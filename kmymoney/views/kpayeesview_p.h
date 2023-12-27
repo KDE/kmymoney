@@ -425,9 +425,9 @@ public:
 
             // now get a list of all schedules that make use of one of the payees
             QList<MyMoneySchedule> used_schedules;
-            Q_FOREACH (const auto schedule, file->scheduleList()) {
+            for (const auto& schedule : file->scheduleList()) {
                 // loop over all splits in the transaction of the schedule
-                Q_FOREACH (const auto split, schedule.transaction().splits()) {
+                for (const auto& split : schedule.transaction().splits()) {
                     // is the payee in the split to be deleted?
                     if (payeeInList(list, split.payeeId())) {
                         used_schedules.push_back(schedule); // remember this schedule
@@ -556,7 +556,7 @@ public:
                     } // for - Schedules
 
                     // reassign the payees in the loans that reference the deleted payees
-                    Q_FOREACH (const MyMoneyAccount &account, usedAccounts) {
+                    for (const MyMoneyAccount& account : qAsConst(usedAccounts)) {
                         MyMoneyAccountLoan loanAccount(account);
                         loanAccount.setPayee(payee_id);
                         file->modifyAccount(loanAccount);

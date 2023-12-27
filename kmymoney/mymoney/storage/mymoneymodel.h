@@ -661,8 +661,8 @@ public:
     QList<T> itemList() const
     {
         QList<T> list;
-        QModelIndexList indexes = match(index(0, 0), eMyMoney::Model::Roles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive);
-        Q_FOREACH (const auto idx, indexes) {
+        const QModelIndexList indexes = match(index(0, 0), eMyMoney::Model::Roles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive);
+        for (const auto& idx : indexes) {
             list.append(static_cast<TreeItem<T>*>(idx.internalPointer())->constDataRef());
         }
         return list;

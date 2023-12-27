@@ -27,7 +27,7 @@ void ScheduledTransactionMatchFinder::createListOfMatchCandidates()
 
 void ScheduledTransactionMatchFinder::findMatchInMatchCandidatesList()
 {
-    Q_FOREACH (const MyMoneySchedule & schedule, listOfMatchCandidates) {
+    for (const MyMoneySchedule& schedule : qAsConst(listOfMatchCandidates)) {
         QDate nextDueDate = schedule.nextDueDate();
         bool nextDueDateWithinMatchWindowRange = (nextDueDate >= importedTransaction.postDate().addDays(-m_matchWindow))
                 && (nextDueDate <= importedTransaction.postDate().addDays(m_matchWindow));

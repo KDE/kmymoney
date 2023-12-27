@@ -48,7 +48,7 @@ public:
         itInvAcc->setColumnCount(m_columns.count());
         setAccountData(node, itInvAcc->row(), invAcc, m_columns);
 
-        Q_FOREACH (const auto strStkAcc, invAcc.accountList()) { // only stock or bond accounts are expected here
+        for (const auto strStkAcc : invAcc.accountList()) { // only stock or bond accounts are expected here
             auto stkAcc = m_file->account(strStkAcc);
             auto itStkAcc = new QStandardItem(strStkAcc);
             itStkAcc->setEditable(false);
@@ -394,7 +394,7 @@ void EquitiesModel::slotObjectRemoved(eMyMoney::File::Object objType, const QStr
         return;
 
     const auto indexList = match(index(0, 0), Role::EquityID, id, -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchRecursive));
-    Q_FOREACH (const auto index, indexList)
+    for (const auto& index : indexList)
         removeRow(index.row(), index.parent());
 }
 
@@ -539,7 +539,7 @@ void EquitiesFilterProxyModel::slotColumnsMenu(const QPoint)
     // create menu
     QMenu menu(i18n("Displayed columns"));
     QList<QAction *> actions;
-    Q_FOREACH (const auto idColumn, idColumns) {
+    for (const auto idColumn : idColumns) {
         auto a = new QAction(nullptr);
         a->setObjectName(QString::number(idColumn));
         a->setText(EquitiesModel::getHeaderName(idColumn));

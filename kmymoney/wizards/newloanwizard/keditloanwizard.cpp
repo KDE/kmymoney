@@ -473,9 +473,9 @@ void KEditLoanWizard::updateEditSummary()
     QList<MyMoneyTransaction> list;
     MyMoneyFile::instance()->transactionList(list, filter);
 
-    Q_FOREACH (const MyMoneyTransaction& it, list) {
+    for (const auto& it : qAsConst(list)) {
         int match = 0;
-        Q_FOREACH (const MyMoneySplit& it_s, it.splits()) {
+        for (const auto& it_s : it.splits()) {
             // we only count those transactions that have an interest
             // and amortization part
             if (it_s.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Interest))

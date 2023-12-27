@@ -1450,8 +1450,7 @@ void MyMoneyGncReader::convertCommodity(const GncCommodity *gcm)
             const auto file = MyMoneyFile::instance();
             const auto currencyList = file->availableCurrencyList();
             bool currencyFound = false;
-            MyMoneySecurity currency;
-            Q_FOREACH (currency, currencyList) {
+            for (const auto& currency : currencyList) {
                 if (currency.id() == id) {
                     m_storage->addCurrency(currency);
                     currencyFound = true;
@@ -1462,7 +1461,7 @@ void MyMoneyGncReader::convertCommodity(const GncCommodity *gcm)
                 MyMoneySecurity newCurrency(id, id);
                 m_storage->addCurrency(newCurrency);
             }
-            currency = file->security(id);
+            const auto currency = file->security(id);
 
             MyMoneyPrice price = file->ancientCurrencies().value(currency, MyMoneyPrice());
             if (price != MyMoneyPrice()) {

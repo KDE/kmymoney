@@ -357,7 +357,7 @@ void KOnlineJobOutboxView::slotSendJobs()
 void KOnlineJobOutboxView::slotSendAllSendableJobs()
 {
     QList<onlineJob> validJobs;
-    Q_FOREACH (const onlineJob& job, MyMoneyFile::instance()->onlineJobList()) {
+    for (const onlineJob& job : MyMoneyFile::instance()->onlineJobList()) {
         if (job.isValid() && job.isEditable())
             validJobs.append(job);
     }
@@ -513,7 +513,7 @@ void KOnlineJobOutboxView::slotOnlineJobSend(QList<onlineJob> jobs)
     QMultiMap<QString, onlineJob> jobsByPlugin;
 
     // Sort jobs by online plugin & lock them
-    Q_FOREACH (onlineJob job, jobs) {
+    for (onlineJob& job : jobs) {
         Q_ASSERT(!job.id().isEmpty());
         // find the provider
         const MyMoneyAccount originAcc = job.responsibleMyMoneyAccount();
@@ -531,7 +531,7 @@ void KOnlineJobOutboxView::slotOnlineJobSend(QList<onlineJob> jobs)
     const QList<QString>::iterator newEnd = std::unique(usedPlugins.begin(), usedPlugins.end());
     usedPlugins.erase(newEnd, usedPlugins.end());
 
-    Q_FOREACH (const QString& pluginKey, usedPlugins) {
+    for (const auto& pluginKey : qAsConst(usedPlugins)) {
         QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p = d->m_onlinePlugins->constFind(pluginKey);
 
         if (it_p != d->m_onlinePlugins->constEnd()) {
@@ -543,13 +543,13 @@ void KOnlineJobOutboxView::slotOnlineJobSend(QList<onlineJob> jobs)
             }
             //! @fixme remove debug message
             qDebug() << "Sending " << jobsByPlugin.count(pluginKey) << " job(s) to online plugin " << pluginKey;
-            QList<onlineJob> jobsToExecute = jobsByPlugin.values(pluginKey);
+            const QList<onlineJob> jobsToExecute = jobsByPlugin.values(pluginKey);
             QList<onlineJob> executedJobs = jobsToExecute;
             pluginExt->sendOnlineJob(executedJobs);
 
             // Save possible changes of the online job and remove lock
             MyMoneyFileTransaction fileTransaction;
-            Q_FOREACH (onlineJob job, executedJobs) {
+            for (onlineJob job : qAsConst(executedJobs)) {
                 fileTransaction.restart();
                 job.setLock(false);
                 kmmFile->modifyOnlineJob(job);

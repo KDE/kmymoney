@@ -320,7 +320,7 @@ public:
     {
         auto file = MyMoneyFile::instance();
         auto value = file->balance(acc.id(), QDate::currentDate());
-        Q_FOREACH (const auto accountID, acc.accountList()) {
+        for (const auto& accountID : acc.accountList()) {
             auto stock = file->account(accountID);
             if (!stock.isClosed()) {
                 try {
@@ -1601,9 +1601,9 @@ public:
         if (transactions.size() > 0) {
 
             //get all transactions for this month
-            Q_FOREACH (const auto transaction, transactions) {
+            for (const auto& transaction : qAsConst(transactions)) {
                 //get the splits for each transaction
-                Q_FOREACH (const auto split, transaction.splits()) {
+                for (const auto& split : transaction.splits()) {
                     if (!split.shares().isZero()) {
                         auto repSplitAcc = file->account(split.accountId());
 
@@ -1693,7 +1693,7 @@ public:
                     //make sure we have all 'starting balances' so that the autocalc works
                     QMap<QString, MyMoneyMoney> balanceMap;
 
-                    Q_FOREACH (const auto split, transaction.splits()) {
+                    for (const auto& split : qAsConst(transaction.splits())) {
                         acc = file->account(split.accountId());
                         // collect all overdues on the first day
                         QDate schedDate = nextDate;

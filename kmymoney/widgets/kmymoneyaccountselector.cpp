@@ -571,7 +571,7 @@ bool AccountSet::includeAccount(const MyMoneyAccount& acc)
     if (d->m_typeList.contains(acc.accountType()))
         return true;
 
-    Q_FOREACH (const auto sAccount, acc.accountList())
+    for (const auto& sAccount : acc.accountList())
         if (includeAccount(d->m_file->account(sAccount)))
             return true;
 

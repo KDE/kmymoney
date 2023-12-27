@@ -188,7 +188,7 @@ QString scheduleToDescription(const MyMoneySchedule& schedule)
     QString category;
     bool isTransfer = false;
     bool isIncome = false;
-    Q_FOREACH (const auto split, transaction.splits()) {
+    for (const auto& split : transaction.splits()) {
         if (split.accountId() != account.id()) {
             if (!category.isEmpty())
                 category += ", "; // this is a split transaction

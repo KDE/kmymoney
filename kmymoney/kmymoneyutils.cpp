@@ -216,7 +216,7 @@ QString KMyMoneyUtils::getStylesheet(QString baseStylesheet)
 const MyMoneySplit KMyMoneyUtils::stockSplit(const MyMoneyTransaction& t)
 {
     MyMoneySplit investmentAccountSplit;
-    Q_FOREACH (const auto split, t.splits()) {
+    for (const auto& split : t.splits()) {
         if (!split.accountId().isEmpty()) {
             auto acc = MyMoneyFile::instance()->account(split.accountId());
             if (acc.isInvest()) {
@@ -356,7 +356,7 @@ MyMoneyTransaction KMyMoneyUtils::scheduledTransaction(const MyMoneySchedule& sc
 
 KXmlGuiWindow* KMyMoneyUtils::mainWindow()
 {
-    Q_FOREACH (QWidget *widget, QApplication::topLevelWidgets()) {
+    for (QWidget* widget : QApplication::topLevelWidgets()) {
         KXmlGuiWindow* result = dynamic_cast<KXmlGuiWindow*>(widget);
         if (result)
             return result;
@@ -487,7 +487,7 @@ void KMyMoneyUtils::deleteSecurity(const MyMoneySecurity& security, QWidget* par
             if (KMessageBox::questionTwoActions(parent, msg2, i18n("Delete prices"), KMMYesNo::yes(), KMMYesNo::no(), dontAsk2) == KMessageBox::PrimaryAction) {
                 try {
                     QString secID = security.id();
-                    Q_FOREACH (auto priceEntry, file->priceList()) {
+                    for (const auto& priceEntry : file->priceList()) {
                         const MyMoneyPrice& price = priceEntry.first();
                         if (price.from() == secID || price.to() == secID)
                             file->removePrice(price);

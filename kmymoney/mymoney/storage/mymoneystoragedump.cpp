@@ -91,9 +91,9 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
     QList<MyMoneyTransaction>::ConstIterator it_t;
     s << "transactions = " << list_t.count() << ", next id = " << file->journalModel()->peekNextId() << "\n";
     QMap<int, int> xferCount;
-    Q_FOREACH (const auto transaction, list_t) {
+    for (const auto& transaction : qAsConst(list_t)) {
         auto accountCount = 0;
-        Q_FOREACH (const auto split, transaction.splits()) {
+        for (const auto& split : transaction.splits()) {
             auto acc = file->account(split.accountId());
             if (acc.accountGroup() != eMyMoney::Account::Type::Expense
                     && acc.accountGroup() != eMyMoney::Account::Type::Income)
@@ -400,7 +400,7 @@ void MyMoneyStorageDump::dumpTransaction(QTextStream& s, MyMoneyFile* file, cons
 
     s << "  Splits\n";
     s << "  ------\n";
-    Q_FOREACH (const auto split, it_t.splits()) {
+    for (const auto& split : it_t.splits()) {
         s << "   ID = " << split.id() << "\n";
         s << "    Transaction = " << split.transactionId() << "\n";
         s << "    Payee = " << split.payeeId();

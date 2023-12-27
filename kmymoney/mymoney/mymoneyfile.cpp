@@ -286,7 +286,7 @@ public:
       * objects mentioned in m_notificationList from the cache.
       */
     void notify() {
-        Q_FOREACH (const BalanceNotifyList::value_type & i, m_balanceNotifyList) {
+        for (const BalanceNotifyList::value_type& i : qAsConst(m_balanceNotifyList)) {
             m_balanceChangedSet += i.first;
             if (i.second.isValid()) {
                 m_balanceCache.clear(i.first, i.second);
@@ -797,7 +797,7 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
                 throw MYMONEYEXCEPTION_CSTRING("Cannot add split referencing unknown payee");
             }
         }
-        Q_FOREACH (const auto tagId, split.tagIdList()) {
+        for (const auto& tagId : split.tagIdList()) {
             if (!tagId.isEmpty())
                 tag(tagId);
         }
@@ -829,7 +829,7 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
     // scan the splits again to update notification list
     // and mark all accounts that are referenced
     const auto splits2 = tr.splits();
-    Q_FOREACH (const auto& split, splits2)
+    for (const auto& split : splits2)
         d->addCacheNotification(split.accountId(), tr.postDate());
 
     // make sure the value is rounded to the accounts precision
@@ -1639,7 +1639,7 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
                 throw MYMONEYEXCEPTION_CSTRING("Cannot add split referencing unknown payee");
             }
         }
-        Q_FOREACH (const auto tagId, split.tagIdList()) {
+        for (const auto& tagId : split.tagIdList()) {
             if (!tagId.isEmpty())
                 tag(tagId);
         }
@@ -1648,7 +1648,7 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
     // change transfer splits between asset/liability and loan accounts
     // into amortization splits
     if (loanAccountAffected) {
-        Q_FOREACH (const auto split, transaction.splits()) {
+        for (const auto& split : qAsConst(transaction.splits())) {
             if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer)) {
                 auto acc = MyMoneyFile::account(split.accountId());
 
@@ -2170,7 +2170,7 @@ QString MyMoneyFile::locateSubAccount(const MyMoneyAccount& base, const QString&
     level = category.section(AccountSeparator, 0, 0);
     remainder = category.section(AccountSeparator, 1);
 
-    Q_FOREACH (const auto sAccount, base.accountList()) {
+    for (const auto& sAccount : base.accountList()) {
         nextBase = account(sAccount);
         if (nextBase.name() == level) {
             if (remainder.isEmpty()) {
@@ -2242,7 +2242,7 @@ void MyMoneyFile::modifySchedule(const MyMoneySchedule& sched)
     if (sched.type() == eMyMoney::Schedule::Type::Any)
         throw MYMONEYEXCEPTION_CSTRING("Cannot store schedule without type");
 
-    Q_FOREACH (const auto split, sched.transaction().splits()) {
+    for (const auto& split : sched.transaction().splits()) {
         // the following line will throw an exception if the
         // account does not exist or is one of the standard accounts
         auto acc = MyMoneyFile::account(split.accountId());
@@ -2472,7 +2472,7 @@ QStringList MyMoneyFile::consistencyCheck()
         }
 
         // now check that all the children exist and have the correct type
-        Q_FOREACH (const auto accountID, (*it_a).accountList()) {
+        for (const auto& accountID : (*it_a).accountList()) {
             // check that the child exists
             try {
                 child = account(accountID);
@@ -2774,7 +2774,7 @@ QStringList MyMoneyFile::consistencyCheck()
             tChanged = true;
             // copy the price information for investments to the new date
             QList<MyMoneySplit>::const_iterator it_t;
-            Q_FOREACH (const auto split, t.splits()) {
+            for (const auto& split : qAsConst(t.splits())) {
                 if ((split.action() != "Buy") &&
                         (split.action() != "Reinvest")) {
                     continue;
@@ -2814,7 +2814,7 @@ QStringList MyMoneyFile::consistencyCheck()
         MyMoneySchedule sch = (*it_sch);
         MyMoneyTransaction t = sch.transaction();
         auto tChanged = false;
-        Q_FOREACH (const auto split, t.splits()) {
+        for (const auto& split : qAsConst(t.splits())) {
             MyMoneySplit s = split;
             bool sChanged = false;
             if (payeeConversionMap.find(split.payeeId()) != payeeConversionMap.end()) {
@@ -3797,7 +3797,7 @@ void MyMoneyFile::removeOnlineJob(const onlineJob& job)
 
 void MyMoneyFile::removeOnlineJob(const QStringList onlineJobIds)
 {
-    Q_FOREACH (QString jobId, onlineJobIds) {
+    for (const auto& jobId : onlineJobIds) {
         removeOnlineJob(getOnlineJob(jobId));
     }
 }
@@ -3817,7 +3817,7 @@ void MyMoneyFile::updateVAT(MyMoneyTransaction& transaction) const
         MyMoneyAccount category;
         MyMoneySplit taxSplit;
         const QString currencyId = transaction.commodity();
-        Q_FOREACH (const auto& split, transaction.splits()) {
+        for (const auto& split : qAsConst(transaction.splits())) {
             const auto acc = account(split.accountId());
             // all splits must reference accounts denoted in the same currency
             if (acc.currencyId() != currencyId) {
@@ -4080,7 +4080,7 @@ bool MyMoneyFile::isTransfer(const MyMoneyTransaction& t) const
 {
     auto rc = true;
     if (t.splitCount() == 2) {
-        Q_FOREACH (const auto split, t.splits()) {
+        for (const auto& split : t.splits()) {
             auto acc = account(split.accountId());
             if (acc.isIncomeExpense()) {
                 rc = false;
@@ -4094,7 +4094,7 @@ bool MyMoneyFile::isTransfer(const MyMoneyTransaction& t) const
 bool MyMoneyFile::referencesClosedAccount(const MyMoneyTransaction& t) const
 {
     auto ret = false;
-    Q_FOREACH (const auto split, t.splits()) {
+    for (const auto& split : t.splits()) {
         if (referencesClosedAccount(split)) {
             ret = true;
             break;

@@ -134,7 +134,7 @@ bool AccountsProxyModel::filterAcceptsRowOrChildRows(int source_row, const QMode
 void AccountsProxyModel::addAccountGroup(const QVector<eMyMoney::Account::Type> &groups)
 {
     Q_D(AccountsProxyModel);
-    Q_FOREACH (const auto group, groups) {
+    for (const auto& group : groups) {
         switch (group) {
         case eMyMoney::Account::Type::Asset:
             d->m_typeList << eMyMoney::Account::Type::Checkings;

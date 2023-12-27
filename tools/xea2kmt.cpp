@@ -211,7 +211,7 @@ QDebug operator <<(QDebug out, const TemplateAccount &a)
 QDebug operator <<(QDebug out, const TemplateAccount::PointerList &a)
 {
     out << "TemplateAccount::List(";
-    Q_FOREACH(const TemplateAccount *account, a)
+    for (const auto* account : a)
         out << *account;
     out << ")";
     return out;
@@ -277,8 +277,7 @@ public:
         else
             list = accountsByParentID(id);
 
-        Q_FOREACH(TemplateAccount *account, list)
-        {
+        for (const auto account : qAsConst(list)) {
             if (account->m_type != "ROOT")
             {
                 xml.writeStartElement("","account");
@@ -369,8 +368,7 @@ public:
         else
             list = accountsByParentID(id);
 
-        Q_FOREACH(TemplateAccount *account, list)
-        {
+        for (const auto account : qAsConst(list)) {
             QString a;
             a.fill(' ', index);
             qDebug() << a << account->m_name << toKMyMoneyAccountType(account->m_type, index);
@@ -389,7 +387,7 @@ QDebug operator <<(QDebug out, const TemplateFile &a)
         << "short description:" << a.shortDescription
         << "long description:" << a.longDescription
         << "accounts:";
-    Q_FOREACH(const TemplateAccount &account, a.accounts)
+    for (const auto& account : a.accounts)
         out << account;
     out << ")";
     return out;
@@ -552,15 +550,14 @@ int convertFileStructure(const QString &indir, const QString &outdir)
     QStringList files;
     scanDir(d, files);
 
-    QString inPath = d.absolutePath();
-    QDir outDir(outdir);
-    QString outPath = outDir.absolutePath();
-    QStringList mapKeys = dirNameMap.keys();
+    const QString inPath = d.absolutePath();
+    const QDir outDir(outdir);
+    const QString outPath = outDir.absolutePath();
+    const QStringList mapKeys = dirNameMap.keys();
     int result = 0;
 
     // process templates
-    Q_FOREACH (const QString &file, files)
-    {
+    for (const auto& file : qAsConst(files)) {
         if (debug || verbose)
             qDebug() << "processing" << file;
 
@@ -570,8 +567,7 @@ int convertFileStructure(const QString &indir, const QString &outdir)
         outFileName.replace(inPath, outPath);
         outFileName.remove("acctchrt_");
         outFileName.replace(".gnucash-xea", ".kmt");
-        Q_FOREACH(const QString &key, mapKeys)
-        {
+        for (const auto& key : mapKeys) {
             if (outFileName.contains('/' + key + '/'))
                 outFileName = outFileName.replace('/' + key + '/', '/' + dirNameMap[key] + '/');
         }

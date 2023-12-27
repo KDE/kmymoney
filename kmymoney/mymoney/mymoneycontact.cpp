@@ -95,21 +95,22 @@ void MyMoneyContact::searchContactResult(KJob *job)
         items = contactJob->items();
     ContactData contactData;
     contactData.email = job->property("MyMoneyContact_email").toString();
-    Q_FOREACH (const Akonadi::Item &item, items) {
+    for (const Akonadi::Item& item : qAsConst(items)) {
         const KContacts::Addressee &contact = item.payload<KContacts::Addressee>();
         if (contact.emails().contains(contactData.email)) {
             KContacts::PhoneNumber phone;
-            KContacts::PhoneNumber::List phones = contact.phoneNumbers();
+            const KContacts::PhoneNumber::List phones = contact.phoneNumbers();
             if (phones.count() == 1)
                 phone = phones.first();
             else {
-                QList<KContacts::PhoneNumber::Type> typesList = {KContacts::PhoneNumber::Work | KContacts::PhoneNumber::Pref,
-                                                                 KContacts::PhoneNumber::Work,
-                                                                 KContacts::PhoneNumber::Home | KContacts::PhoneNumber::Pref,
-                                                                 KContacts::PhoneNumber::Home,
-                                                                };
-                Q_FOREACH (auto type,  typesList) {
-                    Q_FOREACH (auto phn, phones) {
+                const QList<KContacts::PhoneNumber::Type> typesList = {
+                    KContacts::PhoneNumber::Work | KContacts::PhoneNumber::Pref,
+                    KContacts::PhoneNumber::Work,
+                    KContacts::PhoneNumber::Home | KContacts::PhoneNumber::Pref,
+                    KContacts::PhoneNumber::Home,
+                };
+                for (const auto& type : typesList) {
+                    for (const auto& phn : phones) {
                         if (phn.type() & type) {
                             phone = phn;
                             break;
@@ -124,17 +125,18 @@ void MyMoneyContact::searchContactResult(KJob *job)
 
             contactData.phoneNumber = phone.number();
             KContacts::Address address;
-            KContacts::Address::List addresses = contact.addresses();
+            const KContacts::Address::List addresses = contact.addresses();
             if (addresses.count() == 1)
                 address = addresses.first();
             else {
-                QList<KContacts::Address::Type> typesList = {KContacts::Address::Work | KContacts::Address::Pref,
-                                                             KContacts::Address::Work,
-                                                             KContacts::Address::Home | KContacts::Address::Pref,
-                                                             KContacts::Address::Home,
-                                                            };
-                Q_FOREACH (auto type,  typesList) {
-                    Q_FOREACH (auto addr, addresses) {
+                const QList<KContacts::Address::Type> typesList = {
+                    KContacts::Address::Work | KContacts::Address::Pref,
+                    KContacts::Address::Work,
+                    KContacts::Address::Home | KContacts::Address::Pref,
+                    KContacts::Address::Home,
+                };
+                for (const auto& type : typesList) {
+                    for (const auto& addr : addresses) {
                         if (addr.type() & type) {
                             address = addr;
                             break;

@@ -310,8 +310,8 @@ void KSettingsOnlineQuotes::slotDeleteEntry()
 {
     Q_D(KSettingsOnlineQuotes);
     // first check if no security is using this online source
-    auto securities = MyMoneyFile::instance()->securityList();
-    Q_FOREACH(const auto security, securities) {
+    const auto securities = MyMoneyFile::instance()->securityList();
+    for (const auto& security : securities) {
         if (security.value(QStringLiteral("kmm-online-source")).compare(d->m_currentItem.m_name) == 0) {
             if (KMessageBox::questionTwoActions(this,
                                                 i18n("Security <b>%1</b> uses this quote source.<br>"

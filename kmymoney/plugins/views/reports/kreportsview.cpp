@@ -681,14 +681,14 @@ void KReportsView::slotCloseAll()
 void KReportsView::slotListContextMenu(const QPoint & p)
 {
     Q_D(KReportsView);
-    auto items = d->ui.m_tocTreeWidget->selectedItems();
+    const auto items = d->ui.m_tocTreeWidget->selectedItems();
 
     if (items.isEmpty()) {
         return;
     }
 
     QList<TocItem*> tocItems;
-    Q_FOREACH(auto item, items) {
+    for (const auto& item : items) {
         auto tocItem = dynamic_cast<TocItem*>(item);
         if (tocItem && tocItem->isReport()) {
             tocItems.append(tocItem);
@@ -735,13 +735,13 @@ void KReportsView::slotOpenFromList()
 {
     Q_D(KReportsView);
 
-    auto items = d->ui.m_tocTreeWidget->selectedItems();
+    const auto items = d->ui.m_tocTreeWidget->selectedItems();
 
     if (items.isEmpty()) {
         return;
     }
 
-    Q_FOREACH(auto item, items) {
+    for (const auto& item : items) {
         auto tocItem = dynamic_cast<TocItem*>(item);
         if (tocItem && tocItem->isReport()) {
             slotItemDoubleClicked(tocItem, 0);
@@ -753,13 +753,13 @@ void KReportsView::slotPrintFromList()
 {
     Q_D(KReportsView);
 
-    auto items = d->ui.m_tocTreeWidget->selectedItems();
+    const auto items = d->ui.m_tocTreeWidget->selectedItems();
 
     if (items.isEmpty()) {
         return;
     }
 
-    Q_FOREACH(auto item, items) {
+    for (const auto& item : items) {
         auto tocItem = dynamic_cast<TocItem*>(item);
         if (tocItem && tocItem->isReport()) {
             slotItemDoubleClicked(tocItem, 0);

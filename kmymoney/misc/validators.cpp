@@ -10,7 +10,7 @@
 bool validators::checkLineLength(const QString& text, const int& length)
 {
     const QStringList lines = text.split('\n');
-    Q_FOREACH (QString line, lines) {
+    for (const auto& line : lines) {
         if (line.length() > length)
             return false;
     }

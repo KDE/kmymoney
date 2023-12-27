@@ -296,7 +296,7 @@ public:
         query.prepare(m_db.m_tables["kmmInstitutions"].updateString());
         query2.prepare(m_db.m_tables["kmmInstitutions"].insertString());
         signalProgress(0, list.count(), "Writing Institutions...");
-        Q_FOREACH (const MyMoneyInstitution& i, list) {
+        for (const auto& i : list) {
             if (dbList.contains(i.id())) {
                 dbList.removeAll(i.id());
                 updateList << i;
@@ -314,7 +314,7 @@ public:
         if (!dbList.isEmpty()) {
             QVariantList deleteList;
             // qCopy segfaults here, so do it with a hand-rolled loop
-            Q_FOREACH (const QString& it, dbList) {
+            for (const auto& it : qAsConst(dbList)) {
                 deleteList << it;
             }
             query.prepare("DELETE FROM kmmInstitutions WHERE id = :id");
@@ -347,7 +347,7 @@ public:
         list.prepend(user);
         signalProgress(0, list.count(), "Writing Payees...");
 
-        Q_FOREACH(const MyMoneyPayee& it, list) {
+        for (const auto& it : qAsConst(list)) {
             if (dbList.contains(it.id())) {
                 dbList.removeAll(it.id());
                 q->modifyPayee(it);
@@ -358,8 +358,8 @@ public:
         }
 
         if (!dbList.isEmpty()) {
-            QMap<QString, MyMoneyPayee> payeesToDelete = q->fetchPayees(dbList, true);
-            Q_FOREACH(const MyMoneyPayee& payee, payeesToDelete) {
+            const QMap<QString, MyMoneyPayee> payeesToDelete = q->fetchPayees(dbList, true);
+            for (const auto& payee : payeesToDelete) {
                 q->removePayee(payee);
             }
         }
@@ -375,12 +375,12 @@ public:
         if (!query.exec()) throw MYMONEYEXCEPTIONSQL("building Tag list"); // krazy:exclude=crashy
         while (query.next()) dbList.append(query.value(0).toString());
 
-        QList<MyMoneyTag> list = m_file->tagList();
+        const QList<MyMoneyTag> list = m_file->tagList();
         signalProgress(0, list.count(), "Writing Tags...");
         QSqlQuery query2(*q);
         query.prepare(m_db.m_tables["kmmTags"].updateString());
         query2.prepare(m_db.m_tables["kmmTags"].insertString());
-        Q_FOREACH (const MyMoneyTag& it, list) {
+        for (const auto& it : list) {
             if (dbList.contains(it.id())) {
                 dbList.removeAll(it.id());
                 writeTag(it, query);
@@ -393,7 +393,7 @@ public:
         if (!dbList.isEmpty()) {
             QVariantList deleteList;
             // qCopy segfaults here, so do it with a hand-rolled loop
-            Q_FOREACH (const QString& it, dbList) {
+            for (const auto& it : qAsConst(dbList)) {
                 deleteList << it;
             }
             query.prepare(m_db.m_tables["kmmTags"].deleteString());
@@ -477,7 +477,7 @@ public:
         QList<MyMoneyAccount> updateList;
         QList<MyMoneyAccount> insertList;
         // Update the accounts that exist; insert the ones that do not.
-        Q_FOREACH (const MyMoneyAccount& it, list) {
+        for (const auto& it : qAsConst(list)) {
             m_transactionCountMap[it.id()] = m_file->transactionCount(it.id());
             if (dbList.contains(it.id())) {
                 dbList.removeAll(it.id());
@@ -497,7 +497,7 @@ public:
             QVariantList kvpList;
 
             query.prepare("DELETE FROM kmmAccounts WHERE id = :id");
-            Q_FOREACH (const QString& it, dbList) {
+            for (const auto& it : qAsConst(dbList)) {
                 if (!m_file->isStandardAccount(it)) {
                     kvpList << it;
                 }
@@ -528,7 +528,7 @@ public:
         QSqlQuery q2(*q);
         query.prepare(m_db.m_tables["kmmTransactions"].updateString());
         q2.prepare(m_db.m_tables["kmmTransactions"].insertString());
-        Q_FOREACH (const MyMoneyTransaction& it, list) {
+        for (const MyMoneyTransaction& it : qAsConst(list)) {
             if (dbList.contains(it.id())) {
                 dbList.removeAll(it.id());
                 writeTransaction(it.id(), it, query, "N");
@@ -539,7 +539,7 @@ public:
         }
 
         if (!dbList.isEmpty()) {
-            Q_FOREACH (const QString& it, dbList) {
+            for (const QString& it : qAsConst(dbList)) {
                 deleteTransaction(it);
             }
         }
@@ -561,7 +561,7 @@ public:
         //TODO: find a way to prepare the queries outside of the loop.  writeSchedule()
         // modifies the query passed to it, so they have to be re-prepared every pass.
         signalProgress(0, list.count(), "Writing Schedules...");
-        Q_FOREACH (const MyMoneySchedule& it, list) {
+        for (const MyMoneySchedule& it : qAsConst(list)) {
             query.prepare(m_db.m_tables["kmmSchedules"].updateString());
             query2.prepare(m_db.m_tables["kmmSchedules"].insertString());
             if (dbList.contains(it.id())) {
@@ -574,7 +574,7 @@ public:
         }
 
         if (!dbList.isEmpty()) {
-            Q_FOREACH (const QString& it, dbList) {
+            for (const QString& it : qAsConst(dbList)) {
                 deleteSchedule(it);
             }
         }
@@ -595,7 +595,7 @@ public:
         signalProgress(0, securityList.count(), "Writing Securities...");
         query.prepare(m_db.m_tables["kmmSecurities"].updateString());
         query2.prepare(m_db.m_tables["kmmSecurities"].insertString());
-        Q_FOREACH (const MyMoneySecurity& it, securityList) {
+        for (const MyMoneySecurity& it : securityList) {
             if (dbList.contains(it.id())) {
                 dbList.removeAll(it.id());
                 writeSecurity(it, query);
@@ -608,7 +608,7 @@ public:
         if (!dbList.isEmpty()) {
             QVariantList idList;
             // qCopy segfaults here, so do it with a hand-rolled loop
-            Q_FOREACH (const QString& it, dbList) {
+            for (const QString& it : qAsConst(dbList)) {
                 idList << it;
             }
 
@@ -668,7 +668,7 @@ public:
         signalProgress(0, currencyList.count(), "Writing Currencies...");
         query.prepare(m_db.m_tables["kmmCurrencies"].updateString());
         query2.prepare(m_db.m_tables["kmmCurrencies"].insertString());
-        Q_FOREACH (const MyMoneySecurity& it, currencyList) {
+        for (const MyMoneySecurity& it : currencyList) {
             if (dbList.contains(it.id())) {
                 dbList.removeAll(it.id());
                 writeCurrency(it, query);
@@ -682,7 +682,7 @@ public:
             QVariantList isoCodeList;
             query.prepare("DELETE FROM kmmCurrencies WHERE ISOCode = :ISOCode");
             // qCopy segfaults here, so do it with a hand-rolled loop
-            Q_FOREACH (const QString& it, dbList) {
+            for (const QString& it : qAsConst(dbList)) {
                 isoCodeList << it;
             }
 
@@ -827,11 +827,11 @@ public:
         if (!query.exec()) throw MYMONEYEXCEPTIONSQL("building Report list"); // krazy:exclude=crashy
         while (query.next()) dbList.append(query.value(0).toString());
 
-        QList<MyMoneyReport> list = m_file->reportList();
+        const QList<MyMoneyReport> list = m_file->reportList();
         signalProgress(0, list.count(), "Writing Reports...");
         query.prepare(m_db.m_tables["kmmReportConfig"].updateString());
         query2.prepare(m_db.m_tables["kmmReportConfig"].insertString());
-        Q_FOREACH (const MyMoneyReport& it, list) {
+        for (const MyMoneyReport& it : list) {
             if (dbList.contains(it.id())) {
                 dbList.removeAll(it.id());
                 writeReport(it, query);
@@ -845,7 +845,7 @@ public:
             QVariantList idList;
             query.prepare("DELETE FROM kmmReportConfig WHERE id = :id");
             // qCopy segfaults here, so do it with a hand-rolled loop
-            Q_FOREACH (const QString& it, dbList) {
+            for (const QString& it : qAsConst(dbList)) {
                 idList << it;
             }
 
@@ -867,11 +867,11 @@ public:
         while (query.next())
             dbList.append(query.value(0).toString());
 
-        QList<MyMoneyBudget> list = m_file->budgetList();
+        const QList<MyMoneyBudget> list = m_file->budgetList();
         signalProgress(0, list.count(), "Writing Budgets...");
         query.prepare(m_db.m_tables["kmmBudgetConfig"].updateString());
         query2.prepare(m_db.m_tables["kmmBudgetConfig"].insertString());
-        Q_FOREACH (const MyMoneyBudget& it, list) {
+        for (const MyMoneyBudget& it : list) {
             if (dbList.contains(it.name())) {
                 dbList.removeAll(it.name());
                 writeBudget(it, query);
@@ -885,7 +885,7 @@ public:
             QVariantList idList;
             query.prepare("DELETE FROM kmmBudgetConfig WHERE id = :id");
             // qCopy segfaults here, so do it with a hand-rolled loop
-            Q_FOREACH (const QString& it, dbList) {
+            for (const QString& it : qAsConst(dbList)) {
                 idList << it;
             }
 
@@ -930,7 +930,7 @@ public:
         // Create list for onlineJobs which failed and the reason therefor
         QList<QPair<onlineJob, QString> > failedJobs;
         int jobCount = 0;
-        Q_FOREACH (const onlineJob& job, jobs) {
+        for (const onlineJob& job : jobs) {
             try {
                 q->addOnlineJob(job);
             } catch (const MyMoneyException &e) {
@@ -967,7 +967,7 @@ public:
         QVariantList telephoneList;
         QList<QMap<QString, QString> > kvpPairsList;
 
-        Q_FOREACH (const MyMoneyInstitution& i, iList) {
+        for (const MyMoneyInstitution& i : iList) {
             idList << i.id();
             nameList << i.name();
             managerList << i.manager();
@@ -1069,7 +1069,7 @@ public:
         QList<QMap<QString, QString> > pairs;
         QList<QMap<QString, QString> > onlineBankingPairs;
 
-        Q_FOREACH (const MyMoneyAccount& a, accList) {
+        for (const MyMoneyAccount& a : accList) {
             idList << a.id();
             institutionIdList << a.institutionId();
             parentIdList << a.parentAccountId();
@@ -1213,11 +1213,11 @@ public:
         }
 
         if (!dbList.isEmpty()) {
-            QVector<QVariant> txIdList(dbList.count(), txId);
+            const QVector<QVariant> txIdList(dbList.count(), txId);
             QVariantList splitIdList;
             query.prepare("DELETE FROM kmmSplits WHERE transactionId = :txId AND splitId = :splitId");
             // qCopy segfaults here, so do it with a hand-rolled loop
-            Q_FOREACH (int it, dbList) {
+            for (int it : qAsConst(dbList)) {
                 splitIdList << it;
             }
             query.bindValue(":txId", txIdList.toList());
@@ -1238,7 +1238,7 @@ public:
         QVariantList splitIdList_TagSplits;
 
         int i = 0, l = 0;
-        Q_FOREACH (const MyMoneySplit& s, splitList) {
+        for (const MyMoneySplit& s : splitList) {
             for (l = 0; l < s.tagIdList().size(); ++l) {
                 tagIdList << s.tagIdList()[l];
                 splitIdList_TagSplits << splitIdList[i];
@@ -1283,7 +1283,7 @@ public:
         QList<QMap<QString, QString> > kvpPairsList;
 
         int i = 0;
-        Q_FOREACH (const MyMoneySplit& s, splitList) {
+        for (const MyMoneySplit& s : splitList) {
             txIdList << txId;
             typeList << type;
             payeeIdList << s.payeeId();
@@ -1325,7 +1325,7 @@ public:
         query.bindValue(":txType", typeList);
         QVariantList iList;
         // qCopy segfaults here, so do it with a hand-rolled loop
-        Q_FOREACH (int it_s, splitIdList) {
+        for (int it_s : splitIdList) {
             iList << it_s;
         }
 
@@ -1395,7 +1395,7 @@ public:
         if (!query.exec()) throw MYMONEYEXCEPTIONSQL("deleting  Schedule Payment History"); // krazy:exclude=crashy
 
         query.prepare(m_db.m_tables["kmmSchedulePaymentHistory"].insertString());
-        Q_FOREACH (const QDate& it, sch.recordedPayments()) {
+        for (const QDate& it : sch.recordedPayments()) {
             query.bindValue(":schedId", sch.id());
             query.bindValue(":payDate", it.toString(Qt::ISODate));
             if (!query.exec()) throw MYMONEYEXCEPTIONSQL("writing Schedule Payment History"); // krazy:exclude=crashy
@@ -1929,7 +1929,7 @@ public:
         QVariantList transactionIdList;
 
         // qCopy segfaults here, so do it with a hand-rolled loop
-        Q_FOREACH (int it_s, splitIdList) {
+        for (int it_s : splitIdList) {
             iList << it_s;
             transactionIdList << txId;
         }
@@ -2629,9 +2629,9 @@ public:
     {
         Q_Q(MyMoneyStorageSql);
         // create the tables
-        QStringList ql = t.generateCreateSQL(m_driver, version).split('\n', Qt::SkipEmptyParts);
+        const QStringList ql = t.generateCreateSQL(m_driver, version).split('\n', Qt::SkipEmptyParts);
         QSqlQuery query(*q);
-        Q_FOREACH (const QString& i, ql) {
+        for (const QString& i : ql) {
             if (!query.exec(i)) throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("creating table/index %1").arg(t.name()));
         }
     }
