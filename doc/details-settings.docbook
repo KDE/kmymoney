@@ -1113,8 +1113,10 @@
 
 <para>
   Until recently, there was only one plugin that required configuration, the Check
-  printing plugin.  Now, there are several plugins which require configuration.
-  These are described in the following sections.
+  printing plugin.  Now, there are several plugins which have configuration pages
+  which are invoked from this page.  These are listed in the following sections.
+  Note however, that many of them have already been described earlier in this
+  document.
 </para>
 
 <sect2 id="details.settings.plugins.printchecks"><title>Check printing plugin</title>
@@ -1145,6 +1147,8 @@
   <ulink url="https://doc.qt.io/qt-5/richtext-html-subset.html">here</ulink>.
 </para>
 
+<!-- FIXME: do we want to actually include any of these here, and if so, with how
+     much detail? -->
 <!-- info from source code on substitution variables.  Future exercise to list/describe them here.
     // data about the user
     checkHTML.replace("$OWNER_NAME", file->user().name());
@@ -1175,33 +1179,113 @@
 -->
 </sect2>
 
-<sect2><title>CSV Importer</title>
+<sect2 id="details.settings.plugins.csvimporter"><title>CSV Importer</title>
 
 <para>
+  Some aspects of configuring the CSV Importer plugin have already been discussed
+  <link linkend="details.settings.plugins.csvimporter">here</link>.  However, there
+  is also a dialog which can be invoked here.
 
+  <screenshot>
+    <screeninfo>Configure CSV Importer Plugin</screeninfo>
+    <mediaobject>
+      <imageobject>
+	<imagedata fileref="config_plugins_csvimporter.png" format="PNG" />
+      </imageobject>
+      <textobject>
+	<phrase>Configure CSV Importer Plugin</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
 </para>
+
+<sect3><title>Autodetecting</title>
+<para>
+  It is generally best to let the plugin autodetect the field delimiter, decimal
+  symbol, and date format.  However, it is possible to disable this behavior for each
+  of these items by unchecking the appropriate box.
+</para>
+
+<para>
+  In some cases, a csv file to be imported contains the name of the account somewhere
+  in the first lines of the file.  You can request the plugin to automatically look
+  for this by checking the appropriate box, separately for banking and for investment
+  imports.
+</para>
+</sect3>
+
+<sect3><title>QIF export profile</title>
+<para>
+  Although it is currently better just to use the QIF exporter plugin directly, it is
+  still possible to have the CSV Importer export a QIF file.  In this case, you can
+  use this dropdown to select the default QIF export profile to use.
+</para>
+</sect3>
 </sect2>
 
-<sect2><title>Forecast view</title>
+<sect2 id="details.settings.plugins.forecast"><title>Forecast view</title>
 
 <para>
+  This is described in the <link linkend="details.forecast.configure">Configuring the
+  Forecast</link> section of the <link linkend="details.forecast">Forecast
+  Chapter.</link>
 </para>
 </sect2>
 
 <sect2><title>iCalendar</title>
+<!-- FIXME:  isn't this mentioned anywhere else? -->
 
 <para>
+  &kmymoney; is capable of exporting a file inb then <quote>iCalendar</quote> format,
+  so you can import your scheduled transactions into &korganizer;, or another
+  calendar program, so you can be reminded of scheduled transactions.  Actually
+  exporting the file is done with the <menuchoice> <guimenu>File</guimenu>
+  <guisubmenu>Export</guisubmenu> <guimenuitem>Schedules to iCalendar</guimenuitem>
+  </menuchoice>menu item.
+  
+  <screenshot>
+    <screeninfo>Configure iCalendar export</screeninfo>
+    <mediaobject>
+      <imageobject>
+	<imagedata fileref="config_plugins_ical.png" format="PNG" />
+      </imageobject>
+      <textobject>
+	<phrase>Configure iCalendar export</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+
+<para>
+  The exported file will contain one event for each scheduled transaction.  There are
+  controls to configure whether to have the calender show reminders for the events,
+  as well as how many reminders, and how far ahead of the events the reminders are
+  created, although these seem not to currently have any effect on the file created.
+</para>
+
+<para>
+  The final field on the dialog allows you to specify the default name and path of
+  the exported file.  As usual, you can either type the full path, or click the file
+  selector icon at the right and get a file selector dialog.  Currently, the file
+  save dialog does default to the folder specified here, but you still need to enter
+  the actual file name at the time of export.
 </para>
 </sect2>
 
 <sect2 id="details.settings.plugins.kbanking"><title>KBanking</title>
 
 <para>
+  Since both this and the Configure Aqbanking page are minimal, should both just
+  point to the same link currently in the other section?
+</para>
+
+<para>
   This plugins adds support for HBCI/FinTs, OFX and PayPal online banking to
   KMyMoney.  However, configuring this plugin is not done through this dialog, but
-  through the <link linkend="reference.menus.settings.help">Settings</link> menu,
-  with the <menuchoice> <guimenu>Settings</guimenu> <guisubmenu>Configure
-  Aqbanking...</guisubmenu> </menuchoice> menu item.
+  through the <link linkend="reference.menus.settings.help">
+  <guilabel>Settings</guilabel> </link> menu, with the <menuchoice>
+  <guimenu>Settings</guimenu> <guisubmenu>Configure Aqbanking...</guisubmenu>
+  </menuchoice> menu item.
 </para>
 </sect2>
 

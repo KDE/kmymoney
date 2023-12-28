@@ -59,18 +59,17 @@
 </para>
 </sect1>
 
-<sect1 id="details.forecast.configure" >
-<title>Configuring the Forecast</title>
+<sect1 id="details.forecast.configure" ><title>Configuring the Forecast</title>
 
 <para>
-  The parameters used to calculate a Forecast, including the forecast method, can be set
-  in the <guilabel>Forecast view</guilabel> configuration dialog.  Since the forecast
-  functionality is implemented as a <link linkend="makingmostof.plugins">&kmymoney;
-  plugin</link>, you can reach this dialog by invoking the <menuchoice>
-  <guimenu>Settings</guimenu> <guimenuitem>Configure &kmymoney;...</guimenuitem>
-  </menuchoice> menu item, selecting <guilabel>Plugins</guilabel> on the left pane,
-  and clicking the <guilabel>configure</guilabel> icon next to <guilabel>Forecast
-  view</guilabel>.
+  The parameters used to calculate a Forecast, including the forecast method, can be
+  set in the <link linkend="details.settings.plugins.forecast"> <guilabel>Forecast
+  view</guilabel> </link> configuration dialog.  Since the forecast functionality is
+  implemented as a <link linkend="makingmostof.plugins">&kmymoney; plugin</link>, you
+  can reach this dialog by invoking the <menuchoice> <guimenu>Settings</guimenu>
+  <guimenuitem>Configure &kmymoney;...</guimenuitem> </menuchoice> menu item,
+  selecting <guilabel>Plugins</guilabel> on the left pane, and clicking the
+  <guilabel>configure</guilabel> icon next to <guilabel>Forecast view</guilabel>.
 </para>
 
 <para>
