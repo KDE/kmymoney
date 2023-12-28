@@ -75,6 +75,8 @@ Q_GLOBAL_STATIC(GlobalEditData, s_globalEditData);
 
 class LedgerView::Private
 {
+    Q_DISABLE_COPY_MOVE(Private)
+
 public:
     Private(LedgerView* qq)
         : q(qq)

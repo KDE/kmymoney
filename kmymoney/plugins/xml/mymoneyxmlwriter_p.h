@@ -19,6 +19,8 @@ class MyMoneyFile;
 
 class MyMoneyXmlWriterPrivate
 {
+    Q_DISABLE_COPY_MOVE(MyMoneyXmlWriterPrivate)
+
 public:
     typedef struct {
         QString street;

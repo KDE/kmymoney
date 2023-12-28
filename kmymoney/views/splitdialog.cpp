@@ -33,6 +33,8 @@ using namespace Icons;
 
 class SplitDialog::Private
 {
+    Q_DISABLE_COPY_MOVE(Private)
+
 public:
     Private(SplitDialog* p)
         : parent(p)

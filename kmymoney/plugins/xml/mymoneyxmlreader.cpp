@@ -58,6 +58,8 @@
 
 class MyMoneyXmlReaderPrivate
 {
+    Q_DISABLE_COPY_MOVE(MyMoneyXmlReaderPrivate)
+
 public:
     typedef struct {
         QString street;

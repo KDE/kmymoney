@@ -240,6 +240,8 @@ Q_SIGNALS:
 class KMyMoneyApp::Private
 {
 public:
+    Q_DISABLE_COPY_MOVE(Private)
+
     explicit Private(KMyMoneyApp* app)
         : q(app)
         , m_backupState(backupStateE::BACKUP_IDLE)

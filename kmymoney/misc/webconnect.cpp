@@ -15,6 +15,8 @@ Q_LOGGING_CATEGORY(WebConnectLog, "WebConnect")
 
 class WebConnect::Private
 {
+    Q_DISABLE_COPY_MOVE(Private)
+
 public:
     explicit Private(WebConnect* parent)
         : q(parent)

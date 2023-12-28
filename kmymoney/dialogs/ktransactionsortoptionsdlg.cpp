@@ -24,6 +24,8 @@ class KTransactionSortOptionsDlg;
 
 class KTransactionSortOptionsDlgPrivate
 {
+    Q_DISABLE_COPY_MOVE(KTransactionSortOptionsDlgPrivate)
+
 public:
     KTransactionSortOptionsDlgPrivate(KTransactionSortOptionsDlg* qq)
         : ui(new Ui::KTransactionSortOptionsDlg)

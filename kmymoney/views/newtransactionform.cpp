@@ -27,6 +27,8 @@
 
 class NewTransactionForm::Private
 {
+    Q_DISABLE_COPY_MOVE(Private)
+
 public:
     Private()
         : ui(new Ui_NewTransactionForm)

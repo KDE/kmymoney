@@ -40,6 +40,8 @@ using namespace Icons;
 
 class CsvExportDlgPrivate
 {
+    Q_DISABLE_COPY_MOVE(CsvExportDlgPrivate)
+
 public:
     explicit CsvExportDlgPrivate(CsvExportDlg* qq)
         : q(qq)

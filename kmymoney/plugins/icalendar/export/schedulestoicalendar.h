@@ -7,10 +7,11 @@
 #ifndef SCHEDULESTOICALENDAR_H
 #define SCHEDULESTOICALENDAR_H
 
-class QString;
+#include <QString>
 
 class KMMSchedulesToiCalendar
 {
+    Q_DISABLE_COPY_MOVE(KMMSchedulesToiCalendar)
 public:
     KMMSchedulesToiCalendar();
     ~KMMSchedulesToiCalendar();

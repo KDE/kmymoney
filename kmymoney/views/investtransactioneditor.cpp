@@ -55,6 +55,8 @@ using namespace Icons;
 
 class InvestTransactionEditor::Private
 {
+    Q_DISABLE_COPY_MOVE(Private)
+
 public:
     Private(InvestTransactionEditor* parent)
         : q(parent)

@@ -56,6 +56,8 @@ using namespace Icons;
 
 struct NewSplitEditor::Private
 {
+    Q_DISABLE_COPY_MOVE(Private)
+
     Private(NewSplitEditor* parent)
         : q(parent)
         , ui(new Ui_NewSplitEditor)

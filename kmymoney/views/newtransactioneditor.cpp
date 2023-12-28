@@ -65,6 +65,8 @@ using namespace Icons;
 
 class NewTransactionEditor::Private
 {
+    Q_DISABLE_COPY_MOVE(Private)
+
 public:
     enum TaxValueChange {
         ValueUnchanged,

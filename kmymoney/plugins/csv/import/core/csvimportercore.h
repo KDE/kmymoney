@@ -295,6 +295,8 @@ public:
 
 class KMM_CSVIMPORTERCORE_EXPORT CSVFile
 {
+    Q_DISABLE_COPY_MOVE(CSVFile)
+
 public:
     explicit CSVFile();
     ~CSVFile();
@@ -332,6 +334,8 @@ public:
 
 class KMM_CSVIMPORTERCORE_EXPORT CSVImporterCore
 {
+    Q_DISABLE_COPY_MOVE(CSVImporterCore)
+
 public:
     explicit CSVImporterCore();
     ~CSVImporterCore();
