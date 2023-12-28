@@ -615,7 +615,6 @@ QString MyMoneyDbTable::columnList(const int version, bool useNewNames) const
 {
     field_iterator ft = m_fields.begin();
     QString qs;
-    ft = m_fields.begin();
     while (ft != m_fields.end()) {
         if ((*ft)->initVersion() <= version && (*ft)->lastVersion() >= version) {
             QString fieldName = (*ft)->name();
