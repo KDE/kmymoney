@@ -220,7 +220,8 @@ struct KMMSchedulesToiCalendar::Private {
     QString m_icalendarAsString;
 };
 
-KMMSchedulesToiCalendar::KMMSchedulesToiCalendar() : d(new Private)
+KMMSchedulesToiCalendar::KMMSchedulesToiCalendar()
+    : d(new Private)
 {
 }
 

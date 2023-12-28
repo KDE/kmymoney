@@ -159,6 +159,7 @@ public:
         : m_file(qq)
         , m_dirty(false)
         , m_inTransaction(false)
+        , m_journalBlocking(false)
         , payeesModel(qq, &undoStack)
         , userModel(qq, &undoStack)
         , costCenterModel(qq, &undoStack)

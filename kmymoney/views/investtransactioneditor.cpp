@@ -67,6 +67,8 @@ public:
         , securitiesModel(new QSortFilterProxyModel(parent))
         , securityFilterModel(new AccountsProxyModel(parent))
         , accountsListModel(new KDescendantsProxyModel(parent))
+        , feeSplitHelper(nullptr)
+        , interestSplitHelper(nullptr)
         , currentActivity(nullptr)
         , feeSplitModel(new SplitModel(parent, &undoStack))
         , interestSplitModel(new SplitModel(parent, &undoStack))

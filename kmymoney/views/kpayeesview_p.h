@@ -78,13 +78,14 @@ public:
         ClearTransactionDisplay,
     };
 
-    explicit KPayeesViewPrivate(KPayeesView *qq)
+    explicit KPayeesViewPrivate(KPayeesView* qq)
         : KMyMoneyViewBasePrivate(qq)
         , ui(new Ui::KPayeesView)
-        , m_transactionFilter (nullptr)
+        , m_transactionFilter(nullptr)
         , m_contact(nullptr)
         , m_syncedPayees(0)
         , m_filterProxyModel(nullptr)
+        , m_renameProxyModel(nullptr)
     {
     }
 

@@ -116,6 +116,8 @@ public:
         , m_netWorthGraphLastValidSize(400, 300)
         , m_scrollBarPos(0)
         , m_fileOpen(false)
+        , m_adjustedIconSize(0)
+        , m_devRatio(1.0)
     {
     }
 
@@ -184,9 +186,9 @@ public:
 
         if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
             //show account's online-status
-            pathOK = QPixmapToDataUri(Icons::get(Icon::DialogOKApply).pixmap(QSize(adjustedIconSize, adjustedIconSize)));
-            pathTODO = QPixmapToDataUri(Icons::get(Icon::MailReceive).pixmap(QSize(adjustedIconSize, adjustedIconSize)));
-            pathNotOK = QPixmapToDataUri(Icons::get(Icon::DialogCancel).pixmap(QSize(adjustedIconSize, adjustedIconSize)));
+            pathOK = QPixmapToDataUri(Icons::get(Icon::DialogOKApply).pixmap(QSize(m_adjustedIconSize, m_adjustedIconSize)));
+            pathTODO = QPixmapToDataUri(Icons::get(Icon::MailReceive).pixmap(QSize(m_adjustedIconSize, m_adjustedIconSize)));
+            pathNotOK = QPixmapToDataUri(Icons::get(Icon::DialogCancel).pixmap(QSize(m_adjustedIconSize, m_adjustedIconSize)));
 
             if (acc.value("lastImportedTransactionDate").isEmpty() || acc.value("lastStatementBalance").isEmpty())
                 cellStatus = '-';
@@ -533,7 +535,7 @@ public:
         // Adjust the size
         QSize netWorthGraphSize = q->size();
         netWorthGraphSize -= QSize(122, 30);
-        netWorthGraphSize /= devRatio;
+        netWorthGraphSize /= m_devRatio;
         m_netWorthGraphLastValidSize = netWorthGraphSize;
 
         // print header
@@ -572,15 +574,15 @@ public:
         // if a device ratio is 2 (200% scale), we need to create a pixmap using half of the target size,
         // resulted pixmaps will be twice as large as provided in the QSize(...)
         auto ic = Icons::get(Icon::KeyEnter).pixmap(QSize(isize, isize));
-        devRatio = ic.devicePixelRatio();
-        if (devRatio > 1)
-            isize = round(isize / devRatio);
+        m_devRatio = ic.devicePixelRatio();
+        if (m_devRatio > 1)
+            isize = round(isize / m_devRatio);
 
         pathEnterIcon = QPixmapToDataUri(Icons::get(Icon::KeyEnter).pixmap(QSize(isize, isize)));
         pathSkipIcon = QPixmapToDataUri(Icons::get(Icon::SkipForward).pixmap(QSize(isize, isize)));
         pathStatusHeader = QPixmapToDataUri(Icons::get(Icon::Download).pixmap(QSize(isize, isize)));
 
-        adjustedIconSize = isize;
+        m_adjustedIconSize = isize;
     }
 
     void showScheduledPayments()
@@ -867,12 +869,12 @@ public:
                                     // show Enter Next and Skip Next buttons
                                     if (!pathEnterIcon.isEmpty())
                                         tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=enter").arg(sched.id()), i18n("Enter schedule"))
-                                            + QString("<img src=\"%1\" border=\"0\" style=\"height:%2px;\" ></a>").arg(pathEnterIcon).arg(adjustedIconSize)
+                                            + QString("<img src=\"%1\" border=\"0\" style=\"height:%2px;\" ></a>").arg(pathEnterIcon).arg(m_adjustedIconSize)
                                             + linkend();
                                     tmp += "</td><td class=\"center\">";
                                     if (!pathSkipIcon.isEmpty())
                                         tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=skip").arg(sched.id()), i18n("Skip schedule"))
-                                            + QString("<img src=\"%1\" border=\"0\" style=\"height:%2px;\"></a>").arg(pathSkipIcon).arg(adjustedIconSize)
+                                            + QString("<img src=\"%1\" border=\"0\" style=\"height:%2px;\"></a>").arg(pathSkipIcon).arg(m_adjustedIconSize)
                                             + linkend();
                                     tmp += "</td><td>";
 
@@ -1989,8 +1991,8 @@ public:
     QString pathEnterIcon;
     QString pathSkipIcon;
     QString pathStatusHeader; // online download status
-    int adjustedIconSize;
-    double devRatio;
+    int m_adjustedIconSize;
+    double m_devRatio;
     QTimer m_resizeRefreshTimer;
     QSize m_startSize;
 };

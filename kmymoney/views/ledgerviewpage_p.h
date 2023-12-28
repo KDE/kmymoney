@@ -48,6 +48,7 @@ public:
         , stateFilter(nullptr)
         , form(nullptr)
         , stackedView(nullptr)
+        , sortOrderType(LedgerViewSettings::SortOrderStd)
         , needModelInit(true)
         , showEntryForNewTransaction(false)
         , isInvestmentView(false)

@@ -1083,10 +1083,14 @@ GncSchedDef::~GncSchedDef() {}
 /************************************************************************************************
                          XML Reader
 ************************************************************************************************/
-XmlReader::XmlReader(MyMoneyGncReader *pM) :
-    m_co(0),
-    pMain(pM),
-    m_headerFound(false)
+XmlReader::XmlReader(MyMoneyGncReader* pM)
+    : m_co(0)
+    , pMain(pM)
+    , m_headerFound(false)
+#ifdef _GNCFILEANON
+    , lastType(-1)
+    , indentCount(0)
+#endif
 {
 }
 

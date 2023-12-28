@@ -29,9 +29,9 @@ class SpecialLedgerItemFilterPrivate : public LedgerSortProxyModelPrivate
 {
     struct BalanceParameter {
         Qt::SortOrder sortOrder;
-        int startRow;
-        int lastRow;
-        int firstRow;
+        int startRow = 0;
+        int lastRow = 0;
+        int firstRow = 0;
         bool valid = false;
 
         void setFirstRow(int row)
@@ -48,6 +48,7 @@ class SpecialLedgerItemFilterPrivate : public LedgerSortProxyModelPrivate
 public:
     SpecialLedgerItemFilterPrivate(SpecialLedgerItemFilter* qq)
         : LedgerSortProxyModelPrivate(qq)
+        , sourceModel(nullptr)
         , showReconciliationEntries(LedgerViewSettings::DontShowReconciliationHeader)
         , filterBalanceMode(SpecialLedgerItemFilter::FilterBalanceNormal)
         , lastWasReconciliationEntry(false)

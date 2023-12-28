@@ -71,6 +71,7 @@ struct NewSplitEditor::Private
         , isIncomeExpense(false)
         , readOnly(false)
         , postDate(QDate::currentDate())
+        , frameCollection(nullptr)
     {
         accountsModel->setObjectName("AccountNamesFilterProxyModel");
         costCenterModel->setObjectName("SortedCostCenterModel");

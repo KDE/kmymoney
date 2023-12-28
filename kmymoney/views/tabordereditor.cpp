@@ -181,6 +181,7 @@ class TabOrderEditorPrivate
 public:
     explicit TabOrderEditorPrivate(TabOrderEditor* qq)
         : q_ptr(qq)
+        , m_dialog(nullptr)
         , m_indicatorFontMetrics(QFont())
         , m_noWidgetsSelected(true)
     {
