@@ -41,7 +41,7 @@ using namespace Icons;
 class CsvExportDlgPrivate
 {
 public:
-    CsvExportDlgPrivate(CsvExportDlg* qq)
+    explicit CsvExportDlgPrivate(CsvExportDlg* qq)
         : q(qq)
         , ui(new Ui::CsvExportDlg)
         , accountsModel(new AccountNamesFilterProxyModel(qq))
