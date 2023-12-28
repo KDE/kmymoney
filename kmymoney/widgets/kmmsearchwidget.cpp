@@ -26,7 +26,7 @@ using namespace Icons;
 class KMMSearchWidgetPrivate
 {
 public:
-    KMMSearchWidgetPrivate(KMMSearchWidget* qq)
+    explicit KMMSearchWidgetPrivate(KMMSearchWidget* qq)
         : q_ptr(qq)
         , ui(new Ui_KMMSearchWidget)
     {

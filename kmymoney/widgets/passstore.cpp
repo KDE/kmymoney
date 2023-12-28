@@ -31,7 +31,7 @@ using namespace Icons;
 class PassStorePrivate
 {
 public:
-    PassStorePrivate(PassStore* qq)
+    explicit PassStorePrivate(PassStore* qq)
         : q_ptr(qq)
         , m_lineEdit(nullptr)
         , m_loadPasswordAction(nullptr)

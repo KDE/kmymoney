@@ -553,7 +553,7 @@ private:
 class GncTransaction : public GncObject
 {
 public:
-    GncTransaction(bool processingTemplates);
+    explicit GncTransaction(bool processingTemplates);
     ~GncTransaction();
 protected:
     friend class MyMoneyGncReader;
@@ -797,7 +797,7 @@ class XmlReader
 {
 protected:
     friend class MyMoneyGncReader;
-    XmlReader(MyMoneyGncReader *pM);                 // keep pointer to 'main'
+    explicit XmlReader(MyMoneyGncReader* pM); // keep pointer to 'main'
     void processFile(QIODevice*);  // main entry point of reader
     bool parseContents(const QString& contents);
     //  define xml content handler functions

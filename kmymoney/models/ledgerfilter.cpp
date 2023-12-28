@@ -38,7 +38,7 @@ using namespace Icons;
 class LedgerFilterPrivate : public LedgerSortProxyModelPrivate
 {
 public:
-    LedgerFilterPrivate(LedgerFilter* qq)
+    explicit LedgerFilterPrivate(LedgerFilter* qq)
         : LedgerSortProxyModelPrivate(qq)
         , lineEdit(nullptr)
         , comboBox(nullptr)

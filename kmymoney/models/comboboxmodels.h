@@ -26,7 +26,7 @@ class KMM_MODELS_EXPORT OccurrencesModel : public QStringListModel
 {
     Q_OBJECT
 public:
-    OccurrencesModel(QObject* parent = nullptr);
+    explicit OccurrencesModel(QObject* parent = nullptr);
     ~OccurrencesModel();
 
     QVariant data(const QModelIndex& idx, int role) const override;
@@ -43,7 +43,7 @@ class KMM_MODELS_EXPORT PaymentMethodModel : public QStringListModel
 {
     Q_OBJECT
 public:
-    PaymentMethodModel(QObject* parent = nullptr);
+    explicit PaymentMethodModel(QObject* parent = nullptr);
     ~PaymentMethodModel();
 
     QVariant data(const QModelIndex& idx, int role) const override;

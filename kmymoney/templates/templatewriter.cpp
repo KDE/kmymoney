@@ -45,7 +45,7 @@ class TemplateWriterPrivate
     Q_DISABLE_COPY(TemplateWriterPrivate)
 
 public:
-    TemplateWriterPrivate(TemplateWriter* qq)
+    explicit TemplateWriterPrivate(TemplateWriter* qq)
         : q_ptr(qq)
     {
         m_doc = QDomDocument("KMYMONEY-TEMPLATE");
