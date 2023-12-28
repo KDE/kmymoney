@@ -89,10 +89,6 @@ public:
      * will be returned.
      */
     MyMoneyMoney price() const;
-    /** This method just returns what is in m_price, so when we write to the
-     *  database, we don't just generate prices
-    */
-    MyMoneyMoney actualPrice() const;
     void setPrice(const MyMoneyMoney& price);
 
     MyMoneyMoney value() const;
