@@ -193,7 +193,7 @@ QString scheduleToDescription(const MyMoneySchedule& schedule)
             if (!category.isEmpty())
                 category += ", "; // this is a split transaction
             const MyMoneyAccount& splitAccount = file->account(split.accountId());
-            category = splitAccount.name();
+            category += splitAccount.name();
 
             isTransfer = splitAccount.accountGroup() == Account::Type::Asset ||
                          splitAccount.accountGroup() == Account::Type::Liability;
