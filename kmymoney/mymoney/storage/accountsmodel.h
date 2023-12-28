@@ -111,11 +111,44 @@ public:
      */
     QString accountNameToId(const QString& name, eMyMoney::Account::Type type) const;
 
+    /**
+     * Returns the QModelIndex of the favorite group item
+     */
     QModelIndex favoriteIndex() const;
+
+    /**
+     * Checks if @a index references the favorite account group
+     * or a sub-ordinate account in the group.
+     *
+     * @param index QModelIndex of item to check
+     * @returns true in case it is an entry in the favorite group
+     * @returns false in case it is the regular account entry
+     */
+    bool isFavoriteIndex(const QModelIndex& index) const;
+
+    /**
+     * Returns the QModelIndex of the asset group item
+     */
     QModelIndex assetIndex() const;
+
+    /**
+     * Returns the QModelIndex of the liability group item
+     */
     QModelIndex liabilityIndex() const;
+
+    /**
+     * Returns the QModelIndex of the income group item
+     */
     QModelIndex incomeIndex() const;
+
+    /**
+     * Returns the QModelIndex of the expense group item
+     */
     QModelIndex expenseIndex() const;
+
+    /**
+     * Returns the QModelIndex of the equity group item
+     */
     QModelIndex equityIndex() const;
 
     void setColorScheme(ColorScheme scheme, const QColor& color);
@@ -137,6 +170,15 @@ public:
     void removeItem(const QModelIndex& idx);
 
     void touchAccountById(const QString& id);
+
+    Qt::ItemFlags flags(const QModelIndex& index) const override;
+
+    /* Methods for drag and drop support */
+    Qt::DropActions supportedDropActions() const override;
+    bool dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent) override;
+    bool canDropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent) const override;
+    QMimeData* mimeData(const QModelIndexList& indexes) const override;
+    QStringList mimeTypes() const override;
 
 protected:
     void clearModelItems() override;
@@ -160,6 +202,7 @@ Q_SIGNALS:
     void netWorthChanged(const MyMoneyMoney& amount, bool approximate);
     void profitLossChanged(const MyMoneyMoney& amount, bool approximate);
     void reconciliationInfoChanged();
+    void reparentAccountRequest(const QString& accountId, const QString& newParentId);
 
 private:
     struct Private;

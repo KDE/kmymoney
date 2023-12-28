@@ -10,6 +10,11 @@
 
 namespace eWidgets {
 
+/*
+ * IMPORTANT: Keep this in sync with sortOrderText array in transactionsortoption.cpp
+ *            Don't touch the order of this list because it will break
+ *            the sorting in existing data files
+ */
 enum class SortField {
     Unknown = 0, ///< unknown sort criteria
     PostDate = 1, ///< sort by post date
@@ -23,7 +28,7 @@ enum class SortField {
     ReconcileState, ///< sort by reconciliation state
     Security, ///< sort by security (only useful for investment accounts)
     ReconciliationDate, ///< sort by reconciliation date
-    // insert new values in front of this line
+    // insert new values in front of this comment
     MaxFields,
 };
 

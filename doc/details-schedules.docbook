@@ -334,7 +334,7 @@
   <screenshot>
     <mediaobject>
       <imageobject>
-	<imagedata fileref="confirmenter.png" format="PNG" />
+	<imagedata fileref="confirm_enter.png" format="PNG" />
       </imageobject>
     </mediaobject>
   </screenshot>

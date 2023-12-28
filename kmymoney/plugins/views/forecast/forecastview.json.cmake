@@ -91,7 +91,7 @@
         "Name[sk]": "Pohľad predpovede",
         "Name[sl]": "Pogled napovedi",
         "Name[sv]": "Prognosvy",
-        "Name[tr]": "Öngörü görünümü",
+        "Name[tr]": "Öngörü Görünümü",
         "Name[uk]": "Перегляд прогнозів",
         "Name[x-test]": "xxForecast viewxx",
         "Name[zh_CN]": "预测视图",

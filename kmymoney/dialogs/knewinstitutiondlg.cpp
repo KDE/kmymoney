@@ -79,6 +79,7 @@ KNewInstitutionDlg::KNewInstitutionDlg(MyMoneyInstitution& institution, QWidget 
     d->ui->bankCodeEdit->setText(institution.bankcode());
     d->ui->bicEdit->setText(institution.value(QStringLiteral("bic")));
     d->ui->urlEdit->setText(institution.value(QStringLiteral("url")));
+    d->ui->iconUrlEdit->setText(institution.value(QStringLiteral("iconUrl")));
 
     if (!institution.value(QStringLiteral("icon")).isEmpty()) {
         d->m_favIcon = Icons::loadIconFromApplicationCache(institution.value(QStringLiteral("icon")));
@@ -93,7 +94,14 @@ KNewInstitutionDlg::KNewInstitutionDlg(MyMoneyInstitution& institution, QWidget 
     connect(d->ui->buttonBox, &QDialogButtonBox::accepted, this, &KNewInstitutionDlg::okClicked);
     connect(d->ui->buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
     connect(d->ui->nameEdit, &QLineEdit::textChanged, this, &KNewInstitutionDlg::institutionNameChanged);
-    connect(d->ui->urlEdit, &QLineEdit::textChanged, this, &KNewInstitutionDlg::slotUrlChanged);
+    connect(d->ui->urlEdit, &QLineEdit::textChanged, this, [&]() {
+        Q_D(KNewInstitutionDlg);
+        slotUrlChanged(d->ui->urlEdit);
+    });
+    connect(d->ui->iconUrlEdit, &QLineEdit::textChanged, this, [&]() {
+        Q_D(KNewInstitutionDlg);
+        slotUrlChanged(d->ui->iconUrlEdit);
+    });
     connect(&d->m_iconLoadTimer, &QTimer::timeout, this, &KNewInstitutionDlg::slotLoadIcon);
     connect(d->ui->iconButton, &QToolButton::pressed, this,
     [=] {
@@ -101,9 +109,13 @@ KNewInstitutionDlg::KNewInstitutionDlg(MyMoneyInstitution& institution, QWidget 
         url.setUrl(QString::fromLatin1("https://%1").arg(d->ui->urlEdit->text()));
         QDesktopServices::openUrl(url);
     });
+    connect(d->ui->iconUrlEdit, &QLineEdit::textChanged, this, [&]() {
+        Q_D(KNewInstitutionDlg);
+        d->m_iconLoadTimer.start(200);
+    });
 
     institutionNameChanged(d->ui->nameEdit->text());
-    slotUrlChanged(d->ui->urlEdit->text());
+    slotUrlChanged(d->ui->urlEdit);
 
     auto requiredFields = new KMandatoryFieldGroup(this);
     requiredFields->setOkButton(d->ui->buttonBox->button(QDialogButtonBox::Ok)); // button to be enabled when all fields present
@@ -139,6 +151,7 @@ void KNewInstitutionDlg::okClicked()
     d->m_institution.setBankCode(d->ui->bankCodeEdit->text());
     d->m_institution.setValue(QStringLiteral("bic"), d->ui->bicEdit->text());
     d->m_institution.setValue(QStringLiteral("url"), d->ui->urlEdit->text());
+    d->m_institution.setValue(QStringLiteral("iconUrl"), d->ui->iconUrlEdit->text());
     d->m_institution.deletePair(QStringLiteral("icon"));
 
     if (d->ui->iconButton->isEnabled()) {
@@ -165,15 +178,15 @@ void KNewInstitutionDlg::newInstitution(MyMoneyInstitution& institution)
     delete dlg;
 }
 
-void KNewInstitutionDlg::slotUrlChanged(const QString& newUrl)
+void KNewInstitutionDlg::slotUrlChanged(QLineEdit* edit)
 {
     Q_D(KNewInstitutionDlg);
 
     // remove a possible leading protocol since we only provide https for now
     QRegularExpression protocol(QStringLiteral("^[a-zA-Z]+://(?<url>.*)"), QRegularExpression::CaseInsensitiveOption);
-    QRegularExpressionMatch matcher = protocol.match(newUrl);
+    QRegularExpressionMatch matcher = protocol.match(edit->text());
     if (matcher.hasMatch()) {
-        d->ui->urlEdit->setText(matcher.captured(QStringLiteral("url")));
+        edit->setText(matcher.captured(QStringLiteral("url")));
         d->ui->messageWidget->setText(i18nc("@info:usagetip", "The protocol part has been removed by KMyMoney because it is fixed to https for security reasons."));
         d->ui->messageWidget->setMessageType(KMessageWidget::Information);
         d->ui->messageWidget->animatedShow();
@@ -191,7 +204,7 @@ void KNewInstitutionDlg::slotLoadIcon()
         return;
     }
 
-    const auto path = d->ui->urlEdit->text();
+    const auto path = (d->ui->iconUrlEdit->text().isEmpty()) ? d->ui->urlEdit->text() : d->ui->iconUrlEdit->text();
     QRegularExpression urlRe(QStringLiteral("^(.*\\.)?[^\\.]{2,}\\.[a-z]{2,}"), QRegularExpression::CaseInsensitiveOption);
     QRegularExpressionMatch matcher = urlRe.match(path);
     d->ui->iconButton->setEnabled(false);
@@ -199,7 +212,7 @@ void KNewInstitutionDlg::slotLoadIcon()
     if (matcher.hasMatch()) {
         d->ui->iconButton->setEnabled(true);
         d->m_url = QUrl(QString::fromLatin1("https://%1").arg(path));
-        d->m_favIconJob = new KIO::FavIconRequestJob(d->m_url);
+        d->m_favIconJob = new KIO::FavIconRequestJob(d->m_url, KIO::Reload);
         connect(d->m_favIconJob, &KIO::FavIconRequestJob::result, this, &KNewInstitutionDlg::slotIconLoaded);
         // we force to end the job after 1 second to avoid blocking this mechanism in case the thing fails
         QTimer::singleShot(1000, this, &KNewInstitutionDlg::killIconLoad);

@@ -52,6 +52,12 @@ KAccountsView::KAccountsView(QWidget *parent) :
     connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::netWorthChanged, this, &KAccountsView::slotNetWorthChanged);
 
     d->m_sharedToolbarActions.insert(eMenu::Action::FileNew, pActions[eMenu::Action::NewAccount]);
+
+    d->ui->m_accountTree->setSelectionMode(QAbstractItemView::SingleSelection);
+    d->ui->m_accountTree->setDragEnabled(true);
+    d->ui->m_accountTree->setAcceptDrops(true);
+    d->ui->m_accountTree->setDropIndicatorShown(true);
+    d->ui->m_accountTree->setDragDropMode(QAbstractItemView::InternalMove);
 }
 
 KAccountsView::~KAccountsView()

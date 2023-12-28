@@ -119,6 +119,12 @@ This is in the order pulled in from index.docbook, with brief note on state of u
 Items which need to be addressed, but so far not sure where (or more likely in
 multiple places.
 
+- Some author entities seem NOT to be in the current contributor.entities, although
+  they had supposedly been added to svn quite a while ago.  Need to confirm all, and
+  re-add any which are not currently present.
+
+- Need to determine what to do about email address for deceased contributor.
+
 - Need consistency in capitalization of Xxx View.  What about View Selector?
 
 - In Institutuions and Accounts Views, balance is in currency of the account, total

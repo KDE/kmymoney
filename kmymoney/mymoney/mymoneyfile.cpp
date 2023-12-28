@@ -209,6 +209,7 @@ public:
         qq->connect(&schedulesModel, &SchedulesModel::modelReset, &schedulesJournalModel, &SchedulesJournalModel::updateData);
         qq->connect(&schedulesModel, &SchedulesModel::rowsAboutToBeRemoved, &schedulesJournalModel, &SchedulesJournalModel::updateData);
         qq->connect(&accountsModel, &AccountsModel::reconciliationInfoChanged, &reconciliationModel, &ReconciliationModel::updateData);
+        qq->connect(&accountsModel, &AccountsModel::reparentAccountRequest, qq, &MyMoneyFile::reparentAccountByIds);
     }
 
     ~Private()
@@ -936,6 +937,19 @@ void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
     d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Account, account.id());
 }
 
+void MyMoneyFile::reparentAccountByIds(const QString& accountId, const QString& newParentId)
+{
+    MyMoneyFileTransaction ft;
+    try {
+        auto acc = account(accountId);
+        auto newParent = account(newParentId);
+        reparentAccount(acc, newParent);
+        ft.commit();
+    } catch (MyMoneyException& e) {
+        qDebug() << e.what();
+    }
+}
+
 void MyMoneyFile::reparentAccount(MyMoneyAccount &acc, MyMoneyAccount& parent)
 {
     d->checkTransaction(Q_FUNC_INFO);
@@ -959,9 +973,6 @@ void MyMoneyFile::reparentAccount(MyMoneyAccount &acc, MyMoneyAccount& parent)
 
         if (!d->accountsModel.indexById(acc.id()).isValid())
             throw MYMONEYEXCEPTION_CSTRING("Unable to reparent non existent account");
-
-        if (!d->accountsModel.indexById(acc.id()).isValid())
-            throw MYMONEYEXCEPTION_CSTRING("Unable to reparent to existent account");
 
         // reparent in model
         d->accountsModel.reparentAccount(acc.id(), parent.id());

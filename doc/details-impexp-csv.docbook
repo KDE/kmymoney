@@ -102,11 +102,20 @@
 <para>
   Each type of CSV file to be imported requires sepcification of several details
   regarding the expected formatting of the data, as described in the following
-  sections of this handbook.  Not only do the details differ for the different types
-  of data files imported, it is possilbe to need different configurations for the
-  same type of data from different sources.  So you do not need to enter all those
-  details each time you import a file, the CSV Importer allows you to specify the
-  details once, and save them in a named profile.
+  sections.  Not only do the details differ for the different types of data files
+  imported, it is possilbe to need different configurations for the same type of data
+  from different sources.  So you do not need to enter all those details each time
+  you import a file, the CSV Importer allows you to specify the details once, and
+  save them in a named profile.
+</para>
+
+<para>
+  The name of a CSV import profile is completely arbitrary, but will be easier to
+  remember if it reflects both the type of data being imported (bank, credit card,
+  investment, ...) and the source of the data.  There is no need to reference the
+  account into which the data is imported, and it is possible to use the same profile
+  for importing into more than one account, such as two checking accounts at the same
+  bank.
 </para>
 
 <para>
@@ -702,21 +711,21 @@
 <sect3 id="details.impexp.csv.config"><title>Configuration of CSV importer plugin</title>
 
 <para>
- A well-known drawback of QIF format is that it is a fairly loose format.
- With CSV files, there is this same problem, only more so, in that there  is
- no agreed standard at all.  With investment files, in particular, there is
- much more scope for variation in specifying the different types of activities
- represented in the data.  The plugin handles this by listing these activity
- types in a resource file, called <filename>csvimporterrc</filename>. The location
- of this file depends on your distribution. On a &Linux; system, this will be in
- <filename class="directory">$KDEHOME/share/config</filename> where
- <envar>$KDEHOME</envar> is usually <quote>.config</quote> within your home folder.
- If you are migrating from a version of &kmymoney; prior to 5.0 or later, the old
- location of <envar>$KDEHOME</envar> was <filename class="directory">.kde4</filename>.
- Using this resource file allows the user to add an activity type that the developer
- had not encountered. If the file does not exist when the importer first runs, the
- plugin will create a default version, containing a few of the more obvious
- descriptions.
+ A well-known drawback of QIF format is that it is a fairly loose format.  With CSV
+ files, there is this same problem, only more so, in that there is no agreed standard
+ at all.  With investment files, in particular, there is much more scope for
+ variation in specifying the different types of activities represented in the data.
+ The plugin handles this by listing these activity types in a resource file, called
+ <filename>csvimporterrc</filename>. The location of this file depends on your
+ opearintg system or distribution. On a &Linux; system, this will be <filename
+ class="directory">$KDEHOME/share/config</filename> where <envar>$KDEHOME</envar> is
+ usually <filename class="directory">.config</filename> within your home folder.  If
+ you are migrating from a version of &kmymoney; prior to 5.0, the old location of
+ <envar>$KDEHOME</envar> was <filename class="directory">.kde4</filename>, also
+ within your home folder.  Using this resource file allows the user to add an
+ activity type that the developer had not encountered. If the file does not exist
+ when the importer first runs, it will create a default version, containing a few of
+ the more obvious descriptions.
 </para>
 
 <para>
@@ -741,6 +750,18 @@
  &userlist; or developer list &devlist;, the developer will do his best to
  modify the plugin to handle it.
 </para>
+
+<sect4><title>CSV Importer configuration dialog</title>
+
+<para>
+  Finally, there are a few other items which may be configured in a dialog invoked
+  through the <link linkend="details.settings.plugins.csvimporter">CSV Importer
+  configuration dialog</link>, which can be invoked from the Plugins page of the main
+  KMyMoney configuration dialog.  This includes which items will be autodetected by
+  the importer and which profile will be used if you do have the importer export a
+  QIF file, as mentioned above.
+</para>
+</sect4>
 </sect3>
 </sect2>
 </sect1>

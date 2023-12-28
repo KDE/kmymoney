@@ -1778,6 +1778,12 @@ protected:
       */
     MyMoneyFile();
 
+    /**
+     * Used by accountsModel to enclose a reparent operation
+     * inside a MyMoneyFileTransaction.
+     */
+    void reparentAccountByIds(const QString& accountId, const QString& newParentId);
+
 protected Q_SLOTS:
     void finalizeFileOpen();
 

@@ -769,7 +769,7 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
                                                          );
     // The following was contributed by Brendan Coupe <Brendan@CoupeWare.com>
     result["Yahoo Finance"] = WebPriceQuoteSource("Yahoo Finance",
-                              "https://query1.finance.yahoo.com/v7/finance/quote?fields=regularMarketPrice&symbols=%1",
+                              "https://query1.finance.yahoo.com/v8/finance/chart/%1",
                               QString(),
                               "%1",  // webIDRegExp
                               WebPriceQuoteSource::identifyBy::Symbol,
