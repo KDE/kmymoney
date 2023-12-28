@@ -32,7 +32,7 @@ void ExistingTransactionMatchFinder::createListOfMatchCandidates()
 
 void ExistingTransactionMatchFinder::findMatchInMatchCandidatesList()
 {
-    Q_FOREACH (const TransactionAndSplitPair & transactionAndSplit, listOfMatchCandidates) {
+    for (const TransactionAndSplitPair& transactionAndSplit : qAsConst(listOfMatchCandidates)) {
         const MyMoneyTransaction & theTransaction = transactionAndSplit.first;
 
         if (theTransaction.id() == importedTransaction.id()) {

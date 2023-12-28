@@ -40,8 +40,10 @@ using namespace Icons;
 
 class CsvExportDlgPrivate
 {
+    Q_DISABLE_COPY_MOVE(CsvExportDlgPrivate)
+
 public:
-    CsvExportDlgPrivate(CsvExportDlg* qq)
+    explicit CsvExportDlgPrivate(CsvExportDlg* qq)
         : q(qq)
         , ui(new Ui::CsvExportDlg)
         , accountsModel(new AccountNamesFilterProxyModel(qq))

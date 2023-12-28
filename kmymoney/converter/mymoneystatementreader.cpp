@@ -220,7 +220,7 @@ void MyMoneyStatementReader::Private::previouslyUsedCategories(const QString& in
             // stock split shouldn't be fee or interest because it won't play nice with dissectTransaction
             // it was caused by processTransactionEntry adding splits in wrong order != with manual transaction entering
             if (acc.accountGroup() == Account::Type::Expense || acc.accountGroup() == Account::Type::Income) {
-                Q_FOREACH (auto sNew, t.splits()) {
+                for (const auto& sNew : t.splits()) {
                     acc = file->account(sNew.accountId());
                     if (acc.accountGroup() != Account::Type::Expense && // shouldn't be fee
                             acc.accountGroup() != Account::Type::Income &&  // shouldn't be interest
@@ -732,7 +732,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             // search through each subordinate account
             auto found = false;
             QString currencyid;
-            Q_FOREACH (const auto sAccount, thisaccount.accountList()) {
+            for (const auto& sAccount : thisaccount.accountList()) {
                 currencyid = file->account(sAccount).currencyId();
                 auto security = file->security(currencyid);
                 if (matchNotEmpty(statementTransactionUnderImport.m_strSymbol, security.tradingSymbol()) ||
@@ -1078,6 +1078,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                     auto filterProxyModel = new AccountNamesFilterProxyModel(this);
                     filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
                     filterProxyModel->setHideZeroBalancedEquityAccounts(KMyMoneySettings::hideZeroBalanceEquities());
+                    filterProxyModel->setHideZeroBalancedAccounts(KMyMoneySettings::hideZeroBalanceAccounts());
                     filterProxyModel->addAccountGroup(QVector<Account::Type> {Account::Type::Asset, Account::Type::Liability, Account::Type::Equity, Account::Type::Income, Account::Type::Expense});
 
                     filterProxyModel->setSourceModel(MyMoneyFile::instance()->accountsModel());

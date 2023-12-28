@@ -122,6 +122,8 @@ public:
 
         accountsModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
         accountsModel->setHideZeroBalancedEquityAccounts(KMyMoneySettings::hideZeroBalanceEquities());
+        accountsModel->setHideZeroBalancedAccounts(KMyMoneySettings::hideZeroBalanceAccounts());
+        accountsModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
         auto const model = MyMoneyFile::instance()->accountsModel();
         accountsModel->setSourceModel(model);
         accountsModel->sort(AccountsModel::Column::AccountName);
@@ -172,12 +174,12 @@ public:
         const auto subtrees = QVector<QModelIndex> ({ model->favoriteIndex(), model->assetIndex(), model->liabilityIndex() });
 
         bool stopAfterFirstAccount = false;
-        Q_FOREACH(const auto startIdx, subtrees) {
+        for (const auto& startIdx : subtrees) {
             // retrieve all items in the current subtree
-            auto indexes = model->match(model->index(0, 0, startIdx), Qt::DisplayRole, QString("*"), -1, Qt::MatchWildcard);
+            const auto indexes = model->match(model->index(0, 0, startIdx), Qt::DisplayRole, QString("*"), -1, Qt::MatchWildcard);
 
             // indexes now has a list of favorite accounts
-            Q_FOREACH (const auto idx, indexes) {
+            for (const auto& idx : indexes) {
                 openLedger(idx.data(eMyMoney::Model::Roles::IdRole).toString(), false);
                 if (stopAfterFirstAccount) {
                     break;
@@ -724,6 +726,8 @@ void SimpleLedgerView::slotSettingsChanged()
         d->accountsModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
         d->accountsModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
         d->accountsModel->setHideZeroBalancedEquityAccounts(KMyMoneySettings::hideZeroBalanceEquities());
+        d->accountsModel->setHideZeroBalancedAccounts(KMyMoneySettings::hideZeroBalanceAccounts());
+        d->accountsModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
         d->accountsModel->setHideFavoriteAccounts(false);
     }
     Q_EMIT settingsChanged();

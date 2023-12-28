@@ -412,6 +412,13 @@ Set it to 0 to turn the feature off.</string>
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="kcfg_HideZeroBalanceAccounts">
+            <property name="text">
+             <string>Hide accounts with a zero balance</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="kcfg_HideZeroBalanceEquities">
             <property name="text">
              <string>Do not show zero balance equities</string>
@@ -641,6 +648,11 @@ Set it to 0 to turn the feature off.</string>
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KDateComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kdatecombobox.h</header>
   </customwidget>
   <customwidget>
    <class>KMyMoneyDateEdit</class>

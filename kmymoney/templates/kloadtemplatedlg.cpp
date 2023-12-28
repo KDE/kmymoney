@@ -25,6 +25,8 @@
 
 class KLoadTemplateDlgPrivate
 {
+    Q_DISABLE_COPY_MOVE(KLoadTemplateDlgPrivate)
+
 public:
     KLoadTemplateDlgPrivate()
         : ui(new Ui::KLoadTemplateDlg)

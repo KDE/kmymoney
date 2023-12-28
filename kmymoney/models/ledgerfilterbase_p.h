@@ -25,7 +25,7 @@
 class LedgerFilterBasePrivate : public LedgerSortProxyModelPrivate
 {
 public:
-    LedgerFilterBasePrivate(LedgerFilterBase* qq)
+    explicit LedgerFilterBasePrivate(LedgerFilterBase* qq)
         : LedgerSortProxyModelPrivate(qq)
         , concatModel(nullptr)
         , accountType(eMyMoney::Account::Type::Asset)

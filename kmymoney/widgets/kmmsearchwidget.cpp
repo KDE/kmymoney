@@ -25,8 +25,10 @@ using namespace Icons;
 
 class KMMSearchWidgetPrivate
 {
+    Q_DISABLE_COPY_MOVE(KMMSearchWidgetPrivate)
+
 public:
-    KMMSearchWidgetPrivate(KMMSearchWidget* qq)
+    explicit KMMSearchWidgetPrivate(KMMSearchWidget* qq)
         : q_ptr(qq)
         , ui(new Ui_KMMSearchWidget)
     {

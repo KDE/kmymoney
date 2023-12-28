@@ -16,7 +16,7 @@ class QString;
 class KMMTextBrowser : public QTextBrowser
 {
 public:
-    KMMTextBrowser(QWidget* parent = nullptr);
+    explicit KMMTextBrowser(QWidget* parent = nullptr);
     void print(QPagedPaintDevice* printer);
     void setHtml(const QString& text);
 

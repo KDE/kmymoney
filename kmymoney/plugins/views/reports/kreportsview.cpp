@@ -166,48 +166,13 @@ void KReportsView::showEvent(QShowEvent * event)
         });
         connect(d->ui.m_searchWidget, &QLineEdit::textChanged, this, [&](const QString& text) {
             Q_D(KReportsView);
-            const auto columns = d->ui.m_tocTreeWidget->columnCount();
-            for (auto i = 0; i < d->ui.m_tocTreeWidget->topLevelItemCount(); ++i) {
-                const auto toplevelItem = d->ui.m_tocTreeWidget->topLevelItem(i);
-                bool hideTopLevel = true;
-                for (auto j = 0; j < toplevelItem->childCount(); ++j) {
-                    const auto reportItem = toplevelItem->child(j);
-                    if (text.isEmpty()) {
-                        reportItem->setHidden(false);
-                        hideTopLevel = false;
-                    } else {
-                        reportItem->setHidden(true);
-                        for (auto column = 0; column < columns; ++column) {
-                            if (reportItem->text(column).contains(text, Qt::CaseInsensitive)) {
-                                reportItem->setHidden(false);
-                                hideTopLevel = false;
-                                break;
-                            }
-                        }
-                    }
-                }
-                toplevelItem->setHidden(hideTopLevel);
-            }
-
-            if (text.isEmpty()) {
-                if (!d->expandStatesBeforeSearch.isEmpty()) {
-                    d->restoreTocExpandState(d->expandStatesBeforeSearch);
-                    d->expandStatesBeforeSearch.clear();
-                }
-            } else {
-                if (d->expandStatesBeforeSearch.isEmpty()) {
-                    d->expandStatesBeforeSearch = d->saveTocExpandState();
-                }
-                // show groups with matching reports as expanded
-                for (auto i = 0; i < d->ui.m_tocTreeWidget->topLevelItemCount(); ++i) {
-                    const auto toplevelItem = d->ui.m_tocTreeWidget->topLevelItem(i);
-                    toplevelItem->setExpanded(!toplevelItem->isHidden());
-                }
-            }
+            d->setFilter(text);
         });
     }
-    if (d->m_needsRefresh)
+    if (d->m_needsRefresh) {
         refresh();
+        d->setFilter(d->ui.m_searchWidget->text());
+    }
 
     if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget()))
         Q_EMIT reportSelected(tab->report());
@@ -716,14 +681,14 @@ void KReportsView::slotCloseAll()
 void KReportsView::slotListContextMenu(const QPoint & p)
 {
     Q_D(KReportsView);
-    auto items = d->ui.m_tocTreeWidget->selectedItems();
+    const auto items = d->ui.m_tocTreeWidget->selectedItems();
 
     if (items.isEmpty()) {
         return;
     }
 
     QList<TocItem*> tocItems;
-    Q_FOREACH(auto item, items) {
+    for (const auto& item : items) {
         auto tocItem = dynamic_cast<TocItem*>(item);
         if (tocItem && tocItem->isReport()) {
             tocItems.append(tocItem);
@@ -770,13 +735,13 @@ void KReportsView::slotOpenFromList()
 {
     Q_D(KReportsView);
 
-    auto items = d->ui.m_tocTreeWidget->selectedItems();
+    const auto items = d->ui.m_tocTreeWidget->selectedItems();
 
     if (items.isEmpty()) {
         return;
     }
 
-    Q_FOREACH(auto item, items) {
+    for (const auto& item : items) {
         auto tocItem = dynamic_cast<TocItem*>(item);
         if (tocItem && tocItem->isReport()) {
             slotItemDoubleClicked(tocItem, 0);
@@ -788,13 +753,13 @@ void KReportsView::slotPrintFromList()
 {
     Q_D(KReportsView);
 
-    auto items = d->ui.m_tocTreeWidget->selectedItems();
+    const auto items = d->ui.m_tocTreeWidget->selectedItems();
 
     if (items.isEmpty()) {
         return;
     }
 
-    Q_FOREACH(auto item, items) {
+    for (const auto& item : items) {
         auto tocItem = dynamic_cast<TocItem*>(item);
         if (tocItem && tocItem->isReport()) {
             slotItemDoubleClicked(tocItem, 0);

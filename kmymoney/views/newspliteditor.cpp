@@ -34,6 +34,7 @@
 #include "journalmodel.h"
 #include "kcurrencycalculator.h"
 #include "kmymoneyaccountcombo.h"
+#include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
 #include "menuenums.h"
 #include "mymoneyaccount.h"
@@ -55,6 +56,8 @@ using namespace Icons;
 
 struct NewSplitEditor::Private
 {
+    Q_DISABLE_COPY_MOVE(Private)
+
     Private(NewSplitEditor* parent)
         : q(parent)
         , ui(new Ui_NewSplitEditor)
@@ -70,6 +73,7 @@ struct NewSplitEditor::Private
         , isIncomeExpense(false)
         , readOnly(false)
         , postDate(QDate::currentDate())
+        , frameCollection(nullptr)
     {
         accountsModel->setObjectName("AccountNamesFilterProxyModel");
         costCenterModel->setObjectName("SortedCostCenterModel");
@@ -323,6 +327,8 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
     d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense, eMyMoney::Account::Type::Equity,});
     d->accountsModel->setHideEquityAccounts(false);
     d->accountsModel->setHideZeroBalancedEquityAccounts(false);
+    d->accountsModel->setHideZeroBalancedAccounts(false);
+    d->accountsModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
     d->accountsModel->setSourceModel(model);
     d->accountsModel->sort(AccountsModel::Column::AccountName);
     d->ui->accountCombo->setModel(d->accountsModel);

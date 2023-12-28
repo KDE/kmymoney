@@ -1,44 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
-		http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
-	<kcfgfile name="kmymoney/icalendarexporterrc"/>
-	<group name="General">
-		<entry name="createAlarm" type="Bool">
-			<label>To create an alarm for the exported schedules</label>
-                        <default>true</default>
-		</entry>
-    <entry name="beforeAfter" type="Int">
-      <label>Tells whether the reminder should be triggered before or after the schedule start</label>
-      <default>0</default>
-    </entry>
-    <entry name="timeUnits" type="Int">
-      <label>The number of units of the interval before or after the schedule starts</label>
-      <default>1</default>
-    </entry>
-    <entry name="timeUnitInSeconds" type="Int">
-      <label>The units of the interval before or after the schedule starts in seconds </label>
-      <default>2</default>
-    </entry>
-    <entry name="repeatingReminders" type="Bool">
-      <label>If the reminders should repeat or not</label>
-      <default>true</default>
-    </entry>
-    <entry name="intervalBetweenRemindersTimeUnits" type="Int">
-      <label>The number of units of the interval between reminders</label>
-      <default>60</default>
-    </entry>
-    <entry name="intervalBetweenRemindersTimeUnitInSeconds" type="Int">
-      <label>The units of the interval between reminders in seconds </label>
-      <default>0</default>
-    </entry>
-    <entry name="numberOfReminders" type="Int">
-      <label>The number of reminders to be generated for the schedule </label>
-      <default>1</default>
-    </entry>
-    <entry name="icalendarFile" type="String"> 
-      <label>The icalendar file in which to export the schedules.</label> 
-    </entry> 
-	</group>
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+    <kcfgfile name="kmymoney/icalendarexporterrc"/>
+    <group name="General">
+        <entry name="createAlarm" type="Bool">
+            <label>To create an alarm for the exported schedules</label>
+            <default>true</default>
+        </entry>
+        <entry name="beforeAfter" type="Int">
+            <label>Tells whether the reminder should be triggered before or after the schedule start</label>
+            <default>0</default>
+        </entry>
+        <entry name="timeUnits" type="Int">
+            <label>The number of units of the interval before or after the schedule starts</label>
+            <default>1</default>
+        </entry>
+        <entry name="timeUnitInSeconds" type="Int">
+            <label>The units of the interval before or after the schedule starts in seconds </label>
+            <default>2</default>
+        </entry>
+        <entry name="repeatingReminders" type="Bool">
+            <label>If the reminders should repeat or not</label>
+            <default>true</default>
+        </entry>
+        <entry name="intervalBetweenRemindersTimeUnits" type="Int">
+            <label>The number of units of the interval between reminders</label>
+            <default>60</default>
+        </entry>
+        <entry name="intervalBetweenRemindersTimeUnitInSeconds" type="Int">
+            <label>The units of the interval between reminders in seconds </label>
+            <default>0</default>
+        </entry>
+        <entry name="numberOfReminders" type="Int">
+            <label>The number of reminders to be generated for the schedule </label>
+            <default>1</default>
+        </entry>
+        <entry name="icalendarFile" type="String">
+            <label>The icalendar file in which to export the schedules.</label>
+        </entry>
+        <entry name="writeEventsVsTodos" type="Bool">
+            <label>Write Google calendar compatible entries</label>
+            <default>false</default>
+        </entry>
+    </group>
 </kcfg>

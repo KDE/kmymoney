@@ -98,7 +98,7 @@ bool KMyMoneyTextEdit::isValid() const
     }
 
     if (d->m_maxLineLength != -1) {
-        Q_FOREACH (QString line, lines) {
+        for (const auto& line : lines) {
             if (line.length() > d->m_maxLineLength)
                 return false;
         }

@@ -78,13 +78,14 @@ public:
         ClearTransactionDisplay,
     };
 
-    explicit KPayeesViewPrivate(KPayeesView *qq)
+    explicit KPayeesViewPrivate(KPayeesView* qq)
         : KMyMoneyViewBasePrivate(qq)
         , ui(new Ui::KPayeesView)
-        , m_transactionFilter (nullptr)
+        , m_transactionFilter(nullptr)
         , m_contact(nullptr)
         , m_syncedPayees(0)
         , m_filterProxyModel(nullptr)
+        , m_renameProxyModel(nullptr)
     {
     }
 
@@ -122,6 +123,7 @@ public:
         m_filterProxyModel = new AccountNamesFilterProxyModel(q);
         m_filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
         m_filterProxyModel->setHideZeroBalancedEquityAccounts(KMyMoneySettings::hideZeroBalanceEquities());
+        m_filterProxyModel->setHideZeroBalancedAccounts(KMyMoneySettings::hideZeroBalanceAccounts());
         m_filterProxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense, eMyMoney::Account::Type::Equity});
 
         m_filterProxyModel->setSourceModel(MyMoneyFile::instance()->accountsModel());
@@ -424,9 +426,9 @@ public:
 
             // now get a list of all schedules that make use of one of the payees
             QList<MyMoneySchedule> used_schedules;
-            Q_FOREACH (const auto schedule, file->scheduleList()) {
+            for (const auto& schedule : file->scheduleList()) {
                 // loop over all splits in the transaction of the schedule
-                Q_FOREACH (const auto split, schedule.transaction().splits()) {
+                for (const auto& split : schedule.transaction().splits()) {
                     // is the payee in the split to be deleted?
                     if (payeeInList(list, split.payeeId())) {
                         used_schedules.push_back(schedule); // remember this schedule
@@ -555,7 +557,7 @@ public:
                     } // for - Schedules
 
                     // reassign the payees in the loans that reference the deleted payees
-                    Q_FOREACH (const MyMoneyAccount &account, usedAccounts) {
+                    for (const MyMoneyAccount& account : qAsConst(usedAccounts)) {
                         MyMoneyAccountLoan loanAccount(account);
                         loanAccount.setPayee(payee_id);
                         file->modifyAccount(loanAccount);

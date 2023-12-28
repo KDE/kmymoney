@@ -302,9 +302,7 @@ void SQLStorage::slotOpenDatabase()
                     return;
                 }
             }
-            delete dialog;
         }
-
         appInterface()->slotFileOpenRecent(newurl);
     }
     delete dialog;

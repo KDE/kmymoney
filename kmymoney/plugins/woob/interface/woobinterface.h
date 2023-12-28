@@ -52,7 +52,7 @@ public:
             TYPE_CARD,
             TYPE_LOAN_PAYMENT,
             TYPE_BANK,
-        } type;
+        } type = TYPE_UNKNOWN;
         QString raw;
         QString category;
         QString label;
@@ -70,7 +70,7 @@ public:
             TYPE_LOAN,
             TYPE_MARKET,
             TYPE_JOINT,
-        } type;
+        } type = TYPE_UNKNOWN;
         MyMoneyMoney balance;
 
         QList<Transaction> transactions;

@@ -9,6 +9,8 @@
 
 #include <QHash>
 
+#include "qhashseedtype.h"
+
 enum class FieldDelimiter { Comma = 0, Semicolon, Colon, Tab, Auto };
 enum class TextDelimiter { DoubleQuote = 0, SingleQuote };
 enum class DecimalSymbol { Dot = 0, Comma, Auto };
@@ -18,10 +20,12 @@ enum class Column { Date, Memo, Number, Payee, Amount, Credit, Debit, Category, 
 enum class Profile { Banking, Investment, CurrencyPrices, StockPrices };
 enum class ProfileAction { Add, Remove, Rename, UpdateLastUsed };
 
-inline uint qHash(const Column key, uint seed) {
+inline qHashSeedType qHash(const Column key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
-inline uint qHash(const Profile key, uint seed) {
+inline qHashSeedType qHash(const Profile key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 

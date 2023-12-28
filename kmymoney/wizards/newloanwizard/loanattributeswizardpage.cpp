@@ -49,7 +49,7 @@ LoanAttributesWizardPage::LoanAttributesWizardPage(QWidget *parent)
         auto list = file->institutionList();
         std::sort(list.begin(), list.end());
 
-        Q_FOREACH(const MyMoneyInstitution &institution, list) {
+        for (const auto& institution : qAsConst(list)) {
             ui->m_qcomboboxInstitutions->addItem(institution.name());
         }
     } catch (const MyMoneyException &e) {

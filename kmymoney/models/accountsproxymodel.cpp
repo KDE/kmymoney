@@ -134,7 +134,7 @@ bool AccountsProxyModel::filterAcceptsRowOrChildRows(int source_row, const QMode
 void AccountsProxyModel::addAccountGroup(const QVector<eMyMoney::Account::Type> &groups)
 {
     Q_D(AccountsProxyModel);
-    Q_FOREACH (const auto group, groups) {
+    for (const auto& group : groups) {
         switch (group) {
         case eMyMoney::Account::Type::Asset:
             d->m_typeList << eMyMoney::Account::Type::Checkings;
@@ -279,9 +279,21 @@ bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
                         }
                     }
                 }
-                // we hide zero balance investment accounts
-                if (hideZeroBalancedEquityAccounts()) {
-                    if (accountType == eMyMoney::Account::Type::Equity || source.data(eMyMoney::Model::Roles::AccountIsInvestRole).toBool()) {
+
+                // we don't hide the top level accounts
+                if (source.parent() != QModelIndex()) {
+                    // we hide zero balance investment accounts
+                    if (hideZeroBalancedEquityAccounts()) {
+                        if (accountType == eMyMoney::Account::Type::Equity || source.data(eMyMoney::Model::Roles::AccountIsInvestRole).toBool()) {
+                            const auto totalValue = source.data(eMyMoney::Model::Roles::AccountTotalValueRole);
+                            if (totalValue.isValid() && totalValue.value<MyMoneyMoney>().isZero()) {
+                                return false;
+                            }
+                        }
+                    }
+
+                    // check if we hide zero balanced accounts
+                    if (hideZeroBalancedAccounts()) {
                         const auto totalValue = source.data(eMyMoney::Model::Roles::AccountTotalValueRole);
                         if (totalValue.isValid() && totalValue.value<MyMoneyMoney>().isZero()) {
                             return false;
@@ -362,7 +374,7 @@ void AccountsProxyModel::setHideClosedAccounts(bool hideClosedAccounts)
 bool AccountsProxyModel::hideClosedAccounts() const
 {
     Q_D(const AccountsProxyModel);
-    return d->m_hideClosedAccounts;
+    return d->m_hideClosedAccounts && !d->m_showAllEntries;
 }
 
 /**
@@ -384,7 +396,7 @@ void AccountsProxyModel::setHideEquityAccounts(bool hideEquityAccounts)
 bool AccountsProxyModel::hideEquityAccounts() const
 {
     Q_D(const AccountsProxyModel);
-    return d->m_hideEquityAccounts;
+    return d->m_hideEquityAccounts && !d->m_showAllEntries;
 }
 
 /**
@@ -406,7 +418,29 @@ void AccountsProxyModel::setHideZeroBalancedEquityAccounts(bool hideZeroBalanced
 bool AccountsProxyModel::hideZeroBalancedEquityAccounts() const
 {
     Q_D(const AccountsProxyModel);
-    return d->m_hideZeroBalanceEquityAccounts;
+    return d->m_hideZeroBalanceEquityAccounts && !d->m_showAllEntries;
+}
+
+/**
+ * Set if accounts should be hidden if their balance is zero.
+ * @param hideZeroBalancedAccounts
+ */
+void AccountsProxyModel::setHideZeroBalancedAccounts(bool hideZeroBalancedAccounts)
+{
+    Q_D(AccountsProxyModel);
+    if (d->m_hideZeroBalanceAccounts ^ hideZeroBalancedAccounts) {
+        d->m_hideZeroBalanceAccounts = hideZeroBalancedAccounts;
+        invalidateFilter();
+    }
+}
+
+/**
+ * Check if accounts are hidden when their balance is zero.
+ */
+bool AccountsProxyModel::hideZeroBalancedAccounts() const
+{
+    Q_D(const AccountsProxyModel);
+    return d->m_hideZeroBalanceAccounts && !d->m_showAllEntries;
 }
 
 /**
@@ -428,7 +462,7 @@ void AccountsProxyModel::setHideUnusedIncomeExpenseAccounts(bool hideUnusedIncom
 bool AccountsProxyModel::hideUnusedIncomeExpenseAccounts() const
 {
     Q_D(const AccountsProxyModel);
-    return d->m_hideUnusedIncomeExpenseAccounts;
+    return d->m_hideUnusedIncomeExpenseAccounts && !d->m_showAllEntries;
 }
 
 /**
@@ -466,6 +500,21 @@ bool AccountsProxyModel::hideAllEntries() const
 {
     Q_D(const AccountsProxyModel);
     return d->m_hideAllEntries;
+}
+
+void AccountsProxyModel::setShowAllEntries(bool showAllEntries)
+{
+    Q_D(AccountsProxyModel);
+    if (d->m_showAllEntries ^ showAllEntries) {
+        d->m_showAllEntries = showAllEntries;
+        invalidateFilter();
+    }
+}
+
+bool AccountsProxyModel::showAllEntries() const
+{
+    Q_D(const AccountsProxyModel);
+    return d->m_showAllEntries;
 }
 
 /**

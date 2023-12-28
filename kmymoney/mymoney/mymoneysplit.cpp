@@ -359,12 +359,6 @@ MyMoneyMoney MyMoneySplit::value(const QString& transactionCurrencyId, const QSt
     return (transactionCurrencyId == splitCurrencyId) ? d->m_value : d->m_shares;
 }
 
-MyMoneyMoney MyMoneySplit::actualPrice() const
-{
-    Q_D(const MyMoneySplit);
-    return d->m_price;
-}
-
 void MyMoneySplit::setPrice(const MyMoneyMoney& price)
 {
     Q_D(MyMoneySplit);

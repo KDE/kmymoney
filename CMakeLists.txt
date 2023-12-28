@@ -27,7 +27,11 @@ project(KMyMoney VERSION "${RELEASE_SERVICE_VERSION}" LANGUAGES CXX)
 # Minimum versions required for extern packages
 set(KMM_ALKIMIA_MIN_VERSION 8.1.72)
 set(KMM_KCHART_MIN_VERSION 2.6.0)
+# LibOFX uses two different version numbers. find_package looks for the
+# library's so version whereas pkg_check_modules retrieves the package
+# version. Details can be found in the libofx source code
 set(KMM_LIBOFX_MIN_VERSION 0.10.0)
+set(KMM_LIBOFX_MIN_SOVERSION 7.0.0)
 set(KMM_AQBANKING_MIN_VERSION 6.5.0)
 set(KMM_GWENHYWFAR_MIN_VERSION 5.10.1)
 
@@ -158,7 +162,7 @@ find_package(KChart ${KMM_KCHART_MIN_VERSION} QUIET)
 
 # we want the lowercase 'libofx' package name, for 'libofx_FOUND' compatibility with what pkg-config returns,
 # in case it is to be used as fallback
-find_package(libofx ${KMM_LIBOFX_MIN_VERSION} NAMES LibOFX libofx)
+find_package(libofx ${KMM_LIBOFX_MIN_SOVERSION} NAMES LibOFX libofx)
 if(NOT libofx_FOUND)
     find_package(PkgConfig)
 

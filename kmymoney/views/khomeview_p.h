@@ -116,6 +116,8 @@ public:
         , m_netWorthGraphLastValidSize(400, 300)
         , m_scrollBarPos(0)
         , m_fileOpen(false)
+        , m_adjustedIconSize(0)
+        , m_devRatio(1.0)
     {
     }
 
@@ -157,8 +159,8 @@ public:
 
         q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KHomeView::refresh);
 
-        m_resizeRefreshTimeout.setSingleShot(true);
-        q->connect(&m_resizeRefreshTimeout, &QTimer::timeout, q, &KHomeView::refresh);
+        m_resizeRefreshTimer.setSingleShot(true);
+        q->connect(&m_resizeRefreshTimer, &QTimer::timeout, q, &KHomeView::refresh);
     }
 
     /**
@@ -184,9 +186,9 @@ public:
 
         if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
             //show account's online-status
-            pathOK = QPixmapToDataUri(Icons::get(Icon::DialogOKApply).pixmap(QSize(adjustedIconSize, adjustedIconSize)));
-            pathTODO = QPixmapToDataUri(Icons::get(Icon::MailReceive).pixmap(QSize(adjustedIconSize, adjustedIconSize)));
-            pathNotOK = QPixmapToDataUri(Icons::get(Icon::DialogCancel).pixmap(QSize(adjustedIconSize, adjustedIconSize)));
+            pathOK = QPixmapToDataUri(Icons::get(Icon::DialogOKApply).pixmap(QSize(m_adjustedIconSize, m_adjustedIconSize)));
+            pathTODO = QPixmapToDataUri(Icons::get(Icon::MailReceive).pixmap(QSize(m_adjustedIconSize, m_adjustedIconSize)));
+            pathNotOK = QPixmapToDataUri(Icons::get(Icon::DialogCancel).pixmap(QSize(m_adjustedIconSize, m_adjustedIconSize)));
 
             if (acc.value("lastImportedTransactionDate").isEmpty() || acc.value("lastStatementBalance").isEmpty())
                 cellStatus = '-';
@@ -320,7 +322,7 @@ public:
     {
         auto file = MyMoneyFile::instance();
         auto value = file->balance(acc.id(), QDate::currentDate());
-        Q_FOREACH (const auto accountID, acc.accountList()) {
+        for (const auto& accountID : acc.accountList()) {
             auto stock = file->account(accountID);
             if (!stock.isClosed()) {
                 try {
@@ -399,10 +401,30 @@ public:
         return m_accountList[acc.id()][paymentDate];
     }
 
-    void repaintAfterResize()
+    /**
+     * Trigger a reload if no other resize event is received within
+     * 100ms but only if the size does not toggle. It happens, that
+     * two resize events happen short after another with the
+     * following sizes (examples)
+     *
+     * event oldSize  newSize
+     * -----------------------
+     *  1   1127,777  1127,751
+     *  2   1127,751  1127,777
+     *
+     * when re-entering the home view. repaintAfterResize()
+     * stops the m_resizeRefreshTimer in this case.
+     */
+    void repaintAfterResize(const QSize& oldSize, const QSize& newSize)
     {
-        // refresh only if no other resize event occurs within the specified time
-        m_resizeRefreshTimeout.start(100);
+        if (!m_resizeRefreshTimer.isActive()) {
+            m_startSize = oldSize;
+            m_resizeRefreshTimer.start(100);
+        } else {
+            if (m_startSize == newSize) {
+                m_resizeRefreshTimer.stop();
+            }
+        }
     }
 
     void loadView()
@@ -513,7 +535,7 @@ public:
         // Adjust the size
         QSize netWorthGraphSize = q->size();
         netWorthGraphSize -= QSize(122, 30);
-        netWorthGraphSize /= devRatio;
+        netWorthGraphSize /= m_devRatio;
         m_netWorthGraphLastValidSize = netWorthGraphSize;
 
         // print header
@@ -552,15 +574,15 @@ public:
         // if a device ratio is 2 (200% scale), we need to create a pixmap using half of the target size,
         // resulted pixmaps will be twice as large as provided in the QSize(...)
         auto ic = Icons::get(Icon::KeyEnter).pixmap(QSize(isize, isize));
-        devRatio = ic.devicePixelRatio();
-        if (devRatio > 1)
-            isize = round(isize / devRatio);
+        m_devRatio = ic.devicePixelRatio();
+        if (m_devRatio > 1)
+            isize = round(isize / m_devRatio);
 
         pathEnterIcon = QPixmapToDataUri(Icons::get(Icon::KeyEnter).pixmap(QSize(isize, isize)));
         pathSkipIcon = QPixmapToDataUri(Icons::get(Icon::SkipForward).pixmap(QSize(isize, isize)));
         pathStatusHeader = QPixmapToDataUri(Icons::get(Icon::Download).pixmap(QSize(isize, isize)));
 
-        adjustedIconSize = isize;
+        m_adjustedIconSize = isize;
     }
 
     void showScheduledPayments()
@@ -847,12 +869,12 @@ public:
                                     // show Enter Next and Skip Next buttons
                                     if (!pathEnterIcon.isEmpty())
                                         tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=enter").arg(sched.id()), i18n("Enter schedule"))
-                                            + QString("<img src=\"%1\" border=\"0\" style=\"height:%2px;\" ></a>").arg(pathEnterIcon).arg(adjustedIconSize)
+                                            + QString("<img src=\"%1\" border=\"0\" style=\"height:%2px;\" ></a>").arg(pathEnterIcon).arg(m_adjustedIconSize)
                                             + linkend();
                                     tmp += "</td><td class=\"center\">";
                                     if (!pathSkipIcon.isEmpty())
                                         tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=skip").arg(sched.id()), i18n("Skip schedule"))
-                                            + QString("<img src=\"%1\" border=\"0\" style=\"height:%2px;\"></a>").arg(pathSkipIcon).arg(adjustedIconSize)
+                                            + QString("<img src=\"%1\" border=\"0\" style=\"height:%2px;\"></a>").arg(pathSkipIcon).arg(m_adjustedIconSize)
                                             + linkend();
                                     tmp += "</td><td>";
 
@@ -1286,13 +1308,26 @@ public:
         file->accountList(accounts);
 
         const auto showAllAccounts = KMyMoneySettings::showAllAccounts();
+        const bool hideZeroBalanceAccounts = KMyMoneySettings::hideZeroBalanceAccounts() && !showAllAccounts;
 
         for (it = accounts.constBegin(); it != accounts.constEnd();) {
             if (!(*it).isClosed() || showAllAccounts) {
+                const auto value = MyMoneyFile::instance()->balance((*it).id(), QDate::currentDate());
                 switch ((*it).accountType()) {
                 // group all assets into one list but make sure that investment accounts always show up
                 case Account::Type::Investment:
-                    assets << *it;
+                    // for investment accounts we also need to check the sub-accounts
+                    if (value.isZero()) {
+                        for (const auto& accId : (*it).accountList()) {
+                            const auto subValue = MyMoneyFile::instance()->balance(accId, QDate::currentDate());
+                            if (!(subValue.isZero() && hideZeroBalanceAccounts)) {
+                                assets << *it;
+                                break;
+                            }
+                        }
+                    } else {
+                        assets << *it;
+                    }
                     break;
 
                 case Account::Type::Checkings:
@@ -1301,8 +1336,11 @@ public:
                 case Account::Type::Asset:
                 case Account::Type::AssetLoan:
                     // list account if it's the last in the hierarchy or has transactions in it
+                    // and listing zero balance account is not suppressed
                     if ((*it).accountList().isEmpty() || (file->transactionCount((*it).id()) > 0)) {
-                        assets << *it;
+                        if (!(value.isZero() && hideZeroBalanceAccounts)) {
+                            assets << *it;
+                        }
                     }
                     break;
 
@@ -1311,11 +1349,9 @@ public:
                 case Account::Type::Liability:
                 case Account::Type::Loan:
                     // list account if it's the last in the hierarchy or has transactions in it
+                    // and listing zero balance account is not suppressed
                     if ((*it).accountList().isEmpty() || (file->transactionCount((*it).id()) > 0)) {
-                        // Add it if we are not hiding zero balance liabilities, or the balance is not zero
-                        const auto value =
-                            MyMoneyFile::instance()->balance((*it).id(), QDate::currentDate());
-                        if (!(KMyMoneySettings::hideZeroBalanceLiabilities() && value.isZero())) {
+                        if (!(value.isZero() && hideZeroBalanceAccounts)) {
                             liabilities << *it;
                         }
                     }
@@ -1567,9 +1603,9 @@ public:
         if (transactions.size() > 0) {
 
             //get all transactions for this month
-            Q_FOREACH (const auto transaction, transactions) {
+            for (const auto& transaction : qAsConst(transactions)) {
                 //get the splits for each transaction
-                Q_FOREACH (const auto split, transaction.splits()) {
+                for (const auto& split : transaction.splits()) {
                     if (!split.shares().isZero()) {
                         auto repSplitAcc = file->account(split.accountId());
 
@@ -1659,7 +1695,7 @@ public:
                     //make sure we have all 'starting balances' so that the autocalc works
                     QMap<QString, MyMoneyMoney> balanceMap;
 
-                    Q_FOREACH (const auto split, transaction.splits()) {
+                    for (const auto& split : qAsConst(transaction.splits())) {
                         acc = file->account(split.accountId());
                         // collect all overdues on the first day
                         QDate schedDate = nextDate;
@@ -1955,9 +1991,10 @@ public:
     QString pathEnterIcon;
     QString pathSkipIcon;
     QString pathStatusHeader; // online download status
-    int adjustedIconSize;
-    double devRatio;
-    QTimer m_resizeRefreshTimeout;
+    int m_adjustedIconSize;
+    double m_devRatio;
+    QTimer m_resizeRefreshTimer;
+    QSize m_startSize;
 };
 
 #endif

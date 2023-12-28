@@ -21,7 +21,9 @@
 class PluginSettingsWidget : public QWidget, public Ui::ICalendarSettingsDecl
 {
 public:
-    PluginSettingsWidget(QWidget* parent = 0) : QWidget(parent) {
+    explicit PluginSettingsWidget(QWidget* parent = 0)
+        : QWidget(parent)
+    {
         setupUi(this);
 
         kcfg_timeUnitInSeconds->addItem(i18n("Minutes"));

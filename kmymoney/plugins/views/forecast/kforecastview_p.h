@@ -227,7 +227,7 @@ public:
         if (accList.isEmpty())
             return;
 
-        Q_FOREACH (const auto sAccount, accList) {
+        for (const auto& sAccount : accList) {
             auto subAccount = file->account(sAccount);
             //only add the account if it is a forecast account or the parent of a forecast account
             if (includeAccount(forecast, subAccount)) {
@@ -750,7 +750,7 @@ public:
         if (forecast.isForecastAccount(acc))
             return true;
 
-        Q_FOREACH (const auto sAccount, acc.accountList()) {
+        for (const auto& sAccount : acc.accountList()) {
             auto account = file->account(sAccount);
             if (includeAccount(forecast, account))
                 return true;

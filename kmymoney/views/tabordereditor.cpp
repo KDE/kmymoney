@@ -33,7 +33,7 @@ class TabOrderDialogPrivate
     Q_DECLARE_PUBLIC(TabOrderDialog)
 
 public:
-    TabOrderDialogPrivate(TabOrderDialog* qq)
+    explicit TabOrderDialogPrivate(TabOrderDialog* qq)
         : q_ptr(qq)
         , m_editor(nullptr)
         , m_currentIndex(0)
@@ -179,8 +179,9 @@ class TabOrderEditorPrivate
     Q_DECLARE_PUBLIC(TabOrderEditor)
 
 public:
-    TabOrderEditorPrivate(TabOrderEditor* qq)
+    explicit TabOrderEditorPrivate(TabOrderEditor* qq)
         : q_ptr(qq)
+        , m_dialog(nullptr)
         , m_indicatorFontMetrics(QFont())
         , m_noWidgetsSelected(true)
     {

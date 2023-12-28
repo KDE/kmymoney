@@ -461,7 +461,7 @@ void MyMoneyStorageSql::addPayee(const MyMoneyPayee& payee)
     QList<payeeIdentifier> idents = payee.payeeIdentifiers();
     // Store ids which have to be stored in the map table
     identIds.reserve(idents.count());
-    Q_FOREACH (payeeIdentifier ident, idents) {
+    for (auto& ident : idents) {
         try {
             // note: this changes ident
             addPayeeIdentifier(ident);
@@ -512,7 +512,7 @@ void MyMoneyStorageSql::modifyPayee(MyMoneyPayee payee)
         oldIdentIds << query.value(0).toString();
 
     // Add new and modify old payeeIdentifiers
-    Q_FOREACH (payeeIdentifier ident, payee.payeeIdentifiers()) {
+    for (auto ident : payee.payeeIdentifiers()) {
         if (ident.idString().isEmpty()) {
             payeeIdentifier oldIdent(ident);
             addPayeeIdentifier(ident);
@@ -528,7 +528,7 @@ void MyMoneyStorageSql::modifyPayee(MyMoneyPayee payee)
     }
 
     // Remove identifiers which are not used anymore
-    Q_FOREACH (QString idToRemove, oldIdentIds) {
+    for (const auto& idToRemove : qAsConst(oldIdentIds)) {
         payeeIdentifier ident(fetchPayeeIdentifier(idToRemove));
         removePayeeIdentifier(ident);
     }
@@ -595,8 +595,8 @@ void MyMoneyStorageSql::removePayee(const MyMoneyPayee& payee)
     while (query.next())
         identIds << query.value(0).toString();
 
-    QMap<QString, payeeIdentifier> idents = fetchPayeeIdentifiers(identIds);
-    Q_FOREACH (payeeIdentifier ident, idents) {
+    const QMap<QString, payeeIdentifier> idents = fetchPayeeIdentifiers(identIds);
+    for (const auto& ident : idents) {
         removePayeeIdentifier(ident);
     }
 
@@ -677,7 +677,7 @@ void MyMoneyStorageSql::modifyAccountList(const QList<MyMoneyAccount>& acc)
     QSqlQuery q(*this);
     q.prepare(d->m_db.m_tables["kmmAccounts"].updateString());
     QVariantList kvpList;
-    Q_FOREACH (const MyMoneyAccount& a, acc) {
+    for (const auto& a : acc) {
         kvpList << a.id();
     }
     d->deleteKeyValuePairs("ACCOUNT", kvpList);
@@ -715,7 +715,7 @@ void MyMoneyStorageSql::addTransaction(const MyMoneyTransaction& tx)
     ++d->m_transactions;
     QList<MyMoneyAccount> aList;
     // for each split account, update lastMod date, balance, txCount
-    Q_FOREACH (const MyMoneySplit& it_s, tx.splits()) {
+    for (const auto& it_s : tx.splits()) {
         MyMoneyAccount acc = d->m_file->account(it_s.accountId());
         ++d->m_transactionCountMap[acc.id()];
         aList << acc;
@@ -743,7 +743,7 @@ void MyMoneyStorageSql::modifyTransaction(const MyMoneyTransaction& tx)
     d->writeTransaction(tx.id(), tx, query, "N");
     QList<MyMoneyAccount> aList;
     // for each split account, update lastMod date, balance, txCount
-    Q_FOREACH (const MyMoneySplit& it_s, tx.splits()) {
+    for (const auto& it_s : tx.splits()) {
         MyMoneyAccount acc = d->m_file->account(it_s.accountId());
         ++d->m_transactionCountMap[acc.id()];
         aList << acc;
@@ -763,7 +763,7 @@ void MyMoneyStorageSql::removeTransaction(const MyMoneyTransaction& tx)
 
     QList<MyMoneyAccount> aList;
     // for each split account, update lastMod date, balance, txCount
-    Q_FOREACH (const MyMoneySplit& it_s, tx.splits()) {
+    for (const auto& it_s : tx.splits()) {
         MyMoneyAccount acc = d->m_file->account(it_s.accountId());
         --d->m_transactionCountMap[acc.id()];
         aList << acc;
@@ -1223,7 +1223,7 @@ QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions(const QSt
         if (!sq.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading Institution AccountList")); // krazy:exclude=crashy
         QStringList aList;
         while (sq.next()) aList.append(sq.value(0).toString());
-        Q_FOREACH (const QString& it, aList)
+        for (const auto& it : qAsConst(aList))
             inst.addAccountId(it);
 
         iList[iid] = MyMoneyInstitution(iid, inst);
@@ -1445,7 +1445,7 @@ QMap<QString, MyMoneyTag> MyMoneyStorageSql::fetchTags(const QStringList& idList
     } else {
         QString whereClause = " where (";
         QString itemConnector = "";
-        Q_FOREACH (const QString& it, idList) {
+        for (const auto& it : idList) {
             whereClause.append(QString("%1id = '%2'").arg(itemConnector).arg(it));
             itemConnector = " or ";
         }
@@ -1757,7 +1757,7 @@ QMap<QString, MyMoneyMoney> MyMoneyStorageSql::fetchBalance(const QStringList& i
     query.prepare(queryString);
 
     int i = 0;
-    Q_FOREACH (const QString& bindVal, idList) {
+    for (const auto& bindVal : idList) {
         query.bindValue(QString(":id%1").arg(i), bindVal);
         ++i;
     }
@@ -2105,7 +2105,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const MyM
     if (filter.payees(payees)) {
         QString itemConnector = "payeeId IN (";
         QString payeesClause = "";
-        Q_FOREACH (const QString& it, payees) {
+        for (const auto& it : qAsConst(payees)) {
             payeesClause.append(QString("%1'%2'")
                                 .arg(itemConnector).arg(it));
             itemConnector = ", ";
@@ -2122,7 +2122,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const MyM
     if (filter.tags(tags)) {
         QString itemConnector = "splitId IN ( SELECT splitId FROM kmmTagSplits WHERE kmmTagSplits.transactionId = kmmSplits.transactionId AND tagId IN (";
         QString tagsClause = "";
-        Q_FOREACH (const QString& it, tags) {
+        for (const auto& it : qAsConst(tags)) {
             tagsClause.append(QString("%1'%2'")
                               .arg(itemConnector).arg(it));
             itemConnector = ", ";
@@ -2139,7 +2139,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const MyM
         splitFilterActive = true;
         QString itemConnector = "accountId IN (";
         QString accountsClause = "";
-        Q_FOREACH (const QString& it, accounts) {
+        for (const auto& it : qAsConst(accounts)) {
             accountsClause.append(QString("%1 '%2'")
                                   .arg(itemConnector).arg(it));
             itemConnector = ", ";
@@ -2156,7 +2156,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const MyM
         splitFilterActive = true;
         QString itemConnector = " reconcileFlag IN (";
         QString statesClause = "";
-        Q_FOREACH (int it, splitStates) {
+        for (const auto it : splitStates) {
             statesClause.append(QString(" %1 '%2'").arg(itemConnector)
                                 .arg(d->splitState(TransactionFilter::State(it))));
             itemConnector = ',';
@@ -3047,7 +3047,7 @@ QMap< QString, MyMoneyCostCenter > MyMoneyStorageSql::fetchCostCenters(const QSt
     } else {
         QString whereClause = " where (";
         QString itemConnector = "";
-        Q_FOREACH (const QString& it, idList) {
+        for (const auto& it : idList) {
             whereClause.append(QString("%1id = '%2'").arg(itemConnector).arg(it));
             itemConnector = " or ";
         }

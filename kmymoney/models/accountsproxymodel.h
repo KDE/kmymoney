@@ -88,6 +88,9 @@ public:
     void setHideZeroBalancedEquityAccounts(bool hideZeroBalancedEquityAccounts);
     bool hideZeroBalancedEquityAccounts() const;
 
+    void setHideZeroBalancedAccounts(bool hideZeroBalancedAccounts);
+    bool hideZeroBalancedAccounts() const;
+
     void setHideUnusedIncomeExpenseAccounts(bool hideUnusedIncomeExpenseAccounts);
     bool hideUnusedIncomeExpenseAccounts() const;
 
@@ -98,6 +101,9 @@ public:
 
     void setHideAllEntries(bool hideAllEntries);
     bool hideAllEntries() const;
+
+    void setShowAllEntries(bool hideAllEntries);
+    bool showAllEntries() const;
 
     void setState(State state);
     State state() const;

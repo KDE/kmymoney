@@ -85,7 +85,7 @@ QStringList Parse::parseFile(const QString& buf)
     QString line;
     QStringList lines;
 
-    Q_FOREACH (const auto chr, buf) {
+    for (const auto& chr : buf) {
         if (chr == m_textDelimiter) {
             line += chr;
             inQuotes = !inQuotes;

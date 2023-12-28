@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2009 Cristian Onet onet.cristian @gmail.com
+    SPDX-FileCopyrightText: 2023 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
@@ -18,16 +19,17 @@
 #include <libical/ical.h>
 
 // KMyMoney includes
-#include "mymoneymoney.h"
-#include "mymoneyfile.h"
-#include "mymoneysecurity.h"
-#include "mymoneyutils.h"
-#include "mymoneyschedule.h"
 #include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
+#include "mymoneypayee.h"
+#include "mymoneyschedule.h"
+#include "mymoneysecurity.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
-#include "mymoneypayee.h"
-#include "mymoneyenums.h"
+#include "mymoneyutils.h"
+#include "schedulesmodel.h"
 
 // plugin includes
 #include "icalendarsettings.h"
@@ -186,12 +188,12 @@ QString scheduleToDescription(const MyMoneySchedule& schedule)
     QString category;
     bool isTransfer = false;
     bool isIncome = false;
-    Q_FOREACH (const auto split, transaction.splits()) {
+    for (const auto& split : transaction.splits()) {
         if (split.accountId() != account.id()) {
             if (!category.isEmpty())
                 category += ", "; // this is a split transaction
             const MyMoneyAccount& splitAccount = file->account(split.accountId());
-            category = splitAccount.name();
+            category += splitAccount.name();
 
             isTransfer = splitAccount.accountGroup() == Account::Type::Asset ||
                          splitAccount.accountGroup() == Account::Type::Liability;
@@ -218,7 +220,8 @@ struct KMMSchedulesToiCalendar::Private {
     QString m_icalendarAsString;
 };
 
-KMMSchedulesToiCalendar::KMMSchedulesToiCalendar() : d(new Private)
+KMMSchedulesToiCalendar::KMMSchedulesToiCalendar()
+    : d(new Private)
 {
 }
 
@@ -227,10 +230,11 @@ KMMSchedulesToiCalendar::~KMMSchedulesToiCalendar()
     delete d;
 }
 
-void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool settingsChaged)
+void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool writeEventVsTodo)
 {
     QFile icsFile(filePath);
 
+    const icalcomponent_kind newEntryKind = writeEventVsTodo ? ICAL_VEVENT_COMPONENT : ICAL_VTODO_COMPONENT;
     icsFile.open(QIODevice::ReadOnly);
     QTextStream stream(&icsFile);
     d->m_icalendarAsString = stream.readAll();
@@ -238,22 +242,33 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
 
     // create the calendar
     bool newCalendar = false;
-    icalcomponent* vCalendar = 0;
+    icalcomponent* vCalendar = nullptr;
+    struct icaltimetype atime = icaltime_from_timet_with_zone(time(0), 0, icaltimezone_get_utc_timezone());
+
     if (d->m_icalendarAsString.isEmpty()) {
         newCalendar = true;
         vCalendar = icalcomponent_new_vcalendar();
     } else {
         vCalendar = icalcomponent_new_from_string(d->m_icalendarAsString.toUtf8());
-        if (vCalendar == 0) {
+        if (vCalendar == nullptr) {
             qDebug() << "Error parsing the following string into an icalendar:" << Qt::endl;
             qDebug() << d->m_icalendarAsString << Qt::endl;
             qDebug() << "so we will overwrite this with a new calendar" << Qt::endl;
             newCalendar = true;
             vCalendar = icalcomponent_new_vcalendar();
+        } else {
+            // we have a calendar and must check if the entry kind was changed
+            icalcomponent* itTodo = icalcomponent_get_first_component(vCalendar, ICAL_VTODO_COMPONENT);
+            icalcomponent* itEvent = icalcomponent_get_first_component(vCalendar, ICAL_VEVENT_COMPONENT);
+            if (((itTodo != nullptr) && writeEventVsTodo) || (((itEvent != nullptr) && !writeEventVsTodo))) {
+                icalcomponent_free(vCalendar);
+                newCalendar = true;
+                vCalendar = icalcomponent_new_vcalendar();
+            }
         }
     }
 
-    if (vCalendar == 0) {
+    if (vCalendar == nullptr) {
         // one way or the other we must have a calendar by now
         qDebug() << "Unable to create vcalendar component" << Qt::endl;
         return;
@@ -274,25 +289,25 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
         if (myMoneySchedule.isFinished())
             continue;  // skip this schedule if it is already finished
 
-        icalcomponent* schedule = 0;
-        bool newTodo = false;
+        icalcomponent* schedule = nullptr;
+        bool newEntry = false;
         if (!newCalendar) {
             // try to find the schedule to update it if we do not use a new calendar
-            icalcomponent* itVTODO = icalcomponent_get_first_component(vCalendar, ICAL_VTODO_COMPONENT);
-            for (; itVTODO != 0; itVTODO = icalcomponent_get_next_component(vCalendar, ICAL_VTODO_COMPONENT)) {
-                if (icalcomponent_get_uid(itVTODO) == myMoneySchedule.id()) {
+            icalcomponent* itEntry = icalcomponent_get_first_component(vCalendar, newEntryKind);
+            for (; itEntry != nullptr; itEntry = icalcomponent_get_next_component(vCalendar, newEntryKind)) {
+                if (icalcomponent_get_uid(itEntry) == myMoneySchedule.id()) {
                     // we found our todo stop searching
-                    schedule = itVTODO;
+                    schedule = itEntry;
                     break;
                 }
             }
-            if (schedule == 0) {
-                schedule = icalcomponent_new_vtodo();
-                newTodo = true;
+            if (schedule == nullptr) {
+                schedule = writeEventVsTodo ? icalcomponent_new_vevent() : icalcomponent_new_vtodo();
+                newEntry = true;
             }
         } else {
-            schedule = icalcomponent_new_vtodo();
-            newTodo = true;
+            schedule = writeEventVsTodo ? icalcomponent_new_vevent() : icalcomponent_new_vtodo();
+            newEntry = true;
         }
 
         // description
@@ -303,15 +318,25 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
         icalcomponent_set_uid(schedule, myMoneySchedule.id().toUtf8());
         // dtstart
         icalcomponent_set_dtstart(schedule, qdateToIcalTimeType(myMoneySchedule.startDate()));
-        // due
-        icalcomponent_set_due(schedule, qdateToIcalTimeType(myMoneySchedule.nextDueDate()));
-        if (newTodo) {
+
+        // due (only supported for VTODO)
+        if (newEntryKind == ICAL_VTODO_COMPONENT) {
+            icalcomponent_set_due(schedule, qdateToIcalTimeType(myMoneySchedule.nextDueDate()));
+        }
+        // dtstamp
+        icalproperty* dtstamp = icalcomponent_get_first_property(schedule, ICAL_DTSTAMP_PROPERTY);
+        if (dtstamp != nullptr) {
+            icalcomponent_remove_property(schedule, dtstamp);
+        }
+        icalcomponent_add_property(schedule, icalproperty_new_dtstamp(atime));
+
+        if (newEntry) {
             // created
             icalcomponent_add_property(schedule, icalproperty_new_created(qdateTimeToIcalTimeType(QDateTime::currentDateTime())));
         } else {
             // last modified
             icalproperty* pLastMod = icalcomponent_get_first_property(schedule, ICAL_LASTMODIFIED_PROPERTY);
-            if (pLastMod != 0) {
+            if (pLastMod != nullptr) {
                 // set the current property
                 icalproperty_set_lastmodified(pLastMod, qdateTimeToIcalTimeType(QDateTime::currentDateTime()));
             } else {
@@ -321,19 +346,19 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
         }
         // recurrence
         icalproperty* pRRule = icalcomponent_get_first_property(schedule, ICAL_RRULE_PROPERTY);
-        if (pRRule != 0) {
+        if (pRRule != nullptr) {
             icalcomponent_remove_property(schedule, pRRule);
         }
         if (myMoneySchedule.occurrence() != Schedule::Occurrence::Once && myMoneySchedule.baseOccurrence() != Schedule::Occurrence::Any)
             icalcomponent_add_property(schedule, icalproperty_new_rrule(scheduleToRecurenceRule(myMoneySchedule)));
 
-        icalcomponent* oldAlarm = icalcomponent_get_first_component(schedule, ICAL_VALARM_COMPONENT);
-        if (oldAlarm && settingsChaged)
-            icalcomponent_remove_component(schedule, oldAlarm);
+        icalcomponent* alarm = icalcomponent_get_first_component(schedule, ICAL_VALARM_COMPONENT);
+        if (alarm)
+            icalcomponent_remove_component(schedule, alarm);
 
-        if (ICalendarSettings::createAlarm() && (!oldAlarm || settingsChaged)) {
+        if (ICalendarSettings::createAlarm()) {
             // alarm: beginning with one day before the todo is due every one hour
-            icalcomponent* alarm = icalcomponent_new_valarm();
+            alarm = icalcomponent_new_valarm();
             // alarm: action
             icalcomponent_add_property(alarm, icalproperty_new_action(ICAL_ACTION_DISPLAY));
             // alarm: description
@@ -353,12 +378,25 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
         }
 
         // add the schedule to the calendar
-        if (newTodo)
+        if (newEntry)
             icalcomponent_add_component(vCalendar, schedule);
     }
 
-    icsFile.open(QIODevice::WriteOnly);
+    // now remove the ones that have been deleted by the user
+    icalcomponent* itEntry = icalcomponent_get_first_component(vCalendar, newEntryKind);
 
+    while ((itEntry = icalcomponent_get_current_component(vCalendar)) != nullptr) {
+        const QString ical_uid = icalcomponent_get_uid(itEntry);
+        if (!file->schedulesModel()->indexById(ical_uid).isValid()) {
+            icalcomponent_remove_component(vCalendar, itEntry);
+        } else {
+            icalcomponent_get_next_component(vCalendar, newEntryKind);
+        }
+    }
+
+    // write out the ics file
+
+    icsFile.open(QIODevice::WriteOnly);
     d->m_icalendarAsString = QString::fromUtf8(icalcomponent_as_ical_string(vCalendar));
     // reclaim some memory :)
     icalcomponent_free(vCalendar);

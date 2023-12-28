@@ -55,7 +55,7 @@ QString nodeName(Node nodeID)
     return nodeNames.value(nodeID);
 }
 
-uint qHash(const Node key, uint seed)
+qHashSeedType qHash(const Node key, qHashSeedType seed)
 {
     return ::qHash(static_cast<uint>(key), seed);
 }
@@ -128,7 +128,7 @@ QString attributeName(Attribute::Report attributeID)
     return attributeNames.value(attributeID);
 }
 
-uint qHash(const Attribute::Report key, uint seed)
+qHashSeedType qHash(const Attribute::Report key, qHashSeedType seed)
 {
     Q_UNUSED(seed);
     return ::qHash(static_cast<uint>(key), 0);
@@ -184,7 +184,7 @@ QString attributeName(Attribute::Budget attributeID)
     return attributeNames.value(attributeID);
 }
 
-uint qHash(const Attribute::Budget key, uint seed)
+qHashSeedType qHash(const Attribute::Budget key, qHashSeedType seed)
 {
     Q_UNUSED(seed);
     return ::qHash(static_cast<uint>(key), 0);

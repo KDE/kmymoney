@@ -13,6 +13,8 @@
 
 class SplitAdjustDialog::Private {
 public:
+    Q_DISABLE_COPY_MOVE(Private)
+
     Private()
         : ui(new Ui_SplitAdjustDialog),
           buttonGroup(nullptr)

@@ -112,7 +112,7 @@ bool onlineJobAdministration::isJobSupported(const QString& accountId, const QSt
 {
     if (!m_onlinePlugins)
         return false;
-    Q_FOREACH (KMyMoneyPlugin::OnlinePluginExtended* plugin, *m_onlinePlugins) {
+    for (KMyMoneyPlugin::OnlinePluginExtended* plugin : *m_onlinePlugins) {
         if (plugin->availableJobs(accountId).contains(name))
             return true;
     }
@@ -121,7 +121,7 @@ bool onlineJobAdministration::isJobSupported(const QString& accountId, const QSt
 
 bool onlineJobAdministration::isJobSupported(const QString& accountId, const QStringList& names) const
 {
-    Q_FOREACH (QString name, names) {
+    for (const auto& name : names) {
         if (isJobSupported(accountId, name))
             return true;
     }
@@ -136,7 +136,7 @@ bool onlineJobAdministration::isAnyJobSupported(const QString& accountId) const
     if (!m_onlinePlugins)
         return false;
 
-    Q_FOREACH (KMyMoneyPlugin::OnlinePluginExtended* plugin, *m_onlinePlugins) {
+    for (KMyMoneyPlugin::OnlinePluginExtended* plugin : *m_onlinePlugins) {
         if (!(plugin->availableJobs(accountId).isEmpty()))
             return true;
     }
@@ -219,7 +219,7 @@ onlineTaskConverter::convertType onlineJobAdministration::canConvert(const QStri
     //! @todo Make alive
     onlineTaskConverter::convertType bestConvertType = onlineTaskConverter::convertImpossible;
 #if 0
-    Q_FOREACH (QString destinationName, destinationNames) {
+    for (QString destinationName : destinationNames) {
         onlineTask::convertType type = canConvert(original, destinationName);
         if (type == onlineTask::convertionLossy)
             bestConvertType = onlineTask::convertionLossy;
@@ -240,8 +240,8 @@ onlineJob onlineJobAdministration::convert(const onlineJob& original, const QStr
 {
     onlineJob newJob;
 
-    QList<onlineTaskConverter*> converterList = m_onlineTaskConverter.values(convertTaskIid);
-    Q_FOREACH (onlineTaskConverter* converter, converterList) {
+    const QList<onlineTaskConverter*> converterList = m_onlineTaskConverter.values(convertTaskIid);
+    for (const onlineTaskConverter* converter : converterList) {
         if (converter->convertibleTasks().contains(original.taskIid())) {
             onlineTask* task = converter->convert(*original.task(), convertType, userInformation);
             Q_ASSERT_X(convertType != onlineTaskConverter::convertImpossible || task != 0, qPrintable("converter for " + converter->convertedTask()), "Converter returned convertType 'impossible' but return was not null_ptr.");
@@ -266,7 +266,7 @@ onlineJob onlineJobAdministration::convertBest(const onlineJob& original, const 
     bestConvertType = onlineTaskConverter::convertImpossible;
     bestUserInformation = QString();
 
-    Q_FOREACH (QString taskIid, convertTaskIids) {
+    for (const auto& taskIid : convertTaskIids) {
         // Try convert
         onlineTaskConverter::convertType convertType = onlineTaskConverter::convertImpossible;
         QString userInformation;
@@ -292,8 +292,8 @@ void onlineJobAdministration::registerAllOnlineTasks()
         return;
 
     m_inRegistration = true;
-    QStringList availableTasks = availableOnlineTasks();
-    Q_FOREACH (const auto& name, availableTasks) {
+    const QStringList availableTasks = availableOnlineTasks();
+    for (const auto& name : availableTasks) {
         onlineTask* const task = rootOnlineTask(name);
         Q_UNUSED(task);
     }

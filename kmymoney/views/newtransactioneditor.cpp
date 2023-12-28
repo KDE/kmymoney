@@ -65,6 +65,8 @@ using namespace Icons;
 
 class NewTransactionEditor::Private
 {
+    Q_DISABLE_COPY_MOVE(Private)
+
 public:
     enum TaxValueChange {
         ValueUnchanged,
@@ -82,6 +84,7 @@ public:
         , costCenterRequired(false)
         , inUpdateVat(false)
         , keepCategoryAmount(false)
+        , loadedFromModel(false)
         , splitModel(parent, &undoStack)
         , frameCollection(nullptr)
         , m_splitHelper(nullptr)
@@ -142,6 +145,7 @@ public:
     bool costCenterRequired;
     bool inUpdateVat;
     bool keepCategoryAmount;
+    bool loadedFromModel;
     QUndoStack undoStack;
     SplitModel splitModel;
     MyMoneyAccount m_account;
@@ -1042,6 +1046,8 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     });
     d->accountsModel->setHideEquityAccounts(false);
     d->accountsModel->setHideZeroBalancedEquityAccounts(false);
+    d->accountsModel->setHideZeroBalancedAccounts(false);
+    d->accountsModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
     d->accountsModel->setSourceModel(model);
     d->accountsModel->sort(AccountsModel::Column::AccountName);
     d->ui->accountCombo->setModel(d->accountsModel);
@@ -1054,6 +1060,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
         eMyMoney::Account::Type::Equity,
     });
     d->categoriesModel->setHideEquityAccounts(false);
+    d->categoriesModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
     d->categoriesModel->setSourceModel(model);
     d->categoriesModel->sort(AccountsModel::Column::AccountName);
     d->ui->categoryCombo->setModel(d->categoriesModel);
@@ -1304,8 +1311,12 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
 {
     // we may also get here during saving the transaction as
     // a callback from the model, but we can safely ignore it
-    if (d->accepted || !index.isValid())
+    // same when we get called from the delegate's setEditorData()
+    // method
+    if (d->accepted || !index.isValid() || d->loadedFromModel)
         return;
+
+    d->loadedFromModel = true;
 
     auto idx = MyMoneyFile::baseModel()->mapToBaseSource(index);
     const auto commodity = MyMoneyFile::instance()->currency(d->m_account.currencyId());
@@ -1599,8 +1610,8 @@ void NewTransactionEditor::storeTabOrder(const QStringList& tabOrder)
 
 void NewTransactionEditor::slotSettingsChanged()
 {
-    d->categoriesModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
-    d->accountsModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
+    d->categoriesModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
+    d->accountsModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
 }
 
 WidgetHintFrameCollection* NewTransactionEditor::widgetHintFrameCollection() const

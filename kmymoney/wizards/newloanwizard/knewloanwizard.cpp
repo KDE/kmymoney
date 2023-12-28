@@ -22,7 +22,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyaccountselector.h"
 #include "knewaccountdlg.h"
 #include "mymoneypayee.h"
 

@@ -31,7 +31,8 @@ enum class Element {
     Price,
     Security,
 };
-uint qHash(const Element key, uint seed) {
+qHashSeedType qHash(const Element key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 
@@ -66,7 +67,8 @@ enum class Attribute {
     Category,
     SmallestFraction,
 };
-uint qHash(const Attribute key, uint seed) {
+qHashSeedType qHash(const Attribute key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 }
@@ -172,7 +174,7 @@ void MyMoneyStatement::write(QDomElement& _root, QDomDocument* _doc) const
     e.setAttribute(getAttrName(Statement::Attribute::SkipCategoryMatching), m_skipCategoryMatching);
 
     // iterate over transactions, and add each one
-    Q_FOREACH (const auto transaction, m_listTransactions) {
+    for (const auto& transaction : qAsConst(m_listTransactions)) {
         auto p = _doc->createElement(getElName(Statement::Element::Transaction));
         p.setAttribute(getAttrName(Statement::Attribute::DatePosted), transaction.m_datePosted.toString(Qt::ISODate));
         if (transaction.m_dateProcessed.isValid()) {
@@ -194,7 +196,7 @@ void MyMoneyStatement::write(QDomElement& _root, QDomDocument* _doc) const
         }
 
         // add all the splits we know of (might be empty)
-        Q_FOREACH (const auto split, transaction.m_listSplits) {
+        for (const auto& split : qAsConst(transaction.m_listSplits)) {
             auto el = _doc->createElement(getElName(Statement::Element::Split));
             el.setAttribute(getAttrName(Statement::Attribute::AccountID), split.m_accountId);
             el.setAttribute(getAttrName(Statement::Attribute::Amount), split.m_amount.toString());
@@ -208,7 +210,7 @@ void MyMoneyStatement::write(QDomElement& _root, QDomDocument* _doc) const
     }
 
     // iterate over prices, and add each one
-    Q_FOREACH (const auto price, m_listPrices) {
+    for (const auto& price : qAsConst(m_listPrices)) {
         auto p = _doc->createElement(getElName(Statement::Element::Price));
         p.setAttribute(getAttrName(Statement::Attribute::DatePosted), price.m_date.toString(Qt::ISODate));
         p.setAttribute(getAttrName(Statement::Attribute::Security), price.m_strSecurity);
@@ -218,7 +220,7 @@ void MyMoneyStatement::write(QDomElement& _root, QDomDocument* _doc) const
     }
 
     // iterate over securities, and add each one
-    Q_FOREACH (const auto security, m_listSecurities) {
+    for (const auto& security : qAsConst(m_listSecurities)) {
         auto p = _doc->createElement(getElName(Statement::Element::Security));
         p.setAttribute(getAttrName(Statement::Attribute::Name), security.m_strName);
         p.setAttribute(getAttrName(Statement::Attribute::Symbol), security.m_strSymbol);

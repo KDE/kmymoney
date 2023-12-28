@@ -77,7 +77,9 @@ bool CSVImporter::import(const QString& filename)
     if ((wizard->exec() == QDialog::Accepted) && wizard) {
         rc =  !statementInterface()->import(wizard->statement(), false).isEmpty();
     }
-    wizard->deleteLater();
+    if (wizard) {
+        wizard->deleteLater();
+    }
     return rc;
 }
 

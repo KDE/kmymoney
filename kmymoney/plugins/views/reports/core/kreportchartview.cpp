@@ -75,12 +75,12 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
     //remove existing headers
     const HeaderFooterList hfList = headerFooters();
-    Q_FOREACH (const auto hf, hfList)
+    for (const auto& hf : hfList)
         delete hf;
 
     //remove existing legends
     const LegendList lgList = legends();
-    Q_FOREACH (const auto lg, lgList)
+    for (const auto& lg : lgList)
         delete lg;
 
     //make sure the model is clear
@@ -510,7 +510,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     // Set up X axis labels (ie "abscissa" to use the technical term)
     if (accountSeries()) { // if not, we will set these up while putting in the chart values.
         QStringList xLabels;
-        Q_FOREACH (const auto colHeading, columnHeadings)
+        for (const auto& colHeading : columnHeadings)
             xLabels.append(QString(colHeading).replace(QLatin1String("&nbsp;"), QLatin1String(" ")));
         m_model.setVerticalHeaderLabels(xLabels);
     }

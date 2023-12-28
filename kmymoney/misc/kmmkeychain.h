@@ -21,7 +21,7 @@ class KMM_KEYCHAIN_EXPORT KMMKeychain : public QObject
 {
     Q_OBJECT
 public:
-    KMMKeychain(QObject* parent = nullptr);
+    explicit KMMKeychain(QObject* parent = nullptr);
 
     void readKey(const QString& key);
     QString readKeySynchronous(const QString& key);

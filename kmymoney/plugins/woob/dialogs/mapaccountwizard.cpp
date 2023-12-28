@@ -38,6 +38,8 @@ enum {
 
 class MapAccountWizardPrivate
 {
+    Q_DISABLE_COPY_MOVE(MapAccountWizardPrivate)
+
 public:
     MapAccountWizardPrivate(WoobInterface* woob)
         : ui(new Ui::MapAccountWizard)

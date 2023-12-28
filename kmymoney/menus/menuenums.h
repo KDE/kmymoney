@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2017, 2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
+    SPDX-FileCopyrightText: 2023 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -10,6 +11,8 @@
 #include "kmm_menus_export.h"
 #include <QHashFunctions>
 #include <QHash>
+
+#include "qhashseedtype.h"
 
 class QAction;
 class QMenu;
@@ -140,7 +143,8 @@ enum class Action {
 };
 // clang-format on
 
-inline uint qHash(const Action key, uint seed) {
+inline qHashSeedType qHash(const Action key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 
@@ -160,7 +164,8 @@ enum class Menu {
     OnlineJob,
 };
 
-inline uint qHash(const Menu key, uint seed) {
+inline qHashSeedType qHash(const Menu key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 }

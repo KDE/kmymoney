@@ -77,6 +77,8 @@ void KCategoriesView::slotSettingsChanged()
     d->m_proxyModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
     d->m_proxyModel->setHideEquityAccounts(true);
     d->m_proxyModel->setHideZeroBalancedEquityAccounts(true);
+    d->m_proxyModel->setHideZeroBalancedAccounts(KMyMoneySettings::hideZeroBalanceAccounts());
+    d->m_proxyModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
     d->m_proxyModel->setHideFavoriteAccounts(true);
 
     MyMoneyFile::instance()->accountsModel()->setColorScheme(AccountsModel::Positive, KMyMoneySettings::schemeColor(SchemeColor::Positive));
@@ -374,7 +376,7 @@ void KCategoriesView::slotDeleteCategory()
             // case D - User wants to delete all subcategories, now check all subcats of
             //          d->m_currentCategory and remember all that cannot be deleted and
             //          must be "reparented"
-            Q_FOREACH (const auto accountID, d->m_currentCategory.accountList()) {
+            for (const auto& accountID : d->m_currentCategory.accountList()) {
                 // reparent account if a transaction is assigned
                 if (file->transactionCount(accountID) != 0)
                     accountsToReparent.push_back(accountID);

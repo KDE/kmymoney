@@ -32,3 +32,8 @@ Group=Misc
 RemoveKey=AutoAccountBank
 RemoveKey=AutoAccountInvest
 
+Id=general-zero-balance-accounts-2023
+File=kmymoney/kmymoneyrc
+Group=Homepage Options,List Options
+Key=HideZeroBalanceLiabilities,HideZeroBalanceAccounts
+RemoveKey=HideZeroBalanceLiabilities

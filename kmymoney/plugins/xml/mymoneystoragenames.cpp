@@ -36,7 +36,8 @@ QString tagName(Tag tagID)
     return tagNames.value(tagID);
 }
 
-uint qHash(const Tag key, uint seed) {
+qHashSeedType qHash(const Tag key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 
@@ -64,79 +65,98 @@ QString nodeName(Node nodeID)
     return nodeNames.value(nodeID);
 }
 
-uint qHash(const Node key, uint seed) {
+qHashSeedType qHash(const Node key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 
 namespace Element {
-uint qHash(const General key, uint seed) {
+qHashSeedType qHash(const General key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
-uint qHash(const Transaction key, uint seed) {
+qHashSeedType qHash(const Transaction key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
-uint qHash(const Account key, uint seed) {
+qHashSeedType qHash(const Account key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
-uint qHash(const Payee key, uint seed) {
+qHashSeedType qHash(const Payee key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
-uint qHash(const KVP key, uint seed) {
+qHashSeedType qHash(const KVP key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
-uint qHash(const Institution key, uint seed) {
+qHashSeedType qHash(const Institution key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
-uint qHash(const Schedule key, uint seed) {
+qHashSeedType qHash(const Schedule key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
-uint qHash(const OnlineJob key, uint seed) {
+qHashSeedType qHash(const OnlineJob key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 }
 
 namespace Attribute {
-uint qHash(const General key, uint seed) {
+qHashSeedType qHash(const General key, qHashSeedType seed)
+{
     Q_UNUSED(seed);
     return ::qHash(static_cast<uint>(key), 0);
 }
-uint qHash(const Transaction key, uint seed) {
+qHashSeedType qHash(const Transaction key, qHashSeedType seed)
+{
     Q_UNUSED(seed);
     return ::qHash(static_cast<uint>(key), 0);
 }
-uint qHash(const Account key, uint seed) {
+qHashSeedType qHash(const Account key, qHashSeedType seed)
+{
     Q_UNUSED(seed);
     return ::qHash(static_cast<uint>(key), 0);
 }
-uint qHash(const Payee key, uint seed) {
+qHashSeedType qHash(const Payee key, qHashSeedType seed)
+{
     Q_UNUSED(seed);
     return ::qHash(static_cast<uint>(key), 0);
 }
-uint qHash(const Tag key, uint seed) {
+qHashSeedType qHash(const Tag key, qHashSeedType seed)
+{
     Q_UNUSED(seed);
     return ::qHash(static_cast<uint>(key), 0);
 }
-uint qHash(const Security key, uint seed) {
+qHashSeedType qHash(const Security key, qHashSeedType seed)
+{
     Q_UNUSED(seed);
     return ::qHash(static_cast<uint>(key), 0);
 }
-uint qHash(const KVP key, uint seed) {
+qHashSeedType qHash(const KVP key, qHashSeedType seed)
+{
     Q_UNUSED(seed);
     return ::qHash(static_cast<uint>(key), 0);
 }
-uint qHash(const Institution key, uint seed) {
+qHashSeedType qHash(const Institution key, qHashSeedType seed)
+{
     Q_UNUSED(seed);
     return ::qHash(static_cast<uint>(key), 0);
 }
-uint qHash(const Schedule key, uint seed) {
+qHashSeedType qHash(const Schedule key, qHashSeedType seed)
+{
     Q_UNUSED(seed);
     return ::qHash(static_cast<uint>(key), 0);
 }
-uint qHash(const OnlineJob key, uint seed) {
+qHashSeedType qHash(const OnlineJob key, qHashSeedType seed)
+{
     Q_UNUSED(seed);
     return ::qHash(static_cast<uint>(key), 0);
 }
-uint qHash(const Reconciliation key, uint seed)
+qHashSeedType qHash(const Reconciliation key, qHashSeedType seed)
 {
     Q_UNUSED(seed);
     return ::qHash(static_cast<uint>(key), 0);

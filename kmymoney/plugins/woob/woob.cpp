@@ -43,6 +43,7 @@ class WoobPrivate
 {
 public:
     WoobPrivate()
+        : accountSettings(nullptr)
     {
     }
 

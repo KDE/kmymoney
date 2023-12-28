@@ -49,7 +49,7 @@ MyMoneyTransaction::MyMoneyTransaction(const QString& id, const MyMoneyTransacti
     if (d->m_entryDate == QDate())
         d->m_entryDate = QDate::currentDate();
 
-    Q_FOREACH (auto split, d->m_splits)
+    for (auto& split : d->m_splits)
         split.setTransactionId(id);
 }
 
@@ -190,7 +190,7 @@ bool MyMoneyTransaction::accountReferenced(const QString& id) const
 {
     Q_D(const MyMoneyTransaction);
 
-    Q_FOREACH (const auto split, d->m_splits) {
+    for (const auto& split : d->m_splits) {
         if (split.accountId() == id)
             return true;
     }
@@ -255,7 +255,7 @@ void MyMoneyTransaction::removeSplits()
 MyMoneySplit MyMoneyTransaction::splitByPayee(const QString& payeeId) const
 {
     Q_D(const MyMoneyTransaction);
-    Q_FOREACH (const auto split, d->m_splits) {
+    for (const auto& split : d->m_splits) {
         if (split.payeeId() == payeeId)
             return split;
     }
@@ -265,7 +265,7 @@ MyMoneySplit MyMoneyTransaction::splitByPayee(const QString& payeeId) const
 MyMoneySplit MyMoneyTransaction::splitByAccount(const QString& accountId, const bool match) const
 {
     Q_D(const MyMoneyTransaction);
-    Q_FOREACH (const auto split, d->m_splits) {
+    for (const auto& split : d->m_splits) {
         if ((match == true && split.accountId() == accountId) ||
                 (match == false && split.accountId() != accountId))
             return split;
@@ -276,7 +276,7 @@ MyMoneySplit MyMoneyTransaction::splitByAccount(const QString& accountId, const 
 MyMoneySplit MyMoneyTransaction::splitByAccount(const QStringList& accountIds, const bool match) const
 {
     Q_D(const MyMoneyTransaction);
-    Q_FOREACH (const auto split, d->m_splits) {
+    for (const auto& split : d->m_splits) {
         if ((match == true && accountIds.contains(split.accountId())) ||
                 (match == false && !accountIds.contains(split.accountId())))
             return split;
@@ -287,7 +287,7 @@ MyMoneySplit MyMoneyTransaction::splitByAccount(const QStringList& accountIds, c
 MyMoneySplit MyMoneyTransaction::splitById(const QString& splitId) const
 {
     Q_D(const MyMoneyTransaction);
-    Q_FOREACH (const auto split, d->m_splits) {
+    for (const auto& split : d->m_splits) {
         if (split.id() == splitId)
             return split;
     }
@@ -306,7 +306,7 @@ MyMoneyMoney MyMoneyTransaction::splitSum() const
     MyMoneyMoney result;
 
     Q_D(const MyMoneyTransaction);
-    Q_FOREACH (const auto split, d->m_splits)
+    for (const auto& split : d->m_splits)
         result += split.value();
     return result;
 }
@@ -325,7 +325,7 @@ bool MyMoneyTransaction::isLoanPayment() const
     try {
 
         Q_D(const MyMoneyTransaction);
-        Q_FOREACH (const auto split, d->m_splits) {
+        for (const auto& split : d->m_splits) {
             if (split.isAmortizationSplit())
                 return true;
         }
@@ -339,7 +339,7 @@ MyMoneySplit MyMoneyTransaction::amortizationSplit() const
     static MyMoneySplit nullSplit;
 
     Q_D(const MyMoneyTransaction);
-    Q_FOREACH (const auto split, d->m_splits) {
+    for (const auto& split : d->m_splits) {
         if (split.isAmortizationSplit() && split.isAutoCalc())
             return split;
     }
@@ -351,7 +351,7 @@ MyMoneySplit MyMoneyTransaction::interestSplit() const
     static MyMoneySplit nullSplit;
 
     Q_D(const MyMoneyTransaction);
-    Q_FOREACH (const auto split, d->m_splits) {
+    for (const auto& split : d->m_splits) {
         if (split.isInterestSplit() && split.isAutoCalc())
             return split;
     }
@@ -403,7 +403,7 @@ bool MyMoneyTransaction::hasAutoCalcSplit() const
 {
     Q_D(const MyMoneyTransaction);
 
-    Q_FOREACH (const auto split, d->m_splits)
+    for (const auto& split : d->m_splits)
         if (split.isAutoCalc())
             return true;
     return false;
@@ -413,7 +413,7 @@ QString MyMoneyTransaction::accountSignature(bool includeSplitCount) const
 {
     Q_D(const MyMoneyTransaction);
     QMap<QString, int> accountList;
-    Q_FOREACH (const auto split, d->m_splits)
+    for (const auto& split : d->m_splits)
         accountList[split.accountId()] += 1;
 
     QMap<QString, int>::const_iterator it_a;

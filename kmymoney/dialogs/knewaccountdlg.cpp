@@ -62,12 +62,13 @@ class KNewAccountDlgPrivate
     };
 
 public:
-    explicit KNewAccountDlgPrivate(KNewAccountDlg *qq) :
-        q_ptr(qq),
-        ui(new Ui::KNewAccountDlg),
-        m_filterProxyModel(nullptr),
-        m_categoryEditor(false),
-        m_isEditing(false)
+    explicit KNewAccountDlgPrivate(KNewAccountDlg* qq)
+        : q_ptr(qq)
+        , ui(new Ui::KNewAccountDlg)
+        , m_filterProxyModel(nullptr)
+        , m_frameCollection(nullptr)
+        , m_categoryEditor(false)
+        , m_isEditing(false)
     {
     }
 
@@ -131,6 +132,7 @@ public:
         m_filterProxyModel->setHideClosedAccounts(true);
         m_filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
         m_filterProxyModel->setHideZeroBalancedEquityAccounts(KMyMoneySettings::hideZeroBalanceEquities());
+        m_filterProxyModel->setHideZeroBalancedAccounts(KMyMoneySettings::hideZeroBalanceAccounts());
         m_filterProxyModel->addAccountGroup(filterAccountGroup);
         // don't allow to select ourself as parent
         m_filterProxyModel->setNotSelectable(m_account.id());
@@ -406,11 +408,11 @@ public:
 
         q->connect(ui->m_qcomboboxInstitutions, &QComboBox::textActivated, q, &KNewAccountDlg::slotLoadInstitutions);
 
-        frameCollection = new WidgetHintFrameCollection(q);
-        frameCollection->addFrame(new WidgetHintFrame(ui->accountNameEdit));
-        frameCollection->addFrame(new WidgetHintFrame(ui->m_vatRate));
-        frameCollection->addFrame(new WidgetHintFrame(ui->m_vatAccount));
-        frameCollection->addWidget(ui->buttonBox->button(QDialogButtonBox::Ok));
+        m_frameCollection = new WidgetHintFrameCollection(q);
+        m_frameCollection->addFrame(new WidgetHintFrame(ui->accountNameEdit));
+        m_frameCollection->addFrame(new WidgetHintFrame(ui->m_vatRate));
+        m_frameCollection->addFrame(new WidgetHintFrame(ui->m_vatAccount));
+        m_frameCollection->addWidget(ui->buttonBox->button(QDialogButtonBox::Ok));
 
         QModelIndex parentIndex;
         if (!m_parentAccount.id().isEmpty()) {
@@ -665,7 +667,7 @@ public:
     MyMoneyAccount m_account;
     MyMoneyAccount m_parentAccount;
     AccountsProxyModel* m_filterProxyModel;
-    WidgetHintFrameCollection* frameCollection;
+    WidgetHintFrameCollection* m_frameCollection;
 
     bool m_categoryEditor;
     bool m_isEditing;

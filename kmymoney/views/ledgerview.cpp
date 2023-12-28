@@ -75,6 +75,8 @@ Q_GLOBAL_STATIC(GlobalEditData, s_globalEditData);
 
 class LedgerView::Private
 {
+    Q_DISABLE_COPY_MOVE(Private)
+
 public:
     Private(LedgerView* qq)
         : q(qq)
@@ -440,6 +442,23 @@ public:
         journalDelegate->resetLineHeight();
     }
 
+    void allowSectionResize()
+    {
+        auto header = q->horizontalHeader();
+        for (int i = 0; i < header->count(); ++i) {
+            header->setSectionResizeMode(i, QHeaderView::Interactive);
+        }
+        header->setSectionResizeMode(JournalModel::Column::Reconciliation, QHeaderView::ResizeToContents);
+    }
+
+    void blockSectionResize()
+    {
+        auto header = q->horizontalHeader();
+        for (int i = 0; i < header->count(); ++i) {
+            header->setSectionResizeMode(i, QHeaderView::Fixed);
+        }
+    }
+
     LedgerView* q;
     JournalDelegate* journalDelegate;
     DelegateProxy* delegateProxy;
@@ -565,11 +584,7 @@ void LedgerView::setModel(QAbstractItemModel* model)
 
     d->columnSelector->setModel(model);
 
-    horizontalHeader()->setSectionResizeMode(JournalModel::Column::Detail, QHeaderView::Interactive);
-    horizontalHeader()->setSectionResizeMode(JournalModel::Column::Reconciliation, QHeaderView::ResizeToContents);
-    horizontalHeader()->setSectionResizeMode(JournalModel::Column::Payment, QHeaderView::Interactive);
-    horizontalHeader()->setSectionResizeMode(JournalModel::Column::Deposit, QHeaderView::Interactive);
-    horizontalHeader()->setSectionResizeMode(JournalModel::Column::Balance, QHeaderView::Interactive);
+    d->allowSectionResize();
 
     horizontalHeader()->setSectionsMovable(true);
 
@@ -717,6 +732,8 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
                 });
 
                 resizeEditorRow();
+
+                d->blockSectionResize();
             }
         }
         return rc;
@@ -748,10 +765,13 @@ void LedgerView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint
     // we need to resize the row that contained the editor.
     resizeRowsToContents();
 
+    // and allow the section sizes to be modified again
+    d->allowSectionResize();
+
     Q_EMIT aboutToFinishEdit();
 
     d->editIndex = QModelIndex();
-    QMetaObject::invokeMethod(this, "ensureCurrentItemIsVisible", Qt::QueuedConnection);
+    QMetaObject::invokeMethod(this, &LedgerView::ensureCurrentItemIsVisible, Qt::QueuedConnection);
 }
 
 QModelIndex LedgerView::editIndex() const

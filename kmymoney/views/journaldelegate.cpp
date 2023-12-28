@@ -55,6 +55,7 @@ public:
         , m_singleLineRole(eMyMoney::Model::SplitPayeeRole)
         , m_lineHeight(-1)
         , m_margin(2)
+        , m_editorWidthOfs(0)
         , m_showPayeeInDetailColumn(true)
         , m_accountType(eMyMoney::Account::Type::Unknown)
     {}

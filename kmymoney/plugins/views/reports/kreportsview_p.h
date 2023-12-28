@@ -1421,6 +1421,48 @@ public:
         m_columnsAlreadyAdjusted = adjusted;
     }
 
+    void setFilter(const QString& text)
+    {
+        const auto columns = ui.m_tocTreeWidget->columnCount();
+        for (auto i = 0; i < ui.m_tocTreeWidget->topLevelItemCount(); ++i) {
+            const auto toplevelItem = ui.m_tocTreeWidget->topLevelItem(i);
+            bool hideTopLevel = true;
+            for (auto j = 0; j < toplevelItem->childCount(); ++j) {
+                const auto reportItem = toplevelItem->child(j);
+                if (text.isEmpty()) {
+                    reportItem->setHidden(false);
+                    hideTopLevel = false;
+                } else {
+                    reportItem->setHidden(true);
+                    for (auto column = 0; column < columns; ++column) {
+                        if (reportItem->text(column).contains(text, Qt::CaseInsensitive)) {
+                            reportItem->setHidden(false);
+                            hideTopLevel = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            toplevelItem->setHidden(hideTopLevel);
+        }
+
+        if (text.isEmpty()) {
+            if (!expandStatesBeforeSearch.isEmpty()) {
+                restoreTocExpandState(expandStatesBeforeSearch);
+                expandStatesBeforeSearch.clear();
+            }
+        } else {
+            if (expandStatesBeforeSearch.isEmpty()) {
+                expandStatesBeforeSearch = saveTocExpandState();
+            }
+            // show groups with matching reports as expanded
+            for (auto i = 0; i < ui.m_tocTreeWidget->topLevelItemCount(); ++i) {
+                const auto toplevelItem = ui.m_tocTreeWidget->topLevelItem(i);
+                toplevelItem->setExpanded(!toplevelItem->isHidden());
+            }
+        }
+    }
+
     /**
       * This member holds the load state of page
       */

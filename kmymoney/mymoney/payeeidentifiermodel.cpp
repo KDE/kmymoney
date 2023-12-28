@@ -51,7 +51,7 @@ void payeeIdentifierModel::loadData()
     const QList<MyMoneyPayee> payees = MyMoneyFile::instance()->payeeList();
     m_payeeIdentifierIds.clear();
     m_payeeIdentifierIds.reserve(payees.count());
-    Q_FOREACH(const MyMoneyPayee& payee, payees) {
+    for (const MyMoneyPayee& payee : payees) {
         m_payeeIdentifierIds.append(payee.id());
     }
     endResetModel();

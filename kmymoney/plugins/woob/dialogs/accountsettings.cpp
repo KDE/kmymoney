@@ -22,6 +22,8 @@
 
 class AccountSettingsPrivate
 {
+    Q_DISABLE_COPY_MOVE(AccountSettingsPrivate)
+
 public:
     AccountSettingsPrivate()
         : ui(new Ui::AccountSettings)

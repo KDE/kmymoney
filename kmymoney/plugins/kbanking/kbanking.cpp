@@ -671,7 +671,7 @@ void KBanking::sendOnlineJob(QList<onlineJob>& jobs)
     QList<onlineJob> unhandledJobs;
 
     if (!jobs.isEmpty()) {
-        Q_FOREACH (onlineJob job, jobs) {
+        for (onlineJob job : jobs) {
             if (sepaOnlineTransfer::name() == job.task()->taskName()) {
                 onlineJobTyped<sepaOnlineTransfer> typedJob(job);
                 enqueTransaction(typedJob);
@@ -1435,7 +1435,7 @@ void KBankingExt::_slToStatement(MyMoneyStatement &ks,
     // generate dummy booking in case online balance does not match
     MyMoneySecurity security;
     MyMoneyAccount sacc;
-    Q_FOREACH (const auto sAccount, file->account(acc.id()).accountList()) {
+    for (const auto& sAccount : file->account(acc.id()).accountList()) {
         sacc=file->account(sAccount);
         security=file->security(sacc.currencyId());
         if ((!ksy.m_strSymbol.isEmpty() && QString::compare(ksy.m_strSymbol, security.tradingSymbol(), Qt::CaseInsensitive) == 0) ||

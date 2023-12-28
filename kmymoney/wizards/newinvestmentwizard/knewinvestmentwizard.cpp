@@ -169,10 +169,10 @@ void KNewInvestmentWizard::slotCheckForExistingSymbol(const QString& symbol)
     Q_UNUSED(symbol);
 
     if (field("investmentName").toString().isEmpty()) {
-        QList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
+        const QList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
         auto type = static_cast<eMyMoney::Security::Type>(field("securityType").toInt());
 
-        Q_FOREACH (const MyMoneySecurity& it_s, list) {
+        for (const MyMoneySecurity& it_s : list) {
             if (it_s.securityType() == type
                     && it_s.tradingSymbol() == field("investmentSymbol").toString()) {
                 d->m_security = MyMoneySecurity();

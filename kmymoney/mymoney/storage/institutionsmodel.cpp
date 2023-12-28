@@ -35,6 +35,7 @@ struct InstitutionsModel::Private
     Private(InstitutionsModel* qq, QObject* parent)
         : q_ptr(qq)
         , parentObject(parent)
+        , accountsModel(nullptr)
     {
     }
 

@@ -108,7 +108,7 @@ bool AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const QList<pay
     Q_CHECK_PTR(transaction);
 
     bool validOriginAccountSet = false;
-    Q_FOREACH (payeeIdentifier accountNumber, accountNumbers) {
+    for (const payeeIdentifier& accountNumber : accountNumbers) {
         if (!accountNumber.isValid())
             continue;
 

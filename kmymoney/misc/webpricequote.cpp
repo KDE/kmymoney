@@ -584,8 +584,8 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
                                                       "https://fx-rate.net/([^/]+/[^/]+)",
                                                       WebPriceQuoteSource::identifyBy::Symbol,
                                                       "Today\\s+=\\s+([^<]+)",
-                                                      "name=\"date_input\" class=\"ip_ondate\" value=\"(\\d{4}-\\d{2}-\\d{2})",
-                                                      "%y/%m/%d",
+                                                      ",\\s*(\\d+\\s*[a-zA-Z]{3}\\s*\\d{4})",
+                                                      "%d %m %y",
                                                       true // skip HTML stripping
     );
 
@@ -831,7 +831,7 @@ const QStringList WebPriceQuote::quoteSourcesNative()
 
     // if the user has OLD quote source based only on symbols (and not ISIN)
     // now is the time to convert it to the new system.
-    Q_FOREACH (const auto group, groups) {
+    for (const auto& group : qAsConst(groups)) {
         KConfigGroup grp = kconfig->group(QString(QLatin1String("Online-Quote-Source-%1")).arg(group));
         if (grp.hasKey("SymbolRegex")) {
             grp.writeEntry("IDRegex", grp.readEntry("SymbolRegex"));

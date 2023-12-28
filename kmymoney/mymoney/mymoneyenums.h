@@ -12,6 +12,8 @@
 #include <QMetaType>
 #include <QHashFunctions>
 
+#include "qhashseedtype.h"
+
 namespace eMyMoney {
 /**
   * Account types currently supported.
@@ -41,7 +43,8 @@ enum class Type {
     MaxAccountTypes,      /**< Denotes the number of different account types */
 };
 
-inline uint qHash(const Type key, uint seed) {
+inline qHashSeedType qHash(const Type key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 
@@ -56,7 +59,8 @@ enum class Standard {
     MaxGroups,
 };
 
-inline uint qHash(const Standard key, uint seed) {
+inline qHashSeedType qHash(const Standard key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 }
@@ -79,19 +83,22 @@ enum class Type {
     None,
 };
 
-inline uint qHash(const Type key, uint seed) {
+inline qHashSeedType qHash(const Type key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 }
 
 namespace Report {
 enum class RowType { NoRows = 0, AssetLiability, ExpenseIncome, Category, TopCategory, Account, Tag, Payee, Month, Week, TopAccount, AccountByTopAccount, EquityType, AccountType, Institution, Budget, BudgetActual, Schedule, AccountInfo, AccountLoanInfo, AccountReconcile, CashFlow, Invalid };
-inline uint qHash(const RowType key, uint seed) {
+inline qHashSeedType qHash(const RowType key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 
 enum class ColumnType { NoColumns = 0, Days = 1, Months = 1, BiMonths = 2, Quarters = 3, Weeks = 7, Years = 12, Invalid };
-inline uint qHash(const ColumnType key, uint seed) {
+inline qHashSeedType qHash(const ColumnType key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 
@@ -101,22 +108,26 @@ enum class ReportType { NoReport = 0, PivotTable, QueryTable, InfoTable, Invalid
 enum QueryColumn : int { None = 0x0, Begin = 0x1, Number = 0x1, Payee = 0x2, Category = 0x4, Tag = 0x8, Memo = 0x10, Account = 0x20, Reconciled = 0x40, Action = 0x80, Shares = 0x100, Price = 0x200, Performance = 0x400, Loan = 0x800, Balance = 0x1000, CapitalGain = 0x2000, End = 0x4000 };
 
 enum class DetailLevel { None = 0, All, Top, Group, Total, End };
-inline uint qHash(const DetailLevel key, uint seed) {
+inline qHashSeedType qHash(const DetailLevel key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 
 enum class InvestmentSum { Period = 0, OwnedAndSold, Owned, Sold, Bought};
 enum class ChartType { None = 0, Line, Bar, Pie, Ring, StackedBar, End };
-inline uint qHash(const ChartType key, uint seed) {
+inline qHashSeedType qHash(const ChartType key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 
 enum class DataLock { Automatic = 0, UserDefined, DataOptionCount };
-inline uint qHash(const DataLock key, uint seed) {
+inline qHashSeedType qHash(const DataLock key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 enum class ChartPalette { Application = 0, Default, Rainbow, Subdued, End};
-inline uint qHash(const ChartPalette key, uint seed) {
+inline qHashSeedType qHash(const ChartPalette key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 }
@@ -147,7 +158,7 @@ enum class Occurrence {
     EveryFourMonths = 8192,
     Yearly = 16384,
 };
-inline uint qHash(const Occurrence key, uint seed)
+inline qHashSeedType qHash(const Occurrence key, qHashSeedType seed)
 {
     return ::qHash(static_cast<uint>(key), seed);
 }
@@ -162,7 +173,8 @@ enum class Type {
     Transfer = 4,
     LoanPayment = 5,
 };
-inline uint qHash(const Type key, uint seed) {
+inline qHashSeedType qHash(const Type key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 
@@ -179,7 +191,7 @@ enum class PaymentType {
     StandingOrder = 32,
     BankTransfer = 64,
 };
-inline uint qHash(const PaymentType key, uint seed)
+inline qHashSeedType qHash(const PaymentType key, qHashSeedType seed)
 {
     return ::qHash(static_cast<uint>(key), seed);
 }
@@ -206,7 +218,8 @@ enum class Level {
     Max,
 };
 
-inline uint qHash(const Level key, uint seed) {
+inline qHashSeedType qHash(const Level key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 }
@@ -280,7 +293,8 @@ enum class Date {
     // insert new constants above of this line
     LastDateItem,
 };
-inline uint qHash(const Date key, uint seed) {
+inline qHashSeedType qHash(const Date key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 }
@@ -324,7 +338,8 @@ enum class InvestmentTransactionType {
     InterestIncome,
 };
 
-inline uint qHash(const InvestmentTransactionType key, uint seed) {
+inline qHashSeedType qHash(const InvestmentTransactionType key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 
@@ -346,7 +361,8 @@ enum class Action {
     InterestIncome,
 };
 
-inline uint qHash(const Action key, uint seed) {
+inline qHashSeedType qHash(const Action key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 }
@@ -425,7 +441,8 @@ enum class Type {
     Invalid,
 };
 
-inline uint qHash(const Type key, uint seed) {
+inline qHashSeedType qHash(const Type key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 }
@@ -447,7 +464,8 @@ enum class Action {
     Invalid,
 };
 
-inline uint qHash(const Action key, uint seed) {
+inline qHashSeedType qHash(const Action key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 }

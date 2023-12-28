@@ -337,12 +337,12 @@ void KSettingsSchedules::loadList()
 
     QStringList regionList;
 #ifdef ENABLE_HOLIDAYS
-    QStringList regionCodes = HolidayRegion::regionCodes();
+    const QStringList regionCodes = HolidayRegion::regionCodes();
 
     QSet<QString> m_regionalHolidays;
 
     /// @todo with KF5 >= 5.88 use KCountry to construct the list and get rid of the table above
-    Q_FOREACH (const QString &regionCode, regionCodes) {
+    for (const QString& regionCode : regionCodes) {
         const auto countryCode(HolidayRegion::countryCode(regionCode).split(QLatin1Char('-')).at(0).toUpper());
         if (d->m_countryCodesToCountryNames.contains(countryCode)) {
             const auto countryName = d->m_countryCodesToCountryNames[countryCode];

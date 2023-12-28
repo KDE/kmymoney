@@ -29,7 +29,7 @@ class OccurrencesModelPrivate
     OccurrencesModel* q_ptr;
 
 public:
-    OccurrencesModelPrivate(OccurrencesModel* qq)
+    explicit OccurrencesModelPrivate(OccurrencesModel* qq)
         : q_ptr(qq)
     {
         Q_Q(OccurrencesModel);
@@ -114,7 +114,7 @@ class PaymentMethodModelPrivate
     PaymentMethodModel* q_ptr;
 
 public:
-    PaymentMethodModelPrivate(PaymentMethodModel* qq)
+    explicit PaymentMethodModelPrivate(PaymentMethodModel* qq)
         : q_ptr(qq)
     {
         Q_Q(PaymentMethodModel);

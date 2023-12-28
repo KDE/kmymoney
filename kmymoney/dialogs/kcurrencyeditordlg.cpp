@@ -23,6 +23,8 @@
 
 class KCurrencyEditorDlgPrivate
 {
+    Q_DISABLE_COPY_MOVE(KCurrencyEditorDlgPrivate)
+
 public:
     KCurrencyEditorDlgPrivate()
         : ui(new Ui::KCurrencyEditorDlg)
