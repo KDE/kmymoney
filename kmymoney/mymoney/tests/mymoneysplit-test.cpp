@@ -287,3 +287,38 @@ void MyMoneySplitTest::testIsAutoCalc()
     m->setShares(MyMoneyMoney(1, 100));
     QCOMPARE(m->isAutoCalc(), false);
 }
+
+void MyMoneySplitTest::testPriceCalculation()
+{
+    // a fresh split (shares and value equal 0) should return one
+    QCOMPARE(m->price(), MyMoneyMoney::ONE);
+    // setting only the value still returns one
+    m->setValue(MyMoneyMoney(1, 100), "EUR", "EUR");
+    QCOMPARE(m->price(), MyMoneyMoney::ONE);
+    // setting the shares also now allows to calculate a price
+    m->setShares(MyMoneyMoney(2, 100));
+    QCOMPARE(m->price(), MyMoneyMoney(1, 2));
+    // setting the value to zero should return to 1
+    m->setValue(MyMoneyMoney(0, 100), "EUR", "EUR");
+    QCOMPARE(m->price(), MyMoneyMoney::ONE);
+}
+
+void MyMoneySplitTest::testPriceAssignment()
+{
+    m->setValue(MyMoneyMoney(1, 100), "EUR", "EUR");
+    m->setShares(MyMoneyMoney(2, 100));
+    QCOMPARE(m->price(), MyMoneyMoney(1, 2));
+    // override the price with a constant value
+    m->setPrice(MyMoneyMoney(4, 1));
+    QCOMPARE(m->price(), MyMoneyMoney(4, 1));
+    // should return price no matter if value or shares is zero
+    m->setValue(MyMoneyMoney(0, 100), "EUR", "EUR");
+    QCOMPARE(m->price(), MyMoneyMoney(4, 1));
+    m->setValue(MyMoneyMoney(1, 100), "EUR", "EUR");
+    m->setShares(MyMoneyMoney());
+    QCOMPARE(m->price(), MyMoneyMoney(4, 1));
+    // setting the price to zero should reactivate calculation
+    m->setShares(MyMoneyMoney(2, 100));
+    m->setPrice(MyMoneyMoney());
+    QCOMPARE(m->price(), MyMoneyMoney(1, 2));
+}
