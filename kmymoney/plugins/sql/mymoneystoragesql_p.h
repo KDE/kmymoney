@@ -1298,17 +1298,12 @@ public:
             sharesList << s.shares().toString();
             MyMoneyAccount acc = m_file->account(s.accountId());
             MyMoneySecurity sec = m_file->security(acc.currencyId());
-            sharesFormattedList << s.shares().formatMoney("", MyMoneyMoney::denomToPrec(sec.smallestAccountFraction()), false).replace(QChar(','), QChar('.'));
-            MyMoneyMoney price = s.actualPrice();
-            if (!price.isZero()) {
-                priceList << price.toString();
-                priceFormattedList << price.formatMoney
-                                   ("", sec.pricePrecision(), false)
-                                   .replace(QChar(','), QChar('.'));
-            } else {
-                priceList << QString();
-                priceFormattedList << QString();
-            }
+            sharesFormattedList << s.shares()
+                                       .formatMoney(QString(), MyMoneyMoney::denomToPrec(sec.smallestAccountFraction()), false)
+                                       .replace(QLatin1Char(','), QLatin1Char('.'));
+            const MyMoneyMoney price = s.price();
+            priceList << price.toString();
+            priceFormattedList << price.formatMoney(QString(), sec.pricePrecision(), false).replace(QLatin1Char(','), QLatin1Char('.'));
             memoList << s.memo();
             accountIdList << s.accountId();
             costCenterIdList << s.costCenterId();
