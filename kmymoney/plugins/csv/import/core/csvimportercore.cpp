@@ -1396,15 +1396,14 @@ bool CSVImporterCore::createStatement(MyMoneyStatement &st)
         st.m_eType = eMyMoney::Statement::Type::Investment;
 
         auto profile = dynamic_cast<InvestmentProfile *>(m_profile);
-        if (profile->m_autoAccountName)
-            detectAccount(st);
-
-        if ((m_profile->m_colTypeNum.value(Column::Fee, -1) == -1 ||
-                m_profile->m_colTypeNum.value(Column::Fee, -1) >= m_file->m_columnCount) &&
-                profile && !profile->m_feeRate.isEmpty()) // fee column has not been calculated so do it now
-            calculateFee();
-
         if (profile) {
+            if (profile->m_autoAccountName)
+                detectAccount(st);
+
+            if ((m_profile->m_colTypeNum.value(Column::Fee, -1) == -1 || m_profile->m_colTypeNum.value(Column::Fee, -1) >= m_file->m_columnCount) && profile
+                && !profile->m_feeRate.isEmpty()) // fee column has not been calculated so do it now
+                calculateFee();
+
             for (int row = m_profile->m_startLine; row <= m_profile->m_endLine; ++row)
                 if (!processInvestRow(st, profile, row)) { // parse fields
                     st = MyMoneyStatement();
