@@ -50,13 +50,7 @@ public:
 
 protected:
     bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
-    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
-
-    int visibleItems(const QModelIndex& index) const;
-
-Q_SIGNALS:
-    void unusedIncomeExpenseAccountHidden();
-
+    bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
 };
 
 #endif
