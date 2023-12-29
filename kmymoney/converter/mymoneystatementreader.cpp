@@ -220,7 +220,8 @@ void MyMoneyStatementReader::Private::previouslyUsedCategories(const QString& in
             // stock split shouldn't be fee or interest because it won't play nice with dissectTransaction
             // it was caused by processTransactionEntry adding splits in wrong order != with manual transaction entering
             if (acc.accountGroup() == Account::Type::Expense || acc.accountGroup() == Account::Type::Income) {
-                for (const auto& sNew : t.splits()) {
+                const auto splits = t.splits();
+                for (const auto& sNew : splits) {
                     acc = file->account(sNew.accountId());
                     if (acc.accountGroup() != Account::Type::Expense && // shouldn't be fee
                             acc.accountGroup() != Account::Type::Income &&  // shouldn't be interest
@@ -732,7 +733,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             // search through each subordinate account
             auto found = false;
             QString currencyid;
-            for (const auto& sAccount : thisaccount.accountList()) {
+            const auto accountList = thisaccount.accountList();
+            for (const auto& sAccount : accountList) {
                 currencyid = file->account(sAccount).currencyId();
                 auto security = file->security(currencyid);
                 if (matchNotEmpty(statementTransactionUnderImport.m_strSymbol, security.tradingSymbol()) ||

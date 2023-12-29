@@ -677,7 +677,8 @@ public:
                 QString categoryId;
                 QString accountMemo;
                 QString categoryMemo;
-                for (const auto& split : transaction.splits()) {
+                const auto splits = transaction.splits();
+                for (const auto& split : splits) {
                     auto acc = file->account(split.accountId());
                     if (acc.isIncomeExpense()) {
                         categoryId = split.id();
@@ -719,7 +720,8 @@ public:
                     for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
                         const auto acc = MyMoneyFile::instance()->account(*it_a);
                         if (acc.accountType() == eMyMoney::Account::Type::Investment) {
-                            for (const auto& accountID : acc.accountList()) {
+                            const auto accountList = acc.accountList();
+                            for (const auto& accountID : accountList) {
                                 if (!list.contains(accountID)) {
                                     missing.append(accountID);
                                 }
@@ -920,7 +922,8 @@ public:
             QStringList accounts;
             bool hasDuplicateAccounts = false;
 
-            for (const auto& split : t.splits()) {
+            const auto splits = t.splits();
+            for (const auto& split : splits) {
                 if (accounts.contains(split.accountId())) {
                     hasDuplicateAccounts = true;
                     qDebug() << Q_FUNC_INFO << " " << t.id() << " has multiple splits with account " << split.accountId();
@@ -986,7 +989,6 @@ public:
                 }
             }
 
-            isLoan = false;
             for (const auto& split : splits) {
                 auto acc = file->account(split.accountId());
                 MyMoneyMoney val = split.value();
@@ -3972,7 +3974,8 @@ void KMyMoneyApp::Private::moveInvestmentTransaction(const QString& /*fromId*/,
     QString stockAccountId;
     QString stockSecurityId;
     MyMoneySplit s;
-    for (const auto& split : t.splits()) {
+    const auto splits = t.splits();
+    for (const auto& split : splits) {
         stockAccountId = split.accountId();
         stockSecurityId =
             MyMoneyFile::instance()->account(stockAccountId).currencyId();
@@ -3984,7 +3987,8 @@ void KMyMoneyApp::Private::moveInvestmentTransaction(const QString& /*fromId*/,
     // Now check the target investment account to see if it
     // contains a stock with this id
     QString newStockAccountId;
-    for (const auto& sAccount : toInvAcc.accountList()) {
+    const auto accountList = toInvAcc.accountList();
+    for (const auto& sAccount : accountList) {
         if (MyMoneyFile::instance()->account(sAccount).currencyId() ==
                 stockSecurityId) {
             newStockAccountId = sAccount;

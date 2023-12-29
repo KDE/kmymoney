@@ -780,7 +780,6 @@ void MyMoneyForecastTest::testBeginForecastDate()
 
     //setup begin day to same date
     a.setBeginForecastDay(QDate::currentDate().day());
-    beginDay = a.beginForecastDay();
     a.doForecast();
 
     QVERIFY(QDate::currentDate() == a.beginForecastDate());

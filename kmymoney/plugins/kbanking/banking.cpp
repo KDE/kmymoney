@@ -80,7 +80,7 @@ std::list<AB_ACCOUNT_SPEC*> AB_Banking::getAccounts()
         while( (as=AB_AccountSpec_List_First(abAccountSpecList)) ) {
             AB_AccountSpec_List_Del(as);
             accountSpecList.push_back(as);
-            as=AB_AccountSpec_List_Next(as);
+            AB_AccountSpec_List_Next(as);
         }
     }
     AB_AccountSpec_List_free(abAccountSpecList);

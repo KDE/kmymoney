@@ -77,20 +77,20 @@ struct CheckPrinting::Private {
 
     void readCheckTemplate()
     {
-        QFile* checkTemplateHTMLFile = new QFile(CheckPrintingSettings::checkTemplateFile());
+        QFile checkTemplateHTMLFile(CheckPrintingSettings::checkTemplateFile());
 
-        if (!CheckPrintingSettings::useCustomCheckTemplate() || CheckPrintingSettings::checkTemplateFile().isEmpty() || !checkTemplateHTMLFile->exists())
-            checkTemplateHTMLFile = new QFile(CheckPrintingSettings::defaultCheckTemplateFileValue());
-        if (!(checkTemplateHTMLFile->open(QIODevice::ReadOnly)))
-            qDebug() << "Failed to open the template from" << checkTemplateHTMLFile->fileName();
-        else
-            qDebug() << "Template successfully opened from" << checkTemplateHTMLFile->fileName();
+        if (!CheckPrintingSettings::useCustomCheckTemplate() || CheckPrintingSettings::checkTemplateFile().isEmpty() || !checkTemplateHTMLFile.exists())
+            checkTemplateHTMLFile.setFileName(CheckPrintingSettings::defaultCheckTemplateFileValue());
+        if (checkTemplateHTMLFile.open(QIODevice::ReadOnly)) {
+            qDebug() << "Template successfully opened from" << checkTemplateHTMLFile.fileName();
+            QTextStream stream(&checkTemplateHTMLFile);
 
-        QTextStream stream(checkTemplateHTMLFile);
+            m_checkTemplateHTML = stream.readAll();
 
-        m_checkTemplateHTML = stream.readAll();
-
-        checkTemplateHTMLFile->close();
+            checkTemplateHTMLFile.close();
+        } else {
+            qDebug() << "Failed to open the template from" << checkTemplateHTMLFile.fileName();
+        }
     }
 
     void printCheck(const QString& accountId, const QString& transactionId)

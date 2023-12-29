@@ -407,7 +407,6 @@ bool InvestTransactionEditor::Private::amountChanged(SplitModel* model, AmountEd
 {
     bool rc = true;
     if (!amountEdit->text().isEmpty() && (model->rowCount() <= 1)) {
-        rc = false;
         try {
             MyMoneyMoney shares;
             if (model->rowCount() == 1) {
@@ -423,9 +422,9 @@ bool InvestTransactionEditor::Private::amountChanged(SplitModel* model, AmountEd
                 model->setData(index, QVariant::fromValue<MyMoneyMoney>((amountEdit->value() * transactionFactor)), eMyMoney::Model::SplitValueRole);
                 model->setData(index, QVariant::fromValue<MyMoneyMoney>((amountEdit->shares() * transactionFactor)), eMyMoney::Model::SplitSharesRole);
             }
-            rc = true;
 
         } catch (MyMoneyException&) {
+            rc = false;
             qDebug() << "Ooops: something went wrong in" << Q_FUNC_INFO;
         }
     } else {

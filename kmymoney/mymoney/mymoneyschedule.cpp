@@ -159,7 +159,8 @@ void MyMoneySchedule::setTransaction(const MyMoneyTransaction& transaction, bool
     // we need to do this for the case that the transaction passed as argument
     // is a matched or imported transaction.
     auto firstSplit = true;
-    for (const auto& split : t.splits()) {
+    const auto splits = t.splits();
+    for (const auto& split : splits) {
         MyMoneySplit s = split;
         // clear out the bankID
         if (!split.bankID().isEmpty()) {
@@ -1252,7 +1253,6 @@ QDate MyMoneySchedule::addHalfMonths(QDate date, int mult) const
     } else if (mult < 0)  // Go backwards
         for (int i = 0; i > mult; i--) {
             d = newdate.day();
-            dm = newdate.daysInMonth();
             if (d > 15) {
                 dm = newdate.daysInMonth();
                 newdate = newdate.addDays((d == dm) ? 15 - dm : -15);

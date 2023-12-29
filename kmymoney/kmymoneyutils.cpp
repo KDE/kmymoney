@@ -216,7 +216,8 @@ QString KMyMoneyUtils::getStylesheet(QString baseStylesheet)
 const MyMoneySplit KMyMoneyUtils::stockSplit(const MyMoneyTransaction& t)
 {
     MyMoneySplit investmentAccountSplit;
-    for (const auto& split : t.splits()) {
+    const auto splits = t.splits();
+    for (const auto& split : splits) {
         if (!split.accountId().isEmpty()) {
             auto acc = MyMoneyFile::instance()->account(split.accountId());
             if (acc.isInvest()) {
@@ -487,7 +488,8 @@ void KMyMoneyUtils::deleteSecurity(const MyMoneySecurity& security, QWidget* par
             if (KMessageBox::questionTwoActions(parent, msg2, i18n("Delete prices"), KMMYesNo::yes(), KMMYesNo::no(), dontAsk2) == KMessageBox::PrimaryAction) {
                 try {
                     QString secID = security.id();
-                    for (const auto& priceEntry : file->priceList()) {
+                    const auto priceList = file->priceList();
+                    for (const auto& priceEntry : priceList) {
                         const MyMoneyPrice& price = priceEntry.first();
                         if (price.from() == secID || price.to() == secID)
                             file->removePrice(price);

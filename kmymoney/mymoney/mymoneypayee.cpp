@@ -257,7 +257,6 @@ void MyMoneyPayee::setMatchData(eMyMoney::Payee::MatchType type, bool ignorecase
             const auto filteredKeys = keys.filter(validKeyRegExp);
             d->m_matchKey = filteredKeys.join(QLatin1Char('\n'));
         } else if ((type == eMyMoney::Payee::MatchType::Name) && (keys.count() == 1) && (keys.at(0) == QLatin1String("^$"))) {
-            type = eMyMoney::Payee::MatchType::NameExact;
             d->m_matchKey = QLatin1String("^$");
         } else if (type == eMyMoney::Payee::MatchType::NameExact) {
             d->m_matchKey = QLatin1String("^$");
