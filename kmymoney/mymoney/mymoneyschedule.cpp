@@ -159,7 +159,8 @@ void MyMoneySchedule::setTransaction(const MyMoneyTransaction& transaction, bool
     // we need to do this for the case that the transaction passed as argument
     // is a matched or imported transaction.
     auto firstSplit = true;
-    for (const auto& split : t.splits()) {
+    const auto splits = t.splits();
+    for (const auto& split : splits) {
         MyMoneySplit s = split;
         // clear out the bankID
         if (!split.bankID().isEmpty()) {

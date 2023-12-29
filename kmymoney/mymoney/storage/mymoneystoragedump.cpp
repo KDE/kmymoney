@@ -93,7 +93,8 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
     QMap<int, int> xferCount;
     for (const auto& transaction : qAsConst(list_t)) {
         auto accountCount = 0;
-        for (const auto& split : transaction.splits()) {
+        const auto splits = transaction.splits();
+        for (const auto& split : splits) {
             auto acc = file->account(split.accountId());
             if (acc.accountGroup() != eMyMoney::Account::Type::Expense
                     && acc.accountGroup() != eMyMoney::Account::Type::Income)

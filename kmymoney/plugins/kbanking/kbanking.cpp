@@ -1435,7 +1435,8 @@ void KBankingExt::_slToStatement(MyMoneyStatement &ks,
     // generate dummy booking in case online balance does not match
     MyMoneySecurity security;
     MyMoneyAccount sacc;
-    for (const auto& sAccount : file->account(acc.id()).accountList()) {
+    const auto accountList = file->account(acc.id()).accountList();
+    for (const auto& sAccount : accountList) {
         sacc=file->account(sAccount);
         security=file->security(sacc.currencyId());
         if ((!ksy.m_strSymbol.isEmpty() && QString::compare(ksy.m_strSymbol, security.tradingSymbol(), Qt::CaseInsensitive) == 0) ||

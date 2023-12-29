@@ -798,7 +798,8 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
                 throw MYMONEYEXCEPTION_CSTRING("Cannot add split referencing unknown payee");
             }
         }
-        for (const auto& tagId : split.tagIdList()) {
+        const auto tagIdList = split.tagIdList();
+        for (const auto& tagId : tagIdList) {
             if (!tagId.isEmpty())
                 tag(tagId);
         }
@@ -1640,7 +1641,8 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
                 throw MYMONEYEXCEPTION_CSTRING("Cannot add split referencing unknown payee");
             }
         }
-        for (const auto& tagId : split.tagIdList()) {
+        const auto tagIdList = split.tagIdList();
+        for (const auto& tagId : tagIdList) {
             if (!tagId.isEmpty())
                 tag(tagId);
         }
@@ -2171,7 +2173,8 @@ QString MyMoneyFile::locateSubAccount(const MyMoneyAccount& base, const QString&
     level = category.section(AccountSeparator, 0, 0);
     remainder = category.section(AccountSeparator, 1);
 
-    for (const auto& sAccount : base.accountList()) {
+    const auto accountList = base.accountList();
+    for (const auto& sAccount : accountList) {
         nextBase = account(sAccount);
         if (nextBase.name() == level) {
             if (remainder.isEmpty()) {
@@ -2243,7 +2246,8 @@ void MyMoneyFile::modifySchedule(const MyMoneySchedule& sched)
     if (sched.type() == eMyMoney::Schedule::Type::Any)
         throw MYMONEYEXCEPTION_CSTRING("Cannot store schedule without type");
 
-    for (const auto& split : sched.transaction().splits()) {
+    const auto splits = sched.transaction().splits();
+    for (const auto& split : splits) {
         // the following line will throw an exception if the
         // account does not exist or is one of the standard accounts
         auto acc = MyMoneyFile::account(split.accountId());
@@ -2473,7 +2477,8 @@ QStringList MyMoneyFile::consistencyCheck()
         }
 
         // now check that all the children exist and have the correct type
-        for (const auto& accountID : (*it_a).accountList()) {
+        const auto accountList = (*it_a).accountList();
+        for (const auto& accountID : accountList) {
             // check that the child exists
             try {
                 child = account(accountID);
@@ -4081,7 +4086,8 @@ bool MyMoneyFile::isTransfer(const MyMoneyTransaction& t) const
 {
     auto rc = true;
     if (t.splitCount() == 2) {
-        for (const auto& split : t.splits()) {
+        const auto splits = t.splits();
+        for (const auto& split : splits) {
             auto acc = account(split.accountId());
             if (acc.isIncomeExpense()) {
                 rc = false;
@@ -4095,7 +4101,8 @@ bool MyMoneyFile::isTransfer(const MyMoneyTransaction& t) const
 bool MyMoneyFile::referencesClosedAccount(const MyMoneyTransaction& t) const
 {
     auto ret = false;
-    for (const auto& split : t.splits()) {
+    const auto splits = t.splits();
+    for (const auto& split : splits) {
         if (referencesClosedAccount(split)) {
             ret = true;
             break;
