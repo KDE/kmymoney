@@ -854,7 +854,7 @@ public:
     {
         Q_UNUSED(undoStack)
         // use an init() method here to allow virtual override
-        init();
+        this->init();
     }
 
     virtual void init()

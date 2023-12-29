@@ -383,9 +383,9 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool writeEv
     }
 
     // now remove the ones that have been deleted by the user
-    icalcomponent* itEntry = icalcomponent_get_first_component(vCalendar, newEntryKind);
 
-    while ((itEntry = icalcomponent_get_current_component(vCalendar)) != nullptr) {
+    for (icalcomponent* itEntry = icalcomponent_get_first_component(vCalendar, newEntryKind); itEntry != nullptr;
+         itEntry = icalcomponent_get_current_component(vCalendar)) {
         const QString ical_uid = icalcomponent_get_uid(itEntry);
         if (!file->schedulesModel()->indexById(ical_uid).isValid()) {
             icalcomponent_remove_component(vCalendar, itEntry);

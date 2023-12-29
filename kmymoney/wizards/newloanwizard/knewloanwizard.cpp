@@ -157,9 +157,12 @@ bool KNewLoanWizard::validateCurrentPage()
             if (d->ui->m_assetAccountPage)
                 d->m_pages.setBit(Page_AssetAccount);
         } else {
-            if (d->ui->m_assetAccountPage)
+            if (d->ui->m_assetAccountPage) {
                 d->m_pages.clearBit(Page_AssetAccount);
-            d->ui->m_assetAccountPage->ui->m_assetAccountEdit->slotDeselectAllAccounts();
+                if (d->ui->m_assetAccountPage->ui && d->ui->m_assetAccountPage->ui->m_assetAccountEdit) {
+                    d->ui->m_assetAccountPage->ui->m_assetAccountEdit->slotDeselectAllAccounts();
+                }
+            }
         }
     }
 

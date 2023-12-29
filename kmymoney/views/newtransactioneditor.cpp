@@ -396,7 +396,6 @@ bool NewTransactionEditor::Private::amountChanged()
 {
     bool rc = true;
     if (ui->creditDebitEdit->haveValue() && (splitModel.rowCount() <= 1)) {
-        rc = false;
         try {
             if (splitModel.rowCount() == 1) {
                 const QModelIndex index = splitModel.index(0, 0);
@@ -413,9 +412,9 @@ bool NewTransactionEditor::Private::amountChanged()
                 }
                 splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-ui->creditDebitEdit->value()), eMyMoney::Model::SplitValueRole);
             }
-            rc = true;
 
         } catch (MyMoneyException&) {
+            rc = false;
             qDebug() << "Ooops: something went wrong in" << Q_FUNC_INFO;
         }
     } else {

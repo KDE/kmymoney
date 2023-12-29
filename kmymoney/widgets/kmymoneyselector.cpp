@@ -513,7 +513,7 @@ int KMyMoneySelector::slotMakeCompletion(const QRegularExpression& _exp)
     auto cnt = 0;
 
     it = QTreeWidgetItemIterator(d->m_treeWidget, QTreeWidgetItemIterator::Selectable | QTreeWidgetItemIterator::NotHidden);
-    while ((it_v = *it) != 0) {
+    while ((*it) != 0) {
         cnt++;
         it++;
     }
