@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-28 00:41+0000\n"
+"POT-Creation-Date: 2023-12-29 00:41+0000\n"
 "PO-Revision-Date: 2023-12-26 11:22+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -622,10 +622,10 @@ msgid "Backup location:"
 msgstr "Ubicació de la còpia de seguretat:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3740
-#: kmymoney/kmymoney.cpp:3811 kmymoney/kmymoney.cpp:3827
-#: kmymoney/kmymoney.cpp:3833 kmymoney/kmymoney.cpp:3847
-#: kmymoney/kmymoney.cpp:3849
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3742
+#: kmymoney/kmymoney.cpp:3813 kmymoney/kmymoney.cpp:3829
+#: kmymoney/kmymoney.cpp:3835 kmymoney/kmymoney.cpp:3849
+#: kmymoney/kmymoney.cpp:3851
 #, kde-format
 msgid "Backup"
 msgstr "Còpia de seguretat"
@@ -1010,7 +1010,7 @@ msgstr ""
 "tinguin aquests valors."
 
 #: kmymoney/dialogs/kcurrencycalculator.cpp:430
-#: kmymoney/mymoney/mymoneyfile.cpp:3004
+#: kmymoney/mymoney/mymoneyfile.cpp:3005
 #, kde-format
 msgctxt "@info price source"
 msgid "User"
@@ -1033,8 +1033,8 @@ msgstr "Editor del tipus/preu de canvi"
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:61
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:246
 #: kmymoney/plugins/views/reports/core/listtable.cpp:616
-#: kmymoney/views/khomeview_p.h:663 kmymoney/views/khomeview_p.h:723
-#: kmymoney/views/khomeview_p.h:761 kmymoney/views/newspliteditor.ui:32
+#: kmymoney/views/khomeview_p.h:665 kmymoney/views/khomeview_p.h:725
+#: kmymoney/views/khomeview_p.h:763 kmymoney/views/newspliteditor.ui:32
 #: kmymoney/views/newtransactioneditor.ui:56
 #: kmymoney/views/newtransactionform.ui:145
 #: kmymoney/widgets/ktransactionfilter.cpp:131
@@ -1116,8 +1116,8 @@ msgstr "xxx"
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:120
 #: kmymoney/plugins/views/reports/core/listtable.cpp:614
 #: kmymoney/views/investtransactioneditor.ui:245
-#: kmymoney/views/khomeview_p.h:648 kmymoney/views/khomeview_p.h:708
-#: kmymoney/views/khomeview_p.h:746 kmymoney/views/newtransactioneditor.ui:78
+#: kmymoney/views/khomeview_p.h:650 kmymoney/views/khomeview_p.h:710
+#: kmymoney/views/khomeview_p.h:748 kmymoney/views/newtransactioneditor.ui:78
 #: kmymoney/views/newtransactionform.ui:110
 #: kmymoney/widgets/ktransactionfilter.cpp:122
 #: kmymoney/widgets/ktransactionfilter.ui:138
@@ -2068,7 +2068,7 @@ msgstr "Tipus"
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:237
 #: kmymoney/views/investtransactioneditor.ui:51
 #: kmymoney/views/investtransactioneditor.ui:221
-#: kmymoney/views/khomeview_p.h:1061
+#: kmymoney/views/khomeview_p.h:1063
 #, kde-format
 msgid "Total"
 msgstr "Total"
@@ -2237,31 +2237,31 @@ msgstr "Suprimeix aquesta entrada"
 msgid "Delete"
 msgstr "Suprimeix"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:170
+#: kmymoney/dialogs/knewaccountdlg.cpp:171
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:39
 #, kde-format
 msgctxt "default price mode"
 msgid "(default)"
 msgstr "(predeterminat)"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:171
+#: kmymoney/dialogs/knewaccountdlg.cpp:172
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:40
 #, kde-format
 msgid "Price per share"
 msgstr "Cotització per acció"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:172
+#: kmymoney/dialogs/knewaccountdlg.cpp:173
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:41
 #, kde-format
 msgid "Total for all shares"
 msgstr "Total per a totes les accions"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:240
+#: kmymoney/dialogs/knewaccountdlg.cpp:241
 #, kde-format
 msgid "VAT account"
 msgstr "Compte de l'IVA"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:530 kmymoney/kmymoney.cpp:432
+#: kmymoney/dialogs/knewaccountdlg.cpp:531 kmymoney/kmymoney.cpp:434
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:188
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:370
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:73
@@ -2269,7 +2269,7 @@ msgstr "Compte de l'IVA"
 msgid "Asset"
 msgstr "Actiu"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:532 kmymoney/kmymoney.cpp:433
+#: kmymoney/dialogs/knewaccountdlg.cpp:533 kmymoney/kmymoney.cpp:435
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:189
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:378
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:75
@@ -2277,8 +2277,8 @@ msgstr "Actiu"
 msgid "Liability"
 msgstr "Passiu"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:534 kmymoney/kmymoney.cpp:434
-#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1833
+#: kmymoney/dialogs/knewaccountdlg.cpp:535 kmymoney/kmymoney.cpp:436
+#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1835
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -2286,7 +2286,7 @@ msgstr "Passiu"
 msgid "Income"
 msgstr "Ingressos"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:536 kmymoney/kmymoney.cpp:435
+#: kmymoney/dialogs/knewaccountdlg.cpp:537 kmymoney/kmymoney.cpp:437
 #: kmymoney/models/ledgerfilterbase.cpp:97
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:79
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:191
@@ -2295,7 +2295,7 @@ msgstr "Ingressos"
 msgid "Expense"
 msgstr "Despeses"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:583
+#: kmymoney/dialogs/knewaccountdlg.cpp:584
 #, kde-format
 msgid ""
 "Option has been disabled because there are transactions assigned to this "
@@ -2303,7 +2303,7 @@ msgid ""
 msgstr ""
 "L'opció està desactivada perquè hi ha operacions assignades a aquest compte"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:588
+#: kmymoney/dialogs/knewaccountdlg.cpp:589
 #, kde-format
 msgid ""
 "Option has been disabled because there is another account flagged to be an "
@@ -2312,13 +2312,13 @@ msgstr ""
 "L'opció està desactivada perquè hi ha un altre compte marcat com a compte de "
 "saldo inicial per a aquesta divisa"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:608
+#: kmymoney/dialogs/knewaccountdlg.cpp:609
 #, kde-format
 msgctxt "@label:chooser %1 account name, %2 parent account name"
 msgid "<b>%1</b> is a sub account of <b>%2</b>"
 msgstr "<b>%1</b> és un subcompte de <b>%2</b>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:726
+#: kmymoney/dialogs/knewaccountdlg.cpp:727
 #, kde-format
 msgid ""
 "You have not specified a name.\n"
@@ -2327,14 +2327,14 @@ msgstr ""
 "No s'ha especificat cap nom.\n"
 "Ompliu-lo en aquest camp."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:733
+#: kmymoney/dialogs/knewaccountdlg.cpp:734
 #, kde-format
 msgid "Please select a parent account."
 msgstr "Seleccioneu un compte pare."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:739
-#: kmymoney/dialogs/knewaccountdlg.cpp:895
-#: kmymoney/dialogs/knewaccountdlg.cpp:910
+#: kmymoney/dialogs/knewaccountdlg.cpp:740
+#: kmymoney/dialogs/knewaccountdlg.cpp:896
+#: kmymoney/dialogs/knewaccountdlg.cpp:911
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:518
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:45
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:80
@@ -2342,7 +2342,7 @@ msgstr "Seleccioneu un compte pare."
 msgid "(No Institution)"
 msgstr "(Sense institució)"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:794
+#: kmymoney/dialogs/knewaccountdlg.cpp:795
 #, kde-format
 msgid ""
 "A category named <b>%1</b> already exists. You cannot create a second "
@@ -2351,7 +2351,7 @@ msgstr ""
 "Ja existeix una categoria anomenada <b>%1</b>. No es pot crear una segona "
 "categoria amb el mateix nom."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:821
+#: kmymoney/dialogs/knewaccountdlg.cpp:822
 #, kde-format
 msgid ""
 "You have selected to suppress the display of unused categories in the "
@@ -2364,42 +2364,42 @@ msgstr ""
 "crear només es mostrarà si s'usa. Altrament, estarà oculta a la vista de "
 "comptes/categories."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:821
+#: kmymoney/dialogs/knewaccountdlg.cpp:822
 #, kde-format
 msgid "Hidden categories"
 msgstr "Categories ocultes"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:935
+#: kmymoney/dialogs/knewaccountdlg.cpp:936
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
 #, kde-format
 msgid "Cannot add institution"
 msgstr "No es pot afegir la institució"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:972
+#: kmymoney/dialogs/knewaccountdlg.cpp:973
 #, kde-format
 msgctxt "@info:tooltip Hint to provide name"
 msgid "Please provide a name for the new category or account."
 msgstr "Proporcioneu un nom per a la categoria o el compte nou."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:977
+#: kmymoney/dialogs/knewaccountdlg.cpp:978
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
 msgstr "No es pot crear cap compte o categoria que contingui %1 en el nom."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:984
+#: kmymoney/dialogs/knewaccountdlg.cpp:985
 #, kde-format
 msgctxt "@info:tooltip Hint to provide VAT percentage in range"
 msgid "Please provide a percentage greater than zero and less than 100."
 msgstr "Proporcioneu un percentatge superior a zero i inferior a 100."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:988
+#: kmymoney/dialogs/knewaccountdlg.cpp:989
 #, kde-format
 msgctxt "@info:tooltip Hint to provide category to assign VAT"
 msgid "Please select a category for the VAT."
 msgstr "Seleccioneu una categoria per a l'IVA."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1053
+#: kmymoney/dialogs/knewaccountdlg.cpp:1054
 #, kde-format
 msgid ""
 "<p>The category <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2410,13 +2410,13 @@ msgstr ""
 "p><p><i>El compte pare predeterminat serà <b>%2</b>, però es podrà canviar "
 "en el diàleg següent</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1057
-#: kmymoney/dialogs/knewaccountdlg.cpp:1082
+#: kmymoney/dialogs/knewaccountdlg.cpp:1058
+#: kmymoney/dialogs/knewaccountdlg.cpp:1083
 #, kde-format
 msgid "Create category"
 msgstr "Crea una categoria"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1078
+#: kmymoney/dialogs/knewaccountdlg.cpp:1079
 #, kde-format
 msgid ""
 "<p>The account <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2427,13 +2427,13 @@ msgstr ""
 "compte pare predeterminat serà <b>%2</b>, però es podrà canviar en el diàleg "
 "següent</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1100
+#: kmymoney/dialogs/knewaccountdlg.cpp:1101
 #, kde-format
 msgctxt "@title:window"
 msgid "Create a new Category"
 msgstr "Crea una categoria nova"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1105
+#: kmymoney/dialogs/knewaccountdlg.cpp:1106
 #, kde-format
 msgctxt "@title:window"
 msgid "Create a new Account"
@@ -4348,8 +4348,8 @@ msgstr "Liquidada"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:345
 #: kmymoney/plugins/views/reports/core/listtable.cpp:638
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
-#: kmymoney/views/khomeview_p.h:1037 kmymoney/views/khomeview_p.h:1406
-#: kmymoney/views/khomeview_p.h:1435
+#: kmymoney/views/khomeview_p.h:1039 kmymoney/views/khomeview_p.h:1408
+#: kmymoney/views/khomeview_p.h:1437
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:32
 #, kde-format
 msgid "Reconciled"
@@ -4563,7 +4563,7 @@ msgstr "(Cap)"
 msgid "Number of days to preview schedules in ledger"
 msgstr "Nombre de dies a previsualitzar les planificacions en el llibre major"
 
-#: kmymoney/dialogs/splitadjustdialog.cpp:53
+#: kmymoney/dialogs/splitadjustdialog.cpp:55
 #, kde-format
 msgid ""
 "The total amount of this transaction is %1 while the sum of the splits is "
@@ -4572,22 +4572,22 @@ msgstr ""
 "L'import total d'aquesta operació és %1 mentre que la suma dels "
 "desglossaments és %2. La resta %3 queda sense assignar."
 
-#: kmymoney/dialogs/splitadjustdialog.cpp:58
+#: kmymoney/dialogs/splitadjustdialog.cpp:60
 #, kde-format
 msgid "Change &total amount of transaction to %1."
 msgstr "Canvia l'import &total de l'operació a %1."
 
-#: kmymoney/dialogs/splitadjustdialog.cpp:61
+#: kmymoney/dialogs/splitadjustdialog.cpp:63
 #, kde-format
 msgid "&Distribute difference of %1 among all splits."
 msgstr "&Distribueix la diferència de %1 entre tots els desglossaments."
 
-#: kmymoney/dialogs/splitadjustdialog.cpp:69
+#: kmymoney/dialogs/splitadjustdialog.cpp:71
 #, kde-format
 msgid "&Leave total amount of transaction at %1."
 msgstr "&Deixa l'import total de l'operació a %1."
 
-#: kmymoney/dialogs/splitadjustdialog.cpp:71
+#: kmymoney/dialogs/splitadjustdialog.cpp:73
 #, kde-format
 msgid "&Leave %1 unassigned."
 msgstr "&Deixa %1 sense assignar."
@@ -4772,7 +4772,7 @@ msgctxt "Roles in project"
 msgid "CSV import/export"
 msgstr "Importació/exportació de CSV"
 
-#: kmymoney/kmymoney.cpp:436 kmymoney/models/equitiesmodel.cpp:424
+#: kmymoney/kmymoney.cpp:438 kmymoney/models/equitiesmodel.cpp:424
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:192
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:408
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:78
@@ -4780,18 +4780,18 @@ msgstr "Importació/exportació de CSV"
 msgid "Equity"
 msgstr "Acció"
 
-#: kmymoney/kmymoney.cpp:517
+#: kmymoney/kmymoney.cpp:519
 #, kde-format
 msgid "The file has been changed, save it?"
 msgstr "El fitxer ha canviat. El deso?"
 
-#: kmymoney/kmymoney.cpp:518
+#: kmymoney/kmymoney.cpp:520
 #, kde-format
 msgctxt "@title:window"
 msgid "Save file"
 msgstr "Desament de fitxer"
 
-#: kmymoney/kmymoney.cpp:889
+#: kmymoney/kmymoney.cpp:891
 #, kde-format
 msgid ""
 "<p>The account \"%1\" was previously created as loan account but some "
@@ -4805,38 +4805,38 @@ msgstr ""
 "versió 0.8.7 o posterior del KMyMoney i anterior a la versió 0.9 per a "
 "corregir el problema.</p>"
 
-#: kmymoney/kmymoney.cpp:891
+#: kmymoney/kmymoney.cpp:893
 #, kde-format
 msgid "Account problem"
 msgstr "Problema de compte"
 
-#: kmymoney/kmymoney.cpp:910
+#: kmymoney/kmymoney.cpp:912
 #, kde-format
 msgid "Fix transactions"
 msgstr "Esmena operacions"
 
-#: kmymoney/kmymoney.cpp:1177
+#: kmymoney/kmymoney.cpp:1179
 #, kde-format
 msgid "Untitled"
 msgstr "Sense títol"
 
-#: kmymoney/kmymoney.cpp:1351
+#: kmymoney/kmymoney.cpp:1353
 #, kde-format
 msgid "Unable to match the selected transactions"
 msgstr "No s'han pogut emparellar les operacions seleccionades"
 
-#: kmymoney/kmymoney.cpp:1378
+#: kmymoney/kmymoney.cpp:1380
 #, kde-format
 msgid "Unable to unmatch the selected transactions"
 msgstr "No s'han pogut desaparellar les operacions seleccionades"
 
-#: kmymoney/kmymoney.cpp:1470
+#: kmymoney/kmymoney.cpp:1472
 #, kde-format
 msgctxt "@action New file/database"
 msgid "New book..."
 msgstr "Llibreta nova..."
 
-#: kmymoney/kmymoney.cpp:1617
+#: kmymoney/kmymoney.cpp:1619
 #, kde-format
 msgid ""
 "This is the consistency check log, use the context menu to copy or save it."
@@ -4844,592 +4844,592 @@ msgstr ""
 "Aquest és el registre de comprovació de la coherència. Useu el menú "
 "contextual per a copiar-lo o desar-lo."
 
-#: kmymoney/kmymoney.cpp:1630
+#: kmymoney/kmymoney.cpp:1632
 #, kde-format
 msgid "Copy to clipboard"
 msgstr "Copia al porta-retalls"
 
-#: kmymoney/kmymoney.cpp:1631
+#: kmymoney/kmymoney.cpp:1633
 #, kde-format
 msgid "Save to file"
 msgstr "Desa a un fitxer"
 
-#: kmymoney/kmymoney.cpp:1754
+#: kmymoney/kmymoney.cpp:1756
 #, kde-format
 msgid "Backup..."
 msgstr "Còpia de seguretat..."
 
-#: kmymoney/kmymoney.cpp:1755
+#: kmymoney/kmymoney.cpp:1757
 #, kde-format
 msgid "Statement file..."
 msgstr "Fitxer d'extracte..."
 
-#: kmymoney/kmymoney.cpp:1756 kmymoney/kmymoney.cpp:1757
+#: kmymoney/kmymoney.cpp:1758 kmymoney/kmymoney.cpp:1759
 #, kde-format
 msgid "Account Template..."
 msgstr "Plantilla de comptes..."
 
-#: kmymoney/kmymoney.cpp:1758
+#: kmymoney/kmymoney.cpp:1760
 #, kde-format
 msgid "Personal Data..."
 msgstr "Dades personals..."
 
-#: kmymoney/kmymoney.cpp:1760
+#: kmymoney/kmymoney.cpp:1762
 #, kde-format
 msgid "Dump Memory"
 msgstr "Bolca la memòria"
 
-#: kmymoney/kmymoney.cpp:1762
+#: kmymoney/kmymoney.cpp:1764
 #, kde-format
 msgid "File-Information..."
 msgstr "Informació del fitxer..."
 
-#: kmymoney/kmymoney.cpp:1766
+#: kmymoney/kmymoney.cpp:1768
 #, kde-format
 msgid "Find transaction..."
 msgstr "Cerca una operació..."
 
-#: kmymoney/kmymoney.cpp:1770
+#: kmymoney/kmymoney.cpp:1772
 #, kde-format
 msgid "Show Transaction Detail"
 msgstr "Mostra els detalls de les operacions"
 
 #. i18n: ectx: label, entry (HideReconciledTransactions), group (List Options)
-#: kmymoney/kmymoney.cpp:1771 kmymoney/settings/kmymoney.kcfg:236
+#: kmymoney/kmymoney.cpp:1773 kmymoney/settings/kmymoney.kcfg:236
 #, kde-format
 msgid "Hide reconciled transactions"
 msgstr "Oculta les operacions conciliades"
 
 #. i18n: ectx: label, entry (HideUnusedCategory), group (List Options)
-#: kmymoney/kmymoney.cpp:1772 kmymoney/settings/kmymoney.kcfg:212
+#: kmymoney/kmymoney.cpp:1774 kmymoney/settings/kmymoney.kcfg:212
 #, kde-format
 msgid "Hide unused categories"
 msgstr "Oculta les categories no emprades"
 
 #. i18n: ectx: label, entry (ShowAllAccounts), group (List Options)
-#: kmymoney/kmymoney.cpp:1773 kmymoney/settings/kmymoney.kcfg:216
+#: kmymoney/kmymoney.cpp:1775 kmymoney/settings/kmymoney.kcfg:216
 #, kde-format
 msgid "Show all accounts"
 msgstr "Mostra tots els comptes"
 
-#: kmymoney/kmymoney.cpp:1777
+#: kmymoney/kmymoney.cpp:1779
 #, kde-format
 msgid "New institution..."
 msgstr "Institució nova..."
 
-#: kmymoney/kmymoney.cpp:1778
+#: kmymoney/kmymoney.cpp:1780
 #, kde-format
 msgid "Edit institution..."
 msgstr "Edita una institució..."
 
-#: kmymoney/kmymoney.cpp:1779
+#: kmymoney/kmymoney.cpp:1781
 #, kde-format
 msgid "Delete institution..."
 msgstr "Suprimeix una institució..."
 
-#: kmymoney/kmymoney.cpp:1783
+#: kmymoney/kmymoney.cpp:1785
 #, kde-format
 msgid "New account..."
 msgstr "Compte nou..."
 
-#: kmymoney/kmymoney.cpp:1784
+#: kmymoney/kmymoney.cpp:1786
 #, kde-format
 msgid "Open ledger"
 msgstr "Obre el llibre major"
 
-#: kmymoney/kmymoney.cpp:1785
+#: kmymoney/kmymoney.cpp:1787
 #, kde-format
 msgid "Reconcile..."
 msgstr "Concilia..."
 
-#: kmymoney/kmymoney.cpp:1786
+#: kmymoney/kmymoney.cpp:1788
 #, kde-format
 msgctxt "Finish reconciliation"
 msgid "Finish"
 msgstr "Finalitza"
 
-#: kmymoney/kmymoney.cpp:1787
+#: kmymoney/kmymoney.cpp:1789
 #, kde-format
 msgctxt "Postpone reconciliation"
 msgid "Postpone"
 msgstr "Posposa"
 
-#: kmymoney/kmymoney.cpp:1788
+#: kmymoney/kmymoney.cpp:1790
 #, kde-format
 msgctxt "Cancel reconciliation"
 msgid "Cancel"
 msgstr "Cancel·la"
 
-#: kmymoney/kmymoney.cpp:1789
+#: kmymoney/kmymoney.cpp:1791
 #, kde-format
 msgid "Report reconciliation"
 msgstr "Informa de la conciliació"
 
-#: kmymoney/kmymoney.cpp:1790
+#: kmymoney/kmymoney.cpp:1792
 #, kde-format
 msgid "Edit account..."
 msgstr "Edita un compte..."
 
-#: kmymoney/kmymoney.cpp:1791
+#: kmymoney/kmymoney.cpp:1793
 #, kde-format
 msgid "Delete account..."
 msgstr "Suprimeix un compte..."
 
-#: kmymoney/kmymoney.cpp:1792
+#: kmymoney/kmymoney.cpp:1794
 #, kde-format
 msgid "Close account"
 msgstr "Tanca un compte"
 
-#: kmymoney/kmymoney.cpp:1793
+#: kmymoney/kmymoney.cpp:1795
 #, kde-format
 msgid "Reopen account"
 msgstr "Torna a obrir un compte"
 
-#: kmymoney/kmymoney.cpp:1794
+#: kmymoney/kmymoney.cpp:1796
 #, kde-format
 msgid "Transaction report"
 msgstr "Informe d'operació"
 
-#: kmymoney/kmymoney.cpp:1795
+#: kmymoney/kmymoney.cpp:1797
 #, kde-format
 msgid "Show balance chart..."
 msgstr "Mostra el gràfic del saldo..."
 
-#: kmymoney/kmymoney.cpp:1796
+#: kmymoney/kmymoney.cpp:1798
 #, kde-format
 msgid "Map account..."
 msgstr "Vincula amb un compte..."
 
-#: kmymoney/kmymoney.cpp:1797
+#: kmymoney/kmymoney.cpp:1799
 #, kde-format
 msgid "Unmap account..."
 msgstr "Desvincula el compte..."
 
-#: kmymoney/kmymoney.cpp:1798
+#: kmymoney/kmymoney.cpp:1800
 #, kde-format
 msgid "Update account..."
 msgstr "Actualitza un compte..."
 
-#: kmymoney/kmymoney.cpp:1799
+#: kmymoney/kmymoney.cpp:1801
 #, kde-format
 msgid "Update all accounts..."
 msgstr "Actualitza tots els comptes..."
 
-#: kmymoney/kmymoney.cpp:1803
+#: kmymoney/kmymoney.cpp:1805
 #, kde-format
 msgid "New category..."
 msgstr "Categoria nova..."
 
-#: kmymoney/kmymoney.cpp:1804
+#: kmymoney/kmymoney.cpp:1806
 #, kde-format
 msgid "Edit category..."
 msgstr "Edita la categoria..."
 
-#: kmymoney/kmymoney.cpp:1805
+#: kmymoney/kmymoney.cpp:1807
 #, kde-format
 msgid "Delete category..."
 msgstr "Suprimeix la categoria..."
 
-#: kmymoney/kmymoney.cpp:1809
+#: kmymoney/kmymoney.cpp:1811
 #, kde-format
 msgid "Currencies..."
 msgstr "Divises..."
 
-#: kmymoney/kmymoney.cpp:1810
+#: kmymoney/kmymoney.cpp:1812
 #, kde-format
 msgid "Prices..."
 msgstr "Cotitzacions..."
 
-#: kmymoney/kmymoney.cpp:1811
+#: kmymoney/kmymoney.cpp:1813
 #, kde-format
 msgid "Update Stock and Currency Prices..."
 msgstr "Actualitza la cotització dels valors i divises..."
 
-#: kmymoney/kmymoney.cpp:1812
+#: kmymoney/kmymoney.cpp:1814
 #, kde-format
 msgid "Consistency Check"
 msgstr "Comprova la coherència"
 
-#: kmymoney/kmymoney.cpp:1813
+#: kmymoney/kmymoney.cpp:1815
 #, kde-format
 msgid "Performance-Test"
 msgstr "Prova de rendiment"
 
-#: kmymoney/kmymoney.cpp:1814
+#: kmymoney/kmymoney.cpp:1816
 #, kde-format
 msgid "Calculator..."
 msgstr "Calculadora..."
 
-#: kmymoney/kmymoney.cpp:1818
+#: kmymoney/kmymoney.cpp:1820
 #, kde-format
 msgid "Enable all messages"
 msgstr "Activa tots els missatges"
 
-#: kmymoney/kmymoney.cpp:1822 kmymoney/views/kwelcomepage.cpp:82
+#: kmymoney/kmymoney.cpp:1824 kmymoney/views/kwelcomepage.cpp:82
 #, kde-format
 msgid "Get help from our community"
 msgstr "Aconseguiu ajuda de la nostra comunitat"
 
-#: kmymoney/kmymoney.cpp:1823 kmymoney/views/kwelcomepage.cpp:84
+#: kmymoney/kmymoney.cpp:1825 kmymoney/views/kwelcomepage.cpp:84
 #, kde-format
 msgid "See what's new in this version"
 msgstr "Veure què hi ha de nou en aquesta versió"
 
-#: kmymoney/kmymoney.cpp:1824 kmymoney/views/kwelcomepage.cpp:80
+#: kmymoney/kmymoney.cpp:1826 kmymoney/views/kwelcomepage.cpp:80
 #, kde-format
 msgid "Visit our website"
 msgstr "Visiteu la nostra pàgina web"
 
-#: kmymoney/kmymoney.cpp:1828
+#: kmymoney/kmymoney.cpp:1830
 #, kde-format
 msgctxt "New transaction button"
 msgid "New transaction"
 msgstr "Operació nova"
 
-#: kmymoney/kmymoney.cpp:1829
+#: kmymoney/kmymoney.cpp:1831
 #, kde-format
 msgctxt "Edit transaction button"
 msgid "Edit"
 msgstr "Edita"
 
-#: kmymoney/kmymoney.cpp:1830
+#: kmymoney/kmymoney.cpp:1832
 #, kde-format
 msgctxt "Enter transaction"
 msgid "Enter"
 msgstr "Retorn"
 
-#: kmymoney/kmymoney.cpp:1831
+#: kmymoney/kmymoney.cpp:1833
 #, kde-format
 msgctxt "Edit split button"
 msgid "Edit splits"
 msgstr "Edita els desglossaments"
 
-#: kmymoney/kmymoney.cpp:1832
+#: kmymoney/kmymoney.cpp:1834
 #, kde-format
 msgctxt "Cancel transaction edit"
 msgid "Cancel"
 msgstr "Cancel·la"
 
-#: kmymoney/kmymoney.cpp:1833
+#: kmymoney/kmymoney.cpp:1835
 #, kde-format
 msgctxt "Delete transaction"
 msgid "Delete"
 msgstr "Suprimeix"
 
-#: kmymoney/kmymoney.cpp:1834
+#: kmymoney/kmymoney.cpp:1836
 #, kde-format
 msgctxt "Duplicate transaction"
 msgid "Duplicate"
 msgstr "Duplica"
 
-#: kmymoney/kmymoney.cpp:1835
+#: kmymoney/kmymoney.cpp:1837
 #, kde-format
 msgctxt "Add reversing transaction"
 msgid "Add reversing"
 msgstr "Afegeix la reversió"
 
-#: kmymoney/kmymoney.cpp:1836
+#: kmymoney/kmymoney.cpp:1838
 #, kde-format
 msgctxt "Accept 'imported' and 'matched' transaction"
 msgid "Accept"
 msgstr "Accepta"
 
-#: kmymoney/kmymoney.cpp:1837
+#: kmymoney/kmymoney.cpp:1839
 #, kde-format
 msgctxt "Toggle reconciliation flag"
 msgid "Toggle"
 msgstr "Commuta"
 
-#: kmymoney/kmymoney.cpp:1838
+#: kmymoney/kmymoney.cpp:1840
 #, kde-format
 msgctxt "Mark transaction cleared"
 msgid "Cleared"
 msgstr "Liquidada"
 
-#: kmymoney/kmymoney.cpp:1839
+#: kmymoney/kmymoney.cpp:1841
 #, kde-format
 msgctxt "Mark transaction reconciled"
 msgid "Reconciled"
 msgstr "Conciliada"
 
-#: kmymoney/kmymoney.cpp:1840
+#: kmymoney/kmymoney.cpp:1842
 #, kde-format
 msgctxt "Mark transaction not reconciled"
 msgid "Not reconciled"
 msgstr "No conciliada"
 
-#: kmymoney/kmymoney.cpp:1841
+#: kmymoney/kmymoney.cpp:1843
 #, kde-format
 msgctxt "Move transaction"
 msgid "Move transaction"
 msgstr "Mou l'operació"
 
-#: kmymoney/kmymoney.cpp:1842
+#: kmymoney/kmymoney.cpp:1844
 #, kde-format
 msgctxt "Show transaction"
 msgid "Show transaction"
 msgstr "Mostra l'operació"
 
-#: kmymoney/kmymoney.cpp:1843
+#: kmymoney/kmymoney.cpp:1845
 #, kde-format
 msgctxt "Display transaction details"
 msgid "Show transaction details"
 msgstr "Mostra els detalls d'operació"
 
-#: kmymoney/kmymoney.cpp:1845
+#: kmymoney/kmymoney.cpp:1847
 #, kde-format
 msgctxt "Select all transactions"
 msgid "Select all"
 msgstr "Selecciona-ho tot"
 
-#: kmymoney/kmymoney.cpp:1846
+#: kmymoney/kmymoney.cpp:1848
 #, kde-format
 msgid "Go to account"
 msgstr "Ves al compte"
 
-#: kmymoney/kmymoney.cpp:1847
+#: kmymoney/kmymoney.cpp:1849
 #, kde-format
 msgid "Go to payee"
 msgstr "Ves al beneficiari"
 
-#: kmymoney/kmymoney.cpp:1848
+#: kmymoney/kmymoney.cpp:1850
 #, kde-format
 msgid "Create scheduled transaction..."
 msgstr "Crea una operació planificada..."
 
-#: kmymoney/kmymoney.cpp:1849
+#: kmymoney/kmymoney.cpp:1851
 #, kde-format
 msgid "Assign next number"
 msgstr "Assigna el número següent"
 
-#: kmymoney/kmymoney.cpp:1850
+#: kmymoney/kmymoney.cpp:1852
 #, kde-format
 msgctxt "Combine transactions"
 msgid "Combine"
 msgstr "Combina"
 
-#: kmymoney/kmymoney.cpp:1851
+#: kmymoney/kmymoney.cpp:1853
 #, kde-format
 msgid "Move to today"
 msgstr "Mou a avui"
 
-#: kmymoney/kmymoney.cpp:1852
+#: kmymoney/kmymoney.cpp:1854
 #, kde-format
 msgid "Copy splits"
 msgstr "Copia els desglossaments"
 
-#: kmymoney/kmymoney.cpp:1853
+#: kmymoney/kmymoney.cpp:1855
 #, kde-format
 msgid "Show filter widget"
 msgstr "Mostra el giny de filtratge"
 
-#: kmymoney/kmymoney.cpp:1855
+#: kmymoney/kmymoney.cpp:1857
 #, kde-format
 msgid "New investment..."
 msgstr "Inversió nova..."
 
-#: kmymoney/kmymoney.cpp:1856
+#: kmymoney/kmymoney.cpp:1858
 #, kde-format
 msgid "Edit investment..."
 msgstr "Edita una inversió..."
 
-#: kmymoney/kmymoney.cpp:1857
+#: kmymoney/kmymoney.cpp:1859
 #, kde-format
 msgid "Delete investment..."
 msgstr "Suprimeix la inversió..."
 
-#: kmymoney/kmymoney.cpp:1858
+#: kmymoney/kmymoney.cpp:1860
 #, kde-format
 msgid "Online price update..."
 msgstr "Actualització en línia del preu..."
 
-#: kmymoney/kmymoney.cpp:1859
+#: kmymoney/kmymoney.cpp:1861
 #, kde-format
 msgid "Manual price update..."
 msgstr "Actualització manual del preu..."
 
-#: kmymoney/kmymoney.cpp:1860
+#: kmymoney/kmymoney.cpp:1862
 #, kde-format
 msgid "Edit security..."
 msgstr "Edita el títol..."
 
-#: kmymoney/kmymoney.cpp:1861
+#: kmymoney/kmymoney.cpp:1863
 #, kde-format
 msgid "Delete security..."
 msgstr "Suprimeix el títol..."
 
-#: kmymoney/kmymoney.cpp:1864
+#: kmymoney/kmymoney.cpp:1866
 #, kde-format
 msgid "New schedule..."
 msgstr "Planificació nova..."
 
-#: kmymoney/kmymoney.cpp:1865
+#: kmymoney/kmymoney.cpp:1867
 #, kde-format
 msgid "Edit scheduled transaction"
 msgstr "Edita l'operació planificada"
 
-#: kmymoney/kmymoney.cpp:1866
+#: kmymoney/kmymoney.cpp:1868
 #, kde-format
 msgid "Delete scheduled transaction"
 msgstr "Suprimeix l'operació planificada"
 
-#: kmymoney/kmymoney.cpp:1867
+#: kmymoney/kmymoney.cpp:1869
 #, kde-format
 msgid "Duplicate scheduled transaction"
 msgstr "Duplica l'operació planificada"
 
-#: kmymoney/kmymoney.cpp:1868
+#: kmymoney/kmymoney.cpp:1870
 #, kde-format
 msgid "Enter next transaction..."
 msgstr "Introdueix l'operació següent..."
 
-#: kmymoney/kmymoney.cpp:1869
+#: kmymoney/kmymoney.cpp:1871
 #, kde-format
 msgid "Skip next transaction..."
 msgstr "Omet l'operació següent..."
 
-#: kmymoney/kmymoney.cpp:1871
+#: kmymoney/kmymoney.cpp:1873
 #, kde-format
 msgid "New payee..."
 msgstr "Beneficiari nou..."
 
-#: kmymoney/kmymoney.cpp:1872
+#: kmymoney/kmymoney.cpp:1874
 #, kde-format
 msgid "Rename payee"
 msgstr "Reanomena el beneficiari"
 
-#: kmymoney/kmymoney.cpp:1873
+#: kmymoney/kmymoney.cpp:1875
 #, kde-format
 msgid "Delete payee"
 msgstr "Suprimeix el beneficiari"
 
-#: kmymoney/kmymoney.cpp:1874
+#: kmymoney/kmymoney.cpp:1876
 #, kde-format
 msgid "Merge payees"
 msgstr "Fusiona els beneficiaris"
 
-#: kmymoney/kmymoney.cpp:1876
+#: kmymoney/kmymoney.cpp:1878
 #, kde-format
 msgid "New tag..."
 msgstr "Etiqueta nova..."
 
-#: kmymoney/kmymoney.cpp:1877
+#: kmymoney/kmymoney.cpp:1879
 #, kde-format
 msgid "Rename tag"
 msgstr "Reanomena l'etiqueta"
 
-#: kmymoney/kmymoney.cpp:1878
+#: kmymoney/kmymoney.cpp:1880
 #, kde-format
 msgid "Delete tag"
 msgstr "Suprimeix l'etiqueta"
 
-#: kmymoney/kmymoney.cpp:1880
+#: kmymoney/kmymoney.cpp:1882
 #, kde-format
 msgid "Open report"
 msgstr "Obre l'informe"
 
-#: kmymoney/kmymoney.cpp:1881
+#: kmymoney/kmymoney.cpp:1883
 #, kde-format
 msgid "New report"
 msgstr "Informe nou"
 
-#: kmymoney/kmymoney.cpp:1882
+#: kmymoney/kmymoney.cpp:1884
 #, kde-format
 msgid "Copy report"
 msgstr "Copia l'informe"
 
-#: kmymoney/kmymoney.cpp:1883
+#: kmymoney/kmymoney.cpp:1885
 #, kde-format
 msgid "Configure report"
 msgstr "Configura l'informe"
 
-#: kmymoney/kmymoney.cpp:1884
+#: kmymoney/kmymoney.cpp:1886
 #, kde-format
 msgid "Export report"
 msgstr "Exporta l'informe"
 
-#: kmymoney/kmymoney.cpp:1885
+#: kmymoney/kmymoney.cpp:1887
 #, kde-format
 msgid "Delete report"
 msgstr "Suprimeix l'informe"
 
-#: kmymoney/kmymoney.cpp:1886
+#: kmymoney/kmymoney.cpp:1888
 #, kde-format
 msgid "Close report"
 msgstr "Tanca l'informe"
 
-#: kmymoney/kmymoney.cpp:1887
+#: kmymoney/kmymoney.cpp:1889
 #, kde-format
 msgid "Toggle chart"
 msgstr "Commuta el gràfic"
 
-#: kmymoney/kmymoney.cpp:1888
+#: kmymoney/kmymoney.cpp:1890
 #, kde-format
 msgid "Edit tab order"
 msgstr "Edita l'ordre de tabulació"
 
-#: kmymoney/kmymoney.cpp:1891
+#: kmymoney/kmymoney.cpp:1893
 #, kde-format
 msgid "Test new feature"
 msgstr "Prova una característica nova"
 
-#: kmymoney/kmymoney.cpp:1892
+#: kmymoney/kmymoney.cpp:1894
 #, kde-format
 msgid "Debug Traces"
 msgstr "Traces de depuració"
 
-#: kmymoney/kmymoney.cpp:1894
+#: kmymoney/kmymoney.cpp:1896
 #, kde-format
 msgid "Debug Timers"
 msgstr "Temporitzadors de depuració"
 
-#: kmymoney/kmymoney.cpp:1913
+#: kmymoney/kmymoney.cpp:1915
 #, kde-format
 msgctxt "Match transactions"
 msgid "Match"
 msgstr "Coincideix"
 
-#: kmymoney/kmymoney.cpp:1914
+#: kmymoney/kmymoney.cpp:1916
 #, kde-format
 msgctxt "Unmatch transactions"
 msgid "Unmatch"
 msgstr "No coincideix"
 
-#: kmymoney/kmymoney.cpp:2039
+#: kmymoney/kmymoney.cpp:2041
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start reconciling the currently selected account"
 msgstr "Inicia la conciliació del compte actualment seleccionat"
 
-#: kmymoney/kmymoney.cpp:2040
+#: kmymoney/kmymoney.cpp:2042
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Postpone the current reconciliation"
 msgstr "Posposa la conciliació actual"
 
-#: kmymoney/kmymoney.cpp:2041
+#: kmymoney/kmymoney.cpp:2043
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Finish the current reconciliation"
 msgstr "Finalitza la conciliació actual"
 
-#: kmymoney/kmymoney.cpp:2042
+#: kmymoney/kmymoney.cpp:2044
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Cancel the current reconciliation"
 msgstr "Cancel·la la conciliació actual"
 
-#: kmymoney/kmymoney.cpp:2150
+#: kmymoney/kmymoney.cpp:2152
 #, kde-format
 msgid "View back"
 msgstr "Vista anterior"
 
-#: kmymoney/kmymoney.cpp:2151
+#: kmymoney/kmymoney.cpp:2153
 #, kde-format
 msgid "View forward"
 msgstr "Vista posterior"
 
-#: kmymoney/kmymoney.cpp:2542
+#: kmymoney/kmymoney.cpp:2544
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
@@ -5438,12 +5438,12 @@ msgstr ""
 "Com a mínim s'ha conciliat un desglossament de les operacions seleccionades. "
 "Voleu suprimir les operacions igualment?"
 
-#: kmymoney/kmymoney.cpp:2544
+#: kmymoney/kmymoney.cpp:2546
 #, kde-format
 msgid "Transaction already reconciled"
 msgstr "L'operació ja s'ha conciliat"
 
-#: kmymoney/kmymoney.cpp:2549
+#: kmymoney/kmymoney.cpp:2551
 #, kde-format
 msgid "Do you really want to delete the selected transaction?"
 msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -5451,22 +5451,22 @@ msgstr[0] "Esteu segur que voleu suprimir l'operació seleccionada?"
 msgstr[1] ""
 "Esteu segur que voleu suprimir totes les %1 operacions seleccionades?"
 
-#: kmymoney/kmymoney.cpp:2553
+#: kmymoney/kmymoney.cpp:2555
 #, kde-format
 msgid "Delete transaction"
 msgstr "Elimina operació"
 
-#: kmymoney/kmymoney.cpp:2630
+#: kmymoney/kmymoney.cpp:2632
 #, kde-format
 msgid "Unable to duplicate transaction(s)"
 msgstr "No s'ha/n pogut duplicar la/es operació/ons"
 
-#: kmymoney/kmymoney.cpp:2902
+#: kmymoney/kmymoney.cpp:2904
 #, kde-format
 msgid "Unable to modify transaction"
 msgstr "No s'ha pogut modificar l'operació"
 
-#: kmymoney/kmymoney.cpp:2994
+#: kmymoney/kmymoney.cpp:2996
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
@@ -5475,13 +5475,13 @@ msgstr ""
 "Com a mínim s'ha conciliat un desglossament de les operacions seleccionades. "
 "Voleu canviar les operacions igualment?"
 
-#: kmymoney/kmymoney.cpp:2996
+#: kmymoney/kmymoney.cpp:2998
 #, kde-format
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "L'operació ja s'ha conciliat"
 
-#: kmymoney/kmymoney.cpp:3001
+#: kmymoney/kmymoney.cpp:3003
 #, kde-format
 msgid "Do you really want to change the selected transaction?"
 msgid_plural "Do you really want to change all %1 selected transactions?"
@@ -5489,18 +5489,18 @@ msgstr[0] "Esteu segur que voleu canviar l'operació seleccionada?"
 msgstr[1] ""
 "Esteu segur que voleu canviar totes les %1 operacions seleccionades?"
 
-#: kmymoney/kmymoney.cpp:3005
+#: kmymoney/kmymoney.cpp:3007
 #, kde-format
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "Canvi d'operació"
 
-#: kmymoney/kmymoney.cpp:3090
+#: kmymoney/kmymoney.cpp:3092
 #, kde-format
 msgid "Unable to accept transaction"
 msgstr "No s'ha pogut acceptar l'operació"
 
-#: kmymoney/kmymoney.cpp:3130
+#: kmymoney/kmymoney.cpp:3132
 #, kde-format
 msgid ""
 "KMyMoney has detected some overdue scheduled transactions for the account <b>"
@@ -5509,12 +5509,12 @@ msgstr ""
 "El KMyMoney ha detectat algunes operacions planificades endarrerides per al "
 "compte <b>%1</b>. Voleu introduir ara aquestes operacions planificades?"
 
-#: kmymoney/kmymoney.cpp:3133 kmymoney/views/kscheduledview.cpp:134
+#: kmymoney/kmymoney.cpp:3135 kmymoney/views/kscheduledview.cpp:134
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "S'han trobat operacions planificades"
 
-#: kmymoney/kmymoney.cpp:3208
+#: kmymoney/kmymoney.cpp:3210
 #, kde-format
 msgid ""
 "<qt>You have closed this account. It remains in the system because you have "
@@ -5527,81 +5527,81 @@ msgstr ""
 "a fer-lo visible anant al menú «Visualitza» i seleccionat <b>Mostra tots els "
 "comptes</b>.</qt>"
 
-#: kmymoney/kmymoney.cpp:3210
+#: kmymoney/kmymoney.cpp:3212
 #, kde-format
 msgid "Information"
 msgstr "Informació"
 
-#: kmymoney/kmymoney.cpp:3314 kmymoney/kmymoney.cpp:3410
+#: kmymoney/kmymoney.cpp:3316 kmymoney/kmymoney.cpp:3412
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "No s'ha obert cap fitxer del KMyMoney"
 
-#: kmymoney/kmymoney.cpp:3347 kmymoney/kmymoney.cpp:3349
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1360
+#: kmymoney/kmymoney.cpp:3349 kmymoney/kmymoney.cpp:3351
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1364
 #: kmymoney/plugins/xml/xmlstorage.cpp:412
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "Preparat."
 
-#: kmymoney/kmymoney.cpp:3414
+#: kmymoney/kmymoney.cpp:3416
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "Visualitzant les dades personals..."
 
-#: kmymoney/kmymoney.cpp:3421
+#: kmymoney/kmymoney.cpp:3423
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "Editeu les dades personals"
 
-#: kmymoney/kmymoney.cpp:3436
+#: kmymoney/kmymoney.cpp:3438
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr "No s'ha pogut emmagatzemar la informació de l'usuari: %1"
 
-#: kmymoney/kmymoney.cpp:3444
+#: kmymoney/kmymoney.cpp:3446
 #, kde-format
 msgid "Importing account templates."
 msgstr "S'estan important plantilles de comptes."
 
-#: kmymoney/kmymoney.cpp:3458
+#: kmymoney/kmymoney.cpp:3460
 #, kde-format
 msgid "Unable to import template(s)"
 msgstr "No s'ha pogut importar la/es plantilla/es"
 
-#: kmymoney/kmymoney.cpp:3466
+#: kmymoney/kmymoney.cpp:3468
 #, kde-format
 msgid "Exporting account templates."
 msgstr "S'estan exportant les plantilles de comptes."
 
-#: kmymoney/kmymoney.cpp:3472
+#: kmymoney/kmymoney.cpp:3474
 #, kde-format
 msgid "Save as..."
 msgstr "Desa com a..."
 
-#: kmymoney/kmymoney.cpp:3473
+#: kmymoney/kmymoney.cpp:3475
 #, kde-format
 msgid "KMyMoney template files (*.kmt);;All files (*)"
 msgstr "Fitxers de plantilla del KMyMoney (*.kmt);;Tots els fitxers (*)"
 
-#: kmymoney/kmymoney.cpp:3504
+#: kmymoney/kmymoney.cpp:3506
 #, kde-format
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "Exportació de plantilla"
 
-#: kmymoney/kmymoney.cpp:3522
+#: kmymoney/kmymoney.cpp:3524
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr "El fitxer <b>%1</b> ja existeix. Realment voleu sobreescriure'l?"
 
-#: kmymoney/kmymoney.cpp:3524 kmymoney/plugins/csv/export/csvexporter.cpp:102
+#: kmymoney/kmymoney.cpp:3526 kmymoney/plugins/csv/export/csvexporter.cpp:102
 #, kde-format
 msgid "File already exists"
 msgstr "El fitxer ja existeix"
 
-#: kmymoney/kmymoney.cpp:3646
+#: kmymoney/kmymoney.cpp:3648
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
@@ -5610,13 +5610,13 @@ msgstr ""
 "Primer cal desar el fitxer abans que es pugui fer la còpia de seguretat. "
 "Voleu continuar?"
 
-#: kmymoney/kmymoney.cpp:3648
+#: kmymoney/kmymoney.cpp:3650
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr "Confirmació de còpia de seguretat"
 
-#: kmymoney/kmymoney.cpp:3665
+#: kmymoney/kmymoney.cpp:3667
 #, kde-format
 msgid ""
 "The current implementation of the backup functionality only supports local "
@@ -5625,71 +5625,71 @@ msgstr ""
 "La implementació actual de la funcionalitat de còpia de seguretat només "
 "permet fitxers locals com a origen. L'actual fitxer d'origen és «%1»."
 
-#: kmymoney/kmymoney.cpp:3667
+#: kmymoney/kmymoney.cpp:3669
 #, kde-format
 msgid "Local files only"
 msgstr "Només fitxers locals"
 
-#: kmymoney/kmymoney.cpp:3706
+#: kmymoney/kmymoney.cpp:3708
 #, kde-format
 msgid "Mounting %1"
 msgstr "S'està muntant %1"
 
-#: kmymoney/kmymoney.cpp:3740
+#: kmymoney/kmymoney.cpp:3742
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr ""
 "El fitxer de còpia de seguretat d'avui existeix en aquest dispositiu. El "
 "substitueixo?"
 
-#: kmymoney/kmymoney.cpp:3740
+#: kmymoney/kmymoney.cpp:3742
 #, kde-format
 msgid "&Replace"
 msgstr "&Substitueix"
 
-#: kmymoney/kmymoney.cpp:3748
+#: kmymoney/kmymoney.cpp:3750
 #, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
 msgstr "No s'ha pogut crear el directori de còpies de seguretat «%1»."
 
-#: kmymoney/kmymoney.cpp:3753
+#: kmymoney/kmymoney.cpp:3755
 #, kde-format
 msgid "Writing %1"
 msgstr "S'està escrivint %1"
 
-#: kmymoney/kmymoney.cpp:3774
+#: kmymoney/kmymoney.cpp:3776
 #, kde-format
 msgid "Unmounting %1"
 msgstr "S'està desmuntant %1"
 
-#: kmymoney/kmymoney.cpp:3811
+#: kmymoney/kmymoney.cpp:3813
 #, kde-format
 msgid "Error mounting device"
 msgstr "Error en muntar el dispositiu"
 
-#: kmymoney/kmymoney.cpp:3826 kmymoney/kmymoney.cpp:3845
+#: kmymoney/kmymoney.cpp:3828 kmymoney/kmymoney.cpp:3847
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "Fet"
 
-#: kmymoney/kmymoney.cpp:3827 kmymoney/kmymoney.cpp:3847
+#: kmymoney/kmymoney.cpp:3829 kmymoney/kmymoney.cpp:3849
 #, kde-format
 msgid "File successfully backed up"
 msgstr "S'ha efectuat correctament la còpia de seguretat del fitxer"
 
-#: kmymoney/kmymoney.cpp:3833
+#: kmymoney/kmymoney.cpp:3835
 #, kde-format
 msgid "Error copying file to device"
 msgstr "Error en copiar el fitxer al dispositiu"
 
-#: kmymoney/kmymoney.cpp:3849
+#: kmymoney/kmymoney.cpp:3851
 #, kde-format
 msgid "Error unmounting device"
 msgstr "Error en desmuntar el dispositiu"
 
-#: kmymoney/kmymoney.cpp:3896
+#: kmymoney/kmymoney.cpp:3898
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5706,29 +5706,29 @@ msgstr ""
 "Si us plau, premeu «No» per a deixar el total com %2.\n"
 "Si us plau, premeu «Cancel·lar» per a interrompre la creació del compte."
 
-#: kmymoney/kmymoney.cpp:3906
+#: kmymoney/kmymoney.cpp:3908
 #, kde-format
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "Obertura de saldo de passiu"
 
-#: kmymoney/kmymoney.cpp:3917
+#: kmymoney/kmymoney.cpp:3919
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "No s'ha pogut afegir el compte: %1"
 
-#: kmymoney/kmymoney.cpp:4041
+#: kmymoney/kmymoney.cpp:4043
 #, kde-format
 msgid "Running consistency check..."
 msgstr "S'està executant la comprovació de coherència..."
 
-#: kmymoney/kmymoney.cpp:4048
+#: kmymoney/kmymoney.cpp:4050
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "La comprovació de coherència ha fallat: %1"
 
-#: kmymoney/kmymoney.cpp:4058
+#: kmymoney/kmymoney.cpp:4060
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -5737,7 +5737,7 @@ msgstr ""
 "La comprovació de coherència no ha trobat cap problema a les dades. "
 "Seguidament es mostren els detalls."
 
-#: kmymoney/kmymoney.cpp:4060
+#: kmymoney/kmymoney.cpp:4062
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5748,29 +5748,29 @@ msgstr ""
 "Seguidament es mostren els detalls. Aquests problemes no s'han pogut "
 "corregir automàticament i cal que l'usuari els resolgui."
 
-#: kmymoney/kmymoney.cpp:4063
+#: kmymoney/kmymoney.cpp:4065
 #, kde-format
 msgid "Consistency check result"
 msgstr "Resultat de la comprovació de coherència"
 
-#: kmymoney/kmymoney.cpp:4129
+#: kmymoney/kmymoney.cpp:4131
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "S'estan verificant les operacions planificades endarrerides..."
 
-#: kmymoney/kmymoney.cpp:4319
+#: kmymoney/kmymoney.cpp:4321
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr ""
 "Primer cal seleccionar un fitxer del KMyMoney abans d'importar un extracte."
 
-#: kmymoney/kmymoney.cpp:4324
+#: kmymoney/kmymoney.cpp:4326
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Importació d'un extracte via Web Connect"
 
-#: kmymoney/kmymoney.cpp:4336
+#: kmymoney/kmymoney.cpp:4338
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5780,68 +5780,68 @@ msgstr ""
 "No s'ha pogut importar %1 usant el connector %2. El connector ha retornat "
 "l'error següent: %3"
 
-#: kmymoney/kmymoney.cpp:4336 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
+#: kmymoney/kmymoney.cpp:4338 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
 #, kde-format
 msgid "Importing error"
 msgstr "Error d'importació"
 
-#: kmymoney/kmymoney.cpp:4363
+#: kmymoney/kmymoney.cpp:4365
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "S'han activat tots els missatges."
 
-#: kmymoney/kmymoney.cpp:4363
+#: kmymoney/kmymoney.cpp:4365
 #, kde-format
 msgid "All messages"
 msgstr "Tots els missatges"
 
-#: kmymoney/kmymoney.cpp:4399
+#: kmymoney/kmymoney.cpp:4401
 #, kde-format
 msgid "Auto saving..."
 msgstr "S'està desant automàticament..."
 
-#: kmymoney/kmymoney.cpp:4519
+#: kmymoney/kmymoney.cpp:4521
 #, kde-format
 msgid "Creating new document..."
 msgstr "S'està creant un document nou..."
 
-#: kmymoney/kmymoney.cpp:4579
+#: kmymoney/kmymoney.cpp:4581
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "No s'ha pogut crear un fitxer nou."
 
-#: kmymoney/kmymoney.cpp:4590
+#: kmymoney/kmymoney.cpp:4592
 #, kde-format
 msgid "Open a file."
 msgstr "Obre un fitxer."
 
-#: kmymoney/kmymoney.cpp:4604
+#: kmymoney/kmymoney.cpp:4606
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr "No s'ha pogut trobar cap connector per a obrir l'emmagatzematge."
 
-#: kmymoney/kmymoney.cpp:4608
+#: kmymoney/kmymoney.cpp:4610
 #, kde-format
 msgid "All files (*)"
 msgstr "Tots els fitxers (*)"
 
-#: kmymoney/kmymoney.cpp:4621
+#: kmymoney/kmymoney.cpp:4623
 #, kde-format
 msgid "Loading file..."
 msgstr "S'està carregant el fitxer..."
 
-#: kmymoney/kmymoney.cpp:4627
+#: kmymoney/kmymoney.cpp:4629
 #, kde-format
 msgid "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
 msgstr ""
 "<p>El fitxer <b>%1</b> ja està obert en una altra instància del KMyMoney</p>"
 
-#: kmymoney/kmymoney.cpp:4627
+#: kmymoney/kmymoney.cpp:4629
 #, kde-format
 msgid "Duplicate open"
 msgstr "Obertura duplicada"
 
-#: kmymoney/kmymoney.cpp:4634
+#: kmymoney/kmymoney.cpp:4636
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5850,17 +5850,17 @@ msgstr ""
 "<p><b>%1</b> és un nom de fitxer no vàlid o el fitxer no existeix. Podeu "
 "obrir un altre fitxer o crear-ne un de nou.</p>"
 
-#: kmymoney/kmymoney.cpp:4634
+#: kmymoney/kmymoney.cpp:4636
 #, kde-format
 msgid "File not found"
 msgstr "No s'ha trobat el fitxer"
 
-#: kmymoney/kmymoney.cpp:4661
+#: kmymoney/kmymoney.cpp:4663
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "No s'ha pogut obrir el fitxer tal com s'ha sol·licitat."
 
-#: kmymoney/kmymoney.cpp:4667
+#: kmymoney/kmymoney.cpp:4669
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -5869,32 +5869,32 @@ msgstr ""
 "No s'ha pogut llegir la font de dades. Verifiqueu a les opcions de "
 "configuració del KMyMoney que el connector necessari està activat."
 
-#: kmymoney/kmymoney.cpp:4677
+#: kmymoney/kmymoney.cpp:4679
 #, kde-format
 msgid "Saving file..."
 msgstr "S'està desant el fitxer..."
 
-#: kmymoney/kmymoney.cpp:4689
+#: kmymoney/kmymoney.cpp:4691
 #, kde-format
 msgid "Failed to save your data."
 msgstr "Ha fallat en desar les dades."
 
-#: kmymoney/kmymoney.cpp:4695
+#: kmymoney/kmymoney.cpp:4697
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr "No s'ha pogut trobar cap connector adequat per a desar les dades."
 
-#: kmymoney/kmymoney.cpp:4701
+#: kmymoney/kmymoney.cpp:4703
 #, kde-format
 msgid "Saving file as...."
 msgstr "S'està desant el fitxer com a..."
 
-#: kmymoney/kmymoney.cpp:4717
+#: kmymoney/kmymoney.cpp:4719
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr "No s'ha pogut trobar cap connector per a desar les dades."
 
-#: kmymoney/kmymoney.cpp:4746
+#: kmymoney/kmymoney.cpp:4748
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "Ha fallat en desar l'emmagatzematge."
@@ -5908,7 +5908,7 @@ msgstr "&Importa"
 #. i18n: ectx: Menu (export)
 #. i18n: ectx: property (text), widget (QToolButton, buttonExport)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonOk)
-#: kmymoney/kmymoneyui.rc:15 kmymoney/plugins/csv/export/csvexportdlg.cpp:92
+#: kmymoney/kmymoneyui.rc:15 kmymoney/plugins/csv/export/csvexportdlg.cpp:94
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:317
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:410
@@ -6101,7 +6101,7 @@ msgstr "Actius i Passius"
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:68
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1569
+#: kmymoney/views/khomeview_p.h:1571
 #, kde-format
 msgid "Budget"
 msgstr "Pressupost"
@@ -6635,73 +6635,73 @@ msgctxt "Account type"
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:1263 kmymoney/mymoney/mymoneyfile.cpp:1264
+#: kmymoney/mymoney/mymoneyfile.cpp:1264 kmymoney/mymoney/mymoneyfile.cpp:1265
 #, kde-format
 msgid "Loan payout"
 msgstr "Pagament de préstec"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2401 kmymoney/mymoney/mymoneyfile.cpp:2430
-#: kmymoney/mymoney/mymoneyfile.cpp:2449 kmymoney/mymoney/mymoneyfile.cpp:2463
-#: kmymoney/mymoney/mymoneyfile.cpp:2486 kmymoney/mymoney/mymoneyfile.cpp:2507
-#: kmymoney/mymoney/mymoneyfile.cpp:2527
+#: kmymoney/mymoney/mymoneyfile.cpp:2402 kmymoney/mymoney/mymoneyfile.cpp:2431
+#: kmymoney/mymoney/mymoneyfile.cpp:2450 kmymoney/mymoney/mymoneyfile.cpp:2464
+#: kmymoney/mymoney/mymoneyfile.cpp:2487 kmymoney/mymoney/mymoneyfile.cpp:2508
+#: kmymoney/mymoney/mymoneyfile.cpp:2528
 #, kde-format
 msgid "* Problem with account '%1'"
 msgstr "* Problema amb el compte «%1»"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2402
+#: kmymoney/mymoney/mymoneyfile.cpp:2403
 #, kde-format
 msgid "  * Loop detected between this account and account '%1'."
 msgstr "  * S'ha detectat un bucle entre aquest compte i el compte «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2403
+#: kmymoney/mymoney/mymoneyfile.cpp:2404
 #, kde-format
 msgid "    Reparenting account '%2' to top level account '%1'."
 msgstr ""
 "    S'està tornant a vincular el compte «%2» amb el compte de nivell "
 "superior «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2435
+#: kmymoney/mymoney/mymoneyfile.cpp:2436
 #, kde-format
 msgid "  * Parent account '%1' belongs to a different group."
 msgstr "  * El compte pare «%1» pertany a un grup diferent."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2436 kmymoney/mymoney/mymoneyfile.cpp:2466
+#: kmymoney/mymoney/mymoneyfile.cpp:2437 kmymoney/mymoney/mymoneyfile.cpp:2467
 #, kde-format
 msgid "    New parent account is the top level account '%1'."
 msgstr "    El compte pare nou és el compte de primer nivell «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2452
+#: kmymoney/mymoney/mymoneyfile.cpp:2453
 #, kde-format
 msgid "  * Parent account '%1' does not contain '%2' as sub-account."
 msgstr "  * El compte pare «%1» no conté «%2» com a subcompte."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2465
+#: kmymoney/mymoney/mymoneyfile.cpp:2466
 #, kde-format
 msgid "  * The parent with id %1 does not exist anymore."
 msgstr "  * El pare amb ID %1 ja no existeix més."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2488
+#: kmymoney/mymoney/mymoneyfile.cpp:2489
 #, kde-format
 msgid "  * Child account with id %1 does not exist anymore."
 msgstr "  * El compte fill amb ID %1 ja no existeix més."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2489
+#: kmymoney/mymoney/mymoneyfile.cpp:2490
 #, kde-format
 msgid "    The child account list will be reconstructed."
 msgstr "    La llista de comptes fills es reconstruirà."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2509
+#: kmymoney/mymoney/mymoneyfile.cpp:2510
 #, kde-format
 msgid "  * The payee with id %1 referenced by the loan does not exist anymore."
 msgstr ""
 "  * El beneficiari amb ID %1 és referenciat pel préstec que ja no existeix."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2510
+#: kmymoney/mymoney/mymoneyfile.cpp:2511
 #, kde-format
 msgid "    The payee will be removed."
 msgstr "    El beneficiari s'eliminarà."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2529
+#: kmymoney/mymoney/mymoneyfile.cpp:2530
 #, kde-format
 msgid ""
 "  * Older versions of KMyMoney stored an OFX password for this account in "
@@ -6710,7 +6710,7 @@ msgstr ""
 "  * Les versions més antigues del KMyMoney emmagatzemaven una contrasenya "
 "OFX per a aquest compte en text clar."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2530
+#: kmymoney/mymoney/mymoneyfile.cpp:2531
 #, kde-format
 msgid ""
 "    Please open it in the account editor (Account/Edit account) once and "
@@ -6719,7 +6719,7 @@ msgstr ""
 "    Obriu-lo en l'editor de comptes (Compte/Edita el compte) una vegada i "
 "premeu «D'acord»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2531
+#: kmymoney/mymoney/mymoneyfile.cpp:2532
 #, kde-format
 msgid ""
 "    This will store the password in the KDE wallet and remove the cleartext "
@@ -6728,57 +6728,57 @@ msgstr ""
 "    Això emmagatzemarà la contrasenya en la cartera del KDE i eliminarà la "
 "versió de text en clar."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2541
+#: kmymoney/mymoney/mymoneyfile.cpp:2542
 #, kde-format
 msgid "  * Unable to update account data in engine."
 msgstr "  * No s'han pogut actualitzar les dades del compte en el motor."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2548
+#: kmymoney/mymoney/mymoneyfile.cpp:2549
 #, kde-format
 msgid "* Reconstructing the child lists for"
 msgstr "* S'estan reconstruint les llistes de fills per a"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2581
+#: kmymoney/mymoney/mymoneyfile.cpp:2582
 #, kde-format
 msgid "  * Unable to update account data for account %1 in engine"
 msgstr ""
 "  * No s'han pogut actualitzar les dades del compte per al compte %1 en el "
 "motor"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2599
+#: kmymoney/mymoney/mymoneyfile.cpp:2600
 #, kde-format
 msgid "  * Payee %1 recreated with fixed id"
 msgstr "  * El beneficiari %1 s'ha tornat a crear amb un ID esmenat"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2627
+#: kmymoney/mymoney/mymoneyfile.cpp:2628
 #, kde-format
 msgid "* Problems with transactions"
 msgstr "* Problemes amb les operacions"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2638
+#: kmymoney/mymoney/mymoneyfile.cpp:2639
 #, kde-format
 msgid "  * Removed unused match information from transaction '%1'."
 msgstr "  * S'ha eliminat la informació de liquidada de l'operació «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2645
+#: kmymoney/mymoney/mymoneyfile.cpp:2646
 #, kde-format
 msgid "  * Sum of splits in transaction '%1' posted on %2 is not zero."
 msgstr ""
 "  * La suma dels desglossaments de l'operació «%1» publicada a %2 no és zero."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2651
+#: kmymoney/mymoney/mymoneyfile.cpp:2652
 #, kde-format
 msgid "    Account: %1, Amount: %2"
 msgstr "    Compte: %1, Import: %2"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2662
+#: kmymoney/mymoney/mymoneyfile.cpp:2663
 #, kde-format
 msgid "  * Payee id updated in split of transaction '%1'."
 msgstr ""
 "  * L'ID del beneficiari s'ha actualitzat en el desglossament de l'operació "
 "«%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2684
+#: kmymoney/mymoney/mymoneyfile.cpp:2685
 #, kde-format
 msgid ""
 "  * Opening date of Account '%1' cannot be changed to support transaction "
@@ -6787,7 +6787,7 @@ msgstr ""
 "  * La data d'obertura del compte «%1» no es pot canviar per a permetre la "
 "data de situació «%2» de l'operació."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2692
+#: kmymoney/mymoney/mymoneyfile.cpp:2693
 #, kde-format
 msgid ""
 "  * Transaction '%1' post date '%2' is older than opening date '%4' of "
@@ -6796,24 +6796,24 @@ msgstr ""
 "  * L'operació «%1» té una data de situació «%2» anterior a la data "
 "d'obertura «%4» del compte «%3»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2697
+#: kmymoney/mymoney/mymoneyfile.cpp:2698
 #, kde-format
 msgid "    Account opening date updated."
 msgstr "    S'ha actualitzat la data d'obertura del compte."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2711
+#: kmymoney/mymoney/mymoneyfile.cpp:2712
 #, kde-format
 msgid "  * shares set to value in split of transaction '%1'."
 msgstr ""
 "  * Accions establertes a valor en el desglossament de l'operació «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2714
+#: kmymoney/mymoney/mymoneyfile.cpp:2715
 #, kde-format
 msgid "  * value set to shares in split of transaction '%1'."
 msgstr ""
 "  * Valors establerts a accions en el desglossament de l'operació «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2723
+#: kmymoney/mymoney/mymoneyfile.cpp:2724
 #, kde-format
 msgid ""
 "  * Split %2 in transaction '%1' contains different signs for shares and "
@@ -6822,7 +6822,7 @@ msgstr ""
 "  * El desglossament %2 de l'operació «%1» conté signes diferents per les "
 "accions i el valor. Si us plau, arregleu-ho manualment."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2735
+#: kmymoney/mymoney/mymoneyfile.cpp:2736
 #, kde-format
 msgid ""
 "  * Split %2 in transaction '%1' contains a reference to invalid account %3. "
@@ -6831,23 +6831,23 @@ msgstr ""
 "  * El desglossament %2 de l'operació «%1» conté una referència a un compte "
 "no vàlid %3. Si us plau, arregleu-ho manualment."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2744
+#: kmymoney/mymoney/mymoneyfile.cpp:2745
 #, kde-format
 msgid "  * action marked as interest in split of transaction '%1'."
 msgstr ""
 "  * Acció marcada com a interès en el desglossament de l'operació «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2758
+#: kmymoney/mymoney/mymoneyfile.cpp:2759
 #, kde-format
 msgid "  * Transaction '%1' has an invalid post date."
 msgstr "  * L'operació «%1» té una data de situació no vàlida."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2759
+#: kmymoney/mymoney/mymoneyfile.cpp:2760
 #, kde-format
 msgid "    The post date was updated to '%1'."
 msgstr "    La data de situació s'ha actualitzat a «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2793
+#: kmymoney/mymoney/mymoneyfile.cpp:2794
 #, kde-format
 msgid ""
 "  * Transaction '%1' has a post date '%2' before one of the referenced "
@@ -6856,24 +6856,24 @@ msgstr ""
 "  * L'operació «%1» té una data de situació «%2» anterior a la data "
 "d'obertura del compte de referència."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2796
+#: kmymoney/mymoney/mymoneyfile.cpp:2797
 #, kde-format
 msgid "    Referenced accounts: %1"
 msgstr "    Comptes referenciats: %1"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2797
+#: kmymoney/mymoney/mymoneyfile.cpp:2798
 #, kde-format
 msgid "    The post date was not updated to '%1'."
 msgstr "    La data de situació no s'ha actualitzat a «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2823
+#: kmymoney/mymoney/mymoneyfile.cpp:2824
 #, kde-format
 msgid "  * Payee id updated in split of schedule '%1'."
 msgstr ""
 "  * L'ID del beneficiari s'ha actualitzat en el desglossament de la "
 "planificació «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2829
+#: kmymoney/mymoney/mymoneyfile.cpp:2830
 #, kde-format
 msgid ""
 "  * Split in scheduled transaction '%1' contained value != 0 and shares == 0."
@@ -6881,31 +6881,31 @@ msgstr ""
 "  * El desglossament de l'operació planificada «%1» conté el valor != 0 i "
 "accions == 0."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2830
+#: kmymoney/mymoney/mymoneyfile.cpp:2831
 #, kde-format
 msgid "    Shares set to value."
 msgstr "    Accions establertes a valor."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2838
+#: kmymoney/mymoney/mymoneyfile.cpp:2839
 #, kde-format
 msgid "  * Removed bankid from split in scheduled transaction '%1'."
 msgstr ""
 "  * S'ha eliminat l'ID del banc del desglossament en l'operació planificada "
 "«%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2851
+#: kmymoney/mymoney/mymoneyfile.cpp:2852
 #, kde-format
 msgid "  * shares set to value in split in schedule '%1'."
 msgstr ""
 "  * Accions establertes a valor en el desglossament de la planificació «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2854
+#: kmymoney/mymoney/mymoneyfile.cpp:2855
 #, kde-format
 msgid "  * value set to shares in split in schedule '%1'."
 msgstr ""
 "  * Valors establerts a accions en el desglossament de planificació «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2860
+#: kmymoney/mymoney/mymoneyfile.cpp:2861
 #, kde-format
 msgid ""
 "  * Split %2 in schedule '%1' contains a reference to invalid account %3. "
@@ -6914,28 +6914,28 @@ msgstr ""
 "  * El desglossament %2 de la planificació «%1» conté una referència a un "
 "compte no vàlid %3. Si us plau, arregleu-ho manualment."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2869
+#: kmymoney/mymoney/mymoneyfile.cpp:2870
 #, kde-format
 msgid "  * Imported flag removed from schedule '%1'"
 msgstr "  * L'indicador d'importada s'ha eliminat de la planificació «%1»"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2889
+#: kmymoney/mymoney/mymoneyfile.cpp:2890
 #, kde-format
 msgid "  * Payee id updated in report '%1'."
 msgstr "  * L'ID del beneficiari s'ha actualitzat en l'informe «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2906
+#: kmymoney/mymoney/mymoneyfile.cpp:2907
 #, kde-format
 msgid "  * Payee '%1' removed."
 msgstr "  * S'ha eliminat el beneficiari «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2980
+#: kmymoney/mymoney/mymoneyfile.cpp:2981
 #, kde-format
 msgctxt "@info consistency check"
 msgid "* Potential problem with securities/currencies"
 msgstr "* Problema potencial amb els títols/divises"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2985
+#: kmymoney/mymoney/mymoneyfile.cpp:2986
 #, kde-format
 msgctxt "@info consistency check"
 msgid ""
@@ -6945,20 +6945,20 @@ msgstr ""
 "  * El compte «%1» en la divisa «%2» no té preu establert per a la data del "
 "seu primer ús «%3»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2990
+#: kmymoney/mymoney/mymoneyfile.cpp:2991
 #, kde-format
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the currency on or before '%1'."
 msgstr "    Introduïu un preu per al títol en o abans de «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2995
+#: kmymoney/mymoney/mymoneyfile.cpp:2996
 #, kde-format
 msgctxt "@info consistency check"
 msgid "  * The security '%1' has no price set for the first use on '%2'."
 msgstr ""
 "  * El títol «%1» no té preu establert per a la data del primer ús «%2»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3006
+#: kmymoney/mymoney/mymoneyfile.cpp:3007
 #, kde-format
 msgctxt "@info consistency check"
 msgid ""
@@ -6968,49 +6968,49 @@ msgstr ""
 "    El preu del títol s'ha extret de l'operació i s'ha afegit a l'historial "
 "de preus."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3009
+#: kmymoney/mymoney/mymoneyfile.cpp:3010
 #, kde-format
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the security on or before this date."
 msgstr "    Introduïu un preu per al títol en o abans d'aquesta data."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3031
+#: kmymoney/mymoney/mymoneyfile.cpp:3032
 #, kde-format
 msgid "* Problem with budget '%1'"
 msgstr "* Problema amb el pressupost «%1»"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3033
+#: kmymoney/mymoney/mymoneyfile.cpp:3034
 #, kde-format
 msgid ""
 "  * The account with id %1 referenced by the budget does not exist anymore."
 msgstr ""
 "  * El compte amb ID %1 que és referenciat pel pressupost ja no existeix."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3034
+#: kmymoney/mymoney/mymoneyfile.cpp:3035
 #, kde-format
 msgid "    The account reference will be removed."
 msgstr "    La referència del compte s'eliminarà."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3048
+#: kmymoney/mymoney/mymoneyfile.cpp:3049
 #, kde-format
 msgid "Finished: data is consistent."
 msgstr "Finalitzat: Les dades són compatibles."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3050
+#: kmymoney/mymoney/mymoneyfile.cpp:3051
 #, kde-format
 msgid "%1 problem corrected."
 msgid_plural "%1 problems corrected."
 msgstr[0] "%1 problema corregit."
 msgstr[1] "%1 problemes corregits."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3051
+#: kmymoney/mymoney/mymoneyfile.cpp:3052
 #, kde-format
 msgid "%1 problem still present."
 msgid_plural "%1 problems still present."
 msgstr[0] "Encara persisteix %1 problema."
 msgstr[1] "Encara persisteixen %1 problemes."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3054
+#: kmymoney/mymoney/mymoneyfile.cpp:3055
 #, kde-format
 msgctxt ""
 "%1 is a string, e.g. 7 problems corrected; %2 is a string, e.g. 3 problems "
@@ -7018,942 +7018,942 @@ msgctxt ""
 msgid "Finished: %1 %2"
 msgstr "Finalitzat: %1, %2"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3267
+#: kmymoney/mymoney/mymoneyfile.cpp:3268
 #, kde-format
 msgid "Austrian Schilling"
 msgstr "Xíling austríac"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3269
+#: kmymoney/mymoney/mymoneyfile.cpp:3270
 #, kde-format
 msgid "German Mark"
 msgstr "Marc alemany"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3271
+#: kmymoney/mymoney/mymoneyfile.cpp:3272
 #, kde-format
 msgid "French Franc"
 msgstr "Franc francès"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3273
+#: kmymoney/mymoney/mymoneyfile.cpp:3274
 #, kde-format
 msgid "Italian Lira"
 msgstr "Lira Italiana"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3275
+#: kmymoney/mymoney/mymoneyfile.cpp:3276
 #, kde-format
 msgid "Spanish Peseta"
 msgstr "Pesseta espanyola"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3277
+#: kmymoney/mymoney/mymoneyfile.cpp:3278
 #, kde-format
 msgid "Dutch Guilder"
 msgstr "Florí neerlandès"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3279
+#: kmymoney/mymoney/mymoneyfile.cpp:3280
 #, kde-format
 msgid "Belgian Franc"
 msgstr "Franc belga"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3281
+#: kmymoney/mymoney/mymoneyfile.cpp:3282
 #, kde-format
 msgid "Luxembourg Franc"
 msgstr "Franc luxemburguès"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3283
+#: kmymoney/mymoney/mymoneyfile.cpp:3284
 #, kde-format
 msgid "Portuguese Escudo"
 msgstr "Escut portuguès"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3285
+#: kmymoney/mymoney/mymoneyfile.cpp:3286
 #, kde-format
 msgid "Irish Pound"
 msgstr "Lliura irlandesa"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3287
+#: kmymoney/mymoney/mymoneyfile.cpp:3288
 #, kde-format
 msgid "Finnish Markka"
 msgstr "Marc finlandès"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3289
+#: kmymoney/mymoney/mymoneyfile.cpp:3290
 #, kde-format
 msgid "Greek Drachma"
 msgstr "Dracma grega"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3293
+#: kmymoney/mymoney/mymoneyfile.cpp:3294
 #, kde-format
 msgid "Bulgarian Lev"
 msgstr "Lev búlgar"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3296
+#: kmymoney/mymoney/mymoneyfile.cpp:3297
 #, kde-format
 msgid "Romanian Leu"
 msgstr "Leu romanès"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3299
+#: kmymoney/mymoney/mymoneyfile.cpp:3300
 #, kde-format
 msgid "Russian Ruble (old)"
 msgstr "Ruble rus (antic)"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3302
+#: kmymoney/mymoney/mymoneyfile.cpp:3303
 #, kde-format
 msgid "Slovenian Tolar"
 msgstr "Tolar eslovè"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3306
+#: kmymoney/mymoney/mymoneyfile.cpp:3307
 #, kde-format
 msgid "Turkish Lira (old)"
 msgstr "Lira turca (antiga)"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3310
+#: kmymoney/mymoney/mymoneyfile.cpp:3311
 #, kde-format
 msgid "Maltese Lira"
 msgstr "Lira maltesa"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3312
+#: kmymoney/mymoney/mymoneyfile.cpp:3313
 #, kde-format
 msgid "Cyprus Pound"
 msgstr "Lliura xipriota"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3316
+#: kmymoney/mymoney/mymoneyfile.cpp:3317
 #, kde-format
 msgid "Slovak Koruna"
 msgstr "Corona eslovaca"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3320 kmymoney/mymoney/mymoneyfile.cpp:3448
+#: kmymoney/mymoney/mymoneyfile.cpp:3321 kmymoney/mymoney/mymoneyfile.cpp:3449
 #, kde-format
 msgid "Mozambique Metical"
 msgstr "Metical de Moçambic"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3324 kmymoney/mymoney/mymoneyfile.cpp:3360
+#: kmymoney/mymoney/mymoneyfile.cpp:3325 kmymoney/mymoney/mymoneyfile.cpp:3361
 #, kde-format
 msgid "Azerbaijani Manat"
 msgstr "Manat d'Azerbaidjan"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3328
+#: kmymoney/mymoney/mymoneyfile.cpp:3329
 #, kde-format
 msgid "Lithuanian Litas"
 msgstr "Litas lituà"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3332
+#: kmymoney/mymoney/mymoneyfile.cpp:3333
 #, kde-format
 msgid "Belarusian Ruble (old)"
 msgstr "Ruble bielorús (antic)"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3336
+#: kmymoney/mymoney/mymoneyfile.cpp:3337
 #, kde-format
 msgid "Zambian Kwacha (old)"
 msgstr "Kwacha zambià (antic)"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3340
+#: kmymoney/mymoney/mymoneyfile.cpp:3341
 #, kde-format
 msgid "Croatian Kuna"
 msgstr "Kuna croat"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3350
+#: kmymoney/mymoney/mymoneyfile.cpp:3351
 #, kde-format
 msgid "Afghanistan Afghani"
 msgstr "Afghani afganès"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3351
+#: kmymoney/mymoney/mymoneyfile.cpp:3352
 #, kde-format
 msgid "Albanian Lek"
 msgstr "Lek albanès"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3352
+#: kmymoney/mymoney/mymoneyfile.cpp:3353
 #, kde-format
 msgid "Netherland Antillian Guilder"
 msgstr "Florí de les Antilles Neerlandeses"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3353
+#: kmymoney/mymoney/mymoneyfile.cpp:3354
 #, kde-format
 msgid "Algerian Dinar"
 msgstr "Dinar algerià"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3354
+#: kmymoney/mymoney/mymoneyfile.cpp:3355
 #, kde-format
 msgid "Andorran Franc"
 msgstr "Franc andorrà"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3355
+#: kmymoney/mymoney/mymoneyfile.cpp:3356
 #, kde-format
 msgid "Andorran Peseta"
 msgstr "Pesseta andorrana"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3356
+#: kmymoney/mymoney/mymoneyfile.cpp:3357
 #, kde-format
 msgid "Angolan Kwanza"
 msgstr "Kwanza d'Angola"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3357
+#: kmymoney/mymoney/mymoneyfile.cpp:3358
 #, kde-format
 msgid "Argentine Peso"
 msgstr "Peso argentí"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3358
+#: kmymoney/mymoney/mymoneyfile.cpp:3359
 #, kde-format
 msgid "Aruban Florin"
 msgstr "Florí d'Aruba"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3359
+#: kmymoney/mymoney/mymoneyfile.cpp:3360
 #, kde-format
 msgid "Australian Dollar"
 msgstr "Dòlar australià"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3361
+#: kmymoney/mymoney/mymoneyfile.cpp:3362
 #, kde-format
 msgid "Bahamian Dollar"
 msgstr "Dòlar de les Bahames"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3362
+#: kmymoney/mymoney/mymoneyfile.cpp:3363
 #, kde-format
 msgid "Bahraini Dinar"
 msgstr "Dinar de Bahrain"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3363
+#: kmymoney/mymoney/mymoneyfile.cpp:3364
 #, kde-format
 msgid "Bangladeshi Taka"
 msgstr "Taka de Bangladesh"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3364
+#: kmymoney/mymoney/mymoneyfile.cpp:3365
 #, kde-format
 msgid "Barbados Dollar"
 msgstr "Dòlar de Barbados"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3365
+#: kmymoney/mymoney/mymoneyfile.cpp:3366
 #, kde-format
 msgid "Bitcoin"
 msgstr "Bitcoin"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3366
+#: kmymoney/mymoney/mymoneyfile.cpp:3367
 #, kde-format
 msgid "Belarusian Ruble"
 msgstr "Ruble bielorús"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3367
+#: kmymoney/mymoney/mymoneyfile.cpp:3368
 #, kde-format
 msgid "Belize Dollar"
 msgstr "Dòlar de Belize"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3368
+#: kmymoney/mymoney/mymoneyfile.cpp:3369
 #, kde-format
 msgid "Bermudian Dollar"
 msgstr "Dòlar de les Bermudes"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3369
+#: kmymoney/mymoney/mymoneyfile.cpp:3370
 #, kde-format
 msgid "Bhutan Ngultrum"
 msgstr "Ngultrum de Bhutan"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3370
+#: kmymoney/mymoney/mymoneyfile.cpp:3371
 #, kde-format
 msgid "Bolivian Boliviano"
 msgstr "Boliviano de Bolívia"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3371
+#: kmymoney/mymoney/mymoneyfile.cpp:3372
 #, kde-format
 msgid "Bosnian Convertible Mark"
 msgstr "Marc convertible de Bòsnia"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3372
+#: kmymoney/mymoney/mymoneyfile.cpp:3373
 #, kde-format
 msgid "Botswana Pula"
 msgstr "Pula de Botswana"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3373
+#: kmymoney/mymoney/mymoneyfile.cpp:3374
 #, kde-format
 msgid "Brazilian Real"
 msgstr "Real brasiler"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3374
+#: kmymoney/mymoney/mymoneyfile.cpp:3375
 #, kde-format
 msgid "British Pound"
 msgstr "Lliura britànica"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3375
+#: kmymoney/mymoney/mymoneyfile.cpp:3376
 #, kde-format
 msgid "Brunei Dollar"
 msgstr "Dòlar de Brunei"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3376
+#: kmymoney/mymoney/mymoneyfile.cpp:3377
 #, kde-format
 msgid "Bulgarian Lev (new)"
 msgstr "Lev búlgar (nou)"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3377
+#: kmymoney/mymoney/mymoneyfile.cpp:3378
 #, kde-format
 msgid "Burundi Franc"
 msgstr "Franc de Burundi"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3378
+#: kmymoney/mymoney/mymoneyfile.cpp:3379
 #, kde-format
 msgid "CFA Franc BEAC"
 msgstr "Franc CFA de la BEAC"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3379
+#: kmymoney/mymoney/mymoneyfile.cpp:3380
 #, kde-format
 msgid "CFA Franc BCEAO"
 msgstr "Franc CFA de la BCEAO"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3380
+#: kmymoney/mymoney/mymoneyfile.cpp:3381
 #, kde-format
 msgid "CFP Franc Pacifique"
 msgstr "Franc CFP del Pacífic"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3381
+#: kmymoney/mymoney/mymoneyfile.cpp:3382
 #, kde-format
 msgid "Cambodia Riel"
 msgstr "Riel de Cambodja"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3382
+#: kmymoney/mymoney/mymoneyfile.cpp:3383
 #, kde-format
 msgid "Canadian Dollar"
 msgstr "Dòlar canadenc"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3383
+#: kmymoney/mymoney/mymoneyfile.cpp:3384
 #, kde-format
 msgid "Cape Verde Escudo"
 msgstr "Escut de Cap Verd"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3384
+#: kmymoney/mymoney/mymoneyfile.cpp:3385
 #, kde-format
 msgid "Cayman Islands Dollar"
 msgstr "Dòlar de les Illes Caiman"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3385
+#: kmymoney/mymoney/mymoneyfile.cpp:3386
 #, kde-format
 msgid "Chilean Peso"
 msgstr "Peso xilè"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3386
+#: kmymoney/mymoney/mymoneyfile.cpp:3387
 #, kde-format
 msgid "Chinese Yuan Renminbi"
 msgstr "Iuan Renminbi xinès"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3387
+#: kmymoney/mymoney/mymoneyfile.cpp:3388
 #, kde-format
 msgid "Colombian Peso"
 msgstr "Peso colombià"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3388
+#: kmymoney/mymoney/mymoneyfile.cpp:3389
 #, kde-format
 msgid "Comoros Franc"
 msgstr "Franc de Comores"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3389
+#: kmymoney/mymoney/mymoneyfile.cpp:3390
 #, kde-format
 msgid "Costa Rican Colon"
 msgstr "Colon costa-riqueny"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3390
+#: kmymoney/mymoney/mymoneyfile.cpp:3391
 #, kde-format
 msgid "Cuban Peso"
 msgstr "Peso cubà"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3391
+#: kmymoney/mymoney/mymoneyfile.cpp:3392
 #, kde-format
 msgid "Cuban Convertible Peso"
 msgstr "Peso cubà convertible"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3392
+#: kmymoney/mymoney/mymoneyfile.cpp:3393
 #, kde-format
 msgid "Czech Koruna"
 msgstr "Corona txeca"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3393
+#: kmymoney/mymoney/mymoneyfile.cpp:3394
 #, kde-format
 msgid "Danish Krone"
 msgstr "Corona danesa"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3394
+#: kmymoney/mymoney/mymoneyfile.cpp:3395
 #, kde-format
 msgid "Djibouti Franc"
 msgstr "Franc de Djibouti"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3395
+#: kmymoney/mymoney/mymoneyfile.cpp:3396
 #, kde-format
 msgid "Dominican Peso"
 msgstr "Peso dominicà"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3396
+#: kmymoney/mymoney/mymoneyfile.cpp:3397
 #, kde-format
 msgid "East Caribbean Dollar"
 msgstr "Dòlar del Carib Oriental"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3397
+#: kmymoney/mymoney/mymoneyfile.cpp:3398
 #, kde-format
 msgid "Egyptian Pound"
 msgstr "Lliura egípcia"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3398
+#: kmymoney/mymoney/mymoneyfile.cpp:3399
 #, kde-format
 msgid "El Salvador Colon"
 msgstr "Colon salvadorenc"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3399
+#: kmymoney/mymoney/mymoneyfile.cpp:3400
 #, kde-format
 msgid "Eritrean Nakfa"
 msgstr "Nakfa d'Eritrea"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3400
+#: kmymoney/mymoney/mymoneyfile.cpp:3401
 #, kde-format
 msgid "Estonian Kroon"
 msgstr "Corona estoniana"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3401
+#: kmymoney/mymoney/mymoneyfile.cpp:3402
 #, kde-format
 msgid "Ethiopian Birr"
 msgstr "Birr etíop"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3402
+#: kmymoney/mymoney/mymoneyfile.cpp:3403
 #, kde-format
 msgid "Euro"
 msgstr "Euro"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3403
+#: kmymoney/mymoney/mymoneyfile.cpp:3404
 #, kde-format
 msgid "Falkland Islands Pound"
 msgstr "Lliura de les Malvines"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3404
+#: kmymoney/mymoney/mymoneyfile.cpp:3405
 #, kde-format
 msgid "Fiji Dollar"
 msgstr "Dòlar de Fiji"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3405
+#: kmymoney/mymoney/mymoneyfile.cpp:3406
 #, kde-format
 msgid "Gambian Dalasi"
 msgstr "Dalasi de Gàmbia"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3406
+#: kmymoney/mymoney/mymoneyfile.cpp:3407
 #, kde-format
 msgid "Georgian Lari"
 msgstr "Lari de Geòrgia"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3407
+#: kmymoney/mymoney/mymoneyfile.cpp:3408
 #, kde-format
 msgid "Ghanaian Cedi"
 msgstr "Cedi de Ghana"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3408
+#: kmymoney/mymoney/mymoneyfile.cpp:3409
 #, kde-format
 msgid "Gibraltar Pound"
 msgstr "Lliura de Gibraltar"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3409
+#: kmymoney/mymoney/mymoneyfile.cpp:3410
 #, kde-format
 msgid "Guatemalan Quetzal"
 msgstr "Quetzal de Guatemala"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3410
+#: kmymoney/mymoney/mymoneyfile.cpp:3411
 #, kde-format
 msgid "Guinea-Bissau Peso"
 msgstr "Pes de Guinea Bissau"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3411
+#: kmymoney/mymoney/mymoneyfile.cpp:3412
 #, kde-format
 msgid "Guyanan Dollar"
 msgstr "Dòlar de Guyana"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3412
+#: kmymoney/mymoney/mymoneyfile.cpp:3413
 #, kde-format
 msgid "Haitian Gourde"
 msgstr "Gourde d'Haití"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3413
+#: kmymoney/mymoney/mymoneyfile.cpp:3414
 #, kde-format
 msgid "Honduran Lempira"
 msgstr "Lempira d'Hondures"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3414
+#: kmymoney/mymoney/mymoneyfile.cpp:3415
 #, kde-format
 msgid "Hong Kong Dollar"
 msgstr "Dòlar de Hong Kong"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3415
+#: kmymoney/mymoney/mymoneyfile.cpp:3416
 #, kde-format
 msgid "Hungarian Forint"
 msgstr "Fòrint hongarès"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3416
+#: kmymoney/mymoney/mymoneyfile.cpp:3417
 #, kde-format
 msgid "Iceland Krona"
 msgstr "Corona islandesa"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3417
+#: kmymoney/mymoney/mymoneyfile.cpp:3418
 #, kde-format
 msgid "Indian Rupee"
 msgstr "Rupia índia"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3418
+#: kmymoney/mymoney/mymoneyfile.cpp:3419
 #, kde-format
 msgid "Indonesian Rupiah"
 msgstr "Rupia d'Indonèsia"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3419
+#: kmymoney/mymoney/mymoneyfile.cpp:3420
 #, kde-format
 msgid "Iranian Rial"
 msgstr "Rial iranià"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3420
+#: kmymoney/mymoney/mymoneyfile.cpp:3421
 #, kde-format
 msgid "Iraqi Dinar"
 msgstr "Dinar iraquià"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3421
+#: kmymoney/mymoney/mymoneyfile.cpp:3422
 #, kde-format
 msgid "Israeli New Shekel"
 msgstr "Xéquel israelià nou"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3422
+#: kmymoney/mymoney/mymoneyfile.cpp:3423
 #, kde-format
 msgid "Jamaican Dollar"
 msgstr "Dòlar jamaicà"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3423
+#: kmymoney/mymoney/mymoneyfile.cpp:3424
 #, kde-format
 msgid "Japanese Yen"
 msgstr "Ien japonès"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3424
+#: kmymoney/mymoney/mymoneyfile.cpp:3425
 #, kde-format
 msgid "Jordanian Dinar"
 msgstr "Dinar jordà"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3425
+#: kmymoney/mymoney/mymoneyfile.cpp:3426
 #, kde-format
 msgid "Kazakhstan Tenge"
 msgstr "Tenge de Kazakhstan"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3426
+#: kmymoney/mymoney/mymoneyfile.cpp:3427
 #, kde-format
 msgid "Kenyan Shilling"
 msgstr "Xíling kenyà"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3427
+#: kmymoney/mymoney/mymoneyfile.cpp:3428
 #, kde-format
 msgid "Kuwaiti Dinar"
 msgstr "Dinar kuwaitià"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3428
+#: kmymoney/mymoney/mymoneyfile.cpp:3429
 #, kde-format
 msgid "Kyrgyzstan Som"
 msgstr "Som de Kirguizistan"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3429
+#: kmymoney/mymoney/mymoneyfile.cpp:3430
 #, kde-format
 msgid "Laos Kip"
 msgstr "Kip de Laos"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3430
+#: kmymoney/mymoney/mymoneyfile.cpp:3431
 #, kde-format
 msgid "Latvian Lats"
 msgstr "Lats letó"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3431
+#: kmymoney/mymoney/mymoneyfile.cpp:3432
 #, kde-format
 msgid "Lebanese Pound"
 msgstr "Lliura libanesa"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3432
+#: kmymoney/mymoney/mymoneyfile.cpp:3433
 #, kde-format
 msgid "Lesotho Loti"
 msgstr "Loti de Lesotho"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3433
+#: kmymoney/mymoney/mymoneyfile.cpp:3434
 #, kde-format
 msgid "Liberian Dollar"
 msgstr "Dòlar liberià"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3434
+#: kmymoney/mymoney/mymoneyfile.cpp:3435
 #, kde-format
 msgid "Libyan Dinar"
 msgstr "Dinar libi"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3435
+#: kmymoney/mymoney/mymoneyfile.cpp:3436
 #, kde-format
 msgid "Macau Pataca"
 msgstr "Pataca de Macau"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3436
+#: kmymoney/mymoney/mymoneyfile.cpp:3437
 #, kde-format
 msgid "Macedonian Denar"
 msgstr "Denar macedoni"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3437
+#: kmymoney/mymoney/mymoneyfile.cpp:3438
 #, kde-format
 msgid "Malagasy Franc"
 msgstr "Franc malgaix"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3438
+#: kmymoney/mymoney/mymoneyfile.cpp:3439
 #, kde-format
 msgid "Malawi Kwacha"
 msgstr "Kwacha malawià"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3439
+#: kmymoney/mymoney/mymoneyfile.cpp:3440
 #, kde-format
 msgid "Malaysian Ringgit"
 msgstr "Ringgit de Malàisia"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3440
+#: kmymoney/mymoney/mymoneyfile.cpp:3441
 #, kde-format
 msgid "Maldive Rufiyaa"
 msgstr "Rupia de les Maldives"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3441
+#: kmymoney/mymoney/mymoneyfile.cpp:3442
 #, kde-format
 msgid "Mali Republic Franc"
 msgstr "Franc de la República de Mali"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3442
+#: kmymoney/mymoney/mymoneyfile.cpp:3443
 #, kde-format
 msgid "Mauritanian Ouguiya"
 msgstr "Ouguiya de Mauritània"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3443
+#: kmymoney/mymoney/mymoneyfile.cpp:3444
 #, kde-format
 msgid "Mauritius Rupee"
 msgstr "Rupia mauriciana"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3444
+#: kmymoney/mymoney/mymoneyfile.cpp:3445
 #, kde-format
 msgid "Mexican Peso"
 msgstr "Peso mexicà"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3445
+#: kmymoney/mymoney/mymoneyfile.cpp:3446
 #, kde-format
 msgid "Moldavian Leu"
 msgstr "Leu moldau"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3446
+#: kmymoney/mymoney/mymoneyfile.cpp:3447
 #, kde-format
 msgid "Mongolian Tugrik"
 msgstr "Tugrik de Mongòlia"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3447
+#: kmymoney/mymoney/mymoneyfile.cpp:3448
 #, kde-format
 msgid "Moroccan Dirham"
 msgstr "Dírham marroquí"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3449
+#: kmymoney/mymoney/mymoneyfile.cpp:3450
 #, kde-format
 msgid "Myanmar Kyat"
 msgstr "Kyat de Myanmar"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3450
+#: kmymoney/mymoney/mymoneyfile.cpp:3451
 #, kde-format
 msgid "Namibian Dollar"
 msgstr "Dòlar namibià"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3451
+#: kmymoney/mymoney/mymoneyfile.cpp:3452
 #, kde-format
 msgid "Nepalese Rupee"
 msgstr "Rupia nepalesa"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3452
+#: kmymoney/mymoney/mymoneyfile.cpp:3453
 #, kde-format
 msgid "New Zealand Dollar"
 msgstr "Dòlar neozelandès"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3453
+#: kmymoney/mymoney/mymoneyfile.cpp:3454
 #, kde-format
 msgid "Nicaraguan Cordoba Oro"
 msgstr "Córdoba Or de Nicaragua"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3454
+#: kmymoney/mymoney/mymoneyfile.cpp:3455
 #, kde-format
 msgid "Nigerian Naira"
 msgstr "Naira de Nigèria"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3455
+#: kmymoney/mymoney/mymoneyfile.cpp:3456
 #, kde-format
 msgid "North Korean Won"
 msgstr "Won nord-coreà"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3456
+#: kmymoney/mymoney/mymoneyfile.cpp:3457
 #, kde-format
 msgid "Norwegian Kroner"
 msgstr "Corona noruega"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3457
+#: kmymoney/mymoney/mymoneyfile.cpp:3458
 #, kde-format
 msgid "Omani Rial"
 msgstr "Rial omanita"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3458
+#: kmymoney/mymoney/mymoneyfile.cpp:3459
 #, kde-format
 msgid "Pakistan Rupee"
 msgstr "Rupia pakistanesa"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3459
+#: kmymoney/mymoney/mymoneyfile.cpp:3460
 #, kde-format
 msgid "Panamanian Balboa"
 msgstr "Balboa de Panamà"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3460
+#: kmymoney/mymoney/mymoneyfile.cpp:3461
 #, kde-format
 msgid "Papua New Guinea Kina"
 msgstr "Kina de Papua Nova Guinea"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3461
+#: kmymoney/mymoney/mymoneyfile.cpp:3462
 #, kde-format
 msgid "Paraguay Guarani"
 msgstr "Guaraní de Paraguai"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3462
+#: kmymoney/mymoney/mymoneyfile.cpp:3463
 #, kde-format
 msgid "Peruvian Nuevo Sol"
 msgstr "Nuevo Sol del Perú"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3463
+#: kmymoney/mymoney/mymoneyfile.cpp:3464
 #, kde-format
 msgid "Philippine Peso"
 msgstr "Peso filipí"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3464
+#: kmymoney/mymoney/mymoneyfile.cpp:3465
 #, kde-format
 msgid "Polish Zloty"
 msgstr "Zloty polonès"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3465
+#: kmymoney/mymoney/mymoneyfile.cpp:3466
 #, kde-format
 msgid "Qatari Rial"
 msgstr "Rial de Qatar"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3466
+#: kmymoney/mymoney/mymoneyfile.cpp:3467
 #, kde-format
 msgid "Romanian Leu (new)"
 msgstr "Leu romanès (nou)"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3467
+#: kmymoney/mymoney/mymoneyfile.cpp:3468
 #, kde-format
 msgid "Russian Ruble"
 msgstr "Ruble rus"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3468
+#: kmymoney/mymoney/mymoneyfile.cpp:3469
 #, kde-format
 msgid "Rwanda Franc"
 msgstr "Franc de Ruanda"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3469
+#: kmymoney/mymoney/mymoneyfile.cpp:3470
 #, kde-format
 msgid "Samoan Tala"
 msgstr "Tala de Samoa"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3470
+#: kmymoney/mymoney/mymoneyfile.cpp:3471
 #, kde-format
 msgid "Sao Tome and Principe Dobra"
 msgstr "Dobra de Sao Tomé i Príncipe"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3471
+#: kmymoney/mymoney/mymoneyfile.cpp:3472
 #, kde-format
 msgid "Saudi Riyal"
 msgstr "Rial saudita"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3472
+#: kmymoney/mymoney/mymoneyfile.cpp:3473
 #, kde-format
 msgid "Serbian Dinar"
 msgstr "Dinar serbi"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3473
+#: kmymoney/mymoney/mymoneyfile.cpp:3474
 #, kde-format
 msgid "Seychelles Rupee"
 msgstr "Rupia de les Seychelles"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3474
+#: kmymoney/mymoney/mymoneyfile.cpp:3475
 #, kde-format
 msgid "Sierra Leone Leone"
 msgstr "Leone de Sierra Leone"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3475
+#: kmymoney/mymoney/mymoneyfile.cpp:3476
 #, kde-format
 msgid "Singapore Dollar"
 msgstr "Dòlar de Singapur"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3476
+#: kmymoney/mymoney/mymoneyfile.cpp:3477
 #, kde-format
 msgid "Solomon Islands Dollar"
 msgstr "Dòlar de les Illes Salomó"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3477
+#: kmymoney/mymoney/mymoneyfile.cpp:3478
 #, kde-format
 msgid "Somali Shilling"
 msgstr "Xíling somali"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3478
+#: kmymoney/mymoney/mymoneyfile.cpp:3479
 #, kde-format
 msgid "South African Rand"
 msgstr "Rand de Sud-àfrica"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3479
+#: kmymoney/mymoney/mymoneyfile.cpp:3480
 #, kde-format
 msgid "South Korean Won"
 msgstr "Won sud-coreà"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3480
+#: kmymoney/mymoney/mymoneyfile.cpp:3481
 #, kde-format
 msgid "Sri Lanka Rupee"
 msgstr "Rupia de Sri Lanka"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3481
+#: kmymoney/mymoney/mymoneyfile.cpp:3482
 #, kde-format
 msgid "St. Helena Pound"
 msgstr "Lliura de Saint Helena"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3482
+#: kmymoney/mymoney/mymoneyfile.cpp:3483
 #, kde-format
 msgid "Sudanese Dinar"
 msgstr "Dinar sudanès"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3483
+#: kmymoney/mymoney/mymoneyfile.cpp:3484
 #, kde-format
 msgid "Suriname Guilder"
 msgstr "Florí de Surinam"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3484
+#: kmymoney/mymoney/mymoneyfile.cpp:3485
 #, kde-format
 msgid "Swaziland Lilangeni"
 msgstr "Lilangeni de Swazilàndia"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3485
+#: kmymoney/mymoney/mymoneyfile.cpp:3486
 #, kde-format
 msgid "Swedish Krona"
 msgstr "Corona sueca"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3486
+#: kmymoney/mymoney/mymoneyfile.cpp:3487
 #, kde-format
 msgid "Swiss Franc"
 msgstr "Franc suís"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3487
+#: kmymoney/mymoney/mymoneyfile.cpp:3488
 #, kde-format
 msgid "Syrian Pound"
 msgstr "Lliura siriana"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3488
+#: kmymoney/mymoney/mymoneyfile.cpp:3489
 #, kde-format
 msgid "Taiwan Dollar"
 msgstr "Dòlar de Taiwan"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3489
+#: kmymoney/mymoney/mymoneyfile.cpp:3490
 #, kde-format
 msgid "Tajikistan Somoni"
 msgstr "Somoni de Tadjikistan"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3490
+#: kmymoney/mymoney/mymoneyfile.cpp:3491
 #, kde-format
 msgid "Tanzanian Shilling"
 msgstr "Xíling tanzà"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3491
+#: kmymoney/mymoney/mymoneyfile.cpp:3492
 #, kde-format
 msgid "Thai Baht"
 msgstr "Baht de Tailàndia"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3492
+#: kmymoney/mymoney/mymoneyfile.cpp:3493
 #, kde-format
 msgid "Tongan Pa'anga"
 msgstr "Pa'anga de Tonga"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3493
+#: kmymoney/mymoney/mymoneyfile.cpp:3494
 #, kde-format
 msgid "Trinidad and Tobago Dollar"
 msgstr "Dòlar de Trinitat i Tobago"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3494
+#: kmymoney/mymoney/mymoneyfile.cpp:3495
 #, kde-format
 msgid "Tunisian Dinar"
 msgstr "Dinar tunisià"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3495
+#: kmymoney/mymoney/mymoneyfile.cpp:3496
 #, kde-format
 msgid "Turkish Lira"
 msgstr "Lira turca"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3496
+#: kmymoney/mymoney/mymoneyfile.cpp:3497
 #, kde-format
 msgid "Turkmenistan Manat"
 msgstr "Manat del Turkmenistan"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3497
+#: kmymoney/mymoney/mymoneyfile.cpp:3498
 #, kde-format
 msgid "US Dollar"
 msgstr "Dòlar dels Estats Units"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3498
+#: kmymoney/mymoney/mymoneyfile.cpp:3499
 #, kde-format
 msgid "Uganda Shilling"
 msgstr "Xíling ugandès"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3499
+#: kmymoney/mymoney/mymoneyfile.cpp:3500
 #, kde-format
 msgid "Ukraine Hryvnia"
 msgstr "Hrívnia d'Ucraïna"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3500
+#: kmymoney/mymoney/mymoneyfile.cpp:3501
 #, kde-format
 msgid "Unidad de Fometo"
 msgstr "Unidad de fomento"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3501
+#: kmymoney/mymoney/mymoneyfile.cpp:3502
 #, kde-format
 msgid "United Arab Emirates Dirham"
 msgstr "Dírham dels Emirats Àrabs Units"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3502
+#: kmymoney/mymoney/mymoneyfile.cpp:3503
 #, kde-format
 msgid "Uruguayan Peso"
 msgstr "Peso d'Uruguai"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3503
+#: kmymoney/mymoney/mymoneyfile.cpp:3504
 #, kde-format
 msgid "Uzbekistani Sum"
 msgstr "Som d'Uzbekistan"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3504
+#: kmymoney/mymoney/mymoneyfile.cpp:3505
 #, kde-format
 msgid "Vanuatu Vatu"
 msgstr "Vatu de Vanuatu"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3505
+#: kmymoney/mymoney/mymoneyfile.cpp:3506
 #, kde-format
 msgid "Venezuelan Bolivar"
 msgstr "Bolívar de Veneçuela"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3506
+#: kmymoney/mymoney/mymoneyfile.cpp:3507
 #, kde-format
 msgid "Vietnamese Dong"
 msgstr "Dong de Vietnam"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3507
+#: kmymoney/mymoney/mymoneyfile.cpp:3508
 #, kde-format
 msgid "Zambian Kwacha"
 msgstr "Kwacha zambià"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3508
+#: kmymoney/mymoney/mymoneyfile.cpp:3509
 #, kde-format
 msgid "Zimbabwe Dollar"
 msgstr "Dòlar de Zimbàbue"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3520
+#: kmymoney/mymoney/mymoneyfile.cpp:3521
 #, kde-format
 msgid "Gold"
 msgstr "Or"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3521
+#: kmymoney/mymoney/mymoneyfile.cpp:3522
 #, kde-format
 msgid "Palladium"
 msgstr "Pal·ladi"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3522
+#: kmymoney/mymoney/mymoneyfile.cpp:3523
 #, kde-format
 msgid "Platinum"
 msgstr "Platí"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3523
+#: kmymoney/mymoney/mymoneyfile.cpp:3524
 #, kde-format
 msgid "Silver"
 msgstr "Argent"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4136
+#: kmymoney/mymoney/mymoneyfile.cpp:4137
 #, kde-format
 msgid "Opening Balances"
 msgstr "Saldos d'obertura"
@@ -8625,7 +8625,7 @@ msgstr "Any"
 msgid "Cost center"
 msgstr "Centre de despesa"
 
-#: kmymoney/mymoney/storage/institutionsmodel.cpp:229
+#: kmymoney/mymoney/storage/institutionsmodel.cpp:230
 #, kde-format
 msgid "Accounts with no institution assigned"
 msgstr "Comptes sense una institució assignada"
@@ -9480,39 +9480,39 @@ msgctxt ""
 msgid "%1 and No/%2"
 msgstr "%1 i %2"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:64
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:66
 #, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Comma (,)"
 msgstr "Coma (,)"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:65
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:67
 #, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Semicolon (;)"
 msgstr "Punt i coma (;)"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:66
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:68
 #, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Tab (\\t)"
 msgstr "Tabulador (\\t)"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:92
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:94
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:62
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:56
 #, kde-format
 msgid "Start operation"
 msgstr "Inicia l'operació"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:92
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:94
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:63
 #, kde-format
 msgid "Use this to start the export operation"
 msgstr "Useu-ho per a iniciar l'operació d'exportació"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonBrowse)
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:97
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:87
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:66
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:127
@@ -9522,21 +9522,21 @@ msgstr "Useu-ho per a iniciar l'operació d'exportació"
 msgid "&Browse..."
 msgstr "E&xplora..."
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:97
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:99
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:68
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:62
 #, kde-format
 msgid "Select filename"
 msgstr "Seleccioneu el nom del fitxer"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:98
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:100
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:69
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:63
 #, kde-format
 msgid "Use this to select a filename to export to"
 msgstr "Useu-ho per a seleccionar un nom de fitxer al qual exportar"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:199
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:201
 #, kde-format
 msgctxt "@info Hint in CSV export dialog"
 msgid "Current selected account does not contain any transactions."
@@ -10038,8 +10038,8 @@ msgstr "Neteja la selecció del camp de recordatori."
 #: kmymoney/plugins/views/reports/core/listtable.cpp:684
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1040 kmymoney/views/khomeview_p.h:1409
-#: kmymoney/views/khomeview_p.h:1438
+#: kmymoney/views/khomeview_p.h:1042 kmymoney/views/khomeview_p.h:1411
+#: kmymoney/views/khomeview_p.h:1440
 #, kde-format
 msgid "Balance"
 msgstr "Saldo"
@@ -10208,37 +10208,37 @@ msgstr ""
 "%2</b> no s'ha pogut reconèixer.<br>Per això, el perfil no es pot usar."
 "<br>El voleu suprimir?</center>"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1552
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1551
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "buy"
 msgstr "compra"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1554
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1553
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "sell,repurchase"
 msgstr "venda,recompra"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1556
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1555
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "reinvest,reinv,re-inv"
 msgstr "reinversió,reinv"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1558
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1557
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "dividend"
 msgstr "dividend"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1560
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1559
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "interest,income"
 msgstr "interès,ingrés"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1562
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1561
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid ""
@@ -10247,7 +10247,7 @@ msgstr ""
 "afegit,dividend en accions,reinv dividend,transferència rebuda,reinscripció,"
 "entrada de diari"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1564
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1563
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "remove"
@@ -11508,9 +11508,9 @@ msgstr "Beneficiari%1"
 msgid "Schedule%1"
 msgstr "Planificació%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1210
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1249
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1354
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1214
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1253
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1358
 #, kde-format
 msgid ""
 "Import failed:\n"
@@ -11521,17 +11521,17 @@ msgstr ""
 "\n"
 "%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1358
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1362
 #, kde-format
 msgid "Import complete"
 msgstr "S'ha completat la importació"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1415
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1419
 #, kde-format
 msgid "Disguise your wealth"
 msgstr "Oculteu la vostra riquesa"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1416
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1420
 #, kde-format
 msgid ""
 "Each monetary value on your file will be multiplied by a random number "
@@ -11550,33 +11550,33 @@ msgstr ""
 "valors.\n"
 "Aquests números no s'emmagatzemaran al fitxer."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1431
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1435
 #, kde-format
 msgid "Loading commodities..."
 msgstr "S'estan carregant les mercaderies..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1483
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1487
 #, kde-format
 msgid "Loading prices..."
 msgstr "S'estan carregant les cotitzacions..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1487
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1495
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1491
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1499
 #, kde-format
 msgid "Imported History"
 msgstr "Historial importat"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1516
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1520
 #, kde-format
 msgid "Loading accounts..."
 msgstr "S'estan carregant els comptes..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1662
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1666
 #, kde-format
 msgid "Loading transactions..."
 msgstr "S'estan carregant les operacions..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1765
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1769
 #, kde-format
 msgid ""
 "Account or Category %1, transaction date %2; split contains invalid value; "
@@ -11585,38 +11585,38 @@ msgstr ""
 "Compte o categoria %1, data de l'operació %2: el desglossament conté un "
 "valor no vàlid. Comproveu-ho"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1807
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1811
 #, kde-format
 msgid "Imported Transaction"
 msgstr "Operació importada"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1856
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1860
 #, kde-format
 msgid "Loading templates..."
 msgstr "S'estan carregant les plantilles..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1870
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1874
 #, kde-format
 msgid "Unknown payee"
 msgstr "Beneficiari desconegut"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1998
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2002
 #, kde-format
 msgid "Schedule %1 contains unknown action (key = %2, type = %3)"
 msgstr ""
 "La planificació %1 conté una acció desconeguda (tecla = %2, tipus = %3)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2006
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2010
 #, kde-format
 msgid "Schedule %1 contains multiple actions; only one has been imported"
 msgstr "La planificació %1 conté múltiples accions; només se n'ha importat una"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2012
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2016
 #, kde-format
 msgid "Schedule %1 contains no valid splits"
 msgstr "La planificació %1 no conté desglossaments vàlids"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2017
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2021
 #, kde-format
 msgid ""
 "Schedule %1 appears to contain a formula. GnuCash formulae are not "
@@ -11625,18 +11625,18 @@ msgstr ""
 "Sembla que la planificació %1 contingui una fórmula. Les fórmules del "
 "GnuCash no es poden convertir"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2067
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2071
 #, kde-format
 msgid "Loading schedules..."
 msgstr "S'estan carregant les planificacions..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2155
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2159
 #, kde-format
 msgid "Schedule %1 has interval of %2 which is not currently available"
 msgstr ""
 "La planificació %1 conté l'interval %2 el qual no està disponible actualment"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2162
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2166
 #, kde-format
 msgid ""
 "Schedule %1 contains unknown interval specification; please check for "
@@ -11645,7 +11645,7 @@ msgstr ""
 "La planificació %1 conté una especificació d'interval desconeguda. Si us "
 "plau, comproveu que l'operació sigui correcta"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2198
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2202
 #, kde-format
 msgid ""
 "Schedule %1 contains a deferred interval specification; please check for "
@@ -11654,17 +11654,17 @@ msgstr ""
 "La planificació %1 conté una especificació d'interval diferida. Si us plau, "
 "comproveu que l'operació sigui correcta"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2223
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2227
 #, kde-format
 msgid "Schedule %1 dropped at user request"
 msgstr "S'ha descartat la planificació %1 a petició de l'usuari"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2266
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2270
 #, kde-format
 msgid "Reorganizing accounts..."
 msgstr "S'estan reorganitzant els comptes..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2324
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2328
 #, kde-format
 msgid ""
 "Your main currency seems to be %1 (%2); do you want to set this as your base "
@@ -11673,29 +11673,29 @@ msgstr ""
 "Sembla que la vostra divisa principal és %1 (%2); voleu establir-la com a "
 "divisa base?"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2339
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2343
 #, kde-format
 msgctxt "Button to show more detailed data"
 msgid "More"
 msgstr "Més"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2341
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2345
 #, kde-format
 msgctxt "Button to close the current dialog"
 msgid "Done"
 msgstr "Fet"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2343
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2347
 #, kde-format
 msgid "Save Report"
 msgstr "Desa l'informe"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2360
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2364
 #, kde-format
 msgid "Problems were encountered in converting schedule '%1'."
 msgstr "S'han trobat problemes en convertir la planificació «%1»."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2385
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2389
 #, kde-format
 msgid ""
 "Found:\n"
@@ -11704,91 +11704,91 @@ msgstr ""
 "S'ha trobat:\n"
 "\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2386
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2390
 #, kde-format
 msgid "%1 commodity (equity)\n"
 msgid_plural "%1 commodities (equities)\n"
 msgstr[0] "%1 mercaderia (acció)\n"
 msgstr[1] "%1 mercaderies (accions)\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2387
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2391
 #, kde-format
 msgid "%1 price\n"
 msgid_plural "%1 prices\n"
 msgstr[0] "%1 preu\n"
 msgstr[1] "%1 preus\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2388
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2392
 #, kde-format
 msgid "%1 account\n"
 msgid_plural "%1 accounts\n"
 msgstr[0] "%1 compte\n"
 msgstr[1] "%1 compte\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2389
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2393
 #, kde-format
 msgid "%1 transaction\n"
 msgid_plural "%1 transactions\n"
 msgstr[0] "%1 operació\n"
 msgstr[1] "%1 operacions\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2390
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2394
 #, kde-format
 msgid "%1 schedule\n"
 msgid_plural "%1 schedules\n"
 msgstr[0] "%1 planificació\n"
 msgstr[1] "%1 planificacions\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2393
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2397
 #, kde-format
 msgid "No inconsistencies were detected\n"
 msgstr "No s'ha detectat cap inconsistència\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2395
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2399
 #, kde-format
 msgid "%1 inconsistency was detected and corrected\n"
 msgid_plural "%1 inconsistencies were detected and corrected\n"
 msgstr[0] "S'ha detectat %1 incoherència i s'ha corregit\n"
 msgstr[1] "S'han detectat %1 incoherències i s'han corregit\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2400
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2404
 #, kde-format
 msgid "%1 orphan account was created\n"
 msgid_plural "%1 orphan accounts were created\n"
 msgstr[0] "S'ha creat %1 compte orfe\n"
 msgstr[1] "S'han creat %1 comptes orfes\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2405
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2409
 #, kde-format
 msgid "%1 possible schedule problem was noted\n"
 msgid_plural "%1 possible schedule problems were noted\n"
 msgstr[0] "S'ha detectat %1 possible problema de planificació\n"
 msgstr[1] "S'han detectat %1 possibles problemes de planificació\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2410
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2414
 #, kde-format
 msgid "Small Business Features (Customers, Invoices, etc.)"
 msgstr "Funcionalitats per a negocis petits (Clients, Factures, etc.)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2411
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2415
 #: kmymoney/plugins/views/budget/budgetview.cpp:53
 #, kde-format
 msgid "Budgets"
 msgstr "Pressupostos"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2412
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2416
 #, kde-format
 msgid "Lots"
 msgstr "Lots"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2414
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2418
 #, kde-format
 msgid "The following features found in your file are not currently supported:"
 msgstr ""
 "S'han trobat les següents característiques en el fitxer que encara no estan "
 "admeses:"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2417
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2421
 #, kde-format
 msgid ""
 "\n"
@@ -11799,17 +11799,17 @@ msgstr ""
 "\n"
 "Premeu «Més» per a informació addicional"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2432
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2436
 #, kde-format
 msgid "Save report as"
 msgstr "Desa l'informe com a"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2468
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2472
 #, kde-format
 msgid "Orphan created from unknown GnuCash account"
 msgstr "S'ha creat un orfe a partir d'un compte desconegut del GnuCash"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2483
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2487
 #, kde-format
 msgid ""
 "One or more transactions contain a reference to an otherwise unknown "
@@ -11819,7 +11819,7 @@ msgstr ""
 "Una o més operacions contenen referències a comptes desconeguts\n"
 "S'ha creat un compte d'actiu amb el nom %1 per a mantenir les dades"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2517
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2521
 #, kde-format
 msgid ""
 "An Investment account must be a child of an Asset account\n"
@@ -11828,7 +11828,7 @@ msgstr ""
 "Els comptes d'inversió han de ser fills d'un compte d'actiu\n"
 "El compte %1 s'emmagatzemarà sota el compte d'actiu principal"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2524
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2528
 #, kde-format
 msgid ""
 "An Income account must be a child of an Income account\n"
@@ -11837,7 +11837,7 @@ msgstr ""
 "Els comptes d'ingressos han de ser fills d'un compte d'ingressos\n"
 "El compte %1 s'emmagatzemarà sota el compte d'ingressos principal"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2531
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2535
 #, kde-format
 msgid ""
 "An Expense account must be a child of an Expense account\n"
@@ -11846,24 +11846,24 @@ msgstr ""
 "Els comptes de despeses han de ser fills d'un compte de despeses\n"
 "El compte %1 s'emmagatzemarà sota el compte de despeses principal"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2579
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2583
 #, kde-format
 msgid "Enter the investment account name "
 msgstr "Introduïu el nom del compte d'inversions"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2580
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2584
 #, kde-format
 msgid "My Investments"
 msgstr "Les meves inversions"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2618
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2622
 #, kde-format
 msgid "Select parent investment account or enter new name. Stock %1"
 msgstr ""
 "Seleccioneu el compte d'inversions pare o introduïu un nom nou. Valor %1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2643
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2660
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2647
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2664
 #, kde-format
 msgid "%1 is not an Investment Account. Do you wish to make it one?"
 msgstr "%1 no és cap compte d'inversions. Voleu fer-ne un?"
@@ -12032,31 +12032,31 @@ msgstr "Temps (s)"
 msgid "iCalendar file"
 msgstr "Fitxer iCalendar"
 
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:27
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:31
+#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:29
+#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:33
 #, kde-format
 msgid "Minutes"
 msgstr "Minuts"
 
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:28
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:32
+#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:30
+#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:34
 #, kde-format
 msgid "Hours"
 msgstr "Hores"
 
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:29
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:33
+#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:31
+#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:35
 #, kde-format
 msgctxt "Time unit"
 msgid "Days"
 msgstr "Dies"
 
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:35
+#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:37
 #, kde-format
 msgid "Before"
 msgstr "Abans"
 
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:36
+#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:38
 #, kde-format
 msgid "After"
 msgstr "Després"
@@ -12652,9 +12652,9 @@ msgstr "Institució"
 #: kmymoney/plugins/views/reports/reportsview.cpp:227
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
 #: kmymoney/views/investtransactioneditor.ui:92
-#: kmymoney/views/khomeview_p.h:660 kmymoney/views/khomeview_p.h:720
-#: kmymoney/views/khomeview_p.h:758 kmymoney/views/khomeview_p.h:1024
-#: kmymoney/views/khomeview_p.h:1152 kmymoney/views/newtransactioneditor.ui:17
+#: kmymoney/views/khomeview_p.h:662 kmymoney/views/khomeview_p.h:722
+#: kmymoney/views/khomeview_p.h:760 kmymoney/views/khomeview_p.h:1026
+#: kmymoney/views/khomeview_p.h:1154 kmymoney/views/newtransactioneditor.ui:17
 #: kmymoney/widgets/ktransactionfilter.cpp:116
 #: kmymoney/widgets/ktransactionfilter.ui:113
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:73
@@ -14692,12 +14692,12 @@ msgstr ""
 msgid "Inserting online jobs."
 msgstr "S'estan inserint treballs en línia."
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2026
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2021
 #, kde-format
 msgid "SQLite file %1 does not exist"
 msgstr "El fitxer SQLite %1 no existeix"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2080
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2075
 #, kde-format
 msgid ""
 "Automatic database creation for type %1 is not currently implemented.\n"
@@ -14707,7 +14707,7 @@ msgstr ""
 "de tipus %1.\n"
 "Si us plau, creeu manualment la base de dades %2"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2100
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2095
 #, kde-format
 msgid "Error in create database %1; do you have create permissions?"
 msgstr "Error en crear la base de dades %1; teniu permís de creació?"
@@ -14768,7 +14768,7 @@ msgstr "Obre una base de dades..."
 msgid "Generate Database SQL"
 msgstr "Genera la base de dades SQL"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:331
+#: kmymoney/plugins/sql/sqlstorage.cpp:329
 #, kde-format
 msgid ""
 "Database contains data which must be removed before using Save As.\n"
@@ -14778,7 +14778,7 @@ msgstr ""
 "a».\n"
 "Voleu continuar?"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:351
+#: kmymoney/plugins/sql/sqlstorage.cpp:349
 #, kde-format
 msgid ""
 "Cannot open or create database %1.\n"
@@ -15094,13 +15094,13 @@ msgid "Include subaccounts"
 msgstr "Inclou els subcomptes"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:145
-#: kmymoney/views/kpayeesview_p.h:794
+#: kmymoney/views/kpayeesview_p.h:795
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<qt>Voleu desar els canvis per a <b>%1</b>?</qt>"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
-#: kmymoney/views/kpayeesview_p.h:795 kmymoney/views/ktagsview.cpp:289
+#: kmymoney/views/kpayeesview_p.h:796 kmymoney/views/ktagsview.cpp:289
 #, kde-format
 msgid "Save changes"
 msgstr "Desa els canvis"
@@ -15409,13 +15409,13 @@ msgstr[0] "1 dia"
 msgstr[1] "%1 dies"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:379
-#: kmymoney/views/khomeview_p.h:1221
+#: kmymoney/views/khomeview_p.h:1223
 #, kde-format
 msgid "The balance of %1 is below the minimum balance %2 today."
 msgstr "Avui, el saldo de %1 està per sota del saldo mínim de %2."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:384
-#: kmymoney/views/khomeview_p.h:1225
+#: kmymoney/views/khomeview_p.h:1227
 #, kde-format
 msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
 msgid_plural ""
@@ -15425,19 +15425,19 @@ msgstr[1] ""
 "El saldo de %2 se situarà per sota del saldo mínim de %3 en %1 dies."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:403
-#: kmymoney/views/khomeview_p.h:1243
+#: kmymoney/views/khomeview_p.h:1245
 #, kde-format
 msgid "The balance of %1 is below %2 today."
 msgstr "Avui, el saldo de %1 està per sota de %2."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:408
-#: kmymoney/views/khomeview_p.h:1248
+#: kmymoney/views/khomeview_p.h:1250
 #, kde-format
 msgid "The balance of %1 is above %2 today."
 msgstr "Avui, el saldo de %1 està per sobre de %2."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:415
-#: kmymoney/views/khomeview_p.h:1254
+#: kmymoney/views/khomeview_p.h:1256
 #, kde-format
 msgid "The balance of %2 will drop below %3 in %1 day."
 msgid_plural "The balance of %2 will drop below %3 in %1 days."
@@ -15445,7 +15445,7 @@ msgstr[0] "El saldo de %2 se situarà per sota de %3 en %1 dia."
 msgstr[1] "El saldo de %2 se situarà per sota de %3 en %1 dies."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:422
-#: kmymoney/views/khomeview_p.h:1261
+#: kmymoney/views/khomeview_p.h:1263
 #, kde-format
 msgid "The balance of %2 will raise above %3 in %1 day."
 msgid_plural "The balance of %2 will raise above %3 in %1 days."
@@ -15509,7 +15509,7 @@ msgstr ""
 "El connector d'informes no ha proporcionat cap dada per a aquest gràfic."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:660
-#: kmymoney/views/khomeview_p.h:557 kmymoney/views/khomeview_p.h:1573
+#: kmymoney/views/khomeview_p.h:559 kmymoney/views/khomeview_p.h:1575
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "Activa el connector d'informes per a veure aquest gràfic."
@@ -16313,7 +16313,7 @@ msgstr "Interval"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:171
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:27
 #: kmymoney/plugins/views/reports/kreportsview_p.h:430
-#: kmymoney/views/khomeview_p.h:1095
+#: kmymoney/views/khomeview_p.h:1097
 #, kde-format
 msgid "Report"
 msgstr "Informe"
@@ -16631,7 +16631,7 @@ msgstr "Informes"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
 #: kmymoney/plugins/views/reports/kreportsview.ui:51
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:49
-#: kmymoney/views/khomeview_p.h:1097
+#: kmymoney/views/khomeview_p.h:1099
 #, kde-format
 msgid "Comment"
 msgstr "Comentari"
@@ -16662,7 +16662,7 @@ msgid "Charts"
 msgstr "Gràfics"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:660
-#: kmymoney/views/khomeview_p.h:1090
+#: kmymoney/views/khomeview_p.h:1092
 #, kde-format
 msgid "Favorite Reports"
 msgstr "Informes preferits"
@@ -16708,7 +16708,7 @@ msgstr "Gràfic de pastís d'ingressos i despeses"
 
 # skip-rule: ff-net
 #: kmymoney/plugins/views/reports/kreportsview_p.h:867
-#: kmymoney/views/khomeview_p.h:1545
+#: kmymoney/views/khomeview_p.h:1547
 #, kde-format
 msgid "Net Worth"
 msgstr "Valor net"
@@ -17043,7 +17043,7 @@ msgstr "Tanca"
 # skip-rule: ff-net
 #: kmymoney/plugins/views/reports/reportsview.cpp:82
 #: kmymoney/plugins/views/reports/reportsview.cpp:118
-#: kmymoney/views/khomeview_p.h:543
+#: kmymoney/views/khomeview_p.h:545
 #, kde-format
 msgid "Net Worth Forecast"
 msgstr "Previsió del valor net"
@@ -17894,28 +17894,28 @@ msgstr "Dorsal"
 msgid "History"
 msgstr "Historial"
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:127
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:129
 #, kde-format
 msgid "Loading Woob backend..."
 msgstr "S'està carregant el dorsal del Woob..."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:128
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:130
 #, kde-format
 msgid "Getting list of backends."
 msgstr "S'està obtenint la llista de dorsals."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:137
-#: kmymoney/plugins/woob/woob.cpp:170
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:139
+#: kmymoney/plugins/woob/woob.cpp:171
 #, kde-format
 msgid "Connecting to bank..."
 msgstr "S'està connectant amb el banc..."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:138
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:140
 #, kde-format
 msgid "Getting list of accounts from your bank."
 msgstr "S'està obtenint la llista de comptes del banc."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:164
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:166
 #, kde-format
 msgid ""
 "No backends available.\n"
@@ -17924,7 +17924,7 @@ msgstr ""
 "No hi ha disponible cap dorsal.\n"
 "Afegiu-ne un usant «woob config-qt»."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:177
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:179
 #, kde-format
 msgid ""
 "No accounts available.\n"
@@ -17933,7 +17933,7 @@ msgstr ""
 "Ni hi ha cap compte disponible.\n"
 "Verifiqueu la configuració del dorsal a «woob config-qt»."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:186
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:188
 #, kde-format
 msgid "Incorrect password."
 msgstr "Contrasenya incorrecta."
@@ -17972,7 +17972,7 @@ msgstr ""
 "Seleccioneu el compte <b>en línia</b> que vulgueu vincular amb el compte "
 "d'<b>aplicació</b>..."
 
-#: kmymoney/plugins/woob/woob.cpp:58
+#: kmymoney/plugins/woob/woob.cpp:59
 #, kde-format
 msgid ""
 "Woob plugin failed to fully initialize, most likely due to a missing or a "
@@ -17983,7 +17983,7 @@ msgstr ""
 "causa d'un entorn Python que falta o que està mal configurat. Consulteu el "
 "manual sobre com solucionar-ho."
 
-#: kmymoney/plugins/woob/woob.cpp:64
+#: kmymoney/plugins/woob/woob.cpp:65
 #, kde-format
 msgid ""
 "Woob plugin failed to fully initialize, most likely due to a missing or a "
@@ -17994,12 +17994,12 @@ msgstr ""
 "causa d'un mòdul Python per a Woob que falta o que està mal configurat. "
 "Consulteu el manual sobre com solucionar-ho."
 
-#: kmymoney/plugins/woob/woob.cpp:119
+#: kmymoney/plugins/woob/woob.cpp:120
 #, kde-format
 msgid "Woob configuration"
 msgstr "Configuració del Woob"
 
-#: kmymoney/plugins/woob/woob.cpp:171
+#: kmymoney/plugins/woob/woob.cpp:172
 #, kde-format
 msgid "Retrieving transactions..."
 msgstr "S'estan recuperant les operacions..."
@@ -18101,7 +18101,7 @@ msgstr " (valors)"
 msgid "%1 (Brokerage)"
 msgstr "%1 (valors)"
 
-#: kmymoney/plugins/xml/mymoneyxmlreader.cpp:323
+#: kmymoney/plugins/xml/mymoneyxmlreader.cpp:325
 #, kde-format
 msgctxt "Error message when reading XML file"
 msgid "Unknown payee identifier type %1"
@@ -18966,76 +18966,76 @@ msgctxt "@label:textbox"
 msgid "Ratio 1/"
 msgstr "Relació 1/"
 
-#: kmymoney/views/investtransactioneditor.cpp:83
+#: kmymoney/views/investtransactioneditor.cpp:87
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Buy shares"
 msgstr "Compra d'accions"
 
-#: kmymoney/views/investtransactioneditor.cpp:84
+#: kmymoney/views/investtransactioneditor.cpp:88
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Sell shares"
 msgstr "Venda d'accions"
 
-#: kmymoney/views/investtransactioneditor.cpp:85
+#: kmymoney/views/investtransactioneditor.cpp:89
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Dividend"
 msgstr "Dividend"
 
-#: kmymoney/views/investtransactioneditor.cpp:86
+#: kmymoney/views/investtransactioneditor.cpp:90
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Reinvest dividend"
 msgstr "Reinversió del dividend"
 
-#: kmymoney/views/investtransactioneditor.cpp:87
+#: kmymoney/views/investtransactioneditor.cpp:91
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Yield"
 msgstr "Rendiment"
 
-#: kmymoney/views/investtransactioneditor.cpp:88
+#: kmymoney/views/investtransactioneditor.cpp:92
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Add shares"
 msgstr "Afegeix accions"
 
-#: kmymoney/views/investtransactioneditor.cpp:89
+#: kmymoney/views/investtransactioneditor.cpp:93
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Remove shares"
 msgstr "Elimina les accions"
 
-#: kmymoney/views/investtransactioneditor.cpp:90
+#: kmymoney/views/investtransactioneditor.cpp:94
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Split shares"
 msgstr "Desdoblament de les accions"
 
-#: kmymoney/views/investtransactioneditor.cpp:91
+#: kmymoney/views/investtransactioneditor.cpp:95
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
 msgstr "Interessos rebuts"
 
-#: kmymoney/views/investtransactioneditor.cpp:268
-#: kmymoney/views/multitransactioneditor.cpp:164
-#: kmymoney/views/newtransactioneditor.cpp:226
+#: kmymoney/views/investtransactioneditor.cpp:272
+#: kmymoney/views/multitransactioneditor.cpp:166
+#: kmymoney/views/newtransactioneditor.cpp:228
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "La data de situació de l'operació."
 
-#: kmymoney/views/investtransactioneditor.cpp:292
-#: kmymoney/views/multitransactioneditor.cpp:194
-#: kmymoney/views/newtransactioneditor.cpp:246
+#: kmymoney/views/investtransactioneditor.cpp:296
+#: kmymoney/views/multitransactioneditor.cpp:196
+#: kmymoney/views/newtransactioneditor.cpp:248
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr ""
 "La data de situació és anterior a la data d'obertura del compte <b>%1</b>."
 
-#: kmymoney/views/investtransactioneditor.cpp:388
+#: kmymoney/views/investtransactioneditor.cpp:392
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -19045,55 +19045,55 @@ msgstr ""
 "S'ha canviat la mercaderia de l'operació, i possiblement provocarà que tota "
 "la informació del preu no sigui vàlida. Cal comprovar-ho."
 
-#: kmymoney/views/investtransactioneditor.cpp:530
+#: kmymoney/views/investtransactioneditor.cpp:534
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Category for fees"
 msgstr "Categoria per a les despeses"
 
-#: kmymoney/views/investtransactioneditor.cpp:531
+#: kmymoney/views/investtransactioneditor.cpp:535
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Amount of fees"
 msgstr "Import de les despeses"
 
-#: kmymoney/views/investtransactioneditor.cpp:532
+#: kmymoney/views/investtransactioneditor.cpp:536
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Category for interest"
 msgstr "Categoria per a l'interès"
 
-#: kmymoney/views/investtransactioneditor.cpp:533
+#: kmymoney/views/investtransactioneditor.cpp:537
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Amount of interest"
 msgstr "Import de l'interès"
 
-#: kmymoney/views/investtransactioneditor.cpp:534
+#: kmymoney/views/investtransactioneditor.cpp:538
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Asset or brokerage account"
 msgstr "Compte d'actiu o de valors"
 
-#: kmymoney/views/investtransactioneditor.cpp:535
+#: kmymoney/views/investtransactioneditor.cpp:539
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Price information for this transaction"
 msgstr "Informació del preu d'aquesta operació"
 
-#: kmymoney/views/investtransactioneditor.cpp:538
+#: kmymoney/views/investtransactioneditor.cpp:542
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Security for this transaction"
 msgstr "Títol per a aquesta operació"
 
-#: kmymoney/views/investtransactioneditor.cpp:539
+#: kmymoney/views/investtransactioneditor.cpp:543
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
 msgstr "Seleccioneu l'activitat per a aquesta operació."
 
-#: kmymoney/views/investtransactioneditor.cpp:542
+#: kmymoney/views/investtransactioneditor.cpp:546
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19103,7 +19103,7 @@ msgstr ""
 "No s'ha pogut modificar el títol d'aquesta operació perquè el compte dels "
 "títols està tancat."
 
-#: kmymoney/views/investtransactioneditor.cpp:543
+#: kmymoney/views/investtransactioneditor.cpp:547
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19112,13 +19112,13 @@ msgstr ""
 "No s'ha pogut modificar aquesta activitat perquè el compte dels títols està "
 "tancat."
 
-#: kmymoney/views/investtransactioneditor.cpp:555
+#: kmymoney/views/investtransactioneditor.cpp:559
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "Nombre d'accions"
 
-#: kmymoney/views/investtransactioneditor.cpp:557
+#: kmymoney/views/investtransactioneditor.cpp:561
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19128,19 +19128,19 @@ msgstr ""
 "No s'ha pogut modificar el nombre d'accions perquè el compte dels títols "
 "està tancat."
 
-#: kmymoney/views/investtransactioneditor.cpp:561
+#: kmymoney/views/investtransactioneditor.cpp:565
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr "Introduïu el nombre d'accions d'aquesta operació"
 
-#: kmymoney/views/investtransactioneditor.cpp:567
+#: kmymoney/views/investtransactioneditor.cpp:571
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "Relació de desdoblament"
 
-#: kmymoney/views/investtransactioneditor.cpp:569
+#: kmymoney/views/investtransactioneditor.cpp:573
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19149,49 +19149,49 @@ msgstr ""
 "No s'ha pogut modificar la relació de desdoblament perquè el compte dels "
 "títols està tancat."
 
-#: kmymoney/views/investtransactioneditor.cpp:573
+#: kmymoney/views/investtransactioneditor.cpp:577
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr "Introduïu la relació de desdoblament d'aquesta operació"
 
-#: kmymoney/views/investtransactioneditor.cpp:585
+#: kmymoney/views/investtransactioneditor.cpp:589
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr "Introduïu la informació del preu d'aquesta operació"
 
-#: kmymoney/views/investtransactioneditor.cpp:601
+#: kmymoney/views/investtransactioneditor.cpp:605
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "Seleccioneu el compte per saldar l'operació"
 
-#: kmymoney/views/investtransactioneditor.cpp:608
+#: kmymoney/views/investtransactioneditor.cpp:612
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr "Introduïu la categoria per a les despeses"
 
-#: kmymoney/views/investtransactioneditor.cpp:611
+#: kmymoney/views/investtransactioneditor.cpp:615
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "Introduïu l'import de les despeses"
 
-#: kmymoney/views/investtransactioneditor.cpp:617
+#: kmymoney/views/investtransactioneditor.cpp:621
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr "Introduïu la categoria per a l'interès"
 
-#: kmymoney/views/investtransactioneditor.cpp:620
+#: kmymoney/views/investtransactioneditor.cpp:624
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "Introduïu l'import de l'interès"
 
-#: kmymoney/views/investtransactioneditor.cpp:625
+#: kmymoney/views/investtransactioneditor.cpp:629
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
@@ -19225,13 +19225,13 @@ msgstr "Introducció"
 msgid "Activity"
 msgstr "Activitat"
 
-#: kmymoney/views/journaldelegate.cpp:86
+#: kmymoney/views/journaldelegate.cpp:87
 #, kde-format
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Recordatori buit"
 
-#: kmymoney/views/journaldelegate.cpp:339
+#: kmymoney/views/journaldelegate.cpp:340
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
@@ -19732,121 +19732,121 @@ msgstr ""
 "estat financer, cal crear com a mínim un compte. Fins llavors, el KMyMoney "
 "mostrarà la pàgina de benvinguda."
 
-#: kmymoney/views/khomeview_p.h:484
+#: kmymoney/views/khomeview_p.h:486
 #, kde-format
 msgid "Preferred Accounts"
 msgstr "Comptes preferits"
 
-#: kmymoney/views/khomeview_p.h:490 kmymoney/views/khomeview_p.h:492
+#: kmymoney/views/khomeview_p.h:492 kmymoney/views/khomeview_p.h:494
 #, kde-format
 msgid "Payment Accounts"
 msgstr "Comptes monetaris"
 
-#: kmymoney/views/khomeview_p.h:635
+#: kmymoney/views/khomeview_p.h:637
 #, kde-format
 msgid "Scheduled Payments"
 msgstr "Pagaments planificats"
 
-#: kmymoney/views/khomeview_p.h:645
+#: kmymoney/views/khomeview_p.h:647
 #, kde-format
 msgid "Overdue payments"
 msgstr "Pagaments endarrerits"
 
-#: kmymoney/views/khomeview_p.h:651 kmymoney/views/khomeview_p.h:711
-#: kmymoney/views/khomeview_p.h:749
+#: kmymoney/views/khomeview_p.h:653 kmymoney/views/khomeview_p.h:713
+#: kmymoney/views/khomeview_p.h:751
 #, kde-format
 msgid "Next"
 msgstr "Següent"
 
-#: kmymoney/views/khomeview_p.h:654 kmymoney/views/khomeview_p.h:714
-#: kmymoney/views/khomeview_p.h:752
+#: kmymoney/views/khomeview_p.h:656 kmymoney/views/khomeview_p.h:716
+#: kmymoney/views/khomeview_p.h:754
 #, kde-format
 msgid "Skip"
 msgstr "Omet"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, ScheduleWizardPage)
-#: kmymoney/views/khomeview_p.h:657 kmymoney/views/khomeview_p.h:717
-#: kmymoney/views/khomeview_p.h:755
+#: kmymoney/views/khomeview_p.h:659 kmymoney/views/khomeview_p.h:719
+#: kmymoney/views/khomeview_p.h:757
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:78
 #: kmymoney/wizards/newloanwizard/schedulewizardpage.ui:6
 #, kde-format
 msgid "Schedule"
 msgstr "Planificació"
 
-#: kmymoney/views/khomeview_p.h:666 kmymoney/views/khomeview_p.h:726
-#: kmymoney/views/khomeview_p.h:764
+#: kmymoney/views/khomeview_p.h:668 kmymoney/views/khomeview_p.h:728
+#: kmymoney/views/khomeview_p.h:766
 #, kde-format
 msgid "Balance after"
 msgstr "Saldo posterior"
 
-#: kmymoney/views/khomeview_p.h:705
+#: kmymoney/views/khomeview_p.h:707
 #, kde-format
 msgid "Today's due payments"
 msgstr "Pagaments que vencen avui"
 
-#: kmymoney/views/khomeview_p.h:743
+#: kmymoney/views/khomeview_p.h:745
 #, kde-format
 msgid "Future payments"
 msgstr "Pagaments propers"
 
-#: kmymoney/views/khomeview_p.h:829
+#: kmymoney/views/khomeview_p.h:831
 #, kde-format
 msgctxt "Less..."
 msgid "Show fewer schedules on the list"
 msgstr "Mostra algunes planificacions a la llista"
 
-#: kmymoney/views/khomeview_p.h:831
+#: kmymoney/views/khomeview_p.h:833
 #, kde-format
 msgctxt "More..."
 msgid "Show more schedules on the list"
 msgstr "Mostra més planificacions a la llista"
 
-#: kmymoney/views/khomeview_p.h:869
+#: kmymoney/views/khomeview_p.h:871
 #, kde-format
 msgid "Enter schedule"
 msgstr "Introdueix la planificació"
 
-#: kmymoney/views/khomeview_p.h:874
+#: kmymoney/views/khomeview_p.h:876
 #, kde-format
 msgid "Skip schedule"
 msgstr "Omet la planificació"
 
-#: kmymoney/views/khomeview_p.h:880
+#: kmymoney/views/khomeview_p.h:882
 #, kde-format
 msgid "Edit schedule"
 msgstr "Edita la planificació"
 
-#: kmymoney/views/khomeview_p.h:884
+#: kmymoney/views/khomeview_p.h:886
 #, kde-format
 msgid " (%1 payment)"
 msgid_plural " (%1 payments)"
 msgstr[0] " (%1 pagament)"
 msgstr[1] " (%1 pagaments)"
 
-#: kmymoney/views/khomeview_p.h:1028
+#: kmymoney/views/khomeview_p.h:1030
 #, kde-format
 msgctxt "Header not marked"
 msgid "!M"
 msgstr "!M"
 
-#: kmymoney/views/khomeview_p.h:1031
+#: kmymoney/views/khomeview_p.h:1033
 #, kde-format
 msgctxt "Header cleared"
 msgid "C"
 msgstr "C"
 
-#: kmymoney/views/khomeview_p.h:1034
+#: kmymoney/views/khomeview_p.h:1036
 #, kde-format
 msgctxt "Header not reconciled"
 msgid "!R"
 msgstr "!R"
 
-#: kmymoney/views/khomeview_p.h:1046
+#: kmymoney/views/khomeview_p.h:1048
 #, kde-format
 msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr "Al saldo mínim<br>/ crèdit màxim"
 
-#: kmymoney/views/khomeview_p.h:1146
+#: kmymoney/views/khomeview_p.h:1148
 #, kde-format
 msgctxt "Forecast days"
 msgid "%1 Day Forecast"
@@ -19854,7 +19854,7 @@ msgid_plural "%1 Day Forecast"
 msgstr[0] "Previsió a %1 dia"
 msgstr[1] "Previsió a %1 dies"
 
-#: kmymoney/views/khomeview_p.h:1157
+#: kmymoney/views/khomeview_p.h:1159
 #, kde-format
 msgctxt "Forecast days"
 msgid "%1 day"
@@ -19862,97 +19862,97 @@ msgid_plural "%1 days"
 msgstr[0] "%1 dia"
 msgstr[1] "%1 dies"
 
-#: kmymoney/views/khomeview_p.h:1379
+#: kmymoney/views/khomeview_p.h:1381
 #, kde-format
 msgid "Assets and Liabilities Summary"
 msgstr "Resum d'Actius i Passius"
 
-#: kmymoney/views/khomeview_p.h:1393
+#: kmymoney/views/khomeview_p.h:1395
 #, kde-format
 msgid "Asset Accounts"
 msgstr "Comptes d'Actiu"
 
-#: kmymoney/views/khomeview_p.h:1422
+#: kmymoney/views/khomeview_p.h:1424
 #, kde-format
 msgid "Liability Accounts"
 msgstr "Comptes de Passiu"
 
-#: kmymoney/views/khomeview_p.h:1524
+#: kmymoney/views/khomeview_p.h:1526
 #, kde-format
 msgid "Total Assets"
 msgstr "Total d'actius"
 
-#: kmymoney/views/khomeview_p.h:1534
+#: kmymoney/views/khomeview_p.h:1536
 #, kde-format
 msgid "Total Liabilities"
 msgstr "Total de passius"
 
-#: kmymoney/views/khomeview_p.h:1823
+#: kmymoney/views/khomeview_p.h:1825
 #, kde-format
 msgid "Cash Flow Summary"
 msgstr "Resum del flux de caixa"
 
-#: kmymoney/views/khomeview_p.h:1828
+#: kmymoney/views/khomeview_p.h:1830
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "Ingressos i despeses d'aquest mes"
 
-#: kmymoney/views/khomeview_p.h:1836
+#: kmymoney/views/khomeview_p.h:1838
 #, kde-format
 msgid "Scheduled Income"
 msgstr "Ingressos planificats"
 
-#: kmymoney/views/khomeview_p.h:1839
+#: kmymoney/views/khomeview_p.h:1841
 #, kde-format
 msgid "Expenses"
 msgstr "Despeses"
 
-#: kmymoney/views/khomeview_p.h:1842
+#: kmymoney/views/khomeview_p.h:1844
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "Despeses planificades"
 
-#: kmymoney/views/khomeview_p.h:1870
+#: kmymoney/views/khomeview_p.h:1872
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "Actius i Passius líquids"
 
-#: kmymoney/views/khomeview_p.h:1875
+#: kmymoney/views/khomeview_p.h:1877
 #, kde-format
 msgid "Liquid Assets"
 msgstr "Actius líquids"
 
-#: kmymoney/views/khomeview_p.h:1878
+#: kmymoney/views/khomeview_p.h:1880
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "Transferències a passius líquids"
 
-#: kmymoney/views/khomeview_p.h:1881
+#: kmymoney/views/khomeview_p.h:1883
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "Passius líquids"
 
-#: kmymoney/views/khomeview_p.h:1884
+#: kmymoney/views/khomeview_p.h:1886
 #, kde-format
 msgid "Other Transfers"
 msgstr "Altres transferències"
 
-#: kmymoney/views/khomeview_p.h:1927
+#: kmymoney/views/khomeview_p.h:1929
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "Estat del flux de caixa"
 
-#: kmymoney/views/khomeview_p.h:1932
+#: kmymoney/views/khomeview_p.h:1934
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "Actius líquids esperats"
 
-#: kmymoney/views/khomeview_p.h:1935
+#: kmymoney/views/khomeview_p.h:1937
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "Passius líquids esperats"
 
-#: kmymoney/views/khomeview_p.h:1938
+#: kmymoney/views/khomeview_p.h:1940
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "Benefici/pèrdua esperat"
@@ -20146,7 +20146,7 @@ msgstr "Elimina beneficiari"
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>Esteu segur que voleu fusionar els beneficiaris seleccionats?"
 
-#: kmymoney/views/kpayeesview.cpp:572 kmymoney/views/kpayeesview_p.h:570
+#: kmymoney/views/kpayeesview.cpp:572 kmymoney/views/kpayeesview_p.h:571
 #, kde-format
 msgid "Merge Payees"
 msgstr "Fusiona els beneficiaris"
@@ -20329,65 +20329,65 @@ msgstr "Sincronitza"
 msgid "Update"
 msgstr "Actualitza"
 
-#: kmymoney/views/kpayeesview_p.h:134
+#: kmymoney/views/kpayeesview_p.h:135
 #, kde-format
 msgctxt "@item No matching"
 msgid "No matching"
 msgstr "Sense coincidència"
 
-#: kmymoney/views/kpayeesview_p.h:135
+#: kmymoney/views/kpayeesview_p.h:136
 #, kde-format
 msgctxt "@item Match Payees name partially"
 msgid "Match Payees name (partial)"
 msgstr "Coincidència en el nom dels beneficiaris (parcial)"
 
-#: kmymoney/views/kpayeesview_p.h:136
+#: kmymoney/views/kpayeesview_p.h:137
 #, kde-format
 msgctxt "@item Match Payees name exactly"
 msgid "Match Payees name (exact)"
 msgstr "Coincidència en el nom dels beneficiaris (exacta)"
 
-#: kmymoney/views/kpayeesview_p.h:137
+#: kmymoney/views/kpayeesview_p.h:138
 #, kde-format
 msgctxt "@item Search match in list"
 msgid "Match on a name listed below"
 msgstr "Coincidència en un nom que es llista a sota"
 
-#: kmymoney/views/kpayeesview_p.h:140
+#: kmymoney/views/kpayeesview_p.h:141
 #, kde-format
 msgctxt "@item Show all payees"
 msgid "All"
 msgstr "Tot"
 
-#: kmymoney/views/kpayeesview_p.h:141
+#: kmymoney/views/kpayeesview_p.h:142
 #, kde-format
 msgctxt "@item Show only used payees"
 msgid "Used"
 msgstr "Usat"
 
-#: kmymoney/views/kpayeesview_p.h:142
+#: kmymoney/views/kpayeesview_p.h:143
 #, kde-format
 msgctxt "@item Show only unused payees"
 msgid "Unused"
 msgstr "Sense usar"
 
-#: kmymoney/views/kpayeesview_p.h:179 kmymoney/views/ktagsview.cpp:184
+#: kmymoney/views/kpayeesview_p.h:180 kmymoney/views/ktagsview.cpp:184
 #, kde-format
 msgctxt "Placeholder text"
 msgid "Search"
 msgstr "Cerca"
 
-#: kmymoney/views/kpayeesview_p.h:351 kmymoney/views/ktagsview.cpp:212
+#: kmymoney/views/kpayeesview_p.h:352 kmymoney/views/ktagsview.cpp:212
 #, kde-format
 msgid "Balance: %1"
 msgstr "Saldo: %1"
 
-#: kmymoney/views/kpayeesview_p.h:395 kmymoney/views/ktagsview.cpp:256
+#: kmymoney/views/kpayeesview_p.h:396 kmymoney/views/ktagsview.cpp:256
 #, kde-format
 msgid "Balance: %1%2"
 msgstr "Saldo: %1%2"
 
-#: kmymoney/views/kpayeesview_p.h:479
+#: kmymoney/views/kpayeesview_p.h:480
 #, kde-format
 msgid ""
 "At least one transaction/scheduled transaction or loan account is still "
@@ -20400,17 +20400,17 @@ msgstr ""
 "seleccionats. Tanmateix, almenys ha de romandre un beneficiari per tal que "
 "es pugui reassignar l'operació/operació planificada o el compte de préstec."
 
-#: kmymoney/views/kpayeesview_p.h:566
+#: kmymoney/views/kpayeesview_p.h:567
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
 msgstr "No s'ha pogut reassignar el beneficiari d'una operació/desglossament"
 
-#: kmymoney/views/kpayeesview_p.h:570
+#: kmymoney/views/kpayeesview_p.h:571
 #, kde-format
 msgid "Nothing to merge."
 msgstr "No hi ha res a fusionar."
 
-#: kmymoney/views/kpayeesview_p.h:653
+#: kmymoney/views/kpayeesview_p.h:654
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "No s'ha pogut eliminar el/s beneficiari/s"
@@ -20711,31 +20711,31 @@ msgstr "Obre un fitxer de dades existent"
 msgid "Open the Handbook and learn how to use KMyMoney"
 msgstr "Obriu el manual i apreneu a usar el KMyMoney"
 
-#: kmymoney/views/ledgerview.cpp:204
+#: kmymoney/views/ledgerview.cpp:206
 #, kde-format
 msgctxt "@action:inmenu open account"
 msgid "Go to account"
 msgstr "Ves al compte"
 
-#: kmymoney/views/ledgerview.cpp:206
+#: kmymoney/views/ledgerview.cpp:208
 #, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to payee"
 msgstr "Ves al beneficiari"
 
-#: kmymoney/views/ledgerview.cpp:251
+#: kmymoney/views/ledgerview.cpp:253
 #, kde-format
 msgctxt "@action:inmenu open account"
 msgid "Go to '%1'"
 msgstr "Ves a «%1»"
 
-#: kmymoney/views/ledgerview.cpp:261
+#: kmymoney/views/ledgerview.cpp:263
 #, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Ves a «%1»"
 
-#: kmymoney/views/ledgerview.cpp:686
+#: kmymoney/views/ledgerview.cpp:688
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -20746,20 +20746,20 @@ msgstr ""
 "editar dues operacions en paral·lel.<a href=\"jumpToEditor\">Aneu a l'editor "
 "actual</a>"
 
-#: kmymoney/views/ledgerview.cpp:800
+#: kmymoney/views/ledgerview.cpp:802
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Manca assignar una categoria a l'operació."
 
-#: kmymoney/views/ledgerview.cpp:807
+#: kmymoney/views/ledgerview.cpp:809
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Manca assignar una categoria a l'operació de <b>%1</b>."
 
 # skip-rule: ff-enter
-#: kmymoney/views/ledgerview.cpp:816
+#: kmymoney/views/ledgerview.cpp:818
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
@@ -20767,14 +20767,14 @@ msgstr ""
 "Aquesta planificació està endarrerida des del %1. Feu clic sobre la icona "
 "per a entrar-hi."
 
-#: kmymoney/views/ledgerview.cpp:822
+#: kmymoney/views/ledgerview.cpp:824
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr ""
 "Aquesta operació és importada. Feu clic sobre la icona per a acceptar-la."
 
-#: kmymoney/views/ledgerview.cpp:827
+#: kmymoney/views/ledgerview.cpp:829
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -20783,31 +20783,31 @@ msgstr ""
 "Aquesta operació és concordant. Feu clic sobre la icona per a acceptar-la o "
 "marcar-la com desaparellada."
 
-#: kmymoney/views/ledgerview.cpp:903
+#: kmymoney/views/ledgerview.cpp:905
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "No introduïu l'operació de la planificació endarrerida."
 
-#: kmymoney/views/ledgerview.cpp:904
+#: kmymoney/views/ledgerview.cpp:906
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Introduïu l'operació de la planificació endarrerida."
 
-#: kmymoney/views/ledgerview.cpp:907
+#: kmymoney/views/ledgerview.cpp:909
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Voleu introduir ara la planificació endarrerida?"
 
-#: kmymoney/views/ledgerview.cpp:908
+#: kmymoney/views/ledgerview.cpp:910
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Introducció de la planificació endarrerida"
 
-#: kmymoney/views/ledgerview.cpp:928
+#: kmymoney/views/ledgerview.cpp:930
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -20817,7 +20817,7 @@ msgstr ""
 "Separeu l'operació oculta (concordant) des de la qual es mostra i torneu a "
 "introduir-la en el llibre major."
 
-#: kmymoney/views/ledgerview.cpp:930
+#: kmymoney/views/ledgerview.cpp:932
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -20827,13 +20827,13 @@ msgstr ""
 "Accepteu la coincidència com es mostra i elimineu les dades de l'operació "
 "oculta (concordant)."
 
-#: kmymoney/views/ledgerview.cpp:934
+#: kmymoney/views/ledgerview.cpp:936
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Voleu acceptar o desfer ara l'operació concordant?"
 
-#: kmymoney/views/ledgerview.cpp:935
+#: kmymoney/views/ledgerview.cpp:937
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
@@ -20848,55 +20848,55 @@ msgstr "Acceptació o desaparellament de l'operació"
 msgid "TextLabel"
 msgstr "EtiquetaDeText"
 
-#: kmymoney/views/ledgerviewpage_p.h:96
+#: kmymoney/views/ledgerviewpage_p.h:97
 #, kde-format
 msgctxt "@label:textbox Reconciliation date"
 msgid "Last reconciliation: %1"
 msgstr "Última conciliació: %1"
 
-#: kmymoney/views/ledgerviewpage_p.h:98
+#: kmymoney/views/ledgerviewpage_p.h:99
 #, kde-format
 msgctxt "@label:textbox Reconciliation date"
 msgid "Never reconciled"
 msgstr "No s'ha conciliat mai"
 
-#: kmymoney/views/ledgerviewpage_p.h:139
+#: kmymoney/views/ledgerviewpage_p.h:140
 #, kde-format
 msgctxt "@label:textbox Total value of investment"
 msgid "Investment value: %1%2"
 msgstr "Valor de la inversió: %1%2"
 
-#: kmymoney/views/ledgerviewpage_p.h:143
+#: kmymoney/views/ledgerviewpage_p.h:144
 #: kmymoney/views/reconciliationledgerviewpage.cpp:397
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
 msgstr "Liquidat: %1"
 
-#: kmymoney/views/ledgerviewpage_p.h:146
+#: kmymoney/views/ledgerviewpage_p.h:147
 #, kde-format
 msgctxt "@label:textbox %1 sum symbol, %2 number of selected tx, %3 sum of tx"
 msgid "%1 of %2: %3"
 msgstr "%1 de %2: %3"
 
-#: kmymoney/views/ledgerviewpage_p.h:151
+#: kmymoney/views/ledgerviewpage_p.h:152
 #, kde-format
 msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "Saldo: %1"
 
-#: kmymoney/views/multitransactioneditor.cpp:172
-#: kmymoney/views/newtransactioneditor.cpp:229
+#: kmymoney/views/multitransactioneditor.cpp:174
+#: kmymoney/views/newtransactioneditor.cpp:231
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "La data de situació no és vàlida."
 
-#: kmymoney/views/multitransactioneditor.cpp:218
+#: kmymoney/views/multitransactioneditor.cpp:220
 #, kde-format
 msgid "Select category or account."
 msgstr "Seleccioneu una categoria o un compte."
 
-#: kmymoney/views/multitransactioneditor.cpp:230
+#: kmymoney/views/multitransactioneditor.cpp:232
 #, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
@@ -20906,13 +20906,13 @@ msgstr ""
 "Una operació seleccionada té una data de situació (%1) anterior a la data "
 "d'obertura del compte seleccionat (%2)."
 
-#: kmymoney/views/multitransactioneditor.cpp:727
+#: kmymoney/views/multitransactioneditor.cpp:729
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "No es poden editar múltiples planificacions a la vegada."
 
-#: kmymoney/views/multitransactioneditor.cpp:735
+#: kmymoney/views/multitransactioneditor.cpp:737
 #, kde-format
 msgid ""
 "Selection of category or account is not possible when split transactions are "
@@ -20921,13 +20921,13 @@ msgstr ""
 "No és possible la selecció de la categoria o del compte quan les operacions "
 "desglossades són part de la selecció."
 
-#: kmymoney/views/newspliteditor.cpp:147
+#: kmymoney/views/newspliteditor.cpp:150
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "El centre de despesa al que s'ha d'assignar aquesta operació."
 
-#: kmymoney/views/newspliteditor.cpp:152
+#: kmymoney/views/newspliteditor.cpp:155
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid ""
@@ -20937,26 +20937,26 @@ msgstr ""
 "Per a la categoria seleccionada es requereix l'assignació de l'operació a un "
 "centre de despesa."
 
-#: kmymoney/views/newspliteditor.cpp:163
+#: kmymoney/views/newspliteditor.cpp:166
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "La categoria a la qual s'ha d'assignar aquest desglossament."
 
-#: kmymoney/views/newspliteditor.cpp:204
+#: kmymoney/views/newspliteditor.cpp:207
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "Es requereix l'assignació d'una categoria per a un desglossament."
 
-#: kmymoney/views/newspliteditor.cpp:213
-#: kmymoney/views/newtransactioneditor.cpp:374
+#: kmymoney/views/newspliteditor.cpp:216
+#: kmymoney/views/newtransactioneditor.cpp:376
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "El número de xec usat per a aquesta operació."
 
-#: kmymoney/views/newspliteditor.cpp:222
-#: kmymoney/views/newtransactioneditor.cpp:384
+#: kmymoney/views/newspliteditor.cpp:225
+#: kmymoney/views/newtransactioneditor.cpp:386
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "El número de xec <b>%1</b> ja s'ha usat en aquest compte."
@@ -20979,12 +20979,12 @@ msgstr "Pagador/Beneficiari"
 msgid "Costcenter"
 msgstr "Centre de despesa"
 
-#: kmymoney/views/newtransactioneditor.cpp:258
+#: kmymoney/views/newtransactioneditor.cpp:260
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
 msgstr "El centre de despesa al que s'ha d'assignar aquesta operació."
 
-#: kmymoney/views/newtransactioneditor.cpp:261
+#: kmymoney/views/newtransactioneditor.cpp:263
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -20993,13 +20993,13 @@ msgstr ""
 "Per a la categoria seleccionada es requereix l'assignació de l'operació a un "
 "centre de despesa."
 
-#: kmymoney/views/newtransactioneditor.cpp:529
+#: kmymoney/views/newtransactioneditor.cpp:531
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
 msgstr "Seleccioneu autocompleció d'operació"
 
-#: kmymoney/views/newtransactionform.cpp:113
+#: kmymoney/views/newtransactionform.cpp:115
 #, kde-format
 msgctxt ""
 "@item:intext Amount, %1 transaction amount, %2 payment direction enclosed in "
@@ -21159,13 +21159,13 @@ msgstr ""
 "Useu el botó «+» de la barra de pestanyes de la part superior per a afegir "
 "comptes.</p></body></html>"
 
-#: kmymoney/views/splitdialog.cpp:317
+#: kmymoney/views/splitdialog.cpp:319
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Overassigned"
 msgstr "Sobreassignada"
 
-#: kmymoney/views/splitdialog.cpp:320
+#: kmymoney/views/splitdialog.cpp:322
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Unassigned"
@@ -21306,37 +21306,37 @@ msgctxt "@item:inmenu Delete selected split(s)"
 msgid "Delete"
 msgstr "Suprimeix"
 
-#: kmymoney/views/tabordereditor.cpp:423
+#: kmymoney/views/tabordereditor.cpp:424
 #, kde-format
 msgctxt "@title:menu"
 msgid "Tab Editor Options"
 msgstr "Opcions de l'editor de tabulació"
 
-#: kmymoney/views/tabordereditor.cpp:426
+#: kmymoney/views/tabordereditor.cpp:427
 #, kde-format
 msgctxt "@action:inmenu Move tab editor selector to this widget"
 msgid "Start from here"
 msgstr "Comença des d'aquí"
 
-#: kmymoney/views/tabordereditor.cpp:428
+#: kmymoney/views/tabordereditor.cpp:429
 #, kde-format
 msgctxt "@action:inmenu Set tab editor selector to first widget"
 msgid "Restart"
 msgstr "Reinicia"
 
-#: kmymoney/views/tabordereditor.cpp:431
+#: kmymoney/views/tabordereditor.cpp:432
 #, kde-format
 msgctxt "@action:inmenu Reset all changes"
 msgid "Undo changes"
 msgstr "Desfés els canvis"
 
-#: kmymoney/views/tabordereditor.cpp:433
+#: kmymoney/views/tabordereditor.cpp:434
 #, kde-format
 msgctxt "@action:inmenu Reset to application defaults"
 msgid "Reset to default"
 msgstr "Restableix als valors predeterminats"
 
-#: kmymoney/views/tabordereditor.cpp:438
+#: kmymoney/views/tabordereditor.cpp:439
 #, kde-format
 msgctxt "@action:inmenu Open tab order dialog"
 msgid "Tab Order List..."
