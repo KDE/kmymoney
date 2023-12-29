@@ -986,7 +986,6 @@ public:
                 }
             }
 
-            isLoan = false;
             for (const auto& split : splits) {
                 auto acc = file->account(split.accountId());
                 MyMoneyMoney val = split.value();

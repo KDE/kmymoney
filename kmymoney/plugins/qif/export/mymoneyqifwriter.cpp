@@ -307,7 +307,6 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
         QString accName;
         QString actionType = (*it).action();
         MyMoneyAccount acc = file->account((*it).accountId());
-        typ = acc.accountType();
         //
         //  eMyMoney::Account::Type::Checkings.
         //

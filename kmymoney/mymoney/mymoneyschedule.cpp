@@ -1252,7 +1252,6 @@ QDate MyMoneySchedule::addHalfMonths(QDate date, int mult) const
     } else if (mult < 0)  // Go backwards
         for (int i = 0; i > mult; i--) {
             d = newdate.day();
-            dm = newdate.daysInMonth();
             if (d > 15) {
                 dm = newdate.daysInMonth();
                 newdate = newdate.addDays((d == dm) ? 15 - dm : -15);
