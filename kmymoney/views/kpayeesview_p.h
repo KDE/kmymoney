@@ -428,7 +428,8 @@ public:
             QList<MyMoneySchedule> used_schedules;
             for (const auto& schedule : file->scheduleList()) {
                 // loop over all splits in the transaction of the schedule
-                for (const auto& split : schedule.transaction().splits()) {
+                const auto splits = schedule.transaction().splits();
+                for (const auto& split : splits) {
                     // is the payee in the split to be deleted?
                     if (payeeInList(list, split.payeeId())) {
                         used_schedules.push_back(schedule); // remember this schedule
