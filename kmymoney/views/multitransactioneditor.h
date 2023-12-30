@@ -31,12 +31,6 @@ public:
     virtual ~MultiTransactionEditor();
 
     /**
-     * This method returns true if the user pressed the enter button.
-     * It remains false, in case the user pressed the cancel button.
-     */
-    virtual bool accepted() const override;
-
-    /**
      */
     void loadTransaction(const QModelIndex& index) override;
     QStringList saveTransaction(const QStringList& selectedJournalEntries) override;
@@ -72,11 +66,11 @@ public:
      */
     virtual QString errorMessage() const override;
 
+protected:
+    bool isTransactionDataValid() const override;
+
 public Q_SLOTS:
     void slotSettingsChanged() override;
-
-protected Q_SLOTS:
-    virtual void acceptEdit();
 
 Q_SIGNALS:
     void postDateChanged(const QDate& date) const;

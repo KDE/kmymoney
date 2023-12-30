@@ -19,7 +19,6 @@
 #include <QStringList>
 #include <QTableView>
 #include <QTimer>
-#include <QTreeView>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -29,20 +28,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "accountcreator.h"
-#include "accountsmodel.h"
 #include "costcentermodel.h"
 #include "icons.h"
 #include "idfilter.h"
 #include "journalmodel.h"
 #include "kcurrencycalculator.h"
-#include "kmymoneyaccountcombo.h"
 #include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
 #include "knewaccountdlg.h"
 #include "ktransactionselectdlg.h"
 #include "mymoneyaccount.h"
-#include "mymoneyenums.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneypayee.h"
@@ -50,7 +45,6 @@
 #include "mymoneysecurity.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
-#include "payeecreator.h"
 #include "payeesmodel.h"
 #include "securitiesmodel.h"
 #include "splitdialog.h"
@@ -80,7 +74,6 @@ public:
         , categoriesModel(new AccountNamesFilterProxyModel(parent))
         , costCenterModel(new QSortFilterProxyModel(parent))
         , payeesModel(new QSortFilterProxyModel(parent))
-        , accepted(false)
         , costCenterRequired(false)
         , inUpdateVat(false)
         , keepCategoryAmount(false)
@@ -127,8 +120,6 @@ public:
     void updateVAT(TaxValueChange amountChanged);
     MyMoneyMoney removeVatSplit();
     MyMoneyMoney splitsSum() const;
-    void createCategory();
-    void createPayee();
     void defaultCategoryAssignment();
     void loadTransaction(QModelIndex idx);
     MyMoneySplit prepareSplit(const MyMoneySplit& sp);
@@ -141,7 +132,6 @@ public:
     AccountNamesFilterProxyModel* categoriesModel;
     QSortFilterProxyModel* costCenterModel;
     QSortFilterProxyModel* payeesModel;
-    bool accepted;
     bool costCenterRequired;
     bool inUpdateVat;
     bool keepCategoryAmount;
@@ -198,6 +188,10 @@ bool NewTransactionEditor::Private::checkForValidTransaction(bool doUserInteract
         rc = false;
     }
 
+    if (q->needCreateCategory(ui->categoryCombo) || q->needCreatePayee(ui->payeeEdit)) {
+        rc = false;
+    }
+
     if (doUserInteraction) {
         /// @todo add dialog here that shows the @a infos about the problem
     }
@@ -223,6 +217,11 @@ bool NewTransactionEditor::Private::isDatePostOpeningDate(const QDate& date, con
     return rc;
 }
 
+/**
+ * Check that the postdate is valid and that all referenced
+ * account's opening date is prior to the postdate. Return
+ * @a true if all conditions are met.
+ */
 bool NewTransactionEditor::Private::postdateChanged(const QDate& date)
 {
     WidgetHintFrame::hide(ui->dateEdit, i18n("The posting date of the transaction."));
@@ -253,7 +252,13 @@ bool NewTransactionEditor::Private::postdateChanged(const QDate& date)
     return rc;
 }
 
-
+/**
+ * Check that the cost center information is filled when
+ * required for the category and update the first split
+ * of a normal transaction with the id of the selected
+ * cost center. Returns @a true if cost center assignment
+ * is correct.
+ */
 bool NewTransactionEditor::Private::costCenterChanged(int costCenterIndex)
 {
     bool rc = true;
@@ -869,28 +874,6 @@ void NewTransactionEditor::Private::setupTabOrder()
     q->setupTabOrder(q->property("kmm_currenttaborder").toStringList());
 }
 
-void NewTransactionEditor::Private::createCategory()
-{
-    auto creator = new AccountCreator(q);
-    creator->setComboBox(ui->categoryCombo);
-    creator->addButton(ui->cancelButton);
-    creator->addButton(ui->enterButton);
-    creator->setAccountType(eMyMoney::Account::Type::Expense);
-    if (ui->creditDebitEdit->haveValue() && ui->creditDebitEdit->value().isPositive()) {
-        creator->setAccountType(eMyMoney::Account::Type::Income);
-    }
-    creator->createAccount();
-}
-
-void NewTransactionEditor::Private::createPayee()
-{
-    auto creator = new PayeeCreator(q);
-    creator->setComboBox(ui->payeeEdit);
-    creator->addButton(ui->cancelButton);
-    creator->addButton(ui->enterButton);
-    creator->createPayee();
-}
-
 void NewTransactionEditor::Private::defaultCategoryAssignment()
 {
     if (splitModel.rowCount() == 0) {
@@ -1181,19 +1164,6 @@ void NewTransactionEditor::setAmountPlaceHolderText(const QAbstractItemModel* mo
                                                model->headerData(JournalModel::Column::Deposit, Qt::Horizontal).toString());
 }
 
-bool NewTransactionEditor::accepted() const
-{
-    return d->accepted;
-}
-
-void NewTransactionEditor::acceptEdit()
-{
-    if (d->checkForValidTransaction()) {
-        d->accepted = true;
-        Q_EMIT done();
-    }
-}
-
 void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
 {
     if (schedule.transaction().splitCount() == 0) {
@@ -1312,7 +1282,7 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
     // a callback from the model, but we can safely ignore it
     // same when we get called from the delegate's setEditorData()
     // method
-    if (d->accepted || !index.isValid() || d->loadedFromModel)
+    if (accepted() || !index.isValid() || d->loadedFromModel)
         return;
 
     d->loadedFromModel = true;
@@ -1507,28 +1477,18 @@ bool NewTransactionEditor::eventFilter(QObject* o, QEvent* e)
         }
 
         if (e->type() == QEvent::FocusOut) {
-            if (o == d->ui->categoryCombo) {
-                if (!d->ui->categoryCombo->popup()->isVisible() && !cb->currentText().isEmpty() && !d->ui->categoryCombo->lineEdit()->isReadOnly()) {
-                    const auto accountId = d->ui->categoryCombo->getSelected();
-                    const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
-                    if (!accountIdx.isValid() || accountIdx.data(eMyMoney::Model::AccountFullNameRole).toString().compare(cb->currentText())) {
-                        d->createCategory();
-                    }
+            if (cb == d->ui->categoryCombo) {
+                if (needCreateCategory(d->ui->categoryCombo)) {
+                    createCategory(d->ui->categoryCombo, defaultCategoryType(d->ui->creditDebitEdit));
                 }
 
             } else if (o == d->ui->payeeEdit) {
-                // set case sensitivity so that a payee with the same spelling
-                // but different case can be created and is not found by accident
-                // inside the Qt logic (see QComboBoxPrivate::_q_editingFinished())
-                d->ui->payeeEdit->completer()->setCaseSensitivity(Qt::CaseSensitive);
-                if (!cb->currentText().isEmpty()) {
-                    const auto index(cb->findText(cb->currentText()));
-                    if (index != -1) {
-                        cb->setCurrentIndex(index);
-                    } else {
-                        d->createPayee();
-                    }
+                if (needCreatePayee(cb)) {
+                    createPayee(cb);
 
+                } else if (!cb->currentText().isEmpty()) {
+                    const auto index(cb->findText(cb->currentText()));
+                    cb->setCurrentIndex(index);
                     // check if category is filled and fill with
                     // default for payee if one is setup
                     d->defaultCategoryAssignment();
@@ -1621,4 +1581,9 @@ WidgetHintFrameCollection* NewTransactionEditor::widgetHintFrameCollection() con
 void NewTransactionEditor::setKeepCategoryAmount(bool keepCategoryAmount)
 {
     d->keepCategoryAmount = keepCategoryAmount;
+}
+
+bool NewTransactionEditor::isTransactionDataValid() const
+{
+    return d->checkForValidTransaction(false);
 }
