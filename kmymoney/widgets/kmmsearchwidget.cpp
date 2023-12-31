@@ -35,6 +35,7 @@ public:
         ui->setupUi(qq);
         ui->m_closeButton->setIcon(Icons::get(Icon::DialogClose));
     }
+    virtual ~KMMSearchWidgetPrivate() = default;
 
     KMMSearchWidget* q_ptr;
     Ui_KMMSearchWidget* ui;
