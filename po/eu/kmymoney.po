@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-30 00:41+0000\n"
+"POT-Creation-Date: 2023-12-31 00:42+0000\n"
 "PO-Revision-Date: 2023-12-06 11:31+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -15001,13 +15001,13 @@ msgid "Include subaccounts"
 msgstr "Sartu azpikontuak"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:145
-#: kmymoney/views/kpayeesview_p.h:795
+#: kmymoney/views/kpayeesview_p.h:796
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<b>%1</b>(r)en aldaketak gorde nahi dituzu?"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
-#: kmymoney/views/kpayeesview_p.h:796 kmymoney/views/ktagsview.cpp:289
+#: kmymoney/views/kpayeesview_p.h:797 kmymoney/views/ktagsview.cpp:289
 #, kde-format
 msgid "Save changes"
 msgstr "Gorde aldaketak"
@@ -18839,75 +18839,75 @@ msgctxt "@label:textbox"
 msgid "Ratio 1/"
 msgstr "Proportzioa 1/"
 
-#: kmymoney/views/investtransactioneditor.cpp:87
+#: kmymoney/views/investtransactioneditor.cpp:81
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Buy shares"
 msgstr "Erosi akzioak"
 
-#: kmymoney/views/investtransactioneditor.cpp:88
+#: kmymoney/views/investtransactioneditor.cpp:82
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Sell shares"
 msgstr "Saldu akzioak"
 
-#: kmymoney/views/investtransactioneditor.cpp:89
+#: kmymoney/views/investtransactioneditor.cpp:83
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Dividend"
 msgstr "Dibidendua"
 
-#: kmymoney/views/investtransactioneditor.cpp:90
+#: kmymoney/views/investtransactioneditor.cpp:84
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Reinvest dividend"
 msgstr "Berrinbertitu dibidendua"
 
-#: kmymoney/views/investtransactioneditor.cpp:91
+#: kmymoney/views/investtransactioneditor.cpp:85
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Yield"
 msgstr "Etekina"
 
-#: kmymoney/views/investtransactioneditor.cpp:92
+#: kmymoney/views/investtransactioneditor.cpp:86
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Add shares"
 msgstr "Gehitu akzioak"
 
-#: kmymoney/views/investtransactioneditor.cpp:93
+#: kmymoney/views/investtransactioneditor.cpp:87
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Remove shares"
 msgstr "Kendu akzioak"
 
-#: kmymoney/views/investtransactioneditor.cpp:94
+#: kmymoney/views/investtransactioneditor.cpp:88
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Split shares"
 msgstr "Akzioak zatitzea"
 
-#: kmymoney/views/investtransactioneditor.cpp:95
+#: kmymoney/views/investtransactioneditor.cpp:89
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
 msgstr "Interes-irabazia"
 
-#: kmymoney/views/investtransactioneditor.cpp:272
-#: kmymoney/views/multitransactioneditor.cpp:166
-#: kmymoney/views/newtransactioneditor.cpp:228
+#: kmymoney/views/investtransactioneditor.cpp:261
+#: kmymoney/views/multitransactioneditor.cpp:184
+#: kmymoney/views/newtransactioneditor.cpp:227
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "Transakzioaren data."
 
-#: kmymoney/views/investtransactioneditor.cpp:296
-#: kmymoney/views/multitransactioneditor.cpp:196
-#: kmymoney/views/newtransactioneditor.cpp:248
+#: kmymoney/views/investtransactioneditor.cpp:285
+#: kmymoney/views/multitransactioneditor.cpp:214
+#: kmymoney/views/newtransactioneditor.cpp:247
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "Transakzio data  <b>%1</b> kontuaren irekiera dataren aurrekoa da."
 
-#: kmymoney/views/investtransactioneditor.cpp:392
+#: kmymoney/views/investtransactioneditor.cpp:400
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -18917,55 +18917,55 @@ msgstr ""
 "Transakzio-merkantzia aldatu egin da, eta baliteke prezioen informazio "
 "guztia baliogabea izatea. Mesedez, egiaztatu itzazu."
 
-#: kmymoney/views/investtransactioneditor.cpp:533
+#: kmymoney/views/investtransactioneditor.cpp:541
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Category for fees"
 msgstr "Kuoten kategoria"
 
-#: kmymoney/views/investtransactioneditor.cpp:534
+#: kmymoney/views/investtransactioneditor.cpp:542
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Amount of fees"
 msgstr "Kuoten zenbatekoa"
 
-#: kmymoney/views/investtransactioneditor.cpp:535
+#: kmymoney/views/investtransactioneditor.cpp:543
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Category for interest"
 msgstr "Interesaren kategoria"
 
-#: kmymoney/views/investtransactioneditor.cpp:536
+#: kmymoney/views/investtransactioneditor.cpp:544
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Amount of interest"
 msgstr "Interesen zenbatekoa"
 
-#: kmymoney/views/investtransactioneditor.cpp:537
+#: kmymoney/views/investtransactioneditor.cpp:545
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Asset or brokerage account"
 msgstr "Aktibo edo artekari-sarien kontua"
 
-#: kmymoney/views/investtransactioneditor.cpp:538
+#: kmymoney/views/investtransactioneditor.cpp:546
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Price information for this transaction"
 msgstr "Transakzio honen prezioari buruzko informazioa"
 
-#: kmymoney/views/investtransactioneditor.cpp:541
+#: kmymoney/views/investtransactioneditor.cpp:549
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Security for this transaction"
 msgstr "Transakzio honetarako burtsa-balioa"
 
-#: kmymoney/views/investtransactioneditor.cpp:542
+#: kmymoney/views/investtransactioneditor.cpp:550
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
 msgstr "Aukeratu transakzio honetarako jarduera."
 
-#: kmymoney/views/investtransactioneditor.cpp:545
+#: kmymoney/views/investtransactioneditor.cpp:553
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -18975,20 +18975,20 @@ msgstr ""
 "Transakzio honetarako balorea ezin da aldatu baloreen kontua itxita "
 "dagoelako."
 
-#: kmymoney/views/investtransactioneditor.cpp:546
+#: kmymoney/views/investtransactioneditor.cpp:554
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This activity cannot be modified because the security account is closed."
 msgstr "Jarduera hau ezin da aldatu baloreen kontua itxita dagoelako."
 
-#: kmymoney/views/investtransactioneditor.cpp:558
+#: kmymoney/views/investtransactioneditor.cpp:566
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "Akzio kopurua"
 
-#: kmymoney/views/investtransactioneditor.cpp:560
+#: kmymoney/views/investtransactioneditor.cpp:568
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -18996,68 +18996,68 @@ msgid ""
 "closed."
 msgstr "Titulu kopurua ezin da aldatu, baloreen kontua itxia dagoelako."
 
-#: kmymoney/views/investtransactioneditor.cpp:564
+#: kmymoney/views/investtransactioneditor.cpp:572
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr "Sartu transakzio honetarako akzio kopurua."
 
-#: kmymoney/views/investtransactioneditor.cpp:570
+#: kmymoney/views/investtransactioneditor.cpp:578
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "Zatiketa erlazioa"
 
-#: kmymoney/views/investtransactioneditor.cpp:572
+#: kmymoney/views/investtransactioneditor.cpp:580
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr "Zatiketa erlazioa ezin da aldatu baloreen kontua itxita dagoelako."
 
-#: kmymoney/views/investtransactioneditor.cpp:576
+#: kmymoney/views/investtransactioneditor.cpp:584
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr "Sartu transakzio honetarako zatiketa erlazioa"
 
-#: kmymoney/views/investtransactioneditor.cpp:588
+#: kmymoney/views/investtransactioneditor.cpp:596
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr "Sartu transakzio honen prezioari buruzko informazioa"
 
-#: kmymoney/views/investtransactioneditor.cpp:604
+#: kmymoney/views/investtransactioneditor.cpp:612
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "Hautatu kontua transakzioa saldatzeko"
 
-#: kmymoney/views/investtransactioneditor.cpp:611
+#: kmymoney/views/investtransactioneditor.cpp:619
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr "Sartu kuoten kategoria"
 
-#: kmymoney/views/investtransactioneditor.cpp:614
+#: kmymoney/views/investtransactioneditor.cpp:622
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "Sartu kuoten zenbatekoa"
 
-#: kmymoney/views/investtransactioneditor.cpp:620
+#: kmymoney/views/investtransactioneditor.cpp:628
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr "Sartu interesen kategoria"
 
-#: kmymoney/views/investtransactioneditor.cpp:623
+#: kmymoney/views/investtransactioneditor.cpp:631
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "Sartu interesen zenbatekoa"
 
-#: kmymoney/views/investtransactioneditor.cpp:628
+#: kmymoney/views/investtransactioneditor.cpp:636
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
@@ -20007,7 +20007,7 @@ msgstr "Kendu onuraduna"
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>Benetan bateratu nahi dituzu hautatutako onuradun guztiak?"
 
-#: kmymoney/views/kpayeesview.cpp:572 kmymoney/views/kpayeesview_p.h:571
+#: kmymoney/views/kpayeesview.cpp:572 kmymoney/views/kpayeesview_p.h:572
 #, kde-format
 msgid "Merge Payees"
 msgstr " Onuradunak bateratu"
@@ -20246,7 +20246,7 @@ msgstr "Saldoa: %1"
 msgid "Balance: %1%2"
 msgstr "Saldoa: %1%2"
 
-#: kmymoney/views/kpayeesview_p.h:480
+#: kmymoney/views/kpayeesview_p.h:481
 #, kde-format
 msgid ""
 "At least one transaction/scheduled transaction or loan account is still "
@@ -20260,17 +20260,17 @@ msgstr ""
 "transakzio/transakzio antolatua edo mailegu-kontua berriz esleitu ahal "
 "izateko."
 
-#: kmymoney/views/kpayeesview_p.h:567
+#: kmymoney/views/kpayeesview_p.h:568
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
 msgstr "Ez da transakzioaren/partidaren onuraduna berresleitzeko gai"
 
-#: kmymoney/views/kpayeesview_p.h:571
+#: kmymoney/views/kpayeesview_p.h:572
 #, kde-format
 msgid "Nothing to merge."
 msgstr "Bateratzeko ezer ez."
 
-#: kmymoney/views/kpayeesview_p.h:654
+#: kmymoney/views/kpayeesview_p.h:655
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "Ezin d(ir)a onuraduna(k) kendu"
@@ -20736,18 +20736,32 @@ msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "Saldoa: %1"
 
-#: kmymoney/views/multitransactioneditor.cpp:174
-#: kmymoney/views/newtransactioneditor.cpp:231
+#: kmymoney/views/multitransactioneditor.cpp:192
+#: kmymoney/views/newtransactioneditor.cpp:230
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "Argitalpen-data baliogabea da."
 
-#: kmymoney/views/multitransactioneditor.cpp:220
+#: kmymoney/views/multitransactioneditor.cpp:225
+#: kmymoney/views/newtransactioneditor.cpp:265
+#, kde-format
+msgid "The cost center this transaction should be assigned to."
+msgstr "Transakzio honen kostu-zentroa esleitu beharko litzateke."
+
+#: kmymoney/views/multitransactioneditor.cpp:228
+#: kmymoney/views/newtransactioneditor.cpp:268
+#, kde-format
+msgid ""
+"A cost center assignment is required for a transaction in the selected "
+"category."
+msgstr "Hautatutako kategorian kostu-zentroa esleitu behar zaie transakzioei."
+
+#: kmymoney/views/multitransactioneditor.cpp:247
 #, kde-format
 msgid "Select category or account."
 msgstr "Hautatu kategoria edo kontua."
 
-#: kmymoney/views/multitransactioneditor.cpp:232
+#: kmymoney/views/multitransactioneditor.cpp:261
 #, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
@@ -20757,13 +20771,13 @@ msgstr ""
 "Hautatutako transakzio batek bidaltze-data (%1) hautatutako kontuaren (%2) "
 "irekiera dataren aurrekoa du."
 
-#: kmymoney/views/multitransactioneditor.cpp:729
+#: kmymoney/views/multitransactioneditor.cpp:721
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "Ezin ditu aldi berean hainbat antolaketa editatu."
 
-#: kmymoney/views/multitransactioneditor.cpp:737
+#: kmymoney/views/multitransactioneditor.cpp:729
 #, kde-format
 msgid ""
 "Selection of category or account is not possible when split transactions are "
@@ -20801,13 +20815,13 @@ msgid "A category assignment is required for a split."
 msgstr "Partida honetarako kategoria esleitzea beharrezkoa da."
 
 #: kmymoney/views/newspliteditor.cpp:216
-#: kmymoney/views/newtransactioneditor.cpp:376
+#: kmymoney/views/newtransactioneditor.cpp:381
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Transakzio honetan erabilitako txeke-zenbakia."
 
 #: kmymoney/views/newspliteditor.cpp:225
-#: kmymoney/views/newtransactioneditor.cpp:386
+#: kmymoney/views/newtransactioneditor.cpp:391
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "<b>%1</b> txeke-zenbakia dagoeneko erabili da kontu honetan."
@@ -20830,19 +20844,7 @@ msgstr "Ordaintzailea/onuraduna"
 msgid "Costcenter"
 msgstr "Kostu-zentroa"
 
-#: kmymoney/views/newtransactioneditor.cpp:260
-#, kde-format
-msgid "The cost center this transaction should be assigned to."
-msgstr "Transakzio honen kostu-zentroa esleitu beharko litzateke."
-
-#: kmymoney/views/newtransactioneditor.cpp:263
-#, kde-format
-msgid ""
-"A cost center assignment is required for a transaction in the selected "
-"category."
-msgstr "Hautatutako kategorian kostu-zentroa esleitu behar zaie transakzioei."
-
-#: kmymoney/views/newtransactioneditor.cpp:530
+#: kmymoney/views/newtransactioneditor.cpp:535
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"

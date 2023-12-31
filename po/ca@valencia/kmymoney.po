@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-30 00:41+0000\n"
+"POT-Creation-Date: 2023-12-31 00:42+0000\n"
 "PO-Revision-Date: 2023-12-26 11:22+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -15095,13 +15095,13 @@ msgid "Include subaccounts"
 msgstr "Inclou els subcomptes"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:145
-#: kmymoney/views/kpayeesview_p.h:795
+#: kmymoney/views/kpayeesview_p.h:796
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<qt>Voleu guardar els canvis per a <b>%1</b>?</qt>"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
-#: kmymoney/views/kpayeesview_p.h:796 kmymoney/views/ktagsview.cpp:289
+#: kmymoney/views/kpayeesview_p.h:797 kmymoney/views/ktagsview.cpp:289
 #, kde-format
 msgid "Save changes"
 msgstr "Guarda els canvis"
@@ -18966,76 +18966,76 @@ msgctxt "@label:textbox"
 msgid "Ratio 1/"
 msgstr "Relació 1/"
 
-#: kmymoney/views/investtransactioneditor.cpp:87
+#: kmymoney/views/investtransactioneditor.cpp:81
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Buy shares"
 msgstr "Compra d'accions"
 
-#: kmymoney/views/investtransactioneditor.cpp:88
+#: kmymoney/views/investtransactioneditor.cpp:82
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Sell shares"
 msgstr "Venda d'accions"
 
-#: kmymoney/views/investtransactioneditor.cpp:89
+#: kmymoney/views/investtransactioneditor.cpp:83
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Dividend"
 msgstr "Dividend"
 
-#: kmymoney/views/investtransactioneditor.cpp:90
+#: kmymoney/views/investtransactioneditor.cpp:84
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Reinvest dividend"
 msgstr "Reinversió del dividend"
 
-#: kmymoney/views/investtransactioneditor.cpp:91
+#: kmymoney/views/investtransactioneditor.cpp:85
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Yield"
 msgstr "Rendiment"
 
-#: kmymoney/views/investtransactioneditor.cpp:92
+#: kmymoney/views/investtransactioneditor.cpp:86
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Add shares"
 msgstr "Afig accions"
 
-#: kmymoney/views/investtransactioneditor.cpp:93
+#: kmymoney/views/investtransactioneditor.cpp:87
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Remove shares"
 msgstr "Elimina les accions"
 
-#: kmymoney/views/investtransactioneditor.cpp:94
+#: kmymoney/views/investtransactioneditor.cpp:88
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Split shares"
 msgstr "Desdoblament de les accions"
 
-#: kmymoney/views/investtransactioneditor.cpp:95
+#: kmymoney/views/investtransactioneditor.cpp:89
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
 msgstr "Interessos rebuts"
 
-#: kmymoney/views/investtransactioneditor.cpp:272
-#: kmymoney/views/multitransactioneditor.cpp:166
-#: kmymoney/views/newtransactioneditor.cpp:228
+#: kmymoney/views/investtransactioneditor.cpp:261
+#: kmymoney/views/multitransactioneditor.cpp:184
+#: kmymoney/views/newtransactioneditor.cpp:227
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "La data de situació de l'operació."
 
-#: kmymoney/views/investtransactioneditor.cpp:296
-#: kmymoney/views/multitransactioneditor.cpp:196
-#: kmymoney/views/newtransactioneditor.cpp:248
+#: kmymoney/views/investtransactioneditor.cpp:285
+#: kmymoney/views/multitransactioneditor.cpp:214
+#: kmymoney/views/newtransactioneditor.cpp:247
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr ""
 "La data de situació és anterior a la data d'obertura del compte <b>%1</b>."
 
-#: kmymoney/views/investtransactioneditor.cpp:392
+#: kmymoney/views/investtransactioneditor.cpp:400
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -19045,55 +19045,55 @@ msgstr ""
 "S'ha canviat la mercaderia de l'operació, i possiblement provocarà que tota "
 "la informació del preu no siga vàlida. Cal comprovar-ho."
 
-#: kmymoney/views/investtransactioneditor.cpp:533
+#: kmymoney/views/investtransactioneditor.cpp:541
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Category for fees"
 msgstr "Categoria per a les despeses"
 
-#: kmymoney/views/investtransactioneditor.cpp:534
+#: kmymoney/views/investtransactioneditor.cpp:542
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Amount of fees"
 msgstr "Import de les despeses"
 
-#: kmymoney/views/investtransactioneditor.cpp:535
+#: kmymoney/views/investtransactioneditor.cpp:543
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Category for interest"
 msgstr "Categoria per a l'interés"
 
-#: kmymoney/views/investtransactioneditor.cpp:536
+#: kmymoney/views/investtransactioneditor.cpp:544
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Amount of interest"
 msgstr "Import de l'interés"
 
-#: kmymoney/views/investtransactioneditor.cpp:537
+#: kmymoney/views/investtransactioneditor.cpp:545
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Asset or brokerage account"
 msgstr "Compte d'actiu o de valors"
 
-#: kmymoney/views/investtransactioneditor.cpp:538
+#: kmymoney/views/investtransactioneditor.cpp:546
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Price information for this transaction"
 msgstr "Informació del preu d'esta operació"
 
-#: kmymoney/views/investtransactioneditor.cpp:541
+#: kmymoney/views/investtransactioneditor.cpp:549
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Security for this transaction"
 msgstr "Títol per a esta operació"
 
-#: kmymoney/views/investtransactioneditor.cpp:542
+#: kmymoney/views/investtransactioneditor.cpp:550
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
 msgstr "Seleccioneu l'activitat per a esta operació."
 
-#: kmymoney/views/investtransactioneditor.cpp:545
+#: kmymoney/views/investtransactioneditor.cpp:553
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19103,7 +19103,7 @@ msgstr ""
 "No s'ha pogut modificar el títol d'esta operació perquè el compte dels "
 "títols està tancat."
 
-#: kmymoney/views/investtransactioneditor.cpp:546
+#: kmymoney/views/investtransactioneditor.cpp:554
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19112,13 +19112,13 @@ msgstr ""
 "No s'ha pogut modificar esta activitat perquè el compte dels títols està "
 "tancat."
 
-#: kmymoney/views/investtransactioneditor.cpp:558
+#: kmymoney/views/investtransactioneditor.cpp:566
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "Nombre d'accions"
 
-#: kmymoney/views/investtransactioneditor.cpp:560
+#: kmymoney/views/investtransactioneditor.cpp:568
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19128,19 +19128,19 @@ msgstr ""
 "No s'ha pogut modificar el nombre d'accions perquè el compte dels títols "
 "està tancat."
 
-#: kmymoney/views/investtransactioneditor.cpp:564
+#: kmymoney/views/investtransactioneditor.cpp:572
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr "Introduïu el nombre d'accions d'esta operació"
 
-#: kmymoney/views/investtransactioneditor.cpp:570
+#: kmymoney/views/investtransactioneditor.cpp:578
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "Relació de desdoblament"
 
-#: kmymoney/views/investtransactioneditor.cpp:572
+#: kmymoney/views/investtransactioneditor.cpp:580
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19149,49 +19149,49 @@ msgstr ""
 "No s'ha pogut modificar la relació de desdoblament perquè el compte dels "
 "títols està tancat."
 
-#: kmymoney/views/investtransactioneditor.cpp:576
+#: kmymoney/views/investtransactioneditor.cpp:584
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr "Introduïu la relació de desdoblament d'esta operació"
 
-#: kmymoney/views/investtransactioneditor.cpp:588
+#: kmymoney/views/investtransactioneditor.cpp:596
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr "Introduïu la informació del preu d'esta operació"
 
-#: kmymoney/views/investtransactioneditor.cpp:604
+#: kmymoney/views/investtransactioneditor.cpp:612
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "Seleccioneu el compte per saldar l'operació"
 
-#: kmymoney/views/investtransactioneditor.cpp:611
+#: kmymoney/views/investtransactioneditor.cpp:619
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr "Introduïu la categoria per a les despeses"
 
-#: kmymoney/views/investtransactioneditor.cpp:614
+#: kmymoney/views/investtransactioneditor.cpp:622
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "Introduïu l'import de les despeses"
 
-#: kmymoney/views/investtransactioneditor.cpp:620
+#: kmymoney/views/investtransactioneditor.cpp:628
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr "Introduïu la categoria per a l'interés"
 
-#: kmymoney/views/investtransactioneditor.cpp:623
+#: kmymoney/views/investtransactioneditor.cpp:631
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "Introduïu l'import de l'interés"
 
-#: kmymoney/views/investtransactioneditor.cpp:628
+#: kmymoney/views/investtransactioneditor.cpp:636
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
@@ -20147,7 +20147,7 @@ msgstr "Elimina beneficiari"
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>Segur que voleu fusionar els beneficiaris seleccionats?"
 
-#: kmymoney/views/kpayeesview.cpp:572 kmymoney/views/kpayeesview_p.h:571
+#: kmymoney/views/kpayeesview.cpp:572 kmymoney/views/kpayeesview_p.h:572
 #, kde-format
 msgid "Merge Payees"
 msgstr "Fusiona els beneficiaris"
@@ -20388,7 +20388,7 @@ msgstr "Saldo: %1"
 msgid "Balance: %1%2"
 msgstr "Saldo: %1%2"
 
-#: kmymoney/views/kpayeesview_p.h:480
+#: kmymoney/views/kpayeesview_p.h:481
 #, kde-format
 msgid ""
 "At least one transaction/scheduled transaction or loan account is still "
@@ -20402,18 +20402,18 @@ msgstr ""
 "es puga tornar a assignar l'operació/operació planificada o el compte de "
 "préstec."
 
-#: kmymoney/views/kpayeesview_p.h:567
+#: kmymoney/views/kpayeesview_p.h:568
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
 msgstr ""
 "No s'ha pogut tornar a assignar el beneficiari d'una operació/desglossament"
 
-#: kmymoney/views/kpayeesview_p.h:571
+#: kmymoney/views/kpayeesview_p.h:572
 #, kde-format
 msgid "Nothing to merge."
 msgstr "No hi ha res per a fusionar."
 
-#: kmymoney/views/kpayeesview_p.h:654
+#: kmymoney/views/kpayeesview_p.h:655
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "No s'han pogut eliminar els beneficiari/s"
@@ -20888,18 +20888,34 @@ msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "Saldo: %1"
 
-#: kmymoney/views/multitransactioneditor.cpp:174
-#: kmymoney/views/newtransactioneditor.cpp:231
+#: kmymoney/views/multitransactioneditor.cpp:192
+#: kmymoney/views/newtransactioneditor.cpp:230
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "La data de situació no és vàlida."
 
-#: kmymoney/views/multitransactioneditor.cpp:220
+#: kmymoney/views/multitransactioneditor.cpp:225
+#: kmymoney/views/newtransactioneditor.cpp:265
+#, kde-format
+msgid "The cost center this transaction should be assigned to."
+msgstr "El centre de despesa al que s'ha d'assignar esta operació."
+
+#: kmymoney/views/multitransactioneditor.cpp:228
+#: kmymoney/views/newtransactioneditor.cpp:268
+#, kde-format
+msgid ""
+"A cost center assignment is required for a transaction in the selected "
+"category."
+msgstr ""
+"Per a la categoria seleccionada es requerix l'assignació de l'operació a un "
+"centre de despesa."
+
+#: kmymoney/views/multitransactioneditor.cpp:247
 #, kde-format
 msgid "Select category or account."
 msgstr "Seleccioneu una categoria o un compte."
 
-#: kmymoney/views/multitransactioneditor.cpp:232
+#: kmymoney/views/multitransactioneditor.cpp:261
 #, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
@@ -20909,13 +20925,13 @@ msgstr ""
 "Una operació seleccionada té una data de situació (%1) anterior a la data "
 "d'obertura del compte seleccionat (%2)."
 
-#: kmymoney/views/multitransactioneditor.cpp:729
+#: kmymoney/views/multitransactioneditor.cpp:721
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "No es poden editar múltiples planificacions a la vegada."
 
-#: kmymoney/views/multitransactioneditor.cpp:737
+#: kmymoney/views/multitransactioneditor.cpp:729
 #, kde-format
 msgid ""
 "Selection of category or account is not possible when split transactions are "
@@ -20953,13 +20969,13 @@ msgid "A category assignment is required for a split."
 msgstr "Es requerix l'assignació d'una categoria per a un desglossament."
 
 #: kmymoney/views/newspliteditor.cpp:216
-#: kmymoney/views/newtransactioneditor.cpp:376
+#: kmymoney/views/newtransactioneditor.cpp:381
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "El número de xec utilitzat per a esta operació."
 
 #: kmymoney/views/newspliteditor.cpp:225
-#: kmymoney/views/newtransactioneditor.cpp:386
+#: kmymoney/views/newtransactioneditor.cpp:391
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "El número de xec <b>%1</b> ja s'ha utilitzat en este compte."
@@ -20982,21 +20998,7 @@ msgstr "Pagador/Beneficiari"
 msgid "Costcenter"
 msgstr "Centre de despesa"
 
-#: kmymoney/views/newtransactioneditor.cpp:260
-#, kde-format
-msgid "The cost center this transaction should be assigned to."
-msgstr "El centre de despesa al que s'ha d'assignar esta operació."
-
-#: kmymoney/views/newtransactioneditor.cpp:263
-#, kde-format
-msgid ""
-"A cost center assignment is required for a transaction in the selected "
-"category."
-msgstr ""
-"Per a la categoria seleccionada es requerix l'assignació de l'operació a un "
-"centre de despesa."
-
-#: kmymoney/views/newtransactioneditor.cpp:530
+#: kmymoney/views/newtransactioneditor.cpp:535
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"

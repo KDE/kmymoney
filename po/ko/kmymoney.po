@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-30 00:41+0000\n"
+"POT-Creation-Date: 2023-12-31 00:42+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -14817,13 +14817,13 @@ msgid "Include subaccounts"
 msgstr "하위 계좌 포함"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:145
-#: kmymoney/views/kpayeesview_p.h:795
+#: kmymoney/views/kpayeesview_p.h:796
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<qt><b>%1</b>의 변경 사항을 저장하시겠습니까?</qt>"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
-#: kmymoney/views/kpayeesview_p.h:796 kmymoney/views/ktagsview.cpp:289
+#: kmymoney/views/kpayeesview_p.h:797 kmymoney/views/ktagsview.cpp:289
 #, kde-format
 msgid "Save changes"
 msgstr "변경 사항 저장"
@@ -18581,75 +18581,75 @@ msgctxt "@label:textbox"
 msgid "Ratio 1/"
 msgstr "비율 1/"
 
-#: kmymoney/views/investtransactioneditor.cpp:87
+#: kmymoney/views/investtransactioneditor.cpp:81
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Buy shares"
 msgstr "주식 매수"
 
-#: kmymoney/views/investtransactioneditor.cpp:88
+#: kmymoney/views/investtransactioneditor.cpp:82
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Sell shares"
 msgstr "주식 매도"
 
-#: kmymoney/views/investtransactioneditor.cpp:89
+#: kmymoney/views/investtransactioneditor.cpp:83
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Dividend"
 msgstr "배당금"
 
-#: kmymoney/views/investtransactioneditor.cpp:90
+#: kmymoney/views/investtransactioneditor.cpp:84
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Reinvest dividend"
 msgstr "배당금 재투자"
 
-#: kmymoney/views/investtransactioneditor.cpp:91
+#: kmymoney/views/investtransactioneditor.cpp:85
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Yield"
 msgstr "총수익"
 
-#: kmymoney/views/investtransactioneditor.cpp:92
+#: kmymoney/views/investtransactioneditor.cpp:86
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Add shares"
 msgstr "주식 추가"
 
-#: kmymoney/views/investtransactioneditor.cpp:93
+#: kmymoney/views/investtransactioneditor.cpp:87
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Remove shares"
 msgstr "주식 삭제"
 
-#: kmymoney/views/investtransactioneditor.cpp:94
+#: kmymoney/views/investtransactioneditor.cpp:88
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Split shares"
 msgstr "분할 주식"
 
-#: kmymoney/views/investtransactioneditor.cpp:95
+#: kmymoney/views/investtransactioneditor.cpp:89
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
 msgstr "이자 수입"
 
-#: kmymoney/views/investtransactioneditor.cpp:272
-#: kmymoney/views/multitransactioneditor.cpp:166
-#: kmymoney/views/newtransactioneditor.cpp:228
+#: kmymoney/views/investtransactioneditor.cpp:261
+#: kmymoney/views/multitransactioneditor.cpp:184
+#: kmymoney/views/newtransactioneditor.cpp:227
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "거래 전기 일입니다."
 
-#: kmymoney/views/investtransactioneditor.cpp:296
-#: kmymoney/views/multitransactioneditor.cpp:196
-#: kmymoney/views/newtransactioneditor.cpp:248
+#: kmymoney/views/investtransactioneditor.cpp:285
+#: kmymoney/views/multitransactioneditor.cpp:214
+#: kmymoney/views/newtransactioneditor.cpp:247
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "게시일은 계좌 <b>%1</b>의 개설일 이전입니다."
 
-#: kmymoney/views/investtransactioneditor.cpp:392
+#: kmymoney/views/investtransactioneditor.cpp:400
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -18659,55 +18659,55 @@ msgstr ""
 "거래 상품이 변경되었습니다. 모든 가격 정보가 무효화될 수도 있습니다. 다시 확"
 "인하십시오."
 
-#: kmymoney/views/investtransactioneditor.cpp:533
+#: kmymoney/views/investtransactioneditor.cpp:541
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Category for fees"
 msgstr "수수료 분류"
 
-#: kmymoney/views/investtransactioneditor.cpp:534
+#: kmymoney/views/investtransactioneditor.cpp:542
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Amount of fees"
 msgstr "수수료 금액"
 
-#: kmymoney/views/investtransactioneditor.cpp:535
+#: kmymoney/views/investtransactioneditor.cpp:543
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Category for interest"
 msgstr "이자 분류"
 
-#: kmymoney/views/investtransactioneditor.cpp:536
+#: kmymoney/views/investtransactioneditor.cpp:544
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Amount of interest"
 msgstr "이자 금액"
 
-#: kmymoney/views/investtransactioneditor.cpp:537
+#: kmymoney/views/investtransactioneditor.cpp:545
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Asset or brokerage account"
 msgstr "자산 및 중개 계좌"
 
-#: kmymoney/views/investtransactioneditor.cpp:538
+#: kmymoney/views/investtransactioneditor.cpp:546
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Price information for this transaction"
 msgstr "이 거래의 가격 정보"
 
-#: kmymoney/views/investtransactioneditor.cpp:541
+#: kmymoney/views/investtransactioneditor.cpp:549
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Security for this transaction"
 msgstr "이 거래의 유가증권"
 
-#: kmymoney/views/investtransactioneditor.cpp:542
+#: kmymoney/views/investtransactioneditor.cpp:550
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
 msgstr "이 거래의 활동을 선택하십시오."
 
-#: kmymoney/views/investtransactioneditor.cpp:545
+#: kmymoney/views/investtransactioneditor.cpp:553
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -18715,20 +18715,20 @@ msgid ""
 "account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:546
+#: kmymoney/views/investtransactioneditor.cpp:554
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This activity cannot be modified because the security account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:558
+#: kmymoney/views/investtransactioneditor.cpp:566
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "주식 수"
 
-#: kmymoney/views/investtransactioneditor.cpp:560
+#: kmymoney/views/investtransactioneditor.cpp:568
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -18736,68 +18736,68 @@ msgid ""
 "closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:564
+#: kmymoney/views/investtransactioneditor.cpp:572
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr "이 거래의 주식 수 입력"
 
-#: kmymoney/views/investtransactioneditor.cpp:570
+#: kmymoney/views/investtransactioneditor.cpp:578
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "분할 비율"
 
-#: kmymoney/views/investtransactioneditor.cpp:572
+#: kmymoney/views/investtransactioneditor.cpp:580
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:576
+#: kmymoney/views/investtransactioneditor.cpp:584
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr "이 거래의 분할 비율 입력"
 
-#: kmymoney/views/investtransactioneditor.cpp:588
+#: kmymoney/views/investtransactioneditor.cpp:596
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr "이 거래의 가격 정보 입력"
 
-#: kmymoney/views/investtransactioneditor.cpp:604
+#: kmymoney/views/investtransactioneditor.cpp:612
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "거래의 잔액이 있는 계좌 선택"
 
-#: kmymoney/views/investtransactioneditor.cpp:611
+#: kmymoney/views/investtransactioneditor.cpp:619
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr "수수료 분류 입력"
 
-#: kmymoney/views/investtransactioneditor.cpp:614
+#: kmymoney/views/investtransactioneditor.cpp:622
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "수수료 금액 입력"
 
-#: kmymoney/views/investtransactioneditor.cpp:620
+#: kmymoney/views/investtransactioneditor.cpp:628
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr "이자 분류 입력"
 
-#: kmymoney/views/investtransactioneditor.cpp:623
+#: kmymoney/views/investtransactioneditor.cpp:631
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "이자 금액 입력"
 
-#: kmymoney/views/investtransactioneditor.cpp:628
+#: kmymoney/views/investtransactioneditor.cpp:636
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
@@ -19722,7 +19722,7 @@ msgstr "수취인 삭제"
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>선택한 수취인을 병합하시겠습니까?"
 
-#: kmymoney/views/kpayeesview.cpp:572 kmymoney/views/kpayeesview_p.h:571
+#: kmymoney/views/kpayeesview.cpp:572 kmymoney/views/kpayeesview_p.h:572
 #, kde-format
 msgid "Merge Payees"
 msgstr "수취인 병합"
@@ -19960,7 +19960,7 @@ msgstr "잔액: %1"
 msgid "Balance: %1%2"
 msgstr "잔액: %1%2"
 
-#: kmymoney/views/kpayeesview_p.h:480
+#: kmymoney/views/kpayeesview_p.h:481
 #, kde-format
 msgid ""
 "At least one transaction/scheduled transaction or loan account is still "
@@ -19972,17 +19972,17 @@ msgstr ""
 "다. 현재 모든 수취인을 선택했습니다. 그러나 해당 거래/예정된 거래 및 대출 계"
 "좌를 재할당할 수취인이 하나 이상 남아 있어야 합니다."
 
-#: kmymoney/views/kpayeesview_p.h:567
+#: kmymoney/views/kpayeesview_p.h:568
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
 msgstr "거래/분할 수취인을 재할당할 수 없음"
 
-#: kmymoney/views/kpayeesview_p.h:571
+#: kmymoney/views/kpayeesview_p.h:572
 #, kde-format
 msgid "Nothing to merge."
 msgstr "병합할 항목이 없습니다."
 
-#: kmymoney/views/kpayeesview_p.h:654
+#: kmymoney/views/kpayeesview_p.h:655
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "수취인을 삭제할 수 없음"
@@ -20449,20 +20449,34 @@ msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "잔액: %1"
 
-#: kmymoney/views/multitransactioneditor.cpp:174
-#: kmymoney/views/newtransactioneditor.cpp:231
+#: kmymoney/views/multitransactioneditor.cpp:192
+#: kmymoney/views/newtransactioneditor.cpp:230
 #, fuzzy, kde-format
 #| msgid "The posting date of the transaction."
 msgid "The posting date is invalid."
 msgstr "거래 전기 일입니다."
 
-#: kmymoney/views/multitransactioneditor.cpp:220
+#: kmymoney/views/multitransactioneditor.cpp:225
+#: kmymoney/views/newtransactioneditor.cpp:265
+#, kde-format
+msgid "The cost center this transaction should be assigned to."
+msgstr "이 거래를 할당해야 하는 원가 중심점입니다."
+
+#: kmymoney/views/multitransactioneditor.cpp:228
+#: kmymoney/views/newtransactioneditor.cpp:268
+#, kde-format
+msgid ""
+"A cost center assignment is required for a transaction in the selected "
+"category."
+msgstr "선택한 분류의 거래에는 원가 중심점 할당이 필요합니다."
+
+#: kmymoney/views/multitransactioneditor.cpp:247
 #, fuzzy, kde-format
 #| msgid "Select account"
 msgid "Select category or account."
 msgstr "계좌 선택"
 
-#: kmymoney/views/multitransactioneditor.cpp:232
+#: kmymoney/views/multitransactioneditor.cpp:261
 #, fuzzy, kde-format
 #| msgid ""
 #| "  * Transaction '%1' has a post date '%2' before one of the referenced "
@@ -20475,14 +20489,14 @@ msgstr ""
 "  * '%1' 거래에서 참조하는 계좌의 개설일보다 이전인 '%2' 후일부가 설정되었습"
 "니다."
 
-#: kmymoney/views/multitransactioneditor.cpp:729
+#: kmymoney/views/multitransactioneditor.cpp:721
 #, fuzzy, kde-format
 #| msgid "Cannot edit multiple split transactions at once."
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "한 번에 여러 분할 거래를 편집할 수 없습니다."
 
-#: kmymoney/views/multitransactioneditor.cpp:737
+#: kmymoney/views/multitransactioneditor.cpp:729
 #, kde-format
 msgid ""
 "Selection of category or account is not possible when split transactions are "
@@ -20516,13 +20530,13 @@ msgid "A category assignment is required for a split."
 msgstr "분할에는 분류를 할당해야 합니다."
 
 #: kmymoney/views/newspliteditor.cpp:216
-#: kmymoney/views/newtransactioneditor.cpp:376
+#: kmymoney/views/newtransactioneditor.cpp:381
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "이 거래에 사용된 수표 번호입니다."
 
 #: kmymoney/views/newspliteditor.cpp:225
-#: kmymoney/views/newtransactioneditor.cpp:386
+#: kmymoney/views/newtransactioneditor.cpp:391
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "이 계좌에서 수표 번호 <b>%1</b>이(가) 이미 사용되었습니다."
@@ -20545,19 +20559,7 @@ msgstr "지불인/수취인"
 msgid "Costcenter"
 msgstr "원가 중심점"
 
-#: kmymoney/views/newtransactioneditor.cpp:260
-#, kde-format
-msgid "The cost center this transaction should be assigned to."
-msgstr "이 거래를 할당해야 하는 원가 중심점입니다."
-
-#: kmymoney/views/newtransactioneditor.cpp:263
-#, kde-format
-msgid ""
-"A cost center assignment is required for a transaction in the selected "
-"category."
-msgstr "선택한 분류의 거래에는 원가 중심점 할당이 필요합니다."
-
-#: kmymoney/views/newtransactioneditor.cpp:530
+#: kmymoney/views/newtransactioneditor.cpp:535
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@title:window Autofill selection dialog"
