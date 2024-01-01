@@ -6,7 +6,7 @@
     <author>&Michael.Carpino; &Michael.Carpino.mail;</author>
     <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2023-11-30</date>
+  <date>2023-12-30</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 
@@ -1289,22 +1289,46 @@
 </para>
 </sect2>
 
-<sect2><title>QIF Exporter</title>
+<sect2><title>QIF Exporter, QIF Importer</title>
 
 <para>
-</para>
-</sect2>
-
-<sect2><title>QIF Importer</title>
-
-<para>
+  These are described in the section on <link
+  linkend="details.impexp.qif.profile">QIF Profiles</link>.  As pointed out in that
+  section, QIF Import and QIF Export are implemented as separate plugins, they both
+  utilize the same set of profiles.
 </para>
 </sect2>
 
 <sect2><title>Reports view</title>
+<!-- FIXME:  this needs better incorporation into the Reports Chapter.  It is currently
+     not mentioned there at all. -->
 
 <para>
+  This provides a dialog where you can configure some default values to be used when displaying
+  <link linkend="details.reports">Reports</link>.
 </para>
+
+<para>
+  <guilabel>Maximum number of legend items to display</guilabel> limits the number of
+  items to list in the legend of the graph of chart display of a report.
+</para>
+
+<para>
+  <guilabel>Charts line width</guilabel> is the default width in pixels of any lines
+  in the chart display of a report.
+</para>
+
+<para>
+  <guilabel>Charts palette</guilabel> gives some choice in the array of colors used
+  in graphs and chart displays of a report.
+</para>
+
+<para>
+  Since the graph and chart form of reports are shown using HTML, the
+  <guilabel>Default CSS file</guilabel> lets you provide a css file to customize
+  these displays.
+</para>
+
 </sect2>
 
 <sect2><title>XML Storage</title>

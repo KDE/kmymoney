@@ -97,22 +97,22 @@ This is in the order pulled in from index.docbook, with brief note on state of u
   prelim update complete
 
 <!ENTITY details-settings SYSTEM "details-settings.docbook">
-  prelim update begun
+  prelim update complete
   
 <!ENTITY faq SYSTEM "faq.docbook">
   prelim update complete
 
 <!ENTITY reference SYSTEM "reference.docbook">
-
+  prelim update complete
+  
 <!ENTITY details-widgets SYSTEM "details-widgets.docbook">
   to be reviewed by Thomas
 
 <!ENTITY credits SYSTEM "credits.docbook">
   prelim update complete
   
-<!-- no longer used? <!ENTITY details-hbciofx SYSTEM "details-hbciofx.docbook"> -->
-
-<!-- not directly included in docbook   "man-kmymoney.1.docbook" -->
+<!-- not directly included in docbook   "man-kmymoney.1.docbook" but should
+     still be reviewed for accuracy -->
 
 ----------------
 
