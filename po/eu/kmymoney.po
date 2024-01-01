@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-31 00:42+0000\n"
-"PO-Revision-Date: 2023-12-06 11:31+0100\n"
+"PO-Revision-Date: 2023-12-31 16:37+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3463,10 +3463,9 @@ msgstr "Erakutsi kategoriak kontu-zerrendaren ikuspegian"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:417
-#, fuzzy, kde-format
-#| msgid "Hide liability accounts with zero balance"
+#, kde-format
 msgid "Hide accounts with a zero balance"
-msgstr "Ezkutatu pasiboko zero balioko saldokoak"
+msgstr "Ezkutatu zero saldokoa duten kontuak"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:424
@@ -11889,13 +11888,13 @@ msgstr "Antolaketak zein iCalendar fitxategira esportatu behar diren."
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:40
 #, kde-format
 msgid "Write Google calendar compatible entries"
-msgstr ""
+msgstr "Idatzi Google «Calendar»rekin bateragarriak diren sarrerak"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ICalendarSettingsDecl)
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:26
 #, kde-format
 msgid "Icalendar export settings"
-msgstr "iCalendar-era esportatzeko ezarpenak"
+msgstr "iCalendar esportatzeko ezarpenak"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_writeEventsVsTodos)
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:34
@@ -11904,6 +11903,7 @@ msgid ""
 "Write the iCalendar file so that the entries are recognized by Google "
 "Calendar."
 msgstr ""
+"Idatzi iCalendar fitxategia, Google «Calendar»rek sarrerak ulertzeko moduan."
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_writeEventsVsTodos)
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:37
@@ -11916,6 +11916,12 @@ msgid ""
 "href=\"https://icalendar.org/iCalendar-RFC-5545/3-6-1-event-component.html"
 "\">VEVENT</a> are needed.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Idatzi iCalendar fitxategia, Google «Calendar»rek "
+"sarrerak ulertzeko moduan. Lehenespena iCalendar fitxategian <a href="
+"\"https://icalendar.org/iCalendar-RFC-5545/3-6-2-to-do-component.html"
+"\">VTODO</a> sarrerak idaztea da, baina Google «Calendar» sarreretarako <a "
+"href=\"https://icalendar.org/iCalendar-RFC-5545/3-6-1-event-component.html"
+"\">VEVENT</a> motako sarrerak behar dira.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_createAlarm)
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:47
@@ -18530,10 +18536,9 @@ msgstr "Ezkutatu zero balioko saldoak"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:228
-#, fuzzy, kde-format
-#| msgid "Hide zero balance equities"
+#, kde-format
 msgid "Hide zero balance accounts"
-msgstr "Ezkutatu zero balioko saldoak"
+msgstr "Ezkutatu zero saldoa duten kontuak"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:232

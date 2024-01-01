@@ -5455,7 +5455,7 @@ msgstr "Elimina operació"
 #: kmymoney/kmymoney.cpp:2634
 #, kde-format
 msgid "Unable to duplicate transaction(s)"
-msgstr "No s'ha/n pogut duplicar les operacions"
+msgstr "No s'han pogut duplicar les operacions"
 
 #: kmymoney/kmymoney.cpp:2906
 #, kde-format
@@ -25429,11 +25429,3 @@ msgstr ""
 "\n"
 "<p>Tota la informació és optativa i s'utilitza per a personalitzar el fitxer "
 "de KMyMoney.</p>"
-
-#~ msgctxt "Credit suffix"
-#~ msgid "Cr."
-#~ msgstr "Cr."
-
-#~ msgctxt "Debit suffix"
-#~ msgid "Dr."
-#~ msgstr "Db."
