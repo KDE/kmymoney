@@ -19412,7 +19412,7 @@ msgstr "Elimina operació"
 #: kmymoney/views/kgloballedgerview.cpp:1528
 #, kde-format
 msgid "Unable to duplicate transaction(s)"
-msgstr "No s'ha/n pogut duplicar les operacions"
+msgstr "No s'han pogut duplicar les operacions"
 
 #: kmymoney/views/kgloballedgerview.cpp:1603
 #, kde-format
