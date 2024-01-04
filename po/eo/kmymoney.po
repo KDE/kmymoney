@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-31 00:42+0000\n"
-"PO-Revision-Date: 2023-12-27 22:06+0100\n"
+"PO-Revision-Date: 2024-01-03 14:17+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
@@ -2424,7 +2424,7 @@ msgstr "Nova Konta Dialogo"
 #, kde-format
 msgctxt "Account general settings"
 msgid "General"
-msgstr "Ĝeneralo"
+msgstr "Ĝenerala"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/dialogs/knewaccountdlg.ui:47
@@ -3676,7 +3676,7 @@ msgstr ""
 #, kde-format
 msgctxt "General settings"
 msgid "General"
-msgstr "Ĝeneralo"
+msgstr "Ĝenerala"
 
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:42
 #: kmymoney/views/kmymoneyview.cpp:184
@@ -13419,7 +13419,7 @@ msgstr "Forigi QIF-profilon"
 #, kde-format
 msgctxt "@title QIF profile general information"
 msgid "General"
-msgstr "Ĝeneralo"
+msgstr "Ĝenerala"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2_2_3)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:67
@@ -16127,7 +16127,7 @@ msgstr "Filtriloj"
 #, kde-format
 msgctxt "General tab"
 msgid "General"
-msgstr "Ĝeneralo"
+msgstr "Ĝenerala"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:137
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:163
@@ -24757,7 +24757,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title loan general information"
 msgid "General"
-msgstr "Ĝeneralo"
+msgstr "Ĝenerala"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5_3)
 #: kmymoney/wizards/newloanwizard/summarywizardpage.ui:84
