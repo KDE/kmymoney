@@ -17,18 +17,18 @@
   many of the features of Categories are very similar to those of other Accounts.
 </para>
 
-<sect1 id="details.categories.view">
-<title>Categories View</title>
-
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="categories.png" format="PNG" />
-      </imageobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<sect1 id="details.categories.view"><title>Categories View</title>
+<screenshot>
+  <screeninfo>categories view</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="categories.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>categories view</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   The Categories View provides a summary of all the existing categories in your
@@ -68,9 +68,7 @@
 </variablelist>
 </sect1>
 
-<sect1 id="details.categories.create">
-<title>Creating a category</title>
-
+<sect1 id="details.categories.create"><title>Creating a category</title>
 <para>
   There are 3 ways to create a new category: select the
   <menuchoice><guimenu>Category</guimenu><guimenuitem>New
@@ -88,20 +86,20 @@
   VAT support, and a checkbox to include this category in tax related reports.
 </para>
 
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="categoryedit.png" format="PNG" />
-      </imageobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>create new category</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="categoryedit.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>create new category</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 </sect1>
 
-<sect1 id="details.categories.edit">
-<title>Editing a Category</title>
-
+<sect1 id="details.categories.edit"><title>Editing a Category</title>
 <para>
   To edit a category, right-click on a category name in the Category View, and choose
   <guimenuitem>Edit category...</guimenuitem>.  A window appears with the same three
@@ -133,7 +131,6 @@
 <sect1info>
   <author>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
 </sect1info>
-
 <title>VAT Support</title>
 	
 <para>
@@ -172,9 +169,7 @@
 
 </sect1>
 
-<sect1 id="details.categories.delete">
-<title>Deleting a category</title>
-
+<sect1 id="details.categories.delete"><title>Deleting a category</title>
 <para>
   Deleting a Category is similar to deleting an Account.  To delete a category,
   right-click its name in the Categories View, and select <guimenuitem>Delete
@@ -203,9 +198,7 @@
 </para>
 </sect1>
 
-<sect1 id="details.categories.open_ledger">
-<title>Open ledger for a category</title>
-
+<sect1 id="details.categories.open_ledger"><title>Open ledger for a category</title>
 <para>
   The menu options for categories includes a choice to open a ledger for that
   category.  When this option is selected &kmymoney; will display that category in a

@@ -6,13 +6,12 @@
 <title>CSV Importer Plugin</title>
 
 <sect2><title>Reasons for importing CSV Files</title>
-
 <para>
-  In general, it is preferable to import OFX.  However, not all institutions
-  provide data in that format.  CSV (comma separated value) files are almost
-  always available, sometimes described as Excel or spreadsheet files.  Also,
-  they can often be created fairly easily by capturing the data you want to
-  import, such as in a text file, and manually editing it.
+  In general, it is preferable to import OFX.  However, not all institutions provide
+  data in that format.  CSV (comma separated value) files are almost always
+  available, sometimes described as Excel or spreadsheet files.  Also, they can often
+  be created fairly easily by capturing the data you want to import, such as in a
+  text file, and manually editing it.
 </para>
 
 <para>
@@ -29,7 +28,6 @@
 </sect2>
 
 <sect2><title>Getting the plugin</title>
-
 <para>
   The CSV importer is one of the newer features to have been added to &kmymoney; in
   the form of a plugin.  However, as with other plugins, the CSV Importer is included
@@ -59,7 +57,6 @@
 </sect2>
 
 <sect2><title>Importing a CSV file</title>
-
 <para>
   To import a CSV file, choose the importer from the main menu: <menuchoice>
   <guimenu>File</guimenu> <guisubmenu>Import</guisubmenu>
@@ -74,7 +71,6 @@
 </para>
 
 <sect3><title>CSV Import Wizard: Start</title>
-
 <para>
   When launched, the CSV Importer displays the <guilabel>Start</guilabel> or
   <guilabel>File</guilabel> page.  On the left is a list of the steps of the import
@@ -86,19 +82,22 @@
   prices</guilabel>, and <guilabel>Stock prices</guilabel>.  Next, there is a profile
   selector dropdown, which is enabled if once the radio button has been selected for
   one of the import file types.
-
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="csvImporter_1.png" format="PNG" />
-      </imageobject>
-    </mediaobject>
-  </screenshot>
 </para>
+
+<screenshot>
+  <screeninfo>csv import wizard: start</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_1.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>csv import wizard: start</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 </sect3>
 
 <sect3><title>CSV Import Profiles</title>
-
 <para>
   Each type of CSV file to be imported requires sepcification of several details
   regarding the expected formatting of the data, as described in the following
@@ -172,15 +171,19 @@
 <para>
   After opening your selected data file, the wizard will advance to the
   <guilabel>Separators</guilabel> page, and you should now see your data.
-
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="csvImporter_2.png" format="PNG" />
-      </imageobject>
-    </mediaobject>
-  </screenshot>
 </para>
+
+<screenshot>
+  <screeninfo>csv import wizard: separators</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_2.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>csv import wizard: separators</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <warning>
   <para>
@@ -210,15 +213,19 @@
   You will now be on the <guilabel>Rows</guilabel> or <guilabel>Lines</guilabel>
   page.  Here, you indicate if any lines should be ignored at the beginning or end of
   the file.
-
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="csvImporter_5.png" format="PNG" />
-      </imageobject>
-    </mediaobject>
-  </screenshot>
 </para>
+
+<screenshot>
+  <screeninfo>csv import wizard: rows</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_5.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>csv import wizard: rows</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   This page allows you to adjust the import to ignore header and footer rows at the
@@ -282,15 +289,17 @@
 </para>
 
 <sect4><title>CSV Import Wizard: Banking</title>
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="csvImporter_3.png" format="PNG" />
-      </imageobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>csv import wizard: banking</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_3.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>csv import wizard: banking</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
   
 <para>
   For most fields, you just need to use the dropdown to select the appropriate
@@ -377,15 +386,19 @@
   is somewhat more complex.  Most selections are fairly obvious, but there are
   some items which can seem confusing until you have completed the process
   once or twice.
-
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="csvImporter_4.png" format="PNG" />
-      </imageobject>
-    </mediaobject>
-  </screenshot>
 </para>
+
+<screenshot>
+  <screeninfo>csv import wizard: investment</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_4.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>csv import wizard: investment</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
 <itemizedlist>
@@ -474,7 +487,6 @@
 </sect4>
 
 <sect4 id="details.impexp.csv.secsym"><title>CSV Import Wizard: Securities and Symbols</title>
-
 <para>
   For an Investment file, after the <guilabel>Columns</guilabel> page has been
   accepted, you need to assure that each security in the file is matched to the
@@ -584,14 +596,12 @@
 </sect4>
 
 <sect4><title>CSV Import Wizard: Currency Prices</title>
-
 <para>
   something about importing currency prices
 </para>
 </sect4>
 
 <sect4><title>CSV Import Wizard: Stock prices</title>
-
 <para>
 `something about imporing stock prices
 </para>
@@ -653,7 +663,6 @@
 </sect3>
 
 <sect3><title>Make QIF File</title>
-
 <para>
   This button gives you the ability, after the import has been completed, to
   save the data from the CSV file as a QIF file, should you require one for any
@@ -665,7 +674,6 @@
 </sect3>
 
 <sect3><title>Finishing up</title>
-
 <para>
   For a <guilabel>Banking</guilabel> import, the plugin has finished, and
   &kmymoney; will prompt you, as stated above, for the correct account into
@@ -687,7 +695,6 @@
 </sect3>
 
 <sect3><title>Adding Investment Activity Types</title>
-
 <para>
   If you find that your investment statements keep including activity types that
   are not recognized, just add them to the section in the resource file.  (See
@@ -709,7 +716,6 @@
 </sect3>
 
 <sect3 id="details.impexp.csv.config"><title>Configuration of CSV importer plugin</title>
-
 <para>
  A well-known drawback of QIF format is that it is a fairly loose format.  With CSV
  files, there is this same problem, only more so, in that there is no agreed standard
@@ -752,7 +758,6 @@
 </para>
 
 <sect4><title>CSV Importer configuration dialog</title>
-
 <para>
   Finally, there are a few other items which may be configured in a dialog invoked
   through the <link linkend="details.settings.plugins.csvimporter">CSV Importer
@@ -764,4 +769,70 @@
 </sect4>
 </sect3>
 </sect2>
+</sect1>
+
+<sect1 id="details.impexp.csvexp">
+<sect1info>
+  <author>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+</sect1info>
+<title>CSV Exporter</title>
+
+<para>
+  To export data to a CSV file, choose the <menuchoice><guimenu>File</guimenu>
+  <guisubmenu>Export</guisubmenu> <guimenuitem>CSV...</guimenuitem> </menuchoice>
+  menu item.  The dialog which appears gives you a number of choices which control
+  the data to be exported.
+</para>
+
+<screenshot>
+  <screeninfo>csv exporter</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvexport.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>csv exporter</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para>
+  Please note that an exported CSV file can include data from only one account.
+</para>
+
+<para>
+  Specify the name of the exported CSV file either by entering the complete path in
+  the <guilabel>File to export to</guilabel> field, or by clicking the
+  <guilabel>Browse</guilabel> button and navigating to it in the Save File dialog.
+  Choose which account to export with the <guilabel>Account to export</guilabel>
+  dropdown.
+</para>
+
+<para>
+  The time period of data exported is controlled by the <guilabel>Date
+  Range</guilabel> <guilabel>Start on</guilabel> and <guilabel>End on</guilabel> date
+  fields.  The default values represent the complete date range of your entire data
+  file, and they are adjusted when you select an account to export.
+</para>
+
+<para>
+  By default, the <guilabel>Field Separator</guilabel> is a comma, but you can also
+  choose to use a tab or semicolon.
+</para>
+
+<para>
+  If you check the <guilabel>Contents to Export</guilabel>
+  <guilabel>Account</guilabel> radio button, then the data exported will be the
+  transactions from the specified account and date range.  However, if you select the
+  <guilabel>Categories</guilabel> radio button, then the exported file will contain
+  one row for each category which has been defined.  For top level categories, the
+  category name is shown, and an <quote>I</quote> or <quote>E</quote> is shown to
+  indicate whether the Category is Income or Expense.  For non top-level categories,
+  the parent category is also shown.
+</para>
+
+<para>
+  The exporter will output a set of columns appropriate for the type of account being
+  exported.
+</para>
 </sect1>

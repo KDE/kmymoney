@@ -8,7 +8,6 @@
   <date>2023-11-25</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>Search Transactions</title>
 
 <para>
@@ -47,7 +46,6 @@
 </para>
 
 <sect1 id="details.search.criteria"><title>Search Criteria</title>
-
 <para>
   There are several subtabs under the main Criteria tab, each of which allows you to
   specify a different type of search criteria.  Below the area for specifying the
@@ -55,16 +53,15 @@
   currently specified for the search.
 </para>
 
-<sect2 id="details.search.text">
-<title>Text</title>
-
+<sect2 id="details.search.text"><title>Text</title>
 <screenshot>
+  <screeninfo>search transactions, criteria tab, text subtab</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="find-text.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>Search transactions Dialog, Text tab</phrase>
+      <phrase>search transactions, criteria tab, text subtab</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
@@ -114,14 +111,14 @@
 </sect2>
 
 <sect2 id="details.search.account"><title>Account</title>
-
 <screenshot>
+  <screeninfo>search transactions, criteria tab, account subtab</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="find-account.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>Search transactions Dialog, Account tab</phrase>
+      <phrase>search transactions, criteria tab, account subtab</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
@@ -142,14 +139,14 @@
 </sect2>
 
 <sect2 id="details.search.date"><title>Date</title>
-
 <screenshot>
+  <screeninfo>search transactions, criteria tab, date subtab</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="find-date.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>Search transactions Dialog, Date tab</phrase>
+      <phrase>search transactions, criteria tab, date subtab</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
@@ -171,14 +168,14 @@
 
 
 <sect2 id="details.search.amount"><title>Amount</title>
-
 <screenshot>
+  <screeninfo>search transactions, criteria tab, amount subtab</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="find-amount.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>Search transactions Dialog, Amount tab</phrase>
+      <phrase>search transactions, criteria tab, amount subtab</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
@@ -195,14 +192,14 @@
 </sect2>
 
 <sect2 id="details.search.category"><title>Category</title>
-
 <screenshot>
+  <screeninfo>search transactions, criteria tab, category subtab</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="find-category.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>Search transactions Dialog, Category tab</phrase>
+      <phrase>search transactions, criteria tab, category subtab</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
@@ -230,14 +227,14 @@
 </sect2>
 
 <sect2 id="details.search.tag"><title>Tag</title>
-
 <screenshot>
+  <screeninfo>search transactions, criteria tab, tag subtab</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="find-tag.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>Search transactions Dialog, Tag tab</phrase>
+      <phrase>search transactions, criteria tab, tag subtab</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
@@ -265,14 +262,14 @@
 </sect2>
 
 <sect2 id="details.search.payee"><title>Payee</title>
-
 <screenshot>
+  <screeninfo>search transactions, criteria tab, payee subtab</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="find-payee.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>Search transactions Dialog, Payee tab</phrase>
+      <phrase>search transactions, criteria tab, payee subtab</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
@@ -296,8 +293,8 @@
 </sect2>
 
 <sect2 id="details.search.details"><title>Details</title>
-
 <screenshot>
+  <screeninfo>search transactions, criteria tab, details subtab</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="find-details.png" format="PNG" />
@@ -345,7 +342,6 @@
 </sect1>
 
 <sect1 id="details.search.results"><title>Search results</title>
-
 <para>
   The <guilabel>Result</guilabel> tab displays the Entry (entry date, optional,) Date
   (posting date,) Account, Payee, Details (memo,) C (reconciliation status,)

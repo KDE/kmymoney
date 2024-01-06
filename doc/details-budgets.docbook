@@ -12,7 +12,6 @@
 <title>Budgets</title>
 
 <sect1 id="details.budgets.define"><title>What is a budget?</title>
-
 <para>
   A budget is a categorized list of expected income and expenses for a period.
 </para>
@@ -55,7 +54,6 @@
 </sect1>
 
 <sect1 id="details.budgets.create" ><title>Your budgets</title>
-
 <para>
   You can access your budgets in the <guilabel>Budgets View</guilabel>, which you can
   display by clicking the appropriate icon in the navigation pane at the left hand
@@ -74,7 +72,6 @@
 </para>
 
 <sect2><title>Viewing, creating, renaming, and deleting budgets</title>
-
 <para>
   The left section of the Budgets View displays the list of Budgets contained in the
   current &kmymoney; file.  If no Budget has yet been created the list will be empty.
@@ -195,9 +192,7 @@
 </variablelist>
 </sect2>
 
-<sect2>
-<title>Account List</title>
-
+<sect2><title>Account List</title>
 <para>
   The Accounts List displays the list of Income and Expense Categories.  (Remember,
   within &kmymoney;, categories are treated as a special type of account.)  As in
@@ -282,7 +277,6 @@
 </sect2>
 
 <sect2><title>Assignments</title>
-
 <para>
   The Assignments area shows the values for the Category selected in the Accounts
   List.
@@ -393,9 +387,7 @@
 </variablelist>
 </sect2>
 
-<sect2>
-<title>Update and Revert</title>
-
+<sect2><title>Update and Revert</title>
 <!-- FIXME: confirm there reslly is a Save button.  I don't see one, but it might not
      appear until you actually have a budget and hit Update. -->
 <para>
@@ -431,9 +423,7 @@
 </sect2>
 </sect1>
 
-<sect1 id="budget.details.reports">
-<title>Budget Reports</title>
-
+<sect1 id="budget.details.reports"><title>Budget Reports</title>
 <para>
   &kmymoney; provides a number of reports to compare actual income and expenses
   against a Budget.  These are listed in Reports under "Budgeting".  There are two

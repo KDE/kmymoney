@@ -8,11 +8,9 @@
   <date>2023-11-20</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>Loans</title>
 
 <sect1 id="details.loans.general"><title>Understanding Loans</title>
-
 <note>
   <para>
     I am looking for user feedback on whether to expand this section to discuss the
@@ -142,8 +140,7 @@
 </sect2>
 </sect1>
 
-<sect1 id="details.loans.example">
-<title>Example</title>
+<sect1 id="details.loans.example"><title>Example</title>
 <para>
   For an example, you might borrow $25,000.00 for a new automobile and agree to pay
   the bank one payment each month for 60 months.  The interest rate on the loan might
@@ -166,9 +163,7 @@
 </para>
 </sect1>
 
-<sect1 id="details.loans.creation">
-<title>Creating a New Loan</title>
-
+<sect1 id="details.loans.creation"><title>Creating a New Loan</title>
 <!-- FIXME: this section should really be expanded with screenshots of the new loan
      wizard and more detailed explanation of the various entry fields.  In
      particular, it needs an explanation of how fixed payments are calculated by
@@ -202,9 +197,7 @@
 </para>
 </sect1>
 
-<sect1 id="details.loans.extra-payments">
-<title>Making Extra Principle Repayments On Loans</title>
-
+<sect1 id="details.loans.extra-payments"><title>Making Extra Principle Repayments On Loans</title>
 <para>
   If you would like to make an extra principal repayment, you can do so.  Simply
   <link linkend="details.ledger.transactions">enter a transaction</link> using the

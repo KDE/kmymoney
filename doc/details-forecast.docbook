@@ -8,11 +8,9 @@
   <date>2023-11-20</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>Forecast</title>
 
 <sect1 id="details.forecast.define"><title>What is a Forecast?</title>
-
 <para>
   In &kmymoney;, a Forecast is a prediction of the balances of Accounts during a
   specified future period of time.
@@ -60,7 +58,6 @@
 </sect1>
 
 <sect1 id="details.forecast.configure" ><title>Configuring the Forecast</title>
-
 <para>
   The parameters used to calculate a Forecast, including the forecast method, can be
   set in the <link linkend="details.settings.plugins.forecast"> <guilabel>Forecast
@@ -72,19 +69,17 @@
   <guilabel>configure</guilabel> icon next to <guilabel>Forecast view</guilabel>.
 </para>
 
-<para>
-  <screenshot>
-    <screeninfo>forecast configuration</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="plugin_config_forecast.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>forecast configuration</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>forecast configuration</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="plugin_config_forecast.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>forecast configuration</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <variablelist>
   <varlistentry>
@@ -177,27 +172,23 @@
 </para>
 </sect1>
 
-<sect1 id="details.forecast.view" >
-<title>Viewing the Forecasts</title>
-
+<sect1 id="details.forecast.view" ><title>Viewing the Forecasts</title>
 <para>
   You can display the Forecast View by clicking the appropriate icon in the
   navigation pane at the left hand side of your &kmymoney; window.
 </para>
 
-<para>
-  <screenshot>
-    <screeninfo>forecast view</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="forecast_view.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>forecast view</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>forecast view</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="forecast_view.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>forecast view</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   The top area of the Forecast View is the <guilabel>Forecast Settings</guilabel>.
@@ -261,13 +252,11 @@
 </para>
 
 <sect2 id="details.forecast.summary"><title>Summary Tab</title>
-
 <para>
   The Summary tab has two sections.
 </para>
 
 <sect3><title>Account Summary</title>
-
 <para>
   On the left is the Account Summary, displaying one row of information for each
   Asset and Liability, with the columns shows below.  Note that if the Forecast is
@@ -329,7 +318,6 @@
 </sect3>
 
 <sect3><title>Key Summary Information</title>
-
 <para>
   The right portion of the Summary tab displays noteworthy information about
   accounts.  This includes:
@@ -362,7 +350,6 @@
 </sect2>
 
 <sect2><title>Details Tab</title>
-
 <para>
   The Details tab also displays one row for each Asset and Liability account, but the
   columns displayed differ from the Summary Tab.
@@ -402,7 +389,6 @@
 </sect2>
 
 <sect2><title>Advanced Tab</title>
-
 <para>
   The Advanced tab also displays one row of information for each Asset and Liability
   account.  The information is split into columns as follows:
@@ -470,7 +456,6 @@
 </sect2>
 
 <sect2><title>Budget Forecast Tab</title>
-
 <para>
   The Budget tab displays a forecast calculation for all Income and Expense
   categories.  Unlike the Summary Tab, there is one colum per month, starting with
@@ -481,7 +466,6 @@
 </sect2>
 
 <sect2><title>Chart Tab</title>
-
 <para>
   This displays the Forecase in a chart or graphical form.  The level of detail
   varies depending on the detail level selected on the option above.

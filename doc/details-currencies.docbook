@@ -9,7 +9,6 @@
   <date>2023-09-30</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>Currencies</title>
 
 <para>
@@ -18,9 +17,7 @@
   Pounds, and still have your credit card account in US Dollars.
 </para>
 
-<sect1 id="details.currencies.basecurrency">
-<title>Base currency</title>
-
+<sect1 id="details.currencies.basecurrency"><title>Base currency</title>
 <para>
   During the initial &kmymoney; <link linkend="firsttime.newfile"> New File
   Setup</link>, you are asked to select the base currency.  Usually, the base
@@ -41,22 +38,18 @@
   menu item.
 </para>
 
-<sect2 id="details.currencies.addcurrency">
-<title>Adding a currency to your data file</title>
-
-<para>
-  <screenshot>
-    <screeninfo>The currency dialog</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="currency_dialog1.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>show used currencies</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<sect2 id="details.currencies.addcurrency"><title>Adding a currency to your data file</title>
+<screenshot>
+  <screeninfo>currencies dialog</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="currency_dialog1.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>currencies dialog</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   For a newly created data file, the Currencies dialog will show only the currency
@@ -71,22 +64,18 @@
 </para>
 </sect2>
 
-<sect2 id="details.currencies.newcurrency">
-<title>Adding a new currency</title>
-
-<para>
-  <screenshot>
-    <screeninfo>The select currency dialog</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="select_currency.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>select currency</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<sect2 id="details.currencies.newcurrency"><title>Adding a new currency</title>
+<screenshot>
+  <screeninfo>add a new currency</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="select_currency.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>add a new currency</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   Although it does not happen often, sometimes a new currency is introduced.  This
@@ -104,19 +93,17 @@
   <guilabel>Currency editor</guilabel>.
 </para>
 
-<para>
-  <screenshot>
-    <screeninfo>The Currency editor</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="currency_editor.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>add new currency or edit currency details</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>currency editor</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="currency_editor.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>currency editor</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   The Currency editor has some similarities to the dialog for editing details of securities
@@ -180,13 +167,10 @@
   Enter the information and click <guilabel>OK</guilabel>, and the currency will be
   created.
 </para>
-
 </sect2>
 </sect1>
 
-<sect1 id="details.currencies.transactions">
-<title>Entering transactions using different currencies</title>
-
+<sect1 id="details.currencies.transactions"><title>Entering transactions using different currencies</title>
 <para>
   Whenever a transaction is entered that refers to more than one currency, the
   exchange rate editor pops up and allows you to enter an exchange rate.  Initially,
@@ -202,12 +186,9 @@
 </para>
 </sect1>
 
-<sect1 id="details.currencies.prices">
-<title>Exchange rates for currencies</title>
+<sect1 id="details.currencies.prices"><title>Exchange rates for currencies</title>
 
-<sect2>
-<title>Entering prices manually</title>
-
+<sect2><title>Entering prices manually</title>
 <para>
   The <guilabel>Price Editor</guilabel>, also called the price database editor,
   allows you to enter or modify prices for both investments and exchange rates
@@ -216,19 +197,17 @@
   menu item.
 </para>
 
-<para>
-  <screenshot>
-    <screeninfo>Currency Price Editor</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="currency_priceeditor.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Currency Price Editor</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>security and Currency price editor</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="currency_priceeditor.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>security and currency price editor</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   The first column in the dialog is labelled <guilabel>Commodidty</guilabel>, which
@@ -245,19 +224,17 @@
   and you get the New Price Entry dialog.
 </para>
 
-<para>
-  <screenshot>
-    <screeninfo>New Price Entry</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="currency_newpriceentry.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>New Price Entry</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>new price entry</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="currency_newpriceentry.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>new price entry</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   Enter the first currency (USD in the example above) in the Security field.
@@ -270,19 +247,17 @@
   <guilabel>Exchange Rate/Price Editor</guilabel> dialog.
 </para>
 
-<para>
-  <screenshot>
-    <screeninfo>Exchange Rate/Price Editor</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="exchange_rate_editor.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Exchange Rate/Price Editor</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>exchange rate/price editor</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="exchange_rate_editor.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>exchange rate/price editor</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   You can specify a price in two ways.  You can enter the <guilabel>To
@@ -295,9 +270,7 @@
 </para>
 </sect2>
 
-<sect2>
-<title>Online currency updates</title>
-
+<sect2><title>Online currency updates</title>
 <para>
   &kmymoney; can fetch currency conversion rates from the web.  Once you have
   entered a single price for a pair of currencies, the online quote feature will

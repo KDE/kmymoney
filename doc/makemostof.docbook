@@ -10,7 +10,6 @@
   <date>2023-10-23</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>Making the most of &kmymoney;</title>
 
 <para>
@@ -28,9 +27,7 @@
   &kmymoney;'s will almost certainly save you time later.
 </para>
 
-<sect1 id="makingmostof.basicaccounting">
-<title>Basic Accounting</title>
-
+<sect1 id="makingmostof.basicaccounting"><title>Basic Accounting</title>
 <para>
   Imagine your money as balls, or beans, and to stop them rolling around you keep
   them in a box, or pot.  Accounting, or Bookkeeping, is the process of counting and
@@ -77,9 +74,7 @@
      modified the section below, since we explicitly say that KMM is not for
      business use. -->
 
-<sect2 id="makingmostof.basicaccounting.personalaccounts">
-<title>Defining the accounts (personal records)</title>
-
+<sect2 id="makingmostof.basicaccounting.personalaccounts"><title>Defining the accounts (personal records)</title>
 <para>
   Most accounts, or pots, as described above, represent a measure of our
   <quote>Worth</quote>.  The cash and goods represent our <quote>Assets</quote>,
@@ -120,9 +115,7 @@
 </para>
 </sect2>
 
-<sect2 id="makingmostof.basicaccounting.businessaccounts">
-<title>Defining the accounts (business records)</title>
-
+<sect2 id="makingmostof.basicaccounting.businessaccounts"><title>Defining the accounts (business records)</title>
 <para>
   There are similarities to setting up accounts for personal use, but there are
   additional considerations, including legal guidelines and requirements.
@@ -134,9 +127,7 @@
 </sect2>
 </sect1>
 
-<sect1 id="makingmostof.mapping">
-<title>Mapping your finances to &kmymoney;</title>
-
+<sect1 id="makingmostof.mapping"><title>Mapping your finances to &kmymoney;</title>
 <para>
   So, collect your recent financial papers and see the following sections for more
   information on how you can map your own finances to each of the different areas of
@@ -144,9 +135,7 @@
   later chapters of this handbook.
 </para>
 
-<sect2 id="makingmostof.mapping.accounts">
-<title>Accounts</title>
-
+<sect2 id="makingmostof.mapping.accounts"><title>Accounts</title>
 <para>
   An <quote>Account</quote> in &kmymoney; represents one ot the <quote>pots</quote>
   of the previous section: it can be anywhere which holds your money and possessions
@@ -170,9 +159,7 @@
 </para>
 
 
-<sect3 id="makingmostof.mapping.accounts.asset">
-<title>Accounts - Asset</title>
-
+<sect3 id="makingmostof.mapping.accounts.asset"><title>Accounts - Asset</title>
 <para>
   There are multiple types of Asset Accounts.  They are all essentially the same, in
   holding your money, but there are some differences in the details of how money
@@ -236,9 +223,7 @@
 </variablelist>
 </sect3>
 
-<sect3 id="makingmostof.mapping.accounts.liability">
-<title>Accounts - Liability</title>
-
+<sect3 id="makingmostof.mapping.accounts.liability"><title>Accounts - Liability</title>
 <para>
   These accounts represent your debts and money you owe to others.
 </para>
@@ -274,9 +259,7 @@
 </sect3>
 </sect2>
 
-<sect2 id="makingmostof.mapping.institutions">
-<title>Institutions</title>
-
+<sect2 id="makingmostof.mapping.institutions"><title>Institutions</title>
 <para>
   These represent financial institutions, such as banks or investment brokers.  They
   can be used to group accounts, and can show the total value of all your accounts
@@ -286,9 +269,7 @@
 </para>
 </sect2>
 
-<sect2 id="makingmostof.mapping.categories">
-<title>Categories</title>
-
+<sect2 id="makingmostof.mapping.categories"><title>Categories</title>
 <para>
   A Category is a special type of account used internally by &kmymoney; to track
   income and expenses.  These accounts are non-managed, because as mentioned earlier,
@@ -306,9 +287,7 @@
   bill.
 </para>
 
-<sect3 id="makingmostof.mapping.subcategories">
-<title>Sub-Categories</title>
-
+<sect3 id="makingmostof.mapping.subcategories"><title>Sub-Categories</title>
 <para>
   Categories can be split into sub-categories, but this relationship is primarily for
   your convenience, and is used for display purposes.  Most of the time, the
@@ -319,9 +298,7 @@
 
 </sect2>
 
-<sect2 id="makingmostof.mapping.tags">
-<title>Tags</title>
-
+<sect2 id="makingmostof.mapping.tags"><title>Tags</title>
 <para>
   Tags are very similar to Categories, as they are also non-managed accounts that do
   not have a value.  However, unlike Categories, the use of Tags is completely
@@ -329,9 +306,7 @@
 </para>
 </sect2>
 
-<sect2 id="makingmostof.mapping.payees">
-<title>Payees</title>
-
+<sect2 id="makingmostof.mapping.payees"><title>Payees</title>
 <para>
   A Payee (or Payor) represents someone or some group to which you pay money or which
   pays you money.  As with Tags, they are non-managed, and do not have a value.  They
@@ -342,9 +317,7 @@
 </para>
 </sect2>
 
-<sect2 id="makingmostof.mapping.schedules">
-<title>Scheduled transactions</title>
-
+<sect2 id="makingmostof.mapping.schedules"><title>Scheduled transactions</title>
 <para>
   Where transactions occur on a regular basis, such as salary or utility bills, these
   can be set up against a Schedule.  Transactions are created from Schedules.
@@ -353,9 +326,7 @@
 </sect2>
 </sect1>
 
-<sect1 id="makingmostof.usefultips">
-<title>Useful Tips</title>
-
+<sect1 id="makingmostof.usefultips"><title>Useful Tips</title>
 <para>
   When you start &kmymoney;, the Home View, or Home Page, shows a high level overview
   of your finances.  It is divided into several sections, and you can customize which
@@ -435,9 +406,7 @@
 </para>
 </sect1>
 
-<sect1 id="makingmostof.plugins">
-<title>Plugins</title>
-
+<sect1 id="makingmostof.plugins"><title>Plugins</title>
 <para>
   While a detailed knowledge of plugins is not necessary to use &kmymoney;, a basic
   understanding is helpful, as the concept is mentioned in many places throughout

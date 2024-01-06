@@ -6,9 +6,7 @@
 </chapterinfo>
 <title>What's new in this release</title>
 
-<sect1>
-<title>Bug fixes and enhancements to functionality</title>
-
+<sect1><title>Bug fixes and enhancements to functionality</title>
 <para>
   As with every release, the &kmymoney; development team continues to work hard to
   make each version better and easier to use in every way.  Many bugs have been fixed
@@ -44,17 +42,13 @@
   as it is getting increasingly difficult for the team to provide any assistance for
   very old versions.
 </para>
-
 </sect1>
 
-<sect1>
-<title>Updates to this Handbook</title>
+<sect1><title>Updates to this Handbook</title>
 <para>
   This section used to present some details related to the lack of a complete
-  handbook update from 4.x to 5.x.  The intent is that the handbook be fully updated
-  for 5.2, so this section should hopefully be able to be removed before release.
+  handbook update from 4.x to 5.x.  As the handbook has now been fully updated for
+  5.2, this section is no longer necessary.
 </para>
-
 </sect1>
-  
 </chapter>

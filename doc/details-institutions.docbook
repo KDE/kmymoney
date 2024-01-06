@@ -8,7 +8,6 @@
   <date>2018-08-20</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>Institutions</title>
 
 <para>
@@ -20,9 +19,7 @@
   stores.
 </para>
 
-<sect1 id="details.institutions.view">
-<title>Institutions View</title>
-
+<sect1 id="details.institutions.view"><title>Institutions View</title>
 <para>
   The Institutions View provides a summary of all the accounts grouped under their
   respective institutions.  The list of accounts under any institution can be
@@ -37,19 +34,17 @@
   selecting or unselecting the checkbox next to the name of the column.
 </para>
 
-<para>
 <screenshot>
-    	<screeninfo>institution view</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="institution_view.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>institution view</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo>institution view</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="institution_view.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>institution view</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
-</para>
 
 <variablelist>
   <varlistentry>
@@ -119,9 +114,7 @@
 
 </sect1>
 
-<sect1 id="details.institutions.institution">
-<title>Institution Options</title>
-
+<sect1 id="details.institutions.institution"><title>Institution Options</title>
 <para>
   Right-clicking an institution name brings up an Institution Options menu, providing
   you with several choices. Selecting <guimenuitem>New Institution...</guimenuitem>
@@ -135,35 +128,30 @@
   the new account process, which is described in more detail in the next section.
 </para>
 
-<para>
 <screenshot>
-	<screeninfo>Institution options sub-menu</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="institution_options.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Institution options sub-menu</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo>institution options sub-menu</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="institution_options.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>institution options sub-menu</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
-</para>
 
-<sect2 id="details.institutions.new">
-<title>New Institution</title>
-
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="newinst.png" format="PNG" />
-      </imageobject>
-      <textobject>
-        <phrase>New Institution</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<sect2 id="details.institutions.new"><title>New Institution</title>
+<screenshot>
+  <screeninfo>new institution</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newinst.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>new institution</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <note><para>
   You must have a file open before you can create a new institution. If
@@ -184,9 +172,7 @@
 </sect2>
 </sect1>
 
-<sect1 id="details.institutions.account">
-<title>Account Options</title>
-
+<sect1 id="details.institutions.account"><title>Account Options</title>
 <para>
   The options just discussed refer to the institutions listed in the Institutions
   View.  Most of the rows in this viw are accounts.  Right-clicking an account name
@@ -212,19 +198,16 @@
   options, are presented in the appropriate sections of this manual.
 </para>
 
-<para>
 <screenshot>
-	<screeninfo>account options sub-menu</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="account_options.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>account options sub-menu</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo>account options sub-menu</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="account_options.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>account options sub-menu</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
-</para>
-
 </sect1>
 </chapter>

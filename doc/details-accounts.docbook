@@ -43,22 +43,18 @@
   editing that account.
 </para>
 
-<sect1 id="details.accounts.view">
-<title>The Accounts View</title>
-
-<para>
-  <screenshot>
-    <screeninfo>account view</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="account_view.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>account view</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<sect1 id="details.accounts.view"><title>The Accounts View</title>
+<screenshot>
+  <screeninfo>accounts view</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="account_view.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>accounts view</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   The Accounts View provides a summary of all the accounts. It is similar to the
@@ -177,9 +173,7 @@
 </variablelist>
 </sect1>
 
-<sect1 id="details.accounts.create">
-<title>Creating an Account</title>
-
+<sect1 id="details.accounts.create"><title>Creating an Account</title>
 <note><para>
     You must have a file open before you can create a new account. If you
     do not have an existing file, you will need to <link
@@ -197,38 +191,36 @@
   account...</guimenuitem> from the popup menu.
 </para>
 
-<sect2 id="details.accounts.create.institution">
-<title>The Institution (Bank) name</title>
-
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="accwiz1.png" format="PNG" />
-      </imageobject>
-      <textobject>
-        <phrase>Account Wizard</phrase>
+<sect2 id="details.accounts.create.institution"><title>The Institution (Bank) name</title>
+<screenshot>
+  <screeninfo>new account wizard - institution</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz1.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>new account wizard - institution</phrase>
       </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+  </mediaobject>
+</screenshot>
 
 <para>
-  The first step involves selecting an institution for the account.  If this is
-  an account for an institution you have already created, you can select the
-  institution from the dropdown list.  If you want to create a new institution,
-  click on the <guibutton>New Institution</guibutton> button.  This will bring
-  up the New Institution Dialog, as described in the previous section.  If this
-  is not a bank account, or if you do not want to use online banking, you do not
-  need to specify an institution.
+  The first step involves selecting an institution for the account.  If this is an
+  account for an institution you have already created, you can select the institution
+  from the dropdown list.  If you want to create a new institution, click on the
+  <guibutton>New Institution</guibutton> button.  This will bring up the New
+  Institution Dialog, as described in the previous section.  If this is not a bank
+  account, or if you do not want to use online banking, you do not need to specify an
+  institution.
 </para>
 
 <para>
   The Account Number and the <ulink
-  url="https://en.wikipedia.org/wiki/International_Bank_Account_Number"><acronym>IBAN</acronym>
-  (International Bank Account Number)</ulink> are not currently used
-  by &kmymoney;.  These fields may be left blank and filled in at a later time;
-  they are only required for online banking. <!-- FIXME: check accuracy -->
+  url="https://en.wikipedia.org/wiki/International_Bank_Account_Number">
+  <acronym>IBAN</acronym> (International Bank Account Number)</ulink> are not
+  currently used by &kmymoney;.  These fields may be left blank and filled in at a
+  later time; they are only required for online banking.
+  <!-- FIXME: check accuracy -->
 </para>
 
 <para>
@@ -236,21 +228,18 @@
 </para>
 </sect2>
 
-<sect2 id="details.accounts.create.account">
-<title>Account</title>
-
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="accwiz2.png" format="PNG" />
-      </imageobject>
-      <textobject>
-        <phrase>Account Wizard</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<sect2 id="details.accounts.create.account"><title>Account</title>
+<screenshot>
+  <screeninfo>new account wizard - account details</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz2.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>new account wizard - account details</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   First, enter a name for the account. This name will be used to identify it.
@@ -387,27 +376,24 @@
 </para>
 </sect2>
 
-<sect2>
-<title>Credit Card Accounts</title>
-
+<sect2><title>Credit Card Accounts</title>
 <para>
   When creating a Credit Card account, after entering the basic information and
   clicking <guibutton>Next</guibutton>, you can optionally have &kmymoney; create a
   <link linkend="details.schedules">Scheduled Transaction</link> for you.
 </para>
 
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="accwiz6.png" format="PNG" />
-      </imageobject>
-      <textobject>
-        <phrase>Account Wizard</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>new account wizard - credit card with schedule</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz6.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>new account wizard - credit card with schedule</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   If you want such a transaction generated, make sure the checkbox is selected
@@ -419,9 +405,7 @@
 </para>
 </sect2>
 
-<sect2>
-<title>Investment Accounts</title>
-
+<sect2><title>Investment Accounts</title>
 <para>
   In &kmymoney;, Investment accounts contain only equities (stocks, bonds,
   &etc;) but do not contain cash.  (This is why you cannot specify a Opening
@@ -441,18 +425,17 @@
   not expected in the near future.
 </para>
 
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="accwiz7.png" format="PNG" />
-      </imageobject>
-      <textobject>
-        <phrase>Account Wizard</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>new account wizard - investment</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz7.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>new account wizard - investment</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   It is generally best to create the Brokerage account here, which will be given the
@@ -463,9 +446,7 @@
 </para>
 </sect2>
 
-<sect2>
-<title>Loan Accounts</title>
-
+<sect2><title>Loan Accounts</title>
 <para>
   Loan accounts have special features to help you manage Loans with interest and
   scheduled repayments.  By providing &kmymoney; with information about the loan,
@@ -473,18 +454,17 @@
   loan.
 </para>
 
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="accwiz8_1.png" format="PNG" />
-      </imageobject>
-      <textobject>
-        <phrase>Account Wizard</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>new account wizard - loan details</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz8_1.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>new account wizard - loan details</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   On the Details page you enter the general information about the loan.
@@ -531,18 +511,17 @@
   <guibutton>Next</guibutton> to continue.
 </para>
 
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="accwiz8_2.png" format="PNG" />
-      </imageobject>
-      <textobject>
-        <phrase>Account Wizard</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>new account wizard  - loan payments</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz8_2.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>new account wizard - loan payments</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   The Payments page is where you enter the payment and interest values for the loan.
@@ -631,18 +610,17 @@
   and you can advance to the next page.
 </para>
 
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="accwiz8_3.png" format="PNG" />
-      </imageobject>
-      <textobject>
-        <phrase>Account Wizard</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>new account wizard - loan fees</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz8_3.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>new account wizard - loan fees</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   The Fees page is where you can enter any fees added to the loan payments.
@@ -656,18 +634,17 @@
   payment, the total additional fees, and the total periodic payment.
 </para>
 
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="accwiz8_4.png" format="PNG" />
-      </imageobject>
-      <textobject>
-        <phrase>Account Wizard</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>new account wizard - loan schedule</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz8_4.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>new account wizard - loan schedule</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   &kmymoney; will create a <link linkend="details.schedules">Scheduled
@@ -685,18 +662,17 @@
   created.
 </para>
 
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="accwiz8_5.png" format="PNG" />
-      </imageobject>
-      <textobject>
-        <phrase>Account Wizard</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>new account wizard - loan payout</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz8_5.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>new account wizard - loan payout</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   Optionally, &kmymoney; can create a transaction representing what was received
@@ -725,22 +701,18 @@
 </para>
 </sect2>
 
-<sect2 id="details.accounts.create.parent">
-<title>Parent Account</title>
-
-<para>
-  <screenshot>
-    <screeninfo>Parent Account</screeninfo>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="accwiz10.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Account Wizard</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<sect2 id="details.accounts.create.parent"><title>Parent Account</title>
+<screenshot>
+  <screeninfo>new account wizard - parent account</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz10.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>new account wizard - parent account</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   This is the penultimate step in creating any new account except a loan.  Depending
@@ -765,22 +737,18 @@
 
 </sect2>
 
-<sect2>
-<title>Review and save the account details</title>
-
-<para>
-  <screenshot>
-    <screeninfo>Review</screeninfo>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="accwiz9.png" format="PNG" />
-      </imageobject>
-      <textobject>
-        <phrase>Account Wizard</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<sect2><title>Review and save the account details</title>
+<screenshot>
+  <screeninfo>new account wizard - review and finish</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz9.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>new account wizard - review and finish</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   This is the final step in creating a new account.  A summary of the information
@@ -799,9 +767,7 @@
 </sect2>
 </sect1>
 
-<sect1 id="details.accounts.viewing">
-<title>Opening / viewing accounts</title>
-
+<sect1 id="details.accounts.viewing"><title>Opening / viewing accounts</title>
 <para>
   To open an account in the <link linkend="details.ledgers.view">Ledgers View</link>,
   you can either click on the link to the account in the Home View, or you can click
@@ -816,9 +782,7 @@
 </para>
 </sect1>
 
-<sect1 id="details.accounts.edit">
-<title>Editing Account Information</title>
-
+<sect1 id="details.accounts.edit"><title>Editing Account Information</title>
 <para>
   To edit a particular account, right-click the account name in the Accounts View or
   the Institutions View and choose <guimenuitem>Edit account...</guimenuitem> or with
@@ -830,20 +794,20 @@
   linkend="details.accounts.create">creating a new account</link>.
 </para>
 
-<para>
-  <screenshot>
-    <screeninfo>Edit an account</screeninfo>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="account_edit.png" format="PNG" />
-      </imageobject>
-      <textobject>
-        <phrase>Edit account information</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
+<screenshot>
+  <screeninfo>edit account information</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="account_edit.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>edit account information</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
-This dialog has several tabs for configuring different aspects of an Account.
+<para>
+  This dialog has several tabs for configuring different aspects of an Account.
 </para>
 
 <variablelist>
@@ -1009,9 +973,7 @@ This dialog has several tabs for configuring different aspects of an Account.
 </variablelist>
 </sect1>
 
-<sect1 id="details.accounts.delete">
-<title>Deleting accounts</title>
-
+<sect1 id="details.accounts.delete"><title>Deleting accounts</title>
 <para>
   An account can only be deleted if it has no transactions in it, and is not referred
   to by any other item in the data file.  In general, this means you first need to

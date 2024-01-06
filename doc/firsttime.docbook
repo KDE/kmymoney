@@ -8,12 +8,9 @@
   <date>2023-08-15</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>Using &kmymoney; for the first time</title>
 
-<sect1 id="firstime-1">
-<title>Running &kmymoney; for the first time</title>
-
+<sect1 id="firstime-1"><title>Running &kmymoney; for the first time</title>
 <note>
   <para>
     When you run &kmymoney;, it might not look exactly like the screenshots in this
@@ -26,22 +23,18 @@
 
 </sect1>
 
-<sect1 id="firsttime.mainwindow">
-<title>The main window</title>
-
-<para>
-  <screenshot>
-    <screeninfo>The Main Window</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="mainwindow_numbered.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>The Main Window</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<sect1 id="firsttime.mainwindow"><title>The main window</title>
+<screenshot>
+  <screeninfo>The Main Window</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="mainwindow_numbered.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>The Main Window</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   The &kmymoney; main window consists of four major parts
@@ -296,9 +289,7 @@
 </para>
 </sect1>
 
-<sect1 id="firsttime.newfile">
-<title>Creating a new file</title>
-
+<sect1 id="firsttime.newfile"><title>Creating a new file</title>
 <para>
   &kmymoney; keeps all the data about your finances in a file.  As was stated in
   <link linkend="makingmostof.basicaccounting.personalaccounts">Defining the
@@ -332,19 +323,17 @@
   guide you through the process of creating the file.
 </para>
 
-<para>
-  <screenshot>
-    <screeninfo>Personal Data Page</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="newfile.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Personal Data Page</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>Personal Data Page</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newfile.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>Personal Data Page</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   Any information entered hereon the <guilabel>Personal Data</guilabel> page is used
@@ -379,19 +368,17 @@
   currency, if appropriate for you situation.
 </para>
 
-<para>
-  <screenshot>
-    <screeninfo>Base currency selection Page</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="newfile-2.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Base currency selection page</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>Base currency selection Page</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newfile-2.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>Base currency selection page</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   In this example, US Dollar has been selected as the base currency.
@@ -403,19 +390,17 @@
   account.
 </para>
 
-<para>
-  <screenshot>
-    <screeninfo>Checking account creation Page</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="newfile-3.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Checking account creation page</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>Checking account creation Page</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newfile-3.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>Checking account creation page</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   Enter the name of the account and a possible account or reference number assigned
@@ -439,20 +424,17 @@
   Once finished, press <guibutton>Next</guibutton> to proceed.
 </para>
 
-<para>
-  <screenshot>
-    <screeninfo>Account template selection Page</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="newfile-4.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Account template selection page</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
-
+<screenshot>
+  <screeninfo>Account template selection Page</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newfile-4.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>Account template selection page</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   Choose the appropriate country and account template(s). Each template provides a
@@ -469,19 +451,17 @@
   proceed.
 </para>
 
-<para>
-  <screenshot>
-    <screeninfo>Preference Page</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="newfile-6.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Preference page</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>Preference Page</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newfile-6.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>Preference page</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   This page of the wizard allows you to setup user preferences. If you select the
@@ -493,19 +473,17 @@
 <!-- FIXME: note the above shot is 6, but should be numbered 5, and the 5 below
      is the wrong shot. -->
 
-<para>
-  <screenshot>
-    <screeninfo>Filename selection Page</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="newfile-6.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Filename selection page</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>Filename selection Page</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newfile-6.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>Filename selection page</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   The lastfinal page of the wizard allows you to select the location and filename
@@ -522,9 +500,7 @@
 
 </sect1>
 
-<sect1 id="firsttime.4">
-<title>Creating accounts</title>
-
+<sect1 id="firsttime.4"><title>Creating accounts</title>
 <para>
   There are multiple ways you can create an account:
 </para>
@@ -597,9 +573,7 @@
 </para>
 </sect1>
 
-<sect1 id="firsttime.schedules">
-<title>Schedules</title>
-
+<sect1 id="firsttime.schedules"><title>Schedules</title>
 <para>
   A <link linkend="details.schedules">schedule</link>, sometimes called a scheduled
   transaction or a recurring transaction, is a transaction that occurs one or more
@@ -618,9 +592,7 @@
 </para>
 </sect1>
 
-<sect1 id="firsttime.categories">
-<title>Categories</title>
-
+<sect1 id="firsttime.categories"><title>Categories</title>
 <para>
   To maintain your <link linkend="details.categories">categories</link> click on the
   <guiicon><inlinemediaobject><imageobject><imagedata fileref="categories_view.png"
@@ -634,9 +606,7 @@
 </para>
 </sect1>
 
-<sect1 id="firsttime.tags">
-<title>Tags</title>
-
+<sect1 id="firsttime.tags"><title>Tags</title>
 <para>
   To maintain your <link linkend="details.tags">tags</link> click on the <guiicon>
   <inlinemediaobject><imageobject><imagedata fileref="mail-tagged.png" format="PNG"/>
@@ -649,9 +619,7 @@
 </para>
 </sect1>
 
-<sect1 id="firsttime.payees">
-<title>Payees</title>
-
+<sect1 id="firsttime.payees"><title>Payees</title>
 <para>
   To maintain your payees click on the <guiicon><inlinemediaobject>
   <imageobject><imagedata fileref="payees_view.png" format="PNG"/></imageobject>
@@ -664,9 +632,7 @@
 </para>
 </sect1>
 
-<sect1 id="firsttime.import">
-<title>Quicken Interchange Format (QIF) Import</title>
-
+<sect1 id="firsttime.import"><title>Quicken Interchange Format (QIF) Import</title>
 <para>
   If you currently use another financial manager application, &kmymoney; can import
   much or all of the data from that program, as long as they can be exported or saved
@@ -683,9 +649,7 @@
 <!--  FIXME: do we want to mention any other format here?  -->
 </sect1>
 
-<sect1 id="firsttime.find">
-<title>Searching for transactions</title>
-
+<sect1 id="firsttime.find"><title>Searching for transactions</title>
 <para>
   &kmymoney; provides a useful and powerful transaction search facility in the
   form of the search dialog.
@@ -705,9 +669,7 @@
 </para>
 </sect1>
 
-<sect1 id="firsttime.reconcile">
-<title>Reconciliation</title>
-
+<sect1 id="firsttime.reconcile"><title>Reconciliation</title>
 <para>
   At some point, you will want to reconcile your records and details of an account
   with the actual account to assure they match.  This is generally done by comparing
@@ -733,9 +695,7 @@
 </para>
 </sect1>
 
-<sect1 id="firsttime.backup">
-<title>Backing up</title>
-
+<sect1 id="firsttime.backup"><title>Backing up</title>
 <para>
   Now that you have created some accounts and entered transactions it's a good idea
   to perform a backup.  Because the file used by &kmymoney; is a standard &Linux; file
@@ -766,9 +726,7 @@
 </para>
 </sect1>
 
-<sect1 id="firsttime.launch">
-<title>Launching &kmymoney;</title>
-
+<sect1 id="firsttime.launch"><title>Launching &kmymoney;</title>
 <para>
   Most commonly, you will launch &kmymoney; from an icon or a start menu of your
   window manager or desktop environment.  In this case, the default behavior is that
@@ -783,29 +741,26 @@
 </para>
 
 <formalpara><title><command>kmymoney -n</command></title>
-  <para>
-    The -n option tells &kmymoney; not to open the last file it had open.  This
-    can be useful if the program crashes on startup.
-  </para>
+<para>
+  The -n option tells &kmymoney; not to open the last file it had open.  This can be
+  useful if the program crashes on startup.
+</para>
 </formalpara>
 
 <formalpara><title><command>kmymoney &lt;path to file&gt;</command></title>
-  <para>
-    Giving &kmymoney; a filename on the command line tells it to open that file
-    instead of the last file it had open.  You can use the name of any valid
-    &kmymoney; file, as described in the chapter on <link
-    linkend="details.formats">file formats</link>.  In addition, this can be
-    used to import a <link linkend="details.impexp.gnucash">&gnucash;</link> file.
-  </para>
+<para>
+  Giving &kmymoney; a filename on the command line tells it to open that file instead
+  of the last file it had open.  You can use the name of any valid &kmymoney; file,
+  as described in the chapter on <link linkend="details.formats">file formats</link>.
+  In addition, this can be used to import a <link
+  linkend="details.impexp.gnucash">&gnucash;</link> file.
+</para>
 </formalpara>
 </sect1>
 
-<sect1 id="firsttime.newpc">
-<title>How to move &kmymoney; to a new computer</title>
+<sect1 id="firsttime.newpc"><title>How to move &kmymoney; to a new computer</title>
 
-<sect2 id="firsttime.newpc.data">
-<title>Moving your data</title>
-
+<sect2 id="firsttime.newpc.data"><title>Moving your data</title>
 <para>
   If you get a new computer, it's very easy to move your data.  In fact, all you
   have to do is to copy your &kmymoney; data file.  The name of the file is
@@ -835,9 +790,7 @@
 </para>
 </sect2>
 
-<sect2 id="firsttime.newpc.settings">
-<title>Moving your settings</title>
-
+<sect2 id="firsttime.newpc.settings"><title>Moving your settings</title>
 <!-- Need to clarify location of config data.  Some in ~/.config/kmymoney, some in
      ~/.local/share/kmymoney -->
 <para>
@@ -853,9 +806,7 @@
   <envar>$KDEHOME</envar> was <filename class="directory">.kde4</filename>.
 </para>
 
-<sect3 id="firsttime.newpc.settings.plugins">
-<title>Moving plugin settings</title>
-
+<sect3 id="firsttime.newpc.settings.plugins"><title>Moving plugin settings</title>
 <para>
   If you have run any &kmymoney; plugin, such as the csv importer or exporter,
   it may also have created a configuration file in that same folder, such as
@@ -891,9 +842,7 @@
 </sect2>
 </sect1>
 
-<sect1 id="firsttime.contact">
-  <title>Getting Help / Contacting the Developers / Reporting Bugs</title>
-
+<sect1 id="firsttime.contact"><title>Getting Help / Contacting the Developers / Reporting Bugs</title>
 <para>
   Since support channnels change over time, you can refer to the <ulink
   url="https://kmymoney.org/support.html">Support page</ulink> at the <ulink
@@ -909,9 +858,7 @@
   above link.
 </para>
 
-<sect2>
-<title>Contacting the developers</title>
-
+<sect2><title>Contacting the developers</title>
 <para>
   For general questions or comments about &kmymoney;, there is a users' mailing list
   &userlist; with more details <ulink
@@ -931,9 +878,7 @@
 </para>
 </sect2>
 
-<sect2>
-<title>Reporting bugs</title>
-
+<sect2><title>Reporting bugs</title>
 <para>
   To report a bug please use the interface provided by &kmymoney; by selecting
   <menuchoice><guimenu>Help</guimenu><guimenuitem>Report
@@ -954,9 +899,7 @@
   listed above.
 </para>
 
-<sect3 id="firsttime.bugs.quality">
-<title>Writing High Quality Bug Reports</title>
-
+<sect3 id="firsttime.bugs.quality"><title>Writing High Quality Bug Reports</title>
 <para>
   We encourage users to take extra time to write high-quality bug reports when
   submitting them.  This reduces wasted effort on all sides, as the reporter and
@@ -972,60 +915,60 @@
 </para>
 
 <formalpara><title>Include your system information</title>
-  <para>
-    The <menuchoice><guimenu>Help</guimenu><guimenuitem>Report
-    Bug</guimenuitem></menuchoice> menu item will fill this in automatically, but if
-    you would prefer not to use this interface, there are several items you need to
-    include in the report.  We will need to know what operating system you are using
-    (&Linux;, &MacOS;, or &Windows;), the version of &kde;, and the version of
-    &kmymoney; you're running, and either the version of &MacOS; or &Windows; or the
-    name and version of your &Linux; distribution and the version of your kernel.
-    This information is extremely important, as many bugs (as well as behaviors
-    mis-identified as bugs) depend on the Operating System.
-  </para>
+<para>
+  The <menuchoice><guimenu>Help</guimenu><guimenuitem>Report
+  Bug</guimenuitem></menuchoice> menu item will fill this in automatically, but if
+  you would prefer not to use this interface, there are several items you need to
+  include in the report.  We will need to know what operating system you are using
+  (&Linux;, &MacOS;, or &Windows;), the version of &kde;, and the version of
+  &kmymoney; you're running, and either the version of &MacOS; or &Windows; or the
+  name and version of your &Linux; distribution and the version of your kernel.  This
+  information is extremely important, as many bugs (as well as behaviors
+  mis-identified as bugs) depend on the Operating System.
+</para>
 </formalpara>
 
 <formalpara><title>Include a backtrace for crashes</title>
-  <para>
+<para>
     The backtrace is often the single most useful piece of information in solving
     crashes.
-  </para>
+</para>
 </formalpara>
 
 <formalpara><title>Try to reproduce it</title>
-  <para>
-    Let us know if you were able to do so.  It's useful to know whether the bug only
-    happened once and you couldn't get it to happen again or if it happens every time
-    or if it happens sometimes but not others.
+<para>
+  Let us know if you were able to do so.  It's useful to know whether the bug only
+  happened once and you couldn't get it to happen again or if it happens every time
+  or if it happens sometimes but not others.
   </para>
 </formalpara>
 
 <formalpara><title>Include specific steps</title>
-  <para>
-    This is a bad bug report: <quote>I entered a transaction, and &kmymoney;
-    crashed.</quote> A much better bug report is: <quote>Using the transaction form,
-    I entered a new transaction in my Credit Card account.  I selected the Transfer
-    tab, entered an amount, then changed to the Deposit tab, and back to the Transfer
-    tab.  When I returned to the Transfer tab, &kmymoney; crashed.  This bug is fully
-    reproducible for me.</quote>
-  </para>
+<para>
+  This is a bad bug report: <quote>I entered a transaction, and &kmymoney;
+  crashed.</quote> A much better bug report is: <quote>Using the transaction form, I
+  entered a new transaction in my Credit Card account.  I selected the Transfer tab,
+  entered an amount, then changed to the Deposit tab, and back to the Transfer tab.
+  When I returned to the Transfer tab, &kmymoney; crashed.  This bug is fully
+  reproducible for me.</quote>
+</para>
 </formalpara>
 
 <formalpara><title>Tell us what you expected to happen</title>
-  <para>
-    In some cases, this is obvious, but in more subtle bugs, sometimes you'll see a
-    bug report where it is not obvious what the reporter expected to happen.  Always
-    tell us what you think should have happened, as well as what did happen.
-  </para>
+<para>
+  In some cases, this is obvious, but in more subtle bugs, sometimes you'll see a bug
+  report where it is not obvious what the reporter expected to happen.  Always tell
+  us what you think should have happened, as well as what did happen.
+</para>
 </formalpara>
 
 <formalpara><title>Consider running with debugging enabled</title>
-  <para>
-    By compiling a version configured with --enable-debug=full you can ensure
-    that the best possible backtraces are generated.  If you encounter a crash,
-    run &kmymoney; again from within gdb, and reproduce the crash.  When it
-    crashes, type <quote>bt</quote> to generate a backtrace.
-  </para>
+<para>
+  By compiling a version configured with --enable-debug=full you can ensure that the
+  best possible backtraces are generated.  If you encounter a crash, run &kmymoney;
+  again from within gdb, and reproduce the crash.  When it crashes, type
+  <quote>bt</quote> to generate a backtrace.
+</para>
 </formalpara>
 
 <para>

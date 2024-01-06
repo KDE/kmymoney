@@ -8,7 +8,6 @@
   <date>2023-08-30</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>Tags</title>
 
 <para>
@@ -18,27 +17,25 @@
   reports</link>.
 </para>
 
-<sect1 id="details.tags.view">
-<title>Tags View</title>
-
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="tags.png" format="PNG" />
-      </imageobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<sect1 id="details.tags.view"><title>Tags View</title>
+<screenshot>
+  <screeninfo>tags view transactions tab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="tags.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>tags view transactions tab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   The Tags View provides information about all the tags that have been added to the
   data file.  The display is split into two areas.
 </para>
 
-<sect2 id="details.tags.list">
-<title>Tags List</title>
-
+<sect2 id="details.tags.list"><title>Tags List</title>
 <para>
   On the left is a list of tags, with buttons for adding, renaming, or deleting a tag.
 </para>
@@ -55,8 +52,7 @@
 </para>
 </sect2>
   
-<sect2>
-<title>Adding a Tag</title>
+<sect2><title>Adding a Tag</title>
 <para>
   As with most actions in &kmymoney;, there are multiple ways to create a new tag.
   First, you can click on the <guiicon><inlinemediaobject><imageobject><imagedata
@@ -70,8 +66,7 @@
 </para>
 </sect2>
 
-<sect2>
-<title>Renaming a Tag</title>
+<sect2><title>Renaming a Tag</title>
 <para>
   To rename a tag, either click on the tag name to select it and click on the
   <guiicon>Rename tag</guiicon> icon <!-- FIXME: add icon for rename -->(between the
@@ -81,8 +76,7 @@
 </para>
 </sect2>
 
-<sect2>
-<title>Deleting a Tag</title>
+<sect2><title>Deleting a Tag</title>
 <para>
   To delete a tag, either click on the
   <guiicon><inlinemediaobject><imageobject><imagedata fileref="list-remove.png"
@@ -102,30 +96,26 @@
 </sect2>
 </sect1>
 
-<sect1 id="details.tags.info">
-<title>Tagged transactions and Tag details</title>
+<sect1 id="details.tags.info"><title>Tagged transactions and Tag details</title>
 <para>
   To view the transactions or view and edit the information associated with a
   particular tag, select the tag from the list and select the appropriate tab on the
   right side of the dialog.
 </para>
 
-<para>
-  <screenshot>
-    <screeninfo>The tag details tab</screeninfo>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="tag_details.png" format="PNG" />
-      </imageobject>
-      <textobject>
-        <phrase>Tag details</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>tags view details tab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="tag_details.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>tags view details tab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
-<sect2 id="details.tags.info.transactions">
-<title>Tagged transactions</title>
+<sect2 id="details.tags.info.transactions"><title>Tagged transactions</title>
 <para>
   To see a list of the transactions associated with the selected tag, select the
   <guilabel>Transactions</guilabel> tab.  This list is similar to the list of
@@ -136,8 +126,7 @@
 </sect2>
 
 
-<sect2 id="details.tags.info.details">
-<title>Tag details</title>
+<sect2 id="details.tags.info.details"><title>Tag details</title>
 <para>
   To view and edit the information associated with a particular tag, select the
   <guilabel>Details</guilabel> tab.

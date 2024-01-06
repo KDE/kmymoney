@@ -8,7 +8,6 @@
   <date>2023-11-25</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>File Formats</title>
 
 <para>
@@ -28,7 +27,6 @@
 </para>
 
 <sect1><title>Data File formats</title>
-
 <para>
   In general, &kmymoney; stores its
   information in form of an &XML; document.  Depending on the actual format, which is
@@ -208,7 +206,6 @@
 </sect1>
 
 <sect1 id="details.formats.backup"><title>Backup</title>
-
 <para>
   We will not attempt here to convince you that making backup copies of your data is
   an extremely good idea; hopefully you are already convinced of that.  This section
@@ -219,7 +216,6 @@
 </para>
 
 <sect2><title>Backup file location</title>
-
 <para>
   If you need a backup copy of your data to confirm some aspect of your finances at a
   previous point in time, or to revert to an earlier state, such as to undo importing
@@ -234,7 +230,6 @@
 </sect2>
 
 <sect2><title>Autosave</title>
-
 <para>
   &kmymoney; has the ability to automatically save a copy of your data file at
   regular intervals.  It can also do so on closing the program, if the data has
@@ -245,7 +240,6 @@
 </sect2>
 
 <sect2><title>File copy</title>
-
 <para>
   Unless you are using SQL storage, your data may be compressed, and it may be
   encrypted, but is kept in a regular file.  Whenever you save your data with the
@@ -262,22 +256,24 @@
 </sect2>
 
 <sect2><title>Backup command</title>
-
 <para>
   To make things a bit easier, you can select the <menuchoice>
   <guimenu>File</guimenu> <guimenuitem>Backup</guimenuitem> </menuchoice> menu item.
+</para>
 
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="file-backup.png" format="PNG" />
-      </imageobject>
-      <textobject>
-        <phrase>file backup</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
+<screenshot>
+  <screeninfo>file backup</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="file-backup.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>file backup</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
+<para>
   When you click <guibutton>OK</guibutton> &kmymoney; will create a copy of your data
   file, with the date (formatted as YYYY-MM-DD) appended to the name.  Note that this
   means only one backup per day can be created by this method.  If you have already

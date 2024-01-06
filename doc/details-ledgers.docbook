@@ -10,12 +10,9 @@
   <date>2023-09-04</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>Ledgers</title>
 
-<sect1 id="details.ledgers.view">
-<title>The Ledgers View</title>
-
+<sect1 id="details.ledgers.view"><title>The Ledgers View</title>
 <para>
   The Ledgers View is functionally the data integration center of &kmymoney;.  This
   view is for entering, examining, editin, and deleting transactions in your defined
@@ -42,18 +39,17 @@
   within the Ledgers View includes modifying and reconciling the account.
 </para>
   
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="ledgerview-numbered.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Ledger View</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>ledgers view</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="ledgerview-numbered.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>ledgers view</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   The view has three elements:
@@ -70,21 +66,18 @@
   </listitem>
 </itemizedlist>
 
-<sect2 id="details.ledgers.view.filter">
-<title>The filter area</title>
-
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="accountdropdown.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Filter area</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<sect2 id="details.ledgers.view.filter"><title>The filter area</title>
+<screenshot>
+  <screeninfo>ledgers view filter area</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accountdropdown.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>ledgers view filter area</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   In previous versions of &kmymoney;, the filter area was always displayed at the top
@@ -121,21 +114,18 @@
 </para>
 </sect2>
 
-<sect2>
-<title>The transaction list</title>
-
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="translist.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Transaction list</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<sect2><title>The transaction list</title>
+<screenshot>
+  <screeninfo>ledgers view transaction list</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="translist.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>ledgers view transaction list</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 	
 <para>
   The transaction list displays all the (possible filtered) transaction in the
@@ -258,9 +248,7 @@
 </formalpara>
 </sect2>
 
-<sect2>
-<title>The transaction form</title>
-
+<sect2><title>The transaction form</title>
 <para>
   Whether or not the transaction form is displayed at the bottom area of the Ledger
   View depends on your configuration and the type of account being displayed.
@@ -271,9 +259,7 @@
 </sect2>
 </sect1>
 
-<sect1 id="details.ledger.transactions">
-<title>Entering Transactions</title>
-
+<sect1 id="details.ledger.transactions"><title>Entering Transactions</title>
 <para>
   There are two methods of entering transactions into the ledger: using the
   transaction form or entering the data directly into the transaction list.  The
@@ -292,21 +278,18 @@
 </para>
 </sect1>
 
-<sect1 id="details.ledger.transactionform">
-<title>Using the transaction form</title>
-
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="transactionform.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Transaction Form</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<sect1 id="details.ledger.transactionform"><title>Using the transaction form</title>
+<screenshot>
+  <screeninfo>ledgers view transaction form</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="transactionform.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>ledgers view transaction form</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 	
 <para>
   The transaction form at the bottom of the ledger view is the interface for manually
@@ -320,9 +303,7 @@
   specific tab or specify To: or From:.
 </para>
 
-<sect2>
-<title>The fields of a transaction</title>
-
+<sect2><title>The fields of a transaction</title>
 <para>
   Enter the information using the following notes on the available fields.  Note that
   many fields have <quote>Auto Completion</quote> turned on.  That is, if you start
@@ -334,9 +315,7 @@
   characters.
 </para>
 
-<sect3>
-<title>Payer/Payee</title>
-
+<sect3><title>Payer/Payee</title>
 <para>
   This is who the money comes from or goes to.  If the payee is a new entry
   &kmymoney; will ask if you wish to add this to the list of Payees.  Any other
@@ -345,9 +324,7 @@
 </para>
 </sect3>
 
-<sect3>
-<title>Category</title>
-
+<sect3><title>Category</title>
 <para>
   This specifies an income or expense category for accounting and reporting purposes,
   and enables you to group certain transactions.  Type the name of the category into
@@ -378,9 +355,7 @@
 </para>
 </sect3>
 
-<sect3>
-<title>Tags</title>
-
+<sect3><title>Tags</title>
 <para>
   Tags are similar to Categories, and can be used to maintain an orthogonal view to
   Categories.  They provide the ability to group transactions within a Category based
@@ -394,18 +369,14 @@
 </para>
 </sect3>
 
-<sect3>
-<title>Memo</title>
-
+<sect3><title>Memo</title>
 <para>
   A single or multi-line memo can be entered if you wish to record any further
   details of the transaction.
 </para>
 </sect3>
 
-<sect3>
-<title>Number</title>
-
+<sect3><title>Number</title>
 <para>
   The transaction number can be entered if needed.  Note that the check number field
   can be made visible or invisible in the ledger list if desired.  This is configured
@@ -415,9 +386,7 @@
 </para>
 </sect3>
 
-<sect3>
-<title>Date</title>
-
+<sect3><title>Date</title>
 <para>
   The transaction's date must be entered to specify when the transaction took place.
   See the special <link linkend="reference.widgets">&kmymoney; fields</link> section
@@ -433,9 +402,7 @@
 </para>
 </sect3>
 
-<sect3>
-<title>Amount</title>
-
+<sect3><title>Amount</title>
 <para>
   Finally, enter the transaction amount into either the <guilabel>Paymenet</guilabel>
   or <guilabel>Deposit</guilabel> field.  Note that a simple calculator can be
@@ -456,21 +423,18 @@
 </sect2>
 </sect1>
 
-<sect1 id="details.ledger.direct">
-<title>Directly inputting transactions into the list</title>
-
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="transactionform-off.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Direct Transaction Entry</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<sect1 id="details.ledger.direct"><title>Directly inputting transactions into the list</title>
+<screenshot>
+  <screeninfo>ledger view direct transaction entry</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="transactionform-off.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>ledgers view direct transaction entry</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   The second method of entering transactions into the ledger involves creating and
@@ -491,9 +455,7 @@
   <guibutton>OK</guibutton> to be ready to directly enter or edit transactions.
 </para>
 
-<sect2>
-<title>Starting the edit</title>
-
+<sect2><title>Starting the edit</title>
 <para>	
   To enter a new transaction into the ledger, you can either click on the empty entry
   at the bottom of the ledger list, press <keycombo
@@ -527,9 +489,7 @@
 </sect2>
 </sect1>
 
-<sect1 id="details.ledgers.split">
-<title id="details.ledgers.split.title">Split Transactions</title>
-
+<sect1 id="details.ledgers.split"><title>Split Transactions</title>
 <para>
   The split transaction feature allows you to divide up a transaction into multiple
   categories, representing, for example, the different types of items bought with a
@@ -583,19 +543,17 @@
   buttons? -->
 </para>
 
-<para>
-  <screenshot>
-    <screeninfo>Split with unassigned amount</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="split_unassigned.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Split with unassigned amount</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>split editor split with unassigned amount</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="split_unassigned.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>split editor split with unassigned amount</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   To redistribute an <quote>Unassigned</quote> or <quote>Overassigned</quote> amount,
@@ -613,27 +571,22 @@
   displays a comma separated list of the categories in each of the split entries.
 </para> 
 
-<para>
-  <screenshot>
-    <screeninfo>Split transactions</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="split_transaction.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Split transaction</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>split transaction in ledger</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="split_transaction.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>split transaction in ledger</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 </sect1>
 
-<sect1 id="details.ledger.actions">
-<title>Other transaction actions</title>
+<sect1 id="details.ledger.actions"><title>Other transaction actions</title>
 
-<sect2 id="details.ledger.edit">
-<title>Editing transactions</title>
-
+<sect2 id="details.ledger.edit"><title>Editing transactions</title>
 <para>
   To edit a transaction, select it in the list view and either click on
   <guibutton>Edit</guibutton> in the transaction form or right-click on the entry and
@@ -644,9 +597,7 @@
 </para>
 </sect2>
 
-<sect2 id="details.ledger.delete">
-<title>Deleting transactions</title>
-
+<sect2 id="details.ledger.delete"><title>Deleting transactions</title>
 <para>
   To delete a transaction, right-click it in the list view and select
   <guimenuitem>Delete</guimenuitem> from the popup menu when it appears, or click
@@ -654,9 +605,7 @@
 </para>
 </sect2>
 
-<sect2 id="details.ledgers.match">
-<title id="details.ledgers.match.title">Matching Transactions</title>
-
+<sect2 id="details.ledgers.match"><title>Matching Transactions</title>
 <para>
   Generally, when you import transactions, either via QIF, OFX, or HBCI, &kmymoney;
   will automatically attempt to match them against existing transactions.  To allow
@@ -727,9 +676,7 @@
 </sect2>
 </sect1>
 
-<sect1 id="details.ledgers.cleared">
-<title>Understanding the State of a transaction</title>
-
+<sect1 id="details.ledgers.cleared"><title>Understanding the State of a transaction</title>
 <para>
   The process of reconciling accounts is discussed <link
   linkend="details.reconcile">later in the handbook</link>.  For now, it is only
@@ -739,19 +686,17 @@
   as cleared and thus transform it to state (C).
 </para>
 
-<para>
-  <screenshot>
-    <screeninfo>Understanding the cleared state</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="cleared_state.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>cleared state</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>understanding the state of a transaction</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="cleared_state.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>understanding the state of a transaction</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   When you receive a statement from the bank, all cleared transactions should be on
@@ -770,9 +715,7 @@
 </para>
 </sect1>
 
-<sect1 id="details.ledgers.settings">
-<title>Changing Transaction Settings</title>
-
+<sect1 id="details.ledgers.settings"><title>Changing Transaction Settings</title>
 <para>
   There are several options that change the appearance and behavior of the Ledger
   view in terms of transactions.  These settings are found by selecting
@@ -806,35 +749,33 @@
   transaction form.
 </para>
 
-<para>The transaction form:
+<para>The transaction form:</para>
 
 <screenshot>
-  <screeninfo>The transaction form</screeninfo>
+  <screeninfo>the transaction form</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="transactionform.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>Transaction form</phrase>
+      <phrase>the transaction form</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
-</para>
 
-<para>Transactions entered directly
+<para>Transactions entered directly:</para>
 
 <screenshot>
-  <screeninfo>Transactions entered directly</screeninfo>
+  <screeninfo>transactions entered directly in ledger</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="transactionform-off.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>Direct input</phrase>
+      <phrase>transaction entered directly in ledger</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
-</para>
 
 <formalpara><title>Keep changes when selecting a different transaction/split</title>
 <para>
@@ -843,30 +784,25 @@
   to save changes.
 </para>
 </formalpara>
-
 </sect1>
 
-<sect1 id="details.ledgers.other">
-<title id="details.ledgers.other.title">Other Transaction Functionality</title>
-
+<sect1 id="details.ledgers.other"><title>Other Transaction Functionality</title>
 <para>
   Additional options are available from the <guimenu>Transaction Options</guimenu>
   menu, accessed by right-clicking any transaction in the list.
 </para>
 
-<para>
-  <screenshot>
-    <screeninfo>The transaction options sub-menu</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="ledger_more.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Transaction options</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>transaction options sub-menu</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="ledger_more.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>transaction options sub-menu</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   Options include jumping to the Payees view for the Payee in the transaction,

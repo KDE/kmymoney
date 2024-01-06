@@ -8,7 +8,6 @@
   <date>2023-20-25</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>Importing and Exporting</title>
 
 <sect1 id="details.impexp.gnucash">
@@ -19,7 +18,6 @@
 <title>&gnucash; Importer</title>
 
 <sect2><title>&gnucash; Files</title>
-
 <para>
   The &kmymoney; &gnucash; importer is known to handle direct reading of standard
   (&XML;) files as produced by &gnucash; versions 1.8 and 2.0.  File from more recent
@@ -66,7 +64,6 @@
 <sect2><title>Similarities, Differences, and Terminology</title>
 
 <sect3><title>Small Business Usage</title>
-
 <para>
   It should be noted that &kmymoney; is a <emphasis>personal</emphasis> finance
   manager, and as such, does not directly support any of the business features
@@ -79,7 +76,6 @@
 <sect3><title>Accounts</title>
 
 <sect4><title>Account types</title>
-
 <para>
   For both products, the highest level of structure in the file is the
   account. &kmymoney; supports 5 main types of account: Asset, Liability, Income,
@@ -94,7 +90,6 @@
 </sect4>
 
 <sect4><title>Categories</title>
-
 <para>
   &kmymoney; uses the term Category to denote an account of an Income or Expense
   type.  Unlike &gnucash;, these are not considered as <quote>ledger</quote>
@@ -105,7 +100,6 @@
 </sect4>
 
 <sect4><title>Structure and Placeholders</title>
-
 <para>
   &gnucash; supports the use of Placeholder accounts. In effect, these are just
   read-only accounts into which no transactions can be entered, but which function in
@@ -117,7 +111,6 @@
 </sect4>
 
 <sect4><title>Account Type map</title>
-
 <informaltable frame='all'>
 <tgroup cols='2' align='left' colsep='1' rowsep='1'>
 <thead>
@@ -183,7 +176,6 @@
 <sect3><title>Transactions and Splits</title>
 
 <sect4><title>Balanced transactions</title>
-
 <para>
   In both programs, data is entered in the form of transactions, each generally
   consisting of 2 or more split entries.  In fact, valid &gnucash; transactions will
@@ -196,7 +188,6 @@
 </sect4>
 
 <sect4><title>Payees</title>
-
 <para>
   &kmymoney; prefers that all transactions have a Payee (a generic term that
   encompasses both payees and payers,) and unlike &gnucash;, it maintains a list of
@@ -206,7 +197,6 @@
 </sect4>
 
 <sect4><title>Transfers</title>
-
 <para>
   &kmymoney; uses the term Transfer to describe a transaction which does not
   involve a Category, but only transfers money between Asset and/or Liability
@@ -215,7 +205,6 @@
 </sect4>
 
 <sect4><title>Reconcile</title>
-
 <para>
   &kmymoney; provides an account reconciliation function similar to that of
   &gnucash;, and the corresponding transaction status will be imported.
@@ -224,14 +213,12 @@
 </sect3>
 
 <sect3><title>Commodities</title>
-
 <para>
   &gnucash; uses the term Commodity to cover both currencies and non-currency assets.
   These are treated separately in &kmymoney;.
 </para>
 
 <sect4><title>Currencies</title>
-
 <para>
   &kmymoney; has built-in support for all foreign <link
   linkend="details.currencies">currency</link> types.  &kmymoney; also requires that
@@ -252,7 +239,6 @@
 </sect4>
 
 <sect4 id="gncsecurities"><title>Securities and Investments</title>
-
 <para>
   Non-currency assets (typically stocks and bonds) are called Securities by
   &kmymoney;, and represent the main difference between the two products, in that
@@ -289,7 +275,6 @@
 </sect4>
 
 <sect4><title>Prices and currency rates</title>
-
 <para>
   Security prices and currency exchange rates, as displayed in the &gnucash; Price
   Editor, will be imported.  In addition, price and rate entries will be generated
@@ -298,7 +283,6 @@
 </sect4>
 
 <sect4 id="details.impexp.gncquotes"><title>Online Quotes</title>
-
 <para>
   For obtaining online price and currency rate quotations, &gnucash; uses a Perl
   based package called <literal>Finance::Quote</literal>.  Recent versions of
@@ -319,20 +303,21 @@
   <literal>Finance::Quote</literal>, and will always use the native retrieval method.
 </para>
 
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="gnucash-select_price_source.png" format="PNG" />
-      </imageobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>gnucash import price source selection</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="gnucash-select_price_source.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>gnucash import price source selection</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 </sect4>
 </sect3>
 
 <sect3 id="gncschedules"><title>Scheduled Transactions</title>
-
 <para>
   &kmymoney; does not retain the separation made in &gnucash; between template
   transactions and their frequency of occurrence.  Transaction data will be
@@ -341,7 +326,6 @@
 </para>
 
 <sect4><title>Schedule types</title>
-
 <para>
   &kmymoney; classifies all schedules as one of three types: Bills, Deposits, or
   Transfers.  Since &gnucash; does not make such a distinction, the importer attempts
@@ -352,7 +336,6 @@
 </sect4>
 
 <sect4><title>Suspect Schedules</title>
-
 <para>
   Some features of &gnucash; scheduled transactions are not available in &kmymoney;,
   so the importer tries in each case to reach a reasonable compromise in converting
@@ -387,7 +370,6 @@
 </sect3>
 
 <sect3><title>Reports</title>
-
 <para>
   &kmymoney; provides a comprehensive selection of configurable reports, described in
   more detail in <link linkend="details.reports">Reports.</link> These will not
@@ -396,27 +378,26 @@
 </sect3>
 </sect2>
 
-<sect2><title>Selecting Importer Options</title>
-
-<para id="details.impexp.gncoptions">
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="gnucash-import_options.png" format="PNG" />
-      </imageobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<sect2 id="details.impexp.gncoptions"><title>Selecting Importer Options</title>
+<screenshot>
+  <screeninfo>gnucash import options</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="gnucash-import_options.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>gnucash import options</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <sect3><title>Investment Handling</title>
-
 <para>
   See <link linkend="gncsecurities">"Securities and Investments"</link> above.
 </para>
 </sect3>
 
 <sect3><title>Online Quotes</title>
-
 <para>
   Turn this off if you wish to use the native method for future online price quotes.
   See <link linkend="details.impexp.gncquotes">"Online Quotes"</link> above for more
@@ -425,14 +406,12 @@
 </sect3>
 
 <sect3><title>Scheduled Transactions</title>
-
 <para>
   See <link linkend="gncschedules">"Scheduled Transactions"</link> above.
 </para>
 </sect3>
 
 <sect3><title>Decoding Options</title>
-
 <para>
   If your native language is written in letters or symbols which are different from
   those used in the 'Latin' languages (&ie;, generally Western European,) these are
@@ -449,7 +428,6 @@
 </sect3>
 
 <sect3><title>Transaction Notes option</title>
-
 <para>
   Under some usage conditions, non-split &gnucash; transactions may contain residual,
   often incorrect, memo data which is not normally visible to the user.  When
@@ -461,7 +439,6 @@
 </sect3>
 
 <sect3><title>Debug Options</title>
-
 <para>
   These need only be used in the event of import problems.  If you have such
   problems, you should also report them to the developers' mailing list &devlist;.
@@ -473,7 +450,6 @@
 </sect2>
 
 <sect2><title>Import Report</title>
-
 <para>
   At the end of processing, the importer produces a report showing the number of
   different entities processed, and any errors or anomalies encountered.  This report
@@ -495,15 +471,17 @@
   </listitem>
 </itemizedlist>
 
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="gnucash-report.png" format="PNG" />
-      </imageobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>gnucash importer report</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="gnucash-report.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>gnucash importer report</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 </sect2>
 </sect1>
 
@@ -553,15 +531,17 @@
   <guimenuitem>QIF...</guimenuitem> </menuchoice> menu item.
 </para>
 	
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="qifopen.png" format="PNG" />
-      </imageobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>qif importer</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qifopen.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>qif importer</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   The resulting dialog prompts for the QIF filename, allowing you to type in the full
@@ -617,19 +597,17 @@
   At the end of the import, &kmymoney; shows a statement import statistics window.
 </para>
 
-<para>
 <screenshot>
-  <screeninfo>Statement statistics</screeninfo>
+  <screeninfo>qif import statement statistics</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="qif_report.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>Statement statistics</phrase>
+      <phrase>qif import statement statistics</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
-</para>
 
 <para>
   After importing, all of the imported transactions will be shown with a yellow
@@ -671,7 +649,6 @@
 </sect2>
 
 <sect2 id="details.impexp.qif.filter"><title>Writing an import filter</title>
-
 <para>
   Sometimes you may have data in a custom format, like comma-separated-values (CSV)
   or something else unique to your situation.  As of version 4.6, &kmymoney; includes
@@ -732,7 +709,6 @@
 </sect2>
 
 <sect2><title>Special &kmymoney; QIF extensions</title>
-
 <para>
   As already mentioned, one of the major drawbacks of the QIF format is the lack of a
   unique identifier for each transaction.  If you are writing your own QIF file
@@ -744,7 +720,6 @@
 </sect1>
 
 <sect1 id="details.impexp.qif.profile"><title>QIF Profiles</title>
-
 <para>
   To edit an existing QIF Profile, or to create a new one, bring up the QIF Importer
   dialog by selecting <menuchoice> <shortcut>
@@ -763,18 +738,19 @@
   Configuring either one brings up the same Profile Editor dialog.
 </para>
 
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="qifimport-qifprofileeditor.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>QIF Profile Editor</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
+<screenshot>
+  <screeninfo>qif profile editor general tab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qifimport-qifprofileeditor.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>qif profile editor general tab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
+<para>
   On the left, the Profile selector displays a list of all existing QIF Profiles;
   select one to edit its configuration.  To create an new profile, press the
   <guibutton>New</guibutton> button.  You can rename an existing profile by selecting
@@ -798,18 +774,19 @@
   or not to attempt to match similar transactions to avoid duplicates.
 </para>
 
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="qifimport-qifprofilefilter.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>QIF Profile Editor</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
+<screenshot>
+  <screeninfo>qif profile editor filter tab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qifimport-qifprofilefilter.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>qif profile editor filter tab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
+<para>
   The <quote>Filter</quote> tab allows you to specify the location of both an import
   filter, as described in the <link linkend="details.impexp.qif.filter">previous
   section</link> as well as an output filter, which works similarly, but is applied
@@ -818,18 +795,19 @@
   does not require filtering.
 </para>
 
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="qifimport-qifprofiledate.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>QIF Export</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
+<screenshot>
+  <screeninfo>qif profile editor date tab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qifimport-qifprofiledate.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>qif profile editor date tab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
+<para>
   The <quote>Date</quote> tab is primarily applicable to QIF Export, as &kmymoney; is
   usually able to determine the date format by examining the actual data.  The primary
   purpose is to specify the order of the date parts, and the delimiter which separates
@@ -849,18 +827,19 @@
   will be treated as being in the 1900's.
 </para>
 
+<screenshot>
+  <screeninfo>qif profile editor amounts tab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qifimport-qifprofileamount.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>qif profile editor amounts tab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
 <para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="qifimport-qifprofileamount.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>QIF Export</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-  
   The <quote>Amounts</quote> tab is used on QIF Export to specify the Decimal Symbol
   and Thousands Separator to be used.  However, you need to speicfy those for each
   line in the QIF file which can contain an amount.  To alter those settings, click
@@ -884,18 +863,19 @@
   actual data.</para>
 </note>
 
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="qifimport-export.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>QIF Export</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
+<screenshot>
+  <screeninfo>qif exporter</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qifimport-export.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>qif exporter</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
+<para>
   The QIF Exporter uses QIF Profiles in a similar way as the QIF Importer, but it
   uses the information in the Profile to format the QIF file being written, rather
   than to interpret the file being read.  Parallel to the importer, you can use a
@@ -930,7 +910,6 @@
      can probably just be deleted.
 
 <sect2><title>Getting the plugin</title>
-
 <para>
   &kmymoney; will import OFX files painlessly.  However, this functionality is
   not built into the core program.  You must obtain and install the OFX Importer
@@ -966,7 +945,6 @@
 -->
 
 <sect2><title>What is OFX</title>
-
 <para>
   <acronym>OFX</acronym> stands for <quote>Open Financial Exchange</quote>.
   According to the <ulink url="https://financialdataexchange.org/ofx/">OFX Work Group
@@ -1007,7 +985,6 @@
 </sect2>
 
 <sect2><title>Importing OFX data</title>
-
 <para>
   The OFX standard defines the organization and formatting of financial data, but
   that data can exist either as a regular file or as a stream of data between two
@@ -1054,7 +1031,6 @@
 </sect2>
 
 <sect2><title>Importing Investments</title>
-
 <para>
   <!-- FIXME: Was this true in the past?  Currently, KMM will create securites in OFX
        data if they do not already exist.  -->
@@ -1066,7 +1042,6 @@
 </sect2>
 
 <sect2 id="details.impexp.webconnect"><title>Web Connect</title>
-
 <para>
   Rather than explicitly downloading an OFX file, as described above, the easiest way
   to import an OFX file is to set up Web Connect.  Visit your bank's web site, and
@@ -1086,7 +1061,6 @@
 </sect2>
 
 <sect2 id="details.impexp.ofxdirectconnect"><title>Direct Connect</title>
-
 <para>
   &kmymoney; also supports OFX Direct Connect.  This gives allows &kmymoney; the
   ability to contact your bank directly to download transactions, assuming the bank
@@ -1181,7 +1155,6 @@
 </sect2>
 
 <sect2><title>Exporting an OFX file</title>
-
 <para>
   It is currently not possible to export your data as an OFX file.  If you are
   interested to contribute in this area, please contact the libofx development team
@@ -1190,14 +1163,11 @@
 </sect2>
 </sect1>
 
-<!-- Using entities for the csv import and export and woob import sections allow them
-     to be maintained in separate files.  The original note here suggested this was a
-     workaround, but I don't know why. -->
-<!-- entities defined in index.docbook -->
-<!-- perhaps these entity invokations should also be in index.docbook, where all
-     the chapters are so invoked. -->
+<!-- Using entities (defined in index.docbook) for the csv import/export and woob
+     import sections allow them to be maintained in separate files. -->
+<!-- Should these entity invocations be in index.docbook, where all the chapters are
+     so invoked? -->
 &details-impexp-csv;
-&details-impexp-csvexp;
 &details-impexp-woob;
 
 </chapter>

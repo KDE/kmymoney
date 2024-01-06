@@ -4,12 +4,9 @@
   <date>2023-10-23</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>Introduction</title>
 
-<sect1 id="what-is-kmymoney">
-<title>What is &kmymoney;?</title>
-
+<sect1 id="what-is-kmymoney"><title>What is &kmymoney;?</title>
 <para>
   &kmymoney; is a personal finance manager by &kde;.  It enables users to keep
   careful track of their personal finances by providing a broad array of financial
@@ -53,9 +50,7 @@
 
 </sect1>
 
-<sect1 id="what-kmymoney-is-not">
-<title>What &kmymoney; is not</title>
-
+<sect1 id="what-kmymoney-is-not"><title>What &kmymoney; is not</title>
 <para>
   As a personal finance manager, &kmymoney; is not intended to support the needs
   of an average business.  A small business might find sufficient functionality to

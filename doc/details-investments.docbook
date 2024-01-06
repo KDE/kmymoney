@@ -9,12 +9,9 @@
   <date>2023-09-05</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>Investments</title>
 
-<sect1 id="details.investments.overview">
-<title>Investments in &kmymoney;</title>
-
+<sect1 id="details.investments.overview"><title>Investments in &kmymoney;</title>
 <para>
   In very general terms, an investment is any allocation of money with the
   expectation of a future benefit.  &kmymoney;'s Investment accounts are designed for
@@ -30,8 +27,7 @@
   to a stock or mutual fund, it can be tracked.
 </para>
 
-<sect2>
-<title>Investment Accounts</title>
+<sect2><title>Investment Accounts</title>
 <para>
   A &kmymoney; Investment Account holds a collection of Securities, also referred to
   as Equities.  An Investment account contains transactions, recording activities
@@ -52,8 +48,7 @@
 </para>
 </sect2>
 
-<sect2 id="details.investments.brokerage">
-<title>Brokerage Accounts</title>
+<sect2 id="details.investments.brokerage"><title>Brokerage Accounts</title>
 <para>
   When an investment transaction uses (to buy a security) or produces case, such as
   from a sale or dividend, that transaction must refer to another account which can
@@ -74,8 +69,7 @@
 </para>
 </sect2>
 
-<sect2>
-<title>Base Currency</title>
+<sect2><title>Base Currency</title>
 <para>
   You &kmymoney; data file has a base currency, specified when the file was created.
   In addition, an Investment account has a base currency, specified when it is
@@ -90,9 +84,7 @@
 </sect2>
 </sect1>
 
-<sect1 id="details.investments.view">
-<title>The Investments View</title>
-
+<sect1 id="details.investments.view"><title>The Investments View</title>
 <para>
   The Investments View provides a summary of all your investments, similar to several
   of the other major views.  It has a single display area, with two tabs.  The first
@@ -103,22 +95,18 @@
   funds, bonds, &etc;, you track in &kmymoney;.
 </para>
 
-<sect2 id="details.investments.view.equities">
-<title>The Equities tab</title>
-
-<para>
-  <screenshot>
-    <screeninfo>account view</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="investments_view_equities.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>account view</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<sect2 id="details.investments.view.equities"><title>The Equities tab</title>
+<screenshot>
+  <screeninfo>investments veiw equities tab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investments_view_equities.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>investments veiw equities tab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   The distinction between equities and securities on these two tabs is somewhat
@@ -210,22 +198,18 @@
 </para>
 </sect2>
 
-<sect2 id="details.investments.view.securities">
-<title>The Securities tab</title>
-
-<para>
-  <screenshot>
-    <screeninfo>account view</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="investments_view_securities.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>account view</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<sect2 id="details.investments.view.securities"><title>The Securities tab</title>
+<screenshot>
+  <screeninfo>investments veiw securities tab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investments_view_securities.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>investments veiw securities tab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   At the top of the list of securities is a search box.  Beacuse this tab lists all
@@ -303,9 +287,7 @@
 </sect2>
 </sect1>
 
-<sect1 id="details.investments.investment">
-<title>Creating an Investment Account</title>
-
+<sect1 id="details.investments.investment"><title>Creating an Investment Account</title>
 <para>
   The first step on the path to working with investments is to create an Investment
   account to hold your defined securities.  Choose the
@@ -322,27 +304,25 @@
 </para>
 </sect1>
 
-<sect1 id="details.investments.securities">
-<title>Adding Investments to Your Account</title>
-
+<sect1 id="details.investments.securities"><title>Adding Investments to Your Account</title>
 <para>
   To add individual securities to your Investment Account, navigate to the
   <guibutton>Investments</guibutton> View, select the <guibutton>Equities</guibutton>
   tab, and choose the Investment account where the investment is held from the
   <guilabel>Select Account</guilabel> dropdown.
-
-  <screenshot>
-    <screeninfo>Investment View, Equities Tab</screeninfo>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="investments_summarytab.png" format="PNG" />
-      </imageobject>
-      <textobject>
-        <phrase>Investment View, Equities Tab</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
 </para>
+
+<screenshot>
+  <screeninfo>new investment wizard</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investments_summarytab.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>new investment wizard</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 <!-- FIXME: the above shot is of the equities tab.  Replace with shot(s) of the new
      investment dialog. -->
 
@@ -353,9 +333,7 @@
   Investment Wizard</guilabel> which you use to create your new Investment.
 </para>
 
-<sect2 id="details.investments.newinvestmentwizard">
-<title>New Investment Wizard</title>
-
+<sect2 id="details.investments.newinvestmentwizard"><title>New Investment Wizard</title>
 <para>
   The first thing you'll be asked to enter is the type of investment.  The currently
   available values are Stock, Bond, and Mutual Fund.  If your investment is not
@@ -512,9 +490,7 @@
 </itemizedlist>
 </sect2>
 
-<sect2 id="details.investments.reuse">
-  <title>Using a Security in more than one Investment Account</title>
-
+<sect2 id="details.investments.reuse"><title>Using a Security in more than one Investment Account</title>
 <note>
   <para>
     It is possible to own shares of the same security in differentmore than one
@@ -543,9 +519,7 @@
 </sect2>
 </sect1>
 
-<sect1 id="details.investments.edit">
-<title>Editing an Investment</title>
-
+<sect1 id="details.investments.edit"><title>Editing an Investment</title>
 <para>
   The <guilabel>Equities</guilabel> tab of the Investments View lists your current
   holdings in this Investment account.
@@ -570,22 +544,18 @@
 </para>
 </sect1>
 
-<sect1 id="details.investments.ledger">
-<title>Investment Transactions</title>
-
-<para>
-  <screenshot>
-    <screeninfo>Investment Transaction Form</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="investment-transactionform.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Investment Transaction Form</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<sect1 id="details.investments.ledger"><title>Investment Transactions</title>
+<screenshot>
+  <screeninfo>investment transaction form</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investment-transactionform.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>investment transaction form</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   Investment transactions are entered and edited in the <link
@@ -595,8 +565,7 @@
   elements, described below.
 </para>
 
-<sect2>
-<title>Activity</title>
+<sect2><title>Activity</title>
 <para>
   The Activity for an investment transaction describes what type of action is
   happening to the security.  The following activities are supported:
@@ -665,8 +634,7 @@
 </variablelist>
 </sect2>
 
-<sect2>
-<title>Security</title>
+<sect2><title>Security</title>
 <para>
   Each investment transaction must be associated with an individual security.  The
   dropdown shows all securities you own in the current Investment account - select
@@ -674,8 +642,7 @@
 </para>
 </sect2>
 
-<sect2>
-<title>Account</title>
+<sect2><title>Account</title>
 <para>
   For any transaction which generates or requires money, you must enter the account
   where the money is transferred to/from.  If your investment account has an
@@ -685,8 +652,7 @@
 </para>
 </sect2>
 
-<sect2>
-<title>Shares, Price &amp; Total Amount</title>
+<sect2><title>Shares, Price &amp; Total Amount</title>
 <para>
   For buy, sell, and reinvestment transactions, the number of shares, the price per
   share, and the total amount of the transaction must be established.  You can enter
@@ -700,8 +666,7 @@
 </para>
 </sect2>
 
-<sect2>
-<title>Fees</title>
+<sect2><title>Fees</title>
 <para>
   With many investment transactions you can include the fees (or commission) you paid
   the broker.  If you enter a category for the fee, then a field will be shown to the
@@ -713,8 +678,7 @@
 </para>
 </sect2>
 
-<sect2>
-<title>Interest</title>
+<sect2><title>Interest</title>
 <para>
   This is how you enter an interest or dividend payment from a security.  As with
   fees, if you enter a category, then a field will be shown to the right where you
@@ -723,9 +687,7 @@
 </sect2>
 </sect1>
 
-<sect1 id="details.investments.foreign">
-<title>Working With Foreign Investments</title>
-
+<sect1 id="details.investments.foreign"><title>Working With Foreign Investments</title>
 <para>
   &kmymoney; supports multiple currencies, and there are situations where this can be
   very useful, if not essential.  However, doing so requires extra care to assure
@@ -753,19 +715,17 @@
   that it's in a different currency.
 </para>
 
-<para>
-  <screenshot>
-    <screeninfo>Currency Warning</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="investment-currencywarning.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Currency Warning</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>investment transaction currency warning</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investment-currencywarning.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>investment transaction currency warning</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   When you finish entering the transaction, you will be prompted for a price update
@@ -774,19 +734,17 @@
   Manually</link> for more information on the price dialog.
 </para>
 
-<para>
-  <screenshot>
-    <screeninfo>Exchange Rate Editor</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="investment-exchangerateeditor.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Exchange Rate Editor</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>exchange rate editor</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investment-exchangerateeditor.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>exchange rate editor</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   If you then switch over to the brokerage account, you will see the transaction as
@@ -794,32 +752,26 @@
 </para>
 </sect1>
 
-<sect1 id="details.investments.prices">
-<title>Updating Security Prices</title>
-
+<sect1 id="details.investments.prices"><title>Updating Security Prices</title>
 <para>
   There are two ways of updating the prices for your investments.  You can either
   enter the price manually or have &kmymoney; fetch it from the web.
 </para>
 
-<sect2>
-<title>Manual Price Updates</title>
-
+<sect2><title>Manual Price Updates</title>
 <para>
   You can enter prices for your investments using the same <link
   linkend="details.currencies.prices">Price Editor</link> as used for currencies.
 </para>
 </sect2>
 
-<sect2 id="details.investments.onlinequotes">
-<title>Online Price Quotes</title>
+<sect2 id="details.investments.onlinequotes"><title>Online Price Quotes</title>
 <para>
   &kmymoney; has the ability to download the latest prices for your securities
   and currencies via the web.
 </para>
 
-<sect3>
-<title>How Online Quotes Work</title>
+<sect3><title>How Online Quotes Work</title>
 <para>
   At your request, &kmymoney; will fetch a page from the web that contains the latest
   price for each security.  By default, prices are fetched from <ulink
@@ -843,9 +795,7 @@
 </para>
 </sect3>
 
-<sect3>
-<title>Assigning a Quote Source</title>
-
+<sect3><title>Assigning a Quote Source</title>
 <para>
   In order to get online price quotes, you first have to enable the feature for each
   security or currency you want updated, by setting an <quote>Online Quote
@@ -876,9 +826,7 @@
 </para>
 </sect3>
 
-<sect3>
-<title>Adjusting a quote</title>
-
+<sect3><title>Adjusting a quote</title>
 <para>
   Some online sources do not report the price in a base quantity (&eg;, EUR) but in a
   fraction (&eg;, Cent).  Using this information for a price will produce wrong
@@ -897,9 +845,7 @@
 </para>
 </sect3>
 
-<sect3>
-<title>Fetching Quotes</title>
-
+<sect3><title>Fetching Quotes</title>
 <para>
   Typically, you will update the prices for all your securities and currencies as a
   single operation.  Choose the
@@ -909,24 +855,20 @@
   and currencies in your &kmymoney; file.
 </para>
 
-<para>
-  <screenshot>
-    <screeninfo>Update Stock and Currency Prices</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="investment-onlineupdate.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Online Stock and Currency Price Update</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>online update stock and currency prices</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investment-onlineupdate.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>online update stock and currency price</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 </sect3>
 
-<sect3>
-<title>Adding or Editing Quote Sources</title>
-
+<sect3><title>Adding or Editing Quote Sources</title>
 <para>
   Adding or editing quote sources is not recommended for anyone but the most
   technical user.  You should feel comfortable reading HTML and writing complex
@@ -984,9 +926,7 @@
 </sect2>
 </sect1>
 
-<sect1 id="details.investments.unimplemented">
-<title>Unimplemented Features</title>
-
+<sect1 id="details.investments.unimplemented"><title>Unimplemented Features</title>
 <para>
   There are some features that are normally associated with investments which are not
   yet implemented in &kmymoney;.  These include, but are not limited to derivatives,

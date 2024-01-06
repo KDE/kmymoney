@@ -8,13 +8,11 @@
   <date>2023-11-25</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>Database</title>
 
 <sect1 id="details.database.usage"><title>Using relational databases</title>
 
 <sect2><title>Introduction</title>
-
 <para>
   Since release 1.0, &kmymoney; allows you to hold your data in a relational
   database.  One of the advantages of using this industry-standard format is that it
@@ -31,12 +29,12 @@
   <para>
     Although most relational database systems allow concurrent access to a database
     by more than one user, this is not possible with &kmymoney;.  Even though
-    &kmymoney; can store its data in a relational database, it actually behaves as if
-    the database is just a different type of file storage.  When you open your file,
-    the program reads all of the data from the database.  As you work with your data,
-    the changes are made only to the internal storage; they are not immediately
-    written back to the database.  Only when you save your data does &kmymoney; write
-    the entire file back to the database.
+    &kmymoney; can store its data in a relational database, it actually uses the
+    database as just a different type of file storage.  When you open your file, the
+    program reads all of the data from the database.  As you work with your data, the
+    changes are made only to the internal storage; they are not immediately written
+    back to the database.  Only when you save your data does &kmymoney; write the
+    entire file back to the database.
   </para>
 
   <para>
@@ -49,13 +47,12 @@
 </sect2>
 
 <sect2><title>Preparation</title>
-
 <para>
   To access the database, &kmymoney; uses the SQL module supplied by &Qt; Software as
   part of their &Qt; programming system.  This module supports many database systems
   through a collection of drivers.  &Qt; has drivers for a large numeber of open
   source and proprietary relational database systems, including
-  <trademark>MySQL</trademark>, PostgreSQL, and Sqlcipher.  The module also supports
+  <trademark>MySQL</trademark>, PostgreSQL, and SQLCipher.  The module also supports
   some 'heavier', more industrial, systems such as <trademark
   class="registered">Oracle</trademark> and IBM <trademark
   class="registered">DB2</trademark>.
@@ -67,6 +64,8 @@
   for <ulink url="https://www.zetetic.net/sqlcipher">SQLCipher</ulink>, which is a
   standalone fork of the SQLite database library that adds 256 bit AES encryption and
   other security features.  The SQLCipher driver will read existing SQLite files.
+  See the section below on <link
+  linkend="details.database.sqlcipher">SQLCipher</link> for more details.
 </para>
 
 <para>
@@ -100,7 +99,6 @@
 </sect2>
 
 <sect2><title>Administration</title>
-
 <para>
   Looking after databases is a little more complex than dealing with regular files.
   Each system has different methods for performing those necessary administrative
@@ -111,7 +109,6 @@
 </para>
 
 <sect3><title>Creating the database</title>
-
 <para>
   &kmymoney; includes SQL code to create an initial database to hold your data if one
   doesn't exist.  However, it is strongly recommended that you pre-create a database,
@@ -140,7 +137,6 @@
 </sect3>
 
 <sect3><title>Creating Tables</title>
-
 <para>
   On your first use, &kmymoney; will attempt to create the necessary table
   structures.  In order to achieve the maximum compatibility between various database
@@ -158,7 +154,6 @@
 </sect2>
 
 <sect2 id="details.database.selectdatabase"><title>Creating a Database</title>
-
 <para>
   Using &kmymoney;, open or import an existing data file, or create a new one.  Then
   select <menuchoice><guimenu>File</guimenu><guimenuitem>Save as
@@ -169,10 +164,14 @@
 </para>
 
 <screenshot>
+  <screeninfo>creating a database</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="select_database.png" format="PNG" />
     </imageobject>
+    <textobject>
+      <phrase>creating a database</phrase>
+    </textobject>
   </mediaobject>
 </screenshot>
 
@@ -183,9 +182,8 @@
 </para>
 
 <sect3><title>Database Type</title>
-
 <para>
-  This box lists all the &Qt; SQL drivers installed on your system.  Select the
+  This dropdown lists all the &Qt; SQL drivers installed on your system.  Select the
   driver for your database type.  If the one you want is not in the list, you need to
   install the appropriate driver.  See your distribution documentation, or visit the
   <ulink url="https://www.qt.io/">&Qt; software web site</ulink> and search for 'SQL
@@ -193,8 +191,7 @@
 </para>
 </sect3>
 
-<sect3><title>File (SQLite only)</title>
-
+<sect3 id="details.database.sqlcipher"><title>File (SQLite/SQLCipher only)</title>
 <para>
   SQLCipher has one database per file so enter the filename in which you wish to
   create the database.  To browse the file system, click the icon to the right of the
@@ -203,6 +200,19 @@
   relevant. The SQLCipher file must have the appropriate read/write permissions set
   by the underlying file system to enable the appropriate access for the currently
   logged-in user.
+</para>
+
+<para>
+  The creators of <ulink url="https://www zetatic.net/sqlcipher">SQLCipher</ulink>
+  released version 4.0 in November, 2018.  However, many &kmymoney; users, especially
+  those who do not upgrade very often, or who use LTS (Long Term Support) &Linux;
+  distributions, may still be using a database created with version 3 of SQLCipher.
+  At some point, usually after upgrading &kmymoney; or their distribution, they find
+  they are unable to open their database, with an error that is not particularly
+  informative or useful.  What is required in this case is to upgrade the database
+  itself from version 3 to version 4.  Instructions for this can be found on the
+  <ulink url="https://discuss.zetetic.net/t/upgrading-to-sqlcipher-4/3283">SQLCipher
+  website</ulink>.
 </para>
 </sect3>
 
@@ -220,7 +230,6 @@
 </sect3>
 
 <sect3><title>Host name</title>
-
 <para>
   For the average user, the default name of <quote>localhost</quote>, being the
   machine you are currently using, is correct.  For networked databases, enter the
@@ -229,7 +238,6 @@
 </sect3>
 
 <sect3><title>User name and password</title>
-  
 <para>
   Check the permissions set up on your database, or contact the database
   administrator, for the correct values to use here.  The user name must be capable
@@ -242,7 +250,6 @@
 <sect2><title>Accessing your data</title>
 
 <sect3><title>Table design</title>
-
 <para>
   To access your data in &kmymoney;, use the <menuchoice> <guimenu>File</guimenu>
   <guimenuitem>Open Database</guimenuitem> </menuchoice> menu item. This will open a
@@ -431,7 +438,6 @@
 </sect3>
 
 <sect3><title>Field formats</title>
-
 <para>
   Several of the data fields are held in an internal format which may not be
   immediately useful to external programs.  In these cases, the information has been
@@ -452,7 +458,6 @@
 </sect3>
 
 <sect3><title>Updating your data</title>
-
 <para>
   Having data in an industry standard format does give you the ability to modify it
   outside the &kmymoney; application.  DO NOT DO IT unless you really know what you
@@ -463,7 +468,6 @@
 </sect3>
 
 <sect3><title>Stored queries</title>
-
 <para>
   Most database systems allow you to store commonly used queries and procedures, and
   in some cases, these may be held as tables or other objects within your database
@@ -477,7 +481,6 @@
 </sect2>
 
 <sect2 id="details.database.generatesql"><title>Manual database creation</title>
-
 <note>
   <para>
     This section covers more advanced database usage and may be skipped by the general user.
@@ -485,7 +488,6 @@
 </note>
 
 <sect3><title>When to use</title>
-
 <para>
   There may be occasions when &kmymoney; is unable to create the database
   automatically, or creates it without some options required by the user.  For
@@ -503,7 +505,6 @@
 </sect3>
 
 <sect3><title>Generating the SQL</title>
-
 <para>
   If this fails, it is possible to generate the basic SQL commands needed to create
   the various tables, views, and indexes required by the application.  Select the
@@ -512,10 +513,14 @@
 </para>
 
 <screenshot>
+  <screeninfo>generate sql to create a database</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="generate_sql.png" format="PNG" />
     </imageobject>
+    <textobject>
+      <phrase>generate sql to create a database</phrase>
+    </textobject>
   </mediaobject>
 </screenshot>
 
@@ -539,7 +544,6 @@
 </sect3>
 
 <sect3><title>Warning</title>
-
 <para>
   You should be very careful editing the definitions of any of the basic tables or
   views (those with names beginning with '<literal>kmm</literal>'.)  Some changes,
@@ -557,7 +561,6 @@
 </sect2>
 
 <sect2><title>Encryption</title>
-
 <para>
   Encryption of data in your database is not currently supported.
 </para>

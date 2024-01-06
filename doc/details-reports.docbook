@@ -8,24 +8,20 @@
   <date>2023-10-02</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>Reports</title>
 
 <sect1 id="details.reports.avail"><title>Available Reports</title>
-
-<para>
 <screenshot>
-  <screeninfo>Reports View</screeninfo>
+  <screeninfo>reports view</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="reports_view_list.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>Reports View</phrase>
+      <phrase>reports view</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
-</para>
 
 <para>
   The <guilabel>Reports></guilabel> tab of the Reports View lists all available
@@ -168,7 +164,6 @@
 </sect1>
 
 <sect1 id="details.reports.working"><title>Working With Reports</title>
-
 <para>
   There are a number of actions you can take on each report.  You can access some
   these by right-clicking the report name in the list of reports, which brings up the
@@ -206,8 +201,7 @@
 </itemizedlist>
 </sect1>
 
-<sect1 id="details.reports.config">
-<title>Configuring Reports</title>
+<sect1 id="details.reports.config"><title>Configuring Reports</title>
 
 <sect2><title>Working with custom reports</title>
 <para>
@@ -237,18 +231,17 @@
 </para>
 
 <sect3 id="details.reports.config.general"><title>General subtab</title>
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="reports_configuration_general.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Report Configuration - General</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>report configuration report tab general subtab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="reports_configuration_general.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>report configuration report tab general subtab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   Here you set the basic properties of the report.
@@ -286,18 +279,17 @@
   depending on the style of report you are configuring.
 </para>
 
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="reports_configuration_rowscolumns.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Report Configuration - Rows and Columns</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>report configuration report tab rows/columns subtab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="reports_configuration_rowscolumns.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>report configuration report tab rows/columns subtab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   For income/expense and net worth reports:
@@ -385,18 +377,17 @@
   Charts</link> section for more explanation of the charting functions.
 </para>
 
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="reports_configuration_chart.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Report Configuration - Chart</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>report configuration report tab chart subtab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="reports_configuration_chart.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>report configuration report tab chart subtab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <itemizedlist>
   <listitem>
@@ -437,18 +428,17 @@
   linkend="details.reports.config.report">Filters tab</link>.
 </para>
 
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="reports_configuration_range.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Report Configuration - Range</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>report configuration report tab range subtab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="reports_configuration_range.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>report configuration report tab range subtab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <sect3><title>Date range</title>
 <para>
@@ -479,8 +469,7 @@
 </sect3>
 </sect2>
 
-<sect2>
-<title>Filters tab</title>
+<sect2><title>Filters tab</title>
 <para>
   The filters tab has several subtabs, which can be used to filter or limit the data
   &kmymoney; uses to prepare the report.  These are the same subtabs used to control
@@ -493,7 +482,6 @@
 <sect1 id="details.reports.charts"><title>Graphs &amp; Charts</title>
 
 <sect2><title>Viewing as a Chart</title>
-
 <para>
   Many reports can be viewed in either textual form or graphical (chart) form.  The
   same report configuration parameters are used in either case.  You can easily jump
@@ -515,7 +503,6 @@
 <sect2><title>Available Chart Types</title>
 
 <sect3><title>Line Graph</title>
-
 <para>
   A line graph is one of the simplest forms of a chart.  There is one line for each
   series.  Usually, a series is data from a single account or category over time; see
@@ -534,18 +521,14 @@
 </para>
 </sect3>
 
-<sect3>
-<title>Bar Graph</title>
-
+<sect3><title>Bar Graph</title>
 <para>
   The bar graph works exactly the same as the line graph, except there is one bar for
   each series in each time slice.
 </para>
 </sect3>
 
-<sect3>
-<title>Pie Chart</title>
-
+<sect3><title>Pie Chart</title>
 <para>
   The pie chart is the simplest chart type available.  It shows data from only one
   time slice, as opposed to showing the values across time.  This chart shows only
@@ -555,9 +538,7 @@
 </para>
 </sect3>
 
-<sect3>
-<title>Ring Chart</title>
-
+<sect3><title>Ring Chart</title>
 <para>
   The ring chart is very similar to a pie chart, except there is one
   <quote>ring</quote> for each time slice in the report.

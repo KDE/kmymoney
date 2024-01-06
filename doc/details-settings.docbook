@@ -9,7 +9,6 @@
   <date>2023-12-30</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>&kmymoney; Settings</title>
 
 <para>
@@ -33,14 +32,14 @@
 <sect1 id="details.settings.general"><title>General</title>
 
 <sect2 id="details.settings.general.global"><title>Global tab</title>
-
 <screenshot>
+  <screeninfo>KMyMoney configuration, general, global tab</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="config_general_global.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>general config global tab</phrase>
+      <phrase>KMyMoney configuration, general, global tab</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
@@ -130,14 +129,14 @@
 </sect2>
 
 <sect2 id="details.settings.general.views"><title>Views tab</title>
-
 <screenshot>
+  <screeninfo>KMyMoney configuration, general, views tab</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="config_general_views.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>general config views tab</phrase>
+      <phrase>KMyMoney configuration, general, views tab</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
@@ -193,14 +192,14 @@
 </sect2>
 
 <sect2 id="details.settings.general.filter"><title>Filter tab</title>
-
 <screenshot>
+  <screeninfo>KMyMoney configuration, general, filter tab</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="config_general_filter.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>general config filter tab</phrase>
+      <phrase>KMyMoney configuration, general, filter tab</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
@@ -276,14 +275,14 @@
 </sect2>
 
 <sect2 id="details.settings.general.support"><title>Support tab</title>
-
 <screenshot>
+  <screeninfo>KMyMoney configuration, general section, support tab</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="config_general_support.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>general config support tab</phrase>
+      <phrase>KMyMoney configuration, general section, support tab</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
@@ -330,18 +329,18 @@
 </sect1>
 
 <sect1 id="details.settings.home"><title>Home</title>
-
 <!-- FIXME: sect2 should only be used for tabs.  I'm too lazy to convert this to a
      variablelist now, which would require subsuming the lower one to paras.  -->
-<sect2><title>Home page display sections</title>
 
+<sect2><title>Home page display sections</title>
 <screenshot>
+  <screeninfo>KMyMoney configuration, home view</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="config_home.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>home config</phrase>
+      <phrase>KMyMoney configuration, home view</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
@@ -466,7 +465,6 @@
 </sect2>
 
 <sect2><title>Homepage/Summary page scaling</title>
-
 <variablelist>
   <varlistentry>
     <term><guilabel>Zoom factor:</guilabel></term>
@@ -488,7 +486,6 @@
 </sect2>
 
 <sect2 id="details.settings.home.acctinfo"><title>Account information display</title>
-
 <para>
   These options allow you to customize what information is included in any list of
   accounts.
@@ -554,16 +551,13 @@
 </sect2>
 </sect1>
 
-<sect1 id="details.settings.register">
-<title>Ledger</title>
-
+<sect1 id="details.settings.register"><title>Ledger</title>
 <para>
    The settings and options in this section allow for the modification of the
    transaction register displayed in the Ledger View.
 </para>
 
 <sect2 id="details.settings.register.display"><title>Display tab</title>
-
 <variablelist>
   <varlistentry>
     <term><guilabel>Show a grid in the ledger</guilabel></term>
@@ -715,8 +709,7 @@
 </para>
 </sect3>
 
-<sect3 id="details.settings.register.sorting.reconciliation">
-<title>Reconciliation view subtab</title>
+<sect3 id="details.settings.register.sorting.reconciliation"><title>Reconciliation view subtab</title>
 <para>
   This tab controls the default sort order of the ledger while in the
   Reconciliation view.  This is the display of transactions shown during the
@@ -724,8 +717,7 @@
 </para>
 </sect3>
 
-<sect3 id="details.settings.register.sorting.search">
-<title>Search view subtab</title>
+<sect3 id="details.settings.register.sorting.search"><title>Search view subtab</title>
 <para>
   This tab controls the default sort order of the ledger while in the <link
   linkend="details.search">Search view</link>.
@@ -734,7 +726,6 @@
 </sect2>
 
 <sect2 id="details.settings.register.dataentry"><title>Data Entry tab</title>
-
 <para>These options affect the process of creating new transactions.</para>
 
 <variablelist>
@@ -881,7 +872,6 @@
 </sect2>
 
 <sect2 id="details.settings.register.import"><title>Import tab</title>
-
 <variablelist>
   <varlistentry>
     <term><guilabel>Match transaction within days</guilabel></term>
@@ -907,7 +897,6 @@
 </sect1>
 
 <sect1 id="details.settings.schedules"><title>Scheduled Transactions</title>
-
 <para>
   These options allow you to modify the behavior of <link
   linkend="details.schedules">Scheduled Transactions</link>.
@@ -974,7 +963,6 @@
 </sect1>
 
 <sect1 id="details.settings.onlinequote"><title>Online Quotes</title>
-
 <para>
   These settings determine how price quotes are retrieved from different online
   sources.  These include stock, bond, and other equity prices, as well as prices for
@@ -1008,7 +996,6 @@
 </sect1>
 
 <sect1 id="details.settings.colors"><title>Colors</title>
-
 <para>
   These section allows you to customize the colors used within &kmymoney;.  If
   <guilabel>Custom colors</guilabel> is not checked, then default colors will be
@@ -1026,7 +1013,6 @@
 </sect1>
 
 <sect1 id="details.settings.fonts"><title>Fonts</title>
-
 <para>
   This section allows you to modify the fonts used within the Cell or Header fields.
 </para>
@@ -1062,7 +1048,6 @@
 </sect1>
 
 <sect1 id="details.settings.icons"><title>Icons</title>
-
 <para>
   This option allows for the selection of icons that will be displayed.
 </para>
@@ -1082,26 +1067,27 @@
 </sect1>
 
 <sect1 id="details.settings.plugins"><title>Plugins</title>
-
 <para>
   This section provides information about the available plugins, and allow you to
   modify the behavior of some of them.  Note that the list of plugins displayed will
   depend on which plugins &kmymoney; found when it started.  It does not matter
   whether the plugin was compiled as part of the application or added as a separate
   package.
+</para>
   
-  <screenshot>
-    <screeninfo>Configure Plugins</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="configure_plugins.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Configure Plugins</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
+<screenshot>
+  <screeninfo>KMyMoney configuration, plugins</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="configure_plugins.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>KMyMoney configuration, plugins</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
+<para>
   Every plugin can be enabled or disabled, according to the state of the checkbox to
   the left of the name of the plugin name and icon.  In addition, at the right, there
   is an <guibutton>information</guibutton> &infoicon; button for each plugin, which
@@ -1120,7 +1106,6 @@
 </para>
 
 <sect2 id="details.settings.plugins.printchecks"><title>Check printing plugin</title>
-
 <para>
   There is a plugin for printing checks, which is included with the source of
   &kmymoney;, and which should always be enabled.  It allows printing of a check
@@ -1180,24 +1165,23 @@
 </sect2>
 
 <sect2 id="details.settings.plugins.csvimporter"><title>CSV Importer</title>
-
 <para>
   Some aspects of configuring the CSV Importer plugin have already been discussed
   <link linkend="details.settings.plugins.csvimporter">here</link>.  However, there
   is also a dialog which can be invoked here.
-
-  <screenshot>
-    <screeninfo>Configure CSV Importer Plugin</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="config_plugins_csvimporter.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Configure CSV Importer Plugin</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
 </para>
+
+<screenshot>
+  <screeninfo>configure csv importer plugin</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_plugins_csvimporter.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>configure csv importer plugin</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <sect3><title>Autodetecting</title>
 <para>
@@ -1224,7 +1208,6 @@
 </sect2>
 
 <sect2 id="details.settings.plugins.forecast"><title>Forecast view</title>
-
 <para>
   This is described in the <link linkend="details.forecast.configure">Configuring the
   Forecast</link> section of the <link linkend="details.forecast">Forecast
@@ -1234,7 +1217,6 @@
 
 <sect2><title>iCalendar</title>
 <!-- FIXME:  isn't this mentioned anywhere else? -->
-
 <para>
   &kmymoney; is capable of exporting a file inb then <quote>iCalendar</quote> format,
   so you can import your scheduled transactions into &korganizer;, or another
@@ -1242,19 +1224,19 @@
   exporting the file is done with the <menuchoice> <guimenu>File</guimenu>
   <guisubmenu>Export</guisubmenu> <guimenuitem>Schedules to iCalendar</guimenuitem>
   </menuchoice>menu item.
-  
-  <screenshot>
-    <screeninfo>Configure iCalendar export</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="config_plugins_ical.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Configure iCalendar export</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
 </para>
+
+<screenshot>
+  <screeninfo>configure icalendar export</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_plugins_ical.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>configure icalendar export</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   The exported file will contain one event for each scheduled transaction.  There are
@@ -1273,7 +1255,6 @@
 </sect2>
 
 <sect2 id="details.settings.plugins.kbanking"><title>KBanking</title>
-
 <para>
   Since both this and the Configure Aqbanking page are minimal, should both just
   point to the same link currently in the other section?
@@ -1290,7 +1271,6 @@
 </sect2>
 
 <sect2><title>QIF Exporter, QIF Importer</title>
-
 <para>
   These are described in the section on <link
   linkend="details.impexp.qif.profile">QIF Profiles</link>.  As pointed out in that
@@ -1302,7 +1282,6 @@
 <sect2><title>Reports view</title>
 <!-- FIXME:  this needs better incorporation into the Reports Chapter.  It is currently
      not mentioned there at all. -->
-
 <para>
   This provides a dialog where you can configure some default values to be used when displaying
   <link linkend="details.reports">Reports</link>.
@@ -1328,14 +1307,12 @@
   <guilabel>Default CSS file</guilabel> lets you provide a css file to customize
   these displays.
 </para>
-
 </sect2>
 
 <sect2><title>XML Storage</title>
-
 <para>
+  <!-- FIXME:  still needs writing..... -->
 </para>
 </sect2>
-
 </sect1>
 </chapter>

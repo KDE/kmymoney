@@ -8,12 +8,9 @@
   <date>2023-09-30</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>Reconciliation</title>
 
-<sect1 id="details.reconcile.whatis">
-<title>What is reconciliation?</title>
-
+<sect1 id="details.reconcile.whatis"><title>What is reconciliation?</title>
 <para>
   Reconciliation is the process of assuring that your records for an account agree
   with the records of the institution for that account.  This is done by matching the
@@ -42,8 +39,7 @@
 </para>
 </sect1>
 
-<sect1 id="details.reconcile.wizard">
-<title>The reconciliation wizard</title>
+<sect1 id="details.reconcile.wizard"><title>The reconciliation wizard</title>
 <para>
   Note that as you progress through the reconciliation process, there are multiple
   possible paths for entering all the necessary data, especially if you need to find
@@ -69,22 +65,19 @@
   actually start the wizard.
 </para>
 
-<para>
 <screenshot>
-  <screeninfo>Reconciliation wizard</screeninfo>
+  <screeninfo>reconciliation wizard intro</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="reconcile1.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>Reconciliation wizard</phrase>
+      <phrase>reconciliation wizard intro</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
-</para>
 
-<sect2 id="details.reconcile.wizard.statement">
-<title>Statement details</title>
+<sect2 id="details.reconcile.wizard.statement"><title>Statement details</title>
 <para>
   The initial statement date presented by &kmymoney; is typically 30 days after the
   more recent reconcilion for that account.  The starting balance presented is the
@@ -117,23 +110,20 @@
   <guibutton>Next</guibutton> button.
 </para>
 
-<para>
 <screenshot>
-  <screeninfo>Reconciliation wizard</screeninfo>
+  <screeninfo>reconciliation wizard starting information</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="reconcile2.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>Reconciliation wizard</phrase>
+      <phrase>reconciliation wizard starting information</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
-</para>
 </sect2>
 
-<sect2 id="details.reconcile.wizard.interest">
-<title>Interest</title>
+<sect2 id="details.reconcile.wizard.interest"><title>Interest</title>
 <para>
   If you are reconciling a bank account or any account with interest and/or charges
   or fees, then enter these values in the appropriate fields.  Both fields are
@@ -150,19 +140,17 @@
 </para>
 </note>
 
-<para>
 <screenshot>
-  <screeninfo>Reconciliation wizard</screeninfo>
+  <screeninfo>reconciliation wizard interest and chanrges</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="reconcile3.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>Reconciliation wizard</phrase>
+      <phrase>reconciliation wizard interest and charges</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
-</para>
 
 <para>
   Click on <guibutton>Continue</guibutton> to start matching your statement to what
@@ -177,8 +165,7 @@
 </para>
 </sect2>
 
-<sect2 id="details.reconcile.wizard.clearing">
-<title>Clearing transactions</title>
+<sect2 id="details.reconcile.wizard.clearing"><title>Clearing transactions</title>
 <para>
   During the reconciliation, any transaction can be edited to make it match the
   statement, and new transactions can be created as usual.  To mark a transaction as
@@ -207,23 +194,21 @@
 </para>
 
 <screenshot>
-  <screeninfo>Reconciliation wizard</screeninfo>
+  <screeninfo>ledger during reconciliation</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="reconcile4.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>Reconciliation wizard</phrase>
+      <phrase>ledger during reconciliation</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
 </sect2>
 
-<sect2 id="details.reconcile.complete">
-<title>Completing Reconciliation</title>
+<sect2 id="details.reconcile.complete"><title>Completing Reconciliation</title>
 
-<sect3 id="details.reconcile.finish">
-<title>Finishing Reconciliation</title>
+<sect3 id="details.reconcile.finish"><title>Finishing Reconciliation</title>
 <para>
   When the difference between the statement and the cleared balance is zero, then the
   account is reconciled and you can click the <guibutton>Finish</guibutton> button.
@@ -238,8 +223,7 @@
 
 <!-- FIXME: talk about the reconciliation report -->
 
-<sect3 id="details.reconcile.postpone">
-<title>Postponing Reconciliation</title>
+<sect3 id="details.reconcile.postpone"><title>Postponing Reconciliation</title>
 <para>
   If you're having trouble completing the reconciliation, or you need to gather
   additional information before you can complete the process, you can postpone the
@@ -263,17 +247,16 @@
 </para>
 
 <screenshot>
-  <screeninfo>Reconciliation wizard</screeninfo>
+  <screeninfo>reconciliation wizard finish</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="reconcile-redo.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>Reconciliation wizard</phrase>
+      <phrase>reconciliation; wizard finish</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
-
 </sect3>
 </sect2>
 </sect1>

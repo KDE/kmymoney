@@ -10,7 +10,6 @@
   <date>2023-08-30</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>Payees</title>
 
 <para>
@@ -24,9 +23,7 @@
   Payer, if you want to track them separately.
 </para>
 
-<sect1 id="details.payees.view">
-<title>Payees View</title>
-
+<sect1 id="details.payees.view"><title>Payees View</title>
 <para>
   The Payees View provides detailed information about all the payees and payers
   involved in transactions.  &kmymoney; stores information about all the payees and
@@ -35,15 +32,17 @@
   misspelling or typing the wrong name.
 </para>
 
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="payeeview.png" format="PNG" />
-      </imageobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>payees view</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payeeview.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>payees view</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   Like the Tags View, the Payees View is split into two main areas: a payees and payers list on the
@@ -62,8 +61,7 @@
   sections.
 </para>
 
-<sect2>
-<title>Adding a Payee or Payer</title>
+<sect2><title>Adding a Payee or Payer</title>
 <para>
   To add a payee or payer, click the <guibutton>+</guibutton> New Payee button.<!--
   FIXME: use proper icon from button --> This creates a new payee called <quote>New
@@ -72,8 +70,7 @@
 </para>
 </sect2>
 
-<sect2>
-<title>Renaming a Payee or Payer</title>
+<sect2><title>Renaming a Payee or Payer</title>
 <para>
   To rename a payee or payer, either double-click on the name or right-click on the
   name and select <guimenuitem>Rename payee</guimenuitem>.  The name then becomes
@@ -82,8 +79,7 @@
 </para>
 </sect2>
 
-<sect2>
-<title>Deleting a Payee or Payer</title>
+<sect2><title>Deleting a Payee or Payer</title>
 <para>
   To remove a payee or payer, right-click the name and select
   <guimenuitem>Delete payee</guimenuitem>.  If the payee has any transactions,
@@ -95,17 +91,14 @@
 </para>
 </sect2>
 
-<sect2 id="details.payees.merging">
-<title>Merging Payees</title>
+<sect2 id="details.payees.merging"><title>Merging Payees</title>
 <para>
 <!-- FIXME: write something here -->You can merge payees.
 </para>
 </sect2>
 </sect1>
 
-<sect1 id="details.payees.transactionhistory">
-<title>Viewing Transactions for a Payee</title>
-
+<sect1 id="details.payees.transactionhistory"><title>Viewing Transactions for a Payee</title>
 <para>
   To view all transactions associated with a particular payee, select the payee from
   the list and select the <guilabel>Transactions</guilabel> tab in the details area.
@@ -115,27 +108,22 @@
   the ledger of the appropriate account, with that transaction selected.
 </para>
 
-<para>
-  <screenshot>
-    <screeninfo>The transaction tab</screeninfo>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="payee_history.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>Transaction history</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo>payees view transaction tab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_history.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>payees veiw transaction tab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 </sect1>
   
-<sect1 id="details.payees.details">
-<title>Additional Payee Details</title>
+<sect1 id="details.payees.details"><title>Additional Payee Details</title>
 
-<sect2>
-<title>Payee Personal Information</title>
-
+<sect2><title>Payee Personal Information</title>
 <para>
   To view and edit the personal information associated with a particular payee,
   select the payee from the list and select the Address tab.  Although we call this
@@ -146,27 +134,22 @@
   <guibutton>Update</guibutton> button when finished.
 </para>
 
-<para>
 <screenshot>
-  <screeninfo>The personal information tab</screeninfo>
+  <screeninfo>payees view personal information tab</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="payee_info.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>Personal information</phrase>
+      <phrase>payees view personal information tab</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
-</para>
 </sect2>
 
-<sect2 id="details.payees.details.matching">
-<title>Transaction Matching Settings</title>
+<sect2 id="details.payees.details.matching"><title>Transaction Matching Settings</title>
 
-<sect3>
-<title>Overview</title>
-
+<sect3><title>Overview</title>
 <para>
  &kmymoney; has the ability to automatically assign the proper payee to imported
  transactions.  This can be handy when importing transactions from your bank, when
@@ -184,22 +167,18 @@
 </para>
 </sect3>
 
-<sect3>
-<title>Setting up Payee Matching</title>
-
-<para>
+<sect3><title>Setting up Payee Matching</title>
 <screenshot>
-  <screeninfo>The payee matching tab</screeninfo>
+  <screeninfo>payees veiw matching tab</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="payee_match.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>Payee matching details</phrase>
+      <phrase>payees view matching tab</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
-</para>
 
 <para>
   On the Matching tab, you can set the matching settings for transactions imported
@@ -256,9 +235,7 @@
 </para>
 </sect3>
 
-<sect3>
-<title>Importing Transactions</title>
-
+<sect3><title>Importing Transactions</title>
 <para>
   The Match Keys you have set will be considered whenever you import transactions
   using the QIF import, or using a plugin such as OFX or AqBanking.  If the Match Key

@@ -5,7 +5,6 @@
 <title>Woob Importer</title>
 
 <sect2><title>What is Woob?</title>
-
 <para>
   <acronym><ulink url="https://woob.tech/">Woob</ulink></acronym>, or <quote>Web
   outside of browsers</quote> is <quote>a collection of applications able to interact
@@ -28,7 +27,6 @@
 </sect2>
   
 <sect2><title>Installing Woob</title>
-
 <para>
   You need to install Python 3 first before continuing.  All major &Linux;
   distribuitons package Python, and you should use that version, if possible.
@@ -48,7 +46,6 @@
 </sect2>
 
 <sect2><title>Using Woob</title>
-
 <para>
   If Woob is installed, and the &kmymoney; woob plugin is loaded, you should be able
   to set it up for use with an account by invoking the <menuchoice>
