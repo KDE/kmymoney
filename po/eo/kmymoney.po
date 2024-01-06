@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-31 00:42+0000\n"
-"PO-Revision-Date: 2024-01-03 14:17+0100\n"
+"PO-Revision-Date: 2024-01-05 21:07+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
@@ -3491,7 +3491,7 @@ msgstr "Subteno"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:528
 #, kde-format
 msgid "Logging"
-msgstr "Enhavo"
+msgstr "Protokolado"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:536
@@ -19965,7 +19965,7 @@ msgstr "Del"
 #: kmymoney/views/kpayeesview.ui:80
 #, kde-format
 msgid "Merge"
-msgstr "Mergi"
+msgstr "Kunfandi"
 
 #. i18n: ectx: property (text), widget (QLabel, m_balanceLabel)
 #: kmymoney/views/kpayeesview.ui:126 kmymoney/views/ktagsview.ui:168
