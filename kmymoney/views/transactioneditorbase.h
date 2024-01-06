@@ -14,12 +14,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyenums.h"
 #include "mymoneysplit.h"
 
+class CreditDebitEdit;
+class KMyMoneyAccountCombo;
 class MyMoneyTransaction;
-class SplitModel;
 class QAbstractButton;
 class QAbstractItemModel;
+class QComboBox;
+class SplitModel;
 class WidgetHintFrameCollection;
 
 class TransactionEditorBase : public QWidget
@@ -30,7 +34,11 @@ public:
     explicit TransactionEditorBase(QWidget* parent = 0, const QString& accountId = QString());
     virtual ~TransactionEditorBase();
 
-    virtual bool accepted() const = 0;
+    /**
+     * This method returns true if the user pressed the enter button.
+     * It remains false, in case the user pressed the cancel button.
+     */
+    virtual bool accepted() const;
     virtual void loadTransaction(const QModelIndex& index) = 0;
     virtual QStringList saveTransaction(const QStringList& selectedJournalEntries) = 0;
     virtual void setAmountPlaceHolderText(const QAbstractItemModel* model);
@@ -79,9 +87,47 @@ protected:
     QStringList tabOrder(const QString& name, const QStringList& defaultTabOrder) const;
     void setupTabOrder(const QStringList& tabOrder);
     void storeTabOrder(const QString& name, const QStringList& tabOrder);
+    virtual bool isTransactionDataValid() const = 0;
+
+    /**
+     * Check a category with the name entered into the
+     * lineedit of @a comboBox needs to be created
+     */
+    bool needCreateCategory(KMyMoneyAccountCombo* comboBox) const;
+
+    /**
+     * Create a category/account based on the name provided
+     * in @a comboBox and the @a type.
+     *
+     * @note This starts the creation editor and returns immediately
+     */
+    void createCategory(KMyMoneyAccountCombo* comboBox, eMyMoney::Account::Type type);
+
+    /**
+     * Return type depending on the amount entered into the @a valueWidget
+     */
+    eMyMoney::Account::Type defaultCategoryType(CreditDebitEdit* valueWidget) const;
+
+    /**
+     * Check if a payee with the name entered into the
+     * lineedit of @a comboBox needs to be created
+     *
+     * @note As a side effect: sets combobox's completer case
+     *       sensitivity to @c Qt::CaseSensitive
+     */
+    bool needCreatePayee(QComboBox* comboBox) const;
+
+    /**
+     * Create a payee based on the name provided
+     * in @a comboBox.
+     *
+     * @note This starts the creation editor and returns immediately
+     */
+    void createPayee(QComboBox* comboBox);
 
 protected Q_SLOTS:
     virtual void reject();
+    virtual void acceptEdit();
 
 Q_SIGNALS:
     void done();

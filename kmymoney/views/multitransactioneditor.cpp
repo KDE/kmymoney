@@ -18,7 +18,6 @@
 #include <QStringList>
 #include <QTableView>
 #include <QTimer>
-#include <QTreeView>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -29,17 +28,14 @@
 // Project Includes
 
 #include "accountcreator.h"
-#include "accountsmodel.h"
 #include "costcentermodel.h"
 #include "icons.h"
 #include "idfilter.h"
 #include "journalmodel.h"
 #include "kcurrencycalculator.h"
-#include "kmymoneyaccountcombo.h"
 #include "kmymoneysettings.h"
 #include "knewaccountdlg.h"
 #include "mymoneyaccount.h"
-#include "mymoneyenums.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneypayee.h"
@@ -48,7 +44,6 @@
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneyutils.h"
-#include "payeecreator.h"
 #include "payeesmodel.h"
 #include "securitiesmodel.h"
 #include "splitdialog.h"
@@ -77,8 +72,8 @@ public:
         , categoriesModel(new AccountNamesFilterProxyModel(parent))
         , costCenterModel(new QSortFilterProxyModel(parent))
         , payeesModel(new QSortFilterProxyModel(parent))
-        , accepted(false)
         , frameCollection(nullptr)
+        , costCenterRequired(false)
     {
         accountsModel->setObjectName(QLatin1String("MultiTransactionEditor::accountsModel"));
         categoriesModel->setObjectName(QLatin1String("MultiTransactionEditor::categoriesModel"));
@@ -100,8 +95,9 @@ public:
     void setupTabOrder();
     bool anyChanges() const;
     bool isDatePostOpeningDate(const QDate& date, const QString& accountId);
+    bool checkForValidTransaction(bool doUserInteraction);
     bool postdateChanged(const QDate& date);
-    void costCenterChanged(int costCenterIndex);
+    bool costCenterChanged(int costCenterIndex);
     void payeeChanged(int payeeIndex);
     void accountChanged(const QString& id);
     bool categoryChanged(const QString& id);
@@ -110,8 +106,6 @@ public:
     bool isIncomeExpense(const QModelIndex& idx) const;
     bool isIncomeExpense(const QString& categoryId) const;
     void tagsChanged(const QStringList& tagIds);
-    void createCategory();
-    void createPayee();
 
     MultiTransactionEditor* q;
     Ui_NewTransactionEditor* ui;
@@ -120,12 +114,12 @@ public:
     AccountNamesFilterProxyModel* categoriesModel;
     QSortFilterProxyModel* costCenterModel;
     QSortFilterProxyModel* payeesModel;
-    bool accepted;
     QUndoStack undoStack;
     WidgetHintFrameCollection* frameCollection;
     QString errorMessage;
     StatusModel statusModel;
     QStringList selectedJournalEntryIds;
+    bool costCenterRequired;
 };
 
 bool MultiTransactionEditor::Private::anyChanges() const
@@ -139,6 +133,30 @@ bool MultiTransactionEditor::Private::anyChanges() const
     rc |= !ui->tagContainer->selectedTags().isEmpty();
     rc |= !ui->statusCombo->currentText().isEmpty();
     rc |= !ui->memoEdit->toPlainText().isEmpty();
+    return rc;
+}
+
+bool MultiTransactionEditor::Private::checkForValidTransaction(bool doUserInteraction)
+{
+    QStringList infos;
+    bool rc = true;
+    if (!postdateChanged(ui->dateEdit->date())) {
+        infos << ui->dateEdit->toolTip();
+        rc = false;
+    }
+
+    if (!costCenterChanged(ui->costCenterCombo->currentIndex())) {
+        infos << ui->costCenterCombo->toolTip();
+        rc = false;
+    }
+
+    if (q->needCreateCategory(ui->categoryCombo) || q->needCreatePayee(ui->payeeEdit)) {
+        rc = false;
+    }
+
+    if (doUserInteraction) {
+        /// @todo add dialog here that shows the @a infos about the problem
+    }
     return rc;
 }
 
@@ -201,9 +219,18 @@ bool MultiTransactionEditor::Private::postdateChanged(const QDate& date)
     return rc;
 }
 
-void MultiTransactionEditor::Private::costCenterChanged(int costCenterIndex)
+bool MultiTransactionEditor::Private::costCenterChanged(int costCenterIndex)
 {
-    Q_UNUSED(costCenterIndex)
+    bool rc = true;
+    WidgetHintFrame::hide(ui->costCenterCombo, i18n("The cost center this transaction should be assigned to."));
+    if (costCenterIndex != -1) {
+        if (costCenterRequired && ui->costCenterCombo->currentText().isEmpty()) {
+            WidgetHintFrame::show(ui->costCenterCombo, i18n("A cost center assignment is required for a transaction in the selected category."));
+            rc = false;
+        }
+    }
+
+    return rc;
 }
 
 bool MultiTransactionEditor::Private::isIncomeExpense(const QString& categoryId) const
@@ -222,6 +249,8 @@ bool MultiTransactionEditor::Private::categoryChanged(const QString& accountId)
     if (!accountId.isEmpty()) {
         try {
             MyMoneyAccount category = MyMoneyFile::instance()->account(accountId);
+            ui->costCenterCombo->setEnabled(false);
+            ui->costCenterLabel->setEnabled(false);
             if (category.isAssetLiability()) {
                 const auto journalModel = MyMoneyFile::instance()->journalModel();
                 for (const auto& journalEntryId : selectedJournalEntryIds) {
@@ -236,6 +265,11 @@ bool MultiTransactionEditor::Private::categoryChanged(const QString& accountId)
                         rc = false;
                     }
                 }
+            } else if (category.isIncomeExpense()) {
+                ui->costCenterCombo->setEnabled(true);
+                ui->costCenterLabel->setEnabled(true);
+                costCenterRequired = category.isCostCenterRequired();
+                costCenterChanged(ui->costCenterCombo->currentIndex());
             }
         } catch (MyMoneyException&) {
             qDebug() << "Ooops: invalid account id" << accountId << "in" << Q_FUNC_INFO;
@@ -283,28 +317,6 @@ void MultiTransactionEditor::Private::setupTabOrder()
     q->setProperty("kmm_currenttaborder", q->tabOrder(QLatin1String("multiTransactionEditor"), defaultTabOrder));
 
     q->setupTabOrder(q->property("kmm_currenttaborder").toStringList());
-}
-
-void MultiTransactionEditor::Private::createCategory()
-{
-    auto creator = new AccountCreator(q);
-    creator->setComboBox(ui->categoryCombo);
-    creator->addButton(ui->cancelButton);
-    creator->addButton(ui->enterButton);
-    creator->setAccountType(eMyMoney::Account::Type::Expense);
-    if (ui->creditDebitEdit->haveValue() && ui->creditDebitEdit->value().isPositive()) {
-        creator->setAccountType(eMyMoney::Account::Type::Income);
-    }
-    creator->createAccount();
-}
-
-void MultiTransactionEditor::Private::createPayee()
-{
-    auto creator = new PayeeCreator(q);
-    creator->setComboBox(ui->payeeEdit);
-    creator->addButton(ui->cancelButton);
-    creator->addButton(ui->enterButton);
-    creator->createPayee();
 }
 
 MultiTransactionEditor::MultiTransactionEditor(QWidget* parent, const QString& accountId)
@@ -502,17 +514,6 @@ void MultiTransactionEditor::setAmountPlaceHolderText(const QAbstractItemModel* 
                                                model->headerData(JournalModel::Column::Deposit, Qt::Horizontal).toString());
 }
 
-bool MultiTransactionEditor::accepted() const
-{
-    return d->accepted;
-}
-
-void MultiTransactionEditor::acceptEdit()
-{
-    d->accepted = true;
-    Q_EMIT done();
-}
-
 void MultiTransactionEditor::loadTransaction(const QModelIndex& index)
 {
     Q_UNUSED(index)
@@ -614,30 +615,21 @@ QStringList MultiTransactionEditor::saveTransaction(const QStringList& selectedJ
 bool MultiTransactionEditor::eventFilter(QObject* o, QEvent* e)
 {
     auto cb = qobject_cast<QComboBox*>(o);
-    if (o) {
+    if (cb) {
         // filter out wheel events for combo boxes if the popup view is not visible
         if ((e->type() == QEvent::Wheel) && !cb->view()->isVisible()) {
             return true;
         }
 
         if (e->type() == QEvent::FocusOut) {
-            if (o == d->ui->categoryCombo) {
-                if (!d->ui->categoryCombo->popup()->isVisible() && !cb->currentText().isEmpty() && !d->ui->categoryCombo->lineEdit()->isReadOnly()) {
-                    const auto accountId = d->ui->categoryCombo->getSelected();
-                    const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
-                    if (!accountIdx.isValid() || accountIdx.data(eMyMoney::Model::AccountFullNameRole).toString().compare(cb->currentText())) {
-                        d->createCategory();
-                    }
+            if (cb == d->ui->categoryCombo) {
+                if (needCreateCategory(d->ui->categoryCombo)) {
+                    createCategory(d->ui->categoryCombo, defaultCategoryType(d->ui->creditDebitEdit));
                 }
 
-            } else if (o == d->ui->payeeEdit) {
-                if (!cb->currentText().isEmpty()) {
-                    const auto index(cb->findText(cb->currentText()));
-                    if (index != -1) {
-                        cb->setCurrentIndex(index);
-                    } else {
-                        d->createPayee();
-                    }
+            } else if (cb == d->ui->payeeEdit) {
+                if (needCreatePayee(cb)) {
+                    createPayee(cb);
                 }
             }
         }
@@ -756,4 +748,9 @@ bool MultiTransactionEditor::setSelectedJournalEntryIds(const QStringList& selec
 QString MultiTransactionEditor::errorMessage() const
 {
     return d->errorMessage;
+}
+
+bool MultiTransactionEditor::isTransactionDataValid() const
+{
+    return true;
 }

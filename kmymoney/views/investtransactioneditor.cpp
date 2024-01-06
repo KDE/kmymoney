@@ -15,7 +15,6 @@
 #include <QSortFilterProxyModel>
 #include <QStringList>
 #include <QStringListModel>
-#include <QTreeView>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -26,18 +25,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "accountcreator.h"
-#include "accountsmodel.h"
 #include "dialogenums.h"
 #include "icons.h"
 #include "investactivities.h"
 #include "journalmodel.h"
 #include "kcurrencycalculator.h"
-#include "kmymoneyaccountcombo.h"
 #include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
 #include "mymoneyaccount.h"
-#include "mymoneyenums.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneyprice.h"
@@ -74,7 +69,6 @@ public:
         , currentActivity(nullptr)
         , feeSplitModel(new SplitModel(parent, &undoStack))
         , interestSplitModel(new SplitModel(parent, &undoStack))
-        , accepted(false)
         , loadedFromModel(false)
         , bypassUserPriceUpdate(false)
     {
@@ -118,10 +112,7 @@ public:
 
     bool postdateChanged(const QDate& date);
     bool categoryChanged(SplitModel* model, const QString& accountId, AmountEdit* widget, const MyMoneyMoney& factor);
-
-    void createFeeCategory();
-    void createInterestCategory();
-    void createAssetAccount();
+    bool checkForValidTransaction(bool doUserInteraction = true);
 
     void setSecurity(const MyMoneySecurity& sec);
 
@@ -185,8 +176,6 @@ public:
 
     // exchange rate information for assetSplit
     MyMoneyPrice assetPrice;
-
-    bool accepted;
 
     bool loadedFromModel;
 
@@ -358,6 +347,25 @@ bool InvestTransactionEditor::Private::categoryChanged(SplitModel* model, const 
         }
     }
 
+    return rc;
+}
+
+bool InvestTransactionEditor::Private::checkForValidTransaction(bool doUserInteraction)
+{
+    QStringList infos;
+    bool rc = true;
+    if (!postdateChanged(ui->dateEdit->date())) {
+        infos << ui->dateEdit->toolTip();
+        rc = false;
+    }
+
+    if (q->needCreateCategory(ui->feesCombo) || q->needCreateCategory(ui->interestCombo) || q->needCreateCategory(ui->assetAccountCombo)) {
+        rc = false;
+    }
+
+    if (doUserInteraction) {
+        /// @todo add dialog here that shows the @a infos about the problem
+    }
     return rc;
 }
 
@@ -703,36 +711,6 @@ void InvestTransactionEditor::Private::setupTabOrder()
     q->setupTabOrder(q->property("kmm_currenttaborder").toStringList());
 }
 
-void InvestTransactionEditor::Private::createFeeCategory()
-{
-    auto creator = new AccountCreator(q);
-    creator->setComboBox(ui->feesCombo);
-    creator->addButton(ui->cancelButton);
-    creator->addButton(ui->enterButton);
-    creator->setAccountType(eMyMoney::Account::Type::Expense);
-    creator->createAccount();
-}
-
-void InvestTransactionEditor::Private::createInterestCategory()
-{
-    auto creator = new AccountCreator(q);
-    creator->setComboBox(ui->interestCombo);
-    creator->addButton(ui->cancelButton);
-    creator->addButton(ui->enterButton);
-    creator->setAccountType(eMyMoney::Account::Type::Income);
-    creator->createAccount();
-}
-
-void InvestTransactionEditor::Private::createAssetAccount()
-{
-    auto creator = new AccountCreator(q);
-    creator->setComboBox(ui->assetAccountCombo);
-    creator->addButton(ui->cancelButton);
-    creator->addButton(ui->enterButton);
-    creator->setAccountType(eMyMoney::Account::Type::Asset);
-    creator->createAccount();
-}
-
 InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString& accId)
     : TransactionEditorBase(parent, accId)
     , d(new Private(this))
@@ -928,10 +906,7 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     connect(d->ui->cancelButton, &QToolButton::clicked, this, [&]() {
         Q_EMIT done();
     });
-    connect(d->ui->enterButton, &QToolButton::clicked, this, [&]() {
-        d->accepted = true;
-        Q_EMIT done();
-    });
+    connect(d->ui->enterButton, &QToolButton::clicked, this, &InvestTransactionEditor::acceptEdit);
 
     connect(accountsModel, &QAbstractItemModel::dataChanged, this, [&]() {
         d->protectWidgetsForClosedAccount();
@@ -957,11 +932,6 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
 InvestTransactionEditor::~InvestTransactionEditor()
 {
-}
-
-bool InvestTransactionEditor::accepted() const
-{
-    return d->accepted;
 }
 
 void InvestTransactionEditor::updateTotalAmount()
@@ -1011,7 +981,7 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
     // a callback from the model, but we can safely ignore it
     // same when we get called from the delegate's setEditorData()
     // method
-    if (d->accepted || !index.isValid() || d->loadedFromModel)
+    if (accepted() || !index.isValid() || d->loadedFromModel)
         return;
 
     d->loadedFromModel = true;
@@ -1357,28 +1327,16 @@ bool InvestTransactionEditor::eventFilter(QObject* o, QEvent* e)
         }
         if (e->type() == QEvent::FocusOut) {
             if (o == d->ui->feesCombo) {
-                if (!d->ui->feesCombo->popup()->isVisible() && !cb->currentText().isEmpty() && !d->ui->feesCombo->lineEdit()->isReadOnly()) {
-                    const auto accountId = d->ui->feesCombo->getSelected();
-                    const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
-                    if (!accountIdx.isValid() || accountIdx.data(eMyMoney::Model::AccountFullNameRole).toString().compare(cb->currentText())) {
-                        d->createFeeCategory();
-                    }
+                if (needCreateCategory(d->ui->feesCombo)) {
+                    createCategory(d->ui->feesCombo, eMyMoney::Account::Type::Expense);
                 }
             } else if (o == d->ui->interestCombo) {
-                if (!d->ui->interestCombo->popup()->isVisible() && !cb->currentText().isEmpty() && !d->ui->interestCombo->lineEdit()->isReadOnly()) {
-                    const auto accountId = d->ui->interestCombo->getSelected();
-                    const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
-                    if (!accountIdx.isValid() || accountIdx.data(eMyMoney::Model::AccountFullNameRole).toString().compare(cb->currentText())) {
-                        d->createInterestCategory();
-                    }
+                if (needCreateCategory(d->ui->interestCombo)) {
+                    createCategory(d->ui->interestCombo, eMyMoney::Account::Type::Income);
                 }
             } else if (o == d->ui->assetAccountCombo) {
-                if (!d->ui->assetAccountCombo->popup()->isVisible() && !cb->currentText().isEmpty() && !d->ui->assetAccountCombo->lineEdit()->isReadOnly()) {
-                    const auto accountId = d->ui->assetAccountCombo->getSelected();
-                    const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
-                    if (!accountIdx.isValid() || accountIdx.data(eMyMoney::Model::AccountFullNameRole).toString().compare(cb->currentText())) {
-                        d->createAssetAccount();
-                    }
+                if (needCreateCategory(d->ui->assetAccountCombo)) {
+                    createCategory(d->ui->assetAccountCombo, eMyMoney::Account::Type::Asset);
                 }
             }
         }
@@ -1403,4 +1361,9 @@ void InvestTransactionEditor::storeTabOrder(const QStringList& tabOrder)
 void InvestTransactionEditor::slotSettingsChanged()
 {
     d->securityFilterModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
+}
+
+bool InvestTransactionEditor::isTransactionDataValid() const
+{
+    return d->checkForValidTransaction(false);
 }

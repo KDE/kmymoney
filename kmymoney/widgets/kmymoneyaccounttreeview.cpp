@@ -36,6 +36,7 @@
 class KMyMoneyAccountTreeViewPrivate
 {
     Q_DECLARE_PUBLIC(KMyMoneyAccountTreeView)
+    Q_DISABLE_COPY_MOVE(KMyMoneyAccountTreeViewPrivate)
 
 public:
     KMyMoneyAccountTreeViewPrivate(KMyMoneyAccountTreeView *qq)

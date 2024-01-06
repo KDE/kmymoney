@@ -29,12 +29,6 @@ public:
     virtual ~InvestTransactionEditor();
 
     /**
-     * This method returns true if the user pressed the enter button.
-     * It remains false, in case the user pressed the cancel button.
-     */
-    virtual bool accepted() const override;
-
-    /**
      */
     void loadTransaction(const QModelIndex& index) override;
     QStringList saveTransaction(const QStringList& selectedJournalEntries) override;
@@ -52,6 +46,9 @@ public:
     // Implement TabOrderEditorInterface methods
     void setupUi(QWidget* parent) override;
     void storeTabOrder(const QStringList& tabOrder) override;
+
+protected:
+    bool isTransactionDataValid() const override;
 
 public Q_SLOTS:
     void slotSettingsChanged() override;

@@ -10,8 +10,11 @@
 // QT Includes
 
 #include <QAbstractButton>
+#include <QCompleter>
 #include <QKeyEvent>
+#include <QLineEdit>
 #include <QModelIndex>
+#include <QTreeView>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -22,7 +25,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "accountcreator.h"
+#include "accountsmodel.h"
+#include "creditdebitedit.h"
+#include "kmymoneyaccountcombo.h"
 #include "kmymoneyutils.h"
+#include "mymoneyfile.h"
+#include "payeecreator.h"
 #include "widgethintframe.h"
 
 class TransactionEditorBase::Private
@@ -33,6 +42,7 @@ public:
         , enterButton(nullptr)
         , focusFrame(nullptr)
         , readOnly(false)
+        , accepted(false)
     {
     }
 
@@ -40,6 +50,7 @@ public:
     QAbstractButton* enterButton;
     WidgetHintFrame* focusFrame;
     bool readOnly;
+    bool accepted;
 };
 
 TransactionEditorBase::TransactionEditorBase(QWidget* parent, const QString& accountId)
@@ -181,4 +192,80 @@ bool TransactionEditorBase::setSelectedJournalEntryIds(const QStringList& select
 QString TransactionEditorBase::errorMessage() const
 {
     return {};
+}
+
+void TransactionEditorBase::acceptEdit()
+{
+    if (isTransactionDataValid()) {
+        d->accepted = true;
+        Q_EMIT done();
+    }
+}
+
+bool TransactionEditorBase::accepted() const
+{
+    return d->accepted;
+}
+
+bool TransactionEditorBase::needCreateCategory(KMyMoneyAccountCombo* comboBox) const
+{
+    if (comboBox != nullptr) {
+        if (!comboBox->popup()->isVisible() && !comboBox->currentText().isEmpty() && !comboBox->lineEdit()->isReadOnly()) {
+            const auto accountId = comboBox->getSelected();
+            const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
+            if (!accountIdx.isValid() || accountIdx.data(eMyMoney::Model::AccountFullNameRole).toString().compare(comboBox->currentText())) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+void TransactionEditorBase::createCategory(KMyMoneyAccountCombo* comboBox, eMyMoney::Account::Type type)
+{
+    auto creator = new AccountCreator(this);
+    creator->setComboBox(comboBox);
+    creator->addButton(d->cancelButton);
+    creator->addButton(d->enterButton);
+    creator->setAccountType(type);
+    creator->createAccount();
+}
+
+eMyMoney::Account::Type TransactionEditorBase::defaultCategoryType(CreditDebitEdit* valueWidget) const
+{
+    eMyMoney::Account::Type type = eMyMoney::Account::Type::Unknown;
+    if (valueWidget->haveValue()) {
+        if (valueWidget->value().isPositive()) {
+            type = eMyMoney::Account::Type::Income;
+        } else {
+            type = eMyMoney::Account::Type::Expense;
+        }
+    }
+    return type;
+}
+
+bool TransactionEditorBase::needCreatePayee(QComboBox* comboBox) const
+{
+    if (comboBox != nullptr) {
+        // set case sensitivity so that a payee with the same spelling
+        // but different case can be created and is not found by accident
+        // inside the Qt logic (see QComboBoxPrivate::_q_editingFinished())
+        comboBox->completer()->setCaseSensitivity(Qt::CaseSensitive);
+        if (!comboBox->currentText().isEmpty()) {
+            const auto index(comboBox->findText(comboBox->currentText()));
+            if (index == -1) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+void TransactionEditorBase::createPayee(QComboBox* comboBox)
+{
+    auto creator = new PayeeCreator(this);
+    creator->setComboBox(comboBox);
+    creator->addButton(d->cancelButton);
+    creator->addButton(d->enterButton);
+    creator->createPayee();
 }

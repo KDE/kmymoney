@@ -31,12 +31,6 @@ public:
     virtual ~NewTransactionEditor();
 
     /**
-     * This method returns true if the user pressed the enter button.
-     * It remains false, in case the user pressed the cancel button.
-     */
-    virtual bool accepted() const override;
-
-    /**
      * Returns the currently entered amount
      */
     MyMoneyMoney transactionAmount() const;
@@ -79,12 +73,13 @@ public:
 
     void setKeepCategoryAmount(bool keepCategoryAmount);
 
+protected:
+    bool isTransactionDataValid() const override;
+
 public Q_SLOTS:
     void slotSettingsChanged() override;
 
 protected Q_SLOTS:
-    virtual void acceptEdit();
-
     // edit splits directly
     virtual void editSplits();
 

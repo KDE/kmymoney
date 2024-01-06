@@ -36,10 +36,10 @@ template <typename T>
 class TreeItem
 {
 public:
-    TreeItem(T data, TreeItem<T>* parent = nullptr)
+    explicit TreeItem(const T& data, TreeItem<T>* parent = nullptr)
+        : object(data)
+        , parentItem(parent)
     {
-        parentItem = parent;
-        object = data;
     }
 
     ~TreeItem()
@@ -60,8 +60,7 @@ public:
         return childItems.count();
     }
 
-
-    void appendChild(TreeItem<T>* item)
+    void appendChild(const TreeItem<T>* const item)
     {
         childItems.append(item);
     }
@@ -435,12 +434,11 @@ public:
     {
         int count = last - first + 1;
         int row = -1;
-        int step;
         if (count <= 0) {
             return QModelIndex();
         }
         while (count > 0) {
-            step = count / 2;
+            const auto step = count / 2;
             row = first + step;
             const T& item = static_cast<TreeItem<T>*>(index(row, 0).internalPointer())->constDataRef();
             if (item.id() < id) {
@@ -465,12 +463,11 @@ public:
     {
         int count = last - first + 1;
         int row = -1;
-        int step;
         if (count <= 0) {
             return QModelIndex();
         }
         while (count > 0) {
-            step = count / 2;
+            const auto step = count / 2;
             row = first + step;
             const T& item = static_cast<TreeItem<T>*>(index(row, 0).internalPointer())->constDataRef();
             if (!(id < item.id())) {
