@@ -74,7 +74,7 @@ Wizard::Wizard(QWidget *parent, bool modal, Qt::WindowFlags flags) :
     else
         d->setFirstPage(d->m_generalPage);
 
-    setHelpContext("firsttime-3");
+    setHelpContext("firsttime");
 }
 
 Wizard::~Wizard()
