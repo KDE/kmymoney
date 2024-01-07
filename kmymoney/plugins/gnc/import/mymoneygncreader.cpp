@@ -235,7 +235,7 @@ QString GncObject::hide(QString data, unsigned int anonClass)
         case ASIS:     // this is not personal data
             break;
         case SUPPRESS: // this is personal and is not essential
-            result = "";
+            result.clear();
             break;
         case NXTACC:   // generate account name
             result = ki18n("Account%1").subs(++nextAccount, -6).toString();
@@ -1439,7 +1439,7 @@ void MyMoneyGncReader::convertCommodity(const GncCommodity *gcm)
         equ.setTradingMarket(gcm->space());  // the 'space' may be market or quote source, dep on what the user did
         // don't set the source here since he may not want quotes
         //equ.setValue ("kmm-online-source", gcm->space()); // we don't know, so use it as both
-        equ.setTradingCurrency("");  // not available here, will set from pricedb or transaction
+        equ.setTradingCurrency(QString()); // not available here, will set from pricedb or transaction
         equ.setSecurityType(Security::Type::Stock);  // default to it being a stock
         //tell the storage objects we have a new equity object.
         equ.setSmallestAccountFraction(gcm->fraction().toInt());
@@ -1531,7 +1531,8 @@ void MyMoneyGncReader::convertAccount(const GncAccount* gac)
             m_currencyCount[gac->commodity()->id()]++;
         }
 
-        acc.setParentAccountId(gac->parent().toUtf8());
+        const QString gncParentAccountId = gac->parent().toUtf8();
+
         // now determine the account type and its parent id
         /* This list taken from
         # Feb 2006: A RELAX NG Compact schema for gnucash "v2" XML files.
@@ -1579,76 +1580,74 @@ void MyMoneyGncReader::convertAccount(const GncAccount* gac)
         } else { // we have here an account type we can't currently handle
             throw MYMONEYEXCEPTION(QString::fromLatin1("Current importer does not recognize GnuCash account type %1").arg(gac->type()));
         }
+
         // if no parent account is present, assign to one of our standard accounts
-        if ((acc.parentAccountId().isEmpty()) || (acc.parentAccountId() == m_rootId)) {
+        // if ((acc.parentAccountId().isEmpty()) || (acc.parentAccountId() == m_rootId)) {
+        MyMoneyAccount kmmParentAccount;
+        if ((gncParentAccountId.isEmpty()) || (gncParentAccountId == m_rootId)) {
             switch (acc.accountGroup()) {
             case Account::Type::Asset:
-                acc.setParentAccountId(m_storage->asset().id());
+                kmmParentAccount = m_storage->asset();
                 break;
             case Account::Type::Liability:
-                acc.setParentAccountId(m_storage->liability().id());
+                kmmParentAccount = m_storage->liability();
                 break;
             case Account::Type::Income:
-                acc.setParentAccountId(m_storage->income().id());
+                kmmParentAccount = m_storage->income();
                 break;
             case Account::Type::Expense:
-                acc.setParentAccountId(m_storage->expense().id());
+                kmmParentAccount = m_storage->expense();
                 break;
             case Account::Type::Equity:
-                acc.setParentAccountId(m_storage->equity().id());
+                kmmParentAccount = m_storage->equity();
                 break;
             default:
                 break; // not necessary but avoids compiler warnings
             }
+        } else {
+            kmmParentAccount = m_storage->account(m_mapIds.value(gncParentAccountId));
         }
 
-        // extra processing for a stock account
-        if (acc.accountType() == Account::Type::Stock) {
-            // save the id for later linking to investment account
-            m_stockList.append(gac->id());
-            // set the equity type
-            MyMoneySecurity e = m_storage->security(m_mapEquities[gac->commodity()->id().toUtf8()]);
-            if (gncdebug) qDebug() << "Acct equity search, key =" << gac->commodity()->id()
-                                       << "found id =" << e.id();
-            acc.setCurrencyId(e.id());  // actually, the security id
-            if ("MUTUAL" == gac->type()) {
-                e.setSecurityType(Security::Type::MutualFund);
-                if (gncdebug) qDebug() << "Setting" << e.name() << "to mutual";
-                m_storage->modifySecurity(e);
+        // check if it is one of the fixed account groups. in this case, we
+        // don't need to create the account but create the relationship
+        // between gncAccountId and kmmAccountId
+        if (gncParentAccountId == m_rootId) {
+            m_mapIds[gac->id().toUtf8()] = kmmParentAccount.id(); // to link gnucash id to ours
+
+        } else {
+            // extra processing for a stock account
+            if (acc.accountType() == Account::Type::Stock) {
+                // save the id for later linking to investment account
+                m_stockList.append(gac->id());
+                // set the equity type
+                MyMoneySecurity e = m_storage->security(m_mapEquities[gac->commodity()->id().toUtf8()]);
+                if (gncdebug)
+                    qDebug() << "Acct equity search, key =" << gac->commodity()->id() << "found id =" << e.id();
+                acc.setCurrencyId(e.id()); // actually, the security id
+                if ("MUTUAL" == gac->type()) {
+                    e.setSecurityType(Security::Type::MutualFund);
+                    if (gncdebug)
+                        qDebug() << "Setting" << e.name() << "to mutual";
+                    m_storage->modifySecurity(e);
+                }
+
+                QString priceSource = gac->getKvpValue("price-source", "string");
+                if (!priceSource.isEmpty())
+                    getPriceSource(e, priceSource);
             }
 
-            QString priceSource = gac->getKvpValue("price-source", "string");
-            if (!priceSource.isEmpty()) getPriceSource(e, priceSource);
+            if (gac->getKvpValue("tax-related", "integer") == QChar('1'))
+                acc.setIsInTaxReports(true);
+            // all the details from the file about the account should be known by now.
+            // calling addAccount will automatically fill in the account ID.
+            m_storage->addAccount(acc, kmmParentAccount);
+            m_mapIds[gac->id().toUtf8()] = acc.id(); // to link gnucash id to ours for tx posting
+
+            if (gncdebug) {
+                qDebug() << "Gnucash account" << gac->id() << "has id of" << acc.id() << ", type of" << MyMoneyAccount::accountTypeToString(acc.accountType())
+                         << "parent is" << acc.parentAccountId();
+            }
         }
-
-        if (gac->getKvpValue("tax-related", "integer") == QChar('1'))
-            acc.setIsInTaxReports(true);
-        // all the details from the file about the account should be known by now.
-        // calling addAccount will automatically fill in the account ID.
-        MyMoneyAccount parent;
-        switch(acc.accountGroup()) {
-        default:
-        case eMyMoney::Account::Type::Asset:
-            parent = m_storage->asset();
-            break;
-        case eMyMoney::Account::Type::Liability:
-            parent = m_storage->liability();
-            break;
-        case eMyMoney::Account::Type::Income:
-            parent = m_storage->income();
-            break;
-        case eMyMoney::Account::Type::Expense:
-            parent = m_storage->expense();
-            break;
-        }
-        m_storage->addAccount(acc, parent);
-        m_mapIds[gac->id().toUtf8()] = acc.id(); // to link gnucash id to ours for tx posting
-
-        if (gncdebug)
-            qDebug() << "Gnucash account" << gac->id() << "has id of" << acc.id()
-                     << ", type of" << MyMoneyAccount::accountTypeToString(acc.accountType())
-                     << "parent is" << acc.parentAccountId();
-
         signalProgress(++m_accountCount, 0);
         return ;
     }
@@ -1665,8 +1664,8 @@ void MyMoneyGncReader::convertTransaction(const GncTransaction *gtx)
 
     if (m_transactionCount == 0) signalProgress(0, m_gncTransactionCount, i18n("Loading transactions..."));
     // initialize class variables related to transactions
-    m_txCommodity = "";
-    m_txPayeeId = "";
+    m_txCommodity.clear();
+    m_txPayeeId.clear();
     m_potentialTransfer = true;
     m_splitList.clear();
     m_liabilitySplitList.clear();
@@ -1860,8 +1859,8 @@ MyMoneyTransaction MyMoneyGncReader::convertTemplateTransaction(const QString& s
     if (m_templateCount == 0) signalProgress(0, 1, i18n("Loading templates..."));
 
     // initialize class variables related to transactions
-    m_txCommodity = "";
-    m_txPayeeId = "";
+    m_txCommodity.clear();
+    m_txPayeeId.clear();
     m_potentialTransfer = true;
     m_splitList.clear();
     m_liabilitySplitList.clear();
@@ -1890,7 +1889,7 @@ MyMoneyTransaction MyMoneyGncReader::convertTemplateTransaction(const QString& s
     // also, determine the action type. first off, is it a transfer (can only have 2 splits?)
     if (m_splitList.count() != 2) m_potentialTransfer = false;
     // at this point, if m_potentialTransfer is still true, it is actually one!
-    QString txMemo = "";
+    QString txMemo;
     QList<MyMoneySplit>::iterator it = m_splitList.begin();
     while (!m_splitList.isEmpty()) {
         split = *it;
@@ -2265,56 +2264,9 @@ void MyMoneyGncReader::terminate()
         for (stocks = m_stockList.begin(); stocks != m_stockList.end(); ++stocks) {
             checkInvestmentOption(*stocks);
         }
-        // Next step is to walk the list and assign the parent/child relationship between the objects.
-        unsigned int i = 0;
-        signalProgress(0, m_accountCount, i18n("Reorganizing accounts..."));
-        QList<MyMoneyAccount> list;
-        QList<MyMoneyAccount>::iterator acc;
-        m_storage->accountList(list);
-        for (acc = list.begin(); acc != list.end(); ++acc) {
-            if ((*acc).parentAccountId() == m_storage->asset().id()) {
-                MyMoneyAccount assets = m_storage->asset();
-                m_storage->addAccount(assets, (*acc));
-                if (gncdebug) qDebug() << "Account id" << (*acc).id() << "is a child of the main asset account";
-            } else if ((*acc).parentAccountId() == m_storage->liability().id()) {
-                MyMoneyAccount liabilities = m_storage->liability();
-                m_storage->addAccount(liabilities, (*acc));
-                if (gncdebug) qDebug() << "Account id" << (*acc).id() << "is a child of the main liability account";
-            } else if ((*acc).parentAccountId() == m_storage->income().id()) {
-                MyMoneyAccount incomes = m_storage->income();
-                m_storage->addAccount(incomes, (*acc));
-                if (gncdebug) qDebug() << "Account id" << (*acc).id() << "is a child of the main income account";
-            } else if ((*acc).parentAccountId() == m_storage->expense().id()) {
-                MyMoneyAccount expenses = m_storage->expense();
-                m_storage->addAccount(expenses, (*acc));
-                if (gncdebug) qDebug() << "Account id" << (*acc).id() << "is a child of the main expense account";
-            } else if ((*acc).parentAccountId() == m_storage->equity().id()) {
-                MyMoneyAccount equity = m_storage->equity();
-                m_storage->addAccount(equity, (*acc));
-                if (gncdebug) qDebug() << "Account id" << (*acc).id() << "is a child of the main equity account";
-            } else if ((*acc).parentAccountId() == m_rootId) {
-                if (gncdebug) qDebug() << "Account id" << (*acc).id() << "is a child of the main root account";
-            } else {
-                // it is not under one of the main accounts, so find gnucash parent
-                QString parentKey = (*acc).parentAccountId();
-                if (gncdebug) qDebug() << "Account id" << (*acc).id() << "is a child of " << (*acc).parentAccountId();
-                map_accountIds::const_iterator id = m_mapIds.constFind(parentKey);
-                if (id != m_mapIds.constEnd()) {
-                    if (gncdebug)
-                        qDebug() << "Setting account id" << (*acc).id()
-                                 << "parent account id to" << id.value();
-                    MyMoneyAccount parent = m_storage->account(id.value());
-                    parent = checkConsistency(parent, (*acc));
-                    m_storage->addAccount(parent, (*acc));
-                } else {
-                    throw MYMONEYEXCEPTION_CSTRING("terminate() could not find account id");
-                }
-            }
-            signalProgress(++i, 0);
-        } // end for account
-        signalProgress(0, 1, ("."));  // debug - get rid of reorg message
+
         // offer the most common account currency as a default
-        QString mainCurrency = "";
+        QString mainCurrency;
         unsigned int maxCount = 0;
         QMap<QString, unsigned int>::ConstIterator it;
         for (it = m_currencyCount.constBegin(); it != m_currencyCount.constEnd(); ++it) {
@@ -2324,7 +2276,7 @@ void MyMoneyGncReader::terminate()
             }
         }
 
-        if (mainCurrency != "") {
+        if (!mainCurrency.isEmpty()) {
             QString question = i18n("Your main currency seems to be %1 (%2); do you want to set this as your base currency?", mainCurrency, m_storage->currency(mainCurrency.toUtf8()).name());
             if (KMessageBox::questionTwoActions(0, question, PACKAGE, KMMYesNo::yes(), KMMYesNo::no()) == KMessageBox::PrimaryAction) {
                 m_storage->setValue("kmm-baseCurrency", mainCurrency);
@@ -2383,7 +2335,7 @@ void MyMoneyGncReader::terminate()
 QString MyMoneyGncReader::buildReportSection(const QString& source)
 {
     TRY {
-        QString s = "";
+        QString s;
         bool more = false;
         if (source == "MN") {
             s.append(i18n("Found:\n\n"));
@@ -2409,7 +2361,7 @@ QString MyMoneyGncReader::buildReportSection(const QString& source)
                 s.append(i18np("%1 possible schedule problem was noted\n", "%1 possible schedule problems were noted\n", m_scCount));
                 more = true;
             }
-            QString unsupported("");
+            QString unsupported;
             QString lineSep("\n  - ");
             if (m_smallBusinessFound) unsupported.append(lineSep + i18n("Small Business Features (Customers, Invoices, etc.)"));
             if (m_budgetsFound) unsupported.append(lineSep + i18n("Budgets"));
@@ -2559,7 +2511,7 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
     if (m_investmentOption == 0) {
         MyMoneyAccount invAcc(stockAcc);
         invAcc.setAccountType(Account::Type::Investment);
-        invAcc.setCurrencyId(QString(""));  // we don't know what currency it is!!
+        invAcc.setCurrencyId(QString()); // we don't know what currency it is!!
         invAcc.setParentAccountId(parentKey);  // intersperse it between old parent and child stock acct
         parent = m_storage->account(parentKey);
         m_storage->addAccount(invAcc, parent);
@@ -2573,7 +2525,7 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
         m_storage->addAccount(invAcc, stockAcc);
         // investment option 1 creates a single investment account for all stocks
     } else if (m_investmentOption == 1) {
-        static QString singleInvAccId = "";
+        static QString singleInvAccId;
         MyMoneyAccount singleInvAcc;
         bool ok = false;
         if (singleInvAccId.isEmpty()) { // if the account has not yet been created
@@ -2585,7 +2537,7 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
             }
             singleInvAcc.setName(invAccName);
             singleInvAcc.setAccountType(Account::Type::Investment);
-            singleInvAcc.setCurrencyId(QString(""));
+            singleInvAcc.setCurrencyId(QString());
             parent = m_storage->asset();
             singleInvAcc.setParentAccountId(parent.id());
             m_storage->addAccount(singleInvAcc, parent);
@@ -2632,7 +2584,7 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
                 } else {                 // a new account name was entered
                     invAcc.setAccountType(Account::Type::Investment);
                     invAcc.setName(invAccName);
-                    invAcc.setCurrencyId(QString(""));
+                    invAcc.setCurrencyId(QString());
                     parent = m_storage->asset();
                     invAcc.setParentAccountId(parent.id());
                     m_storage->addAccount(invAcc, parent);
