@@ -336,6 +336,12 @@ class KMM_CSVIMPORTERCORE_EXPORT CSVImporterCore
 {
     Q_DISABLE_COPY_MOVE(CSVImporterCore)
 
+    typedef enum {
+        OrderUnknown,
+        OrderAscending,
+        OrderDescending,
+    } TransactionSortOrder;
+
 public:
     explicit CSVImporterCore();
     ~CSVImporterCore();
@@ -444,6 +450,9 @@ public:
     KSharedConfigPtr            m_config;
 
     bool                        m_isActionTypeValidated;
+
+    TransactionSortOrder m_sortOrder;
+    MyMoneyMoney m_firstBalance;
 
     QList<MyMoneyMoney>         m_priceFractions;
     QSet<QString>               m_hashSet;
