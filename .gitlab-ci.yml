@@ -2,7 +2,7 @@
 include:
   - project: sysadmin/ci-utilities
     file:
-      - /json-validation.yml
+      - /gitlab-templates/json-validation.yml
       - /gitlab-templates/linux.yml
       - /gitlab-templates/freebsd.yml
       - /gitlab-templates/windows.yml
