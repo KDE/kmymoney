@@ -465,25 +465,31 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
     m_ft = new MyMoneyFileTransaction();
 
     // see if we need to update some values stored with the account
-    const auto statementEndDate = s.statementEndDate();
-    if (d->m_account.value("lastStatementBalance") != s.m_closingBalance.toString()
-            || d->m_account.value("lastImportedTransactionDate") != statementEndDate.toString(Qt::ISODate)) {
-        if (s.m_closingBalance != MyMoneyMoney::autoCalc) {
-            d->m_account.setValue("lastStatementBalance", s.m_closingBalance.toString());
-        } else {
-            d->m_account.deletePair("lastStatementBalance");
-        }
-        if (statementEndDate.isValid()) {
-            d->m_account.setValue("lastImportedTransactionDate", statementEndDate.toString(Qt::ISODate));
-        }
+    // take into account, that an older statement might get here again
 
-        try {
-            MyMoneyFile::instance()->modifyAccount(d->m_account);
-        } catch (const MyMoneyException &) {
-            qDebug("Updating account in MyMoneyStatementReader::startImport failed");
+    const auto statementEndDate = s.statementEndDate();
+    const auto statementBalance = s.m_closingBalance;
+    const auto previousStatementEndDate = QDate::fromString(d->m_account.value("lastImportedTransactionDate"), Qt::ISODate);
+    const auto previousStatementBalance = MyMoneyMoney(d->m_account.value("lastStatementBalance"));
+
+    // in case balance or date differs
+    if ((previousStatementBalance != statementBalance) || (previousStatementEndDate != statementEndDate)) {
+        // we only update if we have a valid statement date and the previous statement date is empty or older
+        if (statementEndDate.isValid() && (!previousStatementEndDate.isValid() || (statementEndDate >= previousStatementEndDate))) {
+            d->m_account.setValue("lastImportedTransactionDate", statementEndDate.toString(Qt::ISODate));
+            if (!statementBalance.isAutoCalc()) {
+                d->m_account.setValue("lastStatementBalance", statementBalance.toString());
+            } else {
+                d->m_account.deletePair("lastStatementBalance");
+            }
+
+            try {
+                MyMoneyFile::instance()->modifyAccount(d->m_account);
+            } catch (const MyMoneyException&) {
+                qDebug("Updating account in MyMoneyStatementReader::startImport failed");
+            }
         }
     }
-
 
     if (!d->m_account.name().isEmpty())
         messages += i18n("Importing statement for account %1", d->m_account.name());
