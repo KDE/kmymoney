@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-31 00:42+0000\n"
+"POT-Creation-Date: 2024-01-08 00:42+0000\n"
 "PO-Revision-Date: 2024-01-05 21:07+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
@@ -50,39 +50,39 @@ msgstr ""
 msgid "Invalid Statement"
 msgstr "Nevalida Deklaro"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:489
+#: kmymoney/converter/mymoneystatementreader.cpp:495
 #, kde-format
 msgid "Importing statement for account %1"
 msgstr "Importanta deklaron por konto %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:491
+#: kmymoney/converter/mymoneystatementreader.cpp:497
 #, kde-format
 msgid "Importing statement without transactions"
 msgstr "Importanta deklaron sen transakcioj"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:576
+#: kmymoney/converter/mymoneystatementreader.cpp:582
 #, kde-format
 msgid "  Statement balance is not contained in statement."
 msgstr "  Deklara bilanco ne estas enhavita en deklaro."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:578
+#: kmymoney/converter/mymoneystatementreader.cpp:584
 #, kde-format
 msgid "  Statement balance on %1 is reported to be %2"
 msgstr "  Deklara saldo sur %1 estas raportita esti %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:580
+#: kmymoney/converter/mymoneystatementreader.cpp:586
 #, kde-format
 msgid "  Transactions"
 msgstr "  Transakcioj"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:581
+#: kmymoney/converter/mymoneystatementreader.cpp:587
 #, kde-format
 msgid "    %1 processed"
 msgid_plural "    %1 processed"
 msgstr[0] "    %1 pritraktata"
 msgstr[1] "    %1 pritraktataj"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:582
+#: kmymoney/converter/mymoneystatementreader.cpp:588
 #, kde-format
 msgctxt "x transactions have been added"
 msgid "    %1 added"
@@ -90,26 +90,26 @@ msgid_plural "    %1 added"
 msgstr[0] "    %1 aldonita"
 msgstr[1] "    %1 aldonitaj"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:583
+#: kmymoney/converter/mymoneystatementreader.cpp:589
 #, kde-format
 msgid "    %1 matched"
 msgid_plural "    %1 matched"
 msgstr[0] "    %1 kongruo"
 msgstr[1] "    %1 kongruoj"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:584
+#: kmymoney/converter/mymoneystatementreader.cpp:590
 #, kde-format
 msgid "    %1 duplicate"
 msgid_plural "    %1 duplicates"
 msgstr[0] "    %1 duobligo"
 msgstr[1] "    %1 duobligoj"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:585
+#: kmymoney/converter/mymoneystatementreader.cpp:591
 #, kde-format
 msgid "  Payees"
 msgstr "  Pagitoj"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:586
+#: kmymoney/converter/mymoneystatementreader.cpp:592
 #, kde-format
 msgctxt "x transactions have been created"
 msgid "    %1 created"
@@ -117,12 +117,12 @@ msgid_plural "    %1 created"
 msgstr[0] "    %1 kreita"
 msgstr[1] "    %1 kreitaj"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:650
+#: kmymoney/converter/mymoneystatementreader.cpp:656
 #, kde-format
 msgid "Error creating security record: %1"
 msgstr "Eraro dum kreado de sekureca rikordo: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:650
+#: kmymoney/converter/mymoneystatementreader.cpp:656
 #: kmymoney/plugins/kbanking/kbanking.cpp:607
 #: kmymoney/plugins/kbanking/kbanking.cpp:629
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:60
@@ -130,7 +130,7 @@ msgstr "Eraro dum kreado de sekureca rikordo: %1"
 msgid "Error"
 msgstr "Eraro"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:756
+#: kmymoney/converter/mymoneystatementreader.cpp:762
 #, kde-format
 msgid ""
 "This imported statement contains investment transactions with no security.  "
@@ -139,20 +139,20 @@ msgstr ""
 "Ĉi tiu importita deklaro enhavas investajn transakciojn sen sekureco. Ĉi "
 "tiuj transakcioj estos ignoritaj."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:756
+#: kmymoney/converter/mymoneystatementreader.cpp:762
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1441
 #, kde-format
 msgid "Security not found"
 msgstr "Sekureco ne trovita"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:801
-#: kmymoney/converter/mymoneystatementreader.cpp:804
+#: kmymoney/converter/mymoneystatementreader.cpp:807
+#: kmymoney/converter/mymoneystatementreader.cpp:810
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1425
 #, kde-format
 msgid "Statement Importer"
 msgstr "Deklaro Importisto"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:821
+#: kmymoney/converter/mymoneystatementreader.cpp:827
 #, kde-format
 msgid ""
 "This imported statement contains investment transactions with no share "
@@ -161,17 +161,17 @@ msgstr ""
 "Ĉi tiu importita deklaro enhavas investajn transakciojn sen akcia kvanto. Ĉi "
 "tiuj transakcioj estos ignoritaj."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:821
+#: kmymoney/converter/mymoneystatementreader.cpp:827
 #, kde-format
 msgid "No share amount provided"
 msgstr "Neniu akcia kvanto provizita"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:941
+#: kmymoney/converter/mymoneystatementreader.cpp:947
 #, kde-format
 msgid "(Fees) %1"
 msgstr "(Kotizoj) %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1023
+#: kmymoney/converter/mymoneystatementreader.cpp:1029
 #, kde-format
 msgctxt "Prepend name of payee (%1) to original memo (%2)"
 msgid ""
@@ -181,7 +181,7 @@ msgstr ""
 "Origina pagato: %1\n"
 "%2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1031
+#: kmymoney/converter/mymoneystatementreader.cpp:1037
 #, kde-format
 msgid ""
 "Do you want to add \"%1\" as payee/receiver?\n"
@@ -190,7 +190,7 @@ msgstr ""
 "Ĉu vi volas aldoni \"%1\" kiel pagato/ricevanto?\n"
 "\n"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1033
+#: kmymoney/converter/mymoneystatementreader.cpp:1039
 #, kde-format
 msgid ""
 "Selecting \"Yes\" will create the payee, \"No\" will skip creation of a "
@@ -209,79 +209,79 @@ msgstr ""
 "\", la informoj pri pagito por ĉiuj sekvaj transakcioj referencantaj \"%1\" "
 "estos forigita."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1047
+#: kmymoney/converter/mymoneystatementreader.cpp:1053
 #: kmymoney/kmymoneyutils.cpp:569
 #, kde-format
 msgid "New payee/receiver"
 msgstr "Nova pagato/ricevanto"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1070
+#: kmymoney/converter/mymoneystatementreader.cpp:1076
 #, kde-format
 msgid "Default Category for Payee"
 msgstr "Defaŭlta Kategorio por Pagato"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1077
+#: kmymoney/converter/mymoneystatementreader.cpp:1083
 #, kde-format
 msgid "Please select a default category for payee '%1'"
 msgstr "Bonvolu elekti defaŭltan kategorion por la pagato '%1'"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1100
+#: kmymoney/converter/mymoneystatementreader.cpp:1106
 #, kde-format
 msgid "Save Category"
 msgstr "Konservi Kategorion"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1101
+#: kmymoney/converter/mymoneystatementreader.cpp:1107
 #, kde-format
 msgid "No Category"
 msgstr "Neniu Kategorio"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonAbort)
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: kmymoney/converter/mymoneystatementreader.cpp:1102
+#: kmymoney/converter/mymoneystatementreader.cpp:1108
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:132
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:257
 #, kde-format
 msgid "Abort"
 msgstr "Ĉesigi"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1128
+#: kmymoney/converter/mymoneystatementreader.cpp:1134
 #, kde-format
 msgid "Unable to add payee/receiver"
 msgstr "Ne eblas aldoni pagaton/ricevanton"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1375
+#: kmymoney/converter/mymoneystatementreader.cpp:1381
 #, kde-format
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr ""
 "Problemo aldonante aŭ kongruante importitan transakcion kun id '%1': %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1433
+#: kmymoney/converter/mymoneystatementreader.cpp:1439
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr "<b>Vi elŝutis deklaron por la sekva konto:</b><br/><br/>"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1434
+#: kmymoney/converter/mymoneystatementreader.cpp:1440
 #, kde-format
 msgid " - Account Name: %1"
 msgstr "- Nomo de konto: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1435
+#: kmymoney/converter/mymoneystatementreader.cpp:1441
 #, kde-format
 msgid " - Account Type: %1"
 msgstr "- Konto Tipo: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1436
+#: kmymoney/converter/mymoneystatementreader.cpp:1442
 #, kde-format
 msgid " - Account Number: %1"
 msgstr "- Konta Nombro: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1441
+#: kmymoney/converter/mymoneystatementreader.cpp:1447
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "Ĉu vi volas importi transakciojn al ĉi tiu konto?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1444
+#: kmymoney/converter/mymoneystatementreader.cpp:1450
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -292,7 +292,7 @@ msgstr ""
 "konton premante la butonon <b>Krei</b> aŭ elektu alian mane el la "
 "elektokesto sube."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1448
+#: kmymoney/converter/mymoneystatementreader.cpp:1454
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -303,26 +303,26 @@ msgstr ""
 "elekti konton uzante la elektkeston en la dialogo aŭ krei novan konton "
 "premante la butonon <b>Krei</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1477
+#: kmymoney/converter/mymoneystatementreader.cpp:1483
 #, kde-format
 msgid "Import transactions"
 msgstr "Importi transakciojn"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1519
+#: kmymoney/converter/mymoneystatementreader.cpp:1525
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
 "button."
 msgstr "Vi devas elekti konton, krei novan aŭ premi la butonon <b>Ĉeligi</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1631
+#: kmymoney/converter/mymoneystatementreader.cpp:1637
 #: kmymoney/views/kscheduledview_p.h:196 kmymoney/views/kscheduledview_p.h:311
 #: kmymoney/views/kscheduledview_p.h:315
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Ne eblas enigi planitan transakcion '%1'"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1651
+#: kmymoney/converter/mymoneystatementreader.cpp:1657
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -334,7 +334,7 @@ msgstr ""
 "<br/>Horarnomo: <b>%1</b><br/>Transakcio: <i>%2 %3</i><br/>Ĉu vi volas, ke "
 "KMyMoney enigu ĉi tiun horaron nun, por ke la transakcio estu kongrua?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1660
+#: kmymoney/converter/mymoneystatementreader.cpp:1666
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -357,7 +357,7 @@ msgstr[1] ""
 "datoj estas %1 tagojn dise.<br/>Ĉu vi volas, ke KMyMoney enigu ĉi tiun "
 "horaron nun por ke la transakcio estu kongrua?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1674
+#: kmymoney/converter/mymoneystatementreader.cpp:1680
 #, kde-format
 msgid "Schedule found"
 msgstr "Horaro trovita"
@@ -1636,7 +1636,7 @@ msgstr "Forigi"
 #: kmymoney/dialogs/keditequityentry.ui:217
 #: kmymoney/dialogs/kimportverifydlg.ui:92
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:330
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:397
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:400
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:423
 #: kmymoney/views/investtransactioneditor.ui:312
 #: kmymoney/views/kenterscheduledlg.ui:208 kmymoney/views/newspliteditor.ui:95
@@ -9715,7 +9715,7 @@ msgstr ""
 "Dato '%2', Kvanto '%3'.\n"
 "Transakcio malsukcesis.\n"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:250
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:253
 #, kde-format
 msgid ""
 "<center>The '<b>%1</b>' field already has this column selected.</"
@@ -9726,26 +9726,26 @@ msgstr ""
 "center><center>Se vi volas kopii la datumojn de la Pagato al la memorkampo, "
 "alklaku 'Jes'.</center>"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:253
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:256
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:182
 #, kde-format
 msgctxt "@title:window"
 msgid "Field assignment resolution"
 msgstr "Rezolucio pri kampa tasko"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:293
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:296
 #, kde-format
 msgctxt "@item:intext No field selection"
 msgid "None"
 msgstr "Neniu"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:301
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:304
 #, kde-format
 msgctxt "@label:listbox list of currently selected fields"
 msgid "<i>Memo columns:</i> %1"
 msgstr "<i>Memokolumnoj:</i> %1"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:344
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:347
 #, kde-format
 msgid ""
 "<center>Field name not recognised.</center> <center>'<b>%1</b>'</center> "
@@ -9754,7 +9754,7 @@ msgstr ""
 "<center>Kamponomo ne rekonita.</center> <center>'<b>%1</b>'</center> Bonvolu "
 "reenigi viajn kolumnelektadojn."
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:345
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:348
 #: kmymoney/plugins/csv/import/csvwizard.cpp:989
 #: kmymoney/plugins/csv/import/csvwizard.cpp:1060
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:382
@@ -9765,7 +9765,7 @@ msgstr ""
 msgid "CSV import"
 msgstr "CSV-importo"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:363
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:366
 #, kde-format
 msgid ""
 "Column <b>%1</b> cannot be selected because it is already used in '<b>%2</"
@@ -9774,7 +9774,7 @@ msgstr ""
 "Kolumno <b>%1</b> ne povas esti elektita ĉar ĝi jam estas uzata en '<b>%2</"
 "b>'."
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:387
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:390
 #, kde-format
 msgid ""
 "<center>The %1 field contains '%2'</center><center>and the %3 field contains "
@@ -9783,13 +9783,13 @@ msgstr ""
 "<center>La kampo %1 enhavas '%2'</center><center>kaj la kampo %3 enhavas "
 "'%4'.</center><center>Bonvolu elekti kiun vi volas akcepti.</center>"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:394
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:397
 #, kde-format
 msgid "CSV invalid field values"
 msgstr "CSV nevalidaj kampovaloroj"
 
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:395
-#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:396
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:398
+#: kmymoney/plugins/csv/import/bankingwizardpage.cpp:399
 #, kde-format
 msgid "Accept %1"
 msgstr "Akcepti %1"
@@ -10099,37 +10099,37 @@ msgstr ""
 "esti rekonita.<br>La profilo ne povas esti uzata pro tio.<br>Ĉu vi volas "
 "forigi ĝin?</center>"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1551
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1578
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "buy"
 msgstr "Aĉeti"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1553
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1580
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "sell,repurchase"
 msgstr "vendi, reaĉeti"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1555
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1582
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "reinvest,reinv,re-inv"
 msgstr "reinvest,reinv,re-inv"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1557
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1584
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "dividend"
 msgstr "dividendo"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1559
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1586
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "interest,income"
 msgstr "interezo,enspezo"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1561
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1588
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid ""
@@ -10137,7 +10137,7 @@ msgid ""
 msgstr ""
 "aldoni,akcia dividendo,divd reinv,transdono en,reregistrado en,ĵurnalero"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1563
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1590
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "remove"
@@ -11453,12 +11453,12 @@ msgstr "Importita Historio"
 msgid "Loading accounts..."
 msgstr "Ŝargante kontojn..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1666
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1665
 #, kde-format
 msgid "Loading transactions..."
 msgstr "Ŝargante transakciojn..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1769
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1768
 #, kde-format
 msgid ""
 "Account or Category %1, transaction date %2; split contains invalid value; "
@@ -11467,37 +11467,37 @@ msgstr ""
 "Konto aŭ Kategorio %1, transakcia dato %2; disigo enhavas nevalidan valoron; "
 "Bonvolu kontroli"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1811
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1810
 #, kde-format
 msgid "Imported Transaction"
 msgstr "Importita Transakcio"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1860
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1859
 #, kde-format
 msgid "Loading templates..."
 msgstr "Ŝargante ŝablonojn..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1874
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1873
 #, kde-format
 msgid "Unknown payee"
 msgstr "Nekonata pagato"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2002
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2001
 #, kde-format
 msgid "Schedule %1 contains unknown action (key = %2, type = %3)"
 msgstr "Horaro %1 enhavas nekonatan agon (ŝlosilo = %2, tajpu = %3)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2010
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2009
 #, kde-format
 msgid "Schedule %1 contains multiple actions; only one has been imported"
 msgstr "Horaro %1 enhavas plurajn agojn; nur unu estis importita"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2016
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2015
 #, kde-format
 msgid "Schedule %1 contains no valid splits"
 msgstr "Horaro %1 enhavas neniujn validajn dividojn"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2021
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2020
 #, kde-format
 msgid ""
 "Schedule %1 appears to contain a formula. GnuCash formulae are not "
@@ -11505,17 +11505,17 @@ msgid ""
 msgstr ""
 "Horaro %1 ŝajnas enhavi formulon. GnuCash-formuloj ne estas konverteblaj"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2071
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2070
 #, kde-format
 msgid "Loading schedules..."
 msgstr "Ŝargante horarojn..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2159
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2158
 #, kde-format
 msgid "Schedule %1 has interval of %2 which is not currently available"
 msgstr "Horaro %1 havas intervalon de %2 kiu ne estas nuntempe disponebla"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2166
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2165
 #, kde-format
 msgid ""
 "Schedule %1 contains unknown interval specification; please check for "
@@ -11524,7 +11524,7 @@ msgstr ""
 "Horaro %1 enhavas nekonatan intervalspecifon; bonvolu kontroli la ĝustan "
 "funkciadon"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2202
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2201
 #, kde-format
 msgid ""
 "Schedule %1 contains a deferred interval specification; please check for "
@@ -11533,17 +11533,12 @@ msgstr ""
 "Horaro %1 enhavas prokrastan intervalspecifon; bonvolu kontroli la ĝustan "
 "funkciadon"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2227
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2226
 #, kde-format
 msgid "Schedule %1 dropped at user request"
 msgstr "Horaro %1 forigita laŭ peto de uzanto"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2270
-#, kde-format
-msgid "Reorganizing accounts..."
-msgstr "Reorganizante kontojn..."
-
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2328
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2280
 #, kde-format
 msgid ""
 "Your main currency seems to be %1 (%2); do you want to set this as your base "
@@ -11552,29 +11547,29 @@ msgstr ""
 "Via ĉefa valuto ŝajnas esti %1 (%2); ĉu vi volas agordi ĉi tion kiel vian "
 "bazan valuton?"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2343
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2295
 #, kde-format
 msgctxt "Button to show more detailed data"
 msgid "More"
 msgstr "Pli"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2345
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2297
 #, kde-format
 msgctxt "Button to close the current dialog"
 msgid "Done"
 msgstr "Preta"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2347
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2299
 #, kde-format
 msgid "Save Report"
 msgstr "Konservi Raporton"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2364
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2316
 #, kde-format
 msgid "Problems were encountered in converting schedule '%1'."
 msgstr "Problemoj estis renkontitaj en konvertado de horaro '%1'."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2389
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2341
 #, kde-format
 msgid ""
 "Found:\n"
@@ -11583,90 +11578,90 @@ msgstr ""
 "Trovita:\n"
 "\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2390
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2342
 #, kde-format
 msgid "%1 commodity (equity)\n"
 msgid_plural "%1 commodities (equities)\n"
 msgstr[0] "%1 varo (akcio)\n"
 msgstr[1] "%1 varoj (akcioj)\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2391
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2343
 #, kde-format
 msgid "%1 price\n"
 msgid_plural "%1 prices\n"
 msgstr[0] "%1 prezo\n"
 msgstr[1] "%1 prezoj\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2392
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2344
 #, kde-format
 msgid "%1 account\n"
 msgid_plural "%1 accounts\n"
 msgstr[0] "%1 konto\n"
 msgstr[1] "%1 kontoj\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2393
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2345
 #, kde-format
 msgid "%1 transaction\n"
 msgid_plural "%1 transactions\n"
 msgstr[0] "%1 transakcio\n"
 msgstr[1] "%1 transakcioj\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2394
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2346
 #, kde-format
 msgid "%1 schedule\n"
 msgid_plural "%1 schedules\n"
 msgstr[0] "%1 horaro\n"
 msgstr[1] "%1 horaroj\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2397
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2349
 #, kde-format
 msgid "No inconsistencies were detected\n"
 msgstr "Neniuj nekongruoj estis detektitaj\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2399
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2351
 #, kde-format
 msgid "%1 inconsistency was detected and corrected\n"
 msgid_plural "%1 inconsistencies were detected and corrected\n"
 msgstr[0] "%1 nekonsekvenco estis detektita kaj korektita\n"
 msgstr[1] "%1 nekonsekvencoj estis detektitaj kaj korektitaj\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2404
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2356
 #, kde-format
 msgid "%1 orphan account was created\n"
 msgid_plural "%1 orphan accounts were created\n"
 msgstr[0] "%1 orfigita konto estis kreita\n"
 msgstr[1] "%1 orfigitaj kontoj estis kreitaj\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2409
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2361
 #, kde-format
 msgid "%1 possible schedule problem was noted\n"
 msgid_plural "%1 possible schedule problems were noted\n"
 msgstr[0] "%1 ebla horarproblemo estis ekkonita\n"
 msgstr[1] "%1 eblaj horarproblemoj estis ekkonitaj\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2414
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2366
 #, kde-format
 msgid "Small Business Features (Customers, Invoices, etc.)"
 msgstr "Malgrandaj Komercaj Trajtoj (Kliententoj, Fakturoj, ktp.)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2415
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2367
 #: kmymoney/plugins/views/budget/budgetview.cpp:53
 #, kde-format
 msgid "Budgets"
 msgstr "Buĝetoj"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2416
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2368
 #, kde-format
 msgid "Lots"
 msgstr "Multe"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2418
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2370
 #, kde-format
 msgid "The following features found in your file are not currently supported:"
 msgstr ""
 "La sekvaj funkcioj trovitaj en via dosiero ne estas nuntempe subtenataj:"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2421
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2373
 #, kde-format
 msgid ""
 "\n"
@@ -11677,17 +11672,17 @@ msgstr ""
 "\n"
 "Premu Pli por pliaj informoj"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2436
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2388
 #, kde-format
 msgid "Save report as"
 msgstr "Konservi raporton kiel"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2472
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2424
 #, kde-format
 msgid "Orphan created from unknown GnuCash account"
 msgstr "Orfo kreita de nekonata GnuCash-konto"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2487
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2439
 #, kde-format
 msgid ""
 "One or more transactions contain a reference to an otherwise unknown "
@@ -11697,7 +11692,7 @@ msgstr ""
 "Unu aŭ pluraj transakcioj enhavas referencon al alie nekonata konto\n"
 "Konto de valoraĵo kun la nomo %1 estis kreita por konservi la datumojn."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2521
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2473
 #, kde-format
 msgid ""
 "An Investment account must be a child of an Asset account\n"
@@ -11706,7 +11701,7 @@ msgstr ""
 "Investa konto devas esti filo de Aktiva konto\n"
 "Konto %1 estos konservita sub la ĉefa Aktiva konto"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2528
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2480
 #, kde-format
 msgid ""
 "An Income account must be a child of an Income account\n"
@@ -11715,7 +11710,7 @@ msgstr ""
 "Enspeza konto devas esti filo de Enspeza konto\n"
 "Konto %1 estos konservita sub la ĉefa Enspeza konto"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2535
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2487
 #, kde-format
 msgid ""
 "An Expense account must be a child of an Expense account\n"
@@ -11724,23 +11719,23 @@ msgstr ""
 "Elspezkonto devas esti ido de Elspezkonto\n"
 "Konto %1 estos konservita sub la ĉefa Elspezkonto"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2583
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2535
 #, kde-format
 msgid "Enter the investment account name "
 msgstr "Enigu la nomon de investkonto"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2584
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2536
 #, kde-format
 msgid "My Investments"
 msgstr "Miaj Investoj"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2622
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2574
 #, kde-format
 msgid "Select parent investment account or enter new name. Stock %1"
 msgstr "Elektu gepatran investkonton aŭ enigu novan nomon. Akcio %1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2647
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2664
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2599
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2616
 #, kde-format
 msgid "%1 is not an Investment Account. Do you wish to make it one?"
 msgstr "%1 ne estas Investkonto. Ĉu vi volas fari ĝin unu?"
@@ -25158,6 +25153,9 @@ msgstr ""
 "\n"
 "<p>Ĉiuj informoj estas laŭvolaj kaj nur uzataj por personecigi vian KMyMoney-"
 "dosieron.</p>"
+
+#~ msgid "Reorganizing accounts..."
+#~ msgstr "Reorganizante kontojn..."
 
 #~ msgctxt "Credit suffix"
 #~ msgid "Cr."
