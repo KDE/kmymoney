@@ -278,8 +278,8 @@ void ObjectInfoTable::constructAccountTable()
             accountRow[ctCreditWarning] = account.value("maxCreditEarly");
             accountRow[ctMaxCreditLimit] = account.value("maxCreditAbsolute");
             accountRow[ctTax] = account.isInTaxReports() ? i18nc("Is this a tax account?", "Yes") : QString();
-            accountRow[ctOpeningBalance] = account.value("OpeningBalanceAccount") == QLatin1String("Yes") ? i18nc("Is this an opening balance account?", "Yes") : QString();
-            accountRow[ctFavorite] = account.value("PreferredAccount") == QLatin1String("Yes") ? i18nc("Is this a favorite account?", "Yes") : QString();
+            accountRow[ctOpeningBalance] = account.value("OpeningBalanceAccount", false) ? i18nc("Is this an opening balance account?", "Yes") : QString();
+            accountRow[ctFavorite] = account.value("PreferredAccount", false) ? i18nc("Is this a favorite account?", "Yes") : QString();
 
             //investment accounts show the balances of all its subaccounts
             if (account.accountType() == eMyMoney::Account::Type::Investment) {
@@ -340,7 +340,7 @@ void ObjectInfoTable::constructAccountLoanTable()
             accountRow[ctNextInterestChange] = loan.nextInterestChange().toString(Qt::ISODate);
             accountRow[ctPeriodicPayment] = (loan.periodicPayment() * xr).toString();
             accountRow[ctFinalPayment] = (loan.finalPayment() * xr).toString();
-            accountRow[ctFavorite] = account.value("PreferredAccount") == QLatin1String("Yes") ? i18nc("Is this a favorite account?", "Yes") : QString();
+            accountRow[ctFavorite] = account.value("PreferredAccount", false) ? i18nc("Is this a favorite account?", "Yes") : QString();
 
             MyMoneyMoney value = file->balance(account.id());
             value = value * xr;

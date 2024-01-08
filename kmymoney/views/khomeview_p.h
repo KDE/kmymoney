@@ -954,8 +954,7 @@ public:
                 case Account::Type::Liability:
                 case Account::Type::Investment:
                     // if preferred accounts are requested, then keep in list
-                    if ((*it).value("PreferredAccount") != "Yes"
-                            || (type & Preferred) == 0) {
+                    if (!(*it).value("PreferredAccount", false) || (type & Preferred) == 0) {
                         removeAccount = true;
                     }
                     break;
@@ -969,12 +968,12 @@ public:
                 case Account::Type::CreditCard:
                     switch (type & (Payment | Preferred)) {
                     case Payment:
-                        if ((*it).value("PreferredAccount") == "Yes")
+                        if ((*it).value("PreferredAccount", false))
                             removeAccount = true;
                         break;
 
                     case Preferred:
-                        if ((*it).value("PreferredAccount") != "Yes")
+                        if (!(*it).value("PreferredAccount", false))
                             removeAccount = true;
                         break;
 
