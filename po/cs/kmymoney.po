@@ -17992,10 +17992,9 @@ msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:228
-#, fuzzy, kde-format
-#| msgid "Include only Loan accounts"
+#, kde-format
 msgid "Hide zero balance accounts"
-msgstr "Zahrnout jen účty půjček"
+msgstr ""
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:232
@@ -24585,10 +24584,3 @@ msgstr ""
 "\n"
 "<p>Veškeré informace jsou volitelně a používají se pouze pro zosobnění "
 "vašeho KMyMoney.</p>"
-
-#~ msgid "Reorganizing accounts..."
-#~ msgstr "Reorganizuji účty..."
-
-#~ msgctxt "Debit suffix"
-#~ msgid "Dr."
-#~ msgstr "Dr."
