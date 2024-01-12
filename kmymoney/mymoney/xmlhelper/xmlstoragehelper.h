@@ -161,6 +161,7 @@ QString reportNames(eMyMoney::Report::DetailLevel textID);
 QString reportNames(eMyMoney::Report::ChartType textID);
 QString reportNames(eMyMoney::Report::ChartPalette textID);
 
+bool hasAttribute(QXmlStreamReader* reader, const QString& attribute);
 QString readRequiredStringAttribute(QXmlStreamReader* reader, const QString& attribute);
 QString readStringAttribute(QXmlStreamReader* reader, const QString& attribute, const QString& defaultValue = QString());
 MyMoneyMoney readValueAttribute(QXmlStreamReader* reader, const QString& attribute);

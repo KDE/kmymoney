@@ -17,6 +17,7 @@
 #include <QSet>
 #include <QString>
 #include <QStringList>
+#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -70,7 +71,9 @@ bool MyMoneyPayee::operator == (const MyMoneyPayee& right) const
             (d->m_matchKeyIgnoreCase == d2->m_matchKeyIgnoreCase) &&
             ((d->m_matchKey.length() == 0 && d2->m_matchKey.length() == 0) || d->m_matchKey == d2->m_matchKey) &&
             ((d->m_reference.length() == 0 && d2->m_reference.length() == 0) || (d->m_reference == d2->m_reference)) &&
-            ((d->m_defaultAccountId.length() == 0 && d2->m_defaultAccountId.length() == 0) || d->m_defaultAccountId == d2->m_defaultAccountId));
+            ((d->m_defaultAccountId.length() == 0 && d2->m_defaultAccountId.length() == 0) || d->m_defaultAccountId == d2->m_defaultAccountId)) &&
+            ((d->m_idPattern.length() == 0 && d2->m_idPattern.length() == 0) || (d->m_idPattern == d2->m_idPattern)) &&
+            ((d->m_urlTemplate.length() == 0 && d2->m_urlTemplate.length() == 0) || (d->m_urlTemplate == d2->m_urlTemplate));
 }
 
 bool MyMoneyPayee::operator < (const MyMoneyPayee& right) const
@@ -293,6 +296,67 @@ void MyMoneyPayee::setDefaultAccountId(const QString& id)
     Q_D(MyMoneyPayee);
     d->m_defaultAccountId = id;
     d->clearReferences();
+}
+
+QString MyMoneyPayee::idPattern() const
+{
+    Q_D(const MyMoneyPayee);
+    return d->m_idPattern;
+}
+
+void MyMoneyPayee::setIdPattern(const QString& idPattern)
+{
+    Q_D(MyMoneyPayee);
+    d->m_idPattern = idPattern;
+    if (idPattern.contains(QStringLiteral("(")))
+        d->m_idPatternRegEx.setPattern(idPattern);
+    else
+        d->m_idPatternRegEx.setPattern(QStringLiteral("(%1)").arg(idPattern));
+}
+
+QString MyMoneyPayee::urlTemplate() const
+{
+    Q_D(const MyMoneyPayee);
+    return d->m_urlTemplate;
+}
+
+void MyMoneyPayee::setUrlTemplate(const QString& urlTemplate)
+{
+    Q_D(MyMoneyPayee);
+    d->m_urlTemplate = urlTemplate;
+}
+
+QUrl MyMoneyPayee::payeeLink(const QString& text) const
+{
+    QStringList matches = matchingLinks(text);
+    if (matches.size() == 2) {
+        return QUrl(urlTemplate().arg(matches[1]));
+    } else if (matches.size() == 3) {
+        return QUrl(urlTemplate().arg(matches[1], matches[2]));
+    } else {
+        return QUrl();
+    }
+}
+
+QString MyMoneyPayee::decorateLink(const QString& text) const
+{
+    QStringList matches = matchingLinks(text);
+    if (matches.size() == 0 || matches[0].isEmpty())
+        return text;
+    QRegularExpression rx(QStringLiteral("(%1)").arg(matches[0]));
+
+    QString result = text;
+    result.replace(rx, QStringLiteral("<\\1>"));
+    return result;
+}
+
+QStringList MyMoneyPayee::matchingLinks(const QString& text) const
+{
+    Q_D(const MyMoneyPayee);
+    QRegularExpressionMatch match = d->m_idPatternRegEx.match(text);
+    if (!match.hasMatch())
+        return QStringList();
+    return match.capturedTexts();
 }
 
 // vim:cin:si:ai:et:ts=2:sw=2:

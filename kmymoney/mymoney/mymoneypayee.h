@@ -90,6 +90,10 @@ public:
     bool isUsingMatchKey() const;
     bool isMatchKeyIgnoreCase() const;
     QString matchKey() const;
+    QString idPattern() const;
+    void setIdPattern(const QString& idPattern);
+    QString urlTemplate() const;
+    void setUrlTemplate(const QString& urlTemplate);
 
     /**
      * Get all match data in one call
@@ -139,6 +143,10 @@ public:
     bool operator == (const MyMoneyPayee &) const;
 //  bool operator == (const MyMoneyPayee& lhs, const QString& rhs) const;
     bool operator <(const MyMoneyPayee& right) const;
+
+    QUrl payeeLink(const QString& text) const;
+    QString decorateLink(const QString& text) const;
+    QStringList matchingLinks(const QString& text) const;
 
     static MyMoneyPayee null;
 };
