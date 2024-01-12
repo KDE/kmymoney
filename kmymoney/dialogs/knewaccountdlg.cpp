@@ -817,9 +817,25 @@ void KNewAccountDlg::okClicked()
         if (d->ui->m_minBalanceAbsoluteEdit->isVisible()) {
             d->m_account.setValue("minimumBalance", d->ui->m_minBalanceAbsoluteEdit->value().toString());
         }
+
+        if (KMyMoneySettings::hideZeroBalanceAccounts() && !d->m_isEditing) {
+            KMessageBox::information(
+                this,
+                i18nc("@info",
+                      "You have selected to suppress the display of accounts with a zero balance in the KMyMoney configuration dialog. The account you just "
+                      "created will therefore only be shown if it is used. Otherwise, it will be hidden in all accounts views."),
+                i18nc("@title:window Warning message about hidden account", "Hidden accounts"),
+                QLatin1String("NewHiddenAccount"));
+        }
     } else {
         if (KMyMoneySettings::hideUnusedCategory() && !d->m_isEditing) {
-            KMessageBox::information(this, i18n("You have selected to suppress the display of unused categories in the KMyMoney configuration dialog. The category you just created will therefore only be shown if it is used. Otherwise, it will be hidden in the accounts/categories view."), i18n("Hidden categories"), "NewHiddenCategory");
+            KMessageBox::information(
+                this,
+                i18nc("@info",
+                      "You have selected to suppress the display of unused categories in the KMyMoney configuration dialog. The category you just created will "
+                      "therefore only be shown if it is used. Otherwise, it will be hidden in the accounts/categories view."),
+                i18nc("@title:window Warning message about hidden category", "Hidden categories"),
+                QLatin1String("NewHiddenCategory"));
         }
         d->m_account.setCostCenterRequired(d->ui->m_costCenterRequiredCheckBox->isChecked());
     }
