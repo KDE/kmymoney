@@ -149,17 +149,20 @@ struct JournalModel::Private
         // A transaction can have more than 2 splits ...
         const int rows = transaction.splitCount();
         if(rows > 2) {
-            // find the first entry of the transaction
+            // find the first entry of the transaction and keep in 'row'
             QModelIndex idx = index;
-            int row = index.row() - 1;
-            for (; row >= 0; --row) {
-                idx = q->index(row, 0);
-                if (idx.data(eMyMoney::Model::JournalTransactionIdRole).toString() != transaction.id()) {
-                    idx = q->index(row++, 0);
-                    break;
+            int row = index.row();
+            if (row > 0) {
+                for (--row; row >= 0; --row) {
+                    idx = q->index(row, 0);
+                    if (idx.data(eMyMoney::Model::JournalTransactionIdRole).toString() != transaction.id()) {
+                        idx = q->index(row++, 0);
+                        break;
+                    }
                 }
             }
 
+            // collect the counter account(s)
             QString txt, sep;
             const auto endRow = row + rows;
             for (; row < endRow; ++row) {
