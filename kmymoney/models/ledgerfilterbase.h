@@ -55,6 +55,10 @@ public:
      * with role JournalSplitMaxLinesCountRole to a @a value of -1
      * will clear the cache of all items.
      *
+     * Call with any @a index and @a value of -1 and @a role
+     * @c eMyMoney::Model::JournalSplitMaxLinesCountRole to reset
+     * the split height cache
+     *
      * @sa LedgerAccountFilter::data()
      */
     bool setData(const QModelIndex& index, const QVariant& value, int role) override;

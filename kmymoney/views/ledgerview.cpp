@@ -459,6 +459,12 @@ public:
         }
     }
 
+    void resetMaxLineCache()
+    {
+        auto m = q->LedgerView::model();
+        m->setData(QModelIndex(), -1, eMyMoney::Model::JournalSplitMaxLinesCountRole);
+    }
+
     LedgerView* q;
     JournalDelegate* journalDelegate;
     DelegateProxy* delegateProxy;
@@ -598,12 +604,7 @@ void LedgerView::setModel(QAbstractItemModel* model)
     });
 
     connect(model, &QAbstractItemModel::modelReset, this, [&]() {
-        auto m = LedgerView::model();
-        const auto rows = m->rowCount();
-        for (int row = 0; row < rows; ++row) {
-            const auto idx = m->index(row, 0);
-            m->setData(idx, 0, eMyMoney::Model::JournalSplitMaxLinesCountRole);
-        }
+        d->resetMaxLineCache();
     });
 
     horizontalHeader()->setSortIndicatorShown(false);
@@ -1245,7 +1246,7 @@ void LedgerView::slotSettingsChanged()
     Q_EMIT settingsChanged();
 
     d->setFonts();
-
+    d->resetMaxLineCache();
 #if 0
     // KMyMoneySettings::showGrid()
     // KMyMoneySettings::sortNormalView()
