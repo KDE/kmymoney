@@ -207,10 +207,15 @@ public:
         q->connect(ui->checkMatchIgnoreCase, &QAbstractButton::toggled, q, &KPayeesView::slotPayeeDataChanged);
         q->connect(ui->checkEnableDefaultCategory,  &QAbstractButton::toggled, q,               &KPayeesView::slotPayeeDataChanged);
         q->connect(ui->comboDefaultCategory,        &KMyMoneyAccountCombo::accountSelected, q,  &KPayeesView::slotPayeeDataChanged);
+        q->connect(ui->idPatternEdit, &QLineEdit::textChanged, q, &KPayeesView::slotPayeeDataChanged);
+        q->connect(ui->urlTemplateEdit, &QLineEdit::textChanged, q, &KPayeesView::slotPayeeDataChanged);
 
         q->connect(ui->buttonSuggestACategory,      &QAbstractButton::clicked, q,               &KPayeesView::slotChooseDefaultAccount);
 
         q->connect(ui->matchKeyEditList, &KEditListWidget::changed, q, &KPayeesView::slotKeyListChanged);
+        q->connect(ui->idPatternEdit, &QLineEdit::textChanged, q, &KPayeesView::slotPayeeMatchingCheck);
+        q->connect(ui->urlTemplateEdit, &QLineEdit::textChanged, q, &KPayeesView::slotPayeeMatchingCheck);
+        q->connect(ui->matchingCheckEdit, &QLineEdit::textChanged, q, &KPayeesView::slotPayeeMatchingCheck);
 
         q->connect(ui->m_updateButton,    &QAbstractButton::clicked, q, &KPayeesView::slotUpdatePayee);
         q->connect(ui->m_syncAddressbook, &QAbstractButton::clicked, q, &KPayeesView::slotSyncAddressBook);
@@ -291,6 +296,8 @@ public:
         ui->comboDefaultCategory->setSelected(m_payee.defaultAccountId());
 
         ui->payeeIdentifiers->setSource(m_payee);
+        ui->idPatternEdit->setText(m_payee.idPattern());
+        ui->urlTemplateEdit->setText(m_payee.urlTemplate());
 
         ui->m_tabWidget->setEnabled(!m_payee.id().isEmpty());
     }
@@ -304,6 +311,8 @@ public:
         ui->telephoneEdit->setText(QString());
         ui->emailEdit->setText(QString());
         ui->notesEdit->setText(QString());
+        ui->idPatternEdit->setText(QString());
+        ui->urlTemplateEdit->setText(QString());
         showTransactions(eTransactionDisplay::ClearTransactionDisplay);
     }
 

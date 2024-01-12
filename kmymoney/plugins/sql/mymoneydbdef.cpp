@@ -142,6 +142,8 @@ void MyMoneyDbDef::Payees()
     appendField(MyMoneyDbIntColumn("matchData", MyMoneyDbIntColumn::TINY, UNSIGNED, false, false, 5));
     appendField(MyMoneyDbColumn("matchIgnoreCase", "char(1)", false, false, 5));
     appendField(MyMoneyDbTextColumn("matchKeys", MyMoneyDbTextColumn::MEDIUM, false, false, 5));
+    appendField(MyMoneyDbTextColumn("idPattern"));
+    appendField(MyMoneyDbTextColumn("urlTemplate"));
     MyMoneyDbTable t("kmmPayees", fields);
     t.buildSQLStrings();
     m_tables[t.name()] = t;

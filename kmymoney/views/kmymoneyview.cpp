@@ -64,6 +64,7 @@
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
 #include "mymoneymoney.h"
+#include "mymoneypayee.h"
 #include "mymoneyprice.h"
 #include "mymoneyreport.h"
 #include "mymoneyschedule.h"
@@ -386,6 +387,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
     pActions[eMenu::Action::FinishReconciliation]->setEnabled(false);
     pActions[eMenu::Action::CancelReconciliation]->setEnabled(false);
     pActions[eMenu::Action::MoveToToday]->setEnabled(false);
+    pActions[eMenu::Action::TransactionOpenURL]->setEnabled(false);
 
     // update actions in all views. process the current last
     const auto viewBasesKeys = d->viewBases.keys();
@@ -426,6 +428,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
             pActions[eMenu::Action::AddReversingTransaction]->setDisabled(true);
             pActions[eMenu::Action::CopySplits]->setDisabled(true);
             pActions[eMenu::Action::MoveToToday]->setDisabled(true);
+            pActions[eMenu::Action::TransactionOpenURL]->setDisabled(true);
         } else {
             const auto warnLevel = MyMoneyUtils::transactionWarnLevel(selections.selection(SelectedObjects::JournalEntry));
             pActions[eMenu::Action::EditTransaction]->setEnabled(true);
@@ -436,6 +439,8 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
             pActions[eMenu::Action::DisplayTransactionDetails]->setEnabled(true);
             pActions[eMenu::Action::CopySplits]->setDisabled(true);
             pActions[eMenu::Action::MoveToToday]->setEnabled(true);
+            // TODO: limit to transactions with a related payee
+            pActions[eMenu::Action::TransactionOpenURL]->setEnabled(true);
 
             int singleSplitTransactions(0);
             int multipleSplitTransactions(0);

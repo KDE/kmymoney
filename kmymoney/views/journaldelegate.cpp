@@ -132,7 +132,7 @@ public:
                             ++rc.italicStartLine;
                         }
                     }
-                    const auto memo = index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
+                    const auto memo = index.data(eMyMoney::Model::Roles::SplitStyledSingleLineMemoRole).toString();
                     if (!memo.isEmpty()) {
                         rc.lines << memo;
                         ++rc.italicStartLine;
@@ -174,12 +174,12 @@ public:
                         rc.lines << index.data(eMyMoney::Model::Roles::SplitPayeeRole).toString();
                     }
                     rc.lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
-                    rc.lines << index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
+                    rc.lines << index.data(eMyMoney::Model::Roles::SplitStyledSingleLineMemoRole).toString();
 
                 } else {
                     if (rc.lines.at(0).isEmpty()) {
                         rc.lines.clear();
-                        rc.lines << index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
+                        rc.lines << index.data(eMyMoney::Model::Roles::SplitStyledSingleLineMemoRole).toString();
                     }
                     if (rc.lines.at(0).isEmpty()) {
                         rc.lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
@@ -229,7 +229,7 @@ public:
             rc.lines << opt.text;
             if (showAllSplits && isMultiSplitDisplay(index)) {
                 const auto payee = index.data(eMyMoney::Model::SplitPayeeRole).toString();
-                if (!havePayeeColumn && !payee.isEmpty() && !index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString().isEmpty()) {
+                if (!havePayeeColumn && !payee.isEmpty() && !index.data(eMyMoney::Model::Roles::SplitStyledSingleLineMemoRole).toString().isEmpty()) {
                     rc.lines << QStringLiteral(" ");
                 }
                 rc.italicStartLine = 1;
@@ -241,7 +241,7 @@ public:
             rc.lines << opt.text;
             if (showAllSplits && isMultiSplitDisplay(index)) {
                 const auto payee = index.data(eMyMoney::Model::SplitPayeeRole).toString();
-                if (!havePayeeColumn && !payee.isEmpty() && !index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString().isEmpty()) {
+                if (!havePayeeColumn && !payee.isEmpty() && !index.data(eMyMoney::Model::Roles::SplitStyledSingleLineMemoRole).toString().isEmpty()) {
                     rc.lines << QStringLiteral(" ");
                 }
                 rc.italicStartLine = 1;
