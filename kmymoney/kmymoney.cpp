@@ -1946,6 +1946,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::ShowTransaction,               QStringLiteral("transaction_show"),               i18nc("Show transaction", "Show transaction"),      Icon::Empty},     // not directly available in UI
 	    {Action::DisplayTransactionDetails,     QStringLiteral("transaction_display_details"),    i18nc("Display transaction details", "Show transaction details"),   Icon::DocumentProperties},
 
+            {Action::TransactionOpenURL,            QStringLiteral("transaction_open_url"),           i18nc("Open URL", "Open URL"),                      Icon::Empty},     // not directly available in UI
             {Action::SelectAllTransactions,         QStringLiteral("transaction_select_all"),         i18nc("Select all transactions", "Select all"),     Icon::SelectAll},
             {Action::GoToAccount,                   QStringLiteral("transaction_goto_account"),       i18n("Go to account"),                              Icon::BankAccount},
             {Action::GoToPayee,                     QStringLiteral("transaction_goto_payee"),         i18n("Go to payee"),                                Icon::Payee},
@@ -2108,6 +2109,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::MatchTransaction,              &KMyMoneyApp::slotMatchTransaction},
             {Action::AcceptTransaction,             &KMyMoneyApp::slotAcceptTransaction},
             {Action::ShowTransaction,               &KMyMoneyApp::slotExecuteAction},
+            {Action::TransactionOpenURL,            &KMyMoneyApp::slotTransactionOpenURL},
 
             {Action::StartReconciliation,           &KMyMoneyApp::slotStartReconciliation},
             {Action::FinishReconciliation,          &KMyMoneyApp::slotExecuteAction},
@@ -3099,6 +3101,57 @@ void KMyMoneyApp::slotMoveTransactionTo()
             qDebug() << e.what();
         }
     }
+}
+
+void KMyMoneyApp::slotTransactionOpenURL()
+{
+    auto action = qobject_cast<QAction*>(sender());
+    // const auto actionId = d->qActionToId(action);
+    const auto file = MyMoneyFile::instance();
+    const auto accountId = action->data().toString();
+    const auto journalEntryList = d->m_selections.selection(SelectedObjects::JournalEntry);
+
+    if (journalEntryList.isEmpty())
+        return;
+    QList<QUrl> seenUrls;
+    const auto journalModel = file->journalModel();
+    for (const auto& journalId : journalEntryList) {
+        const auto journalIdx = journalModel->indexById(journalId);
+        const auto transactionId = journalIdx.data(eMyMoney::Model::JournalTransactionIdRole).toString();
+        const auto indexes = journalModel->indexesByTransactionId(transactionId);
+        const auto count = indexes.count();
+        for (auto i = 0; i < count; ++i) {
+            const auto payeeId = indexes[i].data(eMyMoney::Model::SplitPayeeIdRole).toString();
+            const auto payee = MyMoneyFile::instance()->payee(payeeId);
+            const auto memo = indexes[i].data(eMyMoney::Model::SplitMemoRole).toString();
+            QUrl url = payee.payeeLink(memo);
+            if (seenUrls.contains(url))
+                continue;
+            if (openUrl(url))
+                seenUrls.append(url);
+        }
+    }
+}
+
+bool KMyMoneyApp::openUrl(const QUrl& url)
+{
+    if (url.scheme() != QStringLiteral("file") || !url.path().contains(QStringLiteral(".*"))) {
+        QDesktopServices::openUrl(url);
+        return true;
+    }
+    QFileInfo fi(url.toLocalFile());
+    QRegExp rx(fi.fileName());
+    QDir dir = fi.absoluteDir();
+    dir.setFilter(QDir::Files);
+    QFileInfoList list = dir.entryInfoList();
+    for (int j = 0; j < list.size(); ++j) {
+        QFileInfo fileInfo = list.at(j);
+        if (rx.indexIn(fileInfo.fileName()) != -1) {
+            QDesktopServices::openUrl(QUrl::fromLocalFile(fileInfo.absoluteFilePath()));
+            return true;
+        }
+    }
+    return false;
 }
 
 void KMyMoneyApp::slotMoveToToday()

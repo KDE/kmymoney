@@ -17,6 +17,7 @@
 #include <QString>
 #include <QMap>
 #include <QHash>
+#include <QRegularExpression>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -48,11 +49,15 @@ public:
     QString m_telephone;
     QString m_email;
     QString m_notes;
+    QString m_idPattern;
+    QString m_urlTemplate;
 
     // Transaction matching fields
     bool m_matchingEnabled;      //< Whether this payee should be matched at all
     bool m_usingMatchKey;        //< If so, whether a m_matchKey list is used (true), or just m_name is used (false)
     bool m_matchKeyIgnoreCase;   //< Whether to ignore the case of the match key or name
+
+    QRegularExpression m_idPatternRegEx; //< holds regular expression for id pattern
 
     /**
      * Semicolon separated list of matching keys used when trying to find a suitable

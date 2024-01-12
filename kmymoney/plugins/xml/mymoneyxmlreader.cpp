@@ -200,6 +200,11 @@ public:
         delete m_reader;
     }
 
+    inline bool hasAttribute(const QString& attribute) const
+    {
+        return MyMoneyXmlHelper::hasAttribute(m_reader, attribute);
+    }
+
     inline MyMoneyMoney readValueAttribute(const QString& attribute) const
     {
         return MyMoneyXmlHelper::readValueAttribute(m_reader, attribute);
@@ -472,6 +477,12 @@ public:
 
         m_payee.setNotes(readStringAttribute(attributeName(Attribute::Payee::Notes)));
         m_payee.setDefaultAccountId(readStringAttribute(attributeName(Attribute::Payee::DefaultAccountID)));
+
+        // read matching links
+        if (hasAttribute(attributeName(Attribute::Payee::IdPattern))) {
+            m_payee.setIdPattern(readStringAttribute(attributeName(Attribute::Payee::IdPattern)));
+            m_payee.setUrlTemplate(readStringAttribute(attributeName(Attribute::Payee::UrlTemplate)));
+        }
 
         int identifierIndex = 1;
         while (m_reader->readNextStartElement()) {

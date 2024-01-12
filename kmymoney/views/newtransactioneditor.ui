@@ -296,6 +296,16 @@
      </property>
     </widget>
    </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="linkLabel">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>Link</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>

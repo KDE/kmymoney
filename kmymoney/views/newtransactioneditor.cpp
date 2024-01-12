@@ -148,6 +148,7 @@ public:
     MyMoneySplit m_split;
     WidgetHintFrameCollection* frameCollection;
     KMyMoneyAccountComboSplitHelper* m_splitHelper;
+    void updateMemoLink();
 };
 
 void NewTransactionEditor::Private::adjustTagIdList()
@@ -1025,6 +1026,8 @@ void NewTransactionEditor::Private::loadTransaction(QModelIndex idx)
 
             ui->numberEdit->setText(splitIdx.data(eMyMoney::Model::SplitNumberRole).toString());
             ui->statusCombo->setCurrentIndex(splitIdx.data(eMyMoney::Model::SplitReconcileFlagRole).toInt());
+            ui->tagContainer->loadTags(splitIdx.data(eMyMoney::Model::SplitTagIdRole).toStringList());
+            updateMemoLink();
         } else {
             splitModel.appendSplit(MyMoneyFile::instance()->journalModel()->itemByIndex(splitIdx).split());
 
@@ -1062,6 +1065,25 @@ void NewTransactionEditor::Private::loadTransaction(QModelIndex idx)
     checkForValidAmount();
 
     m_splitHelper->updateWidget();
+}
+
+void NewTransactionEditor::Private::updateMemoLink()
+{
+    try {
+        const MyMoneyPayee& payeeObj = MyMoneyFile::instance()->payeeByName(ui->payeeEdit->currentText());
+        QUrl url = payeeObj.payeeLink(ui->memoEdit->toPlainText());
+        if (url.isEmpty()) {
+            ui->linkLabel->setText("");
+            return;
+        }
+        ui->linkLabel->setTextFormat(Qt::RichText);
+        ui->linkLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
+        ui->linkLabel->setOpenExternalLinks(true);
+        ui->linkLabel->setText(QString("<a href=\"%1\">%2</a>").arg(url.toString(), i18n("Link")));
+        qDebug() << url;
+    } catch (MyMoneyException&) {
+        ui->linkLabel->setText("");
+    }
 }
 
 NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accountId)
@@ -1334,6 +1356,8 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
 
                 d->ui->numberEdit->setText(split.number());
                 d->ui->statusCombo->setCurrentIndex(static_cast<int>(split.reconcileFlag()));
+                d->ui->tagContainer->loadTags(split.tagIdList());
+                d->updateMemoLink();
             } else {
                 // we block sending out signals for the category combo here to avoid
                 // calling NewTransactionEditorPrivate::categoryChanged which does not

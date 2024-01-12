@@ -75,6 +75,7 @@ private Q_SLOTS:
       * This slot marks the current selected payee as modified (dirty).
       */
     void slotPayeeDataChanged();
+    void slotPayeeMatchingCheck();
     void slotKeyListChanged();
 
     void slotRenameSinglePayee(const QModelIndex& idx, const QVariant& value);

@@ -237,6 +237,12 @@ void MyMoneyXmlWriterPrivate::writePayee(const MyMoneyPayee& payee, QXmlStreamWr
         writer->writeAttribute(attributeName(Attribute::Payee::DefaultAccountID), payee.defaultAccountId());
     }
 
+    // save matching link
+    if (!payee.idPattern().isEmpty() || !payee.urlTemplate().isEmpty()) {
+        writer->writeAttribute(attributeName(Attribute::Payee::IdPattern), payee.idPattern());
+        writer->writeAttribute(attributeName(Attribute::Payee::UrlTemplate), payee.urlTemplate());
+    }
+
     // Save address
     writeAddress(writer, payee.address(), payee.city(), payee.state(), payee.postcode(), payee.telephone());
 

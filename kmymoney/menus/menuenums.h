@@ -84,6 +84,7 @@ enum class Action {
     CombineTransactions,
     MoveTransactionTo,
     MoveToToday,
+    TransactionOpenURL,
     // *************
     // The tools menu
     // *************

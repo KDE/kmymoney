@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>642</width>
-    <height>185</height>
+    <height>192</height>
    </rect>
   </property>
   <property name="frameShape">
@@ -172,6 +172,13 @@
         </size>
        </property>
       </spacer>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="linkLabel">
+       <property name="text">
+        <string>Link</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

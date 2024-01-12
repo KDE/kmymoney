@@ -345,6 +345,8 @@ QString attributeName(Attribute::Payee attributeID)
         {Attribute::Payee::AccountNumber,    QStringLiteral("accountnumber")},
         {Attribute::Payee::BankCode,         QStringLiteral("bankcode")},
         {Attribute::Payee::Country,          QStringLiteral("country")},
+        {Attribute::Payee::IdPattern,        QStringLiteral("idpattern")},
+        {Attribute::Payee::UrlTemplate,      QStringLiteral("urltemplate")},
     };
     return attributeNames.value(attributeID);
 }
