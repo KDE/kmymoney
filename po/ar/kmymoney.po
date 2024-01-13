@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-09 00:41+0000\n"
+"POT-Creation-Date: 2024-01-13 01:46+0000\n"
 "PO-Revision-Date: 2022-01-04 22:18+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -2298,8 +2298,8 @@ msgid "Please select a parent account."
 msgstr "رجاءً اختر حساب أبّ."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:740
-#: kmymoney/dialogs/knewaccountdlg.cpp:896
-#: kmymoney/dialogs/knewaccountdlg.cpp:911
+#: kmymoney/dialogs/knewaccountdlg.cpp:912
+#: kmymoney/dialogs/knewaccountdlg.cpp:927
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:518
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:45
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:80
@@ -2314,8 +2314,39 @@ msgid ""
 "category with the same name."
 msgstr "هناك فئة موجودة بالاسم <b>%1</b>. لا يمكن إنشاء فئة أخرى بنفس الاسم."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:822
-#, kde-format
+#: kmymoney/dialogs/knewaccountdlg.cpp:825
+#, fuzzy, kde-format
+#| msgid ""
+#| "You have selected to suppress the display of unused categories in the "
+#| "KMyMoney configuration dialog. The category you just created will "
+#| "therefore only be shown if it is used. Otherwise, it will be hidden in "
+#| "the accounts/categories view."
+msgctxt "@info"
+msgid ""
+"You have selected to suppress the display of accounts with a zero balance in "
+"the KMyMoney configuration dialog. The account you just created will "
+"therefore only be shown if it is used. Otherwise, it will be hidden in all "
+"accounts views."
+msgstr ""
+"لقد اخترت إلغاء عرض الفئات غير المستخدمة في حواريّ ضبط «أموالك». لهذا السّبب "
+"ستظهر الفئة التي أنشأتها للتّو فقط إن كانت مستخدمة. بينما ستُخفى في منظور "
+"الحسابات/الفئات."
+
+#: kmymoney/dialogs/knewaccountdlg.cpp:827
+#, fuzzy, kde-format
+#| msgid "Payment accounts"
+msgctxt "@title:window Warning message about hidden account"
+msgid "Hidden accounts"
+msgstr "حسابات السداد"
+
+#: kmymoney/dialogs/knewaccountdlg.cpp:835
+#, fuzzy, kde-format
+#| msgid ""
+#| "You have selected to suppress the display of unused categories in the "
+#| "KMyMoney configuration dialog. The category you just created will "
+#| "therefore only be shown if it is used. Otherwise, it will be hidden in "
+#| "the accounts/categories view."
+msgctxt "@info"
 msgid ""
 "You have selected to suppress the display of unused categories in the "
 "KMyMoney configuration dialog. The category you just created will therefore "
@@ -2326,43 +2357,45 @@ msgstr ""
 "ستظهر الفئة التي أنشأتها للتّو فقط إن كانت مستخدمة. بينما ستُخفى في منظور "
 "الحسابات/الفئات."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:822
-#, kde-format
+#: kmymoney/dialogs/knewaccountdlg.cpp:837
+#, fuzzy, kde-format
+#| msgid "Hidden categories"
+msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "فئات مخفيّة"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:936
+#: kmymoney/dialogs/knewaccountdlg.cpp:952
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
 #, kde-format
 msgid "Cannot add institution"
 msgstr "تعذّرت إضافة المؤسّسة"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:973
+#: kmymoney/dialogs/knewaccountdlg.cpp:989
 #, kde-format
 msgctxt "@info:tooltip Hint to provide name"
 msgid "Please provide a name for the new category or account."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:978
+#: kmymoney/dialogs/knewaccountdlg.cpp:994
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:985
+#: kmymoney/dialogs/knewaccountdlg.cpp:1001
 #, kde-format
 msgctxt "@info:tooltip Hint to provide VAT percentage in range"
 msgid "Please provide a percentage greater than zero and less than 100."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:989
+#: kmymoney/dialogs/knewaccountdlg.cpp:1005
 #, fuzzy, kde-format
 #| msgid "Please select a default category for payee '%1'"
 msgctxt "@info:tooltip Hint to provide category to assign VAT"
 msgid "Please select a category for the VAT."
 msgstr "رجاءً اختر فئة مبدئيّة للمُتسلِّم ’%1‘"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1054
+#: kmymoney/dialogs/knewaccountdlg.cpp:1070
 #, kde-format
 msgid ""
 "<p>The category <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2372,13 +2405,13 @@ msgstr ""
 "<p>الفئة <b>%1</b> غير موجودة حاليًّا. هل تريد إنشاءها؟</p><p><i>سيكون الحساب "
 "الأبّ مبدئيًّا <b>%2</b>، لكنّك تستطيع تغييره في الحواري التّالي</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1058
-#: kmymoney/dialogs/knewaccountdlg.cpp:1083
+#: kmymoney/dialogs/knewaccountdlg.cpp:1074
+#: kmymoney/dialogs/knewaccountdlg.cpp:1099
 #, kde-format
 msgid "Create category"
 msgstr "أنشئ فئة"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1079
+#: kmymoney/dialogs/knewaccountdlg.cpp:1095
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>The category <b>%1</b> currently does not exist. Do you want to create "
@@ -2392,14 +2425,14 @@ msgstr ""
 "<p>الفئة <b>%1</b> غير موجودة حاليًّا. هل تريد إنشاءها؟</p><p><i>سيكون الحساب "
 "الأبّ مبدئيًّا <b>%2</b>، لكنّك تستطيع تغييره في الحواري التّالي</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1101
+#: kmymoney/dialogs/knewaccountdlg.cpp:1117
 #, fuzzy, kde-format
 #| msgid "Create a new Category"
 msgctxt "@title:window"
 msgid "Create a new Category"
 msgstr "أنشئ فئة جديدة"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1106
+#: kmymoney/dialogs/knewaccountdlg.cpp:1122
 #, fuzzy, kde-format
 #| msgid "Create a new asset account"
 msgctxt "@title:window"
@@ -8280,7 +8313,7 @@ msgid "Split transaction"
 msgstr "جزّئ المعاملة"
 
 #: kmymoney/mymoney/splitmodel.cpp:112
-#: kmymoney/mymoney/storage/journalmodel.cpp:187
+#: kmymoney/mymoney/storage/journalmodel.cpp:190
 #: kmymoney/plugins/views/reports/core/querytable.cpp:993
 #, fuzzy, kde-format
 msgid "*** UNASSIGNED ***"
@@ -8786,13 +8819,13 @@ msgctxt "Unknown investment activity"
 msgid "Unknown"
 msgstr "مجهول"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:219
+#: kmymoney/mymoney/storage/journalmodel.cpp:222
 #, fuzzy, kde-format
 #| msgid "Expense categories"
 msgid "Multiple fee categories"
 msgstr "فئات المصروفات"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:219
+#: kmymoney/mymoney/storage/journalmodel.cpp:222
 #, fuzzy, kde-format
 #| msgid "Interest category"
 msgid "Multiple interest categories"
@@ -19133,73 +19166,73 @@ msgstr "ما زال هذا الحساب مشمولًا في جدول نشط"
 msgid "This account is still mapped to an online account"
 msgstr "ما زال هذا الحساب مشمولًا في جدول نشط"
 
-#: kmymoney/views/kcategoriesview.cpp:154
+#: kmymoney/views/kcategoriesview.cpp:153
 #, fuzzy, kde-format
 #| msgid "Amount: %1"
 msgctxt "Approximate loss"
 msgid "Loss: ~%1"
 msgstr "الخسارة: %1"
 
-#: kmymoney/views/kcategoriesview.cpp:155
+#: kmymoney/views/kcategoriesview.cpp:154
 #, kde-format
 msgid "Loss: %1"
 msgstr "الخسارة: %1"
 
-#: kmymoney/views/kcategoriesview.cpp:158
+#: kmymoney/views/kcategoriesview.cpp:157
 #, fuzzy, kde-format
 #| msgid "Profit: "
 msgctxt "Approximate profit"
 msgid "Profit: ~%1"
 msgstr "الربح"
 
-#: kmymoney/views/kcategoriesview.cpp:159
+#: kmymoney/views/kcategoriesview.cpp:158
 #, fuzzy, kde-format
 #| msgid "Profit: "
 msgid "Profit: %1"
 msgstr "الربح"
 
-#: kmymoney/views/kcategoriesview.cpp:199
+#: kmymoney/views/kcategoriesview.cpp:198
 #, kde-format
 msgid "Edit category '%1'"
 msgstr "حرّر الفئة ’%1‘"
 
-#: kmymoney/views/kcategoriesview.cpp:207
+#: kmymoney/views/kcategoriesview.cpp:206
 #, fuzzy, kde-format
 #| msgid "Edit category..."
 msgctxt "Undo action description"
 msgid "Edit category"
 msgstr "حرّر الفئة..."
 
-#: kmymoney/views/kcategoriesview.cpp:221
+#: kmymoney/views/kcategoriesview.cpp:220
 #, kde-format
 msgid "Unable to modify category '%1'. Cause: %2"
 msgstr "تعذّر تعديل الفئة ’%1‘. السّبب: %2"
 
-#: kmymoney/views/kcategoriesview.cpp:318
+#: kmymoney/views/kcategoriesview.cpp:317
 #, kde-format
 msgid ""
 "Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3"
 msgstr "تعذّر استبدال الفئة <b>%1</b> بالفئة <b>%2</b>. السّبب: %3"
 
-#: kmymoney/views/kcategoriesview.cpp:339
+#: kmymoney/views/kcategoriesview.cpp:338
 #, kde-format
 msgid "<qt>Do you really want to delete category <b>%1</b>?</qt>"
 msgstr "<qt>أمتأكّد من حذف الفئة <b>%1</b>؟</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:340
-#: kmymoney/views/kcategoriesview.cpp:400
+#: kmymoney/views/kcategoriesview.cpp:339
+#: kmymoney/views/kcategoriesview.cpp:399
 #, fuzzy, kde-format
 #| msgid "Delete category..."
 msgctxt "@title:window"
 msgid "Delete category"
 msgstr "احذف الفئة...."
 
-#: kmymoney/views/kcategoriesview.cpp:349
+#: kmymoney/views/kcategoriesview.cpp:348
 #, kde-format
 msgid "<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>"
 msgstr "<qt>تعذّر حذف الفئة <b>%1</b>. السّبب: %2</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:360
+#: kmymoney/views/kcategoriesview.cpp:359
 #, kde-format
 msgid ""
 "<qt>Do you want to delete category <b>%1</b> with all its sub-categories or "
@@ -19209,17 +19242,17 @@ msgstr ""
 "أتريد حذف الفئة <b>%1</b> مع كلّ فئاتها الفرعيّة أو فقط الفئة نفسها؟ إن حذفت "
 "الفئة نفسها فقط، فستصبح كلّ الفئات الفرعيّة فئات فرعيّة لِ‍ <b>%2</b>."
 
-#: kmymoney/views/kcategoriesview.cpp:366
+#: kmymoney/views/kcategoriesview.cpp:365
 #, kde-format
 msgid "Delete all"
 msgstr "احذف الكلّ"
 
-#: kmymoney/views/kcategoriesview.cpp:367
+#: kmymoney/views/kcategoriesview.cpp:366
 #, kde-format
 msgid "Just the category"
 msgstr "الفئة فقط"
 
-#: kmymoney/views/kcategoriesview.cpp:396
+#: kmymoney/views/kcategoriesview.cpp:395
 #, fuzzy, kde-format
 msgid ""
 "<p>Some sub-categories of category <b>%1</b> cannot be deleted, because they "
@@ -19228,13 +19261,13 @@ msgstr ""
 "<p>لا يمكن حذف بعض فئات <b>%1</b> الفرعيّة لأنّها ما زالت تُستخدم. ستصبح فئات "
 "فرعيّة لِ‍ <b>%2</b>. أأتابع؟</p>"
 
-#: kmymoney/views/kcategoriesview.cpp:422
+#: kmymoney/views/kcategoriesview.cpp:421
 #, kde-format
 msgid ""
 "<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>"
 msgstr "<qt>تعذّر حذف فئة من فئات <b>%1</b> الفرعيّة. السّبب: %2</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:432
+#: kmymoney/views/kcategoriesview.cpp:431
 #, kde-format
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "تعذّر حذف الفئة ’%1‘. السّبب: %2"
@@ -20495,7 +20528,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "انتقل إلى ’%1‘"
 
-#: kmymoney/views/ledgerview.cpp:688
+#: kmymoney/views/ledgerview.cpp:689
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -20503,7 +20536,7 @@ msgid ""
 "to current editor</a>"
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:802
+#: kmymoney/views/ledgerview.cpp:803
 #, fuzzy, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
@@ -20511,27 +20544,27 @@ msgstr ""
 "ينقص المعاملة رقم <b>%1</b> حساب مرتبط.\n"
 "أُسقطت المعاملة."
 
-#: kmymoney/views/ledgerview.cpp:809
+#: kmymoney/views/ledgerview.cpp:810
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:818
+#: kmymoney/views/ledgerview.cpp:819
 #, fuzzy, kde-format
 #| msgid "This schedule will end at some time"
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "سينتهي هذا الجدول في وقت ما في المستقبل"
 
-#: kmymoney/views/ledgerview.cpp:824
+#: kmymoney/views/ledgerview.cpp:825
 #, fuzzy, kde-format
 #| msgid "First transaction does not match requirement for matching"
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "لا تطابق المعالمة الأولى متطلّبات المطابقة"
 
-#: kmymoney/views/ledgerview.cpp:829
+#: kmymoney/views/ledgerview.cpp:830
 #, fuzzy, kde-format
 #| msgid "First transaction does not match requirement for matching"
 msgctxt "@info:tooltip icon description"
@@ -20539,7 +20572,7 @@ msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
 msgstr "لا تطابق المعالمة الأولى متطلّبات المطابقة"
 
-#: kmymoney/views/ledgerview.cpp:905
+#: kmymoney/views/ledgerview.cpp:906
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -20547,14 +20580,14 @@ msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "أمتأكّد من حذف مدخلات الأثمان المحدّدة؟"
 
-#: kmymoney/views/ledgerview.cpp:906
+#: kmymoney/views/ledgerview.cpp:907
 #, fuzzy, kde-format
 #| msgid "Enter scheduled transaction"
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "إدخال معاملة مجدولة"
 
-#: kmymoney/views/ledgerview.cpp:909
+#: kmymoney/views/ledgerview.cpp:910
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -20562,7 +20595,7 @@ msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "أمتأكّد من حذف مدخلات الأثمان المحدّدة؟"
 
-#: kmymoney/views/ledgerview.cpp:910
+#: kmymoney/views/ledgerview.cpp:911
 #, fuzzy, kde-format
 #| msgctxt "Dialog caption for 'Enter or schedule' dialog"
 #| msgid "Enter or schedule?"
@@ -20570,7 +20603,7 @@ msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "أُدخلها أم أُجدولها؟"
 
-#: kmymoney/views/ledgerview.cpp:930
+#: kmymoney/views/ledgerview.cpp:931
 #, fuzzy, kde-format
 #| msgid ""
 #| "Use this to schedule the transaction for later entry into the ledger."
@@ -20580,7 +20613,7 @@ msgid ""
 "the ledger again."
 msgstr "استخدم هذا لجدولة المعاملة لإدخالها لاحقًا في دفتر الأستاذ."
 
-#: kmymoney/views/ledgerview.cpp:932
+#: kmymoney/views/ledgerview.cpp:933
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -20588,7 +20621,7 @@ msgid ""
 "transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:936
+#: kmymoney/views/ledgerview.cpp:937
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -20596,7 +20629,7 @@ msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "أمتأكّد من حذف المعاملات المحدّدة؟"
 
-#: kmymoney/views/ledgerview.cpp:937
+#: kmymoney/views/ledgerview.cpp:938
 #, fuzzy, kde-format
 #| msgid "Attempt to match similar transactions"
 msgctxt "@title:window"

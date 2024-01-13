@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-09 00:41+0000\n"
+"POT-Creation-Date: 2024-01-13 01:46+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -2285,8 +2285,8 @@ msgid "Please select a parent account."
 msgstr "상위 계좌를 선택하십시오."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:740
-#: kmymoney/dialogs/knewaccountdlg.cpp:896
-#: kmymoney/dialogs/knewaccountdlg.cpp:911
+#: kmymoney/dialogs/knewaccountdlg.cpp:912
+#: kmymoney/dialogs/knewaccountdlg.cpp:927
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:518
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:45
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:80
@@ -2303,8 +2303,39 @@ msgstr ""
 "<b>%1</b> 분류가 이미 존재합니다. 같은 이름으로 두 번째 분류를 만들 수 없습니"
 "다."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:822
-#, kde-format
+#: kmymoney/dialogs/knewaccountdlg.cpp:825
+#, fuzzy, kde-format
+#| msgid ""
+#| "You have selected to suppress the display of unused categories in the "
+#| "KMyMoney configuration dialog. The category you just created will "
+#| "therefore only be shown if it is used. Otherwise, it will be hidden in "
+#| "the accounts/categories view."
+msgctxt "@info"
+msgid ""
+"You have selected to suppress the display of accounts with a zero balance in "
+"the KMyMoney configuration dialog. The account you just created will "
+"therefore only be shown if it is used. Otherwise, it will be hidden in all "
+"accounts views."
+msgstr ""
+"KMyMoney 설정 대화 상자에서 사용하지 않는 분류를 숨기도록 선택했습니다. 따라"
+"서 방금 만든 분류는 사용된 경우에만 표시됩니다. 그렇지 않으면 계좌/분류 보기"
+"에서 숨겨집니다."
+
+#: kmymoney/dialogs/knewaccountdlg.cpp:827
+#, fuzzy, kde-format
+#| msgid "Hide closed accounts"
+msgctxt "@title:window Warning message about hidden account"
+msgid "Hidden accounts"
+msgstr "폐쇄된 계좌 숨기기"
+
+#: kmymoney/dialogs/knewaccountdlg.cpp:835
+#, fuzzy, kde-format
+#| msgid ""
+#| "You have selected to suppress the display of unused categories in the "
+#| "KMyMoney configuration dialog. The category you just created will "
+#| "therefore only be shown if it is used. Otherwise, it will be hidden in "
+#| "the accounts/categories view."
+msgctxt "@info"
 msgid ""
 "You have selected to suppress the display of unused categories in the "
 "KMyMoney configuration dialog. The category you just created will therefore "
@@ -2315,42 +2346,44 @@ msgstr ""
 "서 방금 만든 분류는 사용된 경우에만 표시됩니다. 그렇지 않으면 계좌/분류 보기"
 "에서 숨겨집니다."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:822
-#, kde-format
+#: kmymoney/dialogs/knewaccountdlg.cpp:837
+#, fuzzy, kde-format
+#| msgid "Hidden categories"
+msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "숨겨진 분류"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:936
+#: kmymoney/dialogs/knewaccountdlg.cpp:952
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
 #, kde-format
 msgid "Cannot add institution"
 msgstr "금융기관을 추가할 수 없음"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:973
+#: kmymoney/dialogs/knewaccountdlg.cpp:989
 #, kde-format
 msgctxt "@info:tooltip Hint to provide name"
 msgid "Please provide a name for the new category or account."
 msgstr "새 분류나 계좌의 이름을 입력하십시오."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:978
+#: kmymoney/dialogs/knewaccountdlg.cpp:994
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
 msgstr "계좌나 분류 이름에 %1이(가) 포함될 수 없습니다."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:985
+#: kmymoney/dialogs/knewaccountdlg.cpp:1001
 #, kde-format
 msgctxt "@info:tooltip Hint to provide VAT percentage in range"
 msgid "Please provide a percentage greater than zero and less than 100."
 msgstr "0보다 크고 100보다 작은 백분율을 입력하십시오."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:989
+#: kmymoney/dialogs/knewaccountdlg.cpp:1005
 #, kde-format
 msgctxt "@info:tooltip Hint to provide category to assign VAT"
 msgid "Please select a category for the VAT."
 msgstr "부가가치세 분류를 선택하십시오."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1054
+#: kmymoney/dialogs/knewaccountdlg.cpp:1070
 #, kde-format
 msgid ""
 "<p>The category <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2361,13 +2394,13 @@ msgstr ""
 "는 기본적으로 <b>%2</b>(으)로 설정되지만, 다음 대화 상자에서 변경할 수 있습니"
 "다</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1058
-#: kmymoney/dialogs/knewaccountdlg.cpp:1083
+#: kmymoney/dialogs/knewaccountdlg.cpp:1074
+#: kmymoney/dialogs/knewaccountdlg.cpp:1099
 #, kde-format
 msgid "Create category"
 msgstr "분류 만들기"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1079
+#: kmymoney/dialogs/knewaccountdlg.cpp:1095
 #, kde-format
 msgid ""
 "<p>The account <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2378,13 +2411,13 @@ msgstr ""
 "는 기본적으로 <b>%2</b>(으)로 설정되지만, 다음 대화 상자에서 변경할 수 있습니"
 "다</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1101
+#: kmymoney/dialogs/knewaccountdlg.cpp:1117
 #, kde-format
 msgctxt "@title:window"
 msgid "Create a new Category"
 msgstr "새 분류 만들기"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1106
+#: kmymoney/dialogs/knewaccountdlg.cpp:1122
 #, kde-format
 msgctxt "@title:window"
 msgid "Create a new Account"
@@ -8197,7 +8230,7 @@ msgid "Split transaction"
 msgstr "거래 분할"
 
 #: kmymoney/mymoney/splitmodel.cpp:112
-#: kmymoney/mymoney/storage/journalmodel.cpp:187
+#: kmymoney/mymoney/storage/journalmodel.cpp:190
 #: kmymoney/plugins/views/reports/core/querytable.cpp:993
 #, kde-format
 msgid "*** UNASSIGNED ***"
@@ -8677,12 +8710,12 @@ msgctxt "Unknown investment activity"
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:219
+#: kmymoney/mymoney/storage/journalmodel.cpp:222
 #, kde-format
 msgid "Multiple fee categories"
 msgstr "다중 지출 분류"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:219
+#: kmymoney/mymoney/storage/journalmodel.cpp:222
 #, kde-format
 msgid "Multiple interest categories"
 msgstr "다중 이자 분류"
@@ -18969,69 +19002,69 @@ msgstr "이 계좌가 ​​활성화된 일정에 포함되어 있습니다"
 msgid "This account is still mapped to an online account"
 msgstr "이 계좌가 ​​온라인 계좌에 매핑되어 있습니다"
 
-#: kmymoney/views/kcategoriesview.cpp:154
+#: kmymoney/views/kcategoriesview.cpp:153
 #, kde-format
 msgctxt "Approximate loss"
 msgid "Loss: ~%1"
 msgstr "손실: ~%1"
 
-#: kmymoney/views/kcategoriesview.cpp:155
+#: kmymoney/views/kcategoriesview.cpp:154
 #, kde-format
 msgid "Loss: %1"
 msgstr "손실: %1"
 
-#: kmymoney/views/kcategoriesview.cpp:158
+#: kmymoney/views/kcategoriesview.cpp:157
 #, kde-format
 msgctxt "Approximate profit"
 msgid "Profit: ~%1"
 msgstr "수익: ~%1"
 
-#: kmymoney/views/kcategoriesview.cpp:159
+#: kmymoney/views/kcategoriesview.cpp:158
 #, kde-format
 msgid "Profit: %1"
 msgstr "수익: %1"
 
-#: kmymoney/views/kcategoriesview.cpp:199
+#: kmymoney/views/kcategoriesview.cpp:198
 #, kde-format
 msgid "Edit category '%1'"
 msgstr "분류 '%1' 편집"
 
-#: kmymoney/views/kcategoriesview.cpp:207
+#: kmymoney/views/kcategoriesview.cpp:206
 #, fuzzy, kde-format
 #| msgid "Edit category..."
 msgctxt "Undo action description"
 msgid "Edit category"
 msgstr "분류 편집..."
 
-#: kmymoney/views/kcategoriesview.cpp:221
+#: kmymoney/views/kcategoriesview.cpp:220
 #, kde-format
 msgid "Unable to modify category '%1'. Cause: %2"
 msgstr "분류 '%1'을(를) 수정할 수 없습니다. 이유: %2"
 
-#: kmymoney/views/kcategoriesview.cpp:318
+#: kmymoney/views/kcategoriesview.cpp:317
 #, kde-format
 msgid ""
 "Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3"
 msgstr "<b>%1</b> 분류를 <b>%2</b> 분류와 교환할 수 없습니다. 이유: %3"
 
-#: kmymoney/views/kcategoriesview.cpp:339
+#: kmymoney/views/kcategoriesview.cpp:338
 #, kde-format
 msgid "<qt>Do you really want to delete category <b>%1</b>?</qt>"
 msgstr "<qt><b>%1</b> 분류를 삭제하시겠습니까?</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:340
-#: kmymoney/views/kcategoriesview.cpp:400
+#: kmymoney/views/kcategoriesview.cpp:339
+#: kmymoney/views/kcategoriesview.cpp:399
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete category"
 msgstr "분류 삭제"
 
-#: kmymoney/views/kcategoriesview.cpp:349
+#: kmymoney/views/kcategoriesview.cpp:348
 #, kde-format
 msgid "<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>"
 msgstr "<qt><b>%1</b> 분류를 삭제할 수 없습니다. 이유: %2</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:360
+#: kmymoney/views/kcategoriesview.cpp:359
 #, kde-format
 msgid ""
 "<qt>Do you want to delete category <b>%1</b> with all its sub-categories or "
@@ -19042,17 +19075,17 @@ msgstr ""
 "까? 분류 자체만 삭제하면 모든 하위 분류는 분류 <b>%2</b>의 하위 분류가 됩니"
 "다.</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:366
+#: kmymoney/views/kcategoriesview.cpp:365
 #, kde-format
 msgid "Delete all"
 msgstr "모두 삭제"
 
-#: kmymoney/views/kcategoriesview.cpp:367
+#: kmymoney/views/kcategoriesview.cpp:366
 #, kde-format
 msgid "Just the category"
 msgstr "분류만"
 
-#: kmymoney/views/kcategoriesview.cpp:396
+#: kmymoney/views/kcategoriesview.cpp:395
 #, kde-format
 msgid ""
 "<p>Some sub-categories of category <b>%1</b> cannot be deleted, because they "
@@ -19061,13 +19094,13 @@ msgstr ""
 "<p><b>%1</b> 분류의 일부 하위 분류가 사용 중이므로 삭제할 수 없습니다. 해당 "
 "분류는 <b>%2</b>의 하위 분류가 됩니다. 계속 진행하시겠습니까?</p>"
 
-#: kmymoney/views/kcategoriesview.cpp:422
+#: kmymoney/views/kcategoriesview.cpp:421
 #, kde-format
 msgid ""
 "<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>"
 msgstr "<qt><b>%1</b> 분류의 하위 분류를 삭제할 수 없습니다. 이유: %2</qt>"
 
-#: kmymoney/views/kcategoriesview.cpp:432
+#: kmymoney/views/kcategoriesview.cpp:431
 #, kde-format
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "'%1' 분류를 삭제할 수 없습니다. 이유: %2"
@@ -20298,7 +20331,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "'%1'(으)로 이동"
 
-#: kmymoney/views/ledgerview.cpp:688
+#: kmymoney/views/ledgerview.cpp:689
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -20308,19 +20341,19 @@ msgstr ""
 "다른 보기에서 거래를 편집하고 있습니다. KMyMoney에서는 거래 두 개를 동시에 편"
 "집할 수 없습니다. <a href=\"jumpToEditor\">현재 편집기로 이동</a>"
 
-#: kmymoney/views/ledgerview.cpp:802
+#: kmymoney/views/ledgerview.cpp:803
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "거래에 할당된 분류가 없습니다."
 
-#: kmymoney/views/ledgerview.cpp:809
+#: kmymoney/views/ledgerview.cpp:810
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "거래에 <b>%1</b> 할당이 누락되었습니다."
 
-#: kmymoney/views/ledgerview.cpp:818
+#: kmymoney/views/ledgerview.cpp:819
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip icon description"
 #| msgid "This schedule is overdue. Click on the icon to enter it."
@@ -20328,14 +20361,14 @@ msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "이 일정의 만료 기한이 지났습니다. 아이콘을 클릭하면 편집합니다."
 
-#: kmymoney/views/ledgerview.cpp:824
+#: kmymoney/views/ledgerview.cpp:825
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr ""
 "이 거래는 가져온 거래입니다. 아이콘을 클릭하면 수락한 것으로 표시합니다."
 
-#: kmymoney/views/ledgerview.cpp:829
+#: kmymoney/views/ledgerview.cpp:830
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -20343,31 +20376,31 @@ msgid ""
 msgstr ""
 "이 거래가 일치합니다. 아이콘을 클릭하면 수락하거나 일치를 해제할 수 있습니다."
 
-#: kmymoney/views/ledgerview.cpp:905
+#: kmymoney/views/ledgerview.cpp:906
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "기한이 지난 거래를 입력하지 않습니다."
 
-#: kmymoney/views/ledgerview.cpp:906
+#: kmymoney/views/ledgerview.cpp:907
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "기한이 지난 거래를 입력합니다."
 
-#: kmymoney/views/ledgerview.cpp:909
+#: kmymoney/views/ledgerview.cpp:910
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "기한이 지난 일정을 입력하시겠습니까?"
 
-#: kmymoney/views/ledgerview.cpp:910
+#: kmymoney/views/ledgerview.cpp:911
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "기한이 지난 일정 입력"
 
-#: kmymoney/views/ledgerview.cpp:930
+#: kmymoney/views/ledgerview.cpp:931
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -20377,7 +20410,7 @@ msgstr ""
 "숨겨진(일치하는) 거래를 표시된 거래에서 분리하고 원장에 나중에 다시 입력합니"
 "다."
 
-#: kmymoney/views/ledgerview.cpp:932
+#: kmymoney/views/ledgerview.cpp:933
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -20386,13 +20419,13 @@ msgid ""
 msgstr ""
 "표시된 대로 거래 일치를 수락하고 숨겨진(일치하는) 거래의 데이터를 삭제합니다."
 
-#: kmymoney/views/ledgerview.cpp:936
+#: kmymoney/views/ledgerview.cpp:937
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "일치하는 거래를 수락하거나 일치를 해제하시겠습니까?"
 
-#: kmymoney/views/ledgerview.cpp:937
+#: kmymoney/views/ledgerview.cpp:938
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
@@ -25909,9 +25942,6 @@ msgstr ""
 #~ "용하십시오."
 
 #~ msgid "Do not show closed accounts"
-#~ msgstr "폐쇄된 계좌 숨기기"
-
-#~ msgid "Hide closed accounts"
 #~ msgstr "폐쇄된 계좌 숨기기"
 
 #~ msgid "Unable to add schedule: %1"
