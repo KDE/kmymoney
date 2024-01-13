@@ -67,14 +67,12 @@
 </para>
 
 <para>
-  This will be covered in more detail later on in this handbook.
+  This will be covered in more detail later on in this handbook in the section
+  on <link linkend="details.ledgers.split">split transactions</link>.
 </para>
-<!-- FIXME **** don't forget to make sure this is actually covered, and linked to from
-     here.  Also, I have removed "in setting up accounts for Businesses." and
-     modified the section below, since we explicitly say that KMM is not for
-     business use. -->
 
-<sect2 id="makingmostof.basicaccounting.personalaccounts"><title>Defining the accounts (personal records)</title>
+<sect2 id="makingmostof.basicaccounting.personalaccounts">
+  <title>Defining the accounts (personal records)</title>
 <para>
   Most accounts, or pots, as described above, represent a measure of our
   <quote>Worth</quote>.  The cash and goods represent our <quote>Assets</quote>,

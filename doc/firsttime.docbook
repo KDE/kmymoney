@@ -10,7 +10,7 @@
 </chapterinfo>
 <title>Using &kmymoney; for the first time</title>
 
-<sect1 id="firstime-1"><title>Running &kmymoney; for the first time</title>
+<sect1 id="firstime"><title>Running &kmymoney; for the first time</title>
 <note>
   <para>
     When you run &kmymoney;, it might not look exactly like the screenshots in this
@@ -21,9 +21,7 @@
   </para>
 </note>
 
-</sect1>
-
-<sect1 id="firsttime.mainwindow"><title>The main window</title>
+<sect2 id="firsttime.mainwindow"><title>The main window</title>
 <screenshot>
   <screeninfo>The Main Window</screeninfo>
   <mediaobject>
@@ -48,11 +46,12 @@
 </itemizedlist>
 
 <para>
-  The menu and toolbars provide access to the features of &kmymoney; and allow you to
-  <link linkend="firsttime.newfile">Create a new data file,</link> open an existing data
-  file, or configure how &kmymoney; operates.  The toolbar can be configured to show
-  icons for the operations you use most frequently.  <!-- FIXME: pointer to wherever
-  this is described. -->
+  The menu and toolbar provide access to the features of &kmymoney; and allow you to
+  <link linkend="firsttime.newfile">Create a new data file,</link> open an existing
+  data file, or configure how &kmymoney; operates.  The toolbar can be configured to
+  show icons for the operations you use most frequently.  <!-- I would prefer to use
+  a link for this, but it is not described within this handbook, and the fundamentals
+  link on configuring toolbars seems too generic.  I'm open to suggestions.  -->
 </para>
 
 <para>
@@ -287,17 +286,17 @@
   Remember that some of these may not be present on your system; it depends on how
   your copy of &kmymoney; was configured and built.
 </para>
+</sect2>
 </sect1>
 
 <sect1 id="firsttime.newfile"><title>Creating a new file</title>
 <para>
   &kmymoney; keeps all the data about your finances in a file.  As was stated in
-  <link linkend="makingmostof.basicaccounting.personalaccounts">Defining the
-  accounts (personal records)</link>, you can keep more than one set of
-  accounts, but the data for each will be kept in a separate file, and
-  &kmymoney; can only have one file open at a time.  See the chapter on <link
-  linkend="details.formats">File Formats</link> for more details about
-  &kmymoney;'s data files.
+  <link linkend="makingmostof.basicaccounting.personalaccounts">Defining the accounts
+  (personal records)</link>, you can keep more than one set of accounts, but the data
+  for each will be kept in a separate file, and &kmymoney; can only have one file
+  open at a time.  See the chapter on <link linkend="details.formats">File
+  Formats</link> for more details about &kmymoney;'s data files.
 </para>
 
 <para>
@@ -305,8 +304,9 @@
   &kmymoney; uses additional files to store data regarding configuration settings and
   display preferences.  The exact location of these files depends on your specific
   Operating System or Distribution.
-  <!-- FIXME: we need a section on OS specific issues. -->
 </para>
+<!-- FIXME: do we need a section on OS specific issues?  This is also mentioned in
+     section on migrating KMM data to new PC - is that sufficient?  -->
 
 <para>
   To create a new file you can either select the
@@ -327,7 +327,7 @@
   <screeninfo>Personal Data Page</screeninfo>
   <mediaobject>
     <imageobject>
-      <imagedata fileref="newfile.png" format="PNG" />
+      <imagedata fileref="newfile-1.png" format="PNG" />
     </imageobject>
     <textobject>
       <phrase>Personal Data Page</phrase>
@@ -455,7 +455,7 @@
   <screeninfo>Preference Page</screeninfo>
   <mediaobject>
     <imageobject>
-      <imagedata fileref="newfile-6.png" format="PNG" />
+      <imagedata fileref="newfile-5.png" format="PNG" />
     </imageobject>
     <textobject>
       <phrase>Preference page</phrase>
@@ -469,9 +469,6 @@
   completed the account setup wizard.  Press <guibutton>Next</guibutton> if you are
   done and want to proceed.
 </para>
-
-<!-- FIXME: note the above shot is 6, but should be numbered 5, and the 5 below
-     is the wrong shot. -->
 
 <screenshot>
   <screeninfo>Filename selection Page</screeninfo>
@@ -497,7 +494,6 @@
   <guibutton>Finish</guibutton> and &kmymoney; will create the file for you and open
   it.
 </para>
-
 </sect1>
 
 <sect1 id="firsttime.4"><title>Creating accounts</title>
@@ -530,7 +526,8 @@
         holds all of your accounts that are assets, such as savings and investments.
         The Liability tree holds all of your accounts that represent money you owe,
         such as loans and credit cards.  These and all the other account types are
-        discussed in more detail later in this manual. <!-- FIXME:  reference? -->
+        discussed in more detail in the <link linkend="details.accounts">Accounts
+        Chapter.</link>
       </para>
     </listitem>
   </varlistentry>
@@ -632,21 +629,25 @@
 </para>
 </sect1>
 
-<sect1 id="firsttime.import"><title>Quicken Interchange Format (QIF) Import</title>
+<sect1 id="firsttime.import"><title>Importing financial data from other applications</title>
 <para>
-  If you currently use another financial manager application, &kmymoney; can import
-  much or all of the data from that program, as long as they can be exported or saved
-  in a format &kmymoney; understands. The most common of these is the Quicken
-  Interchange Format (QIF).  Most financial programs can export this format, although
-  the different applications' methods of exporting QIF is not discussed here for
-  brevity.
+  If you currently use another financial manager application, it is very likely that
+  &kmymoney; can import much or all of the data from that program, as long as they
+  can be exported or saved in a format &kmymoney; understands.  The most common of
+  these is the Quicken Interchange Format (QIF).  Most financial programs can export
+  this format, although the different applications' methods of exporting QIF is not
+  discussed here for brevity.
 </para>
 
 <para>
-  A full description of this topic can be found in the <link
+  A full description of importing data in this format can be found in the <link
   linkend="details.impexp.qifimp">QIF Import</link> section.
 </para>
-<!--  FIXME: do we want to mention any other format here?  -->
+
+<para>
+  In addition to importing QIF format files, &kmymoney; can directly open data files
+  used by <link linkend="details.impexp.gnucash">&gnucash;</link> file.
+</para>
 </sect1>
 
 <sect1 id="firsttime.find"><title>Searching for transactions</title>
@@ -791,19 +792,18 @@
 </sect2>
 
 <sect2 id="firsttime.newpc.settings"><title>Moving your settings</title>
-<!-- Need to clarify location of config data.  Some in ~/.config/kmymoney, some in
-     ~/.local/share/kmymoney -->
+<!-- FIXME:  confirm we don't need to worry at all (or even mention) that there
+     are also KMM related files under .local/share or even elsewhere  -->
 <para>
   If you only move your data file to the new machine, as described in the previous
-  section, &kmymoney; will work correctly, but you will have lost any settings you
-  changed from the default on your old machine.  To maintain these settings, you also
-  need to copy your configuration file.  This file is called
-  <filename>kmymoneyrc</filename>. This file will be in a folder with other &kde;
-  application configuration files. On a &Linux; system, this will be in <filename
-  class="directory">$KDEHOME/share/config</filename> where <envar>$KDEHOME</envar> is
-  usually <quote>.config</quote> within your home folder. If you are migrating from a
-  version of &kmymoney; prior to 5.0 or later, the old location of
-  <envar>$KDEHOME</envar> was <filename class="directory">.kde4</filename>.
+  section, &kmymoney; will work correctly, but you will have lost any configuration
+  settings you changed from the default on your old machine.  To maintain these
+  settings, you also need to copy your configuration file.  This file is called
+  <filename>kmymoneyrc</filename>.  The location of this file depends on your
+  operating system and distribution.  On a &Linux; system, this will most likely be
+  <filename class="directory">.config</filename> within your home folder.  If you are
+  migrating from a version of &kmymoney; prior to 5.0, the old location was <filename
+  class="directory">.kde4</filename>.
 </para>
 
 <sect3 id="firsttime.newpc.settings.plugins"><title>Moving plugin settings</title>
