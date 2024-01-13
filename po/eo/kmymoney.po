@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-21 02:26+0000\n"
-"PO-Revision-Date: 2023-11-26 16:25+0100\n"
+"PO-Revision-Date: 2024-01-05 21:07+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
@@ -3185,7 +3185,7 @@ msgstr "Nova Konta Dialogo"
 #, kde-format
 msgctxt "Account general settings"
 msgid "General"
-msgstr "Ĝeneralo"
+msgstr "Ĝenerala"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/dialogs/knewaccountdlg.ui:47
@@ -4342,7 +4342,7 @@ msgstr "Subteno"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:547
 #, kde-format
 msgid "Logging"
-msgstr "Enhavo"
+msgstr "Protokolado"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:555
@@ -4533,7 +4533,7 @@ msgstr ""
 #, kde-format
 msgctxt "General settings"
 msgid "General"
-msgstr "Ĝeneralo"
+msgstr "Ĝenerala"
 
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:44
 #: kmymoney/views/kmymoneyview.cpp:139
@@ -11887,7 +11887,7 @@ msgstr "La icalendar-dosiero en kiu eksporti la horarojn."
 #: kmymoney/plugins/icalendar/export/pluginsettingsdecl.ui:34
 #, kde-format
 msgid "Create reminders"
-msgstr "Kreu memorigilojn"
+msgstr "Krei memorigilojn"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_repeatingReminders)
 #: kmymoney/plugins/icalendar/export/pluginsettingsdecl.ui:70
@@ -13398,7 +13398,7 @@ msgstr "Ĉu vi vere volas forigi profilon '%1'?"
 #, kde-format
 msgctxt "@title QIF profile general information"
 msgid "General"
-msgstr "Ĝeneralo"
+msgstr "Ĝenerala"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2_2_3)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:67
@@ -16094,7 +16094,7 @@ msgstr "Filtriloj"
 #, kde-format
 msgctxt "General tab"
 msgid "General"
-msgstr "Ĝeneralo"
+msgstr "Ĝenerala"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:137
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:163
@@ -19801,7 +19801,7 @@ msgstr ""
 #: kmymoney/views/kpayeesview.ui:92
 #, kde-format
 msgid "Merge"
-msgstr "Mergi"
+msgstr "Kunfandi"
 
 #. i18n: ectx: property (text), widget (QLabel, m_balanceLabel)
 #: kmymoney/views/kpayeesview.ui:144 kmymoney/views/ktagsview.ui:190
@@ -20580,7 +20580,7 @@ msgstr ""
 #: kmymoney/views/newtransactioneditor.cpp:234
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
-msgstr "La kostcentro al kiu ĉi tiu transakcio estu atribuita."
+msgstr "La kostocentro al kiu ĉi tiu transakcio estu atribuita."
 
 #: kmymoney/views/newspliteditor.cpp:124
 #: kmymoney/views/newtransactioneditor.cpp:237
@@ -24494,7 +24494,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title loan general information"
 msgid "General"
-msgstr "Ĝeneralo"
+msgstr "Ĝenerala"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5_3)
 #: kmymoney/wizards/newloanwizard/summarywizardpage.ui:84
