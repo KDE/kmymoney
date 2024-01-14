@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-13 01:46+0000\n"
-"PO-Revision-Date: 2023-12-26 07:58+0100\n"
+"PO-Revision-Date: 2024-01-13 07:39+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.4.1\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2349,12 +2349,7 @@ msgstr ""
 "kategorije z istim imenom."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:825
-#, fuzzy, kde-format
-#| msgid ""
-#| "You have selected to suppress the display of unused categories in the "
-#| "KMyMoney configuration dialog. The category you just created will "
-#| "therefore only be shown if it is used. Otherwise, it will be hidden in "
-#| "the accounts/categories view."
+#, kde-format
 msgctxt "@info"
 msgid ""
 "You have selected to suppress the display of accounts with a zero balance in "
@@ -2362,25 +2357,19 @@ msgid ""
 "therefore only be shown if it is used. Otherwise, it will be hidden in all "
 "accounts views."
 msgstr ""
-"Izbrali ste možnost preprečevanja prikaza neuporabljenih kategorij v "
-"nastavitvenem oknu KMyMoneya. Kategorija, ki ste jo pravkar ustvarili se bo "
-"prikazala se samo, če bo tudi uporabljena. Sicer bo skrita v pogledu računov/"
-"kategorij."
+"V konfiguracijskem pogovornem oknu KMyMoney ste izbrali onemogočanje prikaza "
+"računov z ničelnim stanjem. Račun, ki ste ga pravkar ustvarili, bo torej "
+"prikazan le, če bo uporabljen. V nasprotnem primeru bo skrit v vseh pogledih "
+"računov."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:827
-#, fuzzy, kde-format
-#| msgid "Payment accounts"
+#, kde-format
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
-msgstr "Plačilni računi"
+msgstr "Skriti računi"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:835
-#, fuzzy, kde-format
-#| msgid ""
-#| "You have selected to suppress the display of unused categories in the "
-#| "KMyMoney configuration dialog. The category you just created will "
-#| "therefore only be shown if it is used. Otherwise, it will be hidden in "
-#| "the accounts/categories view."
+#, kde-format
 msgctxt "@info"
 msgid ""
 "You have selected to suppress the display of unused categories in the "
@@ -2388,14 +2377,13 @@ msgid ""
 "only be shown if it is used. Otherwise, it will be hidden in the accounts/"
 "categories view."
 msgstr ""
-"Izbrali ste možnost preprečevanja prikaza neuporabljenih kategorij v "
-"nastavitvenem oknu KMyMoneya. Kategorija, ki ste jo pravkar ustvarili se bo "
-"prikazala se samo, če bo tudi uporabljena. Sicer bo skrita v pogledu računov/"
-"kategorij."
+"Izbrali ste onemogočanje prikaza neuporabljenih kategorij v konfiguracijskem "
+"pogovornem oknu KMyMoney. Kategorija, ki ste jo pravkar ustvarili, bo torej "
+"prikazana le, če bo uporabljena. V nasprotnem primeru bo skrita v pogledu "
+"računov/kategorij."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:837
-#, fuzzy, kde-format
-#| msgid "Hidden categories"
+#, kde-format
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "Skrite kategorije"
