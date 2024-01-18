@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-13 01:46+0000\n"
-"PO-Revision-Date: 2024-01-03 14:53+0100\n"
+"PO-Revision-Date: 2024-01-17 10:09+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -2189,11 +2189,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:827
-#, fuzzy, kde-format
-#| msgid "Payment accounts"
+#, kde-format
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
-msgstr "Contos de pagamento"
+msgstr "Contos celate"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:835
 #, kde-format
@@ -2206,11 +2205,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:837
-#, fuzzy, kde-format
-#| msgid "Expense categories"
+#, kde-format
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
-msgstr "Categorias de expensas"
+msgstr "Categorias celate"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:952
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
@@ -2254,7 +2252,7 @@ msgstr ""
 #: kmymoney/dialogs/knewaccountdlg.cpp:1099
 #, kde-format
 msgid "Create category"
-msgstr ""
+msgstr "Crea categoria"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1095
 #, kde-format
@@ -4716,7 +4714,7 @@ msgstr "Nove categoria..."
 #: kmymoney/kmymoney.cpp:1808
 #, kde-format
 msgid "Edit category..."
-msgstr ""
+msgstr "Modifica Categoria..."
 
 #: kmymoney/kmymoney.cpp:1809
 #, kde-format
@@ -18399,7 +18397,7 @@ msgstr "Profitto: %1"
 #: kmymoney/views/kcategoriesview.cpp:198
 #, kde-format
 msgid "Edit category '%1'"
-msgstr ""
+msgstr "Modifica Categoria '%1'"
 
 #: kmymoney/views/kcategoriesview.cpp:206
 #, kde-format
