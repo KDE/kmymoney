@@ -735,6 +735,7 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
                 resizeEditorRow();
 
                 d->blockSectionResize();
+                d->columnSelector->setColumnSelectionDisabled();
             }
         }
         return rc;
@@ -768,6 +769,7 @@ void LedgerView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint
 
     // and allow the section sizes to be modified again
     d->allowSectionResize();
+    d->columnSelector->setColumnSelectionEnabled();
 
     Q_EMIT aboutToFinishEdit();
 

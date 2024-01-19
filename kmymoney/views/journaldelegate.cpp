@@ -9,10 +9,11 @@
 // QT Includes
 
 #include <QApplication>
-#include <QScrollBar>
-#include <QPainter>
-#include <QDebug>
 #include <QDate>
+#include <QDebug>
+#include <QHeaderView>
+#include <QPainter>
+#include <QScrollBar>
 #include <QSortFilterProxyModel>
 
 // ----------------------------------------------------------------------------
@@ -52,6 +53,7 @@ public:
         : m_editor(nullptr)
         , m_view(nullptr)
         , m_editorRow(-1)
+        , m_editorCol(-1)
         , m_singleLineRole(eMyMoney::Model::SplitPayeeRole)
         , m_lineHeight(-1)
         , m_margin(2)
@@ -283,6 +285,7 @@ public:
     TransactionEditorBase* m_editor;
     LedgerView* m_view;
     int m_editorRow;
+    int m_editorCol;
     eMyMoney::Model::Roles m_singleLineRole;
     int m_lineHeight;
     int m_margin;
@@ -392,6 +395,7 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
         // if we still have an editor here,
         if(d->m_editor) {
             d->m_editorRow = index.row();
+            d->m_editorCol = index.column();
             connect(d->m_editor, &TransactionEditorBase::done, this, &JournalDelegate::endEdit);
             JournalDelegate* that = const_cast<JournalDelegate*>(this);
             Q_EMIT that->sizeHintChanged(index);
@@ -432,7 +436,9 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
     opt.state &= ~QStyle::State_HasFocus;
 
     QAbstractItemView* view = qobject_cast<QAbstractItemView*>(parent());
-    const auto editWidget = (d->m_view) ? d->m_view->indexWidget(index) : nullptr;
+    const auto editCol = (d->m_view) ? d->m_view->horizontalHeader()->logicalIndexAt(0) : 0;
+    const auto editIndex = index.model()->index(index.row(), d->m_editorCol, index.parent());
+    const auto editWidget = (d->m_view) ? d->m_view->indexWidget(editIndex) : nullptr;
 
     // if selected, always show as active, so that the
     // background does not change when the editor is shown
@@ -444,12 +450,15 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
 
     // if the widget has a different size than what we can paint on
     // then we adjust the size of the widget so that the focus frame
-    // can be painted correctly using a WidgetHintFrame
-    if (editWidget) {
-        if (editWidget->size() != opt.rect.size()) {
-            editWidget->resize(opt.rect.size());
+    // can be painted correctly using a WidgetHintFrame. The editor
+    // only uses the first column across the whole width
+    if (editWidget && (index.column() == editCol)) {
+        auto size = editWidget->size();
+        if (size.width() != opt.rect.size().width()) {
+            editWidget->resize(size);
         }
     }
+
     painter->save();
 
     // Background
@@ -457,7 +466,7 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
     const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
     const int lineHeight = opt.fontMetrics.lineSpacing() + 2;
 
-    style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
+    style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, editWidget ? editWidget : opt.widget);
 
     QPalette::ColorGroup cg;
 
@@ -600,7 +609,7 @@ QSize JournalDelegate::sizeHint(const QStyleOptionViewItem& option, const QModel
         // check if we are showing the edit widget
         // const QAbstractItemView *view = qobject_cast<const QAbstractItemView *>(opt.widget);
         if (d->m_view) {
-            QModelIndex editIndex = d->m_view->model()->index(index.row(), 0);
+            QModelIndex editIndex = d->m_view->model()->index(index.row(), d->m_editorCol);
             if(editIndex.isValid()) {
                 QWidget* editor = d->m_view->indexWidget(editIndex);
                 if(editor) {
@@ -646,10 +655,9 @@ void JournalDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionVi
 
     QRect r(option.rect);
     // respect the vertical scrollbar if visible
-    if (option.widget
-            && d->m_view
-            && d->m_view->verticalScrollBar()->isVisible() ) {
-        r.setWidth(option.widget->width() - d->m_view->verticalScrollBar()->width());
+    if (option.widget && d->m_view) {
+        const auto ofs = d->m_view->verticalScrollBar()->isVisible() ? d->m_view->verticalScrollBar()->width() : 0;
+        r.setWidth(option.widget->width() - ofs);
     }
     editor->setGeometry(r);
     editor->update();
@@ -663,6 +671,7 @@ void JournalDelegate::endEdit()
         }
         Q_EMIT closeEditor(d->m_editor, NoHint);
         d->m_editorRow = -1;
+        d->m_editorCol = -1;
         delete d->m_editor;
         d->m_editor = nullptr;
     }
