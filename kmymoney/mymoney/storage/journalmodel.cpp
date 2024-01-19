@@ -149,17 +149,20 @@ struct JournalModel::Private
         // A transaction can have more than 2 splits ...
         const int rows = transaction.splitCount();
         if(rows > 2) {
-            // find the first entry of the transaction
+            // find the first entry of the transaction and keep in 'row'
             QModelIndex idx = index;
-            int row = index.row() - 1;
-            for (; row >= 0; --row) {
-                idx = q->index(row, 0);
-                if (idx.data(eMyMoney::Model::JournalTransactionIdRole).toString() != transaction.id()) {
-                    idx = q->index(row++, 0);
-                    break;
+            int row = index.row();
+            if (row > 0) {
+                for (--row; row >= 0; --row) {
+                    idx = q->index(row, 0);
+                    if (idx.data(eMyMoney::Model::JournalTransactionIdRole).toString() != transaction.id()) {
+                        idx = q->index(row++, 0);
+                        break;
+                    }
                 }
             }
 
+            // collect the counter account(s)
             QString txt, sep;
             const auto endRow = row + rows;
             for (; row < endRow; ++row) {
@@ -907,9 +910,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         QString rc(split.memo());
         if(role == eMyMoney::Model::SplitSingleLineMemoRole) {
             // remove empty lines
-            rc.replace("\n\n", "\n");
+            rc.replace(QStringLiteral("\n\n"), QStringLiteral("\n"));
             // replace '\n' with ", "
-            rc.replace('\n', ", ");
+            rc.replace(QStringLiteral("\n"), QStringLiteral(", "));
         }
         return rc;
     }
@@ -926,9 +929,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
             const auto matchedSplit = d->matchedSplit(split);
             auto rc(matchedSplit.memo());
             // remove empty lines
-            rc.replace("\n\n", "\n");
+            rc.replace(QStringLiteral("\n\n"), QStringLiteral("\n"));
             // replace '\n' with ", "
-            rc.replace('\n', ", ");
+            rc.replace(QStringLiteral("\n"), QStringLiteral(", "));
             return rc;
         }
         return {};

@@ -11,30 +11,30 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QTextCodec>
-#include <QTextStream>
 #include <QFileDialog>
+#include <QPointer>
 #include <QRegularExpression>
 #include <QStandardItem>
-#include <QPointer>
+#include <QTextCodec>
+#include <QTextStream>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KConfigGroup>
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <KConfigGroup>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyfile.h"
+#include "convdate.h"
+#include "csvutil.h"
 #include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "mymoneytransaction.h"
-#include "csvutil.h"
-#include "convdate.h"
-#include "mymoneyenums.h"
 
 const QHash<Profile, QString> CSVImporterCore::m_profileConfPrefix {
     {Profile::Banking, QStringLiteral("Bank")},
@@ -99,13 +99,13 @@ const QString CSVImporterCore::m_confProfileNames = QStringLiteral("ProfileNames
 const QString CSVImporterCore::m_confPriorName = QStringLiteral("Prior");
 const QString CSVImporterCore::m_confMiscName = QStringLiteral("Misc");
 
-CSVImporterCore::CSVImporterCore() :
-    m_profile(0),
-    m_isActionTypeValidated(false)
+CSVImporterCore::CSVImporterCore()
+    : m_convertDate(new ConvertDate)
+    , m_file(new CSVFile)
+    , m_profile(nullptr)
+    , m_isActionTypeValidated(false)
+    , m_sortOrder(OrderUnknown)
 {
-    m_convertDate = new ConvertDate;
-    m_file = new CSVFile;
-
     m_priceFractions << MyMoneyMoney(0.01) << MyMoneyMoney(0.1) << MyMoneyMoney::ONE << MyMoneyMoney(10) << MyMoneyMoney(100);
 
     validateConfigFile();
@@ -939,16 +939,40 @@ bool CSVImporterCore::processBankRow(MyMoneyStatement &st, const BankingProfile 
     }
 
     // process balance field
+    //
+    // The order in which transactions are included may be in ascending
+    // or descending order. That means, the current balance could be in
+    // the first record we process or the last. The following logic takes
+    // care of detecting the order by evaluating the order of the postdate
+    // entry. In case that all transactions are on one day, we cannot
+    // tell which entry to use and leave it at its initial value which
+    // informs the application that no online balance is available.
     col = profile->m_colTypeNum.value(Column::Balance, -1);
     if (col != -1) {
         // prior date than the one we have? Adjust it
         if (!st.m_dateBegin.isValid() || st.m_dateBegin > tr.m_datePosted) {
             st.m_dateBegin = tr.m_datePosted;
         }
-        // later or equal date, adjust it and the closing balance
-        if (!st.m_dateEnd.isValid() || st.m_dateEnd <= tr.m_datePosted) {
+
+        const auto balance = processAmountField(profile, row, col);
+
+        // in case we have no idea, we start with current values
+        if (!st.m_dateEnd.isValid()) {
             st.m_dateEnd = tr.m_datePosted;
-            st.m_closingBalance = processAmountField(profile, row, col);
+            m_firstBalance = balance;
+        }
+
+        // transaction on the same date?
+        if (st.m_dateEnd == tr.m_datePosted) {
+            if (m_sortOrder == OrderAscending) {
+                st.m_closingBalance = balance;
+            }
+        } else if (st.m_dateEnd < tr.m_datePosted) {
+            m_sortOrder = OrderAscending;
+            st.m_closingBalance = balance;
+        } else if (m_sortOrder == OrderUnknown) {
+            m_sortOrder = OrderDescending;
+            st.m_closingBalance = m_firstBalance;
         }
     }
 
@@ -1348,6 +1372,9 @@ QList<int> CSVImporterCore::getNumericalColumns()
         } else {
             columns << m_profile->m_colTypeNum.value(Column::Debit);
             columns << m_profile->m_colTypeNum.value(Column::Credit);
+        }
+        if (m_profile->m_colTypeNum.value(Column::Balance, -1) != -1) {
+            columns << m_profile->m_colTypeNum.value(Column::Balance);
         }
         break;
     case Profile::Investment:

@@ -86,6 +86,26 @@ public:
 
     const QString& configGroupName() const;
 
+    /**
+     * This method allows to suppress the column selection
+     * which may be required in certain scenarios.
+     *
+     * @note By default column selection is enabled
+     *
+     * @sa setColumnSelectionEnabled()
+     */
+    void setColumnSelectionDisabled();
+
+    /**
+     * This method allows to enable the column selection
+     * after it has been disabled.
+     *
+     * @note By default column selection is enabled
+     *
+     * @sa setColumnSelectionDisabled()
+     */
+    void setColumnSelectionEnabled();
+
 protected Q_SLOT:
     void slotColumnsMenu(const QPoint);
     void slotUpdateHeaderState();

@@ -536,8 +536,7 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
 #endif
             QLineEdit::setText(QLatin1String("0"));
         }
-        QLineEdit::keyPressEvent(&newEvent);
-        return;
+        *event = newEvent;
     }
 
     // in case we have not processed anything, we

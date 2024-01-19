@@ -140,10 +140,7 @@ const MyMoneyAccount& Wizard::account()
     d->m_account.setInstitutionId(d->m_institutionPage->institution().id());
     d->m_account.setNumber(d->m_institutionPage->d_func()->ui->m_accountNumber->text());
     d->m_account.setValue("iban", d->m_institutionPage->d_func()->ui->m_iban->text());
-    if (d->m_accountTypePage->d_func()->ui->m_preferredAccount->isChecked())
-        d->m_account.setValue("PreferredAccount", "Yes");
-    else
-        d->m_account.deletePair("PreferredAccount");
+    d->m_account.setValue("PreferredAccount", d->m_accountTypePage->d_func()->ui->m_preferredAccount->isChecked(), false);
 
     d->m_account.setCurrencyId(d->currency().id());
     if (d->m_account.isLoan()) {

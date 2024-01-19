@@ -428,8 +428,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
                     tmpKey = key + MyMoneyFile::AccountSeparator + acc.name();
                     QTreeWidgetItem* subItem = selector->newItem(item, acc.name(), tmpKey, acc.id());
                     subItem->setIcon(0, acc.accountIcon());
-                    if (acc.value("PreferredAccount") == "Yes"
-                            && d->m_typeList.contains(acc.accountType())) {
+                    if (acc.value("PreferredAccount", false) && d->m_typeList.contains(acc.accountType())) {
                         selector->newItem(d->m_favorites, acc.name(), tmpKey, acc.id())->setIcon(0, acc.accountIcon());
                     }
                     if (acc.accountList().count() > 0) {
@@ -546,8 +545,7 @@ int AccountSet::loadSubAccounts(KMyMoneyAccountSelector* selector, QTreeWidgetIt
             ++d->m_count;
             QTreeWidgetItem* item = selector->newItem(parent, acc.name(), tmpKey, acc.id());
             item->setIcon(0, acc.accountIcon());
-            if (acc.value("PreferredAccount") == "Yes"
-                    && d->m_typeList.contains(acc.accountType())) {
+            if (acc.value("PreferredAccount", false) && d->m_typeList.contains(acc.accountType())) {
                 selector->newItem(d->m_favorites, acc.name(), tmpKey, acc.id())->setIcon(0, acc.accountIcon());
             }
             if (acc.accountList().count() > 0) {

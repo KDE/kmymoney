@@ -246,9 +246,9 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
         {
             QString rc(split.memo());
             // remove empty lines
-            rc.replace("\n\n", "\n");
+            rc.replace(QStringLiteral("\n\n"), QStringLiteral("\n"));
             // replace '\n' with ", "
-            rc.replace('\n', ", ");
+            rc.replace(QStringLiteral("\n"), QStringLiteral(", "));
             return rc;
         }
 
@@ -294,9 +294,9 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
         QString rc(split.memo());
         if (role == eMyMoney::Model::SplitSingleLineMemoRole) {
             // remove empty lines
-            rc.replace("\n\n", "\n");
+            rc.replace(QStringLiteral("\n\n"), QStringLiteral("\n"));
             // replace '\n' with ", "
-            rc.replace('\n', ", ");
+            rc.replace(QStringLiteral("\n"), QStringLiteral(", "));
         }
         return rc;
     }

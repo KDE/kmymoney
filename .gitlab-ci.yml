@@ -2,10 +2,16 @@
 include:
   - project: sysadmin/ci-utilities
     file:
+      - /gitlab-templates/json-validation.yml
       - /gitlab-templates/linux.yml
       - /gitlab-templates/freebsd.yml
       - /gitlab-templates/windows.yml
       - /gitlab-templates/craft-appimage.yml
+      - /gitlab-templates/craft-windows-x86-64.yml
+
+# windows install only on demand
+craft_windows_qt515_x86_64:
+  when: manual
 
 # custom builds
 

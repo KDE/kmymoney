@@ -40,10 +40,11 @@ public:
         , tableView(nullptr)
         , headerView(nullptr)
         , model(nullptr)
-          // default is, that column 0 is always visible
-        , alwaysVisibleColumns(QVector<int>({ 0 }))
-    , storageOffset(0)
-    , isInit(false)
+        // default is, that column 0 is always visible
+        , alwaysVisibleColumns(QVector<int>({0}))
+        , storageOffset(0)
+        , isInit(false)
+        , columnSelectionEnabled(true)
     {
     }
 
@@ -141,6 +142,7 @@ public:
 
     int                   storageOffset;
     bool                  isInit;
+    bool columnSelectionEnabled;
 };
 
 
@@ -187,6 +189,10 @@ void ColumnSelector::slotUpdateHeaderState()
 void ColumnSelector::slotColumnsMenu(const QPoint)
 {
     Q_D(ColumnSelector);
+
+    if (!d->columnSelectionEnabled) {
+        return;
+    }
 
     // create actions menu
     QList<QAction *> actions;
@@ -308,4 +314,16 @@ const QString& ColumnSelector::configGroupName() const
 {
     Q_D(const ColumnSelector);
     return d->configGroupName;
+}
+
+void ColumnSelector::setColumnSelectionEnabled()
+{
+    Q_D(ColumnSelector);
+    d->columnSelectionEnabled = true;
+}
+
+void ColumnSelector::setColumnSelectionDisabled()
+{
+    Q_D(ColumnSelector);
+    d->columnSelectionEnabled = false;
 }

@@ -459,6 +459,12 @@ public:
         }
     }
 
+    void resetMaxLineCache()
+    {
+        auto m = q->LedgerView::model();
+        m->setData(QModelIndex(), -1, eMyMoney::Model::JournalSplitMaxLinesCountRole);
+    }
+
     LedgerView* q;
     JournalDelegate* journalDelegate;
     DelegateProxy* delegateProxy;
@@ -598,12 +604,7 @@ void LedgerView::setModel(QAbstractItemModel* model)
     });
 
     connect(model, &QAbstractItemModel::modelReset, this, [&]() {
-        auto m = LedgerView::model();
-        const auto rows = m->rowCount();
-        for (int row = 0; row < rows; ++row) {
-            const auto idx = m->index(row, 0);
-            m->setData(idx, 0, eMyMoney::Model::JournalSplitMaxLinesCountRole);
-        }
+        d->resetMaxLineCache();
     });
 
     horizontalHeader()->setSortIndicatorShown(false);
@@ -734,6 +735,7 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
                 resizeEditorRow();
 
                 d->blockSectionResize();
+                d->columnSelector->setColumnSelectionDisabled();
             }
         }
         return rc;
@@ -767,6 +769,7 @@ void LedgerView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint
 
     // and allow the section sizes to be modified again
     d->allowSectionResize();
+    d->columnSelector->setColumnSelectionEnabled();
 
     Q_EMIT aboutToFinishEdit();
 
@@ -1245,7 +1248,7 @@ void LedgerView::slotSettingsChanged()
     Q_EMIT settingsChanged();
 
     d->setFonts();
-
+    d->resetMaxLineCache();
 #if 0
     // KMyMoneySettings::showGrid()
     // KMyMoneySettings::sortNormalView()
@@ -1648,5 +1651,16 @@ void LedgerView::setSortOrder(LedgerSortOrder sortOrder)
     auto sortModel = qobject_cast<LedgerSortProxyModel*>(model());
     if (sortModel) {
         sortModel->setLedgerSortOrder(sortOrder);
+    }
+}
+
+void LedgerView::setFocus()
+{
+    // in case the editor is open, forward the focus
+    // to the editor. otherwise, we take it.
+    if (d->editor) {
+        d->editor->setFocus();
+    } else {
+        QTableView::setFocus();
     }
 }

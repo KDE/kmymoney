@@ -94,6 +94,9 @@ BankingPage::BankingPage(CSVWizard *dlg, CSVImporterCore *imp)
     connect(ui->m_categoryCol, signal, this, [&](int col) {
         validateSelectedColumn(col, Column::Category);
     });
+    connect(ui->m_balanceCol, signal, this, [&](int col) {
+        validateSelectedColumn(col, Column::Balance);
+    });
 
     connect(ui->m_creditIndicator, &QLineEdit::textEdited, [&](const QString& indicator) {
         m_profile->m_creditIndicator = indicator;

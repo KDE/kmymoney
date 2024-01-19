@@ -1682,7 +1682,7 @@ QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts(const QStringList
             kvpAccountList.append(aid);
 
         accList.insert(aid, MyMoneyAccount(aid, acc));
-        if (acc.value("PreferredAccount") == "Yes") {
+        if (acc.value("PreferredAccount", false)) {
             const_cast <MyMoneyStorageSql*>(this)->d_func()->m_preferred.addAccount(aid);
         }
         d->signalProgress(++progress, 0);

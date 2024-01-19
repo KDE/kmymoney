@@ -114,6 +114,13 @@ void LedgerFilterBase::setMaintainBalances(bool maintainBalances)
 bool LedgerFilterBase::setData(const QModelIndex& index, const QVariant& value, int role)
 {
     Q_D(LedgerFilterBase);
+
+    // check for cache reset which can occur with an invalid index
+    if ((role == eMyMoney::Model::JournalSplitMaxLinesCountRole) && (value.toInt() < 0)) {
+        d->splitMaxLineCount.clear();
+        return true;
+    }
+
     if (index.isValid()) {
         if ((d->maintainBalances) && (role == eMyMoney::Model::JournalBalanceRole)) {
             if (rowCount() >= d->balances.size()) {
@@ -124,14 +131,10 @@ bool LedgerFilterBase::setData(const QModelIndex& index, const QVariant& value, 
 
         } else if (role == eMyMoney::Model::JournalSplitMaxLinesCountRole) {
             const int cacheValue = value.toInt();
-            if (cacheValue == -1) {
-                d->splitMaxLineCount.clear();
-            } else {
-                if (rowCount() >= d->splitMaxLineCount.size()) {
-                    d->splitMaxLineCount.resize(rowCount() + 1);
-                }
-                d->splitMaxLineCount[index.row()] = cacheValue;
+            if (rowCount() >= d->splitMaxLineCount.size()) {
+                d->splitMaxLineCount.resize(rowCount() + 1);
             }
+            d->splitMaxLineCount[index.row()] = cacheValue;
             return true;
         }
         return false;
