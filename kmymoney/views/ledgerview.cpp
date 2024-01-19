@@ -1651,3 +1651,14 @@ void LedgerView::setSortOrder(LedgerSortOrder sortOrder)
         sortModel->setLedgerSortOrder(sortOrder);
     }
 }
+
+void LedgerView::setFocus()
+{
+    // in case the editor is open, forward the focus
+    // to the editor. otherwise, we take it.
+    if (d->editor) {
+        d->editor->setFocus();
+    } else {
+        QTableView::setFocus();
+    }
+}

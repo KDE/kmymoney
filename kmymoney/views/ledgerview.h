@@ -86,6 +86,11 @@ public:
 
     void setSortOrder(LedgerSortOrder sortOrder);
 
+    /**
+     * Overridden for internal reasons
+     */
+    void setFocus();
+
 public Q_SLOTS:
     /**
      * This method scrolls the ledger so that the current item is visible
