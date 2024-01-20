@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-13 01:46+0000\n"
+"POT-Creation-Date: 2024-01-20 01:36+0000\n"
 "PO-Revision-Date: 2023-07-13 00:39+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -6578,7 +6578,7 @@ msgid "Last Price Update"
 msgstr "Última Actualização do Preço"
 
 #: kmymoney/models/equitiesmodel.cpp:540
-#: kmymoney/widgets/columnselector.cpp:215
+#: kmymoney/widgets/columnselector.cpp:221
 #, kde-format
 msgid "Displayed columns"
 msgstr "Colunas visíveis"
@@ -19331,13 +19331,13 @@ msgstr "Aceitar"
 msgid "Activity"
 msgstr "Actividade"
 
-#: kmymoney/views/journaldelegate.cpp:87
+#: kmymoney/views/journaldelegate.cpp:89
 #, kde-format
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Memorando vazio"
 
-#: kmymoney/views/journaldelegate.cpp:340
+#: kmymoney/views/journaldelegate.cpp:343
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
@@ -20850,31 +20850,31 @@ msgstr ""
 "edição de duas transacções em paralelo. <a href=\"jumpToEditor\">Ir para o "
 "editor actual</a>"
 
-#: kmymoney/views/ledgerview.cpp:803
+#: kmymoney/views/ledgerview.cpp:805
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Falta atribuir uma categoria para a transacção."
 
-#: kmymoney/views/ledgerview.cpp:810
+#: kmymoney/views/ledgerview.cpp:812
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Falta atribuir o <b>%1</b> para a transacção."
 
-#: kmymoney/views/ledgerview.cpp:819
+#: kmymoney/views/ledgerview.cpp:821
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "Este agendamento já passou em %1. Carregue no ícone para o introduzir."
 
-#: kmymoney/views/ledgerview.cpp:825
+#: kmymoney/views/ledgerview.cpp:827
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "Esta transacção está importada. Carregue no ícone para a aceitar."
 
-#: kmymoney/views/ledgerview.cpp:830
+#: kmymoney/views/ledgerview.cpp:832
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -20883,31 +20883,31 @@ msgstr ""
 "Esta transacção tem correspondência. Carregue no ícone para a aceitar ou "
 "para remover a correspondência."
 
-#: kmymoney/views/ledgerview.cpp:906
+#: kmymoney/views/ledgerview.cpp:908
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Não introduzir a transacção de agendamento ultrapassado."
 
-#: kmymoney/views/ledgerview.cpp:907
+#: kmymoney/views/ledgerview.cpp:909
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Indique a transacção de agendamento ultrapassado."
 
-#: kmymoney/views/ledgerview.cpp:910
+#: kmymoney/views/ledgerview.cpp:912
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Deseja introduzir agora o item de agendamento ultrapassado?"
 
-#: kmymoney/views/ledgerview.cpp:911
+#: kmymoney/views/ledgerview.cpp:913
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Inserir um agendamento ultrapassado"
 
-#: kmymoney/views/ledgerview.cpp:931
+#: kmymoney/views/ledgerview.cpp:933
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -20917,7 +20917,7 @@ msgstr ""
 "Dissociar a transacção escondida (correspondente) da visível e introduzi-la "
 "no livro de registos de novo."
 
-#: kmymoney/views/ledgerview.cpp:933
+#: kmymoney/views/ledgerview.cpp:935
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -20927,13 +20927,13 @@ msgstr ""
 "Aceita a correspondência como visível e remove os dados da transacção "
 "escondida (correspondente)."
 
-#: kmymoney/views/ledgerview.cpp:937
+#: kmymoney/views/ledgerview.cpp:939
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Deseja aceitar ou dissociar agora a transacção correspondente?"
 
-#: kmymoney/views/ledgerview.cpp:938
+#: kmymoney/views/ledgerview.cpp:940
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
