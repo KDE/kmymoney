@@ -5,7 +5,7 @@
     <author> &Roger.Lum; &Roger.Lum.mail; </author>
     <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2018-08-20</date>
+  <date>2024-01-18</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 <title>Institutions</title>
@@ -80,10 +80,11 @@
     <listitem>
       <para>
         The <acronym><ulink
-        url="https://en.wikipedia.org/wiki/International_Bank_Account_Number">IBAN</ulink></acronym>
-        (International Bank Account Number) is shown if there is a value entered in
-        the appropriate field on the account information dialog.
-        <!-- FIXME: is it used at all by KMM?  -->
+        url="https://en.wikipedia.org/wiki/International_Bank_Account_Number"
+        >IBAN</ulink> </acronym> (International Bank Account Number) is shown if
+        there is a value entered in the appropriate field on the account information
+        dialog.
+        <!-- FIXME: where is this actually used?  -->
       </para>
     </listitem>
   </varlistentry>
@@ -108,7 +109,7 @@
         url="https://en.wikipedia.org/wiki/ISO_9362">SWIFT/BIC</ulink></acronym>
         (Society for Worldwide Interbank Financial Telecommunication/Business
         Identifier Code)
-        <!-- FIXME: is it used at all by KMM?  -->
+        <!-- FIXME: where is this actually used?  -->
       </para>
     </listitem>
   </varlistentry>
@@ -172,45 +173,15 @@
   depend on the country your bank is in.
 </para>
 </sect2>
-</sect1>
 
-<sect1 id="details.institutions.account"><title>Account Options</title>
+<sect2><title>Account Options</title>
 <para>
-  The options just discussed refer to the institutions listed in the Institutions
+  The options discussed above refer to the institutions listed in the Institutions
   View.  Most of the rows in this view are accounts.  Right-clicking an account name
-  brings up an Account Options menu.  The entries and details for this menu will be
-  discussed in the following <link linkend="details.accounts">Accounts</link>
-  section.
+  brings up an Account Options menu.  The entries and details for this menu are
+  discussed at the end of the <link linkend="details.accounts.options">Accounts
+  Chapter</link>.
 </para>
-
-<!-- FIXME: Leaving here for now, as this account options menu is NOT included in the
-     accounts chapter -->
-<para>
-  Selecting <guimenuitem>New account...</guimenuitem> steps you through the new
-  account process. Selecting <guimenuitem>Open Ledger</guimenuitem> brings you
-  directly to the Ledgers View or Investments View, depending on the account
-  type. Simply double-clicking an account name also opens the account. Selecting
-  <guimenuitem>Edit account</guimenuitem> brings up a window allowing you to
-  change an account's name, start date, associated banking institution, and
-  parent account. Deleting an account is only possible if there are no
-  transactions associated with that account, and the account is not referred to
-  in any scheduled transaction.  Selecting
-  <guimenuitem>Reconcile...</guimenuitem> opens up the Reconcile Wizard, which
-  steps you through the process of comparing your account statement to your
-  electronic entries. More details, as well as information about the other
-  options, are presented in the appropriate sections of this manual.
-</para>
-
-<screenshot>
-  <screeninfo>account options sub-menu</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="account_options.png" format="PNG" />
-    </imageobject>
-    <textobject>
-      <phrase>account options sub-menu</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
+</sect2>
 </sect1>
 </chapter>

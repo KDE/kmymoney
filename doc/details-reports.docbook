@@ -49,7 +49,7 @@
 </para>
 </sect2>
 
-<sect2><title>Transactions</title>
+<sect2 id="details.reports.transaction"><title>Transactions</title>
 <para>
   This section includes reports that list individual transactions.  This is the
   best way to print your account register for a specific period of time.  The

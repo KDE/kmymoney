@@ -299,7 +299,7 @@
     </menuchoice></term>
     <listitem>
       <para>
-        Shows all accounts in the views, including closed accounts and accountw with
+        Shows all accounts in the views, including closed accounts and accounts with
         zero balance.
       </para>
     </listitem>

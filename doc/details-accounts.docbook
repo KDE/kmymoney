@@ -6,7 +6,7 @@
     <author> &Roger.Lum; &Roger.Lum.mail; </author>
     <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2023-08-30</date>
+  <date>2024-01-18</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 
@@ -964,7 +964,6 @@
                 </para>
               </listitem>
             </itemizedlist>
-            
           </listitem>
         </varlistentry>
       </variablelist>
@@ -973,7 +972,7 @@
 </variablelist>
 </sect1>
 
-<sect1 id="details.accounts.delete"><title>Deleting accounts</title>
+<sect1 id="details.accounts.delete"><title>Deleting and Closing Accounts</title>
 <para>
   An account can only be deleted if it has no transactions in it, and is not referred
   to by any other item in the data file.  In general, this means you first need to
@@ -1003,6 +1002,122 @@
   In some cases, you will be able to select <guimenuitem>Delete
   account...</guimenuitem>, but will get a popup stating why &kmymoney; cannot delete
   the account.
+</para>
+
+<para>
+  Deleting an Account completely removes all data related to that account from your
+  data file.  Howevr, there may be cases where you have closed an account at the
+  bank, and although you do not want to see it in your daily use of &kmymoney; you
+  wnat to keep the data for use in historical reports, you can select
+  <guimenu>Account</guimenu><guimenuitem>Close account</guimenuitem> or right-click
+  the name in the Accounts View and select <guimenuitem>Close
+  account...</guimenuitem> from the popup menu.  This will mark the account as
+  closed, and it's visibility will depend on the setting of <link
+  linkend="reference.menus.view">Show all accounts</link>.  Note that to close an
+  account, it must have a zero balance, but it can still contain transactions.
+</para>
+
+<para>
+  It is also possible to re-open a closed account.  This is most commonly necessary
+  if you have closed an account, but find you did so before actually entering all
+  transactions for the account, such as a final interest payment or dividend for an
+  investment account.  In this case, you can select <guimenu>Account</guimenu>
+  <guimenuitem>Reopen account</guimenuitem> or right-click the name in the Accounts
+  View and select <guimenuitem>Reopen account</guimenuitem> from the popup menu.
+</para>
+</sect1>
+
+<sect1 id="details.accounts.options"><title>Account Options</title>
+<para>
+  Right clicking on an Account in either the Institiutions View or the Accounts View
+  will bring up the Accounts Options.  You can also just click the
+  <guimenu>Account</guimenu> menu.
+</para>
+
+<screenshot>
+  <screeninfo>account options sub-menu</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="account_options.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>account options sub-menu</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para>
+  Note that each of the listed menu options may be enabled or disabled depending on
+  the particular account selected.
+</para>
+
+<para>
+  Selecting <guimenuitem>New account...</guimenuitem> steps you through the <link
+  linkend="details.accounts.create">Account creation process</link>.
+</para>
+
+<para>
+  Selecting <guimenuitem>New Category...</guimenuitem> steps you through the <link
+  linkend="details.categories.create">Category creation process</link>.
+</para>
+
+<para>
+  Selecting <guimenuitem>Open Ledger</guimenuitem> brings you directly to the <link
+  linkend="details.ledgers.view">Ledgers View</link> or the <link
+  linkend="details.investments.view">Investments View</link>, depending on the
+  account type.
+</para>
+
+<para>
+  Selecting <guimenuitem>Edit account...</guimenuitem> brings up a window allowing
+  you to <link linkend="details.accounts.edit">edit various aspects of the
+  account</link>.
+</para>
+
+<para>
+  Selecting <guimenuitem>Deleting account...</guimenuitem> deletes the selected
+  account, but only if certain criteria are met, as described <link
+  linkend="details.accounts.delete">here</link>.  Otherwise, this item is disabled.
+</para>
+
+<para>
+  Selecting <guimenuitem>Reconcile...</guimenuitem> opens up the <link
+  linkend="details.reconcile.wizard">Reconciliation Wizard</link>.
+  <guimenuitem>Postpone</guimenuitem> and <guimenuitem>Finish</guimenuitem> are also
+  described in the same section.
+</para>
+
+<para>
+  Selecting <guimenuitem>Transaction Report</guimenuitem> is onlyl enabled for a
+  limited selection of Accounts, in which case it opens a <link
+  linkend="details.reports.transaction">Transaction Report</link> for the selected
+  account, showing transactions YTD.
+</para>
+
+<para>
+  Selecting <guimenuitem>Close account</guimenuitem> closes the selected account, as
+  long as certain criteria are met, as described <link
+  linkend="details.accounts.delete">here</link>.  <guimenuitem>Reopen
+  account</guimenuitem> is described in the same section.
+</para>
+
+<para>
+  Selecting <guimenuitem>Map account...</guimenuitem> and <guimenuitem>Unmap
+  account...</guimenuitem> allows you to associate an account with an online account
+  and to remove the association.  Selecting <guimenuitem>Update
+  account...</guimenuitem> fetches transaction data from the online source for an
+  account which has alreay been mapped.  In addition, selecting <guimenuitem>Update
+  all accounts...</guimenuitem>, which only appears on the main
+  <guimenu>Account</guimenu> menu, updates all mapped accounts.  These are all
+  described in the <link linkend="details.impexp">Importing and Exporting
+  Chapter.</link>
+</para>
+
+<para>
+  Selecting <guimenuitem>New investment...</guimenuitem>, which only appears on the
+  context menu (by right-clicking an account in the Investments View or Accounts
+  View, brings up the <link linkend="details.investments.newinvestmentwizard">New
+  Investment Wizard</link>.
 </para>
 </sect1>
 </chapter>
