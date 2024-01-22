@@ -115,21 +115,21 @@ void MyMoneyQifWriter::writeAccountEntry(QTextStream& s, const QString& accountI
         s << "P" << m_qifProfile.openingBalanceText() << Qt::endl;
         s << "L";
         if (m_qifProfile.accountDelimiter().length())
-            s << m_qifProfile.accountDelimiter()[0];
+            s << m_qifProfile.accountDelimiter().at(0);
         s << account.name();
         if (m_qifProfile.accountDelimiter().length() > 1)
-            s << m_qifProfile.accountDelimiter()[1];
+            s << m_qifProfile.accountDelimiter().at(1);
         s << Qt::endl;
         s << "^" << Qt::endl;
 
         QList<MyMoneyTransaction>::ConstIterator it;
-        signalProgress(0, list.count());
+        Q_EMIT signalProgress(0, list.count());
         int count = 0;
         for (it = list.constBegin(); it != list.constEnd(); ++it) {
             // don't include the openingBalanceTransaction again
             if ((*it).id() != openingBalanceTransactionId)
                 writeTransactionEntry(s, *it, accountId);
-            signalProgress(++count, 0);
+            Q_EMIT signalProgress(++count, 0);
         }
     }
 }
@@ -214,8 +214,8 @@ void MyMoneyQifWriter::writeTransactionEntry(QTextStream &s, const MyMoneyTransa
         MyMoneyAccount acc = file->account(sp.accountId());
         if (acc.accountGroup() != eMyMoney::Account::Type::Income
                 && acc.accountGroup() != eMyMoney::Account::Type::Expense) {
-            s << "L" << m_qifProfile.accountDelimiter()[0] << MyMoneyFile::instance()->accountToCategory(sp.accountId()) << m_qifProfile.accountDelimiter()[1]
-              << Qt::endl;
+            s << "L" << m_qifProfile.accountDelimiter().at(0) << MyMoneyFile::instance()->accountToCategory(sp.accountId())
+              << m_qifProfile.accountDelimiter().at(1) << Qt::endl;
         } else {
             s << "L" << file->accountToCategory(sp.accountId()) << Qt::endl;
         }
@@ -239,9 +239,7 @@ void MyMoneyQifWriter::writeSplitEntry(QTextStream& s, const MyMoneySplit& split
     MyMoneyAccount acc = file->account(split.accountId());
     if (acc.accountGroup() != eMyMoney::Account::Type::Income
             && acc.accountGroup() != eMyMoney::Account::Type::Expense) {
-        s << m_qifProfile.accountDelimiter()[0]
-          << file->accountToCategory(split.accountId())
-          << m_qifProfile.accountDelimiter()[1];
+        s << m_qifProfile.accountDelimiter().at(0) << file->accountToCategory(split.accountId()) << m_qifProfile.accountDelimiter().at(1);
     } else {
         s << file->accountToCategory(split.accountId());
     }
@@ -267,11 +265,11 @@ void MyMoneyQifWriter::extractInvestmentEntries(QTextStream &s, const QString& a
         QList<MyMoneyTransaction> list;
         file->transactionList(list, filter);
         QList<MyMoneyTransaction>::ConstIterator it;
-        signalProgress(0, list.count());
+        Q_EMIT signalProgress(0, list.count());
         int count = 0;
         for (it = list.constBegin(); it != list.constEnd(); ++it) {
             writeInvestmentEntry(s, *it, ++count);
-            signalProgress(count, 0);
+            Q_EMIT signalProgress(count, 0);
         }
     }
 }
@@ -422,7 +420,7 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
         //
         //  Add account - including its hierarchy.
         //
-        s += 'L' + m_qifProfile.accountDelimiter()[0] + file->accountToCategory(chkAccntId) + m_qifProfile.accountDelimiter()[1] + '\n';
+        s += 'L' + m_qifProfile.accountDelimiter().at(0) + file->accountToCategory(chkAccntId) + m_qifProfile.accountDelimiter().at(1) + '\n';
     }
     stream << s << '^' << '\n';
 }

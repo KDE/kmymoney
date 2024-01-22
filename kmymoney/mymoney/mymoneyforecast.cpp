@@ -267,8 +267,9 @@ public:
 
         QList<MyMoneyTransaction> list;
         file->transactionList(list, filter);
-        for (const auto& transaction : list) {
-            for (const auto& split : transaction.splits()) {
+        for (const auto& transaction : qAsConst(list)) {
+            const auto splits = transaction.splits();
+            for (const auto& split : qAsConst(splits)) {
                 if (!split.shares().isZero()) {
                     auto acc = file->account(split.accountId());
                     if (q->isForecastAccount(acc)) {
@@ -633,7 +634,7 @@ public:
 
         //Calculate account trends
         QSet<QString>::ConstIterator it_n;
-        for (it_n = m_forecastAccounts.begin(); it_n != m_forecastAccounts.end(); ++it_n) {
+        for (it_n = m_forecastAccounts.constBegin(); it_n != m_forecastAccounts.constEnd(); ++it_n) {
             auto acc = file->account(*it_n);
             m_accountTrendList[acc.id()][0] = MyMoneyMoney(); // for today, the trend is 0
 
@@ -735,8 +736,9 @@ public:
         //Check past transactions
         QList<MyMoneyTransaction> list;
         file->transactionList(list, filter);
-        for (const auto& transaction : list) {
-            for (const auto& split : transaction.splits()) {
+        for (const auto& transaction : qAsConst(list)) {
+            const auto splits = transaction.splits();
+            for (const auto& split : qAsConst(splits)) {
                 if (!split.shares().isZero()) {
                     auto acc = file->account(split.accountId());
 
@@ -773,7 +775,7 @@ public:
 
         //calculate running sum
         QSet<QString>::ConstIterator it_n;
-        for (it_n = m_forecastAccounts.begin(); it_n != m_forecastAccounts.end(); ++it_n) {
+        for (it_n = m_forecastAccounts.constBegin(); it_n != m_forecastAccounts.constEnd(); ++it_n) {
             auto acc = file->account(*it_n);
             m_accountListPast[acc.id()][q->historyStartDate().addDays(-1)] = file->balance(acc.id(), q->historyStartDate().addDays(-1));
             for (QDate it_date = q->historyStartDate(); it_date <= q->historyEndDate();) {
@@ -783,7 +785,7 @@ public:
         }
 
         //adjust value of investments to deep currency
-        for (it_n = m_forecastAccounts.begin(); it_n != m_forecastAccounts.end(); ++it_n) {
+        for (it_n = m_forecastAccounts.constBegin(); it_n != m_forecastAccounts.constEnd(); ++it_n) {
             auto acc = file->account(*it_n);
 
             if (acc.isInvest()) {
@@ -1125,8 +1127,9 @@ MyMoneyMoney MyMoneyForecast::calculateAccountTrend(const MyMoneyAccount& acc, q
     //add all transactions for that account
     QList<MyMoneyTransaction> list;
     file->transactionList(list, filter);
-    for (const auto& transaction : list) {
-        for (const auto& split : transaction.splits()) {
+    for (const auto& transaction : qAsConst(list)) {
+        const auto splits = transaction.splits();
+        for (const auto& split : qAsConst(splits)) {
             if (!split.shares().isZero()) {
                 if (acc.id() == split.accountId()) netIncome += split.value();
             }

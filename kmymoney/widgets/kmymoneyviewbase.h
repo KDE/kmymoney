@@ -95,8 +95,8 @@ public:
 
 Q_SIGNALS:
     // these signals are send to application logic
-    void requestSelectionChange(const SelectedObjects& selection) const;
-    void requestCustomContextMenu(eMenu::Menu type, const QPoint& pos) const;
+    void requestSelectionChange(const SelectedObjects& selection);
+    void requestCustomContextMenu(eMenu::Menu type, const QPoint& pos);
     void requestActionTrigger(eMenu::Action action);
 
     void viewStateChanged(bool enabled);

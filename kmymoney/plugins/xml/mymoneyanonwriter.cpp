@@ -227,9 +227,10 @@ MyMoneyTransaction MyMoneyAnonWriterPrivate::fakeTransaction(const MyMoneyTransa
     anonTransaction.setBankID(hideString(transaction.bankID()));
 
     // hide split data
-    for (const auto& split : transaction.splits()) {
+    const auto splits = transaction.splits();
+    for (const auto& split : qAsConst(splits)) {
         MyMoneySplit s = split;
-        s.setMemo(QString("%1/%2").arg(anonTransaction.id()).arg(s.id()));
+        s.setMemo(QString("%1/%2").arg(anonTransaction.id(), s.id()));
 
         if (s.value() != MyMoneyMoney::autoCalc) {
             s.setValue((s.value() * m_factor));
@@ -347,8 +348,8 @@ void MyMoneyAnonWriterPrivate::writePayee(const MyMoneyPayee& payee, QXmlStreamW
     bool ignoreCase;
     QStringList keys;
     auto matchType = anonPayee.matchData(ignoreCase, keys);
-    const QRegularExpression expChar("[A-Za-z]");
-    const QRegularExpression expNum("[0-9]");
+    static const QRegularExpression expChar("[A-Za-z]");
+    static const QRegularExpression expNum("[0-9]");
     anonPayee.setMatchData(matchType, ignoreCase, keys.join(";").replace(expChar, "x").replace(expNum, "#").split(';'));
 
     /// @todo anonymize: data from plugins cannot be estranged, yet.
@@ -415,7 +416,7 @@ void MyMoneyAnonWriterPrivate::writeAccount(const MyMoneyAccount& account)
     if (isBrokerageAccount) {
         // search the name of the corresponding investment account
         // and setup the name according to the rule of brokerage accounts
-        for (const auto& acc : m_accountList) {
+        for (const auto& acc : qAsConst(m_accountList)) {
             if (acc.accountType() == eMyMoney::Account::Type::Investment && account.name() == i18n("%1 (Brokerage)", acc.name())) {
                 newAccount.setName(i18n("%1 (Brokerage)", acc.id()));
                 break;

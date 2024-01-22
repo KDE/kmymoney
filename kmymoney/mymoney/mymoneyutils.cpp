@@ -110,12 +110,13 @@ QString MyMoneyUtils::QStringEmpty(const QString& val)
 
 unsigned long MyMoneyUtils::extractId(const QString& txt)
 {
+    static const QRegularExpression digitRegex("\\d+");
     int pos;
     unsigned long rc = 0;
 
-    pos = txt.indexOf(QRegularExpression("\\d+"));
+    pos = txt.indexOf(digitRegex);
     if (pos != -1) {
-        rc = txt.mid(pos).toInt();
+        rc = txt.midRef(pos).toInt();
     }
     return rc;
 }
@@ -162,45 +163,45 @@ void MyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, con
     }
 }
 
-static QString dateTimeFormat;
-static QString timeFormat;
-static QString dateFormat;
+Q_GLOBAL_STATIC(QString, dateTimeFormat);
+Q_GLOBAL_STATIC(QString, timeFormat);
+Q_GLOBAL_STATIC(QString, dateFormat);
 
 QString MyMoneyUtils::formatDateTime(const QDateTime& dt)
 {
-    if (dateTimeFormat.isEmpty()) {
-        dateTimeFormat = QLocale().dateTimeFormat(QLocale::ShortFormat);
-        if (!dateTimeFormat.contains(QLatin1String("yyyy")) && dateTimeFormat.contains(QLatin1String("yy"))) {
-            dateTimeFormat.replace(QLatin1String("yy"), QLatin1String("yyyy"));
+    if ((*dateTimeFormat).isEmpty()) {
+        *dateTimeFormat = QLocale().dateTimeFormat(QLocale::ShortFormat);
+        if (!(*dateTimeFormat).contains(QLatin1String("yyyy")) && (*dateTimeFormat).contains(QLatin1String("yy"))) {
+            (*dateTimeFormat).replace(QLatin1String("yy"), QLatin1String("yyyy"));
         }
     }
-    return dt.toString(dateTimeFormat);
+    return dt.toString(*dateTimeFormat);
 }
 
 QString MyMoneyUtils::formatTime(const QTime& time)
 {
-    if (timeFormat.isEmpty()) {
-        timeFormat = QLocale().timeFormat(QLocale::LongFormat);
+    if ((*timeFormat).isEmpty()) {
+        *timeFormat = QLocale().timeFormat(QLocale::LongFormat);
     }
-    return time.toString(timeFormat);
+    return time.toString(*timeFormat);
 }
 
 QString MyMoneyUtils::formatDate(const QDate& date, QLocale::FormatType formatType)
 {
-    if (dateFormat.isEmpty()) {
-        dateFormat = QLocale().dateFormat(formatType);
-        if (!dateFormat.contains(QLatin1String("yyyy")) && dateFormat.contains(QLatin1String("yy"))) {
-            dateFormat.replace(QLatin1String("yy"), QLatin1String("yyyy"));
+    if ((*dateFormat).isEmpty()) {
+        *dateFormat = QLocale().dateFormat(formatType);
+        if (!(*dateFormat).contains(QLatin1String("yyyy")) && (*dateFormat).contains(QLatin1String("yy"))) {
+            (*dateFormat).replace(QLatin1String("yy"), QLatin1String("yyyy"));
         }
     }
-    return date.toString(dateFormat);
+    return date.toString(*dateFormat);
 }
 
 void MyMoneyUtils::clearFormatCaches()
 {
-    dateTimeFormat.clear();
-    timeFormat.clear();
-    dateFormat.clear();
+    (*dateTimeFormat).clear();
+    (*timeFormat).clear();
+    (*dateFormat).clear();
 }
 
 QString MyMoneyUtils::paymentMethodToString(eMyMoney::Schedule::PaymentType paymentType)
@@ -225,7 +226,8 @@ modifyTransactionWarnLevel_t MyMoneyUtils::transactionWarnLevel(const QStringLis
                 modifyTransactionWarnLevel_t rc = NoWarning;
                 try {
                     const auto journalEntry = journalModel->itemByIndex(idx);
-                    for (const auto& split : journalEntry.transaction().splits()) {
+                    const auto splits = journalEntry.transaction().splits();
+                    for (const auto& split : qAsConst(splits)) {
                         auto acc = file->account(split.accountId());
                         if (acc.isClosed())
                             rc = OneAccountClosed;

@@ -112,14 +112,14 @@ KTagContainer::KTagContainer(QWidget* parent)
     d->m_idFilter.data()->setSortLocaleAware(true);
     d->m_idFilter.data()->sort(0);
 
-    connect(d->m_tagCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int row) {
+    connect(d->m_tagCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int row) {
         Q_D(KTagContainer);
         if (!d->m_skipSelection) {
             d->addTagWidget(row);
         }
     });
 
-    connect(d->m_tagCombo, QOverload<int>::of(&QComboBox::activated), [=](int row) {
+    connect(d->m_tagCombo, QOverload<int>::of(&QComboBox::activated), this, [=](int row) {
         Q_D(KTagContainer);
         if (d->m_selectAfterFocusOut) {
             d->addTagWidget(row);

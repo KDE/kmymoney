@@ -750,7 +750,8 @@ public:
         if (forecast.isForecastAccount(acc))
             return true;
 
-        for (const auto& sAccount : acc.accountList()) {
+        const auto subAccountList = acc.accountList();
+        for (const auto& sAccount : qAsConst(subAccountList)) {
             auto account = file->account(sAccount);
             if (includeAccount(forecast, account))
                 return true;

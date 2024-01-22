@@ -37,7 +37,7 @@ public:
     QString nextSplitID()
     {
         int lastIdUsed(0);
-        for (const auto& split : m_splits) {
+        for (const auto& split : qAsConst(m_splits)) {
             const int id = split.id().midRef(1).toInt();
             if (id > lastIdUsed) {
                 lastIdUsed = id;
@@ -50,7 +50,7 @@ public:
     void collectReferencedObjects() override
     {
         m_referencedObjects.insert(m_commodity);
-        for (const auto& split : m_splits) {
+        for (const auto& split : qAsConst(m_splits)) {
             m_referencedObjects.unite(split.referencedObjects());
         }
     }

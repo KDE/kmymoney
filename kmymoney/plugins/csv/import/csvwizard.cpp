@@ -704,9 +704,10 @@ void SeparatorPage::initializeEncodingCombobox()
 
     QList<QTextCodec *>   codecs;
     QMap<QString, QTextCodec *> codecMap;
-    const QRegularExpression iso8859RegExp(QLatin1String("ISO[- ]8859-([0-9]+).*"));
+    static const QRegularExpression iso8859RegExp(QLatin1String("ISO[- ]8859-([0-9]+).*"));
 
-    for (const auto& mib : QTextCodec::availableMibs()) {
+    const auto availableMibs = QTextCodec::availableMibs();
+    for (const auto& mib : qAsConst(availableMibs)) {
         QTextCodec *codec = QTextCodec::codecForMib(mib);
 
         QString sortKey = codec->name().toUpper();
@@ -731,7 +732,7 @@ void SeparatorPage::initializeEncodingCombobox()
     }
     codecs = codecMap.values();
 
-    for (const auto codec : codecs)
+    for (const auto codec : qAsConst(codecs))
         ui->m_encoding->addItem(codec->name(), codec->mibEnum());
 }
 

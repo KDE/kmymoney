@@ -74,7 +74,7 @@ bool KSelectDatabaseDlg::checkDrivers()
     bool driverSupported = false;
     while (it != list.end()) {
         QString dname = *it;
-        if (map.keys().contains(dname)) { // only keep if driver is supported
+        if (map.contains(dname)) { // only keep if driver is supported
             m_widget->databaseTypeCombo->addItem(map[dname], dname);
             if (driverName == dname) {
                 driverSupported = true;

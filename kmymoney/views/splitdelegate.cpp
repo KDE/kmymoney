@@ -104,7 +104,7 @@ QWidget* SplitDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem
         if(d->m_editor) {
             d->m_editorRow = index.row();
             connect(d->m_editor, &NewSplitEditor::done, this, &SplitDelegate::endEdit);
-            Q_EMIT sizeHintChanged(index);
+            Q_EMIT const_cast<SplitDelegate*>(this)->sizeHintChanged(index);
 
             d->m_editor->setAmountPlaceHolderText(index.model());
 

@@ -40,13 +40,13 @@ KSettingsPlugins::KSettingsPlugins(QWidget* parent)
     setLayout(layout);  // otherwise KPluginSelector occupies very little area
     layout->addWidget(m_pluginSelector);
 
-    auto allPluginDatas = KMyMoneyPlugin::listPlugins(false); // fetch all available KMyMoney plugins
+    const auto allPluginDatas = KMyMoneyPlugin::listPlugins(false); // fetch all available KMyMoney plugins
     QVector<KPluginMetaData> standardPlugins;
     QVector<KPluginMetaData> payeePlugins;
     QVector<KPluginMetaData> onlinePlugins;
 
     // divide plugins in some arbitrary categories
-    for (const KPluginMetaData& pluginData : allPluginDatas)
+    for (const KPluginMetaData& pluginData : qAsConst(allPluginDatas))
         switch (KMyMoneyPlugin::pluginCategory(pluginData)) {
         case KMyMoneyPlugin::Category::StandardPlugin:
             standardPlugins.append(pluginData);

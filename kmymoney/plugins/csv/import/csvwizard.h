@@ -185,9 +185,6 @@ private Q_SLOTS:
     void                fieldDelimiterChanged(const int index);
     void                textDelimiterChanged(const int index);
 
-Q_SIGNALS:
-    void                completeChanged();
-
 private:
     Ui::SeparatorPage   *ui;
     void                initializeEncodingCombobox();
@@ -260,9 +257,6 @@ private:
     void              initializePage() override;
     bool              isComplete() const override;
     void              cleanupPage() override;
-
-Q_SIGNALS:
-    void              completeChanged();
 
 private Q_SLOTS:
     void              decimalSymbolChanged(int);

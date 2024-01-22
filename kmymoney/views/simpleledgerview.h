@@ -60,8 +60,8 @@ protected:
 
 Q_SIGNALS:
     void settingsChanged();
-    void resizeSection(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize) const;
-    void moveSection(QWidget* view, int section, int oldIndex, int newIndex) const;
+    void resizeSection(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize);
+    void moveSection(QWidget* view, int section, int oldIndex, int newIndex);
 
 private:
     Q_DECLARE_PRIVATE(SimpleLedgerView)

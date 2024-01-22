@@ -63,33 +63,36 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
     QString messageDetail("<qt>");
     auto file = MyMoneyFile::instance();
 
+    const auto toSplits = to.splits();
+    const auto tnSplits = tn.splits();
+
     try {
-        if (to.splits().isEmpty())
+        if (toSplits.isEmpty())
             throw MYMONEYEXCEPTION(i18n("Transaction %1 has no splits", to.id()));
-        if (tn.splits().isEmpty())
+        if (tnSplits.isEmpty())
             throw MYMONEYEXCEPTION(i18n("Transaction %1 has no splits", tn.id()));
 
         QString po, pn;
-        if (!to.splits().front().payeeId().isEmpty())
-            po = file->payee(to.splits().front().payeeId()).name();
-        if (!tn.splits().front().payeeId().isEmpty())
-            pn = file->payee(tn.splits().front().payeeId()).name();
+        if (!toSplits.front().payeeId().isEmpty())
+            po = file->payee(toSplits.front().payeeId()).name();
+        if (!tnSplits.front().payeeId().isEmpty())
+            pn = file->payee(tnSplits.front().payeeId()).name();
 
         if (po != pn) {
             messageDetail += i18n("<p>Payee changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>", po, pn);
         }
 
-        if (to.splits().front().accountId() != tn.splits().front().accountId()) {
-            messageDetail += i18n("<p>Account changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>"
-                                  , file->account(to.splits().front().accountId()).name()
-                                  , file->account(tn.splits().front().accountId()).name());
+        if (toSplits.front().accountId() != tnSplits.front().accountId()) {
+            messageDetail += i18n("<p>Account changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>",
+                                  file->account(toSplits.front().accountId()).name(),
+                                  file->account(tnSplits.front().accountId()).name());
         }
 
         if (file->isTransfer(to) && file->isTransfer(tn)) {
-            if (to.splits()[1].accountId() != tn.splits()[1].accountId()) {
-                messageDetail += i18n("<p>Transfer account changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>"
-                                      , file->account(to.splits()[1].accountId()).name()
-                                      , file->account(tn.splits()[1].accountId()).name());
+            if (toSplits.at(1).accountId() != tnSplits.at(1).accountId()) {
+                messageDetail += i18n("<p>Transfer account changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>",
+                                      file->account(toSplits.at(1).accountId()).name(),
+                                      file->account(tnSplits.at(1).accountId()).name());
             }
         } else {
             QString co, cn;
@@ -98,7 +101,7 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
                 co = i18nc("Split transaction (category replacement)", "Split transaction");
                 break;
             case 2:
-                co = file->accountToCategory(to.splits()[1].accountId());
+                co = file->accountToCategory(toSplits.at(1).accountId());
             case 1:
                 break;
             }
@@ -108,7 +111,7 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
                 cn = i18nc("Split transaction (category replacement)", "Split transaction");
                 break;
             case 2:
-                cn = file->accountToCategory(tn.splits()[1].accountId());
+                cn = file->accountToCategory(tnSplits.at(1).accountId());
             case 1:
                 break;
             }
@@ -118,8 +121,8 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
         }
 
         QString mo, mn;
-        mo = to.splits().front().memo();
-        mn = tn.splits().front().memo();
+        mo = toSplits.front().memo();
+        mn = tnSplits.front().memo();
         if (mo.isEmpty())
             mo = QString("<i>") + i18nc("Empty memo", "empty") + QString("</i>");
         if (mn.isEmpty())
@@ -129,8 +132,8 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
         }
 
         QString no, nn;
-        no = to.splits().front().number();
-        nn = tn.splits().front().number();
+        no = toSplits.front().number();
+        nn = tnSplits.front().number();
         if (no.isEmpty())
             no = QString("<i>") + i18nc("No number", "empty") + QString("</i>");
         if (nn.isEmpty())
@@ -141,15 +144,15 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
 
         const MyMoneySecurity& sec = MyMoneyFile::instance()->security(to.commodity());
         MyMoneyMoney ao, an;
-        ao = to.splits().front().value();
-        an = tn.splits().front().value();
+        ao = toSplits.front().value();
+        an = tnSplits.front().value();
         if (ao != an) {
             messageDetail += i18n("<p>Amount changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>", ao.formatMoney(sec.smallestAccountFraction()), an.formatMoney(sec.smallestAccountFraction()));
         }
 
         eMyMoney::Split::State fo, fn;
-        fo = to.splits().front().reconcileFlag();
-        fn = tn.splits().front().reconcileFlag();
+        fo = toSplits.front().reconcileFlag();
+        fn = tnSplits.front().reconcileFlag();
         if (fo != fn) {
             messageDetail += i18n("<p>Reconciliation flag changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>",    KMyMoneyUtils::reconcileStateToString(fo, true), KMyMoneyUtils::reconcileStateToString(fn, true));
         }

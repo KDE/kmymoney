@@ -87,7 +87,7 @@ void MyMoneyCostCenter::setName(const QString& val)
 QString MyMoneyCostCenter::shortName() const
 {
     Q_D(const MyMoneyCostCenter);
-    const QRegularExpression shortNumberExp("^(\\d+)\\s.+");
+    static const QRegularExpression shortNumberExp("^(\\d+)\\s.+");
     const auto shortNumber(shortNumberExp.match(d->m_name));
     if (shortNumber.hasMatch()) {
         return shortNumber.captured(1);

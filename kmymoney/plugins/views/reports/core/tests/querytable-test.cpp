@@ -385,8 +385,6 @@ void QueryTableTest::testCashFlowAnalysis()
 void QueryTableTest::testAccountQuery()
 {
     try {
-        QString htmlcontext = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"qrc:/html/kmymoney.css\"></head><body>\n%1\n</body></html>\n");
-
         //
         // No transactions, opening balances only
         //
@@ -466,7 +464,7 @@ void QueryTableTest::testAccountQuery()
         QVERIFY(MyMoneyMoney(rows[1][ListTable::ctValue]) == moCheckingOpen - moSolo * 3);
         QVERIFY(MyMoneyMoney(rows[3][ListTable::ctValue]) == moCreditOpen - (moParent1 + moParent2 + moChild) * 3);
         QVERIFY(MyMoneyMoney(rows[4][ListTable::ctValue]) == moCheckingOpen + moCreditOpen - (moParent1 + moParent2 + moSolo + moChild) * 3);
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException& e) {
         QFAIL(e.what());
     }
 }
@@ -1008,7 +1006,7 @@ void QueryTableTest::testTaxReport()
 
         QList<ListTable::TableRow> rows = qtbl_3.rows();
 
-        QString html = qtbl_3.renderHTML();
+        qtbl_3.renderHTML();
         QVERIFY(rows.count() == 5);
     } catch (const MyMoneyException &e) {
         QFAIL(e.what());

@@ -119,7 +119,7 @@ OfxAppVersion::OfxAppVersion(KComboBox* combo, KLineEdit* versionEdit, const QSt
     }
 
     // not found, check if we have a manual version of this product
-    QRegularExpression appExp("(\\w+:)(\\d+|\\w+)");
+    static const QRegularExpression appExp("(\\w+:)(\\d+|\\w+)");
     auto matcher = appExp.match(appId);
     if (it_a == m_appMap.constEnd()) {
         if (matcher.hasMatch()) {
@@ -166,7 +166,7 @@ const QString OfxAppVersion::appId() const
 
 bool OfxAppVersion::isValid() const
 {
-    const QRegularExpression validAppVersionExp(QRegularExpression::anchoredPattern(QLatin1String(".+:\\d+")));
+    static const QRegularExpression validAppVersionExp(QRegularExpression::anchoredPattern(QLatin1String(".+:\\d+")));
     QString app = m_combo->currentText();
     if (m_appMap[app].endsWith(':')) {
         if (m_versionEdit) {
@@ -300,7 +300,7 @@ OfxAccountData::AccountType MyMoneyOfxConnector::accounttype() const
     // This is a bit of a personalized hack.  Sometimes we may want to override the
     // ofx type for an account.  For now, I will stash it in the notes!
 
-    const QRegularExpression accountTypeExp(QLatin1String("OFXTYPE:([A-Z]*)"));
+    static const QRegularExpression accountTypeExp(QLatin1String("OFXTYPE:([A-Z]*)"));
     const auto accountType(accountTypeExp.match(m_account.description()));
     if (accountType.hasMatch()) {
         const auto override = accountType.captured(1);
@@ -333,7 +333,7 @@ void MyMoneyOfxConnector::initRequest(OfxFiLogin* fi) const
     // https://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-intuit-products/
     // https://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-microsoft-money/
     QString appId = m_account.onlineBankingSettings().value("appId");
-    QRegularExpression exp("(.*):(.*)");
+    static const QRegularExpression exp("(.*):(.*)");
     QRegularExpressionMatch match = exp.match(appId);
     if (match.hasMatch()) {
         strncpy(fi->appid, match.captured(1).toLatin1(), OFX_APPID_LENGTH - 1);
@@ -379,13 +379,16 @@ QString MyMoneyOfxConnector::statementRequest() const
 
 void MyMoneyOfxConnector::institutionSpecificRequestAdjustment(QString& request)
 {
+    static const QRegularExpression newFileUidRegex("NEWFILEUID:[\\d\\.]+");
+    static const QRegularExpression trnUidRegex("<TRNUID>[\\d\\.]+");
+    static const QRegularExpression dateRegex("<DTACCTUP>19700101");
+
     if (request.contains(QLatin1String("<FID>67811")) || request.contains(QLatin1String("<FID>00000"))) {
         // USAA requires some specific settings
         // and we do the same with our test account
-        request.replace(QRegularExpression("NEWFILEUID:[\\d\\.]+"), QLatin1String("NEWFILEUID:NONE"));
-        request.replace(QRegularExpression("<TRNUID>[\\d\\.]+"),
-                        QStringLiteral("<TRNUID>%1").arg(QUuid::createUuid().toString(QUuid::WithoutBraces).toUpper()));
-        request.replace(QRegularExpression("<DTACCTUP>19700101"), QLatin1String("<DTACCTUP>19900101"));
+        request.replace(newFileUidRegex, QLatin1String("NEWFILEUID:NONE"));
+        request.replace(trnUidRegex, QStringLiteral("<TRNUID>%1").arg(QUuid::createUuid().toString(QUuid::WithoutBraces).toUpper()));
+        request.replace(dateRegex, QLatin1String("<DTACCTUP>19900101"));
     }
 }
 

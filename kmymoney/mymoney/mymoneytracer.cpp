@@ -43,9 +43,10 @@ int MyMoneyTracerPrivate::m_onoff = 0;
 MyMoneyTracer::MyMoneyTracer(const char* name) :
     d_ptr(new MyMoneyTracerPrivate)
 {
+    static const QRegularExpression classMethodExp("(.*)::(.*)");
+
     Q_D(MyMoneyTracer);
     if (d->m_onoff) {
-        const QRegularExpression classMethodExp("(.*)::(.*)");
         const auto classAndMethod(classMethodExp.match(name));
         if (classAndMethod.hasMatch()) {
             d->m_className = classAndMethod.captured(1);

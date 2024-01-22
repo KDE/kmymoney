@@ -322,7 +322,8 @@ public:
     {
         auto file = MyMoneyFile::instance();
         auto value = file->balance(acc.id(), QDate::currentDate());
-        for (const auto& accountID : acc.accountList()) {
+        const auto subAccountList = acc.accountList();
+        for (const auto& accountID : qAsConst(subAccountList)) {
             auto stock = file->account(accountID);
             if (!stock.isClosed()) {
                 try {
@@ -856,7 +857,8 @@ public:
                     // others
                     bool processMainSplit(true);
                     do {
-                        for (const auto& sp : t.splits()) {
+                        const auto splits = t.splits();
+                        for (const auto& sp : qAsConst(splits)) {
                             if (processMainSplit == (sp.accountId() == mainAccount.id())) {
                                 const auto account = file->account(sp.accountId());
                                 if (account.isAssetLiability()) {
@@ -1101,11 +1103,11 @@ public:
                     }
 
                     m_html += QString("<tr class=\"row-%1\"><td>%2%3%4</td><td align=\"left\">%5</td></tr>")
-                              .arg(row++ & 0x01 ? "even" : "odd")
-                              .arg(link(VIEW_REPORTS, QString("?id=%1").arg((*it_report).id())))
-                              .arg((*it_report).name())
-                              .arg(linkend())
-                              .arg((*it_report).comment());
+                                  .arg(row++ & 0x01 ? "even" : "odd",
+                                       link(VIEW_REPORTS, QString("?id=%1").arg((*it_report).id())),
+                                       (*it_report).name(),
+                                       linkend(),
+                                       (*it_report).comment());
                 }
 
                 ++it_report;
@@ -1317,7 +1319,8 @@ public:
                 case Account::Type::Investment:
                     // for investment accounts we also need to check the sub-accounts
                     if (value.isZero()) {
-                        for (const auto& accId : (*it).accountList()) {
+                        const auto subAccountList = (*it).accountList();
+                        for (const auto& accId : qAsConst(subAccountList)) {
                             const auto subValue = MyMoneyFile::instance()->balance(accId, QDate::currentDate());
                             if (!(subValue.isZero() && hideZeroBalanceAccounts)) {
                                 assets << *it;
@@ -1476,7 +1479,7 @@ public:
                     ++asset_it;
                 } else {
                     //write a white space if we don't
-                    m_html += QString("%1<td></td>%2<td></td>").arg(placeHolder_Status).arg(placeHolder_Counts);
+                    m_html += QString("%1<td></td>%2<td></td>").arg(placeHolder_Status, placeHolder_Counts);
                 }
 
                 //leave the intermediate column empty
@@ -1501,7 +1504,7 @@ public:
                     ++liabilities_it;
                 } else {
                     //leave the space empty if we run out of liabilities
-                    m_html += QString("%1<td></td>%2<td></td>").arg(placeHolder_Status).arg(placeHolder_Counts);
+                    m_html += QString("%1<td></td>%2<td></td>").arg(placeHolder_Status, placeHolder_Counts);
                 }
                 m_html += "</tr>";
             }
@@ -1521,31 +1524,23 @@ public:
 
             //print total for assets
             m_html += QString("%1<td class=\"left\">%2</td>%3<td class=\"right nowrap\">%4</td>")
-                          .arg(placeHolder_Status)
-                          .arg(i18n("Total Assets"))
-                          .arg(placeHolder_Counts)
-                          .arg(showColoredAmount(amountAssets, netAssets.isNegative()));
+                          .arg(placeHolder_Status, i18n("Total Assets"), placeHolder_Counts, showColoredAmount(amountAssets, netAssets.isNegative()));
 
             //leave the intermediate column empty
             m_html += "<td class=\"setcolor\"></td>";
 
             //print total liabilities
-            m_html += QString("%1<td class=\"left\">%2</td>%3<td class=\"right nowrap\">%4</td>")
-                          .arg(placeHolder_Status)
-                          .arg(i18n("Total Liabilities"))
-                          .arg(placeHolder_Counts)
-                          .arg(showColoredAmount(amountLiabilities, netLiabilities.isNegative()));
+            m_html +=
+                QString("%1<td class=\"left\">%2</td>%3<td class=\"right nowrap\">%4</td>")
+                    .arg(placeHolder_Status, i18n("Total Liabilities"), placeHolder_Counts, showColoredAmount(amountLiabilities, netLiabilities.isNegative()));
             m_html += "</tr>";
 
             //print net worth
             m_html += QString("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(i++ & 0x01 ? "even" : "odd");
 
-            m_html += QString("%1<td></td><td></td>%2<td class=\"setcolor\"></td>").arg(placeHolder_Status).arg(placeHolder_Counts);
+            m_html += QString("%1<td></td><td></td>%2<td class=\"setcolor\"></td>").arg(placeHolder_Status, placeHolder_Counts);
             m_html += QString("%1<td class=\"left\">%2</td>%3<td class=\"right nowrap\">%4</td>")
-                          .arg(placeHolder_Status)
-                          .arg(i18n("Net Worth"))
-                          .arg(placeHolder_Counts)
-                          .arg(showColoredAmount(amountNetWorth, netWorth.isNegative()));
+                          .arg(placeHolder_Status, i18n("Net Worth"), placeHolder_Counts, showColoredAmount(amountNetWorth, netWorth.isNegative()));
 
             m_html += "</tr>";
             m_html += "</table></td></tr>";
@@ -1604,7 +1599,8 @@ public:
             //get all transactions for this month
             for (const auto& transaction : qAsConst(transactions)) {
                 //get the splits for each transaction
-                for (const auto& split : transaction.splits()) {
+                const auto splits = transaction.splits();
+                for (const auto& split : qAsConst(splits)) {
                     if (!split.shares().isZero()) {
                         auto repSplitAcc = file->account(split.accountId());
 

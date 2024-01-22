@@ -741,7 +741,7 @@ void SimpleLedgerView::slotRequestSelectionChange(const SelectedObjects& selecti
     if (!d->reconciledAccount.isEmpty()) {
         newSelections.setSelection(SelectedObjects::ReconciliationAccount, d->reconciledAccount);
     }
-    Q_EMIT requestSelectionChange(newSelections);
+    Q_EMIT const_cast<SimpleLedgerView*>(this)->requestSelectionChange(newSelections);
 }
 
 void SimpleLedgerView::updateActions(const SelectedObjects& selections)
@@ -835,12 +835,12 @@ void SimpleLedgerView::executeAction(eMenu::Action action, const SelectedObjects
 
 void SimpleLedgerView::sectionResized(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize) const
 {
-    Q_EMIT resizeSection(view, configGroupName, section, oldSize, newSize);
+    Q_EMIT const_cast<SimpleLedgerView*>(this)->resizeSection(view, configGroupName, section, oldSize, newSize);
 }
 
 void SimpleLedgerView::sectionMoved(QWidget* view, int section, int oldIndex, int newIndex) const
 {
-    Q_EMIT moveSection(view, section, oldIndex, newIndex);
+    Q_EMIT const_cast<SimpleLedgerView*>(this)->moveSection(view, section, oldIndex, newIndex);
 }
 
 bool SimpleLedgerView::hasClosableView() const

@@ -24,17 +24,15 @@ void KMMKeychain::readKey(const QString& key)
 {
     m_readCredentialJob.setKey(key);
 
-    QObject::connect(&m_readCredentialJob, &QKeychain::ReadPasswordJob::finished, [=]() {
+    QObject::connect(&m_readCredentialJob, &QKeychain::ReadPasswordJob::finished, this, [=]() {
         if (m_readCredentialJob.error()) {
-            auto errorMessage = QString("%1/%2 key read failed: %2")
-                                    .arg(m_readCredentialJob.service())
-                                    .arg(m_readCredentialJob.key())
-                                    .arg(qPrintable(m_readCredentialJob.errorString()));
+            auto errorMessage =
+                QString("%1/%2 key read failed: %2").arg(m_readCredentialJob.service(), m_readCredentialJob.key(), m_readCredentialJob.errorString());
 
             qDebug() << errorMessage;
             Q_EMIT error(errorMessage);
         } else {
-            qDebug() << QString("%1/%2 key read succeeded").arg(m_readCredentialJob.service()).arg(m_readCredentialJob.key());
+            qDebug() << QString("%1/%2 key read succeeded").arg(m_readCredentialJob.service(), m_readCredentialJob.key());
             Q_EMIT keyRestored(key, m_readCredentialJob.textData());
         }
     });
@@ -47,7 +45,7 @@ QString KMMKeychain::readKeySynchronous(const QString& key)
     QString value = QString("");
 
     QEventLoop loop;
-    connect(this, &KMMKeychain::keyRestored, [&](const QString, const QString textData) {
+    connect(this, &KMMKeychain::keyRestored, this, [&](const QString, const QString textData) {
         value = textData;
     });
     connect(this, &KMMKeychain::error, &loop, &QEventLoop::quit);
@@ -63,12 +61,10 @@ void KMMKeychain::writeKey(const QString& key, const QString& value)
 {
     m_writeCredentialJob.setKey(key);
 
-    QObject::connect(&m_writeCredentialJob, &QKeychain::WritePasswordJob::finished, [=]() {
+    QObject::connect(&m_writeCredentialJob, &QKeychain::WritePasswordJob::finished, this, [=]() {
         if (m_writeCredentialJob.error()) {
-            auto errorMessage = QString("%1/%2 key write failed: %2")
-                                    .arg(m_writeCredentialJob.service())
-                                    .arg(m_writeCredentialJob.key())
-                                    .arg(qPrintable(m_writeCredentialJob.errorString()));
+            auto errorMessage =
+                QString("%1/%2 key write failed: %2").arg(m_writeCredentialJob.service(), m_writeCredentialJob.key(), m_writeCredentialJob.errorString());
 
             qDebug() << errorMessage;
             Q_EMIT error(errorMessage);
@@ -85,12 +81,10 @@ void KMMKeychain::deleteKey(const QString& key)
 {
     m_deleteCredentialJob.setKey(key);
 
-    QObject::connect(&m_deleteCredentialJob, &QKeychain::DeletePasswordJob::finished, [=]() {
+    QObject::connect(&m_deleteCredentialJob, &QKeychain::DeletePasswordJob::finished, this, [=]() {
         if (m_deleteCredentialJob.error()) {
-            auto errorMessage = QString("%1/%2 key delete failed: %2")
-                                    .arg(m_deleteCredentialJob.service())
-                                    .arg(m_deleteCredentialJob.key())
-                                    .arg(qPrintable(m_deleteCredentialJob.errorString()));
+            auto errorMessage =
+                QString("%1/%2 key delete failed: %2").arg(m_deleteCredentialJob.service(), m_deleteCredentialJob.key(), m_deleteCredentialJob.errorString());
 
             qDebug() << errorMessage;
             Q_EMIT error(errorMessage);

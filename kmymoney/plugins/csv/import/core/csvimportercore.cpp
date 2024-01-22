@@ -589,7 +589,7 @@ DecimalSymbol CSVImporterCore::detectDecimalSymbol(const int col, const QString 
     DecimalSymbol detectedSymbol = DecimalSymbol::Auto;
     QString pattern;
 
-    QRegularExpression re("^[\\(+-]?\\d+[\\)]?$"); // matches '0' ; '+12' ; '-345' ; '(6789)'
+    static const QRegularExpression re("^[\\(+-]?\\d+[\\)]?$"); // matches '0' ; '+12' ; '-345' ; '(6789)'
 
     bool dotIsDecimalSeparator = false;
     bool commaIsDecimalSeparator = false;
@@ -690,8 +690,8 @@ int CSVImporterCore::detectDecimalSymbols(const QList<int> &columns)
             currencySymbols.insert(file->currency(account.currencyId()).tradingSymbol()); // add currency symbol
         }
     }
-    QString filteredCurrencies = QStringList(currencySymbols.values()).join("");
-    QString pattern = QString::fromLatin1("%1%2").arg(QLocale().currencySymbol()).arg(filteredCurrencies);
+    QString filteredCurrencies = currencySymbols.values().join(QString());
+    QString pattern = QString::fromLatin1("%1%2").arg(QLocale().currencySymbol(), filteredCurrencies);
 
     for (const auto& column : columns) {
         DecimalSymbol detectedSymbol = detectDecimalSymbol(column, pattern);

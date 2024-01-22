@@ -78,7 +78,7 @@ void KGpgKeySelectionDlg::setSecretKeys(const QStringList& keyList, const QStrin
             auto name = fields[1];
             name.replace('(', "[");
             name.replace(')', "]");
-            name = QString("%1 (0x%2)").arg(name).arg(fields[0]);
+            name = QString("%1 (0x%2)").arg(name, fields[0]);
             d->ui->m_secretKey->addItem(name);
             if (name.contains(defaultKey)) {
                 d->ui->m_secretKey->setCurrentText(name);

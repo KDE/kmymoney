@@ -387,7 +387,8 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
     pActions[eMenu::Action::MoveToToday]->setEnabled(false);
 
     // update actions in all views. process the current last
-    for (const auto& view : d->viewBases.keys()) {
+    const auto viewBasesKeys = d->viewBases.keys();
+    for (const auto& view : qAsConst(viewBasesKeys)) {
         if (view == currentView)
             continue;
         d->viewBases[view]->updateActions(selections);
@@ -440,7 +441,8 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
             int matchedTransactions(0);
             int importedTransactions(0);
 
-            for (const auto& journalEntryId : selections.selection(SelectedObjects::JournalEntry)) {
+            const auto journalEntryIds = selections.selection(SelectedObjects::JournalEntry);
+            for (const auto& journalEntryId : qAsConst(journalEntryIds)) {
                 const auto idx = file->journalModel()->indexById(journalEntryId);
                 if ((singleSplitTransactions < 1) || (multipleSplitTransactions < 2)) {
                     const auto indeces = file->journalModel()->indexesByTransactionId(idx.data(eMyMoney::Model::JournalTransactionIdRole).toString());
@@ -552,7 +554,9 @@ QHash<eMenu::Action, QAction *> KMyMoneyView::actionsToBeConnected()
         a->setObjectName(QString::fromLatin1("ShowPage%1").arg(QString::number(pageCount++)));
         a->setText(info.text);
         a->setData(static_cast<int>(info.view));
-        connect(a, &QAction::triggered, [this, a] { showPageAndFocus(static_cast<View>(a->data().toUInt())); } );
+        connect(a, &QAction::triggered, this, [this, a] {
+            showPageAndFocus(static_cast<View>(a->data().toUInt()));
+        });
         lutActions.insert(info.action, a);  // store QAction's pointer for later processing
         if (!info.shortcut.isEmpty())
             a->setShortcut(info.shortcut);
@@ -673,7 +677,7 @@ void KMyMoneyView::executeAction(eMenu::Action action, const SelectedObjects& se
 
     // execute the action, at last on the current view
     const auto currentView = d->viewBases[d->currentViewId()];
-    for (const auto view : d->viewBases) {
+    for (const auto& view : qAsConst(d->viewBases)) {
         if (view != currentView) {
             view->executeAction(action, selections);
         }

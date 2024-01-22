@@ -881,7 +881,8 @@ void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
     if (!account.institutionId().isEmpty())
         institution(account.institutionId());
 
-    for (const auto& sAccount : account.accountList())
+    const auto subAccountList = account.accountList();
+    for (const auto& sAccount : qAsConst(subAccountList))
         this->account(sAccount);
 
     // if the account was moved to another institution, we notify
@@ -1091,7 +1092,8 @@ bool MyMoneyFile::isStandardAccount(const QString& id) const
 
 bool MyMoneyFile::isInvestmentTransaction(const MyMoneyTransaction& t) const
 {
-    for (const auto& split : t.splits()) {
+    const auto splits = t.splits();
+    for (const auto& split : qAsConst(splits)) {
         auto acc = d->accountsModel.itemById(split.accountId());
         if (!acc.id().isEmpty()) {
             if (acc.isInvest() && (split.investmentTransactionType() != eMyMoney::Split::InvestmentTransactionType::UnknownTransactionType)) {
@@ -1130,14 +1132,16 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
     // re-parent all sub-ordinate accounts to the parent of the account
     // to be deleted. First round check that all accounts exist, second
     // round do the re-parenting.
-    for (const auto& accountId : account.accountList()) {
+    auto subAccountList = account.accountList();
+    for (const auto& accountId : qAsConst(subAccountList)) {
         this->account(accountId);
     }
 
     // if one of the accounts did not exist, an exception had been
     // thrown and we would not make it until here.
     auto newParent = d->accountsModel.itemById(acc.parentAccountId());
-    for (const auto& accountId : acc.accountList()) {
+    subAccountList = acc.accountList();
+    for (const auto& accountId : qAsConst(subAccountList)) {
         auto accountToMove = d->accountsModel.itemById(accountId);
         reparentAccount(accountToMove, newParent);
         d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Account, accountToMove.id());
@@ -1578,7 +1582,7 @@ MyMoneyAccount MyMoneyFile::createOpeningBalanceAccount(const MyMoneySecurity& s
     // find present opening balance accounts without containing '('
     QString name;
     QString parentAccountId;
-    const QRegularExpression currencyExp(QLatin1String("\\([A-Z]{3}\\)"));
+    static const QRegularExpression currencyExp(QLatin1String("\\([A-Z]{3}\\)"));
 
     for (it = accounts.constBegin(); it != accounts.constEnd(); ++it) {
         const auto currencyMatch(currencyExp.match(it->name()));
@@ -2069,7 +2073,8 @@ MyMoneyMoney MyMoneyFile::totalBalance(const QString& id, const QDate& date) con
 
     MyMoneyMoney result(balance(id, date));
 
-    for (const auto& sAccount : account(id).accountList())
+    const auto subAccountList = account(id).accountList();
+    for (const auto& sAccount : qAsConst(subAccountList))
         result += totalBalance(sAccount, date);
 
     return result;
@@ -2614,7 +2619,7 @@ QStringList MyMoneyFile::consistencyCheck()
     transactionList(tList, filter);
 
     // Generate the list of interest accounts
-    for (const auto& transaction : tList) {
+    for (const auto& transaction : qAsConst(tList)) {
         const auto splits = transaction.splits();
         for (const auto& split : splits) {
             if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Interest))
@@ -2633,7 +2638,7 @@ QStringList MyMoneyFile::consistencyCheck()
     const auto txProblemHeader(i18n("* Problems with transactions"));
     rc << txProblemHeader;
 
-    for (const auto& transaction : tList) {
+    for (const auto& transaction : qAsConst(tList)) {
         MyMoneyTransaction t = transaction;
         bool tChanged = false;
         QDate accountOpeningDate;
@@ -4013,7 +4018,7 @@ QSet<QString> MyMoneyFile::referencedObjects() const
 bool MyMoneyFile::checkNoUsed(const QString& accId, const QString& no) const
 {
     // by definition, an empty string or a non-numeric string is not used
-    const QRegularExpression checkNumberExp(QLatin1String("(.*\\D)?(\\d+)(\\D.*)?"));
+    static const QRegularExpression checkNumberExp(QLatin1String("(.*\\D)?(\\d+)(\\D.*)?"));
     if (no.isEmpty() || !checkNumberExp.match(no).hasMatch())
         return false;
 

@@ -73,7 +73,7 @@ public Q_SLOTS:
     void slotSettingsChanged() override;
 
 Q_SIGNALS:
-    void postDateChanged(const QDate& date) const;
+    void postDateChanged(const QDate& date);
 
 private:
     class Private;

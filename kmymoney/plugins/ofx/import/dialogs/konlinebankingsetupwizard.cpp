@@ -334,7 +334,7 @@ bool KOnlineBankingSetupWizard::finishLoginPage()
         // https://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-intuit-products/
         // https://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-microsoft-money/
         QString appId = m_appId->appId();
-        const QRegularExpression appVersionExp(QLatin1String("(.*):(.*)"));
+        static const QRegularExpression appVersionExp(QLatin1String("(.*):(.*)"));
         const auto appVersion(appVersionExp.match(appId));
         if (appVersion.hasMatch()) {
             strncpy(fi.appid, appVersion.captured(1).toLatin1(), OFX_APPID_LENGTH - 1);

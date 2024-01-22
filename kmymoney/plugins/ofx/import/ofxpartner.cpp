@@ -48,9 +48,7 @@ namespace OfxPartner
 bool post(const QString& request, const QMap<QString, QString>& attr, const QUrl &url, const QUrl& filename);
 bool get(const QString& request, const QMap<QString, QString>& attr, const QUrl &url, const QUrl& filename);
 
-const QString kBankFilename = "ofx-bank-index.xml";
-const QString kCcFilename = "ofx-cc-index.xml";
-const QString kInvFilename = "ofx-inv-index.xml";
+Q_GLOBAL_STATIC_WITH_ARGS(QString, kBankFilename, ("ofx-bank-index.xml"));
 
 #define VER "9"
 
@@ -76,7 +74,7 @@ void ValidateIndexCache()
 
     QMap<QString, QString> attr;
 
-    fname = QUrl("file://" + directory + kBankFilename);
+    fname = QUrl(QStringLiteral("file://") + directory + *kBankFilename);
     QDir dir;
     dir.mkpath(directory);
 
@@ -124,7 +122,7 @@ QStringList BankNames()
     // Make sure the index files are up to date
     ValidateIndexCache();
 
-    ParseFile(result, directory + kBankFilename, QString());
+    ParseFile(result, directory + *kBankFilename, QString());
 
     // Add Innovision
     result["Innovision"].clear();
@@ -136,7 +134,7 @@ QStringList FipidForBank(const QString& bank)
 {
     QMap<QString, QString> result;
 
-    ParseFile(result, directory + kBankFilename, bank);
+    ParseFile(result, directory + *kBankFilename, bank);
 
     // the fipid for Innovision is 1.
     if (bank == "Innovision")
@@ -148,7 +146,7 @@ QStringList FipidForBank(const QString& bank)
 QString extractNodeText(QDomElement& node, const QString& name)
 {
     QString res;
-    const QRegularExpression exp(QLatin1String("([^/]+)/?([^/].*)?"));
+    static const QRegularExpression exp(QLatin1String("([^/]+)/?([^/].*)?"));
     const auto match(exp.match(name));
     if (match.hasMatch()) {
         QDomNodeList olist = node.elementsByTagName(match.captured(1));
@@ -170,7 +168,7 @@ QString extractNodeText(QDomElement& node, const QString& name)
 QString extractNodeText(QDomDocument& doc, const QString& name)
 {
     QString res;
-    const QRegularExpression exp(QLatin1String("([^/]+)/?([^/].*)?"));
+    static const QRegularExpression exp(QLatin1String("([^/]+)/?([^/].*)?"));
     const auto match(exp.match(name));
     if (match.hasMatch()) {
         QDomNodeList olist = doc.elementsByTagName(match.captured(1));
@@ -213,7 +211,7 @@ OfxHomeServiceInfo ServiceInfo(const QString& fipid)
 
     QMap<QString, QString> attr;
 
-    QUrl guidFile(QString("file://%1fipid-%2.xml").arg(directory).arg(fipid));
+    QUrl guidFile(QString("file://%1fipid-%2.xml").arg(directory, fipid));
 
     QFileInfo i(guidFile.toLocalFile());
 

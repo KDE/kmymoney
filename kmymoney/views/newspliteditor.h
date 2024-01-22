@@ -58,12 +58,6 @@ public:
     void setupUi(QWidget* parent) override;
     void storeTabOrder(const QStringList& tabOrder) override;
 
-protected:
-    void keyPressEvent(QKeyEvent* event) final override;
-    bool focusNextPrevChild(bool next) override;
-    bool eventFilter(QObject* o, QEvent* e) override;
-
-public Q_SLOTS:
     /**
      * Returns the id of the selected account in the category widget
      */
@@ -93,6 +87,11 @@ public Q_SLOTS:
 
     QList<QString> tagIdList() const;
     void setTagIdList(const QList<QString>& tagIds);
+
+protected:
+    void keyPressEvent(QKeyEvent* event) final override;
+    bool focusNextPrevChild(bool next) override;
+    bool eventFilter(QObject* o, QEvent* e) override;
 
 protected Q_SLOTS:
     virtual void reject();

@@ -107,7 +107,8 @@ public:
             // collect accounts and their balances
             QMap<QString, MyMoneyMoney> actBalance;
             actBalance[accountId] = file->balance(accountId);
-            for (const auto& accId : account.accountList()) {
+            const auto subAccounts = account.accountList();
+            for (const auto& accId : qAsConst(subAccounts)) {
                 actBalance[accId] = file->balance(accId);
             }
 

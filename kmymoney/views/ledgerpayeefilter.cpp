@@ -107,7 +107,7 @@ void LedgerPayeeFilter::recalculateBalances()
     const QModelIndex top = index(0, JournalModel::Column::Balance);
     const QModelIndex bottom = index(rowCount()-1, JournalModel::Column::Balance);
 
-    dataChanged(top, bottom);
+    Q_EMIT dataChanged(top, bottom);
     d->balanceCalculationPending = false;
 }
 

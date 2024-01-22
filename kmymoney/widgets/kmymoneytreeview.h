@@ -39,7 +39,7 @@ protected:
     void keyPressEvent(QKeyEvent *event) override;
 
 Q_SIGNALS:
-    void startEdit(const QModelIndex& idx) const;
+    void startEdit(const QModelIndex& idx);
 };
 
 #endif // KMYMONEYTREEVIEW_H

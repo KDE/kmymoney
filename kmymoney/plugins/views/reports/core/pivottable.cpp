@@ -1595,7 +1595,7 @@ QString PivotTable::renderCSV() const
         //
 
         if (m_config.isConvertCurrency() && m_config.isShowingColumnTotals()) {
-            result += QString("%1 %2").arg(i18nc("Total balance", "Total")).arg(it_outergroup.key());
+            result += QString("%1 %2").arg(i18nc("Total balance", "Total"), it_outergroup.key());
             column = 0;
             while (column < m_numColumns) {
                 for (int i = 0; i < m_rowTypeList.size(); ++i)
@@ -1667,11 +1667,12 @@ QString PivotTable::renderHTML() const
     headerspan = QString(" colspan=\"%1\"").arg(span);
 
     auto column = 0;
+    static const QRegularExpression whiteSpaceRegex(QLatin1String(" "));
     while (column < m_numColumns)
-        result += QString("<th%1>%2</th>").arg(headerspan, QString(m_columnHeadings[column++]).replace(QRegularExpression(QLatin1String(" ")), "<br>"));
+        result += QString("<th%1>%2</th>").arg(headerspan, QString(m_columnHeadings[column++]).replace(whiteSpaceRegex, "<br>"));
 
     if (m_config.isShowingRowTotals())
-        result += QString("<th%1>%2</th>").arg(headerspan).arg(i18nc("Total balance", "Total"));
+        result += QString("<th%1>%2</th>").arg(headerspan, i18nc("Total balance", "Total"));
 
     result += "</tr></thead>\n";
 
@@ -1688,17 +1689,13 @@ QString PivotTable::renderHTML() const
                 lb = leftborder;
 
             for (int i = 0; i < m_rowTypeList.size(); ++i) {
-                result += QString("<td%2>%1</td>")
-                          .arg(m_columnTypeHeaderList[i])
-                          .arg(i == 0 ? lb : QString());
+                result += QString("<td%2>%1</td>").arg(m_columnTypeHeaderList[i], i == 0 ? lb : QString());
             }
             column++;
         }
         if (m_config.isShowingRowTotals()) {
             for (int i = 0; i < m_rowTypeList.size(); ++i) {
-                result += QString("<td%2>%1</td>")
-                          .arg(m_columnTypeHeaderList[i])
-                          .arg(i == 0 ? leftborder : QString());
+                result += QString("<td%2>%1</td>").arg(m_columnTypeHeaderList[i], i == 0 ? leftborder : QString());
             }
         }
         result += "</tr>";
@@ -1738,7 +1735,7 @@ QString PivotTable::renderHTML() const
             //
 
             if (!(m_config.isIncludingPrice() || m_config.isIncludingAveragePrice()))
-                result += QString("<tr class=\"sectionheader\"><td class=\"left\"%1>%2</td></tr>\n").arg(colspan).arg((*it_outergroup).m_displayName);
+                result += QString("<tr class=\"sectionheader\"><td class=\"left\"%1>%2</td></tr>\n").arg(colspan, (*it_outergroup).m_displayName);
 
             // Skip the inner groups if the report only calls for outer group totals to be shown
             if (m_config.detailLevel() != eMyMoney::Report::DetailLevel::Group) {
@@ -1794,9 +1791,7 @@ QString PivotTable::renderHTML() const
                                         } else
                                             precision = currencyPrecision;
                                     }
-                                    rowdata += QString("<td%2>%1</td>")
-                                               .arg(coloredAmount(it_row.value()[rowType][column], QString(), precision))
-                                               .arg(lb);
+                                    rowdata += QString("<td%2>%1</td>").arg(coloredAmount(it_row.value()[rowType][column], QString(), precision), lb);
                                     lb.clear();
                                     isUsed |= it_row.value()[rowType][column].isUsed();
                                 }
@@ -1806,8 +1801,8 @@ QString PivotTable::renderHTML() const
                             if (m_config.isShowingRowTotals()) {
                                 for (int i = 0; i < m_rowTypeList.size(); ++i) {
                                     rowdata += QString("<td%2>%1</td>")
-                                               .arg(coloredAmount(it_row.value()[ m_rowTypeList[i] ].m_total, QString(), precision))
-                                               .arg(i == 0 ? leftborder : QString());
+                                                   .arg(coloredAmount(it_row.value()[m_rowTypeList[i]].m_total, QString(), precision),
+                                                        i == 0 ? leftborder : QString());
                                 }
                             }
                         } else
@@ -1821,13 +1816,12 @@ QString PivotTable::renderHTML() const
 
                         // don't show closed accounts if they have not been used
                         if (!rowname.isClosed() || isUsed) {
-                            innergroupdata += QString("<tr class=\"row-%1\"%2><td%3 class=\"left\" style=\"text-indent: %4.0em\">%5%6</td>")
-                                    .arg(rownum & 0x01 ? "even" : "odd")
-                                    .arg(rowname.isTopLevel() ? " id=\"topparent\"" : "")
-                                    .arg("") //.arg((*it_row).m_total.isZero() ? colspan : "")  // colspan the distance if this row will be blank
+                            innergroupdata +=
+                                QString("<tr class=\"row-%1\"%2><td%3 class=\"left\" style=\"text-indent: %4.0em\">%5%6</td>")
+                                    .arg((rownum & 0x01 ? "even" : "odd"), (rowname.isTopLevel() ? " id=\"topparent\"" : ""), "")
                                     .arg((rowname.hierarchyDepth() - 1) * 16)
-                                    .arg(rowname.name().replace(QRegularExpression(QLatin1String(" ")), "&nbsp;").replace("<", "&lt;").replace(">", "&gt;"))
-                                    .arg((m_config.isConvertCurrency() || !rowname.isForeignCurrency()) ? QString()
+                                    .arg(rowname.name().replace(whiteSpaceRegex, "&nbsp;").replace("<", "&lt;").replace(">", "&gt;"),
+                                         (m_config.isConvertCurrency() || !rowname.isForeignCurrency()) ? QString()
                                                                                                         : QString(" (%1)").arg(rowname.currency().id()));
 
                             // Don't print this row if it's going to be all zeros
@@ -1858,8 +1852,7 @@ QString PivotTable::renderHTML() const
                         if (m_config.isConvertCurrency() && m_config.isShowingColumnTotals()) {
                             // Start the TOTALS row
                             finalRow = QString("<tr class=\"row-%1\" id=\"subtotal\"><td class=\"left\">&nbsp;&nbsp;%2</td>")
-                                       .arg(rownum & 0x01 ? "even" : "odd")
-                                       .arg(i18nc("Total balance", "Total"));
+                                           .arg(rownum & 0x01 ? "even" : "odd", i18nc("Total balance", "Total"));
                             // don't suppress display of totals
                             isUsed = true;
                         } else {
@@ -1877,11 +1870,10 @@ QString PivotTable::renderHTML() const
                         ReportAccount rowname = (*it_innergroup).begin().key();
                         isUsed |= !rowname.isClosed();
                         finalRow = QString("<tr class=\"row-%1\"%2><td class=\"left\" style=\"text-indent: %3px;\">%5%6</td>")
-                                       .arg(rownum & 0x01 ? "even" : "odd")
-                                       .arg(m_config.detailLevel() == eMyMoney::Report::DetailLevel::All ? "id=\"solo\"" : "")
+                                       .arg(rownum & 0x01 ? "even" : "odd", m_config.detailLevel() == eMyMoney::Report::DetailLevel::All ? "id=\"solo\"" : "")
                                        .arg((rowname.hierarchyDepth() - 1) * 16)
-                                       .arg(rowname.name().replace(QRegularExpression(QLatin1String(" ")), "&nbsp;").replace("<", "&lt;").replace(">", "&gt;"))
-                                       .arg((m_config.isConvertCurrency() || !rowname.isForeignCurrency()) ? QString()
+                                       .arg(rowname.name().replace(whiteSpaceRegex, "&nbsp;").replace("<", "&lt;").replace(">", "&gt;"),
+                                            (m_config.isConvertCurrency() || !rowname.isForeignCurrency()) ? QString()
                                                                                                            : QString(" (%1)").arg(rowname.currency().id()));
                     }
 
@@ -1895,9 +1887,9 @@ QString PivotTable::renderHTML() const
                                 lb = leftborder;
 
                             for (int i = 0; i < m_rowTypeList.size(); ++i) {
-                                finalRow += QString("<td%2>%1</td>")
-                                            .arg(coloredAmount((*it_innergroup).m_total[ m_rowTypeList[i] ][column], QString(), precision))
-                                            .arg(i == 0 ? lb : QString());
+                                finalRow +=
+                                    QString("<td%2>%1</td>")
+                                        .arg(coloredAmount((*it_innergroup).m_total[m_rowTypeList[i]][column], QString(), precision), i == 0 ? lb : QString());
                                 isUsed |= (*it_innergroup).m_total[ m_rowTypeList[i] ][column].isUsed();
                             }
 
@@ -1907,8 +1899,8 @@ QString PivotTable::renderHTML() const
                         if (m_config.isShowingRowTotals()) {
                             for (int i = 0; i < m_rowTypeList.size(); ++i) {
                                 finalRow += QString("<td%2>%1</td>")
-                                            .arg(coloredAmount((*it_innergroup).m_total[ m_rowTypeList[i] ].m_total, QString(), precision))
-                                            .arg(i == 0 ? leftborder : QString());
+                                                .arg(coloredAmount((*it_innergroup).m_total[m_rowTypeList[i]].m_total, QString(), precision),
+                                                     i == 0 ? leftborder : QString());
                             }
                         }
 
@@ -1930,7 +1922,8 @@ QString PivotTable::renderHTML() const
             //
 
             if (m_config.isConvertCurrency() && m_config.isShowingColumnTotals()) {
-                result += QString("<tr class=\"sectionfooter\"><td class=\"left\">%1&nbsp;%2</td>").arg(i18nc("Total balance", "Total")).arg((*it_outergroup).m_displayName);
+                result += QString("<tr class=\"sectionfooter\"><td class=\"left\">%1&nbsp;%2</td>")
+                              .arg(i18nc("Total balance", "Total"), (*it_outergroup).m_displayName);
                 column = 0;
                 while (column < m_numColumns) {
                     QString lb;
@@ -1939,8 +1932,7 @@ QString PivotTable::renderHTML() const
 
                     for (int i = 0; i < m_rowTypeList.size(); ++i) {
                         result += QString("<td%2>%1</td>")
-                                  .arg(coloredAmount((*it_outergroup).m_total[ m_rowTypeList[i] ][column], QString(), precision))
-                                  .arg(i == 0 ? lb : QString());
+                                      .arg(coloredAmount((*it_outergroup).m_total[m_rowTypeList[i]][column], QString(), precision), i == 0 ? lb : QString());
                     }
 
                     column++;
@@ -1948,9 +1940,9 @@ QString PivotTable::renderHTML() const
 
                 if (m_config.isShowingRowTotals()) {
                     for (int i = 0; i < m_rowTypeList.size(); ++i) {
-                        result += QString("<td%2>%1</td>")
-                                  .arg(coloredAmount((*it_outergroup).m_total[ m_rowTypeList[i] ].m_total, QString(), precision))
-                                  .arg(i == 0 ? leftborder : QString());
+                        result +=
+                            QString("<td%2>%1</td>")
+                                .arg(coloredAmount((*it_outergroup).m_total[m_rowTypeList[i]].m_total, QString(), precision), i == 0 ? leftborder : QString());
                     }
                 }
                 result += "</tr>\n";
@@ -1976,9 +1968,8 @@ QString PivotTable::renderHTML() const
                 lb = leftborder;
 
             for (int i = 0; i < m_rowTypeList.size(); ++i) {
-                result += QString("<td%2>%1</td>")
-                          .arg(coloredAmount(m_grid.m_total[ m_rowTypeList[i] ][totalcolumn], QString(), precision))
-                          .arg(i == 0 ? lb : QString());
+                result +=
+                    QString("<td%2>%1</td>").arg(coloredAmount(m_grid.m_total[m_rowTypeList[i]][totalcolumn], QString(), precision), i == 0 ? lb : QString());
             }
 
             totalcolumn++;
@@ -1987,8 +1978,7 @@ QString PivotTable::renderHTML() const
         if (m_config.isShowingRowTotals()) {
             for (int i = 0; i < m_rowTypeList.size(); ++i) {
                 result += QString("<td%2>%1</td>")
-                          .arg(coloredAmount(m_grid.m_total[ m_rowTypeList[i] ].m_total, QString(), precision))
-                          .arg(i == 0 ? leftborder : QString());
+                              .arg(coloredAmount(m_grid.m_total[m_rowTypeList[i]].m_total, QString(), precision), i == 0 ? leftborder : QString());
             }
         }
 
@@ -2392,7 +2382,8 @@ void PivotTable::includeInvestmentSubAccounts()
             for (const auto& sAccount : qAsConst(accountList)) {
                 auto acc = MyMoneyFile::instance()->account(sAccount);
                 if (acc.accountType() == eMyMoney::Account::Type::Investment) {
-                    for (const auto& sSubAccount : acc.accountList()) {
+                    const auto subAccounts = acc.accountList();
+                    for (const auto& sSubAccount : qAsConst(subAccounts)) {
                         if (!accountList.contains(sSubAccount)) {
                             m_config.addAccount(sSubAccount);
                         }

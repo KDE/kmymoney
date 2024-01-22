@@ -26,7 +26,7 @@
 #include <templatesmodel.h>
 #include <mymoneyaccount.h>
 
-class KAccountTemplateSelectorPrivate
+class KAccountTemplateSelectorPrivate : public QObject
 {
     Q_DISABLE_COPY(KAccountTemplateSelectorPrivate)
 
@@ -36,8 +36,9 @@ public:
     QMap<QString, QTreeWidgetItem*>   templateHierarchy;
 
 public:
-    KAccountTemplateSelectorPrivate()
-        : ui(new Ui::KAccountTemplateSelector)
+    KAccountTemplateSelectorPrivate(QObject* parent)
+        : QObject(parent)
+        , ui(new Ui::KAccountTemplateSelector)
         , model(nullptr)
     {
     }
@@ -52,7 +53,7 @@ public:
     {
         if (!templateHierarchy.contains(parent)
                 || templateHierarchy[parent] == 0) {
-            const QRegularExpression hierarchyExp(QLatin1String("(.*):(.*)"));
+            static const QRegularExpression hierarchyExp(QLatin1String("(.*):(.*)"));
             const auto hierarchyParts(hierarchyExp.match(parent));
             if (hierarchyParts.hasMatch())
                 templateHierarchy[parent] = hierarchyItem(hierarchyParts.captured(1), hierarchyParts.captured(2));
@@ -69,7 +70,7 @@ public:
             if (account.isElement()) {
                 QDomElement accountElement = account.toElement();
                 if (accountElement.tagName() == QLatin1String("account")) {
-                    QString name = QString("%1:%2").arg(parent).arg(accountElement.attribute("name"));
+                    QString name = QString("%1:%2").arg(parent, accountElement.attribute("name"));
                     list[name] = 0;
                     hierarchy(list, name, account.firstChild());
                 }
@@ -147,7 +148,7 @@ public:
 
         ui->m_accountList->clear();
 
-        const QRegularExpression hierarchyExp(QLatin1String("(.*):(.*)"));
+        static const QRegularExpression hierarchyExp(QLatin1String("(.*):(.*)"));
         for (QMap<QString, QTreeWidgetItem*>::iterator it_h = templateHierarchy.begin(); it_h != templateHierarchy.end(); ++it_h) {
             const auto hierarchyParts(hierarchyExp.match(it_h.key()));
             if (!hierarchyParts.hasMatch()) {
@@ -168,9 +169,9 @@ public:
     }
 };
 
-KAccountTemplateSelector::KAccountTemplateSelector(QWidget* parent) :
-    QWidget(parent),
-    d_ptr(new KAccountTemplateSelectorPrivate)
+KAccountTemplateSelector::KAccountTemplateSelector(QWidget* parent)
+    : QWidget(parent)
+    , d_ptr(new KAccountTemplateSelectorPrivate(this))
 {
     Q_D(KAccountTemplateSelector);
     d->ui->setupUi(this);
@@ -190,10 +191,11 @@ void KAccountTemplateSelector::setModel(TemplatesModel* model)
     Q_D(KAccountTemplateSelector);
     d->model = model;
     d->ui->m_groupList->setModel(model);
-    connect(d->ui->m_groupList->selectionModel(), &QItemSelectionModel::selectionChanged, this, [&]() {
-        Q_D(KAccountTemplateSelector);
-        d->loadHierarchy();
-    }, Qt::UniqueConnection);
+    connect(d->ui->m_groupList->selectionModel(),
+            &QItemSelectionModel::selectionChanged,
+            d,
+            &KAccountTemplateSelectorPrivate::loadHierarchy,
+            Qt::UniqueConnection);
 }
 
 QList<MyMoneyTemplate> KAccountTemplateSelector::selectedTemplates() const

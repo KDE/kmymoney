@@ -58,9 +58,6 @@ protected:
 protected Q_SLOTS:
     void endEdit();
 
-Q_SIGNALS:
-    void sizeHintChanged(const QModelIndex&) const;
-
 private:
     class Private;
     Private * const d;

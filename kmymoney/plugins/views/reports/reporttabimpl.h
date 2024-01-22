@@ -99,7 +99,7 @@ private:
      */
     void updateDataRangeValidators(const int& precision);
 private Q_SLOTS:
-    void slotEditingFinished(EDimension dim);
+    void slotEditingFinished(ReportTabRange::EDimension dim);
     void slotEditingFinishedStart();
     void slotEditingFinishedEnd();
     void slotEditingFinishedMajor();

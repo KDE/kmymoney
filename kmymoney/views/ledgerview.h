@@ -178,13 +178,13 @@ protected Q_SLOTS:
     void reselectAfterModelReset();
 
 Q_SIGNALS:
-    void requestCustomContextMenu(eMenu::Menu type, const QPoint& pos) const;
-    void transactionSelectionChanged (const SelectedObjects& selection) const;
-    void transactionSelected(const QModelIndex& idx) const;
-    void aboutToStartEdit() const;
-    void aboutToFinishEdit() const;
-    void sectionResized(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize) const;
-    void sectionMoved(QWidget* view, int section, int oldIndex, int newIndex) const;
+    void requestCustomContextMenu(eMenu::Menu type, const QPoint& pos);
+    void transactionSelectionChanged(const SelectedObjects& selection);
+    void transactionSelected(const QModelIndex& idx);
+    void aboutToStartEdit();
+    void aboutToFinishEdit();
+    void sectionResized(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize);
+    void sectionMoved(QWidget* view, int section, int oldIndex, int newIndex);
     void requestView(QWidget* viewWidget, const QString& accountId, const QString& journalEntryId);
     void settingsChanged();
     void sortOrderChanged(QList<int> sortOrder);

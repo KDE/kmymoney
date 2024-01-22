@@ -106,7 +106,7 @@ void XMLStorageSettingsWidget::slotIdChanged()
 
             // if we have a master key, we store it in the hidden widget
             if (m_masterKeyCombo->currentIndex() != 0) {
-                const QRegularExpression keyExp(".* \\((.*)\\)");
+                static const QRegularExpression keyExp(".* \\((.*)\\)");
                 const auto key(keyExp.match(m_masterKeyCombo->currentText()));
                 if (key.hasMatch()) {
                     kcfg_GpgRecipient->setText(key.captured(1));
@@ -132,7 +132,7 @@ void XMLStorageSettingsWidget::showEvent(QShowEvent * event)
     QString masterKey;
 
     if (m_masterKeyCombo->currentIndex() != 0) {
-        const QRegularExpression keyExp(".* \\((.*)\\)");
+        static const QRegularExpression keyExp(".* \\((.*)\\)");
         const auto key(keyExp.match(m_masterKeyCombo->currentText()));
         if (key.hasMatch()) {
             masterKey = key.captured(1);
@@ -154,7 +154,7 @@ void XMLStorageSettingsWidget::showEvent(QShowEvent * event)
             QString name = fields[1];
             name.replace('(', "[");
             name.replace(')', "]");
-            name = QString("%1 (0x%2)").arg(name).arg(fields[0]);
+            name = QString("%1 (0x%2)").arg(name, fields[0]);
             m_masterKeyCombo->addItem(name);
             if (name.contains(masterKey))
                 m_masterKeyCombo->setCurrentItem(name);

@@ -191,7 +191,7 @@ bool XMLStorage::open(const QUrl &url)
     else
         ungetString(qfile, qbaFileHeader.data(), 70);
 
-    const QRegularExpression kmyexp(QLatin1String("<!DOCTYPE KMYMONEY-FILE>"));
+    static const QRegularExpression kmyexp(QLatin1String("<!DOCTYPE KMYMONEY-FILE>"));
     QByteArray txt(qbaFileHeader, 70);
     const auto docType(kmyexp.match(txt));
     if (!docType.hasMatch())
@@ -343,11 +343,13 @@ bool XMLStorage::saveAs()
         prevDir = appInterface()->readLastUsedDir();
 
     QPointer<QFileDialog> dlg =
-        new QFileDialog(nullptr, i18n("Save As"), prevDir,
-                        QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.kmy")).arg(i18nc("KMyMoney (Filefilter)", "KMyMoney files")) +
-                        QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.anon.xml")).arg(i18nc("Anonymous (Filefilter)", "Anonymous files")) +
-                        QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.xml")).arg(i18nc("XML (Filefilter)", "XML files")) +
-                        QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*")).arg(i18nc("All files (Filefilter)", "All files")));
+        new QFileDialog(nullptr,
+                        i18n("Save As"),
+                        prevDir,
+                        QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.kmy"), i18nc("KMyMoney (Filefilter)", "KMyMoney files"))
+                            + QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.anon.xml"), i18nc("Anonymous (Filefilter)", "Anonymous files"))
+                            + QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.xml"), i18nc("XML (Filefilter)", "XML files"))
+                            + QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*"), i18nc("All files (Filefilter)", "All files")));
     dlg->setAcceptMode(QFileDialog::AcceptSave);
     connect(dlg, &QFileDialog::filterSelected, this, [&](const QString txt) {
         // for some reason, txt sometimes contains the filter expression only
@@ -382,7 +384,7 @@ bool XMLStorage::saveAs()
                 rc = save(newURL);
             else {
                 appInterface()->writeFilenameURL(newURL);
-                const QRegularExpression keyExp(QLatin1String(".* \\((.*)\\)"));
+                static const QRegularExpression keyExp(QLatin1String(".* \\((.*)\\)"));
                 const auto key(keyExp.match(selectedKeyName));
                 if (key.hasMatch()) {
                     m_encryptionKeys = key.captured(1);
@@ -453,7 +455,8 @@ void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWr
                 }
             }
 
-            for(const QString& key: keyList.split(',', Qt::SkipEmptyParts)) {
+            const auto keys = keyList.split(',', Qt::SkipEmptyParts);
+            for (const QString& key : qAsConst(keys)) {
                 if (!KGPGFile::keyAvailable(key)) {
                     KMessageBox::error(nullptr, i18n("<p>You have specified to encrypt your data for the user-id</p><p><center><b>%1</b>.</center></p><p>Unfortunately, a valid key for this user-id was not found in your keyring. Please make sure to import a valid key for this user-id. This time, encryption is disabled.</p>", key), i18n("GPG Key not found"));
                     encryptFile = false;
@@ -494,7 +497,8 @@ void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWr
     if (!keyList.isEmpty() && encryptFile && !plaintext) {
         std::unique_ptr<KGPGFile> kgpg = std::unique_ptr<KGPGFile>(new KGPGFile{writeFile});
         if (kgpg) {
-            for(const QString& key: keyList.split(',', Qt::SkipEmptyParts)) {
+            const auto keys = keyList.split(',', Qt::SkipEmptyParts);
+            for (const QString& key : qAsConst(keys)) {
                 kgpg->addRecipient(key.toLatin1());
             }
 

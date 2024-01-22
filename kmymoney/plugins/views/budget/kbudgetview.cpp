@@ -509,7 +509,7 @@ void KBudgetView::removeActions()
 {
     Q_D(KBudgetView);
     // remove and delete the actions for this plugin
-    for (const auto& action : d->m_actions) {
+    for (const auto& action : qAsConst(d->m_actions)) {
         d->m_actionCollection->removeAction(action);
     }
     // the context menu should be our child, but you never know

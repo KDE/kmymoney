@@ -46,11 +46,11 @@ class KMM_BASE_WIDGETS_EXPORT AmountEdit : public QLineEdit, public MultiCurrenc
     Q_OBJECT
     Q_DISABLE_COPY(AmountEdit)
 
-    Q_PROPERTY(bool calculatorButtonVisibility READ isCalculatorButtonVisible WRITE setCalculatorButtonVisible)
-    Q_PROPERTY(bool allowEmpty READ isEmptyAllowed WRITE setAllowEmpty)
-    Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly)
-    Q_PROPERTY(MyMoneyMoney value READ value WRITE setValue DESIGNABLE false STORED false USER true)
-    Q_PROPERTY(bool valid READ isValid DESIGNABLE false STORED false)
+    Q_PROPERTY(bool calculatorButtonVisibility READ isCalculatorButtonVisible WRITE setCalculatorButtonVisible NOTIFY calculatorButtonVisibilityChanged)
+    Q_PROPERTY(bool allowEmpty READ isEmptyAllowed WRITE setAllowEmpty NOTIFY allowEmptyChanged)
+    Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly NOTIFY readOnlyChanged)
+    Q_PROPERTY(MyMoneyMoney value READ value WRITE setValue DESIGNABLE false STORED false USER true NOTIFY amountChanged)
+    Q_PROPERTY(bool valid READ isValid DESIGNABLE false STORED false NOTIFY validityChanged)
 
 protected Q_SLOTS:
     void theTextChanged(const QString & text);
@@ -247,7 +247,7 @@ public Q_SLOTS:
      *
      * @sa setShowShares(), setShowValue()
      */
-    void setDisplayState(DisplayState state) override;
+    void setDisplayState(MultiCurrencyEdit::DisplayState state) override;
 
     /**
      * overridden for internal reasons (keep state of calculator button)
@@ -273,7 +273,12 @@ Q_SIGNALS:
      * by a call to setDisplayState(), setShowShares() or
      * setShowValue() or by user activity.
      */
-    void displayStateChanged(DisplayState state);
+    void displayStateChanged(MultiCurrencyEdit::DisplayState state);
+
+    void calculatorButtonVisibilityChanged(bool show);
+    void allowEmptyChanged(bool allowed);
+    void readOnlyChanged(bool readOnly);
+    void validityChanged(bool isValid);
 
 protected:
     explicit AmountEdit(QWidget* parent, const int prec, AmountEditPrivate* dd);

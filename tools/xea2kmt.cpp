@@ -477,6 +477,7 @@ protected:
 
     bool writeAsXml(QIODevice *device)
     {
+        static const QRegularExpression regExp(".*/accounts");
         QXmlStreamWriter xml(device);
         xml.setAutoFormatting(true);
         xml.setAutoFormattingIndent(1);
@@ -486,7 +487,7 @@ protected:
         xml.writeStartDocument();
 
         QString fileName = inFileName;
-        fileName.replace(QRegularExpression(".*/accounts"), "accounts");
+        fileName.replace(regExp, "accounts");
         xml.writeComment(QString("\n"
                                  "     Converted using xea2kmt from GnuCash sources\n"
                                  "\n"
@@ -522,14 +523,14 @@ void scanDir(QDir dir, QStringList &files)
     {
         if (debug)
             qDebug() << "Found file: " << fileList[i];
-        files.append(QString("%1/%2").arg(dir.absolutePath()).arg(fileList[i]));
+        files.append(QString("%1/%2").arg(dir.absolutePath(), fileList[i]));
     }
 
     dir.setFilter(QDir::AllDirs | QDir::NoDotAndDotDot | QDir::NoSymLinks);
     QStringList dirList = dir.entryList();
     for (int i=0; i<dirList.size(); ++i)
     {
-        QString newPath = QString("%1/%2").arg(dir.absolutePath()).arg(dirList.at(i));
+        QString newPath = QString("%1/%2").arg(dir.absolutePath(), dirList.at(i));
         scanDir(QDir(newPath), files);
     }
 }

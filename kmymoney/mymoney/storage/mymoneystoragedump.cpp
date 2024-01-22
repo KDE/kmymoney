@@ -384,7 +384,8 @@ void MyMoneyStorageDump::dumpKVP(const QString& headline, QTextStream& s, const 
     ind.fill(' ', indent);
     s << ind << headline << "\n";
     QMap<QString, QString>::const_iterator it;
-    for (it = kvp.pairs().constBegin(); it != kvp.pairs().constEnd(); ++it) {
+    const auto pairs = kvp.pairs();
+    for (it = pairs.constBegin(); it != pairs.constEnd(); ++it) {
         s << ind << "  '" << it.key() << "' = '" << it.value() << "'\n";
     }
 }
@@ -401,7 +402,8 @@ void MyMoneyStorageDump::dumpTransaction(QTextStream& s, MyMoneyFile* file, cons
 
     s << "  Splits\n";
     s << "  ------\n";
-    for (const auto& split : it_t.splits()) {
+    const auto splits = it_t.splits();
+    for (const auto& split : qAsConst(splits)) {
         s << "   ID = " << split.id() << "\n";
         s << "    Transaction = " << split.transactionId() << "\n";
         s << "    Payee = " << split.payeeId();
@@ -411,9 +413,9 @@ void MyMoneyStorageDump::dumpTransaction(QTextStream& s, MyMoneyFile* file, cons
         } else
             s << " ()\n";
         for (int i = 0; i < split.tagIdList().size(); i++) {
-            s << "    Tag = " << split.tagIdList()[i];
-            if (!split.tagIdList()[i].isEmpty()) {
-                MyMoneyTag ta = file->tag(split.tagIdList()[i]);
+            s << "    Tag = " << split.tagIdList().at(i);
+            if (!split.tagIdList().at(i).isEmpty()) {
+                MyMoneyTag ta = file->tag(split.tagIdList().at(i));
                 s << " (" << ta.name() << ")" << "\n";
             } else
                 s << " ()\n";

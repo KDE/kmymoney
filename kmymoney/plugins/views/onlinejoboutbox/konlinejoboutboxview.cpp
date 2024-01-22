@@ -333,7 +333,7 @@ QStringList KOnlineJobOutboxView::selectedOnlineJobs() const
 
     QStringList jobIds;
     jobIds.reserve(indexes.count());
-    for (const auto& idx : indexes) {
+    for (const auto& idx : qAsConst(indexes)) {
         jobIds << idx.data(eMyMoney::Model::IdRole).toString();
     }
     return jobIds;
@@ -357,7 +357,8 @@ void KOnlineJobOutboxView::slotSendJobs()
 void KOnlineJobOutboxView::slotSendAllSendableJobs()
 {
     QList<onlineJob> validJobs;
-    for (const onlineJob& job : MyMoneyFile::instance()->onlineJobList()) {
+    const auto onlineJobList = MyMoneyFile::instance()->onlineJobList();
+    for (const onlineJob& job : qAsConst(onlineJobList)) {
         if (job.isValid() && job.isEditable())
             validJobs.append(job);
     }
@@ -370,7 +371,7 @@ void KOnlineJobOutboxView::slotSendAllSendableJobs()
 void KOnlineJobOutboxView::slotSendSelectedJobs()
 {
     Q_D(KOnlineJobOutboxView);
-    QModelIndexList indexes = d->ui->m_onlineJobView->selectionModel()->selectedRows();
+    const QModelIndexList indexes = d->ui->m_onlineJobView->selectionModel()->selectedRows();
     if (indexes.isEmpty())
         return;
 
@@ -379,7 +380,7 @@ void KOnlineJobOutboxView::slotSendSelectedJobs()
     validJobs.reserve(indexes.count());
 
     // Get valid jobs
-    for (const auto& idx : indexes) {
+    for (const auto& idx : qAsConst(indexes)) {
         onlineJob job = idx.data(eMyMoney::Model::OnlineJobRole).value<onlineJob>();
         if (job.isValid() && job.isEditable())
             validJobs.append(job);

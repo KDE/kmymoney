@@ -66,8 +66,8 @@ protected Q_SLOTS:
     void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected) override;
 
 Q_SIGNALS:
-    void requestSelectionChange (const SelectedObjects& selections) const;
-    void requestCustomContextMenu(eMenu::Menu contextMenu, const QPoint& pos) const;
+    void requestSelectionChange(const SelectedObjects& selections);
+    void requestCustomContextMenu(eMenu::Menu contextMenu, const QPoint& pos);
     void requestActionTrigger(eMenu::Action action);
 
 private:

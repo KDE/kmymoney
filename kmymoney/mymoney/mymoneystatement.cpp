@@ -76,19 +76,19 @@ qHashSeedType qHash(const Attribute key, qHashSeedType seed)
 
 using namespace eMyMoney;
 
-const QHash<Statement::Type, QString> txAccountType{
-    // clang-format off
+// clang-format off
+static const QHash<Statement::Type, QString> txAccountType{ // clazy:exclude=non-pod-global-static
     {Statement::Type::None,       QStringLiteral("none")},
     {Statement::Type::Checkings,  QStringLiteral("checkings")},
     {Statement::Type::Savings,    QStringLiteral("savings")},
     {Statement::Type::Investment, QStringLiteral("investment")},
     {Statement::Type::CreditCard, QStringLiteral("creditcard")},
     {Statement::Type::Invalid,    QStringLiteral("invalid")},
-    // clang-format on
 };
+// clang-format on
 
-const QHash<Transaction::Action, QString> txAction{
-    // clang-format off
+// clang-format off
+static const QHash<Transaction::Action, QString> txAction{ // clazy:exclude=non-pod-global-static
     {Transaction::Action::None,             QStringLiteral("none")},
     {Transaction::Action::Buy,              QStringLiteral("buy")},
     {Transaction::Action::Sell,             QStringLiteral("sell")},
@@ -100,8 +100,8 @@ const QHash<Transaction::Action, QString> txAction{
     {Transaction::Action::Fees,             QStringLiteral("fees")},
     {Transaction::Action::Interest,         QStringLiteral("interest")},
     {Transaction::Action::Invalid,          QStringLiteral("invalid")},
-    // clang-format on
 };
+// clang-format on
 
 QString getElName(const Statement::Element el)
 {

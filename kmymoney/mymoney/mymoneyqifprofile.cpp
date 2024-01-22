@@ -60,7 +60,7 @@ public:
 
 void MyMoneyQifProfile::Private::dissectDate(QVector<QString>& parts, const QString& txt) const
 {
-    const QRegularExpression nonDelimChars(QLatin1String("[ 0-9a-zA-Z]"));
+    static const QRegularExpression nonDelimChars(QLatin1String("[ 0-9a-zA-Z]"));
     int part = 0; // the current part we scan
     int pos; // the current scan position
     int maxPartSize = txt.length() > 6 ? 4 : 2;
@@ -806,7 +806,7 @@ void MyMoneyQifProfile::autoDetect(const QStringList& lines)
     // 2 - transactions
     // 3 - prices
     int section = 0;
-    const QRegularExpression priceExp(QLatin1String("\"(.*)\",(.*),\"(.*)\""));
+    static const QRegularExpression priceExp(QLatin1String("\"(.*)\",(.*),\"(.*)\""));
     QRegularExpressionMatch priceMatch;
     for (it = lines.begin(); it != lines.end(); ++it) {
         QChar c((*it)[0]);
@@ -937,7 +937,7 @@ void MyMoneyQifProfile::autoDetect(const QStringList& lines)
 void MyMoneyQifProfile::scanNumeric(const QString& txt, QChar& decimal, QChar& thousands) const
 {
     QChar first, second;
-    const QRegularExpression numericCharsExp(QLatin1String("[0-9-()]"));
+    static const QRegularExpression numericCharsExp(QLatin1String("[0-9-()]"));
     for (int i = 0; i < txt.length(); ++i) {
         const QChar& c = txt[i];
         const auto numericChars(numericCharsExp.match(c));

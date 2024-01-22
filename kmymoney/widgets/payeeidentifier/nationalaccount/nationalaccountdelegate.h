@@ -26,9 +26,6 @@ public:
     void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const final override;
     void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
 
-Q_SIGNALS:
-    void sizeHintChanged(const QModelIndex&) const;
-
 private:
     inline payeeIdentifierTyped<payeeIdentifiers::nationalAccount> identByIndex(const QModelIndex& index) const;
 

@@ -102,7 +102,7 @@ QStringList KMyMoneySettings::listOfItems()
     QStringList list = itemList().split(',', Qt::SkipEmptyParts);
 
     // now add all from 'all' that are missing in 'list'
-    const QRegularExpression exp(QLatin1String("-?(\\d+)"));
+    static const QRegularExpression exp(QLatin1String("-?(\\d+)"));
     QStringList::iterator it_s;
     for (it_s = all.begin(); it_s != all.end(); ++it_s) {
         const auto item(exp.match(*it_s));

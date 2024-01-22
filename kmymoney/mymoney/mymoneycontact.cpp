@@ -66,7 +66,7 @@ QString MyMoneyContact::ownerFullName() const
 void MyMoneyContact::fetchContact(const QString &email)
 {
 #ifdef ENABLE_ADDRESSBOOK
-    QRegularExpression re(".+@.+");
+    static const QRegularExpression re(".+@.+");
     if (!re.match(email).hasMatch()) {
         ContactData contact;
         Q_EMIT contactFetched(contact);

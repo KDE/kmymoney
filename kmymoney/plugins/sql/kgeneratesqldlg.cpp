@@ -152,7 +152,7 @@ int  KGenerateSqlDlg::exec()
     QStringList::Iterator it = list.begin();
     while (it != list.end()) {
         QString dname = *it;
-        if (map.keys().contains(dname)) { // only keep if driver is supported
+        if (map.contains(dname)) { // only keep if driver is supported
             dname = dname + " - " + map[dname];
             d->m_supportedDrivers.append(dname);
         }

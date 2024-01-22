@@ -496,7 +496,8 @@ void ListTable::includeInvestmentSubAccounts()
     for (const auto& sAccount : qAsConst(accountIdList)) {
         const auto acc = file->account(sAccount);
         if (acc.accountType() == eMyMoney::Account::Type::Investment) {
-            for (const auto& sSubAccount : acc.accountList()) {
+            const auto subAccountList = acc.accountList();
+            for (const auto& sSubAccount : qAsConst(subAccountList)) {
                 if (!accountIdList.contains(sSubAccount)) {
                     subAccountsList.append(sSubAccount);
                 }

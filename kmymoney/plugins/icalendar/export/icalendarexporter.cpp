@@ -89,7 +89,8 @@ iCalendarExporter::~iCalendarExporter()
 
 void iCalendarExporter::slotFirstExport()
 {
-    QPointer<QFileDialog> fileDialog = new QFileDialog(d->m_action->parentWidget(), QString(), QString(), QString("%1|%2\n").arg("*.ics").arg(i18nc("ICS (Filefilter)", "iCalendar files")));
+    QPointer<QFileDialog> fileDialog =
+        new QFileDialog(d->m_action->parentWidget(), QString(), QString(), QString("%1|%2\n").arg("*.ics", i18nc("ICS (Filefilter)", "iCalendar files")));
 
     fileDialog->setAcceptMode(QFileDialog::AcceptSave);
     fileDialog->setWindowTitle(i18n("Export as"));

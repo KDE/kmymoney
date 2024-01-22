@@ -243,7 +243,8 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     connect(m_control->ui->buttonChart, &QAbstractButton::clicked, eventHandler, &KReportsView::slotToggleChart);
 
     // setup style for all buttons to contain icon and text
-    for (auto* button : m_control->findChildren<QToolButton*>()) {
+    const auto buttons = m_control->findChildren<QToolButton*>();
+    for (auto* button : qAsConst(buttons)) {
         button->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     }
     enableAllReportActions();
@@ -300,7 +301,6 @@ void KReportTab::print()
                 QFont font = painter.font();
                 font.setPointSizeF(font.pointSizeF() * 0.8);
                 painter.setFont(font);
-                QLocale locale;
                 painter.drawText(0, 0, MyMoneyUtils::formatDate(QDate::currentDate()));
 
                 /// @todo extract url from KMyMoneyApp
@@ -436,6 +436,8 @@ void KReportTab::toggleChart()
 
 void KReportTab::updateDataRange()
 {
+    static const QRegularExpression trailingsZeroesRegEx("0+$");
+
     QList<DataDimension> grids = m_chartView->coordinatePlane()->gridDimensionsList();    // get dimensions of plotted graph
     if (grids.isEmpty())
         return;
@@ -457,7 +459,11 @@ void KReportTab::updateDataRange()
         if (precision == 0)
             dims[i].first = locale().toString(qRound(dims.at(i).second));
         else
-            dims[i].first = locale().toString(dims.at(i).second, 'f', precision).remove(separator).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + decimalPoint + "$"));
+            dims[i].first = locale()
+                                .toString(dims.at(i).second, 'f', precision)
+                                .remove(separator)
+                                .remove(trailingsZeroesRegEx)
+                                .remove(QRegularExpression("\\" + decimalPoint + "$"));
     }
 
     // save string variables in report's data

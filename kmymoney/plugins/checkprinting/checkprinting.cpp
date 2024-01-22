@@ -142,8 +142,8 @@ struct CheckPrinting::Private {
             const QString valueVariable = QString("$SPLITVALUE%1").arg(i);
             const QString accountVariable = QString("$SPLITACCOUNTNAME%1").arg(i);
             if (i < numSplits) {
-                checkHTML.replace( valueVariable, MyMoneyUtils::formatMoney(transaction.splits()[i].value().abs(), currency));
-                checkHTML.replace( accountVariable, (file->account(transaction.splits()[i].accountId())).name());
+                checkHTML.replace(valueVariable, MyMoneyUtils::formatMoney(transaction.splits().at(i).value().abs(), currency));
+                checkHTML.replace(accountVariable, (file->account(transaction.splits().at(i).accountId())).name());
             } else {
                 checkHTML.replace( valueVariable, " ");
                 checkHTML.replace( accountVariable, " ");

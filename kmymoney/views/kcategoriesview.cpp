@@ -375,7 +375,8 @@ void KCategoriesView::slotDeleteCategory()
             // case D - User wants to delete all subcategories, now check all subcats of
             //          d->m_currentCategory and remember all that cannot be deleted and
             //          must be "reparented"
-            for (const auto& accountID : d->m_currentCategory.accountList()) {
+            const auto subAccountList = d->m_currentCategory.accountList();
+            for (const auto& accountID : qAsConst(subAccountList)) {
                 // reparent account if a transaction is assigned
                 if (file->transactionCount(accountID) != 0)
                     accountsToReparent.push_back(accountID);
