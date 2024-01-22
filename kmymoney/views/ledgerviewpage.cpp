@@ -355,7 +355,8 @@ void LedgerViewPage::slotRequestSelectionChanged(const SelectedObjects& selectio
         if (selections.count(SelectedObjects::JournalEntry) > 1) {
             // More than one item selected, so show sum
             MyMoneyMoney balance;
-            for (const auto& journalEntryId : selections.selection(SelectedObjects::JournalEntry)) {
+            const auto journalEntryIds = selections.selection(SelectedObjects::JournalEntry);
+            for (const auto& journalEntryId : qAsConst(journalEntryIds)) {
                 const auto idx = MyMoneyFile::instance()->journalModel()->indexById(journalEntryId);
                 if (idx.isValid()) {
                     balance += idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
@@ -370,7 +371,7 @@ void LedgerViewPage::slotRequestSelectionChanged(const SelectedObjects& selectio
         d->updateSummaryInformation();
 
         d->selections.setSelection(SelectedObjects::Schedule, selections.selection(SelectedObjects::Schedule));
-        Q_EMIT requestSelectionChanged(d->selections);
+        Q_EMIT const_cast<LedgerViewPage*>(this)->requestSelectionChanged(d->selections);
     }
 }
 

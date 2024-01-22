@@ -104,7 +104,7 @@ void WidgetHintFrameCollection::frameDestroyed(QObject* o)
 void WidgetHintFrameCollection::updateWidgets()
 {
     bool enabled = d->chainedCollectionState;
-    for (const auto& frame : d->frameList) {
+    for (const auto& frame : qAsConst(d->frameList)) {
         enabled &= !frame->isErroneous();
         if (!enabled) {
             break;
@@ -176,9 +176,9 @@ bool WidgetHintFrame::isErroneous() const
 static WidgetHintFrame* frame(QWidget* editWidget)
 {
     if (editWidget && editWidget->parentWidget()) {
-        QList<WidgetHintFrame*> allErrorFrames = editWidget->parentWidget()->findChildren<WidgetHintFrame*>();
+        const QList<WidgetHintFrame*> allErrorFrames = editWidget->parentWidget()->findChildren<WidgetHintFrame*>();
         QList<WidgetHintFrame*>::const_iterator it;
-        for (const auto& f : allErrorFrames) {
+        for (const auto& f : qAsConst(allErrorFrames)) {
             if (f->editWidget() == editWidget) {
                 return f;
             }

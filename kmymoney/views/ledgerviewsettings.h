@@ -78,9 +78,9 @@ public Q_SLOTS:
     /**
      * Controls visibility of the reconciliation entries in the ledgers
      */
-    void setShowReconciliationEntries(ReconciliationHeader showHeader);
+    void setShowReconciliationEntries(LedgerViewSettings::ReconciliationHeader showHeader);
 
-    void setSortOrder(SortOrderType type, const QString& sortOrder);
+    void setSortOrder(LedgerViewSettings::SortOrderType type, const QString& sortOrder);
 
 Q_SIGNALS:
     void settingsChanged();

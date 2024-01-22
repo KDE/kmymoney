@@ -70,11 +70,12 @@ const MyMoneyMoney MyMoneyAccountLoan::interestRate(const QDate& date) const
         return rate;
 
     const auto key = QStringLiteral("ir-%1").arg(date.toString(Qt::ISODate));
-    QString val;
-    const QRegularExpression interestRateExp("ir-(\\d{4})-(\\d{2})-(\\d{2})");
+    static const QRegularExpression interestRateExp("ir-(\\d{4})-(\\d{2})-(\\d{2})");
 
     QMap<QString, QString>::ConstIterator it;
-    for (it = pairs().constBegin(); it != pairs().constEnd(); ++it) {
+    const auto map = pairs();
+    QString val;
+    for (it = map.constBegin(); it != map.constEnd(); ++it) {
         const auto interestRateDate(interestRateExp.match(it.key()));
         if (interestRateDate.hasMatch()) {
             if (qstrcmp(it.key().toLatin1(), key.toLatin1()) <= 0)
@@ -121,7 +122,7 @@ const QDate MyMoneyAccountLoan::nextInterestChange() const
 {
     QDate rc;
 
-    const QRegularExpression nextChangeExp("(\\d{4})-(\\d{2})-(\\d{2})");
+    static const QRegularExpression nextChangeExp("(\\d{4})-(\\d{2})-(\\d{2})");
     const auto nextChange(nextChangeExp.match(value("interest-nextchange")));
     if (nextChange.hasMatch()) {
         rc.setDate(nextChange.captured(1).toInt(), nextChange.captured(2).toInt(), nextChange.captured(3).toInt());
@@ -141,7 +142,7 @@ int MyMoneyAccountLoan::interestChangeFrequency(int* unit) const
     if (unit)
         *unit = 1;
 
-    const QRegularExpression frequencyExp("(\\d+)/(\\d{1})");
+    static const QRegularExpression frequencyExp("(\\d+)/(\\d{1})");
     const auto frequency(frequencyExp.match(value("interest-changefrequency")));
     if (frequency.hasMatch()) {
         rc = frequency.captured(1).toInt();

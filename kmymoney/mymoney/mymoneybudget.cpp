@@ -351,8 +351,7 @@ bool MyMoneyBudget::AccountGroup::operator == (const AccountGroup& right) const
     return (d->m_id == d2->m_id //
             && d->m_budgetlevel == d2->m_budgetlevel //
             && d->m_budgetsubaccounts == d2->m_budgetsubaccounts //
-            && d->m_periods.keys() == d2->m_periods.keys() //
-            && d->m_periods.values() == d2->m_periods.values());
+            && d->m_periods == d2->m_periods);
 }
 
 MyMoneyBudget::MyMoneyBudget() :
@@ -390,8 +389,7 @@ bool MyMoneyBudget::operator == (const MyMoneyBudget& right) const
     // clang-format off
     return (MyMoneyObject::operator==(right)
             && (d->m_accounts.count() == d2->m_accounts.count())
-            && (d->m_accounts.keys() == d2->m_accounts.keys())
-            && (d->m_accounts.values() == d2->m_accounts.values())
+            && (d->m_accounts == d2->m_accounts)
             && (d->m_name == d2->m_name)
             && (d->m_start == d2->m_start));
     // clang-format on

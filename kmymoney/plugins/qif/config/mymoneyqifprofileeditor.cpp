@@ -449,7 +449,7 @@ void MyMoneyQifProfileEditor::slotAmountTypeSelected()
 void MyMoneyQifProfileEditor::slotDecimalChanged(const QString& val)
 {
     if (m_selectedAmountType != 0) {
-        QChar key = m_selectedAmountType->text(1)[0];
+        QChar key = m_selectedAmountType->text(1).at(0);
         m_profile.setAmountDecimal(key, val[0]);
         m_selectedAmountType->setText(2, val);
     }
@@ -458,7 +458,7 @@ void MyMoneyQifProfileEditor::slotDecimalChanged(const QString& val)
 void MyMoneyQifProfileEditor::slotThousandsChanged(const QString& val)
 {
     if (m_selectedAmountType != 0) {
-        QChar key = m_selectedAmountType->text(1)[0];
+        QChar key = m_selectedAmountType->text(1).at(0);
         m_profile.setAmountThousands(key, val[0]);
         m_selectedAmountType->setText(3, val);
     }

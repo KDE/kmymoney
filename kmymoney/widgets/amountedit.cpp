@@ -639,6 +639,8 @@ void AmountEdit::clear()
 void AmountEdit::theTextChanged(const QString & theText)
 {
     Q_D(AmountEdit);
+
+    const auto initiallyValid = isValid();
     QLocale locale;
     QString dec = locale.groupSeparator();
     QString l_text = theText;
@@ -679,6 +681,10 @@ void AmountEdit::theTextChanged(const QString & theText)
             }
             Q_EMIT validatedTextChanged(text());
         }
+    }
+
+    if (initiallyValid != isValid()) {
+        Q_EMIT validityChanged(isValid());
     }
 }
 
@@ -728,15 +734,21 @@ void AmountEdit::slotCalculatorResult()
 void AmountEdit::setCalculatorButtonVisible(const bool show)
 {
     Q_D(AmountEdit);
-    d->m_calculatorButton->setVisible(show);
-    d->m_actionIcons.setFlag(AmountEditPrivate::ShowCalculator, show);
-    d->updateLineEditSize(d->m_currencyButton);
+    if (d->m_calculatorButton->isVisible() != show) {
+        d->m_calculatorButton->setVisible(show);
+        d->m_actionIcons.setFlag(AmountEditPrivate::ShowCalculator, show);
+        d->updateLineEditSize(d->m_currencyButton);
+        Q_EMIT calculatorButtonVisibilityChanged(show);
+    }
 }
 
 void AmountEdit::setAllowEmpty(bool allowed)
 {
     Q_D(AmountEdit);
-    d->m_allowEmpty = allowed;
+    if (d->m_allowEmpty != allowed) {
+        d->m_allowEmpty = allowed;
+        Q_EMIT allowEmptyChanged(allowed);
+    }
 }
 
 bool AmountEdit::isEmptyAllowed() const

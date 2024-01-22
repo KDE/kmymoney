@@ -127,7 +127,7 @@ public:
         columns = m_equityColumnSelector->columns();
 
         int colIdx;
-        for (auto col : equityColumns) {
+        for (const auto& col : qAsConst(equityColumns)) {
             colIdx = columns.indexOf(col);
             if (colIdx != -1)
                 columns.remove(colIdx);

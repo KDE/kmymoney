@@ -67,7 +67,6 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
     MyMoneyFile* file = MyMoneyFile::instance();
     MyMoneySecurity currency = file->currency(account.currencyId());
 
-    QString filename;
     QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n<html><head>\n");
 
     // inline the CSS
@@ -261,7 +260,8 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
 
             if (split.reconcileFlag() == eMyMoney::Split::State::NotReconciled && split.shares().isNegative()) {
                 QString category;
-                for (const auto& tSplit : transaction.splits()) {
+                const auto splits = transaction.splits();
+                for (const auto& tSplit : qAsConst(splits)) {
                     if (tSplit.accountId() != account.id()) {
                         if (!category.isEmpty())
                             category += QLatin1String(", "); // this is a split transaction
@@ -287,7 +287,9 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
     }
 
     detailsReport += "<tr class=\"sectionfooter\">";
-    detailsReport += QString("<td class=\"left1\" colspan=\"5\">%1</td><td>%2</td></tr>").arg(i18np("One outstanding payment of", "Total of %1 outstanding payments amounting to", outstandingPayments)).arg(MyMoneyUtils::formatMoney(outstandingPaymentAmount, currency));
+    detailsReport += QString("<td class=\"left1\" colspan=\"5\">%1</td><td>%2</td></tr>")
+                         .arg(i18np("One outstanding payment of", "Total of %1 outstanding payments amounting to", outstandingPayments),
+                              MyMoneyUtils::formatMoney(outstandingPaymentAmount, currency));
 
     detailsReport += "</table>\n";
     detailsReport += QString("<h2 class=\"report\">%1</h2>\n").arg(
@@ -304,7 +306,8 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
 
             if (split.reconcileFlag() == eMyMoney::Split::State::NotReconciled && !split.shares().isNegative()) {
                 QString category;
-                for (const auto& tSplit : transaction.splits()) {
+                const auto splits = transaction.splits();
+                for (const auto& tSplit : qAsConst(splits)) {
                     if (tSplit.accountId() != account.id()) {
                         if (!category.isEmpty())
                             category += QLatin1String(", "); // this is a split transaction
@@ -322,14 +325,14 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
     }
 
     detailsReport += "<tr class=\"sectionfooter\">"
-                     + QString("<td class=\"left1\" colspan=\"5\">%1</td><td>%2</td></tr>").arg(
-                         account.accountType() == eMyMoney::Account::Type::CreditCard ?
-                         i18np("One outstanding charges of", "Total of %1 outstanding charges amounting to", outstandingDeposits) :
-                         i18np("One outstanding deposit of", "Total of %1 outstanding deposits amounting to", outstandingDeposits)
-                     ).arg(MyMoneyUtils::formatMoney(outstandingDepositAmount, currency))
+        + QString("<td class=\"left1\" colspan=\"5\">%1</td><td>%2</td></tr>")
+              .arg((account.accountType() == eMyMoney::Account::Type::CreditCard
+                        ? i18np("One outstanding charges of", "Total of %1 outstanding charges amounting to", outstandingDeposits)
+                        : i18np("One outstanding deposit of", "Total of %1 outstanding deposits amounting to", outstandingDeposits)),
+                   MyMoneyUtils::formatMoney(outstandingDepositAmount, currency))
 
-                     // end of the table
-                     + "</table>\n";
+        // end of the table
+        + "</table>\n";
 
     QPointer<KReportDlg> dlg = new KReportDlg(0, header + report + footer, header + detailsReport + footer);
     dlg->exec();

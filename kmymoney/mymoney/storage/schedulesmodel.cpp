@@ -58,8 +58,8 @@ struct SchedulesModel::Private
     {
         ScheduleInfo rc;
         const auto transaction = schedule.transaction();
-        const auto s1 = (transaction.splits().size() < 1) ? MyMoneySplit() : transaction.splits()[0];
-        const auto s2 = (transaction.splits().size() < 2) ? MyMoneySplit() : transaction.splits()[1];
+        const auto s1 = (transaction.splits().size() < 1) ? MyMoneySplit() : transaction.splits().at(0);
+        const auto s2 = (transaction.splits().size() < 2) ? MyMoneySplit() : transaction.splits().at(1);
         MyMoneySplit split;
         MyMoneyAccount acc;
 
@@ -75,7 +75,8 @@ struct SchedulesModel::Private
         {
             auto found = false;
             QStringList list;
-            for (const auto& s : transaction.splits()) {
+            const auto splits = transaction.splits();
+            for (const auto& s : qAsConst(splits)) {
                 acc = MyMoneyFile::instance()->account(s.accountId());
                 list.append(acc.id());
                 if (acc.accountGroup() == eMyMoney::Account::Type::Asset
@@ -121,7 +122,7 @@ struct SchedulesModel::Private
     QString payee(const MyMoneySchedule& schedule) const
     {
         const auto transaction = schedule.transaction();
-        const auto s1 = (transaction.splits().size() < 1) ? MyMoneySplit() : transaction.splits()[0];
+        const auto s1 = (transaction.splits().size() < 1) ? MyMoneySplit() : transaction.splits().at(0);
         if (s1.payeeId().isEmpty()) {
             return {};
         }
@@ -471,7 +472,8 @@ QList<MyMoneySchedule> SchedulesModel::scheduleList(const QString& accountId,
         if (!accountId.isEmpty()) {
             bool found = false;
             const MyMoneyTransaction& t = schedule.transaction();
-            for (const auto& split : t.splits()) {
+            const auto splits = t.splits();
+            for (const auto& split : qAsConst(splits)) {
                 if (split.accountId() == accountId) {
                     found = true;
                     break;

@@ -498,11 +498,11 @@ void MyMoneyFileTest::testAddAccounts()
         QCOMPARE(a.currencyId(), QLatin1String("EUR"));
         QCOMPARE(m->dirty(), true);
         QCOMPARE(m->asset().accountList().count(), 1);
-        QCOMPARE(m->asset().accountList()[0], QLatin1String("A000001"));
+        QCOMPARE(m->asset().accountList().at(0), QLatin1String("A000001"));
 
         institution = m->institution("I000001");
         QCOMPARE(institution.accountCount(), static_cast<unsigned>(1));
-        QCOMPARE(institution.accountList()[0], QLatin1String("A000001"));
+        QCOMPARE(institution.accountList().at(0), QLatin1String("A000001"));
 
         QCOMPARE(m_objectsRemoved.count(), 0);
         QCOMPARE(m_objectsAdded.count(), 1);
@@ -563,15 +563,15 @@ void MyMoneyFileTest::testAddAccounts()
 
         institution = m->institution("I000001");
         QCOMPARE(institution.accountCount(), static_cast<unsigned>(1));
-        QCOMPARE(institution.accountList()[0], QLatin1String("A000001"));
+        QCOMPARE(institution.accountList().at(0), QLatin1String("A000001"));
 
         institution = m->institution("I000002");
         QCOMPARE(institution.accountCount(), static_cast<unsigned>(1));
-        QCOMPARE(institution.accountList()[0], QLatin1String("A000002"));
+        QCOMPARE(institution.accountList().at(0), QLatin1String("A000002"));
 
         QCOMPARE(m->asset().accountList().count(), 2);
-        QCOMPARE(m->asset().accountList()[0], QLatin1String("A000001"));
-        QCOMPARE(m->asset().accountList()[1], QLatin1String("A000002"));
+        QCOMPARE(m->asset().accountList().at(0), QLatin1String("A000001"));
+        QCOMPARE(m->asset().accountList().at(1), QLatin1String("A000002"));
 
         QCOMPARE(m_objectsRemoved.count(), 0);
         QCOMPARE(m_objectsAdded.count(), 1);
@@ -723,8 +723,8 @@ void MyMoneyFileTest::testModifyAccount()
 
         institution = m->institution("I000002");
         QCOMPARE(institution.accountCount(), static_cast<unsigned>(2));
-        QCOMPARE(institution.accountList()[0], QLatin1String("A000002"));
-        QCOMPARE(institution.accountList()[1], QLatin1String("A000001"));
+        QCOMPARE(institution.accountList().at(0), QLatin1String("A000002"));
+        QCOMPARE(institution.accountList().at(1), QLatin1String("A000001"));
 
         QCOMPARE(m_objectsRemoved.count(), 0);
         QCOMPARE(m_objectsAdded.count(), 0);
@@ -802,7 +802,7 @@ void MyMoneyFileTest::testReparentAccount()
         QCOMPARE(q.accountCount(), 1);
         QCOMPARE(q.id(), QLatin1String("A000002"));
         QCOMPARE(p.id(), QLatin1String("A000001"));
-        QCOMPARE(q.accountList()[0], p.id());
+        QCOMPARE(q.accountList().at(0), p.id());
 
         QCOMPARE(m_objectsRemoved.count(), 0);
         QCOMPARE(m_objectsAdded.count(), 0);
@@ -1561,7 +1561,7 @@ void MyMoneyFileTest::testPayeeWithIdentifier()
         p = m->payee(p.id());
         QCOMPARE(p.payeeIdentifiers().count(), 1);
 
-        ident = p.payeeIdentifiers().first();
+        ident = p.payeeIdentifiers().at(0);
         try {
             iban = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(ident);
         } catch (...) {
@@ -1838,7 +1838,7 @@ void MyMoneyFileTest::testBaseCurrency()
         ref = m->baseCurrency();
         QCOMPARE(ref.id(), QLatin1String("EUR"));
         QCOMPARE(ref.name(), QLatin1String("Euro"));
-        QVERIFY(ref.tradingSymbol() == QChar(0x20ac));
+        QVERIFY(ref.tradingSymbol().at(0) == QChar(0x20ac));
     } catch (const MyMoneyException &e) {
         unexpectedException(e);
     }
@@ -1881,7 +1881,7 @@ void MyMoneyFileTest::testOpeningBalance()
         unexpectedException(e);
     }
 
-    QString refName = QString("%1 (%2)").arg(MyMoneyFile::openingBalancesPrefix()).arg("USD");
+    QString refName = QString("%1 (%2)").arg(MyMoneyFile::openingBalancesPrefix(), QLatin1String("USD"));
     try {
         openingAcc = m->openingBalanceAccount(second);
         QCOMPARE(openingAcc.parentAccountId(), m->equity().id());

@@ -375,7 +375,7 @@ void KSettingsSchedules::loadList()
     QFont boldFont = item->font();
     boldFont.setBold(true);
 
-    for (const auto& region : regionList) {
+    for (const auto& region : qAsConst(regionList)) {
         const auto entries = region.split(QLatin1Char('\0'));
         if (entries.at(0).compare(lastCountry)) {
             lastCountry = entries.at(0);

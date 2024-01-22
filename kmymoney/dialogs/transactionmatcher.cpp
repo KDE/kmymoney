@@ -132,7 +132,7 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
     if (sm.payeeId().isEmpty() && !si.payeeId().isEmpty()) {
         // we use "\xff\xff\xff\xff" as the default so that
         // the entry will be written, since payeeId is empty
-        sm.setValue("kmm-orig-payee", sm.payeeId(), QLatin1String("\xff\xff\xff\xff"));
+        sm.setValue("kmm-orig-payee", sm.payeeId(), QStringLiteral("\xff\xff\xff\xff"));
         sm.setPayeeId(si.payeeId());
     }
 
@@ -147,7 +147,7 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
     if (si.memo() != memo) {
         // we use "\xff\xff\xff\xff" as the default so that
         // the entry will be written, even if memo is empty
-        sm.setValue("kmm-orig-memo", memo, QLatin1String("\xff\xff\xff\xff"));
+        sm.setValue("kmm-orig-memo", memo, QStringLiteral("\xff\xff\xff\xff"));
         if (!memo.isEmpty() && !si.memo().isEmpty())
             memo += '\n';
         memo += si.memo();
@@ -234,7 +234,7 @@ void TransactionMatcher::unmatch(const MyMoneyTransaction& _t, const MyMoneySpli
         // remove splits if they were added during matching
         if (sm.MyMoneyKeyValueContainer::value("kmm-orig-onesplit", false)) {
             const auto splits = tm.splits();
-            for (auto split : splits) {
+            for (const auto& split : splits) {
                 if (split.id() == sm.id())
                     continue;
                 tm.removeSplit(split);

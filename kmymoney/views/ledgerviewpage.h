@@ -96,17 +96,17 @@ protected Q_SLOTS:
     void slotRequestSelectionChanged(const SelectedObjects& selections) const;
 
 Q_SIGNALS:
-    void requestSelectionChanged(const SelectedObjects& selection) const;
-    void requestCustomContextMenu(eMenu::Menu type, const QPoint& pos) const;
+    void requestSelectionChanged(const SelectedObjects& selection);
+    void requestCustomContextMenu(eMenu::Menu type, const QPoint& pos);
 
     void transactionSelected(const QModelIndex& idx);
     void aboutToStartEdit();
     void aboutToFinishEdit();
 
     void resizeSection(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize);
-    void sectionResized(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize) const;
+    void sectionResized(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize);
     void moveSection(QWidget* view, int section, int oldIndex, int newIndex);
-    void sectionMoved(QWidget* view, int section, int oldIndex, int newIndex) const;
+    void sectionMoved(QWidget* view, int section, int oldIndex, int newIndex);
 
     void requestView(QWidget* viewWidget, const QString& accountId, const QString& journalEntryId);
 };

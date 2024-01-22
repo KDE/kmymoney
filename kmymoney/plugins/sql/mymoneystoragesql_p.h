@@ -1240,7 +1240,7 @@ public:
         int i = 0, l = 0;
         for (const MyMoneySplit& s : splitList) {
             for (l = 0; l < s.tagIdList().size(); ++l) {
-                tagIdList << s.tagIdList()[l];
+                tagIdList << s.tagIdList().at(l);
                 splitIdList_TagSplits << splitIdList[i];
                 txIdList << txId;
             }
@@ -1390,7 +1390,8 @@ public:
         if (!query.exec()) throw MYMONEYEXCEPTIONSQL("deleting  Schedule Payment History"); // krazy:exclude=crashy
 
         query.prepare(m_db.m_tables["kmmSchedulePaymentHistory"].insertString());
-        for (const QDate& it : sch.recordedPayments()) {
+        const auto recordedPayments = sch.recordedPayments();
+        for (const QDate& it : qAsConst(recordedPayments)) {
             query.bindValue(":schedId", sch.id());
             query.bindValue(":payDate", it.toString(Qt::ISODate));
             if (!query.exec()) throw MYMONEYEXCEPTIONSQL("writing Schedule Payment History"); // krazy:exclude=crashy
@@ -1759,8 +1760,8 @@ public:
         query.prepare("SELECT kvpKey, kvpData from kmmKeyValuePairs where kvpType = :type and kvpId = :id;");
         query.bindValue(":type", kvpType);
         query.bindValue(":id", kvpId);
-        if (!query.exec()) throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("reading Kvp for %1 %2").arg(kvpType) // krazy:exclude=crashy
-                    .arg(kvpId));
+        if (!query.exec())
+            throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("reading Kvp for %1 %2").arg(kvpType, kvpId));
         while (query.next()) list.setValue(query.value(0).toString(), query.value(1).toString());
         return (list);
     }
@@ -1805,7 +1806,7 @@ public:
             }
           }
         */
-        const bool isOnlineBanking = kvpType.toLower().compare(QLatin1String("onlinebanking")) == 0;
+        const bool isOnlineBanking = kvpType.compare(QLatin1String("onlinebanking"), Qt::CaseInsensitive) == 0;
         while (query.next()) {
             QString kvpId = query.value(0).toString();
             QString kvpKey = query.value(1).toString();
@@ -1813,11 +1814,12 @@ public:
 
             // TODO: these should be moved to upgradeVXX() function
             if (isOnlineBanking) {
-                if ((kvpKey.toLower().compare(QLatin1String("provider")) == 0)
-                        && (kvpData.toLower().compare(QLatin1String("kmymoney ofx")) == 0)) {
+                if ((kvpKey.compare(QLatin1String("provider", Qt::CaseInsensitive)) == 0)
+                    && (kvpData.compare(QLatin1String("kmymoney ofx", Qt::CaseInsensitive)) == 0)) {
                     kvpData = QStringLiteral("ofximporter");
                 }
-                if ((kvpKey.toLower().compare(QLatin1String("provider")) == 0) && (kvpData.toLower().compare(QLatin1String("weboob")) == 0)) {
+                if ((kvpKey.compare(QLatin1String("provider", Qt::CaseInsensitive)) == 0)
+                    && (kvpData.compare(QLatin1String("weboob", Qt::CaseInsensitive)) == 0)) {
                     kvpData = QStringLiteral("woob");
                 }
             }
@@ -1966,15 +1968,16 @@ public:
             for (int i = 0; i < idList.size(); ++i) {
                 idString.append(idList[i].toString() + ' ');
             }
-            throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("deleting kvp for %1 %2").arg(kvpType).arg(idString));
+            throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("deleting kvp for %1 %2").arg(kvpType, idString));
         }
         m_kvps -= query.numRowsAffected();
     }
 
     ulong calcHighId(ulong i, const QString& id)
     {
+        static const QRegularExpression lettersRegex(QLatin1String("[A-Z]*"));
         QString nid = id;
-        ulong high = (ulong)nid.remove(QRegularExpression(QLatin1String("[A-Z]*"))).toULongLong();
+        ulong high = (ulong)nid.remove(lettersRegex).toULongLong();
         return std::max(high, i);
     }
 
@@ -2036,17 +2039,16 @@ public:
                         const QString& message, const QSqlDatabase* db) const
     {
         Q_Q(const MyMoneyStorageSql);
-        QString s = QString("Error in function %1 : %2").arg(function).arg(message);
-        s += QString("\nDriver = %1, Host = %2, User = %3, Database = %4")
-             .arg(db->driverName()).arg(db->hostName()).arg(db->userName()).arg(db->databaseName());
+        QString s = QString("Error in function %1 : %2").arg(function, message);
+        s += QString("\nDriver = %1, Host = %2, User = %3, Database = %4").arg(db->driverName(), db->hostName(), db->userName(), db->databaseName());
         QSqlError e = db->lastError();
         s += QString("\nDriver Error: %1").arg(e.driverText());
-        s += QString("\nDatabase Error No %1: %2").arg(e.nativeErrorCode()).arg(e.databaseText());
+        s += QString("\nDatabase Error No %1: %2").arg(e.nativeErrorCode(), e.databaseText());
         s += QString("\nText: %1").arg(e.text());
         s += QString("\nError type %1").arg(e.type());
         e = query.lastError();
         s += QString("\nExecuted: %1").arg(query.executedQuery());
-        s += QString("\nQuery error No %1: %2").arg(e.nativeErrorCode()).arg(e.text());
+        s += QString("\nQuery error No %1: %2").arg(e.nativeErrorCode(), e.text());
         s += QString("\nError type %1").arg(e.type());
 
         const_cast <MyMoneyStorageSql*>(q)->d_func()->m_error = s;
@@ -2084,8 +2086,7 @@ public:
             maindb.setUserName(url.userName());
             maindb.setPassword(url.password());
             if (!maindb.open()) {
-                throw MYMONEYEXCEPTION(QString::fromLatin1("opening database %1 in function %2")
-                                       .arg(maindb.databaseName()).arg(Q_FUNC_INFO));
+                throw MYMONEYEXCEPTION(QString::fromLatin1("opening database %1 in function %2").arg(maindb.databaseName(), Q_FUNC_INFO));
             } else {
                 QSqlQuery qm(maindb);
                 qm.exec(QString::fromLatin1("PRAGMA key = '%1'").arg(q->password()));
@@ -2734,7 +2735,7 @@ public:
         QSqlQuery query(*q);
         QString cmd = QString("SELECT * FROM %1 LIMIT 1").arg(table);
         if(!query.exec(cmd)) {
-            buildError(query, Q_FUNC_INFO, QString("Error detecting if %1 exists in %2").arg(column).arg(table));
+            buildError(query, Q_FUNC_INFO, QString("Error detecting if %1 exists in %2").arg(column, table));
             return -1;
         }
         QSqlRecord rec = query.record();

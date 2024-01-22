@@ -304,7 +304,7 @@ QString MyMoneyOracleDriver::dropPrimaryKeyString(const QString& name) const
 
 QString MyMoneyPostgresqlDriver::dropPrimaryKeyString(const QString& name) const
 {
-    return QString("ALTER TABLE %1 DROP CONSTRAINT %2_pkey;").arg(name).arg(name);
+    return QString("ALTER TABLE %1 DROP CONSTRAINT %2_pkey;").arg(name, name);
 }
 
 //*******************************************************
@@ -318,7 +318,7 @@ QString MyMoneyDbDriver::dropIndexString(const QString& tableName, const QString
 
 QString MyMoneyMysqlDriver::dropIndexString(const QString& tableName, const QString& indexName) const
 {
-    return QString("DROP INDEX %1 ON %2;").arg(indexName).arg(tableName);
+    return QString("DROP INDEX %1 ON %2;").arg(indexName, tableName);
 }
 
 //*******************************************************
@@ -337,25 +337,19 @@ QString MyMoneyDbDriver::modifyColumnString(const QString& tableName, const QStr
 QString MyMoneyMysqlDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const
 {
     return QString("ALTER TABLE %1 CHANGE %2 %3")
-           .arg(tableName)
-           .arg(columnName)
-           .arg(newDef.generateDDL(QExplicitlySharedDataPointer<MyMoneyDbDriver>(const_cast<MyMoneyMysqlDriver*>(this))));
+        .arg(tableName, columnName, newDef.generateDDL(QExplicitlySharedDataPointer<MyMoneyDbDriver>(const_cast<MyMoneyMysqlDriver*>(this))));
 }
 
 QString MyMoneyPostgresqlDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const
 {
     return QString("ALTER TABLE %1 ALTER COLUMN %2 TYPE %3")
-           .arg(tableName)
-           .arg(columnName)
-           .arg(newDef.generateDDL(QExplicitlySharedDataPointer<MyMoneyDbDriver>(const_cast<MyMoneyPostgresqlDriver*>(this))));
+        .arg(tableName, columnName, newDef.generateDDL(QExplicitlySharedDataPointer<MyMoneyDbDriver>(const_cast<MyMoneyPostgresqlDriver*>(this))));
 }
 
 QString MyMoneyOracleDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const
 {
     return QString("ALTER TABLE %1 MODIFY %2 %3")
-           .arg(tableName)
-           .arg(columnName)
-           .arg(newDef.generateDDL(QExplicitlySharedDataPointer<MyMoneyDbDriver>(const_cast<MyMoneyOracleDriver*>(this))));
+        .arg(tableName, columnName, newDef.generateDDL(QExplicitlySharedDataPointer<MyMoneyDbDriver>(const_cast<MyMoneyOracleDriver*>(this))));
 }
 
 //*******************************************************

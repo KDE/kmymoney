@@ -157,7 +157,7 @@ public:
         // insert new columns above this line
         MaxColumns,
     };
-    Q_ENUMS(Column);
+    Q_ENUM(Column);
 
     struct DateRange {
         QDate firstTransaction;

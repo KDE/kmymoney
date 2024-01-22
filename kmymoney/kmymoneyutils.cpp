@@ -197,9 +197,9 @@ QString KMyMoneyUtils::getStylesheet(QString baseStylesheet)
 
     QString css;
     css += QString(".row-even, .item0 { background-color: %1; color: %2 }\n")
-           .arg(KMyMoneySettings::schemeColor(SchemeColor::ListBackground1).name()).arg(tcolor.name());
+               .arg(KMyMoneySettings::schemeColor(SchemeColor::ListBackground1).name(), tcolor.name());
     css += QString(".row-odd, .item1  { background-color: %1; color: %2 }\n")
-           .arg(KMyMoneySettings::schemeColor(SchemeColor::ListBackground2).name()).arg(tcolor.name());
+               .arg(KMyMoneySettings::schemeColor(SchemeColor::ListBackground2).name(), tcolor.name());
     css += QString(".negativetext  { color: %1; }\n").arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name());
     css += QString("a { color: %1; }\n").arg(link.name());
 
@@ -320,7 +320,7 @@ QString KMyMoneyUtils::getAdjacentNumber(const QString& number, int offset)
     offset = (offset >= 0) ? 1 : -1;
 
     //                              +-#1--+ +#2++-#3-++-#4--+
-    QRegularExpression exp(QString("(.*\\D)?(0*)(\\d+)(\\D.*)?"));
+    static const QRegularExpression exp(QString("(.*\\D)?(0*)(\\d+)(\\D.*)?"));
     QRegularExpressionMatch match = exp.match(number);
     if (match.hasMatch()) {
         return QStringLiteral("%1%2%3%4").arg(match.captured(1), match.captured(2), QString::number(match.captured(3).toULong() + offset), match.captured(4));
@@ -357,7 +357,8 @@ MyMoneyTransaction KMyMoneyUtils::scheduledTransaction(const MyMoneySchedule& sc
 
 KXmlGuiWindow* KMyMoneyUtils::mainWindow()
 {
-    for (QWidget* widget : QApplication::topLevelWidgets()) {
+    const auto widgetList = QApplication::topLevelWidgets();
+    for (QWidget* widget : qAsConst(widgetList)) {
         KXmlGuiWindow* result = dynamic_cast<KXmlGuiWindow*>(widget);
         if (result)
             return result;
@@ -736,10 +737,8 @@ void KMyMoneyUtils::showStatementImportResult(const QStringList& resultMessages,
 
 QString KMyMoneyUtils::normalizeNumericString(const qreal& val, const QLocale& loc, const char f, const int prec)
 {
-    return loc.toString(val, f, prec)
-           .remove(loc.groupSeparator())
-           .remove(QRegularExpression("0+$"))
-           .remove(QRegularExpression("\\" + loc.decimalPoint() + "$"));
+    static const QRegularExpression trailingZeroesRegex("0+$");
+    return loc.toString(val, f, prec).remove(loc.groupSeparator()).remove(trailingZeroesRegex).remove(QRegularExpression("\\" + loc.decimalPoint() + "$"));
 }
 
 QStringList KMyMoneyUtils::tabOrder(const QString& name, const QStringList& defaultTabOrder)

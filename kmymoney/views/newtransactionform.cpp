@@ -85,7 +85,7 @@ void NewTransactionForm::showTransaction(const QModelIndex& idx)
 
     // make sure to have a four digit year display
     auto format(d->ui->dateEdit->displayFormat());
-    const QRegularExpression twoYearDigits(QLatin1String("^([^y]*)yy([^y]*)$"));
+    static const QRegularExpression twoYearDigits(QLatin1String("^([^y]*)yy([^y]*)$"));
     format.replace(twoYearDigits, QLatin1String("\\1yyyy\\2"));
     d->ui->dateEdit->setDisplayFormat(format);
 

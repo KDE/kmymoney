@@ -238,12 +238,12 @@ public:
         const auto journalModel = file->journalModel();
 
         // collect candidates
-        QStringList journalEntryIds(journalEntriesToReconcile());
+        const QStringList journalEntryIds(journalEntriesToReconcile());
         if (!journalEntryIds.isEmpty()) {
             auto balance = file->balance(accountId, endingBalanceDlg->statementDate());
 
             // walk the list of journalEntries to figure out the balance(s)
-            for (const auto& journalEntryId : journalEntryIds) {
+            for (const auto& journalEntryId : qAsConst(journalEntryIds)) {
                 const auto idx = journalModel->indexById(journalEntryId);
                 if (idx.data(eMyMoney::Model::SplitReconcileFlagRole).value<eMyMoney::Split::State>() == eMyMoney::Split::State::NotReconciled) {
                     balance -= idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
@@ -296,7 +296,7 @@ public:
             // walk the list of transactions/splits and mark the cleared ones as reconciled
             QStringList reconciledJournalEntryIds;
             TransactionMatcher matcher;
-            for (const auto& journalEntryId : journalEntryIds) {
+            for (const auto& journalEntryId : qAsConst(journalEntryIds)) {
                 const auto journalEntry = journalModel->itemById(journalEntryId);
                 auto sp = journalEntry.split();
 

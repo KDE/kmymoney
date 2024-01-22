@@ -497,7 +497,8 @@ public:
         Q_ASSERT(m_reader->isStartElement() && (m_reader->name() == elementName(Element::Account::OnlineBanking)));
 
         m_kvp.clear();
-        for (const auto& attribute : m_reader->attributes()) {
+        const auto attributes = m_reader->attributes();
+        for (const auto& attribute : qAsConst(attributes)) {
             attribute.name();
             const auto key = attribute.name().toString();
             const auto value = attribute.value().toString();
@@ -697,9 +698,7 @@ public:
     {
         Q_ASSERT(m_reader->isStartElement() && (m_reader->name() == elementName(Element::Transaction::Splits)));
 
-        QMap<QString, MyMoneyTransaction> transactions;
         while (m_reader->readNextStartElement()) {
-            const auto tag = m_reader->name();
             if (m_reader->name() == elementName(Element::Transaction::Split)) {
                 readSplit();
                 if (!m_reader->hasError()) {
@@ -752,7 +751,6 @@ public:
 
         QMap<QString, QSharedPointer<MyMoneyTransaction>> transactions;
         while (m_reader->readNextStartElement()) {
-            const auto tag = m_reader->name();
             if (m_reader->name() == nodeName(Node::Transaction)) {
                 readTransaction();
                 if (!m_reader->hasError()) {

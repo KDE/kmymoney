@@ -191,7 +191,8 @@ void MyMoneyXmlWriterPrivate::writeInstitution(const MyMoneyInstitution& institu
     writeAddress(writer, institution.street(), institution.town(), QString(), institution.postcode(), institution.telephone());
 
     writer->writeStartElement(elementName(Element::Institution::AccountIDS));
-    for (const auto& accountId : institution.accountList()) {
+    const auto accountList = institution.accountList();
+    for (const auto& accountId : qAsConst(accountList)) {
         writer->writeStartElement(elementName(Element::Institution::AccountID));
         writer->writeAttribute(attributeName(Attribute::Institution::ID), accountId);
         writer->writeEndElement();
@@ -240,7 +241,8 @@ void MyMoneyXmlWriterPrivate::writePayee(const MyMoneyPayee& payee, QXmlStreamWr
     writeAddress(writer, payee.address(), payee.city(), payee.state(), payee.postcode(), payee.telephone());
 
     // Save payeeIdentifiers (account numbers)
-    for (const auto& payeeIdentifier : payee.payeeIdentifiers()) {
+    const auto payeeIdentifiers = payee.payeeIdentifiers();
+    for (const auto& payeeIdentifier : qAsConst(payeeIdentifiers)) {
         if (!payeeIdentifier.isNull()) {
             writePayeeIdentifier(writer, payeeIdentifier);
         }
@@ -322,7 +324,8 @@ void MyMoneyXmlWriterPrivate::writeAccount(const MyMoneyAccount& account)
     // Add in subaccount information, if this account has subaccounts.
     if (!account.accountList().isEmpty()) {
         m_writer->writeStartElement(elementName(Element::Account::SubAccounts));
-        for (const auto& accountId : account.accountList()) {
+        const auto subAccounts = account.accountList();
+        for (const auto& accountId : qAsConst(subAccounts)) {
             m_writer->writeStartElement(elementName(Element::Account::SubAccount));
             m_writer->writeAttribute(attributeName(Attribute::Account::ID), accountId);
             m_writer->writeEndElement();
@@ -382,7 +385,7 @@ void MyMoneyXmlWriterPrivate::writeAccounts()
         return a1.id() < a2.id();
     });
 
-    for (const auto& account : m_accountList) {
+    for (const auto& account : qAsConst(m_accountList)) {
         writeAccount(account);
     }
 
@@ -448,7 +451,8 @@ void MyMoneyXmlWriterPrivate::writeTransaction(QXmlStreamWriter* writer, const M
     writer->writeAttribute(attributeName(Attribute::Transaction::Commodity), transaction.commodity());
 
     writer->writeStartElement(elementName(Element::Transaction::Splits));
-    for (const auto& split : transaction.splits()) {
+    const auto splits = transaction.splits();
+    for (const auto& split : qAsConst(splits)) {
         writeSplit(writer, split);
     }
     writer->writeEndElement();
@@ -497,9 +501,9 @@ void MyMoneyXmlWriterPrivate::writeSchedule(QXmlStreamWriter* writer, const MyMo
 
     // store the payment history for this schedule.
     // ipwizard: i am not sure if this is used at all
-    QList<QDate> payments = schedule.recordedPayments();
+    const QList<QDate> payments = schedule.recordedPayments();
     writer->writeStartElement(elementName(Element::Schedule::Payments));
-    for (const auto date : payments) {
+    for (const auto date : qAsConst(payments)) {
         writer->writeStartElement(elementName(Element::Schedule::Payment));
         writer->writeAttribute(attributeName(Attribute::Schedule::Date), MyMoneyUtils::dateToString(date));
         writer->writeEndElement();
@@ -524,7 +528,7 @@ void MyMoneyXmlWriterPrivate::writeSchedules()
         return t1.id() < t2.id();
     });
 
-    for (const auto& schedule : list) {
+    for (const auto& schedule : qAsConst(list)) {
         writeSchedule(m_writer, schedule);
     }
 

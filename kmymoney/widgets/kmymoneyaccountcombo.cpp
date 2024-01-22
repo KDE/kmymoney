@@ -434,7 +434,7 @@ void KMyMoneyAccountCombo::makeCompletion(const QString& txt)
                 // clear the filter before setting it to a new value
                 filterModel->setFilterFixedString(QString());
                 if (txt.contains(MyMoneyFile::AccountSeparator) == 0) {
-                    const auto filterString = QString::fromLatin1("%1%2%3").arg(completionStr).arg(QRegularExpression::escape(txt)).arg(completionStr);
+                    const auto filterString = QString::fromLatin1("%1%2%3").arg(completionStr, QRegularExpression::escape(txt), completionStr);
                     filterModel->setFilterRegularExpression(QRegularExpression(filterString, QRegularExpression::CaseInsensitiveOption));
                 } else {
                     QStringList parts = txt.split(MyMoneyFile::AccountSeparator /*, Qt::SkipEmptyParts */);

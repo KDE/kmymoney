@@ -586,9 +586,9 @@ void MyMoneyDbTable::buildSQLStrings()
     while (ft != m_fields.constEnd()) {
         if ((*ft)->isPrimaryKey()) {
             if (!ws.isEmpty()) ws += " AND ";
-            ws += QString("%1 = :%2").arg((*ft)->name()).arg((*ft)->name());
+            ws += QString("%1 = :%2").arg((*ft)->name(), (*ft)->name());
         } else {
-            qs += QString("%1 = :%2, ").arg((*ft)->name()).arg((*ft)->name());
+            qs += QString("%1 = :%2, ").arg((*ft)->name(), (*ft)->name());
         }
         ++ft;
     }
@@ -685,7 +685,7 @@ int MyMoneyDbTable::fieldNumber(const QString& name) const
 {
     QHash<QString, int>::ConstIterator i = m_fieldOrder.find(name);
     if (m_fieldOrder.constEnd() == i) {
-        throw MYMONEYEXCEPTION(QString::fromLatin1("Unknown field %1 in table %2").arg(name).arg(m_name));
+        throw MYMONEYEXCEPTION(QString::fromLatin1("Unknown field %1 in table %2").arg(name, m_name));
     }
     return i.value();
 }

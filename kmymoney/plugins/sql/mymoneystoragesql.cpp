@@ -370,7 +370,7 @@ bool MyMoneyStorageSql::endCommitUnit(const QString& callingFunction)
     }
 
     if (callingFunction != d->m_commitUnitStack.top())
-        qDebug("%s", qPrintable(QString("%1 - %2 s/be %3").arg(Q_FUNC_INFO).arg(callingFunction).arg(d->m_commitUnitStack.top())));
+        qDebug("%s", qPrintable(QString("%1 - %2 s/be %3").arg(Q_FUNC_INFO, callingFunction, d->m_commitUnitStack.top())));
     d->m_commitUnitStack.pop();
     if (d->m_commitUnitStack.isEmpty()) {
         //qDebug() << "Committing with " << QSqlQuery::refCount() << " queries";
@@ -384,7 +384,7 @@ void MyMoneyStorageSql::cancelCommitUnit(const QString& callingFunction)
     Q_D(MyMoneyStorageSql);
     if (d->m_commitUnitStack.isEmpty()) return;
     if (callingFunction != d->m_commitUnitStack.top())
-        qDebug("%s", qPrintable(QString("%1 - %2 s/be %3").arg(Q_FUNC_INFO).arg(callingFunction).arg(d->m_commitUnitStack.top())));
+        qDebug("%s", qPrintable(QString("%1 - %2 s/be %3").arg(Q_FUNC_INFO, callingFunction, d->m_commitUnitStack.top())));
     d->m_commitUnitStack.clear();
     if (!rollback()) throw MYMONEYEXCEPTION(d->buildError(QSqlQuery(), callingFunction, "cancelling commit unit") + ' ' + callingFunction);
 }
@@ -512,7 +512,8 @@ void MyMoneyStorageSql::modifyPayee(MyMoneyPayee payee)
         oldIdentIds << query.value(0).toString();
 
     // Add new and modify old payeeIdentifiers
-    for (auto ident : payee.payeeIdentifiers()) {
+    const auto payeeIdentifiers = payee.payeeIdentifiers();
+    for (auto ident : qAsConst(payeeIdentifiers)) {
         if (ident.idString().isEmpty()) {
             payeeIdentifier oldIdent(ident);
             addPayeeIdentifier(ident);
@@ -715,7 +716,8 @@ void MyMoneyStorageSql::addTransaction(const MyMoneyTransaction& tx)
     ++d->m_transactions;
     QList<MyMoneyAccount> aList;
     // for each split account, update lastMod date, balance, txCount
-    for (const auto& it_s : tx.splits()) {
+    const auto splits = tx.splits();
+    for (const auto& it_s : qAsConst(splits)) {
         MyMoneyAccount acc = d->m_file->account(it_s.accountId());
         ++d->m_transactionCountMap[acc.id()];
         aList << acc;
@@ -743,7 +745,8 @@ void MyMoneyStorageSql::modifyTransaction(const MyMoneyTransaction& tx)
     d->writeTransaction(tx.id(), tx, query, "N");
     QList<MyMoneyAccount> aList;
     // for each split account, update lastMod date, balance, txCount
-    for (const auto& it_s : tx.splits()) {
+    const auto splits = tx.splits();
+    for (const auto& it_s : qAsConst(splits)) {
         MyMoneyAccount acc = d->m_file->account(it_s.accountId());
         ++d->m_transactionCountMap[acc.id()];
         aList << acc;
@@ -763,7 +766,8 @@ void MyMoneyStorageSql::removeTransaction(const MyMoneyTransaction& tx)
 
     QList<MyMoneyAccount> aList;
     // for each split account, update lastMod date, balance, txCount
-    for (const auto& it_s : tx.splits()) {
+    const auto splits = tx.splits();
+    for (const auto& it_s : qAsConst(splits)) {
         MyMoneyAccount acc = d->m_file->account(it_s.accountId());
         --d->m_transactionCountMap[acc.id()];
         aList << acc;
@@ -1446,7 +1450,7 @@ QMap<QString, MyMoneyTag> MyMoneyStorageSql::fetchTags(const QStringList& idList
         QString whereClause = " where (";
         QString itemConnector = "";
         for (const auto& it : idList) {
-            whereClause.append(QString("%1id = '%2'").arg(itemConnector).arg(it));
+            whereClause.append(QString("%1id = '%2'").arg(itemConnector, it));
             itemConnector = " or ";
         }
         whereClause += ')';
@@ -3048,7 +3052,7 @@ QMap< QString, MyMoneyCostCenter > MyMoneyStorageSql::fetchCostCenters(const QSt
         QString whereClause = " where (";
         QString itemConnector = "";
         for (const auto& it : idList) {
-            whereClause.append(QString("%1id = '%2'").arg(itemConnector).arg(it));
+            whereClause.append(QString("%1id = '%2'").arg(itemConnector, it));
             itemConnector = " or ";
         }
         whereClause += ')';

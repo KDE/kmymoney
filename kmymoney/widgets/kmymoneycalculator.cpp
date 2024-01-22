@@ -52,10 +52,15 @@ public:
         changeDisplay(operand);
     }
 
+    const QRegularExpression& commaRegex() const
+    {
+        static const QRegularExpression regex(QLatin1String("\\."));
+        return regex;
+    }
     void changeDisplay(const QString& str)
     {
         auto txt = str;
-        txt.replace(QRegularExpression(QLatin1String("\\.")), m_comma);
+        txt.replace(commaRegex(), m_comma);
         display->setText("<b>" + txt + "</b>");
     }
 
@@ -154,7 +159,7 @@ KMyMoneyCalculator::KMyMoneyCalculator(QWidget* parent) :
 
     d->display = new QLabel(this);
     QPalette palette;
-    palette.setColor(d->display->backgroundRole(), QColor("#BDFFB4"));
+    palette.setColor(d->display->backgroundRole(), QColor(0xBD, 0xFF, 0xB4));
     d->display->setPalette(palette);
 
     d->display->setFrameStyle(QFrame::Panel | QFrame::Sunken);
@@ -429,7 +434,7 @@ QString KMyMoneyCalculator::result() const
 {
     Q_D(const KMyMoneyCalculator);
     auto txt = d->m_result;
-    txt.replace(QRegularExpression(QLatin1String("\\.")), d->m_comma);
+    txt.replace(d->commaRegex(), d->m_comma);
     if (txt[0] == '-') {
         txt = txt.mid(1); // get rid of the minus sign
         QString mask;
@@ -482,7 +487,7 @@ void KMyMoneyCalculator::keyPressEvent(QKeyEvent* ev)
 
         // since toDouble() allows scientific notation, we
         // make sure the letter e is not contained
-        if (ok && !(txt.toLower()).contains(QLatin1Char('e'))) {
+        if (ok && !(txt.contains(QLatin1Char('e'), Qt::CaseInsensitive))) {
             if (d->m_clearOperandOnDigit) {
                 d->operand.clear();
                 d->m_clearOperandOnDigit = false;

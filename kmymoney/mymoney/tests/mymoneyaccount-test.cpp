@@ -162,7 +162,7 @@ void MyMoneyAccountTest::testAssignmentConstructor()
     QCOMPARE(b.number(), "assigned Number");
     QCOMPARE(b.value("Key"), "Value");
     QCOMPARE(b.accountList().count(), 1);
-    QCOMPARE(b.accountList()[0], "ChildAccount");
+    QCOMPARE(b.accountList().at(0), "ChildAccount");
 
     MyMoneyAccountLoan c;
 
@@ -179,7 +179,7 @@ void MyMoneyAccountTest::testAssignmentConstructor()
     QCOMPARE(c.number(), "assigned Number");
     QCOMPARE(c.value("Key"), "Value");
     QCOMPARE(c.accountList().count(), 1);
-    QCOMPARE(c.accountList()[0], "ChildAccount");
+    QCOMPARE(c.accountList().at(0), "ChildAccount");
 }
 
 void MyMoneyAccountTest::testAdjustBalance()
@@ -380,15 +380,15 @@ void MyMoneyAccountTest::reconciliationHistory()
 
     QVERIFY(a.reconciliationHistory().isEmpty() == true);
     QVERIFY(a.addReconciliation(QDate(2011, 1, 2), MyMoneyMoney(123, 100)) == true);
-    QVERIFY(a.reconciliationHistory()[QDate(2011, 1, 2)] == MyMoneyMoney(123, 100));
-    QVERIFY(a.reconciliationHistory()[QDate(2011, 1, 1)] == MyMoneyMoney());
-    QVERIFY(a.reconciliationHistory()[QDate(2011, 1, 3)] == MyMoneyMoney());
+    QVERIFY(a.reconciliationHistory().value(QDate(2011, 1, 2)) == MyMoneyMoney(123, 100));
+    QVERIFY(a.reconciliationHistory().value(QDate(2011, 1, 1)) == MyMoneyMoney());
+    QVERIFY(a.reconciliationHistory().value(QDate(2011, 1, 3)) == MyMoneyMoney());
 
     QVERIFY(a.addReconciliation(QDate(2011, 2, 1), MyMoneyMoney(456, 100)) == true);
-    QVERIFY(a.reconciliationHistory()[QDate(2011, 1, 2)] == MyMoneyMoney(123, 100));
-    QVERIFY(a.reconciliationHistory()[QDate(2011, 1, 1)] == MyMoneyMoney());
-    QVERIFY(a.reconciliationHistory()[QDate(2011, 1, 3)] == MyMoneyMoney());
-    QVERIFY(a.reconciliationHistory()[QDate(2011, 2, 1)] == MyMoneyMoney(456, 100));
+    QVERIFY(a.reconciliationHistory().value(QDate(2011, 1, 2)) == MyMoneyMoney(123, 100));
+    QVERIFY(a.reconciliationHistory().value(QDate(2011, 1, 1)) == MyMoneyMoney());
+    QVERIFY(a.reconciliationHistory().value(QDate(2011, 1, 3)) == MyMoneyMoney());
+    QVERIFY(a.reconciliationHistory().value(QDate(2011, 2, 1)) == MyMoneyMoney(456, 100));
     QVERIFY(a.reconciliationHistory().count() == 2);
 }
 

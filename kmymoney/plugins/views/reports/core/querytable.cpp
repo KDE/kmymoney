@@ -389,7 +389,7 @@ void QueryTable::constructTotalRows()
                                 continue;
                             for (const auto& subtotal : qAsConst(subtotals)) {
                                 if (subtotal == ctReturn)
-                                    totalsRow[ctReturn] = stashedTotalRows.takeAt(j)[ctReturn];
+                                    totalsRow[ctReturn] = stashedTotalRows.takeAt(j).value(ctReturn);
                             }
                             break;
                         }
@@ -450,7 +450,7 @@ void QueryTable::constructTotalRows()
                     for (int j = 0; j < stashedTotalRows.count(); ++j) {
                         for (const auto& subtotal : qAsConst(subtotals)) {
                             if (subtotal == ctReturn)
-                                totalsRow[ctReturn] = stashedTotalRows.takeAt(j)[ctReturn];
+                                totalsRow[ctReturn] = stashedTotalRows.takeAt(j).value(ctReturn);
                         }
                     }
                 }

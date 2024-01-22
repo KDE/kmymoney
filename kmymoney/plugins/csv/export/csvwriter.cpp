@@ -122,13 +122,13 @@ void CsvWriter::writeAccountEntry(QTextStream& stream, const QString& accountId,
         QList<MyMoneyTransaction> trList;
         file->transactionList(trList, filter);
         QList<MyMoneyTransaction>::ConstIterator it;
-        signalProgress(0, trList.count());
+        Q_EMIT signalProgress(0, trList.count());
         int count = 0;
         m_highestSplitCount = 0;
         for (it = trList.constBegin(); it != trList.constEnd(); ++it) {
             writeTransactionEntry(*it, accountId, ++count);
             if (m_noError)
-                signalProgress(count, 0);
+                Q_EMIT signalProgress(count, 0);
         }
         data += m_headerLine.join(m_separator);
     }
@@ -171,7 +171,8 @@ void CsvWriter::writeCategoryEntry(QTextStream &s, const QString& accountId, con
     s << (acc.accountGroup() == eMyMoney::Account::Type::Expense ? QLatin1Char('E') : QLatin1Char('I'));
     s << Qt::endl;
 
-    for (const auto& sAccount : acc.accountList())
+    const auto accountList = acc.accountList();
+    for (const auto& sAccount : qAsConst(accountList))
         writeCategoryEntry(s, sAccount, name);
 }
 
@@ -260,17 +261,18 @@ void CsvWriter::extractInvestmentEntries(const QString& accountId, const QDate& 
 {
     MyMoneyFile* file = MyMoneyFile::instance();
 
-    for (const auto& sAccount : file->account(accountId).accountList()) {
+    const auto accountList = file->account(accountId).accountList();
+    for (const auto& sAccount : qAsConst(accountList)) {
         MyMoneyTransactionFilter filter(sAccount);
         filter.setDateFilter(startDate, endDate);
         QList<MyMoneyTransaction> list;
         file->transactionList(list, filter);
         QList<MyMoneyTransaction>::ConstIterator itList;
-        signalProgress(0, list.count());
+        Q_EMIT signalProgress(0, list.count());
         int count = 0;
         for (itList = list.constBegin(); itList != list.constEnd(); ++itList) {
             writeInvestmentEntry(*itList, ++count);
-            signalProgress(count, 0);
+            Q_EMIT signalProgress(count, 0);
         }
     }
 }

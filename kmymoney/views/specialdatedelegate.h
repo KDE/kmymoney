@@ -45,9 +45,6 @@ public:
 protected:
     bool eventFilter(QObject* o, QEvent* event) final override;
 
-Q_SIGNALS:
-    void sizeHintChanged(const QModelIndex&) const;
-
 private:
     class Private;
     Private * const d;

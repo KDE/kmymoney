@@ -103,7 +103,7 @@ QWidget* ibanBicItemDelegate::createEditor(QWidget* parent, const QStyleOptionVi
     connect(edit, &ibanBicItemEdit::closeEditor, this, [&](QWidget* editor) {
         Q_EMIT const_cast<ibanBicItemDelegate*>(this)->closeEditor(editor);
     } );
-    Q_EMIT sizeHintChanged(index);
+    Q_EMIT const_cast<ibanBicItemDelegate*>(this)->sizeHintChanged(index);
     return edit;
 }
 

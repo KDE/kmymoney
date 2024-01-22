@@ -92,12 +92,12 @@ void onlineJobAdministration::updateActions()
 
 QStringList onlineJobAdministration::availableOnlineTasks()
 {
-    auto plugins = KPluginMetaData::findPlugins("kmymoney_plugins/onlinetasks", [](const KPluginMetaData& data) {
+    const auto plugins = KPluginMetaData::findPlugins("kmymoney_plugins/onlinetasks", [](const KPluginMetaData& data) {
         return !(data.rawData()["KMyMoney"].toObject()["OnlineTask"].isNull());
     });
 
     QStringList list;
-    for(const KPluginMetaData& plugin: plugins) {
+    for (const KPluginMetaData& plugin : qAsConst(plugins)) {
         QJsonValue array = plugin.rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["Iids"];
         if (array.isArray())
             list.append(array.toVariant().toStringList());
@@ -112,7 +112,7 @@ bool onlineJobAdministration::isJobSupported(const QString& accountId, const QSt
 {
     if (!m_onlinePlugins)
         return false;
-    for (KMyMoneyPlugin::OnlinePluginExtended* plugin : *m_onlinePlugins) {
+    for (KMyMoneyPlugin::OnlinePluginExtended* plugin : qAsConst(*m_onlinePlugins)) {
         if (plugin->availableJobs(accountId).contains(name))
             return true;
     }
@@ -136,7 +136,7 @@ bool onlineJobAdministration::isAnyJobSupported(const QString& accountId) const
     if (!m_onlinePlugins)
         return false;
 
-    for (KMyMoneyPlugin::OnlinePluginExtended* plugin : *m_onlinePlugins) {
+    for (KMyMoneyPlugin::OnlinePluginExtended* plugin : qAsConst(*m_onlinePlugins)) {
         if (!(plugin->availableJobs(accountId).isEmpty()))
             return true;
     }
@@ -333,9 +333,9 @@ onlineJobAdministration::onlineJobEditOffers onlineJobAdministration::onlineJobE
 
     onlineJobAdministration::onlineJobEditOffers list;
     list.reserve(plugins.size());
-    for(const KPluginMetaData& data: plugins) {
+    for (const KPluginMetaData& data : qAsConst(plugins)) {
         QJsonArray editorsArray = data.rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["Editors"].toArray();
-        for(QJsonValue entry: editorsArray) {
+        for (const QJsonValue& entry : qAsConst(editorsArray)) {
             if (!entry.toObject()["OnlineTaskIds"].isNull()) {
                 list.append(onlineJobAdministration::onlineJobEditOffer{data.fileName(), KJsonUtils::readTranslatedString(entry.toObject(), "Name")});
             }
@@ -368,7 +368,8 @@ bool onlineJobAdministration::canSendAnyTask()
         MyMoneyFile::instance()->accountList(accounts, QStringList(), true);
         for (const auto& account : qAsConst(accounts)) {
             if (account.hasOnlineMapping()) {
-                for (const auto& onlineTaskIid : plugin->availableJobs(account.id())) {
+                const auto availableJobs = plugin->availableJobs(account.id());
+                for (const auto& onlineTaskIid : qAsConst(availableJobs)) {
                     if (m_onlineTasks.contains(onlineTaskIid)) {
                         return true;
                     }

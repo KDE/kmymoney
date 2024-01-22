@@ -37,6 +37,11 @@
 #define connectClearButton(col) \
   connect(ui->col ## Clear, &QToolButton::clicked, this, [&]() { clearComboBox(ui->col ); } );
 
+static void clearComboBox(QComboBox* combobox)
+{
+    combobox->setCurrentIndex(-1);
+}
+
 BankingPage::BankingPage(CSVWizard *dlg, CSVImporterCore *imp)
     : CSVWizardPage(dlg, imp)
     , m_profile(nullptr)
@@ -57,10 +62,6 @@ BankingPage::BankingPage(CSVWizard *dlg, CSVImporterCore *imp)
         {Column::Balance, ui->m_balanceCol},
     };
 
-    auto clearComboBox = [&](QComboBox* combobox) {
-        combobox->setCurrentIndex(-1);
-    };
-
     connect(ui->m_clear, &QAbstractButton::clicked, this, &BankingPage::clearColumns);
     connect(ui->m_oppositeSigns, &QAbstractButton::clicked, this, [&](bool checked) {
         m_profile->m_oppositeSigns = checked;
@@ -76,33 +77,33 @@ BankingPage::BankingPage(CSVWizard *dlg, CSVImporterCore *imp)
     });
 
     void (QComboBox::* signal)(int) = &QComboBox::currentIndexChanged;
-    connect(ui->m_amountCol, signal, this, [&](int col) {
+    connect(ui->m_amountCol, signal, this, [&](int col) { // clazy:exclude=connect-non-signal
         validateSelectedColumn(col, Column::Amount);
     });
-    connect(ui->m_debitCol, signal, this, [&](int col) {
+    connect(ui->m_debitCol, signal, this, [&](int col) { // clazy:exclude=connect-non-signal
         validateSelectedColumn(col, Column::Debit);
     });
-    connect(ui->m_creditCol, signal, this, [&](int col) {
+    connect(ui->m_creditCol, signal, this, [&](int col) { // clazy:exclude=connect-non-signal
         validateSelectedColumn(col, Column::Credit);
     });
-    connect(ui->m_numberCol, signal, this, [&](int col) {
+    connect(ui->m_numberCol, signal, this, [&](int col) { // clazy:exclude=connect-non-signal
         validateSelectedColumn(col, Column::Number);
     });
-    connect(ui->m_dateCol, signal, this, [&](int col) {
+    connect(ui->m_dateCol, signal, this, [&](int col) { // clazy:exclude=connect-non-signal
         validateSelectedColumn(col, Column::Date);
     });
-    connect(ui->m_categoryCol, signal, this, [&](int col) {
+    connect(ui->m_categoryCol, signal, this, [&](int col) { // clazy:exclude=connect-non-signal
         validateSelectedColumn(col, Column::Category);
     });
-    connect(ui->m_balanceCol, signal, this, [&](int col) {
+    connect(ui->m_balanceCol, signal, this, [&](int col) { // clazy:exclude=connect-non-signal
         validateSelectedColumn(col, Column::Balance);
     });
 
-    connect(ui->m_creditIndicator, &QLineEdit::textEdited, [&](const QString& indicator) {
+    connect(ui->m_creditIndicator, &QLineEdit::textEdited, this, [&](const QString& indicator) {
         m_profile->m_creditIndicator = indicator;
         Q_EMIT completeChanged();
     });
-    connect(ui->m_debitIndicator, &QLineEdit::textEdited, [&](const QString&  indicator) {
+    connect(ui->m_debitIndicator, &QLineEdit::textEdited, this, [&](const QString& indicator) {
         m_profile->m_debitIndicator = indicator;
         Q_EMIT completeChanged();
     });
@@ -315,7 +316,7 @@ void BankingPage::payeeColSelected(int col)
 
 void BankingPage::clearColumns()
 {
-    for (const auto& comboBox : m_columnBoxes) {
+    for (const auto& comboBox : qAsConst(m_columnBoxes)) {
         comboBox->setCurrentIndex(-1);
     }
     ui->m_creditIndicator->clear();

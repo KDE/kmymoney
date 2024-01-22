@@ -26,12 +26,8 @@ public:
     void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const override;
     void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
 
-Q_SIGNALS:
-    void sizeHintChanged(const QModelIndex&) const;
-
 private:
     inline payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBicByIndex(const QModelIndex& index) const;
-
 };
 
 #endif // IBANBICITEMDELEGATE_H

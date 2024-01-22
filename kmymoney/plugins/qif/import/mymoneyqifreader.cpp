@@ -944,7 +944,7 @@ void MyMoneyQifReader::createOpeningBalance(eMyMoney::Account::Type accType)
         if (name.isEmpty()) {
             name = i18n("QIF imported, no account name supplied");
         }
-        auto b = d->isTransfer(name, m_qifProfile.accountDelimiter().left(1), m_qifProfile.accountDelimiter().mid(1, 1));
+        auto b = d->isTransfer(name, m_qifProfile.accountDelimiter().at(0), m_qifProfile.accountDelimiter().mid(1, 1));
         Q_UNUSED(b)
         QStringList entry = m_qifEntry;   // keep a temp copy
         m_qifEntry.clear();               // and construct a temp entry to create/search the account
@@ -1097,13 +1097,13 @@ void MyMoneyQifReader::processTransactionEntry()
 
     tmp = extractLine('L');
     pos = tmp.lastIndexOf("--");
-    if (tmp.left(1) == m_qifProfile.accountDelimiter().left(1)) {
+    if (tmp.at(0) == m_qifProfile.accountDelimiter().at(0)) {
         // it's a transfer, so we wipe the memo
 //   tmp = "";         why??
 //    st.m_strAccountName = tmp;
     } else if (pos != -1) {
-//    what's this?
-//    t.setValue("Dialog", tmp.mid(pos+2));
+        //    what's this?
+        //    t.setValue("Dialog", tmp.mid(pos+2));
         tmp = tmp.left(pos);
     }
 //  t.setMemo(tmp);
@@ -1167,7 +1167,7 @@ void MyMoneyQifReader::processTransactionEntry()
 
         // standard transaction
         tmp = extractLine('L');
-        if (d->isTransfer(tmp, m_qifProfile.accountDelimiter().left(1), m_qifProfile.accountDelimiter().mid(1, 1))) {
+        if (d->isTransfer(tmp, m_qifProfile.accountDelimiter().at(0), m_qifProfile.accountDelimiter().mid(1, 1))) {
             accountId = transferAccount(tmp, false);
 
         } else {
@@ -1216,7 +1216,7 @@ void MyMoneyQifReader::processTransactionEntry()
             s2.m_strMemo = listqSplits[count-1].m_strMemo;                             // Memo in split
             tmp = listqSplits[count-1].m_strCategoryName;                              // Category in split
 
-            if (d->isTransfer(tmp, m_qifProfile.accountDelimiter().left(1), m_qifProfile.accountDelimiter().mid(1, 1))) {
+            if (d->isTransfer(tmp, m_qifProfile.accountDelimiter().at(0), m_qifProfile.accountDelimiter().mid(1, 1))) {
                 accountId = transferAccount(tmp, false);
 
             } else {
@@ -1461,13 +1461,13 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
     }
 
     tmp = extractLine('L');
+    static const auto bracketRegex = QRegularExpression(QLatin1String("[\\[\\]]"));
+    tmp = tmp.remove(bracketRegex); //  xAction != true so ignore any'[ and ]'
     // if the action ends in an X, the L-Record contains the asset account
     // to which the dividend should be transferred. In the other cases, it
     // may contain a category that identifies the income category for the
     // dividend payment
-    if ((xAction == true)
-            || (d->isTransfer(tmp, m_qifProfile.accountDelimiter().left(1), m_qifProfile.accountDelimiter().mid(1, 1)) == true)) {
-        tmp = tmp.remove(QRegularExpression(QLatin1String("[\\[\\]]"))); //  xAction != true so ignore any'[ and ]'
+    if ((xAction == true) || (d->isTransfer(tmp, m_qifProfile.accountDelimiter().at(0), m_qifProfile.accountDelimiter().mid(1, 1)) == true)) {
         if (!tmp.isEmpty()) {                                  // use 'L' record name
             tr.m_strBrokerageAccount = tmp;
             transferAccount(tmp);                                // make sure the account exists
@@ -1476,7 +1476,6 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
             transferAccount(m_account.brokerageName());          // make sure the account exists
         }
     } else {
-        tmp = tmp.remove(QRegularExpression(QLatin1String("[\\[\\]]"))); //  xAction != true so ignore any'[ and ]'
         tr.m_strInterestCategory = tmp;
         tr.m_strBrokerageAccount = m_account.brokerageName();
     }
@@ -1536,7 +1535,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
                 tr.m_amount = -(amount - tr.m_fees);
 
         if (tr.m_strMemo.isEmpty())
-            tr.m_strMemo = (QString("%1 %2").arg(extractLine('Y')).arg(d->typeToAccountName(action))).trimmed();
+            tr.m_strMemo = (QString("%1 %2").arg(extractLine('Y'), d->typeToAccountName(action))).trimmed();
     } else if (action == "xin" || action == "xout") {
         QString payee = extractLine('P');
         if (!payee.isEmpty() && ((payee.toLower() == "opening balance") || KMyMoneySettings::qifOpeningBalance().toLower().contains(payee.toLower()))) {
@@ -1547,7 +1546,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
         tr.m_eAction = (eMyMoney::Transaction::Action::None);
         MyMoneyStatement::Split s2;
         tmp = extractLine('L');
-        if (d->isTransfer(tmp, m_qifProfile.accountDelimiter().left(1), m_qifProfile.accountDelimiter().mid(1, 1))) {
+        if (d->isTransfer(tmp, m_qifProfile.accountDelimiter().at(0), m_qifProfile.accountDelimiter().mid(1, 1))) {
             s2.m_accountId = transferAccount(tmp);
             s2.m_strCategoryName = tmp;
         } else {
@@ -1910,8 +1909,9 @@ const QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
         account.setLastReconciliationDate(m_qifProfile.date(tmp));
 
     QifEntryTypeE transactionType = EntryTransaction;
-    QString type = extractLine('T').toLower().remove(QRegularExpression(QLatin1String("\\s+")));
-    if (type == m_qifProfile.profileType().toLower().remove(QRegularExpression(QLatin1String("\\s+")))) {
+    static const auto whiteSpaceRegex = QRegularExpression(QLatin1String("\\s+"));
+    QString type = extractLine('T').toLower().remove(whiteSpaceRegex);
+    if (type == m_qifProfile.profileType().toLower().remove(whiteSpaceRegex)) {
         account.setAccountType(eMyMoney::Account::Type::Checkings);
     } else if (type == "ccard" || type == "creditcard") {
         account.setAccountType(eMyMoney::Account::Type::CreditCard);
@@ -2029,7 +2029,7 @@ void MyMoneyQifReader::processPriceEntry()
     QStringList::const_iterator it_line = m_qifEntry.constBegin();
 
     // Make a price for each line
-    const QRegularExpression priceExp(QLatin1String("\"(.*)\",(.*),\"(.*)\""));
+    static const QRegularExpression priceExp(QLatin1String("\"(.*)\",(.*),\"(.*)\""));
     while (it_line != m_qifEntry.constEnd()) {
         const auto priceMatch(priceExp.match(*it_line));
         if (priceMatch.hasMatch()) {

@@ -56,6 +56,7 @@ QString KMMUrl::toLocalFile() const
 
 QString KMMUrl::normalizeUrlString(const QString &url)
 {
-    return QString(url).remove(QRegularExpression("^(file:|qrc)", QRegularExpression::CaseInsensitiveOption));
+    static const QRegularExpression regex("^(file:|qrc)", QRegularExpression::CaseInsensitiveOption);
+    return QString(url).remove(regex);
 }
 

@@ -120,11 +120,13 @@ bool KMyMoneyPlugin::ImporterPlugin::isMyFormat(const QString& filename) const
     QMimeDatabase db;
     QMimeType mime = db.mimeTypeForFile(filename);
 
-    if (!mime.isDefault())
-        for (const auto& mimeTypeName : formatMimeTypes())
-            if (mime.inherits(mimeTypeName))
+    if (!mime.isDefault()) {
+        const QStringList formatTypes = formatMimeTypes();
+        for (const auto& mimeTypeName : qAsConst(formatTypes))
+            if (mime.inherits(mimeTypeName)) {
                 return true;
-
+            }
+    }
     return false;
 }
 

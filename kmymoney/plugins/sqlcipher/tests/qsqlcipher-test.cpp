@@ -64,7 +64,7 @@ void qsqlciphertest::createEncryptedDatabase()
     m_file.open();
     // https://www.sqlite.org/fileformat.html#database_header
     auto header = QString(m_file.read(16));
-    QVERIFY(header !=  QLatin1String("SQLite format 3\000")); // encrypted database has scrambled content in contrast to its regular SQLite counterpart
+    QVERIFY(header != QStringLiteral("SQLite format 3\000")); // encrypted database has scrambled content in contrast to its regular SQLite counterpart
     m_file.close();
 }
 

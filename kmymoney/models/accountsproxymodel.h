@@ -159,7 +159,7 @@ protected:
     int visibleItems(const QModelIndex& index) const;
 
 Q_SIGNALS:
-    void unusedIncomeExpenseAccountHidden() const;
+    void unusedIncomeExpenseAccountHidden();
 
 private:
     Q_DECLARE_PRIVATE(AccountsProxyModel)

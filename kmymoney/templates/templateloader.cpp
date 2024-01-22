@@ -302,7 +302,7 @@ void TemplateLoader::slotLoadCountry()
 
     // now scan all directories for that country
     for (QStringList::iterator it = d->dirlist.begin(); it != d->dirlist.end(); ++it) {
-        QDir dir(QString("%1/%2").arg(*it).arg(d->it_m.value()));
+        QDir dir(QString("%1/%2").arg(*it, d->it_m.value()));
         if (dir.exists()) {
             const QStringList files = dir.entryList(QStringList("*.kmt"), QDir::Files);
             for (const auto& file : qAsConst(files)) {

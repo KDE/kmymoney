@@ -87,7 +87,7 @@ bool GNCImporter::open(const QUrl &url)
     if (qfile->read(qbaFileHeader.data(), 70) != 70)
         throw MYMONEYEXCEPTION(sFileToShort);
 
-    const QRegularExpression gncVersionExp("<gnc-v(\\d+)");
+    static const QRegularExpression gncVersionExp("<gnc-v(\\d+)");
     if (!(gncVersionExp.match(qbaFileHeader).hasMatch())) {
         return false;
     }

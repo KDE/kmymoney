@@ -48,13 +48,13 @@ TransactionDlg::TransactionDlg(const QStringList& colList, const QStringList& co
 
     QIcon icon = Icons::get(Icon::DialogOK);
     if (!icon.availableSizes().isEmpty())
-        m_iconYes = icon.pixmap(icon.availableSizes().first());
+        m_iconYes = icon.pixmap(icon.availableSizes().at(0));
     else
         m_iconYes = QPixmap();
 
     icon = Icons::get(Icon::DialogCancel);
     if (!icon.availableSizes().isEmpty())
-        m_iconNo = icon.pixmap(icon.availableSizes().first());
+        m_iconNo = icon.pixmap(icon.availableSizes().at(0));
     else
         m_iconNo = QPixmap();
 

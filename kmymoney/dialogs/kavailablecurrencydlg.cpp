@@ -53,7 +53,7 @@ KAvailableCurrencyDlg::~KAvailableCurrencyDlg()
 
 void KAvailableCurrencyDlg::slotLoadCurrencies(const QList<QString>& usedCurrencies)
 {
-    QList<MyMoneySecurity> list = MyMoneyFile::instance()->availableCurrencyList();
+    const QList<MyMoneySecurity> list = MyMoneyFile::instance()->availableCurrencyList();
 
     // construct a transparent 16x16 pixmap
     QPixmap empty(16, 16);
@@ -63,7 +63,7 @@ void KAvailableCurrencyDlg::slotLoadCurrencies(const QList<QString>& usedCurrenc
 
     ui->m_currencyList->clear();
     // remove the used currencies from the list
-    for (const auto& currency : list) {
+    for (const auto& currency : qAsConst(list)) {
         if (!usedCurrencies.contains(currency.id())) {
             const auto item = new QTreeWidgetItem(ui->m_currencyList);
             item->setText(0, currency.name());

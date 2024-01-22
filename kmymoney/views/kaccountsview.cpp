@@ -347,7 +347,7 @@ void KAccountsView::slotAccountMapOnline()
             popup.addAction(it_p.key())->setData(it_p.key());
         }
 
-        QAction *item = popup.actions()[0];
+        QAction* item = popup.actions().at(0);
         if (item) {
             popup.setActiveAction(item);
         }

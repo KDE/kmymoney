@@ -48,7 +48,8 @@ bool InstitutionsProxyModel::lessThan(const QModelIndex &left, const QModelIndex
 
         if (leftData.toInt() == rightData.toInt()) {
             // sort items of the same display order alphabetically
-            return QSortFilterProxyModel::lessThan(left, right);
+            // we bypass the base class here on purpose
+            return QSortFilterProxyModel::lessThan(left, right); // clazy:exclude=skipped-base-method
         }
         return leftData.toInt() < rightData.toInt();
     }
@@ -62,7 +63,9 @@ bool InstitutionsProxyModel::lessThan(const QModelIndex &left, const QModelIndex
     default:
         break;
     }
-    return QSortFilterProxyModel::lessThan(left, right);
+
+    // we bypass the base class here on purpose
+    return QSortFilterProxyModel::lessThan(left, right); // clazy:exclude=skipped-base-method
 }
 
 /**

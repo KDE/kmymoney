@@ -84,7 +84,7 @@ protected Q_SLOTS:
     virtual void editSplits();
 
 Q_SIGNALS:
-    void postDateChanged(const QDate& date) const;
+    void postDateChanged(const QDate& date);
     void categorySelectionChanged();
 
 private:
