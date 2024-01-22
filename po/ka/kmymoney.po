@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-20 01:36+0000\n"
-"PO-Revision-Date: 2023-12-24 05:13+0100\n"
+"PO-Revision-Date: 2024-01-21 11:55+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -2192,11 +2192,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:827
-#, fuzzy, kde-format
-#| msgid "Payment accounts"
+#, kde-format
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
-msgstr "გადახდის ანგარიშები"
+msgstr "დამალული ანგარიშები"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:835
 #, kde-format
@@ -2209,8 +2208,7 @@ msgid ""
 msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:837
-#, fuzzy, kde-format
-#| msgid "Hidden categories"
+#, kde-format
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "დამალული კატეგორიები"
@@ -11796,7 +11794,7 @@ msgstr ""
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.ui:42
 #, kde-format
 msgid "Enlarge"
-msgstr ""
+msgstr "გაზრდა"
 
 #. i18n: ectx: property (text), widget (QToolButton, decelerateButton)
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.ui:73
