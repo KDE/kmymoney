@@ -106,7 +106,7 @@ public:
      */
     void setColumnSelectionEnabled();
 
-protected Q_SLOT:
+protected Q_SLOTS:
     void slotColumnsMenu(const QPoint);
     void slotUpdateHeaderState();
 
