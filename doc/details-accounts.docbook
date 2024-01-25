@@ -218,9 +218,12 @@
   The Account Number and the <ulink
   url="https://en.wikipedia.org/wiki/International_Bank_Account_Number">
   <acronym>IBAN</acronym> (International Bank Account Number)</ulink> are not
-  currently used by &kmymoney;.  These fields may be left blank and filled in at a
-  later time; they are only required for online banking.
-  <!-- FIXME: check accuracy -->
+  required by &kmymoney;.  These fields may be left blank and filled in at a later
+  time.  The account number may be used for <link
+  linkend="details.impexp.ofxdirectconnect">online banking</link> and to assure data
+  imports use the right account.  The <acronym>IBAN</acronym> may be used by the
+  KBanking plugin.
+  <!-- FIXME: confirm accuracy -->
 </para>
 
 <para>
@@ -836,15 +839,12 @@
     <term>Hierarchy</term>
     <listitem>
       <para>
-        <!-- FIXME: drag/drop was in KDE3 versions, but still not ported 5.1.x.  See
-             https://bugs.kde.org/show_bug.cgi?id=272737.  You can change the parent
-             account by dragging the account in this view of the account hierarchy.
-             Changing the parent account is also possible in the main Accounts
-             screen, by dragging the account and dropping it on a different parent
-             account. -->
         This shows where the account is in the overall hierarcy of accounts.  You can
-        change the parent account by clicking the new parent account and then
-        clicking <guibutton>OK</guibutton>.
+        change the parent account by dragging the account and dropping it on a
+        different parent account in this view of the account hierarchy, or in the
+        Accounts View or the Institutuions View.  You can also change the parent
+        account here by clicking the new parent account and then clicking
+        <guibutton>OK</guibutton>.
       </para>
     </listitem>
   </varlistentry>
@@ -887,8 +887,10 @@
             <para>
               This shows the status of the online connection, the bank/broker, and
               the account number.  It also allows you to store or change the password
-              for the online account.
-              <!-- FIXME:  do we want to say WHERE the password is stored? -->
+              for the online account.  Where and how the password is actually stored
+              depends on your specific instance, but most commonly, it is stored by
+              the <ulink url="https://apps.kde.org/kwalletmanager5/">KDE Wallet
+              Manager</ulink>.
             </para>
           </listitem>
         </varlistentry>

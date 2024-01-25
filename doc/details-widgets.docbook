@@ -30,15 +30,15 @@
 
 <para>
 <screenshot>
-	<screeninfo>Tip of the Day</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="date_widget.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Date widget</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo>Date widget</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="date_widget.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>Date widget</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 </para>
 
@@ -107,15 +107,15 @@
 
 <para>
 <screenshot>
-	<screeninfo>Tip of the Day</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="value_widget.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Value widget</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo>Value widget</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="value_widget.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>Value widget</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 </para>
 
@@ -140,15 +140,15 @@
 
 <para>
 <screenshot>
-	<screeninfo>Tip of the Day</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="payee_widget.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Payee widget</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo>Payee widget</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_widget.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>Payee widget</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 </para>
 
@@ -167,8 +167,7 @@
 
 </sect2>
 
-<sect2 id="reference.widgets.category">
-<title>Category/account entry</title>
+<sect2 id="reference.widgets.category"><title>Category/account entry</title>
 
 <para>
   When you are requested to enter the name of a category or account, you can
@@ -182,15 +181,15 @@
 
 <para>
 <screenshot>
-	<screeninfo>Tip of the Day</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="category_widget.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Category widget</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo>Category widget</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="category_widget.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>Category widget</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 </para>
 

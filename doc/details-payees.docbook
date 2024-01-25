@@ -63,37 +63,52 @@
 
 <sect2><title>Adding a Payee or Payer</title>
 <para>
-  To add a payee or payer, click the <guibutton>+</guibutton> New Payee button.<!--
-  FIXME: use proper icon from button --> This creates a new payee called <quote>New
-  Payee</quote>.  You can also right-click on any existing payee and select
-  <guimenuitem>Add payee</guimenuitem>.
+  To add a payee or payer, click the <guiicon> <inlinemediaobject> <imageobject>
+  <imagedata fileref="list-add-user.svg" format="SVG"/> </imageobject>
+  </inlinemediaobject> </guiicon>New Payee button.  This creates a new payee called
+  <quote>New Payee</quote>.  You can also right-click on any existing payee and
+  select <guimenuitem>Add payee</guimenuitem>.
 </para>
 </sect2>
 
 <sect2><title>Renaming a Payee or Payer</title>
 <para>
-  To rename a payee or payer, either double-click on the name or right-click on the
-  name and select <guimenuitem>Rename payee</guimenuitem>.  The name then becomes
-  editable.  Changing the name will affect the name in all the transactions in which
-  it appears.
+  To rename a payee or payer, select the payee (left click on the name) and click
+  the <guiicon> <inlinemediaobject> <imageobject> <imagedata
+  fileref="user-group-properties.svg" format="SVG"/> </imageobject>
+  </inlinemediaobject> </guiicon>Rename Payee button.  You can also double-click on
+  the name or right-click on the name and select <guimenuitem>Rename
+  payee</guimenuitem>.  The name then becomes editable.  Changing the name will
+  affect the name in all the transactions in which it appears.
 </para>
 </sect2>
 
 <sect2><title>Deleting a Payee or Payer</title>
 <para>
-  To remove a payee or payer, right-click the name and select
-  <guimenuitem>Delete payee</guimenuitem>.  If the payee has any transactions,
-  you will be presented with a dialog that allows you to reassign them to a
-  different payee, and also a checkbox to enable the deleted name to be added
-  to the new payee's matching list.  Another option for deleting an existing
-  payee is to select the payee or payer by left clicking it and then left
-  clicking <guibutton>Del</guibutton>.
+  To remove a payee or payer, select it and click the <guiicon> <inlinemediaobject>
+  <imageobject> <imagedata fileref="list-remove-user.svg" format="SVG"/>
+  </imageobject> </inlinemediaobject> </guiicon> Delete Payee button, or right-click
+  the name and select <guimenuitem>Delete payee</guimenuitem>.  If the payee has any
+  transactions, you will be presented with a dialog that allows you to reassign them
+  to a different payee, and also a checkbox to add the deleted name to the new
+  payee's matching list.
 </para>
 </sect2>
 
 <sect2 id="details.payees.merging"><title>Merging Payees</title>
 <para>
-<!-- FIXME: write something here -->You can merge payees.
+  To merge two payees, select one of them (left-click the name) then select the other
+  (<keycombo>&Ctrl;<mousebutton>left click</mousebutton></keycombo>).  You can then
+  either click the <guiicon><inlinemediaobject><imageobject><imagedata
+  fileref="user-group-properties.svg" format="SVG"/></imageobject>
+  </inlinemediaobject> </guiicon> Merge Payees button or right-click either of the
+  selected payees and select <guilabel>Merge Payees</guilabel>..  You will get a
+  pop-up asking if you really want to merge the selected payees.  If you click
+  <guibutton>Yes</guibutton>, you will get another popup for you to specify thename
+  of the payee for the combined data.  There will be a drop-down with the names of
+  the payess you selected for merging (you can actually select more than two) and it
+  also allows you to type in a completely new name.  There is also a checkbox to add
+  the names of the merged payees to the matching list of the new payee.
 </para>
 </sect2>
 </sect1>

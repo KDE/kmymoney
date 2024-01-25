@@ -56,8 +56,8 @@
 </para>
 
 <itemizedlist>
-  <listitem><para>The filter area, which may or may not be visible</para></listitem>
   <listitem><para>The transaction list</para></listitem>
+  <listitem><para>The filter area, which may or may not be visible</para></listitem>
   <listitem>
     <para>
       The transaction form, which may or may not appear, depending upon your
@@ -66,53 +66,11 @@
   </listitem>
 </itemizedlist>
 
-<sect2 id="details.ledgers.view.filter"><title>The filter area</title>
-<screenshot>
-  <screeninfo>ledgers view filter area</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="accountdropdown.png" format="PNG" />
-    </imageobject>
-    <textobject>
-      <phrase>ledgers view filter area</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
-
-<para>
-  In previous versions of &kmymoney;, the filter area was always displayed at the top
-  of the ledger.  Now, it is normally hidden, but can be displayed by typing
-  <keycombo>&Ctrl;<keycap>F</keycap></keycombo>.  It will then appear below the
-  transaction list.  At the left of the filter area is a small <quote>x</quote> in a
-  red circle.<!-- FIXME: use actual icon --> Clicking on this icon will clear any
-  filters in place and hide the filter area.
-</para>
-
 <para>
   Previous versions of &kmymoney; had a dropdown where you could select the account
   to be displayed in the ledger.  This is no longer necessary, as to view another
   account, you can just open a new tab.
 </para>
-
-<para>
-  If displayed, most of the filter area is a text entry area. Typing in this filter
-  box will cause &kmymoney; to display only transactions containing the text typed in
-  the box.  The text specified can be in any of the fields of the transaction for the
-  displayed account.  At the right end of the filter box is a small
-  <quote>x</quote> in a black box.<!-- FIXME: use actual icon --> Clicking this icon
-  will clear any text in the filter box.
-</para>
-
-<para>
-  At the right of the text entry is a status filter dropdown.  The default value is
-  <guilabel>Any status</guilabel> which does not apply any filter to the list.  The
-  other values allow you to restrict the list of displayed transactions to those
-  which are <guilabel>Imported</guilabel>, <guilabel>Matched</guilabel>,
-  <guilabel>Erroneous</guilabel>, <guilabel>Not marked</guilabel>, <guilabel>Not
-  reconciled</guilabel>, <guilabel>Cleared</guilabel>, or
-  <guilabel>Scheduled</guilabel>.
-</para>
-</sect2>
 
 <sect2><title>The transaction list</title>
 <screenshot>
@@ -128,7 +86,7 @@
 </screenshot>
 	
 <para>
-  The transaction list displays all the (possible filtered) transaction in the
+  The transaction list displays all the (possible filtered) transactions in the
   account.  The following columns are always displayed:
 </para>
 
@@ -140,7 +98,7 @@
 
 <formalpara><title>Detail</title>
 <para>
-  this shows the category/categories, other account (for transfers,) and memo for the
+  the category/categories, other account (for transfers,) and memo for the
   transaction
 </para>
 </formalpara>
@@ -154,9 +112,9 @@
 
 <formalpara><title>Balance</title>
 <para>
-  Note that this depends on the currently displayed sort order, and will not be
-  calculated if the display is filtered by the searching within the filter box or
-  transaction status dropdown, as described above.
+  This depends on the currently displayed sort order, and will not be calculated if
+  the display is filtered by use of the filter box or transaction status dropdown, as
+  described above.
 </para>
 </formalpara>
 
@@ -186,9 +144,9 @@
 
 <formalpara><title>C</title>
 <para>
-  the Reconciliation Status.  The value can be blank, a <quote>C</quote> for Cleared,
-  or <quote>R</quote> for Reconciled.  The meaning of these terms is discussed in a
-  following section on Reconciliation. <!-- FIXME: make a real link -->
+  the Reconciliation Status.  The value can be blank, <quote>C</quote> for Cleared,
+  or <quote>R</quote> for Reconciled.  The meaning of these terms is discussed
+  further <link linkend="details.ledgers.cleared">below</link>.
 </para>
 </formalpara>
 	
@@ -206,9 +164,9 @@
 
 <para>
   Note that altering the sort order can be useful in special circumstances, but for
-  many sort orders, especiallyl where the transaction date is not the first sort key,
-  the balance column will not be very meaningful, and will almost certainly not match
-  the balance of any statement or display by the bank or institution.
+  many sort orders, especially where the transaction post date is not the first sort
+  key, the balance column will not be very meaningful, and will almost certainly not
+  match the balance of any statement or display by the bank or institution.
 </para>
 
 <para>
@@ -248,13 +206,78 @@
 </formalpara>
 </sect2>
 
+<sect2 id="details.ledgers.view.filter"><title>The filter area</title>
+
+<para>
+  In previous versions of &kmymoney;, the filter area was at the top of the
+  transaction list, and was always displayed.  Now, when shown, it is at the bottom.
+  It is normally hidden, but can be displayed by typing
+  <keycombo>&Ctrl;<keycap>F</keycap></keycombo>.  At the left of the filter area is a
+  <guiicon> <inlinemediaobject> <imageobject> <imagedata fileref="dialog-close.svg"
+  format="SVG"/></imageobject></inlinemediaobject></guiicon> Dialog Close icon.
+  Clicking on this will clear any filters in place and hide the filter area.
+</para>
+
+<screenshot>
+  <screeninfo>ledgers view filter area</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="ledger_filter.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>ledgers view filter area</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para>
+  If displayed, most of the filter area is a text entry area. Typing here will cause
+  &kmymoney; to display only transactions containing the text typed in the box.  The
+  text specified can be in any of the fields of the transaction for the displayed
+  account.  Clicking the <guiicon> <inlinemediaobject> <imageobject> <imagedata
+  fileref="edit-clear.svg" format="SVG"/></imageobject> </inlinemediaobject>
+  </guiicon> clear text icon at the right end of the text entry box will clear any
+  text in the filter box.
+</para>
+
+<para>
+  At the right of the text entry is a status filter dropdown.  The default value is
+  <guilabel>Any status</guilabel>, which does not apply any filter to the list.  The
+  <guilabel>Not marked</guilabel> and <guilabel>Cleared</guilabel> choices have been
+  previously explained.  <guilabel>Not reconciled</guilabel> includes transactions in
+  either of the above groups.  There is currently so specific filter for
+  <guilabel>Reconciled</guilabel> transactions.
+</para>
+
+<para>
+  <guilabel>Imported</guilabel> selects transactions which have been imported, even
+  if they have been matched with a non-imported transaction.
+  <guilabel>Matched</guilabel> selects transactions which have beem matched, either
+  by &kmymoney; as part of the import process or manually matched by the user.
+  However, once you have clicked <guilabel>Accept</guilabel> on such a transaction,
+  it will not be selected by this filter.
+</para>
+
+<para>
+  <guilabel>Erroneous</guilabel> selects transactions where &kmymoney; has detected
+  some problem.  Most commonly, this is an <link
+  linkend="details.ledgers.split">unbalanced transaction</link>, which is often the
+  case for imported transactions.
+</para>
+
+<para>
+  <guilabel>Scheduled</guilabel> selects upcoming <link
+  linkend="details.schedules">Scheduled Transactions</link>.
+</para>
+</sect2>
+
 <sect2><title>The transaction form</title>
 <para>
   Whether or not the transaction form is displayed at the bottom area of the Ledger
-  View depends on your configuration and the type of account being displayed.
-  However, if present, it generally includes fields for all the details of a single
-  transaction, as well as buttons for various actions that can apply to a
-  transaction.  It is described in more detail in the following sections.
+  View depends on your configuration and the type of account being displayed.  If
+  present, it includes fields for all the details of a single transaction, as well as
+  buttons for various actions that can apply to a transaction.  It is described in
+  more detail in the following sections.
 </para>
 </sect2>
 </sect1>
@@ -264,17 +287,19 @@
   There are two methods of entering transactions into the ledger: using the
   transaction form or entering the data directly into the transaction list.  The
   transaction form is displayed by default and this is the method we will discuss
-  first.  Turning off the transaction form can be accomplished by going to the Ledger
-  section in the Configure &kmymoney; that's within the Settings.
-  <!-- FIXME: use a proper link -->
+  first.  Turning off the transaction form can be accomplished with a check-box on
+  the dialog presented when you select the <guimenuitem>Configure
+  &kmymoney;...</guimenuitem> menu item and clicking <guilabel>Ledger</guilabel> on
+  the left.  This is described in the section on <link
+  linkend="details.settings.register">configuring the Ledger</link>.
 </para>
 
 <para>
-  The fields in the input area match the information fields in the transaction list.
-  Additional fields include the Memo field, for a more detailed description of the
-  transaction, and a Category selection. The Split button allows you to split the
-  transaction into multiple categories.
-  <!-- FIXME: use specific link to discussion of split transaction -->
+  The fields in the input area match the fields in the transaction list.  Additional
+  fields include the Memo field, for a more detailed description or information
+  related to the transaction, and a Category selection.  The Split button allows you
+  to <link linkend="details.ledgers.split">split the transaction</link> into multiple
+  categories.
 </para>
 </sect1>
 
@@ -349,9 +374,8 @@
 </para>
 
 <para>
-  See the special <link linkend="reference.widgets">&kmymoney; fields</link>
-  section for more information on how to use this field.
-  <!-- FIXME: probably need better link to explanation of split transactions -->
+  See the special section on <link linkend="reference.widgets.category">&kmymoney;
+  fields</link> for some additional information on how to use this field.
 </para>
 </sect3>
 
@@ -442,32 +466,25 @@
 </para>
 
 <para>
-  <!-- FIXME: confirm this is right.  It looks to me like new entry is always in the
-       form, although the form is shown at the "correct" position in the ledger, not at
-       the bottom. -->
   To do this you must first let &kmymoney; know that you don't want to use the
-  transaction form.  This is done by selecting the <menuchoice><guimenu>Settings</guimenu>
-  <guimenuitem>Configure &kmymoney;...</guimenuitem></menuchoice> menu item and
-  selecting the <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="ledgers_view.png" format="PNG"/></imageobject></inlinemediaobject>
-  </guiicon> register icon from the list on the left.  The option to uncheck is
-  labeled <guilabel>Show transaction form</guilabel>.  When finished click on
-  <guibutton>OK</guibutton> to be ready to directly enter or edit transactions.
+  transaction form.  This is done by selecting the <guimenu>Settings</guimenu>
+  <guimenuitem>Configure &kmymoney;...</guimenuitem> menu item and selecting the
+  <guiicon><inlinemediaobject><imageobject><imagedata fileref="ledgers_view.png"
+  format="PNG"/></imageobject></inlinemediaobject> </guiicon> register icon from the
+  list on the left.  The option to uncheck is labeled <guilabel>Show transaction
+  form</guilabel>.  When finished click on <guibutton>OK</guibutton> to be ready to
+  directly enter or edit transactions.
 </para>
 
 <sect2><title>Starting the edit</title>
 <para>	
   To enter a new transaction into the ledger, you can either click on the empty entry
-  at the bottom of the ledger list, press <keycombo
-  action="simul">&Ctrl;&Ins;</keycombo>, or select the
-  <menuchoice><guimenu>Transaction</guimenu>
+  at the bottom of the ledger list, press <keycombo>&Ctrl;&Ins;</keycombo>, or select
+  the <menuchoice><guimenu>Transaction</guimenu>
   <guimenuitem>New transaction...</guimenuitem></menuchoice> menu item.  To edit an
-  existing transaction, the &Up; and &Down; arrow keys let you navigate through the
+  existing transaction, use the &Up; and &Down; arrow keys to navigate through the
   list.  After pressing &Enter; or double-clicking on an entry, the transaction list
   displays the fields required to enter or edit the transaction.
-  <!-- FIXME: should we just say this is the floating transaction for or the
-       transaction form appears at the location of the transaction in the list
-       instead of at the bottom of the list? -->
 </para>
 
 <para>
@@ -491,58 +508,44 @@
 
 <sect1 id="details.ledgers.split"><title>Split Transactions</title>
 <para>
-  The split transaction feature allows you to divide up a transaction into multiple
+  The split transaction feature allows you to divide a transaction into multiple
   categories, representing, for example, the different types of items bought with a
   single purchase at a store.
 </para>
 
-<!-- FIXME: Need to note you cas assign a payee in the split editor, and it (?) shows
-     up in the memo columne, which needs to be fixed.
-     Also need to mention th new buttons: Merge, Delete (different from Delete 0 -->
-
 <para>
   A transaction always contains one or more splits.  Each split represents money
-  moving into or out of a sigle account.
-  <!-- FIXME: Is there somewhere else this can refer to which explains in any more
-       detail what can and can't be split, and the possibility of a transaction with
-       only one split for adding or removing shares.  We also need a place to
-       explaint currency conversion, and how it relates to currencies. -->
-  Most of the time, a transaction contains exactly two splits, one for the account
-  the money is coming from and the other for the account the money is going to.  The
-  term <quote>Split Transaction</quote> is used when one side of the transaction is
-  further divided into more than one split.  This is most commonly done when money
-  moves in or out of a typical bank account, but is allocated to more than one
-  category.
+  moving into or out of a sigle account.  Most of the time, a transaction contains
+  exactly two splits, one for the account the money is coming from and the other for
+  the account the money is going to.  The term <quote>Split Transaction</quote> is
+  used when one side of the transaction is further divided into more than one split.
+  This is most commonly done when money moves in or out of a typical bank account,
+  but is allocated to more than one category.
 </para>
 
 <para>
-  To enter a split transaction, using either the transaction form or the transaction
-  list, start a new transaction, including entering the total amount.  Then, instead
-  of selecting a category, click the <guibutton>Split</guibutton><!-- FIXME: use
-  actual icon --> button to the right of the <guilabel>Category</guilabel> field.  If
-  you have already selected a category, that becomes the first entry in the split
-  editor screen.
-</para> 
- 
-<para>
-  In the split editor screen, double-click an empty line to enter a new split or
-  sub-transaction or press <keycombo action="simul">&Ctrl;&Ins;</keycombo>. Specify
-  the category, add an (optional) memo, and enter the amount. To save this part of
-  the split, press the green check mark under the category. To cancel, press the red
-  cross.<!-- FIXME:  the check and cross are in the second below shot, not the one
-  immediately below.  Can we make this description closer to it's picture? -->
-</para> 
- 
-<para>
-  After entering a split, the bottom of the split editor shows how much of the total
-  transaction is still unassigned. After entering all the splits, press the
-  <guibutton>OK</guibutton> button to save the entire transaction. If there is still
-  an unassigned amount, you will be prompted to either return to editing the splits,
-  change the total transaction amount, or leave part of the transaction
-  unassigned. <!-- FIXME: Have the check and cross been replaced with OK and Cancel
-  buttons? -->
+  In almost all cases, if a transaction has only one split, it is said to be
+  <quote>unbalanced</quote> meaning that money is coming from somewhere, but not
+  going anywhere (or vice versa.)  Such transactions are typically flagged by being
+  displayed in red in the Ledger.  The only valid transactions with a single split
+  occurs in Investment Accounts: Add, Remove, or Split shares.
 </para>
 
+<para>
+  To enter a split transaction, create a new transaction, entering the total amount.
+  Then, instead of selecting a category, click the <guiicon> <inlinemediaobject>
+  <imageobject> <imagedata fileref="split_icon.svg" format="SVG"/> </imageobject>
+  </inlinemediaobject> </guiicon> split icon at the right of the
+  <guilabel>Category</guilabel> field.  If you have already selected a category, that
+  becomes the first entry in the split editor.
+</para> 
+
+<para>
+  This will display the Split Edito, which shows the Category, Memo, and Payment or
+  Deposit for each split.  It also shows the total of the splits, the amount of the
+  transaction, and the difference between them.
+</para> 
+ 
 <screenshot>
   <screeninfo>split editor split with unassigned amount</screeninfo>
   <mediaobject>
@@ -556,20 +559,54 @@
 </screenshot>
 
 <para>
-  To redistribute an <quote>Unassigned</quote> or <quote>Overassigned</quote> amount,
-  select a split item that has to be adjusted.  After that click the <guibutton>Apply
-  Difference</guibutton> button.  If <quote>Unassigned</quote> was previously shown
-  and non-zero, that amount will be added to the selected line item value.  If
-  <quote>Overassigned</quote> was previously shown and non-zero, that amount will be
-  subtracted from the selected line item value.  As the result, the
-  <quote>Unassigned</quote> or <quote>Overassigned</quote> amount will be set to zero
-  and the transaction can be saved successfully.
+  To enter a new split or sub-transaction click the <guibutton>New</guibutton> button
+  press <keycombo action="simul">&Ctrl;&Ins;</keycombo>, or double-click an empty
+  row.  Double-clicking an existing row lets you edit the split.  This will expand
+  the row into form where you can enter or edit a split.
+</para> 
+
+<screenshot>
+  <screeninfo>split transaction edit form</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="single_split.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>split transaction edit form</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para>
+  Here you specify the category and amount, as well as optional payee, memo, and
+  tag(s).  Note that if a payee and memo were entered into the transaction before
+  entering the split editor, they will be included in the first split.  It often
+  makes sense to enter a specific memo for each split.  This can also be done for the
+  Payee, but it may make more sense to enter that only once for the transaction.  To
+  save this the split, press <guibutton>Enter</guibutton>.  To cancel, press
+  <guibutton>Cancel</guibutton>.
+</para> 
+ 
+<para>
+  After entering a split, the bottom of the split editor shows how much of the total
+  transaction is still unassigned.  After entering all the splits, press the
+  <guibutton>OK</guibutton> button to save the entire transaction.  If there is still
+  an unassigned amount, you will be prompted to either return to editing the splits,
+  change the total transaction amount, or leave part of the transaction unassigned.
+  The same is true if the amount is overassigned, in which case the total of the
+  splits is more than the amount of the transaction.
 </para>
 
 <para>
-  Note that the category field in the transaction form or the transaction list now
-  displays a comma separated list of the categories in each of the split entries.
-</para> 
+  To redistribute an <quote>Unassigned</quote> or <quote>Overassigned</quote> amount,
+  select the split to be adjusted, and click the <guibutton>Apply
+  Difference</guibutton> button.  If <quote>Unassigned</quote> was previously shown
+  and non-zero, that amount will be added to the selected line item value.  If
+  <quote>Overassigned</quote> was previously shown and non-zero, that amount will be
+  subtracted from the selected line item value.  As a result, the
+  <quote>Unassigned</quote> or <quote>Overassigned</quote> amount will be set to zero
+  and the transaction can be saved successfully.
+</para>
 
 <screenshot>
   <screeninfo>split transaction in ledger</screeninfo>
@@ -582,6 +619,12 @@
     </textobject>
   </mediaobject>
 </screenshot>
+
+<para>
+  Note that the category field in the transaction form or the transaction list now
+  displays a comma separated list of the categories in each of the split entries.
+  Payees entered in a split also show up within the memo field in the register.
+</para> 
 </sect1>
 
 <sect1 id="details.ledger.actions"><title>Other transaction actions</title>
@@ -608,12 +651,14 @@
 <sect2 id="details.ledgers.match"><title>Matching Transactions</title>
 <para>
   Generally, when you import transactions, either via QIF, OFX, or HBCI, &kmymoney;
-  will automatically attempt to match them against existing transactions.  To allow
-  for differences in the dates, there is a default setting of 4 days, which may be
-  changed in the settings - Register/Import. <!-- FIXME: make proper link --> Any
-  transactions so matched will be highlighted in green. <!-- FIXME: confirm the color
-  highlight --> On completion of the import, you should review these and either
-  accept or unmatch them.
+  will automatically attempt to match them against existing transactions.  This can
+  be useful for transactions which are created both as Scheduled Transactions, and
+  also imported from your bank or credit card.  To allow for differences in the
+  dates, there is a default setting of 4 days, which may be changed in
+  <guimenu>Settings</guimenu><guimenuitem>Configure MyMopney...</guimenuitem> Ledger
+  section, <link linkend="details.settings.register.import">Import Tab</link>.  Any
+  transactions so matched will be highlighted in the ledget, and on completion of the
+  import, you should review these and either accept or unmatch them.
 </para>
 
 <para>
@@ -636,13 +681,25 @@
   of the transactions to be matched by clicking on it, then select the other by left
   clicking on it while pressing the <keycap>&Ctrl;</keycap> key, and then select
   <guimenuitem>Match</guimenuitem> from the context menu.  This will match and
-  combine the two transactions.  The values of both transactions must be the
-  same for the match to work, except that the dates may differ by the window
-  specified in the settings, as described above.
+  combine the two transactions.  The values of both transactions must be the same for
+  the match to work, except that the dates may differ by the window specified in the
+  settings, as described above.
 </para> 
 
+<screenshot>
+  <screeninfo>Match transaction dialog</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="match_transaction.png" format="PNG" /><!-- FIXME: need pic -->
+    </imageobject>
+    <textobject>
+      <phrase>Match transaction dialog</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
 <para>
-  <!-- FIXME: get screenshot and confirm this description -->
+  <!-- FIXME: get above screenshot -->
   Since the value is the only field in the two transaction which must absolutely be
   the same, the value of other fields may differ.  When you select
   <guilabel>Match</guilabel>, you will see a <guilabel>Match Transactions</guilabel>
@@ -650,13 +707,16 @@
   the source of the other fields in the matched transaction.  Note that if one of the
   transactions is imported, the date of that transactoin will always be used in the
   matched transaction, even if all other fields are taken from the non-imported
-  transaction.
+  transaction.  That dialog also gives you the option of reversing the transactions
+  in terms of which is used as a source of fields which differ.
 </para> 
 
 <para>
-  If you are happy with the status of the match dialog, right-click the matched
-  transaction, then select <guibutton>Accept</guibutton>.<!-- where do you really right-click,
-  as you see the match dialog -->
+  If you are happy with the status of the match dialog, click
+  <guibutton>OK</guibutton>.  The transaction is then displayed as a Matched
+  Transaction in the Ledger.  You can then click <guimenu>Transaction</guimenu>
+  <guimenuitem>Accept</guimenuitem> or right-click the matched transaction and select
+  <guibutton>Accept</guibutton> from the context menu.
 </para>
 
 <para>
@@ -678,12 +738,14 @@
 
 <sect1 id="details.ledgers.cleared"><title>Understanding the State of a transaction</title>
 <para>
-  The process of reconciling accounts is discussed <link
-  linkend="details.reconcile">later in the handbook</link>.  For now, it is only
-  important to know that transaction can have one of three states: non-reconciled
-  (blank), cleared (C), or reconciled (R).  When a transaction is entered, it has
-  state of non-reconciled.  Once the bank posts the transaction, the user can mark it
-  as cleared and thus transform it to state (C).
+  A later section of this handbook discusses <link
+  linkend="details.reconcile">reconciliation</link> in more detail.  For now, it is
+  only important to know that transaction can have one of three states: not marked
+  (blank), cleared (C), or reconciled (R).  When a transaction is entered, it's state
+  is <quote>not marked</quote>.  Once the bank posts the transaction, the user can
+  mark it as cleared and thus transform it to state (C).  Note that these are only a
+  subset of the states described earlier as available in the <link
+  linkend="details.ledgers.view.filter">Ledger Filter</link>.
 </para>
 
 <screenshot>
@@ -702,10 +764,10 @@
   When you receive a statement from the bank, all cleared transactions should be on
   the statement.  When you reconcile your account, you confirm that the transactions
   marked Cleared and the transactions listed on the statement are the same, and that
-  the difference between the beginning balance and the cleared transactions equals
-  the ending balance of the statement.  When this is the case, you can 'finish
-  reconciling' which changes the state of all cleared (C) transactions prior to the
-  date of reconciliation to reconciled (R).
+  the beginning balance plus the sum of the cleared transactions equals the ending
+  balance of the statement.  When this is the case, you can 'finish reconciling'
+  which changes the state of all cleared (C) transactions prior to the date of
+  reconciliation to reconciled (R).
 </para>
 
 <para>
@@ -729,11 +791,7 @@
   Most of the settings are self explanatory.  The section linked above has a more
   detailed explanation of each of the settings.  Some of these settings have already
   been mentions, but for clarity, several of them are explained briefly below.
-
 </para>
-<!-- FIXME - if these are explained in the chapter on settings, just refer to that
-     as is done above, and don't duplicate here.  Leaving for now, but should clean
-     up later. *** started simplifyiing here, but not done 20230904 JHO -->
 
 <formalpara><title>Show transaction form</title>
 <para>

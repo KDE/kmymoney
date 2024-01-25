@@ -22,10 +22,10 @@ complete by then.
 This is in the order pulled in from index.docbook, with brief note on state of update
 
 <!ENTITY introduction SYSTEM "introduction.docbook">
-  prelim update done
+  prelim update complete
   
 <!ENTITY whatsnew SYSTEM "whatsnew.docbook">
-  prelim update done
+  prelim update complete
   
 <!ENTITY makemostof SYSTEM "makemostof.docbook">
   prelim update - probably need a complete replacement of this
@@ -287,8 +287,36 @@ multiple places.
 - CSV importer - Banking cols, many have "X" to clear the value, and ther is "clear all."
   Investment cols do not have "x" and only "Clear" not "Clear all", plus Clear Fee.
 
+- Why is "Reconciled" not an option on the transaction state dropdown in the filter
+  section of the ledger?
 
-  ----------------
+- I'd like to be consistent in use or not of inline icons when describing where to click
+  to do something, but I'm deferring as too much effort for now.
+
+- The split editor window title is just "Dialog."  The title of the window for
+  actually editing a single split is "Slit transaction."  We need better terms that make
+  more sense.
+
+- Payees entered in a split, show up in the memo of the transaction, like memos and
+  tags.  Perhaps they should be displayed in the Payee field, perhaps in parens with
+  the payy from each split?)
+
+- (from an otherwise resolved FIXME in the split transaction section) do we have
+  adequate description of currency conversion?  I THINK so, but am leaving this
+  comment for confirmation.
+
+- It is also not clear if we need more detail on what can be a split (account instead
+  of category?) and where that would be described.
+
+- Where should we describe the Undo feature?
+
+- transaction matching section of Ledgers chapter - first, are matched transactions
+  still highlighted in green?  If not, how?
+
+- Need more details on the descriptions of all the transaction status features in the
+  filter dropdown? 
+
+- Is it still true you can not match two imported or two not-imported transactions?
 
 This is a list of potential enhancements I came up with while reviewing the handbook,
 but have not yet posted either as wishlist bugs, entries to any Issue on invent, or

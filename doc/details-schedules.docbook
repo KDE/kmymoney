@@ -190,7 +190,7 @@
   The <guilabel>Do not change amount of category but modify exchange rate of
   transaction</guilabel> checkbox can be used when the schedule involves an account
   and a category with different currencies.  If it is not selected, the amount
-  specified is used when the transaction is entered into the ledger.  Checked the box
+  specified is used when the transaction is entered into the ledger.  Checking the box
   tells &kmymoney; that the amount is specified in the currency of the category.  You
   will still need to confirm the other value or the conversion rate when the
   transaction is entered into the ledger.

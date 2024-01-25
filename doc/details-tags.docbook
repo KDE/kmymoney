@@ -56,8 +56,8 @@
 <para>
   As with most actions in &kmymoney;, there are multiple ways to create a new tag.
   First, you can click on the <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="list-add.png"/></imageobject></inlinemediaobject></guiicon> new tag icon.
-  Second, you can right-click on any tag and choose <guimenuitem>New
+  fileref="tag-new.svg" format="SVG"/></imageobject></inlinemediaobject></guiicon>
+  new tag icon.  Second, you can right-click on any tag and choose <guimenuitem>New
   tag...</guimenuitem>. This creates a new tag called <quote>New tag.</quote> See the
   next section for how to rename the tag.  Finally, you can add a new tag directly in
   the ledger or within a split transaction by typing the name of the tag in the tag
@@ -69,21 +69,21 @@
 <sect2><title>Renaming a Tag</title>
 <para>
   To rename a tag, either click on the tag name to select it and click on the
-  <guiicon>Rename tag</guiicon> icon <!-- FIXME: add icon for rename -->(between the
-  add and remove icons) or right-click on the name and then select
-  <guimenuitem>Rename tag</guimenuitem>.  The name then becomes editable. Changing
-  the name will affect the name in all the transactions in which it appears.
+  <guiicon><inlinemediaobject><imageobject><imagedata fileref="tag-edit.svg"
+  format="SVG"/></imageobject></inlinemediaobject></guiicon> or right-click on the
+  name and then select <guimenuitem>Rename tag</guimenuitem>.  The name then becomes
+  editable. Changing the name will affect the name in all the transactions in which
+  it appears.
 </para>
 </sect2>
 
 <sect2><title>Deleting a Tag</title>
 <para>
-  To delete a tag, either click on the
-  <guiicon><inlinemediaobject><imageobject><imagedata fileref="list-remove.png"
-  format="PNG"/></imageobject></inlinemediaobject></guiicon> delete tag icon or
-  right-click the name and select <guimenuitem>Delete tag</guimenuitem>.  If the tag
-  has any transactions, you will be presented with a dialog that allows you to
-  reassign them to a different tag.
+  To delete a tag, either click on the <guiicon><inlinemediaobject><imageobject>
+  <imagedata fileref="tag-delete.svg" format="SVG"/></imageobject>
+  </inlinemediaobject> </guiicon> delete tag icon or right-click the name and select
+  <guimenuitem>Delete tag</guimenuitem>.  If the tag has any transactions, you will
+  be presented with a dialog that allows you to reassign them to a different tag.
 </para>
 
 <note>
