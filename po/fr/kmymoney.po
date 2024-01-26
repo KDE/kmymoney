@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-23 01:39+0000\n"
-"PO-Revision-Date: 2024-01-18 18:34+0100\n"
+"PO-Revision-Date: 2024-01-23 10:44+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -2381,12 +2381,7 @@ msgstr ""
 "deuxième catégorie avec le même nom."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:825
-#, fuzzy, kde-format
-#| msgid ""
-#| "You have selected to suppress the display of unused categories in the "
-#| "KMyMoney configuration dialog. The category you just created will "
-#| "therefore only be shown if it is used. Otherwise, it will be hidden in "
-#| "the accounts/categories view."
+#, kde-format
 msgctxt "@info"
 msgid ""
 "You have selected to suppress the display of accounts with a zero balance in "
@@ -2394,25 +2389,19 @@ msgid ""
 "therefore only be shown if it is used. Otherwise, it will be hidden in all "
 "accounts views."
 msgstr ""
-"Vous avez choisi de supprimer l'affichage des catégories inutilisées dans le "
-"panneau de configuration de KMyMoney. La catégorie que vous venez de créer "
-"ne sera donc affichée que si elle est utilisée. Sinon, elle sera cachée dans "
-"la vue comptes/catégories."
+"Vous avez choisi de supprimer l'affichage des comptes avec un solde à zéro "
+"dans la boîte de dialogue de configuration de KMyMoney. Le compte que vous "
+"venez de créer ne sera donc affiché que si il est utilisé. Sinon, il sera "
+"masqué dans la vue « Comptes / Catégories »."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:827
-#, fuzzy, kde-format
-#| msgid "Hide closed accounts"
+#, kde-format
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
-msgstr "Cacher les comptes fermés"
+msgstr "Comptes masqués"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:835
-#, fuzzy, kde-format
-#| msgid ""
-#| "You have selected to suppress the display of unused categories in the "
-#| "KMyMoney configuration dialog. The category you just created will "
-#| "therefore only be shown if it is used. Otherwise, it will be hidden in "
-#| "the accounts/categories view."
+#, kde-format
 msgctxt "@info"
 msgid ""
 "You have selected to suppress the display of unused categories in the "
@@ -2420,14 +2409,13 @@ msgid ""
 "only be shown if it is used. Otherwise, it will be hidden in the accounts/"
 "categories view."
 msgstr ""
-"Vous avez choisi de supprimer l'affichage des catégories inutilisées dans le "
-"panneau de configuration de KMyMoney. La catégorie que vous venez de créer "
-"ne sera donc affichée que si elle est utilisée. Sinon, elle sera cachée dans "
-"la vue comptes/catégories."
+"Vous avez choisi de supprimer l'affichage des catégories inutilisées dans la "
+"boîte de dialogue de configuration de KMyMoney. La catégorie que vous venez "
+"de créer ne sera donc affichée que si elle est utilisée. Sinon, elle sera "
+"cachée dans la vue  « Comptes / Catégories »."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:837
-#, fuzzy, kde-format
-#| msgid "Hidden categories"
+#, kde-format
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "Catégories masquées"
