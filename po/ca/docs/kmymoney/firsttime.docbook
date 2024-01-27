@@ -677,10 +677,10 @@
 >Conciliació</title>
 
 <para
->En algun moment, voldreu conciliar les operacions que heu introduït amb les operacions llistades en un extracte, ja sigui un extracte bancari, un extracte de targeta de crèdit, un extracte de préstec o qualsevol altre extracte. La conciliació implica fer coincidir el que heu introduït amb el que llista l'extracte. Si es troben discrepàncies, vosaltres o la persona que va crear l'extracte ha comès un error. </para>
+>En algun moment, voldreu conciliar les operacions que heu introduït amb les operacions llistades en un extracte, sigui un extracte bancari, un extracte de targeta de crèdit, un extracte de préstec o qualsevol altre extracte. La conciliació implica fer coincidir el que heu introduït amb el que llista l'extracte. Si es troben discrepàncies, vosaltres o la persona que va crear l'extracte ha comès un error. </para>
 
 <para
->Per a conciliar un compte, primer seleccioneu el compte, ja sigui des de la vista <guiicon
+>Per a conciliar un compte, primer seleccioneu el compte, sigui des de la vista <guiicon
 >Comptes</guiicon
 > o des de la vista <guiicon
 >Llibres majors</guiicon
@@ -770,7 +770,7 @@
 <para
 >Si teniu un ordinador nou, serà molt fàcil moure les dades. De fet, tot el que haureu de fer és copiar el vostre fitxer de dades del &kmymoney;. El nom del fitxer es mostra a la barra de títol quan s'està executant el &kmymoney;, generalment acaba en <filename class="extension"
 >.kmy</filename
->. La primera vegada que executeu l'aplicació a l'ordinador nou, haureu d'indicar-li on heu col·locat el fitxer de dades, ja sigui executant des de la línia d'ordres o des de l'element de menú <menuchoice
+>. La primera vegada que executeu l'aplicació a l'ordinador nou, haureu d'indicar-li on heu col·locat el fitxer de dades, sigui executant des de la línia d'ordres o des de l'element de menú <menuchoice
 ><guimenu
 >Fitxer</guimenu
 ><guimenuitem
@@ -785,7 +785,7 @@
 >Si les dades estan en una base de dades SQL, consulteu la documentació del programari de la base de dades per a obtenir orientació sobre com migrar les dades. </para>
 
 <para
->Recordeu que això assumeix que heu instal·lat la mateixa versió del &kmymoney; a l'ordinador nou que estàveu executant a l'ordinador anterior. La instal·lació d'una versió més nova també hauria de ser segur, però haureu de tenir en compte qualsevol problema relacionat amb aquesta actualització. Qualsevol d'aquests problemes hauria d'estar anotat en les notes de la versió per a la nova versió. </para>
+>Recordeu que això assumeix que heu instal·lat la mateixa versió del &kmymoney; a l'ordinador nou que estàveu executant a l'ordinador anterior. La instal·lació d'una versió més nova també hauria de ser segur, però haureu de tenir en compte qualsevol problema relacionat amb aquesta actualització. Qualsevol d'aquests problemes hauria d'estar anotat en les notes de la versió per a la versió nova. </para>
 </sect2>
 
 <sect2 id="firsttime.newpc.settings">

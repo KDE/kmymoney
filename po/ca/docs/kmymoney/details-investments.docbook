@@ -90,7 +90,7 @@
 > com a tipus de compte. </para>
 
 <para
->Per a treballar amb el nou compte d'inversió, navegueu fins a la vista de les <guibutton
+>Per a treballar amb el compte d'inversió nou, navegueu fins a la vista de les <guibutton
 >Inversions</guibutton
 > i trieu el compte que acabeu de crear des de la llista desplegable <guilabel
 >Selecciona un compte</guilabel
@@ -270,7 +270,7 @@
 >Accions</guilabel
 > de la finestra vista de les inversions llista les participacions actuals en aquest compte, juntament amb el seu símbol, valor, import i preu. Feu clic dret sobre qualsevol de les inversions per a obrir el menú contextual per a les <guimenu
 >Opcions de la inversió</guimenu
->, on tindreu l'opció d'afegir, editar o suprimir inversions individuals d'aquest compte. A més, podreu actualitzar el preu de les inversions, ja sigui manualment o mitjançant la font en línia. A més, és possible tancar un compte buit o tornar a obrir un compte tancat. L'ordre del valor, import i preu es podrà canviar a la pantalla seleccionant-ne qualsevol fent clic esquerre sobre l'element a la barra superior i arrossegant-lo cap a l'esquerra o cap a la dreta. </para>
+>, on tindreu l'opció d'afegir, editar o suprimir inversions individuals d'aquest compte. A més, podreu actualitzar el preu de les inversions, sigui manualment o mitjançant la font en línia. A més, és possible tancar un compte buit o tornar a obrir un compte tancat. L'ordre del valor, import i preu es podrà canviar a la pantalla seleccionant-ne qualsevol fent clic esquerre sobre l'element a la barra superior i arrossegant-lo cap a l'esquerra o cap a la dreta. </para>
 <para
 >Si trieu editar una inversió, s'utilitzarà l'<guilabel
 >Assistent per al detall de la inversió</guilabel
@@ -407,7 +407,7 @@
 <title
 >Accions, preu i import total</title>
 <para
->Per a les operacions de compra, venda i reinversió s'hauran d'establir el nombre d'accions, el preu per acció i l'import total de l'operació. Podreu introduir qualsevol d'aquests dos, i el &kmymoney; calcularà el tercer. En general, és millor introduir només l'import total i el nombre d'accions, perquè aquests són els fets coneguts de l'operació. El &kmymoney; calcularà automàticament el preu per acció. Recordeu que només hi ha un camp d'entrada per al preu, i que està etiquetat com <quote
+>Per a les operacions de compra, venda i reinversió s'hauran d'establir el nombre d'accions, el preu per acció i l'import total de l'operació. Podreu introduir qualsevol d'aquests dos, i el &kmymoney; calcularà el tercer. En general, és millor introduir només l'import total i el nombre d'accions, perquè aquests són els fets coneguts de l'operació. El &kmymoney; calcularà automàticament el preu per acció. Recordeu que només hi ha un camp d'entrada per al preu, i que està etiquetat com a <quote
 >Import de l'operació</quote
 > o <quote
 >Preu per acció</quote
