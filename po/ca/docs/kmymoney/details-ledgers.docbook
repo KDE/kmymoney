@@ -479,7 +479,7 @@
 >. </para>
 
 <para
->Durant la importació dels extractes en línia, ja sigui directament o mitjançant la importació d'un fitxer descarregat, el &kmymoney; realitzarà la coincidència el millor que pugui segons el nom del beneficiari i l'import de l'operació. En cas d'una coincidència no vàlida, una operació coincident es pot fer no coincident. </para>
+>Durant la importació dels extractes en línia, sigui directament o mitjançant la importació d'un fitxer descarregat, el &kmymoney; realitzarà la coincidència el millor que pugui segons el nom del beneficiari i l'import de l'operació. En cas d'una coincidència no vàlida, una operació coincident es pot fer no coincident. </para>
 
 <note>
   <para

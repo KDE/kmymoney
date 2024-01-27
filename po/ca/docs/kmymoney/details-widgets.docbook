@@ -23,7 +23,7 @@
 
 <para
 >Sempre que el &kmymoney; necessiti informació sobre una data específica, &pex;, la data de publicació d'una operació o la data d'obertura d'un compte, oferirà a l'usuari el <emphasis
->giny per introduir la data</emphasis
+>giny per a introduir la data</emphasis
 >. Aquest giny consta de tres camps i un botó. Els camps presenten el <emphasis
 >dia</emphasis
 >, el <emphasis
@@ -51,7 +51,7 @@
 </para>
 
 <para
->Dins del giny per introduir la data, es poden utilitzar les tecles de cursor &Left;/&Right; per a canviar entre els camps de <emphasis
+>Dins del giny per a introduir la data, es poden utilitzar les tecles de cursor &Left;/&Right; per a canviar entre els camps de <emphasis
 >dia</emphasis
 >, <emphasis
 >mes</emphasis
@@ -61,7 +61,7 @@
 >+</keycap
 > i <keycap
 >-</keycap
-> per incrementar/disminuir un sol dia. Es tindran en consideració els límits de mes i any, i si cal s'incrementaran/disminuiran. Prement <keycap
+> per a incrementar/disminuir un sol dia. Es tindran en consideració els límits de mes i any, i si cal s'incrementaran/disminuiran. Prement <keycap
 >T</keycap
 > s'establirà la data a avui. </para>
 
@@ -94,7 +94,7 @@
 <title
 >Introduir el valor</title>
 <para
->El giny per introduir el valor consta d'un camp de text (que accepta dígits, separadors de milers i símbols decimals), així com un botó a la dreta. Utilitza dígits per introduir el valor. Separeu la part fraccional introduint el separador decimal per a la configuració regional. Si feu clic al botó a la dreta o premeu una tecla que representi una operació numèrica (&pex;, <keycap
+>El giny per a introduir el valor consta d'un camp de text (que accepta dígits, separadors de milers i símbols decimals), així com un botó a la dreta. Utilitza dígits per a introduir el valor. Separeu la part fraccional introduint el separador decimal per a la configuració regional. Si feu clic al botó a la dreta o premeu una tecla que representi una operació numèrica (&pex;, <keycap
 >+</keycap
 >, <keycap
 >-</keycap
@@ -107,7 +107,7 @@
 >) apareixerà una petita calculadora que us permetrà calcular el valor final. </para>
 
 <para
->Els valors negatius es poden introduir precedint el valor amb un signe menys. En cas que la configuració regional estigui establerta per a mostrar nombres negatius amb parèntesis al voltant del valor, el valor també podrà tancar-se entre parèntesis al giny per introduir un valor. </para>
+>Els valors negatius es poden introduir precedint el valor amb un signe menys. En cas que la configuració regional estigui establerta per a mostrar nombres negatius amb parèntesis al voltant del valor, el valor també podrà tancar-se entre parèntesis al giny per a introduir un valor. </para>
 
 <para>
 <screenshot>

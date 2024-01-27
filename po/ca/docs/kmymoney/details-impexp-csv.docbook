@@ -401,7 +401,7 @@
 >Importa</guibutton
 >. Al quadre <guilabel
 >Introduïu un compte</guilabel
->, introduïu el nom d'un compte de valors/compte corrent per a fons. Si introduïu un nom vàlid, s'utilitzarà aquest compte. Si no podeu molestar-vos a introduir un nom correcte per ser llarg, introduïu alguns caràcters. La importació ho acceptarà, però les operacions del llibre major després de la importació necessitaran un compte adequat per a ser seleccionades. Per al quadre <guilabel
+>, introduïu el nom d'un compte de valors/compte corrent per a fons. Si introduïu un nom vàlid, s'utilitzarà aquest compte. Si no podeu molestar-vos a introduir un nom correcte però llarg, introduïu alguns caràcters. La importació ho acceptarà, però les operacions del llibre major després de la importació necessitaran un compte adequat per a ser seleccionades. Per al quadre <guilabel
 >Valors</guilabel
 >, introduïu el número de la columna que conté aquest detall. Ara, al quadre <guilabel
 >Operació no vàlida</guilabel

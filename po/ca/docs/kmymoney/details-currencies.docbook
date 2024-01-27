@@ -19,7 +19,7 @@
 >Divises</title>
 
 <para
->El &kmymoney; admet l'ús de múltiples divises en diferents comptes. Per exemple, podreu configurar un compte bancari en euros, un altre en lliures esterlines i així i tot tenir el compte de la targeta de crèdit en dòlars nord-americans. </para>
+>El &kmymoney; admet l'ús de múltiples divises en diferents comptes. Per exemple, podreu configurar un compte bancari en euros, un altre en lliures esterlines i, a més, tenir el compte de la targeta de crèdit en dòlars nord-americans. </para>
 
 <sect1 id="details.currencies.basecurrency">
 <title

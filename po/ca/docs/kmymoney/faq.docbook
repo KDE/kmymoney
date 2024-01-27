@@ -237,7 +237,7 @@
  </question>
  <answer>
    <para
->L'ús de KMyMoney2 va ser un llegat històric de quan el projecte va passar del &kde; 1 al &kde; 2. Per a evitar canviar el nom cada vegada que hi havia una nova versió del &kde;, vam decidir seguir amb &kmymoney;.</para>
+>L'ús de KMyMoney2 va ser un llegat històric de quan el projecte va passar del &kde; 1 al &kde; 2. Per a evitar canviar el nom cada vegada que hi havia una versió nova del &kde;, vam decidir seguir amb &kmymoney;.</para>
    <para
 >La primera versió del &kmymoney; que es va considerar prou estable tenia l'etiqueta 1.0, tot i que s'executava sota el &kde; 3. Com el projecte ara s'està alineant més estretament amb el &kde;, vam decidir fer servir el mateix número de versió principal.</para>
  </answer>
@@ -246,7 +246,7 @@
 <qandaentry>
  <question>
    <para
->Com puc informar d'un error? Com puc sol·licitar una nova característica?</para>
+>Com puc informar d'un error? Com puc sol·licitar una característica nova?</para>
  </question>
  <answer>
    <para
