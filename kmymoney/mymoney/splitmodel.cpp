@@ -27,6 +27,7 @@
 #include "mymoneytransaction.h"
 #include "payeesmodel.h"
 #include "securitiesmodel.h"
+#include "tagsmodel.h"
 
 struct SplitModel::Private
 {
@@ -35,6 +36,7 @@ struct SplitModel::Private
         , headerData(QHash<Column, QString>({
               {Category, i18nc("Split header", "Category")},
               {Memo, i18nc("Split header", "Memo")},
+              {Tag, i18nc("Split header", "Tag")},
               {Payment, i18nc("Split header", "Payment")},
               {Deposit, i18nc("Split header", "Deposit")},
           }))
@@ -269,6 +271,15 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
                 }
             }
             return {};
+
+        case Column::Tag: {
+            const auto baseModel = MyMoneyFile::instance()->tagsModel();
+            QStringList tags;
+            for (auto tagId : split.tagIdList()) {
+                tags.append(baseModel->data(baseModel->indexById(tagId), Qt::DisplayRole).toString());
+            }
+            return tags.join(QLatin1String(", "));
+        }
 
         default:
             break;

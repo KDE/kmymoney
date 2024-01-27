@@ -30,6 +30,7 @@ public:
     enum Column {
         Category = 0,
         Memo,
+        Tag,
         Payment,
         Deposit,
         // insert new columns above this line
