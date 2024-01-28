@@ -200,10 +200,10 @@ bool MyMoneyTransaction::accountReferenced(const QString& id) const
 void MyMoneyTransaction::addSplit(MyMoneySplit &split)
 {
     if (!split.id().isEmpty())
-        throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot add split with assigned id '%1'").arg(split.id()));
+        throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot add split with assigned id '%1' to transaction %2").arg(split.id(), id()));
 
     if (split.accountId().isEmpty())
-        throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot add split that does not contain an account reference"));
+        throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot add split that does not contain an account reference to transaction %1").arg(id()));
 
     Q_D(MyMoneyTransaction);
     MyMoneySplit newSplit(d->nextSplitID(), split);
@@ -218,7 +218,7 @@ void MyMoneyTransaction::modifySplit(const MyMoneySplit& split)
 // This is the other version which allows having more splits referencing
 // the same account.
     if (split.accountId().isEmpty())
-        throw MYMONEYEXCEPTION_CSTRING("Cannot modify split that does not contain an account reference");
+        throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot modify split that does not contain an account reference in transaction %1").arg(id()));
 
     Q_D(MyMoneyTransaction);
     for (auto& it_split : d->m_splits) {
@@ -228,7 +228,7 @@ void MyMoneyTransaction::modifySplit(const MyMoneySplit& split)
             return;
         }
     }
-    throw MYMONEYEXCEPTION(QString::fromLatin1("Invalid split id '%1'").arg(split.id()));
+    throw MYMONEYEXCEPTION(QString::fromLatin1("Invalid split id '%1' in transaction %2").arg(split.id(), id()));
 }
 
 void MyMoneyTransaction::removeSplit(const MyMoneySplit& split)
@@ -242,7 +242,7 @@ void MyMoneyTransaction::removeSplit(const MyMoneySplit& split)
         }
     }
 
-    throw MYMONEYEXCEPTION(QString::fromLatin1("Invalid split id '%1'").arg(split.id()));
+    throw MYMONEYEXCEPTION(QString::fromLatin1("Invalid split id '%1' in transaction %2").arg(split.id(), id()));
 }
 
 void MyMoneyTransaction::removeSplits()
@@ -259,7 +259,7 @@ MyMoneySplit MyMoneyTransaction::splitByPayee(const QString& payeeId) const
         if (split.payeeId() == payeeId)
             return split;
     }
-    throw MYMONEYEXCEPTION(QString::fromLatin1("Split not found for payee '%1'").arg(QString(payeeId)));
+    throw MYMONEYEXCEPTION(QString::fromLatin1("Split not found for payee '%1' in transaction %2").arg(payeeId, id()));
 }
 
 MyMoneySplit MyMoneyTransaction::splitByAccount(const QString& accountId, const bool match) const
@@ -270,7 +270,7 @@ MyMoneySplit MyMoneyTransaction::splitByAccount(const QString& accountId, const 
                 (match == false && split.accountId() != accountId))
             return split;
     }
-    throw MYMONEYEXCEPTION(QString::fromLatin1("Split not found for account %1%2").arg(match ? "" : "!", accountId));
+    throw MYMONEYEXCEPTION(QString::fromLatin1("Split not found for account %1%2 in transaction %3").arg(match ? "" : "!", accountId, id()));
 }
 
 MyMoneySplit MyMoneyTransaction::splitByAccount(const QStringList& accountIds, const bool match) const
@@ -281,7 +281,8 @@ MyMoneySplit MyMoneyTransaction::splitByAccount(const QStringList& accountIds, c
                 (match == false && !accountIds.contains(split.accountId())))
             return split;
     }
-    throw MYMONEYEXCEPTION(QString::fromLatin1("Split not found for account  %1%2...%3").arg(match ? "" : "!", accountIds.front(), accountIds.back()));
+    throw MYMONEYEXCEPTION(
+        QString::fromLatin1("Split not found for account  %1%2...%3 in transaction %4").arg(match ? "" : "!", accountIds.front(), accountIds.back(), id()));
 }
 
 MyMoneySplit MyMoneyTransaction::splitById(const QString& splitId) const
@@ -291,7 +292,7 @@ MyMoneySplit MyMoneyTransaction::splitById(const QString& splitId) const
         if (split.id() == splitId)
             return split;
     }
-    throw MYMONEYEXCEPTION(QString::fromLatin1("Split not found for id '%1'").arg(QString(splitId)));
+    throw MYMONEYEXCEPTION(QString::fromLatin1("Split not found for id '%1' in transaction %2").arg(splitId, id()));
 }
 
 QString MyMoneyTransaction::firstSplitID()
