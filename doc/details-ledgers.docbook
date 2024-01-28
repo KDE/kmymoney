@@ -260,9 +260,9 @@
 
 <para>
   <guilabel>Erroneous</guilabel> selects transactions where &kmymoney; has detected
-  some problem.  Most commonly, this is an <link
-  linkend="details.ledgers.split">unbalanced transaction</link>, which is often the
-  case for imported transactions.
+  some problem.  Most commonly, thrsr str an <link
+  linkend="details.ledgers.split">unbalanced transactiond</link>, which is often the
+  case for imported transactions where a category was not assigned..
 </para>
 
 <para>
@@ -518,17 +518,19 @@
   moving into or out of a sigle account.  Most of the time, a transaction contains
   exactly two splits, one for the account the money is coming from and the other for
   the account the money is going to.  The term <quote>Split Transaction</quote> is
-  used when one side of the transaction is further divided into more than one split.
-  This is most commonly done when money moves in or out of a typical bank account,
-  but is allocated to more than one category.
+  used when there are actually three or more splits, when one side of the transaction
+  is further divided into more than one split.  This is most commonly done when money
+  moves in or out of a typical bank account, but is allocated to more than one
+  category.
 </para>
 
 <para>
-  In almost all cases, if a transaction has only one split, it is said to be
-  <quote>unbalanced</quote> meaning that money is coming from somewhere, but not
+  If a transaction has only one split, it is almost always said to be
+  <quote>unbalanced,</quote> meaning that money is coming from somewhere, but not
   going anywhere (or vice versa.)  Such transactions are typically flagged by being
-  displayed in red in the Ledger.  The only valid transactions with a single split
-  occurs in Investment Accounts: Add, Remove, or Split shares.
+  displayed in red in the Ledger.  Valid transactions with a single split are usually
+  in Investment Accounts: Add, Remove, or Split shares.  The other case is where the
+  amount of the transaction is 0, which banks somtimes produce.
 </para>
 
 <para>

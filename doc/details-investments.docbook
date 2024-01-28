@@ -13,18 +13,19 @@
 
 <sect1 id="details.investments.overview"><title>Investments in &kmymoney;</title>
 <para>
-  In very general terms, an investment is any allocation of money with the
-  expectation of a future benefit.  &kmymoney;'s Investment accounts are designed for
-  one particular type of investment: securities.  A security investment (or just a
-  security) is an instrument for investing money that is traded on a market with the
-  intention of a profitable return in the form of either appreciation in value,
-  income such as interest or dividends, or a combination of both.  Stocks and mutual
-  funds are the most common securities; and they are the ones specifically supported
-  within &kmymoney;.  Bonds have a different financial structure, but can usually be
-  handled by &kmymoney;.  Futures, commodities, options, and more complex investment
-  instruments like derivatives are other types of investments, but &kmymoney; has no
-  special functionality for them.  As long an investment has similar characteristics
-  to a stock or mutual fund, it can be tracked.
+  In very general terms, an <emphasis>investment</emphasis> is any allocation of
+  money with the expectation of a future benefit.  &kmymoney;'s Investment accounts
+  are designed for one particular type of investment: securities.  A security
+  investment (or just a security) is an instrument for investing money that is traded
+  on a market with the intention of a profitable return in the form of either
+  appreciation in value, income such as interest or dividends, or a combination of
+  both.  Stocks and mutual funds are the most common securities; and they are the
+  ones specifically supported within &kmymoney;.  Bonds have a different financial
+  structure, but can usually be handled by &kmymoney;.  Futures, commodities,
+  options, and more complex investment instruments like derivatives are other types
+  of investments, but &kmymoney; has no special functionality for them.  As long an
+  investment has similar characteristics to a stock or mutual fund, it can be
+  tracked.
 </para>
 
 <sect2><title>Investment Accounts</title>
@@ -116,11 +117,13 @@
 </para>
 
 <para>
-  At the top of the list of equities is the <guilabel>Select Account:</guilabel> dropdown,
-  where you can select the investment account for which you want to see the specific
-  investments.  If you are looking at an investment account in the Legders View, and then switch
-  to the Investments View, that account will already be selected. <!-- FIXME: refer to the
-  setting about forcing that coordination, -->
+  At the top of the list of equities is the <guilabel>Select Account:</guilabel>
+  dropdown, where you can select the investment account for which you want to see the
+  specific investments.  If you have checked <link
+  linkend="details.settings.general.views">Synchronize account selection of ledger
+  and investment view</link> in the configuration dialog, then if you are looking at
+  an investment account in the Legders View, and then switch to the Investments View,
+  that account will already be selected.
 </para>
 
 <para>
@@ -312,20 +315,6 @@
   <guilabel>Select Account</guilabel> dropdown.
 </para>
 
-<screenshot>
-  <screeninfo>new investment wizard</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="investments_summarytab.png" format="PNG" />
-    </imageobject>
-    <textobject>
-      <phrase>new investment wizard</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
-<!-- FIXME: the above shot is of the equities tab.  Replace with shot(s) of the new
-     investment dialog. -->
-
 <para>
   Right-click in any empty space in the view.  This brings up the <guimenu>Investment
   Options</guimenu> context menu.  Choose <guimenuitem>New
@@ -334,17 +323,42 @@
 </para>
 
 <sect2 id="details.investments.newinvestmentwizard"><title>New Investment Wizard</title>
+
 <para>
-  The first thing you'll be asked to enter is the type of investment.  The currently
-  available values are Stock, Bond, and Mutual Fund.  If your investment is not
-  strictly one of these types, it is ok to mislabel here, as the type is not
+  The first thing you will be asked to enter is the type of investment.  The
+  currently available values are Stock, Bond, and Mutual Fund.  If your investment is
+  not strictly one of these types, it is ok to mislabel here, as the type is not
   currently used to restrict or control what you can do with the investment.
 </para>
+
+<screenshot>
+  <screeninfo>new investment wizard type</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investments_new_type.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>new investment wizard type</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
   Next, the investment details page is presented.  The following information is
   entered on this page:
 </para>
+
+<screenshot>
+  <screeninfo>new investment wizard details</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investments_new_details.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>new investment wizard details</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <itemizedlist>
   <listitem>
@@ -357,12 +371,12 @@
     </para>
 
     <para>
-      If you plan to use Online Quotes <!--FIXME: use real link --> to retrieve
-      prices for this investment, ensure that the symbol exactly matches the symbol
-      used by your quote source.  Yahoo covers most of the world's markets, and
-      requires a suffix on the end of symbols outside the US, to specify the country
-      or market.  For example, Rubicon Limited on the New Zealand market should be
-      entered as <quote>RBC.NZ</quote>.
+      If you plan to use <link linkend="details.investments.onlinequotes">Online
+      Quotes</link> to retrieve prices for this investment, ensure that the symbol
+      exactly matches the symbol used by your quote source.  Yahoo covers most of the
+      world's markets, and requires a suffix on the end of symbols outside the US, to
+      specify the country or market.  For example, Rubicon Limited on the New Zealand
+      market should be entered as <quote>RBC.NZ</quote>.
     </para>
   </listitem>
 
@@ -417,11 +431,11 @@
 
   <listitem>
     <para>
-      Price entry.  This is a dropdown which specifies when you enter or edit a buy
-      or sell transaction for this investment, whether you follow the default which
-      is specied in a main configuration item <!-- FIXME: where - put linke? -->, or
-      want to explicitly enter either the price per share or the total for all
-      shares.
+      Price entry.  When you enter or edit a buy or sell transaction for this
+      investment, this dropdown indicates whether you want to explicitly enter either
+      the price per share or the total for all shares or to follow the default, which
+      is specied in a main configuration item
+
     </para>
   </listitem>
 
@@ -490,10 +504,10 @@
 </itemizedlist>
 </sect2>
 
-<sect2 id="details.investments.reuse"><title>Using a Security in more than one Investment Account</title>
-<note>
+<sect2><title>Using a Security in more than one Investment Account</title>
+<note><title>Caution</title>
   <para>
-    It is possible to own shares of the same security in differentmore than one
+    It is possible to own shares of the same security in more than one
     investment account, such as a regular investment account and also a retirement
     account.  If you follow the instructions above, you will have that security show
     up in both accounts, but &kmymoney; will actually treat them as if each of the
@@ -507,8 +521,8 @@
 <para>
   When you add a security to an investment account, and that investment already
   exists in another investment account, you need to be careful if you want to reuse
-  it rather than creating a new, duplicate entry.  When you see the <guilabel>New
-  Investment Wizard</guilabel>, after selecting the type of investment and clicking
+  it rather than creating a new, duplicate entry.  In the <guilabel>New Investment
+  Wizard</guilabel>, after selecting the type of investment and clicking
   <guibutton>Next</guibutton>, you need to be sure the <guilabel>Full Name</guilabel>
   field is empty before entering the <guilabel>Trading Symbol</guilabel>.  Then, when
   you hit <keycap>Tab</keycap>, if &kmymoney; already has a security using that
@@ -933,8 +947,8 @@
   options, and futures.  In addition, when you sell a security, &kmymoney; does not
   know which specific shares you are selling, &ie;, the oldest or the most recently
   purchased, so it cannot calculate return on investment.  Finally, it has no direct
-  knowledge about any country's specific tax reporting requirements, but these can
-  usually be handled by marking as Tax related all the categories you use for
+  knowledge about any country's specific tax reporting requirements, although these
+  can usually be handled by marking as Tax related all the categories you use for
   transactions which might have tax consequences.
 </para>
 
