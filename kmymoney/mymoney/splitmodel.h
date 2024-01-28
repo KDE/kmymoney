@@ -33,6 +33,7 @@ public:
         Tag,
         Payment,
         Deposit,
+        Tags,
         // insert new columns above this line
         MaxColumns,
     };
