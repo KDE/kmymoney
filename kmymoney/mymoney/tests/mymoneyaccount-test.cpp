@@ -313,11 +313,11 @@ void MyMoneyAccountTest::testSetClosed()
 {
     MyMoneyAccount a;
 
-    QVERIFY(a.isClosed() == false);
+    QCOMPARE(a.isClosed(), false);
     a.setClosed(true);
-    QVERIFY(a.isClosed() == true);
+    QCOMPARE(a.isClosed(), true);
     a.setClosed(false);
-    QVERIFY(a.isClosed() == false);
+    QCOMPARE(a.isClosed(), false);
 }
 
 void MyMoneyAccountTest::specialAccountTypes_data()
