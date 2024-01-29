@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 01:39+0000\n"
+"POT-Creation-Date: 2024-01-29 01:36+0000\n"
 "PO-Revision-Date: 2009-12-24 06:59-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -8182,28 +8182,35 @@ msgstr ""
 msgid "Could not load responsible plugin to view this task."
 msgstr ""
 
-#: kmymoney/mymoney/splitmodel.cpp:36
+#: kmymoney/mymoney/splitmodel.cpp:37
 #, fuzzy, kde-format
 #| msgid "Category"
 msgctxt "Split header"
 msgid "Category"
 msgstr "Catagóir"
 
-#: kmymoney/mymoney/splitmodel.cpp:37
+#: kmymoney/mymoney/splitmodel.cpp:38
 #, fuzzy, kde-format
 #| msgid "Memo"
 msgctxt "Split header"
 msgid "Memo"
 msgstr "Meamram"
 
-#: kmymoney/mymoney/splitmodel.cpp:38
+#: kmymoney/mymoney/splitmodel.cpp:39
+#, fuzzy, kde-format
+#| msgid "Tag"
+msgctxt "Split header"
+msgid "Tag"
+msgstr "Clib"
+
+#: kmymoney/mymoney/splitmodel.cpp:40
 #, fuzzy, kde-format
 #| msgid "Payment"
 msgctxt "Split header"
 msgid "Payment"
 msgstr "Íocaíocht"
 
-#: kmymoney/mymoney/splitmodel.cpp:39
+#: kmymoney/mymoney/splitmodel.cpp:41
 #, fuzzy, kde-format
 #| msgctxt "Scheduled transaction type"
 #| msgid "Deposit"
@@ -8211,12 +8218,12 @@ msgctxt "Split header"
 msgid "Deposit"
 msgstr "Cur i dTaisce"
 
-#: kmymoney/mymoney/splitmodel.cpp:94
+#: kmymoney/mymoney/splitmodel.cpp:96
 #, kde-format
 msgid "Split transaction"
 msgstr ""
 
-#: kmymoney/mymoney/splitmodel.cpp:112
+#: kmymoney/mymoney/splitmodel.cpp:114
 #: kmymoney/mymoney/storage/journalmodel.cpp:192
 #: kmymoney/plugins/views/reports/core/querytable.cpp:993
 #, kde-format

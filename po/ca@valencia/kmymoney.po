@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 01:39+0000\n"
+"POT-Creation-Date: 2024-01-29 01:36+0000\n"
 "PO-Revision-Date: 2024-01-13 19:04+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -8330,36 +8330,43 @@ msgid "Could not load responsible plugin to view this task."
 msgstr ""
 "No s'ha pogut carregar el connector responsable per a visualitzar esta tasca."
 
-#: kmymoney/mymoney/splitmodel.cpp:36
+#: kmymoney/mymoney/splitmodel.cpp:37
 #, kde-format
 msgctxt "Split header"
 msgid "Category"
 msgstr "Categoria"
 
-#: kmymoney/mymoney/splitmodel.cpp:37
+#: kmymoney/mymoney/splitmodel.cpp:38
 #, kde-format
 msgctxt "Split header"
 msgid "Memo"
 msgstr "Recordatori"
 
-#: kmymoney/mymoney/splitmodel.cpp:38
+#: kmymoney/mymoney/splitmodel.cpp:39
+#, fuzzy, kde-format
+#| msgid "Tag"
+msgctxt "Split header"
+msgid "Tag"
+msgstr "Etiqueta"
+
+#: kmymoney/mymoney/splitmodel.cpp:40
 #, kde-format
 msgctxt "Split header"
 msgid "Payment"
 msgstr "Pagament"
 
-#: kmymoney/mymoney/splitmodel.cpp:39
+#: kmymoney/mymoney/splitmodel.cpp:41
 #, kde-format
 msgctxt "Split header"
 msgid "Deposit"
 msgstr "Ingrés"
 
-#: kmymoney/mymoney/splitmodel.cpp:94
+#: kmymoney/mymoney/splitmodel.cpp:96
 #, kde-format
 msgid "Split transaction"
 msgstr "Operació desglossada"
 
-#: kmymoney/mymoney/splitmodel.cpp:112
+#: kmymoney/mymoney/splitmodel.cpp:114
 #: kmymoney/mymoney/storage/journalmodel.cpp:192
 #: kmymoney/plugins/views/reports/core/querytable.cpp:993
 #, kde-format

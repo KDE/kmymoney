@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 01:39+0000\n"
+"POT-Creation-Date: 2024-01-29 01:36+0000\n"
 "PO-Revision-Date: 2024-01-23 10:44+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
@@ -8395,36 +8395,43 @@ msgstr ""
 "Impossible de charger le module externe en charge de l'affichage de cette "
 "tâche."
 
-#: kmymoney/mymoney/splitmodel.cpp:36
+#: kmymoney/mymoney/splitmodel.cpp:37
 #, kde-format
 msgctxt "Split header"
 msgid "Category"
 msgstr "Catégorie"
 
-#: kmymoney/mymoney/splitmodel.cpp:37
+#: kmymoney/mymoney/splitmodel.cpp:38
 #, kde-format
 msgctxt "Split header"
 msgid "Memo"
 msgstr "Note"
 
-#: kmymoney/mymoney/splitmodel.cpp:38
+#: kmymoney/mymoney/splitmodel.cpp:39
+#, fuzzy, kde-format
+#| msgid "Tag"
+msgctxt "Split header"
+msgid "Tag"
+msgstr "Étiquette"
+
+#: kmymoney/mymoney/splitmodel.cpp:40
 #, kde-format
 msgctxt "Split header"
 msgid "Payment"
 msgstr "Versement"
 
-#: kmymoney/mymoney/splitmodel.cpp:39
+#: kmymoney/mymoney/splitmodel.cpp:41
 #, kde-format
 msgctxt "Split header"
 msgid "Deposit"
 msgstr "Dépôt"
 
-#: kmymoney/mymoney/splitmodel.cpp:94
+#: kmymoney/mymoney/splitmodel.cpp:96
 #, kde-format
 msgid "Split transaction"
 msgstr "Opération répartie"
 
-#: kmymoney/mymoney/splitmodel.cpp:112
+#: kmymoney/mymoney/splitmodel.cpp:114
 #: kmymoney/mymoney/storage/journalmodel.cpp:192
 #: kmymoney/plugins/views/reports/core/querytable.cpp:993
 #, kde-format

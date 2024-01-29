@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 01:39+0000\n"
+"POT-Creation-Date: 2024-01-29 01:36+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -8503,40 +8503,47 @@ msgstr "<p><b>%2</b> үлгі файлындағы <b>%1</b> деген тег �
 msgid "Could not load responsible plugin to view this task."
 msgstr ""
 
-#: kmymoney/mymoney/splitmodel.cpp:36
+#: kmymoney/mymoney/splitmodel.cpp:37
 #, fuzzy, kde-format
 #| msgid "Category"
 msgctxt "Split header"
 msgid "Category"
 msgstr "Санат"
 
-#: kmymoney/mymoney/splitmodel.cpp:37
+#: kmymoney/mymoney/splitmodel.cpp:38
 #, fuzzy, kde-format
 #| msgid "Memo"
 msgctxt "Split header"
 msgid "Memo"
 msgstr "Жаднама"
 
-#: kmymoney/mymoney/splitmodel.cpp:38
+#: kmymoney/mymoney/splitmodel.cpp:39
+#, fuzzy, kde-format
+#| msgid "Tag"
+msgctxt "Split header"
+msgid "Tag"
+msgstr "Белгі"
+
+#: kmymoney/mymoney/splitmodel.cpp:40
 #, fuzzy, kde-format
 #| msgid "Payment"
 msgctxt "Split header"
 msgid "Payment"
 msgstr "Төлемі"
 
-#: kmymoney/mymoney/splitmodel.cpp:39
+#: kmymoney/mymoney/splitmodel.cpp:41
 #, fuzzy, kde-format
 #| msgid "Deposit"
 msgctxt "Split header"
 msgid "Deposit"
 msgstr "Салым"
 
-#: kmymoney/mymoney/splitmodel.cpp:94
+#: kmymoney/mymoney/splitmodel.cpp:96
 #, kde-format
 msgid "Split transaction"
 msgstr "Транзакцияны бөлу"
 
-#: kmymoney/mymoney/splitmodel.cpp:112
+#: kmymoney/mymoney/splitmodel.cpp:114
 #: kmymoney/mymoney/storage/journalmodel.cpp:192
 #: kmymoney/plugins/views/reports/core/querytable.cpp:993
 #, kde-format

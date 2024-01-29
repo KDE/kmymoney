@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 01:39+0000\n"
+"POT-Creation-Date: 2024-01-29 01:36+0000\n"
 "PO-Revision-Date: 2024-01-13 12:20+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
@@ -8243,36 +8243,43 @@ msgstr "<p>Nevalida radika elemento en ŝablondosiero <b>%1</b></p>"
 msgid "Could not load responsible plugin to view this task."
 msgstr "Ne eblis ŝargi respondecan kromprogramon por vidi ĉi tiun taskon."
 
-#: kmymoney/mymoney/splitmodel.cpp:36
+#: kmymoney/mymoney/splitmodel.cpp:37
 #, kde-format
 msgctxt "Split header"
 msgid "Category"
 msgstr "Kategorio"
 
-#: kmymoney/mymoney/splitmodel.cpp:37
+#: kmymoney/mymoney/splitmodel.cpp:38
 #, kde-format
 msgctxt "Split header"
 msgid "Memo"
 msgstr "Noto"
 
-#: kmymoney/mymoney/splitmodel.cpp:38
+#: kmymoney/mymoney/splitmodel.cpp:39
+#, fuzzy, kde-format
+#| msgid "Tag"
+msgctxt "Split header"
+msgid "Tag"
+msgstr "Etikedo"
+
+#: kmymoney/mymoney/splitmodel.cpp:40
 #, kde-format
 msgctxt "Split header"
 msgid "Payment"
 msgstr "Pagado"
 
-#: kmymoney/mymoney/splitmodel.cpp:39
+#: kmymoney/mymoney/splitmodel.cpp:41
 #, kde-format
 msgctxt "Split header"
 msgid "Deposit"
 msgstr "Deponejo"
 
-#: kmymoney/mymoney/splitmodel.cpp:94
+#: kmymoney/mymoney/splitmodel.cpp:96
 #, kde-format
 msgid "Split transaction"
 msgstr "Split transakcio"
 
-#: kmymoney/mymoney/splitmodel.cpp:112
+#: kmymoney/mymoney/splitmodel.cpp:114
 #: kmymoney/mymoney/storage/journalmodel.cpp:192
 #: kmymoney/plugins/views/reports/core/querytable.cpp:993
 #, kde-format
