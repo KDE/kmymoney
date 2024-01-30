@@ -238,7 +238,7 @@ SplitView::SplitView(QWidget* parent)
 
     d->columnSelector = new ColumnSelector(this, QStringLiteral("SplitEditor"));
     d->columnSelector->setAlwaysVisible(
-        QVector<int>({SplitModel::Column::Category, SplitModel::Column::Tag, SplitModel::Column::Payment, SplitModel::Column::Deposit}));
+        QVector<int>({SplitModel::Column::Category, SplitModel::Column::Tags, SplitModel::Column::Payment, SplitModel::Column::Deposit}));
 }
 
 SplitView::~SplitView()

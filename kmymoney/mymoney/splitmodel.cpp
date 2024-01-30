@@ -36,7 +36,7 @@ struct SplitModel::Private
         , headerData(QHash<Column, QString>({
               {Category, i18nc("Split header", "Category")},
               {Memo, i18nc("Split header", "Memo")},
-              {Tag, i18nc("Split header", "Tag")},
+              {Tags, i18nc("Split header", "Tags")},
               {Payment, i18nc("Split header", "Payment")},
               {Deposit, i18nc("Split header", "Deposit")},
           }))

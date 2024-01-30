@@ -30,10 +30,9 @@ public:
     enum Column {
         Category = 0,
         Memo,
-        Tag,
+        Tags,
         Payment,
         Deposit,
-        Tags,
         // insert new columns above this line
         MaxColumns,
     };
