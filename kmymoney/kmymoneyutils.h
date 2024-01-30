@@ -321,7 +321,7 @@ public:
 
     static std::tuple<bool, QString> newPayee(const QString& newnameBase);
 
-    static void newTag(const QString& newnameBase, QString& id);
+    static std::tuple<bool, QString> newTag(const QString& newnameBase);
 
     /**
       * Creates a new institution entry in the MyMoneyFile engine

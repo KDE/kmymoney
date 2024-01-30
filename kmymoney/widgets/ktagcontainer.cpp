@@ -48,31 +48,10 @@ public:
 
     void addTagWidget(int row)
     {
+        Q_Q(KTagContainer);
         const auto idx = m_tagCombo->model()->index(row, 0);
         const auto id = idx.data(eMyMoney::Model::IdRole).toString();
-        addTagWidget(id);
-    }
-
-    void addTagWidget(const QString& id)
-    {
-        Q_Q(KTagContainer);
-
-        m_skipSelection = true;
-        if (id.isEmpty() || m_idFilter->filterList().contains(id))
-            return;
-
-        // set index to the empty item since we remove
-        // the selected item as part of this method
-        m_tagCombo->setCurrentIndex(0);
-
-        const auto tagName = m_tagCombo->itemText(m_tagCombo->findData(QVariant(id), Qt::UserRole, Qt::MatchExactly));
-        KTagLabel *t = new KTagLabel(id, tagName, q);
-        q->connect(t, &KTagLabel::clicked, q, &KTagContainer::slotRemoveTagWidget);
-        m_tagLabelList.append(t);
-        m_idFilter->addFilter(id);
-        q->layout()->addWidget(t);
-
-        Q_EMIT q->tagsChanged(tagIdList());
+        q->addTagWidget(id);
     }
 
     QStringList tagIdList() const
@@ -196,8 +175,30 @@ void KTagContainer::loadTags(const QList<QString>& idList)
     // reset filter
     d->m_idFilter->setFilterList(QStringList());
     for (const auto& id : idList) {
-        d->addTagWidget(id);
+        addTagWidget(id);
     }
+}
+
+void KTagContainer::addTagWidget(const QString& id)
+{
+    Q_D(KTagContainer);
+
+    d->m_skipSelection = true;
+    if (id.isEmpty() || d->m_idFilter->filterList().contains(id))
+        return;
+
+    // set index to the empty item since we remove
+    // the selected item as part of this method
+    d->m_tagCombo->setCurrentIndex(0);
+
+    const auto tagName = d->m_tagCombo->itemText(d->m_tagCombo->findData(QVariant(id), Qt::UserRole, Qt::MatchExactly));
+    KTagLabel* t = new KTagLabel(id, tagName, this);
+    connect(t, &KTagLabel::clicked, this, &KTagContainer::slotRemoveTagWidget);
+    d->m_tagLabelList.append(t);
+    d->m_idFilter->addFilter(id);
+    layout()->addWidget(t);
+
+    Q_EMIT tagsChanged(d->tagIdList());
 }
 
 void KTagContainer::slotRemoveTagWidget()

@@ -1493,6 +1493,10 @@ bool NewTransactionEditor::eventFilter(QObject* o, QEvent* e)
                     // default for payee if one is setup
                     d->defaultCategoryAssignment();
                 }
+            } else if (o == d->ui->tagContainer->tagCombo()) {
+                if (needCreateTag(cb)) {
+                    createTag(d->ui->tagContainer);
+                }
             }
         } else if (e->type() == QEvent::FocusIn) {
             if (o == d->ui->payeeEdit) {
