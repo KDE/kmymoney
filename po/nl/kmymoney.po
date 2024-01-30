@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-29 01:36+0000\n"
-"PO-Revision-Date: 2024-01-13 13:50+0100\n"
+"PO-Revision-Date: 2024-01-29 10:40+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -30,12 +30,12 @@ msgstr ""
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
-"Ronald Stroethoff - 2018,Freek de Kruijf - t/m 2024,Nisse Lommerde - 2023"
+"Ronald Stroethoff - 2018,Nisse Lommerde - 2023,Freek de Kruijf - t/m 2024"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "stroet43@zonnet.nl,freekdekruijf@kde.nl,nisselommerde@gmail.com"
+msgstr "stroet43@zonnet.nl,nisselommerde@gmail.com,freekdekruijf@kde.nl"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:130
 #, kde-format
@@ -8328,8 +8328,7 @@ msgid "Memo"
 msgstr "Memo"
 
 #: kmymoney/mymoney/splitmodel.cpp:39
-#, fuzzy, kde-format
-#| msgid "Tag"
+#, kde-format
 msgctxt "Split header"
 msgid "Tag"
 msgstr "Tag"
