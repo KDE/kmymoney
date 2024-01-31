@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-29 01:36+0000\n"
+"POT-Creation-Date: 2024-01-31 01:45+0000\n"
 "PO-Revision-Date: 2024-01-29 09:38+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
-"%100<=4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
 "X-Generator: Poedit 3.4.2\n"
 
 #, kde-format
@@ -4590,6 +4590,13 @@ msgstr "Pusti %1 nedodeljen."
 msgid "Dialog"
 msgstr "Dialog"
 
+#: kmymoney/dialogs/tagcreator.cpp:64
+#, fuzzy, kde-format
+#| msgid "Create"
+msgctxt "Undo action description"
+msgid "Create tag"
+msgstr "Ustvari"
+
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
 #: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
 #, kde-format
@@ -6184,32 +6191,32 @@ msgstr "<qt>Ali želite dodati <b>%1</b> kot plačnika/prejemnika?</qt>"
 msgid "Unable to add payee"
 msgstr "Ni mogoče dodati prejemnika plačil"
 
-#: kmymoney/kmymoneyutils.cpp:618 kmymoney/views/ktagsview.cpp:633
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:634
 #, kde-format
 msgid "New Tag"
 msgstr "Nova oznaka"
 
-#: kmymoney/kmymoneyutils.cpp:620
+#: kmymoney/kmymoneyutils.cpp:621
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 msgstr "<qt>Ali želite dodati <b>%1</b> kot oznako?</qt>"
 
-#: kmymoney/kmymoneyutils.cpp:622
+#: kmymoney/kmymoneyutils.cpp:623
 #, kde-format
 msgid "New tag"
 msgstr "Nova oznaka"
 
-#: kmymoney/kmymoneyutils.cpp:656
+#: kmymoney/kmymoneyutils.cpp:657
 #, kde-format
 msgid "Unable to add tag"
 msgstr "Ni mogoče dodati oznake"
 
-#: kmymoney/kmymoneyutils.cpp:672 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:674 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "Ni mogoče dodati institucije: %1"
 
-#: kmymoney/kmymoneyutils.cpp:729
+#: kmymoney/kmymoneyutils.cpp:731
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:50
 #, kde-format
 msgid "One statement has been processed with the following results:"
@@ -6219,7 +6226,7 @@ msgstr[1] "%1 izkaza sta bila obdelana z naslednjimi rezultati:"
 msgstr[2] "%1 izkazov je bilo obdelanih z naslednjimi rezultati:"
 msgstr[3] "%1 izkazov je bilo obdelanih z naslednjimi rezultati:"
 
-#: kmymoney/kmymoneyutils.cpp:734
+#: kmymoney/kmymoneyutils.cpp:736
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:52
 #, kde-format
 msgid "No new transaction has been imported."
@@ -6229,7 +6236,7 @@ msgstr[1] "Nobene nove transakcije ni bilo uvožene."
 msgstr[2] "Nobene nove transakcije ni bilo uvožene."
 msgstr[3] "Nobene nove transakcije ni bilo uvožene."
 
-#: kmymoney/kmymoneyutils.cpp:735
+#: kmymoney/kmymoneyutils.cpp:737
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:53
 #, kde-format
 msgid "Statement import statistics"
@@ -8305,10 +8312,11 @@ msgid "Memo"
 msgstr "Opomba"
 
 #: kmymoney/mymoney/splitmodel.cpp:39
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tags"
 msgctxt "Split header"
-msgid "Tag"
-msgstr "Oznaka"
+msgid "Tags"
+msgstr "Oznake"
 
 #: kmymoney/mymoney/splitmodel.cpp:40
 #, kde-format
@@ -20542,12 +20550,12 @@ msgstr "Podvojeno ime oznake"
 msgid "Unable to modify tag"
 msgstr "Ni mogoče spremeniti oznake"
 
-#: kmymoney/views/ktagsview.cpp:802
+#: kmymoney/views/ktagsview.cpp:805
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Oznake transakcije/razcepa ni mogoče dodeliti drugam"
 
-#: kmymoney/views/ktagsview.cpp:814
+#: kmymoney/views/ktagsview.cpp:817
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Ni mogoče odstraniti oznak(e)"
@@ -20856,13 +20864,13 @@ msgstr ""
 "Izbira kategorije ali računa ni mogoča, kadar so razcepljene transakcije "
 "deli izbire."
 
-#: kmymoney/views/newspliteditor.cpp:150
+#: kmymoney/views/newspliteditor.cpp:152
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "Stroškovno mesto, kamor je treba dodeliti to transakcijo."
 
-#: kmymoney/views/newspliteditor.cpp:155
+#: kmymoney/views/newspliteditor.cpp:157
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid ""
@@ -20871,25 +20879,25 @@ msgid ""
 msgstr ""
 "Potrebno je dodeliti stroškovno mesta za transakcijo v izbrani kategoriji."
 
-#: kmymoney/views/newspliteditor.cpp:166
+#: kmymoney/views/newspliteditor.cpp:168
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "Stroškovno mesto kamor je treba dodeliti delež te transakcije."
 
-#: kmymoney/views/newspliteditor.cpp:207
+#: kmymoney/views/newspliteditor.cpp:209
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "Potrebna je dodelitev stroškovnega mesta za delež transakcije."
 
-#: kmymoney/views/newspliteditor.cpp:216
+#: kmymoney/views/newspliteditor.cpp:218
 #: kmymoney/views/newtransactioneditor.cpp:381
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Številka čeka uporabljena za to transakcijo."
 
-#: kmymoney/views/newspliteditor.cpp:225
+#: kmymoney/views/newspliteditor.cpp:227
 #: kmymoney/views/newtransactioneditor.cpp:391
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
@@ -21635,7 +21643,7 @@ msgstr "ikona"
 msgid "Feedback content"
 msgstr "Vsebina povratnih informacij"
 
-#: kmymoney/widgets/ktagcontainer.cpp:110
+#: kmymoney/widgets/ktagcontainer.cpp:89
 #, kde-format
 msgctxt "@info:placeholder tag combo box"
 msgid "Tag"
@@ -25316,6 +25324,10 @@ msgstr ""
 "\n"
 "<p>Vse informacije niso obvezne in se uporabljajo samo za prilagajanje "
 "datoteke KMyMoney.</p>"
+
+#~ msgctxt "Split header"
+#~ msgid "Tag"
+#~ msgstr "Oznaka"
 
 #~ msgid "Reorganizing accounts..."
 #~ msgstr "Reorganizacija računov..."

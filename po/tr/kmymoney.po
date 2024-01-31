@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-29 01:36+0000\n"
+"POT-Creation-Date: 2024-01-31 01:45+0000\n"
 "PO-Revision-Date: 2024-01-29 16:44+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -4556,6 +4556,13 @@ msgstr "%1 ögesini atanmamış olarak &bırakın."
 msgid "Dialog"
 msgstr "İletişim Kutusu"
 
+#: kmymoney/dialogs/tagcreator.cpp:64
+#, fuzzy, kde-format
+#| msgid "Create"
+msgctxt "Undo action description"
+msgid "Create tag"
+msgstr "Oluştur"
+
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
 #: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
 #, kde-format
@@ -6149,32 +6156,32 @@ msgstr ""
 msgid "Unable to add payee"
 msgstr "Alacaklı eklenemiyor"
 
-#: kmymoney/kmymoneyutils.cpp:618 kmymoney/views/ktagsview.cpp:633
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:634
 #, kde-format
 msgid "New Tag"
 msgstr "Yeni Etiket"
 
-#: kmymoney/kmymoneyutils.cpp:620
+#: kmymoney/kmymoneyutils.cpp:621
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 msgstr "<qt><b>%1</b> ögesini etiket olarak eklemek istiyor musunuz?</qt>"
 
-#: kmymoney/kmymoneyutils.cpp:622
+#: kmymoney/kmymoneyutils.cpp:623
 #, kde-format
 msgid "New tag"
 msgstr "Yeni etiket"
 
-#: kmymoney/kmymoneyutils.cpp:656
+#: kmymoney/kmymoneyutils.cpp:657
 #, kde-format
 msgid "Unable to add tag"
 msgstr "Etiket eklenemiyor"
 
-#: kmymoney/kmymoneyutils.cpp:672 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:674 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "Kurum eklenemiyor: %1"
 
-#: kmymoney/kmymoneyutils.cpp:729
+#: kmymoney/kmymoneyutils.cpp:731
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:50
 #, kde-format
 msgid "One statement has been processed with the following results:"
@@ -6182,7 +6189,7 @@ msgid_plural "%1 statements have been processed with the following results:"
 msgstr[0] "1 hesap özeti aşağıdaki sonuçlarla işlendi:"
 msgstr[1] "%1 hesap özeti aşağıdaki sonuçlarla işlendi:"
 
-#: kmymoney/kmymoneyutils.cpp:734
+#: kmymoney/kmymoneyutils.cpp:736
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:52
 #, kde-format
 msgid "No new transaction has been imported."
@@ -6190,7 +6197,7 @@ msgid_plural "No new transactions have been imported."
 msgstr[0] "Başka yeni işlem içe aktarılmadı."
 msgstr[1] "Başka yeni işlemler içe aktarılmadı."
 
-#: kmymoney/kmymoneyutils.cpp:735
+#: kmymoney/kmymoneyutils.cpp:737
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:53
 #, kde-format
 msgid "Statement import statistics"
@@ -8254,10 +8261,11 @@ msgid "Memo"
 msgstr "Not"
 
 #: kmymoney/mymoney/splitmodel.cpp:39
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tags"
 msgctxt "Split header"
-msgid "Tag"
-msgstr "Etiket"
+msgid "Tags"
+msgstr "Etiketler"
 
 #: kmymoney/mymoney/splitmodel.cpp:40
 #, kde-format
@@ -20419,12 +20427,12 @@ msgstr "Yinelenmiş Etiket Adı"
 msgid "Unable to modify tag"
 msgstr "Etiket değiştirilemiyor"
 
-#: kmymoney/views/ktagsview.cpp:802
+#: kmymoney/views/ktagsview.cpp:805
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "İşlemin/bölmenin etiketi yeniden atanamıyor"
 
-#: kmymoney/views/ktagsview.cpp:814
+#: kmymoney/views/ktagsview.cpp:817
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Etiketler kaldırılamıyor"
@@ -20734,13 +20742,13 @@ msgstr ""
 "Bölünmüş işlemler seçimin bir parçası olduğunda kategori veya hesap seçimi "
 "olanaklı değildir."
 
-#: kmymoney/views/newspliteditor.cpp:150
+#: kmymoney/views/newspliteditor.cpp:152
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "Bu işlemin atanması gereken masraf merkezi."
 
-#: kmymoney/views/newspliteditor.cpp:155
+#: kmymoney/views/newspliteditor.cpp:157
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid ""
@@ -20749,25 +20757,25 @@ msgid ""
 msgstr ""
 "Seçili kategorideki bir işlem için bir masraf merkezi ataması gereklidir."
 
-#: kmymoney/views/newspliteditor.cpp:166
+#: kmymoney/views/newspliteditor.cpp:168
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "Bu bölmenin atanması gereken kategori."
 
-#: kmymoney/views/newspliteditor.cpp:207
+#: kmymoney/views/newspliteditor.cpp:209
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "Bölme için bir kategori ataması gereklidir."
 
-#: kmymoney/views/newspliteditor.cpp:216
+#: kmymoney/views/newspliteditor.cpp:218
 #: kmymoney/views/newtransactioneditor.cpp:381
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Bu işlem için kullanılan çek numarası."
 
-#: kmymoney/views/newspliteditor.cpp:225
+#: kmymoney/views/newspliteditor.cpp:227
 #: kmymoney/views/newtransactioneditor.cpp:391
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
@@ -21508,7 +21516,7 @@ msgstr "simge"
 msgid "Feedback content"
 msgstr "Geri bildirim içeriği"
 
-#: kmymoney/widgets/ktagcontainer.cpp:110
+#: kmymoney/widgets/ktagcontainer.cpp:89
 #, kde-format
 msgctxt "@info:placeholder tag combo box"
 msgid "Tag"
@@ -25177,6 +25185,10 @@ msgstr ""
 "\n"
 "<p>Tüm bilgiler isteğe bağlıdır ve yalnızca K Param dosyanızı "
 "kişiselleştirmek için kullanılır.</p>"
+
+#~ msgctxt "Split header"
+#~ msgid "Tag"
+#~ msgstr "Etiket"
 
 #~ msgid "Reorganizing accounts..."
 #~ msgstr "Hesaplar yeniden organize ediliyor..."

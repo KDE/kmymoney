@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-29 01:36+0000\n"
-"PO-Revision-Date: 2024-01-29 19:09+0100\n"
+"POT-Creation-Date: 2024-01-31 01:45+0000\n"
+"PO-Revision-Date: 2024-01-30 19:48+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -4621,6 +4621,13 @@ msgstr "&Deixa %1 sense assignar."
 msgid "Dialog"
 msgstr "Diàleg"
 
+#: kmymoney/dialogs/tagcreator.cpp:64
+#, fuzzy, kde-format
+#| msgid "Create"
+msgctxt "Undo action description"
+msgid "Create tag"
+msgstr "Crea"
+
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
 #: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
 #, kde-format
@@ -6221,32 +6228,32 @@ msgstr "<qt>Voleu afegir <b>%1</b> com a beneficiari/receptor?</qt>"
 msgid "Unable to add payee"
 msgstr "No s'ha pogut afegir el beneficiari"
 
-#: kmymoney/kmymoneyutils.cpp:618 kmymoney/views/ktagsview.cpp:633
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:634
 #, kde-format
 msgid "New Tag"
 msgstr "Etiqueta nova"
 
-#: kmymoney/kmymoneyutils.cpp:620
+#: kmymoney/kmymoneyutils.cpp:621
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 msgstr "<qt>Voleu afegir <b>%1</b> com a etiqueta?</qt>"
 
-#: kmymoney/kmymoneyutils.cpp:622
+#: kmymoney/kmymoneyutils.cpp:623
 #, kde-format
 msgid "New tag"
 msgstr "Etiqueta nova"
 
-#: kmymoney/kmymoneyutils.cpp:656
+#: kmymoney/kmymoneyutils.cpp:657
 #, kde-format
 msgid "Unable to add tag"
 msgstr "No s'ha pogut afegir l'etiqueta"
 
-#: kmymoney/kmymoneyutils.cpp:672 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:674 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "No s'ha pogut afegir la institució: %1"
 
-#: kmymoney/kmymoneyutils.cpp:729
+#: kmymoney/kmymoneyutils.cpp:731
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:50
 #, kde-format
 msgid "One statement has been processed with the following results:"
@@ -6254,7 +6261,7 @@ msgid_plural "%1 statements have been processed with the following results:"
 msgstr[0] "S'ha processat un extracte amb els següents resultats:"
 msgstr[1] "S'han processat %1 extractes amb els següents resultats:"
 
-#: kmymoney/kmymoneyutils.cpp:734
+#: kmymoney/kmymoneyutils.cpp:736
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:52
 #, kde-format
 msgid "No new transaction has been imported."
@@ -6262,7 +6269,7 @@ msgid_plural "No new transactions have been imported."
 msgstr[0] "No s'ha importat cap operació nova."
 msgstr[1] "No s'han importat operacions noves."
 
-#: kmymoney/kmymoneyutils.cpp:735
+#: kmymoney/kmymoneyutils.cpp:737
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:53
 #, kde-format
 msgid "Statement import statistics"
@@ -7878,7 +7885,7 @@ msgstr "Pa'anga de Tonga"
 #: kmymoney/mymoney/mymoneyfile.cpp:3504
 #, kde-format
 msgid "Trinidad and Tobago Dollar"
-msgstr "Dòlar de Trinidad i Tobago"
+msgstr "Dòlar de Trinitat i Tobago"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3505
 #, kde-format
@@ -8351,10 +8358,11 @@ msgid "Memo"
 msgstr "Recordatori"
 
 #: kmymoney/mymoney/splitmodel.cpp:39
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tags"
 msgctxt "Split header"
-msgid "Tag"
-msgstr "Etiqueta"
+msgid "Tags"
+msgstr "Etiquetes"
 
 #: kmymoney/mymoney/splitmodel.cpp:40
 #, kde-format
@@ -20640,12 +20648,12 @@ msgstr "Nom d'etiqueta duplicat"
 msgid "Unable to modify tag"
 msgstr "No s'ha pogut modificar l'etiqueta"
 
-#: kmymoney/views/ktagsview.cpp:802
+#: kmymoney/views/ktagsview.cpp:805
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "No s'ha pogut reassignar l'etiqueta d'una operació/desglossament"
 
-#: kmymoney/views/ktagsview.cpp:814
+#: kmymoney/views/ktagsview.cpp:817
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "No s'ha pogut eliminar l'etiqueta/es"
@@ -20961,13 +20969,13 @@ msgstr ""
 "No és possible la selecció de la categoria o del compte quan les operacions "
 "desglossades són part de la selecció."
 
-#: kmymoney/views/newspliteditor.cpp:150
+#: kmymoney/views/newspliteditor.cpp:152
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "El centre de despesa al que s'ha d'assignar aquesta operació."
 
-#: kmymoney/views/newspliteditor.cpp:155
+#: kmymoney/views/newspliteditor.cpp:157
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid ""
@@ -20977,25 +20985,25 @@ msgstr ""
 "Per a la categoria seleccionada es requereix l'assignació de l'operació a un "
 "centre de despesa."
 
-#: kmymoney/views/newspliteditor.cpp:166
+#: kmymoney/views/newspliteditor.cpp:168
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "La categoria a la qual s'ha d'assignar aquest desglossament."
 
-#: kmymoney/views/newspliteditor.cpp:207
+#: kmymoney/views/newspliteditor.cpp:209
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "Es requereix l'assignació d'una categoria per a un desglossament."
 
-#: kmymoney/views/newspliteditor.cpp:216
+#: kmymoney/views/newspliteditor.cpp:218
 #: kmymoney/views/newtransactioneditor.cpp:381
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "El número de xec usat per a aquesta operació."
 
-#: kmymoney/views/newspliteditor.cpp:225
+#: kmymoney/views/newspliteditor.cpp:227
 #: kmymoney/views/newtransactioneditor.cpp:391
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
@@ -21745,7 +21753,7 @@ msgstr "icona"
 msgid "Feedback content"
 msgstr "Contingut de la informació de tornada"
 
-#: kmymoney/widgets/ktagcontainer.cpp:110
+#: kmymoney/widgets/ktagcontainer.cpp:89
 #, kde-format
 msgctxt "@info:placeholder tag combo box"
 msgid "Tag"
@@ -25457,6 +25465,10 @@ msgstr ""
 "\n"
 "<p>Tota la informació és optativa i s'usa per a personalitzar el fitxer del "
 "KMyMoney.</p>"
+
+#~ msgctxt "Split header"
+#~ msgid "Tag"
+#~ msgstr "Etiqueta"
 
 #~ msgid "Reorganizing accounts..."
 #~ msgstr "S'estan reorganitzant els comptes..."

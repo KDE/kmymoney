@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-29 01:36+0000\n"
-"PO-Revision-Date: 2024-01-15 03:29+0100\n"
+"POT-Creation-Date: 2024-01-31 01:45+0000\n"
+"PO-Revision-Date: 2024-01-30 19:55+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -4613,6 +4613,13 @@ msgstr "&Dejar %1 sin asignar."
 msgid "Dialog"
 msgstr "Diálogo"
 
+#: kmymoney/dialogs/tagcreator.cpp:64
+#, fuzzy, kde-format
+#| msgid "Create"
+msgctxt "Undo action description"
+msgid "Create tag"
+msgstr "Crear"
+
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
 #: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
 #, kde-format
@@ -6209,32 +6216,32 @@ msgstr "<qt>¿Desea añadir <b>%1</b> como beneficiario/receptor?</qt>"
 msgid "Unable to add payee"
 msgstr "No ha sido posible añadir un beneficiario"
 
-#: kmymoney/kmymoneyutils.cpp:618 kmymoney/views/ktagsview.cpp:633
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:634
 #, kde-format
 msgid "New Tag"
 msgstr "Nuevo etiqueta"
 
-#: kmymoney/kmymoneyutils.cpp:620
+#: kmymoney/kmymoneyutils.cpp:621
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 msgstr "<qt>¿Desea añadir <b>%1</b> como etiqueta?</qt>"
 
-#: kmymoney/kmymoneyutils.cpp:622
+#: kmymoney/kmymoneyutils.cpp:623
 #, kde-format
 msgid "New tag"
 msgstr "Nueva etiqueta"
 
-#: kmymoney/kmymoneyutils.cpp:656
+#: kmymoney/kmymoneyutils.cpp:657
 #, kde-format
 msgid "Unable to add tag"
 msgstr "No es posible añadir una etiqueta"
 
-#: kmymoney/kmymoneyutils.cpp:672 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:674 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "No se puede añadir la institución: %1"
 
-#: kmymoney/kmymoneyutils.cpp:729
+#: kmymoney/kmymoneyutils.cpp:731
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:50
 #, kde-format
 msgid "One statement has been processed with the following results:"
@@ -6242,7 +6249,7 @@ msgid_plural "%1 statements have been processed with the following results:"
 msgstr[0] "Se ha procesado un extracto con el siguiente resultado:"
 msgstr[1] "Se han procesado %1 extractos con el siguiente resultado:"
 
-#: kmymoney/kmymoneyutils.cpp:734
+#: kmymoney/kmymoneyutils.cpp:736
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:52
 #, kde-format
 msgid "No new transaction has been imported."
@@ -6250,7 +6257,7 @@ msgid_plural "No new transactions have been imported."
 msgstr[0] "No se ha importado ninguna transacción nueva."
 msgstr[1] "No se han importado nuevas transacciones."
 
-#: kmymoney/kmymoneyutils.cpp:735
+#: kmymoney/kmymoneyutils.cpp:737
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:53
 #, kde-format
 msgid "Statement import statistics"
@@ -8341,10 +8348,10 @@ msgstr "Memorando"
 
 #: kmymoney/mymoney/splitmodel.cpp:39
 #, fuzzy, kde-format
-#| msgid "Tag"
+#| msgid "Tags"
 msgctxt "Split header"
-msgid "Tag"
-msgstr "Etiqueta"
+msgid "Tags"
+msgstr "Etiquetas"
 
 #: kmymoney/mymoney/splitmodel.cpp:40
 #, kde-format
@@ -20595,12 +20602,12 @@ msgstr "Duplicar nombre de etiqueta"
 msgid "Unable to modify tag"
 msgstr "No se puede modificar la etiqueta"
 
-#: kmymoney/views/ktagsview.cpp:802
+#: kmymoney/views/ktagsview.cpp:805
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "No es posible reasignar la etiqueta de la transacción/partida"
 
-#: kmymoney/views/ktagsview.cpp:814
+#: kmymoney/views/ktagsview.cpp:817
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "No es posible eliminar la(s) etiqueta(s)"
@@ -20911,13 +20918,13 @@ msgstr ""
 "La selección de una categoría o cuenta no es posible cuando las "
 "transacciones con partidas son parte de la selección."
 
-#: kmymoney/views/newspliteditor.cpp:150
+#: kmymoney/views/newspliteditor.cpp:152
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "El centro de costos al que se debe asignar esta transacción."
 
-#: kmymoney/views/newspliteditor.cpp:155
+#: kmymoney/views/newspliteditor.cpp:157
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid ""
@@ -20927,25 +20934,25 @@ msgstr ""
 "Se necesita asignar un centro de costos para las transacciones de la "
 "categoría seleccionada."
 
-#: kmymoney/views/newspliteditor.cpp:166
+#: kmymoney/views/newspliteditor.cpp:168
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "La categoría a la que se debe asignar esta partida."
 
-#: kmymoney/views/newspliteditor.cpp:207
+#: kmymoney/views/newspliteditor.cpp:209
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "Se necesita asignar una categoría para las partidas."
 
-#: kmymoney/views/newspliteditor.cpp:216
+#: kmymoney/views/newspliteditor.cpp:218
 #: kmymoney/views/newtransactioneditor.cpp:381
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "El número de cheque usado para esta transacción."
 
-#: kmymoney/views/newspliteditor.cpp:225
+#: kmymoney/views/newspliteditor.cpp:227
 #: kmymoney/views/newtransactioneditor.cpp:391
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
@@ -21686,7 +21693,7 @@ msgstr "icono"
 msgid "Feedback content"
 msgstr "Contenido de los comentarios"
 
-#: kmymoney/widgets/ktagcontainer.cpp:110
+#: kmymoney/widgets/ktagcontainer.cpp:89
 #, kde-format
 msgctxt "@info:placeholder tag combo box"
 msgid "Tag"
@@ -25376,6 +25383,11 @@ msgstr ""
 "\n"
 "<p>Toda la información es opcional y solo se usa para personalizar su "
 "archivo de KMyMoney.</p>"
+
+#~| msgid "Tag"
+#~ msgctxt "Split header"
+#~ msgid "Tag"
+#~ msgstr "Etiqueta"
 
 #~ msgid "Reorganizing accounts..."
 #~ msgstr "Reorganizando cuentas..."
