@@ -133,10 +133,11 @@
   enter them again here, or you will have duplicate transaction.
 </para>
 
-<note>
+<note><title>Interest or Charge</title>
 <para>
-  The interest field is for interest you gained. If you have to pay interest, &eg;,
-  for a credit card account, this has to be entered as a charge.
+  The interest field is for interest you gained.  If you have to pay interest, &eg;,
+  for a credit card account, this should be entered as a charge.  In both cases, you
+  get to choose the proper category for the amount.
 </para>
 </note>
 
@@ -215,13 +216,32 @@
   When you do this, &kmymoney; takes all the transactions which have been marked as
   cleared (only those with a date before the statement date) and marks them as
   reconciled, and the value in the <guilabel>C</guilabel> column changes from
-  <quote>C</quote> to <quote>R</quote> to reflect the change.  In addition, it saves
-  the changes and records that the account has been reconciled. (You still need to
-  save the file to permanently save all the changes.)
+  <quote>C</quote> to <quote>R</quote>.  In addition, it saves the changes and
+  records that the account has been reconciled. (You still need to save the file to
+  permanently save all the changes.)
 </para>
 </sect3>
 
-<!-- FIXME: talk about the reconciliation report -->
+<sect3 id="details.reconcile.report"><title>The Reconciliation Report</title>
+<para>
+  The last thing the reconciliation wizard does it to present a report, in the form of a pop-up with two tabs.
+</para>
+
+<sect4><title>Summary Tab</title>
+<para>
+  This tab shows a summary of the reconciliation, including the starting and ending
+  balances, and the number and amount of payments and deposits: cleared, outsanding,
+  and those after the reconciliation date.
+</para>
+</sect4>
+
+<sect4><title>Details Tab</title>
+<para>
+  This tab shows a list of outstanding payments and charges.  These are unmarked
+  transactions prior to the statement date of the reconciliation.
+</para>
+</sect4>
+</sect3>
 
 <sect3 id="details.reconcile.postpone"><title>Postponing Reconciliation</title>
 <para>

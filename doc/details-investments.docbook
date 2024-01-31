@@ -293,10 +293,9 @@
 <sect1 id="details.investments.investment"><title>Creating an Investment Account</title>
 <para>
   The first step on the path to working with investments is to create an Investment
-  account to hold your defined securities.  Choose the
-  <menuchoice><guimenu>Account</guimenu>
-  <guimenuitem>New account...</guimenuitem></menuchoice> menu item to begin the
-  process.  Create an account as previously described in the <link
+  account to hold your defined securities.  Choose the <guimenu>Account</guimenu>
+  <guimenuitem>New account...</guimenuitem> menu item to begin the process.  Create
+  an account as previously described in the <link
   linkend="details.accounts.create.account"><guilabel>Account</guilabel></link>
   section, making sure to choose <quote>Investment</quote> as the type of account.
 </para>
@@ -305,6 +304,19 @@
   To work with the new investment account, open that account in the Ledgers View, as
   previously described.
 </para>
+
+<sect2><title>Price Entry</title>
+<para>
+  Whenever you enter or edit a buy, sell, or reinvest transaction, you need to
+  specify the number of shares, price per share, and the total amount of the
+  transaction.  As described <link
+  linkend="details.investments.priceentry">here</link> you actually specify only two
+  of those values, and &kmymoney; calculates the third.  The default price entry
+  setting for new Investment Accounts is <quote>Price per share</quote>, but this can
+  be changed to <quote>Total amount</quote> when you <link
+  linkend="details.accounts.edit">edit the account</link>.
+</para>
+</sect2>
 </sect1>
 
 <sect1 id="details.investments.securities"><title>Adding Investments to Your Account</title>
@@ -431,11 +443,10 @@
 
   <listitem>
     <para>
-      Price entry.  When you enter or edit a buy or sell transaction for this
-      investment, this dropdown indicates whether you want to explicitly enter either
-      the price per share or the total for all shares or to follow the default, which
-      is specied in a main configuration item
-
+      Price entry.  When you enter or edit a buy, sell, or reinvest transaction for
+      this investment, this dropdown indicates whether you want to enter the price
+      per share or the total for all shares or to follow the default for the account,
+      which was specified when the Investment Account was created.
     </para>
   </listitem>
 
@@ -666,17 +677,17 @@
 </para>
 </sect2>
 
-<sect2><title>Shares, Price &amp; Total Amount</title>
+<sect2 id="details.investments.priceentry"><title>Shares, Price &amp; Total Amount</title>
 <para>
   For buy, sell, and reinvestment transactions, the number of shares, the price per
   share, and the total amount of the transaction must be established.  You can enter
-  any two of these, and &kmymoney; will calculate the third.  It's usually best to
+  any two of these, and &kmymoney; will calculate the third.  It is usually best to
   enter just the total amount and the number of shares, because these are the known
   facts of the transaction.  &kmymoney; will automatically calculate the price per
   share.  Note that there is only one entry field for the price, and it will be
   labeled <quote>Transaction amount</quote> or <quote>Price/share</quote> depending
-  on the setting of the <guilabel>Price entry</guilabel> option when the account was
-  <link linkend="details.investments.newinvestmentwizard">set up</link>.
+  on the setting of the <guilabel>Price entry</guilabel> option when the investment
+  was <link linkend="details.investments.newinvestmentwizard">set up</link>.
 </para>
 </sect2>
 

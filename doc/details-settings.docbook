@@ -1255,18 +1255,14 @@
 </sect2>
 
 <sect2 id="details.settings.plugins.kbanking"><title>KBanking</title>
-<para>
-  Since both this and the Configure Aqbanking page are minimal, should both just
-  point to the same link currently in the other section?
-</para>
+<!-- FIXME: Since both this and the Configure Aqbanking page are minimal, should both
+     just point to the same link currently in the other section?  -->
 
 <para>
-  This plugins adds support for HBCI/FinTs, OFX and PayPal online banking to
-  KMyMoney.  However, configuring this plugin is not done through this dialog, but
-  through the <link linkend="reference.menus.settings.help">
-  <guilabel>Settings</guilabel> </link> menu, with the <menuchoice>
-  <guimenu>Settings</guimenu> <guisubmenu>Configure Aqbanking...</guisubmenu>
-  </menuchoice> menu item.
+  This plugin adds support for HBCI/FinTs, OFX, and PayPal online banking.  However,
+  configuring this plugin is not done through this dialog, but with the <link
+  linkend="reference.menus.settings.help"> <guimenu>Settings</guimenu>
+  <guisubmenu>Configure Aqbanking...</guisubmenu> </link> menu item.
 </para>
 </sect2>
 

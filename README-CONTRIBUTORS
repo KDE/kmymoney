@@ -318,6 +318,8 @@ multiple places.
 
 - Is it still true you can not match two imported or two not-imported transactions?
 
+- Should there be a note about the relation between aqbanking, kbanking, and hbci?
+
 This is a list of potential enhancements I came up with while reviewing the handbook,
 but have not yet posted either as wishlist bugs, entries to any Issue on invent, or
 elsewhere.

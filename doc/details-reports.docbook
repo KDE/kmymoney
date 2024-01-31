@@ -264,9 +264,15 @@
       the Home View and in the group of <guilabel>Favorite Reports</guilabel>.</para>
     </listitem>
     <listitem>
-      <!-- FIXME: when IS this used? -->
-      <para>Skip value if price is zero: This option is only available where it makes
-      sense.</para>
+      <para>
+        Skip value if price is zero: This option is only used for investments reports
+        which show prices instead of balances as all other reports do.  Selecting
+        this option includes prices only if there is an actual price for the date;
+        otherwise 0 will be shown.  In a graph, the value will be skipped.  If this
+        option is off, the last existing price is shown for a period.  If it is on,
+        in a table <quote>0</quote> is shown, and in a chart a linear interpolation
+        for the missing values will be performed.
+      </para>
     </listitem>
   </itemizedlist>
 </para>

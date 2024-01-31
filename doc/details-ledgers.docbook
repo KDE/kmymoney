@@ -733,6 +733,7 @@
     The matching interface will not allow you to match two transactions which have
     both been imported.  Likewise, it also will not allow matching between two
     transactions which have both been entered by hand.
+    <!-- FIXME: is this restriction still true? -->
   </para>
 </note>
 </sect2>

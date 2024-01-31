@@ -789,12 +789,15 @@
 <para>
   To edit a particular account, right-click the account name in the Accounts View or
   the Institutions View and choose <guimenuitem>Edit account...</guimenuitem> or with
-  that account open in the ledger, select
-  <menuchoice><guimenu>Account</guimenu><guimenuitem>Edit
-  Account...</guimenuitem></menuchoice>. A window will pop-up with several tabs, each
-  allowing you to view and change certain information about the account.  For more
-  information on any of these details, see the section on <link
-  linkend="details.accounts.create">creating a new account</link>.
+  that account open in the ledger, select <guimenu>Account</guimenu>
+  <guimenuitem>Edit Account...</guimenuitem>. A window will pop-up with several tabs,
+  each allowing you to view and change certain information about the account.  For
+  more information on any of these details, see the section on <link
+  linkend="details.accounts.create">creating a new account</link>.  Note that some of
+  these fields may be disabled, possibly depending on the type of account.  For
+  example, <guilabel>Currency</guilabel> will always be disabled, since it can be set
+  when the account it created, but not changed after that.  <guilabel>Price
+  Entry</guilabel> is only enabled for Investment Accounts.
 </para>
 
 <screenshot>
