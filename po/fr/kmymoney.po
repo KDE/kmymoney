@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 01:39+0000\n"
-"PO-Revision-Date: 2024-01-18 18:34+0100\n"
+"POT-Creation-Date: 2024-01-31 01:45+0000\n"
+"PO-Revision-Date: 2024-01-23 10:44+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -2381,12 +2381,7 @@ msgstr ""
 "deuxième catégorie avec le même nom."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:825
-#, fuzzy, kde-format
-#| msgid ""
-#| "You have selected to suppress the display of unused categories in the "
-#| "KMyMoney configuration dialog. The category you just created will "
-#| "therefore only be shown if it is used. Otherwise, it will be hidden in "
-#| "the accounts/categories view."
+#, kde-format
 msgctxt "@info"
 msgid ""
 "You have selected to suppress the display of accounts with a zero balance in "
@@ -2394,25 +2389,19 @@ msgid ""
 "therefore only be shown if it is used. Otherwise, it will be hidden in all "
 "accounts views."
 msgstr ""
-"Vous avez choisi de supprimer l'affichage des catégories inutilisées dans le "
-"panneau de configuration de KMyMoney. La catégorie que vous venez de créer "
-"ne sera donc affichée que si elle est utilisée. Sinon, elle sera cachée dans "
-"la vue comptes/catégories."
+"Vous avez choisi de supprimer l'affichage des comptes avec un solde à zéro "
+"dans la boîte de dialogue de configuration de KMyMoney. Le compte que vous "
+"venez de créer ne sera donc affiché que si il est utilisé. Sinon, il sera "
+"masqué dans la vue « Comptes / Catégories »."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:827
-#, fuzzy, kde-format
-#| msgid "Hide closed accounts"
+#, kde-format
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
-msgstr "Cacher les comptes fermés"
+msgstr "Comptes masqués"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:835
-#, fuzzy, kde-format
-#| msgid ""
-#| "You have selected to suppress the display of unused categories in the "
-#| "KMyMoney configuration dialog. The category you just created will "
-#| "therefore only be shown if it is used. Otherwise, it will be hidden in "
-#| "the accounts/categories view."
+#, kde-format
 msgctxt "@info"
 msgid ""
 "You have selected to suppress the display of unused categories in the "
@@ -2420,14 +2409,13 @@ msgid ""
 "only be shown if it is used. Otherwise, it will be hidden in the accounts/"
 "categories view."
 msgstr ""
-"Vous avez choisi de supprimer l'affichage des catégories inutilisées dans le "
-"panneau de configuration de KMyMoney. La catégorie que vous venez de créer "
-"ne sera donc affichée que si elle est utilisée. Sinon, elle sera cachée dans "
-"la vue comptes/catégories."
+"Vous avez choisi de supprimer l'affichage des catégories inutilisées dans la "
+"boîte de dialogue de configuration de KMyMoney. La catégorie que vous venez "
+"de créer ne sera donc affichée que si elle est utilisée. Sinon, elle sera "
+"cachée dans la vue  « Comptes / Catégories »."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:837
-#, fuzzy, kde-format
-#| msgid "Hidden categories"
+#, kde-format
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "Catégories masquées"
@@ -4677,6 +4665,13 @@ msgstr "&Laisser %1 non attribué."
 msgid "Dialog"
 msgstr "Boîte de dialogue"
 
+#: kmymoney/dialogs/tagcreator.cpp:64
+#, fuzzy, kde-format
+#| msgid "Create"
+msgctxt "Undo action description"
+msgid "Create tag"
+msgstr "Créer"
+
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
 #: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
 #, kde-format
@@ -6287,32 +6282,32 @@ msgstr "<qt>Voulez-vous ajouter <b>%1</b> comme payeur ou bénéficiaire ?</qt>
 msgid "Unable to add payee"
 msgstr "Impossible d'ajouter le bénéficiaire"
 
-#: kmymoney/kmymoneyutils.cpp:618 kmymoney/views/ktagsview.cpp:633
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:634
 #, kde-format
 msgid "New Tag"
 msgstr "Nouvelle étiquette"
 
-#: kmymoney/kmymoneyutils.cpp:620
+#: kmymoney/kmymoneyutils.cpp:621
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 msgstr "<qt>Voulez-vous ajouter <b>%1</b> comme étiquette ?</qt>"
 
-#: kmymoney/kmymoneyutils.cpp:622
+#: kmymoney/kmymoneyutils.cpp:623
 #, kde-format
 msgid "New tag"
 msgstr "Nouvelle étiquette"
 
-#: kmymoney/kmymoneyutils.cpp:656
+#: kmymoney/kmymoneyutils.cpp:657
 #, kde-format
 msgid "Unable to add tag"
 msgstr "Impossible d'ajouter l'étiquette"
 
-#: kmymoney/kmymoneyutils.cpp:672 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:674 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "Impossible d'ajouter l'établissement : %1"
 
-#: kmymoney/kmymoneyutils.cpp:729
+#: kmymoney/kmymoneyutils.cpp:731
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:50
 #, kde-format
 msgid "One statement has been processed with the following results:"
@@ -6320,7 +6315,7 @@ msgid_plural "%1 statements have been processed with the following results:"
 msgstr[0] "Un relevé a été traité avec les résultats suivants :"
 msgstr[1] "%1 relevés ont été traités avec les résultats suivants :"
 
-#: kmymoney/kmymoneyutils.cpp:734
+#: kmymoney/kmymoneyutils.cpp:736
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:52
 #, kde-format
 msgid "No new transaction has been imported."
@@ -6328,7 +6323,7 @@ msgid_plural "No new transactions have been imported."
 msgstr[0] "Aucune nouvelle transaction n'a été importée."
 msgstr[1] "Aucune nouvelle transaction n'a été importée."
 
-#: kmymoney/kmymoneyutils.cpp:735
+#: kmymoney/kmymoneyutils.cpp:737
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:53
 #, kde-format
 msgid "Statement import statistics"
@@ -8407,36 +8402,43 @@ msgstr ""
 "Impossible de charger le module externe en charge de l'affichage de cette "
 "tâche."
 
-#: kmymoney/mymoney/splitmodel.cpp:36
+#: kmymoney/mymoney/splitmodel.cpp:37
 #, kde-format
 msgctxt "Split header"
 msgid "Category"
 msgstr "Catégorie"
 
-#: kmymoney/mymoney/splitmodel.cpp:37
+#: kmymoney/mymoney/splitmodel.cpp:38
 #, kde-format
 msgctxt "Split header"
 msgid "Memo"
 msgstr "Note"
 
-#: kmymoney/mymoney/splitmodel.cpp:38
+#: kmymoney/mymoney/splitmodel.cpp:39
+#, fuzzy, kde-format
+#| msgid "Tags"
+msgctxt "Split header"
+msgid "Tags"
+msgstr "Étiquettes"
+
+#: kmymoney/mymoney/splitmodel.cpp:40
 #, kde-format
 msgctxt "Split header"
 msgid "Payment"
 msgstr "Versement"
 
-#: kmymoney/mymoney/splitmodel.cpp:39
+#: kmymoney/mymoney/splitmodel.cpp:41
 #, kde-format
 msgctxt "Split header"
 msgid "Deposit"
 msgstr "Dépôt"
 
-#: kmymoney/mymoney/splitmodel.cpp:94
+#: kmymoney/mymoney/splitmodel.cpp:96
 #, kde-format
 msgid "Split transaction"
 msgstr "Opération répartie"
 
-#: kmymoney/mymoney/splitmodel.cpp:112
+#: kmymoney/mymoney/splitmodel.cpp:114
 #: kmymoney/mymoney/storage/journalmodel.cpp:192
 #: kmymoney/plugins/views/reports/core/querytable.cpp:993
 #, kde-format
@@ -20755,13 +20757,13 @@ msgstr "Nom d'étiquette en doublon"
 msgid "Unable to modify tag"
 msgstr "Impossible de modifier l'étiquette"
 
-#: kmymoney/views/ktagsview.cpp:802
+#: kmymoney/views/ktagsview.cpp:805
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr ""
 "Impossible de réassigner l'étiquette pour l'opération ou la répartition"
 
-#: kmymoney/views/ktagsview.cpp:814
+#: kmymoney/views/ktagsview.cpp:817
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Impossible de supprimer les étiquettes"
@@ -21077,13 +21079,13 @@ msgstr ""
 "La sélection d'une catégorie ou d'un compte est impossible lorsqu'une "
 "opération répartie fait partie de la sélection."
 
-#: kmymoney/views/newspliteditor.cpp:150
+#: kmymoney/views/newspliteditor.cpp:152
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "Le centre de coûts auquel cette opération doit être assignée."
 
-#: kmymoney/views/newspliteditor.cpp:155
+#: kmymoney/views/newspliteditor.cpp:157
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid ""
@@ -21093,26 +21095,26 @@ msgstr ""
 "Vous devez saisir un centre de coûts associé à une transaction pour la "
 "catégorie sélectionnée."
 
-#: kmymoney/views/newspliteditor.cpp:166
+#: kmymoney/views/newspliteditor.cpp:168
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "La catégorie à laquelle cette répartition doit être affectée."
 
-#: kmymoney/views/newspliteditor.cpp:207
+#: kmymoney/views/newspliteditor.cpp:209
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "Vous devez saisir une catégorie pour cette répartition."
 
 # Ancien: "Saisir la transaction suivante"
-#: kmymoney/views/newspliteditor.cpp:216
+#: kmymoney/views/newspliteditor.cpp:218
 #: kmymoney/views/newtransactioneditor.cpp:381
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Le numéro du chèque utilisé pour cette opération."
 
-#: kmymoney/views/newspliteditor.cpp:225
+#: kmymoney/views/newspliteditor.cpp:227
 #: kmymoney/views/newtransactioneditor.cpp:391
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
@@ -21864,7 +21866,7 @@ msgstr "icône"
 msgid "Feedback content"
 msgstr "Contenus du retour d'information"
 
-#: kmymoney/widgets/ktagcontainer.cpp:110
+#: kmymoney/widgets/ktagcontainer.cpp:89
 #, kde-format
 msgctxt "@info:placeholder tag combo box"
 msgid "Tag"
@@ -25593,6 +25595,12 @@ msgstr ""
 "\n"
 "<p>Toutes ces informations sont optionnelles et sont seulement utilisées "
 "pour personnaliser votre fichier KMyMoney.</p>"
+
+#, fuzzy
+#~| msgid "Tag"
+#~ msgctxt "Split header"
+#~ msgid "Tag"
+#~ msgstr "Étiquette"
 
 #~ msgid "Reorganizing accounts..."
 #~ msgstr "Réorganisation des comptes…"

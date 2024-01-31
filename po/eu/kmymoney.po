@@ -1,10 +1,10 @@
 # Translation for kmymoney.po to Euskara/Basque (eu).
-# Copyright (C) 2010-2023 This file is copyright:
+# Copyright (C) 2010-2024 This file is copyright:
 # This file is distributed under the same license as the kmymoney package.
-# SPDX-FileCopyrightText: 2023 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2023, 2024 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2010, 2011, 2013, 2014, 2018, 2020, 2022, 2023.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2010, 2011, 2013, 2014, 2018, 2020, 2022, 2023, 2024.
 # Hizkuntza Politikarako Sailburuordetza <hizpol@ej-gv.es>, 2013.
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2013.
 # Ander Elortondo <ander.elor@gmail.com>, 2018, 2020, 2022.
@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 01:39+0000\n"
-"PO-Revision-Date: 2023-12-31 16:37+0100\n"
+"POT-Creation-Date: 2024-01-31 01:45+0000\n"
+"PO-Revision-Date: 2024-01-28 23:14+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -2345,12 +2345,7 @@ msgstr ""
 "beste kategoria bat sortu."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:825
-#, fuzzy, kde-format
-#| msgid ""
-#| "You have selected to suppress the display of unused categories in the "
-#| "KMyMoney configuration dialog. The category you just created will "
-#| "therefore only be shown if it is used. Otherwise, it will be hidden in "
-#| "the accounts/categories view."
+#, kde-format
 msgctxt "@info"
 msgid ""
 "You have selected to suppress the display of accounts with a zero balance in "
@@ -2358,25 +2353,18 @@ msgid ""
 "therefore only be shown if it is used. Otherwise, it will be hidden in all "
 "accounts views."
 msgstr ""
-"KMyMoney-ren konfigurazioaren elkarrizketa-leihoan erabiltzen ez diren "
-"kategoriak ez bistaratzea hautatu duzu. Hortaz, sortu berri duzun kategoria "
-"erabiltzen bada soilik erakutsiko da; bestela, Kontuak/Kategoriak ikuspegian "
-"egongo da ezkutuan."
+"KMyMoney konfiguratzeko elkarrizketa-leihoan, saldoa zero duten kontuak ez "
+"azaltzea hautatu duzu. Hortaz, sortu berri duzun kontua erabiltzen bada "
+"soilik erakutsiko da. Bestela, kontuen ikuspegi guztietan ezkutuan egongo da."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:827
-#, fuzzy, kde-format
-#| msgid "Hide closed accounts"
+#, kde-format
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
-msgstr "Ezkutatu itxitako kontuak"
+msgstr "Ezkutuko kontuak"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:835
-#, fuzzy, kde-format
-#| msgid ""
-#| "You have selected to suppress the display of unused categories in the "
-#| "KMyMoney configuration dialog. The category you just created will "
-#| "therefore only be shown if it is used. Otherwise, it will be hidden in "
-#| "the accounts/categories view."
+#, kde-format
 msgctxt "@info"
 msgid ""
 "You have selected to suppress the display of unused categories in the "
@@ -2384,14 +2372,13 @@ msgid ""
 "only be shown if it is used. Otherwise, it will be hidden in the accounts/"
 "categories view."
 msgstr ""
-"KMyMoney-ren konfigurazioaren elkarrizketa-leihoan erabiltzen ez diren "
-"kategoriak ez bistaratzea hautatu duzu. Hortaz, sortu berri duzun kategoria "
-"erabiltzen bada soilik erakutsiko da; bestela, Kontuak/Kategoriak ikuspegian "
-"egongo da ezkutuan."
+"KMyMoney konfiguratzeko elkarrizketa-koadroan erabiltzen ez diren kategoriak "
+"ez azaltzea hautatu duzu. Hortaz, sortu berri duzun kategoria erabiltzen "
+"bada soilik erakutsiko da. Bestela, Kontuak/Kategoriak ikuspegian ezkutuan "
+"egongo da."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:837
-#, fuzzy, kde-format
-#| msgid "Hidden categories"
+#, kde-format
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "Ezkutuko kategoriak"
@@ -4605,6 +4592,13 @@ msgstr "&Utzi %1 esleitu gabe."
 msgid "Dialog"
 msgstr "Elkarrizketa-koadroa"
 
+#: kmymoney/dialogs/tagcreator.cpp:64
+#, fuzzy, kde-format
+#| msgid "Create"
+msgctxt "Undo action description"
+msgid "Create tag"
+msgstr "Sortu"
+
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
 #: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
 #, kde-format
@@ -6202,32 +6196,32 @@ msgstr "<qt><b>%1</b> onuradun/hartzaile gisa gehitu nahi duzu?</qt>"
 msgid "Unable to add payee"
 msgstr "Ezin da onuraduna gehitu"
 
-#: kmymoney/kmymoneyutils.cpp:618 kmymoney/views/ktagsview.cpp:633
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:634
 #, kde-format
 msgid "New Tag"
 msgstr "Etiketa berria"
 
-#: kmymoney/kmymoneyutils.cpp:620
+#: kmymoney/kmymoneyutils.cpp:621
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 msgstr "<qt><b>%1</b> etiketa gisa gehitu nahi duzu?</qt>"
 
-#: kmymoney/kmymoneyutils.cpp:622
+#: kmymoney/kmymoneyutils.cpp:623
 #, kde-format
 msgid "New tag"
 msgstr "Etiketa berria"
 
-#: kmymoney/kmymoneyutils.cpp:656
+#: kmymoney/kmymoneyutils.cpp:657
 #, kde-format
 msgid "Unable to add tag"
 msgstr "Ezin da gehitu etiketa"
 
-#: kmymoney/kmymoneyutils.cpp:672 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:674 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "Ezin da erakundea gehitu: %1"
 
-#: kmymoney/kmymoneyutils.cpp:729
+#: kmymoney/kmymoneyutils.cpp:731
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:50
 #, kde-format
 msgid "One statement has been processed with the following results:"
@@ -6235,7 +6229,7 @@ msgid_plural "%1 statements have been processed with the following results:"
 msgstr[0] "Kontu-laburpen bat prozesatu da, hauek dira emaitzak:"
 msgstr[1] "%1 kontu-laburpen prozesatu dira, hauek dira emaitzak:"
 
-#: kmymoney/kmymoneyutils.cpp:734
+#: kmymoney/kmymoneyutils.cpp:736
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:52
 #, kde-format
 msgid "No new transaction has been imported."
@@ -6243,7 +6237,7 @@ msgid_plural "No new transactions have been imported."
 msgstr[0] "Ez da transakzio berririk inportatu."
 msgstr[1] "Ez da transakzio berririk inportatu."
 
-#: kmymoney/kmymoneyutils.cpp:735
+#: kmymoney/kmymoneyutils.cpp:737
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:53
 #, kde-format
 msgid "Statement import statistics"
@@ -8304,36 +8298,43 @@ msgstr "<p>Erro-elementu baliogabea txantiloi-fitxategian <b>%1</b> </p>"
 msgid "Could not load responsible plugin to view this task."
 msgstr "Ezin da kargatu eginkizun hau erakusteko plugina."
 
-#: kmymoney/mymoney/splitmodel.cpp:36
+#: kmymoney/mymoney/splitmodel.cpp:37
 #, kde-format
 msgctxt "Split header"
 msgid "Category"
 msgstr "Kategoria"
 
-#: kmymoney/mymoney/splitmodel.cpp:37
+#: kmymoney/mymoney/splitmodel.cpp:38
 #, kde-format
 msgctxt "Split header"
 msgid "Memo"
 msgstr "Oharra"
 
-#: kmymoney/mymoney/splitmodel.cpp:38
+#: kmymoney/mymoney/splitmodel.cpp:39
+#, fuzzy, kde-format
+#| msgid "Tags"
+msgctxt "Split header"
+msgid "Tags"
+msgstr "Etiketak"
+
+#: kmymoney/mymoney/splitmodel.cpp:40
 #, kde-format
 msgctxt "Split header"
 msgid "Payment"
 msgstr "Ordainketa"
 
-#: kmymoney/mymoney/splitmodel.cpp:39
+#: kmymoney/mymoney/splitmodel.cpp:41
 #, kde-format
 msgctxt "Split header"
 msgid "Deposit"
 msgstr "Gordailua"
 
-#: kmymoney/mymoney/splitmodel.cpp:94
+#: kmymoney/mymoney/splitmodel.cpp:96
 #, kde-format
 msgid "Split transaction"
 msgstr "Partidadun transakzioa"
 
-#: kmymoney/mymoney/splitmodel.cpp:112
+#: kmymoney/mymoney/splitmodel.cpp:114
 #: kmymoney/mymoney/storage/journalmodel.cpp:192
 #: kmymoney/plugins/views/reports/core/querytable.cpp:993
 #, kde-format
@@ -20507,12 +20508,12 @@ msgstr "Bikoiztutako etiketa-izena"
 msgid "Unable to modify tag"
 msgstr "Ezin da etiketa aldatu"
 
-#: kmymoney/views/ktagsview.cpp:802
+#: kmymoney/views/ktagsview.cpp:805
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Ez da transakzioaren/partidaren etiketa berresleitzeko gai"
 
-#: kmymoney/views/ktagsview.cpp:814
+#: kmymoney/views/ktagsview.cpp:817
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Ezin d(ir)a etiketa(k) kendu"
@@ -20820,13 +20821,13 @@ msgstr ""
 "Ezin da kategoria edo kontua hautatu partidako transakzioak hautapenaren "
 "parte direnean."
 
-#: kmymoney/views/newspliteditor.cpp:150
+#: kmymoney/views/newspliteditor.cpp:152
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "Transakzio hau zein kostu-zentrora esleitu behar den."
 
-#: kmymoney/views/newspliteditor.cpp:155
+#: kmymoney/views/newspliteditor.cpp:157
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid ""
@@ -20836,25 +20837,25 @@ msgstr ""
 "Hautatutako kategoriako transakzio baterako kostu-zentro bat esleitu beharra "
 "dago."
 
-#: kmymoney/views/newspliteditor.cpp:166
+#: kmymoney/views/newspliteditor.cpp:168
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "Partida hau zein kategoriara esleitu behar den."
 
-#: kmymoney/views/newspliteditor.cpp:207
+#: kmymoney/views/newspliteditor.cpp:209
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "Partida honetarako kategoria esleitzea beharrezkoa da."
 
-#: kmymoney/views/newspliteditor.cpp:216
+#: kmymoney/views/newspliteditor.cpp:218
 #: kmymoney/views/newtransactioneditor.cpp:381
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Transakzio honetan erabilitako txeke-zenbakia."
 
-#: kmymoney/views/newspliteditor.cpp:225
+#: kmymoney/views/newspliteditor.cpp:227
 #: kmymoney/views/newtransactioneditor.cpp:391
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
@@ -21598,7 +21599,7 @@ msgstr "Ikonoa"
 msgid "Feedback content"
 msgstr "Berrelikatu edukia"
 
-#: kmymoney/widgets/ktagcontainer.cpp:110
+#: kmymoney/widgets/ktagcontainer.cpp:89
 #, kde-format
 msgctxt "@info:placeholder tag combo box"
 msgid "Tag"
@@ -25281,6 +25282,12 @@ msgstr ""
 "\n"
 "<p>Informazio hori aukerakoa da, eta zure KMyMoney fitxategia "
 "pertsonalizatzeko baino ez da erabiliko.</p>"
+
+#, fuzzy
+#~| msgid "Tag"
+#~ msgctxt "Split header"
+#~ msgid "Tag"
+#~ msgstr "Etiketa"
 
 #~ msgid "Reorganizing accounts..."
 #~ msgstr "Kontuak berrantolatzen..."

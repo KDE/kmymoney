@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 01:39+0000\n"
+"POT-Creation-Date: 2024-01-31 01:45+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -4750,6 +4750,13 @@ msgstr "&Αφήστε %1 χωρίς ανάθεση."
 msgid "Dialog"
 msgstr "MyDialog"
 
+#: kmymoney/dialogs/tagcreator.cpp:64
+#, fuzzy, kde-format
+#| msgid "Create"
+msgctxt "Undo action description"
+msgid "Create tag"
+msgstr "Δημιουργία"
+
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
 #: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
 #, kde-format
@@ -6451,33 +6458,33 @@ msgstr "Θέλετε να προσθέσετε τον <b>%1</b> ως δικαι�
 msgid "Unable to add payee"
 msgstr "Αδυναμία προσθήκης του δικαιούχου"
 
-#: kmymoney/kmymoneyutils.cpp:618 kmymoney/views/ktagsview.cpp:633
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:634
 #, kde-format
 msgid "New Tag"
 msgstr "Νέα ετικέτα"
 
-#: kmymoney/kmymoneyutils.cpp:620
+#: kmymoney/kmymoneyutils.cpp:621
 #, fuzzy, kde-format
 #| msgid "Do you want to add <b>%1</b> as tag?"
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 msgstr "Θέλετε να προστεθεί το αναγνωριστικό <b>%1</b> στις ετικέτες;"
 
-#: kmymoney/kmymoneyutils.cpp:622
+#: kmymoney/kmymoneyutils.cpp:623
 #, kde-format
 msgid "New tag"
 msgstr "Νέα ετικέτα"
 
-#: kmymoney/kmymoneyutils.cpp:656
+#: kmymoney/kmymoneyutils.cpp:657
 #, kde-format
 msgid "Unable to add tag"
 msgstr "Αδυναμία προσθήκης ετικέτας"
 
-#: kmymoney/kmymoneyutils.cpp:672 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:674 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "Αδυναμία προσθήκης του ιδρύματος: %1"
 
-#: kmymoney/kmymoneyutils.cpp:729
+#: kmymoney/kmymoneyutils.cpp:731
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:50
 #, fuzzy, kde-format
 #| msgid "The statement has been processed with the following results:"
@@ -6488,7 +6495,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Έγινε επεξεργασία της κίνησης λογαριασμού με τα ακόλουθα αποτελέσματα:"
 
-#: kmymoney/kmymoneyutils.cpp:734
+#: kmymoney/kmymoneyutils.cpp:736
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:52
 #, fuzzy, kde-format
 #| msgid "Documentation and translations have been improved"
@@ -6497,7 +6504,7 @@ msgid_plural "No new transactions have been imported."
 msgstr[0] "Βελτίωση της τεκμηρίωσης και των μεταφράσεων"
 msgstr[1] "Βελτίωση της τεκμηρίωσης και των μεταφράσεων"
 
-#: kmymoney/kmymoneyutils.cpp:735
+#: kmymoney/kmymoneyutils.cpp:737
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:53
 #, fuzzy, kde-format
 #| msgid "Statement stats"
@@ -8666,40 +8673,47 @@ msgstr "<p>Άκυρη ετικέτα <b>%1</b> στο αρχείο προτύπ�
 msgid "Could not load responsible plugin to view this task."
 msgstr ""
 
-#: kmymoney/mymoney/splitmodel.cpp:36
+#: kmymoney/mymoney/splitmodel.cpp:37
 #, fuzzy, kde-format
 #| msgid "Category"
 msgctxt "Split header"
 msgid "Category"
 msgstr "Κατηγορία"
 
-#: kmymoney/mymoney/splitmodel.cpp:37
+#: kmymoney/mymoney/splitmodel.cpp:38
 #, fuzzy, kde-format
 #| msgid "Memo"
 msgctxt "Split header"
 msgid "Memo"
 msgstr "Υπόμνημα"
 
-#: kmymoney/mymoney/splitmodel.cpp:38
+#: kmymoney/mymoney/splitmodel.cpp:39
+#, fuzzy, kde-format
+#| msgid "Tags"
+msgctxt "Split header"
+msgid "Tags"
+msgstr "Ετικέτες"
+
+#: kmymoney/mymoney/splitmodel.cpp:40
 #, fuzzy, kde-format
 #| msgid "Payment"
 msgctxt "Split header"
 msgid "Payment"
 msgstr "Πληρωμή"
 
-#: kmymoney/mymoney/splitmodel.cpp:39
+#: kmymoney/mymoney/splitmodel.cpp:41
 #, fuzzy, kde-format
 #| msgid "Deposit"
 msgctxt "Split header"
 msgid "Deposit"
 msgstr "Κατάθεση"
 
-#: kmymoney/mymoney/splitmodel.cpp:94
+#: kmymoney/mymoney/splitmodel.cpp:96
 #, kde-format
 msgid "Split transaction"
 msgstr "Διαχωρισμός συναλλαγής"
 
-#: kmymoney/mymoney/splitmodel.cpp:112
+#: kmymoney/mymoney/splitmodel.cpp:114
 #: kmymoney/mymoney/storage/journalmodel.cpp:192
 #: kmymoney/plugins/views/reports/core/querytable.cpp:993
 #, kde-format
@@ -21552,12 +21566,12 @@ msgstr "Διπλή ετικέτα"
 msgid "Unable to modify tag"
 msgstr "Αδυναμία τροποποίησης της ετικέτας"
 
-#: kmymoney/views/ktagsview.cpp:802
+#: kmymoney/views/ktagsview.cpp:805
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Αδυναμία επανάληψης της καταχώρησης ετικέτας για συναλλαγή/διάσπαση"
 
-#: kmymoney/views/ktagsview.cpp:814
+#: kmymoney/views/ktagsview.cpp:817
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Αδυναμία διαγραφής ετικετών"
@@ -21897,14 +21911,14 @@ msgid ""
 "part of the selection."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:150
+#: kmymoney/views/newspliteditor.cpp:152
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "Χρησιμοποιήστε το για την εισαγωγή της συναλλαγής στο καθολικό."
 
-#: kmymoney/views/newspliteditor.cpp:155
+#: kmymoney/views/newspliteditor.cpp:157
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip costcenter combo in split editor"
@@ -21913,28 +21927,28 @@ msgid ""
 "category."
 msgstr "Αδυναμία δημιουργίας συναλλαγών στο περιεχόμενο μιας κατηγορίας."
 
-#: kmymoney/views/newspliteditor.cpp:166
+#: kmymoney/views/newspliteditor.cpp:168
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "Χρησιμοποιήστε το για την εισαγωγή της συναλλαγής στο καθολικό."
 
-#: kmymoney/views/newspliteditor.cpp:207
+#: kmymoney/views/newspliteditor.cpp:209
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "Αδυναμία δημιουργίας συναλλαγών στο περιεχόμενο μιας κατηγορίας."
 
-#: kmymoney/views/newspliteditor.cpp:216
+#: kmymoney/views/newspliteditor.cpp:218
 #: kmymoney/views/newtransactioneditor.cpp:381
 #, fuzzy, kde-format
 #| msgid "Enter the number of the first transaction line."
 msgid "The check number used for this transaction."
 msgstr "Εισάγετε τον αριθμό της γραμμής της πρώτης συναλλαγής."
 
-#: kmymoney/views/newspliteditor.cpp:225
+#: kmymoney/views/newspliteditor.cpp:227
 #: kmymoney/views/newtransactioneditor.cpp:391
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
@@ -22721,7 +22735,7 @@ msgstr ""
 msgid "Feedback content"
 msgstr ""
 
-#: kmymoney/widgets/ktagcontainer.cpp:110
+#: kmymoney/widgets/ktagcontainer.cpp:89
 #, fuzzy, kde-format
 #| msgid "Tag"
 msgctxt "@info:placeholder tag combo box"
@@ -26487,6 +26501,12 @@ msgstr ""
 "\n"
 "<p>Όλες οι πληροφορίες είναι προαιρετικές και χρησιμοποιούνται μόνο για να "
 "δώσουν προσωπικό τόνο στο αρχείο KMyMoney.</p>"
+
+#, fuzzy
+#~| msgid "Tag"
+#~ msgctxt "Split header"
+#~ msgid "Tag"
+#~ msgstr "Ετικέτα"
 
 #~ msgid "Reorganizing accounts..."
 #~ msgstr "Αναδιοργάνωση λογαριασμών..."

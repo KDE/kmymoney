@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 01:39+0000\n"
+"POT-Creation-Date: 2024-01-31 01:45+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -4532,6 +4532,13 @@ msgstr "%1을(를) 할당되지 않은 상태로 둡니다.(&L)"
 msgid "Dialog"
 msgstr "대화"
 
+#: kmymoney/dialogs/tagcreator.cpp:64
+#, fuzzy, kde-format
+#| msgid "Create"
+msgctxt "Undo action description"
+msgid "Create tag"
+msgstr "만들기"
+
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
 #: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
 #, kde-format
@@ -6115,46 +6122,46 @@ msgstr "<qt><b>%1</b>을(를) 수취인으로 추가하시겠습니까?</qt>"
 msgid "Unable to add payee"
 msgstr "수취인을 추가할 수 없음"
 
-#: kmymoney/kmymoneyutils.cpp:618 kmymoney/views/ktagsview.cpp:633
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:634
 #, kde-format
 msgid "New Tag"
 msgstr "새 태그"
 
-#: kmymoney/kmymoneyutils.cpp:620
+#: kmymoney/kmymoneyutils.cpp:621
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 msgstr "<qt><b>%1</b>을(를) 태그로 추가하시겠습니까?</qt>"
 
-#: kmymoney/kmymoneyutils.cpp:622
+#: kmymoney/kmymoneyutils.cpp:623
 #, kde-format
 msgid "New tag"
 msgstr "새 태그"
 
-#: kmymoney/kmymoneyutils.cpp:656
+#: kmymoney/kmymoneyutils.cpp:657
 #, kde-format
 msgid "Unable to add tag"
 msgstr "태그를 추가할 수 없음"
 
-#: kmymoney/kmymoneyutils.cpp:672 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:674 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "금융기관을 추가할 수 없음: %1"
 
-#: kmymoney/kmymoneyutils.cpp:729
+#: kmymoney/kmymoneyutils.cpp:731
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:50
 #, kde-format
 msgid "One statement has been processed with the following results:"
 msgid_plural "%1 statements have been processed with the following results:"
 msgstr[0] "명세서 %1개 처리가 다음 결과를 반환했습니다:"
 
-#: kmymoney/kmymoneyutils.cpp:734
+#: kmymoney/kmymoneyutils.cpp:736
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:52
 #, kde-format
 msgid "No new transaction has been imported."
 msgid_plural "No new transactions have been imported."
 msgstr[0] "가져온 새 거래가 없습니다."
 
-#: kmymoney/kmymoneyutils.cpp:735
+#: kmymoney/kmymoneyutils.cpp:737
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:53
 #, kde-format
 msgid "Statement import statistics"
@@ -8200,36 +8207,43 @@ msgstr "<p>템플릿 파일 <b>%1</b>의 루트 원소가 잘못됨</p>"
 msgid "Could not load responsible plugin to view this task."
 msgstr "이 작업을 볼 수 있는 플러그인을 불러올 수 없습니다."
 
-#: kmymoney/mymoney/splitmodel.cpp:36
+#: kmymoney/mymoney/splitmodel.cpp:37
 #, kde-format
 msgctxt "Split header"
 msgid "Category"
 msgstr "분류"
 
-#: kmymoney/mymoney/splitmodel.cpp:37
+#: kmymoney/mymoney/splitmodel.cpp:38
 #, kde-format
 msgctxt "Split header"
 msgid "Memo"
 msgstr "메모"
 
-#: kmymoney/mymoney/splitmodel.cpp:38
+#: kmymoney/mymoney/splitmodel.cpp:39
+#, fuzzy, kde-format
+#| msgid "Tags"
+msgctxt "Split header"
+msgid "Tags"
+msgstr "태그"
+
+#: kmymoney/mymoney/splitmodel.cpp:40
 #, kde-format
 msgctxt "Split header"
 msgid "Payment"
 msgstr "지출"
 
-#: kmymoney/mymoney/splitmodel.cpp:39
+#: kmymoney/mymoney/splitmodel.cpp:41
 #, kde-format
 msgctxt "Split header"
 msgid "Deposit"
 msgstr "예금"
 
-#: kmymoney/mymoney/splitmodel.cpp:94
+#: kmymoney/mymoney/splitmodel.cpp:96
 #, kde-format
 msgid "Split transaction"
 msgstr "거래 분할"
 
-#: kmymoney/mymoney/splitmodel.cpp:112
+#: kmymoney/mymoney/splitmodel.cpp:114
 #: kmymoney/mymoney/storage/journalmodel.cpp:192
 #: kmymoney/plugins/views/reports/core/querytable.cpp:993
 #, kde-format
@@ -20207,12 +20221,12 @@ msgstr "태그 이름 복제"
 msgid "Unable to modify tag"
 msgstr "태그를 수정할 수 없음"
 
-#: kmymoney/views/ktagsview.cpp:802
+#: kmymoney/views/ktagsview.cpp:805
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "거래/분할 태그를 재할당할 수 없음"
 
-#: kmymoney/views/ktagsview.cpp:814
+#: kmymoney/views/ktagsview.cpp:817
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "태그를 삭제할 수 없음"
@@ -20531,13 +20545,13 @@ msgid ""
 "part of the selection."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:150
+#: kmymoney/views/newspliteditor.cpp:152
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "이 거래를 할당해야 하는 원가 중심점입니다."
 
-#: kmymoney/views/newspliteditor.cpp:155
+#: kmymoney/views/newspliteditor.cpp:157
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid ""
@@ -20545,25 +20559,25 @@ msgid ""
 "category."
 msgstr "선택한 분류의 거래에는 원가 중심점 할당이 필요합니다."
 
-#: kmymoney/views/newspliteditor.cpp:166
+#: kmymoney/views/newspliteditor.cpp:168
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "이 분할을 할당할 분류입니다."
 
-#: kmymoney/views/newspliteditor.cpp:207
+#: kmymoney/views/newspliteditor.cpp:209
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "분할에는 분류를 할당해야 합니다."
 
-#: kmymoney/views/newspliteditor.cpp:216
+#: kmymoney/views/newspliteditor.cpp:218
 #: kmymoney/views/newtransactioneditor.cpp:381
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "이 거래에 사용된 수표 번호입니다."
 
-#: kmymoney/views/newspliteditor.cpp:225
+#: kmymoney/views/newspliteditor.cpp:227
 #: kmymoney/views/newtransactioneditor.cpp:391
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
@@ -21293,7 +21307,7 @@ msgstr "아이콘"
 msgid "Feedback content"
 msgstr "피드백 내용"
 
-#: kmymoney/widgets/ktagcontainer.cpp:110
+#: kmymoney/widgets/ktagcontainer.cpp:89
 #, kde-format
 msgctxt "@info:placeholder tag combo box"
 msgid "Tag"
@@ -24894,6 +24908,12 @@ msgstr ""
 "\n"
 "<p>모든 정보는 선택 사항이며 KMyMoney 파일을 개인 맞춤 설정하는 데 사용됩니"
 "다.</p>"
+
+#, fuzzy
+#~| msgid "Tag"
+#~ msgctxt "Split header"
+#~ msgid "Tag"
+#~ msgstr "태그"
 
 #~ msgid "Reorganizing accounts..."
 #~ msgstr "계좌 재구성 중..."

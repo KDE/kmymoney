@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 01:39+0000\n"
+"POT-Creation-Date: 2024-01-31 01:45+0000\n"
 "PO-Revision-Date: 2023-12-13 17:11+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -4531,6 +4531,13 @@ msgstr "保持 %1 不指定(&L)。"
 msgid "Dialog"
 msgstr "我的對話框"
 
+#: kmymoney/dialogs/tagcreator.cpp:64
+#, fuzzy, kde-format
+#| msgid "Create"
+msgctxt "Undo action description"
+msgid "Create tag"
+msgstr "建立"
+
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
 #: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
 #, kde-format
@@ -6209,36 +6216,36 @@ msgstr "您要新增 <b>%1</b> 為付款者/收款人嗎？"
 msgid "Unable to add payee"
 msgstr "無法新增收款人"
 
-#: kmymoney/kmymoneyutils.cpp:618 kmymoney/views/ktagsview.cpp:633
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:634
 #, fuzzy, kde-format
 #| msgid "New payee"
 msgid "New Tag"
 msgstr "新增收款人"
 
-#: kmymoney/kmymoneyutils.cpp:620
+#: kmymoney/kmymoneyutils.cpp:621
 #, fuzzy, kde-format
 #| msgid "Do you want to add <b>%1</b> as payer/receiver?"
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 msgstr "您要新增 <b>%1</b> 為付款者/收款人嗎？"
 
-#: kmymoney/kmymoneyutils.cpp:622
+#: kmymoney/kmymoneyutils.cpp:623
 #, fuzzy, kde-format
 #| msgid "New Item"
 msgid "New tag"
 msgstr "新增項目"
 
-#: kmymoney/kmymoneyutils.cpp:656
+#: kmymoney/kmymoneyutils.cpp:657
 #, fuzzy, kde-format
 #| msgid "Unable to add payee"
 msgid "Unable to add tag"
 msgstr "無法新增收款人"
 
-#: kmymoney/kmymoneyutils.cpp:672 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:674 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "無法新增機構：%1"
 
-#: kmymoney/kmymoneyutils.cpp:729
+#: kmymoney/kmymoneyutils.cpp:731
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:50
 #, fuzzy, kde-format
 #| msgid "The statement has been processed with the following results:"
@@ -6246,7 +6253,7 @@ msgid "One statement has been processed with the following results:"
 msgid_plural "%1 statements have been processed with the following results:"
 msgstr[0] "報表已經依下列結果處理："
 
-#: kmymoney/kmymoneyutils.cpp:734
+#: kmymoney/kmymoneyutils.cpp:736
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:52
 #, fuzzy, kde-format
 #| msgid "Documentation and translations have been improved"
@@ -6254,7 +6261,7 @@ msgid "No new transaction has been imported."
 msgid_plural "No new transactions have been imported."
 msgstr[0] "文件與翻譯均已改進"
 
-#: kmymoney/kmymoneyutils.cpp:735
+#: kmymoney/kmymoneyutils.cpp:737
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:53
 #, fuzzy, kde-format
 #| msgid "Statement stats"
@@ -8345,40 +8352,46 @@ msgstr "<p>樣本檔 <b>%2</b> 中有不合法的標籤 <b>%1</b>。</p>"
 msgid "Could not load responsible plugin to view this task."
 msgstr ""
 
-#: kmymoney/mymoney/splitmodel.cpp:36
+#: kmymoney/mymoney/splitmodel.cpp:37
 #, fuzzy, kde-format
 #| msgid "Category"
 msgctxt "Split header"
 msgid "Category"
 msgstr "類別"
 
-#: kmymoney/mymoney/splitmodel.cpp:37
+#: kmymoney/mymoney/splitmodel.cpp:38
 #, fuzzy, kde-format
 #| msgid "Memo"
 msgctxt "Split header"
 msgid "Memo"
 msgstr "備忘"
 
-#: kmymoney/mymoney/splitmodel.cpp:38
+#: kmymoney/mymoney/splitmodel.cpp:39
+#, kde-format
+msgctxt "Split header"
+msgid "Tags"
+msgstr ""
+
+#: kmymoney/mymoney/splitmodel.cpp:40
 #, fuzzy, kde-format
 #| msgid "Payment"
 msgctxt "Split header"
 msgid "Payment"
 msgstr "付款"
 
-#: kmymoney/mymoney/splitmodel.cpp:39
+#: kmymoney/mymoney/splitmodel.cpp:41
 #, fuzzy, kde-format
 #| msgid "Deposit"
 msgctxt "Split header"
 msgid "Deposit"
 msgstr "存款"
 
-#: kmymoney/mymoney/splitmodel.cpp:94
+#: kmymoney/mymoney/splitmodel.cpp:96
 #, kde-format
 msgid "Split transaction"
 msgstr "分割交易"
 
-#: kmymoney/mymoney/splitmodel.cpp:112
+#: kmymoney/mymoney/splitmodel.cpp:114
 #: kmymoney/mymoney/storage/journalmodel.cpp:192
 #: kmymoney/plugins/views/reports/core/querytable.cpp:993
 #, kde-format
@@ -20805,13 +20818,13 @@ msgstr "複製"
 msgid "Unable to modify tag"
 msgstr "無法變更收款人"
 
-#: kmymoney/views/ktagsview.cpp:802
+#: kmymoney/views/ktagsview.cpp:805
 #, fuzzy, kde-format
 #| msgid "Unable to reassign payee of transaction/split"
 msgid "Unable to reassign tag of transaction/split"
 msgstr "無法重新指定收款人給交易或分割"
 
-#: kmymoney/views/ktagsview.cpp:814
+#: kmymoney/views/ktagsview.cpp:817
 #, fuzzy, kde-format
 #| msgid "Unable to remove payee(s)"
 msgid "Unable to remove tag(s)"
@@ -21147,14 +21160,14 @@ msgid ""
 "part of the selection."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:150
+#: kmymoney/views/newspliteditor.cpp:152
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "用這個將交易資料輸入分類簿中。"
 
-#: kmymoney/views/newspliteditor.cpp:155
+#: kmymoney/views/newspliteditor.cpp:157
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip costcenter combo in split editor"
@@ -21163,28 +21176,28 @@ msgid ""
 "category."
 msgstr "無法在類別的內文中建立交易。"
 
-#: kmymoney/views/newspliteditor.cpp:166
+#: kmymoney/views/newspliteditor.cpp:168
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "用這個將交易資料輸入分類簿中。"
 
-#: kmymoney/views/newspliteditor.cpp:207
+#: kmymoney/views/newspliteditor.cpp:209
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "無法在類別的內文中建立交易。"
 
-#: kmymoney/views/newspliteditor.cpp:216
+#: kmymoney/views/newspliteditor.cpp:218
 #: kmymoney/views/newtransactioneditor.cpp:381
 #, fuzzy, kde-format
 #| msgid "Enter next transaction..."
 msgid "The check number used for this transaction."
 msgstr "輸入下一筆交易..."
 
-#: kmymoney/views/newspliteditor.cpp:225
+#: kmymoney/views/newspliteditor.cpp:227
 #: kmymoney/views/newtransactioneditor.cpp:391
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
@@ -21919,7 +21932,7 @@ msgstr ""
 msgid "Feedback content"
 msgstr ""
 
-#: kmymoney/widgets/ktagcontainer.cpp:110
+#: kmymoney/widgets/ktagcontainer.cpp:89
 #, fuzzy, kde-format
 #| msgid "Tax"
 msgctxt "@info:placeholder tag combo box"
@@ -25386,6 +25399,12 @@ msgstr ""
 "<p>在下面輸入您自己的一些資訊。</p>\n"
 "\n"
 "<p>所有的資訊都不是必填的，只是用於個人化您的 KMyMoney 檔案。</p>"
+
+#, fuzzy
+#~| msgid "Tax"
+#~ msgctxt "Split header"
+#~ msgid "Tag"
+#~ msgstr "稅"
 
 #~ msgid "Reorganizing accounts..."
 #~ msgstr "重新組織帳戶中..."

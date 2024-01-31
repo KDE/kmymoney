@@ -47,6 +47,7 @@
 #include "securitiesmodel.h"
 #include "splitmodel.h"
 #include "splitview.h"
+#include "tagcreator.h"
 #include "tagsmodel.h"
 #include "widgethintframe.h"
 
@@ -100,6 +101,7 @@ struct NewSplitEditor::Private
     void setupTabOrder();
     void createCategory();
     void createPayee();
+    void createTag();
 
     NewSplitEditor* q;
     Ui_NewSplitEditor* ui;
@@ -291,6 +293,15 @@ void NewSplitEditor::Private::createPayee()
     creator->addButton(ui->cancelButton);
     creator->addButton(ui->enterButton);
     creator->createPayee();
+}
+
+void NewSplitEditor::Private::createTag()
+{
+    auto creator = new TagCreator(q);
+    creator->setTagContainer(ui->tagContainer);
+    creator->addButton(ui->cancelButton);
+    creator->addButton(ui->enterButton);
+    creator->createTag();
 }
 
 NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity, const QString& counterAccountId)
@@ -673,6 +684,15 @@ bool NewSplitEditor::eventFilter(QObject* o, QEvent* e)
                         cb->setCurrentIndex(index);
                     } else {
                         d->createPayee();
+                    }
+                }
+            } else if (o == d->ui->tagContainer->tagCombo()) {
+                if (!cb->currentText().isEmpty()) {
+                    const auto index(cb->findText(cb->currentText(), Qt::MatchExactly | Qt::MatchCaseSensitive));
+                    if (index != -1) {
+                        cb->setCurrentIndex(index);
+                    } else {
+                        d->createTag();
                     }
                 }
             }

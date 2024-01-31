@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 01:39+0000\n"
-"PO-Revision-Date: 2024-01-13 19:04+0100\n"
+"POT-Creation-Date: 2024-01-31 01:45+0000\n"
+"PO-Revision-Date: 2024-01-30 19:48+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -4621,6 +4621,13 @@ msgstr "&Deixa %1 sense assignar."
 msgid "Dialog"
 msgstr "Diàleg"
 
+#: kmymoney/dialogs/tagcreator.cpp:64
+#, fuzzy, kde-format
+#| msgid "Create"
+msgctxt "Undo action description"
+msgid "Create tag"
+msgstr "Crea"
+
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
 #: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
 #, kde-format
@@ -6221,32 +6228,32 @@ msgstr "<qt>Voleu afegir <b>%1</b> com a beneficiari/receptor?</qt>"
 msgid "Unable to add payee"
 msgstr "No s'ha pogut afegir el beneficiari"
 
-#: kmymoney/kmymoneyutils.cpp:618 kmymoney/views/ktagsview.cpp:633
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:634
 #, kde-format
 msgid "New Tag"
 msgstr "Etiqueta nova"
 
-#: kmymoney/kmymoneyutils.cpp:620
+#: kmymoney/kmymoneyutils.cpp:621
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 msgstr "<qt>Voleu afegir <b>%1</b> com a etiqueta?</qt>"
 
-#: kmymoney/kmymoneyutils.cpp:622
+#: kmymoney/kmymoneyutils.cpp:623
 #, kde-format
 msgid "New tag"
 msgstr "Etiqueta nova"
 
-#: kmymoney/kmymoneyutils.cpp:656
+#: kmymoney/kmymoneyutils.cpp:657
 #, kde-format
 msgid "Unable to add tag"
 msgstr "No s'ha pogut afegir l'etiqueta"
 
-#: kmymoney/kmymoneyutils.cpp:672 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:674 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "No s'ha pogut afegir la institució: %1"
 
-#: kmymoney/kmymoneyutils.cpp:729
+#: kmymoney/kmymoneyutils.cpp:731
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:50
 #, kde-format
 msgid "One statement has been processed with the following results:"
@@ -6254,7 +6261,7 @@ msgid_plural "%1 statements have been processed with the following results:"
 msgstr[0] "S'ha processat un extracte amb els següents resultats:"
 msgstr[1] "S'han processat %1 extractes amb els següents resultats:"
 
-#: kmymoney/kmymoneyutils.cpp:734
+#: kmymoney/kmymoneyutils.cpp:736
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:52
 #, kde-format
 msgid "No new transaction has been imported."
@@ -6262,7 +6269,7 @@ msgid_plural "No new transactions have been imported."
 msgstr[0] "No s'ha importat cap operació nova."
 msgstr[1] "No s'han importat operacions noves."
 
-#: kmymoney/kmymoneyutils.cpp:735
+#: kmymoney/kmymoneyutils.cpp:737
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:53
 #, kde-format
 msgid "Statement import statistics"
@@ -8338,36 +8345,43 @@ msgstr ""
 "No s'ha pogut carregar el connector responsable per a visualitzar aquesta "
 "tasca."
 
-#: kmymoney/mymoney/splitmodel.cpp:36
+#: kmymoney/mymoney/splitmodel.cpp:37
 #, kde-format
 msgctxt "Split header"
 msgid "Category"
 msgstr "Categoria"
 
-#: kmymoney/mymoney/splitmodel.cpp:37
+#: kmymoney/mymoney/splitmodel.cpp:38
 #, kde-format
 msgctxt "Split header"
 msgid "Memo"
 msgstr "Recordatori"
 
-#: kmymoney/mymoney/splitmodel.cpp:38
+#: kmymoney/mymoney/splitmodel.cpp:39
+#, fuzzy, kde-format
+#| msgid "Tags"
+msgctxt "Split header"
+msgid "Tags"
+msgstr "Etiquetes"
+
+#: kmymoney/mymoney/splitmodel.cpp:40
 #, kde-format
 msgctxt "Split header"
 msgid "Payment"
 msgstr "Pagament"
 
-#: kmymoney/mymoney/splitmodel.cpp:39
+#: kmymoney/mymoney/splitmodel.cpp:41
 #, kde-format
 msgctxt "Split header"
 msgid "Deposit"
 msgstr "Ingrés"
 
-#: kmymoney/mymoney/splitmodel.cpp:94
+#: kmymoney/mymoney/splitmodel.cpp:96
 #, kde-format
 msgid "Split transaction"
 msgstr "Operació desglossada"
 
-#: kmymoney/mymoney/splitmodel.cpp:112
+#: kmymoney/mymoney/splitmodel.cpp:114
 #: kmymoney/mymoney/storage/journalmodel.cpp:192
 #: kmymoney/plugins/views/reports/core/querytable.cpp:993
 #, kde-format
@@ -11326,7 +11340,8 @@ msgstr "Interès"
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:60
 #, kde-format
 msgid "The size of the file is too small to be a valid GnuCash format: %1"
-msgstr "La mida del fitxer es massa petita per ser un format GnuCash vàlid: %1"
+msgstr ""
+"La mida del fitxer es massa petita per a ser un format GnuCash vàlid: %1"
 
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:64
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:75
@@ -17292,7 +17307,7 @@ msgid ""
 "their plot location.</p>"
 msgstr ""
 "<p>Seleccioneu aquesta opció per a dibuixar els valors numèrics per als "
-"punts de dades propers a la seva ubicació en el gràfic.</p>"
+"punts de dades pròxims a la seva ubicació en el gràfic.</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkValues)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:115
@@ -19182,7 +19197,7 @@ msgstr "Introduïu la informació del preu d'aquesta operació"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
-msgstr "Seleccioneu el compte per saldar l'operació"
+msgstr "Seleccioneu el compte per a saldar l'operació"
 
 #: kmymoney/views/investtransactioneditor.cpp:619
 #, kde-format
@@ -19804,7 +19819,7 @@ msgstr "Pagaments que vencen avui"
 #: kmymoney/views/khomeview_p.h:746
 #, kde-format
 msgid "Future payments"
-msgstr "Pagaments propers"
+msgstr "Pagaments pròxims"
 
 #: kmymoney/views/khomeview_p.h:832
 #, kde-format
@@ -20633,12 +20648,12 @@ msgstr "Nom d'etiqueta duplicat"
 msgid "Unable to modify tag"
 msgstr "No s'ha pogut modificar l'etiqueta"
 
-#: kmymoney/views/ktagsview.cpp:802
+#: kmymoney/views/ktagsview.cpp:805
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "No s'ha pogut reassignar l'etiqueta d'una operació/desglossament"
 
-#: kmymoney/views/ktagsview.cpp:814
+#: kmymoney/views/ktagsview.cpp:817
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "No s'ha pogut eliminar l'etiqueta/es"
@@ -20688,7 +20703,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip Exchange transactions about to merge"
 msgid "Press to exchange the two transactions."
-msgstr "Premeu per intercanviar les dues operacions."
+msgstr "Premeu per a intercanviar les dues operacions."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTransactionSelectDlg)
 #: kmymoney/views/ktransactionselectdlg.ui:14
@@ -20954,13 +20969,13 @@ msgstr ""
 "No és possible la selecció de la categoria o del compte quan les operacions "
 "desglossades són part de la selecció."
 
-#: kmymoney/views/newspliteditor.cpp:150
+#: kmymoney/views/newspliteditor.cpp:152
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "El centre de despesa al que s'ha d'assignar aquesta operació."
 
-#: kmymoney/views/newspliteditor.cpp:155
+#: kmymoney/views/newspliteditor.cpp:157
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid ""
@@ -20970,25 +20985,25 @@ msgstr ""
 "Per a la categoria seleccionada es requereix l'assignació de l'operació a un "
 "centre de despesa."
 
-#: kmymoney/views/newspliteditor.cpp:166
+#: kmymoney/views/newspliteditor.cpp:168
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "La categoria a la qual s'ha d'assignar aquest desglossament."
 
-#: kmymoney/views/newspliteditor.cpp:207
+#: kmymoney/views/newspliteditor.cpp:209
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "Es requereix l'assignació d'una categoria per a un desglossament."
 
-#: kmymoney/views/newspliteditor.cpp:216
+#: kmymoney/views/newspliteditor.cpp:218
 #: kmymoney/views/newtransactioneditor.cpp:381
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "El número de xec usat per a aquesta operació."
 
-#: kmymoney/views/newspliteditor.cpp:225
+#: kmymoney/views/newspliteditor.cpp:227
 #: kmymoney/views/newtransactioneditor.cpp:391
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
@@ -21738,7 +21753,7 @@ msgstr "icona"
 msgid "Feedback content"
 msgstr "Contingut de la informació de tornada"
 
-#: kmymoney/widgets/ktagcontainer.cpp:110
+#: kmymoney/widgets/ktagcontainer.cpp:89
 #, kde-format
 msgctxt "@info:placeholder tag combo box"
 msgid "Tag"
@@ -22842,7 +22857,7 @@ msgstr "Pagament mensual estimat"
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.ui:109
 #, kde-format
 msgid "Due date of next payment"
-msgstr "Data de venciment del proper pagament"
+msgstr "Data de venciment del pròxim pagament"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel3_3)
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.ui:127
@@ -23077,7 +23092,7 @@ msgstr ""
 "dir el següent:<p>\n"
 "\n"
 "<b>Tots els pagaments</b><br>\n"
-"Introduïu la data de venciment del proper pagament<p>\n"
+"Introduïu la data de venciment del pròxim pagament<p>\n"
 "\n"
 "<b>Inici amb els pagaments d'aquest any</b><br>\n"
 "Introduïu la data de venciment del primer pagament de l'any actual"
@@ -23140,7 +23155,7 @@ msgstr "Anys"
 #: kmymoney/wizards/newaccountwizard/kgeneralloaninfopage.ui:293
 #, kde-format
 msgid "Next interest change is due"
-msgstr "El proper canvi del tipus d'interès està vençut"
+msgstr "El pròxim canvi del tipus d'interès està vençut"
 
 #: kmymoney/wizards/newaccountwizard/khierarchypage.cpp:156
 #, kde-format
@@ -25126,7 +25141,7 @@ msgstr "Setmanes"
 #: kmymoney/wizards/newloanwizard/variableinterestdatewizardpage.ui:6
 #, kde-format
 msgid "Date of next interest change"
-msgstr "Data del proper canvi del tipus d'interès"
+msgstr "Data del pròxim canvi del tipus d'interès"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel8_2)
 #: kmymoney/wizards/newloanwizard/variableinterestdatewizardpage.ui:13
@@ -25144,13 +25159,13 @@ msgstr ""
 #: kmymoney/wizards/newloanwizard/variableinterestdatewizardpage.ui:44
 #, kde-format
 msgid "Next interest change on"
-msgstr "El proper canvi del tipus d'interès serà el"
+msgstr "El pròxim canvi del tipus d'interès serà el"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2)
 #: kmymoney/wizards/newloanwizard/variableinterestdatewizardpage.ui:81
 #, kde-format
 msgid "Time until next change"
-msgstr "Temps fins al proper canvi"
+msgstr "Temps fins al pròxim canvi"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel2)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:20
@@ -25321,7 +25336,7 @@ msgstr ""
 "aquest programa us pugui ajudar a gestionar les finances, cal que reculli "
 "algunes dades sobre vós.<p>\n"
 "\n"
-"En les properes pàgines, se us guiarà pels passos necessaris per a "
+"En les pàgines següents, se us guiarà pels passos necessaris per a "
 "configurar el programa. Això només passarà una vegada."
 
 #: kmymoney/wizards/newuserwizard/knewuserwizard.cpp:54
@@ -25450,6 +25465,10 @@ msgstr ""
 "\n"
 "<p>Tota la informació és optativa i s'usa per a personalitzar el fitxer del "
 "KMyMoney.</p>"
+
+#~ msgctxt "Split header"
+#~ msgid "Tag"
+#~ msgstr "Etiqueta"
 
 #~ msgid "Reorganizing accounts..."
 #~ msgstr "S'estan reorganitzant els comptes..."

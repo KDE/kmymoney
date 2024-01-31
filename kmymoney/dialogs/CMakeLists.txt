@@ -26,6 +26,7 @@ set(kmm_base_dialogs_SOURCES
   ktransactionsortoptionsdlg.cpp
   kupdatestockpricedlg.cpp
   payeecreator.cpp
+  tagcreator.cpp
   transactionmatcher.cpp
 )
 

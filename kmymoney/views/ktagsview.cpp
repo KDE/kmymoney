@@ -629,9 +629,12 @@ void KTagsView::slotHelp()
 
 void KTagsView::slotNewTag()
 {
-    QString id;
-    KMyMoneyUtils::newTag(i18n("New Tag"), id);
-    slotSelectTag(id);
+    QString tagId;
+    bool ok;
+    std::tie(ok, tagId) = KMyMoneyUtils::newTag(i18n("New Tag"));
+    if (ok) {
+        slotSelectTag(tagId);
+    }
 }
 
 void KTagsView::slotRenameTag()

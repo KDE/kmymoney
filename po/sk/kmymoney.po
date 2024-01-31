@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 01:39+0000\n"
+"POT-Creation-Date: 2024-01-31 01:45+0000\n"
 "PO-Revision-Date: 2020-01-02 16:30+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -4601,6 +4601,13 @@ msgstr "&Ponechať %1 nepriradené."
 msgid "Dialog"
 msgstr "Dialóg"
 
+#: kmymoney/dialogs/tagcreator.cpp:64
+#, fuzzy, kde-format
+#| msgid "Create"
+msgctxt "Undo action description"
+msgid "Create tag"
+msgstr "Vytvoriť"
+
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
 #: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
 #, kde-format
@@ -6295,33 +6302,33 @@ msgstr "Chcete sa pridať <b>%1</b> ako doručiteľa/príjemcu?"
 msgid "Unable to add payee"
 msgstr "Nemožno pridať príjemcu"
 
-#: kmymoney/kmymoneyutils.cpp:618 kmymoney/views/ktagsview.cpp:633
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:634
 #, kde-format
 msgid "New Tag"
 msgstr "Nová značka"
 
-#: kmymoney/kmymoneyutils.cpp:620
+#: kmymoney/kmymoneyutils.cpp:621
 #, fuzzy, kde-format
 #| msgid "Do you want to add <b>%1</b> as tag?"
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 msgstr "Chcete pridať <b>%1</b> ako značku?"
 
-#: kmymoney/kmymoneyutils.cpp:622
+#: kmymoney/kmymoneyutils.cpp:623
 #, kde-format
 msgid "New tag"
 msgstr "Nová značka"
 
-#: kmymoney/kmymoneyutils.cpp:656
+#: kmymoney/kmymoneyutils.cpp:657
 #, kde-format
 msgid "Unable to add tag"
 msgstr "Nemožno pridať značku"
 
-#: kmymoney/kmymoneyutils.cpp:672 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:674 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "Nie je možné pridať inštitúciu: %1"
 
-#: kmymoney/kmymoneyutils.cpp:729
+#: kmymoney/kmymoneyutils.cpp:731
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:50
 #, fuzzy, kde-format
 #| msgid "The statement has been processed with the following results:"
@@ -6331,7 +6338,7 @@ msgstr[0] "Príkaz bol spracovaný s nasledovnými výsledkami:"
 msgstr[1] "Príkaz bol spracovaný s nasledovnými výsledkami:"
 msgstr[2] "Príkaz bol spracovaný s nasledovnými výsledkami:"
 
-#: kmymoney/kmymoneyutils.cpp:734
+#: kmymoney/kmymoneyutils.cpp:736
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:52
 #, fuzzy, kde-format
 #| msgid "Do not show transactions prior to"
@@ -6341,7 +6348,7 @@ msgstr[0] "Neukazovať transakcie pred"
 msgstr[1] "Neukazovať transakcie pred"
 msgstr[2] "Neukazovať transakcie pred"
 
-#: kmymoney/kmymoneyutils.cpp:735
+#: kmymoney/kmymoneyutils.cpp:737
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:53
 #, fuzzy, kde-format
 #| msgid "Statement stats"
@@ -8456,40 +8463,47 @@ msgstr "<p>Neplatná značka <b>%1</b> v súbore šablóny <b>%2</b></p>"
 msgid "Could not load responsible plugin to view this task."
 msgstr "Nemôžem načítať zodpovedný plugin na zobrazenie tejto úlohy."
 
-#: kmymoney/mymoney/splitmodel.cpp:36
+#: kmymoney/mymoney/splitmodel.cpp:37
 #, fuzzy, kde-format
 #| msgid "Category"
 msgctxt "Split header"
 msgid "Category"
 msgstr "Kategória"
 
-#: kmymoney/mymoney/splitmodel.cpp:37
+#: kmymoney/mymoney/splitmodel.cpp:38
 #, fuzzy, kde-format
 #| msgid "Memo"
 msgctxt "Split header"
 msgid "Memo"
 msgstr "Poznámka"
 
-#: kmymoney/mymoney/splitmodel.cpp:38
+#: kmymoney/mymoney/splitmodel.cpp:39
+#, fuzzy, kde-format
+#| msgid "Tags"
+msgctxt "Split header"
+msgid "Tags"
+msgstr "Značky"
+
+#: kmymoney/mymoney/splitmodel.cpp:40
 #, fuzzy, kde-format
 #| msgid "Payment"
 msgctxt "Split header"
 msgid "Payment"
 msgstr "Platba"
 
-#: kmymoney/mymoney/splitmodel.cpp:39
+#: kmymoney/mymoney/splitmodel.cpp:41
 #, fuzzy, kde-format
 #| msgid "Deposit"
 msgctxt "Split header"
 msgid "Deposit"
 msgstr "Vklad"
 
-#: kmymoney/mymoney/splitmodel.cpp:94
+#: kmymoney/mymoney/splitmodel.cpp:96
 #, kde-format
 msgid "Split transaction"
 msgstr "Rozdeliť transakciu"
 
-#: kmymoney/mymoney/splitmodel.cpp:112
+#: kmymoney/mymoney/splitmodel.cpp:114
 #: kmymoney/mymoney/storage/journalmodel.cpp:192
 #: kmymoney/plugins/views/reports/core/querytable.cpp:993
 #, kde-format
@@ -21120,12 +21134,12 @@ msgstr "Duplikovať značku"
 msgid "Unable to modify tag"
 msgstr "Nemožno zmeniť značku"
 
-#: kmymoney/views/ktagsview.cpp:802
+#: kmymoney/views/ktagsview.cpp:805
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Nemožno znovu priradiť značku transakcie/rozdelenia"
 
-#: kmymoney/views/ktagsview.cpp:814
+#: kmymoney/views/ktagsview.cpp:817
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Nemožno odstrániť značku(y)"
@@ -21460,14 +21474,14 @@ msgid ""
 "part of the selection."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:150
+#: kmymoney/views/newspliteditor.cpp:152
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "Použiť na zadanie transakcie do účtovnej knihy."
 
-#: kmymoney/views/newspliteditor.cpp:155
+#: kmymoney/views/newspliteditor.cpp:157
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip costcenter combo in split editor"
@@ -21476,28 +21490,28 @@ msgid ""
 "category."
 msgstr "Nie je možné vytvoriť transakcie v kontexte kategórie."
 
-#: kmymoney/views/newspliteditor.cpp:166
+#: kmymoney/views/newspliteditor.cpp:168
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "Použiť na zadanie transakcie do účtovnej knihy."
 
-#: kmymoney/views/newspliteditor.cpp:207
+#: kmymoney/views/newspliteditor.cpp:209
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "Nie je možné vytvoriť transakcie v kontexte kategórie."
 
-#: kmymoney/views/newspliteditor.cpp:216
+#: kmymoney/views/newspliteditor.cpp:218
 #: kmymoney/views/newtransactioneditor.cpp:381
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgid "The check number used for this transaction."
 msgstr "Použiť toto tlačidlo na záznam tejto transakcie."
 
-#: kmymoney/views/newspliteditor.cpp:225
+#: kmymoney/views/newspliteditor.cpp:227
 #: kmymoney/views/newtransactioneditor.cpp:391
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
@@ -22246,7 +22260,7 @@ msgstr "ikona"
 msgid "Feedback content"
 msgstr "Obsah spätnej väzby"
 
-#: kmymoney/widgets/ktagcontainer.cpp:110
+#: kmymoney/widgets/ktagcontainer.cpp:89
 #, fuzzy, kde-format
 #| msgid "Tag"
 msgctxt "@info:placeholder tag combo box"
@@ -25956,6 +25970,12 @@ msgstr ""
 "\n"
 "<p>Všetky informácie sú voliteľné a poskytnuté len pre prispôsobenie vášho "
 "súboru KMyMoney.</p>"
+
+#, fuzzy
+#~| msgid "Tag"
+#~ msgctxt "Split header"
+#~ msgid "Tag"
+#~ msgstr "Značka"
 
 #~ msgid "Reorganizing accounts..."
 #~ msgstr "Reorganizovať účty..."

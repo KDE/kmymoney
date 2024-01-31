@@ -43,6 +43,7 @@ public:
 
     void setModel(QAbstractItemModel* model);
     void loadTags(const QList<QString>& idList);
+    void addTagWidget(const QString& id);
 
     QComboBox* tagCombo();
     const QList<QString> selectedTags();

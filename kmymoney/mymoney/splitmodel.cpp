@@ -27,6 +27,7 @@
 #include "mymoneytransaction.h"
 #include "payeesmodel.h"
 #include "securitiesmodel.h"
+#include "tagsmodel.h"
 
 struct SplitModel::Private
 {
@@ -35,6 +36,7 @@ struct SplitModel::Private
         , headerData(QHash<Column, QString>({
               {Category, i18nc("Split header", "Category")},
               {Memo, i18nc("Split header", "Memo")},
+              {Tags, i18nc("Split header", "Tags")},
               {Payment, i18nc("Split header", "Payment")},
               {Deposit, i18nc("Split header", "Deposit")},
           }))
@@ -117,10 +119,11 @@ struct SplitModel::Private
 
     int currencyPrecision(const MyMoneySplit& split) const
     {
-        const auto account = MyMoneyFile::instance()->accountsModel()->itemById(split.accountId());
+        const auto file = MyMoneyFile::instance();
+        const auto account = file->accountsModel()->itemById(split.accountId());
         if (!account.id().isEmpty()) {
             try {
-                const auto currency = MyMoneyFile::instance()->currency(account.currencyId());
+                const auto currency = file->currency(account.currencyId());
                 if (Q_UNLIKELY(account.accountType() == eMyMoney::Account::Type::Cash)) {
                     return MyMoneyMoney::denomToPrec(currency.smallestCashFraction());
                 }
@@ -135,14 +138,28 @@ struct SplitModel::Private
     {
         QString currencySymbol;
         if (showCurrencies) {
-            const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(split.accountId());
+            const auto file = MyMoneyFile::instance();
+            const auto accountIdx = file->accountsModel()->indexById(split.accountId());
             if (accountIdx.isValid()) {
                 const auto currencyId = accountIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString();
-                const auto securityIdx = MyMoneyFile::instance()->currenciesModel()->indexById(currencyId);
+                const auto securityIdx = file->currenciesModel()->indexById(currencyId);
                 currencySymbol = securityIdx.data(eMyMoney::Model::SecuritySymbolRole).toString();
             }
         }
         return currencySymbol;
+    }
+
+    QString tags(const QStringList& tagIdList) const
+    {
+        const auto file = MyMoneyFile::instance();
+        QStringList splitTagList = tagIdList;
+        if (!splitTagList.isEmpty()) {
+            std::transform(splitTagList.begin(), splitTagList.end(), splitTagList.begin(), [file](const QString& tagId) {
+                return file->tagsModel()->itemById(tagId).name();
+            });
+            return splitTagList.join(", ");
+        }
+        return {};
     }
 
     SplitModel* q;
@@ -205,6 +222,7 @@ QVariant SplitModel::headerData(int section, Qt::Orientation orientation, int ro
     if (orientation == Qt::Horizontal) {
         switch (role) {
         case Qt::DisplayRole:
+        case eMyMoney::Model::LongDisplayRole:
             return d->headerData.value(static_cast<Column>(section));
 
         case Qt::SizeHintRole:
@@ -235,12 +253,13 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
         return QVariant();
 
     const MyMoneySplit& split = static_cast<TreeItem<MyMoneySplit>*>(idx.internalPointer())->constDataRef();
+    const auto file = MyMoneyFile::instance();
     switch(role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
         switch(idx.column()) {
         case Column::Category:
-            return MyMoneyFile::instance()->accountsModel()->accountIdToHierarchicalName(split.accountId());
+            return file->accountsModel()->accountIdToHierarchicalName(split.accountId());
 
         case Column::Memo:
         {
@@ -269,6 +288,9 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
                 }
             }
             return {};
+
+        case Tags:
+            return d->tags(split.tagIdList());
 
         default:
             break;
@@ -305,7 +327,7 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
         return split.accountId();
 
     case eMyMoney::Model::AccountFullNameRole:
-        return MyMoneyFile::instance()->accountsModel()->accountIdToHierarchicalName(split.accountId());
+        return file->accountsModel()->accountIdToHierarchicalName(split.accountId());
 
     case eMyMoney::Model::SplitSharesRole:
         return QVariant::fromValue<MyMoneyMoney>(split.shares());
@@ -323,7 +345,7 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
         return split.payeeId();
 
     case eMyMoney::Model::SplitPayeeRole:
-        return MyMoneyFile::instance()->payeesModel()->itemById(split.payeeId()).name();
+        return file->payeesModel()->itemById(split.payeeId()).name();
 
     case eMyMoney::Model::SplitTagIdRole:
         return QVariant::fromValue<QStringList>(split.tagIdList());
@@ -552,12 +574,13 @@ void SplitModel::setTransactionCommodity(const QString& commodity)
 void SplitModel::checkForForeignCurrency() const
 {
     d->showCurrencies = false;
+    const auto file = MyMoneyFile::instance();
     const auto rows = rowCount();
     for (int row = 0; row < rows; ++row) {
         const auto idx = index(row, 0);
         const auto accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
         if (!accountId.isEmpty()) {
-            const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
+            const auto accountIdx = file->accountsModel()->indexById(accountId);
             if (accountIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString() != d->transactionCommodity) {
                 d->showCurrencies = true;
                 break;

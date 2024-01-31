@@ -82,7 +82,7 @@
 <para
 >Per a eliminar un beneficiari o pagador, feu clic dret sobre el nom i seleccioneu <guimenuitem
 >Suprimeix el beneficiari</guimenuitem
->. Si el beneficiari té alguna operació, es presentarà un diàleg que permetrà reassignar-la a un beneficiari diferent, i també una casella de selecció per a permetre que el nom suprimit s'afegeixi a la llista de coincidència del beneficiari nou. Una altra opció per a suprimir un beneficiari existent és seleccionar el beneficiari o pagador fent-hi clic esquerre i després fent clic a <guibutton
+>. Si el beneficiari té alguna operació, es presentarà un diàleg que permetrà reassignar-la a un beneficiari diferent, i també una casella de selecció per a permetre que el nom suprimit s'afegeixi a la llista de coincidències del beneficiari nou. Una altra opció per a suprimir un beneficiari existent és seleccionar el beneficiari o pagador fent-hi clic esquerre i després fent clic a <guibutton
 >Supr</guibutton
 >. </para>
 </sect2>

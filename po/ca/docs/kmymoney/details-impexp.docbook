@@ -854,7 +854,7 @@
 >Coincidència de les operacions</title>
 
 <para
->Com s'ha assenyalat anteriorment, un dels principals inconvenients del format QIF és la manca d'un identificador únic per a cada operació. Per tant, si importeu un fitxer QIF i algunes de les operacions ja es troben al llibre major, podríeu obtenir duplicats. El &kmymoney; ho intentarà solucionar cercant les operacions similars a les que ja teniu. Si troba quelcom que s'assembla a la mateixa operació, coincidirà amb el duplicat aparent. </para>
+>Com s'ha assenyalat anteriorment, un dels principals inconvenients del format QIF és la manca d'un identificador únic per a cada operació. Per tant, si importeu un fitxer QIF i algunes de les operacions ja es troben al llibre major, podríeu obtenir duplicats. El &kmymoney; ho intentarà solucionar cercant les operacions similars a les que ja teniu. Si troba alguna cosa que s'assembla a la mateixa operació, coincidirà amb el duplicat aparent. </para>
 
 <para
 >Això pot ser un problema si teniu operacions que s'assemblen massa, però que en realitat són diferents. En aquest cas, podreu no fer-les coincidir més endavant a la vista del llibre major. </para>
@@ -966,7 +966,7 @@
 >Cal tenir en compte que moltes versions preempaquetades del &kmymoney; s'han creat amb l'importador OFX ja inclòs o disponible com un paquet separat. Si l'importador OFX no sembla estar instal·lat a la versió, el primer lloc per a comprovar és al mateix on vàreu obtenir el paquet base del &kmymoney;. </para>
 
 <para
->Si heu instal·lat des de RPM, el connector d'importació OFX estarà contingut dins del paquet kmymoney-ofx. Hauria d'estar disponible des de qualsevol font on hàgiu obtingut el paquet base del &kmymoney;. Si l'heu creat a partir del codi font, tot el que haureu de fer és tenir al sistema les capçaleres i biblioteques de desenvolupament libOFX 0.9. El procés de compilació del &kmymoney; les detectarà i compilarà el connector. En el moment del llançament del &kmymoney; 4.6, l'última versió de libofx era 0.9.4, la qual també és la versió mínima requerida. </para>
+>Si heu instal·lat des de RPM, el connector d'importació OFX estarà contingut dins del paquet kmymoney-ofx. Hauria d'estar disponible des de qualsevol font on haureu obtingut el paquet base del &kmymoney;. Si l'heu creat a partir del codi font, tot el que haureu de fer és tenir al sistema les capçaleres i biblioteques de desenvolupament libOFX 0.9. El procés de compilació del &kmymoney; les detectarà i compilarà el connector. En el moment del llançament del &kmymoney; 4.6, l'última versió de libofx era 0.9.4, la qual també és la versió mínima requerida. </para>
 
 <para
 >Si teniu problemes per a compilar el &kmymoney; i esteu segur que teniu instal·lada la versió correcta de la libOFX, contacteu amb la llista de desenvolupadors &devlist; per a obtenir ajuda. Afegiu-hi una còpia del fitxer <filename

@@ -611,9 +611,10 @@ std::tuple<bool, QString> KMyMoneyUtils::newPayee(const QString& newnameBase)
     return std::make_tuple(doit, id);
 }
 
-void KMyMoneyUtils::newTag(const QString& newnameBase, QString& id)
+std::tuple<bool, QString> KMyMoneyUtils::newTag(const QString& newnameBase)
 {
     bool doit = true;
+    QString id;
 
     if (newnameBase != i18n("New Tag")) {
         // Ask the user if that is what he intended to do?
@@ -656,6 +657,7 @@ void KMyMoneyUtils::newTag(const QString& newnameBase, QString& id)
             KMessageBox::detailedError(nullptr, i18n("Unable to add tag"), QString::fromLatin1(e.what()));
         }
     }
+    return std::make_tuple(doit, id);
 }
 
 void KMyMoneyUtils::newInstitution(MyMoneyInstitution& institution)

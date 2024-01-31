@@ -382,7 +382,7 @@ void MyMoneyAccount::setClosed(bool closed)
 
 bool MyMoneyAccount::isClosed() const
 {
-    return !(value(QLatin1String("mm-closed")).isEmpty());
+    return value(QLatin1String("mm-closed"), false);
 }
 
 int MyMoneyAccount::fraction(const MyMoneySecurity& sec) const

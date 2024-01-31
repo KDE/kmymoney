@@ -204,7 +204,7 @@
 >Comptes: Passiu</title>
 
 <para
->Aquests són els comptes que mantenen els vostres deutes i diners dels que voleu fer un seguiment. Hi ha disponibles els tipus següents: </para>
+>Aquests són els comptes que mantenen els vostres deutes i diners dels quals voleu fer un seguiment. Hi ha disponibles els tipus següents: </para>
 
 <variablelist>
   <varlistentry>
@@ -306,10 +306,10 @@
 >Si teniu alguns rebuts o despeses regulars en aquest compte, aneu al Beneficiari i introduïu els noms dels pagadors i els beneficiaris involucrats, després aneu a Planificació i completeu una Planificació nova per a cada operació recurrent. Si no heu introduït el beneficiari o pagador, el &kmymoney; us oferirà l'oportunitat de fer-ho a la meitat en introduir la planificació. </para>
 
 <para
->Per a afegir altres operacions noves, aneu a Llibres majors, podreu afegir nous beneficiaris i categories en la meitat d'una operació o anant a Beneficiaris o Categories abans d'introduir l'operació. </para>
+>Per a afegir altres operacions noves, aneu a Llibres majors, podreu afegir beneficiaris nous i categories en la meitat d'una operació o anant a Beneficiaris o Categories abans d'introduir l'operació. </para>
 
 <para
->Probablement trobareu que les Categories predeterminades no coincideixen exactament amb les vostres necessitats, podreu suprimir amb facilitat les que sabeu que mai necessitareu i afegir les altres que necessiteu. Però quan introduïu una operació, només haureu d'escriure algunes lletres d'una categoria i el &kmymoney; us oferirà una llista desplegable de les categories coincidents per a escollir-ne una. </para>
+>Probablement, trobareu que les Categories predeterminades no coincideixen exactament amb les vostres necessitats, podreu suprimir amb facilitat les que sabeu que mai necessitareu i afegir les altres que necessiteu. Però quan introduïu una operació, només haureu d'escriure algunes lletres d'una categoria i el &kmymoney; us oferirà una llista desplegable de les categories coincidents per a escollir-ne una. </para>
 
 <para
 >Podreu afegir diferents comptes gestionats per a diferents institucions; el preferit es mostrarà quan obriu el &kmymoney;, però podreu canviar ràpidament a qualsevol dels altres. </para>
@@ -318,7 +318,7 @@
 >Quan realitzeu un pagament, el &kmymoney; determinarà quin hauria de ser el proper número de xec, suprimiu-lo si no realitzeu un pagament amb xec o editeu-lo si el primer xec que introduïu no és el número 1 del xec. De manera alternativa, podreu desactivar l'increment automàtic dels números de xec. </para>
 
 <para
->De tant en tant podríeu obtenir extractes del vostre compte des de les institucions que utilitzeu. Podreu conciliar els comptes del &kmymoney; amb aquests extractes per tenir una declaració precisa de l'estat actual de les vostres finances. </para>
+>De tant en tant podríeu obtenir extractes del vostre compte des de les institucions que utilitzeu. Podreu conciliar els comptes del &kmymoney; amb aquests extractes de manera que tingueu una declaració precisa de l'estat actual de les vostres finances. </para>
 
 <para
 >Si aneu a Informes, hi ha diversos informes predeterminats. Per a personalitzar-los, obriu-ne un de similar que preferiu i després seleccioneu «Nou» (no «Copia»), després el podreu personalitzar segons les vostres necessitats i si voleu marcar-lo com un informe preferit. </para>

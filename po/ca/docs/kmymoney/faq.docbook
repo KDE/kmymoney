@@ -34,7 +34,7 @@
    <para
 >Hi ha moltes raons per les quals el &kmymoney; podria fallar o donar un error en lloc d'iniciar-se amb normalitat. De vegades es mostra un missatge d'error, però si no, podreu executar el &kmymoney; des d'una línia d'ordres, per a veure si s'emet qualsevol informació útil a la consola. Al &Linux;, això significa escriure només «kmymoney» en un intèrpret d'ordres. El &macOS; hauria de ser similar. Al &Windows;, haureu d'escriure el camí complet a l'executable del &kmymoney;.</para>
    <para
->Si això no mostra la causa del problema, haureu de determinar si la incidència és amb el programari o amb les dades. Per fer-ho, cal <link linkend="firsttime.launch"
+>Si això no mostra la causa del problema, haureu de determinar si la incidència és amb el programari o amb les dades. Per a fer-ho, cal <link linkend="firsttime.launch"
 >llançar el &kmymoney;</link
 > sense obrir el fitxer de dades. Si l'aplicació s'inicia, però es bloqueja quan intenteu carregar el fitxer de dades, proveu de carregar una còpia anterior del fitxer. (Heu fet una còpia de seguretat, no?)</para>
    <para
@@ -244,7 +244,7 @@
  </question>
  <answer>
    <para
->L'ús de KMyMoney2 va ser un llegat històric de quan el projecte va passar del &kde; 1 al &kde; 2. Per a evitar canviar el nom cada vegada que hi havia una nova versió del &kde;, vam decidir seguir amb &kmymoney;.</para
+>L'ús de KMyMoney2 va ser un llegat històric de quan el projecte va passar del &kde; 1 al &kde; 2. Per a evitar canviar el nom cada vegada que hi havia una versió nova del &kde;, vam decidir seguir amb &kmymoney;.</para
 > <para
 >La primera versió del &kmymoney; que es va considerar prou estable tenia l'etiqueta 1.0, tot i que s'executava sota el &kde; 3. A mesura que el projecte es va alinear més estretament amb &kde;, hem decidit fer servir el mateix número de versió principal.</para>
  </answer>
@@ -253,7 +253,7 @@
 <qandaentry>
  <question>
    <para
->Com puc informar d'un error? Com puc sol·licitar una nova característica?</para>
+>Com puc informar d'un error? Com puc sol·licitar una característica nova?</para>
  </question>
  <answer>
    <para
