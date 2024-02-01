@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="introduction">
+<chapterinfo>
+  <date
+>13/01/2018</date>
+  <releaseinfo
+>5.0.0</releaseinfo>
+</chapterinfo>
+
+<title
+>Introduction</title>
+
+<sect1 id="what-is-kmymoney">
+<title
+>Qu'est-ce que &kmymoney; ?</title>
+
+<para
+>Pour faire simple, &kmymoney; est le gestionnaire de finances personnelles de &kde;. Il permet aux utilisateurs des systèmes d'exploitation ouverts de suivre de près leurs finances personnelles en leur proposant un grand nombre de fonctionnalités et d'outils financiers. </para>
+
+<para
+>Les principaux projets de ce projet sont : </para>
+
+<itemizedlist>
+  <listitem>
+    <formalpara
+><title
+>Parité de fonctionnalités</title>
+      <para
+>&kmymoney; a pour but de proposer toutes les fonctionnalités importantes trouvées dans les gestionnaires de finances personnelles commerciaux disponibles. Même si chaque version de &kmymoney; se rapproche de ce but, il y a encore beaucoup de travail à faire. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara
+><title
+>Facilité d'utilisation</title>
+      <para
+>&kmymoney; essaye d'être le gestionnaire de finances personnelles libre le plus simple à utiliser, en particulier pour un utilisateur non-expérimenté. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara
+><title
+>Exactitude</title>
+      <para
+>Basé sur les principes éprouvés de la comptabilité en partie double, &kmymoney; s'assure que vos finances sont tenues en bon ordre. </para>
+    </formalpara>
+  </listitem>
+</itemizedlist>
+
+</sect1>
+
+<sect1 id="what-kmymoney-is-not">
+<title
+>Qu'est-ce que &kmymoney; n'est pas </title>
+
+<para
+>En tant que gestionnaire de finances personnelles, &kmymoney; n'est pas conçu pour s'adapter aux besoins d'une entreprise. Une petite entreprise peut trouver que &kmymoney; dispose d'assez de fonctionnalités, mais les fonctionnalités de comptes à recouvrer et comptes à payer ne sont pas directement gérées. Néanmoins, il serait possible de créer des fonctionnalités de clients, fournisseurs et documents à travers les modules. </para>
+
+<para
+>&kmymoney; n'est pas simplement un clone des programmes de finances personnelles commerciaux disponibles. Même si beaucoup de fonctionnalités présentes dans &kmymoney; peuvent être trouvées dans d'autres applications similaires, &kmymoney; essaie de présenter une vue individuelle et unique de vos finances. </para>
+
+</sect1>
+</chapter>
