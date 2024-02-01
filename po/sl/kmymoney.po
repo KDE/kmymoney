@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-31 01:45+0000\n"
-"PO-Revision-Date: 2024-01-29 09:38+0100\n"
+"PO-Revision-Date: 2024-01-31 07:35+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
 "X-Generator: Poedit 3.4.2\n"
 
 #, kde-format
@@ -4591,11 +4591,10 @@ msgid "Dialog"
 msgstr "Dialog"
 
 #: kmymoney/dialogs/tagcreator.cpp:64
-#, fuzzy, kde-format
-#| msgid "Create"
+#, kde-format
 msgctxt "Undo action description"
 msgid "Create tag"
-msgstr "Ustvari"
+msgstr "Ustvari oznako"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
 #: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
@@ -8312,8 +8311,7 @@ msgid "Memo"
 msgstr "Opomba"
 
 #: kmymoney/mymoney/splitmodel.cpp:39
-#, fuzzy, kde-format
-#| msgid "Tags"
+#, kde-format
 msgctxt "Split header"
 msgid "Tags"
 msgstr "Oznake"

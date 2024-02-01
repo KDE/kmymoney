@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-31 01:45+0000\n"
-"PO-Revision-Date: 2024-01-29 16:44+0300\n"
+"PO-Revision-Date: 2024-01-31 16:12+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -4557,11 +4557,10 @@ msgid "Dialog"
 msgstr "İletişim Kutusu"
 
 #: kmymoney/dialogs/tagcreator.cpp:64
-#, fuzzy, kde-format
-#| msgid "Create"
+#, kde-format
 msgctxt "Undo action description"
 msgid "Create tag"
-msgstr "Oluştur"
+msgstr "Etiket Oluştur"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
 #: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
@@ -8261,8 +8260,7 @@ msgid "Memo"
 msgstr "Not"
 
 #: kmymoney/mymoney/splitmodel.cpp:39
-#, fuzzy, kde-format
-#| msgid "Tags"
+#, kde-format
 msgctxt "Split header"
 msgid "Tags"
 msgstr "Etiketler"
