@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-31 01:45+0000\n"
+"POT-Creation-Date: 2024-02-03 01:41+0000\n"
 "PO-Revision-Date: 2024-01-15 19:47+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -6444,7 +6444,7 @@ msgid "Last Price Update"
 msgstr "Última actualización de prezos"
 
 #: kmymoney/models/equitiesmodel.cpp:540
-#: kmymoney/widgets/columnselector.cpp:221
+#: kmymoney/widgets/columnselector.cpp:219
 #, kde-format
 msgid "Displayed columns"
 msgstr "Columnas amosadas"
