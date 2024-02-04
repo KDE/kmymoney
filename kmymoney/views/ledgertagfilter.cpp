@@ -141,18 +141,6 @@ bool LedgerTagFilter::filterAcceptsRow(int source_row, const QModelIndex& source
         if (d->isSpecialDatesModel(idx)) {
             return (sortRole() == eMyMoney::Model::TransactionPostDateRole);
         }
-
-        // only display splits that reference an asset or liability account
-        const auto accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
-        idx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
-        const auto accountGroup = static_cast<eMyMoney::Account::Type>(idx.data(eMyMoney::Model::AccountGroupRole).toInt());
-        switch(accountGroup) {
-        case eMyMoney::Account::Type::Asset:
-        case eMyMoney::Account::Type::Liability:
-            break;
-        default:
-            return false;
-        }
     }
     return rc;
 }
