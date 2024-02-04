@@ -2678,7 +2678,8 @@ void KMyMoneyApp::slotDisplayTransactionDetails()
                     "<tr><th>Split</th><th>Number</th><th>Payee</th><th>Account</th><th>_CR</th><th>ReconcileDate</th>"
                     "<th>Action</th><th>Shares</th><th>Price</th><th>Value</th>"
                     "<th>BankID</th></th></tr>"
-                    "<tr><th>&nbsp;</th><th colspan=\"10\" align=\"left\">Memo</th></tr>";
+                    "<tr><th>&nbsp;</th><th colspan=\"10\" align=\"left\">Memo</th></tr>"
+                    "<tr><th>&nbsp;</th><th colspan=\"10\" align=\"left\">Tags</th></tr>";
                 for (const auto& split : t.splits()) {
                     // split: id payee account reconcileflag reconciledate activity shares price value memo
                     const auto splitAccount = MyMoneyFile::instance()->account(split.accountId());
@@ -2703,6 +2704,19 @@ void KMyMoneyApp::slotDisplayTransactionDetails()
                         split.price().formatMoney(safraction > splitAccount.fraction() ? safraction / splitAccount.fraction() : splitAccount.fraction(), true);
                     splits += "</td><td>" + split.value().formatMoney(safraction, true) + "<br/>(" + t.commodity() + " " + QString::number(safraction);
                     splits += ")</td><td>" + split.bankID() + "</td></tr><tr><td>&nbsp;</td><td colspan=\"10\">" + split.memo() + "</td></tr>";
+
+                    // collect tags and add them to the view
+                    const auto tagIdList = split.tagIdList();
+                    QString tagList;
+                    for (const auto& tagId : qAsConst(tagIdList)) {
+                        if (!tagList.isEmpty()) {
+                            tagList += QLatin1String(", ");
+                        }
+                        const auto tag = MyMoneyFile::instance()->tag(tagId);
+                        tagList += tag.name().simplified();
+                    }
+                    splits += "<tr><td>&nbsp;</td><td colspan=\"10\">" + tagList + "</td></tr>";
+
                     if (split.pairs().count() > 0) {
                         splits += "<tr><th>KVP</th><th colspan=\"2\">Key</th><th colspan=\"8\">Value</th></tr>";
                         for (auto it = split.pairs().cbegin(); it != split.pairs().cend(); ++it) {
