@@ -39,6 +39,8 @@
 #include "reportaccount.h"
 #include "mymoneyenums.h"
 
+constexpr QChar tagSeparator = QChar(QChar::ParagraphSeparator);
+
 namespace reports
 {
 
@@ -496,7 +498,6 @@ void QueryTable::constructTransactionTable()
     bool use_transfers;
     bool use_summary;
     bool hide_details;
-    bool tag_special_case = false;
 
     switch (m_config.rowType()) {
     case eMyMoney::Report::RowType::Category:
@@ -517,7 +518,6 @@ void QueryTable::constructTransactionTable()
         use_transfers = report.isIncludingTransfers();
         report.setTreatTransfersAsIncomeExpense(use_transfers);
         hide_details = (m_config.detailLevel() == eMyMoney::Report::DetailLevel::None);
-        tag_special_case = true;
         break;
     default:
         use_summary = true;
@@ -532,13 +532,43 @@ void QueryTable::constructTransactionTable()
     //get all transactions for this report
     QList<MyMoneyTransaction> transactions;
     file->transactionList(transactions, report);
+
     for (QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.constBegin(); it_transaction != transactions.constEnd(); ++it_transaction) {
 
         TableRow qA, qS;
         QList<TableRow> qStack;
-
         QDate pd;
-        QList<QString> tagIdListCache;
+
+        auto addRow = [&](const TableRow& row) {
+            const auto tagIds = row[ctTag].split(tagSeparator, Qt::SkipEmptyParts);
+            auto qT = row;
+            if (m_config.rowType() == eMyMoney::Report::RowType::Tag) {
+                // if group by tags, we add the row for each tag we found
+                if (!tagIds.isEmpty()) {
+                    for (const auto& tagId : qAsConst(tagIds)) {
+                        qT[ctTag] = file->tag(tagId).name().simplified();
+                        m_rows += qT;
+                    }
+                } else {
+                    qT[ctTag] = i18n("[No Tag]");
+                    m_rows += qT;
+                }
+            } else {
+                // otherwise, we combine the tags into one list
+                QString tags;
+                for (const auto& tagId : qAsConst(tagIds)) {
+                    if (!tags.isEmpty()) {
+                        tags.append(QLatin1Char(','));
+                    }
+                    tags.append(file->tag(tagId).name().simplified());
+                }
+                if (tags.isEmpty()) {
+                    tags = i18n("[No Tag]");
+                }
+                qT[ctTag] = tags;
+                m_rows += qT;
+            }
+        };
 
         qA[ctID] = qS[ctID] = (* it_transaction).id();
         qA[ctEntryDate] = qS[ctEntryDate] = (* it_transaction).entryDate().toString(Qt::ISODate);
@@ -689,7 +719,7 @@ void QueryTable::constructTransactionTable()
                 xr = MyMoneyMoney::ONE;
             }
 
-            qA[ctTag].clear();
+            qA[ctTag] = (*it_split).tagIdList().join(tagSeparator);
 
             if (it_split == myBegin && splits.count() > 1) {
                 include_me = m_config.includes(splitAcc);
@@ -770,15 +800,6 @@ void QueryTable::constructTransactionTable()
                               ? i18n("[Empty Payee]")
                               : file->payee(payee).name().simplified();
 
-                if (tag_special_case) {
-                    tagIdListCache = tagIdList;
-                } else {
-                    QString delimiter;
-                    for (const auto& tagId : qAsConst(tagIdList)) {
-                        qA[ctTag] += delimiter + file->tag(tagId).name().simplified();
-                        delimiter = QLatin1Char(',');
-                    }
-                }
                 qA[ctReconcileDate] = (*it_split).reconcileDate().toString(Qt::ISODate);
                 qA[ctReconcileFlag] = KMyMoneyUtils::reconcileStateToString((*it_split).reconcileFlag(), true);
                 qA[ctNumber] = (*it_split).number();
@@ -814,7 +835,7 @@ void QueryTable::constructTransactionTable()
                             qA[ctCategory] = i18n("[Split Transaction]");
                             qA[ctTopCategory] = i18nc("Split transaction", "Split");
                             qA[ctCategoryType] = i18nc("Split transaction", "Split");
-                            m_rows += qA;
+                            addRow(qA);
                             if (!m_containsNonBaseCurrency && qA[ctCurrency] != file->baseCurrency().id()) {
                                 m_containsNonBaseCurrency = true;
                             }
@@ -890,12 +911,6 @@ void QueryTable::constructTransactionTable()
                             //convert to lowest fraction
                             qA[ctSplit] = (-(*it_split).shares() * xr).convert(fraction).toString();
                             qA[ctRank] = QLatin1Char('2');
-                            qA[ctTag] = "";
-                            QString delimiter = "";
-                            for (int i = 0; i < tagIdList.size(); i++) {
-                                qA[ctTag] += delimiter + file->tag(tagIdList[i]).name().simplified();
-                                delimiter = ", ";
-                            }
                         } else {
                             //this applies when the transaction has only 2 splits, or each split is going to be
                             //shown separately, eg. transactions by category
@@ -949,18 +964,7 @@ void QueryTable::constructTransactionTable()
                                         || (!m_config.isInvertingText()
                                             && (transaction_text
                                                 || m_config.match((*it_split))))) {
-                                    if (tag_special_case) {
-                                        if (tagIdListCache.isEmpty()) {
-                                            qA[ctTag] = i18n("[No Tag]");
-                                        } else {
-                                            QString delimiter;
-                                            for (const auto& tagId : qAsConst(tagIdListCache)) {
-                                                qA[ctTag] += delimiter + file->tag(tagId).name().simplified();
-                                                delimiter = QLatin1Char(',');
-                                            }
-                                        }
-                                    }
-                                    m_rows += qA;
+                                    addRow(qA);
                                     if (!m_containsNonBaseCurrency && qA[ctCurrency] != file->baseCurrency().id()) {
                                         m_containsNonBaseCurrency = true;
                                     }
@@ -1000,16 +1004,7 @@ void QueryTable::constructTransactionTable()
                                      ? a_memo
                                      : (*it_split).memo();
 
-                        //FIXME-ALEX When is used this? I can't find in which condition we arrive here... maybe this code is useless?
-                        if (tagIdList.isEmpty()) {
-                            qS[ctTag] = i18n("[No Tag]");
-                        } else {
-                            QString delimiter;
-                            for (const auto& tagId : qAsConst(tagIdList)) {
-                                qS[ctTag] += delimiter + file->tag(tagId).name().simplified();
-                                delimiter = QLatin1Char(',');
-                            }
-                        }
+                        qS[ctTag] = tagIdList.join(tagSeparator);
 
                         qS[ctPayee] = payee.isEmpty()
                                       ? qA[ctPayee]
@@ -1024,7 +1019,7 @@ void QueryTable::constructTransactionTable()
                                 || (!m_config.isInvertingText()
                                     && (transaction_text
                                         || m_config.match((*it_split))))) {
-                            m_rows += qS;
+                            addRow(qS);
                             qStack.clear();
                             if (!m_containsNonBaseCurrency && qS[ctCurrency] != file->baseCurrency().id()) {
                                 m_containsNonBaseCurrency = true;
@@ -1056,7 +1051,7 @@ void QueryTable::constructTransactionTable()
         } while (it_split != myBegin);
 
         if (loan_special_case) {
-            m_rows += qA;
+            addRow(qA);
             if (!m_containsNonBaseCurrency && qA[ctCurrency] != file->baseCurrency().id()) {
                 m_containsNonBaseCurrency = true;
             }
@@ -1069,7 +1064,11 @@ void QueryTable::constructTransactionTable()
                 break;
             }
         }
-        m_rows += qStack;
+
+        // add any pending rows
+        for (const auto& row : qAsConst(qStack)) {
+            addRow(row);
+        }
     }
 
     // now run through our accts list and add opening and closing balances
