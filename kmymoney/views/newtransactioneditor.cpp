@@ -124,6 +124,7 @@ public:
     void loadTransaction(QModelIndex idx);
     MyMoneySplit prepareSplit(const MyMoneySplit& sp);
     bool needClearSplitAction(const QString& action) const;
+    void adjustTagIdList();
 
     NewTransactionEditor* q;
     Ui_NewTransactionEditor* ui;
@@ -145,6 +146,25 @@ public:
     KMyMoneyAccountComboSplitHelper* m_splitHelper;
 };
 
+void NewTransactionEditor::Private::adjustTagIdList()
+{
+    // if we open a transaction in an asset or liability account and if the transaction
+    // has more than 2 splits and the current split has a taglist,
+    // a) if the other splits don't have a taglist assigned, copy it over to them
+    // b) clear the taglist in the current split
+
+    if (m_account.isAssetLiability() && !m_split.tagIdList().isEmpty()) {
+        const auto rows = splitModel.rowCount();
+        for (int row = 0; row < rows; ++row) {
+            const auto idx = splitModel.index(row, 0);
+            if (idx.data(eMyMoney::Model::SplitTagIdRole).toStringList().isEmpty()) {
+                splitModel.setData(idx, QVariant::fromValue<QStringList>(m_split.tagIdList()), eMyMoney::Model::SplitTagIdRole);
+            }
+        }
+        m_split.setTagIdList({});
+    }
+}
+
 void NewTransactionEditor::Private::updateWidgetAccess()
 {
     const auto enable = !m_account.id().isEmpty();
@@ -162,8 +182,16 @@ void NewTransactionEditor::Private::updateWidgetAccess()
 
 void NewTransactionEditor::Private::updateWidgetState()
 {
-    // update the category combo box
     auto index = splitModel.index(0, 0);
+
+    // update the tag combo box
+    if (splitModel.rowCount() == 1) {
+        ui->tagContainer->setEnabled(true);
+        ui->tagContainer->loadTags(index.data(eMyMoney::Model::SplitTagIdRole).toStringList());
+    } else {
+        ui->tagContainer->setEnabled(false);
+        ui->tagContainer->loadTags({});
+    }
 
     // update the costcenter combo box
     if (ui->costCenterCombo->isEnabled()) {
@@ -372,6 +400,7 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
             splitModel.unload();
         }
     }
+    ui->tagContainer->setEnabled(splitModel.rowCount() == 1);
     return rc;
 }
 
@@ -946,7 +975,6 @@ void NewTransactionEditor::Private::loadTransaction(QModelIndex idx)
 
             ui->numberEdit->setText(splitIdx.data(eMyMoney::Model::SplitNumberRole).toString());
             ui->statusCombo->setCurrentIndex(splitIdx.data(eMyMoney::Model::SplitReconcileFlagRole).toInt());
-            ui->tagContainer->loadTags(splitIdx.data(eMyMoney::Model::SplitTagIdRole).toStringList());
         } else {
             splitModel.appendSplit(MyMoneyFile::instance()->journalModel()->itemByIndex(splitIdx).split());
 
@@ -968,6 +996,9 @@ void NewTransactionEditor::Private::loadTransaction(QModelIndex idx)
         }
     }
     m_transaction.setCommodity(m_account.currencyId());
+
+    adjustTagIdList();
+    ui->tagContainer->loadTags(m_split.tagIdList());
 
     // then setup the amount widget and update the state
     // of all other widgets
@@ -1241,7 +1272,6 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
 
                 d->ui->numberEdit->setText(split.number());
                 d->ui->statusCombo->setCurrentIndex(static_cast<int>(split.reconcileFlag()));
-                d->ui->tagContainer->loadTags(split.tagIdList());
             } else {
                 // we block sending out signals for the category combo here to avoid
                 // calling NewTransactionEditorPrivate::categoryChanged which does not
@@ -1266,6 +1296,8 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
             }
         }
         d->m_transaction.setCommodity(d->m_account.currencyId());
+
+        d->adjustTagIdList();
 
         // then setup the amount widget and update the state
         // of all other widgets
@@ -1425,7 +1457,6 @@ MyMoneyTransaction NewTransactionEditor::transaction() const
     const auto payeeRow = d->ui->payeeEdit->currentIndex();
     const auto payeeIdx = d->payeesModel->index(payeeRow, 0);
     sp.setPayeeId(payeeIdx.data(eMyMoney::Model::IdRole).toString());
-    sp.setTagIdList(d->ui->tagContainer->selectedTags());
 
     if (sp.id().isEmpty()) {
         t.addSplit(sp);
