@@ -101,28 +101,30 @@
         This setting does not directly affect the operation of &kmymoney;, but
         provides a convenient way to launch any external utility, such as an advanced
         calculator.  The first step is to enter the full path to your chosen program
-        in the <guilabel>Calculator</guilabel> text box.  There are then two ways to
-        launch the program.
+        in the <guilabel>Calculator</guilabel> text box.
       </para>
 
       <para>
-        First, you can use <menuchoice> <guimenu>Settings</guimenu>
-        <guimenuitem>Configure Toolbars...</guimenuitem> </menuchoice> menu item to
-        place the <guilabel>Calculator</guilabel> icon on the Toolbar.  Then, when
+        There is currently no direct menu item to launch the calculator, or whatever
+        external program you have set.  There are then two ways to launch the program.
+      </para>
+
+      <para>
+        First, you can use <guimenu>Settings</guimenu> <guimenuitem>Configure
+        Toolbars...</guimenuitem> menu item to place the <guiicon>
+        <inlinemediaobject> <imageobject> <imagedata
+        fileref="icon-accessories-calculator.svg" format="SVG"/> </imageobject>
+        </inlinemediaobject> </guiicon> Calculator icon on the Toolbar.  Then, when
         you click that icon on the Toolbar, &kmymoney; will launch the selected
         application.
       </para>
-      <!-- FIXME:  need to find and use the toolbar icon for the calculator. -->
 
       <para>
-        Second, you can use <menuchoice> <guimenu>Settings</guimenu>
-        <guimenuitem>Configure Shortcuts...</guimenuitem> </menuchoice> menu item to
-        set a custom keyboard shortcut. (The entry is under &kmymoney;/Calculator in
-        that list.)  You can then use that shortcut to launch the application.
+        Second, you can use <guimenu>Settings</guimenu> <guimenuitem>Configure
+        Shortcuts...</guimenuitem> menu item to set a custom keyboard shortcut. (The
+        entry is under &kmymoney;/Calculator in that list.)  You can then use that
+        shortcut to launch the application.
       </para>
-      <!-- FIXME it is not currently possible to launch the calculator from some menu
-           item.  I have filed a wishlist, and when implemented, it should be
-           described here, probably as the first choice. -->
     </listitem>
   </varlistentry>
 </variablelist>
@@ -158,14 +160,13 @@
   <term><guilabel>Type of the &kmymoney; view</guilabel></term>
     <listitem>
       <para>
-        You can select one of three general layouts for &kmymoney; to use.  If you
-        select <guilabel>List</guilabel> or <guilabel>Tree</guilabel> view, the icons
-        and their labels will be located at the left side of the window.  The List
-        view displays larger icons while the Tree view has smaller icons.  The
-        <guilabel>Tabbed</guilabel> view locates the icons and labels across the top
-        of the window.
-        <!-- FIXME: needs better wording to show that this controls the layout of the
-             Vew Selector area where you select which View to display.  -->
+        This lets you select one of three layouts for the View Selector, where you
+        choose Selecting <guilabel>List</guilabel> or <guilabel>Tree</guilabel> view,
+        the icons and their labels will be located at the left side of the window.
+        The List view displays larger icons above the name of each view, while the
+        Tree view has smaller icons to the left of the names.  The
+        <guilabel>Tabbed</guilabel> view locates the icons and labels in tabs across
+        the top of the window.
       </para>
     </listitem>
   </varlistentry>
@@ -329,8 +330,9 @@
 </sect1>
 
 <sect1 id="details.settings.home"><title>Home</title>
-<!-- FIXME: sect2 should only be used for tabs.  I'm too lazy to convert this to a
-     variablelist now, which would require subsuming the lower one to paras.  -->
+<!-- FIXME: For consistency, <sect2> should only be used for tabs.  I'm too lazy to
+     convert this to a variablelist now, which would require subsuming the lower
+     levels to paras.  -->
 
 <sect2><title>Home page display sections</title>
 <screenshot>
@@ -350,38 +352,38 @@
   linkend="firsttime.mainwindow">Home View</link> (also called the Home Page or Main
   Window) by choosing which information to display there and the order in which it
   appears.  Selected sections can be reordered by clicking the respective
-  <guibutton>Up</guibutton> or <guibutton>Down</guibutton> button.  Some sections may
+  <guibutton>Up</guibutton> or <guibutton>Down</guibutton> button.  A section may
   not appear, even if the appropriate entry is checked, if it would be empty.
 </para>
 
-<!-- FIXME: Many of these sections need a <link> to the doc section actually
-     describing the content. -->
 <variablelist>
   <varlistentry>
     <term><guilabel>Assets and Liabilities</guilabel></term>
     <listitem>
       <para>
-        This will display two lists of accounts which are open, assets on the left
-        and liabilities on the right.  This and the other account lists on the Home
-        Page are sorted in alphabetical order, unless otherwise noted.
+        This will display a listo of asset accountss on the left and liability
+        accounts on the right.  These and the other account lists on the Home Page
+        are sorted in alphabetical order, unless otherwise noted.  Normally, only
+        open accounts will be listed, unless <link
+        linkend="reference.menus.view">Show all accounts</link> has been selected.
       </para>
 
       <para>
-        For this and the other account lists which can be shown on the Home View, the
-        display will include the account name, date last reconcilied, and current
-        balance.  In addition, there may be other columns specific to that type of
-        report, and in some cases, as configured <link
-        linkend="details.settings.home.acctinfo">elsewhere</link>.
+        For this and the other account lists on the Home View, the display will
+        include the account name, date last reconcilied, and current balance.  In
+        addition, there may be other columns displayed, as configured in the
+        <guilabel>Account information display</guilabel> Lower on this window.
       </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term><guilabel>scheduled payments</guilabel></term>
+    <term><guilabel>Scheduled payments</guilabel></term>
     <listitem>
       <para>
-        This will display upcoming occurrences of Scheduled transactions,
-        distinguishing Overdue payments from Future payments.  It shows the date,
+        This will display upcoming occurrences of <link
+        linkend="details.schedules">Scheduled transactions</link>, distinguishing
+        those which are overdue, due today, or due in the future.  It shows the date,
         schedule name, account, and amount of the payment, and the account balance
         after the payment.  By default, it will show up to six transaction.  If six
         are displayed, there is a link you can select to show more, up to 30 days in
@@ -394,9 +396,9 @@
     <term><guilabel>Preferred accounts</guilabel></term>
     <listitem>
       <para>
-        This will display the accounts that are identified as Preferred accounts
-        in the <menuchoice> <guimenu>Account</guimenu> <guimenuitem>Edit account...
-        </guimenuitem> </menuchoice> Configuration dialog.
+        This will display the accounts that are identified as Preferred accounts in
+        the <guimenu>Account</guimenu> <guimenuitem>Edit account...</guimenuitem>
+        Configuration dialog.
       </para>
     </listitem>
   </varlistentry>
@@ -417,7 +419,7 @@
       <para>
         This will display a list of all reports that have been identified as a
         favorite in the <link linkend="details.reports.config">Configuration
-        dialog</link> of the Report.  The list ordered chronologically by when each
+        dialog</link> of the Report.  The list is in the order of the date when each
         report became a favorite.
       </para>
     </listitem>
@@ -429,29 +431,30 @@
       <para>
         This will display a forecast for asset and liability accounts, similar to the
         <link linkend="details.forecast.summary">Summary Tab</link> of the Forecast
-        View.  
-        Details of the display can be controlled with the <link
+        View.  Details of the display can be controlled with the <link
         linkend="details.forecast.configure">Forecast Configuration</link> dialog.
       </para>
-      <!-- FIXME What are the real criteria for inclusion in this (and these other) list(s).
-           JHO: is this question still open?  -->
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Net worth forecast</guilabel></term>
     <listitem>
-      <para>This will display chart of your forecast net worth for the next 90
-      days.</para>
+      <para>
+        This will display a chart of your forecast net worth for the next 90 days.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Budget</guilabel></term>
     <listitem>
-      <para>This will display a current month summary and overruns for any defined
-      budget(s). If no budget is defined, it will display no budget or overruns, with
-      the actual current month spending.</para>
+      <para>
+        This will display a current month summary and overruns for any <link
+        linkend="details.budgets">defined budget(s)</link>. If no budget is defined,
+        it will display no budget or overruns, with the actual current month
+        spending.
+      </para>
     </listitem>
   </varlistentry>
 
@@ -469,8 +472,10 @@
   <varlistentry>
     <term><guilabel>Zoom factor:</guilabel></term>
     <listitem>
-      <para>This option allows for the selection of the font size as a percentage to
-      fit the Home View based on the user preference.</para>
+      <para>
+        This option allows for the selection of the font size as a percentage to fit
+        the Home View based on the user preference.
+      </para>
     </listitem>
   </varlistentry>
 
@@ -478,8 +483,10 @@
     <term><guilabel>Remember zoom factor when leaving the program if manually changed
     with mouse-wheel</guilabel></term>
     <listitem>
-      <para>Selecting this will save your font size preference if you have changed it
-      on the Home page by using the mouse-wheel.</para>
+      <para>
+        Selecting this will save your font size preference if you have changed it on
+        the Home page by using the mouse-wheel.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
@@ -488,45 +495,59 @@
 <sect2 id="details.settings.home.acctinfo"><title>Account information display</title>
 <para>
   These options allow you to customize what information is included in any list of
-  accounts.
+  accounts on the Home View.
 </para>
 
 <variablelist>
   <varlistentry>
     <term><guilabel>Show account limit information</guilabel></term>
     <listitem>
-      <para>Displays the account limit as set in the Account Edit dialog.  It affects
-      any list which includes Payment accounts.</para>
+      <para>
+        Displays the account limit as set in the <link
+        linkend="details.accounts.edit">Account Edit</link> dialog.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Show balance-status of mapped online accounts</guilabel></term>
     <listitem>
-      <para>Shows the balance-status of mapped accounts, symbolized by an icon in the
-      columns preceding the account name.  A green checkmark indicates the online
-      balance and local balance are the same.  A mailbox with a green arrow indicates
-      that the local file has transactions newer than the most recent online update.
-      This alerts the user to start an online-update.  A red warning sign indicates a
-      mismatch between the local file and online-balance.</para>
-      <!-- Note: the colors might be different depending on the selected theme
-           -->
+      <para>
+        Shows the balance status of mapped accounts, and accounts which have had
+        transactions imported.  The status is symbolized by an icon in the column
+        preceding the account name.  Note that the colors described here may be
+        different than displayed for you, depending on the display theme selected.  A
+        <guiicon> <inlinemediaobject> <imageobject> <imagedata
+        fileref="icon-dialog-ok.svg" format="SVG"/> </imageobject>
+        </inlinemediaobject> </guiicon> green checkmark indicates the online balance
+        and local balance are the same.  A <guiicon> <inlinemediaobject>
+        <imageobject> <imagedata fileref="icon-dialog-cancel.svg" format="SVG"/>
+        </imageobject> </inlinemediaobject> </guiicon> red warning sign indicates a
+        mismatch between the local file and online-balance.  A <guiicon>
+        <inlinemediaobject> <imageobject> <imagedata fileref="icon-mail-receive.svg"
+        format="SVG"/> </imageobject> </inlinemediaobject> </guiicon> mailbox with a
+        green arrow indicates that the local file has transactions newer than the
+        most recent online update.  This alerts the user to perform an online-update.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Show number of not marked transactions per account [!M]</guilabel></term>
     <listitem>
-      <para>Inserts an additional column next to the account name, showing the number
-      of not marked transactions in the account.</para>
+      <para>
+        Inserts a column after the account name, showing the number of not marked
+        transactions in the account.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Show number of cleared transactions per account [C]</guilabel></term>
     <listitem>
-      <para>Inserts an additional column showing the number of cleared transactions
-      for the account.</para>
+      <para>
+        Inserts a column showing the number of cleared transactions for the account.
+      </para>
     </listitem>
   </varlistentry>
 
@@ -534,17 +555,20 @@
     <term><guilabel>Show number of not reconciled (not marked + cleared) transactions
     per account [!R]</guilabel></term>
     <listitem>
-      <para>Inserts an additional column showing the number of not reconciled
-      transactions for the account, &ie;, the sum of all not marked and cleared
-      transactions.</para>
+      <para>
+        Inserts a column showing the number of not reconciled transactions for the
+        account, &ie;, the sum of all not marked and cleared transactions.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Show date of last reconciliation</guilabel></term>
     <listitem>
-      <para>Inserts an additional column showing the last reconciliation date for the
-      account.</para>
+      <para>
+        Inserts an additional column showing the last reconciliation date for the
+        account.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
@@ -622,9 +646,6 @@
       <formalpara><title>Show all split details in ledger</title>
       <para>
         Selecting this option shows more details about split transactions.
-        <!-- FIXMNE: might this be related to now showing all categories in a split
-             transaction instead of just "split transaction" (or whatever it used to
-             show?)-->
       </para>
       </formalpara>
     </listitem>
@@ -667,19 +688,6 @@
       </formalpara>
     </listitem>
   </varlistentry>
-
-  <!--  Is this still somewhere else???
-    <varlistentry>
-      <term><guilabel>Always show a No. field</guilabel></term>
-      <listitem>
-      <para>
-        Always display the number (<quote>No.</quote>) field when entering or
-        editing a transaction.  With this enabled you'll be able to check numbers
-        entered in this field for checking accounts.
-      </para>
-      </listitem>
-    </varlistentry>
-    -->
 </variablelist>
 </sect2>
 
@@ -939,12 +947,13 @@
 </variablelist>
 </sect2>
 
-<sect2><title></title>
+<sect2><title>&nbsp; &nbsp;</title>
 <!-- FIXME: This is a good example of problems with the current mix of sect and
-     variablelist, as this sect with no title gives no spacing between the previous
-     and this list entry, so it looks like they belong together.  I consider using
-     literallayout a bad solution.  I'm open to suggestions on how to deal with this.
-     Not using sect2 for boxes might help. -->
+     variablelist, as this sect with no title gives inadequate spacing between the
+     previous and this list entry, even with &nbsp;, so it looks like they belong
+     together.  I consider using literallayout a bad solution.  I'm open to
+     suggestions on how to deal with this.  Not using sect2 for boxes might help,
+     but would be a lot of effort. -->
 <literallayout>
 </literallayout>
 <variablelist>
@@ -1216,7 +1225,7 @@
 </sect2>
 
 <sect2><title>iCalendar</title>
-<!-- FIXME:  isn't this mentioned anywhere else? -->
+<!-- FIXME:  This isn't mentioned anywhere else.  SHould it be? -->
 <para>
   &kmymoney; is capable of exporting a file inb then <quote>iCalendar</quote> format,
   so you can import your scheduled transactions into &korganizer;, or another

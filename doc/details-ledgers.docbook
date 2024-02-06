@@ -692,7 +692,7 @@
   <screeninfo>Match transaction dialog</screeninfo>
   <mediaobject>
     <imageobject>
-      <imagedata fileref="match_transaction.png" format="PNG" /><!-- FIXME: need pic -->
+      <imagedata fileref="match_transaction.png" format="PNG" />
     </imageobject>
     <textobject>
       <phrase>Match transaction dialog</phrase>
@@ -701,7 +701,6 @@
 </screenshot>
 
 <para>
-  <!-- FIXME: get above screenshot -->
   Since the value is the only field in the two transaction which must absolutely be
   the same, the value of other fields may differ.  When you select
   <guilabel>Match</guilabel>, you will see a <guilabel>Match Transactions</guilabel>

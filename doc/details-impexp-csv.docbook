@@ -260,19 +260,6 @@
   not, you will be prompted for that information.
 </para>
 
-<!-- FIXME: where does this actually belong? -->
-<formalpara><title>Date format</title>
-<para>
-  This needs to be set according to the order of year, month, and day in the dates in
-  the file.  If the plugin finds data incompatible with this setting, it will
-  complain when you try to import.  However, if the setting is wrong, but it produce
-  invalid results not detected (such as data with no days higher than 12, so month
-  and day could be switched) you will simply get incorrect data, because the plugin
-  cannot know you made a mistake.  In this case, the error will be obvious in the
-  ledger after import.
-</para>
-</formalpara>
-
 <para>
   When you are ready, click on <guilabel>Next</guilabel> to advance the wizard to the
   next step.
@@ -380,6 +367,54 @@
 </para>
 </sect4>
 
+<sect4><title>CSV Import Wizard: Format</title>
+<para>
+  The next page of the wizart still shows the data to be imported on the top, but the
+  lower section provides three dropdowns.  The initial values are set by &kmymoney;
+  based on examining the actual data.
+</para>
+
+<screenshot>
+  <screeninfo>csv import wizard: investment</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_4.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>csv import wizard: investment</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para>
+  The <guilabel>Decimal Symbol</guilabel> defaults to <quote>auto,</quote> which
+  usually produces the correct results.  If not, you can explicitly specify the
+  <quote>dot</quote> or <quote>comma.</quote>
+</para>
+
+<para>
+  The <guilabel>Thousands Symbol</guilabel> is set automatically, and the field may
+  be disabled if it will not affect the results.
+</para>
+
+<para>
+  This needs to be set according to the order of year, month, and day in the dates in
+  the file.  If the plugin finds data incompatible with this setting, it will
+  complain when you try to import.  However, if the setting is wrong, but it produce
+  invalid results not detected (such as data with no days higher than 12, so month
+  and day could be switched) you will simply get incorrect data, because the plugin
+  cannot know you made a mistake.  In this case, the error will be obvious in the
+  ledger after import.
+</para>
+
+<para>
+  The <guilabel>Date format</guilabel> specifies the order of day, month, and year,
+  and is also set automatically.  However, in some cases, such as data with no day
+  higher than 12, you will notice the problem after the import.  In such cases, you
+  will need to repeat the import, and choose the actual order of the date components.
+</para>
+</sect4>
+
 <sect4><title>CSV Import Wizard: Investment</title>
 <para>
   This page is similar to the <guilabel>Banking</guilabel> page, although it
@@ -436,10 +471,10 @@
   box.  Note that on this page, this is the only field to explicitly include
   "column" in the label, to emphasize that it is for the fee column, not for any
   actual fee.
+  <!-- FIXME: what are the Fee rate and Minimal Fee fields for?  What do the Clear
+       Fee and Calculate Fee buttons do, and when is the latter enabled? -->
 </para>
 </listitem>
-
-<!-- FIXME:  what does the Calucaltae Fee button do, and when is it activated? -->
 
 <listitem>
 <para>

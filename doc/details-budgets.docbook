@@ -61,14 +61,12 @@
 </para>
 
 <para>
-  There are two major sections to the Budgets View.  These are described in more
-  detail below.  On the left, the main section displays the list of budgets you have
-  created.  Above that are buttons for creating, renaming, and deleting budgets.  On
-  the right, there are three sections.  At the top is the Accounts List.  <!-- FIXME:
-  should this really be Categoreis List? --> At the bottom is a display of the
-  amounts assigned to the budget for the category selected in the Accounts List
-  above.  Between those two areas are some additional controls for managing the
-  budget.
+  Thee are two major sections in the Budgets View.  On the left, there is a list of
+  budgets you have created.  Above that are buttons for creating, renaming, and
+  deleting budgets.  On the right, there are three sections.  At the top is the
+  Categories List.  At the bottom is a display of the amounts assigned to the budget
+  selected on the left for the category selected in the Categories List above.
+  Between those two areas are some additional controls for managing the budget.
 </para>
 
 <sect2><title>Viewing, creating, renaming, and deleting budgets</title>
@@ -125,11 +123,9 @@
   <varlistentry>
     <term>Rename</term>
     <listitem>
-      <para>Edit the name of the selected Budget.</para>
-
       <para>
-        You can also edit the name of a Budget by double-clicking on the name of a
-        Budget in the list.
+        Edit the name of the selected Budget.  You can also edit the name of a Budget
+        by double-clicking on the name of a Budget in the list.
       </para>
     </listitem>
   </varlistentry>
@@ -192,13 +188,13 @@
 </variablelist>
 </sect2>
 
-<sect2><title>Account List</title>
+<sect2><title>Categories List</title>
 <para>
-  The Accounts List displays the list of Income and Expense Categories.  (Remember,
+  The Categories List displays the list of Income and Expense Accounts.  (Remember,
   within &kmymoney;, categories are treated as a special type of account.)  As in
   other places in &kmymoney;, the list is organized in a tree structure. The list can
   be expanded or collapsed to show or hide Subcategories within a Category. The
-  Accounts List has a number of columns:
+  Categories List has a number of columns:
 </para>
 
 <para>
@@ -250,22 +246,28 @@
   </varlistentry>
 </variablelist>
 
-<!-- FIXME: It would be nice to include the actual button icons here to confirm
-     which buttons are referred to.  -->
 <para>
-  Below the Accounts List are several controls. The <guibutton>Update</guibutton> and
-  <guibutton>Revert</guibutton> buttons are described further below.  The
-  <guibutton>collapse</guibutton> and <guibutton>expand</guibutton> buttons collapse
-  or expand the entire Accounts List.
+  Below the Categories List are several controls. The <guiicon> <inlinemediaobject>
+  <imageobject> <imagedata fileref="icon-gtk-floppy.svg" format="SVG"/>
+  </imageobject> </inlinemediaobject> </guiicon> <guibutton>Upd</guibutton> (Update)
+  and <guiicon> <inlinemediaobject> <imageobject> <imagedata
+  fileref="icon-edit-undo.svg" format="SVG"/> </imageobject> </inlinemediaobject>
+  </guiicon> <guibutton>Res</guibutton> (Reset) buttons are described further below.
+  The <guiicon> <inlinemediaobject> <imageobject> <imagedata
+  fileref="icon-zoom-out.svg" format="SVG"/> </imageobject>
+  </inlinemediaobject></guiicon> collapse and <guiicon> <inlinemediaobject>
+  <imageobject> <imagedata fileref="icon-zoom-in.svg" format="SVG"/> </imageobject>
+  </inlinemediaobject></guiicon> expand buttons collapse or expand the entire
+  Categories List.
 </para>
 
 <para>
-  The Accounts List can be filtered in two ways.  Checking the <guilabel>Hide unused
-  budget categories</guilabel> checkbox hides any Categories for which no value has
-  been assigned to the Category or any of its Subcategories in the selected budget.
-  To the right of this, is an unlabelled text box.  Only categories which include
-  whatever is typed in this box are listed, but their parent categories are also
-  listed.
+  The Categories List can be filtered in two ways.  Checking the <guilabel>Hide
+  unused budget categories</guilabel> checkbox hides any Categories for which no
+  value has been assigned to the Category or any of its Subcategories in the selected
+  budget.  To the right of this, is an unlabelled text box.  Only categories which
+  include whatever is typed in this box are listed, but their parent categories are
+  also listed.
 </para>
 
 <para>
@@ -278,7 +280,7 @@
 
 <sect2><title>Assignments</title>
 <para>
-  The Assignments area shows the values for the Category selected in the Accounts
+  The Assignments area shows the values for the Category selected in the Categories
   List.
 </para>
 
@@ -315,7 +317,7 @@
       </para>
 
       <para>
-        If the Category selected in the Accounts List has its Subcategories
+        If the Category selected in the Categories List has its Subcategories
         collapsed, although its Total Value will show the sum of the Total Values for
         all its Subcategories, the amounts in the Assignments area may still show 0,
         unless this box has been checked or an amount has explicitly been assigned to
@@ -388,14 +390,6 @@
 </sect2>
 
 <sect2><title>Update and Revert</title>
-<!-- FIXME: confirm there reslly is a Save button.  I don't see one, but it might not
-     appear until you actually have a budget and hit Update. -->
-<para>
-  For performance reasons, changes made to a Budget are not saved immediately.
-  Instead, they must first be stored using the <guibutton>Update</guibutton> button
-  and then permanently saved using the <guibutton>Save</guibutton> button.
-</para>
-
 <para>
   When a Budget's values are first modified, the <guibutton>Update</guibutton> and
   <guibutton>Revert</guibutton> buttons are enabled.  Multiple changes can be made to
@@ -414,11 +408,6 @@
 <para>
   Revert undoes any changes made to a Budget since the last Update and disables the
   <guibutton>Update</guibutton> and <guibutton>Revert</guibutton> buttons.
-</para>
-
-<para>
-  Changes stored using <guibutton>Update</guibutton> but not yet saved using
-  <guibutton>Save</guibutton> can only be reverted by reloading the &kmymoney; file.
 </para>
 </sect2>
 </sect1>

@@ -17,31 +17,34 @@
   otherwise do not offer support for any other financial protocol that &kmymoney;
   handles.
 </para>
-
-<note>
-  <para>
-    &kmymoney; currently requires that you install Woob independently. Refer to the
-    further sections for details.
-  </para>
-</note>
 </sect2>
   
 <sect2><title>Installing Woob</title>
+<note>
+  <para>
+    &kmymoney; currently requires that you install Woob independently.  See below for
+    details.
+  </para>
+</note>
+
 <para>
-  You need to install Python 3 first before continuing.  All major &Linux;
-  distribuitons package Python, and you should use that version, if possible.
-  Otherwise, you can download a package for your system from the <ulink
-  url="https://www.python.org/downloads/">official Python website</ulink>.
+  Some &Linux; distributions package Woob, and that is the preferred method of
+  installation, if it is available.  If not, you need to install a recent version of
+  Python 3 first before continuing.  All major &Linux; distribuitons package Python,
+  and you should use that version, if possible.  Otherwise, you can download a
+  package for your system from the <ulink
+  url="https://www.python.org/downloads/">official Python website</ulink>.  The exact
+  minimum version of Python required by Woob can be found on the <ulink
+  url="https://woob.tech/install/">Woob website</ulink>.
 </para>
 
 <para>
-  With Python 3 installed, you should now be able to easily download and install
-  required Woob modules.  Please refer to the instructions on the <ulink
-  url="https://woob.tech/install/">Woob website</ulink>.  When it runs, &kmymoney;
-  checks for the presence of Woob, and loads the plugin if it is found.  See the
-  section on <link linkend="details.settings.plugins">Plugins</link> in the chapter
-  on <link linkend="details.settings">Settings</link> for more information on
-  confirming that the woob plugin is loaded.
+  With Python 3 installed, you should now be able to easily download and install the
+  required Woob modules.  Please refer to the instructions on the Woob website.  When
+  &kmymoney; runs, it checks for the presence of Woob, and loads the plugin if Woob
+  is found.  See the <link linkend="details.settings.plugins">Plugins</link> section
+  in the <link linkend="details.settings">Settings</link> chapter for more
+  information on confirming that the woob plugin is loaded.
 </para>
 </sect2>
 

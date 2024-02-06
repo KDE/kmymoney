@@ -320,6 +320,8 @@ multiple places.
 
 - Should there be a note about the relation between aqbanking, kbanking, and hbci?
 
+- Budget View has buttons labelled Upd and Res.  Should these be expanded to Update and Reset?
+
 This is a list of potential enhancements I came up with while reviewing the handbook,
 but have not yet posted either as wishlist bugs, entries to any Issue on invent, or
 elsewhere.
