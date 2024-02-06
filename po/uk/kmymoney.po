@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-05 01:54+0000\n"
-"PO-Revision-Date: 2024-01-31 14:44+0200\n"
+"PO-Revision-Date: 2024-02-05 08:51+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -20998,42 +20998,32 @@ msgid "Cannot edit multiple schedules at once."
 msgstr "Не можна одночасно редагувати декілька розкладів."
 
 #: kmymoney/views/multitransactioneditor.cpp:731
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selection of category or account is not possible when split transactions "
-#| "are part of the selection."
+#, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of category or account is not possible when split transactions are "
 "part of the selection."
 msgstr ""
-"Вибір категорії або рахунка неможливий, якщо частиною позначення є розділені "
-"операції."
+"Вибір категорії або рахунка є неможливим, якщо частиною позначення є "
+"розділені операції."
 
 #: kmymoney/views/multitransactioneditor.cpp:735
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selection of category or account is not possible when split transactions "
-#| "are part of the selection."
+#, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of tags is not possible when split transactions are part of the "
 "selection."
 msgstr ""
-"Вибір категорії або рахунка неможливий, якщо частиною позначення є розділені "
-"операції."
+"Вибір міток є неможливим, якщо частиною позначення є розділені операції."
 
 #: kmymoney/views/multitransactioneditor.cpp:739
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selection of category or account is not possible when split transactions "
-#| "are part of the selection."
+#, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of cost center is not possible when split transactions are part of "
 "the selection."
 msgstr ""
-"Вибір категорії або рахунка неможливий, якщо частиною позначення є розділені "
+"Вибір облікового відділу є неможливим, якщо частиною позначення є розділені "
 "операції."
 
 #: kmymoney/views/newspliteditor.cpp:152

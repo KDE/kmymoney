@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-05 01:54+0000\n"
-"PO-Revision-Date: 2024-01-21 14:14\n"
+"PO-Revision-Date: 2024-02-05 11:40\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -4396,11 +4396,10 @@ msgid "Dialog"
 msgstr "对话框"
 
 #: kmymoney/dialogs/tagcreator.cpp:64
-#, fuzzy, kde-format
-#| msgid "Create"
+#, kde-format
 msgctxt "Undo action description"
 msgid "Create tag"
-msgstr "新建"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
 #: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
@@ -8040,11 +8039,10 @@ msgid "Memo"
 msgstr "备忘"
 
 #: kmymoney/mymoney/splitmodel.cpp:39
-#, fuzzy, kde-format
-#| msgid "Tags"
+#, kde-format
 msgctxt "Split header"
 msgid "Tags"
-msgstr "标签"
+msgstr ""
 
 #: kmymoney/mymoney/splitmodel.cpp:40
 #, kde-format
@@ -24392,9 +24390,3 @@ msgstr ""
 "<p>使用下面的各项来输入关于您本人的信息。</p>\n"
 "\n"
 "<p>所有的信息都可以不填，它们仅用来个性化您自己的KMyMoney文件。</p>"
-
-#, fuzzy
-#~| msgid "Tag"
-#~ msgctxt "Split header"
-#~ msgid "Tag"
-#~ msgstr "标签"

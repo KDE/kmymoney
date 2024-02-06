@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-05 01:54+0000\n"
-"PO-Revision-Date: 2024-02-04 12:45+0100\n"
+"PO-Revision-Date: 2024-02-05 08:46+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -20846,10 +20846,7 @@ msgid "Cannot edit multiple schedules at once."
 msgstr "Non se poden editar varias planificacións á vez."
 
 #: kmymoney/views/multitransactioneditor.cpp:731
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selection of category or account is not possible when split transactions "
-#| "are part of the selection."
+#, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of category or account is not possible when split transactions are "
@@ -20859,30 +20856,24 @@ msgstr ""
 "asentos partidos."
 
 #: kmymoney/views/multitransactioneditor.cpp:735
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selection of category or account is not possible when split transactions "
-#| "are part of the selection."
+#, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of tags is not possible when split transactions are part of the "
 "selection."
 msgstr ""
-"Non se pode seleccionar unha categoría ou conta cando a selección inclúe "
-"asentos partidos."
+"Non se pode seleccionar un etiqueta cando a selección inclúe asentos "
+"partidos."
 
 #: kmymoney/views/multitransactioneditor.cpp:739
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selection of category or account is not possible when split transactions "
-#| "are part of the selection."
+#, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of cost center is not possible when split transactions are part of "
 "the selection."
 msgstr ""
-"Non se pode seleccionar unha categoría ou conta cando a selección inclúe "
-"asentos partidos."
+"Non se pode seleccionar un centro de custos cando a selección inclúe asentos "
+"partidos."
 
 #: kmymoney/views/newspliteditor.cpp:152
 #, kde-format

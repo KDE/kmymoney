@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-05 01:54+0000\n"
-"PO-Revision-Date: 2024-01-31 18:23+0100\n"
+"PO-Revision-Date: 2024-02-05 21:57+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -20908,10 +20908,7 @@ msgid "Cannot edit multiple schedules at once."
 msgstr "No se pueden editar múltiples planificaciones al mismo tiempo."
 
 #: kmymoney/views/multitransactioneditor.cpp:731
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selection of category or account is not possible when split transactions "
-#| "are part of the selection."
+#, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of category or account is not possible when split transactions are "
@@ -20921,30 +20918,24 @@ msgstr ""
 "transacciones con partidas son parte de la selección."
 
 #: kmymoney/views/multitransactioneditor.cpp:735
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selection of category or account is not possible when split transactions "
-#| "are part of the selection."
+#, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of tags is not possible when split transactions are part of the "
 "selection."
 msgstr ""
-"La selección de una categoría o cuenta no es posible cuando las "
-"transacciones con partidas son parte de la selección."
+"La selección de etiquetas no es posible cuando las transacciones con "
+"partidas son parte de la selección."
 
 #: kmymoney/views/multitransactioneditor.cpp:739
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selection of category or account is not possible when split transactions "
-#| "are part of the selection."
+#, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of cost center is not possible when split transactions are part of "
 "the selection."
 msgstr ""
-"La selección de una categoría o cuenta no es posible cuando las "
-"transacciones con partidas son parte de la selección."
+"La selección de un centro de costos no es posible cuando las transacciones "
+"con partidas son parte de la selección."
 
 #: kmymoney/views/newspliteditor.cpp:152
 #, kde-format

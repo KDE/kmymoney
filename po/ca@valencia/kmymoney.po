@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-05 01:54+0000\n"
-"PO-Revision-Date: 2024-01-31 09:34+0100\n"
+"PO-Revision-Date: 2024-02-05 09:37+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -20961,43 +20961,34 @@ msgid "Cannot edit multiple schedules at once."
 msgstr "No es poden editar múltiples planificacions a la vegada."
 
 #: kmymoney/views/multitransactioneditor.cpp:731
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selection of category or account is not possible when split transactions "
-#| "are part of the selection."
+#, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of category or account is not possible when split transactions are "
 "part of the selection."
 msgstr ""
 "No és possible la selecció de la categoria o del compte quan les operacions "
-"desglossades són part de la selecció."
+"desglossades formen part de la selecció."
 
 #: kmymoney/views/multitransactioneditor.cpp:735
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selection of category or account is not possible when split transactions "
-#| "are part of the selection."
+#, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of tags is not possible when split transactions are part of the "
 "selection."
 msgstr ""
-"No és possible la selecció de la categoria o del compte quan les operacions "
-"desglossades són part de la selecció."
+"No és possible la selecció d'etiquetes quan les operacions desglossades "
+"formen part de la selecció."
 
 #: kmymoney/views/multitransactioneditor.cpp:739
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selection of category or account is not possible when split transactions "
-#| "are part of the selection."
+#, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of cost center is not possible when split transactions are part of "
 "the selection."
 msgstr ""
-"No és possible la selecció de la categoria o del compte quan les operacions "
-"desglossades són part de la selecció."
+"No és possible la selecció del centre de despesa quan les operacions "
+"desglossades formen part de la selecció."
 
 #: kmymoney/views/newspliteditor.cpp:152
 #, kde-format

@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-05 01:54+0000\n"
-"PO-Revision-Date: 2024-02-01 10:34+0100\n"
+"PO-Revision-Date: 2024-02-05 10:49+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -20903,10 +20903,7 @@ msgid "Cannot edit multiple schedules at once."
 msgstr "Kan niet meerdere planningen tegelijk bewerken."
 
 #: kmymoney/views/multitransactioneditor.cpp:731
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selection of category or account is not possible when split transactions "
-#| "are part of the selection."
+#, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of category or account is not possible when split transactions are "
@@ -20916,30 +20913,24 @@ msgstr ""
 "transacties onderdeel zijn van de selectie."
 
 #: kmymoney/views/multitransactioneditor.cpp:735
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selection of category or account is not possible when split transactions "
-#| "are part of the selection."
+#, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of tags is not possible when split transactions are part of the "
 "selection."
 msgstr ""
-"Selectie van categorie of rekening is niet mogelijk wanneer gesplitste "
-"transacties onderdeel zijn van de selectie."
+"Selectie van tags is niet mogelijk wanneer gesplitste transacties onderdeel "
+"zijn van de selectie."
 
 #: kmymoney/views/multitransactioneditor.cpp:739
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selection of category or account is not possible when split transactions "
-#| "are part of the selection."
+#, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of cost center is not possible when split transactions are part of "
 "the selection."
 msgstr ""
-"Selectie van categorie of rekening is niet mogelijk wanneer gesplitste "
-"transacties onderdeel zijn van de selectie."
+"Selectie van kostencentrum is niet mogelijk wanneer gesplitste transacties "
+"onderdeel zijn van de selectie."
 
 #: kmymoney/views/newspliteditor.cpp:152
 #, kde-format
