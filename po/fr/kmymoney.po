@@ -20,9 +20,9 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-05 01:54+0000\n"
-"PO-Revision-Date: 2024-01-31 21:16+0100\n"
+"PO-Revision-Date: 2024-02-06 13:50+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
-"Language-Team: French <kde-francophone@kde.org>\n"
+"Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21069,10 +21069,7 @@ msgid "Cannot edit multiple schedules at once."
 msgstr "Impossible de modifier plusieurs opérations récurrentes simultanément."
 
 #: kmymoney/views/multitransactioneditor.cpp:731
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selection of category or account is not possible when split transactions "
-#| "are part of the selection."
+#, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of category or account is not possible when split transactions are "
@@ -21082,30 +21079,24 @@ msgstr ""
 "opération répartie fait partie de la sélection."
 
 #: kmymoney/views/multitransactioneditor.cpp:735
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selection of category or account is not possible when split transactions "
-#| "are part of the selection."
+#, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of tags is not possible when split transactions are part of the "
 "selection."
 msgstr ""
-"La sélection d'une catégorie ou d'un compte est impossible lorsqu'une "
-"opération répartie fait partie de la sélection."
+"La sélection d'étiquettes est impossible lorsqu'une opération répartie fait "
+"partie de la sélection."
 
 #: kmymoney/views/multitransactioneditor.cpp:739
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selection of category or account is not possible when split transactions "
-#| "are part of the selection."
+#, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of cost center is not possible when split transactions are part of "
 "the selection."
 msgstr ""
-"La sélection d'une catégorie ou d'un compte est impossible lorsqu'une "
-"opération répartie fait partie de la sélection."
+"La sélection d'un centre de coût est impossible lorsqu'une opération "
+"répartie fait partie de la sélection."
 
 #: kmymoney/views/newspliteditor.cpp:152
 #, kde-format
