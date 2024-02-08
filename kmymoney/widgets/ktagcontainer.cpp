@@ -174,6 +174,8 @@ void KTagContainer::loadTags(const QList<QString>& idList)
     Q_D(KTagContainer);
     // reset filter
     d->m_idFilter->setFilterList(QStringList());
+    qDeleteAll(d->m_tagLabelList);
+    d->m_tagLabelList.clear();
     for (const auto& id : idList) {
         addTagWidget(id);
     }
