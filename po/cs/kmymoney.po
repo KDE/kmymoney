@@ -2262,11 +2262,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:827
-#, fuzzy, kde-format
-#| msgid "Payment accounts"
+#, kde-format
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
-msgstr "Platební účty"
+msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:835
 #, kde-format
@@ -2279,11 +2278,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:837
-#, fuzzy, kde-format
-#| msgid "Hidden categories"
+#, kde-format
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
-msgstr "Skryté kategorie"
+msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:952
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
@@ -4402,11 +4400,10 @@ msgid "Dialog"
 msgstr "Dialog"
 
 #: kmymoney/dialogs/tagcreator.cpp:64
-#, fuzzy, kde-format
-#| msgid "Create"
+#, kde-format
 msgctxt "Undo action description"
 msgid "Create tag"
-msgstr "Vytvořit"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
 #: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
@@ -8073,11 +8070,10 @@ msgid "Memo"
 msgstr "Poznámka"
 
 #: kmymoney/mymoney/splitmodel.cpp:39
-#, fuzzy, kde-format
-#| msgid "Tags"
+#, kde-format
 msgctxt "Split header"
 msgid "Tags"
-msgstr "Značky"
+msgstr ""
 
 #: kmymoney/mymoney/splitmodel.cpp:40
 #, kde-format
@@ -24635,9 +24631,3 @@ msgstr ""
 "\n"
 "<p>Veškeré informace jsou volitelně a používají se pouze pro zosobnění "
 "vašeho KMyMoney.</p>"
-
-#, fuzzy
-#~| msgid "Tag"
-#~ msgctxt "Split header"
-#~ msgid "Tag"
-#~ msgstr "Značka"
