@@ -8,21 +8,21 @@
 # Yury G. Kudryashov <urkud.urkud@gmail.com>, 2011.
 # Alexander Lakhin <exclusion@gmail.com>, 2013.
 # Yuri Efremov <yur.arh@gmail.com>, 2014.
-# Alexander Yavorsky <kekcuha@gmail.com>, 2020.
+# SPDX-FileCopyrightText: 2020, 2024 Alexander Yavorsky <kekcuha@gmail.com>
 # Olesya Gerasimenko <translation-team@basealt.ru>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-05 01:54+0000\n"
-"PO-Revision-Date: 2023-07-14 18:46+0300\n"
-"Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
-"Language-Team: Basealt Translation Team\n"
+"PO-Revision-Date: 2024-02-09 23:23+0300\n"
+"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
+"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.01.95\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Environment: kde\n"
@@ -2390,12 +2390,7 @@ msgid "Hidden accounts"
 msgstr "Скрыть закрытые счета"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:835
-#, fuzzy, kde-format
-#| msgid ""
-#| "You have selected to suppress the display of unused categories in the "
-#| "KMyMoney configuration dialog. The category you just created will "
-#| "therefore only be shown if it is used. Otherwise, it will be hidden in "
-#| "the accounts/categories view."
+#, kde-format
 msgctxt "@info"
 msgid ""
 "You have selected to suppress the display of unused categories in the "
@@ -2408,8 +2403,7 @@ msgstr ""
 "использована хотя бы в одной операции."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:837
-#, fuzzy, kde-format
-#| msgid "Hidden categories"
+#, kde-format
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "Скрытые статьи"
@@ -3149,11 +3143,9 @@ msgstr "Сортировка"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_useDefault)
 #: kmymoney/dialogs/ktransactionsortoptionsdlg.ui:23
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu Reset to application defaults"
-#| msgid "Reset to default"
+#, kde-format
 msgid "Use default"
-msgstr "Вернуться к параметрам по умолчанию"
+msgstr "Использовать значение по умолчанию"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KUpdateStockPriceDlg)
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:14
@@ -3867,8 +3859,7 @@ msgstr ""
 "Действительно удалить его?"
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:320
-#, fuzzy, kde-format
-#| msgid "Delete quote source"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete quote source"
 msgstr "Удалить источник котировок"
@@ -6989,8 +6980,7 @@ msgid "  * Payee '%1' removed."
 msgstr "  * Контрагент «%1» удалён."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2991
-#, fuzzy, kde-format
-#| msgid "* Potential problem with securities/currencies"
+#, kde-format
 msgctxt "@info consistency check"
 msgid "* Potential problem with securities/currencies"
 msgstr "* Потенциальная проблема с ценными бумагами или валютами"
@@ -8742,11 +8732,7 @@ msgid "Security"
 msgstr "Ценная бумага"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:55
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@title:column Indicates whether a Cost Center assignment is necessary "
-#| "when entering a transaction"
-#| msgid "CC"
+#, kde-format
 msgctxt "@title:column Costcenter"
 msgid "CC"
 msgstr "ЦЗ"
@@ -9571,22 +9557,19 @@ msgid "%1 and No/%2"
 msgstr "%1 и нет/%2"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:66
-#, fuzzy, kde-format
-#| msgid "Comma (,)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Comma (,)"
 msgstr "Запятая (,)"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:67
-#, fuzzy, kde-format
-#| msgid "Semicolon (;)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Semicolon (;)"
 msgstr "Точка с запятой (;)"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:68
-#, fuzzy, kde-format
-#| msgid "Tab (\\t)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Tab (\\t)"
 msgstr "Табуляция (\\t)"
@@ -9797,8 +9780,7 @@ msgid "Symbol"
 msgstr "Символ"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:108
-#, fuzzy, kde-format
-#| msgid "Action/Type"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Action/Type"
 msgstr "Действие/тип"
@@ -9870,8 +9852,7 @@ msgid "Payee"
 msgstr "Контрагент"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:117
-#, fuzzy, kde-format
-#| msgid "Account/Cat"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Account/Cat"
 msgstr "Счёт/Статья"
@@ -9904,22 +9885,19 @@ msgid "Invalid transaction"
 msgstr "Недопустимая операция"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:251
-#, fuzzy, kde-format
-#| msgid "splitCategory"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "splitCategory"
 msgstr "Статья разбивки"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:251
-#, fuzzy, kde-format
-#| msgid "splitMemo"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "splitMemo"
 msgstr "Примечание к разбивке"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:252
-#, fuzzy, kde-format
-#| msgid "splitAmount"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "splitAmount"
 msgstr "Сумма разбивки"
@@ -14996,8 +14974,7 @@ msgid "Do you really want to remove all selected budgets?"
 msgstr "Действительно удалить все выбранные бюджеты?"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:135
-#, fuzzy, kde-format
-#| msgid "Remove Budget"
+#, kde-format
 msgctxt "@title:window "
 msgid "Remove Budget"
 msgstr "Удаление бюджета"
@@ -15097,11 +15074,10 @@ msgid "Change to expense"
 msgstr "Прочие расходы"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:490
-#, fuzzy, kde-format
-#| msgid "Budget options"
+#, kde-format
 msgctxt "@title:menu Budget context menu"
 msgid "Budget options"
-msgstr "Действия с бюджетом"
+msgstr "Параметры настройки бюджета"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:501
 #, fuzzy, kde-format
@@ -20951,8 +20927,7 @@ msgid "Never reconciled"
 msgstr "Сверка никогда не выполнялась"
 
 #: kmymoney/views/ledgerviewpage_p.h:141
-#, fuzzy, kde-format
-#| msgid "Investment value: %1%2"
+#, kde-format
 msgctxt "@label:textbox Total value of investment"
 msgid "Investment value: %1%2"
 msgstr "Инвестиционная стоимость: %1%2"
@@ -21106,8 +21081,7 @@ msgid "Costcenter"
 msgstr "Центр затрат"
 
 #: kmymoney/views/newtransactioneditor.cpp:564
-#, fuzzy, kde-format
-#| msgid "Select autofill transaction"
+#, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
 msgstr "Выбор автозаполнения операции"
