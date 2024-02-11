@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-05 01:54+0000\n"
-"PO-Revision-Date: 2024-01-31 14:25+0100\n"
+"PO-Revision-Date: 2024-02-05 14:15+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -20926,10 +20926,7 @@ msgid "Cannot edit multiple schedules at once."
 msgstr "Non è possibile modificare più pianificazioni contemporaneamente."
 
 #: kmymoney/views/multitransactioneditor.cpp:731
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selection of category or account is not possible when split transactions "
-#| "are part of the selection."
+#, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of category or account is not possible when split transactions are "
@@ -20939,30 +20936,24 @@ msgstr ""
 "transazioni suddivise fanno parte della selezione."
 
 #: kmymoney/views/multitransactioneditor.cpp:735
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selection of category or account is not possible when split transactions "
-#| "are part of the selection."
+#, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of tags is not possible when split transactions are part of the "
 "selection."
 msgstr ""
-"La selezione della categoria o del conto non è possibile quando le "
-"transazioni suddivise fanno parte della selezione."
+"La selezione delle etichette non è possibile quando le transazioni suddivise "
+"fanno parte della selezione."
 
 #: kmymoney/views/multitransactioneditor.cpp:739
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selection of category or account is not possible when split transactions "
-#| "are part of the selection."
+#, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of cost center is not possible when split transactions are part of "
 "the selection."
 msgstr ""
-"La selezione della categoria o del conto non è possibile quando le "
-"transazioni suddivise fanno parte della selezione."
+"La selezione del centro di costo non è possibile quando le transazioni "
+"suddivise fanno parte della selezione."
 
 #: kmymoney/views/newspliteditor.cpp:152
 #, kde-format
