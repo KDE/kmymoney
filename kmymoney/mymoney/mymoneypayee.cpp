@@ -223,9 +223,13 @@ eMyMoney::Payee::MatchType MyMoneyPayee::matchData(bool& ignorecase, QStringList
     if (d->m_matchingEnabled) {
         type = d->m_usingMatchKey ? eMyMoney::Payee::MatchType::Key : eMyMoney::Payee::MatchType::Name;
         if (type == eMyMoney::Payee::MatchType::Key) {
-            if (d->m_matchKey.contains(QLatin1Char('\n')))
+            if (d->m_matchKey.contains(QLatin1Char('\n'))) {
                 keys = d->m_matchKey.split(QLatin1Char('\n'));
-            else
+                // Since we added an empty string to the list to be able
+                // to differentiate between older and newer versions, we
+                // remove the empty list items here.
+                keys.removeAll(QString());
+            } else
                 keys = d->m_matchKey.split(QLatin1Char(';'));  // for compatibility with 4.8.0
         } else if (d->m_matchKey.compare(QLatin1String("^$")) == 0) {
             type = eMyMoney::Payee::MatchType::NameExact;
@@ -256,6 +260,12 @@ void MyMoneyPayee::setMatchData(eMyMoney::Payee::MatchType type, bool ignorecase
             const QRegularExpression validKeyRegExp(QLatin1String("[^ ]"));
             const auto filteredKeys = keys.filter(validKeyRegExp);
             d->m_matchKey = filteredKeys.join(QLatin1Char('\n'));
+            // we make sure that each matchKey contains at least a single \n.
+            // Otherwise, we are not able to have a single match that contains
+            // a semi-colon because that is treated as list separator in 4.8
+            if (filteredKeys.count() == 1) {
+                d->m_matchKey.append('\n');
+            }
         } else if ((type == eMyMoney::Payee::MatchType::Name) && (keys.count() == 1) && (keys.at(0) == QLatin1String("^$"))) {
             d->m_matchKey = QLatin1String("^$");
         } else if (type == eMyMoney::Payee::MatchType::NameExact) {
