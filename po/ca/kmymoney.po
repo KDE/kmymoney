@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-05 01:54+0000\n"
+"POT-Creation-Date: 2024-02-18 01:40+0000\n"
 "PO-Revision-Date: 2024-02-05 09:37+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -218,74 +218,74 @@ msgstr ""
 msgid "New payee/receiver"
 msgstr "Beneficiari/receptor nou"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1076
+#: kmymoney/converter/mymoneystatementreader.cpp:1084
 #, kde-format
 msgid "Default Category for Payee"
 msgstr "Categoria predeterminada per al beneficiari"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1083
+#: kmymoney/converter/mymoneystatementreader.cpp:1091
 #, kde-format
 msgid "Please select a default category for payee '%1'"
 msgstr ""
 "Si us plau, seleccioneu una categoria predeterminada per al beneficiari «%1»"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1106
+#: kmymoney/converter/mymoneystatementreader.cpp:1114
 #, kde-format
 msgid "Save Category"
 msgstr "Desa la categoria"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1107
+#: kmymoney/converter/mymoneystatementreader.cpp:1115
 #, kde-format
 msgid "No Category"
 msgstr "Sense categoria"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonAbort)
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: kmymoney/converter/mymoneystatementreader.cpp:1108
+#: kmymoney/converter/mymoneystatementreader.cpp:1116
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:132
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:257
 #, kde-format
 msgid "Abort"
 msgstr "Interromp"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1134
+#: kmymoney/converter/mymoneystatementreader.cpp:1142
 #, kde-format
 msgid "Unable to add payee/receiver"
 msgstr "No s'ha pogut afegir el beneficiari/receptor"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1381
+#: kmymoney/converter/mymoneystatementreader.cpp:1389
 #, kde-format
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr ""
 "Problema en afegir o emparellar una operació que concorda amb ID «%1»: %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1439
+#: kmymoney/converter/mymoneystatementreader.cpp:1447
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr "<b>Heu baixat un extracte per al compte següent:</b><br/><br/>"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1440
+#: kmymoney/converter/mymoneystatementreader.cpp:1448
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " - Nom del compte: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1441
+#: kmymoney/converter/mymoneystatementreader.cpp:1449
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " - Tipus de compte: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1442
+#: kmymoney/converter/mymoneystatementreader.cpp:1450
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " - Número del compte: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1447
+#: kmymoney/converter/mymoneystatementreader.cpp:1455
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "Voleu importar operacions a aquest compte?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1450
+#: kmymoney/converter/mymoneystatementreader.cpp:1458
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -296,7 +296,7 @@ msgstr ""
 "prement el botó <b>Crea</b> o seleccionant manualment un altre des de la "
 "casella de selecció següent."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1454
+#: kmymoney/converter/mymoneystatementreader.cpp:1462
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -307,12 +307,12 @@ msgstr ""
 "Si us plau, seleccioneu un compte usant la casella de selecció en el diàleg "
 "o creeu un compte nou prement el botó <b>Crea</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1483
+#: kmymoney/converter/mymoneystatementreader.cpp:1491
 #, kde-format
 msgid "Import transactions"
 msgstr "Importa operacions"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1525
+#: kmymoney/converter/mymoneystatementreader.cpp:1533
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
@@ -321,14 +321,14 @@ msgstr ""
 "Cal seleccionar un compte, crear-ne un de nou, o prémer el botó "
 "<b>Interromp</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1637
+#: kmymoney/converter/mymoneystatementreader.cpp:1645
 #: kmymoney/views/kscheduledview_p.h:196 kmymoney/views/kscheduledview_p.h:311
 #: kmymoney/views/kscheduledview_p.h:315
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "No s'ha pogut introduir l'operació planificada «%1»"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1657
+#: kmymoney/converter/mymoneystatementreader.cpp:1665
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -341,7 +341,7 @@ msgstr ""
 "i><br/>Voleu que el KMyMoney introdueixi ara aquesta planificació per tal "
 "que es pugui concordar l'operació?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1666
+#: kmymoney/converter/mymoneystatementreader.cpp:1674
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -366,7 +366,7 @@ msgstr[1] ""
 "KMyMoney introdueixi ara aquesta planificació per tal que es pugui concordar "
 "l'operació?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1680
+#: kmymoney/converter/mymoneystatementreader.cpp:1688
 #, kde-format
 msgid "Schedule found"
 msgstr "S'ha trobat una planificació"
