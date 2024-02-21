@@ -5767,7 +5767,7 @@ msgstr "거래 수정"
 msgid ""
 "This is the consistency check log, use the context menu to copy or save it."
 msgstr ""
-"일관성 검사 로그입니다. 콘텍스트 메뉴를 사용하여 복사하거나 저장하십시오."
+"일관성 검사 로그입니다. 상황에 맞는 메뉴를 사용하여 복사하거나 저장하십시오."
 
 #: kmymoney/kmymoney.cpp:1302
 #, kde-format
@@ -24690,7 +24690,7 @@ msgid ""
 "the\n"
 "'Goto' functions?\n"
 msgstr ""
-"<p>...오른쪽 마우스 단추로 콘텍스트 메뉴를 열어서 '이동' 옵션을 선택하여\n"
+"<p>...오른쪽 마우스 단추로 상황에 맞는 메뉴를 열어서 '이동' 옵션을 선택하여\n"
 "대체 거래의 다른 쪽으로 쉽게 이동할 수 있습니다.\n"
 
 #. i18n: ectx: @info:tipoftheday
@@ -24771,7 +24771,7 @@ msgid ""
 "one by selecting the context menu on a transaction in the ledger\n"
 "or the \"More...\"-menu in the transaction form?\n"
 msgstr ""
-"<p>...원장의 거래의 콘텍스트 메뉴에서 선택하거나 거래 양식의\n"
+"<p>...원장의 거래의 상황에 맞는 메뉴에서 선택하거나 거래 양식의\n"
 "\"더 보기...\" 메뉴에서 예정된 거래를 만들 수 있습니다.\n"
 
 #. i18n: ectx: @info:tipoftheday
@@ -24782,7 +24782,7 @@ msgid ""
 "by selecting the context menu on a transaction in the ledger\n"
 "or in the transaction menu?\n"
 msgstr ""
-"<p>...원장의 거래의 콘텍스트 메뉴나 거래 메뉴에서 해당\n"
+"<p>...원장의 거래의 상황에 맞는 메뉴나 거래 메뉴에서 해당\n"
 "거래의 수취인으로 전환할 수 있습니다.\n"
 
 #. i18n: ectx: @info:tipoftheday
