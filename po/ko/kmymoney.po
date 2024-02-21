@@ -4776,7 +4776,7 @@ msgstr "새 장부..."
 msgid ""
 "This is the consistency check log, use the context menu to copy or save it."
 msgstr ""
-"일관성 검사 로그입니다. 콘텍스트 메뉴를 사용하여 복사하거나 저장하십시오."
+"일관성 검사 로그입니다. 상황에 맞는 메뉴를 사용하여 복사하거나 저장하십시오."
 
 #: kmymoney/kmymoney.cpp:1634
 #, kde-format
