@@ -25,6 +25,7 @@ Name[tr]=Kurum adları ve iban'dan bic'e kuralları için bir veritabanı
 Name[uk]=База даних назв банківських установ та правил перетворення iban на bic
 Name[x-test]=xxA database for institution names and iban to bic rulesxx
 Name[zh_CN]=机构名称和国际银行账号至银行识别码转换规则数据库
+Name[zh_TW]=包含機構名稱與 IBAN 轉換為 BIC 規則的資料庫
 
 [PropertyDef::X-KMyMoney-CountryCodes]
 Type=QStringList
