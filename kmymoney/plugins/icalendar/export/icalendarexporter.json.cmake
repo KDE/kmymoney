@@ -32,7 +32,8 @@
                 "Name[tr]": "Cristian Oneț",
                 "Name[uk]": "Cristian Oneț",
                 "Name[x-test]": "xxCristian Onețxx",
-                "Name[zh_CN]": "Cristian Oneț"
+                "Name[zh_CN]": "Cristian Oneț",
+                "Name[zh_TW]": "Cristian Oneț"
             }
         ],
         "Description": "Exports schedules to iCalendar files",
@@ -97,6 +98,7 @@
         "Name[uk]": "iCalendar",
         "Name[x-test]": "xxiCalendarxx",
         "Name[zh_CN]": "iCalendar",
+        "Name[zh_TW]": "iCalendar",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"
     },
