@@ -94,6 +94,7 @@
         "Name[uk]": "Дані IBAN та BIC",
         "Name[x-test]": "xxIBAN/BIC Dataxx",
         "Name[zh_CN]": "国际银行账号/银行识别码数据",
+        "Name[zh_TW]": "IBAN/BIC Data",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

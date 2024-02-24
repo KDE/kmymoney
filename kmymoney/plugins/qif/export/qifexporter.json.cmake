@@ -31,7 +31,8 @@
                 "Name[sv]": "Michael Edwardes",
                 "Name[uk]": "Michael Edwardes",
                 "Name[x-test]": "xxMichael Edwardesxx",
-                "Name[zh_CN]": "Michael Edwardes"
+                "Name[zh_CN]": "Michael Edwardes",
+                "Name[zh_TW]": "Michael Edwardes"
             }
         ],
         "Description": "Add QIF exporting to KMyMoney",
@@ -94,6 +95,7 @@
         "Name[uk]": "Інструмент експортування QIF",
         "Name[x-test]": "xxQIF Exporterxx",
         "Name[zh_CN]": "QIF 导出工具",
+        "Name[zh_TW]": "QIF 匯出工具",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

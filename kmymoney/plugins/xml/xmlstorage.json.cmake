@@ -92,6 +92,7 @@
         "Name[uk]": "Сховище XML",
         "Name[x-test]": "xxXML Storagexx",
         "Name[zh_CN]": "XML 存储",
+        "Name[zh_TW]": "XML 儲存",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

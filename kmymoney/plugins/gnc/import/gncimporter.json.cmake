@@ -31,7 +31,8 @@
                 "Name[sv]": "Michael Edwardes",
                 "Name[uk]": "Michael Edwardes",
                 "Name[x-test]": "xxMichael Edwardesxx",
-                "Name[zh_CN]": "Michael Edwardes"
+                "Name[zh_CN]": "Michael Edwardes",
+                "Name[zh_TW]": "Michael Edwardes"
             }
         ],
         "Description": "Add GnuCash importing to KMyMoney",
@@ -94,6 +95,7 @@
         "Name[uk]": "Імпортування GNC",
         "Name[x-test]": "xxGNC Importerxx",
         "Name[zh_CN]": "GNC 导入工具",
+        "Name[zh_TW]": "GNC 匯入工具",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

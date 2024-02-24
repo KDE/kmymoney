@@ -93,6 +93,7 @@
         "Name[uk]": "Сховище SQL",
         "Name[x-test]": "xxSQL Storagexx",
         "Name[zh_CN]": "SQL 存储",
+        "Name[zh_TW]": "SQL 儲存",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

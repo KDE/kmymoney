@@ -31,7 +31,8 @@
                 "Name[sv]": "Allan Anderson,Łukasz Wojniłowicz",
                 "Name[uk]": "Allan Anderson,Łukasz Wojniłowicz",
                 "Name[x-test]": "xxAllan Anderson,Łukasz Wojniłowiczxx",
-                "Name[zh_CN]": "Allan Anderson,Łukasz Wojniłowicz"
+                "Name[zh_CN]": "Allan Anderson,Łukasz Wojniłowicz",
+                "Name[zh_TW]": "Allan Anderson、Łukasz Wojniłowicz"
             }
         ],
         "Description": "Add CSV importing to KMyMoney",
@@ -95,6 +96,7 @@
         "Name[uk]": "Імпортування CSV",
         "Name[x-test]": "xxCSV Importerxx",
         "Name[zh_CN]": "CSV 导入工具",
+        "Name[zh_TW]": "CSV 匯入工具",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],
