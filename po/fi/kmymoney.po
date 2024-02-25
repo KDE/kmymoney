@@ -7,13 +7,13 @@
 # Raimo Ikonen <raimo.ikonen@innotronics.fi>, 2008, 2009, 2010.
 # Marko Suvila <marko.suvila@gmail.com>, 2008, 2009.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016.
-# Tommi Nieminen <translator@legisign.org>, 2019, 2020, 2021, 2022, 2023.
+# Tommi Nieminen <translator@legisign.org>, 2019, 2020, 2021, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-18 01:40+0000\n"
-"PO-Revision-Date: 2023-06-07 16:30+0300\n"
+"PO-Revision-Date: 2024-02-19 12:11+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2582,14 +2582,14 @@ msgstr "Budjetin asetukset"
 #, kde-format
 msgctxt "@item:inlistbox Don't include this account in budgets"
 msgid "Don't include in budgets"
-msgstr ""
+msgstr "Älä sisällytä budjetteihin"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
 #: kmymoney/dialogs/knewaccountdlg.ui:305
 #, kde-format
 msgctxt "@item:inlistbox Include this account in budgets as expense"
 msgid "Include in budgets as expense"
-msgstr ""
+msgstr "Sisällytä kuluna budjetteihin"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
 #: kmymoney/dialogs/knewaccountdlg.ui:310
@@ -4164,10 +4164,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:105
-#, fuzzy, kde-format
-#| msgid "Show group header between transactions"
+#, kde-format
 msgid "Show group headers between transactions"
-msgstr "Näytä ryhmäotsikko tapahtumien välissä"
+msgstr "Näytä tapahtumien välissä ryhmäotsakkeet"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFiscalMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:115
@@ -5183,15 +5182,13 @@ msgid "Move transaction"
 msgstr "Siirrä tapahtuma"
 
 #: kmymoney/kmymoney.cpp:1846
-#, fuzzy, kde-format
-#| msgid "Show transaction form"
+#, kde-format
 msgctxt "Show transaction"
 msgid "Show transaction"
-msgstr "Näytä tapahtumalomake"
+msgstr "Näytä tapahtuma"
 
 #: kmymoney/kmymoney.cpp:1847
-#, fuzzy, kde-format
-#| msgid "Show Transaction Detail"
+#, kde-format
 msgctxt "Display transaction details"
 msgid "Show transaction details"
 msgstr "Näytä tapahtuman tiedot"
@@ -5654,7 +5651,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
-msgstr ""
+msgstr "Vahvistus varmuuskopioinnista"
 
 #: kmymoney/kmymoney.cpp:3683
 #, kde-format
@@ -8129,7 +8126,7 @@ msgstr "Mikä tahansa"
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "%1 times"
-msgstr ""
+msgstr "%1 kertaa"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:933
 #, fuzzy, kde-format
@@ -9256,13 +9253,13 @@ msgstr "Kuvaus"
 #, kde-format
 msgctxt "Missing attribute %1 in xml file"
 msgid "Missing attribute %1 in line %2"
-msgstr ""
+msgstr "Puuttuva määrite %1 rivillä %2"
 
 #: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:658
 #, kde-format
 msgctxt "Empty attribute %1 in xml file"
 msgid "Empty attribute %1 in line %2"
-msgstr ""
+msgstr "Tyhjä määrite %1 rivillä %2"
 
 #: kmymoney/plugins/checkprinting/checkprinting.cpp:183
 #, kde-format
@@ -9610,11 +9607,10 @@ msgid "Use this to select a filename to export to"
 msgstr "Käytä tätä vietävän tiedostonimen valintaan"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:201
-#, fuzzy, kde-format
-#| msgid "  * Parent account '%1' does not contain '%2' as sub-account."
+#, kde-format
 msgctxt "@info Hint in CSV export dialog"
 msgid "Current selected account does not contain any transactions."
-msgstr "  * Ylätason tili '%1' ei sisällä '%2' sen alatilinä."
+msgstr "Valitulla tilillä ei ole tapahtumia."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, CsvExportDlg)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:14
@@ -11378,7 +11374,7 @@ msgstr "Korko"
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:60
 #, kde-format
 msgid "The size of the file is too small to be a valid GnuCash format: %1"
-msgstr ""
+msgstr "Tiedoston koko on liian pieni ollakseen kelvollinen GnuCash-muoto: %1"
 
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:64
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:75
@@ -11393,6 +11389,8 @@ msgid ""
 "GnuCash SQLite file format is not supported. Please save it using XML format "
 "in GnuCash and try again."
 msgstr ""
+"GnuCashin SQLite-tiedostomuotoa ei tueta. Tallenna tiedosto GnuCashissä XML-"
+"muotoon ja yritä uudelleen."
 
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:129
 #, kde-format
@@ -12021,7 +12019,7 @@ msgstr "iCalendar-tiedosto johon ajoitetut tapahtumat viedään."
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:40
 #, kde-format
 msgid "Write Google calendar compatible entries"
-msgstr ""
+msgstr "Kirjoita Googlen kalenterin kanssa yhteensopivia tietueita"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ICalendarSettingsDecl)
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:26
@@ -12036,6 +12034,7 @@ msgid ""
 "Write the iCalendar file so that the entries are recognized by Google "
 "Calendar."
 msgstr ""
+"Kirjoita iCalendar-tiedosto, jotta Googlen kalenteri tunnistaa tietueet."
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_writeEventsVsTodos)
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:37
@@ -13147,19 +13146,17 @@ msgstr "Kahdentuneiden tapahtumien tunnistusmenetelmä tuonnin aikana"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:424
-#, fuzzy, kde-format
-#| msgid "OFX FITID"
+#, kde-format
 msgctxt "@item:inlistbox Method to identify duplicate transactions"
 msgid "OFX FITID"
 msgstr "OFX FITID"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:429
-#, fuzzy, kde-format
-#| msgid "KMyMoney"
+#, kde-format
 msgctxt "@item:inlistbox Method to identify duplicate transactions"
 msgid "KMyMoney ID"
-msgstr "KMyMoney"
+msgstr "KMyMoney-tunniste"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:443
@@ -19205,11 +19202,10 @@ msgid "Activity"
 msgstr "Aktivisuus"
 
 #: kmymoney/views/journaldelegate.cpp:89
-#, fuzzy, kde-format
-#| msgid "Copy memo"
+#, kde-format
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
-msgstr "Kopioi muistiinpano"
+msgstr "Tyhjä muistio"
 
 #: kmymoney/views/journaldelegate.cpp:343
 #, kde-format
@@ -19217,7 +19213,7 @@ msgctxt "@info Editing multiple transactions"
 msgid ""
 "The current implementation cannot modify multiple transactions in different "
 "accounts."
-msgstr ""
+msgstr "Nykyinen toteutus ei voi muokata useaa tapahtumaa eri tileiltä."
 
 #: kmymoney/views/kaccountsview.cpp:182
 #: kmymoney/views/kinstitutionsview.cpp:208
@@ -19576,7 +19572,7 @@ msgstr ""
 #, kde-format
 msgid ""
 "Do not change amount of category but modify exchange rate of transaction"
-msgstr ""
+msgstr "Älä muuta luokan summaa vaan tapahtuman vaihtokurssia"
 
 #. i18n: ectx: property (text), widget (QCheckBox, lastDayInMonthOption)
 #: kmymoney/views/keditscheduledlg.ui:245
@@ -20613,11 +20609,10 @@ msgid "Tag color:"
 msgstr "Luokitusväri:"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:56
-#, fuzzy, kde-format
-#| msgid "Select transactions without payees"
+#, kde-format
 msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
-msgstr "Valitse tapahtumat ilman maksunsaajia"
+msgstr "Valitse mallina käytettävä tapahtuma."
 
 #: kmymoney/views/ktransactionselectdlg.cpp:126
 #, kde-format
@@ -20712,17 +20707,15 @@ msgid "Go to '%1'"
 msgstr "Siirry: ”%1”"
 
 #: kmymoney/views/ledgerview.cpp:689
-#, fuzzy, kde-format
-#| msgid ""
-#| "You are already editing a transaction in another view. KMyMoney does not "
-#| "support editing two transactions in parallel."
+#, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
 "support editing two transactions in parallel. <a href=\"jumpToEditor\">Jump "
 "to current editor</a>"
 msgstr ""
-"Tapahtumaa muokataan jo toisessa näkymässä. KMyMoney ei tue tapahtuman "
-"rinnakkaista muokkaamista."
+"Tapahtumaa muokataan jo toisessa näkymässä. KMyMoney ei tue tapahtumien "
+"rinnakkaista muokkaamista. <a href=\"jumpToEditor\">Siirry nykyiseen "
+"muokkaimeen</a>"
 
 #: kmymoney/views/ledgerview.cpp:805
 #, kde-format
@@ -20866,10 +20859,9 @@ msgstr "Saldo: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:192
 #: kmymoney/views/newtransactioneditor.cpp:258
-#, fuzzy, kde-format
-#| msgid "The posting date of the transaction."
+#, kde-format
 msgid "The posting date is invalid."
-msgstr "Tapahtuman kirjauspäivä."
+msgstr "Kirjauspäivä on virheellinen."
 
 #: kmymoney/views/multitransactioneditor.cpp:225
 #: kmymoney/views/newtransactioneditor.cpp:293
@@ -20905,11 +20897,10 @@ msgstr ""
 "avaamispäivää."
 
 #: kmymoney/views/multitransactioneditor.cpp:722
-#, fuzzy, kde-format
-#| msgid "Cannot edit multiple split transactions at once."
+#, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
-msgstr "Ei voida muokata useita jaoteltuja tapahtumia yhdellä kertaa."
+msgstr "Montaa aikatauluja ei voi muokata kerralla."
 
 #: kmymoney/views/multitransactioneditor.cpp:731
 #, kde-format
@@ -20986,10 +20977,9 @@ msgstr "Sekkinumero <b>%1</b> on jo käytössä tälle tilille."
 #: kmymoney/views/newspliteditor.ui:137
 #: kmymoney/views/newtransactioneditor.ui:95
 #: kmymoney/views/newtransactionform.ui:40
-#, fuzzy, kde-format
-#| msgid "Payer/Receiver"
+#, kde-format
 msgid "Payer/Payee"
-msgstr "Maksunsaaja / vastaanottaja"
+msgstr "Maksaja/maksunsaaja"
 
 #. i18n: ectx: property (text), widget (QLabel, costCenterLabel)
 #. i18n: ectx: property (text), widget (QLabel, label_8)
