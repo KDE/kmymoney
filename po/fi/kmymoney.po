@@ -7,13 +7,13 @@
 # Raimo Ikonen <raimo.ikonen@innotronics.fi>, 2008, 2009, 2010.
 # Marko Suvila <marko.suvila@gmail.com>, 2008, 2009.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016.
-# Tommi Nieminen <translator@legisign.org>, 2019, 2020, 2021, 2022, 2023.
+# Tommi Nieminen <translator@legisign.org>, 2019, 2020, 2021, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-21 02:26+0000\n"
-"PO-Revision-Date: 2023-06-07 16:30+0300\n"
+"PO-Revision-Date: 2024-02-19 12:11+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2612,11 +2612,10 @@ msgid "Criteria"
 msgstr "Kriteeri"
 
 #: kmymoney/dialogs/kfindtransactiondlg_p.h:110
-#, fuzzy, kde-format
-#| msgid "Search transactions"
+#, kde-format
 msgctxt "@info:tooltip for find transaction Open button"
 msgid "Search transactions"
-msgstr "Hae tapahtumia"
+msgstr "Etsi tapahtumia"
 
 # Luulen että tässä ja seuraavassa tuo %1 korvaantuu täsmäävien tapahtumien määrällä, joten yksikkömuodossa on siistimpää kun jättää sen kokonaan pois ja kirjoittaa vain "yksi"
 #: kmymoney/dialogs/kfindtransactiondlg_p.h:176
