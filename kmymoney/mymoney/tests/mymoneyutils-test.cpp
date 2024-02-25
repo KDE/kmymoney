@@ -94,7 +94,7 @@ void MyMoneyUtilsTest::testExtractId()
     QCOMPARE(MyMoneyUtils::extractId(string), result);
 }
 
-void MyMoneyUtilsTest::testStringToDateTime_data()
+void MyMoneyUtilsTest::testIsoStringToDateTime_data()
 {
     QTest::addColumn<QDate>("date");
     QTest::addColumn<QTime>("time");
@@ -111,17 +111,17 @@ void MyMoneyUtilsTest::testStringToDateTime_data()
                                << QStringLiteral("2023-10-03");
 }
 
-void MyMoneyUtilsTest::testStringToDateTime()
+void MyMoneyUtilsTest::testIsoStringToDateTime()
 {
     QFETCH(QDate, date);
     QFETCH(QTime, time);
     QFETCH(int, offset);
     QFETCH(QString, testvalue);
 
-    QCOMPARE(MyMoneyUtils::stringToDateTime(testvalue), QDateTime(date, time, QTimeZone(offset)));
+    QCOMPARE(MyMoneyUtils::isoStringToDateTime(testvalue), QDateTime(date, time, QTimeZone(offset)));
 }
 
-void MyMoneyUtilsTest::testDateTimeToString_data()
+void MyMoneyUtilsTest::testDateTimeToIsoString_data()
 {
     QTest::addColumn<QDate>("date");
     QTest::addColumn<QTime>("time");
@@ -135,12 +135,71 @@ void MyMoneyUtilsTest::testDateTimeToString_data()
     QTest::newRow("UTC") << QDate(2023, 10, 3) << QTime(11, 12, 13) << 0 << QStringLiteral("2023-10-03T11:12:13+00:00");
 }
 
-void MyMoneyUtilsTest::testDateTimeToString()
+void MyMoneyUtilsTest::testDateTimeToIsoString()
 {
     QFETCH(QDate, date);
     QFETCH(QTime, time);
     QFETCH(int, offset);
     QFETCH(QString, result);
 
-    QCOMPARE(MyMoneyUtils::dateTimeToString(QDateTime(date, time, QTimeZone(offset))), result);
+    QCOMPARE(MyMoneyUtils::dateTimeToIsoString(QDateTime(date, time, QTimeZone(offset))), result);
+}
+
+void MyMoneyUtilsTest::testDateToString_data()
+{
+    QTest::addColumn<QDate>("date");
+    QTest::addColumn<int>("type");
+
+    MyMoneyUtils::clearFormatCaches();
+    firstShort.clear();
+
+    // We can't simply preset the result here because it differs from locale to locale
+    // So we just make sure that the cache is not overwritten when a different format is used.
+    QTest::newRow("First short") << QDate(2024, 2, 21) << static_cast<int>(QLocale::ShortFormat);
+    QTest::newRow("First long") << QDate(2024, 2, 21) << static_cast<int>(QLocale::LongFormat);
+    QTest::newRow("Second short") << QDate(2024, 2, 21) << static_cast<int>(QLocale::ShortFormat);
+}
+
+void MyMoneyUtilsTest::testDateToString()
+{
+    QFETCH(QDate, date);
+    QFETCH(int, type);
+    const auto formatType = static_cast<QLocale::FormatType>(type);
+
+    if (formatType == QLocale::ShortFormat) {
+        if (firstShort.isEmpty()) {
+            firstShort = MyMoneyUtils::formatDate(date, formatType);
+            QVERIFY(!firstShort.isEmpty());
+        } else {
+            QCOMPARE(firstShort, MyMoneyUtils::formatDate(date, formatType));
+        }
+    } else {
+        QVERIFY(!firstShort.isEmpty());
+        QVERIFY(firstShort != MyMoneyUtils::formatDate(date, formatType));
+    }
+}
+
+void MyMoneyUtilsTest::testStringToDate_data()
+{
+    QTest::addColumn<QDate>("date");
+    QTest::addColumn<int>("type");
+
+    MyMoneyUtils::clearFormatCaches();
+    firstShort.clear();
+
+    // We can't simply preset the result here because it differs from locale to locale
+    // So we just make sure that the cache is not overwritten when a different format is used.
+    QTest::newRow("ShortFormat") << QDate(2024, 2, 21) << static_cast<int>(QLocale::ShortFormat);
+    QTest::newRow("LongFormat") << QDate(2024, 2, 21) << static_cast<int>(QLocale::LongFormat);
+}
+
+void MyMoneyUtilsTest::testStringToDate()
+{
+    QFETCH(QDate, date);
+    QFETCH(int, type);
+    const auto formatType = static_cast<QLocale::FormatType>(type);
+
+    const auto textForm = MyMoneyUtils::formatDate(date, formatType);
+    const auto convertedDate = MyMoneyUtils::stringToDate(textForm, formatType);
+    QCOMPARE(date, convertedDate);
 }

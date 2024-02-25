@@ -16,62 +16,69 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <widget class="QTreeWidget" name="lvEquityList">
-     <property name="minimumSize">
-      <size>
-       <width>350</width>
-       <height>0</height>
-      </size>
+    <widget class="QTreeView" name="equityView">
+     <property name="sizeAdjustPolicy">
+      <enum>QAbstractScrollArea::AdjustToContents</enum>
      </property>
-     <property name="toolTip">
-      <string>List of known Equities, and the date they were last updated on.</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
+     <property name="tabKeyNavigation">
+      <bool>false</bool>
      </property>
      <property name="alternatingRowColors">
       <bool>true</bool>
      </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::MultiSelection</enum>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
      <property name="rootIsDecorated">
       <bool>false</bool>
-     </property>
-     <property name="sortingEnabled">
-      <bool>true</bool>
      </property>
      <property name="allColumnsShowFocus">
       <bool>true</bool>
      </property>
-     <column>
-      <property name="text">
-       <string notr="true">1</string>
-      </property>
-     </column>
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string comment="@label:chooser Date">From</string>
-       </property>
+      <widget class="QWidget" name="m_dateContainer" native="true">
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="m_fromLabel">
+          <property name="text">
+           <string comment="@label:chooser Date">From</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="KMyMoneyDateEdit" name="m_fromDate"/>
+        </item>
+        <item>
+         <widget class="QLabel" name="m_toLabel">
+          <property name="text">
+           <string comment="@label:chooser Date">To</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="KMyMoneyDateEdit" name="m_toDate"/>
+        </item>
+       </layout>
       </widget>
-     </item>
-     <item>
-      <widget class="KMyMoneyDateEdit" name="m_fromDate"/>
-     </item>
-     <item>
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string comment="@label:chooser Date">To</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="KMyMoneyDateEdit" name="m_toDate"/>
      </item>
      <item>
       <spacer name="horizontalSpacer_2">
@@ -202,7 +209,6 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>lvEquityList</tabstop>
   <tabstop>m_fromDate</tabstop>
   <tabstop>m_toDate</tabstop>
   <tabstop>btnUpdateAll</tabstop>

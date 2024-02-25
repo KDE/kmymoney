@@ -65,6 +65,7 @@ set(kmm_base_widgets_SOURCES
   kmymoneytreeview.cpp
   transactionsortoption.cpp
   widgethintframe.cpp
+  onlinesourcedelegate.cpp
   )
 
 set(kmm_widgets_SOURCES

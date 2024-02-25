@@ -1,6 +1,5 @@
 /*
-    SPDX-FileCopyrightText: 2005-2010 Thomas Baumgart <tbaumgart@kde.org>
-    SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2023 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -30,25 +29,15 @@ public:
     explicit KSettingsOnlineQuotes(QWidget* parent = nullptr);
     ~KSettingsOnlineQuotes();
 
-    void writeConfig() {}
-    void readConfig() {}
-    void resetConfig();
+public Q_SLOTS:
+    void saveSettings();
+    void resetSettings();
 
 protected Q_SLOTS:
-    void slotDumpCSVProfile();
-    void slotUpdateEntry();
-    void slotLoadWidgets();
-    void slotEntryChanged();
-    void slotEntryChanged(int idx);
-    void slotEntryChanged(const QString& str);
-    void slotEntryChanged(bool b);
-    void slotNewEntry();
-    void slotDeleteEntry();
-    void slotEntryRenamed(QListWidgetItem* item);
-    void slotStartRename(QListWidgetItem* item);
+    // void slotDumpCSVProfile();
 
-protected:
-    void loadList(const bool updateResetList = false);
+Q_SIGNALS:
+    void settingsChanged(bool hasChanges);
 
 private:
     KSettingsOnlineQuotesPrivate * const d_ptr;

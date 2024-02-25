@@ -73,7 +73,7 @@ KMM_MYMONEY_EXPORT QString formatMoney(const MyMoneyMoney& val,
  * @param date const reference to date to be converted
  * @return QString containing the converted date
  */
-KMM_MYMONEY_EXPORT QString dateToString(const QDate& date);
+KMM_MYMONEY_EXPORT QString dateToIsoString(const QDate& date);
 
 /**
  * This function returns a date as QDate object as specified by
@@ -84,7 +84,7 @@ KMM_MYMONEY_EXPORT QString dateToString(const QDate& date);
  * @param str date in Qt::ISODate format
  * @return QDate object
  */
-KMM_MYMONEY_EXPORT QDate stringToDate(const QString& str);
+KMM_MYMONEY_EXPORT QDate isoStringToDate(const QString& str);
 
 /**
  * This function returns a timestamp in the form specified by IS08601.
@@ -93,7 +93,7 @@ KMM_MYMONEY_EXPORT QDate stringToDate(const QString& str);
  * @param date const reference to date to be converted
  * @return QString containing the converted date
  */
-KMM_MYMONEY_EXPORT QString dateTimeToString(const QDateTime& dateTime);
+KMM_MYMONEY_EXPORT QString dateTimeToIsoString(const QDateTime& dateTime);
 
 /**
  * This function returns date and time as QDateTime object as specified by
@@ -107,7 +107,7 @@ KMM_MYMONEY_EXPORT QString dateTimeToString(const QDateTime& dateTime);
  * @param str date in Qt::ISODate format
  * @return QDateTime object
  */
-KMM_MYMONEY_EXPORT QDateTime stringToDateTime(const QString& str);
+KMM_MYMONEY_EXPORT QDateTime isoStringToDateTime(const QString& str);
 
 KMM_MYMONEY_EXPORT QString QStringEmpty(const QString&);
 
@@ -119,6 +119,7 @@ KMM_MYMONEY_EXPORT void clearFormatCaches();
 KMM_MYMONEY_EXPORT QString formatDate(const QDate& date, QLocale::FormatType formatType = QLocale::ShortFormat);
 KMM_MYMONEY_EXPORT QString formatTime(const QTime& date);
 KMM_MYMONEY_EXPORT QString formatDateTime(const QDateTime& date);
+KMM_MYMONEY_EXPORT QDate stringToDate(const QString& text, QLocale::FormatType formatType = QLocale::ShortFormat);
 
 /**
  * This method is used to convert the payment type from its

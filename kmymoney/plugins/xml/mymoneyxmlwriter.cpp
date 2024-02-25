@@ -309,10 +309,10 @@ void MyMoneyXmlWriterPrivate::writeAccount(const MyMoneyAccount& account)
     writeStartObject(m_writer, nodeName(Node::Account), account);
 
     m_writer->writeAttribute(attributeName(Attribute::Account::ParentAccount), account.parentAccountId());
-    m_writer->writeAttribute(attributeName(Attribute::Account::LastReconciled), MyMoneyUtils::dateToString(account.lastReconciliationDate()));
-    m_writer->writeAttribute(attributeName(Attribute::Account::LastModified), MyMoneyUtils::dateToString(account.lastModified()));
+    m_writer->writeAttribute(attributeName(Attribute::Account::LastReconciled), MyMoneyUtils::dateToIsoString(account.lastReconciliationDate()));
+    m_writer->writeAttribute(attributeName(Attribute::Account::LastModified), MyMoneyUtils::dateToIsoString(account.lastModified()));
     m_writer->writeAttribute(attributeName(Attribute::Account::Institution), account.institutionId());
-    m_writer->writeAttribute(attributeName(Attribute::Account::Opened), MyMoneyUtils::dateToString(account.openingDate()));
+    m_writer->writeAttribute(attributeName(Attribute::Account::Opened), MyMoneyUtils::dateToIsoString(account.openingDate()));
     m_writer->writeAttribute(attributeName(Attribute::Account::Number), account.number());
     m_writer->writeAttribute(attributeName(Attribute::Account::Type), QString::number(static_cast<int>(account.accountType())));
     m_writer->writeAttribute(attributeName(Attribute::Account::Name), account.name());
@@ -352,7 +352,7 @@ void MyMoneyXmlWriterPrivate::writeAccount(const MyMoneyAccount& account)
 
         for (auto it = reconciliationHistory.cbegin(); it != reconciliationHistory.cend(); ++it) {
             m_writer->writeStartElement(elementName(Element::Account::ReconciliationEntry));
-            m_writer->writeAttribute(attributeName(Attribute::Reconciliation::Date), MyMoneyUtils::dateToString(it.key()));
+            m_writer->writeAttribute(attributeName(Attribute::Reconciliation::Date), MyMoneyUtils::dateToIsoString(it.key()));
             m_writer->writeAttribute(attributeName(Attribute::Reconciliation::Amount), it.value().toString());
             m_writer->writeEndElement();
         }
@@ -399,7 +399,7 @@ void MyMoneyXmlWriterPrivate::writeSplit(QXmlStreamWriter* writer, const MyMoney
     auto split = _split; // we need to convert matched transaction to kvp pair
 
     writer->writeAttribute(attributeName(Attribute::Split::Payee), split.payeeId());
-    writer->writeAttribute(attributeName(Attribute::Split::ReconcileDate), MyMoneyUtils::dateToString(split.reconcileDate()));
+    writer->writeAttribute(attributeName(Attribute::Split::ReconcileDate), MyMoneyUtils::dateToIsoString(split.reconcileDate()));
     writer->writeAttribute(attributeName(Attribute::Split::Action), split.action());
     writer->writeAttribute(attributeName(Attribute::Split::ReconcileFlag), QString::number(static_cast<int>(split.reconcileFlag())));
     writer->writeAttribute(attributeName(Attribute::Split::Value), split.value().toString());
@@ -445,9 +445,9 @@ void MyMoneyXmlWriterPrivate::writeTransaction(QXmlStreamWriter* writer, const M
 {
     writeStartObject(writer, nodeName(Node::Transaction), transaction);
 
-    writer->writeAttribute(attributeName(Attribute::Transaction::PostDate), MyMoneyUtils::dateToString(transaction.postDate()));
+    writer->writeAttribute(attributeName(Attribute::Transaction::PostDate), MyMoneyUtils::dateToIsoString(transaction.postDate()));
     writer->writeAttribute(attributeName(Attribute::Transaction::Memo), transaction.memo());
-    writer->writeAttribute(attributeName(Attribute::Transaction::EntryDate), MyMoneyUtils::dateToString(transaction.entryDate()));
+    writer->writeAttribute(attributeName(Attribute::Transaction::EntryDate), MyMoneyUtils::dateToIsoString(transaction.entryDate()));
     writer->writeAttribute(attributeName(Attribute::Transaction::Commodity), transaction.commodity());
 
     writer->writeStartElement(elementName(Element::Transaction::Splits));
@@ -489,12 +489,12 @@ void MyMoneyXmlWriterPrivate::writeSchedule(QXmlStreamWriter* writer, const MyMo
     writer->writeAttribute(attributeName(Attribute::Schedule::Occurrence), attrValue(static_cast<int>(schedule.occurrence())));
     writer->writeAttribute(attributeName(Attribute::Schedule::OccurrenceMultiplier), attrValue(schedule.occurrenceMultiplier()));
     writer->writeAttribute(attributeName(Attribute::Schedule::PaymentType), attrValue(static_cast<int>(schedule.paymentType())));
-    writer->writeAttribute(attributeName(Attribute::Schedule::StartDate), MyMoneyUtils::dateToString(schedule.startDate()));
-    writer->writeAttribute(attributeName(Attribute::Schedule::EndDate), MyMoneyUtils::dateToString(schedule.endDate()));
+    writer->writeAttribute(attributeName(Attribute::Schedule::StartDate), MyMoneyUtils::dateToIsoString(schedule.startDate()));
+    writer->writeAttribute(attributeName(Attribute::Schedule::EndDate), MyMoneyUtils::dateToIsoString(schedule.endDate()));
     writer->writeAttribute(attributeName(Attribute::Schedule::Fixed), attrValue(schedule.isFixed()));
     writer->writeAttribute(attributeName(Attribute::Schedule::LastDayInMonth), attrValue(schedule.lastDayInMonth()));
     writer->writeAttribute(attributeName(Attribute::Schedule::AutoEnter), attrValue(schedule.autoEnter()));
-    writer->writeAttribute(attributeName(Attribute::Schedule::LastPayment), MyMoneyUtils::dateToString(schedule.lastPayment()));
+    writer->writeAttribute(attributeName(Attribute::Schedule::LastPayment), MyMoneyUtils::dateToIsoString(schedule.lastPayment()));
     writer->writeAttribute(attributeName(Attribute::Schedule::WeekendOption), attrValue(static_cast<int>(schedule.weekendOption())));
 
     writeKeyValueContainer(writer, schedule);
@@ -505,7 +505,7 @@ void MyMoneyXmlWriterPrivate::writeSchedule(QXmlStreamWriter* writer, const MyMo
     writer->writeStartElement(elementName(Element::Schedule::Payments));
     for (const auto date : qAsConst(payments)) {
         writer->writeStartElement(elementName(Element::Schedule::Payment));
-        writer->writeAttribute(attributeName(Attribute::Schedule::Date), MyMoneyUtils::dateToString(date));
+        writer->writeAttribute(attributeName(Attribute::Schedule::Date), MyMoneyUtils::dateToIsoString(date));
         writer->writeEndElement();
     }
     writer->writeEndElement();
@@ -623,7 +623,7 @@ void MyMoneyXmlWriterPrivate::writePrices()
             to = entry.to();
         }
         m_writer->writeStartElement(nodeName(Node::Price));
-        m_writer->writeAttribute(attributeName(Attribute::General::Date), MyMoneyUtils::dateToString(entry.date()));
+        m_writer->writeAttribute(attributeName(Attribute::General::Date), MyMoneyUtils::dateToIsoString(entry.date()));
         m_writer->writeAttribute(attributeName(Attribute::General::Price), entry.rate(QString()).toString());
         m_writer->writeAttribute(attributeName(Attribute::General::Source), entry.source());
         m_writer->writeEndElement();
@@ -661,9 +661,9 @@ void MyMoneyXmlWriterPrivate::writeOnlineJob(const onlineJob& job, QXmlStreamWri
     MyMoneyXmlHelper::writeStartObject(writer, nodeName(Node::OnlineJob), job.id());
 
     if (!job.sendDate().isNull())
-        writer->writeAttribute(attributeName(Attribute::OnlineJob::Send), MyMoneyUtils::dateToString(job.sendDate().date()));
+        writer->writeAttribute(attributeName(Attribute::OnlineJob::Send), MyMoneyUtils::dateToIsoString(job.sendDate().date()));
     if (!job.bankAnswerDate().isNull())
-        writer->writeAttribute(attributeName(Attribute::OnlineJob::BankAnswerDate), MyMoneyUtils::dateToString(job.bankAnswerDate().date()));
+        writer->writeAttribute(attributeName(Attribute::OnlineJob::BankAnswerDate), MyMoneyUtils::dateToIsoString(job.bankAnswerDate().date()));
 
     switch (job.bankAnswerState()) {
     case eMyMoney::OnlineJob::sendingState::abortedByUser:

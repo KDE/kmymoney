@@ -12,6 +12,8 @@
 // QT Includes
 
 #include <QDate>
+#include <QLocale>
+#include <QMap>
 #include <QProcess>
 #include <QRegularExpression>
 #include <QTimeZone>
@@ -67,7 +69,7 @@ QString MyMoneyUtils::formatMoney(const MyMoneyMoney& val,
                            showThousandSeparator);
 }
 
-QString MyMoneyUtils::dateToString(const QDate& date)
+QString MyMoneyUtils::dateToIsoString(const QDate& date)
 {
     if (!date.isNull() && date.isValid())
         return date.toString(Qt::ISODate);
@@ -75,7 +77,7 @@ QString MyMoneyUtils::dateToString(const QDate& date)
     return QString();
 }
 
-QDate MyMoneyUtils::stringToDate(const QString& str)
+QDate MyMoneyUtils::isoStringToDate(const QString& str)
 {
     if (!str.isEmpty()) {
         QDate date = QDate::fromString(str, Qt::ISODate);
@@ -85,12 +87,12 @@ QDate MyMoneyUtils::stringToDate(const QString& str)
     return {};
 }
 
-QString MyMoneyUtils::dateTimeToString(const QDateTime& dateTime)
+QString MyMoneyUtils::dateTimeToIsoString(const QDateTime& dateTime)
 {
     return QDateTime(dateTime.date(), dateTime.time(), QTimeZone(dateTime.offsetFromUtc())).toString(Qt::ISODate);
 }
 
-QDateTime MyMoneyUtils::stringToDateTime(const QString& str)
+QDateTime MyMoneyUtils::isoStringToDateTime(const QString& str)
 {
     if (!str.isEmpty()) {
         QDateTime dateTime = QDateTime::fromString(str, Qt::ISODate);
@@ -163,9 +165,11 @@ void MyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, con
     }
 }
 
+typedef QMap<QLocale::FormatType, QString> LocaleFormats;
+
 Q_GLOBAL_STATIC(QString, dateTimeFormat);
 Q_GLOBAL_STATIC(QString, timeFormat);
-Q_GLOBAL_STATIC(QString, dateFormat);
+Q_GLOBAL_STATIC(LocaleFormats, dateFormat);
 
 QString MyMoneyUtils::formatDateTime(const QDateTime& dt)
 {
@@ -188,13 +192,26 @@ QString MyMoneyUtils::formatTime(const QTime& time)
 
 QString MyMoneyUtils::formatDate(const QDate& date, QLocale::FormatType formatType)
 {
-    if ((*dateFormat).isEmpty()) {
-        *dateFormat = QLocale().dateFormat(formatType);
-        if (!(*dateFormat).contains(QLatin1String("yyyy")) && (*dateFormat).contains(QLatin1String("yy"))) {
-            (*dateFormat).replace(QLatin1String("yy"), QLatin1String("yyyy"));
+    if (!(*dateFormat).contains(formatType)) {
+        auto format = QLocale().dateFormat(formatType);
+        if (!format.contains(QLatin1String("yyyy")) && format.contains(QLatin1String("yy"))) {
+            format.replace(QLatin1String("yy"), QLatin1String("yyyy"));
         }
+        (*dateFormat).insert(formatType, format);
     }
-    return date.toString(*dateFormat);
+    return date.toString((*dateFormat).value(formatType));
+}
+
+QDate MyMoneyUtils::stringToDate(const QString& text, QLocale::FormatType formatType)
+{
+    if (!(*dateFormat).contains(formatType)) {
+        auto format = QLocale().dateFormat(formatType);
+        if (!format.contains(QLatin1String("yyyy")) && format.contains(QLatin1String("yy"))) {
+            format.replace(QLatin1String("yy"), QLatin1String("yyyy"));
+        }
+        (*dateFormat).insert(formatType, format);
+    }
+    return QLocale().toDate(text, (*dateFormat).value(formatType));
 }
 
 void MyMoneyUtils::clearFormatCaches()

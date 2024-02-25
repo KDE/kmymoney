@@ -6,11 +6,15 @@
 #ifndef MYMONEYUTILSTEST_H
 #define MYMONEYUTILSTEST_H
 
+#include <QLocale>
 #include <QObject>
 
 class MyMoneyUtilsTest : public QObject
 {
     Q_OBJECT
+
+private:
+    QString firstShort;
 
 private Q_SLOTS:
     void init();
@@ -22,10 +26,14 @@ private Q_SLOTS:
     void testConvertRegularExpressionToWildcard();
     void testExtractId_data();
     void testExtractId();
-    void testStringToDateTime_data();
-    void testStringToDateTime();
-    void testDateTimeToString_data();
-    void testDateTimeToString();
+    void testIsoStringToDateTime_data();
+    void testIsoStringToDateTime();
+    void testDateTimeToIsoString_data();
+    void testDateTimeToIsoString();
+    void testDateToString_data();
+    void testDateToString();
+    void testStringToDate_data();
+    void testStringToDate();
 };
 
 #endif // MYMONEYUTILSTEST_H

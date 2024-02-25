@@ -31,8 +31,6 @@
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"
 #include "mymoneysecurity.h"
-/// @todo AlkOnlineQuote remove following include when ported to Alkimia
-#include "webpricequote.h"
 
 #include "kmmyesno.h"
 
@@ -224,12 +222,9 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
 
         if (!field("onlineSourceCombo").toString().isEmpty()) {
             if (field("useFinanceQuote").toBool()) {
-                FinanceQuoteProcess p;
                 newSecurity.setValue("kmm-online-quote-system", "Finance::Quote");
-                newSecurity.setValue("kmm-online-source", p.crypticName(field("onlineSourceCombo").toString()));
-            } else {
-                newSecurity.setValue("kmm-online-source", field("onlineSourceCombo").toString());
             }
+            newSecurity.setValue("kmm-online-source", field("onlineSourceCombo").toString());
         }
         if (d->ui->m_onlineUpdatePage->isOnlineFactorEnabled() && (field("onlineFactor").value<MyMoneyMoney>() != MyMoneyMoney::ONE))
             newSecurity.setValue("kmm-online-factor", field("onlineFactor").value<MyMoneyMoney>().toString());

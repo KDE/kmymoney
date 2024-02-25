@@ -46,23 +46,6 @@ public:
     void storePrices();
     MyMoneyPrice price(const QString& id) const;
 
-protected Q_SLOTS:
-    void slotConfigureClicked();
-    void slotUpdateSelectedClicked();
-    void slotUpdateAllClicked();
-    void slotUpdateSelection();
-    void slotDateChanged();
-
-    void logStatusMessage(const QString&);
-    void logErrorMessage(const QString&);
-    void slotReceivedCSVQuote(const QString& _kmmID, const QString& _webID, MyMoneyStatement& st);
-    void slotReceivedQuote(const QString& _kmmID, const QString& _webID, const QDate&, const double&);
-    void slotQuoteFailed(const QString& _kmmID, const QString& _webID);
-
-protected:
-    void addInvestment(const MyMoneySecurity& inv);
-    void finishUpdate();
-
 private:
     KEquityPriceUpdateDlgPrivate * const d_ptr;
     Q_DECLARE_PRIVATE(KEquityPriceUpdateDlg)

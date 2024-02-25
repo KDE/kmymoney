@@ -14,8 +14,8 @@ set( kmm_textbrowser_SRCS
   kmmtextbrowser.cpp
 )
 set( kmm_webconnect_SRCS
-  webpricequote.cpp
   webconnect.cpp
+  kmmonlinequotesprofilemanager.cpp
 )
 
 set ( kmm_keychain_SRCS

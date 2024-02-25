@@ -110,7 +110,7 @@ endif()
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Widgets Svg Xml Test PrintSupport)
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} OPTIONAL_COMPONENTS Sql Concurrent QuickWidgets)
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service XmlGui TextWidgets Notifications KIO)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service XmlGui TextWidgets Notifications KIO NewStuffCore NewStuff NewStuffQuick)
 
 # For KF5 < 5.100 we need to fix a few method names that
 # have been deprecated but are not available before that version.
