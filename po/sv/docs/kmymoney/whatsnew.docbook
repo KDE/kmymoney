@@ -17,7 +17,7 @@
 >As with every release, the &kmymoney; development team continues to work hard to make each version better and easier to use in every way. This is the third release in the 5.1 series, and most of the activity has been directed to fixing bugs. </para>
 
 <para
->As of 5.1, the conversion to using &kde; frameworks is essentially complete, although that and the work to update many of the underlying libraries used by the application are behind the scenes and not directly visible to the end user. The general look and feel should be stable, although some minor changes may still occur. The basic functionality of the program also remains the same, aside from intentional improvements and additions. </para>
+>As of 5.1, the conversion to using &kde-frameworks; is essentially complete, although that and the work to update many of the underlying libraries used by the application are behind the scenes and not directly visible to the end user. The general look and feel should be stable, although some minor changes may still occur. The basic functionality of the program also remains the same, aside from intentional improvements and additions. </para>
 
 <para
 >I tidigare utgåvor har den här sidan i handboken inkluderat en lista med många av de specifika felrättningarna och funktionsförbättringarna. Istället för att duplicera informationen, hittar du den direkt i <ulink url="https://kmymoney.org/changelog.html"
