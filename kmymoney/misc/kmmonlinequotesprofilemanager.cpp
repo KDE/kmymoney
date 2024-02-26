@@ -36,8 +36,8 @@ static struct OnlineProfileConfig {
                              "kmymoney-quotes.knsrc",
                              AlkOnlineQuotesProfile::Type::KMyMoney5,
                              false,
-                             kli18n(""),
-                             kli18n(""),
+                             KLazyLocalizedString(),
+                             KLazyLocalizedString(),
                          },
                          {
                              "Finance::Quote",
