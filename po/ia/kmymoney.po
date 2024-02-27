@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-26 01:39+0000\n"
-"PO-Revision-Date: 2024-01-31 11:50+0100\n"
+"PO-Revision-Date: 2024-02-26 11:04+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -1572,11 +1572,10 @@ msgid "[No identifier]"
 msgstr "[No identifier]"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:447
-#, fuzzy, kde-format
-#| msgid "No account selected"
+#, kde-format
 msgctxt "@info online update price info"
 msgid "No security selected."
-msgstr "Nulle conto seligite"
+msgstr "Nulle securitate seligite"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:457
 #, kde-format
@@ -1613,11 +1612,10 @@ msgid "Cannot update security <b>%1</b>: %2"
 msgstr ""
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:575
-#, fuzzy, kde-format
-#| msgid "Price found: '%1' (%2)"
+#, kde-format
 msgctxt "@info Online price update %1 online id, %2 internal id"
 msgid "Price for %1 updated (id %2)"
-msgstr "Precio trovate: '%1' (%2)"
+msgstr "Precio per %1 actualisate  (id %2)"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:577
 #, kde-format
@@ -7761,44 +7759,37 @@ msgid "<p>Invalid root element in template file <b>%1</b></p>"
 msgstr ""
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:99
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column External identifier (symbol)"
 msgid "ID"
 msgstr "ID"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:100
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "@title:column Name of security"
 msgid "Name"
 msgstr "Nomine"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:101
-#, fuzzy, kde-format
-#| msgid "Price"
+#, kde-format
 msgctxt "@title:column Price"
 msgid "Price"
 msgstr "Precio"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:102
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "@title:column Date for price"
 msgid "Date"
 msgstr "Data"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "Internal identifier"
-#| msgid "Internal ID"
+#, kde-format
 msgctxt "@title:column KMyMoney internal identifier"
 msgid "Internal ID"
 msgstr "ID interne"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:104
-#, fuzzy, kde-format
-#| msgid "Source"
+#, kde-format
 msgctxt "@title:column Online quote source"
 msgid "Source"
 msgstr "Fonte"
@@ -12780,9 +12771,9 @@ msgid "QIF profile name problem"
 msgstr ""
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:415
-#, kde-format
+#, fuzzy, kde-format
 msgid "Do you really want to delete profile '%1'?"
-msgstr ""
+msgstr "Tu vermente vole deler le profilo \"%1\"?"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:416
 #, kde-format
