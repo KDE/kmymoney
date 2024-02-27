@@ -31,6 +31,7 @@ set(kmm_base_widgets_SOURCES
   kaccounttemplateselector.cpp
   kguiutils.cpp
   kmmsearchwidget.cpp
+  kmmemptytreeview.cpp
   kmymoneyaccountcombo.cpp
   kmymoneyaccountcompletion.cpp
   kmymoneyaccountselector.cpp
