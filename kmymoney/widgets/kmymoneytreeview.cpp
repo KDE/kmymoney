@@ -16,8 +16,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-KMyMoneyTreeView::KMyMoneyTreeView(QWidget *parent)
-    : QTreeView(parent)
+KMyMoneyTreeView::KMyMoneyTreeView(QWidget* parent)
+    : KMMEmptyTreeView(parent)
 {
 }
 

@@ -86,6 +86,9 @@ public:
         q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestActionTrigger, q, &KCategoriesView::requestActionTrigger);
 
         m_focusWidget = ui->m_accountTree;
+
+        // ignore entries in the root level, they are the account groups and not accounts
+        ui->m_accountTree->setSkipRootLevelEntries(true);
     }
 
     Ui::KCategoriesView   *ui;

@@ -99,6 +99,10 @@ public:
 
         ui->m_scheduleTree->setModel(m_filterModel);
 
+        // ignore entries in the root level, they are groups and not schedules
+        ui->m_scheduleTree->setSkipRootLevelEntries(true);
+        ui->m_scheduleTree->setText(i18nc("@info:placeholder", "No schedules found"));
+
         readConfig();
 
         q->connect(ui->m_qbuttonNew, &QAbstractButton::clicked, pActions[eMenu::Action::NewSchedule], &QAction::trigger);

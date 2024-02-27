@@ -72,7 +72,7 @@
        <item>
         <layout class="QHBoxLayout">
          <item>
-          <widget class="QTreeView" name="m_equitiesTree">
+          <widget class="KMMEmptyTreeView" name="m_equitiesTree">
            <property name="contextMenuPolicy">
             <enum>Qt::CustomContextMenu</enum>
            </property>
@@ -127,7 +127,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QTreeView" name="m_securitiesTree">
+          <widget class="KMMEmptyTreeView" name="m_securitiesTree">
            <property name="contextMenuPolicy">
             <enum>Qt::CustomContextMenu</enum>
            </property>
@@ -179,6 +179,11 @@
    <class>KMyMoneyAccountCombo</class>
    <extends>KComboBox</extends>
    <header>kmymoneyaccountcombo.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMMEmptyTreeView</class>
+   <extends>QTreeView</extends>
+   <header>kmmemptytreeview.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -116,6 +116,9 @@ public:
                 }
             }
         });
+
+        // ignore entries in the root level, they are the account groups and not accounts
+        ui->m_accountTree->setSkipRootLevelEntries(true);
     }
 
     void editLoan()

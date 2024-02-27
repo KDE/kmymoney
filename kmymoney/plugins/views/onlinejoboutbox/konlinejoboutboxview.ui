@@ -26,7 +26,7 @@
    <item row="0" column="0" rowspan="5">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QTreeView" name="m_onlineJobView">
+      <widget class="KMMEmptyTreeView" name="m_onlineJobView">
        <property name="alternatingRowColors">
         <bool>true</bool>
        </property>
@@ -137,6 +137,11 @@
    <extends>QWidget</extends>
    <header>kmmsearchwidget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KMMEmptyTreeView</class>
+   <extends>QTreeView</extends>
+   <header>kmmemptytreeview.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

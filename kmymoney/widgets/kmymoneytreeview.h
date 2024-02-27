@@ -11,21 +11,20 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QTreeView>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmmemptytreeview.h"
 /**
   * This class overrides a standard QTreeView in such a way that
   * it emits the signal startEdit upon a mouse double click event
   * or a Return/Enter key press and suppresses further processing
   * of the event.
   */
-class KMM_BASE_WIDGETS_EXPORT KMyMoneyTreeView : public QTreeView
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyTreeView : public KMMEmptyTreeView
 {
     Q_OBJECT
     Q_DISABLE_COPY(KMyMoneyTreeView)
