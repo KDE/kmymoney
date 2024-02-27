@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Giovanni Sora <g.sora@tiscali.it>, 2013, 2014, 2020, 2021, 2022, 2023.
+# Giovanni Sora <g.sora@tiscali.it>, 2013, 2014, 2020, 2021, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-21 02:26+0000\n"
-"PO-Revision-Date: 2023-08-25 12:55+0200\n"
+"PO-Revision-Date: 2024-02-26 11:12+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -1832,7 +1832,7 @@ msgstr ""
 #: kmymoney/mymoney/mymoneysecurity.cpp:268
 #, kde-format
 msgid "Round"
-msgstr ""
+msgstr "Round (Circular)"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KEditEquityEntry)
 #: kmymoney/dialogs/keditequityentry.ui:17
@@ -2361,7 +2361,7 @@ msgstr "Precio ja existe"
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:759
 #, kde-format
 msgid "Price for %1 updated (id %2)"
-msgstr ""
+msgstr "Precio per %1 actualisate  (id %2)"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:701
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:779
@@ -2972,7 +2972,7 @@ msgstr ""
 #: kmymoney/dialogs/knewaccountdlg.cpp:716
 #, kde-format
 msgid "Hidden categories"
-msgstr ""
+msgstr "Categorias celate"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:776
 #, kde-format
@@ -2996,7 +2996,7 @@ msgstr ""
 #: kmymoney/dialogs/knewaccountdlg.cpp:935
 #, kde-format
 msgid "Create category"
-msgstr ""
+msgstr "Crea categoria"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:961
 #, kde-format
@@ -4473,7 +4473,7 @@ msgstr "Identificator"
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:68
 #, kde-format
 msgid "Regular Expression to extract the identifier from the downloaded data"
-msgstr ""
+msgstr "Expression regular per extraher le data ex le datos discargate"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_editDate)
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_editDateFormat)
@@ -5166,7 +5166,7 @@ msgstr "Transferer a"
 #: kmymoney/dialogs/stdtransactioneditor.cpp:742
 #, kde-format
 msgid "Select autofill transaction"
-msgstr ""
+msgstr "Selige  transaction autoreimplente"
 
 #: kmymoney/dialogs/stdtransactioneditor.cpp:1600
 #, kde-format
@@ -5727,7 +5727,7 @@ msgstr "Nove categoria..."
 #: kmymoney/kmymoney.cpp:1431
 #, kde-format
 msgid "Edit category..."
-msgstr ""
+msgstr "Modifica Categoria..."
 
 #: kmymoney/kmymoney.cpp:1432
 #, kde-format
@@ -12906,7 +12906,7 @@ msgstr ""
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:411
 #, kde-format
 msgid "Do you really want to delete profile '%1'?"
-msgstr ""
+msgstr "Tu vermente vole deler le profilo \"'%1\"?"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tabGeneral)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:53
@@ -18178,7 +18178,7 @@ msgstr ""
 #: kmymoney/views/kcategoriesview.cpp:242
 #, kde-format
 msgid "Edit category '%1'"
-msgstr ""
+msgstr "Modifica Categoria '%1'"
 
 #: kmymoney/views/kcategoriesview.cpp:265
 #, kde-format
@@ -22249,7 +22249,7 @@ msgstr ""
 #, kde-format
 msgctxt "Rounding method"
 msgid "Round"
-msgstr ""
+msgstr "Round (Circular)"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:65
 #, kde-format
