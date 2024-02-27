@@ -16,6 +16,9 @@
 #include <QMenu>
 #include <QTimer>
 
+#include <QPainter>
+#include <QStyledItemDelegate>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -326,6 +329,7 @@ void KInvestmentView::executeAction(eMenu::Action action, const SelectedObjects&
         break;
     }
 }
+
 void KInvestmentView::showEvent(QShowEvent* event)
 {
     Q_D(KInvestmentView);
@@ -431,12 +435,24 @@ void KInvestmentView::showEvent(QShowEvent* event)
                                                                 -1,
                                                                 Qt::MatchExactly | Qt::MatchRecursive);
             if (indexes.count()) {
-                qDebug() << indexes.count();
                 d->ui->m_accountComboBox->setSelected(QString());
             }
             d->ui->m_accountComboBox->setSelected(accountId);
         }
     }
+
+    const auto tab = static_cast<eView::Investment::Tab>(d->ui->m_tab->currentIndex());
+
+    switch (tab) {
+    case eView::Investment::Tab::Equities:
+        d->m_selections = d->m_equitySelections;
+        d->m_selections.setSelection(SelectedObjects::Security, d->m_securitySelections.selection(SelectedObjects::Security));
+        break;
+    case eView::Investment::Tab::Securities:
+        d->m_selections = d->m_securitySelections;
+        break;
+    }
+    Q_EMIT requestSelectionChange(d->m_selections);
 }
 
 void KInvestmentView::updateActions(const SelectedObjects& selections)
