@@ -2,13 +2,11 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Sairan Kikkarin <sairan@computer.org>, 2012, 2013.
-#: kmymoney/misc/kmmonlinequotesprofilemanager.cpp:39
-#: kmymoney/misc/kmmonlinequotesprofilemanager.cpp:40
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-26 01:39+0000\n"
+"POT-Creation-Date: 2024-02-28 01:36+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -315,8 +313,8 @@ msgstr ""
 "батырмасын басу керек."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1645
-#: kmymoney/views/kscheduledview_p.h:196 kmymoney/views/kscheduledview_p.h:311
-#: kmymoney/views/kscheduledview_p.h:315
+#: kmymoney/views/kscheduledview_p.h:200 kmymoney/views/kscheduledview_p.h:315
+#: kmymoney/views/kscheduledview_p.h:319
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Жоспарлаған <b>'%1</b> транзакциясын енгізуге болмайды"
@@ -19727,24 +19725,24 @@ msgstr "Ескерту: Пайдаланылмаған санатарды жас
 msgid "Total Profits:"
 msgstr "Жалпы пайда"
 
-#: kmymoney/views/kaccountsview_p.h:189
+#: kmymoney/views/kaccountsview_p.h:192
 #, kde-format
 msgid "Edit account '%1'"
 msgstr "'%1' есепшотын өзгерту"
 
-#: kmymoney/views/kaccountsview_p.h:245
+#: kmymoney/views/kaccountsview_p.h:248
 #, fuzzy, kde-format
 #| msgid "Edit account..."
 msgctxt "Undo action description"
 msgid "Edit account"
 msgstr "Есепшотты өзгерту..."
 
-#: kmymoney/views/kaccountsview_p.h:279
+#: kmymoney/views/kaccountsview_p.h:282
 #, kde-format
 msgid "Unable to modify account '%1'. Cause: %2"
 msgstr "'%1' есепшоты өзгертілмеді. Себебі: %2"
 
-#: kmymoney/views/kaccountsview_p.h:355
+#: kmymoney/views/kaccountsview_p.h:358
 #, fuzzy, kde-format
 #| msgid ""
 #| "The balance of account <b>%1</b> dropped below the warning balance of %2."
@@ -19752,17 +19750,17 @@ msgid ""
 "The balance of the account must be zero before the account can be closed"
 msgstr "<b>%1</b> есепшоттың балансы ескеретін %2 деңгейінен төмен түсті."
 
-#: kmymoney/views/kaccountsview_p.h:358
+#: kmymoney/views/kaccountsview_p.h:361
 #, kde-format
 msgid "All subaccounts must be closed before the account can be closed"
 msgstr ""
 
-#: kmymoney/views/kaccountsview_p.h:361
+#: kmymoney/views/kaccountsview_p.h:364
 #, kde-format
 msgid "This account is still included in an active schedule"
 msgstr ""
 
-#: kmymoney/views/kaccountsview_p.h:364
+#: kmymoney/views/kaccountsview_p.h:367
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>The given application account <b>%1</b> has not been mapped to an "
@@ -20393,17 +20391,17 @@ msgstr "Мекемені өшіру..."
 msgid "Unable to delete institution: %1"
 msgstr "Мекеме өшірілмеді: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:271
+#: kmymoney/views/kinvestmentview.cpp:521
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p><b>%1</b> инвестициясын өшірмексіз бе?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:272
+#: kmymoney/views/kinvestmentview.cpp:522
 #, kde-format
 msgid "Delete investment"
 msgstr "Инвестицияны кетіру"
 
-#: kmymoney/views/kinvestmentview.cpp:283
+#: kmymoney/views/kinvestmentview.cpp:533
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "Инвестицияны кетіру болмады: %1"
@@ -20426,7 +20424,7 @@ msgstr "Қаржы құралдары"
 msgid "Select Account:"
 msgstr "Есепшот таңдауы:"
 
-#. i18n: ectx: property (toolTip), widget (QTreeView, m_equitiesTree)
+#. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
 #: kmymoney/views/kinvestmentview.ui:80
 #, kde-format
 msgid ""
@@ -20927,7 +20925,14 @@ msgctxt "Placeholdertext in schedulesview"
 msgid "Filter"
 msgstr "Сүзгі"
 
-#: kmymoney/views/kscheduledview_p.h:250
+#: kmymoney/views/kscheduledview_p.h:104
+#, fuzzy, kde-format
+#| msgid "Schedule found"
+msgctxt "@info:placeholder"
+msgid "No schedules found"
+msgstr "Жоспар табылды"
+
+#: kmymoney/views/kscheduledview_p.h:254
 #, kde-format
 msgid ""
 "Are you sure you wish to stop this scheduled transaction from being entered "
@@ -20940,14 +20945,14 @@ msgstr ""
 "\n"
 "KMyMoney бұны, келесіде қолмен енгізбейінше, ұсына береді."
 
-#: kmymoney/views/kscheduledview_p.h:252
+#: kmymoney/views/kscheduledview_p.h:256
 #, fuzzy, kde-format
 #| msgid "Enter schedule"
 msgctxt "@title:window"
 msgid "Stop entering schedule"
 msgstr "Жоспарды енгізу"
 
-#: kmymoney/views/kscheduledview_p.h:351
+#: kmymoney/views/kscheduledview_p.h:355
 #, fuzzy, kde-format
 #| msgid ""
 #| "Do you really want to skip the <b>%1</b> transaction scheduled for <b>%2</"
@@ -20959,14 +20964,14 @@ msgstr ""
 "<b>%2</b> дегенге жоспарланған <b>%1</b> транзакция өткізіп кеткеніңіз "
 "келгені шын ба?"
 
-#: kmymoney/views/kscheduledview_p.h:354
+#: kmymoney/views/kscheduledview_p.h:358
 #, fuzzy, kde-format
 #| msgid "Edit scheduled transaction"
 msgctxt "@title:window"
 msgid "Skip scheduled transaction"
 msgstr "Транзакция жоспарын өшіру"
 
-#: kmymoney/views/kscheduledview_p.h:367
+#: kmymoney/views/kscheduledview_p.h:371
 #, fuzzy, kde-format
 #| msgid "Unable to skip scheduled transaction <b>%1</b>."
 msgid "<qt>Unable to skip scheduled transaction <b>%1</b>.</qt>"
@@ -21950,6 +21955,13 @@ msgstr ""
 msgctxt "@title header of the account name column"
 msgid "Name"
 msgstr "Атауы"
+
+#: kmymoney/widgets/kmmemptytreeview.cpp:25
+#, fuzzy, kde-format
+#| msgid "No accounts found."
+msgctxt "Placeholder for when there is no data in a view"
+msgid "No data found"
+msgstr "Есепшет табылмады."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KMMSearchWidget)
 #: kmymoney/widgets/kmmsearchwidget.ui:14

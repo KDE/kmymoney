@@ -3,13 +3,11 @@
 #
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2010, 2011, 2014.
 # Balázs Úr <urbalazs@gmail.com>, 2012, 2013, 2014.
-#: kmymoney/misc/kmmonlinequotesprofilemanager.cpp:39
-#: kmymoney/misc/kmmonlinequotesprofilemanager.cpp:40
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-26 01:39+0000\n"
+"POT-Creation-Date: 2024-02-28 01:36+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -308,8 +306,8 @@ msgstr ""
 "gombot megnyomni."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1645
-#: kmymoney/views/kscheduledview_p.h:196 kmymoney/views/kscheduledview_p.h:311
-#: kmymoney/views/kscheduledview_p.h:315
+#: kmymoney/views/kscheduledview_p.h:200 kmymoney/views/kscheduledview_p.h:315
+#: kmymoney/views/kscheduledview_p.h:319
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Nem lehet megadni a/az '%1' ütemezett tranzakciót"
@@ -19362,24 +19360,24 @@ msgstr ""
 msgid "Total Profits:"
 msgstr "Teljes profit:"
 
-#: kmymoney/views/kaccountsview_p.h:189
+#: kmymoney/views/kaccountsview_p.h:192
 #, kde-format
 msgid "Edit account '%1'"
 msgstr "'%1' számla szerkesztése"
 
-#: kmymoney/views/kaccountsview_p.h:245
+#: kmymoney/views/kaccountsview_p.h:248
 #, fuzzy, kde-format
 #| msgid "Edit account..."
 msgctxt "Undo action description"
 msgid "Edit account"
 msgstr "Számla szerkesztése…"
 
-#: kmymoney/views/kaccountsview_p.h:279
+#: kmymoney/views/kaccountsview_p.h:282
 #, kde-format
 msgid "Unable to modify account '%1'. Cause: %2"
 msgstr "Nem lehet módosítani a '%1' számlát. Ok: %2"
 
-#: kmymoney/views/kaccountsview_p.h:355
+#: kmymoney/views/kaccountsview_p.h:358
 #, fuzzy, kde-format
 #| msgid ""
 #| "The balance of account <b>%1</b> dropped below the warning balance of %2."
@@ -19387,17 +19385,17 @@ msgid ""
 "The balance of the account must be zero before the account can be closed"
 msgstr "A <b>%1</b> számla egyenlege a figyelmeztetési %2 összeg alá csökken."
 
-#: kmymoney/views/kaccountsview_p.h:358
+#: kmymoney/views/kaccountsview_p.h:361
 #, kde-format
 msgid "All subaccounts must be closed before the account can be closed"
 msgstr ""
 
-#: kmymoney/views/kaccountsview_p.h:361
+#: kmymoney/views/kaccountsview_p.h:364
 #, kde-format
 msgid "This account is still included in an active schedule"
 msgstr ""
 
-#: kmymoney/views/kaccountsview_p.h:364
+#: kmymoney/views/kaccountsview_p.h:367
 #, kde-format
 msgid "This account is still mapped to an online account"
 msgstr ""
@@ -20028,17 +20026,17 @@ msgstr "Intézet törlése…t"
 msgid "Unable to delete institution: %1"
 msgstr "Nem lehet öröltni az intézményt: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:271
+#: kmymoney/views/kinvestmentview.cpp:521
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>Valóban törölni akarja a befektetést: <b>%1</b>?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:272
+#: kmymoney/views/kinvestmentview.cpp:522
 #, kde-format
 msgid "Delete investment"
 msgstr "Befektetés törlése"
 
-#: kmymoney/views/kinvestmentview.cpp:283
+#: kmymoney/views/kinvestmentview.cpp:533
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "Nem lehet törölni a befektetést: %1"
@@ -20061,7 +20059,7 @@ msgstr "Részvények"
 msgid "Select Account:"
 msgstr "Válasszon számlát:"
 
-#. i18n: ectx: property (toolTip), widget (QTreeView, m_equitiesTree)
+#. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
 #: kmymoney/views/kinvestmentview.ui:80
 #, kde-format
 msgid ""
@@ -20553,7 +20551,14 @@ msgctxt "Placeholdertext in schedulesview"
 msgid "Filter"
 msgstr "Szűrő"
 
-#: kmymoney/views/kscheduledview_p.h:250
+#: kmymoney/views/kscheduledview_p.h:104
+#, fuzzy, kde-format
+#| msgid "Schedule found"
+msgctxt "@info:placeholder"
+msgid "No schedules found"
+msgstr "Ütemezés található"
+
+#: kmymoney/views/kscheduledview_p.h:254
 #, kde-format
 msgid ""
 "Are you sure you wish to stop this scheduled transaction from being entered "
@@ -20563,14 +20568,14 @@ msgid ""
 "it later."
 msgstr ""
 
-#: kmymoney/views/kscheduledview_p.h:252
+#: kmymoney/views/kscheduledview_p.h:256
 #, fuzzy, kde-format
 #| msgid "Enter schedule"
 msgctxt "@title:window"
 msgid "Stop entering schedule"
 msgstr "Ütemezés megadása"
 
-#: kmymoney/views/kscheduledview_p.h:351
+#: kmymoney/views/kscheduledview_p.h:355
 #, fuzzy, kde-format
 #| msgid ""
 #| "Do you really want to skip the <b>%1</b> transaction scheduled for <b>%2</"
@@ -20582,14 +20587,14 @@ msgstr ""
 "Valóban mellőzni akarod <b>%1</b> tranzakciót, ami ütemezve lett ekkora: <b>"
 "%2</b>?"
 
-#: kmymoney/views/kscheduledview_p.h:354
+#: kmymoney/views/kscheduledview_p.h:358
 #, fuzzy, kde-format
 #| msgid "Edit scheduled transaction"
 msgctxt "@title:window"
 msgid "Skip scheduled transaction"
 msgstr "Ütemezett tranzakció szerkesztése"
 
-#: kmymoney/views/kscheduledview_p.h:367
+#: kmymoney/views/kscheduledview_p.h:371
 #, fuzzy, kde-format
 #| msgid "Unable to skip scheduled transaction <b>%1</b>."
 msgid "<qt>Unable to skip scheduled transaction <b>%1</b>.</qt>"
@@ -21536,6 +21541,13 @@ msgstr ""
 msgctxt "@title header of the account name column"
 msgid "Name"
 msgstr "Név"
+
+#: kmymoney/widgets/kmmemptytreeview.cpp:25
+#, fuzzy, kde-format
+#| msgid "No accounts found."
+msgctxt "Placeholder for when there is no data in a view"
+msgid "No data found"
+msgstr "Nem találhatóak számlák."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KMMSearchWidget)
 #: kmymoney/widgets/kmmsearchwidget.ui:14

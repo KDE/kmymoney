@@ -6,13 +6,11 @@
 # SPDX-FileCopyrightText: 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
 # Raul Gonzalez <raulgf83@gmail.com>, 2014, 2015.
 # Sofia Priego <spriego@darksylvania.net>, 2016.
-#: kmymoney/misc/kmmonlinequotesprofilemanager.cpp:39
-#: kmymoney/misc/kmmonlinequotesprofilemanager.cpp:40
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-26 01:39+0000\n"
+"POT-Creation-Date: 2024-02-28 01:36+0000\n"
 "PO-Revision-Date: 2024-02-27 00:14+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -324,8 +322,8 @@ msgstr ""
 "b>."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1645
-#: kmymoney/views/kscheduledview_p.h:196 kmymoney/views/kscheduledview_p.h:311
-#: kmymoney/views/kscheduledview_p.h:315
+#: kmymoney/views/kscheduledview_p.h:200 kmymoney/views/kscheduledview_p.h:315
+#: kmymoney/views/kscheduledview_p.h:319
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "No ha sido posible introducir el asiento planificado «%1»"
@@ -19193,39 +19191,39 @@ msgstr ""
 msgid "Total Profits:"
 msgstr "Beneficios totales:"
 
-#: kmymoney/views/kaccountsview_p.h:189
+#: kmymoney/views/kaccountsview_p.h:192
 #, kde-format
 msgid "Edit account '%1'"
 msgstr "Editar cuenta «%1»"
 
-#: kmymoney/views/kaccountsview_p.h:245
+#: kmymoney/views/kaccountsview_p.h:248
 #, kde-format
 msgctxt "Undo action description"
 msgid "Edit account"
 msgstr "Editar cuenta"
 
-#: kmymoney/views/kaccountsview_p.h:279
+#: kmymoney/views/kaccountsview_p.h:282
 #, kde-format
 msgid "Unable to modify account '%1'. Cause: %2"
 msgstr "No ha sido posible modificar la cuenta «%1». Motivo: %2"
 
-#: kmymoney/views/kaccountsview_p.h:355
+#: kmymoney/views/kaccountsview_p.h:358
 #, kde-format
 msgid ""
 "The balance of the account must be zero before the account can be closed"
 msgstr "El saldo de la cuenta debe ser cero para poder cerrarla"
 
-#: kmymoney/views/kaccountsview_p.h:358
+#: kmymoney/views/kaccountsview_p.h:361
 #, kde-format
 msgid "All subaccounts must be closed before the account can be closed"
 msgstr "Debe cerrar todas las subcuentas antes de cerrar una cuenta"
 
-#: kmymoney/views/kaccountsview_p.h:361
+#: kmymoney/views/kaccountsview_p.h:364
 #, kde-format
 msgid "This account is still included in an active schedule"
 msgstr "Esta cuenta todavía está incluida en una planificación activa"
 
-#: kmymoney/views/kaccountsview_p.h:364
+#: kmymoney/views/kaccountsview_p.h:367
 #, kde-format
 msgid "This account is still mapped to an online account"
 msgstr "Esta cuenta todavía está conectada a una cuenta en línea"
@@ -19837,17 +19835,17 @@ msgstr "Borrar institución"
 msgid "Unable to delete institution: %1"
 msgstr "No se puede borrar la institución: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:271
+#: kmymoney/views/kinvestmentview.cpp:521
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>¿Desea realmente borrar la inversión <b>%1</b>?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:272
+#: kmymoney/views/kinvestmentview.cpp:522
 #, kde-format
 msgid "Delete investment"
 msgstr "Borrar inversión"
 
-#: kmymoney/views/kinvestmentview.cpp:283
+#: kmymoney/views/kinvestmentview.cpp:533
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "No se ha podido borrar la inversión: %1"
@@ -19870,7 +19868,7 @@ msgstr "Patrimonio"
 msgid "Select Account:"
 msgstr "Seleccionar cuenta:"
 
-#. i18n: ectx: property (toolTip), widget (QTreeView, m_equitiesTree)
+#. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
 #: kmymoney/views/kinvestmentview.ui:80
 #, kde-format
 msgid ""
@@ -20334,7 +20332,14 @@ msgctxt "Placeholdertext in schedulesview"
 msgid "Filter"
 msgstr "Filtro"
 
-#: kmymoney/views/kscheduledview_p.h:250
+#: kmymoney/views/kscheduledview_p.h:104
+#, fuzzy, kde-format
+#| msgid "Schedule found"
+msgctxt "@info:placeholder"
+msgid "No schedules found"
+msgstr "Planificación encontrada"
+
+#: kmymoney/views/kscheduledview_p.h:254
 #, kde-format
 msgid ""
 "Are you sure you wish to stop this scheduled transaction from being entered "
@@ -20348,13 +20353,13 @@ msgstr ""
 "KMyMoney le preguntará de nuevo la próxima vez que inicie a menos que lo "
 "asiente manualmente más tarde."
 
-#: kmymoney/views/kscheduledview_p.h:252
+#: kmymoney/views/kscheduledview_p.h:256
 #, kde-format
 msgctxt "@title:window"
 msgid "Stop entering schedule"
 msgstr "Detener introducción de planificación"
 
-#: kmymoney/views/kscheduledview_p.h:351
+#: kmymoney/views/kscheduledview_p.h:355
 #, kde-format
 msgid ""
 "<qt>Do you really want to skip the <b>%1</b> transaction scheduled for <b>"
@@ -20363,13 +20368,13 @@ msgstr ""
 "<qt>¿Realmente desea omitir la transacción <b>%1</b> planificada para <b>%2</"
 "b>?</qt>"
 
-#: kmymoney/views/kscheduledview_p.h:354
+#: kmymoney/views/kscheduledview_p.h:358
 #, kde-format
 msgctxt "@title:window"
 msgid "Skip scheduled transaction"
 msgstr "Omitir transacción planificada"
 
-#: kmymoney/views/kscheduledview_p.h:367
+#: kmymoney/views/kscheduledview_p.h:371
 #, kde-format
 msgid "<qt>Unable to skip scheduled transaction <b>%1</b>.</qt>"
 msgstr ""
@@ -21295,6 +21300,13 @@ msgstr ""
 msgctxt "@title header of the account name column"
 msgid "Name"
 msgstr "Nombre"
+
+#: kmymoney/widgets/kmmemptytreeview.cpp:25
+#, fuzzy, kde-format
+#| msgid "No accounts found."
+msgctxt "Placeholder for when there is no data in a view"
+msgid "No data found"
+msgstr "No se ha encontrado ninguna cuenta."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KMMSearchWidget)
 #: kmymoney/widgets/kmmsearchwidget.ui:14
