@@ -17,7 +17,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmmemptytreeview.h"
+#include "kmmemptyview.h"
 /**
   * This class overrides a standard QTreeView in such a way that
   * it emits the signal startEdit upon a mouse double click event

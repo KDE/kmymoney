@@ -141,7 +141,7 @@
   <customwidget>
    <class>KMMEmptyTreeView</class>
    <extends>QTreeView</extends>
-   <header>kmmemptytreeview.h</header>
+   <header>kmmemptyview.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

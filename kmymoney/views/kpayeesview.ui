@@ -94,7 +94,7 @@
         </layout>
        </item>
        <item>
-        <widget class="QListView" name="m_payees">
+        <widget class="KMMEmptyListView" name="m_payees">
          <property name="alternatingRowColors">
           <bool>true</bool>
          </property>
@@ -571,14 +571,14 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KEditListWidget</class>
-   <extends>QWidget</extends>
-   <header>keditlistwidget.h</header>
   </customwidget>
   <customwidget>
    <class>KTextEdit</class>
@@ -586,9 +586,9 @@
    <header>ktextedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
+   <class>KEditListWidget</class>
+   <extends>QWidget</extends>
+   <header>keditlistwidget.h</header>
   </customwidget>
   <customwidget>
    <class>KMyMoneyAccountCombo</class>
@@ -606,6 +606,11 @@
    <class>LedgerView</class>
    <extends>QTableView</extends>
    <header>ledgerview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMMEmptyListView</class>
+   <extends>QListView</extends>
+   <header>kmmemptyview.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
