@@ -1634,18 +1634,16 @@ msgid "[No identifier]"
 msgstr ""
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:447
-#, fuzzy, kde-format
-#| msgid "No account selected"
+#, kde-format
 msgctxt "@info online update price info"
 msgid "No security selected."
-msgstr "Nebyl vybrán účet"
+msgstr ""
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:457
-#, fuzzy, kde-format
-#| msgid "Security found"
+#, kde-format
 msgctxt "@info online update price info"
 msgid "No Security to be updated."
-msgstr "Cenný papír nalezen"
+msgstr ""
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:481
 #, kde-format
@@ -1682,18 +1680,16 @@ msgid "Cannot update security <b>%1</b>: %2"
 msgstr "Nelze aktualizovat cenný papír <b>%1</b>: %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:575
-#, fuzzy, kde-format
-#| msgid "Price for %1 updated (id %2)"
+#, kde-format
 msgctxt "@info Online price update %1 online id, %2 internal id"
 msgid "Price for %1 updated (id %2)"
-msgstr "Cena pro %1 aktualizována (id %2)"
+msgstr ""
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:577
-#, fuzzy, kde-format
-#| msgid "Received an invalid price for %1, unable to update."
+#, kde-format
 msgctxt "@info Online price update %1 online id"
 msgid "Received an invalid price for %1, unable to update."
-msgstr "Byla obdržena neplatná cena %1, nelze aktualizovat."
+msgstr ""
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:622
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
@@ -7896,46 +7892,40 @@ msgid "<p>Invalid root element in template file <b>%1</b></p>"
 msgstr ""
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:99
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column External identifier (symbol)"
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:100
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "@title:column Name of security"
 msgid "Name"
-msgstr "Název"
+msgstr ""
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:101
-#, fuzzy, kde-format
-#| msgid "Price"
+#, kde-format
 msgctxt "@title:column Price"
 msgid "Price"
-msgstr "Cena"
+msgstr ""
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:102
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "@title:column Date for price"
 msgid "Date"
-msgstr "Datum"
+msgstr ""
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:103
-#, fuzzy, kde-format
-#| msgid "Interval:"
+#, kde-format
 msgctxt "@title:column KMyMoney internal identifier"
 msgid "Internal ID"
-msgstr "Interval:"
+msgstr ""
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:104
-#, fuzzy, kde-format
-#| msgid "Source"
+#, kde-format
 msgctxt "@title:column Online quote source"
 msgid "Source"
-msgstr "Zdroj"
+msgstr ""
 
 #: kmymoney/mymoney/onlinetasks/unavailabletask/tasks/unavailabletask.cpp:23
 #, kde-format
@@ -19671,11 +19661,10 @@ msgid "Filter"
 msgstr "Filtr"
 
 #: kmymoney/views/kscheduledview_p.h:104
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "No schedules found"
-msgstr "Finanční plán nalezen"
+msgstr ""
 
 #: kmymoney/views/kscheduledview_p.h:254
 #, kde-format
@@ -20589,11 +20578,10 @@ msgid "Name"
 msgstr "Název"
 
 #: kmymoney/widgets/kmmemptytreeview.cpp:25
-#, fuzzy, kde-format
-#| msgid "No accounts found."
+#, kde-format
 msgctxt "Placeholder for when there is no data in a view"
 msgid "No data found"
-msgstr "Účty nenalezeny."
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KMMSearchWidget)
 #: kmymoney/widgets/kmmsearchwidget.ui:14
@@ -24530,67 +24518,3 @@ msgstr ""
 "\n"
 "<p>Veškeré informace jsou volitelně a používají se pouze pro zosobnění "
 "vašeho KMyMoney.</p>"
-
-#~ msgctxt "Equity name"
-#~ msgid "Name"
-#~ msgstr "Název"
-
-#~ msgctxt "Online quote source"
-#~ msgid "Source"
-#~ msgstr "Zdroj"
-
-#~ msgctxt ""
-#~ "Log message e.g. 'Prices for EUR > USD updated between 2001-01-01 and "
-#~ "2001-02-01 (id EUR USD)'"
-#~ msgid "Prices for %1 updated between %3 and %4 (id %2)"
-#~ msgstr "Ceny pro %1 aktualizována %3 a %4 (id %2)"
-
-#~ msgid ""
-#~ "Received a price for %1 (id %2), but this symbol is not on the list. "
-#~ "Aborting entire update."
-#~ msgstr ""
-#~ "Obdržel jsem cenu %1 (id %2), ale tento symbol není na seznamu. Přerušuji "
-#~ "celou aktualizaci."
-
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Symbol"
-#~ msgstr "Symbol"
-
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Name"
-#~ msgstr "Název"
-
-#~ msgid "Source <placeholder>%1</placeholder> does not exist."
-#~ msgstr "Zdroj <placeholder>%1</placeholder> neexistuje."
-
-#~ msgid "Fetching URL %1..."
-#~ msgstr "Stahuji URL %1"
-
-#~ msgctxt "The process x is executing"
-#~ msgid "Executing %1..."
-#~ msgstr "Provádím %1..."
-
-#~ msgid "Unable to launch: %1"
-#~ msgstr "Nelze spustit: %1"
-
-#~ msgid "Failed to open downloaded file"
-#~ msgstr "Nelze otevřít stažený soubor"
-
-#~ msgctxt "Executing 'script' 'online source' 'investment symbol' "
-#~ msgid "Executing %1 %2 %3..."
-#~ msgstr "Provádím %1 %2 %3..."
-
-#~ msgid "Price found: '%1' (%2)"
-#~ msgstr "Cena nalezena: '%1' (%2)"
-
-#~ msgid "Date found: '%1'"
-#~ msgstr "Datum nalezeno: '%1'"
-
-#~ msgid "Unable to update price for %1 (no price or no date)"
-#~ msgstr "Nelze aktualizovat cenu %1 (žádná cena nebo datum)"
-
-#~ msgid "Unable to update price for %1 (empty quote data)"
-#~ msgstr "Nelze aktualizovat cenu %1 (prázdná data)"
-
-#~ msgid "Unable to update price for %1 (error encountered: '%2')"
-#~ msgstr "Nelze aktualizovat cenu %1 (zjištěna chyba: '%2')"

@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-28 01:36+0000\n"
-"PO-Revision-Date: 2024-02-26 21:46+0100\n"
+"PO-Revision-Date: 2024-02-28 15:50+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -20276,11 +20276,10 @@ msgid "Filter"
 msgstr "Filtrar"
 
 #: kmymoney/views/kscheduledview_p.h:104
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "No schedules found"
-msgstr "Atopouse unha planificación"
+msgstr "Non se atopou ningunha planificación."
 
 #: kmymoney/views/kscheduledview_p.h:254
 #, kde-format
@@ -21239,11 +21238,10 @@ msgid "Name"
 msgstr "Nome"
 
 #: kmymoney/widgets/kmmemptytreeview.cpp:25
-#, fuzzy, kde-format
-#| msgid "No accounts found."
+#, kde-format
 msgctxt "Placeholder for when there is no data in a view"
 msgid "No data found"
-msgstr "Non se atopou ningunha conta."
+msgstr "Non se atoparon datos."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KMMSearchWidget)
 #: kmymoney/widgets/kmmsearchwidget.ui:14

@@ -2,22 +2,23 @@
 # Copyright (C) 2006-2024 This_file_is_part_of_KDE
 # This file is put in the public domain.
 #
-# SPDX-FileCopyrightText: 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Antoni Bella Pérez <antonibella5@yahoo.com>
+# SPDX-FileCopyrightText: 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Antoni Bella Pérez <antonibella5@yahoo.com>
+# SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Josep M. Ferrer <txemaq@gmail.com>
 # Orestes Mas Casals <orestes@tsc.upc.edu>, 2006, 2010, 2011.
-# Josep M. Ferrer <txemaq@gmail.com>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024.
+# Josep M. Ferrer <txemaq@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-28 01:36+0000\n"
-"PO-Revision-Date: 2024-02-05 09:37+0100\n"
-"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
+"PO-Revision-Date: 2024-02-28 17:30+0100\n"
+"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -1720,18 +1721,16 @@ msgid "[No identifier]"
 msgstr "[Sense identificador]"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:447
-#, fuzzy, kde-format
-#| msgid "No account selected"
+#, kde-format
 msgctxt "@info online update price info"
 msgid "No security selected."
-msgstr "No s'ha seleccionat cap compte"
+msgstr "No s'ha seleccionat cap títol."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:457
-#, fuzzy, kde-format
-#| msgid "Security found"
+#, kde-format
 msgctxt "@info online update price info"
 msgid "No Security to be updated."
-msgstr "S'ha trobat un títol"
+msgstr "No hi ha cap títol a actualitzar."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:481
 #, kde-format
@@ -1769,18 +1768,16 @@ msgid "Cannot update security <b>%1</b>: %2"
 msgstr "No s'ha pogut actualitzar el títol <b>%1</b>: %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:575
-#, fuzzy, kde-format
-#| msgid "Price for %1 updated (id %2)"
+#, kde-format
 msgctxt "@info Online price update %1 online id, %2 internal id"
 msgid "Price for %1 updated (id %2)"
 msgstr "S'ha actualitzat el preu de %1 (ID %2)"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:577
-#, fuzzy, kde-format
-#| msgid "Received an invalid price for %1, unable to update."
+#, kde-format
 msgctxt "@info Online price update %1 online id"
 msgid "Received an invalid price for %1, unable to update."
-msgstr "S'ha rebut una cotització no vàlida per a %1; no es pot actualitzar."
+msgstr "S'ha rebut un preu no vàlid per a %1; no es pot actualitzar."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:622
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
@@ -6238,17 +6235,18 @@ msgstr "Error no capturat. Informeu dels detalls als desenvolupadors"
 msgctxt "@info:tooltip"
 msgid "Finance::Quote not supported by the installed Alkimia library."
 msgstr ""
+"Finance::Quote no està implementat per la biblioteca Alkimia instal·lada."
 
 #: kmymoney/misc/kmmonlinequotesprofilemanager.cpp:48
 msgctxt "@info:tooltip"
 msgid "Missing or non-functioning Finance::Quote installation."
-msgstr ""
+msgstr "Falta la instal·lació de Finance::Quote o no funciona."
 
 #: kmymoney/misc/kmmonlinequotesprofilemanager.cpp:125
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Online quote source with name '%1' unknown."
-msgstr ""
+msgstr "La font de cotitzacions en línia amb nom desconegut «%1»."
 
 #: kmymoney/misc/kmmyesno.cpp:21
 #, kde-format
@@ -8168,44 +8166,37 @@ msgid "<p>Invalid root element in template file <b>%1</b></p>"
 msgstr "<p>Element arrel no vàlid en el fitxer de plantilla <b>%1</b></p>"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:99
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column External identifier (symbol)"
 msgid "ID"
 msgstr "ID"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:100
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "@title:column Name of security"
 msgid "Name"
 msgstr "Nom"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:101
-#, fuzzy, kde-format
-#| msgid "Price"
+#, kde-format
 msgctxt "@title:column Price"
 msgid "Price"
 msgstr "Preu"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:102
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "@title:column Date for price"
 msgid "Date"
 msgstr "Data"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "Internal identifier"
-#| msgid "Internal ID"
+#, kde-format
 msgctxt "@title:column KMyMoney internal identifier"
 msgid "Internal ID"
 msgstr "ID intern"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:104
-#, fuzzy, kde-format
-#| msgid "Source"
+#, kde-format
 msgctxt "@title:column Online quote source"
 msgid "Source"
 msgstr "Font"
@@ -20393,11 +20384,10 @@ msgid "Filter"
 msgstr "Filtre"
 
 #: kmymoney/views/kscheduledview_p.h:104
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "No schedules found"
-msgstr "S'ha trobat una planificació"
+msgstr "No s'ha trobat cap planificació"
 
 #: kmymoney/views/kscheduledview_p.h:254
 #, kde-format
@@ -21373,11 +21363,10 @@ msgid "Name"
 msgstr "Nom"
 
 #: kmymoney/widgets/kmmemptytreeview.cpp:25
-#, fuzzy, kde-format
-#| msgid "No accounts found."
+#, kde-format
 msgctxt "Placeholder for when there is no data in a view"
 msgid "No data found"
-msgstr "No s'ha trobat cap compte."
+msgstr "No s'ha trobat cap dada"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KMMSearchWidget)
 #: kmymoney/widgets/kmmsearchwidget.ui:14
@@ -25373,124 +25362,3 @@ msgstr ""
 "\n"
 "<p>Tota la informació és optativa i s'utilitza per a personalitzar el fitxer "
 "de KMyMoney.</p>"
-
-#~ msgctxt "Equity name"
-#~ msgid "Name"
-#~ msgstr "Nom"
-
-#~ msgctxt "Online quote source"
-#~ msgid "Source"
-#~ msgstr "Font"
-
-#~ msgid ""
-#~ "For <b>%1</b> on <b>%2</b> price <b>%3</b> already exists.<br>Do you want "
-#~ "to replace it with <b>%4</b>?"
-#~ msgstr ""
-#~ "Per a <b>%1</b> a <b>%2</b> ja existix el preu <b>%3</b>.<br>El voleu "
-#~ "substituir per <b>%4</b>?"
-
-#~ msgid "Price Already Exists"
-#~ msgstr "El preu ja existix"
-
-#~ msgctxt ""
-#~ "Log message e.g. 'Prices for EUR > USD updated between 2001-01-01 and "
-#~ "2001-02-01 (id EUR USD)'"
-#~ msgid "Prices for %1 updated between %3 and %4 (id %2)"
-#~ msgstr "S'ha actualitzat el preu de %1 (ID %2) entre el %3 i el %4"
-
-#~ msgid ""
-#~ "Received a price for %1 (id %2), but this symbol is not on the list. "
-#~ "Aborting entire update."
-#~ msgstr ""
-#~ "S'ha rebut un preu per a %1 (ID %2), però este símbol no es troba en la "
-#~ "llista. S'interromp l'actualització sencera."
-
-#~ msgid "List of known Equities, and the date they were last updated on."
-#~ msgstr "Llista d'accions conegudes, i la data en què es van actualitzar."
-
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Symbol"
-#~ msgstr "Símbol"
-
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Identification number"
-#~ msgstr "Número d'identificació"
-
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Name"
-#~ msgstr "Nom"
-
-#~ msgid "New Quote Source"
-#~ msgstr "Font de cotitzacions nova"
-
-#~ msgid ""
-#~ "Security <b>%1</b> uses this quote source.<br>Do you really want to "
-#~ "remove it?"
-#~ msgstr ""
-#~ "El títol <b>%1</b> utilitza esta font de cotització.<br>Segur que la "
-#~ "voleu eliminar?"
-
-#~ msgctxt "@title:window"
-#~ msgid "Delete quote source"
-#~ msgstr "Suprimiu una font de cotitzacions"
-
-#~ msgid "Source <placeholder>%1</placeholder> does not exist."
-#~ msgstr "La font <placeholder>%1</placeholder> no existix."
-
-#~ msgid "Cannot resolve input date."
-#~ msgstr "No s'ha pogut resoldre la data d'entrada."
-
-#~ msgid "CSV source <placeholder>%1</placeholder> does not exist."
-#~ msgstr "La font <placeholder>%1</placeholder> de CSV no existix."
-
-#~ msgid "Cannot find from and to currency."
-#~ msgstr "No s'ha pogut trobar la divisa d'origen ni de destinació."
-
-#~ msgid "Local quote sources aren't supported."
-#~ msgstr "No s'admeten fonts de cotització locals."
-
-#~ msgid "Fetching URL %1..."
-#~ msgstr "S'està recuperant l'URL %1..."
-
-#~ msgid ""
-#~ "<placeholder>%1</placeholder> skipped because it doesn't have "
-#~ "identification number."
-#~ msgstr ""
-#~ "S'ha omés <placeholder>%1</placeholder> perquè no té cap número "
-#~ "d'identificació."
-
-#~ msgctxt "The process x is executing"
-#~ msgid "Executing %1..."
-#~ msgstr "S'està executant %1..."
-
-#~ msgid "Unable to launch: %1"
-#~ msgstr "No s'ha pogut executar: %1"
-
-#~ msgid "Failed to open downloaded file"
-#~ msgstr "No s'ha pogut obrir el fitxer baixat"
-
-#~ msgctxt "Executing 'script' 'online source' 'investment symbol' "
-#~ msgid "Executing %1 %2 %3..."
-#~ msgstr "S'està executant %1 %2 %3..."
-
-#~ msgid "Unable to update price for %1"
-#~ msgstr "No s'ha pogut actualitzar el preu de %1"
-
-#~ msgid "Identifier found: '%1'"
-#~ msgstr "S'ha trobat un identificador: «%1»"
-
-#~ msgid "Price found: '%1' (%2)"
-#~ msgstr "S'ha trobat un preu: «%1» (%2)"
-
-#~ msgid "Date found: '%1'"
-#~ msgstr "S'ha trobat una data: «%1»"
-
-#~ msgid "Unable to update price for %1 (no price or no date)"
-#~ msgstr "No s'ha pogut actualitzar el preu de %1 (no hi ha preu o data)"
-
-#~ msgid "Unable to update price for %1 (empty quote data)"
-#~ msgstr ""
-#~ "No s'ha pogut actualitzar el preu de %1 (dades de cotització buides)"
-
-#~ msgid "Unable to update price for %1 (error encountered: '%2')"
-#~ msgstr "No s'ha pogut actualitzar el preu de %1 (error detectat: «%2»)"

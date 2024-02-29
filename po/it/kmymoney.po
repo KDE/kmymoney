@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-28 01:36+0000\n"
-"PO-Revision-Date: 2024-02-05 14:15+0100\n"
+"PO-Revision-Date: 2024-02-26 14:12+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1718,18 +1718,16 @@ msgid "[No identifier]"
 msgstr "[Nessun identificatore]"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:447
-#, fuzzy, kde-format
-#| msgid "No account selected"
+#, kde-format
 msgctxt "@info online update price info"
 msgid "No security selected."
-msgstr "Nessun conto selezionato"
+msgstr "Nessuno strumento finanziario selezionato."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:457
-#, fuzzy, kde-format
-#| msgid "Name of security to import."
+#, kde-format
 msgctxt "@info online update price info"
 msgid "No Security to be updated."
-msgstr "Nome dello strumento finanziario da importare."
+msgstr "Nessuno strumento finanziario da aggiornare."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:481
 #, kde-format
@@ -1767,15 +1765,13 @@ msgid "Cannot update security <b>%1</b>: %2"
 msgstr "Impossibile aggiornare lo strumento finanziario <b>%1</b>: %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:575
-#, fuzzy, kde-format
-#| msgid "Price for %1 updated (id %2)"
+#, kde-format
 msgctxt "@info Online price update %1 online id, %2 internal id"
 msgid "Price for %1 updated (id %2)"
 msgstr "Prezzo per %1 aggiornato (id %2)"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:577
-#, fuzzy, kde-format
-#| msgid "Received an invalid price for %1, unable to update."
+#, kde-format
 msgctxt "@info Online price update %1 online id"
 msgid "Received an invalid price for %1, unable to update."
 msgstr "Ricevuto un prezzo non valido per %1, impossibile aggiornare."
@@ -6219,18 +6215,18 @@ msgstr "Errore non catturato. Segnala i dettagli agli sviluppatori"
 #: kmymoney/misc/kmmonlinequotesprofilemanager.cpp:47
 msgctxt "@info:tooltip"
 msgid "Finance::Quote not supported by the installed Alkimia library."
-msgstr ""
+msgstr "Finanza::Quote non supportato dalla libreria Alkimia installata."
 
 #: kmymoney/misc/kmmonlinequotesprofilemanager.cpp:48
 msgctxt "@info:tooltip"
 msgid "Missing or non-functioning Finance::Quote installation."
-msgstr ""
+msgstr "Installazione Finance::Quote mancante o non funzionante."
 
 #: kmymoney/misc/kmmonlinequotesprofilemanager.cpp:125
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Online quote source with name '%1' unknown."
-msgstr ""
+msgstr "Fonte della quotazione in linea con nome «%1» sconosciuta."
 
 #: kmymoney/misc/kmmyesno.cpp:21
 #, kde-format
@@ -8153,44 +8149,37 @@ msgid "<p>Invalid root element in template file <b>%1</b></p>"
 msgstr "<p>Elemento radice non valido nel file di modello <b>%1</b></p>"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:99
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column External identifier (symbol)"
 msgid "ID"
 msgstr "ID"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:100
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "@title:column Name of security"
 msgid "Name"
 msgstr "Nome"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:101
-#, fuzzy, kde-format
-#| msgid "Price"
+#, kde-format
 msgctxt "@title:column Price"
 msgid "Price"
 msgstr "Prezzo"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:102
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "@title:column Date for price"
 msgid "Date"
 msgstr "Data"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "Internal identifier"
-#| msgid "Internal ID"
+#, kde-format
 msgctxt "@title:column KMyMoney internal identifier"
 msgid "Internal ID"
 msgstr "ID interno"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:104
-#, fuzzy, kde-format
-#| msgid "Source"
+#, kde-format
 msgctxt "@title:column Online quote source"
 msgid "Source"
 msgstr "Fonte"
