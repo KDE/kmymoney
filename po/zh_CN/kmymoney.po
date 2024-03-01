@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-21 02:26+0000\n"
-"PO-Revision-Date: 2024-02-05 11:43\n"
+"PO-Revision-Date: 2024-02-29 13:00\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -2370,7 +2370,7 @@ msgstr "名称"
 #, kde-format
 msgctxt "Internal identifier"
 msgid "Internal ID"
-msgstr "内部 ID"
+msgstr ""
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:86
 #, kde-format
@@ -2430,7 +2430,7 @@ msgstr "价格已存在"
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:759
 #, kde-format
 msgid "Price for %1 updated (id %2)"
-msgstr "%1的价格已更新 (id %2)"
+msgstr ""
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:701
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:779
@@ -2443,7 +2443,7 @@ msgstr "已收到%1的价格(id %2)，但是列表中没有此代号。终止整
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:763
 #, kde-format
 msgid "Received an invalid price for %1, unable to update."
-msgstr "已收到的%1的价格非法。无法更新。"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KEquityPriceUpdateDlg)
 #: kmymoney/dialogs/kequitypriceupdatedlg.ui:15
@@ -4483,7 +4483,7 @@ msgstr "新报价来源"
 #, kde-format
 msgctxt "@item:inlistbox Stock"
 msgid "Symbol"
-msgstr "代号"
+msgstr "符号"
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:90
 #, kde-format
