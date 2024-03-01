@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-28 01:36+0000\n"
-"PO-Revision-Date: 2024-02-11 02:13+0100\n"
+"POT-Creation-Date: 2024-03-01 02:01+0000\n"
+"PO-Revision-Date: 2024-02-29 03:10+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -1573,12 +1573,10 @@ msgid "[No identifier]"
 msgstr ""
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:447
-#, fuzzy, kde-format
-#| msgctxt "@info Missing parent account selection in new account wizard"
-#| msgid "No parent account selected"
+#, kde-format
 msgctxt "@info online update price info"
 msgid "No security selected."
-msgstr "მშობელი ანგარიში არჩეული არაა"
+msgstr "უსაფრთხოება არჩეული არაა."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:457
 #, kde-format
@@ -1615,8 +1613,7 @@ msgid "Cannot update security <b>%1</b>: %2"
 msgstr ""
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:575
-#, fuzzy, kde-format
-#| msgid "Price for %1 updated (id %2)"
+#, kde-format
 msgctxt "@info Online price update %1 online id, %2 internal id"
 msgid "Price for %1 updated (id %2)"
 msgstr "%1-ის ფასი განახლდა (id %2)"
@@ -7748,44 +7745,37 @@ msgid "<p>Invalid root element in template file <b>%1</b></p>"
 msgstr ""
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:99
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column External identifier (symbol)"
 msgid "ID"
 msgstr "ID"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:100
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "@title:column Name of security"
 msgid "Name"
 msgstr "სახელი"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:101
-#, fuzzy, kde-format
-#| msgid "Price"
+#, kde-format
 msgctxt "@title:column Price"
 msgid "Price"
 msgstr "ფასი"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:102
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "@title:column Date for price"
 msgid "Date"
 msgstr "თარიღი"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "Internal identifier"
-#| msgid "Internal ID"
+#, kde-format
 msgctxt "@title:column KMyMoney internal identifier"
 msgid "Internal ID"
 msgstr "შიდა ID"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:104
-#, fuzzy, kde-format
-#| msgid "Source"
+#, kde-format
 msgctxt "@title:column Online quote source"
 msgid "Source"
 msgstr "წყარო"
@@ -19310,11 +19300,10 @@ msgid "Filter"
 msgstr "ფილტრი"
 
 #: kmymoney/views/kscheduledview_p.h:104
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "No schedules found"
-msgstr "განრიგი ნაპოვნია"
+msgstr "განრიგი ვერ ვპოვე"
 
 #: kmymoney/views/kscheduledview_p.h:254
 #, kde-format
@@ -20205,12 +20194,11 @@ msgctxt "@title header of the account name column"
 msgid "Name"
 msgstr "სახელი"
 
-#: kmymoney/widgets/kmmemptytreeview.cpp:25
-#, fuzzy, kde-format
-#| msgid "No date"
+#: kmymoney/widgets/kmmemptyview.h:48
+#, kde-format
 msgctxt "Placeholder for when there is no data in a view"
 msgid "No data found"
-msgstr "თარიღის გარეშე"
+msgstr "მონაცემების გარეშე"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KMMSearchWidget)
 #: kmymoney/widgets/kmmsearchwidget.ui:14

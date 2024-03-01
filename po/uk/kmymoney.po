@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-28 01:36+0000\n"
+"POT-Creation-Date: 2024-03-01 02:01+0000\n"
 "PO-Revision-Date: 2024-02-28 08:37+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -21390,7 +21390,7 @@ msgctxt "@title header of the account name column"
 msgid "Name"
 msgstr "Назва"
 
-#: kmymoney/widgets/kmmemptytreeview.cpp:25
+#: kmymoney/widgets/kmmemptyview.h:48
 #, kde-format
 msgctxt "Placeholder for when there is no data in a view"
 msgid "No data found"

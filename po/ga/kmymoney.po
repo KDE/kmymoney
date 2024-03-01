@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-28 01:36+0000\n"
+"POT-Creation-Date: 2024-03-01 02:01+0000\n"
 "PO-Revision-Date: 2009-12-24 06:59-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -21101,7 +21101,7 @@ msgctxt "@title header of the account name column"
 msgid "Name"
 msgstr "Ainm"
 
-#: kmymoney/widgets/kmmemptytreeview.cpp:25
+#: kmymoney/widgets/kmmemptyview.h:48
 #, fuzzy, kde-format
 #| msgid "All dates"
 msgctxt "Placeholder for when there is no data in a view"

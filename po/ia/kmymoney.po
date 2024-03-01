@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-28 01:36+0000\n"
-"PO-Revision-Date: 2024-02-26 11:04+0100\n"
+"POT-Creation-Date: 2024-03-01 02:01+0000\n"
+"PO-Revision-Date: 2024-02-29 15:49+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -12769,9 +12769,9 @@ msgid "QIF profile name problem"
 msgstr ""
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:415
-#, fuzzy, kde-format
+#, kde-format
 msgid "Do you really want to delete profile '%1'?"
-msgstr "Tu vermente vole deler le profilo \"%1\"?"
+msgstr "Tu vermente vole deler le profilo \"'%1\"?"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:416
 #, kde-format
@@ -19314,11 +19314,10 @@ msgid "Filter"
 msgstr "Filtro"
 
 #: kmymoney/views/kscheduledview_p.h:104
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "No schedules found"
-msgstr "Horario trovate"
+msgstr "Necun horario trovate"
 
 #: kmymoney/views/kscheduledview_p.h:254
 #, kde-format
@@ -20219,12 +20218,11 @@ msgctxt "@title header of the account name column"
 msgid "Name"
 msgstr "Nomine"
 
-#: kmymoney/widgets/kmmemptytreeview.cpp:25
-#, fuzzy, kde-format
-#| msgid "No accounts found."
+#: kmymoney/widgets/kmmemptyview.h:48
+#, kde-format
 msgctxt "Placeholder for when there is no data in a view"
 msgid "No data found"
-msgstr "Il non trovata alcun conto."
+msgstr "Nulle datos trovate"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KMMSearchWidget)
 #: kmymoney/widgets/kmmsearchwidget.ui:14
