@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-01 02:01+0000\n"
-"PO-Revision-Date: 2024-02-27 10:58+0100\n"
+"PO-Revision-Date: 2024-02-29 09:39+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -20492,11 +20492,10 @@ msgid "Filter"
 msgstr "Filtrer"
 
 #: kmymoney/views/kscheduledview_p.h:104
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "No schedules found"
-msgstr "Opération récurrente trouvée"
+msgstr "Aucune échéancier trouvé."
 
 #: kmymoney/views/kscheduledview_p.h:254
 #, kde-format
@@ -21478,11 +21477,10 @@ msgid "Name"
 msgstr "Nom"
 
 #: kmymoney/widgets/kmmemptyview.h:48
-#, fuzzy, kde-format
-#| msgid "No accounts found."
+#, kde-format
 msgctxt "Placeholder for when there is no data in a view"
 msgid "No data found"
-msgstr "Pas de compte trouvé."
+msgstr "Aucune donnée trouvée."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KMMSearchWidget)
 #: kmymoney/widgets/kmmsearchwidget.ui:14
