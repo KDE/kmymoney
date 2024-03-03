@@ -24,10 +24,6 @@ namespace Ui {
 class KInvestmentTypeWizardPage;
 }
 
-/**
- * This class implements the investment type page of the
- * @ref KNewInvestmentWizard.
- */
 class KInvestmentTypeWizardPage : public QWizardPage
 {
     Q_OBJECT

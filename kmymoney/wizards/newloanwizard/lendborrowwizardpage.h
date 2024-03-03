@@ -21,11 +21,6 @@ namespace Ui {
 class LendBorrowWizardPage;
 }
 
-/**
- * This class implements the Online Update page of the
- * @ref KNewInvestmentWizard.
- */
-
 class LendBorrowWizardPage : public QWizardPage
 {
     Q_OBJECT

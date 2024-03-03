@@ -21,11 +21,6 @@ namespace Ui {
 class PaymentFrequencyWizardPage;
 }
 
-/**
- * This class implements the Payment Frequency page of the
- * @ref KNewInvestmentWizard.
- */
-
 class PaymentFrequencyWizardPage : public QWizardPage
 {
     Q_OBJECT
