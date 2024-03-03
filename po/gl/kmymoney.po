@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-01 02:01+0000\n"
-"PO-Revision-Date: 2024-02-28 15:50+0100\n"
+"PO-Revision-Date: 2024-03-02 21:15+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -4260,7 +4260,7 @@ msgstr "Conciliado"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:371
 #, kde-format
 msgid "Autofill"
-msgstr "Preencher automaticamente"
+msgstr "Encher automaticamente"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioButton1)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:380
@@ -4272,7 +4272,7 @@ msgstr "Non encher automaticamente os datos do asento."
 #: kmymoney/dialogs/settings/ksettingsregister.ui:383
 #, kde-format
 msgid "No Autofill"
-msgstr "Non preencher automaticamente"
+msgstr "Non encher automaticamente"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioButton2)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:392
@@ -4349,7 +4349,7 @@ msgid ""
 "autofilled."
 msgstr ""
 "Se marca esta opción hanse usar os conceptos do anterior asento, en caso "
-"contrario non se terán en conta os asentos ao preencher automaticamente o "
+"contrario non se terán en conta os asentos ao encher automaticamente o "
 "asento."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoFillUseMemos)
@@ -6842,7 +6842,7 @@ msgstr "Rematado: %1 %2"
 #: kmymoney/mymoney/mymoneyfile.cpp:3282
 #, kde-format
 msgid "Austrian Schilling"
-msgstr "Xelín austríaco"
+msgstr "Xilin austríaco"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3284
 #, kde-format
@@ -6907,7 +6907,7 @@ msgstr "Lev búlgaro"
 #: kmymoney/mymoney/mymoneyfile.cpp:3311
 #, kde-format
 msgid "Romanian Leu"
-msgstr "Leu romeno"
+msgstr "Leu romanés"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3314
 #, kde-format
@@ -6972,7 +6972,7 @@ msgstr "Kuna croata"
 #: kmymoney/mymoney/mymoneyfile.cpp:3365
 #, kde-format
 msgid "Afghanistan Afghani"
-msgstr "Afganí Afgano"
+msgstr "Afgani afgán"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3366
 #, kde-format
@@ -7027,12 +7027,12 @@ msgstr "Dólar das Bahamas"
 #: kmymoney/mymoney/mymoneyfile.cpp:3377
 #, kde-format
 msgid "Bahraini Dinar"
-msgstr "Dinar do Barén"
+msgstr "Dinar de Bahrain"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3378
 #, kde-format
 msgid "Bangladeshi Taka"
-msgstr "Taka bangladechiano"
+msgstr "Taka bangladesí"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3379
 #, kde-format
@@ -7127,7 +7127,7 @@ msgstr "Riel camboxano"
 #: kmymoney/mymoney/mymoneyfile.cpp:3397
 #, kde-format
 msgid "Canadian Dollar"
-msgstr "Dólar canadiano"
+msgstr "Dólar do Canadá"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3398
 #, kde-format
@@ -7252,7 +7252,7 @@ msgstr "Lari xeorxiano"
 #: kmymoney/mymoney/mymoneyfile.cpp:3422
 #, kde-format
 msgid "Ghanaian Cedi"
-msgstr "Cedi ganés"
+msgstr "Cedi de Ghana"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3423
 #, kde-format
@@ -7272,12 +7272,12 @@ msgstr "Peso guineano"
 #: kmymoney/mymoney/mymoneyfile.cpp:3426
 #, kde-format
 msgid "Guyanan Dollar"
-msgstr "Dólar da Guiana"
+msgstr "Dólar da Güiana"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3427
 #, kde-format
 msgid "Haitian Gourde"
-msgstr "Gurde haitiano"
+msgstr "Gourde haitiano"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3428
 #, kde-format
@@ -7342,12 +7342,12 @@ msgstr "Dinar xordano"
 #: kmymoney/mymoney/mymoneyfile.cpp:3440
 #, kde-format
 msgid "Kazakhstan Tenge"
-msgstr "Tenge cazaquistanés"
+msgstr "Tenge casaco"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3441
 #, kde-format
 msgid "Kenyan Shilling"
-msgstr "Xelín queniano"
+msgstr "Xilin kenyano"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3442
 #, kde-format
@@ -7357,7 +7357,7 @@ msgstr "Dinar kuwaití"
 #: kmymoney/mymoney/mymoneyfile.cpp:3443
 #, kde-format
 msgid "Kyrgyzstan Som"
-msgstr "Som quirguiz"
+msgstr "Som kirguiz"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3444
 #, kde-format
@@ -7377,7 +7377,7 @@ msgstr "Libra libanesa"
 #: kmymoney/mymoney/mymoneyfile.cpp:3447
 #, kde-format
 msgid "Lesotho Loti"
-msgstr "Loti lesotiano"
+msgstr "Loti"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3448
 #, kde-format
@@ -7442,7 +7442,7 @@ msgstr "Peso mexicano"
 #: kmymoney/mymoney/mymoneyfile.cpp:3460
 #, kde-format
 msgid "Moldavian Leu"
-msgstr "Leu moldavo"
+msgstr "Leu moldovo"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3461
 #, kde-format
@@ -7512,7 +7512,7 @@ msgstr "Balboa panameño"
 #: kmymoney/mymoney/mymoneyfile.cpp:3475
 #, kde-format
 msgid "Papua New Guinea Kina"
-msgstr "Kina da Papúa-Nova Guiné"
+msgstr "Kina"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3476
 #, kde-format
@@ -7562,7 +7562,7 @@ msgstr "Tala samoana"
 #: kmymoney/mymoney/mymoneyfile.cpp:3485
 #, kde-format
 msgid "Sao Tome and Principe Dobra"
-msgstr "Dobra sao-tomense"
+msgstr "Dobra"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3486
 #, kde-format
@@ -7597,17 +7597,17 @@ msgstr "Dólar das Illas Salomón"
 #: kmymoney/mymoney/mymoneyfile.cpp:3492
 #, kde-format
 msgid "Somali Shilling"
-msgstr "Xelín somaliano"
+msgstr "Xilin somalí"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3493
 #, kde-format
 msgid "South African Rand"
-msgstr "Rand sul-africano"
+msgstr "Rand surafricano"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3494
 #, kde-format
 msgid "South Korean Won"
-msgstr "Won sul-coreano"
+msgstr "Won surcoreano"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3495
 #, kde-format
@@ -7632,7 +7632,7 @@ msgstr "Florín do Suriname"
 #: kmymoney/mymoney/mymoneyfile.cpp:3499
 #, kde-format
 msgid "Swaziland Lilangeni"
-msgstr "Lilangeni suazilandés"
+msgstr "Lilangeni"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3500
 #, kde-format
@@ -7662,7 +7662,7 @@ msgstr "Tajikistan Somoni"
 #: kmymoney/mymoney/mymoneyfile.cpp:3505
 #, kde-format
 msgid "Tanzanian Shilling"
-msgstr "Xelín tanzano"
+msgstr "Xilin tanzano"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3506
 #, kde-format
@@ -7702,12 +7702,12 @@ msgstr "Dólar americano"
 #: kmymoney/mymoney/mymoneyfile.cpp:3513
 #, kde-format
 msgid "Uganda Shilling"
-msgstr "Xelín ugandés"
+msgstr "Xilin ugandés"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3514
 #, kde-format
 msgid "Ukraine Hryvnia"
-msgstr "Hryvnia ucraniana"
+msgstr "Hrivnia ucraína"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3515
 #, kde-format
@@ -7727,7 +7727,7 @@ msgstr "Peso uruguaio"
 #: kmymoney/mymoney/mymoneyfile.cpp:3518
 #, kde-format
 msgid "Uzbekistani Sum"
-msgstr "Sum usbequistanés"
+msgstr "Som uzbeko"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3519
 #, kde-format
@@ -7855,7 +7855,7 @@ msgstr "Cada oito semanas"
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every two months"
-msgstr "Bimestralmente"
+msgstr "Cada dous meses"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:905
 #: kmymoney/mymoney/mymoneyschedule.cpp:963
@@ -7868,7 +7868,7 @@ msgstr "Trimestralmente"
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Quarterly"
-msgstr "Cuadrimestralmente"
+msgstr "Cada catro meses"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:909
 #: kmymoney/mymoney/mymoneyschedule.cpp:966
@@ -8247,7 +8247,7 @@ msgstr "Conciliado"
 #, kde-format
 msgctxt "Reconciliation flag F"
 msgid "F"
-msgstr "Cx"
+msgstr "F"
 
 #: kmymoney/mymoney/statusmodel.cpp:47
 #, kde-format
@@ -10073,15 +10073,13 @@ msgstr "comprar, mercar, adquirir"
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "sell,repurchase"
-msgstr ""
-"vender,readquirir,adquirir de novo,remercar,mercar de novo,recomprar,comprar "
-"de novo"
+msgstr "vender,adquirir de novo,mercar de novo,recomprar,comprar de novo"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1582
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "reinvest,reinv,re-inv"
-msgstr "inverstir de novo,reinvestir"
+msgstr "investir de novo,reinvestir"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1584
 #, kde-format
@@ -10903,7 +10901,7 @@ msgstr "Sen símbolo"
 #: kmymoney/views/kinvestmentview.ui:114
 #, kde-format
 msgid "Securities"
-msgstr "Valores bursátiles"
+msgstr "Valores bolsistas"
 
 #. i18n: ectx: property (text), widget (QLabel, label_title)
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:26
@@ -14496,7 +14494,7 @@ msgstr "&Contrasinal"
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:293
 #, kde-format
 msgid "Preload &all data"
-msgstr "Cargar de antemao &todos os datos"
+msgstr "Cargar de antemán &todos os datos"
 
 #: kmymoney/plugins/sql/mymoneystoragesql.cpp:135
 #, kde-format
@@ -16226,7 +16224,7 @@ msgstr "Semanalmente"
 #, kde-format
 msgctxt "@item the columns will display bi-monthly data"
 msgid "Bi-Monthly"
-msgstr "Bimensalmente"
+msgstr "Dúas veces ao mes"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:621
@@ -17455,7 +17453,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:30
 #, kde-format
 msgid "Average days"
-msgstr "Días promedio"
+msgstr "Días de media"
 
 #. i18n: ectx: property (text), widget (QLabel, m_rowsLabel)
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:50
@@ -20965,7 +20963,7 @@ msgid ""
 "on the tabbar above to select an account.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>As contas marcadas como favoritas abriranse "
-"automaticametne cando KMyMoney abra o ficheiro ou base de datos. Use o botón "
+"automaticamente cando KMyMoney abra o ficheiro ou base de datos. Use o botón "
 "+ da barra de lapelas enriba para seleccionar unha conta.</p></body></html>"
 
 #: kmymoney/views/splitdialog.cpp:319
@@ -23729,7 +23727,7 @@ msgstr "Este asistente permítelle modificar o investimento escollido."
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:74
 #, kde-format
 msgid "This wizard allows you to modify the selected security."
-msgstr "Este asistente permítelle modificar o valor bursátil escollido."
+msgstr "Este asistente permítelle modificar o valor bolsista escollido."
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:117
 #, kde-format
@@ -23914,7 +23912,7 @@ msgstr ""
 "\n"
 "KMyMoney calculou o empréstito como se mostra no resumo de abaixo. Pode "
 "aceptar estes valores escollendo «Seguinte» ou cambialos escollendo «Atrás» "
-"para voltar ao campo de entrada da información que queira cambiar."
+"para volver ao campo de entrada da información que queira cambiar."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel6_3_2_2_2)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel6)
@@ -24140,7 +24138,7 @@ msgid ""
 "Note: You can easily figure out the date of the first payment if you consult "
 "the last statement of last year."
 msgstr ""
-"Nota: Pode averiguar con facilidade a data do primeiro pagamento se consulta "
+"Nota: Pode descubrir con facilidade a data do primeiro pagamento se consulta "
 "o derradeiro extracto bancario do ano anterior."
 
 #. i18n: ectx: property (title), widget (QWizardPage, FirstPaymentWizardPage)
@@ -24275,7 +24273,7 @@ msgid ""
 "come."
 msgstr ""
 "Nota: non poderá modificar esta conta hoxe, devido a que a data de apertura "
-"«%1» está no futuro. Por favor volte a este diálogo cando chegue o momento."
+"«%1» está no futuro. Por favor volva a este diálogo cando chegue o momento."
 
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:283
 #, kde-format

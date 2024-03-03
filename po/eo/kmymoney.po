@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-01 02:01+0000\n"
-"PO-Revision-Date: 2024-02-09 21:14+0100\n"
+"PO-Revision-Date: 2024-03-02 16:58+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
@@ -1702,18 +1702,16 @@ msgid "[No identifier]"
 msgstr "[Neniu identigilo]"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:447
-#, fuzzy, kde-format
-#| msgid "No account selected"
+#, kde-format
 msgctxt "@info online update price info"
 msgid "No security selected."
-msgstr "Neniu konto elektita"
+msgstr "Neniu sekureco elektita."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:457
-#, fuzzy, kde-format
-#| msgid "Security found"
+#, kde-format
 msgctxt "@info online update price info"
 msgid "No Security to be updated."
-msgstr "Sekureco trovita"
+msgstr "Neniu sekureco ĝisdatigenda."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:481
 #, kde-format
@@ -1748,15 +1746,13 @@ msgid "Cannot update security <b>%1</b>: %2"
 msgstr "Ne povas ĝisdatigi sekurecon <b>%1</b>: %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:575
-#, fuzzy, kde-format
-#| msgid "Price for %1 updated (id %2)"
+#, kde-format
 msgctxt "@info Online price update %1 online id, %2 internal id"
 msgid "Price for %1 updated (id %2)"
 msgstr "Prezo por %1 ĝisdatigita (id %2)"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:577
-#, fuzzy, kde-format
-#| msgid "Received an invalid price for %1, unable to update."
+#, kde-format
 msgctxt "@info Online price update %1 online id"
 msgid "Received an invalid price for %1, unable to update."
 msgstr "Ricevis nevalidan prezon por %1, ne povas ĝisdatigi."
@@ -8083,44 +8079,37 @@ msgid "<p>Invalid root element in template file <b>%1</b></p>"
 msgstr "<p>Nevalida radika elemento en ŝablondosiero <b>%1</b></p>"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:99
-#, fuzzy, kde-format
-#| msgid "ID"
+#, kde-format
 msgctxt "@title:column External identifier (symbol)"
 msgid "ID"
 msgstr "ID"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:100
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "@title:column Name of security"
 msgid "Name"
 msgstr "Nomo"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:101
-#, fuzzy, kde-format
-#| msgid "Price"
+#, kde-format
 msgctxt "@title:column Price"
 msgid "Price"
 msgstr "Prezo"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:102
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "@title:column Date for price"
 msgid "Date"
 msgstr "Dato"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "Internal identifier"
-#| msgid "Internal ID"
+#, kde-format
 msgctxt "@title:column KMyMoney internal identifier"
 msgid "Internal ID"
 msgstr "Interna ID"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:104
-#, fuzzy, kde-format
-#| msgid "Source"
+#, kde-format
 msgctxt "@title:column Online quote source"
 msgid "Source"
 msgstr "Fonto"
@@ -20172,11 +20161,10 @@ msgid "Filter"
 msgstr "Filtrilo"
 
 #: kmymoney/views/kscheduledview_p.h:104
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "No schedules found"
-msgstr "Horaro trovita"
+msgstr "Trovis neniujn horarojn"
 
 #: kmymoney/views/kscheduledview_p.h:254
 #, kde-format
@@ -21142,11 +21130,10 @@ msgid "Name"
 msgstr "Nomo"
 
 #: kmymoney/widgets/kmmemptyview.h:48
-#, fuzzy, kde-format
-#| msgid "No accounts found."
+#, kde-format
 msgctxt "Placeholder for when there is no data in a view"
 msgid "No data found"
-msgstr "Neniuj kontoj trovitaj."
+msgstr "Trovis neniujn datumojn"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KMMSearchWidget)
 #: kmymoney/widgets/kmmsearchwidget.ui:14
@@ -25102,123 +25089,3 @@ msgstr ""
 "\n"
 "<p>Ĉiuj informoj estas laŭvolaj kaj nur uzataj por personecigi vian KMyMoney-"
 "dosieron.</p>"
-
-#~ msgctxt "Equity name"
-#~ msgid "Name"
-#~ msgstr "Nomo"
-
-#~ msgctxt "Online quote source"
-#~ msgid "Source"
-#~ msgstr "Fonto"
-
-#~ msgid ""
-#~ "For <b>%1</b> on <b>%2</b> price <b>%3</b> already exists.<br>Do you want "
-#~ "to replace it with <b>%4</b>?"
-#~ msgstr ""
-#~ "Por <b>%1</b> je <b>%2</b> prezo <b>%3</b> jam ekzistas.<br>Ĉu vi volas "
-#~ "anstataŭigi ĝin per <b>%4</b> b>?"
-
-#~ msgid "Price Already Exists"
-#~ msgstr "Prezo Jam Ekzistas"
-
-#~ msgctxt ""
-#~ "Log message e.g. 'Prices for EUR > USD updated between 2001-01-01 and "
-#~ "2001-02-01 (id EUR USD)'"
-#~ msgid "Prices for %1 updated between %3 and %4 (id %2)"
-#~ msgstr "Prezoj por %1 ĝisdatigitaj inter %3 kaj %4 (id %2)"
-
-#~ msgid ""
-#~ "Received a price for %1 (id %2), but this symbol is not on the list. "
-#~ "Aborting entire update."
-#~ msgstr ""
-#~ "Ricevis prezon por %1 (id %2), sed ĉi tiu simbolo ne estas en la listo. "
-#~ "Ĉesigo de la tuta ĝisdatigo."
-
-#~ msgid "List of known Equities, and the date they were last updated on."
-#~ msgstr ""
-#~ "Listo de konataj Akcioj, kaj la dato en kiu ili estis laste ĝisdatigitaj."
-
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Symbol"
-#~ msgstr "Simbolo"
-
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Identification number"
-#~ msgstr "Identiga nombro"
-
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Name"
-#~ msgstr "Nomo"
-
-#~ msgid "New Quote Source"
-#~ msgstr "Nova Citfonto"
-
-#~ msgid ""
-#~ "Security <b>%1</b> uses this quote source.<br>Do you really want to "
-#~ "remove it?"
-#~ msgstr ""
-#~ "Sekureco <b>%1</b> uzas ĉi tiun citfonton.<br>Ĉu vi vere volas forigi ĝin?"
-
-#~ msgctxt "@title:window"
-#~ msgid "Delete quote source"
-#~ msgstr "Forigi citfonton"
-
-#~ msgid "Source <placeholder>%1</placeholder> does not exist."
-#~ msgstr "Fonto <placeholder>%1</placeholder> ne ekzistas."
-
-#~ msgid "Cannot resolve input date."
-#~ msgstr "Ne povas solvi enigdaton."
-
-#~ msgid "CSV source <placeholder>%1</placeholder> does not exist."
-#~ msgstr "CSV-fonto <placeholder>%1</placeholder> ne ekzistas."
-
-#~ msgid "Cannot find from and to currency."
-#~ msgstr "Ne povas trovi de kaj al valuto."
-
-#~ msgid "Local quote sources aren't supported."
-#~ msgstr "Lokaj citfontoj ne estas subtenataj."
-
-#~ msgid "Fetching URL %1..."
-#~ msgstr "Akirante URL %1..."
-
-#~ msgid ""
-#~ "<placeholder>%1</placeholder> skipped because it doesn't have "
-#~ "identification number."
-#~ msgstr ""
-#~ "<placeholder>%1</placeholder> preterlasis ĉar ĝi ne havas identigan "
-#~ "numeron."
-
-#~ msgctxt "The process x is executing"
-#~ msgid "Executing %1..."
-#~ msgstr "Plenumante %1..."
-
-#~ msgid "Unable to launch: %1"
-#~ msgstr "Ne eblas lanĉi: %1"
-
-#~ msgid "Failed to open downloaded file"
-#~ msgstr "Malsukcesis malfermi elŝutitan dosieron"
-
-#~ msgctxt "Executing 'script' 'online source' 'investment symbol' "
-#~ msgid "Executing %1 %2 %3..."
-#~ msgstr "Efektivigante %1 %2 %3..."
-
-#~ msgid "Unable to update price for %1"
-#~ msgstr "Ne eblas ĝisdatigi prezon por %1"
-
-#~ msgid "Identifier found: '%1'"
-#~ msgstr "Identigilo trovita: '%1'"
-
-#~ msgid "Price found: '%1' (%2)"
-#~ msgstr "Prezo trovita: '%1' (%2)"
-
-#~ msgid "Date found: '%1'"
-#~ msgstr "Trovita dato: '%1'"
-
-#~ msgid "Unable to update price for %1 (no price or no date)"
-#~ msgstr "Ne eblas ĝisdatigi prezon por %1 (neniu prezo aŭ neniu dato)"
-
-#~ msgid "Unable to update price for %1 (empty quote data)"
-#~ msgstr "Ne eblas ĝisdatigi prezon por %1 (malplenaj citaĵoj)"
-
-#~ msgid "Unable to update price for %1 (error encountered: '%2')"
-#~ msgstr "Ne eblis ĝisdatigi prezon por %1 (renkontis eraron: '%2')"
