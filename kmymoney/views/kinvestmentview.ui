@@ -41,7 +41,7 @@
          <item>
           <widget class="QLabel" name="textLabel1">
            <property name="text">
-            <string>Select Account:</string>
+            <string>Select investment account:</string>
            </property>
            <property name="wordWrap">
             <bool>false</bool>

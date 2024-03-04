@@ -236,3 +236,24 @@ void SecuritiesModel::addCurrency(const MyMoneySecurity& currency)
         qDebug() << "Unable to add currency without existing ID";
     }
 }
+
+SecuritiesModelNewSecurity::SecuritiesModelNewSecurity(QObject* parent)
+    : SecuritiesModel(parent)
+{
+    setObjectName(QLatin1String("SecuritiesModelNewSecurity"));
+    QMap<QString, QSharedPointer<MyMoneySecurity>> list;
+    MyMoneySecurity sec;
+    SecuritiesModel::doAddItem(sec);
+}
+
+SecuritiesModelNewSecurity::~SecuritiesModelNewSecurity()
+{
+}
+
+QVariant SecuritiesModelNewSecurity::data(const QModelIndex& idx, int role) const
+{
+    Q_UNUSED(idx)
+    Q_UNUSED(role)
+    // never show any data for the empty security
+    return {};
+}

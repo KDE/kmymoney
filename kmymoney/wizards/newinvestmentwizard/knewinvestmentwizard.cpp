@@ -52,37 +52,120 @@ public:
         delete ui;
     }
 
-    void init1()
+    void init()
     {
         Q_Q(KNewInvestmentWizard);
-        ui->m_onlineUpdatePage->slotSourceChanged(false);
+        ui->setupUi(q);
 
         // make sure, the back button does not clear fields
         q->setOption(QWizard::IndependentPages, true);
 
         // enable the help button
         q->setOption(q->HaveHelpButton, true);
-        q->connect(q, &KNewInvestmentWizard::helpRequested, q, &KNewInvestmentWizard::slotHelp);
+        q->connect(q, &KNewInvestmentWizard::helpRequested, q, [&]() {
+            KHelpClient::invokeHelp("details.investments.newinvestmentwizard");
+        });
 
         m_createAccount = true;
 
         // Update label in case of edit
-        if (!m_account.id().isEmpty()) {
-            ui->m_investmentTypePage->setIntroLabelText(i18n("This wizard allows you to modify the selected investment."));
-        }
-        if (!m_security.id().isEmpty()) {
-            ui->m_investmentTypePage->setIntroLabelText(i18n("This wizard allows you to modify the selected security."));
-        }
+        ui->m_investmentTypePage->setIntroLabelText(i18n("This wizard allows you to modify the selected investment."));
 
         KMyMoneyUtils::updateWizardButtons(q);
+
+        ui->m_investmentTypePage->init(m_account, m_security);
+        ui->m_investmentDetailsPage->init(m_account, m_security);
+        ui->m_onlineUpdatePage->init(m_security);
+
+        // setup the signal here, so that the initialization does not interfer.
+        q->connect(ui->m_investmentDetailsPage, &KInvestmentDetailsWizardPage::securityIdChanged, q, [&](const QString& id) {
+            m_security = MyMoneySecurity(id, m_security);
+        });
     }
 
-    void init2()
+    int pageId(const QWizardPage* page) const
     {
-        ui->m_investmentTypePage->init2(m_security);
-        ui->m_investmentDetailsPage->init2(m_security);
-        ui->m_onlineUpdatePage->init2(m_security);
-        ui->m_onlineUpdatePage->slotCheckPage(m_security.value("kmm-online-source"));
+        const auto pageIds = q_ptr->pageIds();
+        for (const auto id : qAsConst(pageIds)) {
+            if (q_ptr->page(id) == page) {
+                return id;
+            }
+        }
+        return -1;
+    }
+
+    void createAccountAndSecurity(const QString& parentAccountId)
+    {
+        Q_Q(KNewInvestmentWizard);
+        const auto file = MyMoneyFile::instance();
+
+        const auto type = static_cast<eMyMoney::Security::Type>(q->field("securityType").toInt());
+        const auto roundingMethod = static_cast<AlkValue::RoundingMethod>(q->field("roundingMethod").toInt());
+        MyMoneyFileTransaction ft;
+        try {
+            // update all relevant attributes only, if we create a stock
+            // account and the security is unknown or we modify the security
+            MyMoneySecurity newSecurity(m_security);
+            // if user really wishes to create the same symbol again, we allow it
+            if (q->field("duplicateSymbol").toBool()) {
+                newSecurity.clearId();
+            }
+            newSecurity.setName(q->field("investmentName").toString());
+            newSecurity.setTradingSymbol(q->field("investmentSymbol").toString());
+            newSecurity.setTradingMarket(q->field("tradingMarket").toString());
+            newSecurity.setSmallestAccountFraction(q->field("fraction").value<MyMoneyMoney>().formatMoney("", 0, false).toUInt());
+            newSecurity.setPricePrecision(MyMoneyMoney(q->field("pricePrecision").toUInt()).formatMoney("", 0, false).toUInt());
+            newSecurity.setTradingCurrency(q->field("tradingCurrencyEdit").value<MyMoneySecurity>().id());
+            newSecurity.setSecurityType(type);
+            newSecurity.setRoundingMethod(roundingMethod);
+            newSecurity.deletePair("kmm-online-source");
+            newSecurity.deletePair("kmm-online-quote-system");
+            newSecurity.deletePair("kmm-online-factor");
+
+            if (!q->field("onlineSourceCombo").toString().isEmpty()) {
+                if (q->field("useFinanceQuote").toBool()) {
+                    newSecurity.setValue("kmm-online-quote-system", "Finance::Quote");
+                }
+                newSecurity.setValue("kmm-online-source", q->field("onlineSourceCombo").toString());
+            }
+            if (!q->field("onlineSourceCombo").toString().isEmpty() && (q->field("onlineFactor").value<MyMoneyMoney>() != MyMoneyMoney::ONE))
+                newSecurity.setValue("kmm-online-factor", q->field("onlineFactor").value<MyMoneyMoney>().toString());
+
+            newSecurity.setValue("kmm-security-id", q->field("investmentIdentification").toString());
+
+            if (m_security.id().isEmpty() || newSecurity != m_security) {
+                m_security = newSecurity;
+
+                // add or update it
+                if (m_security.id().isEmpty()) {
+                    file->addSecurity(m_security);
+                } else {
+                    file->modifySecurity(m_security);
+                }
+            }
+
+            if (m_createAccount) {
+                // now that the security exists, we can add the account to store it
+                m_account.setName(q->field("accountName").toString());
+                if (m_account.accountType() == eMyMoney::Account::Type::Unknown)
+                    m_account.setAccountType(eMyMoney::Account::Type::Stock);
+
+                m_account.setCurrencyId(m_security.id());
+                m_account.setValue("priceMode", q->field("priceMode").toInt(), 0);
+
+                // update account's fraction in case its security fraction has changed
+                // otherwise KMM restart is required because this won't happen automatically
+                m_account.fraction(m_security);
+                if (m_account.id().isEmpty()) {
+                    MyMoneyAccount parent = file->account(parentAccountId);
+                    file->addAccount(m_account, parent);
+                } else
+                    file->modifyAccount(m_account);
+            }
+            ft.commit();
+        } catch (const MyMoneyException& e) {
+            KMessageBox::detailedError(q, i18n("Unexpected error occurred while adding new investment"), QString::fromLatin1(e.what()));
+        }
     }
 
     KNewInvestmentWizard      *q_ptr;
@@ -98,36 +181,24 @@ KNewInvestmentWizard::KNewInvestmentWizard(QWidget *parent) :
     d_ptr(new KNewInvestmentWizardPrivate(this))
 {
     Q_D(KNewInvestmentWizard);
-    d->ui->setupUi(this);
-    d->init1();
-    d->ui->m_onlineUpdatePage->slotCheckPage(QString());
-
-    d->ui->m_investmentDetailsPage->setupInvestmentSymbol();
-
-    connect(d->ui->m_investmentDetailsPage, &KInvestmentDetailsWizardPage::checkForExistingSymbol, this, &KNewInvestmentWizard::slotCheckForExistingSymbol);
+    d->init();
 }
 
-KNewInvestmentWizard::KNewInvestmentWizard(const MyMoneyAccount& acc, QWidget *parent) :
-    QWizard(parent),
-    d_ptr(new KNewInvestmentWizardPrivate(this))
+KNewInvestmentWizard::KNewInvestmentWizard(const MyMoneyAccount& account, QWidget* parent)
+    : QWizard(parent)
+    , d_ptr(new KNewInvestmentWizardPrivate(this))
 {
     Q_D(KNewInvestmentWizard);
-    d->ui->setupUi(this);
-    d->m_account = acc;
-    setWindowTitle(i18n("Investment detail wizard"));
-    d->init1();
+    d->m_account = account;
+    d->m_security = MyMoneyFile::instance()->security(account.currencyId());
+
+    setWindowTitle(i18nc("@info:window", "Investment detail wizard"));
+    d->init();
 
     // load the widgets with the data
-    setName(d->m_account.name());
-    d->m_security = MyMoneyFile::instance()->security(d->m_account.currencyId());
-
-    d->init2();
-
-    int priceMode = 0;
-    if (!d->m_account.value("priceMode").isEmpty())
-        priceMode = d->m_account.value("priceMode").toInt();
-    d->ui->m_investmentDetailsPage->setCurrentPriceMode(priceMode);
-
+    setField("accountName", account.name());
+    setField("investmentName", d->m_security.name());
+    setField("priceMode", d->m_account.value("priceMode", 0));
 }
 
 KNewInvestmentWizard::KNewInvestmentWizard(const MyMoneySecurity& security, QWidget *parent) :
@@ -135,149 +206,35 @@ KNewInvestmentWizard::KNewInvestmentWizard(const MyMoneySecurity& security, QWid
     d_ptr(new KNewInvestmentWizardPrivate(this))
 {
     Q_D(KNewInvestmentWizard);
-    d->ui->setupUi(this);
     d->m_security = security;
-    setWindowTitle(i18n("Security detail wizard"));
-    d->init1();
+    setWindowTitle(i18nc("@info:window", "Security detail wizard"));
+    d->init();
+
+    d->ui->m_investmentDetailsPage->setTitle(i18nc("@info:tab Security edit wizard detail page", "Security details"));
+
+    // We are editing the security, so we cannot create an account
     d->m_createAccount = false;
 
     // load the widgets with the data
-    setName(security.name());
-
-    d->init2();
+    setField("investmentName", security.name());
 
     // no chance to change the price mode here
-    d->ui->m_investmentDetailsPage->setCurrentPriceMode(0);
-    d->ui->m_investmentDetailsPage->setPriceModeEnabled(false);
+    setField("priceMode", 0);
+
+    // start with the details page if editing a security
+    setStartId(d->pageId(d->ui->m_investmentDetailsPage));
+    d->ui->m_investmentTypePage->hide();
 }
 
 KNewInvestmentWizard::~KNewInvestmentWizard()
 {
 }
 
-void KNewInvestmentWizard::setName(const QString& name)
-{
-    Q_D(KNewInvestmentWizard);
-    d->ui->m_investmentDetailsPage->setName(name);
-}
-
-void KNewInvestmentWizard::slotCheckForExistingSymbol(const QString& symbol)
-{
-    Q_D(KNewInvestmentWizard);
-    Q_UNUSED(symbol);
-
-    if (field("investmentName").toString().isEmpty()) {
-        const QList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
-        auto type = static_cast<eMyMoney::Security::Type>(field("securityType").toInt());
-
-        for (const MyMoneySecurity& it_s : list) {
-            if (it_s.securityType() == type
-                    && it_s.tradingSymbol() == field("investmentSymbol").toString()) {
-                d->m_security = MyMoneySecurity();
-                if (KMessageBox::questionTwoActions(this,
-                                                    i18n("The selected symbol is already on file. Do you want to reuse the existing security?"),
-                                                    i18n("Security found"),
-                                                    KMMYesNo::yes(),
-                                                    KMMYesNo::no())
-                    == KMessageBox::PrimaryAction) {
-                    d->m_security = it_s;
-                    d->init2();
-                    d->ui->m_investmentDetailsPage->loadName(d->m_security.name());
-                }
-                break;
-            }
-        }
-    }
-}
-
-void KNewInvestmentWizard::slotHelp()
-{
-    KHelpClient::invokeHelp("details.investments.newinvestmentwizard");
-}
-
-void KNewInvestmentWizard::createObjects(const QString& parentId)
-{
-    Q_D(KNewInvestmentWizard);
-    auto file = MyMoneyFile::instance();
-
-    auto type = static_cast<eMyMoney::Security::Type>(field("securityType").toInt());
-    auto roundingMethod = static_cast<AlkValue::RoundingMethod>(field("roundingMethod").toInt());
-    MyMoneyFileTransaction ft;
-    try {
-        // update all relevant attributes only, if we create a stock
-        // account and the security is unknown or we modify the security
-        MyMoneySecurity newSecurity(d->m_security);
-        newSecurity.setName(field("investmentName").toString());
-        newSecurity.setTradingSymbol(field("investmentSymbol").toString());
-        newSecurity.setTradingMarket(field("tradingMarket").toString());
-        newSecurity.setSmallestAccountFraction(field("fraction").value<MyMoneyMoney>().formatMoney("", 0, false).toUInt());
-        newSecurity.setPricePrecision(MyMoneyMoney(field("pricePrecision").toUInt()).formatMoney("", 0, false).toUInt());
-        newSecurity.setTradingCurrency(field("tradingCurrencyEdit").value<MyMoneySecurity>().id());
-        newSecurity.setSecurityType(type);
-        newSecurity.setRoundingMethod(roundingMethod);
-        newSecurity.deletePair("kmm-online-source");
-        newSecurity.deletePair("kmm-online-quote-system");
-        newSecurity.deletePair("kmm-online-factor");
-        newSecurity.deletePair("kmm-security-id");
-
-        if (!field("onlineSourceCombo").toString().isEmpty()) {
-            if (field("useFinanceQuote").toBool()) {
-                newSecurity.setValue("kmm-online-quote-system", "Finance::Quote");
-            }
-            newSecurity.setValue("kmm-online-source", field("onlineSourceCombo").toString());
-        }
-        if (d->ui->m_onlineUpdatePage->isOnlineFactorEnabled() && (field("onlineFactor").value<MyMoneyMoney>() != MyMoneyMoney::ONE))
-            newSecurity.setValue("kmm-online-factor", field("onlineFactor").value<MyMoneyMoney>().toString());
-        if (!field("investmentIdentification").toString().isEmpty())
-            newSecurity.setValue("kmm-security-id", field("investmentIdentification").toString());
-
-        if (d->m_security.id().isEmpty() || newSecurity != d->m_security) {
-            d->m_security = newSecurity;
-
-            // add or update it
-            if (d->m_security.id().isEmpty()) {
-                file->addSecurity(d->m_security);
-            } else {
-                file->modifySecurity(d->m_security);
-            }
-        }
-
-        if (d->m_createAccount) {
-            // now that the security exists, we can add the account to store it
-            d->m_account.setName(field("investmentName").toString());
-            if (d->m_account.accountType() == eMyMoney::Account::Type::Unknown)
-                d->m_account.setAccountType(eMyMoney::Account::Type::Stock);
-
-            d->m_account.setCurrencyId(d->m_security.id());
-            switch (d->ui->m_investmentDetailsPage->priceMode()) {
-            case 0:
-                d->m_account.deletePair("priceMode");
-                break;
-            case 1:
-            case 2:
-                d->m_account.setValue("priceMode", QString("%1").arg(d->ui->m_investmentDetailsPage->priceMode()));
-                break;
-            }
-            // update account's fraction in case its security fraction has changed
-            // otherwise KMM restart is required because this won't happen automatically
-            d->m_account.fraction(d->m_security);
-            if (d->m_account.id().isEmpty()) {
-                MyMoneyAccount parent = file->account(parentId);
-                file->addAccount(d->m_account, parent);
-            } else
-                file->modifyAccount(d->m_account);
-        }
-        ft.commit();
-    } catch (const MyMoneyException &e) {
-        KMessageBox::detailedError(this, i18n("Unexpected error occurred while adding new investment"), QString::fromLatin1(e.what()));
-    }
-}
-
 void KNewInvestmentWizard::newInvestment(const MyMoneyAccount& parent)
 {
     QPointer<KNewInvestmentWizard> dlg = new KNewInvestmentWizard;
     if (dlg->exec() == QDialog::Accepted)
-        dlg->createObjects(parent.id());
+        dlg->d_func()->createAccountAndSecurity(parent.id());
     delete dlg;
 }
 
@@ -295,10 +252,10 @@ void KNewInvestmentWizard::newInvestment(MyMoneyAccount& account, const MyMoneyA
                                         dontShowAgain)
         == KMessageBox::PrimaryAction) {
         QPointer<KNewInvestmentWizard> dlg = new KNewInvestmentWizard;
-        dlg->setName(account.name());
+        dlg->setField("accountName", account.name());
         if (dlg->exec() == QDialog::Accepted) {
-            dlg->createObjects(parent.id());
-            account = dlg->account();
+            dlg->d_func()->createAccountAndSecurity(parent.id());
+            account = dlg->d_func()->m_account;
         }
         delete dlg;
     } else {
@@ -309,16 +266,22 @@ void KNewInvestmentWizard::newInvestment(MyMoneyAccount& account, const MyMoneyA
     }
 }
 
-void KNewInvestmentWizard::editInvestment(const MyMoneyAccount& parent)
+void KNewInvestmentWizard::editInvestment(const MyMoneyAccount& investment)
 {
-    QPointer<KNewInvestmentWizard> dlg = new KNewInvestmentWizard(parent);
-    if (dlg->exec() == QDialog::Accepted)
-        dlg->createObjects(parent.id());
-    delete dlg;
+    if (!investment.id().isEmpty()) {
+        QPointer<KNewInvestmentWizard> dlg = new KNewInvestmentWizard(investment);
+        if (dlg->exec() == QDialog::Accepted)
+            dlg->d_func()->createAccountAndSecurity(investment.id());
+        delete dlg;
+    }
 }
 
-MyMoneyAccount KNewInvestmentWizard::account() const
+void KNewInvestmentWizard::editSecurity(const MyMoneySecurity& security)
 {
-    Q_D(const KNewInvestmentWizard);
-    return d->m_account;
+    if (!security.id().isEmpty()) {
+        QPointer<KNewInvestmentWizard> dlg = new KNewInvestmentWizard(security);
+        if (dlg->exec() == QDialog::Accepted)
+            dlg->d_func()->createAccountAndSecurity(QString());
+        delete dlg;
+    }
 }

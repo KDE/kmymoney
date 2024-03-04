@@ -1,131 +1,154 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>KInvestmentTypeWizardPage</class>
- <widget class="QWizardPage" name="WizardPage">
-  <attribute name="title">
-    <string>Investment Type</string>
-  </attribute>
-  <layout class="QVBoxLayout">
-    <item>
-      <widget class="QLabel" name="m_introLabel">
-        <property name="text">
-          <string>This wizard allows you to create a new investment.</string>
-        </property>
-        <property name="alignment">
-          <set>Qt::AlignTop</set>
-        </property>
-        <property name="wordWrap">
-          <bool>true</bool>
-        </property>
+ <widget class="KInvestmentTypeWizardPage" name="KInvestmentTypeWizardPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>357</width>
+    <height>275</height>
+   </rect>
+  </property>
+  <property name="title">
+   <string>Investment Type</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="m_introLabel">
+     <property name="text">
+      <string>This wizard allows you to create a new investment.</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignTop</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="spacer8">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>10</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QLabel" name="textLabel1">
+     <property name="text">
+      <string>The first step in this process requires to provide an account name for the investment and select the type of investment. The following steps collect further details about the investment from you.</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignTop</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="spacer3">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Expanding</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>30</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="2">
+      <spacer name="spacer1">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>61</width>
+         <height>21</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="1" column="1">
+      <widget class="KComboBox" name="m_securityType"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="textLabel2">
+       <property name="text">
+        <string>Type of investment</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
       </widget>
-    </item>
-    <item>
-      <spacer name="spacer8">
-        <property name="sizeHint">
-          <size>
-            <width>20</width>
-            <height>10</height>
-          </size>
-        </property>
-        <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-        </property>
-        <property name="orientation">
-          <enum>Qt::Vertical</enum>
-        </property>
-      </spacer>
-    </item>
-    <item>
-      <widget class="QLabel" name="textLabel1">
-        <property name="text">
-          <string>The first step in this process requires to select the type of investment. The following steps collect more details about the investment from you.</string>
-        </property>
-        <property name="alignment">
-          <set>Qt::AlignTop</set>
-        </property>
-        <property name="wordWrap">
-          <bool>true</bool>
-        </property>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Account name</string>
+       </property>
       </widget>
-    </item>
-    <item>
-      <spacer name="spacer3">
-        <property name="sizeHint">
-          <size>
-            <width>20</width>
-            <height>30</height>
-          </size>
-        </property>
-        <property name="sizeType">
-          <enum>QSizePolicy::Expanding</enum>
-        </property>
-        <property name="orientation">
-          <enum>Qt::Vertical</enum>
-        </property>
-      </spacer>
-    </item>
-    <item>
-      <layout class="QHBoxLayout">
-        <item>
-          <widget class="QLabel" name="textLabel2">
-            <property name="text">
-              <string>Type of investment</string>
-            </property>
-            <property name="wordWrap">
-              <bool>false</bool>
-            </property>
-          </widget>
-        </item>
-        <item>
-          <widget class="KComboBox" name="m_securityType">
-          </widget>
-        </item>
-        <item>
-          <spacer name="spacer1">
-            <property name="sizeHint">
-              <size>
-                <width>61</width>
-                <height>21</height>
-              </size>
-            </property>
-            <property name="sizeType">
-              <enum>QSizePolicy::Expanding</enum>
-            </property>
-            <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-            </property>
-          </spacer>
-        </item>
-      </layout>
-    </item>
-    <item>
-      <spacer name="spacer2">
-        <property name="sizeHint">
-          <size>
-            <width>20</width>
-            <height>60</height>
-          </size>
-        </property>
-        <property name="sizeType">
-          <enum>QSizePolicy::Expanding</enum>
-        </property>
-        <property name="orientation">
-          <enum>Qt::Vertical</enum>
-        </property>
-      </spacer>
-    </item>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="m_accountName"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="spacer2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Expanding</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>60</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KInvestmentTypeWizardPage</class>
+   <extends>QWizardPage</extends>
+   <header location="global">kinvestmenttypewizardpage.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>m_securityType</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
- <customwidgets>
-   <customwidget>
-      <class>KComboBox</class>
-      <extends>QComboBox</extends>
-      <header location="global">kcombobox.h</header>
-    </customwidget>
-  </customwidgets>
-  <tabstops>
-    <tabstop>m_securityType</tabstop>
-  </tabstops>
 </ui>

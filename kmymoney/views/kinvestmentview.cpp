@@ -580,15 +580,7 @@ void KInvestmentView::slotUpdatePriceManually()
 void KInvestmentView::slotEditSecurity()
 {
     Q_D(KInvestmentView);
-    auto sec = d->currentSecurity();
-
-    if (!sec.id().isEmpty()) {
-        QPointer<KNewInvestmentWizard> dlg = new KNewInvestmentWizard(sec, this);
-        dlg->setObjectName("KNewInvestmentWizard");
-        if (dlg->exec() == QDialog::Accepted)
-            dlg->createObjects(QString());
-        delete dlg;
-    }
+    KNewInvestmentWizard::editSecurity(d->currentSecurity());
 }
 
 void KInvestmentView::slotDeleteSecurity()

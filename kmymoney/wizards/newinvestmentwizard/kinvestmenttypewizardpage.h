@@ -18,6 +18,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+class MyMoneyAccount;
 class MyMoneySecurity;
 
 namespace Ui {
@@ -31,8 +32,13 @@ public:
     explicit KInvestmentTypeWizardPage(QWidget *parent = nullptr);
     ~KInvestmentTypeWizardPage();
 
-    void init2(const MyMoneySecurity& security);
+    void init(const MyMoneyAccount& account, const MyMoneySecurity& security);
     void setIntroLabelText(const QString& text);
+
+    /**
+     * Overload isComplete to handle the required fields
+     */
+    bool isComplete() const final override;
 
 private:
     Ui::KInvestmentTypeWizardPage  *ui;
