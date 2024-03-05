@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-01 02:01+0000\n"
+"POT-Creation-Date: 2024-03-05 01:35+0000\n"
 "PO-Revision-Date: 2024-02-24 16:23+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -1628,7 +1628,7 @@ msgstr "Cea mai mică fracție:"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
 #: kmymoney/dialogs/keditequityentry.ui:70
 #: kmymoney/dialogs/knewequityentrydlg.ui:63
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:99
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:233
 #, kde-format
 msgid "1 /"
 msgstr "1 /"
@@ -2246,20 +2246,20 @@ msgid "Delete"
 msgstr "Șterge"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:171
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:39
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:151
 #, kde-format
 msgctxt "default price mode"
 msgid "(default)"
 msgstr "(implicit)"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:172
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:40
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:152
 #, kde-format
 msgid "Price per share"
 msgstr "Preț pe acțiune"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:173
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:41
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:153
 #, kde-format
 msgid "Total for all shares"
 msgstr "Totalul tuturor acțiunilor"
@@ -2579,10 +2579,10 @@ msgstr ""
 msgid "Preferred Account"
 msgstr "Cont preferat"
 
-#. i18n: ectx: property (text), widget (QLabel, textLabel2_5)
+#. i18n: ectx: property (text), widget (QLabel, m_priceModeLabel)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_5)
 #: kmymoney/dialogs/knewaccountdlg.ui:250
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:195
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:67
 #, kde-format
 msgid "Price entry"
 msgstr "Intrare preț"
@@ -8422,7 +8422,7 @@ msgid "Do not change the date"
 msgstr "Nu afișa categoriile nefolosite"
 
 #: kmymoney/mymoney/mymoneysecurity.cpp:232
-#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:30
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:31
 #, fuzzy, kde-format
 #| msgid "Stock"
 msgctxt "Security type"
@@ -8430,7 +8430,7 @@ msgid "Stock"
 msgstr "Acțiune"
 
 #: kmymoney/mymoney/mymoneysecurity.cpp:234
-#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:31
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:32
 #, fuzzy, kde-format
 #| msgid "Mutual Fund"
 msgctxt "Security type"
@@ -8438,7 +8438,7 @@ msgid "Mutual Fund"
 msgstr "Fond deschis pentru investiții"
 
 #: kmymoney/mymoney/mymoneysecurity.cpp:236
-#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:32
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:33
 #, fuzzy, kde-format
 #| msgid "Bond"
 msgctxt "Security type"
@@ -9419,7 +9419,7 @@ msgstr "Piața"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2_2)
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:90
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:81
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:188
 #, kde-format
 msgid "Fraction"
 msgstr "Fracție"
@@ -20770,9 +20770,10 @@ msgstr "Capitaluri"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/views/kinvestmentview.ui:44
-#, kde-format
-msgid "Select Account:"
-msgstr "Alegeți un cont:"
+#, fuzzy, kde-format
+#| msgid "Select new investment type"
+msgid "Select investment account:"
+msgstr "Alegeți tipul investiției"
 
 #. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
 #: kmymoney/views/kinvestmentview.ui:80
@@ -23351,8 +23352,10 @@ msgstr ""
 "este asta?</b> pentru a afla mai multe detalii despre diferitele tipuri de "
 "cont.Introduceți data și moneda în care a fost deschis contul."
 
+#. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:35
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:109
 #, kde-format
 msgid "Account name"
 msgstr "Numele contului"
@@ -24661,7 +24664,7 @@ msgstr "Utilizator"
 msgid "Unable to create account: %1"
 msgstr "Nu s-a putut crea contul: %1"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:64
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:190
 #, fuzzy, kde-format
 #| msgid ""
 #| "Found:\n"
@@ -24672,32 +24675,41 @@ msgstr ""
 "Au fost găsite:\n"
 "\n"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:65
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:191
 #, kde-format
 msgctxt "Rounding method"
 msgid "Ceil"
 msgstr ""
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:66
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:192
 #, kde-format
 msgctxt "Rounding method"
 msgid "Floor"
 msgstr ""
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:67
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:193
 #, kde-format
 msgctxt "Rounding method"
 msgid "Truncate"
 msgstr ""
 
-#. i18n: ectx: property (title), widget (QWizardPage, KInvestmentDetailsWizardPage)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:14
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:235
 #, kde-format
-msgid "Investment details"
-msgstr "Detalii ale investiției"
+msgctxt "@info Warning that security is used in multiple accounts"
+msgid ""
+"This security is used in multiple accounts. Changing the values below will "
+"be effective for all of them."
+msgstr ""
+
+#. i18n: ectx: property (title), widget (KInvestmentDetailsWizardPage, KInvestmentDetailsWizardPage)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:14
+#, fuzzy, kde-format
+#| msgid "Security detail wizard"
+msgid "Security details"
+msgstr "Expertul de definire a titlurilor de valoare"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:20
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:23
 #, kde-format
 msgid ""
 "Enter the details below and click <b>Next</b> to continue entering the "
@@ -24706,74 +24718,100 @@ msgstr ""
 "Introduceți detaliile mai jos și faceți clic pe <b>Următor</b> pentru a "
 "continua introducerea detaliilor actualizării online."
 
-#. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:51
-#, kde-format
-msgid "Trading symbol"
-msgstr "Simbol"
-
-# well-spelled: RHAT
-#. i18n: ectx: property (toolTip), widget (KMyMoneyLineEdit, m_investmentSymbol)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:61
-#, kde-format
-msgid "Enter the ticker symbol (e.g. RHAT)."
-msgstr "Introduceți simbolul de pe piața de capital (de exemplu RHAT)"
-
-#. i18n: ectx: property (text), widget (QLabel, textLabel3)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:68
-#, kde-format
-msgid "Full name"
-msgstr "Nume complet"
-
-#. i18n: ectx: property (text), widget (QLabel, textLabel1_3)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:117
-#, kde-format
-msgid "Trading market"
-msgstr "Piața de tranzacționare"
-
 # |, no-check-spell
 #. i18n: ectx: property (text), item, widget (KComboBox, m_tradingMarket)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:131
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:81
 #, kde-format
 msgid "AMEX"
 msgstr "AMEX"
 
 # |, no-check-spell
 #. i18n: ectx: property (text), item, widget (KComboBox, m_tradingMarket)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:136
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:86
 #, kde-format
 msgid "EUREX"
 msgstr "EUREX"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_tradingMarket)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:141
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:91
 #, kde-format
 msgid "FUND"
 msgstr "FUND"
 
 # |, no-check-spell
 #. i18n: ectx: property (text), item, widget (KComboBox, m_tradingMarket)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:146
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:96
 #, kde-format
 msgid "NASDAQ"
 msgstr "NASDAQ"
 
 # |, no-check-spell
 #. i18n: ectx: property (text), item, widget (KComboBox, m_tradingMarket)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:151
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:101
 #, kde-format
 msgid "NYSE"
 msgstr "NYSE"
 
 # |, no-check-spell
 #. i18n: ectx: property (text), item, widget (KComboBox, m_tradingMarket)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:156
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:106
 #, kde-format
 msgid "XETRA"
 msgstr "XETRA"
 
+#. i18n: ectx: property (toolTip), widget (QSpinBox, m_pricePrecision)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:114
+#, kde-format
+msgid "This determines how many digits after decimal symbol price can have."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2_6)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:127
+#, kde-format
+msgid "Price precision"
+msgstr "Precizie preț"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1_3)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:134
+#, kde-format
+msgid "Trading market"
+msgstr "Piața de tranzacționare"
+
+#. i18n: ectx: property (toolTip), widget (QComboBox, m_roundingMethod)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:144
+#, kde-format
+msgid ""
+"This controls what to do with digit situated after precision digits in "
+"amount values."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:158
+#, kde-format
+msgid "Trading symbol"
+msgstr "Simbol"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel4)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:168
+#, fuzzy, kde-format
+#| msgid "Bills & Reminders"
+msgid "Remainder"
+msgstr "Facturi și memoratori"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1_4)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:175
+#, kde-format
+msgid "Trading Currency"
+msgstr "Moneda de tranzacționare"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:198
+#, kde-format
+msgid "Full name"
+msgstr "Nume complet"
+
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:165
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:212
 #, fuzzy, kde-format
 #| msgid "Identification"
 msgid ""
@@ -24781,116 +24819,78 @@ msgid ""
 "number"
 msgstr "Identificare"
 
-# well-spelled: CUSIP, ISIN, WKN
-#. i18n: ectx: property (toolTip), widget (KMyMoneyLineEdit, m_investmentIdentification)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:175
+#. i18n: ectx: property (text), widget (QCheckBox, m_createSymbolDuplicate)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:251
 #, kde-format
-msgid "Enter the CUSIP/ISIN/WKN identification number here"
-msgstr "Introduceți numărul de identificare CUSIP/ISIN/WKN aici"
-
-#. i18n: ectx: property (text), widget (QLabel, textLabel1_4)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:182
-#, kde-format
-msgid "Trading Currency"
-msgstr "Moneda de tranzacționare"
-
-#. i18n: ectx: property (text), widget (QLabel, textLabel2_6)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:208
-#, kde-format
-msgid "Price precision"
-msgstr "Precizie preț"
-
-#. i18n: ectx: property (toolTip), widget (QSpinBox, m_pricePrecision)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:215
-#, kde-format
-msgid "This determines how many digits after decimal symbol price can have."
+msgid "Create duplicate of the symbol"
 msgstr ""
 
-#. i18n: ectx: property (toolTip), widget (QComboBox, m_roundingMethod)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:228
-#, kde-format
-msgid ""
-"This controls what to do with digit situated after precision digits in "
-"amount values."
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, textLabel4)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:235
-#, fuzzy, kde-format
-#| msgid "Bills & Reminders"
-msgid "Remainder"
-msgstr "Facturi și memoratori"
-
-#. i18n: ectx: attribute (title), widget (QWizardPage, WizardPage)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:6
+#. i18n: ectx: property (title), widget (KInvestmentTypeWizardPage, KInvestmentTypeWizardPage)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:14
 #, kde-format
 msgid "Investment Type"
 msgstr "Tip de investiție"
 
 #. i18n: ectx: property (text), widget (QLabel, m_introLabel)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:12
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:20
 #, kde-format
 msgid "This wizard allows you to create a new investment."
 msgstr "Acest expert vă permite crearea unei investiții noi."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:41
-#, kde-format
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:49
+#, fuzzy, kde-format
+#| msgid ""
+#| "The first step in this process requires to select the type of investment. "
+#| "The following steps collect more details about the investment from you."
 msgid ""
-"The first step in this process requires to select the type of investment. "
-"The following steps collect more details about the investment from you."
+"The first step in this process requires to provide an account name for the "
+"investment and select the type of investment. The following steps collect "
+"further details about the investment from you."
 msgstr ""
 "Primul pas al acestui proces constă în alegerea tipului de investiție. Pașii "
 "următori vor colecta detalii suplimentare despre investiție de la "
 "dumneavoastră."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:72
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:99
 #, kde-format
 msgid "Type of investment"
 msgstr "Tipul investiției"
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:71
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:72
 #, kde-format
 msgid "This wizard allows you to modify the selected investment."
 msgstr "Acest expert vă permite modificare investiției alese."
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:74
-#, kde-format
-msgid "This wizard allows you to modify the selected security."
-msgstr "Acest expert vă permite modificarea titlului de valoare ales."
-
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:117
-#, kde-format
-msgid "Investment detail wizard"
-msgstr "Expertul de definire a detaliilor investițiilor"
-
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:140
-#, kde-format
-msgid "Security detail wizard"
-msgstr "Expertul de definire a titlurilor de valoare"
-
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:178
-#, kde-format
-msgid ""
-"The selected symbol is already on file. Do you want to reuse the existing "
-"security?"
-msgstr ""
-"Simbolul dat este deja utilizat. Doriți să reutilizați titlul de valoare "
-"existent?"
-
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:179
-#, kde-format
-msgid "Security found"
-msgstr "S-a găsit titlul de valoare"
-
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:272
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:167
 #, fuzzy, kde-format
 #| msgid "An unrecoverable error occurred while reading the database"
 msgid "Unexpected error occurred while adding new investment"
 msgstr "O eroare ireparabilă a apărut în cursul citirii bazei de date"
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:288
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:195
+#, fuzzy, kde-format
+#| msgid "Investment detail wizard"
+msgctxt "@info:window"
+msgid "Investment detail wizard"
+msgstr "Expertul de definire a detaliilor investițiilor"
+
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:210
+#, fuzzy, kde-format
+#| msgid "Security detail wizard"
+msgctxt "@info:window"
+msgid "Security detail wizard"
+msgstr "Expertul de definire a titlurilor de valoare"
+
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:213
+#, fuzzy, kde-format
+#| msgid "Security detail wizard"
+msgctxt "@info:tab Security edit wizard detail page"
+msgid "Security details"
+msgstr "Expertul de definire a titlurilor de valoare"
+
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:245
 #, fuzzy, kde-format
 #| msgid ""
 #| "The security <b>%1</b> currently does not exist as sub-account of <b>%2</"
@@ -24902,25 +24902,25 @@ msgstr ""
 "Titlul de valoare <b>%1</b> nu există ca un subcont al contului <b>%2</b>. "
 "Doriți sa îl creați acum?"
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:292
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:249
 #, kde-format
 msgid "Create security"
 msgstr "Creează titlul de valoare"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, KNewInvestmentWizard)
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.ui:17
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.ui:14
 #, kde-format
 msgid "New Investment wizard"
 msgstr "Expertul de configurare pentru o investiție nouă"
 
-#. i18n: ectx: attribute (title), widget (QWizardPage, KOnlineUpdateWizardPage)
-#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:6
+#. i18n: ectx: property (title), widget (KOnlineUpdateWizardPage, KOnlineUpdateWizardPage)
+#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:14
 #, kde-format
 msgid "Online Update"
 msgstr "Actualizare online"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel6)
-#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:12
+#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:20
 #, kde-format
 msgid ""
 "Select an online source and click <b>Finish</b> to store the investment "
@@ -24932,19 +24932,19 @@ msgstr ""
 
 # well-spelled: Finance, Quote
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_4)
-#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:37
+#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:54
 #, kde-format
 msgid "Use Finance::Quote"
 msgstr "Folosiți Finance::Quote"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_3)
-#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:58
+#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:75
 #, kde-format
 msgid "Online Source"
 msgstr "Sursă online"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_6)
-#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:87
+#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:104
 #, kde-format
 msgid "Factor"
 msgstr "Factor"
@@ -26371,6 +26371,33 @@ msgstr ""
 "\n"
 "<p>Toate informațiile sînt opționale și sînt folosite doar pentru a vă "
 "personaliza fișierul KMyMoney.</p>"
+
+#~ msgid "Select Account:"
+#~ msgstr "Alegeți un cont:"
+
+#~ msgid "Investment details"
+#~ msgstr "Detalii ale investiției"
+
+# well-spelled: RHAT
+#~ msgid "Enter the ticker symbol (e.g. RHAT)."
+#~ msgstr "Introduceți simbolul de pe piața de capital (de exemplu RHAT)"
+
+# well-spelled: CUSIP, ISIN, WKN
+#~ msgid "Enter the CUSIP/ISIN/WKN identification number here"
+#~ msgstr "Introduceți numărul de identificare CUSIP/ISIN/WKN aici"
+
+#~ msgid "This wizard allows you to modify the selected security."
+#~ msgstr "Acest expert vă permite modificarea titlului de valoare ales."
+
+#~ msgid ""
+#~ "The selected symbol is already on file. Do you want to reuse the existing "
+#~ "security?"
+#~ msgstr ""
+#~ "Simbolul dat este deja utilizat. Doriți să reutilizați titlul de valoare "
+#~ "existent?"
+
+#~ msgid "Security found"
+#~ msgstr "S-a găsit titlul de valoare"
 
 #~ msgctxt "Equity name"
 #~ msgid "Name"

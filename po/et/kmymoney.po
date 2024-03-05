@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-01 02:01+0000\n"
+"POT-Creation-Date: 2024-03-05 01:35+0000\n"
 "PO-Revision-Date: 2020-05-02 10:27+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -1554,7 +1554,7 @@ msgstr "Väikseim jaotis:"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
 #: kmymoney/dialogs/keditequityentry.ui:70
 #: kmymoney/dialogs/knewequityentrydlg.ui:63
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:99
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:233
 #, kde-format
 msgid "1 /"
 msgstr "1 /"
@@ -2161,20 +2161,20 @@ msgid "Delete"
 msgstr "Kustuta"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:171
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:39
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:151
 #, kde-format
 msgctxt "default price mode"
 msgid "(default)"
 msgstr "(vaikimisi)"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:172
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:40
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:152
 #, kde-format
 msgid "Price per share"
 msgstr "Ühe aktsia hind"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:173
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:41
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:153
 #, kde-format
 msgid "Total for all shares"
 msgstr "Kõigi aktsiate hind"
@@ -2492,10 +2492,10 @@ msgstr "Nõutav on kuluüksuse omistamine"
 msgid "Preferred Account"
 msgstr "Eelistatud konto"
 
-#. i18n: ectx: property (text), widget (QLabel, textLabel2_5)
+#. i18n: ectx: property (text), widget (QLabel, m_priceModeLabel)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_5)
 #: kmymoney/dialogs/knewaccountdlg.ui:250
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:195
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:67
 #, kde-format
 msgid "Price entry"
 msgstr "Hinnakirje"
@@ -8151,21 +8151,21 @@ msgid "Do not change the date"
 msgstr "Kuupeva ei muudeta"
 
 #: kmymoney/mymoney/mymoneysecurity.cpp:232
-#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:30
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:31
 #, kde-format
 msgctxt "Security type"
 msgid "Stock"
 msgstr "Aktsia"
 
 #: kmymoney/mymoney/mymoneysecurity.cpp:234
-#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:31
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:32
 #, kde-format
 msgctxt "Security type"
 msgid "Mutual Fund"
 msgstr "Investeerimisfond"
 
 #: kmymoney/mymoney/mymoneysecurity.cpp:236
-#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:32
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:33
 #, kde-format
 msgctxt "Security type"
 msgid "Bond"
@@ -9132,7 +9132,7 @@ msgstr "Turg"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2_2)
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:90
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:81
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:188
 #, kde-format
 msgid "Fraction"
 msgstr "Jagunemine"
@@ -20054,9 +20054,10 @@ msgstr "Finantsinstrumendid"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/views/kinvestmentview.ui:44
-#, kde-format
-msgid "Select Account:"
-msgstr "Konto:"
+#, fuzzy, kde-format
+#| msgid "Select new investment type"
+msgid "Select investment account:"
+msgstr "Uue investeeringutüübi valimine"
 
 #. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
 #: kmymoney/views/kinvestmentview.ui:80
@@ -22584,8 +22585,10 @@ msgstr ""
 "Kasuta teabe hankimiseks konto eri tüüpide kohta <b>Mis see on?</b> abi. "
 "Sisesta konto avamise kuupäev ja valuuta."
 
+#. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:35
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:109
 #, kde-format
 msgid "Account name"
 msgstr "Konto nimi"
@@ -23840,38 +23843,47 @@ msgstr "Kasutaja"
 msgid "Unable to create account: %1"
 msgstr "Kontot loomine nurjus: %1"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:64
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:190
 #, kde-format
 msgctxt "Rounding method"
 msgid "Round"
 msgstr ""
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:65
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:191
 #, kde-format
 msgctxt "Rounding method"
 msgid "Ceil"
 msgstr "Lagi"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:66
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:192
 #, kde-format
 msgctxt "Rounding method"
 msgid "Floor"
 msgstr "Põrand"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:67
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:193
 #, kde-format
 msgctxt "Rounding method"
 msgid "Truncate"
 msgstr ""
 
-#. i18n: ectx: property (title), widget (QWizardPage, KInvestmentDetailsWizardPage)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:14
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:235
 #, kde-format
-msgid "Investment details"
-msgstr "Investeeringu üksikasjad"
+msgctxt "@info Warning that security is used in multiple accounts"
+msgid ""
+"This security is used in multiple accounts. Changing the values below will "
+"be effective for all of them."
+msgstr ""
+
+#. i18n: ectx: property (title), widget (KInvestmentDetailsWizardPage, KInvestmentDetailsWizardPage)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:14
+#, fuzzy, kde-format
+#| msgid "Security detail wizard"
+msgid "Security details"
+msgstr "Väärtpaberi üksikasjade nõustaja"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:20
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:23
 #, kde-format
 msgid ""
 "Enter the details below and click <b>Next</b> to continue entering the "
@@ -23880,178 +23892,170 @@ msgstr ""
 "Allpool tuleb sisestada üksikasjad ja klõpsata nupule <b>Edasi</b>, et "
 "jätkata võrgu-uuenduse üksikasjade sisestamist."
 
-#. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:51
-#, kde-format
-msgid "Trading symbol"
-msgstr "Sümbol"
-
-#. i18n: ectx: property (toolTip), widget (KMyMoneyLineEdit, m_investmentSymbol)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:61
-#, kde-format
-msgid "Enter the ticker symbol (e.g. RHAT)."
-msgstr "Väärtpaberi sümboli sisestamine (nt. RHAT)"
-
-#. i18n: ectx: property (text), widget (QLabel, textLabel3)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:68
-#, kde-format
-msgid "Full name"
-msgstr "Täisnimi"
-
-#. i18n: ectx: property (text), widget (QLabel, textLabel1_3)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:117
-#, kde-format
-msgid "Trading market"
-msgstr "Turg"
-
 #. i18n: ectx: property (text), item, widget (KComboBox, m_tradingMarket)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:131
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:81
 #, kde-format
 msgid "AMEX"
 msgstr "AMEX"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_tradingMarket)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:136
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:86
 #, kde-format
 msgid "EUREX"
 msgstr "EUREX"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_tradingMarket)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:141
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:91
 #, kde-format
 msgid "FUND"
 msgstr "FUND"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_tradingMarket)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:146
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:96
 #, kde-format
 msgid "NASDAQ"
 msgstr "NASDAQ"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_tradingMarket)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:151
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:101
 #, kde-format
 msgid "NYSE"
 msgstr "NYSE"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_tradingMarket)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:156
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:106
 #, kde-format
 msgid "XETRA"
 msgstr "XETRA"
 
-#. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:165
-#, kde-format
-msgid ""
-"Identification\n"
-"number"
-msgstr "Identifitseerimisnumber"
-
-#. i18n: ectx: property (toolTip), widget (KMyMoneyLineEdit, m_investmentIdentification)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:175
-#, kde-format
-msgid "Enter the CUSIP/ISIN/WKN identification number here"
-msgstr "Siin tuleb sisestada CUSIP/ISIN/WKN identifitseerimisnumber"
-
-#. i18n: ectx: property (text), widget (QLabel, textLabel1_4)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:182
-#, kde-format
-msgid "Trading Currency"
-msgstr "Valuuta"
-
-#. i18n: ectx: property (text), widget (QLabel, textLabel2_6)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:208
-#, kde-format
-msgid "Price precision"
-msgstr "Hinnatäpsus"
-
 #. i18n: ectx: property (toolTip), widget (QSpinBox, m_pricePrecision)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:215
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:114
 #, kde-format
 msgid "This determines how many digits after decimal symbol price can have."
 msgstr "Siin saab määrata, mitu kümnendkohta sümboli hinnal olla tohib."
 
+#. i18n: ectx: property (text), widget (QLabel, textLabel2_6)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:127
+#, kde-format
+msgid "Price precision"
+msgstr "Hinnatäpsus"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1_3)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:134
+#, kde-format
+msgid "Trading market"
+msgstr "Turg"
+
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_roundingMethod)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:228
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:144
 #, kde-format
 msgid ""
 "This controls what to do with digit situated after precision digits in "
 "amount values."
 msgstr ""
 
+#. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:158
+#, kde-format
+msgid "Trading symbol"
+msgstr "Sümbol"
+
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:235
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:168
 #, kde-format
 msgid "Remainder"
 msgstr "Jääk"
 
-#. i18n: ectx: attribute (title), widget (QWizardPage, WizardPage)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:6
+#. i18n: ectx: property (text), widget (QLabel, textLabel1_4)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:175
+#, kde-format
+msgid "Trading Currency"
+msgstr "Valuuta"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:198
+#, kde-format
+msgid "Full name"
+msgstr "Täisnimi"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:212
+#, kde-format
+msgid ""
+"Identification\n"
+"number"
+msgstr "Identifitseerimisnumber"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_createSymbolDuplicate)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:251
+#, kde-format
+msgid "Create duplicate of the symbol"
+msgstr ""
+
+#. i18n: ectx: property (title), widget (KInvestmentTypeWizardPage, KInvestmentTypeWizardPage)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:14
 #, kde-format
 msgid "Investment Type"
 msgstr "Investeeringu tüüp"
 
 #. i18n: ectx: property (text), widget (QLabel, m_introLabel)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:12
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:20
 #, kde-format
 msgid "This wizard allows you to create a new investment."
 msgstr "See nõustaja võimaldab luua uue investeeringu."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:41
-#, kde-format
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:49
+#, fuzzy, kde-format
+#| msgid ""
+#| "The first step in this process requires to select the type of investment. "
+#| "The following steps collect more details about the investment from you."
 msgid ""
-"The first step in this process requires to select the type of investment. "
-"The following steps collect more details about the investment from you."
+"The first step in this process requires to provide an account name for the "
+"investment and select the type of investment. The following steps collect "
+"further details about the investment from you."
 msgstr ""
 "Kõigepealt tuleb valida investeeringu tüüp. Seejärel kogutakse täpsemaid "
 "andmeid investeeringu kohta."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:72
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:99
 #, kde-format
 msgid "Type of investment"
 msgstr "Investeeringu tüüp"
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:71
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:72
 #, kde-format
 msgid "This wizard allows you to modify the selected investment."
 msgstr "See nõustaja võimaldab muuta valitud investeeringut."
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:74
-#, kde-format
-msgid "This wizard allows you to modify the selected security."
-msgstr "See nõustaja võimaldab muuta valitud väärtpaberit."
-
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:117
-#, kde-format
-msgid "Investment detail wizard"
-msgstr "Investeeringu üksikasjade nõustaja"
-
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:140
-#, kde-format
-msgid "Security detail wizard"
-msgstr "Väärtpaberi üksikasjade nõustaja"
-
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:178
-#, kde-format
-msgid ""
-"The selected symbol is already on file. Do you want to reuse the existing "
-"security?"
-msgstr "Valitud sümbol on juba failis. Kas kasutada olemasolevat väärtpaberit?"
-
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:179
-#, kde-format
-msgid "Security found"
-msgstr "Leiti väärtpaber"
-
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:272
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:167
 #, kde-format
 msgid "Unexpected error occurred while adding new investment"
 msgstr "Uue investeeringu lisamisel tekkis ootamatu tõrge"
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:288
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:195
+#, fuzzy, kde-format
+#| msgid "Investment detail wizard"
+msgctxt "@info:window"
+msgid "Investment detail wizard"
+msgstr "Investeeringu üksikasjade nõustaja"
+
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:210
+#, fuzzy, kde-format
+#| msgid "Security detail wizard"
+msgctxt "@info:window"
+msgid "Security detail wizard"
+msgstr "Väärtpaberi üksikasjade nõustaja"
+
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:213
+#, fuzzy, kde-format
+#| msgid "Security detail wizard"
+msgctxt "@info:tab Security edit wizard detail page"
+msgid "Security details"
+msgstr "Väärtpaberi üksikasjade nõustaja"
+
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:245
 #, kde-format
 msgid ""
 "<qt>The security <b>%1</b> currently does not exist as sub-account of <b>%2</"
@@ -24059,25 +24063,25 @@ msgid ""
 msgstr ""
 "<qt>Väärtpaber <b>%1</b> ei ole praegu <b>%2</b> allkonto. Kas luua see?</qt>"
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:292
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:249
 #, kde-format
 msgid "Create security"
 msgstr "Väärtpaberi loomine"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, KNewInvestmentWizard)
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.ui:17
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.ui:14
 #, kde-format
 msgid "New Investment wizard"
 msgstr "Uue investeeringu nõustaja"
 
-#. i18n: ectx: attribute (title), widget (QWizardPage, KOnlineUpdateWizardPage)
-#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:6
+#. i18n: ectx: property (title), widget (KOnlineUpdateWizardPage, KOnlineUpdateWizardPage)
+#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:14
 #, kde-format
 msgid "Online Update"
 msgstr "Uuendamine internetist"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel6)
-#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:12
+#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:20
 #, kde-format
 msgid ""
 "Select an online source and click <b>Finish</b> to store the investment "
@@ -24087,19 +24091,19 @@ msgstr ""
 "<b>Lõpeta</b>. Kui sa ei soovi võrgu-uuendusi, ära siin midagi muuda."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_4)
-#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:37
+#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:54
 #, kde-format
 msgid "Use Finance::Quote"
 msgstr "Finance::Quote kasutamine"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_3)
-#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:58
+#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:75
 #, kde-format
 msgid "Online Source"
 msgstr "Võrguallikas"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_6)
-#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:87
+#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:104
 #, kde-format
 msgid "Factor"
 msgstr "Kordaja"
@@ -25494,6 +25498,30 @@ msgstr ""
 "\n"
 "<p>Ükski osa sellest teabest pole kohustuslik ja seda kasutatakse ainult "
 "sinu KMyMoney faili personaliseerimiseks.</p>"
+
+#~ msgid "Select Account:"
+#~ msgstr "Konto:"
+
+#~ msgid "Investment details"
+#~ msgstr "Investeeringu üksikasjad"
+
+#~ msgid "Enter the ticker symbol (e.g. RHAT)."
+#~ msgstr "Väärtpaberi sümboli sisestamine (nt. RHAT)"
+
+#~ msgid "Enter the CUSIP/ISIN/WKN identification number here"
+#~ msgstr "Siin tuleb sisestada CUSIP/ISIN/WKN identifitseerimisnumber"
+
+#~ msgid "This wizard allows you to modify the selected security."
+#~ msgstr "See nõustaja võimaldab muuta valitud väärtpaberit."
+
+#~ msgid ""
+#~ "The selected symbol is already on file. Do you want to reuse the existing "
+#~ "security?"
+#~ msgstr ""
+#~ "Valitud sümbol on juba failis. Kas kasutada olemasolevat väärtpaberit?"
+
+#~ msgid "Security found"
+#~ msgstr "Leiti väärtpaber"
 
 #~ msgctxt "Equity name"
 #~ msgid "Name"
