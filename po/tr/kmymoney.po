@@ -3,13 +3,13 @@
 # Serdar Soytetir <tulliana@gmail.com>, 2007, 2008, 2009, 2012, 2013.
 # Volkan Gezer <volkangezer@gmail.com>, 2013, 2014, 2015, 2017, 2021.
 # Kaan Ozdincer <kaanozdincer@gmail.com>, 2014.
-# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-21 02:26+0000\n"
-"PO-Revision-Date: 2023-08-31 19:52+0300\n"
+"PO-Revision-Date: 2024-03-05 11:25+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.11.70\n"
+"X-Generator: Lokalize 24.02.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -253,17 +253,17 @@ msgstr "<b>Aşağıdaki hesap için bir tablo indirdiniz:</b><br/><br/>"
 #: kmymoney/converter/mymoneystatementreader.cpp:1363
 #, kde-format
 msgid " - Account Name: %1"
-msgstr " - Hesap adı: %1"
+msgstr " — Hesap adı: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1364
 #, kde-format
 msgid " - Account Type: %1"
-msgstr " - Hesap türü: %1"
+msgstr " — Hesap türü: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1365
 #, kde-format
 msgid " - Account Number: %1"
-msgstr " - Hesap numarası: %1"
+msgstr " — Hesap numarası: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1370
 #, kde-format
@@ -387,7 +387,7 @@ msgstr "Şablon Hatası"
 #: kmymoney/converter/mymoneytemplate.cpp:107
 #, kde-format
 msgid "File '%1' not found."
-msgstr "'%1' dosyası bulunamadı."
+msgstr "‘%1’ dosyası bulunamadı."
 
 #: kmymoney/converter/mymoneytemplate.cpp:150
 #, kde-format
@@ -3096,7 +3096,7 @@ msgstr "Tüm hisselerin toplamı"
 #: kmymoney/dialogs/knewaccountdlg.cpp:208
 #, kde-format
 msgid "VAT account"
-msgstr "KDV'li hesap"
+msgstr "KDV’li hesap"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:493 kmymoney/kmymoney.cpp:374
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:187
@@ -3696,7 +3696,7 @@ msgstr "Farklı kaydet..."
 #: kmymoney/dialogs/ksaveasquestion.ui:17
 #, kde-format
 msgid "Choose XML if unsure."
-msgstr "Emin değilseniz XML'i seçin."
+msgstr "Emin değilseniz XML’i seçin."
 
 #. i18n: ectx: property (html), widget (QTextBrowser, textBrowser)
 #: kmymoney/dialogs/ksaveasquestion.ui:34
@@ -6491,7 +6491,7 @@ msgstr "&Değiştir"
 #, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
-msgstr "'%1' yedek dizini oluşturulamadı."
+msgstr "‘%1’ yedek dizini oluşturulamadı."
 
 #: kmymoney/kmymoney.cpp:2441
 #, kde-format
@@ -7794,7 +7794,7 @@ msgstr "    Hesabının açılış tarihi güncellendi."
 #: kmymoney/mymoney/mymoneyfile.cpp:2206
 #, kde-format
 msgid "  * shares set to value in split of transaction '%1'."
-msgstr "  * hisseler '%1' bölünmüş işlemlerin içindeki değere ayarlandı."
+msgstr "  * hisseler ‘%1’ bölünmüş işlemlerin içindeki değere ayarlandı."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2209
 #, kde-format
@@ -7882,18 +7882,18 @@ msgid ""
 "  * Split %2 in schedule '%1' contains a reference to invalid account %3. "
 "Please fix manually."
 msgstr ""
-"  * '%1' planındaki %2 bölmesi geçersiz %3 hesabına bir başvuru içeriyor. "
+"  * ‘%1’ planındaki %2 bölmesi geçersiz %3 hesabına bir başvuru içeriyor. "
 "Lütfen elle düzeltin."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2356
 #, kde-format
 msgid "  * Payee id updated in report '%1'."
-msgstr "  * '%1' raporundaki alacaklı kimliği güncellendi."
+msgstr "  * ‘%1’ raporundaki alacaklı kimliği güncellendi."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2373
 #, kde-format
 msgid "  * Payee '%1' removed."
-msgstr "  * '%1' alacaklısı silindi."
+msgstr "  * ‘%1’ alacaklısı silindi."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2445
 #, kde-format
@@ -7935,7 +7935,7 @@ msgstr ""
 #: kmymoney/mymoney/mymoneyfile.cpp:2474
 #, kde-format
 msgid "* Problem with budget '%1'"
-msgstr "* '%1' bütçesi ile ilgili sorun"
+msgstr "* ‘%1’ bütçesi ile ilgili sorun"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2476
 #, kde-format
@@ -8403,7 +8403,7 @@ msgstr "Guatemala Kuetzalı"
 #: kmymoney/mymoney/mymoneyfile.cpp:2824
 #, kde-format
 msgid "Guinea-Bissau Peso"
-msgstr "Gine-Bissau Pezosu"
+msgstr "Gine–Bissau Pezosu"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2825
 #, kde-format
@@ -10007,7 +10007,7 @@ msgstr "Dışa aktarma işlemi tamamlandı.\n"
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:77
 #, kde-format
 msgid "Unable to open file '%1' for writing"
-msgstr "'%1' dosyası yazmak için açılamadı"
+msgstr "‘%1’ dosyası yazmak için açılamadı"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:97
 #, kde-format
@@ -10846,7 +10846,7 @@ msgid ""
 "<center>Field name not recognised.</center><center>'<b>%1</b>'</"
 "center>Please re-enter your column selections."
 msgstr ""
-"<center>Alan adı tanımlanamadı.</center><center>'<b>%1</b>'</center>Lütfen "
+"<center>Alan adı tanımlanamadı.</center><center>‘<b>%1</b>’</center>Lütfen "
 "sütun seçimlerini yeniden girin."
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:402
@@ -12905,7 +12905,7 @@ msgid ""
 "was on '%1'."
 msgstr ""
 "Sertifika doğrulama OFX ana bilgisayarda başarısız. Son başarılı doğrulama "
-"'%1' tarihinde idi."
+"‘%1’ tarihinde idi."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:278
 #, kde-format
@@ -13442,37 +13442,37 @@ msgstr "Quicken Windows (Uzman)"
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:100
 #, kde-format
 msgid "MS-Money 2003"
-msgstr "MS-Money 2003"
+msgstr "MS–Money 2003"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:101
 #, kde-format
 msgid "MS-Money 2004"
-msgstr "MS-Money 2004"
+msgstr "MS–Money 2004"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:102
 #, kde-format
 msgid "MS-Money 2005"
-msgstr "MS-Money 2005"
+msgstr "MS–Money 2005"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:103
 #, kde-format
 msgid "MS-Money 2006"
-msgstr "MS-Money 2006"
+msgstr "MS–Money 2006"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:104
 #, kde-format
 msgid "MS-Money 2007"
-msgstr "MS-Money 2007"
+msgstr "MS–Money 2007"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:105
 #, kde-format
 msgid "MS-Money Plus"
-msgstr "MS-Money Plus"
+msgstr "MS–Money Plus"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:106
 #, kde-format
 msgid "MS-Money (Expert)"
-msgstr "MS-Money (Uzman)"
+msgstr "MS–Money (Uzman)"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:229
 #, kde-format
@@ -14441,8 +14441,8 @@ msgid ""
 "This investment account does not contain the \"%1\" security.  Transactions "
 "involving this security will be ignored."
 msgstr ""
-"Bu yatırım hesabı \"%1\" menkul kıymetini içermiyor. Bu menkul kıymeti "
-"içeren işlemler yok sayılacaktır."
+"Bu yatırım hesabı, ‘%1’ menkul kıymetini içermiyor. Bu menkul kıymeti içeren "
+"işlemler yok sayılacaktır."
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1950
 #, kde-format
@@ -16674,7 +16674,7 @@ msgid ""
 "Could not find reportgroup \"%1\" for report \"%2\".\n"
 "Please report this error to the developer's list: kmymoney-devel@kde.org"
 msgstr ""
-"\"%2\" raporu için \"%1\" rapor grubu bulunamadı.\n"
+"‘%2’ raporu için ‘%1’ rapor grubu bulunamadı.\n"
 "Lütfen geliştirici listesine bu hatayı bildirin: kmymoney-devel@kde.org"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:337
@@ -18015,6 +18015,8 @@ msgid ""
 "No accounts available.\n"
 "Check your backend configuration in woob config-qt."
 msgstr ""
+"Kullanılabilir hesap yok.\n"
+"woob config-qt’deki arka uç yapılandırmanızı denetleyin."
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:190
 #, fuzzy, kde-format
@@ -18097,6 +18099,8 @@ msgstr ""
 msgid ""
 "No GPG secret keys found, please run gpg[2] --gen-key or import keys into gpg"
 msgstr ""
+"Bir GPG gizli anahtarı bulunamadı, lütfen gpg[2] --gen-key’ çalıştırın veya "
+"GPG’ye anahtarlar içe aktarın"
 
 #: kmymoney/plugins/xml/kcm_xmlstorage.cpp:168
 #: kmymoney/plugins/xml/ksettingsgpg.cpp:206
@@ -18140,6 +18144,9 @@ msgid ""
 "You have configured KMyMoney to save your data secured with GPG. Please "
 "choose the key you want to use for encryption of your data."
 msgstr ""
+"K Param’ı, verilerinizi GPG ile güvenli bir şekilde kaydedecek şekilde "
+"yapılandırdınız. Lütfen verilerinizin şifrelenmesi için kullanmak "
+"istediğiniz anahtarı seçin."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/xml/kgpgkeyselectiondlg.ui:39
@@ -18292,7 +18299,7 @@ msgid ""
 "disabled."
 msgstr ""
 "Sisteminizde GPG kurulu görünmüyor. Lütfen standart arama yolu kullanılarak "
-"GPG' nin bulunabildiğine emin olun. Bu kez şifreleme devre dışı."
+"GPG’nin bulunabildiğine emin olun. Bu kez şifreleme devre dışı."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:441
 #, kde-format
@@ -19264,7 +19271,7 @@ msgstr "Toplam Kâr:"
 #: kmymoney/views/kaccountsview_p.h:152
 #, kde-format
 msgid "Edit account '%1'"
-msgstr "'%1' hesabını düzenle"
+msgstr "‘%1’ hesabını düzenle"
 
 #: kmymoney/views/kaccountsview_p.h:232
 #, kde-format
@@ -19298,7 +19305,7 @@ msgstr "Bu hesap etkin bir planlamanın içinde"
 #: kmymoney/views/kcategoriesview.cpp:242
 #, kde-format
 msgid "Edit category '%1'"
-msgstr "'%1' kategorisini düzenle"
+msgstr "‘%1’ kategorisini düzenle"
 
 #: kmymoney/views/kcategoriesview.cpp:265
 #, fuzzy, kde-format
