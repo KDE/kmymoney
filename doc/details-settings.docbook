@@ -44,9 +44,8 @@
   </mediaobject>
 </screenshot>
 
-<!-- I would prefer to use a more consistent hierarchy and use of levels on this
-     page.  For example, when to use sectX and when variablelist.  For now, I'm
-     minimizing changes. -->
+<!-- FIXME: I prefer a more consistent hierarchy and use of levels on this page, such
+     as with use sectX and variablelist.  For now, I minimize changes. -->
 <variablelist>
   <varlistentry>
     <term><guilabel>Autosave options</guilabel></term>
@@ -330,9 +329,6 @@
 </sect1>
 
 <sect1 id="details.settings.home"><title>Home</title>
-<!-- FIXME: For consistency, <sect2> should only be used for tabs.  I'm too lazy to
-     convert this to a variablelist now, which would require subsuming the lower
-     levels to paras.  -->
 
 <sect2><title>Home page display sections</title>
 <screenshot>
@@ -947,13 +943,13 @@
 </variablelist>
 </sect2>
 
-<sect2><title>&nbsp; &nbsp;</title>
-<!-- FIXME: This is a good example of problems with the current mix of sect and
-     variablelist, as this sect with no title gives inadequate spacing between the
-     previous and this list entry, even with &nbsp;, so it looks like they belong
-     together.  I consider using literallayout a bad solution.  I'm open to
-     suggestions on how to deal with this.  Not using sect2 for boxes might help,
-     but would be a lot of effort. -->
+<sect2><title>Ungrouped Item</title>
+<!-- FIXME: This is a good example of problems with the current mix of sectX and
+     variablelist.  Without a title, this sect has inadequate spacing above it.  so
+     it looks like it is part of the previous group, but the actual title does not
+     match the lack of title in the actual config dialog.  I'm open to suggestions on
+     how to deal with this.  Not using sect2 for boxes might help, but would be a lot
+     of effort.  Perhaps just adding a box and title to the config dialog?  -->
 <literallayout>
 </literallayout>
 <variablelist>
@@ -1141,8 +1137,8 @@
   <ulink url="https://doc.qt.io/qt-5/richtext-html-subset.html">here</ulink>.
 </para>
 
-<!-- FIXME: do we want to actually include any of these here, and if so, with how
-     much detail? -->
+<!-- FIXME: do we want to actually include these checkwriting variables here, and if
+     so, with how much detail? -->
 <!-- info from source code on substitution variables.  Future exercise to list/describe them here.
     // data about the user
     checkHTML.replace("$OWNER_NAME", file->user().name());
@@ -1225,7 +1221,6 @@
 </sect2>
 
 <sect2><title>iCalendar</title>
-<!-- FIXME:  This isn't mentioned anywhere else.  SHould it be? -->
 <para>
   &kmymoney; is capable of exporting a file inb then <quote>iCalendar</quote> format,
   so you can import your scheduled transactions into &korganizer;, or another
@@ -1284,39 +1279,23 @@
 </para>
 </sect2>
 
-<sect2><title>Reports view</title>
-<!-- FIXME:  this needs better incorporation into the Reports Chapter.  It is currently
-     not mentioned there at all. -->
+<sect2 id="details.settings.plugins.reports"><title>Reports view</title>
 <para>
-  This provides a dialog where you can configure some default values to be used when displaying
-  <link linkend="details.reports">Reports</link>.
-</para>
-
-<para>
-  <guilabel>Maximum number of legend items to display</guilabel> limits the number of
-  items to list in the legend of the graph of chart display of a report.
-</para>
-
-<para>
-  <guilabel>Charts line width</guilabel> is the default width in pixels of any lines
-  in the chart display of a report.
-</para>
-
-<para>
-  <guilabel>Charts palette</guilabel> gives some choice in the array of colors used
-  in graphs and chart displays of a report.
-</para>
-
-<para>
-  Since the graph and chart form of reports are shown using HTML, the
-  <guilabel>Default CSS file</guilabel> lets you provide a css file to customize
-  these displays.
+  This provides a dialog where you can configure some default values to be used when
+  displaying <link linkend="details.reports">Reports</link>.  The details are
+  described with the other <link linkend="details.reports.config.plugin">Report
+  Configuration</link> settings.
 </para>
 </sect2>
 
 <sect2><title>XML Storage</title>
 <para>
-  <!-- FIXME:  still needs writing..... -->
+  The default storage of your data is in &XML; format, described in the chapter on
+  <link linnkend="details.formats">File Formats</link>.  Because the code which reads
+  and saves your data is implemented as a plugin, the configuration dialog which
+  controls some aspects of this storage is accessed through the Plugin section of the
+  general KMyMoney Configuration, although it is described in the above linked
+  section.
 </para>
 </sect2>
 </sect1>

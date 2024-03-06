@@ -244,7 +244,7 @@
 </para>
 
 <para>
-  Tags that are marked for search are indicated with a box.  If you click the
+  Tags that are marked for search are indicated with a checked box.  If you click the
   <guibutton>Select all</guibutton> button, all tags are marked for searching. If you
   click the <guibutton>Select none</guibutton> button, no tags will be marked for
   searching.  Individual tags can be marked or unmarked by clicking on the checkbox
@@ -254,10 +254,6 @@
 <para>
   If you check the <guilabel>Select transactions without tags</guilabel> box, only
   transactions with no tag will be selected.
-</para>
-
-<para>
-  <!-- FIXME: need to mention known issues with searching on tags in splits -->
 </para>
 </sect2>
 

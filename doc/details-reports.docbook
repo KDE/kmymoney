@@ -483,6 +483,50 @@
   linkend="details.search">Search Transactions</link> section for details on those
   tabs.</para>
 </sect2>
+
+<sect2 id="details.reports.config.plugin"><title>Report Plugin Configuration</title>
+<para>
+  Behind the scenes, Reports are actually implemented as a plugin in &kmymoney;, and
+  there are some items which can be configured through the <link
+  linkend="details.settings.plugins.reports">Reports View Plugin Configuration</link>
+  dialog.
+</para>
+
+<screenshot>
+  <screeninfo>report plugin configuration</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="reports_configuration_plugin.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>report plugin configuration</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para>
+  <guilabel>Maximum number of legend items to display</guilabel> limits the number of
+  items to list in the legend of the graph or chart display of a report.  This can be
+  useful if there are enough items that the legend would otherwise overwhelm the main
+  display.
+</para>
+
+<para>
+  <guilabel>Charts line width</guilabel> is the default width in pixels of any lines
+  in the chart display of a report.
+</para>
+
+<para>
+  <guilabel>Charts palette</guilabel> gives some choice in the array of colors used
+  in graphs and chart displays of a report.
+</para>
+
+<para>
+  Since the graph and chart displays of reports are shown using HTML, the
+  <guilabel>Default CSS file</guilabel> lets you provide a css file to customize
+  these displays.
+</para>
+</sect2>
 </sect1>
 
 <sect1 id="details.reports.charts"><title>Graphs &amp; Charts</title>
