@@ -11,8 +11,11 @@ include:
       - /gitlab-templates/craft-macos-arm64.yml
       - /gitlab-templates/craft-macos-x86-64.yml
 
-# windows install only on demand
-craft_windows_qt515_x86_64:
+# macos installs currently only on demand since they are failing
+craft_macos_arm64:
+  when: manual
+
+craft_macos_x86_64:
   when: manual
 
 # custom builds
