@@ -19209,10 +19209,9 @@ msgstr "Jmění"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/views/kinvestmentview.ui:44
-#, fuzzy, kde-format
-#| msgid "Enter the investment account name "
+#, kde-format
 msgid "Select investment account:"
-msgstr "Zadejte název investičního účtu "
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
 #: kmymoney/views/kinvestmentview.ui:80
@@ -22915,10 +22914,9 @@ msgstr ""
 
 #. i18n: ectx: property (title), widget (KInvestmentDetailsWizardPage, KInvestmentDetailsWizardPage)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:14
-#, fuzzy, kde-format
-#| msgid "Security detail wizard"
+#, kde-format
 msgid "Security details"
-msgstr "Průvodce podrobnostmi zabezpečení"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:23
@@ -23044,17 +23042,12 @@ msgstr "Tento průvodce vám pomůže vytvořit novou investici."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:49
-#, fuzzy, kde-format
-#| msgid ""
-#| "The first step in this process requires to select the type of investment. "
-#| "The following steps collect more details about the investment from you."
+#, kde-format
 msgid ""
 "The first step in this process requires to provide an account name for the "
 "investment and select the type of investment. The following steps collect "
 "further details about the investment from you."
 msgstr ""
-"V prvním kroku musíte zvolit typ investice. Podrobnější informace o vaší "
-"investici se budou doplňovat v dalších krocích."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:99
@@ -23073,25 +23066,22 @@ msgid "Unexpected error occurred while adding new investment"
 msgstr ""
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:195
-#, fuzzy, kde-format
-#| msgid "Investment detail wizard"
+#, kde-format
 msgctxt "@info:window"
 msgid "Investment detail wizard"
-msgstr "Průvodce s podrobnostmi vaší investice"
+msgstr ""
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:210
-#, fuzzy, kde-format
-#| msgid "Security detail wizard"
+#, kde-format
 msgctxt "@info:window"
 msgid "Security detail wizard"
-msgstr "Průvodce podrobnostmi zabezpečení"
+msgstr ""
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:213
-#, fuzzy, kde-format
-#| msgid "Security detail wizard"
+#, kde-format
 msgctxt "@info:tab Security edit wizard detail page"
 msgid "Security details"
-msgstr "Průvodce podrobnostmi zabezpečení"
+msgstr ""
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:245
 #, kde-format
@@ -24521,27 +24511,3 @@ msgstr ""
 "\n"
 "<p>Veškeré informace jsou volitelně a používají se pouze pro zosobnění "
 "vašeho KMyMoney.</p>"
-
-#~ msgid "Select Account:"
-#~ msgstr "Vyberte účet:"
-
-#~ msgid "Investment details"
-#~ msgstr "Podrobnosti vaší investice"
-
-#~ msgid "Enter the ticker symbol (e.g. RHAT)."
-#~ msgstr "Vložte symbol cenného papíru (např. RHAT)."
-
-#~ msgid "Enter the CUSIP/ISIN/WKN identification number here"
-#~ msgstr "Zde zadejte CUSIP/ISIN/WKN identifikátor"
-
-#~ msgid "This wizard allows you to modify the selected security."
-#~ msgstr "Tento průvodce vám umožní upravit vybraný cenný papír"
-
-#~ msgid ""
-#~ "The selected symbol is already on file. Do you want to reuse the existing "
-#~ "security?"
-#~ msgstr ""
-#~ "Vybraný symbol už je v souboru. Přejete si použít existující cenný papír?"
-
-#~ msgid "Security found"
-#~ msgstr "Cenný papír nalezen"
