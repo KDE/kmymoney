@@ -23,7 +23,7 @@ Dependencies:
     'frameworks/kcmutils': '@stable'
     'frameworks/kcontacts': '@stable'
     'frameworks/kholidays': '@stable'
-    'pim/kpimtextedit': '@stable'
+    'pim/kpimtextedit': 'release/23.08'
     'pim/akonadi': '@stable'
     'pim/kidentitymanagement': '@stable'
     'graphics/kdiagram': '@stable'
