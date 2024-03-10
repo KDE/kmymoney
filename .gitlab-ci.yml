@@ -7,6 +7,7 @@ include:
       - /gitlab-templates/freebsd.yml
       - /gitlab-templates/windows.yml
       - /gitlab-templates/craft-appimage.yml
+      - /gitlab-templates/craft-windows-x86-64.yml
 
 # custom builds
 build_local_ubuntu_2004:
