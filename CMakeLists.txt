@@ -3,7 +3,7 @@
 # For all the configurable CMake switches, please see https://invent.kde.org/office/kmymoney/-/wikis/home#cmake-switches
 
 # The CMake version we require
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.16)
 set(ECM_MINIMUM_VERSION 5.42)
 set(KF5_MIN_VERSION 5.2)
 set(QT_MIN_VERSION 5.6)
@@ -46,13 +46,6 @@ list(APPEND CMAKE_AUTOMOC_MACRO_NAMES "K_PLUGIN_FACTORY" "K_PLUGIN_FACTORY_WITH_
 if (POLICY CMP0063)
   cmake_policy(SET CMP0063 NEW) # Policy introduced in CMake version 3.3
 endif()
-if (POLICY CMP0071)
-  # We do not require the old behaviour. It is only set to old, to prevent accidential use of
-  # the new behavour. If the new behaviour becomes important, cmake_minimum_required has to be
-  # set to "3.10".
-  cmake_policy(SET CMP0071 OLD) # Policy introduced in CMake version 3.10
-endif()
-
 
 ######################### General Requirements ##########################
 
