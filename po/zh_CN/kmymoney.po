@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-05 01:35+0000\n"
-"PO-Revision-Date: 2024-02-29 12:56\n"
+"PO-Revision-Date: 2024-03-09 04:49\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -19122,10 +19122,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/views/kinvestmentview.ui:44
-#, fuzzy, kde-format
-#| msgid "Select new investment type"
+#, kde-format
 msgid "Select investment account:"
-msgstr "选择新的投资类型"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
 #: kmymoney/views/kinvestmentview.ui:80
@@ -22720,10 +22719,9 @@ msgstr ""
 
 #. i18n: ectx: property (title), widget (KInvestmentDetailsWizardPage, KInvestmentDetailsWizardPage)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:14
-#, fuzzy, kde-format
-#| msgid "Security detail wizard"
+#, kde-format
 msgid "Security details"
-msgstr "证券明细向导"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:23
@@ -22871,25 +22869,22 @@ msgid "Unexpected error occurred while adding new investment"
 msgstr "添加新投资交易时发生了未知错误"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:195
-#, fuzzy, kde-format
-#| msgid "Investment detail wizard"
+#, kde-format
 msgctxt "@info:window"
 msgid "Investment detail wizard"
-msgstr "投资明细向导"
+msgstr ""
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:210
-#, fuzzy, kde-format
-#| msgid "Security detail wizard"
+#, kde-format
 msgctxt "@info:window"
 msgid "Security detail wizard"
-msgstr "证券明细向导"
+msgstr ""
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:213
-#, fuzzy, kde-format
-#| msgid "Security detail wizard"
+#, kde-format
 msgctxt "@info:tab Security edit wizard detail page"
 msgid "Security details"
-msgstr "证券明细向导"
+msgstr ""
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:245
 #, kde-format
@@ -24280,15 +24275,3 @@ msgstr ""
 "<p>使用下面的各项来输入关于您本人的信息。</p>\n"
 "\n"
 "<p>所有的信息都可以不填，它们仅用来个性化您自己的KMyMoney文件。</p>"
-
-#~ msgid "Select Account:"
-#~ msgstr "选择账户："
-
-#~ msgid "Enter the ticker symbol (e.g. RHAT)."
-#~ msgstr "请输入股票代码（如RHT等）。"
-
-#~ msgid "Enter the CUSIP/ISIN/WKN identification number here"
-#~ msgstr "在这里填入CUSIP/ISIN/WKN身份认证码"
-
-#~ msgid "Security found"
-#~ msgstr "找到证券"
