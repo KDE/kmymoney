@@ -8,6 +8,8 @@ include:
       - /gitlab-templates/windows.yml
       - /gitlab-templates/craft-appimage.yml
       - /gitlab-templates/craft-windows-x86-64.yml
+      - /gitlab-templates/craft-macos-arm64.yml
+      - /gitlab-templates/craft-macos-x86-64.yml
 
 # custom builds
 build_local_ubuntu_2004:
