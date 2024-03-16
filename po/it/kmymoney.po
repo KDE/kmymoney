@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-05 01:35+0000\n"
-"PO-Revision-Date: 2024-02-28 15:52+0100\n"
+"PO-Revision-Date: 2024-03-07 11:58+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.02.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -19879,10 +19879,9 @@ msgstr "Patrimonio"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/views/kinvestmentview.ui:44
-#, fuzzy, kde-format
-#| msgid "Select new investment type"
+#, kde-format
 msgid "Select investment account:"
-msgstr "Seleziona un nuovo tipo di investimento"
+msgstr "Seleziona conto di investimento:"
 
 #. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
 #: kmymoney/views/kinvestmentview.ui:80
@@ -23674,13 +23673,14 @@ msgid ""
 "This security is used in multiple accounts. Changing the values below will "
 "be effective for all of them."
 msgstr ""
+"Questo strumento finanziario è utilizzato in più conti. La modifica dei "
+"valori seguenti sarà efficace per tutti i conti."
 
 #. i18n: ectx: property (title), widget (KInvestmentDetailsWizardPage, KInvestmentDetailsWizardPage)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:14
-#, fuzzy, kde-format
-#| msgid "Security detail wizard"
+#, kde-format
 msgid "Security details"
-msgstr "Procedura guidata per i dettagli dei certificati"
+msgstr "Dettagli dello strumento finanziario"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:23
@@ -23794,7 +23794,7 @@ msgstr ""
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:251
 #, kde-format
 msgid "Create duplicate of the symbol"
-msgstr ""
+msgstr "Crea un duplicato del simbolo"
 
 #. i18n: ectx: property (title), widget (KInvestmentTypeWizardPage, KInvestmentTypeWizardPage)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:14
@@ -23810,17 +23810,15 @@ msgstr "Questa procedura guidata ti permette di creare un nuovo investimento."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:49
-#, fuzzy, kde-format
-#| msgid ""
-#| "The first step in this process requires to select the type of investment. "
-#| "The following steps collect more details about the investment from you."
+#, kde-format
 msgid ""
 "The first step in this process requires to provide an account name for the "
 "investment and select the type of investment. The following steps collect "
 "further details about the investment from you."
 msgstr ""
-"Il primo passo del processo richiede la selezione del tipo di investimento. "
-"I passi successivi raccolgono ulteriori dettagli circa l'investimento."
+"Il primo passo in questo processo richiede di fornire un nome di conto per "
+"l'investimento e selezionare il tipo di investimento. I passaggi seguenti "
+"raccolgono ulteriori dettagli sull'investimento."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:99
@@ -23843,25 +23841,22 @@ msgstr ""
 "investimento"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:195
-#, fuzzy, kde-format
-#| msgid "Investment detail wizard"
+#, kde-format
 msgctxt "@info:window"
 msgid "Investment detail wizard"
 msgstr "Procedura guidata per i dettagli dell'investimento"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:210
-#, fuzzy, kde-format
-#| msgid "Security detail wizard"
+#, kde-format
 msgctxt "@info:window"
 msgid "Security detail wizard"
-msgstr "Procedura guidata per i dettagli dei certificati"
+msgstr "Procedura guidata per i dettagli dello strumento finanziario"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:213
-#, fuzzy, kde-format
-#| msgid "Security detail wizard"
+#, kde-format
 msgctxt "@info:tab Security edit wizard detail page"
 msgid "Security details"
-msgstr "Procedura guidata per i dettagli dei certificati"
+msgstr "Dettagli dello strumento finanziario"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:245
 #, kde-format
