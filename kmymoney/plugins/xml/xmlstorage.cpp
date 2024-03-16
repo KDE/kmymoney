@@ -78,6 +78,7 @@ XMLStorage::~XMLStorage()
 
 bool XMLStorage::open(const QUrl &url)
 {
+    qDebug() << "Enter XMLStorage::open";
     fileUrl.clear();
 
     if (url.scheme() == QLatin1String("sql"))
@@ -221,9 +222,11 @@ bool XMLStorage::open(const QUrl &url)
     }
 
     fileUrl = url;
+    qDebug() << "Store last used directory info for" << url;
     //write the directory used for this file as the default one for next time.
     appInterface()->writeLastUsedDir(url.toDisplayString(QUrl::RemoveFilename | QUrl::PreferLocalFile | QUrl::StripTrailingSlash));
 
+    qDebug() << "Leave XMLStorage::open";
     return true;
 }
 
