@@ -4348,7 +4348,7 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
                 KMSTATUS(i18n("Importing a statement via Web Connect"));
 
                 // remove the statement files
-                d->unlinkStatementXML();
+                // d->unlinkStatementXML();
 
                 QMap<QString, KMyMoneyPlugin::ImporterPlugin*>::const_iterator it_plugin = pPlugins.importer.constBegin();
                 while (it_plugin != pPlugins.importer.constEnd()) {
