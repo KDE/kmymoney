@@ -169,26 +169,24 @@ set_target_properties(kmm_yesno PROPERTIES
 generate_export_header(kmm_yesno)
 
 
-if(ENABLE_GPG)
-  set( kmm_gpgfile_SRCS
-    kgpgfile.cpp
-  )
-  add_library(kmm_gpgfile ${kmm_gpgfile_SRCS})
+set( kmm_gpgfile_SRCS
+kgpgfile.cpp
+)
+add_library(kmm_gpgfile ${kmm_gpgfile_SRCS})
 
-  target_link_libraries( kmm_gpgfile
-  PUBLIC
-    Qt::Core
-    $<$<BOOL:${Gpgmepp_FOUND}>:Gpgmepp>
-    $<$<BOOL:${KF5Gpgmepp_FOUND}>:KF5::Gpgmepp>
-  )
-  set_target_properties(kmm_gpgfile PROPERTIES
-    VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
-  )
-  generate_export_header(kmm_gpgfile)
+target_link_libraries( kmm_gpgfile
+PUBLIC
+Qt::Core
+$<$<BOOL:${Gpgmepp_FOUND}>:Gpgmepp>
+$<$<BOOL:${KF5Gpgmepp_FOUND}>:KF5::Gpgmepp>
+)
+set_target_properties(kmm_gpgfile PROPERTIES
+VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
+)
+generate_export_header(kmm_gpgfile)
 
-  install(TARGETS kmm_gpgfile ${INSTALL_TARGETS_DEFAULT_ARGS})
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_gpgfile_export.h DESTINATION ${KDE_INSTALL_INCLUDEDIR}/kmymoney COMPONENT Devel)
-endif()
+install(TARGETS kmm_gpgfile ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_gpgfile_export.h DESTINATION ${KDE_INSTALL_INCLUDEDIR}/kmymoney COMPONENT Devel)
 
 install(TARGETS
         kmm_printer
