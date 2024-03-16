@@ -339,16 +339,16 @@ int runKMyMoney(QApplication &a, const QUrl &file, bool noFile)
         }
 
         if (url.isValid() && !noFile) {
-            kmymoney->slotFileOpenRecent(url);
+            QMetaObject::invokeMethod(kmymoney, "slotFileOpenRecent", Qt::QueuedConnection, Q_ARG(QUrl, url));
 
         } else if (KMyMoneySettings::firstTimeRun()) {
-            kmymoney->slotFileNew();
+            QMetaObject::invokeMethod(kmymoney, "slotFileNew", Qt::QueuedConnection, Q_ARG(QUrl, url));
         }
 
         KMyMoneySettings::setFirstTimeRun(false);
 
         if (!importfile.isEmpty()) {
-            kmymoney->webConnect(importfile, QByteArray());
+            QMetaObject::invokeMethod(kmymoney, "webConnect", Qt::QueuedConnection, Q_ARG(QByteArray, QByteArray()));
         }
 
     } else {
