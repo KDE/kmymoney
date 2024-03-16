@@ -390,6 +390,7 @@ public:
     {
         auto file = MyMoneyFile::instance();
         if (_acc.name() != name) {
+            qDebug() << "checkAccountName" << _acc.name() << name;
             MyMoneyAccount acc(_acc);
             acc.setName(name);
             file->modifyAccount(acc);
@@ -406,6 +407,7 @@ public:
 
         QList<MyMoneySecurity> storedCurrencies = MyMoneyFile::instance()->currencyList();
         const QList<MyMoneySecurity> availableCurrencies = MyMoneyFile::instance()->availableCurrencyList();
+        qDebug() << "storedCurrencies" << storedCurrencies.count() << "availableCurrencies" << availableCurrencies.count();
         QStringList currencyIDs;
 
         for (const auto& currency : availableCurrencies)
@@ -415,6 +417,7 @@ public:
             for (auto currency : qAsConst(storedCurrencies)) {
                 int i = currencyIDs.indexOf(currency.id());
                 if (i != -1 && availableCurrencies.at(i).name() != currency.name()) {
+                    qDebug() << "Update currency name" << currency.name() << availableCurrencies.at(i).name();
                     currency.setName(availableCurrencies.at(i).name());
                     file->modifyCurrency(currency);
                 }
@@ -436,6 +439,7 @@ public:
             checkAccountName(file->income(), i18n("Income"));
             checkAccountName(file->expense(), i18n("Expense"));
             checkAccountName(file->equity(), i18n("Equity"));
+            qDebug() << "Account names checked";
             ft.commit();
         } catch (const MyMoneyException &) {
         }
@@ -1195,8 +1199,9 @@ public:
         switch (action) {
         case eKMyMoney::FileAction::Opened:
             q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
-            qDebug() << "Adjust account and currency names";
+            qDebug() << "Adjust account names";
             updateAccountNames();
+            qDebug() << "Adjust currency names";
             updateCurrencyNames();
             qDebug() << "Select base currency";
             selectBaseCurrency();
