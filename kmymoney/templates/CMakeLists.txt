@@ -30,6 +30,8 @@ string(APPEND qrcContents "  </qresource>\n</RCC>\n")
 
 file(WRITE "templates.qrc" "${qrcContents}")
 
+message(SYSTEM "${qrcContents}")
+
 # add generated file to resources
 qt5_add_resources(kmm_templates_SOURCES templates.qrc)
 
