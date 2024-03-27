@@ -190,6 +190,8 @@ public:
         clearItemData();
 
         m_focusWidget = ui->m_searchWidget;
+
+        ui->m_register->slotSettingsChanged();
     }
 
     void clearItemData()
@@ -617,7 +619,8 @@ void KTagsView::slotSelectTag(const QString& tagId)
 void KTagsView::slotSettingsChanged()
 {
     Q_D(KTagsView);
-    if (d->ui->m_register) {
+    // needs complete initialization
+    if (!d->m_needLoad) {
         d->ui->m_register->slotSettingsChanged();
     }
 }
