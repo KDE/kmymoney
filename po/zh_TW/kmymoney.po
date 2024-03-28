@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-17 01:59+0000\n"
+"POT-Creation-Date: 2024-03-28 02:07+0000\n"
 "PO-Revision-Date: 2024-02-27 06:12+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -6130,7 +6130,7 @@ msgstr "您要新增 <b>%1</b> 為付款者/收款人嗎？"
 msgid "Unable to add payee"
 msgstr "無法新增收款人"
 
-#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:634
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:637
 #, fuzzy, kde-format
 #| msgid "New payee"
 msgid "New Tag"
@@ -15161,7 +15161,7 @@ msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "您要儲存 <b>%1</b> 的變更嗎？"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
-#: kmymoney/views/kpayeesview_p.h:797 kmymoney/views/ktagsview.cpp:289
+#: kmymoney/views/kpayeesview_p.h:797 kmymoney/views/ktagsview.cpp:291
 #, kde-format
 msgid "Save changes"
 msgstr "儲存變更"
@@ -20444,12 +20444,12 @@ msgctxt "Placeholder text"
 msgid "Search"
 msgstr "三月"
 
-#: kmymoney/views/kpayeesview_p.h:352 kmymoney/views/ktagsview.cpp:212
+#: kmymoney/views/kpayeesview_p.h:352 kmymoney/views/ktagsview.cpp:214
 #, kde-format
 msgid "Balance: %1"
 msgstr "餘額：%1"
 
-#: kmymoney/views/kpayeesview_p.h:396 kmymoney/views/ktagsview.cpp:256
+#: kmymoney/views/kpayeesview_p.h:396 kmymoney/views/ktagsview.cpp:258
 #, kde-format
 msgid "Balance: %1%2"
 msgstr "餘額：%1%2"
@@ -20663,12 +20663,12 @@ msgctxt "@item Show only closed tags"
 msgid "Closed"
 msgstr "已關閉"
 
-#: kmymoney/views/ktagsview.cpp:288
+#: kmymoney/views/ktagsview.cpp:290
 #, kde-format
 msgid "Do you want to save the changes for <b>%1</b>?"
 msgstr "您要儲存 <b>%1</b> 的變更嗎？"
 
-#: kmymoney/views/ktagsview.cpp:375
+#: kmymoney/views/ktagsview.cpp:377
 #, fuzzy, kde-format
 #| msgid ""
 #| "A payee with the name '%1' already exists. It is not advisable to have "
@@ -20682,7 +20682,7 @@ msgstr ""
 "名為 %1 的收款人已存在。不能有多個收款人使用相同的名稱。您要重新命名此收款人"
 "嗎？"
 
-#: kmymoney/views/ktagsview.cpp:379
+#: kmymoney/views/ktagsview.cpp:381
 #, fuzzy, kde-format
 #| msgctxt "To duplicate a split"
 #| msgid "Duplicate"
@@ -20690,19 +20690,19 @@ msgctxt "@title:window"
 msgid "Duplicate tag name"
 msgstr "複製"
 
-#: kmymoney/views/ktagsview.cpp:402 kmymoney/views/ktagsview.cpp:526
+#: kmymoney/views/ktagsview.cpp:404 kmymoney/views/ktagsview.cpp:528
 #, fuzzy, kde-format
 #| msgid "Unable to modify payee"
 msgid "Unable to modify tag"
 msgstr "無法變更收款人"
 
-#: kmymoney/views/ktagsview.cpp:805
+#: kmymoney/views/ktagsview.cpp:808
 #, fuzzy, kde-format
 #| msgid "Unable to reassign payee of transaction/split"
 msgid "Unable to reassign tag of transaction/split"
 msgstr "無法重新指定收款人給交易或分割"
 
-#: kmymoney/views/ktagsview.cpp:817
+#: kmymoney/views/ktagsview.cpp:820
 #, fuzzy, kde-format
 #| msgid "Unable to remove payee(s)"
 msgid "Unable to remove tag(s)"

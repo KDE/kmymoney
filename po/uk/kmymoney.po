@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-17 01:59+0000\n"
+"POT-Creation-Date: 2024-03-28 02:07+0000\n"
 "PO-Revision-Date: 2024-03-05 09:50+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -6139,7 +6139,7 @@ msgstr "<qt>Бажаєте додати <b>%1</b> як платника/отри
 msgid "Unable to add payee"
 msgstr "Не вдалося додати отримувача"
 
-#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:634
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:637
 #, kde-format
 msgid "New Tag"
 msgstr "Нова мітка"
@@ -15038,7 +15038,7 @@ msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<qt>Бажаєте зберегти зміни до <b>%1</b>?</qt>"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
-#: kmymoney/views/kpayeesview_p.h:797 kmymoney/views/ktagsview.cpp:289
+#: kmymoney/views/kpayeesview_p.h:797 kmymoney/views/ktagsview.cpp:291
 #, kde-format
 msgid "Save changes"
 msgstr "Зберегти зміни"
@@ -20318,12 +20318,12 @@ msgctxt "Placeholder text"
 msgid "Search"
 msgstr "Пошук"
 
-#: kmymoney/views/kpayeesview_p.h:352 kmymoney/views/ktagsview.cpp:212
+#: kmymoney/views/kpayeesview_p.h:352 kmymoney/views/ktagsview.cpp:214
 #, kde-format
 msgid "Balance: %1"
 msgstr "Баланс: %1"
 
-#: kmymoney/views/kpayeesview_p.h:396 kmymoney/views/ktagsview.cpp:256
+#: kmymoney/views/kpayeesview_p.h:396 kmymoney/views/ktagsview.cpp:258
 #, kde-format
 msgid "Balance: %1%2"
 msgstr "Баланс: %1%2"
@@ -20537,12 +20537,12 @@ msgctxt "@item Show only closed tags"
 msgid "Closed"
 msgstr "Закриті"
 
-#: kmymoney/views/ktagsview.cpp:288
+#: kmymoney/views/ktagsview.cpp:290
 #, kde-format
 msgid "Do you want to save the changes for <b>%1</b>?"
 msgstr "Бажаєте зберегти зміни до <b>%1</b>?"
 
-#: kmymoney/views/ktagsview.cpp:375
+#: kmymoney/views/ktagsview.cpp:377
 #, kde-format
 msgid ""
 "A tag with the name '%1' already exists. It is not advisable to have "
@@ -20553,23 +20553,23 @@ msgstr ""
 "записів міток з однаковими назвами. Ви справді бажаєте перейменувати запис "
 "мітки вказаним чином?"
 
-#: kmymoney/views/ktagsview.cpp:379
+#: kmymoney/views/ktagsview.cpp:381
 #, kde-format
 msgctxt "@title:window"
 msgid "Duplicate tag name"
 msgstr "Дублювання назви мітки"
 
-#: kmymoney/views/ktagsview.cpp:402 kmymoney/views/ktagsview.cpp:526
+#: kmymoney/views/ktagsview.cpp:404 kmymoney/views/ktagsview.cpp:528
 #, kde-format
 msgid "Unable to modify tag"
 msgstr "Не вдалося змінити мітку"
 
-#: kmymoney/views/ktagsview.cpp:805
+#: kmymoney/views/ktagsview.cpp:808
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Не вдалося повторно призначити мітку операції/дроблення"
 
-#: kmymoney/views/ktagsview.cpp:817
+#: kmymoney/views/ktagsview.cpp:820
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Не вдалося вилучити мітки"

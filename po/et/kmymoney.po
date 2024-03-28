@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-17 01:59+0000\n"
+"POT-Creation-Date: 2024-03-28 02:07+0000\n"
 "PO-Revision-Date: 2020-05-02 10:27+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -6178,7 +6178,7 @@ msgstr "<qt>Kas lisada <b>%1</b> maksesaajate hulka?</qt>"
 msgid "Unable to add payee"
 msgstr "Maksesaaja lisamine nurjus"
 
-#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:634
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:637
 #, kde-format
 msgid "New Tag"
 msgstr "Uus silt"
@@ -15134,7 +15134,7 @@ msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<qt>Kas salvestada <b>%1</b> muudatused?</qt>"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
-#: kmymoney/views/kpayeesview_p.h:797 kmymoney/views/ktagsview.cpp:289
+#: kmymoney/views/kpayeesview_p.h:797 kmymoney/views/ktagsview.cpp:291
 #, kde-format
 msgid "Save changes"
 msgstr "Salvesta muudatused"
@@ -20422,12 +20422,12 @@ msgctxt "Placeholder text"
 msgid "Search"
 msgstr "&Otsing:"
 
-#: kmymoney/views/kpayeesview_p.h:352 kmymoney/views/ktagsview.cpp:212
+#: kmymoney/views/kpayeesview_p.h:352 kmymoney/views/ktagsview.cpp:214
 #, kde-format
 msgid "Balance: %1"
 msgstr "Bilanss: %1"
 
-#: kmymoney/views/kpayeesview_p.h:396 kmymoney/views/ktagsview.cpp:256
+#: kmymoney/views/kpayeesview_p.h:396 kmymoney/views/ktagsview.cpp:258
 #, kde-format
 msgid "Balance: %1%2"
 msgstr "Bilanss: %1%2"
@@ -20644,12 +20644,12 @@ msgctxt "@item Show only closed tags"
 msgid "Closed"
 msgstr "Suletud"
 
-#: kmymoney/views/ktagsview.cpp:288
+#: kmymoney/views/ktagsview.cpp:290
 #, kde-format
 msgid "Do you want to save the changes for <b>%1</b>?"
 msgstr "Kas salvestada <b>%1</b> muudatused??"
 
-#: kmymoney/views/ktagsview.cpp:375
+#: kmymoney/views/ktagsview.cpp:377
 #, kde-format
 msgid ""
 "A tag with the name '%1' already exists. It is not advisable to have "
@@ -20659,24 +20659,24 @@ msgstr ""
 "Silt nimega \"%1\" on juba olemas. Ei ole soovitatav, et mitu silti kannaks "
 "üht ja sama nime. Kas tõesti soovid sildi nime muuta?"
 
-#: kmymoney/views/ktagsview.cpp:379
+#: kmymoney/views/ktagsview.cpp:381
 #, fuzzy, kde-format
 #| msgid "Duplicate tag"
 msgctxt "@title:window"
 msgid "Duplicate tag name"
 msgstr "Topeltsilt"
 
-#: kmymoney/views/ktagsview.cpp:402 kmymoney/views/ktagsview.cpp:526
+#: kmymoney/views/ktagsview.cpp:404 kmymoney/views/ktagsview.cpp:528
 #, kde-format
 msgid "Unable to modify tag"
 msgstr "Sildi muutmine nurjus"
 
-#: kmymoney/views/ktagsview.cpp:805
+#: kmymoney/views/ktagsview.cpp:808
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Tehingu/alltehingu sildi ümbersuunamine nurjus"
 
-#: kmymoney/views/ktagsview.cpp:817
+#: kmymoney/views/ktagsview.cpp:820
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Siltide eemaldamine nurjus"

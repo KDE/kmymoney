@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-17 01:59+0000\n"
+"POT-Creation-Date: 2024-03-28 02:07+0000\n"
 "PO-Revision-Date: 2009-05-18 00:20+0900\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -5726,7 +5726,7 @@ msgstr ""
 msgid "Unable to add payee"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:634
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:637
 #, kde-format
 msgid "New Tag"
 msgstr ""
@@ -14151,7 +14151,7 @@ msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr ""
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
-#: kmymoney/views/kpayeesview_p.h:797 kmymoney/views/ktagsview.cpp:289
+#: kmymoney/views/kpayeesview_p.h:797 kmymoney/views/ktagsview.cpp:291
 #, kde-format
 msgid "Save changes"
 msgstr ""
@@ -19132,12 +19132,12 @@ msgctxt "Placeholder text"
 msgid "Search"
 msgstr ""
 
-#: kmymoney/views/kpayeesview_p.h:352 kmymoney/views/ktagsview.cpp:212
+#: kmymoney/views/kpayeesview_p.h:352 kmymoney/views/ktagsview.cpp:214
 #, kde-format
 msgid "Balance: %1"
 msgstr ""
 
-#: kmymoney/views/kpayeesview_p.h:396 kmymoney/views/ktagsview.cpp:256
+#: kmymoney/views/kpayeesview_p.h:396 kmymoney/views/ktagsview.cpp:258
 #, kde-format
 msgid "Balance: %1%2"
 msgstr ""
@@ -19333,12 +19333,12 @@ msgctxt "@item Show only closed tags"
 msgid "Closed"
 msgstr ""
 
-#: kmymoney/views/ktagsview.cpp:288
+#: kmymoney/views/ktagsview.cpp:290
 #, kde-format
 msgid "Do you want to save the changes for <b>%1</b>?"
 msgstr ""
 
-#: kmymoney/views/ktagsview.cpp:375
+#: kmymoney/views/ktagsview.cpp:377
 #, kde-format
 msgid ""
 "A tag with the name '%1' already exists. It is not advisable to have "
@@ -19346,23 +19346,23 @@ msgid ""
 "to rename the tag?"
 msgstr ""
 
-#: kmymoney/views/ktagsview.cpp:379
+#: kmymoney/views/ktagsview.cpp:381
 #, kde-format
 msgctxt "@title:window"
 msgid "Duplicate tag name"
 msgstr ""
 
-#: kmymoney/views/ktagsview.cpp:402 kmymoney/views/ktagsview.cpp:526
+#: kmymoney/views/ktagsview.cpp:404 kmymoney/views/ktagsview.cpp:528
 #, kde-format
 msgid "Unable to modify tag"
 msgstr ""
 
-#: kmymoney/views/ktagsview.cpp:805
+#: kmymoney/views/ktagsview.cpp:808
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr ""
 
-#: kmymoney/views/ktagsview.cpp:817
+#: kmymoney/views/ktagsview.cpp:820
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr ""
