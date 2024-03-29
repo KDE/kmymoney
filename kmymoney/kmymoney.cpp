@@ -1195,18 +1195,14 @@ public:
         switch (action) {
         case eKMyMoney::FileAction::Opened:
             q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
-            qDebug() << "Adjust account and currency names";
             updateAccountNames();
             updateCurrencyNames();
-            qDebug() << "Select base currency";
             selectBaseCurrency();
 
             // setup the standard precision
             amountEdit.setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
 
             applyFileFixes();
-
-            qDebug() << "Setup internal data which requires loaded models";
             // setup internal data for which we need all models loaded
             MyMoneyFile::instance()->accountsModel()->setupAccountFractions();
 
@@ -1214,7 +1210,6 @@ public:
             MyMoneyFile::instance()->undoStack()->clear();
 
             // inform everyone about new data
-            qDebug() << "Inform all about new data";
             MyMoneyFile::instance()->modelsReadyToUse();
             MyMoneyFile::instance()->forceDataChanged();
             // Enable save in case the fix changed the contents
@@ -4153,7 +4148,6 @@ void KMyMoneyApp::Private::setThemedCSS()
 
 void KMyMoneyApp::slotCheckSchedules()
 {
-    qDebug() << "Enter KMyMoneyApp::slotCheckSchedules";
     if (KMyMoneySettings::checkSchedule() == true) {
 
         KMSTATUS(i18n("Checking for overdue scheduled transactions..."));
@@ -4185,7 +4179,6 @@ void KMyMoneyApp::slotCheckSchedules()
             }
         }
     }
-    qDebug() << "Leave KMyMoneyApp::slotCheckSchedules";
 }
 
 void KMyMoneyApp::writeLastUsedDir(const QString& directory)
@@ -4649,7 +4642,6 @@ void KMyMoneyApp::slotFileOpen()
 
 bool KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
 {
-    qDebug() << "Enter KMyMoneyApp::slotFileOpenRecent";
     KMSTATUS(i18n("Loading file..."));
 
     if (!url.isValid())
@@ -4679,16 +4671,13 @@ bool KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
                 d->m_storageInfo.type = plugin->storageType();
                 if (plugin->storageType() != eKMyMoney::StorageType::GNC) {
                     d->m_storageInfo.url = plugin->openUrl();
-                    qDebug() << "Store last used file info for" << url;
                     writeLastUsedFile(url.toDisplayString(QUrl::PreferLocalFile));
                     /* Don't use url variable after KRecentFilesAction::addUrl
                     * as it might delete it.
                     * More in API reference to this method
                     */
-                    qDebug() << "Add file to KRecentFilesAction";
                     d->m_recentFiles->addUrl(url);
                 }
-                qDebug() << "Mark file as opened";
                 d->m_storageInfo.isOpened = true;
                 break;
             }
@@ -4703,9 +4692,7 @@ bool KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
         return false;
     }
 
-    qDebug() << "Inform actions that file is open";
     d->fileAction(eKMyMoney::FileAction::Opened);
-    qDebug() << "Leave KMyMoneyApp::slotFileOpenRecent";
     return true;
 }
 
