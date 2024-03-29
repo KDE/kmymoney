@@ -568,7 +568,7 @@ public:
 
                 // update model for the display purposes
                 m_onlinePriceModel.setData(m_onlinePriceModel.index(m_currentRow, OnlinePriceModel::Price),
-                                           price.formatMoney(fromCurrency.tradingSymbol(), toCurrency.pricePrecision()),
+                                           price.formatMoney(toCurrency.tradingSymbol(), toCurrency.pricePrecision()),
                                            Qt::EditRole);
                 m_onlinePriceModel.setData(m_onlinePriceModel.index(m_currentRow, OnlinePriceModel::Date), MyMoneyUtils::formatDate(date), Qt::EditRole);
 
