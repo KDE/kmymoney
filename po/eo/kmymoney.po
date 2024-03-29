@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-28 02:07+0000\n"
+"POT-Creation-Date: 2024-03-29 02:00+0000\n"
 "PO-Revision-Date: 2024-03-27 19:34+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
@@ -20796,7 +20796,7 @@ msgstr ""
 "La fermbutono por ĉi tiu konto estis forigita ĉar vi akordigas ĝin. Finu, "
 "nuligi aŭ prokrasti la repaciĝon por reakiri ĝin."
 
-#: kmymoney/views/simpleledgerview.cpp:435
+#: kmymoney/views/simpleledgerview.cpp:438
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -20806,7 +20806,7 @@ msgstr ""
 "Ĉi tiu paĝo montras la kontolibron. Nuntempe, neniuj kontoj ekzistas do ĉi "
 "tiu teksto estas montrita anstataŭe."
 
-#: kmymoney/views/simpleledgerview.cpp:438
+#: kmymoney/views/simpleledgerview.cpp:441
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -20816,12 +20816,12 @@ msgstr ""
 "Ĉi tiu paĝo montras la kontolibron. Nuntempe, neniuj kontoj estas elektitaj "
 "do ĉi tiu teksto estas montrita anstataŭe."
 
-#: kmymoney/views/simpleledgerview.cpp:678
+#: kmymoney/views/simpleledgerview.cpp:684
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Malfermi retejon de <b>%1</b> en via retumilo."
 
-#: kmymoney/views/simpleledgerview.cpp:865
+#: kmymoney/views/simpleledgerview.cpp:869
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -20830,7 +20830,7 @@ msgstr ""
 "Vi ne povas fermi ĉi tiun vidon ĉar vi akordigas la konton. Unue fini, "
 "nuligi aŭ prokrasti la repaciĝon."
 
-#: kmymoney/views/simpleledgerview.cpp:866
+#: kmymoney/views/simpleledgerview.cpp:870
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
