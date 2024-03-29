@@ -63,6 +63,7 @@ void KHomeView::executeAction(eMenu::Action action, const SelectedObjects& selec
     switch (action) {
     case eMenu::Action::FileNew:
         d->m_fileOpen = true;
+        d->loadView();
         break;
     case eMenu::Action::Print:
         if (d->isActiveView()) {
