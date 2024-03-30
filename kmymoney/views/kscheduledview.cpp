@@ -87,8 +87,6 @@ void KScheduledView::showEvent(QShowEvent* event)
 
 void KScheduledView::updateActions(const SelectedObjects& selections)
 {
-    Q_D(KScheduledView);
-
     const QVector<eMenu::Action> actionsToBeDisabled {
         eMenu::Action::EditSchedule, eMenu::Action::DuplicateSchedule, eMenu::Action::DeleteSchedule,
         eMenu::Action::EnterSchedule, eMenu::Action::SkipSchedule,
@@ -113,7 +111,6 @@ void KScheduledView::updateActions(const SelectedObjects& selections)
             }
         }
     }
-    d->m_currentSchedule = sch;
 }
 
 eDialogs::ScheduleResultCode KScheduledView::enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys)
@@ -203,27 +200,23 @@ void KScheduledView::slotNewSchedule()
 void KScheduledView::slotEditSchedule()
 {
     Q_D(KScheduledView);
-    auto scheduleId = d->m_currentSchedule.id();
-    if (scheduleId.isEmpty()) {
-        scheduleId = pActions[eMenu::Action::EditSchedule]->data().toString();
-    }
+    const auto schedule = d->selectedSchedule(pActions[eMenu::Action::EditSchedule]);
     try {
-        auto schedule = MyMoneyFile::instance()->schedule(scheduleId);
         KEditScheduleDlg::editSchedule(schedule);
-    } catch (const MyMoneyException &e) {
-        KMessageBox::detailedError(this, i18n("Unknown scheduled transaction '%1'", d->m_currentSchedule.name()), QString::fromLatin1(e.what()));
+    } catch (const MyMoneyException& e) {
+        KMessageBox::detailedError(this, i18n("Unknown scheduled transaction '%1'", schedule.name()), QString::fromLatin1(e.what()));
     }
 }
 
 void KScheduledView::slotDeleteSchedule()
 {
     Q_D(KScheduledView);
-    if (!d->m_currentSchedule.id().isEmpty()) {
+    const auto schedule = d->selectedSchedule();
+    if (!schedule.id().isEmpty()) {
         MyMoneyFileTransaction ft;
         try {
-            MyMoneySchedule sched = MyMoneyFile::instance()->schedule(d->m_currentSchedule.id());
-            QString msg = i18n("<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>", d->m_currentSchedule.name());
-            if (sched.type() == eMyMoney::Schedule::Type::LoanPayment) {
+            QString msg = i18n("<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>", schedule.name());
+            if (schedule.type() == eMyMoney::Schedule::Type::LoanPayment) {
                 msg += QString(" ");
                 msg += i18n("In case of loan payments it is currently not possible to recreate the scheduled transaction.");
             }
@@ -231,11 +224,11 @@ void KScheduledView::slotDeleteSchedule()
                 == KMessageBox::SecondaryAction)
                 return;
 
-            MyMoneyFile::instance()->removeSchedule(sched);
+            MyMoneyFile::instance()->removeSchedule(schedule);
             ft.commit();
 
         } catch (const MyMoneyException &e) {
-            KMessageBox::detailedError(this, i18n("Unable to remove scheduled transaction '%1'", d->m_currentSchedule.name()), QString::fromLatin1(e.what()));
+            KMessageBox::detailedError(this, i18n("Unable to remove scheduled transaction '%1'", schedule.name()), QString::fromLatin1(e.what()));
         }
     }
 }
@@ -245,32 +238,32 @@ void KScheduledView::slotDuplicateSchedule()
     Q_D(KScheduledView);
     // since we may jump here via code, we have to make sure to react only
     // if the action is enabled
-    if (pActions[eMenu::Action::DuplicateSchedule]->isEnabled()) {
-        MyMoneySchedule sch = d->m_currentSchedule;
-        sch.clearId();
-        sch.setLastPayment(QDate());
-        sch.setName(i18nc("Copy of scheduled transaction name", "Copy of %1", sch.name()));
+    MyMoneySchedule schedule = d->selectedSchedule();
+    if (pActions[eMenu::Action::DuplicateSchedule]->isEnabled() && !schedule.id().isEmpty()) {
+        schedule.clearId();
+        schedule.setLastPayment(QDate());
+        schedule.setName(i18nc("Copy of scheduled transaction name", "Copy of %1", schedule.name()));
         // make sure that we set a valid next due date if the original next due date is invalid
-        if (!sch.nextDueDate().isValid())
-            sch.setNextDueDate(QDate::currentDate());
+        if (!schedule.nextDueDate().isValid())
+            schedule.setNextDueDate(QDate::currentDate());
 
         MyMoneyFileTransaction ft;
         try {
-            MyMoneyFile::instance()->addSchedule(sch);
+            MyMoneyFile::instance()->addSchedule(schedule);
             ft.commit();
 
             // select the new schedule in the view
             const auto indexes = d->m_filterModel->match(d->m_filterModel->index(0, 0),
-                                 eMyMoney::Model::IdRole,
-                                 QVariant(sch.id()),
-                                 1,
-                                 Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+                                                         eMyMoney::Model::IdRole,
+                                                         QVariant(schedule.id()),
+                                                         1,
+                                                         Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
             if (!indexes.isEmpty()) {
                 d->ui->m_scheduleTree->setCurrentIndex(indexes.at(0));
             }
 
         } catch (const MyMoneyException &e) {
-            KMessageBox::detailedError(this, i18n("Unable to duplicate scheduled transaction: '%1'", d->m_currentSchedule.name()), QString::fromLatin1(e.what()));
+            KMessageBox::detailedError(this, i18n("Unable to duplicate scheduled transaction: '%1'", schedule.name()), QString::fromLatin1(e.what()));
         }
     }
 }
@@ -278,16 +271,13 @@ void KScheduledView::slotDuplicateSchedule()
 void KScheduledView::slotEnterSchedule()
 {
     Q_D(KScheduledView);
-    auto scheduleId = d->m_currentSchedule.id();
-    if (scheduleId.isEmpty()) {
-        scheduleId = pActions[eMenu::Action::EnterSchedule]->data().toString();
-    }
-    if (!scheduleId.isEmpty()) {
+
+    auto schedule = d->selectedSchedule(pActions[eMenu::Action::EnterSchedule]);
+    if (!schedule.id().isEmpty()) {
         try {
-            auto schedule = MyMoneyFile::instance()->schedule(scheduleId);
             d->enterSchedule(schedule);
-        } catch (const MyMoneyException &e) {
-            KMessageBox::detailedError(this, i18n("Unknown scheduled transaction '%1'", d->m_currentSchedule.name()), QString::fromLatin1(e.what()));
+        } catch (const MyMoneyException& e) {
+            KMessageBox::detailedError(this, i18n("Unknown scheduled transaction '%1'", schedule.name()), QString::fromLatin1(e.what()));
         }
     }
 }
@@ -295,16 +285,12 @@ void KScheduledView::slotEnterSchedule()
 void KScheduledView::slotSkipSchedule()
 {
     Q_D(KScheduledView);
-    auto scheduleId = d->m_currentSchedule.id();
-    if (scheduleId.isEmpty()) {
-        scheduleId = pActions[eMenu::Action::SkipSchedule]->data().toString();
-    }
-    if (!scheduleId.isEmpty()) {
+    auto schedule = d->selectedSchedule(pActions[eMenu::Action::SkipSchedule]);
+    if (!schedule.id().isEmpty()) {
         try {
-            auto schedule = MyMoneyFile::instance()->schedule(scheduleId);
             d->skipSchedule(schedule);
-        } catch (const MyMoneyException &e) {
-            KMessageBox::detailedError(this, i18n("Unknown scheduled transaction '%1'", d->m_currentSchedule.name()), QString::fromLatin1(e.what()));
+        } catch (const MyMoneyException& e) {
+            KMessageBox::detailedError(this, i18n("Unknown scheduled transaction '%1'", schedule.name()), QString::fromLatin1(e.what()));
         }
     }
 }

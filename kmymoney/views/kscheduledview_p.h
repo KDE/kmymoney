@@ -373,6 +373,32 @@ public:
         }
     }
 
+    /**
+     * Return the currently active schedule. The active schedule can be attached
+     * as data item to a QAction triggered by a context menu or the current selection
+     * in the view.
+     *
+     * In case the item cannot be found, an empty MyMoneySchedule will be returned.
+     *
+     * @param action pointer to possible QAction (default = nullptr)
+     * @returns MyMoneySchedule filled with data or empty
+     */
+    MyMoneySchedule selectedSchedule(QAction* action = nullptr) const
+    {
+        const auto scheduleId = (action) ? action->data().toString() : QString();
+        if (!scheduleId.isEmpty()) {
+            return MyMoneyFile::instance()->schedulesModel()->itemById(scheduleId);
+        }
+
+        const auto selection = ui->m_scheduleTree->selectionModel()->selectedRows();
+        selection.first();
+        if (!selection.isEmpty()) {
+            const auto baseIndex = MyMoneyModelBase::mapToBaseSource(selection.first());
+            return MyMoneyFile::instance()->schedulesModel()->itemByIndex(baseIndex);
+        }
+        return {};
+    }
+
     Ui::KScheduledView* ui;
     ScheduleProxyModel* m_filterModel;
     QHash<eMyMoney::Schedule::Type, bool> m_expandedGroups;
@@ -382,7 +408,6 @@ public:
       */
     bool m_needLoad;
     bool m_editingCanceled;
-    MyMoneySchedule m_currentSchedule;
 
     QScopedPointer<KBalanceWarning> m_balanceWarning;
 };
