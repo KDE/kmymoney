@@ -129,19 +129,23 @@ public:
         MyMoneyPriceList prices = file->priceList();
         for (MyMoneyPriceList::ConstIterator it_price = prices.constBegin(); it_price != prices.constEnd(); ++it_price) {
             const MyMoneySecurityPair& pair = it_price.key();
-            if (file->security(pair.first).isCurrency() && (securityId.isEmpty() || (pair == currencyIds))) {
-                if (pair.first.trimmed().isEmpty() || pair.second.trimmed().isEmpty()) {
-                    qDebug() << "A currency pair" << pair << "has one of its elements present, while the other one is empty. Omitting.";
-                    continue;
+            try {
+                if (file->security(pair.first).isCurrency() && (securityId.isEmpty() || (pair == currencyIds))) {
+                    if (pair.first.trimmed().isEmpty() || pair.second.trimmed().isEmpty()) {
+                        qDebug() << "A currency pair" << pair << "has one of its elements present, while the other one is empty. Omitting.";
+                        continue;
+                    }
+                    if (!file->security(pair.second).isCurrency()) {
+                        qDebug() << "A currency pair" << pair << "is invalid (from currency to equity). Omitting.";
+                        continue;
+                    }
+                    const MyMoneyPriceEntries& entries = (*it_price);
+                    if (entries.count() > 0 && entries.begin().key() <= QDate::currentDate()) {
+                        addCurrencyConversion(pair, false);
+                    }
                 }
-                if (!file->security(pair.second).isCurrency()) {
-                    qDebug() << "A currency pair" << pair << "is invalid (from currency to equity). Omitting.";
-                    continue;
-                }
-                const MyMoneyPriceEntries& entries = (*it_price);
-                if (entries.count() > 0 && entries.begin().key() <= QDate::currentDate()) {
-                    addCurrencyConversion(pair, false);
-                }
+            } catch (MyMoneyException& e) {
+                qDebug() << "Problem with price entry" << pair << e.what();
             }
         }
 
