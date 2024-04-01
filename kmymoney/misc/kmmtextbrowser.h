@@ -23,6 +23,7 @@ public:
 private:
     QString m_html;
     QString m_css;
+    QString m_content;
 };
 
 #endif // KMMTEXTBROWSER_H
