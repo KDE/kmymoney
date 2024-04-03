@@ -437,96 +437,94 @@ public:
         const auto pointSizeDelta = (stockPointSize * KMyMoneySettings::zoomFactor()) - currentPointSize;
         m_view->zoomIn(pointSizeDelta);
 
-        m_view->setHtml(KWelcomePage::welcomePage());
+        if (m_fileOpen) {
+            // preload transaction statistics
+            m_transactionStats = MyMoneyFile::instance()->countTransactionsWithSpecificReconciliationState();
 
-        if (!m_fileOpen)
-            return;
+            // keep current location on page
+            m_scrollBarPos = m_view->verticalScrollBar()->value();
 
-        // preload transaction statistics
-        m_transactionStats = MyMoneyFile::instance()->countTransactionsWithSpecificReconciliationState();
+            // clear the forecast flag so it will be reloaded
+            m_forecast.setForecastDone(false);
 
-        // keep current location on page
-        m_scrollBarPos = m_view->verticalScrollBar()->value();
+            QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n<html><head>\n");
 
-        // clear the forecast flag so it will be reloaded
-        m_forecast.setForecastDone(false);
+            // inline the CSS
+            header += "<style type=\"text/css\">\n";
+            header += KMyMoneyUtils::getStylesheet();
+            header += "</style>\n";
 
-        QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n<html><head>\n");
+            header += "</head><body id=\"summaryview\">\n";
 
-        // inline the CSS
-        header += "<style type=\"text/css\">\n";
-        header += KMyMoneyUtils::getStylesheet();
-        header += "</style>\n";
+            QString footer = "</body></html>\n";
 
-        header += "</head><body id=\"summaryview\">\n";
+            m_html.clear();
+            m_html += header;
 
-        QString footer = "</body></html>\n";
+            m_html += QString("<div class=\"gap\">&nbsp;</div>");
 
-        m_html.clear();
-        m_html += header;
+            prepareIcons();
 
-        m_html += QString("<div class=\"gap\">&nbsp;</div>");
+            QStringList settings = KMyMoneySettings::listOfItems();
 
-        prepareIcons();
+            QStringList::ConstIterator it;
 
-        QStringList settings = KMyMoneySettings::listOfItems();
+            QElapsedTimer t;
+            t.start();
+            for (it = settings.constBegin(); it != settings.constEnd(); ++it) {
+                int option = (*it).toInt();
+                if (option > 0) {
+                    switch (option) {
+                    case 1: // payments
+                        showScheduledPayments();
+                        break;
 
-        QStringList::ConstIterator it;
+                    case 2: // preferred accounts
+                        showAccounts(Preferred, i18n("Preferred Accounts"));
+                        break;
 
-        QElapsedTimer t;
-        t.start();
-        for (it = settings.constBegin(); it != settings.constEnd(); ++it) {
-            int option = (*it).toInt();
-            if (option > 0) {
-                switch (option) {
-                case 1: // payments
-                    showScheduledPayments();
-                    break;
-
-                case 2: // preferred accounts
-                    showAccounts(Preferred, i18n("Preferred Accounts"));
-                    break;
-
-                case 3: // payment accounts
-                    // Check if preferred accounts are shown separately
-                    if (settings.contains("2")) {
-                        showAccounts(static_cast<paymentTypeE>(Payment | Preferred), i18n("Payment Accounts"));
-                    } else {
-                        showAccounts(Payment, i18n("Payment Accounts"));
+                    case 3: // payment accounts
+                        // Check if preferred accounts are shown separately
+                        if (settings.contains("2")) {
+                            showAccounts(static_cast<paymentTypeE>(Payment | Preferred), i18n("Payment Accounts"));
+                        } else {
+                            showAccounts(Payment, i18n("Payment Accounts"));
+                        }
+                        break;
+                    case 4: // favorite reports
+                        showFavoriteReports();
+                        break;
+                    case 5: // forecast
+                        showForecast();
+                        break;
+                    case 6: // net worth graph over all accounts
+                        showNetWorthGraph();
+                        break;
+                    case 7: // forecast (history) - currently unused
+                        break;
+                    case 8: // assets and liabilities
+                        showAssetsLiabilities();
+                        break;
+                    case 9: // budget
+                        showBudget();
+                        break;
+                    case 10: // cash flow summary
+                        showCashFlowSummary();
+                        break;
                     }
-                    break;
-                case 4: // favorite reports
-                    showFavoriteReports();
-                    break;
-                case 5: // forecast
-                    showForecast();
-                    break;
-                case 6: // net worth graph over all accounts
-                    showNetWorthGraph();
-                    break;
-                case 7: // forecast (history) - currently unused
-                    break;
-                case 8: // assets and liabilities
-                    showAssetsLiabilities();
-                    break;
-                case 9: // budget
-                    showBudget();
-                    break;
-                case 10: // cash flow summary
-                    showCashFlowSummary();
-                    break;
+                    m_html += "<div class=\"gap\">&nbsp;</div>\n";
+                    qDebug() << "Processed home view section" << option << "in" << t.restart() << "ms";
                 }
-                m_html += "<div class=\"gap\">&nbsp;</div>\n";
-                qDebug() << "Processed home view section" << option << "in" << t.restart() << "ms";
             }
-        }
-        m_html += footer;
+            m_html += footer;
+            m_view->setHtml(m_html);
 
-        m_view->setHtml(m_html);
-
-        if (m_scrollBarPos) {
-            QMetaObject::invokeMethod(q, "slotAdjustScrollPos", Qt::QueuedConnection);
+        } else {
+            m_scrollBarPos = 0;
+            m_view->setHtml(KWelcomePage::welcomePage());
         }
+
+        QMetaObject::invokeMethod(q, "slotAdjustScrollPos", Qt::QueuedConnection);
     }
 
     void showNetWorthGraph()

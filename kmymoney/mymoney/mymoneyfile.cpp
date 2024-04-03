@@ -674,11 +674,15 @@ void MyMoneyFile::commitTransaction()
         }
     }
 
+    if (!d->m_valueChangedSet.isEmpty()) {
+        d->journalModel.updateBalances();
+    }
+
     d->m_valueChangedSet.clear();
 
     // as a last action, update the last modification date and send out the global dataChanged signal
     if (changed) {
-        d->parametersModel.addItem(fixedKey(MyMoneyFile::LastModificationDate), MyMoneyUtils::dateTimeToString(QDateTime::currentDateTime()));
+        d->parametersModel.addItem(fixedKey(MyMoneyFile::LastModificationDate), MyMoneyUtils::dateTimeToIsoString(QDateTime::currentDateTime()));
 
         Q_EMIT dataChanged();
     }

@@ -21,11 +21,6 @@ namespace Ui {
 class FinalPaymentWizardPage;
 }
 
-/**
- * This class implements the Online Update page of the
- * @ref KNewInvestmentWizard.
- */
-
 class FinalPaymentWizardPage : public QWizardPage
 {
     Q_OBJECT

@@ -205,13 +205,13 @@ public:
             const auto tag = m_reader->name();
             if (tag == elementName(Element::General::CreationDate)) {
                 const auto strDate = readStringAttribute(attributeName(Attribute::General::Date));
-                if (MyMoneyUtils::stringToDate(strDate).isValid()) {
+                if (MyMoneyUtils::isoStringToDate(strDate).isValid()) {
                     m_fileInformation.insert(m_file->fixedKey(MyMoneyFile::CreationDate), strDate);
                 }
 
             } else if (tag == elementName(Element::General::LastModifiedDate)) {
                 const auto strDate = readStringAttribute(attributeName(Attribute::General::Date));
-                if (MyMoneyUtils::stringToDateTime(strDate).isValid()) {
+                if (MyMoneyUtils::isoStringToDateTime(strDate).isValid()) {
                     m_fileInformation.insert(m_file->fixedKey(MyMoneyFile::LastModificationDate), strDate);
                 }
 

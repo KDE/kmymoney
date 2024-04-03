@@ -22,19 +22,24 @@
 
 class StatusEntry {
 public:
-    explicit StatusEntry() {}
+    explicit StatusEntry()
+        : m_state(eMyMoney::Split::State::NotReconciled)
+    {
+    }
     explicit StatusEntry(const QString& id, const StatusEntry& other)
         : m_id(id)
         , m_shortName(other.m_shortName)
         , m_longName(other.m_longName)
         , m_state(other.m_state)
-    {}
+    {
+    }
     explicit StatusEntry(const QString& id, eMyMoney::Split::State state, const QString& shortName, const QString& longName)
         : m_id(id)
         , m_shortName(shortName)
         , m_longName(longName)
         , m_state(state)
-    {}
+    {
+    }
 
     inline const QString& id() const {
         return m_id;

@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>KInvestmentDetailsWizardPage</class>
- <widget class="QWizardPage" name="KInvestmentDetailsWizardPage">
+ <widget class="KInvestmentDetailsWizardPage" name="KInvestmentDetailsWizardPage">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>216</width>
-    <height>351</height>
+    <width>395</width>
+    <height>424</height>
    </rect>
   </property>
   <property name="title">
-   <string>Investment details</string>
+   <string>Security details</string>
   </property>
   <layout class="QVBoxLayout">
    <item>
     <widget class="QLabel" name="textLabel3_2">
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
      <property name="text">
       <string>Enter the details below and click &lt;b&gt;Next&lt;/b&gt; to continue entering the online update details.</string>
      </property>
@@ -24,6 +27,16 @@
      </property>
      <property name="wordWrap">
       <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="KMessageWidget" name="m_messageWidget">
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="messageType">
+      <enum>KMessageWidget::Warning</enum>
      </property>
     </widget>
    </item>
@@ -45,83 +58,20 @@
    </item>
    <item>
     <layout class="QGridLayout">
-     <item row="0" column="0">
-      <widget class="QLabel" name="textLabel2_2">
+     <item row="9" column="1">
+      <widget class="KMyMoneyGeneralCombo" name="m_priceMode"/>
+     </item>
+     <item row="9" column="0">
+      <widget class="QLabel" name="m_priceModeLabel">
        <property name="text">
-        <string>Trading symbol</string>
+        <string>Price entry</string>
        </property>
        <property name="wordWrap">
         <bool>false</bool>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="KMyMoneyLineEdit" name="m_investmentSymbol" native="true">
-       <property name="toolTip">
-        <string>Enter the ticker symbol (e.g. RHAT).</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="textLabel3">
-       <property name="text">
-        <string>Full name</string>
-       </property>
-       <property name="wordWrap">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="KMyMoneyLineEdit" name="m_investmentName" native="true"/>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="textLabel2_2_2">
-       <property name="text">
-        <string>Fraction</string>
-       </property>
-       <property name="wordWrap">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <layout class="QHBoxLayout">
-       <item>
-        <widget class="QLabel" name="textLabel1_5">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>1 /</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-         <property name="wordWrap">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="AmountEdit" name="m_fraction"/>
-       </item>
-      </layout>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="textLabel1_3">
-       <property name="text">
-        <string>Trading market</string>
-       </property>
-       <property name="wordWrap">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
+     <item row="4" column="1">
       <widget class="KComboBox" name="m_tradingMarket">
        <property name="editable">
         <bool>true</bool>
@@ -158,57 +108,6 @@
        </item>
       </widget>
      </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="textLabel1_2">
-       <property name="text">
-        <string>Identification
-number</string>
-       </property>
-       <property name="wordWrap">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="KMyMoneyLineEdit" name="m_investmentIdentification" native="true">
-       <property name="toolTip">
-        <string>Enter the CUSIP/ISIN/WKN identification number here</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="textLabel1_4">
-       <property name="text">
-        <string>Trading Currency</string>
-       </property>
-       <property name="wordWrap">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="1">
-      <widget class="KMyMoneySecuritySelector" name="m_tradingCurrencyEdit" native="true"/>
-     </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="textLabel2_5">
-       <property name="text">
-        <string>Price entry</string>
-       </property>
-       <property name="wordWrap">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="1">
-      <widget class="KMyMoneyGeneralCombo" name="m_priceMode" native="true"/>
-     </item>
-     <item row="7" column="0">
-      <widget class="QLabel" name="textLabel2_6">
-       <property name="text">
-        <string>Price precision</string>
-       </property>
-      </widget>
-     </item>
      <item row="7" column="1">
       <widget class="QSpinBox" name="m_pricePrecision">
        <property name="toolTip">
@@ -222,6 +121,23 @@ number</string>
        </property>
       </widget>
      </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="textLabel2_6">
+       <property name="text">
+        <string>Price precision</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="textLabel1_3">
+       <property name="text">
+        <string>Trading market</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
      <item row="8" column="1">
       <widget class="QComboBox" name="m_roundingMethod">
        <property name="toolTip">
@@ -229,10 +145,110 @@ number</string>
        </property>
       </widget>
      </item>
+     <item row="0" column="1">
+      <widget class="QComboBox" name="m_investmentSymbol">
+       <property name="editable">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="textLabel2_2">
+       <property name="text">
+        <string>Trading symbol</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
      <item row="8" column="0">
       <widget class="QLabel" name="textLabel4">
        <property name="text">
         <string>Remainder</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="textLabel1_4">
+       <property name="text">
+        <string>Trading Currency</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="KMyMoneySecuritySelector" name="m_tradingCurrencyEdit"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="textLabel2_2_2">
+       <property name="text">
+        <string>Fraction</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="textLabel3">
+       <property name="text">
+        <string>Full name</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="KMyMoneyLineEdit" name="m_investmentName"/>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="textLabel1_2">
+       <property name="text">
+        <string>Identification
+number</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="KMyMoneyLineEdit" name="m_investmentIdentification"/>
+     </item>
+     <item row="3" column="1">
+      <layout class="QHBoxLayout">
+       <item>
+        <widget class="QLabel" name="textLabel1_5">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>1 /</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="wordWrap">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="AmountEdit" name="m_fraction"/>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="0" colspan="2">
+      <widget class="QCheckBox" name="m_createSymbolDuplicate">
+       <property name="text">
+        <string>Create duplicate of the symbol</string>
        </property>
       </widget>
      </item>
@@ -263,26 +279,35 @@ number</string>
    <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
+   <class>KMessageWidget</class>
+   <extends>QFrame</extends>
+   <header>kmessagewidget.h</header>
+  </customwidget>
+  <customwidget>
    <class>AmountEdit</class>
    <extends>QLineEdit</extends>
    <header location="global">amountedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KMyMoneyLineEdit</class>
-   <extends>QWidget</extends>
-   <header>../widgets/kmymoneylineedit.h</header>
+   <class>KInvestmentDetailsWizardPage</class>
+   <extends>QWizardPage</extends>
+   <header location="global">kinvestmentdetailswizardpage.h</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
-   <class>KMyMoneyGeneralCombo</class>
-   <extends>QWidget</extends>
-   <header>kmymoneygeneralcombo.h</header>
-   <container>1</container>
+   <class>KMyMoneyLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>kmymoneylineedit.h</header>
   </customwidget>
   <customwidget>
    <class>KMyMoneySecuritySelector</class>
-   <extends>QWidget</extends>
+   <extends>QComboBox</extends>
    <header>kmymoneycurrencyselector.h</header>
-   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyGeneralCombo</class>
+   <extends>QComboBox</extends>
+   <header>kmymoneygeneralcombo.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
@@ -292,6 +317,8 @@ number</string>
   <tabstop>m_tradingMarket</tabstop>
   <tabstop>m_investmentIdentification</tabstop>
   <tabstop>m_tradingCurrencyEdit</tabstop>
+  <tabstop>m_pricePrecision</tabstop>
+  <tabstop>m_roundingMethod</tabstop>
   <tabstop>m_priceMode</tabstop>
  </tabstops>
  <resources/>

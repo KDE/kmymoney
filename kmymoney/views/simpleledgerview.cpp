@@ -387,11 +387,13 @@ public:
 
     void propagateActionToViews(eMenu::Action action, const SelectedObjects& selections)
     {
-        LedgerViewPage* view = 0;
-        for (int idx = 0; idx < ui->ledgerTab->count() - 1; ++idx) {
-            view = qobject_cast<LedgerViewPage*>(ui->ledgerTab->widget(idx));
-            if (view) {
-                view->executeAction(action, selections);
+        if (!m_needInit) {
+            LedgerViewPage* view = 0;
+            for (int idx = 0; idx < ui->ledgerTab->count() - 1; ++idx) {
+                view = qobject_cast<LedgerViewPage*>(ui->ledgerTab->widget(idx));
+                if (view) {
+                    view->executeAction(action, selections);
+                }
             }
         }
     }
@@ -405,7 +407,7 @@ public:
      */
     int tabIdByAccountId(QString& accountId)
     {
-        if (ui && ui->ledgerTab && !accountId.isEmpty()) {
+        if (!m_needInit && !accountId.isEmpty()) {
             // in case a stock account is selected, we switch to the parent which
             // is the investment account
             MyMoneyAccount acc = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
@@ -429,16 +431,18 @@ public:
 
     void updateTitlePage()
     {
-        QString txt = QLatin1String("<html><head/><body><p>");
-        if (MyMoneyFile::instance()->accountsModel()->itemList().isEmpty()) {
-            txt.append(i18nc("@label displayed when no ledger is open",
-                             "This page shows the accounts ledger. Currently, no accounts exist so this text is shown instead."));
-        } else {
-            txt.append(i18nc("@label displayed when no ledger is open",
-                             "This page shows the accounts ledger. Currently, no accounts are selected so this text is shown instead."));
+        if (!m_needInit) {
+            QString txt = QLatin1String("<html><head/><body><p>");
+            if (MyMoneyFile::instance()->accountsModel()->itemList().isEmpty()) {
+                txt.append(i18nc("@label displayed when no ledger is open",
+                                 "This page shows the accounts ledger. Currently, no accounts exist so this text is shown instead."));
+            } else {
+                txt.append(i18nc("@label displayed when no ledger is open",
+                                 "This page shows the accounts ledger. Currently, no accounts are selected so this text is shown instead."));
+            }
+            txt.append(QLatin1String("</p></body></html>"));
+            ui->l1->setText(txt);
         }
-        txt.append(QLatin1String("</p></body></html>"));
-        ui->l1->setText(txt);
     }
 
     Ui_SimpleLedgerView*          ui;
@@ -462,18 +466,20 @@ SimpleLedgerView::SimpleLedgerView(QWidget *parent) :
 
     connect(MyMoneyFile::instance()->accountsModel(), &QAbstractItemModel::dataChanged, this, [&](const QModelIndex& topLeft, const QModelIndex& bottomRight) {
         Q_D(SimpleLedgerView);
-        Q_ASSERT(topLeft.parent() == bottomRight.parent());
-        for (int row = topLeft.row(); row <= bottomRight.row(); ++row) {
-            const auto idx = MyMoneyFile::instance()->accountsModel()->index(row, 0, topLeft.parent());
-            const auto modifiedAccountId = idx.data(eMyMoney::Model::IdRole).toString();
-            auto tabAccountId = modifiedAccountId;
-            const auto tab = d->tabIdByAccountId(tabAccountId);
-            // d->tabIdByAccountId() may return the tab for the parent in case
-            // a stock account was changed. In this case it also updates
-            // tabAccountId to contain the id of the parent account. We only
-            // update the name if the parent was changed directly.
-            if (tab != -1 && (tabAccountId == modifiedAccountId)) {
-                d->ui->ledgerTab->setTabText(tab, idx.data(eMyMoney::Model::AccountNameRole).toString());
+        if (!d->m_needInit) {
+            Q_ASSERT(topLeft.parent() == bottomRight.parent());
+            for (int row = topLeft.row(); row <= bottomRight.row(); ++row) {
+                const auto idx = MyMoneyFile::instance()->accountsModel()->index(row, 0, topLeft.parent());
+                const auto modifiedAccountId = idx.data(eMyMoney::Model::IdRole).toString();
+                auto tabAccountId = modifiedAccountId;
+                const auto tab = d->tabIdByAccountId(tabAccountId);
+                // d->tabIdByAccountId() may return the tab for the parent in case
+                // a stock account was changed. In this case it also updates
+                // tabAccountId to contain the id of the parent account. We only
+                // update the name if the parent was changed directly.
+                if (tab != -1 && (tabAccountId == modifiedAccountId)) {
+                    d->ui->ledgerTab->setTabText(tab, idx.data(eMyMoney::Model::AccountNameRole).toString());
+                }
             }
         }
     });
@@ -757,9 +763,7 @@ void SimpleLedgerView::updateActions(const SelectedObjects& selections)
             pActions[eMenu::Action::CancelReconciliation]->setEnabled(true);
         }
     }
-    if (!d->m_needInit) {
-        d->updateTitlePage();
-    }
+    d->updateTitlePage();
 }
 
 void SimpleLedgerView::executeAction(eMenu::Action action, const SelectedObjects& selections)

@@ -102,7 +102,7 @@
           </layout>
          </item>
          <item>
-          <widget class="QListView" name="m_tagsList"/>
+          <widget class="KMMEmptyListView" name="m_tagsList"/>
          </item>
         </layout>
        </widget>
@@ -362,6 +362,11 @@
    <class>LedgerView</class>
    <extends>QTableView</extends>
    <header>ledgerview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMMEmptyListView</class>
+   <extends>QListView</extends>
+   <header>kmmemptyview.h</header>
   </customwidget>
  </customwidgets>
  <includes>

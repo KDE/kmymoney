@@ -40,8 +40,6 @@ public:
         , tableView(nullptr)
         , headerView(nullptr)
         , model(nullptr)
-        // default is, that column 0 is always visible
-        , alwaysVisibleColumns(QVector<int>({0}))
         , storageOffset(0)
         , isInit(false)
         , columnSelectionEnabled(true)

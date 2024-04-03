@@ -57,9 +57,18 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
 
     auto defaultButton = button(QDialogButtonBox::RestoreDefaults);
     auto applyButton = button(QDialogButtonBox::Apply);
+    auto cancelButton = button(QDialogButtonBox::Cancel);
+
     connect(this, &KConfigDialog::accepted, pluginsPage, &KSettingsPlugins::slotSavePluginConfiguration);
     connect(applyButton, &QPushButton::clicked, pluginsPage, &KSettingsPlugins::slotSavePluginConfiguration);
     connect(defaultButton, &QPushButton::clicked, pluginsPage, &KSettingsPlugins::slotResetToDefaults);
+
+    connect(this, &KConfigDialog::accepted, onlineQuotesPage, &KSettingsOnlineQuotes::saveSettings);
+    connect(applyButton, &QPushButton::clicked, onlineQuotesPage, &KSettingsOnlineQuotes::saveSettings);
+    connect(cancelButton, &QPushButton::clicked, onlineQuotesPage, &KSettingsOnlineQuotes::resetSettings);
+    connect(defaultButton, &QPushButton::clicked, onlineQuotesPage, &KSettingsOnlineQuotes::resetSettings);
+    connect(onlineQuotesPage, &KSettingsOnlineQuotes::settingsChanged, applyButton, &QPushButton::setEnabled);
+
     connect(pluginsPage, &KSettingsPlugins::changed, this, &KSettingsKMyMoney::slotPluginsChanged);
     connect(pluginsPage, &KSettingsPlugins::settingsChanged, this, &KConfigDialog::settingsChanged);
     connect(generalPage, &KSettingsGeneral::haveValidInput, this, &KSettingsKMyMoney::slotEnableFinishButton);

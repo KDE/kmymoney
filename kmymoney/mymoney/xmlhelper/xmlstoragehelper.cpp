@@ -1033,7 +1033,7 @@ void writeBudget(const MyMoneyBudget& budget, QXmlStreamWriter* writer)
     writeStartObject(writer, nodeName(Node::Budget), budget.id());
 
     writer->writeAttribute(attributeName(Attribute::Budget::Name), budget.name());
-    writer->writeAttribute(attributeName(Attribute::Budget::Start), MyMoneyUtils::dateToString(budget.budgetStart()));
+    writer->writeAttribute(attributeName(Attribute::Budget::Start), MyMoneyUtils::dateToIsoString(budget.budgetStart()));
     writer->writeAttribute(attributeName(Attribute::Budget::Version), BUDGET_VERSION);
 
     QMap<QString, MyMoneyBudget::AccountGroup>::const_iterator it;
@@ -1056,7 +1056,7 @@ void writeBudget(const MyMoneyBudget& budget, QXmlStreamWriter* writer)
                 if (!(*it_per).amount().isZero()) {
                     writer->writeStartElement(elementName(Element::Budget::Period));
                     writer->writeAttribute(attributeName(Attribute::Budget::Amount), (*it_per).amount().toString());
-                    writer->writeAttribute(attributeName(Attribute::Budget::Start), MyMoneyUtils::dateToString((*it_per).startDate()));
+                    writer->writeAttribute(attributeName(Attribute::Budget::Start), MyMoneyUtils::dateToIsoString((*it_per).startDate()));
                     writer->writeEndElement();
                 }
             }
@@ -1171,7 +1171,7 @@ void writeReport(const MyMoneyReport& report, QXmlStreamWriter* writer)
             if (report.investmentSum() == eMyMoney::Report::InvestmentSum::Sold) {
                 writer->writeAttribute(attributeName(Attribute::Report::SettlementPeriod), attrValue(report.settlementPeriod()));
                 writer->writeAttribute(attributeName(Attribute::Report::ShowSTLTCapitalGains), attrValue(report.isShowingSTLTCapitalGains()));
-                writer->writeAttribute(attributeName(Attribute::Report::TermsSeparator), MyMoneyUtils::dateToString(report.termSeparator()));
+                writer->writeAttribute(attributeName(Attribute::Report::TermsSeparator), MyMoneyUtils::dateToIsoString(report.termSeparator()));
             }
         }
     } else if (report.reportType() == eMyMoney::Report::ReportType::InfoTable)
@@ -1368,9 +1368,9 @@ void writeReport(const MyMoneyReport& report, QXmlStreamWriter* writer)
         if (report.dateFilter(dateFrom, dateTo)) {
             writer->writeStartElement(elementName(Element::Report::Dates));
             if (dateFrom.isValid())
-                writer->writeAttribute(attributeName(Attribute::Report::From), MyMoneyUtils::dateToString(dateFrom));
+                writer->writeAttribute(attributeName(Attribute::Report::From), MyMoneyUtils::dateToIsoString(dateFrom));
             if (dateTo.isValid())
-                writer->writeAttribute(attributeName(Attribute::Report::To), MyMoneyUtils::dateToString(dateTo));
+                writer->writeAttribute(attributeName(Attribute::Report::To), MyMoneyUtils::dateToIsoString(dateTo));
             writer->writeEndElement();
         }
     }

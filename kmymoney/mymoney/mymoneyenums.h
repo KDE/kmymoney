@@ -667,6 +667,7 @@ enum Roles {
 
     // General state
     ClosedRole,
+    IsDirtyRole,
 
     // OnlineJobsModel
     OnlineJobRole,

@@ -18,11 +18,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+class MyMoneyAccount;
 class MyMoneySecurity;
-
-namespace Ui {
-class KInvestmentDetailsWizardPage;
-}
 
 /**
  * This class implements the investment details page  of the
@@ -35,34 +32,22 @@ public:
     explicit KInvestmentDetailsWizardPage(QWidget *parent = nullptr);
     ~KInvestmentDetailsWizardPage();
 
-    void init2(const MyMoneySecurity& security);
+    /**
+     * Setup the widgets based on @a account and @a security
+     */
+    void init(const MyMoneyAccount& account, const MyMoneySecurity& security);
 
     /**
      * Overload isComplete to handle the required fields
      */
     bool isComplete() const final override;
 
-    /**
-     * Functions to control or read the m_priceMode widget
-     */
-    int priceMode() const;
-    void setCurrentPriceMode(int mode);
-    void setPriceModeEnabled(bool enabled);
-
-    /**
-     * load or set the name of the m_investmentName item widget. The difference
-     * can be seen in the @ref KMyMoneyLineEdit type.
-     */
-    void loadName(const QString& name);
-    void setName(const QString& name);
-
-    void setupInvestmentSymbol();
-
 Q_SIGNALS:
-    void checkForExistingSymbol(const QString& symbol);
+    void securityIdChanged(const QString& id);
 
 private:
-    Ui::KInvestmentDetailsWizardPage  *ui;
+    class Private;
+    Private* const d;
 };
 
 #endif

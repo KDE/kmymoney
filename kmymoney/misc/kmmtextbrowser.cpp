@@ -37,5 +37,8 @@ void KMMTextBrowser::setHtml(const QString& text)
 {
     m_html = text;
     m_html.replace("@media screen", "@media _screen").replace("@media print", "@media screen");
-    QTextBrowser::setHtml(text);
+    if (m_content != text) {
+        m_content = text;
+        QTextBrowser::setHtml(m_content);
+    }
 }

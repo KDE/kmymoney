@@ -168,6 +168,7 @@ target_link_libraries(kmymoney
   KF5::ConfigGui
   KF5::WidgetsAddons
   KF5::CoreAddons
+  KF5::NewStuff
   kmm_templates
   $<$<BOOL:${USE_MODELTEST}>:Qt::Test>
   $<$<BOOL:${ENABLE_HOLIDAYS}>:KF5::Holidays>

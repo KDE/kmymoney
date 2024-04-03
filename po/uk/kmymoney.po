@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-31 01:45+0000\n"
-"PO-Revision-Date: 2024-01-29 15:38+0200\n"
+"POT-Creation-Date: 2024-03-31 01:59+0000\n"
+"PO-Revision-Date: 2024-03-31 09:19+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
-"Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
+"Language-Team: Ukrainian\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -228,74 +228,74 @@ msgstr ""
 msgid "New payee/receiver"
 msgstr "Новий отримувач"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1076
+#: kmymoney/converter/mymoneystatementreader.cpp:1084
 #, kde-format
 msgid "Default Category for Payee"
 msgstr "Типова категорія для отримувача"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1083
+#: kmymoney/converter/mymoneystatementreader.cpp:1091
 #, kde-format
 msgid "Please select a default category for payee '%1'"
 msgstr "Будь ласка, виберіть типову категорію для отримувача «%1»"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1106
+#: kmymoney/converter/mymoneystatementreader.cpp:1114
 #, kde-format
 msgid "Save Category"
 msgstr "Зберегти категорію"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1107
+#: kmymoney/converter/mymoneystatementreader.cpp:1115
 #, kde-format
 msgid "No Category"
 msgstr "Без категорії"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonAbort)
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: kmymoney/converter/mymoneystatementreader.cpp:1108
+#: kmymoney/converter/mymoneystatementreader.cpp:1116
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:132
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:257
 #, kde-format
 msgid "Abort"
 msgstr "Перервати"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1134
+#: kmymoney/converter/mymoneystatementreader.cpp:1142
 #, kde-format
 msgid "Unable to add payee/receiver"
 msgstr "Не вдалося додати отримувача"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1381
+#: kmymoney/converter/mymoneystatementreader.cpp:1389
 #, kde-format
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr ""
 "Проблема під час додавання або встановлення відповідності імпортованої "
 "операції з ідентифікатором «%1»: %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1439
+#: kmymoney/converter/mymoneystatementreader.cpp:1447
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr "<b>Ви отримали виписку для такого рахунку:</b><br/><br/>"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1440
+#: kmymoney/converter/mymoneystatementreader.cpp:1448
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " - Назва рахунку: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1441
+#: kmymoney/converter/mymoneystatementreader.cpp:1449
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " - Тип рахунку: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1442
+#: kmymoney/converter/mymoneystatementreader.cpp:1450
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " - Номер рахунку: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1447
+#: kmymoney/converter/mymoneystatementreader.cpp:1455
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "Бажаєте імпортувати операції до цього рахунку?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1450
+#: kmymoney/converter/mymoneystatementreader.cpp:1458
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -306,7 +306,7 @@ msgstr ""
 "Ви можете створити рахунок натисканням кнопки <b>Створити</b> або обрати "
 "інший вручну за допомогою панелі вибору, розташованої нижче."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1454
+#: kmymoney/converter/mymoneystatementreader.cpp:1462
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -317,12 +317,12 @@ msgstr ""
 "ласка, виберіть рахунок за допомогою панелі вибору у діалоговому вікні або "
 "створіть рахунок натисканням кнопки <b>Створити</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1483
+#: kmymoney/converter/mymoneystatementreader.cpp:1491
 #, kde-format
 msgid "Import transactions"
 msgstr "Імпортувати операції"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1525
+#: kmymoney/converter/mymoneystatementreader.cpp:1533
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
@@ -331,14 +331,14 @@ msgstr ""
 "Вам слід обрати рахунок, створити рахунок або натиснути кнопку <b>Перервати</"
 "b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1637
-#: kmymoney/views/kscheduledview_p.h:196 kmymoney/views/kscheduledview_p.h:311
-#: kmymoney/views/kscheduledview_p.h:315
+#: kmymoney/converter/mymoneystatementreader.cpp:1645
+#: kmymoney/views/kscheduledview_p.h:200 kmymoney/views/kscheduledview_p.h:315
+#: kmymoney/views/kscheduledview_p.h:319
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Не вдалося ввести заплановану операцію «%1»"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1657
+#: kmymoney/converter/mymoneystatementreader.cpp:1665
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -351,7 +351,7 @@ msgstr ""
 ">Бажаєте, щоб KMyMoney додала цей розклад зараз так, щоб ці операції "
 "збігалися?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1666
+#: kmymoney/converter/mymoneystatementreader.cpp:1674
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -384,7 +384,7 @@ msgstr[3] ""
 ">Дати операцій відрізняються на один день.<br/>Бажаєте, щоб KMyMoney додала "
 "цей розклад зараз так, щоб ці операції збігалися?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1680
+#: kmymoney/converter/mymoneystatementreader.cpp:1688
 #, kde-format
 msgid "Schedule found"
 msgstr "Знайдено розклад"
@@ -621,7 +621,6 @@ msgstr "Назва"
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QTreeWidget, accountsList)
 #: kmymoney/dialogs/kavailablecurrencydlg.ui:47
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:87
 #: kmymoney/plugins/woob/dialogs/accountsettings.ui:26
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:63
 #, kde-format
@@ -641,10 +640,10 @@ msgid "Backup location:"
 msgstr "Розташування файла резервної копії:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3744
-#: kmymoney/kmymoney.cpp:3815 kmymoney/kmymoney.cpp:3831
-#: kmymoney/kmymoney.cpp:3837 kmymoney/kmymoney.cpp:3851
-#: kmymoney/kmymoney.cpp:3853
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3758
+#: kmymoney/kmymoney.cpp:3829 kmymoney/kmymoney.cpp:3845
+#: kmymoney/kmymoney.cpp:3851 kmymoney/kmymoney.cpp:3865
+#: kmymoney/kmymoney.cpp:3867
 #, kde-format
 msgid "Backup"
 msgstr "Резервування"
@@ -1030,7 +1029,7 @@ msgid "Set all further occurrences &in this schedule to be these values."
 msgstr "Встановити ці значення &для всіх подальших разів у цьому розкладі."
 
 #: kmymoney/dialogs/kcurrencycalculator.cpp:430
-#: kmymoney/mymoney/mymoneyfile.cpp:3015
+#: kmymoney/mymoney/mymoneyfile.cpp:3019
 #, kde-format
 msgctxt "@info price source"
 msgid "User"
@@ -1053,8 +1052,8 @@ msgstr "Редактор обмінних курсів/ціни"
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:61
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:245
 #: kmymoney/plugins/views/reports/core/listtable.cpp:617
-#: kmymoney/views/khomeview_p.h:666 kmymoney/views/khomeview_p.h:726
-#: kmymoney/views/khomeview_p.h:764 kmymoney/views/newspliteditor.ui:32
+#: kmymoney/views/khomeview_p.h:664 kmymoney/views/khomeview_p.h:724
+#: kmymoney/views/khomeview_p.h:762 kmymoney/views/newspliteditor.ui:32
 #: kmymoney/views/newtransactioneditor.ui:56
 #: kmymoney/views/newtransactionform.ui:145
 #: kmymoney/widgets/ktransactionfilter.cpp:131
@@ -1122,7 +1121,6 @@ msgstr "xxx"
 #. i18n: ectx: attribute (title), widget (QWidget, tabDate)
 #: kmymoney/dialogs/kcurrencycalculator.ui:87
 #: kmymoney/dialogs/kcurrencycalculator.ui:274
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:88
 #: kmymoney/dialogs/kmymoneypricedlg.ui:60
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:92
 #: kmymoney/mymoney/storage/pricemodel.cpp:40
@@ -1136,8 +1134,8 @@ msgstr "xxx"
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:120
 #: kmymoney/plugins/views/reports/core/listtable.cpp:615
 #: kmymoney/views/investtransactioneditor.ui:245
-#: kmymoney/views/khomeview_p.h:651 kmymoney/views/khomeview_p.h:711
-#: kmymoney/views/khomeview_p.h:749 kmymoney/views/newtransactioneditor.ui:78
+#: kmymoney/views/khomeview_p.h:649 kmymoney/views/khomeview_p.h:709
+#: kmymoney/views/khomeview_p.h:747 kmymoney/views/newtransactioneditor.ui:78
 #: kmymoney/views/newtransactionform.ui:110
 #: kmymoney/widgets/ktransactionfilter.cpp:122
 #: kmymoney/widgets/ktransactionfilter.ui:138
@@ -1610,7 +1608,7 @@ msgstr "Найменша частка:"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
 #: kmymoney/dialogs/keditequityentry.ui:70
 #: kmymoney/dialogs/knewequityentrydlg.ui:63
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:99
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:233
 #, kde-format
 msgid "1 /"
 msgstr "1 /"
@@ -1728,76 +1726,35 @@ msgstr "Оновлювати з того ж джерела"
 msgid "Ask"
 msgstr "Питати"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:87
-#, kde-format
-msgctxt "Equity name"
-msgid "Name"
-msgstr "Назва"
-
-#. i18n: ectx: property (text), widget (QLabel, textLabel3)
-#. i18n: ectx: property (text), widget (QTreeWidget, m_priceList)
-#. i18n: ectx: property (text), widget (QCheckBox, m_checkPrice)
-#. i18n: ectx: property (text), widget (QLabel, labelInv_price)
-#. i18n: ectx: property (text), widget (QLabel, lblpriceCol)
-#. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:88
-#: kmymoney/dialogs/kmymoneypricedlg.ui:65
-#: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:75
-#: kmymoney/models/equitiesmodel.cpp:195 kmymoney/models/equitiesmodel.cpp:432
-#: kmymoney/mymoney/storage/pricemodel.cpp:41
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:55
-#: kmymoney/plugins/csv/import/investmentwizardpage.ui:174
-#: kmymoney/plugins/csv/import/priceswizardpage.cpp:45
-#: kmymoney/plugins/csv/import/priceswizardpage.ui:144
-#: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:465
-#: kmymoney/plugins/views/reports/core/kreportchartview.cpp:163
-#: kmymoney/plugins/views/reports/core/listtable.cpp:645
-#: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:185
-#, kde-format
-msgid "Price"
-msgstr "Ціна"
-
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:94
-#, kde-format
-msgctxt "Internal identifier"
-msgid "Internal ID"
-msgstr "Внутрішній ідентифікатор"
-
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:95
-#, kde-format
-msgctxt "Online quote source"
-msgid "Source"
-msgstr "Джерело"
-
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:175
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:190
 #, kde-format
 msgctxt "@action:button Configuration of price update"
 msgid "Configure"
 msgstr "Налаштувати"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:261
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:304
 #, kde-format
 msgid "%1 units in %2"
 msgstr "%1 одиниць у %2"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:306
-#: kmymoney/misc/webpricequote.cpp:227
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:341
 #, kde-format
 msgid "[No identifier]"
 msgstr "[Немає ідентифікатора]"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:354
-#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
-#: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:38
-#: kmymoney/widgets/daterangedlg.cpp:64 kmymoney/widgets/daterangedlg.cpp:67
-#: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.cpp:38
-#: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.cpp:53
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:451
 #, kde-format
-msgctxt "@info:tooltip"
-msgid "The date is invalid."
-msgstr "Некоректна дата."
+msgctxt "@info online update price info"
+msgid "No security selected."
+msgstr "Не вибрано цінного паперу."
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:565
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:461
+#, kde-format
+msgctxt "@info online update price info"
+msgid "No Security to be updated."
+msgstr "Немає цінних паперів для оновлення."
+
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:485
 #, kde-format
 msgid ""
 "Failed to retrieve an exchange rate for %1 from %2. It will be skipped this "
@@ -1806,14 +1763,14 @@ msgstr ""
 "Не вдалося отримати обмінний курс для %1 з %2. Цього разу відповідний пункт "
 "буде пропущено."
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:565
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:578
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:599
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:486
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:496
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:519
 #, kde-format
 msgid "Price Update Failed"
 msgstr "Спроба оновлення ціни зазнала невдачі"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:574
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:492
 #, kde-format
 msgid ""
 "Failed to retrieve a quote for %1 from %2.  Press <b>No</b> to remove the "
@@ -1827,52 +1784,33 @@ msgstr ""
 "наступних оновлень цін, або кнопку <b>Скасувати</b>, щоб зупинити поточну "
 "дію з оновлення."
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:599
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:518
 #, kde-format
 msgid "Cannot update security <b>%1</b>: %2"
 msgstr "Не вдалося оновити дані цінного паперу <b>%1</b>: %2"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:690
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:579
 #, kde-format
-msgid ""
-"For <b>%1</b> on <b>%2</b> price <b>%3</b> already exists.<br>Do you want to "
-"replace it with <b>%4</b>?"
-msgstr ""
-"Для <b>%1</b> на <b>%2</b> ціна <b>%3</b> вже існує.<br>Хочете замінити її "
-"на <b>%4</b>?"
-
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:696
-#, kde-format
-msgid "Price Already Exists"
-msgstr "Ціна вже існує"
-
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:747
-#, kde-format
-msgctxt ""
-"Log message e.g. 'Prices for EUR > USD updated between 2001-01-01 and "
-"2001-02-01 (id EUR USD)'"
-msgid "Prices for %1 updated between %3 and %4 (id %2)"
-msgstr "Ціну для %1 оновлено між %3 та %4 (ідентифікатор %2)"
-
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:769
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:847
-#, kde-format
-msgid ""
-"Received a price for %1 (id %2), but this symbol is not on the list. "
-"Aborting entire update."
-msgstr ""
-"Отримано ціну для %1 (ідентифікатор %2), але цього коду немає у списку.  "
-"Весь сеанс оновлення перервано."
-
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:827
-#, kde-format
+msgctxt "@info Online price update %1 online id, %2 internal id"
 msgid "Price for %1 updated (id %2)"
 msgstr "Ціну для %1 оновлено (ідентифікатор %2)"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:831
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:581
 #, kde-format
+msgctxt "@info Online price update %1 online id"
 msgid "Received an invalid price for %1, unable to update."
 msgstr "Отримано некоректну ціну для %1, не вдалося оновити."
+
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:626
+#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
+#: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:38
+#: kmymoney/widgets/daterangedlg.cpp:64 kmymoney/widgets/daterangedlg.cpp:67
+#: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.cpp:38
+#: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.cpp:53
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The date is invalid."
+msgstr "Некоректна дата."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KEquityPriceUpdateDlg)
 #: kmymoney/dialogs/kequitypriceupdatedlg.ui:15
@@ -1880,41 +1818,34 @@ msgstr "Отримано некоректну ціну для %1, не вдал�
 msgid "Update Stock and Currency Prices"
 msgstr "Оновити ринкові курси і курси валют"
 
-#. i18n: ectx: property (toolTip), widget (QTreeWidget, lvEquityList)
-#: kmymoney/dialogs/kequitypriceupdatedlg.ui:27
-#, kde-format
-msgid "List of known Equities, and the date they were last updated on."
-msgstr ""
-"Список відомих звичайних акцій і дата останнього оновлення їхніх даних."
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: kmymoney/dialogs/kequitypriceupdatedlg.ui:59
+#. i18n: ectx: property (text), widget (QLabel, m_fromLabel)
+#: kmymoney/dialogs/kequitypriceupdatedlg.ui:63
 #, kde-format
 msgctxt "@label:chooser Date"
 msgid "From"
 msgstr "З"
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: kmymoney/dialogs/kequitypriceupdatedlg.ui:69
+#. i18n: ectx: property (text), widget (QLabel, m_toLabel)
+#: kmymoney/dialogs/kequitypriceupdatedlg.ui:73
 #, kde-format
 msgctxt "@label:chooser Date"
 msgid "To"
 msgstr "До"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdateAll)
-#: kmymoney/dialogs/kequitypriceupdatedlg.ui:92
+#: kmymoney/dialogs/kequitypriceupdatedlg.ui:99
 #, kde-format
 msgid "Update All"
 msgstr "Оновити всі"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdateSelected)
-#: kmymoney/dialogs/kequitypriceupdatedlg.ui:99
+#: kmymoney/dialogs/kequitypriceupdatedlg.ui:106
 #, kde-format
 msgid "Update Selected"
 msgstr "Вибрано оновлення"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#: kmymoney/dialogs/kequitypriceupdatedlg.ui:128
+#: kmymoney/dialogs/kequitypriceupdatedlg.ui:135
 #, kde-format
 msgid "Status:"
 msgstr "Стан:"
@@ -1939,7 +1870,7 @@ msgstr "Стан:"
 #. i18n: ectx: property (text), widget (QToolButton, m_creditDebitIndicatorColClear)
 #. i18n: ectx: property (text), widget (QToolButton, m_debitColClear)
 #. i18n: ectx: property (text), widget (QToolButton, m_creditColClear)
-#: kmymoney/dialogs/kequitypriceupdatedlg.ui:151
+#: kmymoney/dialogs/kequitypriceupdatedlg.ui:158
 #: kmymoney/dialogs/knewinstitutiondlg.ui:88
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:562
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:122
@@ -2089,7 +2020,7 @@ msgstr "Тип"
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:237
 #: kmymoney/views/investtransactioneditor.ui:51
 #: kmymoney/views/investtransactioneditor.ui:221
-#: kmymoney/views/khomeview_p.h:1064
+#: kmymoney/views/khomeview_p.h:1062
 #, kde-format
 msgid "Total"
 msgstr "Разом"
@@ -2181,6 +2112,28 @@ msgstr "Назва акції"
 msgid "Currency"
 msgstr "Валюта"
 
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#. i18n: ectx: property (text), widget (QTreeWidget, m_priceList)
+#. i18n: ectx: property (text), widget (QCheckBox, m_checkPrice)
+#. i18n: ectx: property (text), widget (QLabel, labelInv_price)
+#. i18n: ectx: property (text), widget (QLabel, lblpriceCol)
+#. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
+#: kmymoney/dialogs/kmymoneypricedlg.ui:65
+#: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:75
+#: kmymoney/models/equitiesmodel.cpp:195 kmymoney/models/equitiesmodel.cpp:432
+#: kmymoney/mymoney/storage/pricemodel.cpp:41
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:55
+#: kmymoney/plugins/csv/import/investmentwizardpage.ui:174
+#: kmymoney/plugins/csv/import/priceswizardpage.cpp:45
+#: kmymoney/plugins/csv/import/priceswizardpage.ui:144
+#: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:465
+#: kmymoney/plugins/views/reports/core/kreportchartview.cpp:163
+#: kmymoney/plugins/views/reports/core/listtable.cpp:645
+#: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:185
+#, kde-format
+msgid "Price"
+msgstr "Ціна"
+
 #. i18n: ectx: property (text), widget (QTreeWidget, m_priceList)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:70
 #, kde-format
@@ -2259,20 +2212,20 @@ msgid "Delete"
 msgstr "Вилучити"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:171
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:39
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:151
 #, kde-format
 msgctxt "default price mode"
 msgid "(default)"
 msgstr "(типовий)"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:172
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:40
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:152
 #, kde-format
 msgid "Price per share"
 msgstr "Ціна на акцію"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:173
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:41
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:153
 #, kde-format
 msgid "Total for all shares"
 msgstr "Загальна для всіх акцій"
@@ -2299,7 +2252,7 @@ msgid "Liability"
 msgstr "Пасиви"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:535 kmymoney/kmymoney.cpp:436
-#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1830
+#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1828
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -2575,10 +2528,10 @@ msgstr "Слід призначити обліковий відділ"
 msgid "Preferred Account"
 msgstr "Основний рахунок"
 
-#. i18n: ectx: property (text), widget (QLabel, textLabel2_5)
+#. i18n: ectx: property (text), widget (QLabel, m_priceModeLabel)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_5)
 #: kmymoney/dialogs/knewaccountdlg.ui:250
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:195
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:67
 #, kde-format
 msgid "Price entry"
 msgstr "Запис ціни"
@@ -3800,56 +3753,15 @@ msgstr "Піктограми"
 msgid "Plugins"
 msgstr "Додатки"
 
-#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:78
-#, kde-format
-msgctxt "@item:inlistbox Stock"
-msgid "Symbol"
-msgstr "Код"
-
-#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:79
-#, kde-format
-msgctxt "@item:inlistbox Stock"
-msgid "Identification number"
-msgstr "Ідентифікаційний номер"
-
-#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:80
-#, kde-format
-msgctxt "@item:inlistbox Stock"
-msgid "Name"
-msgstr "Назва"
-
-#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:133
-#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:299
-#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:302
-#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:381
-#, kde-format
-msgid "New Quote Source"
-msgstr "Створити джерело курсів"
-
-#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:260
+#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:132
 #, kde-format
 msgid "CSV profile <b>%1</b> already exists.<br>Do you want to overwrite it?"
 msgstr "Профіль CSV <b>%1</b> вже існує.<br>Хочете перезаписати його дані?"
 
-#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:263
+#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:135
 #, kde-format
 msgid "CSV Profile Already Exists"
 msgstr "Профіль CSV вже існує"
-
-#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:317
-#, kde-format
-msgid ""
-"Security <b>%1</b> uses this quote source.<br>Do you really want to remove "
-"it?"
-msgstr ""
-"Для цінного паперу <b>%1</b> використовується це джерело курсів.<br>Ви "
-"справді хочете його вилучити?"
-
-#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:320
-#, kde-format
-msgctxt "@title:window"
-msgid "Delete quote source"
-msgstr "Вилучити джерело курсів"
 
 #. i18n: ectx: property (whatsThis), widget (QGroupBox, groupParsing)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:36
@@ -4376,8 +4288,8 @@ msgstr "Звірено"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:345
 #: kmymoney/plugins/views/reports/core/listtable.cpp:639
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
-#: kmymoney/views/khomeview_p.h:1040 kmymoney/views/khomeview_p.h:1410
-#: kmymoney/views/khomeview_p.h:1439
+#: kmymoney/views/khomeview_p.h:1038 kmymoney/views/khomeview_p.h:1408
+#: kmymoney/views/khomeview_p.h:1437
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:32
 #, kde-format
 msgid "Reconciled"
@@ -4628,11 +4540,10 @@ msgid "Dialog"
 msgstr "Діалогове вікно"
 
 #: kmymoney/dialogs/tagcreator.cpp:64
-#, fuzzy, kde-format
-#| msgid "Create"
+#, kde-format
 msgctxt "Undo action description"
 msgid "Create tag"
-msgstr "Створити"
+msgstr "Створити мітку"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
 #: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
@@ -4666,8 +4577,8 @@ msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:41
 #, kde-format
-msgid "(c) 2000-2022 The KMyMoney development team"
-msgstr "© Команда розробки KMyMoney, 2000–2022"
+msgid "(c) 2000-2024 The KMyMoney development team"
+msgstr "© Команда розробки KMyMoney, 2000–2024"
 
 #: kmymoney/kcreditswindow.cpp:44
 #, kde-format
@@ -5494,12 +5405,12 @@ msgstr "Вилучити операцію"
 msgid "Unable to duplicate transaction(s)"
 msgstr "Не вдалося здублювати операції"
 
-#: kmymoney/kmymoney.cpp:2906
+#: kmymoney/kmymoney.cpp:2920
 #, kde-format
 msgid "Unable to modify transaction"
 msgstr "Не вдалося змінити операцію"
 
-#: kmymoney/kmymoney.cpp:2998
+#: kmymoney/kmymoney.cpp:3012
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
@@ -5508,13 +5419,13 @@ msgstr ""
 "Було узгоджено принаймні одне дроблення вибраних операцій. Ви все ж бажаєте "
 "змінити ці операції?"
 
-#: kmymoney/kmymoney.cpp:3000
+#: kmymoney/kmymoney.cpp:3014
 #, kde-format
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "Операцію вже узгоджено"
 
-#: kmymoney/kmymoney.cpp:3005
+#: kmymoney/kmymoney.cpp:3019
 #, kde-format
 msgid "Do you really want to change the selected transaction?"
 msgid_plural "Do you really want to change all %1 selected transactions?"
@@ -5523,18 +5434,18 @@ msgstr[1] "Ви справді бажаєте змінити %1 позначен
 msgstr[2] "Ви справді бажаєте змінити всі %1 позначених операцій?"
 msgstr[3] "Ви справді бажаєте змінити %1 позначену операцію?"
 
-#: kmymoney/kmymoney.cpp:3009
+#: kmymoney/kmymoney.cpp:3023
 #, kde-format
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "Змінити операцію"
 
-#: kmymoney/kmymoney.cpp:3094
+#: kmymoney/kmymoney.cpp:3108
 #, kde-format
 msgid "Unable to accept transaction"
 msgstr "Не вдалося прийняти операцію"
 
-#: kmymoney/kmymoney.cpp:3134
+#: kmymoney/kmymoney.cpp:3148
 #, kde-format
 msgid ""
 "KMyMoney has detected some overdue scheduled transactions for the account <b>"
@@ -5543,12 +5454,12 @@ msgstr ""
 "На рахунку <b>%1</b> KMyMoney було виявлено декілька прострочених "
 "запланованих операцій. Бажаєте ввести ці заплановані операції зараз?"
 
-#: kmymoney/kmymoney.cpp:3137 kmymoney/views/kscheduledview.cpp:134
+#: kmymoney/kmymoney.cpp:3151 kmymoney/views/kscheduledview.cpp:131
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "Знайдено заплановану операцію"
 
-#: kmymoney/kmymoney.cpp:3212
+#: kmymoney/kmymoney.cpp:3226
 #, kde-format
 msgid ""
 "<qt>You have closed this account. It remains in the system because you have "
@@ -5561,81 +5472,81 @@ msgstr ""
 "показано у переглядах. Зробити його запис знову видимим можна за допомогою "
 "позначення пункту <b>Показати всі рахунки</b> у меню «Перегляд».</qt>"
 
-#: kmymoney/kmymoney.cpp:3214
+#: kmymoney/kmymoney.cpp:3228
 #, kde-format
 msgid "Information"
 msgstr "Інформація"
 
-#: kmymoney/kmymoney.cpp:3318 kmymoney/kmymoney.cpp:3414
+#: kmymoney/kmymoney.cpp:3332 kmymoney/kmymoney.cpp:3428
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "Не відкрито жодного файла KMyMoney"
 
-#: kmymoney/kmymoney.cpp:3351 kmymoney/kmymoney.cpp:3353
+#: kmymoney/kmymoney.cpp:3365 kmymoney/kmymoney.cpp:3367
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1364
-#: kmymoney/plugins/xml/xmlstorage.cpp:414
+#: kmymoney/plugins/xml/xmlstorage.cpp:415
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "Готово."
 
-#: kmymoney/kmymoney.cpp:3418
+#: kmymoney/kmymoney.cpp:3432
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "Перегляд особистих даних…"
 
-#: kmymoney/kmymoney.cpp:3425
+#: kmymoney/kmymoney.cpp:3439
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "Змінити особисті дані"
 
-#: kmymoney/kmymoney.cpp:3440
+#: kmymoney/kmymoney.cpp:3454
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr "Не вдалося зберегти відомості про користувача: %1"
 
-#: kmymoney/kmymoney.cpp:3448
+#: kmymoney/kmymoney.cpp:3462
 #, kde-format
 msgid "Importing account templates."
 msgstr "Імпортування шаблонів рахунків."
 
-#: kmymoney/kmymoney.cpp:3462
+#: kmymoney/kmymoney.cpp:3476
 #, kde-format
 msgid "Unable to import template(s)"
 msgstr "Не вдалося імпортувати шаблони"
 
-#: kmymoney/kmymoney.cpp:3470
+#: kmymoney/kmymoney.cpp:3484
 #, kde-format
 msgid "Exporting account templates."
 msgstr "Експортування шаблонів рахунків."
 
-#: kmymoney/kmymoney.cpp:3476
+#: kmymoney/kmymoney.cpp:3490
 #, kde-format
 msgid "Save as..."
 msgstr "Зберегти як…"
 
-#: kmymoney/kmymoney.cpp:3477
+#: kmymoney/kmymoney.cpp:3491
 #, kde-format
 msgid "KMyMoney template files (*.kmt);;All files (*)"
 msgstr "файли шаблонів KMyMoney (*.kmt);;усі файли (*)"
 
-#: kmymoney/kmymoney.cpp:3508
+#: kmymoney/kmymoney.cpp:3522
 #, kde-format
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "Експортування шаблону"
 
-#: kmymoney/kmymoney.cpp:3526
+#: kmymoney/kmymoney.cpp:3540
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr "Файл з назвою <b>%1</b> вже існує. Бажаєте його перезаписати?"
 
-#: kmymoney/kmymoney.cpp:3528 kmymoney/plugins/csv/export/csvexporter.cpp:102
+#: kmymoney/kmymoney.cpp:3542 kmymoney/plugins/csv/export/csvexporter.cpp:102
 #, kde-format
 msgid "File already exists"
 msgstr "Файл вже існує"
 
-#: kmymoney/kmymoney.cpp:3650
+#: kmymoney/kmymoney.cpp:3664
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
@@ -5644,13 +5555,13 @@ msgstr ""
 "Перш ніж створювати резервну копію файла, його слід зберегти. Бажаєте "
 "продовжити?"
 
-#: kmymoney/kmymoney.cpp:3652
+#: kmymoney/kmymoney.cpp:3666
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr "Підтвердження резервного копіювання"
 
-#: kmymoney/kmymoney.cpp:3669
+#: kmymoney/kmymoney.cpp:3683
 #, kde-format
 msgid ""
 "The current implementation of the backup functionality only supports local "
@@ -5659,69 +5570,69 @@ msgstr ""
 "Поточна реалізація резервного копіювання передбачає використання лише "
 "локальних файлів. Ви ж бажаєте використати файл «%1»."
 
-#: kmymoney/kmymoney.cpp:3671
+#: kmymoney/kmymoney.cpp:3685
 #, kde-format
 msgid "Local files only"
 msgstr "Лише локальні файли"
 
-#: kmymoney/kmymoney.cpp:3710
+#: kmymoney/kmymoney.cpp:3724
 #, kde-format
 msgid "Mounting %1"
 msgstr "Монтування %1"
 
-#: kmymoney/kmymoney.cpp:3744
+#: kmymoney/kmymoney.cpp:3758
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr "На цьому пристрої вже існує файл. Замінити його?"
 
-#: kmymoney/kmymoney.cpp:3744
+#: kmymoney/kmymoney.cpp:3758
 #, kde-format
 msgid "&Replace"
 msgstr "З&амінити"
 
-#: kmymoney/kmymoney.cpp:3752
+#: kmymoney/kmymoney.cpp:3766
 #, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
 msgstr "Не вдалося створити каталог резервного копіювання «%1»."
 
-#: kmymoney/kmymoney.cpp:3757
+#: kmymoney/kmymoney.cpp:3771
 #, kde-format
 msgid "Writing %1"
 msgstr "Запис %1"
 
-#: kmymoney/kmymoney.cpp:3778
+#: kmymoney/kmymoney.cpp:3792
 #, kde-format
 msgid "Unmounting %1"
 msgstr "Демонтування %1"
 
-#: kmymoney/kmymoney.cpp:3815
+#: kmymoney/kmymoney.cpp:3829
 #, kde-format
 msgid "Error mounting device"
 msgstr "Помилка під час спроби монтування пристрою"
 
-#: kmymoney/kmymoney.cpp:3830 kmymoney/kmymoney.cpp:3849
+#: kmymoney/kmymoney.cpp:3844 kmymoney/kmymoney.cpp:3863
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "Виконано"
 
-#: kmymoney/kmymoney.cpp:3831 kmymoney/kmymoney.cpp:3851
+#: kmymoney/kmymoney.cpp:3845 kmymoney/kmymoney.cpp:3865
 #, kde-format
 msgid "File successfully backed up"
 msgstr "Резервну копію файла успішно створено"
 
-#: kmymoney/kmymoney.cpp:3837
+#: kmymoney/kmymoney.cpp:3851
 #, kde-format
 msgid "Error copying file to device"
 msgstr "Помилка під час спроби копіювання файла на пристрій"
 
-#: kmymoney/kmymoney.cpp:3853
+#: kmymoney/kmymoney.cpp:3867
 #, kde-format
 msgid "Error unmounting device"
 msgstr "Помилка під час спроби демонтування пристрою"
 
-#: kmymoney/kmymoney.cpp:3900
+#: kmymoney/kmymoney.cpp:3914
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5738,29 +5649,29 @@ msgstr ""
 "Натисніть кнопку «Ні», щоб зберегти значення суми %2,\n"
 "Натисніть кнопку «Скасувати», щоб перервати створення рахунку."
 
-#: kmymoney/kmymoney.cpp:3910
+#: kmymoney/kmymoney.cpp:3924
 #, kde-format
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "Відкриття балансу для пасиву"
 
-#: kmymoney/kmymoney.cpp:3921
+#: kmymoney/kmymoney.cpp:3935
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "Не вдалося додати рахунок: %1"
 
-#: kmymoney/kmymoney.cpp:4047
+#: kmymoney/kmymoney.cpp:4065
 #, kde-format
 msgid "Running consistency check..."
 msgstr "Виконання перевірки коректності…"
 
-#: kmymoney/kmymoney.cpp:4054
+#: kmymoney/kmymoney.cpp:4072
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "Знайдено помилку: %1"
 
-#: kmymoney/kmymoney.cpp:4064
+#: kmymoney/kmymoney.cpp:4082
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -5769,7 +5680,7 @@ msgstr ""
 "Під час перевірки цілісності даних у ваших даних не було виявлено жодних "
 "помилок. Подробиці наведено нижче."
 
-#: kmymoney/kmymoney.cpp:4066
+#: kmymoney/kmymoney.cpp:4084
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5780,28 +5691,28 @@ msgstr ""
 "наведено нижче. Знайдені помилки не можна виправити у автоматичному режимі, "
 "потрібне ваше втручання."
 
-#: kmymoney/kmymoney.cpp:4069
+#: kmymoney/kmymoney.cpp:4087
 #, kde-format
 msgid "Consistency check result"
 msgstr "Результат перевірки коректності"
 
-#: kmymoney/kmymoney.cpp:4135
+#: kmymoney/kmymoney.cpp:4153
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Перевірка наявності прострочених запланованих операцій…"
 
-#: kmymoney/kmymoney.cpp:4325
+#: kmymoney/kmymoney.cpp:4343
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr "Перш ніж імпортувати виписку, вам слід обрати файл KMyMoney."
 
-#: kmymoney/kmymoney.cpp:4330
+#: kmymoney/kmymoney.cpp:4348
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Імпортування виписки за допомогою Web Connect"
 
-#: kmymoney/kmymoney.cpp:4342
+#: kmymoney/kmymoney.cpp:4360
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5811,67 +5722,67 @@ msgstr ""
 "Не вдалося імпортувати %1 за допомогою додатка %2. Додаток повернув "
 "повідомлення про помилку: %3"
 
-#: kmymoney/kmymoney.cpp:4342 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
+#: kmymoney/kmymoney.cpp:4360 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
 #, kde-format
 msgid "Importing error"
 msgstr "Помилка під час спроби імпортування"
 
-#: kmymoney/kmymoney.cpp:4369
+#: kmymoney/kmymoney.cpp:4387
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Було увімкнуто всі повідомлення."
 
-#: kmymoney/kmymoney.cpp:4369
+#: kmymoney/kmymoney.cpp:4387
 #, kde-format
 msgid "All messages"
 msgstr "Всі повідомлення"
 
-#: kmymoney/kmymoney.cpp:4405
+#: kmymoney/kmymoney.cpp:4423
 #, kde-format
 msgid "Auto saving..."
 msgstr "Автозбереження…."
 
-#: kmymoney/kmymoney.cpp:4525
+#: kmymoney/kmymoney.cpp:4543
 #, kde-format
 msgid "Creating new document..."
 msgstr "Створення нового документа…"
 
-#: kmymoney/kmymoney.cpp:4585
+#: kmymoney/kmymoney.cpp:4603
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "Не вдалося створити файл."
 
-#: kmymoney/kmymoney.cpp:4596
+#: kmymoney/kmymoney.cpp:4614
 #, kde-format
 msgid "Open a file."
 msgstr "Відкрити файл."
 
-#: kmymoney/kmymoney.cpp:4610
+#: kmymoney/kmymoney.cpp:4628
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr "Не вдалося знайти жодного додатка для відкриття сховища даних."
 
-#: kmymoney/kmymoney.cpp:4614
+#: kmymoney/kmymoney.cpp:4632
 #, kde-format
 msgid "All files (*)"
 msgstr "усі файли (*)"
 
-#: kmymoney/kmymoney.cpp:4627
+#: kmymoney/kmymoney.cpp:4645
 #, kde-format
 msgid "Loading file..."
 msgstr "Завантаження файла…"
 
-#: kmymoney/kmymoney.cpp:4633
+#: kmymoney/kmymoney.cpp:4651
 #, kde-format
 msgid "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
 msgstr "<p>Файл <b>%1</b> вже відкрито у іншому екземплярі KMyMoney</p>"
 
-#: kmymoney/kmymoney.cpp:4633
+#: kmymoney/kmymoney.cpp:4651
 #, kde-format
 msgid "Duplicate open"
 msgstr "Дублювати відкритий"
 
-#: kmymoney/kmymoney.cpp:4640
+#: kmymoney/kmymoney.cpp:4658
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5880,17 +5791,17 @@ msgstr ""
 "<p>Назва <b>%1</b> є некоректною назвою файла (можливо, файла просто не "
 "існує). Ви можете відкрити інший файл або створити новий.</p>"
 
-#: kmymoney/kmymoney.cpp:4640
+#: kmymoney/kmymoney.cpp:4658
 #, kde-format
 msgid "File not found"
 msgstr "Файл не знайдено"
 
-#: kmymoney/kmymoney.cpp:4667
+#: kmymoney/kmymoney.cpp:4685
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "Не вдалося відкрити файл."
 
-#: kmymoney/kmymoney.cpp:4673
+#: kmymoney/kmymoney.cpp:4691
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -5899,32 +5810,32 @@ msgstr ""
 "Не вдалося прочитати дані з вашого джерела. Будь ласка, перевірте, чи "
 "правильно вказано параметри роботи KMyMoney і чи увімкнено потрібний додаток."
 
-#: kmymoney/kmymoney.cpp:4683
+#: kmymoney/kmymoney.cpp:4701
 #, kde-format
 msgid "Saving file..."
 msgstr "Збереження файла…."
 
-#: kmymoney/kmymoney.cpp:4695
+#: kmymoney/kmymoney.cpp:4713
 #, kde-format
 msgid "Failed to save your data."
 msgstr "Не вдалося зберегти ваші дані."
 
-#: kmymoney/kmymoney.cpp:4701
+#: kmymoney/kmymoney.cpp:4719
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr "Не вдалося завантажити відповідний додаток для збереження даних."
 
-#: kmymoney/kmymoney.cpp:4707
+#: kmymoney/kmymoney.cpp:4725
 #, kde-format
 msgid "Saving file as...."
 msgstr "Збереження файла як…"
 
-#: kmymoney/kmymoney.cpp:4723
+#: kmymoney/kmymoney.cpp:4741
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr "Не вдалося знайти жодного додатка для збереження даних."
 
-#: kmymoney/kmymoney.cpp:4752
+#: kmymoney/kmymoney.cpp:4770
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "Не вдалося зберегти ваші дані."
@@ -6130,7 +6041,7 @@ msgstr "Активи і зобов'язання"
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:68
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1565
+#: kmymoney/views/khomeview_p.h:1563
 #, kde-format
 msgid "Budget"
 msgstr "Бюджет"
@@ -6228,7 +6139,7 @@ msgstr "<qt>Бажаєте додати <b>%1</b> як платника/отри
 msgid "Unable to add payee"
 msgstr "Не вдалося додати отримувача"
 
-#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:634
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:637
 #, kde-format
 msgid "New Tag"
 msgstr "Нова мітка"
@@ -6328,6 +6239,24 @@ msgstr ""
 "Джерело помилки встановити не вдалося: будь ласка, повідомте про помилку "
 "розробникам"
 
+#: kmymoney/misc/kmmonlinequotesprofilemanager.cpp:47
+msgctxt "@info:tooltip"
+msgid "Finance::Quote not supported by the installed Alkimia library."
+msgstr ""
+"У встановленій версії бібліотеки Akonadi не передбачено підтримки Finance::"
+"Quote."
+
+#: kmymoney/misc/kmmonlinequotesprofilemanager.cpp:48
+msgctxt "@info:tooltip"
+msgid "Missing or non-functioning Finance::Quote installation."
+msgstr "Не встановлено Finance::Quote або встановлено неробочу версію."
+
+#: kmymoney/misc/kmmonlinequotesprofilemanager.cpp:125
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Online quote source with name '%1' unknown."
+msgstr "Невідоме інтернет-джерело курсів із назвою «%1»."
+
 #: kmymoney/misc/kmmyesno.cpp:21
 #, kde-format
 msgctxt "@action:button"
@@ -6339,102 +6268,6 @@ msgstr "Так"
 msgctxt "@action:button"
 msgid "No"
 msgstr "Ні"
-
-#: kmymoney/misc/webpricequote.cpp:117 kmymoney/misc/webpricequote.cpp:242
-#, kde-format
-msgid "Source <placeholder>%1</placeholder> does not exist."
-msgstr "Джерела <placeholder>%1</placeholder> не існує."
-
-#: kmymoney/misc/webpricequote.cpp:150
-#, kde-format
-msgid "Cannot resolve input date."
-msgstr "Не вдалося обробити вхідні дані."
-
-#: kmymoney/misc/webpricequote.cpp:167
-#, kde-format
-msgid "CSV source <placeholder>%1</placeholder> does not exist."
-msgstr "Джерела CSV <placeholder>%1</placeholder> не існує."
-
-#: kmymoney/misc/webpricequote.cpp:185
-#, kde-format
-msgid "Cannot find from and to currency."
-msgstr "Не вдалося визначити початкову і кінцеву валюти."
-
-#: kmymoney/misc/webpricequote.cpp:198
-#, kde-format
-msgid "Local quote sources aren't supported."
-msgstr "Підтримки локальних джерел курсів не передбачено."
-
-#: kmymoney/misc/webpricequote.cpp:203 kmymoney/misc/webpricequote.cpp:299
-#, kde-format
-msgid "Fetching URL %1..."
-msgstr "Отримання даних URL %1…"
-
-#: kmymoney/misc/webpricequote.cpp:228
-#, kde-format
-msgid ""
-"<placeholder>%1</placeholder> skipped because it doesn't have identification "
-"number."
-msgstr ""
-"<placeholder>%1</placeholder> пропущено, оскільки цей запис не має "
-"ідентифікаційного номера."
-
-#: kmymoney/misc/webpricequote.cpp:267
-#, kde-format
-msgctxt "The process x is executing"
-msgid "Executing %1..."
-msgstr "Виконання %1…"
-
-#: kmymoney/misc/webpricequote.cpp:294 kmymoney/misc/webpricequote.cpp:401
-#, kde-format
-msgid "Unable to launch: %1"
-msgstr "Не вдалося запустити: %1"
-
-#: kmymoney/misc/webpricequote.cpp:330 kmymoney/misc/webpricequote.cpp:359
-#, kde-format
-msgid "Failed to open downloaded file"
-msgstr "Спроба відкрити отриманий файл завершилася невдало"
-
-#: kmymoney/misc/webpricequote.cpp:388
-#, kde-format
-msgctxt "Executing 'script' 'online source' 'investment symbol' "
-msgid "Executing %1 %2 %3..."
-msgstr "Виконання %1 %2 %3…"
-
-#: kmymoney/misc/webpricequote.cpp:426
-#, kde-format
-msgid "Unable to update price for %1"
-msgstr "Не вдалося оновити ціну для %1"
-
-#: kmymoney/misc/webpricequote.cpp:460
-#, kde-format
-msgid "Identifier found: '%1'"
-msgstr "Знайдено ідентифікатор: «%1»"
-
-#: kmymoney/misc/webpricequote.cpp:501
-#, kde-format
-msgid "Price found: '%1' (%2)"
-msgstr "Знайдено ціну: «%1» (%2)"
-
-#: kmymoney/misc/webpricequote.cpp:512
-#, kde-format
-msgid "Date found: '%1'"
-msgstr "Знайдено дату: «%1»"
-
-#: kmymoney/misc/webpricequote.cpp:523
-#, kde-format
-msgid "Unable to update price for %1 (no price or no date)"
-msgstr "Не вдалося оновити ціну для %1 (не вказано ціни або дати)"
-
-#: kmymoney/misc/webpricequote.cpp:527
-#, kde-format
-msgid "Unable to update price for %1 (empty quote data)"
-msgstr "Не вдалося оновити ціну для %1 (порожні дані щодо курсу)"
-
-#: kmymoney/misc/webpricequote.cpp:530
-#, kde-format
-msgid "Unable to update price for %1 (error encountered: '%2')"
-msgstr "Не вдалося оновити ціну %1 (сталася помилка: «%2»)"
 
 #: kmymoney/models/accountsproxymodel.cpp:601
 #, kde-format
@@ -6487,7 +6320,7 @@ msgid "Last Price Update"
 msgstr "Останнє оновлення ціни"
 
 #: kmymoney/models/equitiesmodel.cpp:540
-#: kmymoney/widgets/columnselector.cpp:221
+#: kmymoney/widgets/columnselector.cpp:219
 #, kde-format
 msgid "Displayed columns"
 msgstr "Показані стовпчики"
@@ -6669,74 +6502,74 @@ msgctxt "Account type"
 msgid "Unknown"
 msgstr "Невідомий"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:1269 kmymoney/mymoney/mymoneyfile.cpp:1270
+#: kmymoney/mymoney/mymoneyfile.cpp:1273 kmymoney/mymoney/mymoneyfile.cpp:1274
 #, kde-format
 msgid "Loan payout"
 msgstr "Сплата за кредитом"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2411 kmymoney/mymoney/mymoneyfile.cpp:2440
-#: kmymoney/mymoney/mymoneyfile.cpp:2459 kmymoney/mymoney/mymoneyfile.cpp:2473
-#: kmymoney/mymoney/mymoneyfile.cpp:2497 kmymoney/mymoney/mymoneyfile.cpp:2518
-#: kmymoney/mymoney/mymoneyfile.cpp:2538
+#: kmymoney/mymoney/mymoneyfile.cpp:2415 kmymoney/mymoney/mymoneyfile.cpp:2444
+#: kmymoney/mymoney/mymoneyfile.cpp:2463 kmymoney/mymoney/mymoneyfile.cpp:2477
+#: kmymoney/mymoney/mymoneyfile.cpp:2501 kmymoney/mymoney/mymoneyfile.cpp:2522
+#: kmymoney/mymoney/mymoneyfile.cpp:2542
 #, kde-format
 msgid "* Problem with account '%1'"
 msgstr "* Проблема з рахунком «%1»"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2412
+#: kmymoney/mymoney/mymoneyfile.cpp:2416
 #, kde-format
 msgid "  * Loop detected between this account and account '%1'."
 msgstr ""
 "  * Між цим рахунком та рахунком «%1» зафіксовано циклічне пересилання "
 "грошей."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2413
+#: kmymoney/mymoney/mymoneyfile.cpp:2417
 #, kde-format
 msgid "    Reparenting account '%2' to top level account '%1'."
 msgstr "    Зміна батьківського рахунку для «%2» на рахунок вищого рівня «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2445
+#: kmymoney/mymoney/mymoneyfile.cpp:2449
 #, kde-format
 msgid "  * Parent account '%1' belongs to a different group."
 msgstr "  * Батьківський рахунок «%1» належить до іншої групи."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2446 kmymoney/mymoney/mymoneyfile.cpp:2476
+#: kmymoney/mymoney/mymoneyfile.cpp:2450 kmymoney/mymoney/mymoneyfile.cpp:2480
 #, kde-format
 msgid "    New parent account is the top level account '%1'."
 msgstr "    Новий батьківський рахунок є рахунком вищого рівня «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2462
+#: kmymoney/mymoney/mymoneyfile.cpp:2466
 #, kde-format
 msgid "  * Parent account '%1' does not contain '%2' as sub-account."
 msgstr "  * У батьківському рахунку «%1» не міститься підлеглого рахунку «%2»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2475
+#: kmymoney/mymoney/mymoneyfile.cpp:2479
 #, kde-format
 msgid "  * The parent with id %1 does not exist anymore."
 msgstr "  * Батьківського рахунку %1 більше не існує."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2499
+#: kmymoney/mymoney/mymoneyfile.cpp:2503
 #, kde-format
 msgid "  * Child account with id %1 does not exist anymore."
 msgstr "  * Дочірнього рахунку з ідентифікатором %1 більше не існує."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2500
+#: kmymoney/mymoney/mymoneyfile.cpp:2504
 #, kde-format
 msgid "    The child account list will be reconstructed."
 msgstr "    Список дочірніх рахунків буде перебудовано."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2520
+#: kmymoney/mymoney/mymoneyfile.cpp:2524
 #, kde-format
 msgid "  * The payee with id %1 referenced by the loan does not exist anymore."
 msgstr ""
 "  * Запису отримувача з ідентифікатором %1, посилання на який виявлено у "
 "записі кредиту, більше не існує."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2521
+#: kmymoney/mymoney/mymoneyfile.cpp:2525
 #, kde-format
 msgid "    The payee will be removed."
 msgstr "    Запис отримувача буде вилучено."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2540
+#: kmymoney/mymoney/mymoneyfile.cpp:2544
 #, kde-format
 msgid ""
 "  * Older versions of KMyMoney stored an OFX password for this account in "
@@ -6745,7 +6578,7 @@ msgstr ""
 "  * Старіші версії KMyMoney зберігали пароль OFX для цього рахунку у форматі "
 "звичайного тексту."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2541
+#: kmymoney/mymoney/mymoneyfile.cpp:2545
 #, kde-format
 msgid ""
 "    Please open it in the account editor (Account/Edit account) once and "
@@ -6754,7 +6587,7 @@ msgstr ""
 "    Будь ласка, відкрийте редактор рахунків (Рахунок/Редагувати рахунок) і "
 "натисніть кнопку «Гаразд»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2542
+#: kmymoney/mymoney/mymoneyfile.cpp:2546
 #, kde-format
 msgid ""
 "    This will store the password in the KDE wallet and remove the cleartext "
@@ -6763,53 +6596,53 @@ msgstr ""
 "    Після цього пароль буде збережено торбинкою паролів KDE, версію у "
 "форматі звичайного тексту буде вилучено."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2552
+#: kmymoney/mymoney/mymoneyfile.cpp:2556
 #, kde-format
 msgid "  * Unable to update account data in engine."
 msgstr "  * Не вдалося оновити дані рахунку у рушії."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2559
+#: kmymoney/mymoney/mymoneyfile.cpp:2563
 #, kde-format
 msgid "* Reconstructing the child lists for"
 msgstr "* Перебудова списку дочірніх рахунків для"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2592
+#: kmymoney/mymoney/mymoneyfile.cpp:2596
 #, kde-format
 msgid "  * Unable to update account data for account %1 in engine"
 msgstr "  * Не вдалося оновити дані рахунку для рахунку %1 у рушії"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2610
+#: kmymoney/mymoney/mymoneyfile.cpp:2614
 #, kde-format
 msgid "  * Payee %1 recreated with fixed id"
 msgstr ""
 "  * Запис отримувача %1 повторно створено з виправленим ідентифікатором"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2638
+#: kmymoney/mymoney/mymoneyfile.cpp:2642
 #, kde-format
 msgid "* Problems with transactions"
 msgstr "* Проблеми з операціями"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2649
+#: kmymoney/mymoney/mymoneyfile.cpp:2653
 #, kde-format
 msgid "  * Removed unused match information from transaction '%1'."
 msgstr "  * Вилучено невикористані дані щодо відповідності для операції «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2656
+#: kmymoney/mymoney/mymoneyfile.cpp:2660
 #, kde-format
 msgid "  * Sum of splits in transaction '%1' posted on %2 is not zero."
 msgstr "  * Сума дроблень в операції «%1», яку зараховано %2, не є нульовою."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2662
+#: kmymoney/mymoney/mymoneyfile.cpp:2666
 #, kde-format
 msgid "    Account: %1, Amount: %2"
 msgstr "    Рахунок: %1, сума: %2"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2673
+#: kmymoney/mymoney/mymoneyfile.cpp:2677
 #, kde-format
 msgid "  * Payee id updated in split of transaction '%1'."
 msgstr "  * Оновлено ідентифікатор отримувача у дробленні операції «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2695
+#: kmymoney/mymoney/mymoneyfile.cpp:2699
 #, kde-format
 msgid ""
 "  * Opening date of Account '%1' cannot be changed to support transaction "
@@ -6818,7 +6651,7 @@ msgstr ""
 "  * Дату відкриття рахунку «%1» не можна змінити, оскільки вона не "
 "відповідає дані переказу «%2»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2703
+#: kmymoney/mymoney/mymoneyfile.cpp:2707
 #, kde-format
 msgid ""
 "  * Transaction '%1' post date '%2' is older than opening date '%4' of "
@@ -6826,22 +6659,22 @@ msgid ""
 msgstr ""
 "  * Дата переказу «%1», «%2» є давнішою за дату відкриття «%4» рахунку «%3»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2708
+#: kmymoney/mymoney/mymoneyfile.cpp:2712
 #, kde-format
 msgid "    Account opening date updated."
 msgstr "    Оновлено дату відкриття рахунку."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2722
+#: kmymoney/mymoney/mymoneyfile.cpp:2726
 #, kde-format
 msgid "  * shares set to value in split of transaction '%1'."
 msgstr "  * У дробленні операції «%1» акції встановлено у значення."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2725
+#: kmymoney/mymoney/mymoneyfile.cpp:2729
 #, kde-format
 msgid "  * value set to shares in split of transaction '%1'."
 msgstr "  * У дробленні операції «%1» значення встановлено у акціях."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2734
+#: kmymoney/mymoney/mymoneyfile.cpp:2738
 #, kde-format
 msgid ""
 "  * Split %2 in transaction '%1' contains different signs for shares and "
@@ -6850,7 +6683,7 @@ msgstr ""
 "  * Дроблення %2 у операції «%1» містить різні знаки для акцій і ціни. Будь "
 "ласка, виправте помилку вручну."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2746
+#: kmymoney/mymoney/mymoneyfile.cpp:2750
 #, kde-format
 msgid ""
 "  * Split %2 in transaction '%1' contains a reference to invalid account %3. "
@@ -6859,22 +6692,22 @@ msgstr ""
 "  * Дроблення %2 у операції «%1» містить посилання на некоректний рахунок "
 "%3. Будь ласка, виправте помилку вручну."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2755
+#: kmymoney/mymoney/mymoneyfile.cpp:2759
 #, kde-format
 msgid "  * action marked as interest in split of transaction '%1'."
 msgstr "  * дія, позначена як відсоткова у дроблені операції «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2769
+#: kmymoney/mymoney/mymoneyfile.cpp:2773
 #, kde-format
 msgid "  * Transaction '%1' has an invalid post date."
 msgstr "  * Для операції «%1» вказано некоректне датування."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2770
+#: kmymoney/mymoney/mymoneyfile.cpp:2774
 #, kde-format
 msgid "    The post date was updated to '%1'."
 msgstr "    Дату оновлено до «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2804
+#: kmymoney/mymoney/mymoneyfile.cpp:2808
 #, kde-format
 msgid ""
 "  * Transaction '%1' has a post date '%2' before one of the referenced "
@@ -6883,22 +6716,22 @@ msgstr ""
 "  * Переказ «%1» має дату «%2» до дати, яка вважається датою відкриття "
 "рахунку."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2807
+#: kmymoney/mymoney/mymoneyfile.cpp:2811
 #, kde-format
 msgid "    Referenced accounts: %1"
 msgstr "    Пов'язані рахунки: %1"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2808
+#: kmymoney/mymoney/mymoneyfile.cpp:2812
 #, kde-format
 msgid "    The post date was not updated to '%1'."
 msgstr "    Дату не було оновлено до «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2834
+#: kmymoney/mymoney/mymoneyfile.cpp:2838
 #, kde-format
 msgid "  * Payee id updated in split of schedule '%1'."
 msgstr "  * Оновлено ідентифікатор отримувача у дробленні розкладу «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2840
+#: kmymoney/mymoney/mymoneyfile.cpp:2844
 #, kde-format
 msgid ""
 "  * Split in scheduled transaction '%1' contained value != 0 and shares == 0."
@@ -6906,28 +6739,28 @@ msgstr ""
 "  * Дроблення у запланованій операції «%1» містить значення != 0 і акції == "
 "0."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2841
+#: kmymoney/mymoney/mymoneyfile.cpp:2845
 #, kde-format
 msgid "    Shares set to value."
 msgstr "    Акції встановлено у вартість."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2849
+#: kmymoney/mymoney/mymoneyfile.cpp:2853
 #, kde-format
 msgid "  * Removed bankid from split in scheduled transaction '%1'."
 msgstr ""
 "  * Вилучено ідентифікатор банку з дроблення у спланованій операції «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2862
+#: kmymoney/mymoney/mymoneyfile.cpp:2866
 #, kde-format
 msgid "  * shares set to value in split in schedule '%1'."
 msgstr "  * Акції встановлено у вартість у дробленні розкладу «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2865
+#: kmymoney/mymoney/mymoneyfile.cpp:2869
 #, kde-format
 msgid "  * value set to shares in split in schedule '%1'."
 msgstr "  * Вартість встановлено у акції у дробленні розкладу «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2871
+#: kmymoney/mymoney/mymoneyfile.cpp:2875
 #, kde-format
 msgid ""
 "  * Split %2 in schedule '%1' contains a reference to invalid account %3. "
@@ -6936,28 +6769,28 @@ msgstr ""
 "  * Дроблення %2 у розкладі «%1» містить посилання на некоректний рахунок "
 "%3. Будь ласка, виправте помилку вручну."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2880
+#: kmymoney/mymoney/mymoneyfile.cpp:2884
 #, kde-format
 msgid "  * Imported flag removed from schedule '%1'"
 msgstr "  * Вилучено прапорець імпортованого із розкладу «%1»"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2900
+#: kmymoney/mymoney/mymoneyfile.cpp:2904
 #, kde-format
 msgid "  * Payee id updated in report '%1'."
 msgstr "  * У звіті «%1» оновлено ідентифікатор отримувача."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2917
+#: kmymoney/mymoney/mymoneyfile.cpp:2921
 #, kde-format
 msgid "  * Payee '%1' removed."
 msgstr "  * Вилучено отримувача «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2991
+#: kmymoney/mymoney/mymoneyfile.cpp:2995
 #, kde-format
 msgctxt "@info consistency check"
 msgid "* Potential problem with securities/currencies"
 msgstr "* Потенційна проблема з цінними паперами/валютами"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:2996
+#: kmymoney/mymoney/mymoneyfile.cpp:3000
 #, kde-format
 msgctxt "@info consistency check"
 msgid ""
@@ -6967,13 +6800,13 @@ msgstr ""
 "  *Для рахунку «%1» у валюті «%2» не встановлено курсу валюти на дату його "
 "першого використання, «%3»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3001
+#: kmymoney/mymoney/mymoneyfile.cpp:3005
 #, kde-format
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the currency on or before '%1'."
 msgstr "     Будь ласка, вкажіть курс на час або до дати «%1»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3006
+#: kmymoney/mymoney/mymoneyfile.cpp:3010
 #, kde-format
 msgctxt "@info consistency check"
 msgid "  * The security '%1' has no price set for the first use on '%2'."
@@ -6981,7 +6814,7 @@ msgstr ""
 "  *Для цінного паперу «%1» не встановлено ціни на дату першого використання, "
 "«%2»."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3017
+#: kmymoney/mymoney/mymoneyfile.cpp:3021
 #, kde-format
 msgctxt "@info consistency check"
 msgid ""
@@ -6991,19 +6824,19 @@ msgstr ""
 "    Ціну цінного паперу було видобуто з даних переказу і додано до журналу "
 "цін."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3020
+#: kmymoney/mymoney/mymoneyfile.cpp:3024
 #, kde-format
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the security on or before this date."
 msgstr ""
 "     Будь ласка, вкажіть курс цінного паперу на час цієї дати або до неї."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3042
+#: kmymoney/mymoney/mymoneyfile.cpp:3046
 #, kde-format
 msgid "* Problem with budget '%1'"
 msgstr "* Проблема з бюджетом «%1»"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3044
+#: kmymoney/mymoney/mymoneyfile.cpp:3048
 #, kde-format
 msgid ""
 "  * The account with id %1 referenced by the budget does not exist anymore."
@@ -7011,17 +6844,17 @@ msgstr ""
 "  * Запису рахунку з ідентифікатором %1, посилання на який виявлено у записі "
 "бюджету, більше не існує."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3045
+#: kmymoney/mymoney/mymoneyfile.cpp:3049
 #, kde-format
 msgid "    The account reference will be removed."
 msgstr "    Посилання на запис рахунку буде вилучено."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3059
+#: kmymoney/mymoney/mymoneyfile.cpp:3063
 #, kde-format
 msgid "Finished: data is consistent."
 msgstr "Завершено. Дані є коректними."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3061
+#: kmymoney/mymoney/mymoneyfile.cpp:3065
 #, kde-format
 msgid "%1 problem corrected."
 msgid_plural "%1 problems corrected."
@@ -7030,7 +6863,7 @@ msgstr[1] "Виправлено %1 помилки."
 msgstr[2] "Виправлено %1 помилок."
 msgstr[3] "Виправлено %1 помилку."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3062
+#: kmymoney/mymoney/mymoneyfile.cpp:3066
 #, kde-format
 msgid "%1 problem still present."
 msgid_plural "%1 problems still present."
@@ -7039,7 +6872,7 @@ msgstr[1] "Не виправлено %1 помилки."
 msgstr[2] "Не виправлено %1 помилок."
 msgstr[3] "Не виправлено %1 помилку."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3065
+#: kmymoney/mymoney/mymoneyfile.cpp:3069
 #, kde-format
 msgctxt ""
 "%1 is a string, e.g. 7 problems corrected; %2 is a string, e.g. 3 problems "
@@ -7047,942 +6880,942 @@ msgctxt ""
 msgid "Finished: %1 %2"
 msgstr "Завершено: %1 %2"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3278
+#: kmymoney/mymoney/mymoneyfile.cpp:3282
 #, kde-format
 msgid "Austrian Schilling"
 msgstr "Австрійський шилінг"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3280
+#: kmymoney/mymoney/mymoneyfile.cpp:3284
 #, kde-format
 msgid "German Mark"
 msgstr "Німецька марка"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3282
+#: kmymoney/mymoney/mymoneyfile.cpp:3286
 #, kde-format
 msgid "French Franc"
 msgstr "Французький франк"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3284
+#: kmymoney/mymoney/mymoneyfile.cpp:3288
 #, kde-format
 msgid "Italian Lira"
 msgstr "Італійська ліра"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3286
+#: kmymoney/mymoney/mymoneyfile.cpp:3290
 #, kde-format
 msgid "Spanish Peseta"
 msgstr "Іспанська песета"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3288
+#: kmymoney/mymoney/mymoneyfile.cpp:3292
 #, kde-format
 msgid "Dutch Guilder"
 msgstr "Голландський гульден"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3290
+#: kmymoney/mymoney/mymoneyfile.cpp:3294
 #, kde-format
 msgid "Belgian Franc"
 msgstr "Бельгійський франк"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3292
+#: kmymoney/mymoney/mymoneyfile.cpp:3296
 #, kde-format
 msgid "Luxembourg Franc"
 msgstr "Люксембурзький франк"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3294
+#: kmymoney/mymoney/mymoneyfile.cpp:3298
 #, kde-format
 msgid "Portuguese Escudo"
 msgstr "Португальське ескудо"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3296
+#: kmymoney/mymoney/mymoneyfile.cpp:3300
 #, kde-format
 msgid "Irish Pound"
 msgstr "ірландський фунт"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3298
+#: kmymoney/mymoney/mymoneyfile.cpp:3302
 #, kde-format
 msgid "Finnish Markka"
 msgstr "Фінська марка"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3300
+#: kmymoney/mymoney/mymoneyfile.cpp:3304
 #, kde-format
 msgid "Greek Drachma"
 msgstr "Грецька драхма"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3304
+#: kmymoney/mymoney/mymoneyfile.cpp:3308
 #, kde-format
 msgid "Bulgarian Lev"
 msgstr "Болгарський лев"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3307
+#: kmymoney/mymoney/mymoneyfile.cpp:3311
 #, kde-format
 msgid "Romanian Leu"
 msgstr "Румунська лея"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3310
+#: kmymoney/mymoney/mymoneyfile.cpp:3314
 #, kde-format
 msgid "Russian Ruble (old)"
 msgstr "Російський старий рубль"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3313
+#: kmymoney/mymoney/mymoneyfile.cpp:3317
 #, kde-format
 msgid "Slovenian Tolar"
 msgstr "Словенський толар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3317
+#: kmymoney/mymoney/mymoneyfile.cpp:3321
 #, kde-format
 msgid "Turkish Lira (old)"
 msgstr "Турецька стара ліра"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3321
+#: kmymoney/mymoney/mymoneyfile.cpp:3325
 #, kde-format
 msgid "Maltese Lira"
 msgstr "Мальтійська ліра"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3323
+#: kmymoney/mymoney/mymoneyfile.cpp:3327
 #, kde-format
 msgid "Cyprus Pound"
 msgstr "Кіпрський фунт"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3327
+#: kmymoney/mymoney/mymoneyfile.cpp:3331
 #, kde-format
 msgid "Slovak Koruna"
 msgstr "Словацька крона"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3331 kmymoney/mymoney/mymoneyfile.cpp:3459
+#: kmymoney/mymoney/mymoneyfile.cpp:3335 kmymoney/mymoney/mymoneyfile.cpp:3463
 #, kde-format
 msgid "Mozambique Metical"
 msgstr "Метікал Мозамбіку"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3335 kmymoney/mymoney/mymoneyfile.cpp:3371
+#: kmymoney/mymoney/mymoneyfile.cpp:3339 kmymoney/mymoney/mymoneyfile.cpp:3375
 #, kde-format
 msgid "Azerbaijani Manat"
 msgstr "Азербайджанський манат"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3339
+#: kmymoney/mymoney/mymoneyfile.cpp:3343
 #, kde-format
 msgid "Lithuanian Litas"
 msgstr "Литовський лит"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3343
+#: kmymoney/mymoney/mymoneyfile.cpp:3347
 #, kde-format
 msgid "Belarusian Ruble (old)"
 msgstr "Білоруський рубль (старий)"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3347
+#: kmymoney/mymoney/mymoneyfile.cpp:3351
 #, kde-format
 msgid "Zambian Kwacha (old)"
 msgstr "Замбійська квача (стара)"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3351
+#: kmymoney/mymoney/mymoneyfile.cpp:3355
 #, kde-format
 msgid "Croatian Kuna"
 msgstr "Хорватська куна"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3361
+#: kmymoney/mymoney/mymoneyfile.cpp:3365
 #, kde-format
 msgid "Afghanistan Afghani"
 msgstr "Афганське афгані"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3362
+#: kmymoney/mymoney/mymoneyfile.cpp:3366
 #, kde-format
 msgid "Albanian Lek"
 msgstr "Албанський лек"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3363
+#: kmymoney/mymoney/mymoneyfile.cpp:3367
 #, kde-format
 msgid "Netherland Antillian Guilder"
 msgstr "Гульден Нідерландських Антильських Островів"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3364
+#: kmymoney/mymoney/mymoneyfile.cpp:3368
 #, kde-format
 msgid "Algerian Dinar"
 msgstr "Алжирський динар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3365
+#: kmymoney/mymoney/mymoneyfile.cpp:3369
 #, kde-format
 msgid "Andorran Franc"
 msgstr "Андоррський франк"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3366
+#: kmymoney/mymoney/mymoneyfile.cpp:3370
 #, kde-format
 msgid "Andorran Peseta"
 msgstr "Андоррська песета"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3367
+#: kmymoney/mymoney/mymoneyfile.cpp:3371
 #, kde-format
 msgid "Angolan Kwanza"
 msgstr "Ангольська кванза"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3368
+#: kmymoney/mymoney/mymoneyfile.cpp:3372
 #, kde-format
 msgid "Argentine Peso"
 msgstr "Аргентинське песо"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3369
+#: kmymoney/mymoney/mymoneyfile.cpp:3373
 #, kde-format
 msgid "Aruban Florin"
 msgstr "Гульден Аруби"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3370
+#: kmymoney/mymoney/mymoneyfile.cpp:3374
 #, kde-format
 msgid "Australian Dollar"
 msgstr "Австралійський долар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3372
+#: kmymoney/mymoney/mymoneyfile.cpp:3376
 #, kde-format
 msgid "Bahamian Dollar"
 msgstr "Багамський долар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3373
+#: kmymoney/mymoney/mymoneyfile.cpp:3377
 #, kde-format
 msgid "Bahraini Dinar"
 msgstr "Бахрейнський динар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3374
+#: kmymoney/mymoney/mymoneyfile.cpp:3378
 #, kde-format
 msgid "Bangladeshi Taka"
 msgstr "Бангладешська така"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3375
+#: kmymoney/mymoney/mymoneyfile.cpp:3379
 #, kde-format
 msgid "Barbados Dollar"
 msgstr "Барбадоський долар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3376
+#: kmymoney/mymoney/mymoneyfile.cpp:3380
 #, kde-format
 msgid "Bitcoin"
 msgstr "Біткойн"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3377
+#: kmymoney/mymoney/mymoneyfile.cpp:3381
 #, kde-format
 msgid "Belarusian Ruble"
 msgstr "Білоруський рубль"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3378
+#: kmymoney/mymoney/mymoneyfile.cpp:3382
 #, kde-format
 msgid "Belize Dollar"
 msgstr "Белізький долар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3379
+#: kmymoney/mymoney/mymoneyfile.cpp:3383
 #, kde-format
 msgid "Bermudian Dollar"
 msgstr "Бермудський долар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3380
+#: kmymoney/mymoney/mymoneyfile.cpp:3384
 #, kde-format
 msgid "Bhutan Ngultrum"
 msgstr "Бутанський нгултрум"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3381
+#: kmymoney/mymoney/mymoneyfile.cpp:3385
 #, kde-format
 msgid "Bolivian Boliviano"
 msgstr "Болівійське болівіано"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3382
+#: kmymoney/mymoney/mymoneyfile.cpp:3386
 #, kde-format
 msgid "Bosnian Convertible Mark"
 msgstr "Боснійська конвертована марка"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3383
+#: kmymoney/mymoney/mymoneyfile.cpp:3387
 #, kde-format
 msgid "Botswana Pula"
 msgstr "Пула Ботсвани"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3384
+#: kmymoney/mymoney/mymoneyfile.cpp:3388
 #, kde-format
 msgid "Brazilian Real"
 msgstr "Бразильський реал"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3385
+#: kmymoney/mymoney/mymoneyfile.cpp:3389
 #, kde-format
 msgid "British Pound"
 msgstr "Британський фунт"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3386
+#: kmymoney/mymoney/mymoneyfile.cpp:3390
 #, kde-format
 msgid "Brunei Dollar"
 msgstr "Брунейський долар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3387
+#: kmymoney/mymoney/mymoneyfile.cpp:3391
 #, kde-format
 msgid "Bulgarian Lev (new)"
 msgstr "Болгарський лев (новий)"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3388
+#: kmymoney/mymoney/mymoneyfile.cpp:3392
 #, kde-format
 msgid "Burundi Franc"
 msgstr "Бурундійський франк"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3389
+#: kmymoney/mymoney/mymoneyfile.cpp:3393
 #, kde-format
 msgid "CFA Franc BEAC"
 msgstr "Франк CFA BEAC"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3390
+#: kmymoney/mymoney/mymoneyfile.cpp:3394
 #, kde-format
 msgid "CFA Franc BCEAO"
 msgstr "Франк CFA BCEAO"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3391
+#: kmymoney/mymoney/mymoneyfile.cpp:3395
 #, kde-format
 msgid "CFP Franc Pacifique"
 msgstr "Тихоокеанський франк CFP"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3392
+#: kmymoney/mymoney/mymoneyfile.cpp:3396
 #, kde-format
 msgid "Cambodia Riel"
 msgstr "Камбоджійський ріель"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3393
+#: kmymoney/mymoney/mymoneyfile.cpp:3397
 #, kde-format
 msgid "Canadian Dollar"
 msgstr "Канадський долар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3394
+#: kmymoney/mymoney/mymoneyfile.cpp:3398
 #, kde-format
 msgid "Cape Verde Escudo"
 msgstr "Ескудо Кабо-Верде"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3395
+#: kmymoney/mymoney/mymoneyfile.cpp:3399
 #, kde-format
 msgid "Cayman Islands Dollar"
 msgstr "Долар Кайманових островів"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3396
+#: kmymoney/mymoney/mymoneyfile.cpp:3400
 #, kde-format
 msgid "Chilean Peso"
 msgstr "Чилійське песо"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3397
+#: kmymoney/mymoney/mymoneyfile.cpp:3401
 #, kde-format
 msgid "Chinese Yuan Renminbi"
 msgstr "Китайський юань"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3398
+#: kmymoney/mymoney/mymoneyfile.cpp:3402
 #, kde-format
 msgid "Colombian Peso"
 msgstr "Колумбійське песо"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3399
+#: kmymoney/mymoney/mymoneyfile.cpp:3403
 #, kde-format
 msgid "Comoros Franc"
 msgstr "Франк Коморських островів"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3400
+#: kmymoney/mymoney/mymoneyfile.cpp:3404
 #, kde-format
 msgid "Costa Rican Colon"
 msgstr "Костариканський колон"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3401
+#: kmymoney/mymoney/mymoneyfile.cpp:3405
 #, kde-format
 msgid "Cuban Peso"
 msgstr "Кубинське песо"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3402
+#: kmymoney/mymoney/mymoneyfile.cpp:3406
 #, kde-format
 msgid "Cuban Convertible Peso"
 msgstr "Кубинське конвертоване песо"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3403
+#: kmymoney/mymoney/mymoneyfile.cpp:3407
 #, kde-format
 msgid "Czech Koruna"
 msgstr "Чеська крона"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3404
+#: kmymoney/mymoney/mymoneyfile.cpp:3408
 #, kde-format
 msgid "Danish Krone"
 msgstr "Данська крона"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3405
+#: kmymoney/mymoney/mymoneyfile.cpp:3409
 #, kde-format
 msgid "Djibouti Franc"
 msgstr "Франк Джибуті"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3406
+#: kmymoney/mymoney/mymoneyfile.cpp:3410
 #, kde-format
 msgid "Dominican Peso"
 msgstr "Домініканське песо"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3407
+#: kmymoney/mymoney/mymoneyfile.cpp:3411
 #, kde-format
 msgid "East Caribbean Dollar"
 msgstr "Східно-карибський долар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3408
+#: kmymoney/mymoney/mymoneyfile.cpp:3412
 #, kde-format
 msgid "Egyptian Pound"
 msgstr "Єгипетський фунт"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3409
+#: kmymoney/mymoney/mymoneyfile.cpp:3413
 #, kde-format
 msgid "El Salvador Colon"
 msgstr "Сальвадорський колон"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3410
+#: kmymoney/mymoney/mymoneyfile.cpp:3414
 #, kde-format
 msgid "Eritrean Nakfa"
 msgstr "Еритрейська накфа"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3411
+#: kmymoney/mymoney/mymoneyfile.cpp:3415
 #, kde-format
 msgid "Estonian Kroon"
 msgstr "Естонська крона"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3412
+#: kmymoney/mymoney/mymoneyfile.cpp:3416
 #, kde-format
 msgid "Ethiopian Birr"
 msgstr "Ефіопський бир"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3413
+#: kmymoney/mymoney/mymoneyfile.cpp:3417
 #, kde-format
 msgid "Euro"
 msgstr "Євро"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3414
+#: kmymoney/mymoney/mymoneyfile.cpp:3418
 #, kde-format
 msgid "Falkland Islands Pound"
 msgstr "Фунт Фолклендських островів"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3415
+#: kmymoney/mymoney/mymoneyfile.cpp:3419
 #, kde-format
 msgid "Fiji Dollar"
 msgstr "Фіджийський долар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3416
+#: kmymoney/mymoney/mymoneyfile.cpp:3420
 #, kde-format
 msgid "Gambian Dalasi"
 msgstr "Гамбійський даласі"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3417
+#: kmymoney/mymoney/mymoneyfile.cpp:3421
 #, kde-format
 msgid "Georgian Lari"
 msgstr "Грузинське ларі"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3418
+#: kmymoney/mymoney/mymoneyfile.cpp:3422
 #, kde-format
 msgid "Ghanaian Cedi"
 msgstr "Ганійське седі"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3419
+#: kmymoney/mymoney/mymoneyfile.cpp:3423
 #, kde-format
 msgid "Gibraltar Pound"
 msgstr "Гібралтарський фунт"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3420
+#: kmymoney/mymoney/mymoneyfile.cpp:3424
 #, kde-format
 msgid "Guatemalan Quetzal"
 msgstr "Гватемальський кетцаль"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3421
+#: kmymoney/mymoney/mymoneyfile.cpp:3425
 #, kde-format
 msgid "Guinea-Bissau Peso"
 msgstr "Песо Гвінеї-Бісау"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3422
+#: kmymoney/mymoney/mymoneyfile.cpp:3426
 #, kde-format
 msgid "Guyanan Dollar"
 msgstr "Гаянський долар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3423
+#: kmymoney/mymoney/mymoneyfile.cpp:3427
 #, kde-format
 msgid "Haitian Gourde"
 msgstr "Гаїтянський гурд "
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3424
+#: kmymoney/mymoney/mymoneyfile.cpp:3428
 #, kde-format
 msgid "Honduran Lempira"
 msgstr "Гондураська лемпіра"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3425
+#: kmymoney/mymoney/mymoneyfile.cpp:3429
 #, kde-format
 msgid "Hong Kong Dollar"
 msgstr "Гонконгський долар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3426
+#: kmymoney/mymoney/mymoneyfile.cpp:3430
 #, kde-format
 msgid "Hungarian Forint"
 msgstr "Угорський форинт"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3427
+#: kmymoney/mymoney/mymoneyfile.cpp:3431
 #, kde-format
 msgid "Iceland Krona"
 msgstr "Ісландська крона"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3428
+#: kmymoney/mymoney/mymoneyfile.cpp:3432
 #, kde-format
 msgid "Indian Rupee"
 msgstr "Індійська рупія"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3429
+#: kmymoney/mymoney/mymoneyfile.cpp:3433
 #, kde-format
 msgid "Indonesian Rupiah"
 msgstr "Індонезійська рупія"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3430
+#: kmymoney/mymoney/mymoneyfile.cpp:3434
 #, kde-format
 msgid "Iranian Rial"
 msgstr "Іранський ріал"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3431
+#: kmymoney/mymoney/mymoneyfile.cpp:3435
 #, kde-format
 msgid "Iraqi Dinar"
 msgstr "Іракський динар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3432
+#: kmymoney/mymoney/mymoneyfile.cpp:3436
 #, kde-format
 msgid "Israeli New Shekel"
 msgstr "Ізраїльський новий шекель"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3433
+#: kmymoney/mymoney/mymoneyfile.cpp:3437
 #, kde-format
 msgid "Jamaican Dollar"
 msgstr "Ямайський долар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3434
+#: kmymoney/mymoney/mymoneyfile.cpp:3438
 #, kde-format
 msgid "Japanese Yen"
 msgstr "Японська єна"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3435
+#: kmymoney/mymoney/mymoneyfile.cpp:3439
 #, kde-format
 msgid "Jordanian Dinar"
 msgstr "Йорданський динар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3436
+#: kmymoney/mymoney/mymoneyfile.cpp:3440
 #, kde-format
 msgid "Kazakhstan Tenge"
 msgstr "Казахське тенґе"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3437
+#: kmymoney/mymoney/mymoneyfile.cpp:3441
 #, kde-format
 msgid "Kenyan Shilling"
 msgstr "Кенійський шилінг"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3438
+#: kmymoney/mymoney/mymoneyfile.cpp:3442
 #, kde-format
 msgid "Kuwaiti Dinar"
 msgstr "Кувейтський динар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3439
+#: kmymoney/mymoney/mymoneyfile.cpp:3443
 #, kde-format
 msgid "Kyrgyzstan Som"
 msgstr "Киргизький сом"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3440
+#: kmymoney/mymoney/mymoneyfile.cpp:3444
 #, kde-format
 msgid "Laos Kip"
 msgstr "Лаоський кіп"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3441
+#: kmymoney/mymoney/mymoneyfile.cpp:3445
 #, kde-format
 msgid "Latvian Lats"
 msgstr "Латвійський лат"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3442
+#: kmymoney/mymoney/mymoneyfile.cpp:3446
 #, kde-format
 msgid "Lebanese Pound"
 msgstr "Ліванський фунт"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3443
+#: kmymoney/mymoney/mymoneyfile.cpp:3447
 #, kde-format
 msgid "Lesotho Loti"
 msgstr "Лесотське лоті"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3444
+#: kmymoney/mymoney/mymoneyfile.cpp:3448
 #, kde-format
 msgid "Liberian Dollar"
 msgstr "Ліберійський долар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3445
+#: kmymoney/mymoney/mymoneyfile.cpp:3449
 #, kde-format
 msgid "Libyan Dinar"
 msgstr "Лівійський динар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3446
+#: kmymoney/mymoney/mymoneyfile.cpp:3450
 #, kde-format
 msgid "Macau Pataca"
 msgstr "Патака Макао"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3447
+#: kmymoney/mymoney/mymoneyfile.cpp:3451
 #, kde-format
 msgid "Macedonian Denar"
 msgstr "Македонський денар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3448
+#: kmymoney/mymoney/mymoneyfile.cpp:3452
 #, kde-format
 msgid "Malagasy Franc"
 msgstr "Малагасійський франк"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3449
+#: kmymoney/mymoney/mymoneyfile.cpp:3453
 #, kde-format
 msgid "Malawi Kwacha"
 msgstr "Малавійська квача"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3450
+#: kmymoney/mymoney/mymoneyfile.cpp:3454
 #, kde-format
 msgid "Malaysian Ringgit"
 msgstr "Малайзійський рінгіт"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3451
+#: kmymoney/mymoney/mymoneyfile.cpp:3455
 #, kde-format
 msgid "Maldive Rufiyaa"
 msgstr "Мальдівська руфія"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3452
+#: kmymoney/mymoney/mymoneyfile.cpp:3456
 #, kde-format
 msgid "Mali Republic Franc"
 msgstr "Малійський республіканський франк"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3453
+#: kmymoney/mymoney/mymoneyfile.cpp:3457
 #, kde-format
 msgid "Mauritanian Ouguiya"
 msgstr "Мавританська угія"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3454
+#: kmymoney/mymoney/mymoneyfile.cpp:3458
 #, kde-format
 msgid "Mauritius Rupee"
 msgstr "Маврикійська рупія"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3455
+#: kmymoney/mymoney/mymoneyfile.cpp:3459
 #, kde-format
 msgid "Mexican Peso"
 msgstr "Мексиканське песо"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3456
+#: kmymoney/mymoney/mymoneyfile.cpp:3460
 #, kde-format
 msgid "Moldavian Leu"
 msgstr "Молдавська лея"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3457
+#: kmymoney/mymoney/mymoneyfile.cpp:3461
 #, kde-format
 msgid "Mongolian Tugrik"
 msgstr "Монгольський тугрик"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3458
+#: kmymoney/mymoney/mymoneyfile.cpp:3462
 #, kde-format
 msgid "Moroccan Dirham"
 msgstr "Марокканський дірхам"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3460
+#: kmymoney/mymoney/mymoneyfile.cpp:3464
 #, kde-format
 msgid "Myanmar Kyat"
 msgstr "М'янмський к'ят"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3461
+#: kmymoney/mymoney/mymoneyfile.cpp:3465
 #, kde-format
 msgid "Namibian Dollar"
 msgstr "Намібійський долар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3462
+#: kmymoney/mymoney/mymoneyfile.cpp:3466
 #, kde-format
 msgid "Nepalese Rupee"
 msgstr "Непальська рупія"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3463
+#: kmymoney/mymoney/mymoneyfile.cpp:3467
 #, kde-format
 msgid "New Zealand Dollar"
 msgstr "Новозеландський долар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3464
+#: kmymoney/mymoney/mymoneyfile.cpp:3468
 #, kde-format
 msgid "Nicaraguan Cordoba Oro"
 msgstr "Нікарагуанська кордоба"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3465
+#: kmymoney/mymoney/mymoneyfile.cpp:3469
 #, kde-format
 msgid "Nigerian Naira"
 msgstr "Нігерійська найра"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3466
+#: kmymoney/mymoney/mymoneyfile.cpp:3470
 #, kde-format
 msgid "North Korean Won"
 msgstr "Північнокорейська вона"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3467
+#: kmymoney/mymoney/mymoneyfile.cpp:3471
 #, kde-format
 msgid "Norwegian Kroner"
 msgstr "Норвезька крона"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3468
+#: kmymoney/mymoney/mymoneyfile.cpp:3472
 #, kde-format
 msgid "Omani Rial"
 msgstr "Оманський ріал"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3469
+#: kmymoney/mymoney/mymoneyfile.cpp:3473
 #, kde-format
 msgid "Pakistan Rupee"
 msgstr "Пакистанська рупія"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3470
+#: kmymoney/mymoney/mymoneyfile.cpp:3474
 #, kde-format
 msgid "Panamanian Balboa"
 msgstr "Панамське бальбоа"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3471
+#: kmymoney/mymoney/mymoneyfile.cpp:3475
 #, kde-format
 msgid "Papua New Guinea Kina"
 msgstr "Кіна Папуа-Нова Гвінея"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3472
+#: kmymoney/mymoney/mymoneyfile.cpp:3476
 #, kde-format
 msgid "Paraguay Guarani"
 msgstr "Парагвайський гуарані"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3473
+#: kmymoney/mymoney/mymoneyfile.cpp:3477
 #, kde-format
 msgid "Peruvian Nuevo Sol"
 msgstr "Перуанський новий соль"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3474
+#: kmymoney/mymoney/mymoneyfile.cpp:3478
 #, kde-format
 msgid "Philippine Peso"
 msgstr "Філіппінське песо"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3475
+#: kmymoney/mymoney/mymoneyfile.cpp:3479
 #, kde-format
 msgid "Polish Zloty"
 msgstr "Польський злотий"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3476
+#: kmymoney/mymoney/mymoneyfile.cpp:3480
 #, kde-format
 msgid "Qatari Rial"
 msgstr "Катарський ріал"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3477
+#: kmymoney/mymoney/mymoneyfile.cpp:3481
 #, kde-format
 msgid "Romanian Leu (new)"
 msgstr "Румунська нова лея"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3478
+#: kmymoney/mymoney/mymoneyfile.cpp:3482
 #, kde-format
 msgid "Russian Ruble"
 msgstr "Російський рубль"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3479
+#: kmymoney/mymoney/mymoneyfile.cpp:3483
 #, kde-format
 msgid "Rwanda Franc"
 msgstr "Руандійський франк"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3480
+#: kmymoney/mymoney/mymoneyfile.cpp:3484
 #, kde-format
 msgid "Samoan Tala"
 msgstr "Самоанська тала"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3481
+#: kmymoney/mymoney/mymoneyfile.cpp:3485
 #, kde-format
 msgid "Sao Tome and Principe Dobra"
 msgstr "Добра Сан-Томе і Принсіпі"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3482
+#: kmymoney/mymoney/mymoneyfile.cpp:3486
 #, kde-format
 msgid "Saudi Riyal"
 msgstr "Саудівський ріал"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3483
+#: kmymoney/mymoney/mymoneyfile.cpp:3487
 #, kde-format
 msgid "Serbian Dinar"
 msgstr "Сербський динар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3484
+#: kmymoney/mymoney/mymoneyfile.cpp:3488
 #, kde-format
 msgid "Seychelles Rupee"
 msgstr "Сейшельська рупія"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3485
+#: kmymoney/mymoney/mymoneyfile.cpp:3489
 #, kde-format
 msgid "Sierra Leone Leone"
 msgstr "Леоне Сьєра-Леоне"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3486
+#: kmymoney/mymoney/mymoneyfile.cpp:3490
 #, kde-format
 msgid "Singapore Dollar"
 msgstr "Сінгапурський долар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3487
+#: kmymoney/mymoney/mymoneyfile.cpp:3491
 #, kde-format
 msgid "Solomon Islands Dollar"
 msgstr "Долар Соломонових островів"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3488
+#: kmymoney/mymoney/mymoneyfile.cpp:3492
 #, kde-format
 msgid "Somali Shilling"
 msgstr "Сомалійський шилінг"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3489
+#: kmymoney/mymoney/mymoneyfile.cpp:3493
 #, kde-format
 msgid "South African Rand"
 msgstr "Південноафриканський ранд"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3490
+#: kmymoney/mymoney/mymoneyfile.cpp:3494
 #, kde-format
 msgid "South Korean Won"
 msgstr "Південнокорейська вона"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3491
+#: kmymoney/mymoney/mymoneyfile.cpp:3495
 #, kde-format
 msgid "Sri Lanka Rupee"
 msgstr "Рупія Шрі-Ланки"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3492
+#: kmymoney/mymoney/mymoneyfile.cpp:3496
 #, kde-format
 msgid "St. Helena Pound"
 msgstr "Фунт острова Св. Єлени"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3493
+#: kmymoney/mymoney/mymoneyfile.cpp:3497
 #, kde-format
 msgid "Sudanese Dinar"
 msgstr "Суданський динар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3494
+#: kmymoney/mymoney/mymoneyfile.cpp:3498
 #, kde-format
 msgid "Suriname Guilder"
 msgstr "Суринамський гульден"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3495
+#: kmymoney/mymoney/mymoneyfile.cpp:3499
 #, kde-format
 msgid "Swaziland Lilangeni"
 msgstr "Свазілендське лілангені"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3496
+#: kmymoney/mymoney/mymoneyfile.cpp:3500
 #, kde-format
 msgid "Swedish Krona"
 msgstr "Шведська крона"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3497
+#: kmymoney/mymoney/mymoneyfile.cpp:3501
 #, kde-format
 msgid "Swiss Franc"
 msgstr "Швейцарський франк"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3498
+#: kmymoney/mymoney/mymoneyfile.cpp:3502
 #, kde-format
 msgid "Syrian Pound"
 msgstr "Сирійський фунт"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3499
+#: kmymoney/mymoney/mymoneyfile.cpp:3503
 #, kde-format
 msgid "Taiwan Dollar"
 msgstr "Тайванський долар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3500
+#: kmymoney/mymoney/mymoneyfile.cpp:3504
 #, kde-format
 msgid "Tajikistan Somoni"
 msgstr "Таджицький сомоні"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3501
+#: kmymoney/mymoney/mymoneyfile.cpp:3505
 #, kde-format
 msgid "Tanzanian Shilling"
 msgstr "Танзанійський шилінг"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3502
+#: kmymoney/mymoney/mymoneyfile.cpp:3506
 #, kde-format
 msgid "Thai Baht"
 msgstr "Тайський бат"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3503
+#: kmymoney/mymoney/mymoneyfile.cpp:3507
 #, kde-format
 msgid "Tongan Pa'anga"
 msgstr "Паанга Тонга"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3504
+#: kmymoney/mymoney/mymoneyfile.cpp:3508
 #, kde-format
 msgid "Trinidad and Tobago Dollar"
 msgstr "Долар Тринідаду та Тобаго"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3505
+#: kmymoney/mymoney/mymoneyfile.cpp:3509
 #, kde-format
 msgid "Tunisian Dinar"
 msgstr "Туніський динар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3506
+#: kmymoney/mymoney/mymoneyfile.cpp:3510
 #, kde-format
 msgid "Turkish Lira"
 msgstr "Турецька ліра"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3507
+#: kmymoney/mymoney/mymoneyfile.cpp:3511
 #, kde-format
 msgid "Turkmenistan Manat"
 msgstr "Туркменський манат"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3508
+#: kmymoney/mymoney/mymoneyfile.cpp:3512
 #, kde-format
 msgid "US Dollar"
 msgstr "Долар США"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3509
+#: kmymoney/mymoney/mymoneyfile.cpp:3513
 #, kde-format
 msgid "Uganda Shilling"
 msgstr "Угандійнський шилінг"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3510
+#: kmymoney/mymoney/mymoneyfile.cpp:3514
 #, kde-format
 msgid "Ukraine Hryvnia"
 msgstr "Українська гривня"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3511
+#: kmymoney/mymoney/mymoneyfile.cpp:3515
 #, kde-format
 msgid "Unidad de Fometo"
 msgstr "Чилійська Unidad de Fometo"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3512
+#: kmymoney/mymoney/mymoneyfile.cpp:3516
 #, kde-format
 msgid "United Arab Emirates Dirham"
 msgstr "Діргем Об'єднаних Арабських Еміратів"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3513
+#: kmymoney/mymoney/mymoneyfile.cpp:3517
 #, kde-format
 msgid "Uruguayan Peso"
 msgstr "Уругвайське песо"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3514
+#: kmymoney/mymoney/mymoneyfile.cpp:3518
 #, kde-format
 msgid "Uzbekistani Sum"
 msgstr "Узбецький сум"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3515
+#: kmymoney/mymoney/mymoneyfile.cpp:3519
 #, kde-format
 msgid "Vanuatu Vatu"
 msgstr "Вату Вануату"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3516
+#: kmymoney/mymoney/mymoneyfile.cpp:3520
 #, kde-format
 msgid "Venezuelan Bolivar"
 msgstr "Венесуельський болівар"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3517
+#: kmymoney/mymoney/mymoneyfile.cpp:3521
 #, kde-format
 msgid "Vietnamese Dong"
 msgstr "В'єтнамський донг"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3518
+#: kmymoney/mymoney/mymoneyfile.cpp:3522
 #, kde-format
 msgid "Zambian Kwacha"
 msgstr "Замбійська квача"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3519
+#: kmymoney/mymoney/mymoneyfile.cpp:3523
 #, kde-format
 msgid "Zimbabwe Dollar"
 msgstr "Долар Зімбабве"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3531
+#: kmymoney/mymoney/mymoneyfile.cpp:3535
 #, kde-format
 msgid "Gold"
 msgstr "Золото"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3532
+#: kmymoney/mymoney/mymoneyfile.cpp:3536
 #, kde-format
 msgid "Palladium"
 msgstr "Паладій"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3533
+#: kmymoney/mymoney/mymoneyfile.cpp:3537
 #, kde-format
 msgid "Platinum"
 msgstr "Платина"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3534
+#: kmymoney/mymoney/mymoneyfile.cpp:3538
 #, kde-format
 msgid "Silver"
 msgstr "Срібло"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4149
+#: kmymoney/mymoney/mymoneyfile.cpp:4153
 #, kde-format
 msgid "Opening Balances"
 msgstr "Відкриття балансів"
@@ -8269,21 +8102,21 @@ msgid "Do not change the date"
 msgstr "Не міняти дату"
 
 #: kmymoney/mymoney/mymoneysecurity.cpp:232
-#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:30
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:31
 #, kde-format
 msgctxt "Security type"
 msgid "Stock"
 msgstr "Цінний папір"
 
 #: kmymoney/mymoney/mymoneysecurity.cpp:234
-#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:31
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:32
 #, kde-format
 msgctxt "Security type"
 msgid "Mutual Fund"
 msgstr "Взаємний фонд"
 
 #: kmymoney/mymoney/mymoneysecurity.cpp:236
-#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:32
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:33
 #, kde-format
 msgctxt "Security type"
 msgid "Bond"
@@ -8337,6 +8170,42 @@ msgstr "<p>Пропущено теґ <b>%1</b> у файлі шаблону <b>%
 msgid "<p>Invalid root element in template file <b>%1</b></p>"
 msgstr "<p>Некоректний кореневий елемент у файлі шаблону <b>%1</b></p>"
 
+#: kmymoney/mymoney/onlinepricemodel.cpp:99
+#, kde-format
+msgctxt "@title:column External identifier (symbol)"
+msgid "ID"
+msgstr "Ідентифікатор"
+
+#: kmymoney/mymoney/onlinepricemodel.cpp:100
+#, kde-format
+msgctxt "@title:column Name of security"
+msgid "Name"
+msgstr "Назва"
+
+#: kmymoney/mymoney/onlinepricemodel.cpp:101
+#, kde-format
+msgctxt "@title:column Price"
+msgid "Price"
+msgstr "Ціна"
+
+#: kmymoney/mymoney/onlinepricemodel.cpp:102
+#, kde-format
+msgctxt "@title:column Date for price"
+msgid "Date"
+msgstr "Дата"
+
+#: kmymoney/mymoney/onlinepricemodel.cpp:103
+#, kde-format
+msgctxt "@title:column KMyMoney internal identifier"
+msgid "Internal ID"
+msgstr "Внутрішній ідентифікатор"
+
+#: kmymoney/mymoney/onlinepricemodel.cpp:104
+#, kde-format
+msgctxt "@title:column Online quote source"
+msgid "Source"
+msgstr "Джерело"
+
 #: kmymoney/mymoney/onlinetasks/unavailabletask/tasks/unavailabletask.cpp:23
 #, kde-format
 msgid "Could not load responsible plugin to view this task."
@@ -8356,8 +8225,7 @@ msgid "Memo"
 msgstr "Нотатка"
 
 #: kmymoney/mymoney/splitmodel.cpp:39
-#, fuzzy, kde-format
-#| msgid "Tags"
+#, kde-format
 msgctxt "Split header"
 msgid "Tags"
 msgstr "Мітки"
@@ -8381,7 +8249,7 @@ msgstr "Дроблена операція"
 
 #: kmymoney/mymoney/splitmodel.cpp:114
 #: kmymoney/mymoney/storage/journalmodel.cpp:192
-#: kmymoney/plugins/views/reports/core/querytable.cpp:993
+#: kmymoney/plugins/views/reports/core/querytable.cpp:997
 #, kde-format
 msgid "*** UNASSIGNED ***"
 msgstr "*** НЕ ПРИЗНАЧЕНО ***"
@@ -9121,7 +8989,7 @@ msgstr "Ринок"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2_2)
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:90
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:81
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:188
 #, kde-format
 msgid "Fraction"
 msgstr "Точність"
@@ -10067,8 +9935,8 @@ msgstr "Зняти вибір поля нотаток."
 #: kmymoney/plugins/views/reports/core/listtable.cpp:685
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1043 kmymoney/views/khomeview_p.h:1413
-#: kmymoney/views/khomeview_p.h:1442
+#: kmymoney/views/khomeview_p.h:1041 kmymoney/views/khomeview_p.h:1411
+#: kmymoney/views/khomeview_p.h:1440
 #, kde-format
 msgid "Balance"
 msgstr "Баланс"
@@ -12546,8 +12414,8 @@ msgid "Get Transactions"
 msgstr "Отримати список операцій"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:76
-#: kmymoney/plugins/views/reports/core/querytable.cpp:795
-#: kmymoney/plugins/views/reports/core/querytable.cpp:933
+#: kmymoney/plugins/views/reports/core/querytable.cpp:816
+#: kmymoney/plugins/views/reports/core/querytable.cpp:948
 #, kde-format
 msgid "Transfer"
 msgstr "Трансферт"
@@ -12679,9 +12547,9 @@ msgstr "Установа"
 #: kmymoney/plugins/views/reports/reportsview.cpp:227
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
 #: kmymoney/views/investtransactioneditor.ui:92
-#: kmymoney/views/khomeview_p.h:663 kmymoney/views/khomeview_p.h:723
-#: kmymoney/views/khomeview_p.h:761 kmymoney/views/khomeview_p.h:1027
-#: kmymoney/views/khomeview_p.h:1155 kmymoney/views/newtransactioneditor.ui:17
+#: kmymoney/views/khomeview_p.h:661 kmymoney/views/khomeview_p.h:721
+#: kmymoney/views/khomeview_p.h:759 kmymoney/views/khomeview_p.h:1025
+#: kmymoney/views/khomeview_p.h:1153 kmymoney/views/newtransactioneditor.ui:17
 #: kmymoney/widgets/ktransactionfilter.cpp:116
 #: kmymoney/widgets/ktransactionfilter.ui:113
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:73
@@ -14800,7 +14668,7 @@ msgid "Database malfunction"
 msgstr "Помилка у функціонуванні бази даних"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:188
-#: kmymoney/plugins/xml/xmlstorage.cpp:240
+#: kmymoney/plugins/xml/xmlstorage.cpp:241
 #, kde-format
 msgid "Tried to access a file when it has not been opened"
 msgstr "Спроба доступу до файла, який не відкрито"
@@ -15170,7 +15038,7 @@ msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<qt>Бажаєте зберегти зміни до <b>%1</b>?</qt>"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
-#: kmymoney/views/kpayeesview_p.h:797 kmymoney/views/ktagsview.cpp:289
+#: kmymoney/views/kpayeesview_p.h:797 kmymoney/views/ktagsview.cpp:291
 #, kde-format
 msgid "Save changes"
 msgstr "Зберегти зміни"
@@ -15478,14 +15346,14 @@ msgstr[2] "%1 днів"
 msgstr[3] "%1 день"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:379
-#: kmymoney/views/khomeview_p.h:1224
+#: kmymoney/views/khomeview_p.h:1222
 #, kde-format
 msgid "The balance of %1 is below the minimum balance %2 today."
 msgstr ""
 "Сьогодні баланс на рахунку %1 має значення, нижче за мінімальний баланс %2."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:384
-#: kmymoney/views/khomeview_p.h:1228
+#: kmymoney/views/khomeview_p.h:1226
 #, kde-format
 msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
 msgid_plural ""
@@ -15500,19 +15368,19 @@ msgstr[3] ""
 "Через %1 день баланс на рахунку %2 впаде нижче мінімального значення %3."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:403
-#: kmymoney/views/khomeview_p.h:1246
+#: kmymoney/views/khomeview_p.h:1244
 #, kde-format
 msgid "The balance of %1 is below %2 today."
 msgstr "Сьогодні баланс на рахунку %1 нижчий за %2."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:408
-#: kmymoney/views/khomeview_p.h:1251
+#: kmymoney/views/khomeview_p.h:1249
 #, kde-format
 msgid "The balance of %1 is above %2 today."
 msgstr "Баланс %1 сьогодні перевищує %2."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:415
-#: kmymoney/views/khomeview_p.h:1257
+#: kmymoney/views/khomeview_p.h:1255
 #, kde-format
 msgid "The balance of %2 will drop below %3 in %1 day."
 msgid_plural "The balance of %2 will drop below %3 in %1 days."
@@ -15522,7 +15390,7 @@ msgstr[2] "Через %1 днів баланс на рахунку %2 впаде
 msgstr[3] "Через %1 день баланс на рахунку %2 впаде нижче значення %3."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:422
-#: kmymoney/views/khomeview_p.h:1264
+#: kmymoney/views/khomeview_p.h:1262
 #, kde-format
 msgid "The balance of %2 will raise above %3 in %1 day."
 msgid_plural "The balance of %2 will raise above %3 in %1 days."
@@ -15587,7 +15455,7 @@ msgid "No data provided by reports plugin for this chart."
 msgstr "Для цієї діаграми додатком звітування не надано жодних даних."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:660
-#: kmymoney/views/khomeview_p.h:560 kmymoney/views/khomeview_p.h:1569
+#: kmymoney/views/khomeview_p.h:558 kmymoney/views/khomeview_p.h:1567
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "Щоб переглянути цю діаграму, увімкніть додаток звітів."
@@ -16102,19 +15970,19 @@ msgid "Long-term Gain"
 msgstr "Довгострокове збільшення"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:220
-#: kmymoney/plugins/views/reports/core/querytable.cpp:930
-#: kmymoney/plugins/views/reports/core/querytable.cpp:991
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1931
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1950
+#: kmymoney/plugins/views/reports/core/querytable.cpp:945
+#: kmymoney/plugins/views/reports/core/querytable.cpp:995
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1930
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1949
 #, kde-format
 msgid "Transfer from %1"
 msgstr "Трансферт від %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
-#: kmymoney/plugins/views/reports/core/querytable.cpp:931
-#: kmymoney/plugins/views/reports/core/querytable.cpp:990
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1930
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1949
+#: kmymoney/plugins/views/reports/core/querytable.cpp:946
+#: kmymoney/plugins/views/reports/core/querytable.cpp:994
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1929
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1948
 #, kde-format
 msgid "Transfer to %1"
 msgstr "Трансферт до %1"
@@ -16200,53 +16068,53 @@ msgctxt "@title:column report header"
 msgid "Price"
 msgstr "Ціна"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:549
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1766
+#: kmymoney/plugins/views/reports/core/querytable.cpp:553
+#: kmymoney/plugins/views/reports/core/querytable.cpp:566
+#, kde-format
+msgid "[No Tag]"
+msgstr "[Немає мітки]"
+
+#: kmymoney/plugins/views/reports/core/querytable.cpp:579
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1765
 #, kde-format
 msgid "Month of %1"
 msgstr "Місяць %1"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:550
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1767
+#: kmymoney/plugins/views/reports/core/querytable.cpp:580
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1766
 #, kde-format
 msgid "Week of %1"
 msgstr "Тиждень %1"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:766
-#: kmymoney/plugins/views/reports/core/querytable.cpp:996
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1144
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1893
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2064
+#: kmymoney/plugins/views/reports/core/querytable.cpp:796
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1000
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1143
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1892
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2063
 #, kde-format
 msgid "No Institution"
 msgstr "Без установи"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:770
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1904
+#: kmymoney/plugins/views/reports/core/querytable.cpp:800
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1903
 #, kde-format
 msgid "[Empty Payee]"
 msgstr "[Порожній отримувач]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:814
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1936
+#: kmymoney/plugins/views/reports/core/querytable.cpp:835
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1935
 #, kde-format
 msgid "[Split Transaction]"
 msgstr "[Дроблена операція]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:815
-#: kmymoney/plugins/views/reports/core/querytable.cpp:816
+#: kmymoney/plugins/views/reports/core/querytable.cpp:836
+#: kmymoney/plugins/views/reports/core/querytable.cpp:837
 #, kde-format
 msgctxt "Split transaction"
 msgid "Split"
 msgstr "Розділити"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:954
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1005
-#, kde-format
-msgid "[No Tag]"
-msgstr "[Немає мітки]"
-
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1678
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1677
 #, kde-format
 msgctxt "No institution"
 msgid "None"
@@ -16390,7 +16258,7 @@ msgstr "Діапазон"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:171
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:27
 #: kmymoney/plugins/views/reports/kreportsview_p.h:430
-#: kmymoney/views/khomeview_p.h:1098
+#: kmymoney/views/khomeview_p.h:1096
 #, kde-format
 msgid "Report"
 msgstr "Звіт"
@@ -16708,7 +16576,7 @@ msgstr "Звіти"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
 #: kmymoney/plugins/views/reports/kreportsview.ui:51
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:49
-#: kmymoney/views/khomeview_p.h:1100
+#: kmymoney/views/khomeview_p.h:1098
 #, kde-format
 msgid "Comment"
 msgstr "Коментар"
@@ -16739,7 +16607,7 @@ msgid "Charts"
 msgstr "Діаграми"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:666
-#: kmymoney/views/khomeview_p.h:1093
+#: kmymoney/views/khomeview_p.h:1091
 #, kde-format
 msgid "Favorite Reports"
 msgstr "Улюблені звіти"
@@ -16784,7 +16652,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr "Кругова діаграма прибутків і витрат"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:873
-#: kmymoney/views/khomeview_p.h:1543
+#: kmymoney/views/khomeview_p.h:1541
 #, kde-format
 msgid "Net Worth"
 msgstr "Залишкова вартість"
@@ -17113,7 +16981,7 @@ msgstr "Закрити"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:82
 #: kmymoney/plugins/views/reports/reportsview.cpp:118
-#: kmymoney/views/khomeview_p.h:546
+#: kmymoney/views/khomeview_p.h:544
 #, kde-format
 msgid "Net Worth Forecast"
 msgstr "Прогноз залишкової вартості"
@@ -18178,41 +18046,41 @@ msgctxt "Error message when reading XML file"
 msgid "Unknown payee identifier type %1"
 msgstr "Невідомий атрибут типу ідентифікатора платника %1"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:347
+#: kmymoney/plugins/xml/xmlstorage.cpp:348
 #, kde-format
 msgid "Save As"
 msgstr "Зберегти як"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:349
+#: kmymoney/plugins/xml/xmlstorage.cpp:350
 #, kde-format
 msgctxt "KMyMoney (Filefilter)"
 msgid "KMyMoney files"
 msgstr "Файли KMyMoney"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:350
+#: kmymoney/plugins/xml/xmlstorage.cpp:351
 #, kde-format
 msgctxt "Anonymous (Filefilter)"
 msgid "Anonymous files"
 msgstr "Анонімні файли"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:351
+#: kmymoney/plugins/xml/xmlstorage.cpp:352
 #, kde-format
 msgctxt "XML (Filefilter)"
 msgid "XML files"
 msgstr "Файли XML"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:352
+#: kmymoney/plugins/xml/xmlstorage.cpp:353
 #, kde-format
 msgctxt "All files (Filefilter)"
 msgid "All files"
 msgstr "Всі файли"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:426
+#: kmymoney/plugins/xml/xmlstorage.cpp:427
 #, kde-format
 msgid "KMyMoney files (*.kmy *.xml)"
 msgstr "файли KMyMoney (*.kmy *.xml)"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:447
+#: kmymoney/plugins/xml/xmlstorage.cpp:448
 #, kde-format
 msgid ""
 "GPG does not seem to be installed on your system. Please make sure that GPG "
@@ -18223,12 +18091,12 @@ msgstr ""
 "виконуваний файл GPG встановлено у одному з каталогів, описаних у змінній "
 "PATH. Під час поточного запуску шифрування буде вимкнено."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:447
+#: kmymoney/plugins/xml/xmlstorage.cpp:448
 #, kde-format
 msgid "GPG not found"
 msgstr "Не знайдено GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:453
+#: kmymoney/plugins/xml/xmlstorage.cpp:454
 #, kde-format
 msgid ""
 "<p>You have selected to encrypt your data also with the KMyMoney recover "
@@ -18245,13 +18113,13 @@ msgstr ""
 "на <a href=\"https://kmymoney.org/\">вебсайті KMyMoney</a>. Цього разу ваші "
 "дані не буде зашифровано за допомогою ключа відновлення KMyMoney.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:453
-#: kmymoney/plugins/xml/xmlstorage.cpp:461
+#: kmymoney/plugins/xml/xmlstorage.cpp:454
+#: kmymoney/plugins/xml/xmlstorage.cpp:462
 #, kde-format
 msgid "GPG Key not found"
 msgstr "Не знайдено ключа GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:461
+#: kmymoney/plugins/xml/xmlstorage.cpp:462
 #, kde-format
 msgid ""
 "<p>You have specified to encrypt your data for the user-id</p><p><center><b>"
@@ -18265,7 +18133,7 @@ msgstr ""
 "користувача. Будь ласка, не забувайте, що слід імпортувати чинний ключ для "
 "цього ідентифікатора користувача. Цього разу шифрування виконано не буде.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:468
+#: kmymoney/plugins/xml/xmlstorage.cpp:469
 #, kde-format
 msgid ""
 "<p>You have configured to save your data in encrypted form using GPG. Make "
@@ -18277,12 +18145,12 @@ msgstr ""
 "збережете їх зашифрованими, а потім не зможете розшифрувати! Якщо ви не "
 "впевнені у своїх діях, натисніть кнопку <b>Ні</b>.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:469
+#: kmymoney/plugins/xml/xmlstorage.cpp:470
 #, kde-format
 msgid "Store GPG encrypted"
 msgstr "Зберегти зашифрованим GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:585
+#: kmymoney/plugins/xml/xmlstorage.cpp:586
 #, kde-format
 msgid ""
 "You have configured KMyMoney to use GPG to protect your data and to encrypt "
@@ -18315,7 +18183,7 @@ msgstr[3] ""
 "завершиться взавтра. Будь ласка, оновіть ключ з сервера ключів за допомогою "
 "якоїсь з оболонок для роботи з GPG (наприклад KGPG)."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:585
+#: kmymoney/plugins/xml/xmlstorage.cpp:586
 #, kde-format
 msgid "Recover key expires soon"
 msgstr "Невдовзі завершується строк дії ключа відновлення"
@@ -19097,14 +18965,14 @@ msgstr "Дохід за відсотками"
 
 #: kmymoney/views/investtransactioneditor.cpp:261
 #: kmymoney/views/multitransactioneditor.cpp:184
-#: kmymoney/views/newtransactioneditor.cpp:227
+#: kmymoney/views/newtransactioneditor.cpp:255
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "Дата проведення цієї операції за рахунками."
 
 #: kmymoney/views/investtransactioneditor.cpp:285
 #: kmymoney/views/multitransactioneditor.cpp:214
-#: kmymoney/views/newtransactioneditor.cpp:247
+#: kmymoney/views/newtransactioneditor.cpp:275
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "Дата проведення операції передує даті відкриття рахунку <b>%1</b>."
@@ -19410,40 +19278,40 @@ msgstr ""
 msgid "Total Profits:"
 msgstr "Загальні прибутки:"
 
-#: kmymoney/views/kaccountsview_p.h:189
+#: kmymoney/views/kaccountsview_p.h:192
 #, kde-format
 msgid "Edit account '%1'"
 msgstr "Змінити рахунок «%1»"
 
-#: kmymoney/views/kaccountsview_p.h:245
+#: kmymoney/views/kaccountsview_p.h:248
 #, kde-format
 msgctxt "Undo action description"
 msgid "Edit account"
 msgstr "редагування рахунка"
 
-#: kmymoney/views/kaccountsview_p.h:279
+#: kmymoney/views/kaccountsview_p.h:282
 #, kde-format
 msgid "Unable to modify account '%1'. Cause: %2"
 msgstr "Не вдалося змінити рахунок «%1». Причина: %2"
 
-#: kmymoney/views/kaccountsview_p.h:355
+#: kmymoney/views/kaccountsview_p.h:358
 #, kde-format
 msgid ""
 "The balance of the account must be zero before the account can be closed"
 msgstr ""
 "Перш ніж рахунок можна буде закрити, баланс на ньому має стати нульовим"
 
-#: kmymoney/views/kaccountsview_p.h:358
+#: kmymoney/views/kaccountsview_p.h:361
 #, kde-format
 msgid "All subaccounts must be closed before the account can be closed"
 msgstr "Перш ніж можна буде закрити рахунок, слід закрити усі його підрахунки"
 
-#: kmymoney/views/kaccountsview_p.h:361
+#: kmymoney/views/kaccountsview_p.h:364
 #, kde-format
 msgid "This account is still included in an active schedule"
 msgstr "Цей рахунок усе ще включено до активного розкладу"
 
-#: kmymoney/views/kaccountsview_p.h:364
+#: kmymoney/views/kaccountsview_p.h:367
 #, kde-format
 msgid "This account is still mapped to an online account"
 msgstr "Цей рахунок усе ще пов'язано із інтернет-рахунком"
@@ -19789,7 +19657,7 @@ msgstr "Ігнорувати"
 msgid "Cancel processing of schedule entry."
 msgstr "Скасувати обробку запису розкладу."
 
-#: kmymoney/views/khomeview.cpp:221
+#: kmymoney/views/khomeview.cpp:222
 #, kde-format
 msgid ""
 "Before KMyMoney can give you detailed information about your financial "
@@ -19800,91 +19668,91 @@ msgstr ""
 "стан, вам слід створити принаймні один рахунок. До створення рахунку "
 "KMyMoney показуватиме лише вітальну сторінку."
 
-#: kmymoney/views/khomeview_p.h:487
+#: kmymoney/views/khomeview_p.h:483
 #, kde-format
 msgid "Preferred Accounts"
 msgstr "Основні рахунки"
 
-#: kmymoney/views/khomeview_p.h:493 kmymoney/views/khomeview_p.h:495
+#: kmymoney/views/khomeview_p.h:489 kmymoney/views/khomeview_p.h:491
 #, kde-format
 msgid "Payment Accounts"
 msgstr "Рахунки сплат"
 
-#: kmymoney/views/khomeview_p.h:638
+#: kmymoney/views/khomeview_p.h:636
 #, kde-format
 msgid "Scheduled Payments"
 msgstr "Заплановані сплати"
 
-#: kmymoney/views/khomeview_p.h:648
+#: kmymoney/views/khomeview_p.h:646
 #, kde-format
 msgid "Overdue payments"
 msgstr "Прострочені платежі"
 
-#: kmymoney/views/khomeview_p.h:654 kmymoney/views/khomeview_p.h:714
-#: kmymoney/views/khomeview_p.h:752
+#: kmymoney/views/khomeview_p.h:652 kmymoney/views/khomeview_p.h:712
+#: kmymoney/views/khomeview_p.h:750
 #, kde-format
 msgid "Next"
 msgstr "Далі"
 
-#: kmymoney/views/khomeview_p.h:657 kmymoney/views/khomeview_p.h:717
-#: kmymoney/views/khomeview_p.h:755
+#: kmymoney/views/khomeview_p.h:655 kmymoney/views/khomeview_p.h:715
+#: kmymoney/views/khomeview_p.h:753
 #, kde-format
 msgid "Skip"
 msgstr "Пропустити"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, ScheduleWizardPage)
-#: kmymoney/views/khomeview_p.h:660 kmymoney/views/khomeview_p.h:720
-#: kmymoney/views/khomeview_p.h:758
+#: kmymoney/views/khomeview_p.h:658 kmymoney/views/khomeview_p.h:718
+#: kmymoney/views/khomeview_p.h:756
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:78
 #: kmymoney/wizards/newloanwizard/schedulewizardpage.ui:6
 #, kde-format
 msgid "Schedule"
 msgstr "Запланувати"
 
-#: kmymoney/views/khomeview_p.h:669 kmymoney/views/khomeview_p.h:729
-#: kmymoney/views/khomeview_p.h:767
+#: kmymoney/views/khomeview_p.h:667 kmymoney/views/khomeview_p.h:727
+#: kmymoney/views/khomeview_p.h:765
 #, kde-format
 msgid "Balance after"
 msgstr "Баланс після"
 
-#: kmymoney/views/khomeview_p.h:708
+#: kmymoney/views/khomeview_p.h:706
 #, kde-format
 msgid "Today's due payments"
 msgstr "Сьогоднішні сплати"
 
-#: kmymoney/views/khomeview_p.h:746
+#: kmymoney/views/khomeview_p.h:744
 #, kde-format
 msgid "Future payments"
 msgstr "Майбутні сплати"
 
-#: kmymoney/views/khomeview_p.h:832
+#: kmymoney/views/khomeview_p.h:830
 #, kde-format
 msgctxt "Less..."
 msgid "Show fewer schedules on the list"
 msgstr "Показувати менше розкладів у списку"
 
-#: kmymoney/views/khomeview_p.h:834
+#: kmymoney/views/khomeview_p.h:832
 #, kde-format
 msgctxt "More..."
 msgid "Show more schedules on the list"
 msgstr "Показувати більше розкладів у списку"
 
-#: kmymoney/views/khomeview_p.h:873
+#: kmymoney/views/khomeview_p.h:871
 #, kde-format
 msgid "Enter schedule"
 msgstr "Ввести розклад"
 
-#: kmymoney/views/khomeview_p.h:878
+#: kmymoney/views/khomeview_p.h:876
 #, kde-format
 msgid "Skip schedule"
 msgstr "Пропустити розклад"
 
-#: kmymoney/views/khomeview_p.h:884
+#: kmymoney/views/khomeview_p.h:882
 #, kde-format
 msgid "Edit schedule"
 msgstr "Змінити розклад"
 
-#: kmymoney/views/khomeview_p.h:888
+#: kmymoney/views/khomeview_p.h:886
 #, kde-format
 msgid " (%1 payment)"
 msgid_plural " (%1 payments)"
@@ -19893,30 +19761,30 @@ msgstr[1] " (%1 сплати)"
 msgstr[2] " (%1 сплат)"
 msgstr[3] " (%1 сплата)"
 
-#: kmymoney/views/khomeview_p.h:1031
+#: kmymoney/views/khomeview_p.h:1029
 #, kde-format
 msgctxt "Header not marked"
 msgid "!M"
 msgstr "!П"
 
-#: kmymoney/views/khomeview_p.h:1034
+#: kmymoney/views/khomeview_p.h:1032
 #, kde-format
 msgctxt "Header cleared"
 msgid "C"
 msgstr "З"
 
-#: kmymoney/views/khomeview_p.h:1037
+#: kmymoney/views/khomeview_p.h:1035
 #, kde-format
 msgctxt "Header not reconciled"
 msgid "!R"
 msgstr "!У"
 
-#: kmymoney/views/khomeview_p.h:1049
+#: kmymoney/views/khomeview_p.h:1047
 #, kde-format
 msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr "До мінімального балансу<br>/максимального кредиту"
 
-#: kmymoney/views/khomeview_p.h:1149
+#: kmymoney/views/khomeview_p.h:1147
 #, kde-format
 msgctxt "Forecast days"
 msgid "%1 Day Forecast"
@@ -19926,7 +19794,7 @@ msgstr[1] "%1-денний прогноз"
 msgstr[2] "%1-денний прогноз"
 msgstr[3] "%1-денний прогноз"
 
-#: kmymoney/views/khomeview_p.h:1160
+#: kmymoney/views/khomeview_p.h:1158
 #, kde-format
 msgctxt "Forecast days"
 msgid "%1 day"
@@ -19936,97 +19804,97 @@ msgstr[1] "%1 дні"
 msgstr[2] "%1 днів"
 msgstr[3] "%1 день"
 
-#: kmymoney/views/khomeview_p.h:1383
+#: kmymoney/views/khomeview_p.h:1381
 #, kde-format
 msgid "Assets and Liabilities Summary"
 msgstr "Резюме активів і зобов'язань"
 
-#: kmymoney/views/khomeview_p.h:1397
+#: kmymoney/views/khomeview_p.h:1395
 #, kde-format
 msgid "Asset Accounts"
 msgstr "Рахунки активів"
 
-#: kmymoney/views/khomeview_p.h:1426
+#: kmymoney/views/khomeview_p.h:1424
 #, kde-format
 msgid "Liability Accounts"
 msgstr "Рахунки пасивів"
 
-#: kmymoney/views/khomeview_p.h:1527
+#: kmymoney/views/khomeview_p.h:1525
 #, kde-format
 msgid "Total Assets"
 msgstr "Загальні активи"
 
-#: kmymoney/views/khomeview_p.h:1535
+#: kmymoney/views/khomeview_p.h:1533
 #, kde-format
 msgid "Total Liabilities"
 msgstr "Загальні пасиви"
 
-#: kmymoney/views/khomeview_p.h:1820
+#: kmymoney/views/khomeview_p.h:1818
 #, kde-format
 msgid "Cash Flow Summary"
 msgstr "Резюме грошової активності"
 
-#: kmymoney/views/khomeview_p.h:1825
+#: kmymoney/views/khomeview_p.h:1823
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "Прибутки і витрати поточного місяця"
 
-#: kmymoney/views/khomeview_p.h:1833
+#: kmymoney/views/khomeview_p.h:1831
 #, kde-format
 msgid "Scheduled Income"
 msgstr "Запланований прибуток"
 
-#: kmymoney/views/khomeview_p.h:1836
+#: kmymoney/views/khomeview_p.h:1834
 #, kde-format
 msgid "Expenses"
 msgstr "Витрати"
 
-#: kmymoney/views/khomeview_p.h:1839
+#: kmymoney/views/khomeview_p.h:1837
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "Заплановані витрати"
 
-#: kmymoney/views/khomeview_p.h:1867
+#: kmymoney/views/khomeview_p.h:1865
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "Ліквідні активи і зобов'язання"
 
-#: kmymoney/views/khomeview_p.h:1872
+#: kmymoney/views/khomeview_p.h:1870
 #, kde-format
 msgid "Liquid Assets"
 msgstr "Ліквідні активи"
 
-#: kmymoney/views/khomeview_p.h:1875
+#: kmymoney/views/khomeview_p.h:1873
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "Трансферти на ліквідні зобов'язання"
 
-#: kmymoney/views/khomeview_p.h:1878
+#: kmymoney/views/khomeview_p.h:1876
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "Ліквідні зобов'язання"
 
-#: kmymoney/views/khomeview_p.h:1881
+#: kmymoney/views/khomeview_p.h:1879
 #, kde-format
 msgid "Other Transfers"
 msgstr "Інші трансферти"
 
-#: kmymoney/views/khomeview_p.h:1924
+#: kmymoney/views/khomeview_p.h:1922
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "Стан грошової активності"
 
-#: kmymoney/views/khomeview_p.h:1929
+#: kmymoney/views/khomeview_p.h:1927
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "Очікувані ліквідні активи"
 
-#: kmymoney/views/khomeview_p.h:1932
+#: kmymoney/views/khomeview_p.h:1930
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "Очікувані ліквідні зобов'язання"
 
-#: kmymoney/views/khomeview_p.h:1935
+#: kmymoney/views/khomeview_p.h:1933
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "Очікувані доходи/втрати"
@@ -20058,17 +19926,17 @@ msgstr "Вилучення установи"
 msgid "Unable to delete institution: %1"
 msgstr "Не вдалося вилучити дані установи: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:271
+#: kmymoney/views/kinvestmentview.cpp:521
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>Ви справді бажаєте вилучити інвестицію <b>%1</b>?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:272
+#: kmymoney/views/kinvestmentview.cpp:522
 #, kde-format
 msgid "Delete investment"
 msgstr "Вилучити інвестицію"
 
-#: kmymoney/views/kinvestmentview.cpp:283
+#: kmymoney/views/kinvestmentview.cpp:533
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "Не вдалося вилучити інвестицію: %1"
@@ -20088,10 +19956,10 @@ msgstr "Маржа"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/views/kinvestmentview.ui:44
 #, kde-format
-msgid "Select Account:"
-msgstr "Виберіть рахунок:"
+msgid "Select investment account:"
+msgstr "Виберіть рахунок для інвестиції:"
 
-#. i18n: ectx: property (toolTip), widget (QTreeView, m_equitiesTree)
+#. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
 #: kmymoney/views/kinvestmentview.ui:80
 #, kde-format
 msgid ""
@@ -20450,12 +20318,12 @@ msgctxt "Placeholder text"
 msgid "Search"
 msgstr "Пошук"
 
-#: kmymoney/views/kpayeesview_p.h:352 kmymoney/views/ktagsview.cpp:212
+#: kmymoney/views/kpayeesview_p.h:352 kmymoney/views/ktagsview.cpp:214
 #, kde-format
 msgid "Balance: %1"
 msgstr "Баланс: %1"
 
-#: kmymoney/views/kpayeesview_p.h:396 kmymoney/views/ktagsview.cpp:256
+#: kmymoney/views/kpayeesview_p.h:396 kmymoney/views/ktagsview.cpp:258
 #, kde-format
 msgid "Balance: %1%2"
 msgstr "Баланс: %1%2"
@@ -20488,7 +20356,7 @@ msgstr "Нічого об'єднувати."
 msgid "Unable to remove payee(s)"
 msgstr "Не вдалося вилучити отримувачів"
 
-#: kmymoney/views/kscheduledview.cpp:133
+#: kmymoney/views/kscheduledview.cpp:130
 #, kde-format
 msgid ""
 "KMyMoney has detected some overdue scheduled transactions for this account. "
@@ -20497,19 +20365,19 @@ msgstr ""
 "На цьому рахунку KMyMoney було виявлено декілька прострочених запланованих "
 "операцій. Бажаєте ввести ці заплановані операції зараз?"
 
-#: kmymoney/views/kscheduledview.cpp:214 kmymoney/views/kscheduledview.cpp:290
-#: kmymoney/views/kscheduledview.cpp:307
+#: kmymoney/views/kscheduledview.cpp:207 kmymoney/views/kscheduledview.cpp:280
+#: kmymoney/views/kscheduledview.cpp:293
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"
 msgstr "Невідома запланована операція «%1»"
 
-#: kmymoney/views/kscheduledview.cpp:225
+#: kmymoney/views/kscheduledview.cpp:218
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr "<p>Ви справді бажаєте вилучити заплановану операцію <b>%1</b>?</p>"
 
-#: kmymoney/views/kscheduledview.cpp:228
+#: kmymoney/views/kscheduledview.cpp:221
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
@@ -20518,24 +20386,24 @@ msgstr ""
 "У випадку сплат за кредитом поки що неможливо відтворити заплановану "
 "операцію."
 
-#: kmymoney/views/kscheduledview.cpp:230
+#: kmymoney/views/kscheduledview.cpp:223
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Вилучення розкладу"
 
-#: kmymoney/views/kscheduledview.cpp:238
+#: kmymoney/views/kscheduledview.cpp:231
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "Не вдалося вилучити заплановану операцію «%1»"
 
-#: kmymoney/views/kscheduledview.cpp:252
+#: kmymoney/views/kscheduledview.cpp:245
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "Копія %1"
 
-#: kmymoney/views/kscheduledview.cpp:273
+#: kmymoney/views/kscheduledview.cpp:266
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "Не вдалося здублювати заплановану операцію: «%1»"
@@ -20553,7 +20421,13 @@ msgctxt "Placeholdertext in schedulesview"
 msgid "Filter"
 msgstr "Фільтр"
 
-#: kmymoney/views/kscheduledview_p.h:250
+#: kmymoney/views/kscheduledview_p.h:104
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "No schedules found"
+msgstr "Не знайдено розкладів"
+
+#: kmymoney/views/kscheduledview_p.h:254
 #, kde-format
 msgid ""
 "Are you sure you wish to stop this scheduled transaction from being entered "
@@ -20568,13 +20442,13 @@ msgstr ""
 "KMyMoney запитає вас про це знову під час наступного запуску, якщо ви згодом "
 "не додасте операцію до списку вручну."
 
-#: kmymoney/views/kscheduledview_p.h:252
+#: kmymoney/views/kscheduledview_p.h:256
 #, kde-format
 msgctxt "@title:window"
 msgid "Stop entering schedule"
 msgstr "Зупинення входу до розкладу"
 
-#: kmymoney/views/kscheduledview_p.h:351
+#: kmymoney/views/kscheduledview_p.h:355
 #, kde-format
 msgid ""
 "<qt>Do you really want to skip the <b>%1</b> transaction scheduled for <b>"
@@ -20583,13 +20457,13 @@ msgstr ""
 "<qt>Ви справді бажаєте пропустити операцію <b>%1</b>, заплановану для <b>%2</"
 "b>?</qt>"
 
-#: kmymoney/views/kscheduledview_p.h:354
+#: kmymoney/views/kscheduledview_p.h:358
 #, kde-format
 msgctxt "@title:window"
 msgid "Skip scheduled transaction"
 msgstr "Пропуск запланованого переказу"
 
-#: kmymoney/views/kscheduledview_p.h:367
+#: kmymoney/views/kscheduledview_p.h:371
 #, kde-format
 msgid "<qt>Unable to skip scheduled transaction <b>%1</b>.</qt>"
 msgstr "<qt>Не вдалося пропустити заплановану операцію <b>%1</b>.</qt>"
@@ -20663,12 +20537,12 @@ msgctxt "@item Show only closed tags"
 msgid "Closed"
 msgstr "Закриті"
 
-#: kmymoney/views/ktagsview.cpp:288
+#: kmymoney/views/ktagsview.cpp:290
 #, kde-format
 msgid "Do you want to save the changes for <b>%1</b>?"
 msgstr "Бажаєте зберегти зміни до <b>%1</b>?"
 
-#: kmymoney/views/ktagsview.cpp:375
+#: kmymoney/views/ktagsview.cpp:377
 #, kde-format
 msgid ""
 "A tag with the name '%1' already exists. It is not advisable to have "
@@ -20679,23 +20553,23 @@ msgstr ""
 "записів міток з однаковими назвами. Ви справді бажаєте перейменувати запис "
 "мітки вказаним чином?"
 
-#: kmymoney/views/ktagsview.cpp:379
+#: kmymoney/views/ktagsview.cpp:381
 #, kde-format
 msgctxt "@title:window"
 msgid "Duplicate tag name"
 msgstr "Дублювання назви мітки"
 
-#: kmymoney/views/ktagsview.cpp:402 kmymoney/views/ktagsview.cpp:526
+#: kmymoney/views/ktagsview.cpp:404 kmymoney/views/ktagsview.cpp:528
 #, kde-format
 msgid "Unable to modify tag"
 msgstr "Не вдалося змінити мітку"
 
-#: kmymoney/views/ktagsview.cpp:805
+#: kmymoney/views/ktagsview.cpp:808
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Не вдалося повторно призначити мітку операції/дроблення"
 
-#: kmymoney/views/ktagsview.cpp:817
+#: kmymoney/views/ktagsview.cpp:820
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Не вдалося вилучити мітки"
@@ -20959,19 +20833,19 @@ msgid "Balance: %1"
 msgstr "Баланс: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:192
-#: kmymoney/views/newtransactioneditor.cpp:230
+#: kmymoney/views/newtransactioneditor.cpp:258
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "Дата проведення операції є некоректною."
 
 #: kmymoney/views/multitransactioneditor.cpp:225
-#: kmymoney/views/newtransactioneditor.cpp:265
+#: kmymoney/views/newtransactioneditor.cpp:293
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
 msgstr "Обліковий відділ, із яким слід пов'язати цю операцію."
 
 #: kmymoney/views/multitransactioneditor.cpp:228
-#: kmymoney/views/newtransactioneditor.cpp:268
+#: kmymoney/views/newtransactioneditor.cpp:296
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -20993,19 +20867,39 @@ msgstr ""
 "Дата переказу вибраної операції (%1) передує даті відкриття вибраного "
 "рахунка (%2)."
 
-#: kmymoney/views/multitransactioneditor.cpp:721
+#: kmymoney/views/multitransactioneditor.cpp:722
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "Не можна одночасно редагувати декілька розкладів."
 
-#: kmymoney/views/multitransactioneditor.cpp:729
+#: kmymoney/views/multitransactioneditor.cpp:731
 #, kde-format
+msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of category or account is not possible when split transactions are "
 "part of the selection."
 msgstr ""
-"Вибір категорії або рахунка неможливий, якщо частиною позначення є розділені "
+"Вибір категорії або рахунка є неможливим, якщо частиною позначення є "
+"розділені операції."
+
+#: kmymoney/views/multitransactioneditor.cpp:735
+#, kde-format
+msgctxt "@info:tooltip selecting multiple transactions for edit"
+msgid ""
+"Selection of tags is not possible when split transactions are part of the "
+"selection."
+msgstr ""
+"Вибір міток є неможливим, якщо частиною позначення є розділені операції."
+
+#: kmymoney/views/multitransactioneditor.cpp:739
+#, kde-format
+msgctxt "@info:tooltip selecting multiple transactions for edit"
+msgid ""
+"Selection of cost center is not possible when split transactions are part of "
+"the selection."
+msgstr ""
+"Вибір облікового відділу є неможливим, якщо частиною позначення є розділені "
 "операції."
 
 #: kmymoney/views/newspliteditor.cpp:152
@@ -21035,13 +20929,13 @@ msgid "A category assignment is required for a split."
 msgstr "Поділ має бути пов'язано із категорією."
 
 #: kmymoney/views/newspliteditor.cpp:218
-#: kmymoney/views/newtransactioneditor.cpp:381
+#: kmymoney/views/newtransactioneditor.cpp:410
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Номер чека, використаного для цієї операції."
 
 #: kmymoney/views/newspliteditor.cpp:227
-#: kmymoney/views/newtransactioneditor.cpp:391
+#: kmymoney/views/newtransactioneditor.cpp:420
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Чек із номером <b>%1</b> вже було використано у цьому рахунку."
@@ -21064,7 +20958,7 @@ msgstr "Платник/Отримувач"
 msgid "Costcenter"
 msgstr "Обліковий центр"
 
-#: kmymoney/views/newtransactioneditor.cpp:535
+#: kmymoney/views/newtransactioneditor.cpp:564
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
@@ -21165,7 +21059,7 @@ msgstr ""
 "Кнопку закриття для цього рахунку вилучено, оскільки ви його узгоджуєте. "
 "Завершіть, скасуйте або відкладіть узгодження, щоб повернути кнопку на місце."
 
-#: kmymoney/views/simpleledgerview.cpp:435
+#: kmymoney/views/simpleledgerview.cpp:438
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21175,7 +21069,7 @@ msgstr ""
 "На цій сторінці показано бухгалтерську книгу рахунків. Поки що не створено "
 "жодних записів рахунків, тому показано цей напис."
 
-#: kmymoney/views/simpleledgerview.cpp:438
+#: kmymoney/views/simpleledgerview.cpp:441
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21185,12 +21079,12 @@ msgstr ""
 "На цій сторінці показано бухгалтерську книгу рахунків. Поки що не вибрано "
 "жодних записів рахунків, тому показано цей напис."
 
-#: kmymoney/views/simpleledgerview.cpp:678
+#: kmymoney/views/simpleledgerview.cpp:684
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Відкрити сайт <b>%1</b> у вашій програмі для перегляду інтернету."
 
-#: kmymoney/views/simpleledgerview.cpp:865
+#: kmymoney/views/simpleledgerview.cpp:869
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -21199,7 +21093,7 @@ msgstr ""
 "Ви не можете закрити панель перегляду цього рахунку, оскільки ви узгоджуєте "
 "рахунок. Спочатку, завершіть дію, скасуйте або відкладіть узгодження."
 
-#: kmymoney/views/simpleledgerview.cpp:866
+#: kmymoney/views/simpleledgerview.cpp:870
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
@@ -21495,6 +21389,12 @@ msgstr ""
 msgctxt "@title header of the account name column"
 msgid "Name"
 msgstr "Назва"
+
+#: kmymoney/widgets/kmmemptyview.h:48
+#, kde-format
+msgctxt "Placeholder for when there is no data in a view"
+msgid "No data found"
+msgstr "Даних не знайдено"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KMMSearchWidget)
 #: kmymoney/widgets/kmmsearchwidget.ui:14
@@ -22531,8 +22431,10 @@ msgstr ""
 "дізнатися більше про різноманітні типи рахунків. Введіть дату відкриття "
 "рахунку та назву валюти, у якій його було створено."
 
+#. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:35
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:109
 #, kde-format
 msgid "Account name"
 msgstr "Назва рахунку"
@@ -23817,38 +23719,48 @@ msgstr "Користувач"
 msgid "Unable to create account: %1"
 msgstr "Неможливо створити рахунок: %1"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:64
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:190
 #, kde-format
 msgctxt "Rounding method"
 msgid "Round"
 msgstr "Округлення"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:65
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:191
 #, kde-format
 msgctxt "Rounding method"
 msgid "Ceil"
 msgstr "Стеля"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:66
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:192
 #, kde-format
 msgctxt "Rounding method"
 msgid "Floor"
 msgstr "Підлога"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:67
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:193
 #, kde-format
 msgctxt "Rounding method"
 msgid "Truncate"
 msgstr "Обрізання"
 
-#. i18n: ectx: property (title), widget (QWizardPage, KInvestmentDetailsWizardPage)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:235
+#, kde-format
+msgctxt "@info Warning that security is used in multiple accounts"
+msgid ""
+"This security is used in multiple accounts. Changing the values below will "
+"be effective for all of them."
+msgstr ""
+"Цей цінний папір використано на декількох рахунках. Зміна наведених нижче "
+"значень стосуватиметься усіх цих рахунків."
+
+#. i18n: ectx: property (title), widget (KInvestmentDetailsWizardPage, KInvestmentDetailsWizardPage)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:14
 #, kde-format
-msgid "Investment details"
-msgstr "Параметри інвестиції"
+msgid "Security details"
+msgstr "Параметри цінного паперу"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:20
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:23
 #, kde-format
 msgid ""
 "Enter the details below and click <b>Next</b> to continue entering the "
@@ -23857,104 +23769,64 @@ msgstr ""
 "Введіть дані у поля, розташовані нижче, і натисніть кнопку <b>Далі</b>, щоб "
 "продовжити введення параметрів мережевого оновлення."
 
-#. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:51
-#, kde-format
-msgid "Trading symbol"
-msgstr "Код (символ)"
-
-#. i18n: ectx: property (toolTip), widget (KMyMoneyLineEdit, m_investmentSymbol)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:61
-#, kde-format
-msgid "Enter the ticker symbol (e.g. RHAT)."
-msgstr "Введіть код (наприклад RHAT)."
-
-#. i18n: ectx: property (text), widget (QLabel, textLabel3)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:68
-#, kde-format
-msgid "Full name"
-msgstr "Повна назва"
-
-#. i18n: ectx: property (text), widget (QLabel, textLabel1_3)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:117
-#, kde-format
-msgid "Trading market"
-msgstr "Ринок"
-
 #. i18n: ectx: property (text), item, widget (KComboBox, m_tradingMarket)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:131
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:81
 #, kde-format
 msgid "AMEX"
 msgstr "AMEX"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_tradingMarket)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:136
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:86
 #, kde-format
 msgid "EUREX"
 msgstr "EUREX"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_tradingMarket)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:141
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:91
 #, kde-format
 msgid "FUND"
 msgstr "FUND"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_tradingMarket)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:146
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:96
 #, kde-format
 msgid "NASDAQ"
 msgstr "NASDAQ"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_tradingMarket)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:151
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:101
 #, kde-format
 msgid "NYSE"
 msgstr "NYSE"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_tradingMarket)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:156
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:106
 #, kde-format
 msgid "XETRA"
 msgstr "XETRA"
 
-#. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:165
-#, kde-format
-msgid ""
-"Identification\n"
-"number"
-msgstr ""
-"Ідентифікаційний\n"
-"номер"
-
-#. i18n: ectx: property (toolTip), widget (KMyMoneyLineEdit, m_investmentIdentification)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:175
-#, kde-format
-msgid "Enter the CUSIP/ISIN/WKN identification number here"
-msgstr "Введіть у це поле ідентифікаційний номер CUSIP/ISIN/WKN"
-
-#. i18n: ectx: property (text), widget (QLabel, textLabel1_4)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:182
-#, kde-format
-msgid "Trading Currency"
-msgstr "Валюта"
-
-#. i18n: ectx: property (text), widget (QLabel, textLabel2_6)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:208
-#, kde-format
-msgid "Price precision"
-msgstr "Точність цін"
-
 #. i18n: ectx: property (toolTip), widget (QSpinBox, m_pricePrecision)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:215
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:114
 #, kde-format
 msgid "This determines how many digits after decimal symbol price can have."
 msgstr ""
 "Цей пункт визначає, скільки цифр після крапки слід враховувати у десяткових "
 "числах."
 
+#. i18n: ectx: property (text), widget (QLabel, textLabel2_6)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:127
+#, kde-format
+msgid "Price precision"
+msgstr "Точність цін"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1_3)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:134
+#, kde-format
+msgid "Trading market"
+msgstr "Ринок"
+
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_roundingMethod)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:228
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:144
 #, kde-format
 msgid ""
 "This controls what to do with digit situated after precision digits in "
@@ -23963,83 +23835,106 @@ msgstr ""
 "За допомогою цього віджета ви можете визначити поведінку програми, якщо у "
 "значенні більше цифр, ніж може дозволено показувати програмі."
 
+#. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:158
+#, kde-format
+msgid "Trading symbol"
+msgstr "Код (символ)"
+
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:235
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:168
 #, kde-format
 msgid "Remainder"
 msgstr "Залишок"
 
-#. i18n: ectx: attribute (title), widget (QWizardPage, WizardPage)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:6
+#. i18n: ectx: property (text), widget (QLabel, textLabel1_4)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:175
+#, kde-format
+msgid "Trading Currency"
+msgstr "Валюта"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:198
+#, kde-format
+msgid "Full name"
+msgstr "Повна назва"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:212
+#, kde-format
+msgid ""
+"Identification\n"
+"number"
+msgstr ""
+"Ідентифікаційний\n"
+"номер"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_createSymbolDuplicate)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:251
+#, kde-format
+msgid "Create duplicate of the symbol"
+msgstr "Створити дублікат символу"
+
+#. i18n: ectx: property (title), widget (KInvestmentTypeWizardPage, KInvestmentTypeWizardPage)
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:14
 #, kde-format
 msgid "Investment Type"
 msgstr "Тип інвестиції"
 
 #. i18n: ectx: property (text), widget (QLabel, m_introLabel)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:12
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:20
 #, kde-format
 msgid "This wizard allows you to create a new investment."
 msgstr "За допомогою цього майстра ви зможете створити запис інвестиції."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:41
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:49
 #, kde-format
 msgid ""
-"The first step in this process requires to select the type of investment. "
-"The following steps collect more details about the investment from you."
+"The first step in this process requires to provide an account name for the "
+"investment and select the type of investment. The following steps collect "
+"further details about the investment from you."
 msgstr ""
-"На першому кроці слід обрати тип інвестиції. На наступних кроках буде "
-"зібрано інші дані щодо інвестиції, яку ви бажаєте зробити."
+"На першому кроці слід надати назву рахунка для інвестиції та вибрати тип "
+"інвестиції. На наступних кроках буде зібрано інші дані щодо інвестиції, яку "
+"ви бажаєте зробити."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:72
+#: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:99
 #, kde-format
 msgid "Type of investment"
 msgstr "Тип інвестиції"
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:73
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:72
 #, kde-format
 msgid "This wizard allows you to modify the selected investment."
 msgstr ""
 "За допомогою цього майстра ви можете змінити параметри вибраної інвестиції."
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:76
-#, kde-format
-msgid "This wizard allows you to modify the selected security."
-msgstr ""
-"За допомогою цього майстра ви можете змінити параметри вибраних цінних "
-"паперів."
-
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:119
-#, kde-format
-msgid "Investment detail wizard"
-msgstr "Майстер параметрів інвестицій"
-
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:142
-#, kde-format
-msgid "Security detail wizard"
-msgstr "Майстер параметрів цінного паперу"
-
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:180
-#, kde-format
-msgid ""
-"The selected symbol is already on file. Do you want to reuse the existing "
-"security?"
-msgstr ""
-"Вибраний код вже є у файлі. Бажаєте повторно використати існуючі цінні "
-"папери?"
-
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:181
-#, kde-format
-msgid "Security found"
-msgstr "Знайдено дані цінного паперу"
-
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:277
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:167
 #, kde-format
 msgid "Unexpected error occurred while adding new investment"
 msgstr "Під час додавання нового запису інвестиції сталася неочікувана помилка"
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:293
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:195
+#, kde-format
+msgctxt "@info:window"
+msgid "Investment detail wizard"
+msgstr "Майстер параметрів інвестицій"
+
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:210
+#, kde-format
+msgctxt "@info:window"
+msgid "Security detail wizard"
+msgstr "Майстер параметрів цінного паперу"
+
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:213
+#, kde-format
+msgctxt "@info:tab Security edit wizard detail page"
+msgid "Security details"
+msgstr "Параметри цінного паперу"
+
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:245
 #, kde-format
 msgid ""
 "<qt>The security <b>%1</b> currently does not exist as sub-account of <b>%2</"
@@ -24048,25 +23943,25 @@ msgstr ""
 "<qt>Зараз на підлеглому рахунку <b>%2</b> немає цінного паперу <b>%1</b>. "
 "Бажаєте створити його?</qt>"
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:297
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:249
 #, kde-format
 msgid "Create security"
 msgstr "Створити запис цінного паперу"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, KNewInvestmentWizard)
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.ui:17
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.ui:14
 #, kde-format
 msgid "New Investment wizard"
 msgstr "Майстер нових інвестицій"
 
-#. i18n: ectx: attribute (title), widget (QWizardPage, KOnlineUpdateWizardPage)
-#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:6
+#. i18n: ectx: property (title), widget (KOnlineUpdateWizardPage, KOnlineUpdateWizardPage)
+#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:14
 #, kde-format
 msgid "Online Update"
 msgstr "Інтерактивне оновлення"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel6)
-#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:12
+#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:20
 #, kde-format
 msgid ""
 "Select an online source and click <b>Finish</b> to store the investment "
@@ -24077,19 +23972,19 @@ msgstr ""
 "просто не заповнюйте відповідні поля."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_4)
-#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:37
+#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:54
 #, kde-format
 msgid "Use Finance::Quote"
 msgstr "Використовувати Finance::Quote"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_3)
-#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:58
+#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:75
 #, kde-format
 msgid "Online Source"
 msgstr "Мережеве джерело"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_6)
-#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:87
+#: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:104
 #, kde-format
 msgid "Factor"
 msgstr "Коефіцієнт"
@@ -25504,6 +25399,154 @@ msgstr ""
 "\n"
 "<p>Всі ці відомості є необов'язковими, їх призначено лише для персоніфікації "
 "вашого файла KMyMoney.</p>"
+
+#~ msgid "Select Account:"
+#~ msgstr "Виберіть рахунок:"
+
+#~ msgid "Investment details"
+#~ msgstr "Параметри інвестиції"
+
+#~ msgid "Enter the ticker symbol (e.g. RHAT)."
+#~ msgstr "Введіть код (наприклад RHAT)."
+
+#~ msgid "Enter the CUSIP/ISIN/WKN identification number here"
+#~ msgstr "Введіть у це поле ідентифікаційний номер CUSIP/ISIN/WKN"
+
+#~ msgid "This wizard allows you to modify the selected security."
+#~ msgstr ""
+#~ "За допомогою цього майстра ви можете змінити параметри вибраних цінних "
+#~ "паперів."
+
+#~ msgid ""
+#~ "The selected symbol is already on file. Do you want to reuse the existing "
+#~ "security?"
+#~ msgstr ""
+#~ "Вибраний код вже є у файлі. Бажаєте повторно використати існуючі цінні "
+#~ "папери?"
+
+#~ msgid "Security found"
+#~ msgstr "Знайдено дані цінного паперу"
+
+#~ msgctxt "Equity name"
+#~ msgid "Name"
+#~ msgstr "Назва"
+
+#~ msgctxt "Online quote source"
+#~ msgid "Source"
+#~ msgstr "Джерело"
+
+#~ msgid ""
+#~ "For <b>%1</b> on <b>%2</b> price <b>%3</b> already exists.<br>Do you want "
+#~ "to replace it with <b>%4</b>?"
+#~ msgstr ""
+#~ "Для <b>%1</b> на <b>%2</b> ціна <b>%3</b> вже існує.<br>Хочете замінити "
+#~ "її на <b>%4</b>?"
+
+#~ msgid "Price Already Exists"
+#~ msgstr "Ціна вже існує"
+
+#~ msgctxt ""
+#~ "Log message e.g. 'Prices for EUR > USD updated between 2001-01-01 and "
+#~ "2001-02-01 (id EUR USD)'"
+#~ msgid "Prices for %1 updated between %3 and %4 (id %2)"
+#~ msgstr "Ціну для %1 оновлено між %3 та %4 (ідентифікатор %2)"
+
+#~ msgid ""
+#~ "Received a price for %1 (id %2), but this symbol is not on the list. "
+#~ "Aborting entire update."
+#~ msgstr ""
+#~ "Отримано ціну для %1 (ідентифікатор %2), але цього коду немає у списку.  "
+#~ "Весь сеанс оновлення перервано."
+
+#~ msgid "List of known Equities, and the date they were last updated on."
+#~ msgstr ""
+#~ "Список відомих звичайних акцій і дата останнього оновлення їхніх даних."
+
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Symbol"
+#~ msgstr "Код"
+
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Identification number"
+#~ msgstr "Ідентифікаційний номер"
+
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Name"
+#~ msgstr "Назва"
+
+#~ msgid "New Quote Source"
+#~ msgstr "Створити джерело курсів"
+
+#~ msgid ""
+#~ "Security <b>%1</b> uses this quote source.<br>Do you really want to "
+#~ "remove it?"
+#~ msgstr ""
+#~ "Для цінного паперу <b>%1</b> використовується це джерело курсів.<br>Ви "
+#~ "справді хочете його вилучити?"
+
+#~ msgctxt "@title:window"
+#~ msgid "Delete quote source"
+#~ msgstr "Вилучити джерело курсів"
+
+#~ msgid "Source <placeholder>%1</placeholder> does not exist."
+#~ msgstr "Джерела <placeholder>%1</placeholder> не існує."
+
+#~ msgid "Cannot resolve input date."
+#~ msgstr "Не вдалося обробити вхідні дані."
+
+#~ msgid "CSV source <placeholder>%1</placeholder> does not exist."
+#~ msgstr "Джерела CSV <placeholder>%1</placeholder> не існує."
+
+#~ msgid "Cannot find from and to currency."
+#~ msgstr "Не вдалося визначити початкову і кінцеву валюти."
+
+#~ msgid "Local quote sources aren't supported."
+#~ msgstr "Підтримки локальних джерел курсів не передбачено."
+
+#~ msgid "Fetching URL %1..."
+#~ msgstr "Отримання даних URL %1…"
+
+#~ msgid ""
+#~ "<placeholder>%1</placeholder> skipped because it doesn't have "
+#~ "identification number."
+#~ msgstr ""
+#~ "<placeholder>%1</placeholder> пропущено, оскільки цей запис не має "
+#~ "ідентифікаційного номера."
+
+#~ msgctxt "The process x is executing"
+#~ msgid "Executing %1..."
+#~ msgstr "Виконання %1…"
+
+#~ msgid "Unable to launch: %1"
+#~ msgstr "Не вдалося запустити: %1"
+
+#~ msgid "Failed to open downloaded file"
+#~ msgstr "Спроба відкрити отриманий файл завершилася невдало"
+
+#~ msgctxt "Executing 'script' 'online source' 'investment symbol' "
+#~ msgid "Executing %1 %2 %3..."
+#~ msgstr "Виконання %1 %2 %3…"
+
+#~ msgid "Unable to update price for %1"
+#~ msgstr "Не вдалося оновити ціну для %1"
+
+#~ msgid "Identifier found: '%1'"
+#~ msgstr "Знайдено ідентифікатор: «%1»"
+
+#~ msgid "Price found: '%1' (%2)"
+#~ msgstr "Знайдено ціну: «%1» (%2)"
+
+#~ msgid "Date found: '%1'"
+#~ msgstr "Знайдено дату: «%1»"
+
+#~ msgid "Unable to update price for %1 (no price or no date)"
+#~ msgstr "Не вдалося оновити ціну для %1 (не вказано ціни або дати)"
+
+#~ msgid "Unable to update price for %1 (empty quote data)"
+#~ msgstr "Не вдалося оновити ціну для %1 (порожні дані щодо курсу)"
+
+#~ msgid "Unable to update price for %1 (error encountered: '%2')"
+#~ msgstr "Не вдалося оновити ціну %1 (сталася помилка: «%2»)"
 
 #~ msgctxt "Split header"
 #~ msgid "Tag"

@@ -18,16 +18,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+class MyMoneyAccount;
 class MyMoneySecurity;
 
 namespace Ui {
 class KInvestmentTypeWizardPage;
 }
 
-/**
- * This class implements the investment type page of the
- * @ref KNewInvestmentWizard.
- */
 class KInvestmentTypeWizardPage : public QWizardPage
 {
     Q_OBJECT
@@ -35,8 +32,13 @@ public:
     explicit KInvestmentTypeWizardPage(QWidget *parent = nullptr);
     ~KInvestmentTypeWizardPage();
 
-    void init2(const MyMoneySecurity& security);
+    void init(const MyMoneyAccount& account, const MyMoneySecurity& security);
     void setIntroLabelText(const QString& text);
+
+    /**
+     * Overload isComplete to handle the required fields
+     */
+    bool isComplete() const final override;
 
 private:
     Ui::KInvestmentTypeWizardPage  *ui;

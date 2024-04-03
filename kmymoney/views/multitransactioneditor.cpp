@@ -441,6 +441,7 @@ MultiTransactionEditor::MultiTransactionEditor(QWidget* parent, const QString& a
     d->frameCollection = new WidgetHintFrameCollection(this);
     d->frameCollection->addFrame(new WidgetHintFrame(d->ui->dateEdit));
     d->frameCollection->addFrame(new WidgetHintFrame(d->ui->categoryCombo));
+    d->frameCollection->addFrame(new WidgetHintFrame(d->ui->tagContainer));
     d->frameCollection->addFrame(new WidgetHintFrame(d->ui->costCenterCombo));
     d->frameCollection->addFrame(new WidgetHintFrame(d->ui->numberEdit, WidgetHintFrame::Warning));
     d->frameCollection->addWidget(d->ui->enterButton);
@@ -726,8 +727,17 @@ bool MultiTransactionEditor::setSelectedJournalEntryIds(const QStringList& selec
         }
         if (idx.data(eMyMoney::Model::TransactionSplitCountRole).toInt() > 2) {
             WidgetHintFrame::hide(d->ui->categoryCombo,
-                                  i18n("Selection of category or account is not possible when split transactions are part of the selection."));
+                                  i18nc("@info:tooltip selecting multiple transactions for edit",
+                                        "Selection of category or account is not possible when split transactions are part of the selection."));
             categoryEnabled = false;
+            WidgetHintFrame::hide(d->ui->tagContainer,
+                                  i18nc("@info:tooltip selecting multiple transactions for edit",
+                                        "Selection of tags is not possible when split transactions are part of the selection."));
+            tagEnabled = false;
+            WidgetHintFrame::hide(d->ui->costCenterCombo,
+                                  i18nc("@info:tooltip selecting multiple transactions for edit",
+                                        "Selection of cost center is not possible when split transactions are part of the selection."));
+            costCenterEnabled = false;
         }
     }
 

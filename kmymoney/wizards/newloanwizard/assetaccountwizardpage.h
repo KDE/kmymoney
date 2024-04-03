@@ -21,11 +21,6 @@ namespace Ui {
 class AssetAccountWizardPage;
 }
 
-/**
- * This class implements the Online Update page of the
- * @ref KNewInvestmentWizard.
- */
-
 class AssetAccountWizardPage : public QWizardPage
 {
     Q_OBJECT

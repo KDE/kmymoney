@@ -505,9 +505,9 @@ void MyMoneyAnonWriterPrivate::writeOnlineJob(const onlineJob& job, QXmlStreamWr
     MyMoneyXmlHelper::writeStartObject(writer, nodeName(Node::OnlineJob), job.id());
 
     if (!job.sendDate().isNull())
-        writer->writeAttribute(attributeName(Attribute::OnlineJob::Send), MyMoneyUtils::dateToString(job.sendDate().date()));
+        writer->writeAttribute(attributeName(Attribute::OnlineJob::Send), MyMoneyUtils::dateToIsoString(job.sendDate().date()));
     if (!job.bankAnswerDate().isNull())
-        writer->writeAttribute(attributeName(Attribute::OnlineJob::BankAnswerDate), MyMoneyUtils::dateToString(job.bankAnswerDate().date()));
+        writer->writeAttribute(attributeName(Attribute::OnlineJob::BankAnswerDate), MyMoneyUtils::dateToIsoString(job.bankAnswerDate().date()));
 
     switch (job.bankAnswerState()) {
     case eMyMoney::OnlineJob::sendingState::abortedByUser:

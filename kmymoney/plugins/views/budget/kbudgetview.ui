@@ -65,7 +65,7 @@
         </layout>
        </item>
        <item>
-        <widget class="QTableView" name="m_budgetList">
+        <widget class="KMMEmptyTableView" name="m_budgetList">
          <property name="alternatingRowColors">
           <bool>true</bool>
          </property>
@@ -293,6 +293,11 @@
    <class>KBudgetValues</class>
    <extends>QWidget</extends>
    <header>kbudgetvalues.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMMEmptyTableView</class>
+   <extends>QTableView</extends>
+   <header>kmmemptyview.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

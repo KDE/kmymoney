@@ -54,8 +54,9 @@
 using namespace Icons;
 
 static constexpr KCompressionDevice::CompressionType const& COMPRESSION_TYPE = KCompressionDevice::GZip;
-// static constexpr char recoveryKeyId[] = "0xD2B08440";
+#ifdef ENABLE_GPG
 static constexpr char recoveryKeyId[] = "59B0F826D2B08440";
+#endif
 
 // define the default period to warn about an expiring recoverkey to 30 days
 // but allows to override this setting during build time

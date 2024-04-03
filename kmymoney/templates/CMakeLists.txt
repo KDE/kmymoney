@@ -18,10 +18,12 @@ string(APPEND qrcContents "<RCC>\n  <qresource")
 string(APPEND qrcContents " prefix=\"/templates\"")
 string(APPEND qrcContents ">\n")
 
+# the expression "[a-z][a-z]_[A-Z][A-Z]/*" does match directories named de_DE on
+# linux but not on windows. Using "[a-z][a-z]\_*/*" works on both.
 file(GLOB_RECURSE template_files
         LIST_DIRECTORIES=true
         RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
-        "C/*" "[a-z][a-z]/*" "[a-z][a-z]_[A-Z][A-Z]/*")
+        "C/*" "[a-z][a-z]/*" "[a-z][a-z]\_*/*")
 
 foreach(template_file ${template_files})
     string(APPEND qrcContents "    <file>${template_file}</file>\n")

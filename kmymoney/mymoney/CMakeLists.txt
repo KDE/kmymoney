@@ -27,6 +27,7 @@ set(kmm_mymoney_LIB_SRCS
   onlinejobadministration.cpp
   onlinejobmessage.cpp
   onlinejobfolder.cpp
+  onlinepricemodel.cpp
   mymoneycontact.cpp
   payeeidentifiermodel.cpp
   statusmodel.cpp

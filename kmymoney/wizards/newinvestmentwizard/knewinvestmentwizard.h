@@ -31,7 +31,6 @@ class KNewInvestmentWizardPrivate;
 class KNewInvestmentWizard : public QWizard
 {
     Q_OBJECT
-public:
     /**
       * Use this constructor for the creation of a new investment
       */
@@ -47,35 +46,30 @@ public:
       */
     explicit KNewInvestmentWizard(const MyMoneySecurity& sec, QWidget *parent = nullptr);
 
+public:
     ~KNewInvestmentWizard();
-
-    /**
-     * This method sets the name in the name widget.
-     */
-    void setName(const QString& name);
-
-    /**
-      * Depending on the constructor used, this method either
-      * creates all necessary objects for the investment or updates
-      * them.
-      *
-      * @param parentId id of parent account for the investment
-      */
-    void createObjects(const QString& parentId);
 
     /**
       * Create a new investment in a given @p parent investment account
       */
     static void newInvestment(const MyMoneyAccount& parent);
+
+    /**
+     * Create a new investment in a given @p parent investment account and
+     * preset the data for the new account as provided in @a account
+     */
     static void newInvestment(MyMoneyAccount& account, const MyMoneyAccount& parent);
 
-    static void editInvestment(const MyMoneyAccount& parent);
+    /**
+     * Edit the investment in @p parent and the security it
+     * is denominated in
+     */
+    static void editInvestment(const MyMoneyAccount& investment);
 
-    MyMoneyAccount account() const;
-
-protected Q_SLOTS:
-    void slotCheckForExistingSymbol(const QString&);
-    void slotHelp();
+    /**
+     * Edit the @a security
+     */
+    static void editSecurity(const MyMoneySecurity& security);
 
 private:
     Q_DISABLE_COPY(KNewInvestmentWizard)

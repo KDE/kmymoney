@@ -20,10 +20,6 @@
 
 class MyMoneySecurity;
 
-namespace Ui {
-class KOnlineUpdateWizardPage;
-}
-
 /**
  * This class implements the Online Update page of the
  * @ref KNewInvestmentWizard.
@@ -39,19 +35,11 @@ public:
      * Overload the isComplete function to control the Next button
      */
     bool isComplete() const final override;
-    void init2(const MyMoneySecurity& security);
-
-    /**
-     * Return whether the m_onlineFactor control is enabled
-     */
-    bool isOnlineFactorEnabled() const;
-
-public Q_SLOTS:
-    void slotCheckPage(const QString&);
-    void slotSourceChanged(bool);
+    void init(const MyMoneySecurity& security);
 
 private:
-    Ui::KOnlineUpdateWizardPage  *ui;
+    class Private;
+    Private* const d;
 };
 
 #endif

@@ -1067,7 +1067,15 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                 // is called in the context of an automatic procedure it
                 // might distract the user.
                 payee.setName(importedPayeeName);
-                payee.setMatchData(eMyMoney::Payee::MatchType::Key, true, QStringList() << QString("^%1$").arg(QRegularExpression::escape(importedPayeeName)));
+
+                // Passing a list of two keys makes sure that we don't
+                // get in conflict with semi-colons in importedPayeeName
+                // which might be treated as separators from earlier versions
+                // otherwise.
+                payee.setMatchData(eMyMoney::Payee::MatchType::Key,
+                                   true,
+                                   QStringList() << QString("^%1$").arg(QRegularExpression::escape(importedPayeeName)) << QString());
+
                 if (m_askPayeeCategory) {
                     // We use a QPointer because the dialog may get deleted
                     // during exec() if the parent of the dialog gets deleted.
