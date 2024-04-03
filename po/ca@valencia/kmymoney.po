@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-31 01:59+0000\n"
-"PO-Revision-Date: 2024-03-05 15:28+0100\n"
+"PO-Revision-Date: 2024-03-31 13:42+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -4569,10 +4569,9 @@ msgstr ""
 "i/o suggeriments."
 
 #: kmymoney/kcreditswindow.cpp:41
-#, fuzzy, kde-format
-#| msgid "(c) 2000-2022 The KMyMoney development team"
+#, kde-format
 msgid "(c) 2000-2024 The KMyMoney development team"
-msgstr "(c) 2000-2022 L'equip de desenvolupament de KMyMoney"
+msgstr "(c) 2000-2024 L'equip de desenvolupament de KMyMoney"
 
 #: kmymoney/kcreditswindow.cpp:44
 #, kde-format

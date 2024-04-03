@@ -4348,10 +4348,9 @@ msgid ""
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:41
-#, fuzzy, kde-format
-#| msgid "(c) 2000-2022 The KMyMoney development team"
+#, kde-format
 msgid "(c) 2000-2024 The KMyMoney development team"
-msgstr "(c) 2000-2022 Vývojový tým KMyMoney"
+msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:44
 #, kde-format
