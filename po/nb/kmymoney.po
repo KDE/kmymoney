@@ -1,6 +1,6 @@
 # Translation of kmymoney to Norwegian Bokmål
 #
-# Kjetil Sørlund <translate@sorlund.no>, 2023.
+# Kjetil Sørlund <translate@sorlund.no>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
