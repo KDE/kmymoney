@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-31 01:59+0000\n"
-"PO-Revision-Date: 2024-03-07 11:58+0100\n"
+"PO-Revision-Date: 2024-04-01 12:49+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.02.0\n"
+"X-Generator: Lokalize 24.02.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4555,10 +4555,9 @@ msgstr ""
 "suggerimenti."
 
 #: kmymoney/kcreditswindow.cpp:41
-#, fuzzy, kde-format
-#| msgid "(c) 2000-2022 The KMyMoney development team"
+#, kde-format
 msgid "(c) 2000-2024 The KMyMoney development team"
-msgstr "(c) 2000-2022 La squadra di sviluppo di KMyMoney"
+msgstr "(c) 2000-2024 La squadra di sviluppo di KMyMoney"
 
 #: kmymoney/kcreditswindow.cpp:44
 #, kde-format
