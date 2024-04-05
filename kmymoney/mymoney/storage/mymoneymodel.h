@@ -611,6 +611,7 @@ public:
         bool rc = false;
         for (int row = 0; (rc == false) && (row < rows); ++row) {
             const auto idx = index(row, 0, parent);
+            rc |= static_cast<TreeItem<T>*>(idx.internalPointer())->constDataRef().hasReferenceTo(id);
             const auto childCount = rowCount(idx);
             if (!rc && childCount > 0) {
                 rc |= hasReferenceTo(idx, childCount, id);
