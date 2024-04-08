@@ -84,6 +84,7 @@ public Q_SLOTS:
 
 protected:
     void wheelEvent(QWheelEvent *ev) override;
+    void setSelected(const QString& id, bool ignoreCache);
 
 protected Q_SLOTS:
     void activated();
