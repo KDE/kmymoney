@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-31 01:59+0000\n"
+"POT-Creation-Date: 2024-04-10 01:45+0000\n"
 "PO-Revision-Date: 2015-02-19 20:48+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -22599,13 +22599,13 @@ msgstr "Den angivne BIC er ikke tildelt til nogen kreditinstitution."
 msgid "IBAN & BIC"
 msgstr "IBAN og BIC"
 
-#: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:61
+#: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:65
 #, fuzzy, kde-format
 #| msgid "This IBAN is invalid."
 msgid "This IBAN is too short."
 msgstr "IBAN er ugyldig."
 
-#: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:64
+#: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:68
 #, kde-format
 msgid "This IBAN is invalid."
 msgstr "IBAN er ugyldig."

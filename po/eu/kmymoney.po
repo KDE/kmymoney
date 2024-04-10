@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-31 01:59+0000\n"
+"POT-Creation-Date: 2024-04-10 01:45+0000\n"
 "PO-Revision-Date: 2024-02-13 01:23+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -21762,12 +21762,12 @@ msgstr "Emandako BIC ez dauka esleituta inolako kreditu erakunde."
 msgid "IBAN & BIC"
 msgstr "IBAN eta BIC"
 
-#: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:61
+#: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:65
 #, kde-format
 msgid "This IBAN is too short."
 msgstr "IBAN motzegia da"
 
-#: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:64
+#: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:68
 #, kde-format
 msgid "This IBAN is invalid."
 msgstr "IBAN baliogabea da"
