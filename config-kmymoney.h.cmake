@@ -20,3 +20,5 @@
 #cmakedefine ENABLE_SQLTRACER 1
 
 #cmakedefine ENABLE_GPG 1
+
+#cmakedefine ENABLE_COSTCENTER 1

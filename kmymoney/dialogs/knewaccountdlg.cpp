@@ -6,6 +6,7 @@
 */
 
 #include "knewaccountdlg.h"
+#include "config-kmymoney.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -201,7 +202,6 @@ public:
             if (tab != -1)
                 ui->m_tab->removeTab(tab);
 
-            //m_qlistviewParentAccounts->setEnabled(true);
             ui->accountNoEdit->setEnabled(false);
 
             ui->m_institutionBox->hide();
@@ -232,6 +232,10 @@ public:
 
             ui->m_qcheckboxTax->setChecked(m_account.isInTaxReports());
             ui->m_costCenterRequiredCheckBox->setChecked(m_account.isCostCenterRequired());
+
+#ifndef ENABLE_COSTCENTER
+            ui->m_costCenterRequiredCheckBox->hide();
+#endif
 
             loadVatAccounts();
         } else {
