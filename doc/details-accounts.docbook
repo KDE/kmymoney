@@ -369,9 +369,9 @@
 </para>
 
 <para>
-  Selecting the <emphasis>Preferred Account</emphasis> checkbox will allow preferred
-  access in some dialogs and views of &kmymoney;.  This is also referred to as a
-  <quote>Favorite</quote> account.
+  Selecting the <emphasis>Favorite Account</emphasis> checkbox will allow easier
+  access in some dialogs and views of &kmymoney;.  In some places, this has also been
+  referred to as a <quote>Preferred</quote> account.
 </para>
 
 <para>

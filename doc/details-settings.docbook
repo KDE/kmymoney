@@ -389,10 +389,10 @@
   </varlistentry>
 
   <varlistentry>
-    <term><guilabel>Preferred accounts</guilabel></term>
+    <term><guilabel>Favorite accounts</guilabel></term>
     <listitem>
       <para>
-        This will display the accounts that are identified as Preferred accounts in
+        This will display the accounts that are identified as Favorite accounts in
         the <guimenu>Account</guimenu> <guimenuitem>Edit account...</guimenuitem>
         Configuration dialog.
       </para>
@@ -1291,7 +1291,7 @@
 <sect2><title>XML Storage</title>
 <para>
   The default storage of your data is in &XML; format, described in the chapter on
-  <link linnkend="details.formats">File Formats</link>.  Because the code which reads
+  <link linkend="details.formats">File Formats</link>.  Because the code which reads
   and saves your data is implemented as a plugin, the configuration dialog which
   controls some aspects of this storage is accessed through the Plugin section of the
   general KMyMoney Configuration, although it is described in the above linked
