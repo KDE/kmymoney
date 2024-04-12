@@ -236,6 +236,9 @@ public:
 #ifndef ENABLE_COSTCENTER
             ui->m_costCenterRequiredCheckBox->hide();
 #endif
+            // no need to show the price entry mode for categories
+            ui->m_priceMode->hide();
+            ui->m_priceModeLabel->hide();
 
             loadVatAccounts();
         } else {
