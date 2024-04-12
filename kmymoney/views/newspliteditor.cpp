@@ -4,6 +4,7 @@
 */
 
 #include "newspliteditor.h"
+#include "config-kmymoney.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -355,6 +356,11 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
     d->ui->costCenterCombo->setModel(d->costCenterModel);
     d->ui->costCenterCombo->setModelColumn(0);
     d->ui->costCenterCombo->completer()->setFilterMode(Qt::MatchContains);
+
+#ifndef ENABLE_COSTCENTER
+    d->ui->costCenterCombo->hide();
+    d->ui->costCenterLabel->hide();
+#endif
 
     d->frameCollection = new WidgetHintFrameCollection(this);
     d->frameCollection->addFrame(new WidgetHintFrame(d->ui->costCenterCombo));

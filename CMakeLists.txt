@@ -318,6 +318,10 @@ cmake_dependent_option(ENABLE_LIBICAL "Enable Calendar plugin" ON
                        "LibIcal_FOUND" OFF)
 add_feature_info(iCalendar ENABLE_LIBICAL "iCalendar integration.")
 
+# Optional features currently under development
+option(ENABLE_COSTCENTER "Enable cost center support" OFF)
+add_feature_info("Cost center support" ENABLE_COSTCENTER "Adds support for cost centers (for devs only).")
+
 # Setup translations
 ki18n_install(po)
 

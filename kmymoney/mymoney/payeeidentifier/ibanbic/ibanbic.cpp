@@ -216,8 +216,10 @@ QString ibanBic::ibanToPaperformat(const QString& iban, const QString& separator
         }
     }
 
-    if (paperformat.length() >= 2) {
+    if (paperformat.length() >= 1) {
         paperformat[0] = paperformat[0].toUpper();
+    }
+    if (paperformat.length() >= 2) {
         paperformat[1] = paperformat[1].toUpper();
     }
     return paperformat;

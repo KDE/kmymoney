@@ -24,9 +24,8 @@ class KMM_BASE_WIDGETS_EXPORT ibanValidator : public QValidator
 
 public:
     explicit ibanValidator(QObject* parent = 0);
-    State validate(QString&, int&) const final override;
-    State validate(const QString&) const;
-    void fixup(QString&) const final override;
+    State validate(QString& input, int& pos) const final override;
+    void fixup(QString& input) const final override;
 
     static QPair<eWidgets::ValidationFeedback::MessageType, QString> validateWithMessage(const QString&);
 };

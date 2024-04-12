@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-31 01:59+0000\n"
+"POT-Creation-Date: 2024-04-10 01:45+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -22086,12 +22086,12 @@ msgstr ""
 msgid "IBAN & BIC"
 msgstr ""
 
-#: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:61
+#: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:65
 #, kde-format
 msgid "This IBAN is too short."
 msgstr ""
 
-#: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:64
+#: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:68
 #, kde-format
 msgid "This IBAN is invalid."
 msgstr ""

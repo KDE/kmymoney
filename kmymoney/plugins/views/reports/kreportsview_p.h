@@ -629,7 +629,7 @@ public:
         while (it_group != defaultreports.constEnd()) {
             groupName = (*it_group).name();
 
-            TocItemGroup* defaultTocItemGroup = new TocItemGroup(ui.m_tocTreeWidget, defaultGroupNo++, i18n(groupName.toLatin1().data()));
+            TocItemGroup* defaultTocItemGroup = new TocItemGroup(ui.m_tocTreeWidget, defaultGroupNo++, (*it_group).title());
 
             m_allTocItemGroups.insert(groupName, defaultTocItemGroup);
 

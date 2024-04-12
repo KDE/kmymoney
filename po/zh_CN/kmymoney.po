@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-31 01:59+0000\n"
-"PO-Revision-Date: 2024-03-17 20:45\n"
+"POT-Creation-Date: 2024-04-10 01:45+0000\n"
+"PO-Revision-Date: 2024-04-11 19:24\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -4350,10 +4350,9 @@ msgstr ""
 "如果您喜欢它，可以通过提供代码或者建议等方式来帮助它的开发。"
 
 #: kmymoney/kcreditswindow.cpp:41
-#, fuzzy, kde-format
-#| msgid "(c) 2000-2022 The KMyMoney development team"
+#, kde-format
 msgid "(c) 2000-2024 The KMyMoney development team"
-msgstr "(c) 2000-2022 KMyMoney开发团队"
+msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:44
 #, kde-format
@@ -21006,12 +21005,12 @@ msgstr ""
 msgid "IBAN & BIC"
 msgstr ""
 
-#: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:61
+#: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:65
 #, kde-format
 msgid "This IBAN is too short."
 msgstr ""
 
-#: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:64
+#: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:68
 #, kde-format
 msgid "This IBAN is invalid."
 msgstr ""

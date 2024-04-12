@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-31 01:59+0000\n"
-"PO-Revision-Date: 2024-03-05 12:16+0100\n"
+"POT-Creation-Date: 2024-04-10 01:45+0000\n"
+"PO-Revision-Date: 2024-04-01 01:09+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.02.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4560,10 +4560,9 @@ msgstr ""
 "Puede colaborar con este proyecto mediante código y/o sugerencias."
 
 #: kmymoney/kcreditswindow.cpp:41
-#, fuzzy, kde-format
-#| msgid "(c) 2000-2022 The KMyMoney development team"
+#, kde-format
 msgid "(c) 2000-2024 The KMyMoney development team"
-msgstr "© 2000-2022 El equipo de desarrollo de KMyMoney"
+msgstr "© 2000-2024 El equipo de desarrollo de KMyMoney"
 
 #: kmymoney/kcreditswindow.cpp:44
 #, kde-format
@@ -21841,12 +21840,12 @@ msgstr ""
 msgid "IBAN & BIC"
 msgstr "IBAN y BIC"
 
-#: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:61
+#: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:65
 #, kde-format
 msgid "This IBAN is too short."
 msgstr "Este IBAN es demasiado corto."
 
-#: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:64
+#: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:68
 #, kde-format
 msgid "This IBAN is invalid."
 msgstr "Este IBAN no es válido."

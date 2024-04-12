@@ -283,6 +283,11 @@ bool KMyMoneyAccountCombo::eventFilter(QObject* o, QEvent* e)
 
 void KMyMoneyAccountCombo::setSelected(const QString& id)
 {
+    setSelected(id, false);
+}
+
+void KMyMoneyAccountCombo::setSelected(const QString& id, bool ignoreCache)
+{
     if (id.isEmpty()) {
         d->m_lastSelectedAccount.clear();
         d->m_popupView->selectionModel()->clearSelection();
@@ -293,7 +298,7 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
         return;
     }
 
-    if (id == d->m_lastSelectedAccount) {
+    if (!ignoreCache && (id == d->m_lastSelectedAccount)) {
         // nothing to do
         return;
     }
@@ -345,6 +350,15 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
     d->m_popupView->setSelectionMode(QAbstractItemView::SingleSelection);
     setView(d->m_popupView);
 
+    // we need to use the following logic to support the tree view popup because
+    // the regular QComboBox::popupView only support simple rows. We need
+    // to select the item based on the current index, convert it to the
+    // account id and set it up using the id.
+    connect(this, &QComboBox::activated, this, [&]() {
+        // make sure to ignore the cache during this selection
+        setSelected(d->m_popupView->selectionModel()->currentIndex().data(eMyMoney::Model::IdRole).toString(), true);
+    });
+
     // setup view parameters
     d->m_popupView->setHeaderHidden(true);
     d->m_popupView->setRootIsDecorated(true);
@@ -352,7 +366,6 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
     d->m_popupView->setAnimated(true);
 
     d->m_popupView->expandAll();
-    connect(d->m_popupView, &QTreeView::activated, this, &KMyMoneyAccountCombo::selectItem);
 
     d->m_popupView->installEventFilter(this);
 
