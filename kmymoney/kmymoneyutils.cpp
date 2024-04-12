@@ -122,7 +122,7 @@ const char* homePageItems[] = {
     kli18n("Forecast (history)").untranslatedText(), // unused, s.a. KSettingsHome::slotLoadItems()
     kli18n("Assets and Liabilities").untranslatedText(),
     kli18n("Budget").untranslatedText(),
-    kli18n("CashFlow").untranslatedText(),
+    kli18n("Cash Flow").untranslatedText(),
     // insert new items above this comment
     0,
 };
