@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-10 01:45+0000\n"
+"POT-Creation-Date: 2024-04-13 01:44+0000\n"
 "PO-Revision-Date: 2024-04-01 01:09+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -2191,31 +2191,31 @@ msgstr "Borrar esta entrada"
 msgid "Delete"
 msgstr "Borrar"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:171
+#: kmymoney/dialogs/knewaccountdlg.cpp:172
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:151
 #, kde-format
 msgctxt "default price mode"
 msgid "(default)"
 msgstr "(predeterminado)"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:172
+#: kmymoney/dialogs/knewaccountdlg.cpp:173
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:152
 #, kde-format
 msgid "Price per share"
 msgstr "Precio por acción"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:173
+#: kmymoney/dialogs/knewaccountdlg.cpp:174
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:153
 #, kde-format
 msgid "Total for all shares"
 msgstr "Total para todas las acciones"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:241
+#: kmymoney/dialogs/knewaccountdlg.cpp:248
 #, kde-format
 msgid "VAT account"
 msgstr "Cuenta de IVA"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:531 kmymoney/kmymoney.cpp:434
+#: kmymoney/dialogs/knewaccountdlg.cpp:538 kmymoney/kmymoney.cpp:434
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:188
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:370
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:73
@@ -2223,7 +2223,7 @@ msgstr "Cuenta de IVA"
 msgid "Asset"
 msgstr "Activos"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:533 kmymoney/kmymoney.cpp:435
+#: kmymoney/dialogs/knewaccountdlg.cpp:540 kmymoney/kmymoney.cpp:435
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:189
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:378
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:75
@@ -2231,7 +2231,7 @@ msgstr "Activos"
 msgid "Liability"
 msgstr "Pasivos"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:535 kmymoney/kmymoney.cpp:436
+#: kmymoney/dialogs/knewaccountdlg.cpp:542 kmymoney/kmymoney.cpp:436
 #: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1828
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
@@ -2240,7 +2240,7 @@ msgstr "Pasivos"
 msgid "Income"
 msgstr "Ingreso"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:537 kmymoney/kmymoney.cpp:437
+#: kmymoney/dialogs/knewaccountdlg.cpp:544 kmymoney/kmymoney.cpp:437
 #: kmymoney/models/ledgerfilterbase.cpp:97
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:79
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:191
@@ -2249,7 +2249,7 @@ msgstr "Ingreso"
 msgid "Expense"
 msgstr "Gasto"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:584
+#: kmymoney/dialogs/knewaccountdlg.cpp:591
 #, kde-format
 msgid ""
 "Option has been disabled because there are transactions assigned to this "
@@ -2257,7 +2257,7 @@ msgid ""
 msgstr ""
 "La opción se ha desactivado porque hay transacciones asignadas a esta cuenta"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:589
+#: kmymoney/dialogs/knewaccountdlg.cpp:596
 #, kde-format
 msgid ""
 "Option has been disabled because there is another account flagged to be an "
@@ -2266,13 +2266,13 @@ msgstr ""
 "La opción se ha desactivado porque hay otra cuenta marcada para ser una "
 "cuenta de saldo de apertura para esta moneda"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:609
+#: kmymoney/dialogs/knewaccountdlg.cpp:616
 #, kde-format
 msgctxt "@label:chooser %1 account name, %2 parent account name"
 msgid "<b>%1</b> is a sub account of <b>%2</b>"
 msgstr "<b>%1</b> es una subcuenta de <b>%2</b>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:727
+#: kmymoney/dialogs/knewaccountdlg.cpp:734
 #, kde-format
 msgid ""
 "You have not specified a name.\n"
@@ -2281,14 +2281,14 @@ msgstr ""
 "No ha especificado ningún nombre.\n"
 "Rellene este campo."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:734
+#: kmymoney/dialogs/knewaccountdlg.cpp:741
 #, kde-format
 msgid "Please select a parent account."
 msgstr "Seleccione una cuenta madre."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:740
-#: kmymoney/dialogs/knewaccountdlg.cpp:912
-#: kmymoney/dialogs/knewaccountdlg.cpp:927
+#: kmymoney/dialogs/knewaccountdlg.cpp:747
+#: kmymoney/dialogs/knewaccountdlg.cpp:919
+#: kmymoney/dialogs/knewaccountdlg.cpp:934
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:518
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:45
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:80
@@ -2296,7 +2296,7 @@ msgstr "Seleccione una cuenta madre."
 msgid "(No Institution)"
 msgstr "(No hay ninguna institución)"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:795
+#: kmymoney/dialogs/knewaccountdlg.cpp:802
 #, kde-format
 msgid ""
 "A category named <b>%1</b> already exists. You cannot create a second "
@@ -2305,7 +2305,7 @@ msgstr ""
 "Ya existe una categoría llamada <b>%1</b>- No puede crear una segunda "
 "categoría con el mismo nombre."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:825
+#: kmymoney/dialogs/knewaccountdlg.cpp:832
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2319,13 +2319,13 @@ msgstr ""
 "se mostrará si se usa. En caso contrario, estará oculta en todas las vistas "
 "de cuentas."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:827
+#: kmymoney/dialogs/knewaccountdlg.cpp:834
 #, kde-format
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
 msgstr "Cuentas ocultas"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:835
+#: kmymoney/dialogs/knewaccountdlg.cpp:842
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2339,43 +2339,43 @@ msgstr ""
 "solo se mostrará si es usada. En otro caso, estará oculta en la vista de "
 "cuentas/categorías."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:837
+#: kmymoney/dialogs/knewaccountdlg.cpp:844
 #, kde-format
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "Categorías ocultas"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:952
+#: kmymoney/dialogs/knewaccountdlg.cpp:959
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
 #, kde-format
 msgid "Cannot add institution"
 msgstr "No se puede añadir la institución"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:989
+#: kmymoney/dialogs/knewaccountdlg.cpp:996
 #, kde-format
 msgctxt "@info:tooltip Hint to provide name"
 msgid "Please provide a name for the new category or account."
 msgstr "Proporcione un nombre para la nueva categoría o cuenta."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:994
+#: kmymoney/dialogs/knewaccountdlg.cpp:1001
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
 msgstr "No se puede crear una cuenta o categoría que contenga %1 en el nombre."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1001
+#: kmymoney/dialogs/knewaccountdlg.cpp:1008
 #, kde-format
 msgctxt "@info:tooltip Hint to provide VAT percentage in range"
 msgid "Please provide a percentage greater than zero and less than 100."
 msgstr "Proporcione un porcentaje mayor que cero y menor que 100."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1005
+#: kmymoney/dialogs/knewaccountdlg.cpp:1012
 #, kde-format
 msgctxt "@info:tooltip Hint to provide category to assign VAT"
 msgid "Please select a category for the VAT."
 msgstr "Seleccione una categoría para el IVA."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1070
+#: kmymoney/dialogs/knewaccountdlg.cpp:1077
 #, kde-format
 msgid ""
 "<p>The category <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2386,13 +2386,13 @@ msgstr ""
 "p><p><i>La cuenta madre será <b>%2</b>, pero puede cambiarla en el siguiente "
 "diálogo</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1074
-#: kmymoney/dialogs/knewaccountdlg.cpp:1099
+#: kmymoney/dialogs/knewaccountdlg.cpp:1081
+#: kmymoney/dialogs/knewaccountdlg.cpp:1106
 #, kde-format
 msgid "Create category"
 msgstr "Crear categoría"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1095
+#: kmymoney/dialogs/knewaccountdlg.cpp:1102
 #, kde-format
 msgid ""
 "<p>The account <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2403,13 +2403,13 @@ msgstr ""
 "cuenta madre será <b>%2</b>, pero puede cambiarla en el siguiente diálogo</"
 "i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1117
+#: kmymoney/dialogs/knewaccountdlg.cpp:1124
 #, kde-format
 msgctxt "@title:window"
 msgid "Create a new Category"
 msgstr "Crear una nueva categoría"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1122
+#: kmymoney/dialogs/knewaccountdlg.cpp:1129
 #, kde-format
 msgctxt "@title:window"
 msgid "Create a new Account"
@@ -2509,7 +2509,6 @@ msgid "Preferred Account"
 msgstr "Cuenta preferida"
 
 #. i18n: ectx: property (text), widget (QLabel, m_priceModeLabel)
-#. i18n: ectx: property (text), widget (QLabel, textLabel1_5)
 #: kmymoney/dialogs/knewaccountdlg.ui:250
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:67
 #, kde-format
@@ -6034,8 +6033,10 @@ msgid "Budget"
 msgstr "Presupuesto"
 
 #: kmymoney/kmymoneyutils.cpp:125
-msgid "CashFlow"
-msgstr "Tesorería"
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1015
+#, kde-format
+msgid "Cash Flow"
+msgstr "Flujo de caja"
 
 #: kmymoney/kmymoneyutils.cpp:276 kmymoney/views/kenterscheduledlg.cpp:124
 #, kde-format
@@ -16665,11 +16666,6 @@ msgstr "Asientos de préstamos"
 msgid "Transactions by Reconciliation Status"
 msgstr "Asientos por estado de conciliación"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1015
-#, kde-format
-msgid "Cash Flow"
-msgstr "Flujo de caja"
-
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1020
 #, kde-format
 msgid "Cash Flow Transactions This Month"
@@ -18877,14 +18873,14 @@ msgid "Interest Income"
 msgstr "Ingresos por intereses"
 
 #: kmymoney/views/investtransactioneditor.cpp:261
-#: kmymoney/views/multitransactioneditor.cpp:184
+#: kmymoney/views/multitransactioneditor.cpp:185
 #: kmymoney/views/newtransactioneditor.cpp:255
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "La fecha de valor de la transacción."
 
 #: kmymoney/views/investtransactioneditor.cpp:285
-#: kmymoney/views/multitransactioneditor.cpp:214
+#: kmymoney/views/multitransactioneditor.cpp:215
 #: kmymoney/views/newtransactioneditor.cpp:275
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
@@ -20737,19 +20733,19 @@ msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "Saldo: %1"
 
-#: kmymoney/views/multitransactioneditor.cpp:192
+#: kmymoney/views/multitransactioneditor.cpp:193
 #: kmymoney/views/newtransactioneditor.cpp:258
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "La fecha de valor no es válida."
 
-#: kmymoney/views/multitransactioneditor.cpp:225
+#: kmymoney/views/multitransactioneditor.cpp:226
 #: kmymoney/views/newtransactioneditor.cpp:293
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
 msgstr "El centro de costos al que se debe asignar esta transacción."
 
-#: kmymoney/views/multitransactioneditor.cpp:228
+#: kmymoney/views/multitransactioneditor.cpp:229
 #: kmymoney/views/newtransactioneditor.cpp:296
 #, kde-format
 msgid ""
@@ -20759,12 +20755,12 @@ msgstr ""
 "Se necesita asignar un centro de costos para las transacciones de la "
 "categoría seleccionada."
 
-#: kmymoney/views/multitransactioneditor.cpp:247
+#: kmymoney/views/multitransactioneditor.cpp:248
 #, kde-format
 msgid "Select category or account."
 msgstr "Seleccione categoría o cuenta."
 
-#: kmymoney/views/multitransactioneditor.cpp:261
+#: kmymoney/views/multitransactioneditor.cpp:262
 #, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
@@ -20774,13 +20770,13 @@ msgstr ""
 "Una transacción seleccionada tiene una fecha de valor (%1) anterior a la "
 "fecha de apertura de la cuenta seleccionada (%2)."
 
-#: kmymoney/views/multitransactioneditor.cpp:722
+#: kmymoney/views/multitransactioneditor.cpp:728
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "No se pueden editar múltiples planificaciones al mismo tiempo."
 
-#: kmymoney/views/multitransactioneditor.cpp:731
+#: kmymoney/views/multitransactioneditor.cpp:737
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -20790,7 +20786,7 @@ msgstr ""
 "La selección de una categoría o cuenta no es posible cuando las "
 "transacciones con partidas son parte de la selección."
 
-#: kmymoney/views/multitransactioneditor.cpp:735
+#: kmymoney/views/multitransactioneditor.cpp:741
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -20800,7 +20796,7 @@ msgstr ""
 "La selección de etiquetas no es posible cuando las transacciones con "
 "partidas son parte de la selección."
 
-#: kmymoney/views/multitransactioneditor.cpp:739
+#: kmymoney/views/multitransactioneditor.cpp:745
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -20810,13 +20806,13 @@ msgstr ""
 "La selección de un centro de costos no es posible cuando las transacciones "
 "con partidas son parte de la selección."
 
-#: kmymoney/views/newspliteditor.cpp:152
+#: kmymoney/views/newspliteditor.cpp:153
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "El centro de costos al que se debe asignar esta transacción."
 
-#: kmymoney/views/newspliteditor.cpp:157
+#: kmymoney/views/newspliteditor.cpp:158
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid ""
@@ -20826,25 +20822,25 @@ msgstr ""
 "Se necesita asignar un centro de costos para las transacciones de la "
 "categoría seleccionada."
 
-#: kmymoney/views/newspliteditor.cpp:168
+#: kmymoney/views/newspliteditor.cpp:169
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "La categoría a la que se debe asignar esta partida."
 
-#: kmymoney/views/newspliteditor.cpp:209
+#: kmymoney/views/newspliteditor.cpp:210
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "Se necesita asignar una categoría para las partidas."
 
-#: kmymoney/views/newspliteditor.cpp:218
+#: kmymoney/views/newspliteditor.cpp:219
 #: kmymoney/views/newtransactioneditor.cpp:410
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "El número de cheque usado para esta transacción."
 
-#: kmymoney/views/newspliteditor.cpp:227
+#: kmymoney/views/newspliteditor.cpp:228
 #: kmymoney/views/newtransactioneditor.cpp:420
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
@@ -25278,6 +25274,9 @@ msgstr ""
 "\n"
 "<p>Toda la información es opcional y solo se usa para personalizar su "
 "archivo de KMyMoney.</p>"
+
+#~ msgid "CashFlow"
+#~ msgstr "Tesorería"
 
 #~ msgid "Select Account:"
 #~ msgstr "Seleccionar cuenta:"
