@@ -19,6 +19,9 @@
      <property name="currentIndex">
       <number>0</number>
      </property>
+     <property name="tabsClosable">
+      <bool>true</bool>
+     </property>
      <widget class="QWidget" name="m_listTab">
       <attribute name="title">
        <string comment=" ">Reports</string>

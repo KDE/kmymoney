@@ -106,22 +106,6 @@
      </property>
     </widget>
    </item>
-   <item>
-    <widget class="QToolButton" name="buttonClose">
-     <property name="minimumSize">
-      <size>
-       <width>75</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="toolTip">
-      <string>Close this window</string>
-     </property>
-     <property name="text">
-      <string>Close</string>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

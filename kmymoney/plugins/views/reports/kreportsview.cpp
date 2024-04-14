@@ -168,6 +168,16 @@ void KReportsView::showEvent(QShowEvent * event)
             Q_D(KReportsView);
             d->setFilter(text);
         });
+
+        // remove close button from list tab
+        QTabBar* bar = d->ui.m_reportTabWidget->findChild<QTabBar*>();
+        if (bar) {
+            QTabBar::ButtonPosition closeSide =
+                (QTabBar::ButtonPosition)style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition, 0, d->ui.m_reportTabWidget->widget(0));
+            QWidget* w = bar->tabButton(0, closeSide);
+            bar->setTabButton(0, closeSide, nullptr);
+            w->deleteLater();
+        }
     }
     if (d->m_needsRefresh) {
         refresh();
