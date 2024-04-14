@@ -728,6 +728,7 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     d->securityFilterModel->setSourceModel(accountsModel);
     d->securityFilterModel->setHideEquityAccounts(false);
     d->securityFilterModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
+    d->securityFilterModel->setShowSecuritySymbols(true);
 
     d->accountsListModel->setSourceModel(d->securityFilterModel);
 
