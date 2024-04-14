@@ -25,6 +25,7 @@
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"
 #include "schedulesjournalmodel.h"
+#include "securitiesmodel.h"
 
 AccountsProxyModel::AccountsProxyModel(QObject *parent) :
     QSortFilterProxyModel(parent),
@@ -237,6 +238,21 @@ Qt::ItemFlags AccountsProxyModel::flags(const QModelIndex& index) const
         flags.setFlag(Qt::ItemIsSelectable, false);
     }
     return flags;
+}
+
+QVariant AccountsProxyModel::data(const QModelIndex& index, int role) const
+{
+    Q_D(const AccountsProxyModel);
+    if ((d->m_showSecuritySymbol == true) && (role == Qt::DisplayRole || role == Qt::EditRole) && (index.column() == AccountsModel::Column::AccountName)) {
+        auto name = QSortFilterProxyModel::data(index, role).toString();
+        const auto securityId = QSortFilterProxyModel::data(index, eMyMoney::Model::AccountCurrencyIdRole).toString();
+        const auto security = MyMoneyFile::instance()->securitiesModel()->itemById(securityId);
+        if (!security.id().isEmpty() && !security.isCurrency()) {
+            return QStringLiteral("%1 (%2)").arg(name, security.tradingSymbol());
+        }
+        return name;
+    }
+    return QSortFilterProxyModel::data(index, role);
 }
 
 /**
@@ -615,4 +631,16 @@ void AccountsProxyModel::setSelectableAccountTypes(QSet<eMyMoney::Account::Type>
 {
     Q_D(AccountsProxyModel);
     d->m_selectableAccountTypes = selectableAccountTypes;
+}
+
+void AccountsProxyModel::setShowSecuritySymbols(bool showSecuritySymbols)
+{
+    Q_D(AccountsProxyModel);
+    d->m_showSecuritySymbol = showSecuritySymbols;
+}
+
+bool AccountsProxyModel::showSecuritySymbols() const
+{
+    Q_D(const AccountsProxyModel);
+    return d->m_showSecuritySymbol;
 }

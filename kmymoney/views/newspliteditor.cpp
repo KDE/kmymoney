@@ -599,7 +599,7 @@ QString NewSplitEditor::payeeId() const
 void NewSplitEditor::setPayeeId(const QString& id)
 {
     QModelIndexList indexes = d->payeesModel->match(d->payeesModel->index(0, 0), eMyMoney::Model::IdRole, QVariant(id), 1, Qt::MatchFlags(Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive)));
-    int row(0);
+    int row(-1);
     if (!indexes.isEmpty()) {
         row = indexes.first().row();
     }
@@ -691,6 +691,8 @@ bool NewSplitEditor::eventFilter(QObject* o, QEvent* e)
                     } else {
                         d->createPayee();
                     }
+                } else {
+                    cb->setCurrentIndex(-1);
                 }
             } else if (o == d->ui->tagContainer->tagCombo()) {
                 if (!cb->currentText().isEmpty()) {

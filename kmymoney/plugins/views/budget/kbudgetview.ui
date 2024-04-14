@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>862</width>
-    <height>302</height>
+    <height>305</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -117,7 +117,7 @@
             <string>Use this to store the modified data.</string>
            </property>
            <property name="text">
-            <string>Upd</string>
+            <string>Update</string>
            </property>
            <property name="shortcut">
             <string/>
@@ -136,7 +136,7 @@
             <string>Use this to discard the modified data.</string>
            </property>
            <property name="text">
-            <string>Res</string>
+            <string>Reset</string>
            </property>
            <property name="shortcut">
             <string/>
@@ -144,10 +144,18 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="m_collapseButton"/>
+          <widget class="QPushButton" name="m_collapseButton">
+           <property name="toolTip">
+            <string>Collapse the items of the account tree</string>
+           </property>
+          </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="m_expandButton"/>
+          <widget class="QPushButton" name="m_expandButton">
+           <property name="toolTip">
+            <string>Expand the items of the account tree</string>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QCheckBox" name="m_hideUnusedButton">

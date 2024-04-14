@@ -105,6 +105,9 @@ public:
     void setShowAllEntries(bool hideAllEntries);
     bool showAllEntries() const;
 
+    void setShowSecuritySymbols(bool showSecuritySymbols);
+    bool showSecuritySymbols() const;
+
     void setState(State state);
     State state() const;
 
@@ -117,6 +120,8 @@ public:
     void setClosedSelectable(bool selectable);
 
     Qt::ItemFlags flags(const QModelIndex &index) const override;
+
+    QVariant data(const QModelIndex& index, int role) const override;
 
     /**
      * This is a convenience method which returns a prefilled vector

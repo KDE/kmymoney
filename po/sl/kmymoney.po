@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-10 01:45+0000\n"
+"POT-Creation-Date: 2024-04-13 01:44+0000\n"
 "PO-Revision-Date: 2024-03-31 06:55+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -2189,31 +2189,31 @@ msgstr "Zbriši ta vnos"
 msgid "Delete"
 msgstr "Zbriši"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:171
+#: kmymoney/dialogs/knewaccountdlg.cpp:172
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:151
 #, kde-format
 msgctxt "default price mode"
 msgid "(default)"
 msgstr "(privzeto)"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:172
+#: kmymoney/dialogs/knewaccountdlg.cpp:173
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:152
 #, kde-format
 msgid "Price per share"
 msgstr "Cena za delnico"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:173
+#: kmymoney/dialogs/knewaccountdlg.cpp:174
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:153
 #, kde-format
 msgid "Total for all shares"
 msgstr "Skupaj za vse delnice"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:241
+#: kmymoney/dialogs/knewaccountdlg.cpp:248
 #, kde-format
 msgid "VAT account"
 msgstr "Račun za DDV"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:531 kmymoney/kmymoney.cpp:434
+#: kmymoney/dialogs/knewaccountdlg.cpp:538 kmymoney/kmymoney.cpp:434
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:188
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:370
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:73
@@ -2221,7 +2221,7 @@ msgstr "Račun za DDV"
 msgid "Asset"
 msgstr "Imetje"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:533 kmymoney/kmymoney.cpp:435
+#: kmymoney/dialogs/knewaccountdlg.cpp:540 kmymoney/kmymoney.cpp:435
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:189
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:378
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:75
@@ -2229,7 +2229,7 @@ msgstr "Imetje"
 msgid "Liability"
 msgstr "Obveznost"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:535 kmymoney/kmymoney.cpp:436
+#: kmymoney/dialogs/knewaccountdlg.cpp:542 kmymoney/kmymoney.cpp:436
 #: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1828
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
@@ -2238,7 +2238,7 @@ msgstr "Obveznost"
 msgid "Income"
 msgstr "Dohodek"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:537 kmymoney/kmymoney.cpp:437
+#: kmymoney/dialogs/knewaccountdlg.cpp:544 kmymoney/kmymoney.cpp:437
 #: kmymoney/models/ledgerfilterbase.cpp:97
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:79
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:191
@@ -2247,14 +2247,14 @@ msgstr "Dohodek"
 msgid "Expense"
 msgstr "Izdatek"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:584
+#: kmymoney/dialogs/knewaccountdlg.cpp:591
 #, kde-format
 msgid ""
 "Option has been disabled because there are transactions assigned to this "
 "account"
 msgstr "Možnost je onemogočena, ker so pri temu računu dodeljene transakcije"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:589
+#: kmymoney/dialogs/knewaccountdlg.cpp:596
 #, kde-format
 msgid ""
 "Option has been disabled because there is another account flagged to be an "
@@ -2263,13 +2263,13 @@ msgstr ""
 "Možnost je onemogočena, ker je še en račun označen kot začetno stanje na "
 "računu za to valuto"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:609
+#: kmymoney/dialogs/knewaccountdlg.cpp:616
 #, kde-format
 msgctxt "@label:chooser %1 account name, %2 parent account name"
 msgid "<b>%1</b> is a sub account of <b>%2</b>"
 msgstr "<b>%1</b> Je pod-račun od <b>%2</b>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:727
+#: kmymoney/dialogs/knewaccountdlg.cpp:734
 #, kde-format
 msgid ""
 "You have not specified a name.\n"
@@ -2278,14 +2278,14 @@ msgstr ""
 "Niste določili imena.\n"
 "Prosim vnesite to polje."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:734
+#: kmymoney/dialogs/knewaccountdlg.cpp:741
 #, kde-format
 msgid "Please select a parent account."
 msgstr "Izberite narejeni račun."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:740
-#: kmymoney/dialogs/knewaccountdlg.cpp:912
-#: kmymoney/dialogs/knewaccountdlg.cpp:927
+#: kmymoney/dialogs/knewaccountdlg.cpp:747
+#: kmymoney/dialogs/knewaccountdlg.cpp:919
+#: kmymoney/dialogs/knewaccountdlg.cpp:934
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:518
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:45
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:80
@@ -2293,7 +2293,7 @@ msgstr "Izberite narejeni račun."
 msgid "(No Institution)"
 msgstr "(Brez institucije)"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:795
+#: kmymoney/dialogs/knewaccountdlg.cpp:802
 #, kde-format
 msgid ""
 "A category named <b>%1</b> already exists. You cannot create a second "
@@ -2302,7 +2302,7 @@ msgstr ""
 "Kategorija z imenom <b>%1</b> že obstaja. Ne morete ustvariti še ene "
 "kategorije z istim imenom."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:825
+#: kmymoney/dialogs/knewaccountdlg.cpp:832
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2316,13 +2316,13 @@ msgstr ""
 "prikazan le, če bo uporabljen. V nasprotnem primeru bo skrit v vseh pogledih "
 "računov."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:827
+#: kmymoney/dialogs/knewaccountdlg.cpp:834
 #, kde-format
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
 msgstr "Skriti računi"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:835
+#: kmymoney/dialogs/knewaccountdlg.cpp:842
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2336,43 +2336,43 @@ msgstr ""
 "prikazana le, če bo uporabljena. V nasprotnem primeru bo skrita v pogledu "
 "računov/kategorij."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:837
+#: kmymoney/dialogs/knewaccountdlg.cpp:844
 #, kde-format
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "Skrite kategorije"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:952
+#: kmymoney/dialogs/knewaccountdlg.cpp:959
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
 #, kde-format
 msgid "Cannot add institution"
 msgstr "Ni mogoče dodati institucije"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:989
+#: kmymoney/dialogs/knewaccountdlg.cpp:996
 #, kde-format
 msgctxt "@info:tooltip Hint to provide name"
 msgid "Please provide a name for the new category or account."
 msgstr "Vnesite ime nove kategorije ali računa."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:994
+#: kmymoney/dialogs/knewaccountdlg.cpp:1001
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
 msgstr "Ne morete ustvariti računa ali kategorije, ki vsebuje %1 v imenu."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1001
+#: kmymoney/dialogs/knewaccountdlg.cpp:1008
 #, kde-format
 msgctxt "@info:tooltip Hint to provide VAT percentage in range"
 msgid "Please provide a percentage greater than zero and less than 100."
 msgstr "Vnesite odstotek večji od nič in manjši od 100."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1005
+#: kmymoney/dialogs/knewaccountdlg.cpp:1012
 #, kde-format
 msgctxt "@info:tooltip Hint to provide category to assign VAT"
 msgid "Please select a category for the VAT."
 msgstr "Izberite kategorijo za DDV."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1070
+#: kmymoney/dialogs/knewaccountdlg.cpp:1077
 #, kde-format
 msgid ""
 "<p>The category <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2383,13 +2383,13 @@ msgstr ""
 "p><p><i>Privzeti nadrejeni račun je <b>%2</b> a to lahko spremenite v "
 "naslednjem dialogu</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1074
-#: kmymoney/dialogs/knewaccountdlg.cpp:1099
+#: kmymoney/dialogs/knewaccountdlg.cpp:1081
+#: kmymoney/dialogs/knewaccountdlg.cpp:1106
 #, kde-format
 msgid "Create category"
 msgstr "Ustvari kategorijo"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1095
+#: kmymoney/dialogs/knewaccountdlg.cpp:1102
 #, kde-format
 msgid ""
 "<p>The account <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2400,13 +2400,13 @@ msgstr ""
 "p><p><i>Privzeti nadrejeni račun je <b>%2</b> a to lahko spremenite v "
 "naslednjem dialogu</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1117
+#: kmymoney/dialogs/knewaccountdlg.cpp:1124
 #, kde-format
 msgctxt "@title:window"
 msgid "Create a new Category"
 msgstr "Ustvari novo kategorijo"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1122
+#: kmymoney/dialogs/knewaccountdlg.cpp:1129
 #, kde-format
 msgctxt "@title:window"
 msgid "Create a new Account"
@@ -2506,7 +2506,6 @@ msgid "Preferred Account"
 msgstr "Priljubljen račun"
 
 #. i18n: ectx: property (text), widget (QLabel, m_priceModeLabel)
-#. i18n: ectx: property (text), widget (QLabel, textLabel1_5)
 #: kmymoney/dialogs/knewaccountdlg.ui:250
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:67
 #, kde-format
@@ -6011,7 +6010,9 @@ msgid "Budget"
 msgstr "Proračun"
 
 #: kmymoney/kmymoneyutils.cpp:125
-msgid "CashFlow"
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1015
+#, kde-format
+msgid "Cash Flow"
 msgstr "Denarni tok"
 
 #: kmymoney/kmymoneyutils.cpp:276 kmymoney/views/kenterscheduledlg.cpp:124
@@ -16617,11 +16618,6 @@ msgstr "Posojilne transakcije"
 msgid "Transactions by Reconciliation Status"
 msgstr "Transakcije po stanju usklajevanja"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1015
-#, kde-format
-msgid "Cash Flow"
-msgstr "Denarni tok"
-
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1020
 #, kde-format
 msgid "Cash Flow Transactions This Month"
@@ -18824,14 +18820,14 @@ msgid "Interest Income"
 msgstr "Dohodek od obresti"
 
 #: kmymoney/views/investtransactioneditor.cpp:261
-#: kmymoney/views/multitransactioneditor.cpp:184
+#: kmymoney/views/multitransactioneditor.cpp:185
 #: kmymoney/views/newtransactioneditor.cpp:255
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "Datum objave transakcije."
 
 #: kmymoney/views/investtransactioneditor.cpp:285
-#: kmymoney/views/multitransactioneditor.cpp:214
+#: kmymoney/views/multitransactioneditor.cpp:215
 #: kmymoney/views/newtransactioneditor.cpp:275
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
@@ -20687,19 +20683,19 @@ msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "Saldo: %1"
 
-#: kmymoney/views/multitransactioneditor.cpp:192
+#: kmymoney/views/multitransactioneditor.cpp:193
 #: kmymoney/views/newtransactioneditor.cpp:258
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "Datum objave je neveljaven."
 
-#: kmymoney/views/multitransactioneditor.cpp:225
+#: kmymoney/views/multitransactioneditor.cpp:226
 #: kmymoney/views/newtransactioneditor.cpp:293
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
 msgstr "Stroškovno mesto, ki mu je treba dodeliti to transakcijo."
 
-#: kmymoney/views/multitransactioneditor.cpp:228
+#: kmymoney/views/multitransactioneditor.cpp:229
 #: kmymoney/views/newtransactioneditor.cpp:296
 #, kde-format
 msgid ""
@@ -20708,12 +20704,12 @@ msgid ""
 msgstr ""
 "Potrebna je dodelitev stroškovnega mesta za transakcijo v izbrani kategoriji."
 
-#: kmymoney/views/multitransactioneditor.cpp:247
+#: kmymoney/views/multitransactioneditor.cpp:248
 #, kde-format
 msgid "Select category or account."
 msgstr "Izberite kategorijo ali račun."
 
-#: kmymoney/views/multitransactioneditor.cpp:261
+#: kmymoney/views/multitransactioneditor.cpp:262
 #, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
@@ -20723,13 +20719,13 @@ msgstr ""
 "Izbrana transakcija ima datum objave (%1) pred datumom odprtja izbranega "
 "računa (%2)."
 
-#: kmymoney/views/multitransactioneditor.cpp:722
+#: kmymoney/views/multitransactioneditor.cpp:728
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "Ni mogoče urejati več časovnih načrtov naenkrat."
 
-#: kmymoney/views/multitransactioneditor.cpp:731
+#: kmymoney/views/multitransactioneditor.cpp:737
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -20739,7 +20735,7 @@ msgstr ""
 "Izbira kategorije ali računa ni mogoča, kadar so razcepljene transakcije del "
 "izbire."
 
-#: kmymoney/views/multitransactioneditor.cpp:735
+#: kmymoney/views/multitransactioneditor.cpp:741
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -20747,7 +20743,7 @@ msgid ""
 "selection."
 msgstr "Izbira oznak ni mogoča, kadar so razcepljene transakcije del izbire."
 
-#: kmymoney/views/multitransactioneditor.cpp:739
+#: kmymoney/views/multitransactioneditor.cpp:745
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -20757,13 +20753,13 @@ msgstr ""
 "Izbira stroškovnega mesta ni mogoča, kadar so razcepljene transakcije del "
 "izbire."
 
-#: kmymoney/views/newspliteditor.cpp:152
+#: kmymoney/views/newspliteditor.cpp:153
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "Stroškovno mesto, kamor je treba dodeliti to transakcijo."
 
-#: kmymoney/views/newspliteditor.cpp:157
+#: kmymoney/views/newspliteditor.cpp:158
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid ""
@@ -20772,25 +20768,25 @@ msgid ""
 msgstr ""
 "Potrebno je dodeliti stroškovno mesta za transakcijo v izbrani kategoriji."
 
-#: kmymoney/views/newspliteditor.cpp:168
+#: kmymoney/views/newspliteditor.cpp:169
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "Stroškovno mesto kamor je treba dodeliti delež te transakcije."
 
-#: kmymoney/views/newspliteditor.cpp:209
+#: kmymoney/views/newspliteditor.cpp:210
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "Potrebna je dodelitev stroškovnega mesta za delež transakcije."
 
-#: kmymoney/views/newspliteditor.cpp:218
+#: kmymoney/views/newspliteditor.cpp:219
 #: kmymoney/views/newtransactioneditor.cpp:410
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Številka čeka uporabljena za to transakcijo."
 
-#: kmymoney/views/newspliteditor.cpp:227
+#: kmymoney/views/newspliteditor.cpp:228
 #: kmymoney/views/newtransactioneditor.cpp:420
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
@@ -25219,6 +25215,9 @@ msgstr ""
 "\n"
 "<p>Vse informacije niso obvezne in se uporabljajo samo za prilagajanje "
 "datoteke KMyMoney.</p>"
+
+#~ msgid "CashFlow"
+#~ msgstr "Denarni tok"
 
 #~ msgid "Select Account:"
 #~ msgstr "Izberi račun:"

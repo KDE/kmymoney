@@ -39,6 +39,7 @@ public:
         , m_hideAllEntries(false)
         , m_showAllEntries(false)
         , m_canSelectClosedAccounts(false)
+        , m_showSecuritySymbol(false)
         , m_state(AccountsProxyModel::State::Any)
     {
     }
@@ -60,6 +61,7 @@ public:
     bool m_hideAllEntries;
     bool m_showAllEntries;
     bool m_canSelectClosedAccounts;
+    bool m_showSecuritySymbol;
     QSet<eMyMoney::Account::Type> m_selectableAccountTypes;
     AccountsProxyModel::State m_state;
 };
