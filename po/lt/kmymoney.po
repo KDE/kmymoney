@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-13 01:44+0000\n"
+"POT-Creation-Date: 2024-04-15 01:37+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -992,7 +992,7 @@ msgstr "Suma"
 #: kmymoney/plugins/views/budget/kbudgetvalues.ui:292
 #: kmymoney/plugins/views/budget/kbudgetvalues.ui:305
 #: kmymoney/plugins/views/budget/kbudgetvalues.ui:318
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:240
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:249
 #: kmymoney/wizards/newaccountwizard/kloanpaymentpage.ui:68
 #: kmymoney/wizards/newaccountwizard/kloanpaymentpage.ui:103
 #: kmymoney/wizards/newaccountwizard/kloanpaymentpage.ui:131
@@ -1766,7 +1766,7 @@ msgstr "Būsena:"
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:471
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:612
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:657
-#: kmymoney/plugins/views/reports/kreportsview.ui:77
+#: kmymoney/plugins/views/reports/kreportsview.ui:80
 #: kmymoney/settings/kmymoney.kcfg:461 kmymoney/views/kinstitutionsview.ui:53
 #: kmymoney/views/kinstitutionsview.ui:71
 #: kmymoney/views/kinstitutionsview.ui:81
@@ -1851,8 +1851,8 @@ msgstr "Kategorijos"
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_4)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:148
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:453
-#: kmymoney/plugins/views/reports/kreportsview.cpp:830
-#: kmymoney/plugins/views/reports/kreportsview_p.h:944
+#: kmymoney/plugins/views/reports/kreportsview.cpp:840
+#: kmymoney/plugins/views/reports/kreportsview_p.h:942
 #: kmymoney/views/kpayeesview.ui:117 kmymoney/views/ktagsview.ui:121
 #: kmymoney/views/ktagsview.ui:127
 #, kde-format
@@ -1995,7 +1995,7 @@ msgstr "Ataskaitos pavadinimas"
 #: kmymoney/mymoney/storage/pricemodel.cpp:39
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:88
 #: kmymoney/plugins/views/reports/core/listtable.cpp:703
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:104
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:113
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:61
 #, kde-format
 msgid "Currency"
@@ -4291,9 +4291,8 @@ msgstr "&Pakeisti bendrą operacijos sumą į %1."
 msgid "&Leave %1 unassigned."
 msgstr "&Palikti %1 nepriskirta."
 
-#. i18n: ectx: property (windowTitle), widget (QDialog, SplitDialog)
 #. i18n: ectx: property (windowTitle), widget (QDialog, SplitAdjustDialog)
-#: kmymoney/dialogs/splitadjustdialog.ui:14 kmymoney/views/splitdialog.ui:14
+#: kmymoney/dialogs/splitadjustdialog.ui:14
 #, kde-format
 msgid "Dialog"
 msgstr ""
@@ -5817,7 +5816,7 @@ msgid "Budget"
 msgstr "Biudžetas"
 
 #: kmymoney/kmymoneyutils.cpp:125
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1015
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1013
 #, fuzzy, kde-format
 msgid "Cash Flow"
 msgstr "Grynieji"
@@ -6037,13 +6036,13 @@ msgctxt "@action:button"
 msgid "No"
 msgstr "Ne"
 
-#: kmymoney/models/accountsproxymodel.cpp:601
+#: kmymoney/models/accountsproxymodel.cpp:617
 #, fuzzy, kde-format
 msgctxt "Account filter"
 msgid "Any status"
 msgstr "Visos būklės"
 
-#: kmymoney/models/accountsproxymodel.cpp:602
+#: kmymoney/models/accountsproxymodel.cpp:618
 #, fuzzy, kde-format
 #| msgctxt "@item Show only unused payees"
 #| msgid "Unused"
@@ -6051,7 +6050,7 @@ msgctxt "Account filter"
 msgid "Unused"
 msgstr "Nenaudojamas"
 
-#: kmymoney/models/accountsproxymodel.cpp:603
+#: kmymoney/models/accountsproxymodel.cpp:619
 #, fuzzy, kde-format
 #| msgid "Closed"
 msgctxt "Account filter"
@@ -11674,7 +11673,7 @@ msgid "iCalendar files"
 msgstr "Kalendoriaus vaizdas"
 
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:96
-#: kmymoney/plugins/views/reports/kreportsview.cpp:319
+#: kmymoney/plugins/views/reports/kreportsview.cpp:329
 #, fuzzy, kde-format
 msgid "Export as"
 msgstr "Eksportuoti kaip"
@@ -12123,9 +12122,9 @@ msgid "Error importing statement. Do you want to continue?"
 msgstr "Priderinimo operacija"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1574
-#: kmymoney/plugins/views/reports/kreportsview.cpp:400
-#: kmymoney/plugins/views/reports/kreportsview.cpp:459
-#: kmymoney/plugins/views/reports/kreportsview.cpp:478
+#: kmymoney/plugins/views/reports/kreportsview.cpp:410
+#: kmymoney/plugins/views/reports/kreportsview.cpp:469
+#: kmymoney/plugins/views/reports/kreportsview.cpp:488
 #, kde-format
 msgid "Critical Error"
 msgstr "Kritinė klaida"
@@ -12408,7 +12407,7 @@ msgstr "Institucija"
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxAccount)
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:158
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:247
-#: kmymoney/plugins/views/budget/kbudgetview.ui:185
+#: kmymoney/plugins/views/budget/kbudgetview.ui:193
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:187
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:292
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:481
@@ -13652,6 +13651,7 @@ msgstr "Naujas"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_resetButton)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:647
+#: kmymoney/plugins/views/budget/kbudgetview.ui:139
 #, kde-format
 msgid "Reset"
 msgstr "Iš naujo"
@@ -14612,7 +14612,7 @@ msgid "Unable to remove budget."
 msgstr "Nepavyksta pakeisti tvarkaraščio: "
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:169
-#: kmymoney/plugins/views/reports/kreportsview.cpp:435
+#: kmymoney/plugins/views/reports/kreportsview.cpp:445
 #, kde-format
 msgid "Copy of %1"
 msgstr "%1 kopija"
@@ -14762,11 +14762,15 @@ msgstr "Priima vertes ir jas išsaugo"
 msgid "Use this to store the modified data."
 msgstr "Naudokite tai norėdami užverti dialogą"
 
+#. i18n: ectx: property (text), widget (QToolButton, m_updateButton)
 #. i18n: ectx: property (text), widget (QPushButton, m_updateButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:120
+#: kmymoney/views/kpayeesview.ui:563 kmymoney/views/ktagsview.ui:336
 #, fuzzy, kde-format
-msgid "Upd"
-msgstr "&Aukštyn"
+#| msgctxt "@action update quotes from online quote source"
+#| msgid "Update"
+msgid "Update"
+msgstr "Atnaujinti"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_resetButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:133
@@ -14780,26 +14784,33 @@ msgstr ""
 msgid "Use this to discard the modified data."
 msgstr "Naudokite tai norėdami užverti dialogą"
 
-#. i18n: ectx: property (text), widget (QPushButton, m_resetButton)
-#: kmymoney/plugins/views/budget/kbudgetview.ui:139
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_collapseButton)
+#: kmymoney/plugins/views/budget/kbudgetview.ui:149
+#, kde-format
+msgid "Collapse the items of the account tree"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_expandButton)
+#: kmymoney/plugins/views/budget/kbudgetview.ui:156
 #, fuzzy, kde-format
-msgid "Res"
-msgstr "Raiš.: %1"
+#| msgid "Name of the account"
+msgid "Expand the items of the account tree"
+msgstr "Sąskaitos pavadinimas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_hideUnusedButton)
-#: kmymoney/plugins/views/budget/kbudgetview.ui:155
+#: kmymoney/plugins/views/budget/kbudgetview.ui:163
 #, kde-format
 msgid "Hide unused budget categories"
 msgstr "Slėpti nenaudojamas biudžeto kategorijas"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_assignmentBox)
-#: kmymoney/plugins/views/budget/kbudgetview.ui:177
+#: kmymoney/plugins/views/budget/kbudgetview.ui:185
 #, fuzzy, kde-format
 msgid "Assignments"
 msgstr "Turtas"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#: kmymoney/plugins/views/budget/kbudgetview.ui:211
+#: kmymoney/plugins/views/budget/kbudgetview.ui:219
 #, fuzzy, kde-format
 #| msgid "Total"
 msgctxt "Budget total"
@@ -14807,7 +14818,7 @@ msgid "Total"
 msgstr "Iš viso"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_cbBudgetSubaccounts)
-#: kmymoney/plugins/views/budget/kbudgetview.ui:239
+#: kmymoney/plugins/views/budget/kbudgetview.ui:247
 #, fuzzy, kde-format
 msgid "Include subaccounts"
 msgstr "Yra šalutinė sąskaita"
@@ -14847,7 +14858,7 @@ msgstr "Pavadinimas"
 #. i18n: ectx: property (text), widget (QPushButton, m_forecastButton)
 #: kmymoney/plugins/views/forecast/forecastview.cpp:53
 #: kmymoney/plugins/views/forecast/kforecastview.ui:263
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1328
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1326
 #, kde-format
 msgid "Forecast"
 msgstr "Prognozė"
@@ -15104,7 +15115,7 @@ msgstr "Kiti metai"
 #. i18n: ectx: property (text), widget (QToolButton, buttonChart)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:436
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:145
-#: kmymoney/plugins/views/reports/kreportsview_p.h:420
+#: kmymoney/plugins/views/reports/kreportsview_p.h:418
 #: kmymoney/plugins/views/reports/reportcontrol.ui:41
 #, kde-format
 msgid "Chart"
@@ -15957,8 +15968,8 @@ msgid "%1 Balance History"
 msgstr "Kainų istorija"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:81
-#: kmymoney/plugins/views/reports/kreportsview.cpp:365
-#: kmymoney/plugins/views/reports/kreportsview.cpp:828
+#: kmymoney/plugins/views/reports/kreportsview.cpp:375
+#: kmymoney/plugins/views/reports/kreportsview.cpp:838
 #: kmymoney/plugins/views/reports/reportsview.cpp:83
 #: kmymoney/plugins/views/reports/reportsview.cpp:119
 #: kmymoney/plugins/views/reports/reportsview.cpp:177
@@ -16053,7 +16064,7 @@ msgstr "Intervalas"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:167
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:171
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:27
-#: kmymoney/plugins/views/reports/kreportsview_p.h:430
+#: kmymoney/plugins/views/reports/kreportsview_p.h:428
 #: kmymoney/views/khomeview_p.h:1096
 #, kde-format
 msgid "Report"
@@ -16197,159 +16208,159 @@ msgstr "Ieškoti operacijų"
 msgid "Configure your report"
 msgstr "Konfigūruoti"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:277
+#: kmymoney/plugins/views/reports/kreportsview.cpp:287
 #, kde-format
 msgid "Unknown command '%1' in KReportsView::slotOpenUrl()"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:297
+#: kmymoney/plugins/views/reports/kreportsview.cpp:307
 #, kde-format
 msgid "Unknown view '%1' in KReportsView::slotOpenUrl()"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:340
+#: kmymoney/plugins/views/reports/kreportsview.cpp:350
 #, fuzzy, kde-format
 msgid "Failed to save: %1"
 msgstr "Nepavyko įrašyti „%1“."
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:365
-#: kmymoney/plugins/views/reports/kreportsview.cpp:436
-#: kmymoney/plugins/views/reports/kreportsview_p.h:814
-#: kmymoney/plugins/views/reports/kreportsview_p.h:822
-#: kmymoney/plugins/views/reports/kreportsview_p.h:830
-#: kmymoney/plugins/views/reports/kreportsview_p.h:839
-#: kmymoney/plugins/views/reports/kreportsview_p.h:851
-#: kmymoney/plugins/views/reports/kreportsview_p.h:864
-#: kmymoney/plugins/views/reports/kreportsview_p.h:881
-#: kmymoney/plugins/views/reports/kreportsview_p.h:889
-#: kmymoney/plugins/views/reports/kreportsview_p.h:897
-#: kmymoney/plugins/views/reports/kreportsview_p.h:905
-#: kmymoney/plugins/views/reports/kreportsview_p.h:916
-#: kmymoney/plugins/views/reports/kreportsview_p.h:929
-#: kmymoney/plugins/views/reports/kreportsview_p.h:938
-#: kmymoney/plugins/views/reports/kreportsview_p.h:952
-#: kmymoney/plugins/views/reports/kreportsview_p.h:961
-#: kmymoney/plugins/views/reports/kreportsview_p.h:969
-#: kmymoney/plugins/views/reports/kreportsview_p.h:977
-#: kmymoney/plugins/views/reports/kreportsview_p.h:985
-#: kmymoney/plugins/views/reports/kreportsview_p.h:993
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1001
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1010
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1021
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1033
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1043
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1053
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1063
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1073
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1083
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1093
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1103
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1117
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1132
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1154
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1176
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1193
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1215
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1224
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1233
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1242
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1256
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1267
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1282
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1291
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1301
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1310
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1318
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1336
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1346
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1357
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1367
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1386
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1395
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1404
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1413
+#: kmymoney/plugins/views/reports/kreportsview.cpp:375
+#: kmymoney/plugins/views/reports/kreportsview.cpp:446
+#: kmymoney/plugins/views/reports/kreportsview_p.h:812
+#: kmymoney/plugins/views/reports/kreportsview_p.h:820
+#: kmymoney/plugins/views/reports/kreportsview_p.h:828
+#: kmymoney/plugins/views/reports/kreportsview_p.h:837
+#: kmymoney/plugins/views/reports/kreportsview_p.h:849
+#: kmymoney/plugins/views/reports/kreportsview_p.h:862
+#: kmymoney/plugins/views/reports/kreportsview_p.h:879
+#: kmymoney/plugins/views/reports/kreportsview_p.h:887
+#: kmymoney/plugins/views/reports/kreportsview_p.h:895
+#: kmymoney/plugins/views/reports/kreportsview_p.h:903
+#: kmymoney/plugins/views/reports/kreportsview_p.h:914
+#: kmymoney/plugins/views/reports/kreportsview_p.h:927
+#: kmymoney/plugins/views/reports/kreportsview_p.h:936
+#: kmymoney/plugins/views/reports/kreportsview_p.h:950
+#: kmymoney/plugins/views/reports/kreportsview_p.h:959
+#: kmymoney/plugins/views/reports/kreportsview_p.h:967
+#: kmymoney/plugins/views/reports/kreportsview_p.h:975
+#: kmymoney/plugins/views/reports/kreportsview_p.h:983
+#: kmymoney/plugins/views/reports/kreportsview_p.h:991
+#: kmymoney/plugins/views/reports/kreportsview_p.h:999
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1008
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1019
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1031
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1041
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1051
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1061
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1071
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1081
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1091
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1101
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1115
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1130
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1152
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1174
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1191
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1213
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1222
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1231
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1240
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1254
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1265
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1280
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1289
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1299
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1308
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1316
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1334
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1344
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1355
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1365
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1384
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1393
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1402
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1411
 #, kde-format
 msgid "Default Report"
 msgstr "Standartinė ataskaita"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:366
-#: kmymoney/plugins/views/reports/kreportsview.cpp:437
+#: kmymoney/plugins/views/reports/kreportsview.cpp:376
+#: kmymoney/plugins/views/reports/kreportsview.cpp:447
 #, kde-format
 msgid "Custom Report"
 msgstr "Savadarbė ataskaita"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:367
+#: kmymoney/plugins/views/reports/kreportsview.cpp:377
 #, fuzzy, kde-format
 #| msgid " (Customized)"
 msgid "%1 (Customized)"
 msgstr "(Savadarbė)"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:394
-#: kmymoney/plugins/views/reports/kreportsview.cpp:453
+#: kmymoney/plugins/views/reports/kreportsview.cpp:404
+#: kmymoney/plugins/views/reports/kreportsview.cpp:463
 #, kde-format
 msgid ""
 "Could not find reportgroup \"%1\" for report \"%2\".\n"
 "Please report this error to the developer's list: kmymoney-devel@kde.org"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:414
+#: kmymoney/plugins/views/reports/kreportsview.cpp:424
 #, fuzzy, kde-format
 #| msgid "Unable to generate report"
 msgid "Failed to configure report: %1"
 msgstr "Nepavyksta generuoti ataskaitos"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:472
+#: kmymoney/plugins/views/reports/kreportsview.cpp:482
 #, fuzzy, kde-format
 msgid "Cannot add report, reason: \"%1\""
 msgstr "Nepavyksta redaguoti institucijos:"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:507
+#: kmymoney/plugins/views/reports/kreportsview.cpp:517
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:508
-#: kmymoney/plugins/views/reports/kreportsview_p.h:562
+#: kmymoney/plugins/views/reports/kreportsview.cpp:518
+#: kmymoney/plugins/views/reports/kreportsview_p.h:560
 #, kde-format
 msgid "Delete Report?"
 msgstr "Trinti ataskaitą?"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:705
+#: kmymoney/plugins/views/reports/kreportsview.cpp:715
 #, fuzzy, kde-format
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
 msgstr "Indėlio parinktys"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:706
+#: kmymoney/plugins/views/reports/kreportsview.cpp:716
 #, fuzzy, kde-format
 #| msgid "&Open"
 msgctxt "To open a new report"
 msgid "&Open"
 msgstr "&Atverti"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:709
+#: kmymoney/plugins/views/reports/kreportsview.cpp:719
 #, kde-format
 msgctxt "To print a report"
 msgid "&Print"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:713
+#: kmymoney/plugins/views/reports/kreportsview.cpp:723
 #, kde-format
 msgctxt "Configure a report"
 msgid "&Configure"
 msgstr "&Konfigūruoti"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:716
+#: kmymoney/plugins/views/reports/kreportsview.cpp:726
 #, kde-format
 msgid "&New report"
 msgstr "&Nauja ataskaita"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:726
+#: kmymoney/plugins/views/reports/kreportsview.cpp:736
 #, fuzzy, kde-format
 msgid "&Delete"
 msgstr "&Trinti"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:827
+#: kmymoney/plugins/views/reports/kreportsview.cpp:837
 #, fuzzy, kde-format
 msgid "%1 YTD Account Transactions"
 msgstr "Mokesčių operacijos"
@@ -16362,7 +16373,7 @@ msgid "KReportsView"
 msgstr "Ataskaitos"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_listTab)
-#: kmymoney/plugins/views/reports/kreportsview.ui:24
+#: kmymoney/plugins/views/reports/kreportsview.ui:27
 #, fuzzy, kde-format
 #| msgid "Reports"
 msgctxt " "
@@ -16370,7 +16381,7 @@ msgid "Reports"
 msgstr "Ataskaitos"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
-#: kmymoney/plugins/views/reports/kreportsview.ui:46
+#: kmymoney/plugins/views/reports/kreportsview.ui:49
 #: kmymoney/plugins/views/reports/reportsview.cpp:52
 #, kde-format
 msgid "Reports"
@@ -16378,7 +16389,7 @@ msgstr "Ataskaitos"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel7)
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
-#: kmymoney/plugins/views/reports/kreportsview.ui:51
+#: kmymoney/plugins/views/reports/kreportsview.ui:54
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:49
 #: kmymoney/views/khomeview_p.h:1098
 #, kde-format
@@ -16386,345 +16397,345 @@ msgid "Comment"
 msgstr "Komentaras"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonChart)
-#: kmymoney/plugins/views/reports/kreportsview_p.h:421
+#: kmymoney/plugins/views/reports/kreportsview_p.h:419
 #: kmymoney/plugins/views/reports/reportcontrol.ui:38
 #, kde-format
 msgid "Show the chart version of this report"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:431
+#: kmymoney/plugins/views/reports/kreportsview_p.h:429
 #, kde-format
 msgid "Show the report version of this chart"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:561
+#: kmymoney/plugins/views/reports/kreportsview_p.h:559
 #, fuzzy, kde-format
 msgid ""
 "<qt>Are you sure you want to delete report <b>%1</b>?  There is no way to "
 "recover it.</qt>"
 msgstr "Naudokite tai norėdami ištrinti pažymėtą profilį"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:623
+#: kmymoney/plugins/views/reports/kreportsview_p.h:621
 msgid "Charts"
 msgstr "Diagramos"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:666
+#: kmymoney/plugins/views/reports/kreportsview_p.h:664
 #: kmymoney/views/khomeview_p.h:1091
 #, kde-format
 msgid "Favorite Reports"
 msgstr "Mėgstamiausios ataskaitos"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:695
+#: kmymoney/plugins/views/reports/kreportsview_p.h:693
 #, fuzzy
 #| msgid "Custom Report"
 msgid "Old Customized Reports"
 msgstr "Savadarbė ataskaita"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:806
+#: kmymoney/plugins/views/reports/kreportsview_p.h:804
 #, kde-format
 msgid "Income and Expenses"
 msgstr "Įplaukos ir išlaidos"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:813
+#: kmymoney/plugins/views/reports/kreportsview_p.h:811
 #, kde-format
 msgid "Income and Expenses This Month"
 msgstr "Įplaukos ir išlaidos šį mėnesį"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:821
+#: kmymoney/plugins/views/reports/kreportsview_p.h:819
 #, kde-format
 msgid "Income and Expenses This Year"
 msgstr "Įplaukos ir išlaidos šiais metais"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:829
+#: kmymoney/plugins/views/reports/kreportsview_p.h:827
 #, fuzzy, kde-format
 msgid "Income and Expenses By Year"
 msgstr "Įplaukos ir išlaidos šiais metais"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:838
+#: kmymoney/plugins/views/reports/kreportsview_p.h:836
 #, fuzzy, kde-format
 msgid "Income and Expenses Graph"
 msgstr "Įplaukos ir išlaidos"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:850
+#: kmymoney/plugins/views/reports/kreportsview_p.h:848
 #, fuzzy, kde-format
 msgid "Income and Expenses Bar Graph"
 msgstr "Įplaukos ir išlaidos"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:863
+#: kmymoney/plugins/views/reports/kreportsview_p.h:861
 #, fuzzy, kde-format
 msgid "Income and Expenses Pie Chart"
 msgstr "Įplaukos ir išlaidos šiais metais"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:873
+#: kmymoney/plugins/views/reports/kreportsview_p.h:871
 #: kmymoney/views/khomeview_p.h:1541
 #, kde-format
 msgid "Net Worth"
 msgstr "Grynoji vertė"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:880
+#: kmymoney/plugins/views/reports/kreportsview_p.h:878
 #, kde-format
 msgid "Net Worth By Month"
 msgstr "Grynoji vertė pagal mėnesius"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:888
+#: kmymoney/plugins/views/reports/kreportsview_p.h:886
 #, kde-format
 msgid "Net Worth Today"
 msgstr "Grynoji vertė šiandien"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:896
+#: kmymoney/plugins/views/reports/kreportsview_p.h:894
 #, kde-format
 msgid "Net Worth By Year"
 msgstr "Grynoji vertė pagal metus"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:904
+#: kmymoney/plugins/views/reports/kreportsview_p.h:902
 #, kde-format
 msgid "7-day Cash Flow Forecast"
 msgstr "7-dienų pinigų srautų prognozė"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:915
+#: kmymoney/plugins/views/reports/kreportsview_p.h:913
 #, fuzzy, kde-format
 msgid "Net Worth Graph"
 msgstr "Grynoji vertė"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:928
+#: kmymoney/plugins/views/reports/kreportsview_p.h:926
 #, kde-format
 msgid "Account Balances by Institution"
 msgstr "Sąskaitų balansai pagal įstaigas"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:937
+#: kmymoney/plugins/views/reports/kreportsview_p.h:935
 #, kde-format
 msgid "Account Balances by Type"
 msgstr "Sąskaitų balansai pagal tipus"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:951
+#: kmymoney/plugins/views/reports/kreportsview_p.h:949
 #, kde-format
 msgid "Transactions by Account"
 msgstr "Operacijos pagal sąskaitas"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:960
+#: kmymoney/plugins/views/reports/kreportsview_p.h:958
 #, kde-format
 msgid "Transactions by Category"
 msgstr "Operacijos pagal kategorijas"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:968
+#: kmymoney/plugins/views/reports/kreportsview_p.h:966
 #, kde-format
 msgid "Transactions by Payee"
 msgstr "Operacijos pagal korespondentą"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:976
+#: kmymoney/plugins/views/reports/kreportsview_p.h:974
 #, fuzzy, kde-format
 #| msgid "Transactions by Payee"
 msgid "Transactions by Tag"
 msgstr "Operacijos pagal korespondentą"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:984
+#: kmymoney/plugins/views/reports/kreportsview_p.h:982
 #, kde-format
 msgid "Transactions by Month"
 msgstr "Operacijos pagal mėnesius"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:992
+#: kmymoney/plugins/views/reports/kreportsview_p.h:990
 #, kde-format
 msgid "Transactions by Week"
 msgstr "Operacijos pagal savaites"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1000
+#: kmymoney/plugins/views/reports/kreportsview_p.h:998
 #, fuzzy, kde-format
 msgid "Loan Transactions"
 msgstr "Mokesčių operacijos"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1009
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1007
 #, fuzzy, kde-format
 msgid "Transactions by Reconciliation Status"
 msgstr "Operacijos pagal sąskaitas"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1020
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1018
 #, fuzzy, kde-format
 msgid "Cash Flow Transactions This Month"
 msgstr "Operacijos pagal mėnesius"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1025
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1023
 #: kmymoney/views/kmymoneyview.cpp:192
 #, kde-format
 msgid "Investments"
 msgstr "Investicijos"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1032
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1030
 #, kde-format
 msgid "Investment Transactions"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1042
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1040
 #, kde-format
 msgid "Investment Holdings by Account"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1052
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1050
 #, kde-format
 msgid "Investment Holdings by Type"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1062
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1060
 #, kde-format
 msgid "Investment Performance by Account"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1072
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1070
 #, kde-format
 msgid "Investment Performance by Type"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1082
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1080
 #, fuzzy, kde-format
 msgid "Investment Capital Gains by Account"
 msgstr "Priderinimo operacija"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1092
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1090
 #, fuzzy, kde-format
 msgid "Investment Capital Gains by Type"
 msgstr "Investicijos"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1102
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1100
 #, fuzzy, kde-format
 msgid "Investment Holdings Pie"
 msgstr "Investicijos"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1116
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1114
 #, fuzzy, kde-format
 msgid "Investment Worth Graph"
 msgstr "Grynoji vertė"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1131
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1129
 #, fuzzy, kde-format
 msgid "Investment Price Graph"
 msgstr "Grynoji vertė"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1153
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1151
 #, fuzzy, kde-format
 msgid "Investment Moving Average Price Graph"
 msgstr "Investicijos"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1175
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1173
 #, fuzzy, kde-format
 msgid "Investment Moving Average"
 msgstr "Investicijos"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1192
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1190
 #, kde-format
 msgid "Investment Moving Average vs Actual"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1207
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1205
 #, kde-format
 msgid "Taxes"
 msgstr "Mokesčiai"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1214
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1212
 #, fuzzy, kde-format
 msgid "Tax Transactions by Category"
 msgstr "Operacijos pagal kategorijas"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1223
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1221
 #, fuzzy, kde-format
 msgid "Tax Transactions by Payee"
 msgstr "Operacijos pagal korespondentą"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1232
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1230
 #, fuzzy, kde-format
 msgid "Tax Transactions by Category Last Fiscal Year"
 msgstr "Operacijos pagal kategorijas"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1241
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1239
 #, fuzzy, kde-format
 msgid "Tax Transactions by Payee Last Fiscal Year"
 msgstr "Operacijos pagal korespondentą"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1248
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1246
 #, kde-format
 msgid "Budgeting"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1255
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1253
 #, kde-format
 msgid "Budgeted vs. Actual This Year"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1266
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1264
 #, kde-format
 msgid "Budgeted vs. Actual This Year (YTM)"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1281
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1279
 #: kmymoney/plugins/views/reports/reportsview.cpp:176
 #, kde-format
 msgid "Monthly Budgeted vs. Actual"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1290
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1288
 #, kde-format
 msgid "Yearly Budgeted vs. Actual"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1300
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1298
 #, fuzzy, kde-format
 msgid "Monthly Budget"
 msgstr "Kas mėnesį"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1309
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1307
 #, fuzzy, kde-format
 msgid "Yearly Budget"
 msgstr "Kas metai"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1317
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1315
 #, kde-format
 msgid "Yearly Budgeted vs Actual Graph"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1335
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1333
 #, kde-format
 msgid "Forecast By Month"
 msgstr "Prognozė pagal mėnesius"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1345
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1343
 #, kde-format
 msgid "Forecast Next Quarter"
 msgstr "Kito ketvirčio prognozė"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1356
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1354
 #, fuzzy, kde-format
 #| msgid "Income and Expenses This Year"
 msgid "Income and Expenses Forecast This Year"
 msgstr "Įplaukos ir išlaidos šiais metais"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1366
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1364
 #, fuzzy, kde-format
 msgid "Net Worth Forecast Graph"
 msgstr "Grynoji vertė šiandien"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, NewGeneralInfoWizardPage)
 #. i18n: ectx: attribute (title), widget (QWizardPage, CheckingStartWizardPage)
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1378
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1376
 #: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:14
 #: kmymoney/wizards/newloanwizard/newgeneralinfowizardpage.ui:6
 #, kde-format
 msgid "General Information"
 msgstr "Bendra Informacija"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1385
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1383
 #, fuzzy, kde-format
 msgid "Schedule Information"
 msgstr "Grafiko informacija"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1394
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1392
 #, fuzzy, kde-format
 msgid "Schedule Summary Information"
 msgstr "Korespondento informacija"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1403
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1401
 #, fuzzy, kde-format
 msgid "Account Information"
 msgstr "Paskyros informacija"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1412
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1410
 #, fuzzy, kde-format
 msgid "Loan Information"
 msgstr "Paskolos informacija"
@@ -16766,20 +16777,6 @@ msgstr ""
 #, kde-format
 msgid "Permanently delete this report"
 msgstr ""
-
-#. i18n: ectx: property (toolTip), widget (QToolButton, buttonClose)
-#: kmymoney/plugins/views/reports/reportcontrol.ui:118
-#, kde-format
-msgid "Close this window"
-msgstr "Užverti šį langą"
-
-#. i18n: ectx: property (text), widget (QPushButton, closeButton)
-#. i18n: ectx: property (text), widget (QToolButton, buttonClose)
-#: kmymoney/plugins/views/reports/reportcontrol.ui:121
-#: kmymoney/widgets/onlinejobmessagesview.ui:42
-#, fuzzy, kde-format
-msgid "Close"
-msgstr "Užverti"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:82
 #: kmymoney/plugins/views/reports/reportsview.cpp:118
@@ -19928,15 +19925,6 @@ msgstr "Naudokite tai norėdami sukurti naują tvarkaraštį."
 msgid "Sync"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QToolButton, m_updateButton)
-#. i18n: ectx: property (text), widget (QPushButton, m_updateButton)
-#: kmymoney/views/kpayeesview.ui:563 kmymoney/views/ktagsview.ui:336
-#, fuzzy, kde-format
-#| msgctxt "@action update quotes from online quote source"
-#| msgid "Update"
-msgid "Update"
-msgstr "Atnaujinti"
-
 #: kmymoney/views/kpayeesview_p.h:135
 #, fuzzy, kde-format
 msgctxt "@item No matching"
@@ -20765,6 +20753,12 @@ msgctxt "Split editor summary"
 msgid "Unassigned"
 msgstr "Nepriskirta"
 
+#. i18n: ectx: property (windowTitle), widget (QDialog, SplitDialog)
+#: kmymoney/views/splitdialog.ui:14
+#, fuzzy, kde-format
+msgid "Split editor"
+msgstr "Skelti operaciją"
+
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
 #: kmymoney/views/splitdialog.ui:547
 #, fuzzy, kde-format
@@ -21546,6 +21540,12 @@ msgctxt "Filter widget label"
 msgid "Fi&lter:"
 msgstr "Filtras"
 
+#. i18n: ectx: property (text), widget (QPushButton, closeButton)
+#: kmymoney/widgets/onlinejobmessagesview.ui:42
+#, fuzzy, kde-format
+msgid "Close"
+msgstr "Užverti"
+
 #: kmymoney/widgets/passstore.cpp:61
 #, kde-format
 msgid "Read the password from pass store"
@@ -22067,7 +22067,7 @@ msgid "No account name supplied"
 msgstr "Nenurodytas sąskaitos pavadinimas"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel4)
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:23
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:32
 #, kde-format
 msgid ""
 "Enter the name of the account under which it is known within KMyMoney. "
@@ -22078,26 +22078,26 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:35
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:44
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:109
 #, kde-format
 msgid "Account name"
 msgstr "Paskyros pavadinimas"
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, m_accountName)
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:51
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:60
 #, kde-format
 msgid "Enter a name under which this account is known within KMyMoney."
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:58
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:67
 #, kde-format
 msgid "Account type"
 msgstr "Sąskaitos tipas"
 
 #. i18n: ectx: property (whatsThis), widget (KMyMoneyGeneralCombo, m_typeSelection)
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:97
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:106
 #, kde-format
 msgid ""
 "<p><b>Checking</b>\n"
@@ -22136,7 +22136,7 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (KMyMoneyCurrencySelector, m_currencyComboBox)
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:120
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:129
 #, fuzzy, kde-format
 #| msgid "Select the institution which manages this account or leave empty"
 msgid "Select the currency in which this account is denominated."
@@ -22144,14 +22144,14 @@ msgstr "Parinkite sąskaitą valdančią įstaigą arba palikite lauką tušči�
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:143
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:152
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:106
 #, kde-format
 msgid "Opening date"
 msgstr "Atidarymo data"
 
 #. i18n: ectx: property (whatsThis), widget (KMyMoneyDateEdit, m_openingDate)
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:157
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:166
 #, kde-format
 msgid ""
 "<p>The opening date would be the date of the last statement. In case you "
@@ -22166,14 +22166,14 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
 #. i18n: ectx: property (text), widget (QLabel, m_openingBalanceLabel)
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:164
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:173
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:163
 #, kde-format
 msgid "Opening balance"
 msgstr "Atidarymo balansas"
 
 #. i18n: ectx: property (whatsThis), widget (AmountEdit, m_openingBalance)
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:184
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:193
 #, kde-format
 msgid ""
 "<p>The opening balance is the balance of the account when you start using it "
@@ -22187,13 +22187,13 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, m_conversionLabel)
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:194
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:203
 #, kde-format
 msgid "Conversion rate"
 msgstr "Konvertavimo data"
 
 #. i18n: ectx: property (whatsThis), widget (AmountEdit, m_conversionRate)
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:207
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:216
 #, kde-format
 msgid ""
 "For foreign currencies an initial conversion rate needs to be provided. This "
@@ -22202,31 +22202,32 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, m_onlineQuote)
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:217
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:226
 #, fuzzy, kde-format
 msgid "Online quote"
 msgstr "Internetinis šaltinis"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_preferredAccount)
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:250
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:259
 #, kde-format
 msgid ""
-"Mark this checkbox if the account should be maintained as preferred account"
+"Mark this checkbox to include the account in the group of favorite accounts"
 msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_preferredAccount)
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:253
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:262
 #, kde-format
 msgid ""
-"Selecting the <b>Preferred Account</b> checkbox will allow preferred access "
-"in some dialogs and views of KMyMoney."
+"Selecting the <b>Favorite Account</b> checkbox will allow preferred access "
+"to this account in some dialogs and views of KMyMoney."
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:256
-#, kde-format
-msgid "Preferred account"
-msgstr "Išskirtinė sąskaita"
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:265
+#, fuzzy, kde-format
+#| msgid "Create a new asset account"
+msgid "Favorite account"
+msgstr "Sukurti naują turto sąskaitą"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel14)
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:27
@@ -24759,6 +24760,20 @@ msgstr ""
 "\n"
 "<p>Informaciją įvesti nėra būtina, ji naudojama tik KMyMoney failo "
 "personalizacijai.</p>"
+
+#, fuzzy
+#~ msgid "Upd"
+#~ msgstr "&Aukštyn"
+
+#, fuzzy
+#~ msgid "Res"
+#~ msgstr "Raiš.: %1"
+
+#~ msgid "Close this window"
+#~ msgstr "Užverti šį langą"
+
+#~ msgid "Preferred account"
+#~ msgstr "Išskirtinė sąskaita"
 
 #, fuzzy
 #~ msgid "CashFlow"
