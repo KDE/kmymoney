@@ -108,10 +108,9 @@
 </para>
 
 <para>
-  The General tab allows you to edit the name of the category, any notes you
-  entered when you created the category, the Last check number, and the state of
-  the Cost Center assignment required checkbox.  The Type, Currency, and Price
-  entry cannot be changed from their initial values.
+  The General tab allows you to edit the name of the category, any notes you entered
+  when you created the category, and the Last check number.  The Type and Currency
+  cannot be changed from their initial values.
 </para>
 
 <para>

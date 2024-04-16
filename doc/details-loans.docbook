@@ -11,6 +11,7 @@
 <title>Loans</title>
 
 <sect1 id="details.loans.general"><title>Understanding Loans</title>
+<!-- FIXME: do we leave this request in the released version? -->
 <note>
   <para>
     <!-- FIXME need decision on expanding about principal -->
@@ -92,6 +93,11 @@
   with each periodic repayment.
 </para>
 </formalpara>
+
+<para>
+  Note that a loan in &kmymoney; must have an interest rate greater than 0.  Money
+  borrowed or lent with no interest must be entered as a liability or asset account.
+</para>
 
 <formalpara><title>Periodic Repayments</title>
 <para>

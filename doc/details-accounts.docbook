@@ -302,7 +302,8 @@
         account, &kmymoney; automatically calculates interest payments to help you
         track the remaining principal on the loan.  Loans with no interest should use
         the plain Asset or Liability type below, depending on whether the money is
-        lent or borrowed.
+        lent or borrowed.  A <link linkend="details.schedules">schedule</link> can be
+        created to manage ongoing payments.
       </para>
     </listitem>
   </varlistentry>
@@ -371,7 +372,7 @@
 <para>
   Selecting the <emphasis>Favorite Account</emphasis> checkbox will allow easier
   access in some dialogs and views of &kmymoney;.  In some places, this has also been
-  referred to as a <quote>Preferred</quote> account.
+  referred to as a <emphasis>Preferred</emphasis> account.
 </para>
 
 <para>

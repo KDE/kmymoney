@@ -35,8 +35,8 @@
   The Ledgers View allows for several key actions: searching and viewing
   transactions; entering new transaction; and editing, duplicating, deleting, and
   scheduling existing transactions.  Along with this it also provides the ability to
-  move, mark, and go to additional account transaction details.  Other functionality
-  within the Ledgers View includes modifying and reconciling the account.
+  move, mark, show additional details for transaction.  Other functionality within
+  the Ledgers View includes modifying and reconciling the account.
 </para>
   
 <screenshot>
@@ -57,10 +57,12 @@
 
 <itemizedlist>
   <listitem><para>The transaction list</para></listitem>
-  <listitem><para>The filter area, which may or may not be visible</para></listitem>
+  <listitem>
+    <para>The filter area, which may or may not be displayed</para>
+  </listitem>
   <listitem>
     <para>
-      The transaction form, which may or may not appear, depending upon your
+      The transaction form, which may or may not be displayed, depending upon your
       configuration as selected in the Configure &kmymoney; Ledger section.
     </para>
   </listitem>
@@ -183,7 +185,7 @@
 <para>
   This is the most recent date when you reconciled this account.  Reconciliation is
   an important process for many accounts, and is described <link
-  linkend="details.reconcile">here</link>.
+  linkend="details.reconcile">in its own chapter</link>.
 </para>
 </formalpara>
 

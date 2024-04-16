@@ -1,3 +1,5 @@
+Latest update - 20240414
+
 This Handbook-5.2 branch is specifically for preparing the Handbook for the
 upcoming (but not yet scheduled) release of KMyMoney 5.2 from master branch.
 Use of a separate branch rather than working in master branch is intended to
@@ -8,7 +10,8 @@ If you are interested in contributing, please contact
 ostroffjh@users.sourceforge.net so multiple people are not working on the
 same chapters at the same time.
 
-This branch should have changes ONLY in the doc subdirectory.
+This branch should have changes ONLY in the doc subdirectory.  Master is merged into
+this branch on occasion to keep this true.
 
 Update of screenshots will be left for later in the process, but
 descriptions of what changes or new screenshots are needed can/should be
@@ -164,44 +167,21 @@ multiple places.
 - Confirm IBAN, Bank Code, SWIFT/BIC only apply to accounts, not institutions, and
   explain only to the bank where the account is.
 
-- Deleting an Institution orphans any accounts without warning, and they do not
-  appear under the "Institution for accounts with no institution" until after a
-  restart of KMM.
-
 - "...all the..." or "...all your..."
 
 - In Accounts View, the type of "Favorite" is "Asset" instead of "Favorite" or blank.
 
 - Be consistent: click something or click on something?
 
-- Why do we mix "preferred" and "favorite" account designation?  Are they any different?
-
-- do we still have the issue that you cannot edit a loan account, only the schedule
-  which was created for paying the loan?
-
-- Are loans with 0% now allowed?  Need to know for wording about loan accounts.
-
-- do we want to talk about stock as an account type?
-
-- Bug 272737 is that categories and account hierarchies cannot be dragged to new
-  location.  It seems this is still not implemented.  Will it ever be?  I'm not sure
-  it's really needed, since you just click on the new parent and click OK (or Apply?)
-
-- There are several tabs in the Edit Account dialog which are not included in the New
-  Account dialog.  Should these also be there?
+- we still have the issue that you cannot edit a loan account, only the schedule
+  which was created for paying the loan?  https://bugs.kde.org/show_bug.cgi?id=386186
+  Note some items can be updated (FIXME - need to confirm all updated - drag/drop for
+  hierarchy, and name and soemthing else in existing wizard.)
 
 - Confirm wording of VAT percentage in Edit Account section.
 
-- Is CC (cost center) used for anything?  Does it occur anywhere except Categories
-  (which is only that cc is required)
-
-- In New Category dialog, Price entry dropdown is disabled.  Is there any condition
-  under which it is enabled?  If so, need to add to handbook.
-
 - TMTOWTDI: right-click here, click there.  Do we put multiple ways in lots of
   places, or just a first description and then single way in most descriptions?
-
-- do we need a Tags main menu item?
 
 - confirm which import methods are or are not able to import tags.
 
@@ -213,37 +193,15 @@ multiple places.
 
 - The handbook uses "Schedules" as the formal name, but the View Selector says
   "Scheduled transactions" We should be consistent.
+ -- I found the source - do we want to shorten it?
 
-- On schecule frequency, should we comment on possibly odd combinations of frequency
-  and the interval?  What happens if you say 2 Once?  Is 2 Month the same as 1 Every
-  half month or 1 Every two months?
-
-- Price downloads allow you to specify data (date range?) yet this is never used in
-  actually fetching prices (stocks or currency.)  Should we just drop the field, or
-  at least note it is ignored?  IS there any way to retreive historic prices?
-
-- Can the transaction form show up other than at the bottom of the transaction list?
-  With or without the form enabled, editing a transaction shows the form at the
-  location of the transaction in the ledger.  Shouldn't editing take place in the
-  form at the bottom?
-
-- for clarifications, can a transaction only be split on one side?  It does make
-  sense to restrict a transaction to only one account on one side, but would allowing
-  both sides be split cause any real problem, or just too much confusion?
-
-- In Investment account ledger, Activity has a blue border when selected, but
-  Security and Account have the name highlighted when the field is selected.  Why the
-  difference.
+XXXX
 
 - Can you really not match two non-imported transactions?  If so, then the date
   always comes from the imported transaction.
 
 - The Security dropdown and column in an Investment ledger shows only the name of the
   security.  Should it also show the symbol?  (The manual used to say it did.)
-
-- Manual says KMM can download the latest prices from the web.  Should we just
-  specify "current" prices?  Although there is a date field for price fetch, it is
-  ignored.  How do we want to deal with this?
 
 - online quote page parser, date field order.  Did we recently have a case where it
   needed to be altered due to field separators in the date?  It shouldn't, so am I
@@ -418,4 +376,128 @@ elsewhere.
   example, Ledger configuration, Data Entry tab: Default reconciliation state is
   dropdown with three choices, but Autofill has three radio-button choices.
 
-- 
+------------------------ resolved issues moved to below.  should probably just delete
+
+- Deleting an Institution orphans any accounts without warning, and they do not
+  appear under the "Institution for accounts with no institution" until after a
+  restart of KMM.
+ -- confirmed fixed
+
+- Why do we mix "preferred" and "favorite" account designation?  Are they any different?
+ -- now prefer preferred.  Hanbook updated
+
+- Are loans with 0% now allowed?  Need to know for wording about loan accounts.
+ -- N0, wording updated (loan chapter and loan section of accounts chapter)
+
+- There are several tabs in the Edit Account dialog which are not included in the New
+  Account dialog.  Should these also be there?
+ -- some tabs are only set up after mapping online, so "nothing to see here ...."
+
+- Is CC (cost center) used for anything?  Does it occur anywhere except Categories
+  (which is only that cc is required)
+ -- not used, and now possibly hidden by config time option.
+ 
+- do we need a Tags main menu item?
+ -- don't have one for tags or payees.  OK
+ 
+- for clarifications, can a transaction only be split on one side?  It does make
+  sense to restrict a transaction to only one account on one side, but would allowing
+  both sides be split cause any real problem, or just too much confusion?
+ -- There are all sorts of possibilities, so nothing further needed, other than
+    possible explanation or example in section on split transactions, but this might
+    be morel likely to just add confustion.
+    In addition, "on one side" doesn't really make sense, as money may come from one or
+    more places and go to one or more places.
+
+- In Investment account ledger, Activity has a blue border when selected, but
+  Security and Account have the name highlighted when the field is selected.  Why the
+  difference.
+ -- Border shows field with focus.  Some fields (text, combo-boxes, part of date) will
+    have the text selected/highligted.
+    Nothing to see here.
+    
+
+------------------------ resolved issues for now, but still need future discussion
+
+- do we want to talk about stock as an account type? - will defer, including possible
+  terminology changes (equity/stock/security) when we get to major investment
+  overhaul.
+
+- Bug 272737 is that categories and account hierarchies cannot be dragged to new
+  location.  
+ -- actually fixed a while ago.  However when you click on new parent and then OK,
+    instead of just updating the hierarchy, the whole dialog is closed.  Is this OK?
+
+- In New Category dialog, Price entry dropdown is disabled.  Is there any condition
+  under which it is enabled?  If so, need to add to handbook.
+ -- CC and price entry dropped.  Should we also drop Last Check number?
+
+- On schecule frequency, should we comment on possibly odd combinations of frequency
+  and the interval?  What happens if you say 2 Once?  Is 2 Month the same as 1 Every
+  half month or 1 Every two months?
+ -- wording updated, but I wonder if we wan to eliminate all intervals which are
+    multiples of other intervals.  However, the confusion of making the change might
+    be worse than the confusion when picking the righ frequency and interval.
+
+- Price downloads allow you to specify data (date range?) yet this is never used in
+  actually fetching prices (stocks or currency.)  Should we just drop the field, or
+  at least note it is ignored?  IS there any way to retreive historic prices?
+
+    > > T This has recently changed. If the price source has a #x in its regex for
+          price or date then it expects the data to be in CSV format. In such a case,
+	  the date fields are enabled but only used for that price source.
+    > J2 I'll need to try it, if I can find any source with historic dates.  Otherwise,
+	 I suppose I can just save any changes about this for later.
+    T2 I attach a screenshot of my settings for this. And here are those settings
+       for copy/paste:
+    [Online-Quote-Source-KMyMoney Currency Historic.local]
+    DataFormat=2
+    DateFormatRegex=%d %m %y
+    DateRegex=#1
+    DefaultId=
+    DownloadType=0
+    IDBy=0
+    IDRegex=
+    PriceDecimalSeparator=0
+    PriceRegex=#2
+    URL=https://fx-rate.net/historical/?c_input=%1&cp_input=%2&csv=true
+
+    You could also use the Install button and select the fx-rate.net historical one
+    (which is the same as above). All this is functionality obtained from the latest
+    Alkimia.  Ralf can probably provide more info about that.  Also, attached as
+    screenshot.
+    1) you can hit "Install" more than once.  The button should be disabled while the dialog
+       is displayed. 
+    2) the current list (for Install) all show ratings 5/10 but none have any ratings.  Should
+       I take this up with KDE GHNS?
+    3) on New Account in currency other than base currency, even after downloading a conversion
+       rate, the text below the rate says 1 USD -> 1 EUR (with appropriate symbols).  Shouldn't
+       that get updated?  Also, if you are explicitly looking for conversion on date of account
+       opening, why does it fetch today's rate?
+    4) I did add the new conversion source, but I can't figure out how to use it.  Do I need
+       to change it's name?  
+    5) Even after installing the new source, if I select it in the Online Quotes dialog,
+       all the fields below remain disabled.  I have alkimia as of yesterday.  Is it not recent
+       enough?  Am I missing some other configuration setting?
+
+- Manual says KMM can download the latest prices from the web.  Should we just
+  specify "current" prices?  Although there is a date field for price fetch, it is
+  ignored.  How do we want to deal with this?
+ -- (This is really part of the previous issue.)
+
+- Can the transaction form show up other than at the bottom of the transaction list?
+  With or without the form enabled, editing a transaction shows the form at the
+  location of the transaction in the ledger.  Shouldn't editing take place in the
+  form at the bottom?
+ -- There have been changes here.  Transaction form is always at the bottom (when enabled)
+    and it disappears when entering or editing a transaction (always done in the ledger)
+   1) Why is the transaction form not shown for Investment Accounts?
+   2) Please confirm that the transaction form is now display only, and entering new
+      and editing existing transactions is now always done within the ledger, at
+      which time the transaction form is not displayed (even if enabled).  Otherwise,
+      the transaction form shows the details of the most recently clicked
+      transaction.  (If I Ctl-Click, it shows the last one clicked, but if I then
+      Ctl-click a selected transaction to un-select it, that is the one shown in the
+      form. (I need to revise the Handbook which still says both ways can be used to
+      enter/edit transactions.
+
