@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-15 01:37+0000\n"
-"PO-Revision-Date: 2024-03-31 13:42+0200\n"
+"PO-Revision-Date: 2024-04-15 10:00+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -12310,7 +12310,7 @@ msgstr "Es requerix un codi TAN vàlid per a continuar."
 #: kmymoney/plugins/kbanking/widgets/phototandialog.ui:14
 #, kde-format
 msgid "Order confirmation"
-msgstr "Confirmació d'ordre"
+msgstr "Confirmeu l'ordre"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, reduceButton)
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.ui:24
@@ -14967,17 +14967,15 @@ msgstr "Utilitzeu-la per a descartar les dades modificades."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_collapseButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:149
-#, fuzzy, kde-format
-#| msgid "Use this to open the new account editor"
+#, kde-format
 msgid "Collapse the items of the account tree"
-msgstr "Utilitzeu-ho per a obrir l'editor de comptes nous"
+msgstr "Reduïx els elements de l'arbre de comptes"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_expandButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:156
-#, fuzzy, kde-format
-#| msgid "Enter the investment account name "
+#, kde-format
 msgid "Expand the items of the account tree"
-msgstr "Introduïu el nom del compte d'inversions"
+msgstr "Expandix els elements de l'arbre de comptes"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_hideUnusedButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:163
@@ -21088,11 +21086,9 @@ msgstr "Sense assignar"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, SplitDialog)
 #: kmymoney/views/splitdialog.ui:14
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Split ratio"
+#, kde-format
 msgid "Split editor"
-msgstr "Relació de desdoblament"
+msgstr "Editor de desglossaments"
 
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
 #: kmymoney/views/splitdialog.ui:547
@@ -22586,35 +22582,28 @@ msgstr "Cotització en línia"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:259
-#, fuzzy, kde-format
-#| msgid ""
-#| "Mark this checkbox if the account should be maintained as preferred "
-#| "account"
+#, kde-format
 msgid ""
 "Mark this checkbox to include the account in the group of favorite accounts"
 msgstr ""
-"Seleccioneu esta casella si el compte s'ha de tractar com un compte preferit"
+"Seleccioneu esta casella per a incloure el compte en el grup de comptes "
+"preferits"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:262
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selecting the <b>Preferred Account</b> checkbox will allow preferred "
-#| "access in some dialogs and views of KMyMoney."
+#, kde-format
 msgid ""
 "Selecting the <b>Favorite Account</b> checkbox will allow preferred access "
 "to this account in some dialogs and views of KMyMoney."
 msgstr ""
-"Seleccionant l'opció de la casella de selecció <b>Compte preferit</b> es "
-"permetrà l'accés preferit en alguns diàlegs i vistes de KMyMoney."
+"Seleccionant la casella de selecció <b>Compte preferit</b> es permetrà "
+"l'accés preferit a este compte en alguns diàlegs i vistes de KMyMoney."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:265
-#, fuzzy, kde-format
-#| msgctxt "Create undo action"
-#| msgid "Create account"
+#, kde-format
 msgid "Favorite account"
-msgstr "Crea un compte"
+msgstr "Compte preferit"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel14)
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:27
@@ -24441,7 +24430,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation"
-msgstr "Confirmació"
+msgstr "Confirmeu"
 
 #: kmymoney/wizards/newloanwizard/knewloanwizard.cpp:72
 #, kde-format
@@ -25365,18 +25354,3 @@ msgstr ""
 "\n"
 "<p>Tota la informació és optativa i s'utilitza per a personalitzar el fitxer "
 "de KMyMoney.</p>"
-
-#~ msgid "Upd"
-#~ msgstr "Actu"
-
-#~ msgid "Res"
-#~ msgstr "Rein"
-
-#~ msgid "Close this window"
-#~ msgstr "Tanca esta finestra"
-
-#~ msgid "Preferred account"
-#~ msgstr "Compte preferit"
-
-#~ msgid "CashFlow"
-#~ msgstr "Flux de caixa"
