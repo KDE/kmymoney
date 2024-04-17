@@ -342,7 +342,7 @@ int runKMyMoney(QApplication &a, const QUrl &file, bool noFile)
             QMetaObject::invokeMethod(kmymoney, "slotFileOpenRecent", Qt::QueuedConnection, Q_ARG(QUrl, url));
 
         } else if (KMyMoneySettings::firstTimeRun()) {
-            QMetaObject::invokeMethod(kmymoney, "slotFileNew", Qt::QueuedConnection, Q_ARG(QUrl, url));
+            QMetaObject::invokeMethod(kmymoney, "slotFileNew", Qt::QueuedConnection);
         }
 
         KMyMoneySettings::setFirstTimeRun(false);
