@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-15 01:37+0000\n"
-"PO-Revision-Date: 2024-04-14 19:08\n"
+"PO-Revision-Date: 2024-04-16 14:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -14406,17 +14406,15 @@ msgstr "用它来丢弃对数据的改动。"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_collapseButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:149
-#, fuzzy, kde-format
-#| msgid "Use this to open the new account editor"
+#, kde-format
 msgid "Collapse the items of the account tree"
-msgstr "打开新的账户编辑器"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_expandButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:156
-#, fuzzy, kde-format
-#| msgid "Enter the investment account name "
+#, kde-format
 msgid "Expand the items of the account tree"
-msgstr "输入投资账户名称"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_hideUnusedButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:163
@@ -20222,11 +20220,9 @@ msgstr "未指派"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, SplitDialog)
 #: kmymoney/views/splitdialog.ui:14
-#, fuzzy, kde-format
-#| msgctxt "@title:menu split context menu"
-#| msgid "Split Options"
+#, kde-format
 msgid "Split editor"
-msgstr "分割选项"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
 #: kmymoney/views/splitdialog.ui:547
@@ -21651,34 +21647,24 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:259
-#, fuzzy, kde-format
-#| msgid ""
-#| "Mark this checkbox if the account should be maintained as preferred "
-#| "account"
+#, kde-format
 msgid ""
 "Mark this checkbox to include the account in the group of favorite accounts"
-msgstr "如果想将此账户设为偏好账户，请选中此复选框"
+msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:262
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selecting the <b>Preferred Account</b> checkbox will allow preferred "
-#| "access in some dialogs and views of KMyMoney."
+#, kde-format
 msgid ""
 "Selecting the <b>Favorite Account</b> checkbox will allow preferred access "
 "to this account in some dialogs and views of KMyMoney."
 msgstr ""
-"选中<b>“设为偏好账户”</b>复选框，将允许在某些对话框和视图中对该账户进行偏好访"
-"问。"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:265
-#, fuzzy, kde-format
-#| msgctxt "Create undo action"
-#| msgid "Create account"
+#, kde-format
 msgid "Favorite account"
-msgstr "创建账户"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel14)
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:27
@@ -24284,15 +24270,3 @@ msgstr ""
 "<p>使用下面的各项来输入关于您本人的信息。</p>\n"
 "\n"
 "<p>所有的信息都可以不填，它们仅用来个性化您自己的KMyMoney文件。</p>"
-
-#~ msgid "Upd"
-#~ msgstr "更新"
-
-#~ msgid "Res"
-#~ msgstr "重置"
-
-#~ msgid "Close this window"
-#~ msgstr "关闭此窗口"
-
-#~ msgid "Preferred account"
-#~ msgstr "设为偏好账户"
