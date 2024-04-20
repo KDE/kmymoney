@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-15 01:37+0000\n"
-"PO-Revision-Date: 2024-04-15 10:00+0200\n"
+"PO-Revision-Date: 2024-04-19 22:05+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -6998,7 +6998,7 @@ msgstr "Litas lituà"
 #: kmymoney/mymoney/mymoneyfile.cpp:3347
 #, kde-format
 msgid "Belarusian Ruble (old)"
-msgstr "Ruble bielorús (antic)"
+msgstr "Ruble belarús (antic)"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3351
 #, kde-format
@@ -7088,7 +7088,7 @@ msgstr "Bitcoin"
 #: kmymoney/mymoney/mymoneyfile.cpp:3381
 #, kde-format
 msgid "Belarusian Ruble"
-msgstr "Ruble bielorús"
+msgstr "Ruble belarús"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3382
 #, kde-format
