@@ -7085,6 +7085,7 @@ msgstr "Dòlar de Barbados"
 msgid "Bitcoin"
 msgstr "Bitcoin"
 
+# skip-rule: iso_4217-Belarusian Ruble
 #: kmymoney/mymoney/mymoneyfile.cpp:3381
 #, kde-format
 msgid "Belarusian Ruble"

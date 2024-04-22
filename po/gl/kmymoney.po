@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-15 01:37+0000\n"
-"PO-Revision-Date: 2024-04-14 15:15+0200\n"
+"PO-Revision-Date: 2024-04-21 09:45+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.1\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -14904,17 +14904,15 @@ msgstr "Use isto para descartar os datos modificados."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_collapseButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:149
-#, fuzzy, kde-format
-#| msgid "Use this to open the new account editor"
+#, kde-format
 msgid "Collapse the items of the account tree"
-msgstr "Use isto para abrir o editor de contas novas"
+msgstr "Pregar os elementos da árbore de contas."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_expandButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:156
-#, fuzzy, kde-format
-#| msgid "Enter the investment account name "
+#, kde-format
 msgid "Expand the items of the account tree"
-msgstr "Escriba o nome da conta de investimento "
+msgstr "Despregar os elementos da árbore de contas."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_hideUnusedButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:163
@@ -20965,11 +20963,9 @@ msgstr "Sen asignar"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, SplitDialog)
 #: kmymoney/views/splitdialog.ui:14
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Split ratio"
+#, kde-format
 msgid "Split editor"
-msgstr "Taxa de partición"
+msgstr "Dividir o editor"
 
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
 #: kmymoney/views/splitdialog.ui:547
@@ -22456,34 +22452,26 @@ msgstr "Cotización de Internet"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:259
-#, fuzzy, kde-format
-#| msgid ""
-#| "Mark this checkbox if the account should be maintained as preferred "
-#| "account"
+#, kde-format
 msgid ""
 "Mark this checkbox to include the account in the group of favorite accounts"
-msgstr "Marque esta opción se a conta debe ser mantida como conta preferida"
+msgstr "Marque esta opción para incluír a conta no grupo de contas favoritas."
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:262
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selecting the <b>Preferred Account</b> checkbox will allow preferred "
-#| "access in some dialogs and views of KMyMoney."
+#, kde-format
 msgid ""
 "Selecting the <b>Favorite Account</b> checkbox will allow preferred access "
 "to this account in some dialogs and views of KMyMoney."
 msgstr ""
-"Se marca a opción <b>Conta preferida</b> poderá ter acceso preferente "
+"Marque <b>Conta favorita</b> para permitir acceso preferente a esta conta "
 "nalgúns diálogos e vistas de KMyMoney."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:265
-#, fuzzy, kde-format
-#| msgctxt "Create undo action"
-#| msgid "Create account"
+#, kde-format
 msgid "Favorite account"
-msgstr "Crear unha conta"
+msgstr "Conta favorita"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel14)
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:27
