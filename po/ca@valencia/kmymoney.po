@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-21 02:26+0000\n"
-"PO-Revision-Date: 2024-01-30 19:49+0100\n"
+"PO-Revision-Date: 2024-04-19 22:06+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -198,7 +198,7 @@ msgstr ""
 "registre de beneficiari i eliminarà la informació de beneficiari d'esta "
 "operació. Si escolliu «Cancel·la» s'interromprà l'operació d'importació.\n"
 "\n"
-"Si escolliu «No» i seleccioneu la casella de selecció «No ho tornes a "
+"Si escolliu «No» i marqueu la casella de selecció «No ho tornes a "
 "preguntar», s'eliminarà la informació del beneficiari per a totes les "
 "operacions successives que facen referència de «%1»."
 
@@ -1127,8 +1127,8 @@ msgid ""
 "below to \"mount this directory before backing up.\""
 msgstr ""
 "Si el sistema no utilitza un muntador automàtic, assegureu-vos que heu "
-"activat la casella de selecció «Munta este directori abans de fer la còpia "
-"de seguretat»."
+"marcat la casella de selecció «Munta este directori abans de fer la còpia de "
+"seguretat»."
 
 #. i18n: ectx: property (title), widget (QGroupBox, GroupBox1)
 #: kmymoney/dialogs/kbackupdlg.ui:61
@@ -5115,7 +5115,7 @@ msgid ""
 "Mark this option, if you always want to match names e.g. for payees from the "
 "start. If unset, any substring is matched."
 msgstr ""
-"Seleccioneu esta opció si voleu que sempre coincidisquen els noms (p. ex., "
+"Marqueu esta opció si voleu que sempre coincidisquen els noms (p. ex., "
 "beneficiaris) des de l'inici. Si no s'activa, coincidirà qualsevol subcadena."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_stringMatchFromStart)
@@ -5312,7 +5312,7 @@ msgid ""
 "used otherwise the memos will not be considered when the transaction is "
 "autofilled."
 msgstr ""
-"Si se selecciona esta opció, s'utilitzaran els recordatoris de l'operació "
+"Si es marca esta opció, s'utilitzaran els recordatoris de l'operació "
 "anterior. En cas contrari, els recordatoris no es consideraran quan es "
 "complete automàticament l'operació."
 
@@ -8077,7 +8077,7 @@ msgstr "Litas lituà"
 #: kmymoney/mymoney/mymoneyfile.cpp:2749
 #, kde-format
 msgid "Belarusian Ruble (old)"
-msgstr "Ruble bielorús (antic)"
+msgstr "Ruble belarús (antic)"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2752
 #, kde-format
@@ -8167,7 +8167,7 @@ msgstr "Bitcoin"
 #: kmymoney/mymoney/mymoneyfile.cpp:2780
 #, kde-format
 msgid "Belarusian Ruble"
-msgstr "Ruble bielorús"
+msgstr "Ruble belarús"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2781
 #, kde-format
@@ -10916,7 +10916,7 @@ msgstr "Columna de comissió"
 #, kde-format
 msgid "Check box if any fee is a percentage figure rather than a value."
 msgstr ""
-"Seleccioneu la casella de selecció si alguna xifra de comissió ve donada en "
+"Marqueu la casella de selecció si alguna xifra de comissió ve donada en "
 "percentatge en lloc d'un valor."
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_typeCol)
@@ -12491,7 +12491,7 @@ msgstr "Es requerix un codi TAN vàlid per a continuar."
 #: kmymoney/plugins/kbanking/widgets/phototandialog.ui:14
 #, kde-format
 msgid "Order confirmation"
-msgstr "Confirmació d'ordre"
+msgstr "Confirmeu l'ordre"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, reduceButton)
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.ui:24
@@ -13203,8 +13203,8 @@ msgid ""
 "transaction amounts, e.g. if you need to reverse charges and payments "
 "because your institution provides them inverted.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Seleccioneu-la si cal invertir el signe dels imports "
-"de les operacions importades, p. ex., si cal invertir els càrrecs i els "
+"<html><head/><body><p>Activeu açò si cal invertir el signe dels imports de "
+"les operacions importades, p. ex., si cal invertir els càrrecs i els "
 "pagaments perquè la institució els proporciona invertits.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
@@ -13224,9 +13224,9 @@ msgid ""
 "institution not applying the correct negative/positive sign to the share "
 "amount or quantity value.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Seleccioneu-la si les operacions d'inversió després de "
-"la importació tenen el tipus Compra/Venda assignat incorrectament, el qual "
-"pot ser provocat per la institució perquè no aplica el signe negatiu/positiu "
+"<html><head/><body><p>Activeu açò si les operacions d'inversió després de la "
+"importació tenen el tipus Compra/Venda assignat incorrectament, el qual pot "
+"ser provocat per la institució perquè no aplica el signe negatiu/positiu "
 "correcte a la quantitat de les accions o el valor de la quantitat.</p></"
 "body></html>"
 
@@ -17451,9 +17451,9 @@ msgstr ""
 "              Si no, es mostrarà 0. En el gràfic, s'ometrà el valor.\n"
 "              </p>\n"
 "              <p>\n"
-"              Si esta opció està desseleccionada, es mostrarà l'últim preu "
-"existent per a un període.\n"
-"              Si se selecciona, es mostrarà «0» i en les taules i en el "
+"              Si es desmarca esta opció, es mostrarà l'últim preu existent "
+"per a un període.\n"
+"              Si està marcada, es mostrarà «0» i en les taules i en el "
 "gràfic s'efectuarà una interpolació lineal per als valors que falten.\n"
 "              <br>Exemple:\n"
 "              <br>Hi ha preus per a gener i març, però no per a febrer.\n"
@@ -17816,8 +17816,8 @@ msgid ""
 "<p>Check this box to include only those categories which have been marked to "
 "\"Include on Tax Reports\"</p>"
 msgstr ""
-"<p>Seleccioneu esta casella només per a aquelles categories que s'han marcat "
-"amb «Inclou en els informes d'impostos»</p>"
+"<p>Marqueu esta casella només per a aquelles categories que s'han marcat amb "
+"«Inclou en els informes d'impostos»</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:356
@@ -18398,7 +18398,7 @@ msgstr ""
 "dades encriptades.<p>\n"
 "\n"
 "Es proporciona este mecanisme per al cas que hàgeu perdut la vostra clau i "
-"no pugueu accedir més a les vostres dades. Amb esta opció seleccionada, els "
+"no pugueu accedir més a les vostres dades. Amb esta opció activada, els "
 "desenvolupadors de KMyMoney poden desencriptar les dades i subministrar-vos-"
 "les en una forma accessible. Esteu preparat per a contestar algunes "
 "preguntes detallades quant al contingut de les dades abans que vos les "
@@ -22524,7 +22524,8 @@ msgstr "Cotització en línia"
 msgid ""
 "Mark this checkbox if the account should be maintained as preferred account"
 msgstr ""
-"Seleccioneu esta casella si el compte s'ha de tractar com un compte preferit"
+"Marqueu esta casella de selecció si el compte s'ha de tractar com un compte "
+"preferit"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:253
@@ -22533,8 +22534,8 @@ msgid ""
 "Selecting the <b>Preferred Account</b> checkbox will allow preferred access "
 "in some dialogs and views of KMyMoney."
 msgstr ""
-"Seleccionant l'opció de la casella de selecció <b>Compte preferit</b> es "
-"permetrà l'accés preferit en alguns diàlegs i vistes de KMyMoney."
+"Marcant l'opció de la casella de selecció <b>Compte preferit</b> es permetrà "
+"l'accés preferit en alguns diàlegs i vistes de KMyMoney."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:256
@@ -23419,8 +23420,7 @@ msgstr "Refinançament de préstec existent"
 #, kde-format
 msgid ""
 "Check this if you are refinancing a loan that already exists in KMyMoney"
-msgstr ""
-"Seleccioneu-la si esteu refinançant un préstec que ja existix en KMyMoney"
+msgstr "Marqueu-la si esteu refinançant un préstec que ja existix en KMyMoney"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, AssetAccountWizardPage)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
@@ -25165,7 +25165,7 @@ msgid ""
 msgstr ""
 "Si voleu revisar o canviar qualsevol preferència en les opcions de "
 "configuració de KMyMoney després de finalitzar l'assistent, podreu fer-ho "
-"seleccionant esta casella. Si no, cliqueu <b>Següent</b>."
+"marcant esta casella. Si no, cliqueu <b>Següent</b>."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_openConfigAfterFinished)
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:32
