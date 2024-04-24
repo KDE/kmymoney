@@ -14440,10 +14440,9 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_expandButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:156
-#, fuzzy, kde-format
-#| msgid "Enter the investment account name "
+#, kde-format
 msgid "Expand the items of the account tree"
-msgstr "Zadejte název investičního účtu "
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_hideUnusedButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:163
@@ -21790,36 +21789,24 @@ msgstr "Online ceny"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:259
-#, fuzzy, kde-format
-#| msgid ""
-#| "Mark this checkbox if the account should be maintained as preferred "
-#| "account"
+#, kde-format
 msgid ""
 "Mark this checkbox to include the account in the group of favorite accounts"
 msgstr ""
-"Zatrhněte tento přepínač pokud by měl být tento účet veden jako "
-"upřednostňovaný"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:262
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selecting the <b>Preferred Account</b> checkbox will allow preferred "
-#| "access in some dialogs and views of KMyMoney."
+#, kde-format
 msgid ""
 "Selecting the <b>Favorite Account</b> checkbox will allow preferred access "
 "to this account in some dialogs and views of KMyMoney."
 msgstr ""
-"Zatržením přepínače <b>Upřednostňovaný účet</b> učiníte tento účet "
-"předvoleným v některých dialozích a pohledech programu KMyMoney."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:265
-#, fuzzy, kde-format
-#| msgctxt "Create undo action"
-#| msgid "Create account"
+#, kde-format
 msgid "Favorite account"
-msgstr "Vytvořit účet"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel14)
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:27
@@ -24515,12 +24502,3 @@ msgstr ""
 "\n"
 "<p>Veškeré informace jsou volitelně a používají se pouze pro zosobnění "
 "vašeho KMyMoney.</p>"
-
-#~ msgid "Close this window"
-#~ msgstr "Zavřít toto okno"
-
-#~ msgid "Preferred account"
-#~ msgstr "Upřednostňovaný účet"
-
-#~ msgid "CashFlow"
-#~ msgstr "CashFlow"

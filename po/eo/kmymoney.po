@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-15 01:37+0000\n"
-"PO-Revision-Date: 2024-04-13 08:59+0100\n"
+"PO-Revision-Date: 2024-04-23 21:12+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
@@ -14811,17 +14811,15 @@ msgstr "Uzu ĉi tion por forĵeti la modifitajn datumojn."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_collapseButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:149
-#, fuzzy, kde-format
-#| msgid "Use this to open the new account editor"
+#, kde-format
 msgid "Collapse the items of the account tree"
-msgstr "Uzu ĉi tion por malfermi la novan kontan redaktilon"
+msgstr "Malvastigi la erojn de la konta arbo"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_expandButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:156
-#, fuzzy, kde-format
-#| msgid "Enter the investment account name "
+#, kde-format
 msgid "Expand the items of the account tree"
-msgstr "Enigu la nomon de investkonto"
+msgstr "Vastigi la erojn de la konta arbo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_hideUnusedButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:163
@@ -20857,11 +20855,9 @@ msgstr "Neatribuita"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, SplitDialog)
 #: kmymoney/views/splitdialog.ui:14
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Split ratio"
+#, kde-format
 msgid "Split editor"
-msgstr "Split-proporcio"
+msgstr "Divido-redaktilo"
 
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
 #: kmymoney/views/splitdialog.ui:547
@@ -22343,35 +22339,27 @@ msgstr "Interreta citaĵo"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:259
-#, fuzzy, kde-format
-#| msgid ""
-#| "Mark this checkbox if the account should be maintained as preferred "
-#| "account"
+#, kde-format
 msgid ""
 "Mark this checkbox to include the account in the group of favorite accounts"
 msgstr ""
-"Marku ĉi tiun markobutonon se la konto estu konservita kiel preferata konto"
+"Marku ĉi tiun markkeston se la konto estu konservita kiel preferata konto"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:262
-#, fuzzy, kde-format
-#| msgid ""
-#| "Selecting the <b>Preferred Account</b> checkbox will allow preferred "
-#| "access in some dialogs and views of KMyMoney."
+#, kde-format
 msgid ""
 "Selecting the <b>Favorite Account</b> checkbox will allow preferred access "
 "to this account in some dialogs and views of KMyMoney."
 msgstr ""
 "Elektante la markobutonon <b>Preferata Konto</b> permesos preferatan aliron "
-"en iuj dialogoj kaj vidoj de KMyMoney."
+"al ĉi tiu konto en iuj dialogoj kaj vidoj de KMyMoney."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:265
-#, fuzzy, kde-format
-#| msgctxt "Create undo action"
-#| msgid "Create account"
+#, kde-format
 msgid "Favorite account"
-msgstr "Krei konton"
+msgstr "Ŝatata konto"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel14)
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:27
@@ -25093,18 +25081,3 @@ msgstr ""
 "\n"
 "<p>Ĉiuj informoj estas laŭvolaj kaj nur uzataj por personecigi vian KMyMoney-"
 "dosieron.</p>"
-
-#~ msgid "Upd"
-#~ msgstr "Ĝisdatigita"
-
-#~ msgid "Res"
-#~ msgstr "Res"
-
-#~ msgid "Close this window"
-#~ msgstr "Fermi la fenestron"
-
-#~ msgid "Preferred account"
-#~ msgstr "Preferata konto"
-
-#~ msgid "CashFlow"
-#~ msgstr "Mona Fluo"
