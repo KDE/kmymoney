@@ -7,6 +7,7 @@ set(gncimporter_PART_SRCS
   gncimporter.cpp
   kgncimportoptionsdlg.cpp
   kgncpricesourcedlg.cpp
+  ../../../widgets/kmymoneymoneyvalidator.cpp
   mymoneygncreader.cpp
 )
 
@@ -28,5 +29,4 @@ target_link_libraries(gncimporter
     KF5::Archive
     Alkimia::alkimia
     kmm_yesno
-    kmm_base_widgets
 )
