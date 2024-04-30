@@ -660,8 +660,8 @@
   takes your special file as input, and produces a QIF file as output.  This can be a
   shell script, a perl script, a compiled program written in C/C++, or anything else
   you can dream of, as long as the system can run it.  The filter will be run with
-  the input file as stdin and stdout is assumed to be a valid qif file to pass on the
-  the actual QIF importer.
+  the input file as stdin and stdout is assumed to be a valid qif file to pass on to
+  the the actual QIF importer.
 </para>
 
 <para>
@@ -671,7 +671,8 @@
   field, or click the browse icon next to the field and navigate to the filter in the
   <guilabel>File Open...</guilabel> dialog.  Then, whenever you do a QIF import using
   this profile, the file you select for importing will be run through your filter
-  first
+  first.  Note that the filter location field contains the full path to the filter
+  program or script, but can also include command line parameters for the program.
 </para>
 
 <para>

@@ -191,17 +191,9 @@ multiple places.
 - in Tabbed sections, the sect titles are sometimes just the tab title, but sometimes
   more descriptive (see Payees Details)  Do we want this to be consistent?
 
-- The handbook uses "Schedules" as the formal name, but the View Selector says
-  "Scheduled transactions" We should be consistent.
- -- I found the source - do we want to shorten it?
-
-XXXX
-
 - Can you really not match two non-imported transactions?  If so, then the date
   always comes from the imported transaction.
-
-- The Security dropdown and column in an Investment ledger shows only the name of the
-  security.  Should it also show the symbol?  (The manual used to say it did.)
+ --
 
 - online quote page parser, date field order.  Did we recently have a case where it
   needed to be altered due to field separators in the date?  It shouldn't, so am I
@@ -210,30 +202,7 @@ XXXX
 - Price Editor dialog first column is labelled Commodity, but in New price entry, it
   is called Security.  Shouldn't this be consistent?
 
-- Reconciliatiohn wizard interest/charge dialog - should it allow split entries?  Might
-  be unlikely for interest, but you might have credit card interest plus fees.
-
-- Can we change the order of reports in the Reports View to make more sense?  (Look at
-  Tranacions reports for an example)
-
-- Report section CashFlow - should this be Cash Flow (with a space between?)
-
 - what are cash-flow related transactions?  How is the term defined?
-
-- Can the tabs in the Reports View get an "X" to close them, instead of needing to use
-  the "Close report" button?
-
-- In Gnucash import, matching of account types, some map to things that are only
-  applicable to security subaccounts of investmant accounts.  Should these be shown
-  separately, with an explanation?
-
-- Importing gnucash schedules talks about if it causes fatal errors.  Is this while
-  importing, or while running later?
-
-- doc says not all report types are matched - what happens if they don't?
-
-- is the QIF Profile input filter location a single file or a command?  Does it just use
-  a single file as the program, and anything more than that as a command to be invoked?
 
 - CSV importer wizard, Separators page, for three dropdowns at the bottom, the labels
   to the left of them are not all aligned the same.  The top seems to be centered in
@@ -245,19 +214,8 @@ XXXX
 - CSV importer - Banking cols, many have "X" to clear the value, and ther is "clear all."
   Investment cols do not have "x" and only "Clear" not "Clear all", plus Clear Fee.
 
-- Why is "Reconciled" not an option on the transaction state dropdown in the filter
-  section of the ledger?
-
 - I'd like to be consistent in use or not of inline icons when describing where to click
   to do something, but I'm deferring as too much effort for now.
-
-- The split editor window title is just "Dialog."  The title of the window for
-  actually editing a single split is "Slit transaction."  We need better terms that make
-  more sense.
-
-- Payees entered in a split, show up in the memo of the transaction, like memos and
-  tags.  Perhaps they should be displayed in the Payee field, perhaps in parens with
-  the payy from each split?)
 
 - (from an otherwise resolved FIXME in the split transaction section) do we have
   adequate description of currency conversion?  I THINK so, but am leaving this
@@ -266,21 +224,17 @@ XXXX
 - It is also not clear if we need more detail on what can be a split (account instead
   of category?) and where that would be described.
 
-- Where should we describe the Undo feature?
-
-- transaction matching section of Ledgers chapter - first, are matched transactions
-  still highlighted in green?  If not, how?
-
 - Need more details on the descriptions of all the transaction status features in the
   filter dropdown? 
 
 - Is it still true you can not match two imported or two not-imported transactions?
 
-- Should there be a note about the relation between aqbanking, kbanking, and hbci?
-
-- Budget View has buttons labelled Upd and Res.  Should these be expanded to Update and Reset?
-
 - Should iCalendar be mentioned anywhere other than the Settings chapter?
+
+----- new as of 202404
+
+- In Plugins section of KMM Config, there is "GNC Importer" but everywhere else it is
+  referred to as GnuCash Importer.  Any reason for the difference?
 
 This is a list of potential enhancements I came up with while reviewing the handbook,
 but have not yet posted either as wishlist bugs, entries to any Issue on invent, or
@@ -335,10 +289,6 @@ elsewhere.
   way to interrupt any such very long operation.  In my experience, these are in reports
   over all time and accounts, and this graphic.
 
-- In Edit Account, bottom of General tab, Budget Options allows account to be
-  included in budgets as Income or Expense.  Does this essentially allow to include
-  transfers to/from this account in budgets?
-
 - In Forecast, the Advanced tab seems to show one fewer cycle than expected.
 
 - Forecast View, Budget tab seems final column really is Total, not anything
@@ -375,6 +325,12 @@ elsewhere.
   number of choicees is presented as a dropdown or a set of radio-button items?  For
   example, Ledger configuration, Data Entry tab: Default reconciliation state is
   dropdown with three choices, but Autofill has three radio-button choices.
+
+XXX
+- In Edit Account, bottom of General tab, Budget Options allows account to be
+  included in budgets as Income or Expense.  Does this essentially allow to include
+  transfers to/from this account in budgets?
+
 
 ------------------------ resolved issues moved to below.  should probably just delete
 
@@ -416,6 +372,42 @@ elsewhere.
     have the text selected/highligted.
     Nothing to see here.
     
+- Reconciliatiohn wizard interest/charge dialog - should it allow split entries?  Might
+  be unlikely for interest, but you might have credit card interest plus fees.
+ -- Never asked for, so leaving as is.
+
+- Can we change the order of reports in the Reports View to make more sense?  (Look at
+  Tranacions reports for an example)
+ -- Can change name of custom reports, and can sort on report comment.  Handbook fixed
+ 
+- Report section CashFlow - should this be Cash Flow (with a space between?)
+ -- fixed
+
+- Can the tabs in the Reports View get an "X" to close them, instead of needing to use
+  the "Close report" button?
+ -- done
+
+- is the QIF Profile input filter location a single file or a command?  Does it just use
+  a single file as the program, and anything more than that as a command to be invoked?
+ -- filter box takes both full path to the program/script and any command line
+    parameters.
+
+- The split editor window title is just "Dialog."  The title of the window for
+  actually editing a single split is "Slit transaction."  We need better terms that make
+  more sense.
+ -- Fixed.
+
+- Why is "Reconciled" not an option on the transaction state dropdown in the filter
+  section of the ledger?
+ -- nobody ever asked for it...
+ 
+- transaction matching section of Ledgers chapter - first, are matched transactions
+  still highlighted in green?  If not, how?
+ -- no highlight, just icon.  Handbook updated
+
+- The Security dropdown and column in an Investment ledger shows only the name of the
+  security.  Should it also show the symbol?  (The manual used to say it did.)
+ -- Added.  Not explicitly mentioned in handbook.
 
 ------------------------ resolved issues for now, but still need future discussion
 
@@ -501,3 +493,40 @@ elsewhere.
       form. (I need to revise the Handbook which still says both ways can be used to
       enter/edit transactions.
 
+- The handbook uses "Schedules" as the formal name, but the View Selector says
+  "Scheduled transactions" We should be consistent.
+ -- I found the source - do we want to shorten it?
+
+- In Gnucash import, matching of account types, some map to things that are only
+  applicable to security subaccounts of investmant accounts.  Should these be shown
+  separately, with an explanation?
+- Importing gnucash schedules talks about if it causes fatal errors.  Is this while
+  importing, or while running later?
+- doc says not all report types are matched - what happens if they don't?
+ -- TB: I have no idea about GnuCash stuff. I need to leave those questions
+         unanswered. Same goes for the CSV importer
+ -- With no sufficient expertise for GnuCash or CSV importer - we leave these
+    unanswered until we get a but report or explicit request for help
+
+- Payees entered in a split, show up in the memo of the transaction, like memos and
+  tags.  Perhaps they should be displayed in the Payee field, perhaps in parens with
+  the payee from each split?)
+ -- remind myself that there is no payy (nor tag, ...) for the transaction, only the one
+    for the account of the displayed ledger.  Leaving active for me to confirm the
+    description of these fields and their behaviour in the Handbook is correct (and also
+    hopefully complete.)
+
+- Where should we describe the Undo feature?
+ -- Still not sure - perhaps an early page on "other changes not mentioned elsewhere?
+    what else would be included?
+
+- Should there be a note about the relation between aqbanking, kbanking, and hbci?
+ -- Will mention only used in Germany, although Aqbanking can import other file types
+    (but not used for those instead of native importers)
+ -- Still would like a note on the relation between Aqbanking and KBanking.
+    (external libraries/routines and the KMM framework for calling them?)
+
+- Budget View has buttons labelled Upd and Res.  Should these be expanded to Update and Reset?
+ -- TB said he would remove, but I now see full text Update and Remove.  Tooltips are present and
+    for those two, there is a (not useful?) "hit Shift for more".
+    

@@ -342,6 +342,13 @@
   characters.
 </para>
 
+<para>
+  Note also that the actual fields displayed for a transaction depend on the type of
+  accont.  For example, <link linkend="details.investments.ledger"> Investment
+  Account transactions</link> include fields for activity type, security, and other
+  investment specific items.
+</para>
+
 <sect3><title>Payer/Payee</title>
 <para>
   This is who the money comes from or goes to.  If the payee is a new entry
@@ -661,8 +668,10 @@
   dates, there is a default setting of 4 days, which may be changed in
   <guimenu>Settings</guimenu><guimenuitem>Configure MyMopney...</guimenuitem> Ledger
   section, <link linkend="details.settings.register.import">Import Tab</link>.  Any
-  transactions so matched will be highlighted in the ledget, and on completion of the
-  import, you should review these and either accept or unmatch them.
+  transactions so matched will be indicated in the ledger with an <guiicon>
+  <inlinemediaobject> <imageobject> <imagedata fileref="link.svg"
+  format="SVG"/></imageobject></inlinemediaobject></guiicon> icon, and on completion
+  of the import, you should review these and either accept or unmatch them.
 </para>
 
 <para>

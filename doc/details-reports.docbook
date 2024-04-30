@@ -10,6 +10,23 @@
 </chapterinfo>
 <title>Reports</title>
 
+<para>
+  The Reports View is a tabbed display.  The <guilabel>Reports</guilabel> tab is
+  always displayed, and lists all available reports, grouped under the headings
+  listed and described below.  You can click on the <quote>></quote> to expand or
+  collapse the specific reports under each heading.  When you open any report, it is
+  displayed in an additional tab, labelled with the name of that report.
+</para>
+
+<para>
+  The list of reports is always sorted first by the group name (by number) and then
+  by report name.  Clicking on the <quote>Reports</quote> heading will reverse the
+  sort order.  You can also click on the <quote>Comment</quote> header to sort by the
+  report comment instead of name.  The report's name and comment can be set or edited
+  on the <guilabel>General</guilabel> tab of the <link
+  linkend="details.reports.config">Report Configuration</link> dialog.
+</para>
+
 <sect1 id="details.reports.avail"><title>Available Reports</title>
 <screenshot>
   <screeninfo>reports view</screeninfo>
@@ -24,11 +41,6 @@
 </screenshot>
 
 <para>
-  The <guilabel>Reports></guilabel> tab of the Reports View lists all available
-  reports, grouped under the following headings.  You can click on the
-  <quote>></quote> to expand or collapse the specific reports under each heading.
-  When you open any report, it is displayed in an additional tab, labelled with the
-  name of that report.
 </para>
 
 <sect2><title>Income and Expenses</title>
@@ -196,7 +208,11 @@
     ship with &kmymoney; cannot be deleted.</para>
   </listitem>
   <listitem>
-    <para>Close report: Close the current report.</para>
+    <para>
+      The <guilabel>Close report</guilabel> button was removed in 5.2.  To cClose the
+      current report tab, click the small <guilabel>x</guilabel> to the right of the
+      report name on the tab.
+    </para>
   </listitem>
 </itemizedlist>
 </sect1>
