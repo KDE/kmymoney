@@ -58,6 +58,7 @@ if (POLICY CMP0127)
   cmake_policy(SET CMP0127 NEW) # Policy introduced in CMake version 3.22
 endif()
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 ######################### General Requirements ##########################
 
