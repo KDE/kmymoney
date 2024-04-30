@@ -28,7 +28,7 @@
   *
   * @author Thomas Baumgart
   */
-class KMyMoneyMoneyValidator : public QDoubleValidator
+class KMM_WIDGETS_EXPORT KMyMoneyMoneyValidator : public QDoubleValidator
 {
     Q_OBJECT
     Q_DISABLE_COPY(KMyMoneyMoneyValidator)
