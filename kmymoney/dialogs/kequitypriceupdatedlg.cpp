@@ -141,7 +141,7 @@ public:
                     }
                     const MyMoneyPriceEntries& entries = (*it_price);
                     if (entries.count() > 0 && entries.begin().key() <= QDate::currentDate()) {
-                        addCurrencyConversion(pair, false);
+                        addCurrencyConversion(pair, true);
                     }
                 }
             } catch (MyMoneyException& e) {
