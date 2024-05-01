@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-15 01:37+0000\n"
-"PO-Revision-Date: 2024-02-29 15:49+0100\n"
+"PO-Revision-Date: 2024-04-30 12:31+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -4255,10 +4255,9 @@ msgid ""
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:41
-#, fuzzy, kde-format
-#| msgid "(c) 2000-2022 The KMyMoney development team"
+#, kde-format
 msgid "(c) 2000-2024 The KMyMoney development team"
-msgstr "(c) 2000-2022 le equipa de disveloppamento de KMyMoney"
+msgstr "(c) 2000-2024 Le equipa de disveloppamento de KMyMoney"
 
 #: kmymoney/kcreditswindow.cpp:44
 #, kde-format
@@ -10766,7 +10765,7 @@ msgstr ""
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:205
 #, kde-format
 msgid "Debug Options"
-msgstr ""
+msgstr "Optiones de Cribrar"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkDebugGeneral)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:211
@@ -18855,10 +18854,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/views/kinvestmentview.ui:44
-#, fuzzy, kde-format
-#| msgid "Select account"
+#, kde-format
 msgid "Select investment account:"
-msgstr "Selige conto"
+msgstr "Selige conto de investimento"
 
 #. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
 #: kmymoney/views/kinvestmentview.ui:80
@@ -19957,11 +19955,9 @@ msgstr "Non assignate"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, SplitDialog)
 #: kmymoney/views/splitdialog.ui:14
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Split ratio"
+#, kde-format
 msgid "Split editor"
-msgstr "Divide proportion"
+msgstr "Divide editor"
 
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
 #: kmymoney/views/splitdialog.ui:547
@@ -21363,11 +21359,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:265
-#, fuzzy, kde-format
-#| msgctxt "Create undo action"
-#| msgid "Create account"
+#, kde-format
 msgid "Favorite account"
-msgstr "Crea  conto"
+msgstr "Conto favorite"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel14)
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:27
@@ -22348,10 +22342,9 @@ msgstr ""
 
 #. i18n: ectx: property (title), widget (KInvestmentDetailsWizardPage, KInvestmentDetailsWizardPage)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:14
-#, fuzzy, kde-format
-#| msgid "Security options"
+#, kde-format
 msgid "Security details"
-msgstr "Optiones de securitate"
+msgstr "Detalios de securitate"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:23
@@ -22501,26 +22494,22 @@ msgid "Unexpected error occurred while adding new investment"
 msgstr ""
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:195
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Total value of investment"
-#| msgid "Investment value: %1%2"
+#, kde-format
 msgctxt "@info:window"
 msgid "Investment detail wizard"
-msgstr "Valor de Investimento: %1%2"
+msgstr "Assistente de detalio de investimento"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:210
-#, fuzzy, kde-format
-#| msgid "Security not found"
+#, kde-format
 msgctxt "@info:window"
 msgid "Security detail wizard"
-msgstr "Securitate non trovate"
+msgstr "Assistente de detalio de Securitate"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:213
-#, fuzzy, kde-format
-#| msgid "Security options"
+#, kde-format
 msgctxt "@info:tab Security edit wizard detail page"
 msgid "Security details"
-msgstr "Optiones de securitate"
+msgstr "Detalios de securitate"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:245
 #, kde-format
