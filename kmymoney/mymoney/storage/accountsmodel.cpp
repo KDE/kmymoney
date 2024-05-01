@@ -632,7 +632,7 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
                 }
             } catch (const MyMoneyException&) {
             }
-        }
+        } break;
 
         case Column::PostedValue:
         {
@@ -641,7 +641,7 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
                 return d->adjustedBalance(account.postedValue(), account)
                     .formatMoney(baseCurrency.tradingSymbol(), MyMoneyMoney::denomToPrec(baseCurrency.smallestAccountFraction()));
             }
-        }
+        } break;
 
         case Column::TotalPostedValue:
         {
@@ -650,7 +650,7 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
                 return d->adjustedBalance(account.totalPostedValue(), account)
                     .formatMoney(baseCurrency.tradingSymbol(), MyMoneyMoney::denomToPrec(baseCurrency.smallestAccountFraction()));
             }
-        }
+        } break;
 
         case Column::Bic:
             return account.value("bic");
