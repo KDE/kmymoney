@@ -30,36 +30,22 @@
 #include "ui_kmymoneypricedlg.h"
 #include "ui_kupdatestockpricedlg.h"
 
-#include "kupdatestockpricedlg.h"
+#include "icons/icons.h"
 #include "kcurrencycalculator.h"
-#include "mymoneyprice.h"
 #include "kequitypriceupdatedlg.h"
 #include "kmymoneycurrencyselector.h"
-#include "mymoneyfile.h"
-#include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
-#include "mymoneymoney.h"
-#include "mymoneyexception.h"
 #include "kmymoneyutils.h"
 #include "kpricetreeitem.h"
-#include "icons/icons.h"
+#include "kupdatestockpricedlg.h"
+#include "menuenums.h"
+#include "mymoneyaccount.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
+#include "mymoneyprice.h"
+#include "mymoneysecurity.h"
 
 using namespace Icons;
-
-// duplicated eMenu namespace from menuenums.h for consistency
-// there shouldn't be any clash, because we don't need menuenums.h here
-namespace eMenu {
-enum class Action {
-    // *************
-    // The price menu
-    // *************
-    NewPrice, DeletePrice,
-    UpdatePrice, EditPrice,
-};
-inline uint qHash(const Action key, uint seed) {
-    return ::qHash(static_cast<uint>(key), seed);
-}
-}
 
 class KMyMoneyPriceDlgPrivate
 {

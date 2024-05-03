@@ -124,6 +124,16 @@ enum class Action {
 #endif
     DebugTimers,
     DeleteOnlineJob, EditOnlineJob, LogOnlineJob,
+    // *************
+    // The currency menu
+    // *************
+    NewCurrency, RenameCurrency, DeleteCurrency,
+    SetBaseCurrency,
+    // *************
+    // The price menu
+    // *************
+    NewPrice, DeletePrice,
+    UpdatePrice, EditPrice,
 };
 // clang-format on
 

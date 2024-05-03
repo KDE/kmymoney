@@ -36,33 +36,19 @@
 
 #include "ui_kcurrencyeditdlg.h"
 
-#include "mymoneyexception.h"
-#include "mymoneysecurity.h"
-#include "mymoneyfile.h"
-#include "mymoneyprice.h"
+#include "icons/icons.h"
 #include "kavailablecurrencydlg.h"
 #include "kcurrencyeditordlg.h"
 #include "kmymoneyutils.h"
-#include "icons/icons.h"
-#include "storageenums.h"
+#include "menuenums.h"
 #include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneyprice.h"
+#include "mymoneysecurity.h"
+#include "storageenums.h"
 
 using namespace Icons;
-
-// duplicated eMenu namespace from menuenums.h for consistency
-// there shouldn't be any clash, because we don't need menuenums.h here
-namespace eMenu {
-enum class Action {
-    // *************
-    // The currency menu
-    // *************
-    NewCurrency, RenameCurrency, DeleteCurrency,
-    SetBaseCurrency,
-};
-inline uint qHash(const Action key, uint seed) {
-    return ::qHash(static_cast<uint>(key), seed);
-}
-}
 
 // this delegate is needed to disable editing the currency id (column 1)
 // since QTreeWidgetItem has only one set of flags for the whole row
