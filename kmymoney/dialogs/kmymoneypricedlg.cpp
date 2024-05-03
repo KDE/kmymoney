@@ -37,6 +37,7 @@
 #include "kmymoneyutils.h"
 #include "kpricetreeitem.h"
 #include "kupdatestockpricedlg.h"
+#include "menuenums.h"
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
@@ -48,22 +49,6 @@
 #include "kmmyesno.h"
 
 using namespace Icons;
-
-// duplicated eMenu namespace from menuenums.h for consistency
-// there shouldn't be any clash, because we don't need menuenums.h here
-namespace eMenu {
-enum class Action {
-    // *************
-    // The price menu
-    // *************
-    NewPrice, DeletePrice,
-    UpdatePrice, EditPrice,
-};
-inline qHashSeedType qHash(const Action key, qHashSeedType seed)
-{
-    return ::qHash(static_cast<uint>(key), seed);
-}
-}
 
 class KMyMoneyPriceDlgPrivate
 {
