@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-21 02:26+0000\n"
+"POT-Creation-Date: 2024-05-04 03:41+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -1576,77 +1576,77 @@ msgstr ""
 msgid "Update price history"
 msgstr "Árfolyam előzmények frissítése"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:665
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
 msgstr "Nem lehet beállítani a %1-t %2 alap pénznemének"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:665
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
 #, kde-format
 msgid "Set base currency"
 msgstr "Alap pénznem megadása"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:159
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:163
 #, kde-format
 msgid "Cannot update currency. %1"
 msgstr "Nem lehet frissíteni a pénznemet. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:159
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:163
 #, kde-format
 msgid "Update currency"
 msgstr "Pénznem frissítése"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:196
 #, kde-format
 msgid "Cannot create new currency. %1"
 msgstr "Nem lehet létrehozni az új pénznemet. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:506
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:196
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:492
 #, kde-format
 msgid "New currency"
 msgstr "Új pénznem"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:198
 #, fuzzy, kde-format
 #| msgid "Cannot update currency. %1"
 msgid "Cannot modify currency. %1"
 msgstr "Nem lehet frissíteni a pénznemet. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:198
 #, fuzzy, kde-format
 #| msgid "Update currency"
 msgid "Edit currency"
 msgstr "Pénznem frissítése"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:507
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:493
 #, kde-format
 msgid "Rename currency"
 msgstr "Pénznem átnevezése"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:508
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:650
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:494
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
 #, kde-format
 msgid "Delete currency"
 msgstr "Pénznem törlése"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:509
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:495
 #, kde-format
 msgid "Select as base currency"
 msgstr "Kiválasztás alap pénznemnek"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:519
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:505
 #, fuzzy, kde-format
 #| msgid "Currency options"
 msgctxt "Menu header"
 msgid "Currency options"
 msgstr "Pénznembeállítások"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:650
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
 #, kde-format
 msgid "Cannot delete currency %1. %2"
 msgstr "Nem lehet törölni a pénznemet %1. %2"
@@ -2768,39 +2768,39 @@ msgstr "Összesen"
 msgid "Closed"
 msgstr "Lezárva"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:338
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:324
 #, kde-format
 msgid "Do you really want to delete the selected price entry?"
 msgid_plural "Do you really want to delete the selected price entries?"
 msgstr[0] "Valóban törölni akarja a kiválasztott árfolyam bejegyzést?"
 msgstr[1] "Valóban törölni akarja a kiválasztott árfolyamok bejegyzéseit?"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:338
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:324
 #, kde-format
 msgid "Delete price information"
 msgstr "Árfolyam információ törlése"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:381
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:367
 #, kde-format
 msgid "New price..."
 msgstr "Új ár…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:382
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:368
 #, kde-format
 msgid "Edit price..."
 msgstr "Ár szerkesztése…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:383
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:369
 #, kde-format
 msgid "Online Price Update..."
 msgstr "Online árfolyam frissítés..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:384
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:370
 #, kde-format
 msgid "Delete price..."
 msgstr "Ár törlése…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:394
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:380
 #, fuzzy, kde-format
 #| msgid "Price options"
 msgctxt "Menu header"

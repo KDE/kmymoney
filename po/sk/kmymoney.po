@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-21 02:26+0000\n"
+"POT-Creation-Date: 2024-05-04 03:41+0000\n"
 "PO-Revision-Date: 2023-12-11 18:59+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -1614,76 +1614,76 @@ msgstr ""
 msgid "Update price history"
 msgstr "Aktualizovať históriu ceny"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:665
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
 msgstr "Nie je možné nastaviť %1 ako základnú menu: %2"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:665
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
 #, kde-format
 msgid "Set base currency"
 msgstr "Nastaviť základnú menu"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:159
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:163
 #, kde-format
 msgid "Cannot update currency. %1"
 msgstr "Nie je možné aktualizovať menu. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:159
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:163
 #, kde-format
 msgid "Update currency"
 msgstr "Aktualizovať menu"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:196
 #, kde-format
 msgid "Cannot create new currency. %1"
 msgstr "Nie je možné vytvoriť novú menu. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:506
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:196
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:492
 #, kde-format
 msgid "New currency"
 msgstr "Nová mena"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:198
 #, fuzzy, kde-format
 #| msgid "Cannot update currency. %1"
 msgid "Cannot modify currency. %1"
 msgstr "Nie je možné aktualizovať menu. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:198
 #, fuzzy, kde-format
 #| msgid "Update currency"
 msgid "Edit currency"
 msgstr "Aktualizovať menu"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:507
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:493
 #, kde-format
 msgid "Rename currency"
 msgstr "Premenovať menu"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:508
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:650
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:494
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
 #, kde-format
 msgid "Delete currency"
 msgstr "Vymazať menu"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:509
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:495
 #, kde-format
 msgid "Select as base currency"
 msgstr "Vybrať ako základnú menu"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:519
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:505
 #, kde-format
 msgctxt "Menu header"
 msgid "Currency options"
 msgstr "Voľby meny"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:650
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
 #, kde-format
 msgid "Cannot delete currency %1. %2"
 msgstr "Nie je možné vymazať menu %1. %2"
@@ -2785,7 +2785,7 @@ msgstr "Celkom"
 msgid "Closed"
 msgstr "Uzavreté"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:338
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:324
 #, kde-format
 msgid "Do you really want to delete the selected price entry?"
 msgid_plural "Do you really want to delete the selected price entries?"
@@ -2793,32 +2793,32 @@ msgstr[0] "Naozaj chcete vymazať vybranú cenovú položku?"
 msgstr[1] "Naozaj chcete vymazať vybrané cenové položky?"
 msgstr[2] "Naozaj chcete vymazať vybrané cenové položky?"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:338
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:324
 #, kde-format
 msgid "Delete price information"
 msgstr "Vymazať informácie o cene"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:381
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:367
 #, kde-format
 msgid "New price..."
 msgstr "Nová cena..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:382
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:368
 #, kde-format
 msgid "Edit price..."
 msgstr "Upraviť cenu..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:383
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:369
 #, kde-format
 msgid "Online Price Update..."
 msgstr "Online cenová aktualizácia..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:384
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:370
 #, kde-format
 msgid "Delete price..."
 msgstr "Vymazať cenu..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:394
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:380
 #, kde-format
 msgctxt "Menu header"
 msgid "Price options"

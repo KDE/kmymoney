@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-21 02:26+0000\n"
+"POT-Creation-Date: 2024-05-04 03:41+0000\n"
 "PO-Revision-Date: 2020-05-02 10:27+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -1584,76 +1584,76 @@ msgstr ""
 msgid "Update price history"
 msgstr "Hinnaajaloo uuendamine"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:665
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
 msgstr "%1 määramine baasvaluutaks nurjus: %2"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:665
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
 #, kde-format
 msgid "Set base currency"
 msgstr "Baasvaluuta määramine"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:159
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:163
 #, kde-format
 msgid "Cannot update currency. %1"
 msgstr "Valuuta uuendamine nurjus. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:159
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:163
 #, kde-format
 msgid "Update currency"
 msgstr "Valuuta uuendamine"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:196
 #, kde-format
 msgid "Cannot create new currency. %1"
 msgstr "Uue valuuta loomine nurjus. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:506
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:196
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:492
 #, kde-format
 msgid "New currency"
 msgstr "Uus valuuta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:198
 #, fuzzy, kde-format
 #| msgid "Cannot update currency. %1"
 msgid "Cannot modify currency. %1"
 msgstr "Valuuta uuendamine nurjus. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:198
 #, fuzzy, kde-format
 #| msgid "Update currency"
 msgid "Edit currency"
 msgstr "Valuuta uuendamine"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:507
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:493
 #, kde-format
 msgid "Rename currency"
 msgstr "Muuda valuuta nime"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:508
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:650
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:494
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
 #, kde-format
 msgid "Delete currency"
 msgstr "Kustuta valuuta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:509
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:495
 #, kde-format
 msgid "Select as base currency"
 msgstr "Vali baasvaluutaks"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:519
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:505
 #, kde-format
 msgctxt "Menu header"
 msgid "Currency options"
 msgstr "Valuuta valikud"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:650
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
 #, kde-format
 msgid "Cannot delete currency %1. %2"
 msgstr "Valuuta %1 kustutamine nurjus. %2"
@@ -2760,39 +2760,39 @@ msgstr "Kokku"
 msgid "Closed"
 msgstr "Suletud"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:338
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:324
 #, kde-format
 msgid "Do you really want to delete the selected price entry?"
 msgid_plural "Do you really want to delete the selected price entries?"
 msgstr[0] "Kas tõesti kustutada valitud hinnakirje?"
 msgstr[1] "Kas tõesti kustutada valitud hinnakirjed?"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:338
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:324
 #, kde-format
 msgid "Delete price information"
 msgstr "Kustuta hinnateave"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:381
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:367
 #, kde-format
 msgid "New price..."
 msgstr "Uus hind..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:382
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:368
 #, kde-format
 msgid "Edit price..."
 msgstr "Muuda hinda..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:383
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:369
 #, kde-format
 msgid "Online Price Update..."
 msgstr "Hinna uuendamine internetist..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:384
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:370
 #, kde-format
 msgid "Delete price..."
 msgstr "Kustuta hind..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:394
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:380
 #, kde-format
 msgctxt "Menu header"
 msgid "Price options"

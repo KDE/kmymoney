@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-21 02:26+0000\n"
+"POT-Creation-Date: 2024-05-04 03:41+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -1521,74 +1521,74 @@ msgstr ""
 msgid "Update price history"
 msgstr "Atnaujinti kainų istoriją"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:665
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
 #, fuzzy, kde-format
 msgid "Cannot set %1 as base currency: %2"
 msgstr "Pasirinkite pagrindinę valiutą"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:665
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
 #, fuzzy, kde-format
 msgid "Set base currency"
 msgstr "Pasirinkite pagrindinę valiutą"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:159
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:163
 #, fuzzy, kde-format
 msgid "Cannot update currency. %1"
 msgstr "Sukurti naują kainos įrašą."
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:159
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:163
 #, fuzzy, kde-format
 msgid "Update currency"
 msgstr "Valiuta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:196
 #, fuzzy, kde-format
 msgid "Cannot create new currency. %1"
 msgstr "Sukurti naują kainos įrašą."
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:506
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:196
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:492
 #, fuzzy, kde-format
 msgid "New currency"
 msgstr "Valiuta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:198
 #, fuzzy, kde-format
 msgid "Cannot modify currency. %1"
 msgstr "Sukurti naują kainos įrašą."
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:198
 #, fuzzy, kde-format
 msgid "Edit currency"
 msgstr "Valiuta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:507
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:493
 #, fuzzy, kde-format
 msgid "Rename currency"
 msgstr "Valiuta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:508
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:650
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:494
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
 #, fuzzy, kde-format
 msgid "Delete currency"
 msgstr "Valiuta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:509
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:495
 #, kde-format
 msgid "Select as base currency"
 msgstr "Pasirinkite pagrindinę valiutą"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:519
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:505
 #, fuzzy, kde-format
 msgctxt "Menu header"
 msgid "Currency options"
 msgstr "Valiutos"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:650
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
 #, fuzzy, kde-format
 msgid "Cannot delete currency %1. %2"
 msgstr "Sukurti naują kainos įrašą."
@@ -2690,7 +2690,7 @@ msgstr "Iš viso"
 msgid "Closed"
 msgstr "Uždarytus"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:338
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:324
 #, kde-format
 msgid "Do you really want to delete the selected price entry?"
 msgid_plural "Do you really want to delete the selected price entries?"
@@ -2699,35 +2699,35 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:338
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:324
 #, kde-format
 msgid "Delete price information"
 msgstr ""
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:381
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:367
 #, fuzzy, kde-format
 #| msgid "New category..."
 msgid "New price..."
 msgstr "Nauja kategorija..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:382
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:368
 #, fuzzy, kde-format
 #| msgid "Loading prices..."
 msgid "Edit price..."
 msgstr "Įkeliamos kainos..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:383
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:369
 #, fuzzy, kde-format
 msgid "Online Price Update..."
 msgstr "Atnaujinti kainą iš interneto..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:384
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:370
 #, fuzzy, kde-format
 #| msgid "Delete ..."
 msgid "Delete price..."
 msgstr "Trinti ..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:394
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:380
 #, fuzzy, kde-format
 msgctxt "Menu header"
 msgid "Price options"
