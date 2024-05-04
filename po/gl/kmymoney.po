@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-15 01:37+0000\n"
+"POT-Creation-Date: 2024-05-04 01:57+0000\n"
 "PO-Revision-Date: 2024-04-21 09:45+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -1165,74 +1165,74 @@ msgstr ""
 msgid "Update price history"
 msgstr "Actualizar o historial de prezos"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:664
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:137
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
 msgstr "Non é posíbel usar %1 como divisa base: %2"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:664
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:137
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
 #, kde-format
 msgid "Set base currency"
 msgstr "Escoller como divisa base"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:158
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:162
 #, kde-format
 msgid "Cannot update currency. %1"
 msgstr "Non é posíbel actualizar a divisa. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:158
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:162
 #, kde-format
 msgid "Update currency"
 msgstr "Actualizar a divisa"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:195
 #, kde-format
 msgid "Cannot create new currency. %1"
 msgstr "Non é posíbel crear a nova divisa. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:505
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:195
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:490
 #, kde-format
 msgid "New currency"
 msgstr "Nova divisa"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:197
 #, kde-format
 msgid "Cannot modify currency. %1"
 msgstr "Non é posíbel modificar a divisa. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:197
 #, kde-format
 msgid "Edit currency"
 msgstr "Editar a divisa"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:506
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:491
 #, kde-format
 msgid "Rename currency"
 msgstr "Renomear a divisa"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:507
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:492
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:634
 #, kde-format
 msgid "Delete currency"
 msgstr "Borrar a divisa"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:508
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:493
 #, kde-format
 msgid "Select as base currency"
 msgstr "Escoller como divisa básica"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:518
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:503
 #, kde-format
 msgctxt "@title:menu"
 msgid "Currency options"
 msgstr "Opcións das divisas"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:634
 #, kde-format
 msgid "Cannot delete currency %1. %2"
 msgstr "Non é posíbel eliminar a divisa %1. %2"
@@ -2005,39 +2005,39 @@ msgstr "Total"
 msgid "Closed"
 msgstr "Pechado"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:344
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:329
 #, kde-format
 msgid "Do you really want to delete the selected price entry?"
 msgid_plural "Do you really want to delete the selected price entries?"
 msgstr[0] "Seguro que quere eliminar o prezo escollido?"
 msgstr[1] "Seguro que quere eliminar os prezos escollidos?"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:345
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:330
 #, kde-format
 msgid "Delete price information"
 msgstr "Eliminar a información do prezo"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:392
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:377
 #, kde-format
 msgid "New price..."
 msgstr "Novo prezo…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:393
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:378
 #, kde-format
 msgid "Edit price..."
 msgstr "Editar o prezo…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:394
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:379
 #, kde-format
 msgid "Online Price Update..."
 msgstr "Actualización do prezo por Internet…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:395
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:380
 #, kde-format
 msgid "Delete price..."
 msgstr "Eliminar o prezo…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:405
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:390
 #, kde-format
 msgctxt "@title:menu"
 msgid "Price options"

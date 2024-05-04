@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-15 01:37+0000\n"
-"PO-Revision-Date: 2024-04-17 09:40+0200\n"
+"POT-Creation-Date: 2024-05-04 01:57+0000\n"
+"PO-Revision-Date: 2024-05-02 12:22+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -1188,74 +1188,74 @@ msgstr ""
 msgid "Update price history"
 msgstr "Mise-à-jour de l'historique des cours"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:664
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:137
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
 msgstr "Impossible de mettre %1 comme devise de base : %2"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:664
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:137
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
 #, kde-format
 msgid "Set base currency"
 msgstr "Définir une devise de base"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:158
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:162
 #, kde-format
 msgid "Cannot update currency. %1"
 msgstr "Impossible de mettre à jour la devise. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:158
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:162
 #, kde-format
 msgid "Update currency"
 msgstr "Mise à jour de la devise"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:195
 #, kde-format
 msgid "Cannot create new currency. %1"
 msgstr "Impossible de créer la nouvelle devise. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:505
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:195
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:490
 #, kde-format
 msgid "New currency"
 msgstr "Nouvelle devise"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:197
 #, kde-format
 msgid "Cannot modify currency. %1"
 msgstr "Impossible de mettre à jour la devise. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:197
 #, kde-format
 msgid "Edit currency"
 msgstr "Modifier la devise"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:506
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:491
 #, kde-format
 msgid "Rename currency"
 msgstr "Renommer la devise"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:507
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:492
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:634
 #, kde-format
 msgid "Delete currency"
 msgstr "Supprimer la devise"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:508
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:493
 #, kde-format
 msgid "Select as base currency"
 msgstr "Choisir comme devise de base"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:518
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:503
 #, kde-format
 msgctxt "@title:menu"
 msgid "Currency options"
 msgstr "Options de devises"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:634
 #, kde-format
 msgid "Cannot delete currency %1. %2"
 msgstr "Impossible de supprimer la devise %1. %2"
@@ -2042,39 +2042,39 @@ msgstr "Total"
 msgid "Closed"
 msgstr "Fermé"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:344
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:329
 #, kde-format
 msgid "Do you really want to delete the selected price entry?"
 msgid_plural "Do you really want to delete the selected price entries?"
 msgstr[0] "Voulez-vous vraiment supprimer le cours sélectionné ?"
 msgstr[1] "Voulez-vous vraiment supprimer les prix sélectionnés ?"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:345
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:330
 #, kde-format
 msgid "Delete price information"
 msgstr "Supprimer l'information sur le cours"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:392
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:377
 #, kde-format
 msgid "New price..."
 msgstr "Nouveau cours…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:393
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:378
 #, kde-format
 msgid "Edit price..."
 msgstr "Éditer le cours…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:394
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:379
 #, kde-format
 msgid "Online Price Update..."
 msgstr "Mise à jour du cours en ligne…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:395
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:380
 #, kde-format
 msgid "Delete price..."
 msgstr "Supprimer le cours…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:405
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:390
 #, kde-format
 msgctxt "@title:menu"
 msgid "Price options"
@@ -11278,7 +11278,7 @@ msgstr "Intérêts"
 #, kde-format
 msgid "The size of the file is too small to be a valid GnuCash format: %1"
 msgstr ""
-"La taille du fichier est trop petite pour être un format « GnuCash » "
+"La taille du fichier est trop petite pour être un format « GNUCash » "
 "valable : %1"
 
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:64
@@ -11293,19 +11293,19 @@ msgid ""
 "GnuCash SQLite file format is not supported. Please save it using XML format "
 "in GnuCash and try again."
 msgstr ""
-"Le format de fichier « GnuCash SQLite » n'est pas pris en charge. Veuillez "
-"l'enregistrer au format « XML » dans GnuCash et ré-essayer."
+"Le format de fichier « GNUCash SQLite » n'est pas pris en charge. Veuillez "
+"l'enregistrer au format « XML » dans GNUCash et ré-essayer."
 
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:129
 #, kde-format
 msgid "GnuCash files (*.gnucash *.xac *.gnc)"
-msgstr "Fichiers GnuCash (*.gnucash *.xac *.qnc)"
+msgstr "Fichiers GNUCash (*.gnucash *.xac *.qnc)"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KGncImportOptionsDlg)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:20
 #, kde-format
 msgid "GnuCash Import Options"
-msgstr "Options d'importation de GnuCash"
+msgstr "Options d'importation de GNUCash"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:26
@@ -11602,7 +11602,7 @@ msgid ""
 "convertible"
 msgstr ""
 "L'opération récurrente %1 semble contenir une formule. Les formules de "
-"GnuCash ne sont pas convertibles"
+"GNUCash ne sont pas convertibles"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2070
 #, kde-format
@@ -11786,7 +11786,7 @@ msgstr "Enregistrer le rapport sous"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2424
 #, kde-format
 msgid "Orphan created from unknown GnuCash account"
-msgstr "Compte orphelin créé à partir d'un compte GnuCash inconnu"
+msgstr "Compte orphelin créé à partir d'un compte « GNUCash » inconnu"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2439
 #, kde-format

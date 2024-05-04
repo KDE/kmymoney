@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-15 01:37+0000\n"
+"POT-Creation-Date: 2024-05-04 01:57+0000\n"
 "PO-Revision-Date: 2024-04-15 10:37+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -1171,74 +1171,74 @@ msgstr ""
 msgid "Update price history"
 msgstr "Koershistorie bijwerken"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:664
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:137
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
 msgstr "Kan %1 niet als basisvaluta instellen: %2"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:664
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:137
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
 #, kde-format
 msgid "Set base currency"
 msgstr "Kies basisvaluta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:158
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:162
 #, kde-format
 msgid "Cannot update currency. %1"
 msgstr "Kan valuta niet bijwerken. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:158
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:162
 #, kde-format
 msgid "Update currency"
 msgstr "Valuta bijwerken"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:195
 #, kde-format
 msgid "Cannot create new currency. %1"
 msgstr "Kan nieuwe valuta niet aanmaken. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:505
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:195
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:490
 #, kde-format
 msgid "New currency"
 msgstr "Nieuwe valuta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:197
 #, kde-format
 msgid "Cannot modify currency. %1"
 msgstr "Kan valuta niet wijzigen. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:197
 #, kde-format
 msgid "Edit currency"
 msgstr "Valuta bewerken"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:506
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:491
 #, kde-format
 msgid "Rename currency"
 msgstr "Hernoem valuta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:507
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:492
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:634
 #, kde-format
 msgid "Delete currency"
 msgstr "Verwijder valuta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:508
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:493
 #, kde-format
 msgid "Select as base currency"
 msgstr "Kies een basisvaluta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:518
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:503
 #, kde-format
 msgctxt "@title:menu"
 msgid "Currency options"
 msgstr "Valuta-opties"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:634
 #, kde-format
 msgid "Cannot delete currency %1. %2"
 msgstr "Kan geldsoort %1 niet verwijderen. %2"
@@ -2016,39 +2016,39 @@ msgstr "Totaal"
 msgid "Closed"
 msgstr "Gesloten"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:344
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:329
 #, kde-format
 msgid "Do you really want to delete the selected price entry?"
 msgid_plural "Do you really want to delete the selected price entries?"
 msgstr[0] "Weet u zeker dat u de geselecteerde koers wilt verwijderen?"
 msgstr[1] "Weet u zeker dat u de geselecteerde koersen wilt verwijderen?"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:345
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:330
 #, kde-format
 msgid "Delete price information"
 msgstr "Koers verwijderen"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:392
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:377
 #, kde-format
 msgid "New price..."
 msgstr "Nieuwe koers..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:393
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:378
 #, kde-format
 msgid "Edit price..."
 msgstr "Koers bewerken..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:394
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:379
 #, kde-format
 msgid "Online Price Update..."
 msgstr "Online koers bijwerken..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:395
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:380
 #, kde-format
 msgid "Delete price..."
 msgstr "Koers verwijderen..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:405
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:390
 #, kde-format
 msgctxt "@title:menu"
 msgid "Price options"
