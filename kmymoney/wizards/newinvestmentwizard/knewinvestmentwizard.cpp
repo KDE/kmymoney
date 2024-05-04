@@ -198,6 +198,7 @@ KNewInvestmentWizard::KNewInvestmentWizard(const MyMoneyAccount& account, QWidge
     // load the widgets with the data
     setField("accountName", account.name());
     setField("investmentName", d->m_security.name());
+    setField("investmentIdentification", d->m_security.value("kmm-security-id"));
     setField("priceMode", d->m_account.value("priceMode", 0));
 }
 
@@ -217,6 +218,7 @@ KNewInvestmentWizard::KNewInvestmentWizard(const MyMoneySecurity& security, QWid
 
     // load the widgets with the data
     setField("investmentName", security.name());
+    setField("investmentIdentification", security.value("kmm-security-id"));
 
     // no chance to change the price mode here
     setField("priceMode", 0);
