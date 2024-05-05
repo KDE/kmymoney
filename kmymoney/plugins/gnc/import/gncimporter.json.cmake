@@ -45,7 +45,7 @@
         "Description[et]": "KMyMoney GnuCashi importimine",
         "Description[eu]": "GnuCash inportazioa gehitzen dio KMyMoneyri ",
         "Description[fi]": "Lisää KMyMoneyyn GnuCash-tuonnin",
-        "Description[fr]": "Ajoute l'importation « GnuCash » à KMyMoney",
+        "Description[fr]": "Ajoute l'importation « GNUCash » à KMyMoney",
         "Description[gl]": "Engadir a posibilidade de importar GnuCash en KMyMoney",
         "Description[ia]": "Adde importar de GnuCash a KMyMoney",
         "Description[it]": "Aggiunge l'importazione GnuCash a KMymoney",
