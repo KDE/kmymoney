@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-04 01:57+0000\n"
+"POT-Creation-Date: 2024-05-05 01:44+0000\n"
 "PO-Revision-Date: 2014-07-03 09:44+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -1715,21 +1715,21 @@ msgstr ""
 msgid "Cannot update security <b>%1</b>: %2"
 msgstr "Sekerheit <b>%1</b> lett sik nich opfrischen: %2"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:579
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:583
 #, fuzzy, kde-format
 #| msgid "Price for %1 updated (id %2)"
 msgctxt "@info Online price update %1 online id, %2 internal id"
 msgid "Price for %1 updated (id %2)"
 msgstr "Pries för %1 opfrischt (ID %2)"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:581
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:585
 #, fuzzy, kde-format
 #| msgid "Received an invalid price for %1, unable to update."
 msgctxt "@info Online price update %1 online id"
 msgid "Received an invalid price for %1, unable to update."
 msgstr "Leeg Pries för %1 kregen, Opfrischen fehlslaan."
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:626
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:630
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:38
 #: kmymoney/widgets/daterangedlg.cpp:64 kmymoney/widgets/daterangedlg.cpp:67
@@ -24166,21 +24166,21 @@ msgctxt "@info:window"
 msgid "Investment detail wizard"
 msgstr "Hölper för Geldanlaag-Enkelheiten"
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:210
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:211
 #, fuzzy, kde-format
 #| msgid "Security detail wizard"
 msgctxt "@info:window"
 msgid "Security detail wizard"
 msgstr "Hölper för Weertpapeer-Enkelheiten"
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:213
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:214
 #, fuzzy, kde-format
 #| msgid "Security detail wizard"
 msgctxt "@info:tab Security edit wizard detail page"
 msgid "Security details"
 msgstr "Hölper för Weertpapeer-Enkelheiten"
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:245
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:247
 #, fuzzy, kde-format
 #| msgid ""
 #| "The security <b>%1</b> currently does not exist as sub-account of <b>%2</"
@@ -24192,7 +24192,7 @@ msgstr ""
 "Dat Weertpapeer <b>%1</b> gifft dat nich as Ünnerkonto vun <b>%2</b>. Wullt "
 "Du dat opstellen?"
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:249
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:251
 #, kde-format
 msgid "Create security"
 msgstr "Weertpapeer opstellen"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-04 01:57+0000\n"
+"POT-Creation-Date: 2024-05-05 01:44+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -1732,20 +1732,20 @@ msgstr ""
 msgid "Cannot update security <b>%1</b>: %2"
 msgstr ""
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:579
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:583
 #, fuzzy, kde-format
 #| msgid "Price found: %1 (%2)"
 msgctxt "@info Online price update %1 online id, %2 internal id"
 msgid "Price for %1 updated (id %2)"
 msgstr "Talált árfolyam: %1 (%2)"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:581
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:585
 #, kde-format
 msgctxt "@info Online price update %1 online id"
 msgid "Received an invalid price for %1, unable to update."
 msgstr ""
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:626
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:630
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:38
 #: kmymoney/widgets/daterangedlg.cpp:64 kmymoney/widgets/daterangedlg.cpp:67
@@ -23975,28 +23975,28 @@ msgctxt "@info:window"
 msgid "Investment detail wizard"
 msgstr "Befektetés részletek varázsló"
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:210
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:211
 #, fuzzy, kde-format
 #| msgid "Security detail wizard"
 msgctxt "@info:window"
 msgid "Security detail wizard"
 msgstr "Kötvény részletek varázsló"
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:213
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:214
 #, fuzzy, kde-format
 #| msgid "Security detail wizard"
 msgctxt "@info:tab Security edit wizard detail page"
 msgid "Security details"
 msgstr "Kötvény részletek varázsló"
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:245
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:247
 #, kde-format
 msgid ""
 "<qt>The security <b>%1</b> currently does not exist as sub-account of <b>%2</"
 "b>. Do you want to create it?</qt>"
 msgstr ""
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:249
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:251
 #, kde-format
 msgid "Create security"
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-04 01:57+0000\n"
+"POT-Creation-Date: 2024-05-05 01:44+0000\n"
 "PO-Revision-Date: 2024-04-23 21:12+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
@@ -1745,19 +1745,19 @@ msgstr ""
 msgid "Cannot update security <b>%1</b>: %2"
 msgstr "Ne povas ĝisdatigi sekurecon <b>%1</b>: %2"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:579
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:583
 #, kde-format
 msgctxt "@info Online price update %1 online id, %2 internal id"
 msgid "Price for %1 updated (id %2)"
 msgstr "Prezo por %1 ĝisdatigita (id %2)"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:581
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:585
 #, kde-format
 msgctxt "@info Online price update %1 online id"
 msgid "Received an invalid price for %1, unable to update."
 msgstr "Ricevis nevalidan prezon por %1, ne povas ĝisdatigi."
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:626
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:630
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:38
 #: kmymoney/widgets/daterangedlg.cpp:64 kmymoney/widgets/daterangedlg.cpp:67
@@ -23622,19 +23622,19 @@ msgctxt "@info:window"
 msgid "Investment detail wizard"
 msgstr "Sorĉisto pri investodetaloj"
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:210
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:211
 #, kde-format
 msgctxt "@info:window"
 msgid "Security detail wizard"
 msgstr "Sorĉisto pri sekurecdetaloj"
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:213
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:214
 #, kde-format
 msgctxt "@info:tab Security edit wizard detail page"
 msgid "Security details"
 msgstr "Sekurecaj detaloj"
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:245
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:247
 #, kde-format
 msgid ""
 "<qt>The security <b>%1</b> currently does not exist as sub-account of <b>%2</"
@@ -23643,7 +23643,7 @@ msgstr ""
 "<qt>La sekureco <b>%1</b> nuntempe ne ekzistas kiel subkonto de <b>%2</b>. "
 "Ĉu vi volas krei ĝin?</qt>"
 
-#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:249
+#: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:251
 #, kde-format
 msgid "Create security"
 msgstr "Krei sekurecon"
