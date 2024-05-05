@@ -21,6 +21,7 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "mymoneysecurity.h"
 #include "mymoneyutils.h"
 
 PriceEntry::PriceEntry(const MyMoneyPrice& price)
@@ -93,26 +94,32 @@ QVariant PriceModel::data(const QModelIndex& idx, int role) const
         return QVariant();
 
     const PriceEntry& priceEntry = static_cast<TreeItem<PriceEntry>*>(idx.internalPointer())->constDataRef();
+    const auto security = MyMoneyFile::instance()->security(priceEntry.from());
 
     switch(role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
         switch(idx.column()) {
         case Commodity:
-            return QString("From");
+            if (!security.isCurrency()) {
+                return security.tradingSymbol();
+            }
+            return security.id();
 
-        case StockName:
-            return QString("Stockname");
+        case StockName: {
+            if (!security.isCurrency()) {
+                return security.name();
+            }
+        } break;
 
         case Currency:
-            return QString("To");
+            return priceEntry.to();
 
         case Date:
             return MyMoneyUtils::formatDate(priceEntry.date());
 
         case Price:
-            /// @todo fix precision handling
-            return priceEntry.rate(priceEntry.to()).formatMoney("", 2);
+            return priceEntry.rate(priceEntry.to()).formatMoney(QString(), security.pricePrecision());
 
         case Source:
             return priceEntry.source();
@@ -129,9 +136,26 @@ QVariant PriceModel::data(const QModelIndex& idx, int role) const
         }
         return QVariant(Qt::AlignLeft | Qt::AlignTop);
 
-    case eMyMoney::Model::Roles::IdRole:
+    case eMyMoney::Model::IdRole:
         return priceEntry.id();
 
+    case eMyMoney::Model::PriceFromRole:
+        return priceEntry.from();
+
+    case eMyMoney::Model::PriceToRole:
+        return priceEntry.to();
+
+    case eMyMoney::Model::PriceDateRole:
+        return priceEntry.date();
+
+    case eMyMoney::Model::PriceRateRole:
+        return QVariant::fromValue<MyMoneyMoney>(priceEntry.rate(priceEntry.to()));
+
+    case eMyMoney::Model::PricePairRole:
+        return QStringLiteral("%1-%2").arg(priceEntry.pricePair().first, priceEntry.pricePair().second);
+
+    case eMyMoney::Model::PriceSourceRole:
+        return priceEntry.source();
 
     default:
         if (role >= Qt::UserRole)
