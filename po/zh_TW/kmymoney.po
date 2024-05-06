@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-05 01:44+0000\n"
+"POT-Creation-Date: 2024-05-06 01:45+0000\n"
 "PO-Revision-Date: 2024-02-27 06:12+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -1062,7 +1062,6 @@ msgstr "xxx"
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#. i18n: ectx: property (text), widget (QTreeWidget, m_priceList)
 #. i18n: ectx: attribute (title), widget (QWidget, m_dateTab)
 #. i18n: ectx: property (text), widget (QLabel, labelInv_date)
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_date)
@@ -1070,9 +1069,8 @@ msgstr "xxx"
 #. i18n: ectx: attribute (title), widget (QWidget, tabDate)
 #: kmymoney/dialogs/kcurrencycalculator.ui:87
 #: kmymoney/dialogs/kcurrencycalculator.ui:274
-#: kmymoney/dialogs/kmymoneypricedlg.ui:60
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:92
-#: kmymoney/mymoney/storage/pricemodel.cpp:40
+#: kmymoney/mymoney/storage/pricemodel.cpp:41
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:132
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:58
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:152
@@ -1991,38 +1989,38 @@ msgstr "總計"
 msgid "Closed"
 msgstr "已關閉"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:329
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:271
 #, kde-format
 msgid "Do you really want to delete the selected price entry?"
 msgid_plural "Do you really want to delete the selected price entries?"
 msgstr[0] "您確定要刪除選取的價格項目嗎？"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:330
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:272
 #, kde-format
 msgid "Delete price information"
 msgstr "刪除價格資訊"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:377
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:339
 #, kde-format
 msgid "New price..."
 msgstr "新增價格..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:378
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:340
 #, kde-format
 msgid "Edit price..."
 msgstr "編輯價格..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:379
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:341
 #, kde-format
 msgid "Online Price Update..."
 msgstr "線上價格更新..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:380
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:342
 #, kde-format
 msgid "Delete price..."
 msgstr "刪除價格..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:390
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:354
 #, fuzzy, kde-format
 #| msgctxt "Menu header"
 #| msgid "Price options"
@@ -2036,115 +2034,60 @@ msgstr "價格選項"
 msgid "Price Editor"
 msgstr "價格編輯器"
 
-#. i18n: ectx: property (whatsThis), widget (QTreeWidget, m_priceList)
-#: kmymoney/dialogs/kmymoneypricedlg.ui:32
-#, kde-format
-msgid "Remove this price item from the file"
-msgstr "從檔案中移除此價格項目。"
-
-#. i18n: ectx: property (text), widget (QTreeWidget, m_priceList)
-#: kmymoney/dialogs/kmymoneypricedlg.ui:45
-#: kmymoney/mymoney/storage/pricemodel.cpp:37
-#, kde-format
-msgid "Commodity"
-msgstr "商品"
-
-#. i18n: ectx: property (text), widget (QTreeWidget, m_priceList)
-#: kmymoney/dialogs/kmymoneypricedlg.ui:50
-#, kde-format
-msgid "Stock Name"
-msgstr "股票名稱"
-
-#. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#. i18n: ectx: property (text), widget (QLabel, textLabel3)
-#. i18n: ectx: property (text), widget (QLabel, textLabel2)
-#. i18n: ectx: property (text), widget (QTreeWidget, m_priceList)
-#: kmymoney/dialogs/kmymoneypricedlg.ui:55
-#: kmymoney/dialogs/kupdatestockpricedlg.ui:75
-#: kmymoney/mymoney/storage/pricemodel.cpp:39
-#: kmymoney/mymoney/storage/securitiesmodel.cpp:88
-#: kmymoney/plugins/views/reports/core/listtable.cpp:703
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:113
-#: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:61
-#, kde-format
-msgid "Currency"
-msgstr "貨幣"
-
-#. i18n: ectx: property (text), widget (QLabel, textLabel3)
-#. i18n: ectx: property (text), widget (QTreeWidget, m_priceList)
-#. i18n: ectx: property (text), widget (QCheckBox, m_checkPrice)
-#. i18n: ectx: property (text), widget (QLabel, labelInv_price)
-#. i18n: ectx: property (text), widget (QLabel, lblpriceCol)
-#. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
-#: kmymoney/dialogs/kmymoneypricedlg.ui:65
-#: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:75
-#: kmymoney/models/equitiesmodel.cpp:195 kmymoney/models/equitiesmodel.cpp:432
-#: kmymoney/mymoney/storage/pricemodel.cpp:41
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:55
-#: kmymoney/plugins/csv/import/investmentwizardpage.ui:174
-#: kmymoney/plugins/csv/import/priceswizardpage.cpp:45
-#: kmymoney/plugins/csv/import/priceswizardpage.ui:144
-#: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:465
-#: kmymoney/plugins/views/reports/core/kreportchartview.cpp:163
-#: kmymoney/plugins/views/reports/core/listtable.cpp:645
-#: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:185
-#, kde-format
-msgid "Price"
-msgstr "價格"
-
-#. i18n: ectx: property (text), widget (QTreeWidget, m_priceList)
-#: kmymoney/dialogs/kmymoneypricedlg.ui:70
-#, kde-format
-msgctxt "Price source"
-msgid "Source"
-msgstr "來源"
+#. i18n: ectx: property (placeholderText), widget (KLineEdit, m_searchWidget)
+#: kmymoney/dialogs/kmymoneypricedlg.ui:26
+#, fuzzy, kde-format
+#| msgid "March"
+msgctxt "Placeholder text for search bar"
+msgid "Search..."
+msgstr "三月"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_showAllPrices)
-#: kmymoney/dialogs/kmymoneypricedlg.ui:78
+#: kmymoney/dialogs/kmymoneypricedlg.ui:52
 #, kde-format
 msgid "Show all stored prices"
 msgstr "顯示所有儲存的價格"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_newButton)
-#: kmymoney/dialogs/kmymoneypricedlg.ui:89
+#: kmymoney/dialogs/kmymoneypricedlg.ui:63
 #, kde-format
 msgid "Add a new entry"
 msgstr "新增項目"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_newButton)
-#: kmymoney/dialogs/kmymoneypricedlg.ui:92
+#: kmymoney/dialogs/kmymoneypricedlg.ui:66
 #, kde-format
 msgid "Create a new price entry."
 msgstr "建立新的價格項目。"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_newButton)
-#: kmymoney/dialogs/kmymoneypricedlg.ui:95
+#: kmymoney/dialogs/kmymoneypricedlg.ui:69
 #, kde-format
 msgctxt "@action add new price"
 msgid "New"
 msgstr "新增"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_editButton)
-#: kmymoney/dialogs/kmymoneypricedlg.ui:102
+#: kmymoney/dialogs/kmymoneypricedlg.ui:76
 #, kde-format
 msgid "Modify the selected entry"
 msgstr "變更選取的項目"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_editButton)
-#: kmymoney/dialogs/kmymoneypricedlg.ui:105
+#: kmymoney/dialogs/kmymoneypricedlg.ui:79
 #, kde-format
 msgid "Change the details of selected price information."
 msgstr "變更選取的價格資訊詳情。"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_editButton)
-#: kmymoney/dialogs/kmymoneypricedlg.ui:108
+#: kmymoney/dialogs/kmymoneypricedlg.ui:82
 #, kde-format
 msgid "Modify"
 msgstr "變更"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsOnlineQuotes)
 #. i18n: ectx: property (text), widget (QPushButton, m_onlineQuoteButton)
-#: kmymoney/dialogs/kmymoneypricedlg.ui:115
+#: kmymoney/dialogs/kmymoneypricedlg.ui:89
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:45
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:20
 #, kde-format
@@ -2152,7 +2095,7 @@ msgid "Online Quotes"
 msgstr "線上報價"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_deleteButton)
-#: kmymoney/dialogs/kmymoneypricedlg.ui:122
+#: kmymoney/dialogs/kmymoneypricedlg.ui:96
 #, kde-format
 msgid "Delete this entry"
 msgstr "刪除此項目"
@@ -2160,7 +2103,7 @@ msgstr "刪除此項目"
 #. i18n: ectx: property (text), widget (QPushButton, deleteButton)
 #. i18n: ectx: property (text), widget (QPushButton, m_deleteButton)
 #. i18n: ectx: property (text), widget (QToolButton, buttonDelete)
-#: kmymoney/dialogs/kmymoneypricedlg.ui:125
+#: kmymoney/dialogs/kmymoneypricedlg.ui:99
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:196
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:617
 #: kmymoney/plugins/views/reports/reportcontrol.ui:105
@@ -3026,6 +2969,19 @@ msgstr "使用預設值"
 msgid "New price entry"
 msgstr "新增價格項目"
 
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#: kmymoney/dialogs/kupdatestockpricedlg.ui:75
+#: kmymoney/mymoney/storage/pricemodel.cpp:40
+#: kmymoney/mymoney/storage/securitiesmodel.cpp:88
+#: kmymoney/plugins/views/reports/core/listtable.cpp:703
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:113
+#: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:61
+#, kde-format
+msgid "Currency"
+msgstr "貨幣"
+
 #. i18n: ectx: property (text), widget (QLabel, securityLabel)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: property (windowTitle), widget (QDialog, SecurityDlg)
@@ -3743,6 +3699,26 @@ msgstr "銀行項目："
 #| msgid "Regular Expression to extract the date from the downloaded data"
 msgid "Regular Expression to extract the identifier from the downloaded data"
 msgstr "從下載資料中取出日期所使用的正規表示式"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#. i18n: ectx: property (text), widget (QCheckBox, m_checkPrice)
+#. i18n: ectx: property (text), widget (QLabel, labelInv_price)
+#. i18n: ectx: property (text), widget (QLabel, lblpriceCol)
+#. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
+#: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:75
+#: kmymoney/models/equitiesmodel.cpp:195 kmymoney/models/equitiesmodel.cpp:432
+#: kmymoney/mymoney/storage/pricemodel.cpp:42
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:55
+#: kmymoney/plugins/csv/import/investmentwizardpage.ui:174
+#: kmymoney/plugins/csv/import/priceswizardpage.cpp:45
+#: kmymoney/plugins/csv/import/priceswizardpage.ui:144
+#: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:465
+#: kmymoney/plugins/views/reports/core/kreportchartview.cpp:163
+#: kmymoney/plugins/views/reports/core/listtable.cpp:645
+#: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:185
+#, kde-format
+msgid "Price"
+msgstr "價格"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_editDate)
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_editDateFormat)
@@ -8964,12 +8940,17 @@ msgid "Payee"
 msgstr "收款人"
 
 #: kmymoney/mymoney/storage/pricemodel.cpp:38
+#, kde-format
+msgid "Commodity"
+msgstr "商品"
+
+#: kmymoney/mymoney/storage/pricemodel.cpp:39
 #, fuzzy, kde-format
 #| msgid "Stock Name"
 msgid "Stock name"
 msgstr "股票名稱"
 
-#: kmymoney/mymoney/storage/pricemodel.cpp:42
+#: kmymoney/mymoney/storage/pricemodel.cpp:43
 #, fuzzy, kde-format
 #| msgctxt "Online quote source"
 #| msgid "Source"
@@ -25300,6 +25281,16 @@ msgstr ""
 "<p>在下面輸入您自己的一些資訊。</p>\n"
 "\n"
 "<p>所有的資訊都不是必填的，只是用於個人化您的 KMyMoney 檔案。</p>"
+
+#~ msgid "Remove this price item from the file"
+#~ msgstr "從檔案中移除此價格項目。"
+
+#~ msgid "Stock Name"
+#~ msgstr "股票名稱"
+
+#~ msgctxt "Price source"
+#~ msgid "Source"
+#~ msgstr "來源"
 
 #, fuzzy
 #~| msgctxt "@action move item up"
