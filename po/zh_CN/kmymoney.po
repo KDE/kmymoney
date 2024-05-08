@@ -1962,11 +1962,10 @@ msgstr "价格编辑器"
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, m_searchWidget)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:26
-#, fuzzy, kde-format
-#| msgid "Search view"
+#, kde-format
 msgctxt "Placeholder text for search bar"
 msgid "Search..."
-msgstr "搜索视图"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_showAllPrices)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:52
@@ -24251,13 +24250,3 @@ msgstr ""
 "<p>使用下面的各项来输入关于您本人的信息。</p>\n"
 "\n"
 "<p>所有的信息都可以不填，它们仅用来个性化您自己的KMyMoney文件。</p>"
-
-#~ msgid "Remove this price item from the file"
-#~ msgstr "从文件中删除此价格项"
-
-#~ msgid "Stock Name"
-#~ msgstr "股票名称"
-
-#~ msgctxt "Price source"
-#~ msgid "Source"
-#~ msgstr "来源"

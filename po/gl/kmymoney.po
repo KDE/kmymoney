@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-06 01:45+0000\n"
-"PO-Revision-Date: 2024-04-21 09:45+0200\n"
+"PO-Revision-Date: 2024-05-07 08:09+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -2049,8 +2049,7 @@ msgstr "Editor de prezos"
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, m_searchWidget)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:26
-#, fuzzy, kde-format
-#| msgid "Search..."
+#, kde-format
 msgctxt "Placeholder text for search bar"
 msgid "Search..."
 msgstr "Buscar…"

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-06 01:45+0000\n"
-"PO-Revision-Date: 2024-04-19 22:05+0200\n"
+"PO-Revision-Date: 2024-05-06 09:35+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -517,7 +517,7 @@ msgstr ""
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:47
 #, kde-format
 msgid "&Create..."
-msgstr "&Crea..."
+msgstr "&Crea…"
 
 #: kmymoney/dialogs/kaccountselectdlg.cpp:88
 #, kde-format
@@ -689,7 +689,7 @@ msgstr "Utilitzeu-ho per a navegar fins al punt de muntatge."
 #: kmymoney/dialogs/kbackupdlg.ui:118
 #, kde-format
 msgid "C&hoose..."
-msgstr "E&scolliu..."
+msgstr "E&scolliu…"
 
 #. i18n: ectx: property (text), widget (QCheckBox, mountCheckBox)
 #: kmymoney/dialogs/kbackupdlg.ui:127
@@ -1868,7 +1868,7 @@ msgstr "Estat:"
 #: kmymoney/widgets/kmymoneybriefschedule.ui:131
 #, kde-format
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KImportVerifyDlg)
 #: kmymoney/dialogs/kimportverifydlg.ui:17
@@ -2022,22 +2022,22 @@ msgstr "Suprimix la informació de cotitzacions"
 #: kmymoney/dialogs/kmymoneypricedlg.cpp:339
 #, kde-format
 msgid "New price..."
-msgstr "Preu nou..."
+msgstr "Preu nou…"
 
 #: kmymoney/dialogs/kmymoneypricedlg.cpp:340
 #, kde-format
 msgid "Edit price..."
-msgstr "Edita el preu..."
+msgstr "Edita el preu…"
 
 #: kmymoney/dialogs/kmymoneypricedlg.cpp:341
 #, kde-format
 msgid "Online Price Update..."
-msgstr "Actualització en línia del preu..."
+msgstr "Actualització en línia del preu…"
 
 #: kmymoney/dialogs/kmymoneypricedlg.cpp:342
 #, kde-format
 msgid "Delete price..."
-msgstr "Suprimix preu..."
+msgstr "Suprimix preu…"
 
 #: kmymoney/dialogs/kmymoneypricedlg.cpp:354
 #, kde-format
@@ -2053,11 +2053,10 @@ msgstr "Editor de cotitzacions"
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, m_searchWidget)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:26
-#, fuzzy, kde-format
-#| msgid "Search..."
+#, kde-format
 msgctxt "Placeholder text for search bar"
 msgid "Search..."
-msgstr "Busca..."
+msgstr "Busca…"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_showAllPrices)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:52
@@ -2518,7 +2517,7 @@ msgstr "Institució"
 #, kde-format
 msgctxt "create new institution"
 msgid "New..."
-msgstr "Nova..."
+msgstr "Nova…"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2_2)
 #: kmymoney/dialogs/knewaccountdlg.ui:390
@@ -2868,7 +2867,7 @@ msgstr "SQL"
 #: kmymoney/dialogs/ksaveasquestion.ui:20
 #, kde-format
 msgid "Save storage as..."
-msgstr "Guarda l'emmagatzematge com a..."
+msgstr "Anomena i guarda l'emmagatzematge…"
 
 #. i18n: ectx: property (toolTip), widget (QDialog, KSaveAsQuestion)
 #: kmymoney/dialogs/ksaveasquestion.ui:23
@@ -4746,7 +4745,7 @@ msgstr "No s'han pogut desaparellar les operacions seleccionades"
 #, kde-format
 msgctxt "@action New file/database"
 msgid "New book..."
-msgstr "Llibreta nova..."
+msgstr "Llibreta nova…"
 
 #: kmymoney/kmymoney.cpp:1621
 #, kde-format
@@ -4769,22 +4768,22 @@ msgstr "Guarda a un fitxer"
 #: kmymoney/kmymoney.cpp:1758
 #, kde-format
 msgid "Backup..."
-msgstr "Còpia de seguretat..."
+msgstr "Còpia de seguretat…"
 
 #: kmymoney/kmymoney.cpp:1759
 #, kde-format
 msgid "Statement file..."
-msgstr "Fitxer d'extracte..."
+msgstr "Fitxer d'extracte…"
 
 #: kmymoney/kmymoney.cpp:1760 kmymoney/kmymoney.cpp:1761
 #, kde-format
 msgid "Account Template..."
-msgstr "Plantilla de comptes..."
+msgstr "Plantilla de comptes…"
 
 #: kmymoney/kmymoney.cpp:1762
 #, kde-format
 msgid "Personal Data..."
-msgstr "Dades personals..."
+msgstr "Dades personals…"
 
 #: kmymoney/kmymoney.cpp:1764
 #, kde-format
@@ -4794,12 +4793,12 @@ msgstr "Bolca la memòria"
 #: kmymoney/kmymoney.cpp:1766
 #, kde-format
 msgid "File-Information..."
-msgstr "Informació del fitxer..."
+msgstr "Informació del fitxer…"
 
 #: kmymoney/kmymoney.cpp:1770
 #, kde-format
 msgid "Find transaction..."
-msgstr "Busca una operació..."
+msgstr "Busca una operació…"
 
 #: kmymoney/kmymoney.cpp:1774
 #, kde-format
@@ -4827,22 +4826,22 @@ msgstr "Mostra tots els comptes"
 #: kmymoney/kmymoney.cpp:1781
 #, kde-format
 msgid "New institution..."
-msgstr "Institució nova..."
+msgstr "Institució nova…"
 
 #: kmymoney/kmymoney.cpp:1782
 #, kde-format
 msgid "Edit institution..."
-msgstr "Edita una institució..."
+msgstr "Edita una institució…"
 
 #: kmymoney/kmymoney.cpp:1783
 #, kde-format
 msgid "Delete institution..."
-msgstr "Suprimix una institució..."
+msgstr "Suprimix una institució…"
 
 #: kmymoney/kmymoney.cpp:1787
 #, kde-format
 msgid "New account..."
-msgstr "Compte nou..."
+msgstr "Compte nou…"
 
 #: kmymoney/kmymoney.cpp:1788
 #, kde-format
@@ -4852,7 +4851,7 @@ msgstr "Obri el llibre major"
 #: kmymoney/kmymoney.cpp:1789
 #, kde-format
 msgid "Reconcile..."
-msgstr "Concilia..."
+msgstr "Concilia…"
 
 #: kmymoney/kmymoney.cpp:1790
 #, kde-format
@@ -4880,12 +4879,12 @@ msgstr "Informa de la conciliació"
 #: kmymoney/kmymoney.cpp:1794
 #, kde-format
 msgid "Edit account..."
-msgstr "Edita un compte..."
+msgstr "Edita un compte…"
 
 #: kmymoney/kmymoney.cpp:1795
 #, kde-format
 msgid "Delete account..."
-msgstr "Suprimix un compte..."
+msgstr "Suprimix un compte…"
 
 #: kmymoney/kmymoney.cpp:1796
 #, kde-format
@@ -4905,57 +4904,57 @@ msgstr "Informe d'operació"
 #: kmymoney/kmymoney.cpp:1799
 #, kde-format
 msgid "Show balance chart..."
-msgstr "Mostra el gràfic del saldo..."
+msgstr "Mostra el gràfic del saldo…"
 
 #: kmymoney/kmymoney.cpp:1800
 #, kde-format
 msgid "Map account..."
-msgstr "Vincula amb un compte..."
+msgstr "Vincula amb un compte…"
 
 #: kmymoney/kmymoney.cpp:1801
 #, kde-format
 msgid "Unmap account..."
-msgstr "Desvincula el compte..."
+msgstr "Desvincula el compte…"
 
 #: kmymoney/kmymoney.cpp:1802
 #, kde-format
 msgid "Update account..."
-msgstr "Actualitza un compte..."
+msgstr "Actualitza un compte…"
 
 #: kmymoney/kmymoney.cpp:1803
 #, kde-format
 msgid "Update all accounts..."
-msgstr "Actualitza tots els comptes..."
+msgstr "Actualitza tots els comptes…"
 
 #: kmymoney/kmymoney.cpp:1807
 #, kde-format
 msgid "New category..."
-msgstr "Categoria nova..."
+msgstr "Categoria nova…"
 
 #: kmymoney/kmymoney.cpp:1808
 #, kde-format
 msgid "Edit category..."
-msgstr "Edita la categoria..."
+msgstr "Edita la categoria…"
 
 #: kmymoney/kmymoney.cpp:1809
 #, kde-format
 msgid "Delete category..."
-msgstr "Suprimix la categoria..."
+msgstr "Suprimix la categoria…"
 
 #: kmymoney/kmymoney.cpp:1813
 #, kde-format
 msgid "Currencies..."
-msgstr "Divises..."
+msgstr "Divises…"
 
 #: kmymoney/kmymoney.cpp:1814
 #, kde-format
 msgid "Prices..."
-msgstr "Cotitzacions..."
+msgstr "Cotitzacions…"
 
 #: kmymoney/kmymoney.cpp:1815
 #, kde-format
 msgid "Update Stock and Currency Prices..."
-msgstr "Actualitza la cotització dels valors i divises..."
+msgstr "Actualitza la cotització dels valors i divises…"
 
 #: kmymoney/kmymoney.cpp:1816
 #, kde-format
@@ -4970,7 +4969,7 @@ msgstr "Prova de rendiment"
 #: kmymoney/kmymoney.cpp:1818
 #, kde-format
 msgid "Calculator..."
-msgstr "Calculadora..."
+msgstr "Calculadora…"
 
 #: kmymoney/kmymoney.cpp:1822
 #, kde-format
@@ -5107,7 +5106,7 @@ msgstr "Ves fins al beneficiari"
 #: kmymoney/kmymoney.cpp:1852
 #, kde-format
 msgid "Create scheduled transaction..."
-msgstr "Crea una operació planificada..."
+msgstr "Crea una operació planificada…"
 
 #: kmymoney/kmymoney.cpp:1853
 #, kde-format
@@ -5138,42 +5137,42 @@ msgstr "Mostra el giny de filtratge"
 #: kmymoney/kmymoney.cpp:1859
 #, kde-format
 msgid "New investment..."
-msgstr "Inversió nova..."
+msgstr "Inversió nova…"
 
 #: kmymoney/kmymoney.cpp:1860
 #, kde-format
 msgid "Edit investment..."
-msgstr "Edita una inversió..."
+msgstr "Edita una inversió…"
 
 #: kmymoney/kmymoney.cpp:1861
 #, kde-format
 msgid "Delete investment..."
-msgstr "Suprimix la inversió..."
+msgstr "Suprimix la inversió…"
 
 #: kmymoney/kmymoney.cpp:1862
 #, kde-format
 msgid "Online price update..."
-msgstr "Actualització en línia del preu..."
+msgstr "Actualització en línia del preu…"
 
 #: kmymoney/kmymoney.cpp:1863
 #, kde-format
 msgid "Manual price update..."
-msgstr "Actualització manual del preu..."
+msgstr "Actualització manual del preu…"
 
 #: kmymoney/kmymoney.cpp:1864
 #, kde-format
 msgid "Edit security..."
-msgstr "Edita el títol..."
+msgstr "Edita el títol…"
 
 #: kmymoney/kmymoney.cpp:1865
 #, kde-format
 msgid "Delete security..."
-msgstr "Suprimix el títol..."
+msgstr "Suprimix el títol…"
 
 #: kmymoney/kmymoney.cpp:1868
 #, kde-format
 msgid "New schedule..."
-msgstr "Planificació nova..."
+msgstr "Planificació nova…"
 
 #: kmymoney/kmymoney.cpp:1869
 #, kde-format
@@ -5193,17 +5192,17 @@ msgstr "Duplica l'operació planificada"
 #: kmymoney/kmymoney.cpp:1872
 #, kde-format
 msgid "Enter next transaction..."
-msgstr "Introduïx l'operació següent..."
+msgstr "Introduïx l'operació següent…"
 
 #: kmymoney/kmymoney.cpp:1873
 #, kde-format
 msgid "Skip next transaction..."
-msgstr "Omet l'operació següent..."
+msgstr "Omet l'operació següent…"
 
 #: kmymoney/kmymoney.cpp:1875
 #, kde-format
 msgid "New payee..."
-msgstr "Beneficiari nou..."
+msgstr "Beneficiari nou…"
 
 #: kmymoney/kmymoney.cpp:1876
 #, kde-format
@@ -5223,7 +5222,7 @@ msgstr "Fusiona els beneficiaris"
 #: kmymoney/kmymoney.cpp:1880
 #, kde-format
 msgid "New tag..."
-msgstr "Etiqueta nova..."
+msgstr "Etiqueta nova…"
 
 #: kmymoney/kmymoney.cpp:1881
 #, kde-format
@@ -5458,7 +5457,7 @@ msgstr "Preparat."
 #: kmymoney/kmymoney.cpp:3432
 #, kde-format
 msgid "Viewing personal data..."
-msgstr "Visualitzant les dades personals..."
+msgstr "Visualitzant les dades personals…"
 
 #: kmymoney/kmymoney.cpp:3439
 #, kde-format
@@ -5488,7 +5487,7 @@ msgstr "S'estan exportant les plantilles de comptes."
 #: kmymoney/kmymoney.cpp:3490
 #, kde-format
 msgid "Save as..."
-msgstr "Anomena i guarda..."
+msgstr "Anomena i guarda…"
 
 #: kmymoney/kmymoney.cpp:3491
 #, kde-format
@@ -5631,7 +5630,7 @@ msgstr "No s'ha pogut afegir el compte: %1"
 #: kmymoney/kmymoney.cpp:4065
 #, kde-format
 msgid "Running consistency check..."
-msgstr "S'està executant la comprovació de coherència..."
+msgstr "S'està executant la comprovació de coherència…"
 
 #: kmymoney/kmymoney.cpp:4072
 #, kde-format
@@ -5666,7 +5665,7 @@ msgstr "Resultat de la comprovació de coherència"
 #: kmymoney/kmymoney.cpp:4153
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
-msgstr "S'estan verificant les operacions planificades endarrerides..."
+msgstr "S'estan verificant les operacions planificades endarrerides…"
 
 #: kmymoney/kmymoney.cpp:4343
 #, kde-format
@@ -5708,12 +5707,12 @@ msgstr "Tots els missatges"
 #: kmymoney/kmymoney.cpp:4423
 #, kde-format
 msgid "Auto saving..."
-msgstr "S'està guardant automàticament..."
+msgstr "S'està guardant automàticament…"
 
 #: kmymoney/kmymoney.cpp:4543
 #, kde-format
 msgid "Creating new document..."
-msgstr "S'està creant un document nou..."
+msgstr "S'està creant un document nou…"
 
 #: kmymoney/kmymoney.cpp:4603
 #, kde-format
@@ -5738,7 +5737,7 @@ msgstr "Tots els fitxers (*)"
 #: kmymoney/kmymoney.cpp:4645
 #, kde-format
 msgid "Loading file..."
-msgstr "S'està carregant el fitxer..."
+msgstr "S'està carregant el fitxer…"
 
 #: kmymoney/kmymoney.cpp:4651
 #, kde-format
@@ -5783,7 +5782,7 @@ msgstr ""
 #: kmymoney/kmymoney.cpp:4701
 #, kde-format
 msgid "Saving file..."
-msgstr "S'està guardant el fitxer..."
+msgstr "S'està guardant el fitxer…"
 
 #: kmymoney/kmymoney.cpp:4713
 #, kde-format
@@ -5798,7 +5797,7 @@ msgstr "No s'ha trobat cap connector adequat per a guardar les dades."
 #: kmymoney/kmymoney.cpp:4725
 #, kde-format
 msgid "Saving file as...."
-msgstr "S'està guardant el fitxer com a..."
+msgstr "S'està guardant el fitxer com a…"
 
 #: kmymoney/kmymoney.cpp:4741
 #, kde-format
@@ -5857,7 +5856,7 @@ msgstr "&Operació"
 #: kmymoney/kmymoneyui.rc:85 kmymoney/kmymoneyui.rc:226
 #, kde-format
 msgid "Mark transaction as..."
-msgstr "Marca l'operació com a..."
+msgstr "Marca l'operació com a…"
 
 #. i18n: ectx: Menu (transaction_mark_menu)
 #. i18n: ectx: Menu (transaction_context_mark_menu)
@@ -5931,7 +5930,7 @@ msgstr "Opcions de l'operació"
 #: kmymoney/kmymoneyui.rc:221
 #, kde-format
 msgid "Move transaction to..."
-msgstr "Mou l'operació a..."
+msgstr "Mou l'operació a…"
 
 #. i18n: ectx: Menu (transaction_move_menu)
 #: kmymoney/kmymoneyui.rc:222
@@ -5948,7 +5947,7 @@ msgstr "Barra d'eines principal"
 #: kmymoney/kmymoneyutils.cpp:97
 #, kde-format
 msgid "&New Schedule..."
-msgstr "Planificació &nova..."
+msgstr "Planificació &nova…"
 
 #: kmymoney/kmymoneyutils.cpp:99
 #, kde-format
@@ -9398,7 +9397,7 @@ msgstr "Utilitzeu-ho per a iniciar l'operació d'exportació"
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:67
 #, kde-format
 msgid "&Browse..."
-msgstr "E&xplora..."
+msgstr "E&xplora…"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:99
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:68
@@ -9512,7 +9511,7 @@ msgstr "Separador de camps"
 #: kmymoney/plugins/csv/export/csvexporter.cpp:60
 #, kde-format
 msgid "&CSV..."
-msgstr "&CSV..."
+msgstr "&CSV…"
 
 #: kmymoney/plugins/csv/export/csvexporter.cpp:70
 #, kde-format
@@ -10136,7 +10135,7 @@ msgstr "eliminació"
 #: kmymoney/plugins/csv/import/csvimporter.cpp:56
 #, kde-format
 msgid "CSV..."
-msgstr "CSV..."
+msgstr "CSV…"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:411
 #, kde-format
@@ -11435,12 +11434,12 @@ msgstr ""
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1435
 #, kde-format
 msgid "Loading commodities..."
-msgstr "S'estan carregant les mercaderies..."
+msgstr "S'estan carregant les mercaderies…"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1487
 #, kde-format
 msgid "Loading prices..."
-msgstr "S'estan carregant les cotitzacions..."
+msgstr "S'estan carregant les cotitzacions…"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1491
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1499
@@ -11451,12 +11450,12 @@ msgstr "Historial importat"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1520
 #, kde-format
 msgid "Loading accounts..."
-msgstr "S'estan carregant els comptes..."
+msgstr "S'estan carregant els comptes…"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1665
 #, kde-format
 msgid "Loading transactions..."
-msgstr "S'estan carregant les operacions..."
+msgstr "S'estan carregant les operacions…"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1768
 #, kde-format
@@ -11475,7 +11474,7 @@ msgstr "Operació importada"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1859
 #, kde-format
 msgid "Loading templates..."
-msgstr "S'estan carregant les plantilles..."
+msgstr "S'estan carregant les plantilles…"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1873
 #, kde-format
@@ -11510,7 +11509,7 @@ msgstr ""
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2070
 #, kde-format
 msgid "Loading schedules..."
-msgstr "S'estan carregant les planificacions..."
+msgstr "S'estan carregant les planificacions…"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2158
 #, kde-format
@@ -12209,12 +12208,12 @@ msgstr "El mòdul KBanking no s'ha inicialitzat correctament"
 #: kmymoney/plugins/kbanking/kbanking.cpp:335
 #, kde-format
 msgid "Configure Aq&Banking..."
-msgstr "Configura l'Aq&Banking..."
+msgstr "Configura l'Aq&Banking…"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:340
 #, kde-format
 msgid "AqBanking importer..."
-msgstr "Importador d'AqBanking..."
+msgstr "Importador d'AqBanking…"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:526
 #: kmymoney/plugins/kbanking/kbanking.cpp:775
@@ -12571,7 +12570,7 @@ msgstr "Connexió OFX directa"
 #: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlgdecl.ui:23
 #, kde-format
 msgid "Contacting bank..."
-msgstr "S'està connectant amb el banc..."
+msgstr "S'està connectant amb el banc…"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:70
 #, kde-format
@@ -12693,7 +12692,7 @@ msgstr "Seleccioneu la institució financera"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:38
 #, kde-format
 msgid "Please select your financial institution from the list below..."
-msgstr "Seleccioneu la institució financera des de la llista davall..."
+msgstr "Seleccioneu la institució financera des de la llista davall…"
 
 #. i18n: ectx: attribute (title), widget (QWidget, autoTab)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:55
@@ -13218,7 +13217,7 @@ msgstr "Suma de verificació de KMyMoney"
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:153
 #, kde-format
 msgid "OFX..."
-msgstr "OFX..."
+msgstr "OFX…"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:167
 #, kde-format
@@ -13851,7 +13850,7 @@ msgstr ""
 #: kmymoney/plugins/qif/import/qifimporter.cpp:56
 #, kde-format
 msgid "QIF..."
-msgstr "QIF..."
+msgstr "QIF…"
 
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:57
 #, kde-format
@@ -13862,7 +13861,7 @@ msgstr "Utilitzeu-ho per a iniciar l'operació d'importació"
 #, kde-format
 msgctxt "New profile"
 msgid "&New..."
-msgstr "&Nou..."
+msgstr "&Nou…"
 
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:69
 #, kde-format
@@ -13872,7 +13871,7 @@ msgstr "Utilitzeu-ho per a obrir l'editor de perfils"
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:94
 #, kde-format
 msgid "Import File..."
-msgstr "Importa un fitxer..."
+msgstr "Importa un fitxer…"
 
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:96
 #, kde-format
@@ -14038,12 +14037,12 @@ msgstr ""
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:379
 #, kde-format
 msgid "Importing QIF..."
-msgstr "S'està important un QIF..."
+msgstr "S'està important un QIF…"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:481
 #, kde-format
 msgid "Reading QIF..."
-msgstr "S'està llegint el QIF..."
+msgstr "S'està llegint el QIF…"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:486
 #, kde-format
@@ -14643,7 +14642,7 @@ msgstr "Fitxers de base de dades (*.db *.sql)"
 #: kmymoney/plugins/sql/sqlstorage.cpp:265
 #, kde-format
 msgid "Open database..."
-msgstr "Obri una base de dades..."
+msgstr "Obri una base de dades…"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:270
 #, kde-format
@@ -17769,7 +17768,7 @@ msgstr "Historial"
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:129
 #, kde-format
 msgid "Loading Woob backend..."
-msgstr "S'està carregant el dorsal de Woob..."
+msgstr "S'està carregant el dorsal de Woob…"
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:130
 #, kde-format
@@ -17780,7 +17779,7 @@ msgstr "S'està obtenint la llista de dorsals."
 #: kmymoney/plugins/woob/woob.cpp:171
 #, kde-format
 msgid "Connecting to bank..."
-msgstr "S'està connectant amb el banc..."
+msgstr "S'està connectant amb el banc…"
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:140
 #, kde-format
@@ -17820,7 +17819,7 @@ msgstr "Seleccioneu el dorsal"
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:21
 #, kde-format
 msgid "Please select a backend from the list below..."
-msgstr "Seleccioneu un dorsal des de la llista següent..."
+msgstr "Seleccioneu un dorsal des de la llista següent…"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, backendsList)
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:33
@@ -17842,7 +17841,7 @@ msgid ""
 "account..."
 msgstr ""
 "Seleccioneu el compte <b>en línia</b> que vulgueu vincular amb el compte "
-"d'<b>aplicació</b>..."
+"d'<b>aplicació</b>…"
 
 #: kmymoney/plugins/woob/woob.cpp:59
 #, kde-format
@@ -17874,7 +17873,7 @@ msgstr "Configureu Woob"
 #: kmymoney/plugins/woob/woob.cpp:172
 #, kde-format
 msgid "Retrieving transactions..."
-msgstr "S'estan recuperant les operacions..."
+msgstr "S'estan recuperant les operacions…"
 
 #: kmymoney/plugins/xml/kcm_xmlstorage.cpp:42
 #, kde-format
@@ -17904,7 +17903,7 @@ msgstr ""
 "<p>Heu activat el funcionament amb l'encriptació GPG. Açò vol dir que els "
 "fitxers nous s'emmagatzemaran encriptats.</p><p>Els fitxers existents no "
 "s'encriptaran automàticament. Per a aconseguir l'encriptació dels fitxers "
-"existents, utilitzeu la característica <b>Fitxer/Anomena i guarda...</b> i "
+"existents, utilitzeu la característica <b>Fitxer/Anomena i guarda…</b> i "
 "guardeu el fitxer amb un nom diferent.<br/>Després de comprovar el resultat, "
 "podreu suprimir el fitxer antic i canviar el nom de l'encriptat al nom antic."
 "</p>"
@@ -19903,7 +19902,7 @@ msgstr ""
 #: kmymoney/views/kinvestmentview.ui:122
 #, kde-format
 msgid "Search..."
-msgstr "Busca..."
+msgstr "Busca…"
 
 #: kmymoney/views/kmymoneyview.cpp:191
 #, kde-format
@@ -20338,7 +20337,7 @@ msgstr "No s'ha pogut duplicar l'operació planificada: «%1»"
 #: kmymoney/views/kscheduledview.ui:31
 #, kde-format
 msgid "New Scheduled transaction..."
-msgstr "Operació planificada nova..."
+msgstr "Operació planificada nova…"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_searchWidget)
 #: kmymoney/views/kscheduledview.ui:38
@@ -21187,13 +21186,13 @@ msgstr "Opcions de desglossament"
 #, kde-format
 msgctxt "@item:inmenu Create a split"
 msgid "New..."
-msgstr "Nou..."
+msgstr "Nou…"
 
 #: kmymoney/views/splitview.cpp:127
 #, kde-format
 msgctxt "@item:inmenu Edit a split"
 msgid "Edit..."
-msgstr "Edita..."
+msgstr "Edita…"
 
 #: kmymoney/views/splitview.cpp:132
 #, kde-format
@@ -21241,7 +21240,7 @@ msgstr "Restablix als valors predeterminats"
 #, kde-format
 msgctxt "@action:inmenu Open tab order dialog"
 msgid "Tab Order List..."
-msgstr "Llista de l'ordre de tabulació..."
+msgstr "Llista de l'ordre de tabulació…"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, TabOrderEditor)
 #: kmymoney/views/tabordereditor.ui:14
@@ -21468,7 +21467,7 @@ msgstr "Utilitzeu este botó per a enregistrar esta operació"
 #: kmymoney/widgets/kmymoneybriefschedule.ui:309
 #, kde-format
 msgid "Enter..."
-msgstr "Introducció..."
+msgstr "Introducció…"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_skipButton)
 #: kmymoney/widgets/kmymoneybriefschedule.ui:319
@@ -23931,7 +23930,7 @@ msgstr "Factor"
 #: kmymoney/wizards/newloanwizard/additionalfeeswizardpage.cpp:42
 #, kde-format
 msgid "&Additional fees..."
-msgstr "Despeses &addicionals..."
+msgstr "Despeses &addicionals…"
 
 #: kmymoney/wizards/newloanwizard/additionalfeeswizardpage.cpp:44
 #, kde-format
@@ -25276,8 +25275,8 @@ msgid ""
 "<b>Settings</b> menu."
 msgstr ""
 "Podeu canviar les opcions de configuració en qualsevol moment utilitzant el "
-"diàleg de configuració. Seleccioneu l'opció <b>Configura KMyMoney...</b> en "
-"el menú <b>Configuració</b>."
+"diàleg de configuració. Seleccioneu l'opció <b>Configura KMyMoney…</b> en el "
+"menú <b>Configuració</b>."
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel2)
 #: kmymoney/wizards/wizardpages/accounts.ui:17
@@ -25335,13 +25334,3 @@ msgstr ""
 "\n"
 "<p>Tota la informació és optativa i s'utilitza per a personalitzar el fitxer "
 "de KMyMoney.</p>"
-
-#~ msgid "Remove this price item from the file"
-#~ msgstr "Elimina del fitxer este element de cotització"
-
-#~ msgid "Stock Name"
-#~ msgstr "Nom del Valor"
-
-#~ msgctxt "Price source"
-#~ msgid "Source"
-#~ msgstr "Font"

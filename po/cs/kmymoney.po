@@ -1967,11 +1967,10 @@ msgstr "Editor cen"
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, m_searchWidget)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:26
-#, fuzzy, kde-format
-#| msgid "Search..."
+#, kde-format
 msgctxt "Placeholder text for search bar"
 msgid "Search..."
-msgstr "Hledat..."
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_showAllPrices)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:52
@@ -24483,13 +24482,3 @@ msgstr ""
 "\n"
 "<p>Veškeré informace jsou volitelně a používají se pouze pro zosobnění "
 "vašeho KMyMoney.</p>"
-
-#~ msgid "Remove this price item from the file"
-#~ msgstr "Odstranit tuto cenovou položku ze souboru"
-
-#~ msgid "Stock Name"
-#~ msgstr "Název akcie"
-
-#~ msgctxt "Price source"
-#~ msgid "Source"
-#~ msgstr "Zdroj"
