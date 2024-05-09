@@ -14,6 +14,7 @@
 #include <QListView>
 #include <QPainter>
 #include <QTableView>
+#include <QTextBrowser>
 #include <QTreeView>
 
 // ----------------------------------------------------------------------------
@@ -69,6 +70,7 @@ class KMMEmptyView : public T
         }
 
         QString m_text;
+        QFont m_font;
         bool m_skipRootLevelEntries;
     };
 
@@ -77,6 +79,7 @@ public:
         : T(parent)
         , d(new Private)
     {
+        d->m_font = T::font();
     }
 
     virtual ~KMMEmptyView()
@@ -86,13 +89,26 @@ public:
 
     /**
      * Use @a text as the message to be shown when the
-     * underlying model does not have items
+     * view does not show any data
      *
      * @param text Text to be displayed
      */
-    void setText(const QString& text)
+    void setEmptyText(const QString& text)
     {
         d->m_text = text;
+        // Invalidate the area to trigger a repaint
+        T::viewport()->update();
+    }
+
+    /**
+     * Use @a font as the font to show the message when the
+     * view does not show any data
+     *
+     * @param text Text to be displayed
+     */
+    void setEmptyFont(const QFont& font)
+    {
+        d->m_font = font;
         // Invalidate the area to trigger a repaint
         T::viewport()->update();
     }
@@ -120,11 +136,19 @@ protected:
     {
         T::paintEvent(event); // Call the base class paint event
 
-        // Check if the model is empty
-        if (d->isModelEmpty(T::model())) {
+        bool empty = false;
+        if (std::is_base_of<QAbstractItemView, T>::value) {
+            empty = d->isModelEmpty(qobject_cast<QAbstractItemView*>(this)->model());
+        } else if (std::is_base_of<QTextBrowser, T>::value) {
+            empty = qobject_cast<QTextBrowser*>(this)->toPlainText().isEmpty();
+        }
+
+        // Check if no data is in the view
+        if (empty) {
             QPainter painter(T::viewport());
             painter.save();
             painter.setPen(Qt::gray);
+            painter.setFont(d->m_font);
             painter.drawText(T::rect(), Qt::AlignCenter, d->m_text);
             painter.restore();
         }
@@ -137,5 +161,6 @@ private:
 typedef KMMEmptyView<QTreeView> KMMEmptyTreeView;
 typedef KMMEmptyView<QTableView> KMMEmptyTableView;
 typedef KMMEmptyView<QListView> KMMEmptyListView;
+typedef KMMEmptyView<QTextBrowser> KMMEmptyTextBrowser;
 
 #endif // KMMEMPTYVIEW_H

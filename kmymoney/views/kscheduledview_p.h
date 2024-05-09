@@ -101,7 +101,7 @@ public:
 
         // ignore entries in the root level, they are groups and not schedules
         ui->m_scheduleTree->setSkipRootLevelEntries(true);
-        ui->m_scheduleTree->setText(i18nc("@info:placeholder", "No schedules found"));
+        ui->m_scheduleTree->setEmptyText(i18nc("@info:placeholder", "No schedules found"));
 
         readConfig();
 
