@@ -120,7 +120,7 @@ public:
     void addWidget(QWidget* w);
 
     void showPageAndFocus(View idView);
-    void showPage(View idView);
+    void showPage(View idView, bool forceShow = false);
 
     /**
       * This method changes the view type according to the settings.

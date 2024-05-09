@@ -578,10 +578,10 @@ void KMyMoneyView::showPageAndFocus(View idView)
     }
 }
 
-void KMyMoneyView::showPage(View idView)
+void KMyMoneyView::showPage(View idView, bool forceShow)
 {
     Q_D(KMyMoneyView);
-    if (!d->viewFrames.contains(idView) || (currentPage() == d->viewFrames[idView]))
+    if ((!d->viewFrames.contains(idView) || (currentPage() == d->viewFrames[idView])) && !forceShow)
         return;
 
     setCurrentPage(d->viewFrames[idView]);
@@ -606,13 +606,10 @@ void KMyMoneyView::enableViewsIfFileOpen(bool fileOpen)
 
 void KMyMoneyView::switchToDefaultView()
 {
-    Q_D(KMyMoneyView);
     const auto idView = KMyMoneySettings::startLastViewSelected() ?
                         static_cast<View>(KMyMoneySettings::lastViewSelected()) :
                         View::Home;
-    // if we currently see a different page, then select the right one
-    if (d->viewFrames.contains(idView) && d->viewFrames[idView] != currentPage())
-        showPage(idView);
+    showPage(idView, true);
 
     executeCustomAction(eView::Action::UnblockViewAfterFileOpen);
 }
