@@ -613,6 +613,8 @@ void KMyMoneyView::switchToDefaultView()
     // if we currently see a different page, then select the right one
     if (d->viewFrames.contains(idView) && d->viewFrames[idView] != currentPage())
         showPage(idView);
+
+    executeCustomAction(eView::Action::UnblockViewAfterFileOpen);
 }
 
 void KMyMoneyView::slotSwitchView(KPageWidgetItem* current, KPageWidgetItem* previous)
@@ -647,6 +649,19 @@ void KMyMoneyView::slotSwitchView(KPageWidgetItem* current, KPageWidgetItem* pre
 void KMyMoneyView::slotRememberLastView(View view)
 {
     KMyMoneySettings::setLastViewSelected(static_cast<int>(view));
+}
+
+void KMyMoneyView::executeCustomAction(eView::Action action)
+{
+    Q_D(KMyMoneyView);
+    // execute the action, at last on the current view
+    const auto currentView = d->viewBases[d->currentViewId()];
+    for (const auto& view : qAsConst(d->viewBases)) {
+        if (view != currentView) {
+            view->executeCustomAction(action);
+        }
+    }
+    currentView->executeCustomAction(action);
 }
 
 void KMyMoneyView::executeAction(eMenu::Action action, const SelectedObjects& selections)

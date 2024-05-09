@@ -48,7 +48,7 @@
 // Project Includes
 
 #include "icons.h"
-#include "kmmtextbrowser.h"
+#include "kmmemptyview.h"
 #include "kmymoneyplugin.h"
 #include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
@@ -149,18 +149,24 @@ public:
         vbox->setSpacing(6);
         vbox->setContentsMargins(0, 0, 0, 0);
 
-        m_view = new KMMTextBrowser();
+        m_view = new KMMEmptyTextBrowser();
+        auto font = m_view->font();
+        font.setPointSize(32);
+        m_view->setEmptyFont(font);
+        m_view->setEmptyText(i18nc("@info:placeholder Shown when the application starts up", "Loading..."));
         m_view->setOpenLinks(false);
         m_view->installEventFilter(q);
 
         vbox->addWidget(m_view);
 
-        q->connect(m_view, &KMMTextBrowser::anchorClicked, q, &KHomeView::slotOpenUrl);
+        q->connect(m_view, &QTextBrowser::anchorClicked, q, &KHomeView::slotOpenUrl);
 
         q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KHomeView::refresh);
 
         m_resizeRefreshTimer.setSingleShot(true);
         q->connect(&m_resizeRefreshTimer, &QTimer::timeout, q, &KHomeView::refresh);
+
+        m_needsRefresh = false;
     }
 
     /**
@@ -418,7 +424,7 @@ public:
      */
     void repaintAfterResize(const QSize& oldSize, const QSize& newSize)
     {
-        if (!m_resizeRefreshTimer.isActive()) {
+        if (!m_resizeRefreshTimer.isActive() && oldSize.isValid()) {
             m_startSize = oldSize;
             m_resizeRefreshTimer.start(100);
         } else {
@@ -1957,7 +1963,7 @@ public:
      */
     typedef QMap<QDate, MyMoneyMoney> dailyBalances;
 
-    KMMTextBrowser* m_view;
+    KMMEmptyTextBrowser* m_view;
 
     QString m_html;
     bool m_showAllSchedules;

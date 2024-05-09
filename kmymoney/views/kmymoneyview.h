@@ -150,6 +150,11 @@ public:
      */
     void executeAction(eMenu::Action action, const SelectedObjects& selections);
 
+    /**
+     * Send the @a action to all views
+     */
+    void executeCustomAction(eView::Action action);
+
     void setupSharedActions();
 
     /**

@@ -46,6 +46,8 @@ enum class Action {
     Refresh,
     Print,
     ClosePayeeIdentifierSource,
+    BlockViewDuringFileOpen,
+    UnblockViewAfterFileOpen,
 };
 }
 
