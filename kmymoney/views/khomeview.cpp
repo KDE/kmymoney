@@ -92,10 +92,6 @@ void KHomeView::executeCustomAction(eView::Action action)
     case eView::Action::UnblockViewAfterFileOpen:
         slotEnableRefresh();
         break;
-    case eView::Action::Refresh:
-        refresh();
-        break;
-
     default:
         break;
     }

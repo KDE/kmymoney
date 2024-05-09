@@ -46,7 +46,6 @@ public:
     explicit KForecastView(QWidget *parent = nullptr);
     ~KForecastView() override;
 
-    void executeCustomAction(eView::Action action) override;
     void refresh();
 
     void createActions(KXMLGUIClient* guiClient);
