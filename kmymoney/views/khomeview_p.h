@@ -430,6 +430,7 @@ public:
             m_resizeRefreshTimer.start(100);
         } else {
             if (m_startSize == newSize) {
+                qDebug() << "stop refresh timer";
                 m_resizeRefreshTimer.stop();
             }
         }
