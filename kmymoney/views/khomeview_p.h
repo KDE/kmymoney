@@ -425,6 +425,7 @@ public:
     void repaintAfterResize(const QSize& oldSize, const QSize& newSize)
     {
         if (!m_resizeRefreshTimer.isActive() && oldSize.isValid()) {
+            qDebug() << "start refresh timer";
             m_startSize = oldSize;
             m_resizeRefreshTimer.start(100);
         } else {
