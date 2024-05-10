@@ -100,7 +100,6 @@ void KHomeView::executeCustomAction(eView::Action action)
 void KHomeView::refresh()
 {
     Q_D(KHomeView);
-    qDebug() << "KHomeView::refresh" << isVisible() << d->m_skipRefresh << d->m_resizeRefreshTimer.isActive() << d->m_resizeRefreshTimer.remainingTime();
     if (isVisible() && !d->m_skipRefresh && !d->m_resizeRefreshTimer.isActive()) {
         d->loadView();
         d->m_needsRefresh = false;
