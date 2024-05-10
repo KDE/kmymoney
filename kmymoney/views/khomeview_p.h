@@ -118,6 +118,7 @@ public:
         , m_fileOpen(false)
         , m_adjustedIconSize(0)
         , m_devRatio(1.0)
+        , m_endSkipWithTimerRunning(false)
     {
     }
 
@@ -421,6 +422,9 @@ public:
      *
      * when re-entering the home view. repaintAfterResize()
      * stops the m_resizeRefreshTimer in this case.
+     *
+     * Don't stop the timer in case the refresh has been
+     * enabled in the meantime via KHomeView::slotEnableRefresh()
      */
     void repaintAfterResize(const QSize& oldSize, const QSize& newSize)
     {
@@ -430,8 +434,11 @@ public:
             m_resizeRefreshTimer.start(100);
         } else {
             if (m_startSize == newSize) {
-                qDebug() << "stop refresh timer";
-                m_resizeRefreshTimer.stop();
+                if (!m_endSkipWithTimerRunning) {
+                    qDebug() << "stop refresh timer";
+                    m_resizeRefreshTimer.stop();
+                }
+                m_endSkipWithTimerRunning = false;
             }
         }
     }
@@ -1996,6 +2003,7 @@ public:
     double m_devRatio;
     QTimer m_resizeRefreshTimer;
     QSize m_startSize;
+    bool m_endSkipWithTimerRunning;
 };
 
 #endif

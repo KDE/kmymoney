@@ -247,6 +247,8 @@ void KHomeView::slotEnableRefresh()
 {
     Q_D(KHomeView);
     d->m_skipRefresh = false;
+    // prevent stopping the timer in case we delayed the refresh
+    d->m_endSkipWithTimerRunning = d->m_resizeRefreshTimer.isActive();
     refresh();
 }
 
