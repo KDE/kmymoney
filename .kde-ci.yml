@@ -24,7 +24,8 @@ Dependencies:
     'frameworks/kholidays': '@stable'
     'graphics/kdiagram': '@stable'
     'pim/akonadi': '@stable'
-    'pim/kidentitymanagement': '@stable'
+# Temporarily removed because out of a sudden: "Package kidentitymanagement was not found in branch release/23.08"
+#    'pim/kidentitymanagement': '@stable'
     'office/alkimia': '@latest'
 
 Options:
