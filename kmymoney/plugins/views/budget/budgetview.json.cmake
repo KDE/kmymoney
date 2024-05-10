@@ -32,7 +32,8 @@
                 "Name[tr]": "Darren Gould",
                 "Name[uk]": "Darren Gould",
                 "Name[x-test]": "xxDarren Gouldxx",
-                "Name[zh_CN]": "Darren Gould"
+                "Name[zh_CN]": "Darren Gould",
+                "Name[zh_TW]": "Darren Gould"
             }
         ],
         "Description": "Adds budget view to KMyMoney",
@@ -62,6 +63,7 @@
         "Description[uk]": "Панель бюджетів у KMyMoney",
         "Description[x-test]": "xxAdds budget view to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加预算视图",
+        "Description[zh_TW]": "提供預算檢視給 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "budget",
         "Id": "budgetview",
@@ -94,6 +96,7 @@
         "Name[uk]": "Панель бюджету",
         "Name[x-test]": "xxBudget viewxx",
         "Name[zh_CN]": "预算视图",
+        "Name[zh_TW]": "預算檢視",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"
     }

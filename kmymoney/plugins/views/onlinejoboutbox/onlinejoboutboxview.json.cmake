@@ -32,7 +32,8 @@
                 "Name[tr]": "Christian Dávid",
                 "Name[uk]": "Christian Dávid",
                 "Name[x-test]": "xxChristian Dávidxx",
-                "Name[zh_CN]": "Christian Dávid"
+                "Name[zh_CN]": "Christian Dávid",
+                "Name[zh_TW]": "Christian Dávid"
             }
         ],
         "Description": "Adds online job outbox view to KMyMoney",

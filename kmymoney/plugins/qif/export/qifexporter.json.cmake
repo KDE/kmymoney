@@ -64,6 +64,7 @@
         "Description[uk]": "Експортування даних QIF у KMyMoney",
         "Description[x-test]": "xxAdd QIF exporting to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加 QIF 导出服务",
+        "Description[zh_TW]": "提供 QIF 匯出功能給 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "document-export",
         "Id": "qifexporter",

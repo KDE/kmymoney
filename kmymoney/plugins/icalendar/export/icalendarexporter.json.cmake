@@ -64,6 +64,7 @@
         "Description[uk]": "Експортування розкладів до файлів iCalendar",
         "Description[x-test]": "xxExports schedules to iCalendar filesxx",
         "Description[zh_CN]": "将日程表导出为 iCalebdar 文件",
+        "Description[zh_TW]": "匯出行程到 iCalendar 檔案",
         "EnabledByDefault": true,
         "Icon": "x-office-calendar",
         "Id": "icalendarexporter",
