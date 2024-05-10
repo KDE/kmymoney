@@ -587,7 +587,10 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
             break;
 
         case Column::Type:
-            return account.accountTypeToString(account.accountType());
+            if (!d->isFavoriteIndex(idx)) {
+                return account.accountTypeToString(account.accountType());
+            }
+            break;
 
         case Column::HasOnlineMapping:
             if (account.hasOnlineMapping()) {
@@ -622,24 +625,32 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
         case Column::Balance:
         {
             try {
-                auto security = MyMoneyFile::instance()->security(account.currencyId());
-                const auto prec = MyMoneyMoney::denomToPrec(account.fraction());
-                return d->adjustedBalance(account.balance(), account).formatMoney(security.tradingSymbol(), prec);
+                if (!d->isFavoriteIndex(idx)) {
+                    auto security = MyMoneyFile::instance()->security(account.currencyId());
+                    const auto prec = MyMoneyMoney::denomToPrec(account.fraction());
+                    return d->adjustedBalance(account.balance(), account).formatMoney(security.tradingSymbol(), prec);
+                }
             } catch (const MyMoneyException&) {
             }
-        }
+        } break;
 
         case Column::PostedValue:
         {
-            const auto baseCurrency = MyMoneyFile::instance()->baseCurrency();
-            return d->adjustedBalance(account.postedValue(), account).formatMoney(baseCurrency.tradingSymbol(), MyMoneyMoney::denomToPrec(baseCurrency.smallestAccountFraction()));
-        }
+            if (!d->isFavoriteIndex(idx)) {
+                const auto baseCurrency = MyMoneyFile::instance()->baseCurrency();
+                return d->adjustedBalance(account.postedValue(), account)
+                    .formatMoney(baseCurrency.tradingSymbol(), MyMoneyMoney::denomToPrec(baseCurrency.smallestAccountFraction()));
+            }
+        } break;
 
         case Column::TotalPostedValue:
         {
-            const auto baseCurrency = MyMoneyFile::instance()->baseCurrency();
-            return d->adjustedBalance(account.totalPostedValue(), account).formatMoney(baseCurrency.tradingSymbol(), MyMoneyMoney::denomToPrec(baseCurrency.smallestAccountFraction()));
-        }
+            if (!d->isFavoriteIndex(idx)) {
+                const auto baseCurrency = MyMoneyFile::instance()->baseCurrency();
+                return d->adjustedBalance(account.totalPostedValue(), account)
+                    .formatMoney(baseCurrency.tradingSymbol(), MyMoneyMoney::denomToPrec(baseCurrency.smallestAccountFraction()));
+            }
+        } break;
 
         case Column::Bic:
             return account.value("bic");

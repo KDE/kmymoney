@@ -140,6 +140,16 @@ enum class Action {
     // Actions only used by code
     // *************
     ShowTransaction,
+    // *************
+    // The currency menu
+    // *************
+    NewCurrency, RenameCurrency, DeleteCurrency,
+    SetBaseCurrency,
+    // *************
+    // The price menu
+    // *************
+    NewPrice, DeletePrice,
+    UpdatePrice, EditPrice,
 };
 // clang-format on
 

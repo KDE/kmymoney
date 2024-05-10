@@ -20,9 +20,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class MyMoneyPrice;
-class QTreeWidgetItem;
-
 class KMyMoneyPriceDlgPrivate;
 class KMM_EXTENDED_DIALOGS_EXPORT KMyMoneyPriceDlg : public QDialog
 {
@@ -33,15 +30,10 @@ public:
     explicit KMyMoneyPriceDlg(QWidget* parent);
     ~KMyMoneyPriceDlg();
 
-private:
-    QTreeWidgetItem* loadPriceItem(const MyMoneyPrice& basePrice);
-
 protected Q_SLOTS:
-    void slotSelectPrice();
     void slotNewPrice();
     void slotDeletePrice();
     void slotEditPrice();
-    void slotLoadWidgets();
     void slotOnlinePriceUpdate();
     void slotShowPriceMenu(const QPoint& p);
 

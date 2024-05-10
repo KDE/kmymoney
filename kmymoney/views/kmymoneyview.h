@@ -120,7 +120,7 @@ public:
     void addWidget(QWidget* w);
 
     void showPageAndFocus(View idView);
-    void showPage(View idView);
+    void showPage(View idView, bool forceShow = false);
 
     /**
       * This method changes the view type according to the settings.
@@ -149,6 +149,11 @@ public:
      * Execute the @a action using the selected objects of @a selections
      */
     void executeAction(eMenu::Action action, const SelectedObjects& selections);
+
+    /**
+     * Send the @a action to all views
+     */
+    void executeCustomAction(eView::Action action);
 
     void setupSharedActions();
 

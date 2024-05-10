@@ -141,7 +141,7 @@ public:
                     }
                     const MyMoneyPriceEntries& entries = (*it_price);
                     if (entries.count() > 0 && entries.begin().key() <= QDate::currentDate()) {
-                        addCurrencyConversion(pair, false);
+                        addCurrencyConversion(pair, true);
                     }
                 }
             } catch (MyMoneyException& e) {
@@ -374,7 +374,7 @@ public:
             const auto source = idx.data().toString();
             const auto profileName = source.startsWith(m_fqName) ? m_fqName : QString();
             AlkOnlineQuoteSource alkOnlineSource(source, quoteProfile(profileName));
-            if (alkOnlineSource.priceRegex().contains('#') && alkOnlineSource.dateRegex().contains('#')) {
+            if (alkOnlineSource.dataFormat() == AlkOnlineQuoteSource::CSV) {
                 return true;
             }
         }
@@ -536,6 +536,8 @@ public:
                 MyMoneyMoney price = MyMoneyMoney::ONE;
                 QString id = _kmmID.toUtf8();
                 MyMoneySecurity fromCurrency, toCurrency;
+                int precision(2);
+
                 if (_kmmID.contains(" ") == 0) {
                     MyMoneySecurity security = MyMoneyFile::instance()->security(id);
                     QString factor = security.value("kmm-online-factor");
@@ -543,8 +545,9 @@ public:
                         price = price * MyMoneyMoney(factor);
                     }
                     try {
-                        toCurrency = MyMoneyFile::instance()->security(id);
-                        fromCurrency = MyMoneyFile::instance()->security(toCurrency.tradingCurrency());
+                        fromCurrency = MyMoneyFile::instance()->security(id);
+                        toCurrency = MyMoneyFile::instance()->security(toCurrency.tradingCurrency());
+                        precision = fromCurrency.pricePrecision();
                     } catch (const MyMoneyException&) {
                         fromCurrency = toCurrency = MyMoneySecurity();
                     }
@@ -553,14 +556,15 @@ public:
                     QRegularExpressionMatch match(m_splitRegex.match(_kmmID));
                     if (match.hasMatch()) {
                         try {
-                            fromCurrency = MyMoneyFile::instance()->security(match.captured(1).toUtf8());
-                            toCurrency = MyMoneyFile::instance()->security(match.captured(2).toUtf8());
+                            fromCurrency = MyMoneyFile::instance()->security(match.captured(1));
+                            toCurrency = MyMoneyFile::instance()->security(match.captured(2));
+                            precision = toCurrency.pricePrecision();
                         } catch (const MyMoneyException&) {
                             fromCurrency = toCurrency = MyMoneySecurity();
                         }
                     }
                 }
-                price *= MyMoneyMoney(_price, MyMoneyMoney::precToDenom(toCurrency.pricePrecision()));
+                price *= MyMoneyMoney(_price, MyMoneyMoney::precToDenom(precision));
 
                 // add this price info to the list of prices to be stored
                 const auto fromCurrencyId = fromCurrency.id();
@@ -572,7 +576,7 @@ public:
 
                 // update model for the display purposes
                 m_onlinePriceModel.setData(m_onlinePriceModel.index(m_currentRow, OnlinePriceModel::Price),
-                                           price.formatMoney(toCurrency.tradingSymbol(), toCurrency.pricePrecision()),
+                                           price.formatMoney(toCurrency.tradingSymbol(), precision),
                                            Qt::EditRole);
                 m_onlinePriceModel.setData(m_onlinePriceModel.index(m_currentRow, OnlinePriceModel::Date), MyMoneyUtils::formatDate(date), Qt::EditRole);
 

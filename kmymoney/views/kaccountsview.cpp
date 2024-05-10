@@ -85,18 +85,6 @@ void KAccountsView::slotSettingsChanged()
     MyMoneyFile::instance()->accountsModel()->setColorScheme(AccountsModel::Negative, KMyMoneySettings::schemeColor(SchemeColor::Negative));
 }
 
-void KAccountsView::executeCustomAction(eView::Action action)
-{
-    switch(action) {
-    case eView::Action::Refresh:
-        refresh();
-        break;
-
-    default:
-        break;
-    }
-}
-
 void KAccountsView::refresh()
 {
     Q_D(KAccountsView);

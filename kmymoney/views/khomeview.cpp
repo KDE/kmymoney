@@ -63,7 +63,6 @@ void KHomeView::executeAction(eMenu::Action action, const SelectedObjects& selec
     switch (action) {
     case eMenu::Action::FileNew:
         d->m_fileOpen = true;
-        d->loadView();
         break;
     case eMenu::Action::Print:
         if (d->isActiveView()) {
@@ -87,10 +86,12 @@ void KHomeView::executeAction(eMenu::Action action, const SelectedObjects& selec
 void KHomeView::executeCustomAction(eView::Action action)
 {
     switch(action) {
-    case eView::Action::Refresh:
-        refresh();
+    case eView::Action::BlockViewDuringFileOpen:
+        slotDisableRefresh();
         break;
-
+    case eView::Action::UnblockViewAfterFileOpen:
+        slotEnableRefresh();
+        break;
     default:
         break;
     }
@@ -117,6 +118,7 @@ void KHomeView::resizeEvent(QResizeEvent* event)
 void KHomeView::showEvent(QShowEvent* event)
 {
     Q_D(KHomeView);
+
     if (d->m_needLoad)
         d->init();
 
@@ -244,6 +246,8 @@ void KHomeView::slotEnableRefresh()
 {
     Q_D(KHomeView);
     d->m_skipRefresh = false;
+    // prevent stopping the timer in case we delayed the refresh
+    d->m_endSkipWithTimerRunning = d->m_resizeRefreshTimer.isActive();
     refresh();
 }
 

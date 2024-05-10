@@ -68,18 +68,6 @@ void KForecastView::showEvent(QShowEvent* event)
     QWidget::showEvent(event);
 }
 
-void KForecastView::executeCustomAction(eView::Action action)
-{
-    switch(action) {
-    case eView::Action::Refresh:
-        refresh();
-        break;
-
-    default:
-        break;
-    }
-}
-
 void KForecastView::refresh()
 {
     Q_D(KForecastView);

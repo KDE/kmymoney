@@ -666,6 +666,9 @@ void MyMoneyXmlReaderTest::testReadPrices_data()
 void MyMoneyXmlReaderTest::testReadPrices()
 {
     const auto data = QLatin1String(
+        "<CURRENCIES>"
+        "<CURRENCY id=\"USD\" name=\"US Dollars\" pp=\"4\" rounding-method=\"0\" saf=\"100\" scf=\"1\" symbol=\"USD\" type=\"3\"/>"
+        "</CURRENCIES>"
         "<PRICES>"
         "<PRICEPAIR from=\"USD\" to=\"EUR\">"
         "<PRICE date=\"2005-12-26\" price=\"21/25\" source=\"Yahoo Currency\"/>"

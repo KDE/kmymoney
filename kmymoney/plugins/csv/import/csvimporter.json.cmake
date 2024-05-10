@@ -64,6 +64,7 @@
         "Description[uk]": "Імпортування даних CSV у KMyMoney",
         "Description[x-test]": "xxAdd CSV importing to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加 CSV 导入服务",
+        "Description[zh_TW]": "提供 CSV 匯入功能給 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "document-import",
         "Id": "csvimporter",

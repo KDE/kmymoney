@@ -85,7 +85,6 @@ public:
     explicit KReportsView(QWidget *parent = nullptr);
     ~KReportsView() override;
 
-    void executeCustomAction(eView::Action action) override;
     void executeAction(eMenu::Action action, const SelectedObjects& selections) override;
 
     void refresh();

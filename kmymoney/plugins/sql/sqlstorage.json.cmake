@@ -31,7 +31,8 @@
                 "Name[tr]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[uk]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[x-test]": "xxTony Bloomfield,Łukasz Wojniłowiczxx",
-                "Name[zh_CN]": "Tony Bloomfield,Łukasz Wojniłowicz"
+                "Name[zh_CN]": "Tony Bloomfield,Łukasz Wojniłowicz",
+                "Name[zh_TW]": "Tony Bloomfield、Łukasz Wojniłowicz"
             }
         ],
         "Description": "Adds SQL storage support to KMyMoney",
@@ -61,6 +62,7 @@
         "Description[uk]": "Підтримка сховища даних SQL у KMyMoney",
         "Description[x-test]": "xxAdds SQL storage support to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加 SQL 存储支持",
+        "Description[zh_TW]": "提供 SQL 儲存功能給 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "server-database",
         "Id": "sqlstorage",

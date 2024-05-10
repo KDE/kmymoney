@@ -680,6 +680,14 @@ enum Roles {
     OnlineJobPostDateRole,
     OnlineJobValueAsDoubleRole,
 
+    // PriceModel
+    PriceFromRole,
+    PriceToRole,
+    PriceDateRole,
+    PriceRateRole,
+    PricePairRole,
+    PriceSourceRole,
+
     // LedgerStack special roles
     ActiveFilterRole,
     ActiveFilterTextRole,

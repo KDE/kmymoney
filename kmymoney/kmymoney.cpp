@@ -1392,6 +1392,13 @@ public:
         }
     }
 
+    void executeCustomAction(eView::Action actionId)
+    {
+        if (actionId != eView::Action::None) {
+            m_myMoneyView->executeCustomAction(actionId);
+        }
+    }
+
     void closeSubAccounts(const MyMoneyAccount& account)
     {
         MyMoneyFile* file = MyMoneyFile::instance();
@@ -4665,6 +4672,10 @@ bool KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
 
     // open the database
     d->m_storageInfo.type = eKMyMoney::StorageType::None;
+    // Inform views that a new file will be loaded
+    // The information that the file is really open will
+    // be sent out in KMyMoneyView::switchToDefaultView()
+    d->executeCustomAction(eView::Action::BlockViewDuringFileOpen);
     for (auto &plugin : pPlugins.storage) {
         try {
             if (plugin->open(url)) {
@@ -4683,12 +4694,14 @@ bool KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
             }
         } catch (const MyMoneyException &e) {
             KMessageBox::detailedError(this, i18n("Cannot open file as requested."), QString::fromLatin1(e.what()));
+            d->executeCustomAction(eView::Action::UnblockViewAfterFileOpen);
             return false;
         }
     }
 
     if(d->m_storageInfo.type == eKMyMoney::StorageType::None) {
         KMessageBox::error(this, i18n("Could not read your data source. Please check the KMyMoney settings that the necessary plugin is enabled."));
+        d->executeCustomAction(eView::Action::UnblockViewAfterFileOpen);
         return false;
     }
 

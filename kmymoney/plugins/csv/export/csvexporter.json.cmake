@@ -64,6 +64,7 @@
         "Description[uk]": "Експортування даних CSV у KMyMoney",
         "Description[x-test]": "xxAdd CSV exporting to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加 CSV 导出服务",
+        "Description[zh_TW]": "提供 CSV 匯出功能給 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "document-export",
         "Id": "csvexporter",

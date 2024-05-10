@@ -32,7 +32,8 @@
                 "Name[tr]": "Christian Dávid",
                 "Name[uk]": "Christian Dávid",
                 "Name[x-test]": "xxChristian Dávidxx",
-                "Name[zh_CN]": "Christian Dávid"
+                "Name[zh_CN]": "Christian Dávid",
+                "Name[zh_TW]": "Christian Dávid"
             }
         ],
         "Description": "Adds predefined IBAN/BIC numbers to KMyMoney",
@@ -63,6 +64,7 @@
         "Description[uk]": "Попередньо визначені номери IBAN/BIC у KMyMoney",
         "Description[x-test]": "xxAdds predefined IBAN/BIC numbers to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加预定义的国际银行账号/银行识别码",
+        "Description[zh_TW]": "提供預先定義的 IBAN/BIC 號碼給 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "server-database",
         "Id": "ibanbicdata",

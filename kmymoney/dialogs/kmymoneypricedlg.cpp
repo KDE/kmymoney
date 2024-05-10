@@ -10,10 +10,9 @@
 // QT Includes
 
 #include <QCheckBox>
-#include <QPushButton>
 #include <QIcon>
-#include <QVBoxLayout>
 #include <QMenu>
+#include <QSortFilterProxyModel>
 #include <QVector>
 
 // ----------------------------------------------------------------------------
@@ -37,6 +36,7 @@
 #include "kmymoneyutils.h"
 #include "kpricetreeitem.h"
 #include "kupdatestockpricedlg.h"
+#include "menuenums.h"
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
@@ -44,26 +44,64 @@
 #include "mymoneyprice.h"
 #include "mymoneysecurity.h"
 #include "mymoneyutils.h"
+#include "pricemodel.h"
 
 #include "kmmyesno.h"
 
 using namespace Icons;
 
-// duplicated eMenu namespace from menuenums.h for consistency
-// there shouldn't be any clash, because we don't need menuenums.h here
-namespace eMenu {
-enum class Action {
-    // *************
-    // The price menu
-    // *************
-    NewPrice, DeletePrice,
-    UpdatePrice, EditPrice,
-};
-inline qHashSeedType qHash(const Action key, qHashSeedType seed)
+class PriceSortFilterModel : public QSortFilterProxyModel
 {
-    return ::qHash(static_cast<uint>(key), seed);
-}
-}
+    Q_OBJECT
+public:
+    PriceSortFilterModel(QObject* parent)
+        : QSortFilterProxyModel(parent)
+        , m_showAllEntries(false)
+    {
+    }
+
+protected:
+    bool lessThan(const QModelIndex& source_left, const QModelIndex& source_right) const override
+    {
+        switch (source_left.column()) {
+        case PriceModel::Column::Date:
+            return source_left.data(eMyMoney::Model::PriceDateRole).toDate() < source_right.data(eMyMoney::Model::PriceDateRole).toDate();
+
+        case PriceModel::Column::Price:
+            return source_left.data(eMyMoney::Model::PriceRateRole).value<MyMoneyMoney>()
+                < source_right.data(eMyMoney::Model::PriceRateRole).value<MyMoneyMoney>();
+
+        default:
+            return QSortFilterProxyModel::lessThan(source_left, source_right);
+        }
+    }
+
+    bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override
+    {
+        if (!m_showAllEntries) {
+            const auto thisIdx = sourceModel()->index(source_row, 0, source_parent);
+            const auto nextIdx = sourceModel()->index(source_row + 1, 0, source_parent);
+            if (nextIdx.isValid()) {
+                const auto thisId = thisIdx.data(eMyMoney::Model::PricePairRole).toString();
+                const auto nextId = nextIdx.data(eMyMoney::Model::PricePairRole).toString();
+                if (thisId == nextId) {
+                    return false;
+                }
+            }
+        }
+        return QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent);
+    }
+
+public Q_SLOTS:
+    void setShowAllEntries(bool showAll)
+    {
+        m_showAllEntries = showAll;
+        invalidateFilter();
+    }
+
+private:
+    bool m_showAllEntries;
+};
 
 class KMyMoneyPriceDlgPrivate
 {
@@ -71,11 +109,10 @@ class KMyMoneyPriceDlgPrivate
     Q_DECLARE_PUBLIC(KMyMoneyPriceDlg)
 
 public:
-    explicit KMyMoneyPriceDlgPrivate(KMyMoneyPriceDlg *qq) :
-        q_ptr(qq),
-        ui(new Ui::KMyMoneyPriceDlg),
-        m_currentItem(nullptr),
-        m_searchWidget(nullptr)
+    explicit KMyMoneyPriceDlgPrivate(KMyMoneyPriceDlg* qq)
+        : q_ptr(qq)
+        , ui(new Ui::KMyMoneyPriceDlg)
+        , m_sortModel(new PriceSortFilterModel(qq))
     {
     }
 
@@ -84,40 +121,56 @@ public:
         delete ui;
     }
 
-    int editPrice()
+    void editPrice()
+    {
+        const auto indexes = ui->m_priceList->selectionModel()->selectedRows();
+        if (!indexes.isEmpty()) {
+            const auto baseIdx = MyMoneyModelBase::mapToBaseSource(indexes.at(0));
+            const auto price = MyMoneyFile::instance()->priceModel()->itemByIndex(baseIdx);
+            editPrice(price);
+        }
+    }
+
+    int editPrice(const MyMoneyPrice& price)
     {
         Q_Q(KMyMoneyPriceDlg);
         int rc = QDialog::Rejected;
-        auto item = ui->m_priceList->currentItem();
-        if (item) {
-            MyMoneySecurity from(MyMoneyFile::instance()->security(item->data(0, Qt::UserRole).value<MyMoneyPrice>().from()));
-            MyMoneySecurity to(MyMoneyFile::instance()->security(item->data(0, Qt::UserRole).value<MyMoneyPrice>().to()));
-            signed64 fract = MyMoneyMoney::precToDenom(from.pricePrecision());
+        MyMoneySecurity from(MyMoneyFile::instance()->security(price.from()));
+        MyMoneySecurity to(MyMoneyFile::instance()->security(price.to()));
+        signed64 fract = MyMoneyMoney::precToDenom(from.pricePrecision());
 
-            QPointer<KCurrencyCalculator> calc =
-                new KCurrencyCalculator(from,
-                                        to,
-                                        MyMoneyMoney::ONE,
-                                        item->data(0, Qt::UserRole).value<MyMoneyPrice>().rate(to.id()),
-                                        item->data(0, Qt::UserRole).value<MyMoneyPrice>().date(),
-                                        fract,
-                                        q);
-            calc->setupPriceEditor();
+        QPointer<KCurrencyCalculator> calc = new KCurrencyCalculator(from, to, MyMoneyMoney::ONE, price.rate(to.id()), price.date(), fract, q);
+        calc->setupPriceEditor();
 
-            rc = calc->exec();
-            delete calc;
-        }
+        rc = calc->exec();
+        delete calc;
         return rc;
     }
 
-    KMyMoneyPriceDlg      *q_ptr;
-    Ui::KMyMoneyPriceDlg  *ui;
-    QTreeWidgetItem*       m_currentItem;
-    /**
-      * Search widget for the list
-      */
-    KTreeWidgetSearchLineWidget*  m_searchWidget;
-    QMap<QString, QString>        m_stockNameMap;
+    void selectionChanged()
+    {
+        const auto indexes = ui->m_priceList->selectionModel()->selectedRows();
+        ui->m_editButton->setEnabled(!indexes.isEmpty());
+        ui->m_deleteButton->setEnabled(!indexes.isEmpty());
+
+        // if one of the selected entries is a default, then deleting and editing is disabled
+        for (const auto& idx : indexes) {
+            if (idx.data(eMyMoney::Model::PriceSourceRole).toString() == QLatin1String("KMyMoney")) {
+                ui->m_deleteButton->setEnabled(false);
+                ui->m_editButton->setEnabled(false);
+                break;
+            }
+        }
+
+        // Multiple entries cannot be edited at once
+        if (indexes.count() > 1) {
+            ui->m_editButton->setEnabled(false);
+        }
+    }
+
+    KMyMoneyPriceDlg* q_ptr;
+    Ui::KMyMoneyPriceDlg* ui;
+    PriceSortFilterModel* m_sortModel;
 };
 
 KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
@@ -126,17 +179,6 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
 {
     Q_D(KMyMoneyPriceDlg);
     d->ui->setupUi(this);
-
-    // create the searchline widget
-    // and insert it into the existing layout
-    d->m_searchWidget = new KTreeWidgetSearchLineWidget(this, d->ui->m_priceList);
-    d->m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
-
-    d->ui->m_listLayout->insertWidget(0, d->m_searchWidget);
-
-    d->ui->m_priceList->header()->setSortIndicator(0, Qt::AscendingOrder);
-    d->ui->m_priceList->header()->setStretchLastSection(true);
-    d->ui->m_priceList->setContextMenuPolicy(Qt::CustomContextMenu);
 
     d->ui->m_deleteButton->setIcon(Icons::get(Icon::EditRemove));
     d->ui->m_newButton->setIcon(Icons::get(Icon::DocumentNew));
@@ -147,15 +189,37 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
     connect(d->ui->m_editButton, &QAbstractButton::clicked, this, &KMyMoneyPriceDlg::slotEditPrice);
     connect(d->ui->m_deleteButton, &QAbstractButton::clicked, this, &KMyMoneyPriceDlg::slotDeletePrice);
     connect(d->ui->m_newButton, &QAbstractButton::clicked, this, &KMyMoneyPriceDlg::slotNewPrice);
-    connect(d->ui->m_priceList, &QTreeWidget::itemSelectionChanged, this, &KMyMoneyPriceDlg::slotSelectPrice);
     connect(d->ui->m_onlineQuoteButton, &QAbstractButton::clicked, this, &KMyMoneyPriceDlg::slotOnlinePriceUpdate);
+
+    // setup model view stack
+    d->m_sortModel->setSortLocaleAware(true);
+    d->m_sortModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    d->m_sortModel->setSortRole(Qt::DisplayRole);
+    d->m_sortModel->setSourceModel(MyMoneyFile::instance()->priceModel());
+    d->m_sortModel->setFilterKeyColumn(-1); // filter on all columns
+
+    d->ui->m_priceList->setModel(d->m_sortModel);
+    d->ui->m_priceList->setSortingEnabled(true);
+
+    d->ui->m_priceList->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    d->ui->m_priceList->sortByColumn(PriceModel::Column::Commodity, Qt::AscendingOrder);
+    d->ui->m_priceList->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(d->ui->m_priceList, &QWidget::customContextMenuRequested, this, &KMyMoneyPriceDlg::slotShowPriceMenu);
 
-    connect(d->ui->m_showAllPrices, &QAbstractButton::toggled, this, &KMyMoneyPriceDlg::slotLoadWidgets);
-    connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, &KMyMoneyPriceDlg::slotLoadWidgets);
+    connect(d->ui->m_showAllPrices, &QAbstractButton::toggled, d->m_sortModel, &PriceSortFilterModel::setShowAllEntries);
+    connect(d->ui->m_priceList->selectionModel(), &QItemSelectionModel::selectionChanged, this, [&]() {
+        Q_D(KMyMoneyPriceDlg);
+        d->selectionChanged();
+    });
+    connect(d->ui->m_searchWidget, &KLineEdit::textChanged, d->m_sortModel, &QSortFilterProxyModel::setFilterFixedString);
 
-    slotLoadWidgets();
-    slotSelectPrice();
+    // in case we have items, select the first one
+    if (d->ui->m_priceList->model()->hasChildren()) {
+        const auto firstIdx = d->ui->m_priceList->model()->index(0, 0);
+        d->ui->m_priceList->setCurrentIndex(firstIdx);
+        d->ui->m_priceList->selectionModel()->select(firstIdx, QItemSelectionModel::Select);
+    }
+    d->selectionChanged();
 }
 
 KMyMoneyPriceDlg::~KMyMoneyPriceDlg()
@@ -164,166 +228,28 @@ KMyMoneyPriceDlg::~KMyMoneyPriceDlg()
     delete d;
 }
 
-void KMyMoneyPriceDlg::slotLoadWidgets()
-{
-    Q_D(KMyMoneyPriceDlg);
-    auto file = MyMoneyFile::instance();
-
-    //clear the list and disable the sorting while it loads the widgets, for performance
-    d->ui->m_priceList->setSortingEnabled(false);
-    d->ui->m_priceList->clear();
-    d->m_stockNameMap.clear();
-
-    //load the currencies for investments, which we'll need later
-    QList<MyMoneyAccount> accList;
-    file->accountList(accList);
-    QList<MyMoneyAccount>::const_iterator acc_it;
-    for (acc_it = accList.constBegin(); acc_it != accList.constEnd(); ++acc_it) {
-        if ((*acc_it).isInvest()) {
-            if (d->m_stockNameMap.contains((*acc_it).currencyId())) {
-                d->m_stockNameMap[(*acc_it).currencyId()] = QString(d->m_stockNameMap.value((*acc_it).currencyId()) + ", " + (*acc_it).name());
-            } else {
-                d->m_stockNameMap[(*acc_it).currencyId()] = (*acc_it).name();
-            }
-        }
-    }
-
-    //get the price list
-    MyMoneyPriceList list = file->priceList();
-    MyMoneyPriceList::ConstIterator it_allPrices;
-    for (it_allPrices = list.constBegin(); it_allPrices != list.constEnd(); ++it_allPrices) {
-        const auto& pair = it_allPrices.key();
-        try {
-            if (file->security(pair.first).isCurrency() && !file->security(pair.second).isCurrency()) {
-                qDebug() << "A currency pair" << pair << "is invalid (from currency to equity). Omitting from listing.";
-                continue;
-            }
-        } catch (MyMoneyException&) {
-            qDebug() << "A currency pair" << pair << "is invalid. Omitting from listing.";
-            continue;
-        }
-
-        MyMoneyPriceEntries::ConstIterator it_priceItem;
-        if (d->ui->m_showAllPrices->isChecked()) {
-            for (it_priceItem = (*it_allPrices).constBegin(); it_priceItem != (*it_allPrices).constEnd(); ++it_priceItem) {
-                loadPriceItem(*it_priceItem);
-            }
-        } else {
-            //if it doesn't show all prices, it only shows the most recent occurrence for each price
-            if ((*it_allPrices).count() > 0) {
-                //the prices for each currency are ordered by date in ascending order
-                //it gets the last item of the item, which is supposed to be the most recent price
-                it_priceItem = (*it_allPrices).constEnd();
-                --it_priceItem;
-                loadPriceItem(*it_priceItem);
-            }
-        }
-    }
-    //reenable sorting and sort by the commodity column
-    d->ui->m_priceList->setSortingEnabled(true);
-    d->ui->m_priceList->sortByColumn(KPriceTreeItem::ePriceCommodity, Qt::SortOrder::AscendingOrder);
-
-    //update the search widget so the list gets refreshed correctly if it was being filtered
-    if (!d->m_searchWidget->searchLine()->text().isEmpty())
-        d->m_searchWidget->searchLine()->updateSearch(d->m_searchWidget->searchLine()->text());
-}
-
-QTreeWidgetItem* KMyMoneyPriceDlg::loadPriceItem(const MyMoneyPrice& basePrice)
-{
-    Q_D(KMyMoneyPriceDlg);
-    MyMoneySecurity from, to;
-    auto price = MyMoneyPrice(basePrice);
-
-    auto priceTreeItem = new KPriceTreeItem(d->ui->m_priceList);
-
-    if (!price.isValid())
-        price = MyMoneyFile::instance()->price(price.from(), price.to(), price.date());
-
-    if (price.isValid()) {
-        QString priceBase = price.to();
-        from = MyMoneyFile::instance()->security(price.from());
-        to = MyMoneyFile::instance()->security(price.to());
-        if (!to.isCurrency()) {
-            from = MyMoneyFile::instance()->security(price.to());
-            to = MyMoneyFile::instance()->security(price.from());
-            priceBase = price.from();
-        }
-
-        priceTreeItem->setData(KPriceTreeItem::ePriceCommodity, Qt::UserRole, QVariant::fromValue(price));
-        priceTreeItem->setText(KPriceTreeItem::ePriceCommodity, (from.isCurrency()) ? from.id() : from.tradingSymbol());
-        priceTreeItem->setText(KPriceTreeItem::ePriceStockName, (from.isCurrency()) ? QString() : d->m_stockNameMap.value(from.id()));
-        priceTreeItem->setToolTip(KPriceTreeItem::ePriceStockName, (from.isCurrency()) ? QString() : d->m_stockNameMap.value(from.id()));
-        priceTreeItem->setText(KPriceTreeItem::ePriceCurrency, to.id());
-        priceTreeItem->setText(KPriceTreeItem::ePriceDate, MyMoneyUtils::formatDate(price.date()));
-        priceTreeItem->setData(KPriceTreeItem::ePriceDate, KPriceTreeItem::OrderRole, QVariant(price.date()));
-        priceTreeItem->setText(KPriceTreeItem::ePricePrice, price.rate(priceBase).formatMoney("", from.pricePrecision()));
-        priceTreeItem->setTextAlignment(KPriceTreeItem::ePricePrice, Qt::AlignRight | Qt::AlignVCenter);
-        priceTreeItem->setData(KPriceTreeItem::ePricePrice, KPriceTreeItem::OrderRole, QVariant::fromValue(price.rate(priceBase)));
-        priceTreeItem->setText(KPriceTreeItem::ePriceSource, price.source());
-    }
-    return priceTreeItem;
-}
-
-void KMyMoneyPriceDlg::slotSelectPrice()
-{
-    Q_D(KMyMoneyPriceDlg);
-    QTreeWidgetItem* item = 0;
-    if (d->ui->m_priceList->selectedItems().count() > 0) {
-        item = d->ui->m_priceList->selectedItems().at(0);
-    }
-    d->m_currentItem = item;
-    d->ui->m_editButton->setEnabled(item != 0);
-    bool deleteEnabled = (item != 0);
-
-    //if one of the selected entries is a default, then deleting is disabled
-    QList<QTreeWidgetItem*> itemsList = d->ui->m_priceList->selectedItems();
-    QList<QTreeWidgetItem*>::const_iterator item_it;
-    for (item_it = itemsList.constBegin(); item_it != itemsList.constEnd(); ++item_it) {
-        MyMoneyPrice price = (*item_it)->data(0, Qt::UserRole).value<MyMoneyPrice>();
-        if (price.source() == "KMyMoney")
-            deleteEnabled = false;
-    }
-    d->ui->m_deleteButton->setEnabled(deleteEnabled);
-
-    // Modification of automatically added entries is not allowed
-    // Multiple entries cannot be edited at once
-    if (item) {
-        MyMoneyPrice price = item->data(0, Qt::UserRole).value<MyMoneyPrice>();
-        if (price.source() == "KMyMoney" || itemsList.count() > 1)
-            d->ui->m_editButton->setEnabled(false);
-//    Q_EMIT selectObject(price);
-    }
-}
-
 void KMyMoneyPriceDlg::slotNewPrice()
 {
     Q_D(KMyMoneyPriceDlg);
     QPointer<KUpdateStockPriceDlg> dlg = new KUpdateStockPriceDlg(this);
     try {
-        auto item = d->ui->m_priceList->currentItem();
-        if (item) {
+        auto idx = d->ui->m_priceList->currentIndex();
+        if (idx.isValid()) {
             MyMoneySecurity security;
-            security = MyMoneyFile::instance()->security(item->data(0, Qt::UserRole).value<MyMoneyPrice>().from());
+            security = MyMoneyFile::instance()->security(idx.data(eMyMoney::Model::PriceFromRole).toString());
             dlg->ui->m_security->setSecurity(security);
-            security = MyMoneyFile::instance()->security(item->data(0, Qt::UserRole).value<MyMoneyPrice>().to());
+            security = MyMoneyFile::instance()->security(idx.data(eMyMoney::Model::PriceToRole).toString());
             dlg->ui->m_currency->setSecurity(security);
         }
 
         if (dlg->exec()) {
             MyMoneyPrice price(dlg->ui->m_security->security().id(), dlg->ui->m_currency->security().id(), dlg->date(), MyMoneyMoney::ONE, QString());
-            QTreeWidgetItem* p = loadPriceItem(price);
-            d->ui->m_priceList->setCurrentItem(p, true);
-            // If the user cancels the following operation, we delete the new item
-            // and re-select any previously selected one
-            if (d->editPrice() == Rejected) {
-                delete p;
-                if (item)
-                    d->ui->m_priceList->setCurrentItem(item, true);
-            }
+            d->editPrice(price);
+
+            // make sure old prices are hidden
+            d->m_sortModel->invalidate();
         }
     } catch (...) {
-        delete dlg;
-        throw;
     }
     delete dlg;
 }
@@ -337,11 +263,12 @@ void KMyMoneyPriceDlg::slotEditPrice()
 void KMyMoneyPriceDlg::slotDeletePrice()
 {
     Q_D(KMyMoneyPriceDlg);
-    QList<QTreeWidgetItem*> listItems = d->ui->m_priceList->selectedItems();
-    if (listItems.count() > 0) {
+    const auto indexes = d->ui->m_priceList->selectionModel()->selectedRows();
+
+    if (!indexes.isEmpty()) {
         if (KMessageBox::questionTwoActions(
                 this,
-                i18np("Do you really want to delete the selected price entry?", "Do you really want to delete the selected price entries?", listItems.count()),
+                i18np("Do you really want to delete the selected price entry?", "Do you really want to delete the selected price entries?", indexes.count()),
                 i18n("Delete price information"),
                 KMMYesNo::yes(),
                 KMMYesNo::no(),
@@ -349,11 +276,24 @@ void KMyMoneyPriceDlg::slotDeletePrice()
             == KMessageBox::PrimaryAction) {
             MyMoneyFileTransaction ft;
             try {
-                QList<QTreeWidgetItem*>::const_iterator price_it;
-                for (price_it = listItems.constBegin(); price_it != listItems.constEnd(); ++price_it) {
-                    MyMoneyFile::instance()->removePrice((*price_it)->data(0, Qt::UserRole).value<MyMoneyPrice>());
+                // we cannot remove the prices on the fly since the indexes will change
+                // while the model is updated. we simply collect all price objects in
+                // a local list and delete from it
+                QList<MyMoneyPrice> pricesToBeDeleted;
+                for (const auto& idx : indexes) {
+                    const auto baseIdx = MyMoneyModelBase::mapToBaseSource(idx);
+                    const auto price = MyMoneyFile::instance()->priceModel()->itemByIndex(baseIdx);
+                    pricesToBeDeleted << price;
+                }
+                // now we can safely delete
+                for (const auto& price : pricesToBeDeleted) {
+                    MyMoneyFile::instance()->removePrice(price);
                 }
                 ft.commit();
+
+                // make sure current prices are shown
+                d->m_sortModel->invalidate();
+
             } catch (const MyMoneyException &) {
                 qDebug("Cannot delete price");
             }
@@ -363,47 +303,57 @@ void KMyMoneyPriceDlg::slotDeletePrice()
 
 void KMyMoneyPriceDlg::slotOnlinePriceUpdate()
 {
+    Q_D(KMyMoneyPriceDlg);
     QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this);
-    if (dlg->exec() == Accepted && dlg)
+    if (dlg->exec() == Accepted && dlg) {
         dlg->storePrices();
+
+        // make sure current prices are shown
+        d->m_sortModel->invalidate();
+    }
     delete dlg;
 }
 
 void KMyMoneyPriceDlg::slotShowPriceMenu(const QPoint& p)
 {
     Q_D(KMyMoneyPriceDlg);
-    auto item = d->ui->m_priceList->itemAt(p);
-    if (item) {
-        d->ui->m_priceList->setCurrentItem(item, QItemSelectionModel::ClearAndSelect);
-        const auto price = item->data(0, Qt::UserRole).value<MyMoneyPrice>();
-        const auto cond1 = !price.from().isEmpty() && price.source() != QLatin1String("KMyMoney");
-        const auto cond2 = cond1 && MyMoneyFile::instance()->security(price.from()).isCurrency();
-        auto menu = new QMenu;
-        typedef void(KMyMoneyPriceDlg::*KMyMoneyPriceDlgFunc)();
-        struct actionInfo {
-            eMenu::Action        action;
-            KMyMoneyPriceDlgFunc callback;
-            QString              text;
-            Icon                 icon;
-            bool                 enabled;
-        };
+    const auto idx = d->ui->m_priceList->indexAt(p);
 
-        const QVector<actionInfo> actionInfos {
-            {eMenu::Action::NewPrice,    &KMyMoneyPriceDlg::slotNewPrice,          i18n("New price..."),           Icon::DocumentNew,       true},
-            {eMenu::Action::EditPrice,   &KMyMoneyPriceDlg::slotEditPrice,         i18n("Edit price..."),          Icon::DocumentEdit,      cond1},
-            {eMenu::Action::UpdatePrice, &KMyMoneyPriceDlg::slotOnlinePriceUpdate, i18n("Online Price Update..."), Icon::OnlinePriceUpdate, cond2},
-            {eMenu::Action::DeletePrice, &KMyMoneyPriceDlg::slotDeletePrice,       i18n("Delete price..."), Icon::EditRemove,        cond1},
-        };
+    d->ui->m_priceList->selectionModel()->select(idx, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows);
+    const auto baseIdx = MyMoneyModelBase::mapToBaseSource(idx);
+    const auto price = MyMoneyFile::instance()->priceModel()->itemByIndex(baseIdx);
+    const auto cond1 = !price.from().isEmpty() && price.source() != QLatin1String("KMyMoney");
+    const auto cond2 = cond1 && MyMoneyFile::instance()->security(price.from()).isCurrency();
 
-        QList<QAction*> LUTActions;
-        for (const auto& info : actionInfos) {
-            auto a = new QAction(Icons::get(info.icon), info.text, nullptr); // WARNING: no empty Icon::Empty here
-            a->setEnabled(info.enabled);
-            connect(a, &QAction::triggered, this, info.callback);
-            LUTActions.append(a);
-        }
-        menu->addSection(i18nc("@title:menu", "Price options"));
-        menu->addActions(LUTActions);
-        menu->exec(QCursor::pos());
+    typedef void (KMyMoneyPriceDlg::*KMyMoneyPriceDlgFunc)();
+    struct actionInfo {
+        eMenu::Action action;
+        KMyMoneyPriceDlgFunc callback;
+        QString text;
+        Icon icon;
+        bool enabled;
+    };
+
+    // clang-format off
+    const QVector<actionInfo> actionInfos {
+        {eMenu::Action::NewPrice,    &KMyMoneyPriceDlg::slotNewPrice,          i18n("New price..."),           Icon::DocumentNew,       true},
+        {eMenu::Action::EditPrice,   &KMyMoneyPriceDlg::slotEditPrice,         i18n("Edit price..."),          Icon::DocumentEdit,      cond1},
+        {eMenu::Action::UpdatePrice, &KMyMoneyPriceDlg::slotOnlinePriceUpdate, i18n("Online Price Update..."), Icon::OnlinePriceUpdate, cond2},
+        {eMenu::Action::DeletePrice, &KMyMoneyPriceDlg::slotDeletePrice,       i18n("Delete price..."),        Icon::EditRemove,        cond1},
+    };
+    // clang-format on
+
+    QList<QAction*> LUTActions;
+    for (const auto& info : actionInfos) {
+        auto a = new QAction(Icons::get(info.icon), info.text, nullptr); // WARNING: no empty Icon::Empty here
+        a->setEnabled(info.enabled);
+        connect(a, &QAction::triggered, this, info.callback);
+        LUTActions.append(a);
     }
+    auto menu = new QMenu;
+    menu->addSection(i18nc("@title:menu", "Price options"));
+    menu->addActions(LUTActions);
+    menu->exec(QCursor::pos());
 }
+
+#include "kmymoneypricedlg.moc"

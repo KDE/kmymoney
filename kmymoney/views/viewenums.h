@@ -43,9 +43,10 @@ enum class Tag { All = 0,
 
 enum class Action {
     None,
-    Refresh,
     Print,
     ClosePayeeIdentifierSource,
+    BlockViewDuringFileOpen,
+    UnblockViewAfterFileOpen,
 };
 }
 

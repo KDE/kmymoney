@@ -1934,6 +1934,17 @@ void MyMoneyFileTest::testAddPrice()
     MyMoneyAccount p;
 
     MyMoneyFileTransaction ft;
+    // make sure the currency exists
+    MyMoneySecurity foreignCurrency("RON", "Romanian Leu (new)", "RON");
+    try {
+        m->currency(foreignCurrency.id());
+    } catch (const MyMoneyException&) {
+        m->addCurrency(foreignCurrency);
+    }
+    ft.commit();
+
+    clearObjectLists();
+    ft.restart();
     try {
         p = m->account("A000002");
         p.setCurrencyId("RON");

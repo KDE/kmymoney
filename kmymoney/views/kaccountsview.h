@@ -45,7 +45,6 @@ public:
     explicit KAccountsView(QWidget *parent = nullptr);
     ~KAccountsView();
 
-    void executeCustomAction(eView::Action action) override;
     void refresh();
 
 public Q_SLOTS:

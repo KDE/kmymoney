@@ -51,7 +51,8 @@
                 "Name[tr]": "Christian David",
                 "Name[uk]": "Christian David",
                 "Name[x-test]": "xxChristian Davidxx",
-                "Name[zh_CN]": "Christian David"
+                "Name[zh_CN]": "Christian David",
+                "Name[zh_TW]": "Christian David"
             }
         ],
         "Description": "Order types for single european payment area (SEPA) orders",
