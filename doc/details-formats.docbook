@@ -5,7 +5,7 @@
     <author> &Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
     <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2023-11-25</date>
+  <date>2024-05-10</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 <title>File Formats</title>
@@ -23,7 +23,7 @@
 
 <para>
   This chapter describes the file formats in which &kmymoney; can store its data in
-  permanent form on the user's storage device.  It also discusses backing up your data.
+  permanent form.  It also discusses backing up your data.
 </para>
 
 <sect1><title>Data File formats</title>
@@ -63,7 +63,7 @@
     Manual modification of the file is not recommended to the normal user, and should
     only be performed if the internal working of &kmymoney; is fully understood or if
     instructions from the developers tell you what to do.  Don't blame the &kmymoney;
-    developers if you screw up your data: You have been warned!
+    developers if you damage or destroy your data: You have been warned!
   </para>
 </caution>
 </para>
@@ -148,18 +148,16 @@
 </para>
 </sect3>
 
-<sect3 id="details.formats.encrypted.recoverkey"><title>The &kmymoney; recover key</title>
+<sect3 id="details.formats.encrypted.recoverkey"><title>The &kmymoney; recovery key</title>
 <para>
   Also on this page of the settings dialog you have the choice of selecting
-  supplemental encryption with the &kmymoney; recover key.  This option is available
+  supplemental encryption with the &kmymoney; recovery key.  This option is available
   to you if that key is stored in your <application>GPG</application> keyring.
   Selecting this option will allow you to recover your data even in the case you lose
   your own private key.  This is possible because the data is not only encrypted for
-  your own key, but also for the &kmymoney; recover key.  This key is only available
+  your own key, but also for the &kmymoney; recovery key.  This key is only available
   to selected &kmymoney; developers (at the time of writing only to the author.)  As
-  of the November 2023, the recover key is set to expire on 7 January 2024.
-  <!-- should we specify that you import the PUBLIC key?  More generally, should we
-       give more details on how to find and import the recovery key? -->
+  of the May, 2024, the recovery key is set to expire on 7 January 2025.
 </para>
 
 <para>
@@ -174,7 +172,12 @@
   To get the recovery key, go to <ulink url="https://kmymoney.org/recovery.html"> The
   KMyMoney recovery key</ulink> page of the &kmymoney; web site.  Copy and save the
   <quote>PGP PUBLIC KEY BLOCK</quote> (including the <quote>BEGIN</quote> and
-  <quote>END</quote> lines) to a text file and then import
+  <quote>END</quote> lines) to a text file and then import it with gpg.
+</para>
+
+<para>
+  Remember that the developer can only help recover your data file if you acually do
+  encrypt it with the recovery key, in addition to your own key.
 </para>
 </sect3>
 </sect2>
