@@ -31,7 +31,8 @@
                 "Name[sv]": "Christian David",
                 "Name[uk]": "Christian David",
                 "Name[x-test]": "xxChristian Davidxx",
-                "Name[zh_CN]": "Christian David"
+                "Name[zh_CN]": "Christian David",
+                "Name[zh_TW]": "Christian David"
             }
         ],
         "Description": "If mapped to an account, it pretends it could handle all onlineTasks (for developers only).",

@@ -31,7 +31,8 @@
                 "Name[sv]": "Romain Bignon",
                 "Name[uk]": "Romain Bignon",
                 "Name[x-test]": "xxRomain Bignonxx",
-                "Name[zh_CN]": "Romain Bignon"
+                "Name[zh_CN]": "Romain Bignon",
+                "Name[zh_TW]": "Romain Bignon"
             }
         ],
         "Description": "Plugin for Woob",
@@ -59,6 +60,7 @@
         "Description[uk]": "Додаток для Woob",
         "Description[x-test]": "xxPlugin for Woobxx",
         "Description[zh_CN]": "Woob 插件",
+        "Description[zh_TW]": "Woob 外掛程式",
         "EnabledByDefault": true,
         "Icon": "network-connect",
         "Id": "woob",
@@ -88,6 +90,7 @@
         "Name[uk]": "Woob",
         "Name[x-test]": "xxWoobxx",
         "Name[zh_CN]": "Woob",
+        "Name[zh_TW]": "Woob",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

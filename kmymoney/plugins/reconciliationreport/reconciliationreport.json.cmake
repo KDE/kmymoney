@@ -95,6 +95,7 @@
         "Name[uk]": "Звіт щодо звірки",
         "Name[x-test]": "xxReconciliation reportxx",
         "Name[zh_CN]": "对账报告",
+        "Name[zh_TW]": "對帳報告",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

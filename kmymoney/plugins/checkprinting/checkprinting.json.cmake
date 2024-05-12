@@ -63,6 +63,7 @@
         "Description[uk]": "Можливість друку чеків",
         "Description[x-test]": "xxProvides the capability to print checksxx",
         "Description[zh_CN]": "提供支票打印功能",
+        "Description[zh_TW]": "提供列印支票的功能",
         "EnabledByDefault": true,
         "Icon": "document-print",
         "Id": "checkprinting",
@@ -96,6 +97,7 @@
         "Name[uk]": "Друк чеків",
         "Name[x-test]": "xxCheck printingxx",
         "Name[zh_CN]": "支票打印",
+        "Name[zh_TW]": "支票列印",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

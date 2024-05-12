@@ -31,7 +31,8 @@
                 "Name[sv]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[uk]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[x-test]": "xxAlvaro Soliverez,Łukasz Wojniłowiczxx",
-                "Name[zh_CN]": "Alvaro Soliverez,Łukasz Wojniłowicz"
+                "Name[zh_CN]": "Alvaro Soliverez,Łukasz Wojniłowicz",
+                "Name[zh_TW]": "Alvaro Soliverez、Łukasz Wojniłowicz"
             }
         ],
         "Description": "Adds reports view to KMyMoney",
@@ -61,6 +62,7 @@
         "Description[uk]": "Панель звітів у KMyMoney",
         "Description[x-test]": "xxAdds reports view to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加报告视图",
+        "Description[zh_TW]": "提供回報檢視給 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "report",
         "Id": "reportsview",
@@ -93,6 +95,7 @@
         "Name[uk]": "Перегляд звітів",
         "Name[x-test]": "xxReports viewxx",
         "Name[zh_CN]": "报表视图",
+        "Name[zh_TW]": "報告檢視",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],
