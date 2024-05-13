@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui version="53" name="kmymoney" >
+<kpartgui version="54" name="kmymoney" >
  <MenuBar>
   <Menu name="file" >
    <DefineGroup name="open_db_group" append="open_merge"/>
@@ -55,6 +55,7 @@
    <Action name="account_reconcile_cancel" />
    <Separator/>
    <Action name="account_transaction_report" />
+   <Action name="account_chart" />
    <Separator/>
    <Action name="account_close" />
    <Action name="account_reopen" />
