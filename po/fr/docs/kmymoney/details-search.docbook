@@ -132,7 +132,7 @@
 >Si vous cochez la case <guilabel
 >Traiter le texte comme une expression rationnelle</guilabel
 >, le texte sera traité comme une expression rationnelle. Pour des informations sur la manière d'établir une expression rationnelle, visitez la documentation &Qt; à propos de <ulink url="https://doc.qt.io/qt-5/qregexp.html"
->QRegExp class</ulink
+>classe « QRegExp » </ulink
 >. </para>
 </sect2>
 
