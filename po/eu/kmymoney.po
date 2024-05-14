@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-13 01:48+0000\n"
+"POT-Creation-Date: 2024-05-14 01:46+0000\n"
 "PO-Revision-Date: 2024-02-13 01:23+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -5818,106 +5818,106 @@ msgid "&Account"
 msgstr "&Kontua"
 
 #. i18n: ectx: Menu (category)
-#: kmymoney/kmymoneyui.rc:69
+#: kmymoney/kmymoneyui.rc:70
 #, kde-format
 msgid "&Category"
 msgstr "Kate&goria"
 
 #. i18n: ectx: Menu (transaction)
-#: kmymoney/kmymoneyui.rc:76
+#: kmymoney/kmymoneyui.rc:77
 #, kde-format
 msgid "&Transaction"
 msgstr "&Transakzioa"
 
 #. i18n: ectx: Menu (transaction_mark_menu)
 #. i18n: ectx: Menu (transaction_context_mark_menu)
-#: kmymoney/kmymoneyui.rc:85 kmymoney/kmymoneyui.rc:226
+#: kmymoney/kmymoneyui.rc:86 kmymoney/kmymoneyui.rc:227
 #, kde-format
 msgid "Mark transaction as..."
 msgstr "Markatu transakzioa honela..."
 
 #. i18n: ectx: Menu (transaction_mark_menu)
 #. i18n: ectx: Menu (transaction_context_mark_menu)
-#: kmymoney/kmymoneyui.rc:86 kmymoney/kmymoneyui.rc:227
+#: kmymoney/kmymoneyui.rc:87 kmymoney/kmymoneyui.rc:228
 #, kde-format
 msgid "Mark transaction"
 msgstr "Markatu transakzioa"
 
 #. i18n: ectx: Menu (kmmtools)
-#: kmymoney/kmymoneyui.rc:104 kmymoney/plugins/sql/sqlstorage.rc:9
+#: kmymoney/kmymoneyui.rc:105 kmymoney/plugins/sql/sqlstorage.rc:9
 #, kde-format
 msgid "T&ools"
 msgstr "T&resnak"
 
 #. i18n: ectx: Menu (account_context_menu)
 #. i18n: ectx: Menu (budget_account_context_menu)
-#: kmymoney/kmymoneyui.rc:126 kmymoney/plugins/views/budget/budgetview.rc:12
+#: kmymoney/kmymoneyui.rc:127 kmymoney/plugins/views/budget/budgetview.rc:12
 #, kde-format
 msgid "Account options"
 msgstr "Kontu-aukerak"
 
 #. i18n: ectx: Menu (category_context_menu)
-#: kmymoney/kmymoneyui.rc:150
+#: kmymoney/kmymoneyui.rc:151
 #, kde-format
 msgid "Category options"
 msgstr "Kategoria-aukerak"
 
 #. i18n: ectx: Menu (institution_context_menu)
-#: kmymoney/kmymoneyui.rc:157
+#: kmymoney/kmymoneyui.rc:158
 #, kde-format
 msgid "Institution options"
 msgstr "Erakunde-aukerak"
 
 #. i18n: ectx: Menu (payee_context_menu)
-#: kmymoney/kmymoneyui.rc:165
+#: kmymoney/kmymoneyui.rc:166
 #, kde-format
 msgid "Payee options"
 msgstr "Onuradun-aukerak"
 
 #. i18n: ectx: Menu (tag_context_menu)
-#: kmymoney/kmymoneyui.rc:172
+#: kmymoney/kmymoneyui.rc:173
 #, kde-format
 msgid "Tag options"
 msgstr "Etiketa-aukerak"
 
 #. i18n: ectx: Menu (investment_context_menu)
-#: kmymoney/kmymoneyui.rc:178
+#: kmymoney/kmymoneyui.rc:179
 #, kde-format
 msgid "Investment options"
 msgstr "Inbertsio-aukerak"
 
 #. i18n: ectx: Menu (security_context_menu)
-#: kmymoney/kmymoneyui.rc:191
+#: kmymoney/kmymoneyui.rc:192
 #, kde-format
 msgid "Security options"
 msgstr "Burtsa-balio aukerak"
 
 #. i18n: ectx: Menu (schedule_context_menu)
-#: kmymoney/kmymoneyui.rc:196
+#: kmymoney/kmymoneyui.rc:197
 #, kde-format
 msgid "Scheduled transactions options"
 msgstr "Transakzio antolatuen aukerak"
 
 #. i18n: ectx: Menu (transaction_context_menu)
-#: kmymoney/kmymoneyui.rc:211
+#: kmymoney/kmymoneyui.rc:212
 #, kde-format
 msgid "Transaction options"
 msgstr "Transakzio-aukerak"
 
 #. i18n: ectx: Menu (transaction_move_menu)
-#: kmymoney/kmymoneyui.rc:221
+#: kmymoney/kmymoneyui.rc:222
 #, kde-format
 msgid "Move transaction to..."
 msgstr "Transakzioa hona eraman..."
 
 #. i18n: ectx: Menu (transaction_move_menu)
-#: kmymoney/kmymoneyui.rc:222
+#: kmymoney/kmymoneyui.rc:223
 #, kde-format
 msgid "Select account"
 msgstr "Hautatu kontua"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kmymoney/kmymoneyui.rc:246
+#: kmymoney/kmymoneyui.rc:247
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Tresna-barra nagusia"

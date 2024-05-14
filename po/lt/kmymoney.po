@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-13 01:48+0000\n"
+"POT-Creation-Date: 2024-05-14 01:46+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -5611,106 +5611,106 @@ msgid "&Account"
 msgstr "&Sąskaita"
 
 #. i18n: ectx: Menu (category)
-#: kmymoney/kmymoneyui.rc:69
+#: kmymoney/kmymoneyui.rc:70
 #, kde-format
 msgid "&Category"
 msgstr "&Kategorija"
 
 #. i18n: ectx: Menu (transaction)
-#: kmymoney/kmymoneyui.rc:76
+#: kmymoney/kmymoneyui.rc:77
 #, kde-format
 msgid "&Transaction"
 msgstr "&Operacija"
 
 #. i18n: ectx: Menu (transaction_mark_menu)
 #. i18n: ectx: Menu (transaction_context_mark_menu)
-#: kmymoney/kmymoneyui.rc:85 kmymoney/kmymoneyui.rc:226
+#: kmymoney/kmymoneyui.rc:86 kmymoney/kmymoneyui.rc:227
 #, fuzzy, kde-format
 msgid "Mark transaction as..."
 msgstr "Rasti operaciją..."
 
 #. i18n: ectx: Menu (transaction_mark_menu)
 #. i18n: ectx: Menu (transaction_context_mark_menu)
-#: kmymoney/kmymoneyui.rc:86 kmymoney/kmymoneyui.rc:227
+#: kmymoney/kmymoneyui.rc:87 kmymoney/kmymoneyui.rc:228
 #, fuzzy, kde-format
 msgid "Mark transaction"
 msgstr "Ieškoti operacijų"
 
 #. i18n: ectx: Menu (kmmtools)
-#: kmymoney/kmymoneyui.rc:104 kmymoney/plugins/sql/sqlstorage.rc:9
+#: kmymoney/kmymoneyui.rc:105 kmymoney/plugins/sql/sqlstorage.rc:9
 #, kde-format
 msgid "T&ools"
 msgstr "Į&rankiai"
 
 #. i18n: ectx: Menu (account_context_menu)
 #. i18n: ectx: Menu (budget_account_context_menu)
-#: kmymoney/kmymoneyui.rc:126 kmymoney/plugins/views/budget/budgetview.rc:12
+#: kmymoney/kmymoneyui.rc:127 kmymoney/plugins/views/budget/budgetview.rc:12
 #, fuzzy, kde-format
 msgid "Account options"
 msgstr "Mokėjimo informacija"
 
 #. i18n: ectx: Menu (category_context_menu)
-#: kmymoney/kmymoneyui.rc:150
+#: kmymoney/kmymoneyui.rc:151
 #, fuzzy, kde-format
 msgid "Category options"
 msgstr "Kategorijos"
 
 #. i18n: ectx: Menu (institution_context_menu)
-#: kmymoney/kmymoneyui.rc:157
+#: kmymoney/kmymoneyui.rc:158
 #, kde-format
 msgid "Institution options"
 msgstr "Įstaigų parinktys"
 
 #. i18n: ectx: Menu (payee_context_menu)
-#: kmymoney/kmymoneyui.rc:165
+#: kmymoney/kmymoneyui.rc:166
 #, fuzzy, kde-format
 msgid "Payee options"
 msgstr "Korespondento informacija"
 
 #. i18n: ectx: Menu (tag_context_menu)
-#: kmymoney/kmymoneyui.rc:172
+#: kmymoney/kmymoneyui.rc:173
 #, fuzzy, kde-format
 msgid "Tag options"
 msgstr "Korespondento informacija"
 
 #. i18n: ectx: Menu (investment_context_menu)
-#: kmymoney/kmymoneyui.rc:178
+#: kmymoney/kmymoneyui.rc:179
 #, fuzzy, kde-format
 msgid "Investment options"
 msgstr "Investicijos"
 
 #. i18n: ectx: Menu (security_context_menu)
-#: kmymoney/kmymoneyui.rc:191
+#: kmymoney/kmymoneyui.rc:192
 #, fuzzy, kde-format
 msgid "Security options"
 msgstr "Rikiavimo parinktys"
 
 #. i18n: ectx: Menu (schedule_context_menu)
-#: kmymoney/kmymoneyui.rc:196
+#: kmymoney/kmymoneyui.rc:197
 #, fuzzy, kde-format
 msgid "Scheduled transactions options"
 msgstr "Įvesti operaciją pagal tvarkaraštį"
 
 #. i18n: ectx: Menu (transaction_context_menu)
-#: kmymoney/kmymoneyui.rc:211
+#: kmymoney/kmymoneyui.rc:212
 #, fuzzy, kde-format
 msgid "Transaction options"
 msgstr "Operacijos detalės"
 
 #. i18n: ectx: Menu (transaction_move_menu)
-#: kmymoney/kmymoneyui.rc:221
+#: kmymoney/kmymoneyui.rc:222
 #, fuzzy, kde-format
 msgid "Move transaction to..."
 msgstr "Rasti operaciją..."
 
 #. i18n: ectx: Menu (transaction_move_menu)
-#: kmymoney/kmymoneyui.rc:222
+#: kmymoney/kmymoneyui.rc:223
 #, kde-format
 msgid "Select account"
 msgstr "Pasirinkite sąskaitą"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kmymoney/kmymoneyui.rc:246
+#: kmymoney/kmymoneyui.rc:247
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Pagrindinė įrankinė"

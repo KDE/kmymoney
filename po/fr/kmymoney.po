@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-13 01:48+0000\n"
-"PO-Revision-Date: 2024-05-08 18:08+0200\n"
+"POT-Creation-Date: 2024-05-14 01:46+0000\n"
+"PO-Revision-Date: 2024-05-12 18:21+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -5898,106 +5898,106 @@ msgid "&Account"
 msgstr "Co&mpte"
 
 #. i18n: ectx: Menu (category)
-#: kmymoney/kmymoneyui.rc:69
+#: kmymoney/kmymoneyui.rc:70
 #, kde-format
 msgid "&Category"
 msgstr "&Catégorie"
 
 #. i18n: ectx: Menu (transaction)
-#: kmymoney/kmymoneyui.rc:76
+#: kmymoney/kmymoneyui.rc:77
 #, kde-format
 msgid "&Transaction"
 msgstr "Opéra&tion"
 
 #. i18n: ectx: Menu (transaction_mark_menu)
 #. i18n: ectx: Menu (transaction_context_mark_menu)
-#: kmymoney/kmymoneyui.rc:85 kmymoney/kmymoneyui.rc:226
+#: kmymoney/kmymoneyui.rc:86 kmymoney/kmymoneyui.rc:227
 #, kde-format
 msgid "Mark transaction as..."
 msgstr "Marquer l'opération comme…"
 
 #. i18n: ectx: Menu (transaction_mark_menu)
 #. i18n: ectx: Menu (transaction_context_mark_menu)
-#: kmymoney/kmymoneyui.rc:86 kmymoney/kmymoneyui.rc:227
+#: kmymoney/kmymoneyui.rc:87 kmymoney/kmymoneyui.rc:228
 #, kde-format
 msgid "Mark transaction"
 msgstr "Marquer l'opération"
 
 #. i18n: ectx: Menu (kmmtools)
-#: kmymoney/kmymoneyui.rc:104 kmymoney/plugins/sql/sqlstorage.rc:9
+#: kmymoney/kmymoneyui.rc:105 kmymoney/plugins/sql/sqlstorage.rc:9
 #, kde-format
 msgid "T&ools"
 msgstr "&Outils"
 
 #. i18n: ectx: Menu (account_context_menu)
 #. i18n: ectx: Menu (budget_account_context_menu)
-#: kmymoney/kmymoneyui.rc:126 kmymoney/plugins/views/budget/budgetview.rc:12
+#: kmymoney/kmymoneyui.rc:127 kmymoney/plugins/views/budget/budgetview.rc:12
 #, kde-format
 msgid "Account options"
 msgstr "Options du compte"
 
 #. i18n: ectx: Menu (category_context_menu)
-#: kmymoney/kmymoneyui.rc:150
+#: kmymoney/kmymoneyui.rc:151
 #, kde-format
 msgid "Category options"
 msgstr "Options de la catégorie"
 
 #. i18n: ectx: Menu (institution_context_menu)
-#: kmymoney/kmymoneyui.rc:157
+#: kmymoney/kmymoneyui.rc:158
 #, kde-format
 msgid "Institution options"
 msgstr "Options de l'établissement"
 
 #. i18n: ectx: Menu (payee_context_menu)
-#: kmymoney/kmymoneyui.rc:165
+#: kmymoney/kmymoneyui.rc:166
 #, kde-format
 msgid "Payee options"
 msgstr "Options du bénéficiaire"
 
 #. i18n: ectx: Menu (tag_context_menu)
-#: kmymoney/kmymoneyui.rc:172
+#: kmymoney/kmymoneyui.rc:173
 #, kde-format
 msgid "Tag options"
 msgstr "Options des étiquettes"
 
 #. i18n: ectx: Menu (investment_context_menu)
-#: kmymoney/kmymoneyui.rc:178
+#: kmymoney/kmymoneyui.rc:179
 #, kde-format
 msgid "Investment options"
 msgstr "Gamme de placements"
 
 #. i18n: ectx: Menu (security_context_menu)
-#: kmymoney/kmymoneyui.rc:191
+#: kmymoney/kmymoneyui.rc:192
 #, kde-format
 msgid "Security options"
 msgstr "Options de sécurité"
 
 #. i18n: ectx: Menu (schedule_context_menu)
-#: kmymoney/kmymoneyui.rc:196
+#: kmymoney/kmymoneyui.rc:197
 #, kde-format
 msgid "Scheduled transactions options"
 msgstr "Options des opérations récurrentes"
 
 #. i18n: ectx: Menu (transaction_context_menu)
-#: kmymoney/kmymoneyui.rc:211
+#: kmymoney/kmymoneyui.rc:212
 #, kde-format
 msgid "Transaction options"
 msgstr "Options des opérations"
 
 #. i18n: ectx: Menu (transaction_move_menu)
-#: kmymoney/kmymoneyui.rc:221
+#: kmymoney/kmymoneyui.rc:222
 #, kde-format
 msgid "Move transaction to..."
 msgstr "Déplacer l'opération vers…"
 
 #. i18n: ectx: Menu (transaction_move_menu)
-#: kmymoney/kmymoneyui.rc:222
+#: kmymoney/kmymoneyui.rc:223
 #, kde-format
 msgid "Select account"
 msgstr "Sélectionner le Compte"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kmymoney/kmymoneyui.rc:246
+#: kmymoney/kmymoneyui.rc:247
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Barre principale"
@@ -19709,11 +19709,10 @@ msgstr ""
 "D'ici-là, KMyMoney affiche la page de bienvenue à la place."
 
 #: kmymoney/views/khomeview_p.h:157
-#, fuzzy, kde-format
-#| msgid "Loading %1..."
+#, kde-format
 msgctxt "@info:placeholder Shown when the application starts up"
 msgid "Loading..."
-msgstr "Chargement de %1..."
+msgstr "Chargement en cours..."
 
 #: kmymoney/views/khomeview_p.h:496
 #, kde-format
