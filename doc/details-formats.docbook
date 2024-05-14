@@ -57,15 +57,14 @@
   a filename in <filename class="extension">.xml</filename>, the file will be
   stored in this format.
 
-<!-- FIXME: should this caution really be within the above <para>? -->
-<caution>
+<note>
   <para>
     Manual modification of the file is not recommended to the normal user, and should
     only be performed if the internal working of &kmymoney; is fully understood or if
     instructions from the developers tell you what to do.  Don't blame the &kmymoney;
     developers if you damage or destroy your data: You have been warned!
   </para>
-</caution>
+</note>
 </para>
 </sect2>
 
@@ -205,6 +204,22 @@
   developer mailing list at &devlist; for further investigation.  If the problem does
   not show ... well, I don't want to think about this scenario right now.
 </para>
+</sect2>
+
+<sect2><title>Data file locations</title>
+<para>
+  All of the above file types can be stored on a local hard drive, a removeable
+  devicee such as a usb thumb drive, or a network location.  Depending on your
+  Operating System, a remote location may need to be mapped or mounted prior to use.
+</para>
+
+<note><title>Limitation on Windows</title>
+  <para>
+    On &Windows;, in order to use a netork or remote file location, that mapped
+    location must be mapped to a drive letter.
+  </para>
+</note>
+
 </sect2>
 </sect1>
 

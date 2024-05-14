@@ -430,6 +430,15 @@
 
   <varlistentry>
     <term><menuchoice>
+      <guimenu>Account</guimenu><guimenuitem>Show balance chart...</guimenuitem>
+    </menuchoice></term>
+    <listitem>
+      <para>Opens a YTD (Year to date) chart of the balance of the selected account.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><menuchoice>
       <guimenu>Account</guimenu><guimenuitem>Close account</guimenuitem>
     </menuchoice></term>
     <listitem>

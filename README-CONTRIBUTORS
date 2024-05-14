@@ -22,98 +22,25 @@ updated for the 4 -> 5 changes in the What's New section.  It is no longer usefu
 needed as this version will be released with the release of 5.2, ane really should be
 complete by then.
 
-This is in the order pulled in from index.docbook, with brief note on state of update
+All chapters have had at least one pass, with the following exceptions:
 
-<!ENTITY introduction SYSTEM "introduction.docbook">
-  prelim update complete
-  
-<!ENTITY whatsnew SYSTEM "whatsnew.docbook">
-  prelim update complete
-  
 <!ENTITY makemostof SYSTEM "makemostof.docbook">
-  prelim update - probably need a complete replacement of this
+  I think we need a complete replacement of this chapter.
   
-<!ENTITY firsttime SYSTEM "firsttime.docbook">
-  prelim update complete
-
-<!ENTITY details-institutions SYSTEM "details-institutions.docbook">
-  prelim update complete
-
-<!ENTITY details-accounts SYSTEM "details-accounts.docbook">
-  prelim update complete
-
-<!ENTITY details-categories SYSTEM "details-categories.docbook">
-  prelim update complete
-
-<!ENTITY details-tags SYSTEM "details-tags.docbook">
-  prelim update complete
-
-<!ENTITY details-payees SYSTEM "details-payees.docbook">
-  prelim update complete
-
-<!ENTITY details-schedules SYSTEM "details-schedules.docbook">
-  prelim update complete
-
-<!ENTITY details-ledgers SYSTEM "details-ledgers.docbook">
-  prelim update complete
-
-<!ENTITY details-investments SYSTEM "details-investments.docbook">
-  prelim update complete
-
-<!ENTITY details-currencies SYSTEM "details-currencies.docbook">
-  prelim update complete
-  
-<!ENTITY details-reconciliation SYSTEM "details-reconciliation.docbook">
-  prelim update complete
-
-<!ENTITY details-reports SYSTEM "details-reports.docbook">
-  prelim update complete
-
-<!ENTITY details-impexp SYSTEM "details-impexp.docbook">
-  prelim update complete
-
 <!ENTITY details-impexp-csv SYSTEM "details-impexp-csv.docbook">
-  prelim update one pass.  needs lots more work
-
-<!ENTITY details-impexp-csvexp SYSTEM "details-impexp-csvexp.docbook">
-  prelim update complete
+  Really needs lots more work.  I'd love to add a discussion of what parts of import
+  are file type specific, and what things are done after an import is processed into
+  a common format for final processing.
 
 <!ENTITY details-impexp-woob SYSTEM "details-impexp-woob.docbook">
-  prelim update complete - needs reveiw by Woob user.
-
-<!ENTITY details-loans SYSTEM "details-loans.docbook">
-  prelim update complete
+  Needs reveiw by Woob user.
 
 <!ENTITY details-budgets SYSTEM "details-budgets.docbook">
-  prelim update complete, need to add screenshots
+  Need to add screenshots
 
-<!ENTITY details-forecast SYSTEM "details-forecast.docbook">
-  prelim update complete
-  
-<!ENTITY details-search SYSTEM "details-search.docbook">
-  prelim update complete
-  
-<!ENTITY details-formats SYSTEM "details-formats.docbook">
-  prelim update complete
-
-<!ENTITY details-database SYSTEM "details-database.docbook">
-  prelim update complete
-
-<!ENTITY details-settings SYSTEM "details-settings.docbook">
-  prelim update complete
-  
-<!ENTITY faq SYSTEM "faq.docbook">
-  prelim update complete
-
-<!ENTITY reference SYSTEM "reference.docbook">
-  prelim update complete
-  
 <!ENTITY details-widgets SYSTEM "details-widgets.docbook">
-  to be reviewed by Thomas
+  Needs to be reviewed by Thomas
 
-<!ENTITY credits SYSTEM "credits.docbook">
-  prelim update complete
-  
 <!-- not directly included in docbook   "man-kmymoney.1.docbook" but should
      still be reviewed for accuracy -->
 
@@ -306,9 +233,6 @@ elsewhere.
 
 - Cant search results be sorted any more?  (Could they ever?)
 
-- Need to mention in file formats chapter that all data files can be stored locally
-  or on a network share.  Also mention mounting the share is often an issue on Windows.
-
 - what does File/Backup do if SQL is the current file type?
 
 - on the config dialog, home section, should the top area be put in a box as are the
@@ -326,10 +250,11 @@ elsewhere.
   example, Ledger configuration, Data Entry tab: Default reconciliation state is
   dropdown with three choices, but Autofill has three radio-button choices.
 
-XXX
 - In Edit Account, bottom of General tab, Budget Options allows account to be
-  included in budgets as Income or Expense.  Does this essentially allow to include
-  transfers to/from this account in budgets?
+  included in budgets as Income or Expense.  This actually adds the account as Asset
+  or Liability, not Income or Expense.  However, I still see no evicence of any such
+  account in any budget report.  Perhaps this should just be left as is, and raised
+  as an issue after 5.2?
 
 
 ------------------------ resolved issues moved to below.  should probably just delete
@@ -352,6 +277,7 @@ XXX
 - Is CC (cost center) used for anything?  Does it occur anywhere except Categories
   (which is only that cc is required)
  -- not used, and now possibly hidden by config time option.
+   -- now noted.
  
 - do we need a Tags main menu item?
  -- don't have one for tags or payees.  OK
@@ -409,6 +335,10 @@ XXX
   security.  Should it also show the symbol?  (The manual used to say it did.)
  -- Added.  Not explicitly mentioned in handbook.
 
+- Need to mention in file formats chapter that all data files can be stored locally
+  or on a network share.  Also mention mounting the share is often an issue on Windows.
+ -- done.
+
 ------------------------ resolved issues for now, but still need future discussion
 
 - do we want to talk about stock as an account type? - will defer, including possible
@@ -420,9 +350,8 @@ XXX
  -- actually fixed a while ago.  However when you click on new parent and then OK,
     instead of just updating the hierarchy, the whole dialog is closed.  Is this OK?
 
-- In New Category dialog, Price entry dropdown is disabled.  Is there any condition
-  under which it is enabled?  If so, need to add to handbook.
- -- CC and price entry dropped.  Should we also drop Last Check number?
+- In New Category dialog, Price entry has been dropped (also CC)
+ -- Should we also drop Last Check number?
 
 - On schecule frequency, should we comment on possibly odd combinations of frequency
   and the interval?  What happens if you say 2 Once?  Is 2 Month the same as 1 Every
@@ -435,9 +364,9 @@ XXX
   actually fetching prices (stocks or currency.)  Should we just drop the field, or
   at least note it is ignored?  IS there any way to retreive historic prices?
 
-    > > T This has recently changed. If the price source has a #x in its regex for
-          price or date then it expects the data to be in CSV format. In such a case,
-	  the date fields are enabled but only used for that price source.
+    >> T This has recently changed. If the price source has a #x in its regex for
+       price or date then it expects the data to be in CSV format. In such a case,
+       the date fields are enabled but only used for that price source.
     > J2 I'll need to try it, if I can find any source with historic dates.  Otherwise,
 	 I suppose I can just save any changes about this for later.
     T2 I attach a screenshot of my settings for this. And here are those settings
@@ -477,7 +406,7 @@ XXX
   ignored.  How do we want to deal with this?
  -- (This is really part of the previous issue.)
 
-- Can the transaction form show up other than at the bottom of the transaction list?
+- The transaction form shows up always at the bottom of the transaction list.
   With or without the form enabled, editing a transaction shows the form at the
   location of the transaction in the ledger.  Shouldn't editing take place in the
   form at the bottom?
@@ -494,8 +423,8 @@ XXX
       enter/edit transactions.
 
 - The handbook uses "Schedules" as the formal name, but the View Selector says
-  "Scheduled transactions" We should be consistent.
- -- I found the source - do we want to shorten it?
+  "Scheduled transactions" We should be consistent. and shorten it?  (hard to find in
+  code, since it includes \n.
 
 - In Gnucash import, matching of account types, some map to things that are only
   applicable to security subaccounts of investmant accounts.  Should these be shown
@@ -526,7 +455,8 @@ XXX
  -- Still would like a note on the relation between Aqbanking and KBanking.
     (external libraries/routines and the KMM framework for calling them?)
 
-- Budget View has buttons labelled Upd and Res.  Should these be expanded to Update and Reset?
- -- TB said he would remove, but I now see full text Update and Remove.  Tooltips are present and
-    for those two, there is a (not useful?) "hit Shift for more".
+- Budget View has buttons labelled Upd and Res.  Should these be expanded to Update
+and Reset?  -- TB said he would remove, but I now see full text Update and Remove.
+Tooltips are present and for those two, there is a (not useful?) "hit Shift for
+more".  The "more" is not very useful - should it just be dropped?
     

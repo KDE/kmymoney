@@ -61,7 +61,8 @@
         An indication that a cost center assignment is necessary under certain
         conditions when entering a transaction for this category.  This is a recently
         added feature, which is not yet implemented, so this column is not currently
-        used.
+        used.  In addition, it may not show up at all, depending on the value of a
+        build time configuration setting.
       </para>
     </listitem>
   </varlistentry>
