@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-14 01:46+0000\n"
-"PO-Revision-Date: 2024-05-06 17:05+0200\n"
+"PO-Revision-Date: 2024-05-10 16:20+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -19569,11 +19569,10 @@ msgstr ""
 "invece la pagina di benvenuto."
 
 #: kmymoney/views/khomeview_p.h:157
-#, fuzzy, kde-format
-#| msgid "Loading %1..."
+#, kde-format
 msgctxt "@info:placeholder Shown when the application starts up"
 msgid "Loading..."
-msgstr "Caricamento di %1 in corso..."
+msgstr "Caricamento..."
 
 #: kmymoney/views/khomeview_p.h:496
 #, kde-format
