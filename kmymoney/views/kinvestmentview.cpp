@@ -323,8 +323,10 @@ void KInvestmentView::executeAction(eMenu::Action action, const SelectedObjects&
         d->m_equitySelections.clearSelections();
         d->m_securitySelections.clearSelections();
         d->m_selections.clearSelections();
-        // make sure to remove any account reference
-        d->ui->m_accountComboBox->setSelected(QString());
+        if (!d->m_needLoad) {
+            // make sure to remove any account reference
+            d->ui->m_accountComboBox->setSelected(QString());
+        }
         break;
 
     default:
