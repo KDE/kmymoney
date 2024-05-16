@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-14 01:46+0000\n"
+"POT-Creation-Date: 2024-05-16 02:08+0000\n"
 "PO-Revision-Date: 2024-02-13 01:23+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -19739,17 +19739,17 @@ msgstr "Ezabatu erakundea"
 msgid "Unable to delete institution: %1"
 msgstr "Ezin da erakundea ezabatu: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:523
+#: kmymoney/views/kinvestmentview.cpp:525
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>Benetan ezabatu nahi duzu <b>%1</b> inbertsioa?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:524
+#: kmymoney/views/kinvestmentview.cpp:526
 #, kde-format
 msgid "Delete investment"
 msgstr "Ezabatu inbertsioa"
 
-#: kmymoney/views/kinvestmentview.cpp:535
+#: kmymoney/views/kinvestmentview.cpp:537
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "Ezin da inbertsioa ezabatu: %1"

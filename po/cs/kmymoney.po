@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-14 01:46+0000\n"
+"POT-Creation-Date: 2024-05-16 02:08+0000\n"
 "PO-Revision-Date: 2023-11-10 16:09+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -18896,11 +18896,10 @@ msgstr ""
 "bude zobrazovat pouze uvítací stránku."
 
 #: kmymoney/views/khomeview_p.h:157
-#, fuzzy, kde-format
-#| msgid "Loading file..."
+#, kde-format
 msgctxt "@info:placeholder Shown when the application starts up"
 msgid "Loading..."
-msgstr "Načítám soubor..."
+msgstr ""
 
 #: kmymoney/views/khomeview_p.h:496
 #, kde-format
@@ -19157,17 +19156,17 @@ msgstr "Odstranit instituci"
 msgid "Unable to delete institution: %1"
 msgstr "Nelze smazat instituci: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:523
+#: kmymoney/views/kinvestmentview.cpp:525
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>Opravdu si přejete odstranit investici <b>%1</b>?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:524
+#: kmymoney/views/kinvestmentview.cpp:526
 #, kde-format
 msgid "Delete investment"
 msgstr "Odstranit investici"
 
-#: kmymoney/views/kinvestmentview.cpp:535
+#: kmymoney/views/kinvestmentview.cpp:537
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "Nelze odstranit investici: %1"
