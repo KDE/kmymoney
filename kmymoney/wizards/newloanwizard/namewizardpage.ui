@@ -78,7 +78,7 @@ How do you want to call this loan? Examples for names are 'car loan', 'school lo
     <item>
       <widget class="QLabel" name="m_generalReceiverText">
         <property name="text">
-          <string comment="KDE::DoNotExtract">TextLabel6</string>
+          <string notr="true">TextLabel6</string>
         </property>
         <property name="wordWrap">
           <bool>false</bool>
@@ -90,7 +90,7 @@ How do you want to call this loan? Examples for names are 'car loan', 'school lo
         <item>
           <widget class="QLabel" name="m_receiverLabel">
             <property name="text">
-              <string comment="KDE::DoNotExtract">TextLabel7</string>
+              <string notr="true">TextLabel7</string>
             </property>
             <property name="wordWrap">
               <bool>false</bool>
