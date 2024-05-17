@@ -56,6 +56,108 @@
 #include "securitiesmodel.h"
 #include "tagsmodel.h"
 
+class QIOXmlDeviceProxy : public QIODevice
+{
+    Q_OBJECT
+
+public:
+    QIOXmlDeviceProxy(QIODevice* device, QObject* parent = nullptr)
+        : QIODevice(parent)
+        , m_device(device)
+        , m_state(FirstChar)
+    {
+        // Open the device in the same mode as the underlying device
+        if (device->isOpen()) {
+            open(device->openMode());
+        }
+    }
+
+protected:
+    // Implement reading from the device
+    qint64 readData(char* data, qint64 maxSize) override
+    {
+        if (!m_device) {
+            return -1;
+        }
+
+        // Read data from the underlying device
+        qint64 bytesRead = m_device->read(data, maxSize);
+        if (bytesRead > 0) {
+            // Filter the data here
+            return validateUtf8AndXML(data, bytesRead);
+        }
+        return 0;
+    }
+
+    // Implement writing to the device
+    qint64 writeData(const char* data, qint64 maxSize) override
+    {
+        if (!m_device) {
+            return -1;
+        }
+
+        // Write data to the underlying device
+        return m_device->write(data, maxSize);
+    }
+
+private:
+    QIODevice* m_device;
+    enum State {
+        FirstChar,
+        LeadInCharSeen,
+        SequenceCharSeen,
+    } m_state;
+
+    qint64 validateUtf8AndXML(char* data, qint64 isize)
+    {
+        qint64 osize(0);
+
+        for (qint64 i = 0; i < isize; ++i) {
+            char c = 0;
+            if ((data[i] & 0x80) == 0x00) {
+                // in case the last was the first byte of a multi byte sequence
+                // but a following character is missing, we remove it
+                if ((m_state == LeadInCharSeen) && (osize > 0)) {
+                    --osize;
+                }
+                m_state = FirstChar;
+                if (data[i] >= 0x20) { // non-control characters
+                    c = data[i];
+                } else {
+                    // filter out non C0 control characters
+                    switch (data[i]) {
+                    case 0x0A: // LF
+                    case 0x0D: // CR
+                    case 0x09: // TAB
+                        c = data[i];
+                        break;
+                    default:
+                        break;
+                    }
+                }
+            } else if (((data[i] & 0xC0) == 0xC0) && (m_state != LeadInCharSeen)) {
+                // first byte of a multi byte sequence
+                c = data[i];
+                m_state = LeadInCharSeen;
+            } else if (((data[i] & 0xC0) == 0xC0) && (m_state == LeadInCharSeen)) {
+                // another first byte, we remove the previous one
+                if (osize > 0) {
+                    --osize;
+                }
+                c = data[i];
+            } else if (((data[i] & 0xC0) == 0x80) && (m_state >= LeadInCharSeen)) {
+                // a byte of a multibyte sequence
+                c = data[i];
+                m_state = SequenceCharSeen;
+            }
+            if (c != 0) {
+                data[osize++] = c;
+            }
+        }
+        return osize;
+    }
+};
+
 class MyMoneyXmlReaderPrivate
 {
     Q_DISABLE_COPY_MOVE(MyMoneyXmlReaderPrivate)
@@ -1195,7 +1297,8 @@ bool MyMoneyXmlReader::read(QIODevice* device)
     Q_ASSERT(d->m_file != nullptr);
     Q_ASSERT(device->isOpen());
 
-    return d->read(device);
+    QIOXmlDeviceProxy validationProxy(device);
+    return d->read(&validationProxy);
 }
 
 bool MyMoneyXmlReader::read(const QString& text)
@@ -1214,3 +1317,5 @@ bool MyMoneyXmlReader::read(const QString& text)
     }
     return !d->m_reader->hasError();
 }
+
+#include "mymoneyxmlreader.moc"
