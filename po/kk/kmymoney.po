@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-16 02:08+0000\n"
+"POT-Creation-Date: 2024-05-18 01:46+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -18429,7 +18429,7 @@ msgstr " (Делдал ақысы)"
 msgid "%1 (Brokerage)"
 msgstr "%1 (Делдал ақысы)"
 
-#: kmymoney/plugins/xml/mymoneyxmlreader.cpp:325
+#: kmymoney/plugins/xml/mymoneyxmlreader.cpp:427
 #, fuzzy, kde-format
 #| msgid "Unknown QIF type %1"
 msgctxt "Error message when reading XML file"
