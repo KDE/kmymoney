@@ -939,6 +939,15 @@ bool MyMoneyReport::includes(const MyMoneyAccount& acc) const
     Q_D(const MyMoneyReport);
     auto result = false;
 
+    // Usually, budget reports only contain income and expense accounts
+    // but asset and liability accounts can also count as income or expense
+    // account in a budget. In this case, we need to include them. Such accounts
+    // are identified by the fact that their budgetAccountType differs from
+    // their accountType.
+    if (hasBudget()) {
+        result = acc.budgetAccountType() != acc.accountType();
+    }
+
     if (includesAccountGroup(acc.accountGroup())) {
         switch (acc.accountGroup()) {
         case eMyMoney::Account::Type::Income:
