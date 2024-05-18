@@ -25,8 +25,18 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#define HAVE_ICON_THEME __has_include(<KIconTheme>)
+#if HAVE_ICON_THEME
+#include <KIconTheme>
+#endif
+
 #include <KLocalizedString>
 #include <KMessageBox>
+
+#define HAVE_STYLE_MANAGER __has_include(<KStyleManager>)
+#if HAVE_STYLE_MANAGER
+#include <KStyleManager>
+#endif
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -74,9 +84,34 @@ int main(int argc, char *argv[])
 #endif
 
     /**
+     * trigger initialisation of proper icon theme
+     */
+#if HAVE_ICON_THEME
+#if KICONTHEMES_VERSION >= QT_VERSION_CHECK(6, 3, 0)
+    KIconTheme::initTheme();
+#endif
+#endif
+
+    /**
      * Create application first
      */
     QApplication app(argc, argv);
+
+#if HAVE_STYLE_MANAGER
+    /**
+     * trigger initialisation of proper application style
+     */
+    KStyleManager::initStyle();
+#else
+#if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
+    /**
+     * For Windows and macOS: use Breeze if available
+     * Of all tested styles that works the best for us
+     */
+    QApplication::setStyle(QStringLiteral("breeze"));
+#endif
+#endif
+
     KLocalizedString::setApplicationDomain("kmymoney");
 
     AlkEnvironment::checkForAppImageEnvironment(argv[0]);
