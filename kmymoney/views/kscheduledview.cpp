@@ -32,14 +32,17 @@ KScheduledView::KScheduledView(QWidget *parent) :
     KMyMoneyViewBase(*new KScheduledViewPrivate(this), parent)
 {
     typedef void(KScheduledView::*KScheduledViewFunc)();
+    // clang-format off
     const QHash<eMenu::Action, KScheduledViewFunc> actionConnections {
         {eMenu::Action::NewSchedule,        &KScheduledView::slotNewSchedule},
         {eMenu::Action::EditSchedule,       &KScheduledView::slotEditSchedule},
+        {eMenu::Action::EditScheduleForce,  &KScheduledView::slotEditLoanSchedule},
         {eMenu::Action::DeleteSchedule,     &KScheduledView::slotDeleteSchedule},
         {eMenu::Action::DuplicateSchedule,  &KScheduledView::slotDuplicateSchedule},
         {eMenu::Action::EnterSchedule,      &KScheduledView::slotEnterSchedule},
         {eMenu::Action::SkipSchedule,       &KScheduledView::slotSkipSchedule},
     };
+    // clang-format on
 
     for (auto a = actionConnections.cbegin(); a != actionConnections.cend(); ++a)
         connect(pActions[a.key()], &QAction::triggered, this, a.value());
@@ -195,6 +198,17 @@ void KScheduledView::slotSetSelectedItem(const QItemSelection& selected, const Q
 void KScheduledView::slotNewSchedule()
 {
     KEditScheduleDlg::newSchedule(MyMoneyTransaction(), eMyMoney::Schedule::Occurrence::Monthly);
+}
+
+void KScheduledView::slotEditLoanSchedule()
+{
+    Q_D(KScheduledView);
+    const auto schedule = d->selectedSchedule(pActions[eMenu::Action::EditSchedule]);
+    try {
+        KEditScheduleDlg::editSchedule(schedule, true);
+    } catch (const MyMoneyException& e) {
+        KMessageBox::detailedError(this, i18n("Unknown scheduled transaction '%1'", schedule.name()), QString::fromLatin1(e.what()));
+    }
 }
 
 void KScheduledView::slotEditSchedule()

@@ -73,6 +73,7 @@ public:
 
 public Q_SLOTS:
     void slotEditSchedule();
+    void slotEditLoanSchedule();
 
     void slotEnterOverdueSchedules(const MyMoneyAccount& acc);
 

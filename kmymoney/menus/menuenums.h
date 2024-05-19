@@ -105,7 +105,7 @@ enum class Action {
     // *************
     // The schedule menu
     // *************
-    NewSchedule, EditSchedule,
+    NewSchedule, EditSchedule, EditScheduleForce,
     DeleteSchedule, DuplicateSchedule,
     EnterSchedule, SkipSchedule,
     // *************

@@ -257,6 +257,12 @@ public:
                 setCurrencySymbol(QString(), QString());
             }
         }
+
+        const auto isAutoCalc = m_shares.isAutoCalc();
+        q->setDisabled(isAutoCalc);
+        if (isAutoCalc) {
+            q->QLineEdit::setText(i18nc("@info:placeholder amount widget", "calculated"));
+        }
     }
 
     void swapCommodities()
@@ -288,34 +294,36 @@ public:
         return prec;
     }
 
-    void setValueText(const QString& txt)
+    void setWidgetText(QString& widgetTextCache, const MyMoneyMoney& amount, const QString& txt, MultiCurrencyEdit::DisplayState state)
     {
         Q_Q(AmountEdit);
-        m_valueText = txt;
-        if (q->isEnabled() && !txt.isEmpty()) {
-            ensureFractionalPart(m_valueText);
-        }
-        // only update text if it really differs
-        if (m_state == AmountEdit::DisplayValue && m_valueText.compare(q->QLineEdit::text())) {
-            // prevent to change the values due to emitted textChanged() signals
+        if (!amount.isAutoCalc()) {
+            q->setEnabled(true);
+            widgetTextCache = txt;
+            if (q->isEnabled() && !txt.isEmpty()) {
+                ensureFractionalPart(widgetTextCache);
+            }
+            // only update text if it really differs
+            if (m_state == state && widgetTextCache.compare(q->QLineEdit::text())) {
+                // prevent to change the values due to emitted textChanged() signals
+                QSignalBlocker block(q);
+                q->QLineEdit::setText(widgetTextCache);
+            }
+        } else {
+            q->setEnabled(false);
             QSignalBlocker block(q);
-            q->QLineEdit::setText(m_valueText);
+            q->QLineEdit::setText(i18nc("@info:placeholder amount widget", "calculated"));
         }
+    }
+
+    void setValueText(const QString& txt)
+    {
+        setWidgetText(m_valueText, m_value, txt, AmountEdit::DisplayValue);
     }
 
     void setSharesText(const QString& txt)
     {
-        Q_Q(AmountEdit);
-        m_sharesText = txt;
-        if (q->isEnabled() && !txt.isEmpty()) {
-            ensureFractionalPart(m_sharesText);
-        }
-        // only update text if it really differs
-        if (m_state == AmountEdit::DisplayShares && m_sharesText.compare(q->QLineEdit::text())) {
-            // prevent to change the values due to emitted textChanged() signals
-            QSignalBlocker block(q);
-            q->QLineEdit::setText(m_sharesText);
-        }
+        setWidgetText(m_sharesText, m_shares, txt, AmountEdit::DisplayShares);
     }
 
     AmountEdit* q_ptr;
@@ -766,13 +774,15 @@ bool AmountEdit::isCalculatorButtonVisible() const
 void AmountEdit::ensureFractionalPart()
 {
     Q_D(AmountEdit);
-    QString s(text());
-    d->ensureFractionalPart(s);
-    // by setting the text only when it's different then the one that it is already there
-    // we preserve the edit widget's state (like the selection for example) during a
-    // call to ensureFractionalPart() that does not change anything
-    if (s != text())
-        QLineEdit::setText(s);
+    if (isEnabled()) {
+        QString s(text());
+        d->ensureFractionalPart(s);
+        // by setting the text only when it's different then the one that it is already there
+        // we preserve the edit widget's state (like the selection for example) during a
+        // call to ensureFractionalPart() that does not change anything
+        if (s != text())
+            QLineEdit::setText(s);
+    }
 }
 
 void AmountEdit::setCurrencySymbol(const QString& symbol, const QString& name)

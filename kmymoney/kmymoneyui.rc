@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui version="54" name="kmymoney" >
+<kpartgui version="55" name="kmymoney" >
  <MenuBar>
   <Menu name="file" >
    <DefineGroup name="open_db_group" append="open_merge"/>
@@ -197,6 +197,7 @@
   <title>Scheduled transactions options</title>
   <Action name="schedule_new" />
   <Action name="schedule_edit" />
+  <Action name="schedule_edit_force" />
   <Action name="schedule_delete" />
   <Action name="schedule_duplicate" />
   <Separator />

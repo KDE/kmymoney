@@ -584,12 +584,35 @@ void KEditScheduleDlg::newSchedule(const MyMoneyTransaction& _t, eMyMoney::Sched
     } while (!committed);
 }
 
-void KEditScheduleDlg::editSchedule(const MyMoneySchedule& inputSchedule)
+void KEditScheduleDlg::editSchedule(const MyMoneySchedule& inputSchedule, bool alwaysUseEditor)
 {
     try {
         auto schedule = MyMoneyFile::instance()->schedule(inputSchedule.id());
 
         switch (schedule.type()) {
+        // normally, the loan schedule is managed as part of the loan, but in
+        // rare cases it might become necessary to edit it directly. In this
+        // case, alwaysUseEditor is true and we fall through to the 'normal'
+        // schedule editor
+        case eMyMoney::Schedule::Type::LoanPayment:
+            if (!alwaysUseEditor) {
+                QScopedPointer<KEditLoanWizard> dlg(new KEditLoanWizard(schedule.account(2)));
+                if (dlg->exec() == QDialog::Accepted) {
+                    MyMoneyFileTransaction ft;
+                    try {
+                        MyMoneyFile::instance()->modifySchedule(dlg->schedule());
+                        MyMoneyFile::instance()->modifyAccount(dlg->account());
+                        ft.commit();
+                    } catch (const MyMoneyException& e) {
+                        KMessageBox::detailedError(nullptr,
+                                                   i18n("Unable to modify scheduled transaction '%1'", inputSchedule.name()),
+                                                   QString::fromLatin1(e.what()));
+                    }
+                }
+                break;
+            }
+            // intentional fall through
+
         case eMyMoney::Schedule::Type::Bill:
         case eMyMoney::Schedule::Type::Deposit:
         case eMyMoney::Schedule::Type::Transfer: {
@@ -622,22 +645,6 @@ void KEditScheduleDlg::editSchedule(const MyMoneySchedule& inputSchedule)
                         }
                     }
                     MyMoneyFile::instance()->modifySchedule(sched);
-                    ft.commit();
-                } catch (const MyMoneyException& e) {
-                    KMessageBox::detailedError(nullptr,
-                                               i18n("Unable to modify scheduled transaction '%1'", inputSchedule.name()),
-                                               QString::fromLatin1(e.what()));
-                }
-            }
-            break;
-        }
-        case eMyMoney::Schedule::Type::LoanPayment: {
-            QScopedPointer<KEditLoanWizard> dlg(new KEditLoanWizard(schedule.account(2)));
-            if (dlg->exec() == QDialog::Accepted) {
-                MyMoneyFileTransaction ft;
-                try {
-                    MyMoneyFile::instance()->modifySchedule(dlg->schedule());
-                    MyMoneyFile::instance()->modifyAccount(dlg->account());
                     ft.commit();
                 } catch (const MyMoneyException& e) {
                     KMessageBox::detailedError(nullptr,

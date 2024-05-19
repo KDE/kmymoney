@@ -49,7 +49,7 @@ public:
     const MyMoneySchedule& schedule();
 
     static void newSchedule(const MyMoneyTransaction& _t, eMyMoney::Schedule::Occurrence occurrence);
-    static void editSchedule(const MyMoneySchedule& inputSchedule);
+    static void editSchedule(const MyMoneySchedule& inputSchedule, bool alwaysUseEditor = false);
 
     // Implement TabOrderEditorInterface methods
     void setupUi(QWidget* parent) override;

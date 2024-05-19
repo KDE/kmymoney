@@ -162,6 +162,72 @@ struct SplitModel::Private
         return {};
     }
 
+    QString displayAutoCalc(const MyMoneySplit& split, int column) const
+    {
+        const auto account = MyMoneyFile::instance()->accountsModel()->itemById(split.accountId());
+        // isDepsit is an assumption in which column the value is likely to appear
+        // based on the assigned account/category type
+        const auto isDeposit = (account.accountGroup() == eMyMoney::Account::Type::Asset) || (account.accountGroup() == eMyMoney::Account::Type::Income);
+
+        switch (column) {
+        case Column::Payment:
+            if (!isDeposit) {
+                return i18nc("@info:placeholder amount widget", "calculated");
+            }
+            break;
+        case Column::Deposit:
+            if (isDeposit) {
+                return i18nc("@info:placeholder amount widget", "calculated");
+            }
+            break;
+        default:
+            break;
+        }
+        return {};
+    }
+
+    QString displayAmount(const MyMoneySplit& split, int column) const
+    {
+        const auto value = split.shares();
+        switch (column) {
+        case Column::Payment:
+            if (!split.id().isEmpty()) {
+                if (value.isAutoCalc()) {
+                    return displayAutoCalc(split, column);
+                }
+                if (value.isPositive()) {
+                    return value.formatMoney(splitCurrencySymbol(split), currencyPrecision(split));
+                }
+            }
+            break;
+
+        case Column::Deposit:
+            if (!split.id().isEmpty()) {
+                if (value.isAutoCalc()) {
+                    return displayAutoCalc(split, column);
+                }
+                if (value.isNegative() || value.isZero()) {
+                    return (-value).formatMoney(splitCurrencySymbol(split), currencyPrecision(split));
+                }
+            }
+            break;
+
+        default:
+            break;
+        }
+        return {};
+    }
+
+    MyMoneyMoney adjustAutoCalc(const MyMoneyMoney& value)
+    {
+        // in case the magic autoCalc value comes in with the wrong sign
+        // we make sure to use the constant (which has a defined sign)
+        if (value.isAutoCalc()) {
+            return MyMoneyMoney::autoCalc;
+        }
+        return value;
+    }
+
     SplitModel* q;
     QHash<Column, QString> headerData;
     QString transactionCommodity;
@@ -272,22 +338,8 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
         }
 
         case Column::Payment:
-            if (!split.id().isEmpty()) {
-                const auto value = split.shares();
-                if (value.isPositive()) {
-                    return value.formatMoney(d->splitCurrencySymbol(split), d->currencyPrecision(split));
-                }
-            }
-            return {};
-
         case Column::Deposit:
-            if (!split.id().isEmpty()) {
-                const auto value = split.shares();
-                if (value.isNegative() || value.isZero()) {
-                    return (-value).formatMoney(d->splitCurrencySymbol(split), d->currencyPrecision(split));
-                }
-            }
-            return {};
+            return d->displayAmount(split, idx.column());
 
         case Tags:
             return d->tags(split.tagIdList());
@@ -359,6 +411,9 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::SplitActionRole:
         return split.action();
 
+    case eMyMoney::Model::SplitIsAutoCalcRole:
+        return split.shares().isAutoCalc();
+
     default:
         break;
     }
@@ -412,12 +467,12 @@ bool SplitModel::setData(const QModelIndex& idx, const QVariant& value, int role
         return true;
 
     case eMyMoney::Model::SplitSharesRole:
-        split.setShares(value.value<MyMoneyMoney>());
+        split.setShares(d->adjustAutoCalc(value.value<MyMoneyMoney>()));
         Q_EMIT dataChanged(startIdx, endIdx);
         return true;
 
     case eMyMoney::Model::SplitValueRole:
-        split.setValue(value.value<MyMoneyMoney>());
+        split.setValue(d->adjustAutoCalc(value.value<MyMoneyMoney>()));
         Q_EMIT dataChanged(startIdx, endIdx);
         return true;
 
