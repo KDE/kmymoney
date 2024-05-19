@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-18 01:46+0000\n"
+"POT-Creation-Date: 2024-05-19 01:47+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -6269,48 +6269,48 @@ msgstr[0] "Құжаттама мен басқа тілдерге аударма�
 msgid "Statement import statistics"
 msgstr "Үзінді көшірме статистикасы"
 
-#: kmymoney/main.cpp:89
+#: kmymoney/main.cpp:124
 #, kde-format
 msgid "KMyMoney"
 msgstr "KMyMoney"
 
-#: kmymoney/main.cpp:109
+#: kmymoney/main.cpp:144
 #, kde-format
 msgid "language to be used"
 msgstr "Қолданатын тілі"
 
-#: kmymoney/main.cpp:113
+#: kmymoney/main.cpp:148
 #, kde-format
 msgid "do not open last used file"
 msgstr "соңғы қолданған файлды ашпау"
 
-#: kmymoney/main.cpp:117
+#: kmymoney/main.cpp:152
 #, kde-format
 msgid "enable performance timers"
 msgstr "жылдамдығын өлшеу таймерлері болсын"
 
-#: kmymoney/main.cpp:121
+#: kmymoney/main.cpp:156
 #, kde-format
 msgid "do not globally catch uncaught exceptions"
 msgstr "қармауға түспеген ерекшеліктерді глобалды деңгейде қармауы болмасын"
 
-#: kmymoney/main.cpp:127
+#: kmymoney/main.cpp:162
 #, kde-format
 msgid "turn on program traces"
 msgstr "бағдарлама орындау хатамасы жазылсын"
 
-#: kmymoney/main.cpp:131
+#: kmymoney/main.cpp:166
 #, fuzzy, kde-format
 #| msgid "dump the names of all defined KAction objects to stdout and quit"
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr "барлық анықталған KAction нысандардың атауларын дамп етіп шығу"
 
-#: kmymoney/main.cpp:137
+#: kmymoney/main.cpp:172
 #, kde-format
 msgid "file to open"
 msgstr "ашатын файлы"
 
-#: kmymoney/main.cpp:272
+#: kmymoney/main.cpp:307
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr "Беймәлім ерекше жағдай - құрастырушысыларына егжей-тегжейін хабарлаңыз"
@@ -15800,12 +15800,12 @@ msgstr "Орташасы"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
 #: kmymoney/plugins/views/reports/core/listtable.cpp:298
 #: kmymoney/plugins/views/reports/core/listtable.cpp:299
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1408
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1548
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1598
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1675
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1855
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1926
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1413
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1553
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1603
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1680
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1860
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1931
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -16068,8 +16068,8 @@ msgstr "Жабу балансы"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:302
 #: kmymoney/plugins/views/reports/core/listtable.cpp:303
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1622
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1963
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1627
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1968
 #, kde-format
 msgid "Grand Total"
 msgstr "Ақырғы қорытынды"
@@ -16390,70 +16390,70 @@ msgid "Yes"
 msgstr "Иә"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeBox)
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:335
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:344
 #: kmymoney/widgets/ktransactionfilter.ui:624
 #, kde-format
 msgid "Transfers"
 msgstr "Аударылым"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:531
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:540
 #, fuzzy, kde-format
 #| msgid "Opening Date"
 msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "Ашылған күні"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1394
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1662
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1399
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1667
 #, fuzzy, kde-format
 #| msgid "Account"
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Есепшот"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2162
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2167
 #, fuzzy, kde-format
 #| msgid "Actual"
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "Шын"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2167
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2172
 #, fuzzy, kde-format
 #| msgid "Budget"
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Бюджет"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2172
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2177
 #, fuzzy, kde-format
 #| msgid "Difference"
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Айырмашылық"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2177
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2182
 #, fuzzy, kde-format
 #| msgid "Forecast"
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Болжам"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2182
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2187
 #, fuzzy, kde-format
 #| msgid "Moving Average"
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "Жылжымалы орташасы"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2187
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2192
 #, fuzzy, kde-format
 #| msgid "Moving Average Price"
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "Жылжымалы орта бағасы"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2192
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2197
 #, fuzzy, kde-format
 #| msgid "Price"
 msgctxt "@title:column report header"
