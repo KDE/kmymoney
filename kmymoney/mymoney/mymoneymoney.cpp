@@ -382,7 +382,7 @@ bool MyMoneyMoney::isZero() const
 
 bool MyMoneyMoney::isAutoCalc() const
 {
-    return (*this == autoCalc);
+    return (*this == autoCalc) || (*this == -autoCalc);
 }
 
 MyMoneyMoney MyMoneyMoney::convert(const signed64 _denom, const AlkValue::RoundingMethod how) const

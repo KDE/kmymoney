@@ -45,6 +45,7 @@ private Q_SLOTS:
     void testZeroDenominator();
     void testMaxPrecision();
     void testZeroIsMinusZero();
+    void testAutoCalcDetection();
 };
 
 #endif

@@ -752,3 +752,10 @@ void MyMoneyMoneyTest::testZeroIsMinusZero()
     m1 = -m1;
     QCOMPARE(m1.isZero(), true);
 }
+
+void MyMoneyMoneyTest::testAutoCalcDetection()
+{
+    MyMoneyMoney calc = MyMoneyMoney::autoCalc;
+    QVERIFY(calc.isAutoCalc());
+    QVERIFY((-calc).isAutoCalc());
+}
