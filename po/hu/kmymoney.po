@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-19 01:47+0000\n"
+"POT-Creation-Date: 2024-05-20 01:45+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -590,10 +590,10 @@ msgid "Backup location:"
 msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3765
-#: kmymoney/kmymoney.cpp:3836 kmymoney/kmymoney.cpp:3852
-#: kmymoney/kmymoney.cpp:3858 kmymoney/kmymoney.cpp:3872
-#: kmymoney/kmymoney.cpp:3874
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3773
+#: kmymoney/kmymoney.cpp:3844 kmymoney/kmymoney.cpp:3860
+#: kmymoney/kmymoney.cpp:3866 kmymoney/kmymoney.cpp:3880
+#: kmymoney/kmymoney.cpp:3882
 #, kde-format
 msgid "Backup"
 msgstr "Biztonsági mentés"
@@ -2125,7 +2125,7 @@ msgstr "Összes minden részvényhez"
 msgid "VAT account"
 msgstr "Áfás számla"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:538 kmymoney/kmymoney.cpp:434
+#: kmymoney/dialogs/knewaccountdlg.cpp:538 kmymoney/kmymoney.cpp:438
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:188
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:370
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:73
@@ -2133,7 +2133,7 @@ msgstr "Áfás számla"
 msgid "Asset"
 msgstr "Vagyontárgy"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:540 kmymoney/kmymoney.cpp:435
+#: kmymoney/dialogs/knewaccountdlg.cpp:540 kmymoney/kmymoney.cpp:439
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:189
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:378
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:75
@@ -2141,7 +2141,7 @@ msgstr "Vagyontárgy"
 msgid "Liability"
 msgstr "Kötelezettség"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:542 kmymoney/kmymoney.cpp:436
+#: kmymoney/dialogs/knewaccountdlg.cpp:542 kmymoney/kmymoney.cpp:440
 #: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1841
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
@@ -2150,7 +2150,7 @@ msgstr "Kötelezettség"
 msgid "Income"
 msgstr "Bevétel"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:544 kmymoney/kmymoney.cpp:437
+#: kmymoney/dialogs/knewaccountdlg.cpp:544 kmymoney/kmymoney.cpp:441
 #: kmymoney/models/ledgerfilterbase.cpp:97
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:79
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:191
@@ -4600,7 +4600,7 @@ msgctxt "Roles in project"
 msgid "CSV import/export"
 msgstr "CSV importáló"
 
-#: kmymoney/kmymoney.cpp:438 kmymoney/models/equitiesmodel.cpp:424
+#: kmymoney/kmymoney.cpp:442 kmymoney/models/equitiesmodel.cpp:424
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:192
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:408
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:78
@@ -4608,19 +4608,19 @@ msgstr "CSV importáló"
 msgid "Equity"
 msgstr "Saját tőke"
 
-#: kmymoney/kmymoney.cpp:519
+#: kmymoney/kmymoney.cpp:523
 #, kde-format
 msgid "The file has been changed, save it?"
 msgstr "A fájl megváltozott, menti?"
 
-#: kmymoney/kmymoney.cpp:520
+#: kmymoney/kmymoney.cpp:524
 #, fuzzy, kde-format
 #| msgid "Unable to parse file"
 msgctxt "@title:window"
 msgid "Save file"
 msgstr "Nem lehet elemezni a fájt"
 
-#: kmymoney/kmymoney.cpp:893
+#: kmymoney/kmymoney.cpp:897
 #, kde-format
 msgid ""
 "<p>The account \"%1\" was previously created as loan account but some "
@@ -4629,287 +4629,287 @@ msgid ""
 "and earlier than version 0.9 to correct the problem.</p>"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:895
+#: kmymoney/kmymoney.cpp:899
 #, kde-format
 msgid "Account problem"
 msgstr "Számla probléma"
 
-#: kmymoney/kmymoney.cpp:914
+#: kmymoney/kmymoney.cpp:918
 #, kde-format
 msgid "Fix transactions"
 msgstr "Tranzakciók javítása"
 
-#: kmymoney/kmymoney.cpp:1181
+#: kmymoney/kmymoney.cpp:1185
 #, kde-format
 msgid "Untitled"
 msgstr "Névtelen"
 
-#: kmymoney/kmymoney.cpp:1355
+#: kmymoney/kmymoney.cpp:1359
 #, kde-format
 msgid "Unable to match the selected transactions"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1382
+#: kmymoney/kmymoney.cpp:1386
 #, kde-format
 msgid "Unable to unmatch the selected transactions"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1481
+#: kmymoney/kmymoney.cpp:1485
 #, fuzzy, kde-format
 #| msgid "New account..."
 msgctxt "@action New file/database"
 msgid "New book..."
 msgstr "Új számla…"
 
-#: kmymoney/kmymoney.cpp:1628
+#: kmymoney/kmymoney.cpp:1632
 #, kde-format
 msgid ""
 "This is the consistency check log, use the context menu to copy or save it."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1641
+#: kmymoney/kmymoney.cpp:1645
 #, fuzzy, kde-format
 #| msgid "Copy this report to the clipboard"
 msgid "Copy to clipboard"
 msgstr "Másolja ezt a jelentést a vágólapra"
 
-#: kmymoney/kmymoney.cpp:1642
+#: kmymoney/kmymoney.cpp:1646
 #, fuzzy, kde-format
 #| msgid "Unable to parse file"
 msgid "Save to file"
 msgstr "Nem lehet elemezni a fájt"
 
-#: kmymoney/kmymoney.cpp:1765
+#: kmymoney/kmymoney.cpp:1772
 #, kde-format
 msgid "Backup..."
 msgstr "Biztonsági mentés..."
 
-#: kmymoney/kmymoney.cpp:1766
+#: kmymoney/kmymoney.cpp:1773
 #, kde-format
 msgid "Statement file..."
 msgstr "Számlakivonat fájl..."
 
-#: kmymoney/kmymoney.cpp:1767 kmymoney/kmymoney.cpp:1768
+#: kmymoney/kmymoney.cpp:1774 kmymoney/kmymoney.cpp:1775
 #, kde-format
 msgid "Account Template..."
 msgstr "Számla sablon..."
 
-#: kmymoney/kmymoney.cpp:1769
+#: kmymoney/kmymoney.cpp:1776
 #, kde-format
 msgid "Personal Data..."
 msgstr "Személyes adatok…"
 
-#: kmymoney/kmymoney.cpp:1771
+#: kmymoney/kmymoney.cpp:1778
 #, kde-format
 msgid "Dump Memory"
 msgstr "Memória kiíratás"
 
-#: kmymoney/kmymoney.cpp:1773
+#: kmymoney/kmymoney.cpp:1780
 #, kde-format
 msgid "File-Information..."
 msgstr "Fájlinformációk…"
 
-#: kmymoney/kmymoney.cpp:1777
+#: kmymoney/kmymoney.cpp:1784
 #, kde-format
 msgid "Find transaction..."
 msgstr "Tranzakció keresése..."
 
-#: kmymoney/kmymoney.cpp:1781
+#: kmymoney/kmymoney.cpp:1788
 #, kde-format
 msgid "Show Transaction Detail"
 msgstr "Tranzakció részleteinek megjelenítése"
 
 #. i18n: ectx: label, entry (HideReconciledTransactions), group (List Options)
-#: kmymoney/kmymoney.cpp:1782 kmymoney/settings/kmymoney.kcfg:236
+#: kmymoney/kmymoney.cpp:1789 kmymoney/settings/kmymoney.kcfg:236
 #, kde-format
 msgid "Hide reconciled transactions"
 msgstr "Egyeztetett tranzakciók elrejtése"
 
 #. i18n: ectx: label, entry (HideUnusedCategory), group (List Options)
-#: kmymoney/kmymoney.cpp:1783 kmymoney/settings/kmymoney.kcfg:212
+#: kmymoney/kmymoney.cpp:1790 kmymoney/settings/kmymoney.kcfg:212
 #, kde-format
 msgid "Hide unused categories"
 msgstr "Nem használt kategóriák elrejtése"
 
 #. i18n: ectx: label, entry (ShowAllAccounts), group (List Options)
-#: kmymoney/kmymoney.cpp:1784 kmymoney/settings/kmymoney.kcfg:216
+#: kmymoney/kmymoney.cpp:1791 kmymoney/settings/kmymoney.kcfg:216
 #, kde-format
 msgid "Show all accounts"
 msgstr "Összes számla megjelenítése"
 
-#: kmymoney/kmymoney.cpp:1788
+#: kmymoney/kmymoney.cpp:1795
 #, kde-format
 msgid "New institution..."
 msgstr "Új intézet…"
 
-#: kmymoney/kmymoney.cpp:1789
+#: kmymoney/kmymoney.cpp:1796
 #, kde-format
 msgid "Edit institution..."
 msgstr "Intézet szerkesztése…"
 
-#: kmymoney/kmymoney.cpp:1790
+#: kmymoney/kmymoney.cpp:1797
 #, kde-format
 msgid "Delete institution..."
 msgstr "Intézet törlése…t"
 
-#: kmymoney/kmymoney.cpp:1794
+#: kmymoney/kmymoney.cpp:1801
 #, kde-format
 msgid "New account..."
 msgstr "Új számla…"
 
-#: kmymoney/kmymoney.cpp:1795
+#: kmymoney/kmymoney.cpp:1802
 #, kde-format
 msgid "Open ledger"
 msgstr "Főkönyv megnyitása"
 
-#: kmymoney/kmymoney.cpp:1796
+#: kmymoney/kmymoney.cpp:1803
 #, kde-format
 msgid "Reconcile..."
 msgstr "Egyeztetés..."
 
-#: kmymoney/kmymoney.cpp:1797
+#: kmymoney/kmymoney.cpp:1804
 #, kde-format
 msgctxt "Finish reconciliation"
 msgid "Finish"
 msgstr "Befejezés"
 
-#: kmymoney/kmymoney.cpp:1798
+#: kmymoney/kmymoney.cpp:1805
 #, fuzzy, kde-format
 #| msgid "Postal Code:"
 msgctxt "Postpone reconciliation"
 msgid "Postpone"
 msgstr "Irányítószám:"
 
-#: kmymoney/kmymoney.cpp:1799
+#: kmymoney/kmymoney.cpp:1806
 #, fuzzy, kde-format
 #| msgid "Cancel"
 msgctxt "Cancel reconciliation"
 msgid "Cancel"
 msgstr "Mégsem"
 
-#: kmymoney/kmymoney.cpp:1800
+#: kmymoney/kmymoney.cpp:1807
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgid "Report reconciliation"
 msgstr "Utolsó egyeztetés"
 
-#: kmymoney/kmymoney.cpp:1801
+#: kmymoney/kmymoney.cpp:1808
 #, kde-format
 msgid "Edit account..."
 msgstr "Számla szerkesztése…"
 
-#: kmymoney/kmymoney.cpp:1802
+#: kmymoney/kmymoney.cpp:1809
 #, kde-format
 msgid "Delete account..."
 msgstr "Számla törlése…"
 
-#: kmymoney/kmymoney.cpp:1803
+#: kmymoney/kmymoney.cpp:1810
 #, kde-format
 msgid "Close account"
 msgstr "Számla lezárása"
 
-#: kmymoney/kmymoney.cpp:1804
+#: kmymoney/kmymoney.cpp:1811
 #, kde-format
 msgid "Reopen account"
 msgstr "Számla újranyitása"
 
-#: kmymoney/kmymoney.cpp:1805
+#: kmymoney/kmymoney.cpp:1812
 #, kde-format
 msgid "Transaction report"
 msgstr "Tranzakció jelentés"
 
-#: kmymoney/kmymoney.cpp:1806
+#: kmymoney/kmymoney.cpp:1813
 #, kde-format
 msgid "Show balance chart..."
 msgstr "Egyenleg diagram megjelenítése..."
 
-#: kmymoney/kmymoney.cpp:1807
+#: kmymoney/kmymoney.cpp:1814
 #, fuzzy, kde-format
 #| msgid "Unmap account..."
 msgid "Map account..."
 msgstr "Számla lecsatlakoztatása..."
 
-#: kmymoney/kmymoney.cpp:1808
+#: kmymoney/kmymoney.cpp:1815
 #, kde-format
 msgid "Unmap account..."
 msgstr "Számla lecsatlakoztatása..."
 
-#: kmymoney/kmymoney.cpp:1809
+#: kmymoney/kmymoney.cpp:1816
 #, kde-format
 msgid "Update account..."
 msgstr "Számla frissítése…a"
 
-#: kmymoney/kmymoney.cpp:1810
+#: kmymoney/kmymoney.cpp:1817
 #, kde-format
 msgid "Update all accounts..."
 msgstr "Összes számla frissítése…"
 
-#: kmymoney/kmymoney.cpp:1814
+#: kmymoney/kmymoney.cpp:1821
 #, kde-format
 msgid "New category..."
 msgstr "Új kategória…"
 
-#: kmymoney/kmymoney.cpp:1815
+#: kmymoney/kmymoney.cpp:1822
 #, kde-format
 msgid "Edit category..."
 msgstr "Kategória szerkesztése…"
 
-#: kmymoney/kmymoney.cpp:1816
+#: kmymoney/kmymoney.cpp:1823
 #, kde-format
 msgid "Delete category..."
 msgstr "Kategória törlése…"
 
-#: kmymoney/kmymoney.cpp:1820
+#: kmymoney/kmymoney.cpp:1827
 #, kde-format
 msgid "Currencies..."
 msgstr "Valuták…"
 
-#: kmymoney/kmymoney.cpp:1821
+#: kmymoney/kmymoney.cpp:1828
 #, kde-format
 msgid "Prices..."
 msgstr "Á&rak…"
 
-#: kmymoney/kmymoney.cpp:1822
+#: kmymoney/kmymoney.cpp:1829
 #, kde-format
 msgid "Update Stock and Currency Prices..."
 msgstr "Részvény és valuta árfolyamok frissítése…"
 
-#: kmymoney/kmymoney.cpp:1823
+#: kmymoney/kmymoney.cpp:1830
 #, kde-format
 msgid "Consistency Check"
 msgstr "Összefüggés ellenőrzés"
 
-#: kmymoney/kmymoney.cpp:1824
+#: kmymoney/kmymoney.cpp:1831
 #, kde-format
 msgid "Performance-Test"
 msgstr "Teljesítmény-teszt"
 
-#: kmymoney/kmymoney.cpp:1825
+#: kmymoney/kmymoney.cpp:1832
 #, kde-format
 msgid "Calculator..."
 msgstr "Számológép..."
 
-#: kmymoney/kmymoney.cpp:1829
+#: kmymoney/kmymoney.cpp:1836
 #, kde-format
 msgid "Enable all messages"
 msgstr "Összes üzenet engedélyezése"
 
-#: kmymoney/kmymoney.cpp:1833 kmymoney/views/kwelcomepage.cpp:82
+#: kmymoney/kmymoney.cpp:1840 kmymoney/views/kwelcomepage.cpp:82
 #, kde-format
 msgid "Get help from our community"
 msgstr "Segítség kérése a közösségétől"
 
-#: kmymoney/kmymoney.cpp:1834 kmymoney/views/kwelcomepage.cpp:84
+#: kmymoney/kmymoney.cpp:1841 kmymoney/views/kwelcomepage.cpp:84
 #, kde-format
 msgid "See what's new in this version"
 msgstr "Tekintsd meg az újdonságait ennek a verziónak"
 
-#: kmymoney/kmymoney.cpp:1835 kmymoney/views/kwelcomepage.cpp:80
+#: kmymoney/kmymoney.cpp:1842 kmymoney/views/kwelcomepage.cpp:80
 #, kde-format
 msgid "Visit our website"
 msgstr "Weboldal meglátogatása"
 
-#: kmymoney/kmymoney.cpp:1839
+#: kmymoney/kmymoney.cpp:1846
 #, fuzzy, kde-format
 #| msgid "%1 transaction\n"
 #| msgid_plural "%1 transactions\n"
@@ -4917,323 +4917,323 @@ msgctxt "New transaction button"
 msgid "New transaction"
 msgstr "%1 tranzakció\n"
 
-#: kmymoney/kmymoney.cpp:1840
+#: kmymoney/kmymoney.cpp:1847
 #, kde-format
 msgctxt "Edit transaction button"
 msgid "Edit"
 msgstr "Szerkesztés"
 
-#: kmymoney/kmymoney.cpp:1841
+#: kmymoney/kmymoney.cpp:1848
 #, kde-format
 msgctxt "Enter transaction"
 msgid "Enter"
 msgstr "Beír"
 
-#: kmymoney/kmymoney.cpp:1842
+#: kmymoney/kmymoney.cpp:1849
 #, kde-format
 msgctxt "Edit split button"
 msgid "Edit splits"
 msgstr "Rekordok szerkesztése"
 
-#: kmymoney/kmymoney.cpp:1843
+#: kmymoney/kmymoney.cpp:1850
 #, kde-format
 msgctxt "Cancel transaction edit"
 msgid "Cancel"
 msgstr "Mégsem"
 
-#: kmymoney/kmymoney.cpp:1844
+#: kmymoney/kmymoney.cpp:1851
 #, kde-format
 msgctxt "Delete transaction"
 msgid "Delete"
 msgstr "Törlés"
 
-#: kmymoney/kmymoney.cpp:1845
+#: kmymoney/kmymoney.cpp:1852
 #, kde-format
 msgctxt "Duplicate transaction"
 msgid "Duplicate"
 msgstr "Duplikálás"
 
-#: kmymoney/kmymoney.cpp:1846
+#: kmymoney/kmymoney.cpp:1853
 #, fuzzy, kde-format
 #| msgid "Add shares"
 msgctxt "Add reversing transaction"
 msgid "Add reversing"
 msgstr "Részvények hozzáadása"
 
-#: kmymoney/kmymoney.cpp:1847
+#: kmymoney/kmymoney.cpp:1854
 #, kde-format
 msgctxt "Accept 'imported' and 'matched' transaction"
 msgid "Accept"
 msgstr "Elfogad"
 
-#: kmymoney/kmymoney.cpp:1848
+#: kmymoney/kmymoney.cpp:1855
 #, kde-format
 msgctxt "Toggle reconciliation flag"
 msgid "Toggle"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1849
+#: kmymoney/kmymoney.cpp:1856
 #, kde-format
 msgctxt "Mark transaction cleared"
 msgid "Cleared"
 msgstr "Tisztázott"
 
-#: kmymoney/kmymoney.cpp:1850
+#: kmymoney/kmymoney.cpp:1857
 #, kde-format
 msgctxt "Mark transaction reconciled"
 msgid "Reconciled"
 msgstr "Egyeztetett"
 
-#: kmymoney/kmymoney.cpp:1851
+#: kmymoney/kmymoney.cpp:1858
 #, kde-format
 msgctxt "Mark transaction not reconciled"
 msgid "Not reconciled"
 msgstr "Nem egyeztetett"
 
-#: kmymoney/kmymoney.cpp:1852
+#: kmymoney/kmymoney.cpp:1859
 #, fuzzy, kde-format
 #| msgid "Move transaction to..."
 msgctxt "Move transaction"
 msgid "Move transaction"
 msgstr "Tranzakció mozgatása ide…"
 
-#: kmymoney/kmymoney.cpp:1853
+#: kmymoney/kmymoney.cpp:1860
 #, fuzzy, kde-format
 #| msgid "Show transaction form"
 msgctxt "Show transaction"
 msgid "Show transaction"
 msgstr "Tranzakció űrlap megjelenítése"
 
-#: kmymoney/kmymoney.cpp:1854
+#: kmymoney/kmymoney.cpp:1861
 #, fuzzy, kde-format
 #| msgid "Show Transaction Detail"
 msgctxt "Display transaction details"
 msgid "Show transaction details"
 msgstr "Tranzakció részleteinek megjelenítése"
 
-#: kmymoney/kmymoney.cpp:1856
+#: kmymoney/kmymoney.cpp:1863
 #, kde-format
 msgctxt "Select all transactions"
 msgid "Select all"
 msgstr "Összes kijelölése"
 
-#: kmymoney/kmymoney.cpp:1857
+#: kmymoney/kmymoney.cpp:1864
 #, kde-format
 msgid "Go to account"
 msgstr "Ugrás a számlához"
 
-#: kmymoney/kmymoney.cpp:1858
+#: kmymoney/kmymoney.cpp:1865
 #, kde-format
 msgid "Go to payee"
 msgstr "Ugrás a kedvezményezetthez"
 
-#: kmymoney/kmymoney.cpp:1859
+#: kmymoney/kmymoney.cpp:1866
 #, kde-format
 msgid "Create scheduled transaction..."
 msgstr "Ütemezett tranzakció létrehozása..."
 
-#: kmymoney/kmymoney.cpp:1860
+#: kmymoney/kmymoney.cpp:1867
 #, kde-format
 msgid "Assign next number"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1861
+#: kmymoney/kmymoney.cpp:1868
 #, kde-format
 msgctxt "Combine transactions"
 msgid "Combine"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1862
+#: kmymoney/kmymoney.cpp:1869
 #, fuzzy, kde-format
 #| msgid "As of today"
 msgid "Move to today"
 msgstr "A mai napig"
 
-#: kmymoney/kmymoney.cpp:1863
+#: kmymoney/kmymoney.cpp:1870
 #, fuzzy, kde-format
 #| msgid "Correct splits"
 msgid "Copy splits"
 msgstr "Osztott tranzakció javítása"
 
-#: kmymoney/kmymoney.cpp:1864
+#: kmymoney/kmymoney.cpp:1871
 #, kde-format
 msgid "Show filter widget"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1866
+#: kmymoney/kmymoney.cpp:1873
 #, kde-format
 msgid "New investment..."
 msgstr "Új befektetés…"
 
-#: kmymoney/kmymoney.cpp:1867
+#: kmymoney/kmymoney.cpp:1874
 #, kde-format
 msgid "Edit investment..."
 msgstr "Befektetés szerkesztése…"
 
-#: kmymoney/kmymoney.cpp:1868
+#: kmymoney/kmymoney.cpp:1875
 #, kde-format
 msgid "Delete investment..."
 msgstr "Befektetés törlése…"
 
-#: kmymoney/kmymoney.cpp:1869
+#: kmymoney/kmymoney.cpp:1876
 #, kde-format
 msgid "Online price update..."
 msgstr "Online árfolyam frissítés..."
 
-#: kmymoney/kmymoney.cpp:1870
+#: kmymoney/kmymoney.cpp:1877
 #, kde-format
 msgid "Manual price update..."
 msgstr "Kézi árfolyam frissítés..."
 
-#: kmymoney/kmymoney.cpp:1871
+#: kmymoney/kmymoney.cpp:1878
 #, fuzzy, kde-format
 #| msgid "Hide security"
 msgid "Edit security..."
 msgstr "Biztonság elrejtése"
 
-#: kmymoney/kmymoney.cpp:1872
+#: kmymoney/kmymoney.cpp:1879
 #, fuzzy, kde-format
 #| msgid "Delete security"
 msgid "Delete security..."
 msgstr "Kötvény törlése"
 
-#: kmymoney/kmymoney.cpp:1875
+#: kmymoney/kmymoney.cpp:1882
 #, fuzzy, kde-format
 #| msgid "&New Schedule..."
 msgid "New schedule..."
 msgstr "&Új ütemezés..."
 
-#: kmymoney/kmymoney.cpp:1876
+#: kmymoney/kmymoney.cpp:1883 kmymoney/kmymoney.cpp:1884
 #, kde-format
 msgid "Edit scheduled transaction"
 msgstr "Ütemezett tranzakció szerkesztése"
 
-#: kmymoney/kmymoney.cpp:1877
+#: kmymoney/kmymoney.cpp:1885
 #, kde-format
 msgid "Delete scheduled transaction"
 msgstr "Ütemezett tranzakció törlése"
 
-#: kmymoney/kmymoney.cpp:1878
+#: kmymoney/kmymoney.cpp:1886
 #, kde-format
 msgid "Duplicate scheduled transaction"
 msgstr "Ütemezett tranzakció duplikálása"
 
-#: kmymoney/kmymoney.cpp:1879
+#: kmymoney/kmymoney.cpp:1887
 #, kde-format
 msgid "Enter next transaction..."
 msgstr "Következő tranzakció bevitele..."
 
-#: kmymoney/kmymoney.cpp:1880
+#: kmymoney/kmymoney.cpp:1888
 #, kde-format
 msgid "Skip next transaction..."
 msgstr "Következő tranzakció kihagyása..."
 
-#: kmymoney/kmymoney.cpp:1882
+#: kmymoney/kmymoney.cpp:1890
 #, fuzzy, kde-format
 #| msgid "New payee"
 msgid "New payee..."
 msgstr "Kedvezményezett létrehozása"
 
-#: kmymoney/kmymoney.cpp:1883
+#: kmymoney/kmymoney.cpp:1891
 #, kde-format
 msgid "Rename payee"
 msgstr "Kedvezményezett átnevezése"
 
-#: kmymoney/kmymoney.cpp:1884
+#: kmymoney/kmymoney.cpp:1892
 #, kde-format
 msgid "Delete payee"
 msgstr "Kedvezményezett törlése"
 
-#: kmymoney/kmymoney.cpp:1885
+#: kmymoney/kmymoney.cpp:1893
 #, kde-format
 msgid "Merge payees"
 msgstr "Kedvezményezettek egyesítése"
 
-#: kmymoney/kmymoney.cpp:1887
+#: kmymoney/kmymoney.cpp:1895
 #, fuzzy, kde-format
 #| msgid "New tag"
 msgid "New tag..."
 msgstr "Új címke"
 
-#: kmymoney/kmymoney.cpp:1888
+#: kmymoney/kmymoney.cpp:1896
 #, kde-format
 msgid "Rename tag"
 msgstr "Címke átnevezése"
 
-#: kmymoney/kmymoney.cpp:1889
+#: kmymoney/kmymoney.cpp:1897
 #, kde-format
 msgid "Delete tag"
 msgstr "Címke törlése"
 
-#: kmymoney/kmymoney.cpp:1891
+#: kmymoney/kmymoney.cpp:1899
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Open report"
 msgstr "&Új jelentés"
 
-#: kmymoney/kmymoney.cpp:1892
+#: kmymoney/kmymoney.cpp:1900
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "New report"
 msgstr "&Új jelentés"
 
-#: kmymoney/kmymoney.cpp:1893
+#: kmymoney/kmymoney.cpp:1901
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Copy report"
 msgstr "&Új jelentés"
 
-#: kmymoney/kmymoney.cpp:1894
+#: kmymoney/kmymoney.cpp:1902
 #, fuzzy, kde-format
 #| msgid "Configure this report"
 msgid "Configure report"
 msgstr "A jelentés szerkesztése"
 
-#: kmymoney/kmymoney.cpp:1895
+#: kmymoney/kmymoney.cpp:1903
 #, fuzzy, kde-format
 #| msgid "Favorite reports"
 msgid "Export report"
 msgstr "Kedvenc jelentések"
 
-#: kmymoney/kmymoney.cpp:1896
+#: kmymoney/kmymoney.cpp:1904
 #, fuzzy, kde-format
 #| msgid "Delete Report?"
 msgid "Delete report"
 msgstr "Törli a jelentést?"
 
-#: kmymoney/kmymoney.cpp:1897
+#: kmymoney/kmymoney.cpp:1905
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Close report"
 msgstr "&Új jelentés"
 
-#: kmymoney/kmymoney.cpp:1898
+#: kmymoney/kmymoney.cpp:1906
 #, kde-format
 msgid "Toggle chart"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1899
+#: kmymoney/kmymoney.cpp:1907
 #, fuzzy, kde-format
 #| msgid "Include transfers"
 msgid "Edit tab order"
 msgstr "Átutalásokat hozzávéve"
 
-#: kmymoney/kmymoney.cpp:1902
+#: kmymoney/kmymoney.cpp:1910
 #, kde-format
 msgid "Test new feature"
 msgstr "Új funkciók tesztelése"
 
-#: kmymoney/kmymoney.cpp:1903
+#: kmymoney/kmymoney.cpp:1911
 #, kde-format
 msgid "Debug Traces"
 msgstr "Nyomok követése"
 
-#: kmymoney/kmymoney.cpp:1905
+#: kmymoney/kmymoney.cpp:1913
 #, kde-format
 msgid "Debug Timers"
 msgstr "Időzítők követése"
 
-#: kmymoney/kmymoney.cpp:1924
+#: kmymoney/kmymoney.cpp:1932
 #, fuzzy, kde-format
 #| msgctxt "Button text for match transaction"
 #| msgid "Match"
@@ -5241,7 +5241,7 @@ msgctxt "Match transactions"
 msgid "Match"
 msgstr "Egyezés"
 
-#: kmymoney/kmymoney.cpp:1925
+#: kmymoney/kmymoney.cpp:1933
 #, fuzzy, kde-format
 #| msgctxt "Button text for match transaction"
 #| msgid "Match"
@@ -5249,45 +5249,45 @@ msgctxt "Unmatch transactions"
 msgid "Unmatch"
 msgstr "Egyezés"
 
-#: kmymoney/kmymoney.cpp:2050
+#: kmymoney/kmymoney.cpp:2058
 #, fuzzy, kde-format
 #| msgid "Duplicate the current selected transactions"
 msgctxt "@info:tooltip"
 msgid "Start reconciling the currently selected account"
 msgstr "Jelenleg kiválasztott tranzakció duplikálása"
 
-#: kmymoney/kmymoney.cpp:2051
+#: kmymoney/kmymoney.cpp:2059
 #, fuzzy, kde-format
 #| msgid "Postpone reconciliation"
 msgctxt "@info:tooltip"
 msgid "Postpone the current reconciliation"
 msgstr "Egyeztetés elhalasztása"
 
-#: kmymoney/kmymoney.cpp:2052
+#: kmymoney/kmymoney.cpp:2060
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgctxt "@info:tooltip"
 msgid "Finish the current reconciliation"
 msgstr "Utolsó egyeztetés"
 
-#: kmymoney/kmymoney.cpp:2053
+#: kmymoney/kmymoney.cpp:2061
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgctxt "@info:tooltip"
 msgid "Cancel the current reconciliation"
 msgstr "Utolsó egyeztetés"
 
-#: kmymoney/kmymoney.cpp:2161
+#: kmymoney/kmymoney.cpp:2169
 #, kde-format
 msgid "View back"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:2162
+#: kmymoney/kmymoney.cpp:2170
 #, kde-format
 msgid "View forward"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:2553
+#: kmymoney/kmymoney.cpp:2561
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
@@ -5296,36 +5296,36 @@ msgstr ""
 "Legalább egy rekordja az osztott tranzakciónak egyeztettve lett. "
 "Mindenképpen törölni akarja a tranzakciót?"
 
-#: kmymoney/kmymoney.cpp:2555
+#: kmymoney/kmymoney.cpp:2563
 #, kde-format
 msgid "Transaction already reconciled"
 msgstr "A tranzakció már egyeztetve van"
 
-#: kmymoney/kmymoney.cpp:2560
+#: kmymoney/kmymoney.cpp:2568
 #, kde-format
 msgid "Do you really want to delete the selected transaction?"
 msgid_plural "Do you really want to delete all %1 selected transactions?"
 msgstr[0] "Valóban törölni akarja a kiválasztott tranzakciót?"
 msgstr[1] "Valóban törölni akarja az összes %1 kiválasztott tranzakciót?"
 
-#: kmymoney/kmymoney.cpp:2564
+#: kmymoney/kmymoney.cpp:2572
 #, kde-format
 msgid "Delete transaction"
 msgstr "Tranzakció törlése"
 
-#: kmymoney/kmymoney.cpp:2641
+#: kmymoney/kmymoney.cpp:2649
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to duplicate transaction(s)"
 msgstr "Nem lehet hozzáadni a tranzakciókat"
 
-#: kmymoney/kmymoney.cpp:2927
+#: kmymoney/kmymoney.cpp:2935
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to modify transaction"
 msgstr "Nem lehet hozzáadni a tranzakciókat"
 
-#: kmymoney/kmymoney.cpp:3019
+#: kmymoney/kmymoney.cpp:3027
 #, fuzzy, kde-format
 #| msgid ""
 #| "At least one split of the selected transactions has been reconciled. Do "
@@ -5337,14 +5337,14 @@ msgstr ""
 "Legalább egy rekordja az osztott tranzakciónak egyeztettve lett. "
 "Mindenképpen törölni akarja a tranzakciót?"
 
-#: kmymoney/kmymoney.cpp:3021
+#: kmymoney/kmymoney.cpp:3029
 #, fuzzy, kde-format
 #| msgid "Transaction already reconciled"
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "A tranzakció már egyeztetve van"
 
-#: kmymoney/kmymoney.cpp:3026
+#: kmymoney/kmymoney.cpp:3034
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -5353,20 +5353,20 @@ msgid_plural "Do you really want to change all %1 selected transactions?"
 msgstr[0] "Valóban törölni akarja a kiválasztott tranzakciót?"
 msgstr[1] "Valóban törölni akarja az összes %1 kiválasztott tranzakciót?"
 
-#: kmymoney/kmymoney.cpp:3030
+#: kmymoney/kmymoney.cpp:3038
 #, fuzzy, kde-format
 #| msgid "Any transaction"
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "Minden tranzakció"
 
-#: kmymoney/kmymoney.cpp:3115
+#: kmymoney/kmymoney.cpp:3123
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to accept transaction"
 msgstr "Nem lehet hozzáadni a tranzakciókat"
 
-#: kmymoney/kmymoney.cpp:3155
+#: kmymoney/kmymoney.cpp:3163
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has detected some overdue scheduled transactions for this "
@@ -5378,12 +5378,12 @@ msgstr ""
 "KMyMoney néhány lejárt ütemezett tranzakciót észlelt ennél a számlánál. "
 "Szeretné most elfogadni ezeket az ütemezett tranzakciókat?"
 
-#: kmymoney/kmymoney.cpp:3158 kmymoney/views/kscheduledview.cpp:131
+#: kmymoney/kmymoney.cpp:3166 kmymoney/views/kscheduledview.cpp:134
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "Ütemezett tranzakciók találhatóak"
 
-#: kmymoney/kmymoney.cpp:3233
+#: kmymoney/kmymoney.cpp:3241
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have closed this account. It remains in the system because you have "
@@ -5403,17 +5403,17 @@ msgstr ""
 "menüpontra kattintva, vagy ha kiveszi a pipát a <b>Ne mutassa a lezárt "
 "számlákat</b> beállításnál."
 
-#: kmymoney/kmymoney.cpp:3235
+#: kmymoney/kmymoney.cpp:3243
 #, kde-format
 msgid "Information"
 msgstr "Információ"
 
-#: kmymoney/kmymoney.cpp:3339 kmymoney/kmymoney.cpp:3435
+#: kmymoney/kmymoney.cpp:3347 kmymoney/kmymoney.cpp:3443
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "Nincs KMyMoney fájl nyitva"
 
-#: kmymoney/kmymoney.cpp:3372 kmymoney/kmymoney.cpp:3374
+#: kmymoney/kmymoney.cpp:3380 kmymoney/kmymoney.cpp:3382
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1364
 #: kmymoney/plugins/xml/xmlstorage.cpp:415
 #, kde-format
@@ -5421,43 +5421,43 @@ msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "Kész."
 
-#: kmymoney/kmymoney.cpp:3439
+#: kmymoney/kmymoney.cpp:3447
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "Személyes adatok megtekintése…"
 
-#: kmymoney/kmymoney.cpp:3446
+#: kmymoney/kmymoney.cpp:3454
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "Személyes adatok szerkesztése"
 
-#: kmymoney/kmymoney.cpp:3461
+#: kmymoney/kmymoney.cpp:3469
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr "Nem lehet tárolni a felhasználó információt: %1"
 
-#: kmymoney/kmymoney.cpp:3469
+#: kmymoney/kmymoney.cpp:3477
 #, kde-format
 msgid "Importing account templates."
 msgstr "Számla sablonok importálása."
 
-#: kmymoney/kmymoney.cpp:3483
+#: kmymoney/kmymoney.cpp:3491
 #, fuzzy, kde-format
 #| msgid "Unable to remove payee(s)"
 msgid "Unable to import template(s)"
 msgstr "Nem lehet eltávolítani a kedvezményezett(ek)et"
 
-#: kmymoney/kmymoney.cpp:3491
+#: kmymoney/kmymoney.cpp:3499
 #, kde-format
 msgid "Exporting account templates."
 msgstr "Számla sablonok exportálása."
 
-#: kmymoney/kmymoney.cpp:3497
+#: kmymoney/kmymoney.cpp:3505
 #, kde-format
 msgid "Save as..."
 msgstr "Mentés másként…"
 
-#: kmymoney/kmymoney.cpp:3498
+#: kmymoney/kmymoney.cpp:3506
 #, fuzzy, kde-format
 #| msgid ""
 #| "*.kmt|KMyMoney template files\n"
@@ -5467,24 +5467,24 @@ msgstr ""
 "*.kmt|KMyMoney sablonfájl\n"
 "*|Összes fájl"
 
-#: kmymoney/kmymoney.cpp:3529
+#: kmymoney/kmymoney.cpp:3537
 #, fuzzy, kde-format
 #| msgid "Template Error"
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "Sablonhiba"
 
-#: kmymoney/kmymoney.cpp:3547
+#: kmymoney/kmymoney.cpp:3555
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr "A(z) <b>%1</b> fájl már létezik. Biztosan felül kívánja írni?"
 
-#: kmymoney/kmymoney.cpp:3549 kmymoney/plugins/csv/export/csvexporter.cpp:102
+#: kmymoney/kmymoney.cpp:3557 kmymoney/plugins/csv/export/csvexporter.cpp:102
 #, kde-format
 msgid "File already exists"
 msgstr "A fájl már létezik"
 
-#: kmymoney/kmymoney.cpp:3671
+#: kmymoney/kmymoney.cpp:3679
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
@@ -5493,85 +5493,85 @@ msgstr ""
 "A fájlt először el kell menteni, mielőtt biztonsági mentést lehetne róla "
 "készíteni. Szeretné folytatni?"
 
-#: kmymoney/kmymoney.cpp:3673
+#: kmymoney/kmymoney.cpp:3681
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3690
+#: kmymoney/kmymoney.cpp:3698
 #, kde-format
 msgid ""
 "The current implementation of the backup functionality only supports local "
 "files as source files. Your current source file is '%1'."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3692
+#: kmymoney/kmymoney.cpp:3700
 #, kde-format
 msgid "Local files only"
 msgstr "Csak helyi fájlok"
 
-#: kmymoney/kmymoney.cpp:3731
+#: kmymoney/kmymoney.cpp:3739
 #, kde-format
 msgid "Mounting %1"
 msgstr "%1 csatolása"
 
-#: kmymoney/kmymoney.cpp:3765
+#: kmymoney/kmymoney.cpp:3773
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr ""
 "A biztonsági mentés fájlja a mai napra már létezik ezen az eszközön. "
 "Kicseréli?"
 
-#: kmymoney/kmymoney.cpp:3765
+#: kmymoney/kmymoney.cpp:3773
 #, kde-format
 msgid "&Replace"
 msgstr "&Cserélés"
 
-#: kmymoney/kmymoney.cpp:3773
+#: kmymoney/kmymoney.cpp:3781
 #, fuzzy, kde-format
 #| msgid "Unable to create account: %1"
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
 msgstr "Nem lehet létrehozni a számlát: %1"
 
-#: kmymoney/kmymoney.cpp:3778
+#: kmymoney/kmymoney.cpp:3786
 #, kde-format
 msgid "Writing %1"
 msgstr "%1 írása"
 
-#: kmymoney/kmymoney.cpp:3799
+#: kmymoney/kmymoney.cpp:3807
 #, kde-format
 msgid "Unmounting %1"
 msgstr "%1 leválasztása"
 
-#: kmymoney/kmymoney.cpp:3836
+#: kmymoney/kmymoney.cpp:3844
 #, kde-format
 msgid "Error mounting device"
 msgstr "Hiba az eszköz csatolásakor"
 
-#: kmymoney/kmymoney.cpp:3851 kmymoney/kmymoney.cpp:3870
+#: kmymoney/kmymoney.cpp:3859 kmymoney/kmymoney.cpp:3878
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "Kész"
 
-#: kmymoney/kmymoney.cpp:3852 kmymoney/kmymoney.cpp:3872
+#: kmymoney/kmymoney.cpp:3860 kmymoney/kmymoney.cpp:3880
 #, kde-format
 msgid "File successfully backed up"
 msgstr "Fájl sikeresen mentve"
 
-#: kmymoney/kmymoney.cpp:3858
+#: kmymoney/kmymoney.cpp:3866
 #, kde-format
 msgid "Error copying file to device"
 msgstr "Hiba az eszközre való másoláskor"
 
-#: kmymoney/kmymoney.cpp:3874
+#: kmymoney/kmymoney.cpp:3882
 #, kde-format
 msgid "Error unmounting device"
 msgstr "Hiba az eszköz leválasztásakor"
 
-#: kmymoney/kmymoney.cpp:3921
+#: kmymoney/kmymoney.cpp:3929
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5588,30 +5588,30 @@ msgstr ""
 "kattintson a Nem-re, hogy %2 maradjon,\n"
 "vagy a Mégsem-re, hogy megszakítsa a számla létrehozását."
 
-#: kmymoney/kmymoney.cpp:3931
+#: kmymoney/kmymoney.cpp:3939
 #, fuzzy, kde-format
 #| msgid "Opening balance problem"
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "Nyitóegyenleg probléma"
 
-#: kmymoney/kmymoney.cpp:3942
+#: kmymoney/kmymoney.cpp:3950
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "Nem lehet hozzáadni ezt a számlát: %1"
 
-#: kmymoney/kmymoney.cpp:4072
+#: kmymoney/kmymoney.cpp:4080
 #, kde-format
 msgid "Running consistency check..."
 msgstr "Összefüggés ellenőrzés futtatása..."
 
-#: kmymoney/kmymoney.cpp:4079
+#: kmymoney/kmymoney.cpp:4087
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "Összefüggés ellenőrzés hiba: %1"
 
-#: kmymoney/kmymoney.cpp:4089
+#: kmymoney/kmymoney.cpp:4097
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -5620,7 +5620,7 @@ msgstr ""
 "Az összefüggés ellenőrző nem talált ellentétet az adatokban. A részletek "
 "megtalálhatóak alább."
 
-#: kmymoney/kmymoney.cpp:4091
+#: kmymoney/kmymoney.cpp:4099
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5631,28 +5631,28 @@ msgstr ""
 "alább vannak felsorolva. Azokat az ellentéteket, amik automatikusan nem "
 "voltak javíthatóak, a felhasználónak kell megoldania."
 
-#: kmymoney/kmymoney.cpp:4094
+#: kmymoney/kmymoney.cpp:4102
 #, kde-format
 msgid "Consistency check result"
 msgstr "Összefüggés ellenőrzés eredménye"
 
-#: kmymoney/kmymoney.cpp:4160
+#: kmymoney/kmymoney.cpp:4168
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Lejárt ütemezett tranzakciók ellenőrzése"
 
-#: kmymoney/kmymoney.cpp:4350
+#: kmymoney/kmymoney.cpp:4358
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4355
+#: kmymoney/kmymoney.cpp:4363
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4367
+#: kmymoney/kmymoney.cpp:4375
 #, fuzzy, kde-format
 #| msgid ""
 #| "Unable to import %1 using %2 plugin.  The plugin returned the following "
@@ -5665,71 +5665,71 @@ msgstr ""
 "Nem sikerült %1 importálása a(z) %2 bővítmény használatával. A bővítmény a "
 "következő hibával tért vissza: %3"
 
-#: kmymoney/kmymoney.cpp:4367 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
+#: kmymoney/kmymoney.cpp:4375 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
 #, kde-format
 msgid "Importing error"
 msgstr "Importálási hiba"
 
-#: kmymoney/kmymoney.cpp:4394
+#: kmymoney/kmymoney.cpp:4402
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Minden üzenet engedélyezve lett."
 
-#: kmymoney/kmymoney.cpp:4394
+#: kmymoney/kmymoney.cpp:4402
 #, kde-format
 msgid "All messages"
 msgstr "Minden üzenet"
 
-#: kmymoney/kmymoney.cpp:4430
+#: kmymoney/kmymoney.cpp:4438
 #, kde-format
 msgid "Auto saving..."
 msgstr "Automatikus mentés..."
 
-#: kmymoney/kmymoney.cpp:4550
+#: kmymoney/kmymoney.cpp:4558
 #, kde-format
 msgid "Creating new document..."
 msgstr "Új dokumentum létrehozása…"
 
-#: kmymoney/kmymoney.cpp:4610
+#: kmymoney/kmymoney.cpp:4618
 #, fuzzy, kde-format
 #| msgid "Create a new profile"
 msgid "Couldn't create a new file."
 msgstr "Új profil létrehozása"
 
-#: kmymoney/kmymoney.cpp:4621
+#: kmymoney/kmymoney.cpp:4629
 #, kde-format
 msgid "Open a file."
 msgstr "Fájl megnyitása."
 
-#: kmymoney/kmymoney.cpp:4635
+#: kmymoney/kmymoney.cpp:4643
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4639
+#: kmymoney/kmymoney.cpp:4647
 #, fuzzy, kde-format
 #| msgctxt "All files (Filefilter)"
 #| msgid "All files"
 msgid "All files (*)"
 msgstr "Összes fájl"
 
-#: kmymoney/kmymoney.cpp:4652
+#: kmymoney/kmymoney.cpp:4660
 #, kde-format
 msgid "Loading file..."
 msgstr "Fájl betöltése…"
 
-#: kmymoney/kmymoney.cpp:4658
+#: kmymoney/kmymoney.cpp:4666
 #, kde-format
 msgid "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
 msgstr ""
 "<p>A <b>%1</b> fájl már meg van nyitva a KMyMoney egy másik példányában</p>"
 
-#: kmymoney/kmymoney.cpp:4658
+#: kmymoney/kmymoney.cpp:4666
 #, kde-format
 msgid "Duplicate open"
 msgstr "Duplikált megnyitás"
 
-#: kmymoney/kmymoney.cpp:4665
+#: kmymoney/kmymoney.cpp:4673
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5738,52 +5738,52 @@ msgstr ""
 "<p><b>%1</b> egy érvénytelen fájlnév, vagy a fájl nem létezik. Megnyithat "
 "egy másik fájlt, vagy létrehozhat egy újat.</p>"
 
-#: kmymoney/kmymoney.cpp:4665
+#: kmymoney/kmymoney.cpp:4673
 #, kde-format
 msgid "File not found"
 msgstr "A fájl nem található"
 
-#: kmymoney/kmymoney.cpp:4696
+#: kmymoney/kmymoney.cpp:4704
 #, fuzzy, kde-format
 #| msgid "Cannot open file %1 for writing"
 msgid "Cannot open file as requested."
 msgstr "%1 fájlt nem lehet megnyitni írásra"
 
-#: kmymoney/kmymoney.cpp:4703
+#: kmymoney/kmymoney.cpp:4711
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
 "necessary plugin is enabled."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4714
+#: kmymoney/kmymoney.cpp:4722
 #, kde-format
 msgid "Saving file..."
 msgstr "Fájl mentése…"
 
-#: kmymoney/kmymoney.cpp:4726
+#: kmymoney/kmymoney.cpp:4734
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your data."
 msgstr "Sikertelen mentés: %1"
 
-#: kmymoney/kmymoney.cpp:4732
+#: kmymoney/kmymoney.cpp:4740
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4738
+#: kmymoney/kmymoney.cpp:4746
 #, fuzzy, kde-format
 #| msgid "Saving file..."
 msgid "Saving file as...."
 msgstr "Fájl mentése…"
 
-#: kmymoney/kmymoney.cpp:4754
+#: kmymoney/kmymoney.cpp:4762
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4783
+#: kmymoney/kmymoney.cpp:4791
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your storage."
@@ -5833,14 +5833,14 @@ msgstr "&Tranzakció"
 
 #. i18n: ectx: Menu (transaction_mark_menu)
 #. i18n: ectx: Menu (transaction_context_mark_menu)
-#: kmymoney/kmymoneyui.rc:86 kmymoney/kmymoneyui.rc:227
+#: kmymoney/kmymoneyui.rc:86 kmymoney/kmymoneyui.rc:228
 #, kde-format
 msgid "Mark transaction as..."
 msgstr "Tranzakció megjelölése mint…"
 
 #. i18n: ectx: Menu (transaction_mark_menu)
 #. i18n: ectx: Menu (transaction_context_mark_menu)
-#: kmymoney/kmymoneyui.rc:87 kmymoney/kmymoneyui.rc:228
+#: kmymoney/kmymoneyui.rc:87 kmymoney/kmymoneyui.rc:229
 #, kde-format
 msgid "Mark transaction"
 msgstr "Tranzakció megjelölése"
@@ -5902,25 +5902,25 @@ msgid "Scheduled transactions options"
 msgstr "Ütemezett tranzakciók beállításai"
 
 #. i18n: ectx: Menu (transaction_context_menu)
-#: kmymoney/kmymoneyui.rc:212
+#: kmymoney/kmymoneyui.rc:213
 #, kde-format
 msgid "Transaction options"
 msgstr "Tranzakcióbeállítások"
 
 #. i18n: ectx: Menu (transaction_move_menu)
-#: kmymoney/kmymoneyui.rc:222
+#: kmymoney/kmymoneyui.rc:223
 #, kde-format
 msgid "Move transaction to..."
 msgstr "Tranzakció mozgatása ide…"
 
 #. i18n: ectx: Menu (transaction_move_menu)
-#: kmymoney/kmymoneyui.rc:223
+#: kmymoney/kmymoneyui.rc:224
 #, kde-format
 msgid "Select account"
 msgstr "Számla kiválasztása"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kmymoney/kmymoneyui.rc:247
+#: kmymoney/kmymoneyui.rc:248
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Alap eszköztár"
@@ -8242,6 +8242,18 @@ msgstr "Osztott tranzakció"
 #, kde-format
 msgid "*** UNASSIGNED ***"
 msgstr "*** NINCS HOZZÁRENDELT ***"
+
+#: kmymoney/mymoney/splitmodel.cpp:175 kmymoney/mymoney/splitmodel.cpp:180
+#: kmymoney/widgets/amountedit.cpp:264 kmymoney/widgets/amountedit.cpp:315
+#: kmymoney/widgets/creditdebitedit.cpp:123
+#: kmymoney/widgets/creditdebitedit.cpp:124
+#: kmymoney/widgets/creditdebitedit.cpp:153
+#: kmymoney/widgets/creditdebitedit.cpp:154
+#, fuzzy, kde-format
+#| msgid "calculate"
+msgctxt "@info:placeholder amount widget"
+msgid "calculated"
+msgstr "kiszámol"
 
 #: kmymoney/mymoney/statusmodel.cpp:32
 #, kde-format
@@ -19524,7 +19536,14 @@ msgstr "Nem lehet hozzáadni az ütemezett tranzakciót: %1"
 msgid "Add scheduled transaction"
 msgstr "Ütemezett tranzakció hozzáadása"
 
-#: kmymoney/views/keditscheduledlg.cpp:614
+#: kmymoney/views/keditscheduledlg.cpp:608
+#: kmymoney/views/keditscheduledlg.cpp:651
+#: kmymoney/views/keditscheduledlg.cpp:661
+#, kde-format
+msgid "Unable to modify scheduled transaction '%1'"
+msgstr "Nem lehet módosítani a(z) „%1” ütemezett tranzakciót"
+
+#: kmymoney/views/keditscheduledlg.cpp:637
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -19545,17 +19564,10 @@ msgstr ""
 "hacsak az utolsó fizetés dátumát vissza nem állítja.  Vissza szeretné "
 "állítani az utolsó fizetési dátumot?"
 
-#: kmymoney/views/keditscheduledlg.cpp:619
+#: kmymoney/views/keditscheduledlg.cpp:642
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Utolsó fizetési dátum visszaállítása"
-
-#: kmymoney/views/keditscheduledlg.cpp:628
-#: kmymoney/views/keditscheduledlg.cpp:644
-#: kmymoney/views/keditscheduledlg.cpp:654
-#, kde-format
-msgid "Unable to modify scheduled transaction '%1'"
-msgstr "Nem lehet módosítani a(z) „%1” ütemezett tranzakciót"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KEditScheduleDlg)
 #: kmymoney/views/keditscheduledlg.ui:14
@@ -20461,7 +20473,7 @@ msgstr ""
 msgid "Unable to remove payee(s)"
 msgstr "Nem lehet eltávolítani a kedvezményezett(ek)et"
 
-#: kmymoney/views/kscheduledview.cpp:130
+#: kmymoney/views/kscheduledview.cpp:133
 #, kde-format
 msgid ""
 "KMyMoney has detected some overdue scheduled transactions for this account. "
@@ -20470,44 +20482,44 @@ msgstr ""
 "KMyMoney néhány lejárt ütemezett tranzakciót észlelt ennél a számlánál. "
 "Szeretné most elfogadni ezeket az ütemezett tranzakciókat?"
 
-#: kmymoney/views/kscheduledview.cpp:207 kmymoney/views/kscheduledview.cpp:280
-#: kmymoney/views/kscheduledview.cpp:293
+#: kmymoney/views/kscheduledview.cpp:210 kmymoney/views/kscheduledview.cpp:221
+#: kmymoney/views/kscheduledview.cpp:294 kmymoney/views/kscheduledview.cpp:307
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"
 msgstr "Ismeretlen ütemezett tranzakció: '%1'"
 
-#: kmymoney/views/kscheduledview.cpp:218
+#: kmymoney/views/kscheduledview.cpp:232
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr "<p>Biztosan törölni akarja a/az<b>%1</b> ütemezett tranzakciót?</p>"
 
-#: kmymoney/views/kscheduledview.cpp:221
+#: kmymoney/views/kscheduledview.cpp:235
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
 "scheduled transaction."
 msgstr ""
 
-#: kmymoney/views/kscheduledview.cpp:223
+#: kmymoney/views/kscheduledview.cpp:237
 #, fuzzy, kde-format
 #| msgid "Select Schedules"
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Ütemezések kiválasztása"
 
-#: kmymoney/views/kscheduledview.cpp:231
+#: kmymoney/views/kscheduledview.cpp:245
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "Nem lehet eltávolítani a(z) „%1” ütemezett tranzakciót"
 
-#: kmymoney/views/kscheduledview.cpp:245
+#: kmymoney/views/kscheduledview.cpp:259
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "%1 másolása"
 
-#: kmymoney/views/kscheduledview.cpp:266
+#: kmymoney/views/kscheduledview.cpp:280
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "Nem lehet kettőzni az ütemezett tranzakciót: „%1”"
@@ -21026,14 +21038,14 @@ msgid ""
 "the selection."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:153
+#: kmymoney/views/newspliteditor.cpp:154
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "Használja ezt, hogy megadja a tranzakciókat a Főkönyvbe."
 
-#: kmymoney/views/newspliteditor.cpp:158
+#: kmymoney/views/newspliteditor.cpp:159
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip costcenter combo in split editor"
@@ -21043,14 +21055,14 @@ msgid ""
 msgstr ""
 "Nem lehet ebben a kontextusban létrehozni tranzakciókat a kategóriának."
 
-#: kmymoney/views/newspliteditor.cpp:169
+#: kmymoney/views/newspliteditor.cpp:170
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "Használja ezt, hogy megadja a tranzakciókat a Főkönyvbe."
 
-#: kmymoney/views/newspliteditor.cpp:210
+#: kmymoney/views/newspliteditor.cpp:211
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip category combo in split editor"
@@ -21058,14 +21070,14 @@ msgid "A category assignment is required for a split."
 msgstr ""
 "Nem lehet ebben a kontextusban létrehozni tranzakciókat a kategóriának."
 
-#: kmymoney/views/newspliteditor.cpp:219
+#: kmymoney/views/newspliteditor.cpp:220
 #: kmymoney/views/newtransactioneditor.cpp:410
 #, fuzzy, kde-format
 #| msgid "Enter next transaction..."
 msgid "The check number used for this transaction."
 msgstr "Következő tranzakció bevitele..."
 
-#: kmymoney/views/newspliteditor.cpp:228
+#: kmymoney/views/newspliteditor.cpp:229
 #: kmymoney/views/newtransactioneditor.cpp:420
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
@@ -21246,14 +21258,21 @@ msgid ""
 "on the tabbar above to select an account.</p></body></html>"
 msgstr ""
 
-#: kmymoney/views/splitdialog.cpp:319
+#: kmymoney/views/splitdialog.cpp:310
+#, fuzzy, kde-format
+#| msgid "Sum of splits"
+msgctxt "Split editor summary"
+msgid "Sum of splits"
+msgstr "Rekordok összege"
+
+#: kmymoney/views/splitdialog.cpp:328
 #, fuzzy, kde-format
 #| msgid "Unassigned"
 msgctxt "Split editor summary"
 msgid "Overassigned"
 msgstr "Hiányzó összeg"
 
-#: kmymoney/views/splitdialog.cpp:322
+#: kmymoney/views/splitdialog.cpp:331
 #, fuzzy, kde-format
 #| msgid "Unassigned"
 msgctxt "Split editor summary"
