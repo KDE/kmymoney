@@ -70,7 +70,12 @@ KMenuActionExchanger::~KMenuActionExchanger()
 
 void KMenuActionExchanger::addExchange(QMenu* menu, Qt::Key key, QAction* actionReleased, QAction* actionPressed)
 {
-    ExchangeAction newAction{.menu = menu, .key = key, .actionReleased = actionReleased, .actionPressed = actionPressed};
+    ExchangeAction newAction;
+    newAction.menu = menu;
+    newAction.key = key;
+    newAction.actionReleased = actionReleased;
+    newAction.actionPressed = actionPressed;
+
     QSet<QMenu*> installedMenus;
     for (int i = 0; i < d->m_actions.count(); ++i) {
         const auto& action = d->m_actions.at(i);
