@@ -7955,11 +7955,10 @@ msgstr "*** NEPŘIŘAZENO ***"
 #: kmymoney/widgets/creditdebitedit.cpp:124
 #: kmymoney/widgets/creditdebitedit.cpp:153
 #: kmymoney/widgets/creditdebitedit.cpp:154
-#, fuzzy, kde-format
-#| msgid "calculate"
+#, kde-format
 msgctxt "@info:placeholder amount widget"
 msgid "calculated"
-msgstr "spočítat"
+msgstr ""
 
 #: kmymoney/mymoney/statusmodel.cpp:32
 #, kde-format
@@ -20299,11 +20298,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/splitdialog.cpp:310
-#, fuzzy, kde-format
-#| msgid "Sum of splits"
+#, kde-format
 msgctxt "Split editor summary"
 msgid "Sum of splits"
-msgstr "Součet jednotlivých částí"
+msgstr ""
 
 #: kmymoney/views/splitdialog.cpp:328
 #, kde-format

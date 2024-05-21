@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-20 01:45+0000\n"
-"PO-Revision-Date: 2024-05-10 05:53+0200\n"
+"PO-Revision-Date: 2024-05-20 05:48+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -5095,7 +5095,7 @@ msgstr "Prenesi na danes"
 #: kmymoney/kmymoney.cpp:1870
 #, kde-format
 msgid "Copy splits"
-msgstr "Kopiraj razdelitve"
+msgstr "Kopiraj dele"
 
 #: kmymoney/kmymoney.cpp:1871
 #, kde-format
@@ -5314,7 +5314,7 @@ msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
 "wish to delete the transactions anyway?"
 msgstr ""
-"Usklajen je vsaj en razcep izbranih transakcij. Ali si želite vseeno "
+"Usklajena je vsaj ena delitev izbranih transakcij. Ali si želite vseeno "
 "izbrisati transakcije?"
 
 #: kmymoney/kmymoney.cpp:2563
@@ -5352,7 +5352,7 @@ msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
 "wish to change the transactions anyway?"
 msgstr ""
-"Usklajen je vsaj en razcep izbranih transakcij. Ali si vseeno želite "
+"Usklajena je vsaj ena delitev izbranih transakcij. Ali si vseeno želite "
 "spremeniti transakcije?"
 
 #: kmymoney/kmymoney.cpp:3029
@@ -6559,7 +6559,7 @@ msgstr ""
 #: kmymoney/mymoney/mymoneyfile.cpp:2660
 #, kde-format
 msgid "  * Sum of splits in transaction '%1' posted on %2 is not zero."
-msgstr " * Vsota razcepov v transakciji '%1' objavljeni na %2 ni nič."
+msgstr " * Vsota delitev v transakciji '%1' objavljeni na %2 ni nič."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2666
 #, kde-format
@@ -6570,7 +6570,7 @@ msgstr "    Račun: %1, Znesek: %2"
 #, kde-format
 msgid "  * Payee id updated in split of transaction '%1'."
 msgstr ""
-"  * Id prejemnika plačila je posodobljen v razcepitvi transakcije '%1'."
+"  * Id prejemnika plačila posodobljenega v delitvi transakcije je '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2699
 #, kde-format
@@ -6598,12 +6598,12 @@ msgstr "  Datum odprtja računa posodobljen."
 #: kmymoney/mymoney/mymoneyfile.cpp:2726
 #, kde-format
 msgid "  * shares set to value in split of transaction '%1'."
-msgstr "  * delnice, postavljene na vrednost v razcepitvi transakcije '%1'."
+msgstr "  * delnice, postavljene na vrednost v razdelitvi transakcije '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2729
 #, kde-format
 msgid "  * value set to shares in split of transaction '%1'."
-msgstr "  * vrednost postavljena za delnice v razcepljeni transakciji '%1'."
+msgstr "  * vrednost postavljena za delnice v razdeljeni transakciji '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2738
 #, kde-format
@@ -6611,7 +6611,7 @@ msgid ""
 "  * Split %2 in transaction '%1' contains different signs for shares and "
 "value. Please fix manually."
 msgstr ""
-"  * Razcepitev %2 v transakciji '%1' vsebuje različne predznake za deleže in "
+"  * Delitev %2 v transakciji '%1' vsebuje različne predznake za deleže in "
 "vrednosti. Prosimo, ročno popravite."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2750
@@ -6620,13 +6620,13 @@ msgid ""
 "  * Split %2 in transaction '%1' contains a reference to invalid account %3. "
 "Please fix manually."
 msgstr ""
-"  * Razcepitev %2 v transakciji '%1' vsebuje sklic na neveljaven račun %3. "
+"  * Delitev %2 v transakciji '%1' vsebuje sklic na neveljaven račun %3. "
 "Prosimo, ročno popravite."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2759
 #, kde-format
 msgid "  * action marked as interest in split of transaction '%1'."
-msgstr "  * dejanje, označeno kot obresti za razcepitev transakcije '%1'."
+msgstr "  * dejanje, označeno kot obresti v delitvi transakcije '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2773
 #, kde-format
@@ -6660,15 +6660,14 @@ msgstr "    Datum objave ni bil posodobljen na '%1'."
 #: kmymoney/mymoney/mymoneyfile.cpp:2838
 #, kde-format
 msgid "  * Payee id updated in split of schedule '%1'."
-msgstr ""
-"  * Id prejemnika plačila posodobljen v razcepljenem časovnem načrtu '%1'."
+msgstr "  * Id prejemnika plačila posodobljen v deljenem časovnem načrtu '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2844
 #, kde-format
 msgid ""
 "  * Split in scheduled transaction '%1' contained value != 0 and shares == 0."
 msgstr ""
-"  * Razcep v časovno načrtovani transakciji '%1' je vseboval vrednost != 0 "
+"  * Delitev v časovno načrtovani transakciji '%1' je vseboval vrednost != 0 "
 "in delnice == 0."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2845
@@ -6680,20 +6679,20 @@ msgstr "    Delnice so nastavljene na vrednost."
 #, kde-format
 msgid "  * Removed bankid from split in scheduled transaction '%1'."
 msgstr ""
-"  * Bankid je bil odstranjen iz razcepa v časovno načrtovani transakciji "
+"  * Bankid je bil odstranjen iz delitve v časovno načrtovani transakciji "
 "'%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2866
 #, kde-format
 msgid "  * shares set to value in split in schedule '%1'."
 msgstr ""
-"  * delnice, nastavljene na vrednost v razcepitvi v časovnem razporedu '%1'."
+"  * delnice, nastavljene na vrednost v delitvi v časovnem razporedu '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2869
 #, kde-format
 msgid "  * value set to shares in split in schedule '%1'."
 msgstr ""
-"  * vrednost nastavljena na delnice v razcepitvi v časovnem razporedu '%1'."
+"  * vrednost nastavljena na delnice v delitvi v časovnem razporedu '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2875
 #, kde-format
@@ -6701,8 +6700,8 @@ msgid ""
 "  * Split %2 in schedule '%1' contains a reference to invalid account %3. "
 "Please fix manually."
 msgstr ""
-"  * Razcepitev %2 v časovnem razporedu '%1' vsebuje sklic na neveljaven "
-"račun %3. Prosimo, da ga ročno popravite."
+"  * Delitev %2 v časovnem razporedu '%1' vsebuje sklic na neveljaven račun "
+"%3. Prosimo, da ga ročno popravite."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2884
 #, kde-format
@@ -8191,11 +8190,10 @@ msgstr "*** NEDODELJENO ***"
 #: kmymoney/widgets/creditdebitedit.cpp:124
 #: kmymoney/widgets/creditdebitedit.cpp:153
 #: kmymoney/widgets/creditdebitedit.cpp:154
-#, fuzzy, kde-format
-#| msgid "calculate"
+#, kde-format
 msgctxt "@info:placeholder amount widget"
 msgid "calculated"
-msgstr "izračunaj"
+msgstr "izračunano"
 
 #: kmymoney/mymoney/statusmodel.cpp:32
 #, kde-format
@@ -8661,7 +8659,7 @@ msgstr "Donos"
 #, kde-format
 msgctxt "Split securities/shares/bonds"
 msgid "Split shares"
-msgstr "Razcepi delnice"
+msgstr "Razdeli delnice"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:128
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:51
@@ -11233,7 +11231,7 @@ msgstr "Možnosti transakcijskih opomb"
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:182
 #, kde-format
 msgid "Use transaction notes on non-split transactions"
-msgstr "Uporabite opombe o transakcijah pri transakcijah, ki niso razcepljene"
+msgstr "Uporabite opombe o transakcijah pri transakcijah, ki niso razdeljene"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox3)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:205
@@ -11404,8 +11402,8 @@ msgid ""
 "Account or Category %1, transaction date %2; split contains invalid value; "
 "please check"
 msgstr ""
-"Račun ali kategorija %1, datum transakcije %2; razcepljeni znesek vsebuje "
-"neveljavno vrednost;prosim preveri"
+"Račun ali kategorija %1, datum transakcije %2; razdeljeni znesek vsebuje "
+"neveljavno vrednost; prosim preverite"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1810
 #, kde-format
@@ -11435,7 +11433,7 @@ msgstr "Časovni načrt %1 vsebuje več aktivnosti; samo ena je bila uvožena"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2015
 #, kde-format
 msgid "Schedule %1 contains no valid splits"
-msgstr "Časovni načrt %1 ne vsebuje nobenega veljavnega razcepa zneska"
+msgstr "Časovni načrt %1 ne vsebuje nobene veljavne delitve zneska"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2020
 #, kde-format
@@ -15993,14 +15991,14 @@ msgstr "[Prazni prejemnik plačila]"
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1935
 #, kde-format
 msgid "[Split Transaction]"
-msgstr "[Razcepi transakcijo]"
+msgstr "[Deljena transakcija]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:836
 #: kmymoney/plugins/views/reports/core/querytable.cpp:837
 #, kde-format
 msgctxt "Split transaction"
 msgid "Split"
-msgstr "Razcepi"
+msgstr "Razdeli"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1677
 #, kde-format
@@ -17638,13 +17636,13 @@ msgstr "Vključi samo naložbene račune"
 #, kde-format
 msgid ""
 "Do not display the individual transactions that make up a split transaction"
-msgstr "Ne prikazuj posameznih transakcij, ki tvorijo razcepljeno transakcijo"
+msgstr "Ne prikazuj posameznih transakcij, ki tvorijo deljeno transakcijo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkHideSplitDetails)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:366
 #, kde-format
 msgid "Hide Split Transaction Details"
-msgstr "Skrij podrobnosti razcepljene transakcije"
+msgstr "Skrij podrobnosti deljene transakcije"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkTax)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:373
@@ -18797,7 +18795,7 @@ msgstr "Odstrani delnice"
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Split shares"
-msgstr "Razcepi delnice"
+msgstr "Razdeli delnice"
 
 #: kmymoney/views/investtransactioneditor.cpp:89
 #, kde-format
@@ -20183,7 +20181,7 @@ msgstr ""
 #: kmymoney/views/kpayeesview_p.h:568
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
-msgstr "Prejemnika plačila transakcije / razcepitve ni mogoče dodeliti drugače"
+msgstr "Prejemnika plačila transakcije / delitve ni mogoče dodeliti drugače"
 
 #: kmymoney/views/kpayeesview_p.h:572
 #, kde-format
@@ -20408,7 +20406,7 @@ msgstr "Ni mogoče spremeniti oznake"
 #: kmymoney/views/ktagsview.cpp:808
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
-msgstr "Oznake transakcije/razcepa ni mogoče dodeliti drugam"
+msgstr "Oznake transakcije/delitve ni mogoče dodeliti drugam"
 
 #: kmymoney/views/ktagsview.cpp:820
 #, kde-format
@@ -20717,7 +20715,7 @@ msgid ""
 "Selection of category or account is not possible when split transactions are "
 "part of the selection."
 msgstr ""
-"Izbira kategorije ali računa ni mogoča, kadar so razcepljene transakcije del "
+"Izbira kategorije ali računa ni mogoča, kadar so deljene transakcije del "
 "izbire."
 
 #: kmymoney/views/multitransactioneditor.cpp:741
@@ -20726,7 +20724,7 @@ msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
 "Selection of tags is not possible when split transactions are part of the "
 "selection."
-msgstr "Izbira oznak ni mogoča, kadar so razcepljene transakcije del izbire."
+msgstr "Izbira oznak ni mogoča, kadar so deljene transakcije del izbire."
 
 #: kmymoney/views/multitransactioneditor.cpp:745
 #, kde-format
@@ -20735,8 +20733,7 @@ msgid ""
 "Selection of cost center is not possible when split transactions are part of "
 "the selection."
 msgstr ""
-"Izbira stroškovnega mesta ni mogoča, kadar so razcepljene transakcije del "
-"izbire."
+"Izbira stroškovnega mesta ni mogoča, kadar so deljene transakcije del izbire."
 
 #: kmymoney/views/newspliteditor.cpp:154
 #, kde-format
@@ -20998,7 +20995,7 @@ msgstr "Znesek transakcije"
 #: kmymoney/views/splitdialog.ui:630
 #, kde-format
 msgid "Create a new split"
-msgstr "Ustvari nov razcep"
+msgstr "Ustvari novo delitev"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, mergeButton)
 #: kmymoney/views/splitdialog.ui:653
@@ -21014,9 +21011,9 @@ msgid ""
 "keep them as a single split, press this button. The amount for identical "
 "categories will be added and stored in a single split for that category."
 msgstr ""
-"Če imate več razcepljenih vnosov v isto kategorijo in želite da jih shranite "
-"kot en del, pritisnite ta gumb. Znesek za enake kategorije bodo dodane in "
-"shranjene v enem razcepu za to kategorijo."
+"Če imate več deljenih vnosov v isto kategorijo in želite da jih shranite kot "
+"en del, pritisnite ta gumb. Znesek za enake kategorije bodo dodane in "
+"shranjene v eni delitvi za to kategorijo."
 
 #. i18n: ectx: property (text), widget (QPushButton, mergeButton)
 #: kmymoney/views/splitdialog.ui:659
@@ -21303,7 +21300,7 @@ msgstr "Odstrani delnice"
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:50
 #, kde-format
 msgid "Split shares"
-msgstr "Razcepi delnice"
+msgstr "Razdeli delnice"
 
 #: kmymoney/widgets/kmymoneybriefschedule.cpp:65
 #, kde-format

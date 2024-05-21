@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-20 01:45+0000\n"
-"PO-Revision-Date: 2024-05-10 11:58+0200\n"
+"PO-Revision-Date: 2024-05-20 17:36+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -8161,11 +8161,10 @@ msgstr "*** OTILLDELAD ***"
 #: kmymoney/widgets/creditdebitedit.cpp:124
 #: kmymoney/widgets/creditdebitedit.cpp:153
 #: kmymoney/widgets/creditdebitedit.cpp:154
-#, fuzzy, kde-format
-#| msgid "calculate"
+#, kde-format
 msgctxt "@info:placeholder amount widget"
 msgid "calculated"
-msgstr "beräkna"
+msgstr "beräknad"
 
 #: kmymoney/mymoney/statusmodel.cpp:32
 #, kde-format
@@ -20865,11 +20864,10 @@ msgstr ""
 "flikraden ovan för att välja ett konto.</p></body></html>"
 
 #: kmymoney/views/splitdialog.cpp:310
-#, fuzzy, kde-format
-#| msgid "Sum of splits"
+#, kde-format
 msgctxt "Split editor summary"
 msgid "Sum of splits"
-msgstr "Summa av delarna"
+msgstr "Delningssummering"
 
 #: kmymoney/views/splitdialog.cpp:328
 #, kde-format

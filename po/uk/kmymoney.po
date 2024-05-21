@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-20 01:45+0000\n"
-"PO-Revision-Date: 2024-05-10 13:20+0300\n"
+"PO-Revision-Date: 2024-05-20 18:48+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
@@ -8235,11 +8235,10 @@ msgstr "*** НЕ ПРИЗНАЧЕНО ***"
 #: kmymoney/widgets/creditdebitedit.cpp:124
 #: kmymoney/widgets/creditdebitedit.cpp:153
 #: kmymoney/widgets/creditdebitedit.cpp:154
-#, fuzzy, kde-format
-#| msgid "calculate"
+#, kde-format
 msgctxt "@info:placeholder amount widget"
 msgid "calculated"
-msgstr "обчислення"
+msgstr "обчислене"
 
 #: kmymoney/mymoney/statusmodel.cpp:32
 #, kde-format
@@ -21104,8 +21103,7 @@ msgstr ""
 "body></html>"
 
 #: kmymoney/views/splitdialog.cpp:310
-#, fuzzy, kde-format
-#| msgid "Sum of splits"
+#, kde-format
 msgctxt "Split editor summary"
 msgid "Sum of splits"
 msgstr "Сума дроблень"
