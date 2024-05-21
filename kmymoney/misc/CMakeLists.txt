@@ -210,6 +210,7 @@ install(TARGETS
         kmm_keychain
         kmm_selections
         kmm_yesno
+        kmm_menuactionexchanger
         ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install(FILES
