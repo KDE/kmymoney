@@ -11,7 +11,15 @@ include:
       - /gitlab-templates/craft-macos-arm64.yml
       - /gitlab-templates/craft-macos-x86-64.yml
 
+# macos installs currently only on demand since they are failing
+craft_macos_arm64:
+  when: manual
+
+craft_macos_x86_64:
+  when: manual
+
 # custom builds
+
 build_local_ubuntu_2110:
 # make it manual for now, since 21.10 alkimia is at 5.7 and as such incompatible with master
   when: manual
