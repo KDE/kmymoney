@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-20 01:45+0000\n"
-"PO-Revision-Date: 2024-05-20 14:31+0300\n"
+"PO-Revision-Date: 2024-05-21 14:25+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -1451,7 +1451,7 @@ msgstr ""
 "p><p>Herhangi bir yuvarlama yapmayın, yalnızca kalan olması durumunda bir "
 "uyarı yazdırın. Aksi takdirde RoundTrunc ile aynıdır.</p><p><span style=\" "
 "font-weight:600;\">RoundFloor</span></p><p>Değerden büyük olmayan en büyük "
-"tamsayı değerine yuvarlayın. Örn. 0,5 -&gt; 0,0 ve -0.5 -&gt; -1,0</"
+"tamsayı değerine yuvarlayın. Örn. 0,5 -&gt; 0,0 ve -0,5 -&gt; -1,0</"
 "p><p><span style=\" font-weight:600;\">RoundCeil</span></p><p>Değerden küçük "
 "olmayan en küçük tamsayı değerine yuvarlayın. Örn. 0,5 -&gt; 1,0 ve -0,5 -"
 "&gt; -0,0</p><p><span style=\" font-weight:600;\">RoundTruncate</span></"
@@ -15283,24 +15283,24 @@ msgstr "Bilinmeyen"
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:288
 #, kde-format
 msgid "Send transfer"
-msgstr "Havale gönder"
+msgstr "Havale Gönder"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_buttonNewCreditTransfer)
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:201
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:80
 #, kde-format
 msgid "New credit transfer"
-msgstr "Yeni kredi havalesi"
+msgstr "Yeni Kredi Havalesi"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:202
 #, kde-format
 msgid "Remove transfer"
-msgstr "Havaleyi kaldır"
+msgstr "Havaleyi Kaldır"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:203
 #, kde-format
 msgid "Edit transfer"
-msgstr "Havaleyi düzenle"
+msgstr "Havaleyi Düzenle"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:204
 #, kde-format
