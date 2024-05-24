@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-20 01:45+0000\n"
-"PO-Revision-Date: 2024-05-10 23:37+0200\n"
+"PO-Revision-Date: 2024-05-23 08:30+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -8197,11 +8197,10 @@ msgstr "*** SEN ASIGNAR ***"
 #: kmymoney/widgets/creditdebitedit.cpp:124
 #: kmymoney/widgets/creditdebitedit.cpp:153
 #: kmymoney/widgets/creditdebitedit.cpp:154
-#, fuzzy, kde-format
-#| msgid "calculate"
+#, kde-format
 msgctxt "@info:placeholder amount widget"
 msgid "calculated"
-msgstr "calcular"
+msgstr "calculada"
 
 #: kmymoney/mymoney/statusmodel.cpp:32
 #, kde-format
@@ -20948,8 +20947,7 @@ msgstr ""
 "+ da barra de lapelas enriba para seleccionar unha conta.</p></body></html>"
 
 #: kmymoney/views/splitdialog.cpp:310
-#, fuzzy, kde-format
-#| msgid "Sum of splits"
+#, kde-format
 msgctxt "Split editor summary"
 msgid "Sum of splits"
 msgstr "Suma das partidas"
