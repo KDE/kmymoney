@@ -25,6 +25,9 @@
 // QT Includes
 
 #include <QDebug>
+#include <QLocale>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 #include <QString>
 
 // ----------------------------------------------------------------------------
@@ -52,6 +55,8 @@ bool _negativePrefixCurrencySymbol = false;
 bool _positivePrefixCurrencySymbol = false;
 bool _negativeSpaceSeparatesSymbol = true;
 bool _positiveSpaceSeparatesSymbol = true;
+bool _useQtInternalFormmater = false;
+QLocale _locale;
 eMyMoney::Money::fileVersionE _fileVersion = fileVersionE::FILE_4_BYTE_VALUE;
 }
 }
@@ -213,6 +218,10 @@ QString MyMoneyMoney::formatMoney(int denom, bool showThousandSeparator) const
 
 QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool showThousandSeparator) const
 {
+    if (eMyMoney::Money::_useQtInternalFormmater) {
+        return eMyMoney::Money::_locale.toCurrencyString(this->toDouble(), currency, prec);
+    }
+
     QString res;
     QString tmpCurrency = currency;
     int tmpPrec = prec;
@@ -548,4 +557,48 @@ MyMoneyMoney MyMoneyMoney::convertDenominator(mpz_class denom, const AlkValue::R
     }
     return out;
 #endif
+}
+
+void MyMoneyMoney::detectCurrencyFormatting()
+{
+    const auto montaryLocale = qgetenv("LC_MONETARY");
+    if (!montaryLocale.isEmpty()) {
+        eMyMoney::Money::_locale = QLocale(montaryLocale);
+    }
+
+    qDebug() << "Monetary values will be formatted based on locale" << eMyMoney::Money::_locale.name()
+             << "Example: " << eMyMoney::Money::_locale.toCurrencyString(100);
+
+    const auto displayString = eMyMoney::Money::_locale.toCurrencyString(100);
+    const QRegularExpression digits("^([^01\\h]*)(\\h*)100(\\h*)([^01]*)$");
+    const auto match = digits.match(displayString);
+    if (match.hasMatch()) {
+        setPositivePrefixCurrencySymbol(false);
+        setNegativePrefixCurrencySymbol(false);
+        setPositiveSpaceSeparatesSymbol(false);
+        setNegativeSpaceSeparatesSymbol(false);
+        setPositiveMonetarySignPosition(eMyMoney::Money::SucceedSymbol);
+        setNegativeMonetarySignPosition(eMyMoney::Money::PreceedQuantityAndSymbol);
+
+        if (match.capturedLength(1) > 0) {
+            setPositivePrefixCurrencySymbol(true);
+            setNegativePrefixCurrencySymbol(true);
+            setPositiveSpaceSeparatesSymbol(match.capturedLength(2) > 0);
+            setNegativeSpaceSeparatesSymbol(match.capturedLength(2) > 0);
+        } else if (match.capturedLength(3) > 0) {
+            setPositivePrefixCurrencySymbol(false);
+            setNegativePrefixCurrencySymbol(false);
+            setPositiveSpaceSeparatesSymbol(match.capturedLength(4) > 0);
+            setNegativeSpaceSeparatesSymbol(match.capturedLength(4) > 0);
+        }
+        const auto negativeDisplayString = eMyMoney::Money::_locale.toCurrencyString(-100);
+        if (negativeDisplayString == QStringLiteral("(%1)").arg(displayString)) {
+            setNegativeMonetarySignPosition(eMyMoney::Money::ParensAround);
+        }
+    } else {
+        eMyMoney::Money::_useQtInternalFormmater = true;
+    }
+
+    setThousandSeparator(eMyMoney::Money::_locale.groupSeparator());
+    setDecimalSeparator(eMyMoney::Money::_locale.decimalPoint());
 }

@@ -26,27 +26,6 @@ QString osUsername();
  * This function returns the PID associated with the current process.
  */
 uint processId();
-
-enum currencySymbolPosition_t
-{
-    BeforeQuantityMoney,
-    BeforeQuantityMoneyWithSpace,
-    AfterQuantityMoney,
-    AfterQuantityMoneyWithSpace,
-};
-
-currencySymbolPosition_t currencySymbolPosition(bool negativeValues = false);
-
-enum currencySignPosition_t
-{
-    ParensAround,
-    PreceedQuantityAndSymbol,
-    SucceedQuantityAndSymbol,
-    PreceedSymbol,
-    SucceedSymbol,
-};
-
-currencySignPosition_t currencySignPosition(bool negativeValues = false);
 };
 
 #endif // PLATFORMTOOLS_H

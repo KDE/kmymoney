@@ -6,12 +6,10 @@
 
 #include "platformtools.h"
 
-#include <windows.h>
 #include <lmcons.h>
 #include <process.h>
-#include <locale.h>
+#include <windows.h>
 
-#include <QDebug>
 #include <QString>
 
 QString platformTools::osUsername()
@@ -28,50 +26,4 @@ QString platformTools::osUsername()
 uint platformTools::processId()
 {
     return _getpid();
-}
-
-static struct lconv* localeconv_with_init()
-{
-    static bool needInit = true;
-    if (needInit) {
-        setlocale(LC_ALL, ".UTF8");
-        needInit = false;
-    }
-    return localeconv();
-}
-
-platformTools::currencySymbolPosition_t platformTools::currencySymbolPosition(bool negativeValues)
-{
-    platformTools::currencySymbolPosition_t  rc = platformTools::AfterQuantityMoneyWithSpace;
-    struct lconv* lc = localeconv_with_init();
-    if (lc) {
-        const char precedes = negativeValues ? lc->n_cs_precedes : lc->p_cs_precedes;
-        const char space = negativeValues ? lc->n_sep_by_space : lc->p_sep_by_space;
-        if (precedes != 0) {
-            rc = (space != 0) ? platformTools::BeforeQuantityMoneyWithSpace : platformTools::BeforeQuantityMoney;
-        } else {
-            rc = (space != 0) ? platformTools::AfterQuantityMoneyWithSpace : platformTools::AfterQuantityMoney;
-        }
-    }
-
-    if (rc > AfterQuantityMoneyWithSpace) {
-        qDebug("currencySymbolPosition for %s values from locale is out of bounds (%d). Reset to default.", negativeValues ? "negative" : "positive", rc);
-        rc = platformTools::AfterQuantityMoneyWithSpace;
-    }
-    return rc;
-}
-
-platformTools::currencySignPosition_t platformTools::currencySignPosition(bool negativeValues)
-{
-    platformTools::currencySignPosition_t rc = platformTools::PreceedQuantityAndSymbol;
-    struct lconv* lc = localeconv_with_init();
-    if (lc) {
-        rc = static_cast<platformTools::currencySignPosition_t>(negativeValues ? lc->n_sign_posn : lc->p_sign_posn);
-    }
-
-    if (rc > SucceedSymbol) {
-        qDebug("currencySignPosition for %s values from locale is out of bounds (%d). Reset to default.", negativeValues ? "negative" : "positive", rc);
-        rc = platformTools::PreceedQuantityAndSymbol;
-    }
-    return rc;
 }

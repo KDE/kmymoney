@@ -211,45 +211,7 @@ int main(int argc, char *argv[])
 
     KMyMoneyUtils::checkConstants();
 
-    // setup the MyMoneyMoney locale settings according to the KDE settings
-    MyMoneyMoney::setThousandSeparator(QLocale().groupSeparator());
-    MyMoneyMoney::setDecimalSeparator(QLocale().decimalPoint());
-
-    // setup format of negative values
-    MyMoneyMoney::setNegativeSpaceSeparatesSymbol(false);
-    MyMoneyMoney::setNegativePrefixCurrencySymbol(false);
-    MyMoneyMoney::setNegativeMonetarySignPosition(static_cast<eMyMoney::Money::signPosition>(platformTools::currencySignPosition(true)));
-    switch(platformTools::currencySymbolPosition(true)) {
-    case platformTools::AfterQuantityMoneyWithSpace:
-        MyMoneyMoney::setNegativeSpaceSeparatesSymbol(true);
-    // intentional fall through
-    case platformTools::AfterQuantityMoney:
-        break;
-
-    case platformTools::BeforeQuantityMoneyWithSpace:
-        MyMoneyMoney::setNegativeSpaceSeparatesSymbol(true);
-    // intentional fall through
-    case platformTools::BeforeQuantityMoney:
-        MyMoneyMoney::setNegativePrefixCurrencySymbol(true);
-        break;
-    }
-    // setup format of positive values
-    MyMoneyMoney::setPositiveSpaceSeparatesSymbol(false);
-    MyMoneyMoney::setPositivePrefixCurrencySymbol(false);
-    MyMoneyMoney::setPositiveMonetarySignPosition(static_cast<eMyMoney::Money::signPosition>(platformTools::currencySignPosition(false)));
-    switch(platformTools::currencySymbolPosition(false)) {
-    case platformTools::AfterQuantityMoneyWithSpace:
-        MyMoneyMoney::setPositiveSpaceSeparatesSymbol(true);
-    // intentional fall through
-    case platformTools::AfterQuantityMoney:
-        break;
-    case platformTools::BeforeQuantityMoneyWithSpace:
-        MyMoneyMoney::setPositiveSpaceSeparatesSymbol(true);
-    // intentional fall through
-    case platformTools::BeforeQuantityMoney:
-        MyMoneyMoney::setPositivePrefixCurrencySymbol(true);
-        break;
-    }
+    MyMoneyMoney::detectCurrencyFormatting();
 
     kmymoney = new KMyMoneyApp();
 
