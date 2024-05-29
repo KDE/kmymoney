@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-20 01:45+0000\n"
+"POT-Creation-Date: 2024-05-29 02:08+0000\n"
 "PO-Revision-Date: 2015-02-19 20:48+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -6348,7 +6348,7 @@ msgstr "dump navnene på alle definerede KAction-objekter til stdout og afslut"
 msgid "file to open"
 msgstr "fil der skal åbnes"
 
-#: kmymoney/main.cpp:307
+#: kmymoney/main.cpp:269
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr "Ikke-fanget fejl. Rapportér venligst detaljerne til udviklerne"

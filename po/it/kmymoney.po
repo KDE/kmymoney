@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-20 01:45+0000\n"
+"POT-Creation-Date: 2024-05-29 02:08+0000\n"
 "PO-Revision-Date: 2024-05-10 16:20+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -6182,7 +6182,7 @@ msgstr "stampa i nomi di tutti gli oggetti QAction definiti su stdout ed esci"
 msgid "file to open"
 msgstr "file da aprire"
 
-#: kmymoney/main.cpp:307
+#: kmymoney/main.cpp:269
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr "Errore non catturato. Segnala i dettagli agli sviluppatori"

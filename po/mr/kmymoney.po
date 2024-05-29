@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-20 01:45+0000\n"
+"POT-Creation-Date: 2024-05-29 02:08+0000\n"
 "PO-Revision-Date: 2013-03-28 14:37+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -5842,7 +5842,7 @@ msgstr ""
 msgid "file to open"
 msgstr "उघडावयाची फाईल"
 
-#: kmymoney/main.cpp:307
+#: kmymoney/main.cpp:269
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr ""

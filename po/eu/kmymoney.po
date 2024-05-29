@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-20 01:45+0000\n"
+"POT-Creation-Date: 2024-05-29 02:08+0000\n"
 "PO-Revision-Date: 2024-02-13 01:23+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -6177,7 +6177,7 @@ msgstr ""
 msgid "file to open"
 msgstr "ireki beharreko fitxategia"
 
-#: kmymoney/main.cpp:307
+#: kmymoney/main.cpp:269
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr "Detektatu gabeko errorea. Jakinarazi xehetasunak garatzaileei"
