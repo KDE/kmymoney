@@ -213,6 +213,8 @@ public:
             ui->m_securitiesTree->selectionModel()->select(idx, QItemSelectionModel::SelectCurrent | QItemSelectionModel::Rows);
             ui->m_securitiesTree->setCurrentIndex(idx);
         }
+
+        q->updateActions(m_selections);
     }
 
     /**
