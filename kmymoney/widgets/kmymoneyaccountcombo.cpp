@@ -348,6 +348,7 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
     d->m_popupView = new QTreeView(this);
     d->m_popupView->setModel(model);
     d->m_popupView->setSelectionMode(QAbstractItemView::SingleSelection);
+    d->m_popupView->setMinimumHeight(200);
     setView(d->m_popupView);
 
     // we need to use the following logic to support the tree view popup because
