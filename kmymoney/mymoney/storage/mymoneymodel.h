@@ -362,7 +362,7 @@ public:
         else
             parentItem = static_cast<TreeItem<T>*>(parent.internalPointer());
 
-        if (startRow < 0 || startRow > parentItem->childCount())
+        if (startRow < 0 || startRow >= parentItem->childCount())
             return false;
 
         beginRemoveRows(parent, startRow, startRow + rows - 1);
