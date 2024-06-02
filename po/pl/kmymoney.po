@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-29 02:08+0000\n"
+"POT-Creation-Date: 2024-06-02 01:42+0000\n"
 "PO-Revision-Date: 2023-10-08 11:16+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -19777,17 +19777,17 @@ msgstr "Usuń instytucję"
 msgid "Unable to delete institution: %1"
 msgstr "Nie można usunąć instytucji: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:525
+#: kmymoney/views/kinvestmentview.cpp:539
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>Czy na pewno usunąć inwestycję <b>%1</b>?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:526
+#: kmymoney/views/kinvestmentview.cpp:540
 #, kde-format
 msgid "Delete investment"
 msgstr "Usuń inwestycję"
 
-#: kmymoney/views/kinvestmentview.cpp:537
+#: kmymoney/views/kinvestmentview.cpp:551
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "Nie można usunąć inwestycji: %1"

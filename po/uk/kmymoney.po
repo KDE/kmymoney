@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-29 02:08+0000\n"
+"POT-Creation-Date: 2024-06-02 01:42+0000\n"
 "PO-Revision-Date: 2024-05-20 18:48+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian\n"
@@ -19913,17 +19913,17 @@ msgstr "Вилучення установи"
 msgid "Unable to delete institution: %1"
 msgstr "Не вдалося вилучити дані установи: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:525
+#: kmymoney/views/kinvestmentview.cpp:539
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>Ви справді бажаєте вилучити інвестицію <b>%1</b>?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:526
+#: kmymoney/views/kinvestmentview.cpp:540
 #, kde-format
 msgid "Delete investment"
 msgstr "Вилучити інвестицію"
 
-#: kmymoney/views/kinvestmentview.cpp:537
+#: kmymoney/views/kinvestmentview.cpp:551
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "Не вдалося вилучити інвестицію: %1"

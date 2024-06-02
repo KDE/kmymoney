@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-29 02:08+0000\n"
+"POT-Creation-Date: 2024-06-02 01:42+0000\n"
 "PO-Revision-Date: 2009-12-24 06:59-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -19615,17 +19615,17 @@ msgstr "Institiúid"
 msgid "Unable to delete institution: %1"
 msgstr ""
 
-#: kmymoney/views/kinvestmentview.cpp:525
+#: kmymoney/views/kinvestmentview.cpp:539
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr ""
 
-#: kmymoney/views/kinvestmentview.cpp:526
+#: kmymoney/views/kinvestmentview.cpp:540
 #, kde-format
 msgid "Delete investment"
 msgstr ""
 
-#: kmymoney/views/kinvestmentview.cpp:537
+#: kmymoney/views/kinvestmentview.cpp:551
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr ""

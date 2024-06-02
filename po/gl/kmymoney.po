@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-29 02:08+0000\n"
+"POT-Creation-Date: 2024-06-02 01:42+0000\n"
 "PO-Revision-Date: 2024-05-23 08:30+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -19763,17 +19763,17 @@ msgstr "Eliminar a entidade…"
 msgid "Unable to delete institution: %1"
 msgstr "Non é posíbel eliminar a entidade: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:525
+#: kmymoney/views/kinvestmentview.cpp:539
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>Seguro que quere eliminar o investimento <b>%1</b>?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:526
+#: kmymoney/views/kinvestmentview.cpp:540
 #, kde-format
 msgid "Delete investment"
 msgstr "Borrar o investimento"
 
-#: kmymoney/views/kinvestmentview.cpp:537
+#: kmymoney/views/kinvestmentview.cpp:551
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "Non é posíbel eliminar o investimento: %1"
