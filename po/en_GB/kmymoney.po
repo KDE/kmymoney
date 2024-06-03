@@ -5,13 +5,13 @@
 #
 # Benjamin <benjamincarlyle@optusnet.com.au>, 2004.
 # Andrew Coles <andrew_coles@yahoo.co.uk>, 2009, 2010.
-# Steve Allewell <steve.allewell@gmail.com>, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Steve Allewell <steve.allewell@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2023-03-14 21:06+0000\n"
+"PO-Revision-Date: 2024-06-02 12:16+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.03.70\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -6432,11 +6432,10 @@ msgid "&Replace"
 msgstr "&Replace"
 
 #: kmymoney/kmymoney.cpp:2436
-#, fuzzy, kde-format
-#| msgid "Unable to create account: %1"
+#, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
-msgstr "Unable to create account: %1"
+msgstr "Unable to create backup directory '%1'."
 
 #: kmymoney/kmymoney.cpp:2441
 #, kde-format
@@ -9842,11 +9841,9 @@ msgid "Account Type:"
 msgstr "Account Type:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:101
-#, fuzzy, kde-format
-#| msgctxt "Header for AqBanking account list"
-#| msgid "Account Name"
+#, kde-format
 msgid "Account Name:"
-msgstr "Account Name"
+msgstr "Account Name:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #, kde-format
