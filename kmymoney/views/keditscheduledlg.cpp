@@ -79,6 +79,7 @@ public:
         , m_accountCombo(nullptr)
         , m_categoryCombo(nullptr)
         , transactionEditor(nullptr)
+        , m_warningAboutChangedFrequencyShown(false)
     {
     }
 
@@ -296,6 +297,20 @@ public:
         m_schedule.setOccurrencePeriod(occurrence);
     }
 
+    void showWarningAboutChangedFrequency()
+    {
+        if (!m_warningAboutChangedFrequencyShown) {
+            KMessageBox::information(q_ptr,
+                                     i18nc("@info Scheduled frequency changed",
+                                           "<qt>You have changed the frequency of the schedule.<br>Please make sure to adjust the next due date after each "
+                                           "such change.<br><i>Note:</i> This information will only be shown once for this schedule's edit session.</qt>"),
+                                     i18nc("@info:title", "Schedule frequency changed"),
+                                     QString(),
+                                     KMessageBox::WindowModal);
+            m_warningAboutChangedFrequencyShown = true;
+        }
+    }
+
     KEditScheduleDlg* q_ptr;
     Ui::KEditScheduleDlg* ui;
     Ui::KEditScheduleDlg* tabOrderUi;
@@ -307,6 +322,7 @@ public:
     QWidgetList m_tabOrderWidgets;
     OccurrencesModel m_frequencyModel;
     PaymentMethodModel m_paymentMethodModel;
+    bool m_warningAboutChangedFrequencyShown;
 };
 
 KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* parent)
@@ -429,6 +445,12 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* par
 
     // update the widget hint frames
     d->updateState();
+
+    // This connection must not be established before loadWidgets() was called
+    connect(d->ui->frequencyEdit, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&]() {
+        Q_D(KEditScheduleDlg);
+        d->showWarningAboutChangedFrequency();
+    });
 
     // we delay setting up the tab order until we drop back to the event loop.
     // this will make sure that all widgets are visible and the tab order logic
