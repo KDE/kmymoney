@@ -1497,6 +1497,14 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
     connect(d->m_myMoneyView, &KMyMoneyView::requestCustomContextMenu, this, [&](eMenu::Menu type, const QPoint& pos) {
         if (pMenus.contains(type)) {
+            if (type == eMenu::Menu::Schedule) {
+                const auto scheduleId = d->m_selections.firstSelection(SelectedObjects::Schedule);
+                pActions[eMenu::Action::EnterSchedule]->setData(scheduleId);
+                pActions[eMenu::Action::EditSchedule]->setData(scheduleId);
+                pActions[eMenu::Action::DeleteSchedule]->setData(scheduleId);
+                pActions[eMenu::Action::SkipSchedule]->setData(scheduleId);
+                pActions[eMenu::Action::DuplicateSchedule]->setData(scheduleId);
+            }
             pMenus[type]->exec(pos);
         } else
             qDebug() << "Context menu for type" << static_cast<int>(type) << " not found";

@@ -225,7 +225,7 @@ void KScheduledView::slotEditSchedule()
 void KScheduledView::slotDeleteSchedule()
 {
     Q_D(KScheduledView);
-    const auto schedule = d->selectedSchedule();
+    const auto schedule = d->selectedSchedule(pActions[eMenu::Action::DeleteSchedule]);
     if (!schedule.id().isEmpty()) {
         MyMoneyFileTransaction ft;
         try {
@@ -252,7 +252,7 @@ void KScheduledView::slotDuplicateSchedule()
     Q_D(KScheduledView);
     // since we may jump here via code, we have to make sure to react only
     // if the action is enabled
-    MyMoneySchedule schedule = d->selectedSchedule();
+    MyMoneySchedule schedule = d->selectedSchedule(pActions[eMenu::Action::DuplicateSchedule]);
     if (pActions[eMenu::Action::DuplicateSchedule]->isEnabled() && !schedule.id().isEmpty()) {
         schedule.clearId();
         schedule.setLastPayment(QDate());
@@ -266,14 +266,18 @@ void KScheduledView::slotDuplicateSchedule()
             MyMoneyFile::instance()->addSchedule(schedule);
             ft.commit();
 
-            // select the new schedule in the view
-            const auto indexes = d->m_filterModel->match(d->m_filterModel->index(0, 0),
-                                                         eMyMoney::Model::IdRole,
-                                                         QVariant(schedule.id()),
-                                                         1,
-                                                         Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
-            if (!indexes.isEmpty()) {
-                d->ui->m_scheduleTree->setCurrentIndex(indexes.at(0));
+            // the filterModel might not be initialized if we get here
+            // by the ledger view's context menu
+            if (d->m_filterModel) {
+                // select the new schedule in the view
+                const auto indexes = d->m_filterModel->match(d->m_filterModel->index(0, 0),
+                                                             eMyMoney::Model::IdRole,
+                                                             QVariant(schedule.id()),
+                                                             1,
+                                                             Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+                if (!indexes.isEmpty()) {
+                    d->ui->m_scheduleTree->setCurrentIndex(indexes.at(0));
+                }
             }
 
         } catch (const MyMoneyException &e) {
