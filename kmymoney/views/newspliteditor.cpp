@@ -103,6 +103,7 @@ struct NewSplitEditor::Private
     void createCategory();
     void createPayee();
     void createTag();
+    void updateFocusWidget();
 
     NewSplitEditor* q;
     Ui_NewSplitEditor* ui;
@@ -305,6 +306,21 @@ void NewSplitEditor::Private::createTag()
     creator->createTag();
 }
 
+void NewSplitEditor::Private::updateFocusWidget()
+{
+    // set focus to first enabled tab field once we return to event loop
+    const auto tabOrder = q->property("kmm_currenttaborder").toStringList();
+    if (!tabOrder.isEmpty()) {
+        for (const auto& widget : qAsConst(tabOrder)) {
+            const auto focusWidget = q->findChild<QWidget*>(widget);
+            if (focusWidget && focusWidget->isEnabled()) {
+                QMetaObject::invokeMethod(focusWidget, "setFocus", Qt::QueuedConnection);
+                break;
+            }
+        }
+    }
+}
+
 NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity, const QString& counterAccountId)
     : QWidget(parent)
     , d(new Private(this))
@@ -414,14 +430,7 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
         d->ui->creditDebitEdit->swapCreditDebit();
     }
 
-    // set focus to first tab field once we return to event loop
-    const auto tabOrder = property("kmm_currenttaborder").toStringList();
-    if (!tabOrder.isEmpty()) {
-        const auto focusWidget = findChild<QWidget*>(tabOrder.first());
-        if (focusWidget) {
-            QMetaObject::invokeMethod(focusWidget, "setFocus", Qt::QueuedConnection);
-        }
-    }
+    d->updateFocusWidget();
 }
 
 NewSplitEditor::~NewSplitEditor()
@@ -549,6 +558,7 @@ void NewSplitEditor::setShares(const MyMoneyMoney& amount)
 {
     d->shares = amount;
     d->ui->creditDebitEdit->setShares(amount);
+    d->updateFocusWidget();
 }
 
 MyMoneyMoney NewSplitEditor::value() const
@@ -560,6 +570,7 @@ void NewSplitEditor::setValue(const MyMoneyMoney& amount)
 {
     d->value = amount;
     d->ui->creditDebitEdit->setValue(amount);
+    d->updateFocusWidget();
 }
 
 QString NewSplitEditor::costCenterId() const

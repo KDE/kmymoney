@@ -72,6 +72,10 @@ set( kmm_selections_SRCS
   selectedobjects.cpp
 )
 
+set( kmm_menuactionexchanger_SRCS
+  kmm_menuactionexchanger.cpp
+)
+
 add_library(kmm_utils_validators STATIC ${kmm_utils_validators_SRCS})
 add_library(kmm_utils_platformtools STATIC ${kmm_utils_platformtools_SRCS})
 add_library(kmm_url STATIC ${kmm_url_SRCS})
@@ -81,6 +85,7 @@ add_library(kmm_keychain ${kmm_keychain_SRCS})
 add_library(kmm_printer ${kmm_printer_SRCS})
 add_library(kmm_selections ${kmm_selections_SRCS})
 add_library(kmm_yesno ${kmm_yesno_SRCS})
+add_library(kmm_menuactionexchanger ${kmm_menuactionexchanger_SRCS})
 
 target_link_libraries( kmm_utils_validators
   PUBLIC
@@ -143,6 +148,12 @@ target_link_libraries(kmm_yesno
     KF5::WidgetsAddons
 )
 
+target_link_libraries(kmm_menuactionexchanger
+  PUBLIC
+    Qt::Core
+    Qt::Widgets
+)
+
 set_target_properties(kmm_selections PROPERTIES
   VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
 )
@@ -167,6 +178,11 @@ set_target_properties(kmm_yesno PROPERTIES
   VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
 )
 generate_export_header(kmm_yesno)
+
+set_target_properties(kmm_menuactionexchanger PROPERTIES
+  VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
+)
+generate_export_header(kmm_menuactionexchanger)
 
 
 set( kmm_gpgfile_SRCS
@@ -194,6 +210,7 @@ install(TARGETS
         kmm_keychain
         kmm_selections
         kmm_yesno
+        kmm_menuactionexchanger
         ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install(FILES
@@ -202,5 +219,6 @@ install(FILES
         ${CMAKE_CURRENT_BINARY_DIR}/kmm_webconnect_export.h
         ${CMAKE_CURRENT_BINARY_DIR}/kmm_keychain_export.h
         ${CMAKE_CURRENT_BINARY_DIR}/kmm_yesno_export.h
+        ${CMAKE_CURRENT_BINARY_DIR}/kmm_menuactionexchanger_export.h
   DESTINATION ${KDE_INSTALL_INCLUDEDIR}/kmymoney COMPONENT Devel)
 

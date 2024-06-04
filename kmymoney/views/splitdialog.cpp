@@ -294,16 +294,25 @@ void SplitDialog::adjustSummary()
 
     d->splitsTotal = 0;
     const auto model = d->ui->splitView->model();
+
+    bool haveAutoCalcSplits(false);
     for (int row = 0; row < model->rowCount(); ++row) {
         const auto index = model->index(row, 0);
         if (index.isValid() && !index.data(eMyMoney::Model::SplitIsNewRole).toBool()) {
+            haveAutoCalcSplits |= index.data(eMyMoney::Model::SplitIsAutoCalcRole).toBool();
             d->splitsTotal += index.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
         }
     }
 
     const int denom = MyMoneyMoney::denomToPrec(d->fraction);
     QString formattedValue = (d->splitsTotal * d->inversionFactor).formatMoney(currencySymbol, denom);
-    d->ui->summaryView->item(SumRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
+    if (!haveAutoCalcSplits) {
+        d->ui->summaryView->item(SumRow, HeaderCol)->setData(Qt::DisplayRole, i18nc("Split editor summary", "Sum of splits"));
+        d->ui->summaryView->item(SumRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
+    } else {
+        d->ui->summaryView->item(SumRow, HeaderCol)->setData(Qt::DisplayRole, QString());
+        d->ui->summaryView->item(SumRow, ValueCol)->setData(Qt::DisplayRole, QString());
+    }
 
     if (d->transactionEditor) {
         if (d->transactionTotal.isAutoCalc()) {
@@ -313,7 +322,7 @@ void SplitDialog::adjustSummary()
         }
         d->ui->summaryView->item(AmountRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
 
-        if (!d->transactionTotal.isAutoCalc()) {
+        if (!d->transactionTotal.isAutoCalc() && !haveAutoCalcSplits) {
             auto diff = d->transactionTotal.abs() - d->splitsTotal.abs();
             if (diff.isNegative()) {
                 d->ui->summaryView->item(DiffRow, HeaderCol)->setData(Qt::DisplayRole, i18nc("Split editor summary", "Overassigned"));

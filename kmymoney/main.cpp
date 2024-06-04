@@ -25,8 +25,18 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#define HAVE_ICON_THEME __has_include(<KIconTheme>)
+#if HAVE_ICON_THEME
+#include <KIconTheme>
+#endif
+
 #include <KLocalizedString>
 #include <KMessageBox>
+
+#define HAVE_STYLE_MANAGER __has_include(<KStyleManager>)
+#if HAVE_STYLE_MANAGER
+#include <KStyleManager>
+#endif
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -74,9 +84,34 @@ int main(int argc, char *argv[])
 #endif
 
     /**
+     * trigger initialisation of proper icon theme
+     */
+#if HAVE_ICON_THEME
+#if KICONTHEMES_VERSION >= QT_VERSION_CHECK(6, 3, 0)
+    KIconTheme::initTheme();
+#endif
+#endif
+
+    /**
      * Create application first
      */
     QApplication app(argc, argv);
+
+#if HAVE_STYLE_MANAGER
+    /**
+     * trigger initialisation of proper application style
+     */
+    KStyleManager::initStyle();
+#else
+#if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
+    /**
+     * For Windows and macOS: use Breeze if available
+     * Of all tested styles that works the best for us
+     */
+    QApplication::setStyle(QStringLiteral("breeze"));
+#endif
+#endif
+
     KLocalizedString::setApplicationDomain("kmymoney");
 
     AlkEnvironment::checkForAppImageEnvironment(argv[0]);
@@ -176,45 +211,7 @@ int main(int argc, char *argv[])
 
     KMyMoneyUtils::checkConstants();
 
-    // setup the MyMoneyMoney locale settings according to the KDE settings
-    MyMoneyMoney::setThousandSeparator(QLocale().groupSeparator());
-    MyMoneyMoney::setDecimalSeparator(QLocale().decimalPoint());
-
-    // setup format of negative values
-    MyMoneyMoney::setNegativeSpaceSeparatesSymbol(false);
-    MyMoneyMoney::setNegativePrefixCurrencySymbol(false);
-    MyMoneyMoney::setNegativeMonetarySignPosition(static_cast<eMyMoney::Money::signPosition>(platformTools::currencySignPosition(true)));
-    switch(platformTools::currencySymbolPosition(true)) {
-    case platformTools::AfterQuantityMoneyWithSpace:
-        MyMoneyMoney::setNegativeSpaceSeparatesSymbol(true);
-    // intentional fall through
-    case platformTools::AfterQuantityMoney:
-        break;
-
-    case platformTools::BeforeQuantityMoneyWithSpace:
-        MyMoneyMoney::setNegativeSpaceSeparatesSymbol(true);
-    // intentional fall through
-    case platformTools::BeforeQuantityMoney:
-        MyMoneyMoney::setNegativePrefixCurrencySymbol(true);
-        break;
-    }
-    // setup format of positive values
-    MyMoneyMoney::setPositiveSpaceSeparatesSymbol(false);
-    MyMoneyMoney::setPositivePrefixCurrencySymbol(false);
-    MyMoneyMoney::setPositiveMonetarySignPosition(static_cast<eMyMoney::Money::signPosition>(platformTools::currencySignPosition(false)));
-    switch(platformTools::currencySymbolPosition(false)) {
-    case platformTools::AfterQuantityMoneyWithSpace:
-        MyMoneyMoney::setPositiveSpaceSeparatesSymbol(true);
-    // intentional fall through
-    case platformTools::AfterQuantityMoney:
-        break;
-    case platformTools::BeforeQuantityMoneyWithSpace:
-        MyMoneyMoney::setPositiveSpaceSeparatesSymbol(true);
-    // intentional fall through
-    case platformTools::BeforeQuantityMoney:
-        MyMoneyMoney::setPositivePrefixCurrencySymbol(true);
-        break;
-    }
+    MyMoneyMoney::detectCurrencyFormatting();
 
     kmymoney = new KMyMoneyApp();
 

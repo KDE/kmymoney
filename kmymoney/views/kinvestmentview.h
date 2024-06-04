@@ -49,6 +49,7 @@ protected:
 
 private:
     Q_DECLARE_PRIVATE(KInvestmentView)
+    void refreshEquities();
 
 private Q_SLOTS:
     void slotNewInvestment();

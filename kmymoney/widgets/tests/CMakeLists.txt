@@ -8,7 +8,7 @@ add_library(testwidgets STATIC ${testwidgets_SOURCES})
 target_link_libraries(testwidgets PUBLIC
     Qt::Gui
     Qt::Core
-    kmm_utils_platformtools
+    kmm_mymoney
 )
 
 file(GLOB tests_sources "*-test.cpp")

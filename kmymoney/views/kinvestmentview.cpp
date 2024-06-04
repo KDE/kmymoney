@@ -213,6 +213,8 @@ public:
             ui->m_securitiesTree->selectionModel()->select(idx, QItemSelectionModel::SelectCurrent | QItemSelectionModel::Rows);
             ui->m_securitiesTree->setCurrentIndex(idx);
         }
+
+        q->updateActions(m_selections);
     }
 
     /**
@@ -323,6 +325,10 @@ void KInvestmentView::executeAction(eMenu::Action action, const SelectedObjects&
         d->m_equitySelections.clearSelections();
         d->m_securitySelections.clearSelections();
         d->m_selections.clearSelections();
+        if (!d->m_needLoad) {
+            // make sure to remove any account reference
+            d->ui->m_accountComboBox->setSelected(QString());
+        }
         break;
 
     default:
@@ -414,6 +420,18 @@ void KInvestmentView::showEvent(QShowEvent* event)
         connect(d->ui->m_accountComboBox, &KMyMoneyAccountCombo::accountSelected, this, [&](const QString& accountId) {
             Q_D(KInvestmentView);
             d->loadAccount(accountId);
+        });
+
+        connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::rowsInserted, this, [&]() {
+            Q_D(KInvestmentView);
+            // Maybe due to the somewhat special way the accounts proxy model is setup,
+            // the very first stock account added as subaccount to the selected investment
+            // account does not show up in the list (m_equitiesTree). Reselecting the
+            // investment account when the application returns to the main loop will
+            // kick the necessary update of the view
+            if (d->m_equitiesProxyModel->rowCount() == 0) {
+                QMetaObject::invokeMethod(this, &KInvestmentView::refreshEquities, Qt::QueuedConnection);
+            }
         });
 
         d->selectDefaultInvestmentAccount();
@@ -603,4 +621,10 @@ void KInvestmentView::slotSettingsChanged()
         d->m_equitiesProxyModel->setHideClosedAccounts(!showAllAccounts);
         d->loadAccount(d->m_idInvAcc);
     }
+}
+
+void KInvestmentView::refreshEquities()
+{
+    Q_D(KInvestmentView);
+    d->loadAccount(d->m_idInvAcc);
 }

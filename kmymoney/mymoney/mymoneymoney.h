@@ -123,6 +123,8 @@ public:
     static void setNegativeSpaceSeparatesSymbol(const bool flag);
     static void setPositiveSpaceSeparatesSymbol(const bool flag);
 
+    static void detectCurrencyFormatting();
+
     static const QChar thousandSeparator();
     static const QChar decimalSeparator();
     static eMyMoney::Money::signPosition negativeMonetarySignPosition();

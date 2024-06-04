@@ -136,8 +136,9 @@ void PivotTable::init()
         //
         // Create rows for income/expense reports with all accounts included
         //
-        if (m_config.isIncludingUnusedAccounts())
+        if (m_config.isIncludingUnusedAccounts()) {
             createAccountRows();
+        }
     }
 
     //
@@ -317,6 +318,14 @@ void PivotTable::init()
                     MyMoneyMoney value;
                     // the outer group is the account class (major account type)
                     eMyMoney::Account::Type type = splitAccount.accountGroup();
+                    if (m_config.hasBudget()) {
+                        // if running a budget report, we may need to use the budgetAccountType
+                        // and then may have to adjust the reverse factor
+                        if (splitAccount.accountType() != splitAccount.budgetAccountType()) {
+                            type = MyMoneyAccount::accountGroup(splitAccount.budgetAccountType());
+                            reverse = MyMoneyMoney(MyMoneyAccount::isIncomeExpense(type) ? -1 : 1, 1);
+                        }
+                    }
                     QString outergroup = MyMoneyAccount::accountTypeToString(type);
 
                     value = (*it_split).shares();
@@ -894,12 +903,12 @@ void PivotTable::calculateBudgetMapping()
         // Go through all accounts in the system to build the mapping
         QList<MyMoneyAccount> accounts;
         file->accountList(accounts);
-        QList<MyMoneyAccount>::const_iterator it_account = accounts.constBegin();
-        while (it_account != accounts.constEnd()) {
+
+        for (const auto& account : qAsConst(accounts)) {
             //include only the accounts selected for the report
-            if (m_config.includes(*it_account)) {
-                QString id = (*it_account).id();
-                QString acid = id;
+            if (m_config.includes(account)) {
+                QString id = account.id();
+                const QString acid = id;
 
                 // If the budget contains this account outright
                 if (budget.contains(id)) {
@@ -926,28 +935,25 @@ void PivotTable::calculateBudgetMapping()
                     } while (! id.isEmpty());
                 }
             }
-            ++it_account;
-        } // end while looping through the accounts in the file
+        } // end looping through the accounts in the file
 
         // Place the budget values into the budget grid
-        QList<MyMoneyBudget::AccountGroup> baccounts = budget.getaccounts();
-        QList<MyMoneyBudget::AccountGroup>::const_iterator it_bacc = baccounts.constBegin();
-        while (it_bacc != baccounts.constEnd()) {
-            ReportAccount splitAccount((*it_bacc).id());
+        const QList<MyMoneyBudget::AccountGroup> baccounts = budget.getaccounts();
+        for (const auto& budgetAccount : qAsConst(baccounts)) {
+            ReportAccount splitAccount(budgetAccount.id());
 
-            //include the budget account only if it is included in the report
+            // include the budget account only if it is included in the report
             if (m_config.includes(splitAccount)) {
-                eMyMoney::Account::Type type = splitAccount.accountGroup();
-                QString outergroup = MyMoneyAccount::accountTypeToString(type);
+                const eMyMoney::Account::Type budgetAccountType = MyMoneyAccount::accountGroup(splitAccount.budgetAccountType());
+                QString outergroup = MyMoneyAccount::accountTypeToString(budgetAccountType);
 
                 // reverse sign to match common notation for cash flow direction, only for expense/income splits
-                MyMoneyMoney reverse((splitAccount.accountType() == eMyMoney::Account::Type::Expense) ? -1 : 1, 1);
+                MyMoneyMoney reverse((budgetAccountType == eMyMoney::Account::Type::Expense) ? -1 : 1, 1);
 
-                const QMap<QDate, MyMoneyBudget::PeriodGroup>& periods = (*it_bacc).getPeriods();
+                const QMap<QDate, MyMoneyBudget::PeriodGroup>& periods = budgetAccount.getPeriods();
 
                 // skip the account if it has no periods
                 if (periods.count() < 1) {
-                    ++it_bacc;
                     continue;
                 }
 
@@ -955,7 +961,7 @@ void PivotTable::calculateBudgetMapping()
                 int column = m_startColumn;
 
                 // based on the kind of budget it is, deal accordingly
-                switch ((*it_bacc).budgetLevel()) {
+                switch (budgetAccount.budgetLevel()) {
                 case eMyMoney::Budget::Level::Yearly:
                     // divide the single yearly value by 12 and place it in each column
                     value /= MyMoneyMoney(12, 1);
@@ -1020,7 +1026,6 @@ void PivotTable::calculateBudgetMapping()
                 }
                 }
             }
-            ++it_bacc;
         }
     } // end if there was a budget
 }

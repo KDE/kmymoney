@@ -15,7 +15,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "platformtools.h"
+#include "mymoneyenums.h"
+#include "mymoneymoney.h"
 
 AmountValidator::AmountValidator(QObject * parent) :
     AmountValidator(-HUGE_VAL, HUGE_VAL, 1000, parent)
@@ -34,8 +35,8 @@ QValidator::State AmountValidator::validate(QString& input, int& pos) const
     const auto openParen = QStringLiteral("(");
     const auto closeParen = QStringLiteral(")");
 
-    if ((platformTools::currencySignPosition(true) == platformTools::ParensAround)
-        || (platformTools::currencySignPosition(false) == platformTools::ParensAround)) {
+    if ((MyMoneyMoney::negativeMonetarySignPosition() == eMyMoney::Money::signPosition::ParensAround)
+        || (MyMoneyMoney::positiveMonetarySignPosition() == eMyMoney::Money::signPosition::ParensAround)) {
         const auto openCount = input.count(openParen);
         const auto closeCount = input.count(closeParen);
 

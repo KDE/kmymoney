@@ -107,6 +107,7 @@
 #include "equitiesmodel.h"
 #include "journalmodel.h"
 #include "keditscheduledlg.h"
+#include "kmm_menuactionexchanger.h"
 #include "kmymoneyadaptor.h"
 #include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
@@ -267,6 +268,7 @@ public:
         , m_applicationIsReady(true)
         , m_webConnect(new WebConnect(app))
         , m_searchDlg(nullptr)
+        , m_actionExchanger(new KMenuActionExchanger(q))
     {
         // since the days of the week are from 1 to 7,
         // and a day of the week is used to index this bit array,
@@ -379,6 +381,8 @@ public:
     QHash<eMenu::Action, SharedActionButtonInfo> m_sharedActionButtons;
 
     KSearchTransactionDlg* m_searchDlg;
+
+    KMenuActionExchanger* m_actionExchanger;
 
     // methods
     void consistencyCheck(bool alwaysDisplayResults);
@@ -1493,6 +1497,14 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
     connect(d->m_myMoneyView, &KMyMoneyView::requestCustomContextMenu, this, [&](eMenu::Menu type, const QPoint& pos) {
         if (pMenus.contains(type)) {
+            if (type == eMenu::Menu::Schedule) {
+                const auto scheduleId = d->m_selections.firstSelection(SelectedObjects::Schedule);
+                pActions[eMenu::Action::EnterSchedule]->setData(scheduleId);
+                pActions[eMenu::Action::EditSchedule]->setData(scheduleId);
+                pActions[eMenu::Action::DeleteSchedule]->setData(scheduleId);
+                pActions[eMenu::Action::SkipSchedule]->setData(scheduleId);
+                pActions[eMenu::Action::DuplicateSchedule]->setData(scheduleId);
+            }
             pMenus[type]->exec(pos);
         } else
             qDebug() << "Context menu for type" << static_cast<int>(type) << " not found";
@@ -1671,8 +1683,11 @@ QHash<eMenu::Menu, QMenu *> KMyMoneyApp::initMenus()
         {Menu::MarkTransactionContext, QStringLiteral("transaction_context_mark_menu")},
     };
 
-    for (auto it = menuNames.cbegin(); it != menuNames.cend(); ++it)
+    for (auto it = menuNames.cbegin(); it != menuNames.cend(); ++it) {
         lutMenus.insert(it.key(), qobject_cast<QMenu*>(factory()->container(it.value(), this)));
+    }
+
+    d->m_actionExchanger->addExchange(lutMenus[Menu::Schedule], Qt::Key_Shift, pActions[Action::EditSchedule], pActions[Action::EditScheduleForce]);
     return lutMenus;
 }
 
@@ -1874,6 +1889,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             //Schedule
             {Action::NewSchedule,                   QStringLiteral("schedule_new"),                   i18n("New schedule..."),                            Icon::NewSchedule},
             {Action::EditSchedule,                  QStringLiteral("schedule_edit"),                  i18n("Edit scheduled transaction"),                 Icon::DocumentEdit},
+            {Action::EditScheduleForce,             QStringLiteral("schedule_edit_force"),            i18n("Edit scheduled transaction"),                 Icon::DocumentEdit},
             {Action::DeleteSchedule,                QStringLiteral("schedule_delete"),                i18n("Delete scheduled transaction"),               Icon::EditRemove},
             {Action::DuplicateSchedule,             QStringLiteral("schedule_duplicate"),             i18n("Duplicate scheduled transaction"),            Icon::EditCopy},
             {Action::EnterSchedule,                 QStringLiteral("schedule_enter"),                 i18n("Enter next transaction..."),                  Icon::KeyEnter},
