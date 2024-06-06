@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-05 02:06+0000\n"
-"PO-Revision-Date: 2024-05-20 17:36+0200\n"
+"PO-Revision-Date: 2024-06-05 17:57+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -19194,13 +19194,16 @@ msgid ""
 "adjust the next due date after each such change.<br><i>Note:</i> This "
 "information will only be shown once for this schedule's edit session.</qt>"
 msgstr ""
+"<qt>Du har ändrat schemats frekvens.<br>Se till att justera nästa "
+"förfallodatum efter varje sådan ändring.<br><i>Observera:</i> Den här "
+"informationen visas bara en gång för det här schemats redigeringssession.</"
+"qt>"
 
 #: kmymoney/views/keditscheduledlg.cpp:307
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
-msgstr "Schema hittades"
+msgstr "Schemafrekvens ändrad"
 
 #: kmymoney/views/keditscheduledlg.cpp:600
 #, kde-format

@@ -13,14 +13,14 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-05 02:06+0000\n"
-"PO-Revision-Date: 2024-05-20 17:44+0200\n"
+"PO-Revision-Date: 2024-06-05 10:30+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.0\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -19337,13 +19337,16 @@ msgid ""
 "adjust the next due date after each such change.<br><i>Note:</i> This "
 "information will only be shown once for this schedule's edit session.</qt>"
 msgstr ""
+"<qt>U hebt de frequentie van de periodieke transactie gewijzigd.<br>Pas dan "
+"ook de volgende verloopdatum aan na zo'n wijziging.<br><i>Opmerking:</i> "
+"Deze informatie zal alleen eenmaal getoond worden voor deze bewerkingssessie "
+"van de planning.</qt>"
 
 #: kmymoney/views/keditscheduledlg.cpp:307
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
-msgstr "Periodieke transactie gevonden"
+msgstr "Frequentie periodieke transactie gewijzigd"
 
 #: kmymoney/views/keditscheduledlg.cpp:600
 #, kde-format

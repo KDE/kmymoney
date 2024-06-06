@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-05 02:06+0000\n"
-"PO-Revision-Date: 2024-05-30 22:41+0200\n"
+"PO-Revision-Date: 2024-06-05 23:54+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
@@ -19177,13 +19177,15 @@ msgid ""
 "adjust the next due date after each such change.<br><i>Note:</i> This "
 "information will only be shown once for this schedule's edit session.</qt>"
 msgstr ""
+"<qt>Vi ŝanĝis la frekvencon de la horaro.<br>Bonvolu certigi ĝustigi la "
+"sekvan ligdaton post ĉiu tia ŝanĝo.<br><i>Noto:</i> Ĉi tiu informo nur "
+"montriĝos unufoje por la redakta seanco de ĉi tiu horaro.</qt>"
 
 #: kmymoney/views/keditscheduledlg.cpp:307
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
-msgstr "Horaro trovita"
+msgstr "Horara frekvenco ŝanĝiĝis"
 
 #: kmymoney/views/keditscheduledlg.cpp:600
 #, kde-format

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-05 02:06+0000\n"
-"PO-Revision-Date: 2024-05-21 07:30+0200\n"
+"PO-Revision-Date: 2024-06-05 07:13+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -31,12 +31,12 @@ msgstr "matjaz.jeran@amis.net"
 #: kmymoney/converter/mymoneystatementreader.cpp:130
 #, kde-format
 msgid "_Fees"
-msgstr "_Pristojbine"
+msgstr "Pristojbine"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:136
 #, kde-format
 msgid "_Dividend"
-msgstr "_Dividende"
+msgstr "Dividende"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:372
 #, kde-format
@@ -19283,13 +19283,15 @@ msgid ""
 "adjust the next due date after each such change.<br><i>Note:</i> This "
 "information will only be shown once for this schedule's edit session.</qt>"
 msgstr ""
+"<qt>Spremenili ste pogostost časovnega plana.<br>Ne pozabite prilagoditi "
+"naslednjega roka po vsaki taki spremembi.<br><i>Opomba:</i> Ta informacija "
+"bo prikazana samo enkrat za to seja urejanja časovnega plana.</qt>"
 
 #: kmymoney/views/keditscheduledlg.cpp:307
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
-msgstr "Najden razpored"
+msgstr "Sprememba frekvence v časovnem planu"
 
 #: kmymoney/views/keditscheduledlg.cpp:600
 #, kde-format

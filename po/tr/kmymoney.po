@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-05 02:06+0000\n"
-"PO-Revision-Date: 2024-05-21 14:25+0300\n"
+"PO-Revision-Date: 2024-06-05 14:19+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -19174,13 +19174,15 @@ msgid ""
 "adjust the next due date after each such change.<br><i>Note:</i> This "
 "information will only be shown once for this schedule's edit session.</qt>"
 msgstr ""
+"<qt>Planın sıklığını değiştirdiniz.<br>Her bir bu tür değişiklikten sonra "
+"bir sonraki bitiş tarihini ayarlamayı unutmayın.<br><i>Not:</i> Bu bilgi, bu "
+"planın düzenlemesi sırasında yalnızca bir kez gösterilecektir.</qt>"
 
 #: kmymoney/views/keditscheduledlg.cpp:307
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
-msgstr "Plan bulundu"
+msgstr "Plan Sıklığı Değişti"
 
 #: kmymoney/views/keditscheduledlg.cpp:600
 #, kde-format

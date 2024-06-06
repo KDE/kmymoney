@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-05 02:06+0000\n"
-"PO-Revision-Date: 2024-05-20 18:48+0300\n"
+"PO-Revision-Date: 2024-06-05 08:15+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
@@ -19428,13 +19428,16 @@ msgid ""
 "adjust the next due date after each such change.<br><i>Note:</i> This "
 "information will only be shown once for this schedule's edit session.</qt>"
 msgstr ""
+"<qt>Вами змінено частоту у розкладі.<br>Будь ласка, не забудьте скоригувати "
+"наступну дату сплати після кожної такої зміни.<br><i>Зауваження:</i> це "
+"повідомлення буде показано для цього сеансу редагування розкладу лише один "
+"раз.</qt>"
 
 #: kmymoney/views/keditscheduledlg.cpp:307
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
-msgstr "Знайдено розклад"
+msgstr "Змінено частоту у розкладі"
 
 #: kmymoney/views/keditscheduledlg.cpp:600
 #, kde-format
