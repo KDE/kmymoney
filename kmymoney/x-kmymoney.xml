@@ -2,6 +2,7 @@
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
   <mime-type type="application/x-kmymoney">
     <comment>KMyMoney File</comment>
+    <comment xml:lang="ar">ملف أموالك</comment>
     <comment xml:lang="ca">Fitxer del KMyMoney</comment>
     <comment xml:lang="ca@valencia">Fitxer de KMyMoney</comment>
     <comment xml:lang="cs">Soubor KMyMoney</comment>
