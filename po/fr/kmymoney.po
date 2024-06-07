@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-05 02:06+0000\n"
-"PO-Revision-Date: 2024-05-21 13:03+0200\n"
+"PO-Revision-Date: 2024-06-05 14:21+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -19494,13 +19494,17 @@ msgid ""
 "adjust the next due date after each such change.<br><i>Note:</i> This "
 "information will only be shown once for this schedule's edit session.</qt>"
 msgstr ""
+"<qt>Vous avez modifié la fréquence d'opérations récurrentes...<br>Veuillez "
+"vous assurer que vous avez bien ajusté la prochaine date d'échéance après de "
+"tels modifications.<br><i>Remarque : </i> Ces informations ne seront "
+"affichées qu’une seule fois pour cette session de modification d'opérations "
+"récurrentes.</qt>"
 
 #: kmymoney/views/keditscheduledlg.cpp:307
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
-msgstr "Opération récurrente trouvée"
+msgstr "La fréquence d'opérations récurrentes a été modifiée."
 
 #: kmymoney/views/keditscheduledlg.cpp:600
 #, kde-format
