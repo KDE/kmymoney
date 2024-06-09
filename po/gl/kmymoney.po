@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-05 02:06+0000\n"
-"PO-Revision-Date: 2024-05-23 08:30+0200\n"
+"PO-Revision-Date: 2024-06-08 11:37+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -19283,13 +19283,16 @@ msgid ""
 "adjust the next due date after each such change.<br><i>Note:</i> This "
 "information will only be shown once for this schedule's edit session.</qt>"
 msgstr ""
+"<qt>Cambiou a frecuencia da planificación.<br>Asegúrese de axustar a "
+"seguinte data de vencemento tras un cambio como este.<br><i>Nota:</i> Esta "
+"información só se amosará unha vez durante a sesión de edición desta "
+"planificación.</qt>"
 
 #: kmymoney/views/keditscheduledlg.cpp:307
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
-msgstr "Atopouse unha planificación"
+msgstr "Cambiouse a frecuencia da planificación"
 
 #: kmymoney/views/keditscheduledlg.cpp:600
 #, kde-format
