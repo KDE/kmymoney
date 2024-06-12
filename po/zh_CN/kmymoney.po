@@ -17138,7 +17138,7 @@ msgid ""
 "No backends available.\n"
 "Add one using woob config-qt."
 msgstr ""
-"无可用后端。\n"
+"没有可用的后端。\n"
 "请使用 woob config-qt 添加一个。"
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:179
@@ -17147,7 +17147,7 @@ msgid ""
 "No accounts available.\n"
 "Check your backend configuration in woob config-qt."
 msgstr ""
-"无可用账户。\n"
+"没有可用的账户。\n"
 "请检查 woob config-qt 的后端配置。"
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:188

@@ -18694,11 +18694,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/keditscheduledlg.cpp:307
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
-msgstr "Finanční plán nalezen"
+msgstr ""
 
 #: kmymoney/views/keditscheduledlg.cpp:600
 #, kde-format
