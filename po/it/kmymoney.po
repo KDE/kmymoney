@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-05 02:06+0000\n"
-"PO-Revision-Date: 2024-05-21 15:54+0200\n"
+"PO-Revision-Date: 2024-06-05 10:26+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -19354,13 +19354,16 @@ msgid ""
 "adjust the next due date after each such change.<br><i>Note:</i> This "
 "information will only be shown once for this schedule's edit session.</qt>"
 msgstr ""
+"<qt>Hai modificato la frequenza della pianificazione.<br>Assicurati di "
+"modificare la data di scadenza successiva dopo ciascuna modifica.<br><i>Nota:"
+"</i> queste informazioni saranno visualizzate solo una volta per questa "
+"sessione di modifica della pianificazione.</qt>"
 
 #: kmymoney/views/keditscheduledlg.cpp:307
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
-msgstr "Pianificazione trovata"
+msgstr "Frequenza di pianificazione modificata"
 
 #: kmymoney/views/keditscheduledlg.cpp:600
 #, kde-format
