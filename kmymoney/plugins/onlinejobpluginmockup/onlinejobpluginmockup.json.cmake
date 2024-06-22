@@ -62,7 +62,7 @@
         "Description[tr]": "Bir hesapla eşlenirse tüm çevrimiçi görevleri halledebilirmiş gibi görünür (yalnızca geliştiriciler için).",
         "Description[uk]": "Якщо пов'язано із рахунком, імітує можливість обробки усіх інтернет-завдань (лише для розробників).",
         "Description[x-test]": "xxIf mapped to an account, it pretends it could handle all onlineTasks (for developers only).xx",
-        "Description[zh_CN]": "绑定到账号上会假装可以处理所有在线任务 (仅限开发者用)",
+        "Description[zh_CN]": "绑定到账户上会假装可以处理所有在线任务 (仅限开发者用)",
         "EnabledByDefault": true,
         "Id": "onlinejobpluginmockup",
         "License": "GPL",
