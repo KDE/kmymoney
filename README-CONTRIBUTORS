@@ -160,6 +160,8 @@ multiple places.
 
 ----- new as of 202404
 
+- The FAQ chapter needs checking for coordination with https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
+
 - In Plugins section of KMM Config, there is "GNC Importer" but everywhere else it is
   referred to as GnuCash Importer.  Any reason for the difference?
 

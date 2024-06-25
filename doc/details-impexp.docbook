@@ -984,10 +984,10 @@
 </para>
 
 <para>
-  Please note that this section describes the <quote>native</quote> OFX importer.
-  OFX files may also be imported using the AqBanking Importer Plugin.  Note that the
-  two importers do behave slightly differently, and they are written and supported by
-  two different developers.
+  This section describes the <quote>native</quote> OFX importer.  OFX files may also
+  be imported using the AqBanking Importer Plugin.  The two importers do behave
+  slightly differently, and they are written and supported by two different
+  developers.
 </para>
 </sect2>
 

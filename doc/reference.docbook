@@ -862,18 +862,38 @@
   </varlistentry>
 
   <varlistentry>
+  <!-- FIXME: There is some overlap between here and the KBanking Plugin section.
+              Better coordination would be good. -->
     <term><menuchoice>
       <guimenu>Settings</guimenu><guimenuitem>Configure Aqbanking</guimenuitem>
     </menuchoice></term>
     <listitem>
       <para>
-        Configure online banking setting.  See <ulink
+        Configure online banking settings, but only if the KBanking module is
+        enabled.  More information may be found in the section on configuring the
+        <link linkend="details.settings.plugins.kbanking">KBanking plugin</link> as
+        well as in the <ulink
+        url="https://www.gnucash.org/docs/v5/C/gnucash-manual/tools-on-line-banking.html#tool-
+        aqb-modules">GnuCash documentation</ulink>.
+      </para>
+
+      <para>
+        The process of setting up online access in AqBanking is described in <ulink
+        url="https://wiki.gnucash.org/wiki/De/Onlinebanking-Einrichtungsassistent">the
+        GnuCash wiki (German only)</ulink>.  This menu entry brings you to the dialog
+        shown in step #3.  The process until step #18 is the same for KMyMoney.  Once
+        done, you can map the account in &kmymoney; using <guimenu>Account</guimenu>
+        <guisubmenu>Map account</guisubmenu> and select the account from the list
+        provided.  From there, simply use <guimenu>Account</guimenu>
+        <guisubmenu>Update account</guisubmenu>, or in case you have more than one
+        online account mapped <guimenu>Account</guimenu> <guisubmenu>Update all
+        accounts</guisubmenu>.
+      </para>
+
+      <para>
+        See <ulink
         url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F">How
-        do I configure online banking</ulink> for further details.  This menu
-        selection is only available if the KBanking module is enabled.  See the
-        section on configuring the <link
-        linkend="details.settings.plugins.kbanking">KBanking plugin</link> for more
-        information.
+        do I configure online banking</ulink> for further details.
       </para>
     </listitem>
   </varlistentry>

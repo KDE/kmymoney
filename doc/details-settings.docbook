@@ -1259,14 +1259,21 @@
 </sect2>
 
 <sect2 id="details.settings.plugins.kbanking"><title>KBanking</title>
-<!-- FIXME: Since both this and the Configure Aqbanking page are minimal, should both
-     just point to the same link currently in the other section?  -->
+<!-- FIXME: There is some overlap between here and the Reference/Settings section.
+            Better coordination would be good. -->
 
 <para>
-  This plugin adds support for HBCI/FinTs, OFX, and PayPal online banking.  However,
-  configuring this plugin is not done through this dialog, but with the <link
+  This plugin adds support for HBCI/FinTs, OFX, and PayPal online banking by using
+  <ulink url="https://www.aquamaniac.de/rdm/">AqBanking</ulink>, which is a an open
+  source project on its own.  Most of the protocols is uses to communicate with banks
+  are only used in Germany.
+</para>
+
+<para>
+  Configuring this plugin is not done through this dialog, but with the <link
   linkend="reference.menus.settings.help"> <guimenu>Settings</guimenu>
-  <guisubmenu>Configure Aqbanking...</guisubmenu> </link> menu item.
+  <guisubmenu>Configure Aqbanking...</guisubmenu> </link> menu item, and there is
+  further information there.
 </para>
 </sect2>
 
