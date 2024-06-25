@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-05 02:06+0000\n"
-"PO-Revision-Date: 2024-05-27 15:13+0200\n"
+"PO-Revision-Date: 2024-06-13 13:48+0200\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1681,13 +1681,13 @@ msgstr "Nelze aktualizovat cenný papír <b>%1</b>: %2"
 #, kde-format
 msgctxt "@info Online price update %1 online id, %2 internal id"
 msgid "Price for %1 updated (id %2)"
-msgstr ""
+msgstr "Cena pro %1 aktualizována (id %2)"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:585
 #, kde-format
 msgctxt "@info Online price update %1 online id"
 msgid "Received an invalid price for %1, unable to update."
-msgstr ""
+msgstr "Byla obdržena neplatná cena %1, nelze aktualizovat."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:630
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
@@ -1970,7 +1970,7 @@ msgstr "Editor cen"
 #, kde-format
 msgctxt "Placeholder text for search bar"
 msgid "Search..."
-msgstr ""
+msgstr "Hledat..."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_showAllPrices)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:52
@@ -2179,7 +2179,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
-msgstr ""
+msgstr "Skryté kategorie"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:959
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
@@ -4293,7 +4293,7 @@ msgstr "Dialog"
 #, kde-format
 msgctxt "Undo action description"
 msgid "Create tag"
-msgstr ""
+msgstr "Vytvořit značku"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
 #: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
@@ -4323,7 +4323,7 @@ msgstr ""
 #: kmymoney/kcreditswindow.cpp:41
 #, kde-format
 msgid "(c) 2000-2024 The KMyMoney development team"
-msgstr ""
+msgstr "(c) 2000-2024 Vývojový tým KMyMoney"
 
 #: kmymoney/kcreditswindow.cpp:44
 #, kde-format
@@ -7870,25 +7870,25 @@ msgstr ""
 #, kde-format
 msgctxt "@title:column External identifier (symbol)"
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:100
 #, kde-format
 msgctxt "@title:column Name of security"
 msgid "Name"
-msgstr ""
+msgstr "Název"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:101
 #, kde-format
 msgctxt "@title:column Price"
 msgid "Price"
-msgstr ""
+msgstr "Cena"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:102
 #, kde-format
 msgctxt "@title:column Date for price"
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:103
 #, kde-format
@@ -7900,7 +7900,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:column Online quote source"
 msgid "Source"
-msgstr ""
+msgstr "Zdroj"
 
 #: kmymoney/mymoney/onlinetasks/unavailabletask/tasks/unavailabletask.cpp:23
 #, kde-format
@@ -7923,7 +7923,7 @@ msgstr "Poznámka"
 #, kde-format
 msgctxt "Split header"
 msgid "Tags"
-msgstr ""
+msgstr "Značky"
 
 #: kmymoney/mymoney/splitmodel.cpp:40
 #, kde-format
@@ -7958,7 +7958,7 @@ msgstr "*** NEPŘIŘAZENO ***"
 #, kde-format
 msgctxt "@info:placeholder amount widget"
 msgid "calculated"
-msgstr ""
+msgstr "spočteno"
 
 #: kmymoney/mymoney/statusmodel.cpp:32
 #, kde-format
@@ -18694,11 +18694,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/keditscheduledlg.cpp:307
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
-msgstr "Finanční plán nalezen"
+msgstr ""
 
 #: kmymoney/views/keditscheduledlg.cpp:600
 #, kde-format
@@ -18926,7 +18925,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:placeholder Shown when the application starts up"
 msgid "Loading..."
-msgstr ""
+msgstr "Probíhá načítání..."
 
 #: kmymoney/views/khomeview_p.h:496
 #, kde-format
@@ -20317,7 +20316,7 @@ msgstr ""
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Sum of splits"
-msgstr ""
+msgstr "Součet jednotlivých částí"
 
 #: kmymoney/views/splitdialog.cpp:328
 #, kde-format
@@ -20589,7 +20588,7 @@ msgstr "Název"
 #, kde-format
 msgctxt "Placeholder for when there is no data in a view"
 msgid "No data found"
-msgstr ""
+msgstr "Data nenalezena"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KMMSearchWidget)
 #: kmymoney/widgets/kmmsearchwidget.ui:14
@@ -21820,12 +21819,14 @@ msgid ""
 "Selecting the <b>Favorite Account</b> checkbox will allow preferred access "
 "to this account in some dialogs and views of KMyMoney."
 msgstr ""
+"Zatržením přepínače <b>Oblíbený účet</b> povolí preferovaný přístup k tomuto "
+"účtu v některých dialozích a pohledech programu KMyMoney."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:265
 #, kde-format
 msgid "Favorite account"
-msgstr ""
+msgstr "Oblíbený účet"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel14)
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:27
@@ -23079,13 +23080,13 @@ msgstr ""
 #, kde-format
 msgctxt "@info:window"
 msgid "Investment detail wizard"
-msgstr ""
+msgstr "Průvodce s podrobnostmi vaší investice"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:211
 #, kde-format
 msgctxt "@info:window"
 msgid "Security detail wizard"
-msgstr ""
+msgstr "Průvodce podrobnostmi zabezpečení"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:214
 #, kde-format

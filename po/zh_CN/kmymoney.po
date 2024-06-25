@@ -5186,7 +5186,7 @@ msgid ""
 "KMyMoney has detected some overdue scheduled transactions for the account <b>"
 "%1</b>. Do you want to enter those scheduled transactions now?"
 msgstr ""
-"KMyMoney 检测到账号 <b>%1</b> 有几笔逾期计划交易。您要立即输入这些计划交易信"
+"KMyMoney 检测到账户 <b>%1</b> 有几笔逾期计划交易。您要立即输入这些计划交易信"
 "息吗？"
 
 #: kmymoney/kmymoney.cpp:3174 kmymoney/views/kscheduledview.cpp:134
@@ -6276,14 +6276,14 @@ msgstr "    将删除该收款人。"
 msgid ""
 "  * Older versions of KMyMoney stored an OFX password for this account in "
 "cleartext."
-msgstr "  * 旧版 KMyMoney 明文存储了此账号的 OFX 密码。"
+msgstr "  * 旧版 KMyMoney 明文存储了此账户的 OFX 密码。"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2545
 #, kde-format
 msgid ""
 "    Please open it in the account editor (Account/Edit account) once and "
 "press OK."
-msgstr "    请在账号编辑器 (账号、编辑账号) 中打开一次，然后点击确定。"
+msgstr "    请在账户编辑器 (账户/编辑账户) 中打开一次，然后点击确定。"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2546
 #, kde-format
@@ -17138,7 +17138,7 @@ msgid ""
 "No backends available.\n"
 "Add one using woob config-qt."
 msgstr ""
-"无可用后端。\n"
+"没有可用的后端。\n"
 "请使用 woob config-qt 添加一个。"
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:179
@@ -17147,7 +17147,7 @@ msgid ""
 "No accounts available.\n"
 "Check your backend configuration in woob config-qt."
 msgstr ""
-"无可用账户。\n"
+"没有可用的账户。\n"
 "请检查 woob config-qt 的后端配置。"
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:188
@@ -24209,8 +24209,8 @@ msgid ""
 "your account numbers and other important financial information will be very "
 "secure.</p>"
 msgstr ""
-"<p>KMyMoney可以使用GPG加密来加密您的数据文件。GPG加密是世界上最安全的数据保护"
-"方法之一。您的账号和其他所有的重要财务信息都会非常安全。</p>"
+"<p>KMyMoney 可以使用 GPG 加密来加密您的数据文件。GPG 加密是世界上最安全的数据"
+"保护方法之一。您的账号和其他所有的重要财务信息都会非常安全。</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:20
