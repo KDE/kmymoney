@@ -152,13 +152,6 @@ private:
     void doItemDoubleClicked(QTreeWidgetItem* item, int column, OpenOption openOption);
 
     void doConfigure(ConfigureOption configureOption);
-
-private Q_SLOTS:
-    /**
-      * This slot creates a transaction report for the selected account
-      * and opens it in the reports view.
-      */
-    void slotReportAccountTransactions();
 };
 
 #endif

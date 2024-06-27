@@ -1467,6 +1467,24 @@ public:
         }
     }
 
+    // Generate a transaction report that contains transactions for only the
+    // currently selected account.
+    void showTransactionReport()
+    {
+        Q_Q(KReportsView);
+        if (!m_currentAccount.id().isEmpty()) {
+            MyMoneyReport report(eMyMoney::Report::RowType::Account,
+                                 eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category,
+                                 eMyMoney::TransactionFilter::Date::YearToDate,
+                                 eMyMoney::Report::DetailLevel::All,
+                                 i18n("%1 YTD Account Transactions", m_currentAccount.name()),
+                                 i18n("Generated Report"));
+            report.setGroup(i18n("Transactions"));
+            report.addAccount(m_currentAccount.id());
+            q->slotOpenReport(report);
+        }
+    }
+
     /**
       * This member holds the load state of page
       */
