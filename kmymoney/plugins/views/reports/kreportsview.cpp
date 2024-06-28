@@ -73,8 +73,6 @@ using namespace Icons;
 KReportsView::KReportsView(QWidget *parent) :
     KMyMoneyViewBase(*new KReportsViewPrivate(this), parent)
 {
-    connect(pActions[eMenu::Action::ReportAccountTransactions], &QAction::triggered, this, &KReportsView::slotReportAccountTransactions);
-
     connect(pActions[eMenu::Action::ReportNew], &QAction::triggered, this, &KReportsView::slotDuplicate);
     connect(pActions[eMenu::Action::ReportConfigure], &QAction::triggered, this, &KReportsView::slotConfigure);
     connect(pActions[eMenu::Action::ReportExport], &QAction::triggered, this, &KReportsView::slotExportView);
@@ -98,16 +96,19 @@ void KReportsView::executeAction(eMenu::Action action, const SelectedObjects& se
     case eMenu::Action::ReportOpen:
         slotOpenReport(selections.firstSelection(SelectedObjects::Report));
         break;
+
     case eMenu::Action::Print:
         if (d->isActiveView()) {
             slotPrintView();
         }
         break;
+
     case eMenu::Action::PrintPreview:
         if (d->isActiveView()) {
             slotPrintPreviewView();
         }
         break;
+
     case eMenu::Action::ChartAccountBalance: {
         const auto account = MyMoneyFile::instance()->accountsModel()->itemById(selections.firstSelection(SelectedObjects::Account));
         if (!account.id().isEmpty()) {
@@ -116,8 +117,15 @@ void KReportsView::executeAction(eMenu::Action action, const SelectedObjects& se
             delete dlg;
         }
     } break;
+
     case eMenu::Action::FileClose:
         slotCloseAll();
+        break;
+
+    case eMenu::Action::ReportAccountTransactions:
+        d->showTransactionReport();
+        break;
+
     default:
         break;
     }
@@ -808,26 +816,6 @@ void KReportsView::slotDeleteFromList()
                 ft.commit();
             }
         }
-    }
-}
-
-void KReportsView::slotReportAccountTransactions()
-{
-    Q_D(KReportsView);
-    // Generate a transaction report that contains transactions for only the
-    // currently selected account.
-    if (!d->m_currentAccount.id().isEmpty()) {
-        MyMoneyReport report(
-            eMyMoney::Report::RowType::Account,
-            eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category,
-            eMyMoney::TransactionFilter::Date::YearToDate,
-            eMyMoney::Report::DetailLevel::All,
-            i18n("%1 YTD Account Transactions", d->m_currentAccount.name()),
-            i18n("Generated Report")
-        );
-        report.setGroup(i18n("Transactions"));
-        report.addAccount(d->m_currentAccount.id());
-        slotOpenReport(report);
     }
 }
 
