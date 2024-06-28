@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-05 02:06+0000\n"
+"POT-Creation-Date: 2024-06-28 01:54+0000\n"
 "PO-Revision-Date: 2024-06-05 08:15+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian\n"
@@ -1966,8 +1966,8 @@ msgstr "Рахунки/Категорії"
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_4)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:148
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:453
-#: kmymoney/plugins/views/reports/kreportsview.cpp:828
 #: kmymoney/plugins/views/reports/kreportsview_p.h:942
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1482
 #: kmymoney/views/kpayeesview.ui:117 kmymoney/views/ktagsview.ui:121
 #: kmymoney/views/ktagsview.ui:127
 #, kde-format
@@ -11781,7 +11781,7 @@ msgid "iCalendar files"
 msgstr "Файли iCalendar"
 
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:96
-#: kmymoney/plugins/views/reports/kreportsview.cpp:317
+#: kmymoney/plugins/views/reports/kreportsview.cpp:325
 #, kde-format
 msgid "Export as"
 msgstr "Експортувати як"
@@ -12258,9 +12258,9 @@ msgstr ""
 "дії?"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1574
-#: kmymoney/plugins/views/reports/kreportsview.cpp:398
-#: kmymoney/plugins/views/reports/kreportsview.cpp:457
-#: kmymoney/plugins/views/reports/kreportsview.cpp:476
+#: kmymoney/plugins/views/reports/kreportsview.cpp:406
+#: kmymoney/plugins/views/reports/kreportsview.cpp:465
+#: kmymoney/plugins/views/reports/kreportsview.cpp:484
 #, kde-format
 msgid "Critical Error"
 msgstr "Критична помилка"
@@ -14827,7 +14827,7 @@ msgid "Unable to remove budget."
 msgstr "Не вдалося вилучити бюджет."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:169
-#: kmymoney/plugins/views/reports/kreportsview.cpp:433
+#: kmymoney/plugins/views/reports/kreportsview.cpp:441
 #, kde-format
 msgid "Copy of %1"
 msgstr "Копія %1"
@@ -16165,8 +16165,8 @@ msgid "%1 Balance History"
 msgstr "Журнал балансу %1"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:81
-#: kmymoney/plugins/views/reports/kreportsview.cpp:363
-#: kmymoney/plugins/views/reports/kreportsview.cpp:826
+#: kmymoney/plugins/views/reports/kreportsview.cpp:371
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1481
 #: kmymoney/plugins/views/reports/reportsview.cpp:83
 #: kmymoney/plugins/views/reports/reportsview.cpp:119
 #: kmymoney/plugins/views/reports/reportsview.cpp:177
@@ -16395,23 +16395,23 @@ msgstr "Шукати операції"
 msgid "Configure your report"
 msgstr "Налаштувати цей звіт"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:275
+#: kmymoney/plugins/views/reports/kreportsview.cpp:283
 #, kde-format
 msgid "Unknown command '%1' in KReportsView::slotOpenUrl()"
 msgstr "Невідома команда «%1» у KReportsView::slotOpenUrl()"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:295
+#: kmymoney/plugins/views/reports/kreportsview.cpp:303
 #, kde-format
 msgid "Unknown view '%1' in KReportsView::slotOpenUrl()"
 msgstr "Невідома панель перегляду «%1» у KReportsView::slotOpenUrl()"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:338
+#: kmymoney/plugins/views/reports/kreportsview.cpp:346
 #, kde-format
 msgid "Failed to save: %1"
 msgstr "Не вдалося зберегти: %1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:363
-#: kmymoney/plugins/views/reports/kreportsview.cpp:434
+#: kmymoney/plugins/views/reports/kreportsview.cpp:371
+#: kmymoney/plugins/views/reports/kreportsview.cpp:442
 #: kmymoney/plugins/views/reports/kreportsview_p.h:812
 #: kmymoney/plugins/views/reports/kreportsview_p.h:820
 #: kmymoney/plugins/views/reports/kreportsview_p.h:828
@@ -16470,19 +16470,19 @@ msgstr "Не вдалося зберегти: %1"
 msgid "Default Report"
 msgstr "Типовий звіт"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:364
-#: kmymoney/plugins/views/reports/kreportsview.cpp:435
+#: kmymoney/plugins/views/reports/kreportsview.cpp:372
+#: kmymoney/plugins/views/reports/kreportsview.cpp:443
 #, kde-format
 msgid "Custom Report"
 msgstr "Нетиповий звіт"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:365
+#: kmymoney/plugins/views/reports/kreportsview.cpp:373
 #, kde-format
 msgid "%1 (Customized)"
 msgstr "%1 (змінений)"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:392
-#: kmymoney/plugins/views/reports/kreportsview.cpp:451
+#: kmymoney/plugins/views/reports/kreportsview.cpp:400
+#: kmymoney/plugins/views/reports/kreportsview.cpp:459
 #, kde-format
 msgid ""
 "Could not find reportgroup \"%1\" for report \"%2\".\n"
@@ -16492,65 +16492,60 @@ msgstr ""
 "Будь ласка, повідомте про цю помилку у списку листування розробників: "
 "kmymoney-devel@kde.org"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:412
+#: kmymoney/plugins/views/reports/kreportsview.cpp:420
 #, kde-format
 msgid "Failed to configure report: %1"
 msgstr "Не вдалося налаштувати звіт: %1"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:470
+#: kmymoney/plugins/views/reports/kreportsview.cpp:478
 #, kde-format
 msgid "Cannot add report, reason: \"%1\""
 msgstr "Не вдалося додати звіт, причина: «%1»"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:505
+#: kmymoney/plugins/views/reports/kreportsview.cpp:513
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
 msgstr "<b>%1</b> є типовим звітом. Його не можна вилучати."
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:506
+#: kmymoney/plugins/views/reports/kreportsview.cpp:514
 #: kmymoney/plugins/views/reports/kreportsview_p.h:560
 #, kde-format
 msgid "Delete Report?"
 msgstr "Вилучити звіт?"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:703
+#: kmymoney/plugins/views/reports/kreportsview.cpp:711
 #, kde-format
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
 msgstr "Параметри звіту"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:704
+#: kmymoney/plugins/views/reports/kreportsview.cpp:712
 #, kde-format
 msgctxt "To open a new report"
 msgid "&Open"
 msgstr "&Відкрити"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:707
+#: kmymoney/plugins/views/reports/kreportsview.cpp:715
 #, kde-format
 msgctxt "To print a report"
 msgid "&Print"
 msgstr "На&друкувати"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:711
+#: kmymoney/plugins/views/reports/kreportsview.cpp:719
 #, kde-format
 msgctxt "Configure a report"
 msgid "&Configure"
 msgstr "&Налаштувати"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:714
+#: kmymoney/plugins/views/reports/kreportsview.cpp:722
 #, kde-format
 msgid "&New report"
 msgstr "С&творити звіт"
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:724
+#: kmymoney/plugins/views/reports/kreportsview.cpp:732
 #, kde-format
 msgid "&Delete"
 msgstr "&Вилучити"
-
-#: kmymoney/plugins/views/reports/kreportsview.cpp:825
-#, kde-format
-msgid "%1 YTD Account Transactions"
-msgstr "Операції на рахунку %1 протягом поточного року"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KReportsView)
 #: kmymoney/plugins/views/reports/kreportsview.ui:14
@@ -16922,6 +16917,11 @@ msgstr "Інформація про рахунок"
 #, kde-format
 msgid "Loan Information"
 msgstr "Відомості щодо кредиту"
+
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1480
+#, kde-format
+msgid "%1 YTD Account Transactions"
+msgstr "Операції на рахунку %1 протягом поточного року"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonConfigure)
 #: kmymoney/plugins/views/reports/reportcontrol.ui:54
