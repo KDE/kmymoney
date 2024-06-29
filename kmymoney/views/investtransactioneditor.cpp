@@ -1328,6 +1328,13 @@ bool InvestTransactionEditor::eventFilter(QObject* o, QEvent* e)
         if ((e->type() == QEvent::Wheel) && !cb->view()->isVisible()) {
             return true;
         }
+        if (e->type() == QEvent::KeyPress) {
+            // the activity combo needs special handling, because it does
+            // not process the return/enter key directly but ignores it
+            if (o == d->ui->activityCombo) {
+                processReturnKey();
+            }
+        }
         if (e->type() == QEvent::FocusOut) {
             if (o == d->ui->feesCombo) {
                 if (needCreateCategory(d->ui->feesCombo)) {
