@@ -157,6 +157,12 @@ bool NewSplitEditor::Private::costCenterChanged(int costCenterIndex)
             WidgetHintFrame::show(
                 ui->costCenterCombo,
                 i18nc("@info:tooltip costcenter combo in split editor", "A cost center assignment is required for a transaction in the selected category."));
+#ifndef ENABLE_COSTCENTER
+            // in case the cost center widgets are disabled by default, we still need
+            // to make them available when we need them due to data found in the engine
+            ui->costCenterCombo->show();
+            ui->costCenterLabel->show();
+#endif
             rc = false;
         }
     }

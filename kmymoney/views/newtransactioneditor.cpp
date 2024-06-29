@@ -293,6 +293,12 @@ bool NewTransactionEditor::Private::costCenterChanged(int costCenterIndex)
     WidgetHintFrame::hide(ui->costCenterCombo, i18n("The cost center this transaction should be assigned to."));
     if (costCenterIndex != -1) {
         if (costCenterRequired && ui->costCenterCombo->currentText().isEmpty()) {
+#ifndef ENABLE_COSTCENTER
+            // in case the cost center widgets are disabled by default, we still need
+            // to make them available when we need them due to data found in the engine
+            ui->costCenterCombo->show();
+            ui->costCenterLabel->show();
+#endif
             WidgetHintFrame::show(ui->costCenterCombo, i18n("A cost center assignment is required for a transaction in the selected category."));
             rc = false;
         }
