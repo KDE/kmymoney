@@ -80,6 +80,9 @@ CreditDebitEdit::CreditDebitEdit(QWidget* parent)
 CreditDebitEdit::~CreditDebitEdit()
 {
     Q_D(CreditDebitEdit);
+    // make sure that children's signal emission don't hit this (destroyed) object
+    d->ui->creditAmount->disconnect(this);
+    d->ui->debitAmount->disconnect(this);
     delete d;
 }
 
