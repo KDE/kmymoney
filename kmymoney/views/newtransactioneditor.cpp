@@ -193,12 +193,23 @@ void NewTransactionEditor::Private::updateWidgetState()
         ui->tagContainer->loadTags({});
     }
 
+#ifndef ENABLE_COSTCENTER
+    if (!index.data(eMyMoney::Model::SplitCostCenterIdRole).toString().isEmpty()) {
+        // in case the cost center widgets are disabled by default, we still need
+        // to make them available when we need them due to data found in the engine
+        ui->costCenterCombo->show();
+        ui->costCenterLabel->show();
+    }
+#endif
+
     // update the costcenter combo box
     if (ui->costCenterCombo->isEnabled()) {
         // extract the cost center
         index = MyMoneyFile::instance()->costCenterModel()->indexById(index.data(eMyMoney::Model::SplitCostCenterIdRole).toString());
-        if (index.isValid())
-            ui->costCenterCombo->setCurrentIndex(costCenterModel->mapFromSource(index).row());
+        if (index.isValid()) {
+            const auto row = MyMoneyModelBase::mapFromBaseSource(costCenterModel, index).row();
+            ui->costCenterCombo->setCurrentIndex(row);
+        }
     }
 }
 
