@@ -884,6 +884,7 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
         this,
         [&]() {
             d->editSplits(d->feeSplitModel, d->ui->feesAmountEdit, MyMoneyMoney::ONE);
+            d->scheduleUpdateTotalAmount();
         },
         Qt::QueuedConnection);
 
@@ -901,6 +902,7 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
         this,
         [&]() {
             d->editSplits(d->interestSplitModel, d->ui->interestAmountEdit, MyMoneyMoney::MINUS_ONE);
+            d->scheduleUpdateTotalAmount();
         },
         Qt::QueuedConnection);
 
