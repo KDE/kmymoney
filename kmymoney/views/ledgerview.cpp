@@ -551,6 +551,7 @@ LedgerView::LedgerView(QWidget* parent)
     connect(this, &LedgerView::doubleClicked, this, [&](const QModelIndex& index) {
         // double click on a schedule causes the schedule editor to be opened
         if (MyMoneyModelBase::baseModel(index) == MyMoneyFile::instance()->schedulesJournalModel()) {
+            pActions[eMenu::Action::EditSchedule]->setData(index.data(eMyMoney::Model::TransactionScheduleIdRole).toString());
             pActions[eMenu::Action::EditSchedule]->trigger();
         }
     });
