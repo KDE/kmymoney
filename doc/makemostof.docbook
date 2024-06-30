@@ -7,7 +7,7 @@
     </author>
     <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2023-10-23</date>
+  <date>2024-07-01</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 <title>Making the most of &kmymoney;</title>
@@ -20,19 +20,31 @@
 </para>
 
 <para>
-  You will get a more effective system and much better use of your time if you first
-  spend a little time planning how you are going to use &kmymoney;, so follow the
-  steps given here.  This may seem very simple, and indeed, it is simple, but taking
-  the time to assure that your understanding of how things work is the same as
-  &kmymoney;'s will almost certainly save you time later.
+  You will get a more efficient and effective system and much better use of your time
+  if you first spend a little time planning how you are going to use &kmymoney;, so
+  follow the steps given here.  This may seem very simple, and indeed, it is simple,
+  but taking the time to assure that your understanding of how things work is the
+  same as &kmymoney;'s will almost certainly save you time later.
 </para>
+
+<note>
+  <para>
+    This and the following sections have been essentially unchanged since a very
+    early version of &kmymoney;.  While the basics of bookkeeping have not changed
+    over the years, and there is nothing inaccurate or misleading here, there have
+    been requests to update this area.  If you have any specific suggestions or ideas
+    for this, the author would like to hear from you, through one of the routes
+    listed at the <ulink url="https://kmymoney.org/support.html">Support page</ulink>
+    at the <ulink url="https://kmymoney.org/">&kmymoney; web site</ulink>
+  </para>
+</note>
 
 <sect1 id="makingmostof.basicaccounting"><title>Basic Accounting</title>
 <para>
-  Imagine your money as balls, or beans, and to stop them rolling around you keep
-  them in a box, or pot.  Accounting, or Bookkeeping, is the process of counting and
-  keeping track of the beans in the pot, or more important, the beans in several
-  pots.
+  Imagine your money as balls, or beans, and to stop them rolling around and getting
+  lost you keep them in a box, or pot.  Accounting, or Bookkeeping, is the process of
+  counting and keeping track of the beans in the pot, or more important, the beans in
+  several pots.
 </para>
 
 <para>

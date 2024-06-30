@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="credits">
 <chapterinfo>
-  <date>2023-12-24</date>
+  <date>2024-07-01</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 
 <title>Credits</title>
 
 <para>
-  Program Copyright &copy; 2000-2019 The &kmymoney; Development Team
+  Program Copyright &copy; 2000-2024 The &kmymoney; Development Team
 </para>
 
 <para>
@@ -16,7 +16,7 @@
 </para>
 
 <para>
-  Documentation Copyright &copy; 2000-2019 The &kmymoney; Development Team
+  Documentation Copyright &copy; 2000-2024 The &kmymoney; Development Team
 </para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->

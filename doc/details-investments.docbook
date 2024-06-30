@@ -6,7 +6,7 @@
     <author>&Michael.Carpino; &Michael.Carpino.mail;</author>
     <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2023-09-05</date>
+  <date>2024-07-01</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 <title>Investments</title>
@@ -42,7 +42,7 @@
   and cash.  In &kmymoney;, an Investment account holds <emphasis>only</emphasis>
   securities.  It cannot contain any cash balance.  This was a design decision made
   when Investment accounts were first included in &kmymoney;.  It might be changed in
-  th future, but that is likely to be done as part of a significant revision in all
+  the future, but that is likely to be done as part of a significant revision in all
   of &kmymoney;'s handling of investments.  For now, any cash needed to purchase a
   security or gained from a sell or dividend transaction requires the use of a
   Brokerage Account.

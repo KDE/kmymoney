@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="introduction">
 <chapterinfo>
-  <date>2023-10-23</date>
+  <date>2024-07-01</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 <title>Introduction</title>
@@ -41,7 +41,7 @@
   <listitem>
     <formalpara><title>Correctness</title>
       <para>
-        Based on tried and tested double entry accounting principles &kmymoney;
+        Based on tried and tested double entry accounting principles, &kmymoney;
         ensures that your finances are kept in correct order.
       </para>
     </formalpara>
@@ -52,14 +52,15 @@
 
 <sect1 id="what-kmymoney-is-not"><title>What &kmymoney; is not</title>
 <para>
-  As a personal finance manager, &kmymoney; is not intended to support the needs
-  of an average business.  A small business might find sufficient functionality to
-  use &kmymoney;, but features such as accounts-receivable and accounts-payable are
-  not directly supported.  Most if not all the data needed for a small business, such
-  as for reports for audit and taxation purposes is present, but may need to be
-  extracted using various reports and then processed and assembled into the required
-  formats.  In addition, it would be possible to create client, supplier, document,
-  or other features through plugins.
+  As a personal finance manager, &kmymoney; is not intended to support the needs of a
+  business.  A small business might find sufficient functionality to use &kmymoney;,
+  but features such as accounts-receivable and accounts-payable are not directly
+  supported.  The larger the business, the less likely it is to find &kmymoney; will
+  meet its financial management needs.  Most if not all the data needed for a small
+  business, such as for reports for audit and taxation purposes is present, but may
+  need to be extracted using various reports and then processed and assembled into
+  the required formats.  In addition, it would be possible to create client,
+  supplier, document, or other features through plugins.
 </para>
 
 <para>
