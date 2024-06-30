@@ -89,6 +89,7 @@ protected:
     void setupTabOrder(const QStringList& tabOrder);
     void storeTabOrder(const QString& name, const QStringList& tabOrder);
     virtual bool isTransactionDataValid() const = 0;
+    void processReturnKey();
 
     /**
      * Check a category with the name entered into the

@@ -69,7 +69,7 @@ CreditDebitEdit::CreditDebitEdit(QWidget* parent)
     connect(d->ui->creditAmount, &AmountEdit::amountChanged, this, &CreditDebitEdit::creditChanged);
     connect(d->ui->debitAmount, &AmountEdit::amountChanged, this, &CreditDebitEdit::debitChanged);
 
-    // propagate display state changes
+    // propagate display state changes between the two amount widgets
     connect(d->ui->creditAmount, &AmountEdit::displayStateChanged, d->ui->debitAmount, &AmountEdit::setDisplayState);
     connect(d->ui->debitAmount, &AmountEdit::displayStateChanged, d->ui->creditAmount, &AmountEdit::setDisplayState);
 
@@ -80,6 +80,9 @@ CreditDebitEdit::CreditDebitEdit(QWidget* parent)
 CreditDebitEdit::~CreditDebitEdit()
 {
     Q_D(CreditDebitEdit);
+    // make sure that children's signal emission don't hit this (destroyed) object
+    d->ui->creditAmount->disconnect(this);
+    d->ui->debitAmount->disconnect(this);
     delete d;
 }
 

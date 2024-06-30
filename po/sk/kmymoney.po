@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-28 01:54+0000\n"
+"POT-Creation-Date: 2024-06-30 01:46+0000\n"
 "PO-Revision-Date: 2020-01-02 16:30+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -8364,10 +8364,10 @@ msgstr "*** Nepriradené ***"
 
 #: kmymoney/mymoney/splitmodel.cpp:175 kmymoney/mymoney/splitmodel.cpp:180
 #: kmymoney/widgets/amountedit.cpp:264 kmymoney/widgets/amountedit.cpp:315
-#: kmymoney/widgets/creditdebitedit.cpp:123
-#: kmymoney/widgets/creditdebitedit.cpp:124
-#: kmymoney/widgets/creditdebitedit.cpp:153
-#: kmymoney/widgets/creditdebitedit.cpp:154
+#: kmymoney/widgets/creditdebitedit.cpp:126
+#: kmymoney/widgets/creditdebitedit.cpp:127
+#: kmymoney/widgets/creditdebitedit.cpp:156
+#: kmymoney/widgets/creditdebitedit.cpp:157
 #, fuzzy, kde-format
 #| msgid "calculate"
 msgctxt "@info:placeholder amount widget"
@@ -21318,7 +21318,7 @@ msgid "The cost center this transaction should be assigned to."
 msgstr "Použiť na zadanie transakcie do účtovnej knihy."
 
 #: kmymoney/views/multitransactioneditor.cpp:229
-#: kmymoney/views/newtransactioneditor.cpp:296
+#: kmymoney/views/newtransactioneditor.cpp:302
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgid ""
@@ -21392,29 +21392,29 @@ msgid ""
 "category."
 msgstr "Nie je možné vytvoriť transakcie v kontexte kategórie."
 
-#: kmymoney/views/newspliteditor.cpp:170
+#: kmymoney/views/newspliteditor.cpp:176
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "Použiť na zadanie transakcie do účtovnej knihy."
 
-#: kmymoney/views/newspliteditor.cpp:211
+#: kmymoney/views/newspliteditor.cpp:217
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "Nie je možné vytvoriť transakcie v kontexte kategórie."
 
-#: kmymoney/views/newspliteditor.cpp:220
-#: kmymoney/views/newtransactioneditor.cpp:410
+#: kmymoney/views/newspliteditor.cpp:226
+#: kmymoney/views/newtransactioneditor.cpp:416
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgid "The check number used for this transaction."
 msgstr "Použiť toto tlačidlo na záznam tejto transakcie."
 
-#: kmymoney/views/newspliteditor.cpp:229
-#: kmymoney/views/newtransactioneditor.cpp:420
+#: kmymoney/views/newspliteditor.cpp:235
+#: kmymoney/views/newtransactioneditor.cpp:426
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr ""
@@ -21438,7 +21438,7 @@ msgstr "Doručiteľ/Príjemca"
 msgid "Costcenter"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:564
+#: kmymoney/views/newtransactioneditor.cpp:570
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@title:window Autofill selection dialog"
@@ -21726,7 +21726,7 @@ msgid "&OK"
 msgstr "&OK"
 
 #. i18n: ectx: property (text), widget (QPushButton, cancelButton)
-#: kmymoney/views/splitdialog.ui:728 kmymoney/wizards/kmymoneywizard_p.h:76
+#: kmymoney/views/splitdialog.ui:734 kmymoney/wizards/kmymoneywizard_p.h:76
 #, kde-format
 msgid "&Cancel"
 msgstr "&Zrušiť"
