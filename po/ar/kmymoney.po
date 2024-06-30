@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-28 01:54+0000\n"
+"POT-Creation-Date: 2024-06-30 01:46+0000\n"
 "PO-Revision-Date: 2022-01-04 22:18+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -8191,10 +8191,10 @@ msgstr "*** غير مخصّص ***"
 
 #: kmymoney/mymoney/splitmodel.cpp:175 kmymoney/mymoney/splitmodel.cpp:180
 #: kmymoney/widgets/amountedit.cpp:264 kmymoney/widgets/amountedit.cpp:315
-#: kmymoney/widgets/creditdebitedit.cpp:123
-#: kmymoney/widgets/creditdebitedit.cpp:124
-#: kmymoney/widgets/creditdebitedit.cpp:153
-#: kmymoney/widgets/creditdebitedit.cpp:154
+#: kmymoney/widgets/creditdebitedit.cpp:126
+#: kmymoney/widgets/creditdebitedit.cpp:127
+#: kmymoney/widgets/creditdebitedit.cpp:156
+#: kmymoney/widgets/creditdebitedit.cpp:157
 #, fuzzy, kde-format
 #| msgid "calculate"
 msgctxt "@info:placeholder amount widget"
@@ -20604,7 +20604,7 @@ msgid "The cost center this transaction should be assigned to."
 msgstr ""
 
 #: kmymoney/views/multitransactioneditor.cpp:229
-#: kmymoney/views/newtransactioneditor.cpp:296
+#: kmymoney/views/newtransactioneditor.cpp:302
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -20671,26 +20671,26 @@ msgid ""
 "category."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:170
+#: kmymoney/views/newspliteditor.cpp:176
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:211
+#: kmymoney/views/newspliteditor.cpp:217
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:220
-#: kmymoney/views/newtransactioneditor.cpp:410
+#: kmymoney/views/newspliteditor.cpp:226
+#: kmymoney/views/newtransactioneditor.cpp:416
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:229
-#: kmymoney/views/newtransactioneditor.cpp:420
+#: kmymoney/views/newspliteditor.cpp:235
+#: kmymoney/views/newtransactioneditor.cpp:426
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr ""
@@ -20714,7 +20714,7 @@ msgstr "المستفيد/المستقبِل"
 msgid "Costcenter"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:564
+#: kmymoney/views/newtransactioneditor.cpp:570
 #, fuzzy, kde-format
 #| msgid "Select Transaction"
 msgctxt "@title:window Autofill selection dialog"
@@ -20987,7 +20987,7 @@ msgid "&OK"
 msgstr "&حسنًا"
 
 #. i18n: ectx: property (text), widget (QPushButton, cancelButton)
-#: kmymoney/views/splitdialog.ui:728 kmymoney/wizards/kmymoneywizard_p.h:76
+#: kmymoney/views/splitdialog.ui:734 kmymoney/wizards/kmymoneywizard_p.h:76
 #, kde-format
 msgid "&Cancel"
 msgstr "أ&لغِ"
