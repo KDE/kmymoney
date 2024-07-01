@@ -35,6 +35,9 @@ public:
     explicit CheckingStartWizardPage(QWidget *parent = nullptr);
     ~CheckingStartWizardPage();
 
+    // overridden for internal reasons
+    void cleanupPage() override;
+
 private:
     Ui::CheckingStartWizardPage *ui;
 };
