@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-30 01:46+0000\n"
+"POT-Creation-Date: 2024-07-01 01:45+0000\n"
 "PO-Revision-Date: 2024-06-13 01:00+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -18699,14 +18699,14 @@ msgstr "Faiz Geliri"
 
 #: kmymoney/views/investtransactioneditor.cpp:261
 #: kmymoney/views/multitransactioneditor.cpp:185
-#: kmymoney/views/newtransactioneditor.cpp:255
+#: kmymoney/views/newtransactioneditor.cpp:266
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "İşlemin gönderim tarihi."
 
 #: kmymoney/views/investtransactioneditor.cpp:285
 #: kmymoney/views/multitransactioneditor.cpp:215
-#: kmymoney/views/newtransactioneditor.cpp:275
+#: kmymoney/views/newtransactioneditor.cpp:286
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "<b>%1</b> hesabının gönderim tarihi açılış tarihinden önce."
@@ -20415,7 +20415,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Git: “%1”"
 
-#: kmymoney/views/ledgerview.cpp:689
+#: kmymoney/views/ledgerview.cpp:690
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -20426,31 +20426,31 @@ msgstr ""
 "işlemin aynı anda düzenlenmesini desteklemez. <a href=\"jumpToEditor"
 "\">Geçerli düzenleyiciye atla</a>"
 
-#: kmymoney/views/ledgerview.cpp:805
+#: kmymoney/views/ledgerview.cpp:806
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "İşlemde bir kategori ataması eksik."
 
-#: kmymoney/views/ledgerview.cpp:812
+#: kmymoney/views/ledgerview.cpp:813
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "İşlemde <b>%1</b> ataması eksik."
 
-#: kmymoney/views/ledgerview.cpp:821
+#: kmymoney/views/ledgerview.cpp:822
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "Bu plan, %1 tarihinden itibaren gecikti. Girmek için simgeye tıklayın."
 
-#: kmymoney/views/ledgerview.cpp:827
+#: kmymoney/views/ledgerview.cpp:828
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "Bu işlem içe aktarılmış. Kabul etmek için simgeye tıklayın."
 
-#: kmymoney/views/ledgerview.cpp:832
+#: kmymoney/views/ledgerview.cpp:833
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -20459,31 +20459,31 @@ msgstr ""
 "Bu işlem eşleştirildi. Kabul etmek veya eşleştirmeyi kaldırmak için simgeye "
 "tıklayın."
 
-#: kmymoney/views/ledgerview.cpp:908
+#: kmymoney/views/ledgerview.cpp:909
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Vadesi geçmiş planlı işlemi girmeyin."
 
-#: kmymoney/views/ledgerview.cpp:909
+#: kmymoney/views/ledgerview.cpp:910
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Vadesi geçmiş planlı işlemi girin."
 
-#: kmymoney/views/ledgerview.cpp:912
+#: kmymoney/views/ledgerview.cpp:913
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Gecikme takvimine şimdi girmek istiyor musunuz?"
 
-#: kmymoney/views/ledgerview.cpp:913
+#: kmymoney/views/ledgerview.cpp:914
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Gecikme Takvimine Gir"
 
-#: kmymoney/views/ledgerview.cpp:933
+#: kmymoney/views/ledgerview.cpp:934
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -20492,7 +20492,7 @@ msgid ""
 msgstr ""
 "Gizli (eşleşen) işlemi gösterilen işlemden ayırın ve yeniden deftere girin."
 
-#: kmymoney/views/ledgerview.cpp:935
+#: kmymoney/views/ledgerview.cpp:936
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -20502,7 +20502,7 @@ msgstr ""
 "Eşleşmeyi gösterildiği gibi kabul edin ve gizli (eşleşen) işlemin verisini "
 "kaldırın."
 
-#: kmymoney/views/ledgerview.cpp:939
+#: kmymoney/views/ledgerview.cpp:940
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
@@ -20510,7 +20510,7 @@ msgstr ""
 "Eşleşen işlemi şimdi kabul etmek mi yoksa eşleştirmeyi kaldırmak mı "
 "istiyorsunuz?"
 
-#: kmymoney/views/ledgerview.cpp:940
+#: kmymoney/views/ledgerview.cpp:941
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
@@ -20563,19 +20563,19 @@ msgid "Balance: %1"
 msgstr "Bakiye: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:193
-#: kmymoney/views/newtransactioneditor.cpp:258
+#: kmymoney/views/newtransactioneditor.cpp:269
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "Gönderim tarihi geçersiz."
 
 #: kmymoney/views/multitransactioneditor.cpp:226
-#: kmymoney/views/newtransactioneditor.cpp:293
+#: kmymoney/views/newtransactioneditor.cpp:304
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
 msgstr "Bu işlemin atanması gereken masraf merkezi."
 
 #: kmymoney/views/multitransactioneditor.cpp:229
-#: kmymoney/views/newtransactioneditor.cpp:302
+#: kmymoney/views/newtransactioneditor.cpp:313
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -20640,7 +20640,7 @@ msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "Bu işlemin atanması gereken masraf merkezi."
 
-#: kmymoney/views/newspliteditor.cpp:159
+#: kmymoney/views/newspliteditor.cpp:167
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid ""
@@ -20649,26 +20649,26 @@ msgid ""
 msgstr ""
 "Seçili kategorideki bir işlem için bir masraf merkezi ataması gereklidir."
 
-#: kmymoney/views/newspliteditor.cpp:176
+#: kmymoney/views/newspliteditor.cpp:178
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "Bu bölmenin atanması gereken kategori."
 
-#: kmymoney/views/newspliteditor.cpp:217
+#: kmymoney/views/newspliteditor.cpp:219
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "Bölme için bir kategori ataması gereklidir."
 
-#: kmymoney/views/newspliteditor.cpp:226
-#: kmymoney/views/newtransactioneditor.cpp:416
+#: kmymoney/views/newspliteditor.cpp:228
+#: kmymoney/views/newtransactioneditor.cpp:427
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Bu işlem için kullanılan çek numarası."
 
-#: kmymoney/views/newspliteditor.cpp:235
-#: kmymoney/views/newtransactioneditor.cpp:426
+#: kmymoney/views/newspliteditor.cpp:237
+#: kmymoney/views/newtransactioneditor.cpp:437
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "<b>%1</b> çek numarası bu hesapta halihazırda kullanılmış."
@@ -20691,7 +20691,7 @@ msgstr "Ödeyen/Alacaklı"
 msgid "Costcenter"
 msgstr "Maliyet Merkezi"
 
-#: kmymoney/views/newtransactioneditor.cpp:570
+#: kmymoney/views/newtransactioneditor.cpp:581
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"

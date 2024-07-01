@@ -685,3 +685,23 @@ eMyMoney::Account::Type MyMoneyAccount::budgetAccountType() const
 {
     return static_cast<eMyMoney::Account::Type>(value(QLatin1String("budgetAccountType"), static_cast<int>(accountType())));
 }
+
+MyMoneyMoney MyMoneyAccount::balanceFactor(eMyMoney::Account::Type accountType)
+{
+    switch (accountGroup(accountType)) {
+    case eMyMoney::Account::Type::Expense:
+    case eMyMoney::Account::Type::Equity:
+    case eMyMoney::Account::Type::Liability:
+        return MyMoneyMoney::MINUS_ONE;
+
+    default:
+        break;
+    }
+    return MyMoneyMoney::ONE;
+}
+
+MyMoneyMoney MyMoneyAccount::balanceFactor() const
+{
+    Q_D(const MyMoneyAccount);
+    return balanceFactor(d->m_accountType);
+}

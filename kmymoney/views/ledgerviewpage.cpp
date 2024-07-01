@@ -292,6 +292,8 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
 
     d->ui->m_ledgerView->setSortOrder(d->sortOrder);
 
+    d->balanceFactor = MyMoneyAccount::balanceFactor(acc.accountType());
+
     const auto file = MyMoneyFile::instance();
     d->totalBalance = file->balance(d->accountId, QDate());
     d->clearedBalance = file->clearedBalance(d->accountId, QDate());

@@ -1511,7 +1511,7 @@ public:
                         netLiabilities += value;
                     }
                     //show the account without minimum balance
-                    showAccountEntry(*liabilities_it, value, MyMoneyMoney(), false);
+                    showAccountEntry(*liabilities_it, value * MyMoneyAccount::balanceFactor((*liabilities_it).accountType()), MyMoneyMoney(), false);
                     ++liabilities_it;
                 } else {
                     //leave the space empty if we run out of liabilities
@@ -1525,7 +1525,8 @@ public:
 
             //format assets, liabilities and net worth
             QString amountAssets = netAssets.formatMoney(file->baseCurrency().tradingSymbol(), prec);
-            QString amountLiabilities = netLiabilities.formatMoney(file->baseCurrency().tradingSymbol(), prec);
+            QString amountLiabilities =
+                (netLiabilities * MyMoneyAccount::balanceFactor(eMyMoney::Account::Type::Liability)).formatMoney(file->baseCurrency().tradingSymbol(), prec);
             QString amountNetWorth = netWorth.formatMoney(file->baseCurrency().tradingSymbol(), prec);
             amountAssets.replace(QChar(' '), "&nbsp;");
             amountLiabilities.replace(QChar(' '), "&nbsp;");
@@ -1541,9 +1542,12 @@ public:
             m_html += "<td class=\"setcolor\"></td>";
 
             //print total liabilities
-            m_html +=
-                QString("%1<td class=\"left\">%2</td>%3<td class=\"right nowrap\">%4</td>")
-                    .arg(placeHolder_Status, i18n("Total Liabilities"), placeHolder_Counts, showColoredAmount(amountLiabilities, netLiabilities.isNegative()));
+            m_html += QString("%1<td class=\"left\">%2</td>%3<td class=\"right nowrap\">%4</td>")
+                          .arg(placeHolder_Status,
+                               i18n("Total Liabilities"),
+                               placeHolder_Counts,
+                               showColoredAmount(amountLiabilities,
+                                                 (netLiabilities * MyMoneyAccount::balanceFactor(eMyMoney::Account::Type::Liability)).isNegative()));
             m_html += "</tr>";
 
             //print net worth

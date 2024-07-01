@@ -90,6 +90,13 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget* par
     //FIXME: port
     d->ui->m_statementInfoPageCheckings->ui->m_enterInformationLabel->setText(QString("<qt>") + i18n("Please enter the following fields with the information as you find them on your statement. Make sure to enter all values in <b>%1</b>.", currency.name()) + QString("</qt>"));
 
+    bool skipIntroPage = false;
+    KSharedConfigPtr kconfig = KSharedConfig::openConfig();
+    if (kconfig) {
+        skipIntroPage = kconfig->group(QLatin1String("Notification Messages")).readEntry(QLatin1String("SkipReconciliationIntro"), false);
+    }
+    setField(QLatin1String("skipIntroPage"), skipIntroPage);
+
     // If the previous reconciliation was postponed,
     // we show a different first page
     value = account.value("lastReconciledBalance");
@@ -105,6 +112,10 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget* par
         slotUpdateBalances();
 
         d->m_pages.clearBit(Page_PreviousPostpone);
+        if (skipIntroPage) {
+            d->m_pages.clearBit(Page_CheckingStart);
+            setStartId(Page_CheckingStatementInfo);
+        }
     } else {
         d->m_pages.clearBit(Page_CheckingStart);
         d->m_pages.clearBit(Page_InterestChargeCheckings);

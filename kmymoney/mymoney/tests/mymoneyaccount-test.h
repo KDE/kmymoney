@@ -37,6 +37,8 @@ private Q_SLOTS:
     void reconciliationHistory();
     void testHasOnlineMapping();
     void testBudgetOptions();
+    void testBalanceFactor();
+    void testBalanceFactor_data();
 };
 
 #endif
