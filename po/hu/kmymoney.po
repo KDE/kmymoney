@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-30 01:46+0000\n"
+"POT-Creation-Date: 2024-07-01 01:45+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -19029,7 +19029,7 @@ msgstr "Kamatbevétel"
 
 #: kmymoney/views/investtransactioneditor.cpp:261
 #: kmymoney/views/multitransactioneditor.cpp:185
-#: kmymoney/views/newtransactioneditor.cpp:255
+#: kmymoney/views/newtransactioneditor.cpp:266
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
 msgid "The posting date of the transaction."
@@ -19037,7 +19037,7 @@ msgstr "Számlakivonat importálása tranzakciók nélkül"
 
 #: kmymoney/views/investtransactioneditor.cpp:285
 #: kmymoney/views/multitransactioneditor.cpp:215
-#: kmymoney/views/newtransactioneditor.cpp:275
+#: kmymoney/views/newtransactioneditor.cpp:286
 #, fuzzy, kde-format
 #| msgid "Next due date is prior to opening date"
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
@@ -20827,7 +20827,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Ugrás erre: „%1”"
 
-#: kmymoney/views/ledgerview.cpp:689
+#: kmymoney/views/ledgerview.cpp:690
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -20835,41 +20835,41 @@ msgid ""
 "to current editor</a>"
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:805
+#: kmymoney/views/ledgerview.cpp:806
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "A tranzakciónál hiányzik a kategória hozzárendelése."
 
-#: kmymoney/views/ledgerview.cpp:812
+#: kmymoney/views/ledgerview.cpp:813
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "A tranzakciónál hiányzik a kategória hozzárendelése."
 
-#: kmymoney/views/ledgerview.cpp:821
+#: kmymoney/views/ledgerview.cpp:822
 #, fuzzy, kde-format
 #| msgid "This schedule will end at some time"
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "Az ütemezés véget ér valamikor"
 
-#: kmymoney/views/ledgerview.cpp:827
+#: kmymoney/views/ledgerview.cpp:828
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:832
+#: kmymoney/views/ledgerview.cpp:833
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:908
+#: kmymoney/views/ledgerview.cpp:909
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -20877,14 +20877,14 @@ msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Valóban törölni akarja a kiválasztott árfolyam bejegyzést?"
 
-#: kmymoney/views/ledgerview.cpp:909
+#: kmymoney/views/ledgerview.cpp:910
 #, fuzzy, kde-format
 #| msgid "Enter scheduled transaction"
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Ütemezett tranzakció megadása"
 
-#: kmymoney/views/ledgerview.cpp:912
+#: kmymoney/views/ledgerview.cpp:913
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -20892,14 +20892,14 @@ msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Valóban törölni akarja a kiválasztott árfolyam bejegyzést?"
 
-#: kmymoney/views/ledgerview.cpp:913
+#: kmymoney/views/ledgerview.cpp:914
 #, fuzzy, kde-format
 #| msgid "Enter schedule"
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Ütemezés megadása"
 
-#: kmymoney/views/ledgerview.cpp:933
+#: kmymoney/views/ledgerview.cpp:934
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -20907,7 +20907,7 @@ msgid ""
 "the ledger again."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:935
+#: kmymoney/views/ledgerview.cpp:936
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -20915,7 +20915,7 @@ msgid ""
 "transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:939
+#: kmymoney/views/ledgerview.cpp:940
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -20923,7 +20923,7 @@ msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Valóban törölni akarja a kiválasztott tranzakciót?"
 
-#: kmymoney/views/ledgerview.cpp:940
+#: kmymoney/views/ledgerview.cpp:941
 #, fuzzy, kde-format
 #| msgid "Found %1 matching transaction"
 #| msgid_plural "Found %1 matching transactions"
@@ -20986,21 +20986,21 @@ msgid "Balance: %1"
 msgstr "Egyenleg: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:193
-#: kmymoney/views/newtransactioneditor.cpp:258
+#: kmymoney/views/newtransactioneditor.cpp:269
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
 msgid "The posting date is invalid."
 msgstr "Számlakivonat importálása tranzakciók nélkül"
 
 #: kmymoney/views/multitransactioneditor.cpp:226
-#: kmymoney/views/newtransactioneditor.cpp:293
+#: kmymoney/views/newtransactioneditor.cpp:304
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgid "The cost center this transaction should be assigned to."
 msgstr "Használja ezt, hogy megadja a tranzakciókat a Főkönyvbe."
 
 #: kmymoney/views/multitransactioneditor.cpp:229
-#: kmymoney/views/newtransactioneditor.cpp:302
+#: kmymoney/views/newtransactioneditor.cpp:313
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgid ""
@@ -21061,7 +21061,7 @@ msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "Használja ezt, hogy megadja a tranzakciókat a Főkönyvbe."
 
-#: kmymoney/views/newspliteditor.cpp:159
+#: kmymoney/views/newspliteditor.cpp:167
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip costcenter combo in split editor"
@@ -21071,14 +21071,14 @@ msgid ""
 msgstr ""
 "Nem lehet ebben a kontextusban létrehozni tranzakciókat a kategóriának."
 
-#: kmymoney/views/newspliteditor.cpp:176
+#: kmymoney/views/newspliteditor.cpp:178
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "Használja ezt, hogy megadja a tranzakciókat a Főkönyvbe."
 
-#: kmymoney/views/newspliteditor.cpp:217
+#: kmymoney/views/newspliteditor.cpp:219
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip category combo in split editor"
@@ -21086,15 +21086,15 @@ msgid "A category assignment is required for a split."
 msgstr ""
 "Nem lehet ebben a kontextusban létrehozni tranzakciókat a kategóriának."
 
-#: kmymoney/views/newspliteditor.cpp:226
-#: kmymoney/views/newtransactioneditor.cpp:416
+#: kmymoney/views/newspliteditor.cpp:228
+#: kmymoney/views/newtransactioneditor.cpp:427
 #, fuzzy, kde-format
 #| msgid "Enter next transaction..."
 msgid "The check number used for this transaction."
 msgstr "Következő tranzakció bevitele..."
 
-#: kmymoney/views/newspliteditor.cpp:235
-#: kmymoney/views/newtransactioneditor.cpp:426
+#: kmymoney/views/newspliteditor.cpp:237
+#: kmymoney/views/newtransactioneditor.cpp:437
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr ""
@@ -21118,7 +21118,7 @@ msgstr "Fizető/Fogadó"
 msgid "Costcenter"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:570
+#: kmymoney/views/newtransactioneditor.cpp:581
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@title:window Autofill selection dialog"
