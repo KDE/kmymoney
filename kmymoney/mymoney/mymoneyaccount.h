@@ -19,15 +19,15 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmm_mymoney_export.h"
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneyobject.h"
-#include "kmm_mymoney_export.h"
 #include "mymoneyunittestable.h"
 
 class QString;
 class QDate;
-class MyMoneySecurity;
 class MyMoneyMoney;
+class MyMoneySecurity;
 class MyMoneySplit;
 class payeeIdentifier;
 namespace eMyMoney {
@@ -642,6 +642,8 @@ public:
      */
     QMap<QDate, MyMoneyMoney> reconciliationHistory() const;
 
+    MyMoneyMoney balanceFactor() const;
+
     /**
       * @return @c true if account has an online mapping, @c false otherwise
       */
@@ -652,6 +654,8 @@ public:
 
     static QString stdAccName(eMyMoney::Account::Standard stdAccID);
     static QString accountSeparator();
+
+    static MyMoneyMoney balanceFactor(eMyMoney::Account::Type accountType);
 
     QDataStream &operator<<(const MyMoneyAccount &);
     QDataStream &operator>>(MyMoneyAccount &);

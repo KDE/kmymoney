@@ -421,3 +421,40 @@ void MyMoneyAccountTest::testBudgetOptions()
     QCOMPARE(a.accountType(), eMyMoney::Account::Type::Asset);
     QCOMPARE(a.budgetAccountType(), eMyMoney::Account::Type::Asset);
 }
+
+void MyMoneyAccountTest::testBalanceFactor_data()
+{
+    QTest::addColumn<eMyMoney::Account::Type>("accountType");
+    QTest::addColumn<MyMoneyMoney>("factor");
+
+    // positive and null is debit
+    QTest::newRow("unknown") << eMyMoney::Account::Type::Unknown << MyMoneyMoney::ONE;
+    QTest::newRow("checking") << eMyMoney::Account::Type::Checkings << MyMoneyMoney::ONE;
+    QTest::newRow("savings") << eMyMoney::Account::Type::Savings << MyMoneyMoney::ONE;
+    QTest::newRow("cash") << eMyMoney::Account::Type::Cash << MyMoneyMoney::ONE;
+    QTest::newRow("investment") << eMyMoney::Account::Type::Investment << MyMoneyMoney::ONE;
+    QTest::newRow("asset") << eMyMoney::Account::Type::Asset << MyMoneyMoney::ONE;
+    QTest::newRow("currency") << eMyMoney::Account::Type::Currency << MyMoneyMoney::ONE;
+    QTest::newRow("moneymarket") << eMyMoney::Account::Type::MoneyMarket << MyMoneyMoney::ONE;
+    QTest::newRow("certificatedeposit") << eMyMoney::Account::Type::CertificateDep << MyMoneyMoney::ONE;
+    QTest::newRow("assetloan") << eMyMoney::Account::Type::AssetLoan << MyMoneyMoney::ONE;
+    QTest::newRow("stock") << eMyMoney::Account::Type::Stock << MyMoneyMoney::ONE;
+    QTest::newRow("income") << eMyMoney::Account::Type::Income << MyMoneyMoney::ONE;
+
+    QTest::newRow("expense") << eMyMoney::Account::Type::Expense << MyMoneyMoney::MINUS_ONE;
+    QTest::newRow("creditcard") << eMyMoney::Account::Type::CreditCard << MyMoneyMoney::MINUS_ONE;
+    QTest::newRow("liability") << eMyMoney::Account::Type::Liability << MyMoneyMoney::MINUS_ONE;
+    QTest::newRow("loan") << eMyMoney::Account::Type::Loan << MyMoneyMoney::MINUS_ONE;
+    QTest::newRow("equity") << eMyMoney::Account::Type::Equity << MyMoneyMoney::MINUS_ONE;
+}
+void MyMoneyAccountTest::testBalanceFactor()
+{
+    QFETCH(eMyMoney::Account::Type, accountType);
+    QFETCH(MyMoneyMoney, factor);
+
+    QCOMPARE(MyMoneyAccount::balanceFactor(accountType), factor);
+
+    MyMoneyAccount account;
+    account.setAccountType(accountType);
+    QCOMPARE(account.balanceFactor(), factor);
+}

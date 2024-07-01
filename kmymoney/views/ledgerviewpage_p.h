@@ -48,6 +48,7 @@ public:
         , stateFilter(nullptr)
         , form(nullptr)
         , stackedView(nullptr)
+        , balanceFactor(MyMoneyMoney::ONE)
         , sortOrderType(LedgerViewSettings::SortOrderStd)
         , needModelInit(true)
         , showEntryForNewTransaction(false)
@@ -142,15 +143,15 @@ public:
                                             balanceIsApproximated ? QLatin1String("~") : QString(),
                                             balance.formatMoney(baseCurrency.tradingSymbol(), precision)));
         } else {
-            ui->m_centerLabel->setText(i18nc("@label:textbox Cleared balance", "Cleared: %1", clearedBalance.formatMoney("", precision)));
+            ui->m_centerLabel->setText(i18nc("@label:textbox Cleared balance", "Cleared: %1", (clearedBalance * balanceFactor).formatMoney("", precision)));
             if (selections.count(SelectedObjects::JournalEntry) > 1) {
                 ui->m_rightLabel->setText(i18nc("@label:textbox %1 sum symbol, %2 number of selected tx, %3 sum of tx",
                                                 "%1 of %2: %3",
                                                 QChar(0x2211),
                                                 selections.count(SelectedObjects::JournalEntry),
-                                                selectedTotal.formatMoney("", precision)));
+                                                (selectedTotal * balanceFactor).formatMoney("", precision)));
             } else {
-                ui->m_rightLabel->setText(i18nc("@label:textbox Total balance", "Balance: %1", totalBalance.formatMoney("", precision)));
+                ui->m_rightLabel->setText(i18nc("@label:textbox Total balance", "Balance: %1", (totalBalance * balanceFactor).formatMoney("", precision)));
             }
         }
     }
@@ -237,6 +238,7 @@ public:
     MyMoneyMoney totalBalance;
     MyMoneyMoney clearedBalance;
     MyMoneyMoney selectedTotal;
+    MyMoneyMoney balanceFactor;
     LedgerViewSettings::SortOrderType sortOrderType;
     LedgerSortOrder sortOrder;
     bool needModelInit;

@@ -462,22 +462,38 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
             //set the cell value and tooltip
             if (config.isMixedTime()) {
                 if (myRowTypeList.at(i) == eActual)
-                    rowNum = drawPivotGridRow(rowNum, grid.m_total.value(myRowTypeList.at(i)),
+                    rowNum = drawPivotGridRow(rowNum,
+                                              grid.m_total.value(myRowTypeList.at(i)),
                                               config.isChartDataLabels() ? legendText : QString(),
-                                              0, config.currentDateColumn(), precision, false);
+                                              0,
+                                              config.currentDateColumn(),
+                                              precision,
+                                              config.isNegExpenses());
                 else if (myRowTypeList.at(i)== eForecast) {
-                    rowNum = drawPivotGridRow(rowNum, grid.m_total.value(myRowTypeList.at(i)),
+                    rowNum = drawPivotGridRow(rowNum,
+                                              grid.m_total.value(myRowTypeList.at(i)),
                                               config.isChartDataLabels() ? legendText : QString(),
-                                              config.currentDateColumn(), numberColumns - config.currentDateColumn(), precision, false);
+                                              config.currentDateColumn(),
+                                              numberColumns - config.currentDateColumn(),
+                                              precision,
+                                              config.isNegExpenses());
 
                 } else
-                    rowNum = drawPivotGridRow(rowNum, grid.m_total.value(myRowTypeList.at(i)),
+                    rowNum = drawPivotGridRow(rowNum,
+                                              grid.m_total.value(myRowTypeList.at(i)),
                                               config.isChartDataLabels() ? legendText : QString(),
-                                              0, numberColumns, precision, false);
+                                              0,
+                                              numberColumns,
+                                              precision,
+                                              config.isNegExpenses());
             } else
-                rowNum = drawPivotGridRow(rowNum, grid.m_total.value(myRowTypeList.at(i)),
+                rowNum = drawPivotGridRow(rowNum,
+                                          grid.m_total.value(myRowTypeList.at(i)),
                                           config.isChartDataLabels() ? legendText : QString(),
-                                          0, numberColumns, precision, false);
+                                          0,
+                                          numberColumns,
+                                          precision,
+                                          config.isNegExpenses());
         }
 
     }

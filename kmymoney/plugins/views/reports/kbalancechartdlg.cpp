@@ -92,11 +92,14 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
         const auto subAccountList = account.accountList();
         for (const auto& accountID : qAsConst(subAccountList))
             reportCfg.addAccount(accountID);
-    } else
+    } else {
         reportCfg.addAccount(account.id());
+    }
     reportCfg.setColumnsAreDays(true);
     reportCfg.setConvertCurrency(false);
     reportCfg.setMixedTime(true);
+    reportCfg.setNegExpenses(MyMoneyAccount::balanceFactor(account.accountType()).isNegative());
+
     reports::PivotTable table(reportCfg);
 
     reports::KReportChartView* chartWidget = new reports::KReportChartView(this);
