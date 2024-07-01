@@ -288,7 +288,7 @@
   these inter-table relationships.
 </para>
 
-<informaltable>
+<informaltable pgwide="1">
   <tgroup cols="3">
     <thead>
       <row>
@@ -422,18 +422,13 @@
   Notes:
 </para>
 
-<!-- FIXME:  can anyone explain why we should use these character codes?
-     &#x2013 en dash
-     &#x201C left double quote
-     &#x201D right double quote
--->
 <para>
-  1 &#x2013; txType = &#x201C;N&#x201D; for normal transactions,
-  &#x201C;S&#x201D; for scheduled transactions
+  1 &ndash; txType = "N&rdquor; for normal transactions, "S&rdquor; for scheduled
+  transactions
 </para>
 
 <para>
-2 &#x2013; if kmmAccounts.isStockAccount = &#x201C;Y&#x201D;
+  2 &ndash; if kmmAccounts.isStockAccount = "Y&rdquor;
 </para>
 </sect3>
 
@@ -539,7 +534,7 @@
   and click <guibutton>Create Tables</guibutton>.  Note that, except in the case of
   SQLite, you will need either to include a suitable <literal>CREATE
   DATABASE</literal> statement as the first command, or have previously issued such a
-  command externally to &kmymoney;.  <!-- FIXME:  to KMM or to the RDBMS? -->
+  command externally to &kmymoney;.
 </para>
 </sect3>
 

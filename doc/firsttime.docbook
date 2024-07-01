@@ -11,13 +11,13 @@
 <title>Using &kmymoney; for the first time</title>
 
 <sect1 id="firstime"><title>Running &kmymoney; for the first time</title>
-<note>
+<note><title>Screenshots may differ</title>
   <para>
     When you run &kmymoney;, it might not look exactly like the screenshots in this
     manual.  Many details, such as fonts, colors, and icons, can be customized, using
     the <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
     &kmymoney;...</guimenuitem></menuchoice> menu item or the &kde; &systemsettings;
-    application, depending on your operating system.
+    application, depending on your operating system or distribution.
   </para>
 </note>
 

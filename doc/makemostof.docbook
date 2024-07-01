@@ -27,10 +27,10 @@
   same as &kmymoney;'s will almost certainly save you time later.
 </para>
 
-<note>
+<note><title></title>
   <para>
-    This and the following sections have been essentially unchanged since a very
-    early version of &kmymoney;.  While the basics of bookkeeping have not changed
+    This and the following sections have been essentially unchanged since the very
+    early versions of &kmymoney;.  While the basics of bookkeeping have not changed
     over the years, and there is nothing inaccurate or misleading here, there have
     been requests to update this area.  If you have any specific suggestions or ideas
     for this, the author would like to hear from you, through one of the routes
@@ -120,8 +120,8 @@
 
 <para>
   Finally, consider if you want everything in one set of accounts, or two or
-  more. This may depend on the legal framework or just how you want to analyze
-  things. Each set of accounts would be handled separately.
+  more. This may depend on the legal framework where you live, or just how you want
+  to analyze things. Each set of accounts would be handled separately.
 </para>
 </sect2>
 
@@ -139,10 +139,10 @@
 
 <sect1 id="makingmostof.mapping"><title>Mapping your finances to &kmymoney;</title>
 <para>
-  So, collect your recent financial papers and see the following sections for more
-  information on how you can map your own finances to each of the different areas of
-  &kmymoney;.  Note that each of these sections below is presented in more detail in
-  later chapters of this handbook.
+  So, collect your recent financial papers and seeexplore the following sections for
+  more information on how you can map your own finances to each of the different
+  areas of &kmymoney;.  Note that each of these sections below is presented in more
+  detail in later chapters of this handbook.
 </para>
 
 <sect2 id="makingmostof.mapping.accounts"><title>Accounts</title>
@@ -152,7 +152,7 @@
   that you wish to monitor.  You generally create an account in &kmymoney; to
   represent each different account you have in <quote>real life,</quote> whether it
   is with a bank or other financial institution, or a store, or even just the cash in
-  your wallet.  There are several types of accounts available, to represent the
+  your wallet.  There are several types of accounts available, which represent
   different types of places your money may be.
 </para>
 
@@ -199,7 +199,8 @@
     <term>Cash</term>
     <listitem>
       <para>
-        Money in your pocket or your wallet.
+        Money in your pocket or your wallet or in a jar or box on the shelf or under
+        your bed.
       </para>
     </listitem>
   </varlistentry>
@@ -271,11 +272,11 @@
 
 <sect2 id="makingmostof.mapping.institutions"><title>Institutions</title>
 <para>
-  These represent financial institutions, such as banks or investment brokers.  They
-  can be used to group accounts, and can show the total value of all your accounts
-  within that institution.  These do not need to reflect actual organizations, but
-  are for your convenience in grouping your accounts, and their use is completely
-  optional.
+  These represent financial institutions, such as banks or stores or investment
+  brokers.  They can be used to group accounts, and can show the total value of all
+  your accounts within that institution.  These do not need to reflect actual
+  organizations, but are for your convenience in grouping your accounts.  Their use
+  is completely optional.
 </para>
 </sect2>
 
@@ -318,12 +319,12 @@
 
 <sect2 id="makingmostof.mapping.payees"><title>Payees</title>
 <para>
-  A Payee (or Payor) represents someone or some group to which you pay money or which
+  A Payee (or Payer) represents someone or some group to which you pay money or which
   pays you money.  As with Tags, they are non-managed, and do not have a value.  They
   are primarily a convenience for being able to report how much money you have sent
   to someone or spent at a particular store.  These are optional for most
   transactions, but are required for Scheduled transactions, which are describe
-  below.  A transaction history, with category, can be shown for each payee.
+  below.  A transaction history, with categories, can be shown for each payee.
 </para>
 </sect2>
 
@@ -331,7 +332,8 @@
 <para>
   Where transactions occur on a regular basis, such as salary or utility bills, these
   can be set up against a Schedule.  Transactions are created from Schedules.
-  Scheduled transaction which are overdue can be shown on the home page.
+  Upcoming scheduled transaction as well as those which are overdue can be shown on
+  the home page.
 </para>
 </sect2>
 </sect1>
@@ -340,13 +342,14 @@
 <para>
   When you start &kmymoney;, the Home View, or Home Page, shows a high level overview
   of your finances.  It is divided into several sections, and you can customize which
-  are displayed.  Along the left, there are icons for each of the major Views.  Each one is used
-  by &kmymoney; to present a different type of data for entry or reveiw.
+  are displayed, and in what order.  Along the left, there are icons for each of the
+  major Views.  Each view is used by &kmymoney; to present a different type of data
+  for entry or reveiw.
 </para>
 
 <para>
   Unless you keep your money under your mattress or under the floorboards, you
-  probably make use of one or more institutions where you have accounts, which
+  probably make use of one or more institutions, where you have accounts, which
   may be in credit or debit. In order to familiarize yourself with the way
   &kmymoney; works, choose an account you want to track with &kmymoney; and
   select the <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem>
@@ -367,7 +370,7 @@
 </para>
 
 <para>
-  To add other new transactions go to th Ledger view; you can add new payees and
+  To add other transactions go to th Ledger View; you can add new payees and
   categories while entering a transaction or by going to the Payees or Categories
   View before entering the transaction.
 </para>
@@ -375,7 +378,7 @@
 <para> 
   Depending on which option you chose when setting up the data file, you will
   probably find that the default Categories do not exactly match your needs; you can
-  easily delete ones you know you are never going to need and add others that you
+  easily delete ones you know you are never going to need and add others that you do
   need. But when you are entering a transaction, you only have to type a few letters
   of a category and &kmymoney; will offer you a dropdown list of the matching
   categories from which to choose.
@@ -430,14 +433,14 @@
 </para>
 
 <para>
-  When the first plugins were written, even though the source code was included with
-  the complete source code of &kmymoney;, not all &Linux; distributions included them
-  in the versions they compiled.  For some time, the handbook included instructions
-  for checking this and for compiling them yourself, if necessary.  At this point,
-  many of the basic features of &kmymoney; have been implemented as plugins, and they
-  are included by all distributions, as well as the &Windows;, &macOS;, and Appimage
-  versions distributed on the <ulink url="https://www.kmymoney.org">&kmymoney; web
-  site</ulink>.
+  When the first plugins were written, even though their source code was included
+  with the complete source code of &kmymoney;, not all &Linux; distributions included
+  them in the versions they compiled.  For some time, the handbook included
+  instructions for checking this and for compiling them yourself, if necessary.  At
+  this point, many of the basic features of &kmymoney; have been implemented as
+  plugins, and they are included by all distributions, as well as the &Windows;,
+  &macOS;, Appimage, and other versions distributed on the <ulink
+  url="https://www.kmymoney.org">&kmymoney; web site</ulink>.
 </para>
 
 <para>
@@ -447,7 +450,7 @@
 </para>
 
 <para>
-  If you wish to write your own plugin in order to implement a feature, such as
+  If you wish to write your own plugin in order to implement a new feature, such as
   importing or exporting data in a custom format, you should use one of the existing
   importer or exporter plugins as an example.  If you do so, please write to the
   developers' mailing list &devlist;, in case someone has already started a similar

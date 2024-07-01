@@ -44,8 +44,8 @@
   </mediaobject>
 </screenshot>
 
-<!-- FIXME: I prefer a more consistent hierarchy and use of levels on this page, such
-     as with use sectX and variablelist.  For now, I minimize changes. -->
+<!-- FIXME: I would prefer a more consistent hierarchy and use of levels here, such
+     as with using sectX and variablelist.  For now, I minimize layoue changes. -->
 <variablelist>
   <varlistentry>
     <term><guilabel>Autosave options</guilabel></term>
@@ -834,6 +834,7 @@
         </listitem>
         
         <listitem>
+          <!-- FIXME:  What happens if multiple transactions are within X%?  -->
           <para>Same transaction if amount differs less than percentage set below</para>
           <para>
             With this option selected, when you enter a new transaction, &kmymoney;
@@ -847,7 +848,6 @@
             all previous transactions for the payee and account will be displayed,
             and you can select one of those transactions to use for autofill by
             clicking on it.
-            <!-- FIXME:  What happens if multiple transactions are within X%?  -->
           </para>
         </listitem>
 
@@ -944,12 +944,10 @@
 </sect2>
 
 <sect2><title>Ungrouped Item</title>
-<!-- FIXME: This is a good example of problems with the current mix of sectX and
-     variablelist.  Without a title, this sect has inadequate spacing above it.  so
-     it looks like it is part of the previous group, but the actual title does not
-     match the lack of title in the actual config dialog.  I'm open to suggestions on
-     how to deal with this.  Not using sect2 for boxes might help, but would be a lot
-     of effort.  Perhaps just adding a box and title to the config dialog?  -->
+<!-- FIXME: This is a good example of problems with the current mix of sectX and variablelist.  Without a title, this
+     sect has inadequate spacing above.  so it looks part of the previous group, but the actual title doesn't match the
+     lack of title in the actual config dialog.  I'm open to suggestions on how to deal with this.  Not using sect2 for
+     boxes might help, but would be a lot of effort.  Perhaps just adding a box and title to the config dialog?-->
 <literallayout>
 </literallayout>
 <variablelist>
@@ -1258,9 +1256,9 @@
 </para>
 </sect2>
 
-<sect2 id="details.settings.plugins.kbanking"><title>KBanking</title>
 <!-- FIXME: There is some overlap between here and the Reference/Settings section.
-            Better coordination would be good. -->
+            I would prefer better coordination.  -->
+<sect2 id="details.settings.plugins.kbanking"><title>KBanking</title>
 
 <para>
   This plugin adds support for HBCI/FinTs, OFX, and PayPal online banking by using
