@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-01 01:45+0000\n"
+"POT-Creation-Date: 2024-07-02 01:45+0000\n"
 "PO-Revision-Date: 2024-02-24 16:23+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -2229,7 +2229,7 @@ msgid "Liability"
 msgstr "Pasiv"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:542 kmymoney/kmymoney.cpp:440
-#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1841
+#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1845
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -6194,7 +6194,7 @@ msgstr "Active și pasive"
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:68
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1576
+#: kmymoney/views/khomeview_p.h:1580
 #, kde-format
 msgid "Budget"
 msgstr "Buget"
@@ -16076,7 +16076,7 @@ msgid "No data provided by reports plugin for this chart."
 msgstr "Afișează versiunea raportului acestui grafic"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:660
-#: kmymoney/views/khomeview_p.h:571 kmymoney/views/khomeview_p.h:1580
+#: kmymoney/views/khomeview_p.h:571 kmymoney/views/khomeview_p.h:1584
 #, fuzzy, kde-format
 #| msgid "Show the report version of this chart"
 msgid "Enable reports plugin to see this chart."
@@ -16298,7 +16298,7 @@ msgstr "Transfer"
 msgid "Time"
 msgstr "Timp"
 
-#: kmymoney/plugins/views/reports/core/kreportchartview.cpp:539
+#: kmymoney/plugins/views/reports/core/kreportchartview.cpp:555
 #, kde-format
 msgctxt "Chart legend title"
 msgid "Legend"
@@ -17316,7 +17316,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr "Diagramă circulară cu venituri și cheltuieli"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:871
-#: kmymoney/views/khomeview_p.h:1554
+#: kmymoney/views/khomeview_p.h:1558
 #, kde-format
 msgid "Net Worth"
 msgstr "Valoare netă"
@@ -17563,7 +17563,7 @@ msgid "Net Worth Forecast Graph"
 msgstr "Graficul valorii nete prognozate"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, NewGeneralInfoWizardPage)
-#. i18n: ectx: attribute (title), widget (QWizardPage, CheckingStartWizardPage)
+#. i18n: ectx: property (title), widget (QWizardPage, CheckingStartWizardPage)
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1376
 #: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:14
 #: kmymoney/wizards/newloanwizard/newgeneralinfowizardpage.ui:6
@@ -20642,82 +20642,82 @@ msgstr "Conturi de active"
 msgid "Liability Accounts"
 msgstr "Conturi de pasive"
 
-#: kmymoney/views/khomeview_p.h:1538
+#: kmymoney/views/khomeview_p.h:1539
 #, kde-format
 msgid "Total Assets"
 msgstr "Total active"
 
-#: kmymoney/views/khomeview_p.h:1546
+#: kmymoney/views/khomeview_p.h:1547
 #, kde-format
 msgid "Total Liabilities"
 msgstr "Total pasive"
 
-#: kmymoney/views/khomeview_p.h:1831
+#: kmymoney/views/khomeview_p.h:1835
 #, kde-format
 msgid "Cash Flow Summary"
 msgstr "Sumarul fluxului financiar"
 
-#: kmymoney/views/khomeview_p.h:1836
+#: kmymoney/views/khomeview_p.h:1840
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "Venituri și cheltuieli în această lună"
 
-#: kmymoney/views/khomeview_p.h:1844
+#: kmymoney/views/khomeview_p.h:1848
 #, kde-format
 msgid "Scheduled Income"
 msgstr "Venit programat"
 
-#: kmymoney/views/khomeview_p.h:1847
+#: kmymoney/views/khomeview_p.h:1851
 #, kde-format
 msgid "Expenses"
 msgstr "Cheltuieli"
 
-#: kmymoney/views/khomeview_p.h:1850
+#: kmymoney/views/khomeview_p.h:1854
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "Cheltuieli programate"
 
-#: kmymoney/views/khomeview_p.h:1878
+#: kmymoney/views/khomeview_p.h:1882
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "Active și pasive lichide"
 
-#: kmymoney/views/khomeview_p.h:1883
+#: kmymoney/views/khomeview_p.h:1887
 #, kde-format
 msgid "Liquid Assets"
 msgstr "Active lichide"
 
-#: kmymoney/views/khomeview_p.h:1886
+#: kmymoney/views/khomeview_p.h:1890
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "Transferuri în pasive lichide"
 
-#: kmymoney/views/khomeview_p.h:1889
+#: kmymoney/views/khomeview_p.h:1893
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "Pasive lichide"
 
-#: kmymoney/views/khomeview_p.h:1892
+#: kmymoney/views/khomeview_p.h:1896
 #, kde-format
 msgid "Other Transfers"
 msgstr "Alte transferuri"
 
-#: kmymoney/views/khomeview_p.h:1935
+#: kmymoney/views/khomeview_p.h:1939
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "Starea fluxului financiar"
 
-#: kmymoney/views/khomeview_p.h:1940
+#: kmymoney/views/khomeview_p.h:1944
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "Active lichide estimate"
 
-#: kmymoney/views/khomeview_p.h:1943
+#: kmymoney/views/khomeview_p.h:1947
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "Pasive lichide estimate"
 
-#: kmymoney/views/khomeview_p.h:1946
+#: kmymoney/views/khomeview_p.h:1950
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "Profit estimat/Pierdere estimată"
@@ -21679,28 +21679,28 @@ msgstr "Acceptă"
 msgid "TextLabel"
 msgstr "TextLabel6"
 
-#: kmymoney/views/ledgerviewpage_p.h:97
+#: kmymoney/views/ledgerviewpage_p.h:98
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgctxt "@label:textbox Reconciliation date"
 msgid "Last reconciliation: %1"
 msgstr "Ultima reconciliere"
 
-#: kmymoney/views/ledgerviewpage_p.h:99
+#: kmymoney/views/ledgerviewpage_p.h:100
 #, fuzzy, kde-format
 #| msgid "Never reconciled"
 msgctxt "@label:textbox Reconciliation date"
 msgid "Never reconciled"
 msgstr "Nu s-a făcut nicio reconciliere pînă acum"
 
-#: kmymoney/views/ledgerviewpage_p.h:141
+#: kmymoney/views/ledgerviewpage_p.h:142
 #, fuzzy, kde-format
 #| msgid "Investment value: %1%2"
 msgctxt "@label:textbox Total value of investment"
 msgid "Investment value: %1%2"
 msgstr "Valoarea investițiilor: %1%2"
 
-#: kmymoney/views/ledgerviewpage_p.h:145
+#: kmymoney/views/ledgerviewpage_p.h:146
 #: kmymoney/views/reconciliationledgerviewpage.cpp:397
 #, fuzzy, kde-format
 #| msgctxt "Cleared balance"
@@ -21709,14 +21709,14 @@ msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
 msgstr "Verificate: %1"
 
-#: kmymoney/views/ledgerviewpage_p.h:148
+#: kmymoney/views/ledgerviewpage_p.h:149
 #, fuzzy, kde-format
 #| msgid "%1 of %2"
 msgctxt "@label:textbox %1 sum symbol, %2 number of selected tx, %3 sum of tx"
 msgid "%1 of %2: %3"
 msgstr "%1 din %2"
 
-#: kmymoney/views/ledgerviewpage_p.h:153
+#: kmymoney/views/ledgerviewpage_p.h:154
 #, fuzzy, kde-format
 #| msgid "Balance: %1"
 msgctxt "@label:textbox Total balance"
@@ -22925,7 +22925,7 @@ msgid "Sort order"
 msgstr "Ordinea de sortare"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel6)
-#: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:32
+#: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:41
 #, kde-format
 msgid ""
 "Reconciling your account ensures your records match those of your "
@@ -22956,6 +22956,12 @@ msgstr ""
 "\n"
 "Soldul inițial este suma tranzacțiilor dumneavoastră verificate și "
 "reconciliate."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_skipIntroPage)
+#: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:67
+#, kde-format
+msgid "Don't show this page again when starting the reconciliation next time."
+msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, CheckingStatementInfoWizardPage)
 #: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.ui:14
@@ -23017,12 +23023,12 @@ msgstr ""
 "dumneavoastră de cont. Aveți grijă să introduceți toate valorile în <b>%1</"
 "b>."
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:141
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:152
 #, kde-format
 msgid "Last reconciled statement: %1"
 msgstr "Extrasul de cont folosit pentru ultima reconciliere: %1"
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:209
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:220
 #, kde-format
 msgid "Oldest unmarked transaction: %1"
 msgstr "Tranzacția cea mai veche nemarcată: %1"

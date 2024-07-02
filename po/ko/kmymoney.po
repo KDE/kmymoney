@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-01 01:45+0000\n"
+"POT-Creation-Date: 2024-07-02 01:45+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -2132,7 +2132,7 @@ msgid "Liability"
 msgstr "부채"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:542 kmymoney/kmymoney.cpp:440
-#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1841
+#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1845
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -5919,7 +5919,7 @@ msgstr "자산 및 부채"
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:68
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1576
+#: kmymoney/views/khomeview_p.h:1580
 #, kde-format
 msgid "Budget"
 msgstr "예산"
@@ -15153,7 +15153,7 @@ msgid "No data provided by reports plugin for this chart."
 msgstr "보고서 플러그인에서 이 차트 데이터를 제공하지 않았습니다."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:660
-#: kmymoney/views/khomeview_p.h:571 kmymoney/views/khomeview_p.h:1580
+#: kmymoney/views/khomeview_p.h:571 kmymoney/views/khomeview_p.h:1584
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "이 차트를 보려면 보고서 플러그인을 사용하십시오."
@@ -15361,7 +15361,7 @@ msgstr "계좌 이체 설정"
 msgid "Time"
 msgstr "시간"
 
-#: kmymoney/plugins/views/reports/core/kreportchartview.cpp:539
+#: kmymoney/plugins/views/reports/core/kreportchartview.cpp:555
 #, kde-format
 msgctxt "Chart legend title"
 msgid "Legend"
@@ -16333,7 +16333,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr "수입과 지출 원형 차트"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:871
-#: kmymoney/views/khomeview_p.h:1554
+#: kmymoney/views/khomeview_p.h:1558
 #, kde-format
 msgid "Net Worth"
 msgstr "순자산"
@@ -16576,7 +16576,7 @@ msgid "Net Worth Forecast Graph"
 msgstr "순자산 예측 그래프"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, NewGeneralInfoWizardPage)
-#. i18n: ectx: attribute (title), widget (QWizardPage, CheckingStartWizardPage)
+#. i18n: ectx: property (title), widget (QWizardPage, CheckingStartWizardPage)
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1376
 #: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:14
 #: kmymoney/wizards/newloanwizard/newgeneralinfowizardpage.ui:6
@@ -19389,82 +19389,82 @@ msgstr "자산 계좌"
 msgid "Liability Accounts"
 msgstr "부채 계좌"
 
-#: kmymoney/views/khomeview_p.h:1538
+#: kmymoney/views/khomeview_p.h:1539
 #, kde-format
 msgid "Total Assets"
 msgstr "자산 총액"
 
-#: kmymoney/views/khomeview_p.h:1546
+#: kmymoney/views/khomeview_p.h:1547
 #, kde-format
 msgid "Total Liabilities"
 msgstr "부채 총액"
 
-#: kmymoney/views/khomeview_p.h:1831
+#: kmymoney/views/khomeview_p.h:1835
 #, kde-format
 msgid "Cash Flow Summary"
 msgstr "현금 흐름 요약"
 
-#: kmymoney/views/khomeview_p.h:1836
+#: kmymoney/views/khomeview_p.h:1840
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "이번 달 수입과 지출"
 
-#: kmymoney/views/khomeview_p.h:1844
+#: kmymoney/views/khomeview_p.h:1848
 #, kde-format
 msgid "Scheduled Income"
 msgstr "예정된 수입"
 
-#: kmymoney/views/khomeview_p.h:1847
+#: kmymoney/views/khomeview_p.h:1851
 #, kde-format
 msgid "Expenses"
 msgstr "지출"
 
-#: kmymoney/views/khomeview_p.h:1850
+#: kmymoney/views/khomeview_p.h:1854
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "예정된 지출"
 
-#: kmymoney/views/khomeview_p.h:1878
+#: kmymoney/views/khomeview_p.h:1882
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "유동 자산과 부채"
 
-#: kmymoney/views/khomeview_p.h:1883
+#: kmymoney/views/khomeview_p.h:1887
 #, kde-format
 msgid "Liquid Assets"
 msgstr "유동 자산"
 
-#: kmymoney/views/khomeview_p.h:1886
+#: kmymoney/views/khomeview_p.h:1890
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "유동 부채로 이체"
 
-#: kmymoney/views/khomeview_p.h:1889
+#: kmymoney/views/khomeview_p.h:1893
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "유동 부채"
 
-#: kmymoney/views/khomeview_p.h:1892
+#: kmymoney/views/khomeview_p.h:1896
 #, kde-format
 msgid "Other Transfers"
 msgstr "다른 이체"
 
-#: kmymoney/views/khomeview_p.h:1935
+#: kmymoney/views/khomeview_p.h:1939
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "현금 흐름 상태"
 
-#: kmymoney/views/khomeview_p.h:1940
+#: kmymoney/views/khomeview_p.h:1944
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "예상된 유동 자산"
 
-#: kmymoney/views/khomeview_p.h:1943
+#: kmymoney/views/khomeview_p.h:1947
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "예상된 유동 부채"
 
-#: kmymoney/views/khomeview_p.h:1946
+#: kmymoney/views/khomeview_p.h:1950
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "예상된 수익/손실"
@@ -20347,38 +20347,38 @@ msgstr "거래 수락 또는 일치 해제"
 msgid "TextLabel"
 msgstr "텍스트 레이블"
 
-#: kmymoney/views/ledgerviewpage_p.h:97
+#: kmymoney/views/ledgerviewpage_p.h:98
 #, kde-format
 msgctxt "@label:textbox Reconciliation date"
 msgid "Last reconciliation: %1"
 msgstr "마지막 조정: %1"
 
-#: kmymoney/views/ledgerviewpage_p.h:99
+#: kmymoney/views/ledgerviewpage_p.h:100
 #, kde-format
 msgctxt "@label:textbox Reconciliation date"
 msgid "Never reconciled"
 msgstr "조정되지 않음"
 
-#: kmymoney/views/ledgerviewpage_p.h:141
+#: kmymoney/views/ledgerviewpage_p.h:142
 #, kde-format
 msgctxt "@label:textbox Total value of investment"
 msgid "Investment value: %1%2"
 msgstr "투자 가치: %1%2"
 
-#: kmymoney/views/ledgerviewpage_p.h:145
+#: kmymoney/views/ledgerviewpage_p.h:146
 #: kmymoney/views/reconciliationledgerviewpage.cpp:397
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
 msgstr "확정됨: %1"
 
-#: kmymoney/views/ledgerviewpage_p.h:148
+#: kmymoney/views/ledgerviewpage_p.h:149
 #, kde-format
 msgctxt "@label:textbox %1 sum symbol, %2 number of selected tx, %3 sum of tx"
 msgid "%1 of %2: %3"
 msgstr "%2 중 %1: %3"
 
-#: kmymoney/views/ledgerviewpage_p.h:153
+#: kmymoney/views/ledgerviewpage_p.h:154
 #, kde-format
 msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
@@ -21550,7 +21550,7 @@ msgid "Sort order"
 msgstr "정렬 순서"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel6)
-#: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:32
+#: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:41
 #, kde-format
 msgid ""
 "Reconciling your account ensures your records match those of your "
@@ -21576,6 +21576,12 @@ msgstr ""
 "으면 수정하십시오.\n"
 "\n"
 "시작 잔액은 확정 및 조정된 거래의 합계입니다."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_skipIntroPage)
+#: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:67
+#, kde-format
+msgid "Don't show this page again when starting the reconciliation next time."
+msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, CheckingStatementInfoWizardPage)
 #: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.ui:14
@@ -21632,12 +21638,12 @@ msgstr ""
 "명세서에서 찾은 정보와 함께 다음 필드를 입력하십시오. <b>%1</b>의 모든 값을 "
 "입력하십시오."
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:141
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:152
 #, kde-format
 msgid "Last reconciled statement: %1"
 msgstr "마지막으로 조정된 명세서: %1"
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:209
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:220
 #, kde-format
 msgid "Oldest unmarked transaction: %1"
 msgstr "표시되지 않은 가장 오래된 거래: %1"

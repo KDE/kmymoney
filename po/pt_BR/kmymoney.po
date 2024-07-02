@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-01 01:45+0000\n"
+"POT-Creation-Date: 2024-07-02 01:45+0000\n"
 "PO-Revision-Date: 2023-09-18 10:19-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -2181,7 +2181,7 @@ msgid "Liability"
 msgstr "Passivo"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:542 kmymoney/kmymoney.cpp:440
-#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1841
+#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1845
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -6069,7 +6069,7 @@ msgstr "Ativos e passivos"
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:68
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1576
+#: kmymoney/views/khomeview_p.h:1580
 #, kde-format
 msgid "Budget"
 msgstr "Orçamento"
@@ -15537,7 +15537,7 @@ msgid "No data provided by reports plugin for this chart."
 msgstr "Ative o plugin de relatórios para ver este gráfico."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:660
-#: kmymoney/views/khomeview_p.h:571 kmymoney/views/khomeview_p.h:1580
+#: kmymoney/views/khomeview_p.h:571 kmymoney/views/khomeview_p.h:1584
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "Ative o plugin de relatórios para ver este gráfico."
@@ -15754,7 +15754,7 @@ msgstr "Opções de transferência de crédito"
 msgid "Time"
 msgstr "Tempo"
 
-#: kmymoney/plugins/views/reports/core/kreportchartview.cpp:539
+#: kmymoney/plugins/views/reports/core/kreportchartview.cpp:555
 #, kde-format
 msgctxt "Chart legend title"
 msgid "Legend"
@@ -16737,7 +16737,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr "Gráfico de setores de receitas e despesas"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:871
-#: kmymoney/views/khomeview_p.h:1554
+#: kmymoney/views/khomeview_p.h:1558
 #, kde-format
 msgid "Net Worth"
 msgstr "Valor líquido"
@@ -16980,7 +16980,7 @@ msgid "Net Worth Forecast Graph"
 msgstr "Gráfico de previsão do patrimônio líquido"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, NewGeneralInfoWizardPage)
-#. i18n: ectx: attribute (title), widget (QWizardPage, CheckingStartWizardPage)
+#. i18n: ectx: property (title), widget (QWizardPage, CheckingStartWizardPage)
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1376
 #: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:14
 #: kmymoney/wizards/newloanwizard/newgeneralinfowizardpage.ui:6
@@ -19897,82 +19897,82 @@ msgstr "Contas de ativos"
 msgid "Liability Accounts"
 msgstr "Contas de passivos"
 
-#: kmymoney/views/khomeview_p.h:1538
+#: kmymoney/views/khomeview_p.h:1539
 #, kde-format
 msgid "Total Assets"
 msgstr "Ativos totais"
 
-#: kmymoney/views/khomeview_p.h:1546
+#: kmymoney/views/khomeview_p.h:1547
 #, kde-format
 msgid "Total Liabilities"
 msgstr "Passivos totais"
 
-#: kmymoney/views/khomeview_p.h:1831
+#: kmymoney/views/khomeview_p.h:1835
 #, kde-format
 msgid "Cash Flow Summary"
 msgstr "Resumo do fluxo de caixa"
 
-#: kmymoney/views/khomeview_p.h:1836
+#: kmymoney/views/khomeview_p.h:1840
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "Receitas e despesas deste mês"
 
-#: kmymoney/views/khomeview_p.h:1844
+#: kmymoney/views/khomeview_p.h:1848
 #, kde-format
 msgid "Scheduled Income"
 msgstr "Receitas agendadas"
 
-#: kmymoney/views/khomeview_p.h:1847
+#: kmymoney/views/khomeview_p.h:1851
 #, kde-format
 msgid "Expenses"
 msgstr "Despesas"
 
-#: kmymoney/views/khomeview_p.h:1850
+#: kmymoney/views/khomeview_p.h:1854
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "Despesas agendadas"
 
-#: kmymoney/views/khomeview_p.h:1878
+#: kmymoney/views/khomeview_p.h:1882
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "Ativos e passivos líquidos"
 
-#: kmymoney/views/khomeview_p.h:1883
+#: kmymoney/views/khomeview_p.h:1887
 #, kde-format
 msgid "Liquid Assets"
 msgstr "Ativos líquidos"
 
-#: kmymoney/views/khomeview_p.h:1886
+#: kmymoney/views/khomeview_p.h:1890
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "Transferências para passivos líquidos"
 
-#: kmymoney/views/khomeview_p.h:1889
+#: kmymoney/views/khomeview_p.h:1893
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "Passivos líquidos"
 
-#: kmymoney/views/khomeview_p.h:1892
+#: kmymoney/views/khomeview_p.h:1896
 #, kde-format
 msgid "Other Transfers"
 msgstr "Outras transferências"
 
-#: kmymoney/views/khomeview_p.h:1935
+#: kmymoney/views/khomeview_p.h:1939
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "Status do fluxo de caixa"
 
-#: kmymoney/views/khomeview_p.h:1940
+#: kmymoney/views/khomeview_p.h:1944
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "Previsão de ativos líquidos"
 
-#: kmymoney/views/khomeview_p.h:1943
+#: kmymoney/views/khomeview_p.h:1947
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "Previsão de passivos líquidos"
 
-#: kmymoney/views/khomeview_p.h:1946
+#: kmymoney/views/khomeview_p.h:1950
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "Previsão de rendimentos/perdas"
@@ -20884,42 +20884,42 @@ msgstr "Tentar fazer corresponder as transações parecidas"
 msgid "TextLabel"
 msgstr "Etiqueta de texto"
 
-#: kmymoney/views/ledgerviewpage_p.h:97
+#: kmymoney/views/ledgerviewpage_p.h:98
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgctxt "@label:textbox Reconciliation date"
 msgid "Last reconciliation: %1"
 msgstr "Última reconciliação"
 
-#: kmymoney/views/ledgerviewpage_p.h:99
+#: kmymoney/views/ledgerviewpage_p.h:100
 #, fuzzy, kde-format
 #| msgid "Never reconciled"
 msgctxt "@label:textbox Reconciliation date"
 msgid "Never reconciled"
 msgstr "Nunca reconciliada"
 
-#: kmymoney/views/ledgerviewpage_p.h:141
+#: kmymoney/views/ledgerviewpage_p.h:142
 #, fuzzy, kde-format
 #| msgid "Investment value: %1%2"
 msgctxt "@label:textbox Total value of investment"
 msgid "Investment value: %1%2"
 msgstr "Valor do investimento: %1%2"
 
-#: kmymoney/views/ledgerviewpage_p.h:145
+#: kmymoney/views/ledgerviewpage_p.h:146
 #: kmymoney/views/reconciliationledgerviewpage.cpp:397
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
 msgstr "Compensado: %1"
 
-#: kmymoney/views/ledgerviewpage_p.h:148
+#: kmymoney/views/ledgerviewpage_p.h:149
 #, fuzzy, kde-format
 #| msgid "%1 of %2"
 msgctxt "@label:textbox %1 sum symbol, %2 number of selected tx, %3 sum of tx"
 msgid "%1 of %2: %3"
 msgstr "%1 de %2"
 
-#: kmymoney/views/ledgerviewpage_p.h:153
+#: kmymoney/views/ledgerviewpage_p.h:154
 #, fuzzy, kde-format
 #| msgid "Balance: %1"
 msgctxt "@label:textbox Total balance"
@@ -22125,7 +22125,7 @@ msgid "Sort order"
 msgstr "Ordenação"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel6)
-#: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:32
+#: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:41
 #, kde-format
 msgid ""
 "Reconciling your account ensures your records match those of your "
@@ -22152,6 +22152,12 @@ msgstr ""
 "extrato. Caso contrário, ajuste os valores.\n"
 "\n"
 "O saldo inicial é a soma de suas transações compensadas e reconciliadas."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_skipIntroPage)
+#: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:67
+#, kde-format
+msgid "Don't show this page again when starting the reconciliation next time."
+msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, CheckingStatementInfoWizardPage)
 #: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.ui:14
@@ -22208,12 +22214,12 @@ msgstr ""
 "Preencha os campos a seguir com as informações que você encontrou no seu "
 "extrato. Certifique-se de inserir todos os valores em <b>%1</b>."
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:141
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:152
 #, kde-format
 msgid "Last reconciled statement: %1"
 msgstr "Último extrato reconciliado: %1"
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:209
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:220
 #, kde-format
 msgid "Oldest unmarked transaction: %1"
 msgstr "Transação não reconciliada mais antiga: %1"

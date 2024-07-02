@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-01 01:45+0000\n"
+"POT-Creation-Date: 2024-07-02 01:45+0000\n"
 "PO-Revision-Date: 2024-06-08 12:29+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -2151,7 +2151,7 @@ msgid "Liability"
 msgstr "Liability"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:542 kmymoney/kmymoney.cpp:440
-#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1841
+#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1845
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -5946,7 +5946,7 @@ msgstr "Assets and Liabilities"
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:68
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1576
+#: kmymoney/views/khomeview_p.h:1580
 #, kde-format
 msgid "Budget"
 msgstr "Budget"
@@ -15257,7 +15257,7 @@ msgid "No data provided by reports plugin for this chart."
 msgstr "No data provided by reports plugin for this chart."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:660
-#: kmymoney/views/khomeview_p.h:571 kmymoney/views/khomeview_p.h:1580
+#: kmymoney/views/khomeview_p.h:571 kmymoney/views/khomeview_p.h:1584
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "Enable reports plugin to see this chart."
@@ -15468,7 +15468,7 @@ msgstr "Credit transfer options"
 msgid "Time"
 msgstr "Time"
 
-#: kmymoney/plugins/views/reports/core/kreportchartview.cpp:539
+#: kmymoney/plugins/views/reports/core/kreportchartview.cpp:555
 #, kde-format
 msgctxt "Chart legend title"
 msgid "Legend"
@@ -16443,7 +16443,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr "Income and Expenses Pie Chart"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:871
-#: kmymoney/views/khomeview_p.h:1554
+#: kmymoney/views/khomeview_p.h:1558
 #, kde-format
 msgid "Net Worth"
 msgstr "Net Worth"
@@ -16686,7 +16686,7 @@ msgid "Net Worth Forecast Graph"
 msgstr "Net Worth Forecast Graph"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, NewGeneralInfoWizardPage)
-#. i18n: ectx: attribute (title), widget (QWizardPage, CheckingStartWizardPage)
+#. i18n: ectx: property (title), widget (QWizardPage, CheckingStartWizardPage)
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1376
 #: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:14
 #: kmymoney/wizards/newloanwizard/newgeneralinfowizardpage.ui:6
@@ -19568,82 +19568,82 @@ msgstr "Asset Accounts"
 msgid "Liability Accounts"
 msgstr "Liability Accounts"
 
-#: kmymoney/views/khomeview_p.h:1538
+#: kmymoney/views/khomeview_p.h:1539
 #, kde-format
 msgid "Total Assets"
 msgstr "Total Assets"
 
-#: kmymoney/views/khomeview_p.h:1546
+#: kmymoney/views/khomeview_p.h:1547
 #, kde-format
 msgid "Total Liabilities"
 msgstr "Total Liabilities"
 
-#: kmymoney/views/khomeview_p.h:1831
+#: kmymoney/views/khomeview_p.h:1835
 #, kde-format
 msgid "Cash Flow Summary"
 msgstr "Cash Flow Summary"
 
-#: kmymoney/views/khomeview_p.h:1836
+#: kmymoney/views/khomeview_p.h:1840
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "Income and Expenses of Current Month"
 
-#: kmymoney/views/khomeview_p.h:1844
+#: kmymoney/views/khomeview_p.h:1848
 #, kde-format
 msgid "Scheduled Income"
 msgstr "Scheduled Income"
 
-#: kmymoney/views/khomeview_p.h:1847
+#: kmymoney/views/khomeview_p.h:1851
 #, kde-format
 msgid "Expenses"
 msgstr "Expenses"
 
-#: kmymoney/views/khomeview_p.h:1850
+#: kmymoney/views/khomeview_p.h:1854
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "Scheduled Expenses"
 
-#: kmymoney/views/khomeview_p.h:1878
+#: kmymoney/views/khomeview_p.h:1882
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "Liquid Assets and Liabilities"
 
-#: kmymoney/views/khomeview_p.h:1883
+#: kmymoney/views/khomeview_p.h:1887
 #, kde-format
 msgid "Liquid Assets"
 msgstr "Liquid Assets"
 
-#: kmymoney/views/khomeview_p.h:1886
+#: kmymoney/views/khomeview_p.h:1890
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "Transfers to Liquid Liabilities"
 
-#: kmymoney/views/khomeview_p.h:1889
+#: kmymoney/views/khomeview_p.h:1893
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "Liquid Liabilities"
 
-#: kmymoney/views/khomeview_p.h:1892
+#: kmymoney/views/khomeview_p.h:1896
 #, kde-format
 msgid "Other Transfers"
 msgstr "Other Transfers"
 
-#: kmymoney/views/khomeview_p.h:1935
+#: kmymoney/views/khomeview_p.h:1939
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "Cash Flow Status"
 
-#: kmymoney/views/khomeview_p.h:1940
+#: kmymoney/views/khomeview_p.h:1944
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "Expected Liquid Assets"
 
-#: kmymoney/views/khomeview_p.h:1943
+#: kmymoney/views/khomeview_p.h:1947
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "Expected Liquid Liabilities"
 
-#: kmymoney/views/khomeview_p.h:1946
+#: kmymoney/views/khomeview_p.h:1950
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "Expected Profit/Loss"
@@ -20529,38 +20529,38 @@ msgstr "Accept or unmatch transaction"
 msgid "TextLabel"
 msgstr "TextLabel"
 
-#: kmymoney/views/ledgerviewpage_p.h:97
+#: kmymoney/views/ledgerviewpage_p.h:98
 #, kde-format
 msgctxt "@label:textbox Reconciliation date"
 msgid "Last reconciliation: %1"
 msgstr "Last reconciliation: %1"
 
-#: kmymoney/views/ledgerviewpage_p.h:99
+#: kmymoney/views/ledgerviewpage_p.h:100
 #, kde-format
 msgctxt "@label:textbox Reconciliation date"
 msgid "Never reconciled"
 msgstr "Never reconciled"
 
-#: kmymoney/views/ledgerviewpage_p.h:141
+#: kmymoney/views/ledgerviewpage_p.h:142
 #, kde-format
 msgctxt "@label:textbox Total value of investment"
 msgid "Investment value: %1%2"
 msgstr "Investment value: %1%2"
 
-#: kmymoney/views/ledgerviewpage_p.h:145
+#: kmymoney/views/ledgerviewpage_p.h:146
 #: kmymoney/views/reconciliationledgerviewpage.cpp:397
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
 msgstr "Cleared: %1"
 
-#: kmymoney/views/ledgerviewpage_p.h:148
+#: kmymoney/views/ledgerviewpage_p.h:149
 #, kde-format
 msgctxt "@label:textbox %1 sum symbol, %2 number of selected tx, %3 sum of tx"
 msgid "%1 of %2: %3"
 msgstr "%1 of %2: %3"
 
-#: kmymoney/views/ledgerviewpage_p.h:153
+#: kmymoney/views/ledgerviewpage_p.h:154
 #, kde-format
 msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
@@ -21743,7 +21743,7 @@ msgid "Sort order"
 msgstr "Sort order"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel6)
-#: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:32
+#: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:41
 #, kde-format
 msgid ""
 "Reconciling your account ensures your records match those of your "
@@ -21771,6 +21771,12 @@ msgstr ""
 "your statement. If not, please modify it.\n"
 "\n"
 "The starting balance is the sum of your cleared and reconciled transactions."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_skipIntroPage)
+#: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:67
+#, kde-format
+msgid "Don't show this page again when starting the reconciliation next time."
+msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, CheckingStatementInfoWizardPage)
 #: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.ui:14
@@ -21827,12 +21833,12 @@ msgstr ""
 "Please enter the following fields with the information as you find them on "
 "your statement. Make sure to enter all values in <b>%1</b>."
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:141
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:152
 #, kde-format
 msgid "Last reconciled statement: %1"
 msgstr "Last reconciled statement: %1"
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:209
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:220
 #, kde-format
 msgid "Oldest unmarked transaction: %1"
 msgstr "Oldest unmarked transaction: %1"
