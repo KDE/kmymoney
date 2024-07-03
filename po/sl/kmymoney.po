@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-02 01:45+0000\n"
-"PO-Revision-Date: 2024-06-05 07:13+0200\n"
+"PO-Revision-Date: 2024-07-02 06:54+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -21895,7 +21895,7 @@ msgstr ""
 #: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:67
 #, kde-format
 msgid "Don't show this page again when starting the reconciliation next time."
-msgstr ""
+msgstr "Ne prikazuj te strani več, ko se naslednjič začenja usklajevanje"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, CheckingStatementInfoWizardPage)
 #: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.ui:14

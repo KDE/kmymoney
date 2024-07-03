@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-02 01:45+0000\n"
-"PO-Revision-Date: 2024-06-05 08:15+0300\n"
-"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
-"Language-Team: Ukrainian\n"
+"PO-Revision-Date: 2024-07-02 09:27+0300\n"
+"Last-Translator: Fracture dept <yurchor@ukr.net>\n"
+"Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22043,7 +22043,7 @@ msgstr ""
 #: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:67
 #, kde-format
 msgid "Don't show this page again when starting the reconciliation next time."
-msgstr ""
+msgstr "Не показувати цю сторінку знову, коли розпочинатиметься звірювання."
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, CheckingStatementInfoWizardPage)
 #: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.ui:14

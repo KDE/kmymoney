@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-02 01:45+0000\n"
-"PO-Revision-Date: 2024-06-05 17:57+0200\n"
-"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"PO-Revision-Date: 2024-07-02 22:08+0200\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -21802,7 +21802,7 @@ msgstr ""
 #: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:67
 #, kde-format
 msgid "Don't show this page again when starting the reconciliation next time."
-msgstr ""
+msgstr "Visa inte sidan igen när avstämning startas nästa gång."
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, CheckingStatementInfoWizardPage)
 #: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.ui:14

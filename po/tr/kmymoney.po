@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-02 01:45+0000\n"
-"PO-Revision-Date: 2024-06-13 01:00+0300\n"
+"PO-Revision-Date: 2024-07-02 14:04+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -203,11 +203,11 @@ msgid ""
 "payee information for all following transactions referencing \"%1\" will be "
 "removed."
 msgstr ""
-"‘Evet’i seçmek alacaklıyı oluşturur, ‘Hayır’ bir alacaklı kaydı "
-"oluşturulmayı atlar ve alacaklı bilgilerini bu işlemden kaldırır. ‘İptal’ "
+"“Evet”i seçmek alacaklıyı oluşturur, “Hayır” bir alacaklı kaydı "
+"oluşturulmayı atlar ve alacaklı bilgilerini bu işlemden kaldırır. “İptal” "
 "seçildiğinde, içe aktarma işlemi iptal edilir.\n"
 "\n"
-"Burada ‘Hayır’ı seçer ve ‘Bir daha sorma’ onay kutusunu işaretlerseniz takip "
+"Burada “Hayır”ı seçer ve “Bir daha sorma” onay kutusunu işaretlerseniz takip "
 "eden tüm işlemler için “%1” referanslı alacaklı bilgileri kaldırılır."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1053
@@ -649,8 +649,8 @@ msgid ""
 "If your system does not use an automounter, make sure you mark the checkbox "
 "below to \"mount this directory before backing up.\""
 msgstr ""
-"Sisteminiz bir kendiliğinden bağlayıcı kullanmıyorsa ‘Yedeklemeden önce bu "
-"dizini bağla’ onay kutusunu işaretlediğinizden emin olun."
+"Sisteminiz bir kendiliğinden bağlayıcı kullanmıyorsa “Yedeklemeden önce bu "
+"dizini bağla” onay kutusunu işaretlediğinizden emin olun."
 
 #. i18n: ectx: property (title), widget (QGroupBox, GroupBox1)
 #: kmymoney/dialogs/kbackupdlg.ui:61
@@ -2730,8 +2730,8 @@ msgid ""
 "'Sort Code' (UK accounts)."
 msgstr ""
 "Bir Merkez Bankası, banka denetleme organı veya Bankacılar Birliği "
-"tarafından kuruma atanan bir banka kodu. ‘Yönlendirme Numarası’ (ABD "
-"hesapları) veya ‘Sıralama Kodu’ (İngiltere hesapları) olarak da bilinir."
+"tarafından kuruma atanan bir banka kodu. “Yönlendirme Numarası” (ABD "
+"hesapları) veya “Sıralama Kodu” (BK hesapları) olarak da bilinir."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5_1)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2)
@@ -8392,8 +8392,8 @@ msgid ""
 "'Sort Code' (UK accounts)."
 msgstr ""
 "Bir merkez bankası, banka denetleme organı veya Bankacılar Birliği "
-"tarafından Kuruma atanan bir banka kodu. ‘Yönlendirme Numarası’ (ABD "
-"hesapları) veya ‘Sıralama Kodu’ (BK hesapları) olarak bilinir."
+"tarafından Kuruma atanan bir banka kodu. “Yönlendirme Numarası’ (ABD "
+"hesapları) veya “Sıralama Kodu” (BK hesapları) olarak bilinir."
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:531
 #, kde-format
@@ -9617,9 +9617,9 @@ msgid ""
 "center><center>If you wish to copy the Payee data to the memo field, click "
 "'Yes'.</center>"
 msgstr ""
-"<center>‘<b>%1</b>’ alanında bu sütun halihazırda seçili.</"
+"<center><b>“%1”</b> alanında bu sütun halihazırda seçili.</"
 "center><center>Eğer alacaklı verisini anımsatma alanına kopyalamak "
-"isterseniz ‘Evet’e tıklayın.</center>"
+"isterseniz “Evet”e tıklayın.</center>"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:257
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:182
@@ -9646,7 +9646,7 @@ msgid ""
 "<center>Field name not recognised.</center> <center>'<b>%1</b>'</center> "
 "Please re-enter your column selections."
 msgstr ""
-"<center>Alan adı tanımlanamadı.</center> <center>‘<b>%1</b>’</center> Sütün "
+"<center>Alan adı tanımlanamadı.</center> <center><b>“%1”</b></center> Sütün "
 "seçimlerinizi lütfen yeniden girin."
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:349
@@ -9666,7 +9666,7 @@ msgid ""
 "Column <b>%1</b> cannot be selected because it is already used in '<b>%2</"
 "b>'."
 msgstr ""
-"<b>%1</b> sütunu seçilemez; çünkü halihazırda ‘<b>%2</b>’ içinde kullanılmış."
+"<b>%1</b> sütunu seçilemez; çünkü halihazırda <b>“%2”</b> içinde kullanılmış."
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:391
 #, kde-format
@@ -10204,7 +10204,7 @@ msgid ""
 msgstr ""
 "Lütfen dosyanızda kullanılan ondalık sembolünü seçin.\n"
 "Binler basamağı ayrıcısı kendiliğinden değişecektir.\n"
-"Herşey tamamsa ‘İçe Aktar’a tıklayabileceksiniz.\n"
+"Herşey tamamsa “İçe Aktar”a tıklayabileceksiniz.\n"
 "Gerekliyse bir QIF dosyası üretilir."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_fieldDelimiter)
@@ -10304,7 +10304,7 @@ msgid ""
 msgstr ""
 "Bankacılık, Yatırım veya Fiyatlar’a tıklayın.\n"
 "Var olan profili seçin veya adını girerek ve\n"
-"‘Ekle’yi seçerek yeni oluşturun. Ardından\n"
+"“Ekle”yi seçerek yeni oluşturun. Ardından\n"
 "içe aktarmak istediğiniz dosyayı seçin."
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_profilesBank)
@@ -10391,8 +10391,8 @@ msgid ""
 "center><center>If you wish to copy that data to the memo field, click 'Yes'."
 "</center>"
 msgstr ""
-"<center>‘<b>%1</b>’ alanında bu sütun zaten seçili.</center><center>Bu "
-"verileri not alanına kopyalamak istiyorsanız, ‘Evet’e tıklayın.</center >"
+"<center><b>“%1”</b> alanında bu sütun zaten seçili.</center><center>Bu "
+"verileri not alanına kopyalamak istiyorsanız, “Evet”e tıklayın.</center >"
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:382
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:135
@@ -10401,7 +10401,7 @@ msgid ""
 "<center>Field name not recognised.</center><center>'<b>%1</b>'</"
 "center>Please re-enter your column selections."
 msgstr ""
-"<center>Alan adı tanımlanamadı.</center><center>‘<b>%1</b>’</center>Lütfen "
+"<center>Alan adı tanımlanamadı.</center> <center><b>“%1”</b></center>Lütfen "
 "sütun seçimlerini yeniden girin."
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:409
@@ -10439,7 +10439,7 @@ msgid ""
 "The '<b>%1</b>' field already has this column selected. <center>Please "
 "reselect both entries as necessary.</center>"
 msgstr ""
-"‘<b>%1</b>’ alanında bu sütun halihazırda seçili. <center>Lütfen her iki "
+"<b>“%1”</b> alanında bu sütun halihazırda seçili. <center>Lütfen her iki "
 "girdiyi de gerektiği gibi yeniden seçin.</center>"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, InvestmentPage)
@@ -11111,7 +11111,7 @@ msgstr "GnuCash İçe Aktarma Seçenekleri"
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:26
 #, kde-format
 msgid "Use 'Help' for more information on these options"
-msgstr "Bu seçenekler hakkında daha fazla bilgi için ‘Yardım’ı kullanın"
+msgstr "Bu seçenekler hakkında daha fazla bilgi için “Yardım”ı kullanın"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonInvestGroupBox)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:39
@@ -12796,7 +12796,7 @@ msgstr "Kullanıcı Aracısı"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:252
 #, kde-format
 msgid "OFX <CLIENTUID> for institutions that require it"
-msgstr "Gereksinim duyan kurumlar için OFX <MÜŞTERİ_UID‘Sİ>"
+msgstr "Gereksinim duyan kurumlar için OFX <MÜŞTERİ_UID’Sİ>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, importTab)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:278
@@ -13198,7 +13198,7 @@ msgstr[1] "Satır başına en çok %1 karakterlik satır uzunluğu aşıldı."
 #, kde-format
 msgid ""
 "The purpose can only contain the letters A-Z, spaces and ':?.,-()+ and /"
-msgstr "Amaç yalnızca A–Z harflerini, boşlukları ve ‘:?.,-()+/’ içerebilir"
+msgstr "Amaç yalnızca A–Z harflerini, boşlukları ve “:?.,-()+/” içerebilir"
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:504
 #, kde-format
@@ -14025,7 +14025,7 @@ msgstr ""
 "Dosyadan okunan “%1” tarih girdisi, “%2” geçerli tarih profili ayarı "
 "aracılığıyla yorumlanamaz.\n"
 "\n"
-"‘Sürdür’e basmak işleme bugünün tarihini atar. ‘İptal’e basmak içe aktarma "
+"“Sürdür”e basmak işleme bugünün tarihini atar. “İptal”e basmak içe aktarma "
 "işlemini iptal eder. Daha sonra içe aktarmayı yeniden başlatabilir ve farklı "
 "bir QIF profili seçebilir veya yeni bir profil oluşturabilirsiniz."
 
@@ -17150,7 +17150,7 @@ msgstr ""
 "              </p>\n"
 "              <p>\n"
 "              Eğer bu seçenek kapalıysa dönem için var olan son fiyat\n"
-"              gösterilir, eğer açıksa tabloda değer ‘0’ olarak gösterilir "
+"              gösterilir, eğer açıksa tabloda değer “0” olarak gösterilir "
 "ve\n"
 "              eksik değerler için grafikte doğrusal ara değer hesabı "
 "yapılacaktır.\n"
@@ -17160,7 +17160,7 @@ msgstr ""
 "              <ul>\n"
 "              <li><b>KAPALI</b>: Şubat ayı için fiyat\n"
 "              Ocak ayının son fiyatı olarak gösterilir.\n"
-"              <li><b>AÇIK</b>: tabloda değer ‘0’ olarak gösterilir, "
+"              <li><b>AÇIK</b>: tabloda değer “0” olarak gösterilir, "
 "grafikte\n"
 "              Şubat fiyatı için doğrusal ara değer hesabı yapılır.\n"
 "              (Grafikte Ocak fiyatı ve Mart fiyatı kullanılarak bir tür "
@@ -17557,7 +17557,7 @@ msgid ""
 "<p>Check this box to include only those categories which have been marked to "
 "\"Include on Tax Reports\"</p>"
 msgstr ""
-"<p>Yalnızca ‘Vergi Raporlarında İçer’ olarak işaretlenmiş kategori eklemek "
+"<p>Yalnızca “Vergi Raporlarında İçer” olarak işaretlenmiş kategori eklemek "
 "için bu kutuyu işaretleyin.</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkTax)
@@ -20927,8 +20927,8 @@ msgid ""
 "'Unassigned' amount will be added or 'Overassigned' amount\n"
 "will be subtracted from the amount of the selected split."
 msgstr ""
-"Geçerli bölmeye ‘Atanmayan’ veya ‘Fazla Atanan’ tutarı uygulayın.\n"
-"‘Atanmayan’ tutar eklenecek veya ‘Fazla Atanan’ tutar, seçili bölmenin\n"
+"Geçerli bölmeye “Atanmayan” veya “Fazla Atanan” tutarı uygulayın.\n"
+"“Atanmayan” tutar eklenecek veya “Fazla Atanan” tutar, seçili bölmenin\n"
 "tutarından çıkarılacaktır."
 
 #. i18n: ectx: property (text), widget (QPushButton, adjustUnassigned)
@@ -21770,6 +21770,7 @@ msgstr ""
 #, kde-format
 msgid "Don't show this page again when starting the reconciliation next time."
 msgstr ""
+"Bir sonraki mutabakatı başlatırken bu sayfayı bir kez daha göstermeyin."
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, CheckingStatementInfoWizardPage)
 #: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.ui:14
@@ -21870,7 +21871,7 @@ msgstr ""
 "önemlidir.\n"
 "\n"
 "Bu sihirbaza girdiğiniz tüm bilgiler gösterilecek ve zaten temizlediğiniz "
-"tüm işlemler ‘C’ ile işaretlenecektir."
+"tüm işlemler “C” ile işaretlenecektir."
 
 #: kmymoney/wizards/kmymoneywizard_p.h:77
 #, kde-format
@@ -23271,7 +23272,7 @@ msgstr ""
 "oluşturabilirsiniz. Bir varlık hesabı, bir varlığın toplam değerini temsil "
 "eder. Bu krediden alınan para, oluşturduğunuz veya seçtiğiniz varlık "
 "hesabına havale edilir.\n"
-"Bu kredi bir ‘tüketici kredisi’ ise (istediğiniz şekilde kullanabileceğiniz "
+"Bu kredi bir “tüketici kredisi” ise (istediğiniz şekilde kullanabileceğiniz "
 "para), bunun yerine bir cari hesap kullanabilirsiniz."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_dontCreatePayoutCheckBox)
@@ -23738,7 +23739,7 @@ msgid ""
 "\"Additional fees\" to enter them."
 msgstr ""
 "\n"
-"Dönemsel ödemeniz herhangi bir ek ücret içeriyorsa girmek için ‘Ek ücretler’ "
+"Dönemsel ödemeniz herhangi bir ek ücret içeriyorsa girmek için “Ek Ücretler” "
 "düğmesine tıklayın."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel21_1_3)
@@ -23777,7 +23778,7 @@ msgid ""
 "entered all such fees, then click on \"Next\"."
 msgstr ""
 "Dönemsel ödemenize ek ücretler dahil değilse veya bu ücretlerin tümünü "
-"girdiyseniz ‘Sonraki’ düğmesine tıklayın."
+"girdiyseniz “Sonraki” düğmesine tıklayın."
 
 #: kmymoney/wizards/newloanwizard/assetaccountwizardpage.cpp:50
 #, kde-format
@@ -23809,7 +23810,7 @@ msgid ""
 msgstr ""
 "\n"
 "K Param krediyi aşağıdaki genel görünümde gösterildiği gibi hesapladı. Bu "
-"değerleri ‘Sonraki’yi seçerek kabul edebilir veya ‘Geri’yi seçerek "
+"değerleri “Sonraki”yi seçerek kabul edebilir veya “Geri”yi seçerek "
 "değiştirmek istediğiniz bilgilerin giriş alanına dönebilirsiniz."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel6_3_2_2_2)
@@ -24144,7 +24145,7 @@ msgstr ""
 "\n"
 "Bu kredinin faizi belirli bir süre içinde sabit mi yoksa zaman zaman "
 "uyarlanıyor mu? Kredinin amortisman aşamasında faiz oranı değişirse "
-"‘değişken faiz oranı’ seçeneğini seçmelisiniz."
+"“değişken faiz oranı” seçeneğini seçmelisiniz."
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_fixedInterestButton)
 #: kmymoney/wizards/newloanwizard/interesttypewizardpage.ui:68
@@ -24339,8 +24340,8 @@ msgid ""
 "'school loan', 'home owner loan'."
 msgstr ""
 "\n"
-"Bu krediyi nasıl adlandırmak istersiniz? Örnek olarak ‘araba kredisi’, ‘okul "
-"kredisi’, ‘ev kredisi’ verilebilir."
+"Bu krediyi nasıl adlandırmak istersiniz? Örnek olarak “araba kredisi”, “okul "
+"kredisi”, “ev kredisi” verilebilir."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
 #: kmymoney/wizards/newloanwizard/namewizardpage.ui:50
@@ -24625,8 +24626,8 @@ msgid ""
 msgstr ""
 "\n"
 "K Param, krediyi aşağıda gösterildiği gibi hesapladı. Bu değerleri kabul "
-"etmek istiyorsanız hesabınızı güncellemek için ‘Bitir’ düğmesini kullanın, "
-"aksi takdirde ayarlarınızı değiştirmek için ‘Geri’ düğmesini kullanın."
+"etmek istiyorsanız hesabınızı güncellemek için “Bitir” düğmesini kullanın, "
+"aksi takdirde ayarlarınızı değiştirmek için “Geri” düğmesini kullanın."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel8_3_2_2_2_2_2)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel14)
@@ -24690,8 +24691,8 @@ msgid ""
 msgstr ""
 "\n"
 "Bu sayfa, girdiğiniz veriyi özetler. Herhangi bir şeyi değiştirmeniz "
-"gerekirse, lütfen ilgili sayfaya gitmek için ‘Geri’ düğmesini kullanın. Aksi "
-"takdirde, hesabı oluşturmak için ‘Bitir’ düğmesini kullanın."
+"gerekirse, lütfen ilgili sayfaya gitmek için “Geri” düğmesini kullanın. Aksi "
+"takdirde, hesabı oluşturmak için “Bitir” düğmesini kullanın."
 
 #. i18n: ectx: property (title), widget (QGroupBox, GroupBox3)
 #: kmymoney/wizards/newloanwizard/summarywizardpage.ui:64
