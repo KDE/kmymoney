@@ -203,7 +203,6 @@
   tells &kmymoney; that the amount is specified in the currency of the category.  You
   will still need to confirm the other value or the conversion rate when the
   transaction is entered into the ledger.
-  <!-- FIXME: confirm what this really does. -->
 </para>
 
 <para>

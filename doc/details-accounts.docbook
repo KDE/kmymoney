@@ -215,6 +215,7 @@
 </para>
 
 <para>
+  <!-- FIXME: confirm accuracy -->
   The Account Number and the <ulink
   url="https://en.wikipedia.org/wiki/International_Bank_Account_Number">
   <acronym>IBAN</acronym> (International Bank Account Number)</ulink> are not
@@ -223,7 +224,6 @@
   linkend="details.impexp.ofxdirectconnect">online banking</link> and to assure data
   imports use the right account.  The <acronym>IBAN</acronym> may be used by the
   KBanking plugin.
-  <!-- FIXME: confirm accuracy -->
 </para>
 
 <para>

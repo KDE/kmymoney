@@ -305,8 +305,6 @@
   display preferences.  The exact location of these files depends on your specific
   Operating System or Distribution.
 </para>
-<!-- FIXME: do we need a section on OS specific issues?  This is also mentioned in
-     section on migrating KMM data to new PC - is that sufficient?  -->
 
 <para>
   To create a new file you can either select the
@@ -792,8 +790,8 @@
 </sect2>
 
 <sect2 id="firsttime.newpc.settings"><title>Moving your settings</title>
-<!-- FIXME:  confirm we don't need to worry at all (or even mention) that there
-     are also KMM related files under .local/share or even elsewhere  -->
+<!-- FIXME: confirm we don't need to consider/mention that there might also be KMM related files under .local/share or
+     even elsewhere.  Also, do we want/need a section on OS specific issues beyond what is mentioned here? -->
 <para>
   If you only move your data file to the new machine, as described in the previous
   section, &kmymoney; will work correctly, but you will have lost any configuration

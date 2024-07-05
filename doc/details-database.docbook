@@ -84,7 +84,6 @@
   modules for the more popular databases.  Otherwise, check with the <ulink
   url="https://www.qt.io/">&Qt; software web site</ulink> and search for <quote>SQL
   drivers</quote>.
-  <!-- FIXME:  what about Windows and macOS? -->
 </para>
 
 <note>
@@ -422,6 +421,9 @@
   Notes:
 </para>
 
+<!-- For ndash and right and left double quotes I switched from Unicode &#x2013,
+     &#x201C, and &#x201D. to direct names, but couldn't find one for left double
+     quote.  JHO -->
 <para>
   1 &ndash; txType = "N&rdquor; for normal transactions, "S&rdquor; for scheduled
   transactions

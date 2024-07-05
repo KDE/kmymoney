@@ -147,6 +147,8 @@
   </question>
   <answer>
     <para>
+      <!-- FIXME: this still needs a link to the section on moving transactions, which
+           does not yet exist.  Short term - to be added to reference section. -->
       You can easily change an account type between checking, savings, and cash.
       However, because of the way &kmymoney; stores the account information, it does
       not allow other changes of account type.  The way around this is to
@@ -154,8 +156,6 @@
       type</link>, move all the transactions from the old to the new account, and
       then <link linkend="details.accounts.delete"> delete the old account.</link>
     </para>
-    <!-- FIXME:  this still needs a link to the section on moving transactions, which
-        does not yet exist.  Short term - to be added to reference section.  -->
   </answer>
 </qandaentry>
 

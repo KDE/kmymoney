@@ -84,7 +84,6 @@
         >IBAN</ulink> </acronym> (International Bank Account Number) is shown if
         there is a value entered in the appropriate field on the account information
         dialog.
-        <!-- FIXME: where is this actually used?  -->
       </para>
     </listitem>
   </varlistentry>
@@ -105,11 +104,11 @@
     <term>SWIFT/BIC</term>
     <listitem>
       <para>
+        <!-- FIXME: where is this actually used?  -->
         The <acronym><ulink
         url="https://en.wikipedia.org/wiki/ISO_9362">SWIFT/BIC</ulink></acronym>
         (Society for Worldwide Interbank Financial Telecommunication/Business
         Identifier Code)
-        <!-- FIXME: where is this actually used?  -->
       </para>
     </listitem>
   </varlistentry>

@@ -464,15 +464,28 @@
 
 <listitem>
 <para>
-  Use the <guilabel>Fee Column</guilabel> selector if your file has a distinct
-  column for fees.  Beware, though, that the fee might have been taken into
-  account in the price.  If there is a fee, and it is a percentage figure,
-  rather than a value, click the <guilabel>Fee is percentage</guilabel> check
-  box.  Note that on this page, this is the only field to explicitly include
-  "column" in the label, to emphasize that it is for the fee column, not for any
-  actual fee.
-  <!-- FIXME: what are the Fee rate and Minimal Fee fields for?  What do the Clear
-       Fee and Calculate Fee buttons do, and when is the latter enabled? -->
+  There are two ways to specify fees for transactions.  If your file has a distinct
+  column for fees, use the <guilabel>Fee Column</guilabel> selector.  Note that on
+  this page, this is the only field to explicitly include "column" in the label, to
+  emphasize that it is for the fee column, not for any actual fee.  Beware, though,
+  that the fee might have been taken into account in the price.
+</para>
+
+<para>
+  If there is a fee, but it is a percentage figure, rather than a specified value,
+  click the <guilabel>Fee is percentage</guilabel> check box, and enter the
+  percentage rate into the <guilabel>Fee rate</guilabel> field.  In addition, if
+  there is a minimum fee, specify it in the <guilabel>Minimal Fee</guilabel> field,
+  which becomes enabled when you enter the Fee rate (with a decimal point.)  At this
+  point, clicking the <guibutton>Calculate Fees</guibutton> button will add a column
+  at the right of the table above, and will indicate the calculated fee for each
+  transaction.
+</para>
+
+<para>
+  If you made a mistake in entering the fee information, clicking the
+  <guibutton>Clear Fee</guibutton> button will reset all the fee related fields to
+  their initial values.
 </para>
 </listitem>
 

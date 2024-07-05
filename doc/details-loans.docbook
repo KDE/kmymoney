@@ -11,13 +11,13 @@
 <title>Loans</title>
 
 <sect1 id="details.loans.general"><title>Understanding Loans</title>
-<!-- FIXME: do we leave this request in the released version? -->
-<note>
+<note><title>Feedback requested</title>
   <para>
-    <!-- FIXME need decision on expanding about principal -->
-    I am looking for user feedback on whether to expand this section to discuss the
-    variation of principal and interest payments to attain a fixed recurring payment.
-    It is mentioned in the section on actually creating a loan in &kmymoney; but it
+    <!-- FIXME: do we leave this request in the released version?  Also need 
+                decision on expanding about principal -->
+    The author would appreciate feedback on whether to expand this section to discuss
+    the variation of principal and interest to attain a fixed recurring payment.  It
+    is mentioned in the section on actually creating a loan in &kmymoney; but it
     seems it should be mentioned earlier.
   </para>
 </note>
@@ -170,12 +170,10 @@
 </para>
 </sect1>
 
+<!-- FIXME: this section needs expanding, screenshots of the new loan wizard, and more dtails on the various entry
+     fields.  In particular, it needs an explanation of how fixed payments are calculated by adjusting the amount of
+     principal and interest of each payment, sometimes resulting in a final payment different from the others.  -->
 <sect1 id="details.loans.creation"><title>Creating a New Loan</title>
-<!-- FIXME: this section needs expanding and screenshots of the new loan wizard and
-     more detailed explanation of the various entry fields.  In particular, it needs
-     an explanation of how fixed payments are calculated by adjusting the amount of
-     principal and interest of each payment, sometimes resulting in a final payment
-     different from the others.  -->
 <para>
   In &kmymoney;, a loan is a type of account.  Therefore, to create a new loan, you
   begin by selecting the <menuchoice><guimenu>Account</guimenu><guimenuitem>New
