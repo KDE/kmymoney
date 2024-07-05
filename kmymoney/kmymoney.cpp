@@ -3995,12 +3995,8 @@ void KMyMoneyApp::slotEditTabOrder()
     d->executeAction(d->qActionToId(qobject_cast<QAction*>(sender())));
 }
 
-#include <KNS3/QtQuickDialogWrapper>
-
 void KMyMoneyApp::slotNewFeature()
 {
-    static KNS3::QtQuickDialogWrapper* ghnsDialog = new KNS3::QtQuickDialogWrapper("kmymoney-quotes.knsrc", this);
-    ghnsDialog->open();
 }
 
 // move a stock transaction from one investment account to another
