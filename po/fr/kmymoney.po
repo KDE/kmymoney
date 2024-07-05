@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-02 01:45+0000\n"
-"PO-Revision-Date: 2024-06-05 14:21+0200\n"
+"PO-Revision-Date: 2024-07-03 14:37+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -28,10 +28,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
-"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
 "X-Generator: Lokalize 23.08.5\n"
+"X-Text-Markup: kde4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -19212,7 +19212,8 @@ msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "La note est vide"
 
-# Je ne suis pas certain du sens du terme implémentation ici, j'espère l'avoir interprété correctement
+# Je ne suis pas certain du sens du terme implémentation ici, j'espère l'avoir
+# interprété correctement
 #: kmymoney/views/journaldelegate.cpp:343
 #, kde-format
 msgctxt "@info Editing multiple transactions"
@@ -22127,6 +22128,8 @@ msgstr ""
 #, kde-format
 msgid "Don't show this page again when starting the reconciliation next time."
 msgstr ""
+"Ne plus afficher cette page lorsque vous commencerez le rapprochement la "
+"prochaine fois."
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, CheckingStatementInfoWizardPage)
 #: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.ui:14
