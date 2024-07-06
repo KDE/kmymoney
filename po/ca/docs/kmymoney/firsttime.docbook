@@ -911,7 +911,7 @@
 ><guimenu
 >Ajuda</guimenu
 ><guimenuitem
->Informa d'un error</guimenuitem
+>Informeu d'un error</guimenuitem
 ></menuchoice
 > i completant la informació requerida. No obstant això, en cas que es tingui dificultats amb aquest mètode, podreu informar-ne (presentar una llista de desitjos o una sol·licitud de millora) directament al <ulink url="https://bugs.kde.org"
 >lloc web d'informes d'error del &kde;</ulink
@@ -942,7 +942,7 @@
 ><guimenu
 >Ajuda</guimenu
 ><guimenuitem
->Informa d'un error</guimenuitem
+>Informeu d'un error</guimenuitem
 ></menuchoice
 > ho completarà automàticament, però si preferiu no fer servir aquesta interfície, hi ha diversos elements que haureu d'incloure a l'informe. Ens caldrà saber quin sistema operatiu utilitzeu (&Linux;, &MacOS; o &Windows;), la versió del &kde; així com la versió del &kmymoney; que esteu executant, i la versió de &MacOS; o &Windows;, o el nom i la versió de la distribució de &Linux; amb la versió del nucli. </para>
 </formalpara>
