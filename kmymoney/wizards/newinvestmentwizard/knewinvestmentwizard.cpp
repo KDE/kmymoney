@@ -114,7 +114,7 @@ public:
             newSecurity.setTradingSymbol(q->field("investmentSymbol").toString());
             newSecurity.setTradingMarket(q->field("tradingMarket").toString());
             newSecurity.setSmallestAccountFraction(q->field("fraction").value<MyMoneyMoney>().formatMoney("", 0, false).toUInt());
-            newSecurity.setPricePrecision(MyMoneyMoney(q->field("pricePrecision").toUInt()).formatMoney("", 0, false).toUInt());
+            newSecurity.setPricePrecision(q->field("pricePrecision").toUInt());
             newSecurity.setTradingCurrency(q->field("tradingCurrencyEdit").value<MyMoneySecurity>().id());
             newSecurity.setSecurityType(type);
             newSecurity.setRoundingMethod(roundingMethod);
