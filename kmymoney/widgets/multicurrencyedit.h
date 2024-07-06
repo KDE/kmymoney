@@ -71,9 +71,12 @@ public:
     /**
      * Sets the value portion to @a amount.
      *
+     * In case forceUpdate is @c true, the operation is performed
+     * even if the amount does not change. The default is @c false.
+     *
      * @note This method does not Q_EMIT the amountChanged() signal
      */
-    virtual void setValue(const MyMoneyMoney& amount) = 0;
+    virtual void setValue(const MyMoneyMoney& amount, bool forceUpdate = false) = 0;
 
     /**
      * Sets the shares portion to @a amount.

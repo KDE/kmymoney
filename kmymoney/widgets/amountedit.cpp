@@ -76,6 +76,7 @@ public:
         , m_calculatorButton(nullptr)
         , m_prec(2)
         , m_allowEmpty(false)
+        , m_precisionOverridesFraction(false)
         , m_actionIcons(NoItem)
         , m_initialExchangeRate(MyMoneyMoney::ONE)
         , m_state(AmountEdit::DisplayValue)
@@ -275,7 +276,7 @@ public:
     {
         auto money(amount);
         const MyMoneySecurity& sec((state == AmountEdit::DisplayValue) ? m_valueCommodity : m_sharesCommodity);
-        if (!sec.id().isEmpty()) {
+        if (!m_precisionOverridesFraction && !sec.id().isEmpty()) {
             const auto fraction = m_isCashAmount ? sec.smallestCashFraction() : sec.smallestAccountFraction();
             money = money.convert(fraction);
         } else if (m_prec != -1)
@@ -288,7 +289,7 @@ public:
         const MyMoneySecurity& sec((state == AmountEdit::DisplayValue) ? m_valueCommodity : m_sharesCommodity);
         auto prec(m_prec);
 
-        if (!sec.id().isEmpty()) {
+        if (!m_precisionOverridesFraction && !sec.id().isEmpty()) {
             prec = MyMoneyMoney::denomToPrec(m_isCashAmount ? sec.smallestCashFraction() : sec.smallestAccountFraction());
         }
         return prec;
@@ -333,6 +334,7 @@ public:
     QToolButton* m_currencyButton;
     int m_prec;
     bool m_allowEmpty;
+    bool m_precisionOverridesFraction;
     QString m_previousText; // keep track of what has been typed
 
     QString m_valueText; // keep track of what was the original value
@@ -552,15 +554,14 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
     QLineEdit::keyPressEvent(event);
 }
 
-
-void AmountEdit::setPrecision(const int prec)
+void AmountEdit::setPrecision(const int prec, bool forceUpdate)
 {
     Q_D(AmountEdit);
     if (prec >= -1 && prec <= 20) {
-        if (prec != d->m_prec) {
+        if (prec != d->m_prec || forceUpdate) {
             d->m_prec = prec;
-            // update current display
-            setValue(value());
+            // force update of current display
+            setValue(value(), true);
         }
     }
 }
@@ -595,13 +596,13 @@ MyMoneyMoney AmountEdit::value() const
     return d->adjustToPrecision(AmountEdit::DisplayValue, money);
 }
 
-void AmountEdit::setValue(const MyMoneyMoney& amount)
+void AmountEdit::setValue(const MyMoneyMoney& amount, bool forceUpdate)
 {
     Q_D(AmountEdit);
     if (d->sharesSet && !d->valueSet) {
         qWarning() << objectName() << "Call AmountEdit::setValue() before AmountEdit::setShares(). Fix source code!";
     }
-    if (d->valueSet && (amount == d->m_value))
+    if (d->valueSet && (amount == d->m_value) && !forceUpdate)
         return;
 
     d->valueSet = true;
@@ -878,4 +879,10 @@ bool AmountEdit::hasMultipleCurrencies() const
 {
     Q_D(const AmountEdit);
     return d->hasMultipleCurrencies();
+}
+
+void AmountEdit::setPrecisionOverridesFraction(bool override)
+{
+    Q_D(AmountEdit);
+    d->m_precisionOverridesFraction = override;
 }

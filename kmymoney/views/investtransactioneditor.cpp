@@ -374,6 +374,7 @@ void InvestTransactionEditor::Private::setSecurity(const MyMoneySecurity& sec)
     if (sec.tradingCurrency() != security.tradingCurrency()) {
         transactionCurrency = MyMoneyFile::instance()->currency(sec.tradingCurrency());
         ui->totalAmountEdit->setValueCommodity(transactionCurrency);
+        ui->priceAmountEdit->setValueCommodity(transactionCurrency);
         transaction.setCommodity(sec.tradingCurrency());
         feeSplitModel->setTransactionCommodity(sec.tradingCurrency());
         interestSplitModel->setTransactionCommodity(sec.tradingCurrency());
@@ -408,7 +409,8 @@ void InvestTransactionEditor::Private::setSecurity(const MyMoneySecurity& sec)
     security = sec;
 
     // update the precision to that used by the new security
-    ui->sharesAmountEdit->setPrecision(MyMoneyMoney::denomToPrec(security.smallestAccountFraction()));
+    ui->sharesAmountEdit->setPrecision(MyMoneyMoney::denomToPrec(security.smallestAccountFraction()), true);
+    ui->priceAmountEdit->setPrecision(security.pricePrecision(), true);
 }
 
 bool InvestTransactionEditor::Private::amountChanged(SplitModel* model, AmountEdit* amountEdit, const MyMoneyMoney& transactionFactor)
@@ -785,6 +787,8 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
     d->ui->priceAmountEdit->setAllowEmpty(true);
     d->ui->priceAmountEdit->setCalculatorButtonVisible(true);
+    d->ui->priceAmountEdit->setPrecisionOverridesFraction(true);
+
     connect(d->ui->priceAmountEdit, &AmountEdit::amountChanged, this, [&]() {
         if (d->currentActivity) {
             d->stockSplit.setValue(d->currentActivity->valueAllShares().convert(d->transactionCurrency.smallestAccountFraction(), d->security.roundingMethod())
@@ -1098,6 +1102,9 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
 
         // Avoid updating other widgets (connected through signal/slot) during loading
         QSignalBlocker blockPrice(d->ui->priceAmountEdit);
+
+        // make sure to set the precision before the value gets loaded
+        d->ui->priceAmountEdit->setPrecision(d->security.pricePrecision(), true);
         d->currentActivity->loadPriceWidget(d->stockSplit);
 
         // check if security and amount of shares needs to be
