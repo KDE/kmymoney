@@ -50,6 +50,10 @@ void KForecastView::slotManualForecast()
     d->m_needReload[BudgetView] = true;
     d->m_needReload[ChartView] = true;
 
+    if (!d->m_needLoad) {
+        d->updateForecastMethod();
+    }
+
     if (isVisible())
         slotTabChanged(d->ui->m_tab->currentIndex());
 }
@@ -109,4 +113,9 @@ void KForecastView::createActions(KXMLGUIClient* guiClient)
 
 void KForecastView::removeActions()
 {
+}
+
+void KForecastView::slotSettingsChanged()
+{
+    slotManualForecast();
 }

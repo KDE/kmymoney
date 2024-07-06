@@ -44,6 +44,11 @@ class KMM_MYMONEY_EXPORT MyMoneyForecast
     KMM_MYMONEY_UNIT_TESTABLE
 
 public:
+    enum class eForecastMethod {
+        Scheduled = 0,
+        Historic = 1,
+    };
+
     /**
       * The default forecast ctor sets the following defaults:
       *
@@ -178,6 +183,7 @@ public:
     bool isForecastDone() const;
     bool isIncludingFutureTransactions() const;
     bool isIncludingScheduledTransactions() const;
+    eForecastMethod forecastMethod() const;
 
     /**
       * This method modifies a scheduled loan transaction such that all

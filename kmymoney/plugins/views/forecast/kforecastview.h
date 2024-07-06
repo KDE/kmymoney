@@ -51,6 +51,9 @@ public:
     void createActions(KXMLGUIClient* guiClient);
     void removeActions();
 
+public Q_SLOTS:
+    virtual void slotSettingsChanged() override;
+
 protected:
     void showEvent(QShowEvent* event) override;
 

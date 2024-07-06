@@ -35,8 +35,6 @@
 #include "mymoneyexception.h"
 #include "mymoneyenums.h"
 
-enum class eForecastMethod {Scheduled = 0, Historic = 1, };
-
 /**
  * daily balances of an account
  */
@@ -52,23 +50,23 @@ class MyMoneyForecastPrivate
     Q_DECLARE_PUBLIC(MyMoneyForecast)
 
 public:
-    explicit MyMoneyForecastPrivate(MyMoneyForecast *qq) :
-        q_ptr(qq),
-        m_accountsCycle(30),
-        m_forecastCycles(3),
-        m_forecastDays(90),
-        m_beginForecastDay(0),
-        m_forecastMethod(eForecastMethod::Scheduled),
-        m_historyMethod(1),
-        m_skipOpeningDate(true),
-        m_includeUnusedAccounts(false),
-        m_forecastDone(false),
-        m_includeFutureTransactions(true),
-        m_includeScheduledTransactions(true)
+    explicit MyMoneyForecastPrivate(MyMoneyForecast* qq)
+        : q_ptr(qq)
+        , m_accountsCycle(30)
+        , m_forecastCycles(3)
+        , m_forecastDays(90)
+        , m_beginForecastDay(0)
+        , m_forecastMethod(MyMoneyForecast::eForecastMethod::Scheduled)
+        , m_historyMethod(1)
+        , m_skipOpeningDate(true)
+        , m_includeUnusedAccounts(false)
+        , m_forecastDone(false)
+        , m_includeFutureTransactions(true)
+        , m_includeScheduledTransactions(true)
     {
     }
 
-    eForecastMethod forecastMethod() const
+    MyMoneyForecast::eForecastMethod forecastMethod() const
     {
         return m_forecastMethod;
     }
@@ -495,7 +493,7 @@ public:
         }
 
         //if the method is linear regression, we have to add the opening balance to m_accountListPast
-        if (forecastMethod() == eForecastMethod::Historic && q->historyMethod() == 2) {
+        if (forecastMethod() == MyMoneyForecast::eForecastMethod::Historic && q->historyMethod() == 2) {
             //FIXME workaround for stock opening dates
             QDate openingDate;
             if (acc.accountType() == eMyMoney::Account::Type::Stock) {
@@ -925,7 +923,7 @@ public:
     /**
      * forecast method
      */
-    eForecastMethod m_forecastMethod;
+    MyMoneyForecast::eForecastMethod m_forecastMethod;
 
     /**
      * history method
@@ -1586,6 +1584,12 @@ int MyMoneyForecast::historyMethod() const
 {
     Q_D(const MyMoneyForecast);
     return d->m_historyMethod;
+}
+
+MyMoneyForecast::eForecastMethod MyMoneyForecast::forecastMethod() const
+{
+    Q_D(const MyMoneyForecast);
+    return d->m_forecastMethod;
 }
 
 bool MyMoneyForecast::isIncludingUnusedAccounts() const
