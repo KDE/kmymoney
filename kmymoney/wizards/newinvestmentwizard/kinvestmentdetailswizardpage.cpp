@@ -65,6 +65,24 @@ public:
         ui->m_priceMode->setEnabled(enable);
     }
 
+    void loadWidgets(const MyMoneySecurity& security)
+    {
+        const auto file = MyMoneyFile::instance();
+
+        ui->m_investmentName->setText(security.name());
+        MyMoneySecurity tradingCurrency = file->currency(security.tradingCurrency());
+        ui->m_tradingMarket->setCurrentIndex(ui->m_tradingMarket->findText(security.tradingMarket(), Qt::MatchExactly));
+        if (security.roundingMethod() == AlkValue::RoundNever)
+            ui->m_roundingMethod->setCurrentIndex(0);
+        else
+            ui->m_roundingMethod->setCurrentIndex(ui->m_roundingMethod->findData(security.roundingMethod()));
+        ui->m_fraction->setValue(MyMoneyMoney(security.smallestAccountFraction(), 1));
+        ui->m_pricePrecision->setValue(security.pricePrecision());
+        ui->m_tradingCurrencyEdit->setSecurity(tradingCurrency);
+
+        ui->m_investmentIdentification->setText(security.value("kmm-security-id"));
+    }
+
     void symbolSelectionChanged(int idx)
     {
         if (m_startedWithoutData) {
@@ -85,18 +103,8 @@ public:
 
             // in case we are creating the security, we copy the data
             if (m_startedWithoutData) {
-                ui->m_investmentName->setText(security.name());
-                MyMoneySecurity tradingCurrency = file->currency(security.tradingCurrency());
-                ui->m_tradingMarket->setCurrentIndex(ui->m_tradingMarket->findText(security.tradingMarket(), Qt::MatchExactly));
-                if (security.roundingMethod() == AlkValue::RoundNever)
-                    ui->m_roundingMethod->setCurrentIndex(0);
-                else
-                    ui->m_roundingMethod->setCurrentIndex(ui->m_roundingMethod->findData(security.roundingMethod()));
-                ui->m_fraction->setValue(MyMoneyMoney(security.smallestAccountFraction(), 1));
-                ui->m_pricePrecision->setValue(security.pricePrecision());
-                ui->m_tradingCurrencyEdit->setSecurity(tradingCurrency);
+                loadWidgets(security);
 
-                ui->m_investmentIdentification->setText(security.value("kmm-security-id"));
                 ui->m_createSymbolDuplicate->setChecked(false);
 
                 Q_EMIT q->securityIdChanged(security.id());
@@ -257,6 +265,8 @@ void KInvestmentDetailsWizardPage::init(const MyMoneyAccount& account, const MyM
         d->ui->m_createSymbolDuplicate->setEnabled(false);
     }
     d->ui->m_investmentSymbol->setModelColumn(SecuritiesModel::Column::Symbol);
+
+    d->loadWidgets(security);
 }
 
 bool KInvestmentDetailsWizardPage::isComplete() const
