@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-06 01:48+0000\n"
+"POT-Creation-Date: 2024-07-07 01:46+0000\n"
 "PO-Revision-Date: 2024-05-09 17:33+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -1533,7 +1533,7 @@ msgstr "選擇交易"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
 #: kmymoney/dialogs/keditequityentry.ui:70
 #: kmymoney/dialogs/knewequityentrydlg.ui:63
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:233
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:241
 #, kde-format
 msgid "1 /"
 msgstr "1 /"
@@ -2082,20 +2082,20 @@ msgid "Delete"
 msgstr "刪除"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:172
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:151
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:159
 #, kde-format
 msgctxt "default price mode"
 msgid "(default)"
 msgstr "(預設)"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:173
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:152
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:160
 #, kde-format
 msgid "Price per share"
 msgstr "每股價格"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:174
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:153
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:161
 #, kde-format
 msgid "Total for all shares"
 msgstr "總共價格"
@@ -8203,7 +8203,7 @@ msgid "*** UNASSIGNED ***"
 msgstr "*** 未指定 ***"
 
 #: kmymoney/mymoney/splitmodel.cpp:175 kmymoney/mymoney/splitmodel.cpp:180
-#: kmymoney/widgets/amountedit.cpp:264 kmymoney/widgets/amountedit.cpp:315
+#: kmymoney/widgets/amountedit.cpp:265 kmymoney/widgets/amountedit.cpp:316
 #: kmymoney/widgets/creditdebitedit.cpp:126
 #: kmymoney/widgets/creditdebitedit.cpp:127
 #: kmymoney/widgets/creditdebitedit.cpp:156
@@ -12587,10 +12587,10 @@ msgstr "機構"
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:158
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:247
 #: kmymoney/plugins/views/budget/kbudgetview.ui:193
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:187
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:292
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:481
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:613
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:189
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:294
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:483
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:615
 #: kmymoney/plugins/views/reports/core/listtable.cpp:627
 #: kmymoney/plugins/views/reports/reportsview.cpp:227
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
@@ -14245,7 +14245,7 @@ msgstr "顯示於 %1 的所有數值"
 #. i18n: ectx: attribute (title), widget (QWizardPage, SummaryWizardPage)
 #. i18n: ectx: attribute (title), widget (QWidget, summary)
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:133
-#: kmymoney/plugins/views/forecast/kforecastview.ui:326
+#: kmymoney/plugins/views/forecast/kforecastview.ui:335
 #: kmymoney/wizards/newloanwizard/summaryeditwizardpage.ui:6
 #: kmymoney/wizards/newloanwizard/summarywizardpage.ui:6
 #, kde-format
@@ -15048,7 +15048,7 @@ msgstr "名稱"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_forecastButton)
 #: kmymoney/plugins/views/forecast/forecastview.cpp:53
-#: kmymoney/plugins/views/forecast/kforecastview.ui:263
+#: kmymoney/plugins/views/forecast/kforecastview.ui:272
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1326
 #, kde-format
 msgid "Forecast"
@@ -15120,7 +15120,7 @@ msgstr "使用排程預測時包含已排程交易"
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox3)
 #. i18n: ectx: property (windowTitle), widget (QWidget, ForecastViewSettings)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:17
-#: kmymoney/plugins/views/forecast/kforecastview.ui:20
+#: kmymoney/plugins/views/forecast/kforecastview.ui:29
 #, kde-format
 msgid "Forecast Settings"
 msgstr "預測設定"
@@ -15134,7 +15134,7 @@ msgstr "帳戶循環的天數："
 #. i18n: ectx: property (text), widget (QLabel, textLabel5)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:57
-#: kmymoney/plugins/views/forecast/kforecastview.ui:98
+#: kmymoney/plugins/views/forecast/kforecastview.ui:107
 #, kde-format
 msgid "Day of Month to start Forecast:"
 msgstr "開始預測的日期："
@@ -15178,71 +15178,71 @@ msgstr "在預測中使用的循環數："
 #. i18n: ectx: property (title), widget (QGroupBox, m_historyMethodGroupBox)
 #. i18n: ectx: property (title), widget (QGroupBox, kcfg_historyMethod)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:162
-#: kmymoney/plugins/views/forecast/kforecastview.ui:272
+#: kmymoney/plugins/views/forecast/kforecastview.ui:281
 #, kde-format
 msgid "History Forecast Method"
 msgstr "歷史預測方式"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton11)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:168
-#: kmymoney/plugins/views/forecast/kforecastview.ui:278
+#: kmymoney/plugins/views/forecast/kforecastview.ui:287
 #, kde-format
 msgid "Simple Moving Average"
 msgstr "簡單移動平均"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton12)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:175
-#: kmymoney/plugins/views/forecast/kforecastview.ui:288
+#: kmymoney/plugins/views/forecast/kforecastview.ui:297
 #, kde-format
 msgid "Weighted Moving Average"
 msgstr "加權移動平均"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton13)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:182
-#: kmymoney/plugins/views/forecast/kforecastview.ui:298
+#: kmymoney/plugins/views/forecast/kforecastview.ui:307
 #, kde-format
 msgid "Linear Regression"
 msgstr "線性回歸"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#: kmymoney/plugins/views/forecast/kforecastview.ui:40
+#: kmymoney/plugins/views/forecast/kforecastview.ui:49
 #, kde-format
 msgid "Days to Forecast:"
 msgstr "預測天數："
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
-#: kmymoney/plugins/views/forecast/kforecastview.ui:72
+#: kmymoney/plugins/views/forecast/kforecastview.ui:81
 #, kde-format
 msgid "Days of Accounts Cycle:"
 msgstr "帳戶循環天數："
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
-#: kmymoney/plugins/views/forecast/kforecastview.ui:124
+#: kmymoney/plugins/views/forecast/kforecastview.ui:133
 #, kde-format
 msgid "Historic Cycles:"
 msgstr "歷史循環："
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel6)
-#: kmymoney/plugins/views/forecast/kforecastview.ui:150
+#: kmymoney/plugins/views/forecast/kforecastview.ui:159
 #, kde-format
 msgid "Chart Detail:"
 msgstr "圖表詳情："
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_comboDetail)
-#: kmymoney/plugins/views/forecast/kforecastview.ui:160
+#: kmymoney/plugins/views/forecast/kforecastview.ui:169
 #, kde-format
 msgid "<p>Choose what level of detail to show on the chart.</p>"
 msgstr "<p>選擇此圖表的詳細等級。</p>"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
-#: kmymoney/plugins/views/forecast/kforecastview.ui:167
+#: kmymoney/plugins/views/forecast/kforecastview.ui:176
 #, kde-format
 msgctxt "Show all details"
 msgid "All"
 msgstr "全部"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
-#: kmymoney/plugins/views/forecast/kforecastview.ui:172
+#: kmymoney/plugins/views/forecast/kforecastview.ui:181
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:423
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:153
 #, kde-format
@@ -15250,7 +15250,7 @@ msgid "Top-Level"
 msgstr "頂層"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
-#: kmymoney/plugins/views/forecast/kforecastview.ui:177
+#: kmymoney/plugins/views/forecast/kforecastview.ui:186
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:426
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:158
 #, kde-format
@@ -15258,7 +15258,7 @@ msgid "Groups"
 msgstr "群組"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
-#: kmymoney/plugins/views/forecast/kforecastview.ui:182
+#: kmymoney/plugins/views/forecast/kforecastview.ui:191
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:429
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:163
 #, kde-format
@@ -15266,41 +15266,41 @@ msgid "Totals"
 msgstr "總計"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
-#: kmymoney/plugins/views/forecast/kforecastview.ui:215
+#: kmymoney/plugins/views/forecast/kforecastview.ui:224
 #, kde-format
 msgid "Current Forecast Method:"
 msgstr "目前預測方式："
 
 #. i18n: ectx: property (text), widget (QLabel, m_forecastMethod)
-#: kmymoney/plugins/views/forecast/kforecastview.ui:237
+#: kmymoney/plugins/views/forecast/kforecastview.ui:246
 #, kde-format
 msgid "method"
 msgstr "方法"
 
 #. i18n: ectx: attribute (title), widget (QWidget, detail)
 #. i18n: ectx: property (text), widget (QLabel, textLabel6)
-#: kmymoney/plugins/views/forecast/kforecastview.ui:361
+#: kmymoney/plugins/views/forecast/kforecastview.ui:370
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:134
 #, kde-format
 msgid "Detail"
 msgstr "詳情"
 
 #. i18n: ectx: attribute (title), widget (QWidget, advanced)
-#: kmymoney/plugins/views/forecast/kforecastview.ui:389
+#: kmymoney/plugins/views/forecast/kforecastview.ui:407
 #, kde-format
 msgctxt "Advanced forecast view"
 msgid "Advanced"
 msgstr "進階"
 
 #. i18n: ectx: attribute (title), widget (QWidget, budget)
-#: kmymoney/plugins/views/forecast/kforecastview.ui:414
+#: kmymoney/plugins/views/forecast/kforecastview.ui:441
 #, kde-format
 msgid "Budget Forecast"
 msgstr "預算預測"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_tabChart)
 #. i18n: ectx: property (text), widget (QToolButton, buttonChart)
-#: kmymoney/plugins/views/forecast/kforecastview.ui:436
+#: kmymoney/plugins/views/forecast/kforecastview.ui:479
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:145
 #: kmymoney/plugins/views/reports/kreportsview_p.h:418
 #: kmymoney/plugins/views/reports/reportcontrol.ui:41
@@ -15308,32 +15308,32 @@ msgstr "預算預測"
 msgid "Chart"
 msgstr "圖表"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:190
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:293
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:192
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:295
 #, kde-format
 msgctxt "Today's forecast"
 msgid "Current"
 msgstr "目前"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:198
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:308
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:200
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:310
 #, kde-format
 msgid "Total variation"
 msgstr "總變異"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:304
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:306
 #, kde-format
 msgid "1 day"
 msgid_plural "%1 days"
 msgstr[0] "%1 天"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:379
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:381
 #: kmymoney/views/khomeview_p.h:1235
 #, kde-format
 msgid "The balance of %1 is below the minimum balance %2 today."
 msgstr "%1 的餘額今天會低於最小餘額 %2。"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:384
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:386
 #: kmymoney/views/khomeview_p.h:1239
 #, kde-format
 msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
@@ -15341,65 +15341,65 @@ msgid_plural ""
 "The balance of %2 will drop below the minimum balance %3 in %1 days."
 msgstr[0] "%2 的餘額會在 %1 天內低於最小餘額 %3。"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:403
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:405
 #: kmymoney/views/khomeview_p.h:1257
 #, kde-format
 msgid "The balance of %1 is below %2 today."
 msgstr "%1 的餘額今日會低於 %2。"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:408
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:410
 #: kmymoney/views/khomeview_p.h:1262
 #, kde-format
 msgid "The balance of %1 is above %2 today."
 msgstr "%1 的餘額今日會高於 %2。"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:415
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:417
 #: kmymoney/views/khomeview_p.h:1268
 #, kde-format
 msgid "The balance of %2 will drop below %3 in %1 day."
 msgid_plural "The balance of %2 will drop below %3 in %1 days."
 msgstr[0] "%2 的餘額會在 %1 天內低於 %3。"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:422
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:424
 #: kmymoney/views/khomeview_p.h:1275
 #, kde-format
 msgid "The balance of %2 will raise above %3 in %1 day."
 msgid_plural "The balance of %2 will raise above %3 in %1 days."
 msgstr[0] "%2 的餘額會在 %1 天內增加到高於 %3。"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:437
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:439
 #, kde-format
 msgid "The account %1 is decreasing %2 per cycle."
 msgstr "帳戶 %1 每次循環都會減少 %2。"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:492
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:494
 #, kde-format
 msgid "Min Bal %1"
 msgstr "最小餘額 %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:493
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:495
 #, kde-format
 msgid "Min Date %1"
 msgstr "最小日期 %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:496
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:498
 #, kde-format
 msgid "Max Bal %1"
 msgstr "最大餘額 %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:497
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:499
 #, kde-format
 msgid "Max Date %1"
 msgstr "最大日期 %1"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:499
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:501
 #, kde-format
 msgctxt "Average balance"
 msgid "Average"
 msgstr "平均"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:626
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:739
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:628
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:753
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:430
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:432
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:454
@@ -15417,32 +15417,39 @@ msgctxt "Total balance"
 msgid "Total"
 msgstr "總計"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:658
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:646
+#, kde-format
+msgctxt "@info Hint about the base of the budget forecast"
+msgid ""
+"Budget forecast is based on historic transactions found between %1 and %2."
+msgstr ""
+
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:666
 #, fuzzy, kde-format
 #| msgid "Show the report version of this chart"
 msgid "No data provided by reports plugin for this chart."
 msgstr "顯示此圖表的報告版本"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:660
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:668
 #: kmymoney/views/khomeview_p.h:571 kmymoney/views/khomeview_p.h:1584
 #, fuzzy, kde-format
 #| msgid "Show the report version of this chart"
 msgid "Enable reports plugin to see this chart."
 msgstr "顯示此圖表的報告版本"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:678
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:692
 #, kde-format
 msgctxt "Scheduled method"
 msgid "Scheduled"
 msgstr "已排程"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:683
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:697
 #, kde-format
 msgctxt "History-based method"
 msgid "History"
 msgstr "歷史紀錄"
 
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:688
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:702
 #, kde-format
 msgctxt "Unknown forecast method"
 msgid "Unknown"
@@ -18870,7 +18877,7 @@ msgstr "匯入無交易的報表"
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "  * 帳戶 %1 的貨幣 %2 沒有設定開戶日 %3 的價格。"
 
-#: kmymoney/views/investtransactioneditor.cpp:400
+#: kmymoney/views/investtransactioneditor.cpp:401
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -18878,63 +18885,63 @@ msgid ""
 "price information invalid. Please check them."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:541
+#: kmymoney/views/investtransactioneditor.cpp:543
 #, fuzzy, kde-format
 #| msgid "Default Category for Payee"
 msgctxt "@info:tooltip"
 msgid "Category for fees"
 msgstr "預設收款人類別"
 
-#: kmymoney/views/investtransactioneditor.cpp:542
+#: kmymoney/views/investtransactioneditor.cpp:544
 #, fuzzy, kde-format
 #| msgid "Amount is:"
 msgctxt "@info:tooltip"
 msgid "Amount of fees"
 msgstr "金額為："
 
-#: kmymoney/views/investtransactioneditor.cpp:543
+#: kmymoney/views/investtransactioneditor.cpp:545
 #, fuzzy, kde-format
 #| msgid "Category options"
 msgctxt "@info:tooltip"
 msgid "Category for interest"
 msgstr "類別選項"
 
-#: kmymoney/views/investtransactioneditor.cpp:544
+#: kmymoney/views/investtransactioneditor.cpp:546
 #, fuzzy, kde-format
 #| msgid "Amount entered"
 msgctxt "@info:tooltip"
 msgid "Amount of interest"
 msgstr "輸入的金額"
 
-#: kmymoney/views/investtransactioneditor.cpp:545
+#: kmymoney/views/investtransactioneditor.cpp:547
 #, fuzzy, kde-format
 #| msgid "Create brokerage account"
 msgctxt "@info:tooltip"
 msgid "Asset or brokerage account"
 msgstr "建立傭金帳戶"
 
-#: kmymoney/views/investtransactioneditor.cpp:546
+#: kmymoney/views/investtransactioneditor.cpp:548
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Price information for this transaction"
 msgstr "用這個來紀錄此交易"
 
-#: kmymoney/views/investtransactioneditor.cpp:549
+#: kmymoney/views/investtransactioneditor.cpp:551
 #, fuzzy, kde-format
 #| msgid "Skip this transaction"
 msgctxt "@info:tooltip"
 msgid "Security for this transaction"
 msgstr "略過此交易"
 
-#: kmymoney/views/investtransactioneditor.cpp:550
+#: kmymoney/views/investtransactioneditor.cpp:552
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
 msgstr "用這個來紀錄此交易"
 
-#: kmymoney/views/investtransactioneditor.cpp:553
+#: kmymoney/views/investtransactioneditor.cpp:555
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -18942,21 +18949,21 @@ msgid ""
 "account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:554
+#: kmymoney/views/investtransactioneditor.cpp:556
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This activity cannot be modified because the security account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:566
+#: kmymoney/views/investtransactioneditor.cpp:568
 #, fuzzy, kde-format
 #| msgid "Number of Days to Forecast:"
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "預測天數："
 
-#: kmymoney/views/investtransactioneditor.cpp:568
+#: kmymoney/views/investtransactioneditor.cpp:570
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -18964,77 +18971,77 @@ msgid ""
 "closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:572
+#: kmymoney/views/investtransactioneditor.cpp:574
 #, fuzzy, kde-format
 #| msgid "Enter next transaction..."
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr "輸入下一筆交易..."
 
-#: kmymoney/views/investtransactioneditor.cpp:578
+#: kmymoney/views/investtransactioneditor.cpp:580
 #, fuzzy, kde-format
 #| msgid "Split transaction"
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "分割交易"
 
-#: kmymoney/views/investtransactioneditor.cpp:580
+#: kmymoney/views/investtransactioneditor.cpp:582
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:584
+#: kmymoney/views/investtransactioneditor.cpp:586
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr "用這個來紀錄此交易"
 
-#: kmymoney/views/investtransactioneditor.cpp:596
+#: kmymoney/views/investtransactioneditor.cpp:598
 #, fuzzy, kde-format
 #| msgid "Enter next transaction..."
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr "輸入下一筆交易..."
 
-#: kmymoney/views/investtransactioneditor.cpp:612
+#: kmymoney/views/investtransactioneditor.cpp:614
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "選擇自動填入交易"
 
-#: kmymoney/views/investtransactioneditor.cpp:619
+#: kmymoney/views/investtransactioneditor.cpp:621
 #, fuzzy, kde-format
 #| msgid "Default Category for Payee"
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr "預設收款人類別"
 
-#: kmymoney/views/investtransactioneditor.cpp:622
+#: kmymoney/views/investtransactioneditor.cpp:624
 #, fuzzy, kde-format
 #| msgid "Enter additional fees"
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "輸入額外費用"
 
-#: kmymoney/views/investtransactioneditor.cpp:628
+#: kmymoney/views/investtransactioneditor.cpp:630
 #, fuzzy, kde-format
 #| msgid "Expense categories"
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr "支出類別"
 
-#: kmymoney/views/investtransactioneditor.cpp:631
+#: kmymoney/views/investtransactioneditor.cpp:633
 #, fuzzy, kde-format
 #| msgid "Type of interest"
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "利息型態"
 
-#: kmymoney/views/investtransactioneditor.cpp:636
+#: kmymoney/views/investtransactioneditor.cpp:638
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
@@ -19859,17 +19866,17 @@ msgstr "刪除機構..."
 msgid "Unable to delete institution: %1"
 msgstr "無法刪除機構：%1"
 
-#: kmymoney/views/kinvestmentview.cpp:539
+#: kmymoney/views/kinvestmentview.cpp:546
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>您確定要刪除投資 <b>%1</b> 嗎？</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:540
+#: kmymoney/views/kinvestmentview.cpp:547
 #, kde-format
 msgid "Delete investment"
 msgstr "刪除投資"
 
-#: kmymoney/views/kinvestmentview.cpp:551
+#: kmymoney/views/kinvestmentview.cpp:558
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "無法刪除投資：%1"
@@ -21293,14 +21300,14 @@ msgstr ""
 msgid "Tab Order Editor"
 msgstr "價格編輯器"
 
-#: kmymoney/widgets/amountedit.cpp:245
+#: kmymoney/widgets/amountedit.cpp:246
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid ""
 "Value are presented in %1. Press this button to switch the currency to %2."
 msgstr ""
 
-#: kmymoney/widgets/amountedit.cpp:252
+#: kmymoney/widgets/amountedit.cpp:253
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid "Values are presented in %1."
@@ -23498,7 +23505,7 @@ msgstr "使用者"
 msgid "Unable to create account: %1"
 msgstr "無法建立帳戶：%1"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:190
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:198
 #, fuzzy, kde-format
 #| msgid ""
 #| "Found:\n"
@@ -23509,25 +23516,25 @@ msgstr ""
 "找到：\n"
 "\n"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:191
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:199
 #, kde-format
 msgctxt "Rounding method"
 msgid "Ceil"
 msgstr "無條件進位"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:192
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:200
 #, kde-format
 msgctxt "Rounding method"
 msgid "Floor"
 msgstr "無條件退位"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:193
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:201
 #, kde-format
 msgctxt "Rounding method"
 msgid "Truncate"
 msgstr ""
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:235
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:243
 #, kde-format
 msgctxt "@info Warning that security is used in multiple accounts"
 msgid ""
@@ -23637,7 +23644,7 @@ msgid "Full name"
 msgstr "完整名稱"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:212
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:216
 #, kde-format
 msgid ""
 "Identification\n"
@@ -23647,7 +23654,7 @@ msgstr ""
 "編號"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_createSymbolDuplicate)
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:251
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:259
 #, kde-format
 msgid "Create duplicate of the symbol"
 msgstr "建立符號的複本"
