@@ -12,6 +12,7 @@
 #include <QCompleter>
 #include <QDebug>
 #include <QGlobalStatic>
+#include <QKeyEvent>
 #include <QSortFilterProxyModel>
 #include <QStringList>
 #include <QStringListModel>
@@ -1339,7 +1340,10 @@ bool InvestTransactionEditor::eventFilter(QObject* o, QEvent* e)
             // the activity combo needs special handling, because it does
             // not process the return/enter key directly but ignores it
             if (o == d->ui->activityCombo) {
-                processReturnKey();
+                const auto key = static_cast<QKeyEvent*>(e)->key();
+                if (key == Qt::Key_Return || key == Qt::Key_Enter) {
+                    processReturnKey();
+                }
             }
         }
         if (e->type() == QEvent::FocusOut) {
