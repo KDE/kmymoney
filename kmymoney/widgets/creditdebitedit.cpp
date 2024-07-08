@@ -117,7 +117,7 @@ MyMoneyMoney CreditDebitEdit::value() const
     return value;
 }
 
-void CreditDebitEdit::setValue(const MyMoneyMoney& amount)
+void CreditDebitEdit::setValue(const MyMoneyMoney& amount, bool forceUpdate)
 {
     Q_D(CreditDebitEdit);
 
@@ -126,10 +126,10 @@ void CreditDebitEdit::setValue(const MyMoneyMoney& amount)
         d->ui->creditAmount->setText(i18nc("@info:placeholder amount widget", "calculated"));
         d->ui->debitAmount->setText(i18nc("@info:placeholder amount widget", "calculated"));
     } else if (amount.isNegative()) {
-        d->ui->creditAmount->setValue(-amount);
+        d->ui->creditAmount->setValue(-amount, forceUpdate);
         d->ui->debitAmount->clear();
     } else {
-        d->ui->debitAmount->setValue(amount);
+        d->ui->debitAmount->setValue(amount, forceUpdate);
         d->ui->creditAmount->clear();
     }
 }

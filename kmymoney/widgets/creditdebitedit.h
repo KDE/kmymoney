@@ -46,9 +46,10 @@ public:
     /**
      * Loads the value of the widgets with the @a amount passed. If
      * @a amount is negative it is loaded into the credit
-     * widget, otherwise into the debit widget.
+     * widget, otherwise into the debit widget. @a forceUpdate is
+     * passed through to the underlying AmountEdit widgets.
      */
-    void setValue(const MyMoneyMoney& amount) override;
+    void setValue(const MyMoneyMoney& amount, bool forceUpdate = false) override;
     void setShares(const MyMoneyMoney& amount) override;
 
     /**

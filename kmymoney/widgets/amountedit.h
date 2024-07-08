@@ -70,20 +70,16 @@ public:
     DisplayState displayState() const override;
 
     /**
-      * This method returns the value of the edit field in "numerator/denominator" format.
-      * If you want to get the text of the edit field, use lineedit()->text() instead.
-      */
-    // QString numericalText() const;
-
-    /**
-      * Set the number of fractional digits that should be shown
-      *
-      * @param prec number of fractional digits.
-      *
-      * @note should be used prior to calling setText()
-      * @sa precision
-      */
-    void setPrecision(const int prec);
+     * Set the number of fractional digits that should be shown
+     *
+     * @param prec number of fractional digits.
+     * @param forceUpdate update widget even if @a prec does not change
+     *                    the previously set precision. Default is @c false.
+     *
+     * @note should be used prior to calling setText()
+     * @sa precision
+     */
+    void setPrecision(const int prec, bool forceUpdate = false);
 
     /**
       * return the number of fractional digits
@@ -166,9 +162,12 @@ public:
      * Sets the value portion to @a amount. This method calls
      * setShares internally and sets the initialExchangeRate to 1.
      *
+     * In case forceUpdate is @c true, the operation is performed
+     * even if the amount does not change. The default is @c false.
+     *
      * @note This method does not emit the valueChanged() signal
      */
-    void setValue(const MyMoneyMoney& amount) override;
+    void setValue(const MyMoneyMoney& amount, bool forceUpdate = false) override;
 
     /**
      * Sets the shares portion to @a amount. This method
@@ -228,6 +227,18 @@ public:
      * to the currently visible currency.
      */
     void setText(const QString& txt);
+
+    /**
+     * If a precision is set by setPrecision() and a
+     * security is also assigned, the precision is defined
+     * by the smallestAccountFraction or smallestCashFraction
+     * defined for the security. This is the default when
+     * the AmountEdit widget is constructed or this method
+     * is called with @c false. When called with @a override
+     * as @c true the value passed in by setPrecision() takes
+     * precedence over the fractions defined by the security.
+     */
+    void setPrecisionOverridesFraction(bool override);
 
 private:
 public Q_SLOTS:

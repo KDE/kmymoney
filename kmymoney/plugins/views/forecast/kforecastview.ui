@@ -11,7 +11,16 @@
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -278,7 +287,7 @@
               <string>Simple Moving Average</string>
              </property>
              <attribute name="buttonGroup">
-              <string>m_historyMethod</string>
+              <string notr="true">m_historyMethod</string>
              </attribute>
             </widget>
            </item>
@@ -288,7 +297,7 @@
               <string>Weighted Moving Average</string>
              </property>
              <attribute name="buttonGroup">
-              <string>m_historyMethod</string>
+              <string notr="true">m_historyMethod</string>
              </attribute>
             </widget>
            </item>
@@ -298,7 +307,7 @@
               <string>Linear Regression</string>
              </property>
              <attribute name="buttonGroup">
-              <string>m_historyMethod</string>
+              <string notr="true">m_historyMethod</string>
              </attribute>
             </widget>
            </item>
@@ -361,7 +370,16 @@
        <string>Detail</string>
       </attribute>
       <layout class="QVBoxLayout">
-       <property name="margin">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
         <number>0</number>
        </property>
        <item>
@@ -389,7 +407,16 @@
        <string comment="Advanced forecast view">Advanced</string>
       </attribute>
       <layout class="QVBoxLayout">
-       <property name="margin">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
         <number>0</number>
        </property>
        <item>
@@ -414,7 +441,16 @@
        <string>Budget Forecast</string>
       </attribute>
       <layout class="QVBoxLayout">
-       <property name="margin">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
         <number>0</number>
        </property>
        <item>
@@ -429,6 +465,13 @@
          </column>
         </widget>
        </item>
+       <item>
+        <widget class="QLabel" name="m_budgetHistoryRange">
+         <property name="text">
+          <string notr="true">Historic data range</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="m_tabChart">
@@ -436,7 +479,16 @@
        <string>Chart</string>
       </attribute>
       <layout class="QVBoxLayout">
-       <property name="margin">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
         <number>0</number>
        </property>
       </layout>
@@ -451,12 +503,6 @@
    <class>KComboBox</class>
    <extends>QComboBox</extends>
    <header>kcombobox.h</header>
-  </customwidget>
-  <customwidget>
-   <class>QTabWidget</class>
-   <extends>QTabWidget</extends>
-   <header>ktabwidget.h</header>
-   <container>1</container>
   </customwidget>
   <customwidget>
    <class>KTextEdit</class>

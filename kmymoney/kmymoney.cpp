@@ -2141,7 +2141,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {qMakePair(Action::MoveToToday,                 Qt::CTRL | Qt::SHIFT | Qt::Key_T)},
             {qMakePair(Action::GoToPayee,                   Qt::CTRL | Qt::SHIFT | Qt::Key_P)},
             {qMakePair(Action::SelectAllTransactions,       Qt::CTRL | Qt::Key_A)},
-            {qMakePair(Action::EditTabOrder,                Qt::CTRL | Qt::SHIFT | Qt::Key_T)},
+            {qMakePair(Action::EditTabOrder,                Qt::CTRL | Qt::ALT | Qt::Key_T)},
 #ifdef KMM_DEBUG
             {qMakePair(Action::NewFeature,                  Qt::CTRL | Qt::Key_G)},
 #endif
@@ -3995,12 +3995,8 @@ void KMyMoneyApp::slotEditTabOrder()
     d->executeAction(d->qActionToId(qobject_cast<QAction*>(sender())));
 }
 
-#include <KNS3/QtQuickDialogWrapper>
-
 void KMyMoneyApp::slotNewFeature()
 {
-    static KNS3::QtQuickDialogWrapper* ghnsDialog = new KNS3::QtQuickDialogWrapper("kmymoney-quotes.knsrc", this);
-    ghnsDialog->open();
 }
 
 // move a stock transaction from one investment account to another

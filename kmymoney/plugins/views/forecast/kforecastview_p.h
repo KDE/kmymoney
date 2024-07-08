@@ -102,6 +102,8 @@ public:
         m_needLoad = false;
         ui->setupUi(q);
 
+        ui->m_budgetHistoryRange->hide();
+
         for (int i = 0; i < MaxViewTabs; ++i)
             m_needReload[i] = false;
 
@@ -638,6 +640,12 @@ public:
         loadAccounts(forecast, file->expense(), m_expenseItem, EForecastViewType::eBudget);
 
         adjustHeadersAndResizeToContents(ui->m_budgetList);
+
+        // Show the range which historic transactions are used to calculate the forecast
+        ui->m_budgetHistoryRange->setText(
+            i18nc("@info Hint about the base of the budget forecast", "Budget forecast is based on historic transactions found between %1 and %2.")
+                .arg(MyMoneyUtils::formatDate(historyStartDate), MyMoneyUtils::formatDate(historyEndDate)));
+        ui->m_budgetHistoryRange->setVisible(forecast.forecastMethod() == MyMoneyForecast::eForecastMethod::Historic);
     }
 
     void loadChartView()
@@ -673,13 +681,19 @@ public:
         ui->m_historyMethod->setId(ui->radioButton12, 1); // weighted moving avg
         ui->m_historyMethod->setId(ui->radioButton13, 2); // linear regression
         ui->m_historyMethod->button(KMyMoneySettings::historyMethod())->setChecked(true);
-        switch (KMyMoneySettings::forecastMethod()) {
-        case 0:
+
+        updateForecastMethod();
+    }
+
+    void updateForecastMethod()
+    {
+        switch (static_cast<MyMoneyForecast::eForecastMethod>(KMyMoneySettings::forecastMethod())) {
+        case MyMoneyForecast::eForecastMethod::Scheduled:
             ui->m_forecastMethod->setText(i18nc("Scheduled method", "Scheduled"));
             ui->m_forecastCycles->setDisabled(true);
             ui->m_historyMethodGroupBox->setDisabled(true);
             break;
-        case 1:
+        case MyMoneyForecast::eForecastMethod::Historic:
             ui->m_forecastMethod->setText(i18nc("History-based method", "History"));
             ui->m_forecastCycles->setEnabled(true);
             ui->m_historyMethodGroupBox->setEnabled(true);

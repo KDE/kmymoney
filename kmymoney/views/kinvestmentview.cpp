@@ -253,7 +253,14 @@ public:
      */
     MyMoneyAccount currentEquity()
     {
-        QModelIndex idx = MyMoneyFile::baseModel()->mapToBaseSource(ui->m_equitiesTree->currentIndex());
+        // the currentIndex() may point to a column that does not exist in the
+        // base model (see EquitiesModel which provides additional columns
+        // in a proxy of the model stack) which would result in an invalid
+        // index to be returned. To avoid that, we take the row of the current
+        // index and use column 0 which (always) exist.
+        QModelIndex idx = ui->m_equitiesTree->currentIndex();
+        idx = ui->m_equitiesTree->model()->index(idx.row(), 0, idx.parent());
+        idx = MyMoneyFile::baseModel()->mapToBaseSource(idx);
         return MyMoneyFile::instance()->accountsModel()->itemByIndex(idx);
     }
 
