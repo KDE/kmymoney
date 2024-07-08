@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-07 01:46+0000\n"
+"POT-Creation-Date: 2024-07-08 01:44+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -18588,32 +18588,32 @@ msgctxt "@label:textbox"
 msgid "Ratio 1/"
 msgstr "Santykis 1/"
 
-#: kmymoney/views/investtransactioneditor.cpp:81
+#: kmymoney/views/investtransactioneditor.cpp:82
 #, fuzzy, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Buy shares"
 msgstr "Adresas:"
 
-#: kmymoney/views/investtransactioneditor.cpp:82
+#: kmymoney/views/investtransactioneditor.cpp:83
 #, fuzzy, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Sell shares"
 msgstr "Visos būklės"
 
-#: kmymoney/views/investtransactioneditor.cpp:83
+#: kmymoney/views/investtransactioneditor.cpp:84
 #, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Dividend"
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:84
+#: kmymoney/views/investtransactioneditor.cpp:85
 #, fuzzy, kde-format
 #| msgid "Investments"
 msgctxt "@item:inlistbox transaction type"
 msgid "Reinvest dividend"
 msgstr "Investicijos"
 
-#: kmymoney/views/investtransactioneditor.cpp:85
+#: kmymoney/views/investtransactioneditor.cpp:86
 #, fuzzy, kde-format
 #| msgctxt "@title header of the QIF field name column"
 #| msgid "Field"
@@ -18621,39 +18621,39 @@ msgctxt "@item:inlistbox transaction type"
 msgid "Yield"
 msgstr "Laukas"
 
-#: kmymoney/views/investtransactioneditor.cpp:86
+#: kmymoney/views/investtransactioneditor.cpp:87
 #, fuzzy, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Add shares"
 msgstr "Adresas:"
 
-#: kmymoney/views/investtransactioneditor.cpp:87
+#: kmymoney/views/investtransactioneditor.cpp:88
 #, fuzzy, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Remove shares"
 msgstr "Šalinti korespondentą"
 
-#: kmymoney/views/investtransactioneditor.cpp:88
+#: kmymoney/views/investtransactioneditor.cpp:89
 #, fuzzy, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Split shares"
 msgstr "Perskirta-vertė"
 
-#: kmymoney/views/investtransactioneditor.cpp:89
+#: kmymoney/views/investtransactioneditor.cpp:90
 #, fuzzy, kde-format
 #| msgid "Interest rate"
 msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
 msgstr "Palūkanos"
 
-#: kmymoney/views/investtransactioneditor.cpp:261
+#: kmymoney/views/investtransactioneditor.cpp:262
 #: kmymoney/views/multitransactioneditor.cpp:185
 #: kmymoney/views/newtransactioneditor.cpp:266
 #, fuzzy, kde-format
 msgid "The posting date of the transaction."
 msgstr "Priderinimo operacija"
 
-#: kmymoney/views/investtransactioneditor.cpp:285
+#: kmymoney/views/investtransactioneditor.cpp:286
 #: kmymoney/views/multitransactioneditor.cpp:215
 #: kmymoney/views/newtransactioneditor.cpp:286
 #, fuzzy, kde-format
@@ -18661,7 +18661,7 @@ msgstr "Priderinimo operacija"
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "Sekanti mokėjimo data yra ankstesnė už atidarymo datą"
 
-#: kmymoney/views/investtransactioneditor.cpp:401
+#: kmymoney/views/investtransactioneditor.cpp:402
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -18669,57 +18669,57 @@ msgid ""
 "price information invalid. Please check them."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:543
+#: kmymoney/views/investtransactioneditor.cpp:544
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Category for fees"
 msgstr "Nauja kategorija..."
 
-#: kmymoney/views/investtransactioneditor.cpp:544
+#: kmymoney/views/investtransactioneditor.cpp:545
 #, fuzzy, kde-format
 #| msgid "Amount is:"
 msgctxt "@info:tooltip"
 msgid "Amount of fees"
 msgstr "Suma yra:"
 
-#: kmymoney/views/investtransactioneditor.cpp:545
+#: kmymoney/views/investtransactioneditor.cpp:546
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Category for interest"
 msgstr "Kategorijos"
 
-#: kmymoney/views/investtransactioneditor.cpp:546
+#: kmymoney/views/investtransactioneditor.cpp:547
 #, fuzzy, kde-format
 #| msgid "Amount entered"
 msgctxt "@info:tooltip"
 msgid "Amount of interest"
 msgstr "Įvesta suma"
 
-#: kmymoney/views/investtransactioneditor.cpp:547
+#: kmymoney/views/investtransactioneditor.cpp:548
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Asset or brokerage account"
 msgstr "Išskirtinė sąskaita"
 
-#: kmymoney/views/investtransactioneditor.cpp:548
+#: kmymoney/views/investtransactioneditor.cpp:549
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Price information for this transaction"
 msgstr "Išrinkti operacijas be korespondento"
 
-#: kmymoney/views/investtransactioneditor.cpp:551
+#: kmymoney/views/investtransactioneditor.cpp:552
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Security for this transaction"
 msgstr "Išrinkti operacijas be korespondento"
 
-#: kmymoney/views/investtransactioneditor.cpp:552
+#: kmymoney/views/investtransactioneditor.cpp:553
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
 msgstr "Išrinkti operacijas be korespondento"
 
-#: kmymoney/views/investtransactioneditor.cpp:555
+#: kmymoney/views/investtransactioneditor.cpp:556
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -18727,20 +18727,20 @@ msgid ""
 "account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:556
+#: kmymoney/views/investtransactioneditor.cpp:557
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This activity cannot be modified because the security account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:568
+#: kmymoney/views/investtransactioneditor.cpp:569
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "Grynoji vertė šiandien"
 
-#: kmymoney/views/investtransactioneditor.cpp:570
+#: kmymoney/views/investtransactioneditor.cpp:571
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -18748,69 +18748,69 @@ msgid ""
 "closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:574
+#: kmymoney/views/investtransactioneditor.cpp:575
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr "Išrinkti operacijas be korespondento"
 
-#: kmymoney/views/investtransactioneditor.cpp:580
+#: kmymoney/views/investtransactioneditor.cpp:581
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "Skelti operaciją"
 
-#: kmymoney/views/investtransactioneditor.cpp:582
+#: kmymoney/views/investtransactioneditor.cpp:583
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:586
+#: kmymoney/views/investtransactioneditor.cpp:587
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr "Išrinkti operacijas be korespondento"
 
-#: kmymoney/views/investtransactioneditor.cpp:598
+#: kmymoney/views/investtransactioneditor.cpp:599
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr "Išrinkti operacijas be korespondento"
 
-#: kmymoney/views/investtransactioneditor.cpp:614
+#: kmymoney/views/investtransactioneditor.cpp:615
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "Trinti operaciją"
 
-#: kmymoney/views/investtransactioneditor.cpp:621
+#: kmymoney/views/investtransactioneditor.cpp:622
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr "Nauja kategorija..."
 
-#: kmymoney/views/investtransactioneditor.cpp:624
+#: kmymoney/views/investtransactioneditor.cpp:625
 #, fuzzy, kde-format
 #| msgid "Transfer amount to %1"
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "Pervesti pinigus į %1"
 
-#: kmymoney/views/investtransactioneditor.cpp:630
+#: kmymoney/views/investtransactioneditor.cpp:631
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr "Lauko tipo tekstas"
 
-#: kmymoney/views/investtransactioneditor.cpp:633
+#: kmymoney/views/investtransactioneditor.cpp:634
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "Lauko tipo tekstas"
 
-#: kmymoney/views/investtransactioneditor.cpp:638
+#: kmymoney/views/investtransactioneditor.cpp:639
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
