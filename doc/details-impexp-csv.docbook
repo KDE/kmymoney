@@ -132,8 +132,8 @@
   If you have previously created one or more profiles, the other two buttons will be
   enabled.  If you click <guilabel>Remove</guilabel>, the profile named in the
   dropdown will be deleted.  If you click <guilabel>Rename</guilabel>, then alter the
-  name displayed in the dropdown, and click the Rename button again, the profile will
-  be renamed accordingly.
+  name displayed in the dropdown, and click <guilabel>Rename</guilabel> again, the
+  profile will be renamed accordingly.
 </para>
 
 <para>
@@ -161,9 +161,8 @@
   of data you are importing.  In the profile selector dropdown, you can select the
   name of a previously created CSV Importer profile, or enter a new name, possibly
   the name of the account into which you wish to import, and click
-  <guilabel>Add</guilabel>.  Finally, click on <guilabel>Select File</guilabel>, and
-  a file selector dialog will open, where you ` select the CSV file you wish to
-  import.
+  <guilabel>Add</guilabel>.  Finally, click <guilabel>Select File</guilabel>, and a
+  file selector dialog will open, where you ` select the CSV file you wish to import.
 </para>
 </sect3>
 
@@ -204,7 +203,7 @@
   your data is actually tab delimited, and not a comma delimited, be aware that doing
   so will reset any field choices you may already have made.  Generally the quote
   (&quot;) is the correct text delimiter, but you may change it as necessary.  Click
-  on <guibutton>Next</guibutton> to proceed.
+  <guibutton>Next</guibutton> to proceed.
 </para>
 </sect3>
 
@@ -261,8 +260,7 @@
 </para>
 
 <para>
-  When you are ready, click on <guilabel>Next</guilabel> to advance the wizard to the
-  next step.
+  When you are ready, click <guilabel>Next</guilabel> to proceed to the next step.
 </para>
 </sect3>
 
@@ -356,8 +354,8 @@
 
 <para>
   If you notice you have made an incorrect choice, just change that selection.  If
-  several changes need to be made, you can click the <guilabel>Clear all</guilabel>
-  button and start over.
+  several changes need to be made, you can click <guilabel>Clear all</guilabel> and
+  start over.
 </para>
 
 <para>
@@ -477,15 +475,14 @@
   percentage rate into the <guilabel>Fee rate</guilabel> field.  In addition, if
   there is a minimum fee, specify it in the <guilabel>Minimal Fee</guilabel> field,
   which becomes enabled when you enter the Fee rate (with a decimal point.)  At this
-  point, clicking the <guibutton>Calculate Fees</guibutton> button will add a column
-  at the right of the table above, and will indicate the calculated fee for each
+  point, clicking <guibutton>Calculate Fees</guibutton> will add a column at the
+  right of the table above, and will indicate the calculated fee for each
   transaction.
 </para>
 
 <para>
-  If you made a mistake in entering the fee information, clicking the
-  <guibutton>Clear Fee</guibutton> button will reset all the fee related fields to
-  their initial values.
+  If you made a mistake in entering the fee information, clicking <guibutton>Clear
+  Fee</guibutton> will reset all the fee related fields to their initial values.
 </para>
 </listitem>
 
@@ -502,9 +499,9 @@
         possibly in a header row, the name should be entered into the
         <guilabel>Security Name</guilabel> box. The name you enter will be added to
         the dropdown list for future use. You may subsequently wish to remove that
-        name from the list.  If so, select it, then click the <guilabel>Hide
-        security</guilabel> button.  This removes it only from this list, and has no
-        effect on your main &kmymoney; file.
+        name from the list.  If so, select it, then click <guilabel>Hide
+        security</guilabel>.  This removes it only from this list, and has no effect
+        on your main &kmymoney; file.
       </para>
     </listitem>
 
@@ -581,12 +578,12 @@
 </para>
 
 <para>
-  You can edit a symbol or security name by double clicking the cell.  For
-  each security, if necessary, edit the name in one of its rows, If the correct
-  security name appears in the imported file, double click on it to select it,
-  then copy and paste/edit, taking care if you have used a variation or
-  abbreviation within &kmymoney;.  If you edit a security name, that edit will
-  be applied to all rows with the same symbol.
+  You can edit a symbol or security name by double=clicking the cell.  For each
+  security, if necessary, edit the name in one of its rows, If the correct security
+  name appears in the imported file, double-click it to select it, then copy and
+  paste/edit, taking care if you have used a variation or abbreviation within
+  &kmymoney;.  If you edit a security name, that edit will be applied to all rows
+  with the same symbol.
 </para>
 
 <para>
@@ -607,18 +604,16 @@
 </para>
 
 <para>
-  If you have more that one transaction referring to the same security, you can
-  edit all of them at once, using multi-select.  For instance, to add a symbol for
-  several lines, press and hold the &Ctrl; key, and in the symbol column,
-  select each transaction.  While still holding the &Ctrl; key,
-  all those symbol cells should still be selected, so click on one and enter the
-  symbol.  Click inside the window but outside that column, or hit
-  &Enter; (not <guibutton>OK</guibutton>).  Now that those
-  transactions all have the same symbol, double click one detail entry and edit
-  the security name as you wish.  Click elsewhere on the window (or
-  &Enter;) to accept the edit, which will then change all
-  those entries.  The remaining entries will show the symbols picked up from the
-  transactions in the import file.
+  If you have more that one transaction referring to the same security, you can edit
+  all of them at once, using multi-select.  For instance, to add a symbol for several
+  lines, press and hold the &Ctrl; key, and in the symbol column, select each
+  transaction.  While still holding the &Ctrl; key, all those symbol cells should
+  still be selected, so click one and enter the symbol.  Click inside the window but
+  outside that column, or hit &Enter; (not <guibutton>OK</guibutton>).  Now that
+  those transactions all have the same symbol, double-click one detail entry and edit
+  the security name as you wish.  Click elsewhere on the window (or &Enter;) to
+  accept the edit, which will then change all those entries.  The remaining entries
+  will show the symbols picked up from the transactions in the import file.
 </para>
 
 <para>
@@ -737,8 +732,8 @@
 </para>
 
 <para>
-  If you wish to save your settings, remember to click the
-  <guibutton>Finish</guibutton> button, and the plugin will then close.
+  If you wish to save your settings, remember to click <guibutton>Finish</guibutton>,
+  and the plugin will then close.
 </para>
 </sect3>
 
@@ -850,10 +845,9 @@
 
 <para>
   Specify the name of the exported CSV file either by entering the complete path in
-  the <guilabel>File to export to</guilabel> field, or by clicking the
-  <guilabel>Browse</guilabel> button and navigating to it in the Save File dialog.
-  Choose which account to export with the <guilabel>Account to export</guilabel>
-  dropdown.
+  the <guilabel>File to export to</guilabel> field, or by clicking
+  <guilabel>Browse</guilabel> and navigating to it in the Save File dialog.  Choose
+  which account to export with the <guilabel>Account to export</guilabel> dropdown.
 </para>
 
 <para>

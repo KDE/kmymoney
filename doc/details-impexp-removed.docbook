@@ -27,8 +27,8 @@
 
 <para>
   Transaction data can be edited or even deleted if needed.  To edit a transaction
-  simply double-click on the entry or hit enter when the entry is highlighted.  Once
-  finished click on <guibutton>OK</guibutton> to accept the imported transactions or
+  simply double-click the entry or hit enter when the entry is highlighted.  Once
+  finished click <guibutton>OK</guibutton> to accept the imported transactions or
   <guibutton>Cancel</guibutton> to remove the imported transactions.
 </para>
 </sect2>

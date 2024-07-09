@@ -184,7 +184,7 @@
   <answer>
     <para>
       There are several settings that control which transactions are displayed in the
-      ledger view of an account.  First, check
+      Ledger View of an account.  First, check
       the <link linkend="details.ledgers.view.filter">ledger filter area</link>.  If
       there is anything typed in the search box, only transactions containing that
       text will be shown.  If the status dropdown has been changed from <quote>Any

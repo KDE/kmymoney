@@ -182,7 +182,7 @@
   always contain at least 2 splits, and to conform to &gnucash;'s double-entry
   bookkeeping standard, these must be in monetary balance (&ie;, they must balance
   out to zero). &kmymoney; encourages, but does not enforce, this standard, but any
-  imported transaction which is not balanced will be marked in the ledger view as
+  imported transaction which is not balanced will be marked in the Ledgers View as
   having a problem.
 </para>
 </sect4>
@@ -544,8 +544,7 @@
 
 <para>
   The resulting dialog prompts for the QIF filename, allowing you to type in the full
-  path to the file or to locate the file by clicking on the
-  <guibutton>Browse</guibutton> button.
+  path to the file or to locate the file by clicking <guibutton>Browse</guibutton>.
 </para>
 
 <para>
@@ -568,7 +567,7 @@
 </para>
 
 <para>
-  Click on <guibutton>Import</guibutton> to import the QIF file.
+  Click <guibutton>Import</guibutton> to import the QIF file.
 </para>
 
 <para>
@@ -589,7 +588,7 @@
   In case &kmymoney; could not detect the name of the account to be imported, the
   user will be asked to select the account into which the data should be imported.
   If the account does not already exist in your file, a new account can be created by
-  clicking on <guibutton>Create</guibutton>.
+  clicking <guibutton>Create</guibutton>.
 </para>
 
 <para>
@@ -729,11 +728,10 @@
   dialog by selecting <menuchoice> <shortcut>
   <keycombo>&Ctrl;&Shift;<keycap>,</keycap> </keycombo> </shortcut>
   <guimenu>Settings</guimenu> <guimenuitem>Configure &kmymoney;...</guimenuitem>
-  </menuchoice> from the main menu, clicking on <inlinemediaobject> <imageobject>
+  </menuchoice> from the main menu, clicking <inlinemediaobject> <imageobject>
   <imagedata fileref='preferences-plugin.svg' format='SVG'/> </imageobject>
   </inlinemediaobject> <guilabel>Plugins</guilabel> at the bottom of the left panel,
-  and clicking the &configicon; configure button on the entry for <quote>QIF
-  Importer</quote>.
+  and clicking &configicon; Configure on the entry for <quote>QIF Importer</quote>.
 </para>
 
 <para>
@@ -758,10 +756,10 @@
   On the left, the Profile selector displays a list of all existing QIF Profiles;
   select one to edit its configuration.  To create an new profile, press the
   <guibutton>New</guibutton> button.  You can rename an existing profile by selecting
-  it in the Profile selector and clicking the <guibutton>Rename</guibutton> button,
-  and delete one with the <guibutton>Delete</guibutton> button.  Clicking the
-  <guibutton>Reset</guibutton> button resets all the fields of the currenlty
-  displayed profile to their default values.
+  it in the Profile selector and clicking <guibutton>Rename</guibutton>, and delete
+  one with the <guibutton>Delete</guibutton> button.  Clicking
+  <guibutton>Reset</guibutton> resets all the fields of the currenlty displayed
+  profile to their default values.
 </para>
 
 <para>
@@ -1004,15 +1002,16 @@
 
 <sect2 id="details.impexp.webconnect"><title>Web Connect</title>
 <para>
-  Rather than explicitly downloading an OFX file, as described above, the easiest way
+  Rather than explicitly downloading an OFX file, as described above, an easier way
   to import an OFX file is to set up Web Connect.  Visit your bank's web site, and
-  click on the button or link to download an OFX file.  Your browser should ask
-  whether you want to save the file, or else what program you would like to use to
-  open the file.  Point your browser to &kmymoney;.  It will then import the
-  downloaded OFX file directly into the &kmymoney; file you currenlty have open, or
-  the file you most recently had open.  You can also change the file associations of
-  your desktop environment, and have the system automatically opne &kmymoney; if you
-  click on an OFX file in your file browser.  you.
+  click the button or link to download your data as an OFX file.  (Some institutions
+  will only list QFX, which is equivalent.)  Your browser should ask whether you want
+  to save the file, or else what program you would like to use to open the file.
+  Point your browser to &kmymoney;.  It will then import the downloaded OFX file
+  directly into the &kmymoney; file you currenlty have open, or the file you most
+  recently had open.  You can also change the file associations of your desktop
+  environment, and have the system automatically open &kmymoney; if you click an OFX
+  file in your file browser.
 </para>
 
 <para>
@@ -1058,10 +1057,10 @@
 
 <para>
   The first step is to configure each account for which you wish to download
-  transactions.  Go to the Accounts view, right-click on the account you wish to
+  transactions.  Go to the Accounts view, right-click the account you wish to
   configure, and choose <guimenuitem>Map to online account...</guimenuitem>.  This is
   also available from the <guimenu>Accounts</guimenu> menu if the account is open in
-  the Ledger View.  In case more than one online banking plugin is installed on your
+  the Ledgers View.  In case more than one online banking plugin is installed on your
   system you will be asked which one to use.  For the internal OFX method select
   <guimenuitem>&kmymoney; OFX</guimenuitem>.  A list of banks will be downloaded from
   the Internet and a wizard will guide you through choosing a bank, entering your

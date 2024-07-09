@@ -55,17 +55,17 @@
 </para>
 
 <para>
-  On the left side of the main window, the view selector consists of at least eleven
+  On the left side of the main window, the View Selector consists of at least eleven
   icons with optional labels, depending upon the software provided by your system, as
   some features can be included or excluded when the program is compiled.  More icons
-  could be added by various plugins.  By clicking on an icon, the view window on the
-  right hand side is loaded with the appropriate view of your financial data.  Each
-  view provides a unique representation of your financial situation and allows you to
-  view or edit the information shown.
+  could be added by various plugins.  By clicking one of the icon, the view window on
+  the right hand side is loaded with the appropriate view of your financial data.
+  Each view provides a unique representation of your financial situation and allows
+  you to view or edit the information shown.
 </para>
 
 <para>
-  The view selector may contain the following icons
+  The View Selector may contain the following icons
 </para>
 
 <itemizedlist>
@@ -81,8 +81,8 @@
 	  </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Home: a configurable overview of your current financial situation (or an
-      introduction page when no data file is open.)
+      Home:  a configurable overview of your current financial situation (or an introduction
+      page when no data file is open.)
     </para>
   </listitem>
 
@@ -98,7 +98,7 @@
 	  </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Institutions: all of your institutions and accounts displayed in a hierarchy.
+      Institutions: your institutions and accounts displayed in a hierarchy.
     </para>
   </listitem>
 
@@ -114,7 +114,7 @@
 	  </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Accounts: all of your accounts displayed in a hierarchy.
+      Accounts: your accounts displayed in a hierarchy.
     </para>
   </listitem>
 
@@ -130,7 +130,7 @@
 	  </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Scheduled Transactions: your recurring payments, income, and transfers.
+      Scheduled transactions: your recurring payments, income, and transfers.
     </para>
   </listitem>
 
@@ -180,7 +180,7 @@
 	  </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Payees: all your payees, the people and organizations you pay money to or receive
+      Payees: your payees - the people and organizations you pay money to or receive
       money from.
     </para>
   </listitem>
@@ -515,11 +515,11 @@
     <term>Using the Accounts View</term>
     <listitem>
       <para>
-        To create an account using the Accounts View click on the <guiicon>
+        To create an account using the Accounts View, click the <guiicon>
         <inlinemediaobject><imageobject><imagedata fileref="accounts_view.png"
         format="PNG"/></imageobject></inlinemediaobject></guiicon> accounts icon in
-        the view selector to display the Accounts View.  Right-click on the either
-        the Asset tree icon or the Liability tree icon in the display and select
+        the View Selector to display the Accounts View.  Right-click either the Asset
+        tree icon or the Liability tree icon in the display and select
         <guimenuitem>New account</guimenuitem> from the popup menu.  The Asset tree
         holds all of your accounts that are assets, such as savings and investments.
         The Liability tree holds all of your accounts that represent money you owe,
@@ -554,9 +554,9 @@
   Creating a new account by any of the above methods opens the <emphasis>New Account
   Wizard</emphasis>.  This wizard will take you step by step through the process of
   creating an account, gathering the required information at each step.  To navigate
-  through the pages click on the <guibutton>Next</guibutton> and
-  <guibutton>Back</guibutton> buttons.  A full description of creating accounts can
-  be found in the <link linkend="details.accounts">Accounts</link> section.
+  through the pages click <guibutton>Next</guibutton> and
+  <guibutton>Back</guibutton>.  A full description of creating accounts can be found
+  in the <link linkend="details.accounts">Accounts</link> section.
 </para>
 
 <para>
@@ -568,10 +568,10 @@
 </para>
 </sect1>
 
-<sect1 id="firsttime.schedules"><title>Schedules</title>
+<sect1 id="firsttime.schedules"><title>Scheduled transactions</title>
 <para>
-  A <link linkend="details.schedules">schedule</link>, sometimes called a scheduled
-  transaction or a recurring transaction, is a transaction that occurs one or more
+  A <link linkend="details.schedules">scheduled transaction</link>, sometimes called
+  a schedule or a recurring transaction, is a transaction that occurs one or more
   times at a specified interval over a certain period of time.  A typical example is
   your pay check that you receive every week or month, or a utility bill you pay
   every month.  Rather than having to enter the transaction details each time you get
@@ -580,19 +580,19 @@
 </para>
 
 <para>
-  To maintain your <link linkend="details.schedules">schedules</link> click on the
+  To maintain your <link linkend="details.schedules">schedules</link>, click the
   <guiicon><inlinemediaobject><imageobject><imagedata fileref="schedule_view.png"
-  format="PNG"/></imageobject></inlinemediaobject></guiicon> schedules icon in the
-  view selector.
+  format="PNG"/></imageobject></inlinemediaobject></guiicon> Scheduled transaction
+  icon in the View Selector.
 </para>
 </sect1>
 
 <sect1 id="firsttime.categories"><title>Categories</title>
 <para>
-  To maintain your <link linkend="details.categories">categories</link> click on the
+  To maintain your <link linkend="details.categories">categories</link>, click the
   <guiicon><inlinemediaobject><imageobject><imagedata fileref="categories_view.png"
-  format="PNG"/></imageobject></inlinemediaobject></guiicon> categories icon in the
-  view selector.
+  format="PNG"/></imageobject></inlinemediaobject></guiicon> Categories icon in the
+  View Selector.
 </para>
 
 <para>
@@ -603,26 +603,27 @@
 
 <sect1 id="firsttime.tags"><title>Tags</title>
 <para>
-  To maintain your <link linkend="details.tags">tags</link> click on the <guiicon>
+  To maintain your <link linkend="details.tags">tags</link>, click the <guiicon>
   <inlinemediaobject><imageobject><imagedata fileref="mail-tagged.png" format="PNG"/>
-  </imageobject></inlinemediaobject></guiicon> tags icon in the view selector.
+  </imageobject></inlinemediaobject></guiicon> Tags icon in the View Selector.
 </para>
 
 <para>
-  A full description of this topic can be found in the <link
+  A more detaioled description of this topic can be found in the <link
   linkend="details.tags">Tags</link> section.
 </para>
 </sect1>
 
 <sect1 id="firsttime.payees"><title>Payees</title>
 <para>
-  To maintain your payees click on the <guiicon><inlinemediaobject>
+  To maintain your <link linkend="details.payees">payees</link>,
+  click the <guiicon><inlinemediaobject>
   <imageobject><imagedata fileref="payees_view.png" format="PNG"/></imageobject>
-  </inlinemediaobject></guiicon> payees icon in the view selector.
+  </inlinemediaobject></guiicon> Payees icon in the View Selector.
 </para>
 
 <para>
-  A full description of this topic can be found in the <link
+  A more detailed description of this topic can be found in the <link
   linkend="details.payees">Payees</link> section.
 </para>
 </sect1>
@@ -682,14 +683,14 @@
 
 <para>
   To reconcile an account, first select the account, either from the
-  <guiicon>Accounts</guiicon> View or from the <guiicon>Ledgers</guiicon> View. Then,
-  either click on the <guiicon>Reconcile</guiicon> icon on the Toolbar, if it is
+  <guiicon>Accounts</guiicon> View or in the <guiicon>Ledgers</guiicon> View. Then,
+  either click the <guiicon>Reconcile</guiicon> icon on the Toolbar, if it is
   visible, or select the <menuchoice><guimenu>Account</guimenu>
   <guimenuitem>Reconcile</guimenuitem></menuchoice> menu item.
 </para>
 
 <para>
-  A full description of this topic can be found in the <link
+  A more detailed description of this topic can be found in the <link
   linkend="details.reconcile">Reconciliation</link> section.
 </para>
 </sect1>
@@ -711,7 +712,7 @@
   menu item and enter the folder where you wish the file to be saved. If the folder
   needs mounting first and you have the sufficient privileges then check the
   tick box labeled <guilabel>Mount this folder before backing up</guilabel>
-  and click on <guibutton>OK</guibutton>.
+  and click <guibutton>OK</guibutton>.
 </para>
 
 <para>

@@ -54,13 +54,13 @@
 <para>
   For a newly created data file, the Currencies dialog will show only the currency
   you chose as the default currency.  If you want to use a different currency for a
-  new account, you must first add that currency.  By clicking the
-  <guibutton>Add</guibutton> button, you will be presented with the same list of
-  currencies from which you chose the default currency.  You can either scroll
-  through the list or use the search box at the top to find the currency you wish to
-  use.  Click on that currency, and click <guibutton>OK</guibutton>.  The Currencies
-  dialog will then include that currency in the list displayed, and you can now
-  select that currency when creating a new account.
+  new account, you must first add that currency.  By clicking
+  <guibutton>Add</guibutton>, you will be presented with the same list of currencies
+  from which you chose the default currency.  You can either scroll through the list
+  or use the search box at the top to find the currency you wish to use.  Click that
+  currency, and click <guibutton>OK</guibutton>.  The Currencies dialog will then
+  include that currency in the list displayed, and you can now select that currency
+  when creating a new account.
 </para>
 </sect2>
 
@@ -87,10 +87,10 @@
 
 <para>
   To manually add a currency, bring up the Currencies dialog, as shown above.
-  Right-click on any existing currency and select <guimenuitem>New
+  Right-click any existing currency and select <guimenuitem>New
   currency</guimenuitem> from the <guimenu>Currency Options</guimenu> context menu,
-  or click the <guibutton>New</guibutton> button.  This will bring up the
-  <guilabel>Currency editor</guilabel>.
+  or click <guibutton>New</guibutton>.  This will bring up the <guilabel>Currency
+  editor</guilabel>.
 </para>
 
 <screenshot>

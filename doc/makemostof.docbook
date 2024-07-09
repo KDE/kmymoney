@@ -12,6 +12,18 @@
 </chapterinfo>
 <title>Making the most of &kmymoney;</title>
 
+<note><title>Help improve this Handbook</title>
+  <para>
+    This and the following sections have had no significant updates since the very
+    early versions of &kmymoney;.  While the basics of bookkeeping have not changed
+    over the years, and there is nothing inaccurate or misleading here, there have
+    been requests to update this area.  If you have any specific suggestions or ideas
+    for this, the author would like to hear from you, through one of the routes
+    listed at the <ulink url="https://kmymoney.org/support.html">Support page</ulink>
+    at the <ulink url="https://kmymoney.org/">&kmymoney; web site</ulink>
+  </para>
+</note>
+
 <para>
   While much of &kmymoney; might be obvious to a naive user, and you could go ahead,
   clicking some buttons and filling in some data, after a time, you might decide you
@@ -26,18 +38,6 @@
   but taking the time to assure that your understanding of how things work is the
   same as &kmymoney;'s will almost certainly save you time later.
 </para>
-
-<note><title>Help improve this Handbook</title>
-  <para>
-    This and the following sections have been essentially unchanged since the very
-    early versions of &kmymoney;.  While the basics of bookkeeping have not changed
-    over the years, and there is nothing inaccurate or misleading here, there have
-    been requests to update this area.  If you have any specific suggestions or ideas
-    for this, the author would like to hear from you, through one of the routes
-    listed at the <ulink url="https://kmymoney.org/support.html">Support page</ulink>
-    at the <ulink url="https://kmymoney.org/">&kmymoney; web site</ulink>
-  </para>
-</note>
 
 <sect1 id="makingmostof.basicaccounting"><title>Basic Accounting</title>
 <para>

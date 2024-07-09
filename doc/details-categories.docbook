@@ -34,7 +34,7 @@
   The Categories View provides a summary of all the existing categories in your
   current data file.  Similar to the Accounts View, categories are grouped into
   Income and Expense.  As with the Institutions View and Accounts View, the list of
-  categories can be expanded or collapse by clicking on the arrow to the left of the
+  categories can be expanded or collapse by clicking the arrow to the left of the
   type or name.  As with Asset and Liability Accounts, Categories can be considered
   subcategories, with a parent of another category instead of the top-level Income or
   Expense.
@@ -43,8 +43,8 @@
 <para>
   Similar to the Accounts View, the Categories View displays several columns with
   descriptive and summary information about each category.  As with the Accounts
-  View, you can select which columns are shown by right-clicking on any column
-  heading and selecting or unselecting the checkbox next to the name of the column.
+  View, you can select which columns are shown by right-clicking any column heading
+  and selecting or unselecting the checkbox next to the name of the column.
 </para>
 
 <para>
@@ -102,7 +102,7 @@
 
 <sect1 id="details.categories.edit"><title>Editing a Category</title>
 <para>
-  To edit a category, right-click on a category name in the Category View, and choose
+  To edit a category, right-click a category name in the Category View, and choose
   <guimenuitem>Edit category...</guimenuitem>.  A window appears with the same three
   tabs as the <guilabel>Create a new Category</guilabel> dialog: General, Hierarchy,
   and Tax.  Each tab allows you to edit certain details of the category.
@@ -116,7 +116,7 @@
 
 <para>
   The Hierarchy tab allows you to change the parent of the selected category by
-  clicking on another category which then becomes the parent.  In addition, you can
+  clicking another category which then becomes the parent.  In addition, you can
   drag a category and drop it under its new parent.
 </para>
 
@@ -204,7 +204,7 @@
   category.  When this option is selected &kmymoney; will display that category in a
   tab in the Ledgers View, showing all the transactions for the selected category.
   This allows you to quickly review all the transactions in detail for the selected
-  category.  You can then right-click on any transaction to obtain additional details
+  category.  You can then right-click any transaction to obtain additional details
   about the specific transaction, and can even edit the transaction.
 </para>
 </sect1>

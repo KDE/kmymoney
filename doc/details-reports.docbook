@@ -13,15 +13,15 @@
 <para>
   The Reports View is a tabbed display.  The <guilabel>Reports</guilabel> tab is
   always displayed, and lists all available reports, grouped under the headings
-  listed and described below.  You can click on the <quote>></quote> to expand or
+  listed and described below.  You can click <quote>></quote> to expand or
   collapse the specific reports under each heading.  When you open any report, it is
   displayed in an additional tab, labelled with the name of that report.
 </para>
 
 <para>
   The list of reports is always sorted first by the group name (by number) and then
-  by report name.  Clicking on the <quote>Reports</quote> heading will reverse the
-  sort order.  You can also click on the <quote>Comment</quote> header to sort by the
+  by report name.  Clicking the <quote>Reports</quote> heading will reverse the
+  sort order.  You can also click the <quote>Comment</quote> header to sort by the
   report comment instead of name.  The report's name and comment can be set or edited
   on the <guilabel>General</guilabel> tab of the <link
   linkend="details.reports.config">Report Configuration</link> dialog.
@@ -553,7 +553,7 @@
   same report configuration parameters are used in either case.  You can easily jump
   back and forth between the textual and graphical forms by pressing the
   <guibutton>Chart</guibutton> or <guibutton>Report</guibutton> buttons along the top
-  of the report view.
+  of the Report View.
 </para>
 
 <para>

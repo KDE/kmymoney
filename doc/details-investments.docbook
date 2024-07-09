@@ -120,18 +120,18 @@
   At the top of the list of equities is the <guilabel>Select Account:</guilabel>
   dropdown, where you can select the investment account for which you want to see the
   specific investments.  If you have checked <link
-  linkend="details.settings.general.views">Synchronize account selection of ledger
-  and investment view</link> in the configuration dialog, then if you are looking at
-  an investment account in the Legders View, and then switch to the Investments View,
-  that account will already be selected.
+  linkend="details.settings.general.views">Synchronize account selection of Ledgers
+  View and Investments View</link> in the configuration dialog, then if you are
+  looking at an investment account in the Legders View, and then switch to the
+  Investments View, that account will already be selected.
 </para>
 
 <para>
   Simlar to the Institutions and several other views, the Equities tab displays
   several columns with descriptive and summary information about each equity.  As
   with the Institutions View, you can select which columns are shown by
-  right-clicking on any column heading and selecting or unselecting the checkbox next
-  to the name of the column.
+  right-clicking any column heading and selecting or unselecting the checkbox next to
+  the name of the column.
 </para>
 
 <variablelist>
@@ -196,8 +196,8 @@
 </variablelist>
 
 <para>
-  The order for any of the columns except Name changed by left clicking on the item
-  name in the column header, and dragging it to the left or right.
+  The order for any of the columns except Name can be changed by left clicking the
+  column header, and dragging it to the left or right.
 </para>
 </sect2>
 
@@ -284,8 +284,7 @@
 
 <para>
   As with the Equities tab, the order for any of the columns except Security can
-  changed by left clicking on the item name in the column header, and dragging it to
-  the left or right.
+  changed by left clicking the column header and dragging it to the left or right.
 </para>
 </sect2>
 </sect1>
@@ -547,12 +546,11 @@
 <sect1 id="details.investments.edit"><title>Editing an Investment</title>
 <para>
   The <guilabel>Equities</guilabel> tab of the Investments View lists your current
-  holdings in this Investment account.
-  Right-click on any of the investments to bring up the <guimenu>Investment
-  Options</guimenu> context menu, where you can add, edit, or delete an individual
-  investment from this account. Also, you can update the price of an investments here
-  either manually or via its online source.  In addition, it is possible to close an
-  empty account, or to reopen a closed account.
+  holdings in this Investment account.  Right-click any of the investments to bring
+  up the <guimenu>Investment Options</guimenu> context menu, where you can add, edit,
+  or delete an individual investment from this account. Also, you can update the
+  price of an investments here either manually or via its online source.  In
+  addition, it is possible to close an empty account, or to reopen a closed account.
 </para>
 
 <para>
@@ -562,7 +560,7 @@
 </para>
 
 <para>
-  Right-clicking on an entry in the Securities tab produces a <guilabel>Securites
+  Right-clicking an entry in the Securities tab produces a <guilabel>Securites
   Options</guilabel> conext menu, where you can edit or delete a security.  Actually
   creating a security is done when you create an equity in an Investment account, and
   do not choose to reuse an existing security, as discussed above.

@@ -252,7 +252,7 @@
     <listitem>
       <para>
         Shows transaction details in the <link
-        linkend="details.ledgers">Ledgers</link> view.  With this option turned on,
+        linkend="details.ledgers">Ledgers</link> View.  With this option turned on,
         all lines of the transaction will be shown.  When it is turned off, only one
         line will be shown.
       </para>
@@ -376,7 +376,7 @@
       <guimenu>Account</guimenu><guimenuitem>Open ledger</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para>Displays the ledger view of the selected account.</para>
+      <para>Displays the Ledgers View of the selected account.</para>
     </listitem>
   </varlistentry>
 
@@ -528,7 +528,7 @@
       <guimenu>Category</guimenu><guimenuitem>Open ledger</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para>Displays the ledger view of a category.</para>
+      <para>Displays the Ledgers View of a category.</para>
     </listitem>
   </varlistentry>
 </variablelist>
@@ -658,7 +658,7 @@
     </menuchoice></term>
     <listitem>
       <para>
-        Displays the Payee view and focuses on the payee of the selected transaction.
+        Displays the Payees View and focuses on the payee of the selected transaction.
       </para>
     </listitem>
   </varlistentry>

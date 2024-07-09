@@ -60,15 +60,14 @@
   The Accounts View provides a summary of all the accounts. It is similar to the
   Institutions View, except accounts are grouped by the type of account.  The list of
   accounts under any account type (or under the parent acccount for any subaccounts)
-  can be expanded or collapsed by clicking on the arrow to the left of the type or
-  name.
+  can be expanded or collapsed by clicking the arrow to the left of the type or name.
 </para>
 
 <para>
   Similar to the Institutions View, the Accounts View displays several columns with
   descriptive and summary information about each account.  As with the Institutions
-  View, you can select which columns are shown by right-clicking on any column
-  heading and selecting or unselecting the checkbox next to the name of the column.
+  View, you can select which columns are shown by right-clicking any column heading
+  and selecting or unselecting the checkbox next to the name of the column.
 </para>
 
 <para>
@@ -184,11 +183,11 @@
   To create a new account, you can either select the <menuchoice>
   <guimenu>Account</guimenu><guimenuitem>New account...</guimenuitem></menuchoice>
   menu item or choose the <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="newacct.png" format="PNG"/></imageobject></inlinemediaobject>
-  </guiicon> new account icon from the toolbar. You can also create an account
-  from the Accounts View; click on the Accounts icon in the view selector and
-  then right-click on the Asset or Liability tree icon and select <guimenuitem>New
-  account...</guimenuitem> from the popup menu.
+  fileref="newacct.png" format="PNG"/></imageobject></inlinemediaobject> </guiicon>
+  new account icon from the toolbar. You can also create an account from the Accounts
+  View; click the Accounts icon in the View Selector and then right-click the Asset
+  or Liability tree icon and select <guimenuitem>New account...</guimenuitem> from
+  the popup menu.
 </para>
 
 <sect2 id="details.accounts.create.institution"><title>The Institution (Bank) name</title>
@@ -207,11 +206,10 @@
 <para>
   The first step involves selecting an institution for the account.  If this is an
   account for an institution you have already created, you can select the institution
-  from the dropdown list.  If you want to create a new institution, click on the
-  <guibutton>New Institution</guibutton> button.  This will bring up the New
-  Institution Dialog, as described in the previous section.  If this is not a bank
-  account, or if you do not want to use online banking, you do not need to specify an
-  institution.
+  from the dropdown list.  If you want to create a new institution, click
+  <guibutton>New Institution</guibutton>.  This will bring up the New Institution
+  Dialog, as described in the previous section.  If this is not a bank account, or if
+  you do not want to use online banking, you do not need to specify an institution.
 </para>
 
 <para>
@@ -227,7 +225,7 @@
 </para>
 
 <para>
-  To proceed to the next step click on <guibutton>Next</guibutton>.
+  To proceed to the next step click <guibutton>Next</guibutton>.
 </para>
 </sect2>
 
@@ -376,7 +374,7 @@
 </para>
 
 <para>
-  To proceed to the next step click on <guibutton>Next</guibutton>.
+  To proceed to the next step click <guibutton>Next</guibutton>.
 </para>
 </sect2>
 
@@ -405,7 +403,7 @@
 </para>
 
 <para>
-  Click on <guibutton>Next</guibutton> to continue.
+  Click <guibutton>Next</guibutton> to continue.
 </para>
 </sect2>
 
@@ -773,16 +771,15 @@
 
 <sect1 id="details.accounts.viewing"><title>Opening / viewing accounts</title>
 <para>
-  To open an account in the <link linkend="details.ledgers.view">Ledgers View</link>,
-  you can either click on the link to the account in the Home View, or you can click
-  on the <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="ledgers_view.png"
-  format="PNG"/></imageobject></inlinemediaobject></guiicon> ledgers icon in the view
-  selector.  If the account is not already displayed there, then click on the
-  <quote>+</quote> in the right-most tab and select the account in the dropdown box
-  which appears.  Alternatively, in the Accounts View or the Institutionss View,
-  either double-click the account name or right-click and select <guimenuitem>Open
-  ledger</guimenuitem>.
+  To display an account in the <link linkend="details.ledgers.view">Ledgers
+  View</link>, you can either click the link to the account in the Home View, or you
+  can click the <guiicon> <inlinemediaobject> <imageobject> <imagedata
+  fileref="ledgers_view.png" format="PNG"/> </imageobject> </inlinemediaobject>
+  </guiicon> ledgers icon in the View Selector.  If the account is not already
+  displayed there, then click <quote>+</quote> in the right-most tab and select the
+  account in the dropdown box which appears.  Alternatively, in the Accounts View or
+  the Institutionss View, either double-click the account name or right-click and
+  select <guimenuitem>Open ledger</guimenuitem>.
 </para>
 </sect1>
 
@@ -1035,8 +1032,8 @@
 
 <sect1 id="details.accounts.options"><title>Account Options</title>
 <para>
-  Right clicking on an Account in either the Institiutions View or the Accounts View
-  will bring up the Accounts Options.  You can also just click the
+  Right clicking an Account in either the Institiutions View or the Accounts View
+  will bring up the Accounts Options.  You can also just select the
   <guimenu>Account</guimenu> menu.
 </para>
 
@@ -1121,7 +1118,7 @@
 
 <para>
   Selecting <guimenuitem>New investment...</guimenuitem>, which only appears on the
-  context menu (by right-clicking an account in the Investments View or Accounts
+  context menu when you right-click an account in the Investments View or Accounts
   View, brings up the <link linkend="details.investments.newinvestmentwizard">New
   Investment Wizard</link>.
 </para>

@@ -51,7 +51,7 @@
 
 <para>
   To reconcile an account, select the account in the Accounts or Institutions Veiw,
-  or display it in the register, then click on the
+  or display it in the register, then click the
   <guiicon><inlinemediaobject><imageobject><imagedata fileref="reconcile.png"
   format="PNG"/></imageobject></inlinemediaobject></guiicon> reconcile icon, select
   the <menuchoice><guimenu>Account</guimenu> <guimenuitem>Reconcile...</guimenuitem>
@@ -61,7 +61,7 @@
 
 <para>
   This will open the reconciliation wizard.  The first page of the wizard briefly
-  describes the process you will follow.  Click on <guibutton>Next</guibutton> to
+  describes the process you will follow.  Click <guibutton>Next</guibutton> to
   actually start the wizard.
 </para>
 
@@ -103,11 +103,10 @@
 
 <para>
   The statement date, starting balance, and ending balance can be found in your
-  statement.  Make sure that the figures match and click on the
-  <guibutton>Next</guibutton> button.  If the starting balanc does not match, see the
-  previous paragraphs.  If the statement date or ending balance does not match then
-  enter the figures as listed on your statement and click on the
-  <guibutton>Next</guibutton> button.
+  statement.  Make sure that the figures match and click <guibutton>Next</guibutton>.
+  If the starting balanc does not match, see the previous paragraphs.  If the
+  statement date or ending balance does not match then enter the figures as listed on
+  your statement and click <guibutton>Next</guibutton>.
 </para>
 
 <screenshot>
@@ -154,7 +153,7 @@
 </screenshot>
 
 <para>
-  Click on <guibutton>Continue</guibutton> to start matching your statement to what
+  Click <guibutton>Continue</guibutton> to start matching your statement to what
   you have entered.  Note that this completes the Reconciliation Wizard, but not the
   process of reconciliation.  At this point, &kmymoney; displays the Ledgers View for
   this account, but it changes the ledger display in two ways.  First, it only shows
@@ -170,11 +169,10 @@
 <para>
   During the reconciliation, any transaction can be edited to make it match the
   statement, and new transactions can be created as usual.  To mark a transaction as
-  cleared, click on the <guilabel>C</guilabel> column of the transaction in the
-  ledger.  You can also 
-  select the <menuchoice><guimenu>Transactions</guimenu></menuchoice> menu
-  or right-click on the transaction to bring up the "Transaction options" contxt menu,
-  and then select <menuchoice> <shortcut> <keycombo> <keysym>&Ctrl;</keysym>
+  cleared, click the <guilabel>C</guilabel> column of the transaction in the ledger.
+  You can also select the <menuchoice><guimenu>Transactions</guimenu></menuchoice>
+  menu or right-click the transaction to bring up the "Transaction options" contxt
+  menu, and then select <menuchoice> <shortcut> <keycombo> <keysym>&Ctrl;</keysym>
   <keysym>&Alt;</keysym> <keysym>&Space;</keysym> </keycombo></shortcut>
   <guisubmenu>Mark transaction as...</guisubmenu> <guimenuitem>Cleared</guimenuitem>
   </menuchoice>; A transaction is considered cleared when it matches the transaction
@@ -212,13 +210,13 @@
 <sect3 id="details.reconcile.finish"><title>Finishing Reconciliation</title>
 <para>
   When the difference between the statement and the cleared balance is zero, then the
-  account is reconciled and you can click the <guibutton>Finish</guibutton> button.
-  When you do this, &kmymoney; takes all the transactions which have been marked as
-  cleared (only those with a date before the statement date) and marks them as
-  reconciled, and the value in the <guilabel>C</guilabel> column changes from
-  <quote>C</quote> to <quote>R</quote>.  In addition, it saves the changes and
-  records that the account has been reconciled. (You still need to save the file to
-  permanently save all the changes.)
+  account is reconciled and you can click <guibutton>Finish</guibutton>.  When you do
+  this, &kmymoney; takes all the transactions which have been marked as cleared (only
+  those with a date before the statement date) and marks them as reconciled, and the
+  value in the <guilabel>C</guilabel> column changes from <quote>C</quote> to
+  <quote>R</quote>.  In addition, it saves the changes and records that the account
+  has been reconciled. (You still need to save the file to permanently save all the
+  changes.)
 </para>
 </sect3>
 
@@ -247,10 +245,10 @@
 <para>
   If you're having trouble completing the reconciliation, or you need to gather
   additional information before you can complete the process, you can postpone the
-  process to a later time by clicking on the <guibutton>Postpone</guibutton> button.
-  When you do this, &kmymoney; remembers the values you entered when you started the
-  wizard, it does not mark cleared transactions as reconciled, and it returns the
-  ledger to its normal view.  If you exit &kmymoney; before clicking either
+  process to a later time by clicking <guibutton>Postpone</guibutton>.  When you do
+  this, &kmymoney; remembers the values you entered when you started the wizard, it
+  does not mark cleared transactions as reconciled, and it returns the ledger to its
+  normal view.  If you exit &kmymoney; before clicking either
   <guibutton>Finish</guibutton> or <guibutton>Postpone</guibutton>, it has the same
   effect as clicking <guibutton>Postpone</guibutton>.  Any edits you have made, such
   as marking transactions cleared or entering new transactions, are not touched, and
@@ -259,8 +257,8 @@
 </para>
 
 <para>
-  If you do click <guilabel>Postpone</guilabel>, When you run the reconciliation
-  wizard on this account the next time, &kmymoney; remembers the values you entered
+  If you do click <guilabel>Postpone</guilabel>, the next time you run the
+  reconciliation wizard on this account, &kmymoney; remembers the values you entered
   when you previously ran the wizard, and you will be able to change them, if
   necessary.  In this case, the initial screen of the wizard is different, to remind
   you of this.

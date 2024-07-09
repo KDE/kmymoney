@@ -29,9 +29,9 @@
 <para>
   After the search has completed, the results will be displayed under the
   <guilabel>Result</guilabel> tab.  Below the list of results, &kmymoney; shows the
-  number of transactions that met the search criteria.  Double-clicking on an
-  individual transaction in the result list will bring up the appropriate ledger with
-  that transaction selected.
+  number of transactions that met the search criteria.  Double-clicking an individual
+  transaction in the result list will bring up the appropriate ledger with that
+  transaction selected.
 </para>
 
 <para>
@@ -129,12 +129,11 @@
 
 <para>
   Accounts are displayed in a tree format.  Accounts that are marked for search are
-  indicated with a checkbox.  If you click the <guibutton>All</guibutton> button, all
-  accounts are marked for searching.  If you click the <guibutton>None</guibutton>
-  button, no accounts will be marked for searching.  Individual accounts can be
-  marked or unmarked by clicking on the box next to the account name using the &LMB;.
-  A complete hierarchy of accounts can be marked or unmarked by clicking on the box
-  using the &RMB;.
+  indicated with a checkbox.  If you click <guibutton>All</guibutton>, all accounts
+  are marked for searching.  If you click <guibutton>None</guibutton>.  no accounts
+  will be marked for searching.  Individual accounts can be marked or unmarked by
+  clicking the box next to the account name using the &LMB;.  A complete hierarchy
+  of accounts can be marked or unmarked by clicking the box using the &RMB;.
 </para>
 </sect2>
 
@@ -162,7 +161,7 @@
   can be entered manually, and clicking the down arrow at the right of the field will
   bring up a typical calendar widget to select the date.  The controls will prevent
   you from entering non-existing dates.  Date values can also be changed by clicking
-  on the up and down arrows while the cursor in within a particular part of a date.
+  the up and down arrows while the cursor in within a particular part of a date.
 </para>
 </sect2>
 
@@ -185,7 +184,7 @@
 </para>
 
 <para>
-  You can search for an exact amount or for a range of amounts.  If you click on the
+  You can search for an exact amount or for a range of amounts.  If you click the
   calculator icon, a small on-screen calculator will pop up to assist you in entering
   a value.
 </para>
@@ -210,19 +209,18 @@
 
 <para>
   Categories are displayed in a tree format, similar to Accounts.  Categories that
-  are marked for search are indicated with a checkbox. If you click the
-  <guibutton>All</guibutton> button, all categories are marked for searching.  If you
-  click the <guibutton>Income</guibutton> button, all income categories will be
-  marked and all expense categories will be unmarked. If you click the
-  <guibutton>Expense</guibutton> button, all income categories will be unmarked and
-  all expense categories will be marked.  If you click the
-  <guibutton>None</guibutton> button, no categories will be marked for searching.
+  are marked for search are indicated with a checkbox. If you click
+  <guibutton>All</guibutton>, all categories are marked for searching.  If you click
+  <guibutton>Income</guibutton>, all income categories will be marked and all expense
+  categories will be unmarked.  If you click <guibutton>Expense</guibutton>, all
+  income categories will be unmarked and all expense categories will be marked.  If
+  you click <guibutton>None</guibutton>, no categories will be marked for searching.
 </para>
 
 <para>
-  Individual categories can be marked or unmarked by clicking on the checkbox next to
+  Individual categories can be marked or unmarked by clicking the checkbox next to
   the category name using the &LMB;.  A complete hierarchy of categories can be
-  marked or unmarked by clicking on the box using the &RMB;.
+  marked or unmarked by clicking the box using the &RMB;.
 </para>
 </sect2>
 
@@ -244,11 +242,11 @@
 </para>
 
 <para>
-  Tags that are marked for search are indicated with a checked box.  If you click the
-  <guibutton>Select all</guibutton> button, all tags are marked for searching. If you
-  click the <guibutton>Select none</guibutton> button, no tags will be marked for
-  searching.  Individual tags can be marked or unmarked by clicking on the checkbox
-  next to the payee name.
+  Tags that are marked for search are indicated with a checked box.  If you click
+  <guibutton>Select all</guibutton>, all tags are marked for searching. If you click
+  <guibutton>Select none</guibutton>, no tags will be marked for searching.
+  Individual tags can be marked or unmarked by clicking the checkbox next to the
+  payee name.
 </para>
 
 <para>
@@ -275,11 +273,11 @@
 </para>
 
 <para>
-  Payees that are marked for search are indicated with a box.  If you click the
-  <guibutton>Select all</guibutton> button, all payees are marked for searching. If
-  you click the <guibutton>Select none</guibutton> button, no payees will be marked
-  for searching. Individual payees can be marked or unmarked by clicking on the box
-  next to the payee name.
+  Payees that are marked for search are indicated with a box.  If you click
+  <guibutton>Select all</guibutton>, all payees are marked for searching.  If you
+  click <guibutton>Select none</guibutton>, no payees will be marked for searching.
+  Individual payees can be marked or unmarked by clicking the box next to the payee
+  name.
 </para>
 
 <para>
@@ -347,7 +345,7 @@
 </para>
 
 <para>
-  Double-clicking on a transaction will display the corresponding account ledger with
+  Double-clicking a transaction will display the corresponding account ledger with
   that transaction selected.
 </para>
 </sect1>

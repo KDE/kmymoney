@@ -56,8 +56,8 @@
 <sect1 id="details.budgets.create" ><title>Your budgets</title>
 <para>
   You can access your budgets in the <guilabel>Budgets View</guilabel>, which you can
-  display by clicking the appropriate icon in the navigation pane at the left hand
-  side of your &kmymoney; window.
+  display by clicking the appropriate icon in the View Selector at the left hand side
+  of your &kmymoney; window.
 </para>
 
 <para>
@@ -91,7 +91,7 @@
         Fiscal year of the Budget.  Note that the starting month and day of the
         fiscal year can be specified in the <link
         linkend="details.settings.general.global">Configure &kmymoney; dialog.</link>
-        To change the fiscal year of a Budget, double click on the year.
+        To change the fiscal year of a Budget, double click the year.
       </para>
     </listitem>
   </varlistentry>
@@ -99,7 +99,7 @@
 
 <para>
   Values from the selected Budget are displayed to the right.  To select a different
-  Budget you can click on the Budget in the list on the left.  Alternatively, when
+  Budget you can click the budget name in the list on the left.  Alternatively, when
   the list has focus, you can select a different Budget using the &Up; and &Down;
   keys.  If you have made changes to a Budget and then select a different budget,
   &kmymoney; will ask you whether you want to save or discard the changes.
@@ -125,7 +125,7 @@
     <listitem>
       <para>
         Edit the name of the selected Budget.  You can also edit the name of a Budget
-        by double-clicking on the name of a Budget in the list.
+        by double-clickin the name of a Budget in the list.
       </para>
     </listitem>
   </varlistentry>
@@ -140,7 +140,7 @@
 
 <para>
   Additional options are available on the <guilabel>Budget Options</guilabel> context
-  menu accessed by right-clicking on a Budget.
+  menu accessed by right-clicking a Budget.
 </para>
 
 <variablelist>
@@ -199,11 +199,11 @@
 
 <para>
   Aside from the Name column, all other columns may be shown or hidden by
-  right-clicking on any column header, and checking or unchecking the checkbox next
-  to the column name.  For more details about the meaning of each column, see the
-  <link linkend="details.categories.view">Categories Veiw</link> section.  Only the
-  columns specifically relevant to Budgets are listed below, but all Category columns
-  may be displayed.
+  right-clicking any column header, and checking or unchecking the checkbox next to
+  the column name.  For more details about the meaning of each column, see the <link
+  linkend="details.categories.view">Categories Veiw</link> section.  Only the columns
+  specifically relevant to Budgets are listed below, but all Category columns may be
+  displayed.
 </para>
 
 <variablelist>

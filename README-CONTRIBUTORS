@@ -1,90 +1,78 @@
-Latest update - 20240414
+Latest update - 20240708
 
-This Handbook-5.2 branch is specifically for preparing the Handbook for the
-upcoming (but not yet scheduled) release of KMyMoney 5.2 from master branch.
-Use of a separate branch rather than working in master branch is intended to
-save the translators from extra work, as there are likely to be multiple
-edits to some sections, as well as reorganizations of the material.
+This Handbook-5.2 branch is specifically for preparing the Handbook for the upcoming
+(but not yet scheduled) release of KMyMoney 5.2 from master branch.  Use of a
+separate branch rather than working in master branch is intended to save the
+translators from extra work, as there are likely to be multiple edits to some
+sections, as well as reorganizations of the material.
 
-If you are interested in contributing, please contact
-ostroffjh@users.sourceforge.net so multiple people are not working on the
-same chapters at the same time.
+If you are interested in contributing, please contact ostroffjh@users.sourceforge.net
+so multiple people are not working on the same chapters at the same time.
 
 This branch should have changes ONLY in the doc subdirectory.  Master is merged into
 this branch on occasion to keep this true.
 
-Update of screenshots will be left for later in the process, but
-descriptions of what changes or new screenshots are needed can/should be
-placed below the existing or target location.
+Update of screenshots will be left for later in the process, but descriptions of what
+changes or new screenshots are needed can/should be placed below the existing or
+target location.
 
-I have removed from the handbook the list used for tracking which chapters were
-updated for the 4 -> 5 changes in the What's New section.  It is no longer useful or
-needed as this version will be released with the release of 5.2, ane really should be
-complete by then.
+I have removed from the What's New chapter the list used for tracking which chapters
+were updated for the 4 -> 5 changes.  It is no longer useful or needed as this
+version will be released with the release of 5.2, and should really be complete by
+then.
 
 All chapters have had at least one pass, with the following exceptions:
 
-<!ENTITY makemostof SYSTEM "makemostof.docbook">
-  I think we need a complete replacement of this chapter.
-  
-<!ENTITY details-impexp-csv SYSTEM "details-impexp-csv.docbook">
-  Really needs lots more work.  I'd love to add a discussion of what parts of import
-  are file type specific, and what things are done after an import is processed into
-  a common format for final processing.
+I have added a note to the MakeMostOf chapter requesting suggestions for improvement.
+I would really like to totally replace it, but have no good ideas, so it stays mostly
+as is for now.
 
-<!ENTITY details-impexp-woob SYSTEM "details-impexp-woob.docbook">
-  Needs reveiw by Woob user.
+CSV import/export chapter probably needs lots more work.
 
-<!ENTITY details-budgets SYSTEM "details-budgets.docbook">
-  Need to add screenshots
+For import in general, I'd love to add a discussion of what parts are file type
+  specific, and what things are done after an import is processed into a common
+  format for final processing.
 
-<!ENTITY details-widgets SYSTEM "details-widgets.docbook">
-  Needs to be reviewed by Thomas
+The Woob import chapter needs reveiw by Woob user.
 
-<!-- not directly included in docbook   "man-kmymoney.1.docbook" but should
-     still be reviewed for accuracy -->
+The Budgets chapter needs additional screenshots.
+
+The Widgets chapter needs to be reviewed by Thomas
+
+The man page, while not directly included in the docbook, still be reviewed for
+accuracy.
 
 ----------------
 
-Items which need to be addressed, but so far not sure where (or more likely in
-multiple places.
+Items which need to be addressed, but so far not sure where (or more likely in multiple places)
 
-- Some author entities seem NOT to be in the current contributor.entities, although
-  they had supposedly been added to svn quite a while ago.  Need to confirm all, and
-  re-add any which are not currently present.
+- Some author entities seem NOT to be in the current contributor.entities, although they had
+  supposedly been added to svn quite a while ago.  Need to confirm all, and re-add any which are not
+  currently present.
 
-- Need to determine what to do about email address for deceased contributor.
+- In Institutuions and Accounts Views, balance is in currency of the account, total value is in base
+  currency.  Need to confirm, and see how/if this affects roll-up of values in various
+  displays/views and reports.
 
-- Need consistency in capitalization of Xxx View.  What about View Selector?
-
-- In Institutuions and Accounts Views, balance is in currency of the account, total
-  value is in base currency.  Need to confirm, and see how/if this affects roll-up of
-  values in various displays/views and reports.
-
-- In Categories View, Balance and Total Value - which get rolled up under what
-  circumstances?
+- In Categories View, Balance and Total Value - which get rolled up under what circumstances?
 
 - I'd really like to avoid use of the word account when talking about tags.
 
-- most view selectors are "all of your..." why are Payees different?  Also need to
-  use payee/payor earlier.  The definition should not be in this description.
-
-- Add a section on platform specific known issues, and reference it in the makemost
-  of section.
+- Add a section on platform specific issues, and reference it in the makemost of section.  (Do we
+  want to summarize "known issues" on the web site to stop duplicate reports?  could include
+  pointers to bugs, invent issues, discuss topics, and such.)
 
 - Need an early mention of region/country differences. VAT, for example.
 
-- Firstuse says KMM keeps all your data in a file.  Need to add note about where else
-  any info id kept (.local/.config for settings, rc file for checkprinting, ... and
-  others?)  Also not sure where to mention that sql storage is treated as another
-  type of file.
+- Firstuse says KMM keeps all your data in a file.  Need to add note about where else any info id
+  kept (.local/.config for settings, rc file for checkprinting, ... and others?)  Also not sure
+  where to mention that sql storage is treated as another type of file.
 
-- Where are config files located?  Handbook currently says $KDEHOME/share/config, but
-  I find it $KDEHOME/kmymoney where $KDEHOME is ~/.config) and other stuff in
-  ~/.local/share/kmymoney.
+- Where are config files located?  Handbook currently says $KDEHOME/share/.config, but I find it
+  $KDEHOME/kmymoney where $KDEHOME is ~/.config) and other stuff in ~/.local/share/kmymoney.
 
-- is there a "man file" equivalent on Mac and Windows? (referenced in Launching
-  section of Firsttime.
+- is there a "man file" equivalent on Mac and Windows? (referenced in Launching section of
+  Firsttime.
 
 - running 'kmymoney path-to-file' says can import a gnucash file.  Import or open
   into kmm format?
@@ -98,38 +86,45 @@ multiple places.
 
 - In Accounts View, the type of "Favorite" is "Asset" instead of "Favorite" or blank.
 
-- Be consistent: click something or click on something?
+- I decided to use "click" and not "click on" but the style sugggestions I read suggest that "click"
+  may not be best.  I know we don't have to worry about "tap" as we don't have a mobile version, but
+  there are touchpad laptops and screen readers to consider.  I'll leave "click" for now, but will
+  revisit and consider "select."  There is also a question of whether you need to specify the type
+  of object being selected; I have delete explicit "button" references, but not "icon," and I'm
+  still undecided about "link."
 
-- we still have the issue that you cannot edit a loan account, only the schedule
-  which was created for paying the loan?  https://bugs.kde.org/show_bug.cgi?id=386186
-  Note some items can be updated (FIXME - need to confirm all updated - drag/drop for
-  hierarchy, and name and soemthing else in existing wizard.)
+- We still have the issue that you cannot edit a loan account, only the schedule which was created
+  for paying the loan (see https://bugs.kde.org/show_bug.cgi?id=386186).  Note some items can be
+  updated (FIXME - need to confirm all updated - drag/drop for hierarchy, and name and something
+  else in existing wizard.)
 
 - Confirm wording of VAT percentage in Edit Account section.
 
-- TMTOWTDI: right-click here, click there.  Do we put multiple ways in lots of
-  places, or just a first description and then single way in most descriptions?
+- TMTOWTDI: right-click here, click there.  Do we put multiple ways in lots of places, or just a
+  first description and then single way in most descriptions?
 
 - confirm which import methods are or are not able to import tags.
 
-- do we want to be consistent about whether descriptions are above/below/or mixed in
-  relation to the screenshot they describe?
+- Should we want be consistent about whether descriptions are above/below/or mixed in relation to
+  the screenshot they describe?
 
-- in Tabbed sections, the sect titles are sometimes just the tab title, but sometimes
-  more descriptive (see Payees Details)  Do we want this to be consistent?
+- in Tabbed sections, the sect titles are sometimes just the tab title, but sometimes more
+  descriptive (see Payees Details) Do we want this to and can it be consistent?
 
-- Can you really not match two non-imported transactions?  If so, then the date
-  always comes from the imported transaction.
- --
+- Can you really not match two non-imported transactions?  If so, then the date always comes from
+  the imported transaction.
 
-- online quote page parser, date field order.  Did we recently have a case where it
-  needed to be altered due to field separators in the date?  It shouldn't, so am I
-  mis-remembering, or was there a problem?
+- online quote page parser, date field order.  Did we recently have a case where it needed to be
+  altered due to field separators in the date?  It shouldn't, so am I mis-remembering, or was there
+  a problem?
+
+- How much of the online price retrieval needs to be re-written due to moving that funcionality to
+  libalkimia?
 
 - Price Editor dialog first column is labelled Commodity, but in New price entry, it
   is called Security.  Shouldn't this be consistent?
 
-- what are cash-flow related transactions?  How is the term defined?
+- what are cash-flow related transactions?  How (and where) is the term defined?
 
 - CSV importer wizard, Separators page, for three dropdowns at the bottom, the labels
   to the left of them are not all aligned the same.  The top seems to be centered in

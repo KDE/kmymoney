@@ -25,7 +25,7 @@
 <para>
   On the left of the <guilabel>Configure</guilabel> or settings dialog is a list of
   icons and labels, each representing a particular area of the program.  When you
-  click on one of those icons, the right part of the dialog will display controls for
+  click one of those icons, the right part of the dialog will display controls for
   configuring that area of the program, often divided into several tabs.
 </para>
 
@@ -173,16 +173,16 @@
   <varlistentry>
     <term>
       <guilabel>
-        Synchronize account selection of ledger and investment view
+        Synchronize account selection of Ledgers View and Investments View
       </guilabel>
     </term>
     <listitem>
       <para>
-        If this option is selected, the accounts displayed in the Ledger View and
-        Investment View will be synchronized, meaning if you change the account
+        If this option is selected, the accounts displayed in the Ledgers View and
+        Investments View will be synchronized, meaning if you change the account
         displayed in one of the views, and then switch to the other view, the
         information for the same account will be displayed.  This increases the
-        efficiency of navigating between these 2 tab views.  If it is not selected,
+        efficiency of navigating between these 2 views.  If it is not selected,
         selecting either of those views will show the same account previously
         selected in that view, regardless of the account selected in the other view.
       </para>
@@ -242,7 +242,7 @@
     <listitem>
       <para>
         Checking the <guilabel>Do not show finished schedules</guilabel> box hide all
-        finished schedules from appearing in the Scheduled transaction View.
+        finished schedules from appearing in the Scheduled transactions View.
       </para>
     </listitem>
   </varlistentry>
@@ -252,7 +252,7 @@
     <listitem>
       <para>
         Transactions prior to the date in the <guilabel>Do not show transaction prior
-        to</guilabel> field will not be displayed in the Ledger View.  This can be
+        to</guilabel> field will not be displayed in the Ledgers View.  This can be
         useful if your data includes many years of transactions; setting this to one
         or two years ago hides older transactions.
       </para>
@@ -266,7 +266,7 @@
       <para>
         Checking the <guilabel>Do not show reconciled transactions</guilabel> box
         will filter transactions by reconciliation state.  Transactions that are
-        marked as <emphasis>Reconciled</emphasis> will not be shown in the Ledger
+        marked as <emphasis>Reconciled</emphasis> will not be shown in the Ledgers
         View.
       </para>
     </listitem>
@@ -301,8 +301,8 @@
       <para>
         For any logging to take place, specify the path to the directory where logs
         will be created in the <guilabel>Log path</guilabel> field.  You can also
-        click the <guibutton>...</guibutton> button to the right of the field, and use
-        the file chooser dialog to navigate to the chosen directory.
+        click <guibutton>...</guibutton> to the right of the field, and use the file
+        chooser dialog to navigate to the chosen directory.
       </para>
 
       <para>
@@ -574,7 +574,7 @@
 <sect1 id="details.settings.register"><title>Ledger</title>
 <para>
    The settings and options in this section allow for the modification of the
-   transaction register displayed in the Ledger View.
+   transaction register displayed in the Ledgers View.
 </para>
 
 <sect2 id="details.settings.register.display"><title>Display tab</title>
@@ -584,7 +584,7 @@
     <listitem>
       <para>
         Selecting this option displays grid lines in the transaction register or
-        Ledger View.  This is an additional viewing option that may make it easier to
+        Ledgers View.  This is an additional viewing option that may make it easier to
         visualize separate transactions and their component parts.
       </para>
     </listitem>
@@ -608,7 +608,7 @@
     <term><guilabel>Display overdue schedules with planned date</guilabel></term>
     <listitem>
       <para>
-        Scheduled transactions with future dates are shown in the Ledger View for the
+        Scheduled transactions with future dates are shown in the Ledgers View for the
         relevant account.  When the date passes, and a scheduled transaction becomes
         overdue, it is no longer shown in the ledger, unless this option is selected.
       </para>
@@ -690,14 +690,14 @@
 <sect2 id="details.settings.register.sorting"><title>Sorting tab</title>
 <para>
   These three sections allow you to set the default sort order of transactions in the
-  Ledger View.  In all cases, the list on the right shows the fields which have been
+  Ledgers View.  In all cases, the list on the right shows the fields which have been
   selected as part of the sort order for that view, and the list on the left shows
   all the fields available for sorting whic have not yet been chosen.  To sort on an
   item, select it (single mouse click) and click the right arrow between the two
   lists.  You can adjust the relative order of the fields by selecting one and
   adjusting its position in the list using the up and down arrows to the right of the
   list.  You can switch between ascending and descending sort for any item by
-  double-clicking on it.
+  double-clicking it.
 </para>
 
 <para>
@@ -709,15 +709,15 @@
 
 <sect3 id="details.settings.register.sorting.normal"><title>Normal view subtab</title>
 <para>
-  This tab controls the default sort order of the regular Ledger View.
+  This tab controls the default sort order of the regular Ledgers View.
 </para>
 </sect3>
 
 <sect3 id="details.settings.register.sorting.reconciliation"><title>Reconciliation view subtab</title>
 <para>
-  This tab controls the default sort order of the ledger while in the
-  Reconciliation view.  This is the display of transactions shown during the
-  process of <link linkend="details.reconcile">Reconciliation</link>.
+  This tab controls the default sort order of the ledger while in the Reconciliation
+  View.  This is the display of transactions shown during the process of <link
+  linkend="details.reconcile">Reconciliation</link>.
 </para>
 </sect3>
 
@@ -846,7 +846,7 @@
             less than</guilabel>, and can range from 0 to 100%.  If the percentage is
             0, all previous transactions for the payee and account will be displayed,
             and you can select one of those transactions to use for autofill by
-            clicking on it.
+            clicking it.
           </para>
         </listitem>
 
@@ -956,7 +956,7 @@
       <para>
         Specify how many days in advance should scheduled transactions show up in the
         ledger.  For future scheduled transactions displayed in the ledger, you can
-        enter or skip them by right-clicking on them.
+        enter or skip them by right-clicking them.
       </para>
     </listitem>
   </varlistentry>
@@ -1006,10 +1006,10 @@
 
 <para>
   To customize colors check the <guilabel>Custom colors</guilabel> checkbox.  You can
-  then modify any of the colors by clicking on the color button, which will open
-  color select palette.  This will provide unlimited options in color selection.  You
-  can select a defined basic color, pick a color by clicking anywhere on the
-  displayed color palette, input an &HTML; defined color, specify values for Hue,
+  then modify any of the colors by clicking the color button, which will open color
+  select palette.  This will provide unlimited options in color selection.  You can
+  select a defined basic color, pick a color by clicking anywhere on the displayed
+  color palette, input an &HTML; defined color, or specify values for Hue,
   Saturation, Value, Red, Green, and Blue.
 </para>
 </sect1>
@@ -1094,9 +1094,8 @@
   the left of the name of the plugin name and icon.  In addition, at the right, there
   is an <guibutton>information</guibutton> &infoicon; button for each plugin, which
   will show the plugin version and author(s.)  For some plugins, further information
-  on configuring and using it may be found by clicking the
-  <guibutton>configure</guibutton> &configicon; button just to the left of the
-  information button.
+  on configuring and using it may be found by clicking &configicon;
+  <guibutton>configure</guibutton> just to the left of the information button.
 </para>
 
 <para>
@@ -1114,11 +1113,10 @@
   based on the data from a selected transaction, with the layout controlled by an
   &HTML; template.  You need to use a template which is matched to your pre-printed
   checks.  A default, built-in template is provided.  You may also choose a custom
-  template.  To do so, click on the <guibutton>configure</guibutton> &configicon;
-  button to get the <guilabel>Check printing</guilabel> configuration dialog
-  displayed.  At the top you can check the box to use a custom template.  To the
-  right of that is a button which brings up a file chooser, to select an alternate
-  template file.
+  template.  To do so, click &configicon; <guibutton>configure</guibutton> to get the
+  <guilabel>Check printing</guilabel> configuration dialog displayed.  At the top you
+  can check the box to use a custom template.  To the right of that is a button which
+  brings up a file chooser, to select an alternate template file.
 </para>
 
 <para>
@@ -1209,7 +1207,7 @@
 </sect3>
 </sect2>
 
-<sect2 id="details.settings.plugins.forecast"><title>Forecast view</title>
+<sect2 id="details.settings.plugins.forecast"><title>Forecast View</title>
 <para>
   This is described in the <link linkend="details.forecast.configure">Configuring the
   Forecast</link> section of the <link linkend="details.forecast">Forecast

@@ -47,18 +47,18 @@
   the tag.  The <guilabel>Details</guilabel> tab includes a user-selectable color, as
   well as Notes, which are not used elsewhere.  Note that if you change the color,
   which is used in the symbol displayed before the tag name in any associated
-  transactions, you need to click the <guibutton>Update</guibutton> button at the
-  lower right of the Details area for it to be saved.
+  transactions, you need to click <guibutton>Update</guibutton> at the lower right of
+  the Details area for it to be saved.
 </para>
 </sect2>
   
 <sect2><title>Adding a Tag</title>
 <para>
   As with most actions in &kmymoney;, there are multiple ways to create a new tag.
-  First, you can click on the <guiicon><inlinemediaobject><imageobject><imagedata
+  First, you can click the <guiicon><inlinemediaobject><imageobject><imagedata
   fileref="tag-new.svg" format="SVG"/></imageobject></inlinemediaobject></guiicon>
-  new tag icon.  Second, you can right-click on any tag and choose <guimenuitem>New
-  tag...</guimenuitem>. This creates a new tag called <quote>New tag.</quote> See the
+  new tag icon.  Second, you can right-click any tag and choose <guimenuitem>New
+  tag...</guimenuitem>.  This creates a new tag called <quote>New tag.</quote> See the
   next section for how to rename the tag.  Finally, you can add a new tag directly in
   the ledger or within a split transaction by typing the name of the tag in the tag
   field.  &kmymoney; will ask if you want to add this tag and after selecting
@@ -68,20 +68,20 @@
 
 <sect2><title>Renaming a Tag</title>
 <para>
-  To rename a tag, either click on the tag name to select it and click on the
-  <guiicon><inlinemediaobject><imageobject><imagedata fileref="tag-edit.svg"
-  format="SVG"/></imageobject></inlinemediaobject></guiicon> or right-click on the
-  name and then select <guimenuitem>Rename tag</guimenuitem>.  The name then becomes
-  editable. Changing the name will affect the name in all the transactions in which
-  it appears.
+  To rename a tag, either click the tag name to select it and then click <guiicon>
+  <inlinemediaobject> <imageobject> <imagedata fileref="tag-edit.svg"
+  format="SVG"/></imageobject> </inlinemediaobject> </guiicon> Renaname Tag, or
+  right-click the name and then select <guimenuitem>Rename tag</guimenuitem>.  The
+  name then becomes editable.  Changing the name will affect the name in all the
+  transactions in which it appears.
 </para>
 </sect2>
 
 <sect2><title>Deleting a Tag</title>
 <para>
-  To delete a tag, either click on the <guiicon><inlinemediaobject><imageobject>
-  <imagedata fileref="tag-delete.svg" format="SVG"/></imageobject>
-  </inlinemediaobject> </guiicon> delete tag icon or right-click the name and select
+  To delete a tag, either select it and click <guiicon> <inlinemediaobject>
+  <imageobject> <imagedata fileref="tag-delete.svg" format="SVG"/></imageobject>
+  </inlinemediaobject> </guiicon> delete tag or right-click the tag name and select
   <guimenuitem>Delete tag</guimenuitem>.  If the tag has any transactions, you will
   be presented with a dialog that allows you to reassign them to a different tag.
 </para>
@@ -119,12 +119,12 @@
 <para>
   To see a list of the transactions associated with the selected tag, select the
   <guilabel>Transactions</guilabel> tab.  This list is similar to the list of
-  transactions for a Payee.  You can double-click on a transaction, and you will
-  be taken to the ledger view of that transaction for the account in which the
-  transaction has been tagged.
+  transactions for a Payee.  You can double-click a transaction to edit it, or you
+  can right-click the transaction and select <guimenuitem>Go to 'Account
+  name'</guimenuitem> to go to the Ledgers View of that transaction in the account in
+  which the transaction has been tagged.
 </para>
 </sect2>
-
 
 <sect2 id="details.tags.info.details"><title>Tag details</title>
 <para>
@@ -134,9 +134,9 @@
   <itemizedlist>
     <listitem>
       <para>
-        You can select the color used to highlight transactions with which this
-        tag has been associated.  If you click on the color bar, you will get a
-        color chooser dialog.
+        You can select the color used to highlight transactions with which this tag
+        has been associated.  If you click the color bar, you will get a color
+        chooser dialog.
       </para>
     </listitem>
     <listitem>
@@ -154,9 +154,9 @@
     </listitem>
   </itemizedlist>
 <para>
-  When you are done, don't forget to click the <guiicon>Update</guiicon> button,
-  at the lower right of the window, although you will be prompted if you leave
-  the dialog without having done so.
+  When you are done, don't forget to click <guiicon>Update</guiicon>, at the lower
+  right of the window, although you will be prompted if you try to leave the dialog
+  without having done so.
 </para>
 </sect2>
 </sect1>

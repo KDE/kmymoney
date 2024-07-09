@@ -89,8 +89,8 @@
 
 <sect1 id="details.schedules.view"><title>The Schedules View</title>
 <para>
-  Open the Schedules View by clicking on the <guiicon> <inlinemediaobject>
-  <imageobject> <imagedata fileref="schedule_view.png" format="PNG"/></imageobject>
+  Open the Schedules View by clicking the <guiicon> <inlinemediaobject> <imageobject>
+  <imagedata fileref="schedule_view.png" format="PNG"/></imageobject>
   </inlinemediaobject> </guiicon> Scheduled transactions icon in the view selector.
 </para>
 
@@ -112,11 +112,10 @@
 </para>
 	
 <para>
-  To create a new schedule click on the <guibutton>New Schedule...</guibutton>
-  button.  &kmymoney; will display the new schedule dialog, which can be used to
-  create a Deposit, Transfer, or Bill/Withdrawal schedule.  Loan schedules are
-  handled differently, as described in the <link linkend="details.loans">Loans</link>
-  section of this manual.
+  To create a new schedule click <guibutton>New Schedule...</guibutton>.  &kmymoney;
+  will display the new schedule dialog, which can be used to create a Deposit,
+  Transfer, or Bill/Withdrawal schedule.  Loan schedules are handled differently, as
+  described in the <link linkend="details.loans">Loans</link> section of this manual.
 </para>
 </sect1>
 
@@ -227,8 +226,8 @@
 </para>
 
 <para>
-  When you have entered all the necessary information click on
-  <guibutton>OK</guibutton> to continue.
+  When you have entered all the necessary information click <guibutton>OK</guibutton>
+  to continue.
 </para>
 </sect2>
 </sect1>
@@ -268,7 +267,7 @@
 <itemizedlist>
   <listitem>
     <para>
-      Manually, by right-clicking on the entry in the Schedules View and selecting
+      Manually, by right-clicking the entry in the Schedules View and selecting
       <guilabel>Enter next transaction</guilabel> in the context menu.
     </para>
   </listitem>
