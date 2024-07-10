@@ -1143,7 +1143,9 @@ public:
         // make sure all shared actions of the New button have the right state
         if (m_sharedActionButtons[Action::FileNew].button) {
             for (const auto action : m_sharedActionButtons[Action::FileNew].button->actions()) {
-                action->setEnabled(m_storageInfo.isOpened);
+                if (action) {
+                    action->setEnabled(m_storageInfo.isOpened);
+                }
             }
         }
         // except the New File/Book which is always enabled
@@ -1522,7 +1524,9 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
             d->m_sharedActionButtons.value(action).button->setDefaultAction(newAction);
         } else {
             for (auto buttonInfo : d->m_sharedActionButtons) {
-                buttonInfo.button->setDefaultAction(buttonInfo.defaultAction);
+                if (buttonInfo.button) {
+                    buttonInfo.button->setDefaultAction(buttonInfo.defaultAction);
+                }
             }
         }
     });
