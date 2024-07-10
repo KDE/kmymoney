@@ -186,6 +186,9 @@ This will reset any existing field choices.</string>
            <property name="text">
             <string>Encoding</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
           </widget>
          </item>
         </layout>
