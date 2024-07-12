@@ -129,8 +129,8 @@ public:
         m_filterProxyModel->setSourceModel(MyMoneyFile::instance()->accountsModel());
         m_filterProxyModel->sort(AccountsModel::Column::AccountName);
 
-
         ui->comboDefaultCategory->setModel(m_filterProxyModel);
+        ui->comboDefaultCategory->setShowFullAccountName(true);
 
         ui->matchTypeCombo->addItem(i18nc("@item No matching", "No matching"), static_cast<int>(eMyMoney::Payee::MatchType::Disabled));
         ui->matchTypeCombo->addItem(i18nc("@item Match Payees name partially", "Match Payees name (partial)"), static_cast<int>(eMyMoney::Payee::MatchType::Name));

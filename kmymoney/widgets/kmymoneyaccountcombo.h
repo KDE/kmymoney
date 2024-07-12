@@ -70,6 +70,14 @@ public:
      */
     void setEditable(bool isEditable);
 
+    /**
+     * Show the full hierarchical account name in case the combo box
+     * is not editable.
+     *
+     * @sa setEditable
+     */
+    void setShowFullAccountName(bool showFullName);
+
     bool eventFilter(QObject* o, QEvent* e) override;
 
     QTreeView* popup() const;
@@ -85,6 +93,7 @@ public Q_SLOTS:
 protected:
     void wheelEvent(QWheelEvent *ev) override;
     void setSelected(const QString& id, bool ignoreCache);
+    void paintEvent(QPaintEvent* event) override;
 
 protected Q_SLOTS:
     void activated();
