@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-10 01:45+0000\n"
+"POT-Creation-Date: 2024-07-12 01:44+0000\n"
 "PO-Revision-Date: 2024-07-06 16:50+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
@@ -19176,7 +19176,7 @@ msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr "La kategorio estas postulata kampo por horaro"
 
-#: kmymoney/views/keditscheduledlg.cpp:305
+#: kmymoney/views/keditscheduledlg.cpp:312
 #, kde-format
 msgctxt "@info Scheduled frequency changed"
 msgid ""
@@ -19188,30 +19188,30 @@ msgstr ""
 "sekvan ligdaton post ĉiu tia ŝanĝo.<br><i>Noto:</i> Ĉi tiu informo nur "
 "montriĝos unufoje por la redakta seanco de ĉi tiu horaro.</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:307
+#: kmymoney/views/keditscheduledlg.cpp:314
 #, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "Horara frekvenco ŝanĝiĝis"
 
-#: kmymoney/views/keditscheduledlg.cpp:600
+#: kmymoney/views/keditscheduledlg.cpp:607
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Ne eblas aldoni planitan transakcion: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:600
+#: kmymoney/views/keditscheduledlg.cpp:607
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Aldoni planitan transakcion"
 
-#: kmymoney/views/keditscheduledlg.cpp:630
-#: kmymoney/views/keditscheduledlg.cpp:673
-#: kmymoney/views/keditscheduledlg.cpp:683
+#: kmymoney/views/keditscheduledlg.cpp:637
+#: kmymoney/views/keditscheduledlg.cpp:680
+#: kmymoney/views/keditscheduledlg.cpp:690
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Ne eblas modifi planitan transakcion '%1'"
 
-#: kmymoney/views/keditscheduledlg.cpp:659
+#: kmymoney/views/keditscheduledlg.cpp:666
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -19225,7 +19225,7 @@ msgstr ""
 "planitan transakcian daton al la sekva dato krom se la lasta pagodato estas "
 "rekomencigita. Ĉu vi volas restarigi la lastan pagodaton?</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:664
+#: kmymoney/views/keditscheduledlg.cpp:671
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Restarigi Lastan Pagan Daton"

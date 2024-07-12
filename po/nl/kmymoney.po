@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-10 01:45+0000\n"
+"POT-Creation-Date: 2024-07-12 01:44+0000\n"
 "PO-Revision-Date: 2024-07-07 16:06+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -19338,7 +19338,7 @@ msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr "De categorie is een vereist veld voor een planning"
 
-#: kmymoney/views/keditscheduledlg.cpp:305
+#: kmymoney/views/keditscheduledlg.cpp:312
 #, kde-format
 msgctxt "@info Scheduled frequency changed"
 msgid ""
@@ -19351,30 +19351,30 @@ msgstr ""
 "Deze informatie zal alleen eenmaal getoond worden voor deze bewerkingssessie "
 "van de planning.</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:307
+#: kmymoney/views/keditscheduledlg.cpp:314
 #, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "Frequentie periodieke transactie gewijzigd"
 
-#: kmymoney/views/keditscheduledlg.cpp:600
+#: kmymoney/views/keditscheduledlg.cpp:607
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Kan periodieke transactie niet toevoegen: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:600
+#: kmymoney/views/keditscheduledlg.cpp:607
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Periodieke transactie toevoegen"
 
-#: kmymoney/views/keditscheduledlg.cpp:630
-#: kmymoney/views/keditscheduledlg.cpp:673
-#: kmymoney/views/keditscheduledlg.cpp:683
+#: kmymoney/views/keditscheduledlg.cpp:637
+#: kmymoney/views/keditscheduledlg.cpp:680
+#: kmymoney/views/keditscheduledlg.cpp:690
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Kan periodieke transactie '%1' niet wijzigen"
 
-#: kmymoney/views/keditscheduledlg.cpp:659
+#: kmymoney/views/keditscheduledlg.cpp:666
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -19389,7 +19389,7 @@ msgstr ""
 "van de laatste betaling zelf invoert. Wilt u de datum van de laatste "
 "betaling zelf invoeren?</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:664
+#: kmymoney/views/keditscheduledlg.cpp:671
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Herstel laatste betaaldatum"
