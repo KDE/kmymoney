@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-12 01:44+0000\n"
+"POT-Creation-Date: 2024-07-13 01:45+0000\n"
 "PO-Revision-Date: 2024-07-07 09:57+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -19874,29 +19874,36 @@ msgstr "Passius líquids esperats"
 msgid "Expected Profit/Loss"
 msgstr "Benefici/pèrdua esperat"
 
-#: kmymoney/views/kinstitutionsview.cpp:257
+#: kmymoney/views/kinstitutionsview.cpp:251
+#, fuzzy, kde-format
+#| msgid "Edit institution..."
+msgctxt "@info:title Dialog title"
+msgid "Edit Institution"
+msgstr "Edita una institució..."
+
+#: kmymoney/views/kinstitutionsview.cpp:258
 #, kde-format
 msgid "Unable to store institution: %1"
 msgstr "No s'ha pogut desar la institució: %1"
 
-#: kmymoney/views/kinstitutionsview.cpp:263
+#: kmymoney/views/kinstitutionsview.cpp:264
 #, kde-format
 msgid "Unable to edit institution: %1"
 msgstr "No s'ha pogut editar la institució: %1"
 
-#: kmymoney/views/kinstitutionsview.cpp:274
+#: kmymoney/views/kinstitutionsview.cpp:275
 #, kde-format
 msgid "<p>Do you really want to delete the institution <b>%1</b>?</p>"
 msgstr "<p>Esteu segur que voleu suprimir la institució <b>%1</b>?</p>"
 
-#: kmymoney/views/kinstitutionsview.cpp:275
+#: kmymoney/views/kinstitutionsview.cpp:276
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete institution"
 msgstr "Supressió d'institució"
 
-#: kmymoney/views/kinstitutionsview.cpp:286
-#: kmymoney/views/kinstitutionsview.cpp:289
+#: kmymoney/views/kinstitutionsview.cpp:287
+#: kmymoney/views/kinstitutionsview.cpp:290
 #, kde-format
 msgid "Unable to delete institution: %1"
 msgstr "No s'ha pogut suprimir la institució: %1"
@@ -21394,7 +21401,7 @@ msgstr "No s'ha trobat cap dada"
 msgid "Form"
 msgstr "Formulari"
 
-#: kmymoney/widgets/kmymoneyaccountcombo.cpp:131
+#: kmymoney/widgets/kmymoneyaccountcombo.cpp:136
 #, kde-format
 msgctxt "@info:tooltip icon in category to open the split editor"
 msgid "Click this icon to open the split editor"
