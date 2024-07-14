@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-13 01:45+0000\n"
-"PO-Revision-Date: 2024-07-07 08:49+0200\n"
+"PO-Revision-Date: 2024-07-13 07:56+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -19677,11 +19677,10 @@ msgid "Expected Profit/Loss"
 msgstr "Förväntad vinst eller förlust"
 
 #: kmymoney/views/kinstitutionsview.cpp:251
-#, fuzzy, kde-format
-#| msgid "Edit institution..."
+#, kde-format
 msgctxt "@info:title Dialog title"
 msgid "Edit Institution"
-msgstr "Redigera institution..."
+msgstr "Redigera institution"
 
 #: kmymoney/views/kinstitutionsview.cpp:258
 #, kde-format

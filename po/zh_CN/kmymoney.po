@@ -19079,7 +19079,6 @@ msgstr ""
 
 #: kmymoney/views/kinstitutionsview.cpp:251
 #, fuzzy, kde-format
-#| msgid "Edit institution..."
 msgctxt "@info:title Dialog title"
 msgid "Edit Institution"
 msgstr "编辑金融机构..."
