@@ -23,10 +23,11 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <KMessageBox>
 #include <KComboBox>
-#include <kguiutils.h>
 #include <KLocalizedString>
+#include <KMessageBox>
+#include <KMessageWidget>
+#include <kguiutils.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -82,6 +83,8 @@ public:
     {
         Q_Q(KNewAccountDlg);
         ui->setupUi(q);
+
+        ui->m_messageWidget->hide();
 
         auto file = MyMoneyFile::instance();
 
@@ -207,6 +210,12 @@ public:
             ui->m_institutionBox->hide();
             ui->m_qcheckboxNoVat->hide();
             ui->m_budgetOptionsGroupBox->hide();
+
+            // no web site for categories
+            ui->m_websiteLabel->hide();
+            ui->m_protocolLabel->hide();
+            ui->m_urlEdit->hide();
+
             ui->m_budgetInclusion->setCurrentIndex(accountTypeToBudgetOptionIndex(eMyMoney::Account::Type::Unknown));
 
             ui->typeCombo->addItem(MyMoneyAccount::accountTypeToString(Account::Type::Income), (int)Account::Type::Income);
@@ -352,6 +361,7 @@ public:
             if (!ui->m_maxCreditEarlyEdit->text().isEmpty())
                 ui->m_maxCreditEarlyEdit->setValue(ui->m_maxCreditEarlyEdit->value()*MyMoneyMoney::MINUS_ONE);
             loadKVP("lastNumberUsed", ui->m_lastCheckNumberUsed);
+            loadKVP("url", ui->m_urlEdit);
 
             if (m_account.isInvest()) {
                 ui->typeCombo->setEnabled(false);
@@ -669,6 +679,20 @@ public:
         return eMyMoney::Account::Type::Unknown;
     }
 
+    void urlChanged(QLineEdit* edit)
+    {
+        // remove a possible leading protocol since we only provide https for now
+        QRegularExpression protocol(QStringLiteral("^[a-zA-Z]+://(?<url>.*)"), QRegularExpression::CaseInsensitiveOption);
+        QRegularExpressionMatch matcher = protocol.match(edit->text());
+        if (matcher.hasMatch()) {
+            edit->setText(matcher.captured(QStringLiteral("url")));
+            ui->m_messageWidget->setText(
+                i18nc("@info:usagetip", "The protocol part has been removed by KMyMoney because it is fixed to https for security reasons."));
+            ui->m_messageWidget->setMessageType(KMessageWidget::Information);
+            ui->m_messageWidget->animatedShow();
+        }
+    }
+
     KNewAccountDlg* q_ptr;
     Ui::KNewAccountDlg* ui;
     MyMoneyAccount m_account;
@@ -695,6 +719,11 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     connect(d->ui->accountNameEdit, &QLineEdit::textChanged, this, [&]() {
         Q_D(KNewAccountDlg);
         d->changeHierarchyLabel();
+    });
+
+    connect(d->ui->m_urlEdit, &QLineEdit::textChanged, this, [&]() {
+        Q_D(KNewAccountDlg);
+        d->urlChanged(d->ui->m_urlEdit);
     });
 }
 
@@ -765,6 +794,7 @@ void KNewAccountDlg::okClicked()
     d->storeKVP("iban", d->ui->ibanEdit);
     d->storeKVP("minBalanceAbsolute", d->ui->m_minBalanceAbsoluteEdit);
     d->storeKVP("minBalanceEarly", d->ui->m_minBalanceEarlyEdit);
+    d->storeKVP("url", d->ui->m_urlEdit);
 
     // the figures for credit line with reversed sign
     if (!d->ui->m_maxCreditAbsoluteEdit->text().isEmpty())

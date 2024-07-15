@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-08 01:44+0000\n"
+"POT-Creation-Date: 2024-07-15 01:46+0000\n"
 "PO-Revision-Date: 2024-02-24 16:23+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -636,10 +636,10 @@ msgid "Backup location:"
 msgstr "Copie de siguranță"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3781
-#: kmymoney/kmymoney.cpp:3852 kmymoney/kmymoney.cpp:3868
-#: kmymoney/kmymoney.cpp:3874 kmymoney/kmymoney.cpp:3888
-#: kmymoney/kmymoney.cpp:3890
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3786
+#: kmymoney/kmymoney.cpp:3857 kmymoney/kmymoney.cpp:3873
+#: kmymoney/kmymoney.cpp:3879 kmymoney/kmymoney.cpp:3893
+#: kmymoney/kmymoney.cpp:3895
 #, kde-format
 msgid "Backup"
 msgstr "Copie de siguranță"
@@ -2035,7 +2035,7 @@ msgstr "Prețuri"
 #. i18n: ectx: property (text), widget (QLabel, TextLabel10)
 #. i18n: ectx: property (text), widget (QTreeWidget, m_listAccount)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:232
-#: kmymoney/dialogs/knewaccountdlg.ui:493
+#: kmymoney/dialogs/knewaccountdlg.ui:513
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:84
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:54
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:381
@@ -2188,31 +2188,31 @@ msgstr "Șterge această intrare"
 msgid "Delete"
 msgstr "Șterge"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:172
+#: kmymoney/dialogs/knewaccountdlg.cpp:175
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:159
 #, kde-format
 msgctxt "default price mode"
 msgid "(default)"
 msgstr "(implicit)"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:173
+#: kmymoney/dialogs/knewaccountdlg.cpp:176
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:160
 #, kde-format
 msgid "Price per share"
 msgstr "Preț pe acțiune"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:174
+#: kmymoney/dialogs/knewaccountdlg.cpp:177
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:161
 #, kde-format
 msgid "Total for all shares"
 msgstr "Totalul tuturor acțiunilor"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:248
+#: kmymoney/dialogs/knewaccountdlg.cpp:257
 #, kde-format
 msgid "VAT account"
 msgstr "Cont TVA"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:538 kmymoney/kmymoney.cpp:438
+#: kmymoney/dialogs/knewaccountdlg.cpp:548 kmymoney/kmymoney.cpp:438
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:188
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:370
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:73
@@ -2220,7 +2220,7 @@ msgstr "Cont TVA"
 msgid "Asset"
 msgstr "Activ"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:540 kmymoney/kmymoney.cpp:439
+#: kmymoney/dialogs/knewaccountdlg.cpp:550 kmymoney/kmymoney.cpp:439
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:189
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:378
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:75
@@ -2228,7 +2228,7 @@ msgstr "Activ"
 msgid "Liability"
 msgstr "Pasiv"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:542 kmymoney/kmymoney.cpp:440
+#: kmymoney/dialogs/knewaccountdlg.cpp:552 kmymoney/kmymoney.cpp:440
 #: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1845
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
@@ -2237,7 +2237,7 @@ msgstr "Pasiv"
 msgid "Income"
 msgstr "Venituri"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:544 kmymoney/kmymoney.cpp:441
+#: kmymoney/dialogs/knewaccountdlg.cpp:554 kmymoney/kmymoney.cpp:441
 #: kmymoney/models/ledgerfilterbase.cpp:97
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:79
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:191
@@ -2246,28 +2246,37 @@ msgstr "Venituri"
 msgid "Expense"
 msgstr "Cheltuieli"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:591
+#: kmymoney/dialogs/knewaccountdlg.cpp:601
 #, kde-format
 msgid ""
 "Option has been disabled because there are transactions assigned to this "
 "account"
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:596
+#: kmymoney/dialogs/knewaccountdlg.cpp:606
 #, kde-format
 msgid ""
 "Option has been disabled because there is another account flagged to be an "
 "opening balance account for this currency"
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:616
+#: kmymoney/dialogs/knewaccountdlg.cpp:626
 #, fuzzy, kde-format
 #| msgid "Is a sub account of %1"
 msgctxt "@label:chooser %1 account name, %2 parent account name"
 msgid "<b>%1</b> is a sub account of <b>%2</b>"
 msgstr "Este un subcont al contului %1"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:734
+#: kmymoney/dialogs/knewaccountdlg.cpp:690
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:190
+#, kde-format
+msgctxt "@info:usagetip"
+msgid ""
+"The protocol part has been removed by KMyMoney because it is fixed to https "
+"for security reasons."
+msgstr ""
+
+#: kmymoney/dialogs/knewaccountdlg.cpp:763
 #, kde-format
 msgid ""
 "You have not specified a name.\n"
@@ -2276,14 +2285,14 @@ msgstr ""
 "Nu ați specificat un nume.\n"
 "Vă rog să completați acest cîmp."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:741
+#: kmymoney/dialogs/knewaccountdlg.cpp:770
 #, kde-format
 msgid "Please select a parent account."
 msgstr "Vă rog să alegeți un cont părinte."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:747
-#: kmymoney/dialogs/knewaccountdlg.cpp:919
-#: kmymoney/dialogs/knewaccountdlg.cpp:934
+#: kmymoney/dialogs/knewaccountdlg.cpp:776
+#: kmymoney/dialogs/knewaccountdlg.cpp:949
+#: kmymoney/dialogs/knewaccountdlg.cpp:964
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:518
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:45
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:80
@@ -2291,7 +2300,7 @@ msgstr "Vă rog să alegeți un cont părinte."
 msgid "(No Institution)"
 msgstr "(Fără instituție)"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:802
+#: kmymoney/dialogs/knewaccountdlg.cpp:832
 #, kde-format
 msgid ""
 "A category named <b>%1</b> already exists. You cannot create a second "
@@ -2300,7 +2309,7 @@ msgstr ""
 "O categorie numită <b>%1</b> există deja. Nu puteți crea o a doua categorie "
 "cu același nume."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:832
+#: kmymoney/dialogs/knewaccountdlg.cpp:862
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have selected to suppress the display of unused categories in the "
@@ -2319,14 +2328,14 @@ msgstr ""
 "după ce va fi folosită. Altfel ea va fi ascunsă în modul de vizualizare a "
 "conturilor/categoriilor."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:834
+#: kmymoney/dialogs/knewaccountdlg.cpp:864
 #, fuzzy, kde-format
 #| msgid "Payment accounts"
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
 msgstr "Conturi de plată"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:842
+#: kmymoney/dialogs/knewaccountdlg.cpp:872
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have selected to suppress the display of unused categories in the "
@@ -2345,45 +2354,45 @@ msgstr ""
 "după ce va fi folosită. Altfel ea va fi ascunsă în modul de vizualizare a "
 "conturilor/categoriilor."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:844
+#: kmymoney/dialogs/knewaccountdlg.cpp:874
 #, fuzzy, kde-format
 #| msgid "Hidden categories"
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "Categorii ascunse"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:959
+#: kmymoney/dialogs/knewaccountdlg.cpp:989
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
 #, kde-format
 msgid "Cannot add institution"
 msgstr "Nu s-a putut adăuga instituția"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:996
+#: kmymoney/dialogs/knewaccountdlg.cpp:1026
 #, kde-format
 msgctxt "@info:tooltip Hint to provide name"
 msgid "Please provide a name for the new category or account."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1001
+#: kmymoney/dialogs/knewaccountdlg.cpp:1031
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1008
+#: kmymoney/dialogs/knewaccountdlg.cpp:1038
 #, kde-format
 msgctxt "@info:tooltip Hint to provide VAT percentage in range"
 msgid "Please provide a percentage greater than zero and less than 100."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1012
+#: kmymoney/dialogs/knewaccountdlg.cpp:1042
 #, fuzzy, kde-format
 #| msgid "Please select a default category for payee '%1'"
 msgctxt "@info:tooltip Hint to provide category to assign VAT"
 msgid "Please select a category for the VAT."
 msgstr "Alegeți categoria implicită pentru beneficiarul „%1”"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1077
+#: kmymoney/dialogs/knewaccountdlg.cpp:1107
 #, kde-format
 msgid ""
 "<p>The category <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2394,13 +2403,13 @@ msgstr ""
 "părinte va lua valoare implicită <b>%2</b> dar se poate schimba în dialogul "
 "următor</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1081
-#: kmymoney/dialogs/knewaccountdlg.cpp:1106
+#: kmymoney/dialogs/knewaccountdlg.cpp:1111
+#: kmymoney/dialogs/knewaccountdlg.cpp:1136
 #, kde-format
 msgid "Create category"
 msgstr "Creează o categorie"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1102
+#: kmymoney/dialogs/knewaccountdlg.cpp:1132
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>The category <b>%1</b> currently does not exist. Do you want to create "
@@ -2415,14 +2424,14 @@ msgstr ""
 "părinte va lua valoare implicită <b>%2</b> dar se poate schimba în dialogul "
 "următor</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1124
+#: kmymoney/dialogs/knewaccountdlg.cpp:1154
 #, fuzzy, kde-format
 #| msgid "Create a new Category"
 msgctxt "@title:window"
 msgid "Create a new Category"
 msgstr "Creează o categorie nouă"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1129
+#: kmymoney/dialogs/knewaccountdlg.cpp:1159
 #, fuzzy, kde-format
 #| msgid "Create a new asset account"
 msgctxt "@title:window"
@@ -2492,45 +2501,63 @@ msgstr "Sold:"
 msgid "Options"
 msgstr "Opțiuni"
 
-#. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
-#: kmymoney/dialogs/knewaccountdlg.ui:185
+#. i18n: ectx: property (text), widget (QLabel, label)
+#. i18n: ectx: property (text), widget (QLabel, m_websiteLabel)
+#: kmymoney/dialogs/knewaccountdlg.ui:162
+#: kmymoney/dialogs/knewinstitutiondlg.ui:78
 #, kde-format
-msgid "Last check number:"
-msgstr "Ultimul număr de cec"
+msgid "Website"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
-#: kmymoney/dialogs/knewaccountdlg.ui:207
+#: kmymoney/dialogs/knewaccountdlg.ui:181
 #, kde-format
 msgid "Notes:"
 msgstr "Note:"
 
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#. i18n: ectx: property (text), widget (QLabel, m_protocolLabel)
+#: kmymoney/dialogs/knewaccountdlg.ui:194
+#: kmymoney/dialogs/knewinstitutiondlg.ui:58
+#: kmymoney/dialogs/knewinstitutiondlg.ui:214
+#, kde-format
+msgid "https://"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
+#: kmymoney/dialogs/knewaccountdlg.ui:201
+#, kde-format
+msgid "Last check number:"
+msgstr "Ultimul număr de cec"
+
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxNoVat)
-#: kmymoney/dialogs/knewaccountdlg.ui:227
+#: kmymoney/dialogs/knewaccountdlg.ui:244
 #, kde-format
 msgid "No auto-VAT-assignment"
 msgstr "Nu efectua asignare automată de TVA"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_costCenterRequiredCheckBox)
-#: kmymoney/dialogs/knewaccountdlg.ui:234
+#: kmymoney/dialogs/knewaccountdlg.ui:251
 #, kde-format
 msgid "Cost Center assignment required"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxPreferred)
-#: kmymoney/dialogs/knewaccountdlg.ui:241
+#: kmymoney/dialogs/knewaccountdlg.ui:258
 #, kde-format
 msgid "Preferred Account"
 msgstr "Cont preferat"
 
 #. i18n: ectx: property (text), widget (QLabel, m_priceModeLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:250
+#: kmymoney/dialogs/knewaccountdlg.ui:267
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:67
 #, kde-format
 msgid "Price entry"
 msgstr "Intrare preț"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_qcheckboxOpeningBalance)
-#: kmymoney/dialogs/knewaccountdlg.ui:278
+#: kmymoney/dialogs/knewaccountdlg.ui:295
 #, fuzzy, kde-format
 #| msgid "Use this to clear all splits of this transaction"
 msgid ""
@@ -2539,7 +2566,7 @@ msgid ""
 msgstr "Folosește aceasta pentru a șterge toate părțile acestei tranzacții"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxOpeningBalance)
-#: kmymoney/dialogs/knewaccountdlg.ui:281
+#: kmymoney/dialogs/knewaccountdlg.ui:298
 #, fuzzy, kde-format
 #| msgid "Opening Balance text"
 msgid "Opening Balance Account"
@@ -2547,28 +2574,28 @@ msgstr "Text pentru soldul de deschidere"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_budgetOptionsGroupBox)
 #. i18n: ectx: Menu (budget_context_menu)
-#: kmymoney/dialogs/knewaccountdlg.ui:293
+#: kmymoney/dialogs/knewaccountdlg.ui:310
 #: kmymoney/plugins/views/budget/budgetview.rc:4
 #, kde-format
 msgid "Budget options"
 msgstr "Opțiuni buget"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
-#: kmymoney/dialogs/knewaccountdlg.ui:300
+#: kmymoney/dialogs/knewaccountdlg.ui:317
 #, kde-format
 msgctxt "@item:inlistbox Don't include this account in budgets"
 msgid "Don't include in budgets"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
-#: kmymoney/dialogs/knewaccountdlg.ui:305
+#: kmymoney/dialogs/knewaccountdlg.ui:322
 #, kde-format
 msgctxt "@item:inlistbox Include this account in budgets as expense"
 msgid "Include in budgets as expense"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
-#: kmymoney/dialogs/knewaccountdlg.ui:310
+#: kmymoney/dialogs/knewaccountdlg.ui:327
 #, kde-format
 msgctxt "@item:inlistbox Include this account in budgets as income"
 msgid "Include in budgets as income"
@@ -2578,8 +2605,8 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #. i18n: ectx: attribute (title), widget (QWidget, m_institutionTab)
 #. i18n: ectx: property (title), widget (QGroupBox, m_institutionBox)
-#: kmymoney/dialogs/knewaccountdlg.ui:338
-#: kmymoney/dialogs/knewaccountdlg.ui:344
+#: kmymoney/dialogs/knewaccountdlg.ui:358
+#: kmymoney/dialogs/knewaccountdlg.ui:364
 #: kmymoney/plugins/views/reports/core/listtable.cpp:697
 #: kmymoney/wizards/newaccountwizard/kinstitutionpage.ui:44
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:72
@@ -2589,7 +2616,7 @@ msgid "Institution"
 msgstr "Instituție"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonNew)
-#: kmymoney/dialogs/knewaccountdlg.ui:376
+#: kmymoney/dialogs/knewaccountdlg.ui:396
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:45
 #, kde-format
 msgctxt "create new institution"
@@ -2597,7 +2624,7 @@ msgid "New..."
 msgstr "Nouă..."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2_2)
-#: kmymoney/dialogs/knewaccountdlg.ui:390
+#: kmymoney/dialogs/knewaccountdlg.ui:410
 #, kde-format
 msgid "Number:"
 msgstr "Număr:"
@@ -2606,7 +2633,7 @@ msgstr "Număr:"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_4)
 #. i18n: ectx: property (placeholderText), widget (KBicEdit, bicEdit)
 #. i18n: ectx: property (text), widget (QLabel, label_bic)
-#: kmymoney/dialogs/knewaccountdlg.ui:400
+#: kmymoney/dialogs/knewaccountdlg.ui:420
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:46
 #: kmymoney/widgets/payeeidentifier/ibanbic/ibanbicitemedit.ui:27
 #, kde-format
@@ -2618,7 +2645,7 @@ msgstr "CIB (cod de identificare a băncii)"
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #. i18n: ectx: property (placeholderText), widget (KIbanLineEdit, ibanEdit)
 #. i18n: ectx: property (text), widget (QLabel, label_iban)
-#: kmymoney/dialogs/knewaccountdlg.ui:413
+#: kmymoney/dialogs/knewaccountdlg.ui:433
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:33
 #: kmymoney/widgets/payeeidentifier/ibanbic/ibanbicitemedit.ui:17
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:94
@@ -2628,25 +2655,25 @@ msgid "IBAN"
 msgstr "IBAN"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_hierarchyTab)
-#: kmymoney/dialogs/knewaccountdlg.ui:455
+#: kmymoney/dialogs/knewaccountdlg.ui:475
 #, kde-format
 msgid "Hierarchy"
 msgstr "Ierarhie"
 
 #. i18n: ectx: property (text), widget (QLabel, m_subAccountLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:461
+#: kmymoney/dialogs/knewaccountdlg.ui:481
 #, kde-format
 msgid "Subaccount"
 msgstr "Subcont"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_limitsTab)
-#: kmymoney/dialogs/knewaccountdlg.ui:475
+#: kmymoney/dialogs/knewaccountdlg.ui:495
 #, kde-format
 msgid "Limits"
 msgstr "Limite"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
-#: kmymoney/dialogs/knewaccountdlg.ui:481
+#: kmymoney/dialogs/knewaccountdlg.ui:501
 #, kde-format
 msgid ""
 "This page allows to setup certain limits. KMyMoney will warn you when the "
@@ -2656,81 +2683,81 @@ msgstr ""
 "în momentul în care soldul contului va atinge una dintre limite."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
-#: kmymoney/dialogs/knewaccountdlg.ui:510
+#: kmymoney/dialogs/knewaccountdlg.ui:530
 #, kde-format
 msgid "Absolute limit"
 msgstr "Limită absolută"
 
 #. i18n: ectx: property (text), widget (QLabel, m_maxCreditLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:520
+#: kmymoney/dialogs/knewaccountdlg.ui:540
 #, kde-format
 msgid "Maximum credit limit"
 msgstr "Limita maximă de credit"
 
 #. i18n: ectx: property (text), widget (QLabel, m_minBalanceLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:551
+#: kmymoney/dialogs/knewaccountdlg.ui:571
 #, kde-format
 msgid "Minimum balance"
 msgstr "Soldul minim"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
-#: kmymoney/dialogs/knewaccountdlg.ui:571
+#: kmymoney/dialogs/knewaccountdlg.ui:591
 #, kde-format
 msgid "Early warning"
 msgstr "Avertizare din timp"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_taxTab)
-#: kmymoney/dialogs/knewaccountdlg.ui:600
+#: kmymoney/dialogs/knewaccountdlg.ui:620
 #: kmymoney/plugins/views/reports/core/listtable.cpp:713
 #, kde-format
 msgid "Tax"
 msgstr "Impozit"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox3)
-#: kmymoney/dialogs/knewaccountdlg.ui:606
+#: kmymoney/dialogs/knewaccountdlg.ui:626
 #, kde-format
 msgid "VAT details"
 msgstr "Detalii TVA"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_vatCategory)
-#: kmymoney/dialogs/knewaccountdlg.ui:623
+#: kmymoney/dialogs/knewaccountdlg.ui:643
 #, kde-format
 msgid "VAT category"
 msgstr "Categorie TVA"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#: kmymoney/dialogs/knewaccountdlg.ui:643
+#: kmymoney/dialogs/knewaccountdlg.ui:663
 #, kde-format
 msgid "VAT percentage"
 msgstr "Procent TVA"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_vatAssignment)
-#: kmymoney/dialogs/knewaccountdlg.ui:709
+#: kmymoney/dialogs/knewaccountdlg.ui:729
 #, kde-format
 msgid "Enable auto VAT assignment"
 msgstr "Activează asignarea TVA automată"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_amountGroupBox)
-#: kmymoney/dialogs/knewaccountdlg.ui:739
+#: kmymoney/dialogs/knewaccountdlg.ui:759
 #, kde-format
 msgid "Amount entered"
 msgstr "Suma introdusă"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_grossAmount)
-#: kmymoney/dialogs/knewaccountdlg.ui:754
+#: kmymoney/dialogs/knewaccountdlg.ui:774
 #, kde-format
 msgid "Gross amount"
 msgstr "Suma brută"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_netAmount)
-#: kmymoney/dialogs/knewaccountdlg.ui:767
+#: kmymoney/dialogs/knewaccountdlg.ui:787
 #, fuzzy, kde-format
 #| msgid "Net amount"
 msgid "Net a&mount"
 msgstr "Suma netă"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxTax)
-#: kmymoney/dialogs/knewaccountdlg.ui:807
+#: kmymoney/dialogs/knewaccountdlg.ui:827
 #, kde-format
 msgid "Include on Tax Reports"
 msgstr "Include în raporturile de impozite"
@@ -2767,14 +2794,6 @@ msgstr "Numele instituției nu a fost dat. Vă rog să dați numele instituției
 msgid "Adding New Institution"
 msgstr "Se adaugă instituția nouă"
 
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:190
-#, kde-format
-msgctxt "@info:usagetip"
-msgid ""
-"The protocol part has been removed by KMyMoney because it is fixed to https "
-"for security reasons."
-msgstr ""
-
 #. i18n: ectx: property (windowTitle), widget (QDialog, KNewInstitutionDlg)
 #: kmymoney/dialogs/knewinstitutiondlg.ui:14
 #, kde-format
@@ -2794,26 +2813,12 @@ msgstr "Detalii ale instituției"
 msgid "A Business Identifier Code, also known as SWIFT."
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#. i18n: ectx: property (text), widget (QLabel, label_4)
-#: kmymoney/dialogs/knewinstitutiondlg.ui:58
-#: kmymoney/dialogs/knewinstitutiondlg.ui:214
-#, kde-format
-msgid "https://"
-msgstr ""
-
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/dialogs/knewinstitutiondlg.ui:68
 #, kde-format
 msgctxt "institution name column"
 msgid "Name:"
 msgstr "Denumire:"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: kmymoney/dialogs/knewinstitutiondlg.ui:78
-#, kde-format
-msgid "Website"
-msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel7)
 #: kmymoney/dialogs/knewinstitutiondlg.ui:101
@@ -4833,601 +4838,601 @@ msgstr "Problemă de cont"
 msgid "Fix transactions"
 msgstr "Repară tranzacțiile"
 
-#: kmymoney/kmymoney.cpp:1185
+#: kmymoney/kmymoney.cpp:1187
 #, kde-format
 msgid "Untitled"
 msgstr "Fără titlu"
 
-#: kmymoney/kmymoney.cpp:1359
+#: kmymoney/kmymoney.cpp:1361
 #, kde-format
 msgid "Unable to match the selected transactions"
 msgstr "Nu s-au putut asocia tranzacțiile selectate"
 
-#: kmymoney/kmymoney.cpp:1386
+#: kmymoney/kmymoney.cpp:1388
 #, kde-format
 msgid "Unable to unmatch the selected transactions"
 msgstr "Nu s-au putut disocia tranzacțiile selectate"
 
-#: kmymoney/kmymoney.cpp:1485
+#: kmymoney/kmymoney.cpp:1487
 #, fuzzy, kde-format
 #| msgid "New account..."
 msgctxt "@action New file/database"
 msgid "New book..."
 msgstr "Cont nou..."
 
-#: kmymoney/kmymoney.cpp:1640
+#: kmymoney/kmymoney.cpp:1644
 #, kde-format
 msgid ""
 "This is the consistency check log, use the context menu to copy or save it."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1653
+#: kmymoney/kmymoney.cpp:1657
 #, fuzzy, kde-format
 #| msgid "Copy this report to the clipboard"
 msgid "Copy to clipboard"
 msgstr "Copiază acest raport în memorie"
 
-#: kmymoney/kmymoney.cpp:1654
+#: kmymoney/kmymoney.cpp:1658
 #, fuzzy, kde-format
 #| msgid "Unable to parse file"
 msgid "Save to file"
 msgstr "Fișierul nu a putut fi prelucrat"
 
-#: kmymoney/kmymoney.cpp:1780
+#: kmymoney/kmymoney.cpp:1784
 #, kde-format
 msgid "Backup..."
 msgstr "Copie de siguranță..."
 
-#: kmymoney/kmymoney.cpp:1781
+#: kmymoney/kmymoney.cpp:1785
 #, kde-format
 msgid "Statement file..."
 msgstr "Fișier extras de cont..."
 
-#: kmymoney/kmymoney.cpp:1782 kmymoney/kmymoney.cpp:1783
+#: kmymoney/kmymoney.cpp:1786 kmymoney/kmymoney.cpp:1787
 #, kde-format
 msgid "Account Template..."
 msgstr "Cont șablon..."
 
-#: kmymoney/kmymoney.cpp:1784
+#: kmymoney/kmymoney.cpp:1788
 #, kde-format
 msgid "Personal Data..."
 msgstr "Date personale..."
 
-#: kmymoney/kmymoney.cpp:1786
+#: kmymoney/kmymoney.cpp:1790
 #, kde-format
 msgid "Dump Memory"
 msgstr "Copie a memoriei"
 
-#: kmymoney/kmymoney.cpp:1788
+#: kmymoney/kmymoney.cpp:1792
 #, kde-format
 msgid "File-Information..."
 msgstr "Informații despre fișier..."
 
-#: kmymoney/kmymoney.cpp:1792
+#: kmymoney/kmymoney.cpp:1796
 #, kde-format
 msgid "Find transaction..."
 msgstr "Căutare tranzacție..."
 
-#: kmymoney/kmymoney.cpp:1796
+#: kmymoney/kmymoney.cpp:1800
 #, kde-format
 msgid "Show Transaction Detail"
 msgstr "Arată detaliile tranzacției"
 
 #. i18n: ectx: label, entry (HideReconciledTransactions), group (List Options)
-#: kmymoney/kmymoney.cpp:1797 kmymoney/settings/kmymoney.kcfg:236
+#: kmymoney/kmymoney.cpp:1801 kmymoney/settings/kmymoney.kcfg:236
 #, kde-format
 msgid "Hide reconciled transactions"
 msgstr "Ascunde tranzacțiile reconciliate"
 
 #. i18n: ectx: label, entry (HideUnusedCategory), group (List Options)
-#: kmymoney/kmymoney.cpp:1798 kmymoney/settings/kmymoney.kcfg:212
+#: kmymoney/kmymoney.cpp:1802 kmymoney/settings/kmymoney.kcfg:212
 #, kde-format
 msgid "Hide unused categories"
 msgstr "Ascunde categoriile neutilizate"
 
 #. i18n: ectx: label, entry (ShowAllAccounts), group (List Options)
-#: kmymoney/kmymoney.cpp:1799 kmymoney/settings/kmymoney.kcfg:216
+#: kmymoney/kmymoney.cpp:1803 kmymoney/settings/kmymoney.kcfg:216
 #, kde-format
 msgid "Show all accounts"
 msgstr "Arată toate conturile"
 
-#: kmymoney/kmymoney.cpp:1803
+#: kmymoney/kmymoney.cpp:1807
 #, kde-format
 msgid "New institution..."
 msgstr "Instituție nouă..."
 
-#: kmymoney/kmymoney.cpp:1804
+#: kmymoney/kmymoney.cpp:1808
 #, kde-format
 msgid "Edit institution..."
 msgstr "Modificare instituție..."
 
-#: kmymoney/kmymoney.cpp:1805
+#: kmymoney/kmymoney.cpp:1809
 #, kde-format
 msgid "Delete institution..."
 msgstr "Ștergere instituție..."
 
-#: kmymoney/kmymoney.cpp:1809
+#: kmymoney/kmymoney.cpp:1813
 #, kde-format
 msgid "New account..."
 msgstr "Cont nou..."
 
-#: kmymoney/kmymoney.cpp:1810
+#: kmymoney/kmymoney.cpp:1814
 #, kde-format
 msgid "Open ledger"
 msgstr "Deschide registrul"
 
-#: kmymoney/kmymoney.cpp:1811
+#: kmymoney/kmymoney.cpp:1815
 #, kde-format
 msgid "Reconcile..."
 msgstr "Reconciliază..."
 
-#: kmymoney/kmymoney.cpp:1812
+#: kmymoney/kmymoney.cpp:1816
 #, kde-format
 msgctxt "Finish reconciliation"
 msgid "Finish"
 msgstr "Finalizează"
 
-#: kmymoney/kmymoney.cpp:1813
+#: kmymoney/kmymoney.cpp:1817
 #, fuzzy, kde-format
 #| msgid "Postal Code:"
 msgctxt "Postpone reconciliation"
 msgid "Postpone"
 msgstr "Cod poștal:"
 
-#: kmymoney/kmymoney.cpp:1814
+#: kmymoney/kmymoney.cpp:1818
 #, fuzzy, kde-format
 #| msgid "Cancel"
 msgctxt "Cancel reconciliation"
 msgid "Cancel"
 msgstr "Renunță"
 
-#: kmymoney/kmymoney.cpp:1815
+#: kmymoney/kmymoney.cpp:1819
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgid "Report reconciliation"
 msgstr "Ultima reconciliere"
 
-#: kmymoney/kmymoney.cpp:1816
+#: kmymoney/kmymoney.cpp:1820
 #, kde-format
 msgid "Edit account..."
 msgstr "Modificare cont..."
 
-#: kmymoney/kmymoney.cpp:1817
+#: kmymoney/kmymoney.cpp:1821
 #, kde-format
 msgid "Delete account..."
 msgstr "Ștergere cont..."
 
-#: kmymoney/kmymoney.cpp:1818
+#: kmymoney/kmymoney.cpp:1822
 #, kde-format
 msgid "Close account"
 msgstr "Închide contul"
 
-#: kmymoney/kmymoney.cpp:1819
+#: kmymoney/kmymoney.cpp:1823
 #, kde-format
 msgid "Reopen account"
 msgstr "Redeschide contul"
 
-#: kmymoney/kmymoney.cpp:1820
+#: kmymoney/kmymoney.cpp:1824
 #, kde-format
 msgid "Transaction report"
 msgstr "Raportul tranzacțiilor"
 
-#: kmymoney/kmymoney.cpp:1821
+#: kmymoney/kmymoney.cpp:1825
 #, kde-format
 msgid "Show balance chart..."
 msgstr "Arată graficul soldului..."
 
-#: kmymoney/kmymoney.cpp:1822
+#: kmymoney/kmymoney.cpp:1826
 #, fuzzy, kde-format
 #| msgid "Unmap account..."
 msgid "Map account..."
 msgstr "Disociere cont..."
 
-#: kmymoney/kmymoney.cpp:1823
+#: kmymoney/kmymoney.cpp:1827
 #, kde-format
 msgid "Unmap account..."
 msgstr "Disociere cont..."
 
-#: kmymoney/kmymoney.cpp:1824
+#: kmymoney/kmymoney.cpp:1828
 #, kde-format
 msgid "Update account..."
 msgstr "Actualizare cont..."
 
-#: kmymoney/kmymoney.cpp:1825
+#: kmymoney/kmymoney.cpp:1829
 #, kde-format
 msgid "Update all accounts..."
 msgstr "Actualizare toate conturile..."
 
-#: kmymoney/kmymoney.cpp:1829
+#: kmymoney/kmymoney.cpp:1833
 #, kde-format
 msgid "New category..."
 msgstr "Categorie nouă..."
 
-#: kmymoney/kmymoney.cpp:1830
+#: kmymoney/kmymoney.cpp:1834
 #, kde-format
 msgid "Edit category..."
 msgstr "Modificare categorie..."
 
-#: kmymoney/kmymoney.cpp:1831
+#: kmymoney/kmymoney.cpp:1835
 #, kde-format
 msgid "Delete category..."
 msgstr "Ștergere categorie..."
 
-#: kmymoney/kmymoney.cpp:1835
+#: kmymoney/kmymoney.cpp:1839
 #, kde-format
 msgid "Currencies..."
 msgstr "Monede..."
 
-#: kmymoney/kmymoney.cpp:1836
+#: kmymoney/kmymoney.cpp:1840
 #, kde-format
 msgid "Prices..."
 msgstr "Prețuri..."
 
-#: kmymoney/kmymoney.cpp:1837
+#: kmymoney/kmymoney.cpp:1841
 #, kde-format
 msgid "Update Stock and Currency Prices..."
 msgstr "Actualizează cotațiile acțiunilor și monedelor..."
 
-#: kmymoney/kmymoney.cpp:1838
+#: kmymoney/kmymoney.cpp:1842
 #, kde-format
 msgid "Consistency Check"
 msgstr "Verificarea consistenței"
 
-#: kmymoney/kmymoney.cpp:1839
+#: kmymoney/kmymoney.cpp:1843
 #, kde-format
 msgid "Performance-Test"
 msgstr "Verificarea performanței"
 
-#: kmymoney/kmymoney.cpp:1840
+#: kmymoney/kmymoney.cpp:1844
 #, kde-format
 msgid "Calculator..."
 msgstr "Calculator"
 
-#: kmymoney/kmymoney.cpp:1844
+#: kmymoney/kmymoney.cpp:1848
 #, kde-format
 msgid "Enable all messages"
 msgstr "Activează toate mesajele"
 
-#: kmymoney/kmymoney.cpp:1848 kmymoney/views/kwelcomepage.cpp:82
+#: kmymoney/kmymoney.cpp:1852 kmymoney/views/kwelcomepage.cpp:82
 #, kde-format
 msgid "Get help from our community"
 msgstr "Cereți ajutorul comunității noastre"
 
-#: kmymoney/kmymoney.cpp:1849 kmymoney/views/kwelcomepage.cpp:84
+#: kmymoney/kmymoney.cpp:1853 kmymoney/views/kwelcomepage.cpp:84
 #, kde-format
 msgid "See what's new in this version"
 msgstr "Vedeți ce e nou în această versiune"
 
-#: kmymoney/kmymoney.cpp:1850 kmymoney/views/kwelcomepage.cpp:80
+#: kmymoney/kmymoney.cpp:1854 kmymoney/views/kwelcomepage.cpp:80
 #, kde-format
 msgid "Visit our website"
 msgstr "Vizitați pagina noastră"
 
-#: kmymoney/kmymoney.cpp:1854
+#: kmymoney/kmymoney.cpp:1858
 #, fuzzy, kde-format
 #| msgid "Any transaction"
 msgctxt "New transaction button"
 msgid "New transaction"
 msgstr "Oricare tranzacție"
 
-#: kmymoney/kmymoney.cpp:1855
+#: kmymoney/kmymoney.cpp:1859
 #, kde-format
 msgctxt "Edit transaction button"
 msgid "Edit"
 msgstr "Modifică"
 
-#: kmymoney/kmymoney.cpp:1856
+#: kmymoney/kmymoney.cpp:1860
 #, kde-format
 msgctxt "Enter transaction"
 msgid "Enter"
 msgstr "Introdu"
 
-#: kmymoney/kmymoney.cpp:1857
+#: kmymoney/kmymoney.cpp:1861
 #, kde-format
 msgctxt "Edit split button"
 msgid "Edit splits"
 msgstr "Redactează despărțirile"
 
-#: kmymoney/kmymoney.cpp:1858
+#: kmymoney/kmymoney.cpp:1862
 #, kde-format
 msgctxt "Cancel transaction edit"
 msgid "Cancel"
 msgstr "Renunță"
 
-#: kmymoney/kmymoney.cpp:1859
+#: kmymoney/kmymoney.cpp:1863
 #, kde-format
 msgctxt "Delete transaction"
 msgid "Delete"
 msgstr "Șterge"
 
-#: kmymoney/kmymoney.cpp:1860
+#: kmymoney/kmymoney.cpp:1864
 #, kde-format
 msgctxt "Duplicate transaction"
 msgid "Duplicate"
 msgstr "Duplică"
 
-#: kmymoney/kmymoney.cpp:1861
+#: kmymoney/kmymoney.cpp:1865
 #, fuzzy, kde-format
 #| msgid "Add shares"
 msgctxt "Add reversing transaction"
 msgid "Add reversing"
 msgstr "Adaugă acțiuni"
 
-#: kmymoney/kmymoney.cpp:1862
+#: kmymoney/kmymoney.cpp:1866
 #, kde-format
 msgctxt "Accept 'imported' and 'matched' transaction"
 msgid "Accept"
 msgstr "Acceptă"
 
-#: kmymoney/kmymoney.cpp:1863
+#: kmymoney/kmymoney.cpp:1867
 #, kde-format
 msgctxt "Toggle reconciliation flag"
 msgid "Toggle"
 msgstr "Comută"
 
-#: kmymoney/kmymoney.cpp:1864
+#: kmymoney/kmymoney.cpp:1868
 #, kde-format
 msgctxt "Mark transaction cleared"
 msgid "Cleared"
 msgstr "Verificată"
 
-#: kmymoney/kmymoney.cpp:1865
+#: kmymoney/kmymoney.cpp:1869
 #, kde-format
 msgctxt "Mark transaction reconciled"
 msgid "Reconciled"
 msgstr "Reconciliată"
 
-#: kmymoney/kmymoney.cpp:1866
+#: kmymoney/kmymoney.cpp:1870
 #, kde-format
 msgctxt "Mark transaction not reconciled"
 msgid "Not reconciled"
 msgstr "Nereconciliată"
 
-#: kmymoney/kmymoney.cpp:1867
+#: kmymoney/kmymoney.cpp:1871
 #, fuzzy, kde-format
 #| msgid "Move transaction to..."
 msgctxt "Move transaction"
 msgid "Move transaction"
 msgstr "Mută tranzacția în..."
 
-#: kmymoney/kmymoney.cpp:1868
+#: kmymoney/kmymoney.cpp:1872
 #, fuzzy, kde-format
 #| msgid "Show transaction form"
 msgctxt "Show transaction"
 msgid "Show transaction"
 msgstr "Afișează formularul pentru o tranzacție"
 
-#: kmymoney/kmymoney.cpp:1869
+#: kmymoney/kmymoney.cpp:1873
 #, fuzzy, kde-format
 #| msgid "Show Transaction Detail"
 msgctxt "Display transaction details"
 msgid "Show transaction details"
 msgstr "Arată detaliile tranzacției"
 
-#: kmymoney/kmymoney.cpp:1871
+#: kmymoney/kmymoney.cpp:1875
 #, kde-format
 msgctxt "Select all transactions"
 msgid "Select all"
 msgstr "Selectează tot"
 
-#: kmymoney/kmymoney.cpp:1872
+#: kmymoney/kmymoney.cpp:1876
 #, kde-format
 msgid "Go to account"
 msgstr "Du-te la cont"
 
-#: kmymoney/kmymoney.cpp:1873
+#: kmymoney/kmymoney.cpp:1877
 #, kde-format
 msgid "Go to payee"
 msgstr "Du-te la beneficiar/plătitor"
 
-#: kmymoney/kmymoney.cpp:1874
+#: kmymoney/kmymoney.cpp:1878
 #, kde-format
 msgid "Create scheduled transaction..."
 msgstr "Creare tranzacție programată..."
 
-#: kmymoney/kmymoney.cpp:1875
+#: kmymoney/kmymoney.cpp:1879
 #, kde-format
 msgid "Assign next number"
 msgstr "Alocă numărul următor"
 
-#: kmymoney/kmymoney.cpp:1876
+#: kmymoney/kmymoney.cpp:1880
 #, kde-format
 msgctxt "Combine transactions"
 msgid "Combine"
 msgstr "Combină"
 
-#: kmymoney/kmymoney.cpp:1877
+#: kmymoney/kmymoney.cpp:1881
 #, fuzzy, kde-format
 #| msgid "As of today"
 msgid "Move to today"
 msgstr "De astăzi"
 
-#: kmymoney/kmymoney.cpp:1878
+#: kmymoney/kmymoney.cpp:1882
 #, fuzzy, kde-format
 #| msgid "Correct splits"
 msgid "Copy splits"
 msgstr "Corectează părți de tranzacție"
 
-#: kmymoney/kmymoney.cpp:1879
+#: kmymoney/kmymoney.cpp:1883
 #, kde-format
 msgid "Show filter widget"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1881
+#: kmymoney/kmymoney.cpp:1885
 #, kde-format
 msgid "New investment..."
 msgstr "Investiție nouă..."
 
-#: kmymoney/kmymoney.cpp:1882
+#: kmymoney/kmymoney.cpp:1886
 #, kde-format
 msgid "Edit investment..."
 msgstr "Modificare investiție..."
 
-#: kmymoney/kmymoney.cpp:1883
+#: kmymoney/kmymoney.cpp:1887
 #, kde-format
 msgid "Delete investment..."
 msgstr "Ștergere investiție..."
 
-#: kmymoney/kmymoney.cpp:1884
+#: kmymoney/kmymoney.cpp:1888
 #, kde-format
 msgid "Online price update..."
 msgstr "Actualizare preț online..."
 
-#: kmymoney/kmymoney.cpp:1885
+#: kmymoney/kmymoney.cpp:1889
 #, kde-format
 msgid "Manual price update..."
 msgstr "Actualizare preț manual..."
 
-#: kmymoney/kmymoney.cpp:1886
+#: kmymoney/kmymoney.cpp:1890
 #, fuzzy, kde-format
 #| msgid "Hide security"
 msgid "Edit security..."
 msgstr "Ascunde titlul de valoare"
 
-#: kmymoney/kmymoney.cpp:1887
+#: kmymoney/kmymoney.cpp:1891
 #, fuzzy, kde-format
 #| msgid "Delete security"
 msgid "Delete security..."
 msgstr "Șterge titlul de valoare"
 
-#: kmymoney/kmymoney.cpp:1890
+#: kmymoney/kmymoney.cpp:1894
 #, fuzzy, kde-format
 msgid "New schedule..."
 msgstr "Programare nouă..."
 
-#: kmymoney/kmymoney.cpp:1891 kmymoney/kmymoney.cpp:1892
+#: kmymoney/kmymoney.cpp:1895 kmymoney/kmymoney.cpp:1896
 #, kde-format
 msgid "Edit scheduled transaction"
 msgstr "Modifică tranzacția programată"
 
-#: kmymoney/kmymoney.cpp:1893
+#: kmymoney/kmymoney.cpp:1897
 #, kde-format
 msgid "Delete scheduled transaction"
 msgstr "Șterge tranzacția programată"
 
-#: kmymoney/kmymoney.cpp:1894
+#: kmymoney/kmymoney.cpp:1898
 #, kde-format
 msgid "Duplicate scheduled transaction"
 msgstr "Duplică tranzacția programată"
 
-#: kmymoney/kmymoney.cpp:1895
+#: kmymoney/kmymoney.cpp:1899
 #, kde-format
 msgid "Enter next transaction..."
 msgstr "Introducere tranzacție următoare..."
 
-#: kmymoney/kmymoney.cpp:1896
+#: kmymoney/kmymoney.cpp:1900
 #, kde-format
 msgid "Skip next transaction..."
 msgstr "Omite tranzacția următoare"
 
-#: kmymoney/kmymoney.cpp:1898
+#: kmymoney/kmymoney.cpp:1902
 #, fuzzy, kde-format
 #| msgid "New payee"
 msgid "New payee..."
 msgstr "Beneficiar nou"
 
-#: kmymoney/kmymoney.cpp:1899
+#: kmymoney/kmymoney.cpp:1903
 #, kde-format
 msgid "Rename payee"
 msgstr "Redenumește beneficiarul"
 
-#: kmymoney/kmymoney.cpp:1900
+#: kmymoney/kmymoney.cpp:1904
 #, kde-format
 msgid "Delete payee"
 msgstr "Șterge beneficiarul"
 
-#: kmymoney/kmymoney.cpp:1901
+#: kmymoney/kmymoney.cpp:1905
 #, kde-format
 msgid "Merge payees"
 msgstr "Îmbină beneficiarii"
 
-#: kmymoney/kmymoney.cpp:1903
+#: kmymoney/kmymoney.cpp:1907
 #, fuzzy, kde-format
 #| msgid "New tag"
 msgid "New tag..."
 msgstr "Marcaj nou"
 
-#: kmymoney/kmymoney.cpp:1904
+#: kmymoney/kmymoney.cpp:1908
 #, kde-format
 msgid "Rename tag"
 msgstr "Redenumește marcajul"
 
-#: kmymoney/kmymoney.cpp:1905
+#: kmymoney/kmymoney.cpp:1909
 #, kde-format
 msgid "Delete tag"
 msgstr "Șterge marcajul"
 
-#: kmymoney/kmymoney.cpp:1907
+#: kmymoney/kmymoney.cpp:1911
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Open report"
 msgstr "Raport &nou"
 
-#: kmymoney/kmymoney.cpp:1908
+#: kmymoney/kmymoney.cpp:1912
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "New report"
 msgstr "Raport &nou"
 
-#: kmymoney/kmymoney.cpp:1909
+#: kmymoney/kmymoney.cpp:1913
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Copy report"
 msgstr "Raport &nou"
 
-#: kmymoney/kmymoney.cpp:1910
+#: kmymoney/kmymoney.cpp:1914
 #, fuzzy, kde-format
 #| msgid "Configure this report"
 msgid "Configure report"
 msgstr "Personalizează acest raport"
 
-#: kmymoney/kmymoney.cpp:1911
+#: kmymoney/kmymoney.cpp:1915
 #, fuzzy, kde-format
 #| msgid "Favorite reports"
 msgid "Export report"
 msgstr "Rapoarte favorite"
 
-#: kmymoney/kmymoney.cpp:1912
+#: kmymoney/kmymoney.cpp:1916
 #, fuzzy, kde-format
 #| msgid "Delete Report?"
 msgid "Delete report"
 msgstr "Șterge Raportul?"
 
-#: kmymoney/kmymoney.cpp:1913
+#: kmymoney/kmymoney.cpp:1917
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Close report"
 msgstr "Raport &nou"
 
-#: kmymoney/kmymoney.cpp:1914
+#: kmymoney/kmymoney.cpp:1918
 #, fuzzy, kde-format
 #| msgctxt "Toggle reconciliation flag"
 #| msgid "Toggle"
 msgid "Toggle chart"
 msgstr "Comută"
 
-#: kmymoney/kmymoney.cpp:1915
+#: kmymoney/kmymoney.cpp:1919
 #, fuzzy, kde-format
 #| msgid "Include transfers"
 msgid "Edit tab order"
 msgstr "Include transferuri"
 
-#: kmymoney/kmymoney.cpp:1918
+#: kmymoney/kmymoney.cpp:1922
 #, kde-format
 msgid "Test new feature"
 msgstr "Testează funcționalitate nouă"
 
-#: kmymoney/kmymoney.cpp:1919
+#: kmymoney/kmymoney.cpp:1923
 #, kde-format
 msgid "Debug Traces"
 msgstr "Depanare"
 
-#: kmymoney/kmymoney.cpp:1921
+#: kmymoney/kmymoney.cpp:1925
 #, kde-format
 msgid "Debug Timers"
 msgstr "Cronometre pentru depanare"
 
-#: kmymoney/kmymoney.cpp:1940
+#: kmymoney/kmymoney.cpp:1944
 #, fuzzy, kde-format
 #| msgctxt "Button text for match transaction"
 #| msgid "Match"
@@ -5435,7 +5440,7 @@ msgctxt "Match transactions"
 msgid "Match"
 msgstr "Potrivește"
 
-#: kmymoney/kmymoney.cpp:1941
+#: kmymoney/kmymoney.cpp:1945
 #, fuzzy, kde-format
 #| msgctxt "Button text for unmatch transaction"
 #| msgid "Unmatch"
@@ -5443,45 +5448,45 @@ msgctxt "Unmatch transactions"
 msgid "Unmatch"
 msgstr "Disociază"
 
-#: kmymoney/kmymoney.cpp:2066
+#: kmymoney/kmymoney.cpp:2070
 #, fuzzy, kde-format
 #| msgid "Duplicate the current selected transactions"
 msgctxt "@info:tooltip"
 msgid "Start reconciling the currently selected account"
 msgstr "Creează duplicate pentru tranzacțiile marcate"
 
-#: kmymoney/kmymoney.cpp:2067
+#: kmymoney/kmymoney.cpp:2071
 #, fuzzy, kde-format
 #| msgid "Postpone reconciliation"
 msgctxt "@info:tooltip"
 msgid "Postpone the current reconciliation"
 msgstr "Amînă reconcilierea"
 
-#: kmymoney/kmymoney.cpp:2068
+#: kmymoney/kmymoney.cpp:2072
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgctxt "@info:tooltip"
 msgid "Finish the current reconciliation"
 msgstr "Ultima reconciliere"
 
-#: kmymoney/kmymoney.cpp:2069
+#: kmymoney/kmymoney.cpp:2073
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgctxt "@info:tooltip"
 msgid "Cancel the current reconciliation"
 msgstr "Ultima reconciliere"
 
-#: kmymoney/kmymoney.cpp:2177
+#: kmymoney/kmymoney.cpp:2181
 #, kde-format
 msgid "View back"
 msgstr "Vizualizare înapoi"
 
-#: kmymoney/kmymoney.cpp:2178
+#: kmymoney/kmymoney.cpp:2182
 #, kde-format
 msgid "View forward"
 msgstr "Vizualizare înainte"
 
-#: kmymoney/kmymoney.cpp:2569
+#: kmymoney/kmymoney.cpp:2571
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
@@ -5490,12 +5495,12 @@ msgstr ""
 "Cel puțin o parte de tranzacție aparținînd tranzacțiilor marcate a fost "
 "reconciliată. Doriți totuși să ștergeți aceste tranzacții?"
 
-#: kmymoney/kmymoney.cpp:2571
+#: kmymoney/kmymoney.cpp:2573
 #, kde-format
 msgid "Transaction already reconciled"
 msgstr "Tranzacția a fost deja reconciliată"
 
-#: kmymoney/kmymoney.cpp:2576
+#: kmymoney/kmymoney.cpp:2578
 #, kde-format
 msgid "Do you really want to delete the selected transaction?"
 msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -5503,24 +5508,24 @@ msgstr[0] "Doriți într-adevăr să ștergeți tranzacția marcată?"
 msgstr[1] "Doriți într-adevăr să ștergeți toate cele %1 tranzacții marcate?"
 msgstr[2] "Doriți într-adevăr să ștergeți toate cele %1 de tranzacții marcate?"
 
-#: kmymoney/kmymoney.cpp:2580
+#: kmymoney/kmymoney.cpp:2582
 #, kde-format
 msgid "Delete transaction"
 msgstr "Șterge tranzacția"
 
-#: kmymoney/kmymoney.cpp:2657
+#: kmymoney/kmymoney.cpp:2659
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to duplicate transaction(s)"
 msgstr "Nu s-au putut adăuga tranzacții"
 
-#: kmymoney/kmymoney.cpp:2943
+#: kmymoney/kmymoney.cpp:2945
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to modify transaction"
 msgstr "Nu s-au putut adăuga tranzacții"
 
-#: kmymoney/kmymoney.cpp:3035
+#: kmymoney/kmymoney.cpp:3037
 #, fuzzy, kde-format
 #| msgid ""
 #| "At least one split of the selected transactions has been reconciled. Do "
@@ -5532,14 +5537,14 @@ msgstr ""
 "Cel puțin o parte de tranzacție aparținînd tranzacțiilor marcate a fost "
 "reconciliată. Doriți totuși să ștergeți aceste tranzacții?"
 
-#: kmymoney/kmymoney.cpp:3037
+#: kmymoney/kmymoney.cpp:3039
 #, fuzzy, kde-format
 #| msgid "Transaction already reconciled"
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "Tranzacția a fost deja reconciliată"
 
-#: kmymoney/kmymoney.cpp:3042
+#: kmymoney/kmymoney.cpp:3044
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -5549,20 +5554,20 @@ msgstr[0] "Doriți într-adevăr să ștergeți tranzacția marcată?"
 msgstr[1] "Doriți într-adevăr să ștergeți toate cele %1 tranzacții marcate?"
 msgstr[2] "Doriți într-adevăr să ștergeți toate cele %1 de tranzacții marcate?"
 
-#: kmymoney/kmymoney.cpp:3046
+#: kmymoney/kmymoney.cpp:3048
 #, fuzzy, kde-format
 #| msgid "Storing transactions"
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "Memorează tranzacții"
 
-#: kmymoney/kmymoney.cpp:3131
+#: kmymoney/kmymoney.cpp:3133
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to accept transaction"
 msgstr "Nu s-au putut adăuga tranzacții"
 
-#: kmymoney/kmymoney.cpp:3171
+#: kmymoney/kmymoney.cpp:3173
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has detected some overdue scheduled transactions for this "
@@ -5574,12 +5579,12 @@ msgstr ""
 "KMyMoney a detectat existența unor tranzacții programate întîrziate pentru "
 "acest cont. Doriți să introduceți acele tranzacții acum?"
 
-#: kmymoney/kmymoney.cpp:3174 kmymoney/views/kscheduledview.cpp:134
+#: kmymoney/kmymoney.cpp:3176 kmymoney/views/kscheduledview.cpp:134
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "Au fost găsite tranzacții programate"
 
-#: kmymoney/kmymoney.cpp:3249
+#: kmymoney/kmymoney.cpp:3251
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have closed this account. It remains in the system because you have "
@@ -5598,17 +5603,17 @@ msgstr ""
 "accesând meniul Vizualizează și alegând opțiunea <b>Arată toate conturile</"
 "b> sau renunțând la opțiunea <b>Ascunde conturile închise</b>."
 
-#: kmymoney/kmymoney.cpp:3251
+#: kmymoney/kmymoney.cpp:3253
 #, kde-format
 msgid "Information"
 msgstr "Informații"
 
-#: kmymoney/kmymoney.cpp:3355 kmymoney/kmymoney.cpp:3451
+#: kmymoney/kmymoney.cpp:3357 kmymoney/kmymoney.cpp:3453
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "Nu există fișier KMyMoney deschis"
 
-#: kmymoney/kmymoney.cpp:3388 kmymoney/kmymoney.cpp:3390
+#: kmymoney/kmymoney.cpp:3390 kmymoney/kmymoney.cpp:3392
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1364
 #: kmymoney/plugins/xml/xmlstorage.cpp:415
 #, kde-format
@@ -5616,44 +5621,44 @@ msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "Gata."
 
-#: kmymoney/kmymoney.cpp:3455
+#: kmymoney/kmymoney.cpp:3457
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "Se vizualizează datele personale..."
 
-#: kmymoney/kmymoney.cpp:3462
+#: kmymoney/kmymoney.cpp:3464
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "Modifică Datele personale"
 
-#: kmymoney/kmymoney.cpp:3477
+#: kmymoney/kmymoney.cpp:3479
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr "Nu s-au putut salva datele utilizator: %1"
 
-#: kmymoney/kmymoney.cpp:3485
+#: kmymoney/kmymoney.cpp:3487
 #, kde-format
 msgid "Importing account templates."
 msgstr "Se importă șabloane de cont"
 
-#: kmymoney/kmymoney.cpp:3499
+#: kmymoney/kmymoney.cpp:3501
 #, fuzzy, kde-format
 #| msgid "Unable to import template(s): %1, thrown in %2:%3"
 msgid "Unable to import template(s)"
 msgstr "Nu s-au putut importa șabloanele de cont: %1, excepție în %2:%3"
 
-#: kmymoney/kmymoney.cpp:3507
+#: kmymoney/kmymoney.cpp:3509
 #, kde-format
 msgid "Exporting account templates."
 msgstr "Se exportă șabloanele de cont"
 
-#: kmymoney/kmymoney.cpp:3513
+#: kmymoney/kmymoney.cpp:3515
 #, kde-format
 msgid "Save as..."
 msgstr "Salvează ca..."
 
 # well-spelled: kmt
-#: kmymoney/kmymoney.cpp:3514
+#: kmymoney/kmymoney.cpp:3516
 #, fuzzy, kde-format
 #| msgid ""
 #| "*.kmt|KMyMoney template files\n"
@@ -5663,24 +5668,24 @@ msgstr ""
 "*.kmt|Fișiere șablon KMyMoney\n"
 "*|Toate fișierele"
 
-#: kmymoney/kmymoney.cpp:3545
+#: kmymoney/kmymoney.cpp:3547
 #, fuzzy, kde-format
 #| msgid "Template Error"
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "Eroare de șablon"
 
-#: kmymoney/kmymoney.cpp:3563
+#: kmymoney/kmymoney.cpp:3565
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr "Fișierul <b>%1</b> deja există. Doriți într-adevăr să-l suprascrieți?"
 
-#: kmymoney/kmymoney.cpp:3565 kmymoney/plugins/csv/export/csvexporter.cpp:102
+#: kmymoney/kmymoney.cpp:3567 kmymoney/plugins/csv/export/csvexporter.cpp:102
 #, kde-format
 msgid "File already exists"
 msgstr "Fișierul deja există"
 
-#: kmymoney/kmymoney.cpp:3687
+#: kmymoney/kmymoney.cpp:3692
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
@@ -5689,13 +5694,13 @@ msgstr ""
 "Fișierul trebuie salvat înainte de a crea copia de siguranță. Doriți să "
 "continuați?"
 
-#: kmymoney/kmymoney.cpp:3689
+#: kmymoney/kmymoney.cpp:3694
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3706
+#: kmymoney/kmymoney.cpp:3711
 #, kde-format
 msgid ""
 "The current implementation of the backup functionality only supports local "
@@ -5704,72 +5709,72 @@ msgstr ""
 "Implementarea curentă a funcționalității de realizare de copii de siguranță "
 "susține doar fișiere-sursă locale. Fișierul-sursă actual este „%1”."
 
-#: kmymoney/kmymoney.cpp:3708
+#: kmymoney/kmymoney.cpp:3713
 #, kde-format
 msgid "Local files only"
 msgstr "Doar fișiere locale"
 
-#: kmymoney/kmymoney.cpp:3747
+#: kmymoney/kmymoney.cpp:3752
 #, kde-format
 msgid "Mounting %1"
 msgstr "Se montează %1"
 
-#: kmymoney/kmymoney.cpp:3781
+#: kmymoney/kmymoney.cpp:3786
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr ""
 "Există deja o copie de siguranță creată astăzi pe dispozitivul dat. Doriți "
 "să înlocuiți această copie?"
 
-#: kmymoney/kmymoney.cpp:3781
+#: kmymoney/kmymoney.cpp:3786
 #, kde-format
 msgid "&Replace"
 msgstr "Î&nlocuiește"
 
-#: kmymoney/kmymoney.cpp:3789
+#: kmymoney/kmymoney.cpp:3794
 #, fuzzy, kde-format
 #| msgid "Unable to create account: %1"
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
 msgstr "Nu s-a putut crea contul: %1"
 
-#: kmymoney/kmymoney.cpp:3794
+#: kmymoney/kmymoney.cpp:3799
 #, kde-format
 msgid "Writing %1"
 msgstr "Se scrie %1"
 
-#: kmymoney/kmymoney.cpp:3815
+#: kmymoney/kmymoney.cpp:3820
 #, kde-format
 msgid "Unmounting %1"
 msgstr "Se demontează %1"
 
-#: kmymoney/kmymoney.cpp:3852
+#: kmymoney/kmymoney.cpp:3857
 #, kde-format
 msgid "Error mounting device"
 msgstr "Eroare la montarea dispozitivului"
 
-#: kmymoney/kmymoney.cpp:3867 kmymoney/kmymoney.cpp:3886
+#: kmymoney/kmymoney.cpp:3872 kmymoney/kmymoney.cpp:3891
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "Gata"
 
-#: kmymoney/kmymoney.cpp:3868 kmymoney/kmymoney.cpp:3888
+#: kmymoney/kmymoney.cpp:3873 kmymoney/kmymoney.cpp:3893
 #, kde-format
 msgid "File successfully backed up"
 msgstr "Copia de securitate a fișierului s-a salvat cu succes"
 
-#: kmymoney/kmymoney.cpp:3874
+#: kmymoney/kmymoney.cpp:3879
 #, kde-format
 msgid "Error copying file to device"
 msgstr "Eroare la copierea fișierului pe dispozitiv"
 
-#: kmymoney/kmymoney.cpp:3890
+#: kmymoney/kmymoney.cpp:3895
 #, kde-format
 msgid "Error unmounting device"
 msgstr "Eroare la demontarea dispozitivului"
 
-#: kmymoney/kmymoney.cpp:3937
+#: kmymoney/kmymoney.cpp:3942
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5786,30 +5791,30 @@ msgstr ""
 "Vă rog să folosiți Nu pentru a lăsa soldul ca %2,\n"
 "Vă rog să folosiți Renunță pentru a întrerupe procesul de creere a contului."
 
-#: kmymoney/kmymoney.cpp:3947
+#: kmymoney/kmymoney.cpp:3952
 #, fuzzy, kde-format
 #| msgid "Opening balance problem"
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "Problemă cu soldul inițial"
 
-#: kmymoney/kmymoney.cpp:3958
+#: kmymoney/kmymoney.cpp:3963
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "Nu s-a putut adăuga contul: %1"
 
-#: kmymoney/kmymoney.cpp:4084
+#: kmymoney/kmymoney.cpp:4089
 #, kde-format
 msgid "Running consistency check..."
 msgstr "Se execută o verificare de consistență..."
 
-#: kmymoney/kmymoney.cpp:4091
+#: kmymoney/kmymoney.cpp:4096
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "Verificarea consistenței a eșuat: %1"
 
-#: kmymoney/kmymoney.cpp:4101
+#: kmymoney/kmymoney.cpp:4106
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -5818,7 +5823,7 @@ msgstr ""
 "Verificarea consitenței a găsit cîteva probleme cu datele dumneavoastră. "
 "Detaliile sînt prezentate mai jos."
 
-#: kmymoney/kmymoney.cpp:4103
+#: kmymoney/kmymoney.cpp:4108
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5829,17 +5834,17 @@ msgstr ""
 "Detaliile sînt prezentate mai jos. Acele probleme care nu au putut fi "
 "rezolvate automat trebuiesc rezolvate de către utilizator."
 
-#: kmymoney/kmymoney.cpp:4106
+#: kmymoney/kmymoney.cpp:4111
 #, kde-format
 msgid "Consistency check result"
 msgstr "Rezultatul verificării consistenței"
 
-#: kmymoney/kmymoney.cpp:4172
+#: kmymoney/kmymoney.cpp:4177
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Se verifică existența unor tranzacții programate restante..."
 
-#: kmymoney/kmymoney.cpp:4362
+#: kmymoney/kmymoney.cpp:4367
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
@@ -5847,12 +5852,12 @@ msgstr ""
 "Înainte să puteți importa un bilanț trebuie să alegeți un fișier KMyMoney."
 
 # well-spelled: Web, Connect
-#: kmymoney/kmymoney.cpp:4367
+#: kmymoney/kmymoney.cpp:4372
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Importă un bilanț nou prin Web Connect"
 
-#: kmymoney/kmymoney.cpp:4379
+#: kmymoney/kmymoney.cpp:4384
 #, fuzzy, kde-format
 #| msgid ""
 #| "Unable to import %1 using %2 plugin.  The plugin returned the following "
@@ -5865,72 +5870,72 @@ msgstr ""
 "Nu s-a putut importa %1 folosind modulul %2. Modulul a întors următoarea "
 "eroare: %3"
 
-#: kmymoney/kmymoney.cpp:4379 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
+#: kmymoney/kmymoney.cpp:4384 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
 #, kde-format
 msgid "Importing error"
 msgstr "Eroare de import"
 
-#: kmymoney/kmymoney.cpp:4406
+#: kmymoney/kmymoney.cpp:4411
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Toate mesajele au fost activate"
 
-#: kmymoney/kmymoney.cpp:4406
+#: kmymoney/kmymoney.cpp:4411
 #, kde-format
 msgid "All messages"
 msgstr "Toate mesajele"
 
-#: kmymoney/kmymoney.cpp:4442
+#: kmymoney/kmymoney.cpp:4447
 #, kde-format
 msgid "Auto saving..."
 msgstr "Se salvează automat..."
 
-#: kmymoney/kmymoney.cpp:4562
+#: kmymoney/kmymoney.cpp:4567
 #, kde-format
 msgid "Creating new document..."
 msgstr "Se creează un document nou..."
 
-#: kmymoney/kmymoney.cpp:4622
+#: kmymoney/kmymoney.cpp:4627
 #, fuzzy, kde-format
 #| msgid "Create a new profile"
 msgid "Couldn't create a new file."
 msgstr "Creează un profil nou"
 
-#: kmymoney/kmymoney.cpp:4633
+#: kmymoney/kmymoney.cpp:4638
 #, kde-format
 msgid "Open a file."
 msgstr "Deschide un fișier."
 
-#: kmymoney/kmymoney.cpp:4647
+#: kmymoney/kmymoney.cpp:4652
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4651
+#: kmymoney/kmymoney.cpp:4656
 #, fuzzy, kde-format
 #| msgctxt "All files (Filefilter)"
 #| msgid "All files"
 msgid "All files (*)"
 msgstr "Toate fișierele"
 
-#: kmymoney/kmymoney.cpp:4664
+#: kmymoney/kmymoney.cpp:4669
 #, kde-format
 msgid "Loading file..."
 msgstr "Se încarcă fișierul..."
 
-#: kmymoney/kmymoney.cpp:4670
+#: kmymoney/kmymoney.cpp:4675
 #, kde-format
 msgid "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
 msgstr ""
 "<p>Fișierul <b>%1</b> este deja deschis de către o altă instanță a "
 "aplicației KMyMoney</p>"
 
-#: kmymoney/kmymoney.cpp:4670
+#: kmymoney/kmymoney.cpp:4675
 #, kde-format
 msgid "Duplicate open"
 msgstr "Deschidere multiplă"
 
-#: kmymoney/kmymoney.cpp:4677
+#: kmymoney/kmymoney.cpp:4682
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5939,52 +5944,52 @@ msgstr ""
 "<p><b>%1</b> este un nume de fișier greșit sau fișierul nu există. Puteți "
 "deschide un alt fișier sau creați un fișier nou.</p>"
 
-#: kmymoney/kmymoney.cpp:4677
+#: kmymoney/kmymoney.cpp:4682
 #, kde-format
 msgid "File not found"
 msgstr "Fișierul nu a fost găsit"
 
-#: kmymoney/kmymoney.cpp:4708
+#: kmymoney/kmymoney.cpp:4713
 #, fuzzy, kde-format
 #| msgid "Cannot open file %1 for writing"
 msgid "Cannot open file as requested."
 msgstr "Nu s-a putut deschide fișierul %1 pentru scriere"
 
-#: kmymoney/kmymoney.cpp:4715
+#: kmymoney/kmymoney.cpp:4720
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
 "necessary plugin is enabled."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4726
+#: kmymoney/kmymoney.cpp:4731
 #, kde-format
 msgid "Saving file..."
 msgstr "Se salvează fișierul..."
 
-#: kmymoney/kmymoney.cpp:4738
+#: kmymoney/kmymoney.cpp:4743
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your data."
 msgstr "Nu s-a putut salva: %1"
 
-#: kmymoney/kmymoney.cpp:4744
+#: kmymoney/kmymoney.cpp:4749
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4750
+#: kmymoney/kmymoney.cpp:4755
 #, fuzzy, kde-format
 #| msgid "Saving file..."
 msgid "Saving file as...."
 msgstr "Se salvează fișierul..."
 
-#: kmymoney/kmymoney.cpp:4766
+#: kmymoney/kmymoney.cpp:4771
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4795
+#: kmymoney/kmymoney.cpp:4800
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your storage."
@@ -20237,7 +20242,7 @@ msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr "Nu pot fi create tranzacții în contextul unei categorii."
 
-#: kmymoney/views/keditscheduledlg.cpp:305
+#: kmymoney/views/keditscheduledlg.cpp:312
 #, kde-format
 msgctxt "@info Scheduled frequency changed"
 msgid ""
@@ -20246,31 +20251,31 @@ msgid ""
 "information will only be shown once for this schedule's edit session.</qt>"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:307
+#: kmymoney/views/keditscheduledlg.cpp:314
 #, fuzzy, kde-format
 #| msgid "Schedule found"
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "A fost găsit un program"
 
-#: kmymoney/views/keditscheduledlg.cpp:600
+#: kmymoney/views/keditscheduledlg.cpp:607
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Nu s-a putut adăuga tranzacția programată: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:600
+#: kmymoney/views/keditscheduledlg.cpp:607
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Adăugați o tranzacție programată"
 
-#: kmymoney/views/keditscheduledlg.cpp:630
-#: kmymoney/views/keditscheduledlg.cpp:673
-#: kmymoney/views/keditscheduledlg.cpp:683
+#: kmymoney/views/keditscheduledlg.cpp:637
+#: kmymoney/views/keditscheduledlg.cpp:680
+#: kmymoney/views/keditscheduledlg.cpp:690
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Nu s-a putut modifica tranzacția programată '%1'"
 
-#: kmymoney/views/keditscheduledlg.cpp:659
+#: kmymoney/views/keditscheduledlg.cpp:666
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -20291,7 +20296,7 @@ msgstr ""
 "cazul în care ultima dată a tranzacției nu este reactualizată. Doriți să "
 "reactualizați data ultimului transfer?"
 
-#: kmymoney/views/keditscheduledlg.cpp:664
+#: kmymoney/views/keditscheduledlg.cpp:671
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Resetează ultima dată de plată"
@@ -20729,30 +20734,37 @@ msgstr "Pasive lichide estimate"
 msgid "Expected Profit/Loss"
 msgstr "Profit estimat/Pierdere estimată"
 
-#: kmymoney/views/kinstitutionsview.cpp:257
+#: kmymoney/views/kinstitutionsview.cpp:251
+#, fuzzy, kde-format
+#| msgid "Edit institution..."
+msgctxt "@info:title Dialog title"
+msgid "Edit Institution"
+msgstr "Modificare instituție..."
+
+#: kmymoney/views/kinstitutionsview.cpp:258
 #, kde-format
 msgid "Unable to store institution: %1"
 msgstr "Nu se poate salva instituția: %1"
 
-#: kmymoney/views/kinstitutionsview.cpp:263
+#: kmymoney/views/kinstitutionsview.cpp:264
 #, kde-format
 msgid "Unable to edit institution: %1"
 msgstr "Nu se poate modifica instituția: %1"
 
-#: kmymoney/views/kinstitutionsview.cpp:274
+#: kmymoney/views/kinstitutionsview.cpp:275
 #, kde-format
 msgid "<p>Do you really want to delete the institution <b>%1</b>?</p>"
 msgstr "<p>Doriți într-adevăr să ștergeți instituția <b>%1</b> ?</p>"
 
-#: kmymoney/views/kinstitutionsview.cpp:275
+#: kmymoney/views/kinstitutionsview.cpp:276
 #, fuzzy, kde-format
 #| msgid "Delete institution..."
 msgctxt "@title:window"
 msgid "Delete institution"
 msgstr "Ștergere instituție..."
 
-#: kmymoney/views/kinstitutionsview.cpp:286
-#: kmymoney/views/kinstitutionsview.cpp:289
+#: kmymoney/views/kinstitutionsview.cpp:287
+#: kmymoney/views/kinstitutionsview.cpp:290
 #, kde-format
 msgid "Unable to delete institution: %1"
 msgstr "Nu s-a putut șterge instituția: %1"
@@ -21964,7 +21976,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Diferență: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:325
+#: kmymoney/views/simpleledgerview.cpp:326
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21972,7 +21984,7 @@ msgid ""
 "reconciling it. Finish, cancel or postpone the reconciliation to get it back."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:438
+#: kmymoney/views/simpleledgerview.cpp:439
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21980,7 +21992,7 @@ msgid ""
 "text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:441
+#: kmymoney/views/simpleledgerview.cpp:442
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21988,19 +22000,19 @@ msgid ""
 "this text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:684
+#: kmymoney/views/simpleledgerview.cpp:698
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:869
+#: kmymoney/views/simpleledgerview.cpp:882
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
 "cancel or postpone the reconciliation first."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:870
+#: kmymoney/views/simpleledgerview.cpp:883
 #, fuzzy, kde-format
 #| msgid "Closed tags can't be used."
 msgctxt "@title:info In reconciliation"
@@ -22327,7 +22339,7 @@ msgstr "Nu au fost găsite conturi."
 msgid "Form"
 msgstr ""
 
-#: kmymoney/widgets/kmymoneyaccountcombo.cpp:131
+#: kmymoney/widgets/kmymoneyaccountcombo.cpp:136
 #, fuzzy, kde-format
 #| msgid "Use this to open the profile editor"
 msgctxt "@info:tooltip icon in category to open the split editor"

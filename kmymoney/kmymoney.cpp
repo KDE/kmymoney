@@ -1143,7 +1143,9 @@ public:
         // make sure all shared actions of the New button have the right state
         if (m_sharedActionButtons[Action::FileNew].button) {
             for (const auto action : m_sharedActionButtons[Action::FileNew].button->actions()) {
-                action->setEnabled(m_storageInfo.isOpened);
+                if (action) {
+                    action->setEnabled(m_storageInfo.isOpened);
+                }
             }
         }
         // except the New File/Book which is always enabled
@@ -1522,7 +1524,9 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
             d->m_sharedActionButtons.value(action).button->setDefaultAction(newAction);
         } else {
             for (auto buttonInfo : d->m_sharedActionButtons) {
-                buttonInfo.button->setDefaultAction(buttonInfo.defaultAction);
+                if (buttonInfo.button) {
+                    buttonInfo.button->setDefaultAction(buttonInfo.defaultAction);
+                }
             }
         }
     });
@@ -2304,9 +2308,7 @@ void KMyMoneyApp::saveOptions()
     toolBar("mainToolBar")->saveSettings(toolbarGrp);
 
     d->m_recentFiles->saveEntries(d->m_config->group("Recent Files"));
-
 }
-
 
 void KMyMoneyApp::readOptions()
 {
@@ -3653,6 +3655,9 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
     MyMoneyFile::instance()->journalModel()->resetRowHeightInformation();
 
     pActions[Action::ViewTransactionDetail]->setChecked(KMyMoneySettings::showRegisterDetailed());
+    pActions[Action::ViewHideReconciled]->setChecked(KMyMoneySettings::hideReconciledTransactions());
+    pActions[Action::ViewHideCategories]->setChecked(KMyMoneySettings::hideUnusedCategory());
+    pActions[Action::ViewShowAll]->setChecked(KMyMoneySettings::showAllAccounts());
 
     // update the holiday region configuration
     setHolidayRegion(KMyMoneySettings::holidayRegion());

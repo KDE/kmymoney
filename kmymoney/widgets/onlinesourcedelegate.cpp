@@ -41,7 +41,14 @@ QWidget* OnlineSourceDelegate::createEditor(QWidget* parent, const QStyleOptionV
     KMMOnlineQuotesProfileManager& manager(KMMOnlineQuotesProfileManager::instance());
     const auto quoteProfile(manager.profile(QLatin1String("kmymoney5")));
     if (quoteProfile) {
-        editor->addItems(quoteProfile->quoteSources());
+        const auto quoteSourceNames = quoteProfile->quoteSources();
+        // add only quote sources that are eligible for currency conversions
+        for (const auto& quoteSourceName : quoteSourceNames) {
+            const auto quoteSource = AlkOnlineQuoteSource(quoteSourceName, quoteProfile);
+            if (quoteSource.requiresTwoIdentifier()) {
+                editor->addItem(quoteSourceName);
+            }
+        }
     }
     editor->setEnabled(quoteProfile != nullptr);
     editor->model()->sort(0);

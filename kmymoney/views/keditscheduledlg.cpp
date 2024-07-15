@@ -158,6 +158,13 @@ public:
             connect(m_accountCombo, &KMyMoneyAccountCombo::accountSelected, this, [&]() {
                 updateState();
             });
+
+            // don't show any investment account in the account combo
+            auto model = qobject_cast<AccountsProxyModel*>(m_accountCombo->model());
+            if (model) {
+                model->removeAccountType(eMyMoney::Account::Type::Investment);
+                model->removeAccountType(eMyMoney::Account::Type::Stock);
+            }
         }
         const auto account = m_schedule.account();
         if (!account.id().isEmpty()) {

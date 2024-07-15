@@ -15,6 +15,7 @@
 #include <QLineEdit>
 #include <QList>
 #include <QRegularExpression>
+#include <QStylePainter>
 #include <QTreeView>
 
 // ----------------------------------------------------------------------------
@@ -38,18 +39,21 @@ public:
         , m_popupView(nullptr)
         , m_splitAction(nullptr)
         , m_inMakeCompletion(false)
+        , m_showFullAccountName(false)
     {
         m_q->setInsertPolicy(QComboBox::NoInsert);
         m_q->setMinimumWidth(m_q->fontMetrics().horizontalAdvance(QLatin1Char('W')) * 15);
         m_q->setMaxVisibleItems(15);
     }
 
-    KMyMoneyAccountCombo*           m_q;
-    QTreeView*                      m_popupView;
-    QAction*                        m_splitAction;
-    QString                         m_lastSelectedAccount;
-    QModelIndex                     m_lastSelectedIndex;
-    bool                            m_inMakeCompletion;
+    KMyMoneyAccountCombo* m_q;
+    QTreeView* m_popupView;
+    QAction* m_splitAction;
+    QString m_lastSelectedAccount;
+    QString m_fullAccountName;
+    QModelIndex m_lastSelectedIndex;
+    bool m_inMakeCompletion;
+    bool m_showFullAccountName;
 
     void selectFirstMatchingItem()
     {
@@ -118,6 +122,7 @@ public:
         m_q->setRootModelIndex(idx.parent());
         m_q->setCurrentIndex(idx.row());
         m_q->setRootModelIndex(QModelIndex());
+        m_fullAccountName = idx.data(eMyMoney::Model::AccountFullHierarchyNameRole).toString();
     }
 
     void showSplitAction(bool show)
@@ -177,6 +182,14 @@ void KMyMoneyAccountCombo::setEditable(bool isEditable)
         connect(lineEdit(), &QLineEdit::textEdited, this, &KMyMoneyAccountCombo::makeCompletion, Qt::UniqueConnection);
         installEventFilter(this);
         d->showSplitAction(true);
+        d->m_showFullAccountName = false;
+    }
+}
+
+void KMyMoneyAccountCombo::setShowFullAccountName(bool showFullName)
+{
+    if (!lineEdit()) {
+        d->m_showFullAccountName = showFullName;
     }
 }
 
@@ -191,6 +204,27 @@ void KMyMoneyAccountCombo::wheelEvent(QWheelEvent *ev)
 {
     Q_UNUSED(ev)
     // don't change anything with the help of the wheel, yet (due to the tree model)
+}
+
+void KMyMoneyAccountCombo::paintEvent(QPaintEvent*)
+{
+    QStylePainter painter(this);
+    painter.setPen(palette().color(QPalette::Text));
+
+    // draw the combobox frame, focusrect and selected etc.
+    QStyleOptionComboBox opt;
+    initStyleOption(&opt);
+    painter.drawComplexControl(QStyle::CC_ComboBox, opt);
+
+    if (currentIndex() < 0 && !placeholderText().isEmpty()) {
+        opt.palette.setBrush(QPalette::ButtonText, opt.palette.placeholderText());
+        opt.currentText = placeholderText();
+    } else if (d->m_showFullAccountName) {
+        opt.currentText = d->m_fullAccountName;
+    }
+
+    // draw the icon and text
+    painter.drawControl(QStyle::CE_ComboBoxLabel, opt);
 }
 
 void KMyMoneyAccountCombo::expandAll()
