@@ -273,7 +273,7 @@
         <guimenuitem>Hide reconciled transactions</guimenuitem>
       </menuchoice></term>
     <listitem>
-      <para>Hides reconciled transactions in the register.</para>
+      <para>Hides reconciled transactions in the ledger.</para>
     </listitem>
   </varlistentry>
 
@@ -718,7 +718,7 @@
       <guimenu>Transaction</guimenu><guimenuitem>Select all</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para>Selects all transactions in the register.</para>
+      <para>Selects all transactions in the ledger.</para>
     </listitem>
   </varlistentry>
 
@@ -874,20 +874,20 @@
         <link linkend="details.settings.plugins.kbanking">KBanking plugin</link> as
         well as in the <ulink
         url="https://www.gnucash.org/docs/v5/C/gnucash-manual/tools-on-line-banking.html#tool-
-        aqb-modules">GnuCash documentation</ulink>.
+        aqb-modules">&gnucash; documentation</ulink>.
       </para>
 
       <para>
         The process of setting up online access in AqBanking is described in <ulink
         url="https://wiki.gnucash.org/wiki/De/Onlinebanking-Einrichtungsassistent">the
-        GnuCash wiki (German only)</ulink>.  This menu entry brings you to the dialog
-        shown in step #3.  The process until step #18 is the same for KMyMoney.  Once
-        done, you can map the account in &kmymoney; using <guimenu>Account</guimenu>
-        <guisubmenu>Map account</guisubmenu> and select the account from the list
-        provided.  From there, simply use <guimenu>Account</guimenu>
-        <guisubmenu>Update account</guisubmenu>, or in case you have more than one
-        online account mapped <guimenu>Account</guimenu> <guisubmenu>Update all
-        accounts</guisubmenu>.
+        &gnucash; wiki (German only)</ulink>.  This menu entry brings you to the
+        dialog shown in step #3.  The process until step #18 is the same for
+        KMyMoney.  Once done, you can map the account in &kmymoney; using
+        <guimenu>Account</guimenu> <guisubmenu>Map account</guisubmenu> and select
+        the account from the list provided.  From there, simply use
+        <guimenu>Account</guimenu> <guisubmenu>Update account</guisubmenu>, or in
+        case you have more than one online account mapped <guimenu>Account</guimenu>
+        <guisubmenu>Update all accounts</guisubmenu>.
       </para>
 
       <para>

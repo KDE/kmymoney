@@ -111,8 +111,8 @@ Items which need to be addressed, but so far not sure where (or more likely in m
 - in Tabbed sections, the sect titles are sometimes just the tab title, but sometimes more
   descriptive (see Payees Details) Do we want this to and can it be consistent?
 
-- Can you really not match two non-imported transactions?  If so, then the date always comes from
-  the imported transaction.
+- Can you really not match two imported or two non-imported transactions?  In the latter case, then
+  the date always comes from the imported transaction.
 
 - online quote page parser, date field order.  Did we recently have a case where it needed to be
   altered due to field separators in the date?  It shouldn't, so am I mis-remembering, or was there
@@ -121,253 +121,150 @@ Items which need to be addressed, but so far not sure where (or more likely in m
 - How much of the online price retrieval needs to be re-written due to moving that funcionality to
   libalkimia?
 
-- Price Editor dialog first column is labelled Commodity, but in New price entry, it
-  is called Security.  Shouldn't this be consistent?
+- Price Editor dialog first column is labelled Commodity, but in New price entry, it is called
+  Security.  Shouldn't this be consistent?
 
 - what are cash-flow related transactions?  How (and where) is the term defined?
 
-- CSV importer wizard, Separators page, for three dropdowns at the bottom, the labels
-  to the left of them are not all aligned the same.  The top seems to be centered in
-  a larger area, the bottom two are right aligned.
+- CSV importer wizard, Separators page, for three dropdowns at the bottom, the labels to the left of
+  them are not all aligned the same.  The top seems to be centered in a larger area, the bottom two
+  are right aligned. *** MR225 ***
 
-- CSV importer: list of steps is lower left in most of wizard, but all of left on start
-  page.  Should it be lower left on all for consistancy?
+- CSV importer: list of steps is lower left in most of wizard, but all of left on start page.
+  Should it be lower left on all for consistancy?
 
 - CSV importer - Banking cols, many have "X" to clear the value, and ther is "clear all."
-  Investment cols do not have "x" and only "Clear" not "Clear all", plus Clear Fee.
+  Investment cols do not have "x" and only "Clear" not "Clear all", plus Clear Fee.  Low priority to
+  make consistent?
 
 - I'd like to be consistent in use or not of inline icons when describing where to click
   to do something, but I'm deferring as too much effort for now.
 
-- (from an otherwise resolved FIXME in the split transaction section) do we have
-  adequate description of currency conversion?  I THINK so, but am leaving this
-  comment for confirmation.
-
-- It is also not clear if we need more detail on what can be a split (account instead
-  of category?) and where that would be described.
-
-- Need more details on the descriptions of all the transaction status features in the
-  filter dropdown? 
-
-- Is it still true you can not match two imported or two not-imported transactions?
+- (from resolved FIXME on split transactions) do we have adequate description of currency
+  conversion?  I THINK so, but am leaving this comment for confirmation.
 
 - Should iCalendar be mentioned anywhere other than the Settings chapter?
 
------ new as of 202404
-
-- The FAQ chapter needs checking for coordination with https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
-
-- In Plugins section of KMM Config, there is "GNC Importer" but everywhere else it is
-  referred to as GnuCash Importer.  Any reason for the difference?
+- The FAQ chapter needs checking for coordination with our online version, specifically
+  https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
 
 This is a list of potential enhancements I came up with while reviewing the handbook,
 but have not yet posted either as wishlist bugs, entries to any Issue on invent, or
 elsewhere.
 
-- In the Institutions View, configure the ability to allow not showing an institution
-  with no open accounts
+- In the Institutions View, configure the ability to allow not showing an institution with no open
+  accounts
 
-- In Views with selectable columns, allow reordering of those columns, and make it
-  easier to add/remove more than one column at a time when right clicking in thr
-  header row.
+- In Views with selectable columns, allow reordering of those columns, and make it easier to
+  add/remove more than one column at a time when right clicking in thr header row.  (partly done?)
 
-- Do we want to allow selecting right v left justification of any columns?  (mainly
-  thinking of date in Schedules View.
+- Do we want to allow selecting right v left justification of any columns?  (mainly thinking of date
+  in Schedules View.
 
-- In multi column views, allow not forcing use of full width, i.e., don't force
-  rightmost column to right edge of window.
+- In multi column views, allow not forcing use of full width, i.e., don't force rightmost column to
+  right edge of window (or allow left-justifying that column.)
 
-- Consider reordering the View Selector.  Categories right after Accounts, move
-  Schedules down directly above Ledgers?  Payees above Tags
+- Consider reordering the View Selector.  Categories should be right after Accounts.  Schedules should be 
+  directly above Ledgers.  Payees should be above Tags.
 
-- Should the Account View (Institutions also?) include Currency column?
+- Should the Accounts and Institutions Views include Currency column?
 
 - New Schedule dialog is still titled "Edit Scheduled transaction"
 
-- should register be replaced with ledger wherever it is used?
+- If the transaction form is displayed, a single selected transaction is shown in the form.
+  However, if you unselect the transaction, it remains displaye in the form.  If you select
+  additional transaction, the last one selected is shown in the form.  There seems no danger, since
+  the form is not editable, but it does seem odd.
 
-- If the transaction form is displayed, a single selected transaction is shown in the
-  form.  However, if you unselect the transaction, it remains displaye in the form.
-  If you select additional transaction, the last one selected is shown in the form.
-  There seems no danger, since the form is not editable, but it does seem odd.
+- all data items specified when creating or editing an object should be displayed on the main view
+  for that object.  For example identification number for stocks is not shown anywhere else.
 
-- all data items specified when creating or editing an object should be displayed on
-  the main view for that object.  For example identification number for stocks is not
-  shown anywhere else.
+- In report configuration dialog, if the report has not been run (select configure from the reports
+  list) need to allow closing without actually runing the report.
 
-- In report configuration dialog, if the report has not been run (select configure from
-  the reports list) and you close, do not actually run the report.
+- In the Budgets View, the list of categories on the right does not allow resizing columns.  In
+  addition, with all columns displayed, the Name column is so narrow you do not even see the first
+  letters of the name, only the income or expense icon.
 
-- In the Budgets View, the list of categories on the right does not allow resizing
-  columns.  In addition, with all columns displayed, the Name column is so narrow you
-  do not even see the first letters of the name, only the income or expense icon.
+- In the Budgets View, should the list on the right be called the Accounts List or the Categories
+  List?  The doc does mention that categories are accounts, but given this list is restricted to
+  categories only, ....?
 
-- In the Budgets View, should the list on the right be called the Accounts List or
-  the Categories List?  The doc does mention that categories are accounts, but given
-  this list is restricted to categories only, ....?
+- In the Budgets View, the three sections on the right cannot be resized, although it is possible to
+  adjust the division between the right and left sections.
 
-- In the Budgets View, the three sections on the right cannot be resized, although it is
-  possible to adjust the division between the right and left sections.
+- Forecast View - clicking the Chart tab takes (can take?) a LONG time.  Users need a way to
+  interrupt any such very long operation.  In my experience, these are in graphical reports over all
+  time and accounts.
 
-- Forecast View - clicking the Chart tab takes (can take?) a LONG time.  Users need a
-  way to interrupt any such very long operation.  In my experience, these are in reports
-  over all time and accounts, and this graphic.
+- In Forecast View, the Advanced tab seems to show one fewer cycle than expected.
 
-- In Forecast, the Advanced tab seems to show one fewer cycle than expected.
-
-- Forecast View, Budget tab seems final column really is Total, not anything
-  predicted, and values seem history predicted, even though my Forecast Method is
-  Scheduled.
-
-- Search dialog - some tabs say "All"/"None" but some say "Select all"/"Select none."
-  These should be consisstent.
-
-- The Search Dialog Deatils subtab has a problem with vertical alignment.  "Search
-  number in range" is at the vertical midpoint of from and to (looks good) but
-  "Search this number" seems lower than the text field for that number.
-
-- Search results should include (optional) Number column if you can search on it.
-
-- Cant search results be sorted any more?  (Could they ever?)
-
-- what does File/Backup do if SQL is the current file type?
-
-- on the config dialog, home section, should the top area be put in a box as are the
-  other two areas, and most of the contents on the other sections?
+- Forecast View, Budget tab it seems final column really is Total, not anything predicted, and
+  values seem history predicted, even though my Forecast Method is Scheduled.
 
 - Forecast View - doesn't seem to change forecast method without restarting KMM.
 
-- "Show all split details in ledger" acts inconsistenly.  With a split transaction,
-  if a split has a memo, that memo is shown in stead of the second category.  I don't
-  know if this is related to the bug I just filed about splits getting duplicated if
-  you toggle that setting while the transaction is open for editing.
+- Search dialog - some tabs say "All"/"None" but some say "Select all"/"Select none."  These should
+  be consistent.
 
-- Is there any consistency or pattern in config dialogs where something with a small
-  number of choicees is presented as a dropdown or a set of radio-button items?  For
-  example, Ledger configuration, Data Entry tab: Default reconciliation state is
-  dropdown with three choices, but Autofill has three radio-button choices.
+- The Search Dialog Deatils subtab has a problem with vertical alignment.  "Search number in range"
+  is at the vertical midpoint of from and to (looks good) but "Search this number" seems lower than
+  the text field for that number.
 
-- In Edit Account, bottom of General tab, Budget Options allows account to be
-  included in budgets as Income or Expense.  This actually adds the account as Asset
-  or Liability, not Income or Expense.  However, I still see no evicence of any such
-  account in any budget report.  Perhaps this should just be left as is, and raised
-  as an issue after 5.2?
+- Search results should include (optional) Number column, since it seems you can search on it.
 
+- Can search results be sorted any more?  (Could they ever?)
 
------------------------- resolved issues moved to below.  should probably just delete
+- what does File/Backup do if SQL is the current file type?
 
-- Deleting an Institution orphans any accounts without warning, and they do not
-  appear under the "Institution for accounts with no institution" until after a
-  restart of KMM.
- -- confirmed fixed
+- on the config dialog, home section, should the top area be put in a box as are the other two
+  areas, and most of the contents on the other sections?
 
-- Why do we mix "preferred" and "favorite" account designation?  Are they any different?
- -- now prefer preferred.  Hanbook updated
+- "Show all split details in ledger" seems to act inconsistenly.  With a split transaction, if a
+  split has a memo, that memo is shown instead of the second category.  I don't know if this is
+  related to the bug I filed (and now can't find) about splits getting duplicated if you toggle that
+  setting while the transaction is open for editing.
 
-- Are loans with 0% now allowed?  Need to know for wording about loan accounts.
- -- N0, wording updated (loan chapter and loan section of accounts chapter)
+- Is there any consistency or pattern in config dialogs where something with a small number of
+  choicees is presented as a dropdown or a set of radio-button items?  For example, Ledger
+  configuration, Data Entry tab: Default reconciliation state is dropdown with three choices, but
+  Autofill has three radio-button choices.
 
-- There are several tabs in the Edit Account dialog which are not included in the New
-  Account dialog.  Should these also be there?
- -- some tabs are only set up after mapping online, so "nothing to see here ...."
-
-- Is CC (cost center) used for anything?  Does it occur anywhere except Categories
-  (which is only that cc is required)
- -- not used, and now possibly hidden by config time option.
-   -- now noted.
- 
-- do we need a Tags main menu item?
- -- don't have one for tags or payees.  OK
- 
-- for clarifications, can a transaction only be split on one side?  It does make
-  sense to restrict a transaction to only one account on one side, but would allowing
-  both sides be split cause any real problem, or just too much confusion?
- -- There are all sorts of possibilities, so nothing further needed, other than
-    possible explanation or example in section on split transactions, but this might
-    be morel likely to just add confustion.
-    In addition, "on one side" doesn't really make sense, as money may come from one or
-    more places and go to one or more places.
-
-- In Investment account ledger, Activity has a blue border when selected, but
-  Security and Account have the name highlighted when the field is selected.  Why the
-  difference.
- -- Border shows field with focus.  Some fields (text, combo-boxes, part of date) will
-    have the text selected/highligted.
-    Nothing to see here.
-    
-- Reconciliatiohn wizard interest/charge dialog - should it allow split entries?  Might
-  be unlikely for interest, but you might have credit card interest plus fees.
- -- Never asked for, so leaving as is.
-
-- Can we change the order of reports in the Reports View to make more sense?  (Look at
-  Tranacions reports for an example)
- -- Can change name of custom reports, and can sort on report comment.  Handbook fixed
- 
-- Report section CashFlow - should this be Cash Flow (with a space between?)
- -- fixed
-
-- Can the tabs in the Reports View get an "X" to close them, instead of needing to use
-  the "Close report" button?
- -- done
-
-- is the QIF Profile input filter location a single file or a command?  Does it just use
-  a single file as the program, and anything more than that as a command to be invoked?
- -- filter box takes both full path to the program/script and any command line
-    parameters.
-
-- The split editor window title is just "Dialog."  The title of the window for
-  actually editing a single split is "Slit transaction."  We need better terms that make
-  more sense.
- -- Fixed.
-
-- Why is "Reconciled" not an option on the transaction state dropdown in the filter
-  section of the ledger?
- -- nobody ever asked for it...
- 
-- transaction matching section of Ledgers chapter - first, are matched transactions
-  still highlighted in green?  If not, how?
- -- no highlight, just icon.  Handbook updated
-
-- The Security dropdown and column in an Investment ledger shows only the name of the
-  security.  Should it also show the symbol?  (The manual used to say it did.)
- -- Added.  Not explicitly mentioned in handbook.
-
-- Need to mention in file formats chapter that all data files can be stored locally
-  or on a network share.  Also mention mounting the share is often an issue on Windows.
- -- done.
+- In Edit Account, bottom of General tab, Budget Options allows account to be included in budgets as
+  Income or Expense.  This actually adds the account as Asset or Liability, not Income or Expense.
+  However, I still see no evicence of any such account in any budget report.  Perhaps this should
+  just be left as is, and raised as an issue after 5.2?
 
 ------------------------ resolved issues for now, but still need future discussion
 
-- do we want to talk about stock as an account type? - will defer, including possible
-  terminology changes (equity/stock/security) when we get to major investment
-  overhaul.
+- do we want to talk about stock as an account type? - will defer, including possible terminology
+  changes (equity/stock/security) when we get to major investment overhaul.
 
-- Bug 272737 is that categories and account hierarchies cannot be dragged to new
-  location.  
- -- actually fixed a while ago.  However when you click on new parent and then OK,
-    instead of just updating the hierarchy, the whole dialog is closed.  Is this OK?
+- Bug 272737 is that categories and account hierarchies cannot be dragged to new location.  This was
+  actually fixed a while ago, but when you click on new parent and then OK, instead of just updating
+  the hierarchy, the whole dialog is closed.  Is this OK?
 
-- In New Category dialog, Price entry has been dropped (also CC)
- -- Should we also drop Last Check number?
+- In New Category dialog, Price entry and CC were dropped.  Should we also drop Last Check number?
 
-- On schecule frequency, should we comment on possibly odd combinations of frequency
-  and the interval?  What happens if you say 2 Once?  Is 2 Month the same as 1 Every
-  half month or 1 Every two months?
- -- wording updated, but I wonder if we wan to eliminate all intervals which are
-    multiples of other intervals.  However, the confusion of making the change might
-    be worse than the confusion when picking the righ frequency and interval.
+- On schedule frequency, should we comment on possibly odd combinations of frequency and the
+  interval?  What happens if you say 2 Once?  Is 2 Month the same as 1 Every half month or 1 Every
+  two months?
+  -- wording updated, but I wonder if we should eliminate all intervals which are multiples of other
+     intervals.  However, the confusion of making the change might be worse than the confusion when
+     picking the righ frequency and interval.
 
-- Price downloads allow you to specify data (date range?) yet this is never used in
-  actually fetching prices (stocks or currency.)  Should we just drop the field, or
-  at least note it is ignored?  IS there any way to retreive historic prices?
+- Price downloads allow you to specify data (date range?) yet this is never used in actually
+  fetching prices (stocks or currency.)  Should we just drop the field, or at least note it is
+  ignored?  IS there any way to retreive historic prices? (How does this relate to the more of price
+  downloads to alkimia?
 
-    >> T This has recently changed. If the price source has a #x in its regex for
-       price or date then it expects the data to be in CSV format. In such a case,
-       the date fields are enabled but only used for that price source.
-    > J2 I'll need to try it, if I can find any source with historic dates.  Otherwise,
-	 I suppose I can just save any changes about this for later.
-    T2 I attach a screenshot of my settings for this. And here are those settings
-       for copy/paste:
+  >> T This has recently changed. If the price source has a #x in its regex for price or date then
+       it expects the data to be in CSV format. In such a case, the date fields are enabled but only
+       used for that price source.
+    > J2 I need to try it, if I can find any source with historic data.  Otherwise, I suppose I can
+	 just save any changes about this for later.
+    T2 I attach a screenshot of my settings for this. And here are those settings for copy/paste:
+
     [Online-Quote-Source-KMyMoney Currency Historic.local]
     DataFormat=2
     DateFormatRegex=%d %m %y
@@ -380,80 +277,75 @@ elsewhere.
     PriceRegex=#2
     URL=https://fx-rate.net/historical/?c_input=%1&cp_input=%2&csv=true
 
-    You could also use the Install button and select the fx-rate.net historical one
-    (which is the same as above). All this is functionality obtained from the latest
-    Alkimia.  Ralf can probably provide more info about that.  Also, attached as
-    screenshot.
-    1) you can hit "Install" more than once.  The button should be disabled while the dialog
-       is displayed. 
-    2) the current list (for Install) all show ratings 5/10 but none have any ratings.  Should
-       I take this up with KDE GHNS?
+    You could also use the Install button and select the fx-rate.net historical one (which is the
+    same as above). All this is functionality obtained from the latest Alkimia.  Ralf can probably
+    provide more info about that.  Also, attached as screenshot.
+    1) you can hit "Install" more than once.  The button should be disabled while the dialog is
+       displayed.
+    2) the current list (for Install) all show ratings 5/10 but none have any ratings.  Should I
+       take this up with KDE GHNS?
     3) on New Account in currency other than base currency, even after downloading a conversion
-       rate, the text below the rate says 1 USD -> 1 EUR (with appropriate symbols).  Shouldn't
-       that get updated?  Also, if you are explicitly looking for conversion on date of account
-       opening, why does it fetch today's rate?
-    4) I did add the new conversion source, but I can't figure out how to use it.  Do I need
-       to change it's name?  
-    5) Even after installing the new source, if I select it in the Online Quotes dialog,
-       all the fields below remain disabled.  I have alkimia as of yesterday.  Is it not recent
-       enough?  Am I missing some other configuration setting?
+       rate, the text below the rate says 1 USD -> 1 EUR (with appropriate symbols).  Shouldn't that
+       get updated?  Also, if you are explicitly looking for conversion on date of account opening,
+       why does it fetch today's rate?
+    4) I did add the new conversion source, but I can't figure out how to use it.  Do I need to
+       change it's name?
+    5) Even after installing the new source, if I select it in the Online Quotes dialog, all the
+       fields below remain disabled.  I have alkimia as of yesterday.  Is it not recent enough?  Am
+       I missing some other configuration setting?
 
-- Manual says KMM can download the latest prices from the web.  Should we just
-  specify "current" prices?  Although there is a date field for price fetch, it is
-  ignored.  How do we want to deal with this?
- -- (This is really part of the previous issue.)
+- (related to above issue) Manual says KMM can download the latest prices from the web.  Should we
+  just specify "current" prices?  Although there is a date field for price fetch, it is ignored.
+  How do we want to deal with this?
 
-- The transaction form shows up always at the bottom of the transaction list.
-  With or without the form enabled, editing a transaction shows the form at the
-  location of the transaction in the ledger.  Shouldn't editing take place in the
-  form at the bottom?
- -- There have been changes here.  Transaction form is always at the bottom (when enabled)
-    and it disappears when entering or editing a transaction (always done in the ledger)
+- Transaction form shows up always at the bottom of the transaction list.  With or without the form
+  enabled, editing a transaction shows the form at the location of the transaction in the ledger.
+  Shouldn't editing take place in the form at the bottom if it is enabled?
+ -- There have been changes here.  Transaction form is always at the bottom (when enabled) and it
+    disappears when entering or editing a transaction (always done in the ledger)
    1) Why is the transaction form not shown for Investment Accounts?
-   2) Please confirm that the transaction form is now display only, and entering new
-      and editing existing transactions is now always done within the ledger, at
-      which time the transaction form is not displayed (even if enabled).  Otherwise,
-      the transaction form shows the details of the most recently clicked
-      transaction.  (If I Ctl-Click, it shows the last one clicked, but if I then
-      Ctl-click a selected transaction to un-select it, that is the one shown in the
-      form. (I need to revise the Handbook which still says both ways can be used to
-      enter/edit transactions.
+   2) Please confirm that the transaction form is now display only, and entering new and editing
+      existing transactions is now always done within the ledger, at which time the transaction form
+      is not displayed (even if enabled).  Otherwise, the transaction form shows the details of the
+      most recently selected transaction.  (If I Ctl-Click, it shows the last one clicked, but if I
+      then Ctl-click a selected transaction to un-select it, that is the one shown in the form. (I
+      need to revise the Handbook which still says both ways can be used to enter/edit transactions.
 
-- The handbook uses "Schedules" as the formal name, but the View Selector says
-  "Scheduled transactions" We should be consistent. and shorten it?  (hard to find in
-  code, since it includes \n.
+- The handbook uses "Schedules" as the formal name, but the View Selector says "Scheduled
+  transactions."  Shoule we be consistent and shorten it?  (hard to find in code, since it includes
+  \n.
 
-- In Gnucash import, matching of account types, some map to things that are only
-  applicable to security subaccounts of investmant accounts.  Should these be shown
-  separately, with an explanation?
-- Importing gnucash schedules talks about if it causes fatal errors.  Is this while
-  importing, or while running later?
-- doc says not all report types are matched - what happens if they don't?
- -- TB: I have no idea about GnuCash stuff. I need to leave those questions
-         unanswered. Same goes for the CSV importer
- -- With no sufficient expertise for GnuCash or CSV importer - we leave these
-    unanswered until we get a but report or explicit request for help
+- In Gnucash import, matching of account types, some map to things that are only applicable to
+  security subaccounts of investmant accounts.  Should these be shown separately, with an
+  explanation?
 
-- Payees entered in a split, show up in the memo of the transaction, like memos and
-  tags.  Perhaps they should be displayed in the Payee field, perhaps in parens with
-  the payee from each split?)
- -- remind myself that there is no payy (nor tag, ...) for the transaction, only the one
-    for the account of the displayed ledger.  Leaving active for me to confirm the
-    description of these fields and their behaviour in the Handbook is correct (and also
-    hopefully complete.)
+  -- Importing gnucash schedules talks about if it causes fatal errors.  Is this while importing, or
+     while running later?
+
+  -- doc says not all report types are matched - what happens if they don't?
+     -- TB: I have no idea about GnuCash stuff. I need to leave those questions unanswered. Same goes
+        for the CSV importer
+  -- With no sufficient expertise for GnuCash or CSV importer - we leave these unanswered until we
+     get a bug report or explicit request for help
+
+- Payees entered in a split, show up in the memo of the transaction, like memos and tags.  Perhaps
+  they should be displayed in the Payee field, perhaps in parens with the payee from each split?
+  -- remind myself that there is no payee (nor tag, ...) for the transaction itself, only for the
+     account of the displayed ledger.  Leaving active for me to confirm the description of these
+     fields and their behaviour in the Handbook is correct (and also hopefully complete.)
 
 - Where should we describe the Undo feature?
- -- Still not sure - perhaps an early page on "other changes not mentioned elsewhere?
-    what else would be included?
+  -- Still not sure - perhaps an early page on "other changes not mentioned elsewhere?
+     what else would be included?
 
 - Should there be a note about the relation between aqbanking, kbanking, and hbci?
- -- Will mention only used in Germany, although Aqbanking can import other file types
-    (but not used for those instead of native importers)
- -- Still would like a note on the relation between Aqbanking and KBanking.
-    (external libraries/routines and the KMM framework for calling them?)
+  -- Will mention only used in Germany, although Aqbanking can import other file types (but not used
+     for those instead of native importers)
+  -- Still would like a note on the relation between Aqbanking and KBanking.  (external
+     libraries/routines and the KMM framework for calling them?)
 
-- Budget View has buttons labelled Upd and Res.  Should these be expanded to Update
-and Reset?  -- TB said he would remove, but I now see full text Update and Remove.
-Tooltips are present and for those two, there is a (not useful?) "hit Shift for
-more".  The "more" is not very useful - should it just be dropped?
+- Budget View has buttons labelled Upd and Res.  Should these be expanded to Update and Reset?  --
+  TB said he would remove, but I now see full text Update and Remove.  Tooltips are present and for
+  those two, there is a (not useful?) "hit Shift for more".  The "more" is not very useful - should
+  it just be dropped?
     

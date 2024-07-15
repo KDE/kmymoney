@@ -574,7 +574,7 @@
 <sect1 id="details.settings.register"><title>Ledger</title>
 <para>
    The settings and options in this section allow for the modification of the
-   transaction register displayed in the Ledgers View.
+   transaction ledger displayed in the Ledgers View.
 </para>
 
 <sect2 id="details.settings.register.display"><title>Display tab</title>
@@ -583,9 +583,9 @@
     <term><guilabel>Show a grid in the ledger</guilabel></term>
     <listitem>
       <para>
-        Selecting this option displays grid lines in the transaction register or
-        Ledgers View.  This is an additional viewing option that may make it easier to
-        visualize separate transactions and their component parts.
+        Selecting this option displays grid lines in the Ledgers View.  This is an
+        additional viewing option that may make it easier to visualize separate
+        transactions and their component parts.
       </para>
     </listitem>
   </varlistentry>
@@ -596,8 +596,8 @@
       <para>
         Selecting this option displays the <link
         linkend="details.ledger.transactionform">transaction form</link> at the
-        bottom of the register, and that is where you enter or edit a transaction.
-        If the transaction form is not displayed, you edit a transaction within the
+        bottom of the ledger, and that is where you enter or edit a transaction.  If
+        the transaction form is not displayed, you edit a transaction within the
         ledger itself.  With this option enabled, fewer transactions are visible in
         the ledger, compared to when it is disabled.
       </para>
@@ -621,7 +621,7 @@
       <formalpara>
         <title><guilabel>Show all ledger entries in full detail</guilabel></title>
         <para>
-          Selecting this option makes the register show all the information for all
+          Selecting this option makes the ledger show all the information for all
           displayed transactions, with separate lines in the Detail Column for
           Category, Tags, and the Memo.  If it is not selected, Category, Tags, and
           Memo will not be displayed.  This has the same effect as selecting the
@@ -634,7 +634,7 @@
         <title><guilabel>Use the ledger lens</guilabel></title>
         <para>
           Selecting this option displays all the detail lines for the selected
-          transaction, even if <guilabel>Show all register entries in full
+          transaction, even if <guilabel>Show all ledger entries in full
           detail</guilabel> is not selected.
         </para>
       </formalpara>
@@ -653,7 +653,7 @@
       <formalpara>
         <title><guilabel>Show group headers between transactions</guilabel></title>
         <para>
-          Selecting this option will display group headers in the register.  These
+          Selecting this option will display group headers in the ledger.  These
           refer to time periods or milestones such as Last month, Last week, This
           month, Last reconciliation, Next week, and Next month.
         </para>
@@ -664,7 +664,7 @@
           <guilabel>Show header for the previous and current fiscal year</guilabel>
         </title>
         <para>
-          Selecting this option will display group headers in the register for the
+          Selecting this option will display group headers in the ledger for the
           current and the previous fiscal year.
         </para>
       </formalpara>

@@ -233,13 +233,13 @@
 </screenshot>
 
 <para>
-  If displayed, most of the filter area is a text entry area. Typing here will cause
+  When displayed, most of the filter area is a text entry box. Typing here will cause
   &kmymoney; to display only transactions containing the text typed in the box.  The
   text specified can be in any of the fields of the transaction for the displayed
   account.  Clicking the <guiicon> <inlinemediaobject> <imageobject> <imagedata
   fileref="edit-clear.svg" format="SVG"/></imageobject> </inlinemediaobject>
   </guiicon> clear text icon at the right end of the text entry box will clear any
-  text in the filter box.
+  text that has been entered.
 </para>
 
 <para>
@@ -262,8 +262,8 @@
 
 <para>
   <guilabel>Erroneous</guilabel> selects transactions where &kmymoney; has detected
-  some problem.  Most commonly, thrsr str an <link
-  linkend="details.ledgers.split">unbalanced transactiond</link>, which is often the
+  some problem.  Most commonly, these are <link
+  linkend="details.ledgers.split">unbalanced transactions</link>, which is often the
   case for imported transactions where a category was not assigned..
 </para>
 
@@ -478,7 +478,7 @@
   transaction form.  This is done by selecting the <guimenu>Settings</guimenu>
   <guimenuitem>Configure &kmymoney;...</guimenuitem> menu item and selecting the
   <guiicon><inlinemediaobject><imageobject><imagedata fileref="ledgers_view.png"
-  format="PNG"/></imageobject></inlinemediaobject> </guiicon> register icon from the
+  format="PNG"/></imageobject></inlinemediaobject> </guiicon> ledger icon from the
   list on the left.  The option to uncheck is labeled <guilabel>Show transaction
   form</guilabel>.  When finished click <guibutton>OK</guibutton> to be ready to
   directly enter or edit transactions.
@@ -633,7 +633,7 @@
 <para>
   Note that the category field in the transaction form or the transaction list now
   displays a comma separated list of the categories in each of the split entries.
-  Payees entered in a split also show up within the memo field in the register.
+  Payees entered in a split also show up within the memo field in the ledger.
 </para> 
 </sect1>
 
