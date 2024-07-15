@@ -115,8 +115,9 @@ public:
         q->connect(ui->ledgerTab, &QTabWidget::tabBarClicked, q, &SimpleLedgerView::tabClicked);
         q->connect(ui->ledgerTab, &QTabWidget::tabCloseRequested, q, &SimpleLedgerView::closeLedger);
 
-        // we reload the icon if the institution data changed
+        // we reload the icon if the institution or account data changed
         q->connect(MyMoneyFile::instance()->institutionsModel(), &InstitutionsModel::dataChanged, q, &SimpleLedgerView::setupCornerWidget);
+        q->connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::dataChanged, q, &SimpleLedgerView::setupCornerWidget);
 
         accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity});
 
@@ -669,33 +670,45 @@ void SimpleLedgerView::setupCornerWidget()
         if(index.isValid()) {
             // get icon name and url via account and institution object
             const auto acc = accountsModel->itemByIndex(index);
+            // use the URL stored with the account and only the one of the
+            // institution if the account's URL is empty. The icon is always
+            // taken from the bank
+            auto url = acc.value(QStringLiteral("url"));
+            QString iconName;
+            QString displayName = acc.name();
             if (!acc.institutionId().isEmpty()) {
                 const auto institutionsModel = MyMoneyFile::instance()->institutionsModel();
                 index = institutionsModel->indexById(acc.institutionId());
                 const auto institution = institutionsModel->itemByIndex(index);
-                const auto url = institution.value(QStringLiteral("url"));
-                const auto iconName = institution.value(QStringLiteral("icon"));
-                if (!url.isEmpty() && !iconName.isEmpty()) {
-                    const auto favIcon = Icons::loadIconFromApplicationCache(iconName);
-                    if (!favIcon.isNull()) {
-                        d->webSiteButton->show();
-                        d->webSiteButton->setIcon(favIcon);
-                        d->webSiteButton->setText(url);
-                        d->webSiteButton->setToolTip(i18n("Open website of <b>%1</b> in your browser.", institution.name()));
+                if (url.isEmpty()) {
+                    url = institution.value(QStringLiteral("url"));
+                    displayName = institution.name();
+                }
+                iconName = institution.value(QStringLiteral("icon"));
+            }
+            if (!url.isEmpty() && iconName.isEmpty()) {
+                iconName = QLatin1String("enum:Bank");
+            }
+            if (!url.isEmpty()) {
+                const auto favIcon = Icons::loadIconFromApplicationCache(iconName);
+                if (!favIcon.isNull()) {
+                    d->webSiteButton->show();
+                    d->webSiteButton->setIcon(favIcon);
+                    d->webSiteButton->setText(url);
+                    d->webSiteButton->setToolTip(i18n("Open website of <b>%1</b> in your browser.", displayName));
 
-                        // we remove all parts of the URL that we provide ourselves first
-                        auto webUrl(url);
-                        auto pos = webUrl.indexOf(QLatin1String("://"));
-                        if (pos != -1) {
-                            webUrl = webUrl.mid(pos + 3);
-                        }
-                        // make sure it has at least one /
-                        pos = webUrl.indexOf(QLatin1Char('/'));
-                        if (pos != -1) {
-                            webUrl.push_back(QLatin1Char('/'));
-                        }
-                        d->webSiteUrl.setUrl(QString::fromLatin1("https://%1").arg(url));
+                    // we remove all parts of the URL that we provide ourselves first
+                    auto webUrl(url);
+                    auto pos = webUrl.indexOf(QLatin1String("://"));
+                    if (pos != -1) {
+                        webUrl = webUrl.mid(pos + 3);
                     }
+                    // make sure it has at least one /
+                    pos = webUrl.indexOf(QLatin1Char('/'));
+                    if (pos != -1) {
+                        webUrl.push_back(QLatin1Char('/'));
+                    }
+                    d->webSiteUrl.setUrl(QString::fromLatin1("https://%1").arg(url));
                 }
             }
         }

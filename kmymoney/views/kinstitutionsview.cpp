@@ -248,6 +248,7 @@ void KInstitutionsView::slotEditInstitution()
 
         // bankSuccess is not checked anymore because d->m_file->institution will throw anyway
         QPointer<KNewInstitutionDlg> dlg = new KNewInstitutionDlg(institution);
+        dlg->setWindowTitle(i18nc("@info:title Dialog title", "Edit Institution"));
         if (dlg->exec() == QDialog::Accepted && dlg != 0) {
             MyMoneyFileTransaction ft;
             try {

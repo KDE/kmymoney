@@ -2308,9 +2308,7 @@ void KMyMoneyApp::saveOptions()
     toolBar("mainToolBar")->saveSettings(toolbarGrp);
 
     d->m_recentFiles->saveEntries(d->m_config->group("Recent Files"));
-
 }
-
 
 void KMyMoneyApp::readOptions()
 {
@@ -3657,6 +3655,9 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
     MyMoneyFile::instance()->journalModel()->resetRowHeightInformation();
 
     pActions[Action::ViewTransactionDetail]->setChecked(KMyMoneySettings::showRegisterDetailed());
+    pActions[Action::ViewHideReconciled]->setChecked(KMyMoneySettings::hideReconciledTransactions());
+    pActions[Action::ViewHideCategories]->setChecked(KMyMoneySettings::hideUnusedCategory());
+    pActions[Action::ViewShowAll]->setChecked(KMyMoneySettings::showAllAccounts());
 
     // update the holiday region configuration
     setHolidayRegion(KMyMoneySettings::holidayRegion());
