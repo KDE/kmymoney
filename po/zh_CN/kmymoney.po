@@ -19083,10 +19083,10 @@ msgid "Expected Profit/Loss"
 msgstr ""
 
 #: kmymoney/views/kinstitutionsview.cpp:251
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:title Dialog title"
 msgid "Edit Institution"
-msgstr "编辑金融机构..."
+msgstr ""
 
 #: kmymoney/views/kinstitutionsview.cpp:258
 #, kde-format
