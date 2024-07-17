@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-15 01:46+0000\n"
-"PO-Revision-Date: 2024-07-06 16:50+0200\n"
+"PO-Revision-Date: 2024-07-16 21:47+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
@@ -15255,6 +15255,8 @@ msgctxt "@info Hint about the base of the budget forecast"
 msgid ""
 "Budget forecast is based on historic transactions found between %1 and %2."
 msgstr ""
+"Buĝetprognozo estas bazita sur historiaj transakcioj trovitaj inter %1 kaj "
+"%2."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:666
 #, kde-format
@@ -19659,11 +19661,10 @@ msgid "Expected Profit/Loss"
 msgstr "Atendita Profito/Perdo"
 
 #: kmymoney/views/kinstitutionsview.cpp:251
-#, fuzzy, kde-format
-#| msgid "Edit institution..."
+#, kde-format
 msgctxt "@info:title Dialog title"
 msgid "Edit Institution"
-msgstr "Redakti institucion..."
+msgstr "Redakti Institucion"
 
 #: kmymoney/views/kinstitutionsview.cpp:258
 #, kde-format
