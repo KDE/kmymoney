@@ -568,6 +568,7 @@ public:
         , m_accountCombo(nullptr)
         , m_splitModel(nullptr)
         , m_norecursive(false)
+        , m_accountComboProtected(false)
     {
     }
 
@@ -575,6 +576,7 @@ public:
     QComboBox*                        m_accountCombo;
     QAbstractItemModel*               m_splitModel;
     bool                              m_norecursive;
+    bool m_accountComboProtected;
 };
 
 
@@ -602,10 +604,16 @@ KMyMoneyAccountComboSplitHelper::~KMyMoneyAccountComboSplitHelper()
 {
 }
 
+void KMyMoneyAccountComboSplitHelper::setProtectAccountCombo(bool protect)
+{
+    Q_D(KMyMoneyAccountComboSplitHelper);
+    d->m_accountComboProtected = protect;
+}
+
 bool KMyMoneyAccountComboSplitHelper::eventFilter(QObject* watched, QEvent* event)
 {
     Q_D(KMyMoneyAccountComboSplitHelper);
-    if (d->m_splitModel && (d->m_splitModel->rowCount() > 1)) {
+    if (d->m_accountComboProtected || (d->m_splitModel && (d->m_splitModel->rowCount() > 1))) {
         const auto type = event->type();
         if (watched == d->m_accountCombo) {
             if (type == QEvent::FocusIn) {
@@ -645,7 +653,6 @@ bool KMyMoneyAccountComboSplitHelper::eventFilter(QObject* watched, QEvent* even
             }
             return true;
         }
-
     }
     return QObject::eventFilter(watched, event);
 }
@@ -700,6 +707,7 @@ void KMyMoneyAccountComboSplitHelper::updateWidget()
                 d->m_accountCombo->setRootModelIndex(QModelIndex());
             }
         }
+        disabled = d->m_accountComboProtected;
         break;
     default:
     {

@@ -125,6 +125,12 @@ public:
     explicit KMyMoneyAccountComboSplitHelper(QComboBox* accountCombo, QAbstractItemModel *model);
     ~KMyMoneyAccountComboSplitHelper();
 
+    /**
+     * This method allows to protect the assigned accountCombo
+     * object to be changed.
+     */
+    void setProtectAccountCombo(bool protect);
+
 public Q_SLOTS:
     void updateWidget();
 
