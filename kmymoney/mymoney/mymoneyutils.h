@@ -36,8 +36,8 @@ class MyMoneyTransaction;
 typedef enum {
     NoWarning = 0,
     OneSplitReconciled,
-    OneSplitFrozen,
     OneAccountClosed,
+    OneSplitFrozen,
 } modifyTransactionWarnLevel_t;
 
 namespace MyMoneyUtils

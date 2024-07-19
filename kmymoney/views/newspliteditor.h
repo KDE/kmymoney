@@ -88,6 +88,8 @@ public:
     QList<QString> tagIdList() const;
     void setTagIdList(const QList<QString>& tagIds);
 
+    void setProtectClosedAccount(bool protect);
+
 protected:
     void keyPressEvent(QKeyEvent* event) final override;
     bool focusNextPrevChild(bool next) override;

@@ -1,5 +1,5 @@
 /*
-    SPDX-FileCopyrightText: 2015-2020 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2015-2024 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -78,6 +78,7 @@ public:
         , inUpdateVat(false)
         , keepCategoryAmount(false)
         , loadedFromModel(false)
+        , counterAccountIsClosed(false)
         , splitModel(parent, &undoStack)
         , frameCollection(nullptr)
         , m_splitHelper(nullptr)
@@ -112,6 +113,7 @@ public:
     bool categoryChanged(const QString& id);
     bool numberChanged(const QString& newNumber);
     bool amountChanged();
+    bool checkForValidAmount();
     bool isIncomeExpense(const QModelIndex& idx) const;
     bool isIncomeExpense(const QString& categoryId) const;
     bool tagsChanged(const QStringList& ids);
@@ -137,6 +139,7 @@ public:
     bool inUpdateVat;
     bool keepCategoryAmount;
     bool loadedFromModel;
+    bool counterAccountIsClosed;
     QUndoStack undoStack;
     SplitModel splitModel;
     MyMoneyAccount m_account;
@@ -168,8 +171,8 @@ void NewTransactionEditor::Private::adjustTagIdList()
 void NewTransactionEditor::Private::updateWidgetAccess()
 {
     const auto enable = !m_account.id().isEmpty();
-    ui->dateEdit->setEnabled(enable);
-    ui->creditDebitEdit->setEnabled(enable);
+    ui->dateEdit->setEnabled(!counterAccountIsClosed);
+    ui->creditDebitEdit->setEnabled(!counterAccountIsClosed || splitModel.rowCount() > 1);
     ui->payeeEdit->setEnabled(enable);
     ui->numberEdit->setEnabled(enable);
     ui->categoryCombo->setEnabled(enable);
@@ -178,6 +181,17 @@ void NewTransactionEditor::Private::updateWidgetAccess()
     ui->statusCombo->setEnabled(enable);
     ui->memoEdit->setEnabled(enable);
     ui->enterButton->setEnabled(!q->isReadOnly());
+
+    m_splitHelper->setProtectAccountCombo(counterAccountIsClosed);
+
+    if (counterAccountIsClosed) {
+        const auto tip = i18nc("@info:tooltip Protected", "This widget is currently protected because the transaction references a closed account.");
+        ui->categoryCombo->setToolTip(tip);
+        ui->creditDebitEdit->setToolTip(tip);
+    } else {
+        ui->categoryCombo->setToolTip(QString());
+        ui->creditDebitEdit->setToolTip(QString());
+    }
 }
 
 void NewTransactionEditor::Private::updateWidgetState()
@@ -211,6 +225,15 @@ void NewTransactionEditor::Private::updateWidgetState()
             ui->costCenterCombo->setCurrentIndex(row);
         }
     }
+}
+
+bool NewTransactionEditor::Private::checkForValidAmount()
+{
+    WidgetHintFrame::hide(ui->creditDebitEdit);
+    if (q->transactionAmount() != -splitsSum()) {
+        WidgetHintFrame::show(ui->creditDebitEdit, i18nc("@info:tooltip", "The amount is different from the sum of all splits."));
+    }
+    return true;
 }
 
 bool NewTransactionEditor::Private::checkForValidTransaction(bool doUserInteraction)
@@ -473,6 +496,7 @@ bool NewTransactionEditor::Private::amountChanged()
         /// of all splits, otherwise we could ask if the user wants to start the split editor or anything else.
     }
     updateVAT(ValueChanged);
+    checkForValidAmount();
     return rc;
 }
 
@@ -752,6 +776,8 @@ int NewTransactionEditor::Private::editSplits()
         ui->creditDebitEdit->setShares(amountShares);
 
         updateWidgetState();
+        updateWidgetAccess();
+        checkForValidAmount();
 
         QWidget* next = ui->tagContainer->tagCombo();
         if (ui->costCenterCombo->isEnabled()) {
@@ -1009,6 +1035,8 @@ void NewTransactionEditor::Private::loadTransaction(QModelIndex idx)
                 const auto currencyId = accountIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString();
                 const auto currency = MyMoneyFile::instance()->currenciesModel()->itemById(currencyId);
                 ui->creditDebitEdit->setSharesCommodity(currency);
+
+                counterAccountIsClosed = accountIdx.data(eMyMoney::Model::AccountIsClosedRole).toBool();
             }
         }
     }
@@ -1023,6 +1051,9 @@ void NewTransactionEditor::Private::loadTransaction(QModelIndex idx)
     ui->creditDebitEdit->setShares(amountShares);
 
     updateWidgetState();
+    updateWidgetAccess();
+    checkForValidAmount();
+
     m_splitHelper->updateWidget();
 }
 
@@ -1148,6 +1179,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     d->frameCollection->addFrame(new WidgetHintFrame(d->ui->dateEdit));
     d->frameCollection->addFrame(new WidgetHintFrame(d->ui->costCenterCombo));
     d->frameCollection->addFrame(new WidgetHintFrame(d->ui->numberEdit, WidgetHintFrame::Warning));
+    d->frameCollection->addFrame(new WidgetHintFrame(d->ui->creditDebitEdit, WidgetHintFrame::Warning));
     d->frameCollection->addWidget(d->ui->enterButton);
 
     connect(d->ui->numberEdit, &QLineEdit::textChanged, this, [&](const QString& newNumber) {
