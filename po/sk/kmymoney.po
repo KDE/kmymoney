@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-15 01:46+0000\n"
+"POT-Creation-Date: 2024-07-20 01:45+0000\n"
 "PO-Revision-Date: 2020-01-02 16:30+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -19348,7 +19348,7 @@ msgstr "Úrokový príjem"
 
 #: kmymoney/views/investtransactioneditor.cpp:262
 #: kmymoney/views/multitransactioneditor.cpp:185
-#: kmymoney/views/newtransactioneditor.cpp:266
+#: kmymoney/views/newtransactioneditor.cpp:289
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
 msgid "The posting date of the transaction."
@@ -19356,7 +19356,7 @@ msgstr "Príkaz importu bez transakcií"
 
 #: kmymoney/views/investtransactioneditor.cpp:286
 #: kmymoney/views/multitransactioneditor.cpp:215
-#: kmymoney/views/newtransactioneditor.cpp:286
+#: kmymoney/views/newtransactioneditor.cpp:309
 #, fuzzy, kde-format
 #| msgid ""
 #| "  * Transaction '%1' post date '%2' is older than opening date '%4' of "
@@ -21323,21 +21323,21 @@ msgid "Balance: %1"
 msgstr "Bilancia: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:193
-#: kmymoney/views/newtransactioneditor.cpp:269
+#: kmymoney/views/newtransactioneditor.cpp:292
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
 msgid "The posting date is invalid."
 msgstr "Príkaz importu bez transakcií"
 
 #: kmymoney/views/multitransactioneditor.cpp:226
-#: kmymoney/views/newtransactioneditor.cpp:304
+#: kmymoney/views/newtransactioneditor.cpp:327
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgid "The cost center this transaction should be assigned to."
 msgstr "Použiť na zadanie transakcie do účtovnej knihy."
 
 #: kmymoney/views/multitransactioneditor.cpp:229
-#: kmymoney/views/newtransactioneditor.cpp:313
+#: kmymoney/views/newtransactioneditor.cpp:336
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgid ""
@@ -21395,14 +21395,14 @@ msgid ""
 "the selection."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:154
+#: kmymoney/views/newspliteditor.cpp:156
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "Použiť na zadanie transakcie do účtovnej knihy."
 
-#: kmymoney/views/newspliteditor.cpp:167
+#: kmymoney/views/newspliteditor.cpp:169
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip costcenter combo in split editor"
@@ -21411,32 +21411,42 @@ msgid ""
 "category."
 msgstr "Nie je možné vytvoriť transakcie v kontexte kategórie."
 
-#: kmymoney/views/newspliteditor.cpp:178
+#: kmymoney/views/newspliteditor.cpp:180
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "Použiť na zadanie transakcie do účtovnej knihy."
 
-#: kmymoney/views/newspliteditor.cpp:219
+#: kmymoney/views/newspliteditor.cpp:221
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "Nie je možné vytvoriť transakcie v kontexte kategórie."
 
-#: kmymoney/views/newspliteditor.cpp:228
-#: kmymoney/views/newtransactioneditor.cpp:427
+#: kmymoney/views/newspliteditor.cpp:230
+#: kmymoney/views/newtransactioneditor.cpp:450
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgid "The check number used for this transaction."
 msgstr "Použiť toto tlačidlo na záznam tejto transakcie."
 
-#: kmymoney/views/newspliteditor.cpp:237
-#: kmymoney/views/newtransactioneditor.cpp:437
+#: kmymoney/views/newspliteditor.cpp:239
+#: kmymoney/views/newtransactioneditor.cpp:460
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr ""
+
+#: kmymoney/views/newspliteditor.cpp:741
+#: kmymoney/views/newtransactioneditor.cpp:188
+#, fuzzy, kde-format
+#| msgid "Cannot remove transaction that references a closed account."
+msgctxt "@info:tooltip Protected"
+msgid ""
+"This widget is currently protected because the transaction references a "
+"closed account."
+msgstr "Nie je možné transakciu, ktorá odkazuje na uzavretý účet."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, payToLabel)
@@ -21457,7 +21467,13 @@ msgstr "Doručiteľ/Príjemca"
 msgid "Costcenter"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:581
+#: kmymoney/views/newtransactioneditor.cpp:234
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The amount is different from the sum of all splits."
+msgstr ""
+
+#: kmymoney/views/newtransactioneditor.cpp:605
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@title:window Autofill selection dialog"
@@ -21614,14 +21630,14 @@ msgid ""
 "on the tabbar above to select an account.</p></body></html>"
 msgstr ""
 
-#: kmymoney/views/splitdialog.cpp:310
+#: kmymoney/views/splitdialog.cpp:313
 #, fuzzy, kde-format
 #| msgid "Sum of splits"
 msgctxt "Split editor summary"
 msgid "Sum of splits"
 msgstr "Suma rozdelení"
 
-#: kmymoney/views/splitdialog.cpp:328
+#: kmymoney/views/splitdialog.cpp:331
 #, fuzzy, kde-format
 #| msgctxt "Split editor summary"
 #| msgid "Unassigned"
@@ -21629,7 +21645,7 @@ msgctxt "Split editor summary"
 msgid "Overassigned"
 msgstr "Nepriradené"
 
-#: kmymoney/views/splitdialog.cpp:331
+#: kmymoney/views/splitdialog.cpp:334
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Unassigned"
@@ -27818,9 +27834,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Účet %1 obsahuje počiatočný stav. Použite, prosím, KMyMoney verzie 0.8 "
 #~ "alebo vyššej a nižšej ako 0.9 na odstránenie problému."
-
-#~ msgid "Cannot remove transaction that references a closed account."
-#~ msgstr "Nie je možné transakciu, ktorá odkazuje na uzavretý účet."
 
 #~ msgid "Cannot add currency with existing id %1"
 #~ msgstr "Nie je možné pridať menu s existujúcim id %1"

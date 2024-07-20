@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-15 01:46+0000\n"
+"POT-Creation-Date: 2024-07-20 01:45+0000\n"
 "PO-Revision-Date: 2020-05-02 10:27+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -19049,14 +19049,14 @@ msgstr "Intressitulu"
 
 #: kmymoney/views/investtransactioneditor.cpp:262
 #: kmymoney/views/multitransactioneditor.cpp:185
-#: kmymoney/views/newtransactioneditor.cpp:266
+#: kmymoney/views/newtransactioneditor.cpp:289
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "Tehingu sooritamise kuupäev."
 
 #: kmymoney/views/investtransactioneditor.cpp:286
 #: kmymoney/views/multitransactioneditor.cpp:215
-#: kmymoney/views/newtransactioneditor.cpp:286
+#: kmymoney/views/newtransactioneditor.cpp:309
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "Sooritamise kuupäev on varasem kui konto <b>%1</b> avamispäev."
@@ -20975,20 +20975,20 @@ msgid "Balance: %1"
 msgstr "Bilanss: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:193
-#: kmymoney/views/newtransactioneditor.cpp:269
+#: kmymoney/views/newtransactioneditor.cpp:292
 #, fuzzy, kde-format
 #| msgid "The posting date of the transaction."
 msgid "The posting date is invalid."
 msgstr "Tehingu sooritamise kuupäev."
 
 #: kmymoney/views/multitransactioneditor.cpp:226
-#: kmymoney/views/newtransactioneditor.cpp:304
+#: kmymoney/views/newtransactioneditor.cpp:327
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
 msgstr "Selle tehingu kuluüksus tuleb omistada."
 
 #: kmymoney/views/multitransactioneditor.cpp:229
-#: kmymoney/views/newtransactioneditor.cpp:313
+#: kmymoney/views/newtransactioneditor.cpp:336
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -21044,14 +21044,14 @@ msgid ""
 "the selection."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:154
+#: kmymoney/views/newspliteditor.cpp:156
 #, fuzzy, kde-format
 #| msgid "The cost center this transaction should be assigned to."
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "Selle tehingu kuluüksus tuleb omistada."
 
-#: kmymoney/views/newspliteditor.cpp:167
+#: kmymoney/views/newspliteditor.cpp:169
 #, fuzzy, kde-format
 #| msgid ""
 #| "A cost center assignment is required for a transaction in the selected "
@@ -21062,14 +21062,14 @@ msgid ""
 "category."
 msgstr "Valitud kategooria tehinguks on nõutav kuluüksuse omistamine."
 
-#: kmymoney/views/newspliteditor.cpp:178
+#: kmymoney/views/newspliteditor.cpp:180
 #, fuzzy, kde-format
 #| msgid "The cost center this transaction should be assigned to."
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "Selle tehingu kuluüksus tuleb omistada."
 
-#: kmymoney/views/newspliteditor.cpp:219
+#: kmymoney/views/newspliteditor.cpp:221
 #, fuzzy, kde-format
 #| msgid ""
 #| "A cost center assignment is required for a transaction in the selected "
@@ -21078,17 +21078,27 @@ msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "Valitud kategooria tehinguks on nõutav kuluüksuse omistamine."
 
-#: kmymoney/views/newspliteditor.cpp:228
-#: kmymoney/views/newtransactioneditor.cpp:427
+#: kmymoney/views/newspliteditor.cpp:230
+#: kmymoney/views/newtransactioneditor.cpp:450
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Tehingu tšekinumber."
 
-#: kmymoney/views/newspliteditor.cpp:237
-#: kmymoney/views/newtransactioneditor.cpp:437
+#: kmymoney/views/newspliteditor.cpp:239
+#: kmymoney/views/newtransactioneditor.cpp:460
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Tšekinumbrit <b>%1</b> on selles kontos juba kasutatud."
+
+#: kmymoney/views/newspliteditor.cpp:741
+#: kmymoney/views/newtransactioneditor.cpp:188
+#, fuzzy, kde-format
+#| msgid "Cannot remove transaction that references a closed account."
+msgctxt "@info:tooltip Protected"
+msgid ""
+"This widget is currently protected because the transaction references a "
+"closed account."
+msgstr "Suletud kontole viitavat tehingut ei saa eemaldada."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, payToLabel)
@@ -21109,7 +21119,13 @@ msgstr "Maksja/saaja"
 msgid "Costcenter"
 msgstr "Kuluüksus"
 
-#: kmymoney/views/newtransactioneditor.cpp:581
+#: kmymoney/views/newtransactioneditor.cpp:234
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The amount is different from the sum of all splits."
+msgstr ""
+
+#: kmymoney/views/newtransactioneditor.cpp:605
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@title:window Autofill selection dialog"
@@ -21269,14 +21285,14 @@ msgid ""
 "on the tabbar above to select an account.</p></body></html>"
 msgstr ""
 
-#: kmymoney/views/splitdialog.cpp:310
+#: kmymoney/views/splitdialog.cpp:313
 #, fuzzy, kde-format
 #| msgid "Sum of splits"
 msgctxt "Split editor summary"
 msgid "Sum of splits"
 msgstr "Alltehingute summa"
 
-#: kmymoney/views/splitdialog.cpp:328
+#: kmymoney/views/splitdialog.cpp:331
 #, fuzzy, kde-format
 #| msgctxt "Split editor summary"
 #| msgid "Unassigned"
@@ -21284,7 +21300,7 @@ msgctxt "Split editor summary"
 msgid "Overassigned"
 msgstr "Omistamata"
 
-#: kmymoney/views/splitdialog.cpp:331
+#: kmymoney/views/splitdialog.cpp:334
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Unassigned"
@@ -27404,9 +27420,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Konto %1 sisaldab algsaldot. Palun kasuta probleemi parandamiseks "
 #~ "KMyMoney versiooni 0.8 või uuem ja varasem kui 0.9."
-
-#~ msgid "Cannot remove transaction that references a closed account."
-#~ msgstr "Suletud kontole viitavat tehingut ei saa eemaldada."
 
 #, fuzzy
 #~| msgid "Cannot update currency. %1"

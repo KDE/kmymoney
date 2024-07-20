@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-15 01:46+0000\n"
+"POT-Creation-Date: 2024-07-20 01:45+0000\n"
 "PO-Revision-Date: 2023-10-08 11:16+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -18831,14 +18831,14 @@ msgstr "Przychód z oprocentowania"
 
 #: kmymoney/views/investtransactioneditor.cpp:262
 #: kmymoney/views/multitransactioneditor.cpp:185
-#: kmymoney/views/newtransactioneditor.cpp:266
+#: kmymoney/views/newtransactioneditor.cpp:289
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "Data wykonania transakcji"
 
 #: kmymoney/views/investtransactioneditor.cpp:286
 #: kmymoney/views/multitransactioneditor.cpp:215
-#: kmymoney/views/newtransactioneditor.cpp:286
+#: kmymoney/views/newtransactioneditor.cpp:309
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "Data wykonania jest wcześniejsza niż data otwarcia konta <b>%1</b>."
@@ -20709,19 +20709,19 @@ msgid "Balance: %1"
 msgstr "Saldo: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:193
-#: kmymoney/views/newtransactioneditor.cpp:269
+#: kmymoney/views/newtransactioneditor.cpp:292
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "Data wysłania jest nieprawidłowa."
 
 #: kmymoney/views/multitransactioneditor.cpp:226
-#: kmymoney/views/newtransactioneditor.cpp:304
+#: kmymoney/views/newtransactioneditor.cpp:327
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
 msgstr "Ośrodek kosztów, do którego przypisać tę transakcję."
 
 #: kmymoney/views/multitransactioneditor.cpp:229
-#: kmymoney/views/newtransactioneditor.cpp:313
+#: kmymoney/views/newtransactioneditor.cpp:336
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -20790,13 +20790,13 @@ msgstr ""
 "Zaznaczenie kategorii lub konta jest niemożliwe, gdy część transakcji jest "
 "częścią zaznaczenia."
 
-#: kmymoney/views/newspliteditor.cpp:154
+#: kmymoney/views/newspliteditor.cpp:156
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "Ośrodek kosztów, do którego przypisać tę transakcję."
 
-#: kmymoney/views/newspliteditor.cpp:167
+#: kmymoney/views/newspliteditor.cpp:169
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid ""
@@ -20806,29 +20806,39 @@ msgstr ""
 "Przypisanie ośrodka kosztów jest wymagane dla transakcji w wybranej "
 "kategorii."
 
-#: kmymoney/views/newspliteditor.cpp:178
+#: kmymoney/views/newspliteditor.cpp:180
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "Kategoria, do którego przypisać tę część."
 
-#: kmymoney/views/newspliteditor.cpp:219
+#: kmymoney/views/newspliteditor.cpp:221
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "Wymagane jest przypisanie kategorii dla części."
 
-#: kmymoney/views/newspliteditor.cpp:228
-#: kmymoney/views/newtransactioneditor.cpp:427
+#: kmymoney/views/newspliteditor.cpp:230
+#: kmymoney/views/newtransactioneditor.cpp:450
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Numer rozliczeniowy użyty dla tej transakcji."
 
-#: kmymoney/views/newspliteditor.cpp:237
-#: kmymoney/views/newtransactioneditor.cpp:437
+#: kmymoney/views/newspliteditor.cpp:239
+#: kmymoney/views/newtransactioneditor.cpp:460
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Numer rozliczeniowy <b>%1</b> został już użyty w tym koncie."
+
+#: kmymoney/views/newspliteditor.cpp:741
+#: kmymoney/views/newtransactioneditor.cpp:188
+#, fuzzy, kde-format
+#| msgid "Cannot remove transaction that references a closed account."
+msgctxt "@info:tooltip Protected"
+msgid ""
+"This widget is currently protected because the transaction references a "
+"closed account."
+msgstr "Nie można usunąć transakcji, która odwołuje się do zamkniętego konta."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, payToLabel)
@@ -20848,7 +20858,13 @@ msgstr "Płatnik/Odbiorca"
 msgid "Costcenter"
 msgstr "Ośrodek kosztów"
 
-#: kmymoney/views/newtransactioneditor.cpp:581
+#: kmymoney/views/newtransactioneditor.cpp:234
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The amount is different from the sum of all splits."
+msgstr ""
+
+#: kmymoney/views/newtransactioneditor.cpp:605
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
@@ -21010,20 +21026,20 @@ msgstr ""
 "otwarte po otwarciu przez KMyMoney pliku lub bazy danych. Użyj przycisku + "
 "na pasku kart powyżej, aby wybrać konta.</p></body></html>"
 
-#: kmymoney/views/splitdialog.cpp:310
+#: kmymoney/views/splitdialog.cpp:313
 #, fuzzy, kde-format
 #| msgid "Sum of splits"
 msgctxt "Split editor summary"
 msgid "Sum of splits"
 msgstr "Suma części"
 
-#: kmymoney/views/splitdialog.cpp:328
+#: kmymoney/views/splitdialog.cpp:331
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Overassigned"
 msgstr "Zbyt dużo przypisane"
 
-#: kmymoney/views/splitdialog.cpp:331
+#: kmymoney/views/splitdialog.cpp:334
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Unassigned"
@@ -27204,10 +27220,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Konto %1 zawiera saldo otwarcia. Użyj KMyMoney w wersji 0.8 lub wyższej, "
 #~ "lecz niższej niż 0.9, aby naprawić ten problem."
-
-#~ msgid "Cannot remove transaction that references a closed account."
-#~ msgstr ""
-#~ "Nie można usunąć transakcji, która odwołuje się do zamkniętego konta."
 
 #~ msgid "Cannot add currency with existing id %1"
 #~ msgstr "Nie można dodać waluty z istniejącym id %1"
