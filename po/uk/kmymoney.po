@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-20 01:45+0000\n"
-"PO-Revision-Date: 2024-07-13 09:08+0300\n"
+"PO-Revision-Date: 2024-07-20 08:51+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
@@ -20966,6 +20966,8 @@ msgid ""
 "This widget is currently protected because the transaction references a "
 "closed account."
 msgstr ""
+"Зараз цей віджет заблоковано, оскільки операція посилається на закритий "
+"рахунок."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, payToLabel)
@@ -20989,7 +20991,7 @@ msgstr "Обліковий центр"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits."
-msgstr ""
+msgstr "Сума є відмінною від суми усіх дроблень."
 
 #: kmymoney/views/newtransactioneditor.cpp:605
 #, kde-format

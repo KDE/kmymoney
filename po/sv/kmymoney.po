@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-20 01:45+0000\n"
-"PO-Revision-Date: 2024-07-13 07:56+0200\n"
+"PO-Revision-Date: 2024-07-20 05:20+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -20722,13 +20722,14 @@ msgstr "Checknumret <b>%1</b> har redan används i kontot."
 
 #: kmymoney/views/newspliteditor.cpp:741
 #: kmymoney/views/newtransactioneditor.cpp:188
-#, fuzzy, kde-format
-#| msgid "Cannot remove transaction that references a closed account."
+#, kde-format
 msgctxt "@info:tooltip Protected"
 msgid ""
 "This widget is currently protected because the transaction references a "
 "closed account."
-msgstr "Kan inte ta bort transaktioner som refererar till ett stängt konto."
+msgstr ""
+"Den grafiska komponenten är för närvarande skyddad eftersom transaktionen "
+"refererar till ett stängt konto."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, payToLabel)
@@ -20752,7 +20753,7 @@ msgstr "Kostnadsställe"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits."
-msgstr ""
+msgstr "Beloppet skiljer sig från summan av alla delningar."
 
 #: kmymoney/views/newtransactioneditor.cpp:605
 #, kde-format
