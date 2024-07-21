@@ -11,14 +11,15 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPushButton>
-#include <QLabel>
 #include <QButtonGroup>
 #include <QCheckBox>
-#include <QTabWidget>
-#include <QRadioButton>
+#include <QDesktopServices>
+#include <QLabel>
 #include <QList>
+#include <QPushButton>
+#include <QRadioButton>
 #include <QStringListModel>
+#include <QTabWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -37,6 +38,7 @@
 #include "accountsmodel.h"
 #include "accountsproxymodel.h"
 #include "columnselector.h"
+#include "icons.h"
 #include "kmymoneycurrencyselector.h"
 #include "kmymoneysettings.h"
 #include "knewinstitutiondlg.h"
@@ -385,10 +387,14 @@ public:
         QString institutionName;
 
         try {
-            if (m_isEditing && !m_account.institutionId().isEmpty())
-                institutionName = file->institution(m_account.institutionId()).name();
-            else
+            if (m_isEditing && !m_account.institutionId().isEmpty()) {
+                const auto institution = file->institution(m_account.institutionId());
+                institutionName = institution.name();
+                ui->m_urlEdit->setPlaceholderText(institution.value(QLatin1String("url")));
+            } else {
                 institutionName.clear();
+                ui->m_urlEdit->setPlaceholderText(QString());
+            }
         } catch (const MyMoneyException &e) {
             qDebug("exception in init for account dialog: %s", e.what());
         }
@@ -691,6 +697,45 @@ public:
             ui->m_messageWidget->setMessageType(KMessageWidget::Information);
             ui->m_messageWidget->animatedShow();
         }
+        updateIconButtonState();
+    }
+
+    MyMoneyInstitution selectedInstitution() const
+    {
+        QString institutionNameText = ui->m_qcomboboxInstitutions->currentText();
+        if (institutionNameText != i18n("(No Institution)")) {
+            try {
+                QList<MyMoneyInstitution> list = MyMoneyFile::instance()->institutionList();
+                QList<MyMoneyInstitution>::ConstIterator institutionIterator;
+                for (institutionIterator = list.constBegin(); institutionIterator != list.constEnd(); ++institutionIterator) {
+                    if ((*institutionIterator).name() == institutionNameText) {
+                        return *institutionIterator;
+                    }
+                }
+            } catch (const MyMoneyException& e) {
+                qDebug("Exception in account institution set: %s", e.what());
+            }
+        }
+        return {};
+    }
+
+    void updateIcon()
+    {
+        const auto institution = selectedInstitution();
+        ui->m_urlEdit->setPlaceholderText(institution.value(QLatin1String("url")));
+        QIcon favIcon;
+        if (!institution.value(QStringLiteral("icon")).isEmpty()) {
+            favIcon = Icons::loadIconFromApplicationCache(institution.value(QStringLiteral("icon")));
+        } else {
+            favIcon = Icons::get(Icons::Icon::Institution);
+        }
+        ui->m_iconButton->setIcon(favIcon);
+        updateIconButtonState();
+    }
+
+    void updateIconButtonState() const
+    {
+        ui->m_iconButton->setDisabled(ui->m_urlEdit->text().isEmpty() && ui->m_urlEdit->placeholderText().isEmpty());
     }
 
     KNewAccountDlg* q_ptr;
@@ -725,6 +770,25 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
         Q_D(KNewAccountDlg);
         d->urlChanged(d->ui->m_urlEdit);
     });
+
+    connect(d->ui->m_qcomboboxInstitutions, &QComboBox::currentIndexChanged, this, [&]() {
+        Q_D(KNewAccountDlg);
+        d->updateIcon();
+    });
+    connect(d->ui->m_iconButton, &QToolButton::pressed, this, [&] {
+        Q_D(KNewAccountDlg);
+        QUrl url;
+        QString urlText;
+        if (d->ui->m_urlEdit->text().isEmpty()) {
+            urlText = d->ui->m_urlEdit->placeholderText();
+        } else {
+            urlText = d->ui->m_urlEdit->text();
+        }
+        url.setUrl(QString::fromLatin1("https://%1").arg(urlText));
+        QDesktopServices::openUrl(url);
+    });
+
+    d->updateIcon();
 }
 
 MyMoneyMoney KNewAccountDlg::openingBalance() const
@@ -772,21 +836,8 @@ void KNewAccountDlg::okClicked()
     }
 
     if (!d->m_categoryEditor) {
-        QString institutionNameText = d->ui->m_qcomboboxInstitutions->currentText();
-        if (institutionNameText != i18n("(No Institution)")) {
-            try {
-                QList<MyMoneyInstitution> list = file->institutionList();
-                QList<MyMoneyInstitution>::ConstIterator institutionIterator;
-                for (institutionIterator = list.constBegin(); institutionIterator != list.constEnd(); ++institutionIterator) {
-                    if ((*institutionIterator).name() == institutionNameText)
-                        d->m_account.setInstitutionId((*institutionIterator).id());
-                }
-            } catch (const MyMoneyException &e) {
-                qDebug("Exception in account institution set: %s", e.what());
-            }
-        } else {
-            d->m_account.setInstitutionId(QString());
-        }
+        const auto institution = d->selectedInstitution();
+        d->m_account.setInstitutionId(institution.id());
     }
 
     d->m_account.setName(accountNameText);
