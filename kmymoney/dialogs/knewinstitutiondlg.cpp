@@ -239,6 +239,13 @@ void KNewInstitutionDlg::slotIconLoaded(KJob* job)
         d->ui->iconButton->setEnabled(true);
         d->m_favIcon = Icons::get(Icons::Icon::Institution);
         d->m_iconName = QStringLiteral("enum:Bank");
+
+        // in case we know about an icon from earlier attempts, we keep using it
+        if (!d->m_institution.value(QStringLiteral("icon")).isEmpty()) {
+            d->m_iconName = d->m_institution.value(QStringLiteral("icon"));
+            d->m_favIcon = Icons::loadIconFromApplicationCache(d->m_iconName);
+        }
+
         break;
     case 0:
         // There is an answer from the server, and the favicon is found
