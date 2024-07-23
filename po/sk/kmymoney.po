@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-22 01:49+0000\n"
+"POT-Creation-Date: 2024-07-23 01:50+0000\n"
 "PO-Revision-Date: 2020-01-02 16:30+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -5481,7 +5481,7 @@ msgstr ""
 "Aplikácia KMyMoney zistila, že niektoré plánované transakcie pre tento účet "
 "sú po termíne. Chcete teraz zadať tieto plánované transakcie?"
 
-#: kmymoney/kmymoney.cpp:3176 kmymoney/views/kscheduledview.cpp:134
+#: kmymoney/kmymoney.cpp:3176
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "Plánované transakcie nájdené"
@@ -20821,28 +20821,19 @@ msgstr "Nie je čo zlúčiť."
 msgid "Unable to remove payee(s)"
 msgstr "Nemožno odstrániť príjemcu(ov)"
 
-#: kmymoney/views/kscheduledview.cpp:133
-#, kde-format
-msgid ""
-"KMyMoney has detected some overdue scheduled transactions for this account. "
-"Do you want to enter those scheduled transactions now?"
-msgstr ""
-"Aplikácia KMyMoney zistila, že niektoré plánované transakcie pre tento účet "
-"sú po termíne. Chcete teraz zadať tieto plánované transakcie?"
-
-#: kmymoney/views/kscheduledview.cpp:210 kmymoney/views/kscheduledview.cpp:221
-#: kmymoney/views/kscheduledview.cpp:298 kmymoney/views/kscheduledview.cpp:311
+#: kmymoney/views/kscheduledview.cpp:172 kmymoney/views/kscheduledview.cpp:183
+#: kmymoney/views/kscheduledview.cpp:260 kmymoney/views/kscheduledview.cpp:273
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"
 msgstr "Neznáma plánovaná transakcia '%1'"
 
-#: kmymoney/views/kscheduledview.cpp:232
+#: kmymoney/views/kscheduledview.cpp:194
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr "<p>Ste si istí, že chcete vymazať plánovanú transakciu <b>%1</b>?</p>"
 
-#: kmymoney/views/kscheduledview.cpp:235
+#: kmymoney/views/kscheduledview.cpp:197
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
@@ -20851,25 +20842,25 @@ msgstr ""
 "V prípade splátok pôžičky v súčasnej dobe nie je možné znovu vytvoriť "
 "plánovanú transakciu."
 
-#: kmymoney/views/kscheduledview.cpp:237
+#: kmymoney/views/kscheduledview.cpp:199
 #, fuzzy, kde-format
 #| msgid "Select Schedules"
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Vybrať úlohy"
 
-#: kmymoney/views/kscheduledview.cpp:245
+#: kmymoney/views/kscheduledview.cpp:207
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "Nemožno odstrániť plánovanú transakciu '%1'"
 
-#: kmymoney/views/kscheduledview.cpp:259
+#: kmymoney/views/kscheduledview.cpp:221
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "Kópia %1"
 
-#: kmymoney/views/kscheduledview.cpp:284
+#: kmymoney/views/kscheduledview.cpp:246
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "Nemožno duplikovať plánovanú transakciu: '%1'"
@@ -25948,6 +25939,13 @@ msgstr ""
 "\n"
 "<p>Všetky informácie sú voliteľné a poskytnuté len pre prispôsobenie vášho "
 "súboru KMyMoney.</p>"
+
+#~ msgid ""
+#~ "KMyMoney has detected some overdue scheduled transactions for this "
+#~ "account. Do you want to enter those scheduled transactions now?"
+#~ msgstr ""
+#~ "Aplikácia KMyMoney zistila, že niektoré plánované transakcie pre tento "
+#~ "účet sú po termíne. Chcete teraz zadať tieto plánované transakcie?"
 
 #~ msgid "Remove this price item from the file"
 #~ msgstr "Odstrániť túto cenu aj zo súboru"

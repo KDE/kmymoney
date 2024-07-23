@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-22 01:49+0000\n"
+"POT-Creation-Date: 2024-07-23 01:50+0000\n"
 "PO-Revision-Date: 2024-07-20 12:42+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -5413,7 +5413,7 @@ msgstr ""
 "KMyMoney ha detectado asientos planificados vencidos para la cuenta <b>%1</"
 "b>. ¿Desea introducir esos asientos planificados ahora?"
 
-#: kmymoney/kmymoney.cpp:3176 kmymoney/views/kscheduledview.cpp:134
+#: kmymoney/kmymoney.cpp:3176
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "Asientos planificados encontrados"
@@ -20286,28 +20286,19 @@ msgstr "No combinar nada."
 msgid "Unable to remove payee(s)"
 msgstr "No ha sido posible eliminar el/los beneficiario(s)"
 
-#: kmymoney/views/kscheduledview.cpp:133
-#, kde-format
-msgid ""
-"KMyMoney has detected some overdue scheduled transactions for this account. "
-"Do you want to enter those scheduled transactions now?"
-msgstr ""
-"KMyMoney ha detectado asientos planificados vencidos para esta cuenta. "
-"¿Desea introducir esos asientos planificados ahora?"
-
-#: kmymoney/views/kscheduledview.cpp:210 kmymoney/views/kscheduledview.cpp:221
-#: kmymoney/views/kscheduledview.cpp:298 kmymoney/views/kscheduledview.cpp:311
+#: kmymoney/views/kscheduledview.cpp:172 kmymoney/views/kscheduledview.cpp:183
+#: kmymoney/views/kscheduledview.cpp:260 kmymoney/views/kscheduledview.cpp:273
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"
 msgstr "Planificación desconocida «%1»"
 
-#: kmymoney/views/kscheduledview.cpp:232
+#: kmymoney/views/kscheduledview.cpp:194
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr "<p>¿Seguro que desea borrar el asiento planificado <b>%1</b>?</p>"
 
-#: kmymoney/views/kscheduledview.cpp:235
+#: kmymoney/views/kscheduledview.cpp:197
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
@@ -20316,24 +20307,24 @@ msgstr ""
 "En el caso de pago de préstamos, actualmente no es posible recrear los "
 "asientos planificados."
 
-#: kmymoney/views/kscheduledview.cpp:237
+#: kmymoney/views/kscheduledview.cpp:199
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Borrar planificación"
 
-#: kmymoney/views/kscheduledview.cpp:245
+#: kmymoney/views/kscheduledview.cpp:207
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "No ha sido posible eliminar el asiento planificado «%1»"
 
-#: kmymoney/views/kscheduledview.cpp:259
+#: kmymoney/views/kscheduledview.cpp:221
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "Copia de %1"
 
-#: kmymoney/views/kscheduledview.cpp:284
+#: kmymoney/views/kscheduledview.cpp:246
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "No ha sido posible duplicar el asiento planificado: «%1»"
@@ -25339,6 +25330,13 @@ msgstr ""
 "\n"
 "<p>Toda la información es opcional y solo se usa para personalizar su "
 "archivo de KMyMoney.</p>"
+
+#~ msgid ""
+#~ "KMyMoney has detected some overdue scheduled transactions for this "
+#~ "account. Do you want to enter those scheduled transactions now?"
+#~ msgstr ""
+#~ "KMyMoney ha detectado asientos planificados vencidos para esta cuenta. "
+#~ "¿Desea introducir esos asientos planificados ahora?"
 
 #~ msgid "Remove this price item from the file"
 #~ msgstr "Elimine este precio del archivo"

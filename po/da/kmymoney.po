@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-22 01:49+0000\n"
+"POT-Creation-Date: 2024-07-23 01:50+0000\n"
 "PO-Revision-Date: 2015-02-19 20:48+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -5550,7 +5550,7 @@ msgstr ""
 "KMyMoney har detekteret nogle forsinkede skemalagte transaktioner for denne "
 "konto. Vil du gå ind i disse skemalagte transaktioner nu?"
 
-#: kmymoney/kmymoney.cpp:3176 kmymoney/views/kscheduledview.cpp:134
+#: kmymoney/kmymoney.cpp:3176
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "Skemalagte transaktioner fundet"
@@ -20976,28 +20976,19 @@ msgstr "Intet at flette."
 msgid "Unable to remove payee(s)"
 msgstr "Kan ikke fjerne betalingsmodtagere"
 
-#: kmymoney/views/kscheduledview.cpp:133
-#, kde-format
-msgid ""
-"KMyMoney has detected some overdue scheduled transactions for this account. "
-"Do you want to enter those scheduled transactions now?"
-msgstr ""
-"KMyMoney har detekteret nogle forsinkede skemalagte transaktioner for denne "
-"konto. Vil du gå ind i disse skemalagte transaktioner nu?"
-
-#: kmymoney/views/kscheduledview.cpp:210 kmymoney/views/kscheduledview.cpp:221
-#: kmymoney/views/kscheduledview.cpp:298 kmymoney/views/kscheduledview.cpp:311
+#: kmymoney/views/kscheduledview.cpp:172 kmymoney/views/kscheduledview.cpp:183
+#: kmymoney/views/kscheduledview.cpp:260 kmymoney/views/kscheduledview.cpp:273
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"
 msgstr "Ukendt skemalagt transaktion \"%1\""
 
-#: kmymoney/views/kscheduledview.cpp:232
+#: kmymoney/views/kscheduledview.cpp:194
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr "<p>Vil du virkelig slette den skemalagte transaktion <b>%1</b>?</p>"
 
-#: kmymoney/views/kscheduledview.cpp:235
+#: kmymoney/views/kscheduledview.cpp:197
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
@@ -21006,24 +20997,24 @@ msgstr ""
 "Hvad angår afdrag på lån er det i øjeblikket ikke muligt at genskabe den "
 "skemalagte transaktion."
 
-#: kmymoney/views/kscheduledview.cpp:237
+#: kmymoney/views/kscheduledview.cpp:199
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Slet modtgaer"
 
-#: kmymoney/views/kscheduledview.cpp:245
+#: kmymoney/views/kscheduledview.cpp:207
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "Kan ikke fjerne skemalagt transaktion \"%1\""
 
-#: kmymoney/views/kscheduledview.cpp:259
+#: kmymoney/views/kscheduledview.cpp:221
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "Kopi af %1"
 
-#: kmymoney/views/kscheduledview.cpp:284
+#: kmymoney/views/kscheduledview.cpp:246
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "Kan ikke duplikere skemalagt transaktion: \"%1\""
@@ -26126,6 +26117,13 @@ msgstr ""
 "\n"
 "<p>Al information er valgfri og bruges kun til at personliggøre din KMyMoney-"
 "fil.</p>"
+
+#~ msgid ""
+#~ "KMyMoney has detected some overdue scheduled transactions for this "
+#~ "account. Do you want to enter those scheduled transactions now?"
+#~ msgstr ""
+#~ "KMyMoney har detekteret nogle forsinkede skemalagte transaktioner for "
+#~ "denne konto. Vil du gå ind i disse skemalagte transaktioner nu?"
 
 #~ msgid "Remove this price item from the file"
 #~ msgstr "Fjern dette priselement fra filen"
