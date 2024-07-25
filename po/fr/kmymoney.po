@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-23 01:50+0000\n"
-"PO-Revision-Date: 2024-07-08 11:36+0200\n"
+"PO-Revision-Date: 2024-07-20 16:04+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -19986,11 +19986,10 @@ msgid "Expected Profit/Loss"
 msgstr "Gain/Perte attendu"
 
 #: kmymoney/views/kinstitutionsview.cpp:251
-#, fuzzy, kde-format
-#| msgid "Edit institution..."
+#, kde-format
 msgctxt "@info:title Dialog title"
 msgid "Edit Institution"
-msgstr "Modifier un établissement…"
+msgstr "Modifier une institution"
 
 #: kmymoney/views/kinstitutionsview.cpp:258
 #, kde-format
@@ -21030,14 +21029,14 @@ msgstr "Le numéro de chèque <b>%1</b> a déjà été utilisé sur ce compte."
 
 #: kmymoney/views/newspliteditor.cpp:741
 #: kmymoney/views/newtransactioneditor.cpp:188
-#, fuzzy, kde-format
-#| msgid "Cannot remove transaction that references a closed account."
+#, kde-format
 msgctxt "@info:tooltip Protected"
 msgid ""
 "This widget is currently protected because the transaction references a "
 "closed account."
 msgstr ""
-"Impossible de supprimer une opération qui fait référence à un compte clos."
+"Ce composant graphique est actuellement protégé car la transaction fait "
+"référence à un compte clos."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, payToLabel)
@@ -21061,7 +21060,7 @@ msgstr "Centre de coûts"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits."
-msgstr ""
+msgstr "Le montant est différent de la somme de toutes les parties."
 
 #: kmymoney/views/newtransactioneditor.cpp:605
 #, kde-format
