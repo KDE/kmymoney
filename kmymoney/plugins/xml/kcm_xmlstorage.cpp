@@ -22,11 +22,9 @@
 // Project Includes
 
 #include "config-kmymoney.h"
+#include "gpg-recover-key.h"
 #include "kgpgfile.h"
 #include "kmymoneysettings.h"
-
-#define RECOVER_KEY_ID      "0xD2B08440"
-#define RECOVER_KEY_ID_FULL "59B0F826D2B08440"
 
 XMLStorageSettingsWidget::XMLStorageSettingsWidget(QWidget* parent) :
     QWidget(parent)
@@ -37,6 +35,14 @@ XMLStorageSettingsWidget::XMLStorageSettingsWidget(QWidget* parent) :
 #else
     const bool available = false;
 #endif
+
+    m_recoverKeyList = QStringLiteral(OLD_RECOVER_KEY_IDS).split(':');
+    m_recoverKeyList.append(RECOVER_KEY_ID);
+
+    for (auto it = m_recoverKeyList.begin(); it != m_recoverKeyList.end(); ++it) {
+        *it = (*it).replace(QLatin1String("0x"), QString());
+    }
+
     setEnabled(available);
     if (!available) {
         setToolTip(i18n("GPG installation not found or not working properly."));
@@ -131,7 +137,7 @@ void XMLStorageSettingsWidget::showEvent(QShowEvent * event)
 {
     QString masterKey;
 
-    if (m_masterKeyCombo->currentIndex() != 0) {
+    if (m_masterKeyCombo->currentIndex() != -1) {
         static const QRegularExpression keyExp(".* \\((.*)\\)");
         const auto key(keyExp.match(m_masterKeyCombo->currentText()));
         if (key.hasMatch()) {
@@ -145,17 +151,24 @@ void XMLStorageSettingsWidget::showEvent(QShowEvent * event)
     QStringList keyList;
 
 #ifdef ENABLE_GPG
+
+    // load m_masterKeyCombo with available private keys
+    // but don't show the recover keys and omit duplicate
+    // addresses for the same key id
     KGPGFile::secretKeyList(keyList);
 
+    QStringList loadedKeys;
     for (QStringList::iterator it = keyList.begin(); it != keyList.end(); ++it) {
         QStringList fields = (*it).split(':', Qt::SkipEmptyParts);
-        if (fields[0] != RECOVER_KEY_ID_FULL) {
+        const auto keyId = fields[0];
+        if (!m_recoverKeyList.contains(keyId) && !loadedKeys.contains(keyId)) {
             // replace parenthesis in name field with brackets
             QString name = fields[1];
             name.replace('(', "[");
             name.replace(')', "]");
-            name = QString("%1 (0x%2)").arg(name, fields[0]);
+            name = QString("%1 (0x%2)").arg(name, keyId);
             m_masterKeyCombo->addItem(name);
+            loadedKeys.append(keyId);
             if (name.contains(masterKey))
                 m_masterKeyCombo->setCurrentItem(name);
         }
@@ -181,7 +194,14 @@ void XMLStorageSettingsWidget::slotStatusChanged(bool state)
         state = false;
 
     if ((state == true) && (oncePerSession == true) && isVisible()) {
-        KMessageBox::information(this, QString("<qt>%1</qt>").arg(i18n("<p>You have turned on the GPG encryption support. This means, that new files will be stored encrypted.</p><p>Existing files will not be encrypted automatically.  To achieve encryption of existing files, please use the <b>File/Save as...</b> feature and store the file under a different name.<br/>Once confident with the result, feel free to delete the old file and rename the encrypted one to the old name.</p>")), i18n("GPG encryption activated"), "GpgEncryptionActivated");
+        KMessageBox::information(nativeParentWidget(),
+                                 QString("<qt>%1</qt>")
+                                     .arg(i18n("<p>You have turned on the GPG encryption support. This means, that new files will be stored "
+                                               "encrypted.</p><p>Existing files will not be encrypted automatically.  To achieve encryption of existing files, "
+                                               "please use the <b>File/Save as...</b> feature and store the file under a different name.<br/>Once confident "
+                                               "with the result, feel free to delete the old file and rename the encrypted one to the old name.</p>")),
+                                 i18n("GPG encryption activated"),
+                                 "GpgEncryptionActivated");
         oncePerSession = false;
     }
 

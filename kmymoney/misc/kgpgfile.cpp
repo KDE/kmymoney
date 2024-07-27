@@ -367,7 +367,7 @@ bool KGPGFile::keyAvailable(const QString& name)
     KGPGFile file;
     QStringList keys;
     file.keyList(keys, false, name);
-    // qDebug("keyAvailable returns %d for '%s'", keys.count(), qPrintable(name));
+    // qDebug() << "keyAvailable returns" << keys.count() << "for" << name << keys;
     return keys.count() != 0;
 }
 

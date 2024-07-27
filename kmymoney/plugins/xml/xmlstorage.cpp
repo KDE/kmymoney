@@ -35,6 +35,7 @@
 // Project Includes
 
 #include "appinterface.h"
+#include "gpg-recover-key.h"
 #include "icons.h"
 #include "kgpgfile.h"
 #include "kgpgkeyselectiondlg.h"
@@ -54,9 +55,6 @@
 using namespace Icons;
 
 static constexpr KCompressionDevice::CompressionType const& COMPRESSION_TYPE = KCompressionDevice::GZip;
-#ifdef ENABLE_GPG
-static constexpr char recoveryKeyId[] = "59B0F826D2B08440";
-#endif
 
 // define the default period to warn about an expiring recoverkey to 30 days
 // but allows to override this setting during build time
@@ -328,7 +326,7 @@ bool XMLStorage::saveAs()
         dlg->setSecretKeys(keyList, KMyMoneySettings::gpgRecipient());
         dlg->setAdditionalKeys(KMyMoneySettings::gpgRecipientList());
         rc = dlg->exec();
-        if ((rc == QDialog::Accepted) && (dlg != 0)) {
+        if ((rc == QDialog::Accepted) && (dlg != nullptr)) {
             m_additionalGpgKeys = dlg->additionalKeys();
             selectedKeyName = dlg->secretKey();
         }
@@ -450,8 +448,14 @@ void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWr
         } else {
             if (KMyMoneySettings::encryptRecover()) {
                 encryptRecover = true;
-                if (!KGPGFile::keyAvailable(QString(recoveryKeyId))) {
-                    KMessageBox::error(nullptr, i18n("<p>You have selected to encrypt your data also with the KMyMoney recover key, but the key with id</p><p><center><b>%1</b></center></p><p>has not been found in your keyring at this time. Please make sure to import this key into your keyring. You can find it on the <a href=\"https://kmymoney.org/\">KMyMoney web-site</a>. This time your data will not be encrypted with the KMyMoney recover key.</p>", QString(recoveryKeyId)), i18n("GPG Key not found"));
+                if (!KGPGFile::keyAvailable(QLatin1String(RECOVER_KEY_ID))) {
+                    KMessageBox::error(nullptr,
+                                       i18n("<p>You have selected to encrypt your data also with the KMyMoney recover key, but the key with "
+                                            "id</p><p><center><b>%1</b></center></p><p>has not been found in your keyring at this time. Please make sure to "
+                                            "import this key into your keyring. You can find it on the <a href=\"https://kmymoney.org/\">KMyMoney "
+                                            "web-site</a>. This time your data will not be encrypted with the KMyMoney recover key.</p>",
+                                            QLatin1String(RECOVER_KEY_ID)),
+                                       i18n("GPG Key not found"));
                     encryptRecover = false;
                 }
             }
@@ -504,7 +508,7 @@ void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWr
             }
 
             if (encryptRecover) {
-                kgpg->addRecipient(recoveryKeyId);
+                kgpg->addRecipient(QLatin1String(RECOVER_KEY_ID));
             }
             MyMoneyFile::instance()->setValue("kmm-encryption-key", keyList);
             device = std::unique_ptr<decltype(device)::element_type>(kgpg.release());
@@ -564,7 +568,7 @@ void XMLStorage::checkRecoveryKeyValidity()
     if (KMyMoneySettings::writeDataEncrypted() && KMyMoneySettings::encryptRecover()) {
         if (KGPGFile::GPGAvailable()) {
             KGPGFile file;
-            QDateTime expirationDate = file.keyExpires(QLatin1String(recoveryKeyId));
+            QDateTime expirationDate = file.keyExpires(QLatin1String(RECOVER_KEY_ID));
             if (expirationDate.isValid() && QDateTime::currentDateTime().daysTo(expirationDate) <= RECOVER_KEY_EXPIRATION_WARNING) {
                 bool skipMessage = false;
 

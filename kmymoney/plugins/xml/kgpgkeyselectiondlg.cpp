@@ -18,8 +18,10 @@
 // Project Includes
 
 #include "config-kmymoney.h"
-#include <kgpgfile.h>
-#include <ui_kgpgkeyselectiondlg.h>
+#include "gpg-recover-key.h"
+#include "kgpgfile.h"
+
+#include "ui_kgpgkeyselectiondlg.h"
 
 class KGpgKeySelectionDlgPrivate
 {
@@ -43,6 +45,7 @@ public:
     bool                      needCheckList;
     bool                      listOk;
     int                       checkCount;
+    QStringList m_recoverKeyList;
 };
 
 
@@ -52,6 +55,14 @@ KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget *parent) :
 {
     Q_D(KGpgKeySelectionDlg);
     d->ui->setupUi(this);
+
+    d->m_recoverKeyList = QStringLiteral(OLD_RECOVER_KEY_IDS).split(':');
+    d->m_recoverKeyList.append(RECOVER_KEY_ID);
+
+    for (auto it = d->m_recoverKeyList.begin(); it != d->m_recoverKeyList.end(); ++it) {
+        *it = (*it).replace(QLatin1String("0x"), QString());
+    }
+
     connect(d->ui->m_secretKey, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &KGpgKeySelectionDlg::slotIdChanged);
     connect(d->ui->m_listWidget, &KEditListWidget::changed, this, &KGpgKeySelectionDlg::slotIdChanged);
     connect(d->ui->m_listWidget, &KEditListWidget::added, this, &KGpgKeySelectionDlg::slotKeyListChanged);
@@ -66,20 +77,24 @@ KGpgKeySelectionDlg::~KGpgKeySelectionDlg()
 
 void KGpgKeySelectionDlg::setSecretKeys(const QStringList& keyList, const QString& defaultKey)
 {
-    static constexpr char recoveryKeyId[] = "59B0F826D2B08440";
-
     Q_D(KGpgKeySelectionDlg);
     d->ui->m_secretKey->addItem(i18n("No encryption"));
 
+    // load m_secretKey with available private keys
+    // but don't show the recover keys and omit duplicate
+    // addresses for the same key id
+    QStringList loadedKeys;
     for (const auto& key : keyList) {
         QStringList fields = key.split(':', Qt::SkipEmptyParts);
-        if (fields[0] != recoveryKeyId) {
+        const auto keyId = fields[0];
+        if (!d->m_recoverKeyList.contains(keyId) && !loadedKeys.contains(keyId)) {
             // replace parenthesis in name field with brackets
             auto name = fields[1];
             name.replace('(', "[");
             name.replace(')', "]");
             name = QString("%1 (0x%2)").arg(name, fields[0]);
             d->ui->m_secretKey->addItem(name);
+            loadedKeys.append(keyId);
             if (name.contains(defaultKey)) {
                 d->ui->m_secretKey->setCurrentText(name);
             }
