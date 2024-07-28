@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-23 01:50+0000\n"
+"POT-Creation-Date: 2024-07-28 01:51+0000\n"
 "PO-Revision-Date: 2024-07-15 15:29+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -5222,7 +5222,7 @@ msgstr "Není otevřen žádný KMyMoney soubor"
 
 #: kmymoney/kmymoney.cpp:3390 kmymoney/kmymoney.cpp:3392
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1364
-#: kmymoney/plugins/xml/xmlstorage.cpp:415
+#: kmymoney/plugins/xml/xmlstorage.cpp:413
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
@@ -14095,7 +14095,7 @@ msgid "Database malfunction"
 msgstr "Porucha databáze"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:188
-#: kmymoney/plugins/xml/xmlstorage.cpp:241
+#: kmymoney/plugins/xml/xmlstorage.cpp:239
 #, kde-format
 msgid "Tried to access a file when it has not been opened"
 msgstr "Pokus o přístup do souboru, když není otevřen"
@@ -17275,18 +17275,18 @@ msgstr "Nastavení Woob"
 msgid "Retrieving transactions..."
 msgstr "Získávám transakce..."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:42
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:48
 #, kde-format
 msgid "GPG installation not found or not working properly."
 msgstr ""
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:168
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:181
 #, kde-format
 msgid ""
 "No GPG secret keys found, please run gpg[2] --gen-key or import keys into gpg"
 msgstr ""
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:184
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:199
 #: kmymoney/plugins/xml/ksettingsgpg.cpp:209
 #, kde-format
 msgid ""
@@ -17304,13 +17304,13 @@ msgstr ""
 "Jakmile si ověříte výsledek, můžete starý soubor smazat a svůj zašifrovaný "
 "soubor přejmenovat na původní jméno.</p>"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:184
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:203
 #: kmymoney/plugins/xml/ksettingsgpg.cpp:209
 #, kde-format
 msgid "GPG encryption activated"
 msgstr "Šifrování pomocí GPG aktivováno"
 
-#: kmymoney/plugins/xml/kgpgkeyselectiondlg.cpp:72
+#: kmymoney/plugins/xml/kgpgkeyselectiondlg.cpp:81
 #, kde-format
 msgid "No encryption"
 msgstr "Bez šifrování"
@@ -17374,41 +17374,41 @@ msgctxt "Error message when reading XML file"
 msgid "Unknown payee identifier type %1"
 msgstr ""
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:348
+#: kmymoney/plugins/xml/xmlstorage.cpp:346
 #, kde-format
 msgid "Save As"
 msgstr "Uložit jako..."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:350
+#: kmymoney/plugins/xml/xmlstorage.cpp:348
 #, kde-format
 msgctxt "KMyMoney (Filefilter)"
 msgid "KMyMoney files"
 msgstr "Soubory KMyMoney"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:351
+#: kmymoney/plugins/xml/xmlstorage.cpp:349
 #, kde-format
 msgctxt "Anonymous (Filefilter)"
 msgid "Anonymous files"
 msgstr "Anonymní soubory"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:352
+#: kmymoney/plugins/xml/xmlstorage.cpp:350
 #, kde-format
 msgctxt "XML (Filefilter)"
 msgid "XML files"
 msgstr "Soubory XML"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:353
+#: kmymoney/plugins/xml/xmlstorage.cpp:351
 #, kde-format
 msgctxt "All files (Filefilter)"
 msgid "All files"
 msgstr "Všechny soubory"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:427
+#: kmymoney/plugins/xml/xmlstorage.cpp:425
 #, kde-format
 msgid "KMyMoney files (*.kmy *.xml)"
 msgstr ""
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:448
+#: kmymoney/plugins/xml/xmlstorage.cpp:446
 #, kde-format
 msgid ""
 "GPG does not seem to be installed on your system. Please make sure that GPG "
@@ -17419,12 +17419,12 @@ msgstr ""
 "nalezeno s použitím standardních vyhledávacích cest. Nyní je šifrování "
 "zablokováno."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:448
+#: kmymoney/plugins/xml/xmlstorage.cpp:446
 #, kde-format
 msgid "GPG not found"
 msgstr "GPG nebylo nalezeno"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:454
+#: kmymoney/plugins/xml/xmlstorage.cpp:453
 #, kde-format
 msgid ""
 "<p>You have selected to encrypt your data also with the KMyMoney recover "
@@ -17441,13 +17441,13 @@ msgstr ""
 "\"https://kmymoney.org/\">Webová stránka KMyMoney</a>. Nyní vaše data "
 "nebudou zašifrovaná obnovovacím klíčem KMyMoney.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:454
-#: kmymoney/plugins/xml/xmlstorage.cpp:462
+#: kmymoney/plugins/xml/xmlstorage.cpp:458
+#: kmymoney/plugins/xml/xmlstorage.cpp:466
 #, kde-format
 msgid "GPG Key not found"
 msgstr "GPG klíč nebyl nalezen"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:462
+#: kmymoney/plugins/xml/xmlstorage.cpp:466
 #, kde-format
 msgid ""
 "<p>You have specified to encrypt your data for the user-id</p><p><center><b>"
@@ -17460,7 +17460,7 @@ msgstr ""
 "příslušný platný klíč. Prosím, ujistěte se, že máte importovaný platný klíč "
 "tohoto uživatele. Zatím bude šifrování zakázáno.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:469
+#: kmymoney/plugins/xml/xmlstorage.cpp:473
 #, kde-format
 msgid ""
 "<p>You have configured to save your data in encrypted form using GPG. Make "
@@ -17472,12 +17472,12 @@ msgstr ""
 "je později nedovedete rozšifrovat. Pokud si nejste jistí, odpovězte <b>Ne</"
 "b>.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:470
+#: kmymoney/plugins/xml/xmlstorage.cpp:474
 #, kde-format
 msgid "Store GPG encrypted"
 msgstr "Uložit zašifrováno pomocí GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:586
+#: kmymoney/plugins/xml/xmlstorage.cpp:590
 #, kde-format
 msgid ""
 "You have configured KMyMoney to use GPG to protect your data and to encrypt "
@@ -17493,7 +17493,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:586
+#: kmymoney/plugins/xml/xmlstorage.cpp:590
 #, kde-format
 msgid "Recover key expires soon"
 msgstr ""

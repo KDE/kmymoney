@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-23 01:50+0000\n"
+"POT-Creation-Date: 2024-07-28 01:51+0000\n"
 "PO-Revision-Date: 2024-07-20 19:39+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -5439,7 +5439,7 @@ msgstr "Nessun file di KMyMoney aperto"
 
 #: kmymoney/kmymoney.cpp:3390 kmymoney/kmymoney.cpp:3392
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1364
-#: kmymoney/plugins/xml/xmlstorage.cpp:415
+#: kmymoney/plugins/xml/xmlstorage.cpp:413
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
@@ -14596,7 +14596,7 @@ msgid "Database malfunction"
 msgstr "Malfunzionamento del database"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:188
-#: kmymoney/plugins/xml/xmlstorage.cpp:241
+#: kmymoney/plugins/xml/xmlstorage.cpp:239
 #, kde-format
 msgid "Tried to access a file when it has not been opened"
 msgstr "Tentativo di accedere a un file non ancora aperto"
@@ -17857,12 +17857,12 @@ msgstr "Configurazione Woob"
 msgid "Retrieving transactions..."
 msgstr "Recupero transazioni..."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:42
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:48
 #, kde-format
 msgid "GPG installation not found or not working properly."
 msgstr "Installazione di GPG non trovata o non funziona correttamente."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:168
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:181
 #, kde-format
 msgid ""
 "No GPG secret keys found, please run gpg[2] --gen-key or import keys into gpg"
@@ -17870,7 +17870,7 @@ msgstr ""
 "Nessuna chiave segreta GPG trovata, esegui gpg[2] --gen-key o importa le "
 "chiavi in gpg"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:184
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:199
 #: kmymoney/plugins/xml/ksettingsgpg.cpp:209
 #, kde-format
 msgid ""
@@ -17889,13 +17889,13 @@ msgstr ""
 "eliminare il vecchio file e rinominare quello cifrato con il vecchio nome.</"
 "p>"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:184
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:203
 #: kmymoney/plugins/xml/ksettingsgpg.cpp:209
 #, kde-format
 msgid "GPG encryption activated"
 msgstr "Cifratura GPG attivata"
 
-#: kmymoney/plugins/xml/kgpgkeyselectiondlg.cpp:72
+#: kmymoney/plugins/xml/kgpgkeyselectiondlg.cpp:81
 #, kde-format
 msgid "No encryption"
 msgstr "Nessuna cifratura"
@@ -17960,41 +17960,41 @@ msgctxt "Error message when reading XML file"
 msgid "Unknown payee identifier type %1"
 msgstr "Tipo di identificatore beneficiario %1 sconosciuto"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:348
+#: kmymoney/plugins/xml/xmlstorage.cpp:346
 #, kde-format
 msgid "Save As"
 msgstr "Salva come"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:350
+#: kmymoney/plugins/xml/xmlstorage.cpp:348
 #, kde-format
 msgctxt "KMyMoney (Filefilter)"
 msgid "KMyMoney files"
 msgstr "File di KMyMoney"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:351
+#: kmymoney/plugins/xml/xmlstorage.cpp:349
 #, kde-format
 msgctxt "Anonymous (Filefilter)"
 msgid "Anonymous files"
 msgstr "File anonimi"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:352
+#: kmymoney/plugins/xml/xmlstorage.cpp:350
 #, kde-format
 msgctxt "XML (Filefilter)"
 msgid "XML files"
 msgstr "File XML"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:353
+#: kmymoney/plugins/xml/xmlstorage.cpp:351
 #, kde-format
 msgctxt "All files (Filefilter)"
 msgid "All files"
 msgstr "Tutti i file"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:427
+#: kmymoney/plugins/xml/xmlstorage.cpp:425
 #, kde-format
 msgid "KMyMoney files (*.kmy *.xml)"
 msgstr "File di KMyMoney (*.kmy *.xml)"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:448
+#: kmymoney/plugins/xml/xmlstorage.cpp:446
 #, kde-format
 msgid ""
 "GPG does not seem to be installed on your system. Please make sure that GPG "
@@ -18005,12 +18005,12 @@ msgstr ""
 "eseguibile sia presente utilizzando il percorso di ricerca standard. Al "
 "momento, la cifratura è disabilitata."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:448
+#: kmymoney/plugins/xml/xmlstorage.cpp:446
 #, kde-format
 msgid "GPG not found"
 msgstr "GPG non trovato"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:454
+#: kmymoney/plugins/xml/xmlstorage.cpp:453
 #, kde-format
 msgid ""
 "<p>You have selected to encrypt your data also with the KMyMoney recover "
@@ -18027,13 +18027,13 @@ msgstr ""
 "kmymoney.org/\">sito web di KMyMoney</a>. In questo caso, i dati non saranno "
 "cifrati con la chiave di recupero di KMyMoney.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:454
-#: kmymoney/plugins/xml/xmlstorage.cpp:462
+#: kmymoney/plugins/xml/xmlstorage.cpp:458
+#: kmymoney/plugins/xml/xmlstorage.cpp:466
 #, kde-format
 msgid "GPG Key not found"
 msgstr "Chiave GPG non trovata"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:462
+#: kmymoney/plugins/xml/xmlstorage.cpp:466
 #, kde-format
 msgid ""
 "<p>You have specified to encrypt your data for the user-id</p><p><center><b>"
@@ -18047,7 +18047,7 @@ msgstr ""
 "importare una chiave valida per l'utente. Al momento, la cifratura è "
 "disabilitata.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:469
+#: kmymoney/plugins/xml/xmlstorage.cpp:473
 #, kde-format
 msgid ""
 "<p>You have configured to save your data in encrypted form using GPG. Make "
@@ -18059,12 +18059,12 @@ msgstr ""
 "verranno cifrati senza che sia possibile decifrarli successivamente! Se non "
 "sei sicuro, rispondi <b>No</b>.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:470
+#: kmymoney/plugins/xml/xmlstorage.cpp:474
 #, kde-format
 msgid "Store GPG encrypted"
 msgstr "Salva cifrando con GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:586
+#: kmymoney/plugins/xml/xmlstorage.cpp:590
 #, kde-format
 msgid ""
 "You have configured KMyMoney to use GPG to protect your data and to encrypt "
@@ -18087,7 +18087,7 @@ msgstr[1] ""
 "%1 giorni. Aggiorna la chiave da un server di chiavi utilizzando la tua "
 "interfaccia a GPG (ad es. KGPG)."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:586
+#: kmymoney/plugins/xml/xmlstorage.cpp:590
 #, kde-format
 msgid "Recover key expires soon"
 msgstr "La chiave di ripristino scade a breve"

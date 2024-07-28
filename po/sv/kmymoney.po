@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-23 01:50+0000\n"
+"POT-Creation-Date: 2024-07-28 01:51+0000\n"
 "PO-Revision-Date: 2024-07-20 05:20+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -5408,7 +5408,7 @@ msgstr "Ingen KMyMoney-fil öppen"
 
 #: kmymoney/kmymoney.cpp:3390 kmymoney/kmymoney.cpp:3392
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1364
-#: kmymoney/plugins/xml/xmlstorage.cpp:415
+#: kmymoney/plugins/xml/xmlstorage.cpp:413
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
@@ -14497,7 +14497,7 @@ msgid "Database malfunction"
 msgstr "Tekniskt databasfel"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:188
-#: kmymoney/plugins/xml/xmlstorage.cpp:241
+#: kmymoney/plugins/xml/xmlstorage.cpp:239
 #, kde-format
 msgid "Tried to access a file when it has not been opened"
 msgstr "Försökte komma åt en fil när den inte har öppnats"
@@ -17739,12 +17739,12 @@ msgstr "Inställning av Woob"
 msgid "Retrieving transactions..."
 msgstr "Hämtar transaktioner..."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:42
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:48
 #, kde-format
 msgid "GPG installation not found or not working properly."
 msgstr "Installation av GPG hittades inte eller fungerar inte riktigt."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:168
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:181
 #, kde-format
 msgid ""
 "No GPG secret keys found, please run gpg[2] --gen-key or import keys into gpg"
@@ -17752,7 +17752,7 @@ msgstr ""
 "Några GPG hemliga nycklar hittades inte. Kör gpg[2] --gen-key eller "
 "importera nycklar till GPG."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:184
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:199
 #: kmymoney/plugins/xml/ksettingsgpg.cpp:209
 #, kde-format
 msgid ""
@@ -17770,13 +17770,13 @@ msgstr ""
 ">När du väl är säker på resultatet, ta gärna bort den gamla filen och byt "
 "namn på den krypterade till det gamla namnet.</p>"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:184
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:203
 #: kmymoney/plugins/xml/ksettingsgpg.cpp:209
 #, kde-format
 msgid "GPG encryption activated"
 msgstr "Kryptering med GPG aktiverad"
 
-#: kmymoney/plugins/xml/kgpgkeyselectiondlg.cpp:72
+#: kmymoney/plugins/xml/kgpgkeyselectiondlg.cpp:81
 #, kde-format
 msgid "No encryption"
 msgstr "Ingen kryptering"
@@ -17842,41 +17842,41 @@ msgctxt "Error message when reading XML file"
 msgid "Unknown payee identifier type %1"
 msgstr "Okänd identifierartyp för betalningsmottagare %1"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:348
+#: kmymoney/plugins/xml/xmlstorage.cpp:346
 #, kde-format
 msgid "Save As"
 msgstr "Spara som"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:350
+#: kmymoney/plugins/xml/xmlstorage.cpp:348
 #, kde-format
 msgctxt "KMyMoney (Filefilter)"
 msgid "KMyMoney files"
 msgstr "KMyMoney-filer"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:351
+#: kmymoney/plugins/xml/xmlstorage.cpp:349
 #, kde-format
 msgctxt "Anonymous (Filefilter)"
 msgid "Anonymous files"
 msgstr "Anonyma filer"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:352
+#: kmymoney/plugins/xml/xmlstorage.cpp:350
 #, kde-format
 msgctxt "XML (Filefilter)"
 msgid "XML files"
 msgstr "XML-filer"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:353
+#: kmymoney/plugins/xml/xmlstorage.cpp:351
 #, kde-format
 msgctxt "All files (Filefilter)"
 msgid "All files"
 msgstr "Alla filer"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:427
+#: kmymoney/plugins/xml/xmlstorage.cpp:425
 #, kde-format
 msgid "KMyMoney files (*.kmy *.xml)"
 msgstr "KMyMoney-filer (*.kmy *.xml)"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:448
+#: kmymoney/plugins/xml/xmlstorage.cpp:446
 #, kde-format
 msgid ""
 "GPG does not seem to be installed on your system. Please make sure that GPG "
@@ -17886,12 +17886,12 @@ msgstr ""
 "GPG verkar inte vara installerat på systemet. Försäkra dig om att GPG kan "
 "hittas via den vanliga sökvägen. För närvarande är kryptering inaktiverad."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:448
+#: kmymoney/plugins/xml/xmlstorage.cpp:446
 #, kde-format
 msgid "GPG not found"
 msgstr "GPG hittades inte"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:454
+#: kmymoney/plugins/xml/xmlstorage.cpp:453
 #, kde-format
 msgid ""
 "<p>You have selected to encrypt your data also with the KMyMoney recover "
@@ -17908,13 +17908,13 @@ msgstr ""
 "\">KMyMoneys webbsida</a>. Data kommer inte att krypteras med KMyMoneys "
 "återställningsnyckel denna gången.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:454
-#: kmymoney/plugins/xml/xmlstorage.cpp:462
+#: kmymoney/plugins/xml/xmlstorage.cpp:458
+#: kmymoney/plugins/xml/xmlstorage.cpp:466
 #, kde-format
 msgid "GPG Key not found"
 msgstr "GPG-nyckel hittades inte"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:462
+#: kmymoney/plugins/xml/xmlstorage.cpp:466
 #, kde-format
 msgid ""
 "<p>You have specified to encrypt your data for the user-id</p><p><center><b>"
@@ -17927,7 +17927,7 @@ msgstr ""
 "i din nyckelring. Försäkra dig om att du importerar en giltig nyckel för "
 "detta användar-id. För närvarande är kryptering inaktiverad.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:469
+#: kmymoney/plugins/xml/xmlstorage.cpp:473
 #, kde-format
 msgid ""
 "<p>You have configured to save your data in encrypted form using GPG. Make "
@@ -17938,12 +17938,12 @@ msgstr ""
 "medveten om att all data kan gå förlorad om du krypterar den, och inte "
 "senare kan avkoda den. Om du är osäker, svara <b>Nej</b>.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:470
+#: kmymoney/plugins/xml/xmlstorage.cpp:474
 #, kde-format
 msgid "Store GPG encrypted"
 msgstr "Lagra krypterad med GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:586
+#: kmymoney/plugins/xml/xmlstorage.cpp:590
 #, kde-format
 msgid ""
 "You have configured KMyMoney to use GPG to protect your data and to encrypt "
@@ -17966,7 +17966,7 @@ msgstr[1] ""
 "att utgå om %1 dagar. Uppdatera nyckeln från en nyckelserver genom att "
 "använda ett GPG-gränssnitt (exempelvis KGPG)."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:586
+#: kmymoney/plugins/xml/xmlstorage.cpp:590
 #, kde-format
 msgid "Recover key expires soon"
 msgstr "Återställningsnyckel går snart ut"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-23 01:50+0000\n"
+"POT-Creation-Date: 2024-07-28 01:51+0000\n"
 "PO-Revision-Date: 2024-07-20 09:47+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -5454,7 +5454,7 @@ msgstr "No s'ha obert cap fitxer de KMyMoney"
 
 #: kmymoney/kmymoney.cpp:3390 kmymoney/kmymoney.cpp:3392
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1364
-#: kmymoney/plugins/xml/xmlstorage.cpp:415
+#: kmymoney/plugins/xml/xmlstorage.cpp:413
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
@@ -14627,7 +14627,7 @@ msgid "Database malfunction"
 msgstr "Funcionament incorrecte de la base de dades"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:188
-#: kmymoney/plugins/xml/xmlstorage.cpp:241
+#: kmymoney/plugins/xml/xmlstorage.cpp:239
 #, kde-format
 msgid "Tried to access a file when it has not been opened"
 msgstr "S'ha intentat accedir a un fitxer quan no estava obert"
@@ -17901,13 +17901,13 @@ msgstr "Configureu Woob"
 msgid "Retrieving transactions..."
 msgstr "S'estan recuperant les operacions…"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:42
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:48
 #, kde-format
 msgid "GPG installation not found or not working properly."
 msgstr ""
 "No s'ha trobat la instal·lació de GPG o no està treballant de forma adequada."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:168
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:181
 #, kde-format
 msgid ""
 "No GPG secret keys found, please run gpg[2] --gen-key or import keys into gpg"
@@ -17915,7 +17915,7 @@ msgstr ""
 "No s'han trobat les claus secretes de GPG, executeu gpg[2] --gen-key o "
 "importeu les claus a dins de «gpg»"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:184
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:199
 #: kmymoney/plugins/xml/ksettingsgpg.cpp:209
 #, kde-format
 msgid ""
@@ -17934,13 +17934,13 @@ msgstr ""
 "podreu suprimir el fitxer antic i canviar el nom de l'encriptat al nom antic."
 "</p>"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:184
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:203
 #: kmymoney/plugins/xml/ksettingsgpg.cpp:209
 #, kde-format
 msgid "GPG encryption activated"
 msgstr "S'ha activat l'encriptació GPG"
 
-#: kmymoney/plugins/xml/kgpgkeyselectiondlg.cpp:72
+#: kmymoney/plugins/xml/kgpgkeyselectiondlg.cpp:81
 #, kde-format
 msgid "No encryption"
 msgstr "Sense encriptació"
@@ -18005,41 +18005,41 @@ msgctxt "Error message when reading XML file"
 msgid "Unknown payee identifier type %1"
 msgstr "Tipus d'identificador de beneficiari %1 desconegut"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:348
+#: kmymoney/plugins/xml/xmlstorage.cpp:346
 #, kde-format
 msgid "Save As"
 msgstr "Anomena i guarda"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:350
+#: kmymoney/plugins/xml/xmlstorage.cpp:348
 #, kde-format
 msgctxt "KMyMoney (Filefilter)"
 msgid "KMyMoney files"
 msgstr "Fitxers de KMyMoney"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:351
+#: kmymoney/plugins/xml/xmlstorage.cpp:349
 #, kde-format
 msgctxt "Anonymous (Filefilter)"
 msgid "Anonymous files"
 msgstr "Fitxers anònims"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:352
+#: kmymoney/plugins/xml/xmlstorage.cpp:350
 #, kde-format
 msgctxt "XML (Filefilter)"
 msgid "XML files"
 msgstr "Fitxers en XML"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:353
+#: kmymoney/plugins/xml/xmlstorage.cpp:351
 #, kde-format
 msgctxt "All files (Filefilter)"
 msgid "All files"
 msgstr "Tots els fitxers"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:427
+#: kmymoney/plugins/xml/xmlstorage.cpp:425
 #, kde-format
 msgid "KMyMoney files (*.kmy *.xml)"
 msgstr "Fitxers de KMyMoney (*.kmy *.xml)"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:448
+#: kmymoney/plugins/xml/xmlstorage.cpp:446
 #, kde-format
 msgid ""
 "GPG does not seem to be installed on your system. Please make sure that GPG "
@@ -18049,12 +18049,12 @@ msgstr ""
 "Pareix que GPG no està instal·lat en el sistema. Comproveu que es pot trobar "
 "utilitzant el camí de busca estàndard. Ara, s'ha desactivat l'encriptació."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:448
+#: kmymoney/plugins/xml/xmlstorage.cpp:446
 #, kde-format
 msgid "GPG not found"
 msgstr "No s'ha trobat GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:454
+#: kmymoney/plugins/xml/xmlstorage.cpp:453
 #, kde-format
 msgid ""
 "<p>You have selected to encrypt your data also with the KMyMoney recover "
@@ -18071,13 +18071,13 @@ msgstr ""
 "\">lloc web de KMyMoney</a>. En este moment les dades no s'encriptaran amb "
 "la clau de recuperació de KMyMoney.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:454
-#: kmymoney/plugins/xml/xmlstorage.cpp:462
+#: kmymoney/plugins/xml/xmlstorage.cpp:458
+#: kmymoney/plugins/xml/xmlstorage.cpp:466
 #, kde-format
 msgid "GPG Key not found"
 msgstr "No s'ha trobat la clau GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:462
+#: kmymoney/plugins/xml/xmlstorage.cpp:466
 #, kde-format
 msgid ""
 "<p>You have specified to encrypt your data for the user-id</p><p><center><b>"
@@ -18090,7 +18090,7 @@ msgstr ""
 "d'usuari en l'anell de claus. Assegureu-vos d'importar una clau vàlida per a "
 "este ID d'usuari. En este moment, l'encriptació està desactivat.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:469
+#: kmymoney/plugins/xml/xmlstorage.cpp:473
 #, kde-format
 msgid ""
 "<p>You have configured to save your data in encrypted form using GPG. Make "
@@ -18102,12 +18102,12 @@ msgstr ""
 "encripteu però no les podeu desencriptar més tard. Si no esteu segur, "
 "contesteu <b>No</b>.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:470
+#: kmymoney/plugins/xml/xmlstorage.cpp:474
 #, kde-format
 msgid "Store GPG encrypted"
 msgstr "Emmagatzema-ho encriptat amb GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:586
+#: kmymoney/plugins/xml/xmlstorage.cpp:590
 #, kde-format
 msgid ""
 "You have configured KMyMoney to use GPG to protect your data and to encrypt "
@@ -18130,7 +18130,7 @@ msgstr[1] ""
 "a punt de caducar en %1 dies. Actualitzeu la clau des de l'anell de claus "
 "emprant el frontal de GPG (p. ex., KGpg)."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:586
+#: kmymoney/plugins/xml/xmlstorage.cpp:590
 #, kde-format
 msgid "Recover key expires soon"
 msgstr "La clau de recuperació caducarà prompte"
