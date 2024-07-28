@@ -26,8 +26,11 @@
 #include "kgpgfile.h"
 #include "kmymoneysettings.h"
 
-XMLStorageSettingsWidget::XMLStorageSettingsWidget(QWidget* parent) :
-    QWidget(parent)
+XMLStorageSettingsWidget::XMLStorageSettingsWidget(QWidget* parent)
+    : QWidget(parent)
+    , m_checkCount(0)
+    , m_needCheckList(true)
+    , m_listOk(false)
 {
     setupUi(this);
 #ifdef ENABLE_GPG
