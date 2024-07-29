@@ -438,6 +438,7 @@ void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWr
 #ifndef ENABLE_GPG
     Q_UNUSED(keyList)
 #else
+    qDebug() << "saveToLocalFile(1)";
     // Check GPG encryption
     bool encryptFile = true;
     bool encryptRecover = false;
@@ -482,6 +483,7 @@ void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWr
     // Permissions to apply to new file
     QFileDevice::Permissions fmode = QFileDevice::ReadUser | QFileDevice::WriteUser;
 
+    qDebug() << "saveToLocalFile(2)";
     // Create a temporary file if needed
     QString writeFile = localFile;
     if (QFile::exists(localFile)) {
@@ -492,6 +494,7 @@ void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWr
         fmode = QFile::permissions(localFile);
     }
 
+    qDebug() << "saveToLocalFile(3)";
     QSignalBlocker blockMyMoneyFile(MyMoneyFile::instance());
 
     MyMoneyFileTransaction ft;
@@ -500,18 +503,24 @@ void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWr
 
 #ifdef ENABLE_GPG
     if (!keyList.isEmpty() && encryptFile && !plaintext) {
+        qDebug() << "saveToLocalFile(4)";
         std::unique_ptr<KGPGFile> kgpg = std::unique_ptr<KGPGFile>(new KGPGFile{writeFile});
+        qDebug() << "saveToLocalFile(5)";
         if (kgpg) {
             const auto keys = keyList.split(',', Qt::SkipEmptyParts);
             for (const QString& key : qAsConst(keys)) {
+                qDebug() << "saveToLocalFile(6) addRecipient" << key;
                 kgpg->addRecipient(key.toLatin1());
             }
 
             if (encryptRecover) {
+                qDebug() << "saveToLocalFile(7) addRecipient" << QLatin1String(RECOVER_KEY_ID);
                 kgpg->addRecipient(QLatin1String(RECOVER_KEY_ID));
             }
             MyMoneyFile::instance()->setValue("kmm-encryption-key", keyList);
+            qDebug() << "saveToLocalFile(8)";
             device = std::unique_ptr<decltype(device)::element_type>(kgpg.release());
+            qDebug() << "saveToLocalFile(9)";
         }
     } else
 #endif
@@ -523,12 +532,15 @@ void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWr
 
     ft.commit();
 
+    qDebug() << "saveToLocalFile(10)";
     if (!device || !device->open(QIODevice::WriteOnly)) {
         throw MYMONEYEXCEPTION(QString::fromLatin1("Unable to open file '%1' for writing.").arg(localFile));
     }
 
+    qDebug() << "saveToLocalFile(11)";
     pWriter->setFile(MyMoneyFile::instance());
     const auto xmlWrittenOk = pWriter->write(device.get());
+    qDebug() << "saveToLocalFile(12)";
     device->close();
 
     if (!xmlWrittenOk) {
@@ -540,6 +552,7 @@ void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWr
     if (fileDevice && fileDevice->error() != QFileDevice::NoError) {
         throw MYMONEYEXCEPTION(QString::fromLatin1("Failure while writing to '%1'").arg(localFile));
     }
+    qDebug() << "saveToLocalFile(13)";
 
     if (writeFile != localFile) {
         // This simple comparison is possible because the strings are equal if no temporary file was created.
@@ -557,7 +570,9 @@ void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWr
             throw MYMONEYEXCEPTION(QString::fromLatin1("Failure while renaming '%1' to '%2'").arg(writeFile, localFile));
         }
     }
+    qDebug() << "saveToLocalFile(14)";
     QFile::setPermissions(localFile, fmode);
+    qDebug() << "saveToLocalFile(15)";
 }
 
 void XMLStorage::checkRecoveryKeyValidity()
