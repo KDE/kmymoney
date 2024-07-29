@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-28 01:51+0000\n"
+"POT-Creation-Date: 2024-07-29 01:50+0000\n"
 "PO-Revision-Date: 2024-07-16 21:47+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
@@ -17716,12 +17716,12 @@ msgstr "Woob-agordo"
 msgid "Retrieving transactions..."
 msgstr "Prenante transakciojn..."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:48
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:51
 #, kde-format
 msgid "GPG installation not found or not working properly."
 msgstr "GPG-instalaĵo ne trovita aŭ ne funkcias ĝuste."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:181
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:184
 #, kde-format
 msgid ""
 "No GPG secret keys found, please run gpg[2] --gen-key or import keys into gpg"
@@ -17729,8 +17729,7 @@ msgstr ""
 "Neniuj sekretaj ŝlosiloj de GPG trovitaj, bonvolu ruli gpg[2] --gen-key aŭ "
 "importi ŝlosilojn en gpg"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:199
-#: kmymoney/plugins/xml/ksettingsgpg.cpp:209
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:202
 #, kde-format
 msgid ""
 "<p>You have turned on the GPG encryption support. This means, that new files "
@@ -17747,8 +17746,7 @@ msgstr ""
 "nomo.<br/>Kiam kontenta pri la rezulto, licas forigi la malnovan dosieron "
 "kaj renomi la ĉifritan al la malnova nomo.</p>"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:203
-#: kmymoney/plugins/xml/ksettingsgpg.cpp:209
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:206
 #, kde-format
 msgid "GPG encryption activated"
 msgstr "GPG-ĉifrado aktivigita"

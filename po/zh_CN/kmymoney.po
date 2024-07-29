@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-28 01:51+0000\n"
+"POT-Creation-Date: 2024-07-29 01:50+0000\n"
 "PO-Revision-Date: 2024-04-22 16:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -17229,19 +17229,18 @@ msgstr "Woob 配置"
 msgid "Retrieving transactions..."
 msgstr ""
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:48
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:51
 #, kde-format
 msgid "GPG installation not found or not working properly."
 msgstr "没有找到已安装的 GPG 程序，或者 GPG 程序运行异常。"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:181
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:184
 #, kde-format
 msgid ""
 "No GPG secret keys found, please run gpg[2] --gen-key or import keys into gpg"
 msgstr "没有找到 GPG 私钥，请运行 gpg[2] --gen-key，或者向 gpg 导入密钥。"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:199
-#: kmymoney/plugins/xml/ksettingsgpg.cpp:209
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:202
 #, kde-format
 msgid ""
 "<p>You have turned on the GPG encryption support. This means, that new files "
@@ -17252,8 +17251,7 @@ msgid ""
 "the encrypted one to the old name.</p>"
 msgstr ""
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:203
-#: kmymoney/plugins/xml/ksettingsgpg.cpp:209
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:206
 #, kde-format
 msgid "GPG encryption activated"
 msgstr "已启用 GPG 加密"

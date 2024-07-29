@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-28 01:51+0000\n"
+"POT-Creation-Date: 2024-07-29 01:50+0000\n"
 "PO-Revision-Date: 2024-02-09 23:23+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -17952,12 +17952,12 @@ msgstr "Настройка Woob"
 msgid "Retrieving transactions..."
 msgstr "Идёт выборка операций..."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:48
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:51
 #, kde-format
 msgid "GPG installation not found or not working properly."
 msgstr "Система шифрования GPG не установлена или работает неправильно."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:181
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:184
 #, kde-format
 msgid ""
 "No GPG secret keys found, please run gpg[2] --gen-key or import keys into gpg"
@@ -17965,8 +17965,7 @@ msgstr ""
 "Закрытые ключи GPG не найдены, выполните команду gpg[2] --gen-key или "
 "импортируйте ключи в gpg"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:199
-#: kmymoney/plugins/xml/ksettingsgpg.cpp:209
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:202
 #, kde-format
 msgid ""
 "<p>You have turned on the GPG encryption support. This means, that new files "
@@ -17983,8 +17982,7 @@ msgstr ""
 "<br/>После этого удалите старый файл и измените имя нового, зашифрованного "
 "файла на старое.</p>"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:203
-#: kmymoney/plugins/xml/ksettingsgpg.cpp:209
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:206
 #, kde-format
 msgid "GPG encryption activated"
 msgstr "Шифрование GPG включено"

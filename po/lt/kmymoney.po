@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-28 01:51+0000\n"
+"POT-Creation-Date: 2024-07-29 01:50+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -17704,19 +17704,18 @@ msgstr "Ataskaitos konfigūravimas"
 msgid "Retrieving transactions..."
 msgstr "Rasti operaciją..."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:48
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:51
 #, kde-format
 msgid "GPG installation not found or not working properly."
 msgstr ""
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:181
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:184
 #, kde-format
 msgid ""
 "No GPG secret keys found, please run gpg[2] --gen-key or import keys into gpg"
 msgstr ""
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:199
-#: kmymoney/plugins/xml/ksettingsgpg.cpp:209
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:202
 #, kde-format
 msgid ""
 "<p>You have turned on the GPG encryption support. This means, that new files "
@@ -17727,8 +17726,7 @@ msgid ""
 "the encrypted one to the old name.</p>"
 msgstr ""
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:203
-#: kmymoney/plugins/xml/ksettingsgpg.cpp:209
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:206
 #, fuzzy, kde-format
 msgid "GPG encryption activated"
 msgstr "Naudoti GPG šifravimą"
