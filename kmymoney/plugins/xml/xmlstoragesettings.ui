@@ -27,6 +27,9 @@ The &lt;i&gt;additional recovery encryption&lt;/i&gt; is only accessible, if the
     </widget>
    </item>
    <item>
+    <widget class="KMessageWidget" name="m_messageWidget"/>
+   </item>
+   <item>
     <widget class="QGroupBox" name="m_idGroup">
      <property name="title">
       <string>GPG encryption</string>
@@ -206,6 +209,11 @@ This mechanism is provided for the case that you have lost your key and cannot a
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
@@ -216,14 +224,14 @@ This mechanism is provided for the case that you have lost your key and cannot a
    <header>keditlistwidget.h</header>
   </customwidget>
   <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
-  </customwidget>
-  <customwidget>
    <class>KLed</class>
    <extends>QWidget</extends>
    <header>kled.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMessageWidget</class>
+   <extends>QFrame</extends>
+   <header>kmessagewidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -33,6 +33,10 @@ XMLStorageSettingsWidget::XMLStorageSettingsWidget(QWidget* parent)
     , m_listOk(false)
 {
     setupUi(this);
+
+    // hide the message widget until it is needed
+    m_messageWidget->hide();
+
 #ifdef ENABLE_GPG
     const bool available = KGPGFile::GPGAvailable();
 #else
@@ -48,7 +52,9 @@ XMLStorageSettingsWidget::XMLStorageSettingsWidget(QWidget* parent)
 
     setEnabled(available);
     if (!available) {
-        setToolTip(i18n("GPG installation not found or not working properly."));
+        m_messageWidget->setMessageType(KMessageWidget::Warning);
+        m_messageWidget->setText(i18n("GPG installation not found or not working properly."));
+        m_messageWidget->show();
     }
 
     // don't show the widget in which the master key is actually kept
@@ -181,7 +187,10 @@ void XMLStorageSettingsWidget::showEvent(QShowEvent * event)
     // if we don't have at least one secret key, we turn off encryption
     if (keyList.isEmpty()) {
         setEnabled(false);
-        setToolTip(i18n("No GPG secret keys found, please run gpg[2] --gen-key or import keys into gpg"));
+        m_messageWidget->setMessageType(KMessageWidget::Warning);
+        m_messageWidget->setText(i18n("No GPG secret keys found, please run gpg[2] --gen-key or import keys into gpg"));
+        m_messageWidget->animatedShow();
+
         kcfg_WriteDataEncrypted->setChecked(false);
     }
 
@@ -214,7 +223,7 @@ void XMLStorageSettingsWidget::slotStatusChanged(bool state)
     kcfg_GpgRecipientList->setEnabled(state);
 
     if (state) {
-        setToolTip(QString());
+        m_messageWidget->animatedHide();
         m_recoverKeyFound->setState((KLed::State)(KGPGFile::keyAvailable(RECOVER_KEY_ID) ? KLed::On : KLed::Off));
         kcfg_EncryptRecover->setEnabled(m_recoverKeyFound->state() == KLed::On);
         slotIdChanged();
