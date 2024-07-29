@@ -542,6 +542,7 @@ void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWr
     const auto xmlWrittenOk = pWriter->write(device.get());
     qDebug() << "saveToLocalFile(12)";
     device->close();
+    qDebug() << "saveToLocalFile(12a)";
 
     if (!xmlWrittenOk) {
         throw MYMONEYEXCEPTION(QString::fromLatin1("XML write failure while writing to '%1'").arg(localFile));
@@ -549,6 +550,7 @@ void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWr
 
     // Check for errors if possible, only possible for KGPGFile
     QFileDevice *fileDevice = qobject_cast<QFileDevice*>(device.get());
+    qDebug() << "saveToLocalFile(12b)";
     if (fileDevice && fileDevice->error() != QFileDevice::NoError) {
         throw MYMONEYEXCEPTION(QString::fromLatin1("Failure while writing to '%1'").arg(localFile));
     }
