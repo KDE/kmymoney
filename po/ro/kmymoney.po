@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-29 01:50+0000\n"
+"POT-Creation-Date: 2024-07-30 01:52+0000\n"
 "PO-Revision-Date: 2024-02-24 16:23+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -4601,7 +4601,7 @@ msgid "Create tag"
 msgstr "Creează"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
-#: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
+#: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:35
 #, kde-format
 msgid "GPG encryption"
 msgstr "Criptarea GPG"
@@ -18640,18 +18640,18 @@ msgstr "Personalizarea raportului"
 msgid "Retrieving transactions..."
 msgstr "Se salvează tranzacțiile..."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:51
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:56
 #, kde-format
 msgid "GPG installation not found or not working properly."
 msgstr ""
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:184
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:191
 #, kde-format
 msgid ""
 "No GPG secret keys found, please run gpg[2] --gen-key or import keys into gpg"
 msgstr ""
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:202
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:211
 #, kde-format
 msgid ""
 "<p>You have turned on the GPG encryption support. This means, that new files "
@@ -18669,7 +18669,7 @@ msgstr ""
 "șterge fișierul vechi și puteți redenumi fișierul criptat astfel încît "
 "acesta să aibă numele vechiului fișier.</p>"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:206
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:215
 #, kde-format
 msgid "GPG encryption activated"
 msgstr "Criptarea GPG activată"
@@ -18716,7 +18716,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: property (text), widget (QLabel, ledLabel)
 #: kmymoney/plugins/xml/kgpgkeyselectiondlg.ui:58
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:105
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:108
 #, kde-format
 msgid "Keys for all of the above user ids found"
 msgstr "Chei găsite pentru toți identificatorii de utilizatori dați mai sus."
@@ -18930,13 +18930,13 @@ msgid "Use GPG encryption"
 msgstr "Folosește criptarea GPG"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:40
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:43
 #, kde-format
 msgid "Your key"
 msgstr "Cheia dumneavoastră"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, m_masterKeyCombo)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:56
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:59
 #, kde-format
 msgid ""
 "This combo box lists all the secret keys you have in your keyring. Select "
@@ -18948,14 +18948,14 @@ msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #. i18n: ectx: property (title), widget (KEditListWidget, kcfg_GpgRecipientList)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:68
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:80
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:71
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:83
 #, kde-format
 msgid "Additional keys"
 msgstr "Chei adiționale"
 
 #. i18n: ectx: property (whatsThis), widget (KEditListWidget, kcfg_GpgRecipientList)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:74
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:77
 #, kde-format
 msgid ""
 "Enter the id of the key you want to use for data encryption. This can either "
@@ -18968,7 +18968,7 @@ msgstr ""
 "nu uitați prefixul 0x."
 
 #. i18n: ectx: property (whatsThis), widget (KLed, m_userKeysFound)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:92
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:95
 #, kde-format
 msgid ""
 "This symbol denotes, if the key for the given user id has been found in your "
@@ -18979,7 +18979,7 @@ msgstr ""
 "contrar."
 
 #. i18n: ectx: property (whatsThis), widget (KLed, m_recoverKeyFound)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:135
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:138
 #, kde-format
 msgid ""
 "This symbol denotes, if the KMyMoney recovery key has been found in your "
@@ -18989,13 +18989,13 @@ msgstr ""
 "inelul de chei. Este verde dacă s-a găsit cheia, opac în caz contrar."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:148
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:151
 #, kde-format
 msgid "Recover Key available in keyring"
 msgstr "Cheia de recuperare este disponibilă în inelul de chei"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_EncryptRecover)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:178
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:181
 #, fuzzy, kde-format
 #| msgid ""
 #| "You can specify to encrypt the data also with the KMyMoney recover key. "
@@ -19030,7 +19030,7 @@ msgstr ""
 "poată intra în posesia acestora."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EncryptRecover)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:181
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:184
 #, kde-format
 msgid "Also encrypt with KMyMoney's recover key"
 msgstr "Criptează de asemenea cu cheia de recuperare KMyMoney."

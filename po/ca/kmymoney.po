@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-29 01:50+0000\n"
+"POT-Creation-Date: 2024-07-30 01:52+0000\n"
 "PO-Revision-Date: 2024-07-20 09:47+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -4520,7 +4520,7 @@ msgid "Create tag"
 msgstr "Crea una etiqueta"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
-#: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
+#: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:35
 #, kde-format
 msgid "GPG encryption"
 msgstr "Encriptatge GPG"
@@ -17901,13 +17901,13 @@ msgstr "Configuració del Woob"
 msgid "Retrieving transactions..."
 msgstr "S'estan recuperant les operacions..."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:51
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:56
 #, kde-format
 msgid "GPG installation not found or not working properly."
 msgstr ""
 "No s'ha trobat la instal·lació de GPG o no està treballant de forma adequada."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:184
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:191
 #, kde-format
 msgid ""
 "No GPG secret keys found, please run gpg[2] --gen-key or import keys into gpg"
@@ -17915,7 +17915,7 @@ msgstr ""
 "No s'han trobat les claus secretes de GPG, executeu gpg[2] --gen-key o "
 "importeu les claus a dins de «gpg»"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:202
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:211
 #, kde-format
 msgid ""
 "<p>You have turned on the GPG encryption support. This means, that new files "
@@ -17932,7 +17932,7 @@ msgstr ""
 "fitxer amb un nom diferent.<br/>Després de comprovar el resultat, podreu "
 "suprimir el fitxer antic i canviar el nom de l'encriptat al nom antic.</p>"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:206
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:215
 #, kde-format
 msgid "GPG encryption activated"
 msgstr "S'ha activat l'encriptatge GPG"
@@ -17979,7 +17979,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: property (text), widget (QLabel, ledLabel)
 #: kmymoney/plugins/xml/kgpgkeyselectiondlg.ui:58
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:105
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:108
 #, kde-format
 msgid "Keys for all of the above user ids found"
 msgstr "Claus trobades per a tots els ID d'usuari de més amunt"
@@ -18169,13 +18169,13 @@ msgid "Use GPG encryption"
 msgstr "Usa l'encriptatge GPG"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:40
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:43
 #, kde-format
 msgid "Your key"
 msgstr "La vostra clau"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, m_masterKeyCombo)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:56
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:59
 #, kde-format
 msgid ""
 "This combo box lists all the secret keys you have in your keyring. Select "
@@ -18187,14 +18187,14 @@ msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #. i18n: ectx: property (title), widget (KEditListWidget, kcfg_GpgRecipientList)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:68
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:80
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:71
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:83
 #, kde-format
 msgid "Additional keys"
 msgstr "Claus addicionals"
 
 #. i18n: ectx: property (whatsThis), widget (KEditListWidget, kcfg_GpgRecipientList)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:74
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:77
 #, kde-format
 msgid ""
 "Enter the id of the key you want to use for data encryption. This can either "
@@ -18206,7 +18206,7 @@ msgstr ""
 "cas d'un ID de clau, no oblideu el «0x» inicial."
 
 #. i18n: ectx: property (whatsThis), widget (KLed, m_userKeysFound)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:92
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:95
 #, kde-format
 msgid ""
 "This symbol denotes, if the key for the given user id has been found in your "
@@ -18216,7 +18216,7 @@ msgstr ""
 "de claus. És verd si s'ha trobat, i fosc en cas contrari."
 
 #. i18n: ectx: property (whatsThis), widget (KLed, m_recoverKeyFound)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:135
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:138
 #, kde-format
 msgid ""
 "This symbol denotes, if the KMyMoney recovery key has been found in your "
@@ -18226,13 +18226,13 @@ msgstr ""
 "vostre anell de claus. És verd si s'ha trobat, i fosc en cas contrari."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:148
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:151
 #, kde-format
 msgid "Recover Key available in keyring"
 msgstr "Clau de recuperació disponible en l'anell de claus"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_EncryptRecover)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:178
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:181
 #, kde-format
 msgid ""
 "You can specify to encrypt the data also with the KMyMoney recover key. Only "
@@ -18258,7 +18258,7 @@ msgstr ""
 "enviar."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EncryptRecover)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:181
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:184
 #, kde-format
 msgid "Also encrypt with KMyMoney's recover key"
 msgstr "Encripta també amb la clau de recuperació del KMyMoney"

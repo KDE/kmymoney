@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-29 01:50+0000\n"
+"POT-Creation-Date: 2024-07-30 01:52+0000\n"
 "PO-Revision-Date: 2024-02-09 23:23+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -4549,7 +4549,7 @@ msgid "Create tag"
 msgstr "Создать"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
-#: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
+#: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:35
 #, kde-format
 msgid "GPG encryption"
 msgstr "Шифрование GPG"
@@ -17952,12 +17952,12 @@ msgstr "Настройка Woob"
 msgid "Retrieving transactions..."
 msgstr "Идёт выборка операций..."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:51
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:56
 #, kde-format
 msgid "GPG installation not found or not working properly."
 msgstr "Система шифрования GPG не установлена или работает неправильно."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:184
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:191
 #, kde-format
 msgid ""
 "No GPG secret keys found, please run gpg[2] --gen-key or import keys into gpg"
@@ -17965,7 +17965,7 @@ msgstr ""
 "Закрытые ключи GPG не найдены, выполните команду gpg[2] --gen-key или "
 "импортируйте ключи в gpg"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:202
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:211
 #, kde-format
 msgid ""
 "<p>You have turned on the GPG encryption support. This means, that new files "
@@ -17982,7 +17982,7 @@ msgstr ""
 "<br/>После этого удалите старый файл и измените имя нового, зашифрованного "
 "файла на старое.</p>"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:206
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:215
 #, kde-format
 msgid "GPG encryption activated"
 msgstr "Шифрование GPG включено"
@@ -18029,7 +18029,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: property (text), widget (QLabel, ledLabel)
 #: kmymoney/plugins/xml/kgpgkeyselectiondlg.ui:58
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:105
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:108
 #, kde-format
 msgid "Keys for all of the above user ids found"
 msgstr "Найдены ключи для всех указанных идентификаторов пользователя"
@@ -18228,13 +18228,13 @@ msgid "Use GPG encryption"
 msgstr "Использовать шифрование GPG"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:40
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:43
 #, kde-format
 msgid "Your key"
 msgstr "Ключ"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, m_masterKeyCombo)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:56
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:59
 #, kde-format
 msgid ""
 "This combo box lists all the secret keys you have in your keyring. Select "
@@ -18246,14 +18246,14 @@ msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #. i18n: ectx: property (title), widget (KEditListWidget, kcfg_GpgRecipientList)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:68
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:80
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:71
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:83
 #, kde-format
 msgid "Additional keys"
 msgstr "Дополнительные ключи"
 
 #. i18n: ectx: property (whatsThis), widget (KEditListWidget, kcfg_GpgRecipientList)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:74
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:77
 #, kde-format
 msgid ""
 "Enter the id of the key you want to use for data encryption. This can either "
@@ -18265,7 +18265,7 @@ msgstr ""
 "шестнадцатеричном виде, начинающийся с <i>0x</i>."
 
 #. i18n: ectx: property (whatsThis), widget (KLed, m_userKeysFound)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:92
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:95
 #, kde-format
 msgid ""
 "This symbol denotes, if the key for the given user id has been found in your "
@@ -18275,7 +18275,7 @@ msgstr ""
 "пользователя найден в наборе. Если ключ не найден, символ остаётся тёмным."
 
 #. i18n: ectx: property (whatsThis), widget (KLed, m_recoverKeyFound)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:135
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:138
 #, kde-format
 msgid ""
 "This symbol denotes, if the KMyMoney recovery key has been found in your "
@@ -18285,13 +18285,13 @@ msgstr ""
 "в наборе ключей. Если ключ не найден, символ остаётся тёмным."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:148
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:151
 #, kde-format
 msgid "Recover Key available in keyring"
 msgstr "Ключ восстановления KMyMoney найден"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_EncryptRecover)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:178
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:181
 #, kde-format
 msgid ""
 "You can specify to encrypt the data also with the KMyMoney recover key. Only "
@@ -18316,7 +18316,7 @@ msgstr ""
 "ответить на ряд вопросов о содержимом этих данных."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EncryptRecover)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:181
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:184
 #, kde-format
 msgid "Also encrypt with KMyMoney's recover key"
 msgstr "Применить шифрование ключом восстановления KMyMoney"
