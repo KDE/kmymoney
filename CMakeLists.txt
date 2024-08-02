@@ -94,16 +94,25 @@ add_definitions(
     -DQT_DISABLE_DEPRECATED_BEFORE=0x50f02
 )
 
-find_package(PkgConfig)
-
-find_package(Gpgmepp)
-if (Gpgmepp_FOUND)
-  set(GPG_FOUND TRUE)
-else()
-  set(GPG_FOUND FALSE)
-  find_package(KF5 ${KF5_MIN_VERSION} OPTIONAL_COMPONENTS QGpgme)
+# GPG Encryption checks
+# ---------------------
+find_package(QGpgme)
+if (QGpgme_FOUND)
+    set(GPG_FOUND TRUE)
+else ()
+    set(GPG_FOUND FALSE)
 endif()
 
+cmake_dependent_option(ENABLE_GPG "Enable GPG support." ON
+                       "GPG_FOUND" OFF)
+
+add_feature_info("Encryption" ENABLE_GPG "Allows to store your financial data using strong GPG encryption.")
+
+
+
+
+
+find_package(PkgConfig)
 if (PkgConfig_FOUND)
   pkg_check_modules(SQLCIPHER sqlcipher IMPORTED_TARGET)
 endif()
@@ -182,15 +191,6 @@ if(NOT libofx_FOUND)
     endif()
 endif()
 
-
-if(KF5Gpgmepp_FOUND)
-  set(GPG_FOUND TRUE)
-endif()
-
-cmake_dependent_option(ENABLE_GPG "Enable GPG support." ON
-                       "GPG_FOUND" OFF)
-
-add_feature_info("Encryption" ENABLE_GPG "Allows to store your financial data using strong GPG encryption.")
 
 add_definitions(-DQT_USE_QSTRINGBUILDER -DQT_NO_CAST_TO_ASCII -DQT_NO_URL_CAST_FROM_STRING -DQT_NO_KEYWORDS)
 set(CMAKE_CXX_STANDARD 14)
