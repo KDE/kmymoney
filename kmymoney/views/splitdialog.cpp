@@ -1,5 +1,5 @@
 /*
-    SPDX-FileCopyrightText: 2015-2020 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2015-2024 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -106,9 +106,12 @@ void SplitDialog::Private::deleteSplits(QModelIndexList indexList)
     do {
         --it;
         const auto idx = model->index(*it, 0);
-        const auto id = idx.data(eMyMoney::Model::IdRole).toString();
-        if (!(id.isEmpty() || id.endsWith('-'))) {
-            model->removeRow(*it);
+        // protect the splits that reference a closed account
+        if (!idx.data(eMyMoney::Model::AccountIsClosedRole).toBool()) {
+            const auto id = idx.data(eMyMoney::Model::IdRole).toString();
+            if (!(id.isEmpty() || id.endsWith('-'))) {
+                model->removeRow(*it);
+            }
         }
     } while (it != sortedList.constBegin());
     blockEditorStart(false);

@@ -320,6 +320,7 @@ void SplitDelegate::setEditorData(QWidget* editWidget, const QModelIndex& index)
         editor->setNumber(index.data(eMyMoney::Model::SplitNumberRole).toString());
         editor->setPayeeId(index.data(eMyMoney::Model::SplitPayeeIdRole).toString());
         editor->setTagIdList(index.data(eMyMoney::Model::SplitTagIdRole).toStringList());
+        editor->setProtectClosedAccount(index.data(eMyMoney::Model::AccountIsClosedRole).toBool());
         editor->finishLoadingSplit();
     }
 }

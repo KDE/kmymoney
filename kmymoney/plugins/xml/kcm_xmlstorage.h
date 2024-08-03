@@ -43,6 +43,7 @@ private:
     int               m_checkCount;
     bool              m_needCheckList;
     bool              m_listOk;
+    QStringList m_recoverKeyList;
 };
 
 class KCMXMLStorage : public KCModule

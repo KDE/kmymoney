@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-15 01:46+0000\n"
-"PO-Revision-Date: 2024-07-13 07:56+0200\n"
+"POT-Creation-Date: 2024-07-30 01:52+0000\n"
+"PO-Revision-Date: 2024-07-20 05:20+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -1819,6 +1819,7 @@ msgstr "Status:"
 #. i18n: ectx: property (text), widget (QToolButton, iconButton)
 #. i18n: ectx: property (text), widget (QToolButton, closeStatusButton)
 #. i18n: ectx: property (text), widget (QPushButton, choosePath)
+#. i18n: ectx: property (text), widget (QToolButton, m_iconButton)
 #. i18n: ectx: label, entry, group (Forecast Options)
 #. i18n: ectx: property (text), widget (QToolButton, m_prevButton)
 #. i18n: ectx: property (text), widget (QToolButton, m_nextButton)
@@ -1833,6 +1834,7 @@ msgstr "Status:"
 #. i18n: ectx: property (text), widget (QToolButton, m_debitColClear)
 #. i18n: ectx: property (text), widget (QToolButton, m_creditColClear)
 #: kmymoney/dialogs/kequitypriceupdatedlg.ui:158
+#: kmymoney/dialogs/knewaccountdlg.ui:450
 #: kmymoney/dialogs/knewinstitutiondlg.ui:88
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:562
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:122
@@ -1965,7 +1967,7 @@ msgstr "Kurser"
 #. i18n: ectx: property (text), widget (QLabel, TextLabel10)
 #. i18n: ectx: property (text), widget (QTreeWidget, m_listAccount)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:232
-#: kmymoney/dialogs/knewaccountdlg.ui:513
+#: kmymoney/dialogs/knewaccountdlg.ui:533
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:84
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:54
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:381
@@ -2115,31 +2117,31 @@ msgstr "Ta bort posten"
 msgid "Delete"
 msgstr "Ta bort"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:175
+#: kmymoney/dialogs/knewaccountdlg.cpp:177
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:159
 #, kde-format
 msgctxt "default price mode"
 msgid "(default)"
 msgstr "(förval)"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:176
+#: kmymoney/dialogs/knewaccountdlg.cpp:178
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:160
 #, kde-format
 msgid "Price per share"
 msgstr "Kurs"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:177
+#: kmymoney/dialogs/knewaccountdlg.cpp:179
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:161
 #, kde-format
 msgid "Total for all shares"
 msgstr "Totalt för alla aktier"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:257
+#: kmymoney/dialogs/knewaccountdlg.cpp:259
 #, kde-format
 msgid "VAT account"
 msgstr "Momskonto"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:548 kmymoney/kmymoney.cpp:438
+#: kmymoney/dialogs/knewaccountdlg.cpp:554 kmymoney/kmymoney.cpp:438
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:188
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:370
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:73
@@ -2147,7 +2149,7 @@ msgstr "Momskonto"
 msgid "Asset"
 msgstr "Tillgång"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:550 kmymoney/kmymoney.cpp:439
+#: kmymoney/dialogs/knewaccountdlg.cpp:556 kmymoney/kmymoney.cpp:439
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:189
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:378
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:75
@@ -2155,7 +2157,7 @@ msgstr "Tillgång"
 msgid "Liability"
 msgstr "Skuld"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:552 kmymoney/kmymoney.cpp:440
+#: kmymoney/dialogs/knewaccountdlg.cpp:558 kmymoney/kmymoney.cpp:440
 #: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1845
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
@@ -2164,7 +2166,7 @@ msgstr "Skuld"
 msgid "Income"
 msgstr "Inkomst"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:554 kmymoney/kmymoney.cpp:441
+#: kmymoney/dialogs/knewaccountdlg.cpp:560 kmymoney/kmymoney.cpp:441
 #: kmymoney/models/ledgerfilterbase.cpp:97
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:79
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:191
@@ -2173,7 +2175,7 @@ msgstr "Inkomst"
 msgid "Expense"
 msgstr "Utgift"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:601
+#: kmymoney/dialogs/knewaccountdlg.cpp:607
 #, kde-format
 msgid ""
 "Option has been disabled because there are transactions assigned to this "
@@ -2182,7 +2184,7 @@ msgstr ""
 "Alternativet har inaktiverats eftersom det finns transaktioner tilldelade "
 "till kontot"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:606
+#: kmymoney/dialogs/knewaccountdlg.cpp:612
 #, kde-format
 msgid ""
 "Option has been disabled because there is another account flagged to be an "
@@ -2191,13 +2193,13 @@ msgstr ""
 "Alternativet har inaktiverats eftersom det finns ett annat konto markerat "
 "som ett konto med ingående behållning för valutan"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:626
+#: kmymoney/dialogs/knewaccountdlg.cpp:632
 #, kde-format
 msgctxt "@label:chooser %1 account name, %2 parent account name"
 msgid "<b>%1</b> is a sub account of <b>%2</b>"
 msgstr "<b>%1</b> är ett delkonto av <b>%2</b>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:690
+#: kmymoney/dialogs/knewaccountdlg.cpp:696
 #: kmymoney/dialogs/knewinstitutiondlg.cpp:190
 #, kde-format
 msgctxt "@info:usagetip"
@@ -2208,7 +2210,17 @@ msgstr ""
 "Protokolldelen har tagits bort av KMyMoney eftersom den är låst till https "
 "av säkerhetsskäl."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:763
+#: kmymoney/dialogs/knewaccountdlg.cpp:706
+#: kmymoney/dialogs/knewaccountdlg.cpp:1000
+#: kmymoney/dialogs/knewaccountdlg.cpp:1015
+#: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:518
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:45
+#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:80
+#, kde-format
+msgid "(No Institution)"
+msgstr "(Ingen institution)"
+
+#: kmymoney/dialogs/knewaccountdlg.cpp:827
 #, kde-format
 msgid ""
 "You have not specified a name.\n"
@@ -2217,22 +2229,12 @@ msgstr ""
 "Du har inte angivit ett namn.\n"
 "Fyll i fältet."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:770
+#: kmymoney/dialogs/knewaccountdlg.cpp:834
 #, kde-format
 msgid "Please select a parent account."
 msgstr "Välj ett överliggande konto."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:776
-#: kmymoney/dialogs/knewaccountdlg.cpp:949
-#: kmymoney/dialogs/knewaccountdlg.cpp:964
-#: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:518
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:45
-#: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:80
-#, kde-format
-msgid "(No Institution)"
-msgstr "(Ingen institution)"
-
-#: kmymoney/dialogs/knewaccountdlg.cpp:832
+#: kmymoney/dialogs/knewaccountdlg.cpp:883
 #, kde-format
 msgid ""
 "A category named <b>%1</b> already exists. You cannot create a second "
@@ -2241,7 +2243,7 @@ msgstr ""
 "En kategori som heter <b>%1</b> finns redan. Du kan inte skapa en andra "
 "kategori med samma namn."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:862
+#: kmymoney/dialogs/knewaccountdlg.cpp:913
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2254,13 +2256,13 @@ msgstr ""
 "inställningsdialogruta. Kontot som du just skapade kommer därför bara att "
 "visas om det används. Annars döljs det i alla kontovyer."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:864
+#: kmymoney/dialogs/knewaccountdlg.cpp:915
 #, kde-format
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
 msgstr "Dolda konton"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:872
+#: kmymoney/dialogs/knewaccountdlg.cpp:923
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2273,44 +2275,44 @@ msgstr ""
 "inställningsdialogruta. Kategorin som du just skapade kommer därför bara att "
 "visas om den används. Annars döljs den i kontovyn och kategorivyn."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:874
+#: kmymoney/dialogs/knewaccountdlg.cpp:925
 #, kde-format
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "Dolda kategorier"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:989
+#: kmymoney/dialogs/knewaccountdlg.cpp:1040
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
 #, kde-format
 msgid "Cannot add institution"
 msgstr "Kan inte lägga till institution"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1026
+#: kmymoney/dialogs/knewaccountdlg.cpp:1077
 #, kde-format
 msgctxt "@info:tooltip Hint to provide name"
 msgid "Please provide a name for the new category or account."
 msgstr "Ange ett namn på den nya kategorin eller det nya kontot."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1031
+#: kmymoney/dialogs/knewaccountdlg.cpp:1082
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
 msgstr ""
 "Du kan inte skapa ett konto eller en kategori som innehåller %1 i namnet."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1038
+#: kmymoney/dialogs/knewaccountdlg.cpp:1089
 #, kde-format
 msgctxt "@info:tooltip Hint to provide VAT percentage in range"
 msgid "Please provide a percentage greater than zero and less than 100."
 msgstr "Ange ett procentvärde större än noll och mindre än 100."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1042
+#: kmymoney/dialogs/knewaccountdlg.cpp:1093
 #, kde-format
 msgctxt "@info:tooltip Hint to provide category to assign VAT"
 msgid "Please select a category for the VAT."
 msgstr "Välj en momskategori"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1107
+#: kmymoney/dialogs/knewaccountdlg.cpp:1158
 #, kde-format
 msgid ""
 "<p>The category <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2321,13 +2323,13 @@ msgstr ""
 "p><p><i>Överliggande konto kommer att väljas som <b>%2</b>, men kan ändras i "
 "den följande dialogrutan</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1111
-#: kmymoney/dialogs/knewaccountdlg.cpp:1136
+#: kmymoney/dialogs/knewaccountdlg.cpp:1162
+#: kmymoney/dialogs/knewaccountdlg.cpp:1187
 #, kde-format
 msgid "Create category"
 msgstr "Skapa kategori"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1132
+#: kmymoney/dialogs/knewaccountdlg.cpp:1183
 #, kde-format
 msgid ""
 "<p>The account <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2338,13 +2340,13 @@ msgstr ""
 "p><p><i>Överliggande konto kommer att väljas som <b>%2</b>, men kan ändras i "
 "den följande dialogrutan</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1154
+#: kmymoney/dialogs/knewaccountdlg.cpp:1205
 #, kde-format
 msgctxt "@title:window"
 msgid "Create a new Category"
 msgstr "Skapa en ny kategori"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1159
+#: kmymoney/dialogs/knewaccountdlg.cpp:1210
 #, kde-format
 msgctxt "@title:window"
 msgid "Create a new Account"
@@ -2357,34 +2359,34 @@ msgid "New Account Dialog"
 msgstr "Dialogrutan för nytt konto"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_generalTab)
-#: kmymoney/dialogs/knewaccountdlg.ui:27
+#: kmymoney/dialogs/knewaccountdlg.ui:37
 #, kde-format
 msgctxt "Account general settings"
 msgid "General"
 msgstr "Allmänt"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
-#: kmymoney/dialogs/knewaccountdlg.ui:47
+#: kmymoney/dialogs/knewaccountdlg.ui:57
 #, kde-format
 msgctxt "account name"
 msgid "Name:"
 msgstr "Namn:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox4)
-#: kmymoney/dialogs/knewaccountdlg.ui:62
+#: kmymoney/dialogs/knewaccountdlg.ui:72
 #, kde-format
 msgid "Opening information"
 msgstr "Öppningsinformation"
 
 #. i18n: ectx: property (text), widget (QLabel, m_currencyText)
-#: kmymoney/dialogs/knewaccountdlg.ui:86
+#: kmymoney/dialogs/knewaccountdlg.ui:96
 #, kde-format
 msgid "Currency:"
 msgstr "Valuta:"
 
 #. i18n: ectx: property (text), widget (QLabel, typeLabel)
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
-#: kmymoney/dialogs/knewaccountdlg.ui:109
+#: kmymoney/dialogs/knewaccountdlg.ui:119
 #: kmymoney/views/kenterscheduledlg.ui:95
 #: kmymoney/widgets/kmymoneybriefschedule.ui:176
 #, kde-format
@@ -2393,83 +2395,65 @@ msgstr "Typ:"
 
 #. i18n: ectx: property (text), widget (QLabel, lblDate)
 #. i18n: ectx: property (text), widget (QLabel, m_openingDateLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:125
+#: kmymoney/dialogs/knewaccountdlg.ui:135
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:85
 #, kde-format
 msgid "Date:"
 msgstr "Datum:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_openingBalanceLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:138
+#: kmymoney/dialogs/knewaccountdlg.ui:148
 #, kde-format
 msgid "Balance:"
 msgstr "Behållning:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox2)
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox6)
-#: kmymoney/dialogs/knewaccountdlg.ui:154
+#: kmymoney/dialogs/knewaccountdlg.ui:164
 #: kmymoney/views/keditscheduledlg.ui:147
 #, kde-format
 msgid "Options"
 msgstr "Alternativ"
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#. i18n: ectx: property (text), widget (QLabel, m_websiteLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:162
-#: kmymoney/dialogs/knewinstitutiondlg.ui:78
-#, kde-format
-msgid "Website"
-msgstr "Webbplats"
-
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
-#: kmymoney/dialogs/knewaccountdlg.ui:181
+#: kmymoney/dialogs/knewaccountdlg.ui:184
 #, kde-format
 msgid "Notes:"
 msgstr "Anteckningar:"
 
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#. i18n: ectx: property (text), widget (QLabel, label_4)
-#. i18n: ectx: property (text), widget (QLabel, m_protocolLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:194
-#: kmymoney/dialogs/knewinstitutiondlg.ui:58
-#: kmymoney/dialogs/knewinstitutiondlg.ui:214
-#, kde-format
-msgid "https://"
-msgstr "https://"
-
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
-#: kmymoney/dialogs/knewaccountdlg.ui:201
+#: kmymoney/dialogs/knewaccountdlg.ui:197
 #, kde-format
 msgid "Last check number:"
 msgstr "Senaste checknummer:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxNoVat)
-#: kmymoney/dialogs/knewaccountdlg.ui:244
+#: kmymoney/dialogs/knewaccountdlg.ui:237
 #, kde-format
 msgid "No auto-VAT-assignment"
 msgstr "Ingen automatisk momstilldelning"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_costCenterRequiredCheckBox)
-#: kmymoney/dialogs/knewaccountdlg.ui:251
+#: kmymoney/dialogs/knewaccountdlg.ui:244
 #, kde-format
 msgid "Cost Center assignment required"
 msgstr "Tilldelning av kostnadsställe krävs"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxPreferred)
-#: kmymoney/dialogs/knewaccountdlg.ui:258
+#: kmymoney/dialogs/knewaccountdlg.ui:251
 #, kde-format
 msgid "Preferred Account"
 msgstr "Föredraget konto"
 
 #. i18n: ectx: property (text), widget (QLabel, m_priceModeLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:267
+#: kmymoney/dialogs/knewaccountdlg.ui:260
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:67
 #, kde-format
 msgid "Price entry"
 msgstr "Kursinmatning"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_qcheckboxOpeningBalance)
-#: kmymoney/dialogs/knewaccountdlg.ui:295
+#: kmymoney/dialogs/knewaccountdlg.ui:288
 #, kde-format
 msgid ""
 "<html><head/><body><p>Flag this account to be an opening balance account</"
@@ -2479,35 +2463,35 @@ msgstr ""
 "p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxOpeningBalance)
-#: kmymoney/dialogs/knewaccountdlg.ui:298
+#: kmymoney/dialogs/knewaccountdlg.ui:291
 #, kde-format
 msgid "Opening Balance Account"
 msgstr "Konto med ingående behållning"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_budgetOptionsGroupBox)
 #. i18n: ectx: Menu (budget_context_menu)
-#: kmymoney/dialogs/knewaccountdlg.ui:310
+#: kmymoney/dialogs/knewaccountdlg.ui:303
 #: kmymoney/plugins/views/budget/budgetview.rc:4
 #, kde-format
 msgid "Budget options"
 msgstr "Budgetalternativ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
-#: kmymoney/dialogs/knewaccountdlg.ui:317
+#: kmymoney/dialogs/knewaccountdlg.ui:310
 #, kde-format
 msgctxt "@item:inlistbox Don't include this account in budgets"
 msgid "Don't include in budgets"
 msgstr "Inkludera inte i budgetar"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
-#: kmymoney/dialogs/knewaccountdlg.ui:322
+#: kmymoney/dialogs/knewaccountdlg.ui:315
 #, kde-format
 msgctxt "@item:inlistbox Include this account in budgets as expense"
 msgid "Include in budgets as expense"
 msgstr "Inkludera i budgetar som utgift"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
-#: kmymoney/dialogs/knewaccountdlg.ui:327
+#: kmymoney/dialogs/knewaccountdlg.ui:320
 #, kde-format
 msgctxt "@item:inlistbox Include this account in budgets as income"
 msgid "Include in budgets as income"
@@ -2517,8 +2501,8 @@ msgstr "Inkludera i budgetar som inkomst"
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #. i18n: ectx: attribute (title), widget (QWidget, m_institutionTab)
 #. i18n: ectx: property (title), widget (QGroupBox, m_institutionBox)
-#: kmymoney/dialogs/knewaccountdlg.ui:358
-#: kmymoney/dialogs/knewaccountdlg.ui:364
+#: kmymoney/dialogs/knewaccountdlg.ui:351
+#: kmymoney/dialogs/knewaccountdlg.ui:357
 #: kmymoney/plugins/views/reports/core/listtable.cpp:697
 #: kmymoney/wizards/newaccountwizard/kinstitutionpage.ui:44
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:72
@@ -2528,7 +2512,7 @@ msgid "Institution"
 msgstr "Institution"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonNew)
-#: kmymoney/dialogs/knewaccountdlg.ui:396
+#: kmymoney/dialogs/knewaccountdlg.ui:389
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:45
 #, kde-format
 msgctxt "create new institution"
@@ -2536,15 +2520,23 @@ msgid "New..."
 msgstr "Nytt..."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2_2)
-#: kmymoney/dialogs/knewaccountdlg.ui:410
+#: kmymoney/dialogs/knewaccountdlg.ui:403
 #, kde-format
 msgid "Number:"
 msgstr "Nummer:"
 
+#. i18n: ectx: property (text), widget (QLabel, label)
+#. i18n: ectx: property (text), widget (QLabel, m_websiteLabel)
+#: kmymoney/dialogs/knewaccountdlg.ui:420
+#: kmymoney/dialogs/knewinstitutiondlg.ui:78
+#, kde-format
+msgid "Website"
+msgstr "Webbplats"
+
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_4)
 #. i18n: ectx: property (placeholderText), widget (KBicEdit, bicEdit)
 #. i18n: ectx: property (text), widget (QLabel, label_bic)
-#: kmymoney/dialogs/knewaccountdlg.ui:420
+#: kmymoney/dialogs/knewaccountdlg.ui:427
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:46
 #: kmymoney/widgets/payeeidentifier/ibanbic/ibanbicitemedit.ui:27
 #, kde-format
@@ -2556,7 +2548,7 @@ msgstr "BIC"
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #. i18n: ectx: property (placeholderText), widget (KIbanLineEdit, ibanEdit)
 #. i18n: ectx: property (text), widget (QLabel, label_iban)
-#: kmymoney/dialogs/knewaccountdlg.ui:433
+#: kmymoney/dialogs/knewaccountdlg.ui:437
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:33
 #: kmymoney/widgets/payeeidentifier/ibanbic/ibanbicitemedit.ui:17
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:94
@@ -2566,25 +2558,25 @@ msgid "IBAN"
 msgstr "IBAN"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_hierarchyTab)
-#: kmymoney/dialogs/knewaccountdlg.ui:475
+#: kmymoney/dialogs/knewaccountdlg.ui:495
 #, kde-format
 msgid "Hierarchy"
 msgstr "Hierarki"
 
 #. i18n: ectx: property (text), widget (QLabel, m_subAccountLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:481
+#: kmymoney/dialogs/knewaccountdlg.ui:501
 #, kde-format
 msgid "Subaccount"
 msgstr "Delkonto"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_limitsTab)
-#: kmymoney/dialogs/knewaccountdlg.ui:495
+#: kmymoney/dialogs/knewaccountdlg.ui:515
 #, kde-format
 msgid "Limits"
 msgstr "Gränser"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
-#: kmymoney/dialogs/knewaccountdlg.ui:501
+#: kmymoney/dialogs/knewaccountdlg.ui:521
 #, kde-format
 msgid ""
 "This page allows to setup certain limits. KMyMoney will warn you when the "
@@ -2594,80 +2586,80 @@ msgstr ""
 "behållning når en gräns."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
-#: kmymoney/dialogs/knewaccountdlg.ui:530
+#: kmymoney/dialogs/knewaccountdlg.ui:550
 #, kde-format
 msgid "Absolute limit"
 msgstr "Absolut gräns"
 
 #. i18n: ectx: property (text), widget (QLabel, m_maxCreditLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:540
+#: kmymoney/dialogs/knewaccountdlg.ui:560
 #, kde-format
 msgid "Maximum credit limit"
 msgstr "Maximal kreditgräns"
 
 #. i18n: ectx: property (text), widget (QLabel, m_minBalanceLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:571
+#: kmymoney/dialogs/knewaccountdlg.ui:591
 #, kde-format
 msgid "Minimum balance"
 msgstr "Minimal behållning"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
-#: kmymoney/dialogs/knewaccountdlg.ui:591
+#: kmymoney/dialogs/knewaccountdlg.ui:611
 #, kde-format
 msgid "Early warning"
 msgstr "Tidig varning"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_taxTab)
-#: kmymoney/dialogs/knewaccountdlg.ui:620
+#: kmymoney/dialogs/knewaccountdlg.ui:640
 #: kmymoney/plugins/views/reports/core/listtable.cpp:713
 #, kde-format
 msgid "Tax"
 msgstr "Skatt"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox3)
-#: kmymoney/dialogs/knewaccountdlg.ui:626
+#: kmymoney/dialogs/knewaccountdlg.ui:646
 #, kde-format
 msgid "VAT details"
 msgstr "Momsinformation"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_vatCategory)
-#: kmymoney/dialogs/knewaccountdlg.ui:643
+#: kmymoney/dialogs/knewaccountdlg.ui:663
 #, kde-format
 msgid "VAT category"
 msgstr "Momskategori"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#: kmymoney/dialogs/knewaccountdlg.ui:663
+#: kmymoney/dialogs/knewaccountdlg.ui:683
 #, kde-format
 msgid "VAT percentage"
 msgstr "Momsprocent"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_vatAssignment)
-#: kmymoney/dialogs/knewaccountdlg.ui:729
+#: kmymoney/dialogs/knewaccountdlg.ui:749
 #, kde-format
 msgid "Enable auto VAT assignment"
 msgstr "Aktivera automatisk momstilldelning"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_amountGroupBox)
-#: kmymoney/dialogs/knewaccountdlg.ui:759
+#: kmymoney/dialogs/knewaccountdlg.ui:779
 #, kde-format
 msgid "Amount entered"
 msgstr "Angivet belopp"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_grossAmount)
-#: kmymoney/dialogs/knewaccountdlg.ui:774
+#: kmymoney/dialogs/knewaccountdlg.ui:794
 #, kde-format
 msgid "Gross amount"
 msgstr "Brutto"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_netAmount)
-#: kmymoney/dialogs/knewaccountdlg.ui:787
+#: kmymoney/dialogs/knewaccountdlg.ui:807
 #, kde-format
 msgid "Net a&mount"
 msgstr "Netto&belopp"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxTax)
-#: kmymoney/dialogs/knewaccountdlg.ui:827
+#: kmymoney/dialogs/knewaccountdlg.ui:847
 #, kde-format
 msgid "Include on Tax Reports"
 msgstr "Ta med på skatterapporter"
@@ -2722,6 +2714,14 @@ msgstr "Institutionsinformation"
 #, kde-format
 msgid "A Business Identifier Code, also known as SWIFT."
 msgstr "En företagsidentiferingskod, också känd som SWIFT."
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: kmymoney/dialogs/knewinstitutiondlg.ui:58
+#: kmymoney/dialogs/knewinstitutiondlg.ui:214
+#, kde-format
+msgid "https://"
+msgstr "https://"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/dialogs/knewinstitutiondlg.ui:68
@@ -4475,7 +4475,7 @@ msgid "Create tag"
 msgstr "Skapa etikett"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
-#: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
+#: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:35
 #, kde-format
 msgid "GPG encryption"
 msgstr "Kryptering med GPG"
@@ -5378,7 +5378,7 @@ msgstr ""
 "KMyMoney har upptäckt några försenade schemalagda transaktioner för kontot "
 "<b>%1</b>. Vill du registrera dessa schemalagda transaktioner nu?"
 
-#: kmymoney/kmymoney.cpp:3176 kmymoney/views/kscheduledview.cpp:134
+#: kmymoney/kmymoney.cpp:3176
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "Schemalagd transaktion hittades"
@@ -5408,7 +5408,7 @@ msgstr "Ingen KMyMoney-fil öppen"
 
 #: kmymoney/kmymoney.cpp:3390 kmymoney/kmymoney.cpp:3392
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1364
-#: kmymoney/plugins/xml/xmlstorage.cpp:415
+#: kmymoney/plugins/xml/xmlstorage.cpp:413
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
@@ -14497,7 +14497,7 @@ msgid "Database malfunction"
 msgstr "Tekniskt databasfel"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:188
-#: kmymoney/plugins/xml/xmlstorage.cpp:241
+#: kmymoney/plugins/xml/xmlstorage.cpp:239
 #, kde-format
 msgid "Tried to access a file when it has not been opened"
 msgstr "Försökte komma åt en fil när den inte har öppnats"
@@ -17739,12 +17739,12 @@ msgstr "Inställning av Woob"
 msgid "Retrieving transactions..."
 msgstr "Hämtar transaktioner..."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:42
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:56
 #, kde-format
 msgid "GPG installation not found or not working properly."
 msgstr "Installation av GPG hittades inte eller fungerar inte riktigt."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:168
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:191
 #, kde-format
 msgid ""
 "No GPG secret keys found, please run gpg[2] --gen-key or import keys into gpg"
@@ -17752,8 +17752,7 @@ msgstr ""
 "Några GPG hemliga nycklar hittades inte. Kör gpg[2] --gen-key eller "
 "importera nycklar till GPG."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:184
-#: kmymoney/plugins/xml/ksettingsgpg.cpp:209
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:211
 #, kde-format
 msgid ""
 "<p>You have turned on the GPG encryption support. This means, that new files "
@@ -17770,13 +17769,12 @@ msgstr ""
 ">När du väl är säker på resultatet, ta gärna bort den gamla filen och byt "
 "namn på den krypterade till det gamla namnet.</p>"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:184
-#: kmymoney/plugins/xml/ksettingsgpg.cpp:209
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:215
 #, kde-format
 msgid "GPG encryption activated"
 msgstr "Kryptering med GPG aktiverad"
 
-#: kmymoney/plugins/xml/kgpgkeyselectiondlg.cpp:72
+#: kmymoney/plugins/xml/kgpgkeyselectiondlg.cpp:81
 #, kde-format
 msgid "No encryption"
 msgstr "Ingen kryptering"
@@ -17819,7 +17817,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: property (text), widget (QLabel, ledLabel)
 #: kmymoney/plugins/xml/kgpgkeyselectiondlg.ui:58
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:105
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:108
 #, kde-format
 msgid "Keys for all of the above user ids found"
 msgstr "Nycklar för alla ovanstående användaridentiteter hittades"
@@ -17842,41 +17840,41 @@ msgctxt "Error message when reading XML file"
 msgid "Unknown payee identifier type %1"
 msgstr "Okänd identifierartyp för betalningsmottagare %1"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:348
+#: kmymoney/plugins/xml/xmlstorage.cpp:346
 #, kde-format
 msgid "Save As"
 msgstr "Spara som"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:350
+#: kmymoney/plugins/xml/xmlstorage.cpp:348
 #, kde-format
 msgctxt "KMyMoney (Filefilter)"
 msgid "KMyMoney files"
 msgstr "KMyMoney-filer"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:351
+#: kmymoney/plugins/xml/xmlstorage.cpp:349
 #, kde-format
 msgctxt "Anonymous (Filefilter)"
 msgid "Anonymous files"
 msgstr "Anonyma filer"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:352
+#: kmymoney/plugins/xml/xmlstorage.cpp:350
 #, kde-format
 msgctxt "XML (Filefilter)"
 msgid "XML files"
 msgstr "XML-filer"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:353
+#: kmymoney/plugins/xml/xmlstorage.cpp:351
 #, kde-format
 msgctxt "All files (Filefilter)"
 msgid "All files"
 msgstr "Alla filer"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:427
+#: kmymoney/plugins/xml/xmlstorage.cpp:425
 #, kde-format
 msgid "KMyMoney files (*.kmy *.xml)"
 msgstr "KMyMoney-filer (*.kmy *.xml)"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:448
+#: kmymoney/plugins/xml/xmlstorage.cpp:446
 #, kde-format
 msgid ""
 "GPG does not seem to be installed on your system. Please make sure that GPG "
@@ -17886,12 +17884,12 @@ msgstr ""
 "GPG verkar inte vara installerat på systemet. Försäkra dig om att GPG kan "
 "hittas via den vanliga sökvägen. För närvarande är kryptering inaktiverad."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:448
+#: kmymoney/plugins/xml/xmlstorage.cpp:446
 #, kde-format
 msgid "GPG not found"
 msgstr "GPG hittades inte"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:454
+#: kmymoney/plugins/xml/xmlstorage.cpp:453
 #, kde-format
 msgid ""
 "<p>You have selected to encrypt your data also with the KMyMoney recover "
@@ -17908,13 +17906,13 @@ msgstr ""
 "\">KMyMoneys webbsida</a>. Data kommer inte att krypteras med KMyMoneys "
 "återställningsnyckel denna gången.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:454
-#: kmymoney/plugins/xml/xmlstorage.cpp:462
+#: kmymoney/plugins/xml/xmlstorage.cpp:458
+#: kmymoney/plugins/xml/xmlstorage.cpp:466
 #, kde-format
 msgid "GPG Key not found"
 msgstr "GPG-nyckel hittades inte"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:462
+#: kmymoney/plugins/xml/xmlstorage.cpp:466
 #, kde-format
 msgid ""
 "<p>You have specified to encrypt your data for the user-id</p><p><center><b>"
@@ -17927,7 +17925,7 @@ msgstr ""
 "i din nyckelring. Försäkra dig om att du importerar en giltig nyckel för "
 "detta användar-id. För närvarande är kryptering inaktiverad.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:469
+#: kmymoney/plugins/xml/xmlstorage.cpp:473
 #, kde-format
 msgid ""
 "<p>You have configured to save your data in encrypted form using GPG. Make "
@@ -17938,12 +17936,12 @@ msgstr ""
 "medveten om att all data kan gå förlorad om du krypterar den, och inte "
 "senare kan avkoda den. Om du är osäker, svara <b>Nej</b>.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:470
+#: kmymoney/plugins/xml/xmlstorage.cpp:474
 #, kde-format
 msgid "Store GPG encrypted"
 msgstr "Lagra krypterad med GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:586
+#: kmymoney/plugins/xml/xmlstorage.cpp:590
 #, kde-format
 msgid ""
 "You have configured KMyMoney to use GPG to protect your data and to encrypt "
@@ -17966,7 +17964,7 @@ msgstr[1] ""
 "att utgå om %1 dagar. Uppdatera nyckeln från en nyckelserver genom att "
 "använda ett GPG-gränssnitt (exempelvis KGPG)."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:586
+#: kmymoney/plugins/xml/xmlstorage.cpp:590
 #, kde-format
 msgid "Recover key expires soon"
 msgstr "Återställningsnyckel går snart ut"
@@ -18006,13 +18004,13 @@ msgid "Use GPG encryption"
 msgstr "Använd kryptering med GPG"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:40
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:43
 #, kde-format
 msgid "Your key"
 msgstr "Din nyckel"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, m_masterKeyCombo)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:56
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:59
 #, kde-format
 msgid ""
 "This combo box lists all the secret keys you have in your keyring. Select "
@@ -18023,14 +18021,14 @@ msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #. i18n: ectx: property (title), widget (KEditListWidget, kcfg_GpgRecipientList)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:68
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:80
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:71
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:83
 #, kde-format
 msgid "Additional keys"
 msgstr "Ytterligare nycklar"
 
 #. i18n: ectx: property (whatsThis), widget (KEditListWidget, kcfg_GpgRecipientList)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:74
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:77
 #, kde-format
 msgid ""
 "Enter the id of the key you want to use for data encryption. This can either "
@@ -18043,7 +18041,7 @@ msgstr ""
 "0x."
 
 #. i18n: ectx: property (whatsThis), widget (KLed, m_userKeysFound)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:92
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:95
 #, kde-format
 msgid ""
 "This symbol denotes, if the key for the given user id has been found in your "
@@ -18053,7 +18051,7 @@ msgstr ""
 "din nyckelring. Den är grön om den har hittats, och mörk annars."
 
 #. i18n: ectx: property (whatsThis), widget (KLed, m_recoverKeyFound)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:135
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:138
 #, kde-format
 msgid ""
 "This symbol denotes, if the KMyMoney recovery key has been found in your "
@@ -18063,13 +18061,13 @@ msgstr ""
 "nyckelring. Den är grön om den har hittats, och mörk annars."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:148
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:151
 #, kde-format
 msgid "Recover Key available in keyring"
 msgstr "Återställningsnyckel tillgänglig i nyckelring"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_EncryptRecover)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:178
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:181
 #, kde-format
 msgid ""
 "You can specify to encrypt the data also with the KMyMoney recover key. Only "
@@ -18093,7 +18091,7 @@ msgstr ""
 "om innehållet i data, innan vi skickar ut det."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EncryptRecover)
-#: kmymoney/plugins/xml/xmlstoragesettings.ui:181
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:184
 #, kde-format
 msgid "Also encrypt with KMyMoney's recover key"
 msgstr "Kryptera också med KMyMoneys återställningsnyckel"
@@ -18736,14 +18734,14 @@ msgstr "Ränteinkomst"
 
 #: kmymoney/views/investtransactioneditor.cpp:262
 #: kmymoney/views/multitransactioneditor.cpp:185
-#: kmymoney/views/newtransactioneditor.cpp:266
+#: kmymoney/views/newtransactioneditor.cpp:289
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "Transaktionens registreringsdatum."
 
 #: kmymoney/views/investtransactioneditor.cpp:286
 #: kmymoney/views/multitransactioneditor.cpp:215
-#: kmymoney/views/newtransactioneditor.cpp:286
+#: kmymoney/views/newtransactioneditor.cpp:309
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "Registreringsdatum är tidigare än kontots öppningsdatum <b>%1</b>."
@@ -20137,22 +20135,13 @@ msgstr "Ingenting att sammanfoga."
 msgid "Unable to remove payee(s)"
 msgstr "Kan inte ta bort betalningsmottagare"
 
-#: kmymoney/views/kscheduledview.cpp:133
-#, kde-format
-msgid ""
-"KMyMoney has detected some overdue scheduled transactions for this account. "
-"Do you want to enter those scheduled transactions now?"
-msgstr ""
-"KMyMoney har upptäckt några försenade schemalagda transaktioner för kontot. "
-"Vill du registrera dessa schemalagda transaktioner nu?"
-
-#: kmymoney/views/kscheduledview.cpp:210 kmymoney/views/kscheduledview.cpp:221
-#: kmymoney/views/kscheduledview.cpp:298 kmymoney/views/kscheduledview.cpp:311
+#: kmymoney/views/kscheduledview.cpp:172 kmymoney/views/kscheduledview.cpp:183
+#: kmymoney/views/kscheduledview.cpp:260 kmymoney/views/kscheduledview.cpp:273
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"
 msgstr "Okänd schemalagd transaktion '%1'"
 
-#: kmymoney/views/kscheduledview.cpp:232
+#: kmymoney/views/kscheduledview.cpp:194
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
@@ -20160,7 +20149,7 @@ msgstr ""
 "<p>Är du säker på att du vill ta bort den schemalagda transaktionen <b>%1</"
 "b>?</p>"
 
-#: kmymoney/views/kscheduledview.cpp:235
+#: kmymoney/views/kscheduledview.cpp:197
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
@@ -20169,24 +20158,24 @@ msgstr ""
 "I fallet med låneavbetalningar är det för närvarande inte möjligt att "
 "återskapa den schemalagda transaktionen."
 
-#: kmymoney/views/kscheduledview.cpp:237
+#: kmymoney/views/kscheduledview.cpp:199
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Ta bort schema"
 
-#: kmymoney/views/kscheduledview.cpp:245
+#: kmymoney/views/kscheduledview.cpp:207
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "Kan inte ta bort schemalagd transaktion '%1'"
 
-#: kmymoney/views/kscheduledview.cpp:259
+#: kmymoney/views/kscheduledview.cpp:221
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "Kopia av %1"
 
-#: kmymoney/views/kscheduledview.cpp:284
+#: kmymoney/views/kscheduledview.cpp:246
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "Kan inte duplicera schemalagd transaktion: '%1'"
@@ -20610,19 +20599,19 @@ msgid "Balance: %1"
 msgstr "Behållning: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:193
-#: kmymoney/views/newtransactioneditor.cpp:269
+#: kmymoney/views/newtransactioneditor.cpp:292
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "Inlämningsdatum är ogiltigt."
 
 #: kmymoney/views/multitransactioneditor.cpp:226
-#: kmymoney/views/newtransactioneditor.cpp:304
+#: kmymoney/views/newtransactioneditor.cpp:327
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
 msgstr "Kostnadsställe som transaktionen ska tilldelas till."
 
 #: kmymoney/views/multitransactioneditor.cpp:229
-#: kmymoney/views/newtransactioneditor.cpp:313
+#: kmymoney/views/newtransactioneditor.cpp:336
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -20681,13 +20670,13 @@ msgstr ""
 "Markering av kostnadsställe är inte möjlig när delade transaktioner ingår i "
 "markeringen."
 
-#: kmymoney/views/newspliteditor.cpp:154
+#: kmymoney/views/newspliteditor.cpp:156
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "Kostnadsställe som transaktionen ska tilldelas till."
 
-#: kmymoney/views/newspliteditor.cpp:167
+#: kmymoney/views/newspliteditor.cpp:169
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid ""
@@ -20696,29 +20685,40 @@ msgid ""
 msgstr ""
 "En tilldelning av kostnadsställe krävs för en transaktion i vald kategori."
 
-#: kmymoney/views/newspliteditor.cpp:178
+#: kmymoney/views/newspliteditor.cpp:180
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "Kategorin den här delningen ska tilldelas till."
 
-#: kmymoney/views/newspliteditor.cpp:219
+#: kmymoney/views/newspliteditor.cpp:221
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "En kategoritilldelning krävs för en delning."
 
-#: kmymoney/views/newspliteditor.cpp:228
-#: kmymoney/views/newtransactioneditor.cpp:427
+#: kmymoney/views/newspliteditor.cpp:230
+#: kmymoney/views/newtransactioneditor.cpp:450
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Checknummer använd för transaktionen."
 
-#: kmymoney/views/newspliteditor.cpp:237
-#: kmymoney/views/newtransactioneditor.cpp:437
+#: kmymoney/views/newspliteditor.cpp:239
+#: kmymoney/views/newtransactioneditor.cpp:460
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Checknumret <b>%1</b> har redan används i kontot."
+
+#: kmymoney/views/newspliteditor.cpp:741
+#: kmymoney/views/newtransactioneditor.cpp:188
+#, kde-format
+msgctxt "@info:tooltip Protected"
+msgid ""
+"This widget is currently protected because the transaction references a "
+"closed account."
+msgstr ""
+"Den grafiska komponenten är för närvarande skyddad eftersom transaktionen "
+"refererar till ett stängt konto."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, payToLabel)
@@ -20738,7 +20738,13 @@ msgstr "Utbetalare och mottagare"
 msgid "Costcenter"
 msgstr "Kostnadsställe"
 
-#: kmymoney/views/newtransactioneditor.cpp:581
+#: kmymoney/views/newtransactioneditor.cpp:234
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The amount is different from the sum of all splits."
+msgstr "Beloppet skiljer sig från summan av alla delningar."
+
+#: kmymoney/views/newtransactioneditor.cpp:605
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
@@ -20902,19 +20908,19 @@ msgstr ""
 "efter att KMyMoney har öppnat filen eller databasen. Använd knappen + på "
 "flikraden ovan för att välja ett konto.</p></body></html>"
 
-#: kmymoney/views/splitdialog.cpp:310
+#: kmymoney/views/splitdialog.cpp:313
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Sum of splits"
 msgstr "Delningssummering"
 
-#: kmymoney/views/splitdialog.cpp:328
+#: kmymoney/views/splitdialog.cpp:331
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Overassigned"
 msgstr "Övertilldelat"
 
-#: kmymoney/views/splitdialog.cpp:331
+#: kmymoney/views/splitdialog.cpp:334
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Unassigned"
@@ -25167,6 +25173,13 @@ msgstr ""
 "<p>All information är valfri, och används bara för att göra KMyMoney-filen "
 "personlig.</p>"
 
+#~ msgid ""
+#~ "KMyMoney has detected some overdue scheduled transactions for this "
+#~ "account. Do you want to enter those scheduled transactions now?"
+#~ msgstr ""
+#~ "KMyMoney har upptäckt några försenade schemalagda transaktioner för "
+#~ "kontot. Vill du registrera dessa schemalagda transaktioner nu?"
+
 #~ msgid "Remove this price item from the file"
 #~ msgstr "Ta bort denna kurs från filen"
 
@@ -26938,9 +26951,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Kontot %1 innehåller en ingående behållning. Använd KMyMoney version 0.8 "
 #~ "eller senare men tidigare än version 0.9 för att korrigera problemet."
-
-#~ msgid "Cannot remove transaction that references a closed account."
-#~ msgstr "Kan inte ta bort transaktioner som refererar till ett stängt konto."
 
 #~ msgid "Cannot add currency with existing id %1"
 #~ msgstr "Kan inte lägga till valuta med befintlig identifikation %1"

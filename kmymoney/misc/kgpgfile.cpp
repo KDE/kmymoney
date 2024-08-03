@@ -38,6 +38,18 @@
 #include <gpgme++/engineinfo.h>
 #include <gpgme++/key.h>
 #include <gpgme++/keylistresult.h>
+#include <qgpgme/dataprovider.h>
+
+// On Unix style systems we can use the file handle of
+// the QSaveFile object to write out the encrypted data
+// directly. On Windows this does not work and we encrypt
+// the data into a local buffer and write that out to the
+// QSaveFile object in a separate step.
+#if defined(Q_OS_WIN32)
+#define WRITE_THROUGH_DATA_BUFFER 1
+#else
+#define WRITE_THROUGH_DATA_BUFFER 0
+#endif
 
 class GPGConfig
 {
@@ -271,6 +283,7 @@ bool KGPGFile::open(OpenMode mode)
 
 void KGPGFile::close()
 {
+    qDebug() << "KGPGFile::close(1)";
     if (!isOpen()) {
         return;
     }
@@ -278,19 +291,43 @@ void KGPGFile::close()
     if (!d->m_ctx)
         return;
 
+    qDebug() << "KGPGFile::close(2)";
     if (isWritable()) {
+        qDebug() << "KGPGFile::close(3)";
         d->m_data.seek(0, SEEK_SET);
+        qDebug() << "KGPGFile::close(4)";
+
+#if WRITE_THROUGH_DATA_BUFFER
+        QGpgME::QByteArrayDataProvider dataProvider;
+        GpgME::Data dcipher(&dataProvider);
+#else
         GpgME::Data dcipher(d->m_fileWrite->handle());
+#endif
+        qDebug() << "KGPGFile::close(5)";
         d->m_lastError = d->m_ctx->encrypt(d->m_recipients, d->m_data, dcipher, GpgME::Context::AlwaysTrust).error();
+        qDebug() << "KGPGFile::close(6)";
         if (d->m_lastError.encodedError()) {
             setErrorString(QLatin1String("Failure while writing temporary file for file: '") + QLatin1String(d->m_lastError.asString()) + QLatin1String("'"));
-        } else if (!d->m_fileWrite->commit()) {
-            setErrorString("Failure while committing file changes.");
+        } else {
+#if WRITE_THROUGH_DATA_BUFFER
+            const auto dataSize = dataProvider.data().size();
+            const auto bytesWritten = d->m_fileWrite->write(dataProvider.data(), dataSize);
+            if ((bytesWritten != dataSize) || (bytesWritten == -1)) {
+                setErrorString("Failure while writing encrypted data from buffer to file.");
+                d->m_fileWrite->cancelWriting(); // prevent commit to change existing file
+            }
+#endif
+            if (!d->m_fileWrite->commit()) {
+                setErrorString("Failure while committing file changes.");
+            }
         }
     }
+    qDebug() << "KGPGFile::close(7)";
 
     delete d->m_fileWrite;
+    qDebug() << "KGPGFile::close(8)";
     delete d->m_fileRead;
+    qDebug() << "KGPGFile::close(9)";
     d->m_fileWrite = 0;
     d->m_fileRead = 0;
     d->m_recipients.clear();
@@ -367,7 +404,7 @@ bool KGPGFile::keyAvailable(const QString& name)
     KGPGFile file;
     QStringList keys;
     file.keyList(keys, false, name);
-    // qDebug("keyAvailable returns %d for '%s'", keys.count(), qPrintable(name));
+    // qDebug() << "keyAvailable returns" << keys.count() << "for" << name << keys;
     return keys.count() != 0;
 }
 

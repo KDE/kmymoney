@@ -75,8 +75,6 @@ public Q_SLOTS:
     void slotEditSchedule();
     void slotEditLoanSchedule();
 
-    void slotEnterOverdueSchedules(const MyMoneyAccount& acc);
-
     void updateActions(const SelectedObjects& selections) override;
 
 Q_SIGNALS:

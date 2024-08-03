@@ -136,7 +136,7 @@ void ParametersModel::addItem(const QString& key, const QString& val)
 void ParametersModel::deleteItem(const QString& key)
 {
     const auto idx = indexById(key);
-    if (!idx.isValid()) {
+    if (idx.isValid()) {
         removeRow(idx.row());
     }
 }

@@ -1,5 +1,5 @@
 /*
-    SPDX-FileCopyrightText: 2016-2022 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2016-2024 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -74,6 +74,7 @@ struct NewSplitEditor::Private
         , loadingSplit(false)
         , isIncomeExpense(false)
         , readOnly(false)
+        , protectClosedAccount(false)
         , postDate(QDate::currentDate())
         , frameCollection(nullptr)
     {
@@ -118,6 +119,7 @@ struct NewSplitEditor::Private
     bool loadingSplit;
     bool isIncomeExpense;
     bool readOnly;
+    bool protectClosedAccount;
     MyMoneyAccount counterAccount;
     MyMoneyAccount category;
     MyMoneySecurity commodity;
@@ -726,4 +728,21 @@ bool NewSplitEditor::eventFilter(QObject* o, QEvent* e)
         }
     }
     return QWidget::eventFilter(o, e);
+}
+
+void NewSplitEditor::setProtectClosedAccount(bool protect)
+{
+    d->protectClosedAccount = protect;
+
+    d->ui->creditDebitEdit->setDisabled(protect);
+    d->ui->accountCombo->setDisabled(protect);
+
+    if (protect) {
+        const auto tip = i18nc("@info:tooltip Protected", "This widget is currently protected because the transaction references a closed account.");
+        d->ui->accountCombo->setToolTip(tip);
+        d->ui->creditDebitEdit->setToolTip(tip);
+    } else {
+        d->ui->accountCombo->setToolTip(QString());
+        d->ui->creditDebitEdit->setToolTip(QString());
+    }
 }
