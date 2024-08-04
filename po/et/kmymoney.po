@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-30 01:52+0000\n"
+"POT-Creation-Date: 2024-08-04 01:50+0000\n"
 "PO-Revision-Date: 2020-05-02 10:27+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -4160,7 +4160,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoReconciliation)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:267
-#: kmymoney/views/reconciliationledgerviewpage.cpp:126
+#: kmymoney/views/reconciliationledgerviewpage.cpp:127
 #, kde-format
 msgid "Automatic reconciliation"
 msgstr "Automaatne kooskõlastamine"
@@ -20941,7 +20941,7 @@ msgid "Investment value: %1%2"
 msgstr "Investeering väärtus: %1%2"
 
 #: kmymoney/views/ledgerviewpage_p.h:146
-#: kmymoney/views/reconciliationledgerviewpage.cpp:397
+#: kmymoney/views/reconciliationledgerviewpage.cpp:437
 #, fuzzy, kde-format
 #| msgctxt "Cleared balance"
 #| msgid "Cleared: %1"
@@ -21170,7 +21170,7 @@ msgctxt "Ledger marker showing a reconciliation entry"
 msgid "Reconciliation"
 msgstr "Kooskõlastamisvaade"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:123
+#: kmymoney/views/reconciliationledgerviewpage.cpp:124
 #, kde-format
 msgid ""
 "KMyMoney has detected transactions matching your reconciliation data.\n"
@@ -21179,7 +21179,7 @@ msgstr ""
 "KMyMoney tuvastas kooskõlastamisandmetega kokkusobivad tehingud.\n"
 "Kas soovid, et KMyMoney märgiks need tehingud kontrollituks?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:255
+#: kmymoney/views/reconciliationledgerviewpage.cpp:256
 #, kde-format
 msgid ""
 "You are about to finish the reconciliation of this account with a difference "
@@ -21190,19 +21190,26 @@ msgstr ""
 "märgitud tehingute vahel valitseb erinevusi.\n"
 "Kas tõesti soovid kooskõlastamise lõpetada?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:258
+#: kmymoney/views/reconciliationledgerviewpage.cpp:259
 #, kde-format
 msgid "Confirm end of reconciliation"
 msgstr "Kooskõlastamise lõpetamise kinnitus"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:396
+#: kmymoney/views/reconciliationledgerviewpage.cpp:294
+#, fuzzy, kde-format
+#| msgid "Retrieving transactions..."
+msgctxt "@label Reconciliation progress dialog"
+msgid "Reconciling transactions..."
+msgstr "Tehingute tõmbamine ..."
+
+#: kmymoney/views/reconciliationledgerviewpage.cpp:436
 #, fuzzy, kde-format
 #| msgid "Statement: %1"
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Pangaväljavõte: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:398
+#: kmymoney/views/reconciliationledgerviewpage.cpp:438
 #, fuzzy, kde-format
 #| msgid "Difference: %1"
 msgctxt "@label:textbox Difference to statement"

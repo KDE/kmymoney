@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-30 01:52+0000\n"
-"PO-Revision-Date: 2024-07-05 14:13+0100\n"
+"POT-Creation-Date: 2024-08-04 01:50+0000\n"
+"PO-Revision-Date: 2024-08-03 13:38+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.0\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4131,7 +4131,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoReconciliation)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:267
-#: kmymoney/views/reconciliationledgerviewpage.cpp:126
+#: kmymoney/views/reconciliationledgerviewpage.cpp:127
 #, kde-format
 msgid "Automatic reconciliation"
 msgstr "Automatic reconciliation"
@@ -15262,6 +15262,7 @@ msgctxt "@info Hint about the base of the budget forecast"
 msgid ""
 "Budget forecast is based on historic transactions found between %1 and %2."
 msgstr ""
+"Budget forecast is based on historic transactions found between %1 and %2."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:666
 #, kde-format
@@ -19659,11 +19660,10 @@ msgid "Expected Profit/Loss"
 msgstr "Expected Profit/Loss"
 
 #: kmymoney/views/kinstitutionsview.cpp:251
-#, fuzzy, kde-format
-#| msgid "Edit institution..."
+#, kde-format
 msgctxt "@info:title Dialog title"
 msgid "Edit Institution"
-msgstr "Edit institution..."
+msgstr "Edit Institution"
 
 #: kmymoney/views/kinstitutionsview.cpp:258
 #, kde-format
@@ -20556,7 +20556,7 @@ msgid "Investment value: %1%2"
 msgstr "Investment value: %1%2"
 
 #: kmymoney/views/ledgerviewpage_p.h:146
-#: kmymoney/views/reconciliationledgerviewpage.cpp:397
+#: kmymoney/views/reconciliationledgerviewpage.cpp:437
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
@@ -20689,13 +20689,14 @@ msgstr "The cheque number <b>%1</b> has already been used in this account."
 
 #: kmymoney/views/newspliteditor.cpp:741
 #: kmymoney/views/newtransactioneditor.cpp:188
-#, fuzzy, kde-format
-#| msgid "Cannot remove transaction that references a closed account."
+#, kde-format
 msgctxt "@info:tooltip Protected"
 msgid ""
 "This widget is currently protected because the transaction references a "
 "closed account."
-msgstr "Cannot remove transaction that references a closed account."
+msgstr ""
+"This widget is currently protected because the transaction references a "
+"closed account."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, payToLabel)
@@ -20719,7 +20720,7 @@ msgstr "Costcentre"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits."
-msgstr ""
+msgstr "The amount is different from the sum of all splits."
 
 #: kmymoney/views/newtransactioneditor.cpp:605
 #, kde-format
@@ -20774,7 +20775,7 @@ msgctxt "Ledger marker showing a reconciliation entry"
 msgid "Reconciliation"
 msgstr "Reconciliation"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:123
+#: kmymoney/views/reconciliationledgerviewpage.cpp:124
 #, kde-format
 msgid ""
 "KMyMoney has detected transactions matching your reconciliation data.\n"
@@ -20783,7 +20784,7 @@ msgstr ""
 "KMyMoney has detected transactions matching your reconciliation data.\n"
 "Would you like KMyMoney to clear these transactions for you?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:255
+#: kmymoney/views/reconciliationledgerviewpage.cpp:256
 #, kde-format
 msgid ""
 "You are about to finish the reconciliation of this account with a difference "
@@ -20794,18 +20795,25 @@ msgstr ""
 "between your bank statement and the transactions marked as cleared.\n"
 "Are you sure you want to finish the reconciliation?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:258
+#: kmymoney/views/reconciliationledgerviewpage.cpp:259
 #, kde-format
 msgid "Confirm end of reconciliation"
 msgstr "Confirm end of reconciliation"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:396
+#: kmymoney/views/reconciliationledgerviewpage.cpp:294
+#, fuzzy, kde-format
+#| msgid "Retrieving transactions..."
+msgctxt "@label Reconciliation progress dialog"
+msgid "Reconciling transactions..."
+msgstr "Retrieving transactions..."
+
+#: kmymoney/views/reconciliationledgerviewpage.cpp:436
 #, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Statement: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:398
+#: kmymoney/views/reconciliationledgerviewpage.cpp:438
 #, kde-format
 msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
