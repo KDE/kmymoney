@@ -20172,11 +20172,10 @@ msgid "Confirm end of reconciliation"
 msgstr "确认对账结束"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:294
-#, fuzzy, kde-format
-#| msgid "Loading transactions..."
+#, kde-format
 msgctxt "@label Reconciliation progress dialog"
 msgid "Reconciling transactions..."
-msgstr "正在加载交易..."
+msgstr ""
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:436
 #, kde-format
