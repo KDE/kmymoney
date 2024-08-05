@@ -41,14 +41,13 @@
 #include <qgpgme/dataprovider.h>
 
 // On Unix style systems we can use the file handle of
-// the QSaveFile object to write out the encrypted data
-// directly. On Windows this does not work and we encrypt
-// the data into a local buffer and write that out to the
-// QSaveFile object in a separate step.
+// the file object to write out and read in the encrypted data
+// directly. On Windows this does not work and we encrypt and
+// decrypt the data through a local buffer in a separate step.
 #if defined(Q_OS_WIN32)
-#define WRITE_THROUGH_DATA_BUFFER 1
+#define IO_THROUGH_DATA_BUFFER 1
 #else
-#define WRITE_THROUGH_DATA_BUFFER 0
+#define IO_THROUGH_DATA_BUFFER 0
 #endif
 
 class GPGConfig
@@ -263,7 +262,14 @@ bool KGPGFile::open(OpenMode mode)
             setOpenMode(NotOpen);
             return false;
         }
+
+#if IO_THROUGH_DATA_BUFFER
+        QGpgME::QByteArrayDataProvider dataProvider(d->m_fileRead->readAll());
+        GpgME::Data dcipher(&dataProvider);
+#else
         GpgME::Data dcipher(d->m_fileRead->handle());
+#endif
+
         d->m_lastError = d->m_ctx->decrypt(dcipher, d->m_data).error();
         if (d->m_lastError.encodedError()) {
             return false;
@@ -297,7 +303,7 @@ void KGPGFile::close()
         d->m_data.seek(0, SEEK_SET);
         qDebug() << "KGPGFile::close(4)";
 
-#if WRITE_THROUGH_DATA_BUFFER
+#if IO_THROUGH_DATA_BUFFER
         QGpgME::QByteArrayDataProvider dataProvider;
         GpgME::Data dcipher(&dataProvider);
 #else
@@ -309,7 +315,7 @@ void KGPGFile::close()
         if (d->m_lastError.encodedError()) {
             setErrorString(QLatin1String("Failure while writing temporary file for file: '") + QLatin1String(d->m_lastError.asString()) + QLatin1String("'"));
         } else {
-#if WRITE_THROUGH_DATA_BUFFER
+#if IO_THROUGH_DATA_BUFFER
             const auto dataSize = dataProvider.data().size();
             const auto bytesWritten = d->m_fileWrite->write(dataProvider.data(), dataSize);
             if ((bytesWritten != dataSize) || (bytesWritten == -1)) {
