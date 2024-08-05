@@ -194,7 +194,7 @@ target_link_libraries( kmm_gpgfile
 PUBLIC
 Qt::Core
 $<$<BOOL:${Gpgmepp_FOUND}>:Gpgmepp>
-$<$<BOOL:${QGpgme_FOUND}>:qgpgme>
+$<$<BOOL:${QGpgme_FOUND}>:QGpgme>
 )
 set_target_properties(kmm_gpgfile PROPERTIES
 VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
