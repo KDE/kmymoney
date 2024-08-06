@@ -262,6 +262,7 @@ protected Q_SLOTS:
     void slotMarkTransactions();
     void slotMoveTransactionTo();
     void slotTransactionOpenURL();
+    bool openUrl(const QUrl& url);
     void slotMoveToToday();
     void slotMatchTransaction();
     void slotAcceptTransaction();
