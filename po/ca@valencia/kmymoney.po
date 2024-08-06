@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-04 01:50+0000\n"
-"PO-Revision-Date: 2024-07-20 09:47+0200\n"
+"PO-Revision-Date: 2024-08-04 10:42+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -21032,11 +21032,10 @@ msgid "Confirm end of reconciliation"
 msgstr "Confirmeu el final de la conciliació"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:294
-#, fuzzy, kde-format
-#| msgid "Retrieving transactions..."
+#, kde-format
 msgctxt "@label Reconciliation progress dialog"
 msgid "Reconciling transactions..."
-msgstr "S'estan recuperant les operacions…"
+msgstr "S'estan conciliant operacions…"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:436
 #, kde-format
@@ -25417,10 +25416,3 @@ msgstr ""
 "\n"
 "<p>Tota la informació és optativa i s'utilitza per a personalitzar el fitxer "
 "de KMyMoney.</p>"
-
-#~ msgid ""
-#~ "KMyMoney has detected some overdue scheduled transactions for this "
-#~ "account. Do you want to enter those scheduled transactions now?"
-#~ msgstr ""
-#~ "KMyMoney ha detectat algunes operacions planificades endarrerides per a "
-#~ "este compte. Voleu introduir ara estes operacions planificades?"

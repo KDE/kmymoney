@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-04 01:50+0000\n"
-"PO-Revision-Date: 2024-07-20 12:42+0200\n"
+"PO-Revision-Date: 2024-08-04 21:14+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -20972,11 +20972,10 @@ msgid "Confirm end of reconciliation"
 msgstr "Confirmar el fin de la conciliación"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:294
-#, fuzzy, kde-format
-#| msgid "Retrieving transactions..."
+#, kde-format
 msgctxt "@label Reconciliation progress dialog"
 msgid "Reconciling transactions..."
-msgstr "Obteniendo transacciones..."
+msgstr "Conciliando transacciones..."
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:436
 #, kde-format
