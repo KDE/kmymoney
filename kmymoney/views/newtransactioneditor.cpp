@@ -231,7 +231,13 @@ bool NewTransactionEditor::Private::checkForValidAmount()
 {
     WidgetHintFrame::hide(ui->creditDebitEdit);
     if (q->transactionAmount() != -splitsSum()) {
-        WidgetHintFrame::show(ui->creditDebitEdit, i18nc("@info:tooltip", "The amount is different from the sum of all splits."));
+        QString infoText;
+        if (splitModel.rowCount() == 0) {
+            infoText = i18nc("@info:tooltip", "The transaction is missing a category assignment.");
+        } else {
+            infoText = i18nc("@info:tooltip", "The amount is different from the sum of all splits.");
+        }
+        WidgetHintFrame::show(ui->creditDebitEdit, infoText);
     }
     return true;
 }
