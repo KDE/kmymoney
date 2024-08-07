@@ -466,6 +466,7 @@ void AmountEdit::focusOutEvent(QFocusEvent* event)
     if ((d->m_value != value()) || (d->m_shares != shares())) {
         d->m_value = value();
         d->m_shares = shares();
+        d->valueSet = true;
         Q_EMIT amountChanged();
     }
 }

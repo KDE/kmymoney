@@ -336,7 +336,9 @@ bool InvestTransactionEditor::Private::categoryChanged(SplitModel* model, const 
                 auto sharesAmount = amountEdit->value();
                 if (!sharesAmount.isZero()) {
                     amountEdit->setShares(sharesAmount);
-                    KCurrencyCalculator::updateConversion(amountEdit, ui->dateEdit->date());
+                    if (!bypassUserPriceUpdate) {
+                        KCurrencyCalculator::updateConversion(amountEdit, ui->dateEdit->date());
+                    }
                 }
             }
 
@@ -425,9 +427,11 @@ bool InvestTransactionEditor::Private::amountChanged(SplitModel* model, AmountEd
 
                 // check if there is a change in the values other than simply reverting the sign
                 // and get an updated price in that case
-                if ((index.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>() != -amountEdit->shares())
-                    || (index.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>() != -amountEdit->value())) {
-                    KCurrencyCalculator::updateConversion(amountEdit, ui->dateEdit->date());
+                if (!bypassUserPriceUpdate) {
+                    if ((index.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>() != -amountEdit->shares())
+                        || (index.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>() != -amountEdit->value())) {
+                        KCurrencyCalculator::updateConversion(amountEdit, ui->dateEdit->date());
+                    }
                 }
 
                 model->setData(index, QVariant::fromValue<MyMoneyMoney>((amountEdit->value() * transactionFactor)), eMyMoney::Model::SplitValueRole);
@@ -467,6 +471,30 @@ void InvestTransactionEditor::Private::editSplits(SplitModel* sourceSplitModel, 
         // remove that empty split again before we update the splits
         splitModel.removeEmptySplit();
 
+        // skip price update by user while returning back
+        // from the split dialog
+        bypassUserPriceUpdate = true;
+
+        // in case the new model has only one split, we need to update
+        // the amount widget with the values in the splitModel so that
+        // they are available during further processing (copying calls
+        // InvestTransactionEditor::Private::categoryChanged through
+        // signals which needs it)
+        if (splitModel.rowCount() == 1) {
+            const auto idx = splitModel.index(0, 0);
+            amountEdit->setValue(idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>());
+            amountEdit->setShares(idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>());
+            // make sure that the commodity of the shares is changed to the current selected account
+            const auto accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
+            const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
+            const auto currencyId = accountIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString();
+            const auto currency = MyMoneyFile::instance()->currenciesModel()->itemById(currencyId);
+            // switch to value display so that we show the transaction commodity
+            // for single currency data entry this does not have an effect
+            amountEdit->setDisplayState(MultiCurrencyEdit::DisplayValue);
+            amountEdit->setSharesCommodity(currency);
+        }
+
         // copy the splits model contents
         *sourceSplitModel = splitModel;
 
@@ -480,13 +508,15 @@ void InvestTransactionEditor::Private::editSplits(SplitModel* sourceSplitModel, 
         if (sourceSplitModel->rowCount() == 1) {
             const auto idx = sourceSplitModel->index(0, 0);
             amountShares = idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
-
             adjustSharesCommodity(amountEdit, idx.data(eMyMoney::Model::SplitAccountIdRole).toString());
 
             // make sure to show the value in the widget
             // according to the currency presented
         }
         amountEdit->setShares(amountShares * transactionFactor);
+
+        // reactivate the price update for the use
+        bypassUserPriceUpdate = false;
 
         updateWidgetState();
     }
