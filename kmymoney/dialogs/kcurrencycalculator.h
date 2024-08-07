@@ -105,6 +105,15 @@ public:
      */
     static void updateConversion(MultiCurrencyEdit* amountEdit, const QDate date);
 
+protected:
+    /**
+     * Passing @c true as argument allows to suppress sending out
+     * update signals from the MyMoneyFile object during price
+     * update. Sending out signals causes a problem when performed
+     * in a nested dialog (e.g. investment split fees)
+     */
+    void blockSignalsDuringUpdate(bool block);
+
 protected Q_SLOTS:
     void slotSetToAmount();
     void slotSetExchangeRate();

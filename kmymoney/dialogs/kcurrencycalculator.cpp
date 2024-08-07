@@ -48,6 +48,7 @@ public:
         : q_ptr(qq)
         , ui(new Ui::KCurrencyCalculator)
         , m_resultFraction(100)
+        , m_blockUpdateSignals(false)
     {
     }
 
@@ -66,6 +67,7 @@ public:
         , m_fromAmount(fromAmount.abs())
         , m_date(date)
         , m_resultFraction(resultFraction)
+        , m_blockUpdateSignals(false)
     {
     }
 
@@ -184,6 +186,7 @@ public:
     MyMoneyMoney m_fromAmount;
     QDate m_date;
     signed64 m_resultFraction;
+    bool m_blockUpdateSignals;
 };
 
 KCurrencyCalculator::KCurrencyCalculator(QWidget* parent)
@@ -431,6 +434,10 @@ void KCurrencyCalculator::accept()
             MyMoneyFileTransaction ft;
             try {
                 MyMoneyFile::instance()->addPrice(pr);
+                QSignalBlocker blocker(MyMoneyFile::instance());
+                if (!d->m_blockUpdateSignals) {
+                    blocker.unblock();
+                }
                 ft.commit();
             } catch (const MyMoneyException &) {
                 qDebug("Cannot add price");
@@ -456,6 +463,12 @@ MyMoneyMoney KCurrencyCalculator::price() const
         return MyMoneyMoney::ONE;
     } else
         return d->ui->m_conversionRate->value();
+}
+
+void KCurrencyCalculator::blockSignalsDuringUpdate(bool block)
+{
+    Q_D(KCurrencyCalculator);
+    d->m_blockUpdateSignals = block;
 }
 
 void KCurrencyCalculator::updateConversion(MultiCurrencyEdit* amountEdit, const QDate date)
@@ -500,6 +513,7 @@ void KCurrencyCalculator::updateConversion(MultiCurrencyEdit* amountEdit, const 
     }
 
     calc = new KCurrencyCalculator(fromSecurity, toSecurity, fromValue, toValue, date, fraction, amountEdit->widget());
+    calc->blockSignalsDuringUpdate(true);
 
     if (calc->exec() == QDialog::Accepted) {
         if (calc) {
