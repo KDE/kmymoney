@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-04 01:50+0000\n"
+"POT-Creation-Date: 2024-08-07 01:48+0000\n"
 "PO-Revision-Date: 2024-07-22 19:20+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -18815,14 +18815,14 @@ msgstr "Taxa de xuro"
 
 #: kmymoney/views/investtransactioneditor.cpp:262
 #: kmymoney/views/multitransactioneditor.cpp:185
-#: kmymoney/views/newtransactioneditor.cpp:289
+#: kmymoney/views/newtransactioneditor.cpp:295
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "A data de publicación do asento."
 
 #: kmymoney/views/investtransactioneditor.cpp:286
 #: kmymoney/views/multitransactioneditor.cpp:215
-#: kmymoney/views/newtransactioneditor.cpp:309
+#: kmymoney/views/newtransactioneditor.cpp:315
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr ""
@@ -20662,7 +20662,7 @@ msgid "Investment value: %1%2"
 msgstr "Valor do investimento: %1%2"
 
 #: kmymoney/views/ledgerviewpage_p.h:146
-#: kmymoney/views/reconciliationledgerviewpage.cpp:437
+#: kmymoney/views/reconciliationledgerviewpage.cpp:443
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
@@ -20681,19 +20681,19 @@ msgid "Balance: %1"
 msgstr "Saldo: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:193
-#: kmymoney/views/newtransactioneditor.cpp:292
+#: kmymoney/views/newtransactioneditor.cpp:298
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "A data de publicación non é válida."
 
 #: kmymoney/views/multitransactioneditor.cpp:226
-#: kmymoney/views/newtransactioneditor.cpp:327
+#: kmymoney/views/newtransactioneditor.cpp:333
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
 msgstr "Os centros de prezos aos que debería asignarse esta transacción."
 
 #: kmymoney/views/multitransactioneditor.cpp:229
-#: kmymoney/views/newtransactioneditor.cpp:336
+#: kmymoney/views/newtransactioneditor.cpp:342
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -20782,13 +20782,13 @@ msgid "A category assignment is required for a split."
 msgstr "As partidas requires unha asignación de categoría."
 
 #: kmymoney/views/newspliteditor.cpp:230
-#: kmymoney/views/newtransactioneditor.cpp:450
+#: kmymoney/views/newtransactioneditor.cpp:456
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "O número de cheque que se usa para este asento."
 
 #: kmymoney/views/newspliteditor.cpp:239
-#: kmymoney/views/newtransactioneditor.cpp:460
+#: kmymoney/views/newtransactioneditor.cpp:466
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "O número de cheque <b>%1</b> xa se usou nesta conta."
@@ -20822,13 +20822,20 @@ msgstr "Pagadora/beneficiaria"
 msgid "Costcenter"
 msgstr "Centro de prezos"
 
-#: kmymoney/views/newtransactioneditor.cpp:234
+#: kmymoney/views/newtransactioneditor.cpp:236
+#, fuzzy, kde-format
+#| msgid "Transaction is missing a category assignment."
+msgctxt "@info:tooltip"
+msgid "The transaction is missing a category assignment."
+msgstr "Ao asento fáltalle unha asignación de categoría."
+
+#: kmymoney/views/newtransactioneditor.cpp:238
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits."
 msgstr "A cantidade non coincide coa suma das divisións."
 
-#: kmymoney/views/newtransactioneditor.cpp:605
+#: kmymoney/views/newtransactioneditor.cpp:611
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
@@ -20913,13 +20920,13 @@ msgctxt "@label Reconciliation progress dialog"
 msgid "Reconciling transactions..."
 msgstr "Obtendo os asentos…"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:436
+#: kmymoney/views/reconciliationledgerviewpage.cpp:442
 #, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Extracto: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:438
+#: kmymoney/views/reconciliationledgerviewpage.cpp:444
 #, kde-format
 msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
@@ -26149,9 +26156,6 @@ msgstr ""
 
 #~ msgid "Your entry:"
 #~ msgstr "O seu asento:"
-
-#~ msgid "Transaction is missing a category assignment."
-#~ msgstr "Ao asento fáltalle unha asignación de categoría."
 
 #~ msgid "The transaction has a missing assignment of <b>%1</b>."
 #~ msgstr "A este asento fáltalle unha asignación de <b>%1</b>."

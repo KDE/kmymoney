@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-04 01:50+0000\n"
+"POT-Creation-Date: 2024-08-07 01:48+0000\n"
 "PO-Revision-Date: 2015-02-09 11:02+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -19498,7 +19498,7 @@ msgstr "Kamatni prihodi"
 
 #: kmymoney/views/investtransactioneditor.cpp:262
 #: kmymoney/views/multitransactioneditor.cpp:185
-#: kmymoney/views/newtransactioneditor.cpp:289
+#: kmymoney/views/newtransactioneditor.cpp:295
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
 msgid "The posting date of the transaction."
@@ -19506,7 +19506,7 @@ msgstr "Uvoz obračuna bez transakcija"
 
 #: kmymoney/views/investtransactioneditor.cpp:286
 #: kmymoney/views/multitransactioneditor.cpp:215
-#: kmymoney/views/newtransactioneditor.cpp:309
+#: kmymoney/views/newtransactioneditor.cpp:315
 #, fuzzy, kde-format
 #| msgid ""
 #| "  * The account '%1' in currency '%2' has no price set for the opening "
@@ -21468,7 +21468,7 @@ msgid "Investment value: %1%2"
 msgstr "Investicijska vrijednost: %1 %2"
 
 #: kmymoney/views/ledgerviewpage_p.h:146
-#: kmymoney/views/reconciliationledgerviewpage.cpp:437
+#: kmymoney/views/reconciliationledgerviewpage.cpp:443
 #, fuzzy, kde-format
 #| msgctxt "Cleared balance"
 #| msgid "Cleared: %1"
@@ -21491,21 +21491,21 @@ msgid "Balance: %1"
 msgstr "Stanje: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:193
-#: kmymoney/views/newtransactioneditor.cpp:292
+#: kmymoney/views/newtransactioneditor.cpp:298
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
 msgid "The posting date is invalid."
 msgstr "Uvoz obračuna bez transakcija"
 
 #: kmymoney/views/multitransactioneditor.cpp:226
-#: kmymoney/views/newtransactioneditor.cpp:327
+#: kmymoney/views/newtransactioneditor.cpp:333
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgid "The cost center this transaction should be assigned to."
 msgstr "Koristite ovo za unos transakcije u knjigu."
 
 #: kmymoney/views/multitransactioneditor.cpp:229
-#: kmymoney/views/newtransactioneditor.cpp:336
+#: kmymoney/views/newtransactioneditor.cpp:342
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgid ""
@@ -21592,14 +21592,14 @@ msgid "A category assignment is required for a split."
 msgstr "Nije moguće kreirati transakciju u okviru kategorije."
 
 #: kmymoney/views/newspliteditor.cpp:230
-#: kmymoney/views/newtransactioneditor.cpp:450
+#: kmymoney/views/newtransactioneditor.cpp:456
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgid "The check number used for this transaction."
 msgstr "Koristite ovo dugme za snimanje ove transakcije"
 
 #: kmymoney/views/newspliteditor.cpp:239
-#: kmymoney/views/newtransactioneditor.cpp:460
+#: kmymoney/views/newtransactioneditor.cpp:466
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr ""
@@ -21633,13 +21633,20 @@ msgstr "Isplatitelj / Primatelj"
 msgid "Costcenter"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:234
+#: kmymoney/views/newtransactioneditor.cpp:236
+#, fuzzy, kde-format
+#| msgid "Transaction is missing a category assignment."
+msgctxt "@info:tooltip"
+msgid "The transaction is missing a category assignment."
+msgstr "Transakcija nema dodjeljenu kategoriju."
+
+#: kmymoney/views/newtransactioneditor.cpp:238
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:605
+#: kmymoney/views/newtransactioneditor.cpp:611
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@title:window Autofill selection dialog"
@@ -21727,14 +21734,14 @@ msgctxt "@label Reconciliation progress dialog"
 msgid "Reconciling transactions..."
 msgstr "Spremanje transakcije..."
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:436
+#: kmymoney/views/reconciliationledgerviewpage.cpp:442
 #, fuzzy, kde-format
 #| msgid "Statement: %1"
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Izvod: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:438
+#: kmymoney/views/reconciliationledgerviewpage.cpp:444
 #, fuzzy, kde-format
 #| msgid "Difference: %1"
 msgctxt "@label:textbox Difference to statement"
@@ -26969,9 +26976,6 @@ msgstr ""
 
 #~ msgid "Your entry:"
 #~ msgstr "Vaš unos:"
-
-#~ msgid "Transaction is missing a category assignment."
-#~ msgstr "Transakcija nema dodjeljenu kategoriju."
 
 #~ msgid "The transaction has a missing assignment of <b>%1</b>."
 #~ msgstr "Transakciji nedostaje dodjela <b>%1</b>."

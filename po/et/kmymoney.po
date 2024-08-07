@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-04 01:50+0000\n"
+"POT-Creation-Date: 2024-08-07 01:48+0000\n"
 "PO-Revision-Date: 2020-05-02 10:27+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -19047,14 +19047,14 @@ msgstr "Intressitulu"
 
 #: kmymoney/views/investtransactioneditor.cpp:262
 #: kmymoney/views/multitransactioneditor.cpp:185
-#: kmymoney/views/newtransactioneditor.cpp:289
+#: kmymoney/views/newtransactioneditor.cpp:295
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "Tehingu sooritamise kuupäev."
 
 #: kmymoney/views/investtransactioneditor.cpp:286
 #: kmymoney/views/multitransactioneditor.cpp:215
-#: kmymoney/views/newtransactioneditor.cpp:309
+#: kmymoney/views/newtransactioneditor.cpp:315
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "Sooritamise kuupäev on varasem kui konto <b>%1</b> avamispäev."
@@ -20941,7 +20941,7 @@ msgid "Investment value: %1%2"
 msgstr "Investeering väärtus: %1%2"
 
 #: kmymoney/views/ledgerviewpage_p.h:146
-#: kmymoney/views/reconciliationledgerviewpage.cpp:437
+#: kmymoney/views/reconciliationledgerviewpage.cpp:443
 #, fuzzy, kde-format
 #| msgctxt "Cleared balance"
 #| msgid "Cleared: %1"
@@ -20964,20 +20964,20 @@ msgid "Balance: %1"
 msgstr "Bilanss: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:193
-#: kmymoney/views/newtransactioneditor.cpp:292
+#: kmymoney/views/newtransactioneditor.cpp:298
 #, fuzzy, kde-format
 #| msgid "The posting date of the transaction."
 msgid "The posting date is invalid."
 msgstr "Tehingu sooritamise kuupäev."
 
 #: kmymoney/views/multitransactioneditor.cpp:226
-#: kmymoney/views/newtransactioneditor.cpp:327
+#: kmymoney/views/newtransactioneditor.cpp:333
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
 msgstr "Selle tehingu kuluüksus tuleb omistada."
 
 #: kmymoney/views/multitransactioneditor.cpp:229
-#: kmymoney/views/newtransactioneditor.cpp:336
+#: kmymoney/views/newtransactioneditor.cpp:342
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -21068,13 +21068,13 @@ msgid "A category assignment is required for a split."
 msgstr "Valitud kategooria tehinguks on nõutav kuluüksuse omistamine."
 
 #: kmymoney/views/newspliteditor.cpp:230
-#: kmymoney/views/newtransactioneditor.cpp:450
+#: kmymoney/views/newtransactioneditor.cpp:456
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Tehingu tšekinumber."
 
 #: kmymoney/views/newspliteditor.cpp:239
-#: kmymoney/views/newtransactioneditor.cpp:460
+#: kmymoney/views/newtransactioneditor.cpp:466
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Tšekinumbrit <b>%1</b> on selles kontos juba kasutatud."
@@ -21108,13 +21108,20 @@ msgstr "Maksja/saaja"
 msgid "Costcenter"
 msgstr "Kuluüksus"
 
-#: kmymoney/views/newtransactioneditor.cpp:234
+#: kmymoney/views/newtransactioneditor.cpp:236
+#, fuzzy, kde-format
+#| msgid "Transaction is missing a category assignment."
+msgctxt "@info:tooltip"
+msgid "The transaction is missing a category assignment."
+msgstr "Tehingule pole omistatud kategooriat."
+
+#: kmymoney/views/newtransactioneditor.cpp:238
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:605
+#: kmymoney/views/newtransactioneditor.cpp:611
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@title:window Autofill selection dialog"
@@ -21202,14 +21209,14 @@ msgctxt "@label Reconciliation progress dialog"
 msgid "Reconciling transactions..."
 msgstr "Tehingute tõmbamine ..."
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:436
+#: kmymoney/views/reconciliationledgerviewpage.cpp:442
 #, fuzzy, kde-format
 #| msgid "Statement: %1"
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Pangaväljavõte: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:438
+#: kmymoney/views/reconciliationledgerviewpage.cpp:444
 #, fuzzy, kde-format
 #| msgid "Difference: %1"
 msgctxt "@label:textbox Difference to statement"
@@ -26422,9 +26429,6 @@ msgstr ""
 
 #~ msgid "Your entry:"
 #~ msgstr "Sinu kirjend:"
-
-#~ msgid "Transaction is missing a category assignment."
-#~ msgstr "Tehingule pole omistatud kategooriat."
 
 #~ msgid "The transaction has a missing assignment of <b>%1</b>."
 #~ msgstr "Tehingule pole omistatud <b>%1</b>."

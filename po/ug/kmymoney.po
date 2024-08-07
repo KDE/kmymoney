@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-04 01:50+0000\n"
+"POT-Creation-Date: 2024-08-07 01:48+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -18348,14 +18348,14 @@ msgstr "ئۆسۈم"
 
 #: kmymoney/views/investtransactioneditor.cpp:262
 #: kmymoney/views/multitransactioneditor.cpp:185
-#: kmymoney/views/newtransactioneditor.cpp:289
+#: kmymoney/views/newtransactioneditor.cpp:295
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:286
 #: kmymoney/views/multitransactioneditor.cpp:215
-#: kmymoney/views/newtransactioneditor.cpp:309
+#: kmymoney/views/newtransactioneditor.cpp:315
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr ""
@@ -20177,7 +20177,7 @@ msgid "Investment value: %1%2"
 msgstr "مەبلەغ"
 
 #: kmymoney/views/ledgerviewpage_p.h:146
-#: kmymoney/views/reconciliationledgerviewpage.cpp:437
+#: kmymoney/views/reconciliationledgerviewpage.cpp:443
 #, fuzzy, kde-format
 #| msgctxt "@item reconciliation status"
 #| msgid "Cleared"
@@ -20200,19 +20200,19 @@ msgid "Balance: %1"
 msgstr "تەڭپۇڭ: "
 
 #: kmymoney/views/multitransactioneditor.cpp:193
-#: kmymoney/views/newtransactioneditor.cpp:292
+#: kmymoney/views/newtransactioneditor.cpp:298
 #, kde-format
 msgid "The posting date is invalid."
 msgstr ""
 
 #: kmymoney/views/multitransactioneditor.cpp:226
-#: kmymoney/views/newtransactioneditor.cpp:327
+#: kmymoney/views/newtransactioneditor.cpp:333
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
 msgstr ""
 
 #: kmymoney/views/multitransactioneditor.cpp:229
-#: kmymoney/views/newtransactioneditor.cpp:336
+#: kmymoney/views/newtransactioneditor.cpp:342
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -20290,13 +20290,13 @@ msgid "A category assignment is required for a split."
 msgstr ""
 
 #: kmymoney/views/newspliteditor.cpp:230
-#: kmymoney/views/newtransactioneditor.cpp:450
+#: kmymoney/views/newtransactioneditor.cpp:456
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr ""
 
 #: kmymoney/views/newspliteditor.cpp:239
-#: kmymoney/views/newtransactioneditor.cpp:460
+#: kmymoney/views/newtransactioneditor.cpp:466
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr ""
@@ -20329,13 +20329,19 @@ msgstr "تىپ: %1"
 msgid "Costcenter"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:234
+#: kmymoney/views/newtransactioneditor.cpp:236
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The transaction is missing a category assignment."
+msgstr ""
+
+#: kmymoney/views/newtransactioneditor.cpp:238
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:605
+#: kmymoney/views/newtransactioneditor.cpp:611
 #, fuzzy, kde-format
 #| msgid "  Transactions"
 msgctxt "@title:window Autofill selection dialog"
@@ -20419,14 +20425,14 @@ msgctxt "@label Reconciliation progress dialog"
 msgid "Reconciling transactions..."
 msgstr "  سودا"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:436
+#: kmymoney/views/reconciliationledgerviewpage.cpp:442
 #, fuzzy, kde-format
 #| msgid "Date:"
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "چېسلا:"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:438
+#: kmymoney/views/reconciliationledgerviewpage.cpp:444
 #, fuzzy, kde-format
 #| msgid "Difference"
 msgctxt "@label:textbox Difference to statement"

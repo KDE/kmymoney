@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-04 01:50+0000\n"
+"POT-Creation-Date: 2024-08-07 01:48+0000\n"
 "PO-Revision-Date: 2022-11-07 20:00+0100\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -19052,7 +19052,7 @@ msgstr "Zinseinkünfte"
 
 #: kmymoney/views/investtransactioneditor.cpp:262
 #: kmymoney/views/multitransactioneditor.cpp:185
-#: kmymoney/views/newtransactioneditor.cpp:289
+#: kmymoney/views/newtransactioneditor.cpp:295
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
 msgid "The posting date of the transaction."
@@ -19060,7 +19060,7 @@ msgstr "Kontoauszug ohne Buchungen wird importiert"
 
 #: kmymoney/views/investtransactioneditor.cpp:286
 #: kmymoney/views/multitransactioneditor.cpp:215
-#: kmymoney/views/newtransactioneditor.cpp:309
+#: kmymoney/views/newtransactioneditor.cpp:315
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr ""
@@ -20959,7 +20959,7 @@ msgid "Investment value: %1%2"
 msgstr "Investition: %1%2"
 
 #: kmymoney/views/ledgerviewpage_p.h:146
-#: kmymoney/views/reconciliationledgerviewpage.cpp:437
+#: kmymoney/views/reconciliationledgerviewpage.cpp:443
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
@@ -20980,21 +20980,21 @@ msgid "Balance: %1"
 msgstr "Saldo: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:193
-#: kmymoney/views/newtransactioneditor.cpp:292
+#: kmymoney/views/newtransactioneditor.cpp:298
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
 msgid "The posting date is invalid."
 msgstr "Kontoauszug ohne Buchungen wird importiert"
 
 #: kmymoney/views/multitransactioneditor.cpp:226
-#: kmymoney/views/newtransactioneditor.cpp:327
+#: kmymoney/views/newtransactioneditor.cpp:333
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgid "The cost center this transaction should be assigned to."
 msgstr "Nehmen Sie hiermit die Buchung in das Kontenbuch auf."
 
 #: kmymoney/views/multitransactioneditor.cpp:229
-#: kmymoney/views/newtransactioneditor.cpp:336
+#: kmymoney/views/newtransactioneditor.cpp:342
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgid ""
@@ -21083,13 +21083,13 @@ msgid "A category assignment is required for a split."
 msgstr "Im Kontext einer Kategorie können keine Buchungen erstellt werden."
 
 #: kmymoney/views/newspliteditor.cpp:230
-#: kmymoney/views/newtransactioneditor.cpp:450
+#: kmymoney/views/newtransactioneditor.cpp:456
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Die Schecknummer für diese Buchung."
 
 #: kmymoney/views/newspliteditor.cpp:239
-#: kmymoney/views/newtransactioneditor.cpp:460
+#: kmymoney/views/newtransactioneditor.cpp:466
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Die Schecknummer <b>%1</b> wird bereits in diesem Konto benutzt."
@@ -21123,13 +21123,20 @@ msgstr "Zahler/Empfänger"
 msgid "Costcenter"
 msgstr "Kostenstelle"
 
-#: kmymoney/views/newtransactioneditor.cpp:234
+#: kmymoney/views/newtransactioneditor.cpp:236
+#, fuzzy, kde-format
+#| msgid "Transaction is missing a category assignment."
+msgctxt "@info:tooltip"
+msgid "The transaction is missing a category assignment."
+msgstr "Dieser Buchung wurde keine Kategorie zugewiesenen."
+
+#: kmymoney/views/newtransactioneditor.cpp:238
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:605
+#: kmymoney/views/newtransactioneditor.cpp:611
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@title:window Autofill selection dialog"
@@ -21217,13 +21224,13 @@ msgctxt "@label Reconciliation progress dialog"
 msgid "Reconciling transactions..."
 msgstr "Buchungen werden abgerufen ..."
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:436
+#: kmymoney/views/reconciliationledgerviewpage.cpp:442
 #, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Kontoauszug: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:438
+#: kmymoney/views/reconciliationledgerviewpage.cpp:444
 #, kde-format
 msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
@@ -26497,9 +26504,6 @@ msgstr ""
 
 #~ msgid "Your entry:"
 #~ msgstr "Ihr Eintrag:"
-
-#~ msgid "Transaction is missing a category assignment."
-#~ msgstr "Dieser Buchung wurde keine Kategorie zugewiesenen."
 
 #~ msgid "The transaction has a missing assignment of <b>%1</b>."
 #~ msgstr "Die Buchung hat eine fehlende Zuordnung von <b>%1</b>."
