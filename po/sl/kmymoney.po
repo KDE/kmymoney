@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-07 01:48+0000\n"
-"PO-Revision-Date: 2024-08-04 06:40+0200\n"
+"POT-Creation-Date: 2024-08-08 01:49+0000\n"
+"PO-Revision-Date: 2024-08-07 07:23+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -1011,7 +1011,7 @@ msgstr "Vnesite &te nove vrednosti samo za ta pojav."
 msgid "Set all further occurrences &in this schedule to be these values."
 msgstr "Nastavite vse nadaljnje pojave in v tem urniku na te vrednosti."
 
-#: kmymoney/dialogs/kcurrencycalculator.cpp:430
+#: kmymoney/dialogs/kcurrencycalculator.cpp:433
 #: kmymoney/mymoney/mymoneyfile.cpp:3019
 #, kde-format
 msgctxt "@info price source"
@@ -18827,7 +18827,7 @@ msgstr "Datum objave transakcije."
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "Datum objave je pred datumom odprtja računa <b>%1</b>."
 
-#: kmymoney/views/investtransactioneditor.cpp:402
+#: kmymoney/views/investtransactioneditor.cpp:404
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -18837,55 +18837,55 @@ msgstr ""
 "Blago v transakciji je bilo spremenjeno, zaradi česar bodo morda podatki o "
 "ceni neveljavni. Prosimo, preverite jih."
 
-#: kmymoney/views/investtransactioneditor.cpp:544
+#: kmymoney/views/investtransactioneditor.cpp:574
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Category for fees"
 msgstr "Kategorija za pristojbine"
 
-#: kmymoney/views/investtransactioneditor.cpp:545
+#: kmymoney/views/investtransactioneditor.cpp:575
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Amount of fees"
 msgstr "Znesek pristojbin"
 
-#: kmymoney/views/investtransactioneditor.cpp:546
+#: kmymoney/views/investtransactioneditor.cpp:576
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Category for interest"
 msgstr "Kategorija za obresti"
 
-#: kmymoney/views/investtransactioneditor.cpp:547
+#: kmymoney/views/investtransactioneditor.cpp:577
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Amount of interest"
 msgstr "Znesek obresti"
 
-#: kmymoney/views/investtransactioneditor.cpp:548
+#: kmymoney/views/investtransactioneditor.cpp:578
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Asset or brokerage account"
 msgstr "Račun imetij ali posredništva"
 
-#: kmymoney/views/investtransactioneditor.cpp:549
+#: kmymoney/views/investtransactioneditor.cpp:579
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Price information for this transaction"
 msgstr "Podatki o ceni za to transakcijo"
 
-#: kmymoney/views/investtransactioneditor.cpp:552
+#: kmymoney/views/investtransactioneditor.cpp:582
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Security for this transaction"
 msgstr "Vrednostni papir za to transakcijo"
 
-#: kmymoney/views/investtransactioneditor.cpp:553
+#: kmymoney/views/investtransactioneditor.cpp:583
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
 msgstr "Izberite dejavnost za to transakcijo."
 
-#: kmymoney/views/investtransactioneditor.cpp:556
+#: kmymoney/views/investtransactioneditor.cpp:586
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -18895,7 +18895,7 @@ msgstr ""
 "Vrednostnega papirja za to transakcijo ni mogoče spremeniti, ker je račun za "
 "ta vrednostni papir zaprt."
 
-#: kmymoney/views/investtransactioneditor.cpp:557
+#: kmymoney/views/investtransactioneditor.cpp:587
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -18903,13 +18903,13 @@ msgid ""
 msgstr ""
 "Te dejavnosti ni mogoče spremeniti, ker je račun za vrednostni papir zaprt."
 
-#: kmymoney/views/investtransactioneditor.cpp:569
+#: kmymoney/views/investtransactioneditor.cpp:599
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "Število delnic"
 
-#: kmymoney/views/investtransactioneditor.cpp:571
+#: kmymoney/views/investtransactioneditor.cpp:601
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -18918,19 +18918,19 @@ msgid ""
 msgstr ""
 "Števila delnic ni mogoče spremeniti, ker je račun za vrednostni papir zaprt."
 
-#: kmymoney/views/investtransactioneditor.cpp:575
+#: kmymoney/views/investtransactioneditor.cpp:605
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr "Vnesite število delnic te transakcije"
 
-#: kmymoney/views/investtransactioneditor.cpp:581
+#: kmymoney/views/investtransactioneditor.cpp:611
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "Razmerje delitve"
 
-#: kmymoney/views/investtransactioneditor.cpp:583
+#: kmymoney/views/investtransactioneditor.cpp:613
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -18939,49 +18939,49 @@ msgstr ""
 "Razmerja delitve ni mogoče spremeniti, ker je račun za vrednostni papir "
 "zaprt."
 
-#: kmymoney/views/investtransactioneditor.cpp:587
+#: kmymoney/views/investtransactioneditor.cpp:617
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr "Vnesite razmerje delitve za to transakcijo"
 
-#: kmymoney/views/investtransactioneditor.cpp:599
+#: kmymoney/views/investtransactioneditor.cpp:629
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr "Vnesite informacije o ceni za to transakcijo"
 
-#: kmymoney/views/investtransactioneditor.cpp:615
+#: kmymoney/views/investtransactioneditor.cpp:645
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "Izberite račun stanja transakcije"
 
-#: kmymoney/views/investtransactioneditor.cpp:622
+#: kmymoney/views/investtransactioneditor.cpp:652
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr "Vnesite kategorijo za pristojbine"
 
-#: kmymoney/views/investtransactioneditor.cpp:625
+#: kmymoney/views/investtransactioneditor.cpp:655
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "Vnesite znesek pristojbin"
 
-#: kmymoney/views/investtransactioneditor.cpp:631
+#: kmymoney/views/investtransactioneditor.cpp:661
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr "Vnesite kategorijo za obresti"
 
-#: kmymoney/views/investtransactioneditor.cpp:634
+#: kmymoney/views/investtransactioneditor.cpp:664
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "Vnesite znesek obresti"
 
-#: kmymoney/views/investtransactioneditor.cpp:639
+#: kmymoney/views/investtransactioneditor.cpp:669
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
@@ -20828,9 +20828,7 @@ msgid "Costcenter"
 msgstr "Stroškovno mesto"
 
 #: kmymoney/views/newtransactioneditor.cpp:236
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip icon description"
-#| msgid "Transaction is missing a category assignment."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
 msgstr "Transakciji manjka dodeljena kategorija."

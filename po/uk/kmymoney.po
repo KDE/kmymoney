@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-07 01:48+0000\n"
-"PO-Revision-Date: 2024-08-04 16:24+0300\n"
+"POT-Creation-Date: 2024-08-08 01:49+0000\n"
+"PO-Revision-Date: 2024-08-07 09:14+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -1028,7 +1028,7 @@ msgstr "Ввести &ці нові значення лише цього окр�
 msgid "Set all further occurrences &in this schedule to be these values."
 msgstr "Встановити ці значення &для всіх подальших разів у цьому розкладі."
 
-#: kmymoney/dialogs/kcurrencycalculator.cpp:430
+#: kmymoney/dialogs/kcurrencycalculator.cpp:433
 #: kmymoney/mymoney/mymoneyfile.cpp:3019
 #, kde-format
 msgctxt "@info price source"
@@ -18969,7 +18969,7 @@ msgstr "Дата проведення цієї операції за рахун�
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "Дата проведення операції передує даті відкриття рахунку <b>%1</b>."
 
-#: kmymoney/views/investtransactioneditor.cpp:402
+#: kmymoney/views/investtransactioneditor.cpp:404
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -18979,55 +18979,55 @@ msgstr ""
 "Товар операції було змінено, що може призвести до встановлення некоректних "
 "даних щодо ціни. Будь ласка, перевірте дані."
 
-#: kmymoney/views/investtransactioneditor.cpp:544
+#: kmymoney/views/investtransactioneditor.cpp:574
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Category for fees"
 msgstr "Категорія податків"
 
-#: kmymoney/views/investtransactioneditor.cpp:545
+#: kmymoney/views/investtransactioneditor.cpp:575
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Amount of fees"
 msgstr "Сума податків"
 
-#: kmymoney/views/investtransactioneditor.cpp:546
+#: kmymoney/views/investtransactioneditor.cpp:576
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Category for interest"
 msgstr "Категорія дивідендів"
 
-#: kmymoney/views/investtransactioneditor.cpp:547
+#: kmymoney/views/investtransactioneditor.cpp:577
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Amount of interest"
 msgstr "Сума дивідендів"
 
-#: kmymoney/views/investtransactioneditor.cpp:548
+#: kmymoney/views/investtransactioneditor.cpp:578
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Asset or brokerage account"
 msgstr "Рахунок активів або куртажу"
 
-#: kmymoney/views/investtransactioneditor.cpp:549
+#: kmymoney/views/investtransactioneditor.cpp:579
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Price information for this transaction"
 msgstr "Дані щодо цін для цієї операції"
 
-#: kmymoney/views/investtransactioneditor.cpp:552
+#: kmymoney/views/investtransactioneditor.cpp:582
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Security for this transaction"
 msgstr "Цінний папір для цієї операції"
 
-#: kmymoney/views/investtransactioneditor.cpp:553
+#: kmymoney/views/investtransactioneditor.cpp:583
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
 msgstr "Виберіть дію для цієї операції"
 
-#: kmymoney/views/investtransactioneditor.cpp:556
+#: kmymoney/views/investtransactioneditor.cpp:586
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19037,7 +19037,7 @@ msgstr ""
 "Цінний папір для цієї операції змінювати не можна, оскільки рахунок цінних "
 "паперів закрито."
 
-#: kmymoney/views/investtransactioneditor.cpp:557
+#: kmymoney/views/investtransactioneditor.cpp:587
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19046,13 +19046,13 @@ msgstr ""
 "Записі цієї дії не може бути змінено, оскільки рахунок цінних паперів "
 "закрито."
 
-#: kmymoney/views/investtransactioneditor.cpp:569
+#: kmymoney/views/investtransactioneditor.cpp:599
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "Кількість акцій"
 
-#: kmymoney/views/investtransactioneditor.cpp:571
+#: kmymoney/views/investtransactioneditor.cpp:601
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19062,19 +19062,19 @@ msgstr ""
 "Кількість акцій не може бути змінено, оскільки рахунок цінних паперів "
 "закрито."
 
-#: kmymoney/views/investtransactioneditor.cpp:575
+#: kmymoney/views/investtransactioneditor.cpp:605
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr "Введіть кількість акцій для цієї операції"
 
-#: kmymoney/views/investtransactioneditor.cpp:581
+#: kmymoney/views/investtransactioneditor.cpp:611
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "Частка дроблення"
 
-#: kmymoney/views/investtransactioneditor.cpp:583
+#: kmymoney/views/investtransactioneditor.cpp:613
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19083,49 +19083,49 @@ msgstr ""
 "Співвідношення дроблення не може бути змінено, оскільки рахунок цінних "
 "паперів закрито."
 
-#: kmymoney/views/investtransactioneditor.cpp:587
+#: kmymoney/views/investtransactioneditor.cpp:617
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr "Введіть частку дроблення для цієї операції"
 
-#: kmymoney/views/investtransactioneditor.cpp:599
+#: kmymoney/views/investtransactioneditor.cpp:629
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr "Введіть дані щодо цін для цієї операції"
 
-#: kmymoney/views/investtransactioneditor.cpp:615
+#: kmymoney/views/investtransactioneditor.cpp:645
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "Виберіть рахунок для балансування операції"
 
-#: kmymoney/views/investtransactioneditor.cpp:622
+#: kmymoney/views/investtransactioneditor.cpp:652
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr "Введіть категорію податків"
 
-#: kmymoney/views/investtransactioneditor.cpp:625
+#: kmymoney/views/investtransactioneditor.cpp:655
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "Введіть суму податків"
 
-#: kmymoney/views/investtransactioneditor.cpp:631
+#: kmymoney/views/investtransactioneditor.cpp:661
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr "Введіть категорію дивідендів"
 
-#: kmymoney/views/investtransactioneditor.cpp:634
+#: kmymoney/views/investtransactioneditor.cpp:664
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "Введіть суму дивідендів"
 
-#: kmymoney/views/investtransactioneditor.cpp:639
+#: kmymoney/views/investtransactioneditor.cpp:669
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
@@ -20977,8 +20977,7 @@ msgid "Costcenter"
 msgstr "Обліковий центр"
 
 #: kmymoney/views/newtransactioneditor.cpp:236
-#, fuzzy, kde-format
-#| msgid "Transaction is missing a category assignment."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
 msgstr "Операцію не пов'язано з категорією."
