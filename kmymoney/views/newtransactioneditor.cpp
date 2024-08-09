@@ -446,6 +446,7 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
             splitModel.unload();
         }
     }
+    checkForValidAmount();
     ui->tagContainer->setEnabled(splitModel.rowCount() == 1);
     return rc;
 }
