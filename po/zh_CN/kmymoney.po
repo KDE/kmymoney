@@ -20091,12 +20091,10 @@ msgid "Costcenter"
 msgstr ""
 
 #: kmymoney/views/newtransactioneditor.cpp:236
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip icon description"
-#| msgid "Transaction is missing a category assignment."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
-msgstr "交易中缺少交易类别。"
+msgstr ""
 
 #: kmymoney/views/newtransactioneditor.cpp:238
 #, kde-format

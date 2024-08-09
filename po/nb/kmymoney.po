@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-04 01:50+0000\n"
+"POT-Creation-Date: 2024-08-08 01:49+0000\n"
 "PO-Revision-Date: 2024-03-29 14:27+0100\n"
 "Last-Translator: Kjetil Sørlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -994,7 +994,7 @@ msgid "Set all further occurrences &in this schedule to be these values."
 msgstr ""
 "Angi alle andre forekomster &i denne tidsplanen til å være disse verdiene."
 
-#: kmymoney/dialogs/kcurrencycalculator.cpp:430
+#: kmymoney/dialogs/kcurrencycalculator.cpp:433
 #: kmymoney/mymoney/mymoneyfile.cpp:3019
 #, kde-format
 msgctxt "@info price source"
@@ -18726,19 +18726,19 @@ msgstr "Renteinntekt"
 
 #: kmymoney/views/investtransactioneditor.cpp:262
 #: kmymoney/views/multitransactioneditor.cpp:185
-#: kmymoney/views/newtransactioneditor.cpp:289
+#: kmymoney/views/newtransactioneditor.cpp:295
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "Posteringsdatoen for transaksjonen."
 
 #: kmymoney/views/investtransactioneditor.cpp:286
 #: kmymoney/views/multitransactioneditor.cpp:215
-#: kmymoney/views/newtransactioneditor.cpp:309
+#: kmymoney/views/newtransactioneditor.cpp:315
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "Posteringsdatoen er eldre enn åpningsdatoen for kontoen <b>%1</b>."
 
-#: kmymoney/views/investtransactioneditor.cpp:402
+#: kmymoney/views/investtransactioneditor.cpp:404
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -18748,55 +18748,55 @@ msgstr ""
 "Transaksjonsvaren er blitt endret noe som sannsynligvis vil ugyldiggjøre all "
 "prisinformasjon. Se over dem."
 
-#: kmymoney/views/investtransactioneditor.cpp:544
+#: kmymoney/views/investtransactioneditor.cpp:574
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Category for fees"
 msgstr "Gebyrkategori"
 
-#: kmymoney/views/investtransactioneditor.cpp:545
+#: kmymoney/views/investtransactioneditor.cpp:575
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Amount of fees"
 msgstr "Gebyrbeløp"
 
-#: kmymoney/views/investtransactioneditor.cpp:546
+#: kmymoney/views/investtransactioneditor.cpp:576
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Category for interest"
 msgstr "Rentekategori"
 
-#: kmymoney/views/investtransactioneditor.cpp:547
+#: kmymoney/views/investtransactioneditor.cpp:577
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Amount of interest"
 msgstr "Rentebeløp"
 
-#: kmymoney/views/investtransactioneditor.cpp:548
+#: kmymoney/views/investtransactioneditor.cpp:578
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Asset or brokerage account"
 msgstr "Eiendels- eller kurtasjekonto"
 
-#: kmymoney/views/investtransactioneditor.cpp:549
+#: kmymoney/views/investtransactioneditor.cpp:579
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Price information for this transaction"
 msgstr "Kursinformasjon for denne transaksjonen"
 
-#: kmymoney/views/investtransactioneditor.cpp:552
+#: kmymoney/views/investtransactioneditor.cpp:582
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Security for this transaction"
 msgstr "Verdipapir for denne transaksjonen"
 
-#: kmymoney/views/investtransactioneditor.cpp:553
+#: kmymoney/views/investtransactioneditor.cpp:583
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
 msgstr "Velg aktivitet for denne transaksjonen."
 
-#: kmymoney/views/investtransactioneditor.cpp:556
+#: kmymoney/views/investtransactioneditor.cpp:586
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -18806,7 +18806,7 @@ msgstr ""
 "Verdipapiret for denne transaksjonen kan ikke endres fordi verdipapirkontoen "
 "er avsluttet."
 
-#: kmymoney/views/investtransactioneditor.cpp:557
+#: kmymoney/views/investtransactioneditor.cpp:587
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -18814,13 +18814,13 @@ msgid ""
 msgstr ""
 "Denne aktiviteten kan ikke endres fordi verdipapirkontoen er avsluttet."
 
-#: kmymoney/views/investtransactioneditor.cpp:569
+#: kmymoney/views/investtransactioneditor.cpp:599
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "Antall aksjer"
 
-#: kmymoney/views/investtransactioneditor.cpp:571
+#: kmymoney/views/investtransactioneditor.cpp:601
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -18828,68 +18828,68 @@ msgid ""
 "closed."
 msgstr "Aksjeantallet kan ikke endres fordi verdipapirkontoen er avsluttet."
 
-#: kmymoney/views/investtransactioneditor.cpp:575
+#: kmymoney/views/investtransactioneditor.cpp:605
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr "Legg inn antall aksjer for denne transaksjonen"
 
-#: kmymoney/views/investtransactioneditor.cpp:581
+#: kmymoney/views/investtransactioneditor.cpp:611
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "Delingsforhold"
 
-#: kmymoney/views/investtransactioneditor.cpp:583
+#: kmymoney/views/investtransactioneditor.cpp:613
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr "Delingsforholdet kan ikke endres fordi verdipapirkontoen er avsluttet."
 
-#: kmymoney/views/investtransactioneditor.cpp:587
+#: kmymoney/views/investtransactioneditor.cpp:617
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr "Legg in delingsforholdet for denne transaksjonen"
 
-#: kmymoney/views/investtransactioneditor.cpp:599
+#: kmymoney/views/investtransactioneditor.cpp:629
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr "Legg inn kursinformasjon for denne transaksjonen"
 
-#: kmymoney/views/investtransactioneditor.cpp:615
+#: kmymoney/views/investtransactioneditor.cpp:645
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "Velg hvilken konto transaksjonen skal balanseres mot"
 
-#: kmymoney/views/investtransactioneditor.cpp:622
+#: kmymoney/views/investtransactioneditor.cpp:652
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr "Legg inn gebyrkategori"
 
-#: kmymoney/views/investtransactioneditor.cpp:625
+#: kmymoney/views/investtransactioneditor.cpp:655
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "Legg inn gebyrbeløp"
 
-#: kmymoney/views/investtransactioneditor.cpp:631
+#: kmymoney/views/investtransactioneditor.cpp:661
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr "Legg inn rentekategori"
 
-#: kmymoney/views/investtransactioneditor.cpp:634
+#: kmymoney/views/investtransactioneditor.cpp:664
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "Legg inn rentebeløp"
 
-#: kmymoney/views/investtransactioneditor.cpp:639
+#: kmymoney/views/investtransactioneditor.cpp:669
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
@@ -20565,7 +20565,7 @@ msgid "Investment value: %1%2"
 msgstr "Investeringsverdi: %1%2"
 
 #: kmymoney/views/ledgerviewpage_p.h:146
-#: kmymoney/views/reconciliationledgerviewpage.cpp:437
+#: kmymoney/views/reconciliationledgerviewpage.cpp:443
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
@@ -20584,19 +20584,19 @@ msgid "Balance: %1"
 msgstr "Saldo: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:193
-#: kmymoney/views/newtransactioneditor.cpp:292
+#: kmymoney/views/newtransactioneditor.cpp:298
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "Posteringsdatoen er ikke gyldig."
 
 #: kmymoney/views/multitransactioneditor.cpp:226
-#: kmymoney/views/newtransactioneditor.cpp:327
+#: kmymoney/views/newtransactioneditor.cpp:333
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
 msgstr "Velg kostnadssenteret denne transaksjonen skal tilordnes."
 
 #: kmymoney/views/multitransactioneditor.cpp:229
-#: kmymoney/views/newtransactioneditor.cpp:336
+#: kmymoney/views/newtransactioneditor.cpp:342
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -20685,13 +20685,13 @@ msgid "A category assignment is required for a split."
 msgstr "Tilordning til kategori er påkrevd for denne oppdelingen."
 
 #: kmymoney/views/newspliteditor.cpp:230
-#: kmymoney/views/newtransactioneditor.cpp:450
+#: kmymoney/views/newtransactioneditor.cpp:456
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Sjekknummerer brukt i denne transaksjonen."
 
 #: kmymoney/views/newspliteditor.cpp:239
-#: kmymoney/views/newtransactioneditor.cpp:460
+#: kmymoney/views/newtransactioneditor.cpp:466
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Sjekknummeret <b>%1</b> er allerede brukt på denne kontoen."
@@ -20723,13 +20723,19 @@ msgstr "Betaler/mottaker"
 msgid "Costcenter"
 msgstr "Kostnadssenter"
 
-#: kmymoney/views/newtransactioneditor.cpp:234
+#: kmymoney/views/newtransactioneditor.cpp:236
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "The transaction is missing a category assignment."
+msgstr ""
+
+#: kmymoney/views/newtransactioneditor.cpp:238
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:605
+#: kmymoney/views/newtransactioneditor.cpp:611
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
@@ -20813,13 +20819,13 @@ msgctxt "@label Reconciliation progress dialog"
 msgid "Reconciling transactions..."
 msgstr ""
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:436
+#: kmymoney/views/reconciliationledgerviewpage.cpp:442
 #, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Kontoutdrag: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:438
+#: kmymoney/views/reconciliationledgerviewpage.cpp:444
 #, kde-format
 msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
