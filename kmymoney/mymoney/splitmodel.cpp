@@ -57,6 +57,10 @@ struct SplitModel::Private
             const auto split = right.itemByIndex(idx);
             q->appendSplit(split);
         }
+        transactionCommodity = right.d->transactionCommodity;
+        currentSplitCount = right.d->currentSplitCount;
+        showCurrencies = right.d->showCurrencies;
+
         blocker.unblock();
         // send out a combined dataChanged signal
         QModelIndex start(q->index(0, 0));
@@ -117,7 +121,7 @@ struct SplitModel::Private
         return QString();
     }
 
-    int currencyPrecision(const MyMoneySplit& split) const
+    int splitCurrencyPrecision(const MyMoneySplit& split) const
     {
         const auto file = MyMoneyFile::instance();
         const auto account = file->accountsModel()->itemById(split.accountId());
@@ -147,6 +151,26 @@ struct SplitModel::Private
             }
         }
         return currencySymbol;
+    }
+
+    QString transactionCurrencySymbol() const
+    {
+        QString currencySymbol;
+        if (showCurrencies) {
+            const auto securityIdx = MyMoneyFile::instance()->currenciesModel()->indexById(transactionCommodity);
+            currencySymbol = securityIdx.data(eMyMoney::Model::SecuritySymbolRole).toString();
+        }
+        return currencySymbol;
+    }
+
+    int transactionCurrencyPrecision() const
+    {
+        try {
+            const auto currency = MyMoneyFile::instance()->currency(transactionCommodity);
+            return MyMoneyMoney::denomToPrec(currency.smallestAccountFraction());
+        } catch (MyMoneyException&) {
+        }
+        return 2; // the default precision is 2 digits
     }
 
     QString tags(const QStringList& tagIdList) const
@@ -186,9 +210,9 @@ struct SplitModel::Private
         return {};
     }
 
-    QString displayAmount(const MyMoneySplit& split, int column) const
+    QString displayValueAmount(const MyMoneySplit& split, int column) const
     {
-        const auto value = split.shares();
+        const auto value = split.value();
         switch (column) {
         case Column::Payment:
             if (!split.id().isEmpty()) {
@@ -196,7 +220,7 @@ struct SplitModel::Private
                     return displayAutoCalc(split, column);
                 }
                 if (value.isPositive()) {
-                    return value.formatMoney(splitCurrencySymbol(split), currencyPrecision(split));
+                    return value.formatMoney(transactionCurrencySymbol(), transactionCurrencyPrecision());
                 }
             }
             break;
@@ -207,7 +231,39 @@ struct SplitModel::Private
                     return displayAutoCalc(split, column);
                 }
                 if (value.isNegative() || value.isZero()) {
-                    return (-value).formatMoney(splitCurrencySymbol(split), currencyPrecision(split));
+                    return (-value).formatMoney(transactionCurrencySymbol(), transactionCurrencyPrecision());
+                }
+            }
+            break;
+
+        default:
+            break;
+        }
+        return {};
+    }
+
+    QString displaySharesAmount(const MyMoneySplit& split, int column) const
+    {
+        const auto value = split.shares();
+        switch (column) {
+        case Column::Payment:
+            if (!split.id().isEmpty()) {
+                if (value.isAutoCalc()) {
+                    return displayAutoCalc(split, column);
+                }
+                if (value.isPositive()) {
+                    return value.formatMoney(splitCurrencySymbol(split), splitCurrencyPrecision(split));
+                }
+            }
+            break;
+
+        case Column::Deposit:
+            if (!split.id().isEmpty()) {
+                if (value.isAutoCalc()) {
+                    return displayAutoCalc(split, column);
+                }
+                if (value.isNegative() || value.isZero()) {
+                    return (-value).formatMoney(splitCurrencySymbol(split), splitCurrencyPrecision(split));
                 }
             }
             break;
@@ -339,13 +395,23 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
 
         case Column::Payment:
         case Column::Deposit:
-            return d->displayAmount(split, idx.column());
+            return d->displayValueAmount(split, idx.column());
 
         case Tags:
             return d->tags(split.tagIdList());
 
         default:
             break;
+        }
+        break;
+
+    case Qt::ToolTipRole:
+        switch (idx.column()) {
+        case Column::Payment:
+        case Column::Deposit:
+            if (d->showCurrencies) {
+                return d->displaySharesAmount(split, idx.column());
+            }
         }
         break;
 
