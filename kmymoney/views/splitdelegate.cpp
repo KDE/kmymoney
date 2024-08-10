@@ -19,13 +19,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "splitview.h"
 #include "accountsmodel.h"
-#include "splitmodel.h"
-#include "newspliteditor.h"
 #include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
 #include "mymoneyfile.h"
+#include "mymoneysecurity.h"
+#include "newspliteditor.h"
+#include "splitmodel.h"
+#include "splitview.h"
+#include "transactioneditorbase.h"
 
 QColor SplitDelegate::m_erroneousColor = QColor(Qt::red);
 QColor SplitDelegate::m_importedColor = QColor(Qt::yellow);
@@ -46,6 +47,7 @@ public:
     bool m_readOnly;
     MyMoneySecurity m_commodity;
     QString m_transactionPayeeId;
+    TransactionEditorBase* m_baseEditor;
 };
 
 
@@ -53,6 +55,16 @@ SplitDelegate::SplitDelegate(QObject* parent)
     : QStyledItemDelegate(parent)
     , d(new Private)
 {
+    // find the calling transaction editor so that we can use
+    // the currency conversion functionality
+    QWidget* w = qobject_cast<QWidget*>(parent);
+    if (w) { // w points to the split view if not null
+        w = w->parentWidget(); // w points to the split dialog if not null
+        if (w) {
+            w = w->parentWidget(); // w points to the transaction editor
+        }
+    }
+    d->m_baseEditor = qobject_cast<TransactionEditorBase*>(w);
 }
 
 SplitDelegate::~SplitDelegate()
@@ -110,6 +122,7 @@ QWidget* SplitDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem
 
             // propagate read-only mode
             d->m_editor->setReadOnly(d->m_readOnly);
+            d->m_editor->setBaseTransactionEditor(d->m_baseEditor);
         }
 
     } else {

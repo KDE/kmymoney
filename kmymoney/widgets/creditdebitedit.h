@@ -87,6 +87,11 @@ public:
 
     int precision(MultiCurrencyEdit::DisplayState state) const override;
 
+    /**
+     * @copydoc MultiCurrencyEdit::lastChangedByUser
+     */
+    LastValueChanged lastChangedByUser() const override;
+
 public Q_SLOTS:
     /**
      * Show the symbol next to the edit field in case

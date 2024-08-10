@@ -14,6 +14,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "amountedit.h"
 #include "mymoneyenums.h"
 #include "mymoneysplit.h"
 
@@ -26,10 +27,13 @@ class QComboBox;
 class KTagContainer;
 class SplitModel;
 class WidgetHintFrameCollection;
+class KCurrencyConverter;
+class NewSplitEditor;
 
 class TransactionEditorBase : public QWidget
 {
     Q_OBJECT
+    friend NewSplitEditor;
 
 public:
     explicit TransactionEditorBase(QWidget* parent = 0, const QString& accountId = QString());
@@ -43,6 +47,7 @@ public:
     virtual void loadTransaction(const QModelIndex& index) = 0;
     virtual QStringList saveTransaction(const QStringList& selectedJournalEntries) = 0;
     virtual void setAmountPlaceHolderText(const QAbstractItemModel* model);
+    virtual QDate postDate() const = 0;
 
     /**
      * Inform the editor about the selected journal entries so that
@@ -143,6 +148,10 @@ protected:
      * @note This starts the creation editor and returns immediately
      */
     void createTag(KTagContainer* tagContainer);
+
+    KCurrencyConverter* currencyConverter() const;
+
+    void updateConversionRate(MultiCurrencyEdit* amountEdit) const;
 
 protected Q_SLOTS:
     virtual void reject();

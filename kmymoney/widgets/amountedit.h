@@ -65,6 +65,11 @@ public:
 
     bool isValid() const;
 
+    /**
+     * @copydoc MultiCurrencyEdit::lastChangedByUser
+     */
+    LastValueChanged lastChangedByUser() const override;
+
     QWidget* widget() override;
 
     DisplayState displayState() const override;

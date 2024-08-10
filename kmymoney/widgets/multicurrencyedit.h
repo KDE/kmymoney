@@ -30,6 +30,12 @@ public:
         DisplayShares,
     } DisplayState;
 
+    typedef enum {
+        NothingChanged,
+        ValueChanged,
+        SharesChanged,
+    } LastValueChanged;
+
     virtual ~MultiCurrencyEdit() = default;
 
     /**
@@ -127,6 +133,15 @@ public:
      * @retval true sharesCommodity and valueCommodity differ
      */
     virtual bool hasMultipleCurrencies() const = 0;
+
+    /**
+     * Returns the value the user changed last
+     *
+     * @retval NothingChanged no changes by user
+     * @retval ValueChanged transaction commodity amount was changed last
+     * @retval SharesChanged account commodity amount was changed last
+     */
+    virtual LastValueChanged lastChangedByUser() const = 0;
 };
 
 #endif // MULTICURRENCYEDIT_H

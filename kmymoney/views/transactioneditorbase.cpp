@@ -28,9 +28,12 @@
 #include "accountcreator.h"
 #include "accountsmodel.h"
 #include "creditdebitedit.h"
+#include "kcurrencyconverter.h"
 #include "kmymoneyaccountcombo.h"
 #include "kmymoneyutils.h"
 #include "mymoneyfile.h"
+#include "mymoneyprice.h"
+#include "mymoneysecurity.h"
 #include "payeecreator.h"
 #include "tagcreator.h"
 #include "widgethintframe.h"
@@ -52,6 +55,8 @@ public:
     WidgetHintFrame* focusFrame;
     bool readOnly;
     bool accepted;
+
+    KCurrencyConverter currencyConverter;
 };
 
 TransactionEditorBase::TransactionEditorBase(QWidget* parent, const QString& accountId)
@@ -300,5 +305,26 @@ void TransactionEditorBase::processReturnKey()
             QMetaObject::invokeMethod(d->enterButton, "setFocus", Qt::QueuedConnection);
             QMetaObject::invokeMethod(d->enterButton, "click", Qt::QueuedConnection);
         }
+    }
+}
+
+KCurrencyConverter* TransactionEditorBase::currencyConverter() const
+{
+    return &d->currencyConverter;
+}
+
+void TransactionEditorBase::updateConversionRate(MultiCurrencyEdit* amountEdit) const
+{
+    const auto rate = d->currencyConverter.updateRate(amountEdit, postDate());
+    const auto state = amountEdit->displayState();
+    switch (state) {
+    case MultiCurrencyEdit::DisplayShares:
+        amountEdit->setValue(amountEdit->shares() * rate);
+        amountEdit->setShares(amountEdit->shares());
+        break;
+    case MultiCurrencyEdit::DisplayValue:
+        amountEdit->setValue(amountEdit->value());
+        amountEdit->setShares(amountEdit->value() / rate);
+        break;
     }
 }

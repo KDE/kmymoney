@@ -33,7 +33,6 @@
 #include "icons.h"
 #include "idfilter.h"
 #include "journalmodel.h"
-#include "kcurrencycalculator.h"
 #include "kmymoneysettings.h"
 #include "knewaccountdlg.h"
 #include "mymoneyaccount.h"

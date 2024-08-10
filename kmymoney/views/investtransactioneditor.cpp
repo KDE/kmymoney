@@ -30,7 +30,7 @@
 #include "icons.h"
 #include "investactivities.h"
 #include "journalmodel.h"
-#include "kcurrencycalculator.h"
+#include "kcurrencyconverter.h"
 #include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
 #include "mymoneyaccount.h"
@@ -334,11 +334,9 @@ bool InvestTransactionEditor::Private::categoryChanged(SplitModel* model, const 
                 amountEdit->setDisplayState(MultiCurrencyEdit::DisplayValue);
                 amountEdit->setSharesCommodity(currency);
                 auto sharesAmount = amountEdit->value();
+                amountEdit->setShares(sharesAmount);
                 if (!sharesAmount.isZero()) {
-                    amountEdit->setShares(sharesAmount);
-                    if (!bypassUserPriceUpdate) {
-                        KCurrencyCalculator::updateConversion(amountEdit, ui->dateEdit->date());
-                    }
+                    q->updateConversionRate(amountEdit);
                 }
             }
 
@@ -377,7 +375,7 @@ void InvestTransactionEditor::Private::setSecurity(const MyMoneySecurity& sec)
     if (sec.tradingCurrency() != security.tradingCurrency()) {
         transactionCurrency = MyMoneyFile::instance()->currency(sec.tradingCurrency());
         ui->totalAmountEdit->setValueCommodity(transactionCurrency);
-        ui->priceAmountEdit->setValueCommodity(transactionCurrency);
+        ui->priceAmountEdit->setCommodity(transactionCurrency);
         transaction.setCommodity(sec.tradingCurrency());
         feeSplitModel->setTransactionCommodity(sec.tradingCurrency());
         interestSplitModel->setTransactionCommodity(sec.tradingCurrency());
@@ -430,7 +428,7 @@ bool InvestTransactionEditor::Private::amountChanged(SplitModel* model, AmountEd
                 if (!bypassUserPriceUpdate) {
                     if ((index.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>() != -amountEdit->shares())
                         || (index.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>() != -amountEdit->value())) {
-                        KCurrencyCalculator::updateConversion(amountEdit, ui->dateEdit->date());
+                        q->updateConversionRate(amountEdit);
                     }
                 }
 
@@ -993,11 +991,8 @@ void InvestTransactionEditor::updateTotalAmount()
             if ((oldValue.abs() != d->ui->totalAmountEdit->value().abs()) || (oldShares.abs() != d->ui->totalAmountEdit->shares().abs())) {
                 // force display to the transaction commodity so that the values are correct
                 d->ui->totalAmountEdit->setDisplayState(AmountEdit::DisplayValue);
-                KCurrencyCalculator::updateConversion(d->ui->totalAmountEdit, d->ui->dateEdit->date());
-                const auto rate = d->ui->totalAmountEdit->value() / d->ui->totalAmountEdit->shares();
-                d->assetPrice =
-                    MyMoneyPrice(d->transactionCurrency.id(), d->assetAccount.currencyId(), d->transaction.postDate(), rate, QLatin1String("KMyMoney"));
-                d->assetSplit.setShares(d->ui->totalAmountEdit->shares());
+                updateConversionRate(d->ui->totalAmountEdit);
+
                 // since the total amount is kept as a positive number, we may
                 // need to adjust the sign of the shares. The value nevertheless
                 // has the correct sign. So if the sign does not match, we
@@ -1042,6 +1037,7 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
         d->assetSecurity = MyMoneySecurity();
         d->ui->activityCombo->setCurrentIndex(0);
         d->ui->securityAccountCombo->setCurrentIndex(-1);
+        d->ui->priceAmountEdit->setCommodity(MyMoneySecurity());
         const auto lastUsedPostDate = KMyMoneySettings::lastUsedPostDate();
         if (lastUsedPostDate.isValid()) {
             d->ui->dateEdit->setDate(lastUsedPostDate.date());
@@ -1417,4 +1413,9 @@ void InvestTransactionEditor::slotSettingsChanged()
 bool InvestTransactionEditor::isTransactionDataValid() const
 {
     return d->checkForValidTransaction(false);
+}
+
+QDate InvestTransactionEditor::postDate() const
+{
+    return d->ui->dateEdit->date();
 }

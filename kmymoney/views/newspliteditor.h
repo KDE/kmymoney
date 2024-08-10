@@ -23,7 +23,7 @@ class QWidget;
 
 #include "mymoneymoney.h"
 #include "tabordereditor.h"
-
+class TransactionEditorBase;
 class MyMoneySecurity;
 
 class NewSplitEditor : public QWidget, TabOrderEditorInterface
@@ -89,6 +89,8 @@ public:
     void setTagIdList(const QList<QString>& tagIds);
 
     void setProtectClosedAccount(bool protect);
+
+    void setBaseTransactionEditor(TransactionEditorBase* editor);
 
 protected:
     void keyPressEvent(QKeyEvent* event) final override;

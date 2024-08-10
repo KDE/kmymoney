@@ -47,6 +47,8 @@ public:
     void setupUi(QWidget* parent) override;
     void storeTabOrder(const QStringList& tabOrder) override;
 
+    QDate postDate() const override;
+
 protected:
     bool isTransactionDataValid() const override;
 

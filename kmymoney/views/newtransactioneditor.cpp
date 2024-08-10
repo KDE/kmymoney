@@ -32,7 +32,7 @@
 #include "icons.h"
 #include "idfilter.h"
 #include "journalmodel.h"
-#include "kcurrencycalculator.h"
+#include "kcurrencyconverter.h"
 #include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
 #include "knewaccountdlg.h"
@@ -127,6 +127,7 @@ public:
     MyMoneySplit prepareSplit(const MyMoneySplit& sp);
     bool needClearSplitAction(const QString& action) const;
     void adjustTagIdList();
+    // void updateConversionRate(MultiCurrencyEdit* amountEdit);
 
     NewTransactionEditor* q;
     Ui_NewTransactionEditor* ui;
@@ -420,15 +421,15 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
 
                 // in case the commodity changes, we need to update the shares part
                 if (currency.id() != ui->creditDebitEdit->sharesCommodity().id()) {
-                    ui->creditDebitEdit->setSharesCommodity(currency);
-                    auto sharesAmount = ui->creditDebitEdit->value();
-                    ui->creditDebitEdit->setShares(sharesAmount);
                     // switch to value display so that we show the transaction commodity
                     // for single currency data entry this does not have an effect
                     ui->creditDebitEdit->setDisplayState(MultiCurrencyEdit::DisplayValue);
+                    ui->creditDebitEdit->setSharesCommodity(currency);
+                    auto sharesAmount = ui->creditDebitEdit->value();
+                    ui->creditDebitEdit->setShares(sharesAmount);
 
                     if (!sharesAmount.isZero()) {
-                        KCurrencyCalculator::updateConversion(ui->creditDebitEdit, ui->dateEdit->date());
+                        q->updateConversionRate(ui->creditDebitEdit);
                     }
                 }
 
@@ -486,7 +487,7 @@ bool NewTransactionEditor::Private::amountChanged()
                     // and get an updated price in that case
                     if ((index.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>() != ui->creditDebitEdit->shares())
                         || (index.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>() != ui->creditDebitEdit->value())) {
-                        KCurrencyCalculator::updateConversion(ui->creditDebitEdit, ui->dateEdit->date());
+                        q->updateConversionRate(ui->creditDebitEdit);
                     }
 
                     splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-ui->creditDebitEdit->shares()), eMyMoney::Model::SplitSharesRole);
