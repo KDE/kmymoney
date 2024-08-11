@@ -50,6 +50,7 @@
 #include "splitview.h"
 #include "tagcreator.h"
 #include "tagsmodel.h"
+#include "transactioneditorbase.h"
 #include "widgethintframe.h"
 
 #include "ui_newspliteditor.h"
@@ -68,6 +69,7 @@ struct NewSplitEditor::Private
         , payeesModel(new QSortFilterProxyModel(parent))
         , costCenterModel(new QSortFilterProxyModel(parent))
         , splitModel(nullptr)
+        , baseEditor(nullptr)
         , accepted(false)
         , costCenterRequired(false)
         , showValuesInverted(false)
@@ -113,6 +115,7 @@ struct NewSplitEditor::Private
     QSortFilterProxyModel* payeesModel;
     QSortFilterProxyModel* costCenterModel;
     SplitModel* splitModel;
+    TransactionEditorBase* baseEditor;
     bool accepted;
     bool costCenterRequired;
     bool showValuesInverted;
@@ -207,7 +210,11 @@ bool NewSplitEditor::Private::categoryChanged(const QString& accountId)
                 ui->creditDebitEdit->setDisplayState(MultiCurrencyEdit::DisplayValue);
 
                 if (!sharesAmount.isZero()) {
-                    KCurrencyCalculator::updateConversion(ui->creditDebitEdit, postDate);
+                    if (baseEditor) {
+                        baseEditor->updateConversionRate(ui->creditDebitEdit);
+                    } else {
+                        KCurrencyCalculator::updateConversion(ui->creditDebitEdit, postDate);
+                    }
                 }
             }
 
@@ -745,4 +752,9 @@ void NewSplitEditor::setProtectClosedAccount(bool protect)
         d->ui->accountCombo->setToolTip(QString());
         d->ui->creditDebitEdit->setToolTip(QString());
     }
+}
+
+void NewSplitEditor::setBaseTransactionEditor(TransactionEditorBase* editor)
+{
+    d->baseEditor = editor;
 }

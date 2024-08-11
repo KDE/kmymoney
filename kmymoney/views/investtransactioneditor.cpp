@@ -30,7 +30,7 @@
 #include "icons.h"
 #include "investactivities.h"
 #include "journalmodel.h"
-#include "kcurrencycalculator.h"
+#include "kcurrencyconverter.h"
 #include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
 #include "mymoneyaccount.h"
@@ -334,9 +334,9 @@ bool InvestTransactionEditor::Private::categoryChanged(SplitModel* model, const 
                 amountEdit->setDisplayState(MultiCurrencyEdit::DisplayValue);
                 amountEdit->setSharesCommodity(currency);
                 auto sharesAmount = amountEdit->value();
+                amountEdit->setShares(sharesAmount);
                 if (!sharesAmount.isZero()) {
-                    amountEdit->setShares(sharesAmount);
-                    KCurrencyCalculator::updateConversion(amountEdit, ui->dateEdit->date());
+                    q->updateConversionRate(amountEdit);
                 }
             }
 
@@ -375,7 +375,7 @@ void InvestTransactionEditor::Private::setSecurity(const MyMoneySecurity& sec)
     if (sec.tradingCurrency() != security.tradingCurrency()) {
         transactionCurrency = MyMoneyFile::instance()->currency(sec.tradingCurrency());
         ui->totalAmountEdit->setValueCommodity(transactionCurrency);
-        ui->priceAmountEdit->setValueCommodity(transactionCurrency);
+        ui->priceAmountEdit->setCommodity(transactionCurrency);
         transaction.setCommodity(sec.tradingCurrency());
         feeSplitModel->setTransactionCommodity(sec.tradingCurrency());
         interestSplitModel->setTransactionCommodity(sec.tradingCurrency());
@@ -425,9 +425,11 @@ bool InvestTransactionEditor::Private::amountChanged(SplitModel* model, AmountEd
 
                 // check if there is a change in the values other than simply reverting the sign
                 // and get an updated price in that case
-                if ((index.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>() != -amountEdit->shares())
-                    || (index.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>() != -amountEdit->value())) {
-                    KCurrencyCalculator::updateConversion(amountEdit, ui->dateEdit->date());
+                if (!bypassUserPriceUpdate) {
+                    if ((index.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>() != -amountEdit->shares())
+                        || (index.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>() != -amountEdit->value())) {
+                        q->updateConversionRate(amountEdit);
+                    }
                 }
 
                 model->setData(index, QVariant::fromValue<MyMoneyMoney>((amountEdit->value() * transactionFactor)), eMyMoney::Model::SplitValueRole);
@@ -467,6 +469,30 @@ void InvestTransactionEditor::Private::editSplits(SplitModel* sourceSplitModel, 
         // remove that empty split again before we update the splits
         splitModel.removeEmptySplit();
 
+        // skip price update by user while returning back
+        // from the split dialog
+        bypassUserPriceUpdate = true;
+
+        // in case the new model has only one split, we need to update
+        // the amount widget with the values in the splitModel so that
+        // they are available during further processing (copying calls
+        // InvestTransactionEditor::Private::categoryChanged through
+        // signals which needs it)
+        if (splitModel.rowCount() == 1) {
+            const auto idx = splitModel.index(0, 0);
+            amountEdit->setValue(idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>());
+            amountEdit->setShares(idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>());
+            // make sure that the commodity of the shares is changed to the current selected account
+            const auto accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
+            const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
+            const auto currencyId = accountIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString();
+            const auto currency = MyMoneyFile::instance()->currenciesModel()->itemById(currencyId);
+            // switch to value display so that we show the transaction commodity
+            // for single currency data entry this does not have an effect
+            amountEdit->setDisplayState(MultiCurrencyEdit::DisplayValue);
+            amountEdit->setSharesCommodity(currency);
+        }
+
         // copy the splits model contents
         *sourceSplitModel = splitModel;
 
@@ -480,13 +506,15 @@ void InvestTransactionEditor::Private::editSplits(SplitModel* sourceSplitModel, 
         if (sourceSplitModel->rowCount() == 1) {
             const auto idx = sourceSplitModel->index(0, 0);
             amountShares = idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
-
             adjustSharesCommodity(amountEdit, idx.data(eMyMoney::Model::SplitAccountIdRole).toString());
 
             // make sure to show the value in the widget
             // according to the currency presented
         }
         amountEdit->setShares(amountShares * transactionFactor);
+
+        // reactivate the price update for the use
+        bypassUserPriceUpdate = false;
 
         updateWidgetState();
     }
@@ -963,11 +991,8 @@ void InvestTransactionEditor::updateTotalAmount()
             if ((oldValue.abs() != d->ui->totalAmountEdit->value().abs()) || (oldShares.abs() != d->ui->totalAmountEdit->shares().abs())) {
                 // force display to the transaction commodity so that the values are correct
                 d->ui->totalAmountEdit->setDisplayState(AmountEdit::DisplayValue);
-                KCurrencyCalculator::updateConversion(d->ui->totalAmountEdit, d->ui->dateEdit->date());
-                const auto rate = d->ui->totalAmountEdit->value() / d->ui->totalAmountEdit->shares();
-                d->assetPrice =
-                    MyMoneyPrice(d->transactionCurrency.id(), d->assetAccount.currencyId(), d->transaction.postDate(), rate, QLatin1String("KMyMoney"));
-                d->assetSplit.setShares(d->ui->totalAmountEdit->shares());
+                updateConversionRate(d->ui->totalAmountEdit);
+
                 // since the total amount is kept as a positive number, we may
                 // need to adjust the sign of the shares. The value nevertheless
                 // has the correct sign. So if the sign does not match, we
@@ -1012,6 +1037,7 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
         d->assetSecurity = MyMoneySecurity();
         d->ui->activityCombo->setCurrentIndex(0);
         d->ui->securityAccountCombo->setCurrentIndex(-1);
+        d->ui->priceAmountEdit->setCommodity(MyMoneySecurity());
         const auto lastUsedPostDate = KMyMoneySettings::lastUsedPostDate();
         if (lastUsedPostDate.isValid()) {
             d->ui->dateEdit->setDate(lastUsedPostDate.date());
@@ -1387,4 +1413,9 @@ void InvestTransactionEditor::slotSettingsChanged()
 bool InvestTransactionEditor::isTransactionDataValid() const
 {
     return d->checkForValidTransaction(false);
+}
+
+QDate InvestTransactionEditor::postDate() const
+{
+    return d->ui->dateEdit->date();
 }

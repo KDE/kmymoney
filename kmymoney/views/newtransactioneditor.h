@@ -56,7 +56,7 @@ public:
     void setShowButtons(bool show) const;
     void setAccountId(const QString& accountId);
 
-    QDate postDate() const;
+    QDate postDate() const override;
 
     /// overridden for internal reasons
     void setReadOnly(bool readOnly) override;

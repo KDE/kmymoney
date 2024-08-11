@@ -80,6 +80,7 @@ public:
         , m_actionIcons(NoItem)
         , m_initialExchangeRate(MyMoneyMoney::ONE)
         , m_state(AmountEdit::DisplayValue)
+        , m_lastChanged(AmountEdit::NothingChanged)
         , sharesSet(false)
         , valueSet(false)
         , m_isCashAmount(false)
@@ -350,9 +351,10 @@ public:
     MyMoneySecurity m_valueCommodity;
 
     /**
-     * Which part is displayed
+     * Which part is displayed and which one was last modified
      */
     AmountEdit::DisplayState m_state;
+    AmountEdit::LastValueChanged m_lastChanged;
 
     bool sharesSet;
     bool valueSet;
@@ -466,6 +468,7 @@ void AmountEdit::focusOutEvent(QFocusEvent* event)
     if ((d->m_value != value()) || (d->m_shares != shares())) {
         d->m_value = value();
         d->m_shares = shares();
+        d->valueSet = true;
         Q_EMIT amountChanged();
     }
 }
@@ -680,12 +683,14 @@ void AmountEdit::theTextChanged(const QString & theText)
                     d->adjustToPrecision(AmountEdit::DisplayValue, amount);
                     amount /= d->m_initialExchangeRate;
                     d->m_sharesText = amount.formatMoney(QString(), d->precision(AmountEdit::DisplayShares), false);
+                    d->m_lastChanged = ValueChanged;
                 } else {
                     d->m_sharesText = l_text;
                     MyMoneyMoney amount(l_text);
                     d->adjustToPrecision(AmountEdit::DisplayShares, amount);
                     amount *= d->m_initialExchangeRate;
                     d->m_valueText = amount.formatMoney(QString(), d->precision(AmountEdit::DisplayValue), false);
+                    d->m_lastChanged = SharesChanged;
                 }
             }
             Q_EMIT validatedTextChanged(text());
@@ -885,4 +890,10 @@ void AmountEdit::setPrecisionOverridesFraction(bool override)
 {
     Q_D(AmountEdit);
     d->m_precisionOverridesFraction = override;
+}
+
+AmountEdit::LastValueChanged AmountEdit::lastChangedByUser() const
+{
+    Q_D(const AmountEdit);
+    return d->m_lastChanged;
 }

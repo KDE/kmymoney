@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-30 01:52+0000\n"
+"POT-Creation-Date: 2024-08-11 01:50+0000\n"
 "PO-Revision-Date: 2024-05-09 17:33+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -975,7 +975,7 @@ msgstr "輸入這些新數值，但對這次的交易。"
 msgid "Set all further occurrences &in this schedule to be these values."
 msgstr "設定此排程將來所有的事件都使用這些數值。"
 
-#: kmymoney/dialogs/kcurrencycalculator.cpp:430
+#: kmymoney/dialogs/kcurrencycalculator.cpp:433
 #: kmymoney/mymoney/mymoneyfile.cpp:3019
 #, kde-format
 msgctxt "@info price source"
@@ -4082,7 +4082,7 @@ msgstr "輸入對帳資料後，會自動偵測符合該資料的交易紀錄（
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoReconciliation)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:267
-#: kmymoney/views/reconciliationledgerviewpage.cpp:126
+#: kmymoney/views/reconciliationledgerviewpage.cpp:127
 #, kde-format
 msgid "Automatic reconciliation"
 msgstr "自動對帳"
@@ -8195,20 +8195,20 @@ msgctxt "Split header"
 msgid "Deposit"
 msgstr "存款"
 
-#: kmymoney/mymoney/splitmodel.cpp:96
+#: kmymoney/mymoney/splitmodel.cpp:100
 #, kde-format
 msgid "Split transaction"
 msgstr "分割交易"
 
-#: kmymoney/mymoney/splitmodel.cpp:114
+#: kmymoney/mymoney/splitmodel.cpp:118
 #: kmymoney/mymoney/storage/journalmodel.cpp:192
 #: kmymoney/plugins/views/reports/core/querytable.cpp:997
 #, kde-format
 msgid "*** UNASSIGNED ***"
 msgstr "*** 未指定 ***"
 
-#: kmymoney/mymoney/splitmodel.cpp:175 kmymoney/mymoney/splitmodel.cpp:180
-#: kmymoney/widgets/amountedit.cpp:265 kmymoney/widgets/amountedit.cpp:316
+#: kmymoney/mymoney/splitmodel.cpp:199 kmymoney/mymoney/splitmodel.cpp:204
+#: kmymoney/widgets/amountedit.cpp:266 kmymoney/widgets/amountedit.cpp:317
 #: kmymoney/widgets/creditdebitedit.cpp:126
 #: kmymoney/widgets/creditdebitedit.cpp:127
 #: kmymoney/widgets/creditdebitedit.cpp:156
@@ -18863,16 +18863,16 @@ msgid "Interest Income"
 msgstr "利息收入"
 
 #: kmymoney/views/investtransactioneditor.cpp:262
-#: kmymoney/views/multitransactioneditor.cpp:185
-#: kmymoney/views/newtransactioneditor.cpp:289
+#: kmymoney/views/multitransactioneditor.cpp:184
+#: kmymoney/views/newtransactioneditor.cpp:296
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
 msgid "The posting date of the transaction."
 msgstr "匯入無交易的報表"
 
 #: kmymoney/views/investtransactioneditor.cpp:286
-#: kmymoney/views/multitransactioneditor.cpp:215
-#: kmymoney/views/newtransactioneditor.cpp:309
+#: kmymoney/views/multitransactioneditor.cpp:214
+#: kmymoney/views/newtransactioneditor.cpp:316
 #, fuzzy, kde-format
 #| msgid ""
 #| "  * The account '%1' in currency '%2' has no price set for the opening "
@@ -18888,63 +18888,63 @@ msgid ""
 "price information invalid. Please check them."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:544
+#: kmymoney/views/investtransactioneditor.cpp:572
 #, fuzzy, kde-format
 #| msgid "Default Category for Payee"
 msgctxt "@info:tooltip"
 msgid "Category for fees"
 msgstr "預設收款人類別"
 
-#: kmymoney/views/investtransactioneditor.cpp:545
+#: kmymoney/views/investtransactioneditor.cpp:573
 #, fuzzy, kde-format
 #| msgid "Amount is:"
 msgctxt "@info:tooltip"
 msgid "Amount of fees"
 msgstr "金額為："
 
-#: kmymoney/views/investtransactioneditor.cpp:546
+#: kmymoney/views/investtransactioneditor.cpp:574
 #, fuzzy, kde-format
 #| msgid "Category options"
 msgctxt "@info:tooltip"
 msgid "Category for interest"
 msgstr "類別選項"
 
-#: kmymoney/views/investtransactioneditor.cpp:547
+#: kmymoney/views/investtransactioneditor.cpp:575
 #, fuzzy, kde-format
 #| msgid "Amount entered"
 msgctxt "@info:tooltip"
 msgid "Amount of interest"
 msgstr "輸入的金額"
 
-#: kmymoney/views/investtransactioneditor.cpp:548
+#: kmymoney/views/investtransactioneditor.cpp:576
 #, fuzzy, kde-format
 #| msgid "Create brokerage account"
 msgctxt "@info:tooltip"
 msgid "Asset or brokerage account"
 msgstr "建立傭金帳戶"
 
-#: kmymoney/views/investtransactioneditor.cpp:549
+#: kmymoney/views/investtransactioneditor.cpp:577
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Price information for this transaction"
 msgstr "用這個來紀錄此交易"
 
-#: kmymoney/views/investtransactioneditor.cpp:552
+#: kmymoney/views/investtransactioneditor.cpp:580
 #, fuzzy, kde-format
 #| msgid "Skip this transaction"
 msgctxt "@info:tooltip"
 msgid "Security for this transaction"
 msgstr "略過此交易"
 
-#: kmymoney/views/investtransactioneditor.cpp:553
+#: kmymoney/views/investtransactioneditor.cpp:581
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
 msgstr "用這個來紀錄此交易"
 
-#: kmymoney/views/investtransactioneditor.cpp:556
+#: kmymoney/views/investtransactioneditor.cpp:584
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -18952,21 +18952,21 @@ msgid ""
 "account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:557
+#: kmymoney/views/investtransactioneditor.cpp:585
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This activity cannot be modified because the security account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:569
+#: kmymoney/views/investtransactioneditor.cpp:597
 #, fuzzy, kde-format
 #| msgid "Number of Days to Forecast:"
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "預測天數："
 
-#: kmymoney/views/investtransactioneditor.cpp:571
+#: kmymoney/views/investtransactioneditor.cpp:599
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -18974,77 +18974,77 @@ msgid ""
 "closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:575
+#: kmymoney/views/investtransactioneditor.cpp:603
 #, fuzzy, kde-format
 #| msgid "Enter next transaction..."
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr "輸入下一筆交易..."
 
-#: kmymoney/views/investtransactioneditor.cpp:581
+#: kmymoney/views/investtransactioneditor.cpp:609
 #, fuzzy, kde-format
 #| msgid "Split transaction"
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "分割交易"
 
-#: kmymoney/views/investtransactioneditor.cpp:583
+#: kmymoney/views/investtransactioneditor.cpp:611
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:587
+#: kmymoney/views/investtransactioneditor.cpp:615
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr "用這個來紀錄此交易"
 
-#: kmymoney/views/investtransactioneditor.cpp:599
+#: kmymoney/views/investtransactioneditor.cpp:627
 #, fuzzy, kde-format
 #| msgid "Enter next transaction..."
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr "輸入下一筆交易..."
 
-#: kmymoney/views/investtransactioneditor.cpp:615
+#: kmymoney/views/investtransactioneditor.cpp:643
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "選擇自動填入交易"
 
-#: kmymoney/views/investtransactioneditor.cpp:622
+#: kmymoney/views/investtransactioneditor.cpp:650
 #, fuzzy, kde-format
 #| msgid "Default Category for Payee"
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr "預設收款人類別"
 
-#: kmymoney/views/investtransactioneditor.cpp:625
+#: kmymoney/views/investtransactioneditor.cpp:653
 #, fuzzy, kde-format
 #| msgid "Enter additional fees"
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "輸入額外費用"
 
-#: kmymoney/views/investtransactioneditor.cpp:631
+#: kmymoney/views/investtransactioneditor.cpp:659
 #, fuzzy, kde-format
 #| msgid "Expense categories"
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr "支出類別"
 
-#: kmymoney/views/investtransactioneditor.cpp:634
+#: kmymoney/views/investtransactioneditor.cpp:662
 #, fuzzy, kde-format
 #| msgid "Type of interest"
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "利息型態"
 
-#: kmymoney/views/investtransactioneditor.cpp:639
+#: kmymoney/views/investtransactioneditor.cpp:667
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
@@ -20785,7 +20785,7 @@ msgid "Investment value: %1%2"
 msgstr "投資價值：%1%2"
 
 #: kmymoney/views/ledgerviewpage_p.h:146
-#: kmymoney/views/reconciliationledgerviewpage.cpp:397
+#: kmymoney/views/reconciliationledgerviewpage.cpp:443
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
@@ -20805,22 +20805,22 @@ msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "餘額：%1"
 
-#: kmymoney/views/multitransactioneditor.cpp:193
-#: kmymoney/views/newtransactioneditor.cpp:292
+#: kmymoney/views/multitransactioneditor.cpp:192
+#: kmymoney/views/newtransactioneditor.cpp:299
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
 msgid "The posting date is invalid."
 msgstr "匯入無交易的報表"
 
-#: kmymoney/views/multitransactioneditor.cpp:226
-#: kmymoney/views/newtransactioneditor.cpp:327
+#: kmymoney/views/multitransactioneditor.cpp:225
+#: kmymoney/views/newtransactioneditor.cpp:334
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgid "The cost center this transaction should be assigned to."
 msgstr "用這個將交易資料輸入分類簿中。"
 
-#: kmymoney/views/multitransactioneditor.cpp:229
-#: kmymoney/views/newtransactioneditor.cpp:336
+#: kmymoney/views/multitransactioneditor.cpp:228
+#: kmymoney/views/newtransactioneditor.cpp:343
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgid ""
@@ -20828,13 +20828,13 @@ msgid ""
 "category."
 msgstr "無法在類別的內文中建立交易。"
 
-#: kmymoney/views/multitransactioneditor.cpp:248
+#: kmymoney/views/multitransactioneditor.cpp:247
 #, fuzzy, kde-format
 #| msgid "Select account"
 msgid "Select category or account."
 msgstr "選擇帳戶"
 
-#: kmymoney/views/multitransactioneditor.cpp:262
+#: kmymoney/views/multitransactioneditor.cpp:261
 #, fuzzy, kde-format
 #| msgid ""
 #| "Cannot enter transaction with postdate prior to account's opening date."
@@ -20844,14 +20844,14 @@ msgid ""
 "selected account (%2)."
 msgstr "輸入的交易日期不能早於帳戶開戶日。"
 
-#: kmymoney/views/multitransactioneditor.cpp:728
+#: kmymoney/views/multitransactioneditor.cpp:727
 #, fuzzy, kde-format
 #| msgid "Cannot edit multiple split transactions at once."
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "不能同時編輯多個分割交易。"
 
-#: kmymoney/views/multitransactioneditor.cpp:737
+#: kmymoney/views/multitransactioneditor.cpp:736
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -20859,7 +20859,7 @@ msgid ""
 "part of the selection."
 msgstr ""
 
-#: kmymoney/views/multitransactioneditor.cpp:741
+#: kmymoney/views/multitransactioneditor.cpp:740
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -20867,7 +20867,7 @@ msgid ""
 "selection."
 msgstr ""
 
-#: kmymoney/views/multitransactioneditor.cpp:745
+#: kmymoney/views/multitransactioneditor.cpp:744
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -20875,14 +20875,14 @@ msgid ""
 "the selection."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:156
+#: kmymoney/views/newspliteditor.cpp:159
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr "用這個將交易資料輸入分類簿中。"
 
-#: kmymoney/views/newspliteditor.cpp:169
+#: kmymoney/views/newspliteditor.cpp:172
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip costcenter combo in split editor"
@@ -20891,35 +20891,35 @@ msgid ""
 "category."
 msgstr "無法在類別的內文中建立交易。"
 
-#: kmymoney/views/newspliteditor.cpp:180
+#: kmymoney/views/newspliteditor.cpp:183
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr "用這個將交易資料輸入分類簿中。"
 
-#: kmymoney/views/newspliteditor.cpp:221
+#: kmymoney/views/newspliteditor.cpp:228
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr "無法在類別的內文中建立交易。"
 
-#: kmymoney/views/newspliteditor.cpp:230
-#: kmymoney/views/newtransactioneditor.cpp:450
+#: kmymoney/views/newspliteditor.cpp:237
+#: kmymoney/views/newtransactioneditor.cpp:458
 #, fuzzy, kde-format
 #| msgid "Enter next transaction..."
 msgid "The check number used for this transaction."
 msgstr "輸入下一筆交易..."
 
-#: kmymoney/views/newspliteditor.cpp:239
-#: kmymoney/views/newtransactioneditor.cpp:460
+#: kmymoney/views/newspliteditor.cpp:246
+#: kmymoney/views/newtransactioneditor.cpp:468
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:741
-#: kmymoney/views/newtransactioneditor.cpp:188
+#: kmymoney/views/newspliteditor.cpp:748
+#: kmymoney/views/newtransactioneditor.cpp:189
 #, kde-format
 msgctxt "@info:tooltip Protected"
 msgid ""
@@ -20946,13 +20946,20 @@ msgstr "付款者/收款者"
 msgid "Costcenter"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:234
+#: kmymoney/views/newtransactioneditor.cpp:237
+#, fuzzy, kde-format
+#| msgid "Transaction is missing a category assignment."
+msgctxt "@info:tooltip"
+msgid "The transaction is missing a category assignment."
+msgstr "交易內沒有指定類別。"
+
+#: kmymoney/views/newtransactioneditor.cpp:239
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:605
+#: kmymoney/views/newtransactioneditor.cpp:613
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@title:window Autofill selection dialog"
@@ -21008,7 +21015,7 @@ msgctxt "Ledger marker showing a reconciliation entry"
 msgid "Reconciliation"
 msgstr "對帳檢視"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:123
+#: kmymoney/views/reconciliationledgerviewpage.cpp:124
 #, kde-format
 msgid ""
 "KMyMoney has detected transactions matching your reconciliation data.\n"
@@ -21017,7 +21024,7 @@ msgstr ""
 "KMyMoney 偵測到有些交易與您對帳資料相符。\n"
 "您要讓 KMyMoney 清除這些交易嗎？"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:255
+#: kmymoney/views/reconciliationledgerviewpage.cpp:256
 #, kde-format
 msgid ""
 "You are about to finish the reconciliation of this account with a difference "
@@ -21027,19 +21034,26 @@ msgstr ""
 "您準備完成此帳戶的對帳，但您的銀行報表與標示為已清算的交易有所不同。\n"
 "您確定要完成對帳嗎？"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:258
+#: kmymoney/views/reconciliationledgerviewpage.cpp:259
 #, kde-format
 msgid "Confirm end of reconciliation"
 msgstr "對帳結束時確認"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:396
+#: kmymoney/views/reconciliationledgerviewpage.cpp:294
+#, fuzzy, kde-format
+#| msgid "Saving transactions..."
+msgctxt "@label Reconciliation progress dialog"
+msgid "Reconciling transactions..."
+msgstr "儲存交易中..."
+
+#: kmymoney/views/reconciliationledgerviewpage.cpp:442
 #, fuzzy, kde-format
 #| msgid "Statement: %1"
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "報表：%1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:398
+#: kmymoney/views/reconciliationledgerviewpage.cpp:444
 #, fuzzy, kde-format
 #| msgid "Difference: %1"
 msgctxt "@label:textbox Difference to statement"
@@ -21318,14 +21332,14 @@ msgstr ""
 msgid "Tab Order Editor"
 msgstr "價格編輯器"
 
-#: kmymoney/widgets/amountedit.cpp:246
+#: kmymoney/widgets/amountedit.cpp:247
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid ""
 "Value are presented in %1. Press this button to switch the currency to %2."
 msgstr ""
 
-#: kmymoney/widgets/amountedit.cpp:253
+#: kmymoney/widgets/amountedit.cpp:254
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid "Values are presented in %1."
@@ -25947,9 +25961,6 @@ msgstr ""
 
 #~ msgid "Your entry:"
 #~ msgstr "您的項目："
-
-#~ msgid "Transaction is missing a category assignment."
-#~ msgstr "交易內沒有指定類別。"
 
 #~ msgid "The transaction has a missing assignment of <b>%1</b>."
 #~ msgstr "交易內沒有指定<b>%1</b>。"

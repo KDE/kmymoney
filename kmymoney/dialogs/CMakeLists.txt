@@ -14,6 +14,7 @@ set(kmm_base_dialogs_SOURCES
   kchooseimportexportdlg.cpp
   kconfirmmanualenterdlg.cpp
   kcurrencycalculator.cpp
+  kcurrencyconverter.cpp
   kcurrencyeditdlg.cpp
   kcurrencyeditordlg.cpp
   kmymoneyfileinfodlg.cpp

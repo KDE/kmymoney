@@ -294,7 +294,7 @@ public:
             new QProgressDialog(i18nc("@label Reconciliation progress dialog", "Reconciling transactions..."), QString(), 0, journalEntryIds.count());
         progressDialog->setModal(true);
         progressDialog->setAutoReset(false);
-        progressDialog->setAutoClose(false);
+        progressDialog->setAutoClose(true);
         progressDialog->setCancelButton(nullptr); // no cancel button available
         progressDialog->hide();
 
@@ -355,6 +355,12 @@ public:
                 reconciledJournalEntryIds.append(journalEntryId);
             }
             ft.commit();
+
+            // make sure the progress dialog is not triggered anymore
+            delete timer;
+            timer = nullptr;
+            delete progressDialog;
+            progressDialog = nullptr;
 
             /// send information to plugins through a QAction. Data is
             /// a) accountId

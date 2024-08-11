@@ -115,6 +115,8 @@ public:
 
         // we don't need the focus frame here
         delete transactionEditor->focusFrame();
+
+        ui->buttonBox->button(QDialogButtonBox::Ok)->setDefault(true);
     }
 
     void updateState()
@@ -729,7 +731,9 @@ void KEditScheduleDlg::keyPressEvent(QKeyEvent* event)
             }
         }
         tabOrderDialog->deleteLater();
+        return;
     }
+    QDialog::keyPressEvent(event);
 }
 
 void KEditScheduleDlg::setupUi(QWidget* parent)
