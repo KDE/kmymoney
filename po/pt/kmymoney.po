@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-11 01:50+0000\n"
+"POT-Creation-Date: 2024-08-12 01:46+0000\n"
 "PO-Revision-Date: 2023-07-13 00:39+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -19478,25 +19478,25 @@ msgstr ""
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "Não foi possível apagar a categoria '%1'. Motivo: %2"
 
-#: kmymoney/views/keditscheduledlg.cpp:128
+#: kmymoney/views/keditscheduledlg.cpp:130
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The name is a required field for a schedule"
 msgstr "O nome é um campo obrigatório na calendarização"
 
-#: kmymoney/views/keditscheduledlg.cpp:131
+#: kmymoney/views/keditscheduledlg.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The account is a required field for a schedule"
 msgstr "A conta é um campo obrigatório numa calendarização"
 
-#: kmymoney/views/keditscheduledlg.cpp:135
+#: kmymoney/views/keditscheduledlg.cpp:137
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr "A categoria é um campo obrigatório numa calendarização"
 
-#: kmymoney/views/keditscheduledlg.cpp:312
+#: kmymoney/views/keditscheduledlg.cpp:314
 #, kde-format
 msgctxt "@info Scheduled frequency changed"
 msgid ""
@@ -19505,31 +19505,31 @@ msgid ""
 "information will only be shown once for this schedule's edit session.</qt>"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:314
+#: kmymoney/views/keditscheduledlg.cpp:316
 #, fuzzy, kde-format
 #| msgid "Schedule found"
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "Calendarização encontrada"
 
-#: kmymoney/views/keditscheduledlg.cpp:607
+#: kmymoney/views/keditscheduledlg.cpp:609
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Não foi possível adicionar a transacção agendada: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:607
+#: kmymoney/views/keditscheduledlg.cpp:609
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Adicionar a transacção agendada"
 
-#: kmymoney/views/keditscheduledlg.cpp:637
-#: kmymoney/views/keditscheduledlg.cpp:680
-#: kmymoney/views/keditscheduledlg.cpp:690
+#: kmymoney/views/keditscheduledlg.cpp:639
+#: kmymoney/views/keditscheduledlg.cpp:682
+#: kmymoney/views/keditscheduledlg.cpp:692
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Não foi possível modificar a transacção agendada '%1'"
 
-#: kmymoney/views/keditscheduledlg.cpp:666
+#: kmymoney/views/keditscheduledlg.cpp:668
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -19544,7 +19544,7 @@ msgstr ""
 "data do último pagamento tenha sido limpa. Deseja limpar a data do último "
 "pagamento?</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:671
+#: kmymoney/views/keditscheduledlg.cpp:673
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Reiniciar a Data do Último Pagamento"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-11 01:50+0000\n"
+"POT-Creation-Date: 2024-08-12 01:46+0000\n"
 "PO-Revision-Date: 2024-08-07 13:19+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -19158,25 +19158,25 @@ msgstr ""
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "“%1” kategorisi silinemiyor. Gerekçe: %2"
 
-#: kmymoney/views/keditscheduledlg.cpp:128
+#: kmymoney/views/keditscheduledlg.cpp:130
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The name is a required field for a schedule"
 msgstr "Ad, plan için zorunlu bir alandır"
 
-#: kmymoney/views/keditscheduledlg.cpp:131
+#: kmymoney/views/keditscheduledlg.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The account is a required field for a schedule"
 msgstr "Hesap, plan için zorunlu bir alandır"
 
-#: kmymoney/views/keditscheduledlg.cpp:135
+#: kmymoney/views/keditscheduledlg.cpp:137
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr "Kategori, plan için zorunlu bir alandır"
 
-#: kmymoney/views/keditscheduledlg.cpp:312
+#: kmymoney/views/keditscheduledlg.cpp:314
 #, kde-format
 msgctxt "@info Scheduled frequency changed"
 msgid ""
@@ -19188,30 +19188,30 @@ msgstr ""
 "bir sonraki bitiş tarihini ayarlamayı unutmayın.<br><i>Not:</i> Bu bilgi, bu "
 "planın düzenlemesi sırasında yalnızca bir kez gösterilecektir.</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:314
+#: kmymoney/views/keditscheduledlg.cpp:316
 #, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "Plan Sıklığı Değişti"
 
-#: kmymoney/views/keditscheduledlg.cpp:607
+#: kmymoney/views/keditscheduledlg.cpp:609
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Planlı işlem eklenemiyor: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:607
+#: kmymoney/views/keditscheduledlg.cpp:609
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Planlı işlem ekle"
 
-#: kmymoney/views/keditscheduledlg.cpp:637
-#: kmymoney/views/keditscheduledlg.cpp:680
-#: kmymoney/views/keditscheduledlg.cpp:690
+#: kmymoney/views/keditscheduledlg.cpp:639
+#: kmymoney/views/keditscheduledlg.cpp:682
+#: kmymoney/views/keditscheduledlg.cpp:692
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "“%1” planlı işlemi değiştirilemiyor"
 
-#: kmymoney/views/keditscheduledlg.cpp:666
+#: kmymoney/views/keditscheduledlg.cpp:668
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -19225,7 +19225,7 @@ msgstr ""
 "kendiliğinden şu tarihe ayarlayacaktır: Son ödeme tarihi sıfırlanmadığı "
 "sürece bir sonraki tarih. Son ödeme tarihini sıfırlamak istiyor musunuz?</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:671
+#: kmymoney/views/keditscheduledlg.cpp:673
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Son Ödeme Tarihini Sıfırla"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-11 01:50+0000\n"
+"POT-Creation-Date: 2024-08-12 01:46+0000\n"
 "PO-Revision-Date: 2024-08-07 09:14+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -19413,25 +19413,25 @@ msgstr ""
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "Не вдалося вилучити категорію «%1». Причина: %2"
 
-#: kmymoney/views/keditscheduledlg.cpp:128
+#: kmymoney/views/keditscheduledlg.cpp:130
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The name is a required field for a schedule"
 msgstr "Для визначення розкладу потрібна назва"
 
-#: kmymoney/views/keditscheduledlg.cpp:131
+#: kmymoney/views/keditscheduledlg.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The account is a required field for a schedule"
 msgstr "Для визначення розкладу потрібен рахунок"
 
-#: kmymoney/views/keditscheduledlg.cpp:135
+#: kmymoney/views/keditscheduledlg.cpp:137
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr "Для визначення розкладу потрібна категорія"
 
-#: kmymoney/views/keditscheduledlg.cpp:312
+#: kmymoney/views/keditscheduledlg.cpp:314
 #, kde-format
 msgctxt "@info Scheduled frequency changed"
 msgid ""
@@ -19444,30 +19444,30 @@ msgstr ""
 "повідомлення буде показано для цього сеансу редагування розкладу лише один "
 "раз.</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:314
+#: kmymoney/views/keditscheduledlg.cpp:316
 #, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "Змінено частоту у розкладі"
 
-#: kmymoney/views/keditscheduledlg.cpp:607
+#: kmymoney/views/keditscheduledlg.cpp:609
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Не вдалося додати заплановану дію: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:607
+#: kmymoney/views/keditscheduledlg.cpp:609
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Додати заплановану операцію"
 
-#: kmymoney/views/keditscheduledlg.cpp:637
-#: kmymoney/views/keditscheduledlg.cpp:680
-#: kmymoney/views/keditscheduledlg.cpp:690
+#: kmymoney/views/keditscheduledlg.cpp:639
+#: kmymoney/views/keditscheduledlg.cpp:682
+#: kmymoney/views/keditscheduledlg.cpp:692
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Не вдалося змінити заплановану операцію «%1»"
 
-#: kmymoney/views/keditscheduledlg.cpp:666
+#: kmymoney/views/keditscheduledlg.cpp:668
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -19481,7 +19481,7 @@ msgstr ""
 "дату запланованої операції на наступну дату, якщо дату останньої сплати не "
 "буде скинуто. Бажаєте скинути значення дати останньої сплати?</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:671
+#: kmymoney/views/keditscheduledlg.cpp:673
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Відновити попередню дату сплати"

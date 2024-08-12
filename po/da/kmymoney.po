@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-11 01:50+0000\n"
+"POT-Creation-Date: 2024-08-12 01:46+0000\n"
 "PO-Revision-Date: 2015-02-19 20:48+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -19979,27 +19979,27 @@ msgstr "Kan ikke slette en underkategori til kategorien <b>%1</b>. Årsag: %2"
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "Kan ikke slette kategorien <b>%1</b>. Årsag: %2"
 
-#: kmymoney/views/keditscheduledlg.cpp:128
+#: kmymoney/views/keditscheduledlg.cpp:130
 #, fuzzy, kde-format
 #| msgid "No name assigned for schedule"
 msgctxt "@info:tooltip"
 msgid "The name is a required field for a schedule"
 msgstr "Intet navn tildelt skemaet"
 
-#: kmymoney/views/keditscheduledlg.cpp:131
+#: kmymoney/views/keditscheduledlg.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The account is a required field for a schedule"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:135
+#: kmymoney/views/keditscheduledlg.cpp:137
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr "Kan ikke oprette transaktioner i en kategoris kontekst."
 
-#: kmymoney/views/keditscheduledlg.cpp:312
+#: kmymoney/views/keditscheduledlg.cpp:314
 #, kde-format
 msgctxt "@info Scheduled frequency changed"
 msgid ""
@@ -20008,31 +20008,31 @@ msgid ""
 "information will only be shown once for this schedule's edit session.</qt>"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:314
+#: kmymoney/views/keditscheduledlg.cpp:316
 #, fuzzy, kde-format
 #| msgid "Schedule found"
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "Skema fundet"
 
-#: kmymoney/views/keditscheduledlg.cpp:607
+#: kmymoney/views/keditscheduledlg.cpp:609
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Kan ikke tilføje skemalagt transaktion: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:607
+#: kmymoney/views/keditscheduledlg.cpp:609
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Tilføj skemalagt transaktion"
 
-#: kmymoney/views/keditscheduledlg.cpp:637
-#: kmymoney/views/keditscheduledlg.cpp:680
-#: kmymoney/views/keditscheduledlg.cpp:690
+#: kmymoney/views/keditscheduledlg.cpp:639
+#: kmymoney/views/keditscheduledlg.cpp:682
+#: kmymoney/views/keditscheduledlg.cpp:692
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Kan ikke ændre skemalagt transaktion \"%1\""
 
-#: kmymoney/views/keditscheduledlg.cpp:666
+#: kmymoney/views/keditscheduledlg.cpp:668
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -20052,7 +20052,7 @@ msgstr ""
 "justere den skemalagte transaktionsdato til den næste dato, medmindre den "
 "seneste betalingsdato nulstilles. Vil du nulstille den seneste betalingsdato?"
 
-#: kmymoney/views/keditscheduledlg.cpp:671
+#: kmymoney/views/keditscheduledlg.cpp:673
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Nulstil seneste betalingsdato"
