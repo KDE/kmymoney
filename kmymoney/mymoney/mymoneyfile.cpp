@@ -77,6 +77,10 @@
 #include "tagsmodel.h"
 /// @note add new models here
 
+#include "onlinetasks/sepa/sepaonlinetransferimpl.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
+#include "payeeidentifier/nationalaccount/nationalaccount.h"
+#include "payeeidentifiertyped.h"
 
 // include the following line to get a 'cout' for debug purposes
 // #include <iostream>
@@ -2603,6 +2607,24 @@ QStringList MyMoneyFile::consistencyCheck()
     QList<MyMoneyPayee> pList = payeeList();
     QMap<QString, QString>payeeConversionMap;
 
+    auto checkPayeeAccountInfo = [&](const MyMoneyPayee& p) {
+        QList<payeeIdentifier> idents = p.payeeIdentifiers();
+        // Store ids which have to be stored in the map table
+        for (auto& ident : idents) {
+            if (ident->payeeIdentifierId() == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid()) {
+                const auto payeeIdentifier = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(ident);
+                const auto bic = payeeIdentifier->fullStoredBic();
+                if (!bic.isEmpty()) {
+                    if (bic.length() != 11) {
+                        rc << i18n("  * Payee %1 has BIC with invalid length '%2'.\n    Must be 11 chars and is %3", p.name(), bic, bic.length());
+                        ++problemCount;
+                        ++unfixedCount;
+                    }
+                }
+            }
+        }
+    };
+
     for (it_p = pList.begin(); it_p != pList.end(); ++it_p) {
         if ((*it_p).id().length() > 7) {
             // found one of those with an invalid ids
@@ -2613,6 +2635,9 @@ QStringList MyMoneyFile::consistencyCheck()
             payeeConversionMap[(*it_p).id()] = payee.id();
             rc << i18n("  * Payee %1 recreated with fixed id", payee.name());
             ++problemCount;
+            checkPayeeAccountInfo(payee);
+        } else {
+            checkPayeeAccountInfo(*it_p);
         }
     }
 
