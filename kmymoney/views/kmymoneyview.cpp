@@ -131,6 +131,7 @@ public:
         for (auto it = sharedActions.cbegin(); it != sharedActions.cend(); ++it) {
             Q_EMIT q->addSharedActionButton(it.key(), it.value());
         }
+        selectSharedActions(currentViewId());
     }
 
     void switchView(eMenu::Action action)
