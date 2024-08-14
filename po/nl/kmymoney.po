@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-13 01:46+0000\n"
-"PO-Revision-Date: 2024-08-07 10:34+0200\n"
+"PO-Revision-Date: 2024-08-13 14:36+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -6576,6 +6576,8 @@ msgid ""
 "  * Payee %1 has BIC with invalid length '%2'.\n"
 "    Must be 11 chars and is %3"
 msgstr ""
+"  * Debiteur %1 heeft BIC met ongeldige lengte '%2'.\n"
+"    Moet 11 tekens zijn en is %3"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2636
 #, kde-format
