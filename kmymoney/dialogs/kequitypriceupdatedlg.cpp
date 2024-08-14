@@ -580,7 +580,12 @@ public:
                                            Qt::EditRole);
                 m_onlinePriceModel.setData(m_onlinePriceModel.index(m_currentRow, OnlinePriceModel::Date), MyMoneyUtils::formatDate(date), Qt::EditRole);
 
-                logStatusMessage(i18nc("@info Online price update %1 online id, %2 internal id", "Price for %1 updated (id %2)", _webID, _kmmID));
+                logStatusMessage(i18nc("@info Online price update %1 online id, %2 internal id, %3 price, %4 date",
+                                       "Price for %1 updated to %3 for %4 (id %2)",
+                                       _webID,
+                                       _kmmID,
+                                       price.formatMoney(toCurrency.tradingSymbol(), precision),
+                                       MyMoneyUtils::formatDate(date)));
             } else {
                 logErrorMessage(i18nc("@info Online price update %1 online id", "Received an invalid price for %1, unable to update.", _webID));
             }
