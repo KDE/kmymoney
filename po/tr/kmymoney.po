@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-13 01:46+0000\n"
+"POT-Creation-Date: 2024-08-15 01:52+0000\n"
 "PO-Revision-Date: 2024-08-13 14:07+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -1741,19 +1741,24 @@ msgstr ""
 msgid "Cannot update security <b>%1</b>: %2"
 msgstr "Menkul kıymet güncellenemedi <b>%1</b>: %2"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:583
-#, kde-format
-msgctxt "@info Online price update %1 online id, %2 internal id"
-msgid "Price for %1 updated (id %2)"
-msgstr "%1 fiyatı güncellendi (kimlik %2)"
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:584
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "Log message e.g. 'Prices for EUR > USD updated between 2001-01-01 and "
+#| "2001-02-01 (id EUR USD)'"
+#| msgid "Prices for %1 updated between %3 and %4 (id %2)"
+msgctxt ""
+"@info Online price update %1 online id, %2 internal id, %3 price, %4 date"
+msgid "Price for %1 updated to %3 for %4 (id %2)"
+msgstr "%1 fiyatı %3 ve %4 arasında güncellendi (kimlik %2)"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:585
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:590
 #, kde-format
 msgctxt "@info Online price update %1 online id"
 msgid "Received an invalid price for %1, unable to update."
 msgstr "%1 için geçersiz bir fiyat alındı, güncellenemiyor."
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:630
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:635
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:38
 #: kmymoney/widgets/daterangedlg.cpp:64 kmymoney/widgets/daterangedlg.cpp:67
@@ -25149,6 +25154,10 @@ msgstr ""
 "<p>Tüm bilgiler isteğe bağlıdır ve yalnızca K Param dosyanızı "
 "kişiselleştirmek için kullanılır.</p>"
 
+#~ msgctxt "@info Online price update %1 online id, %2 internal id"
+#~ msgid "Price for %1 updated (id %2)"
+#~ msgstr "%1 fiyatı güncellendi (kimlik %2)"
+
 #~ msgid ""
 #~ "KMyMoney has detected some overdue scheduled transactions for this "
 #~ "account. Do you want to enter those scheduled transactions now?"
@@ -25223,12 +25232,6 @@ msgstr ""
 
 #~ msgid "Price Already Exists"
 #~ msgstr "Fiyat Halihazırda Var"
-
-#~ msgctxt ""
-#~ "Log message e.g. 'Prices for EUR > USD updated between 2001-01-01 and "
-#~ "2001-02-01 (id EUR USD)'"
-#~ msgid "Prices for %1 updated between %3 and %4 (id %2)"
-#~ msgstr "%1 fiyatı %3 ve %4 arasında güncellendi (kimlik %2)"
 
 #~ msgid ""
 #~ "Received a price for %1 (id %2), but this symbol is not on the list. "

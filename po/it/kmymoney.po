@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-13 01:46+0000\n"
-"PO-Revision-Date: 2024-08-07 18:59+0200\n"
+"POT-Creation-Date: 2024-08-15 01:52+0000\n"
+"PO-Revision-Date: 2024-08-13 18:21+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -1762,19 +1762,24 @@ msgstr ""
 msgid "Cannot update security <b>%1</b>: %2"
 msgstr "Impossibile aggiornare lo strumento finanziario <b>%1</b>: %2"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:583
-#, kde-format
-msgctxt "@info Online price update %1 online id, %2 internal id"
-msgid "Price for %1 updated (id %2)"
-msgstr "Prezzo per %1 aggiornato (id %2)"
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:584
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "Log message e.g. 'Prices for EUR > USD updated between 2001-01-01 and "
+#| "2001-02-01 (id EUR USD)'"
+#| msgid "Prices for %1 updated between %3 and %4 (id %2)"
+msgctxt ""
+"@info Online price update %1 online id, %2 internal id, %3 price, %4 date"
+msgid "Price for %1 updated to %3 for %4 (id %2)"
+msgstr "Prezzi per %1 aggiornati tra %3 e %4 (id %2)"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:585
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:590
 #, kde-format
 msgctxt "@info Online price update %1 online id"
 msgid "Received an invalid price for %1, unable to update."
 msgstr "Ricevuto un prezzo non valido per %1, impossibile aggiornare."
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:630
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:635
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:38
 #: kmymoney/widgets/daterangedlg.cpp:64 kmymoney/widgets/daterangedlg.cpp:67
@@ -6564,6 +6569,8 @@ msgid ""
 "  * Payee %1 has BIC with invalid length '%2'.\n"
 "    Must be 11 chars and is %3"
 msgstr ""
+"* Il beneficiario %1 ha un BIC con lunghezza non valida «%2».\n"
+"Deve essere di 11 caratteri ed è di %3"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2636
 #, kde-format
@@ -25395,6 +25402,10 @@ msgstr ""
 "<p>Tutte le informazioni sono facoltative e sono utilizzate solo per \n"
 "personalizzare il file di KMyMoney.</p>"
 
+#~ msgctxt "@info Online price update %1 online id, %2 internal id"
+#~ msgid "Price for %1 updated (id %2)"
+#~ msgstr "Prezzo per %1 aggiornato (id %2)"
+
 #~ msgid ""
 #~ "KMyMoney has detected some overdue scheduled transactions for this "
 #~ "account. Do you want to enter those scheduled transactions now?"
@@ -25471,12 +25482,6 @@ msgstr ""
 
 #~ msgid "Price Already Exists"
 #~ msgstr "Prezzo già esistente"
-
-#~ msgctxt ""
-#~ "Log message e.g. 'Prices for EUR > USD updated between 2001-01-01 and "
-#~ "2001-02-01 (id EUR USD)'"
-#~ msgid "Prices for %1 updated between %3 and %4 (id %2)"
-#~ msgstr "Prezzi per %1 aggiornati tra %3 e %4 (id %2)"
 
 #~ msgid ""
 #~ "Received a price for %1 (id %2), but this symbol is not on the list. "

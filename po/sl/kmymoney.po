@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-13 01:46+0000\n"
+"POT-Creation-Date: 2024-08-15 01:52+0000\n"
 "PO-Revision-Date: 2024-08-13 06:22+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -1765,19 +1765,24 @@ msgstr ""
 msgid "Cannot update security <b>%1</b>: %2"
 msgstr "Ni mogoče posodobiti vrednostnega papirja <b>%1</b>: %2"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:583
-#, kde-format
-msgctxt "@info Online price update %1 online id, %2 internal id"
-msgid "Price for %1 updated (id %2)"
-msgstr "Cena za %1 posodobljen (id %2)"
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:584
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "Log message e.g. 'Prices for EUR > USD updated between 2001-01-01 and "
+#| "2001-02-01 (id EUR USD)'"
+#| msgid "Prices for %1 updated between %3 and %4 (id %2)"
+msgctxt ""
+"@info Online price update %1 online id, %2 internal id, %3 price, %4 date"
+msgid "Price for %1 updated to %3 for %4 (id %2)"
+msgstr "Cena za %1 posodobljena med %3 in %4 (id %2)"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:585
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:590
 #, kde-format
 msgctxt "@info Online price update %1 online id"
 msgid "Received an invalid price for %1, unable to update."
 msgstr "Prejeta neveljavna cena za %1, ni mogoče posodobiti."
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:630
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:635
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:38
 #: kmymoney/widgets/daterangedlg.cpp:64 kmymoney/widgets/daterangedlg.cpp:67
@@ -25285,6 +25290,10 @@ msgstr ""
 "<p>Vse informacije niso obvezne in se uporabljajo samo za prilagajanje "
 "datoteke KMyMoney.</p>"
 
+#~ msgctxt "@info Online price update %1 online id, %2 internal id"
+#~ msgid "Price for %1 updated (id %2)"
+#~ msgstr "Cena za %1 posodobljen (id %2)"
+
 #~ msgid ""
 #~ "KMyMoney has detected some overdue scheduled transactions for this "
 #~ "account. Do you want to enter those scheduled transactions now?"
@@ -25360,12 +25369,6 @@ msgstr ""
 
 #~ msgid "Price Already Exists"
 #~ msgstr "Cena že obstaja"
-
-#~ msgctxt ""
-#~ "Log message e.g. 'Prices for EUR > USD updated between 2001-01-01 and "
-#~ "2001-02-01 (id EUR USD)'"
-#~ msgid "Prices for %1 updated between %3 and %4 (id %2)"
-#~ msgstr "Cena za %1 posodobljena med %3 in %4 (id %2)"
 
 #~ msgid ""
 #~ "Received a price for %1 (id %2), but this symbol is not on the list. "

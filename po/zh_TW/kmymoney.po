@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-13 01:46+0000\n"
+"POT-Creation-Date: 2024-08-15 01:52+0000\n"
 "PO-Revision-Date: 2024-05-09 17:33+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -1712,21 +1712,22 @@ msgstr ""
 msgid "Cannot update security <b>%1</b>: %2"
 msgstr "無法更新抵押品 <b>%1</b>：%2"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:583
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:584
 #, fuzzy, kde-format
 #| msgid "Price for %1 updated (id %2)"
-msgctxt "@info Online price update %1 online id, %2 internal id"
-msgid "Price for %1 updated (id %2)"
+msgctxt ""
+"@info Online price update %1 online id, %2 internal id, %3 price, %4 date"
+msgid "Price for %1 updated to %3 for %4 (id %2)"
 msgstr "%1 的價格已更新（代碼 %2）"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:585
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:590
 #, fuzzy, kde-format
 #| msgid "Received an invalid price for %1, unable to update."
 msgctxt "@info Online price update %1 online id"
 msgid "Received an invalid price for %1, unable to update."
 msgstr "收到 %1 的不合理價格，無法更新。"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:630
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:635
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:38
 #: kmymoney/widgets/daterangedlg.cpp:64 kmymoney/widgets/daterangedlg.cpp:67
@@ -25147,6 +25148,12 @@ msgstr ""
 "\n"
 "<p>所有的資訊都不是必填的，只是用於個人化您的 KMyMoney 檔案。</p>"
 
+#, fuzzy
+#~| msgid "Price for %1 updated (id %2)"
+#~ msgctxt "@info Online price update %1 online id, %2 internal id"
+#~ msgid "Price for %1 updated (id %2)"
+#~ msgstr "%1 的價格已更新（代碼 %2）"
+
 #~ msgid ""
 #~ "KMyMoney has detected some overdue scheduled transactions for this "
 #~ "account. Do you want to enter those scheduled transactions now?"
@@ -25212,14 +25219,6 @@ msgstr ""
 #~| msgid "File already exists"
 #~ msgid "Price Already Exists"
 #~ msgstr "檔案已經存在"
-
-#, fuzzy
-#~| msgid "Price for %1 updated (id %2)"
-#~ msgctxt ""
-#~ "Log message e.g. 'Prices for EUR > USD updated between 2001-01-01 and "
-#~ "2001-02-01 (id EUR USD)'"
-#~ msgid "Prices for %1 updated between %3 and %4 (id %2)"
-#~ msgstr "%1 的價格已更新（代碼 %2）"
 
 #~ msgid ""
 #~ "Received a price for %1 (id %2), but this symbol is not on the list. "
