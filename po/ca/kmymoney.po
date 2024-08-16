@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-15 01:52+0000\n"
-"PO-Revision-Date: 2024-08-13 10:50+0200\n"
+"PO-Revision-Date: 2024-08-15 10:15+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -1769,15 +1769,11 @@ msgid "Cannot update security <b>%1</b>: %2"
 msgstr "No s'ha pogut actualitzar el títol <b>%1</b>: %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:584
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Log message e.g. 'Prices for EUR > USD updated between 2001-01-01 and "
-#| "2001-02-01 (id EUR USD)'"
-#| msgid "Prices for %1 updated between %3 and %4 (id %2)"
+#, kde-format
 msgctxt ""
 "@info Online price update %1 online id, %2 internal id, %3 price, %4 date"
 msgid "Price for %1 updated to %3 for %4 (id %2)"
-msgstr "S'ha actualitzat el preu de %1 (ID %2) entre el %3 i el %4"
+msgstr "S'ha actualitzat el preu de %1 a %3 el %4 (ID %2)"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:590
 #, kde-format

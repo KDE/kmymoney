@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-15 01:52+0000\n"
-"PO-Revision-Date: 2024-08-14 09:33+0300\n"
+"PO-Revision-Date: 2024-08-15 09:01+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -1788,15 +1788,11 @@ msgid "Cannot update security <b>%1</b>: %2"
 msgstr "Не вдалося оновити дані цінного паперу <b>%1</b>: %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:584
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Log message e.g. 'Prices for EUR > USD updated between 2001-01-01 and "
-#| "2001-02-01 (id EUR USD)'"
-#| msgid "Prices for %1 updated between %3 and %4 (id %2)"
+#, kde-format
 msgctxt ""
 "@info Online price update %1 online id, %2 internal id, %3 price, %4 date"
 msgid "Price for %1 updated to %3 for %4 (id %2)"
-msgstr "Ціну для %1 оновлено між %3 та %4 (ідентифікатор %2)"
+msgstr "Ціну %1 оновлено до %3, %4 (ідентифікатор %2)"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:590
 #, kde-format

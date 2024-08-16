@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-15 01:52+0000\n"
-"PO-Revision-Date: 2024-08-07 09:09+0200\n"
+"PO-Revision-Date: 2024-08-15 10:15+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -1766,13 +1766,11 @@ msgid "Cannot update security <b>%1</b>: %2"
 msgstr "No s'ha pogut actualitzar el títol <b>%1</b>: %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:584
-#, fuzzy, kde-format
-#| msgctxt "@info Online price update %1 online id, %2 internal id"
-#| msgid "Price for %1 updated (id %2)"
+#, kde-format
 msgctxt ""
 "@info Online price update %1 online id, %2 internal id, %3 price, %4 date"
 msgid "Price for %1 updated to %3 for %4 (id %2)"
-msgstr "S'ha actualitzat el preu de %1 (ID %2)"
+msgstr "S'ha actualitzat el preu de %1 a %3 el %4 (ID %2)"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:590
 #, kde-format
@@ -6592,6 +6590,8 @@ msgid ""
 "  * Payee %1 has BIC with invalid length '%2'.\n"
 "    Must be 11 chars and is %3"
 msgstr ""
+"  * El beneficiari %1 té un BIC amb llargària «%2» no vàlida.\n"
+"    Cal que siguen 11 caràcters i en té %3"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2636
 #, kde-format
