@@ -58,16 +58,31 @@ QColor KMyMoneySettings::schemeColor(const SchemeColor color)
         return KColorScheme (QPalette::Active, KColorScheme::View).foreground(KColorScheme::PositiveText).color();
     case SchemeColor::Negative:
         return KColorScheme (QPalette::Active, KColorScheme::View).foreground(KColorScheme::NegativeText).color();
+
     case SchemeColor::TransactionImported:
         if (useCustomColors())
             return transactionImportedColor();
         else
             return KColorScheme (QPalette::Active, KColorScheme::View).background(KColorScheme::LinkBackground).color();
+
+    case SchemeColor::TransactionImportedText:
+        if (useCustomColors())
+            return transactionImportedText();
+        else
+            return KColorScheme(QPalette::Active, KColorScheme::Selection).foreground(KColorScheme::NormalText).color();
+
     case SchemeColor::TransactionMatched:
         if (useCustomColors())
             return transactionMatchedColor();
         else
             return KColorScheme (QPalette::Active, KColorScheme::View).background(KColorScheme::LinkBackground).color();
+
+    case SchemeColor::TransactionMatchedText:
+        if (useCustomColors())
+            return transactionMatchedText();
+        else
+            return KColorScheme(QPalette::Active, KColorScheme::Selection).foreground(KColorScheme::NormalText).color();
+
     case SchemeColor::TransactionErroneous:
         if (useCustomColors())
             return transactionErroneousColor();
@@ -78,11 +93,19 @@ QColor KMyMoneySettings::schemeColor(const SchemeColor color)
             return fieldRequiredColor();
         else
             return KColorScheme (QPalette::Active, KColorScheme::View).background(KColorScheme::NeutralBackground).color();
+
     case SchemeColor::GroupMarker:
         if (useCustomColors())
             return groupMarkerColor();
         else
             return KColorScheme (QPalette::Active, KColorScheme::Selection).background(KColorScheme::LinkBackground).color();
+
+    case SchemeColor::GroupMarkerText:
+        if (useCustomColors())
+            return groupMarkerText();
+        else
+            return KColorScheme(QPalette::Active, KColorScheme::Selection).foreground(KColorScheme::NormalText).color();
+
     case SchemeColor::MissingConversionRate:
         if (useCustomColors())
             return missingConversionRateColor();

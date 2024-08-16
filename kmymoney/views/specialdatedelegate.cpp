@@ -86,10 +86,14 @@ void SpecialDateDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
     QAbstractItemView* view = qobject_cast< QAbstractItemView* >(parent());
 
     // Background
-    QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
+    opt.backgroundBrush = opt.palette.base();
+    opt.backgroundBrush.setColor(property("groupMarkerColor").value<QColor>());
+    opt.palette.setColor(QPalette::Normal, QPalette::Text, property("groupMarkerText").value<QColor>());
+    opt.state &= ~QStyle::State_Selected;
 
     opt.rect.setX(opt.rect.x()-2);
     opt.rect.setWidth(opt.rect.width()+5);
+    QStyle* style = opt.widget ? opt.widget->style() : QApplication::style();
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
     switch (index.column()) {

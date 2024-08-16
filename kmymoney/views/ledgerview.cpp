@@ -81,6 +81,10 @@ public:
     Private(LedgerView* qq)
         : q(qq)
         , journalDelegate(new JournalDelegate(q))
+        , onlineBalanceDelegate(new OnlineBalanceDelegate(q))
+        , specialDatesDelegate(new SpecialDateDelegate(q))
+        , reconciliationDelegate(new ReconciliationDelegate(q))
+        , securityAccuntNameDelegate(new SecurityAccountNameDelegate(q))
         , delegateProxy(new DelegateProxy(q))
         , moveToAccountSelector(nullptr)
         , columnSelector(nullptr)
@@ -95,11 +99,11 @@ public:
         infoMessage->hide();
 
         delegateProxy->addDelegate(eMyMoney::Delegates::Types::JournalDelegate, journalDelegate);
-        delegateProxy->addDelegate(eMyMoney::Delegates::Types::OnlineBalanceDelegate, new OnlineBalanceDelegate(q));
-        delegateProxy->addDelegate(eMyMoney::Delegates::Types::SpecialDateDelegate, new SpecialDateDelegate(q));
+        delegateProxy->addDelegate(eMyMoney::Delegates::Types::OnlineBalanceDelegate, onlineBalanceDelegate);
+        delegateProxy->addDelegate(eMyMoney::Delegates::Types::SpecialDateDelegate, specialDatesDelegate);
         delegateProxy->addDelegate(eMyMoney::Delegates::Types::SchedulesDelegate, journalDelegate);
-        delegateProxy->addDelegate(eMyMoney::Delegates::Types::ReconciliationDelegate, new ReconciliationDelegate(q));
-        delegateProxy->addDelegate(eMyMoney::Delegates::Types::SecurityAccountNameDelegate, new SecurityAccountNameDelegate(q));
+        delegateProxy->addDelegate(eMyMoney::Delegates::Types::ReconciliationDelegate, reconciliationDelegate);
+        delegateProxy->addDelegate(eMyMoney::Delegates::Types::SecurityAccountNameDelegate, securityAccuntNameDelegate);
 
         q->setItemDelegate(delegateProxy);
     }
@@ -442,6 +446,22 @@ public:
         journalDelegate->resetLineHeight();
     }
 
+    void setColors()
+    {
+        specialDatesDelegate->setProperty("groupMarkerColor", KMyMoneySettings::schemeColor(SchemeColor::GroupMarker));
+        securityAccuntNameDelegate->setProperty("groupMarkerColor", KMyMoneySettings::schemeColor(SchemeColor::GroupMarker));
+        specialDatesDelegate->setProperty("groupMarkerText", KMyMoneySettings::schemeColor(SchemeColor::GroupMarkerText));
+        securityAccuntNameDelegate->setProperty("groupMarkerText", KMyMoneySettings::schemeColor(SchemeColor::GroupMarkerText));
+
+        journalDelegate->setProperty("transactionImportedColor", KMyMoneySettings::schemeColor(SchemeColor::TransactionImported));
+        journalDelegate->setProperty("transactionImportedText", KMyMoneySettings::schemeColor(SchemeColor::TransactionImportedText));
+
+        journalDelegate->setProperty("transactionMatchedColor", KMyMoneySettings::schemeColor(SchemeColor::TransactionMatched));
+        journalDelegate->setProperty("transactionMatchedText", KMyMoneySettings::schemeColor(SchemeColor::TransactionMatchedText));
+
+        journalDelegate->setProperty("erroneousText", KMyMoneySettings::schemeColor(SchemeColor::TransactionErroneous));
+    }
+
     void allowSectionResize()
     {
         auto header = q->horizontalHeader();
@@ -467,6 +487,10 @@ public:
 
     LedgerView* q;
     JournalDelegate* journalDelegate;
+    OnlineBalanceDelegate* onlineBalanceDelegate;
+    SpecialDateDelegate* specialDatesDelegate;
+    ReconciliationDelegate* reconciliationDelegate;
+    SecurityAccountNameDelegate* securityAccuntNameDelegate;
     DelegateProxy* delegateProxy;
     KMyMoneyAccountSelector* moveToAccountSelector;
     ColumnSelector* columnSelector;
@@ -501,6 +525,7 @@ LedgerView::LedgerView(QWidget* parent)
     setSortingEnabled(false);
 
     d->setFonts();
+    d->setColors();
 
     // since we don't have a vertical header, it does not make sense
     // to use the first column to select all items in the view
@@ -1249,16 +1274,8 @@ void LedgerView::slotSettingsChanged()
     Q_EMIT settingsChanged();
 
     d->setFonts();
+    d->setColors();
     d->resetMaxLineCache();
-#if 0
-    // KMyMoneySettings::showGrid()
-    // KMyMoneySettings::sortNormalView()
-    // KMyMoneySettings::ledgerLens()
-    // KMyMoneySettings::showRegisterDetailed()
-    d->m_proxyModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
-    d->m_proxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
-    d->m_proxyModel->setHideFavoriteAccounts(true);
-#endif
 }
 
 void LedgerView::selectMostRecentTransaction()
