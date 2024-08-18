@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-17 01:45+0000\n"
-"PO-Revision-Date: 2024-08-15 09:01+0300\n"
+"PO-Revision-Date: 2024-08-17 08:58+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -3120,16 +3120,15 @@ msgstr "Відповідна операція"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:177
-#, fuzzy, kde-format
-#| msgid "Backend"
+#, kde-format
 msgid "Background"
-msgstr "Сервер"
+msgstr "Тло"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:184
 #, kde-format
 msgid "Foreground"
-msgstr ""
+msgstr "Текст"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsIcons)
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsFonts)
@@ -18573,10 +18572,9 @@ msgstr "Колір тла імпортованих операцій"
 
 #. i18n: ectx: label, entry (transactionImportedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:190
-#, fuzzy, kde-format
-#| msgid "Background color for imported transactions"
+#, kde-format
 msgid "Text color for imported transactions"
-msgstr "Колір тла імпортованих операцій"
+msgstr "Колір тексту імпортованих операцій"
 
 #. i18n: ectx: label, entry (transactionMatchedColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:194
@@ -18586,10 +18584,9 @@ msgstr "Колір тла відповідних операцій"
 
 #. i18n: ectx: label, entry (transactionMatchedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:198
-#, fuzzy, kde-format
-#| msgid "Background color for matched transactions"
+#, kde-format
 msgid "Text color for matched transactions"
-msgstr "Колір тла відповідних операцій"
+msgstr "Колір тексту відповідних операцій"
 
 #. i18n: ectx: label, entry (transactionErroneousColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:202
@@ -18611,10 +18608,9 @@ msgstr "Колір тла позначки групи"
 
 #. i18n: ectx: label, entry (groupMarkerText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:214
-#, fuzzy, kde-format
-#| msgid "Background color for group marker"
+#, kde-format
 msgid "Text color for group marker"
-msgstr "Колір тла позначки групи"
+msgstr "Колір тексту позначки групи"
 
 #. i18n: ectx: label, entry (fieldRequiredColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:218

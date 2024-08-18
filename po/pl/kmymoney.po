@@ -3119,7 +3119,8 @@ msgstr "Tło"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:184
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Foreground"
 msgid "Foreground"
 msgstr "Pierwszoplanowy"
 

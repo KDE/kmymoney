@@ -2949,10 +2949,9 @@ msgstr "匹配的交易"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:177
-#, fuzzy, kde-format
-#| msgid "Backend"
+#, kde-format
 msgid "Background"
-msgstr "后端"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:184
@@ -17797,10 +17796,9 @@ msgstr "导入交易的背景色"
 
 #. i18n: ectx: label, entry (transactionImportedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:190
-#, fuzzy, kde-format
-#| msgid "Background color for imported transactions"
+#, kde-format
 msgid "Text color for imported transactions"
-msgstr "导入交易的背景色"
+msgstr ""
 
 #. i18n: ectx: label, entry (transactionMatchedColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:194
@@ -17810,10 +17808,9 @@ msgstr "匹配交易的背景色"
 
 #. i18n: ectx: label, entry (transactionMatchedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:198
-#, fuzzy, kde-format
-#| msgid "Background color for matched transactions"
+#, kde-format
 msgid "Text color for matched transactions"
-msgstr "匹配交易的背景色"
+msgstr ""
 
 #. i18n: ectx: label, entry (transactionErroneousColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:202
@@ -17835,10 +17832,9 @@ msgstr "组标记的背景色"
 
 #. i18n: ectx: label, entry (groupMarkerText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:214
-#, fuzzy, kde-format
-#| msgid "Background color for group marker"
+#, kde-format
 msgid "Text color for group marker"
-msgstr "组标记的背景色"
+msgstr ""
 
 #. i18n: ectx: label, entry (fieldRequiredColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:218

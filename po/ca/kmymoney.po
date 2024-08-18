@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-17 01:45+0000\n"
-"PO-Revision-Date: 2024-08-15 10:15+0200\n"
+"PO-Revision-Date: 2024-08-17 11:07+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -3105,16 +3105,15 @@ msgstr "Operació concordant"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:177
-#, fuzzy, kde-format
-#| msgid "Backend"
+#, kde-format
 msgid "Background"
-msgstr "Dorsal"
+msgstr "Fons"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:184
 #, kde-format
 msgid "Foreground"
-msgstr ""
+msgstr "Primer pla"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsIcons)
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsFonts)
@@ -18530,10 +18529,9 @@ msgstr "Color del fons per a les operacions importades"
 
 #. i18n: ectx: label, entry (transactionImportedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:190
-#, fuzzy, kde-format
-#| msgid "Background color for imported transactions"
+#, kde-format
 msgid "Text color for imported transactions"
-msgstr "Color del fons per a les operacions importades"
+msgstr "Color del text per a les operacions importades"
 
 #. i18n: ectx: label, entry (transactionMatchedColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:194
@@ -18543,10 +18541,9 @@ msgstr "Color del fons per a les operacions conciliades"
 
 #. i18n: ectx: label, entry (transactionMatchedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:198
-#, fuzzy, kde-format
-#| msgid "Background color for matched transactions"
+#, kde-format
 msgid "Text color for matched transactions"
-msgstr "Color del fons per a les operacions conciliades"
+msgstr "Color del text per a les operacions conciliades"
 
 #. i18n: ectx: label, entry (transactionErroneousColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:202
@@ -18568,10 +18565,9 @@ msgstr "Color del fons per als marcadors de grup"
 
 #. i18n: ectx: label, entry (groupMarkerText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:214
-#, fuzzy, kde-format
-#| msgid "Background color for group marker"
+#, kde-format
 msgid "Text color for group marker"
-msgstr "Color del fons per als marcadors de grup"
+msgstr "Color del text per als marcadors de grup"
 
 #. i18n: ectx: label, entry (fieldRequiredColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:218

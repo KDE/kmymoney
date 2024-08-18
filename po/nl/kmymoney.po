@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-17 01:45+0000\n"
-"PO-Revision-Date: 2024-08-15 09:54+0200\n"
+"PO-Revision-Date: 2024-08-17 12:17+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -3102,9 +3102,7 @@ msgstr "Identieke transactie"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:177
-#, fuzzy, kde-format
-#| msgctxt "@title background colors"
-#| msgid "Background"
+#, kde-format
 msgid "Background"
 msgstr "Achtergrond"
 
@@ -18477,10 +18475,9 @@ msgstr "Achtergrond kleur voor geïmporteerde transacties"
 
 #. i18n: ectx: label, entry (transactionImportedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:190
-#, fuzzy, kde-format
-#| msgid "Background color for imported transactions"
+#, kde-format
 msgid "Text color for imported transactions"
-msgstr "Achtergrond kleur voor geïmporteerde transacties"
+msgstr "Tekstkleur voor geïmporteerde transacties"
 
 #. i18n: ectx: label, entry (transactionMatchedColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:194
@@ -18490,10 +18487,9 @@ msgstr "Achtergrond kleur voor identieke transacties"
 
 #. i18n: ectx: label, entry (transactionMatchedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:198
-#, fuzzy, kde-format
-#| msgid "Background color for matched transactions"
+#, kde-format
 msgid "Text color for matched transactions"
-msgstr "Achtergrond kleur voor identieke transacties"
+msgstr "Tekstkleur voor overeenkomende transacties"
 
 #. i18n: ectx: label, entry (transactionErroneousColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:202
@@ -18515,10 +18511,9 @@ msgstr "Achtergrondkleur voor groep markering"
 
 #. i18n: ectx: label, entry (groupMarkerText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:214
-#, fuzzy, kde-format
-#| msgid "Background color for group marker"
+#, kde-format
 msgid "Text color for group marker"
-msgstr "Achtergrondkleur voor groep markering"
+msgstr "Tekstkleur voor groep markering"
 
 #. i18n: ectx: label, entry (fieldRequiredColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:218

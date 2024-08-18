@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-17 01:45+0000\n"
-"PO-Revision-Date: 2024-08-15 06:50+0200\n"
+"PO-Revision-Date: 2024-08-17 07:30+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -3094,8 +3094,7 @@ msgstr "Ujemajoča se transakcija"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:177
-#, fuzzy, kde-format
-#| msgid "Backend"
+#, kde-format
 msgid "Background"
 msgstr "Ozadje"
 
@@ -3103,7 +3102,7 @@ msgstr "Ozadje"
 #: kmymoney/dialogs/settings/ksettingscolors.ui:184
 #, kde-format
 msgid "Foreground"
-msgstr ""
+msgstr "Ospredje"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsIcons)
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsFonts)
@@ -18432,10 +18431,9 @@ msgstr "Barva ozadja za uvožene transakcije"
 
 #. i18n: ectx: label, entry (transactionImportedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:190
-#, fuzzy, kde-format
-#| msgid "Background color for imported transactions"
+#, kde-format
 msgid "Text color for imported transactions"
-msgstr "Barva ozadja za uvožene transakcije"
+msgstr "Barva besedila za uvožene transakcije"
 
 #. i18n: ectx: label, entry (transactionMatchedColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:194
@@ -18445,10 +18443,9 @@ msgstr "Barva ozadja za usklajene transakcije"
 
 #. i18n: ectx: label, entry (transactionMatchedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:198
-#, fuzzy, kde-format
-#| msgid "Background color for matched transactions"
+#, kde-format
 msgid "Text color for matched transactions"
-msgstr "Barva ozadja za usklajene transakcije"
+msgstr "Barva besedila za usklajene transakcije"
 
 #. i18n: ectx: label, entry (transactionErroneousColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:202
@@ -18470,10 +18467,9 @@ msgstr "Barva ozadja za označevalnik skupine"
 
 #. i18n: ectx: label, entry (groupMarkerText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:214
-#, fuzzy, kde-format
-#| msgid "Background color for group marker"
+#, kde-format
 msgid "Text color for group marker"
-msgstr "Barva ozadja za označevalnik skupine"
+msgstr "Barva besedila za označevalnik skupine"
 
 #. i18n: ectx: label, entry (fieldRequiredColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:218
