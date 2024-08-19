@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-17 01:45+0000\n"
-"PO-Revision-Date: 2024-08-15 14:05+0300\n"
+"PO-Revision-Date: 2024-08-18 20:04+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -3067,16 +3067,15 @@ msgstr "Eşleşen işlem"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:177
-#, fuzzy, kde-format
-#| msgid "Backend"
+#, kde-format
 msgid "Background"
-msgstr "Arka uç"
+msgstr "Arka plan"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:184
 #, kde-format
 msgid "Foreground"
-msgstr ""
+msgstr "Ön plan"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsIcons)
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsFonts)
@@ -18323,27 +18322,25 @@ msgstr "Özel renkler kullan"
 #: kmymoney/settings/kmymoney.kcfg:186
 #, kde-format
 msgid "Background color for imported transactions"
-msgstr "İçe aktarılan işlemler için arka plan rengi"
+msgstr "İçe aktarılan işlemlerin arka plan rengi"
 
 #. i18n: ectx: label, entry (transactionImportedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:190
-#, fuzzy, kde-format
-#| msgid "Background color for imported transactions"
+#, kde-format
 msgid "Text color for imported transactions"
-msgstr "İçe aktarılan işlemler için arka plan rengi"
+msgstr "İçe aktarılan işlemlerin metin rengi"
 
 #. i18n: ectx: label, entry (transactionMatchedColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:194
 #, kde-format
 msgid "Background color for matched transactions"
-msgstr "Eşleşmiş işlemler için arka plan rengi"
+msgstr "Eşleşen işlemlerin arka plan rengi"
 
 #. i18n: ectx: label, entry (transactionMatchedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:198
-#, fuzzy, kde-format
-#| msgid "Background color for matched transactions"
+#, kde-format
 msgid "Text color for matched transactions"
-msgstr "Eşleşmiş işlemler için arka plan rengi"
+msgstr "Eşleşen işlemlerin metin rengi"
 
 #. i18n: ectx: label, entry (transactionErroneousColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:202
@@ -18361,20 +18358,19 @@ msgstr "Eksik dönüşüm oranı için renk listesi"
 #: kmymoney/settings/kmymoney.kcfg:210
 #, kde-format
 msgid "Background color for group marker"
-msgstr "Grup etiketi arka plan rengi"
+msgstr "Grup imleyicisinin arka plan rengi"
 
 #. i18n: ectx: label, entry (groupMarkerText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:214
-#, fuzzy, kde-format
-#| msgid "Background color for group marker"
+#, kde-format
 msgid "Text color for group marker"
-msgstr "Grup etiketi arka plan rengi"
+msgstr "Grup imleyicisinin metin rengi"
 
 #. i18n: ectx: label, entry (fieldRequiredColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:218
 #, kde-format
 msgid "Background color for required fields"
-msgstr "Zorunlu alanlar arka plan rengi"
+msgstr "Zorunlu alanların arka plan rengi"
 
 #. i18n: ectx: label, entry (ShowCategoriesInAccountsView), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:232
