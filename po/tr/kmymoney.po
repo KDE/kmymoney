@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2024-07-02 14:02+0300\n"
+"PO-Revision-Date: 2024-08-18 20:04+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.07.70\n"
+"X-Generator: Lokalize 24.11.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -18786,7 +18786,7 @@ msgstr "İçe aktarılmış işlemler için arka plan rengi"
 #: kmymoney/settings/kmymoney.kcfg:206
 #, kde-format
 msgid "Background color for matched transactions"
-msgstr "Eşleşmiş işlemler için arka plan rengi"
+msgstr "Eşleşen işlemlerin arka plan rengi"
 
 #. i18n: ectx: label, entry (transactionErroneousColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:210
@@ -18804,13 +18804,13 @@ msgstr "Eksik dönüşüm oranı için renk listesi"
 #: kmymoney/settings/kmymoney.kcfg:218
 #, kde-format
 msgid "Background color for group marker"
-msgstr "Grup etiketi arka plan rengi"
+msgstr "Grup imleyicisinin arka plan rengi"
 
 #. i18n: ectx: label, entry (fieldRequiredColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:222
 #, kde-format
 msgid "Background color for required fields"
-msgstr "Zorunlu alanlar arka plan rengi"
+msgstr "Zorunlu alanların arka plan rengi"
 
 #. i18n: ectx: label, entry (ShowCategoriesInAccountsView), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:236
