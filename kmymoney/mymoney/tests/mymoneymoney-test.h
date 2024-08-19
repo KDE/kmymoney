@@ -46,6 +46,7 @@ private Q_SLOTS:
     void testMaxPrecision();
     void testZeroIsMinusZero();
     void testAutoCalcDetection();
+    void testBug491828();
 };
 
 #endif

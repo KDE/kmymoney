@@ -13,9 +13,11 @@
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyMoneyTest;
 
 #include <config-kmymoney.h>
+
+#include "mymoneyenums.h"
 #include "mymoneyexception.h"
 #include "mymoneymoney.h"
-#include "mymoneyenums.h"
+#include "mymoneysecurity.h"
 
 QTEST_GUILESS_MAIN(MyMoneyMoneyTest)
 
@@ -485,6 +487,15 @@ void MyMoneyMoneyTest::testFormatMoney()
 
     m1 = MyMoneyMoney(-1404, 100);
     QCOMPARE(m1.formatMoney("", -1), QStringLiteral("-14.04"));
+}
+
+void MyMoneyMoneyTest::testBug491828()
+{
+    // test to cover bug #491828
+    int precision(8);
+    MyMoneySecurity bitcoin("BTC", QLatin1String("Bitcoin"), "BTC", 100000000, 100000000);
+    MyMoneyMoney smallestFraction = MyMoneyMoney::ONE / MyMoneyMoney(bitcoin.smallestCashFraction());
+    QCOMPARE(smallestFraction.formatMoney(QString(), precision), QStringLiteral("0.00000001"));
 }
 
 void MyMoneyMoneyTest::testRelation()
