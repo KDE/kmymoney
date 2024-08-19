@@ -157,7 +157,6 @@ void OnlineBalanceDelegate::paint(QPainter* painter, const QStyleOptionViewItem&
     KColorScheme::BackgroundRole role = (accountBalance == onlineBalanceValue) ? KColorScheme::PositiveBackground : KColorScheme::NegativeBackground;
 
     KColorScheme::adjustBackground(opt.palette, role, QPalette::Base, KColorScheme::View, KSharedConfigPtr());
-    // opt.rect.setHeight(lineHeight);
     opt.backgroundBrush = opt.palette.base();
     d->m_backGround = opt.backgroundBrush;
 
