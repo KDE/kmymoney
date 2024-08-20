@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-17 01:45+0000\n"
+"POT-Creation-Date: 2024-08-20 02:02+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -1207,77 +1207,77 @@ msgstr ""
 msgid "Update price history"
 msgstr "Ενημέρωση του ιστορικού τιμών"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:137
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:653
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
 msgstr "Αδυναμία να οριστεί το %1 ως βασικό νόμισμα: %2"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:137
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:653
 #, kde-format
 msgid "Set base currency"
 msgstr "Ορισμός βασικού νομίσματος"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:158
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:162
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:159
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:163
 #, kde-format
 msgid "Cannot update currency. %1"
 msgstr "Αδυναμία ενημέρωσης του νομίσματος. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:158
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:162
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:159
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:163
 #, kde-format
 msgid "Update currency"
 msgstr "Ενημέρωση του νομίσματος"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:195
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:196
 #, kde-format
 msgid "Cannot create new currency. %1"
 msgstr "Αδυναμία δημιουργίας νέου νομίσματος. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:195
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:490
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:196
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:491
 #, kde-format
 msgid "New currency"
 msgstr "Νέο νόμισμα"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:197
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:198
 #, fuzzy, kde-format
 #| msgid "Cannot update currency. %1"
 msgid "Cannot modify currency. %1"
 msgstr "Αδυναμία ενημέρωσης του νομίσματος. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:197
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:198
 #, fuzzy, kde-format
 #| msgid "Update currency"
 msgid "Edit currency"
 msgstr "Ενημέρωση του νομίσματος"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:491
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:492
 #, kde-format
 msgid "Rename currency"
 msgstr "Μετονομασία νομίσματος"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:492
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:634
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:493
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:638
 #, kde-format
 msgid "Delete currency"
 msgstr "Διαγραφή νομίσματος"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:493
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:494
 #, kde-format
 msgid "Select as base currency"
 msgstr "Ορισμός ως βασικό νόμισμα"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:503
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:504
 #, fuzzy, kde-format
 #| msgid "Currency options"
 msgctxt "@title:menu"
 msgid "Currency options"
 msgstr "Επιλογές νομίσματος"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:634
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:638
 #, kde-format
 msgid "Cannot delete currency %1. %2"
 msgstr "Αδυναμία διαγραφής νομίσματος %1. %2"
@@ -21969,7 +21969,7 @@ msgctxt "text for online balance date if not available"
 msgid "n/a"
 msgstr ""
 
-#: kmymoney/views/onlinebalancedelegate.cpp:176
+#: kmymoney/views/onlinebalancedelegate.cpp:175
 #, fuzzy, kde-format
 #| msgid "Opening Balance"
 msgctxt "Label in ledger for online balance row"
