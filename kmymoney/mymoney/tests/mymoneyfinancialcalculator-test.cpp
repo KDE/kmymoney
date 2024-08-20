@@ -88,28 +88,28 @@ void MyMoneyFinancialCalculatorTest::testSetDisc()
 void MyMoneyFinancialCalculatorTest::testSetIr()
 {
     m->setIr(12.3);
-    QVERIFY(m->d_func()->m_ir == 12.3);
+    QCOMPARE(m->d_func()->m_ir, 12.3);
     QVERIFY(m->d_func()->m_mask == IR_SET);
 }
 
 void MyMoneyFinancialCalculatorTest::testSetPv()
 {
     m->setPv(23.4);
-    QVERIFY(m->d_func()->m_pv == 23.4);
+    QCOMPARE(m->d_func()->m_pv, 23.4);
     QVERIFY(m->d_func()->m_mask == PV_SET);
 }
 
 void MyMoneyFinancialCalculatorTest::testSetPmt()
 {
     m->setPmt(34.5);
-    QVERIFY(m->d_func()->m_pmt == 34.5);
+    QCOMPARE(m->d_func()->m_pmt, 34.5);
     QVERIFY(m->d_func()->m_mask == PMT_SET);
 }
 
 void MyMoneyFinancialCalculatorTest::testSetFv()
 {
     m->setFv(45.6);
-    QVERIFY(m->d_func()->m_fv == 45.6);
+    QCOMPARE(m->d_func()->m_fv, 45.6);
     QVERIFY(m->d_func()->m_mask == FV_SET);
 }
 
