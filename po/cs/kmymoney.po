@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-20 02:02+0000\n"
-"PO-Revision-Date: 2024-08-08 10:02+0200\n"
+"PO-Revision-Date: 2024-08-20 08:39+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -1678,13 +1678,11 @@ msgid "Cannot update security <b>%1</b>: %2"
 msgstr "Nelze aktualizovat cenný papír <b>%1</b>: %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:584
-#, fuzzy, kde-format
-#| msgctxt "@info Online price update %1 online id, %2 internal id"
-#| msgid "Price for %1 updated (id %2)"
+#, kde-format
 msgctxt ""
 "@info Online price update %1 online id, %2 internal id, %3 price, %4 date"
 msgid "Price for %1 updated to %3 for %4 (id %2)"
-msgstr "Cena pro %1 aktualizována (id %2)"
+msgstr "Ceny pro %1 aktualizována na %3 pro %4 (id %2)"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:590
 #, kde-format
@@ -2959,16 +2957,15 @@ msgstr "Odpovídající transakce"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:177
-#, fuzzy, kde-format
-#| msgid "Backend"
+#, kde-format
 msgid "Background"
-msgstr "Podpůrná vrstva"
+msgstr "Pozadí"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:184
 #, kde-format
 msgid "Foreground"
-msgstr ""
+msgstr "Popředí"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsIcons)
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsFonts)
@@ -17869,10 +17866,9 @@ msgstr "Barva pozadí pro importované transakce"
 
 #. i18n: ectx: label, entry (transactionImportedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:190
-#, fuzzy, kde-format
-#| msgid "Background color for imported transactions"
+#, kde-format
 msgid "Text color for imported transactions"
-msgstr "Barva pozadí pro importované transakce"
+msgstr "Barva textu pro importované transakce"
 
 #. i18n: ectx: label, entry (transactionMatchedColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:194
@@ -17882,10 +17878,9 @@ msgstr "Barva pozadí pro odpovídající transakce"
 
 #. i18n: ectx: label, entry (transactionMatchedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:198
-#, fuzzy, kde-format
-#| msgid "Background color for matched transactions"
+#, kde-format
 msgid "Text color for matched transactions"
-msgstr "Barva pozadí pro odpovídající transakce"
+msgstr "Barva textu pro odpovídající transakce"
 
 #. i18n: ectx: label, entry (transactionErroneousColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:202
@@ -17907,10 +17902,9 @@ msgstr "Barva pozadí pro značku skupiny"
 
 #. i18n: ectx: label, entry (groupMarkerText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:214
-#, fuzzy, kde-format
-#| msgid "Background color for group marker"
+#, kde-format
 msgid "Text color for group marker"
-msgstr "Barva pozadí pro značku skupiny"
+msgstr "Barva textu pro značku skupiny"
 
 #. i18n: ectx: label, entry (fieldRequiredColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:218
