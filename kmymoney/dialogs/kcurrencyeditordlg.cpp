@@ -95,13 +95,13 @@ KCurrencyEditorDlg::KCurrencyEditorDlg(const MyMoneySecurity& currency, QWidget 
     d->ui->leSymbol->setText(currency.tradingSymbol());
 
     int precision = MyMoneyMoney::denomToPrec(currency.smallestCashFraction());
+    qDebug() << "cash precision" << precision;
     MyMoneyMoney smallestFraction = MyMoneyMoney::ONE / MyMoneyMoney(currency.smallestCashFraction());
-    qDebug() << "cash precision" << precision << smallestFraction.formatMoney(QString(), precision);
     d->ui->leCashFraction->setText(smallestFraction.formatMoney(QString(), precision));
 
     precision = MyMoneyMoney::denomToPrec(currency.smallestAccountFraction());
+    qDebug() << "account precision" << precision;
     smallestFraction = MyMoneyMoney::ONE / MyMoneyMoney(currency.smallestAccountFraction());
-    qDebug() << "account precision" << precision << smallestFraction.formatMoney(QString(), precision);
     d->ui->leAccountFraction->setText(smallestFraction.formatMoney(QString(), precision));
 
     d->ui->comboRoundingMethod->setCurrentIndex(currency.roundingMethod());
