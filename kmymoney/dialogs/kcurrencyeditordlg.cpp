@@ -9,7 +9,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDebug>
 #include <QPushButton>
 
 // ----------------------------------------------------------------------------
@@ -65,8 +64,6 @@ KCurrencyEditorDlg::KCurrencyEditorDlg(const MyMoneySecurity& currency, QWidget 
     d->currency = currency;
     d->ui->setupUi(this);
 
-    qDebug() << "editing currency" << currency.name() << currency.tradingSymbol() << currency.smallestAccountFraction() << currency.smallestCashFraction();
-
     connect(d->ui->leIsoCode, &QLineEdit::textChanged, this, [&]() {
         Q_D(KCurrencyEditorDlg);
         d->validateValues();
@@ -95,12 +92,10 @@ KCurrencyEditorDlg::KCurrencyEditorDlg(const MyMoneySecurity& currency, QWidget 
     d->ui->leSymbol->setText(currency.tradingSymbol());
 
     int precision = MyMoneyMoney::denomToPrec(currency.smallestCashFraction());
-    qDebug() << "cash precision" << precision;
     MyMoneyMoney smallestFraction = MyMoneyMoney::ONE / MyMoneyMoney(currency.smallestCashFraction());
     d->ui->leCashFraction->setText(smallestFraction.formatMoney(QString(), precision));
 
     precision = MyMoneyMoney::denomToPrec(currency.smallestAccountFraction());
-    qDebug() << "account precision" << precision;
     smallestFraction = MyMoneyMoney::ONE / MyMoneyMoney(currency.smallestAccountFraction());
     d->ui->leAccountFraction->setText(smallestFraction.formatMoney(QString(), precision));
 

@@ -540,8 +540,6 @@ void KCurrencyEditDlg::slotAddCurrency()
         const QList<QTreeWidgetItem*> currencyRows = d->m_availableCurrencyDlg->selectedItems(); // get selected currencies from new dialog
         for (const auto& currencyRow : currencyRows) {
             MyMoneySecurity currency = currencyRow->data(0, Qt::UserRole).value<MyMoneySecurity>();
-            qDebug() << "adding currency" << currency.name() << currency.tradingSymbol() << currency.smallestAccountFraction()
-                     << currency.smallestCashFraction();
             file->addCurrency(currency);
             if (ancientCurrencies.value(currency, MyMoneyPrice()) != MyMoneyPrice()) { // if ancient currency is added...
                 file->addPrice(ancientCurrencies[currency]);                             // ...we want to add last known exchange rate as well
