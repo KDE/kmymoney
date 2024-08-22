@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-20 02:02+0000\n"
+"POT-Creation-Date: 2024-08-22 01:55+0000\n"
 "PO-Revision-Date: 2024-05-09 17:33+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -1133,13 +1133,13 @@ msgid "Update price history"
 msgstr "更新價格歷史紀錄"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:653
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
 msgstr "無法將 %1 設定為基本貨幣：%2"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:653
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
 #, kde-format
 msgid "Set base currency"
 msgstr "設定基本貨幣"
@@ -1184,7 +1184,7 @@ msgid "Rename currency"
 msgstr "重新命名貨幣"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:493
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:638
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
 #, kde-format
 msgid "Delete currency"
 msgstr "刪除貨幣"
@@ -1200,7 +1200,7 @@ msgctxt "@title:menu"
 msgid "Currency options"
 msgstr "貨幣選項"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:638
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
 #, kde-format
 msgid "Cannot delete currency %1. %2"
 msgstr "無法刪除貨幣 %1。%2"

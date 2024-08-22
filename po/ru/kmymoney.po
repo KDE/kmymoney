@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-20 02:02+0000\n"
+"POT-Creation-Date: 2024-08-22 01:55+0000\n"
 "PO-Revision-Date: 2024-02-09 23:23+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -1176,13 +1176,13 @@ msgid "Update price history"
 msgstr "Обновить историю изменения курсов"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:653
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
 msgstr "Невозможно использовать «%1» как базовую валюту: %2"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:653
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
 #, kde-format
 msgid "Set base currency"
 msgstr "Базовая валюта"
@@ -1226,7 +1226,7 @@ msgid "Rename currency"
 msgstr "Переименовать валюту"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:493
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:638
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
 #, kde-format
 msgid "Delete currency"
 msgstr "Удалить валюту"
@@ -1242,7 +1242,7 @@ msgctxt "@title:menu"
 msgid "Currency options"
 msgstr "Действия с валютой"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:638
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
 #, kde-format
 msgid "Cannot delete currency %1. %2"
 msgstr "Невозможно удалить валюту «%1». %2"

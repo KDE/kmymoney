@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-20 02:02+0000\n"
+"POT-Creation-Date: 2024-08-22 01:55+0000\n"
 "PO-Revision-Date: 2024-02-19 12:11+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -1145,13 +1145,13 @@ msgid "Update price history"
 msgstr "Päivitä hintahistoria"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:653
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
 msgstr "Ei voitu asettaa pohjavaluutaksi %1: %2"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:653
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
 #, kde-format
 msgid "Set base currency"
 msgstr "Aseta pohjavaluutaksi."
@@ -1195,7 +1195,7 @@ msgid "Rename currency"
 msgstr "Muuta valuutan nimeä"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:493
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:638
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
 #, kde-format
 msgid "Delete currency"
 msgstr "Poista valuutta"
@@ -1211,7 +1211,7 @@ msgctxt "@title:menu"
 msgid "Currency options"
 msgstr "Valuutta-asetukset"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:638
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
 #, kde-format
 msgid "Cannot delete currency %1. %2"
 msgstr "Valuuttaa %1 ei voitu poistaa. %2"

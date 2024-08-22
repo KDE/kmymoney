@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-20 02:02+0000\n"
-"PO-Revision-Date: 2024-07-20 16:04+0200\n"
+"POT-Creation-Date: 2024-08-22 01:55+0000\n"
+"PO-Revision-Date: 2024-08-18 09:35+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -1187,13 +1187,13 @@ msgid "Update price history"
 msgstr "Mise-à-jour de l'historique des cours"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:653
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
 msgstr "Impossible de mettre %1 comme devise de base : %2"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:653
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
 #, kde-format
 msgid "Set base currency"
 msgstr "Définir une devise de base"
@@ -1237,7 +1237,7 @@ msgid "Rename currency"
 msgstr "Renommer la devise"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:493
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:638
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
 #, kde-format
 msgid "Delete currency"
 msgstr "Supprimer la devise"
@@ -1253,7 +1253,7 @@ msgctxt "@title:menu"
 msgid "Currency options"
 msgstr "Options de devises"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:638
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
 #, kde-format
 msgid "Cannot delete currency %1. %2"
 msgstr "Impossible de supprimer la devise %1. %2"
@@ -1797,15 +1797,11 @@ msgid "Cannot update security <b>%1</b>: %2"
 msgstr "Impossible de mettre à jour ce titre <b>%1</b> : %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:584
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Log message e.g. 'Prices for EUR > USD updated between 2001-01-01 and "
-#| "2001-02-01 (id EUR USD)'"
-#| msgid "Prices for %1 updated between %3 and %4 (id %2)"
+#, kde-format
 msgctxt ""
 "@info Online price update %1 online id, %2 internal id, %3 price, %4 date"
 msgid "Price for %1 updated to %3 for %4 (id %2)"
-msgstr "Les cours pour %1 ont été mis à jour entre %3 et %4 (Id %2)"
+msgstr "Les cours pour %1 ont été mis à jour vers %3 pour %4 (Id %2)"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:590
 #, kde-format
@@ -3141,9 +3137,7 @@ msgstr "Opération mise en correspondance"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:177
-#, fuzzy, kde-format
-#| msgctxt "@title background colors"
-#| msgid "Background"
+#, kde-format
 msgid "Background"
 msgstr "Arrière plan"
 
@@ -6664,6 +6658,9 @@ msgid ""
 "  * Payee %1 has BIC with invalid length '%2'.\n"
 "    Must be 11 chars and is %3"
 msgstr ""
+"* Le bénéficiaire %1 possède une information « BIC » dont la longueur « %2 » "
+"est non valable.\n"
+"    Doit être de 11 caractères et est de %3 caractères."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2636
 #, kde-format
@@ -18627,10 +18624,9 @@ msgstr "Couleur de fond pour les opérations importées"
 
 #. i18n: ectx: label, entry (transactionImportedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:190
-#, fuzzy, kde-format
-#| msgid "Background color for imported transactions"
+#, kde-format
 msgid "Text color for imported transactions"
-msgstr "Couleur de fond pour les opérations importées"
+msgstr "Couleur du texte pour les opérations importées"
 
 #. i18n: ectx: label, entry (transactionMatchedColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:194
@@ -18640,10 +18636,9 @@ msgstr "Couleur de fond pour les opérations mises en correspondance"
 
 #. i18n: ectx: label, entry (transactionMatchedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:198
-#, fuzzy, kde-format
-#| msgid "Background color for matched transactions"
+#, kde-format
 msgid "Text color for matched transactions"
-msgstr "Couleur de fond pour les opérations mises en correspondance"
+msgstr "Couleur du texte pour les opérations mises en correspondance"
 
 #. i18n: ectx: label, entry (transactionErroneousColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:202
@@ -18665,10 +18660,9 @@ msgstr "Couleur de fond pour le marqueur de groupe"
 
 #. i18n: ectx: label, entry (groupMarkerText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:214
-#, fuzzy, kde-format
-#| msgid "Background color for group marker"
+#, kde-format
 msgid "Text color for group marker"
-msgstr "Couleur de fond pour le marqueur de groupe"
+msgstr "Couleur du texte pour le marqueur de groupe"
 
 #. i18n: ectx: label, entry (fieldRequiredColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:218
@@ -21102,11 +21096,10 @@ msgid "Costcenter"
 msgstr "Centre de coûts"
 
 #: kmymoney/views/newtransactioneditor.cpp:237
-#, fuzzy, kde-format
-#| msgid "Transaction is missing a category assignment."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
-msgstr "Cette opération n'a pas de catégorie."
+msgstr "Aucune catégorie n'est associée à cette opération."
 
 #: kmymoney/views/newtransactioneditor.cpp:239
 #, kde-format
@@ -21195,11 +21188,10 @@ msgid "Confirm end of reconciliation"
 msgstr "Confirmer la fin du rapprochement"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:294
-#, fuzzy, kde-format
-#| msgid "Retrieving transactions..."
+#, kde-format
 msgctxt "@label Reconciliation progress dialog"
 msgid "Reconciling transactions..."
-msgstr "Réception des opérations..."
+msgstr "Rapprochement des opérations en cours..."
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:442
 #, kde-format
