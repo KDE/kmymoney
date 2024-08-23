@@ -16,7 +16,6 @@
 
 #include <KLocalizedString>
 
-#include <AkonadiCore/akonadi_version.h>
 #include <alkimia/alkversion.h>
 #include <kchart_version.h>
 
@@ -71,10 +70,13 @@ KAboutData initializeCreditsData()
                         i18n("Inactive member. ") + i18nc("Roles in project", "Developer, Code refactoring"),
                         "lukasz.wojnilowicz@gmail.com");
 
+    // finding the definition of the AKONADI_VERSION_STRING seems to be different
+    // between the platforms (openSUSE, FreeBSD, ...). Since I have no idea how
+    // to fix it, I simply remove it all together.
 #ifdef ENABLE_ADDRESSBOOK
     aboutData.addComponent(QString::fromUtf8("Akonadi"),
                            i18n("Addressbook integration"),
-                           i18n("%1 (build against %2)").arg(i18n("Unknown"), AKONADI_VERSION_STRING),
+                           i18n("%1 (build against %2)").arg(i18n("Unknown"), i18n("Unknown")),
                            "https://userbase.kde.org/Akonadi");
 #endif
 
