@@ -16,12 +16,12 @@
 
 #include <KLocalizedString>
 
+#include <AkonadiCore/akonadi_version.h>
 #include <alkimia/alkversion.h>
 #include <kchart_version.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
 
 KAboutData initializeCreditsData()
 {
