@@ -150,6 +150,10 @@ if (DEFINED AKONADI_MIN_VERSION)
     set(PIMPREFIX KF5)
     find_package(${PIMPREFIX}Akonadi ${AKONADI_MIN_VERSION} QUIET)
   endif()
+  if(${PIMPREFIX}Akonadi_FOUND)
+    # for config-kmymoney.h.cmake
+    set(ADDRESSBOOK_VERSION ${${PIMPREFIX}Akonadi_VERSION})
+  endif()
   find_package(${PIMPREFIX}IdentityManagement ${AKONADI_MIN_VERSION} QUIET)
 endif()
 
