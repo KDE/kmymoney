@@ -31,9 +31,6 @@
 #cmakedefine ENABLE_LIBOFX 1
 #define ENABLE_LIBOFX_VERSION "@libofx_VERSION@"
 
-#cmakedefine ENABLE_WEBENGINE 1
-/* Part of Qt5 */
-
 #cmakedefine ENABLE_SQLCIPHER 1
 #define ENABLE_SQLCIPHER_VERSION "@SQLCIPHER_VERSION@"
 

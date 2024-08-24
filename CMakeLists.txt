@@ -169,7 +169,6 @@ if (NOT LibAlkimia${QT_MAJOR_VERSION}_FOUND)
     set(LibAlkimia5_DIR ${_LibAlkimia5_DIR})
   endif()
   find_package(LibAlkimia5 8.1 REQUIRED)
-  find_package(Qt5WebEngineWidgets 5.9.3 REQUIRED)
 endif()
 
 find_package(KChart ${KMM_KCHART_MIN_VERSION} QUIET)
