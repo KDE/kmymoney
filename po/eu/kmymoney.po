@@ -1,10 +1,10 @@
 # Translation for kmymoney.po to Euskara/Basque (eu).
-# Copyright (C) 2010-2023 This file is copyright:
+# Copyright (C) 2010-2024 This file is copyright:
 # This file is distributed under the same license as the kmymoney package.
-# SPDX-FileCopyrightText: 2023 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2023, 2024 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2010, 2011, 2013, 2014, 2018, 2020, 2022, 2023.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2010, 2011, 2013, 2014, 2018, 2020, 2022, 2023, 2024.
 # Hizkuntza Politikarako Sailburuordetza <hizpol@ej-gv.es>, 2013.
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2013.
 # Ander Elortondo <ander.elor@gmail.com>, 2018, 2020, 2022.
@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2023-12-31 16:35+0100\n"
+"PO-Revision-Date: 2024-08-23 19:24+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -825,7 +825,7 @@ msgstr "Prezioa/akzioa"
 #: kmymoney/widgets/transactionsortoption.cpp:39
 #, kde-format
 msgid "Security"
-msgstr "Burtsa-balioa"
+msgstr "Burtsa-balorea"
 
 #: kmymoney/dialogs/investtransactioneditor.cpp:365
 #, kde-format
@@ -2517,15 +2517,15 @@ msgid ""
 "the current update operation."
 msgstr ""
 "Huts egin du %2(e)tik %1(r)en kotizazioa berreskuratzean. Sakatu <b>Ez</b> "
-"burtsa-balio honetatik online prezio-iturria betiko kentzeko, sakatu <b>Bai</"
-"b> etorkizunean prezioak eguneratzen direnean burtsa-balio hau ere "
+"burtsa-balore honetatik online prezio-iturria betiko kentzeko, sakatu "
+"<b>Bai</b> etorkizunean prezioak eguneratzen direnean burtsa-balore hau ere "
 "eguneratzen jarraitzeko edo <b>Utzi</b> une honetako eguneratze-eragiketa "
 "gelditzeko."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:544
 #, kde-format
 msgid "Cannot update security <b>%1</b>: %2"
-msgstr "Ezin da <b>%1</b> burtsa-balioa eguneratu: %2"
+msgstr "Ezin da <b>%1</b> burtsa-balorea eguneratu: %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:635
 #, kde-format
@@ -3484,7 +3484,7 @@ msgid ""
 "The protocol part has been removed by KMyMoney because it is fixed to https "
 "for security reasons."
 msgstr ""
-"KMyMoneyk protokoloaren zatia kendu du https finkatuta dagoelako ziurtasun "
+"KMyMoneyk protokoloaren zatia kendu du https finkatuta dagoelako segurtasun "
 "arrazoiak direla eta."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KNewBankDlg)
@@ -4778,7 +4778,7 @@ msgid ""
 "<b>%1</b> with the currency the quote is based on."
 msgstr ""
 "Sartu akzio-kotizazioak eskuratzeko erabili beharreko URLa. Kotizatzen den "
-"burtsa-balioaren ikurrak ordeztuko du <b>%1</b>. Dibisa-bihurketetarako, "
+"burtsa-balorearen ikurrak ordeztuko du <b>%1</b>. Dibisa-bihurketetarako, "
 "kotizatu beharreko dibisak ordeztuko du <b>%2</b> eta kotizazioak oinarri "
 "duen dibisak ordeztuko du <b>%1</b>."
 
@@ -7059,7 +7059,7 @@ msgstr ""
 #: kmymoney/kmymoneyutils.cpp:576
 #, kde-format
 msgid "Delete security"
-msgstr "Ezabatu burtsa-balioa"
+msgstr "Ezabatu burtsa-balorea"
 
 #: kmymoney/kmymoneyutils.cpp:584
 #, kde-format
@@ -11076,14 +11076,14 @@ msgstr ""
 #, kde-format
 msgctxt "Security has no name"
 msgid "No name"
-msgstr "Izenik ez"
+msgstr "Izenik gabe"
 
 #: kmymoney/plugins/csv/import/securitiesdlg.cpp:46
 #: kmymoney/plugins/csv/import/securitiesdlg.cpp:76
 #, kde-format
 msgctxt "Security has no symbol"
 msgid "No symbol"
-msgstr "Ikurrik ez"
+msgstr "Ikurrik gabe"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_securitiesTab)
 #. i18n: ectx: property (windowTitle), widget (QDialog, SecuritiesDlg)
@@ -11122,14 +11122,14 @@ msgid ""
 "You need security to import into,\n"
 "so please select existing security or enter new security name and symbol."
 msgstr ""
-"Burtsa-balioa behar da inportatzeko,\n"
-"beraz aukeratu badagoena edo sartu burtsa-balio izen eta ikur berriak."
+"Burtsa-balorea behar da hartan inportatzeko,\n"
+"beraz aukeratu dagoen balorea edo sartu balore izen eta ikur berriak."
 
 #. i18n: ectx: property (text), widget (QLabel, lblSecurity)
 #: kmymoney/plugins/csv/import/securitydlg.ui:82
 #, kde-format
 msgid "Existing security"
-msgstr "Badago burtsa-balioa"
+msgstr "Dagoen burtsa-balorea"
 
 #. i18n: ectx: property (text), widget (QLabel, lblNewSymbol)
 #: kmymoney/plugins/csv/import/securitydlg.ui:89
@@ -14153,7 +14153,7 @@ msgstr "Kategoria"
 #, kde-format
 msgctxt "QIF tag for security"
 msgid "Security"
-msgstr "Burtsa-balioa"
+msgstr "Burtsa-balorea"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:545
 #, kde-format
@@ -14251,7 +14251,7 @@ msgid ""
 "involving this security will be ignored."
 msgstr ""
 "Inbertsio-kontu honek ez du \"%1\" burtsa-baliorik. Ez dira kontuan hartuko "
-"burtsa-balio horrekin lotutako transakzioak."
+"burtsa-balore horrekin lotutako transakzioak."
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1950
 #, kde-format
@@ -15049,7 +15049,7 @@ msgstr "Berz."
 #: kmymoney/plugins/views/budget/kbudgetview.ui:177
 #, kde-format
 msgid "Hide unused budget categories"
-msgstr "Ezkutatu aurrekontu-kategoria erabiligabeak"
+msgstr "Ezkutatu aurrekontu-kategoria erabili gabeak"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_assignmentBox)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:199
@@ -18590,7 +18590,7 @@ msgstr "Zerrendaren kolorea falta diren trukatze-tasetarako"
 #: kmymoney/settings/kmymoney.kcfg:218
 #, kde-format
 msgid "Background color for group marker"
-msgstr "Hondoaren kolorea talde-markatzailerako"
+msgstr "Hondoaren kolorea, talde-markarako"
 
 #. i18n: ectx: label, entry (fieldRequiredColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:222
@@ -23648,13 +23648,13 @@ msgid ""
 "<qt>The security <b>%1</b> currently does not exist as sub-account of <b>%2</"
 "b>. Do you want to create it?</qt>"
 msgstr ""
-"<qt>Une honetan ez dago <b>%1</b> burtsa-baliorik <b>%2</b>(r)en azpikontu "
+"<qt>Une honetan <b>%1</b> burtsa-balorea ez dago <b>%2</b>(r)en azpikontu "
 "gisa. Sortu nahi duzu?</qt>"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:284
 #, kde-format
 msgid "Create security"
-msgstr "Sortu burtsa-balioa"
+msgstr "Sortu burtsa-balorea"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, KNewInvestmentWizard)
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.ui:17
