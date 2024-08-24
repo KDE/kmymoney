@@ -671,6 +671,7 @@ void MyMoneyXmlReaderTest::testReadPrices()
     const auto data = QLatin1String(
         "<CURRENCIES>"
         "<CURRENCY id=\"USD\" name=\"US Dollars\" pp=\"4\" rounding-method=\"0\" saf=\"100\" scf=\"1\" symbol=\"USD\" type=\"3\"/>"
+        "<CURRENCY id=\"EUR\" name=\"Euro\" pp=\"4\" rounding-method=\"0\" saf=\"100\" scf=\"1\" symbol=\"EUR\" type=\"3\"/>"
         "</CURRENCIES>"
         "<PRICES>"
         "<PRICEPAIR from=\"USD\" to=\"EUR\">"
