@@ -274,7 +274,7 @@ bool KGPGFile::open(OpenMode mode)
         if (d->m_lastError.encodedError()) {
             return false;
         }
-        d->m_data.seek(0, SEEK_SET);
+        d->m_data.rewind();
 
     } else if (isWritable()) {
         d->m_fileWrite->setFileName(d->m_fn);
@@ -297,7 +297,7 @@ void KGPGFile::close()
         return;
 
     if (isWritable()) {
-        d->m_data.seek(0, SEEK_SET);
+        d->m_data.rewind();
 
 #if IO_THROUGH_DATA_BUFFER
         QGpgME::QByteArrayDataProvider dataProvider;
