@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-17 01:45+0000\n"
+"POT-Creation-Date: 2024-08-22 01:55+0000\n"
 "PO-Revision-Date: 2024-03-29 14:27+0100\n"
 "Last-Translator: Kjetil Sørlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -1150,74 +1150,74 @@ msgstr ""
 msgid "Update price history"
 msgstr "Oppdater kurshistorikk"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:137
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
 msgstr "Kan ikke sette %1 som grunnvaluta: %2"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:137
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
 #, kde-format
 msgid "Set base currency"
 msgstr "Sett grunnvaluta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:158
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:162
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:159
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:163
 #, kde-format
 msgid "Cannot update currency. %1"
 msgstr "Kan ikke oppdatere valuta. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:158
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:162
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:159
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:163
 #, kde-format
 msgid "Update currency"
 msgstr "Oppdater valuta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:195
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:196
 #, kde-format
 msgid "Cannot create new currency. %1"
 msgstr "Kan ikke opprette ny valuta. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:195
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:490
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:196
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:491
 #, kde-format
 msgid "New currency"
 msgstr "Ny valuta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:197
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:198
 #, kde-format
 msgid "Cannot modify currency. %1"
 msgstr "Kan ikke endre valuta. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:197
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:198
 #, kde-format
 msgid "Edit currency"
 msgstr "Endre valuta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:491
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:492
 #, kde-format
 msgid "Rename currency"
 msgstr "Gi nytt navn til valuta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:492
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:634
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:493
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
 #, kde-format
 msgid "Delete currency"
 msgstr "Slett valuta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:493
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:494
 #, kde-format
 msgid "Select as base currency"
 msgstr "Velg som grunnvaluta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:503
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:504
 #, kde-format
 msgctxt "@title:menu"
 msgid "Currency options"
 msgstr "Valutavalg"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:634
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
 #, kde-format
 msgid "Cannot delete currency %1. %2"
 msgstr "Kan ikke ikke slette valutaen %1: %2"
@@ -20799,7 +20799,7 @@ msgctxt "text for online balance date if not available"
 msgid "n/a"
 msgstr "i/t"
 
-#: kmymoney/views/onlinebalancedelegate.cpp:176
+#: kmymoney/views/onlinebalancedelegate.cpp:175
 #, kde-format
 msgctxt "Label in ledger for online balance row"
 msgid "Online Balance"

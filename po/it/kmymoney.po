@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-22 01:55+0000\n"
+"POT-Creation-Date: 2024-08-24 01:48+0000\n"
 "PO-Revision-Date: 2024-08-17 19:29+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -4516,22 +4516,23 @@ msgid "Create tag"
 msgstr "Crea etichetta"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
-#: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:35
+#: kmymoney/kcreditswindow.cpp:32 kmymoney/kcreditswindow.cpp:97
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:35
 #, kde-format
 msgid "GPG encryption"
 msgstr "Cifratura GPG"
 
-#: kmymoney/kcreditswindow.cpp:33
+#: kmymoney/kcreditswindow.cpp:35 kmymoney/kcreditswindow.cpp:78
 #, kde-format
 msgid "Addressbook integration"
 msgstr "Integrazione della rubrica"
 
-#: kmymoney/kcreditswindow.cpp:36
+#: kmymoney/kcreditswindow.cpp:38
 #, kde-format
 msgid "Holiday regions integration"
 msgstr "Integrazione festività regionali"
 
-#: kmymoney/kcreditswindow.cpp:39
+#: kmymoney/kcreditswindow.cpp:41
 #, kde-format
 msgid ""
 "\n"
@@ -4545,12 +4546,12 @@ msgstr ""
 "Considera l'idea di contribuire a questo progetto con codice e/o "
 "suggerimenti."
 
-#: kmymoney/kcreditswindow.cpp:41
+#: kmymoney/kcreditswindow.cpp:43
 #, kde-format
 msgid "(c) 2000-2024 The KMyMoney development team"
 msgstr "(c) 2000-2024 La squadra di sviluppo di KMyMoney"
 
-#: kmymoney/kcreditswindow.cpp:44
+#: kmymoney/kcreditswindow.cpp:46
 #, kde-format
 msgid ""
 "Compiled with the following optional features:\n"
@@ -4559,129 +4560,186 @@ msgstr ""
 "Compilato con le seguenti funzionalità opzionali:\n"
 "%1"
 
-#: kmymoney/kcreditswindow.cpp:46
+#: kmymoney/kcreditswindow.cpp:48
 #, kde-format
 msgctxt "Roles in project"
 msgid "Core engine, Release Manager, Project admin"
 msgstr "Motore principale, gestore dei rilasci, amministratore del progetto"
 
-#: kmymoney/kcreditswindow.cpp:47
+#: kmymoney/kcreditswindow.cpp:49
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Maintainer, Windows support"
 msgstr "Sviluppatore, responsabile, supporto Windows"
 
-#: kmymoney/kcreditswindow.cpp:48
+#: kmymoney/kcreditswindow.cpp:50
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Windows and MacOS support"
 msgstr "Sviluppatore, supporto Windows e MacOS"
 
-#: kmymoney/kcreditswindow.cpp:51 kmymoney/kcreditswindow.cpp:53
-#: kmymoney/kcreditswindow.cpp:55 kmymoney/kcreditswindow.cpp:58
-#: kmymoney/kcreditswindow.cpp:61 kmymoney/kcreditswindow.cpp:63
-#: kmymoney/kcreditswindow.cpp:64 kmymoney/kcreditswindow.cpp:65
-#: kmymoney/kcreditswindow.cpp:66 kmymoney/kcreditswindow.cpp:68
-#: kmymoney/kcreditswindow.cpp:73 kmymoney/kcreditswindow.cpp:76
-#: kmymoney/kcreditswindow.cpp:79 kmymoney/kcreditswindow.cpp:82
-#: kmymoney/kcreditswindow.cpp:84
+#: kmymoney/kcreditswindow.cpp:53 kmymoney/kcreditswindow.cpp:55
+#: kmymoney/kcreditswindow.cpp:57 kmymoney/kcreditswindow.cpp:60
+#: kmymoney/kcreditswindow.cpp:63 kmymoney/kcreditswindow.cpp:65
+#: kmymoney/kcreditswindow.cpp:66 kmymoney/kcreditswindow.cpp:67
+#: kmymoney/kcreditswindow.cpp:68 kmymoney/kcreditswindow.cpp:70
+#: kmymoney/kcreditswindow.cpp:136 kmymoney/kcreditswindow.cpp:139
+#: kmymoney/kcreditswindow.cpp:142 kmymoney/kcreditswindow.cpp:145
+#: kmymoney/kcreditswindow.cpp:147
 #, kde-format
 msgid "Inactive member. "
 msgstr "Membro inattivo."
 
-#: kmymoney/kcreditswindow.cpp:51
+#: kmymoney/kcreditswindow.cpp:53
 #, kde-format
 msgctxt "Roles in project"
 msgid "Initial idea, much initial source code, Project admin"
 msgstr ""
 "Idea iniziale, molto codice sorgente iniziale, amministratore del progetto"
 
-#: kmymoney/kcreditswindow.cpp:53
+#: kmymoney/kcreditswindow.cpp:55
 #, kde-format
 msgctxt "Roles in project"
 msgid "Forecast, Reports"
 msgstr "Previsione, report"
 
-#: kmymoney/kcreditswindow.cpp:55
+#: kmymoney/kcreditswindow.cpp:57
 #, kde-format
 msgctxt "Roles in project"
 msgid "Reporting logic, OFX Import"
 msgstr "Logica di creazione dei report, Importazione OFX"
 
-#: kmymoney/kcreditswindow.cpp:58
+#: kmymoney/kcreditswindow.cpp:60
 #, kde-format
 msgctxt "Roles in project"
 msgid "Database backend, maintainer stable branch"
 msgstr "Motore del database, responsabile del ramo stabile"
 
-#: kmymoney/kcreditswindow.cpp:61
+#: kmymoney/kcreditswindow.cpp:63
 #, kde-format
 msgctxt "Roles in project"
 msgid "Project Admin"
 msgstr "Amministratore del progetto"
 
-#: kmymoney/kcreditswindow.cpp:63 kmymoney/kcreditswindow.cpp:65
-#: kmymoney/kcreditswindow.cpp:66
+#: kmymoney/kcreditswindow.cpp:65 kmymoney/kcreditswindow.cpp:67
+#: kmymoney/kcreditswindow.cpp:68
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer"
 msgstr "Sviluppatore"
 
-#: kmymoney/kcreditswindow.cpp:64
+#: kmymoney/kcreditswindow.cpp:66
 #, kde-format
 msgctxt "Roles in project"
 msgid "Database backend"
 msgstr "Motore del database"
 
-#: kmymoney/kcreditswindow.cpp:68
+#: kmymoney/kcreditswindow.cpp:70
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Code refactoring"
 msgstr "Sviluppatore, refactoring del codice"
 
-#: kmymoney/kcreditswindow.cpp:71
+#: kmymoney/kcreditswindow.cpp:79 kmymoney/kcreditswindow.cpp:85
+#: kmymoney/kcreditswindow.cpp:91 kmymoney/kcreditswindow.cpp:98
+#: kmymoney/kcreditswindow.cpp:105 kmymoney/kcreditswindow.cpp:111
+#: kmymoney/kcreditswindow.cpp:116 kmymoney/kcreditswindow.cpp:123
+#: kmymoney/kcreditswindow.cpp:130
+#, kde-format
+msgid "%1 (build against %2)"
+msgstr ""
+
+#: kmymoney/kcreditswindow.cpp:79 kmymoney/kcreditswindow.cpp:91
+#: kmymoney/kcreditswindow.cpp:98 kmymoney/kcreditswindow.cpp:105
+#: kmymoney/kcreditswindow.cpp:111 kmymoney/kcreditswindow.cpp:116
+#: kmymoney/kcreditswindow.cpp:123 kmymoney/kcreditswindow.cpp:130
+#: kmymoney/mymoney/mymoneysecurity.cpp:266
+#, kde-format
+msgid "Unknown"
+msgstr "Sconosciuto"
+
+#: kmymoney/kcreditswindow.cpp:84
+#, kde-format
+msgid "Financial framework"
+msgstr ""
+
+#: kmymoney/kcreditswindow.cpp:90
+#, fuzzy, kde-format
+#| msgid "Online settings"
+msgid "Online banking"
+msgstr "Impostazioni in linea"
+
+#: kmymoney/kcreditswindow.cpp:104
+#, fuzzy, kde-format
+#| msgid "Online Banking Operations"
+msgid "Online banking framework"
+msgstr "Operazioni bancarie in linea"
+
+#: kmymoney/kcreditswindow.cpp:110
+#, kde-format
+msgid "Library for creating diagrams"
+msgstr ""
+
+#: kmymoney/kcreditswindow.cpp:115
+#, fuzzy, kde-format
+#| msgid "iCalendar file"
+msgid "iCalendar integration"
+msgstr "File iCalendar"
+
+#: kmymoney/kcreditswindow.cpp:122
+#, kde-format
+msgid "OFX banking protocol abstraction library"
+msgstr ""
+
+#: kmymoney/kcreditswindow.cpp:129
+#, fuzzy, kde-format
+#| msgid "Database malfunction"
+msgid "SQLite database encryption"
+msgstr "Malfunzionamento del database"
+
+#: kmymoney/kcreditswindow.cpp:134
 #, kde-format
 msgctxt "Roles in project"
 msgid "Documentation and user support"
 msgstr "Documentazione e supporto utente"
 
-#: kmymoney/kcreditswindow.cpp:73
+#: kmymoney/kcreditswindow.cpp:136
 #, kde-format
 msgctxt "Roles in project"
 msgid "Initial investment support"
 msgstr "Supporto all'investimento iniziale"
 
-#: kmymoney/kcreditswindow.cpp:76
+#: kmymoney/kcreditswindow.cpp:139
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer & Artist"
 msgstr "Sviluppatore e artista"
 
-#: kmymoney/kcreditswindow.cpp:79
+#: kmymoney/kcreditswindow.cpp:142
 #, kde-format
 msgctxt "Roles in project"
 msgid "Icons & splash screen"
 msgstr "Icone e schermata iniziale"
 
-#: kmymoney/kcreditswindow.cpp:81
+#: kmymoney/kcreditswindow.cpp:144
 #, kde-format
 msgctxt "Roles in project"
 msgid "Patches and port to kde4"
 msgstr "Patch e conversione a kde4"
 
-#: kmymoney/kcreditswindow.cpp:82
+#: kmymoney/kcreditswindow.cpp:145
 #, kde-format
 msgctxt "Roles in project"
 msgid "Patches"
 msgstr "Patch"
 
-#: kmymoney/kcreditswindow.cpp:84
+#: kmymoney/kcreditswindow.cpp:147
 #, kde-format
 msgctxt "Roles in project"
 msgid "Patches, packaging and KF5-CI for OS X"
 msgstr "Patch, pacchetti e KF5-CI per OS X"
 
-#: kmymoney/kcreditswindow.cpp:86
+#: kmymoney/kcreditswindow.cpp:149
 #, kde-format
 msgctxt "Roles in project"
 msgid "CSV import/export"
@@ -8127,10 +8185,6 @@ msgstr "HalfDown"
 #: kmymoney/mymoney/mymoneysecurity.cpp:262
 msgid "HalfUp"
 msgstr "HalfUp"
-
-#: kmymoney/mymoney/mymoneysecurity.cpp:266
-msgid "Unknown"
-msgstr "Sconosciuto"
 
 #: kmymoney/mymoney/mymoneytemplate.cpp:99
 #, kde-format

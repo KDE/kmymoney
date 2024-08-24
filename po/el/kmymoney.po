@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-22 01:55+0000\n"
+"POT-Creation-Date: 2024-08-24 01:48+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -4664,23 +4664,24 @@ msgid "Create tag"
 msgstr "Δημιουργία"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
-#: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:35
+#: kmymoney/kcreditswindow.cpp:32 kmymoney/kcreditswindow.cpp:97
+#: kmymoney/plugins/xml/xmlstoragesettings.ui:35
 #, kde-format
 msgid "GPG encryption"
 msgstr "Κρυπτογράφηση GPG"
 
-#: kmymoney/kcreditswindow.cpp:33
+#: kmymoney/kcreditswindow.cpp:35 kmymoney/kcreditswindow.cpp:78
 #, fuzzy, kde-format
 #| msgid "Address book import"
 msgid "Addressbook integration"
 msgstr "Εισαγωγή του βιβλίου διευθύνσεων"
 
-#: kmymoney/kcreditswindow.cpp:36
+#: kmymoney/kcreditswindow.cpp:38
 #, kde-format
 msgid "Holiday regions integration"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:39
+#: kmymoney/kcreditswindow.cpp:41
 #, fuzzy, kde-format
 #| msgid ""
 #| "\n"
@@ -4698,13 +4699,13 @@ msgstr ""
 "\n"
 "Μπορείτε να συνεισφέρετε σε αυτό το έργο με κώδικα ή/και προτάσεις."
 
-#: kmymoney/kcreditswindow.cpp:41
+#: kmymoney/kcreditswindow.cpp:43
 #, fuzzy, kde-format
 #| msgid "(c) 2000-2012 The KMyMoney development team"
 msgid "(c) 2000-2024 The KMyMoney development team"
 msgstr "(c) 2000-2012 Η ομάδα ανάπτυξης του KMyMoney"
 
-#: kmymoney/kcreditswindow.cpp:44
+#: kmymoney/kcreditswindow.cpp:46
 #, fuzzy, kde-format
 #| msgid "Compiled with the following settings:\n"
 msgid ""
@@ -4712,143 +4713,200 @@ msgid ""
 "%1"
 msgstr "Μεταγλωττισμένο με τις παρακάτω παραμέτρους:\n"
 
-#: kmymoney/kcreditswindow.cpp:46
+#: kmymoney/kcreditswindow.cpp:48
 #, fuzzy, kde-format
 #| msgid "Core engine, Release Manager, Project admin"
 msgctxt "Roles in project"
 msgid "Core engine, Release Manager, Project admin"
 msgstr "Μηχανή πυρήνα, διαχειριστής εκδόσεων, διαχειριστής έργου"
 
-#: kmymoney/kcreditswindow.cpp:47
+#: kmymoney/kcreditswindow.cpp:49
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Maintainer, Windows support"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:48
+#: kmymoney/kcreditswindow.cpp:50
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Windows and MacOS support"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:51 kmymoney/kcreditswindow.cpp:53
-#: kmymoney/kcreditswindow.cpp:55 kmymoney/kcreditswindow.cpp:58
-#: kmymoney/kcreditswindow.cpp:61 kmymoney/kcreditswindow.cpp:63
-#: kmymoney/kcreditswindow.cpp:64 kmymoney/kcreditswindow.cpp:65
-#: kmymoney/kcreditswindow.cpp:66 kmymoney/kcreditswindow.cpp:68
-#: kmymoney/kcreditswindow.cpp:73 kmymoney/kcreditswindow.cpp:76
-#: kmymoney/kcreditswindow.cpp:79 kmymoney/kcreditswindow.cpp:82
-#: kmymoney/kcreditswindow.cpp:84
+#: kmymoney/kcreditswindow.cpp:53 kmymoney/kcreditswindow.cpp:55
+#: kmymoney/kcreditswindow.cpp:57 kmymoney/kcreditswindow.cpp:60
+#: kmymoney/kcreditswindow.cpp:63 kmymoney/kcreditswindow.cpp:65
+#: kmymoney/kcreditswindow.cpp:66 kmymoney/kcreditswindow.cpp:67
+#: kmymoney/kcreditswindow.cpp:68 kmymoney/kcreditswindow.cpp:70
+#: kmymoney/kcreditswindow.cpp:136 kmymoney/kcreditswindow.cpp:139
+#: kmymoney/kcreditswindow.cpp:142 kmymoney/kcreditswindow.cpp:145
+#: kmymoney/kcreditswindow.cpp:147
 #, kde-format
 msgid "Inactive member. "
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:51
+#: kmymoney/kcreditswindow.cpp:53
 #, fuzzy, kde-format
 #| msgid "Initial idea, much initial source code, Project admin"
 msgctxt "Roles in project"
 msgid "Initial idea, much initial source code, Project admin"
 msgstr "Αρχική ιδέα, αρκετό από τον αρχικό κώδικα, διαχειριστής του έργου"
 
-#: kmymoney/kcreditswindow.cpp:53
+#: kmymoney/kcreditswindow.cpp:55
 #, fuzzy, kde-format
 #| msgid "Forecast, Reports"
 msgctxt "Roles in project"
 msgid "Forecast, Reports"
 msgstr "Πρόβλεψη, αναφορές"
 
-#: kmymoney/kcreditswindow.cpp:55
+#: kmymoney/kcreditswindow.cpp:57
 #, fuzzy, kde-format
 #| msgid "Reporting logic, OFX Import"
 msgctxt "Roles in project"
 msgid "Reporting logic, OFX Import"
 msgstr "Λογική των αναφορών, εισαγωγή OFX"
 
-#: kmymoney/kcreditswindow.cpp:58
+#: kmymoney/kcreditswindow.cpp:60
 #, fuzzy, kde-format
 #| msgid "Database backend, maintainer stable branch"
 msgctxt "Roles in project"
 msgid "Database backend, maintainer stable branch"
 msgstr "Βάση δεδομένων, συντηρητής του κλάδου stable"
 
-#: kmymoney/kcreditswindow.cpp:61
+#: kmymoney/kcreditswindow.cpp:63
 #, fuzzy, kde-format
 #| msgid "Project Admin"
 msgctxt "Roles in project"
 msgid "Project Admin"
 msgstr "Διαχειριστής έργου"
 
-#: kmymoney/kcreditswindow.cpp:63 kmymoney/kcreditswindow.cpp:65
-#: kmymoney/kcreditswindow.cpp:66
+#: kmymoney/kcreditswindow.cpp:65 kmymoney/kcreditswindow.cpp:67
+#: kmymoney/kcreditswindow.cpp:68
 #, fuzzy, kde-format
 #| msgid "Developer"
 msgctxt "Roles in project"
 msgid "Developer"
 msgstr "Προγραμματιστής"
 
-#: kmymoney/kcreditswindow.cpp:64
+#: kmymoney/kcreditswindow.cpp:66
 #, fuzzy, kde-format
 #| msgid "Database backend"
 msgctxt "Roles in project"
 msgid "Database backend"
 msgstr "Σύστημα υποστήριξης βάσης δεδομένων"
 
-#: kmymoney/kcreditswindow.cpp:68
+#: kmymoney/kcreditswindow.cpp:70
 #, fuzzy, kde-format
 #| msgid "Developer & Artist"
 msgctxt "Roles in project"
 msgid "Developer, Code refactoring"
 msgstr "Προγραμματιστής & καλλιτέχνης"
 
-#: kmymoney/kcreditswindow.cpp:71
+#: kmymoney/kcreditswindow.cpp:79 kmymoney/kcreditswindow.cpp:85
+#: kmymoney/kcreditswindow.cpp:91 kmymoney/kcreditswindow.cpp:98
+#: kmymoney/kcreditswindow.cpp:105 kmymoney/kcreditswindow.cpp:111
+#: kmymoney/kcreditswindow.cpp:116 kmymoney/kcreditswindow.cpp:123
+#: kmymoney/kcreditswindow.cpp:130
+#, kde-format
+msgid "%1 (build against %2)"
+msgstr ""
+
+#: kmymoney/kcreditswindow.cpp:79 kmymoney/kcreditswindow.cpp:91
+#: kmymoney/kcreditswindow.cpp:98 kmymoney/kcreditswindow.cpp:105
+#: kmymoney/kcreditswindow.cpp:111 kmymoney/kcreditswindow.cpp:116
+#: kmymoney/kcreditswindow.cpp:123 kmymoney/kcreditswindow.cpp:130
+#: kmymoney/mymoney/mymoneysecurity.cpp:266
+#, kde-format
+msgid "Unknown"
+msgstr "Άγνωστο"
+
+#: kmymoney/kcreditswindow.cpp:84
+#, kde-format
+msgid "Financial framework"
+msgstr ""
+
+#: kmymoney/kcreditswindow.cpp:90
+#, fuzzy, kde-format
+#| msgid "Online settings"
+msgid "Online banking"
+msgstr "Διαδικτυακές ρυθμίσεις"
+
+#: kmymoney/kcreditswindow.cpp:104
+#, fuzzy, kde-format
+#| msgid "Online Banking Account Setup"
+msgid "Online banking framework"
+msgstr "Ρύθμιση του διαδικτυακού λογαριασμού τραπεζικών εργασιών"
+
+#: kmymoney/kcreditswindow.cpp:110
+#, kde-format
+msgid "Library for creating diagrams"
+msgstr ""
+
+#: kmymoney/kcreditswindow.cpp:115
+#, fuzzy, kde-format
+#| msgid "iCalendar file"
+msgid "iCalendar integration"
+msgstr "Αρχείο iCalendar"
+
+#: kmymoney/kcreditswindow.cpp:122
+#, kde-format
+msgid "OFX banking protocol abstraction library"
+msgstr ""
+
+#: kmymoney/kcreditswindow.cpp:129
+#, fuzzy, kde-format
+#| msgid "Database malfunction"
+msgid "SQLite database encryption"
+msgstr "Δυσλειτουργία της βάσης δεδομένων"
+
+#: kmymoney/kcreditswindow.cpp:134
 #, kde-format
 msgctxt "Roles in project"
 msgid "Documentation and user support"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:73
+#: kmymoney/kcreditswindow.cpp:136
 #, fuzzy, kde-format
 #| msgid "Initial investment support"
 msgctxt "Roles in project"
 msgid "Initial investment support"
 msgstr "Αρχική υποστήριξη επενδύσεων"
 
-#: kmymoney/kcreditswindow.cpp:76
+#: kmymoney/kcreditswindow.cpp:139
 #, fuzzy, kde-format
 #| msgid "Developer & Artist"
 msgctxt "Roles in project"
 msgid "Developer & Artist"
 msgstr "Προγραμματιστής & καλλιτέχνης"
 
-#: kmymoney/kcreditswindow.cpp:79
+#: kmymoney/kcreditswindow.cpp:142
 #, fuzzy, kde-format
 #| msgid "Icons & splash screen"
 msgctxt "Roles in project"
 msgid "Icons & splash screen"
 msgstr "Εικονίδια & εικόνα εκκίνησης"
 
-#: kmymoney/kcreditswindow.cpp:81
+#: kmymoney/kcreditswindow.cpp:144
 #, fuzzy, kde-format
 #| msgid "Patches and port to kde4"
 msgctxt "Roles in project"
 msgid "Patches and port to kde4"
 msgstr "Διορθώσεις και μεταφορά στο KDE4"
 
-#: kmymoney/kcreditswindow.cpp:82
+#: kmymoney/kcreditswindow.cpp:145
 #, fuzzy, kde-format
 #| msgid "Patches"
 msgctxt "Roles in project"
 msgid "Patches"
 msgstr "Διορθώσεις"
 
-#: kmymoney/kcreditswindow.cpp:84
+#: kmymoney/kcreditswindow.cpp:147
 #, fuzzy, kde-format
 #| msgid "Patches and port to kde4"
 msgctxt "Roles in project"
 msgid "Patches, packaging and KF5-CI for OS X"
 msgstr "Διορθώσεις και μεταφορά στο KDE4"
 
-#: kmymoney/kcreditswindow.cpp:86
+#: kmymoney/kcreditswindow.cpp:149
 #, fuzzy, kde-format
 #| msgctxt "CSV Importer dialog title"
 #| msgid "CSV Importer"
@@ -8471,10 +8529,6 @@ msgstr "Κάτω"
 #: kmymoney/mymoney/mymoneysecurity.cpp:262
 msgid "HalfUp"
 msgstr ""
-
-#: kmymoney/mymoney/mymoneysecurity.cpp:266
-msgid "Unknown"
-msgstr "Άγνωστο"
 
 #: kmymoney/mymoney/mymoneytemplate.cpp:99
 #, kde-format
