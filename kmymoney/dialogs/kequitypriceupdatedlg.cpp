@@ -295,13 +295,13 @@ public:
                     QString date;
                     QString source = QLatin1String("KMyMoney Currency");
                     if (pr.isValid()) {
-                        MyMoneySecurity fromCurrency = file->currency(pair.second);
-                        MyMoneySecurity toCurrency = file->currency(pair.first);
+                        MyMoneySecurity fromCurrency = file->currency(pair.first);
+                        MyMoneySecurity toCurrency = file->currency(pair.second);
                         price = pr.rate(pair.second).formatMoney(fromCurrency.tradingSymbol(), toCurrency.pricePrecision());
                         date = MyMoneyUtils::formatDate(pr.date());
                         source = pr.source();
                     }
-                    m_onlinePriceModel.addOnlinePrice(id, symbol, i18n("%1 units in %2", pair.first, pair.second), price, date, source);
+                    m_onlinePriceModel.addOnlinePrice(id, symbol, i18n("%1 units for one %2", pair.first, pair.second), price, date, source);
                 }
             }
         }
