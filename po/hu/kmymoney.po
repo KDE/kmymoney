@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-24 01:48+0000\n"
+"POT-Creation-Date: 2024-08-25 01:48+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -1679,7 +1679,7 @@ msgstr "Beállítás"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:304
 #, kde-format
-msgid "%1 units in %2"
+msgid "%1 units for one %2"
 msgstr ""
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:341
@@ -4428,23 +4428,23 @@ msgid "Create tag"
 msgstr "Létrehozás"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
-#: kmymoney/kcreditswindow.cpp:32 kmymoney/kcreditswindow.cpp:97
+#: kmymoney/kcreditswindow.cpp:31 kmymoney/kcreditswindow.cpp:93
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:35
 #, kde-format
 msgid "GPG encryption"
 msgstr "GPG titkosítás"
 
-#: kmymoney/kcreditswindow.cpp:35 kmymoney/kcreditswindow.cpp:78
+#: kmymoney/kcreditswindow.cpp:34 kmymoney/kcreditswindow.cpp:74
 #, kde-format
 msgid "Addressbook integration"
 msgstr "Címjegyzék-integráció"
 
-#: kmymoney/kcreditswindow.cpp:38
+#: kmymoney/kcreditswindow.cpp:37
 #, kde-format
 msgid "Holiday regions integration"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:41
+#: kmymoney/kcreditswindow.cpp:40
 #, fuzzy, kde-format
 #| msgid ""
 #| "\n"
@@ -4463,13 +4463,13 @@ msgstr ""
 "Kérlek fontold meg hozzájárulásod ehhez a projekthez kóddal és/vagy "
 "javaslatokkal."
 
-#: kmymoney/kcreditswindow.cpp:43
+#: kmymoney/kcreditswindow.cpp:42
 #, fuzzy, kde-format
 #| msgid "(c) 2000-2014 The KMyMoney development team"
 msgid "(c) 2000-2024 The KMyMoney development team"
 msgstr "© A KMyMoney fejlesztői csapata, 2000-2014."
 
-#: kmymoney/kcreditswindow.cpp:46
+#: kmymoney/kcreditswindow.cpp:45
 #, fuzzy, kde-format
 #| msgid "Compiled with the following settings:\n"
 msgid ""
@@ -4477,200 +4477,200 @@ msgid ""
 "%1"
 msgstr "A következő beállításokkal összeállított:\n"
 
-#: kmymoney/kcreditswindow.cpp:48
+#: kmymoney/kcreditswindow.cpp:47
 #, fuzzy, kde-format
 #| msgid "Core engine, Release Manager, Project admin"
 msgctxt "Roles in project"
 msgid "Core engine, Release Manager, Project admin"
 msgstr "Elsődleges szoftver komponensek, kiadás menedzser, projekt admin"
 
-#: kmymoney/kcreditswindow.cpp:49
+#: kmymoney/kcreditswindow.cpp:48
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Maintainer, Windows support"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:50
+#: kmymoney/kcreditswindow.cpp:49
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Windows and MacOS support"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:53 kmymoney/kcreditswindow.cpp:55
-#: kmymoney/kcreditswindow.cpp:57 kmymoney/kcreditswindow.cpp:60
-#: kmymoney/kcreditswindow.cpp:63 kmymoney/kcreditswindow.cpp:65
-#: kmymoney/kcreditswindow.cpp:66 kmymoney/kcreditswindow.cpp:67
-#: kmymoney/kcreditswindow.cpp:68 kmymoney/kcreditswindow.cpp:70
-#: kmymoney/kcreditswindow.cpp:136 kmymoney/kcreditswindow.cpp:139
-#: kmymoney/kcreditswindow.cpp:142 kmymoney/kcreditswindow.cpp:145
-#: kmymoney/kcreditswindow.cpp:147
+#: kmymoney/kcreditswindow.cpp:52 kmymoney/kcreditswindow.cpp:54
+#: kmymoney/kcreditswindow.cpp:56 kmymoney/kcreditswindow.cpp:59
+#: kmymoney/kcreditswindow.cpp:62 kmymoney/kcreditswindow.cpp:64
+#: kmymoney/kcreditswindow.cpp:65 kmymoney/kcreditswindow.cpp:66
+#: kmymoney/kcreditswindow.cpp:67 kmymoney/kcreditswindow.cpp:69
+#: kmymoney/kcreditswindow.cpp:132 kmymoney/kcreditswindow.cpp:135
+#: kmymoney/kcreditswindow.cpp:138 kmymoney/kcreditswindow.cpp:141
+#: kmymoney/kcreditswindow.cpp:143
 #, kde-format
 msgid "Inactive member. "
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:53
+#: kmymoney/kcreditswindow.cpp:52
 #, fuzzy, kde-format
 #| msgid "Initial idea, much initial source code, Project admin"
 msgctxt "Roles in project"
 msgid "Initial idea, much initial source code, Project admin"
 msgstr "Eredeti ötlet, számos eredeti forráskód, projekt admin"
 
-#: kmymoney/kcreditswindow.cpp:55
+#: kmymoney/kcreditswindow.cpp:54
 #, fuzzy, kde-format
 #| msgid "Forecast, Reports"
 msgctxt "Roles in project"
 msgid "Forecast, Reports"
 msgstr "Előrejelzések, jelentések"
 
-#: kmymoney/kcreditswindow.cpp:57
+#: kmymoney/kcreditswindow.cpp:56
 #, fuzzy, kde-format
 #| msgid "Reporting logic, OFX Import"
 msgctxt "Roles in project"
 msgid "Reporting logic, OFX Import"
 msgstr "Jelentések, OFX import"
 
-#: kmymoney/kcreditswindow.cpp:60
+#: kmymoney/kcreditswindow.cpp:59
 #, fuzzy, kde-format
 #| msgid "Database backend, maintainer stable branch"
 msgctxt "Roles in project"
 msgid "Database backend, maintainer stable branch"
 msgstr "Adatbázismodul, a stabil ág karbantartója"
 
-#: kmymoney/kcreditswindow.cpp:63
+#: kmymoney/kcreditswindow.cpp:62
 #, fuzzy, kde-format
 #| msgid "Project Admin"
 msgctxt "Roles in project"
 msgid "Project Admin"
 msgstr "Projektadminisztrátor"
 
-#: kmymoney/kcreditswindow.cpp:65 kmymoney/kcreditswindow.cpp:67
-#: kmymoney/kcreditswindow.cpp:68
+#: kmymoney/kcreditswindow.cpp:64 kmymoney/kcreditswindow.cpp:66
+#: kmymoney/kcreditswindow.cpp:67
 #, fuzzy, kde-format
 #| msgid "Developer"
 msgctxt "Roles in project"
 msgid "Developer"
 msgstr "Fejlesztő"
 
-#: kmymoney/kcreditswindow.cpp:66
+#: kmymoney/kcreditswindow.cpp:65
 #, fuzzy, kde-format
 #| msgid "Database backend"
 msgctxt "Roles in project"
 msgid "Database backend"
 msgstr "Adatbázismodul"
 
-#: kmymoney/kcreditswindow.cpp:70
+#: kmymoney/kcreditswindow.cpp:69
 #, fuzzy, kde-format
 #| msgid "Developer & Artist"
 msgctxt "Roles in project"
 msgid "Developer, Code refactoring"
 msgstr "Fejlesztő és művész"
 
-#: kmymoney/kcreditswindow.cpp:79 kmymoney/kcreditswindow.cpp:85
-#: kmymoney/kcreditswindow.cpp:91 kmymoney/kcreditswindow.cpp:98
-#: kmymoney/kcreditswindow.cpp:105 kmymoney/kcreditswindow.cpp:111
-#: kmymoney/kcreditswindow.cpp:116 kmymoney/kcreditswindow.cpp:123
-#: kmymoney/kcreditswindow.cpp:130
+#: kmymoney/kcreditswindow.cpp:75 kmymoney/kcreditswindow.cpp:81
+#: kmymoney/kcreditswindow.cpp:87 kmymoney/kcreditswindow.cpp:94
+#: kmymoney/kcreditswindow.cpp:101 kmymoney/kcreditswindow.cpp:107
+#: kmymoney/kcreditswindow.cpp:112 kmymoney/kcreditswindow.cpp:119
+#: kmymoney/kcreditswindow.cpp:126
 #, kde-format
 msgid "%1 (build against %2)"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:79 kmymoney/kcreditswindow.cpp:91
-#: kmymoney/kcreditswindow.cpp:98 kmymoney/kcreditswindow.cpp:105
-#: kmymoney/kcreditswindow.cpp:111 kmymoney/kcreditswindow.cpp:116
-#: kmymoney/kcreditswindow.cpp:123 kmymoney/kcreditswindow.cpp:130
+#: kmymoney/kcreditswindow.cpp:75 kmymoney/kcreditswindow.cpp:87
+#: kmymoney/kcreditswindow.cpp:94 kmymoney/kcreditswindow.cpp:101
+#: kmymoney/kcreditswindow.cpp:107 kmymoney/kcreditswindow.cpp:112
+#: kmymoney/kcreditswindow.cpp:119 kmymoney/kcreditswindow.cpp:126
 #: kmymoney/mymoney/mymoneysecurity.cpp:266
 #, kde-format
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: kmymoney/kcreditswindow.cpp:84
+#: kmymoney/kcreditswindow.cpp:80
 #, kde-format
 msgid "Financial framework"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:90
+#: kmymoney/kcreditswindow.cpp:86
 #, fuzzy, kde-format
 #| msgid "Online settings"
 msgid "Online banking"
 msgstr "Online beállítások"
 
-#: kmymoney/kcreditswindow.cpp:104
+#: kmymoney/kcreditswindow.cpp:100
 #, fuzzy, kde-format
 #| msgid "Online settings"
 msgid "Online banking framework"
 msgstr "Online beállítások"
 
-#: kmymoney/kcreditswindow.cpp:110
+#: kmymoney/kcreditswindow.cpp:106
 #, kde-format
 msgid "Library for creating diagrams"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:115
+#: kmymoney/kcreditswindow.cpp:111
 #, fuzzy, kde-format
 #| msgid "iCalendar file"
 msgid "iCalendar integration"
 msgstr "iCalendar fájl"
 
-#: kmymoney/kcreditswindow.cpp:122
+#: kmymoney/kcreditswindow.cpp:118
 #, kde-format
 msgid "OFX banking protocol abstraction library"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:129
+#: kmymoney/kcreditswindow.cpp:125
 #, fuzzy, kde-format
 #| msgid "Database malfunction"
 msgid "SQLite database encryption"
 msgstr "Adatbázis hiba"
 
-#: kmymoney/kcreditswindow.cpp:134
+#: kmymoney/kcreditswindow.cpp:130
 #, kde-format
 msgctxt "Roles in project"
 msgid "Documentation and user support"
 msgstr ""
 
-#: kmymoney/kcreditswindow.cpp:136
+#: kmymoney/kcreditswindow.cpp:132
 #, fuzzy, kde-format
 #| msgid "Initial investment support"
 msgctxt "Roles in project"
 msgid "Initial investment support"
 msgstr "Kezdeti befektetés támogató"
 
-#: kmymoney/kcreditswindow.cpp:139
+#: kmymoney/kcreditswindow.cpp:135
 #, fuzzy, kde-format
 #| msgid "Developer & Artist"
 msgctxt "Roles in project"
 msgid "Developer & Artist"
 msgstr "Fejlesztő és művész"
 
-#: kmymoney/kcreditswindow.cpp:142
+#: kmymoney/kcreditswindow.cpp:138
 #, fuzzy, kde-format
 #| msgid "Icons & splash screen"
 msgctxt "Roles in project"
 msgid "Icons & splash screen"
 msgstr "Ikonok és betöltőlépernyő"
 
-#: kmymoney/kcreditswindow.cpp:144
+#: kmymoney/kcreditswindow.cpp:140
 #, fuzzy, kde-format
 #| msgid "Patches and port to kde4"
 msgctxt "Roles in project"
 msgid "Patches and port to kde4"
 msgstr "Javítócsomag és átírás a KDE4-re"
 
-#: kmymoney/kcreditswindow.cpp:145
+#: kmymoney/kcreditswindow.cpp:141
 #, fuzzy, kde-format
 #| msgid "Patches"
 msgctxt "Roles in project"
 msgid "Patches"
 msgstr "Javítócsomagok"
 
-#: kmymoney/kcreditswindow.cpp:147
+#: kmymoney/kcreditswindow.cpp:143
 #, fuzzy, kde-format
 #| msgid "Patches and packaging for OS X"
 msgctxt "Roles in project"
 msgid "Patches, packaging and KF5-CI for OS X"
 msgstr "Javítások és csomagolás OS X-re"
 
-#: kmymoney/kcreditswindow.cpp:149
+#: kmymoney/kcreditswindow.cpp:145
 #, fuzzy, kde-format
 #| msgctxt "CSV Importer dialog title"
 #| msgid "CSV Importer"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-24 01:48+0000\n"
+"POT-Creation-Date: 2024-08-25 01:48+0000\n"
 "PO-Revision-Date: 2024-08-18 20:04+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -1687,8 +1687,9 @@ msgid "Configure"
 msgstr "Yapılandır"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:304
-#, kde-format
-msgid "%1 units in %2"
+#, fuzzy, kde-format
+#| msgid "%1 units in %2"
+msgid "%1 units for one %2"
 msgstr "%2 içinde %1 birim"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:341
@@ -4467,23 +4468,23 @@ msgid "Create tag"
 msgstr "Etiket Oluştur"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
-#: kmymoney/kcreditswindow.cpp:32 kmymoney/kcreditswindow.cpp:97
+#: kmymoney/kcreditswindow.cpp:31 kmymoney/kcreditswindow.cpp:93
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:35
 #, kde-format
 msgid "GPG encryption"
 msgstr "GPG şifrelemesi"
 
-#: kmymoney/kcreditswindow.cpp:35 kmymoney/kcreditswindow.cpp:78
+#: kmymoney/kcreditswindow.cpp:34 kmymoney/kcreditswindow.cpp:74
 #, kde-format
 msgid "Addressbook integration"
 msgstr "Adres defteri tümleştirmesi"
 
-#: kmymoney/kcreditswindow.cpp:38
+#: kmymoney/kcreditswindow.cpp:37
 #, kde-format
 msgid "Holiday regions integration"
 msgstr "Tatil bölgeleri tümleştirmesi"
 
-#: kmymoney/kcreditswindow.cpp:41
+#: kmymoney/kcreditswindow.cpp:40
 #, kde-format
 msgid ""
 "\n"
@@ -4496,12 +4497,12 @@ msgstr ""
 "\n"
 "Lütfen bu projeye kod ve/veya önerilerle katkıda bulunmayı düşünün."
 
-#: kmymoney/kcreditswindow.cpp:43
+#: kmymoney/kcreditswindow.cpp:42
 #, kde-format
 msgid "(c) 2000-2024 The KMyMoney development team"
 msgstr "(c) 2000–2024 K Param geliştirme takımı"
 
-#: kmymoney/kcreditswindow.cpp:46
+#: kmymoney/kcreditswindow.cpp:45
 #, kde-format
 msgid ""
 "Compiled with the following optional features:\n"
@@ -4510,185 +4511,181 @@ msgstr ""
 "Aşağıdaki isteğe bağlı özelliklerle derlendi:\n"
 "%1"
 
-#: kmymoney/kcreditswindow.cpp:48
+#: kmymoney/kcreditswindow.cpp:47
 #, kde-format
 msgctxt "Roles in project"
 msgid "Core engine, Release Manager, Project admin"
 msgstr "Temel işletke, yayım yöneticisi, proje yöneticisi"
 
-#: kmymoney/kcreditswindow.cpp:49
+#: kmymoney/kcreditswindow.cpp:48
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Maintainer, Windows support"
 msgstr "Geliştirici, bakımcı, Windows desteği"
 
-#: kmymoney/kcreditswindow.cpp:50
+#: kmymoney/kcreditswindow.cpp:49
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Windows and MacOS support"
 msgstr "Geliştirici, Windows ve macOS desteği"
 
-#: kmymoney/kcreditswindow.cpp:53 kmymoney/kcreditswindow.cpp:55
-#: kmymoney/kcreditswindow.cpp:57 kmymoney/kcreditswindow.cpp:60
-#: kmymoney/kcreditswindow.cpp:63 kmymoney/kcreditswindow.cpp:65
-#: kmymoney/kcreditswindow.cpp:66 kmymoney/kcreditswindow.cpp:67
-#: kmymoney/kcreditswindow.cpp:68 kmymoney/kcreditswindow.cpp:70
-#: kmymoney/kcreditswindow.cpp:136 kmymoney/kcreditswindow.cpp:139
-#: kmymoney/kcreditswindow.cpp:142 kmymoney/kcreditswindow.cpp:145
-#: kmymoney/kcreditswindow.cpp:147
+#: kmymoney/kcreditswindow.cpp:52 kmymoney/kcreditswindow.cpp:54
+#: kmymoney/kcreditswindow.cpp:56 kmymoney/kcreditswindow.cpp:59
+#: kmymoney/kcreditswindow.cpp:62 kmymoney/kcreditswindow.cpp:64
+#: kmymoney/kcreditswindow.cpp:65 kmymoney/kcreditswindow.cpp:66
+#: kmymoney/kcreditswindow.cpp:67 kmymoney/kcreditswindow.cpp:69
+#: kmymoney/kcreditswindow.cpp:132 kmymoney/kcreditswindow.cpp:135
+#: kmymoney/kcreditswindow.cpp:138 kmymoney/kcreditswindow.cpp:141
+#: kmymoney/kcreditswindow.cpp:143
 #, kde-format
 msgid "Inactive member. "
 msgstr "Pasif üye."
 
-#: kmymoney/kcreditswindow.cpp:53
+#: kmymoney/kcreditswindow.cpp:52
 #, kde-format
 msgctxt "Roles in project"
 msgid "Initial idea, much initial source code, Project admin"
 msgstr "İlk fikir, ilk kaynak kodlar, proje yöneticisi"
 
-#: kmymoney/kcreditswindow.cpp:55
+#: kmymoney/kcreditswindow.cpp:54
 #, kde-format
 msgctxt "Roles in project"
 msgid "Forecast, Reports"
 msgstr "Öngörüler, raporlar"
 
-#: kmymoney/kcreditswindow.cpp:57
+#: kmymoney/kcreditswindow.cpp:56
 #, kde-format
 msgctxt "Roles in project"
 msgid "Reporting logic, OFX Import"
 msgstr "Raporlama, OFX içe aktarma"
 
-#: kmymoney/kcreditswindow.cpp:60
+#: kmymoney/kcreditswindow.cpp:59
 #, kde-format
 msgctxt "Roles in project"
 msgid "Database backend, maintainer stable branch"
 msgstr "Veritabanı arka ucu, kararlı dal bakımcısı"
 
-#: kmymoney/kcreditswindow.cpp:63
+#: kmymoney/kcreditswindow.cpp:62
 #, kde-format
 msgctxt "Roles in project"
 msgid "Project Admin"
 msgstr "Proje yöneticisi"
 
-#: kmymoney/kcreditswindow.cpp:65 kmymoney/kcreditswindow.cpp:67
-#: kmymoney/kcreditswindow.cpp:68
+#: kmymoney/kcreditswindow.cpp:64 kmymoney/kcreditswindow.cpp:66
+#: kmymoney/kcreditswindow.cpp:67
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer"
 msgstr "Geliştirici"
 
-#: kmymoney/kcreditswindow.cpp:66
+#: kmymoney/kcreditswindow.cpp:65
 #, kde-format
 msgctxt "Roles in project"
 msgid "Database backend"
 msgstr "Veritabanı arka ucu"
 
-#: kmymoney/kcreditswindow.cpp:70
+#: kmymoney/kcreditswindow.cpp:69
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Code refactoring"
 msgstr "Geliştirici, kod düzenlemeleri"
 
-#: kmymoney/kcreditswindow.cpp:79 kmymoney/kcreditswindow.cpp:85
-#: kmymoney/kcreditswindow.cpp:91 kmymoney/kcreditswindow.cpp:98
-#: kmymoney/kcreditswindow.cpp:105 kmymoney/kcreditswindow.cpp:111
-#: kmymoney/kcreditswindow.cpp:116 kmymoney/kcreditswindow.cpp:123
-#: kmymoney/kcreditswindow.cpp:130
+#: kmymoney/kcreditswindow.cpp:75 kmymoney/kcreditswindow.cpp:81
+#: kmymoney/kcreditswindow.cpp:87 kmymoney/kcreditswindow.cpp:94
+#: kmymoney/kcreditswindow.cpp:101 kmymoney/kcreditswindow.cpp:107
+#: kmymoney/kcreditswindow.cpp:112 kmymoney/kcreditswindow.cpp:119
+#: kmymoney/kcreditswindow.cpp:126
 #, kde-format
 msgid "%1 (build against %2)"
-msgstr ""
+msgstr "%1 (%2 üzerine yapılı)"
 
-#: kmymoney/kcreditswindow.cpp:79 kmymoney/kcreditswindow.cpp:91
-#: kmymoney/kcreditswindow.cpp:98 kmymoney/kcreditswindow.cpp:105
-#: kmymoney/kcreditswindow.cpp:111 kmymoney/kcreditswindow.cpp:116
-#: kmymoney/kcreditswindow.cpp:123 kmymoney/kcreditswindow.cpp:130
+#: kmymoney/kcreditswindow.cpp:75 kmymoney/kcreditswindow.cpp:87
+#: kmymoney/kcreditswindow.cpp:94 kmymoney/kcreditswindow.cpp:101
+#: kmymoney/kcreditswindow.cpp:107 kmymoney/kcreditswindow.cpp:112
+#: kmymoney/kcreditswindow.cpp:119 kmymoney/kcreditswindow.cpp:126
 #: kmymoney/mymoney/mymoneysecurity.cpp:266
 #, kde-format
 msgid "Unknown"
-msgstr "Bilinmiyor"
+msgstr "Bilinmeyen"
 
-#: kmymoney/kcreditswindow.cpp:84
+#: kmymoney/kcreditswindow.cpp:80
 #, kde-format
 msgid "Financial framework"
-msgstr ""
+msgstr "Finansal çatı"
 
-#: kmymoney/kcreditswindow.cpp:90
-#, fuzzy, kde-format
-#| msgid "Online settings"
+#: kmymoney/kcreditswindow.cpp:86
+#, kde-format
 msgid "Online banking"
-msgstr "Çevrimiçi ayarlar"
+msgstr "Çevrimiçi bankacılık"
 
-#: kmymoney/kcreditswindow.cpp:104
-#, fuzzy, kde-format
-#| msgid "Online Banking Operations"
+#: kmymoney/kcreditswindow.cpp:100
+#, kde-format
 msgid "Online banking framework"
-msgstr "Çevrimiçi Bankacılık İşlemleri"
+msgstr "Çevrimiçi bankacılık çatısı"
 
-#: kmymoney/kcreditswindow.cpp:110
+#: kmymoney/kcreditswindow.cpp:106
 #, kde-format
 msgid "Library for creating diagrams"
-msgstr ""
+msgstr "Diyagram oluşturmak için kitaplık"
 
-#: kmymoney/kcreditswindow.cpp:115
-#, fuzzy, kde-format
-#| msgid "iCalendar file"
+#: kmymoney/kcreditswindow.cpp:111
+#, kde-format
 msgid "iCalendar integration"
-msgstr "iCalendar dosyası"
+msgstr "iCalendar tümleştirmesi"
 
-#: kmymoney/kcreditswindow.cpp:122
+#: kmymoney/kcreditswindow.cpp:118
 #, kde-format
 msgid "OFX banking protocol abstraction library"
-msgstr ""
+msgstr "OFX bankacılık protokolü soyutlaştırma kitaplığı"
 
-#: kmymoney/kcreditswindow.cpp:129
-#, fuzzy, kde-format
-#| msgid "Database malfunction"
+#: kmymoney/kcreditswindow.cpp:125
+#, kde-format
 msgid "SQLite database encryption"
-msgstr "Veritabanı bozukluğu"
+msgstr "SQLite veritabanı şifrelemesi"
 
-#: kmymoney/kcreditswindow.cpp:134
+#: kmymoney/kcreditswindow.cpp:130
 #, kde-format
 msgctxt "Roles in project"
 msgid "Documentation and user support"
 msgstr "Belgelendirme ve kullanıcı desteği"
 
-#: kmymoney/kcreditswindow.cpp:136
+#: kmymoney/kcreditswindow.cpp:132
 #, kde-format
 msgctxt "Roles in project"
 msgid "Initial investment support"
 msgstr "İlk yatırım desteği"
 
-#: kmymoney/kcreditswindow.cpp:139
+#: kmymoney/kcreditswindow.cpp:135
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer & Artist"
 msgstr "Geliştirici ve sanatçı"
 
-#: kmymoney/kcreditswindow.cpp:142
+#: kmymoney/kcreditswindow.cpp:138
 #, kde-format
 msgctxt "Roles in project"
 msgid "Icons & splash screen"
 msgstr "Simgeler ve açılış ekranı"
 
-#: kmymoney/kcreditswindow.cpp:144
+#: kmymoney/kcreditswindow.cpp:140
 #, kde-format
 msgctxt "Roles in project"
 msgid "Patches and port to kde4"
 msgstr "Kde4 geçişi ve yamalar"
 
-#: kmymoney/kcreditswindow.cpp:145
+#: kmymoney/kcreditswindow.cpp:141
 #, kde-format
 msgctxt "Roles in project"
 msgid "Patches"
 msgstr "Yamalar"
 
-#: kmymoney/kcreditswindow.cpp:147
+#: kmymoney/kcreditswindow.cpp:143
 #, kde-format
 msgctxt "Roles in project"
 msgid "Patches, packaging and KF5-CI for OS X"
 msgstr "Yamalar, paketleme ve macOS için KF5–CI"
 
-#: kmymoney/kcreditswindow.cpp:149
+#: kmymoney/kcreditswindow.cpp:145
 #, kde-format
 msgctxt "Roles in project"
 msgid "CSV import/export"
@@ -25233,194 +25230,3 @@ msgstr ""
 "\n"
 "<p>Tüm bilgiler isteğe bağlıdır ve yalnızca K Param dosyanızı "
 "kişiselleştirmek için kullanılır.</p>"
-
-#~ msgctxt "@info Online price update %1 online id, %2 internal id"
-#~ msgid "Price for %1 updated (id %2)"
-#~ msgstr "%1 fiyatı güncellendi (kimlik %2)"
-
-#~ msgid ""
-#~ "KMyMoney has detected some overdue scheduled transactions for this "
-#~ "account. Do you want to enter those scheduled transactions now?"
-#~ msgstr ""
-#~ "K Param bu hesap için bazı vadesi geçmiş planlı işlemler algıladı. Bu "
-#~ "planlı işlemleri şimdi girmek istiyor musunuz?"
-
-#~ msgid "Remove this price item from the file"
-#~ msgstr "Bu fiyat ögesini dosyadan kaldır"
-
-#~ msgid "Stock Name"
-#~ msgstr "Hisse senedi adı"
-
-#~ msgctxt "Price source"
-#~ msgid "Source"
-#~ msgstr "Kaynak"
-
-#~ msgid "Upd"
-#~ msgstr "Gncl"
-
-#~ msgid "Res"
-#~ msgstr "Sfrl"
-
-#~ msgid "Close this window"
-#~ msgstr "Pencereyi kapat"
-
-#~ msgid "Preferred account"
-#~ msgstr "Tercih edilen hesap"
-
-#~ msgid "CashFlow"
-#~ msgstr "Nakit Akışı"
-
-#~ msgid "Select Account:"
-#~ msgstr "Hesap seç:"
-
-#~ msgid "Investment details"
-#~ msgstr "Yatırım ayrıntıları"
-
-#~ msgid "Enter the ticker symbol (e.g. RHAT)."
-#~ msgstr "Kayan yazı sembolünü girin (örn. RHAT)."
-
-#~ msgid "Enter the CUSIP/ISIN/WKN identification number here"
-#~ msgstr "CUSIP/ISIN/WKN tanımlama numarasını buraya girin"
-
-#~ msgid "This wizard allows you to modify the selected security."
-#~ msgstr "Bu sihirbaz, seçili menkul kıymeti değiştirmenize izin verir."
-
-#~ msgid ""
-#~ "The selected symbol is already on file. Do you want to reuse the existing "
-#~ "security?"
-#~ msgstr ""
-#~ "Seçili sembol halihazırda dosyada. Var olan menkul kıymeti yeniden "
-#~ "kullanmak istiyor musunuz?"
-
-#~ msgid "Security found"
-#~ msgstr "Menkul kıymet bulundu"
-
-#~ msgctxt "Equity name"
-#~ msgid "Name"
-#~ msgstr "Ad"
-
-#~ msgctxt "Online quote source"
-#~ msgid "Source"
-#~ msgstr "Kaynak"
-
-#~ msgid ""
-#~ "For <b>%1</b> on <b>%2</b> price <b>%3</b> already exists.<br>Do you want "
-#~ "to replace it with <b>%4</b>?"
-#~ msgstr ""
-#~ "<b>%2</b> üzerindeki <b>%1</b> için <b>%3</b> fiyatı halihazırda var."
-#~ "<br>Bunu <b>%4</b> ile değiştirmek istiyor musunuz?"
-
-#~ msgid "Price Already Exists"
-#~ msgstr "Fiyat Halihazırda Var"
-
-#~ msgid ""
-#~ "Received a price for %1 (id %2), but this symbol is not on the list. "
-#~ "Aborting entire update."
-#~ msgstr ""
-#~ "%1 (kimlik %2) için bir fiyat alındı; ancak bu sembol listede yok. Tüm "
-#~ "güncelleme iptal ediliyor."
-
-#~ msgid "List of known Equities, and the date they were last updated on."
-#~ msgstr "Bilinen özkaynakların listesi ve en son güncellendikleri tarih."
-
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Symbol"
-#~ msgstr "Sembol"
-
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Identification number"
-#~ msgstr "Tanımlama numarası"
-
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Name"
-#~ msgstr "Ad"
-
-#~ msgid "New Quote Source"
-#~ msgstr "Yeni Kur Kaynağı"
-
-#~ msgid ""
-#~ "Security <b>%1</b> uses this quote source.<br>Do you really want to "
-#~ "remove it?"
-#~ msgstr ""
-#~ "Menkul kıymet <b>%1</b>, bu kur kaynağını kullanıyor.<br>Kaldırmayı "
-#~ "gerçekten istiyor musunuz?"
-
-#~ msgctxt "@title:window"
-#~ msgid "Delete quote source"
-#~ msgstr "Kur Kaynağını Sil"
-
-#~ msgid "Source <placeholder>%1</placeholder> does not exist."
-#~ msgstr "<placeholder>%1</placeholder> kaynağı yok."
-
-#~ msgid "Cannot resolve input date."
-#~ msgstr "Girdi tarihi çözülemedi."
-
-#~ msgid "CSV source <placeholder>%1</placeholder> does not exist."
-#~ msgstr "<placeholder>%1</placeholder> CSV kaynağı yok."
-
-#~ msgid "Cannot find from and to currency."
-#~ msgstr "Dönüştürülecek para birimleri bulunamıyor."
-
-#~ msgid "Local quote sources aren't supported."
-#~ msgstr "Yerel kur kaynakları desteklenmiyor."
-
-#~ msgid "Fetching URL %1..."
-#~ msgstr "%1 URL'si getiriliyor…"
-
-#~ msgid ""
-#~ "<placeholder>%1</placeholder> skipped because it doesn't have "
-#~ "identification number."
-#~ msgstr "<placeholder>%1</placeholder> atlandı çünkü kimlik numarası yok."
-
-#~ msgctxt "The process x is executing"
-#~ msgid "Executing %1..."
-#~ msgstr "%1 yürütülüyor…"
-
-#~ msgid "Unable to launch: %1"
-#~ msgstr "Başlatılamadı: %1"
-
-#~ msgid "Failed to open downloaded file"
-#~ msgstr "İndirilen dosya açılamadı"
-
-#~ msgctxt "Executing 'script' 'online source' 'investment symbol' "
-#~ msgid "Executing %1 %2 %3..."
-#~ msgstr "%1 %2 %3 yürütülüyor…"
-
-#~ msgid "Unable to update price for %1"
-#~ msgstr "%1 fiyatı güncellenemedi"
-
-#~ msgid "Identifier found: '%1'"
-#~ msgstr "Tanımlayıcı bulundu: '%1'"
-
-#~ msgid "Price found: '%1' (%2)"
-#~ msgstr "Fiyat bulundu: '%1' (%2)"
-
-#~ msgid "Date found: '%1'"
-#~ msgstr "Tarih bulundu: '%1'"
-
-#~ msgid "Unable to update price for %1 (no price or no date)"
-#~ msgstr "%1 fiyatı güncellenemedi (fiyat veya tarih yok)"
-
-#~ msgid "Unable to update price for %1 (empty quote data)"
-#~ msgstr "%1 fiyatı güncellenemedi (boş kur verisi)"
-
-#~ msgid "Unable to update price for %1 (error encountered: '%2')"
-#~ msgstr "%1 fiyatı güncellenemedi (rastlanılan hata: '%2')"
-
-#~ msgctxt "Split header"
-#~ msgid "Tag"
-#~ msgstr "Etiket"
-
-#~ msgid "Reorganizing accounts..."
-#~ msgstr "Hesaplar yeniden organize ediliyor..."
-
-#~ msgctxt "Credit suffix"
-#~ msgid "Cr."
-#~ msgstr "Kr."
-
-#~ msgctxt "Debit suffix"
-#~ msgid "Dr."
-#~ msgstr "Br."
-
-#~ msgid "Hide zero balance liabilities on the Homepage"
-#~ msgstr "Sıfır bakiyeli yükümlülükleri ana sayfada gizle"

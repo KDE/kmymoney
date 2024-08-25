@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-24 01:48+0000\n"
-"PO-Revision-Date: 2024-08-03 13:38+0100\n"
+"POT-Creation-Date: 2024-08-25 01:48+0000\n"
+"PO-Revision-Date: 2024-08-24 12:17+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -1691,8 +1691,9 @@ msgid "Configure"
 msgstr "Configure"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:304
-#, kde-format
-msgid "%1 units in %2"
+#, fuzzy, kde-format
+#| msgid "%1 units in %2"
+msgid "%1 units for one %2"
 msgstr "%1 units in %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:341
@@ -1747,15 +1748,11 @@ msgid "Cannot update security <b>%1</b>: %2"
 msgstr "Cannot update security <b>%1</b>: %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:584
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Log message e.g. 'Prices for EUR > USD updated between 2001-01-01 and "
-#| "2001-02-01 (id EUR USD)'"
-#| msgid "Prices for %1 updated between %3 and %4 (id %2)"
+#, kde-format
 msgctxt ""
 "@info Online price update %1 online id, %2 internal id, %3 price, %4 date"
 msgid "Price for %1 updated to %3 for %4 (id %2)"
-msgstr "Prices for %1 updated between %3 and %4 (id %2)"
+msgstr "Price for %1 updated to %3 for %4 (id %2)"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:590
 #, kde-format
@@ -3078,9 +3075,7 @@ msgstr "Matched transaction"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:177
-#, fuzzy, kde-format
-#| msgctxt "@title background colors"
-#| msgid "Background"
+#, kde-format
 msgid "Background"
 msgstr "Background"
 
@@ -4479,23 +4474,23 @@ msgid "Create tag"
 msgstr "Create tag"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
-#: kmymoney/kcreditswindow.cpp:32 kmymoney/kcreditswindow.cpp:97
+#: kmymoney/kcreditswindow.cpp:31 kmymoney/kcreditswindow.cpp:93
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:35
 #, kde-format
 msgid "GPG encryption"
 msgstr "GPG encryption"
 
-#: kmymoney/kcreditswindow.cpp:35 kmymoney/kcreditswindow.cpp:78
+#: kmymoney/kcreditswindow.cpp:34 kmymoney/kcreditswindow.cpp:74
 #, kde-format
 msgid "Addressbook integration"
 msgstr "Addressbook integration"
 
-#: kmymoney/kcreditswindow.cpp:38
+#: kmymoney/kcreditswindow.cpp:37
 #, kde-format
 msgid "Holiday regions integration"
 msgstr "Holiday regions integration"
 
-#: kmymoney/kcreditswindow.cpp:41
+#: kmymoney/kcreditswindow.cpp:40
 #, kde-format
 msgid ""
 "\n"
@@ -4508,12 +4503,12 @@ msgstr ""
 "\n"
 "Please consider contributing to this project with code and/or suggestions."
 
-#: kmymoney/kcreditswindow.cpp:43
+#: kmymoney/kcreditswindow.cpp:42
 #, kde-format
 msgid "(c) 2000-2024 The KMyMoney development team"
 msgstr "(c) 2000-2024 The KMyMoney development team"
 
-#: kmymoney/kcreditswindow.cpp:46
+#: kmymoney/kcreditswindow.cpp:45
 #, kde-format
 msgid ""
 "Compiled with the following optional features:\n"
@@ -4522,185 +4517,181 @@ msgstr ""
 "Compiled with the following optional features:\n"
 "%1"
 
-#: kmymoney/kcreditswindow.cpp:48
+#: kmymoney/kcreditswindow.cpp:47
 #, kde-format
 msgctxt "Roles in project"
 msgid "Core engine, Release Manager, Project admin"
 msgstr "Core engine, Release Manager, Project admin"
 
-#: kmymoney/kcreditswindow.cpp:49
+#: kmymoney/kcreditswindow.cpp:48
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Maintainer, Windows support"
 msgstr "Developer, Maintainer, Windows support"
 
-#: kmymoney/kcreditswindow.cpp:50
+#: kmymoney/kcreditswindow.cpp:49
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Windows and MacOS support"
 msgstr "Developer, Windows and MacOS support"
 
-#: kmymoney/kcreditswindow.cpp:53 kmymoney/kcreditswindow.cpp:55
-#: kmymoney/kcreditswindow.cpp:57 kmymoney/kcreditswindow.cpp:60
-#: kmymoney/kcreditswindow.cpp:63 kmymoney/kcreditswindow.cpp:65
-#: kmymoney/kcreditswindow.cpp:66 kmymoney/kcreditswindow.cpp:67
-#: kmymoney/kcreditswindow.cpp:68 kmymoney/kcreditswindow.cpp:70
-#: kmymoney/kcreditswindow.cpp:136 kmymoney/kcreditswindow.cpp:139
-#: kmymoney/kcreditswindow.cpp:142 kmymoney/kcreditswindow.cpp:145
-#: kmymoney/kcreditswindow.cpp:147
+#: kmymoney/kcreditswindow.cpp:52 kmymoney/kcreditswindow.cpp:54
+#: kmymoney/kcreditswindow.cpp:56 kmymoney/kcreditswindow.cpp:59
+#: kmymoney/kcreditswindow.cpp:62 kmymoney/kcreditswindow.cpp:64
+#: kmymoney/kcreditswindow.cpp:65 kmymoney/kcreditswindow.cpp:66
+#: kmymoney/kcreditswindow.cpp:67 kmymoney/kcreditswindow.cpp:69
+#: kmymoney/kcreditswindow.cpp:132 kmymoney/kcreditswindow.cpp:135
+#: kmymoney/kcreditswindow.cpp:138 kmymoney/kcreditswindow.cpp:141
+#: kmymoney/kcreditswindow.cpp:143
 #, kde-format
 msgid "Inactive member. "
 msgstr "Inactive member. "
 
-#: kmymoney/kcreditswindow.cpp:53
+#: kmymoney/kcreditswindow.cpp:52
 #, kde-format
 msgctxt "Roles in project"
 msgid "Initial idea, much initial source code, Project admin"
 msgstr "Initial idea, much initial source code, Project admin"
 
-#: kmymoney/kcreditswindow.cpp:55
+#: kmymoney/kcreditswindow.cpp:54
 #, kde-format
 msgctxt "Roles in project"
 msgid "Forecast, Reports"
 msgstr "Forecast, Reports"
 
-#: kmymoney/kcreditswindow.cpp:57
+#: kmymoney/kcreditswindow.cpp:56
 #, kde-format
 msgctxt "Roles in project"
 msgid "Reporting logic, OFX Import"
 msgstr "Reporting logic, OFX Import"
 
-#: kmymoney/kcreditswindow.cpp:60
+#: kmymoney/kcreditswindow.cpp:59
 #, kde-format
 msgctxt "Roles in project"
 msgid "Database backend, maintainer stable branch"
 msgstr "Database backend, maintainer stable branch"
 
-#: kmymoney/kcreditswindow.cpp:63
+#: kmymoney/kcreditswindow.cpp:62
 #, kde-format
 msgctxt "Roles in project"
 msgid "Project Admin"
 msgstr "Project Admin"
 
-#: kmymoney/kcreditswindow.cpp:65 kmymoney/kcreditswindow.cpp:67
-#: kmymoney/kcreditswindow.cpp:68
+#: kmymoney/kcreditswindow.cpp:64 kmymoney/kcreditswindow.cpp:66
+#: kmymoney/kcreditswindow.cpp:67
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer"
 msgstr "Developer"
 
-#: kmymoney/kcreditswindow.cpp:66
+#: kmymoney/kcreditswindow.cpp:65
 #, kde-format
 msgctxt "Roles in project"
 msgid "Database backend"
 msgstr "Database backend"
 
-#: kmymoney/kcreditswindow.cpp:70
+#: kmymoney/kcreditswindow.cpp:69
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Code refactoring"
 msgstr "Developer, Code refactoring"
 
-#: kmymoney/kcreditswindow.cpp:79 kmymoney/kcreditswindow.cpp:85
-#: kmymoney/kcreditswindow.cpp:91 kmymoney/kcreditswindow.cpp:98
-#: kmymoney/kcreditswindow.cpp:105 kmymoney/kcreditswindow.cpp:111
-#: kmymoney/kcreditswindow.cpp:116 kmymoney/kcreditswindow.cpp:123
-#: kmymoney/kcreditswindow.cpp:130
+#: kmymoney/kcreditswindow.cpp:75 kmymoney/kcreditswindow.cpp:81
+#: kmymoney/kcreditswindow.cpp:87 kmymoney/kcreditswindow.cpp:94
+#: kmymoney/kcreditswindow.cpp:101 kmymoney/kcreditswindow.cpp:107
+#: kmymoney/kcreditswindow.cpp:112 kmymoney/kcreditswindow.cpp:119
+#: kmymoney/kcreditswindow.cpp:126
 #, kde-format
 msgid "%1 (build against %2)"
-msgstr ""
+msgstr "%1 (build against %2)"
 
-#: kmymoney/kcreditswindow.cpp:79 kmymoney/kcreditswindow.cpp:91
-#: kmymoney/kcreditswindow.cpp:98 kmymoney/kcreditswindow.cpp:105
-#: kmymoney/kcreditswindow.cpp:111 kmymoney/kcreditswindow.cpp:116
-#: kmymoney/kcreditswindow.cpp:123 kmymoney/kcreditswindow.cpp:130
+#: kmymoney/kcreditswindow.cpp:75 kmymoney/kcreditswindow.cpp:87
+#: kmymoney/kcreditswindow.cpp:94 kmymoney/kcreditswindow.cpp:101
+#: kmymoney/kcreditswindow.cpp:107 kmymoney/kcreditswindow.cpp:112
+#: kmymoney/kcreditswindow.cpp:119 kmymoney/kcreditswindow.cpp:126
 #: kmymoney/mymoney/mymoneysecurity.cpp:266
 #, kde-format
 msgid "Unknown"
 msgstr "Unknown"
 
-#: kmymoney/kcreditswindow.cpp:84
+#: kmymoney/kcreditswindow.cpp:80
 #, kde-format
 msgid "Financial framework"
-msgstr ""
+msgstr "Financial framework"
 
-#: kmymoney/kcreditswindow.cpp:90
-#, fuzzy, kde-format
-#| msgid "Online settings"
+#: kmymoney/kcreditswindow.cpp:86
+#, kde-format
 msgid "Online banking"
-msgstr "Online settings"
+msgstr "Online banking"
 
-#: kmymoney/kcreditswindow.cpp:104
-#, fuzzy, kde-format
-#| msgid "Online Banking Operations"
+#: kmymoney/kcreditswindow.cpp:100
+#, kde-format
 msgid "Online banking framework"
-msgstr "Online Banking Operations"
+msgstr "Online banking framework"
 
-#: kmymoney/kcreditswindow.cpp:110
+#: kmymoney/kcreditswindow.cpp:106
 #, kde-format
 msgid "Library for creating diagrams"
-msgstr ""
+msgstr "Library for creating diagrams"
 
-#: kmymoney/kcreditswindow.cpp:115
-#, fuzzy, kde-format
-#| msgid "iCalendar file"
+#: kmymoney/kcreditswindow.cpp:111
+#, kde-format
 msgid "iCalendar integration"
-msgstr "iCalendar file"
+msgstr "iCalendar integration"
 
-#: kmymoney/kcreditswindow.cpp:122
+#: kmymoney/kcreditswindow.cpp:118
 #, kde-format
 msgid "OFX banking protocol abstraction library"
-msgstr ""
+msgstr "OFX banking protocol abstraction library"
 
-#: kmymoney/kcreditswindow.cpp:129
-#, fuzzy, kde-format
-#| msgid "Database malfunction"
+#: kmymoney/kcreditswindow.cpp:125
+#, kde-format
 msgid "SQLite database encryption"
-msgstr "Database malfunction"
+msgstr "SQLite database encryption"
 
-#: kmymoney/kcreditswindow.cpp:134
+#: kmymoney/kcreditswindow.cpp:130
 #, kde-format
 msgctxt "Roles in project"
 msgid "Documentation and user support"
 msgstr "Documentation and user support"
 
-#: kmymoney/kcreditswindow.cpp:136
+#: kmymoney/kcreditswindow.cpp:132
 #, kde-format
 msgctxt "Roles in project"
 msgid "Initial investment support"
 msgstr "Initial investment support"
 
-#: kmymoney/kcreditswindow.cpp:139
+#: kmymoney/kcreditswindow.cpp:135
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer & Artist"
 msgstr "Developer & Artist"
 
-#: kmymoney/kcreditswindow.cpp:142
+#: kmymoney/kcreditswindow.cpp:138
 #, kde-format
 msgctxt "Roles in project"
 msgid "Icons & splash screen"
 msgstr "Icons & splash screen"
 
-#: kmymoney/kcreditswindow.cpp:144
+#: kmymoney/kcreditswindow.cpp:140
 #, kde-format
 msgctxt "Roles in project"
 msgid "Patches and port to kde4"
 msgstr "Patches and port to kde4"
 
-#: kmymoney/kcreditswindow.cpp:145
+#: kmymoney/kcreditswindow.cpp:141
 #, kde-format
 msgctxt "Roles in project"
 msgid "Patches"
 msgstr "Patches"
 
-#: kmymoney/kcreditswindow.cpp:147
+#: kmymoney/kcreditswindow.cpp:143
 #, kde-format
 msgctxt "Roles in project"
 msgid "Patches, packaging and KF5-CI for OS X"
 msgstr "Patches, packaging and KF5-CI for OS X"
 
-#: kmymoney/kcreditswindow.cpp:149
+#: kmymoney/kcreditswindow.cpp:145
 #, kde-format
 msgctxt "Roles in project"
 msgid "CSV import/export"
@@ -6594,6 +6585,8 @@ msgid ""
 "  * Payee %1 has BIC with invalid length '%2'.\n"
 "    Must be 11 chars and is %3"
 msgstr ""
+"  * Payee %1 has BIC with invalid length '%2'.\n"
+"    Must be 11 chars and is %3"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2636
 #, kde-format
@@ -18385,10 +18378,9 @@ msgstr "Background colour for imported transactions"
 
 #. i18n: ectx: label, entry (transactionImportedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:190
-#, fuzzy, kde-format
-#| msgid "Background color for imported transactions"
+#, kde-format
 msgid "Text color for imported transactions"
-msgstr "Background colour for imported transactions"
+msgstr "Text colour for imported transactions"
 
 #. i18n: ectx: label, entry (transactionMatchedColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:194
@@ -18398,10 +18390,9 @@ msgstr "Background colour for matched transactions"
 
 #. i18n: ectx: label, entry (transactionMatchedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:198
-#, fuzzy, kde-format
-#| msgid "Background color for matched transactions"
+#, kde-format
 msgid "Text color for matched transactions"
-msgstr "Background colour for matched transactions"
+msgstr "Text colour for matched transactions"
 
 #. i18n: ectx: label, entry (transactionErroneousColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:202
@@ -18423,10 +18414,9 @@ msgstr "Background colour for group marker"
 
 #. i18n: ectx: label, entry (groupMarkerText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:214
-#, fuzzy, kde-format
-#| msgid "Background color for group marker"
+#, kde-format
 msgid "Text color for group marker"
-msgstr "Background colour for group marker"
+msgstr "Text colour for group marker"
 
 #. i18n: ectx: label, entry (fieldRequiredColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:218
@@ -20818,11 +20808,10 @@ msgid "Costcenter"
 msgstr "Costcentre"
 
 #: kmymoney/views/newtransactioneditor.cpp:237
-#, fuzzy, kde-format
-#| msgid "Transaction is missing a category assignment."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
-msgstr "Transaction is missing a category assignment."
+msgstr "The transaction is missing a category assignment."
 
 #: kmymoney/views/newtransactioneditor.cpp:239
 #, kde-format
@@ -20909,11 +20898,10 @@ msgid "Confirm end of reconciliation"
 msgstr "Confirm end of reconciliation"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:294
-#, fuzzy, kde-format
-#| msgid "Retrieving transactions..."
+#, kde-format
 msgctxt "@label Reconciliation progress dialog"
 msgid "Reconciling transactions..."
-msgstr "Retrieving transactions..."
+msgstr "Reconciling transactions..."
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:442
 #, kde-format
