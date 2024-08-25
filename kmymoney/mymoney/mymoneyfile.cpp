@@ -3387,6 +3387,7 @@ QMap<MyMoneySecurity, MyMoneyPrice> MyMoneyFile::ancientCurrencies() const
 QList<MyMoneySecurity> MyMoneyFile::availableCurrencyList() const
 {
     QList<MyMoneySecurity> currencyList;
+    // clang-format off
     currencyList.append(MyMoneySecurity("AFA", i18n("Afghanistan Afghani")));
     currencyList.append(MyMoneySecurity("ALL", i18n("Albanian Lek")));
     currencyList.append(MyMoneySecurity("ANG", i18n("Netherland Antillian Guilder")));
@@ -3402,7 +3403,7 @@ QList<MyMoneySecurity> MyMoneyFile::availableCurrencyList() const
     currencyList.append(MyMoneySecurity("BHD", i18n("Bahraini Dinar"),         "BHD", 1000));
     currencyList.append(MyMoneySecurity("BDT", i18n("Bangladeshi Taka")));
     currencyList.append(MyMoneySecurity("BBD", i18n("Barbados Dollar"),        "$"));
-    currencyList.append(MyMoneySecurity("BTC", i18n("Bitcoin"),                "BTC", 100000000, 100000000));
+    currencyList.append(MyMoneySecurity("BTC", i18n("Bitcoin"),                "BTC", 100000000, 100000000, 8));
     currencyList.append(MyMoneySecurity("BYN", i18n("Belarusian Ruble"),       "Br"));
     currencyList.append(MyMoneySecurity("BZD", i18n("Belize Dollar"),          "$"));
     currencyList.append(MyMoneySecurity("BMD", i18n("Bermudian Dollar"),       "$"));
@@ -3546,6 +3547,7 @@ QList<MyMoneySecurity> MyMoneyFile::availableCurrencyList() const
     currencyList.append(MyMoneySecurity("VND", i18n("Vietnamese Dong"),        QChar(0x20AB)));
     currencyList.append(MyMoneySecurity("ZMW", i18n("Zambian Kwacha"),         "K"));
     currencyList.append(MyMoneySecurity("ZWD", i18n("Zimbabwe Dollar"),        "$"));
+    // clang-format on
 
     currencyList.append(ancientCurrencies().keys());
 
@@ -3557,10 +3559,12 @@ QList<MyMoneySecurity> MyMoneyFile::availableCurrencyList() const
     });
 
     // ... and add a few precious metals at the end
+    // clang-format off
     currencyList.append(MyMoneySecurity("XAU", i18n("Gold"),       "XAU", 1000000));
     currencyList.append(MyMoneySecurity("XPD", i18n("Palladium"),  "XPD", 1000000));
     currencyList.append(MyMoneySecurity("XPT", i18n("Platinum"),   "XPT", 1000000));
     currencyList.append(MyMoneySecurity("XAG", i18n("Silver"),     "XAG", 1000000));
+    // clang-format on
 
     return currencyList;
 }
