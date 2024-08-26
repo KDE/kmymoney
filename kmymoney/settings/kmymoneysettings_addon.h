@@ -28,10 +28,13 @@ enum class SchemeColor {
     Positive,
     Negative,
     TransactionImported,
+    TransactionImportedText,
     TransactionMatched,
+    TransactionMatchedText,
     TransactionErroneous,
     FieldRequired,
     GroupMarker,
+    GroupMarkerText,
     MissingConversionRate,
 };
 

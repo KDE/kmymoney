@@ -74,14 +74,14 @@ void SecurityAccountNameDelegate::paint(QPainter* painter, const QStyleOptionVie
     QAbstractItemView* view = qobject_cast<QAbstractItemView*>(parent());
 
     // Background
-    QStyle* style = opt.widget ? opt.widget->style() : QApplication::style();
-
-    KColorScheme::adjustBackground(opt.palette, KColorScheme::PositiveBackground, QPalette::Base, KColorScheme::View, KSharedConfigPtr());
-    // opt.rect.setHeight(lineHeight);
     opt.backgroundBrush = opt.palette.base();
+    opt.backgroundBrush.setColor(property("groupMarkerColor").value<QColor>());
+    opt.palette.setColor(QPalette::Normal, QPalette::Text, property("groupMarkerText").value<QColor>());
+    opt.state &= ~QStyle::State_Selected;
 
     opt.rect.setX(opt.rect.x() - 2);
     opt.rect.setWidth(opt.rect.width() + 5);
+    QStyle* style = opt.widget ? opt.widget->style() : QApplication::style();
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
     painter->setFont(opt.font);

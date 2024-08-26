@@ -567,10 +567,10 @@ void MyMoneyMoney::detectCurrencyFormatting()
     }
 
     qDebug() << "Monetary values will be formatted based on locale" << eMyMoney::Money::_locale.name()
-             << "Example: " << eMyMoney::Money::_locale.toCurrencyString(100);
+             << "Example: " << eMyMoney::Money::_locale.toCurrencyString(123.45);
 
-    const auto displayString = eMyMoney::Money::_locale.toCurrencyString(100);
-    const QRegularExpression digits("^([^01\\h]*)(\\h*)100(\\h*)([^01]*)$");
+    const auto displayString = eMyMoney::Money::_locale.toCurrencyString(123.45);
+    const QRegularExpression digits("^([^01\\h]*)(\\h*)123[,\\.]45(\\h*)([^01]*)$");
     const auto match = digits.match(displayString);
     if (match.hasMatch()) {
         setPositivePrefixCurrencySymbol(false);
@@ -596,6 +596,7 @@ void MyMoneyMoney::detectCurrencyFormatting()
             setNegativeMonetarySignPosition(eMyMoney::Money::ParensAround);
         }
     } else {
+        qDebug() << "Using Qt internal formatter";
         eMyMoney::Money::_useQtInternalFormmater = true;
     }
 

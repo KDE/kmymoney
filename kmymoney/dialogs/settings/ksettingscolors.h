@@ -32,10 +32,6 @@ public:
     ~KSettingsColors();
 
 private Q_SLOTS:
-    /**
-      * This presets custom colors with system's color scheme
-      */
-    void slotCustomColorsToggled(bool);
 
 private:
     Ui::KSettingsColors       *ui;

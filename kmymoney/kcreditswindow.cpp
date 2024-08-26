@@ -16,9 +16,10 @@
 
 #include <KLocalizedString>
 
+#include <alkimia/alkversion.h>
+
 // ----------------------------------------------------------------------------
 // Project Includes
-
 
 KAboutData initializeCreditsData()
 {
@@ -67,6 +68,64 @@ KAboutData initializeCreditsData()
     aboutData.addAuthor(QString::fromUtf8("Łukasz Wojniłowicz"),
                         i18n("Inactive member. ") + i18nc("Roles in project", "Developer, Code refactoring"),
                         "lukasz.wojnilowicz@gmail.com");
+
+#ifdef ENABLE_ADDRESSBOOK
+    aboutData.addComponent(QString::fromUtf8("Akonadi"),
+                           i18n("Addressbook integration"),
+                           i18n("%1 (build against %2)").arg(i18n("Unknown"), ENABLE_ADDRESSBOOK_VERSION),
+                           "https://userbase.kde.org/Akonadi");
+#endif
+
+    aboutData.addComponent(QString::fromUtf8("Alkimia"),
+                           i18n("Financial framework"),
+                           i18n("%1 (build against %2)").arg(alkVersionString(), ALK_VERSION_STRING),
+                           "https://community.kde.org/Alkimia");
+
+#ifdef ENABLE_KBANKING
+    aboutData.addComponent(QString::fromUtf8("Aqbanking"),
+                           i18n("Online banking"),
+                           i18n("%1 (build against %2)").arg(i18n("Unknown"), ENABLE_AQBANKING_VERSION),
+                           "https://www.aquamaniac.de/rdm/projects/aqbanking");
+#endif
+
+#ifdef ENABLE_GPG
+    aboutData.addComponent(QString::fromUtf8("Gpgme"),
+                           i18n("GPG encryption"),
+                           i18n("%1 (build against %2)").arg(i18n("Unknown"), ENABLE_GPG_VERSION),
+                           "https://gnupg.org/software/gpgme/index.html");
+#endif
+
+#ifdef ENABLE_KBANKING
+    aboutData.addComponent(QString::fromUtf8("Gwenhywfar"),
+                           i18n("Online banking framework"),
+                           i18n("%1 (build against %2)").arg(i18n("Unknown"), ENABLE_GWENHYWFAR_VERSION),
+                           "https://www.aquamaniac.de/rdm/projects/gwenhywfar");
+#endif
+
+    aboutData.addComponent(QString::fromUtf8("KDiagram"),
+                           i18n("Library for creating diagrams"),
+                           i18n("%1 (build against %2)").arg(i18n("Unknown"), ENABLE_KCHART_VERSION));
+
+#ifdef ENABLE_LIBICAL
+    aboutData.addComponent(QString::fromUtf8("libical"),
+                           i18n("iCalendar integration"),
+                           i18n("%1 (build against %2)").arg(i18n("Unknown"), ENABLE_LIBICAL_VERSION),
+                           "https://github.com/libical/libical");
+#endif
+
+#ifdef ENABLE_LIBOFX
+    aboutData.addComponent(QString::fromUtf8("libofx"),
+                           i18n("OFX banking protocol abstraction library"),
+                           i18n("%1 (build against %2)").arg(i18n("Unknown"), ENABLE_LIBOFX_VERSION),
+                           "https://github.com/libofx/libofx");
+#endif
+
+#ifdef ENABLE_SQLCIPHER
+    aboutData.addComponent(QString::fromUtf8("SQLCipher"),
+                           i18n("SQLite database encryption"),
+                           i18n("%1 (build against %2)").arg(i18n("Unknown"), ENABLE_SQLCIPHER_VERSION),
+                           "https://www.zetetic.net/sqlcipher");
+#endif
 
     aboutData.addCredit(QLatin1String("Jack Ostroff"), i18nc("Roles in project", "Documentation and user support"), "ostroffjh@users.sourceforge.net");
     aboutData.addCredit(QLatin1String("Kevin Tambascio"),

@@ -77,6 +77,7 @@ target_link_libraries(kmymoney_common
     kmm_url
     kmm_yesno
     kmm_menuactionexchanger
+    $<$<BOOL:${ENABLE_ADDRESSBOOK}>:${PIMPREFIX}::AkonadiCore>
     PRIVATE
     KF5::I18n
     kmm_settings

@@ -95,7 +95,13 @@ QVariant PriceModel::data(const QModelIndex& idx, int role) const
 
     const PriceEntry& priceEntry = static_cast<TreeItem<PriceEntry>*>(idx.internalPointer())->constDataRef();
     const auto security = MyMoneyFile::instance()->security(priceEntry.from());
-
+    int precision = security.pricePrecision();
+    const auto currency = MyMoneyFile::instance()->security(priceEntry.to());
+    // in case both parts are currencies, we need to use the
+    // price precision of the currency
+    if (security.isCurrency() && currency.isCurrency()) {
+        precision = currency.pricePrecision();
+    }
     switch(role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
@@ -119,7 +125,7 @@ QVariant PriceModel::data(const QModelIndex& idx, int role) const
             return MyMoneyUtils::formatDate(priceEntry.date());
 
         case Price:
-            return priceEntry.rate(priceEntry.to()).formatMoney(QString(), security.pricePrecision());
+            return priceEntry.rate(priceEntry.to()).formatMoney(QString(), precision);
 
         case Source:
             return priceEntry.source();

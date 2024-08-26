@@ -39,8 +39,6 @@
 #include "newtransactioneditor.h"
 #include "schedulesjournalmodel.h"
 
-QColor JournalDelegate::m_erroneousColor = QColor(Qt::red);
-
 struct displayProperties {
     int italicStartLine;
     QStringList lines;
@@ -307,11 +305,6 @@ JournalDelegate::~JournalDelegate()
     delete d;
 }
 
-void JournalDelegate::setErroneousColor(const QColor& color)
-{
-    m_erroneousColor = color;
-}
-
 void JournalDelegate::setSingleLineRole(eMyMoney::Model::Roles role)
 {
     d->m_singleLineRole = role;
@@ -464,7 +457,8 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
     // Background
     QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
     const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
-    const int lineHeight = opt.fontMetrics.lineSpacing() + 2;
+    d->m_lineHeight = opt.fontMetrics.lineSpacing();
+    const int lineHeight = d->m_lineHeight + 2;
 
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, editWidget ? editWidget : opt.widget);
 
@@ -486,7 +480,9 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
         const int lineCount = displayProperties.lines.count();
         const int matchedLineCount = matchedDisplayProperties.lines.count();
 
-        const bool erroneous = index.data(eMyMoney::Model::Roles::TransactionErroneousRole).toBool();
+        const bool erroneous = index.data(eMyMoney::Model::TransactionErroneousRole).toBool();
+        const bool imported = index.data(eMyMoney::Model::TransactionIsImportedRole).toBool();
+        const bool matched = index.data(eMyMoney::Model::JournalSplitIsMatchedRole).toBool();
 
         // draw the text items
         if (!opt.text.isEmpty() || (lineCount > 0) || (matchedLineCount > 0)) {
@@ -499,16 +495,29 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
             if (cg == QPalette::Normal && !(opt.state & QStyle::State_Active)) {
                 cg = QPalette::Inactive;
             }
+
             if (selected) {
                 // always use the normal palette since the background is also in normal
                 painter->setPen(opt.palette.color(QPalette::ColorGroup(QPalette::Normal), QPalette::HighlightedText));
 
             } else if (erroneous) {
-                painter->setPen(m_erroneousColor);
+                painter->setPen(property("transactionErroneousColor").value<QColor>());
+
+            } else if (matched) {
+                opt.backgroundBrush = opt.palette.base();
+                opt.backgroundBrush.setColor(property("transactionMatchedColor").value<QColor>());
+                opt.palette.setColor(QPalette::Normal, QPalette::Text, property("transactionMatchedColor").value<QColor>());
+
+            } else if (imported) {
+                opt.backgroundBrush = opt.palette.base();
+                opt.backgroundBrush.setColor(property("transactionImportedColor").value<QColor>());
+                opt.palette.setColor(QPalette::Normal, QPalette::Text, property("transactionImportedColor").value<QColor>());
 
             } else {
                 painter->setPen(opt.palette.color(cg, QPalette::Text));
             }
+
+            style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
             if (opt.state & QStyle::State_Editing) {
                 painter->setPen(opt.palette.color(cg, QPalette::Text));

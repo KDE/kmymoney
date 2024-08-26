@@ -184,11 +184,19 @@
   </entry>
   <entry name="transactionImportedColor" type="Color">
    <label>Background color for imported transactions</label>
-   <default>255,255,0</default>
+   <default>255,255,127</default>
+  </entry>
+  <entry name="transactionImportedText" type="Color">
+   <label>Text color for imported transactions</label>
+   <default>0,0,0</default>
   </entry>
   <entry name="transactionMatchedColor" type="Color">
    <label>Background color for matched transactions</label>
    <default>152,251,152</default>
+  </entry>
+  <entry name="transactionMatchedText" type="Color">
+   <label>Text color for matched transactions</label>
+   <default>0,0,0</default>
   </entry>
   <entry name="transactionErroneousColor" type="Color">
    <label>List color for erroneous transactions</label>
@@ -201,6 +209,10 @@
   <entry name="groupMarkerColor" type="Color">
    <label>Background color for group marker</label>
    <default>255,242,155</default>
+  </entry>
+  <entry name="groupMarkerText" type="Color">
+   <label>Text color for group marker</label>
+   <default>0,0,0</default>
   </entry>
   <entry name="fieldRequiredColor" type="Color">
    <label>Background color for required fields</label>

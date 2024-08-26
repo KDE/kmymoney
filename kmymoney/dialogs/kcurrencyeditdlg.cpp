@@ -26,9 +26,10 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KTreeWidgetSearchLineWidget>
-#include <KMessageBox>
 #include <KLocalizedString>
+#include <KMessageBox>
+#include <KTreeWidgetSearchLine>
+#include <KTreeWidgetSearchLineWidget>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -571,6 +572,7 @@ void KCurrencyEditDlg::slotAddCurrency()
         ft.commit();
         d->ui->m_removeUnusedCurrencyButton->setDisabled(file->currencyList().count() <= 1);
     }
+    d->m_searchWidget->searchLine()->updateSearch();
     delete d->m_availableCurrencyDlg;
 }
 

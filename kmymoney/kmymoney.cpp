@@ -1538,8 +1538,13 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
     const auto viewActions = d->m_myMoneyView->actionsToBeConnected();
     actionCollection()->addActions(viewActions.values());
-    for (auto it = viewActions.cbegin(); it != viewActions.cend(); ++it)
+    for (auto it = viewActions.cbegin(); it != viewActions.cend(); ++it) {
         pActions.insert(it.key(), it.value());
+        // set the shortcut again through the actionCollection
+        if (it.value()->shortcut() != QKeySequence()) {
+            actionCollection()->setDefaultShortcut(it.value(), it.value()->shortcut());
+        }
+    }
 
     ///////////////////////////////////////////////////////////////////
     // call inits to invoke all other construction parts
@@ -1615,7 +1620,12 @@ KMyMoneyApp::~KMyMoneyApp()
 
     // make sure all settings are written to disk
     KMyMoneySettings::self()->save();
+
     delete d;
+
+    // clear the pointer because it could still be used in connected lambdas
+    // (see KMyMoneyApp::slotAddSharedAction)
+    d = nullptr;
 }
 
 QUrl KMyMoneyApp::lastOpenedURL()
@@ -2214,6 +2224,22 @@ void KMyMoneyApp::slotAddSharedAction(eMenu::Action action, QAction* defaultActi
                 if (toolButton) {
                     d->m_sharedActionButtons[action].button = toolButton;
                     d->m_sharedActionButtons[action].defaultAction = actionObject;
+                    connect(toolButton, &QObject::destroyed, this, [&](QObject* button) {
+                        // we maybe called after we destroyed our private object already
+                        if (d != nullptr) {
+                            QHash<eMenu::Action, KMyMoneyApp::Private::SharedActionButtonInfo>::iterator it;
+                            for (it = d->m_sharedActionButtons.begin(); it != d->m_sharedActionButtons.end();) {
+                                if ((*it).button == button) {
+                                    d->m_sharedActionButtons.remove(it.key());
+                                    // start from beginning since container changed
+                                    it = d->m_sharedActionButtons.begin();
+                                    QMetaObject::invokeMethod(d->m_myMoneyView, &KMyMoneyView::setupSharedActions, Qt::QueuedConnection);
+                                    continue;
+                                }
+                                ++it;
+                            }
+                        }
+                    });
                     break;
                 }
             }

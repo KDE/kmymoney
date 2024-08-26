@@ -295,13 +295,13 @@ public:
                     QString date;
                     QString source = QLatin1String("KMyMoney Currency");
                     if (pr.isValid()) {
-                        MyMoneySecurity fromCurrency = file->currency(pair.second);
-                        MyMoneySecurity toCurrency = file->currency(pair.first);
+                        MyMoneySecurity fromCurrency = file->currency(pair.first);
+                        MyMoneySecurity toCurrency = file->currency(pair.second);
                         price = pr.rate(pair.second).formatMoney(fromCurrency.tradingSymbol(), toCurrency.pricePrecision());
                         date = MyMoneyUtils::formatDate(pr.date());
                         source = pr.source();
                     }
-                    m_onlinePriceModel.addOnlinePrice(id, symbol, i18n("%1 units in %2", pair.first, pair.second), price, date, source);
+                    m_onlinePriceModel.addOnlinePrice(id, symbol, i18n("%1 units for one %2", pair.first, pair.second), price, date, source);
                 }
             }
         }
@@ -580,7 +580,12 @@ public:
                                            Qt::EditRole);
                 m_onlinePriceModel.setData(m_onlinePriceModel.index(m_currentRow, OnlinePriceModel::Date), MyMoneyUtils::formatDate(date), Qt::EditRole);
 
-                logStatusMessage(i18nc("@info Online price update %1 online id, %2 internal id", "Price for %1 updated (id %2)", _webID, _kmmID));
+                logStatusMessage(i18nc("@info Online price update %1 online id, %2 internal id, %3 price, %4 date",
+                                       "Price for %1 updated to %3 for %4 (id %2)",
+                                       _webID,
+                                       _kmmID,
+                                       price.formatMoney(toCurrency.tradingSymbol(), precision),
+                                       MyMoneyUtils::formatDate(date)));
             } else {
                 logErrorMessage(i18nc("@info Online price update %1 online id", "Received an invalid price for %1, unable to update.", _webID));
             }
