@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-26 02:00+0000\n"
-"PO-Revision-Date: 2024-08-17 19:29+0200\n"
+"PO-Revision-Date: 2024-08-26 00:21+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -1706,10 +1706,9 @@ msgid "Configure"
 msgstr "Configura"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:304
-#, fuzzy, kde-format
-#| msgid "%1 units in %2"
+#, kde-format
 msgid "%1 units for one %2"
-msgstr "%1 unità in %2"
+msgstr "%1 unità per un %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:341
 #, kde-format
@@ -4648,7 +4647,7 @@ msgstr "Sviluppatore, refactoring del codice"
 #: kmymoney/kcreditswindow.cpp:126
 #, kde-format
 msgid "%1 (build against %2)"
-msgstr ""
+msgstr "%1 (compilato con %2)"
 
 #: kmymoney/kcreditswindow.cpp:75 kmymoney/kcreditswindow.cpp:87
 #: kmymoney/kcreditswindow.cpp:94 kmymoney/kcreditswindow.cpp:101
@@ -4662,41 +4661,37 @@ msgstr "Sconosciuto"
 #: kmymoney/kcreditswindow.cpp:80
 #, kde-format
 msgid "Financial framework"
-msgstr ""
+msgstr "Framework finanziario"
 
 #: kmymoney/kcreditswindow.cpp:86
-#, fuzzy, kde-format
-#| msgid "Online settings"
+#, kde-format
 msgid "Online banking"
-msgstr "Impostazioni in linea"
+msgstr "Servizi bancari in linea"
 
 #: kmymoney/kcreditswindow.cpp:100
-#, fuzzy, kde-format
-#| msgid "Online Banking Operations"
+#, kde-format
 msgid "Online banking framework"
-msgstr "Operazioni bancarie in linea"
+msgstr "Framework per servizi bancari in linea"
 
 #: kmymoney/kcreditswindow.cpp:106
 #, kde-format
 msgid "Library for creating diagrams"
-msgstr ""
+msgstr "Libreria per la creazione di diagrammi"
 
 #: kmymoney/kcreditswindow.cpp:111
-#, fuzzy, kde-format
-#| msgid "iCalendar file"
+#, kde-format
 msgid "iCalendar integration"
-msgstr "File iCalendar"
+msgstr "Integrazione iCalendar"
 
 #: kmymoney/kcreditswindow.cpp:118
 #, kde-format
 msgid "OFX banking protocol abstraction library"
-msgstr ""
+msgstr "Libreria di astrazione del protocollo bancario OFX"
 
 #: kmymoney/kcreditswindow.cpp:125
-#, fuzzy, kde-format
-#| msgid "Database malfunction"
+#, kde-format
 msgid "SQLite database encryption"
-msgstr "Malfunzionamento del database"
+msgstr "Cifratura del database SQLite"
 
 #: kmymoney/kcreditswindow.cpp:130
 #, kde-format

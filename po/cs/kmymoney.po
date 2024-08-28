@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-26 02:00+0000\n"
-"PO-Revision-Date: 2024-08-20 08:39+0200\n"
+"PO-Revision-Date: 2024-08-27 13:58+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -1622,10 +1622,9 @@ msgid "Configure"
 msgstr "Nastavit"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:304
-#, fuzzy, kde-format
-#| msgid "%1 units in %2"
+#, kde-format
 msgid "%1 units for one %2"
-msgstr "%1 jednotek v %2"
+msgstr "%1 jednotek pro jeden %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:341
 #, kde-format
@@ -4438,7 +4437,7 @@ msgstr "Vývojář, přepis kódu"
 #: kmymoney/kcreditswindow.cpp:126
 #, kde-format
 msgid "%1 (build against %2)"
-msgstr ""
+msgstr "%1 (sestaveno oproti %2)"
 
 #: kmymoney/kcreditswindow.cpp:75 kmymoney/kcreditswindow.cpp:87
 #: kmymoney/kcreditswindow.cpp:94 kmymoney/kcreditswindow.cpp:101
@@ -4452,28 +4451,27 @@ msgstr "Neznámý"
 #: kmymoney/kcreditswindow.cpp:80
 #, kde-format
 msgid "Financial framework"
-msgstr ""
+msgstr "Finanční framework"
 
 #: kmymoney/kcreditswindow.cpp:86
 #, kde-format
 msgid "Online banking"
-msgstr ""
+msgstr "Online bankovnictví"
 
 #: kmymoney/kcreditswindow.cpp:100
 #, kde-format
 msgid "Online banking framework"
-msgstr ""
+msgstr "Framework pro online bankovnictví"
 
 #: kmymoney/kcreditswindow.cpp:106
 #, kde-format
 msgid "Library for creating diagrams"
-msgstr ""
+msgstr "Knihovna pro vytváření diagramů"
 
 #: kmymoney/kcreditswindow.cpp:111
-#, fuzzy, kde-format
-#| msgid "iCalendar file"
+#, kde-format
 msgid "iCalendar integration"
-msgstr "soubor iCalendar"
+msgstr "Integrace i Calendar"
 
 #: kmymoney/kcreditswindow.cpp:118
 #, kde-format
@@ -4481,10 +4479,9 @@ msgid "OFX banking protocol abstraction library"
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:125
-#, fuzzy, kde-format
-#| msgid "Database malfunction"
+#, kde-format
 msgid "SQLite database encryption"
-msgstr "Porucha databáze"
+msgstr "Šifrování databáze SQLite"
 
 #: kmymoney/kcreditswindow.cpp:130
 #, kde-format

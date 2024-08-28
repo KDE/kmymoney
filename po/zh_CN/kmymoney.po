@@ -1622,9 +1622,9 @@ msgid "Configure"
 msgstr "设置"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:304
-#, fuzzy, kde-format
+#, kde-format
 msgid "%1 units for one %2"
-msgstr "%2中的%1单位"
+msgstr ""
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:341
 #, kde-format
@@ -4460,14 +4460,14 @@ msgid "Financial framework"
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:86
-#, fuzzy, kde-format
+#, kde-format
 msgid "Online banking"
-msgstr "在线设置"
+msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:100
-#, fuzzy, kde-format
+#, kde-format
 msgid "Online banking framework"
-msgstr "网上银行业务"
+msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:106
 #, kde-format
@@ -4475,9 +4475,9 @@ msgid "Library for creating diagrams"
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:111
-#, fuzzy, kde-format
+#, kde-format
 msgid "iCalendar integration"
-msgstr "iCalendar 文件"
+msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:118
 #, kde-format
@@ -4485,9 +4485,9 @@ msgid "OFX banking protocol abstraction library"
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:125
-#, fuzzy, kde-format
+#, kde-format
 msgid "SQLite database encryption"
-msgstr "数据库工作异常"
+msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:130
 #, kde-format

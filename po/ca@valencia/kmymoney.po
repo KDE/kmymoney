@@ -11,14 +11,14 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-26 02:00+0000\n"
-"PO-Revision-Date: 2024-08-17 11:07+0200\n"
+"PO-Revision-Date: 2024-08-25 16:56+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.08.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -1709,10 +1709,9 @@ msgid "Configure"
 msgstr "Configura"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:304
-#, fuzzy, kde-format
-#| msgid "%1 units in %2"
+#, kde-format
 msgid "%1 units for one %2"
-msgstr "Les unitats de %1 són en %2"
+msgstr "%1 unitats per un %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:341
 #, kde-format
@@ -4663,7 +4662,7 @@ msgstr "Desenvolupador, refactorització del codi"
 #: kmymoney/kcreditswindow.cpp:126
 #, kde-format
 msgid "%1 (build against %2)"
-msgstr ""
+msgstr "%1 (construït amb %2)"
 
 #: kmymoney/kcreditswindow.cpp:75 kmymoney/kcreditswindow.cpp:87
 #: kmymoney/kcreditswindow.cpp:94 kmymoney/kcreditswindow.cpp:101
@@ -4677,41 +4676,37 @@ msgstr "Desconegut"
 #: kmymoney/kcreditswindow.cpp:80
 #, kde-format
 msgid "Financial framework"
-msgstr ""
+msgstr "Entorn de treball financer"
 
 #: kmymoney/kcreditswindow.cpp:86
-#, fuzzy, kde-format
-#| msgid "Online settings"
+#, kde-format
 msgid "Online banking"
-msgstr "Configuració en línia"
+msgstr "Banca en línia"
 
 #: kmymoney/kcreditswindow.cpp:100
-#, fuzzy, kde-format
-#| msgid "Online Banking Operations"
+#, kde-format
 msgid "Online banking framework"
-msgstr "Operacions de banca en línia"
+msgstr "Entorn de treball de banca en línia"
 
 #: kmymoney/kcreditswindow.cpp:106
 #, kde-format
 msgid "Library for creating diagrams"
-msgstr ""
+msgstr "Biblioteca per a crear diagrames"
 
 #: kmymoney/kcreditswindow.cpp:111
-#, fuzzy, kde-format
-#| msgid "iCalendar file"
+#, kde-format
 msgid "iCalendar integration"
-msgstr "Fitxer iCalendar"
+msgstr "Integració de l'iCalendar"
 
 #: kmymoney/kcreditswindow.cpp:118
 #, kde-format
 msgid "OFX banking protocol abstraction library"
-msgstr ""
+msgstr "Biblioteca d'abstracció del protocol bancari OFX"
 
 #: kmymoney/kcreditswindow.cpp:125
-#, fuzzy, kde-format
-#| msgid "Database malfunction"
+#, kde-format
 msgid "SQLite database encryption"
-msgstr "Funcionament incorrecte de la base de dades"
+msgstr "Encriptació de la base de dades SQLite"
 
 #: kmymoney/kcreditswindow.cpp:130
 #, kde-format
