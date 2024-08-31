@@ -104,6 +104,13 @@ public:
      * @see PivotTable
      */
     virtual void drawChart(KReportChartView& view) const = 0;
+
+    /**
+     * Dump the report's HTML to a file. Implemented by the concrete classes
+     *
+     * @param file The filename to dump into
+     * @param context QString-like format string with which the generated report is to be wrapped (at least “%1” is required)
+     */
     virtual void dump(const QString& file, const QString& context = QString()) const = 0;
 
     /**
