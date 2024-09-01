@@ -175,7 +175,6 @@ public:
         m_renameProxyModel->setSourceModel(MyMoneyFile::instance()->payeesModel());
 
         // setup the searchline widget
-        q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_renameProxyModel, &QSortFilterProxyModel::setFilterFixedString);
         ui->m_searchWidget->setClearButtonEnabled(true);
         ui->m_searchWidget->setPlaceholderText(i18nc("Placeholder text", "Search"));
 

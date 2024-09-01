@@ -34,6 +34,13 @@ KPayeesView::KPayeesView(QWidget *parent) :
     Q_D(KPayeesView);
     d->init();
 
+    connect(d->ui->m_searchWidget, &QLineEdit::textChanged, this, [&](const QString txt) {
+        Q_D(KPayeesView);
+        d->finalizePendingChanges();
+        d->m_renameProxyModel->setFilterFixedString(txt);
+        ;
+    });
+
     connect(d->ui->m_payees, &QWidget::customContextMenuRequested, this, [&](QPoint pos) {
         Q_D(KPayeesView);
         updateActions(d->m_selections);

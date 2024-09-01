@@ -179,7 +179,6 @@ public:
         ui->m_register->setColumnsShown(columns);
 
         // setup the searchline widget
-        q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_renameProxyModel, &QSortFilterProxyModel::setFilterFixedString);
         ui->m_searchWidget->setClearButtonEnabled(true);
         ui->m_searchWidget->setPlaceholderText(i18nc("Placeholder text", "Search"));
 
@@ -535,6 +534,11 @@ void KTagsView::showEvent(QShowEvent* event)
     Q_D(KTagsView);
     if (d->m_needLoad) {
         d->init();
+        connect(d->ui->m_searchWidget, &QLineEdit::textChanged, this, [&](const QString& txt) {
+            Q_D(KTagsView);
+            d->finalizePendingChanges();
+            d->m_renameProxyModel->setFilterFixedString(txt);
+        });
         connect(d->ui->m_filterBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int idx) {
             Q_D(KTagsView);
             d->m_renameProxyModel->setReferenceFilter(d->ui->m_filterBox->itemData(idx));
