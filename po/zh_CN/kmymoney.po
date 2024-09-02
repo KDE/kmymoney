@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-26 02:00+0000\n"
+"POT-Creation-Date: 2024-09-02 01:47+0000\n"
 "PO-Revision-Date: 2024-04-22 16:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -5914,7 +5914,7 @@ msgstr "加载文件“%1”时出错。"
 msgid "File access error"
 msgstr "文件访问出错"
 
-#: kmymoney/kmymoneyutils.cpp:566 kmymoney/views/kpayeesview.cpp:530
+#: kmymoney/kmymoneyutils.cpp:566 kmymoney/views/kpayeesview.cpp:537
 #, kde-format
 msgid "New Payee"
 msgstr "新建收款人"
@@ -5929,7 +5929,7 @@ msgstr ""
 msgid "Unable to add payee"
 msgstr "无法创建收款人"
 
-#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:637
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:641
 #, kde-format
 msgid "New Tag"
 msgstr "新建标签"
@@ -14508,13 +14508,13 @@ msgid "Include subaccounts"
 msgstr "包括子账户"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:145
-#: kmymoney/views/kpayeesview_p.h:796
+#: kmymoney/views/kpayeesview_p.h:795
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr ""
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
-#: kmymoney/views/kpayeesview_p.h:797 kmymoney/views/ktagsview.cpp:291
+#: kmymoney/views/kpayeesview_p.h:796 kmymoney/views/ktagsview.cpp:290
 #, kde-format
 msgid "Save changes"
 msgstr "保存修改"
@@ -19318,7 +19318,7 @@ msgstr ""
 msgid "Show outbox page"
 msgstr ""
 
-#: kmymoney/views/kpayeesview.cpp:148
+#: kmymoney/views/kpayeesview.cpp:155
 #, kde-format
 msgid ""
 "A payee with the name '%1' already exists. It is not advisable to have "
@@ -19327,39 +19327,39 @@ msgid ""
 msgstr ""
 "名为“%1”的交款人已存在。不建议多个交款人使用同一个名称。是否重命名该交款人？"
 
-#: kmymoney/views/kpayeesview.cpp:152
+#: kmymoney/views/kpayeesview.cpp:159
 #, kde-format
 msgctxt "@title:window"
 msgid "Duplicate payee name"
 msgstr ""
 
-#: kmymoney/views/kpayeesview.cpp:176 kmymoney/views/kpayeesview.cpp:378
-#: kmymoney/views/kpayeesview.cpp:401
+#: kmymoney/views/kpayeesview.cpp:183 kmymoney/views/kpayeesview.cpp:385
+#: kmymoney/views/kpayeesview.cpp:408
 #, kde-format
 msgid "Unable to modify payee"
 msgstr "无法修改收款人"
 
-#: kmymoney/views/kpayeesview.cpp:553
+#: kmymoney/views/kpayeesview.cpp:560
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "<p>您真的要删除收款人<b>%1</b>吗？</p>"
 
-#: kmymoney/views/kpayeesview.cpp:555
+#: kmymoney/views/kpayeesview.cpp:562
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr "您真的要删除所有选中的付款人吗？"
 
-#: kmymoney/views/kpayeesview.cpp:557
+#: kmymoney/views/kpayeesview.cpp:564
 #, kde-format
 msgid "Remove Payee"
 msgstr "删除收款人"
 
-#: kmymoney/views/kpayeesview.cpp:571
+#: kmymoney/views/kpayeesview.cpp:578
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr ""
 
-#: kmymoney/views/kpayeesview.cpp:572 kmymoney/views/kpayeesview_p.h:572
+#: kmymoney/views/kpayeesview.cpp:579 kmymoney/views/kpayeesview_p.h:571
 #, kde-format
 msgid "Merge Payees"
 msgstr ""
@@ -19574,23 +19574,23 @@ msgctxt "@item Show only unused payees"
 msgid "Unused"
 msgstr "未使用的"
 
-#: kmymoney/views/kpayeesview_p.h:180 kmymoney/views/ktagsview.cpp:184
+#: kmymoney/views/kpayeesview_p.h:179 kmymoney/views/ktagsview.cpp:183
 #, kde-format
 msgctxt "Placeholder text"
 msgid "Search"
 msgstr ""
 
-#: kmymoney/views/kpayeesview_p.h:352 kmymoney/views/ktagsview.cpp:214
+#: kmymoney/views/kpayeesview_p.h:351 kmymoney/views/ktagsview.cpp:213
 #, kde-format
 msgid "Balance: %1"
 msgstr "余额：%1"
 
-#: kmymoney/views/kpayeesview_p.h:396 kmymoney/views/ktagsview.cpp:258
+#: kmymoney/views/kpayeesview_p.h:395 kmymoney/views/ktagsview.cpp:257
 #, kde-format
 msgid "Balance: %1%2"
 msgstr ""
 
-#: kmymoney/views/kpayeesview_p.h:481
+#: kmymoney/views/kpayeesview_p.h:480
 #, kde-format
 msgid ""
 "At least one transaction/scheduled transaction or loan account is still "
@@ -19599,17 +19599,17 @@ msgid ""
 "loan account can be reassigned."
 msgstr ""
 
-#: kmymoney/views/kpayeesview_p.h:568
+#: kmymoney/views/kpayeesview_p.h:567
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
 msgstr "无法重新指定交易/划分的收/付款人"
 
-#: kmymoney/views/kpayeesview_p.h:572
+#: kmymoney/views/kpayeesview_p.h:571
 #, kde-format
 msgid "Nothing to merge."
 msgstr ""
 
-#: kmymoney/views/kpayeesview_p.h:655
+#: kmymoney/views/kpayeesview_p.h:654
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "无法删除收/付款人"
@@ -19774,12 +19774,12 @@ msgctxt "@item Show only closed tags"
 msgid "Closed"
 msgstr "已关闭"
 
-#: kmymoney/views/ktagsview.cpp:290
+#: kmymoney/views/ktagsview.cpp:289
 #, kde-format
 msgid "Do you want to save the changes for <b>%1</b>?"
 msgstr "是否保存对<b>%1</b>的修改？"
 
-#: kmymoney/views/ktagsview.cpp:377
+#: kmymoney/views/ktagsview.cpp:376
 #, kde-format
 msgid ""
 "A tag with the name '%1' already exists. It is not advisable to have "
@@ -19788,23 +19788,23 @@ msgid ""
 msgstr ""
 "名为“%1”的交款人已存在。不建议多个交款人使用同一个名称。是否重命名该交款人？"
 
-#: kmymoney/views/ktagsview.cpp:381
+#: kmymoney/views/ktagsview.cpp:380
 #, kde-format
 msgctxt "@title:window"
 msgid "Duplicate tag name"
 msgstr ""
 
-#: kmymoney/views/ktagsview.cpp:404 kmymoney/views/ktagsview.cpp:528
+#: kmymoney/views/ktagsview.cpp:403 kmymoney/views/ktagsview.cpp:527
 #, kde-format
 msgid "Unable to modify tag"
 msgstr ""
 
-#: kmymoney/views/ktagsview.cpp:808
+#: kmymoney/views/ktagsview.cpp:812
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr ""
 
-#: kmymoney/views/ktagsview.cpp:820
+#: kmymoney/views/ktagsview.cpp:824
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr ""

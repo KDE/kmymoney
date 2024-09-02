@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-26 02:00+0000\n"
+"POT-Creation-Date: 2024-09-02 01:47+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -6084,7 +6084,7 @@ msgstr "파일 '%1'을(를) 불러오는 중 오류가 발생했습니다."
 msgid "File access error"
 msgstr "파일 접근 오류"
 
-#: kmymoney/kmymoneyutils.cpp:566 kmymoney/views/kpayeesview.cpp:530
+#: kmymoney/kmymoneyutils.cpp:566 kmymoney/views/kpayeesview.cpp:537
 #, kde-format
 msgid "New Payee"
 msgstr "새 수취인"
@@ -6099,7 +6099,7 @@ msgstr "<qt><b>%1</b>을(를) 수취인으로 추가하시겠습니까?</qt>"
 msgid "Unable to add payee"
 msgstr "수취인을 추가할 수 없음"
 
-#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:637
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:641
 #, kde-format
 msgid "New Tag"
 msgstr "새 태그"
@@ -14831,13 +14831,13 @@ msgid "Include subaccounts"
 msgstr "하위 계좌 포함"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:145
-#: kmymoney/views/kpayeesview_p.h:796
+#: kmymoney/views/kpayeesview_p.h:795
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<qt><b>%1</b>의 변경 사항을 저장하시겠습니까?</qt>"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
-#: kmymoney/views/kpayeesview_p.h:797 kmymoney/views/ktagsview.cpp:291
+#: kmymoney/views/kpayeesview_p.h:796 kmymoney/views/ktagsview.cpp:290
 #, kde-format
 msgid "Save changes"
 msgstr "변경 사항 저장"
@@ -19732,7 +19732,7 @@ msgstr "예측 페이지 표시"
 msgid "Show outbox page"
 msgstr "보낼 작업함 페이지 표시"
 
-#: kmymoney/views/kpayeesview.cpp:148
+#: kmymoney/views/kpayeesview.cpp:155
 #, kde-format
 msgid ""
 "A payee with the name '%1' already exists. It is not advisable to have "
@@ -19742,39 +19742,39 @@ msgstr ""
 "이름이 '%1'인 수취인이 이미 존재합니다. 동일한 식별 이름을 가진 여러 수취인"
 "을 갖는 것은 권장되지 않습니다. 수취인의 이름을 변경하시겠습니까?"
 
-#: kmymoney/views/kpayeesview.cpp:152
+#: kmymoney/views/kpayeesview.cpp:159
 #, kde-format
 msgctxt "@title:window"
 msgid "Duplicate payee name"
 msgstr "중복된 수취인 이름"
 
-#: kmymoney/views/kpayeesview.cpp:176 kmymoney/views/kpayeesview.cpp:378
-#: kmymoney/views/kpayeesview.cpp:401
+#: kmymoney/views/kpayeesview.cpp:183 kmymoney/views/kpayeesview.cpp:385
+#: kmymoney/views/kpayeesview.cpp:408
 #, kde-format
 msgid "Unable to modify payee"
 msgstr "수취인을 수정할 수 없음"
 
-#: kmymoney/views/kpayeesview.cpp:553
+#: kmymoney/views/kpayeesview.cpp:560
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "<p>수취인 <b>%1</b>을(를) 삭제하시겠습니까?</p>"
 
-#: kmymoney/views/kpayeesview.cpp:555
+#: kmymoney/views/kpayeesview.cpp:562
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr "선택한 모든 수취인을 삭제하시겠습니까?"
 
-#: kmymoney/views/kpayeesview.cpp:557
+#: kmymoney/views/kpayeesview.cpp:564
 #, kde-format
 msgid "Remove Payee"
 msgstr "수취인 삭제"
 
-#: kmymoney/views/kpayeesview.cpp:571
+#: kmymoney/views/kpayeesview.cpp:578
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>선택한 수취인을 병합하시겠습니까?"
 
-#: kmymoney/views/kpayeesview.cpp:572 kmymoney/views/kpayeesview_p.h:572
+#: kmymoney/views/kpayeesview.cpp:579 kmymoney/views/kpayeesview_p.h:571
 #, kde-format
 msgid "Merge Payees"
 msgstr "수취인 병합"
@@ -19989,23 +19989,23 @@ msgctxt "@item Show only unused payees"
 msgid "Unused"
 msgstr "사용하지 않음"
 
-#: kmymoney/views/kpayeesview_p.h:180 kmymoney/views/ktagsview.cpp:184
+#: kmymoney/views/kpayeesview_p.h:179 kmymoney/views/ktagsview.cpp:183
 #, kde-format
 msgctxt "Placeholder text"
 msgid "Search"
 msgstr "검색"
 
-#: kmymoney/views/kpayeesview_p.h:352 kmymoney/views/ktagsview.cpp:214
+#: kmymoney/views/kpayeesview_p.h:351 kmymoney/views/ktagsview.cpp:213
 #, kde-format
 msgid "Balance: %1"
 msgstr "잔액: %1"
 
-#: kmymoney/views/kpayeesview_p.h:396 kmymoney/views/ktagsview.cpp:258
+#: kmymoney/views/kpayeesview_p.h:395 kmymoney/views/ktagsview.cpp:257
 #, kde-format
 msgid "Balance: %1%2"
 msgstr "잔액: %1%2"
 
-#: kmymoney/views/kpayeesview_p.h:481
+#: kmymoney/views/kpayeesview_p.h:480
 #, kde-format
 msgid ""
 "At least one transaction/scheduled transaction or loan account is still "
@@ -20017,17 +20017,17 @@ msgstr ""
 "다. 현재 모든 수취인을 선택했습니다. 그러나 해당 거래/예정된 거래 및 대출 계"
 "좌를 재할당할 수취인이 하나 이상 남아 있어야 합니다."
 
-#: kmymoney/views/kpayeesview_p.h:568
+#: kmymoney/views/kpayeesview_p.h:567
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
 msgstr "거래/분할 수취인을 재할당할 수 없음"
 
-#: kmymoney/views/kpayeesview_p.h:572
+#: kmymoney/views/kpayeesview_p.h:571
 #, kde-format
 msgid "Nothing to merge."
 msgstr "병합할 항목이 없습니다."
 
-#: kmymoney/views/kpayeesview_p.h:655
+#: kmymoney/views/kpayeesview_p.h:654
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "수취인을 삭제할 수 없음"
@@ -20196,12 +20196,12 @@ msgctxt "@item Show only closed tags"
 msgid "Closed"
 msgstr "닫힘"
 
-#: kmymoney/views/ktagsview.cpp:290
+#: kmymoney/views/ktagsview.cpp:289
 #, kde-format
 msgid "Do you want to save the changes for <b>%1</b>?"
 msgstr "<b>%1</b>의 변경 사항을 저장하시겠습니까?"
 
-#: kmymoney/views/ktagsview.cpp:377
+#: kmymoney/views/ktagsview.cpp:376
 #, kde-format
 msgid ""
 "A tag with the name '%1' already exists. It is not advisable to have "
@@ -20211,23 +20211,23 @@ msgstr ""
 "이름이 '%1'인 태그가 이미 있습니다. 식별 이름이 동일한 태그를 여러 개 사용하"
 "는 것은 좋지 않습니다. 태그 이름을 변경하시겠습니까?"
 
-#: kmymoney/views/ktagsview.cpp:381
+#: kmymoney/views/ktagsview.cpp:380
 #, kde-format
 msgctxt "@title:window"
 msgid "Duplicate tag name"
 msgstr "태그 이름 복제"
 
-#: kmymoney/views/ktagsview.cpp:404 kmymoney/views/ktagsview.cpp:528
+#: kmymoney/views/ktagsview.cpp:403 kmymoney/views/ktagsview.cpp:527
 #, kde-format
 msgid "Unable to modify tag"
 msgstr "태그를 수정할 수 없음"
 
-#: kmymoney/views/ktagsview.cpp:808
+#: kmymoney/views/ktagsview.cpp:812
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "거래/분할 태그를 재할당할 수 없음"
 
-#: kmymoney/views/ktagsview.cpp:820
+#: kmymoney/views/ktagsview.cpp:824
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "태그를 삭제할 수 없음"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-26 02:00+0000\n"
+"POT-Creation-Date: 2024-09-02 01:47+0000\n"
 "PO-Revision-Date: 2022-01-04 22:18+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -6113,7 +6113,7 @@ msgstr "خطأ أثناء تحميل الملفّ ’%1‘."
 msgid "File access error"
 msgstr "خطأ في الوصول للملفّ"
 
-#: kmymoney/kmymoneyutils.cpp:566 kmymoney/views/kpayeesview.cpp:530
+#: kmymoney/kmymoneyutils.cpp:566 kmymoney/views/kpayeesview.cpp:537
 #, kde-format
 msgid "New Payee"
 msgstr "مُتسلِّم جديد"
@@ -6129,7 +6129,7 @@ msgstr "<qt>أتريد إضافة <b>%1</b> كمُتسلِّم/مستقبِل؟<
 msgid "Unable to add payee"
 msgstr "تعذّر إضافة المُتسلِّم"
 
-#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:637
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:641
 #, kde-format
 msgid "New Tag"
 msgstr "وسم جديد"
@@ -14955,14 +14955,14 @@ msgid "Include subaccounts"
 msgstr "ضمّن الحسابات الفرعية"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:145
-#: kmymoney/views/kpayeesview_p.h:796
+#: kmymoney/views/kpayeesview_p.h:795
 #, fuzzy, kde-format
 #| msgid "Do you want to save the changes for <b>%1</b>?"
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "أتريد حفظ التّغييرات على <b>%1</b>؟"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
-#: kmymoney/views/kpayeesview_p.h:797 kmymoney/views/ktagsview.cpp:291
+#: kmymoney/views/kpayeesview_p.h:796 kmymoney/views/ktagsview.cpp:290
 #, kde-format
 msgid "Save changes"
 msgstr "احفظ التغييرات"
@@ -19914,7 +19914,7 @@ msgstr "اعرض صفحة التّنبّؤ"
 msgid "Show outbox page"
 msgstr "اعرض صفحة علبة الصّادر"
 
-#: kmymoney/views/kpayeesview.cpp:148
+#: kmymoney/views/kpayeesview.cpp:155
 #, kde-format
 msgid ""
 "A payee with the name '%1' already exists. It is not advisable to have "
@@ -19922,40 +19922,40 @@ msgid ""
 "like to rename the payee?"
 msgstr ""
 
-#: kmymoney/views/kpayeesview.cpp:152
+#: kmymoney/views/kpayeesview.cpp:159
 #, fuzzy, kde-format
 #| msgid "Duplicate open"
 msgctxt "@title:window"
 msgid "Duplicate payee name"
 msgstr "فتح متكرّر"
 
-#: kmymoney/views/kpayeesview.cpp:176 kmymoney/views/kpayeesview.cpp:378
-#: kmymoney/views/kpayeesview.cpp:401
+#: kmymoney/views/kpayeesview.cpp:183 kmymoney/views/kpayeesview.cpp:385
+#: kmymoney/views/kpayeesview.cpp:408
 #, kde-format
 msgid "Unable to modify payee"
 msgstr "تعذّر تعديل المُتسلِّم"
 
-#: kmymoney/views/kpayeesview.cpp:553
+#: kmymoney/views/kpayeesview.cpp:560
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "<p>هل تريد حقًّا إزالة المُتسلِّم <b>%1</b>?</p>"
 
-#: kmymoney/views/kpayeesview.cpp:555
+#: kmymoney/views/kpayeesview.cpp:562
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr "هل تريد حقًّا إزالة كل المُتسلِّمين المحدّدين؟"
 
-#: kmymoney/views/kpayeesview.cpp:557
+#: kmymoney/views/kpayeesview.cpp:564
 #, kde-format
 msgid "Remove Payee"
 msgstr "أزل المُتسلِّم"
 
-#: kmymoney/views/kpayeesview.cpp:571
+#: kmymoney/views/kpayeesview.cpp:578
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>أمتأكّد من دمج المُتسلِّمين المحدّدين؟"
 
-#: kmymoney/views/kpayeesview.cpp:572 kmymoney/views/kpayeesview_p.h:572
+#: kmymoney/views/kpayeesview.cpp:579 kmymoney/views/kpayeesview_p.h:571
 #, kde-format
 msgid "Merge Payees"
 msgstr ""
@@ -20177,23 +20177,23 @@ msgctxt "@item Show only unused payees"
 msgid "Unused"
 msgstr "غير المستخدم"
 
-#: kmymoney/views/kpayeesview_p.h:180 kmymoney/views/ktagsview.cpp:184
+#: kmymoney/views/kpayeesview_p.h:179 kmymoney/views/ktagsview.cpp:183
 #, kde-format
 msgctxt "Placeholder text"
 msgid "Search"
 msgstr "ابحث"
 
-#: kmymoney/views/kpayeesview_p.h:352 kmymoney/views/ktagsview.cpp:214
+#: kmymoney/views/kpayeesview_p.h:351 kmymoney/views/ktagsview.cpp:213
 #, kde-format
 msgid "Balance: %1"
 msgstr "الرصيد: %1"
 
-#: kmymoney/views/kpayeesview_p.h:396 kmymoney/views/ktagsview.cpp:258
+#: kmymoney/views/kpayeesview_p.h:395 kmymoney/views/ktagsview.cpp:257
 #, kde-format
 msgid "Balance: %1%2"
 msgstr "الرصيد: %1%2"
 
-#: kmymoney/views/kpayeesview_p.h:481
+#: kmymoney/views/kpayeesview_p.h:480
 #, fuzzy, kde-format
 msgid ""
 "At least one transaction/scheduled transaction or loan account is still "
@@ -20204,17 +20204,17 @@ msgstr ""
 "ما زالت هناك معاملة واحدة أو معاملة مجدولة أو حساب قروض يُشير إليه أحد "
 "المُتسلِّمين"
 
-#: kmymoney/views/kpayeesview_p.h:568
+#: kmymoney/views/kpayeesview_p.h:567
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
 msgstr ""
 
-#: kmymoney/views/kpayeesview_p.h:572
+#: kmymoney/views/kpayeesview_p.h:571
 #, kde-format
 msgid "Nothing to merge."
 msgstr "لا شيء لدمجه."
 
-#: kmymoney/views/kpayeesview_p.h:655
+#: kmymoney/views/kpayeesview_p.h:654
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "تعذّر إزالة المُتسلِّمين"
@@ -20394,12 +20394,12 @@ msgctxt "@item Show only closed tags"
 msgid "Closed"
 msgstr "المغلقة"
 
-#: kmymoney/views/ktagsview.cpp:290
+#: kmymoney/views/ktagsview.cpp:289
 #, kde-format
 msgid "Do you want to save the changes for <b>%1</b>?"
 msgstr "هل تريد حفظ تغييرات <b>%1</b>؟"
 
-#: kmymoney/views/ktagsview.cpp:377
+#: kmymoney/views/ktagsview.cpp:376
 #, kde-format
 msgid ""
 "A tag with the name '%1' already exists. It is not advisable to have "
@@ -20409,24 +20409,24 @@ msgstr ""
 "هناك وسم بالاسم '%1' بالفعل. لا يُنصح بعدّة وسوم بنفس اسم التعريف. هل أنت "
 "متأكد من إعادة تسمية الوسم؟"
 
-#: kmymoney/views/ktagsview.cpp:381
+#: kmymoney/views/ktagsview.cpp:380
 #, fuzzy, kde-format
 #| msgid "Duplicate tag"
 msgctxt "@title:window"
 msgid "Duplicate tag name"
 msgstr "الوسم متكرّر"
 
-#: kmymoney/views/ktagsview.cpp:404 kmymoney/views/ktagsview.cpp:528
+#: kmymoney/views/ktagsview.cpp:403 kmymoney/views/ktagsview.cpp:527
 #, kde-format
 msgid "Unable to modify tag"
 msgstr "تعذّر تعديل الوسم"
 
-#: kmymoney/views/ktagsview.cpp:808
+#: kmymoney/views/ktagsview.cpp:812
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr ""
 
-#: kmymoney/views/ktagsview.cpp:820
+#: kmymoney/views/ktagsview.cpp:824
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "تعذّر إزالة الوسوم"

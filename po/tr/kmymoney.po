@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-26 02:00+0000\n"
+"POT-Creation-Date: 2024-09-02 01:47+0000\n"
 "PO-Revision-Date: 2024-08-25 21:07+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -6099,7 +6099,7 @@ msgstr "“%1” dosyası yüklenirken hata."
 msgid "File access error"
 msgstr "Dosya erişim hatası"
 
-#: kmymoney/kmymoneyutils.cpp:566 kmymoney/views/kpayeesview.cpp:530
+#: kmymoney/kmymoneyutils.cpp:566 kmymoney/views/kpayeesview.cpp:537
 #, kde-format
 msgid "New Payee"
 msgstr "Yeni Alacaklı"
@@ -6115,7 +6115,7 @@ msgstr ""
 msgid "Unable to add payee"
 msgstr "Alacaklı eklenemiyor"
 
-#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:637
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:641
 #, kde-format
 msgid "New Tag"
 msgstr "Yeni Etiket"
@@ -14923,13 +14923,13 @@ msgid "Include subaccounts"
 msgstr "Alt hesapları içer"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:145
-#: kmymoney/views/kpayeesview_p.h:796
+#: kmymoney/views/kpayeesview_p.h:795
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<b>%1</b> değişikliklerini kaydetmek istiyor musunuz?"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
-#: kmymoney/views/kpayeesview_p.h:797 kmymoney/views/ktagsview.cpp:291
+#: kmymoney/views/kpayeesview_p.h:796 kmymoney/views/ktagsview.cpp:290
 #, kde-format
 msgid "Save changes"
 msgstr "Değişiklikleri kaydet"
@@ -19896,7 +19896,7 @@ msgstr "Öngörü sayfasını göster"
 msgid "Show outbox page"
 msgstr "Giden kutusu sayfasını göster"
 
-#: kmymoney/views/kpayeesview.cpp:148
+#: kmymoney/views/kpayeesview.cpp:155
 #, kde-format
 msgid ""
 "A payee with the name '%1' already exists. It is not advisable to have "
@@ -19907,39 +19907,39 @@ msgstr ""
 "alacaklı olması tavsiye edilmez. Alacaklıyı yeniden adlandırmak "
 "istediğinizden emin misiniz?"
 
-#: kmymoney/views/kpayeesview.cpp:152
+#: kmymoney/views/kpayeesview.cpp:159
 #, kde-format
 msgctxt "@title:window"
 msgid "Duplicate payee name"
 msgstr "Yinelenmiş Alacaklı Adı"
 
-#: kmymoney/views/kpayeesview.cpp:176 kmymoney/views/kpayeesview.cpp:378
-#: kmymoney/views/kpayeesview.cpp:401
+#: kmymoney/views/kpayeesview.cpp:183 kmymoney/views/kpayeesview.cpp:385
+#: kmymoney/views/kpayeesview.cpp:408
 #, kde-format
 msgid "Unable to modify payee"
 msgstr "Alacaklı değiştirilemiyor"
 
-#: kmymoney/views/kpayeesview.cpp:553
+#: kmymoney/views/kpayeesview.cpp:560
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "<p><b>%1</b> alacaklısını silmeyi gerçekten istiyor musunuz?</p>"
 
-#: kmymoney/views/kpayeesview.cpp:555
+#: kmymoney/views/kpayeesview.cpp:562
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr "Seçili tüm alacaklıları silmeyi gerçekten istiyor musunuz?"
 
-#: kmymoney/views/kpayeesview.cpp:557
+#: kmymoney/views/kpayeesview.cpp:564
 #, kde-format
 msgid "Remove Payee"
 msgstr "Alacaklıyı Kaldır"
 
-#: kmymoney/views/kpayeesview.cpp:571
+#: kmymoney/views/kpayeesview.cpp:578
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>Seçili tüm alacaklıları birleştirmeyi gerçekten istiyor musunuz?"
 
-#: kmymoney/views/kpayeesview.cpp:572 kmymoney/views/kpayeesview_p.h:572
+#: kmymoney/views/kpayeesview.cpp:579 kmymoney/views/kpayeesview_p.h:571
 #, kde-format
 msgid "Merge Payees"
 msgstr "Alacaklıları Birleştir"
@@ -20155,23 +20155,23 @@ msgctxt "@item Show only unused payees"
 msgid "Unused"
 msgstr "Kullanılmayan"
 
-#: kmymoney/views/kpayeesview_p.h:180 kmymoney/views/ktagsview.cpp:184
+#: kmymoney/views/kpayeesview_p.h:179 kmymoney/views/ktagsview.cpp:183
 #, kde-format
 msgctxt "Placeholder text"
 msgid "Search"
 msgstr "Ara"
 
-#: kmymoney/views/kpayeesview_p.h:352 kmymoney/views/ktagsview.cpp:214
+#: kmymoney/views/kpayeesview_p.h:351 kmymoney/views/ktagsview.cpp:213
 #, kde-format
 msgid "Balance: %1"
 msgstr "Bakiye: %1"
 
-#: kmymoney/views/kpayeesview_p.h:396 kmymoney/views/ktagsview.cpp:258
+#: kmymoney/views/kpayeesview_p.h:395 kmymoney/views/ktagsview.cpp:257
 #, kde-format
 msgid "Balance: %1%2"
 msgstr "Bakiye: %1%2"
 
-#: kmymoney/views/kpayeesview_p.h:481
+#: kmymoney/views/kpayeesview_p.h:480
 #, kde-format
 msgid ""
 "At least one transaction/scheduled transaction or loan account is still "
@@ -20184,17 +20184,17 @@ msgstr ""
 "işlemin veya kredi hesabının yeniden atanabilmesi için en az bir alacaklının "
 "kalması gerekir."
 
-#: kmymoney/views/kpayeesview_p.h:568
+#: kmymoney/views/kpayeesview_p.h:567
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
 msgstr "İşlemin/bölümün alacaklısı yeniden atanamıyor"
 
-#: kmymoney/views/kpayeesview_p.h:572
+#: kmymoney/views/kpayeesview_p.h:571
 #, kde-format
 msgid "Nothing to merge."
 msgstr "Birleştirilecek bir şey yok."
 
-#: kmymoney/views/kpayeesview_p.h:655
+#: kmymoney/views/kpayeesview_p.h:654
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "Alacaklılar kaldırılamıyor"
@@ -20368,12 +20368,12 @@ msgctxt "@item Show only closed tags"
 msgid "Closed"
 msgstr "Kapalı"
 
-#: kmymoney/views/ktagsview.cpp:290
+#: kmymoney/views/ktagsview.cpp:289
 #, kde-format
 msgid "Do you want to save the changes for <b>%1</b>?"
 msgstr "<b>%1</b> değişikliklerini kaydetmek istiyor musunuz?"
 
-#: kmymoney/views/ktagsview.cpp:377
+#: kmymoney/views/ktagsview.cpp:376
 #, kde-format
 msgid ""
 "A tag with the name '%1' already exists. It is not advisable to have "
@@ -20384,23 +20384,23 @@ msgstr ""
 "fazla etiketin olması tavsiye edilmez. Etiketi yeniden adlandırmak "
 "istediğinizden emin misiniz?"
 
-#: kmymoney/views/ktagsview.cpp:381
+#: kmymoney/views/ktagsview.cpp:380
 #, kde-format
 msgctxt "@title:window"
 msgid "Duplicate tag name"
 msgstr "Yinelenmiş Etiket Adı"
 
-#: kmymoney/views/ktagsview.cpp:404 kmymoney/views/ktagsview.cpp:528
+#: kmymoney/views/ktagsview.cpp:403 kmymoney/views/ktagsview.cpp:527
 #, kde-format
 msgid "Unable to modify tag"
 msgstr "Etiket değiştirilemiyor"
 
-#: kmymoney/views/ktagsview.cpp:808
+#: kmymoney/views/ktagsview.cpp:812
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "İşlemin/bölmenin etiketi yeniden atanamıyor"
 
-#: kmymoney/views/ktagsview.cpp:820
+#: kmymoney/views/ktagsview.cpp:824
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Etiketler kaldırılamıyor"

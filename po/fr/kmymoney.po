@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-26 02:00+0000\n"
-"PO-Revision-Date: 2024-08-18 09:35+0200\n"
+"POT-Creation-Date: 2024-09-02 01:47+0000\n"
+"PO-Revision-Date: 2024-08-26 10:58+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -1740,10 +1740,9 @@ msgid "Configure"
 msgstr "Configurer"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:304
-#, fuzzy, kde-format
-#| msgid "%1 units in %2"
+#, kde-format
 msgid "%1 units for one %2"
-msgstr "%1 unités dans %2"
+msgstr "%1 unités pour une unité %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:341
 #, kde-format
@@ -4708,7 +4707,7 @@ msgstr "Développeur pour le remaniement du code"
 #: kmymoney/kcreditswindow.cpp:126
 #, kde-format
 msgid "%1 (build against %2)"
-msgstr ""
+msgstr "%1 (compilé à l'encontre de %2)"
 
 #: kmymoney/kcreditswindow.cpp:75 kmymoney/kcreditswindow.cpp:87
 #: kmymoney/kcreditswindow.cpp:94 kmymoney/kcreditswindow.cpp:101
@@ -4722,41 +4721,37 @@ msgstr "Inconnu"
 #: kmymoney/kcreditswindow.cpp:80
 #, kde-format
 msgid "Financial framework"
-msgstr ""
+msgstr "Environnement de développement pour la finance"
 
 #: kmymoney/kcreditswindow.cpp:86
-#, fuzzy, kde-format
-#| msgid "Online settings"
+#, kde-format
 msgid "Online banking"
-msgstr "Paramètres en ligne"
+msgstr "Banque en ligne"
 
 #: kmymoney/kcreditswindow.cpp:100
-#, fuzzy, kde-format
-#| msgid "Online Banking Operations"
+#, kde-format
 msgid "Online banking framework"
-msgstr "Opérations de banque en ligne"
+msgstr "Environnement de développement pour banques en ligne"
 
 #: kmymoney/kcreditswindow.cpp:106
 #, kde-format
 msgid "Library for creating diagrams"
-msgstr ""
+msgstr "Bibliothèque pour la création de diagrammes"
 
 #: kmymoney/kcreditswindow.cpp:111
-#, fuzzy, kde-format
-#| msgid "iCalendar file"
+#, kde-format
 msgid "iCalendar integration"
-msgstr "Fichier iCalendar"
+msgstr "Intégration avec iCalendar"
 
 #: kmymoney/kcreditswindow.cpp:118
 #, kde-format
 msgid "OFX banking protocol abstraction library"
-msgstr ""
+msgstr "Bibliothèque d'abstraction pour le protocole bancaire « OFX »"
 
 #: kmymoney/kcreditswindow.cpp:125
-#, fuzzy, kde-format
-#| msgid "Database malfunction"
+#, kde-format
 msgid "SQLite database encryption"
-msgstr "Défaut de fonctionnement de la base de données"
+msgstr "Chiffrement de bases de données SQLite"
 
 #: kmymoney/kcreditswindow.cpp:130
 #, kde-format
@@ -6231,7 +6226,7 @@ msgstr "Erreur lors du chargement du fichier « %1 »."
 msgid "File access error"
 msgstr "Erreur d'accès au fichier"
 
-#: kmymoney/kmymoneyutils.cpp:566 kmymoney/views/kpayeesview.cpp:530
+#: kmymoney/kmymoneyutils.cpp:566 kmymoney/views/kpayeesview.cpp:537
 #, kde-format
 msgid "New Payee"
 msgstr "Nouveau bénéficiaire"
@@ -6246,7 +6241,7 @@ msgstr "<qt>Voulez-vous ajouter <b>%1</b> comme payeur ou bénéficiaire ?</qt>
 msgid "Unable to add payee"
 msgstr "Impossible d'ajouter le bénéficiaire"
 
-#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:637
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:641
 #, kde-format
 msgid "New Tag"
 msgstr "Nouvelle étiquette"
@@ -15173,13 +15168,13 @@ msgid "Include subaccounts"
 msgstr "Inclure les sous-comptes"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:145
-#: kmymoney/views/kpayeesview_p.h:796
+#: kmymoney/views/kpayeesview_p.h:795
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<qt>Voulez-vous enregistrer les modifications pour <b>%1</b> ?</qt>"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
-#: kmymoney/views/kpayeesview_p.h:797 kmymoney/views/ktagsview.cpp:291
+#: kmymoney/views/kpayeesview_p.h:796 kmymoney/views/ktagsview.cpp:290
 #, kde-format
 msgid "Save changes"
 msgstr "Enregistrer les modifications"
@@ -20231,7 +20226,7 @@ msgstr "Afficher la page des prévisions"
 msgid "Show outbox page"
 msgstr "Afficher la page boîte d'envoi"
 
-#: kmymoney/views/kpayeesview.cpp:148
+#: kmymoney/views/kpayeesview.cpp:155
 #, kde-format
 msgid ""
 "A payee with the name '%1' already exists. It is not advisable to have "
@@ -20242,39 +20237,39 @@ msgstr ""
 "d'avoir plusieurs bénéficiaires du même nom. Voulez-vous vraiment renommer "
 "le bénéficiaire ?"
 
-#: kmymoney/views/kpayeesview.cpp:152
+#: kmymoney/views/kpayeesview.cpp:159
 #, kde-format
 msgctxt "@title:window"
 msgid "Duplicate payee name"
 msgstr "Nom du bénéficiaire en double"
 
-#: kmymoney/views/kpayeesview.cpp:176 kmymoney/views/kpayeesview.cpp:378
-#: kmymoney/views/kpayeesview.cpp:401
+#: kmymoney/views/kpayeesview.cpp:183 kmymoney/views/kpayeesview.cpp:385
+#: kmymoney/views/kpayeesview.cpp:408
 #, kde-format
 msgid "Unable to modify payee"
 msgstr "Impossible de modifier le bénéficiaire"
 
-#: kmymoney/views/kpayeesview.cpp:553
+#: kmymoney/views/kpayeesview.cpp:560
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "<p>Voulez-vous vraiment supprimer le bénéficiaire <b>%1</b> ? </p>"
 
-#: kmymoney/views/kpayeesview.cpp:555
+#: kmymoney/views/kpayeesview.cpp:562
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr "Voulez-vous vraiment supprimer tous les bénéficiaires sélectionnés ?"
 
-#: kmymoney/views/kpayeesview.cpp:557
+#: kmymoney/views/kpayeesview.cpp:564
 #, kde-format
 msgid "Remove Payee"
 msgstr "Supprimer le bénéficiaire"
 
-#: kmymoney/views/kpayeesview.cpp:571
+#: kmymoney/views/kpayeesview.cpp:578
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>Voulez-vous vraiment fusionner les bénéficiaires sélectionnés ?"
 
-#: kmymoney/views/kpayeesview.cpp:572 kmymoney/views/kpayeesview_p.h:572
+#: kmymoney/views/kpayeesview.cpp:579 kmymoney/views/kpayeesview_p.h:571
 #, kde-format
 msgid "Merge Payees"
 msgstr "Fusionner les bénéficiaires"
@@ -20495,23 +20490,23 @@ msgctxt "@item Show only unused payees"
 msgid "Unused"
 msgstr "Non utilisé"
 
-#: kmymoney/views/kpayeesview_p.h:180 kmymoney/views/ktagsview.cpp:184
+#: kmymoney/views/kpayeesview_p.h:179 kmymoney/views/ktagsview.cpp:183
 #, kde-format
 msgctxt "Placeholder text"
 msgid "Search"
 msgstr "Rechercher"
 
-#: kmymoney/views/kpayeesview_p.h:352 kmymoney/views/ktagsview.cpp:214
+#: kmymoney/views/kpayeesview_p.h:351 kmymoney/views/ktagsview.cpp:213
 #, kde-format
 msgid "Balance: %1"
 msgstr "Solde : %1"
 
-#: kmymoney/views/kpayeesview_p.h:396 kmymoney/views/ktagsview.cpp:258
+#: kmymoney/views/kpayeesview_p.h:395 kmymoney/views/ktagsview.cpp:257
 #, kde-format
 msgid "Balance: %1%2"
 msgstr "Solde : %1%2"
 
-#: kmymoney/views/kpayeesview_p.h:481
+#: kmymoney/views/kpayeesview_p.h:480
 #, kde-format
 msgid ""
 "At least one transaction/scheduled transaction or loan account is still "
@@ -20524,18 +20519,18 @@ msgstr ""
 "Cependant, au moins un bénéficiaire doit rester pour que les opérations ou "
 "opérations récurrentes puissent être réassignées."
 
-#: kmymoney/views/kpayeesview_p.h:568
+#: kmymoney/views/kpayeesview_p.h:567
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
 msgstr ""
 "Impossible de réassigner le bénéficiaire pour l'opération ou la répartition"
 
-#: kmymoney/views/kpayeesview_p.h:572
+#: kmymoney/views/kpayeesview_p.h:571
 #, kde-format
 msgid "Nothing to merge."
 msgstr "Rien à fusionner."
 
-#: kmymoney/views/kpayeesview_p.h:655
+#: kmymoney/views/kpayeesview_p.h:654
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "Impossible de supprimer le(s) bénéficiaire(s)"
@@ -20710,12 +20705,12 @@ msgctxt "@item Show only closed tags"
 msgid "Closed"
 msgstr "Fermées"
 
-#: kmymoney/views/ktagsview.cpp:290
+#: kmymoney/views/ktagsview.cpp:289
 #, kde-format
 msgid "Do you want to save the changes for <b>%1</b>?"
 msgstr "Voulez-vous enregistrer les modifications pour <b>%1</b> ?"
 
-#: kmymoney/views/ktagsview.cpp:377
+#: kmymoney/views/ktagsview.cpp:376
 #, kde-format
 msgid ""
 "A tag with the name '%1' already exists. It is not advisable to have "
@@ -20726,24 +20721,24 @@ msgstr ""
 "d'avoir plusieurs étiquettes portant le même nom. Voulez-vous vraiment "
 "renommer l'étiquette ?"
 
-#: kmymoney/views/ktagsview.cpp:381
+#: kmymoney/views/ktagsview.cpp:380
 #, kde-format
 msgctxt "@title:window"
 msgid "Duplicate tag name"
 msgstr "Nom d'étiquette en doublon"
 
-#: kmymoney/views/ktagsview.cpp:404 kmymoney/views/ktagsview.cpp:528
+#: kmymoney/views/ktagsview.cpp:403 kmymoney/views/ktagsview.cpp:527
 #, kde-format
 msgid "Unable to modify tag"
 msgstr "Impossible de modifier l'étiquette"
 
-#: kmymoney/views/ktagsview.cpp:808
+#: kmymoney/views/ktagsview.cpp:812
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr ""
 "Impossible de réassigner l'étiquette pour l'opération ou la répartition"
 
-#: kmymoney/views/ktagsview.cpp:820
+#: kmymoney/views/ktagsview.cpp:824
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Impossible de supprimer les étiquettes"

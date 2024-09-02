@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-26 02:00+0000\n"
+"POT-Creation-Date: 2024-09-02 01:47+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -6409,7 +6409,7 @@ msgstr "Σφάλμα κατά τη φόρτωση του αρχείου «%1»."
 msgid "File access error"
 msgstr "Σφάλμα πρόσβασης στο αρχείο"
 
-#: kmymoney/kmymoneyutils.cpp:566 kmymoney/views/kpayeesview.cpp:530
+#: kmymoney/kmymoneyutils.cpp:566 kmymoney/views/kpayeesview.cpp:537
 #, kde-format
 msgid "New Payee"
 msgstr "Νέος δικαιούχος"
@@ -6425,7 +6425,7 @@ msgstr "Θέλετε να προσθέσετε τον <b>%1</b> ως δικαι�
 msgid "Unable to add payee"
 msgstr "Αδυναμία προσθήκης του δικαιούχου"
 
-#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:637
+#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:641
 #, kde-format
 msgid "New Tag"
 msgstr "Νέα ετικέτα"
@@ -15768,14 +15768,14 @@ msgid "Include subaccounts"
 msgstr "Συμπερίληψη των υπολογαριασμών"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:145
-#: kmymoney/views/kpayeesview_p.h:796
+#: kmymoney/views/kpayeesview_p.h:795
 #, fuzzy, kde-format
 #| msgid "Do you want to save the changes for <b>%1</b>?"
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "Επιθυμείτε την αποθήκευση των τροποποιήσεων του <b>%1</b>;"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
-#: kmymoney/views/kpayeesview_p.h:797 kmymoney/views/ktagsview.cpp:291
+#: kmymoney/views/kpayeesview_p.h:796 kmymoney/views/ktagsview.cpp:290
 #, kde-format
 msgid "Save changes"
 msgstr "Αποθήκευση αλλαγών"
@@ -21006,7 +21006,7 @@ msgstr ""
 msgid "Show outbox page"
 msgstr "Εμφάνιση της γραμμής τίτλου σε κάθε σελίδα"
 
-#: kmymoney/views/kpayeesview.cpp:148
+#: kmymoney/views/kpayeesview.cpp:155
 #, kde-format
 msgid ""
 "A payee with the name '%1' already exists. It is not advisable to have "
@@ -21017,40 +21017,40 @@ msgstr ""
 "περισσότερους δικαιούχους με το ίδιο όνομα. Επιθυμείτε πραγματικά τη "
 "μετονομασία του δικαιούχου;"
 
-#: kmymoney/views/kpayeesview.cpp:152
+#: kmymoney/views/kpayeesview.cpp:159
 #, fuzzy, kde-format
 #| msgid "Duplicate open"
 msgctxt "@title:window"
 msgid "Duplicate payee name"
 msgstr "Διπλό άνοιγμα"
 
-#: kmymoney/views/kpayeesview.cpp:176 kmymoney/views/kpayeesview.cpp:378
-#: kmymoney/views/kpayeesview.cpp:401
+#: kmymoney/views/kpayeesview.cpp:183 kmymoney/views/kpayeesview.cpp:385
+#: kmymoney/views/kpayeesview.cpp:408
 #, kde-format
 msgid "Unable to modify payee"
 msgstr "Αδυναμία τροποποίησης του δικαιούχου"
 
-#: kmymoney/views/kpayeesview.cpp:553
+#: kmymoney/views/kpayeesview.cpp:560
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "<p>Θέλετε πράγματι να αφαιρεθεί ο δικαιούχος <b>%1</b>;</p>"
 
-#: kmymoney/views/kpayeesview.cpp:555
+#: kmymoney/views/kpayeesview.cpp:562
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr "Θέλετε πράγματι να αφαιρεθούν όλοι οι επιλεγμένοι δικαιούχοι;"
 
-#: kmymoney/views/kpayeesview.cpp:557
+#: kmymoney/views/kpayeesview.cpp:564
 #, kde-format
 msgid "Remove Payee"
 msgstr "Αφαίρεση δικαιούχου"
 
-#: kmymoney/views/kpayeesview.cpp:571
+#: kmymoney/views/kpayeesview.cpp:578
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>Θέλετε πράγματι να συγχωνευτούν οι επιλεγμένοι δικαιούχοι;"
 
-#: kmymoney/views/kpayeesview.cpp:572 kmymoney/views/kpayeesview_p.h:572
+#: kmymoney/views/kpayeesview.cpp:579 kmymoney/views/kpayeesview_p.h:571
 #, kde-format
 msgid "Merge Payees"
 msgstr "Συγχωνευμένοι δικαιούχοι"
@@ -21287,7 +21287,7 @@ msgctxt "@item Show only unused payees"
 msgid "Unused"
 msgstr "Που δεν χρησιμοποιούνται"
 
-#: kmymoney/views/kpayeesview_p.h:180 kmymoney/views/ktagsview.cpp:184
+#: kmymoney/views/kpayeesview_p.h:179 kmymoney/views/ktagsview.cpp:183
 #, fuzzy, kde-format
 #| msgctxt "Search widget label"
 #| msgid "S&earch:"
@@ -21295,17 +21295,17 @@ msgctxt "Placeholder text"
 msgid "Search"
 msgstr "Αναζήτηση:"
 
-#: kmymoney/views/kpayeesview_p.h:352 kmymoney/views/ktagsview.cpp:214
+#: kmymoney/views/kpayeesview_p.h:351 kmymoney/views/ktagsview.cpp:213
 #, kde-format
 msgid "Balance: %1"
 msgstr "Υπόλοιπο: %1"
 
-#: kmymoney/views/kpayeesview_p.h:396 kmymoney/views/ktagsview.cpp:258
+#: kmymoney/views/kpayeesview_p.h:395 kmymoney/views/ktagsview.cpp:257
 #, kde-format
 msgid "Balance: %1%2"
 msgstr "Υπόλοιπο: %1%2"
 
-#: kmymoney/views/kpayeesview_p.h:481
+#: kmymoney/views/kpayeesview_p.h:480
 #, kde-format
 msgid ""
 "At least one transaction/scheduled transaction or loan account is still "
@@ -21318,17 +21318,17 @@ msgstr ""
 "Ωστόσο, τουλάχιστον ένας δικαιούχος πρέπει να παραμείνει έτσι ώστε η "
 "προγραμματισμένη ή όχι συναλλαγή να καταχωρηθεί ξανά."
 
-#: kmymoney/views/kpayeesview_p.h:568
+#: kmymoney/views/kpayeesview_p.h:567
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
 msgstr "Αδυναμία επανάληψης της καταχώρησης δικαιούχου για συναλλαγή/διάσπαση"
 
-#: kmymoney/views/kpayeesview_p.h:572
+#: kmymoney/views/kpayeesview_p.h:571
 #, kde-format
 msgid "Nothing to merge."
 msgstr "Τίποτα προς συγχώνευση."
 
-#: kmymoney/views/kpayeesview_p.h:655
+#: kmymoney/views/kpayeesview_p.h:654
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "Αδυναμία αφαίρεσης δικαιούχων"
@@ -21521,12 +21521,12 @@ msgctxt "@item Show only closed tags"
 msgid "Closed"
 msgstr "Κλειστές"
 
-#: kmymoney/views/ktagsview.cpp:290
+#: kmymoney/views/ktagsview.cpp:289
 #, kde-format
 msgid "Do you want to save the changes for <b>%1</b>?"
 msgstr "Επιθυμείτε την αποθήκευση των τροποποιήσεων του <b>%1</b>;"
 
-#: kmymoney/views/ktagsview.cpp:377
+#: kmymoney/views/ktagsview.cpp:376
 #, kde-format
 msgid ""
 "A tag with the name '%1' already exists. It is not advisable to have "
@@ -21537,24 +21537,24 @@ msgstr ""
 "περισσότερες ετικέτες με το ίδιο όνομα. Είστε βέβαιοι ότι θέλετε να "
 "μετονομαστεί η ετικέτα;"
 
-#: kmymoney/views/ktagsview.cpp:381
+#: kmymoney/views/ktagsview.cpp:380
 #, fuzzy, kde-format
 #| msgid "Duplicate tag"
 msgctxt "@title:window"
 msgid "Duplicate tag name"
 msgstr "Διπλή ετικέτα"
 
-#: kmymoney/views/ktagsview.cpp:404 kmymoney/views/ktagsview.cpp:528
+#: kmymoney/views/ktagsview.cpp:403 kmymoney/views/ktagsview.cpp:527
 #, kde-format
 msgid "Unable to modify tag"
 msgstr "Αδυναμία τροποποίησης της ετικέτας"
 
-#: kmymoney/views/ktagsview.cpp:808
+#: kmymoney/views/ktagsview.cpp:812
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Αδυναμία επανάληψης της καταχώρησης ετικέτας για συναλλαγή/διάσπαση"
 
-#: kmymoney/views/ktagsview.cpp:820
+#: kmymoney/views/ktagsview.cpp:824
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Αδυναμία διαγραφής ετικετών"
