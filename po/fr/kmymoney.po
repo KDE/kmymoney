@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-02 01:47+0000\n"
-"PO-Revision-Date: 2024-08-26 10:58+0200\n"
+"PO-Revision-Date: 2024-09-01 21:17+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -10277,8 +10277,8 @@ msgctxt "Type of operation as in financial statement"
 msgid ""
 "add,stock dividend,divd reinv,transfer in,re-registration in,journal entry"
 msgstr ""
-"ajout, dividende en actions, divd réinv, transfert, ré-enregistrement, "
-"entrée dans le journal"
+"ajout, dividende en actions, dividende à réinvestir, transfert, ré-"
+"enregistrement, entrée dans le journal"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1590
 #, kde-format
@@ -11419,7 +11419,7 @@ msgstr "Cotations en ligne"
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:87
 #, kde-format
 msgid "Use Finance::Quote for share price quotes"
-msgstr "Utilise Finance::Quote pour les cotations des titres"
+msgstr "Utilise Finance::Quote pour les cotations de titres"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox2)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:100
@@ -12014,7 +12014,7 @@ msgstr "Écrire les entrées compatibles avec l'agenda de Google"
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:26
 #, kde-format
 msgid "Icalendar export settings"
-msgstr "Paramètres d'exportation Icalendar"
+msgstr "Paramètres d'exportation pour iCalendar"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_writeEventsVsTodos)
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:34
