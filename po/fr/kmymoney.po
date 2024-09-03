@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2024-05-07 09:57+0200\n"
+"PO-Revision-Date: 2024-09-01 21:17+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -28,10 +28,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
-"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
 "X-Generator: Lokalize 23.08.5\n"
+"X-Text-Markup: kde4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -9778,7 +9778,7 @@ msgstr "Une liste contenant les identifiants des chèques déjà imprimés."
 #: kmymoney/plugins/icalendar/export/pluginsettingsdecl.ui:26
 #, kde-format
 msgid "Icalendar export settings"
-msgstr "Paramètres d'exportation Icalendar"
+msgstr "Paramètres d'exportation pour iCalendar"
 
 #. i18n: ectx: property (text), widget (QLabel, check_template_file)
 #: kmymoney/plugins/checkprinting/pluginsettingsdecl.ui:36
@@ -10432,8 +10432,8 @@ msgctxt "Type of operation as in financial statement"
 msgid ""
 "add,stock dividend,divd reinv,transfer in,re-registration in,journal entry"
 msgstr ""
-"ajout, dividende en actions, divd réinv, transfert, ré-enregistrement, "
-"entrée dans le journal"
+"ajout, dividende en actions, dividende à réinvestir, transfert, ré-"
+"enregistrement, entrée dans le journal"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1587
 #, kde-format
@@ -11497,7 +11497,7 @@ msgstr "Cotations en ligne"
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:87
 #, kde-format
 msgid "Use Finance::Quote for share price quotes"
-msgstr "Utilise Finance::Quote pour les cotations des titres"
+msgstr "Utilise Finance::Quote pour les cotations de titres"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox2)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:100
