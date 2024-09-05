@@ -78,6 +78,13 @@ void updateActions(const Container& plugins, const SelectedObjects& selections);
  * @param plugins   List of loaded plugins
  */
 void updateConfiguration(const Container& plugins);
+
+/**
+ * @brief Return if a specific plugin is loaded and available
+ * @param name name of plugin to check for
+ * @returns @c true or @c false depending on availability
+ */
+bool pluginAvailable(const QString& name);
 }
 
 #endif

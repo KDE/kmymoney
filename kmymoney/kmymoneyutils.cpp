@@ -70,6 +70,7 @@
 #include "mymoneytag.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
+#include "pluginloader.h"
 #include "splitmodel.h"
 #include "statusmodel.h"
 #include "storageenums.h"
@@ -752,4 +753,9 @@ QString KMyMoneyUtils::normalizeNumericString(const qreal& val, const QLocale& l
 {
     static const QRegularExpression trailingZeroesRegex("0+$");
     return loc.toString(val, f, prec).remove(loc.groupSeparator()).remove(trailingZeroesRegex).remove(QRegularExpression("\\" + loc.decimalPoint() + "$"));
+}
+
+bool KMyMoneyUtils::hasOnlineTransactionSupport()
+{
+    return KMyMoneyPlugin::pluginAvailable(QLatin1String("kbanking")) && KMyMoneyPlugin::pluginAvailable(QLatin1String("onlinejoboutboxview"));
 }

@@ -158,4 +158,15 @@ void updateConfiguration(const Container& plugins)
         plugin->updateConfiguration();
     }
 }
+
+bool pluginAvailable(const QString& name)
+{
+    const auto plugins = listPlugins(true);
+    for (auto it = plugins.cbegin(); it != plugins.cend(); ++it) {
+        if ((*it).pluginId() == name) {
+            return true;
+        }
+    }
+    return false;
+}
 }

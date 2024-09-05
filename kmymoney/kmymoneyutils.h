@@ -359,6 +359,12 @@ public:
       * @return QString object containing the converted value
       */
     static QString normalizeNumericString(const qreal& val, const QLocale& loc, const char f = 'g', const int prec = 6);
+
+    /**
+     * Returns @c true if the the plugins kbanking and onlinejoboutboxview
+     * are available and @c false otherwise.
+     */
+    static bool hasOnlineTransactionSupport();
 };
 
 #endif
