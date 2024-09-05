@@ -264,7 +264,7 @@ onlineJob onlineJobAdministration::convertBest(const onlineJob& original, const 
 {
     onlineJob bestConvert;
     bestConvertType = onlineTaskConverter::convertImpossible;
-    bestUserInformation = QString();
+    bestUserInformation.clear();
 
     for (const auto& taskIid : convertTaskIids) {
         // Try convert

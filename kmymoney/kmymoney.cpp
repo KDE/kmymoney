@@ -4404,7 +4404,7 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
                 while (it_plugin != pPlugins.importer.constEnd()) {
                     if ((*it_plugin)->isMyFormat(url)) {
                         if (!(*it_plugin)->import(url) && !(*it_plugin)->lastError().isEmpty()) {
-                            auto pluginName = QString();
+                            QString pluginName;
                             if (pPlugins.standard.contains(it_plugin.key()))
                                 pluginName = pPlugins.standard.value(it_plugin.key())->componentDisplayName();
                             KMessageBox::error(this, i18nc("%1 file location, %2 plugin name", "Unable to import %1 using %2 plugin. The plugin returned the following error: %3", url, pluginName, (*it_plugin)->lastError()), i18n("Importing error"));

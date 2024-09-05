@@ -1180,9 +1180,9 @@ MyMoneyMoney CSVImporterCore::processCreditDebit(QString &credit, QString &debit
 
     if (!credit.isEmpty() && !debit.isEmpty()) {  // we do not expect both fields to be non-zero
         if (MyMoneyMoney(credit).isZero())
-            credit = QString();
+            credit.clear();
         if (MyMoneyMoney(debit).isZero())
-            debit = QString();
+            debit.clear();
     }
 
     if (!debit.startsWith(QLatin1Char('-')) && !debit.isEmpty()) // ensure debit field is negative

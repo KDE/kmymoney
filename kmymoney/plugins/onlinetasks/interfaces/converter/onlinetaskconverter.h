@@ -71,7 +71,7 @@ public:
      *
      * Never forget to set convertResult! You should always set userInformation and convertResult. Code for copy & paste:
      * @code
-     * userInformation = QString();
+     * userInformation.clear();
      * convertResult = convertImpossible;
      * @endcode
      *

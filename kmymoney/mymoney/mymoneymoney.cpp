@@ -131,7 +131,7 @@ void MyMoneyMoney::setDecimalSeparator(const QChar &separator)
     if (separator != QLatin1Char(' '))
         eMyMoney::Money::_decimalSeparator = separator;
     else
-        eMyMoney::Money::_decimalSeparator = QString();
+        eMyMoney::Money::_decimalSeparator.clear();
 }
 
 void MyMoneyMoney::setDecimalSeparator(const QString& separator)

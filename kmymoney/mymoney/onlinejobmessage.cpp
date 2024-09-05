@@ -35,8 +35,8 @@ onlineJobMessage::onlineJobMessage() :
 {
     Q_D(onlineJobMessage);
     d->m_type = eMyMoney::OnlineJob::MessageType::Error;
-    d->m_sender = QString();
-    d->m_message = QString();
+    d->m_sender.clear();
+    d->m_message.clear();
     d->m_timestamp = QDateTime();
 }
 
