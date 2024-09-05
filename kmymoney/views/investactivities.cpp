@@ -479,6 +479,14 @@ void Reinvest::showWidgets() const
     setupWidgets(activityWidgets);
 }
 
+void Reinvest::adjustStockSplit(MyMoneySplit& stockSplit)
+{
+    // in case the amount of shares is negative, make it positive
+    if (stockSplit.shares().isNegative()) {
+        stockSplit.setShares(-stockSplit.shares());
+        stockSplit.setValue(-stockSplit.value());
+    }
+}
 
 MyMoneyMoney Invest::Reinvest::totalAmount(const MyMoneySplit & stockSplit, const SplitModel * feesModel, const SplitModel * interestModel) const
 {

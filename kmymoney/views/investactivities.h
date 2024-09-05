@@ -213,7 +213,7 @@ public:
     ~Reinvest() override;
     eMyMoney::Split::InvestmentTransactionType type() const override;
     void showWidgets() const override;
-    virtual void adjustStockSplit(MyMoneySplit&) override {}
+    virtual void adjustStockSplit(MyMoneySplit&) override;
     MyMoneyMoney totalAmount(const MyMoneySplit& stockSplit, const SplitModel* feesModel, const SplitModel* interestModel) const override;
 
     fieldRequired_t feesRequired() const override {
