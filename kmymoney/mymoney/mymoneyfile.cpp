@@ -326,6 +326,20 @@ public:
         }
     }
 
+    void adjustSplitSign(MyMoneyTransaction& transaction)
+    {
+        // in case the sign of shares and value of a split differs,
+        // invert the sign of the value to make them equal
+        const auto splits = transaction.splits();
+        for (const auto& split : splits) {
+            if (split.shares().isNegative() != split.value().isNegative()) {
+                auto newSplit(split);
+                newSplit.setValue(-newSplit.value());
+                transaction.modifySplit(newSplit);
+            }
+        }
+    }
+
     MyMoneyFile* m_file;
     bool m_dirty;
     bool m_inTransaction;
@@ -844,6 +858,8 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
 
     // make sure the value is rounded to the accounts precision
     fixSplitPrecision(tCopy);
+
+    d->adjustSplitSign(tCopy);
 
     d->journalModel.modifyTransaction(tCopy);
 
@@ -1683,6 +1699,8 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
 
     // make sure the value is rounded to the accounts precision
     fixSplitPrecision(transaction);
+
+    d->adjustSplitSign(transaction);
 
     // then add the transaction to the file global pool
     d->journalModel.addTransaction(transaction);
