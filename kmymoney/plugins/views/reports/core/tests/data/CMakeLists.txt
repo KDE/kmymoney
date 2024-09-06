@@ -6,6 +6,7 @@ set(querytable_test_files
 )
 
 set(pivottable_test_files
+  test-pivottable.xml
 )
 
 macro(fetch_report_names file)

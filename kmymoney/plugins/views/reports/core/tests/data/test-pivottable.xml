@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE KMYMONEY-FILE>
+<KMYMONEY-FILE>
+  <FILEINFO>
+    <CREATION_DATE date=""/>
+    <LAST_MODIFIED_DATE date="2024-09-09T10:40:54+02:00"/>
+    <VERSION id="1"/>
+    <FIXVERSION date=""/>
+    <APPVERSION id="5.1.80-0eea4b2ca"/>
+  </FILEINFO>
+  <USER name="" email="">
+    <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
+  </USER>
+  <INSTITUTIONS/>
+  <PAYEES/>
+  <COSTCENTERS/>
+  <TAGS/>
+  <ACCOUNTS>
+    <ACCOUNT id="AStd::Asset" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="9" name="Anlagen" description="" currency="EUR">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000001"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Liability" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="10" name="Verbindlichkeiten" description="" currency="EUR"/>
+    <ACCOUNT id="AStd::Expense" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="13" name="Ausgabe" description="" currency="EUR">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000002"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Income" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="12" name="Einnahme" description="" currency="EUR"/>
+    <ACCOUNT id="AStd::Equity" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="16" name="Eigenkapital" description="" currency="EUR"/>
+    <ACCOUNT id="A000001" parentaccount="AStd::Asset" lastreconciled="" lastmodified="2024-09-06" institution="" opened="2024-01-01" number="" type="1" name="checking" description="" currency="EUR"/>
+    <ACCOUNT id="A000002" parentaccount="AStd::Expense" lastreconciled="" lastmodified="2024-09-06" institution="" opened="1900-01-01" number="" type="13" name="Ausgabe" description="" currency="EUR"/>
+  </ACCOUNTS>
+  <TRANSACTIONS>
+    <TRANSACTION id="T000000000000000001" postdate="2024-01-01" memo="" entrydate="2024-09-06" commodity="EUR">
+      <SPLITS>
+        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="-123/1" shares="-123/1" price="1/1" memo="" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="123/1" shares="123/1" price="1/1" memo="" account="A000002" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+  </TRANSACTIONS>
+  <KEYVALUEPAIRS>
+    <PAIR key="LastModificationDate" value="2024-09-09T10:40:54+02:00"/>
+    <PAIR key="kmm-baseCurrency" value="EUR"/>
+    <PAIR key="kmm-id" value="{f8f47595-3cac-4ace-8579-b740638b1629}"/>
+  </KEYVALUEPAIRS>
+  <SCHEDULES/>
+  <SECURITIES/>
+  <CURRENCIES>
+    <CURRENCY id="EUR" name="Euro" symbol="€" type="3" rounding-method="7" saf="100" pp="4" scf="100"/>
+  </CURRENCIES>
+  <PRICES/>
+  <REPORTS>
+    <REPORT id="R000002" type="pivottable 1.16" group="Forecast" name="Eigenkapital-Vorhersage  (angepasst)" comment="Custom report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="assetliability" includesactuals="0" includesforecast="1" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" showrowtotals="0" showcolumntotals="1" detail="total" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="0" chartsvgridlines="0" chartdatalabels="1" chartbydefault="1" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="months" datalock="automatic" dataRangeStart="-125" dataRangeEnd="-121" dataMajorTick="1" dataMinorTick="0,2" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="asset"/>
+      <ACCOUNTGROUP group="liability"/>
+      <DATES from="2024-01-01" to="2024-12-31"/>
+    </REPORT>
+    <REPORT id="R000003" type="pivottable 1.16" group="Forecast" name="Einnahmen-Ausgaben-Vorhersage (angepasst)" comment="Benutzerdefinierter Bericht" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="expenseincome" includesactuals="0" includesforecast="1" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="0" chartsvgridlines="0" chartdatalabels="1" chartbydefault="1" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="months" datalock="automatic" dataRangeStart="-2" dataRangeEnd="2" dataMajorTick="1" dataMinorTick="0,2" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2024-01-01" to="2024-12-31"/>
+    </REPORT>
+  </REPORTS>
+  <BUDGETS/>
+  <ONLINEJOBS/>
+</KMYMONEY-FILE>
