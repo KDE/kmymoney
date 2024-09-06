@@ -13,6 +13,6 @@ target_link_libraries(kmmreport-export
     kmm_mymoney
     kmm_testutilities
     reports
-    xmlstorage
+    xmlstorage_static
     Qt::Core
 )

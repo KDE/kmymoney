@@ -28,6 +28,22 @@ target_link_libraries(xmlstorage
     onlinetask_interfaces
 )
 
+add_library(xmlstorage_static STATIC ${xmlstorage_SOURCES})
+
+target_link_libraries(xmlstorage_static
+  PUBLIC
+    kmm_plugin
+    Qt::Xml
+    KF5::Archive
+    KF5::I18n
+    KF5::CoreAddons
+    $<$<BOOL:${ENABLE_GPG}>:kmm_gpgfile>
+    kmymoney_common
+    kmm_mymoney
+    xmlstoragehelper
+    onlinetask_interfaces
+)
+
 # install(FILES kmymoney-xmlstorageplugin.desktop
 #   DESTINATION ${SERVICETYPES_INSTALL_DIR}
 # )
