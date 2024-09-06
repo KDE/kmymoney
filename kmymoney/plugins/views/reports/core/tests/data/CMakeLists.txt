@@ -1,4 +1,5 @@
 set(infotable_test_files
+  test-infotable.xml
 )
 
 set(querytable_test_files
