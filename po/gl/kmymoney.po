@@ -4523,7 +4523,7 @@ msgstr ""
 #: kmymoney/kcreditswindow.cpp:42
 #, kde-format
 msgid "(c) 2000-2024 The KMyMoney development team"
-msgstr "© 2000-2024 Equipo de desenvolvemento de KMyMoney"
+msgstr "© 2000-2024 Equipo desenvolvedor de KMyMoney"
 
 #: kmymoney/kcreditswindow.cpp:45
 #, kde-format
