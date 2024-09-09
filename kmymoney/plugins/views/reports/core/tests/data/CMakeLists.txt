@@ -3,6 +3,7 @@ set(infotable_test_files
 )
 
 set(querytable_test_files
+  test-382245.xml
   test-423870.xml
   test-424674.xml
   test-448788.xml
