@@ -596,7 +596,7 @@ void QueryTable::constructTransactionTable()
 
         bool foundTaxAccount = false;
         for (it_split = splits.constBegin(), myBegin = splits.constEnd(); it_split != splits.constEnd(); ++it_split) {
-            ReportAccount splitAcc((* it_split).accountId());
+            ReportAccount splitAcc((*it_split).accountId());
             // always put split with a "stock" account if it exists
             if (splitAcc.isInvest())
                 break;
@@ -903,7 +903,6 @@ void QueryTable::constructTransactionTable()
                     }
                     //--- default case includes all transaction details
                     else {
-
                         //this is when the splits are going to be shown as children of the main split
                         if ((splits.count() > 2) && use_summary) {
                             qA[ctValue].clear();
@@ -912,18 +911,26 @@ void QueryTable::constructTransactionTable()
                             qA[ctSplit] = (-(*it_split).shares() * xr).convert(fraction).toString();
                             qA[ctRank] = QLatin1Char('2');
                         } else {
-                            //this applies when the transaction has only 2 splits, or each split is going to be
-                            //shown separately, eg. transactions by category
+                            // this applies when the transaction has only 2 splits, or each split is going to be
+                            // shown separately, eg. transactions by category
                             switch (m_config.rowType()) {
                             case eMyMoney::Report::RowType::Category:
                             case eMyMoney::Report::RowType::TopCategory:
                             case eMyMoney::Report::RowType::Tag:
                             case eMyMoney::Report::RowType::Payee:
                                 if (splitAcc.isIncomeExpense()) {
-                                    qA[ctValue] = (-(*it_split).shares() * xr).convert(fraction).toString(); // needed for category reports, in case of multicurrency transaction it breaks it
-                                    // make sure we use the right currency of the category
-                                    // (will be ignored when converting to base currency)
-                                    qA[ctCurrency] = splitAcc.currencyId();
+                                    // if the currency of the split is different from the currency of the main split,
+                                    // then convert to the currency of the main split
+                                    MyMoneyMoney ieXr(xr);
+                                    if (!m_config.isConvertCurrency() && splitAcc.currency().id() != myBeginCurrency) {
+                                        ieXr = (xr * splitAcc.foreignCurrencyPrice(myBeginCurrency, (*it_transaction).postDate())).reduce();
+                                        qA[ctCurrency] = file->account((*myBegin).accountId()).currencyId();
+                                    } else {
+                                        // make sure we use the right currency of the category
+                                        // (will be ignored when converting to base currency)
+                                        qA[ctCurrency] = splitAcc.currencyId();
+                                    }
+                                    qA[ctValue] = ((-(*it_split).shares()) * ieXr).convert(fraction).toString();
                                 }
                                 break;
                             default:
