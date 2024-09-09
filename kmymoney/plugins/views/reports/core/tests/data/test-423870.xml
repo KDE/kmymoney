@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE KMYMONEY-FILE>
+<KMYMONEY-FILE>
+  <FILEINFO>
+    <CREATION_DATE date=""/>
+    <LAST_MODIFIED_DATE date="2024-09-09T22:58:54+02:00"/>
+    <VERSION id="1"/>
+    <FIXVERSION date=""/>
+    <APPVERSION id="5.1.80-a82f24b57"/>
+  </FILEINFO>
+  <USER name="" email="">
+    <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
+  </USER>
+  <INSTITUTIONS>
+    <INSTITUTION id="I000001" name="Bank A (USD)" manager="" sortcode="">
+      <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
+      <ACCOUNTIDS>
+        <ACCOUNTID id="A000001"/>
+      </ACCOUNTIDS>
+    </INSTITUTION>
+    <INSTITUTION id="I000002" name="Bank B (GBP)" manager="" sortcode="">
+      <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
+      <ACCOUNTIDS>
+        <ACCOUNTID id="A000008"/>
+      </ACCOUNTIDS>
+    </INSTITUTION>
+  </INSTITUTIONS>
+  <PAYEES>
+    <PAYEE id="P000001" name="Amazon" reference="" email="" matchingenabled="0">
+      <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
+    </PAYEE>
+  </PAYEES>
+  <COSTCENTERS/>
+  <TAGS/>
+  <ACCOUNTS>
+    <ACCOUNT id="AStd::Asset" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="9" name="Asset" description="" currency="USD">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000001"/>
+        <SUBACCOUNT id="A000008"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Liability" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="10" name="Liability" description="" currency="USD"/>
+    <ACCOUNT id="AStd::Expense" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="13" name="Expense" description="" currency="USD">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000003"/>
+        <SUBACCOUNT id="A000004"/>
+        <SUBACCOUNT id="A000006"/>
+        <SUBACCOUNT id="A000010"/>
+        <SUBACCOUNT id="A000011"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Income" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="12" name="Income" description="" currency="USD"/>
+    <ACCOUNT id="AStd::Equity" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="16" name="Equity" description="" currency="USD">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000002"/>
+        <SUBACCOUNT id="A000009"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="A000001" parentaccount="AStd::Asset" lastreconciled="" lastmodified="2020-08-15" institution="I000001" opened="2020-01-01" number="" type="1" name="Account (USD)" description="" currency="USD"/>
+    <ACCOUNT id="A000002" parentaccount="AStd::Equity" lastreconciled="" lastmodified="2020-08-15" institution="" opened="2020-01-01" number="" type="16" name="Opening Balances" description="" currency="USD">
+      <KEYVALUEPAIRS>
+        <PAIR key="OpeningBalanceAccount" value="Yes"/>
+      </KEYVALUEPAIRS>
+    </ACCOUNT>
+    <ACCOUNT id="A000003" parentaccount="AStd::Expense" lastreconciled="" lastmodified="" institution="" opened="1900-01-01" number="" type="13" name="Home Repair" description="" currency="USD"/>
+    <ACCOUNT id="A000004" parentaccount="AStd::Expense" lastreconciled="" lastmodified="" institution="" opened="1900-01-01" number="" type="13" name="Insurance" description="" currency="USD">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000005"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="A000005" parentaccount="A000004" lastreconciled="" lastmodified="" institution="" opened="1900-01-01" number="" type="13" name="Home Insurance" description="" currency="USD"/>
+    <ACCOUNT id="A000006" parentaccount="AStd::Expense" lastreconciled="" lastmodified="" institution="" opened="1900-01-01" number="" type="13" name="Taxes" description="" currency="USD">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000007"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="A000007" parentaccount="A000006" lastreconciled="" lastmodified="" institution="" opened="1900-01-01" number="" type="13" name="Property Tax" description="" currency="USD"/>
+    <ACCOUNT id="A000008" parentaccount="AStd::Asset" lastreconciled="" lastmodified="2020-08-15" institution="I000002" opened="2020-04-05" number="" type="1" name="Account (GBP)" description="" currency="GBP"/>
+    <ACCOUNT id="A000009" parentaccount="AStd::Equity" lastreconciled="" lastmodified="2020-08-15" institution="" opened="2020-04-05" number="" type="16" name="Opening Balances (GBP)" description="" currency="GBP">
+      <KEYVALUEPAIRS>
+        <PAIR key="OpeningBalanceAccount" value="Yes"/>
+      </KEYVALUEPAIRS>
+    </ACCOUNT>
+    <ACCOUNT id="A000010" parentaccount="AStd::Expense" lastreconciled="" lastmodified="2020-08-15" institution="" opened="1900-01-01" number="" type="13" name="Books" description="" currency="USD"/>
+    <ACCOUNT id="A000011" parentaccount="AStd::Expense" lastreconciled="" lastmodified="2020-08-15" institution="" opened="1900-01-01" number="" type="13" name="Clothes" description="" currency="USD"/>
+  </ACCOUNTS>
+  <TRANSACTIONS>
+    <TRANSACTION id="T000000000000000001" postdate="2020-01-01" memo="" entrydate="2020-08-15" commodity="USD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="100/1" shares="100/1" price="1/1" memo="" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="-100/1" shares="-100/1" price="1/1" memo="" account="A000002" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000002" postdate="2020-04-05" memo="" entrydate="2020-08-15" commodity="GBP">
+      <SPLITS>
+        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="100/1" shares="100/1" price="1/1" memo="" account="A000008" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="-100/1" shares="-100/1" price="1/1" memo="" account="A000009" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000003" postdate="2020-06-27" memo="" entrydate="2020-08-15" commodity="USD">
+      <SPLITS>
+        <SPLIT id="S0001" payee="P000001" reconciledate="" action="" reconcileflag="0" value="-50/1" shares="-50/1" price="1/1" memo="" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0002" payee="P000001" reconciledate="" action="" reconcileflag="0" value="50/1" shares="50/1" price="1/1" memo="" account="A000010" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000004" postdate="2020-06-27" memo="" entrydate="2020-08-15" commodity="GBP">
+      <SPLITS>
+        <SPLIT id="S0001" payee="P000001" reconciledate="" action="" reconcileflag="0" value="-50/1" shares="-50/1" price="1/1" memo="" account="A000008" number="" bankid=""/>
+        <SPLIT id="S0002" payee="P000001" reconciledate="" action="" reconcileflag="0" value="50/1" shares="1636/25" price="625/818" memo="" account="A000011" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+  </TRANSACTIONS>
+  <KEYVALUEPAIRS>
+    <PAIR key="LastModificationDate" value="2024-09-09T22:58:54+02:00"/>
+    <PAIR key="kmm-baseCurrency" value="USD"/>
+    <PAIR key="kmm-id" value="{1bc5425b-d897-4dea-a489-2db5abd97368}"/>
+  </KEYVALUEPAIRS>
+  <SCHEDULES/>
+  <SECURITIES/>
+  <CURRENCIES>
+    <CURRENCY id="GBP" name="British Pound" symbol="£" type="3" rounding-method="7" saf="100" pp="4" scf="100"/>
+    <CURRENCY id="USD" name="US Dollar" symbol="$" type="3" rounding-method="7" saf="100" pp="4" scf="100"/>
+  </CURRENCIES>
+  <PRICES>
+    <PRICEPAIR from="GBP" to="USD">
+      <PRICE date="2020-06-27" price="818/625" source="User"/>
+    </PRICEPAIR>
+    <PRICEPAIR from="USD" to="GBP">
+      <PRICE date="2020-04-05" price="7641/10000" source="User"/>
+    </PRICEPAIR>
+  </PRICES>
+  <REPORTS>
+    <REPORT id="R000001" type="querytable 1.15" group="Transactions" name="Transactions by Category (Base unconverted)" comment="Custom Report" convertcurrency="0" favorite="1" skipZero="0" datelock="userdefined" rowtype="category" querycolumns="number,payee,tag,account" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0">
+      <DATES from="2020-01-01" to="2020-12-31"/>
+    </REPORT>
+    <REPORT id="R000002" type="querytable 1.15" group="Transactions" name="Transactions by Payee (Base converted)" comment="Custom Report" convertcurrency="1" favorite="1" skipZero="0" datelock="userdefined" rowtype="payee" querycolumns="number,category,tag" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0">
+      <DATES from="2020-01-01" to="2020-12-31"/>
+    </REPORT>
+    <REPORT id="R000003" type="querytable 1.15" group="Transactions" name="Transactions by Category (Base converted)" comment="Custom Report" convertcurrency="1" favorite="1" skipZero="0" datelock="userdefined" rowtype="category" querycolumns="number,payee,tag,account" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0">
+      <DATES from="2020-01-01" to="2020-12-31"/>
+    </REPORT>
+    <REPORT id="R000004" type="querytable 1.15" group="Transactions" name="Transactions by Payee (Base unconverted)" comment="Custom Report" convertcurrency="0" favorite="1" skipZero="0" datelock="userdefined" rowtype="payee" querycolumns="number,category,tag" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0">
+      <DATES from="2020-01-01" to="2020-12-31"/>
+    </REPORT>
+    <REPORT id="R000005" type="querytable 1.15" group="Transactions" name="Transactions by account (Base converted)" comment="Custom report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="account" querycolumns="number,payee,category,tag,balance" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0">
+      <ACCOUNTGROUP group="asset"/>
+      <ACCOUNTGROUP group="assetloan"/>
+      <ACCOUNTGROUP group="cash"/>
+      <ACCOUNTGROUP group="checkings"/>
+      <ACCOUNTGROUP group="creditcard"/>
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <ACCOUNTGROUP group="liability"/>
+      <ACCOUNTGROUP group="loan"/>
+      <ACCOUNTGROUP group="savings"/>
+      <ACCOUNTGROUP group="stock"/>
+      <DATES from="2020-01-01" to="2020-12-31"/>
+    </REPORT>
+    <REPORT id="R000006" type="querytable 1.15" group="Transactions" name="Transactions by account (Base unconverted)" comment="Custom report" convertcurrency="0" favorite="0" skipZero="0" datelock="userdefined" rowtype="account" querycolumns="number,payee,category,tag,balance" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0">
+      <ACCOUNTGROUP group="asset"/>
+      <ACCOUNTGROUP group="assetloan"/>
+      <ACCOUNTGROUP group="cash"/>
+      <ACCOUNTGROUP group="checkings"/>
+      <ACCOUNTGROUP group="creditcard"/>
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <ACCOUNTGROUP group="liability"/>
+      <ACCOUNTGROUP group="loan"/>
+      <ACCOUNTGROUP group="savings"/>
+      <ACCOUNTGROUP group="stock"/>
+      <DATES from="2020-01-01" to="2020-12-31"/>
+    </REPORT>
+  </REPORTS>
+  <BUDGETS/>
+  <ONLINEJOBS/>
+</KMYMONEY-FILE>

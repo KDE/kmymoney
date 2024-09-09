@@ -1,0 +1,7 @@
+Date,Payee,Category,Amount,Balance
+"BTC"
+"2023-01-01","Opening Balance","","","BTC 0.00000000"
+"2023-04-30","Alice","Transfer from Current Assets: Checking Account","BTC 0.03776000","BTC 0.03776000"
+"2023-04-30","Closing Balance","","","BTC 0.03776000"
+Total BTC,,,"BTC 0.03776000",
+Grand Total,,,"BTC 0.03776000",
