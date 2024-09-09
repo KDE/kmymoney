@@ -3,6 +3,7 @@ set(infotable_test_files
 )
 
 set(querytable_test_files
+  test-buchungen.xml
   test-eigenkapital.xml
 )
 

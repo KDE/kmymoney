@@ -1,0 +1,14 @@
+Date,Num,Payee,Tags,Category,Amount,Balance
+"Verbindlichkeiten"
+"2024-01-01","","Opening Balance","","",""," 0.00"
+"2024-01-03","","[Empty Payee]","[No Tag]","Transfer from checking"," 100.00"," 100.00"
+"2024-12-31","","Closing Balance","","",""," 100.00"
+Total Verbindlichkeiten,,,,," 100.00",
+"checking"
+"2024-01-01","","Opening Balance","","",""," 0.00"
+"2024-01-01","","[Empty Payee]","[No Tag]","Ausgabe"," -123.00"," -123.00"
+"2024-01-02","","[Empty Payee]","[No Tag]","Einnahme"," 445.00"," 322.00"
+"2024-01-03","","[Empty Payee]","[No Tag]","Transfer to Verbindlichkeiten"," -100.00"," 222.00"
+"2024-12-31","","Closing Balance","","",""," 222.00"
+Total checking,,,,," 222.00",
+Grand Total,,,,," 322.00",
