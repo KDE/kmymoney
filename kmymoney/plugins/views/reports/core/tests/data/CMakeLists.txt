@@ -3,11 +3,13 @@ set(infotable_test_files
 )
 
 set(querytable_test_files
+  test-eigenkapital.xml
 )
 
 set(pivottable_test_files
   test-einnahmen-und-ausgaben.xml
   test-pivottable.xml
+  test-eigenkapital.xml
 )
 
 macro(fetch_report_names file)
