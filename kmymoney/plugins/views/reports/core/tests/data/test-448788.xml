@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KMYMONEY-FILE>
+<KMYMONEY-FILE>
+ <FILEINFO>
+  <CREATION_DATE date=""/>
+  <LAST_MODIFIED_DATE date="2024-08-29"/>
+  <VERSION id="1"/>
+  <FIXVERSION id="4"/>
+ </FILEINFO>
+ <USER email="" name="">
+  <ADDRESS street="" telephone="" county="" city="" zipcode=""/>
+ </USER>
+ <INSTITUTIONS count="0"/>
+ <PAYEES count="0"/>
+ <TAGS count="0"/>
+ <ACCOUNTS count="8">
+  <ACCOUNT currency="EUR" description="" parentaccount="" opened="" number="" lastmodified="" type="9" id="AStd::Asset" lastreconciled="" institution="" name="Anlagen">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000001"/>
+    <SUBACCOUNT id="A000002"/>
+   </SUBACCOUNTS>
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="EUR" description="" parentaccount="" opened="" number="" lastmodified="" type="10" id="AStd::Liability" lastreconciled="" institution="" name="Verbindlichkeiten">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="EUR" description="" parentaccount="" opened="" number="" lastmodified="" type="13" id="AStd::Expense" lastreconciled="" institution="" name="Ausgabe">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="EUR" description="" parentaccount="" opened="" number="" lastmodified="" type="12" id="AStd::Income" lastreconciled="" institution="" name="Einnahme">
+   <SUBACCOUNTS>
+    <SUBACCOUNT id="A000003"/>
+   </SUBACCOUNTS>
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="EUR" description="" parentaccount="" opened="" number="" lastmodified="" type="16" id="AStd::Equity" lastreconciled="" institution="" name="Eigenkapital">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="EUR" description="" parentaccount="AStd::Asset" opened="2024-01-01" number="" lastmodified="" type="1" id="A000001" lastreconciled="" institution="" name="checking">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="BTC" description="" parentaccount="AStd::Asset" opened="2024-01-01" number="" lastmodified="2024-08-29" type="1" id="A000002" lastreconciled="" institution="" name="checking (BTC)">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+    <PAIR key="minBalanceEarly" value="0/1"/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+  <ACCOUNT currency="EUR" description="" parentaccount="AStd::Income" opened="1900-01-01" number="" lastmodified="2024-08-29" type="12" id="A000003" lastreconciled="" institution="" name="dividend">
+   <KEYVALUEPAIRS>
+    <PAIR key="lastStatementDate" value=""/>
+   </KEYVALUEPAIRS>
+  </ACCOUNT>
+ </ACCOUNTS>
+ <TRANSACTIONS count="1">
+  <TRANSACTION postdate="2024-08-29" commodity="BTC" posttime="" memo="" id="T000000000000000001" entrydate="2024-08-29" entrytime="">
+   <SPLITS>
+    <SPLIT payee="" reconcileflag="0" shares="1/100" price="1/1" reconciledate="" action="" bankid="" account="A000002" number="" value="1/100" memo="" id="S0001"/>
+    <SPLIT payee="" reconcileflag="0" shares="-570/1" price="1/57000" reconciledate="" action="" bankid="" account="A000003" number="" value="-1/100" memo="" id="S0002"/>
+   </SPLITS>
+  </TRANSACTION>
+ </TRANSACTIONS>
+ <KEYVALUEPAIRS>
+  <PAIR key="LastModificationDate" value="2024-08-29T00:40:00+02:00"/>
+  <PAIR key="kmm-baseCurrency" value="EUR"/>
+  <PAIR key="kmm-id" value="{0472c532-9330-45e3-910d-3bfe18ff739b}"/>
+ </KEYVALUEPAIRS>
+ <SCHEDULES count="0"/>
+ <SECURITIES count="0"/>
+ <CURRENCIES count="29">
+  <CURRENCY saf="100" symbol="ÃS" type="3" id="ATS" name="Österreichischer Schilling" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="m." type="3" id="AZM" name="Aserbaidschan-Manat" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="Fr" type="3" id="BEF" name="Belgischer Franc" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="BGL" type="3" id="BGL" name="Bulgarischer Lew" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="BGN" type="3" id="BGN" name="Bulgarischer Lew (neu)" ppu="100" scf="100"/>
+  <CURRENCY saf="100000000" symbol="BTC" type="3" id="BTC" name="Bitcoin" ppu="100000000" scf="100000000"/>
+  <CURRENCY saf="100" symbol="BYR" type="3" id="BYR" name="Weißrussischer Rubel (alt)" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="C£" type="3" id="CYP" name="Zypern-Pfund" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="DM" type="3" id="DEM" name="Deutsche Mark" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="ESP" type="3" id="ESP" name="Spanische Pesete" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="€" type="3" id="EUR" name="Euro" ppu="0" scf="100"/>
+  <CURRENCY saf="100" symbol="FIM" type="3" id="FIM" name="Finnische Mark" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="FF" type="3" id="FRF" name="Französischer Franc" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="₯" type="3" id="GRD" name="Griechische Drachme" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="£" type="3" id="IEP" name="Irisches Pfund" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="₤" type="3" id="ITL" name="Italienische Lira" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="Lt" type="3" id="LTL" name="Litauische Litas" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="Fr" type="3" id="LUF" name="Luxemburger Franc" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="MTL" type="3" id="MTL" name="Maltesische Lire" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="MT" type="3" id="MZM" name="Mosambikanischer Metical" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="NLG" type="3" id="NLG" name="Holländischer Gulden" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="PTE" type="3" id="PTE" name="Portugiesischer Escudo" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="ROL" type="3" id="ROL" name="Rumänischer Leu" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="RON" type="3" id="RON" name="Rumänischer Leu (neu)" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="RUB" type="3" id="RUB" name="Russischer Rubel" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="RUR" type="3" id="RUR" name="Russischer Rubel (alt)" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="SIT" type="3" id="SIT" name="Slowenischer Tolar" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="SKK" type="3" id="SKK" name="Slowakische Krone" ppu="100" scf="100"/>
+  <CURRENCY saf="100" symbol="TL" type="3" id="TRL" name="Türkische Lira (alt)" ppu="100" scf="100"/>
+ </CURRENCIES>
+ <PRICES count="26">
+  <PRICEPAIR from="ATS" to="EUR">
+   <PRICE price="10000/137603" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="AZM" to="AZN">
+   <PRICE price="1/5000" source="KMyMoney" date="2006-01-01"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="BEF" to="EUR">
+   <PRICE price="10000/403399" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="BGL" to="BGN">
+   <PRICE price="1/1000" source="KMyMoney" date="1999-07-05"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="BTC" to="EUR">
+   <PRICE price="57000/1" source="Benutzer" date="2024-08-29"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="BYR" to="BYN">
+   <PRICE price="1/10000" source="KMyMoney" date="2016-07-01"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="CYP" to="EUR">
+   <PRICE price="292637/500000" source="KMyMoney" date="2008-01-01"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="DEM" to="EUR">
+   <PRICE price="100000/195583" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="ESP" to="EUR">
+   <PRICE price="500/83193" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="EUR" to="BTC">
+   <PRICE price="1/1" source="Benutzer" date="2024-01-01"/>
+   <PRICE price="903/50000000" source="Yahoo.com [Currency].BTC-test" date="2024-08-23"/>
+   <PRICE price="349/20000000" source="Yahoo.com [Currency].BTC-test" date="2024-08-24"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="FIM" to="EUR">
+   <PRICE price="100000/594573" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="FRF" to="EUR">
+   <PRICE price="100000/655957" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="GRD" to="EUR">
+   <PRICE price="4/1363" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="IEP" to="EUR">
+   <PRICE price="250000/196891" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="ITL" to="EUR">
+   <PRICE price="100/193627" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="LTL" to="EUR">
+   <PRICE price="625/2158" source="KMyMoney" date="2015-01-01"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="LUF" to="EUR">
+   <PRICE price="10000/403399" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="MTL" to="EUR">
+   <PRICE price="4293/10000" source="KMyMoney" date="2008-01-01"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="MZM" to="MZN">
+   <PRICE price="1/1000" source="KMyMoney" date="2006-07-01"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="NLG" to="EUR">
+   <PRICE price="100000/220371" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="PTE" to="EUR">
+   <PRICE price="500/100241" source="KMyMoney" date="1998-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="ROL" to="RON">
+   <PRICE price="1/10000" source="KMyMoney" date="2005-06-30"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="RUR" to="RUB">
+   <PRICE price="1/1000" source="KMyMoney" date="1998-01-01"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="SIT" to="EUR">
+   <PRICE price="25/5991" source="KMyMoney" date="2006-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="SKK" to="EUR">
+   <PRICE price="500/15063" source="KMyMoney" date="2008-12-31"/>
+  </PRICEPAIR>
+  <PRICEPAIR from="TRL" to="TRY">
+   <PRICE price="1/1000000" source="KMyMoney" date="2004-12-31"/>
+  </PRICEPAIR>
+ </PRICES>
+ <REPORTS count="3">
+  <REPORT includesprice="0" includesactuals="0" columnsaredays="0" includestransfers="0" loans="0" id="R000001" comment="Benutzerdefinierter Bericht" rowtype="category" name="Buchungen nach Kategorie (ohne Umrechnung)" chartgridlines="1" includesaverageprice="0" includesmovingaverage="0" chartbydefault="0" skipZero="0" datelock="yeartodate" investments="0" charttype="none" favorite="0" chartdatalabels="1" convertcurrency="0" fixes="" chartlinewidth="1" chartpalette="application" includeschedules="0" querycolumns="number,payee,tag,account" tax="0" group="Transactions" includesforecast="0" includeunused="0" mixedtime="0" type="querytable 1.14"/>
+  <REPORT includesprice="0" includesactuals="0" columnsaredays="0" includestransfers="0" loans="0" id="R000002" comment="Benutzerdefinierter Bericht" rowtype="category" name="Buchungen nach Kategorie (mit Umrechnung)" chartgridlines="1" includesaverageprice="0" includesmovingaverage="0" chartbydefault="0" skipZero="0" datelock="yeartodate" investments="0" charttype="none" favorite="0" chartdatalabels="1" convertcurrency="1" fixes="" chartlinewidth="1" chartpalette="application" includeschedules="0" querycolumns="number,payee,tag,account" tax="0" group="Transactions" includesforecast="0" includeunused="0" mixedtime="0" type="querytable 1.14"/>
+ </REPORTS>
+ <BUDGETS count="0"/>
+ <ONLINEJOBS count="0"/>
+</KMYMONEY-FILE>
