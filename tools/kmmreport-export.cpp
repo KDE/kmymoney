@@ -42,6 +42,7 @@ public:
     bool hasObjectInfoTableOption = false;
     bool hasPivotTableOption = false;
     bool hasQueryTableOption = true;
+    bool hasXMLOption = false;
     QString outFileName;
     QString useReportName;
 
@@ -60,44 +61,31 @@ QTextStream& qStdOut()
     return ts;
 }
 
-void exportObjectInfoTable(QTextStream& o, const Options& options, const MyMoneyReport& report)
+template<class T>
+void exportTable(QTextStream& o, const Options& options, const MyMoneyReport& report)
 {
-    ObjectInfoTable table(report);
+    T table(report);
     if (options.hasCSVOption) {
         o << table.renderCSV();
     } else if (options.hasHTMLOption) {
         o << table.renderHTML();
+    } else if (options.hasXMLOption) {
+        o << table.toXml();
     }
 }
 
-void exportPivotTable(QTextStream& o, const Options& options, const MyMoneyReport& report)
-{
-    PivotTable table(report);
-    if (options.hasCSVOption) {
-        o << table.renderCSV();
-    } else if (options.hasHTMLOption) {
-        o << table.renderHTML();
-    }
-}
-
-void exportQueryTable(QTextStream& o, const Options& options, const MyMoneyReport& report)
-{
-    QueryTable table(report);
-    if (options.hasCSVOption) {
-        o << table.renderCSV();
-    } else if (options.hasHTMLOption) {
-        o << table.renderHTML();
-    }
-}
+template void exportTable<PivotTable>(QTextStream& o, const Options& options, const MyMoneyReport& report);
+template void exportTable<QueryTable>(QTextStream& o, const Options& options, const MyMoneyReport& report);
+template void exportTable<ObjectInfoTable>(QTextStream& o, const Options& options, const MyMoneyReport& report);
 
 void exportTable(QTextStream& o, const Options& options, const MyMoneyReport& report)
 {
     if (options.hasObjectInfoTableOption && report.reportType() == eMyMoney::Report::ReportType::InfoTable)
-        exportObjectInfoTable(o, options, report);
+        exportTable<ObjectInfoTable>(o, options, report);
     if (options.hasPivotTableOption && report.reportType() == eMyMoney::Report::ReportType::PivotTable)
-        exportPivotTable(o, options, report);
+        exportTable<PivotTable>(o, options, report);
     if (options.hasQueryTableOption && report.reportType() == eMyMoney::Report::ReportType::QueryTable)
-        exportQueryTable(o, options, report);
+        exportTable<QueryTable>(o, options, report);
 }
 
 void showReportName(QTextStream& o, const Options& options, const MyMoneyReport& report)
@@ -135,6 +123,9 @@ int main(int argc, char** argv)
         const QCommandLineOption htmlOption(QStringLiteral("html"), i18n("Export in HTML format"));
         parser.addOption(htmlOption);
 
+        const QCommandLineOption xmlOption(QStringLiteral("xml"), i18n("Export in xml format"));
+        parser.addOption(xmlOption);
+
         const QCommandLineOption createReferenceOption(QStringLiteral("reference"), i18n("Create reference file from output"));
         parser.addOption(createReferenceOption);
 
@@ -164,6 +155,7 @@ int main(int argc, char** argv)
         options.hasCreateReferenceOption = parser.isSet(createReferenceOption);
         options.hasCSVOption = parser.isSet(csvOption);
         options.hasHTMLOption = parser.isSet(htmlOption);
+        options.hasXMLOption = parser.isSet(xmlOption);
         if (options.hasCSVOption && options.hasHTMLOption) {
             qWarning() << i18n("Only one of --csv and --html is supported");
             return 1;
