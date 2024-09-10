@@ -29,7 +29,7 @@ private:
     MyMoneyFile* file;
 
 private Q_SLOTS:
-    void setup();
+    void initTestCase();
     void init();
     void cleanup();
     void testNetWorthSingle();

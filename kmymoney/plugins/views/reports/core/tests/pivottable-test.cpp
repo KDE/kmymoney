@@ -6,6 +6,8 @@
 
 #include "pivottable-test.h"
 
+#include <KLocalizedString>
+
 #include <QFile>
 #include <QList>
 #include <QRegularExpression>
@@ -65,8 +67,9 @@ void writeTabletoCSV(const PivotTable& table, const QString& _filename = QString
     g.close();
 }
 
-void PivotTableTest::setup()
+void PivotTableTest::initTestCase()
 {
+    KLocalizedString::setApplicationDomain(QByteArrayLiteral("kmymoney"));
 }
 
 void PivotTableTest::init()

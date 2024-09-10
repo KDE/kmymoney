@@ -24,10 +24,12 @@ namespace reports
 class PivotGridTest : public QObject
 {
     Q_OBJECT
+
 private:
     MyMoneyFile* file;
 
 private Q_SLOTS:
+    void initTestCase();
     void init();
     void cleanup();
     void testCellAddValue();

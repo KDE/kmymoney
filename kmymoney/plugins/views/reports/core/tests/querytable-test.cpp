@@ -6,10 +6,10 @@
 
 #include "querytable-test.h"
 
+#include <KLocalizedString>
+
 #include <QFile>
 #include <QTest>
-
-#include <KLocalizedString>
 
 #include "cashflowlist.h"
 #include "kmymoneysettings.h"
@@ -62,8 +62,9 @@ void writeTabletoCSV(const QueryTable& table, const QString& _filename = QString
     g.close();
 }
 
-void QueryTableTest::setup()
+void QueryTableTest::initTestCase()
 {
+    KLocalizedString::setApplicationDomain(QByteArrayLiteral("kmymoney"));
 }
 
 void QueryTableTest::init()
