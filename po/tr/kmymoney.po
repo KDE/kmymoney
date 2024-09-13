@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-06 02:02+0000\n"
-"PO-Revision-Date: 2024-08-25 21:07+0300\n"
+"PO-Revision-Date: 2024-09-13 01:05+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21422,7 +21422,7 @@ msgstr "Tüm tarihler"
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:33
 #, kde-format
 msgid "As of today"
-msgstr "Bugün itibariyle"
+msgstr "Bugün itibarıyla"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:35
 #, kde-format
