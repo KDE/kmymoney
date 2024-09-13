@@ -230,15 +230,14 @@ void NewTransactionEditor::Private::updateWidgetState()
 
 bool NewTransactionEditor::Private::checkForValidAmount()
 {
-    WidgetHintFrame::hide(ui->creditDebitEdit);
+    WidgetHintFrame::hide(ui->creditDebitEdit, i18nc("@info:tooltip", "Enter the amount of the transaction."));
+    WidgetHintFrame::hide(ui->categoryCombo, i18nc("@info:tooltip", "Enter the category or counter account of the transaction."));
     if (q->transactionAmount() != -splitsSum()) {
-        QString infoText;
         if (splitModel.rowCount() == 0) {
-            infoText = i18nc("@info:tooltip", "The transaction is missing a category assignment.");
+            WidgetHintFrame::show(ui->categoryCombo, i18nc("@info:tooltip", "The transaction is missing a category assignment."));
         } else {
-            infoText = i18nc("@info:tooltip", "The amount is different from the sum of all splits.");
+            WidgetHintFrame::show(ui->creditDebitEdit, i18nc("@info:tooltip", "The amount is different from the sum of all splits."));
         }
-        WidgetHintFrame::show(ui->creditDebitEdit, infoText);
     }
     return true;
 }
@@ -1188,6 +1187,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     d->frameCollection->addFrame(new WidgetHintFrame(d->ui->costCenterCombo));
     d->frameCollection->addFrame(new WidgetHintFrame(d->ui->numberEdit, WidgetHintFrame::Warning));
     d->frameCollection->addFrame(new WidgetHintFrame(d->ui->creditDebitEdit, WidgetHintFrame::Warning));
+    d->frameCollection->addFrame(new WidgetHintFrame(d->ui->categoryCombo, WidgetHintFrame::Warning));
     d->frameCollection->addWidget(d->ui->enterButton);
 
     connect(d->ui->numberEdit, &QLineEdit::textChanged, this, [&](const QString& newNumber) {
