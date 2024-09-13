@@ -239,6 +239,22 @@
         font-size: 4pt;
         padding: 16px 0;
     }
+
+    tr.item0 td, tr.item1 td, tr.itemA td, tr.itemZ td {
+        font-style: italic;
+    }
+
+    tr.itemA td {
+        border-bottom: 1px dotted #000000;
+    }
+
+    tr.itemZ td {
+        border-top: 1px dotted #000000;
+    }
+
+    .item0 .value, .item1 .value {
+        padding-right: 32px;
+    }
 }
 
 @media print {
@@ -440,20 +456,4 @@
     }
 
     /*  #topparent td, #solo td { border-top: 1px solid #000000 } */
-}
-
-tr.item0 td, tr.item1 td, tr.itemA td, tr.itemZ td {
-    font-style: italic;
-}
-
-tr.itemA td {
-    border-bottom: 1px dotted #000000;
-}
-
-tr.itemZ td {
-    border-top: 1px dotted #000000;
-}
-
-.item0 .value, .item1 .value {
-    padding-right: 32px;
 }

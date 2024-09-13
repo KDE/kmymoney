@@ -196,12 +196,14 @@ QString KMyMoneyUtils::getStylesheet(QString baseStylesheet)
     QColor link = KColorScheme(QPalette::Active).foreground(KColorScheme::LinkText).color();
 
     QString css;
+    css += QString("@media screen {\n");
     css += QString(".row-even, .item0 { background-color: %1; color: %2 }\n")
                .arg(KMyMoneySettings::schemeColor(SchemeColor::ListBackground1).name(), tcolor.name());
     css += QString(".row-odd, .item1  { background-color: %1; color: %2 }\n")
                .arg(KMyMoneySettings::schemeColor(SchemeColor::ListBackground2).name(), tcolor.name());
     css += QString(".negativetext  { color: %1; }\n").arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name());
     css += QString("a { color: %1; }\n").arg(link.name());
+    css += QString("}\n");
 
     QFile cssFile(baseStylesheet);
     if (cssFile.open(QIODevice::ReadOnly)) {
