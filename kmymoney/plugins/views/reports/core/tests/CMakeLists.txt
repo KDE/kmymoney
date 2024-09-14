@@ -27,3 +27,6 @@ target_link_libraries(reports-chart-test
   Qt::Gui
   Qt::Test
 )
+
+set_tests_properties(reports-pivottable-test PROPERTIES ENVIRONMENT "LANG=C")
+set_tests_properties(reports-querytable-test PROPERTIES ENVIRONMENT "LANG=C")
