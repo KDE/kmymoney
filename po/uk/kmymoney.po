@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-06 02:02+0000\n"
+"POT-Creation-Date: 2024-09-14 01:57+0000\n"
 "PO-Revision-Date: 2024-08-25 09:08+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -19047,14 +19047,14 @@ msgstr "Дохід за відсотками"
 
 #: kmymoney/views/investtransactioneditor.cpp:262
 #: kmymoney/views/multitransactioneditor.cpp:184
-#: kmymoney/views/newtransactioneditor.cpp:296
+#: kmymoney/views/newtransactioneditor.cpp:295
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "Дата проведення цієї операції за рахунками."
 
 #: kmymoney/views/investtransactioneditor.cpp:286
 #: kmymoney/views/multitransactioneditor.cpp:214
-#: kmymoney/views/newtransactioneditor.cpp:316
+#: kmymoney/views/newtransactioneditor.cpp:315
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "Дата проведення операції передує даті відкриття рахунку <b>%1</b>."
@@ -20930,19 +20930,19 @@ msgid "Balance: %1"
 msgstr "Баланс: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:192
-#: kmymoney/views/newtransactioneditor.cpp:299
+#: kmymoney/views/newtransactioneditor.cpp:298
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "Дата проведення операції є некоректною."
 
 #: kmymoney/views/multitransactioneditor.cpp:225
-#: kmymoney/views/newtransactioneditor.cpp:334
+#: kmymoney/views/newtransactioneditor.cpp:333
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
 msgstr "Обліковий відділ, із яким слід пов'язати цю операцію."
 
 #: kmymoney/views/multitransactioneditor.cpp:228
-#: kmymoney/views/newtransactioneditor.cpp:343
+#: kmymoney/views/newtransactioneditor.cpp:342
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -21026,13 +21026,13 @@ msgid "A category assignment is required for a split."
 msgstr "Поділ має бути пов'язано із категорією."
 
 #: kmymoney/views/newspliteditor.cpp:237
-#: kmymoney/views/newtransactioneditor.cpp:458
+#: kmymoney/views/newtransactioneditor.cpp:457
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Номер чека, використаного для цієї операції."
 
 #: kmymoney/views/newspliteditor.cpp:246
-#: kmymoney/views/newtransactioneditor.cpp:468
+#: kmymoney/views/newtransactioneditor.cpp:467
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Чек із номером <b>%1</b> вже було використано у цьому рахунку."
@@ -21066,6 +21066,22 @@ msgstr "Платник/Отримувач"
 msgid "Costcenter"
 msgstr "Обліковий центр"
 
+#: kmymoney/views/newtransactioneditor.cpp:233
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Enter the split ratio for this transaction"
+msgctxt "@info:tooltip"
+msgid "Enter the amount of the transaction."
+msgstr "Введіть частку дроблення для цієї операції"
+
+#: kmymoney/views/newtransactioneditor.cpp:234
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Enter the split ratio for this transaction"
+msgctxt "@info:tooltip"
+msgid "Enter the category or counter account of the transaction."
+msgstr "Введіть частку дроблення для цієї операції"
+
 #: kmymoney/views/newtransactioneditor.cpp:237
 #, kde-format
 msgctxt "@info:tooltip"
@@ -21078,7 +21094,7 @@ msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits."
 msgstr "Сума є відмінною від суми усіх дроблень."
 
-#: kmymoney/views/newtransactioneditor.cpp:613
+#: kmymoney/views/newtransactioneditor.cpp:612
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"

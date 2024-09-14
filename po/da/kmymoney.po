@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-06 02:02+0000\n"
+"POT-Creation-Date: 2024-09-14 01:57+0000\n"
 "PO-Revision-Date: 2015-02-19 20:48+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -19581,7 +19581,7 @@ msgstr "Renteindtægt"
 
 #: kmymoney/views/investtransactioneditor.cpp:262
 #: kmymoney/views/multitransactioneditor.cpp:184
-#: kmymoney/views/newtransactioneditor.cpp:296
+#: kmymoney/views/newtransactioneditor.cpp:295
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
 msgid "The posting date of the transaction."
@@ -19589,7 +19589,7 @@ msgstr "Importerer opgørelse uden transaktioner"
 
 #: kmymoney/views/investtransactioneditor.cpp:286
 #: kmymoney/views/multitransactioneditor.cpp:214
-#: kmymoney/views/newtransactioneditor.cpp:316
+#: kmymoney/views/newtransactioneditor.cpp:315
 #, fuzzy, kde-format
 #| msgid ""
 #| "  * The account '%1' in currency '%2' has no price set for the opening "
@@ -21565,21 +21565,21 @@ msgid "Balance: %1"
 msgstr "Saldo: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:192
-#: kmymoney/views/newtransactioneditor.cpp:299
+#: kmymoney/views/newtransactioneditor.cpp:298
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
 msgid "The posting date is invalid."
 msgstr "Importerer opgørelse uden transaktioner"
 
 #: kmymoney/views/multitransactioneditor.cpp:225
-#: kmymoney/views/newtransactioneditor.cpp:334
+#: kmymoney/views/newtransactioneditor.cpp:333
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgid "The cost center this transaction should be assigned to."
 msgstr "Brug dette til at sætte transaktionen ind i hovedbogen."
 
 #: kmymoney/views/multitransactioneditor.cpp:228
-#: kmymoney/views/newtransactioneditor.cpp:343
+#: kmymoney/views/newtransactioneditor.cpp:342
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgid ""
@@ -21665,14 +21665,14 @@ msgid "A category assignment is required for a split."
 msgstr "Kan ikke oprette transaktioner i en kategoris kontekst."
 
 #: kmymoney/views/newspliteditor.cpp:237
-#: kmymoney/views/newtransactioneditor.cpp:458
+#: kmymoney/views/newtransactioneditor.cpp:457
 #, fuzzy, kde-format
 #| msgid "Enter the number of the first transaction line."
 msgid "The check number used for this transaction."
 msgstr "Angiv nummeret for den første transaktionslinje."
 
 #: kmymoney/views/newspliteditor.cpp:246
-#: kmymoney/views/newtransactioneditor.cpp:468
+#: kmymoney/views/newtransactioneditor.cpp:467
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr ""
@@ -21706,6 +21706,20 @@ msgstr "Betaler/modtager"
 msgid "Costcenter"
 msgstr ""
 
+#: kmymoney/views/newtransactioneditor.cpp:233
+#, fuzzy, kde-format
+#| msgid "Use this button to record this transaction"
+msgctxt "@info:tooltip"
+msgid "Enter the amount of the transaction."
+msgstr "Brug denne knap til at registrere transaktionen"
+
+#: kmymoney/views/newtransactioneditor.cpp:234
+#, fuzzy, kde-format
+#| msgid "Use this button to record this transaction"
+msgctxt "@info:tooltip"
+msgid "Enter the category or counter account of the transaction."
+msgstr "Brug denne knap til at registrere transaktionen"
+
 #: kmymoney/views/newtransactioneditor.cpp:237
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
@@ -21719,7 +21733,7 @@ msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:613
+#: kmymoney/views/newtransactioneditor.cpp:612
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@title:window Autofill selection dialog"

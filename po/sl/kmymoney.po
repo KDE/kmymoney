@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-06 02:02+0000\n"
+"POT-Creation-Date: 2024-09-14 01:57+0000\n"
 "PO-Revision-Date: 2024-08-25 07:47+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -18905,14 +18905,14 @@ msgstr "Dohodek od obresti"
 
 #: kmymoney/views/investtransactioneditor.cpp:262
 #: kmymoney/views/multitransactioneditor.cpp:184
-#: kmymoney/views/newtransactioneditor.cpp:296
+#: kmymoney/views/newtransactioneditor.cpp:295
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "Datum objave transakcije."
 
 #: kmymoney/views/investtransactioneditor.cpp:286
 #: kmymoney/views/multitransactioneditor.cpp:214
-#: kmymoney/views/newtransactioneditor.cpp:316
+#: kmymoney/views/newtransactioneditor.cpp:315
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "Datum objave je pred datumom odprtja računa <b>%1</b>."
@@ -20782,19 +20782,19 @@ msgid "Balance: %1"
 msgstr "Saldo: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:192
-#: kmymoney/views/newtransactioneditor.cpp:299
+#: kmymoney/views/newtransactioneditor.cpp:298
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "Datum objave je neveljaven."
 
 #: kmymoney/views/multitransactioneditor.cpp:225
-#: kmymoney/views/newtransactioneditor.cpp:334
+#: kmymoney/views/newtransactioneditor.cpp:333
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
 msgstr "Stroškovno mesto, ki mu je treba dodeliti to transakcijo."
 
 #: kmymoney/views/multitransactioneditor.cpp:228
-#: kmymoney/views/newtransactioneditor.cpp:343
+#: kmymoney/views/newtransactioneditor.cpp:342
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -20878,13 +20878,13 @@ msgid "A category assignment is required for a split."
 msgstr "Potrebna je dodelitev stroškovnega mesta za delež transakcije."
 
 #: kmymoney/views/newspliteditor.cpp:237
-#: kmymoney/views/newtransactioneditor.cpp:458
+#: kmymoney/views/newtransactioneditor.cpp:457
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Številka čeka uporabljena za to transakcijo."
 
 #: kmymoney/views/newspliteditor.cpp:246
-#: kmymoney/views/newtransactioneditor.cpp:468
+#: kmymoney/views/newtransactioneditor.cpp:467
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Številka čeka <b>%1</b> je bila v tem računu že uporabljena."
@@ -20917,6 +20917,22 @@ msgstr "Plačnik/Prejemnik"
 msgid "Costcenter"
 msgstr "Stroškovno mesto"
 
+#: kmymoney/views/newtransactioneditor.cpp:233
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Enter the split ratio for this transaction"
+msgctxt "@info:tooltip"
+msgid "Enter the amount of the transaction."
+msgstr "Vnesite razmerje delitve za to transakcijo"
+
+#: kmymoney/views/newtransactioneditor.cpp:234
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Enter the split ratio for this transaction"
+msgctxt "@info:tooltip"
+msgid "Enter the category or counter account of the transaction."
+msgstr "Vnesite razmerje delitve za to transakcijo"
+
 #: kmymoney/views/newtransactioneditor.cpp:237
 #, kde-format
 msgctxt "@info:tooltip"
@@ -20929,7 +20945,7 @@ msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits."
 msgstr "Znesek se razlikuje od vsote vseh delov."
 
-#: kmymoney/views/newtransactioneditor.cpp:613
+#: kmymoney/views/newtransactioneditor.cpp:612
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"

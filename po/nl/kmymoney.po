@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-06 02:02+0000\n"
+"POT-Creation-Date: 2024-09-14 01:57+0000\n"
 "PO-Revision-Date: 2024-08-25 13:34+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -18952,14 +18952,14 @@ msgstr "Rente-inkomsten"
 
 #: kmymoney/views/investtransactioneditor.cpp:262
 #: kmymoney/views/multitransactioneditor.cpp:184
-#: kmymoney/views/newtransactioneditor.cpp:296
+#: kmymoney/views/newtransactioneditor.cpp:295
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "De plaatsingsdatum van de transactie."
 
 #: kmymoney/views/investtransactioneditor.cpp:286
 #: kmymoney/views/multitransactioneditor.cpp:214
-#: kmymoney/views/newtransactioneditor.cpp:316
+#: kmymoney/views/newtransactioneditor.cpp:315
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr ""
@@ -20833,19 +20833,19 @@ msgid "Balance: %1"
 msgstr "Saldo: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:192
-#: kmymoney/views/newtransactioneditor.cpp:299
+#: kmymoney/views/newtransactioneditor.cpp:298
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "De plaatsingsdatum is ongeldig."
 
 #: kmymoney/views/multitransactioneditor.cpp:225
-#: kmymoney/views/newtransactioneditor.cpp:334
+#: kmymoney/views/newtransactioneditor.cpp:333
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
 msgstr "Het kostencentrum waaraan deze transactie gekoppeld moet worden."
 
 #: kmymoney/views/multitransactioneditor.cpp:228
-#: kmymoney/views/newtransactioneditor.cpp:343
+#: kmymoney/views/newtransactioneditor.cpp:342
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -20934,13 +20934,13 @@ msgid "A category assignment is required for a split."
 msgstr "Koppeling aan een categorie is vereist voor een splitsing."
 
 #: kmymoney/views/newspliteditor.cpp:237
-#: kmymoney/views/newtransactioneditor.cpp:458
+#: kmymoney/views/newtransactioneditor.cpp:457
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Het nummer van de cheque gebruikt voor deze transactie."
 
 #: kmymoney/views/newspliteditor.cpp:246
-#: kmymoney/views/newtransactioneditor.cpp:468
+#: kmymoney/views/newtransactioneditor.cpp:467
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Het number <b>%1</b> voor een cheque is al gebruikt in dit account."
@@ -20974,6 +20974,22 @@ msgstr "Betaler/Ontvanger"
 msgid "Costcenter"
 msgstr "Kostencentrum"
 
+#: kmymoney/views/newtransactioneditor.cpp:233
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Enter the split ratio for this transaction"
+msgctxt "@info:tooltip"
+msgid "Enter the amount of the transaction."
+msgstr "De splitsverhouding voor deze transactie invoeren"
+
+#: kmymoney/views/newtransactioneditor.cpp:234
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Enter the split ratio for this transaction"
+msgctxt "@info:tooltip"
+msgid "Enter the category or counter account of the transaction."
+msgstr "De splitsverhouding voor deze transactie invoeren"
+
 #: kmymoney/views/newtransactioneditor.cpp:237
 #, kde-format
 msgctxt "@info:tooltip"
@@ -20986,7 +21002,7 @@ msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits."
 msgstr "De som verschilt van de som van alle splitsingen."
 
-#: kmymoney/views/newtransactioneditor.cpp:613
+#: kmymoney/views/newtransactioneditor.cpp:612
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
