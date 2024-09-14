@@ -39,6 +39,8 @@ void writeTabletoHTML(const QueryTable& table, const QString& _filename = QStrin
     if (filename.isEmpty()) {
         filename = QString::fromLatin1("%1/report-%2.html").arg(CMAKE_CURRENT_BINARY_DIR).arg(filenumber, 2, 10, QLatin1Char('0'));
         ++filenumber;
+    } else {
+        filename = QString::fromLatin1("%1/%2").arg(CMAKE_CURRENT_BINARY_DIR).arg(_filename);
     }
 
     QFile g(filename);
@@ -54,6 +56,8 @@ void writeTabletoCSV(const QueryTable& table, const QString& _filename = QString
     if (filename.isEmpty()) {
         filename = QString::fromLatin1("%1/report-%2.csv").arg(CMAKE_CURRENT_BINARY_DIR).arg(filenumber, 2, 10, QLatin1Char('0'));
         ++filenumber;
+    } else {
+        filename = QString::fromLatin1("%1/%2").arg(CMAKE_CURRENT_BINARY_DIR).arg(_filename);
     }
 
     QFile g(filename);
