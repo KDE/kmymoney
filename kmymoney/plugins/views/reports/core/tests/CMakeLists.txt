@@ -7,6 +7,8 @@ set(tests_sources
   querytable-test.cpp
 )
 
+add_definitions(-DCMAKE_CURRENT_BINARY_DIR=\"${CMAKE_CURRENT_BINARY_DIR}\")
+
 ecm_add_tests(${tests_sources}
   NAME_PREFIX
     "reports-"
