@@ -32,15 +32,15 @@ using namespace test;
 
 QTEST_GUILESS_MAIN(QueryTableTest)
 
-void writeTabletoHTML(const QueryTable& table, const QString& _filename = QString())
+void writeTabletoHTML(const QueryTable& table, const QString& basename = QString())
 {
     static unsigned filenumber = 1;
-    QString filename = _filename;
-    if (filename.isEmpty()) {
+    QString filename;
+    if (basename.isEmpty()) {
         filename = QString::fromLatin1("%1/report-%2.html").arg(CMAKE_CURRENT_BINARY_DIR).arg(filenumber, 2, 10, QLatin1Char('0'));
         ++filenumber;
     } else {
-        filename = QString::fromLatin1("%1/%2").arg(CMAKE_CURRENT_BINARY_DIR).arg(_filename);
+        filename = QString::fromLatin1("%1/%2.html").arg(CMAKE_CURRENT_BINARY_DIR).arg(basename);
     }
 
     QFile g(filename);
@@ -49,21 +49,26 @@ void writeTabletoHTML(const QueryTable& table, const QString& _filename = QStrin
     g.close();
 }
 
-void writeTabletoCSV(const QueryTable& table, const QString& _filename = QString())
+void writeTabletoCSV(const QueryTable& table, const QString& basename = QString())
 {
     static unsigned filenumber = 1;
-    QString filename = _filename;
-    if (filename.isEmpty()) {
+    QString filename;
+    if (basename.isEmpty()) {
         filename = QString::fromLatin1("%1/report-%2.csv").arg(CMAKE_CURRENT_BINARY_DIR).arg(filenumber, 2, 10, QLatin1Char('0'));
         ++filenumber;
     } else {
-        filename = QString::fromLatin1("%1/%2").arg(CMAKE_CURRENT_BINARY_DIR).arg(_filename);
+        filename = QString::fromLatin1("%1/%2.csv").arg(CMAKE_CURRENT_BINARY_DIR).arg(basename);
     }
 
     QFile g(filename);
     g.open(QIODevice::WriteOnly);
     QTextStream(&g) << table.renderCSV();
     g.close();
+}
+
+void writeTable(const QueryTable& table, const QString& basename = QString())
+{
+    writeTabletoHTML(table, basename);
 }
 
 void QueryTableTest::initTestCase()
@@ -139,7 +144,7 @@ void QueryTableTest::testQueryBasics()
         XMLandback(filter);
         QueryTable qtbl_1(filter);
 
-        writeTabletoHTML(qtbl_1, "Transactions by Category.html");
+        writeTable(qtbl_1, "Transactions by Category");
 
         QList<ListTable::TableRow> rows = qtbl_1.rows();
 
@@ -164,7 +169,7 @@ void QueryTableTest::testQueryBasics()
         XMLandback(filter);
         QueryTable qtbl_2(filter);
 
-        writeTabletoHTML(qtbl_2, "Transactions by Top Category.html");
+        writeTable(qtbl_2, "Transactions by Top Category");
 
         rows = qtbl_2.rows();
 
@@ -191,7 +196,7 @@ void QueryTableTest::testQueryBasics()
         XMLandback(filter);
         QueryTable qtbl_3(filter);
 
-        writeTabletoHTML(qtbl_3, "Transactions by Account.html");
+        writeTable(qtbl_3, "Transactions by Account");
 
         rows = qtbl_3.rows();
 
@@ -224,7 +229,7 @@ void QueryTableTest::testQueryBasics()
         XMLandback(filter);
         QueryTable qtbl_4(filter);
 
-        writeTabletoHTML(qtbl_4, "Transactions by Payee.html");
+        writeTable(qtbl_4, "Transactions by Payee");
 
         rows = qtbl_4.rows();
 
@@ -249,7 +254,7 @@ void QueryTableTest::testQueryBasics()
         XMLandback(filter);
         QueryTable qtbl_5(filter);
 
-        writeTabletoHTML(qtbl_5, "Transactions by Month.html");
+        writeTable(qtbl_5, "Transactions by Month");
 
         rows = qtbl_5.rows();
 
@@ -276,7 +281,7 @@ void QueryTableTest::testQueryBasics()
         XMLandback(filter);
         QueryTable qtbl_6(filter);
 
-        writeTabletoHTML(qtbl_6, "Transactions by Week.html");
+        writeTable(qtbl_6, "Transactions by Week");
 
         rows = qtbl_6.rows();
 
@@ -400,7 +405,7 @@ void QueryTableTest::testAccountQuery()
         XMLandback(filter);
         QueryTable qtbl_1(filter);
 
-        writeTabletoHTML(qtbl_1, "Accounts by Institution (No transactions).html");
+        writeTable(qtbl_1, "Accounts by Institution (No transactions)");
 
         QList<ListTable::TableRow> rows = qtbl_1.rows();
 
@@ -531,7 +536,7 @@ void QueryTableTest::testInvestment()
         QueryTable invtran(invtran_r);
 
 #if 1
-        writeTabletoHTML(invtran, "investment_transactions_test.html");
+        writeTable(invtran, "investment_transactions_test");
 
         QList<ListTable::TableRow> rows = invtran.rows();
 
@@ -629,7 +634,7 @@ void QueryTableTest::testInvestment()
         XMLandback(invhold_r);
         QueryTable invhold(invhold_r);
 
-        writeTabletoHTML(invhold, "Investment Performance by Account.html");
+        writeTable(invhold, "Investment Performance by Account");
 
         rows = invhold.rows();
 
@@ -711,7 +716,7 @@ void QueryTableTest::testSplitShares()
         XMLandback(invhold_r);
         QueryTable invhold(invhold_r);
 
-        writeTabletoHTML(invhold, "Investment Performance by Account (with stock split).html");
+        writeTable(invhold, "Investment Performance by Account (with stock split)");
 
         const auto rows = invhold.rows();
 
@@ -747,7 +752,7 @@ void QueryTableTest::testConversionRate()
         XMLandback(filter);
         QueryTable qtbl(filter);
 
-        writeTabletoHTML(qtbl, "Transactions by Account (conversion rate).html");
+        writeTable(qtbl, "Transactions by Account (conversion rate)");
 
         const auto rows = qtbl.rows();
 
@@ -794,7 +799,7 @@ void QueryTableTest::testBalanceColumn()
         XMLandback(filter);
         QueryTable qtbl_3(filter);
 
-        writeTabletoHTML(qtbl_3, "Transactions by Account.html");
+        writeTable(qtbl_3, "Transactions by Account");
 
         QString html = qtbl_3.renderHTML();
 
@@ -879,7 +884,7 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
         XMLandback(filter);
         QueryTable qtbl_3(filter);
 
-        writeTabletoHTML(qtbl_3, "Transactions by Account (multiple currencies).html");
+        writeTable(qtbl_3, "Transactions by Account (multiple currencies)");
 
         QString html = qtbl_3.renderHTML();
 
@@ -945,7 +950,7 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
         XMLandback(filter);
         QueryTable qtbl_4(filter);
 
-        writeTabletoHTML(qtbl_4, "Transactions by Account (multiple currencies converted to base).html");
+        writeTable(qtbl_4, "Transactions by Account (multiple currencies converted to base)");
 
         html = qtbl_4.renderHTML();
 
@@ -1007,7 +1012,7 @@ void QueryTableTest::testTaxReport()
         XMLandback(filter);
         QueryTable qtbl_3(filter);
 
-        writeTabletoHTML(qtbl_3, "Tax Transactions.html");
+        writeTable(qtbl_3, "Tax Transactions");
 
         QList<ListTable::TableRow> rows = qtbl_3.rows();
 
