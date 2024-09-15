@@ -30,3 +30,6 @@ target_link_libraries(reports-chart-test
 
 set_tests_properties(reports-pivottable-test PROPERTIES ENVIRONMENT "LANG=C")
 set_tests_properties(reports-querytable-test PROPERTIES ENVIRONMENT "LANG=C")
+
+add_subdirectory(data)
+
