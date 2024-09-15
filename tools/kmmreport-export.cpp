@@ -114,6 +114,7 @@ void showReportName(QTextStream& o, const Options& options, const MyMoneyReport&
 
 int main(int argc, char** argv)
 {
+    QLocale::setDefault(QLocale(QLocale::English, QLocale::UnitedStates));
     KLocalizedString::setApplicationDomain(QByteArrayLiteral("kmymoney"));
     QCoreApplication app(argc, argv);
     QCoreApplication::setApplicationName("kmmreport-export");
