@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-14 01:57+0000\n"
+"POT-Creation-Date: 2024-09-15 01:52+0000\n"
 "PO-Revision-Date: 2024-09-07 12:28+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -211,7 +211,7 @@ msgstr ""
 "removed."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1053
-#: kmymoney/kmymoneyutils.cpp:570
+#: kmymoney/kmymoneyutils.cpp:572
 #, kde-format
 msgid "New payee/receiver"
 msgstr "New payee/receiver"
@@ -6029,12 +6029,12 @@ msgstr "Budget"
 msgid "Cash Flow"
 msgstr "Cash Flow"
 
-#: kmymoney/kmymoneyutils.cpp:276 kmymoney/views/kenterscheduledlg.cpp:124
+#: kmymoney/kmymoneyutils.cpp:278 kmymoney/views/kenterscheduledlg.cpp:124
 #, kde-format
 msgid "Unable to load schedule details"
 msgstr "Unable to load schedule details"
 
-#: kmymoney/kmymoneyutils.cpp:372
+#: kmymoney/kmymoneyutils.cpp:374
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:112
 #: kmymoney/wizards/kmymoneywizard_p.h:78
 #, kde-format
@@ -6042,19 +6042,19 @@ msgctxt "Go to next page of the wizard"
 msgid "&Next"
 msgstr "&Next"
 
-#: kmymoney/kmymoneyutils.cpp:461
+#: kmymoney/kmymoneyutils.cpp:463
 #, kde-format
 msgid "Prices Importer"
 msgstr "Prices Importer"
 
-#: kmymoney/kmymoneyutils.cpp:471
+#: kmymoney/kmymoneyutils.cpp:473
 #, kde-format
 msgid ""
 "<p>Do you really want to remove the currency <b>%1</b> from the file?</p>"
 msgstr ""
 "<p>Do you really want to remove the currency <b>%1</b> from the file?</p>"
 
-#: kmymoney/kmymoneyutils.cpp:472
+#: kmymoney/kmymoneyutils.cpp:474
 #, kde-format
 msgid ""
 "<p>All exchange rates for currency <b>%1</b> will be lost.</p><p>Do you "
@@ -6063,12 +6063,12 @@ msgstr ""
 "<p>All exchange rates for currency <b>%1</b> will be lost.</p><p>Do you "
 "still want to continue?</p>"
 
-#: kmymoney/kmymoneyutils.cpp:476
+#: kmymoney/kmymoneyutils.cpp:478
 #, kde-format
 msgid "<p>Do you really want to remove the %1 <b>%2</b> from the file?</p>"
 msgstr "<p>Do you really want to remove the %1 <b>%2</b> from the file?</p>"
 
-#: kmymoney/kmymoneyutils.cpp:477
+#: kmymoney/kmymoneyutils.cpp:479
 #, kde-format
 msgid ""
 "<p>All price quotes for %1 <b>%2</b> will be lost.</p><p>Do you still want "
@@ -6077,17 +6077,17 @@ msgstr ""
 "<p>All price quotes for %1 <b>%2</b> will be lost.</p><p>Do you still want "
 "to continue?</p>"
 
-#: kmymoney/kmymoneyutils.cpp:481
+#: kmymoney/kmymoneyutils.cpp:483
 #, kde-format
 msgid "Delete security"
 msgstr "Delete security"
 
-#: kmymoney/kmymoneyutils.cpp:489
+#: kmymoney/kmymoneyutils.cpp:491
 #, kde-format
 msgid "Delete prices"
 msgstr "Delete prices"
 
-#: kmymoney/kmymoneyutils.cpp:546
+#: kmymoney/kmymoneyutils.cpp:548
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:138
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:431
 #: kmymoney/templates/templateloader.cpp:78
@@ -6095,7 +6095,7 @@ msgstr "Delete prices"
 msgid "Error while loading file '%1'."
 msgstr "Error while loading file '%1'."
 
-#: kmymoney/kmymoneyutils.cpp:548
+#: kmymoney/kmymoneyutils.cpp:550
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:138
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:433
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1004
@@ -6104,47 +6104,47 @@ msgstr "Error while loading file '%1'."
 msgid "File access error"
 msgstr "File access error"
 
-#: kmymoney/kmymoneyutils.cpp:566 kmymoney/views/kpayeesview.cpp:537
+#: kmymoney/kmymoneyutils.cpp:568 kmymoney/views/kpayeesview.cpp:537
 #, kde-format
 msgid "New Payee"
 msgstr "New Payee"
 
-#: kmymoney/kmymoneyutils.cpp:568
+#: kmymoney/kmymoneyutils.cpp:570
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as payee/receiver?</qt>"
 msgstr "<qt>Do you want to add <b>%1</b> as payee/receiver?</qt>"
 
-#: kmymoney/kmymoneyutils.cpp:607
+#: kmymoney/kmymoneyutils.cpp:609
 #, kde-format
 msgid "Unable to add payee"
 msgstr "Unable to add payee"
 
-#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:641
+#: kmymoney/kmymoneyutils.cpp:621 kmymoney/views/ktagsview.cpp:641
 #, kde-format
 msgid "New Tag"
 msgstr "New Tag"
 
-#: kmymoney/kmymoneyutils.cpp:621
+#: kmymoney/kmymoneyutils.cpp:623
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 msgstr "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 
-#: kmymoney/kmymoneyutils.cpp:623
+#: kmymoney/kmymoneyutils.cpp:625
 #, kde-format
 msgid "New tag"
 msgstr "New tag"
 
-#: kmymoney/kmymoneyutils.cpp:657
+#: kmymoney/kmymoneyutils.cpp:659
 #, kde-format
 msgid "Unable to add tag"
 msgstr "Unable to add tag"
 
-#: kmymoney/kmymoneyutils.cpp:674 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:676 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "Cannot add institution: %1"
 
-#: kmymoney/kmymoneyutils.cpp:731
+#: kmymoney/kmymoneyutils.cpp:733
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:50
 #, kde-format
 msgid "One statement has been processed with the following results:"
@@ -6152,7 +6152,7 @@ msgid_plural "%1 statements have been processed with the following results:"
 msgstr[0] "One statement has been processed with the following results:"
 msgstr[1] "%1 statements have been processed with the following results:"
 
-#: kmymoney/kmymoneyutils.cpp:736
+#: kmymoney/kmymoneyutils.cpp:738
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:52
 #, kde-format
 msgid "No new transaction has been imported."
@@ -6160,7 +6160,7 @@ msgid_plural "No new transactions have been imported."
 msgstr[0] "No new transaction has been imported."
 msgstr[1] "No new transactions have been imported."
 
-#: kmymoney/kmymoneyutils.cpp:737
+#: kmymoney/kmymoneyutils.cpp:739
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:53
 #, kde-format
 msgid "Statement import statistics"

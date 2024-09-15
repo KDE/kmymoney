@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-14 01:57+0000\n"
+"POT-Creation-Date: 2024-09-15 01:52+0000\n"
 "PO-Revision-Date: 2024-04-22 16:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -195,7 +195,7 @@ msgstr ""
 "记录，它们的收款人信息都会被删除。"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1053
-#: kmymoney/kmymoneyutils.cpp:570
+#: kmymoney/kmymoneyutils.cpp:572
 #, kde-format
 msgid "New payee/receiver"
 msgstr "新建收款人"
@@ -5844,12 +5844,12 @@ msgstr "预算"
 msgid "Cash Flow"
 msgstr "现金流"
 
-#: kmymoney/kmymoneyutils.cpp:276 kmymoney/views/kenterscheduledlg.cpp:124
+#: kmymoney/kmymoneyutils.cpp:278 kmymoney/views/kenterscheduledlg.cpp:124
 #, kde-format
 msgid "Unable to load schedule details"
 msgstr "无法加载时间表数据。"
 
-#: kmymoney/kmymoneyutils.cpp:372
+#: kmymoney/kmymoneyutils.cpp:374
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:112
 #: kmymoney/wizards/kmymoneywizard_p.h:78
 #, kde-format
@@ -5857,47 +5857,47 @@ msgctxt "Go to next page of the wizard"
 msgid "&Next"
 msgstr "下一个(&N)"
 
-#: kmymoney/kmymoneyutils.cpp:461
+#: kmymoney/kmymoneyutils.cpp:463
 #, kde-format
 msgid "Prices Importer"
 msgstr "价格导入工具"
 
-#: kmymoney/kmymoneyutils.cpp:471
+#: kmymoney/kmymoneyutils.cpp:473
 #, kde-format
 msgid ""
 "<p>Do you really want to remove the currency <b>%1</b> from the file?</p>"
 msgstr "<p>您确定要从文件中删除货币 <b>%1</b> 吗？</p>"
 
-#: kmymoney/kmymoneyutils.cpp:472
+#: kmymoney/kmymoneyutils.cpp:474
 #, kde-format
 msgid ""
 "<p>All exchange rates for currency <b>%1</b> will be lost.</p><p>Do you "
 "still want to continue?</p>"
 msgstr "<p>您将丢失货币 <b>%1</b> 的所有汇率。</p><p>仍要继续吗？</p>"
 
-#: kmymoney/kmymoneyutils.cpp:476
+#: kmymoney/kmymoneyutils.cpp:478
 #, kde-format
 msgid "<p>Do you really want to remove the %1 <b>%2</b> from the file?</p>"
 msgstr "<p>您确定要从文件中删除 %1 <b>%2</b> 吗？</p>"
 
-#: kmymoney/kmymoneyutils.cpp:477
+#: kmymoney/kmymoneyutils.cpp:479
 #, kde-format
 msgid ""
 "<p>All price quotes for %1 <b>%2</b> will be lost.</p><p>Do you still want "
 "to continue?</p>"
 msgstr "<p>您将丢失 %1 <b>%2</b> 的所有价格报表。</p><p>仍要继续吗？</p>"
 
-#: kmymoney/kmymoneyutils.cpp:481
+#: kmymoney/kmymoneyutils.cpp:483
 #, kde-format
 msgid "Delete security"
 msgstr "删除证券"
 
-#: kmymoney/kmymoneyutils.cpp:489
+#: kmymoney/kmymoneyutils.cpp:491
 #, kde-format
 msgid "Delete prices"
 msgstr "删除价格"
 
-#: kmymoney/kmymoneyutils.cpp:546
+#: kmymoney/kmymoneyutils.cpp:548
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:138
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:431
 #: kmymoney/templates/templateloader.cpp:78
@@ -5905,7 +5905,7 @@ msgstr "删除价格"
 msgid "Error while loading file '%1'."
 msgstr "加载文件“%1”时出错。"
 
-#: kmymoney/kmymoneyutils.cpp:548
+#: kmymoney/kmymoneyutils.cpp:550
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:138
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:433
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1004
@@ -5914,61 +5914,61 @@ msgstr "加载文件“%1”时出错。"
 msgid "File access error"
 msgstr "文件访问出错"
 
-#: kmymoney/kmymoneyutils.cpp:566 kmymoney/views/kpayeesview.cpp:537
+#: kmymoney/kmymoneyutils.cpp:568 kmymoney/views/kpayeesview.cpp:537
 #, kde-format
 msgid "New Payee"
 msgstr "新建收款人"
 
-#: kmymoney/kmymoneyutils.cpp:568
+#: kmymoney/kmymoneyutils.cpp:570
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as payee/receiver?</qt>"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:607
+#: kmymoney/kmymoneyutils.cpp:609
 #, kde-format
 msgid "Unable to add payee"
 msgstr "无法创建收款人"
 
-#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:641
+#: kmymoney/kmymoneyutils.cpp:621 kmymoney/views/ktagsview.cpp:641
 #, kde-format
 msgid "New Tag"
 msgstr "新建标签"
 
-#: kmymoney/kmymoneyutils.cpp:621
+#: kmymoney/kmymoneyutils.cpp:623
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 msgstr "<qt>您确定要将 <b>%1</b> 添加为标签吗？</qt>"
 
-#: kmymoney/kmymoneyutils.cpp:623
+#: kmymoney/kmymoneyutils.cpp:625
 #, kde-format
 msgid "New tag"
 msgstr "新建标签"
 
-#: kmymoney/kmymoneyutils.cpp:657
+#: kmymoney/kmymoneyutils.cpp:659
 #, kde-format
 msgid "Unable to add tag"
 msgstr "无法添加标签"
 
-#: kmymoney/kmymoneyutils.cpp:674 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:676 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "无法添加金融机构：%1"
 
-#: kmymoney/kmymoneyutils.cpp:731
+#: kmymoney/kmymoneyutils.cpp:733
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:50
 #, kde-format
 msgid "One statement has been processed with the following results:"
 msgid_plural "%1 statements have been processed with the following results:"
 msgstr[0] "已处理 %1 份对账单，结果如下："
 
-#: kmymoney/kmymoneyutils.cpp:736
+#: kmymoney/kmymoneyutils.cpp:738
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:52
 #, kde-format
 msgid "No new transaction has been imported."
 msgid_plural "No new transactions have been imported."
 msgstr[0] "无新交易导入。"
 
-#: kmymoney/kmymoneyutils.cpp:737
+#: kmymoney/kmymoneyutils.cpp:739
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:53
 #, kde-format
 msgid "Statement import statistics"

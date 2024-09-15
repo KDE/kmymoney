@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-14 01:57+0000\n"
-"PO-Revision-Date: 2024-08-25 09:08+0300\n"
+"POT-Creation-Date: 2024-09-15 01:52+0000\n"
+"PO-Revision-Date: 2024-09-14 15:56+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -223,7 +223,7 @@ msgstr ""
 "вилучено."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1053
-#: kmymoney/kmymoneyutils.cpp:570
+#: kmymoney/kmymoneyutils.cpp:572
 #, kde-format
 msgid "New payee/receiver"
 msgstr "Новий отримувач"
@@ -6097,12 +6097,12 @@ msgstr "Бюджет"
 msgid "Cash Flow"
 msgstr "Грошова активність"
 
-#: kmymoney/kmymoneyutils.cpp:276 kmymoney/views/kenterscheduledlg.cpp:124
+#: kmymoney/kmymoneyutils.cpp:278 kmymoney/views/kenterscheduledlg.cpp:124
 #, kde-format
 msgid "Unable to load schedule details"
 msgstr "Не вдалося завантажити дані розкладу"
 
-#: kmymoney/kmymoneyutils.cpp:372
+#: kmymoney/kmymoneyutils.cpp:374
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:112
 #: kmymoney/wizards/kmymoneywizard_p.h:78
 #, kde-format
@@ -6110,18 +6110,18 @@ msgctxt "Go to next page of the wizard"
 msgid "&Next"
 msgstr "&Далі"
 
-#: kmymoney/kmymoneyutils.cpp:461
+#: kmymoney/kmymoneyutils.cpp:463
 #, kde-format
 msgid "Prices Importer"
 msgstr "Імпортування курсів"
 
-#: kmymoney/kmymoneyutils.cpp:471
+#: kmymoney/kmymoneyutils.cpp:473
 #, kde-format
 msgid ""
 "<p>Do you really want to remove the currency <b>%1</b> from the file?</p>"
 msgstr "<p>Ви справді бажаєте вилучити запис валюти <b>%1</b> з файла?</p>"
 
-#: kmymoney/kmymoneyutils.cpp:472
+#: kmymoney/kmymoneyutils.cpp:474
 #, kde-format
 msgid ""
 "<p>All exchange rates for currency <b>%1</b> will be lost.</p><p>Do you "
@@ -6130,12 +6130,12 @@ msgstr ""
 "<p>Усі курси для валюти <b>%1</b> буде втрачено.</p><p>Хочете продовжити "
 "виконання дії?</p>"
 
-#: kmymoney/kmymoneyutils.cpp:476
+#: kmymoney/kmymoneyutils.cpp:478
 #, kde-format
 msgid "<p>Do you really want to remove the %1 <b>%2</b> from the file?</p>"
 msgstr "<p>Ви справді бажаєте вилучити %1 <b>%2</b> з файла?</p>"
 
-#: kmymoney/kmymoneyutils.cpp:477
+#: kmymoney/kmymoneyutils.cpp:479
 #, kde-format
 msgid ""
 "<p>All price quotes for %1 <b>%2</b> will be lost.</p><p>Do you still want "
@@ -6144,17 +6144,17 @@ msgstr ""
 "<p>Усі цінові курси для %1 <b>%2</b> буде втрачено.</p><p>Хочете продовжити "
 "виконання дії?</p>"
 
-#: kmymoney/kmymoneyutils.cpp:481
+#: kmymoney/kmymoneyutils.cpp:483
 #, kde-format
 msgid "Delete security"
 msgstr "Вилучити цінний папір"
 
-#: kmymoney/kmymoneyutils.cpp:489
+#: kmymoney/kmymoneyutils.cpp:491
 #, kde-format
 msgid "Delete prices"
 msgstr "Вилучити ціни"
 
-#: kmymoney/kmymoneyutils.cpp:546
+#: kmymoney/kmymoneyutils.cpp:548
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:138
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:431
 #: kmymoney/templates/templateloader.cpp:78
@@ -6162,7 +6162,7 @@ msgstr "Вилучити ціни"
 msgid "Error while loading file '%1'."
 msgstr "Під час спроби завантаження файла «%1» сталася помилка."
 
-#: kmymoney/kmymoneyutils.cpp:548
+#: kmymoney/kmymoneyutils.cpp:550
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:138
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:433
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1004
@@ -6171,47 +6171,47 @@ msgstr "Під час спроби завантаження файла «%1» с
 msgid "File access error"
 msgstr "Помилка під час спроби доступу до файла"
 
-#: kmymoney/kmymoneyutils.cpp:566 kmymoney/views/kpayeesview.cpp:537
+#: kmymoney/kmymoneyutils.cpp:568 kmymoney/views/kpayeesview.cpp:537
 #, kde-format
 msgid "New Payee"
 msgstr "Створити запис отримувача"
 
-#: kmymoney/kmymoneyutils.cpp:568
+#: kmymoney/kmymoneyutils.cpp:570
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as payee/receiver?</qt>"
 msgstr "<qt>Бажаєте додати <b>%1</b> як платника/отримувача?</qt>"
 
-#: kmymoney/kmymoneyutils.cpp:607
+#: kmymoney/kmymoneyutils.cpp:609
 #, kde-format
 msgid "Unable to add payee"
 msgstr "Не вдалося додати отримувача"
 
-#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:641
+#: kmymoney/kmymoneyutils.cpp:621 kmymoney/views/ktagsview.cpp:641
 #, kde-format
 msgid "New Tag"
 msgstr "Нова мітка"
 
-#: kmymoney/kmymoneyutils.cpp:621
+#: kmymoney/kmymoneyutils.cpp:623
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 msgstr "<qt>Бажаєте додати <b>%1</b> як мітку?</qt>"
 
-#: kmymoney/kmymoneyutils.cpp:623
+#: kmymoney/kmymoneyutils.cpp:625
 #, kde-format
 msgid "New tag"
 msgstr "Створити мітку"
 
-#: kmymoney/kmymoneyutils.cpp:657
+#: kmymoney/kmymoneyutils.cpp:659
 #, kde-format
 msgid "Unable to add tag"
 msgstr "Не вдалося додати мітку"
 
-#: kmymoney/kmymoneyutils.cpp:674 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:676 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "Не вдалося додати установу: %1"
 
-#: kmymoney/kmymoneyutils.cpp:731
+#: kmymoney/kmymoneyutils.cpp:733
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:50
 #, kde-format
 msgid "One statement has been processed with the following results:"
@@ -6221,7 +6221,7 @@ msgstr[1] "Було оброблено %1 виписки. Отримано та�
 msgstr[2] "Було оброблено %1 виписок. Отримано такі результати:"
 msgstr[3] "Було оброблено виписку. Отримано такі результати:"
 
-#: kmymoney/kmymoneyutils.cpp:736
+#: kmymoney/kmymoneyutils.cpp:738
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:52
 #, kde-format
 msgid "No new transaction has been imported."
@@ -6231,7 +6231,7 @@ msgstr[1] "Не було імпортовано жодного нового за
 msgstr[2] "Не було імпортовано жодного нового запису операцій."
 msgstr[3] "Не було імпортовано жодного нового запису операцій."
 
-#: kmymoney/kmymoneyutils.cpp:737
+#: kmymoney/kmymoneyutils.cpp:739
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:53
 #, kde-format
 msgid "Statement import statistics"
@@ -21067,20 +21067,16 @@ msgid "Costcenter"
 msgstr "Обліковий центр"
 
 #: kmymoney/views/newtransactioneditor.cpp:233
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the split ratio for this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the amount of the transaction."
-msgstr "Введіть частку дроблення для цієї операції"
+msgstr "Введіть суму операції."
 
 #: kmymoney/views/newtransactioneditor.cpp:234
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the split ratio for this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the category or counter account of the transaction."
-msgstr "Введіть частку дроблення для цієї операції"
+msgstr "Введіть категорію або конторський рахунок операції."
 
 #: kmymoney/views/newtransactioneditor.cpp:237
 #, kde-format

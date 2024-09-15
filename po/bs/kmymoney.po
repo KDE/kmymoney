@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-14 01:57+0000\n"
+"POT-Creation-Date: 2024-09-15 01:52+0000\n"
 "PO-Revision-Date: 2015-02-09 11:02+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -213,7 +213,7 @@ msgstr ""
 "za sve sljedeće transakcije se navodi \"%1\" će se ukloniti."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1053
-#: kmymoney/kmymoneyutils.cpp:570
+#: kmymoney/kmymoneyutils.cpp:572
 #, kde-format
 msgid "New payee/receiver"
 msgstr "Novi uplatitelj/primatelj"
@@ -6228,12 +6228,12 @@ msgstr "Budžet"
 msgid "Cash Flow"
 msgstr "Novčani tok"
 
-#: kmymoney/kmymoneyutils.cpp:276 kmymoney/views/kenterscheduledlg.cpp:124
+#: kmymoney/kmymoneyutils.cpp:278 kmymoney/views/kenterscheduledlg.cpp:124
 #, kde-format
 msgid "Unable to load schedule details"
 msgstr "Nismo u stanju ucitati detalje rasporeda."
 
-#: kmymoney/kmymoneyutils.cpp:372
+#: kmymoney/kmymoneyutils.cpp:374
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:112
 #: kmymoney/wizards/kmymoneywizard_p.h:78
 #, kde-format
@@ -6241,50 +6241,50 @@ msgctxt "Go to next page of the wizard"
 msgid "&Next"
 msgstr "&Sljedeći"
 
-#: kmymoney/kmymoneyutils.cpp:461
+#: kmymoney/kmymoneyutils.cpp:463
 #, fuzzy, kde-format
 #| msgid "Verify Import"
 msgid "Prices Importer"
 msgstr "Potvrdi import"
 
-#: kmymoney/kmymoneyutils.cpp:471
+#: kmymoney/kmymoneyutils.cpp:473
 #, fuzzy, kde-format
 #| msgid "<p>Do you really want to remove the %1 <b>%2</b> from the file?</p>"
 msgid ""
 "<p>Do you really want to remove the currency <b>%1</b> from the file?</p>"
 msgstr "<p>Želite li zaista ukloniti %1 <b>%2</b> iz datoteke?</p>"
 
-#: kmymoney/kmymoneyutils.cpp:472
+#: kmymoney/kmymoneyutils.cpp:474
 #, kde-format
 msgid ""
 "<p>All exchange rates for currency <b>%1</b> will be lost.</p><p>Do you "
 "still want to continue?</p>"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:476
+#: kmymoney/kmymoneyutils.cpp:478
 #, kde-format
 msgid "<p>Do you really want to remove the %1 <b>%2</b> from the file?</p>"
 msgstr "<p>Želite li zaista ukloniti %1 <b>%2</b> iz datoteke?</p>"
 
-#: kmymoney/kmymoneyutils.cpp:477
+#: kmymoney/kmymoneyutils.cpp:479
 #, kde-format
 msgid ""
 "<p>All price quotes for %1 <b>%2</b> will be lost.</p><p>Do you still want "
 "to continue?</p>"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:481
+#: kmymoney/kmymoneyutils.cpp:483
 #, kde-format
 msgid "Delete security"
 msgstr "Izbriši sigurnost"
 
-#: kmymoney/kmymoneyutils.cpp:489
+#: kmymoney/kmymoneyutils.cpp:491
 #, fuzzy, kde-format
 #| msgid "Delete price..."
 msgid "Delete prices"
 msgstr "Izbriši cijenu..."
 
-#: kmymoney/kmymoneyutils.cpp:546
+#: kmymoney/kmymoneyutils.cpp:548
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:138
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:431
 #: kmymoney/templates/templateloader.cpp:78
@@ -6292,7 +6292,7 @@ msgstr "Izbriši cijenu..."
 msgid "Error while loading file '%1'."
 msgstr "Greška  prilikom učitavanja datoteke '%1'."
 
-#: kmymoney/kmymoneyutils.cpp:548
+#: kmymoney/kmymoneyutils.cpp:550
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:138
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:433
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1004
@@ -6301,49 +6301,49 @@ msgstr "Greška  prilikom učitavanja datoteke '%1'."
 msgid "File access error"
 msgstr "Greska nastala pri pokušaju pristupa datoteci"
 
-#: kmymoney/kmymoneyutils.cpp:566 kmymoney/views/kpayeesview.cpp:537
+#: kmymoney/kmymoneyutils.cpp:568 kmymoney/views/kpayeesview.cpp:537
 #, kde-format
 msgid "New Payee"
 msgstr "Novi Primalac"
 
-#: kmymoney/kmymoneyutils.cpp:568
+#: kmymoney/kmymoneyutils.cpp:570
 #, fuzzy, kde-format
 #| msgid "Do you want to add <b>%1</b> as payer/receiver?"
 msgid "<qt>Do you want to add <b>%1</b> as payee/receiver?</qt>"
 msgstr "Želite li dodati <b>%1</b> kao pošiljaoca/primaoca?"
 
-#: kmymoney/kmymoneyutils.cpp:607
+#: kmymoney/kmymoneyutils.cpp:609
 #, kde-format
 msgid "Unable to add payee"
 msgstr "Nemoguće dodati primaoca"
 
-#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:641
+#: kmymoney/kmymoneyutils.cpp:621 kmymoney/views/ktagsview.cpp:641
 #, kde-format
 msgid "New Tag"
 msgstr "Nova oznaka"
 
-#: kmymoney/kmymoneyutils.cpp:621
+#: kmymoney/kmymoneyutils.cpp:623
 #, fuzzy, kde-format
 #| msgid "Do you want to add <b>%1</b> as tag?"
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 msgstr "Da li želiš dodati  <b>%1</b> kao oznaku?"
 
-#: kmymoney/kmymoneyutils.cpp:623
+#: kmymoney/kmymoneyutils.cpp:625
 #, kde-format
 msgid "New tag"
 msgstr "Nova oznaka"
 
-#: kmymoney/kmymoneyutils.cpp:657
+#: kmymoney/kmymoneyutils.cpp:659
 #, kde-format
 msgid "Unable to add tag"
 msgstr "Nemoguće dodati oznaku"
 
-#: kmymoney/kmymoneyutils.cpp:674 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:676 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "Ne može dodati instituciju :%1"
 
-#: kmymoney/kmymoneyutils.cpp:731
+#: kmymoney/kmymoneyutils.cpp:733
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:50
 #, fuzzy, kde-format
 #| msgid "The statement has been processed with the following results:"
@@ -6353,7 +6353,7 @@ msgstr[0] "Statistika je obrađena sa sljedećim rezultatima:"
 msgstr[1] "Statistika je obrađena sa sljedećim rezultatima:"
 msgstr[2] "Statistika je obrađena sa sljedećim rezultatima:"
 
-#: kmymoney/kmymoneyutils.cpp:736
+#: kmymoney/kmymoneyutils.cpp:738
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:52
 #, fuzzy, kde-format
 #| msgid "Do not show transactions prior to"
@@ -6363,7 +6363,7 @@ msgstr[0] "Ne prikazuj transakcije prije"
 msgstr[1] "Ne prikazuj transakcije prije"
 msgstr[2] "Ne prikazuj transakcije prije"
 
-#: kmymoney/kmymoneyutils.cpp:737
+#: kmymoney/kmymoneyutils.cpp:739
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:53
 #, fuzzy, kde-format
 #| msgid "Statement stats"
