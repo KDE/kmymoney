@@ -165,7 +165,7 @@ int main(int argc, char** argv)
         options.hasCSVOption = parser.isSet(csvOption);
         options.hasHTMLOption = parser.isSet(htmlOption);
         if (options.hasCSVOption && options.hasHTMLOption) {
-            qWarning() << i18n("Only one of --csv and --html is suppored");
+            qWarning() << i18n("Only one of --csv and --html is supported");
             return 1;
         }
         options.hasListOption = parser.isSet(listOption);
