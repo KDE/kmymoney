@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-06 02:02+0000\n"
+"POT-Creation-Date: 2024-09-15 01:52+0000\n"
 "PO-Revision-Date: 2024-03-29 14:27+0100\n"
 "Last-Translator: Kjetil Sørlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -210,7 +210,7 @@ msgstr ""
 "«%1»."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1053
-#: kmymoney/kmymoneyutils.cpp:570
+#: kmymoney/kmymoneyutils.cpp:572
 #, kde-format
 msgid "New payee/receiver"
 msgstr "Ny mottaker"
@@ -6040,12 +6040,12 @@ msgstr "Budsjett"
 msgid "Cash Flow"
 msgstr "Kontantstrøm"
 
-#: kmymoney/kmymoneyutils.cpp:276 kmymoney/views/kenterscheduledlg.cpp:124
+#: kmymoney/kmymoneyutils.cpp:278 kmymoney/views/kenterscheduledlg.cpp:124
 #, kde-format
 msgid "Unable to load schedule details"
 msgstr "Kan ikke laste detaljer fra tidsplan"
 
-#: kmymoney/kmymoneyutils.cpp:372
+#: kmymoney/kmymoneyutils.cpp:374
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:112
 #: kmymoney/wizards/kmymoneywizard_p.h:78
 #, kde-format
@@ -6053,18 +6053,18 @@ msgctxt "Go to next page of the wizard"
 msgid "&Next"
 msgstr "&Neste"
 
-#: kmymoney/kmymoneyutils.cpp:461
+#: kmymoney/kmymoneyutils.cpp:463
 #, kde-format
 msgid "Prices Importer"
 msgstr "Kursimportør"
 
-#: kmymoney/kmymoneyutils.cpp:471
+#: kmymoney/kmymoneyutils.cpp:473
 #, kde-format
 msgid ""
 "<p>Do you really want to remove the currency <b>%1</b> from the file?</p>"
 msgstr "<p>Vil du virkelig fjerne valutaen <b>%1</b> fra filen?</p>"
 
-#: kmymoney/kmymoneyutils.cpp:472
+#: kmymoney/kmymoneyutils.cpp:474
 #, kde-format
 msgid ""
 "<p>All exchange rates for currency <b>%1</b> will be lost.</p><p>Do you "
@@ -6073,12 +6073,12 @@ msgstr ""
 "<p>Alle vekslingskursene for valutaen <b>%1</b> vil gå tapt.</p><p>Vil du "
 "fortsette likevel?</p>"
 
-#: kmymoney/kmymoneyutils.cpp:476
+#: kmymoney/kmymoneyutils.cpp:478
 #, kde-format
 msgid "<p>Do you really want to remove the %1 <b>%2</b> from the file?</p>"
 msgstr "<p>Vil du virkelig fjerne %1 <b>%2</b> fra filen?</p>"
 
-#: kmymoney/kmymoneyutils.cpp:477
+#: kmymoney/kmymoneyutils.cpp:479
 #, kde-format
 msgid ""
 "<p>All price quotes for %1 <b>%2</b> will be lost.</p><p>Do you still want "
@@ -6087,17 +6087,17 @@ msgstr ""
 "<p>Alle aksjekursene for %1 <b>%2</b> vil gå tapt.</p><p>Vil du fortsette "
 "likevel?</p>"
 
-#: kmymoney/kmymoneyutils.cpp:481
+#: kmymoney/kmymoneyutils.cpp:483
 #, kde-format
 msgid "Delete security"
 msgstr "Slett verdipapir"
 
-#: kmymoney/kmymoneyutils.cpp:489
+#: kmymoney/kmymoneyutils.cpp:491
 #, kde-format
 msgid "Delete prices"
 msgstr "Slett kurser"
 
-#: kmymoney/kmymoneyutils.cpp:546
+#: kmymoney/kmymoneyutils.cpp:548
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:138
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:431
 #: kmymoney/templates/templateloader.cpp:78
@@ -6105,7 +6105,7 @@ msgstr "Slett kurser"
 msgid "Error while loading file '%1'."
 msgstr "Feil ved lasting av filen %1."
 
-#: kmymoney/kmymoneyutils.cpp:548
+#: kmymoney/kmymoneyutils.cpp:550
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:138
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:433
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1004
@@ -6114,47 +6114,47 @@ msgstr "Feil ved lasting av filen %1."
 msgid "File access error"
 msgstr "Feil med tilgang til fil"
 
-#: kmymoney/kmymoneyutils.cpp:566 kmymoney/views/kpayeesview.cpp:537
+#: kmymoney/kmymoneyutils.cpp:568 kmymoney/views/kpayeesview.cpp:537
 #, kde-format
 msgid "New Payee"
 msgstr "Ny mottaker"
 
-#: kmymoney/kmymoneyutils.cpp:568
+#: kmymoney/kmymoneyutils.cpp:570
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as payee/receiver?</qt>"
 msgstr "<qt>Vil du legge til <b>%1</b> som mottaker?</qt>"
 
-#: kmymoney/kmymoneyutils.cpp:607
+#: kmymoney/kmymoneyutils.cpp:609
 #, kde-format
 msgid "Unable to add payee"
 msgstr "Kan ikke legge til mottaker"
 
-#: kmymoney/kmymoneyutils.cpp:619 kmymoney/views/ktagsview.cpp:641
+#: kmymoney/kmymoneyutils.cpp:621 kmymoney/views/ktagsview.cpp:641
 #, kde-format
 msgid "New Tag"
 msgstr "Nytt merke"
 
-#: kmymoney/kmymoneyutils.cpp:621
+#: kmymoney/kmymoneyutils.cpp:623
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 msgstr "<qt>Vil du legge til <b>%1</b> som et merke?</qt>"
 
-#: kmymoney/kmymoneyutils.cpp:623
+#: kmymoney/kmymoneyutils.cpp:625
 #, kde-format
 msgid "New tag"
 msgstr "Nytt merke"
 
-#: kmymoney/kmymoneyutils.cpp:657
+#: kmymoney/kmymoneyutils.cpp:659
 #, kde-format
 msgid "Unable to add tag"
 msgstr "Kan ikke legge til merke"
 
-#: kmymoney/kmymoneyutils.cpp:674 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:676 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "Kan ikke legge til institusjon: %1"
 
-#: kmymoney/kmymoneyutils.cpp:731
+#: kmymoney/kmymoneyutils.cpp:733
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:50
 #, kde-format
 msgid "One statement has been processed with the following results:"
@@ -6162,7 +6162,7 @@ msgid_plural "%1 statements have been processed with the following results:"
 msgstr[0] "Et kontoutdrag er blitt behandlet med følgende resultat:"
 msgstr[1] "%1 kontoutdrag er blitt behandlet med følgende resultat:"
 
-#: kmymoney/kmymoneyutils.cpp:736
+#: kmymoney/kmymoneyutils.cpp:738
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:52
 #, kde-format
 msgid "No new transaction has been imported."
@@ -6170,7 +6170,7 @@ msgid_plural "No new transactions have been imported."
 msgstr[0] "Ingen ny transaksjon er importert."
 msgstr[1] "Ingen nye transaksjoner er importert."
 
-#: kmymoney/kmymoneyutils.cpp:737
+#: kmymoney/kmymoneyutils.cpp:739
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:53
 #, kde-format
 msgid "Statement import statistics"
@@ -18814,14 +18814,14 @@ msgstr "Renteinntekt"
 
 #: kmymoney/views/investtransactioneditor.cpp:262
 #: kmymoney/views/multitransactioneditor.cpp:184
-#: kmymoney/views/newtransactioneditor.cpp:296
+#: kmymoney/views/newtransactioneditor.cpp:295
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "Posteringsdatoen for transaksjonen."
 
 #: kmymoney/views/investtransactioneditor.cpp:286
 #: kmymoney/views/multitransactioneditor.cpp:214
-#: kmymoney/views/newtransactioneditor.cpp:316
+#: kmymoney/views/newtransactioneditor.cpp:315
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "Posteringsdatoen er eldre enn åpningsdatoen for kontoen <b>%1</b>."
@@ -20672,19 +20672,19 @@ msgid "Balance: %1"
 msgstr "Saldo: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:192
-#: kmymoney/views/newtransactioneditor.cpp:299
+#: kmymoney/views/newtransactioneditor.cpp:298
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "Posteringsdatoen er ikke gyldig."
 
 #: kmymoney/views/multitransactioneditor.cpp:225
-#: kmymoney/views/newtransactioneditor.cpp:334
+#: kmymoney/views/newtransactioneditor.cpp:333
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
 msgstr "Velg kostnadssenteret denne transaksjonen skal tilordnes."
 
 #: kmymoney/views/multitransactioneditor.cpp:228
-#: kmymoney/views/newtransactioneditor.cpp:343
+#: kmymoney/views/newtransactioneditor.cpp:342
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -20773,13 +20773,13 @@ msgid "A category assignment is required for a split."
 msgstr "Tilordning til kategori er påkrevd for denne oppdelingen."
 
 #: kmymoney/views/newspliteditor.cpp:237
-#: kmymoney/views/newtransactioneditor.cpp:458
+#: kmymoney/views/newtransactioneditor.cpp:457
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Sjekknummerer brukt i denne transaksjonen."
 
 #: kmymoney/views/newspliteditor.cpp:246
-#: kmymoney/views/newtransactioneditor.cpp:468
+#: kmymoney/views/newtransactioneditor.cpp:467
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Sjekknummeret <b>%1</b> er allerede brukt på denne kontoen."
@@ -20811,6 +20811,18 @@ msgstr "Betaler/mottaker"
 msgid "Costcenter"
 msgstr "Kostnadssenter"
 
+#: kmymoney/views/newtransactioneditor.cpp:233
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Enter the amount of the transaction."
+msgstr ""
+
+#: kmymoney/views/newtransactioneditor.cpp:234
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Enter the category or counter account of the transaction."
+msgstr ""
+
 #: kmymoney/views/newtransactioneditor.cpp:237
 #, kde-format
 msgctxt "@info:tooltip"
@@ -20823,7 +20835,7 @@ msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:613
+#: kmymoney/views/newtransactioneditor.cpp:612
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
