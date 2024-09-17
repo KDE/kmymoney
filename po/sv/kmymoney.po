@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-16 02:09+0000\n"
-"PO-Revision-Date: 2024-09-14 07:43+0200\n"
+"POT-Creation-Date: 2024-09-17 01:53+0000\n"
+"PO-Revision-Date: 2024-09-16 20:07+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -25288,67 +25288,65 @@ msgstr ""
 "personlig.</p>"
 
 #: tools/kmmreport-export.cpp:128
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export KMyMoney reports"
-msgstr "Exportera rapport"
+msgstr "Exportera rapporter från KMyMoney"
 
 #: tools/kmmreport-export.cpp:132
 #, kde-format
 msgid "export in csv format (default)"
-msgstr ""
+msgstr "exportera med csv-format (förval)"
 
 #: tools/kmmreport-export.cpp:135
 #, kde-format
 msgid "export in HTML format"
-msgstr ""
+msgstr "exportera med HTML-format"
 
 #: tools/kmmreport-export.cpp:138
 #, kde-format
 msgid "Create reference file from output"
-msgstr ""
+msgstr "Skapa referensfil från utdata"
 
 #: tools/kmmreport-export.cpp:141
 #, kde-format
 msgid "Use info table for exporting"
-msgstr ""
+msgstr "Använd informationstabell för export"
 
 #: tools/kmmreport-export.cpp:144
 #, kde-format
 msgid "Use pivot table for exporting"
-msgstr ""
+msgstr "Använd pivottabell för export"
 
 #: tools/kmmreport-export.cpp:147
 #, kde-format
 msgid "Use query table for exporting (default)"
-msgstr ""
+msgstr "Använd frågetabell för export (förval)"
 
 #: tools/kmmreport-export.cpp:150
-#, fuzzy, kde-format
-#| msgid "Old Customized Reports"
+#, kde-format
 msgid "List all custom reports"
-msgstr "Gamla anpassade rapporter"
+msgstr "Lista alla anpassade rapporter"
 
 #: tools/kmmreport-export.cpp:153
-#, fuzzy, kde-format
-#| msgid "Unable to generate report"
+#, kde-format
 msgid "Filename for generated output"
-msgstr "Kan inte skapa rapport"
+msgstr "Filnamn för genererad utdata"
 
 #: tools/kmmreport-export.cpp:156
 #, kde-format
 msgid "Process a specific report"
-msgstr ""
+msgstr "Behandla en specifik rapport"
 
 #: tools/kmmreport-export.cpp:168
-#, kde-format
-msgid "Only one of --csv and --html is suppored"
-msgstr ""
+#, fuzzy, kde-format
+#| msgid "Only one of --csv and --html is suppored"
+msgid "Only one of --csv and --html is supported"
+msgstr "Bara en av --csv och --html stöds"
 
 #: tools/kmmreport-export.cpp:203
 #, kde-format
 msgid "saving report '%1' into '%2'"
-msgstr ""
+msgstr "sparar rapport '%1' i '%2'"
 
 #~ msgctxt "@info Online price update %1 online id, %2 internal id"
 #~ msgid "Price for %1 updated (id %2)"

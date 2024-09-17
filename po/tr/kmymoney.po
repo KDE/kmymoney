@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-16 02:09+0000\n"
-"PO-Revision-Date: 2024-09-15 20:30+0300\n"
+"POT-Creation-Date: 2024-09-17 01:53+0000\n"
+"PO-Revision-Date: 2024-09-16 12:15+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -25243,64 +25243,62 @@ msgstr ""
 "kişiselleştirmek için kullanılır.</p>"
 
 #: tools/kmmreport-export.cpp:128
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export KMyMoney reports"
-msgstr "Raporu Dışa Aktar"
+msgstr "K Param raporlarını dışa aktar"
 
 #: tools/kmmreport-export.cpp:132
 #, kde-format
 msgid "export in csv format (default)"
-msgstr ""
+msgstr "CSV biçiminde dışa aktar (öntanımlı)"
 
 #: tools/kmmreport-export.cpp:135
 #, kde-format
 msgid "export in HTML format"
-msgstr ""
+msgstr "HTML biçiminde dışa aktar"
 
 #: tools/kmmreport-export.cpp:138
 #, kde-format
 msgid "Create reference file from output"
-msgstr ""
+msgstr "Çıktıdan başvuru dosya oluştur"
 
 #: tools/kmmreport-export.cpp:141
 #, kde-format
 msgid "Use info table for exporting"
-msgstr ""
+msgstr "Dışa aktarma için bilgi tablosunu kullan"
 
 #: tools/kmmreport-export.cpp:144
 #, kde-format
 msgid "Use pivot table for exporting"
-msgstr ""
+msgstr "Dışa aktarma için özet tabloyu kullan"
 
 #: tools/kmmreport-export.cpp:147
 #, kde-format
 msgid "Use query table for exporting (default)"
-msgstr ""
+msgstr "Dışa aktarma için sorgu tablosunu kullan (öntanımlı)"
 
 #: tools/kmmreport-export.cpp:150
-#, fuzzy, kde-format
-#| msgid "Old Customized Reports"
+#, kde-format
 msgid "List all custom reports"
-msgstr "Eski Özelleştirilmiş Raporlar"
+msgstr "Tüm özel raporları listele"
 
 #: tools/kmmreport-export.cpp:153
-#, fuzzy, kde-format
-#| msgid "Unable to generate report"
+#, kde-format
 msgid "Filename for generated output"
-msgstr "Rapor üretilemiyor"
+msgstr "Üretilen çıktının dosya adı"
 
 #: tools/kmmreport-export.cpp:156
 #, kde-format
 msgid "Process a specific report"
-msgstr ""
+msgstr "Belirli bir raporu işle"
 
 #: tools/kmmreport-export.cpp:168
-#, kde-format
-msgid "Only one of --csv and --html is suppored"
-msgstr ""
+#, fuzzy, kde-format
+#| msgid "Only one of --csv and --html is suppored"
+msgid "Only one of --csv and --html is supported"
+msgstr "--csv veya --html bayraklarından yalnızca biri kullanılabilir"
 
 #: tools/kmmreport-export.cpp:203
 #, kde-format
 msgid "saving report '%1' into '%2'"
-msgstr ""
+msgstr "“%1” raporu “%2” içine kaydediliyor"

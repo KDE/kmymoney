@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-16 02:09+0000\n"
+"POT-Creation-Date: 2024-09-17 01:53+0000\n"
 "PO-Revision-Date: 2024-08-27 13:58+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -20272,11 +20272,10 @@ msgid "Costcenter"
 msgstr "Nákladové středisko"
 
 #: kmymoney/views/newtransactioneditor.cpp:233
-#, fuzzy, kde-format
-#| msgid "Enter scheduled transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the amount of the transaction."
-msgstr "Vložení naplánované transakce"
+msgstr ""
 
 #: kmymoney/views/newtransactioneditor.cpp:234
 #, kde-format
@@ -24667,10 +24666,9 @@ msgstr ""
 "vašeho KMyMoney.</p>"
 
 #: tools/kmmreport-export.cpp:128
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export KMyMoney reports"
-msgstr "Exportovat hlášení"
+msgstr ""
 
 #: tools/kmmreport-export.cpp:132
 #, kde-format
@@ -24703,16 +24701,14 @@ msgid "Use query table for exporting (default)"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:150
-#, fuzzy, kde-format
-#| msgid "Custom Report"
+#, kde-format
 msgid "List all custom reports"
-msgstr "Vlastní výkaz"
+msgstr ""
 
 #: tools/kmmreport-export.cpp:153
-#, fuzzy, kde-format
-#| msgid "Unable to generate report"
+#, kde-format
 msgid "Filename for generated output"
-msgstr "Nelze vytvořit výkaz"
+msgstr ""
 
 #: tools/kmmreport-export.cpp:156
 #, kde-format
@@ -24721,7 +24717,7 @@ msgstr ""
 
 #: tools/kmmreport-export.cpp:168
 #, kde-format
-msgid "Only one of --csv and --html is suppored"
+msgid "Only one of --csv and --html is supported"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:203

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-15 01:52+0000\n"
+"POT-Creation-Date: 2024-09-16 02:09+0000\n"
 "PO-Revision-Date: 2024-03-29 14:27+0100\n"
 "Last-Translator: Kjetil Sørlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -6211,7 +6211,7 @@ msgstr "aktiver programsporing"
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr "dump navnene for alle QAction-objekter til stdut og avslutt"
 
-#: kmymoney/main.cpp:172
+#: kmymoney/main.cpp:172 tools/kmmreport-export.cpp:159
 #, kde-format
 msgid "file to open"
 msgstr "fil som skal åpnes"
@@ -8221,7 +8221,7 @@ msgstr "Fordel transaksjon"
 
 #: kmymoney/mymoney/splitmodel.cpp:118
 #: kmymoney/mymoney/storage/journalmodel.cpp:192
-#: kmymoney/plugins/views/reports/core/querytable.cpp:997
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1004
 #, kde-format
 msgid "*** UNASSIGNED ***"
 msgstr "*** IKKE TILDELT ***"
@@ -12370,7 +12370,7 @@ msgstr "Hent transaksjoner"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:76
 #: kmymoney/plugins/views/reports/core/querytable.cpp:816
-#: kmymoney/plugins/views/reports/core/querytable.cpp:948
+#: kmymoney/plugins/views/reports/core/querytable.cpp:955
 #, kde-format
 msgid "Transfer"
 msgstr "Overfør"
@@ -15868,19 +15868,19 @@ msgid "Long-term Gain"
 msgstr "Langsiktig gevinst"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:220
-#: kmymoney/plugins/views/reports/core/querytable.cpp:945
-#: kmymoney/plugins/views/reports/core/querytable.cpp:995
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1930
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1949
+#: kmymoney/plugins/views/reports/core/querytable.cpp:952
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1002
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1937
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1956
 #, kde-format
 msgid "Transfer from %1"
 msgstr "Overfør fra %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
-#: kmymoney/plugins/views/reports/core/querytable.cpp:946
-#: kmymoney/plugins/views/reports/core/querytable.cpp:994
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1929
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1948
+#: kmymoney/plugins/views/reports/core/querytable.cpp:953
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1001
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1936
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1955
 #, kde-format
 msgid "Transfer to %1"
 msgstr "Overfør til %1"
@@ -15973,34 +15973,34 @@ msgid "[No Tag]"
 msgstr "[Ingen merker]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:579
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1765
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1772
 #, kde-format
 msgid "Month of %1"
 msgstr "Måneden som starter med %1"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:580
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1766
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1773
 #, kde-format
 msgid "Week of %1"
 msgstr "Uken som starter med %1"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:796
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1000
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1143
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1892
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2063
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1007
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1150
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1899
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2070
 #, kde-format
 msgid "No Institution"
 msgstr "(Ingen institusjon)"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:800
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1903
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1910
 #, kde-format
 msgid "[Empty Payee]"
 msgstr "[Tom mottaker]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:835
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1935
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1942
 #, kde-format
 msgid "[Split Transaction]"
 msgstr "[Fordelt transaksjon]"
@@ -16012,7 +16012,7 @@ msgctxt "Split transaction"
 msgid "Split"
 msgstr "Del"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1677
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1684
 #, kde-format
 msgctxt "No institution"
 msgid "None"
@@ -25252,3 +25252,63 @@ msgstr ""
 "\n"
 "<p>All informasjon er valgfri er oppgis kun for å tilpasse KMyMoney-filen "
 "din</p>"
+
+#: tools/kmmreport-export.cpp:128
+#, kde-format
+msgid "Export KMyMoney reports"
+msgstr ""
+
+#: tools/kmmreport-export.cpp:132
+#, kde-format
+msgid "export in csv format (default)"
+msgstr ""
+
+#: tools/kmmreport-export.cpp:135
+#, kde-format
+msgid "export in HTML format"
+msgstr ""
+
+#: tools/kmmreport-export.cpp:138
+#, kde-format
+msgid "Create reference file from output"
+msgstr ""
+
+#: tools/kmmreport-export.cpp:141
+#, kde-format
+msgid "Use info table for exporting"
+msgstr ""
+
+#: tools/kmmreport-export.cpp:144
+#, kde-format
+msgid "Use pivot table for exporting"
+msgstr ""
+
+#: tools/kmmreport-export.cpp:147
+#, kde-format
+msgid "Use query table for exporting (default)"
+msgstr ""
+
+#: tools/kmmreport-export.cpp:150
+#, kde-format
+msgid "List all custom reports"
+msgstr ""
+
+#: tools/kmmreport-export.cpp:153
+#, kde-format
+msgid "Filename for generated output"
+msgstr ""
+
+#: tools/kmmreport-export.cpp:156
+#, kde-format
+msgid "Process a specific report"
+msgstr ""
+
+#: tools/kmmreport-export.cpp:168
+#, kde-format
+msgid "Only one of --csv and --html is suppored"
+msgstr ""
+
+#: tools/kmmreport-export.cpp:203
+#, kde-format
+msgid "saving report '%1' into '%2'"
+msgstr ""

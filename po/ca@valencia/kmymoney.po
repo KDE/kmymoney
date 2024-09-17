@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-16 02:09+0000\n"
-"PO-Revision-Date: 2024-09-14 15:54+0200\n"
+"POT-Creation-Date: 2024-09-17 01:53+0000\n"
+"PO-Revision-Date: 2024-09-16 11:30+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -25526,64 +25526,62 @@ msgstr ""
 "de KMyMoney.</p>"
 
 #: tools/kmmreport-export.cpp:128
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export KMyMoney reports"
-msgstr "Exporta l'informe"
+msgstr "Exporta informes de KMyMoney"
 
 #: tools/kmmreport-export.cpp:132
 #, kde-format
 msgid "export in csv format (default)"
-msgstr ""
+msgstr "exporta en format «csv» (predeterminat)"
 
 #: tools/kmmreport-export.cpp:135
 #, kde-format
 msgid "export in HTML format"
-msgstr ""
+msgstr "exporta en format HTML"
 
 #: tools/kmmreport-export.cpp:138
 #, kde-format
 msgid "Create reference file from output"
-msgstr ""
+msgstr "Crea un fitxer de referència a partir de l'eixida"
 
 #: tools/kmmreport-export.cpp:141
 #, kde-format
 msgid "Use info table for exporting"
-msgstr ""
+msgstr "Utilitza la taula d'informació per a exportar"
 
 #: tools/kmmreport-export.cpp:144
 #, kde-format
 msgid "Use pivot table for exporting"
-msgstr ""
+msgstr "Utilitza la taula pivot per a exportar"
 
 #: tools/kmmreport-export.cpp:147
 #, kde-format
 msgid "Use query table for exporting (default)"
-msgstr ""
+msgstr "Utilitza la taula de consulta per a exportar (predeterminada)"
 
 #: tools/kmmreport-export.cpp:150
-#, fuzzy, kde-format
-#| msgid "Old Customized Reports"
+#, kde-format
 msgid "List all custom reports"
-msgstr "Informes personalitzats antics"
+msgstr "Llista tots els informes personalitzats"
 
 #: tools/kmmreport-export.cpp:153
-#, fuzzy, kde-format
-#| msgid "Unable to generate report"
+#, kde-format
 msgid "Filename for generated output"
-msgstr "No s'ha pogut generar l'informe"
+msgstr "Nom de fitxer de l'eixida generada"
 
 #: tools/kmmreport-export.cpp:156
 #, kde-format
 msgid "Process a specific report"
-msgstr ""
+msgstr "Processa un informe específic"
 
 #: tools/kmmreport-export.cpp:168
-#, kde-format
-msgid "Only one of --csv and --html is suppored"
-msgstr ""
+#, fuzzy, kde-format
+#| msgid "Only one of --csv and --html is suppored"
+msgid "Only one of --csv and --html is supported"
+msgstr "Només s'admet un entre --csv i --html"
 
 #: tools/kmmreport-export.cpp:203
 #, kde-format
 msgid "saving report '%1' into '%2'"
-msgstr ""
+msgstr "s'està guardant l'informe «%1» en «%2»"

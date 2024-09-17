@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-16 02:09+0000\n"
-"PO-Revision-Date: 2024-09-15 11:04+0200\n"
+"POT-Creation-Date: 2024-09-17 01:53+0000\n"
+"PO-Revision-Date: 2024-09-16 11:47+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 24.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -25444,64 +25444,62 @@ msgstr ""
 "archivo de KMyMoney.</p>"
 
 #: tools/kmmreport-export.cpp:128
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export KMyMoney reports"
-msgstr "Exportar informe"
+msgstr "Exportar informes de KMyMoney"
 
 #: tools/kmmreport-export.cpp:132
 #, kde-format
 msgid "export in csv format (default)"
-msgstr ""
+msgstr "exportar en formato CSV (predeterminado)"
 
 #: tools/kmmreport-export.cpp:135
 #, kde-format
 msgid "export in HTML format"
-msgstr ""
+msgstr "exportar en formato HTML"
 
 #: tools/kmmreport-export.cpp:138
 #, kde-format
 msgid "Create reference file from output"
-msgstr ""
+msgstr "Crear archivo de referencias a partir de la salida"
 
 #: tools/kmmreport-export.cpp:141
 #, kde-format
 msgid "Use info table for exporting"
-msgstr ""
+msgstr "Usar la tabla de información para exportar"
 
 #: tools/kmmreport-export.cpp:144
 #, kde-format
 msgid "Use pivot table for exporting"
-msgstr ""
+msgstr "Usar la tabla dinámica para exportar"
 
 #: tools/kmmreport-export.cpp:147
 #, kde-format
 msgid "Use query table for exporting (default)"
-msgstr ""
+msgstr "Usar la tabla de consultas para exportar (predeterminado)"
 
 #: tools/kmmreport-export.cpp:150
-#, fuzzy, kde-format
-#| msgid "Old Customized Reports"
+#, kde-format
 msgid "List all custom reports"
-msgstr "Informes personalizados antiguos"
+msgstr "Listar todos los informes personalizados"
 
 #: tools/kmmreport-export.cpp:153
-#, fuzzy, kde-format
-#| msgid "Unable to generate report"
+#, kde-format
 msgid "Filename for generated output"
-msgstr "No ha sido posible generar el informe"
+msgstr "Nombre de archivo para la salida generada"
 
 #: tools/kmmreport-export.cpp:156
 #, kde-format
 msgid "Process a specific report"
-msgstr ""
+msgstr "Procesar un informe específico"
 
 #: tools/kmmreport-export.cpp:168
-#, kde-format
-msgid "Only one of --csv and --html is suppored"
-msgstr ""
+#, fuzzy, kde-format
+#| msgid "Only one of --csv and --html is suppored"
+msgid "Only one of --csv and --html is supported"
+msgstr "Solo se permite una de las opciones --csv y --html"
 
 #: tools/kmmreport-export.cpp:203
 #, kde-format
 msgid "saving report '%1' into '%2'"
-msgstr ""
+msgstr "guardando informe «%1» en «%2»"

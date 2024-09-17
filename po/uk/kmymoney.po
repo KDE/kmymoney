@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-16 02:09+0000\n"
-"PO-Revision-Date: 2024-09-14 15:56+0300\n"
+"POT-Creation-Date: 2024-09-17 01:53+0000\n"
+"PO-Revision-Date: 2024-09-16 18:29+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -25564,67 +25564,65 @@ msgstr ""
 "вашого файла KMyMoney.</p>"
 
 #: tools/kmmreport-export.cpp:128
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export KMyMoney reports"
-msgstr "Експортувати звіт"
+msgstr "Експортувати звіти KMyMoney"
 
 #: tools/kmmreport-export.cpp:132
 #, kde-format
 msgid "export in csv format (default)"
-msgstr ""
+msgstr "експортувати у форматі csv (типовий варіант)"
 
 #: tools/kmmreport-export.cpp:135
 #, kde-format
 msgid "export in HTML format"
-msgstr ""
+msgstr "експортувати у форматі HTML"
 
 #: tools/kmmreport-export.cpp:138
 #, kde-format
 msgid "Create reference file from output"
-msgstr ""
+msgstr "Створити з виведених даних еталонний файл"
 
 #: tools/kmmreport-export.cpp:141
 #, kde-format
 msgid "Use info table for exporting"
-msgstr ""
+msgstr "Використати для експортування інформаційну таблицю"
 
 #: tools/kmmreport-export.cpp:144
 #, kde-format
 msgid "Use pivot table for exporting"
-msgstr ""
+msgstr "Використати для експортування зведену таблицю"
 
 #: tools/kmmreport-export.cpp:147
 #, kde-format
 msgid "Use query table for exporting (default)"
-msgstr ""
+msgstr "Використати таблицю запитів для експортування (типовий варіант)"
 
 #: tools/kmmreport-export.cpp:150
-#, fuzzy, kde-format
-#| msgid "Old Customized Reports"
+#, kde-format
 msgid "List all custom reports"
-msgstr "Старі нетипові звіти"
+msgstr "Список усіх нетипових звітів"
 
 #: tools/kmmreport-export.cpp:153
-#, fuzzy, kde-format
-#| msgid "Unable to generate report"
+#, kde-format
 msgid "Filename for generated output"
-msgstr "Не вдалося створити звіт"
+msgstr "Назва файла для створених результатів"
 
 #: tools/kmmreport-export.cpp:156
 #, kde-format
 msgid "Process a specific report"
-msgstr ""
+msgstr "Обробити вказаний звіт"
 
 #: tools/kmmreport-export.cpp:168
-#, kde-format
-msgid "Only one of --csv and --html is suppored"
-msgstr ""
+#, fuzzy, kde-format
+#| msgid "Only one of --csv and --html is suppored"
+msgid "Only one of --csv and --html is supported"
+msgstr "Передбачено підтримку лише одного з варіантів, --csv або --html"
 
 #: tools/kmmreport-export.cpp:203
 #, kde-format
 msgid "saving report '%1' into '%2'"
-msgstr ""
+msgstr "зберігаємо звіт «%1» до «%2»"
 
 #~ msgctxt "@info Online price update %1 online id, %2 internal id"
 #~ msgid "Price for %1 updated (id %2)"

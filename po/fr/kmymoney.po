@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-16 02:09+0000\n"
-"PO-Revision-Date: 2024-09-01 21:17+0200\n"
+"POT-Creation-Date: 2024-09-17 01:53+0000\n"
+"PO-Revision-Date: 2024-09-15 10:27+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -21146,20 +21146,16 @@ msgid "Costcenter"
 msgstr "Centre de coûts"
 
 #: kmymoney/views/newtransactioneditor.cpp:233
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the split ratio for this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the amount of the transaction."
-msgstr "Saisissez le taux de répartition pour cette transaction"
+msgstr "Saisissez le montant de la transaction."
 
 #: kmymoney/views/newtransactioneditor.cpp:234
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the split ratio for this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the category or counter account of the transaction."
-msgstr "Saisissez le taux de répartition pour cette transaction"
+msgstr "Saisissez la catégorie ou le numéro de compte de la transaction."
 
 #: kmymoney/views/newtransactioneditor.cpp:237
 #, kde-format
@@ -25724,7 +25720,7 @@ msgstr ""
 
 #: tools/kmmreport-export.cpp:168
 #, kde-format
-msgid "Only one of --csv and --html is suppored"
+msgid "Only one of --csv and --html is supported"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:203

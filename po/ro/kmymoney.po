@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-16 02:09+0000\n"
+"POT-Creation-Date: 2024-09-17 01:53+0000\n"
 "PO-Revision-Date: 2024-02-24 16:23+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -26612,7 +26612,7 @@ msgstr ""
 
 #: tools/kmmreport-export.cpp:168
 #, kde-format
-msgid "Only one of --csv and --html is suppored"
+msgid "Only one of --csv and --html is supported"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:203
