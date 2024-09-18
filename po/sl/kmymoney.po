@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-17 01:53+0000\n"
-"PO-Revision-Date: 2024-09-16 07:12+0200\n"
+"PO-Revision-Date: 2024-09-17 06:32+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -20921,7 +20921,7 @@ msgstr "Stroškovno mesto"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the amount of the transaction."
-msgstr "Vnesite znesek transakcije"
+msgstr "Vnesite znesek transakcije."
 
 #: kmymoney/views/newtransactioneditor.cpp:234
 #, kde-format
@@ -25429,8 +25429,7 @@ msgid "Process a specific report"
 msgstr "Obdelaj določeno poročilo"
 
 #: tools/kmmreport-export.cpp:168
-#, fuzzy, kde-format
-#| msgid "Only one of --csv and --html is suppored"
+#, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "Podprt je samo eden od --csv in --html"
 
