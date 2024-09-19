@@ -3,15 +3,14 @@
 # This file is distributed under the same license as the kmymoney package.
 #
 # Automatically generated, 2014.
+# SPDX-FileCopyrightText: 2014, 2015 Raul Gonzalez
 # SPDX-FileCopyrightText: 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
-# Raul Gonzalez <raulgf83@gmail.com>, 2014, 2015.
-# Sofia Priego <spriego@darksylvania.net>, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-17 01:53+0000\n"
-"PO-Revision-Date: 2024-09-16 11:47+0200\n"
+"PO-Revision-Date: 2024-09-18 11:20+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -25494,8 +25493,7 @@ msgid "Process a specific report"
 msgstr "Procesar un informe específico"
 
 #: tools/kmmreport-export.cpp:168
-#, fuzzy, kde-format
-#| msgid "Only one of --csv and --html is suppored"
+#, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "Solo se permite una de las opciones --csv y --html"
 
