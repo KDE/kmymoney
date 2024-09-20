@@ -47,7 +47,6 @@
 #include "knewaccountwizard.h"
 #include "knewinvestmentwizard.h"
 #include "mymoneyaccount.h"
-#include "mymoneyenums.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneypayee.h"
@@ -332,12 +331,12 @@ void MyMoneyStatementReader::Private::setupPrice(MyMoneySplit &s, const MyMoneyA
     }
 }
 
-MyMoneyStatementReader::MyMoneyStatementReader() :
-    d(new Private),
-    m_userAbort(false),
-    m_autoCreatePayee(false),
-    m_ft(0),
-    m_progressCallback(0)
+MyMoneyStatementReader::MyMoneyStatementReader()
+    : d(new Private)
+    , m_userAbort(false)
+    , m_payeeCreationMode(eMyMoney::Account::PayeeCreation::AskUser)
+    , m_ft(0)
+    , m_progressCallback(0)
 {
     m_askPayeeCategory = KMyMoneySettings::askForPayeeCategory();
 }
@@ -352,9 +351,9 @@ bool MyMoneyStatementReader::anyTransactionAdded() const
     return (d->transactionsAdded != 0) ? true : false;
 }
 
-void MyMoneyStatementReader::setAutoCreatePayee(bool create)
+void MyMoneyStatementReader::setPayeeCreationMode(eMyMoney::Account::PayeeCreation creationMode)
 {
-    m_autoCreatePayee = create;
+    m_payeeCreationMode = creationMode;
 }
 
 void MyMoneyStatementReader::setAskPayeeCategory(bool ask)
@@ -386,7 +385,7 @@ QStringList MyMoneyStatementReader::importStatement(const MyMoneyStatement& s, b
     }
 
     auto reader = new MyMoneyStatementReader;
-    reader->setAutoCreatePayee(true);
+    reader->setPayeeCreationMode(eMyMoney::Account::PayeeCreation::AutomaticCreaation);
     if (callback)
         reader->setProgressCallback(callback);
 
@@ -958,6 +957,12 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         d->assignUniqueBankID(s1, statementTransactionUnderImport);
     }
 
+    // use the payee creation mode specific to this account if set
+    auto payeeCreationMode = thisaccount.payeeCreation();
+    if (payeeCreationMode == eMyMoney::Account::PayeeCreation::ApplicationDefault) {
+        payeeCreationMode = m_payeeCreationMode;
+    }
+
     const auto importedPayeeName = statementTransactionUnderImport.m_strPayee;
     if (!importedPayeeName.isEmpty()) {
         qDebug() << QLatin1String("Start matching payee") << importedPayeeName;
@@ -1030,9 +1035,9 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             }
         } catch (const MyMoneyException &) {
             MyMoneyPayee payee;
-            int rc = KMessageBox::PrimaryAction;
+            int rc = payeeCreationMode == eMyMoney::Account::PayeeCreation::AutomaticCreaation ? KMessageBox::PrimaryAction : KMessageBox::SecondaryAction;
 
-            if (m_autoCreatePayee == false) {
+            if (payeeCreationMode == eMyMoney::Account::PayeeCreation::AskUser) {
                 // Ask the user if that is what he intended to do?
                 QString msg = i18n("Do you want to add \"%1\" as payee/receiver?\n\n", importedPayeeName);
                 msg += i18n(

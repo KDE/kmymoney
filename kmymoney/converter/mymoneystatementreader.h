@@ -17,6 +17,7 @@
 #include <QString>
 #include <QStringList>
 
+#include "mymoneyenums.h"
 #include "mymoneystatement.h"
 #include "transactionmatchfinder.h"
 
@@ -60,7 +61,8 @@ public:
       * @param create flag if this feature should be turned on (@p true)
       *               or turned off (@p false)
       */
-    void setAutoCreatePayee(bool create);
+    void setPayeeCreationMode(eMyMoney::Account::PayeeCreation creationMode);
+
     void setAskPayeeCategory(bool ask);
 
     const MyMoneyAccount& account() const;
@@ -127,7 +129,7 @@ private:
     Private* const d;
     QStringList             m_dontAskAgain;
     bool                    m_userAbort;
-    bool                    m_autoCreatePayee;
+    eMyMoney::Account::PayeeCreation m_payeeCreationMode;
     bool                    m_askPayeeCategory;
     MyMoneyFileTransaction* m_ft;
 
