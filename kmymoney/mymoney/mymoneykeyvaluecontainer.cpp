@@ -104,7 +104,7 @@ void MyMoneyKeyValueContainer::setValue(const QString& key, bool value, bool def
     setValue(key, d->toString(value), d->toString(defaultValue));
 }
 
-void MyMoneyKeyValueContainer::setValue(const QString& key, int value, int defaultValue)
+void MyMoneyKeyValueContainer::setValue_int(const QString& key, int value, int defaultValue)
 {
     Q_D(MyMoneyKeyValueContainer);
     setValue(key, d->toString(value), d->toString(defaultValue));

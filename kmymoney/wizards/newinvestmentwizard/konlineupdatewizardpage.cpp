@@ -125,7 +125,7 @@ void KOnlineUpdateWizardPage::init(const MyMoneySecurity& security)
 {
     d->ui->m_onlineFactor->setEnabled(false);
 
-    const auto onlineQuoteProfileName = security.value(QLatin1String("kmm-online-quote-system"), QLatin1String("kmymoney5"));
+    const auto onlineQuoteProfileName = security.value(QLatin1String("kmm-online-quote-system"), QStringLiteral("kmymoney5"));
 
     KMMOnlineQuotesProfileManager& manager = KMMOnlineQuotesProfileManager::instance();
     AlkOnlineQuotesProfile* onlineQuoteProfile;

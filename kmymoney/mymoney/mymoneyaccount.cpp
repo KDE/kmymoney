@@ -678,12 +678,12 @@ void MyMoneyAccount::setBudgetAccountType(eMyMoney::Account::Type type)
     if ((type != eMyMoney::Account::Type::Income) && (type != eMyMoney::Account::Type::Expense)) {
         type = eMyMoney::Account::Type::Unknown;
     }
-    setValue(QLatin1String("budgetAccountType"), static_cast<int>(type), static_cast<int>(eMyMoney::Account::Type::Unknown));
+    setValue(QLatin1String("budgetAccountType"), type, eMyMoney::Account::Type::Unknown);
 }
 
 eMyMoney::Account::Type MyMoneyAccount::budgetAccountType() const
 {
-    return static_cast<eMyMoney::Account::Type>(value(QLatin1String("budgetAccountType"), static_cast<int>(accountType())));
+    return value<eMyMoney::Account::Type>(QLatin1String("budgetAccountType"), accountType());
 }
 
 MyMoneyMoney MyMoneyAccount::balanceFactor(eMyMoney::Account::Type accountType)

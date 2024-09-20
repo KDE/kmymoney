@@ -91,6 +91,15 @@ public:
     int value(const QString& key, int defaultValue) const;
 
     /**
+     * convenience method for @c enum
+     */
+    template<typename T>
+    T value(const QString& key, T defaultValue) const
+    {
+        return static_cast<T>(value(key, static_cast<int>(defaultValue)));
+    }
+
+    /**
      * This method is used to add a key/value pair to the container or
      * modify an existing pair.
      *
@@ -101,9 +110,13 @@ public:
     void setValue(const QString& key, const QString& value, const QString& defaultValue = QString());
 
     /**
-     * Convenience method for setValue(const QString& key, const QString& value, const QString& defaultValue)
+     * convenience method for integral types (except bool)
      */
-    void setValue(const QString& key, int value, int defaultValue);
+    template<typename T>
+    void setValue(const QString& key, T value, T defaultValue)
+    {
+        return setValue_int(key, static_cast<int>(value), static_cast<int>(defaultValue));
+    }
 
     /**
      * Convenience method for setValue(const QString& key, const QString& value, const QString& defaultValue)
@@ -165,6 +178,9 @@ public:
     QString operator[](const QString& k) const;
 
     QString& operator[](const QString& k);
+
+private:
+    void setValue_int(const QString& key, int value, int defaultValue);
 };
 
 inline void swap(MyMoneyKeyValueContainer& first, MyMoneyKeyValueContainer& second) // krazy:exclude=inline

@@ -48,14 +48,14 @@ void MyMoneyKeyValueContainerTest::testRetrieveDefaultValue()
     QCOMPARE(m->d_func()->m_kvp.count(), 0);
 
     // check to retrieve the default value
-    QCOMPARE(m->value(QLatin1String("Key"), QLatin1String("KMyMoney")), QLatin1String("KMyMoney"));
+    QCOMPARE(m->value(QLatin1String("Key"), QStringLiteral("KMyMoney")), QLatin1String("KMyMoney"));
     // now add a value
     m->d_func()->m_kvp["Key"] = "Value";
     // check to retrieve the stored value
-    QCOMPARE(m->value(QLatin1String("Key"), QLatin1String("KMyMoney")), QLatin1String("Value"));
+    QCOMPARE(m->value(QLatin1String("Key"), QStringLiteral("KMyMoney")), QLatin1String("Value"));
     // now delete it and check to get the default value again
     m->deletePair("Key");
-    QCOMPARE(m->value(QLatin1String("Key"), QLatin1String("KMyMoney")), QLatin1String("KMyMoney"));
+    QCOMPARE(m->value(QLatin1String("Key"), QStringLiteral("KMyMoney")), QLatin1String("KMyMoney"));
 }
 
 void MyMoneyKeyValueContainerTest::testSetValue()
@@ -63,6 +63,18 @@ void MyMoneyKeyValueContainerTest::testSetValue()
     m->setValue("Key", "Value");
     QCOMPARE(m->d_func()->m_kvp.count(), 1);
     QCOMPARE(m->d_func()->m_kvp["Key"], QLatin1String("Value"));
+
+    m->setValue("Key", true, false);
+    QCOMPARE(m->d_func()->m_kvp.count(), 1);
+    QCOMPARE(m->d_func()->m_kvp["Key"], QLatin1String("yes"));
+
+    m->setValue("Key", false, true);
+    QCOMPARE(m->d_func()->m_kvp.count(), 1);
+    QCOMPARE(m->d_func()->m_kvp["Key"], QLatin1String("no"));
+
+    m->setValue("Key", 100, 99);
+    QCOMPARE(m->d_func()->m_kvp.count(), 1);
+    QCOMPARE(m->d_func()->m_kvp["Key"], QLatin1String("100"));
 }
 
 void MyMoneyKeyValueContainerTest::testDeletePair()
