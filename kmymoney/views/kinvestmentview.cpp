@@ -346,6 +346,13 @@ void KInvestmentView::executeAction(eMenu::Action action, const SelectedObjects&
 void KInvestmentView::showEvent(QShowEvent* event)
 {
     Q_D(KInvestmentView);
+
+    // check if the last selected account was an investment account.
+    // if so, then select it in this view as well. otherwise, we
+    // leave the selection as is
+    const auto accountId = d->m_externalSelections.firstSelection(SelectedObjects::Account);
+
+    // but first we need to make sure we have all initialization done
     if (d->m_needLoad) {
         d->init();
 
@@ -447,10 +454,6 @@ void KInvestmentView::showEvent(QShowEvent* event)
     // don't forget base class implementation
     QWidget::showEvent(event);
 
-    // check if the last selected account was an investment account.
-    // if so, then select it in this view as well. otherwise, we
-    // leave the selection as is
-    const auto accountId = d->m_externalSelections.firstSelection(SelectedObjects::Account);
     if (!accountId.isEmpty()) {
         const auto account = MyMoneyFile::instance()->account(accountId);
         if (account.accountType() == eMyMoney::Account::Type::Investment) {
