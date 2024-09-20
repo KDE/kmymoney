@@ -199,19 +199,19 @@ public:
         ui->m_vatAccount->removeButtons();
 
         if (m_categoryEditor) {
-            // get rid of the tabs that are not used for categories
+            // get rid of the widgets that are not used for categories
             int tab = ui->m_tab->indexOf(ui->m_institutionTab);
             if (tab != -1)
                 ui->m_tab->removeTab(tab);
-            tab = ui->m_tab->indexOf(ui->m_limitsTab);
-            if (tab != -1)
-                ui->m_tab->removeTab(tab);
+
+            ui->m_limitsGroupBox->hide();
+            ui->m_importGroupBox->hide();
 
             ui->accountNoEdit->setEnabled(false);
 
             ui->m_institutionBox->hide();
             ui->m_qcheckboxNoVat->hide();
-            ui->m_budgetOptionsGroupBox->hide();
+            ui->m_budgetGroupBox->hide();
 
             // no web site for categories
             ui->m_websiteLabel->hide();
@@ -253,15 +253,10 @@ public:
 
             loadVatAccounts();
         } else {
-            // get rid of the tabs that are not used for accounts
-            int taxtab = ui->m_tab->indexOf(ui->m_taxTab);
-            if (taxtab != -1) {
-                ui->m_vatCategory->setText(i18n("VAT account"));
-                ui->m_qcheckboxTax->setChecked(m_account.isInTaxReports());
-                loadVatAccounts();
-            } else {
-                ui->m_tab->removeTab(taxtab);
-            }
+            // adjust the widgets that are not used for accounts
+            ui->m_vatCategory->setText(i18n("VAT account"));
+            ui->m_qcheckboxTax->setChecked(m_account.isInTaxReports());
+            loadVatAccounts();
 
             ui->m_costCenterRequiredCheckBox->hide();
 
@@ -282,10 +277,8 @@ public:
 
             default:
                 // no limit available, so we might get rid of the tab
-                int tab = ui->m_tab->indexOf(ui->m_limitsTab);
-                if (tab != -1)
-                    ui->m_tab->removeTab(tab);
-                // don't try to hide the widgets we just wiped
+                ui->m_limitsGroupBox->hide();
+                // no need to hide the widgets separately
                 // in the next step
                 haveMaxCredit = haveMinBalance = true;
                 break;
@@ -350,6 +343,8 @@ public:
 
             ui->accountNoEdit->setText(m_account.number());
             ui->m_budgetInclusion->setCurrentIndex(accountTypeToBudgetOptionIndex(m_account.budgetAccountType()));
+            ui->m_payeeCreation->setCurrentIndex(static_cast<int>(m_account.payeeCreation()));
+
             loadKVP("PreferredAccount", ui->m_qcheckboxPreferred);
             loadKVP("NoVat", ui->m_qcheckboxNoVat);
             loadKVP("iban", ui->ibanEdit);
@@ -901,6 +896,7 @@ void KNewAccountDlg::okClicked()
         d->storeKVP("PreferredAccount", d->ui->m_qcheckboxPreferred);
         d->storeKVP("NoVat", d->ui->m_qcheckboxNoVat);
         d->m_account.setBudgetAccountType(d->budgetOptionIndexToAccountType(d->ui->m_budgetInclusion->currentIndex()));
+        d->m_account.setPayeeCreation(static_cast<eMyMoney::Account::PayeeCreation>(d->ui->m_payeeCreation->currentIndex()));
 
         if (d->ui->m_minBalanceAbsoluteEdit->isVisible()) {
             d->m_account.setValue("minimumBalance", d->ui->m_minBalanceAbsoluteEdit->value().toString());
