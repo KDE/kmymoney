@@ -458,3 +458,23 @@ void MyMoneyAccountTest::testBalanceFactor()
     account.setAccountType(accountType);
     QCOMPARE(account.balanceFactor(), factor);
 }
+
+void MyMoneyAccountTest::testPayeeCreation_data()
+{
+    QTest::addColumn<eMyMoney::Account::PayeeCreation>("creationMode");
+
+    QTest::newRow("AskUser") << eMyMoney::Account::PayeeCreation::AskUser;
+    QTest::newRow("AutomaticCreaation") << eMyMoney::Account::PayeeCreation::AutomaticCreaation;
+    QTest::newRow("NoCreation") << eMyMoney::Account::PayeeCreation::NoCreation;
+    QTest::newRow("ApplicationDefault") << eMyMoney::Account::PayeeCreation::ApplicationDefault;
+}
+
+void MyMoneyAccountTest::testPayeeCreation()
+{
+    QFETCH(eMyMoney::Account::PayeeCreation, creationMode);
+
+    MyMoneyAccount account;
+    QCOMPARE(account.payeeCreation(), eMyMoney::Account::PayeeCreation::ApplicationDefault);
+    account.setPayeeCreation(creationMode);
+    QCOMPARE(account.payeeCreation(), creationMode);
+}

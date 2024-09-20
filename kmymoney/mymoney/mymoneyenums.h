@@ -43,7 +43,19 @@ enum class Type {
     MaxAccountTypes,      /**< Denotes the number of different account types */
 };
 
+enum class PayeeCreation {
+    ApplicationDefault = 0, /**< Application default (ask user once and allow override */
+    NoCreation, /**< Never create a newly imported payee */
+    AskUser, /**< Always ask user what to do */
+    AutomaticCreaation, /**< Automatically create the payee */
+};
+
 inline qHashSeedType qHash(const Type key, qHashSeedType seed)
+{
+    return ::qHash(static_cast<uint>(key), seed);
+}
+
+inline qHashSeedType qHash(const PayeeCreation key, qHashSeedType seed)
 {
     return ::qHash(static_cast<uint>(key), seed);
 }

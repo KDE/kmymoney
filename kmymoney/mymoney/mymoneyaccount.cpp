@@ -363,6 +363,16 @@ void MyMoneyAccount::setIsInTaxReports(bool include)
     setValue(QLatin1String("Tax"), include, false);
 }
 
+eMyMoney::Account::PayeeCreation MyMoneyAccount::payeeCreation() const
+{
+    return value<eMyMoney::Account::PayeeCreation>(QLatin1String("PayeeCreation"), eMyMoney::Account::PayeeCreation::ApplicationDefault);
+}
+
+void MyMoneyAccount::setPayeeCreation(eMyMoney::Account::PayeeCreation creationMode)
+{
+    setValue(QLatin1String("PayeeCreation"), creationMode, eMyMoney::Account::PayeeCreation::ApplicationDefault);
+}
+
 void MyMoneyAccount::setOnlineBankingSettings(const MyMoneyKeyValueContainer& values)
 {
     Q_D(MyMoneyAccount);

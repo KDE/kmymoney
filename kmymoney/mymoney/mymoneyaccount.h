@@ -34,6 +34,7 @@ namespace eMyMoney {
 namespace Account {
 enum class Type;
 enum class Standard;
+enum class PayeeCreation;
 }
 }
 namespace Icons {
@@ -586,6 +587,16 @@ public:
     void setIsInTaxReports(bool include = true);
 
     /**
+     * set the mode payee creation should be handled for this account during import
+     */
+    void setPayeeCreation(eMyMoney::Account::PayeeCreation creationMode);
+
+    /**
+     * return how payee creation should be handled for this account during import
+     */
+    eMyMoney::Account::PayeeCreation payeeCreation() const;
+
+    /**
      * This method returns a name that has a brokerage suffix of
      * the current name. It only works on investment accounts and
      * returns the name for all other cases.
@@ -685,5 +696,6 @@ inline MyMoneyAccount & MyMoneyAccount::operator=(MyMoneyAccount other) // krazy
  */
 Q_DECLARE_METATYPE(MyMoneyAccount)
 Q_DECLARE_METATYPE(eMyMoney::Account::Type)
+Q_DECLARE_METATYPE(eMyMoney::Account::PayeeCreation)
 
 #endif
