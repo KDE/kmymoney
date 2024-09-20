@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-17 01:53+0000\n"
-"PO-Revision-Date: 2024-09-16 12:15+0300\n"
+"PO-Revision-Date: 2024-09-19 19:31+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -25293,8 +25293,7 @@ msgid "Process a specific report"
 msgstr "Belirli bir raporu işle"
 
 #: tools/kmmreport-export.cpp:168
-#, fuzzy, kde-format
-#| msgid "Only one of --csv and --html is suppored"
+#, kde-format
 msgid "Only one of --csv and --html is supported"
 msgstr "--csv veya --html bayraklarından yalnızca biri kullanılabilir"
 
