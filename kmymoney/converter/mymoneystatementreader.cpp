@@ -965,7 +965,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
     const auto importedPayeeName = statementTransactionUnderImport.m_strPayee;
     if (!importedPayeeName.isEmpty()) {
-        qDebug() << QLatin1String("Start matching payee") << importedPayeeName;
+        qDebug() << "Start matching payee" << importedPayeeName;
         QString payeeid;
         try {
             QList<MyMoneyPayee> pList = file->payeeList();
@@ -994,7 +994,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                         QRegularExpression exp(*it_s, ignoreCase ? QRegularExpression::CaseInsensitiveOption : QRegularExpression::NoPatternOption);
                         QRegularExpressionMatch match(exp.match(importedPayeeName));
                         if (match.hasMatch()) {
-                            qDebug() << "Found match with" << importedPayeeName << "on" << (*it_p).name() << "for" << match.capturedLength();
+                            qDebug() << "Located match for" << (*it_p).name() << (*it_p).id() << "with" << (*it_s) << "for" << match.capturedLength()
+                                     << "chars";
                             matchMap[match.capturedLength()] = (*it_p).id();
                         }
                     }
@@ -1010,19 +1011,23 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             // for c) we just do nothing, for b) we take the one we found
             // in case of a) we take the one with the largest matchedLength()
             // which happens to be the last one in the map
+            qDebug() << "Done matching payee" << importedPayeeName << ", Result:";
             if (matchMap.count() > 1) {
-                qDebug("Multiple matches");
                 QMap<int, QString>::const_iterator it_m = matchMap.constEnd();
                 --it_m;
                 payeeid = *it_m;
+                qDebug() << "Multiple matches: using" << file->payeesModel()->itemById(payeeid).name() << payeeid;
             } else if (matchMap.count() == 1) {
-                qDebug("Single matches");
                 payeeid = *(matchMap.constBegin());
+                qDebug() << "Single match:" << file->payeesModel()->itemById(payeeid).name() << payeeid;
+            } else {
+                qDebug() << "No match found";
             }
 
             // if we did not find a matching payee, we throw an exception and try to create it
-            if (payeeid.isEmpty())
+            if (payeeid.isEmpty()) {
                 throw MYMONEYEXCEPTION_CSTRING("payee not matched");
+            }
 
             s1.setPayeeId(payeeid);
 
