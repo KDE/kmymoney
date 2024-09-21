@@ -431,9 +431,9 @@ void KInvestmentView::showEvent(QShowEvent* event)
             },
             Qt::QueuedConnection);
 
-        connect(d->ui->m_accountComboBox, &KMyMoneyAccountCombo::accountSelected, this, [&](const QString& accountId) {
+        connect(d->ui->m_accountComboBox, &KMyMoneyAccountCombo::accountSelected, this, [&](const QString& accId) {
             Q_D(KInvestmentView);
-            d->loadAccount(accountId);
+            d->loadAccount(accId);
         });
 
         connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::rowsInserted, this, [&]() {
