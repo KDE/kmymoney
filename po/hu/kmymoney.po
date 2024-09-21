@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-17 01:53+0000\n"
+"POT-Creation-Date: 2024-09-21 01:52+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -28,60 +28,60 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "ulysses@kubuntu.org,boobacsi@gmail.com,urbalazs@gmail.com"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:130
+#: kmymoney/converter/mymoneystatementreader.cpp:129
 #, kde-format
 msgid "_Fees"
 msgstr "_Díjak"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:136
+#: kmymoney/converter/mymoneystatementreader.cpp:135
 #, kde-format
 msgid "_Dividend"
 msgstr "_Osztalék"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:372
+#: kmymoney/converter/mymoneystatementreader.cpp:371
 #, kde-format
 msgid "Error importing %1: This file is not a valid KMM statement file."
 msgstr ""
 "Hiba a %1 importálásakor: Ez a fájl nem egy érvényes KMM számlakivonat fájl."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:372
+#: kmymoney/converter/mymoneystatementreader.cpp:371
 #, kde-format
 msgid "Invalid Statement"
 msgstr "Érvénytelen számlakivonat"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:495
+#: kmymoney/converter/mymoneystatementreader.cpp:494
 #, kde-format
 msgid "Importing statement for account %1"
 msgstr "Számlakivonat importálása a %1 számlához"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:497
+#: kmymoney/converter/mymoneystatementreader.cpp:496
 #, kde-format
 msgid "Importing statement without transactions"
 msgstr "Számlakivonat importálása tranzakciók nélkül"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:582
+#: kmymoney/converter/mymoneystatementreader.cpp:581
 #, kde-format
 msgid "  Statement balance is not contained in statement."
 msgstr "  A számlakivonat egyenlege nincs benne a számlakivonatban."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:584
+#: kmymoney/converter/mymoneystatementreader.cpp:583
 #, kde-format
 msgid "  Statement balance on %1 is reported to be %2"
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:586
+#: kmymoney/converter/mymoneystatementreader.cpp:585
 #, kde-format
 msgid "  Transactions"
 msgstr "  Tranzakciók"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:587
+#: kmymoney/converter/mymoneystatementreader.cpp:586
 #, kde-format
 msgid "    %1 processed"
 msgid_plural "    %1 processed"
 msgstr[0] "    %1 feldolgozva"
 msgstr[1] "    %1 feldolgozva"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:588
+#: kmymoney/converter/mymoneystatementreader.cpp:587
 #, kde-format
 msgctxt "x transactions have been added"
 msgid "    %1 added"
@@ -89,26 +89,26 @@ msgid_plural "    %1 added"
 msgstr[0] "    %1 hozzáadva"
 msgstr[1] "    %1 hozzáadva"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:589
+#: kmymoney/converter/mymoneystatementreader.cpp:588
 #, kde-format
 msgid "    %1 matched"
 msgid_plural "    %1 matched"
 msgstr[0] "    %1 egyező"
 msgstr[1] "    %1 egyező"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:590
+#: kmymoney/converter/mymoneystatementreader.cpp:589
 #, kde-format
 msgid "    %1 duplicate"
 msgid_plural "    %1 duplicates"
 msgstr[0] "    %1 duplikátum"
 msgstr[1] "    %1 duplikátum"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:591
+#: kmymoney/converter/mymoneystatementreader.cpp:590
 #, kde-format
 msgid "  Payees"
 msgstr "  Kedvezményezettek"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:592
+#: kmymoney/converter/mymoneystatementreader.cpp:591
 #, kde-format
 msgctxt "x transactions have been created"
 msgid "    %1 created"
@@ -116,12 +116,12 @@ msgid_plural "    %1 created"
 msgstr[0] "    %1 létrehozva"
 msgstr[1] "    %1 létrehozva"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:656
+#: kmymoney/converter/mymoneystatementreader.cpp:655
 #, kde-format
 msgid "Error creating security record: %1"
 msgstr "Hiba a kötvényrekord létrehozása közben: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:656
+#: kmymoney/converter/mymoneystatementreader.cpp:655
 #: kmymoney/plugins/kbanking/kbanking.cpp:607
 #: kmymoney/plugins/kbanking/kbanking.cpp:629
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:60
@@ -129,7 +129,7 @@ msgstr "Hiba a kötvényrekord létrehozása közben: %1"
 msgid "Error"
 msgstr "Hiba"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:762
+#: kmymoney/converter/mymoneystatementreader.cpp:761
 #, kde-format
 msgid ""
 "This imported statement contains investment transactions with no security.  "
@@ -138,37 +138,37 @@ msgstr ""
 "Az importált számlakivonat befektetési tranzakciókat tartalmaz, de nincsen "
 "kötvény.  Ezek a tranzakciók elutasításra kerülnek."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:762
+#: kmymoney/converter/mymoneystatementreader.cpp:761
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1441
 #, kde-format
 msgid "Security not found"
 msgstr "Nem található kötvény"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:807
-#: kmymoney/converter/mymoneystatementreader.cpp:810
+#: kmymoney/converter/mymoneystatementreader.cpp:806
+#: kmymoney/converter/mymoneystatementreader.cpp:809
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1425
 #, kde-format
 msgid "Statement Importer"
 msgstr "Számlakivonat importáló"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:827
+#: kmymoney/converter/mymoneystatementreader.cpp:826
 #, kde-format
 msgid ""
 "This imported statement contains investment transactions with no share "
 "amount.  These transactions will be ignored."
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:827
+#: kmymoney/converter/mymoneystatementreader.cpp:826
 #, kde-format
 msgid "No share amount provided"
 msgstr "Nincs részvény mennyiség megadva"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:947
+#: kmymoney/converter/mymoneystatementreader.cpp:946
 #, kde-format
 msgid "(Fees) %1"
 msgstr "(Díjak) %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1029
+#: kmymoney/converter/mymoneystatementreader.cpp:1034
 #, fuzzy, kde-format
 #| msgid "Additional Fees: %1"
 msgctxt "Prepend name of payee (%1) to original memo (%2)"
@@ -177,7 +177,7 @@ msgid ""
 "%2"
 msgstr "További díjak: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1037
+#: kmymoney/converter/mymoneystatementreader.cpp:1042
 #, kde-format
 msgid ""
 "Do you want to add \"%1\" as payee/receiver?\n"
@@ -186,7 +186,7 @@ msgstr ""
 "Hozzá akarja adni \"%1\"-t, mint fizető/fogadó?\n"
 "\n"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1039
+#: kmymoney/converter/mymoneystatementreader.cpp:1044
 #, kde-format
 msgid ""
 "Selecting \"Yes\" will create the payee, \"No\" will skip creation of a "
@@ -198,78 +198,78 @@ msgid ""
 "removed."
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1053
+#: kmymoney/converter/mymoneystatementreader.cpp:1058
 #: kmymoney/kmymoneyutils.cpp:572
 #, kde-format
 msgid "New payee/receiver"
 msgstr "Új kedvezményezett/fogadó"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1084
+#: kmymoney/converter/mymoneystatementreader.cpp:1089
 #, kde-format
 msgid "Default Category for Payee"
 msgstr "Kedvezményezett alapértelmezett kategóriája"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1091
+#: kmymoney/converter/mymoneystatementreader.cpp:1096
 #, kde-format
 msgid "Please select a default category for payee '%1'"
 msgstr "Kérjük válasszon alapértelmezett kategóriát a kedvezményezettnek: „%1”"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1114
+#: kmymoney/converter/mymoneystatementreader.cpp:1119
 #, kde-format
 msgid "Save Category"
 msgstr "Kategória mentése"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1115
+#: kmymoney/converter/mymoneystatementreader.cpp:1120
 #, kde-format
 msgid "No Category"
 msgstr "Nincs kategória"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonAbort)
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: kmymoney/converter/mymoneystatementreader.cpp:1116
+#: kmymoney/converter/mymoneystatementreader.cpp:1121
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:132
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:257
 #, kde-format
 msgid "Abort"
 msgstr "Megszakítás"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1142
+#: kmymoney/converter/mymoneystatementreader.cpp:1147
 #, kde-format
 msgid "Unable to add payee/receiver"
 msgstr "Nem lehet kedvezményezettet/fogadót hozzáadni"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1389
+#: kmymoney/converter/mymoneystatementreader.cpp:1394
 #, kde-format
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1447
+#: kmymoney/converter/mymoneystatementreader.cpp:1452
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr "<b>Letöltött egy számlakivonatot a következő számlához:</b><br/><br/>"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1448
+#: kmymoney/converter/mymoneystatementreader.cpp:1453
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " - Számlanév: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1449
+#: kmymoney/converter/mymoneystatementreader.cpp:1454
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " - Számlatípus: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1450
+#: kmymoney/converter/mymoneystatementreader.cpp:1455
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " - Számlaszám: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1455
+#: kmymoney/converter/mymoneystatementreader.cpp:1460
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "Ebbe a számlába szeretné importálni a tranzakciókat?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1458
+#: kmymoney/converter/mymoneystatementreader.cpp:1463
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -280,7 +280,7 @@ msgstr ""
 "új számlát a <b>Létrehozás</b> gombra kattintva, vagy kiválaszthat egyet "
 "saját kezűleg az alábbi listából."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1462
+#: kmymoney/converter/mymoneystatementreader.cpp:1467
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -291,12 +291,12 @@ msgstr ""
 "válasszon egy számlát az ablakban lévő választódobozt használva, vagy hozzon "
 "létre egy új számlát a <b>Létrehozás</b> gombra kattintva."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1491
+#: kmymoney/converter/mymoneystatementreader.cpp:1496
 #, kde-format
 msgid "Import transactions"
 msgstr "Tranzakciók importálása"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1533
+#: kmymoney/converter/mymoneystatementreader.cpp:1538
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
@@ -305,14 +305,14 @@ msgstr ""
 "Választani kell egy számlát, egy újat létrehozni, vagy a <b>Megszakítás</b> "
 "gombot megnyomni."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1645
+#: kmymoney/converter/mymoneystatementreader.cpp:1650
 #: kmymoney/views/kscheduledview_p.h:200 kmymoney/views/kscheduledview_p.h:315
 #: kmymoney/views/kscheduledview_p.h:319
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Nem lehet megadni a/az '%1' ütemezett tranzakciót"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1665
+#: kmymoney/converter/mymoneystatementreader.cpp:1670
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -321,7 +321,7 @@ msgid ""
 "be matched?"
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1674
+#: kmymoney/converter/mymoneystatementreader.cpp:1679
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -336,7 +336,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1688
+#: kmymoney/converter/mymoneystatementreader.cpp:1693
 #, kde-format
 msgid "Schedule found"
 msgstr "Ütemezés található"
@@ -1818,7 +1818,7 @@ msgstr "Állapot:"
 #. i18n: ectx: property (text), widget (QToolButton, m_debitColClear)
 #. i18n: ectx: property (text), widget (QToolButton, m_creditColClear)
 #: kmymoney/dialogs/kequitypriceupdatedlg.ui:158
-#: kmymoney/dialogs/knewaccountdlg.ui:450
+#: kmymoney/dialogs/knewaccountdlg.ui:409
 #: kmymoney/dialogs/knewinstitutiondlg.ui:88
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:562
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:122
@@ -1951,7 +1951,7 @@ msgstr "Árak"
 #. i18n: ectx: property (text), widget (QLabel, TextLabel10)
 #. i18n: ectx: property (text), widget (QTreeWidget, m_listAccount)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:232
-#: kmymoney/dialogs/knewaccountdlg.ui:533
+#: kmymoney/dialogs/knewaccountdlg.ui:531
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:84
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:54
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:381
@@ -2123,12 +2123,12 @@ msgstr "Egy részvényre jutó ár"
 msgid "Total for all shares"
 msgstr "Összes minden részvényhez"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:259
+#: kmymoney/dialogs/knewaccountdlg.cpp:257
 #, kde-format
 msgid "VAT account"
 msgstr "Áfás számla"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:554 kmymoney/kmymoney.cpp:438
+#: kmymoney/dialogs/knewaccountdlg.cpp:549 kmymoney/kmymoney.cpp:438
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:188
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:370
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:73
@@ -2136,7 +2136,7 @@ msgstr "Áfás számla"
 msgid "Asset"
 msgstr "Vagyontárgy"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:556 kmymoney/kmymoney.cpp:439
+#: kmymoney/dialogs/knewaccountdlg.cpp:551 kmymoney/kmymoney.cpp:439
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:189
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:378
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:75
@@ -2144,7 +2144,7 @@ msgstr "Vagyontárgy"
 msgid "Liability"
 msgstr "Kötelezettség"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:558 kmymoney/kmymoney.cpp:440
+#: kmymoney/dialogs/knewaccountdlg.cpp:553 kmymoney/kmymoney.cpp:440
 #: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1845
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
@@ -2153,7 +2153,7 @@ msgstr "Kötelezettség"
 msgid "Income"
 msgstr "Bevétel"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:560 kmymoney/kmymoney.cpp:441
+#: kmymoney/dialogs/knewaccountdlg.cpp:555 kmymoney/kmymoney.cpp:441
 #: kmymoney/models/ledgerfilterbase.cpp:97
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:79
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:191
@@ -2162,28 +2162,28 @@ msgstr "Bevétel"
 msgid "Expense"
 msgstr "Költség"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:607
+#: kmymoney/dialogs/knewaccountdlg.cpp:602
 #, kde-format
 msgid ""
 "Option has been disabled because there are transactions assigned to this "
 "account"
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:612
+#: kmymoney/dialogs/knewaccountdlg.cpp:607
 #, kde-format
 msgid ""
 "Option has been disabled because there is another account flagged to be an "
 "opening balance account for this currency"
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:632
+#: kmymoney/dialogs/knewaccountdlg.cpp:627
 #, fuzzy, kde-format
 #| msgid "Is a sub account of %1"
 msgctxt "@label:chooser %1 account name, %2 parent account name"
 msgid "<b>%1</b> is a sub account of <b>%2</b>"
 msgstr "A szerkesztett kategória %1 alszámlája lesz"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:696
+#: kmymoney/dialogs/knewaccountdlg.cpp:691
 #: kmymoney/dialogs/knewinstitutiondlg.cpp:190
 #, kde-format
 msgctxt "@info:usagetip"
@@ -2192,9 +2192,9 @@ msgid ""
 "for security reasons."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:706
-#: kmymoney/dialogs/knewaccountdlg.cpp:1000
-#: kmymoney/dialogs/knewaccountdlg.cpp:1015
+#: kmymoney/dialogs/knewaccountdlg.cpp:701
+#: kmymoney/dialogs/knewaccountdlg.cpp:996
+#: kmymoney/dialogs/knewaccountdlg.cpp:1011
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:518
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:45
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:80
@@ -2202,7 +2202,7 @@ msgstr ""
 msgid "(No Institution)"
 msgstr "(Nincs intézmény)"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:827
+#: kmymoney/dialogs/knewaccountdlg.cpp:822
 #, kde-format
 msgid ""
 "You have not specified a name.\n"
@@ -2211,12 +2211,12 @@ msgstr ""
 "Nem határozott meg egy nevet.\n"
 "Kérjük töltse ki a mezőt."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:834
+#: kmymoney/dialogs/knewaccountdlg.cpp:829
 #, kde-format
 msgid "Please select a parent account."
 msgstr "Válasszon szülőszámlát."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:883
+#: kmymoney/dialogs/knewaccountdlg.cpp:878
 #, kde-format
 msgid ""
 "A category named <b>%1</b> already exists. You cannot create a second "
@@ -2225,7 +2225,7 @@ msgstr ""
 "<b>%1</b> kategória már létezik. Nem lehet még egy ilyen  nevű kategóriát "
 "létrehozni."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:913
+#: kmymoney/dialogs/knewaccountdlg.cpp:909
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2235,14 +2235,14 @@ msgid ""
 "accounts views."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:915
+#: kmymoney/dialogs/knewaccountdlg.cpp:911
 #, fuzzy, kde-format
 #| msgid "Payment accounts"
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
 msgstr "Fizetés számlák"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:923
+#: kmymoney/dialogs/knewaccountdlg.cpp:919
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2252,45 +2252,45 @@ msgid ""
 "categories view."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:925
+#: kmymoney/dialogs/knewaccountdlg.cpp:921
 #, fuzzy, kde-format
 #| msgid "Hidden categories"
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "Rejtett kategóriák"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1040
+#: kmymoney/dialogs/knewaccountdlg.cpp:1036
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
 #, kde-format
 msgid "Cannot add institution"
 msgstr "Nem lehet hozzáadni az intézményt"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1077
+#: kmymoney/dialogs/knewaccountdlg.cpp:1073
 #, kde-format
 msgctxt "@info:tooltip Hint to provide name"
 msgid "Please provide a name for the new category or account."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1082
+#: kmymoney/dialogs/knewaccountdlg.cpp:1078
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1089
+#: kmymoney/dialogs/knewaccountdlg.cpp:1085
 #, kde-format
 msgctxt "@info:tooltip Hint to provide VAT percentage in range"
 msgid "Please provide a percentage greater than zero and less than 100."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1093
+#: kmymoney/dialogs/knewaccountdlg.cpp:1089
 #, fuzzy, kde-format
 #| msgid "Please select a default category for payee '%1'"
 msgctxt "@info:tooltip Hint to provide category to assign VAT"
 msgid "Please select a category for the VAT."
 msgstr "Kérjük válasszon alapértelmezett kategóriát a kedvezményezettnek: „%1”"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1158
+#: kmymoney/dialogs/knewaccountdlg.cpp:1154
 #, kde-format
 msgid ""
 "<p>The category <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2301,13 +2301,13 @@ msgstr ""
 "p><p><i>A szülő számla alapértelmezettként a <b>%2</b> lesz, de ez a "
 "következő ablakban megváltoztatható</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1162
-#: kmymoney/dialogs/knewaccountdlg.cpp:1187
+#: kmymoney/dialogs/knewaccountdlg.cpp:1158
+#: kmymoney/dialogs/knewaccountdlg.cpp:1183
 #, kde-format
 msgid "Create category"
 msgstr "Kategória létrehozása"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1183
+#: kmymoney/dialogs/knewaccountdlg.cpp:1179
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>The category <b>%1</b> currently does not exist. Do you want to create "
@@ -2322,14 +2322,14 @@ msgstr ""
 "p><p><i>A szülő számla alapértelmezettként a <b>%2</b> lesz, de ez a "
 "következő ablakban megváltoztatható</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1205
+#: kmymoney/dialogs/knewaccountdlg.cpp:1201
 #, fuzzy, kde-format
 #| msgid "Create a new Category"
 msgctxt "@title:window"
 msgid "Create a new Category"
 msgstr "Új kategória létrehozása"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1210
+#: kmymoney/dialogs/knewaccountdlg.cpp:1206
 #, fuzzy, kde-format
 #| msgid "Create a new asset account"
 msgctxt "@title:window"
@@ -2343,34 +2343,34 @@ msgid "New Account Dialog"
 msgstr "Új számla ablak"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_generalTab)
-#: kmymoney/dialogs/knewaccountdlg.ui:37
+#: kmymoney/dialogs/knewaccountdlg.ui:27
 #, kde-format
 msgctxt "Account general settings"
 msgid "General"
 msgstr "Általános"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
-#: kmymoney/dialogs/knewaccountdlg.ui:57
+#: kmymoney/dialogs/knewaccountdlg.ui:47
 #, kde-format
 msgctxt "account name"
 msgid "Name:"
 msgstr "Név:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox4)
-#: kmymoney/dialogs/knewaccountdlg.ui:72
+#: kmymoney/dialogs/knewaccountdlg.ui:62
 #, kde-format
 msgid "Opening information"
 msgstr "Nyitási információk"
 
 #. i18n: ectx: property (text), widget (QLabel, m_currencyText)
-#: kmymoney/dialogs/knewaccountdlg.ui:96
+#: kmymoney/dialogs/knewaccountdlg.ui:86
 #, kde-format
 msgid "Currency:"
 msgstr "Pénznem:"
 
 #. i18n: ectx: property (text), widget (QLabel, typeLabel)
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
-#: kmymoney/dialogs/knewaccountdlg.ui:119
+#: kmymoney/dialogs/knewaccountdlg.ui:109
 #: kmymoney/views/kenterscheduledlg.ui:95
 #: kmymoney/widgets/kmymoneybriefschedule.ui:176
 #, kde-format
@@ -2379,65 +2379,67 @@ msgstr "Típus:"
 
 #. i18n: ectx: property (text), widget (QLabel, lblDate)
 #. i18n: ectx: property (text), widget (QLabel, m_openingDateLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:135
+#: kmymoney/dialogs/knewaccountdlg.ui:125
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:85
 #, kde-format
 msgid "Date:"
 msgstr "Dátum:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_openingBalanceLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:148
+#: kmymoney/dialogs/knewaccountdlg.ui:138
 #, kde-format
 msgid "Balance:"
 msgstr "Egyenleg:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox2)
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox6)
-#: kmymoney/dialogs/knewaccountdlg.ui:164
+#. i18n: ectx: attribute (title), widget (QWidget, m_optionsTab)
+#: kmymoney/dialogs/knewaccountdlg.ui:154
+#: kmymoney/dialogs/knewaccountdlg.ui:477
 #: kmymoney/views/keditscheduledlg.ui:147
 #, kde-format
 msgid "Options"
 msgstr "Beállítások"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
-#: kmymoney/dialogs/knewaccountdlg.ui:184
+#: kmymoney/dialogs/knewaccountdlg.ui:174
 #, kde-format
 msgid "Notes:"
 msgstr "Megjegyzések:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
-#: kmymoney/dialogs/knewaccountdlg.ui:197
+#: kmymoney/dialogs/knewaccountdlg.ui:187
 #, kde-format
 msgid "Last check number:"
 msgstr "Utolsó ellenőrzés száma:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxNoVat)
-#: kmymoney/dialogs/knewaccountdlg.ui:237
+#: kmymoney/dialogs/knewaccountdlg.ui:227
 #, kde-format
 msgid "No auto-VAT-assignment"
 msgstr "Nincs automatikus ÁFA hozzárendelés"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_costCenterRequiredCheckBox)
-#: kmymoney/dialogs/knewaccountdlg.ui:244
+#: kmymoney/dialogs/knewaccountdlg.ui:234
 #, kde-format
 msgid "Cost Center assignment required"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxPreferred)
-#: kmymoney/dialogs/knewaccountdlg.ui:251
+#: kmymoney/dialogs/knewaccountdlg.ui:241
 #, kde-format
 msgid "Preferred Account"
 msgstr "Elsődleges számla"
 
 #. i18n: ectx: property (text), widget (QLabel, m_priceModeLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:260
+#: kmymoney/dialogs/knewaccountdlg.ui:250
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:67
 #, kde-format
 msgid "Price entry"
 msgstr "Árfolyam bejegyzés"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_qcheckboxOpeningBalance)
-#: kmymoney/dialogs/knewaccountdlg.ui:288
+#: kmymoney/dialogs/knewaccountdlg.ui:278
 #, fuzzy, kde-format
 #| msgid "Use this to clear all splits of this transaction"
 msgid ""
@@ -2446,48 +2448,18 @@ msgid ""
 msgstr "Használja ezt, hogy törölhesse a tranzakció összes rekordját"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxOpeningBalance)
-#: kmymoney/dialogs/knewaccountdlg.ui:291
+#: kmymoney/dialogs/knewaccountdlg.ui:281
 #, fuzzy, kde-format
 #| msgid "Opening Balance text"
 msgid "Opening Balance Account"
 msgstr "Nyitóegyenleg szövege"
 
-#. i18n: ectx: property (title), widget (QGroupBox, m_budgetOptionsGroupBox)
-#. i18n: ectx: Menu (budget_context_menu)
-#: kmymoney/dialogs/knewaccountdlg.ui:303
-#: kmymoney/plugins/views/budget/budgetview.rc:4
-#, fuzzy, kde-format
-#| msgid "Budget options"
-msgid "Budget options"
-msgstr "Költségvetési beállítások"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
-#: kmymoney/dialogs/knewaccountdlg.ui:310
-#, kde-format
-msgctxt "@item:inlistbox Don't include this account in budgets"
-msgid "Don't include in budgets"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
-#: kmymoney/dialogs/knewaccountdlg.ui:315
-#, kde-format
-msgctxt "@item:inlistbox Include this account in budgets as expense"
-msgid "Include in budgets as expense"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
-#: kmymoney/dialogs/knewaccountdlg.ui:320
-#, kde-format
-msgctxt "@item:inlistbox Include this account in budgets as income"
-msgid "Include in budgets as income"
-msgstr ""
-
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1_3)
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #. i18n: ectx: attribute (title), widget (QWidget, m_institutionTab)
 #. i18n: ectx: property (title), widget (QGroupBox, m_institutionBox)
-#: kmymoney/dialogs/knewaccountdlg.ui:351
-#: kmymoney/dialogs/knewaccountdlg.ui:357
+#: kmymoney/dialogs/knewaccountdlg.ui:310
+#: kmymoney/dialogs/knewaccountdlg.ui:316
 #: kmymoney/plugins/views/reports/core/listtable.cpp:697
 #: kmymoney/wizards/newaccountwizard/kinstitutionpage.ui:44
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:72
@@ -2497,7 +2469,7 @@ msgid "Institution"
 msgstr "Intézet"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonNew)
-#: kmymoney/dialogs/knewaccountdlg.ui:389
+#: kmymoney/dialogs/knewaccountdlg.ui:348
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:45
 #, kde-format
 msgctxt "create new institution"
@@ -2505,14 +2477,14 @@ msgid "New..."
 msgstr "Új…"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2_2)
-#: kmymoney/dialogs/knewaccountdlg.ui:403
+#: kmymoney/dialogs/knewaccountdlg.ui:362
 #, kde-format
 msgid "Number:"
 msgstr "Szám:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, m_websiteLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:420
+#: kmymoney/dialogs/knewaccountdlg.ui:379
 #: kmymoney/dialogs/knewinstitutiondlg.ui:78
 #, kde-format
 msgid "Website"
@@ -2521,7 +2493,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_4)
 #. i18n: ectx: property (placeholderText), widget (KBicEdit, bicEdit)
 #. i18n: ectx: property (text), widget (QLabel, label_bic)
-#: kmymoney/dialogs/knewaccountdlg.ui:427
+#: kmymoney/dialogs/knewaccountdlg.ui:386
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:46
 #: kmymoney/widgets/payeeidentifier/ibanbic/ibanbicitemedit.ui:27
 #, kde-format
@@ -2533,7 +2505,7 @@ msgstr "Bank SWIFT(BIC) kódja"
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #. i18n: ectx: property (placeholderText), widget (KIbanLineEdit, ibanEdit)
 #. i18n: ectx: property (text), widget (QLabel, label_iban)
-#: kmymoney/dialogs/knewaccountdlg.ui:437
+#: kmymoney/dialogs/knewaccountdlg.ui:396
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:33
 #: kmymoney/widgets/payeeidentifier/ibanbic/ibanbicitemedit.ui:17
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:94
@@ -2543,112 +2515,192 @@ msgid "IBAN"
 msgstr "IBAN"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_hierarchyTab)
-#: kmymoney/dialogs/knewaccountdlg.ui:495
+#: kmymoney/dialogs/knewaccountdlg.ui:457
 #, kde-format
 msgid "Hierarchy"
 msgstr "Struktúra"
 
 #. i18n: ectx: property (text), widget (QLabel, m_subAccountLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:501
+#: kmymoney/dialogs/knewaccountdlg.ui:463
 #, kde-format
 msgid "Subaccount"
 msgstr "Alszámla"
 
-#. i18n: ectx: attribute (title), widget (QWidget, m_limitsTab)
-#: kmymoney/dialogs/knewaccountdlg.ui:515
+#. i18n: ectx: property (title), widget (QGroupBox, m_limitsGroupBox)
+#: kmymoney/dialogs/knewaccountdlg.ui:510
 #, kde-format
 msgid "Limits"
 msgstr "Limitek"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
-#: kmymoney/dialogs/knewaccountdlg.ui:521
-#, kde-format
+#: kmymoney/dialogs/knewaccountdlg.ui:519
+#, fuzzy, kde-format
+#| msgid ""
+#| "This page allows to setup certain limits. KMyMoney will warn you when the "
+#| "account balance reaches a limit."
 msgid ""
-"This page allows to setup certain limits. KMyMoney will warn you when the "
+"This section allows to setup certain limits. KMyMoney will warn you when the "
 "account balance reaches a limit."
 msgstr ""
 "Ezen az oldalon beállíthat bizonyos korlátokat. A KMyMoney figyelmeztetni "
 "fogja, amikor a számla egyenlege elér egy limitet."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
-#: kmymoney/dialogs/knewaccountdlg.ui:550
+#: kmymoney/dialogs/knewaccountdlg.ui:548
 #, kde-format
 msgid "Absolute limit"
 msgstr "Teljes limit"
 
 #. i18n: ectx: property (text), widget (QLabel, m_maxCreditLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:560
+#: kmymoney/dialogs/knewaccountdlg.ui:558
 #, kde-format
 msgid "Maximum credit limit"
 msgstr "Maximum hitelkeret"
 
 #. i18n: ectx: property (text), widget (QLabel, m_minBalanceLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:591
+#: kmymoney/dialogs/knewaccountdlg.ui:589
 #, kde-format
 msgid "Minimum balance"
 msgstr "Minimum egyenleg"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
-#: kmymoney/dialogs/knewaccountdlg.ui:611
+#: kmymoney/dialogs/knewaccountdlg.ui:609
 #, kde-format
 msgid "Early warning"
 msgstr "Korai figyelmeztetés"
 
-#. i18n: ectx: attribute (title), widget (QWidget, m_taxTab)
-#: kmymoney/dialogs/knewaccountdlg.ui:640
-#: kmymoney/plugins/views/reports/core/listtable.cpp:713
-#, kde-format
-msgid "Tax"
-msgstr "Adó"
+#. i18n: ectx: property (title), widget (QGroupBox, m_taxGroupBox)
+#: kmymoney/dialogs/knewaccountdlg.ui:624
+#, fuzzy, kde-format
+#| msgid "Tag options"
+msgid "Tax options"
+msgstr "Címke beállításai"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox3)
-#: kmymoney/dialogs/knewaccountdlg.ui:646
+#: kmymoney/dialogs/knewaccountdlg.ui:630
 #, kde-format
 msgid "VAT details"
 msgstr "ÁFA részletek"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_vatCategory)
-#: kmymoney/dialogs/knewaccountdlg.ui:663
+#: kmymoney/dialogs/knewaccountdlg.ui:662
 #, kde-format
 msgid "VAT category"
 msgstr "ÁFA kategória"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#: kmymoney/dialogs/knewaccountdlg.ui:683
+#: kmymoney/dialogs/knewaccountdlg.ui:682
 #, kde-format
 msgid "VAT percentage"
 msgstr "ÁFA százaléka"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_vatAssignment)
-#: kmymoney/dialogs/knewaccountdlg.ui:749
+#: kmymoney/dialogs/knewaccountdlg.ui:760
 #, kde-format
 msgid "Enable auto VAT assignment"
 msgstr "Automatikus ÁFA hozzárendelés engedélyezése"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_amountGroupBox)
-#: kmymoney/dialogs/knewaccountdlg.ui:779
+#: kmymoney/dialogs/knewaccountdlg.ui:790
 #, kde-format
 msgid "Amount entered"
 msgstr "Mennyiség megadása"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_grossAmount)
-#: kmymoney/dialogs/knewaccountdlg.ui:794
+#: kmymoney/dialogs/knewaccountdlg.ui:805
 #, kde-format
 msgid "Gross amount"
 msgstr "Bruttó mennyiség"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_netAmount)
-#: kmymoney/dialogs/knewaccountdlg.ui:807
+#: kmymoney/dialogs/knewaccountdlg.ui:818
 #, fuzzy, kde-format
 #| msgid "Net amount"
 msgid "Net a&mount"
 msgstr "Nettó mennyiség"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxTax)
-#: kmymoney/dialogs/knewaccountdlg.ui:847
+#: kmymoney/dialogs/knewaccountdlg.ui:858
 #, kde-format
 msgid "Include on Tax Reports"
 msgstr "Adóügyi jelentésekkel"
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_importGroupBox)
+#. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox1)
+#. i18n: ectx: property (title), widget (QGroupBox, m_optionGroupBox)
+#: kmymoney/dialogs/knewaccountdlg.ui:868
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:391
+#: kmymoney/plugins/ofx/import/importoption.ui:29
+#: kmymoney/plugins/qif/import/kimportdlgdecl.ui:76
+#, kde-format
+msgid "Import options"
+msgstr "Importálási beállítások"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: kmymoney/dialogs/knewaccountdlg.ui:876
+#, fuzzy, kde-format
+#| msgid "Payee creation"
+msgid "Automatic Payee creation"
+msgstr "Kedvezményezett létrehozása"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
+#: kmymoney/dialogs/knewaccountdlg.ui:884
+#, fuzzy, kde-format
+#| msgid "Application Account"
+msgid "Application Default"
+msgstr "Alkalmazás számla"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
+#: kmymoney/dialogs/knewaccountdlg.ui:889
+#, fuzzy, kde-format
+#| msgid "Never reconciled"
+msgid "Never create"
+msgstr "Soha nem egyeztetett"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
+#. i18n: ectx: property (text), item, widget (KComboBox, m_preferredStatementDate)
+#: kmymoney/dialogs/knewaccountdlg.ui:894
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:140
+#, kde-format
+msgid "Ask user"
+msgstr "Felhasználó megkérdezése"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
+#: kmymoney/dialogs/knewaccountdlg.ui:899
+#, fuzzy, kde-format
+#| msgid "Create category"
+msgid "Create automatically"
+msgstr "Kategória létrehozása"
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_budgetGroupBox)
+#. i18n: ectx: Menu (budget_context_menu)
+#: kmymoney/dialogs/knewaccountdlg.ui:925
+#: kmymoney/plugins/views/budget/budgetview.rc:4
+#, fuzzy, kde-format
+#| msgid "Budget options"
+msgid "Budget options"
+msgstr "Költségvetési beállítások"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
+#: kmymoney/dialogs/knewaccountdlg.ui:932
+#, kde-format
+msgctxt "@item:inlistbox Don't include this account in budgets"
+msgid "Don't include in budgets"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
+#: kmymoney/dialogs/knewaccountdlg.ui:937
+#, kde-format
+msgctxt "@item:inlistbox Include this account in budgets as expense"
+msgid "Include in budgets as expense"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
+#: kmymoney/dialogs/knewaccountdlg.ui:942
+#, kde-format
+msgctxt "@item:inlistbox Include this account in budgets as income"
+msgid "Include in budgets as income"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KNewEquityEntryDlg)
 #: kmymoney/dialogs/knewequityentrydlg.ui:14
@@ -6435,124 +6487,124 @@ msgstr "Fizetés"
 msgid "The plugin to show this information could not be found."
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:425
+#: kmymoney/mymoney/mymoneyaccount.cpp:435
 #, kde-format
 msgctxt "Brokerage (suffix for account names)"
 msgid "Brokerage"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:522
+#: kmymoney/mymoney/mymoneyaccount.cpp:532
 #, fuzzy, kde-format
 #| msgid "Checking"
 msgctxt "Account type"
 msgid "Checking"
 msgstr "Folyószámla"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:524
+#: kmymoney/mymoney/mymoneyaccount.cpp:534
 #, fuzzy, kde-format
 #| msgid "Savings"
 msgctxt "Account type"
 msgid "Savings"
 msgstr "Megtakarítások"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:526
+#: kmymoney/mymoney/mymoneyaccount.cpp:536
 #, fuzzy, kde-format
 #| msgid "Credit Card"
 msgctxt "Account type"
 msgid "Credit Card"
 msgstr "Hitelkártya"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:528
+#: kmymoney/mymoney/mymoneyaccount.cpp:538
 #, fuzzy, kde-format
 #| msgid "Cash"
 msgctxt "Account type"
 msgid "Cash"
 msgstr "Készpénz"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:530
+#: kmymoney/mymoney/mymoneyaccount.cpp:540
 #, fuzzy, kde-format
 #| msgid "Loan"
 msgctxt "Account type"
 msgid "Loan"
 msgstr "Hitel"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:532
+#: kmymoney/mymoney/mymoneyaccount.cpp:542
 #, kde-format
 msgctxt "Account type"
 msgid "Certificate of Deposit"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:534
+#: kmymoney/mymoney/mymoneyaccount.cpp:544
 #, fuzzy, kde-format
 #| msgid "Investment"
 msgctxt "Account type"
 msgid "Investment"
 msgstr "Befektetés"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:536
+#: kmymoney/mymoney/mymoneyaccount.cpp:546
 #, fuzzy, kde-format
 #| msgid "Market"
 msgctxt "Account type"
 msgid "Money Market"
 msgstr "Piac"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:538
+#: kmymoney/mymoney/mymoneyaccount.cpp:548
 #, fuzzy, kde-format
 #| msgid "Asset"
 msgctxt "Account type"
 msgid "Asset"
 msgstr "Vagyontárgy"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:540
+#: kmymoney/mymoney/mymoneyaccount.cpp:550
 #, fuzzy, kde-format
 #| msgid "Liability"
 msgctxt "Account type"
 msgid "Liability"
 msgstr "Kötelezettség"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:542
+#: kmymoney/mymoney/mymoneyaccount.cpp:552
 #, fuzzy, kde-format
 #| msgid "Currency"
 msgctxt "Account type"
 msgid "Currency"
 msgstr "Pénznem"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:544
+#: kmymoney/mymoney/mymoneyaccount.cpp:554
 #, fuzzy, kde-format
 #| msgid "Income"
 msgctxt "Account type"
 msgid "Income"
 msgstr "Bevétel"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:546
+#: kmymoney/mymoney/mymoneyaccount.cpp:556
 #, fuzzy, kde-format
 #| msgid "Expense"
 msgctxt "Account type"
 msgid "Expense"
 msgstr "Költség"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:548
+#: kmymoney/mymoney/mymoneyaccount.cpp:558
 #, fuzzy, kde-format
 #| msgid "Investment Loan"
 msgctxt "Account type"
 msgid "Investment Loan"
 msgstr "Befektetési hitel"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:550
+#: kmymoney/mymoney/mymoneyaccount.cpp:560
 #, fuzzy, kde-format
 #| msgid "Stock"
 msgctxt "Account type"
 msgid "Stock"
 msgstr "Részvény"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:552
+#: kmymoney/mymoney/mymoneyaccount.cpp:562
 #, fuzzy, kde-format
 #| msgid "Equity"
 msgctxt "Account type"
 msgid "Equity"
 msgstr "Saját tőke"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:554
+#: kmymoney/mymoney/mymoneyaccount.cpp:564
 #, fuzzy, kde-format
 #| msgid "Unknown"
 msgctxt "Account type"
@@ -12280,12 +12332,6 @@ msgid "Download transactions from institution"
 msgstr "Tranzakciók letöltése az intézménytől"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_preferredStatementDate)
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:140
-#, kde-format
-msgid "Ask user"
-msgstr "Felhasználó megkérdezése"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, m_preferredStatementDate)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:145
 #, kde-format
 msgid "No date"
@@ -13219,15 +13265,6 @@ msgstr "nap"
 #, kde-format
 msgid "Pi&ck date"
 msgstr ""
-
-#. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox1)
-#. i18n: ectx: property (title), widget (QGroupBox, m_optionGroupBox)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:391
-#: kmymoney/plugins/ofx/import/importoption.ui:29
-#: kmymoney/plugins/qif/import/kimportdlgdecl.ui:76
-#, kde-format
-msgid "Import options"
-msgstr "Importálási beállítások"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:416
@@ -16123,6 +16160,11 @@ msgstr "Hitel korai értesítő"
 #, kde-format
 msgid "Credit Max Limit"
 msgstr "Hitel maximum limit"
+
+#: kmymoney/plugins/views/reports/core/listtable.cpp:713
+#, kde-format
+msgid "Tax"
+msgstr "Adó"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:715
 #, kde-format
@@ -20151,17 +20193,17 @@ msgstr "Intézet törlése…t"
 msgid "Unable to delete institution: %1"
 msgstr "Nem lehet öröltni az intézményt: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:546
+#: kmymoney/views/kinvestmentview.cpp:549
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>Valóban törölni akarja a befektetést: <b>%1</b>?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:547
+#: kmymoney/views/kinvestmentview.cpp:550
 #, kde-format
 msgid "Delete investment"
 msgstr "Befektetés törlése"
 
-#: kmymoney/views/kinvestmentview.cpp:558
+#: kmymoney/views/kinvestmentview.cpp:561
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "Nem lehet törölni a befektetést: %1"
