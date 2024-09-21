@@ -177,6 +177,8 @@ bool LedgerFilter::filterAcceptsRow(int source_row, const QModelIndex& source_pa
                 rc = idx.data(eMyMoney::Model::SplitNumberRole).toString().contains(d->filterString, Qt::CaseInsensitive);
             if (!rc)
                 rc = idx.data(eMyMoney::Model::SplitPayeeRole).toString().contains(d->filterString, Qt::CaseInsensitive);
+            if (!rc)
+                rc = idx.data(eMyMoney::Model::SplitActivityRole).toString().contains(d->filterString, Qt::CaseInsensitive);
             if (!rc) {
                 const auto tagIdList = idx.data(eMyMoney::Model::SplitTagIdRole).toStringList();
                 for (const auto& tagId : tagIdList) {
