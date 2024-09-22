@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-21 01:52+0000\n"
-"PO-Revision-Date: 2024-07-16 21:47+0200\n"
+"POT-Creation-Date: 2024-09-22 01:50+0000\n"
+"PO-Revision-Date: 2024-09-21 22:27+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
@@ -171,7 +171,7 @@ msgstr "Neniu akcia kvanto provizita"
 msgid "(Fees) %1"
 msgstr "(Kotizoj) %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1034
+#: kmymoney/converter/mymoneystatementreader.cpp:1039
 #, kde-format
 msgctxt "Prepend name of payee (%1) to original memo (%2)"
 msgid ""
@@ -181,7 +181,7 @@ msgstr ""
 "Origina pagato: %1\n"
 "%2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1042
+#: kmymoney/converter/mymoneystatementreader.cpp:1047
 #, kde-format
 msgid ""
 "Do you want to add \"%1\" as payee/receiver?\n"
@@ -190,7 +190,7 @@ msgstr ""
 "Ĉu vi volas aldoni \"%1\" kiel pagato/ricevanto?\n"
 "\n"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1044
+#: kmymoney/converter/mymoneystatementreader.cpp:1049
 #, kde-format
 msgid ""
 "Selecting \"Yes\" will create the payee, \"No\" will skip creation of a "
@@ -209,79 +209,79 @@ msgstr ""
 "\", la informoj pri pagito por ĉiuj sekvaj transakcioj referencantaj \"%1\" "
 "estos forigita."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1058
+#: kmymoney/converter/mymoneystatementreader.cpp:1063
 #: kmymoney/kmymoneyutils.cpp:572
 #, kde-format
 msgid "New payee/receiver"
 msgstr "Nova pagato/ricevanto"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1089
+#: kmymoney/converter/mymoneystatementreader.cpp:1094
 #, kde-format
 msgid "Default Category for Payee"
 msgstr "Defaŭlta Kategorio por Pagato"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1096
+#: kmymoney/converter/mymoneystatementreader.cpp:1101
 #, kde-format
 msgid "Please select a default category for payee '%1'"
 msgstr "Bonvolu elekti defaŭltan kategorion por la pagato '%1'"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1119
+#: kmymoney/converter/mymoneystatementreader.cpp:1124
 #, kde-format
 msgid "Save Category"
 msgstr "Konservi Kategorion"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1120
+#: kmymoney/converter/mymoneystatementreader.cpp:1125
 #, kde-format
 msgid "No Category"
 msgstr "Neniu Kategorio"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonAbort)
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: kmymoney/converter/mymoneystatementreader.cpp:1121
+#: kmymoney/converter/mymoneystatementreader.cpp:1126
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:132
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:257
 #, kde-format
 msgid "Abort"
 msgstr "Ĉesigi"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1147
+#: kmymoney/converter/mymoneystatementreader.cpp:1152
 #, kde-format
 msgid "Unable to add payee/receiver"
 msgstr "Ne eblas aldoni pagaton/ricevanton"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1394
+#: kmymoney/converter/mymoneystatementreader.cpp:1399
 #, kde-format
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr ""
 "Problemo aldonante aŭ kongruante importitan transakcion kun id '%1': %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1452
+#: kmymoney/converter/mymoneystatementreader.cpp:1457
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr "<b>Vi elŝutis deklaron por la sekva konto:</b><br/><br/>"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1453
+#: kmymoney/converter/mymoneystatementreader.cpp:1458
 #, kde-format
 msgid " - Account Name: %1"
 msgstr "- Nomo de konto: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1454
+#: kmymoney/converter/mymoneystatementreader.cpp:1459
 #, kde-format
 msgid " - Account Type: %1"
 msgstr "- Konto Tipo: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1455
+#: kmymoney/converter/mymoneystatementreader.cpp:1460
 #, kde-format
 msgid " - Account Number: %1"
 msgstr "- Konta Nombro: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1460
+#: kmymoney/converter/mymoneystatementreader.cpp:1465
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "Ĉu vi volas importi transakciojn al ĉi tiu konto?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1463
+#: kmymoney/converter/mymoneystatementreader.cpp:1468
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -292,7 +292,7 @@ msgstr ""
 "konton premante la butonon <b>Krei</b> aŭ elektu alian mane el la "
 "elektokesto sube."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1467
+#: kmymoney/converter/mymoneystatementreader.cpp:1472
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -303,26 +303,26 @@ msgstr ""
 "elekti konton uzante la elektkeston en la dialogo aŭ krei novan konton "
 "premante la butonon <b>Krei</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1496
+#: kmymoney/converter/mymoneystatementreader.cpp:1501
 #, kde-format
 msgid "Import transactions"
 msgstr "Importi transakciojn"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1538
+#: kmymoney/converter/mymoneystatementreader.cpp:1543
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
 "button."
 msgstr "Vi devas elekti konton, krei novan aŭ premi la butonon <b>Ĉeligi</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1650
+#: kmymoney/converter/mymoneystatementreader.cpp:1655
 #: kmymoney/views/kscheduledview_p.h:200 kmymoney/views/kscheduledview_p.h:315
 #: kmymoney/views/kscheduledview_p.h:319
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Ne eblas enigi planitan transakcion '%1'"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1670
+#: kmymoney/converter/mymoneystatementreader.cpp:1675
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -334,7 +334,7 @@ msgstr ""
 "<br/>Horarnomo: <b>%1</b><br/>Transakcio: <i>%2 %3</i><br/>Ĉu vi volas, ke "
 "KMyMoney enigu ĉi tiun horaron nun, por ke la transakcio estu kongrua?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1679
+#: kmymoney/converter/mymoneystatementreader.cpp:1684
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -357,7 +357,7 @@ msgstr[1] ""
 "datoj estas %1 tagojn dise.<br/>Ĉu vi volas, ke KMyMoney enigu ĉi tiun "
 "horaron nun por ke la transakcio estu kongrua?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1693
+#: kmymoney/converter/mymoneystatementreader.cpp:1698
 #, kde-format
 msgid "Schedule found"
 msgstr "Horaro trovita"
@@ -1691,10 +1691,9 @@ msgid "Configure"
 msgstr "Agordi"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:304
-#, fuzzy, kde-format
-#| msgid "%1 units in %2"
+#, kde-format
 msgid "%1 units for one %2"
-msgstr "%1 unuoj en %2"
+msgstr "%1 unuoj por unu %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:341
 #, kde-format
@@ -1746,13 +1745,11 @@ msgid "Cannot update security <b>%1</b>: %2"
 msgstr "Ne povas ĝisdatigi sekurecon <b>%1</b>: %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:584
-#, fuzzy, kde-format
-#| msgctxt "@info Online price update %1 online id, %2 internal id"
-#| msgid "Price for %1 updated (id %2)"
+#, kde-format
 msgctxt ""
 "@info Online price update %1 online id, %2 internal id, %3 price, %4 date"
 msgid "Price for %1 updated to %3 for %4 (id %2)"
-msgstr "Prezo por %1 ĝisdatigita (id %2)"
+msgstr "Prezo por %1 ĝisdatigita al %3 por %4 (id %2)"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:590
 #, kde-format
@@ -2545,16 +2542,13 @@ msgstr "Limigoj"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/dialogs/knewaccountdlg.ui:519
-#, fuzzy, kde-format
-#| msgid ""
-#| "This page allows to setup certain limits. KMyMoney will warn you when the "
-#| "account balance reaches a limit."
+#, kde-format
 msgid ""
 "This section allows to setup certain limits. KMyMoney will warn you when the "
 "account balance reaches a limit."
 msgstr ""
-"Ĉi tiu paĝo permesas agordi iujn limojn. KMyMoney avertos vin kiam la konta "
-"saldo atingos limon."
+"Ĉi tiu sekcio permesas agordi iujn limojn. KMyMoney avertos vin kiam la "
+"konta saldo atingos limon."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/dialogs/knewaccountdlg.ui:548
@@ -2582,10 +2576,9 @@ msgstr "Frua averto"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_taxGroupBox)
 #: kmymoney/dialogs/knewaccountdlg.ui:624
-#, fuzzy, kde-format
-#| msgid "Tag options"
+#, kde-format
 msgid "Tax options"
-msgstr "Etikedoj"
+msgstr "Elektebloj pri impostoj"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox3)
 #: kmymoney/dialogs/knewaccountdlg.ui:630
@@ -2648,25 +2641,21 @@ msgstr "Import-elektebloj"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/knewaccountdlg.ui:876
-#, fuzzy, kde-format
-#| msgid "Payee creation"
+#, kde-format
 msgid "Automatic Payee creation"
-msgstr "Kreado de Pagito"
+msgstr "Aŭtomata kreado de Pagito"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:884
-#, fuzzy, kde-format
-#| msgid "Application Account"
+#, kde-format
 msgid "Application Default"
-msgstr "Aplika Konto"
+msgstr "Aplika Defaŭlto"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:889
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Reconciliation date"
-#| msgid "Never reconciled"
+#, kde-format
 msgid "Never create"
-msgstr "Neniam repaciĝis"
+msgstr "Neniam krei"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_preferredStatementDate)
@@ -2678,10 +2667,9 @@ msgstr "Demandi uzanton"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:899
-#, fuzzy, kde-format
-#| msgid "Create category"
+#, kde-format
 msgid "Create automatically"
-msgstr "Krei kategorion"
+msgstr "Krei aŭtomate"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_budgetGroupBox)
 #. i18n: ectx: Menu (budget_context_menu)
@@ -3127,16 +3115,15 @@ msgstr "Kongrua transakcio"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:177
-#, fuzzy, kde-format
-#| msgid "Backend"
+#, kde-format
 msgid "Background"
-msgstr "Backend"
+msgstr "Fono"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:184
 #, kde-format
 msgid "Foreground"
-msgstr ""
+msgstr "Malfono"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsIcons)
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsFonts)
@@ -4675,16 +4662,14 @@ msgid "Financial framework"
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:86
-#, fuzzy, kde-format
-#| msgid "Online settings"
+#, kde-format
 msgid "Online banking"
-msgstr "Interretaj agordoj"
+msgstr "Interreta bankado"
 
 #: kmymoney/kcreditswindow.cpp:100
-#, fuzzy, kde-format
-#| msgid "Online Banking Operations"
+#, kde-format
 msgid "Online banking framework"
-msgstr "Interretaj Bankaj Operacioj"
+msgstr "Interreta bankadoframo"
 
 #: kmymoney/kcreditswindow.cpp:106
 #, kde-format
@@ -4692,10 +4677,9 @@ msgid "Library for creating diagrams"
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:111
-#, fuzzy, kde-format
-#| msgid "iCalendar file"
+#, kde-format
 msgid "iCalendar integration"
-msgstr "iCalendar dosiero"
+msgstr "iCalendar-integriĝo"
 
 #: kmymoney/kcreditswindow.cpp:118
 #, kde-format
@@ -4703,10 +4687,9 @@ msgid "OFX banking protocol abstraction library"
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:125
-#, fuzzy, kde-format
-#| msgid "Database malfunction"
+#, kde-format
 msgid "SQLite database encryption"
-msgstr "Misfunkcio de datumbazo"
+msgstr "SQLite-datumbaza ĉifrado"
 
 #: kmymoney/kcreditswindow.cpp:130
 #, kde-format
@@ -18427,10 +18410,9 @@ msgstr "Fona koloro por importitaj transakcioj"
 
 #. i18n: ectx: label, entry (transactionImportedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:190
-#, fuzzy, kde-format
-#| msgid "Background color for imported transactions"
+#, kde-format
 msgid "Text color for imported transactions"
-msgstr "Fona koloro por importitaj transakcioj"
+msgstr "Tekstkoloro por importitaj transakcioj"
 
 #. i18n: ectx: label, entry (transactionMatchedColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:194
@@ -18440,10 +18422,9 @@ msgstr "Fona koloro por kongruaj transakcioj"
 
 #. i18n: ectx: label, entry (transactionMatchedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:198
-#, fuzzy, kde-format
-#| msgid "Background color for matched transactions"
+#, kde-format
 msgid "Text color for matched transactions"
-msgstr "Fona koloro por kongruaj transakcioj"
+msgstr "Tekstkoloro por kongruaj transakcioj"
 
 #. i18n: ectx: label, entry (transactionErroneousColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:202
@@ -18465,10 +18446,9 @@ msgstr "Fonkoloro por grupmarko"
 
 #. i18n: ectx: label, entry (groupMarkerText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:214
-#, fuzzy, kde-format
-#| msgid "Background color for group marker"
+#, kde-format
 msgid "Text color for group marker"
-msgstr "Fonkoloro por grupmarko"
+msgstr "Tekstkoloro por grupmarko"
 
 #. i18n: ectx: label, entry (fieldRequiredColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:218
@@ -20857,28 +20837,22 @@ msgid "Costcenter"
 msgstr "Kostcentro"
 
 #: kmymoney/views/newtransactioneditor.cpp:233
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the split ratio for this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the amount of the transaction."
-msgstr "Enigu la dividan proporcion por ĉi tiu transakcio"
+msgstr "Enigu la kvanton por ĉi tiu transakcio"
 
 #: kmymoney/views/newtransactioneditor.cpp:234
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the split ratio for this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the category or counter account of the transaction."
-msgstr "Enigu la dividan proporcion por ĉi tiu transakcio"
+msgstr "Enigu la kategorion aŭ kontraŭkonton de la transakcio."
 
 #: kmymoney/views/newtransactioneditor.cpp:237
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip icon description"
-#| msgid "Transaction is missing a category assignment."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
-msgstr "Al transakcio mankas kategori-atribuo."
+msgstr "Al la transakcio mankas kategori-atribuo."
 
 #: kmymoney/views/newtransactioneditor.cpp:239
 #, kde-format
@@ -20965,11 +20939,10 @@ msgid "Confirm end of reconciliation"
 msgstr "Konfirmi finon de repaciĝo"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:294
-#, fuzzy, kde-format
-#| msgid "Retrieving transactions..."
+#, kde-format
 msgctxt "@label Reconciliation progress dialog"
 msgid "Reconciling transactions..."
-msgstr "Prenante transakciojn..."
+msgstr "Repacigante transakciojn..."
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:442
 #, kde-format
@@ -25309,10 +25282,9 @@ msgstr ""
 "dosieron.</p>"
 
 #: tools/kmmreport-export.cpp:128
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export KMyMoney reports"
-msgstr "Eksporta raporto"
+msgstr "Eksporti KMyMoney-raportojn"
 
 #: tools/kmmreport-export.cpp:132
 #, kde-format
@@ -25345,21 +25317,19 @@ msgid "Use query table for exporting (default)"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:150
-#, fuzzy, kde-format
-#| msgid "Old Customized Reports"
+#, kde-format
 msgid "List all custom reports"
-msgstr "Malnovaj Agordaj Raportoj"
+msgstr "Listigi ĉiujn proprajn raportojn"
 
 #: tools/kmmreport-export.cpp:153
-#, fuzzy, kde-format
-#| msgid "Unable to generate report"
+#, kde-format
 msgid "Filename for generated output"
-msgstr "Ne eblas generi raporton"
+msgstr "Dosiernomo por generita eligo"
 
 #: tools/kmmreport-export.cpp:156
 #, kde-format
 msgid "Process a specific report"
-msgstr ""
+msgstr "Pritrakti specifan raporton"
 
 #: tools/kmmreport-export.cpp:168
 #, kde-format
@@ -25369,11 +25339,4 @@ msgstr ""
 #: tools/kmmreport-export.cpp:203
 #, kde-format
 msgid "saving report '%1' into '%2'"
-msgstr ""
-
-#~ msgid ""
-#~ "KMyMoney has detected some overdue scheduled transactions for this "
-#~ "account. Do you want to enter those scheduled transactions now?"
-#~ msgstr ""
-#~ "KMyMoney detektis kelkajn prokrastitajn planitajn transakciojn por ĉi tiu "
-#~ "konto. Ĉu vi volas nun enigi tiujn planitajn transakciojn?"
+msgstr "konservante raporton '%1' en '%2'"

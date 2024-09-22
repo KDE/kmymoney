@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-21 01:52+0000\n"
-"PO-Revision-Date: 2024-09-17 11:39+0200\n"
+"POT-Creation-Date: 2024-09-22 01:50+0000\n"
+"PO-Revision-Date: 2024-09-21 12:11+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -175,7 +175,7 @@ msgstr "No s'ha indicat cap quantitat d'accions"
 msgid "(Fees) %1"
 msgstr "(Despeses) %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1034
+#: kmymoney/converter/mymoneystatementreader.cpp:1039
 #, kde-format
 msgctxt "Prepend name of payee (%1) to original memo (%2)"
 msgid ""
@@ -185,7 +185,7 @@ msgstr ""
 "Beneficiari original: %1\n"
 "%2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1042
+#: kmymoney/converter/mymoneystatementreader.cpp:1047
 #, kde-format
 msgid ""
 "Do you want to add \"%1\" as payee/receiver?\n"
@@ -194,7 +194,7 @@ msgstr ""
 "Voleu afegir «%1» com a beneficiari/receptor?\n"
 "\n"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1044
+#: kmymoney/converter/mymoneystatementreader.cpp:1049
 #, kde-format
 msgid ""
 "Selecting \"Yes\" will create the payee, \"No\" will skip creation of a "
@@ -213,80 +213,80 @@ msgstr ""
 "preguntar», s'eliminarà la informació del beneficiari per a totes les "
 "operacions successives que facin referència de «%1»."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1058
+#: kmymoney/converter/mymoneystatementreader.cpp:1063
 #: kmymoney/kmymoneyutils.cpp:572
 #, kde-format
 msgid "New payee/receiver"
 msgstr "Beneficiari/receptor nou"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1089
+#: kmymoney/converter/mymoneystatementreader.cpp:1094
 #, kde-format
 msgid "Default Category for Payee"
 msgstr "Categoria predeterminada per al beneficiari"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1096
+#: kmymoney/converter/mymoneystatementreader.cpp:1101
 #, kde-format
 msgid "Please select a default category for payee '%1'"
 msgstr ""
 "Si us plau, seleccioneu una categoria predeterminada per al beneficiari «%1»"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1119
+#: kmymoney/converter/mymoneystatementreader.cpp:1124
 #, kde-format
 msgid "Save Category"
 msgstr "Desa la categoria"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1120
+#: kmymoney/converter/mymoneystatementreader.cpp:1125
 #, kde-format
 msgid "No Category"
 msgstr "Sense categoria"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonAbort)
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: kmymoney/converter/mymoneystatementreader.cpp:1121
+#: kmymoney/converter/mymoneystatementreader.cpp:1126
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:132
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:257
 #, kde-format
 msgid "Abort"
 msgstr "Interromp"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1147
+#: kmymoney/converter/mymoneystatementreader.cpp:1152
 #, kde-format
 msgid "Unable to add payee/receiver"
 msgstr "No s'ha pogut afegir el beneficiari/receptor"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1394
+#: kmymoney/converter/mymoneystatementreader.cpp:1399
 #, kde-format
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr ""
 "Problema en afegir o emparellar una operació que concorda amb ID «%1»: %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1452
+#: kmymoney/converter/mymoneystatementreader.cpp:1457
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr "<b>Heu baixat un extracte per al compte següent:</b><br/><br/>"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1453
+#: kmymoney/converter/mymoneystatementreader.cpp:1458
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " - Nom del compte: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1454
+#: kmymoney/converter/mymoneystatementreader.cpp:1459
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " - Tipus de compte: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1455
+#: kmymoney/converter/mymoneystatementreader.cpp:1460
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " - Número del compte: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1460
+#: kmymoney/converter/mymoneystatementreader.cpp:1465
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "Voleu importar operacions a aquest compte?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1463
+#: kmymoney/converter/mymoneystatementreader.cpp:1468
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -297,7 +297,7 @@ msgstr ""
 "prement el botó <b>Crea</b> o seleccionant manualment un altre des de la "
 "casella de selecció següent."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1467
+#: kmymoney/converter/mymoneystatementreader.cpp:1472
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -308,12 +308,12 @@ msgstr ""
 "Si us plau, seleccioneu un compte usant la casella de selecció en el diàleg "
 "o creeu un compte nou prement el botó <b>Crea</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1496
+#: kmymoney/converter/mymoneystatementreader.cpp:1501
 #, kde-format
 msgid "Import transactions"
 msgstr "Importa operacions"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1538
+#: kmymoney/converter/mymoneystatementreader.cpp:1543
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
@@ -322,14 +322,14 @@ msgstr ""
 "Cal seleccionar un compte, crear-ne un de nou, o prémer el botó "
 "<b>Interromp</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1650
+#: kmymoney/converter/mymoneystatementreader.cpp:1655
 #: kmymoney/views/kscheduledview_p.h:200 kmymoney/views/kscheduledview_p.h:315
 #: kmymoney/views/kscheduledview_p.h:319
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "No s'ha pogut introduir l'operació planificada «%1»"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1670
+#: kmymoney/converter/mymoneystatementreader.cpp:1675
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -342,7 +342,7 @@ msgstr ""
 "i><br/>Voleu que el KMyMoney introdueixi ara aquesta planificació per tal "
 "que es pugui concordar l'operació?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1679
+#: kmymoney/converter/mymoneystatementreader.cpp:1684
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -367,7 +367,7 @@ msgstr[1] ""
 "KMyMoney introdueixi ara aquesta planificació per tal que es pugui concordar "
 "l'operació?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1693
+#: kmymoney/converter/mymoneystatementreader.cpp:1698
 #, kde-format
 msgid "Schedule found"
 msgstr "S'ha trobat una planificació"
@@ -2570,15 +2570,12 @@ msgstr "Límits"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/dialogs/knewaccountdlg.ui:519
-#, fuzzy, kde-format
-#| msgid ""
-#| "This page allows to setup certain limits. KMyMoney will warn you when the "
-#| "account balance reaches a limit."
+#, kde-format
 msgid ""
 "This section allows to setup certain limits. KMyMoney will warn you when the "
 "account balance reaches a limit."
 msgstr ""
-"Aquesta pàgina permet establir alguns límits. El KMyMoney us avisarà quan el "
+"Aquesta secció permet establir alguns límits. El KMyMoney us avisarà quan el "
 "saldo del compte arribi a un límit."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
@@ -2607,10 +2604,9 @@ msgstr "Avís anticipat"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_taxGroupBox)
 #: kmymoney/dialogs/knewaccountdlg.ui:624
-#, fuzzy, kde-format
-#| msgid "Tag options"
+#, kde-format
 msgid "Tax options"
-msgstr "Opcions de les etiquetes"
+msgstr "Opcions d'impostos"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox3)
 #: kmymoney/dialogs/knewaccountdlg.ui:630
@@ -2674,25 +2670,21 @@ msgstr "Opcions d'importació"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/knewaccountdlg.ui:876
-#, fuzzy, kde-format
-#| msgid "Payee creation"
+#, kde-format
 msgid "Automatic Payee creation"
-msgstr "Creació de beneficiari"
+msgstr "Creació automàtica de beneficiaris"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:884
-#, fuzzy, kde-format
-#| msgid "Application Account"
+#, kde-format
 msgid "Application Default"
-msgstr "Compte d'aplicació"
+msgstr "Predeterminat de l'aplicació"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:889
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Reconciliation date"
-#| msgid "Never reconciled"
+#, kde-format
 msgid "Never create"
-msgstr "No s'ha conciliat mai"
+msgstr "No creïs mai"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_preferredStatementDate)
@@ -2704,10 +2696,9 @@ msgstr "Pregunta a l'usuari"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:899
-#, fuzzy, kde-format
-#| msgid "Create category"
+#, kde-format
 msgid "Create automatically"
-msgstr "Crea una categoria"
+msgstr "Crea automàticament"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_budgetGroupBox)
 #. i18n: ectx: Menu (budget_context_menu)
