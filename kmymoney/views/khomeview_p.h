@@ -861,6 +861,11 @@ public:
             MyMoneyAccount mainAccount = sched.account();
             if (!mainAccount.id().isEmpty()) {
                 MyMoneyTransaction t = sched.transaction();
+                if (sched.type() == eMyMoney::Schedule::Type::LoanPayment) {
+                    // in case of a loan payment we need to adjust the schedule locally
+                    // to contain the actual values for the next transaction.
+                    KMyMoneyUtils::calculateAutoLoan(sched, t, QMap<QString, MyMoneyMoney>());
+                }
                 // only show the entry, if it is still active
                 if (!sched.isFinished()) {
                     // walk over splits in two rounds: the first takes
