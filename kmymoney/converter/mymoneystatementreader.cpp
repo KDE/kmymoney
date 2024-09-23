@@ -73,14 +73,15 @@ Q_GLOBAL_STATIC(QStringList, globalResultMessages);
 class MyMoneyStatementReader::Private
 {
 public:
-    Private() :
-        transactionsCount(0),
-        transactionsAdded(0),
-        transactionsMatched(0),
-        transactionsDuplicate(0),
-        m_skipCategoryMatching(true),
-        m_progressCallback(nullptr),
-        scannedCategories(false) {}
+    Private()
+        : transactionsCount(0)
+        , transactionsAdded(0)
+        , transactionsMatched(0)
+        , transactionsDuplicate(0)
+        , m_skipCategoryMatching(true)
+        , scannedCategories(false)
+    {
+    }
 
     const QString& feeId(const MyMoneyAccount& invAcc);
     const QString& interestId(const MyMoneyAccount& invAcc);
@@ -101,8 +102,7 @@ public:
     QMap<QString, bool>            uniqIds;
     QMap<QString, MyMoneySecurity> securitiesBySymbol;
     QMap<QString, MyMoneySecurity> securitiesByName;
-    bool                           m_skipCategoryMatching;
-    void (*m_progressCallback)(int, int, const QString&);
+    bool m_skipCategoryMatching;
     QDate m_oldestPostDate;
 
 private:
@@ -336,7 +336,6 @@ MyMoneyStatementReader::MyMoneyStatementReader()
     , m_userAbort(false)
     , m_payeeCreationMode(eMyMoney::Account::PayeeCreation::AskUser)
     , m_ft(0)
-    , m_progressCallback(0)
 {
     m_askPayeeCategory = KMyMoneySettings::askForPayeeCategory();
 }
@@ -361,19 +360,19 @@ void MyMoneyStatementReader::setAskPayeeCategory(bool ask)
     m_askPayeeCategory = ask;
 }
 
-QStringList MyMoneyStatementReader::importStatement(const QString& url, bool silent, void(*callback)(int, int, const QString&))
+QStringList MyMoneyStatementReader::importStatement(const QString& url, bool silent)
 {
     QStringList summary;
     MyMoneyStatement s;
     if (MyMoneyStatement::readXMLFile(s, url))
-        summary = MyMoneyStatementReader::importStatement(s, silent, callback);
+        summary = MyMoneyStatementReader::importStatement(s, silent);
     else
         KMessageBox::error(nullptr, i18n("Error importing %1: This file is not a valid KMM statement file.", url), i18n("Invalid Statement"));
 
     return summary;
 }
 
-QStringList MyMoneyStatementReader::importStatement(const MyMoneyStatement& s, bool silent, void(*callback)(int, int, const QString&))
+QStringList MyMoneyStatementReader::importStatement(const MyMoneyStatement& s, bool silent)
 {
     auto result = false;
 
@@ -386,8 +385,6 @@ QStringList MyMoneyStatementReader::importStatement(const MyMoneyStatement& s, b
 
     auto reader = new MyMoneyStatementReader;
     reader->setPayeeCreationMode(eMyMoney::Account::PayeeCreation::AutomaticCreaation);
-    if (callback)
-        reader->setProgressCallback(callback);
 
     QStringList messages;
     result = reader->import(s, messages);
@@ -395,9 +392,6 @@ QStringList MyMoneyStatementReader::importStatement(const MyMoneyStatement& s, b
     auto transactionAdded = reader->anyTransactionAdded();
 
     delete reader;
-
-    if (callback)
-        callback(-1, -1, QString());
 
     if (!silent && transactionAdded) {
         globalResultMessages()->append(messages);
@@ -511,15 +505,11 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
     //
     // Process the securities
     //
-    signalProgress(0, s.m_listSecurities.count(), "Importing Statement ...");
-    int progress = 0;
     QList<MyMoneyStatement::Security>::const_iterator it_s = s.m_listSecurities.begin();
     while (it_s != s.m_listSecurities.end()) {
         processSecurityEntry(*it_s);
-        signalProgress(++progress, 0);
         ++it_s;
     }
-    signalProgress(-1, -1);
 
     //
     // Process the transactions
@@ -528,12 +518,9 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
     if (!m_userAbort) {
         try {
             qDebug("Processing transactions (%s)", qPrintable(d->m_account.name()));
-            signalProgress(0, s.m_listTransactions.count(), "Importing Statement ...");
-            progress = 0;
             QList<MyMoneyStatement::Transaction>::const_iterator it_t = s.m_listTransactions.begin();
             while (it_t != s.m_listTransactions.end() && !m_userAbort) {
                 processTransactionEntry(*it_t);
-                signalProgress(++progress, 0);
                 ++it_t;
             }
             qDebug("Processing transactions done (%s)", qPrintable(d->m_account.name()));
@@ -544,7 +531,6 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
             else
                 qDebug("Caught exception from processTransactionEntry() not caused by USERABORT: %s", e.what());
         }
-        signalProgress(-1, -1);
     }
 
     //
@@ -552,15 +538,13 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
     //
     if (!m_userAbort) {
         try {
-            signalProgress(0, s.m_listPrices.count(), "Importing Statement ...");
             KMyMoneyUtils::processPriceList(s);
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException& e) {
             if (QString::fromLatin1(e.what()).contains("USERABORT"))
                 m_userAbort = true;
             else
                 qDebug("Caught exception from processPriceEntry() not caused by USERABORT: %s", e.what());
         }
-        signalProgress(-1, -1);
     }
 
     bool  rc = false;
@@ -1550,17 +1534,6 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
 
 const MyMoneyAccount& MyMoneyStatementReader::account() const {
     return d->m_account;
-}
-
-void MyMoneyStatementReader::setProgressCallback(void(*callback)(int, int, const QString&))
-{
-    m_progressCallback = callback;
-}
-
-void MyMoneyStatementReader::signalProgress(int current, int total, const QString& msg)
-{
-    if (m_progressCallback != 0)
-        (*m_progressCallback)(current, total, msg);
 }
 
 void MyMoneyStatementReader::handleMatchingOfExistingTransaction(MyMoneyTransaction matchedTransaction,

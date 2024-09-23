@@ -81,20 +81,12 @@ public:
       * UI to handle account matching, payee creation, and someday
       * payee and transaction matching.
       */
-    static QStringList importStatement(const QString& url, bool silent = false, void(*callback)(int, int, const QString&) = nullptr);
-    static QStringList importStatement(const MyMoneyStatement& s, bool silent = false, void(*callback)(int, int, const QString&) = nullptr);
+    static QStringList importStatement(const QString& url, bool silent = false);
+    static QStringList importStatement(const MyMoneyStatement& s, bool silent = false);
     static void clearResultMessages();
     static QStringList resultMessages();
 
 private:
-    /**
-      * This method is used to update the progress information. It
-      * checks if an appropriate function is known and calls it.
-      *
-      * For a parameter description see KMyMoneyView::progressCallback().
-      */
-    void signalProgress(int current, int total, const QString& = "");
-
     void processTransactionEntry(const MyMoneyStatement::Transaction& t_in);
     void processSecurityEntry(const MyMoneyStatement::Security& s_in);
 
@@ -132,8 +124,6 @@ private:
     eMyMoney::Account::PayeeCreation m_payeeCreationMode;
     bool                    m_askPayeeCategory;
     MyMoneyFileTransaction* m_ft;
-
-    void (*m_progressCallback)(int, int, const QString&);
 
     void handleMatchingOfExistingTransaction(MyMoneyTransaction matchedTransaction,
                                              MyMoneySplit matchedSplit,

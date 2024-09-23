@@ -4418,10 +4418,11 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
                 // If we did not find a match, try importing it as a KMM statement file,
                 // which is really just for testing.  the statement file is not exposed
                 // to users.
-                if (it_plugin == pPlugins.importer.constEnd())
-                    if (MyMoneyStatement::isStatementFile(url))
-                        MyMoneyStatementReader::importStatement(url, false, progressCallback);
-
+                if (it_plugin == pPlugins.importer.constEnd()) {
+                    if (MyMoneyStatement::isStatementFile(url)) {
+                        MyMoneyStatementReader::importStatement(url, false);
+                    }
+                }
             }
             // remove the current processed item from the queue
             d->m_importUrlsQueue.dequeue();
