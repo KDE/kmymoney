@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-22 01:50+0000\n"
+"POT-Creation-Date: 2024-09-23 01:47+0000\n"
 "PO-Revision-Date: 2024-02-19 12:11+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -1985,7 +1985,7 @@ msgstr "Tyyppi"
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:237
 #: kmymoney/views/investtransactioneditor.ui:51
 #: kmymoney/views/investtransactioneditor.ui:221
-#: kmymoney/views/khomeview_p.h:1075
+#: kmymoney/views/khomeview_p.h:1080
 #, kde-format
 msgid "Total"
 msgstr "Yhteensä"
@@ -2160,7 +2160,7 @@ msgid "Liability"
 msgstr "Velat ja lainat"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:553 kmymoney/kmymoney.cpp:440
-#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1845
+#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1850
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -4329,8 +4329,8 @@ msgstr "Varmistettu"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:345
 #: kmymoney/plugins/views/reports/core/listtable.cpp:639
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
-#: kmymoney/views/khomeview_p.h:1051 kmymoney/views/khomeview_p.h:1421
-#: kmymoney/views/khomeview_p.h:1450
+#: kmymoney/views/khomeview_p.h:1056 kmymoney/views/khomeview_p.h:1426
+#: kmymoney/views/khomeview_p.h:1455
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:32
 #, kde-format
 msgid "Reconciled"
@@ -6162,7 +6162,7 @@ msgstr "Varat ja velat"
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:68
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1580
+#: kmymoney/views/khomeview_p.h:1585
 #, kde-format
 msgid "Budget"
 msgstr "Budjetti"
@@ -10131,8 +10131,8 @@ msgstr "Poista muistiinpanokentän valinta."
 #: kmymoney/plugins/views/reports/core/listtable.cpp:685
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1054 kmymoney/views/khomeview_p.h:1424
-#: kmymoney/views/khomeview_p.h:1453
+#: kmymoney/views/khomeview_p.h:1059 kmymoney/views/khomeview_p.h:1429
+#: kmymoney/views/khomeview_p.h:1458
 #, kde-format
 msgid "Balance"
 msgstr "Yhteensä"
@@ -12700,8 +12700,8 @@ msgstr "Rahalaitos"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
 #: kmymoney/views/investtransactioneditor.ui:92
 #: kmymoney/views/khomeview_p.h:674 kmymoney/views/khomeview_p.h:734
-#: kmymoney/views/khomeview_p.h:772 kmymoney/views/khomeview_p.h:1038
-#: kmymoney/views/khomeview_p.h:1166 kmymoney/views/newtransactioneditor.ui:17
+#: kmymoney/views/khomeview_p.h:772 kmymoney/views/khomeview_p.h:1043
+#: kmymoney/views/khomeview_p.h:1171 kmymoney/views/newtransactioneditor.ui:17
 #: kmymoney/widgets/ktransactionfilter.cpp:116
 #: kmymoney/widgets/ktransactionfilter.ui:113
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:73
@@ -15440,13 +15440,13 @@ msgstr[0] "Yksi päivä"
 msgstr[1] "%1 päivää"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:381
-#: kmymoney/views/khomeview_p.h:1235
+#: kmymoney/views/khomeview_p.h:1240
 #, kde-format
 msgid "The balance of %1 is below the minimum balance %2 today."
 msgstr "Tilin %1 saldo on alle minimisaldon %2."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:386
-#: kmymoney/views/khomeview_p.h:1239
+#: kmymoney/views/khomeview_p.h:1244
 #, kde-format
 msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
 msgid_plural ""
@@ -15456,19 +15456,19 @@ msgstr[0] ""
 msgstr[1] "Saldo %2 tulee tippumaan minimisaldon %3 alle %1 päivän kuluessa."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:405
-#: kmymoney/views/khomeview_p.h:1257
+#: kmymoney/views/khomeview_p.h:1262
 #, kde-format
 msgid "The balance of %1 is below %2 today."
 msgstr "Tilin %1 saldo on alle %2 tänään."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:410
-#: kmymoney/views/khomeview_p.h:1262
+#: kmymoney/views/khomeview_p.h:1267
 #, kde-format
 msgid "The balance of %1 is above %2 today."
 msgstr "Tilin %1 saldo on yli %2 tänään."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:417
-#: kmymoney/views/khomeview_p.h:1268
+#: kmymoney/views/khomeview_p.h:1273
 #, kde-format
 msgid "The balance of %2 will drop below %3 in %1 day."
 msgid_plural "The balance of %2 will drop below %3 in %1 days."
@@ -15476,7 +15476,7 @@ msgstr[0] "Saldo %2 tulee tippumaan %3 alle yhden päivän kuluessa."
 msgstr[1] "Saldo %2 tulee tippumaan %3 alle %1 päivän kuluessa."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:424
-#: kmymoney/views/khomeview_p.h:1275
+#: kmymoney/views/khomeview_p.h:1280
 #, kde-format
 msgid "The balance of %2 will raise above %3 in %1 day."
 msgid_plural "The balance of %2 will raise above %3 in %1 days."
@@ -15546,7 +15546,7 @@ msgid "No data provided by reports plugin for this chart."
 msgstr "Raportointi-liitännäinen ei tarjonnut tietoja tälle kaaviolle"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:668
-#: kmymoney/views/khomeview_p.h:571 kmymoney/views/khomeview_p.h:1584
+#: kmymoney/views/khomeview_p.h:571 kmymoney/views/khomeview_p.h:1589
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "Ota käyttöön raporttiliitännäinen tämän kaavion näkemiseksi."
@@ -16352,7 +16352,7 @@ msgstr "Alue"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:171
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:27
 #: kmymoney/plugins/views/reports/kreportsview_p.h:428
-#: kmymoney/views/khomeview_p.h:1109
+#: kmymoney/views/khomeview_p.h:1114
 #, kde-format
 msgid "Report"
 msgstr "Raporttinäkymä"
@@ -16664,7 +16664,7 @@ msgstr "Raportit"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
 #: kmymoney/plugins/views/reports/kreportsview.ui:54
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:49
-#: kmymoney/views/khomeview_p.h:1111
+#: kmymoney/views/khomeview_p.h:1116
 #, kde-format
 msgid "Comment"
 msgstr "Kommentti"
@@ -16695,7 +16695,7 @@ msgid "Charts"
 msgstr "Kaavionäkymä"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:664
-#: kmymoney/views/khomeview_p.h:1104
+#: kmymoney/views/khomeview_p.h:1109
 #, kde-format
 msgid "Favorite Reports"
 msgstr "Suosikkiraportit"
@@ -16740,7 +16740,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr "Tulot ja menot -piirakkakaavio"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:871
-#: kmymoney/views/khomeview_p.h:1558
+#: kmymoney/views/khomeview_p.h:1563
 #, kde-format
 msgid "Net Worth"
 msgstr "Nettovarallisuus"
@@ -19803,53 +19803,53 @@ msgctxt "More..."
 msgid "Show more schedules on the list"
 msgstr "Näytä enemmän ajoitettuna tapahtumia listassa"
 
-#: kmymoney/views/khomeview_p.h:884
+#: kmymoney/views/khomeview_p.h:889
 #, kde-format
 msgid "Enter schedule"
 msgstr "Kirjaa ajoitettu tapahtuma"
 
-#: kmymoney/views/khomeview_p.h:889
+#: kmymoney/views/khomeview_p.h:894
 #, kde-format
 msgid "Skip schedule"
 msgstr "Ohita ajoitettu tapahtuma"
 
-#: kmymoney/views/khomeview_p.h:895
+#: kmymoney/views/khomeview_p.h:900
 #, kde-format
 msgid "Edit schedule"
 msgstr "Muokkaa ajoitettua tapahtumaa"
 
-#: kmymoney/views/khomeview_p.h:899
+#: kmymoney/views/khomeview_p.h:904
 #, kde-format
 msgid " (%1 payment)"
 msgid_plural " (%1 payments)"
 msgstr[0] "(yksi maksu)"
 msgstr[1] "(%1 maksua)"
 
-#: kmymoney/views/khomeview_p.h:1042
+#: kmymoney/views/khomeview_p.h:1047
 #, kde-format
 msgctxt "Header not marked"
 msgid "!M"
 msgstr "!M"
 
-#: kmymoney/views/khomeview_p.h:1045
+#: kmymoney/views/khomeview_p.h:1050
 #, kde-format
 msgctxt "Header cleared"
 msgid "C"
 msgstr "C"
 
-#: kmymoney/views/khomeview_p.h:1048
+#: kmymoney/views/khomeview_p.h:1053
 #, kde-format
 msgctxt "Header not reconciled"
 msgid "!R"
 msgstr "!R"
 
-#: kmymoney/views/khomeview_p.h:1060
+#: kmymoney/views/khomeview_p.h:1065
 #, fuzzy, kde-format
 #| msgid "To Minimum Balance / Maximum Credit"
 msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr "Käytettävissä"
 
-#: kmymoney/views/khomeview_p.h:1160
+#: kmymoney/views/khomeview_p.h:1165
 #, kde-format
 msgctxt "Forecast days"
 msgid "%1 Day Forecast"
@@ -19857,7 +19857,7 @@ msgid_plural "%1 Day Forecast"
 msgstr[0] "%1 päivän ennuste"
 msgstr[1] "%1 päivän ennuste"
 
-#: kmymoney/views/khomeview_p.h:1171
+#: kmymoney/views/khomeview_p.h:1176
 #, kde-format
 msgctxt "Forecast days"
 msgid "%1 day"
@@ -19865,97 +19865,97 @@ msgid_plural "%1 days"
 msgstr[0] "Yksi päivä"
 msgstr[1] "%1 päivää"
 
-#: kmymoney/views/khomeview_p.h:1394
+#: kmymoney/views/khomeview_p.h:1399
 #, kde-format
 msgid "Assets and Liabilities Summary"
 msgstr "Omaisuuden ja velkojen yhteenveto"
 
-#: kmymoney/views/khomeview_p.h:1408
+#: kmymoney/views/khomeview_p.h:1413
 #, kde-format
 msgid "Asset Accounts"
 msgstr "Omaisuustilit"
 
-#: kmymoney/views/khomeview_p.h:1437
+#: kmymoney/views/khomeview_p.h:1442
 #, kde-format
 msgid "Liability Accounts"
 msgstr "Velkatilit"
 
-#: kmymoney/views/khomeview_p.h:1539
+#: kmymoney/views/khomeview_p.h:1544
 #, kde-format
 msgid "Total Assets"
 msgstr "Omaisuus yhteensä"
 
-#: kmymoney/views/khomeview_p.h:1547
+#: kmymoney/views/khomeview_p.h:1552
 #, kde-format
 msgid "Total Liabilities"
 msgstr "Velat yhteensä"
 
-#: kmymoney/views/khomeview_p.h:1835
+#: kmymoney/views/khomeview_p.h:1840
 #, kde-format
 msgid "Cash Flow Summary"
 msgstr "Rahavirtojen yhteenveto"
 
-#: kmymoney/views/khomeview_p.h:1840
+#: kmymoney/views/khomeview_p.h:1845
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "Tulot ja menot tälle kuulle"
 
-#: kmymoney/views/khomeview_p.h:1848
+#: kmymoney/views/khomeview_p.h:1853
 #, kde-format
 msgid "Scheduled Income"
 msgstr "Ajoitettu tulo"
 
-#: kmymoney/views/khomeview_p.h:1851
+#: kmymoney/views/khomeview_p.h:1856
 #, kde-format
 msgid "Expenses"
 msgstr "Menot"
 
-#: kmymoney/views/khomeview_p.h:1854
+#: kmymoney/views/khomeview_p.h:1859
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "Ajoitettu meno"
 
-#: kmymoney/views/khomeview_p.h:1882
+#: kmymoney/views/khomeview_p.h:1887
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "Rahavarat ja velat"
 
-#: kmymoney/views/khomeview_p.h:1887
+#: kmymoney/views/khomeview_p.h:1892
 #, kde-format
 msgid "Liquid Assets"
 msgstr "Rahavarat"
 
-#: kmymoney/views/khomeview_p.h:1890
+#: kmymoney/views/khomeview_p.h:1895
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "Siirrä velkoihin"
 
-#: kmymoney/views/khomeview_p.h:1893
+#: kmymoney/views/khomeview_p.h:1898
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "Velat"
 
-#: kmymoney/views/khomeview_p.h:1896
+#: kmymoney/views/khomeview_p.h:1901
 #, kde-format
 msgid "Other Transfers"
 msgstr "Muu siirto"
 
-#: kmymoney/views/khomeview_p.h:1939
+#: kmymoney/views/khomeview_p.h:1944
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "Rahavirtatilanne"
 
-#: kmymoney/views/khomeview_p.h:1944
+#: kmymoney/views/khomeview_p.h:1949
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "Odotetut rahavarat"
 
-#: kmymoney/views/khomeview_p.h:1947
+#: kmymoney/views/khomeview_p.h:1952
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "Odotetut velat"
 
-#: kmymoney/views/khomeview_p.h:1950
+#: kmymoney/views/khomeview_p.h:1955
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "Odotettu netto / tappio"
