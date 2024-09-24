@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-23 01:47+0000\n"
+"POT-Creation-Date: 2024-09-24 02:02+0000\n"
 "PO-Revision-Date: 2024-09-21 10:52+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -47,49 +47,49 @@ msgstr "_Kosten"
 msgid "_Dividend"
 msgstr "_Dividend"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:371
+#: kmymoney/converter/mymoneystatementreader.cpp:370
 #, kde-format
 msgid "Error importing %1: This file is not a valid KMM statement file."
 msgstr "Fout bij importeren van %1. Dit bestand is geen geldig KMM-bestand."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:371
+#: kmymoney/converter/mymoneystatementreader.cpp:370
 #, kde-format
 msgid "Invalid Statement"
 msgstr "Ongeldig afschrift"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:494
+#: kmymoney/converter/mymoneystatementreader.cpp:488
 #, kde-format
 msgid "Importing statement for account %1"
 msgstr "Bankafschrift importeren voor rekening %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:496
+#: kmymoney/converter/mymoneystatementreader.cpp:490
 #, kde-format
 msgid "Importing statement without transactions"
 msgstr "Bankafschrift importeren zonder transacties"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:581
+#: kmymoney/converter/mymoneystatementreader.cpp:565
 #, kde-format
 msgid "  Statement balance is not contained in statement."
 msgstr "  Saldo voor dit bankafschrift is niet vermeld op bankafschrift"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:583
+#: kmymoney/converter/mymoneystatementreader.cpp:567
 #, kde-format
 msgid "  Statement balance on %1 is reported to be %2"
 msgstr "  Saldo op bankafschrift %1 is %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:585
+#: kmymoney/converter/mymoneystatementreader.cpp:569
 #, kde-format
 msgid "  Transactions"
 msgstr "  Transacties"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:586
+#: kmymoney/converter/mymoneystatementreader.cpp:570
 #, kde-format
 msgid "    %1 processed"
 msgid_plural "    %1 processed"
 msgstr[0] "    %1 verwerkt"
 msgstr[1] "    %1 verwerkt"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:587
+#: kmymoney/converter/mymoneystatementreader.cpp:571
 #, kde-format
 msgctxt "x transactions have been added"
 msgid "    %1 added"
@@ -97,26 +97,26 @@ msgid_plural "    %1 added"
 msgstr[0] "    %1 toegevoegd"
 msgstr[1] "    %1 toegevoegd"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:588
+#: kmymoney/converter/mymoneystatementreader.cpp:572
 #, kde-format
 msgid "    %1 matched"
 msgid_plural "    %1 matched"
 msgstr[0] "    %1 vergeleken"
 msgstr[1] "    %1 vergeleken"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:589
+#: kmymoney/converter/mymoneystatementreader.cpp:573
 #, kde-format
 msgid "    %1 duplicate"
 msgid_plural "    %1 duplicates"
 msgstr[0] "    %1 duplicaat"
 msgstr[1] "    %1 duplicaten"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:590
+#: kmymoney/converter/mymoneystatementreader.cpp:574
 #, kde-format
 msgid "  Payees"
 msgstr "  Begunstigden"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:591
+#: kmymoney/converter/mymoneystatementreader.cpp:575
 #, kde-format
 msgctxt "x transactions have been created"
 msgid "    %1 created"
@@ -124,12 +124,12 @@ msgid_plural "    %1 created"
 msgstr[0] "    %1 aangemaakt"
 msgstr[1] "    %1 aangemaakt"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:655
+#: kmymoney/converter/mymoneystatementreader.cpp:639
 #, kde-format
 msgid "Error creating security record: %1"
 msgstr "Fout bij aanmaken van fonds: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:655
+#: kmymoney/converter/mymoneystatementreader.cpp:639
 #: kmymoney/plugins/kbanking/kbanking.cpp:607
 #: kmymoney/plugins/kbanking/kbanking.cpp:629
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:60
@@ -137,7 +137,7 @@ msgstr "Fout bij aanmaken van fonds: %1"
 msgid "Error"
 msgstr "Fout"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:761
+#: kmymoney/converter/mymoneystatementreader.cpp:745
 #, kde-format
 msgid ""
 "This imported statement contains investment transactions with no security.  "
@@ -146,20 +146,20 @@ msgstr ""
 "Dit geïmporteerde afschrift bevat investeringstransacties, maar bevat geen "
 "fondsen.  Deze transacties worden genegeerd."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:761
+#: kmymoney/converter/mymoneystatementreader.cpp:745
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1441
 #, kde-format
 msgid "Security not found"
 msgstr "Fonds niet gevonden"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:806
-#: kmymoney/converter/mymoneystatementreader.cpp:809
+#: kmymoney/converter/mymoneystatementreader.cpp:790
+#: kmymoney/converter/mymoneystatementreader.cpp:793
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1425
 #, kde-format
 msgid "Statement Importer"
 msgstr "Importeur van afschriften"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:826
+#: kmymoney/converter/mymoneystatementreader.cpp:810
 #, kde-format
 msgid ""
 "This imported statement contains investment transactions with no share "
@@ -168,17 +168,17 @@ msgstr ""
 "Dit geïmporteerde afschrift bevat investeringstransacties zonder "
 "hoeveelheden aandelen. Deze transacties worden genegeerd."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:826
+#: kmymoney/converter/mymoneystatementreader.cpp:810
 #, kde-format
 msgid "No share amount provided"
 msgstr "Geen aantallen aandelen ingevoerd"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:946
+#: kmymoney/converter/mymoneystatementreader.cpp:930
 #, kde-format
 msgid "(Fees) %1"
 msgstr "(Kosten) %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1039
+#: kmymoney/converter/mymoneystatementreader.cpp:1023
 #, kde-format
 msgctxt "Prepend name of payee (%1) to original memo (%2)"
 msgid ""
@@ -188,7 +188,7 @@ msgstr ""
 "Oorspronkelijke debiteur: %1\n"
 "%2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1047
+#: kmymoney/converter/mymoneystatementreader.cpp:1031
 #, kde-format
 msgid ""
 "Do you want to add \"%1\" as payee/receiver?\n"
@@ -197,7 +197,7 @@ msgstr ""
 "Wilt u \"%1\" toevoegen als begunstigde/ontvanger?\n"
 "\n"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1049
+#: kmymoney/converter/mymoneystatementreader.cpp:1033
 #, kde-format
 msgid ""
 "Selecting \"Yes\" will create the payee, \"No\" will skip creation of a "
@@ -217,79 +217,79 @@ msgstr ""
 "dan zal de begunstigde informatie voor alle volgende transacties die "
 "verwijzen naar \"%1\" worden verwijderd."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1063
+#: kmymoney/converter/mymoneystatementreader.cpp:1047
 #: kmymoney/kmymoneyutils.cpp:572
 #, kde-format
 msgid "New payee/receiver"
 msgstr "Nieuwe begunstigde/ontvanger"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1094
+#: kmymoney/converter/mymoneystatementreader.cpp:1078
 #, kde-format
 msgid "Default Category for Payee"
 msgstr "Standaardcategorie voor begunstigde"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1101
+#: kmymoney/converter/mymoneystatementreader.cpp:1085
 #, kde-format
 msgid "Please select a default category for payee '%1'"
 msgstr "Selecteer een standaardcategorie voor begunstigde '%1'"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1124
+#: kmymoney/converter/mymoneystatementreader.cpp:1108
 #, kde-format
 msgid "Save Category"
 msgstr "Categorie opslaan"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1125
+#: kmymoney/converter/mymoneystatementreader.cpp:1109
 #, kde-format
 msgid "No Category"
 msgstr "Geen categorie"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonAbort)
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: kmymoney/converter/mymoneystatementreader.cpp:1126
+#: kmymoney/converter/mymoneystatementreader.cpp:1110
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:132
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:257
 #, kde-format
 msgid "Abort"
 msgstr "Afbreken"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1152
+#: kmymoney/converter/mymoneystatementreader.cpp:1136
 #, kde-format
 msgid "Unable to add payee/receiver"
 msgstr "Kan begunstigde/ontvanger niet toevoegen"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1399
+#: kmymoney/converter/mymoneystatementreader.cpp:1383
 #, kde-format
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr "Probleem bij het toevoegen van de geïmporteerde transactie '%1': %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1457
+#: kmymoney/converter/mymoneystatementreader.cpp:1441
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr ""
 "<b>U hebt een afschrift voor de volgende rekening gedownload:</b><br/><br/>"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1458
+#: kmymoney/converter/mymoneystatementreader.cpp:1442
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " - Rekeningnaam: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1459
+#: kmymoney/converter/mymoneystatementreader.cpp:1443
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " - Rekeningtype: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1460
+#: kmymoney/converter/mymoneystatementreader.cpp:1444
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " - Rekeningnummer: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1465
+#: kmymoney/converter/mymoneystatementreader.cpp:1449
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "Wilt u transacties importeren naar deze rekening?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1468
+#: kmymoney/converter/mymoneystatementreader.cpp:1452
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -300,7 +300,7 @@ msgstr ""
 "een nieuwe rekening aanmaken door op de <b>Creëer</b>-knop te drukken of "
 "handmatig een keuze te maken uit onderstaande lijst."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1472
+#: kmymoney/converter/mymoneystatementreader.cpp:1456
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -311,12 +311,12 @@ msgstr ""
 "Selecteer een rekening via de lijst of creëer een nieuwe rekening door te "
 "drukken op de <b>Creëer</b>-knop."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1501
+#: kmymoney/converter/mymoneystatementreader.cpp:1485
 #, kde-format
 msgid "Import transactions"
 msgstr "Transacties importeren"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1543
+#: kmymoney/converter/mymoneystatementreader.cpp:1527
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
@@ -325,14 +325,14 @@ msgstr ""
 "U moet een rekening selecteren, een nieuwe aanmaken of op de knop "
 "<b>Afbreken</b> klikken."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1655
+#: kmymoney/converter/mymoneystatementreader.cpp:1628
 #: kmymoney/views/kscheduledview_p.h:200 kmymoney/views/kscheduledview_p.h:315
 #: kmymoney/views/kscheduledview_p.h:319
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Kan de periodieke transactie '%1' niet invoeren"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1675
+#: kmymoney/converter/mymoneystatementreader.cpp:1648
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -345,7 +345,7 @@ msgstr ""
 "%2 %3</i><br/>Wilt u deze periodieke transactie nu invoeren zodat deze 2 "
 "transacties kunnen worden vergeleken?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1684
+#: kmymoney/converter/mymoneystatementreader.cpp:1657
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -370,7 +370,7 @@ msgstr[1] ""
 "periodieke transactie nu invoeren zodat deze 2 transacties kunnen worden "
 "vergeleken?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1698
+#: kmymoney/converter/mymoneystatementreader.cpp:1671
 #, kde-format
 msgid "Schedule found"
 msgstr "Periodieke transactie gevonden"
@@ -5803,63 +5803,63 @@ msgstr ""
 msgid "Importing error"
 msgstr "importeer fout"
 
-#: kmymoney/kmymoney.cpp:4437
+#: kmymoney/kmymoney.cpp:4438
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Alle berichten staan aan."
 
-#: kmymoney/kmymoney.cpp:4437
+#: kmymoney/kmymoney.cpp:4438
 #, kde-format
 msgid "All messages"
 msgstr "Alle berichten"
 
-#: kmymoney/kmymoney.cpp:4473
+#: kmymoney/kmymoney.cpp:4474
 #, kde-format
 msgid "Auto saving..."
 msgstr "Autom. opslaan..."
 
-#: kmymoney/kmymoney.cpp:4593
+#: kmymoney/kmymoney.cpp:4594
 #, kde-format
 msgid "Creating new document..."
 msgstr "Bezig met aanmaken van nieuw document..."
 
-#: kmymoney/kmymoney.cpp:4653
+#: kmymoney/kmymoney.cpp:4654
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "Kon geen nieuw bestand aanmaken."
 
-#: kmymoney/kmymoney.cpp:4664
+#: kmymoney/kmymoney.cpp:4665
 #, kde-format
 msgid "Open a file."
 msgstr "Een bestand openen."
 
-#: kmymoney/kmymoney.cpp:4678
+#: kmymoney/kmymoney.cpp:4679
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr "Kon geen geschikte plug-in vinden om opslag te openen."
 
-#: kmymoney/kmymoney.cpp:4682
+#: kmymoney/kmymoney.cpp:4683
 #, kde-format
 msgid "All files (*)"
 msgstr "Alle bestanden (*)"
 
-#: kmymoney/kmymoney.cpp:4695
+#: kmymoney/kmymoney.cpp:4696
 #, kde-format
 msgid "Loading file..."
 msgstr "Bezig met laden van bestand..."
 
-#: kmymoney/kmymoney.cpp:4701
+#: kmymoney/kmymoney.cpp:4702
 #, kde-format
 msgid "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
 msgstr ""
 "<p>Bestand <b>%1</b> is al geopend door een ander exemplaar van KMyMoney</p>"
 
-#: kmymoney/kmymoney.cpp:4701
+#: kmymoney/kmymoney.cpp:4702
 #, kde-format
 msgid "Duplicate open"
 msgstr "Open duplicaat"
 
-#: kmymoney/kmymoney.cpp:4708
+#: kmymoney/kmymoney.cpp:4709
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5868,17 +5868,17 @@ msgstr ""
 "<p><b>%1</b> is een ongeldige bestandsnaam of het bestand bestaat niet. U "
 "kunt een ander bestand openen of een nieuwe aanmaken.</p>"
 
-#: kmymoney/kmymoney.cpp:4708
+#: kmymoney/kmymoney.cpp:4709
 #, kde-format
 msgid "File not found"
 msgstr "Bestand niet gevonden"
 
-#: kmymoney/kmymoney.cpp:4739
+#: kmymoney/kmymoney.cpp:4740
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "Kan gevraagd bestand niet openen."
 
-#: kmymoney/kmymoney.cpp:4746
+#: kmymoney/kmymoney.cpp:4747
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -5887,32 +5887,32 @@ msgstr ""
 "Kon uw gegevensbron niet lezen. Controleer de instellingen van KMyMoney of "
 "de benodigde plug-in is ingeschakeld."
 
-#: kmymoney/kmymoney.cpp:4757
+#: kmymoney/kmymoney.cpp:4758
 #, kde-format
 msgid "Saving file..."
 msgstr "Bezig met opslaan van bestand..."
 
-#: kmymoney/kmymoney.cpp:4769
+#: kmymoney/kmymoney.cpp:4770
 #, kde-format
 msgid "Failed to save your data."
 msgstr "Uw gegevens opslaan is mislukt."
 
-#: kmymoney/kmymoney.cpp:4775
+#: kmymoney/kmymoney.cpp:4776
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr "Kon geen geschikte plug-in vinden om uw gegevens op te slaan."
 
-#: kmymoney/kmymoney.cpp:4781
+#: kmymoney/kmymoney.cpp:4782
 #, kde-format
 msgid "Saving file as...."
 msgstr "Bezig met opslaan van bestand als..."
 
-#: kmymoney/kmymoney.cpp:4797
+#: kmymoney/kmymoney.cpp:4798
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr "Kon geen enkele plug-in vinden om uw gegevens op te slaan."
 
-#: kmymoney/kmymoney.cpp:4826
+#: kmymoney/kmymoney.cpp:4827
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "Uw opslag opslaan is mislukt."
