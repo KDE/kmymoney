@@ -283,8 +283,10 @@ public:
                 const auto selectedAccountId = selection.firstSelection(SelectedObjects::Account);
                 const auto accountIdx = file->accountsModel()->indexById(selectedAccountId);
                 AccountSet accountSet;
+                bool isInvestmentMove(false);
                 if (accountIdx.isValid()) {
                     if (accountIdx.data(eMyMoney::Model::AccountTypeRole).value<eMyMoney::Account::Type>() == eMyMoney::Account::Type::Investment) {
+                        isInvestmentMove = true;
                         accountSet.addAccountType(eMyMoney::Account::Type::Investment);
                     } else if (accountIdx.data(eMyMoney::Model::AccountIsAssetLiabilityRole).toBool()) {
                         accountSet.addAccountType(eMyMoney::Account::Type::Checkings);
@@ -323,25 +325,53 @@ public:
                 QSet<QString> currencyIds;
                 for (const auto& journalId : selection.selection(SelectedObjects::JournalEntry)) {
                     const auto journalIdx = file->journalModel()->indexById(journalId);
-                    moveToAccountSelector->removeItem(journalIdx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString());
                     const auto accId = journalIdx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString();
+                    // remove myself
+                    moveToAccountSelector->removeItem(accId);
                     const auto accIdx = file->accountsModel()->indexById(accId);
+                    if (isInvestmentMove) {
+                        // and also the parent (investment) account for investment moves
+                        moveToAccountSelector->removeItem(accIdx.data(eMyMoney::Model::AccountParentIdRole).toString());
+                    }
                     currencyIds.insert(accIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString());
                 }
 
-                // remove those accounts from the list that are denominated
-                // in a different currency
-                const auto list = moveToAccountSelector->accountList();
-                for (const auto& accId : list) {
-                    const auto idx = file->accountsModel()->indexById(accId);
-                    if (!currencyIds.contains(idx.data(eMyMoney::Model::AccountCurrencyIdRole).toString())) {
-                        moveToAccountSelector->removeItem(accId);
+                if (!isInvestmentMove) {
+                    // remove those accounts from the list that are denominated
+                    // in a different currency
+                    const auto list = moveToAccountSelector->accountList();
+                    for (const auto& accId : list) {
+                        const auto idx = file->accountsModel()->indexById(accId);
+                        if (!currencyIds.contains(idx.data(eMyMoney::Model::AccountCurrencyIdRole).toString())) {
+                            moveToAccountSelector->removeItem(accId);
+                        }
                     }
-                }
+                    // in case we have transactions in multiple currencies selected,
+                    // the move is not supported.
+                    pMenus[eMenu::Menu::MoveTransaction]->setDisabled(currencyIds.count() > 1);
 
-                // in case we have transactions in multiple currencies selected,
-                // the move is not supported.
-                pMenus[eMenu::Menu::MoveTransaction]->setDisabled(currencyIds.count() > 1);
+                } else {
+                    // remove those accounts from the list that do not
+                    // have sub-accounts denominated in all currencies
+                    const auto list = moveToAccountSelector->accountList();
+                    for (const auto& accId : list) {
+                        QSet<QString> securityIds;
+                        const auto idx = file->accountsModel()->indexById(accId);
+                        const auto rows = file->accountsModel()->rowCount(idx);
+                        for (int row = 0; row < rows; ++row) {
+                            const auto subIdx = file->accountsModel()->index(row, 0, idx);
+                            securityIds.insert(subIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString());
+                        }
+                        // if not all are found, remove the account from the list
+                        securityIds &= currencyIds;
+                        if (securityIds != currencyIds) {
+                            moveToAccountSelector->removeItem(accId);
+                        }
+                    }
+                    // in case we have no matching account left
+                    // the move is not supported.
+                    pMenus[eMenu::Menu::MoveTransaction]->setDisabled(moveToAccountSelector->accountList().isEmpty());
+                }
             }
         }
 
