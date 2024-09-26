@@ -89,6 +89,11 @@ protected:
      */
     mutable bool m_containsNonBaseCurrency;
 
+    /**
+     * The report may contain incorrect values
+     */
+    mutable bool m_mayContainIncorrectValues{false};
+
 public:
     virtual ~ReportTable() {}
 

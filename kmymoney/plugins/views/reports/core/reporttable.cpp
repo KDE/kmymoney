@@ -110,6 +110,10 @@ QString reports::ReportTable::renderReport(const QString& type, const QByteArray
                                                   "<div class=\"gap\">&nbsp;</div>\n").arg(
                                   i18n("All values shown in %1", file->baseCurrency().name())));
             }
+            if (m_mayContainIncorrectValues)
+                result.append(QString::fromLatin1("<div class=\"subtitle\">%1</div>\n"
+                                                  "<div class=\"gap\">&nbsp;</div>\n")
+                                  .arg(i18n("The results of this report may be incorrect if categories are included")));
 
             //this method is implemented by each concrete class
             result.append(renderHTML());
@@ -128,6 +132,12 @@ QString reports::ReportTable::renderReport(const QString& type, const QByteArray
             result.append(QString::fromLatin1("%1\n").arg(m_config.isConvertCurrency() ?
                           i18n("All currencies converted to %1", file->baseCurrency().name()) :
                           i18n("All values shown in %1 unless otherwise noted", file->baseCurrency().name())));
+
+        if (m_mayContainIncorrectValues)
+            result.append(QString::fromLatin1("<div class=\"subtitle\">%1</div>\n"
+                                              "<div class=\"gap\">&nbsp;</div>\n")
+                              .arg(i18n("The results of this report may be incorrect if categories are included")));
+
         result.append(renderCSV());
     }
 
