@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-26 01:48+0000\n"
+"POT-Creation-Date: 2024-09-27 01:54+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -8531,7 +8531,7 @@ msgstr "Транзакцияны бөлу"
 
 #: kmymoney/mymoney/splitmodel.cpp:118
 #: kmymoney/mymoney/storage/journalmodel.cpp:192
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1004
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1009
 #, kde-format
 msgid "*** UNASSIGNED ***"
 msgstr "*** ТАҒАЙЫНДАУЫ ЖОҚ ***"
@@ -12957,8 +12957,8 @@ msgid "Get Transactions"
 msgstr "Транзакцияларды табу"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:76
-#: kmymoney/plugins/views/reports/core/querytable.cpp:816
-#: kmymoney/plugins/views/reports/core/querytable.cpp:955
+#: kmymoney/plugins/views/reports/core/querytable.cpp:821
+#: kmymoney/plugins/views/reports/core/querytable.cpp:960
 #, kde-format
 msgid "Transfer"
 msgstr "Аударылым"
@@ -15931,12 +15931,12 @@ msgstr "Орташасы"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
 #: kmymoney/plugins/views/reports/core/listtable.cpp:298
 #: kmymoney/plugins/views/reports/core/listtable.cpp:299
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1413
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1553
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1603
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1680
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1860
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1931
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1417
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1557
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1607
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1684
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1864
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1935
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -16206,8 +16206,8 @@ msgstr "Жабу балансы"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:302
 #: kmymoney/plugins/views/reports/core/listtable.cpp:303
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1627
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1968
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1631
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1972
 #, kde-format
 msgid "Grand Total"
 msgstr "Ақырғы қорытынды"
@@ -16494,19 +16494,19 @@ msgid "Long-term Gain"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:220
-#: kmymoney/plugins/views/reports/core/querytable.cpp:952
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1002
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1937
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1956
+#: kmymoney/plugins/views/reports/core/querytable.cpp:957
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1007
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1942
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1961
 #, kde-format
 msgid "Transfer from %1"
 msgstr "%1 дегеннен аударылым"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
-#: kmymoney/plugins/views/reports/core/querytable.cpp:953
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1001
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1936
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1955
+#: kmymoney/plugins/views/reports/core/querytable.cpp:958
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1006
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1941
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1960
 #, kde-format
 msgid "Transfer to %1"
 msgstr "%1 дегенге аударылым"
@@ -16533,70 +16533,70 @@ msgid "Yes"
 msgstr "Иә"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeBox)
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:344
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:348
 #: kmymoney/widgets/ktransactionfilter.ui:624
 #, kde-format
 msgid "Transfers"
 msgstr "Аударылым"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:540
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:544
 #, fuzzy, kde-format
 #| msgid "Opening Date"
 msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "Ашылған күні"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1399
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1667
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1403
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1671
 #, fuzzy, kde-format
 #| msgid "Account"
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Есепшот"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2167
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2171
 #, fuzzy, kde-format
 #| msgid "Actual"
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "Шын"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2172
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2176
 #, fuzzy, kde-format
 #| msgid "Budget"
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Бюджет"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2177
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2181
 #, fuzzy, kde-format
 #| msgid "Difference"
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Айырмашылық"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2182
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2186
 #, fuzzy, kde-format
 #| msgid "Forecast"
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Болжам"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2187
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2191
 #, fuzzy, kde-format
 #| msgid "Moving Average"
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "Жылжымалы орташасы"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2192
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2196
 #, fuzzy, kde-format
 #| msgid "Moving Average Price"
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "Жылжымалы орта бағасы"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2197
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2201
 #, fuzzy, kde-format
 #| msgid "Price"
 msgctxt "@title:column report header"
@@ -16610,76 +16610,82 @@ msgid "[No Tag]"
 msgstr "[Белгі жоқ]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:579
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1772
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1777
 #, kde-format
 msgid "Month of %1"
 msgstr "%1 айы"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:580
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1773
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1778
 #, kde-format
 msgid "Week of %1"
 msgstr "%1 аптасы"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:796
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1007
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1150
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1899
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2070
+#: kmymoney/plugins/views/reports/core/querytable.cpp:801
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1012
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1155
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1904
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2075
 #, kde-format
 msgid "No Institution"
 msgstr "Мекемесі жоқ"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:800
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1910
+#: kmymoney/plugins/views/reports/core/querytable.cpp:805
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1915
 #, kde-format
 msgid "[Empty Payee]"
 msgstr "[Алушысы жоқ]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:835
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1942
+#: kmymoney/plugins/views/reports/core/querytable.cpp:840
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1947
 #, kde-format
 msgid "[Split Transaction]"
 msgstr "[Бөлінген транзакция]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:836
-#: kmymoney/plugins/views/reports/core/querytable.cpp:837
+#: kmymoney/plugins/views/reports/core/querytable.cpp:841
+#: kmymoney/plugins/views/reports/core/querytable.cpp:842
 #, kde-format
 msgctxt "Split transaction"
 msgid "Split"
 msgstr "Бөлу"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1684
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1689
 #, kde-format
 msgctxt "No institution"
 msgid "None"
 msgstr "Жоқ"
 
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:101
-#: kmymoney/plugins/views/reports/core/reporttable.cpp:126
+#: kmymoney/plugins/views/reports/core/reporttable.cpp:130
 #, kde-format
 msgctxt "Report date range"
 msgid "%1 through %2"
 msgstr "%1 және %2 аралығында"
 
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:106
-#: kmymoney/plugins/views/reports/core/reporttable.cpp:129
+#: kmymoney/plugins/views/reports/core/reporttable.cpp:133
 #, kde-format
 msgid "All currencies converted to %1"
 msgstr "Бүкіл ақша %1 қылып аударылған"
 
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:107
-#: kmymoney/plugins/views/reports/core/reporttable.cpp:130
+#: kmymoney/plugins/views/reports/core/reporttable.cpp:134
 #, kde-format
 msgid "All values shown in %1 unless otherwise noted"
 msgstr "Белгіленбеген болса бүкілінің бірлігі: %1"
 
-#: kmymoney/plugins/views/reports/core/reporttable.cpp:117
+#: kmymoney/plugins/views/reports/core/reporttable.cpp:116
+#: kmymoney/plugins/views/reports/core/reporttable.cpp:139
+#, kde-format
+msgid "The results of this report may be incorrect if categories are included"
+msgstr ""
+
+#: kmymoney/plugins/views/reports/core/reporttable.cpp:121
 #, kde-format
 msgid "Unable to generate report"
 msgstr "Есеп-беру болмады"
 
-#: kmymoney/plugins/views/reports/core/reporttable.cpp:118
+#: kmymoney/plugins/views/reports/core/reporttable.cpp:122
 #, kde-format
 msgid ""
 "There was an error creating your report: \"%1\".\n"
