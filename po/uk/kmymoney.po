@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-27 01:54+0000\n"
-"PO-Revision-Date: 2024-09-21 09:29+0300\n"
+"PO-Revision-Date: 2024-09-27 20:22+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -16263,6 +16263,7 @@ msgstr "У %1 буде показано всі значення, якщо не �
 #, kde-format
 msgid "The results of this report may be incorrect if categories are included"
 msgstr ""
+"Результати цього звіту можуть бути некоректними, якщо включено категорії"
 
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:121
 #, kde-format

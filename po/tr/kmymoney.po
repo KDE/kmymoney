@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-27 01:54+0000\n"
-"PO-Revision-Date: 2024-09-23 15:28+0300\n"
+"PO-Revision-Date: 2024-09-27 17:45+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -16059,7 +16059,7 @@ msgstr "Aksi belirtilmediği sürece tüm değerler %1 olarak gösteriliyor"
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:139
 #, kde-format
 msgid "The results of this report may be incorrect if categories are included"
-msgstr ""
+msgstr "Kategoriler içerilirse bu raporun içeriği doğru olmayabilir"
 
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:121
 #, kde-format

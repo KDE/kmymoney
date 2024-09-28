@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-27 01:54+0000\n"
-"PO-Revision-Date: 2024-09-21 10:52+0200\n"
+"PO-Revision-Date: 2024-09-27 23:19+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -16181,6 +16181,8 @@ msgstr "Alle waarden in %1 tonen, tenzij anders aangegeven"
 #, kde-format
 msgid "The results of this report may be incorrect if categories are included"
 msgstr ""
+"De resultaten van dit rapport kunnen onjuist zijn als categorieën worden "
+"meegenomen"
 
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:121
 #, kde-format
