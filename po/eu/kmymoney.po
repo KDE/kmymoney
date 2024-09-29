@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-27 01:54+0000\n"
-"PO-Revision-Date: 2024-08-25 22:25+0200\n"
+"PO-Revision-Date: 2024-09-28 21:20+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 24.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2561,16 +2561,13 @@ msgstr "Mugak"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/dialogs/knewaccountdlg.ui:519
-#, fuzzy, kde-format
-#| msgid ""
-#| "This page allows to setup certain limits. KMyMoney will warn you when the "
-#| "account balance reaches a limit."
+#, kde-format
 msgid ""
 "This section allows to setup certain limits. KMyMoney will warn you when the "
 "account balance reaches a limit."
 msgstr ""
-"Orri honetan, mugak ezar ditzakezu. KMyMoney-k abisatu egingo dizu kontu-"
-"saldoa muga batera iristen bada."
+"Atal honek zenbait muga ezartzeko aukera ematen du. KMyMoney-k, kontuaren "
+"saldoa muga batera iristen denean abisatuko dizu."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/dialogs/knewaccountdlg.ui:548
@@ -2598,10 +2595,9 @@ msgstr "Abisu goiztiarra"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_taxGroupBox)
 #: kmymoney/dialogs/knewaccountdlg.ui:624
-#, fuzzy, kde-format
-#| msgid "Tag options"
+#, kde-format
 msgid "Tax options"
-msgstr "Etiketa-aukerak"
+msgstr "Zerga aukerak"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox3)
 #: kmymoney/dialogs/knewaccountdlg.ui:630
@@ -2664,25 +2660,21 @@ msgstr "Inportatzeko aukerak"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/knewaccountdlg.ui:876
-#, fuzzy, kde-format
-#| msgid "Payee creation"
+#, kde-format
 msgid "Automatic Payee creation"
-msgstr "Onuradunak sortzea"
+msgstr "Onuraduna automatikoki sortzea"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:884
-#, fuzzy, kde-format
-#| msgid "Application Account"
+#, kde-format
 msgid "Application Default"
-msgstr "Aplikazio-kontua"
+msgstr "Aplikazioaren lehenespena"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:889
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Reconciliation date"
-#| msgid "Never reconciled"
+#, kde-format
 msgid "Never create"
-msgstr "Inoiz adostu gabe"
+msgstr "Ez sortu inoiz"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_preferredStatementDate)
@@ -2694,10 +2686,9 @@ msgstr "Galdetu erabiltzaileari"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:899
-#, fuzzy, kde-format
-#| msgid "Create category"
+#, kde-format
 msgid "Create automatically"
-msgstr "Kategoria sortu"
+msgstr "Automatikoki sortu"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_budgetGroupBox)
 #. i18n: ectx: Menu (budget_context_menu)
@@ -16129,6 +16120,8 @@ msgstr ""
 #, kde-format
 msgid "The results of this report may be incorrect if categories are included"
 msgstr ""
+"Kategoriak barneratzen badira, baliteke txosten honetako emaitzak zuzenak ez "
+"izatea"
 
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:121
 #, kde-format
@@ -17618,7 +17611,7 @@ msgstr "Sartu transferentziak"
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:218
 #, kde-format
 msgid "Include unused accounts/categories"
-msgstr "Sartu kontu/kategoria erabiligabeak"
+msgstr "Barneratu erabili gabeko kontuak/kategoriak"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:43
@@ -20932,20 +20925,16 @@ msgid "Costcenter"
 msgstr "Kostu-zentroa"
 
 #: kmymoney/views/newtransactioneditor.cpp:233
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the split ratio for this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the amount of the transaction."
-msgstr "Sartu transakzio honetarako zatiketa erlazioa"
+msgstr "Sartu transakzioaren zenbatekoa."
 
 #: kmymoney/views/newtransactioneditor.cpp:234
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the split ratio for this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the category or counter account of the transaction."
-msgstr "Sartu transakzio honetarako zatiketa erlazioa"
+msgstr "Sartu transakzioaren kategoria edo kontra-kontua"
 
 #: kmymoney/views/newtransactioneditor.cpp:237
 #, kde-format
@@ -25398,67 +25387,64 @@ msgstr ""
 "pertsonalizatzeko baino ez da erabiliko.</p>"
 
 #: tools/kmmreport-export.cpp:128
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export KMyMoney reports"
-msgstr "Esportatu txostena"
+msgstr "Esportatu KMyMoney txostenak"
 
 #: tools/kmmreport-export.cpp:132
 #, kde-format
 msgid "export in csv format (default)"
-msgstr ""
+msgstr "esportatu CSV formatuan (lehenetsia)"
 
 #: tools/kmmreport-export.cpp:135
 #, kde-format
 msgid "export in HTML format"
-msgstr ""
+msgstr "esportatu HTML formatuan"
 
 #: tools/kmmreport-export.cpp:138
 #, kde-format
 msgid "Create reference file from output"
-msgstr ""
+msgstr "Sortu erreferentzia fitxategia irteeratik"
 
 #: tools/kmmreport-export.cpp:141
 #, kde-format
 msgid "Use info table for exporting"
-msgstr ""
+msgstr "Esportatzeko, informazio taula erabili"
 
 #: tools/kmmreport-export.cpp:144
 #, kde-format
 msgid "Use pivot table for exporting"
-msgstr ""
+msgstr "Esportatzeko, taula dinamiko bat erabili"
 
 #: tools/kmmreport-export.cpp:147
 #, kde-format
 msgid "Use query table for exporting (default)"
-msgstr ""
+msgstr "Esportatzeko, itaun taula erabili (lehenetsia)"
 
 #: tools/kmmreport-export.cpp:150
-#, fuzzy, kde-format
-#| msgid "Old Customized Reports"
+#, kde-format
 msgid "List all custom reports"
-msgstr "Txosten pertsonalizatu zaharrak"
+msgstr "Zerrendatu neurrira egokitutako txosten denak"
 
 #: tools/kmmreport-export.cpp:153
-#, fuzzy, kde-format
-#| msgid "Unable to generate report"
+#, kde-format
 msgid "Filename for generated output"
-msgstr "Ezin izan da txostena sortu"
+msgstr "Sortutako irteeraren fitxategi-izena"
 
 #: tools/kmmreport-export.cpp:156
 #, kde-format
 msgid "Process a specific report"
-msgstr ""
+msgstr "Txosten jakin bat prozesatu"
 
 #: tools/kmmreport-export.cpp:168
 #, kde-format
 msgid "Only one of --csv and --html is supported"
-msgstr ""
+msgstr "--csv eta --html arteko bakarra onartzen da"
 
 #: tools/kmmreport-export.cpp:203
 #, kde-format
 msgid "saving report '%1' into '%2'"
-msgstr ""
+msgstr "'%1' txostena '%2'(e)an gordetzea"
 
 #, fuzzy
 #~| msgid "Price for %1 updated (id %2)"

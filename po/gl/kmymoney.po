@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-27 01:54+0000\n"
-"PO-Revision-Date: 2024-09-21 16:02+0200\n"
+"PO-Revision-Date: 2024-09-28 13:05+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -16144,6 +16144,7 @@ msgstr "Todos os valores en %1 a non ser que se indique outra cousa"
 #, kde-format
 msgid "The results of this report may be incorrect if categories are included"
 msgstr ""
+"Os resultados deste informe poden ser incorrectos se se inclúen categorías."
 
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:121
 #, kde-format
