@@ -2459,16 +2459,11 @@ msgstr "Limity"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/dialogs/knewaccountdlg.ui:519
-#, fuzzy, kde-format
-#| msgid ""
-#| "This page allows to setup certain limits. KMyMoney will warn you when the "
-#| "account balance reaches a limit."
+#, kde-format
 msgid ""
 "This section allows to setup certain limits. KMyMoney will warn you when the "
 "account balance reaches a limit."
 msgstr ""
-"Na této stránce můžete nastavit limity zůstatku na účtu, při jejichž "
-"dosažení nebo překročení vás bude aplikace KMyMoney varovat."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/dialogs/knewaccountdlg.ui:548
@@ -2496,10 +2491,9 @@ msgstr "Včasné varování"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_taxGroupBox)
 #: kmymoney/dialogs/knewaccountdlg.ui:624
-#, fuzzy, kde-format
-#| msgid "Tag options"
+#, kde-format
 msgid "Tax options"
-msgstr "Možnosti značek"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox3)
 #: kmymoney/dialogs/knewaccountdlg.ui:630
@@ -2562,10 +2556,9 @@ msgstr "Možnosti importu"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/knewaccountdlg.ui:876
-#, fuzzy, kde-format
-#| msgid "Payee creation"
+#, kde-format
 msgid "Automatic Payee creation"
-msgstr "Vytvoření plátce"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:884
@@ -2575,11 +2568,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:889
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Reconciliation date"
-#| msgid "Never reconciled"
+#, kde-format
 msgid "Never create"
-msgstr "Nikdy neschváleno"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_preferredStatementDate)
@@ -2591,10 +2582,9 @@ msgstr "Zeptat se uživatele"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:899
-#, fuzzy, kde-format
-#| msgid "Create category"
+#, kde-format
 msgid "Create automatically"
-msgstr "Vytvořit kategorii"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_budgetGroupBox)
 #. i18n: ectx: Menu (budget_context_menu)
