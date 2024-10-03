@@ -213,6 +213,10 @@ int main(int argc, char *argv[])
 
     MyMoneyMoney::detectCurrencyFormatting();
 
+    qDebug() << "Long date format" << QLocale().dateFormat(QLocale::LongFormat);
+    qDebug() << "Short date format" << QLocale().dateFormat(QLocale::ShortFormat);
+    qDebug() << "Narrow date format" << QLocale().dateFormat(QLocale::NarrowFormat);
+
     kmymoney = new KMyMoneyApp();
 
 #ifdef KMM_DEBUG
