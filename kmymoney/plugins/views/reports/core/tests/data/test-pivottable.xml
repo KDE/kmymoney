@@ -52,7 +52,8 @@
   </CURRENCIES>
   <PRICES/>
   <REPORTS>
-    <REPORT id="R000002" type="pivottable 1.16" group="Forecast" name="Eigenkapital-Vorhersage  (angepasst)" comment="Custom report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="assetliability" includesactuals="0" includesforecast="1" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" showrowtotals="0" showcolumntotals="1" detail="total" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="0" chartsvgridlines="0" chartdatalabels="1" chartbydefault="1" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="months" datalock="automatic" dataRangeStart="-125" dataRangeEnd="-121" dataMajorTick="1" dataMinorTick="0,2" yLabelsPrecision="2">
+    <REPORT
+        id="R000002" type="pivottable 1.16" group="Forecast" name="Eigenkapital-Vorhersage  (angepasst)" comment="Custom report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="assetliability" includesactuals="0" includesforecast="1" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" showrowtotals="0" showcolumntotals="1" detail="total" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="0" chartsvgridlines="0" chartdatalabels="1" chartbydefault="1" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="months" datalock="automatic" dataRangeStart="-125" dataRangeEnd="-121" dataMajorTick="1" dataMinorTick="0,2" yLabelsPrecision="2">
       <ACCOUNTGROUP group="asset"/>
       <ACCOUNTGROUP group="liability"/>
       <DATES from="2024-01-01" to="2024-12-31"/>
