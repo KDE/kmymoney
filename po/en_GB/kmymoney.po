@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-27 01:54+0000\n"
+"POT-Creation-Date: 2024-10-04 01:50+0000\n"
 "PO-Revision-Date: 2024-09-15 10:52+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -6259,7 +6259,7 @@ msgstr "dump the names of all defined QAction objects to stdout and quit"
 msgid "file to open"
 msgstr "file to open"
 
-#: kmymoney/main.cpp:269
+#: kmymoney/main.cpp:273
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr "Uncaught error. Please report the details to the developers"

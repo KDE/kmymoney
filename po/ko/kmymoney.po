@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-27 01:54+0000\n"
+"POT-Creation-Date: 2024-10-04 01:50+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -6237,7 +6237,7 @@ msgstr "정의된 모든 QAction 객체의 이름을 표준 출력에 출력하�
 msgid "file to open"
 msgstr "열 파일"
 
-#: kmymoney/main.cpp:269
+#: kmymoney/main.cpp:273
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr "잡히지 않은 오류. 자세한 정보를 개발자에게 보고해 주십시오"

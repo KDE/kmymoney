@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-27 01:54+0000\n"
+"POT-Creation-Date: 2024-10-04 01:50+0000\n"
 "PO-Revision-Date: 2024-04-30 12:31+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -5965,7 +5965,7 @@ msgstr ""
 msgid "file to open"
 msgstr "file de aperir"
 
-#: kmymoney/main.cpp:269
+#: kmymoney/main.cpp:273
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr ""

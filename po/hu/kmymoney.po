@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-27 01:54+0000\n"
+"POT-Creation-Date: 2024-10-04 01:50+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -6316,7 +6316,7 @@ msgstr ""
 msgid "file to open"
 msgstr "megnyitandó fájl"
 
-#: kmymoney/main.cpp:269
+#: kmymoney/main.cpp:273
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr "Lekezeletlen hiba. Kérjük jelentse a részleteket a fejlesztőknek"
