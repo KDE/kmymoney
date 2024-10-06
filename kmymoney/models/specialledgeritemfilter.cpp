@@ -161,7 +161,7 @@ public:
 
         if (parameter.isValid()) {
             auto idx = q->index(qAbs(parameter.firstRow), 0);
-            const bool showValuesInverted(idx.data(eMyMoney::Model::ShowValueInvertedRole).toBool());
+            const MyMoneyMoney showValuesInverted = idx.data(eMyMoney::Model::ShowValueInvertedRole).toBool() ? MyMoneyMoney::MINUS_ONE : MyMoneyMoney::ONE;
             auto accountId = idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString();
             const auto account = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
             const bool isInvestmentAccount = (account.accountType() == eMyMoney::Account::Type::Investment) || account.isInvest();
@@ -193,7 +193,7 @@ public:
 
                 accountId = idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString();
                 if (balances.constFind(accountId) == balances.constEnd()) {
-                    balances[accountId] = MyMoneyFile::instance()->balance(accountId, startDate);
+                    balances[accountId] = MyMoneyFile::instance()->balance(accountId, startDate) * showValuesInverted;
                 }
 
                 const auto shares = idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
@@ -205,11 +205,7 @@ public:
                     }
 
                 } else {
-                    if (showValuesInverted) {
-                        balances[accountId] -= shares;
-                    } else {
-                        balances[accountId] += shares;
-                    }
+                    balances[accountId] += (shares * showValuesInverted);
                 }
                 q->setData(idx, QVariant::fromValue(balances[accountId]), eMyMoney::Model::JournalBalanceRole);
             }
