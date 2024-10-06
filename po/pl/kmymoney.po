@@ -1,19 +1,19 @@
 # translation of pl.po to polish
 # This file is put in the public domain.
 #
+# SPDX-FileCopyrightText: 2011, 2012, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 # Robert Gomulka <rgom@o2.pl>, 2007.
 # Mateusz "Święty" Pogorzelski <vlogical@o2.pl>, 2009.
 # Mirek Sabiniewicz <m.sabiniewicz@gmail.com>, 2010.
 # Marta Rybczyńska <kde-i18n@rybczynska.net>, 2010, 2011, 2013.
 # Marek Lemanczyk <marek@lemanczyk.eu>, 2011.
-# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2011, 2012, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 # Grzegorz Koryga <rehork@tutamail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-04 01:50+0000\n"
-"PO-Revision-Date: 2023-10-08 11:16+0200\n"
+"PO-Revision-Date: 2024-10-05 13:22+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -22,6 +22,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1705,10 +1706,9 @@ msgid "Configure"
 msgstr "Ustawienia"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:304
-#, fuzzy, kde-format
-#| msgid "%1 units in %2"
+#, kde-format
 msgid "%1 units for one %2"
-msgstr "%1 jednostek w %2"
+msgstr "%1 jednostek dla jednego %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:341
 #, kde-format
@@ -1716,18 +1716,16 @@ msgid "[No identifier]"
 msgstr "[Brak identyfikatora]"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:451
-#, fuzzy, kde-format
-#| msgid "No account selected"
+#, kde-format
 msgctxt "@info online update price info"
 msgid "No security selected."
-msgstr "Nie wybrano konta"
+msgstr "Nie wybrano papieru."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:461
-#, fuzzy, kde-format
-#| msgid "Name of security to import."
+#, kde-format
 msgctxt "@info online update price info"
 msgid "No Security to be updated."
-msgstr "Nazwa zabezpieczenia do importu."
+msgstr "Nie ma żadnego papieru do uaktualnienia."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:485
 #, kde-format
@@ -2307,8 +2305,7 @@ msgstr ""
 "widoku kont i kategorii."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:921
-#, fuzzy, kde-format
-#| msgid "Hidden categories"
+#, kde-format
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "Ukryte kategorie"
@@ -2684,17 +2681,15 @@ msgstr "Opcje importu"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/knewaccountdlg.ui:876
-#, fuzzy, kde-format
-#| msgid "Payee creation"
+#, kde-format
 msgid "Automatic Payee creation"
-msgstr "Tworzenie odbiorcy"
+msgstr "Samodzielne tworzenie odbiorców"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:884
-#, fuzzy, kde-format
-#| msgid "Application Account"
+#, kde-format
 msgid "Application Default"
-msgstr "Konto aplikacji"
+msgstr "Domyślne aplikacji"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:889
@@ -2714,10 +2709,9 @@ msgstr "Zapytaj użytkownika"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:899
-#, fuzzy, kde-format
-#| msgid "Create category"
+#, kde-format
 msgid "Create automatically"
-msgstr "Stwórz kategorię"
+msgstr "Utwórz sam"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_budgetGroupBox)
 #. i18n: ectx: Menu (budget_context_menu)
@@ -3485,10 +3479,9 @@ msgstr "Pokaż kategorie w widoku listy kont"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:417
-#, fuzzy, kde-format
-#| msgid "Hide liability accounts with zero balance"
+#, kde-format
 msgid "Hide accounts with a zero balance"
-msgstr "Ukryj konta pasywów z zerowym saldem"
+msgstr "Ukryj konta z zerowym saldem"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:424
@@ -4731,10 +4724,9 @@ msgid "Online banking"
 msgstr "Ustawienia połączenia"
 
 #: kmymoney/kcreditswindow.cpp:100
-#, fuzzy, kde-format
-#| msgid "Online Banking Operations"
+#, kde-format
 msgid "Online banking framework"
-msgstr "Internetowe operacje bankowe"
+msgstr "System obsługi bankowości internetowej"
 
 #: kmymoney/kcreditswindow.cpp:106
 #, kde-format
@@ -4742,10 +4734,9 @@ msgid "Library for creating diagrams"
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:111
-#, fuzzy, kde-format
-#| msgid "iCalendar file"
+#, kde-format
 msgid "iCalendar integration"
-msgstr "Plik iCalendar"
+msgstr "Obsługa iCalendar"
 
 #: kmymoney/kcreditswindow.cpp:118
 #, kde-format
@@ -4753,10 +4744,9 @@ msgid "OFX banking protocol abstraction library"
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:125
-#, fuzzy, kde-format
-#| msgid "Database malfunction"
+#, kde-format
 msgid "SQLite database encryption"
-msgstr "Błąd bazy danych"
+msgstr "Szyfrowanie bazy danych SQLite"
 
 #: kmymoney/kcreditswindow.cpp:130
 #, kde-format
@@ -18590,10 +18580,9 @@ msgstr "Kolor tła dla znacznika grupy"
 
 #. i18n: ectx: label, entry (groupMarkerText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:214
-#, fuzzy, kde-format
-#| msgid "Background color for group marker"
+#, kde-format
 msgid "Text color for group marker"
-msgstr "Kolor tła dla znacznika grupy"
+msgstr "Kolor tekstu dla znacznika grupy"
 
 #. i18n: ectx: label, entry (fieldRequiredColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:218
@@ -18615,10 +18604,9 @@ msgstr "Ukryj kapitał o zerowym saldzie"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:240
-#, fuzzy, kde-format
-#| msgid "Hide zero balance equities"
+#, kde-format
 msgid "Hide zero balance accounts"
-msgstr "Ukryj kapitał o zerowym saldzie"
+msgstr "Ukryj konta o zerowym saldzie"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:244
@@ -19457,11 +19445,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/keditscheduledlg.cpp:316
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
-msgstr "Znaleziono harmonogram"
+msgstr "Zmieniono częstotliwość planowania"
 
 #: kmymoney/views/keditscheduledlg.cpp:609
 #, kde-format
@@ -19928,11 +19915,10 @@ msgid "Expected Profit/Loss"
 msgstr "Spodziewany zysk/strata"
 
 #: kmymoney/views/kinstitutionsview.cpp:251
-#, fuzzy, kde-format
-#| msgid "Edit institution..."
+#, kde-format
 msgctxt "@info:title Dialog title"
 msgid "Edit Institution"
-msgstr "Edytuj instytucję..."
+msgstr "Edytuj instytucję"
 
 #: kmymoney/views/kinstitutionsview.cpp:258
 #, kde-format
@@ -19990,10 +19976,9 @@ msgstr "Kapitał"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/views/kinvestmentview.ui:44
-#, fuzzy, kde-format
-#| msgid "Select new investment type"
+#, kde-format
 msgid "Select investment account:"
-msgstr "Wybierz nowy rodzaj inwestycji"
+msgstr "Wybierz konto inwestycyjne:"
 
 #. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
 #: kmymoney/views/kinvestmentview.ui:80
@@ -20440,11 +20425,10 @@ msgid "Filter"
 msgstr "Odfiltruj"
 
 #: kmymoney/views/kscheduledview_p.h:104
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "No schedules found"
-msgstr "Znaleziono harmonogram"
+msgstr "Nie znaleziono żadnego harmonogramu"
 
 #: kmymoney/views/kscheduledview_p.h:254
 #, kde-format
@@ -21106,11 +21090,10 @@ msgid "Confirm end of reconciliation"
 msgstr "Potwierdź zakończenie uzgadniania"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:294
-#, fuzzy, kde-format
-#| msgid "Retrieving transactions..."
+#, kde-format
 msgctxt "@label Reconciliation progress dialog"
 msgid "Reconciling transactions..."
-msgstr "Pobieranie transakcji..."
+msgstr "Uzgadnianie transakcji..."
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:442
 #, kde-format
@@ -22735,11 +22718,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:265
-#, fuzzy, kde-format
-#| msgctxt "Create undo action"
-#| msgid "Create account"
+#, kde-format
 msgid "Favorite account"
-msgstr "Utwórz konto"
+msgstr "Ulubione konto"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel14)
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:27
@@ -24008,15 +23989,13 @@ msgid "Unexpected error occurred while adding new investment"
 msgstr "Wystąpił nieoczekiwany błąd w trakcie dodawania nowej inwestycji"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:195
-#, fuzzy, kde-format
-#| msgid "Investment detail wizard"
+#, kde-format
 msgctxt "@info:window"
 msgid "Investment detail wizard"
 msgstr "Pomocnik szczegółów inwestycji"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:211
-#, fuzzy, kde-format
-#| msgid "Security detail wizard"
+#, kde-format
 msgctxt "@info:window"
 msgid "Security detail wizard"
 msgstr "Pomocnik szczegółów papierów wartościowych"
@@ -25485,10 +25464,9 @@ msgstr ""
 "program KMyMoney.</p>"
 
 #: tools/kmmreport-export.cpp:128
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export KMyMoney reports"
-msgstr "Wyeksportuj sprawozdanie"
+msgstr "Wyeksportuj sprawozdania KMyMoney"
 
 #: tools/kmmreport-export.cpp:132
 #, kde-format
@@ -25522,16 +25500,14 @@ msgid "Use query table for exporting (default)"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:150
-#, fuzzy, kde-format
-#| msgid "Old Customized Reports"
+#, kde-format
 msgid "List all custom reports"
-msgstr "Stare przerobione sprawozdania"
+msgstr "Wypisz wszystkie własne sprawozdania"
 
 #: tools/kmmreport-export.cpp:153
-#, fuzzy, kde-format
-#| msgid "Unable to generate report"
+#, kde-format
 msgid "Filename for generated output"
-msgstr "Nie można utworzyć sprawozdania"
+msgstr "Nazwa pliku dla utworzonego wyniku"
 
 #: tools/kmmreport-export.cpp:156
 #, kde-format
