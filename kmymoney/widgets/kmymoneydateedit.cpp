@@ -40,12 +40,14 @@ public:
         , m_firstFocusIn(true)
     {
         int sectionIndex(0);
+        int sectionSize(0);
         bool lastWasDelimiter(false);
         m_sections.resize(3);
         const auto format(q->locale().dateFormat(QLocale::ShortFormat).toLower());
 
         for (int pos = 0; pos < format.length(); ++pos) {
             const auto ch = format[pos];
+            ++sectionSize;
             if (ch == QLatin1Char('d')) {
                 m_sections[sectionIndex] = QDateTimeEdit::DaySection;
                 lastWasDelimiter = false;
@@ -60,7 +62,11 @@ public:
                     m_validDelims.append(ch);
                 }
                 if (!lastWasDelimiter) {
+                    if (sectionSize > 2) {
+                        /// @todo special handling for non-numeric fields
+                    }
                     ++sectionIndex;
+                    sectionSize = 0;
                     lastWasDelimiter = true;
                 }
             }
@@ -174,7 +180,38 @@ public:
             parts[yearIndex] = QStringLiteral("%1%2").arg(QString::number(QDate::currentDate().year() / 100), parts[yearIndex]);
         }
 
-        return QDate(parts[yearIndex].toInt(), parts[monthIndex].toInt(), parts[dayIndex].toInt());
+        // convert the part of the month to a numeric value. in case
+        // it is in alphanumeric form, it will result in zero which
+        // is an invalid value for a month in a QDate object.
+        int month = parts.at(monthIndex).toInt();
+        if (month == 0) { // must be alphanumeric
+            // now we have to solve the following problem: if the locale's
+            // short date format uses a two digit year, we cannot use
+            // QLocale::toDate() with a four digit year string. That
+            // will result in an invalid date. Solution is to convert
+            // the year part to the version that is expected by the locale,
+            // create a string out of the parts and convert it to a QDate
+            // using QLocale::toDate() and take the month of that date
+            // for further processing.
+            auto yearPart = parts.at(yearIndex);
+            if (!q->locale().dateFormat(QLocale::ShortFormat).contains("yyyy")) {
+                yearPart = yearPart.right(2);
+            }
+            // construct a valid date by appending the parts
+            QString dateString;
+            for (int part = 0; part < 3; ++part) {
+                if (part > 0) {
+                    dateString.append(m_validDelims[0]);
+                }
+                if (part == yearIndex) {
+                    dateString.append(yearPart);
+                } else {
+                    dateString.append(parts[part]);
+                }
+            }
+            month = q->locale().toDate(dateString, QLocale::ShortFormat).month();
+        }
+        return QDate(parts[yearIndex].toInt(), month, parts[dayIndex].toInt());
     }
 
     /**
@@ -554,10 +591,6 @@ void KMyMoneyDateEdit::keyPressEvent(QKeyEvent* keyEvent)
     default:
         if (keyEvent->text().length() > 0) {
             const auto ch(keyEvent->text().at(0));
-
-            if (!(d->isValidDelimiter(ch) || (ch >= QLatin1Char('0') && ch <= QLatin1Char('9')))) {
-                dropKey = true;
-            }
 
             // prevent two delimters in a row and simply
             // fake an overwrite and select the next section
