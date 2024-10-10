@@ -68,6 +68,7 @@ void writeTabletoCSV(const QueryTable& table, const QString& basename = QString(
 
 void writeTable(const QueryTable& table, const QString& basename = QString())
 {
+    writeTabletoCSV(table, basename);
     writeTabletoHTML(table, basename);
 }
 
@@ -143,8 +144,7 @@ void QueryTableTest::testQueryBasics()
         filter.setName("Transactions by Category");
         XMLandback(filter);
         QueryTable qtbl_1(filter);
-
-        writeTable(qtbl_1, "Transactions by Category");
+        writeTable(qtbl_1, filter.name());
 
         QList<ListTable::TableRow> rows = qtbl_1.rows();
 
@@ -168,8 +168,7 @@ void QueryTableTest::testQueryBasics()
         filter.setName("Transactions by Top Category");
         XMLandback(filter);
         QueryTable qtbl_2(filter);
-
-        writeTable(qtbl_2, "Transactions by Top Category");
+        writeTable(qtbl_2, filter.name());
 
         rows = qtbl_2.rows();
 
@@ -196,7 +195,7 @@ void QueryTableTest::testQueryBasics()
         XMLandback(filter);
         QueryTable qtbl_3(filter);
 
-        writeTable(qtbl_3, "Transactions by Account");
+        writeTable(qtbl_3, filter.name());
 
         rows = qtbl_3.rows();
 
@@ -228,8 +227,7 @@ void QueryTableTest::testQueryBasics()
         filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
         XMLandback(filter);
         QueryTable qtbl_4(filter);
-
-        writeTable(qtbl_4, "Transactions by Payee");
+        writeTable(qtbl_4, filter.name());
 
         rows = qtbl_4.rows();
 
@@ -253,8 +251,7 @@ void QueryTableTest::testQueryBasics()
         filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
         XMLandback(filter);
         QueryTable qtbl_5(filter);
-
-        writeTable(qtbl_5, "Transactions by Month");
+        writeTable(qtbl_5, filter.name());
 
         rows = qtbl_5.rows();
 
@@ -280,8 +277,7 @@ void QueryTableTest::testQueryBasics()
         filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
         XMLandback(filter);
         QueryTable qtbl_6(filter);
-
-        writeTable(qtbl_6, "Transactions by Week");
+        writeTable(qtbl_6, filter.name());
 
         rows = qtbl_6.rows();
 
@@ -404,8 +400,7 @@ void QueryTableTest::testAccountQuery()
         filter.setName("Accounts by Institution (No transactions)");
         XMLandback(filter);
         QueryTable qtbl_1(filter);
-
-        writeTable(qtbl_1, "Accounts by Institution (No transactions)");
+        writeTable(qtbl_1, filter.name());
 
         QList<ListTable::TableRow> rows = qtbl_1.rows();
 
@@ -528,15 +523,14 @@ void QueryTableTest::testInvestment()
                           eMyMoney::Report::QueryColumn::Action | eMyMoney::Report::QueryColumn::Shares | eMyMoney::Report::QueryColumn::Price,
                           eMyMoney::TransactionFilter::Date::UserDefined,
                           eMyMoney::Report::DetailLevel::All,
-                          i18n("Investment Transactions"),
-                          i18n("Test Report")));
+                          "Investment Transactions",
+                          "Test Report"));
         invtran_r.setDateFilter(QDate(2004, 1, 1), QDate(2004, 12, 31));
         invtran_r.setInvestmentsOnly(true);
         XMLandback(invtran_r);
         QueryTable invtran(invtran_r);
-
 #if 1
-        writeTable(invtran, "investment_transactions_test");
+        writeTable(invtran, invtran_r.name());
 
         QList<ListTable::TableRow> rows = invtran.rows();
 
@@ -627,14 +621,13 @@ void QueryTableTest::testInvestment()
                                               eMyMoney::Report::QueryColumn::Performance,
                                               eMyMoney::TransactionFilter::Date::UserDefined,
                                               eMyMoney::Report::DetailLevel::All,
-                                              i18n("Investment Performance by Account"),
-                                              i18n("Test Report")));
+                                              "Investment Performance by Account",
+                                              "Test Report"));
         invhold_r.setDateFilter(QDate(2004, 1, 1), QDate(2004, 10, 1));
         invhold_r.setInvestmentsOnly(true);
         XMLandback(invhold_r);
         QueryTable invhold(invhold_r);
-
-        writeTable(invhold, "Investment Performance by Account");
+        writeTable(invhold, invhold_r.name());
 
         rows = invhold.rows();
 
@@ -709,14 +702,13 @@ void QueryTableTest::testSplitShares()
                                               eMyMoney::Report::QueryColumn::Performance,
                                               eMyMoney::TransactionFilter::Date::UserDefined,
                                               eMyMoney::Report::DetailLevel::All,
-                                              i18n("Investment Performance by Account"),
-                                              i18n("Test Report")));
+                                              "Investment Performance by Account (with stock split)",
+                                              "Test Report"));
         invhold_r.setDateFilter(QDate(2017, 8, 1), QDate(2017, 8, 3));
         invhold_r.setInvestmentsOnly(true);
         XMLandback(invhold_r);
         QueryTable invhold(invhold_r);
-
-        writeTable(invhold, "Investment Performance by Account (with stock split)");
+        writeTable(invhold, invhold_r.name());
 
         const auto rows = invhold.rows();
 
@@ -746,13 +738,12 @@ void QueryTableTest::testConversionRate()
         MyMoneyReport filter(QLatin1String("fake-id"));
         filter.setRowType(eMyMoney::Report::RowType::Account);
         filter.setDateFilter(QDate(2017, 8, 1), QDate(2017, 8, 2));
-        filter.setName("Transactions by Account");
+        filter.setName("Transactions by Account (conversion rate)");
         auto cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category | eMyMoney::Report::QueryColumn::Balance;
         filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
         XMLandback(filter);
         QueryTable qtbl(filter);
-
-        writeTable(qtbl, "Transactions by Account (conversion rate)");
+        writeTable(qtbl, filter.name());
 
         const auto rows = qtbl.rows();
 
@@ -793,13 +784,12 @@ void QueryTableTest::testBalanceColumn()
         MyMoneyReport filter(QLatin1String("fake-id"));
 
         filter.setRowType(eMyMoney::Report::RowType::Account);
-        filter.setName("Transactions by Account");
+        filter.setName("Transactions by Account (balance column)");
         cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category | eMyMoney::Report::QueryColumn::Balance;
         filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
         XMLandback(filter);
         QueryTable qtbl_3(filter);
-
-        writeTable(qtbl_3, "Transactions by Account");
+        writeTable(qtbl_3, filter.name());
 
         QString html = qtbl_3.renderHTML();
 
@@ -876,15 +866,14 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
         MyMoneyReport filter(QLatin1String("fake-id"));
 
         filter.setRowType(eMyMoney::Report::RowType::Account);
-        filter.setName("Transactions by Account");
+        filter.setName("Transactions by Account (multiple currencies)");
         cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category | eMyMoney::Report::QueryColumn::Balance;
         filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));
         // don't convert values to the default currency
         filter.setConvertCurrency(false);
         XMLandback(filter);
         QueryTable qtbl_3(filter);
-
-        writeTable(qtbl_3, "Transactions by Account (multiple currencies)");
+        writeTable(qtbl_3, filter.name());
 
         QString html = qtbl_3.renderHTML();
 
@@ -947,10 +936,10 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
 
         // now run the same report again but this time convert all values to the base currency and make sure the values are correct
         filter.setConvertCurrency(true);
+        filter.setName("Transactions by Account (multiple currencies converted to base)");
         XMLandback(filter);
         QueryTable qtbl_4(filter);
-
-        writeTable(qtbl_4, "Transactions by Account (multiple currencies converted to base)");
+        writeTable(qtbl_4, filter.name());
 
         html = qtbl_4.renderHTML();
 
@@ -1011,8 +1000,7 @@ void QueryTableTest::testTaxReport()
 
         XMLandback(filter);
         QueryTable qtbl_3(filter);
-
-        writeTable(qtbl_3, "Tax Transactions");
+        writeTable(qtbl_3, filter.name());
 
         QList<ListTable::TableRow> rows = qtbl_3.rows();
 

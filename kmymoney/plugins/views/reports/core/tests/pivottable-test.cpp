@@ -51,7 +51,6 @@ void writeTabletoHTML(const PivotTable& table, const QString& basename = QString
     g.open(QIODevice::WriteOnly);
     QTextStream(&g) << table.renderHTML();
     g.close();
-
 }
 
 void writeTabletoCSV(const PivotTable& table, const QString& basename = QString())
@@ -74,6 +73,7 @@ void writeTabletoCSV(const PivotTable& table, const QString& basename = QString(
 void writeTable(const PivotTable& table, const QString& basename = QString())
 {
     writeTabletoCSV(table, basename);
+    writeTabletoHTML(table, basename);
 }
 
 void PivotTableTest::initTestCase()
@@ -131,9 +131,10 @@ void PivotTableTest::testNetWorthSingle()
         MyMoneyReport filter(QLatin1String("fake-id"));
         filter.setRowType(eMyMoney::Report::RowType::AssetLiability);
         filter.setDateFilter(QDate(2004, 1, 1), QDate(2004, 7, 1).addDays(-1));
+        filter.setName("Net worth single");
         XMLandback(filter);
         PivotTable networth_f(filter);
-        writeTable(networth_f);
+        writeTable(networth_f, filter.name());
 
         QVERIFY(networth_f.m_grid["Asset"]["Checking Account"][ReportAccount(acChecking)][eActual][5] == moCheckingOpen);
         QVERIFY(networth_f.m_grid["Asset"]["Checking Account"][ReportAccount(acChecking)][eActual][6] == moCheckingOpen);
@@ -175,7 +176,7 @@ void PivotTableTest::testNetWorthOpeningPrior()
     filter.setName("Net Worth Opening Prior 1");
     XMLandback(filter);
     PivotTable networth_f(filter);
-    writeTable(networth_f);
+    writeTable(networth_f, filter.name());
 
     QVERIFY(networth_f.m_grid["Liability"]["Credit Card"].m_total[eActual][0] == -moCreditOpen);
     QVERIFY(networth_f.m_grid["Asset"]["Checking Account"].m_total[eActual][0] == moCheckingOpen);
@@ -191,7 +192,7 @@ void PivotTableTest::testNetWorthOpeningPrior()
 
     filter.setName("Net Worth Opening Prior 2");
     PivotTable networth_f2(filter);
-    writeTable(networth_f2);
+    writeTable(networth_f2, filter.name());
 
     MyMoneyMoney m1 = (networth_f2.m_grid["Liability"]["Credit Card"].m_total[eActual][1]);
     MyMoneyMoney m2 = (-moCreditOpen + moParent);
@@ -240,9 +241,10 @@ void PivotTableTest::testNetWorthOpening()
     filter.setRowType(eMyMoney::Report::RowType::AssetLiability);
     filter.setDateFilter(QDate(2016, 1, 1), QDate(2017, 12, 31));
     filter.addAccount(acBasicAccount);
+    filter.setName("Networth opening 1");
     XMLandback(filter);
     PivotTable nt_opening1(filter);
-    writeTable(nt_opening1, "networth-opening-1");
+    writeTable(nt_opening1, filter.name());
 
     QCOMPARE(nt_opening1.m_grid["Asset"]["Basic Account"][ReportAccount(acBasicAccount)][eActual][0].toDouble(),
              openingBalance.toDouble()); // opening value on 1st Jan 2016 is 12000000, but before that i.e. 31st Dec 2015 opening value is 0
@@ -254,9 +256,10 @@ void PivotTableTest::testNetWorthOpening()
              MyMoneyMoney(18700000).toDouble()); // value after t6 transaction
 
     filter.setDateFilter(QDate(2017, 1, 1), QDate(2017, 12, 31));
+    filter.setName("Networth opening 2");
     XMLandback(filter);
     PivotTable nt_opening2(filter);
-    writeTable(nt_opening2, "networth-opening-2");
+    writeTable(nt_opening2, filter.name());
 
     QCOMPARE(nt_opening2.m_grid["Asset"]["Basic Account"][ReportAccount(acBasicAccount)][eActual][0].toDouble(),
              MyMoneyMoney(18700000).toDouble()); // opening value is equal to the value after t6 transaction
@@ -286,10 +289,10 @@ void PivotTableTest::testSingleTransaction()
     MyMoneyReport filter(QLatin1String("fake-id"));
     filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
     filter.setDateFilter(QDate(2004, 9, 1), QDate(2005, 1, 1).addDays(-1));
-    filter.setName("Spending with Single Transaction.html");
+    filter.setName("Spending with Single Transaction");
     XMLandback(filter);
     PivotTable spending_f(filter);
-    writeTable(spending_f, "Spending with Single Transaction.html");
+    writeTable(spending_f, filter.name());
 
     QVERIFY(spending_f.m_grid["Expense"]["Solo"][ReportAccount(acSolo)][eActual][1] == moSolo);
     QVERIFY(spending_f.m_grid["Expense"]["Solo"].m_total[eActual][1] == moSolo);
@@ -320,7 +323,7 @@ void PivotTableTest::testSubAccount()
     filter.setName("Spending with Sub-Account");
     XMLandback(filter);
     PivotTable spending_f(filter);
-    writeTable(spending_f, "Spending with Sub-Account.html");
+    writeTable(spending_f, filter.name());
 
     QVERIFY(spending_f.m_grid["Expense"]["Parent"][ReportAccount(acParent)][eActual][2] == moParent);
     QVERIFY(spending_f.m_grid["Expense"]["Parent"][ReportAccount(acChild)][eActual][2] == moChild);
@@ -336,7 +339,8 @@ void PivotTableTest::testSubAccount()
     filter.setName("Net Worth with Sub-Account");
     XMLandback(filter);
     PivotTable networth_f(filter);
-    writeTable(networth_f, "Net Worth with Sub-Account.html");
+    writeTable(networth_f, filter.name());
+
     QVERIFY(networth_f.m_grid["Liability"]["Credit Card"].m_total[eActual][3] == moParent + moChild - moCreditOpen);
     QVERIFY(networth_f.m_grid.m_total[eActual][4] == -moParent - moChild + moCreditOpen + moCheckingOpen);
 
@@ -542,10 +546,8 @@ void PivotTableTest::testMultipleCurrencies()
     filter.setConvertCurrency(true);
     filter.setName("Multiple Currency Spending Rerport (with currency conversion)");
     XMLandback(filter);
-
     PivotTable spending_f(filter);
-
-    writeTable(spending_f);
+    writeTable(spending_f, filter.name());
 
     // test single foreign currency
     QVERIFY(spending_f.m_grid["Expense"]["Foreign"][ReportAccount(canCash)][eActual][1] == (moCanTransaction * moCanPrice));
@@ -565,7 +567,7 @@ void PivotTableTest::testMultipleCurrencies()
     filter.setName("Multiple Currency Spending Report (WITHOUT currency conversion)");
     XMLandback(filter);
     PivotTable spending_fnc(filter);
-    writeTable(spending_fnc);
+    writeTable(spending_fnc, filter.name());
 
     QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][ReportAccount(canCash)][eActual][1] == (moCanTransaction));
     QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][ReportAccount(canCash)][eActual][2] == (moCanTransaction));
@@ -581,7 +583,7 @@ void PivotTableTest::testMultipleCurrencies()
     filter.setDateFilter(QDate(2004, 1, 1), QDate(2005, 1, 1).addDays(-1));
     XMLandback(filter);
     PivotTable networth_f(filter);
-    writeTable(networth_f);
+    writeTable(networth_f, filter.name());
 
     // test single foreign currency
     QVERIFY(networth_f.m_grid["Asset"]["Canadian Checking"][ReportAccount(canChecking)][eActual][1] == (moCanOpening * moCanPrice));
@@ -647,7 +649,7 @@ void PivotTableTest::testAdvancedFilter()
         filter.setName("Spending with Payee Filter");
         XMLandback(filter);
         PivotTable spending_f(filter);
-        writeTable(spending_f, "Spending with Payee Filter.html");
+        writeTable(spending_f, filter.name());
 
         QVERIFY(spending_f.m_grid["Expense"]["Parent"][ReportAccount(acParent)][eActual][10] == moThomas);
         QVERIFY(spending_f.m_grid.m_total[eActual].m_total == -moThomas);
@@ -901,7 +903,7 @@ void PivotTableTest::testColumnType()
     filter.setName("Net Worth by Quarter");
     XMLandback(filter);
     PivotTable networth_q(filter);
-    writeTable(networth_q, "Net Worth by Quarter.html");
+    writeTable(networth_q, filter.name());
 
     QVERIFY(networth_q.m_grid.m_total[eActual][1] == moZero);
     QVERIFY(networth_q.m_grid.m_total[eActual][2] == -moSolo - moParent);
@@ -950,10 +952,9 @@ void PivotTableTest::testColumnType()
     filter.setColumnType(eMyMoney::Report::ColumnType::Months);
     filter.setColumnsAreDays(true);
     filter.setName("Spending by Days");
-
     XMLandback(filter);
     PivotTable spending_days(filter);
-    writeTable(spending_days, "Spending by Days.html");
+    writeTable(spending_days, filter.name());
 
     QVERIFY(spending_days.m_grid.m_total[eActual][2] == -moParent2);
     QVERIFY(spending_days.m_grid.m_total[eActual][12] == -moSolo);
@@ -967,10 +968,9 @@ void PivotTableTest::testColumnType()
     filter.setColumnType(static_cast<eMyMoney::Report::ColumnType>(7));
     filter.setColumnsAreDays(true);
     filter.setName("Spending by Weeks");
-
     XMLandback(filter);
     PivotTable spending_weeks(filter);
-    writeTable(spending_weeks, "Spending by Weeks.html");
+    writeTable(spending_weeks, filter.name());
 
     // restore the locale
     QLocale::setDefault(QLocale::system());
@@ -1017,10 +1017,10 @@ void PivotTableTest::testInvestment()
         MyMoneyReport networth_r(QLatin1String("fake-id"));
         networth_r.setRowType(eMyMoney::Report::RowType::AssetLiability);
         networth_r.setDateFilter(QDate(2004, 1, 1), QDate(2004, 12, 31).addDays(-1));
+        networth_r.setName("Networth with investment");
         XMLandback(networth_r);
         PivotTable networth(networth_r);
-
-        networth.dump("networth_i.html");
+        writeTable(networth, networth_r.name());
 
         QVERIFY(networth.m_grid["Asset"]["Investment"].m_total[eActual][1] == moZero);
         // 1000 shares @ $100.00
