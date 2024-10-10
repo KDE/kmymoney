@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-04 01:50+0000\n"
+"POT-Creation-Date: 2024-10-10 01:47+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -21297,8 +21297,8 @@ msgstr "이 거래를 건너뜁니다"
 msgid "&Close"
 msgstr "닫기(&C)"
 
-#: kmymoney/widgets/kmymoneydateedit.cpp:449
-#: kmymoney/widgets/kmymoneydateedit.cpp:519
+#: kmymoney/widgets/kmymoneydateedit.cpp:486
+#: kmymoney/widgets/kmymoneydateedit.cpp:556
 #, kde-format
 msgctxt "@info"
 msgid "The date you entered is invalid"

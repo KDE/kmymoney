@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-04 01:50+0000\n"
+"POT-Creation-Date: 2024-10-10 01:47+0000\n"
 "PO-Revision-Date: 2023-07-13 00:39+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -21824,8 +21824,8 @@ msgstr "Use este botão para ignorar esta transacção"
 msgid "&Close"
 msgstr "Fe&char"
 
-#: kmymoney/widgets/kmymoneydateedit.cpp:449
-#: kmymoney/widgets/kmymoneydateedit.cpp:519
+#: kmymoney/widgets/kmymoneydateedit.cpp:486
+#: kmymoney/widgets/kmymoneydateedit.cpp:556
 #, kde-format
 msgctxt "@info"
 msgid "The date you entered is invalid"
