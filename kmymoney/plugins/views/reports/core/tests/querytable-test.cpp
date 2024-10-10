@@ -66,10 +66,28 @@ void writeTabletoCSV(const QueryTable& table, const QString& basename = QString(
     g.close();
 }
 
+void writeTabletoXML(const QueryTable& table, const QString& basename = QString())
+{
+    static unsigned filenumber = 1;
+    QString filename;
+    if (basename.isEmpty()) {
+        filename = QString::fromLatin1("%1/report-%2.xml").arg(CMAKE_CURRENT_BINARY_DIR).arg(filenumber, 2, 10, QLatin1Char('0'));
+        ++filenumber;
+    } else {
+        filename = QString::fromLatin1("%1/%2.xml").arg(CMAKE_CURRENT_BINARY_DIR).arg(basename);
+    }
+
+    QFile g(filename);
+    g.open(QIODevice::WriteOnly);
+    QTextStream(&g) << table.toXml();
+    g.close();
+}
+
 void writeTable(const QueryTable& table, const QString& basename = QString())
 {
     writeTabletoCSV(table, basename);
     writeTabletoHTML(table, basename);
+    writeTabletoXML(table, basename);
 }
 
 void QueryTableTest::initTestCase()
