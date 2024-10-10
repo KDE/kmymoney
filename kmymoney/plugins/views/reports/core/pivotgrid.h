@@ -28,29 +28,29 @@ namespace reports
 enum ERowType {eActual, eBudget, eBudgetDiff, eForecast, eAverage, ePrice };
 
 /**
-  * The fundamental data construct of this class is a 'grid'.  It is organized as follows:
-  *
-  * A 'Row' is a row of money values, each column is a month.  The first month corresponds to
-  * m_beginDate.
-  *
-  * A 'Row Pair' is two rows of money values.  Each column is the SAME month.  One row is the
-  * 'actual' values for the period, the other row is the 'budgetted' values for the same
-  * period.  For ease of implementation, a Row Pair is implemented as a Row which contains
-  * another Row.  The inherited Row is the 'actual', the contained row is the 'Budget'.
-  *
-  * An 'Inner Group' contains a rows for each subordinate account within a single top-level
-  * account.  It also contains a mapping from the account descriptor for the subordinate account
-  * to its row data.  So if we have an Expense account called "Computers", with sub-accounts called
-  * "Hardware", "Software", and "Peripherals", there will be one Inner Group for "Computers"
-  * which contains three Rows.
-  *
-  * An 'Outer Group' contains Inner Row Groups for all the top-level accounts in a given
-  * account class.  Account classes are Expense, Income, Asset, Liability.  In the case above,
-  * the "Computers" Inner Group is contained within the "Expense" Outer Group.
-  *
-  * A 'Grid' is the set of all Outer Groups contained in this report.
-  *
-  */
+ * The fundamental data construct of this class is a 'grid'.  It is organized as follows:
+ *
+ * A 'Row' is a row of money values, each column is a month.  The first month corresponds to
+ * m_beginDate.
+ *
+ * A 'Row Pair' is two rows of money values.  Each column is the SAME month.  One row is the
+ * 'actual' values for the period, the other row is the 'budgetted' values for the same
+ * period.  For ease of implementation, a Row Pair is implemented as a Row which contains
+ * another Row.  The inherited Row is the 'actual', the contained row is the 'Budget'.
+ *
+ * An 'Inner Group' contains a rows for each subordinate account within a single top-level
+ * account.  It also contains a mapping from the account descriptor for the subordinate account
+ * to its row data.  So if we have an Expense account called "Computers", with sub-accounts called
+ * "Hardware", "Software", and "Peripherals", there will be one Inner Group for "Computers"
+ * which contains three Rows.
+ *
+ * An 'Outer Group' contains Inner Row Groups for all the top-level accounts in a given
+ * account class.  Account classes are Expense, Income, Asset, Liability.  In the case above,
+ * the "Computers" Inner Group is contained within the "Expense" Outer Group.
+ *
+ * A 'Grid' is the set of all Outer Groups contained in this report.
+ *
+ */
 class PivotCell: public MyMoneyMoney
 {
     KMM_MYMONEY_UNIT_TESTABLE
