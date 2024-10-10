@@ -9,14 +9,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QVariant>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
+
+#include <alkimia/alkdom.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace reports
-{
+namespace reports {
 
 const unsigned PivotOuterGroup::m_kDefaultSortOrder = 100;
 
@@ -88,6 +91,17 @@ MyMoneyMoney PivotCell::cellBalance(const MyMoneyMoney& _balance)
     return balance;
 }
 
+bool PivotCell::saveToXml(AlkDomDocument& doc, AlkDomElement& parent) const
+{
+    AlkDomElement el = doc.createElement("PivotCell");
+    el.setAttribute("value", toString());
+    el.setAttribute("isUsed", isUsed());
+    el.setAttribute("stockSplit", m_stockSplit.toString());
+    el.setAttribute("postSplit", m_postSplit.toString());
+    parent.appendChild(el);
+    return true;
+}
+
 PivotGridRowSet::PivotGridRowSet(unsigned _numcolumns)
 {
     insert(eActual, PivotGridRow(_numcolumns));
@@ -118,6 +132,98 @@ PivotGridRowSet PivotGrid::rowSet(QString id)
         ++it_outergroup;
     }
     return PivotGridRowSet();
+}
+
+QStringList getKey(const ERowType& f)
+{
+    return QStringList() << "id" << QVariant::fromValue(f).toString();
+}
+
+QStringList getKey(const QString& f)
+{
+    return QStringList() << "id" << f;
+}
+
+QStringList getKey(const ReportAccount& f)
+{
+    return QStringList() << "id" << f.id();
+}
+
+template<class K, class V>
+AlkDomElement createElement(AlkDomDocument& doc, const QString& mapName, const QMap<K, V>& map, const QString& keyType)
+{
+    AlkDomElement me = doc.createElement(mapName);
+    for (const auto& key : map.keys()) {
+        AlkDomElement mapEntry = doc.createElement(QString("%1Entry").arg(mapName));
+        AlkDomElement mapKey = doc.createElement(QString("%1Key").arg(mapName));
+        AlkDomElement entryKey = doc.createElement(keyType);
+        QStringList keys = getKey(key);
+        entryKey.setAttribute(keys[0], keys[1]);
+        mapKey.appendChild(entryKey);
+        mapEntry.appendChild(mapKey);
+        AlkDomElement mapValue = doc.createElement(QString("%1Value").arg(mapName));
+        map[key].saveToXml(doc, mapValue);
+        mapEntry.appendChild(mapValue);
+        me.appendChild(mapEntry);
+    }
+    return me;
+}
+
+bool PivotGridRowSet::saveToXml(AlkDomDocument& doc, AlkDomElement& parent) const
+{
+    AlkDomElement el = doc.createElement("PivotGridRowSet");
+    const QString mapName = "PivotGridRowSetMap";
+    AlkDomElement map = createElement<ERowType, PivotGridRow>(doc, mapName, *this, "ERowType");
+    el.appendChild(map);
+    parent.appendChild(el);
+    return true;
+}
+
+bool PivotGridRow::saveToXml(AlkDomDocument& doc, AlkDomElement& parent) const
+{
+    AlkDomElement el = doc.createElement("PivotGridRow");
+    el.setAttribute("total", m_total.toString());
+    const QString listName = "PivotGridRowList";
+    AlkDomElement list = doc.createElement(QString("%1").arg(listName));
+    for (int i = 0; i < size(); i++) {
+        const PivotCell& cell = at(i);
+        cell.saveToXml(doc, list);
+    }
+    el.appendChild(list);
+    parent.appendChild(el);
+    return true;
+}
+
+bool PivotInnerGroup::saveToXml(AlkDomDocument& doc, AlkDomElement& parent) const
+{
+    AlkDomElement el = doc.createElement("PivotInnerGroup");
+    m_total.saveToXml(doc, el);
+    AlkDomElement map = createElement<ReportAccount, PivotGridRowSet>(doc, "PivotInnerGroupMap", *this, "ReportAccount");
+    el.appendChild(map);
+    parent.appendChild(el);
+    return true;
+}
+
+bool PivotOuterGroup::saveToXml(AlkDomDocument& doc, AlkDomElement& parent) const
+{
+    AlkDomElement el = doc.createElement("PivotOuterGroup");
+    m_total.saveToXml(doc, el);
+    el.setAttribute("inverted", m_inverted);
+    el.setAttribute("displayName", m_displayName);
+    el.setAttribute("sortOrder", m_sortOrder);
+    AlkDomElement map = createElement<QString, PivotInnerGroup>(doc, "PivotOuterGroupMap", *this, "String");
+    el.appendChild(map);
+    parent.appendChild(el);
+    return true;
+}
+
+bool PivotGrid::saveToXml(AlkDomDocument& doc, AlkDomElement& parent) const
+{
+    AlkDomElement el = doc.createElement("PivotGrid");
+    AlkDomElement map = createElement<QString, PivotOuterGroup>(doc, "PivotGridMap", *this, "String");
+    el.appendChild(map);
+    parent.appendChild(el);
+    return true;
 }
 
 } // namespace

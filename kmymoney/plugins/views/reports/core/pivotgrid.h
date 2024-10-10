@@ -10,8 +10,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QMap>
 #include <QList>
+#include <QMap>
+#include <QMetaObject>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -22,10 +23,16 @@
 #include "reportaccount.h"
 #include "mymoneymoney.h"
 
-namespace reports
-{
+class AlkDomDocument;
+class AlkDomElement;
+
+namespace reports {
+
+Q_NAMESPACE
 
 enum ERowType {eActual, eBudget, eBudgetDiff, eForecast, eAverage, ePrice };
+
+Q_ENUM_NS(ERowType)
 
 /**
  * The fundamental data construct of this class is a 'grid'.  It is organized as follows:
@@ -69,6 +76,8 @@ public:
     bool isUsed() const {
         return m_cellUsed;
     }
+    bool saveToXml(AlkDomDocument& doc, AlkDomElement& parent) const;
+
 private:
     MyMoneyMoney m_stockSplit;
     MyMoneyMoney m_postSplit;
@@ -83,12 +92,14 @@ public:
             append(PivotCell());
     }
     MyMoneyMoney m_total;
+    bool saveToXml(AlkDomDocument& doc, AlkDomElement& parent) const;
 };
 
 class PivotGridRowSet: public QMap<ERowType, PivotGridRow>
 {
 public:
     explicit PivotGridRowSet(unsigned _numcolumns = 0);
+    bool saveToXml(AlkDomDocument& doc, AlkDomElement& parent) const;
 };
 
 class PivotInnerGroup: public QMap<ReportAccount, PivotGridRowSet>
@@ -97,6 +108,7 @@ public:
     explicit PivotInnerGroup(unsigned _numcolumns = 0): m_total(_numcolumns) {}
 
     PivotGridRowSet m_total;
+    bool saveToXml(AlkDomDocument& doc, AlkDomElement& parent) const;
 };
 
 class PivotOuterGroup: public QMap<QString, PivotInnerGroup>
@@ -109,6 +121,9 @@ public:
         else
             return m_displayName < _right.m_displayName;
     }
+
+    bool saveToXml(AlkDomDocument& doc, AlkDomElement& parent) const;
+
     PivotGridRowSet m_total;
 
     // An inverted outergroup means that all values placed in subordinate rows
@@ -135,6 +150,7 @@ public:
     PivotGridRowSet rowSet(QString id);
 
     PivotGridRowSet m_total;
+    bool saveToXml(AlkDomDocument& doc, AlkDomElement& parent) const;
 };
 
 }

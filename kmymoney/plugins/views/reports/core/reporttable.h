@@ -119,6 +119,21 @@ public:
     virtual void dump(const QString& file, const QString& context = QString()) const = 0;
 
     /**
+     * Saves report data to an xml file. Implemented by the concrete classes
+     *
+     * @param file file to save the report data into
+     * @return state of saving
+     */
+    virtual bool saveToXml(const QString& file) = 0;
+
+    /**
+     * Returns report data as string in xml format. Implemented by the concrete classes
+     *
+     * @return string with report data in xml format
+     */
+    virtual QString toXml() const = 0;
+
+    /**
      * Creates the complete html document.
      *
      * @param widget      parent widget

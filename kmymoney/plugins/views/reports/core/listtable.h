@@ -43,12 +43,15 @@ class ReportAccount;
 
 class ListTable : public ReportTable
 {
+    Q_OBJECT
 public:
     explicit ListTable(const MyMoneyReport&);
     QString renderHTML() const final override;
     QString renderCSV() const final override;
     void drawChart(KReportChartView&) const final override {}
     void dump(const QString& file, const QString& context = QString()) const final override;
+    bool saveToXml(const QString& file) override;
+    QString toXml() const override;
     void init();
 
 public:
@@ -79,6 +82,8 @@ public:
         ctAction, ctTag, ctPayee, ctEquityType, ctType, ctName,
         ctDepth, ctRowsCount, ctTax, ctFavorite, ctDescription, ctOccurrence, ctPaymentType
     };
+    Q_ENUM(cellTypeE)
+
     /**
       * Contains a single row in the table.
       *
