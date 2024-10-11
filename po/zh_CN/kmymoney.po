@@ -2452,16 +2452,11 @@ msgstr "限额"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/dialogs/knewaccountdlg.ui:519
-#, fuzzy, kde-format
-#| msgid ""
-#| "This page allows to setup certain limits. KMyMoney will warn you when the "
-#| "account balance reaches a limit."
+#, kde-format
 msgid ""
 "This section allows to setup certain limits. KMyMoney will warn you when the "
 "account balance reaches a limit."
 msgstr ""
-"在本页中您可以设置一些限额。当账户余额到达某一限额时，KMyMoney将向您发出警"
-"告。"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/dialogs/knewaccountdlg.ui:548
@@ -2489,10 +2484,9 @@ msgstr "早期报警"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_taxGroupBox)
 #: kmymoney/dialogs/knewaccountdlg.ui:624
-#, fuzzy, kde-format
-#| msgid "Tag options"
+#, kde-format
 msgid "Tax options"
-msgstr "标记选项"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox3)
 #: kmymoney/dialogs/knewaccountdlg.ui:630
@@ -2555,25 +2549,21 @@ msgstr "导入选项"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/knewaccountdlg.ui:876
-#, fuzzy, kde-format
-#| msgid "Payee creation"
+#, kde-format
 msgid "Automatic Payee creation"
-msgstr "创建收款人"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:884
-#, fuzzy, kde-format
-#| msgid "Application Account"
+#, kde-format
 msgid "Application Default"
-msgstr "应用程序账户"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:889
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Reconciliation date"
-#| msgid "Never reconciled"
+#, kde-format
 msgid "Never create"
-msgstr "从未对账"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_preferredStatementDate)
@@ -2585,10 +2575,9 @@ msgstr "询问用户"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:899
-#, fuzzy, kde-format
-#| msgid "Create category"
+#, kde-format
 msgid "Create automatically"
-msgstr "创建交易类别"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_budgetGroupBox)
 #. i18n: ectx: Menu (budget_context_menu)
@@ -20228,11 +20217,10 @@ msgid "Costcenter"
 msgstr ""
 
 #: kmymoney/views/newtransactioneditor.cpp:233
-#, fuzzy, kde-format
-#| msgid "Enter scheduled transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the amount of the transaction."
-msgstr "输入预定交易"
+msgstr ""
 
 #: kmymoney/views/newtransactioneditor.cpp:234
 #, kde-format
@@ -21012,7 +21000,7 @@ msgstr "使用正则表达式"
 #: kmymoney/widgets/ktransactionfilter.ui:105
 #, kde-format
 msgid "Case sensitive"
-msgstr "不区分大小写"
+msgstr "区分大小写"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_amountButton)
 #: kmymoney/widgets/ktransactionfilter.ui:210
@@ -24482,10 +24470,9 @@ msgstr ""
 "<p>所有的信息都可以不填，它们仅用来个性化您自己的KMyMoney文件。</p>"
 
 #: tools/kmmreport-export.cpp:128
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export KMyMoney reports"
-msgstr "导出报表"
+msgstr ""
 
 #: tools/kmmreport-export.cpp:132
 #, kde-format
@@ -24518,16 +24505,14 @@ msgid "Use query table for exporting (default)"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:150
-#, fuzzy, kde-format
-#| msgid "Old Customized Reports"
+#, kde-format
 msgid "List all custom reports"
-msgstr "旧的自定义报表"
+msgstr ""
 
 #: tools/kmmreport-export.cpp:153
-#, fuzzy, kde-format
-#| msgid "Unable to generate report"
+#, kde-format
 msgid "Filename for generated output"
-msgstr "无法生成报表"
+msgstr ""
 
 #: tools/kmmreport-export.cpp:156
 #, kde-format
