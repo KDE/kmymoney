@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2023-10-08 11:15+0200\n"
+"PO-Revision-Date: 2024-10-12 11:08+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -377,7 +377,7 @@ msgstr "Błąd przy dostępie do pliku"
 #: kmymoney/converter/mymoneytemplate.cpp:90
 #, kde-format
 msgid "<p><b>%1</b> is not a template file.</p>"
-msgstr "<p><b>%1</b> nie jest plikiem szablonu.</p>"
+msgstr "<p><b>%1</b> nie jest plikiem wzorca.</p>"
 
 #: kmymoney/converter/mymoneytemplate.cpp:91
 #, kde-format
@@ -389,12 +389,12 @@ msgstr "Błąd rodzaju pliku"
 msgid ""
 "<p>Error while reading template file <b>%1</b> in line %2, column %3</p>"
 msgstr ""
-"<p>Błąd podczas odczytu pliku szablonu <b>%1</b> w linii %2, kolumna %3</p>"
+"<p>Błąd podczas odczytu pliku wzorca <b>%1</b> w linii %2, kolumna %3</p>"
 
 #: kmymoney/converter/mymoneytemplate.cpp:100
 #, kde-format
 msgid "Template Error"
-msgstr "Błąd szablonu"
+msgstr "Błąd wzorca"
 
 #: kmymoney/converter/mymoneytemplate.cpp:107
 #, kde-format
@@ -404,19 +404,18 @@ msgstr "Nie znaleziono pliku '%1'."
 #: kmymoney/converter/mymoneytemplate.cpp:150
 #, kde-format
 msgid "<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>"
-msgstr "Nieprawidłowy znacznik <b>%1</b> w pliku szablonu <b>%2</b>"
+msgstr "Nieprawidłowy znacznik <b>%1</b> w pliku wzorca <b>%2</b>"
 
 #: kmymoney/converter/mymoneytemplate.cpp:214
 #, kde-format
 msgid "Loading template %1"
-msgstr "Wczytywanie szablonu %1"
+msgstr "Wczytywanie wzorca %1"
 
 #: kmymoney/converter/mymoneytemplate.cpp:240
 #, kde-format
 msgid ""
 "<p>Invalid top-level account type <b>%1</b> in template file <b>%2</b></p>"
-msgstr ""
-"<p>Błędny rodzaj konta głównego <b>%1</b> w pliku szablonu <b>%2</b></p>"
+msgstr "<p>Błędny rodzaj konta głównego <b>%1</b> w pliku wzorca <b>%2</b></p>"
 
 #: kmymoney/converter/mymoneytemplate.cpp:343
 #, kde-format
@@ -424,8 +423,8 @@ msgid ""
 "<p>Invalid flag type <b>%1</b> for account <b>%3</b> in template file <b>%2</"
 "b></p>"
 msgstr ""
-"<p>Zły rodzaj znacznika <b>%1</b> dla konta <b>%3</b> w pliku szablonu <b>"
-"%2</b></p>"
+"<p>Zły rodzaj znacznika <b>%1</b> dla konta <b>%3</b> w pliku wzorca <b>%2</"
+"b></p>"
 
 #: kmymoney/converter/webpricequote.cpp:118
 #: kmymoney/converter/webpricequote.cpp:244
@@ -2669,7 +2668,7 @@ msgstr "Weryfikacja importu"
 #: kmymoney/dialogs/kloadtemplatedlg.ui:14
 #, kde-format
 msgid "MyDialog"
-msgstr "Szablon"
+msgstr "MojeOkno"
 
 #: kmymoney/dialogs/kmergetransactionsdlg.cpp:32
 #, kde-format
@@ -3948,7 +3947,7 @@ msgstr "Dostępne znaczniki:"
 #: kmymoney/dialogs/ktemplateexportdlg.ui:14
 #, kde-format
 msgid "Template Export Attributes"
-msgstr "Atrybuty eksportowania szablonu"
+msgstr "Atrybuty eksportowania wzorca"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/ktemplateexportdlg.ui:26
@@ -5895,7 +5894,7 @@ msgstr "Plik wyciągu..."
 #: kmymoney/kmymoney.cpp:1383 kmymoney/kmymoney.cpp:1384
 #, kde-format
 msgid "Account Template..."
-msgstr "Szablon konta..."
+msgstr "Wzorzec konta..."
 
 #: kmymoney/kmymoney.cpp:1385
 #, kde-format
@@ -6382,17 +6381,17 @@ msgstr "Nie można zachować informacji o użytkowniku: %1"
 #: kmymoney/kmymoney.cpp:2188
 #, kde-format
 msgid "Importing account templates."
-msgstr "Importowanie szablonów kont."
+msgstr "Importowanie wzorców kont."
 
 #: kmymoney/kmymoney.cpp:2202
 #, kde-format
 msgid "Unable to import template(s)"
-msgstr "Nie można zaimportować szablonu"
+msgstr "Nie można zaimportować wzorca"
 
 #: kmymoney/kmymoney.cpp:2210
 #, kde-format
 msgid "Exporting account templates."
-msgstr "Eksportowanie szablonów kont."
+msgstr "Eksportowanie wzorców kont."
 
 #: kmymoney/kmymoney.cpp:2216
 #, kde-format
@@ -6402,7 +6401,7 @@ msgstr "Zapisz jako..."
 #: kmymoney/kmymoney.cpp:2217
 #, kde-format
 msgid "KMyMoney template files (*.kmt);;All files (*)"
-msgstr "Pliki szablonów KMyMoney (*.kmt);;Wszystkie pliki (*)"
+msgstr "Pliki wzorców KMyMoney (*.kmt);;Wszystkie pliki (*)"
 
 #: kmymoney/kmymoney.cpp:2262
 #, kde-format
@@ -9643,8 +9642,8 @@ msgstr "Nie"
 msgid ""
 "The check template file which defines the way the printed check will look."
 msgstr ""
-"Plik szablonu rachunku, który definiuje wygląd jak będzie wyglądał rachunek "
-"po wydrukowaniu. "
+"Plik wzorca rachunku, który definiuje wygląd jak będzie wyglądał rachunek po "
+"wydrukowaniu. "
 
 #. i18n: ectx: label, entry (printedChecks), group (General)
 #: kmymoney/plugins/checkprinting/pluginsettings.kcfg:13
@@ -9663,7 +9662,7 @@ msgstr "Ustawienia eksportu iCalendar"
 #: kmymoney/plugins/checkprinting/pluginsettingsdecl.ui:36
 #, kde-format
 msgid "Check template file"
-msgstr "Plik szablonu przelewu"
+msgstr "Plik wzorca przelewu"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:56
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:64
@@ -11572,7 +11571,7 @@ msgstr "Zaimportowane transakcje"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1837
 #, kde-format
 msgid "Loading templates..."
-msgstr "Wczytywanie szablonów..."
+msgstr "Wczytywanie wzorców..."
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1851
 #, kde-format
