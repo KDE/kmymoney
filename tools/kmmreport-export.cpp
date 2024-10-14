@@ -129,10 +129,10 @@ int main(int argc, char** argv)
         parser.addHelpOption();
         parser.addVersionOption();
 
-        const QCommandLineOption csvOption(QStringLiteral("csv"), i18n("export in csv format (default)"));
+        const QCommandLineOption csvOption(QStringLiteral("csv"), i18n("Export in csv format (default)"));
         parser.addOption(csvOption);
 
-        const QCommandLineOption htmlOption(QStringLiteral("html"), i18n("export in HTML format"));
+        const QCommandLineOption htmlOption(QStringLiteral("html"), i18n("Export in HTML format"));
         parser.addOption(htmlOption);
 
         const QCommandLineOption createReferenceOption(QStringLiteral("reference"), i18n("Create reference file from output"));
