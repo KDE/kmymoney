@@ -42,6 +42,7 @@ public:
         int sectionIndex(0);
         int sectionSize(0);
         bool lastWasDelimiter(false);
+        bool lastDelimiterAdded(false);
         m_sections.resize(3);
         const auto format(q->locale().dateFormat(QLocale::ShortFormat).toLower());
 
@@ -58,8 +59,18 @@ public:
                 m_sections[sectionIndex] = QDateTimeEdit::YearSection;
                 lastWasDelimiter = false;
             } else {
+                // in case we detect multiple delimiters in row, we
+                // only keep the last one. E.g. in "dd. MMM. yyyy" the
+                // space is the delimiter and the dot is a fill character
+                if (lastWasDelimiter && lastDelimiterAdded) {
+                    m_validDelims.remove(m_validDelims.length() - 1, 1);
+                    lastDelimiterAdded = false;
+                }
                 if (!m_validDelims.contains(ch)) {
                     m_validDelims.append(ch);
+                    lastDelimiterAdded = true;
+                } else {
+                    lastDelimiterAdded = false;
                 }
                 if (!lastWasDelimiter) {
                     if (sectionSize > 2) {
