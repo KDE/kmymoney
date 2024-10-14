@@ -135,7 +135,8 @@ public:
         ctFavorite,
         ctDescription,
         ctOccurrence,
-        ctPaymentType
+        ctPaymentType,
+        ctValueSourceLine
     };
     Q_ENUM(cellTypeE)
 
