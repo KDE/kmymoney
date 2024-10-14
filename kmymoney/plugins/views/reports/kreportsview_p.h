@@ -342,10 +342,12 @@ void KReportTab::saveAs(const QString& filename, const QString& selectedMimeType
     if (file.open(QIODevice::WriteOnly)) {
         if (selectedMimeType == QStringLiteral("text/csv")) {
             QTextStream(&file) << m_table->renderReport(QLatin1String("csv"), m_encoding, QString());
-        } else {
+        } else if (selectedMimeType == QStringLiteral("text/html")) {
             QString table = m_table->renderReport(QLatin1String("html"), m_encoding, m_report.name());
             QTextStream stream(&file);
             stream << table;
+        } else if (selectedMimeType == QStringLiteral("application/xml")) {
+            QTextStream(&file) << m_table->toXml();
         }
         file.close();
     }
