@@ -64,7 +64,7 @@ endmacro()
 macro(add_report_tests)
    set(options)
    set(oneValueArgs TYPE)
-   set(multiValueArgs FILES)
+   set(multiValueArgs FILES FORMATS)
    cmake_parse_arguments(ART "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
   foreach(file ${ART_FILES})
@@ -81,30 +81,32 @@ macro(add_report_tests)
       if(NOT rt MATCHES "${ART_TYPE}.*")
         continue()
       endif()
-      to_test_and_file_name(TYPE ${ART_TYPE} BASENAME ${basename} REPORT_NAME ${rn} RETURN_TEST_NAME test_name RETURN_FILE_NAME file_name)
-      message(" * adding test '${test_name}' for report '${rn}' with type '${rt}' and id '${id}'")
-      add_test(
-        NAME ${test_name}
-        COMMAND ${CMAKE_COMMAND}
-          -Dlauncher=$<TARGET_FILE:kmmreport-export>
-          -Dtestfile=${CMAKE_CURRENT_SOURCE_DIR}/${file}
-          -Dformat=csv
-          -Dtype=${ART_TYPE}
-          -Dreport=${rn}
-          -Doutfilename=${CMAKE_CURRENT_BINARY_DIR}/${file_name}.csv
-          -Dreffilename=${CMAKE_CURRENT_SOURCE_DIR}/${file_name}.csv
-          -Dworkingdir=${CMAKE_CURRENT_BINARY_DIR}
-          -P ${CMAKE_CURRENT_SOURCE_DIR}/compare.cmake
-      )
-      set_tests_properties(${test_name}
-        PROPERTIES
-          SKIP_REGULAR_EXPRESSION "is missing" "SKIP" "Skipped"
-          ENVIRONMENT LANG=c
+      foreach(format ${ART_FORMATS})
+        to_test_and_file_name(TYPE ${ART_TYPE} BASENAME ${basename} REPORT_NAME ${rn} RETURN_TEST_NAME test_name RETURN_FILE_NAME file_name)
+        message(" * adding test '${test_name}-${format}' for report '${rn}' with type '${rt}' and id '${id}'")
+        add_test(
+          NAME ${test_name}-${format}
+          COMMAND ${CMAKE_COMMAND}
+            -Dlauncher=$<TARGET_FILE:kmmreport-export>
+            -Dtestfile=${CMAKE_CURRENT_SOURCE_DIR}/${file}
+            -Dformat=${format}
+            -Dtype=${ART_TYPE}
+            -Dreport=${rn}
+            -Doutfilename=${CMAKE_CURRENT_BINARY_DIR}/${file_name}.${format}
+            -Dreffilename=${CMAKE_CURRENT_SOURCE_DIR}/${file_name}.${format}
+            -Dworkingdir=${CMAKE_CURRENT_BINARY_DIR}
+            -P ${CMAKE_CURRENT_SOURCE_DIR}/compare.cmake
         )
+        set_tests_properties(${test_name}-${format}
+          PROPERTIES
+            SKIP_REGULAR_EXPRESSION "is missing" "SKIP" "Skipped"
+            ENVIRONMENT LANG=c
+          )
+      endforeach()
     endwhile()
   endforeach()
 endmacro()
 
-add_report_tests(TYPE infotable FILES ${infotable_test_files})
-add_report_tests(TYPE querytable FILES ${querytable_test_files})
-add_report_tests(TYPE pivottable FILES ${pivottable_test_files})
+add_report_tests(TYPE infotable FILES ${infotable_test_files} FORMATS csv)
+add_report_tests(TYPE querytable FILES ${querytable_test_files} FORMATS csv)
+add_report_tests(TYPE pivottable FILES ${pivottable_test_files} FORMATS csv)
