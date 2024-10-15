@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-10 01:47+0000\n"
+"POT-Creation-Date: 2024-10-15 01:48+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -21904,8 +21904,8 @@ msgstr "Használja ezt a gombot a tranzakció kihagyásához"
 msgid "&Close"
 msgstr "&Bezárás"
 
-#: kmymoney/widgets/kmymoneydateedit.cpp:486
-#: kmymoney/widgets/kmymoneydateedit.cpp:556
+#: kmymoney/widgets/kmymoneydateedit.cpp:497
+#: kmymoney/widgets/kmymoneydateedit.cpp:567
 #, kde-format
 msgctxt "@info"
 msgid "The date you entered is invalid"
