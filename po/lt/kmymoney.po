@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-15 01:48+0000\n"
+"POT-Creation-Date: 2024-10-16 01:51+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -24974,12 +24974,12 @@ msgstr "Mėgstamiausios ataskaitos"
 
 #: tools/kmmreport-export.cpp:132
 #, kde-format
-msgid "export in csv format (default)"
+msgid "Export in csv format (default)"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:135
 #, kde-format
-msgid "export in HTML format"
+msgid "Export in HTML format"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:138

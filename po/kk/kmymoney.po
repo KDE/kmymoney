@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-15 01:48+0000\n"
+"POT-Creation-Date: 2024-10-16 01:51+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -26143,12 +26143,12 @@ msgstr "Таңдамалы есеп-берулері"
 
 #: tools/kmmreport-export.cpp:132
 #, kde-format
-msgid "export in csv format (default)"
+msgid "Export in csv format (default)"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:135
 #, kde-format
-msgid "export in HTML format"
+msgid "Export in HTML format"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:138

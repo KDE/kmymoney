@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-15 01:48+0000\n"
+"POT-Creation-Date: 2024-10-16 01:51+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -25074,12 +25074,12 @@ msgstr "보고서 내보내기"
 
 #: tools/kmmreport-export.cpp:132
 #, kde-format
-msgid "export in csv format (default)"
+msgid "Export in csv format (default)"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:135
 #, kde-format
-msgid "export in HTML format"
+msgid "Export in HTML format"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:138

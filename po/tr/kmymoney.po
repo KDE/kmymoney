@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-15 01:48+0000\n"
+"POT-Creation-Date: 2024-10-16 01:51+0000\n"
 "PO-Revision-Date: 2024-09-27 17:45+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -25288,13 +25288,15 @@ msgid "Export KMyMoney reports"
 msgstr "K Param raporlarını dışa aktar"
 
 #: tools/kmmreport-export.cpp:132
-#, kde-format
-msgid "export in csv format (default)"
+#, fuzzy, kde-format
+#| msgid "export in csv format (default)"
+msgid "Export in csv format (default)"
 msgstr "CSV biçiminde dışa aktar (öntanımlı)"
 
 #: tools/kmmreport-export.cpp:135
-#, kde-format
-msgid "export in HTML format"
+#, fuzzy, kde-format
+#| msgid "export in HTML format"
+msgid "Export in HTML format"
 msgstr "HTML biçiminde dışa aktar"
 
 #: tools/kmmreport-export.cpp:138

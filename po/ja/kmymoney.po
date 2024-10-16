@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-15 01:48+0000\n"
+"POT-Creation-Date: 2024-10-16 01:51+0000\n"
 "PO-Revision-Date: 2009-05-18 00:20+0900\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -23876,12 +23876,12 @@ msgstr ""
 
 #: tools/kmmreport-export.cpp:132
 #, kde-format
-msgid "export in csv format (default)"
+msgid "Export in csv format (default)"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:135
 #, kde-format
-msgid "export in HTML format"
+msgid "Export in HTML format"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:138

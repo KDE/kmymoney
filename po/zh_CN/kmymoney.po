@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-15 01:48+0000\n"
+"POT-Creation-Date: 2024-10-16 01:51+0000\n"
 "PO-Revision-Date: 2024-04-22 16:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -24476,12 +24476,12 @@ msgstr ""
 
 #: tools/kmmreport-export.cpp:132
 #, kde-format
-msgid "export in csv format (default)"
+msgid "Export in csv format (default)"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:135
 #, kde-format
-msgid "export in HTML format"
+msgid "Export in HTML format"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:138

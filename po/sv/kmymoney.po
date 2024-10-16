@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-15 01:48+0000\n"
+"POT-Creation-Date: 2024-10-16 01:51+0000\n"
 "PO-Revision-Date: 2024-09-27 17:45+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -25333,13 +25333,15 @@ msgid "Export KMyMoney reports"
 msgstr "Exportera rapporter från KMyMoney"
 
 #: tools/kmmreport-export.cpp:132
-#, kde-format
-msgid "export in csv format (default)"
+#, fuzzy, kde-format
+#| msgid "export in csv format (default)"
+msgid "Export in csv format (default)"
 msgstr "exportera med csv-format (förval)"
 
 #: tools/kmmreport-export.cpp:135
-#, kde-format
-msgid "export in HTML format"
+#, fuzzy, kde-format
+#| msgid "export in HTML format"
+msgid "Export in HTML format"
 msgstr "exportera med HTML-format"
 
 #: tools/kmmreport-export.cpp:138

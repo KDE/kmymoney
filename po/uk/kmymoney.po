@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-15 01:48+0000\n"
+"POT-Creation-Date: 2024-10-16 01:51+0000\n"
 "PO-Revision-Date: 2024-09-27 20:22+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -25610,13 +25610,15 @@ msgid "Export KMyMoney reports"
 msgstr "Експортувати звіти KMyMoney"
 
 #: tools/kmmreport-export.cpp:132
-#, kde-format
-msgid "export in csv format (default)"
+#, fuzzy, kde-format
+#| msgid "export in csv format (default)"
+msgid "Export in csv format (default)"
 msgstr "експортувати у форматі csv (типовий варіант)"
 
 #: tools/kmmreport-export.cpp:135
-#, kde-format
-msgid "export in HTML format"
+#, fuzzy, kde-format
+#| msgid "export in HTML format"
+msgid "Export in HTML format"
 msgstr "експортувати у форматі HTML"
 
 #: tools/kmmreport-export.cpp:138

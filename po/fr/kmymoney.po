@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-15 01:48+0000\n"
+"POT-Creation-Date: 2024-10-16 01:51+0000\n"
 "PO-Revision-Date: 2024-09-28 09:20+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -25712,13 +25712,15 @@ msgid "Export KMyMoney reports"
 msgstr "Exporter des rapports de KMyMoney"
 
 #: tools/kmmreport-export.cpp:132
-#, kde-format
-msgid "export in csv format (default)"
+#, fuzzy, kde-format
+#| msgid "export in csv format (default)"
+msgid "Export in csv format (default)"
 msgstr "Exporter au format « csv » (Par défaut)"
 
 #: tools/kmmreport-export.cpp:135
-#, kde-format
-msgid "export in HTML format"
+#, fuzzy, kde-format
+#| msgid "export in HTML format"
+msgid "Export in HTML format"
 msgstr "exporter au format « HTML »"
 
 #: tools/kmmreport-export.cpp:138
