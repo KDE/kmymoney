@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-16 01:51+0000\n"
-"PO-Revision-Date: 2024-09-27 06:20+0200\n"
+"PO-Revision-Date: 2024-10-16 07:22+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -25424,16 +25424,14 @@ msgid "Export KMyMoney reports"
 msgstr "Izvozi poročila KMyMoney"
 
 #: tools/kmmreport-export.cpp:132
-#, fuzzy, kde-format
-#| msgid "export in csv format (default)"
+#, kde-format
 msgid "Export in csv format (default)"
-msgstr "izvoz v obliki csv (privzeto)"
+msgstr "Izvoz v obliki csv (privzeto)"
 
 #: tools/kmmreport-export.cpp:135
-#, fuzzy, kde-format
-#| msgid "export in HTML format"
+#, kde-format
 msgid "Export in HTML format"
-msgstr "izvoz v formatu HTML"
+msgstr "Izvoz v formatu HTML"
 
 #: tools/kmmreport-export.cpp:138
 #, kde-format

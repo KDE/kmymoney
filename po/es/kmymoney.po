@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-16 01:51+0000\n"
-"PO-Revision-Date: 2024-09-27 21:05+0200\n"
+"PO-Revision-Date: 2024-10-16 13:14+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.1\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -25489,16 +25489,14 @@ msgid "Export KMyMoney reports"
 msgstr "Exportar informes de KMyMoney"
 
 #: tools/kmmreport-export.cpp:132
-#, fuzzy, kde-format
-#| msgid "export in csv format (default)"
+#, kde-format
 msgid "Export in csv format (default)"
-msgstr "exportar en formato CSV (predeterminado)"
+msgstr "Exportar en formato CSV (predeterminado)"
 
 #: tools/kmmreport-export.cpp:135
-#, fuzzy, kde-format
-#| msgid "export in HTML format"
+#, kde-format
 msgid "Export in HTML format"
-msgstr "exportar en formato HTML"
+msgstr "Exportar en formato HTML"
 
 #: tools/kmmreport-export.cpp:138
 #, kde-format

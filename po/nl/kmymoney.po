@@ -13,14 +13,14 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-16 01:51+0000\n"
-"PO-Revision-Date: 2024-09-27 23:19+0200\n"
+"PO-Revision-Date: 2024-10-16 11:09+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.08.1\n"
+"X-Generator: Lokalize 24.08.2\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -25502,16 +25502,14 @@ msgid "Export KMyMoney reports"
 msgstr "KMyMoney rapporten exporteren"
 
 #: tools/kmmreport-export.cpp:132
-#, fuzzy, kde-format
-#| msgid "export in csv format (default)"
+#, kde-format
 msgid "Export in csv format (default)"
-msgstr "in csv formaat exporteren (standaard)"
+msgstr "In csv formaat exporteren (standaard)"
 
 #: tools/kmmreport-export.cpp:135
-#, fuzzy, kde-format
-#| msgid "export in HTML format"
+#, kde-format
 msgid "Export in HTML format"
-msgstr "in HTML formaat exporteren"
+msgstr "In HTML formaat exporteren"
 
 #: tools/kmmreport-export.cpp:138
 #, kde-format
