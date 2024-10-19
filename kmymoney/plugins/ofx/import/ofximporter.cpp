@@ -165,10 +165,10 @@ void OFXImporter::slotImportFile()
     option->m_uniqueIdSource->setCurrentIndex(defaultIdSource());
 
     QUrl url = importInterface()->selectFile(i18n("OFX import file selection"),
-               QString(),
-               QStringLiteral("*.ofx *.qfx *.ofc|OFX files (*.ofx *.qfx *.ofc);;*|All files (*)"),
-               QFileDialog::ExistingFile,
-               widget);
+                                             QString(),
+                                             i18nc("Filter for QFileDialog", "OFX files (*.ofx *.qfx *.ofc);;All files (*)"),
+                                             QFileDialog::ExistingFile,
+                                             widget);
 
     d->m_preferName = static_cast<OFXImporter::Private::NamePreference>(option->m_preferName->currentIndex());
     d->m_uniqueIdSource = static_cast<UniqueTransactionIdSource>(option->m_uniqueIdSource->currentIndex());
