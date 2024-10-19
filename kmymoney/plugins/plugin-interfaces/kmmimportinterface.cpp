@@ -48,6 +48,9 @@ QUrl KMyMoneyPlugin::KMMImportInterface::selectFile(const QString& title,
         layout->addWidget(widget, layout->rowCount(), 0, 1, layout->columnCount());
     }
 
+    // increase dialog height by the height of the additionally added widget
+    dialog->resize(dialog->width(), dialog->height() + widget->height());
+
     QUrl url;
     if (dialog->exec() == QDialog::Accepted && dialog != 0) {
         QList<QUrl> selectedUrls = dialog->selectedUrls();
