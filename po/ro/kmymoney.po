@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-19 01:52+0000\n"
+"POT-Creation-Date: 2024-10-20 01:50+0000\n"
 "PO-Revision-Date: 2024-02-24 16:23+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -13952,6 +13952,17 @@ msgstr "OFX..."
 #, kde-format
 msgid "OFX import file selection"
 msgstr "Selecție pentru importul de fișier OFX"
+
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:169
+#, fuzzy, kde-format
+#| msgid ""
+#| "*.kmy|KMyMoney files (*.kmy)\n"
+#| "*.*|All files (*.*)"
+msgctxt "Filter for QFileDialog"
+msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
+msgstr ""
+"*.kmy|fișiere KMyMoney (*.kmy)\n"
+"*.*|Toate fișierele (*.*)"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:187
 #, kde-format
@@ -28923,15 +28934,6 @@ msgstr ""
 
 #~ msgid "Importing an XML Statement."
 #~ msgstr "Se importă un bilanț în format XML."
-
-#, fuzzy
-#~| msgid ""
-#~| "*.kmy|KMyMoney files (*.kmy)\n"
-#~| "*.*|All files (*.*)"
-#~ msgid "XML files (*.xml);;All files (*)"
-#~ msgstr ""
-#~ "*.kmy|fișiere KMyMoney (*.kmy)\n"
-#~ "*.*|Toate fișierele (*.*)"
 
 #, fuzzy
 #~| msgid "Unable to setup online parameters for account ''%1'"

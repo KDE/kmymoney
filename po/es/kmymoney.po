@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-19 01:52+0000\n"
-"PO-Revision-Date: 2024-10-16 13:14+0200\n"
+"POT-Creation-Date: 2024-10-20 01:50+0000\n"
+"PO-Revision-Date: 2024-10-19 12:47+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -13324,6 +13324,12 @@ msgstr "OFX..."
 msgid "OFX import file selection"
 msgstr "Selección del archivo OFX a importar"
 
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:169
+#, kde-format
+msgctxt "Filter for QFileDialog"
+msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
+msgstr ""
+
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:187
 #, kde-format
 msgid ""
@@ -25499,10 +25505,9 @@ msgid "Export in HTML format"
 msgstr "Exportar en formato HTML"
 
 #: tools/kmmreport-export.cpp:126
-#, fuzzy, kde-format
-#| msgid "Export in HTML format"
+#, kde-format
 msgid "Export in xml format"
-msgstr "Exportar en formato HTML"
+msgstr "Exportar en formato XML"
 
 #: tools/kmmreport-export.cpp:129
 #, kde-format

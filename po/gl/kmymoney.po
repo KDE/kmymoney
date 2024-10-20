@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-19 01:52+0000\n"
+"POT-Creation-Date: 2024-10-20 01:50+0000\n"
 "PO-Revision-Date: 2024-09-28 13:05+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -13279,6 +13279,13 @@ msgstr "OFX…"
 #, kde-format
 msgid "OFX import file selection"
 msgstr "Escolla do ficheiro OFX a importar"
+
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:169
+#, fuzzy, kde-format
+#| msgid "XML files (*.xml);;All files (*)"
+msgctxt "Filter for QFileDialog"
+msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
+msgstr "Ficheiros XML (*.xml);;Todos os ficheiros (*)"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:187
 #, kde-format
@@ -27610,9 +27617,6 @@ msgstr "gardando o informe «%1» en «%2»"
 
 #~ msgid "Importing an XML Statement."
 #~ msgstr "Estase a importar un extracto en XML."
-
-#~ msgid "XML files (*.xml);;All files (*)"
-#~ msgstr "Ficheiros XML (*.xml);;Todos os ficheiros (*)"
 
 #~ msgid "Unable to setup online parameters for account '%1'"
 #~ msgstr "Non foi posíbel configurar os parámetros en internet da conta «%1»"

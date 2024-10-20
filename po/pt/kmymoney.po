@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-19 01:52+0000\n"
+"POT-Creation-Date: 2024-10-20 01:50+0000\n"
 "PO-Revision-Date: 2023-07-13 00:39+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -13468,6 +13468,12 @@ msgstr "OFX..."
 #, kde-format
 msgid "OFX import file selection"
 msgstr "Selecção do ficheiro de importação OFX"
+
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:169
+#, kde-format
+msgctxt "Filter for QFileDialog"
+msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
+msgstr ""
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:187
 #, kde-format

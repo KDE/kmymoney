@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-19 01:52+0000\n"
-"PO-Revision-Date: 2024-10-12 11:08+0200\n"
+"POT-Creation-Date: 2024-10-20 01:50+0000\n"
+"PO-Revision-Date: 2024-10-19 13:10+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -13250,6 +13250,13 @@ msgstr "OFX..."
 msgid "OFX import file selection"
 msgstr "Wybór pliku importu OFX"
 
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:169
+#, fuzzy, kde-format
+#| msgid "XML files (*.xml);;All files (*)"
+msgctxt "Filter for QFileDialog"
+msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
+msgstr "Pliki XML (*.xml);;Wszystkie pliki (*)"
+
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:187
 #, kde-format
 msgid ""
@@ -25408,22 +25415,19 @@ msgid "Export KMyMoney reports"
 msgstr "Wyeksportuj sprawozdania KMyMoney"
 
 #: tools/kmmreport-export.cpp:120
-#, fuzzy, kde-format
-#| msgid "export in csv format (default)"
+#, kde-format
 msgid "Export in csv format (default)"
-msgstr "wyeksportuj do pliku csv (domyślnie)"
+msgstr "Wyeksportuj do pliku csv (domyślnie)"
 
 #: tools/kmmreport-export.cpp:123
-#, fuzzy, kde-format
-#| msgid "export in HTML format"
+#, kde-format
 msgid "Export in HTML format"
-msgstr "wyeksportuj do pliku HTML"
+msgstr "Wyeksportuj do pliku HTML"
 
 #: tools/kmmreport-export.cpp:126
-#, fuzzy, kde-format
-#| msgid "export in HTML format"
+#, kde-format
 msgid "Export in xml format"
-msgstr "wyeksportuj do pliku HTML"
+msgstr "Wyeksportuj do pliku XML"
 
 #: tools/kmmreport-export.cpp:129
 #, kde-format
@@ -27606,9 +27610,6 @@ msgstr "Zapisywanie sprawozdania '%1' do '%2'"
 
 #~ msgid "Importing an XML Statement."
 #~ msgstr "Importowanie wyciągu XML."
-
-#~ msgid "XML files (*.xml);;All files (*)"
-#~ msgstr "Pliki XML (*.xml);;Wszystkie pliki (*)"
 
 #~ msgid "Unable to setup online parameters for account '%1'"
 #~ msgstr "Nie można ustawić parametrów dla konta internetowego '%1'"

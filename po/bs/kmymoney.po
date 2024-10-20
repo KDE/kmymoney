@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-19 01:52+0000\n"
+"POT-Creation-Date: 2024-10-20 01:50+0000\n"
 "PO-Revision-Date: 2015-02-09 11:02+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -13815,6 +13815,14 @@ msgstr "OFX..."
 #, kde-format
 msgid "OFX import file selection"
 msgstr "Odabir OFX uvoznih datoteka"
+
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:169
+#, fuzzy, kde-format
+msgctxt "Filter for QFileDialog"
+msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
+msgstr ""
+"*.kmy *.xml|KMyMoney datoteke\n"
+"*|Sve datoteke"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:187
 #, kde-format
@@ -28491,12 +28499,6 @@ msgstr ""
 
 #~ msgid "Importing an XML Statement."
 #~ msgstr "Uvoz XML Izvještaja."
-
-#, fuzzy
-#~ msgid "XML files (*.xml);;All files (*)"
-#~ msgstr ""
-#~ "*.kmy *.xml|KMyMoney datoteke\n"
-#~ "*|Sve datoteke"
 
 #~ msgid "Unable to setup online parameters for account '%1'"
 #~ msgstr "Nemoguće postaviti onlajn parametre za račun '%1'"

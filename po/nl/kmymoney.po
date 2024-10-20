@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-19 01:52+0000\n"
-"PO-Revision-Date: 2024-10-16 11:09+0200\n"
+"POT-Creation-Date: 2024-10-20 01:50+0000\n"
+"PO-Revision-Date: 2024-10-19 11:19+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -13310,6 +13310,13 @@ msgstr "OFX..."
 msgid "OFX import file selection"
 msgstr "OFX import; bestand selectie"
 
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:169
+#, fuzzy, kde-format
+#| msgid "XML files (*.xml);;All files (*)"
+msgctxt "Filter for QFileDialog"
+msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
+msgstr "XML-bestanden (*.xml);;Alle bestanden (*)"
+
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:187
 #, kde-format
 msgid ""
@@ -25512,10 +25519,9 @@ msgid "Export in HTML format"
 msgstr "In HTML formaat exporteren"
 
 #: tools/kmmreport-export.cpp:126
-#, fuzzy, kde-format
-#| msgid "Export in HTML format"
+#, kde-format
 msgid "Export in xml format"
-msgstr "In HTML formaat exporteren"
+msgstr "In xml-formaat exporteren"
 
 #: tools/kmmreport-export.cpp:129
 #, kde-format
@@ -27719,9 +27725,6 @@ msgstr "rapport '%1' wordt opgeslagen in '%2'"
 
 #~ msgid "Importing an XML Statement."
 #~ msgstr "Importeren van een XML afschrift."
-
-#~ msgid "XML files (*.xml);;All files (*)"
-#~ msgstr "XML-bestanden (*.xml);;Alle bestanden (*)"
 
 #~ msgid "Unable to setup online parameters for account '%1'"
 #~ msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-19 01:52+0000\n"
+"POT-Creation-Date: 2024-10-20 01:50+0000\n"
 "PO-Revision-Date: 2020-05-02 10:27+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -13492,6 +13492,12 @@ msgstr "OFX..."
 #, kde-format
 msgid "OFX import file selection"
 msgstr "OFX impordi faili valimine"
+
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:169
+#, fuzzy, kde-format
+msgctxt "Filter for QFileDialog"
+msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
+msgstr "failid Kõik failid"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:187
 #, kde-format
@@ -27870,10 +27876,6 @@ msgstr ""
 
 #~ msgid "Importing an XML Statement."
 #~ msgstr "XML-vormingus pangaväljavõtte import"
-
-#, fuzzy
-#~ msgid "XML files (*.xml);;All files (*)"
-#~ msgstr "failid Kõik failid"
 
 #~ msgid "Unable to setup online parameters for account '%1'"
 #~ msgstr "Konto \"%1\" võrguparameetrite häälestamine nurjus"

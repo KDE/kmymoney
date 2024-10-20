@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-19 01:52+0000\n"
+"POT-Creation-Date: 2024-10-20 01:50+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -13521,6 +13521,17 @@ msgstr "OFX..."
 #, kde-format
 msgid "OFX import file selection"
 msgstr ""
+
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:169
+#, fuzzy, kde-format
+#| msgid ""
+#| "*.kmy *.xml|KMyMoney files\n"
+#| " *|All files"
+msgctxt "Filter for QFileDialog"
+msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
+msgstr ""
+"*.kmy *.xml|KMyMoney-fájlok\n"
+" **|Összes fájl (*.*"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:187
 #, kde-format
@@ -27500,15 +27511,6 @@ msgstr ""
 
 #~ msgid "Importing an XML Statement."
 #~ msgstr "XML számlakivonat importálása."
-
-#, fuzzy
-#~| msgid ""
-#~| "*.kmy *.xml|KMyMoney files\n"
-#~| " *|All files"
-#~ msgid "XML files (*.xml);;All files (*)"
-#~ msgstr ""
-#~ "*.kmy *.xml|KMyMoney-fájlok\n"
-#~ " **|Összes fájl (*.*"
 
 #~ msgid "Deleting transactions"
 #~ msgstr "Tranzakciók törlése"

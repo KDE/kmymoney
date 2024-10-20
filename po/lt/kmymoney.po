@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-19 01:52+0000\n"
+"POT-Creation-Date: 2024-10-20 01:50+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -13193,6 +13193,17 @@ msgstr "..."
 msgid "OFX import file selection"
 msgstr "Išvedimio filtro vieta"
 
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:169
+#, fuzzy, kde-format
+#| msgid ""
+#| "*.kmy *.xml|KMyMoney files\n"
+#| " *.*|All files (*.*)"
+msgctxt "Filter for QFileDialog"
+msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
+msgstr ""
+"*.kmy *.xml|KMyMoney failai\n"
+" *.*|All files (*.*)"
+
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:187
 #, kde-format
 msgid ""
@@ -26376,15 +26387,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "KMyMoney QIF importer"
 #~ msgstr "&Importuoti"
-
-#, fuzzy
-#~| msgid ""
-#~| "*.kmy *.xml|KMyMoney files\n"
-#~| " *.*|All files (*.*)"
-#~ msgid "XML files (*.xml);;All files (*)"
-#~ msgstr ""
-#~ "*.kmy *.xml|KMyMoney failai\n"
-#~ " *.*|All files (*.*)"
 
 #, fuzzy
 #~ msgid "Unable to setup online parameters for account '%1'"

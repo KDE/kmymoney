@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-19 01:52+0000\n"
+"POT-Creation-Date: 2024-10-20 01:50+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -13786,6 +13786,17 @@ msgstr "OFX..."
 #, kde-format
 msgid "OFX import file selection"
 msgstr "Импортайтын OFX файлын таңдау"
+
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:169
+#, fuzzy, kde-format
+#| msgid ""
+#| "*.kmy *.xml|KMyMoney files\n"
+#| "*|All files"
+msgctxt "Filter for QFileDialog"
+msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
+msgstr ""
+"*.kmy *.xml|KMyMoney файлдары\n"
+"*|Бүкіл файлдар"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:187
 #, kde-format
@@ -28372,15 +28383,6 @@ msgstr ""
 
 #~ msgid "Importing an XML Statement."
 #~ msgstr "XML үзінді көшірмені импорттау."
-
-#, fuzzy
-#~| msgid ""
-#~| "*.kmy *.xml|KMyMoney files\n"
-#~| "*|All files"
-#~ msgid "XML files (*.xml);;All files (*)"
-#~ msgstr ""
-#~ "*.kmy *.xml|KMyMoney файлдары\n"
-#~ "*|Бүкіл файлдар"
 
 #~ msgid "Unable to setup online parameters for account '%1'"
 #~ msgstr "'%1' есепшотқа онлайн параметрі орнатылмайды"
