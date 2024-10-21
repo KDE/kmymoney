@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-20 01:50+0000\n"
-"PO-Revision-Date: 2024-10-19 07:09+0200\n"
+"PO-Revision-Date: 2024-10-20 10:41+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -13270,7 +13270,7 @@ msgstr "Izbira vhodne datoteke OFX"
 #, kde-format
 msgctxt "Filter for QFileDialog"
 msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
-msgstr ""
+msgstr "Datoteke OFX (*.ofx *.qfx *.ofc);;Vse datoteke (*)"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:187
 #, kde-format

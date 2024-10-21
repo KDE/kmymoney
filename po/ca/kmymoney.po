@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-20 01:50+0000\n"
-"PO-Revision-Date: 2024-10-19 11:45+0200\n"
+"PO-Revision-Date: 2024-10-20 23:10+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -7817,10 +7817,11 @@ msgstr "Baht de Tailàndia"
 msgid "Tongan Pa'anga"
 msgstr "Pa'anga de Tonga"
 
+# skip-rule: iso_4217-Trinidad and Tobago Dollar
 #: kmymoney/mymoney/mymoneyfile.cpp:3552
 #, kde-format
 msgid "Trinidad and Tobago Dollar"
-msgstr "Dòlar de Trinitat i Tobago"
+msgstr "Dòlar de Trinidad i Tobago"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3553
 #, kde-format
@@ -13349,7 +13350,7 @@ msgstr "Selecció de fitxer d'importació OFX"
 #, kde-format
 msgctxt "Filter for QFileDialog"
 msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
-msgstr ""
+msgstr "Fitxers OFX (*.ofx *.qfx *.ofc);;Tots els fitxes (*)"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:187
 #, kde-format
