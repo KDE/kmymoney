@@ -284,6 +284,24 @@ struct SplitModel::Private
         return value;
     }
 
+    void setupSplitData(MyMoneySplit& s, const QModelIndex& idx) const
+    {
+        s.setNumber(idx.data(eMyMoney::Model::SplitNumberRole).toString());
+        s.setMemo(idx.data(eMyMoney::Model::SplitMemoRole).toString());
+        s.setAccountId(idx.data(eMyMoney::Model::SplitAccountIdRole).toString());
+        s.setShares(idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>());
+        s.setValue(idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>());
+        s.setCostCenterId(idx.data(eMyMoney::Model::SplitCostCenterIdRole).toString());
+        s.setPayeeId(idx.data(eMyMoney::Model::SplitPayeeIdRole).toString());
+        s.setTagIdList(idx.data(eMyMoney::Model::SplitTagIdRole).toStringList());
+
+        // update the price information. setting the price to zero
+        // will cause MyMoneySplit::price to recalculate the price
+        // based on value and shares of the split
+        s.setPrice(MyMoneyMoney());
+        s.setPrice(s.price());
+    }
+
     SplitModel* q;
     QHash<Column, QString> headerData;
     QString transactionCommodity;
@@ -639,21 +657,7 @@ void SplitModel::addSplitsToTransaction(MyMoneyTransaction& t) const
             s = t.splitById(splitId);
         } catch (const MyMoneyException&) {
         }
-        s.setNumber(idx.data(eMyMoney::Model::SplitNumberRole).toString());
-        s.setMemo(idx.data(eMyMoney::Model::SplitMemoRole).toString());
-        s.setAccountId(idx.data(eMyMoney::Model::SplitAccountIdRole).toString());
-        s.setShares(idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>());
-        s.setValue(idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>());
-        s.setCostCenterId(idx.data(eMyMoney::Model::SplitCostCenterIdRole).toString());
-        s.setPayeeId(idx.data(eMyMoney::Model::SplitPayeeIdRole).toString());
-        s.setTagIdList(idx.data(eMyMoney::Model::SplitTagIdRole).toStringList());
-
-        // update the price information. setting the price to zero
-        // will cause MyMoneySplit::price to recalculate the price
-        // based on value and shares of the split
-        s.setPrice(MyMoneyMoney());
-        s.setPrice(s.price());
-
+        d->setupSplitData(s, idx);
         if (s.id().isEmpty()) {
             t.addSplit(s);
         } else {
@@ -669,21 +673,7 @@ QList<MyMoneySplit> SplitModel::splitList() const
     for (int row = 0; row < rows; ++row) {
         const auto idx = index(row, 0);
         MyMoneySplit s;
-        s.setNumber(idx.data(eMyMoney::Model::SplitNumberRole).toString());
-        s.setMemo(idx.data(eMyMoney::Model::SplitMemoRole).toString());
-        s.setAccountId(idx.data(eMyMoney::Model::SplitAccountIdRole).toString());
-        s.setShares(idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>());
-        s.setValue(idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>());
-        s.setCostCenterId(idx.data(eMyMoney::Model::SplitCostCenterIdRole).toString());
-        s.setPayeeId(idx.data(eMyMoney::Model::SplitPayeeIdRole).toString());
-        s.setTagIdList(idx.data(eMyMoney::Model::SplitTagIdRole).toStringList());
-
-        // update the price information. setting the price to zero
-        // will cause MyMoneySplit::price to recalculate the price
-        // based on value and shares of the split
-        s.setPrice(MyMoneyMoney());
-        s.setPrice(s.price());
-
+        d->setupSplitData(s, idx);
         splits.append(s);
     }
     return splits;

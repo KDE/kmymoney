@@ -384,6 +384,30 @@ public:
         q->connect(ui->m_accountsView, &KMyMoneyAccountSelector::stateChanged, q, &KTransactionFilter::slotUpdateSelections);
     }
 
+    void clearNumberWidgets()
+    {
+        ui->m_nrEdit->setEnabled(true);
+        ui->m_nrFromEdit->setEnabled(false);
+        ui->m_nrToEdit->setEnabled(false);
+        ui->m_nrEdit->setText(QString());
+        ui->m_nrFromEdit->setText(QString());
+        ui->m_nrToEdit->setText(QString());
+        ui->m_nrButton->setChecked(true);
+        ui->m_nrRangeButton->setChecked(false);
+    }
+
+    void clearAmountWidgets()
+    {
+        ui->m_amountEdit->setEnabled(true);
+        ui->m_amountFromEdit->setEnabled(false);
+        ui->m_amountToEdit->setEnabled(false);
+        ui->m_amountEdit->setText(QString());
+        ui->m_amountFromEdit->setText(QString());
+        ui->m_amountToEdit->setText(QString());
+        ui->m_amountButton->setChecked(true);
+        ui->m_amountRangeButton->setChecked(false);
+    }
+
     KTransactionFilter      *q_ptr;
     Ui::KTransactionFilter  *ui;
     QDate                m_startDates[(int)eMyMoney::TransactionFilter::Date::LastDateItem];

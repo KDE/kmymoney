@@ -22,6 +22,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "widgetenums.h"
+
 class QHBoxLayout;
 
 class KMyMoneySelectorPrivate
@@ -68,6 +70,20 @@ public:
 
         q->connect(m_treeWidget, &QTreeWidget::itemPressed, q, &KMyMoneySelector::slotItemPressed);
         q->connect(m_treeWidget, &QTreeWidget::itemChanged, q, &KMyMoneySelector::stateChanged);
+    }
+
+    void setupItemData(QTreeWidgetItem* item, const QString& name, const QString& key, const QString& id)
+    {
+        item->setText(0, name);
+        item->setData(0, (int)eWidgets::Selector::Role::Key, key);
+        item->setData(0, (int)eWidgets::Selector::Role::Id, id);
+        item->setText(1, key); // hidden, but used for sorting
+        item->setFlags(item->flags() & ~Qt::ItemIsUserCheckable);
+
+        if (m_selMode == QTreeWidget::MultiSelection) {
+            item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
+            item->setCheckState(0, Qt::Checked);
+        }
     }
 
     KMyMoneySelector          *q_ptr;

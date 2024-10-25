@@ -279,11 +279,6 @@ public:
         m_actionCollectorTimer.setInterval(100);
     }
 
-    void unlinkStatementXML();
-    void moveInvestmentTransaction(const QString& fromId,
-                                   const QString& toId,
-                                   const MyMoneyTransaction& t);
-
     struct storageInfo {
         eKMyMoney::StorageType type {eKMyMoney::StorageType::None};
         bool isOpened {false};
@@ -1427,6 +1422,75 @@ public:
             return LedgerViewSettings::ShowLastReconciliationHeader;
         default:
             return LedgerViewSettings::ShowAllReconciliationHeader;
+        }
+    }
+
+    /**
+     * Create a new stock account as a copy of @a sourceStockAccountId in
+     * the invesment account identified by @a parentInvestAccount.
+     */
+    QString createNewStockAccount(MyMoneyAccount& parentInvestAccount, const QString& sourceStockAccountId)
+    {
+        MyMoneyAccount stockAccount = MyMoneyFile::instance()->account(sourceStockAccountId);
+        MyMoneyAccount newStock;
+        newStock.setName(stockAccount.name());
+        newStock.setNumber(stockAccount.number());
+        newStock.setDescription(stockAccount.description());
+        newStock.setInstitutionId(stockAccount.institutionId());
+        newStock.setOpeningDate(stockAccount.openingDate());
+        newStock.setAccountType(stockAccount.accountType());
+        newStock.setCurrencyId(stockAccount.currencyId());
+        newStock.setClosed(stockAccount.isClosed());
+        MyMoneyFile::instance()->addAccount(newStock, parentInvestAccount);
+        return newStock.id();
+    }
+
+    // move a stock transaction from one investment account to another
+    void moveInvestmentTransaction(const QString& /*fromId*/, const QString& toId, const MyMoneyTransaction& tx)
+    {
+        MyMoneyAccount toInvAcc = MyMoneyFile::instance()->account(toId);
+        MyMoneyTransaction t(tx);
+        // first determine which stock we are dealing with.
+        // fortunately, investment transactions have only one stock involved
+        QString stockAccountId;
+        QString stockSecurityId;
+        MyMoneySplit s;
+        const auto splits = t.splits();
+        for (const auto& split : splits) {
+            stockAccountId = split.accountId();
+            stockSecurityId = MyMoneyFile::instance()->account(stockAccountId).currencyId();
+            if (!MyMoneyFile::instance()->security(stockSecurityId).isCurrency()) {
+                s = split;
+                break;
+            }
+        }
+        // Now check the target investment account to see if it
+        // contains a stock with this id
+        QString newStockAccountId;
+        const auto accountList = toInvAcc.accountList();
+        for (const auto& sAccount : accountList) {
+            if (MyMoneyFile::instance()->account(sAccount).currencyId() == stockSecurityId) {
+                newStockAccountId = sAccount;
+                break;
+            }
+        }
+        // if it doesn't exist, we need to add it as a copy of the old one
+        // no 'copyAccount()' function??
+        if (newStockAccountId.isEmpty()) {
+            newStockAccountId = createNewStockAccount(toInvAcc, stockAccountId);
+        }
+        // now update the split and the transaction
+        s.setAccountId(newStockAccountId);
+        t.modifySplit(s);
+        MyMoneyFile::instance()->modifyTransaction(t);
+    }
+
+    void unlinkStatementXML()
+    {
+        QDir dir(KMyMoneySettings::logPath(), "kmm-statement*");
+        for (uint i = 0; i < dir.count(); ++i) {
+            qDebug("Remove %s", qPrintable(dir[i]));
+            dir.remove(KMyMoneySettings::logPath() + QString("/%1").arg(dir[i]));
         }
     }
 };
@@ -3016,18 +3080,7 @@ void KMyMoneyApp::slotMoveTransactionTo()
                     // if it doesn't exist, we need to add it as a copy of the old one
                     // no 'copyAccount()' function??
                     if (newStockAccountId.isEmpty()) {
-                        MyMoneyAccount stockAccount = file->account(stockAccountId);
-                        MyMoneyAccount newStock;
-                        newStock.setName(stockAccount.name());
-                        newStock.setNumber(stockAccount.number());
-                        newStock.setDescription(stockAccount.description());
-                        newStock.setInstitutionId(stockAccount.institutionId());
-                        newStock.setOpeningDate(stockAccount.openingDate());
-                        newStock.setAccountType(stockAccount.accountType());
-                        newStock.setCurrencyId(stockAccount.currencyId());
-                        newStock.setClosed(stockAccount.isClosed());
-                        file->addAccount(newStock, toInvAcc);
-                        newStockAccountId = newStock.id();
+                        newStockAccountId = d->createNewStockAccount(toInvAcc, stockAccountId);
                     }
 
                     // now update the split and the transaction
@@ -4030,62 +4083,6 @@ void KMyMoneyApp::slotNewFeature()
 {
 }
 
-// move a stock transaction from one investment account to another
-void KMyMoneyApp::Private::moveInvestmentTransaction(const QString& /*fromId*/,
-        const QString& toId,
-        const MyMoneyTransaction& tx)
-{
-    MyMoneyAccount toInvAcc = MyMoneyFile::instance()->account(toId);
-    MyMoneyTransaction t(tx);
-    // first determine which stock we are dealing with.
-    // fortunately, investment transactions have only one stock involved
-    QString stockAccountId;
-    QString stockSecurityId;
-    MyMoneySplit s;
-    const auto splits = t.splits();
-    for (const auto& split : splits) {
-        stockAccountId = split.accountId();
-        stockSecurityId =
-            MyMoneyFile::instance()->account(stockAccountId).currencyId();
-        if (!MyMoneyFile::instance()->security(stockSecurityId).isCurrency()) {
-            s = split;
-            break;
-        }
-    }
-    // Now check the target investment account to see if it
-    // contains a stock with this id
-    QString newStockAccountId;
-    const auto accountList = toInvAcc.accountList();
-    for (const auto& sAccount : accountList) {
-        if (MyMoneyFile::instance()->account(sAccount).currencyId() ==
-                stockSecurityId) {
-            newStockAccountId = sAccount;
-            break;
-        }
-    }
-    // if it doesn't exist, we need to add it as a copy of the old one
-    // no 'copyAccount()' function??
-    if (newStockAccountId.isEmpty()) {
-        MyMoneyAccount stockAccount =
-            MyMoneyFile::instance()->account(stockAccountId);
-        MyMoneyAccount newStock;
-        newStock.setName(stockAccount.name());
-        newStock.setNumber(stockAccount.number());
-        newStock.setDescription(stockAccount.description());
-        newStock.setInstitutionId(stockAccount.institutionId());
-        newStock.setOpeningDate(stockAccount.openingDate());
-        newStock.setAccountType(stockAccount.accountType());
-        newStock.setCurrencyId(stockAccount.currencyId());
-        newStock.setClosed(stockAccount.isClosed());
-        MyMoneyFile::instance()->addAccount(newStock, toInvAcc);
-        newStockAccountId = newStock.id();
-    }
-    // now update the split and the transaction
-    s.setAccountId(newStockAccountId);
-    t.modifySplit(s);
-    MyMoneyFile::instance()->modifyTransaction(t);
-}
-
 void KMyMoneyApp::slotDataChanged()
 {
     d->fileAction(eKMyMoney::FileAction::Changed);
@@ -4901,15 +4898,6 @@ KMStatus::KMStatus(const QString &text)
 KMStatus::~KMStatus()
 {
     kmymoney->slotStatusMsg(m_prevText);
-}
-
-void KMyMoneyApp::Private::unlinkStatementXML()
-{
-    QDir dir(KMyMoneySettings::logPath(), "kmm-statement*");
-    for (uint i = 0; i < dir.count(); ++i) {
-        qDebug("Remove %s", qPrintable(dir[i]));
-        dir.remove(KMyMoneySettings::logPath() + QString("/%1").arg(dir[i]));
-    }
 }
 
 #include "kmymoney.moc"

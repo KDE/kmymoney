@@ -283,28 +283,8 @@ public:
                 const auto selectedAccountId = selection.firstSelection(SelectedObjects::Account);
                 const auto accountIdx = file->accountsModel()->indexById(selectedAccountId);
                 AccountSet accountSet;
-                bool isInvestmentMove(false);
-                if (accountIdx.isValid()) {
-                    if (accountIdx.data(eMyMoney::Model::AccountTypeRole).value<eMyMoney::Account::Type>() == eMyMoney::Account::Type::Investment) {
-                        isInvestmentMove = true;
-                        accountSet.addAccountType(eMyMoney::Account::Type::Investment);
-                    } else if (accountIdx.data(eMyMoney::Model::AccountIsAssetLiabilityRole).toBool()) {
-                        accountSet.addAccountType(eMyMoney::Account::Type::Checkings);
-                        accountSet.addAccountType(eMyMoney::Account::Type::Savings);
-                        accountSet.addAccountType(eMyMoney::Account::Type::Cash);
-                        accountSet.addAccountType(eMyMoney::Account::Type::AssetLoan);
-                        accountSet.addAccountType(eMyMoney::Account::Type::CertificateDep);
-                        accountSet.addAccountType(eMyMoney::Account::Type::MoneyMarket);
-                        accountSet.addAccountType(eMyMoney::Account::Type::Asset);
-                        accountSet.addAccountType(eMyMoney::Account::Type::Currency);
-                        accountSet.addAccountType(eMyMoney::Account::Type::CreditCard);
-                        accountSet.addAccountType(eMyMoney::Account::Type::Loan);
-                        accountSet.addAccountType(eMyMoney::Account::Type::Liability);
-                    } else if (accountIdx.data(eMyMoney::Model::AccountIsIncomeExpenseRole).toBool()) {
-                        accountSet.addAccountType(eMyMoney::Account::Type::Income);
-                        accountSet.addAccountType(eMyMoney::Account::Type::Expense);
-                    }
-                } else {
+
+                auto loadAssetLiabilityTypes = [&]() {
                     accountSet.addAccountType(eMyMoney::Account::Type::Checkings);
                     accountSet.addAccountType(eMyMoney::Account::Type::Savings);
                     accountSet.addAccountType(eMyMoney::Account::Type::Cash);
@@ -316,6 +296,23 @@ public:
                     accountSet.addAccountType(eMyMoney::Account::Type::CreditCard);
                     accountSet.addAccountType(eMyMoney::Account::Type::Loan);
                     accountSet.addAccountType(eMyMoney::Account::Type::Liability);
+                };
+
+                bool isInvestmentMove(false);
+                if (accountIdx.isValid()) {
+                    if (accountIdx.data(eMyMoney::Model::AccountTypeRole).value<eMyMoney::Account::Type>() == eMyMoney::Account::Type::Investment) {
+                        isInvestmentMove = true;
+                        accountSet.addAccountType(eMyMoney::Account::Type::Investment);
+
+                    } else if (accountIdx.data(eMyMoney::Model::AccountIsAssetLiabilityRole).toBool()) {
+                        loadAssetLiabilityTypes();
+
+                    } else if (accountIdx.data(eMyMoney::Model::AccountIsIncomeExpenseRole).toBool()) {
+                        accountSet.addAccountType(eMyMoney::Account::Type::Income);
+                        accountSet.addAccountType(eMyMoney::Account::Type::Expense);
+                    }
+                } else {
+                    loadAssetLiabilityTypes();
                 }
 
                 accountSet.load(moveToAccountSelector);

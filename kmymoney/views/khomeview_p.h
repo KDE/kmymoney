@@ -597,6 +597,34 @@ public:
         m_adjustedIconSize = isize;
     }
 
+    void addScheduleHeader(const QString& title, const QString& cssClass)
+    {
+        m_html += QString("<tr class=\"%1\"><td colspan=\"7\">%2</td></tr>\n").arg(cssClass, title);
+        m_html += "<tr class=\"item\">";
+        m_html += "<td class=\"left\" width=\"10%\">";
+        m_html += i18n("Date");
+        m_html += "</td>";
+        m_html += "<td class=\"left\" width=\"2%\">";
+        m_html += i18n("Next");
+        m_html += "</td>";
+        m_html += "<td class=\"left\" width=\"2%\">";
+        m_html += i18n("Skip");
+        m_html += "</td>";
+        m_html += "<td class=\"left\" width=\"36%\">";
+        m_html += i18n("Schedule");
+        m_html += "</td>";
+        m_html += "<td class=\"left\" width=\"20%\">";
+        m_html += i18n("Account");
+        m_html += "</td>";
+        m_html += "<td class=\"right nowrap\" width=\"15%\">";
+        m_html += i18n("Amount");
+        m_html += "</td>";
+        m_html += "<td class=\"right nowrap\" width=\"15%\">";
+        m_html += i18n("Balance after");
+        m_html += "</td>";
+        m_html += "</tr>";
+    }
+
     void showScheduledPayments()
     {
         MyMoneyFile* file = MyMoneyFile::instance();
@@ -656,30 +684,7 @@ public:
             QList<MyMoneySchedule>::Iterator it_f;
 
             m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
-            m_html += QString("<tr class=\"itemtitle negativetext\"><td colspan=\"7\">%1</td></tr>\n").arg(i18n("Overdue payments"));
-            m_html += "<tr class=\"item\">";
-            m_html += "<td class=\"left\" width=\"10%\">";
-            m_html += i18n("Date");
-            m_html += "</td>";
-            m_html += "<td class=\"left\" width=\"2%\">";
-            m_html += i18n("Next");
-            m_html += "</td>";
-            m_html += "<td class=\"left\" width=\"2%\">";
-            m_html += i18n("Skip");
-            m_html += "</td>";
-            m_html += "<td class=\"left\" width=\"36%\">";
-            m_html += i18n("Schedule");
-            m_html += "</td>";
-            m_html += "<td class=\"left\" width=\"20%\">";
-            m_html += i18n("Account");
-            m_html += "</td>";
-            m_html += "<td class=\"right nowrap\" width=\"15%\">";
-            m_html += i18n("Amount");
-            m_html += "</td>";
-            m_html += "<td class=\"right nowrap\" width=\"15%\">";
-            m_html += i18n("Balance after");
-            m_html += "</td>";
-            m_html += "</tr>";
+            addScheduleHeader(QLatin1String("itemtitle negativetext"), i18n("Overdue payments"));
 
             int i = 0;
             for (it = overdues.begin(); it != overdues.end(); ++it) {
@@ -716,30 +721,7 @@ public:
             if (todays.count() > 0) {
                 m_html += "<tr class=\"gap\"><td>&nbsp;\n</td></tr>";
                 m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
-                m_html += QString("<tr class=\"itemtitle\"><td class=\"left\" colspan=\"7\">%1</td></tr>\n").arg(i18n("Today's due payments"));
-                m_html += "<tr class=\"item\">";
-                m_html += "<td class=\"left\" width=\"10%\">";
-                m_html += i18n("Date");
-                m_html += "</td>";
-                m_html += "<td class=\"left\" width=\"2%\">";
-                m_html += i18n("Next");
-                m_html += "</td>";
-                m_html += "<td class=\"left\" width=\"2%\">";
-                m_html += i18n("Skip");
-                m_html += "</td>";
-                m_html += "<td class=\"left\" width=\"36%\">";
-                m_html += i18n("Schedule");
-                m_html += "</td>";
-                m_html += "<td class=\"left\" width=\"20%\">";
-                m_html += i18n("Account");
-                m_html += "</td>";
-                m_html += "<td class=\"right nowrap\" width=\"15%\">";
-                m_html += i18n("Amount");
-                m_html += "</td>";
-                m_html += "<td class=\"right nowrap\" width=\"15%\">";
-                m_html += i18n("Balance after");
-                m_html += "</td>";
-                m_html += "</tr>";
+                addScheduleHeader(QLatin1String("itemtitle"), i18n("Today's due payments"));
 
                 int i = 0;
                 for (t_it = todays.begin(); t_it != todays.end(); ++t_it) {
@@ -754,30 +736,7 @@ public:
                 QList<MyMoneySchedule>::Iterator it;
 
                 m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
-                m_html += QString("<tr class=\"itemtitle\"><td class=\"left\" colspan=\"7\">%1</td></tr>\n").arg(i18n("Future payments"));
-                m_html += "<tr class=\"item\">";
-                m_html += "<td class=\"left\" width=\"10%\">";
-                m_html += i18n("Date");
-                m_html += "</td>";
-                m_html += "<td class=\"left\" width=\"2%\">";
-                m_html += i18n("Next");
-                m_html += "</td>";
-                m_html += "<td class=\"left\" width=\"2%\">";
-                m_html += i18n("Skip");
-                m_html += "</td>";
-                m_html += "<td class=\"left\" width=\"36%\">";
-                m_html += i18n("Schedule");
-                m_html += "</td>";
-                m_html += "<td class=\"left\" width=\"20%\">";
-                m_html += i18n("Account");
-                m_html += "</td>";
-                m_html += "<td class=\"right nowrap\" width=\"15%\">";
-                m_html += i18n("Amount");
-                m_html += "</td>";
-                m_html += "<td class=\"right nowrap\" width=\"15%\">";
-                m_html += i18n("Balance after");
-                m_html += "</td>";
-                m_html += "</tr>";
+                addScheduleHeader(QLatin1String("itemtitle"), i18n("Future payments"));
 
                 // show all or the first 6 entries
                 int cnt;

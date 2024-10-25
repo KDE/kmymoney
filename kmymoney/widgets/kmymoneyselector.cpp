@@ -20,7 +20,6 @@
 // Project Includes
 
 #include "kmymoneysettings.h"
-#include "widgetenums.h"
 
 using namespace eWidgets;
 
@@ -159,17 +158,7 @@ QTreeWidgetItem* KMyMoneySelector::newTopItem(const QString& name, const QString
 {
     Q_D(KMyMoneySelector);
     QTreeWidgetItem* item = new QTreeWidgetItem(d->m_treeWidget);
-
-    item->setText(0, name);
-    item->setData(0, (int)Selector::Role::Key, key);
-    item->setData(0, (int)Selector::Role::Id, id);
-    item->setText(1, key); // hidden, but used for sorting
-    item->setFlags(item->flags() & ~Qt::ItemIsUserCheckable);
-
-    if (d->m_selMode == QTreeWidget::MultiSelection) {
-        item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
-        item->setCheckState(0, Qt::Checked);
-    }
+    d->setupItemData(item, name, key, id);
     return item;
 }
 
@@ -177,17 +166,7 @@ QTreeWidgetItem* KMyMoneySelector::newItem(QTreeWidgetItem* parent, const QStrin
 {
     Q_D(KMyMoneySelector);
     QTreeWidgetItem* item = new QTreeWidgetItem(parent);
-
-    item->setText(0, name);
-    item->setData(0, (int)Selector::Role::Key, key);
-    item->setData(0, (int)Selector::Role::Id, id);
-    item->setText(1, key); // hidden, but used for sorting
-    item->setFlags(item->flags() & ~Qt::ItemIsUserCheckable);
-
-    if (d->m_selMode == QTreeWidget::MultiSelection) {
-        item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
-        item->setCheckState(0, Qt::Checked);
-    }
+    d->setupItemData(item, name, key, id);
     return item;
 }
 

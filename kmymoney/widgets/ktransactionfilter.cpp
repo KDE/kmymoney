@@ -54,14 +54,7 @@ void KTransactionFilter::slotReset()
     d->ui->m_caseSensitive->setChecked(false);
     d->ui->m_textNegate->setCurrentItem(0);
 
-    d->ui->m_amountEdit->setEnabled(true);
-    d->ui->m_amountFromEdit->setEnabled(false);
-    d->ui->m_amountToEdit->setEnabled(false);
-    d->ui->m_amountEdit->setText(QString());
-    d->ui->m_amountFromEdit->setText(QString());
-    d->ui->m_amountToEdit->setText(QString());
-    d->ui->m_amountButton->setChecked(true);
-    d->ui->m_amountRangeButton->setChecked(false);
+    d->clearAmountWidgets();
 
     d->ui->m_emptyPayeesButton->setChecked(false);
     d->selectAllItems(d->ui->m_payeesView, true);
@@ -73,14 +66,7 @@ void KTransactionFilter::slotReset()
     d->ui->m_stateBox->setCurrentIndex((int)eMyMoney::TransactionFilter::State::All);
     d->ui->m_validityBox->setCurrentIndex((int)eMyMoney::TransactionFilter::Validity::Any);
 
-    d->ui->m_nrEdit->setEnabled(true);
-    d->ui->m_nrFromEdit->setEnabled(false);
-    d->ui->m_nrToEdit->setEnabled(false);
-    d->ui->m_nrEdit->setText(QString());
-    d->ui->m_nrFromEdit->setText(QString());
-    d->ui->m_nrToEdit->setText(QString());
-    d->ui->m_nrButton->setChecked(true);
-    d->ui->m_nrRangeButton->setChecked(false);
+    d->clearNumberWidgets();
 
     // the following call implies a call to slotUpdateSelections,
     // that's why we call it last
@@ -422,14 +408,7 @@ void KTransactionFilter::resetFilter(MyMoneyReport& rep)
             d->ui->m_nrRangeButton->setChecked(true);
         }
     } else {
-        d->ui->m_nrEdit->setEnabled(true);
-        d->ui->m_nrFromEdit->setEnabled(false);
-        d->ui->m_nrToEdit->setEnabled(false);
-        d->ui->m_nrEdit->setText(QString());
-        d->ui->m_nrFromEdit->setText(QString());
-        d->ui->m_nrToEdit->setText(QString());
-        d->ui->m_nrButton->setChecked(true);
-        d->ui->m_nrRangeButton->setChecked(false);
+        d->clearNumberWidgets();
     }
 
     //
@@ -458,14 +437,7 @@ void KTransactionFilter::resetFilter(MyMoneyReport& rep)
             d->ui->m_amountRangeButton->setChecked(true);
         }
     } else {
-        d->ui->m_amountEdit->setEnabled(true);
-        d->ui->m_amountFromEdit->setEnabled(false);
-        d->ui->m_amountToEdit->setEnabled(false);
-        d->ui->m_amountEdit->setText(QString());
-        d->ui->m_amountFromEdit->setText(QString());
-        d->ui->m_amountToEdit->setText(QString());
-        d->ui->m_amountButton->setChecked(true);
-        d->ui->m_amountRangeButton->setChecked(false);
+        d->clearAmountWidgets();
     }
 
     //

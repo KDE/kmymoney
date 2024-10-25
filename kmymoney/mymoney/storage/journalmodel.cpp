@@ -39,6 +39,11 @@ struct JournalModel::Private
     } category_t;
 
     typedef enum {
+        Add,
+        Remove,
+    } BalanceCacheDirection;
+
+    typedef enum {
         StockSplitForward,
         StockSplitBackward,
     } StockSplitDirection;
@@ -308,32 +313,29 @@ struct JournalModel::Private
         fullBalanceRecalc.clear();
     }
 
-    void removeTransactionFromBalance(int startRow, int rows)
+    void updateTransactionFromBalance(int startRow, int rows, BalanceCacheDirection direction)
     {
         for (int row = 0; row < rows; ++row)  {
             const auto journalEntry = static_cast<TreeItem<JournalEntry>*>(q->index(startRow, 0).internalPointer())->constDataRef();
             balanceChangedSet.insert(journalEntry.split().accountId());
             if (Q_UNLIKELY(journalEntry.transaction().isStockSplit())) {
                 fullBalanceRecalc.insert(journalEntry.split().accountId());
+            } else if (direction == BalanceCacheDirection::Add) {
+                balanceCache[journalEntry.split().accountId()] += journalEntry.split();
             } else {
                 balanceCache[journalEntry.split().accountId()] -= journalEntry.split();
             }
             ++startRow;
         }
     }
+    void removeTransactionFromBalance(int startRow, int rows)
+    {
+        updateTransactionFromBalance(startRow, rows, BalanceCacheDirection::Remove);
+    }
 
     void addTransactionToBalance(int startRow, int rows)
     {
-        for (int row = 0; row < rows; ++row)  {
-            const auto journalEntry = static_cast<TreeItem<JournalEntry>*>(q->index(startRow, 0).internalPointer())->constDataRef();
-            balanceChangedSet.insert(journalEntry.split().accountId());
-            if (Q_UNLIKELY(journalEntry.transaction().isStockSplit())) {
-                fullBalanceRecalc.insert(journalEntry.split().accountId());
-            } else {
-                balanceCache[journalEntry.split().accountId()] += journalEntry.split();
-            }
-            ++startRow;
-        }
+        updateTransactionFromBalance(startRow, rows, BalanceCacheDirection::Add);
     }
 
     /**
