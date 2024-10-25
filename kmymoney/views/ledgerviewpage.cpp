@@ -169,6 +169,9 @@ void LedgerViewPage::initModel()
     // the next call will also take care of enabling
     // sorting on the stateFilter.
     d->specialItemFilter->setSortingEnabled(true);
+
+    // Now scroll to the bottom
+    d->ui->m_ledgerView->scrollToBottom();
 }
 
 LedgerViewPage::~LedgerViewPage()
