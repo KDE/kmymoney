@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-23 01:49+0000\n"
+"POT-Creation-Date: 2024-10-25 01:49+0000\n"
 "PO-Revision-Date: 2009-05-18 00:20+0900\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -1778,8 +1778,8 @@ msgstr ""
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_4)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:148
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:453
-#: kmymoney/plugins/views/reports/kreportsview_p.h:944
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1484
+#: kmymoney/plugins/views/reports/kreportsview_p.h:951
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1491
 #: kmymoney/views/kpayeesview.ui:117 kmymoney/views/ktagsview.ui:121
 #: kmymoney/views/ktagsview.ui:127
 #, kde-format
@@ -5727,7 +5727,7 @@ msgid "Budget"
 msgstr ""
 
 #: kmymoney/kmymoneyutils.cpp:125
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1015
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1022
 #, kde-format
 msgid "Cash Flow"
 msgstr ""
@@ -11238,7 +11238,7 @@ msgid "iCalendar files"
 msgstr ""
 
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:96
-#: kmymoney/plugins/views/reports/kreportsview.cpp:325
+#: kmymoney/plugins/views/reports/kreportsview.cpp:348
 #, kde-format
 msgid "Export as"
 msgstr ""
@@ -11673,9 +11673,9 @@ msgid "Error importing statement. Do you want to continue?"
 msgstr ""
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1574
-#: kmymoney/plugins/views/reports/kreportsview.cpp:406
-#: kmymoney/plugins/views/reports/kreportsview.cpp:465
-#: kmymoney/plugins/views/reports/kreportsview.cpp:484
+#: kmymoney/plugins/views/reports/kreportsview.cpp:430
+#: kmymoney/plugins/views/reports/kreportsview.cpp:489
+#: kmymoney/plugins/views/reports/kreportsview.cpp:508
 #, kde-format
 msgid "Critical Error"
 msgstr ""
@@ -14052,7 +14052,7 @@ msgid "Unable to remove budget."
 msgstr ""
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:169
-#: kmymoney/plugins/views/reports/kreportsview.cpp:441
+#: kmymoney/plugins/views/reports/kreportsview.cpp:465
 #, kde-format
 msgid "Copy of %1"
 msgstr ""
@@ -14287,7 +14287,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QPushButton, m_forecastButton)
 #: kmymoney/plugins/views/forecast/forecastview.cpp:53
 #: kmymoney/plugins/views/forecast/kforecastview.ui:272
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1328
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1335
 #, kde-format
 msgid "Forecast"
 msgstr ""
@@ -14540,7 +14540,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QToolButton, buttonChart)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:479
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:145
-#: kmymoney/plugins/views/reports/kreportsview_p.h:420
+#: kmymoney/plugins/views/reports/kreportsview_p.h:427
 #: kmymoney/plugins/views/reports/reportcontrol.ui:41
 #, kde-format
 msgid "Chart"
@@ -15374,8 +15374,8 @@ msgid "%1 Balance History"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:81
-#: kmymoney/plugins/views/reports/kreportsview.cpp:371
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1483
+#: kmymoney/plugins/views/reports/kreportsview.cpp:395
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1490
 #: kmymoney/plugins/views/reports/reportsview.cpp:83
 #: kmymoney/plugins/views/reports/reportsview.cpp:119
 #: kmymoney/plugins/views/reports/reportsview.cpp:177
@@ -15463,7 +15463,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:167
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:171
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:27
-#: kmymoney/plugins/views/reports/kreportsview_p.h:430
+#: kmymoney/plugins/views/reports/kreportsview_p.h:437
 #: kmymoney/views/khomeview_p.h:1114
 #, kde-format
 msgid "Report"
@@ -15601,153 +15601,170 @@ msgstr ""
 msgid "Configure your report"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:283
+#: kmymoney/plugins/views/reports/kreportsview.cpp:306
 #, kde-format
 msgid "Unknown command '%1' in KReportsView::slotOpenUrl()"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:303
+#: kmymoney/plugins/views/reports/kreportsview.cpp:326
 #, kde-format
 msgid "Unknown view '%1' in KReportsView::slotOpenUrl()"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:346
+#: kmymoney/plugins/views/reports/kreportsview.cpp:370
 #, kde-format
 msgid "Failed to save: %1"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:371
-#: kmymoney/plugins/views/reports/kreportsview.cpp:442
-#: kmymoney/plugins/views/reports/kreportsview_p.h:814
-#: kmymoney/plugins/views/reports/kreportsview_p.h:822
-#: kmymoney/plugins/views/reports/kreportsview_p.h:830
-#: kmymoney/plugins/views/reports/kreportsview_p.h:839
-#: kmymoney/plugins/views/reports/kreportsview_p.h:851
-#: kmymoney/plugins/views/reports/kreportsview_p.h:864
-#: kmymoney/plugins/views/reports/kreportsview_p.h:881
-#: kmymoney/plugins/views/reports/kreportsview_p.h:889
-#: kmymoney/plugins/views/reports/kreportsview_p.h:897
-#: kmymoney/plugins/views/reports/kreportsview_p.h:905
-#: kmymoney/plugins/views/reports/kreportsview_p.h:916
-#: kmymoney/plugins/views/reports/kreportsview_p.h:929
-#: kmymoney/plugins/views/reports/kreportsview_p.h:938
-#: kmymoney/plugins/views/reports/kreportsview_p.h:952
-#: kmymoney/plugins/views/reports/kreportsview_p.h:961
-#: kmymoney/plugins/views/reports/kreportsview_p.h:969
-#: kmymoney/plugins/views/reports/kreportsview_p.h:977
-#: kmymoney/plugins/views/reports/kreportsview_p.h:985
-#: kmymoney/plugins/views/reports/kreportsview_p.h:993
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1001
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1010
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1021
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1033
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1043
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1053
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1063
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1073
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1083
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1093
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1103
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1117
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1132
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1154
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1176
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1193
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1215
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1224
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1233
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1242
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1256
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1267
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1282
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1291
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1301
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1310
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1318
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1336
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1346
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1357
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1367
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1386
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1395
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1404
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1413
+#: kmymoney/plugins/views/reports/kreportsview.cpp:395
+#: kmymoney/plugins/views/reports/kreportsview.cpp:466
+#: kmymoney/plugins/views/reports/kreportsview_p.h:821
+#: kmymoney/plugins/views/reports/kreportsview_p.h:829
+#: kmymoney/plugins/views/reports/kreportsview_p.h:837
+#: kmymoney/plugins/views/reports/kreportsview_p.h:846
+#: kmymoney/plugins/views/reports/kreportsview_p.h:858
+#: kmymoney/plugins/views/reports/kreportsview_p.h:871
+#: kmymoney/plugins/views/reports/kreportsview_p.h:888
+#: kmymoney/plugins/views/reports/kreportsview_p.h:896
+#: kmymoney/plugins/views/reports/kreportsview_p.h:904
+#: kmymoney/plugins/views/reports/kreportsview_p.h:912
+#: kmymoney/plugins/views/reports/kreportsview_p.h:923
+#: kmymoney/plugins/views/reports/kreportsview_p.h:936
+#: kmymoney/plugins/views/reports/kreportsview_p.h:945
+#: kmymoney/plugins/views/reports/kreportsview_p.h:959
+#: kmymoney/plugins/views/reports/kreportsview_p.h:968
+#: kmymoney/plugins/views/reports/kreportsview_p.h:976
+#: kmymoney/plugins/views/reports/kreportsview_p.h:984
+#: kmymoney/plugins/views/reports/kreportsview_p.h:992
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1000
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1008
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1017
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1028
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1040
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1050
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1060
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1070
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1080
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1090
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1100
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1110
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1124
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1139
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1161
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1183
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1200
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1222
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1231
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1240
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1249
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1263
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1274
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1289
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1298
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1308
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1317
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1325
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1343
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1353
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1364
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1374
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1393
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1402
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1411
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1420
 #, kde-format
 msgid "Default Report"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:372
-#: kmymoney/plugins/views/reports/kreportsview.cpp:443
+#: kmymoney/plugins/views/reports/kreportsview.cpp:396
+#: kmymoney/plugins/views/reports/kreportsview.cpp:467
 #, kde-format
 msgid "Custom Report"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:373
+#: kmymoney/plugins/views/reports/kreportsview.cpp:397
 #, kde-format
 msgid "%1 (Customized)"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:400
-#: kmymoney/plugins/views/reports/kreportsview.cpp:459
+#: kmymoney/plugins/views/reports/kreportsview.cpp:424
+#: kmymoney/plugins/views/reports/kreportsview.cpp:483
 #, kde-format
 msgid ""
 "Could not find reportgroup \"%1\" for report \"%2\".\n"
 "Please report this error to the developer's list: kmymoney-devel@kde.org"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:420
+#: kmymoney/plugins/views/reports/kreportsview.cpp:444
 #, kde-format
 msgid "Failed to configure report: %1"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:478
+#: kmymoney/plugins/views/reports/kreportsview.cpp:502
 #, kde-format
 msgid "Cannot add report, reason: \"%1\""
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:513
+#: kmymoney/plugins/views/reports/kreportsview.cpp:537
 #, kde-format
 msgid "<b>%1</b> is a default report, so it cannot be deleted."
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:514
-#: kmymoney/plugins/views/reports/kreportsview_p.h:562
+#: kmymoney/plugins/views/reports/kreportsview.cpp:538
+#: kmymoney/plugins/views/reports/kreportsview_p.h:569
 #, kde-format
 msgid "Delete Report?"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:711
+#: kmymoney/plugins/views/reports/kreportsview.cpp:735
 #, kde-format
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:712
+#: kmymoney/plugins/views/reports/kreportsview.cpp:736
 #, kde-format
 msgctxt "To open a new report"
 msgid "&Open"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:715
+#: kmymoney/plugins/views/reports/kreportsview.cpp:739
 #, kde-format
 msgctxt "To print a report"
 msgid "&Print"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:719
+#: kmymoney/plugins/views/reports/kreportsview.cpp:743
+#, kde-format
+msgctxt "To export a report"
+msgid "&Export to PDF file"
+msgstr ""
+
+#: kmymoney/plugins/views/reports/kreportsview.cpp:745
 #, kde-format
 msgctxt "Configure a report"
 msgid "&Configure"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:722
+#: kmymoney/plugins/views/reports/kreportsview.cpp:748
 #, kde-format
 msgid "&New report"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview.cpp:732
+#: kmymoney/plugins/views/reports/kreportsview.cpp:758
 #, kde-format
 msgid "&Delete"
+msgstr ""
+
+#: kmymoney/plugins/views/reports/kreportsview.cpp:763
+#, kde-format
+msgctxt "To export reports"
+msgid "&Export to PDF files"
+msgstr ""
+
+#: kmymoney/plugins/views/reports/kreportsview.cpp:816
+#, kde-format
+msgid "Export into directory"
 msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KReportsView)
@@ -15780,346 +15797,346 @@ msgid "Comment"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonChart)
-#: kmymoney/plugins/views/reports/kreportsview_p.h:421
+#: kmymoney/plugins/views/reports/kreportsview_p.h:428
 #: kmymoney/plugins/views/reports/reportcontrol.ui:38
 #, kde-format
 msgid "Show the chart version of this report"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:431
+#: kmymoney/plugins/views/reports/kreportsview_p.h:438
 #, kde-format
 msgid "Show the report version of this chart"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:561
+#: kmymoney/plugins/views/reports/kreportsview_p.h:568
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to delete report <b>%1</b>?  There is no way to "
 "recover it.</qt>"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:623
+#: kmymoney/plugins/views/reports/kreportsview_p.h:630
 msgid "Charts"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:666
+#: kmymoney/plugins/views/reports/kreportsview_p.h:673
 #: kmymoney/views/khomeview_p.h:1109
 #, kde-format
 msgid "Favorite Reports"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:695
+#: kmymoney/plugins/views/reports/kreportsview_p.h:702
 msgid "Old Customized Reports"
-msgstr ""
-
-#: kmymoney/plugins/views/reports/kreportsview_p.h:806
-#, kde-format
-msgid "Income and Expenses"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:813
 #, kde-format
+msgid "Income and Expenses"
+msgstr ""
+
+#: kmymoney/plugins/views/reports/kreportsview_p.h:820
+#, kde-format
 msgid "Income and Expenses This Month"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:821
+#: kmymoney/plugins/views/reports/kreportsview_p.h:828
 #, kde-format
 msgid "Income and Expenses This Year"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:829
+#: kmymoney/plugins/views/reports/kreportsview_p.h:836
 #, kde-format
 msgid "Income and Expenses By Year"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:838
+#: kmymoney/plugins/views/reports/kreportsview_p.h:845
 #, kde-format
 msgid "Income and Expenses Graph"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:850
+#: kmymoney/plugins/views/reports/kreportsview_p.h:857
 #, kde-format
 msgid "Income and Expenses Bar Graph"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:863
+#: kmymoney/plugins/views/reports/kreportsview_p.h:870
 #, kde-format
 msgid "Income and Expenses Pie Chart"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:873
+#: kmymoney/plugins/views/reports/kreportsview_p.h:880
 #: kmymoney/views/khomeview_p.h:1563
 #, kde-format
 msgid "Net Worth"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:880
+#: kmymoney/plugins/views/reports/kreportsview_p.h:887
 #, kde-format
 msgid "Net Worth By Month"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:888
+#: kmymoney/plugins/views/reports/kreportsview_p.h:895
 #, kde-format
 msgid "Net Worth Today"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:896
+#: kmymoney/plugins/views/reports/kreportsview_p.h:903
 #, kde-format
 msgid "Net Worth By Year"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:904
+#: kmymoney/plugins/views/reports/kreportsview_p.h:911
 #, kde-format
 msgid "7-day Cash Flow Forecast"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:915
+#: kmymoney/plugins/views/reports/kreportsview_p.h:922
 #, kde-format
 msgid "Net Worth Graph"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:928
+#: kmymoney/plugins/views/reports/kreportsview_p.h:935
 #, kde-format
 msgid "Account Balances by Institution"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:937
+#: kmymoney/plugins/views/reports/kreportsview_p.h:944
 #, kde-format
 msgid "Account Balances by Type"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:951
+#: kmymoney/plugins/views/reports/kreportsview_p.h:958
 #, kde-format
 msgid "Transactions by Account"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:960
+#: kmymoney/plugins/views/reports/kreportsview_p.h:967
 #, kde-format
 msgid "Transactions by Category"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:968
+#: kmymoney/plugins/views/reports/kreportsview_p.h:975
 #, kde-format
 msgid "Transactions by Payee"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:976
+#: kmymoney/plugins/views/reports/kreportsview_p.h:983
 #, kde-format
 msgid "Transactions by Tag"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:984
+#: kmymoney/plugins/views/reports/kreportsview_p.h:991
 #, kde-format
 msgid "Transactions by Month"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:992
+#: kmymoney/plugins/views/reports/kreportsview_p.h:999
 #, kde-format
 msgid "Transactions by Week"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1000
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1007
 #, kde-format
 msgid "Loan Transactions"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1009
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1016
 #, kde-format
 msgid "Transactions by Reconciliation Status"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1020
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1027
 #, kde-format
 msgid "Cash Flow Transactions This Month"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1025
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1032
 #: kmymoney/views/kmymoneyview.cpp:193
 #, kde-format
 msgid "Investments"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1032
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1039
 #, kde-format
 msgid "Investment Transactions"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1042
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1049
 #, kde-format
 msgid "Investment Holdings by Account"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1052
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1059
 #, kde-format
 msgid "Investment Holdings by Type"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1062
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1069
 #, kde-format
 msgid "Investment Performance by Account"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1072
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1079
 #, kde-format
 msgid "Investment Performance by Type"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1082
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1089
 #, kde-format
 msgid "Investment Capital Gains by Account"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1092
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1099
 #, kde-format
 msgid "Investment Capital Gains by Type"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1102
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1109
 #, kde-format
 msgid "Investment Holdings Pie"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1116
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1123
 #, kde-format
 msgid "Investment Worth Graph"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1131
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1138
 #, kde-format
 msgid "Investment Price Graph"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1153
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1160
 #, kde-format
 msgid "Investment Moving Average Price Graph"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1175
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1182
 #, kde-format
 msgid "Investment Moving Average"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1192
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1199
 #, kde-format
 msgid "Investment Moving Average vs Actual"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1207
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1214
 #, kde-format
 msgid "Taxes"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1214
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1221
 #, kde-format
 msgid "Tax Transactions by Category"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1223
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1230
 #, kde-format
 msgid "Tax Transactions by Payee"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1232
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1239
 #, kde-format
 msgid "Tax Transactions by Category Last Fiscal Year"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1241
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1248
 #, kde-format
 msgid "Tax Transactions by Payee Last Fiscal Year"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1248
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1255
 #, kde-format
 msgid "Budgeting"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1255
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1262
 #, kde-format
 msgid "Budgeted vs. Actual This Year"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1266
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1273
 #, kde-format
 msgid "Budgeted vs. Actual This Year (YTM)"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1281
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1288
 #: kmymoney/plugins/views/reports/reportsview.cpp:176
 #, kde-format
 msgid "Monthly Budgeted vs. Actual"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1290
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1297
 #, kde-format
 msgid "Yearly Budgeted vs. Actual"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1300
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1307
 #, kde-format
 msgid "Monthly Budget"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1309
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1316
 #, kde-format
 msgid "Yearly Budget"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1317
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1324
 #, kde-format
 msgid "Yearly Budgeted vs Actual Graph"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1335
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1342
 #, kde-format
 msgid "Forecast By Month"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1345
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1352
 #, kde-format
 msgid "Forecast Next Quarter"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1356
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1363
 #, kde-format
 msgid "Income and Expenses Forecast This Year"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1366
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1373
 #, kde-format
 msgid "Net Worth Forecast Graph"
 msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, NewGeneralInfoWizardPage)
 #. i18n: ectx: property (title), widget (QWizardPage, CheckingStartWizardPage)
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1378
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1385
 #: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:14
 #: kmymoney/wizards/newloanwizard/newgeneralinfowizardpage.ui:6
 #, kde-format
 msgid "General Information"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1385
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1392
 #, kde-format
 msgid "Schedule Information"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1394
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1401
 #, kde-format
 msgid "Schedule Summary Information"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1403
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1410
 #, kde-format
 msgid "Account Information"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1412
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1419
 #, kde-format
 msgid "Loan Information"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1482
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1489
 #, kde-format
 msgid "%1 YTD Account Transactions"
 msgstr ""
