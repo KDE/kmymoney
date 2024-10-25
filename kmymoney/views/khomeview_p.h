@@ -1284,7 +1284,7 @@ public:
         file->accountList(accounts);
 
         const auto showAllAccounts = KMyMoneySettings::showAllAccounts();
-        const bool hideZeroBalanceAccounts = KMyMoneySettings::hideZeroBalanceAccounts() && !showAllAccounts;
+        const bool hideZeroBalanceAccounts = KMyMoneySettings::hideZeroBalanceAccountsHome() && !showAllAccounts;
 
         for (it = accounts.constBegin(); it != accounts.constEnd();) {
             if (!(*it).isClosed() || showAllAccounts) {

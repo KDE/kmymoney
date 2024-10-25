@@ -237,7 +237,11 @@
    <default>false</default>
   </entry>
   <entry name="HideZeroBalanceAccounts" type="Bool">
-   <label>Hide zero balance accounts</label>
+   <label>Hide zero balance accounts from Accounts</label>
+   <default>false</default>
+  </entry>
+  <entry name="HideZeroBalanceAccountsHome" type="Bool">
+   <label>Hide zero balance accounts from Home</label>
    <default>false</default>
   </entry>
   <entry name="HideFinishedSchedules" type="Bool">

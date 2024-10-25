@@ -412,9 +412,16 @@ Set it to 0 to turn the feature off.</string>
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="kcfg_HideZeroBalanceAccountsHome">
+            <property name="text">
+             <string>Hide accounts with a zero balance from Home</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="kcfg_HideZeroBalanceAccounts">
             <property name="text">
-             <string>Hide accounts with a zero balance</string>
+             <string>Hide accounts with a zero balance from Accounts</string>
             </property>
            </widget>
           </item>
