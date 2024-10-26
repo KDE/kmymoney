@@ -2922,11 +2922,13 @@ void KMyMoneyApp::slotCopySplits()
 
                                 MyMoneySplit sp(split);
                                 // clear the ID, reconciliation state, match information and data stored in KVP
+                                // update the payee to the one in the baseSplit
                                 sp.clearId();
                                 sp.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
                                 sp.setReconcileDate(QDate());
                                 sp.removeMatch();
                                 sp.clear();
+                                sp.setPayeeId(baseSplit.payeeId());
 
                                 // in case it is a simple transaction consisting of two splits,
                                 // we can adjust the share and value part of the second split we
