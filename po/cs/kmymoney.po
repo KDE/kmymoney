@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-26 01:51+0000\n"
+"POT-Creation-Date: 2024-10-27 01:57+0000\n"
 "PO-Revision-Date: 2024-09-17 15:29+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -603,10 +603,10 @@ msgid "Backup location:"
 msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3865
-#: kmymoney/kmymoney.cpp:3936 kmymoney/kmymoney.cpp:3952
-#: kmymoney/kmymoney.cpp:3958 kmymoney/kmymoney.cpp:3972
-#: kmymoney/kmymoney.cpp:3974
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3867
+#: kmymoney/kmymoney.cpp:3938 kmymoney/kmymoney.cpp:3954
+#: kmymoney/kmymoney.cpp:3960 kmymoney/kmymoney.cpp:3974
+#: kmymoney/kmymoney.cpp:3976
 #, kde-format
 msgid "Backup"
 msgstr "Záloha"
@@ -5257,12 +5257,12 @@ msgstr "Odstranit transakci"
 msgid "Unable to duplicate transaction(s)"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3035
+#: kmymoney/kmymoney.cpp:3037
 #, kde-format
 msgid "Unable to modify transaction"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3116
+#: kmymoney/kmymoney.cpp:3118
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
@@ -5271,13 +5271,13 @@ msgstr ""
 "Nejméně jedna část vybrané rozdělené transakce už byla schválena. Přejete si "
 "i přesto změnit transakce?"
 
-#: kmymoney/kmymoney.cpp:3118
+#: kmymoney/kmymoney.cpp:3120
 #, kde-format
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "Transakce už je schválena"
 
-#: kmymoney/kmymoney.cpp:3123
+#: kmymoney/kmymoney.cpp:3125
 #, kde-format
 msgid "Do you really want to change the selected transaction?"
 msgid_plural "Do you really want to change all %1 selected transactions?"
@@ -5285,30 +5285,30 @@ msgstr[0] "Opravdu si přejete změnit zvolenou transakci?"
 msgstr[1] "Opravdu si přejete změnit %1 zvolené transakce?"
 msgstr[2] "Opravdu si přejete změnit všech %1 zvolených transakcí?"
 
-#: kmymoney/kmymoney.cpp:3127
+#: kmymoney/kmymoney.cpp:3129
 #, kde-format
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "Změnit transakci"
 
-#: kmymoney/kmymoney.cpp:3212
+#: kmymoney/kmymoney.cpp:3214
 #, kde-format
 msgid "Unable to accept transaction"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3252
+#: kmymoney/kmymoney.cpp:3254
 #, kde-format
 msgid ""
 "KMyMoney has detected some overdue scheduled transactions for the account <b>"
 "%1</b>. Do you want to enter those scheduled transactions now?"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3255
+#: kmymoney/kmymoney.cpp:3257
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "Naplánované transakce nalezeny"
 
-#: kmymoney/kmymoney.cpp:3330
+#: kmymoney/kmymoney.cpp:3332
 #, kde-format
 msgid ""
 "<qt>You have closed this account. It remains in the system because you have "
@@ -5317,17 +5317,17 @@ msgid ""
 "all accounts</b>.</qt>"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3332
+#: kmymoney/kmymoney.cpp:3334
 #, kde-format
 msgid "Information"
 msgstr "Informace"
 
-#: kmymoney/kmymoney.cpp:3436 kmymoney/kmymoney.cpp:3532
+#: kmymoney/kmymoney.cpp:3438 kmymoney/kmymoney.cpp:3534
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "Není otevřen žádný KMyMoney soubor"
 
-#: kmymoney/kmymoney.cpp:3469 kmymoney/kmymoney.cpp:3471
+#: kmymoney/kmymoney.cpp:3471 kmymoney/kmymoney.cpp:3473
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1364
 #: kmymoney/plugins/xml/xmlstorage.cpp:413
 #, kde-format
@@ -5335,63 +5335,63 @@ msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "Připraven."
 
-#: kmymoney/kmymoney.cpp:3536
+#: kmymoney/kmymoney.cpp:3538
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "Zobrazit osobní informace..."
 
-#: kmymoney/kmymoney.cpp:3543
+#: kmymoney/kmymoney.cpp:3545
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "Upravit osobní informace"
 
-#: kmymoney/kmymoney.cpp:3558
+#: kmymoney/kmymoney.cpp:3560
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr "Nebylo možné uložit osobní informace: %1"
 
-#: kmymoney/kmymoney.cpp:3566
+#: kmymoney/kmymoney.cpp:3568
 #, kde-format
 msgid "Importing account templates."
 msgstr "Importuji šablony účtů."
 
-#: kmymoney/kmymoney.cpp:3580
+#: kmymoney/kmymoney.cpp:3582
 #, kde-format
 msgid "Unable to import template(s)"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3588
+#: kmymoney/kmymoney.cpp:3590
 #, kde-format
 msgid "Exporting account templates."
 msgstr "Exportuji šablony účtů."
 
-#: kmymoney/kmymoney.cpp:3594
+#: kmymoney/kmymoney.cpp:3596
 #, kde-format
 msgid "Save as..."
 msgstr "Uložit jako..."
 
-#: kmymoney/kmymoney.cpp:3595
+#: kmymoney/kmymoney.cpp:3597
 #, kde-format
 msgid "KMyMoney template files (*.kmt);;All files (*)"
 msgstr "Soubory šablon KMyMoney (*.kmt);;Všechny soubory (*)"
 
-#: kmymoney/kmymoney.cpp:3626
+#: kmymoney/kmymoney.cpp:3628
 #, kde-format
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3644
+#: kmymoney/kmymoney.cpp:3646
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr "Soubor <b>%1</b> již existuje. Opravdu si jej přejete přepsat?"
 
-#: kmymoney/kmymoney.cpp:3646 kmymoney/plugins/csv/export/csvexporter.cpp:102
+#: kmymoney/kmymoney.cpp:3648 kmymoney/plugins/csv/export/csvexporter.cpp:102
 #, kde-format
 msgid "File already exists"
 msgstr "Soubor již existuje"
 
-#: kmymoney/kmymoney.cpp:3771
+#: kmymoney/kmymoney.cpp:3773
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
@@ -5400,13 +5400,13 @@ msgstr ""
 "Soubor musí být uložen předtím, než může být zazálohován. Přejete si "
 "pokračovat?"
 
-#: kmymoney/kmymoney.cpp:3773
+#: kmymoney/kmymoney.cpp:3775
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3790
+#: kmymoney/kmymoney.cpp:3792
 #, kde-format
 msgid ""
 "The current implementation of the backup functionality only supports local "
@@ -5415,69 +5415,69 @@ msgstr ""
 "Současná implementace zálohování podporuje pouze místní soubory jako "
 "zdrojové soubory. váš současný zdrojový soubor je \"%1\"."
 
-#: kmymoney/kmymoney.cpp:3792
+#: kmymoney/kmymoney.cpp:3794
 #, kde-format
 msgid "Local files only"
 msgstr "Pouze místní soubory"
 
-#: kmymoney/kmymoney.cpp:3831
+#: kmymoney/kmymoney.cpp:3833
 #, kde-format
 msgid "Mounting %1"
 msgstr "Připojuji %1"
 
-#: kmymoney/kmymoney.cpp:3865
+#: kmymoney/kmymoney.cpp:3867
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3865
+#: kmymoney/kmymoney.cpp:3867
 #, kde-format
 msgid "&Replace"
 msgstr "&Přepsat"
 
-#: kmymoney/kmymoney.cpp:3873
+#: kmymoney/kmymoney.cpp:3875
 #, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
 msgstr "Nelze vytvořit zálohovací adresář '%1'."
 
-#: kmymoney/kmymoney.cpp:3878
+#: kmymoney/kmymoney.cpp:3880
 #, kde-format
 msgid "Writing %1"
 msgstr "Zapisuji %1"
 
-#: kmymoney/kmymoney.cpp:3899
+#: kmymoney/kmymoney.cpp:3901
 #, kde-format
 msgid "Unmounting %1"
 msgstr "Odpojuji %1"
 
-#: kmymoney/kmymoney.cpp:3936
+#: kmymoney/kmymoney.cpp:3938
 #, kde-format
 msgid "Error mounting device"
 msgstr "Chyba při připojování zařízení"
 
-#: kmymoney/kmymoney.cpp:3951 kmymoney/kmymoney.cpp:3970
+#: kmymoney/kmymoney.cpp:3953 kmymoney/kmymoney.cpp:3972
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "Hotovo"
 
-#: kmymoney/kmymoney.cpp:3952 kmymoney/kmymoney.cpp:3972
+#: kmymoney/kmymoney.cpp:3954 kmymoney/kmymoney.cpp:3974
 #, kde-format
 msgid "File successfully backed up"
 msgstr "Soubor byl úspěšně zazálohován"
 
-#: kmymoney/kmymoney.cpp:3958
+#: kmymoney/kmymoney.cpp:3960
 #, kde-format
 msgid "Error copying file to device"
 msgstr "Chyba při kopírování souboru na zařízení"
 
-#: kmymoney/kmymoney.cpp:3974
+#: kmymoney/kmymoney.cpp:3976
 #, kde-format
 msgid "Error unmounting device"
 msgstr "Chyba při odpojování zařízení"
 
-#: kmymoney/kmymoney.cpp:4021
+#: kmymoney/kmymoney.cpp:4023
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5494,29 +5494,29 @@ msgstr ""
 "Prosím, klikněte na Ne pro zachování částky '%2,\n"
 "Prosím, klikněte na Zrušit, pokud si nepřejete účet vytvořit."
 
-#: kmymoney/kmymoney.cpp:4031
+#: kmymoney/kmymoney.cpp:4033
 #, kde-format
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4042
+#: kmymoney/kmymoney.cpp:4044
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "Nelze přidat účet: %1"
 
-#: kmymoney/kmymoney.cpp:4112
+#: kmymoney/kmymoney.cpp:4114
 #, kde-format
 msgid "Running consistency check..."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4119
+#: kmymoney/kmymoney.cpp:4121
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4129
+#: kmymoney/kmymoney.cpp:4131
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -5525,7 +5525,7 @@ msgstr ""
 "Při kontrole konsistence byly nalezeny nesrovnalosti ve vašich datech, "
 "podrobnosti jsou vypsané níže."
 
-#: kmymoney/kmymoney.cpp:4131
+#: kmymoney/kmymoney.cpp:4133
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5536,28 +5536,28 @@ msgstr ""
 "podrobnosti jsou vypsané níže. Tyto nesrovnalosti nelze opravit automaticky "
 "a je potřeba je opravit ručně."
 
-#: kmymoney/kmymoney.cpp:4134
+#: kmymoney/kmymoney.cpp:4136
 #, kde-format
 msgid "Consistency check result"
 msgstr "Výsledky kontroly konsistentnosti"
 
-#: kmymoney/kmymoney.cpp:4200
+#: kmymoney/kmymoney.cpp:4202
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Kontroluji naplánované transakce po splatnosti..."
 
-#: kmymoney/kmymoney.cpp:4390
+#: kmymoney/kmymoney.cpp:4392
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4395
+#: kmymoney/kmymoney.cpp:4397
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4407
+#: kmymoney/kmymoney.cpp:4409
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5565,67 +5565,67 @@ msgid ""
 "error: %3"
 msgstr "Nelze importovat %1 modulem %2. Modul ohlásil chybu: %3"
 
-#: kmymoney/kmymoney.cpp:4407 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
+#: kmymoney/kmymoney.cpp:4409 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
 #, kde-format
 msgid "Importing error"
 msgstr "Chyba při importu"
 
-#: kmymoney/kmymoney.cpp:4435
+#: kmymoney/kmymoney.cpp:4437
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Všechna hlášení byla povolena."
 
-#: kmymoney/kmymoney.cpp:4435
+#: kmymoney/kmymoney.cpp:4437
 #, kde-format
 msgid "All messages"
 msgstr "Všechna hlášení"
 
-#: kmymoney/kmymoney.cpp:4471
+#: kmymoney/kmymoney.cpp:4473
 #, kde-format
 msgid "Auto saving..."
 msgstr "Automatické ukládání..."
 
-#: kmymoney/kmymoney.cpp:4591
+#: kmymoney/kmymoney.cpp:4593
 #, kde-format
 msgid "Creating new document..."
 msgstr "Vytvářím nový dokument...."
 
-#: kmymoney/kmymoney.cpp:4651
+#: kmymoney/kmymoney.cpp:4653
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4662
+#: kmymoney/kmymoney.cpp:4664
 #, kde-format
 msgid "Open a file."
 msgstr "Otevřít soubor..."
 
-#: kmymoney/kmymoney.cpp:4676
+#: kmymoney/kmymoney.cpp:4678
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4680
+#: kmymoney/kmymoney.cpp:4682
 #, kde-format
 msgid "All files (*)"
 msgstr "Všechny soubory (*)"
 
-#: kmymoney/kmymoney.cpp:4693
+#: kmymoney/kmymoney.cpp:4695
 #, kde-format
 msgid "Loading file..."
 msgstr "Načítám soubor..."
 
-#: kmymoney/kmymoney.cpp:4699
+#: kmymoney/kmymoney.cpp:4701
 #, kde-format
 msgid "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
 msgstr "<p>Soubor <b>%1</b> je již otevřen v jiné instanci KMyMoney</p>"
 
-#: kmymoney/kmymoney.cpp:4699
+#: kmymoney/kmymoney.cpp:4701
 #, kde-format
 msgid "Duplicate open"
 msgstr "Duplikovat otevřené"
 
-#: kmymoney/kmymoney.cpp:4706
+#: kmymoney/kmymoney.cpp:4708
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5634,49 +5634,49 @@ msgstr ""
 "<p>Název souboru <b>%1</b> je buď  špatné, nebo soubor neexistuje. Otevřete "
 "nebo vytvořte jiný soubor.</p>"
 
-#: kmymoney/kmymoney.cpp:4706
+#: kmymoney/kmymoney.cpp:4708
 #, kde-format
 msgid "File not found"
 msgstr "Soubor nebyl nalezen"
 
-#: kmymoney/kmymoney.cpp:4737
+#: kmymoney/kmymoney.cpp:4739
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "Požadovaný soubor nelze otevřít."
 
-#: kmymoney/kmymoney.cpp:4744
+#: kmymoney/kmymoney.cpp:4746
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
 "necessary plugin is enabled."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4755
+#: kmymoney/kmymoney.cpp:4757
 #, kde-format
 msgid "Saving file..."
 msgstr "Ukládám soubor..."
 
-#: kmymoney/kmymoney.cpp:4767
+#: kmymoney/kmymoney.cpp:4769
 #, kde-format
 msgid "Failed to save your data."
 msgstr "Uložení dat selhalo."
 
-#: kmymoney/kmymoney.cpp:4773
+#: kmymoney/kmymoney.cpp:4775
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr "Nelze najít vhodný modul pro uložení vašich dat."
 
-#: kmymoney/kmymoney.cpp:4779
+#: kmymoney/kmymoney.cpp:4781
 #, kde-format
 msgid "Saving file as...."
 msgstr "Ukládám soubor jako...."
 
-#: kmymoney/kmymoney.cpp:4795
+#: kmymoney/kmymoney.cpp:4797
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr "Nelze najít jakýkoliv modul pro uložení dat."
 
-#: kmymoney/kmymoney.cpp:4824
+#: kmymoney/kmymoney.cpp:4826
 #, kde-format
 msgid "Failed to save your storage."
 msgstr ""
