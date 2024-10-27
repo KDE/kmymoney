@@ -36,6 +36,7 @@
 
 #include <alkimia/alkonlinequote.h>
 #include <alkimia/alkonlinequotesource.h>
+#include <alkimia/alkversion.h>
 
 #include "dialogenums.h"
 #include "icons.h"
@@ -374,7 +375,11 @@ public:
             const auto source = idx.data().toString();
             const auto profileName = source.startsWith(m_fqName) ? m_fqName : QString();
             AlkOnlineQuoteSource alkOnlineSource(source, quoteProfile(profileName));
+#if ALK_VERSION_CHECK(8, 1, 90)
+            if (alkOnlineSource.supportsDateRange()) {
+#else
             if (alkOnlineSource.dataFormat() == AlkOnlineQuoteSource::CSV) {
+#endif
                 return true;
             }
         }
