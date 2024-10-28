@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-27 01:57+0000\n"
-"PO-Revision-Date: 2024-10-21 11:26+0200\n"
+"PO-Revision-Date: 2024-10-26 06:38+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -16713,11 +16713,10 @@ msgid "&Print"
 msgstr "Im&primer"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:743
-#, fuzzy, kde-format
-#| msgid "Exporting file..."
+#, kde-format
 msgctxt "To export a report"
 msgid "&Export to PDF file"
-msgstr "Exportation du fichier..."
+msgstr "&Exporter vers un fichier au format « PDF »"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:745
 #, kde-format
@@ -16739,13 +16738,12 @@ msgstr "&Supprimer"
 #, kde-format
 msgctxt "To export reports"
 msgid "&Export to PDF files"
-msgstr ""
+msgstr "&Exporter vers des fichiers au format « PDF »"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:816
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export into directory"
-msgstr "Exporter un rapport"
+msgstr "Exporter dans un dossier"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KReportsView)
 #: kmymoney/plugins/views/reports/kreportsview.ui:14
