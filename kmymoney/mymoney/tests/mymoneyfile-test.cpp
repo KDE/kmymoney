@@ -2547,7 +2547,7 @@ void MyMoneyFileTest::testAdjustedValues()
 
     testAddEquityAccount();
 
-    MyMoneySecurity stockSecurity(QLatin1String("Blubber"), QLatin1String("TestStockSecurity"), QLatin1String("BLUB"), 1000, 1000, 1000);
+    MyMoneySecurity stockSecurity(QLatin1String("Blubber"), QLatin1String("TestStockSecurity"), QLatin1String("BLUB"), 1000, 1000, 4);
     stockSecurity.setTradingCurrency(QLatin1String("BLUB"));
     MyMoneySecurity tradingCurrency("BLUB", "BlubCurrency");
 
@@ -2775,7 +2775,7 @@ void MyMoneyFileTest::testAddSecurity()
 
     testAddEquityAccount();
 
-    MyMoneySecurity stockSecurity(QLatin1String("Blubber"), QLatin1String("TestsockSecurity"), QLatin1String("BLUB"), 1000, 1000, 1000);
+    MyMoneySecurity stockSecurity(QLatin1String("Blubber"), QLatin1String("TestsockSecurity"), QLatin1String("BLUB"), 1000, 1000, 4);
     stockSecurity.setTradingCurrency(QLatin1String("BLUB"));
     // add the security
     ft.restart();
