@@ -290,7 +290,7 @@ struct AccountsModel::Private
             QList<MyMoneyPrice>::const_iterator it_p;
             QString securityID = account.currencyId();
             for (it_p = prices.constBegin(); it_p != prices.constEnd(); ++it_p) {
-                const auto prec = MyMoneyMoney::denomToPrec(file->security(securityID).pricePrecision());
+                const auto prec = file->security(securityID).pricePrecision();
                 accountValue = (accountValue * (MyMoneyMoney::ONE / (*it_p).rate(securityID))).convertPrecision(prec);
                 if ((*it_p).from() == securityID)
                     securityID = (*it_p).to();
