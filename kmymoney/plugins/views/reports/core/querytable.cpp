@@ -599,11 +599,6 @@ void QueryTable::constructTransactionTable()
         bool foundTaxAccount = false;
         for (it_split = splits.constBegin(), myBegin = splits.constEnd(); it_split != splits.constEnd(); ++it_split) {
             ReportAccount splitAcc((*it_split).accountId());
-
-            // Enable note that report may be broken
-            if (splitAcc.isIncomeExpense())
-                m_mayContainIncorrectValues = true;
-
             // always put split with a "stock" account if it exists
             if (splitAcc.isInvest())
                 break;

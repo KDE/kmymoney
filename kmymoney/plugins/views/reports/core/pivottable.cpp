@@ -311,10 +311,6 @@ void PivotTable::init()
             while (it_split != splits.constEnd()) {
                 ReportAccount splitAccount((*it_split).accountId());
 
-                // Enable note that report may be broken
-                if (splitAccount.isIncomeExpense())
-                    m_mayContainIncorrectValues = true;
-
                 // Each split must be further filtered, because if even one split matches,
                 // the ENTIRE transaction is returned with all splits (even non-matching ones)
                 if (m_config.includes(splitAccount) && m_config.match((*it_split))) {
