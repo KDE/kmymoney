@@ -929,8 +929,8 @@ void QueryTable::constructTransactionTable()
                                     // if the currency of the split is different from the currency of the main split,
                                     // then convert to the currency of the main split
                                     MyMoneyMoney ieXr(xr);
-                                    if (!m_config.isConvertCurrency() && splitAcc.currency().id() != myBeginCurrency) {
-                                        ieXr = (xr * splitAcc.foreignCurrencyPrice(myBeginCurrency, (*it_transaction).postDate())).reduce();
+                                    if (m_config.isConvertCurrency() && splitAcc.currency().id() != baseCurrency) {
+                                        ieXr = (xr * splitAcc.foreignCurrencyPrice(baseCurrency, (*it_transaction).postDate())).reduce();
                                         qA[ctCurrency] = file->account((*myBegin).accountId()).currencyId();
                                     } else {
                                         // make sure we use the right currency of the category
