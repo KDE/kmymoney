@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-27 01:57+0000\n"
+"POT-Creation-Date: 2024-10-29 01:48+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -1607,52 +1607,52 @@ msgstr ""
 msgid "Ask"
 msgstr ""
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:190
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:191
 #, fuzzy, kde-format
 #| msgid "Configure"
 msgctxt "@action:button Configuration of price update"
 msgid "Configure"
 msgstr "Konfigūruoti"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:304
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:305
 #, kde-format
 msgid "%1 units for one %2"
 msgstr ""
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:341
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:342
 #, fuzzy, kde-format
 msgid "[No identifier]"
 msgstr "Pridėti naują įrašą"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:451
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:456
 #, fuzzy, kde-format
 #| msgid "No account selected"
 msgctxt "@info online update price info"
 msgid "No security selected."
 msgstr "Neparinkta sąskaita"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:461
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:466
 #, fuzzy, kde-format
 #| msgid "Security"
 msgctxt "@info online update price info"
 msgid "No Security to be updated."
 msgstr "Saugumas"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:485
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:490
 #, kde-format
 msgid ""
 "Failed to retrieve an exchange rate for %1 from %2. It will be skipped this "
 "time."
 msgstr ""
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:486
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:496
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:519
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:491
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:501
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:524
 #, kde-format
 msgid "Price Update Failed"
 msgstr ""
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:492
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:497
 #, kde-format
 msgid ""
 "Failed to retrieve a quote for %1 from %2.  Press <b>No</b> to remove the "
@@ -1661,25 +1661,25 @@ msgid ""
 "the current update operation."
 msgstr ""
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:518
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:523
 #, kde-format
 msgid "Cannot update security <b>%1</b>: %2"
 msgstr ""
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:584
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:589
 #, kde-format
 msgctxt ""
 "@info Online price update %1 online id, %2 internal id, %3 price, %4 date"
 msgid "Price for %1 updated to %3 for %4 (id %2)"
 msgstr ""
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:590
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:595
 #, kde-format
 msgctxt "@info Online price update %1 online id"
 msgid "Received an invalid price for %1, unable to update."
 msgstr ""
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:635
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:640
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:38
 #: kmymoney/widgets/daterangedlg.cpp:64 kmymoney/widgets/daterangedlg.cpp:67
@@ -1754,7 +1754,7 @@ msgstr "Būsena:"
 #: kmymoney/dialogs/kequitypriceupdatedlg.ui:158
 #: kmymoney/dialogs/knewaccountdlg.ui:409
 #: kmymoney/dialogs/knewinstitutiondlg.ui:88
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:562
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:569
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:122
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:170
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:212
@@ -1766,7 +1766,7 @@ msgstr "Būsena:"
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:612
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:657
 #: kmymoney/plugins/views/reports/kreportsview.ui:80
-#: kmymoney/settings/kmymoney.kcfg:473 kmymoney/views/kinstitutionsview.ui:53
+#: kmymoney/settings/kmymoney.kcfg:477 kmymoney/views/kinstitutionsview.ui:53
 #: kmymoney/views/kinstitutionsview.ui:71
 #: kmymoney/views/kinstitutionsview.ui:81
 #: kmymoney/views/ktransactionselectdlg.ui:50
@@ -1849,7 +1849,7 @@ msgstr "Kategorijos"
 #. i18n: ectx: property (text), widget (QLabel, textLabel8)
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_4)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:148
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:453
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:460
 #: kmymoney/plugins/views/reports/kreportsview_p.h:951
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1491
 #: kmymoney/views/kpayeesview.ui:117 kmymoney/views/ktagsview.ui:121
@@ -1868,7 +1868,7 @@ msgstr "&Skelti"
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #. i18n: ectx: property (windowTitle), widget (QWidget, KMyMoneyBriefSchedule)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:188
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:434
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:441
 #: kmymoney/widgets/kmymoneybriefschedule.ui:14
 #, fuzzy, kde-format
 #| msgid "Schedule"
@@ -3037,7 +3037,7 @@ msgstr "Bendrosios nuostatos"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (listCellFont), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:71
-#: kmymoney/settings/kmymoney.kcfg:314
+#: kmymoney/settings/kmymoney.kcfg:318
 #, kde-format
 msgid "Cell font"
 msgstr ""
@@ -3045,7 +3045,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #. i18n: ectx: label, entry (listHeaderFont), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:81
-#: kmymoney/settings/kmymoney.kcfg:317
+#: kmymoney/settings/kmymoney.kcfg:321
 #, kde-format
 msgid "Header font"
 msgstr ""
@@ -3315,70 +3315,77 @@ msgstr "Redaguoti sąskaitą"
 msgid "Show categories in the accounts list view"
 msgstr "Redaguoti sąskaitą"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccountsHome)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:417
+#: kmymoney/dialogs/settings/ksettingshome.ui:238
 #, kde-format
-msgid "Hide accounts with a zero balance"
+msgid "Hide accounts with a zero balance from Home"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:424
+#, fuzzy, kde-format
+msgid "Hide accounts with a zero balance from Accounts"
+msgstr "Turto sąskaitos"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:431
 #, fuzzy, kde-format
 msgid "Do not show zero balance equities"
 msgstr "Turto sąskaitos"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_HideFinishedSchedules)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:440
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:447
 #, kde-format
 msgid "This option hides all finished schedules in the schedules view."
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideFinishedSchedules)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:443
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:450
 #, fuzzy, kde-format
 #| msgid "Hide unused categories"
 msgid "Do not show finished schedules"
 msgstr "Slėpti nenaudojamas kategorijas"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_3)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:461
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:468
 #, fuzzy, kde-format
 msgid "Do not show transactions prior to"
 msgstr "Nepavyksta pašalinti operacijos"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_HideReconciledTransactions)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:492
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:499
 #, fuzzy, kde-format
 msgid "This option hides all reconciled transactions in the ledger view."
 msgstr "<p>Pasirinkite kaip sugrupuoti pervedimus šiame pranešime</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideReconciledTransactions)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:495
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:502
 #, fuzzy, kde-format
 msgid "Do not show reconciled transactions"
 msgstr "Nepavyksta pašalinti operacijos"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:522
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:529
 #, fuzzy, kde-format
 #| msgid "Report"
 msgid "Support"
 msgstr "Ataskaita"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_8)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:528
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:535
 #, kde-format
 msgid "Logging"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:536
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:543
 #, kde-format
 msgid "Log path"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:584
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:591
 #, kde-format
 msgid ""
 "On choosing a log file path please keep in mind that log files may contain "
@@ -3387,16 +3394,16 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_logImportedStatements)
 #. i18n: ectx: label, entry (logImportedStatements), group (List Options)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:594
-#: kmymoney/settings/kmymoney.kcfg:304
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:601
+#: kmymoney/settings/kmymoney.kcfg:308
 #, kde-format
 msgid "Log imported statements"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_logOfxTransactions)
 #. i18n: ectx: label, entry (logOfxTransactions), group (List Options)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:601
-#: kmymoney/settings/kmymoney.kcfg:307
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:608
+#: kmymoney/settings/kmymoney.kcfg:311
 #, fuzzy, kde-format
 #| msgid "  Transactions"
 msgid "Log OFX transactions"
@@ -3529,7 +3536,7 @@ msgstr "Bendrosios nuostatos"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (IconsTheme), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsicons.ui:52
-#: kmymoney/settings/kmymoney.kcfg:320
+#: kmymoney/settings/kmymoney.kcfg:324
 #, kde-format
 msgid "Icon theme"
 msgstr ""
@@ -4039,7 +4046,7 @@ msgstr "Sutaikinimo vediklis"
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_1)
 #. i18n: ectx: label, entry (initialDateFieldCursorPosition), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:279
-#: kmymoney/settings/kmymoney.kcfg:336
+#: kmymoney/settings/kmymoney.kcfg:340
 #, kde-format
 msgid "Initial cursor position within the date field"
 msgstr ""
@@ -4685,7 +4692,7 @@ msgid "Show Transaction Detail"
 msgstr "Rodyti operacijų detales"
 
 #. i18n: ectx: label, entry (HideReconciledTransactions), group (List Options)
-#: kmymoney/kmymoney.cpp:1875 kmymoney/settings/kmymoney.kcfg:248
+#: kmymoney/kmymoney.cpp:1875 kmymoney/settings/kmymoney.kcfg:252
 #, kde-format
 msgid "Hide reconciled transactions"
 msgstr ""
@@ -14971,63 +14978,63 @@ msgstr "Prognozė"
 
 #. i18n: ectx: label, entry (forecastMethod), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:11
-#: kmymoney/settings/kmymoney.kcfg:425
+#: kmymoney/settings/kmymoney.kcfg:429
 #, fuzzy, kde-format
 msgid "Method to calculate forecast"
 msgstr "Grynoji vertė šiandien"
 
 #. i18n: ectx: label, entry (forecastDays), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:15
-#: kmymoney/settings/kmymoney.kcfg:429
+#: kmymoney/settings/kmymoney.kcfg:433
 #, fuzzy, kde-format
 msgid "Days to forecast"
 msgstr "Grynoji vertė šiandien"
 
 #. i18n: ectx: label, entry (forecastAccountCycle), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:21
-#: kmymoney/settings/kmymoney.kcfg:435
+#: kmymoney/settings/kmymoney.kcfg:439
 #, kde-format
 msgid "Days of normal account cycle"
 msgstr ""
 
 #. i18n: ectx: label, entry (forecastCycles), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:27
-#: kmymoney/settings/kmymoney.kcfg:441
+#: kmymoney/settings/kmymoney.kcfg:445
 #, kde-format
 msgid "Number of historic cycles to use in forecast"
 msgstr ""
 
 #. i18n: ectx: label, entry (beginForecastDay), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:33
-#: kmymoney/settings/kmymoney.kcfg:447
+#: kmymoney/settings/kmymoney.kcfg:451
 #, kde-format
 msgid "Day of month to start forecast"
 msgstr ""
 
 #. i18n: ectx: label, entry (historyMethod), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:39
-#: kmymoney/settings/kmymoney.kcfg:453
+#: kmymoney/settings/kmymoney.kcfg:457
 #, kde-format
 msgid "Method to calculate history-based forecast"
 msgstr ""
 
 #. i18n: ectx: label, entry (skipOpeningDate), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:43
-#: kmymoney/settings/kmymoney.kcfg:457
+#: kmymoney/settings/kmymoney.kcfg:461
 #, fuzzy, kde-format
 msgid "Skip opening date when fetching transactions"
 msgstr "Priderinimo operacija"
 
 #. i18n: ectx: label, entry (includeFutureTransactions), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:47
-#: kmymoney/settings/kmymoney.kcfg:461
+#: kmymoney/settings/kmymoney.kcfg:465
 #, fuzzy, kde-format
 msgid "Include future transaction when using Schedule Forecast"
 msgstr "Įvesti operaciją pagal tvarkaraštį"
 
 #. i18n: ectx: label, entry (includeScheduledTransactions), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:51
-#: kmymoney/settings/kmymoney.kcfg:465
+#: kmymoney/settings/kmymoney.kcfg:469
 #, fuzzy, kde-format
 msgid "Include scheduled transactions when using Schedule Forecast"
 msgstr "Įvesti operaciją pagal tvarkaraštį"
@@ -16992,7 +16999,7 @@ msgstr "Kategorijos tipas"
 #. i18n: ectx: label, entry (LineWidth), group (Chart Settings)
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_LineWidth)
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:66
-#: kmymoney/settings/kmymoney.kcfg:406
+#: kmymoney/settings/kmymoney.kcfg:410
 #, kde-format
 msgid "Line width for diagrams, in pixels"
 msgstr ""
@@ -18432,184 +18439,190 @@ msgstr ""
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:240
 #, fuzzy, kde-format
-msgid "Hide zero balance accounts"
+msgid "Hide zero balance accounts from Accounts"
+msgstr "Turto sąskaitos"
+
+#. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
+#: kmymoney/settings/kmymoney.kcfg:244
+#, fuzzy, kde-format
+msgid "Hide zero balance accounts from Home"
 msgstr "Turto sąskaitos"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:244
+#: kmymoney/settings/kmymoney.kcfg:248
 #, fuzzy, kde-format
 #| msgid "Hide unused categories"
 msgid "Hide finished schedules"
 msgstr "Slėpti nenaudojamas kategorijas"
 
 #. i18n: ectx: label, entry (ShowRegisterDetailed), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:252
+#: kmymoney/settings/kmymoney.kcfg:256
 #, kde-format
 msgid "Show all register entries in full detail"
 msgstr ""
 
 #. i18n: ectx: label, entry (ShowAllSplits), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:256
+#: kmymoney/settings/kmymoney.kcfg:260
 #, fuzzy, kde-format
 msgid "Show all split details in register"
 msgstr "Redaguoti sąskaitą"
 
 #. i18n: ectx: label, entry (ShowPlannedScheduleDates), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:260
+#: kmymoney/settings/kmymoney.kcfg:264
 #, fuzzy, kde-format
 #| msgid "Scheduled transactions"
 msgid "Show schedules with planned date"
 msgstr "Periodinės operacijos"
 
 #. i18n: ectx: label, entry (ShowGrid), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:264
+#: kmymoney/settings/kmymoney.kcfg:268
 #, fuzzy, kde-format
 msgid "Show a grid in the register"
 msgstr "Redaguoti sąskaitą"
 
 #. i18n: ectx: label, entry (ShowFancyMarker), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:268
+#: kmymoney/settings/kmymoney.kcfg:272
 #, kde-format
 msgid "Show fancy group markers"
 msgstr ""
 
 #. i18n: ectx: label, entry (ShowFiscalMarker), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:272
+#: kmymoney/settings/kmymoney.kcfg:276
 #, kde-format
 msgid "Show fancy markers for previous and current fiscal year"
 msgstr ""
 
 #. i18n: ectx: label, entry (ShowReconciliationMarker), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:276
+#: kmymoney/settings/kmymoney.kcfg:280
 #, kde-format
 msgid "Show reconciliation entries with date and balance"
 msgstr ""
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:285
+#: kmymoney/settings/kmymoney.kcfg:289
 #, fuzzy, kde-format
 msgid "Starting month of the fiscal year"
 msgstr "Pranešimo pradžios data"
 
 #. i18n: ectx: label, entry (FiscalYearBeginDay), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:291
+#: kmymoney/settings/kmymoney.kcfg:295
 #, fuzzy, kde-format
 msgid "Starting day of the fiscal year"
 msgstr "Pranešimo pradžios data"
 
 #. i18n: ectx: label, entry (StartDate), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:297
+#: kmymoney/settings/kmymoney.kcfg:301
 #, kde-format
 msgid "Start date"
 msgstr "Pradžios data"
 
 #. i18n: ectx: label, entry (logPath), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:301
+#: kmymoney/settings/kmymoney.kcfg:305
 #, kde-format
 msgid "Log file path"
 msgstr ""
 
 #. i18n: ectx: label, entry (useSystemFont), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:310
+#: kmymoney/settings/kmymoney.kcfg:314
 #, kde-format
 msgid "Use system font"
 msgstr "Naudoti sistemos šriftą"
 
 #. i18n: ectx: label, entry (sortNormalView), group (List Options)
 #. i18n: ectx: label, entry (sortReconcileView), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:324 kmymoney/settings/kmymoney.kcfg:328
+#: kmymoney/settings/kmymoney.kcfg:328 kmymoney/settings/kmymoney.kcfg:332
 #, kde-format
 msgid "Sort order of register in normal view"
 msgstr ""
 
 #. i18n: ectx: label, entry (sortSearchView), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:332
+#: kmymoney/settings/kmymoney.kcfg:336
 #, kde-format
 msgid "Sort order of register in search dialog"
 msgstr ""
 
 #. i18n: ectx: label, entry (defaultReconciliationState), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:345
+#: kmymoney/settings/kmymoney.kcfg:349
 #, kde-format
 msgid ""
 "Default reconciliation state for transactions entered during reconciliation"
 msgstr ""
 
 #. i18n: ectx: label, entry (matchInterval), group (Import options)
-#: kmymoney/settings/kmymoney.kcfg:351
+#: kmymoney/settings/kmymoney.kcfg:355
 #, kde-format
 msgid "Number of days (plus/minus) to search for matching transactions"
 msgstr ""
 
 #. i18n: ectx: label, entry (askForPayeeCategory), group (Import options)
-#: kmymoney/settings/kmymoney.kcfg:355
+#: kmymoney/settings/kmymoney.kcfg:359
 #, kde-format
 msgid "During import, ask for a new payee's default category"
 msgstr ""
 
 #. i18n: ectx: label, entry (lastUsedPostDate), group (Internal Options)
-#: kmymoney/settings/kmymoney.kcfg:362
+#: kmymoney/settings/kmymoney.kcfg:366
 #, kde-format
 msgid "Post date last entered by the user"
 msgstr ""
 
 #. i18n: ectx: label, entry (qifCash), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:368
+#: kmymoney/settings/kmymoney.kcfg:372
 #, kde-format
 msgid "additional names for cash account"
 msgstr ""
 
 #. i18n: ectx: label, entry (qifBank), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:372
+#: kmymoney/settings/kmymoney.kcfg:376
 #, kde-format
 msgid "additional names for checking account"
 msgstr ""
 
 #. i18n: ectx: label, entry (qifCreditCard), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:376
+#: kmymoney/settings/kmymoney.kcfg:380
 #, kde-format
 msgid "additional names for credit card account"
 msgstr ""
 
 #. i18n: ectx: label, entry (qifAsset), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:380
+#: kmymoney/settings/kmymoney.kcfg:384
 #, fuzzy, kde-format
 #| msgid "Create a new asset account"
 msgid "additional names for asset account"
 msgstr "Sukurti naują turto sąskaitą"
 
 #. i18n: ectx: label, entry (qifOpeningBalance), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:384
+#: kmymoney/settings/kmymoney.kcfg:388
 #, kde-format
 msgid "additional names for opening balance payee"
 msgstr ""
 
 #. i18n: ectx: label, entry (qifInvoice), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:388
+#: kmymoney/settings/kmymoney.kcfg:392
 #, kde-format
 msgid "additional names for invoice accounts"
 msgstr ""
 
 #. i18n: ectx: label, entry (showAccountsExpanded), group (Account View Settings)
-#: kmymoney/settings/kmymoney.kcfg:394
+#: kmymoney/settings/kmymoney.kcfg:398
 #, kde-format
 msgid "Show accounts view expanded when loaded"
 msgstr ""
 
 #. i18n: ectx: label, entry (MaximumLegendItems), group (Chart Settings)
-#: kmymoney/settings/kmymoney.kcfg:400
+#: kmymoney/settings/kmymoney.kcfg:404
 #, kde-format
 msgid "Maximum quantity of legend items to display on charts"
 msgstr ""
 
 #. i18n: ectx: label, entry (ChartsPalette), group (Chart Settings)
-#: kmymoney/settings/kmymoney.kcfg:412
+#: kmymoney/settings/kmymoney.kcfg:416
 #, kde-format
 msgid "The palette used to render charts"
 msgstr ""
 
 #. i18n: ectx: label, entry (CssFileDefault), group (Chart Settings)
-#: kmymoney/settings/kmymoney.kcfg:418
+#: kmymoney/settings/kmymoney.kcfg:422
 #, fuzzy, kde-format
 #| msgid "The default QIF profile"
 msgid "Name of default CSS file"
