@@ -315,7 +315,7 @@
 >Podreu afegir diferents comptes gestionats per a diferents institucions; el preferit es mostrarà quan obriu el &kmymoney;, però podreu canviar ràpidament a qualsevol dels altres. </para>
 
 <para
->Quan realitzeu un pagament, el &kmymoney; determinarà quin hauria de ser el proper número de xec, suprimiu-lo si no realitzeu un pagament amb xec o editeu-lo si el primer xec que introduïu no és el número 1 del xec. De manera alternativa, podreu desactivar l'increment automàtic dels números de xec. </para>
+>Quan realitzeu un pagament, el &kmymoney; determinarà quin hauria de ser el número de xec següent, suprimiu-lo si no realitzeu un pagament amb xec o editeu-lo si el primer xec que introduïu no és el número 1 del xec. De manera alternativa, podreu desactivar l'increment automàtic dels números de xec. </para>
 
 <para
 >De tant en tant podríeu obtenir extractes del vostre compte des de les institucions que utilitzeu. Podreu conciliar els comptes del &kmymoney; amb aquests extractes de manera que tingueu una declaració precisa de l'estat actual de les vostres finances. </para>

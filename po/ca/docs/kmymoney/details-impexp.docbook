@@ -903,7 +903,7 @@
 >Extensions especials QIF del &kmymoney;</title>
 
 <para
->Com ja s'ha mencionat, un dels principals inconvenients del format QIF és la manca d'un identificador únic per a cada operació. Si esteu escrivint el propi creador de fitxers QIF (o filtre, com s'ha descrit anteriorment), podreu superar aquest problema. El &kmymoney; admet el camp «#». L'importador l'interpretarà com un ID únic d'operació i no tindrà en compte el registre si l'operació ja es troba al sistema. </para>
+>Com ja s'ha mencionat, un dels principals inconvenients del format QIF és la manca d'un identificador únic per a cada operació. Si esteu escrivint el creador de fitxers QIF mateix (o filtre, com s'ha descrit anteriorment), podreu superar aquest problema. El &kmymoney; admet el camp «#». L'importador l'interpretarà com un ID únic d'operació i no tindrà en compte el registre si l'operació ja es troba al sistema. </para>
 </sect2>
 </sect1>
 

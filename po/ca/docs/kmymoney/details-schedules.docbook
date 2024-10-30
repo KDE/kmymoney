@@ -205,7 +205,7 @@
 >Omplir el Nom de la planificació, la Freqüència i la Informació del pagament</title>
 
 <para
->Introduïu el nom de la planificació i la data de la propera aparició en els seus respectius camps. El nom és com s'etiquetarà la planificació a la Vista de les planificacions i a les altres pantalles. Especifiqueu amb quina freqüència succeirà la planificació, utilitzant el camp Freqüència i la llista desplegable. Per exemple, «cada 6 setmanes» o «cada 3 mesos». Si l'import varia d'una operació a una altra, assegureu-vos de marcar la casella de selecció <guilabel
+>Introduïu el nom de la planificació i la data de l'aparició següent en els seus respectius camps. El nom és com s'etiquetarà la planificació a la Vista de les planificacions i a les altres pantalles. Especifiqueu amb quina freqüència succeirà la planificació, utilitzant el camp Freqüència i la llista desplegable. Per exemple, «cada 6 setmanes» o «cada 3 mesos». Si l'import varia d'una operació a una altra, assegureu-vos de marcar la casella de selecció <guilabel
 >Estimació</guilabel
 > i quan escriviu en el llibre major se us demanarà per l'import correcte. Els altres camps obligatoris a la secció Informació del pagament inclouen el Compte i la Categoria. Els camps restants d'aquesta secció són opcionals. </para
 > 
@@ -326,7 +326,7 @@
 <para
 >Aquesta informació es podrà canviar i els canvis es podran aplicar només a aquesta instància de la planificació o a totes les operacions posteriors. Després de verificar que totes les dades són correctes, en fer clic a <guibutton
 >D'acord</guibutton
-> afegirà l'operació al llibre major i actualitzarà la pròxima data de venciment de la planificació a la propera aparició. Si heu canviat alguna de les dades de l'operació, es mostrarà una confirmació addicional del que heu canviat, el qual us donarà l'oportunitat final d'acceptar o rebutjar els canvis. </para>
+> afegirà l'operació al llibre major i actualitzarà la pròxima data de venciment de la planificació a l'aparició següent. Si heu canviat alguna de les dades de l'operació, es mostrarà una confirmació addicional del que heu canviat, el qual us donarà l'oportunitat final d'acceptar o rebutjar els canvis. </para>
 
 <para>
 	<screenshot>

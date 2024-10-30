@@ -337,7 +337,7 @@
 ></term>
     <listitem>
       <para
->Mostrarà les properes ocurrències de les operacions planificades, distingint entre els Pagaments endarrerits i els Pagaments futurs. Mostra la data, el nom de la planificació, el compte i l'import del pagament, i el saldo del compte després del pagament. De manera predeterminada mostrarà fins a sis operacions. Si se'n mostren sis, hi haurà un enllaç que podreu seleccionar per a mostrar-ne més, fins a 30 dies d'anticipació.</para>
+>Mostrarà les ocurrències següents de les operacions planificades, distingint entre els Pagaments endarrerits i els Pagaments futurs. Mostra la data, el nom de la planificació, el compte i l'import del pagament, i el saldo del compte després del pagament. De manera predeterminada mostrarà fins a sis operacions. Si se'n mostren sis, hi haurà un enllaç que podreu seleccionar per a mostrar-ne més, fins a 30 dies d'anticipació.</para>
     </listitem>
   </varlistentry>
 
