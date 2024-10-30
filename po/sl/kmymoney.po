@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-29 01:48+0000\n"
-"PO-Revision-Date: 2024-10-25 07:41+0200\n"
+"PO-Revision-Date: 2024-10-29 06:37+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -3453,17 +3453,15 @@ msgstr "Prikazuj kategorije v pogledu seznama računov"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccountsHome)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:417
 #: kmymoney/dialogs/settings/ksettingshome.ui:238
-#, fuzzy, kde-format
-#| msgid "Hide accounts with a zero balance"
+#, kde-format
 msgid "Hide accounts with a zero balance from Home"
-msgstr "Skrij račune obveznosti z ničelnim saldom"
+msgstr "Skrij račune z ničelnim saldom v Domu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:424
-#, fuzzy, kde-format
-#| msgid "Hide accounts with a zero balance"
+#, kde-format
 msgid "Hide accounts with a zero balance from Accounts"
-msgstr "Skrij račune obveznosti z ničelnim saldom"
+msgstr "Skrij račune z ničelnim saldom v Računih"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:431
@@ -18610,17 +18608,15 @@ msgstr "Skrij lastniške vrednostne papirje z ničelnim stanjem"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:240
-#, fuzzy, kde-format
-#| msgid "Hide zero balance accounts"
+#, kde-format
 msgid "Hide zero balance accounts from Accounts"
-msgstr "Skrij račune z ničelnim stanjem"
+msgstr "Skrij račune z ničelnim saldom v Računih"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:244
-#, fuzzy, kde-format
-#| msgid "Hide zero balance accounts"
+#, kde-format
 msgid "Hide zero balance accounts from Home"
-msgstr "Skrij račune z ničelnim stanjem"
+msgstr "Skrij račune z ničelnim saldom v Domu"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:248

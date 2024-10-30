@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-29 01:48+0000\n"
-"PO-Revision-Date: 2024-10-25 18:02+0200\n"
+"PO-Revision-Date: 2024-10-29 16:40+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -3460,17 +3460,15 @@ msgstr "Mostrar categorías en la vista de listado de cuentas"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccountsHome)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:417
 #: kmymoney/dialogs/settings/ksettingshome.ui:238
-#, fuzzy, kde-format
-#| msgid "Hide accounts with a zero balance"
+#, kde-format
 msgid "Hide accounts with a zero balance from Home"
-msgstr "Ocultar cuentas con balance cero"
+msgstr "Ocultar cuentas con balance cero del inicio"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:424
-#, fuzzy, kde-format
-#| msgid "Hide accounts with a zero balance"
+#, kde-format
 msgid "Hide accounts with a zero balance from Accounts"
-msgstr "Ocultar cuentas con balance cero"
+msgstr "Ocultar cuentas con balance cero de las cuentas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:431
@@ -18663,17 +18661,15 @@ msgstr "Ocultar las acciones de saldo cero"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:240
-#, fuzzy, kde-format
-#| msgid "Hide zero balance accounts"
+#, kde-format
 msgid "Hide zero balance accounts from Accounts"
-msgstr "Ocultar las cuentas de saldo cero"
+msgstr "Ocultar las cuentas de saldo cero de las cuentas"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:244
-#, fuzzy, kde-format
-#| msgid "Hide zero balance accounts"
+#, kde-format
 msgid "Hide zero balance accounts from Home"
-msgstr "Ocultar las cuentas de saldo cero"
+msgstr "Ocultar las cuentas de saldo cero del inicio"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:248

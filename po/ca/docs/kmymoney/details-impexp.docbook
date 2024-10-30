@@ -901,7 +901,7 @@
 >Extensions especials QIF del &kmymoney;</title>
 
 <para
->Com ja s'ha mencionat, un dels principals inconvenients del format QIF és la manca d'un identificador únic per a cada operació. Si esteu escrivint el propi creador de fitxers QIF (o filtre, com s'ha descrit anteriorment), podreu superar aquest problema. El &kmymoney; admet el camp «#». L'importador l'interpretarà com un ID únic d'operació i no tindrà en compte el registre si l'operació ja es troba al sistema. </para>
+>Com ja s'ha mencionat, un dels principals inconvenients del format QIF és la manca d'un identificador únic per a cada operació. Si esteu escrivint el creador de fitxers QIF mateix (o filtre, com s'ha descrit anteriorment), podreu superar aquest problema. El &kmymoney; admet el camp «#». L'importador l'interpretarà com un ID únic d'operació i no tindrà en compte el registre si l'operació ja es troba al sistema. </para>
 </sect2>
 </sect1>
 
@@ -1076,7 +1076,7 @@
 >Vincula amb un compte en línia...</guimenuitem
 >. En cas que hi hagi més d'un connector de banca en línia al sistema, se us demanarà quin emprar. Per al mètode OFX intern, seleccioneu <guimenuitem
 >OFX del &kmymoney;</guimenuitem
->. Es baixarà una llista de bancs des d'Internet i un assistent us guiarà a través de l'elecció d'un banc, introduïu el nom d'usuari i la contrasenya, i seleccioneu un compte. Si trobeu que el banc no es troba a la llista, encara es podrà emprar l'opció manual. És possible que el banc us pugui proporcionar els paràmetres requerits, o potser hàgiu d'investigar una mica per a trobar-los. </para>
+>. Es baixarà una llista de bancs des d'Internet i un assistent us guiarà a través de l'elecció d'un banc, introduïu el nom d'usuari i la contrasenya, i seleccioneu un compte. Si trobeu que el banc no es troba a la llista, encara es podrà emprar l'opció manual. És possible que el banc us pugui proporcionar els paràmetres requerits, o potser haureu d'investigar una mica per a trobar-los. </para>
 
 <note>
   <para

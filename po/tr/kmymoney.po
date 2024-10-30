@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-29 01:48+0000\n"
-"PO-Revision-Date: 2024-10-25 13:33+0300\n"
+"PO-Revision-Date: 2024-10-29 16:20+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -3427,17 +3427,15 @@ msgstr "Hesaplar listesi görünümünde kategorileri göster"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccountsHome)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:417
 #: kmymoney/dialogs/settings/ksettingshome.ui:238
-#, fuzzy, kde-format
-#| msgid "Hide accounts with a zero balance"
+#, kde-format
 msgid "Hide accounts with a zero balance from Home"
-msgstr "Sıfır bakiyeli hesapları gizle"
+msgstr "Sıfır bakiyeli hesapları ana sayfadan gizle"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:424
-#, fuzzy, kde-format
-#| msgid "Hide accounts with a zero balance"
+#, kde-format
 msgid "Hide accounts with a zero balance from Accounts"
-msgstr "Sıfır bakiyeli hesapları gizle"
+msgstr "Sıfır bakiyeli hesapları hesaplardan gizle"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:431
@@ -18505,17 +18503,15 @@ msgstr "Sıfır bakiyeli varlıkları gizle"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:240
-#, fuzzy, kde-format
-#| msgid "Hide zero balance accounts"
+#, kde-format
 msgid "Hide zero balance accounts from Accounts"
-msgstr "Sıfır bakiyeli hesapları gizle"
+msgstr "Sıfır bakiyeli hesapları hesaplardan gizle"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:244
-#, fuzzy, kde-format
-#| msgid "Hide zero balance accounts"
+#, kde-format
 msgid "Hide zero balance accounts from Home"
-msgstr "Sıfır bakiyeli hesapları gizle"
+msgstr "Sıfır bakiyeli hesapları ana sayfadan gizle"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:248

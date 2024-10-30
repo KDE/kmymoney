@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-29 01:48+0000\n"
-"PO-Revision-Date: 2024-10-25 09:35+0200\n"
+"PO-Revision-Date: 2024-10-29 09:04+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -3468,17 +3468,15 @@ msgstr "Mostra les categories a la vista de la llista de comptes"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccountsHome)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:417
 #: kmymoney/dialogs/settings/ksettingshome.ui:238
-#, fuzzy, kde-format
-#| msgid "Hide accounts with a zero balance"
+#, kde-format
 msgid "Hide accounts with a zero balance from Home"
-msgstr "Oculta els comptes amb saldo zero"
+msgstr "Oculta els comptes amb saldo zero a la pàgina principal"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:424
-#, fuzzy, kde-format
-#| msgid "Hide accounts with a zero balance"
+#, kde-format
 msgid "Hide accounts with a zero balance from Accounts"
-msgstr "Oculta els comptes amb saldo zero"
+msgstr "Oculta els comptes amb saldo zero als comptes"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:431
@@ -18711,17 +18709,15 @@ msgstr "Oculta les accions amb saldo zero"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:240
-#, fuzzy, kde-format
-#| msgid "Hide zero balance accounts"
+#, kde-format
 msgid "Hide zero balance accounts from Accounts"
-msgstr "Oculta els comptes amb saldo zero"
+msgstr "Oculta els comptes amb saldo zero als comptes"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:244
-#, fuzzy, kde-format
-#| msgid "Hide zero balance accounts"
+#, kde-format
 msgid "Hide zero balance accounts from Home"
-msgstr "Oculta els comptes amb saldo zero"
+msgstr "Oculta els comptes amb saldo zero a la pàgina principal"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:248
