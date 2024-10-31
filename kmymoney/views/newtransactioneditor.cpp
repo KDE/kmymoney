@@ -1389,7 +1389,11 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
         // of all other widgets
         d->ui->creditDebitEdit->setValue(amountValue);
         d->ui->creditDebitEdit->setShares(amountShares);
+
         d->updateWidgetState();
+        d->updateWidgetAccess();
+        d->checkForValidAmount();
+
         d->m_splitHelper->updateWidget();
     }
 }
