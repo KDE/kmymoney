@@ -233,11 +233,14 @@ bool NewTransactionEditor::Private::checkForValidAmount()
 {
     WidgetHintFrame::hide(ui->creditDebitEdit, i18nc("@info:tooltip", "Enter the amount of the transaction."));
     WidgetHintFrame::hide(ui->categoryCombo, i18nc("@info:tooltip", "Enter the category or counter account of the transaction."));
-    if (q->transactionAmount() != -splitsSum()) {
+    const auto difference = (q->transactionAmount() - (-splitsSum())).abs();
+    if (!difference.isZero()) {
         if (splitModel.rowCount() == 0) {
             WidgetHintFrame::show(ui->categoryCombo, i18nc("@info:tooltip", "The transaction is missing a category assignment."));
         } else {
-            WidgetHintFrame::show(ui->creditDebitEdit, i18nc("@info:tooltip", "The amount is different from the sum of all splits."));
+            WidgetHintFrame::show(
+                ui->creditDebitEdit,
+                i18nc("@info:tooltip", "The amount is different from the sum of all splits by %1.").arg(difference.formatMoney(m_account.fraction())));
         }
     }
     return true;
