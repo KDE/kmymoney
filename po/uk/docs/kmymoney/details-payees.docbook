@@ -30,9 +30,9 @@
 >На панелі перегляду отримувачів буде показано докладні дані щодо усіх отримувачів сплат та платників, які зафіксовано у записах операцій. Отримувачі і платники — установи або особи, яким ви переказуєте гроші або від яких ви отримуєте гроші. &kmymoney; зберігає дані щодо усіх отримувачів і платників на основі усіх наявних операцій. Отже, ви можете просто вибрати отримувача зі списку і не вводити його дані знову, що зменшує ймовірність друкарської помилки або введення помилкових даних. </para>
 
 <para
->Панель отримувачів поділено на дві основні ділянки: список отримувачів і платників ліворуч та панель подробиць праворуч. За допомогою розділу <guilabel
->Ваші отримувачі</guilabel
-> ви можете додавати, вилучати, перейменовувати та об'єднувати записи отримувачів. Панель подробиць поділено між декількома вкладками, де показано операції, адресу, відповідні дані, типову категорію та номери рахунків для отримувача, пункт якого буде позначено у списку. </para>
+>The Payees View is split into two main areas: a payees and payers list on the left, and a detail area on the right. The <guilabel
+>Your payees</guilabel
+> section allows for adding, deleting, renaming, and merging payees. The detail area has several tabs, showing the transactions, address, matching information, default category, and account numbers for the payee selected in the list. </para>
 
 <para>
 	<screenshot>

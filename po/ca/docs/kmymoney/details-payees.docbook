@@ -32,7 +32,7 @@
 <para
 >Aquesta vista es divideix en dues àrees principals: una llista de beneficiaris i pagadors a l'esquerra, i una àrea de detalls a la dreta. La secció <guilabel
 >Els vostres beneficiaris</guilabel
-> permet afegir, suprimir, canviar el nom i fusionar els beneficiaris. L'àrea de detalls té diverses pestanyes, les quals mostren les operacions, les adreces, la informació coincident, la categoria predeterminada i els números de compte del beneficiari seleccionat a la llista. </para>
+> permet afegir, suprimir, canviar el nom i fusionar els beneficiaris. L'àrea de detalls té diverses pestanyes, les quals mostren les operacions, les adreces, la informació coincident, la categoria predeterminada i els números de compte del beneficiari seleccionat a la llista. A més, es poden crear i gestionar enllaços entre el contingut específic del beneficiari del camp de recordatori d'una operació i els camins de fitxer locals o l'URL remot. </para>
 
 <para>
 	<screenshot>
@@ -251,5 +251,89 @@
 </screenshot>
 </para>
 </sect1>
-</chapter>
 
+<sect1 id="details.payees.linkmatching">
+<title
+>Gestió de la coincidència d'enllaços</title>
+
+<para
+>Aquesta pestanya es pot utilitzar per a enllaçar parts del contingut del camp de recordatori d'una operació a un URL remot o local, per exemple, per a fer accessibles factures o altres documents. </para>
+
+<para
+>La pestanya conté camps d'entrada per a un patró i una plantilla d'URL. El patró especificat s'extreu a través d'expressions regulars en el camp de recordatori de les operacions associades amb aquest beneficiari i inserides a la plantilla d'URL a les ubicacions designades. <screenshot>
+  <screeninfo
+>La pestanya de coincidència d'enllaços</screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="payee_link-matching.png" format="PNG"/>
+      </imageobject>
+    </mediaobject>
+</screenshot>
+</para>
+
+<para
+>L'URL resultant es mostra com a enllaç al llibre major general a les operacions corresponents (vegeu la columna «Detall»). <screenshot
+> <screeninfo
+>Mostra l'enllaç al llibre major general</screeninfo
+> <mediaobject
+> <imageobject
+> <imagedata fileref="payee_link-matching-ledger.png" format="PNG"/> </imageobject
+> </mediaobject
+> </screenshot
+> L'enllaç es pot accedir a través del menú contextual d'una operació o mitjançant una drecera de teclat. <screenshot>
+  <screeninfo
+>...</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_link-matching-open-url.png" format="PNG"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.payees.linkmatching.pattern">
+<title
+>Suggeriments</title>
+<para
+>Els patrons trobats, que han de coincidir amb expressions regulars compatibles amb el Perl, s'insereixen a la plantilla URL en el lloc dels espais reservats. Alguns exemples senzills són: <itemizedlist>
+    <listitem
+><para
+>\d+\b: un o més nombres seguits per un límit de paraula.</para
+></listitem>
+    <listitem
+><para
+>\d{2,4}\b: 2 a 4 nombres seguits per un límit de paraula</para
+></listitem>
+    <listitem
+><para
+>\d{3}-d{6}\b: 3 nombres seguits d'un guió i 6 nombres seguits per un límit de paraula</para
+></listitem>
+  </itemizedlist>
+</para>
+
+<para
+>Els marcadors de posició acceptats són: <itemizedlist
+> <listitem
+><para
+>%1: primera expressió trobada</para
+></listitem
+> <listitem
+><para
+>%2: segona expressió trobada (opcional)</para
+></listitem
+> </itemizedlist
+> Quan s'utilitzen dos patrons independents, les expressions individuals del patró estan separades per parèntesis, p. ex. <code
+>(..)...(..)</code
+>. </para>
+
+<para
+>A més, es poden utilitzar variables predefinides a la plantilla URL. Les variables acceptades actualment són: <itemizedlist
+> <listitem
+><para
+>%year: l'any de la data de l'operació corresponent</para
+></listitem>
+  </itemizedlist>
+</para>
+</sect2>
+</sect1>
+</chapter>

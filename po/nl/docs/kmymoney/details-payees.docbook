@@ -32,7 +32,7 @@
 <para
 >De Debiteurenweergave is gesplitst in twee hoofdgebieden: een lijst met debiteuren en crediteuren links en een gebied met details rechts. De sectie <guilabel
 >Uw debiteuren</guilabel
-> biedt het toevoegen, verwijderen, hernoemen en samenvoegen van debiteuren. Het gebied met details heeft verschillende tabbladen, met de transacties, adres, informatie voor overeenkomst, standaard categorie en rekeningnummers voor de debiteur geselecteerd in de lijst. </para>
+> biedt het toevoegen, verwijderen, hernoemen en samenvoegen van debiteuren. Het gebied met details heeft verschillende tabbladen, met de transacties, adres, informatie voor overeenkomst, standaard categorie en rekeningnummers voor de debiteur geselecteerd in de lijst. Verder kunnen koppelingen tussen inhoud specifiek van debiteuren van een memo-veld van een transactie en lokale bestandspaden of URL op afstand aangemaakt en beheerd worden. </para>
 
 <para>
 	<screenshot>
@@ -235,5 +235,89 @@
 </screenshot>
 </para>
 </sect1>
-</chapter>
 
+<sect1 id="details.payees.linkmatching">
+<title
+>Overeenkomst tussen koppelingen beheren</title>
+
+<para
+>Dit tabblad kan gebruikt worden om gedeelten van inhoud van het memo-veld van een transactie te koppelen met een URL lokaal of op afstand, bijvoorbeeld om rekeningen of andere documenten toegankelijk te maken. </para>
+
+<para
+>Het tabblad bevat invoervelden voor een patroon en een URL-sjabloon. Het gespecificeerde patroon wordt uitgenomen via reguliere expressies in het memo-veld uit transacties geassocieerd met deze debiteur en ingevoegd in het URL-sjabloon op de aangegeven locaties. <screenshot>
+  <screeninfo
+>Het tabblad koppeling overeen laten komen</screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="payee_link-matching.png" format="PNG"/>
+      </imageobject>
+    </mediaobject>
+</screenshot>
+</para>
+
+<para
+>De resulterende URL wordt getoond als koppeling in het algemene grootboek bij de bijbehorende transacties (zie kolom "Detail"). <screenshot
+> <screeninfo
+>Koppeling tonen in het algemene grootboek</screeninfo
+> <mediaobject
+> <imageobject
+> <imagedata fileref="payee_link-matching-ledger.png" format="PNG"/> </imageobject
+> </mediaobject
+> </screenshot
+> De toegang tot de koppeling gaat via het contextmenu van een transactie of via een sneltoets. <screenshot>
+  <screeninfo
+>....</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_link-matching-open-url.png" format="PNG"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.payees.linkmatching.pattern">
+<title
+>Tips</title>
+<para
+>Gevonden patronen, die overeen moeten komen met Perl-compatibele reguliere expressies, worden ingevoegd in het URL-sjabloon op de plaats van de ondersteunde plaatshouders. Eenvoudige voorbeelden zijn: <itemizedlist>
+    <listitem
+><para
+>\d+\b - één of meer cijfers gevolgd door een woordgrens.</para
+></listitem>
+    <listitem
+><para
+>\d{2,4}\b - 2 tot 4 cijfers gevolgd door een woordgrens</para
+></listitem>
+    <listitem
+><para
+>\d{3}-d{6}\b - 3 cijfers gevolgd door een minteken en 6 cijfers gevolgd door een woordgrens</para
+></listitem>
+  </itemizedlist>
+</para>
+
+<para
+>Ondersteunde plaatshouders zijn: <itemizedlist
+> <listitem
+><para
+>%1 - eerst gevonden expressie</para
+></listitem
+> <listitem
+><para
+>%2 - tweede gevonden expressie (optioneel)</para
+></listitem
+> </itemizedlist
+> Bij het gebruik van twee onafhankelijke patronen, worden de individuele expressies in het patroon gescheiden door ronde haakjes, bijv. <code
+>(..)...(..)</code
+>. </para>
+
+<para
+>Bovendien kunnen voorgedefinieerde variabelen toegevoegd worden in het URL-sjabloon. Nu ondersteunde variabelen zijn: <itemizedlist
+> <listitem
+><para
+>%year - het jaar van de datum van de bijbehorende transactie</para
+></listitem>
+  </itemizedlist>
+</para>
+</sect2>
+</sect1>
+</chapter>
