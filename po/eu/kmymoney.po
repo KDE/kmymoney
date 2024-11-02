@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2024-09-28 21:13+0200\n"
+"PO-Revision-Date: 2024-10-30 17:28+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.1\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4603,7 +4603,7 @@ msgstr "Orokorra"
 #: kmymoney/views/kmymoneyview.cpp:139
 #, kde-format
 msgid "Home"
-msgstr "Orri nagusia"
+msgstr "Etxea"
 
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:45
 #, kde-format
@@ -18501,7 +18501,8 @@ msgstr "Orri nagusiaren HTML ikuspegiko letra-tamainaren ehunekoa"
 #, kde-format
 msgid "Remember (manually adjusted) zoom factor in home view on program end."
 msgstr ""
-"Gogoan izan orri nagusiaren letra-tamaina (eskuz doitua) programa ixtean."
+"Oroitu, etxeko ikuspegian (eskuz doitutako) zoom faktorea, programa "
+"bukatzean."
 
 #. i18n: ectx: label, entry (ShowLimitInfo), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:168
@@ -19786,7 +19787,7 @@ msgstr "<b>%1</b> zutabea ezkutatu nahi duzu zamatze ikuspegi guztietan?"
 #: kmymoney/views/kmymoneyview.cpp:431
 #, kde-format
 msgid "Show home page"
-msgstr "Erakutsi hasiera-orria"
+msgstr "Erakutsi orri nagusia"
 
 #: kmymoney/views/kmymoneyview.cpp:432
 #, kde-format
