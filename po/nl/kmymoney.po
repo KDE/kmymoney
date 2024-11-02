@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-01 01:48+0000\n"
-"PO-Revision-Date: 2024-10-31 13:34+0100\n"
+"PO-Revision-Date: 2024-11-01 11:05+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -21117,12 +21117,10 @@ msgid "The transaction is missing a category assignment."
 msgstr "Aan de transactie is geen categorie toegewezen."
 
 #: kmymoney/views/newtransactioneditor.cpp:243
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "The amount is different from the sum of all splits."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits by %1."
-msgstr "De som verschilt van de som van alle splitsingen."
+msgstr "De som verschilt van de som van alle splitsingen door %1."
 
 #: kmymoney/views/newtransactioneditor.cpp:616
 #, kde-format

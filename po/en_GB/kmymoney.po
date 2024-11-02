@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-01 01:48+0000\n"
-"PO-Revision-Date: 2024-10-18 18:49+0100\n"
+"PO-Revision-Date: 2024-11-01 14:09+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -3434,17 +3434,15 @@ msgstr "Show categories in the accounts list view"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccountsHome)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:417
 #: kmymoney/dialogs/settings/ksettingshome.ui:238
-#, fuzzy, kde-format
-#| msgid "Hide accounts with a zero balance"
+#, kde-format
 msgid "Hide accounts with a zero balance from Home"
-msgstr "Hide accounts with a zero balance"
+msgstr "Hide accounts with a zero balance from Home"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:424
-#, fuzzy, kde-format
-#| msgid "Hide accounts with a zero balance"
+#, kde-format
 msgid "Hide accounts with a zero balance from Accounts"
-msgstr "Hide accounts with a zero balance"
+msgstr "Hide accounts with a zero balance from Accounts"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:431
@@ -5150,12 +5148,10 @@ msgid "Show transaction details"
 msgstr "Show transaction details"
 
 #: kmymoney/kmymoney.cpp:1949
-#, fuzzy, kde-format
-#| msgctxt "To open a new report"
-#| msgid "&Open"
+#, kde-format
 msgctxt "Open URL"
 msgid "Open URL"
-msgstr "&Open"
+msgstr "Open URL"
 
 #: kmymoney/kmymoney.cpp:1950
 #, kde-format
@@ -13223,11 +13219,10 @@ msgid "OFX import file selection"
 msgstr "OFX import file selection"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:169
-#, fuzzy, kde-format
-#| msgid "XML files (*.xml);;All files (*)"
+#, kde-format
 msgctxt "Filter for QFileDialog"
 msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
-msgstr "XML files (*.xml);;All files (*)"
+msgstr "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:187
 #, kde-format
@@ -16468,11 +16463,10 @@ msgid "&Print"
 msgstr "&Print"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:743
-#, fuzzy, kde-format
-#| msgid "Exporting file..."
+#, kde-format
 msgctxt "To export a report"
 msgid "&Export to PDF file"
-msgstr "Exporting file..."
+msgstr "&Export to PDF file"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:745
 #, kde-format
@@ -16494,13 +16488,12 @@ msgstr "&Delete"
 #, kde-format
 msgctxt "To export reports"
 msgid "&Export to PDF files"
-msgstr ""
+msgstr "&Export to PDF files"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:816
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export into directory"
-msgstr "Export report"
+msgstr "Export into directory"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KReportsView)
 #: kmymoney/plugins/views/reports/kreportsview.ui:14
@@ -18511,17 +18504,15 @@ msgstr "Hide zero balance equities"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:240
-#, fuzzy, kde-format
-#| msgid "Hide zero balance accounts"
+#, kde-format
 msgid "Hide zero balance accounts from Accounts"
-msgstr "Hide zero balance accounts"
+msgstr "Hide zero balance accounts from Accounts"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:244
-#, fuzzy, kde-format
-#| msgid "Hide zero balance accounts"
+#, kde-format
 msgid "Hide zero balance accounts from Home"
-msgstr "Hide zero balance accounts"
+msgstr "Hide zero balance accounts from Home"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:248
@@ -20180,64 +20171,57 @@ msgstr "Account Numbers"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tabLinks)
 #: kmymoney/views/kpayeesview.ui:503
-#, fuzzy, kde-format
-#| msgid "Matching"
+#, kde-format
 msgid "Link Matching"
-msgstr "Matching"
+msgstr "Link Matching"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: kmymoney/views/kpayeesview.ui:511
-#, fuzzy, kde-format
-#| msgid "Matching"
+#, kde-format
 msgid "Matching setup"
-msgstr "Matching"
+msgstr "Matching setup"
 
 #. i18n: ectx: property (text), widget (KLineEdit, idPatternEdit)
 #: kmymoney/views/kpayeesview.ui:519
 #, kde-format
 msgid "\\d+-\\d+-\\d+"
-msgstr ""
+msgstr "\\d+-\\d+-\\d+"
 
 #. i18n: ectx: property (text), widget (QLabel, idPatternLabel)
 #: kmymoney/views/kpayeesview.ui:526
-#, fuzzy, kde-format
-#| msgid "Identifier"
+#, kde-format
 msgid "Identifier pattern"
-msgstr "Identifier"
+msgstr "Identifier pattern"
 
 #. i18n: ectx: property (text), widget (QLabel, urlTemplateLabel)
 #: kmymoney/views/kpayeesview.ui:533
-#, fuzzy, kde-format
-#| msgid "Templates"
+#, kde-format
 msgid "Url template"
-msgstr "Templates"
+msgstr "URL template"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_3)
 #: kmymoney/views/kpayeesview.ui:548
-#, fuzzy, kde-format
-#| msgid "Matching"
+#, kde-format
 msgid "Matching check"
-msgstr "Matching"
+msgstr "Matching check"
 
 #. i18n: ectx: property (text), widget (QLabel, label_1)
 #: kmymoney/views/kpayeesview.ui:563
-#, fuzzy, kde-format
-#| msgid "[No identifier]"
+#, kde-format
 msgid "Enter identifier"
-msgstr "[No identifier]"
+msgstr "Enter identifier"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/views/kpayeesview.ui:570
 #, kde-format
 msgid "Captured result"
-msgstr ""
+msgstr "Captured result"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: kmymoney/views/kpayeesview.ui:580
-#, fuzzy, kde-format
-#| msgid "Result"
+#, kde-format
 msgid "Resulting URL"
-msgstr "Result"
+msgstr "Resulting URL"
 
 #. i18n: ectx: property (text), widget (QLabel, m_leftLabel)
 #. i18n: ectx: property (text), widget (QLabel, m_centerLabel)
@@ -20965,12 +20949,10 @@ msgid "The transaction is missing a category assignment."
 msgstr "The transaction is missing a category assignment."
 
 #: kmymoney/views/newtransactioneditor.cpp:243
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "The amount is different from the sum of all splits."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits by %1."
-msgstr "The amount is different from the sum of all splits."
+msgstr "The amount is different from the sum of all splits by %1."
 
 #: kmymoney/views/newtransactioneditor.cpp:616
 #, kde-format
@@ -20985,7 +20967,7 @@ msgstr "Select autofill transaction"
 #: kmymoney/views/newtransactionform.ui:179
 #, kde-format
 msgid "Link"
-msgstr ""
+msgstr "Link"
 
 #: kmymoney/views/newtransactionform.cpp:140
 #, kde-format
@@ -25430,10 +25412,9 @@ msgid "Export in HTML format"
 msgstr "Export in HTML format"
 
 #: tools/kmmreport-export.cpp:126
-#, fuzzy, kde-format
-#| msgid "Export in HTML format"
+#, kde-format
 msgid "Export in xml format"
-msgstr "Export in HTML format"
+msgstr "Export in XML format"
 
 #: tools/kmmreport-export.cpp:129
 #, kde-format

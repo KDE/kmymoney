@@ -5,20 +5,19 @@
 # SPDX-FileCopyrightText: 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Antoni Bella Pérez <antonibella5@yahoo.com>
 # SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Josep M. Ferrer <txemaq@gmail.com>
 # Orestes Mas Casals <orestes@tsc.upc.edu>, 2006, 2010, 2011.
-# Josep M. Ferrer <txemaq@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-01 01:48+0000\n"
-"PO-Revision-Date: 2024-10-29 09:04+0100\n"
+"PO-Revision-Date: 2024-11-01 10:30+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -5210,12 +5209,10 @@ msgid "Show transaction details"
 msgstr "Mostra els detalls d'operació"
 
 #: kmymoney/kmymoney.cpp:1949
-#, fuzzy, kde-format
-#| msgctxt "To open a new report"
-#| msgid "&Open"
+#, kde-format
 msgctxt "Open URL"
 msgid "Open URL"
-msgstr "O&bri"
+msgstr "Obri un URL"
 
 #: kmymoney/kmymoney.cpp:1950
 #, kde-format
@@ -20394,63 +20391,57 @@ msgstr "Números de compte"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tabLinks)
 #: kmymoney/views/kpayeesview.ui:503
-#, fuzzy, kde-format
-#| msgid "Matching"
+#, kde-format
 msgid "Link Matching"
-msgstr "Coincidència"
+msgstr "Coincidència d'enllaços"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: kmymoney/views/kpayeesview.ui:511
-#, fuzzy, kde-format
-#| msgid "Matching"
+#, kde-format
 msgid "Matching setup"
-msgstr "Coincidència"
+msgstr "Configureu la coincidència"
 
 #. i18n: ectx: property (text), widget (KLineEdit, idPatternEdit)
 #: kmymoney/views/kpayeesview.ui:519
 #, kde-format
 msgid "\\d+-\\d+-\\d+"
-msgstr ""
+msgstr "\\d+-\\d+-\\d+"
 
 #. i18n: ectx: property (text), widget (QLabel, idPatternLabel)
 #: kmymoney/views/kpayeesview.ui:526
-#, fuzzy, kde-format
-#| msgid "Identifier"
+#, kde-format
 msgid "Identifier pattern"
-msgstr "Identificador"
+msgstr "Patró identificador"
 
 #. i18n: ectx: property (text), widget (QLabel, urlTemplateLabel)
 #: kmymoney/views/kpayeesview.ui:533
 #, kde-format
 msgid "Url template"
-msgstr ""
+msgstr "Plantilla d'URL"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_3)
 #: kmymoney/views/kpayeesview.ui:548
-#, fuzzy, kde-format
-#| msgid "Matching"
+#, kde-format
 msgid "Matching check"
-msgstr "Coincidència"
+msgstr "Verificació de coincidència"
 
 #. i18n: ectx: property (text), widget (QLabel, label_1)
 #: kmymoney/views/kpayeesview.ui:563
-#, fuzzy, kde-format
-#| msgid "[No identifier]"
+#, kde-format
 msgid "Enter identifier"
-msgstr "[Sense identificador]"
+msgstr "Introduïu un identificador"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/views/kpayeesview.ui:570
 #, kde-format
 msgid "Captured result"
-msgstr ""
+msgstr "Resultat capturat"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: kmymoney/views/kpayeesview.ui:580
-#, fuzzy, kde-format
-#| msgid "Result"
+#, kde-format
 msgid "Resulting URL"
-msgstr "Resultat"
+msgstr "URL resultant"
 
 #. i18n: ectx: property (text), widget (QLabel, m_leftLabel)
 #. i18n: ectx: property (text), widget (QLabel, m_centerLabel)
@@ -21187,12 +21178,10 @@ msgid "The transaction is missing a category assignment."
 msgstr "Falta assignar una categoria a l'operació."
 
 #: kmymoney/views/newtransactioneditor.cpp:243
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "The amount is different from the sum of all splits."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits by %1."
-msgstr "L'import és diferent de la suma de tots els desglossaments."
+msgstr "L'import és diferent de la suma de tots els desglossaments en %1."
 
 #: kmymoney/views/newtransactioneditor.cpp:616
 #, kde-format
@@ -21207,7 +21196,7 @@ msgstr "Seleccioneu autocompleció d'operació"
 #: kmymoney/views/newtransactionform.ui:179
 #, kde-format
 msgid "Link"
-msgstr ""
+msgstr "Enllaç"
 
 #: kmymoney/views/newtransactionform.cpp:140
 #, kde-format
@@ -25733,9 +25722,3 @@ msgstr "Només s'admet un d'entre --csv o --html"
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr "s'està guardant l'informe «%1» en «%2»"
-
-#~ msgid ""
-#~ "The results of this report may be incorrect if categories are included"
-#~ msgstr ""
-#~ "El resultat d'este informe podria ser incorrecte si s'inclouen les "
-#~ "categories"

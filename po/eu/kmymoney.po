@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-01 01:48+0000\n"
-"PO-Revision-Date: 2024-10-30 17:32+0100\n"
+"PO-Revision-Date: 2024-11-01 09:01+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -5180,12 +5180,10 @@ msgid "Show transaction details"
 msgstr "Erakutsi transakzio-xehetasunak"
 
 #: kmymoney/kmymoney.cpp:1949
-#, fuzzy, kde-format
-#| msgctxt "To open a new report"
-#| msgid "&Open"
+#, kde-format
 msgctxt "Open URL"
 msgid "Open URL"
-msgstr "I&reki"
+msgstr "Ireki URLa"
 
 #: kmymoney/kmymoney.cpp:1950
 #, kde-format
@@ -20253,63 +20251,57 @@ msgstr "Kontu-zenbakiak"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tabLinks)
 #: kmymoney/views/kpayeesview.ui:503
-#, fuzzy, kde-format
-#| msgid "Matching"
+#, kde-format
 msgid "Link Matching"
-msgstr "Parekatzea"
+msgstr "Esteka bat etortzea"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: kmymoney/views/kpayeesview.ui:511
-#, fuzzy, kde-format
-#| msgid "Matching"
+#, kde-format
 msgid "Matching setup"
-msgstr "Parekatzea"
+msgstr "Bat etortzea ezarpena"
 
 #. i18n: ectx: property (text), widget (KLineEdit, idPatternEdit)
 #: kmymoney/views/kpayeesview.ui:519
 #, kde-format
 msgid "\\d+-\\d+-\\d+"
-msgstr ""
+msgstr "\\d+-\\d+-\\d+"
 
 #. i18n: ectx: property (text), widget (QLabel, idPatternLabel)
 #: kmymoney/views/kpayeesview.ui:526
-#, fuzzy, kde-format
-#| msgid "Identifier"
+#, kde-format
 msgid "Identifier pattern"
-msgstr "Identifikatzailea"
+msgstr "Eredu identifikatzailea"
 
 #. i18n: ectx: property (text), widget (QLabel, urlTemplateLabel)
 #: kmymoney/views/kpayeesview.ui:533
 #, kde-format
 msgid "Url template"
-msgstr ""
+msgstr "URL txantiloia"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_3)
 #: kmymoney/views/kpayeesview.ui:548
-#, fuzzy, kde-format
-#| msgid "Matching"
+#, kde-format
 msgid "Matching check"
-msgstr "Parekatzea"
+msgstr "Bat etortze egiaztatzea"
 
 #. i18n: ectx: property (text), widget (QLabel, label_1)
 #: kmymoney/views/kpayeesview.ui:563
-#, fuzzy, kde-format
-#| msgid "[No identifier]"
+#, kde-format
 msgid "Enter identifier"
-msgstr "[identifikatzailerik ez]"
+msgstr "Sartu identifikatzailea"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/views/kpayeesview.ui:570
 #, kde-format
 msgid "Captured result"
-msgstr ""
+msgstr "Atzemandako emaitza"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: kmymoney/views/kpayeesview.ui:580
-#, fuzzy, kde-format
-#| msgid "Result"
+#, kde-format
 msgid "Resulting URL"
-msgstr "Emaitza"
+msgstr "URL emaitza"
 
 #. i18n: ectx: property (text), widget (QLabel, m_leftLabel)
 #. i18n: ectx: property (text), widget (QLabel, m_centerLabel)
@@ -21034,12 +21026,10 @@ msgid "The transaction is missing a category assignment."
 msgstr "Transakzioak kategoria esleitzea falta du."
 
 #: kmymoney/views/newtransactioneditor.cpp:243
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "The amount is different from the sum of all splits."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits by %1."
-msgstr "Kopurua eta partida guztien batura ezberdina da."
+msgstr "Kopurua partida guztien baturarekiko %1(e)an ezberdina da."
 
 #: kmymoney/views/newtransactioneditor.cpp:616
 #, kde-format
@@ -21054,7 +21044,7 @@ msgstr "Hautatu automatikoki betetzeko transakzioa"
 #: kmymoney/views/newtransactionform.ui:179
 #, kde-format
 msgid "Link"
-msgstr ""
+msgstr "Esteka"
 
 #: kmymoney/views/newtransactionform.cpp:140
 #, kde-format
