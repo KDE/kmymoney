@@ -49,8 +49,9 @@ public:
     virtual QString lastError() const override;
 
 private:
-    bool              m_silent;
-    QAction*          m_action;
+    bool m_silent;
+    QAction* m_action;
+    QWidget* m_parentWidget;
 
 protected Q_SLOTS:
     void startWizardRun();

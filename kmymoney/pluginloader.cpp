@@ -11,8 +11,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QMap>
 #include <QDebug>
+#include <QMap>
+#include <QWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -62,7 +63,7 @@ QMap<QString, KPluginMetaData> listPlugins(bool onlyEnabled)
     return plugins;
 }
 
-void pluginHandling(Action action, Container& ctnPlugins, QObject* parent, KXMLGUIFactory* guiFactory)
+void pluginHandling(Action action, Container& ctnPlugins, QWidget* parent, KXMLGUIFactory* guiFactory)
 {
     QMap<QString, KPluginMetaData> referencePluginDatas;
     if (action == Action::Load ||
@@ -106,7 +107,10 @@ void pluginHandling(Action action, Container& ctnPlugins, QObject* parent, KXMLG
                     continue;
                 }
                 auto factory = factoryResult.plugin;
-                Plugin* plugin = factory->create<Plugin>(parent);
+                // pass the application widget as an argument to the plugins
+                QVariantList args;
+                args.append(QVariant::fromValue(parent));
+                Plugin* plugin = factory->create<Plugin>(parent, parent, args);
                 if (!plugin) {
                     qWarning("This is not KMyMoney plugin: '%s'", qPrintable((*it).fileName()));
                     continue;

@@ -29,12 +29,16 @@
 #include "statementinterface.h"
 #include "viewinterface.h"
 
-CSVImporter::CSVImporter(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
+CSVImporter::CSVImporter(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
     : KMyMoneyPlugin::Plugin(parent, metaData, args)
     , m_action(nullptr)
+    , m_parentWidget(nullptr)
 {
     Q_INIT_RESOURCE(csvimporter);
 
+    if (!args.isEmpty()) {
+        m_parentWidget = args.at(0).value<QWidget*>();
+    }
     const auto rcFileName = QLatin1String("csvimporter.rc");
     setXMLFile(rcFileName);
 
@@ -70,7 +74,7 @@ void CSVImporter::startWizardRun()
 
 bool CSVImporter::import(const QString& filename)
 {
-    QPointer<CSVWizard> wizard = new CSVWizard(this);
+    QPointer<CSVWizard> wizard = new CSVWizard(m_parentWidget, this);
     wizard->presetFilename(filename);
     auto rc = false;
 

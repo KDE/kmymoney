@@ -10,7 +10,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-class QObject;
+class QWidget;
 class QString;
 template <class Key, class T> class QMap;
 
@@ -64,7 +64,7 @@ QMap<QString, KPluginMetaData> listPlugins(bool onlyEnabled);
  * @param parent Parent of plugins. This should be KMyMoneyApp
  * @param guiFactory GUI Factory of plugins. This should be GUI Factory of KMyMoneyApp
  */
-void pluginHandling(Action action, Container& ctnPlugins, QObject* parent, KXMLGUIFactory* guiFactory);
+void pluginHandling(Action action, Container& ctnPlugins, QWidget* parent, KXMLGUIFactory* guiFactory);
 
 /**
  * @brief Update the actions in all plugins

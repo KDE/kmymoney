@@ -50,12 +50,13 @@
 
 using namespace Icons;
 
-CSVWizard::CSVWizard(CSVImporter *plugin) :
-    ui(new Ui::CSVWizard),
-    m_skipSetup(false),
-    m_plugin(plugin),
-    m_imp(new CSVImporterCore),
-    m_wiz(new QWizard)
+CSVWizard::CSVWizard(QWidget* parentWidget, CSVImporter* plugin)
+    : QDialog(parentWidget)
+    , ui(new Ui::CSVWizard)
+    , m_skipSetup(false)
+    , m_plugin(plugin)
+    , m_imp(new CSVImporterCore)
+    , m_wiz(new QWizard)
 {
     ui->setupUi(this);
     ui->tableView->setModel(m_imp->m_file->m_model);
@@ -216,12 +217,12 @@ void CSVWizard::markUnwantedRows()
 
 void CSVWizard::updateWindowSize()
 {
-    QTableView *table = this->ui->tableView;
+    const auto table = ui->tableView;
     table->resizeColumnsToContents();
-    this->repaint();
+    repaint();
 
-    QSize screen = this->screen()->size(); // get available screen size
-    QRect wizard = this->frameGeometry(); // get current wizard size
+    QSize screenSize = screen()->size(); // get available screen size
+    QRect wizard = frameGeometry(); // get current wizard size
 
     int newWidth = (table->contentsMargins().left() //
                     + table->contentsMargins().right() //
@@ -251,27 +252,28 @@ void CSVWizard::updateWindowSize()
     }
 
     // limit wizard size to screen size
-    if (newHeight > screen.height())
-        newHeight = screen.height();
+    if (newHeight > screenSize.height())
+        newHeight = screenSize.height();
 
-    if (newWidth > screen.width())
-        newWidth = screen.width();
-
+    if (newWidth > screenSize.width())
+        newWidth = screenSize.width();
 
     // don't shrink wizard if required size is less than initial
-    if (newWidth < this->m_initialWidth)
-        newWidth = this->m_initialWidth;
-    if (newHeight < this->m_initialHeight)
-        newHeight = this->m_initialHeight;
+    if (newWidth < m_initialWidth)
+        newWidth = m_initialWidth;
+    if (newHeight < m_initialHeight)
+        newHeight = m_initialHeight;
 
-    newWidth -= (wizard.width() - this->geometry().width());      // remove window frame
-    newHeight -= (wizard.height() - this->geometry().height());
+    newWidth -= (wizard.width() - geometry().width()); // remove window frame
+    newHeight -= (wizard.height() - geometry().height());
 
     wizard.setWidth(newWidth);
     wizard.setHeight(newHeight);
-    wizard.moveTo((screen.width() - wizard.width()) / 2,
-                  (screen.height() - wizard.height()) / 2);
-    this->setGeometry(wizard);
+
+    const auto topLeftOfScreen = screen()->geometry().topLeft();
+    const auto newPos = QPoint((screenSize.width() - wizard.width()) / 2, (screenSize.height() - wizard.height()) / 2);
+    wizard.moveTo(topLeftOfScreen + newPos);
+    setGeometry(wizard);
 }
 
 bool CSVWizard::eventFilter(QObject *object, QEvent *event)
@@ -492,6 +494,9 @@ void IntroPage::initializePage()
         //resize wizard to its initial size and center it
         m_dlg->setGeometry(
             QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, QSize(m_dlg->m_initialWidth, m_dlg->m_initialHeight), screen()->availableGeometry()));
+
+        // and make sure it shows up on the same monitor in multi monitor environments
+        m_dlg->move(m_dlg->pos() + m_dlg->parentWidget()->screen()->geometry().topLeft());
     }
     m_dlg->ui->tableView->hide();
 }

@@ -47,7 +47,7 @@ class CSVWizard : public QDialog
     Q_OBJECT
 
 public:
-    explicit CSVWizard(CSVImporter *plugin);
+    CSVWizard(QWidget* parentWidget, CSVImporter* plugin);
     ~CSVWizard();
 
     enum wizardPageE  { PageIntro, PageSeparator, PageRows,
