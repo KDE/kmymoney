@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-01 01:48+0000\n"
-"PO-Revision-Date: 2024-10-30 09:53+0100\n"
+"PO-Revision-Date: 2024-11-01 08:32+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -5259,12 +5259,10 @@ msgid "Show transaction details"
 msgstr "Afficher le détail de l'opération"
 
 #: kmymoney/kmymoney.cpp:1949
-#, fuzzy, kde-format
-#| msgctxt "To open a new report"
-#| msgid "&Open"
+#, kde-format
 msgctxt "Open URL"
 msgid "Open URL"
-msgstr "&Ouvrir"
+msgstr "Ouvrir une URL"
 
 #: kmymoney/kmymoney.cpp:1950
 #, kde-format
@@ -20502,64 +20500,57 @@ msgstr "Numéros de comptes"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tabLinks)
 #: kmymoney/views/kpayeesview.ui:503
-#, fuzzy, kde-format
-#| msgid "Matching"
+#, kde-format
 msgid "Link Matching"
-msgstr "Correspondance"
+msgstr "Lier la correspondance"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: kmymoney/views/kpayeesview.ui:511
-#, fuzzy, kde-format
-#| msgid "Matching"
+#, kde-format
 msgid "Matching setup"
-msgstr "Correspondance"
+msgstr "Configuration de correspondance"
 
 #. i18n: ectx: property (text), widget (KLineEdit, idPatternEdit)
 #: kmymoney/views/kpayeesview.ui:519
 #, kde-format
 msgid "\\d+-\\d+-\\d+"
-msgstr ""
+msgstr "\\d+-\\d+-\\d+"
 
 #. i18n: ectx: property (text), widget (QLabel, idPatternLabel)
 #: kmymoney/views/kpayeesview.ui:526
-#, fuzzy, kde-format
-#| msgid "Identifier"
+#, kde-format
 msgid "Identifier pattern"
-msgstr "Identifiant"
+msgstr "Structure d'identifiant"
 
 #. i18n: ectx: property (text), widget (QLabel, urlTemplateLabel)
 #: kmymoney/views/kpayeesview.ui:533
-#, fuzzy, kde-format
-#| msgid "Templates"
+#, kde-format
 msgid "Url template"
-msgstr "Modèles"
+msgstr "Modèle d'URL"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_3)
 #: kmymoney/views/kpayeesview.ui:548
-#, fuzzy, kde-format
-#| msgid "Matching"
+#, kde-format
 msgid "Matching check"
-msgstr "Correspondance"
+msgstr "Vérification de correspondance"
 
 #. i18n: ectx: property (text), widget (QLabel, label_1)
 #: kmymoney/views/kpayeesview.ui:563
-#, fuzzy, kde-format
-#| msgid "[No identifier]"
+#, kde-format
 msgid "Enter identifier"
-msgstr "[Pas d'identifiant]"
+msgstr "Saisir un identifiant"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/views/kpayeesview.ui:570
 #, kde-format
 msgid "Captured result"
-msgstr ""
+msgstr "Résultat capturé"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: kmymoney/views/kpayeesview.ui:580
-#, fuzzy, kde-format
-#| msgid "Result"
+#, kde-format
 msgid "Resulting URL"
-msgstr "Résultat"
+msgstr "URL résultante"
 
 #. i18n: ectx: property (text), widget (QLabel, m_leftLabel)
 #. i18n: ectx: property (text), widget (QLabel, m_centerLabel)
@@ -21317,7 +21308,7 @@ msgstr "Sélectionner une opération pour la saisie automatique"
 #: kmymoney/views/newtransactionform.ui:179
 #, kde-format
 msgid "Link"
-msgstr ""
+msgstr "Lier"
 
 #: kmymoney/views/newtransactionform.cpp:140
 #, kde-format
