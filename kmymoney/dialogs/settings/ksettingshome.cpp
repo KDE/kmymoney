@@ -73,6 +73,8 @@ KSettingsHome::KSettingsHome(QWidget* parent) :
     connect(d->ui->m_upButton, &QAbstractButton::clicked, this, &KSettingsHome::slotMoveUp);
     connect(d->ui->m_downButton, &QAbstractButton::clicked, this, &KSettingsHome::slotMoveDown);
 
+    connect(d->ui->kcfg_HideZeroBalanceAccountsHome, &QCheckBox::stateChanged, this, &KSettingsHome::hideZeroBalanceAccountsHomeChanged);
+
     // Don't show it to the user, we only need it to load and save the settings
     d->ui->kcfg_ItemList->hide();
 }
@@ -81,6 +83,14 @@ KSettingsHome::~KSettingsHome()
 {
     Q_D(KSettingsHome);
     delete d;
+}
+
+void KSettingsHome::setHideZeroBalanceAccountsHome(bool state)
+{
+    Q_D(KSettingsHome);
+    if (d->ui->kcfg_HideZeroBalanceAccountsHome->isChecked() != state) {
+        d->ui->kcfg_HideZeroBalanceAccountsHome->setChecked(state);
+    }
 }
 
 void KSettingsHome::slotLoadItems()

@@ -28,6 +28,9 @@ public:
     explicit KSettingsGeneral(QWidget* parent = nullptr);
     ~KSettingsGeneral();
 
+public Q_SLOTS:
+    void setHideZeroBalanceAccountsHome(bool state);
+
 protected Q_SLOTS:
     void slotChooseLogPath();
     void slotUpdateLogTypes();
@@ -37,6 +40,7 @@ protected:
 
 Q_SIGNALS:
     void haveValidInput(bool valid);
+    void hideZeroBalanceAccountsHomeChanged(bool state);
 
 private:
     KSettingsGeneralPrivate * const d_ptr;

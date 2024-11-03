@@ -72,6 +72,10 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
     connect(pluginsPage, &KSettingsPlugins::changed, this, &KSettingsKMyMoney::slotPluginsChanged);
     connect(pluginsPage, &KSettingsPlugins::settingsChanged, this, &KConfigDialog::settingsChanged);
     connect(generalPage, &KSettingsGeneral::haveValidInput, this, &KSettingsKMyMoney::slotEnableFinishButton);
+
+    // make sure both HideZeroBalanceAccountsHome checkboxes sync each other
+    connect(generalPage, &KSettingsGeneral::hideZeroBalanceAccountsHomeChanged, homePage, &KSettingsHome::setHideZeroBalanceAccountsHome);
+    connect(homePage, &KSettingsHome::hideZeroBalanceAccountsHomeChanged, generalPage, &KSettingsGeneral::setHideZeroBalanceAccountsHome);
 }
 
 void KSettingsKMyMoney::slotEnableFinishButton(bool enable)

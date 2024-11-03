@@ -28,12 +28,18 @@ public:
     explicit KSettingsHome(QWidget* parent = nullptr);
     ~KSettingsHome();
 
+public Q_SLOTS:
+    void setHideZeroBalanceAccountsHome(bool state);
+
 protected Q_SLOTS:
     void slotLoadItems();
     void slotUpdateItemList();
     void slotSelectHomePageItem();
     void slotMoveUp();
     void slotMoveDown();
+
+Q_SIGNALS:
+    void hideZeroBalanceAccountsHomeChanged(bool state);
 
 private:
     KSettingsHomePrivate * const d_ptr;
