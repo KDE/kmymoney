@@ -684,7 +684,7 @@ public:
             QList<MyMoneySchedule>::Iterator it_f;
 
             m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
-            addScheduleHeader(QLatin1String("itemtitle negativetext"), i18n("Overdue payments"));
+            addScheduleHeader(i18n("Overdue payments"), QLatin1String("itemtitle negativetext"));
 
             int i = 0;
             for (it = overdues.begin(); it != overdues.end(); ++it) {
@@ -721,7 +721,7 @@ public:
             if (todays.count() > 0) {
                 m_html += "<tr class=\"gap\"><td>&nbsp;\n</td></tr>";
                 m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
-                addScheduleHeader(QLatin1String("itemtitle"), i18n("Today's due payments"));
+                addScheduleHeader(i18n("Today's due payments"), QLatin1String("itemtitle"));
 
                 int i = 0;
                 for (t_it = todays.begin(); t_it != todays.end(); ++t_it) {
@@ -736,7 +736,7 @@ public:
                 QList<MyMoneySchedule>::Iterator it;
 
                 m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
-                addScheduleHeader(QLatin1String("itemtitle"), i18n("Future payments"));
+                addScheduleHeader(i18n("Future payments"), QLatin1String("itemtitle"));
 
                 // show all or the first 6 entries
                 int cnt;
