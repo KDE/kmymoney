@@ -10,6 +10,7 @@
 #include <QDebug>
 #include <QRegularExpression>
 #include <QTextBrowser>
+#include <QTextObject>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -30,6 +31,13 @@ void KMMTextBrowser::print(QPagedPaintDevice* printer)
     QTextDocument documentCopy;
     documentCopy.setDefaultStyleSheet("");
     documentCopy.setHtml(m_html);
+    // Add space between columns
+    for (QTextBlock it = documentCopy.begin(); it != documentCopy.end(); it = it.next()) {
+        QTextCursor cursor(it);
+        QTextBlockFormat tbf = it.blockFormat();
+        tbf.setTextIndent(0.1);
+        cursor.setBlockFormat(tbf);
+    }
     documentCopy.print(printer);
 }
 
