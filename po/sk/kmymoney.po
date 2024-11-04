@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-01 01:48+0000\n"
+"POT-Creation-Date: 2024-11-04 01:46+0000\n"
 "PO-Revision-Date: 2020-01-02 16:30+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -3197,7 +3197,7 @@ msgstr "Písmo bunky"
 msgid "Header font"
 msgstr "Písmo hlavičky"
 
-#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:78
+#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:88
 #, fuzzy, kde-format
 #| msgid "Choose Style"
 msgid "Choose file path"
@@ -10204,8 +10204,8 @@ msgstr ""
 "Prosím, zadajte znova váš výber stĺpcov."
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:349
-#: kmymoney/plugins/csv/import/csvwizard.cpp:990
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1061
+#: kmymoney/plugins/csv/import/csvwizard.cpp:995
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1066
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:382
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:411
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:432
@@ -10612,65 +10612,65 @@ msgctxt "Type of operation as in financial statement"
 msgid "remove"
 msgstr "Odstrániť"
 
-#: kmymoney/plugins/csv/import/csvimporter.cpp:56
+#: kmymoney/plugins/csv/import/csvimporter.cpp:60
 #, kde-format
 msgid "CSV..."
 msgstr "CSV..."
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:411
+#: kmymoney/plugins/csv/import/csvwizard.cpp:413
 #, kde-format
 msgid "Save QIF"
 msgstr "Uložiť QIF"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:411
+#: kmymoney/plugins/csv/import/csvwizard.cpp:413
 #, kde-format
 msgid "QIF Files (*.qif)"
 msgstr "QIF súbory (*.qif)"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:470
+#: kmymoney/plugins/csv/import/csvwizard.cpp:472
 #, kde-format
 msgid "Select File"
 msgstr "Vyberte súbor"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:471
+#: kmymoney/plugins/csv/import/csvwizard.cpp:473
 #, kde-format
 msgid "A profile must be selected before selecting a file."
 msgstr "Profil musí byť zvolený pred výberom súboru."
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:537
+#: kmymoney/plugins/csv/import/csvwizard.cpp:542
 #, kde-format
 msgid ""
 "<center>Profile <b>%1</b> already exists.<br>Please enter another name</"
 "center>"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:558
+#: kmymoney/plugins/csv/import/csvwizard.cpp:563
 #, kde-format
 msgid "<center>Profile <b>%1</b> has been added.</center>"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:564
+#: kmymoney/plugins/csv/import/csvwizard.cpp:569
 #, kde-format
 msgid "<center>Profile <b>%1</b> has been removed.</center>"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:570
+#: kmymoney/plugins/csv/import/csvwizard.cpp:575
 #, kde-format
 msgid ""
 "<center>Profile name has been renamed from <b>%1</b> to <b>%2</b>.</center>"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:950
+#: kmymoney/plugins/csv/import/csvwizard.cpp:955
 #, kde-format
 msgid "Import CSV"
 msgstr "Importovať CSV"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:952
+#: kmymoney/plugins/csv/import/csvwizard.cpp:957
 #, kde-format
 msgid "Make QIF File"
 msgstr "Vytvoriť QIF súbor"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:989
+#: kmymoney/plugins/csv/import/csvwizard.cpp:994
 #, kde-format
 msgid ""
 "<center>Autodetect could not detect your decimal symbol in column %1.</"
@@ -10678,7 +10678,7 @@ msgid ""
 "your data.</center>"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1059
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1064
 #, fuzzy, kde-format
 #| msgid ""
 #| "<center>The start line is greater than the end line.\n"
@@ -10690,7 +10690,7 @@ msgstr ""
 "<center>Počiatočný riadok je väčší než koncový riadok.\n"
 "</center><center>Prosím opravte si vaše nastavenie.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1107
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1112
 #, fuzzy, kde-format
 #| msgid "Please select a profile type and enter a profile name."
 msgctxt "@info:tooltip QIF profile not selected"
@@ -10699,32 +10699,32 @@ msgstr "Prosím, vyberte typ profilu a zadajte názov profilu."
 
 #. i18n: Noun, the introduction.
 #. i18n: ectx: property (text), widget (QLabel, label_intro)
-#: kmymoney/plugins/csv/import/csvwizard.ui:69
+#: kmymoney/plugins/csv/import/csvwizard.ui:63
 #, kde-format
 msgctxt "Noun, the introduction."
 msgid "1. File"
 msgstr "1. Súbor"
 
 #. i18n: ectx: property (text), widget (QLabel, label_separators)
-#: kmymoney/plugins/csv/import/csvwizard.ui:82
+#: kmymoney/plugins/csv/import/csvwizard.ui:76
 #, kde-format
 msgid "2. Separators"
 msgstr "2. Oddeľovače"
 
 #. i18n: ectx: property (text), widget (QLabel, label_rows)
-#: kmymoney/plugins/csv/import/csvwizard.ui:95
+#: kmymoney/plugins/csv/import/csvwizard.ui:89
 #, kde-format
 msgid "3. Rows"
 msgstr "3. Riadky"
 
 #. i18n: ectx: property (text), widget (QLabel, label_columns)
-#: kmymoney/plugins/csv/import/csvwizard.ui:102
+#: kmymoney/plugins/csv/import/csvwizard.ui:96
 #, kde-format
 msgid "4. Columns"
 msgstr "4. Stĺpce"
 
 #. i18n: ectx: property (text), widget (QLabel, label_formats)
-#: kmymoney/plugins/csv/import/csvwizard.ui:109
+#: kmymoney/plugins/csv/import/csvwizard.ui:103
 #, kde-format
 msgid "5. Formats"
 msgstr "5. Formáty"

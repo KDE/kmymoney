@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-01 01:48+0000\n"
+"POT-Creation-Date: 2024-11-04 01:46+0000\n"
 "PO-Revision-Date: 2009-05-18 00:20+0900\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -2949,7 +2949,7 @@ msgstr ""
 msgid "Header font"
 msgstr ""
 
-#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:78
+#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:88
 #, kde-format
 msgid "Choose file path"
 msgstr ""
@@ -9383,8 +9383,8 @@ msgid ""
 msgstr ""
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:349
-#: kmymoney/plugins/csv/import/csvwizard.cpp:990
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1061
+#: kmymoney/plugins/csv/import/csvwizard.cpp:995
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1066
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:382
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:411
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:432
@@ -9759,65 +9759,65 @@ msgctxt "Type of operation as in financial statement"
 msgid "remove"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvimporter.cpp:56
+#: kmymoney/plugins/csv/import/csvimporter.cpp:60
 #, kde-format
 msgid "CSV..."
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:411
+#: kmymoney/plugins/csv/import/csvwizard.cpp:413
 #, kde-format
 msgid "Save QIF"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:411
+#: kmymoney/plugins/csv/import/csvwizard.cpp:413
 #, kde-format
 msgid "QIF Files (*.qif)"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:470
+#: kmymoney/plugins/csv/import/csvwizard.cpp:472
 #, kde-format
 msgid "Select File"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:471
+#: kmymoney/plugins/csv/import/csvwizard.cpp:473
 #, kde-format
 msgid "A profile must be selected before selecting a file."
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:537
+#: kmymoney/plugins/csv/import/csvwizard.cpp:542
 #, kde-format
 msgid ""
 "<center>Profile <b>%1</b> already exists.<br>Please enter another name</"
 "center>"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:558
+#: kmymoney/plugins/csv/import/csvwizard.cpp:563
 #, kde-format
 msgid "<center>Profile <b>%1</b> has been added.</center>"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:564
+#: kmymoney/plugins/csv/import/csvwizard.cpp:569
 #, kde-format
 msgid "<center>Profile <b>%1</b> has been removed.</center>"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:570
+#: kmymoney/plugins/csv/import/csvwizard.cpp:575
 #, kde-format
 msgid ""
 "<center>Profile name has been renamed from <b>%1</b> to <b>%2</b>.</center>"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:950
+#: kmymoney/plugins/csv/import/csvwizard.cpp:955
 #, kde-format
 msgid "Import CSV"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:952
+#: kmymoney/plugins/csv/import/csvwizard.cpp:957
 #, kde-format
 msgid "Make QIF File"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:989
+#: kmymoney/plugins/csv/import/csvwizard.cpp:994
 #, kde-format
 msgid ""
 "<center>Autodetect could not detect your decimal symbol in column %1.</"
@@ -9825,14 +9825,14 @@ msgid ""
 "your data.</center>"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1059
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1064
 #, kde-format
 msgid ""
 "<center>There are invalid date formats in column '%1'.</"
 "center><center>Please check your selections.</center>"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1107
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1112
 #, kde-format
 msgctxt "@info:tooltip QIF profile not selected"
 msgid "Please select a QIF profile in the CSV importer settings"
@@ -9840,32 +9840,32 @@ msgstr ""
 
 #. i18n: Noun, the introduction.
 #. i18n: ectx: property (text), widget (QLabel, label_intro)
-#: kmymoney/plugins/csv/import/csvwizard.ui:69
+#: kmymoney/plugins/csv/import/csvwizard.ui:63
 #, kde-format
 msgctxt "Noun, the introduction."
 msgid "1. File"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_separators)
-#: kmymoney/plugins/csv/import/csvwizard.ui:82
+#: kmymoney/plugins/csv/import/csvwizard.ui:76
 #, kde-format
 msgid "2. Separators"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_rows)
-#: kmymoney/plugins/csv/import/csvwizard.ui:95
+#: kmymoney/plugins/csv/import/csvwizard.ui:89
 #, kde-format
 msgid "3. Rows"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_columns)
-#: kmymoney/plugins/csv/import/csvwizard.ui:102
+#: kmymoney/plugins/csv/import/csvwizard.ui:96
 #, kde-format
 msgid "4. Columns"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_formats)
-#: kmymoney/plugins/csv/import/csvwizard.ui:109
+#: kmymoney/plugins/csv/import/csvwizard.ui:103
 #, kde-format
 msgid "5. Formats"
 msgstr ""

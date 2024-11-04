@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-01 01:48+0000\n"
+"POT-Creation-Date: 2024-11-04 01:46+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -3164,7 +3164,7 @@ msgstr "셀 글꼴"
 msgid "Header font"
 msgstr "머리글 글꼴"
 
-#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:78
+#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:88
 #, kde-format
 msgid "Choose file path"
 msgstr "파일 경로 선택"
@@ -9776,8 +9776,8 @@ msgstr ""
 "열 선택을 다시 입력하십시오."
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:349
-#: kmymoney/plugins/csv/import/csvwizard.cpp:990
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1061
+#: kmymoney/plugins/csv/import/csvwizard.cpp:995
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1066
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:382
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:411
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:432
@@ -10164,32 +10164,32 @@ msgctxt "Type of operation as in financial statement"
 msgid "remove"
 msgstr "삭제"
 
-#: kmymoney/plugins/csv/import/csvimporter.cpp:56
+#: kmymoney/plugins/csv/import/csvimporter.cpp:60
 #, kde-format
 msgid "CSV..."
 msgstr "CSV..."
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:411
+#: kmymoney/plugins/csv/import/csvwizard.cpp:413
 #, kde-format
 msgid "Save QIF"
 msgstr "QIF 저장"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:411
+#: kmymoney/plugins/csv/import/csvwizard.cpp:413
 #, kde-format
 msgid "QIF Files (*.qif)"
 msgstr "QIF 파일 (*.qif)"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:470
+#: kmymoney/plugins/csv/import/csvwizard.cpp:472
 #, kde-format
 msgid "Select File"
 msgstr "파일 선택"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:471
+#: kmymoney/plugins/csv/import/csvwizard.cpp:473
 #, kde-format
 msgid "A profile must be selected before selecting a file."
 msgstr "파일을 선택하기 전에 프로필을 선택해야 합니다."
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:537
+#: kmymoney/plugins/csv/import/csvwizard.cpp:542
 #, kde-format
 msgid ""
 "<center>Profile <b>%1</b> already exists.<br>Please enter another name</"
@@ -10198,34 +10198,34 @@ msgstr ""
 "<center>프로필 <b>%1</b>이(가) 이미 존재합니다.<br>다른 이름을 입력하십시오</"
 "center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:558
+#: kmymoney/plugins/csv/import/csvwizard.cpp:563
 #, kde-format
 msgid "<center>Profile <b>%1</b> has been added.</center>"
 msgstr "<center>프로필 <b>%1</b>이(가) 추가되었습니다.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:564
+#: kmymoney/plugins/csv/import/csvwizard.cpp:569
 #, kde-format
 msgid "<center>Profile <b>%1</b> has been removed.</center>"
 msgstr "<center>프로필 <b>%1</b>이(가) 삭제되었습니다.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:570
+#: kmymoney/plugins/csv/import/csvwizard.cpp:575
 #, kde-format
 msgid ""
 "<center>Profile name has been renamed from <b>%1</b> to <b>%2</b>.</center>"
 msgstr ""
 "<center>프로필 이름이 <b>%1</b>에서 <b>%2</b>(으)로 변경되었습니다.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:950
+#: kmymoney/plugins/csv/import/csvwizard.cpp:955
 #, kde-format
 msgid "Import CSV"
 msgstr "CSV 가져오기"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:952
+#: kmymoney/plugins/csv/import/csvwizard.cpp:957
 #, kde-format
 msgid "Make QIF File"
 msgstr "QIF 파일 만들기"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:989
+#: kmymoney/plugins/csv/import/csvwizard.cpp:994
 #, kde-format
 msgid ""
 "<center>Autodetect could not detect your decimal symbol in column %1.</"
@@ -10235,7 +10235,7 @@ msgstr ""
 "<center>자동 검색이 %1 열에서 소수점을 감지할 수 없습니다.</center><center>문"
 "제가 있는 셀을 보고 데이터를 수정하려면 수동 선택을 시도하십시오.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1059
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1064
 #, kde-format
 msgid ""
 "<center>There are invalid date formats in column '%1'.</"
@@ -10244,7 +10244,7 @@ msgstr ""
 "<center>'%1'열에 잘못된 날짜 형식이 있습니다.</center><center>선택 항목을 확"
 "인하십시오.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1107
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1112
 #, kde-format
 msgctxt "@info:tooltip QIF profile not selected"
 msgid "Please select a QIF profile in the CSV importer settings"
@@ -10252,32 +10252,32 @@ msgstr "CSV 가져오기 도구 설정에서 QIF 프로필을 선택하십시오
 
 #. i18n: Noun, the introduction.
 #. i18n: ectx: property (text), widget (QLabel, label_intro)
-#: kmymoney/plugins/csv/import/csvwizard.ui:69
+#: kmymoney/plugins/csv/import/csvwizard.ui:63
 #, kde-format
 msgctxt "Noun, the introduction."
 msgid "1. File"
 msgstr "1. 파일"
 
 #. i18n: ectx: property (text), widget (QLabel, label_separators)
-#: kmymoney/plugins/csv/import/csvwizard.ui:82
+#: kmymoney/plugins/csv/import/csvwizard.ui:76
 #, kde-format
 msgid "2. Separators"
 msgstr "2. 구분자"
 
 #. i18n: ectx: property (text), widget (QLabel, label_rows)
-#: kmymoney/plugins/csv/import/csvwizard.ui:95
+#: kmymoney/plugins/csv/import/csvwizard.ui:89
 #, kde-format
 msgid "3. Rows"
 msgstr "3. 행"
 
 #. i18n: ectx: property (text), widget (QLabel, label_columns)
-#: kmymoney/plugins/csv/import/csvwizard.ui:102
+#: kmymoney/plugins/csv/import/csvwizard.ui:96
 #, kde-format
 msgid "4. Columns"
 msgstr "4. 열"
 
 #. i18n: ectx: property (text), widget (QLabel, label_formats)
-#: kmymoney/plugins/csv/import/csvwizard.ui:109
+#: kmymoney/plugins/csv/import/csvwizard.ui:103
 #, kde-format
 msgid "5. Formats"
 msgstr "5. 형식"

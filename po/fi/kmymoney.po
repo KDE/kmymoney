@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-01 01:48+0000\n"
+"POT-Creation-Date: 2024-11-04 01:46+0000\n"
 "PO-Revision-Date: 2024-02-19 12:11+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -3215,7 +3215,7 @@ msgstr "Solun fontti"
 msgid "Header font"
 msgstr "Otsikon fontti"
 
-#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:78
+#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:88
 #, kde-format
 msgid "Choose file path"
 msgstr "Valitse tiedostopolku"
@@ -9974,8 +9974,8 @@ msgstr ""
 "Syötä sarakkeiden valinnat uudestaan."
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:349
-#: kmymoney/plugins/csv/import/csvwizard.cpp:990
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1061
+#: kmymoney/plugins/csv/import/csvwizard.cpp:995
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1066
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:382
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:411
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:432
@@ -10359,66 +10359,66 @@ msgctxt "Type of operation as in financial statement"
 msgid "remove"
 msgstr "poista"
 
-#: kmymoney/plugins/csv/import/csvimporter.cpp:56
+#: kmymoney/plugins/csv/import/csvimporter.cpp:60
 #, kde-format
 msgid "CSV..."
 msgstr "CSV…"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:411
+#: kmymoney/plugins/csv/import/csvwizard.cpp:413
 #, kde-format
 msgid "Save QIF"
 msgstr "Tallenna QIF"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:411
+#: kmymoney/plugins/csv/import/csvwizard.cpp:413
 #, kde-format
 msgid "QIF Files (*.qif)"
 msgstr "QIF-tiedostot (*.qif)"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:470
+#: kmymoney/plugins/csv/import/csvwizard.cpp:472
 #, kde-format
 msgid "Select File"
 msgstr "Valitse tiedosto"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:471
+#: kmymoney/plugins/csv/import/csvwizard.cpp:473
 #, kde-format
 msgid "A profile must be selected before selecting a file."
 msgstr "Profiili on valittava ennen tiedoston valintaa."
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:537
+#: kmymoney/plugins/csv/import/csvwizard.cpp:542
 #, kde-format
 msgid ""
 "<center>Profile <b>%1</b> already exists.<br>Please enter another name</"
 "center>"
 msgstr "<center>Kuvaus <b>%1</b> on jo olemassa.<br>Syötä toinen nimi</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:558
+#: kmymoney/plugins/csv/import/csvwizard.cpp:563
 #, kde-format
 msgid "<center>Profile <b>%1</b> has been added.</center>"
 msgstr "<center>Kuvaus <b>%1</b> on lisätty.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:564
+#: kmymoney/plugins/csv/import/csvwizard.cpp:569
 #, kde-format
 msgid "<center>Profile <b>%1</b> has been removed.</center>"
 msgstr "<center>Kuvaus <b>%1</b> on poistettu.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:570
+#: kmymoney/plugins/csv/import/csvwizard.cpp:575
 #, kde-format
 msgid ""
 "<center>Profile name has been renamed from <b>%1</b> to <b>%2</b>.</center>"
 msgstr ""
 "<center>Kuvauksen nimi on muutettu: vanha <b>%1</b>, uusi <b>%2</b>.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:950
+#: kmymoney/plugins/csv/import/csvwizard.cpp:955
 #, kde-format
 msgid "Import CSV"
 msgstr "Tuo CSV"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:952
+#: kmymoney/plugins/csv/import/csvwizard.cpp:957
 #, kde-format
 msgid "Make QIF File"
 msgstr "Luo QIF-tiedosto"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:989
+#: kmymoney/plugins/csv/import/csvwizard.cpp:994
 #, kde-format
 msgid ""
 "<center>Autodetect could not detect your decimal symbol in column %1.</"
@@ -10429,7 +10429,7 @@ msgstr ""
 "</center><center>Valitse käsivalinta nähdäksesi ongelmalliset solut ja "
 "korjaa tietosisältö.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1059
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1064
 #, kde-format
 msgid ""
 "<center>There are invalid date formats in column '%1'.</"
@@ -10438,7 +10438,7 @@ msgstr ""
 "<center>Sarakkeessa '%1' on epäkelpoja päivämäärämuotoiluja.</center> "
 "<center>Tarkista valinnat.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1107
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1112
 #, kde-format
 msgctxt "@info:tooltip QIF profile not selected"
 msgid "Please select a QIF profile in the CSV importer settings"
@@ -10446,32 +10446,32 @@ msgstr "Valitse CSV-tuontiasetuksista QIF-profiili"
 
 #. i18n: Noun, the introduction.
 #. i18n: ectx: property (text), widget (QLabel, label_intro)
-#: kmymoney/plugins/csv/import/csvwizard.ui:69
+#: kmymoney/plugins/csv/import/csvwizard.ui:63
 #, kde-format
 msgctxt "Noun, the introduction."
 msgid "1. File"
 msgstr "1. Tiedosto"
 
 #. i18n: ectx: property (text), widget (QLabel, label_separators)
-#: kmymoney/plugins/csv/import/csvwizard.ui:82
+#: kmymoney/plugins/csv/import/csvwizard.ui:76
 #, kde-format
 msgid "2. Separators"
 msgstr "2. Erottimet"
 
 #. i18n: ectx: property (text), widget (QLabel, label_rows)
-#: kmymoney/plugins/csv/import/csvwizard.ui:95
+#: kmymoney/plugins/csv/import/csvwizard.ui:89
 #, kde-format
 msgid "3. Rows"
 msgstr "3. Rivit"
 
 #. i18n: ectx: property (text), widget (QLabel, label_columns)
-#: kmymoney/plugins/csv/import/csvwizard.ui:102
+#: kmymoney/plugins/csv/import/csvwizard.ui:96
 #, kde-format
 msgid "4. Columns"
 msgstr "4. Sarakkeet"
 
 #. i18n: ectx: property (text), widget (QLabel, label_formats)
-#: kmymoney/plugins/csv/import/csvwizard.ui:109
+#: kmymoney/plugins/csv/import/csvwizard.ui:103
 #, kde-format
 msgid "5. Formats"
 msgstr "5. Muotoilu"
