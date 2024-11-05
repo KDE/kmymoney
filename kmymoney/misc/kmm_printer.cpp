@@ -5,11 +5,10 @@
 
 #include "kmm_printer.h"
 
-#include <QPrinter>
 #include <QPointer>
 #include <QPrintDialog>
+#include <QPrinter>
 #include <QScopedPointer>
-#include <QDebug>
 
 // Q_LOGGING_CATEGORY(Print, "Printing")
 
@@ -40,7 +39,7 @@ QPrintDialog* KMyMoneyPrinter::dialog()
 
 QPrinter* KMyMoneyPrinter::startPrint(QPrinter::PrinterMode mode)
 {
-    QPrinter *printer = instance(mode);
+    QPrinter* printer = instance(mode);
 
     if (dialog()->exec() != QDialog::Accepted)
         return nullptr;
