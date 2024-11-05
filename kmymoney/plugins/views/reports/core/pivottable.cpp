@@ -1824,9 +1824,9 @@ QString PivotTable::renderHTML() const
                         // don't show closed accounts if they have not been used
                         if (!rowname.isClosed() || isUsed) {
                             innergroupdata +=
-                                QString("<tr class=\"row-%1\"%2><td%3 class=\"left\" style=\"text-indent: %4.0em\">%5%6</td>")
+                                QString("<tr class=\"row-%1\"%2><td%3 class=\"left\" style=\"text-indent: %4px;\">%5%6</td>")
                                     .arg((rownum & 0x01 ? "even" : "odd"), (rowname.isTopLevel() ? " id=\"topparent\"" : ""), "")
-                                    .arg((rowname.hierarchyDepth() - 1))
+                                    .arg((rowname.hierarchyDepth() - 1) * 16)
                                     .arg(rowname.name().replace(whiteSpaceRegex, "&nbsp;").replace("<", "&lt;").replace(">", "&gt;"),
                                          (m_config.isConvertCurrency() || !rowname.isForeignCurrency()) ? QString()
                                                                                                         : QString(" (%1)").arg(rowname.currency().id()));
@@ -1878,7 +1878,7 @@ QString PivotTable::renderHTML() const
                         isUsed |= !rowname.isClosed();
                         finalRow = QString("<tr class=\"row-%1\"%2><td class=\"left\" style=\"text-indent: %3px;\">%5%6</td>")
                                        .arg(rownum & 0x01 ? "even" : "odd", m_config.detailLevel() == eMyMoney::Report::DetailLevel::All ? "id=\"solo\"" : "")
-                                       .arg((rowname.hierarchyDepth() - 1))
+                                       .arg((rowname.hierarchyDepth() - 1) * 16)
                                        .arg(rowname.name().replace(whiteSpaceRegex, "&nbsp;").replace("<", "&lt;").replace(">", "&gt;"),
                                             (m_config.isConvertCurrency() || !rowname.isForeignCurrency()) ? QString()
                                                                                                            : QString(" (%1)").arg(rowname.currency().id()));
