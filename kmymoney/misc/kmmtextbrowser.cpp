@@ -31,11 +31,11 @@ void KMMTextBrowser::print(QPagedPaintDevice* printer)
     QTextDocument documentCopy;
     documentCopy.setDefaultStyleSheet("");
     documentCopy.setHtml(m_html);
-    // Add space between columns
+    // Add space in front of a column
     for (QTextBlock it = documentCopy.begin(); it != documentCopy.end(); it = it.next()) {
-        QTextCursor cursor(it);
         QTextBlockFormat tbf = it.blockFormat();
-        tbf.setTextIndent(0.1);
+        QTextCursor cursor(it);
+        tbf.setLeftMargin(16);
         cursor.setBlockFormat(tbf);
     }
     documentCopy.print(printer);
