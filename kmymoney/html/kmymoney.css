@@ -432,7 +432,6 @@
     tr.sectionheader td.left0,
     tr.sectionfooter td.left0 {
         padding-top: 12pt;
-        font-size: 18px;
         font-weight: bold
     }
 
@@ -441,13 +440,11 @@
     tr.sectionheader td.left2,
     tr.sectionfooter td.left2 {
         padding-top: 6pt;
-        font-size: 14px;
         font-weight: bold
     }
 
     tr.reportfooter td.left {
         padding-top: 12pt;
-        font-size: 18px;
         font-weight: bold
     }
 
