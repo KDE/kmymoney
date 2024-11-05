@@ -338,10 +338,11 @@ void KReportTab::printPreview()
 void KReportTab::saveAs(const QString& filename, const QString& selectedMimeType)
 {
     if (selectedMimeType == QStringLiteral("application/pdf")) {
-        QPrinter printer(QPrinter::HighResolution);
-        printer.setOutputFormat(QPrinter::PdfFormat);
-        printer.setOutputFileName(filename);
-        m_tableView->print(&printer);
+        auto printer = KMyMoneyPDFPrinter::startPrint(m_report.name());
+        if (printer != nullptr) {
+            printer->setOutputFileName(filename);
+            m_tableView->print(printer);
+        }
         return;
     }
 

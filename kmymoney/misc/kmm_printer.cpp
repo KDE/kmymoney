@@ -5,6 +5,7 @@
 
 #include "kmm_printer.h"
 
+#include <QPageSetupDialog>
 #include <QPointer>
 #include <QPrintDialog>
 #include <QPrinter>
@@ -47,6 +48,50 @@ QPrinter* KMyMoneyPrinter::startPrint(QPrinter::PrinterMode mode)
 }
 
 void KMyMoneyPrinter::cleanup()
+{
+    auto printer = instance();
+    auto dlg = dialog();
+
+    delete dlg;
+    delete printer;
+}
+
+KMyMoneyPDFPrinter::KMyMoneyPDFPrinter()
+{
+}
+
+QPrinter* KMyMoneyPDFPrinter::instance()
+{
+    static QPrinter* printer(nullptr);
+
+    if (printer == nullptr) {
+        printer = new QPrinter(QPrinter::HighResolution);
+        printer->setOutputFormat(QPrinter::PdfFormat);
+    }
+    return printer;
+}
+
+QPageSetupDialog* KMyMoneyPDFPrinter::dialog(const QString& title)
+{
+    static QPageSetupDialog* dialog(nullptr);
+
+    if (dialog == nullptr) {
+        dialog = new QPageSetupDialog(instance());
+    }
+    dialog->setWindowTitle(title);
+    return dialog;
+}
+
+QPrinter* KMyMoneyPDFPrinter::startPrint(const QString& title)
+{
+    QPrinter* printer = instance();
+
+    if (dialog(title)->exec() != QDialog::Accepted)
+        return nullptr;
+    return printer;
+}
+
+void KMyMoneyPDFPrinter::cleanup()
 {
     auto printer = instance();
     auto dlg = dialog();
