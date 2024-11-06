@@ -79,7 +79,7 @@ add_library(views STATIC ${libviews_a_SOURCES})
 # This should be replaced by virtual methods in a pure abstract object.
 target_link_libraries( views PUBLIC
   newaccountwizard
-  KF5::TextWidgets
+  KF${QT_MAJOR_VERSION}::TextWidgets
   Qt::PrintSupport
   kmm_base_dialogs
   kmm_mymoney # needed to load payeeIdentifier

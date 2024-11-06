@@ -68,10 +68,10 @@ generate_export_header(kmm_base_dialogs BASE_NAME kmm_base_dialogs)
 
 target_link_libraries(kmm_base_dialogs
   PUBLIC
-    KF5::ItemViews
-    KF5::I18n
-    KF5::TextWidgets
-    KF5::Completion
+    KF${QT_MAJOR_VERSION}::ItemViews
+    KF${QT_MAJOR_VERSION}::I18n
+    KF${QT_MAJOR_VERSION}::TextWidgets
+    KF${QT_MAJOR_VERSION}::Completion
     Qt::Widgets
     Alkimia::alkimia
     kmm_mymoney
@@ -80,7 +80,7 @@ target_link_libraries(kmm_base_dialogs
     kmm_utils_platformtools
     kmm_yesno
   PRIVATE
-    KF5::KIOGui
+    KF${QT_MAJOR_VERSION}::KIOGui
 )
 
 target_link_libraries(kmm_base_dialogs LINK_PUBLIC
@@ -117,10 +117,10 @@ generate_export_header(kmm_extended_dialogs BASE_NAME kmm_extended_dialogs)
 
 target_link_libraries(kmm_extended_dialogs
   PUBLIC
-    KF5::ItemViews
-    KF5::I18n
-    KF5::TextWidgets
-    KF5::Completion
+    KF${QT_MAJOR_VERSION}::ItemViews
+    KF${QT_MAJOR_VERSION}::I18n
+    KF${QT_MAJOR_VERSION}::TextWidgets
+    KF${QT_MAJOR_VERSION}::Completion
     Qt::Widgets
     Alkimia::alkimia
     kmm_mymoney
@@ -130,7 +130,7 @@ target_link_libraries(kmm_extended_dialogs
     kmm_webconnect
     kmm_widgets
   PRIVATE
-    KF5::KIOGui
+    KF${QT_MAJOR_VERSION}::KIOGui
 )
 
 target_link_libraries(kmm_extended_dialogs LINK_PUBLIC

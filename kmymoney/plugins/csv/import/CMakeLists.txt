@@ -5,7 +5,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/csvimporter.json.cmake ${CMAKE_CURREN
 
 ########### next target ###############
 add_library(csvimporter_settings_static STATIC ${CMAKE_CURRENT_BINARY_DIR}/pluginsettings.cpp)
-target_link_libraries(csvimporter_settings_static KF5::ConfigGui)
+target_link_libraries(csvimporter_settings_static KF${QT_MAJOR_VERSION}::ConfigGui)
 kconfig_add_kcfg_files(csvimporter_settings_static pluginsettings.kcfgc)
 
 set(csvimporter_PART_SRCS
@@ -61,7 +61,7 @@ kmymoney_add_plugin_kcm(kcm_csvimporter SOURCES ${kcm_csvimporter_PART_SRCS})
 
 target_link_libraries(kcm_csvimporter
                       csvimporter_settings_static
-                      KF5::I18n
-                      KF5::CoreAddons
-                      KF5::ConfigWidgets
+                      KF${QT_MAJOR_VERSION}::I18n
+                      KF${QT_MAJOR_VERSION}::CoreAddons
+                      KF${QT_MAJOR_VERSION}::ConfigWidgets
                       )

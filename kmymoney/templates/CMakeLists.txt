@@ -38,10 +38,10 @@ qt_add_resources(kmm_templates_SOURCES templates.qrc)
 add_library(kmm_templates ${kmm_templates_SOURCES})
 
 #   kmm_settings
-#  KF5::KIOWidgets
-#  KF5::Completion
-#  KF5::Notifications
-#  KF5::ItemViews
+#  KF${QT_MAJOR_VERSION}::KIOWidgets
+#  KF${QT_MAJOR_VERSION}::Completion
+#  KF${QT_MAJOR_VERSION}::Notifications
+#  KF${QT_MAJOR_VERSION}::ItemViews
 #  Qt::Gui
 #  Qt::Core
 #  Alkimia::alkimia
@@ -49,8 +49,8 @@ add_library(kmm_templates ${kmm_templates_SOURCES})
 
 
 target_link_libraries(kmm_templates PUBLIC
-  KF5::TextWidgets
-  KF5::I18n
+  KF${QT_MAJOR_VERSION}::TextWidgets
+  KF${QT_MAJOR_VERSION}::I18n
   kmm_models
   kmm_widgets
 )

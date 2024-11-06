@@ -17,8 +17,8 @@ add_library(kmm_wizard ${kmm_wizard_SOURCES})
 generate_export_header(kmm_wizard BASE_NAME kmm_wizard)
 
 target_link_libraries(kmm_wizard
-    KF5::XmlGui
-    KF5::TextWidgets
+    KF${QT_MAJOR_VERSION}::XmlGui
+    KF${QT_MAJOR_VERSION}::TextWidgets
     kmm_icons
     kmm_base_widgets
     )

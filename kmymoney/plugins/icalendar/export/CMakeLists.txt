@@ -5,7 +5,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/icalendarexporter.json.cmake
 )
 
 add_library(icalendar_settings_static STATIC ${CMAKE_CURRENT_BINARY_DIR}/icalendarsettings.cpp)
-target_link_libraries(icalendar_settings_static KF5::ConfigGui)
+target_link_libraries(icalendar_settings_static KF${QT_MAJOR_VERSION}::ConfigGui)
 kconfig_add_kcfg_files(icalendar_settings_static icalendarsettings.kcfgc)
 
 set(icalendarexporter_PART_SRCS
@@ -22,7 +22,7 @@ kmymoney_add_plugin(icalendarexporter SOURCES ${icalendarexporter_PART_SRCS})
 target_include_directories(icalendarexporter PRIVATE ${LibIcal_INCLUDE_DIRS})
 target_link_libraries(icalendarexporter
   icalendar_settings_static
-  KF5::KIOWidgets
+  KF${QT_MAJOR_VERSION}::KIOWidgets
   kmm_mymoney
   kmm_plugin
   ${LibIcal_LIBRARIES}
@@ -41,10 +41,10 @@ kmymoney_add_plugin_kcm(kcm_icalendarexporter SOURCES ${kcm_icalendarexporter_PA
 
 target_link_libraries(kcm_icalendarexporter
   icalendar_settings_static
-  KF5::I18n
-  KF5::ConfigWidgets
-  KF5::KIOWidgets
-  KF5::Completion
+  KF${QT_MAJOR_VERSION}::I18n
+  KF${QT_MAJOR_VERSION}::ConfigWidgets
+  KF${QT_MAJOR_VERSION}::KIOWidgets
+  KF${QT_MAJOR_VERSION}::Completion
   Qt::Widgets
   Qt::Gui
 )

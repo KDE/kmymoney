@@ -23,7 +23,7 @@ target_link_libraries(kbanking_widgets
   Qt::Widgets
   Qt::QuickWidgets
   aqbanking::aqbanking
-  KF5::I18n
-  KF5::ConfigCore
-  KF5::ConfigGui
+  KF${QT_MAJOR_VERSION}::I18n
+  KF${QT_MAJOR_VERSION}::ConfigCore
+  KF${QT_MAJOR_VERSION}::ConfigGui
 )

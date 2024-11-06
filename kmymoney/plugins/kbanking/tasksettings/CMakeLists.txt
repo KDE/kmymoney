@@ -8,6 +8,6 @@ target_link_libraries( kbanking_tasksettings
   kmm_utils_validators
   Qt::Gui
   Qt::Xml
-  KF5::I18n
+  KF${QT_MAJOR_VERSION}::I18n
   konlinetasks_sepa_interface
 )

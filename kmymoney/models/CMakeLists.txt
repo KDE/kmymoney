@@ -30,7 +30,7 @@ target_link_libraries(kmm_models PUBLIC
     kmm_settings
     kmymoney_common
     onlinetask_interfaces
-    KF5::ItemModels
+    KF${QT_MAJOR_VERSION}::ItemModels
 )
 set_target_properties(kmm_models PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR})
 

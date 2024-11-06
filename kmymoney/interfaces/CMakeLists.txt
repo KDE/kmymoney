@@ -24,10 +24,10 @@ generate_export_header(kmm_plugin BASE_NAME kmm_plugin)
 target_link_libraries(kmm_plugin
   PUBLIC
     Qt::Core
-    KF5::XmlGui
+    KF${QT_MAJOR_VERSION}::XmlGui
   PRIVATE
-    KF5::KCMUtils
-    KF5::KIOWidgets
+    KF${QT_MAJOR_VERSION}::KCMUtils
+    KF${QT_MAJOR_VERSION}::KIOWidgets
     Qt::Gui
     Qt::Widgets
   INTERFACE

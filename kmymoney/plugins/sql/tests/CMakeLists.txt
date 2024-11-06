@@ -11,7 +11,7 @@ kde_target_enable_exceptions(sqlstoragestatic PUBLIC)
 target_link_libraries(sqlstoragestatic
 PUBLIC
   Qt::Sql
-  KF5::CoreAddons
+  KF${QT_MAJOR_VERSION}::CoreAddons
   kmm_plugin
   kmm_widgets
   kmm_utils_platformtools

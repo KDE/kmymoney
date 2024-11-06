@@ -23,6 +23,6 @@ target_link_libraries(onlinejoboutboxview
     kmm_widgets
     kmm_base_widgets
     onlinetask_interfaces
-    KF5::TextWidgets
+    KF${QT_MAJOR_VERSION}::TextWidgets
     kmm_menus
 )

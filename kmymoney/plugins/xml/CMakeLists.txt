@@ -18,9 +18,9 @@ target_link_libraries(xmlstorage
     kmm_plugin
   PRIVATE
     Qt::Xml
-    KF5::Archive
-    KF5::I18n
-    KF5::CoreAddons
+    KF${QT_MAJOR_VERSION}::Archive
+    KF${QT_MAJOR_VERSION}::I18n
+    KF${QT_MAJOR_VERSION}::CoreAddons
     $<$<BOOL:${ENABLE_GPG}>:kmm_gpgfile>
     kmymoney_common
     kmm_mymoney
@@ -34,9 +34,9 @@ target_link_libraries(xmlstorage_static
   PUBLIC
     kmm_plugin
     Qt::Xml
-    KF5::Archive
-    KF5::I18n
-    KF5::CoreAddons
+    KF${QT_MAJOR_VERSION}::Archive
+    KF${QT_MAJOR_VERSION}::I18n
+    KF${QT_MAJOR_VERSION}::CoreAddons
     $<$<BOOL:${ENABLE_GPG}>:kmm_gpgfile>
     kmymoney_common
     kmm_mymoney
@@ -66,10 +66,10 @@ kmymoney_add_plugin_kcm(kcm_xmlstorage SOURCES ${kcm_xmlstorage_PART_SRCS})
 
 target_link_libraries(kcm_xmlstorage
   PRIVATE
-    KF5::I18n
-    KF5::CoreAddons
-    KF5::ConfigWidgets
-    KF5::Completion
+    KF${QT_MAJOR_VERSION}::I18n
+    KF${QT_MAJOR_VERSION}::CoreAddons
+    KF${QT_MAJOR_VERSION}::ConfigWidgets
+    KF${QT_MAJOR_VERSION}::Completion
     $<$<BOOL:${ENABLE_GPG}>:kmm_gpgfile>
     kmm_settings
 )

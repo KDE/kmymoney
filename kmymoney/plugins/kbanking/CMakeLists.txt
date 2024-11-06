@@ -49,8 +49,8 @@ target_link_libraries(kbanking
                       kmm_mymoney
                       kmm_base_widgets
                       kmm_plugin
-                      KF5::ConfigCore
-                      KF5::ConfigGui
+                      KF${QT_MAJOR_VERSION}::ConfigCore
+                      KF${QT_MAJOR_VERSION}::ConfigGui
                       Qt::Core
                       Alkimia::alkimia
                       gwenhywfar::core

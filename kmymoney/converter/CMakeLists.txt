@@ -15,17 +15,17 @@ add_library(converter STATIC ${libconverter_a_SOURCES})
 # TODO: clean dependencies
 target_link_libraries(converter
   PUBLIC
-    KF5::Service
-    KF5::XmlGui
-    KF5::Completion
-    KF5::TextWidgets
-    KF5::WidgetsAddons
+    KF${QT_MAJOR_VERSION}::Service
+    KF${QT_MAJOR_VERSION}::XmlGui
+    KF${QT_MAJOR_VERSION}::Completion
+    KF${QT_MAJOR_VERSION}::TextWidgets
+    KF${QT_MAJOR_VERSION}::WidgetsAddons
     Alkimia::alkimia
-    KF5::KIOWidgets
+    KF${QT_MAJOR_VERSION}::KIOWidgets
     kmm_csvimportercore
     kmm_base_dialogs
   PRIVATE
-    KF5::I18n
+    KF${QT_MAJOR_VERSION}::I18n
     kmymoney_common
     newaccountwizard
 )

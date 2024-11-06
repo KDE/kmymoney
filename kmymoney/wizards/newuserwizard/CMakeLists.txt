@@ -26,11 +26,11 @@ add_library(newuserwizard STATIC ${libnewuserwizard_a_SOURCES})
 
 # TODO: clean dependencies
 target_link_libraries(newuserwizard
-    KF5::ConfigGui
-    KF5::KIOWidgets
-    KF5::TextWidgets
-    KF5::Completion
-    KF5::ConfigWidgets
+    KF${QT_MAJOR_VERSION}::ConfigGui
+    KF${QT_MAJOR_VERSION}::KIOWidgets
+    KF${QT_MAJOR_VERSION}::TextWidgets
+    KF${QT_MAJOR_VERSION}::Completion
+    KF${QT_MAJOR_VERSION}::ConfigWidgets
     Qt::Widgets
     Qt::Xml
     Alkimia::alkimia

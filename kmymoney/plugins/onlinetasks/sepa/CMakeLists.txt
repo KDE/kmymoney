@@ -16,11 +16,11 @@ target_link_libraries(konlinetasks_sepa
   PUBLIC
     konlinetasks_sepa_interface
   PRIVATE
-    KF5::I18n
-    KF5::Service
+    KF${QT_MAJOR_VERSION}::I18n
+    KF${QT_MAJOR_VERSION}::Service
     kmm_settings
     kmm_utils_validators
-    KF5::ItemModels
+    KF${QT_MAJOR_VERSION}::ItemModels
 )
 
 add_library(konlinetasks_sepa_interface INTERFACE)

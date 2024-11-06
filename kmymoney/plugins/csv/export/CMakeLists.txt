@@ -22,8 +22,8 @@ target_link_libraries(csvexporter
     kmm_mymoney
     Alkimia::alkimia
   PRIVATE
-    KF5::Completion
-    KF5::KIOWidgets
+    KF${QT_MAJOR_VERSION}::Completion
+    KF${QT_MAJOR_VERSION}::KIOWidgets
     kmm_plugin
     kmm_base_widgets
 )

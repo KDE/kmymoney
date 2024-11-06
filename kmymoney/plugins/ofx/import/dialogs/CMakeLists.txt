@@ -17,11 +17,11 @@ target_link_libraries(
         ofximporter_dialogs
         kmm_widgets
         libofx::libofx
-        KF5::WidgetsAddons
-        KF5::I18n
-        KF5::CoreAddons
-        KF5::KIOCore
-        KF5::KIOWidgets
+        KF${QT_MAJOR_VERSION}::WidgetsAddons
+        KF${QT_MAJOR_VERSION}::I18n
+        KF${QT_MAJOR_VERSION}::CoreAddons
+        KF${QT_MAJOR_VERSION}::KIOCore
+        KF${QT_MAJOR_VERSION}::KIOWidgets
         Qt::Widgets
         Qt::Xml
         kmm_keychain

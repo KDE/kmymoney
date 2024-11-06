@@ -19,7 +19,7 @@ target_link_libraries (
   PRIVATE
   Qt::Concurrent
   Qt::Widgets
-  KF5::WidgetsAddons
-  KF5::I18n
+  KF${QT_MAJOR_VERSION}::WidgetsAddons
+  KF${QT_MAJOR_VERSION}::I18n
   Alkimia::alkimia
   )

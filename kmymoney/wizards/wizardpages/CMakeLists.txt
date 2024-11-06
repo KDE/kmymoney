@@ -18,9 +18,9 @@ add_library(wizardpages STATIC
 
 # TODO: fix widgets library public dependencies
 target_link_libraries(wizardpages
-    KF5::KIOWidgets
-    KF5::TextWidgets
-    KF5::ItemModels
+    KF${QT_MAJOR_VERSION}::KIOWidgets
+    KF${QT_MAJOR_VERSION}::TextWidgets
+    KF${QT_MAJOR_VERSION}::ItemModels
     Alkimia::alkimia
     Qt::Xml
 )

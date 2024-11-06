@@ -119,15 +119,15 @@ target_link_libraries(kmm_mymoney
                       Qt::Xml
                       Qt::Core
                       Qt::Gui
-                      KF5::Service
-                      KF5::I18n
-                      KF5::ItemModels
-                      KF5::ConfigCore
+                      KF${QT_MAJOR_VERSION}::Service
+                      KF${QT_MAJOR_VERSION}::I18n
+                      KF${QT_MAJOR_VERSION}::ItemModels
+                      KF${QT_MAJOR_VERSION}::ConfigCore
                       Alkimia::alkimia
                       kmm_payeeidentifier
                       kmm_plugin
                       # TODO: fix this
-                      KF5::XmlGui
+                      KF${QT_MAJOR_VERSION}::XmlGui
                       PRIVATE
                       kmm_keychain
                       onlinetask_interfaces
@@ -135,7 +135,7 @@ target_link_libraries(kmm_mymoney
 )
 
 if(ENABLE_ADDRESSBOOK)
-target_link_libraries(kmm_mymoney PUBLIC ${PIMPREFIX}::IdentityManagement ${PIMPREFIX}::AkonadiCore KF5::Contacts)
+target_link_libraries(kmm_mymoney PUBLIC ${PIMPREFIX}::IdentityManagement ${PIMPREFIX}::AkonadiCore KF${QT_MAJOR_VERSION}::Contacts)
 endif()
 
 set_target_properties(kmm_mymoney PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR})

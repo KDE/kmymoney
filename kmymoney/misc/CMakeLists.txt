@@ -97,16 +97,16 @@ target_link_libraries( kmm_webconnect
   PUBLIC
     Qt::Core
     Qt::Network
-    KF5::ConfigCore
-    KF5::Service
-    KF5::Codecs
-    KF5::KIOCore
-    KF5::KIOWidgets
+    KF${QT_MAJOR_VERSION}::ConfigCore
+    KF${QT_MAJOR_VERSION}::Service
+    KF${QT_MAJOR_VERSION}::Codecs
+    KF${QT_MAJOR_VERSION}::KIOCore
+    KF${QT_MAJOR_VERSION}::KIOWidgets
     Alkimia::alkimia
     kmm_mymoney
     kmm_csvimportercore
   PRIVATE
-    KF5::I18n
+    KF${QT_MAJOR_VERSION}::I18n
 )
 
 target_link_libraries( kmm_keychain
@@ -144,8 +144,8 @@ target_link_libraries( kmm_selections
 
 target_link_libraries(kmm_yesno
   PRIVATE
-    KF5::I18n
-    KF5::WidgetsAddons
+    KF${QT_MAJOR_VERSION}::I18n
+    KF${QT_MAJOR_VERSION}::WidgetsAddons
 )
 
 target_link_libraries(kmm_menuactionexchanger

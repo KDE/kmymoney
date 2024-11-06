@@ -133,9 +133,9 @@ ki18n_wrap_ui(kmm_widgets_SOURCES
 add_library(kmm_base_widgets ${kmm_base_widgets_SOURCES})
 
 target_link_libraries(kmm_base_widgets PUBLIC
-  KF5::Completion
-  KF5::Notifications
-  KF5::TextWidgets
+  KF${QT_MAJOR_VERSION}::Completion
+  KF${QT_MAJOR_VERSION}::Notifications
+  KF${QT_MAJOR_VERSION}::TextWidgets
   Alkimia::alkimia
   kmm_selections
   kmm_mymoney
@@ -158,17 +158,17 @@ generate_export_header(kmm_base_widgets BASE_NAME kmm_base_widgets)
 add_library(kmm_widgets ${kmm_widgets_SOURCES})
 
 target_link_libraries(kmm_widgets PUBLIC
-  KF5::TextWidgets
-  KF5::KIOWidgets
-  KF5::Completion
-  KF5::Notifications
-  KF5::ItemViews
-  KF5::I18n
-  KF5::XmlGui
-  KF5::ConfigWidgets
-  KF5::ConfigCore
-  KF5::ItemModels
-  KF5::Service
+  KF${QT_MAJOR_VERSION}::TextWidgets
+  KF${QT_MAJOR_VERSION}::KIOWidgets
+  KF${QT_MAJOR_VERSION}::Completion
+  KF${QT_MAJOR_VERSION}::Notifications
+  KF${QT_MAJOR_VERSION}::ItemViews
+  KF${QT_MAJOR_VERSION}::I18n
+  KF${QT_MAJOR_VERSION}::XmlGui
+  KF${QT_MAJOR_VERSION}::ConfigWidgets
+  KF${QT_MAJOR_VERSION}::ConfigCore
+  KF${QT_MAJOR_VERSION}::ItemModels
+  KF${QT_MAJOR_VERSION}::Service
   Qt::Gui
   Qt::Core
   Qt::Widgets

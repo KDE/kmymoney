@@ -10,10 +10,10 @@ add_library(interfaces STATIC ${libinterfaces_a_SOURCES})
 
 # TODO: fix dependencies
 target_link_libraries(interfaces
-    KF5::Service
-    KF5::XmlGui
+    KF${QT_MAJOR_VERSION}::Service
+    KF${QT_MAJOR_VERSION}::XmlGui
     Alkimia::alkimia
     Qt::Xml
-    KF5::I18n
+    KF${QT_MAJOR_VERSION}::I18n
     onlinetask_interfaces
 )

@@ -2,7 +2,7 @@
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/checkprinting.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/checkprinting.json @ONLY)
 
 add_library(checkprinting_settings_static STATIC ${CMAKE_CURRENT_BINARY_DIR}/checkprintingsettings.cpp)
-target_link_libraries(checkprinting_settings_static KF5::ConfigGui)
+target_link_libraries(checkprinting_settings_static KF${QT_MAJOR_VERSION}::ConfigGui)
 kconfig_add_kcfg_files(checkprinting_settings_static checkprintingsettings.kcfgc)
 
 set(checkprinting_PART_SRCS
@@ -17,7 +17,7 @@ kmymoney_add_plugin(checkprinting SOURCES ${checkprinting_PART_SRCS})
 
 target_link_libraries(checkprinting
   Qt::PrintSupport
-  KF5::I18n
+  KF${QT_MAJOR_VERSION}::I18n
   checkprinting_settings_static
   kmm_mymoney
   kmm_plugin
@@ -41,11 +41,11 @@ target_link_libraries(
                       checkprinting_settings_static
                       kmm_url
                       Qt::PrintSupport
-                      KF5::I18n
-                      KF5::ConfigWidgets
-                      KF5::Completion
-                      KF5::KIOWidgets
-                      KF5::CoreAddons
+                      KF${QT_MAJOR_VERSION}::I18n
+                      KF${QT_MAJOR_VERSION}::ConfigWidgets
+                      KF${QT_MAJOR_VERSION}::Completion
+                      KF${QT_MAJOR_VERSION}::KIOWidgets
+                      KF${QT_MAJOR_VERSION}::CoreAddons
                       )
 
 file(GLOB TEMPLATE_FILES

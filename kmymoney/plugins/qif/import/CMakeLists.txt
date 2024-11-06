@@ -23,8 +23,8 @@ target_link_libraries(qifimporter
   PUBLIC
     kmm_plugin
   PRIVATE
-    KF5::Completion
-    KF5::KIOWidgets
+    KF${QT_MAJOR_VERSION}::Completion
+    KF${QT_MAJOR_VERSION}::KIOWidgets
     Alkimia::alkimia
     kmm_settings
 )

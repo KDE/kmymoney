@@ -33,10 +33,10 @@ kmymoney_add_plugin(reportsview SOURCES ${reportsview_SOURCES})
 target_link_libraries(reportsview
   PUBLIC
     kmm_plugin
-    KF5::TextWidgets
-    KF5::KIOCore
-    KF5::KIOFileWidgets
-    KF5::KIOWidgets
+    KF${QT_MAJOR_VERSION}::TextWidgets
+    KF${QT_MAJOR_VERSION}::KIOCore
+    KF${QT_MAJOR_VERSION}::KIOFileWidgets
+    KF${QT_MAJOR_VERSION}::KIOWidgets
     reports
     kmm_widgets
     kmm_menus
@@ -57,10 +57,10 @@ ki18n_wrap_ui(kcm_reportsview_PART_SRCS reportsviewsettings.ui)
 kmymoney_add_plugin_kcm(kcm_reportsview SOURCES ${kcm_reportsview_PART_SRCS})
 
 target_link_libraries(kcm_reportsview
-                      KF5::I18n
-                      KF5::ConfigWidgets
-                      KF5::Completion
-                      KF5::KIOWidgets
-                      KF5::CoreAddons
+                      KF${QT_MAJOR_VERSION}::I18n
+                      KF${QT_MAJOR_VERSION}::ConfigWidgets
+                      KF${QT_MAJOR_VERSION}::Completion
+                      KF${QT_MAJOR_VERSION}::KIOWidgets
+                      KF${QT_MAJOR_VERSION}::CoreAddons
                       kmm_settings
                       )

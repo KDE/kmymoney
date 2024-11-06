@@ -20,10 +20,10 @@ ki18n_wrap_ui(libendingbalancedlg_a_SOURCES ${libendingbalancedlg_a_UI} )
 
 add_library(endingbalancedlg STATIC ${libendingbalancedlg_a_SOURCES})
 target_link_libraries(endingbalancedlg
-        KF5::ConfigWidgets
-        KF5::WidgetsAddons
-        KF5::I18n
-        KF5::Completion
+        KF${QT_MAJOR_VERSION}::ConfigWidgets
+        KF${QT_MAJOR_VERSION}::WidgetsAddons
+        KF${QT_MAJOR_VERSION}::I18n
+        KF${QT_MAJOR_VERSION}::Completion
         Qt::Widgets
         Qt::Xml
         Alkimia::alkimia

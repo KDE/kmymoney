@@ -9,7 +9,7 @@ add_library(mymoneystoragexml STATIC ${mymoneystoragexml_SOURCES})
 target_link_libraries(mymoneystoragexml
   PUBLIC
     Qt::Xml
-    KF5::I18n
+    KF${QT_MAJOR_VERSION}::I18n
     onlinetask_interfaces
     kmm_mymoney
   PRIVATE

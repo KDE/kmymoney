@@ -65,11 +65,11 @@ add_library(kmymoney_common STATIC ${kmymoney_common_SRCS})
 target_link_libraries(kmymoney_common
   PUBLIC
     Qt::Core
-    KF5::ConfigGui
-    KF5::WidgetsAddons
-    KF5::KIOCore
-    KF5::KIOFileWidgets
-    KF5::KIOWidgets
+    KF${QT_MAJOR_VERSION}::ConfigGui
+    KF${QT_MAJOR_VERSION}::WidgetsAddons
+    KF${QT_MAJOR_VERSION}::KIOCore
+    KF${QT_MAJOR_VERSION}::KIOFileWidgets
+    KF${QT_MAJOR_VERSION}::KIOWidgets
     Alkimia::alkimia
     kmm_mymoney
     kmm_webconnect
@@ -79,7 +79,7 @@ target_link_libraries(kmymoney_common
     kmm_menuactionexchanger
     $<$<BOOL:${ENABLE_ADDRESSBOOK}>:${PIMPREFIX}::AkonadiCore>
     PRIVATE
-    KF5::I18n
+    KF${QT_MAJOR_VERSION}::I18n
     kmm_settings
 )
 
@@ -166,13 +166,13 @@ target_link_libraries(kmymoney
   interfaces
   kmm_plugin
   Qt::Core
-  KF5::ConfigGui
-  KF5::WidgetsAddons
-  KF5::CoreAddons
+  KF${QT_MAJOR_VERSION}::ConfigGui
+  KF${QT_MAJOR_VERSION}::WidgetsAddons
+  KF${QT_MAJOR_VERSION}::CoreAddons
   kmm_templates
   $<$<BOOL:${USE_MODELTEST}>:Qt::Test>
-  $<$<BOOL:${ENABLE_HOLIDAYS}>:KF5::Holidays>
-  $<$<BOOL:${ENABLE_ACTIVITIES}>:KF5::Activities>
+  $<$<BOOL:${ENABLE_HOLIDAYS}>:KF${QT_MAJOR_VERSION}::Holidays>
+  $<$<BOOL:${ENABLE_ACTIVITIES}>:KF${QT_MAJOR_VERSION}::Activities>
   PRIVATE
     kmm_selections
     $<$<BOOL:${ENABLE_SQLCIPHER}>:PkgConfig::SQLCIPHER>

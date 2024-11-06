@@ -25,8 +25,8 @@ target_link_libraries(gncimporter
     kmm_plugin
   PRIVATE
     kmm_models
-    KF5::Completion
-    KF5::Archive
+    KF${QT_MAJOR_VERSION}::Completion
+    KF${QT_MAJOR_VERSION}::Archive
     Alkimia::alkimia
     kmm_yesno
 )

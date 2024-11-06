@@ -29,18 +29,18 @@ add_library(settings STATIC ${libsettings_a_SOURCES})
 
 # TODO: cleanup dependencies
 target_link_libraries(settings PUBLIC
-  KF5::Completion
-  KF5::KIOWidgets
-  KF5::TextWidgets
-  KF5::I18n
-  KF5::Completion
-  KF5::KCMUtils
-  KF5::ItemViews
+  KF${QT_MAJOR_VERSION}::Completion
+  KF${QT_MAJOR_VERSION}::KIOWidgets
+  KF${QT_MAJOR_VERSION}::TextWidgets
+  KF${QT_MAJOR_VERSION}::I18n
+  KF${QT_MAJOR_VERSION}::Completion
+  KF${QT_MAJOR_VERSION}::KCMUtils
+  KF${QT_MAJOR_VERSION}::ItemViews
   Alkimia::alkimia
 )
 
 if (ENABLE_HOLIDAYS)
-  target_link_libraries(settings PUBLIC KF5::Holidays)
+  target_link_libraries(settings PUBLIC KF${QT_MAJOR_VERSION}::Holidays)
 endif()
 
 add_dependencies(settings kmm_widgets kmm_settings)

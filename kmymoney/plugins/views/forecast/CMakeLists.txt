@@ -1,7 +1,7 @@
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/forecastview.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/forecastview.json @ONLY)
 
 add_library(forecast_settings_static STATIC ${CMAKE_CURRENT_BINARY_DIR}/forecastviewsettings.cpp)
-target_link_libraries(forecast_settings_static KF5::ConfigGui)
+target_link_libraries(forecast_settings_static KF${QT_MAJOR_VERSION}::ConfigGui)
 kconfig_add_kcfg_files(forecast_settings_static forecastviewsettings.kcfgc)
 
 set(forecastview_SOURCES
@@ -21,7 +21,7 @@ target_link_libraries(forecastview
   PUBLIC
     forecast_settings_static
     kmm_plugin
-    KF5::TextWidgets
+    KF${QT_MAJOR_VERSION}::TextWidgets
     kmm_widgets
     kmymoney_common
 )
@@ -38,10 +38,10 @@ kmymoney_add_plugin_kcm(kcm_forecastview SOURCES ${kcm_forecastview_PART_SRCS})
 
 target_link_libraries(kcm_forecastview
                       forecast_settings_static
-                      KF5::I18n
-                      KF5::ConfigWidgets
-                      KF5::Completion
-                      KF5::KIOWidgets
-                      KF5::CoreAddons
+                      KF${QT_MAJOR_VERSION}::I18n
+                      KF${QT_MAJOR_VERSION}::ConfigWidgets
+                      KF${QT_MAJOR_VERSION}::Completion
+                      KF${QT_MAJOR_VERSION}::KIOWidgets
+                      KF${QT_MAJOR_VERSION}::CoreAddons
                       kmm_settings
                       )
