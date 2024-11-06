@@ -17,7 +17,7 @@ endif()
 
 ki18n_wrap_ui(sqlstorage_SOURCES kselectdatabasedlg.ui kgeneratesqldlg.ui)
 
-qt5_add_resources(sqlstorage_SOURCES sqlstorage.qrc)
+qt_add_resources(sqlstorage_SOURCES sqlstorage.qrc)
 
 kmymoney_add_plugin(sqlstorage SOURCES ${sqlstorage_SOURCES})
 

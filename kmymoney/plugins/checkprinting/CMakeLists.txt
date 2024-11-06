@@ -11,7 +11,7 @@ set(checkprinting_PART_SRCS
     )
 set_property(SOURCE checkprinting.cpp APPEND PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/checkprintingsettings.h)
 
-qt5_add_resources(checkprinting_PART_SRCS checkprinting.qrc)
+qt_add_resources(checkprinting_PART_SRCS checkprinting.qrc)
 
 kmymoney_add_plugin(checkprinting SOURCES ${checkprinting_PART_SRCS})
 

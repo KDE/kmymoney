@@ -28,7 +28,7 @@ string(APPEND qrcContents "  </qresource>\n</RCC>\n")
 file(WRITE "kmm_icons.qrc" "${qrcContents}")
 
 # add generated file to resources
-qt5_add_resources(icons_SOURCES kmm_icons.qrc)
+qt_add_resources(icons_SOURCES kmm_icons.qrc)
 
 add_library(kmm_icons ${icons_SOURCES})
 

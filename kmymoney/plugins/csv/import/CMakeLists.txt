@@ -20,7 +20,7 @@ set(csvimporter_PART_SRCS
   currenciesdlg.cpp
 )
 
-qt5_add_resources(csvimporter_PART_SRCS csvimporter.qrc)
+qt_add_resources(csvimporter_PART_SRCS csvimporter.qrc)
 
 ki18n_wrap_ui(csvimporter_PART_SRCS
   csvwizard.ui

@@ -13,7 +13,7 @@ set(woob_PART_SRCS
         woob.cpp
 )
 
-qt5_add_resources(woob_PART_SRCS woob.qrc)
+qt_add_resources(woob_PART_SRCS woob.qrc)
 
 kmymoney_add_plugin(woob SOURCES ${woob_PART_SRCS})
 

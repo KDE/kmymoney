@@ -10,13 +10,13 @@
 /* No external component */
 
 #cmakedefine ENABLE_HOLIDAYS 1
-/* Part of KF5 */
+/* Part of KF */
 
 #cmakedefine ENABLE_ADDRESSBOOK 1
 #define ENABLE_ADDRESSBOOK_VERSION "@ADDRESSBOOK_VERSION@"
 
 #cmakedefine ENABLE_ACTIVITIES 1
-/* Part of KF5 */
+/* Part of KF */
 
 #cmakedefine ENABLE_KBANKING 1
 #define ENABLE_AQBANKING_VERSION "@aqbanking_VERSION@"

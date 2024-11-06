@@ -15,7 +15,7 @@ set(icalendarexporter_PART_SRCS
 set_property(SOURCE schedulestoicalendar.cpp APPEND PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/icalendarsettings.h)
 set_property(SOURCE icalendarexporter.cpp APPEND PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/icalendarsettings.h)
 
-qt5_add_resources(icalendarexporter_PART_SRCS icalendarexporter.qrc)
+qt_add_resources(icalendarexporter_PART_SRCS icalendarexporter.qrc)
 
 kmymoney_add_plugin(icalendarexporter SOURCES ${icalendarexporter_PART_SRCS})
 

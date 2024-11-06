@@ -9,7 +9,7 @@ set(csvexporter_PART_SRCS
   csvexportdlg.cpp
 )
 
-qt5_add_resources(csvexporter_PART_SRCS csvexporter.qrc)
+qt_add_resources(csvexporter_PART_SRCS csvexporter.qrc)
 
 ki18n_wrap_ui(csvexporter_PART_SRCS
   csvexportdlg.ui

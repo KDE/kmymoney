@@ -12,7 +12,7 @@ ki18n_wrap_ui(onlinejoboutboxview_SOURCES
   konlinetransferform.ui
   )
 
-qt5_add_resources(onlinejoboutboxview_SOURCES onlinejoboutboxview.qrc)
+qt_add_resources(onlinejoboutboxview_SOURCES onlinejoboutboxview.qrc)
 
 kmymoney_add_plugin(onlinejoboutboxview SOURCES ${onlinejoboutboxview_SOURCES})
 

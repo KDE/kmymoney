@@ -7,9 +7,11 @@ cmake_minimum_required(VERSION 3.16)
 
 option(BUILD_STATIC_PLUGINS "Build the plugins statically" OFF)
 
+set(KF6_MIN_VERSION 6.1)
 set(KF5_MIN_VERSION 5.90)
-set(QT_MIN_VERSION 5.15.2)
-set(KDE_COMPILERSETTINGS_LEVEL 5.82)
+set(QT6_MIN_VERSION 6.7)
+set(QT5_MIN_VERSION 5.15.2)
+#set(KDE_COMPILERSETTINGS_LEVEL 5.82)
 
 if (NOT BUILD_STATIC_PLUGINS)
     set(AKONADI_MIN_VERSION 5.14.2)
@@ -78,9 +80,13 @@ endif()
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 set(APPLE_SUPPRESS_X11_WARNING TRUE)
-find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
+find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
+# adds option BUILD_WITH_QT6
+include(QtVersionOption OPTIONAL)
+set(KF_MIN_VERSION ${KF${QT_MAJOR_VERSION}_MIN_VERSION})
+set(QT_MIN_VERSION ${QT${QT_MAJOR_VERSION}_MIN_VERSION})
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 
@@ -134,13 +140,13 @@ endif()
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Widgets Svg Xml Test PrintSupport)
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} OPTIONAL_COMPONENTS Sql Concurrent QuickWidgets)
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service XmlGui TextWidgets Notifications KIO)
+find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service XmlGui TextWidgets Notifications KIO)
 
-# For KF5 < 5.100 we need to fix a few method names that
+# For KF < 5.100 we need to fix a few method names that
 # have been deprecated but are not available before that version.
-# Once the KF5_MIN_VERSION of this project is >= 5.100 this
+# Once the KF_MIN_VERSION of this project is >= 5.100 this
 # whole block can be removed
-if (${KF5_MIN_VERSION} VERSION_LESS "5.100")
+if (${KF_MIN_VERSION} VERSION_LESS "5.100")
     if (${KF5_VERSION} VERSION_LESS "5.100")
         add_definitions(
             -DquestionTwoActions=questionYesNo
@@ -151,17 +157,17 @@ if (${KF5_MIN_VERSION} VERSION_LESS "5.100")
             -DSecondaryAction=No
         )
     endif()
-else()
+elseif(QT_MAJOR_VERSION VERSION_LESS "6.0.0")
     message(FATAL_ERROR "Remove the above logic from CMakeLists.txt since it is not needed anymore")
 endif()
 
-find_package(KF5 ${KF5_MIN_VERSION} OPTIONAL_COMPONENTS DocTools Holidays Contacts Activities)
+find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} OPTIONAL_COMPONENTS DocTools Holidays Contacts Activities)
 if (DEFINED AKONADI_MIN_VERSION)
   # Akonadi 23.04 moved to KPim5 prefix, deprecating KF5
-  set(PIMPREFIX KPim5)
+  set(PIMPREFIX KPim${QT_MAJOR_VERSION})
   find_package(${PIMPREFIX}Akonadi ${AKONADI_MIN_VERSION} QUIET)
   if(NOT ${PIMPREFIX}Akonadi_FOUND)
-    set(PIMPREFIX KF5)
+    set(PIMPREFIX KF${QT_MAJOR_VERSION})
     find_package(${PIMPREFIX}Akonadi ${AKONADI_MIN_VERSION} QUIET)
   endif()
   if(${PIMPREFIX}Akonadi_FOUND)
@@ -173,16 +179,16 @@ endif()
 
 find_package(Qt${QT_MAJOR_VERSION}Keychain CONFIG REQUIRED)
 
-if(LibAlkimia5_DIR)
-  set(_LibAlkimia5_DIR ${LibAlkimia5_DIR})
+if(LibAlkimia${QT_MAJOR_VERSION}_DIR)
+  set(_LibAlkimia${QT_MAJOR_VERSION}_DIR ${LibAlkimia${QT_MAJOR_VERSION}_DIR})
 endif()
 find_package(LibAlkimia${QT_MAJOR_VERSION} ${KMM_ALKIMIA_MIN_VERSION} REQUIRED)
 if (NOT LibAlkimia${QT_MAJOR_VERSION}_FOUND)
   # restore LibAlkimia5_DIR set to NOTFOUND by first find_package call
-  if(_LibAlkimia5_DIR)
-    set(LibAlkimia5_DIR ${_LibAlkimia5_DIR})
+  if(_LibAlkimia${QT_MAJOR_VERSION}_DIR)
+    set(LibAlkimia${QT_MAJOR_VERSION}_DIR ${_LibAlkimia${QT_MAJOR_VERSION}_DIR})
   endif()
-  find_package(LibAlkimia5 8.1 REQUIRED)
+  find_package(LibAlkimia${QT_MAJOR_VERSION} 8.1 REQUIRED)
 endif()
 
 find_package(KChart ${KMM_KCHART_MIN_VERSION} QUIET)
@@ -248,25 +254,27 @@ include (CheckStructHasMember)
 
 ######################### Special Requirements ##########################
 
-# This is needed for QtSqlite and QtDesigner
-# (they'll install files to ${QT_INSTALL_DIR}/plugins/)
-get_filename_component(QT_BIN_DIR "${QT_MOC_EXECUTABLE}" PATH)
-get_filename_component(QT_DIR     ${QT_BIN_DIR}        PATH)
-set(QT_INSTALL_DIR ${QT_DIR} CACHE PATH
-  "Qt install prefix defaults to the Qt prefix: ${QT_DIR}")
+if(QT_MAJOR_VERSION LESS 6)
+  # This is needed for QtSqlite and QtDesigner
+  # (they'll install files to ${QT_INSTALL_DIR}/plugins/)
+  get_filename_component(QT_BIN_DIR "${QT_MOC_EXECUTABLE}" PATH)
+  get_filename_component(QT_DIR     ${QT_BIN_DIR}        PATH)
+  set(QT_INSTALL_DIR ${QT_DIR} CACHE PATH
+    "Qt install prefix defaults to the Qt prefix: ${QT_DIR}")
+endif()
 
 cmake_dependent_option(ENABLE_ADDRESSBOOK "Enable addressbook support." ON
-                       "${PIMPREFIX}IdentityManagement_FOUND;${PIMPREFIX}Akonadi_FOUND;KF5Contacts_FOUND" OFF)
+                       "${PIMPREFIX}IdentityManagement_FOUND;${PIMPREFIX}Akonadi_FOUND;KF${QT_MAJOR_VERSION}Contacts_FOUND" OFF)
 
 add_feature_info("Address book" ENABLE_ADDRESSBOOK "Allows fetching payee information from KDE PIM system.")
 
 cmake_dependent_option(ENABLE_HOLIDAYS "Enable addressbook support." ON
-                       "KF5Holidays_FOUND" OFF)
+                       "KF${QT_MAJOR_VERSION}Holidays_FOUND" OFF)
 
 add_feature_info("Holidays" ENABLE_HOLIDAYS "Allows fetching holidays from KDE PIM system.")
 
 cmake_dependent_option(ENABLE_ACTIVITIES "Enable activities support." ON
-                       "KF5Activities_FOUND" OFF)
+                       "KF${QT_MAJOR_VERSION}Activities_FOUND" OFF)
 
 option(ENABLE_FORECASTVIEW "Enable forecast view" ON)
 add_feature_info("Forecast view" ENABLE_FORECASTVIEW "Adds possibility to calculate forecasts.")
@@ -279,7 +287,7 @@ option(ENABLE_ONLINEJOBOUTBOXVIEW "Enable online job outbox view" ON)
 add_feature_info("Online job outbox view" ENABLE_ONLINEJOBOUTBOXVIEW "Adds outbox for sending online jobs.")
 
 cmake_dependent_option(ENABLE_SQLSTORAGE "Enable SQL storage support." ON
-                       "Qt5Sql_FOUND" OFF)
+                       "Qt${QT_MAJOR_VERSION}Sql_FOUND" OFF)
 
 add_feature_info("SQL Storage" ENABLE_SQLSTORAGE "Allows storing your financial data in SQL database.")
 
@@ -304,7 +312,7 @@ add_feature_info("SQLCipher" ENABLE_SQLCIPHER "Allows encrypting your SQLite3 da
 add_feature_info("SQL Tracer" ENABLE_SQLTRACER "It traces the SQL queries to the console.")
 
 cmake_dependent_option(ENABLE_IBANBICDATA "Enable IBAN/BIC data support." OFF
-                       "Qt5Sql_FOUND" OFF)
+                       "Qt${QT_MAJOR_VERSION}Sql_FOUND" OFF)
 
 add_feature_info("IBAN/BIC data" ENABLE_IBANBICDATA "Adds predefined IBAN/BIC numbers to KMyMoney (note: doesn't work yet).")
 
@@ -312,10 +320,10 @@ add_feature_info("IBAN/BIC data" ENABLE_IBANBICDATA "Adds predefined IBAN/BIC nu
 find_package(aqbanking ${KMM_AQBANKING_MIN_VERSION} QUIET)
 find_package(gwenhywfar ${KMM_GWENHYWFAR_MIN_VERSION} QUIET)
 find_package(gwengui-cpp QUIET)
-find_package(gwengui-qt5 QUIET)
+find_package(gwengui-qt${QT_MAJOR_VERSION} QUIET)
 
 cmake_dependent_option(ENABLE_KBANKING "Enable KBanking plugin" ON
-                       "AQBANKING_FOUND;gwengui-cpp_FOUND;gwengui-qt5_FOUND;Qt5QuickWidgets_FOUND" OFF)
+                       "AQBANKING_FOUND;gwengui-cpp_FOUND;gwengui-qt${QT_MAJOR_VERSION}_FOUND;Qt${QT_MAJOR_VERSION}QuickWidgets_FOUND" OFF)
 
 add_feature_info(KBanking ENABLE_KBANKING "Interface for the following online banking protocols: HBCI, EBICS, OFX Direct Connect, Paypal")
 
@@ -326,7 +334,7 @@ set_package_properties(Python3 PROPERTIES
         PURPOSE "Required by Woob plugin.")
 
 cmake_dependent_option(ENABLE_WOOB "Enable Woob plugin" ON
-                       "Python3_FOUND;Qt5Concurrent_FOUND" OFF)
+                       "Python3_FOUND;Qt${QT_MAJOR_VERSION}Concurrent_FOUND" OFF)
 add_feature_info(Woob ENABLE_WOOB "Online banking interface using Woob.")
 
 
@@ -454,7 +462,7 @@ endif()
 
 add_subdirectory( tools )
 add_subdirectory( kmymoney )
-if(KF5DocTools_FOUND)
+if(KF${QT_MAJOR_VERSION}DocTools_FOUND)
   add_subdirectory( doc )
   kdoctools_install( po )
 endif()

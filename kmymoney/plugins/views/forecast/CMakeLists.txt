@@ -13,7 +13,7 @@ set_property(SOURCE kforecastview.cpp APPEND PROPERTY OBJECT_DEPENDS ${CMAKE_CUR
 
 ki18n_wrap_ui(forecastview_SOURCES kforecastview.ui)
 
-qt5_add_resources(forecastview_SOURCES forecastview.qrc)
+qt_add_resources(forecastview_SOURCES forecastview.qrc)
 
 kmymoney_add_plugin(forecastview SOURCES ${forecastview_SOURCES})
 

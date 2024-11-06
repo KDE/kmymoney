@@ -16,7 +16,7 @@ set(ofximporter_PART_UI
 
 ki18n_wrap_ui(ofximporter_PART_SRCS ${ofximporter_PART_UI})
 
-qt5_add_resources(ofximporter_PART_SRCS ofximporter.qrc)
+qt_add_resources(ofximporter_PART_SRCS ofximporter.qrc)
 
 kmymoney_add_plugin(ofximporter SOURCES ${ofximporter_PART_SRCS})
 

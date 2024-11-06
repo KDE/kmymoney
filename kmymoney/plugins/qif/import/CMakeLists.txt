@@ -15,7 +15,7 @@ set(qifimporter_PART_UI
 
 ki18n_wrap_ui(qifimporter_PART_SRCS ${qifimporter_PART_UI})
 
-qt5_add_resources(qifimporter_PART_SRCS qifimporter.qrc)
+qt_add_resources(qifimporter_PART_SRCS qifimporter.qrc)
 
 kmymoney_add_plugin(qifimporter SOURCES ${qifimporter_PART_SRCS})
 
