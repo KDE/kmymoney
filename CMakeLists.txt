@@ -188,6 +188,7 @@ endif()
 
 if(BUILD_WITH_QT6)
     find_package(PlasmaActivities)
+    find_package(Qt6Core5Compat)
 else()
     set(KF_ACTIVITIES Activities)
 endif()

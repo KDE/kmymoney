@@ -1824,13 +1824,16 @@ void CSVFile::readFile(CSVProfile *profile)
     if (!inFile.exists())
         return;
     inFile.open(QIODevice::ReadOnly);
-    QTextStream inStream(&inFile);
     QTextCodec* codec = QTextCodec::codecForMib(profile->m_encodingMIBEnum);
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
+    QByteArray encodedString = inFile.readAll();
+    QString buf = codec->toUnicode(encodedString);
+#else
+    QTextStream inStream(&inFile);
     inStream.setCodec(codec);
-#endif
 
     QString buf = inStream.readAll();
+#endif
     inFile.close();
     m_model->clear();
     m_parse->setTextDelimiter(profile->m_textDelimiter);
