@@ -51,3 +51,9 @@
 #else
 #define QLIST_COUNT_FORMAT "%d"
 #endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#define QT6_IF(a, b) a
+#else
+#define QT6_IF(a, b) b
+#endif

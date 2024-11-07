@@ -8,6 +8,8 @@
 #include "kmymoneycombo.h"
 #include "kmymoneycombo_p.h"
 
+#include "config-kmymoney.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -161,7 +163,8 @@ void KMyMoneyCombo::mousePressEvent(QMouseEvent *e)
     if (e->button() != Qt::LeftButton)
         return;
 
-    if (((!isEditable() || isInArrowArea(e->screenPos().toPoint())) && selector()->itemList().count()) && !d->m_completion->isVisible()) {
+    if (((!isEditable() || isInArrowArea(QT6_IF(e->globalPosition(), e->screenPos()).toPoint())) && selector()->itemList().count())
+        && !d->m_completion->isVisible()) {
         d->m_completion->setVisible(true);
     }
 

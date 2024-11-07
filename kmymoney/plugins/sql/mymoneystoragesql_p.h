@@ -10,6 +10,7 @@
 #ifndef MYMONEYSTORAGESQL_P_H
 #define MYMONEYSTORAGESQL_P_H
 
+#include "config-kmymoney.h"
 #include "mymoneystoragesql.h"
 
 // ----------------------------------------------------------------------------
@@ -87,6 +88,12 @@
 
 using namespace eMyMoney;
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#define QT6_IF(a, b) a
+#else
+#define QT6_IF(a, b) b
+#endif
+
 #if 0
 class FilterFail
 {
@@ -122,7 +129,7 @@ public:
 
     ~MyMoneyDbTransaction()
     {
-        if (std::uncaught_exception()) {
+        if (QT6_IF(std::uncaught_exceptions(), std::uncaught_exception())) {
             m_db.cancelCommitUnit(m_name);
         } else {
             try {
@@ -2962,7 +2969,7 @@ public:
             query.bindValue(":id", obj.idString());
             query.bindValue(":iban", payeeIdentifier->electronicIban());
             const auto bic = payeeIdentifier->fullStoredBic();
-            query.bindValue(":bic", (bic.isEmpty()) ? QVariant(QVariant::String) : bic);
+            query.bindValue(":bic", (bic.isEmpty()) ? QT6_IF(QVariant::fromMetaType(QMetaType(QMetaType::QString)), QVariant(QVariant::String)) : bic);
             query.bindValue(":name", payeeIdentifier->ownerName());
             if (!query.exec()) { // krazy:exclude=crashy
                 qWarning("Error while saving ibanbic data for '%s': %s", qPrintable(obj.idString()), qPrintable(query.lastError().text()));
@@ -3006,7 +3013,9 @@ public:
             query.bindValue(":id", obj.idString());
             query.bindValue(":countryCode", payeeIdentifier->country());
             query.bindValue(":accountNumber", payeeIdentifier->accountNumber());
-            query.bindValue(":bankCode", (payeeIdentifier->bankCode().isEmpty()) ? QVariant(QVariant::String) : payeeIdentifier->bankCode());
+            query.bindValue(":bankCode",
+                            (payeeIdentifier->bankCode().isEmpty()) ? QT6_IF(QVariant::fromMetaType(QMetaType(QMetaType::QString)), QVariant(QVariant::String))
+                                                                    : payeeIdentifier->bankCode());
             query.bindValue(":name", payeeIdentifier->ownerName());
             if (!query.exec()) { // krazy:exclude=crashy
                 qWarning("Error while saving national account number for '%s': %s", qPrintable(obj.idString()), qPrintable(query.lastError().text()));

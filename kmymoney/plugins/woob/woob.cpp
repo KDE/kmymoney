@@ -175,8 +175,11 @@ bool Woob::updateAccount(const MyMoneyAccount& kacc, bool moreAccounts)
         d->progress->setMinimum(0);
         d->progress->setMaximum(0);
         d->progress->setMinimumDuration(0);
-
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QFuture<WoobInterface::Account> future = QtConcurrent::run(&WoobInterface::getAccount, &d->woob, bname, id, max);
+#else
         QFuture<WoobInterface::Account> future = QtConcurrent::run(&d->woob, &WoobInterface::getAccount, bname, id, max);
+#endif
         d->watcher.setFuture(future);
 
         d->progress->exec();

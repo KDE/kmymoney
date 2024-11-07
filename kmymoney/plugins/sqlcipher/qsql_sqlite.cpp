@@ -25,6 +25,8 @@
 
 #include "qsql_sqlite_p.h"
 
+#include "config-kmymoney.h"
+
 #include <qcoreapplication.h>
 #include <qdatetime.h>
 #include <qvariant.h>
@@ -314,7 +316,7 @@ bool QSQLiteResultPrivate::fetchNext(QSqlCachedResult::ValueCache &values, int i
                 };
                 break;
             case SQLITE_NULL:
-                values[i + idx] = QVariant(QVariant::String);
+                values[i + idx] = QT6_IF(QVariant::fromMetaType(QMetaType(QMetaType::QString)), QVariant(QVariant::String));
                 break;
             default:
                 values[i + idx] = QString(reinterpret_cast<const QChar *>(

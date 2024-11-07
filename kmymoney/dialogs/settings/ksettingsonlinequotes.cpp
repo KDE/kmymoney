@@ -92,7 +92,11 @@ KSettingsOnlineQuotes::~KSettingsOnlineQuotes()
 void KSettingsOnlineQuotes::saveSettings()
 {
     Q_D(KSettingsOnlineQuotes);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     d->m_acceptButton->animateClick(1); // a very short click (1ms)
+#else
+    d->m_acceptButton->animateClick();
+#endif
 }
 
 void KSettingsOnlineQuotes::resetSettings()

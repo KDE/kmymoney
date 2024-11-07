@@ -292,7 +292,9 @@ int runKMyMoney(QApplication &a, const QUrl &file, bool noFile)
     /**
      * enable high dpi icons
      */
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     a.setAttribute(Qt::AA_UseHighDpiPixmaps);
+#endif
 
     if (kmymoney->webConnect()->isClient()) {
         // If the user launches a second copy of the app and includes a file to

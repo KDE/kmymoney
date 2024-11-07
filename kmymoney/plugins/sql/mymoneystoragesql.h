@@ -44,7 +44,9 @@ class MyMoneyStorageSql;
 class MyMoneyStorageMgr;
 class MyMoneyFile;
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 template <class T1, class T2> struct QPair;
+#endif
 template <class Key, class Value> class QMap;
 
 typedef QPair<QString, QString> MyMoneySecurityPair;

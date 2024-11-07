@@ -2285,7 +2285,7 @@ void KMyMoneyApp::slotAddSharedAction(eMenu::Action action, QAction* defaultActi
     if (toolButton == nullptr) {
         auto actionObject = pActions.value(action, nullptr);
         if (actionObject) {
-            for (auto* widget : actionObject->associatedWidgets()) {
+            for (auto* widget : QT6_IF(actionObject->associatedObjects(), actionObject->associatedWidgets())) {
                 toolButton = qobject_cast<QToolButton*>(widget);
                 if (toolButton) {
                     d->m_sharedActionButtons[action].button = toolButton;

@@ -130,8 +130,11 @@ void MapAccountWizard::slotNewPage(int id)
         d->progress->setLabelText(i18n("Getting list of backends."));
 
         QCoreApplication::processEvents();
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        d->backendsWatcher.setFuture(QtConcurrent::run(&WoobInterface::getBackends, &d->m_woob));
+#else
         d->backendsWatcher.setFuture(QtConcurrent::run(&d->m_woob, &WoobInterface::getBackends));
-
+#endif
         break;
     }
     case ACCOUNTS_PAGE: {
@@ -140,8 +143,12 @@ void MapAccountWizard::slotNewPage(int id)
         d->progress->setLabelText(i18n("Getting list of accounts from your bank."));
 
         QCoreApplication::processEvents();
-        d->accountsWatcher.setFuture(QtConcurrent::run(&d->m_woob, &WoobInterface::getAccounts, d->ui->backendsList->currentItem()->text(0)));
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        d->accountsWatcher.setFuture(QtConcurrent::run(&WoobInterface::getAccounts, &d->m_woob, d->ui->backendsList->currentItem()->text(0)));
+#else
+        d->accountsWatcher.setFuture(QtConcurrent::run(&d->m_woob, &WoobInterface::getAccounts, d->ui->backendsList->currentItem()->text(0)));
+#endif
         button(QWizard::BackButton)->setEnabled(false);
         d->ui->accountsList->setEnabled(false);
 
