@@ -5,12 +5,12 @@
 #ifndef KCM_QIF_H
 #define KCM_QIF_H
 
-#include <KCModule>
+#include "kmm_kcmodule.h"
 
-class KCMqif : public KCModule
+class KCMqif : public KMMKCModule
 {
 public:
-    KCMqif(QWidget* parent, const QVariantList& args);
+    KCMqif(QObject* parent, const QVariantList& args = QVariantList());
 };
 
 #endif // KCM_QIF_H

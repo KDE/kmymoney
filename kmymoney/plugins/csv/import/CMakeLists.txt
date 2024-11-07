@@ -64,4 +64,5 @@ target_link_libraries(kcm_csvimporter
                       KF${QT_MAJOR_VERSION}::I18n
                       KF${QT_MAJOR_VERSION}::CoreAddons
                       KF${QT_MAJOR_VERSION}::ConfigWidgets
+                      kmm_kcmodule
                       )

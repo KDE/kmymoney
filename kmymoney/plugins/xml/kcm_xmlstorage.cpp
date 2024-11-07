@@ -239,13 +239,13 @@ void XMLStorageSettingsWidget::slotStatusChanged(bool state)
 #endif
 }
 
-KCMXMLStorage::KCMXMLStorage(QWidget *parent, const QVariantList& args)
-    : KCModule(parent, args)
+KCMXMLStorage::KCMXMLStorage(QObject* parent, const QVariantList& args)
+    : KMMKCModule(parent, args)
 {
-    XMLStorageSettingsWidget* w = new XMLStorageSettingsWidget(this);
+    XMLStorageSettingsWidget* w = new XMLStorageSettingsWidget(widget());
     addConfig(KMyMoneySettings::self(), w);
     QVBoxLayout *layout = new QVBoxLayout;
-    setLayout(layout);
+    widget()->setLayout(layout);
     layout->addWidget(w);
     setButtons(NoAdditionalButton);
     load();

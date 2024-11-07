@@ -123,6 +123,7 @@ target_link_libraries(kmm_mymoney
                       KF${QT_MAJOR_VERSION}::I18n
                       KF${QT_MAJOR_VERSION}::ItemModels
                       KF${QT_MAJOR_VERSION}::ConfigCore
+                      $<$<BOOL:${BUILD_WITH_QT6}>:KF${QT_MAJOR_VERSION}::CoreAddons>
                       Alkimia::alkimia
                       kmm_payeeidentifier
                       kmm_plugin

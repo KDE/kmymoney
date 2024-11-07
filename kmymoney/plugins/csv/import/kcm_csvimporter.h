@@ -14,16 +14,16 @@ class QWidget;
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KCModule>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmm_kcmodule.h"
+
 class KCMCSVImporterPrivate;
-class KCMCSVImporter : public KCModule
+class KCMCSVImporter : public KMMKCModule
 {
 public:
-    explicit KCMCSVImporter(QWidget* parent, const QVariantList& args);
+    explicit KCMCSVImporter(QObject* parent, const QVariantList& args = QVariantList());
     ~KCMCSVImporter();
 
 private:

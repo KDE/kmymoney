@@ -103,13 +103,13 @@ CheckPrintingSettingsWidget::~CheckPrintingSettingsWidget()
     }
 }
 
-KCMCheckPrinting::KCMCheckPrinting(QWidget *parent, const QVariantList& args)
-    : KCModule(parent, args)
+KCMCheckPrinting::KCMCheckPrinting(QObject* parent, const QVariantList& args)
+    : KMMKCModule(parent, args)
 {
-    CheckPrintingSettingsWidget* w = new CheckPrintingSettingsWidget(this);
+    CheckPrintingSettingsWidget* w = new CheckPrintingSettingsWidget(widget());
     addConfig(CheckPrintingSettings::self(), w);
     QVBoxLayout *layout = new QVBoxLayout;
-    setLayout(layout);
+    widget()->setLayout(layout);
     layout->addWidget(w);
     load();
     w->urlSelected(CheckPrintingSettings::useCustomCheckTemplate() ? CheckPrintingSettings::checkTemplateFile()

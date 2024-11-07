@@ -76,6 +76,10 @@ set( kmm_menuactionexchanger_SRCS
   kmm_menuactionexchanger.cpp
 )
 
+set( kmm_kcmodule_SRCS
+  kmm_kcmodule.h
+)
+
 add_library(kmm_utils_validators STATIC ${kmm_utils_validators_SRCS})
 add_library(kmm_utils_platformtools STATIC ${kmm_utils_platformtools_SRCS})
 add_library(kmm_url STATIC ${kmm_url_SRCS})
@@ -86,6 +90,7 @@ add_library(kmm_printer ${kmm_printer_SRCS})
 add_library(kmm_selections ${kmm_selections_SRCS})
 add_library(kmm_yesno ${kmm_yesno_SRCS})
 add_library(kmm_menuactionexchanger ${kmm_menuactionexchanger_SRCS})
+add_library(kmm_kcmodule STATIC ${kmm_kcmodule_SRCS})
 
 target_link_libraries( kmm_utils_validators
   PUBLIC
@@ -154,6 +159,13 @@ target_link_libraries(kmm_menuactionexchanger
     Qt::Widgets
 )
 
+target_link_libraries(kmm_kcmodule
+  PUBLIC
+    Qt::Core
+    Qt::Widgets
+    KF${QT_MAJOR_VERSION}::KCMUtils
+)
+
 set_target_properties(kmm_selections PROPERTIES
   VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
 )
@@ -182,6 +194,11 @@ generate_export_header(kmm_yesno)
 set_target_properties(kmm_menuactionexchanger PROPERTIES
   VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
 )
+
+set_target_properties(kmm_kcmodule PROPERTIES
+  VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
+)
+
 generate_export_header(kmm_menuactionexchanger)
 
 

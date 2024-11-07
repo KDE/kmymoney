@@ -24,6 +24,7 @@ target_link_libraries(csvexporter
   PRIVATE
     KF${QT_MAJOR_VERSION}::Completion
     KF${QT_MAJOR_VERSION}::KIOWidgets
+    kmm_kcmodule
     kmm_plugin
     kmm_base_widgets
 )

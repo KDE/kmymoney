@@ -45,6 +45,7 @@ target_link_libraries(kcm_icalendarexporter
   KF${QT_MAJOR_VERSION}::ConfigWidgets
   KF${QT_MAJOR_VERSION}::KIOWidgets
   KF${QT_MAJOR_VERSION}::Completion
+  kmm_kcmodule
   Qt::Widgets
   Qt::Gui
 )

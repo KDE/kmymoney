@@ -17,7 +17,6 @@
 // KDE Includes
 
 #include <KAboutData>
-#include <KCModule>
 #include <KPluginFactory>
 
 // ----------------------------------------------------------------------------
@@ -85,13 +84,13 @@ public:
     QString emptyProfileListText;
 };
 
-KCMCSVImporter::KCMCSVImporter(QWidget* parent, const QVariantList& args)
-    : KCModule(parent, args)
+KCMCSVImporter::KCMCSVImporter(QObject* parent, const QVariantList& args)
+    : KMMKCModule(parent, args)
     , d_ptr(new KCMCSVImporterPrivate)
 {
     Q_D(KCMCSVImporter);
 
-    d->ui->setupUi(this);
+    d->ui->setupUi(widget());
 
     // don't show the text box we need for the kcfg automatism of the profile
     d->ui->kcfg_QifExportProfile->hide();
@@ -99,7 +98,7 @@ KCMCSVImporter::KCMCSVImporter(QWidget* parent, const QVariantList& args)
     // initially update the combobox when the hidden text field is set
     connect(d->ui->kcfg_QifExportProfile, &QLineEdit::textChanged, d, &KCMCSVImporterPrivate::loadProfiles);
 
-    addConfig(PluginSettings::self(), this);
+    addConfig(PluginSettings::self(), widget());
     setButtons(NoAdditionalButton);
 
     // make sure to keep track of the user's selection in the hidden field

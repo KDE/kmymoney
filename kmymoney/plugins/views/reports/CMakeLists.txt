@@ -62,5 +62,6 @@ target_link_libraries(kcm_reportsview
                       KF${QT_MAJOR_VERSION}::Completion
                       KF${QT_MAJOR_VERSION}::KIOWidgets
                       KF${QT_MAJOR_VERSION}::CoreAddons
+                      kmm_kcmodule
                       kmm_settings
                       )

@@ -12,11 +12,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QUrlQuery>
+#include <QFile>
+#include <QPointer>
+#include <QSqlDriver>
 #include <QSqlQuery>
 #include <QTimer>
-#include <QFile>
-#include <QSqlDriver>
+#include <QUrlQuery>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

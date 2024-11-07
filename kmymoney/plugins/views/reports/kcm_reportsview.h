@@ -5,9 +5,10 @@
 #ifndef KCM_REPORTSVIEW_H
 #define KCM_REPORTSVIEW_H
 
-#include <KCModule>
 #include <QWidget>
 #include <QScopedPointer>
+
+#include "kmm_kcmodule.h"
 
 class ReportsViewSettingsWidgetPrivate;
 class ReportsViewSettingsWidget : public QWidget
@@ -28,10 +29,10 @@ private Q_SLOTS:
     void slotEditingFinished();
 };
 
-class KCMReportsView : public KCModule
+class KCMReportsView : public KMMKCModule
 {
 public:
-    explicit KCMReportsView(QWidget* parent, const QVariantList& args);
+    explicit KCMReportsView(QObject* parent, const QVariantList& args = QVariantList());
     ~KCMReportsView();
 };
 

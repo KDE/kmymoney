@@ -15,11 +15,10 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KCModule>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmm_kcmodule.h"
 #include "ui_xmlstoragesettings.h"
 
 class XMLStorageSettingsWidget : public QWidget, public Ui::XMLStorageSettings
@@ -46,10 +45,10 @@ private:
     QStringList m_recoverKeyList;
 };
 
-class KCMXMLStorage : public KCModule
+class KCMXMLStorage : public KMMKCModule
 {
 public:
-    explicit KCMXMLStorage(QWidget *parent, const QVariantList &args);
+    explicit KCMXMLStorage(QObject* parent, const QVariantList& args = QVariantList());
     ~KCMXMLStorage();
 };
 

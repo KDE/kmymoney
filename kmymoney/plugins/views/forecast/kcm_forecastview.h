@@ -5,8 +5,7 @@
 #ifndef KCM_FORECASTVIEW_H
 #define KCM_FORECASTVIEW_H
 
-#include <KCModule>
-#include <QWidget>
+#include "kmm_kcmodule.h"
 #include "ui_forecastviewsettings.h"
 
 class ForecastViewSettingsWidget : public QWidget, public Ui::ForecastViewSettings
@@ -16,10 +15,10 @@ public:
     explicit ForecastViewSettingsWidget(QWidget* parent = nullptr);
 };
 
-class KCMForecastView : public KCModule
+class KCMForecastView : public KMMKCModule
 {
 public:
-    explicit KCMForecastView(QWidget* parent, const QVariantList& args);
+    explicit KCMForecastView(QObject* parent, const QVariantList& args = QVariantList());
     ~KCMForecastView();
 };
 

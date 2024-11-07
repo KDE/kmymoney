@@ -39,13 +39,13 @@ public:
     }
 };
 
-KCMiCalendarExporter::KCMiCalendarExporter(QWidget *parent, const QVariantList& args)
-    : KCModule(parent, args)
+KCMiCalendarExporter::KCMiCalendarExporter(QObject* parent, const QVariantList& args)
+    : KMMKCModule(parent, args)
 {
-    PluginSettingsWidget *w = new PluginSettingsWidget(this);
+    PluginSettingsWidget* w = new PluginSettingsWidget(widget());
     addConfig(ICalendarSettings::self(), w);
     QVBoxLayout *layout = new QVBoxLayout;
-    setLayout(layout);
+    widget()->setLayout(layout);
     layout->addWidget(w);
     load();
 }

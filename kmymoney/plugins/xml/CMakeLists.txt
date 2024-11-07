@@ -71,5 +71,6 @@ target_link_libraries(kcm_xmlstorage
     KF${QT_MAJOR_VERSION}::ConfigWidgets
     KF${QT_MAJOR_VERSION}::Completion
     $<$<BOOL:${ENABLE_GPG}>:kmm_gpgfile>
+    kmm_kcmodule
     kmm_settings
 )

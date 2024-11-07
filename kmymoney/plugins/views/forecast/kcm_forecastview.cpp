@@ -18,14 +18,14 @@ ForecastViewSettingsWidget::ForecastViewSettingsWidget(QWidget* parent) :
     setupUi(this);
 }
 
-KCMForecastView::KCMForecastView(QWidget *parent, const QVariantList& args)
-    : KCModule(parent, args)
+KCMForecastView::KCMForecastView(QObject* parent, const QVariantList& args)
+    : KMMKCModule(parent, args)
 {
-    ForecastViewSettingsWidget* w = new ForecastViewSettingsWidget(this);
+    ForecastViewSettingsWidget* w = new ForecastViewSettingsWidget(widget());
     // addConfig(ForecastViewSettings::self(), w);
     addConfig(KMyMoneySettings::self(), w);
     QVBoxLayout *layout = new QVBoxLayout;
-    setLayout(layout);
+    widget()->setLayout(layout);
     layout->addWidget(w);
     setButtons(NoAdditionalButton);
     load();

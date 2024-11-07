@@ -9,10 +9,10 @@
 #include "ui_checkprintingsettingsdecl.h"
 #include <config-kmymoney.h>
 
-#include <KCModule>
 #include <QWidget>
 
 // Override QUrl
+#include "kmm_kcmodule.h"
 #include "kmmurl.h"
 
 class QTextEdit;
@@ -37,10 +37,10 @@ private:
     void restoreDefaultSettings() const;
 };
 
-class KCMCheckPrinting : public KCModule
+class KCMCheckPrinting : public KMMKCModule
 {
 public:
-    KCMCheckPrinting(QWidget* parent, const QVariantList& args);
+    KCMCheckPrinting(QObject* parent, const QVariantList& args = QVariantList());
     ~KCMCheckPrinting();
 };
 

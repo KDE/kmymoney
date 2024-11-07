@@ -187,14 +187,14 @@ void ReportsViewSettingsWidget::slotEditingFinished()
     d->checkCssFile(txt);
 }
 
-KCMReportsView::KCMReportsView(QWidget *parent, const QVariantList& args)
-    : KCModule(parent, args)
+KCMReportsView::KCMReportsView(QObject* parent, const QVariantList& args)
+    : KMMKCModule(parent, args)
 {
-    ReportsViewSettingsWidget* w = new ReportsViewSettingsWidget(this);
+    ReportsViewSettingsWidget* w = new ReportsViewSettingsWidget(widget());
     // addConfig(ReportsViewSettings::self(), w);
     addConfig(KMyMoneySettings::self(), w);
     QVBoxLayout *layout = new QVBoxLayout;
-    setLayout(layout);
+    widget()->setLayout(layout);
     layout->addWidget(w);
     setButtons(NoAdditionalButton);
     load();

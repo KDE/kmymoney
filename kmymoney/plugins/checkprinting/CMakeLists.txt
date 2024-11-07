@@ -40,9 +40,9 @@ target_link_libraries(
                       kcm_checkprinting
                       checkprinting_settings_static
                       kmm_url
+                      kmm_kcmodule
                       Qt::PrintSupport
                       KF${QT_MAJOR_VERSION}::I18n
-                      KF${QT_MAJOR_VERSION}::ConfigWidgets
                       KF${QT_MAJOR_VERSION}::Completion
                       KF${QT_MAJOR_VERSION}::KIOWidgets
                       KF${QT_MAJOR_VERSION}::CoreAddons

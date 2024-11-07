@@ -13,11 +13,12 @@
 
 #include "mymoneyqifprofileeditor.h"
 
-KCMqif::KCMqif(QWidget *parent, const QVariantList& args) : KCModule(parent, args)
+KCMqif::KCMqif(QObject* parent, const QVariantList& args)
+    : KMMKCModule(parent, args)
 {
-    auto editor = new MyMoneyQifProfileEditor(true, this);
+    auto editor = new MyMoneyQifProfileEditor(true, widget());
     auto layout = new QVBoxLayout;
-    setLayout(layout);
+    widget()->setLayout(layout);
     layout->addWidget(editor);
     setButtons(NoAdditionalButton);
     load();

@@ -6,14 +6,14 @@
 #ifndef KCM_ICALENDAREXPORTER_H
 #define KCM_ICALENDAREXPORTER_H
 
-#include <kcmodule.h>
+#include "kmm_kcmodule.h"
 
 #include "qcontainerfwd.h"
 
-class KCMiCalendarExporter : public KCModule
+class KCMiCalendarExporter : public KMMKCModule
 {
 public:
-    explicit KCMiCalendarExporter(QWidget *parent = 0, const QVariantList& args = QVariantList());
+    explicit KCMiCalendarExporter(QObject* parent = 0, const QVariantList& args = QVariantList());
     ~KCMiCalendarExporter();
 };
 

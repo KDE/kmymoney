@@ -13,5 +13,6 @@ target_link_libraries(kcm_qif
                       KF${QT_MAJOR_VERSION}::ConfigWidgets
                       KF${QT_MAJOR_VERSION}::Completion
                       KF${QT_MAJOR_VERSION}::KIOWidgets
+                      kmm_kcmodule
                       kmm_yesno
                       )
