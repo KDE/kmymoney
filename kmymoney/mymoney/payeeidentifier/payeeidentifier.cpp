@@ -34,11 +34,11 @@ payeeIdentifier::payeeIdentifier(const payeeIdentifier::id_t& id, payeeIdentifie
 }
 
 payeeIdentifier::payeeIdentifier(const QString& id, payeeIdentifierData* const identifierdata)
-    : m_id(id.midRef(5).toUInt())
+    : m_id(QStringView{id}.mid(5).toUInt())
     , m_payeeIdentifier(identifierdata)
 {
     bool ok = false; // hopefully the compiler optimizes this away if compiled in non-debug mode
-    Q_ASSERT(id.midRef(5).toUInt(&ok) && ok);
+    Q_ASSERT(QStringView{id}.mid(5).toUInt(&ok) && ok);
 }
 
 payeeIdentifier::payeeIdentifier(const payeeIdentifier::id_t& id, const payeeIdentifier& other)

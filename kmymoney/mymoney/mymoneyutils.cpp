@@ -118,7 +118,7 @@ unsigned long MyMoneyUtils::extractId(const QString& txt)
 
     pos = txt.indexOf(digitRegex);
     if (pos != -1) {
-        rc = txt.midRef(pos).toInt();
+        rc = QStringView{txt}.mid(pos).toInt();
     }
     return rc;
 }

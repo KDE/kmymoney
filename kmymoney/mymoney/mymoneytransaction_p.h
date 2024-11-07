@@ -38,7 +38,7 @@ public:
     {
         int lastIdUsed(0);
         for (const auto& split : qAsConst(m_splits)) {
-            const int id = split.id().midRef(1).toInt();
+            const int id = QStringView{split.id()}.mid(1).toInt();
             if (id > lastIdUsed) {
                 lastIdUsed = id;
             }
