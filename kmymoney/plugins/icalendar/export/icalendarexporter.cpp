@@ -9,10 +9,10 @@
 #include "icalendarexporter.h"
 
 // Qt includes
+#include <QAction>
 #include <QFileDialog>
 #include <QPointer>
 #include <QUrl>
-#include <QAction>
 
 // KDE includes
 #include <KPluginFactory>
@@ -28,9 +28,25 @@
 #include "icalendarsettings.h"
 #include "viewinterface.h"
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+class KMMAction : public QAction
+{
+public:
+    QWidget* parentWidget() const
+    {
+        QObject* ret = parent();
+        while (ret && !ret->isWidgetType())
+            ret = ret->parent();
+        return static_cast<QWidget*>(ret);
+    }
+};
+#else
+typedef QAction KMMAction;
+#endif
+
 struct iCalendarExporter::Private {
     bool m_skipFirstUpdate;
-    QAction* m_action;
+    KMMAction* m_action;
     QString  m_profileName;
     QString  m_iCalendarFileEntryName;
     KMMSchedulesToiCalendar m_exporter;
@@ -76,7 +92,7 @@ iCalendarExporter::iCalendarExporter(QObject *parent, const KPluginMetaData &met
         actionName = i18n("Schedules to iCalendar [%1]", icalFilePath);
 
     const auto &kpartgui = QStringLiteral("file_export_icalendar");
-    d->m_action = actionCollection()->addAction(kpartgui);
+    d->m_action = static_cast<KMMAction*>(actionCollection()->addAction(kpartgui));
     d->m_action->setText(actionName);
     connect(d->m_action, &QAction::triggered, this, &iCalendarExporter::slotFirstExport);
     connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, action(qPrintable(kpartgui)), &QAction::setEnabled);
