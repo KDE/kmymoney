@@ -1261,7 +1261,8 @@ bool XmlReader::endElement(int /*lineNumber*/, int /*columnNumber*/, const QStri
 
 bool XmlReader::characters(const QString &data)
 {
-    if (pMain->xmldebug) qDebug("XML Data received - %d bytes", data.length());
+    if (pMain->xmldebug)
+        qDebug("XML Data received - " QLIST_COUNT_FORMAT " bytes", data.length());
     QString pData = data.trimmed(); // data may contain line feeds and indentation spaces
     if (!pData.isEmpty()) {
         if (pMain->developerDebug) qDebug() << "XML Data -" << pData;

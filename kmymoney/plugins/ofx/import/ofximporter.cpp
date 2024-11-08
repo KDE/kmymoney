@@ -1044,7 +1044,7 @@ bool OFXImporter::storeStatements(const QList<MyMoneyStatement> &statements)
         abort = true;
     }*/
 
-    qDebug("OfxImporterPlugin::storeStatements() with %d statements called", statements.count());
+    qDebug("OfxImporterPlugin::storeStatements() with " QLIST_COUNT_FORMAT " statements called", statements.count());
 
     for (const auto& statement : statements) {
         if (abort)

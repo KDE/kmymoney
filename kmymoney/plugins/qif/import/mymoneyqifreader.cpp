@@ -26,23 +26,24 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <kmessagebox.h>
-#include <kconfig.h>
+#include "kio/job.h"
+#include "kjobwidgets.h"
 #include <KConfigGroup>
 #include <KIO/FileCopyJob>
-#include <KSharedConfig>
 #include <KLocalizedString>
-#include "kjobwidgets.h"
-#include "kio/job.h"
+#include <KSharedConfig>
+#include <kconfig.h>
+#include <kmessagebox.h>
 
 // ----------------------------------------------------------------------------
 // Project Headers
 
+#include "config-kmymoney.h"
+#include "kmymoneysettings.h"
+#include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "mymoneysplit.h"
-#include "mymoneyexception.h"
-#include "kmymoneysettings.h"
 
 #include "mymoneystatement.h"
 
@@ -126,8 +127,11 @@ void MyMoneyQifReader::Private::finishStatement()
     // in case we have collected any data in the statement, we keep it
     if ((st.m_listTransactions.count() + st.m_listPrices.count() + st.m_listSecurities.count()) > 0) {
         statements += st;
-        qDebug("Statement with %d transactions, %d prices and %d securities added to the statement list",
-               st.m_listTransactions.count(), st.m_listPrices.count(), st.m_listSecurities.count());
+        qDebug("Statement with " QLIST_COUNT_FORMAT " transactions, " QLIST_COUNT_FORMAT " prices and " QLIST_COUNT_FORMAT
+               " securities added to the statement list",
+               st.m_listTransactions.count(),
+               st.m_listPrices.count(),
+               st.m_listSecurities.count());
     }
     eMyMoney::Statement::Type type = st.m_eType; //stash type and...
     // start with a fresh statement

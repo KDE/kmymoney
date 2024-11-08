@@ -43,3 +43,11 @@
 
 #cmakedefine ENABLE_COSTCENTER 1
 /* No external component */
+
+#include <qglobal.h>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#define QLIST_COUNT_FORMAT "%lld"
+#else
+#define QLIST_COUNT_FORMAT "%d"
+#endif

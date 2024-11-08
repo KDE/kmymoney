@@ -4,7 +4,6 @@
 */
 
 #include "kofxdirectconnectdlg.h"
-#include "kmymoneysettings.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -31,6 +30,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "config-kmymoney.h"
+#include "kmymoneysettings.h"
 #include "mymoneyofxconnector.h"
 
 class KOfxDirectConnectDlg::Private
@@ -146,7 +147,7 @@ void KOfxDirectConnectDlg::setDetails(const QString& _details)
 
 void KOfxDirectConnectDlg::slotOfxData(KIO::Job*, const QByteArray& _ba)
 {
-    qDebug("Got %d bytes of data", _ba.size());
+    qDebug("Got " QLIST_COUNT_FORMAT " bytes of data", _ba.size());
     if (d->m_firstData) {
         setStatus("Connection established, retrieving data...");
         setDetails(QString("Downloading data to %1...").arg(m_tmpfile->fileName()));
