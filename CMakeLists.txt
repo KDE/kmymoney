@@ -167,11 +167,16 @@ if (${KF_MIN_VERSION} VERSION_LESS "5.100")
             -DSecondaryAction=No
         )
     endif()
-elseif(QT_MAJOR_VERSION VERSION_LESS "6.0.0")
+elseif(NOT BUILD_WITH_QT6)
     message(FATAL_ERROR "Remove the above logic from CMakeLists.txt since it is not needed anymore")
 endif()
 
-find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} OPTIONAL_COMPONENTS DocTools Holidays Contacts Activities)
+if(BUILD_WITH_QT6)
+    find_package(PlasmaActivities)
+else()
+    set(KF_ACTIVITIES Activities)
+endif()
+find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} OPTIONAL_COMPONENTS DocTools Holidays Contacts ${KF_ACTIVITIES})
 if (DEFINED AKONADI_MIN_VERSION)
   # Akonadi 23.04 moved to KPim5 prefix, deprecating KF5
   set(PIMPREFIX KPim${QT_MAJOR_VERSION})
@@ -201,7 +206,11 @@ if (NOT LibAlkimia${QT_MAJOR_VERSION}_FOUND)
   find_package(LibAlkimia${QT_MAJOR_VERSION} 8.1 REQUIRED)
 endif()
 
-find_package(KChart ${KMM_KCHART_MIN_VERSION} QUIET)
+if(BUILD_WITH_QT6)
+    find_package(KChart6 ${KMM_KCHART_MIN_VERSION} QUIET)
+else()
+    find_package(KChart ${KMM_KCHART_MIN_VERSION} QUIET)
+endif()
 
 # we want the lowercase 'libofx' package name, for 'libofx_FOUND' compatibility with what pkg-config returns,
 # in case it is to be used as fallback
@@ -289,7 +298,7 @@ cmake_dependent_option(ENABLE_ACTIVITIES "Enable activities support." ON
 option(ENABLE_FORECASTVIEW "Enable forecast view" ON)
 add_feature_info("Forecast view" ENABLE_FORECASTVIEW "Adds possibility to calculate forecasts.")
 cmake_dependent_option(ENABLE_REPORTSVIEW "Enable reports view." ON
-                       "KChart_FOUND" OFF)
+                       "KChart_FOUND OR KChart6_FOUND" OFF)
 add_feature_info("Reports view" ENABLE_REPORTSVIEW "Adds possibility to display chart and table reports.")
 option(ENABLE_BUDGETVIEW "Enable budget view" ON)
 add_feature_info("Budget view" ENABLE_BUDGETVIEW "Adds possibility to plan a budget.")

@@ -18,7 +18,8 @@ set (libreports_a_SOURCES
 add_library(reports STATIC ${libreports_a_SOURCES})
 target_link_libraries(reports
   PUBLIC
-    KChart
+    $<$<BOOL:${KChart_FOUND}>:KChart>
+    $<$<BOOL:${KChart6_FOUND}>:KChart6>
     Alkimia::alkimia
     Qt::PrintSupport
     kmymoney_common
