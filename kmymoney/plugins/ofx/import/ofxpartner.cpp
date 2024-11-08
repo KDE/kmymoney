@@ -397,7 +397,7 @@ void OfxHttpRequest::slotOfxFinished(KJob* /* e */)
         if (m_error) {
             m_postJob->uiDelegate()->showErrorMessage();
             QFile::remove(m_dst);
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 3, 0)
         } else if (m_postJob->isErrorPage()) {
             QString details;
             QFile f(m_dst);
@@ -410,8 +410,8 @@ void OfxHttpRequest::slotOfxFinished(KJob* /* e */)
             }
             KMessageBox::detailedError(0, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed"));
             QFile::remove(m_dst);
+#endif
         }
-
     } else if(m_getJob) {
         m_error = m_getJob->error();
         if (m_error) {
