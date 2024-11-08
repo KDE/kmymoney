@@ -24,6 +24,7 @@ target_link_libraries(qifimporter
     kmm_plugin
   PRIVATE
     KF${QT_MAJOR_VERSION}::Completion
+    KF${QT_MAJOR_VERSION}::KIOCore
     KF${QT_MAJOR_VERSION}::KIOWidgets
     Alkimia::alkimia
     kmm_settings
