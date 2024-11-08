@@ -198,6 +198,12 @@
 
 #include "kmmyesno.h"
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#define QT6_SKIP_FROM_LATIN_STRING(a) a
+#else
+#define QT6_SKIP_FROM_LATIN_STRING(a) QString::fromLatin1(a)
+#endif
+
 using namespace Icons;
 using namespace eMenu;
 
@@ -507,7 +513,7 @@ public:
 
     bool askAboutSaving()
     {
-        const auto isFileNotSaved = q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->isEnabled();
+        const auto isFileNotSaved = q->actionCollection()->action(QT6_SKIP_FROM_LATIN_STRING(KStandardAction::name(KStandardAction::Save)))->isEnabled();
         const auto isNewFileNotSaved = m_storageInfo.isOpened && m_storageInfo.url.isEmpty();
         auto fileNeedsToBeSaved = false;
 
@@ -1149,8 +1155,8 @@ public:
         pActions[Action::FileBackup]->setEnabled(m_storageInfo.isOpened && m_storageInfo.type == eKMyMoney::StorageType::XML);
 
         auto aC = q->actionCollection();
-        aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::SaveAs)))->setEnabled(canFileSaveAs());
-        aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Close)))->setEnabled(m_storageInfo.isOpened);
+        aC->action(QT6_SKIP_FROM_LATIN_STRING(KStandardAction::name(KStandardAction::SaveAs)))->setEnabled(canFileSaveAs());
+        aC->action(QT6_SKIP_FROM_LATIN_STRING(KStandardAction::name(KStandardAction::Close)))->setEnabled(m_storageInfo.isOpened);
         pActions[Action::UpdateAllAccounts]->setEnabled(m_storageInfo.isOpened && KMyMoneyUtils::canUpdateAllAccounts());
 
         updateReconciliationTools(selections);
@@ -1195,7 +1201,7 @@ public:
 
         switch (action) {
         case eKMyMoney::FileAction::Opened:
-            q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
+            q->actionCollection()->action(QT6_SKIP_FROM_LATIN_STRING(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
             updateAccountNames();
             updateCurrencyNames();
             selectBaseCurrency();
@@ -1214,7 +1220,7 @@ public:
             MyMoneyFile::instance()->modelsReadyToUse();
             MyMoneyFile::instance()->forceDataChanged();
             // Enable save in case the fix changed the contents
-            q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(dirty());
+            q->actionCollection()->action(QT6_SKIP_FROM_LATIN_STRING(KStandardAction::name(KStandardAction::Save)))->setEnabled(dirty());
             updateActions(SelectedObjects());
             // inform views about new data source
             m_myMoneyView->executeAction(Action::FileNew, SelectedObjects());
@@ -1242,7 +1248,7 @@ public:
             // clear the dirty flag
             MyMoneyFile::instance()->setDirty(false);
             q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
-            q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
+            q->actionCollection()->action(QT6_SKIP_FROM_LATIN_STRING(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
             m_autoSaveTimer->stop();
             break;
 
@@ -1256,14 +1262,16 @@ public:
 
         case eKMyMoney::FileAction::Closed:
             q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
-            q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
+            q->actionCollection()->action(QT6_SKIP_FROM_LATIN_STRING(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
             m_myMoneyView->enableViewsIfFileOpen(m_storageInfo.isOpened);
             updateActions(SelectedObjects());
             break;
 
         case eKMyMoney::FileAction::Changed:
             q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
-            q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(true && !m_storageInfo.url.isEmpty());
+            q->actionCollection()
+                ->action(QT6_SKIP_FROM_LATIN_STRING(KStandardAction::name(KStandardAction::Save)))
+                ->setEnabled(true && !m_storageInfo.url.isEmpty());
             // As this method is called every time the MyMoneyFile instance
             // notifies a modification, it's the perfect place to start the timer if needed
             if (m_autoSaveEnabled && !m_autoSaveTimer->isActive()) {
@@ -2265,7 +2273,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
     setupGUI();
 
     // reconnect about app entry to dialog with full credits information
-    auto aboutApp = aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::AboutApp)));
+    auto aboutApp = aC->action(QT6_SKIP_FROM_LATIN_STRING(KStandardAction::name(KStandardAction::AboutApp)));
     aboutApp->disconnect();
     connect(aboutApp, &QAction::triggered, this, &KMyMoneyApp::slotShowCredits);
 
@@ -3742,7 +3750,7 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
 {
     if(dialogName.compare(QLatin1String("Plugins")) == 0) {
         KMyMoneyPlugin::pluginHandling(KMyMoneyPlugin::Action::Reorganize, pPlugins, this, guiFactory());
-        actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::SaveAs)))->setEnabled(d->canFileSaveAs());
+        actionCollection()->action(QT6_SKIP_FROM_LATIN_STRING(KStandardAction::name(KStandardAction::SaveAs)))->setEnabled(d->canFileSaveAs());
         onlineJobAdministration::instance()->updateActions();
         onlineJobAdministration::instance()->setOnlinePlugins(pPlugins.extended);
         d->m_myMoneyView->setOnlinePlugins(&pPlugins.online);
