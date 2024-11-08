@@ -129,7 +129,11 @@ void KImportDlg::slotFileTextChanged(const QString& text)
 {
     bool fileExists = false;
     if (file().isValid()) {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        auto statjob = KIO::stat(file(), KIO::StatJob::SourceSide, KIO::StatNoDetails);
+#else
         auto statjob = KIO::statDetails(file(), KIO::StatJob::SourceSide, KIO::StatNoDetails);
+#endif
         bool noerror = statjob->exec();
         if (noerror) {
             // We want a file

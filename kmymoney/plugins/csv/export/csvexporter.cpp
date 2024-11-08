@@ -87,7 +87,11 @@ bool CSVExporter::okToWriteFile(const QUrl &url)
     bool fileExists = false;
 
     if (url.isValid()) {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        auto statjob = KIO::stat(url, KIO::StatJob::SourceSide, KIO::StatNoDetails);
+#else
         auto statjob = KIO::statDetails(url, KIO::StatJob::SourceSide, KIO::StatNoDetails);
+#endif
         bool noerror = statjob->exec();
         if (noerror) {
             // We want a file

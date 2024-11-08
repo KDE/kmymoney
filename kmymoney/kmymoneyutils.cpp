@@ -526,7 +526,11 @@ bool KMyMoneyUtils::fileExists(const QUrl &url)
             fileExists = check_file.exists() && check_file.isFile();
 
         } else {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            auto statjob = KIO::stat(url, KIO::StatJob::SourceSide, KIO::StatNoDetails);
+#else
             auto statjob = KIO::statDetails(url, KIO::StatJob::SourceSide, KIO::StatNoDetails);
+#endif
             bool noerror = statjob->exec();
             if (noerror) {
                 // We want a file
