@@ -3139,14 +3139,18 @@ bool KMyMoneyApp::openUrl(const QUrl& url)
         QDesktopServices::openUrl(url);
         return true;
     }
+
+    // Use the regex pattern of the file name from the URL to find the desired file.
+    static QRegularExpression rx;
     QFileInfo fi(url.toLocalFile());
-    QRegExp rx(fi.fileName());
+    rx.setPattern(fi.fileName());
     QDir dir = fi.absoluteDir();
     dir.setFilter(QDir::Files);
     QFileInfoList list = dir.entryInfoList();
     for (int j = 0; j < list.size(); ++j) {
         QFileInfo fileInfo = list.at(j);
-        if (rx.indexIn(fileInfo.fileName()) != -1) {
+        QRegularExpressionMatch match = rx.match(fileInfo.fileName());
+        if (match.hasMatch()) {
             QDesktopServices::openUrl(QUrl::fromLocalFile(fileInfo.absoluteFilePath()));
             return true;
         }
