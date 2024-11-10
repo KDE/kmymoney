@@ -11,6 +11,7 @@ set(querytable_test_files
   test-469195.xml
   test-buchungen.xml
   test-eigenkapital.xml
+  refinance-loan.xml
 )
 
 set(pivottable_test_files

@@ -822,7 +822,7 @@ void QueryTable::constructTransactionTable()
                 if (include_me) {
                     if (loan_special_case) {
                         // put the principal amount in the "value" column and convert to lowest fraction
-                        qA[ctValue] = (-(*it_split).shares() * xr).convert(fraction).toString();
+                        qA[ctValue] = ((*it_split).shares() * xr).convert(fraction).toString();
                         qA[ctValueSourceLine] = QString("%1").arg(__LINE__);
                         qA[ctRank] = QLatin1Char('1');
                         qA[ctSplit].clear();
@@ -873,7 +873,7 @@ void QueryTable::constructTransactionTable()
                 if (include_me) {
 
                     if (loan_special_case) {
-                        MyMoneyMoney value = (-(* it_split).shares() * xr).convert(fraction);
+                        MyMoneyMoney value = ((*it_split).shares() * xr).convert(fraction);
 
                         if ((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization)) {
                             // put the payment in the "payment" column and convert to lowest fraction
@@ -889,9 +889,12 @@ void QueryTable::constructTransactionTable()
                             // pay-in apart from fees is if there are only 2 splits in
                             // the transaction.  I wish there was a better way.
                         } else {
-                            // accumulate everything else in the "fees" column
-                            MyMoneyMoney n0 = MyMoneyMoney(qA[ctFees]);
-                            qA[ctFees] = (n0 + value).toString();
+                            // accumulate everything else in the "fees" column if
+                            // the split references an income or expense account
+                            if (splitAcc.isIncomeExpense()) {
+                                MyMoneyMoney n0 = MyMoneyMoney(qA[ctFees]);
+                                qA[ctFees] = (n0 + value).toString();
+                            }
                         }
                         // we don't add qA here for a loan transaction. we'll add one
                         // qA after all of the split components have been processed.
