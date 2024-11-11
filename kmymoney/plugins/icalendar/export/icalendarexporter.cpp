@@ -10,6 +10,7 @@
 
 // Qt includes
 #include <QFileDialog>
+#include <QPointer>
 #include <QUrl>
 #include <QAction>
 

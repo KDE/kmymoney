@@ -29,6 +29,7 @@
 #include <kmessagebox.h>
 #include <kconfig.h>
 #include <KConfigGroup>
+#include <KIO/FileCopyJob>
 #include <KSharedConfig>
 #include <KLocalizedString>
 #include "kjobwidgets.h"

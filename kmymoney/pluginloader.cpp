@@ -19,11 +19,10 @@
 // KDE Includes
 
 #include <KConfigGroup>
-#include <KPluginLoader>
 #include <KPluginFactory>
 #include <KPluginMetaData>
-#include <KXMLGUIFactory>
 #include <KSharedConfig>
+#include <KXMLGUIFactory>
 
 // ----------------------------------------------------------------------------
 // Project Includes

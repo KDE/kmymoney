@@ -13,12 +13,13 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QTimer>
 #include <QFile>
-#include <QTemporaryFile>
 #include <QFileDialog>
+#include <QPointer>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
+#include <QTemporaryFile>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
