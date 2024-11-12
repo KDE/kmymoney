@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-11 01:59+0000\n"
+"POT-Creation-Date: 2024-11-12 01:53+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -143,14 +143,14 @@ msgstr ""
 "συναλλαγές αυτές θα αγνοηθούν."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:745
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1441
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1442
 #, kde-format
 msgid "Security not found"
 msgstr "Δεν βρέθηκε αξιόγραφο"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:790
 #: kmymoney/converter/mymoneystatementreader.cpp:793
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1425
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1426
 #, kde-format
 msgid "Statement Importer"
 msgstr "Οδηγός εισαγωγής αποσπάσματος κίνησης λογαριασμού"
@@ -640,10 +640,10 @@ msgid "Backup location:"
 msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3920
-#: kmymoney/kmymoney.cpp:3991 kmymoney/kmymoney.cpp:4007
-#: kmymoney/kmymoney.cpp:4013 kmymoney/kmymoney.cpp:4027
-#: kmymoney/kmymoney.cpp:4029
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3924
+#: kmymoney/kmymoney.cpp:3995 kmymoney/kmymoney.cpp:4011
+#: kmymoney/kmymoney.cpp:4017 kmymoney/kmymoney.cpp:4031
+#: kmymoney/kmymoney.cpp:4033
 #, kde-format
 msgid "Backup"
 msgstr "Υποστηρικτικό αντίγραφο"
@@ -5713,7 +5713,7 @@ msgstr "Αδυναμία προσθήκης συναλλαγών"
 msgid "Unable to modify transaction"
 msgstr "Αδυναμία προσθήκης συναλλαγών"
 
-#: kmymoney/kmymoney.cpp:3171
+#: kmymoney/kmymoney.cpp:3175
 #, fuzzy, kde-format
 #| msgid ""
 #| "At least one split of the selected transactions has been reconciled. Do "
@@ -5725,14 +5725,14 @@ msgstr ""
 "Τουλάχιστο μία διάσπαση των επιλεγμένων συναλλαγών έχει συμφωνηθεί. Θέλετε "
 "οπωσδήποτε να διαγράψετε τη συναλλαγή;"
 
-#: kmymoney/kmymoney.cpp:3173
+#: kmymoney/kmymoney.cpp:3177
 #, fuzzy, kde-format
 #| msgid "Transaction already reconciled"
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "Η συναλλαγή έχει ήδη συμφωνηθεί"
 
-#: kmymoney/kmymoney.cpp:3178
+#: kmymoney/kmymoney.cpp:3182
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -5741,20 +5741,20 @@ msgid_plural "Do you really want to change all %1 selected transactions?"
 msgstr[0] "Θέλετε πραγματικά να διαγράψετε την επιλεγμένη συναλλαγή;"
 msgstr[1] "Θέλετε πραγματικά να διαγράψετε όλες τις %1 επιλεγμένες συναλλαγές;"
 
-#: kmymoney/kmymoney.cpp:3182
+#: kmymoney/kmymoney.cpp:3186
 #, fuzzy, kde-format
 #| msgid "Any transaction"
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "Όλες οι συναλλαγές"
 
-#: kmymoney/kmymoney.cpp:3267
+#: kmymoney/kmymoney.cpp:3271
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to accept transaction"
 msgstr "Αδυναμία προσθήκης συναλλαγών"
 
-#: kmymoney/kmymoney.cpp:3307
+#: kmymoney/kmymoney.cpp:3311
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has detected some overdue scheduled transactions for this "
@@ -5767,12 +5767,12 @@ msgstr ""
 "προγραμματιστεί για αυτόν τον λογαριασμό. Θέλετε να κάνετε εισαγωγή αυτών "
 "των προγραμματισμένων συναλλαγών τώρα;"
 
-#: kmymoney/kmymoney.cpp:3310
+#: kmymoney/kmymoney.cpp:3314
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "Βρέθηκαν προγραμματισμένες συναλλαγές"
 
-#: kmymoney/kmymoney.cpp:3385
+#: kmymoney/kmymoney.cpp:3389
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have closed this account. It remains in the system because you have "
@@ -5791,61 +5791,61 @@ msgstr ""
 "ξανά επιλέγοντας από το μενού Προβολή <b>Εμφάνιση όλων των λογαριασμών</b> ή "
 "με αναίρεση της ρύθμισης <b>Να μην εμφανίζονται οι κλειστοί λογαριασμοί</b>."
 
-#: kmymoney/kmymoney.cpp:3387
+#: kmymoney/kmymoney.cpp:3391
 #, kde-format
 msgid "Information"
 msgstr "Πληροφορίες"
 
-#: kmymoney/kmymoney.cpp:3491 kmymoney/kmymoney.cpp:3587
+#: kmymoney/kmymoney.cpp:3495 kmymoney/kmymoney.cpp:3591
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "Κανένα αρχείο KMyMoney ανοιχτό"
 
-#: kmymoney/kmymoney.cpp:3524 kmymoney/kmymoney.cpp:3526
+#: kmymoney/kmymoney.cpp:3528 kmymoney/kmymoney.cpp:3530
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1364
-#: kmymoney/plugins/xml/xmlstorage.cpp:413
+#: kmymoney/plugins/xml/xmlstorage.cpp:414
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "Έτοιμο."
 
-#: kmymoney/kmymoney.cpp:3591
+#: kmymoney/kmymoney.cpp:3595
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "Εμφάνιση προσωπικών δεδομένων..."
 
-#: kmymoney/kmymoney.cpp:3598
+#: kmymoney/kmymoney.cpp:3602
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "Επεξεργασία προσωπικών δεδομένων"
 
-#: kmymoney/kmymoney.cpp:3613
+#: kmymoney/kmymoney.cpp:3617
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr "Αδυναμία αποθήκευσης των πληροφοριών του χρήστη: %1"
 
-#: kmymoney/kmymoney.cpp:3621
+#: kmymoney/kmymoney.cpp:3625
 #, kde-format
 msgid "Importing account templates."
 msgstr "Εισαγωγή προτύπων λογαριασμών."
 
-#: kmymoney/kmymoney.cpp:3635
+#: kmymoney/kmymoney.cpp:3639
 #, fuzzy, kde-format
 #| msgid "Unable to import template(s): %1, thrown in %2:%3"
 msgid "Unable to import template(s)"
 msgstr "Αδυναμία εισαγωγής του (ή των) προτύπου (ών): %1, ανεστάλη στο %2:%3"
 
-#: kmymoney/kmymoney.cpp:3643
+#: kmymoney/kmymoney.cpp:3647
 #, kde-format
 msgid "Exporting account templates."
 msgstr "Εξαγωγή προτύπων του λογαριασμού"
 
-#: kmymoney/kmymoney.cpp:3649
+#: kmymoney/kmymoney.cpp:3653
 #, kde-format
 msgid "Save as..."
 msgstr "Αποθήκευση Ως..."
 
-#: kmymoney/kmymoney.cpp:3650
+#: kmymoney/kmymoney.cpp:3654
 #, fuzzy, kde-format
 #| msgid ""
 #| "*.kmt|KMyMoney template files\n"
@@ -5855,24 +5855,24 @@ msgstr ""
 "*kmt|KMyMoney αρχεία προτύπων\n"
 "*|Όλα τα αρχεία"
 
-#: kmymoney/kmymoney.cpp:3681
+#: kmymoney/kmymoney.cpp:3685
 #, fuzzy, kde-format
 #| msgid "Template Error"
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "Σφάλμα στο πρότυπο"
 
-#: kmymoney/kmymoney.cpp:3699
+#: kmymoney/kmymoney.cpp:3703
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr "Το αρχείο <b>%1</b> υπάρχει ήδη. Θέλετε να το αντικαταστήσετε;"
 
-#: kmymoney/kmymoney.cpp:3701 kmymoney/plugins/csv/export/csvexporter.cpp:102
+#: kmymoney/kmymoney.cpp:3705 kmymoney/plugins/csv/export/csvexporter.cpp:102
 #, kde-format
 msgid "File already exists"
 msgstr "Το αρχείο υπάρχει ήδη"
 
-#: kmymoney/kmymoney.cpp:3826
+#: kmymoney/kmymoney.cpp:3830
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
@@ -5881,13 +5881,13 @@ msgstr ""
 "Το αρχείο πρέπει πρώτα να αποθηκευτεί πριν τη δημιουργία υποστηρικτικού "
 "αντιγράφου (backup). Θέλετε να συνεχίσετε;"
 
-#: kmymoney/kmymoney.cpp:3828
+#: kmymoney/kmymoney.cpp:3832
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3845
+#: kmymoney/kmymoney.cpp:3849
 #, kde-format
 msgid ""
 "The current implementation of the backup functionality only supports local "
@@ -5897,72 +5897,72 @@ msgstr ""
 "τοπικά αρχεία μόνο ως πηγαία αρχεία. Το τρέχον πηγαίο αρχείο σας είναι το "
 "'%1'."
 
-#: kmymoney/kmymoney.cpp:3847
+#: kmymoney/kmymoney.cpp:3851
 #, kde-format
 msgid "Local files only"
 msgstr "Μόνο τοπικά αρχεία"
 
-#: kmymoney/kmymoney.cpp:3886
+#: kmymoney/kmymoney.cpp:3890
 #, kde-format
 msgid "Mounting %1"
 msgstr "Προσάρτηση του %1 σε εξέλιξη"
 
-#: kmymoney/kmymoney.cpp:3920
+#: kmymoney/kmymoney.cpp:3924
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr ""
 "Το σημερινό αρχείο υποστηρικτικής αποθήκευσης (backup) υπάρχει σε αυτήν τη "
 "συσκευή. Να αντικατασταθεί;"
 
-#: kmymoney/kmymoney.cpp:3920
+#: kmymoney/kmymoney.cpp:3924
 #, kde-format
 msgid "&Replace"
 msgstr "&Αντικατάσταση"
 
-#: kmymoney/kmymoney.cpp:3928
+#: kmymoney/kmymoney.cpp:3932
 #, fuzzy, kde-format
 #| msgid "Unable to create account: %1"
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
 msgstr "Αδυναμία δημιουργίας λογαριασμού: %1"
 
-#: kmymoney/kmymoney.cpp:3933
+#: kmymoney/kmymoney.cpp:3937
 #, kde-format
 msgid "Writing %1"
 msgstr "Εγγραφή του %1"
 
-#: kmymoney/kmymoney.cpp:3954
+#: kmymoney/kmymoney.cpp:3958
 #, kde-format
 msgid "Unmounting %1"
 msgstr "Αποπροσάρτηση του %1 σε εξέλιξη"
 
-#: kmymoney/kmymoney.cpp:3991
+#: kmymoney/kmymoney.cpp:3995
 #, kde-format
 msgid "Error mounting device"
 msgstr "Σφάλμα κατά την προσάρτηση της συσκευής"
 
-#: kmymoney/kmymoney.cpp:4006 kmymoney/kmymoney.cpp:4025
+#: kmymoney/kmymoney.cpp:4010 kmymoney/kmymoney.cpp:4029
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "Ολοκληρώθηκε"
 
-#: kmymoney/kmymoney.cpp:4007 kmymoney/kmymoney.cpp:4027
+#: kmymoney/kmymoney.cpp:4011 kmymoney/kmymoney.cpp:4031
 #, kde-format
 msgid "File successfully backed up"
 msgstr "Το υποστηρικτικό αντίγραφο του αρχείου δημιουργήθηκε επιτυχώς"
 
-#: kmymoney/kmymoney.cpp:4013
+#: kmymoney/kmymoney.cpp:4017
 #, kde-format
 msgid "Error copying file to device"
 msgstr "Σφάλμα στην αντιγραφή του αρχείου στη συσκευή"
 
-#: kmymoney/kmymoney.cpp:4029
+#: kmymoney/kmymoney.cpp:4033
 #, kde-format
 msgid "Error unmounting device"
 msgstr "Σφάλμα κατά την αποπροσάρτηση της συσκευής"
 
-#: kmymoney/kmymoney.cpp:4076
+#: kmymoney/kmymoney.cpp:4080
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5980,30 +5980,30 @@ msgstr ""
 "Με κλικ στο Όχι ο λογαριασμός παραμένει %2,\n"
 "Με κλικ στο Ακύρωση εγκαταλείπετε τη δημιουργία του λογαριασμού."
 
-#: kmymoney/kmymoney.cpp:4086
+#: kmymoney/kmymoney.cpp:4090
 #, fuzzy, kde-format
 #| msgid "Opening balance problem"
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "Πρόβλημα ισολογισμού ανοίγματος"
 
-#: kmymoney/kmymoney.cpp:4097
+#: kmymoney/kmymoney.cpp:4101
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "Αδυναμία προσθήκης του λογαριασμού: %1"
 
-#: kmymoney/kmymoney.cpp:4167
+#: kmymoney/kmymoney.cpp:4171
 #, kde-format
 msgid "Running consistency check..."
 msgstr "Εκτέλεση ελέγχου ακεραιότητας..."
 
-#: kmymoney/kmymoney.cpp:4174
+#: kmymoney/kmymoney.cpp:4178
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "Ο έλεγχος ακεραιότητας απέτυχε: %1"
 
-#: kmymoney/kmymoney.cpp:4184
+#: kmymoney/kmymoney.cpp:4188
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -6012,7 +6012,7 @@ msgstr ""
 "Ο έλεγχος ακεραιότητας δεν βρήκε προβλήματα με τα δεδομένα σας. Οι "
 "λεπτομέρειες παρουσιάζονται παρακάτω."
 
-#: kmymoney/kmymoney.cpp:4186
+#: kmymoney/kmymoney.cpp:4190
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -6023,17 +6023,17 @@ msgstr ""
 "λεπτομέρειες παρουσιάζονται παρακάτω. Τα προβλήματα αυτά που δεν μπορούν να "
 "διορθωθούν αυτόματα χρειάζεται να επιλυθούν από τον χρήστη."
 
-#: kmymoney/kmymoney.cpp:4189
+#: kmymoney/kmymoney.cpp:4193
 #, kde-format
 msgid "Consistency check result"
 msgstr "Αποτέλεσμα του ελέγχου ακεραιότητας"
 
-#: kmymoney/kmymoney.cpp:4255
+#: kmymoney/kmymoney.cpp:4259
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Έλεγχος για εκπρόθεσμες προγραμματισμένες συναλλαγές..."
 
-#: kmymoney/kmymoney.cpp:4445
+#: kmymoney/kmymoney.cpp:4449
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
@@ -6041,12 +6041,12 @@ msgstr ""
 "Πρέπει πρώτα να επιλέξετε ένα αρχείο KMyMoney πριν κάνετε εισαγωγή κίνησης "
 "λογαριασμού."
 
-#: kmymoney/kmymoney.cpp:4450
+#: kmymoney/kmymoney.cpp:4454
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Εισαγωγή κίνησης μέσω σύνδεσης διαδικτύου"
 
-#: kmymoney/kmymoney.cpp:4462
+#: kmymoney/kmymoney.cpp:4466
 #, fuzzy, kde-format
 #| msgid ""
 #| "Unable to import %1 using %2 plugin.  The plugin returned the following "
@@ -6059,72 +6059,72 @@ msgstr ""
 "Αδυναμία εισαγωγής %1 με χρήση του πρόσθετου %2.  Το πρόσθετο επέστρεψε το "
 "ακόλουθο σφάλμα: %3"
 
-#: kmymoney/kmymoney.cpp:4462 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
+#: kmymoney/kmymoney.cpp:4466 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
 #, kde-format
 msgid "Importing error"
 msgstr "Σφάλμα κατά την εισαγωγή"
 
-#: kmymoney/kmymoney.cpp:4490
+#: kmymoney/kmymoney.cpp:4494
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Όλα τα μηνύματα έχουν ενεργοποιηθεί."
 
-#: kmymoney/kmymoney.cpp:4490
+#: kmymoney/kmymoney.cpp:4494
 #, kde-format
 msgid "All messages"
 msgstr "Όλα τα μηνύματα"
 
-#: kmymoney/kmymoney.cpp:4526
+#: kmymoney/kmymoney.cpp:4530
 #, kde-format
 msgid "Auto saving..."
 msgstr "Αυτόματη αποθήκευση..."
 
-#: kmymoney/kmymoney.cpp:4646
+#: kmymoney/kmymoney.cpp:4650
 #, kde-format
 msgid "Creating new document..."
 msgstr "Δημιουργία νέου εγγράφου..."
 
-#: kmymoney/kmymoney.cpp:4706
+#: kmymoney/kmymoney.cpp:4710
 #, fuzzy, kde-format
 #| msgid "Create a new profile"
 msgid "Couldn't create a new file."
 msgstr "Δημιουργία ενός νέου προφίλ"
 
-#: kmymoney/kmymoney.cpp:4717
+#: kmymoney/kmymoney.cpp:4721
 #, kde-format
 msgid "Open a file."
 msgstr "Άνοιγμα ενός αρχείου."
 
-#: kmymoney/kmymoney.cpp:4731
+#: kmymoney/kmymoney.cpp:4735
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4735
+#: kmymoney/kmymoney.cpp:4739
 #, fuzzy, kde-format
 #| msgctxt "All files (Filefilter)"
 #| msgid "All files"
 msgid "All files (*)"
 msgstr "Όλα τα αρχεία"
 
-#: kmymoney/kmymoney.cpp:4748
+#: kmymoney/kmymoney.cpp:4752
 #, kde-format
 msgid "Loading file..."
 msgstr "Φόρτωση αρχείου..."
 
-#: kmymoney/kmymoney.cpp:4754
+#: kmymoney/kmymoney.cpp:4758
 #, kde-format
 msgid "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
 msgstr ""
 "<p>Το αρχείο <b>%1</b> είναι ήδη ανοιχτό από ένα άλλο παράθυρο του KMyMoney</"
 "p>"
 
-#: kmymoney/kmymoney.cpp:4754
+#: kmymoney/kmymoney.cpp:4758
 #, kde-format
 msgid "Duplicate open"
 msgstr "Διπλό άνοιγμα"
 
-#: kmymoney/kmymoney.cpp:4761
+#: kmymoney/kmymoney.cpp:4765
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -6133,52 +6133,52 @@ msgstr ""
 "<p>Το αρχείο <b>%1</b> έχει ένα μη έγκυρο όνομα ή δεν υπάρχει. Μπορείτε να "
 "ανοίξετε ένα άλλο αρχείο ή να δημιουργήσετε ένα νέο.</p>"
 
-#: kmymoney/kmymoney.cpp:4761
+#: kmymoney/kmymoney.cpp:4765
 #, kde-format
 msgid "File not found"
 msgstr "Το αρχείο δεν βρέθηκε"
 
-#: kmymoney/kmymoney.cpp:4792
+#: kmymoney/kmymoney.cpp:4796
 #, fuzzy, kde-format
 #| msgid "Cannot open file as requested. Error was: %1"
 msgid "Cannot open file as requested."
 msgstr "Αδύνατο το άνοιγμα του ζητούμενου αρχείου. Το σφάλμα ήταν: %1"
 
-#: kmymoney/kmymoney.cpp:4799
+#: kmymoney/kmymoney.cpp:4803
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
 "necessary plugin is enabled."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4810
+#: kmymoney/kmymoney.cpp:4814
 #, kde-format
 msgid "Saving file..."
 msgstr "Αποθήκευση του αρχείου..."
 
-#: kmymoney/kmymoney.cpp:4822
+#: kmymoney/kmymoney.cpp:4826
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your data."
 msgstr "Αποτυχία αποθήκευσης: %1"
 
-#: kmymoney/kmymoney.cpp:4828
+#: kmymoney/kmymoney.cpp:4832
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4834
+#: kmymoney/kmymoney.cpp:4838
 #, fuzzy, kde-format
 #| msgid "Saving file..."
 msgid "Saving file as...."
 msgstr "Αποθήκευση του αρχείου..."
 
-#: kmymoney/kmymoney.cpp:4850
+#: kmymoney/kmymoney.cpp:4854
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4879
+#: kmymoney/kmymoney.cpp:4883
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your storage."
@@ -6460,7 +6460,7 @@ msgstr "Διαγραφή τιμής..."
 
 #: kmymoney/kmymoneyutils.cpp:548
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:138
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:431
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:432
 #: kmymoney/templates/templateloader.cpp:78
 #, kde-format
 msgid "Error while loading file '%1'."
@@ -6468,8 +6468,8 @@ msgstr "Σφάλμα κατά τη φόρτωση του αρχείου «%1»."
 
 #: kmymoney/kmymoneyutils.cpp:550
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:138
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:433
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1004
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:434
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1005
 #: kmymoney/templates/templateloader.cpp:80
 #, kde-format
 msgid "File access error"
@@ -12541,23 +12541,23 @@ msgstr ""
 msgid "%1 is not an Investment Account. Do you wish to make it one?"
 msgstr "%1 δεν είναι λογαριασμός επενδύσεων. Θέλετε να δημιουργήσετε έναν;"
 
-#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:55
+#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:56
 #, kde-format
 msgid "Schedules to iCalendar"
 msgstr "Προγρ.συναλλαγών σε iCalendar"
 
-#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:75
+#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:76
 #, kde-format
 msgid "Schedules to iCalendar [%1]"
 msgstr "Προγρ.συναλλαγών σε iCalendar [%1]"
 
-#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:93
+#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:94
 #, kde-format
 msgctxt "ICS (Filefilter)"
 msgid "iCalendar files"
 msgstr "Αρχεία iCalendar"
 
-#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:96
+#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:97
 #: kmymoney/plugins/views/reports/kreportsview.cpp:348
 #, kde-format
 msgid "Export as"
@@ -14747,7 +14747,7 @@ msgstr "Απόσπασμα κίνησης λογαριασμού"
 msgid "Other application"
 msgstr "Άλλη εφαρμογή"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:167
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:168
 #, fuzzy, kde-format
 #| msgctxt "Category name"
 #| msgid "Reinvested dividend"
@@ -14755,150 +14755,150 @@ msgctxt "Category name"
 msgid "Reinvested interest"
 msgstr "Επανεπενδυθέντα μερίσματα"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:170
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:171
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested dividend"
 msgstr "Επανεπενδυθέντα μερίσματα"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:173
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:174
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested dividend (long term)"
 msgstr "Επανεπενδυθέντα μερίσματα (μακροπρόθεσμα)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:176
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:177
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested dividend (short term)"
 msgstr "Επανεπενδυθέντα μερίσματα (βραχυπρόθεσμα)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:179
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:180
 #, kde-format
 msgctxt "Category name"
 msgid "Dividend"
 msgstr "Μέρισμα"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:182
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:183
 #, kde-format
 msgctxt "Category name"
 msgid "Interest"
 msgstr "Τόκος"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:185
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:186
 #, kde-format
 msgctxt "Category name"
 msgid "Capital Gain (short term)"
 msgstr "Κεφαλαιακή απόδοση (βραχυπρόθεσμη)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:188
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:189
 #, kde-format
 msgctxt "Category name"
 msgid "Capital Gain (mid term)"
 msgstr "Κεφαλαιακή απόδοση (μεσοπρόθεσμη)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:191
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:192
 #, kde-format
 msgctxt "Category name"
 msgid "Capital Gain (long term)"
 msgstr "Κεφαλαιακή απόδοση (μακροπρόθεσμη)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:194
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:195
 #, kde-format
 msgctxt "Category name"
 msgid "Returned capital"
 msgstr "Επιστροφή κεφαλαίου"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:197
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:198
 #, kde-format
 msgctxt "Category name"
 msgid "Miscellaneous income"
 msgstr "Διάφορα έσοδα"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:200
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:201
 #, kde-format
 msgctxt "Category name"
 msgid "Miscellaneous expense"
 msgstr "Διάφορα έξοδα"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:203
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:204
 #, kde-format
 msgctxt "Category name"
 msgid "Investment fees"
 msgstr "Αμοιβές επενδύσεων"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:205
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:206
 #, kde-format
 msgid "Unknown QIF type %1"
 msgstr "Άγνωστος τύπος QIF %1"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:364
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:365
 #, kde-format
 msgid "Date format selection"
 msgstr "Επιλογή μορφής ημερομηνίας"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:364
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:365
 #, kde-format
 msgid "Pick the date format that suits your input file"
 msgstr "Επιλέξτε την μορφή ημερομηνίας που ταιριάζει με το αρχείο εισαγωγής"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:379
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:380
 #, kde-format
 msgid "Importing QIF..."
 msgstr "Εισαγωγή QIF..."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:481
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:482
 #, kde-format
 msgid "Reading QIF..."
 msgstr "Ανάγνωση QIF..."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:486
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:487
 #, kde-format
 msgid "Error while running the filter '%1'."
 msgstr "Σφάλμα κατά την εκτέλεση του φίλτρου «%1»."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:488
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:489
 #, kde-format
 msgid "Filter error"
 msgstr "Σφάλμα φίλτρου"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:522
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:523
 #, kde-format
 msgctxt "QIF tag for liability account"
 msgid "Oth L"
 msgstr "Oth L"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:527
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:528
 #, kde-format
 msgctxt "QIF tag for investment account"
 msgid "Invst"
 msgstr "Invst"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:541
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:542
 #, kde-format
 msgctxt "QIF tag for category"
 msgid "Cat"
 msgstr "Cat"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:544
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:545
 #, kde-format
 msgctxt "QIF tag for security"
 msgid "Security"
 msgstr "Αξιόγραφο"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:547
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:548
 #, kde-format
 msgctxt "QIF tag for prices"
 msgid "Prices"
 msgstr "Τιμές"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:556
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:557
 #, kde-format
 msgctxt "QIF tag for a class"
 msgid "Class"
 msgstr "Κλάση"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:736
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:737
 #, kde-format
 msgid ""
 "The %1 account currently has an opening balance of %2. This QIF file reports "
@@ -14909,29 +14909,29 @@ msgstr ""
 "αρχείο QIF αναφέρει έναν ισολογισμό ανοίγματος %3. Θέλετε να αντικαταστήσετε "
 "τον τρέχοντα ισολογισμό με αυτόν από το αρχείο QIF;"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:737
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:738
 #, kde-format
 msgid "Overwrite opening balance"
 msgstr "Αντικατάσταση του ισολογισμού ανοίγματος"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:904
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:905
 #, kde-format
 msgid "Unable to find account: %1"
 msgstr "Αδυναμία εύρεσης λογαριασμού: %1"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:918
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:928
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:953
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:919
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:929
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:954
 #, kde-format
 msgid "Autogenerated by QIF importer"
 msgstr "Αυτόματα παραγόμενο από τον οδηγό εισαγωγής QIF"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:945
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:946
 #, kde-format
 msgid "QIF imported, no account name supplied"
 msgstr "Εισαγωγή από το QIF, δεν παρέχεται όνομα λογαριασμού"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:979
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:980
 #, kde-format
 msgid ""
 "KMyMoney has imported a second opening balance transaction into account <b>"
@@ -14943,18 +14943,18 @@ msgstr ""
 "αρχείο. Παρακαλώ κάνετε την διόρθωση χειροκίνητα μετά την ολοκλήρωση της "
 "εισαγωγής."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:979
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:980
 #, kde-format
 msgid "Opening balance problem"
 msgstr "Πρόβλημα ισολογισμού ανοίγματος"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1002
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1003
 #, kde-format
 msgid "Error while creating opening balance transaction"
 msgstr "Σφάλμα κατά τη δημιουργία της συναλλαγής του ισολογισμού ανοίγματος"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1081
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1309
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1082
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1310
 #, kde-format
 msgid ""
 "The date entry \"%1\" read from the file cannot be interpreted through the "
@@ -14972,13 +14972,13 @@ msgstr ""
 "εισαγωγής. Θα μπορείτε έτσι να επανεκκινήσετε τη διαδικασία εισαγωγής και να "
 "επιλέξετε ένα προφίλ QIF διαφορετικό ή να δημιουργήσετε ένα νέο."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1086
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1314
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1087
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1315
 #, kde-format
 msgid "Invalid date format"
 msgstr "Άκυρη μορφή ημερομηνίας"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1439
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1440
 #, kde-format
 msgid ""
 "This investment account does not contain the \"%1\" security.  Transactions "
@@ -14987,12 +14987,12 @@ msgstr ""
 "Αυτός ο λογαριασμός επενδύσεων δεν περιέχει το αξιόγραφο «%1». Οι συναλλαγές "
 "που έχουν σχέση με αυτό το αξιόγραφο θα αγνοηθούν."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1950
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1951
 #, kde-format
 msgid "%1 (Investment)"
 msgstr "%1 (Επενδύσεων)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1951
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1952
 #, kde-format
 msgid "Autogenerated by QIF importer from type Mutual account entry"
 msgstr ""
@@ -15430,7 +15430,7 @@ msgid "Database malfunction"
 msgstr "Δυσλειτουργία της βάσης δεδομένων"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:188
-#: kmymoney/plugins/xml/xmlstorage.cpp:239
+#: kmymoney/plugins/xml/xmlstorage.cpp:240
 #, kde-format
 msgid "Tried to access a file when it has not been opened"
 msgstr "Προσπάθεια πρόσβασης σε ένα αρχείο που δεν έχει ανοιχτεί"
@@ -18922,36 +18922,36 @@ msgctxt "Error message when reading XML file"
 msgid "Unknown payee identifier type %1"
 msgstr "Άγνωστος τύπος QIF %1"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:346
+#: kmymoney/plugins/xml/xmlstorage.cpp:347
 #, kde-format
 msgid "Save As"
 msgstr "Αποθήκευση ως"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:348
+#: kmymoney/plugins/xml/xmlstorage.cpp:349
 #, kde-format
 msgctxt "KMyMoney (Filefilter)"
 msgid "KMyMoney files"
 msgstr "Αρχεία KMyMoney"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:349
+#: kmymoney/plugins/xml/xmlstorage.cpp:350
 #, kde-format
 msgctxt "Anonymous (Filefilter)"
 msgid "Anonymous files"
 msgstr "Ανώνυμα αρχεία"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:350
+#: kmymoney/plugins/xml/xmlstorage.cpp:351
 #, kde-format
 msgctxt "XML (Filefilter)"
 msgid "XML files"
 msgstr "Αρχεία XML"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:351
+#: kmymoney/plugins/xml/xmlstorage.cpp:352
 #, kde-format
 msgctxt "All files (Filefilter)"
 msgid "All files"
 msgstr "Όλα τα αρχεία"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:425
+#: kmymoney/plugins/xml/xmlstorage.cpp:426
 #, fuzzy, kde-format
 #| msgid ""
 #| "*.kmy *.xml|KMyMoney files\n"
@@ -18961,7 +18961,7 @@ msgstr ""
 "*.kmy *.xml|KMyMoney αρχεία\n"
 " *|Όλα τα αρχεία"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:446
+#: kmymoney/plugins/xml/xmlstorage.cpp:447
 #, fuzzy, kde-format
 #| msgid ""
 #| "GPG does not seem to be installed on your system. Please make sure, that "
@@ -18976,12 +18976,12 @@ msgstr ""
 "σιγουρευτείτε ότι το GPG μπορεί να βρεθεί χρησιμοποιώντας την τοποθεσία της "
 "τυπικής αναζήτησης. Η κρυπτογράφηση αυτή τη φορά θα είναι απενεργοποιημένη."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:446
+#: kmymoney/plugins/xml/xmlstorage.cpp:447
 #, kde-format
 msgid "GPG not found"
 msgstr "Αδυναμία εύρεσης του GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:453
+#: kmymoney/plugins/xml/xmlstorage.cpp:454
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>You have selected to encrypt your data also with the KMyMoney recover "
@@ -19006,13 +19006,13 @@ msgstr ""
 "φορά τα δεδομένα σας δεν θα κρυπτογραφηθούν με το κλειδί ανάκτησης του "
 "KMyMoney.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:458
-#: kmymoney/plugins/xml/xmlstorage.cpp:466
+#: kmymoney/plugins/xml/xmlstorage.cpp:459
+#: kmymoney/plugins/xml/xmlstorage.cpp:467
 #, kde-format
 msgid "GPG Key not found"
 msgstr "Δεν βρέθηκε το GPG κλειδί"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:466
+#: kmymoney/plugins/xml/xmlstorage.cpp:467
 #, kde-format
 msgid ""
 "<p>You have specified to encrypt your data for the user-id</p><p><center><b>"
@@ -19026,7 +19026,7 @@ msgstr ""
 "εισαγάγει ένα έγκυρο κλειδί γι' αυτόν το χρήστη. Αυτήν τη φορά, η "
 "κρυπτογράφηση θα απενεργοποιηθεί.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:473
+#: kmymoney/plugins/xml/xmlstorage.cpp:474
 #, kde-format
 msgid ""
 "<p>You have configured to save your data in encrypted form using GPG. Make "
@@ -19039,12 +19039,12 @@ msgstr ""
 "θέση να το αποκρυπτογραφήσετε αργότερα. Σε περίπτωση αμφιβολίας απαντήστε "
 "<b>Όχι</b>.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:474
+#: kmymoney/plugins/xml/xmlstorage.cpp:475
 #, kde-format
 msgid "Store GPG encrypted"
 msgstr "Αποθήκευση με κρυπτογράφηση GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:590
+#: kmymoney/plugins/xml/xmlstorage.cpp:591
 #, kde-format
 msgid ""
 "You have configured KMyMoney to use GPG to protect your data and to encrypt "
@@ -19059,7 +19059,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:590
+#: kmymoney/plugins/xml/xmlstorage.cpp:591
 #, kde-format
 msgid "Recover key expires soon"
 msgstr ""

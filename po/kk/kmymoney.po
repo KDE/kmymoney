@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-11 01:59+0000\n"
+"POT-Creation-Date: 2024-11-12 01:53+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -134,14 +134,14 @@ msgstr ""
 "жоқ. Осы транзакциялар ескерілмейді."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:745
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1441
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1442
 #, kde-format
 msgid "Security not found"
 msgstr "Құнды қағаз табылмады"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:790
 #: kmymoney/converter/mymoneystatementreader.cpp:793
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1425
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1426
 #, kde-format
 msgid "Statement Importer"
 msgstr "Үзінді көшірме импорты"
@@ -614,10 +614,10 @@ msgid "Backup location:"
 msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3920
-#: kmymoney/kmymoney.cpp:3991 kmymoney/kmymoney.cpp:4007
-#: kmymoney/kmymoney.cpp:4013 kmymoney/kmymoney.cpp:4027
-#: kmymoney/kmymoney.cpp:4029
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3924
+#: kmymoney/kmymoney.cpp:3995 kmymoney/kmymoney.cpp:4011
+#: kmymoney/kmymoney.cpp:4017 kmymoney/kmymoney.cpp:4031
+#: kmymoney/kmymoney.cpp:4033
 #, kde-format
 msgid "Backup"
 msgstr "Сақтық көшірме"
@@ -5603,7 +5603,7 @@ msgstr "Транзакциялар қосылмады"
 msgid "Unable to modify transaction"
 msgstr "Транзакциялар қосылмады"
 
-#: kmymoney/kmymoney.cpp:3171
+#: kmymoney/kmymoney.cpp:3175
 #, fuzzy, kde-format
 #| msgid ""
 #| "At least one split of the selected transactions has been reconciled. Do "
@@ -5615,14 +5615,14 @@ msgstr ""
 "Таңдалған транзакциялардағы кемінде бір бөлігінің салыстырып тексерілген "
 "белгісі бар. Сонда да өшірілсін бе?"
 
-#: kmymoney/kmymoney.cpp:3173
+#: kmymoney/kmymoney.cpp:3177
 #, fuzzy, kde-format
 #| msgid "Transaction already reconciled"
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "Транзакция салыстырып тексерілген ғой"
 
-#: kmymoney/kmymoney.cpp:3178
+#: kmymoney/kmymoney.cpp:3182
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -5630,20 +5630,20 @@ msgid "Do you really want to change the selected transaction?"
 msgid_plural "Do you really want to change all %1 selected transactions?"
 msgstr[0] "Бүкіл таңдалған %1 транзакцияны өшіргіңіз келе ме?"
 
-#: kmymoney/kmymoney.cpp:3182
+#: kmymoney/kmymoney.cpp:3186
 #, fuzzy, kde-format
 #| msgid "Any transaction"
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "Кез-келген транзакция"
 
-#: kmymoney/kmymoney.cpp:3267
+#: kmymoney/kmymoney.cpp:3271
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to accept transaction"
 msgstr "Транзакциялар қосылмады"
 
-#: kmymoney/kmymoney.cpp:3307
+#: kmymoney/kmymoney.cpp:3311
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has detected some overdue scheduled transactions for this "
@@ -5655,12 +5655,12 @@ msgstr ""
 "KMyMoney бұл есепшоттың мерзімі өткен жоспарлаған транзакцияларды тапты. "
 "Бұлар енді енгізілсін бе?"
 
-#: kmymoney/kmymoney.cpp:3310
+#: kmymoney/kmymoney.cpp:3314
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "Жоспарланған транзакциялар бар"
 
-#: kmymoney/kmymoney.cpp:3385
+#: kmymoney/kmymoney.cpp:3389
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have closed this account. It remains in the system because you have "
@@ -5680,61 +5680,61 @@ msgstr ""
 "параметрлердегі <b>Жабылған есепшоттар көрсетілмесін</b> дегеннен белгісін "
 "алып тастау керек."
 
-#: kmymoney/kmymoney.cpp:3387
+#: kmymoney/kmymoney.cpp:3391
 #, kde-format
 msgid "Information"
 msgstr "Ақпарат"
 
-#: kmymoney/kmymoney.cpp:3491 kmymoney/kmymoney.cpp:3587
+#: kmymoney/kmymoney.cpp:3495 kmymoney/kmymoney.cpp:3591
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "KMyMoneyFile ашылмаған"
 
-#: kmymoney/kmymoney.cpp:3524 kmymoney/kmymoney.cpp:3526
+#: kmymoney/kmymoney.cpp:3528 kmymoney/kmymoney.cpp:3530
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1364
-#: kmymoney/plugins/xml/xmlstorage.cpp:413
+#: kmymoney/plugins/xml/xmlstorage.cpp:414
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "Дайын."
 
-#: kmymoney/kmymoney.cpp:3591
+#: kmymoney/kmymoney.cpp:3595
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "Дербес деректерді қарау..."
 
-#: kmymoney/kmymoney.cpp:3598
+#: kmymoney/kmymoney.cpp:3602
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "Дербес деректерді өзгерту"
 
-#: kmymoney/kmymoney.cpp:3613
+#: kmymoney/kmymoney.cpp:3617
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr "Пайдаланушы дерегі сақталмады: %1"
 
-#: kmymoney/kmymoney.cpp:3621
+#: kmymoney/kmymoney.cpp:3625
 #, kde-format
 msgid "Importing account templates."
 msgstr "Есепшоттың үлгілерін импорттау."
 
-#: kmymoney/kmymoney.cpp:3635
+#: kmymoney/kmymoney.cpp:3639
 #, fuzzy, kde-format
 #| msgid "Unable to import template(s): %1, thrown in %2:%3"
 msgid "Unable to import template(s)"
 msgstr "Импортталмаған үлгі(лер) %1, жаңылыс мынада: %2:%3"
 
-#: kmymoney/kmymoney.cpp:3643
+#: kmymoney/kmymoney.cpp:3647
 #, kde-format
 msgid "Exporting account templates."
 msgstr "Есепшоттың үлгілерін экспорттау."
 
-#: kmymoney/kmymoney.cpp:3649
+#: kmymoney/kmymoney.cpp:3653
 #, kde-format
 msgid "Save as..."
 msgstr "Былай сақтау..."
 
-#: kmymoney/kmymoney.cpp:3650
+#: kmymoney/kmymoney.cpp:3654
 #, fuzzy, kde-format
 #| msgid ""
 #| "*.kmt|KMyMoney template files\n"
@@ -5744,24 +5744,24 @@ msgstr ""
 "*.kmt|KMyMoney үлгі файлдары\n"
 "*|Бүкіл файлдар"
 
-#: kmymoney/kmymoney.cpp:3681
+#: kmymoney/kmymoney.cpp:3685
 #, fuzzy, kde-format
 #| msgid "Template Error"
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "Үлгі қатесі"
 
-#: kmymoney/kmymoney.cpp:3699
+#: kmymoney/kmymoney.cpp:3703
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr "<b>%1</b> деп аталған файл бар екен. Үстінен жаза берейік пе?"
 
-#: kmymoney/kmymoney.cpp:3701 kmymoney/plugins/csv/export/csvexporter.cpp:102
+#: kmymoney/kmymoney.cpp:3705 kmymoney/plugins/csv/export/csvexporter.cpp:102
 #, kde-format
 msgid "File already exists"
 msgstr "Файл бар екен"
 
-#: kmymoney/kmymoney.cpp:3826
+#: kmymoney/kmymoney.cpp:3830
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
@@ -5769,13 +5769,13 @@ msgid ""
 msgstr ""
 "Файлды сақтық көшірмелеу үшін алдында сақтау керек. Жалғастырмақсыз ба?"
 
-#: kmymoney/kmymoney.cpp:3828
+#: kmymoney/kmymoney.cpp:3832
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3845
+#: kmymoney/kmymoney.cpp:3849
 #, kde-format
 msgid ""
 "The current implementation of the backup functionality only supports local "
@@ -5784,70 +5784,70 @@ msgstr ""
 "Сақтық көшірмелеу әзірше жергілікті файлдар үшін ғана іске асырылған. "
 "Файлыңыз '%1' деп сақталады."
 
-#: kmymoney/kmymoney.cpp:3847
+#: kmymoney/kmymoney.cpp:3851
 #, kde-format
 msgid "Local files only"
 msgstr "Жергілікті файлдар ғана"
 
-#: kmymoney/kmymoney.cpp:3886
+#: kmymoney/kmymoney.cpp:3890
 #, kde-format
 msgid "Mounting %1"
 msgstr "%1 жалғауы"
 
-#: kmymoney/kmymoney.cpp:3920
+#: kmymoney/kmymoney.cpp:3924
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr "Бұл құрылғыда бүгінгі сақтық көшірме бар. Ауыстырмақсыз ба?"
 
-#: kmymoney/kmymoney.cpp:3920
+#: kmymoney/kmymoney.cpp:3924
 #, kde-format
 msgid "&Replace"
 msgstr "&Ауыстыру"
 
-#: kmymoney/kmymoney.cpp:3928
+#: kmymoney/kmymoney.cpp:3932
 #, fuzzy, kde-format
 #| msgid "Unable to create account: %1"
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
 msgstr "Есепшот құрылмады: %1"
 
-#: kmymoney/kmymoney.cpp:3933
+#: kmymoney/kmymoney.cpp:3937
 #, kde-format
 msgid "Writing %1"
 msgstr "%1 жазуы"
 
-#: kmymoney/kmymoney.cpp:3954
+#: kmymoney/kmymoney.cpp:3958
 #, kde-format
 msgid "Unmounting %1"
 msgstr "%1 дегенді айыру"
 
-#: kmymoney/kmymoney.cpp:3991
+#: kmymoney/kmymoney.cpp:3995
 #, kde-format
 msgid "Error mounting device"
 msgstr "Құрылғыны жалғау қатесі"
 
-#: kmymoney/kmymoney.cpp:4006 kmymoney/kmymoney.cpp:4025
+#: kmymoney/kmymoney.cpp:4010 kmymoney/kmymoney.cpp:4029
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "Дайын"
 
-#: kmymoney/kmymoney.cpp:4007 kmymoney/kmymoney.cpp:4027
+#: kmymoney/kmymoney.cpp:4011 kmymoney/kmymoney.cpp:4031
 #, kde-format
 msgid "File successfully backed up"
 msgstr "Файл сақтық көшірмесі жасалды"
 
-#: kmymoney/kmymoney.cpp:4013
+#: kmymoney/kmymoney.cpp:4017
 #, kde-format
 msgid "Error copying file to device"
 msgstr "Файды құрылғыға көшірмелеу қатесі"
 
-#: kmymoney/kmymoney.cpp:4029
+#: kmymoney/kmymoney.cpp:4033
 #, kde-format
 msgid "Error unmounting device"
 msgstr "Құрылғыны айыру қатесі"
 
-#: kmymoney/kmymoney.cpp:4076
+#: kmymoney/kmymoney.cpp:4080
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5864,30 +5864,30 @@ msgstr ""
 "%2 дегенді қалдыру үшін Жоқ деңіз.\n"
 "Есепшоты құруды доғару үшін Айну деңіз. "
 
-#: kmymoney/kmymoney.cpp:4086
+#: kmymoney/kmymoney.cpp:4090
 #, fuzzy, kde-format
 #| msgid "Opening balance problem"
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "Бастапқы баланс мәселесі"
 
-#: kmymoney/kmymoney.cpp:4097
+#: kmymoney/kmymoney.cpp:4101
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "Есепшот қосылмады: %1"
 
-#: kmymoney/kmymoney.cpp:4167
+#: kmymoney/kmymoney.cpp:4171
 #, kde-format
 msgid "Running consistency check..."
 msgstr "Дұрыстығын тексеру орындауда..."
 
-#: kmymoney/kmymoney.cpp:4174
+#: kmymoney/kmymoney.cpp:4178
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "Дұрыстығын тексеру жаңылысы: %1"
 
-#: kmymoney/kmymoney.cpp:4184
+#: kmymoney/kmymoney.cpp:4188
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -5896,7 +5896,7 @@ msgstr ""
 "Дұрыстығын тексерген кезде деректеріңіз мәсселелер туғызды. Егжей-тегжейі "
 "төменде."
 
-#: kmymoney/kmymoney.cpp:4186
+#: kmymoney/kmymoney.cpp:4190
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5906,28 +5906,28 @@ msgstr ""
 "Дұрыстығын тексерген кезде деректеріңіз мәсселелер туғызды. Егжей-тегжейі "
 "төменде. Автоматты шешілмейтін мәселелерді қолмен шешу керек."
 
-#: kmymoney/kmymoney.cpp:4189
+#: kmymoney/kmymoney.cpp:4193
 #, kde-format
 msgid "Consistency check result"
 msgstr "Дұрыстығын тексеру нәтижесі"
 
-#: kmymoney/kmymoney.cpp:4255
+#: kmymoney/kmymoney.cpp:4259
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Жоспарланған транзакцияларда мерзімі өткендерді іздеу..."
 
-#: kmymoney/kmymoney.cpp:4445
+#: kmymoney/kmymoney.cpp:4449
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr "Үзінді көшірмені импорттау алдында KMyMoney файлын таңдап алыңыз."
 
-#: kmymoney/kmymoney.cpp:4450
+#: kmymoney/kmymoney.cpp:4454
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Үзінді көшірмені Web Connect арқылы импорттау"
 
-#: kmymoney/kmymoney.cpp:4462
+#: kmymoney/kmymoney.cpp:4466
 #, fuzzy, kde-format
 #| msgid ""
 #| "Unable to import %1 using %2 plugin.  The plugin returned the following "
@@ -5938,70 +5938,70 @@ msgid ""
 "error: %3"
 msgstr "%2 плагиннің көмегімен %1 импортталмады. Плагин қайтарған қатесі: %3"
 
-#: kmymoney/kmymoney.cpp:4462 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
+#: kmymoney/kmymoney.cpp:4466 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
 #, kde-format
 msgid "Importing error"
 msgstr "Импорттау қатесі"
 
-#: kmymoney/kmymoney.cpp:4490
+#: kmymoney/kmymoney.cpp:4494
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Бүкіл хабарламалар рұқсат етілген."
 
-#: kmymoney/kmymoney.cpp:4490
+#: kmymoney/kmymoney.cpp:4494
 #, kde-format
 msgid "All messages"
 msgstr "Бүкіл хабарламалар"
 
-#: kmymoney/kmymoney.cpp:4526
+#: kmymoney/kmymoney.cpp:4530
 #, kde-format
 msgid "Auto saving..."
 msgstr "Автосақтау..."
 
-#: kmymoney/kmymoney.cpp:4646
+#: kmymoney/kmymoney.cpp:4650
 #, kde-format
 msgid "Creating new document..."
 msgstr "Жаңа құжатты құру..."
 
-#: kmymoney/kmymoney.cpp:4706
+#: kmymoney/kmymoney.cpp:4710
 #, fuzzy, kde-format
 #| msgid "Create a new profile"
 msgid "Couldn't create a new file."
 msgstr "Жаңа іс-әлпетін құру"
 
-#: kmymoney/kmymoney.cpp:4717
+#: kmymoney/kmymoney.cpp:4721
 #, kde-format
 msgid "Open a file."
 msgstr "Файлды ашу."
 
-#: kmymoney/kmymoney.cpp:4731
+#: kmymoney/kmymoney.cpp:4735
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4735
+#: kmymoney/kmymoney.cpp:4739
 #, fuzzy, kde-format
 #| msgctxt "All files (Filefilter)"
 #| msgid "All files"
 msgid "All files (*)"
 msgstr "Бүкіл файлдар"
 
-#: kmymoney/kmymoney.cpp:4748
+#: kmymoney/kmymoney.cpp:4752
 #, kde-format
 msgid "Loading file..."
 msgstr "Файлды жүктеу...."
 
-#: kmymoney/kmymoney.cpp:4754
+#: kmymoney/kmymoney.cpp:4758
 #, kde-format
 msgid "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
 msgstr "<p><b>%1</b> деген файл басқа KMyMoney данасында ашылып тұр екен</p>"
 
-#: kmymoney/kmymoney.cpp:4754
+#: kmymoney/kmymoney.cpp:4758
 #, kde-format
 msgid "Duplicate open"
 msgstr "Қайталап ашу"
 
-#: kmymoney/kmymoney.cpp:4761
+#: kmymoney/kmymoney.cpp:4765
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -6010,52 +6010,52 @@ msgstr ""
 "<p><b>%1</b> файл атауы дұрыс емес не ондайы жоқ. Басқасын ашыңыз, не "
 "жаңасын құрыңыз.</p>"
 
-#: kmymoney/kmymoney.cpp:4761
+#: kmymoney/kmymoney.cpp:4765
 #, kde-format
 msgid "File not found"
 msgstr "Файл табылмады"
 
-#: kmymoney/kmymoney.cpp:4792
+#: kmymoney/kmymoney.cpp:4796
 #, fuzzy, kde-format
 #| msgid "Cannot open file %1 for writing"
 msgid "Cannot open file as requested."
 msgstr "%1 деген файл жазу үшін ашылмады"
 
-#: kmymoney/kmymoney.cpp:4799
+#: kmymoney/kmymoney.cpp:4803
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
 "necessary plugin is enabled."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4810
+#: kmymoney/kmymoney.cpp:4814
 #, kde-format
 msgid "Saving file..."
 msgstr "Файлды сақтау..."
 
-#: kmymoney/kmymoney.cpp:4822
+#: kmymoney/kmymoney.cpp:4826
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your data."
 msgstr "Сақтау жаңылысы: %1"
 
-#: kmymoney/kmymoney.cpp:4828
+#: kmymoney/kmymoney.cpp:4832
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4834
+#: kmymoney/kmymoney.cpp:4838
 #, fuzzy, kde-format
 #| msgid "Saving file..."
 msgid "Saving file as...."
 msgstr "Файлды сақтау..."
 
-#: kmymoney/kmymoney.cpp:4850
+#: kmymoney/kmymoney.cpp:4854
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4879
+#: kmymoney/kmymoney.cpp:4883
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your storage."
@@ -6334,7 +6334,7 @@ msgstr "Бағаны өшіру..."
 
 #: kmymoney/kmymoneyutils.cpp:548
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:138
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:431
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:432
 #: kmymoney/templates/templateloader.cpp:78
 #, kde-format
 msgid "Error while loading file '%1'."
@@ -6342,8 +6342,8 @@ msgstr "'%1' файлын жүктеу қатесі."
 
 #: kmymoney/kmymoneyutils.cpp:550
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:138
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:433
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1004
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:434
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1005
 #: kmymoney/templates/templateloader.cpp:80
 #, kde-format
 msgid "File access error"
@@ -12347,23 +12347,23 @@ msgstr ""
 msgid "%1 is not an Investment Account. Do you wish to make it one?"
 msgstr "%1 инвестициялық есепшоты емес. Оны сондай қыласыз ба?"
 
-#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:55
+#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:56
 #, kde-format
 msgid "Schedules to iCalendar"
 msgstr "iCalendar-ға жоспарлау"
 
-#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:75
+#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:76
 #, kde-format
 msgid "Schedules to iCalendar [%1]"
 msgstr "iCalendar-ға жоспарлау [%1]"
 
-#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:93
+#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:94
 #, kde-format
 msgctxt "ICS (Filefilter)"
 msgid "iCalendar files"
 msgstr "iCalendar файлдары"
 
-#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:96
+#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:97
 #: kmymoney/plugins/views/reports/kreportsview.cpp:348
 #, kde-format
 msgid "Export as"
@@ -14514,7 +14514,7 @@ msgstr "Банкінің үзінді көшірмесі"
 msgid "Other application"
 msgstr "Басқа қолданба"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:167
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:168
 #, fuzzy, kde-format
 #| msgctxt "Category name"
 #| msgid "Reinvested dividend"
@@ -14522,150 +14522,150 @@ msgctxt "Category name"
 msgid "Reinvested interest"
 msgstr "Қайта инвестицияланған дивиденд"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:170
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:171
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested dividend"
 msgstr "Қайта инвестицияланған дивиденд"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:173
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:174
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested dividend (long term)"
 msgstr "Қайта инвестицияланған дивиденд (ұзақ мерзімді)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:176
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:177
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested dividend (short term)"
 msgstr "Қайта инвестицияланған дивиденд (қысқа мерзімді)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:179
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:180
 #, kde-format
 msgctxt "Category name"
 msgid "Dividend"
 msgstr "Дивиденд"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:182
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:183
 #, kde-format
 msgctxt "Category name"
 msgid "Interest"
 msgstr "Өсімі"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:185
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:186
 #, kde-format
 msgctxt "Category name"
 msgid "Capital Gain (short term)"
 msgstr "Капитал өсімі (қысқа мерзімді)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:188
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:189
 #, kde-format
 msgctxt "Category name"
 msgid "Capital Gain (mid term)"
 msgstr "Капитал өсімі (орта мерзімді)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:191
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:192
 #, kde-format
 msgctxt "Category name"
 msgid "Capital Gain (long term)"
 msgstr "Капитал өсімі (ұзақ мерзімді)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:194
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:195
 #, kde-format
 msgctxt "Category name"
 msgid "Returned capital"
 msgstr "Қайтарылған капитал"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:197
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:198
 #, kde-format
 msgctxt "Category name"
 msgid "Miscellaneous income"
 msgstr "Түрлі басқа кіріс"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:200
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:201
 #, kde-format
 msgctxt "Category name"
 msgid "Miscellaneous expense"
 msgstr "Түрлі басқа шығыс"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:203
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:204
 #, kde-format
 msgctxt "Category name"
 msgid "Investment fees"
 msgstr "Инвестициялық шығындар"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:205
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:206
 #, kde-format
 msgid "Unknown QIF type %1"
 msgstr "%1 деген QIF түрі беймәлім"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:364
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:365
 #, kde-format
 msgid "Date format selection"
 msgstr "Күн пішімін таңдау"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:364
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:365
 #, kde-format
 msgid "Pick the date format that suits your input file"
 msgstr "Кіріс файлыңызға келетін күн пішімін таңдау"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:379
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:380
 #, kde-format
 msgid "Importing QIF..."
 msgstr "QIF импорты..."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:481
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:482
 #, kde-format
 msgid "Reading QIF..."
 msgstr "QIF-ті оқу..."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:486
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:487
 #, kde-format
 msgid "Error while running the filter '%1'."
 msgstr "'%1' сүзгіні жеккенде қате пайда болды."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:488
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:489
 #, kde-format
 msgid "Filter error"
 msgstr "Сүзгі қатесі"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:522
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:523
 #, kde-format
 msgctxt "QIF tag for liability account"
 msgid "Oth L"
 msgstr "Oth L"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:527
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:528
 #, kde-format
 msgctxt "QIF tag for investment account"
 msgid "Invst"
 msgstr "Invst"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:541
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:542
 #, kde-format
 msgctxt "QIF tag for category"
 msgid "Cat"
 msgstr "Cat"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:544
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:545
 #, kde-format
 msgctxt "QIF tag for security"
 msgid "Security"
 msgstr "Security"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:547
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:548
 #, kde-format
 msgctxt "QIF tag for prices"
 msgid "Prices"
 msgstr "Prices"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:556
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:557
 #, kde-format
 msgctxt "QIF tag for a class"
 msgid "Class"
 msgstr "Class"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:736
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:737
 #, kde-format
 msgid ""
 "The %1 account currently has an opening balance of %2. This QIF file reports "
@@ -14675,29 +14675,29 @@ msgstr ""
 "%1 есепшоттың бастапқы балансы %2. QIF файлы бойынша ол %3.  Балансы "
 "файлығындай болсын ба?"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:737
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:738
 #, kde-format
 msgid "Overwrite opening balance"
 msgstr "Бастапқы балансын өзгерту"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:904
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:905
 #, kde-format
 msgid "Unable to find account: %1"
 msgstr "Есепшот табылмады: %1"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:918
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:928
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:953
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:919
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:929
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:954
 #, kde-format
 msgid "Autogenerated by QIF importer"
 msgstr "QIF импорттағышы автожазғаны"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:945
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:946
 #, kde-format
 msgid "QIF imported, no account name supplied"
 msgstr "QIF-тен атаусыз есепшот қылып импорттаған"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:979
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:980
 #, kde-format
 msgid ""
 "KMyMoney has imported a second opening balance transaction into account <b>"
@@ -14708,18 +14708,18 @@ msgstr ""
 "баланс алдында табылғанға тең емес  Қайсы керегі, импортау біткен соң, "
 "қолмен келтіріңіз."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:979
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:980
 #, kde-format
 msgid "Opening balance problem"
 msgstr "Бастапқы баланс мәселесі"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1002
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1003
 #, kde-format
 msgid "Error while creating opening balance transaction"
 msgstr "Бастапқы баланс транзакцияны құру қатесі"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1081
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1309
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1082
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1310
 #, kde-format
 msgid ""
 "The date entry \"%1\" read from the file cannot be interpreted through the "
@@ -14735,13 +14735,13 @@ msgstr ""
 "\" десеңіз импорт әрекеті доғарылады. Сонда жаңадан импортты бастағанда "
 "басқа QIF іс-әлпетін таңдауға не жаңасың құруға болады."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1086
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1314
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1087
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1315
 #, kde-format
 msgid "Invalid date format"
 msgstr "Жарамсыз күн пішімі"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1439
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1440
 #, kde-format
 msgid ""
 "This investment account does not contain the \"%1\" security.  Transactions "
@@ -14750,12 +14750,12 @@ msgstr ""
 "Бұл инвестициялық еңсепшотта \"%1\" құнды қағаз жоқ. Осы құнды қағазымен "
 "транзакциялар ескерілмейді."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1950
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1951
 #, kde-format
 msgid "%1 (Investment)"
 msgstr "%1 (Инвестиция)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1951
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1952
 #, kde-format
 msgid "Autogenerated by QIF importer from type Mutual account entry"
 msgstr "QIF импорттағышы Өзара есепшоттан алып автожазғаны"
@@ -15174,7 +15174,7 @@ msgid "Database malfunction"
 msgstr "Деректер қорының ақаулығы"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:188
-#: kmymoney/plugins/xml/xmlstorage.cpp:239
+#: kmymoney/plugins/xml/xmlstorage.cpp:240
 #, kde-format
 msgid "Tried to access a file when it has not been opened"
 msgstr "Ашылмаған файлға қатынау талпынысы"
@@ -18620,36 +18620,36 @@ msgctxt "Error message when reading XML file"
 msgid "Unknown payee identifier type %1"
 msgstr "%1 деген QIF түрі беймәлім"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:346
+#: kmymoney/plugins/xml/xmlstorage.cpp:347
 #, kde-format
 msgid "Save As"
 msgstr "Былай сақтау"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:348
+#: kmymoney/plugins/xml/xmlstorage.cpp:349
 #, kde-format
 msgctxt "KMyMoney (Filefilter)"
 msgid "KMyMoney files"
 msgstr "KMyMoney файлдары"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:349
+#: kmymoney/plugins/xml/xmlstorage.cpp:350
 #, kde-format
 msgctxt "Anonymous (Filefilter)"
 msgid "Anonymous files"
 msgstr "Анонимды файлдар"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:350
+#: kmymoney/plugins/xml/xmlstorage.cpp:351
 #, kde-format
 msgctxt "XML (Filefilter)"
 msgid "XML files"
 msgstr "XML файлдары"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:351
+#: kmymoney/plugins/xml/xmlstorage.cpp:352
 #, kde-format
 msgctxt "All files (Filefilter)"
 msgid "All files"
 msgstr "Бүкіл файлдар"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:425
+#: kmymoney/plugins/xml/xmlstorage.cpp:426
 #, fuzzy, kde-format
 #| msgid ""
 #| "*.kmy *.xml|KMyMoney files\n"
@@ -18659,7 +18659,7 @@ msgstr ""
 "*.kmy *.xml|KMyMoney файлдары\n"
 "*|Бүкіл файлдар"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:446
+#: kmymoney/plugins/xml/xmlstorage.cpp:447
 #, fuzzy, kde-format
 #| msgid ""
 #| "GPG does not seem to be installed on your system. Please make sure, that "
@@ -18673,12 +18673,12 @@ msgstr ""
 "GPG жүйеңізде орнатылмаған сияқты. Ол стандартты іздеу жолдарында табылатын "
 "болсын. Әзірше, шифры шешуге келмейді. "
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:446
+#: kmymoney/plugins/xml/xmlstorage.cpp:447
 #, kde-format
 msgid "GPG not found"
 msgstr "GPG табылмады"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:453
+#: kmymoney/plugins/xml/xmlstorage.cpp:454
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>You have selected to encrypt your data also with the KMyMoney recover "
@@ -18701,13 +18701,13 @@ msgstr ""
 "a> импорттап алыңыз. Әзірше, дерегіңіз KMyMoney қалпына келтіру кілтімен "
 "шифрланбайды.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:458
-#: kmymoney/plugins/xml/xmlstorage.cpp:466
+#: kmymoney/plugins/xml/xmlstorage.cpp:459
+#: kmymoney/plugins/xml/xmlstorage.cpp:467
 #, kde-format
 msgid "GPG Key not found"
 msgstr "GPG кілті табылмады"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:466
+#: kmymoney/plugins/xml/xmlstorage.cpp:467
 #, kde-format
 msgid ""
 "<p>You have specified to encrypt your data for the user-id</p><p><center><b>"
@@ -18720,7 +18720,7 @@ msgstr ""
 "жоқ. Оны дұрыс импорттап алыңыз. Әзірше, дерегіңіз бұл кілтпен шифрланбайды."
 "</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:473
+#: kmymoney/plugins/xml/xmlstorage.cpp:474
 #, kde-format
 msgid ""
 "<p>You have configured to save your data in encrypted form using GPG. Make "
@@ -18731,12 +18731,12 @@ msgstr ""
 "шеше алмай қалған кезде ол мүлдем жоғалады. Ұйғарымыңыз берік болмаса "
 "<b>Жоқ</b> деп жауап беріңіз.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:474
+#: kmymoney/plugins/xml/xmlstorage.cpp:475
 #, kde-format
 msgid "Store GPG encrypted"
 msgstr "GPG-шифрланған түрде сақтау"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:590
+#: kmymoney/plugins/xml/xmlstorage.cpp:591
 #, kde-format
 msgid ""
 "You have configured KMyMoney to use GPG to protect your data and to encrypt "
@@ -18750,7 +18750,7 @@ msgid_plural ""
 "g. KGPG)."
 msgstr[0] ""
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:590
+#: kmymoney/plugins/xml/xmlstorage.cpp:591
 #, kde-format
 msgid "Recover key expires soon"
 msgstr ""
