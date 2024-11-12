@@ -16,7 +16,6 @@ if (BUILD_STATIC_PLUGINS)
     kcoreaddons_add_plugin(konlinetasks_sepa SOURCES ${sepaOnlineTasks_SRCS} STATIC INSTALL_NAMESPACE "kmymoney_plugins/onlinetasks")
 else()
     kcoreaddons_add_plugin(konlinetasks_sepa SOURCES ${sepaOnlineTasks_SRCS} INSTALL_NAMESPACE "kmymoney_plugins/onlinetasks")
-    set_target_properties(konlinetasks_sepa PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 endif()
 
 # TODO some dependencies can be moved to konlinetasks_sepa
