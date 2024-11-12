@@ -93,13 +93,13 @@ const MyMoneyMoney MyMoneyAccountLoan::interestRate(const QDate& date) const
     return rate;
 }
 
-void MyMoneyAccountLoan::setInterestRate(const QDate& date, const MyMoneyMoney& value)
+void MyMoneyAccountLoan::setInterestRate(const QDate& date, const MyMoneyMoney& newValue)
 {
     if (!date.isValid())
         return;
 
     const auto key = QStringLiteral("ir-%1").arg(date.toString(Qt::ISODate));
-    setValue(key, value.toString());
+    setValue(key, newValue.toString());
 }
 
 MyMoneyAccountLoan::interestDueE MyMoneyAccountLoan::interestCalculation() const
