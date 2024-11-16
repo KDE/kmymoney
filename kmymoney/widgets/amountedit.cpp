@@ -77,6 +77,8 @@ public:
         , m_prec(2)
         , m_allowEmpty(false)
         , m_precisionOverridesFraction(false)
+        , m_isReadOnly(false)
+        , m_allowModifyShares(false)
         , m_actionIcons(NoItem)
         , m_initialExchangeRate(MyMoneyMoney::ONE)
         , m_state(AmountEdit::DisplayValue)
@@ -236,11 +238,13 @@ public:
                 otherCurrency = m_valueCommodity.name();
                 setCurrencySymbol(m_sharesCommodity.tradingSymbol(), currentCurrency);
                 q->QLineEdit::setText(m_sharesText);
+                setReadOnly(!(m_isReadOnly || m_allowModifyShares));
             } else {
                 currentCurrency = m_valueCommodity.name();
                 otherCurrency = m_sharesCommodity.name();
                 setCurrencySymbol(m_valueCommodity.tradingSymbol(), m_valueCommodity.name());
                 q->QLineEdit::setText(m_valueText);
+                setReadOnly(m_isReadOnly);
             }
 
             m_currencyButton->setToolTip(i18nc("@info:tooltip Swap currencies for entry/display",
@@ -328,6 +332,13 @@ public:
         setWidgetText(m_sharesText, m_shares, txt, AmountEdit::DisplayShares);
     }
 
+    void setReadOnly(bool ro)
+    {
+        Q_Q(AmountEdit);
+        m_calculatorButton->setEnabled(!ro);
+        q->QLineEdit::setReadOnly(ro);
+    }
+
     AmountEdit* q_ptr;
     QFrame* m_calculatorFrame;
     KMyMoneyCalculator* m_calculator;
@@ -336,6 +347,8 @@ public:
     int m_prec;
     bool m_allowEmpty;
     bool m_precisionOverridesFraction;
+    bool m_isReadOnly; // read only state as set by application
+    bool m_allowModifyShares; // allow to override shares even if read only state
     QString m_previousText; // keep track of what has been typed
 
     QString m_valueText; // keep track of what was the original value
@@ -366,8 +379,8 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(AmountEditPrivate::Items)
 void AmountEdit::setReadOnly(bool ro)
 {
     Q_D(AmountEdit);
-    d->m_calculatorButton->setEnabled(!ro);
-    QLineEdit::setReadOnly(ro);
+    d->m_isReadOnly = ro;
+    d->setReadOnly(ro);
 }
 
 AmountEdit::AmountEdit(QWidget *parent, const int prec) :
@@ -689,8 +702,10 @@ void AmountEdit::theTextChanged(const QString & theText)
                     d->m_sharesText = l_text;
                     MyMoneyMoney amount(l_text);
                     d->adjustToPrecision(AmountEdit::DisplayShares, amount);
-                    amount *= d->m_initialExchangeRate;
-                    d->m_valueText = amount.formatMoney(QString(), d->precision(AmountEdit::DisplayValue), false);
+                    if (!d->m_isReadOnly) {
+                        amount *= d->m_initialExchangeRate;
+                        d->m_valueText = amount.formatMoney(QString(), d->precision(AmountEdit::DisplayValue), false);
+                    }
                     d->m_lastChanged = SharesChanged;
                 }
             }
@@ -897,4 +912,13 @@ AmountEdit::LastValueChanged AmountEdit::lastChangedByUser() const
 {
     Q_D(const AmountEdit);
     return d->m_lastChanged;
+}
+
+void AmountEdit::setAllowModifyShares(bool allowModifyShares)
+{
+    Q_D(AmountEdit);
+    d->m_allowModifyShares = allowModifyShares;
+    if (d->m_isReadOnly && displayState() == DisplayState::DisplayShares) {
+        d->setReadOnly(!allowModifyShares);
+    }
 }

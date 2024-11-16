@@ -958,11 +958,22 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
     d->ui->totalAmountEdit->setCalculatorButtonVisible(false);
 
+    // in case the total is in a different currency, we do allow
+    // to modify the amount for the brokerage account.
+    d->ui->totalAmountEdit->setAllowModifyShares(true);
+
     d->setupParentInvestmentAccount(accId);
 
     setCancelButton(d->ui->cancelButton);
     setEnterButton(d->ui->enterButton);
 
+    connect(d->ui->totalAmountEdit, &AmountEdit::amountChanged, this, [&]() {
+        if (!d->ui->totalAmountEdit->shares().isZero()) {
+            const auto rate = d->ui->totalAmountEdit->value() / d->ui->totalAmountEdit->shares();
+            d->assetPrice = MyMoneyPrice(d->transactionCurrency.id(), d->assetAccount.currencyId(), d->transaction.postDate(), rate, QLatin1String("KMyMoney"));
+            updateTotalAmount();
+        }
+    });
     d->setupTabOrder();
 }
 

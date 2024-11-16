@@ -245,6 +245,20 @@ public:
      */
     void setPrecisionOverridesFraction(bool override);
 
+    /**
+     * In some cases, the amount edit widget is used in a
+     * readonly mode but it should allow to change the shares
+     * amount in multi-currency mode. Passing @c true as
+     * argument to this method read-only is temporarily
+     * suspended when switching to the display shares mode.
+     *
+     * @note setReadOnly must be set to true before a call
+     * to this method has any effect.
+     *
+     * @sa setReadOnly, displayState
+     */
+    void setAllowModifyShares(bool allowModifyShares);
+
 private:
 public Q_SLOTS:
 
