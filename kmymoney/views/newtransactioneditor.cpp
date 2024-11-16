@@ -125,8 +125,6 @@ public:
     void loadTransaction(QModelIndex idx);
     MyMoneySplit prepareSplit(const MyMoneySplit& sp);
     bool needClearSplitAction(const QString& action) const;
-    void adjustTagIdList();
-    // void updateConversionRate(MultiCurrencyEdit* amountEdit);
 
     NewTransactionEditor* q;
     Ui_NewTransactionEditor* ui;
@@ -149,25 +147,6 @@ public:
     KMyMoneyAccountComboSplitHelper* m_splitHelper;
     void updateMemoLink();
 };
-
-void NewTransactionEditor::Private::adjustTagIdList()
-{
-    // if we open a transaction in an asset or liability account and if the transaction
-    // has more than 2 splits and the current split has a taglist,
-    // a) if the other splits don't have a taglist assigned, copy it over to them
-    // b) clear the taglist in the current split
-
-    if (m_account.isAssetLiability() && !m_split.tagIdList().isEmpty()) {
-        const auto rows = splitModel.rowCount();
-        for (int row = 0; row < rows; ++row) {
-            const auto idx = splitModel.index(row, 0);
-            if (idx.data(eMyMoney::Model::SplitTagIdRole).toStringList().isEmpty()) {
-                splitModel.setData(idx, QVariant::fromValue<QStringList>(m_split.tagIdList()), eMyMoney::Model::SplitTagIdRole);
-            }
-        }
-        m_split.setTagIdList({});
-    }
-}
 
 void NewTransactionEditor::Private::updateWidgetAccess()
 {
@@ -1028,7 +1007,6 @@ void NewTransactionEditor::Private::loadTransaction(QModelIndex idx)
 
             ui->numberEdit->setText(splitIdx.data(eMyMoney::Model::SplitNumberRole).toString());
             ui->statusCombo->setCurrentIndex(splitIdx.data(eMyMoney::Model::SplitReconcileFlagRole).toInt());
-            ui->tagContainer->loadTags(splitIdx.data(eMyMoney::Model::SplitTagIdRole).toStringList());
             updateMemoLink();
         } else {
             splitModel.appendSplit(MyMoneyFile::instance()->journalModel()->itemByIndex(splitIdx).split());
@@ -1049,13 +1027,11 @@ void NewTransactionEditor::Private::loadTransaction(QModelIndex idx)
                 ui->creditDebitEdit->setSharesCommodity(currency);
 
                 counterAccountIsClosed = accountIdx.data(eMyMoney::Model::AccountIsClosedRole).toBool();
+                ui->tagContainer->loadTags(splitIdx.data(eMyMoney::Model::SplitTagIdRole).toStringList());
             }
         }
     }
     m_transaction.setCommodity(m_account.currencyId());
-
-    adjustTagIdList();
-    ui->tagContainer->loadTags(m_split.tagIdList());
 
     // then setup the amount widget and update the state
     // of all other widgets
@@ -1384,8 +1360,6 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
             }
         }
         d->m_transaction.setCommodity(d->m_account.currencyId());
-
-        d->adjustTagIdList();
 
         // then setup the amount widget and update the state
         // of all other widgets

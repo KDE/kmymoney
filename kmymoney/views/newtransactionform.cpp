@@ -123,17 +123,6 @@ void NewTransactionForm::showTransaction(const QModelIndex& idx)
     d->ui->accountEdit->home(false);
     d->updateMemoLink();
 
-    d->ui->tagEdit->clear();
-    QStringList splitTagList = index.data(eMyMoney::Model::SplitTagIdRole).toStringList();
-    if (!splitTagList.isEmpty()) {
-        std::transform(splitTagList.begin(), splitTagList.end(), splitTagList.begin(),
-        [] (const QString& tagId) {
-            return MyMoneyFile::instance()->tagsModel()->itemById(tagId).name();
-        });
-        d->ui->tagEdit->setText(splitTagList.join(", "));
-        d->ui->tagEdit->home(false);
-    }
-
     d->ui->numberEdit->setText(index.data(eMyMoney::Model::SplitNumberRole).toString());
 
     d->ui->amountEdit->setText(i18nc("@item:intext Amount, %1 transaction amount, %2 payment direction enclosed in parenthesis",
@@ -144,6 +133,30 @@ void NewTransactionForm::showTransaction(const QModelIndex& idx)
     const auto status = index.data(eMyMoney::Model::SplitReconcileFlagRole).toInt();
     const auto statusIdx = MyMoneyFile::instance()->statusModel()->index(status, 0);
     d->ui->statusEdit->setText(statusIdx.data(eMyMoney::Model::SplitReconcileStatusRole).toString());
+
+    d->ui->tagEdit->clear();
+
+    // fill tag list but only if two splits in transaction
+    const auto list = index.model()->match(index.model()->index(0, 0),
+                                           eMyMoney::Model::JournalTransactionIdRole,
+                                           index.data(eMyMoney::Model::JournalTransactionIdRole),
+                                           -1, // all splits
+                                           Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+
+    if (list.count() == 2) {
+        for (const auto& splitIdx : list) {
+            if (splitIdx.row() != d->row) {
+                QStringList splitTagList = splitIdx.data(eMyMoney::Model::SplitTagIdRole).toStringList();
+                if (!splitTagList.isEmpty()) {
+                    std::transform(splitTagList.begin(), splitTagList.end(), splitTagList.begin(), [](const QString& tagId) {
+                        return MyMoneyFile::instance()->tagsModel()->itemById(tagId).name();
+                    });
+                    d->ui->tagEdit->setText(splitTagList.join(", "));
+                    d->ui->tagEdit->home(false);
+                }
+            }
+        }
+    }
 }
 
 void NewTransactionForm::modelDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight)
