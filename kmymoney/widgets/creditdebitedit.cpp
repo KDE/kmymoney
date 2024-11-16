@@ -278,5 +278,8 @@ void CreditDebitEdit::setDisplayState(MultiCurrencyEdit::DisplayState state)
 MultiCurrencyEdit::LastValueChanged CreditDebitEdit::lastChangedByUser() const
 {
     Q_D(const CreditDebitEdit);
-    return d->ui->creditAmount->lastChangedByUser();
+    if (!d->ui->creditAmount->text().isEmpty()) {
+        return d->ui->creditAmount->lastChangedByUser();
+    }
+    return d->ui->debitAmount->lastChangedByUser();
 }
