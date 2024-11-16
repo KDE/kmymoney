@@ -32,7 +32,6 @@
 #include "icons.h"
 #include "idfilter.h"
 #include "journalmodel.h"
-#include "kcurrencyconverter.h"
 #include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
 #include "knewaccountdlg.h"
