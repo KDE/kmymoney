@@ -139,6 +139,7 @@ void ListTable::render(QString& result, QString& csv) const
     bool row_odd = true;
     bool isLowestGroupTotal = true;  // hack to inform whether to put separator line or not
 
+    result.append(QLatin1String("<tbody>\n"));
     // ***DV***
     MyMoneyMoney startingBalance;
     MyMoneyMoney balanceChange = MyMoneyMoney();
@@ -239,8 +240,24 @@ void ListTable::render(QString& result, QString& csv) const
         //
 
         QList<cellTypeE>::ConstIterator it_column = columns.constBegin();
+        int skippedColumn = 0;
+        QString tempResult;
         while (it_column != columns.constEnd()) {
             QString data = (*it_row).value(*it_column);
+
+            // include a colspan information if we skipped some
+            // columns while processing the total and subtotal rows
+            auto flushTempResult = [&skippedColumn, &tempResult]() {
+                QString finishedResult(tempResult);
+                if (!tempResult.isEmpty()) {
+                    if (skippedColumn > 0) {
+                        finishedResult.replace(QLatin1String("<td"), QString::fromLatin1("<td colspan=\"%1\"").arg(skippedColumn + 1));
+                        tempResult.clear();
+                        skippedColumn = 0;
+                    }
+                }
+                return finishedResult;
+            };
 
             // ***DV***
             if (rowRank == 2) {
@@ -295,27 +312,31 @@ void ListTable::render(QString& result, QString& csv) const
             } else if ((rowRank == 4 || rowRank == 5)) {
                 // display total title but only if first column doesn't contain any data
                 if (it_column == columns.constBegin() && data.isEmpty()) {
-                    result.append(QString::fromLatin1("<td class=\"left%1\">").arg((*it_row).value(ctDepth)));
+                    tempResult.append(QString::fromLatin1("<td class=\"left%1\">").arg((*it_row).value(ctDepth)));
                     if (rowRank == 4) {
                         if (!(*it_row).value(ctDepth).isEmpty()) {
-                            result += i18nc("Total balance", "Total") + QLatin1Char(' ') + prevGrpNames.at((*it_row).value(ctDepth).toInt());
+                            tempResult += i18nc("Total balance", "Total") + QLatin1Char(' ') + prevGrpNames.at((*it_row).value(ctDepth).toInt());
                             csv.append(i18nc("Total balance", "Total") + QLatin1Char(' ') + prevGrpNames.at((*it_row).value(ctDepth).toInt())
                                        + QLatin1Char(','));
                         } else {
-                            result += i18n("Grand Total");
+                            tempResult += i18n("Grand Total");
                             csv.append(i18n("Grand Total") + QLatin1Char(','));
                         }
                     }
-                    result.append(QLatin1String("</td>"));
+                    tempResult.append(QLatin1String("</td>"));
                     ++it_column;
                     continue;
+
                 } else if (!m_subtotal.contains(*it_column)) {  // don't display e.g. account in totals row
-                    result.append(QLatin1String("<td></td>"));
+                    ++skippedColumn;
                     csv.append(QLatin1Char(','));
                     ++it_column;
                     continue;
                 }
             }
+
+            // append any pending total or subtotal header
+            result += flushTempResult();
 
             // Figure out how to render the value in this column, depending on
             // what its properties are.
@@ -437,7 +458,7 @@ void ListTable::render(QString& result, QString& csv) const
         csv.chop(1);  // remove final comma
         csv.append(QLatin1Char('\n'));
     }
-    result.append(QLatin1String("</table>\n"));
+    result.append(QLatin1String("</tbody>\n</table>\n"));
 }
 
 QString ListTable::renderHTML() const
