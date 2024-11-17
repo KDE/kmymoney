@@ -16,6 +16,16 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
+    <widget class="KMessageWidget" name="messageWidget">
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="messageType">
+      <enum>KMessageWidget::Information</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QTreeView" name="equityView">
      <property name="sizeAdjustPolicy">
       <enum>QAbstractScrollArea::AdjustToContents</enum>
@@ -200,6 +210,11 @@
    <class>KDateComboBox</class>
    <extends>QComboBox</extends>
    <header>kdatecombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMessageWidget</class>
+   <extends>QFrame</extends>
+   <header>kmessagewidget.h</header>
   </customwidget>
   <customwidget>
    <class>KMyMoneyDateEdit</class>

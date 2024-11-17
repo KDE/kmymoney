@@ -108,8 +108,9 @@ public:
         ui->closeStatusButton->setIcon(Icons::get(Icons::Icon::DialogClose));
         connect(ui->closeStatusButton, &QToolButton::clicked, ui->statusContainer, &QWidget::hide);
 
-        // hide the status widgets until there is activity
+        // hide the widgets until there is activity
         ui->statusContainer->hide();
+        ui->messageWidget->hide();
 
         m_fUpdateAll = false;
 
@@ -415,8 +416,9 @@ public:
         // the update process depends and which could be changed with sorting enabled due to the updated values
         ui->equityView->setSortingEnabled(false);
 
-        // show the status widgets
+        // show the status widgets and hide a possibly visible info message
         ui->statusContainer->show();
+        ui->messageWidget->animatedHide();
 
         const auto selectedIndexes = selectedItems();
         const auto rows = selectedIndexes.count();
@@ -668,6 +670,17 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
             }
         }
         d->updateDateWidgetVisibility();
+
+        // inform the user that a source change will only be
+        // persistent after its first use
+        if ((topLeft.column() == OnlinePriceModel::Column::Source) && (bottomRight.column() == OnlinePriceModel::Column::Source)) {
+            // hide the status widgets until there is new activity
+            d->ui->statusContainer->hide();
+            d->ui->messageWidget->setText(i18nc("@info Persistence of price source",
+                                                "The next time you open this dialog the modified price source will only be loaded if you have used it for a "
+                                                "successful price update. Otherwise, the old setting will be shown."));
+            d->ui->messageWidget->animatedShow();
+        }
     });
 }
 
