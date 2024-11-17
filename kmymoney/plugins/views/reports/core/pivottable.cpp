@@ -132,6 +132,11 @@ void PivotTable::init()
     if (m_config.rowType() == eMyMoney::Report::RowType::AssetLiability) {
         m_grid.insert(MyMoneyAccount::accountTypeToString(eMyMoney::Account::Type::Asset), PivotOuterGroup(m_numColumns));
         m_grid.insert(MyMoneyAccount::accountTypeToString(eMyMoney::Account::Type::Liability), PivotOuterGroup(m_numColumns, PivotOuterGroup::m_kDefaultSortOrder, true /* inverted */));
+        // networth reports are only based on balances.
+        // it does not make sense to filter additional categories
+        if (m_config.isNetWortReport()) {
+            m_config.clearCategoryFilter();
+        }
     } else {
         m_grid.insert(MyMoneyAccount::accountTypeToString(eMyMoney::Account::Type::Income), PivotOuterGroup(m_numColumns, PivotOuterGroup::m_kDefaultSortOrder - 2));
         m_grid.insert(MyMoneyAccount::accountTypeToString(eMyMoney::Account::Type::Expense), PivotOuterGroup(m_numColumns, PivotOuterGroup::m_kDefaultSortOrder - 1, true /* inverted */));

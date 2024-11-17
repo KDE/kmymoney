@@ -119,8 +119,15 @@ void MyMoneyTransactionFilter::clear()
 void MyMoneyTransactionFilter::clearAccountFilter()
 {
     Q_D(MyMoneyTransactionFilter);
-    d->m_filterSet.setFlag(accountFilterActive);
+    d->m_filterSet.setFlag(accountFilterActive, false);
     d->m_accounts.clear();
+}
+
+void MyMoneyTransactionFilter::clearCategoryFilter()
+{
+    Q_D(MyMoneyTransactionFilter);
+    d->m_filterSet.setFlag(categoryFilterActive, false);
+    d->m_categories.clear();
 }
 
 void MyMoneyTransactionFilter::setTextFilter(const QRegularExpression& text, bool isRegExp, bool invert)

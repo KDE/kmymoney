@@ -849,6 +849,12 @@ void MyMoneyReport::setSkipZero(int f)
     d->m_skipZero = f;
 }
 
+bool MyMoneyReport::isNetWortReport() const
+{
+    Q_D(const MyMoneyReport);
+    return d->m_group == QLatin1String("Net Worth");
+}
+
 void MyMoneyReport::clearTransactionFilter()
 {
     Q_D(MyMoneyReport);

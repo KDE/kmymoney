@@ -503,6 +503,15 @@ void KTransactionFilter::resetFilter(MyMoneyReport& rep)
     // Categories Filter
     //
 
+    d->ui->m_categoriesView->setEnabled(true);
+    d->ui->m_categoriesHint->show();
+
+    if (rep.isNetWortReport()) {
+        rep.clearCategoryFilter();
+        d->ui->m_categoriesView->setDisabled(true);
+        d->ui->m_categoriesHint->show();
+        d->ui->m_categoriesHint->setText(i18nc("@info Info why selection is disabled", "Category selection is not possible for net worth reports."));
+    }
     if (rep.categories(accounts)) {
         d->ui->m_categoriesView->selectAllItems(false);
         d->ui->m_categoriesView->selectItems(accounts, true);

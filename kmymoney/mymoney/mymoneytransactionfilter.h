@@ -112,6 +112,11 @@ public:
     void clearAccountFilter();
 
     /**
+     * This method is used to clear the category filter only.
+     */
+    void clearCategoryFilter();
+
+    /**
      * This method is used to set the regular expression filter to the value specified
      * as parameter @p exp. The following text based fields are searched:
      *

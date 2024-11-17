@@ -305,6 +305,12 @@ public:
     void setSkipZero(int f);
 
     /**
+     * This method returns true if the group()
+     * return "Net Worth".
+     */
+    bool isNetWortReport() const;
+
+    /**
       * This method allows you to clear the underlying transaction filter
       */
     void clearTransactionFilter();
