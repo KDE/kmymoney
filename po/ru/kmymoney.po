@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-12 01:53+0000\n"
+"POT-Creation-Date: 2024-11-18 01:56+0000\n"
 "PO-Revision-Date: 2024-02-09 23:23+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -1042,7 +1042,7 @@ msgstr "Редактор курсов"
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:59
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:61
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:245
-#: kmymoney/plugins/views/reports/core/listtable.cpp:651
+#: kmymoney/plugins/views/reports/core/listtable.cpp:672
 #: kmymoney/views/khomeview_p.h:620 kmymoney/views/newspliteditor.ui:32
 #: kmymoney/views/newtransactioneditor.ui:56
 #: kmymoney/views/newtransactionform.ui:145
@@ -1120,7 +1120,7 @@ msgstr "xxx"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:274
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:240
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:120
-#: kmymoney/plugins/views/reports/core/listtable.cpp:649
+#: kmymoney/plugins/views/reports/core/listtable.cpp:670
 #: kmymoney/views/investtransactioneditor.ui:245
 #: kmymoney/views/khomeview_p.h:605 kmymoney/views/newtransactioneditor.ui:78
 #: kmymoney/views/newtransactionform.ui:110
@@ -1717,37 +1717,37 @@ msgstr "Обновить из того же источника"
 msgid "Ask"
 msgstr "Спрашивать"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:191
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:192
 #, kde-format
 msgctxt "@action:button Configuration of price update"
 msgid "Configure"
 msgstr "Настроить"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:305
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:306
 #, fuzzy, kde-format
 #| msgid "%1 units in %2"
 msgid "%1 units for one %2"
 msgstr "%1 единиц в %2"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:342
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:343
 #, kde-format
 msgid "[No identifier]"
 msgstr "[Без идентификатора]"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:456
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:458
 #, fuzzy, kde-format
 #| msgid "No account selected"
 msgctxt "@info online update price info"
 msgid "No security selected."
 msgstr "Счёт не выбран"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:466
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:468
 #, fuzzy, kde-format
 msgctxt "@info online update price info"
 msgid "No Security to be updated."
 msgstr "Добавить ценную бумагу"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:490
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:492
 #, kde-format
 msgid ""
 "Failed to retrieve an exchange rate for %1 from %2. It will be skipped this "
@@ -1755,14 +1755,14 @@ msgid ""
 msgstr ""
 "Не удалось получить данные курса обмена %1 из %2. Курс обновлён не будет."
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:491
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:501
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:524
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:493
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:503
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:526
 #, kde-format
 msgid "Price Update Failed"
 msgstr "Не удалось обновить курс"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:497
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:499
 #, kde-format
 msgid ""
 "Failed to retrieve a quote for %1 from %2.  Press <b>No</b> to remove the "
@@ -1776,12 +1776,12 @@ msgstr ""
 "курса в будущем, или кнопку <b>«Отмена»</b>, чтобы остановить текущее "
 "обновление."
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:523
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:525
 #, kde-format
 msgid "Cannot update security <b>%1</b>: %2"
 msgstr "Не удалось обновить информацию об активе <b>%1</b>: %2"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:589
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:591
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "Log message e.g. 'Prices for EUR > USD updated between 2001-01-01 and "
@@ -1792,14 +1792,14 @@ msgctxt ""
 msgid "Price for %1 updated to %3 for %4 (id %2)"
 msgstr "Курсы для %1 обновлены в период с %3 по %4 (ID %2)"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:595
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:597
 #, fuzzy, kde-format
 #| msgid "Received an invalid price for %1, unable to update."
 msgctxt "@info Online price update %1 online id"
 msgid "Received an invalid price for %1, unable to update."
 msgstr "Получен недопустимый курс %1, обновление невозможно."
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:640
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:642
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:38
 #: kmymoney/widgets/daterangedlg.cpp:64 kmymoney/widgets/daterangedlg.cpp:67
@@ -1810,6 +1810,15 @@ msgctxt "@info:tooltip"
 msgid "The date is invalid."
 msgstr "Некорректная дата."
 
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:680
+#, kde-format
+msgctxt "@info Persistence of price source"
+msgid ""
+"The next time you open this dialog the modified price source will only be "
+"loaded if you have used it for a successful price update. Otherwise, the old "
+"setting will be shown."
+msgstr ""
+
 #. i18n: ectx: property (windowTitle), widget (QDialog, KEquityPriceUpdateDlg)
 #: kmymoney/dialogs/kequitypriceupdatedlg.ui:15
 #, kde-format
@@ -1817,33 +1826,33 @@ msgid "Update Stock and Currency Prices"
 msgstr "Обновление курсов акций и валют"
 
 #. i18n: ectx: property (text), widget (QLabel, m_fromLabel)
-#: kmymoney/dialogs/kequitypriceupdatedlg.ui:63
+#: kmymoney/dialogs/kequitypriceupdatedlg.ui:73
 #, kde-format
 msgctxt "@label:chooser Date"
 msgid "From"
 msgstr "Списание"
 
 #. i18n: ectx: property (text), widget (QLabel, m_toLabel)
-#: kmymoney/dialogs/kequitypriceupdatedlg.ui:73
+#: kmymoney/dialogs/kequitypriceupdatedlg.ui:83
 #, kde-format
 msgctxt "@label:chooser Date"
 msgid "To"
 msgstr "по"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdateAll)
-#: kmymoney/dialogs/kequitypriceupdatedlg.ui:99
+#: kmymoney/dialogs/kequitypriceupdatedlg.ui:109
 #, kde-format
 msgid "Update All"
 msgstr "Обновить всё"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdateSelected)
-#: kmymoney/dialogs/kequitypriceupdatedlg.ui:106
+#: kmymoney/dialogs/kequitypriceupdatedlg.ui:116
 #, kde-format
 msgid "Update Selected"
 msgstr "Обновить выбранные"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#: kmymoney/dialogs/kequitypriceupdatedlg.ui:135
+#: kmymoney/dialogs/kequitypriceupdatedlg.ui:145
 #, kde-format
 msgid "Status:"
 msgstr "Состояние:"
@@ -1869,7 +1878,7 @@ msgstr "Состояние:"
 #. i18n: ectx: property (text), widget (QToolButton, m_creditDebitIndicatorColClear)
 #. i18n: ectx: property (text), widget (QToolButton, m_debitColClear)
 #. i18n: ectx: property (text), widget (QToolButton, m_creditColClear)
-#: kmymoney/dialogs/kequitypriceupdatedlg.ui:158
+#: kmymoney/dialogs/kequitypriceupdatedlg.ui:168
 #: kmymoney/dialogs/knewaccountdlg.ui:409
 #: kmymoney/dialogs/knewinstitutiondlg.ui:88
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:569
@@ -2007,7 +2016,7 @@ msgstr "Курсы"
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:84
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:54
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:381
-#: kmymoney/plugins/views/reports/core/listtable.cpp:721
+#: kmymoney/plugins/views/reports/core/listtable.cpp:742
 #: kmymoney/widgets/ktransactionfilter.ui:574
 #: kmymoney/widgets/transactionsortoption.cpp:42
 #, kde-format
@@ -2519,7 +2528,7 @@ msgstr "Счёт начального баланса"
 #. i18n: ectx: property (title), widget (QGroupBox, m_institutionBox)
 #: kmymoney/dialogs/knewaccountdlg.ui:310
 #: kmymoney/dialogs/knewaccountdlg.ui:316
-#: kmymoney/plugins/views/reports/core/listtable.cpp:731
+#: kmymoney/plugins/views/reports/core/listtable.cpp:752
 #: kmymoney/wizards/newaccountwizard/kinstitutionpage.ui:44
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:72
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:19
@@ -3120,7 +3129,7 @@ msgstr "Новый курс"
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:75
 #: kmymoney/mymoney/storage/pricemodel.cpp:40
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:88
-#: kmymoney/plugins/views/reports/core/listtable.cpp:737
+#: kmymoney/plugins/views/reports/core/listtable.cpp:758
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:113
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:61
 #, kde-format
@@ -3880,7 +3889,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/priceswizardpage.ui:144
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:465
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:163
-#: kmymoney/plugins/views/reports/core/listtable.cpp:679
+#: kmymoney/plugins/views/reports/core/listtable.cpp:700
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:185
 #, kde-format
 msgid "Price"
@@ -4318,7 +4327,7 @@ msgstr "День"
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_initialDateFieldCursorPosition)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:292
-#: kmymoney/plugins/views/reports/core/listtable.cpp:669
+#: kmymoney/plugins/views/reports/core/listtable.cpp:690
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:519
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:96
 #, kde-format
@@ -4369,7 +4378,7 @@ msgstr "Учтено"
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkReconciled)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:345
-#: kmymoney/plugins/views/reports/core/listtable.cpp:673
+#: kmymoney/plugins/views/reports/core/listtable.cpp:694
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
 #: kmymoney/views/khomeview_p.h:1015 kmymoney/views/khomeview_p.h:1385
 #: kmymoney/views/khomeview_p.h:1414
@@ -8437,7 +8446,7 @@ msgid "*** UNASSIGNED ***"
 msgstr "*** НЕ НАЗНАЧЕНО ***"
 
 #: kmymoney/mymoney/splitmodel.cpp:199 kmymoney/mymoney/splitmodel.cpp:204
-#: kmymoney/widgets/amountedit.cpp:266 kmymoney/widgets/amountedit.cpp:317
+#: kmymoney/widgets/amountedit.cpp:270 kmymoney/widgets/amountedit.cpp:321
 #: kmymoney/widgets/creditdebitedit.cpp:126
 #: kmymoney/widgets/creditdebitedit.cpp:127
 #: kmymoney/widgets/creditdebitedit.cpp:156
@@ -9088,7 +9097,7 @@ msgstr "Значение"
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:21
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:68
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:242
-#: kmymoney/plugins/views/reports/core/listtable.cpp:655
+#: kmymoney/plugins/views/reports/core/listtable.cpp:676
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:268
 #: kmymoney/widgets/ktransactionfilter.ui:445
 #: kmymoney/widgets/ktransactionfilter.ui:487
@@ -10116,7 +10125,7 @@ msgstr "Отмените выбор поля статьи."
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:78
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:192
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:243
-#: kmymoney/plugins/views/reports/core/listtable.cpp:663
+#: kmymoney/plugins/views/reports/core/listtable.cpp:684
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:159
 #: kmymoney/views/investtransactioneditor.ui:155
 #: kmymoney/views/newspliteditor.ui:191
@@ -10149,7 +10158,7 @@ msgstr "Отмените выбор поля примечания."
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_balance)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:325
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:165
-#: kmymoney/plugins/views/reports/core/listtable.cpp:719
+#: kmymoney/plugins/views/reports/core/listtable.cpp:740
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
 #: kmymoney/views/khomeview_p.h:1018 kmymoney/views/khomeview_p.h:1388
@@ -11401,7 +11410,7 @@ msgstr "Уменьшение числа акций"
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
 #. i18n: ectx: property (text), item, widget (QComboBox, cbActionTypes)
 #: kmymoney/plugins/csv/import/transactiondlg.ui:127
-#: kmymoney/plugins/views/reports/core/listtable.cpp:715
+#: kmymoney/plugins/views/reports/core/listtable.cpp:736
 #: kmymoney/views/investtransactioneditor.ui:61
 #: kmymoney/views/investtransactioneditor.ui:174
 #: kmymoney/views/investtransactioneditor.ui:238
@@ -12738,7 +12747,7 @@ msgstr "Учреждение"
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:294
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:483
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:615
-#: kmymoney/plugins/views/reports/core/listtable.cpp:661
+#: kmymoney/plugins/views/reports/core/listtable.cpp:682
 #: kmymoney/plugins/views/reports/reportsview.cpp:227
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
 #: kmymoney/views/investtransactioneditor.ui:92
@@ -13689,7 +13698,7 @@ msgstr "Разделитель счетов"
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:146
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:134
-#: kmymoney/plugins/views/reports/core/listtable.cpp:733
+#: kmymoney/plugins/views/reports/core/listtable.cpp:754
 #, kde-format
 msgid "Description"
 msgstr "Описание"
@@ -14524,7 +14533,7 @@ msgstr "Баланс на конец периода по реестру"
 #. i18n: ectx: attribute (title), widget (QWidget, m_categoryTab)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkCategory)
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:244
-#: kmymoney/plugins/views/reports/core/listtable.cpp:659
+#: kmymoney/plugins/views/reports/core/listtable.cpp:680
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:287
 #: kmymoney/views/newspliteditor.ui:160
 #: kmymoney/views/newtransactioneditor.ui:212
@@ -15619,8 +15628,8 @@ msgstr "Среднее"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:432
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:454
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
-#: kmymoney/plugins/views/reports/core/listtable.cpp:301
-#: kmymoney/plugins/views/reports/core/listtable.cpp:302
+#: kmymoney/plugins/views/reports/core/listtable.cpp:318
+#: kmymoney/plugins/views/reports/core/listtable.cpp:319
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1415
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1555
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1605
@@ -15861,41 +15870,41 @@ msgctxt "Chart legend title"
 msgid "Legend"
 msgstr "Условные обозначения"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:278
+#: kmymoney/plugins/views/reports/core/listtable.cpp:295
 #, kde-format
 msgid "Initial Market Value"
 msgstr "Рыночная стоимость на начало периода"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:279
+#: kmymoney/plugins/views/reports/core/listtable.cpp:296
 #, kde-format
 msgid "Ending Market Value"
 msgstr "Рыночная стоимость на конец периода"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:282
+#: kmymoney/plugins/views/reports/core/listtable.cpp:299
 #, kde-format
 msgid "Opening Balance"
 msgstr "Начальный баланс"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:283
+#: kmymoney/plugins/views/reports/core/listtable.cpp:300
 #, kde-format
 msgid "Closing Balance"
 msgstr "Конечный баланс"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:305
-#: kmymoney/plugins/views/reports/core/listtable.cpp:306
+#: kmymoney/plugins/views/reports/core/listtable.cpp:322
+#: kmymoney/plugins/views/reports/core/listtable.cpp:323
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1629
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1970
 #, kde-format
 msgid "Grand Total"
 msgstr "Общий итог"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:350
-#: kmymoney/plugins/views/reports/core/listtable.cpp:351
+#: kmymoney/plugins/views/reports/core/listtable.cpp:371
+#: kmymoney/plugins/views/reports/core/listtable.cpp:372
 #, kde-format
 msgid "Calculated"
 msgstr "Рассчитано"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:653
+#: kmymoney/plugins/views/reports/core/listtable.cpp:674
 #, kde-format
 msgid "Num"
 msgstr "Номер"
@@ -15903,7 +15912,7 @@ msgstr "Номер"
 #. i18n: ectx: property (text), widget (QLabel, tagsLabel)
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:657
+#: kmymoney/plugins/views/reports/core/listtable.cpp:678
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:507
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:76
 #: kmymoney/views/kmymoneyview.cpp:191 kmymoney/views/newspliteditor.ui:110
@@ -15914,18 +15923,18 @@ msgstr "Номер"
 msgid "Tags"
 msgstr "Метки"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:665
+#: kmymoney/plugins/views/reports/core/listtable.cpp:686
 #, kde-format
 msgid "Top Category"
 msgstr "Статья верхнего уровня"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:667
+#: kmymoney/plugins/views/reports/core/listtable.cpp:688
 #, kde-format
 msgid "Category Type"
 msgstr "Тип статьи"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:671
+#: kmymoney/plugins/views/reports/core/listtable.cpp:692
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:522
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:101
 #, kde-format
@@ -15933,7 +15942,7 @@ msgid "Week"
 msgstr "Неделя"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkAction)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:675
+#: kmymoney/plugins/views/reports/core/listtable.cpp:696
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:300
 #, kde-format
 msgid "Action"
@@ -15941,89 +15950,89 @@ msgstr "Действие"
 
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, sharesAmountEdit)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkShares)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:677
+#: kmymoney/plugins/views/reports/core/listtable.cpp:698
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:172
 #: kmymoney/views/investtransactioneditor.ui:362
 #, kde-format
 msgid "Shares"
 msgstr "Акции"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:681
+#: kmymoney/plugins/views/reports/core/listtable.cpp:702
 #, kde-format
 msgid "Last Price"
 msgstr "Последняя цена"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:683
+#: kmymoney/plugins/views/reports/core/listtable.cpp:704
 #, kde-format
 msgid "Buy Price"
 msgstr "Покупная цена"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:685
+#: kmymoney/plugins/views/reports/core/listtable.cpp:706
 #, kde-format
 msgid "Net Value"
 msgstr "Чистая стоимость"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:687
+#: kmymoney/plugins/views/reports/core/listtable.cpp:708
 #, kde-format
 msgid "Buy Value"
 msgstr "Покупная стоимость"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:689
+#: kmymoney/plugins/views/reports/core/listtable.cpp:710
 #, kde-format
 msgid "Sell Value"
 msgstr "Продажная стоимость"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:691
+#: kmymoney/plugins/views/reports/core/listtable.cpp:712
 #, kde-format
 msgid "Short-term Buy Value"
 msgstr "Краткосрочная покупная стоимость"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:693
+#: kmymoney/plugins/views/reports/core/listtable.cpp:714
 #, kde-format
 msgid "Short-term Sell Value"
 msgstr "Краткосрочная продажная стоимость"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:695
+#: kmymoney/plugins/views/reports/core/listtable.cpp:716
 #, kde-format
 msgid "Long-term Buy Value"
 msgstr "Долгосрочная покупная стоимость"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:697
+#: kmymoney/plugins/views/reports/core/listtable.cpp:718
 #, kde-format
 msgid "Long-term Sell Value"
 msgstr "Долгосрочная продажная стоимость"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:699
+#: kmymoney/plugins/views/reports/core/listtable.cpp:720
 #, kde-format
 msgid "Dividends Reinvested"
 msgstr "Реинвестированные дивиденды"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:701
+#: kmymoney/plugins/views/reports/core/listtable.cpp:722
 #, kde-format
 msgid "Dividends Paid Out"
 msgstr "Выплаченные дивиденды"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:703
+#: kmymoney/plugins/views/reports/core/listtable.cpp:724
 #, kde-format
 msgid "Starting Balance"
 msgstr "Начальный баланс"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:705
+#: kmymoney/plugins/views/reports/core/listtable.cpp:726
 #, kde-format
 msgid "Ending Balance"
 msgstr "Конечный баланс"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:707
+#: kmymoney/plugins/views/reports/core/listtable.cpp:728
 #, kde-format
 msgid "Market Value"
 msgstr "Рыночная стоимость"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:709
+#: kmymoney/plugins/views/reports/core/listtable.cpp:730
 #, kde-format
 msgid "Annualized Return"
 msgstr "Общегодовой доход"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:711
+#: kmymoney/plugins/views/reports/core/listtable.cpp:732
 #, kde-format
 msgid "Return On Investment"
 msgstr "Окупаемость инвестиций (ROI)"
@@ -16031,7 +16040,7 @@ msgstr "Окупаемость инвестиций (ROI)"
 #. i18n: ectx: property (text), widget (QLabel, feesAmountLabel)
 #. i18n: ectx: property (text), widget (QLabel, feesLabel)
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, feesAmountEdit)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:713
+#: kmymoney/plugins/views/reports/core/listtable.cpp:734
 #: kmymoney/views/investtransactioneditor.ui:106
 #: kmymoney/views/investtransactioneditor.ui:214
 #: kmymoney/views/investtransactioneditor.ui:343
@@ -16044,7 +16053,7 @@ msgstr "Комиссия"
 #. i18n: ectx: attribute (title), widget (QWizardPage, PaymentEditWizardPage)
 #. i18n: ectx: property (title), widget (QGroupBox, GroupBox1)
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, creditAmount)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:717
+#: kmymoney/plugins/views/reports/core/listtable.cpp:738
 #: kmymoney/widgets/creditdebitedit.ui:35
 #: kmymoney/wizards/newloanwizard/paymenteditwizardpage.ui:6
 #: kmymoney/wizards/newloanwizard/paymentwizardpage.ui:6
@@ -16053,110 +16062,110 @@ msgstr "Комиссия"
 msgid "Payment"
 msgstr "Платёж"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:723
+#: kmymoney/plugins/views/reports/core/listtable.cpp:744
 #, kde-format
 msgctxt "Account name"
 msgid "Name"
 msgstr "Название"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:725
+#: kmymoney/plugins/views/reports/core/listtable.cpp:746
 #, kde-format
 msgid "Next Due Date"
 msgstr "Следующий срок платежа"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:727
+#: kmymoney/plugins/views/reports/core/listtable.cpp:748
 #, kde-format
 msgid "Occurrence"
 msgstr "Повторяемость"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:729
+#: kmymoney/plugins/views/reports/core/listtable.cpp:750
 #, kde-format
 msgid "Payment Method"
 msgstr "Способ оплаты"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:735
+#: kmymoney/plugins/views/reports/core/listtable.cpp:756
 #, kde-format
 msgid "Opening Date"
 msgstr "Дата открытия"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:739
+#: kmymoney/plugins/views/reports/core/listtable.cpp:760
 #, kde-format
 msgid "Balance Early Warning"
 msgstr "Предупреждение по остатку"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:741
+#: kmymoney/plugins/views/reports/core/listtable.cpp:762
 #, kde-format
 msgid "Balance Max Limit"
 msgstr "Лимит по остатку"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:743
+#: kmymoney/plugins/views/reports/core/listtable.cpp:764
 #, kde-format
 msgid "Credit Early Warning"
 msgstr "Предупреждение по кредиту"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:745
+#: kmymoney/plugins/views/reports/core/listtable.cpp:766
 #, kde-format
 msgid "Credit Max Limit"
 msgstr "Лимит по кредиту"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:747
+#: kmymoney/plugins/views/reports/core/listtable.cpp:768
 #, kde-format
 msgid "Tax"
 msgstr "Налог"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:749
+#: kmymoney/plugins/views/reports/core/listtable.cpp:770
 #, kde-format
 msgid "Preferred"
 msgstr "Предпочтительный"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:751
+#: kmymoney/plugins/views/reports/core/listtable.cpp:772
 #, kde-format
 msgid "Loan Amount"
 msgstr "Сумма кредита"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, InterestEditWizardPage)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:753
+#: kmymoney/plugins/views/reports/core/listtable.cpp:774
 #: kmymoney/wizards/newloanwizard/interesteditwizardpage.ui:6
 #, kde-format
 msgid "Interest Rate"
 msgstr "Процентная ставка"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:755
+#: kmymoney/plugins/views/reports/core/listtable.cpp:776
 #, kde-format
 msgid "Next Interest Change"
 msgstr "Следующее изменение процентной ставки"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:757
+#: kmymoney/plugins/views/reports/core/listtable.cpp:778
 #, kde-format
 msgid "Periodic Payment"
 msgstr "Регулярный платёж"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:759
+#: kmymoney/plugins/views/reports/core/listtable.cpp:780
 #, kde-format
 msgid "Final Payment"
 msgstr "Окончательный платёж"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:761
+#: kmymoney/plugins/views/reports/core/listtable.cpp:782
 #, kde-format
 msgid "Current Balance"
 msgstr "Текущий остаток"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:763
+#: kmymoney/plugins/views/reports/core/listtable.cpp:784
 #, kde-format
 msgid "Capital Gain"
 msgstr "Доход от прироста капитала"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:765
+#: kmymoney/plugins/views/reports/core/listtable.cpp:786
 #, kde-format
 msgid "Percentage Gain"
 msgstr "Доход в процентах"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:767
+#: kmymoney/plugins/views/reports/core/listtable.cpp:788
 #, kde-format
 msgid "Short-term Gain"
 msgstr "Краткосрочный доход"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:769
+#: kmymoney/plugins/views/reports/core/listtable.cpp:790
 #, kde-format
 msgid "Long-term Gain"
 msgstr "Долгосрочный доход"
@@ -19161,14 +19170,14 @@ msgstr "Доход от процентов"
 
 #: kmymoney/views/investtransactioneditor.cpp:262
 #: kmymoney/views/multitransactioneditor.cpp:184
-#: kmymoney/views/newtransactioneditor.cpp:299
+#: kmymoney/views/newtransactioneditor.cpp:277
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "Дата проводки операции."
 
 #: kmymoney/views/investtransactioneditor.cpp:286
 #: kmymoney/views/multitransactioneditor.cpp:214
-#: kmymoney/views/newtransactioneditor.cpp:319
+#: kmymoney/views/newtransactioneditor.cpp:297
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "Дата проводки предшествует дате открытия счёта <b>%1</b>."
@@ -21098,19 +21107,19 @@ msgid "Balance: %1"
 msgstr "Баланс: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:192
-#: kmymoney/views/newtransactioneditor.cpp:302
+#: kmymoney/views/newtransactioneditor.cpp:280
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "Некорректная дата проводки."
 
 #: kmymoney/views/multitransactioneditor.cpp:225
-#: kmymoney/views/newtransactioneditor.cpp:337
+#: kmymoney/views/newtransactioneditor.cpp:315
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
 msgstr "Центр затрат, к которому должна быть привязана эта операция."
 
 #: kmymoney/views/multitransactioneditor.cpp:228
-#: kmymoney/views/newtransactioneditor.cpp:346
+#: kmymoney/views/newtransactioneditor.cpp:324
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -21196,19 +21205,19 @@ msgid "A category assignment is required for a split."
 msgstr "Для дробления необходима привязка к статье."
 
 #: kmymoney/views/newspliteditor.cpp:237
-#: kmymoney/views/newtransactioneditor.cpp:461
+#: kmymoney/views/newtransactioneditor.cpp:439
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Номер чека по данной операции."
 
 #: kmymoney/views/newspliteditor.cpp:246
-#: kmymoney/views/newtransactioneditor.cpp:471
+#: kmymoney/views/newtransactioneditor.cpp:449
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Номер чека <b>%1</b> уже использовался для этого счёта."
 
 #: kmymoney/views/newspliteditor.cpp:748
-#: kmymoney/views/newtransactioneditor.cpp:190
+#: kmymoney/views/newtransactioneditor.cpp:168
 #, fuzzy, kde-format
 #| msgid "Cannot remove transaction that references a closed account."
 msgctxt "@info:tooltip Protected"
@@ -21235,7 +21244,7 @@ msgstr "Плательщик/Получатель"
 msgid "Costcenter"
 msgstr "Центр затрат"
 
-#: kmymoney/views/newtransactioneditor.cpp:234
+#: kmymoney/views/newtransactioneditor.cpp:212
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Enter the split ratio for this transaction"
@@ -21243,7 +21252,7 @@ msgctxt "@info:tooltip"
 msgid "Enter the amount of the transaction."
 msgstr "Укажите коэффициент дробления для данной операции"
 
-#: kmymoney/views/newtransactioneditor.cpp:235
+#: kmymoney/views/newtransactioneditor.cpp:213
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Enter the split ratio for this transaction"
@@ -21251,27 +21260,27 @@ msgctxt "@info:tooltip"
 msgid "Enter the category or counter account of the transaction."
 msgstr "Укажите коэффициент дробления для данной операции"
 
-#: kmymoney/views/newtransactioneditor.cpp:239
+#: kmymoney/views/newtransactioneditor.cpp:217
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
 msgstr "В операции не указана статья бюджета."
 
-#: kmymoney/views/newtransactioneditor.cpp:243
+#: kmymoney/views/newtransactioneditor.cpp:221
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits by %1."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:616
+#: kmymoney/views/newtransactioneditor.cpp:594
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
 msgstr "Выбор автозаполнения операции"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1085
+#: kmymoney/views/newtransactioneditor.cpp:1060
 #: kmymoney/views/newtransactioneditor.ui:305
 #: kmymoney/views/newtransactionform.cpp:98
 #: kmymoney/views/newtransactionform.ui:179
@@ -21279,7 +21288,7 @@ msgstr "Выбор автозаполнения операции"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactionform.cpp:140
+#: kmymoney/views/newtransactionform.cpp:129
 #, kde-format
 msgctxt ""
 "@item:intext Amount, %1 transaction amount, %2 payment direction enclosed in "
@@ -21645,7 +21654,7 @@ msgstr "Список порядка вкладок…"
 msgid "Tab Order Editor"
 msgstr "Редактор порядка вкладок"
 
-#: kmymoney/widgets/amountedit.cpp:247
+#: kmymoney/widgets/amountedit.cpp:251
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid ""
@@ -21653,7 +21662,7 @@ msgid ""
 msgstr ""
 "Суммы приведены в %1. Нажмите эту кнопку, чтобы переключить валюту на %2."
 
-#: kmymoney/widgets/amountedit.cpp:254
+#: kmymoney/widgets/amountedit.cpp:258
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid "Values are presented in %1."
