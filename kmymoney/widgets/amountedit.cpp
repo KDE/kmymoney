@@ -78,7 +78,7 @@ public:
         , m_allowEmpty(false)
         , m_precisionOverridesFraction(false)
         , m_isReadOnly(false)
-        , m_allowModifyShares(false)
+        , m_allowModifyShares(true)
         , m_actionIcons(NoItem)
         , m_initialExchangeRate(MyMoneyMoney::ONE)
         , m_state(AmountEdit::DisplayValue)
@@ -138,9 +138,9 @@ public:
     /**
       * Internal helper function for value() and ensureFractionalPart().
       */
-    void ensureFractionalPart(QString& s) const
+    void ensureFractionalPart(QString& s, MultiCurrencyEdit::DisplayState state) const
     {
-        s = MyMoneyMoney(s).formatMoney(QString(), precision(m_state), false);
+        s = MyMoneyMoney(s).formatMoney(QString(), precision(state), false);
     }
 
     /**
@@ -237,12 +237,18 @@ public:
                 currentCurrency = m_sharesCommodity.name();
                 otherCurrency = m_valueCommodity.name();
                 setCurrencySymbol(m_sharesCommodity.tradingSymbol(), currentCurrency);
+                if (!m_sharesText.isEmpty()) {
+                    m_sharesText = MyMoneyMoney(m_sharesText).formatMoney(QString(), precision(AmountEdit::DisplayShares), false);
+                }
                 q->QLineEdit::setText(m_sharesText);
                 setReadOnly(!(m_isReadOnly || m_allowModifyShares));
             } else {
                 currentCurrency = m_valueCommodity.name();
                 otherCurrency = m_sharesCommodity.name();
                 setCurrencySymbol(m_valueCommodity.tradingSymbol(), m_valueCommodity.name());
+                if (!m_valueText.isEmpty()) {
+                    m_valueText = MyMoneyMoney(m_valueText).formatMoney(QString(), precision(AmountEdit::DisplayValue), false);
+                }
                 q->QLineEdit::setText(m_valueText);
                 setReadOnly(m_isReadOnly);
             }
@@ -307,7 +313,7 @@ public:
             q->setEnabled(true);
             widgetTextCache = txt;
             if (q->isEnabled() && !txt.isEmpty()) {
-                ensureFractionalPart(widgetTextCache);
+                ensureFractionalPart(widgetTextCache, state);
             }
             // only update text if it really differs
             if (m_state == state && widgetTextCache.compare(q->QLineEdit::text())) {
@@ -380,6 +386,7 @@ void AmountEdit::setReadOnly(bool ro)
 {
     Q_D(AmountEdit);
     d->m_isReadOnly = ro;
+    d->m_allowModifyShares = !ro;
     d->setReadOnly(ro);
 }
 
@@ -798,7 +805,7 @@ void AmountEdit::ensureFractionalPart()
     Q_D(AmountEdit);
     if (isEnabled()) {
         QString s(text());
-        d->ensureFractionalPart(s);
+        d->ensureFractionalPart(s, d->m_state);
         // by setting the text only when it's different then the one that it is already there
         // we preserve the edit widget's state (like the selection for example) during a
         // call to ensureFractionalPart() that does not change anything
