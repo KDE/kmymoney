@@ -944,8 +944,8 @@ void LedgerView::mousePressEvent(QMouseEvent* event)
 
             case JournalModel::Column::Detail: {
                 // check if an icon was clicked in the detail column
-                const auto col = columnAt(event->x());
-                const auto row = rowAt(event->y());
+                const auto col = columnAt(event->pos().x());
+                const auto row = rowAt(event->pos().y());
                 const auto idx = model()->index(row, col);
                 const auto iconIndex = d->iconClickIndex(idx, pos);
                 const auto statusRoles = this->statusRoles(idx);

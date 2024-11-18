@@ -161,7 +161,7 @@ void KMyMoneyCombo::mousePressEvent(QMouseEvent *e)
     if (e->button() != Qt::LeftButton)
         return;
 
-    if (((!isEditable() || isInArrowArea(e->globalPos())) && selector()->itemList().count()) && !d->m_completion->isVisible()) {
+    if (((!isEditable() || isInArrowArea(e->screenPos().toPoint())) && selector()->itemList().count()) && !d->m_completion->isVisible()) {
         d->m_completion->setVisible(true);
     }
 
