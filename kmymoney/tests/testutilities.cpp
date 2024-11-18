@@ -147,13 +147,13 @@ void InvTransactionHelper::init(const QDate& _date, const QString& _action, MyMo
 {
     MyMoneyFile* file = MyMoneyFile::instance();
     MyMoneyAccount stockaccount = file->account(_stockaccountid);
-    MyMoneyMoney value = _shares * _price;
+    MyMoneyMoney priceValue = _shares * _price;
 
     setPostDate(_date);
 
     setCommodity("USD");
     MyMoneySplit s1;
-    s1.setValue(value);
+    s1.setValue(priceValue);
     s1.setAccountId(_stockaccountid);
 
     if (_action == MyMoneySplit::actionName(eMyMoney::Split::Action::ReinvestDividend)) {
@@ -162,13 +162,13 @@ void InvTransactionHelper::init(const QDate& _date, const QString& _action, MyMo
 
         MyMoneySplit s2;
         s2.setAccountId(_categoryid);
-        s2.setShares(-value);
-        s2.setValue(-value);
+        s2.setShares(-priceValue);
+        s2.setValue(-priceValue);
         addSplit(s2);
     } else if (_action == MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend) || _action == MyMoneySplit::actionName(eMyMoney::Split::Action::Yield)) {
         s1.setAccountId(_categoryid);
-        s1.setShares(-value);
-        s1.setValue(-value);
+        s1.setShares(-priceValue);
+        s1.setValue(-priceValue);
 
         // Split 2 will be the zero-amount investment split that serves to
         // mark this transaction as a cash dividend and note which stock account
@@ -182,18 +182,18 @@ void InvTransactionHelper::init(const QDate& _date, const QString& _action, MyMo
 
         MyMoneySplit s3;
         s3.setAccountId(_transferid);
-        s3.setShares(value);
-        s3.setValue(value);
+        s3.setShares(priceValue);
+        s3.setValue(priceValue);
         addSplit(s3);
     } else if (_action == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) {
         s1.setShares(_shares);
-        s1.setValue(value);
+        s1.setValue(priceValue);
         s1.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares));
 
         MyMoneySplit s3;
         s3.setAccountId(_transferid);
-        s3.setShares(-value - _fee);
-        s3.setValue(-value - _fee);
+        s3.setShares(-priceValue - _fee);
+        s3.setValue(-priceValue - _fee);
         addSplit(s3);
 
         if (!_categoryid.isEmpty() && !_fee.isZero()) {
