@@ -525,7 +525,7 @@ void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWr
     ft.commit();
 
     if (!device || !device->open(QIODevice::WriteOnly)) {
-        throw MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing").arg(localFile));
+        throw MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing").arg(localFile).append(QString::fromLatin1(": ") + device->errorString()));
     }
 
     pWriter->setFile(MyMoneyFile::instance());

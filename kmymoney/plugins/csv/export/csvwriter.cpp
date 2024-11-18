@@ -82,7 +82,7 @@ void CsvWriter::write(const QString& filename,
         qDebug() << i18n("Export completed.\n");
         delete m_plugin->exporterDialog();  //  Can now delete as export finished
     } else {
-        KMessageBox::error(0, i18n("Unable to open file '%1' for writing", filename));
+        KMessageBox::error(0, i18n("Unable to open file '%1' for writing", filename).append(QString::fromLatin1(": ") + csvFile.errorString()));
     }
 }
 

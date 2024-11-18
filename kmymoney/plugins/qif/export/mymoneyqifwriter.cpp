@@ -76,7 +76,7 @@ void MyMoneyQifWriter::write(const QString& filename, const QString& profile,
         qifFile.close();
         qDebug() << "Export completed.\n";
     } else {
-        KMessageBox::error(0, i18n("Unable to open file '%1' for writing", filename));
+        KMessageBox::error(0, i18n("Unable to open file '%1' for writing", filename).append(QString::fromLatin1(": ") + qifFile.errorString()));
     }
 }
 
