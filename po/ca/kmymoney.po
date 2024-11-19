@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-18 01:56+0000\n"
-"PO-Revision-Date: 2024-11-01 10:30+0100\n"
+"POT-Creation-Date: 2024-11-19 01:50+0000\n"
+"PO-Revision-Date: 2024-11-18 09:44+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -1797,6 +1797,9 @@ msgid ""
 "loaded if you have used it for a successful price update. Otherwise, the old "
 "setting will be shown."
 msgstr ""
+"La pròxima vegada que obriu aquest diàleg, la font de preus modificada només "
+"es carregarà si l'heu utilitzat per a una actualització de preus amb èxit. "
+"En cas contrari, es mostrarà la configuració antiga."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KEquityPriceUpdateDlg)
 #: kmymoney/dialogs/kequitypriceupdatedlg.ui:15
@@ -1996,7 +1999,7 @@ msgstr "Preus"
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:54
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:381
 #: kmymoney/plugins/views/reports/core/listtable.cpp:742
-#: kmymoney/widgets/ktransactionfilter.ui:574
+#: kmymoney/widgets/ktransactionfilter.ui:584
 #: kmymoney/widgets/transactionsortoption.cpp:42
 #, kde-format
 msgid "Type"
@@ -3806,7 +3809,7 @@ msgstr ""
 #. i18n: ectx: attribute (title), widget (QWidget, m_detailsTab)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:39
 #: kmymoney/views/ktagsview.ui:187 kmymoney/widgets/ktransactionfilter.cpp:154
-#: kmymoney/widgets/ktransactionfilter.ui:554
+#: kmymoney/widgets/ktransactionfilter.ui:564
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:75
 #, kde-format
 msgid "Details"
@@ -4322,7 +4325,7 @@ msgstr "No conciliada"
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_stateBox)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:340
-#: kmymoney/widgets/ktransactionfilter.ui:595
+#: kmymoney/widgets/ktransactionfilter.ui:605
 #, kde-format
 msgctxt "@item reconciliation status"
 msgid "Cleared"
@@ -8375,7 +8378,7 @@ msgid "*** UNASSIGNED ***"
 msgstr "*** SENSE ASSIGNAR ***"
 
 #: kmymoney/mymoney/splitmodel.cpp:199 kmymoney/mymoney/splitmodel.cpp:204
-#: kmymoney/widgets/amountedit.cpp:270 kmymoney/widgets/amountedit.cpp:321
+#: kmymoney/widgets/amountedit.cpp:276 kmymoney/widgets/amountedit.cpp:327
 #: kmymoney/widgets/creditdebitedit.cpp:126
 #: kmymoney/widgets/creditdebitedit.cpp:127
 #: kmymoney/widgets/creditdebitedit.cpp:156
@@ -9024,8 +9027,8 @@ msgstr "Valor"
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:242
 #: kmymoney/plugins/views/reports/core/listtable.cpp:676
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:268
-#: kmymoney/widgets/ktransactionfilter.ui:445
-#: kmymoney/widgets/ktransactionfilter.ui:487
+#: kmymoney/widgets/ktransactionfilter.ui:455
+#: kmymoney/widgets/ktransactionfilter.ui:497
 #: kmymoney/widgets/transactionsortoption.cpp:38
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.ui:76
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.ui:79
@@ -9701,6 +9704,7 @@ msgstr "S'ha completat l'exportació.\n"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:85
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
+#: kmymoney/plugins/xml/xmlstorage.cpp:528
 #, kde-format
 msgid "Unable to open file '%1' for writing"
 msgstr "No es pot obrir el fitxer «%1» per a escriptura"
@@ -9824,7 +9828,7 @@ msgstr ""
 #: kmymoney/plugins/csv/export/csvwriter.cpp:190
 #: kmymoney/plugins/csv/export/csvwriter.cpp:371
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:346
-#: kmymoney/widgets/ktransactionfilter.ui:643
+#: kmymoney/widgets/ktransactionfilter.ui:653
 #, kde-format
 msgid "Invalid transaction"
 msgstr "Operació no vàlida"
@@ -15524,12 +15528,12 @@ msgstr "Mitjana"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
 #: kmymoney/plugins/views/reports/core/listtable.cpp:318
 #: kmymoney/plugins/views/reports/core/listtable.cpp:319
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1415
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1555
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1605
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1682
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1862
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1933
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1420
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1560
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1610
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1687
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1867
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1938
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -15791,8 +15795,8 @@ msgstr "Saldo final"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:322
 #: kmymoney/plugins/views/reports/core/listtable.cpp:323
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1629
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1970
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1634
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1975
 #, kde-format
 msgid "Grand Total"
 msgstr "Suma total"
@@ -16110,62 +16114,62 @@ msgid "Yes"
 msgstr "Sí"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeBox)
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:346
-#: kmymoney/widgets/ktransactionfilter.ui:624
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:351
+#: kmymoney/widgets/ktransactionfilter.ui:634
 #, kde-format
 msgid "Transfers"
 msgstr "Transferències"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:542
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:547
 #, kde-format
 msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "En obrir"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1401
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1669
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1406
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1674
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Compte"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2190
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2195
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "Real"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2195
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2200
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Pressupost"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2200
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2205
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Diferència"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2205
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2210
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Previsió"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2210
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2215
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "Mitjana mòbil"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2215
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2220
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "Mitjana mòbil del preu"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2220
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2225
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Price"
@@ -17836,8 +17840,8 @@ msgstr "<p>Seleccioneu aquesta opció per a mostrar la columna Etiqueta</p>"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tagsView)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkTag)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:249
-#: kmymoney/widgets/ktransactionfilter.ui:336
-#: kmymoney/widgets/ktransactionfilter.ui:378
+#: kmymoney/widgets/ktransactionfilter.ui:346
+#: kmymoney/widgets/ktransactionfilter.ui:388
 #, kde-format
 msgid "Tag"
 msgstr "Etiqueta"
@@ -21572,7 +21576,7 @@ msgstr "Llista de l'ordre de tabulació..."
 msgid "Tab Order Editor"
 msgstr "Editor de l'ordre de tabulació"
 
-#: kmymoney/widgets/amountedit.cpp:251
+#: kmymoney/widgets/amountedit.cpp:257
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid ""
@@ -21580,7 +21584,7 @@ msgid ""
 msgstr ""
 "El valor es presenta en %1. Premeu aquest botó per a canviar la moneda a %2."
 
-#: kmymoney/widgets/amountedit.cpp:258
+#: kmymoney/widgets/amountedit.cpp:264
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid "Values are presented in %1."
@@ -21981,6 +21985,12 @@ msgstr "(Cap)"
 msgid "Current selections: %1"
 msgstr "Seleccions actuals: %1"
 
+#: kmymoney/widgets/ktransactionfilter.cpp:513
+#, kde-format
+msgctxt "@info Info why selection is disabled"
+msgid "Category selection is not possible for net worth reports."
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/widgets/ktransactionfilter.ui:23
 #, kde-format
@@ -22038,69 +22048,69 @@ msgid "from"
 msgstr "des de"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_emptyTagsButton)
-#: kmymoney/widgets/ktransactionfilter.ui:386
+#: kmymoney/widgets/ktransactionfilter.ui:396
 #, kde-format
 msgid "Select transactions without tags"
 msgstr "Selecciona les operacions sense etiquetes"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_allTagsButton)
 #. i18n: ectx: property (text), widget (QPushButton, m_allPayeesButton)
-#: kmymoney/widgets/ktransactionfilter.ui:412
-#: kmymoney/widgets/ktransactionfilter.ui:521
+#: kmymoney/widgets/ktransactionfilter.ui:422
+#: kmymoney/widgets/ktransactionfilter.ui:531
 #, kde-format
 msgid "Select all"
 msgstr "Selecciona-ho tot"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_clearTagsButton)
 #. i18n: ectx: property (text), widget (QPushButton, m_clearPayeesButton)
-#: kmymoney/widgets/ktransactionfilter.ui:419
-#: kmymoney/widgets/ktransactionfilter.ui:528
+#: kmymoney/widgets/ktransactionfilter.ui:429
+#: kmymoney/widgets/ktransactionfilter.ui:538
 #, kde-format
 msgid "Select none"
 msgstr "No en seleccionis cap"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_emptyPayeesButton)
-#: kmymoney/widgets/ktransactionfilter.ui:495
+#: kmymoney/widgets/ktransactionfilter.ui:505
 #, kde-format
 msgid "Select transactions without payees"
 msgstr "Selecciona les operacions sense beneficiaris"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel11_2)
-#: kmymoney/widgets/ktransactionfilter.ui:564
+#: kmymoney/widgets/ktransactionfilter.ui:574
 #, kde-format
 msgid "Validity"
 msgstr "Validesa"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_stateBox)
-#: kmymoney/widgets/ktransactionfilter.ui:585
+#: kmymoney/widgets/ktransactionfilter.ui:595
 #, kde-format
 msgctxt "@item reconciliation status"
 msgid "All states"
 msgstr "Tots els estats"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_stateBox)
-#: kmymoney/widgets/ktransactionfilter.ui:590
+#: kmymoney/widgets/ktransactionfilter.ui:600
 #, kde-format
 msgctxt "@item reconciliation status"
 msgid "Not reconciled"
 msgstr "No conciliat"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_stateBox)
-#: kmymoney/widgets/ktransactionfilter.ui:600
+#: kmymoney/widgets/ktransactionfilter.ui:610
 #, kde-format
 msgctxt "@item reconciliation status"
 msgid "Reconciled"
 msgstr "Conciliat"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeBox)
-#: kmymoney/widgets/ktransactionfilter.ui:609
+#: kmymoney/widgets/ktransactionfilter.ui:619
 #, kde-format
 msgid "All types"
 msgstr "Tots els tipus"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, NewPaymentsWizardPage)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeBox)
-#: kmymoney/widgets/ktransactionfilter.ui:614
+#: kmymoney/widgets/ktransactionfilter.ui:624
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.cpp:97
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:76
 #: kmymoney/wizards/newloanwizard/durationwizardpage.cpp:36
@@ -22110,58 +22120,58 @@ msgid "Payments"
 msgstr "Pagaments"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeBox)
-#: kmymoney/widgets/ktransactionfilter.ui:619
+#: kmymoney/widgets/ktransactionfilter.ui:629
 #, kde-format
 msgid "Deposits"
 msgstr "Ingressos"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_validityBox)
-#: kmymoney/widgets/ktransactionfilter.ui:633
+#: kmymoney/widgets/ktransactionfilter.ui:643
 #, kde-format
 msgid "Any transaction"
 msgstr "Qualsevol operació"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_validityBox)
-#: kmymoney/widgets/ktransactionfilter.ui:638
+#: kmymoney/widgets/ktransactionfilter.ui:648
 #, kde-format
 msgid "Valid transaction"
 msgstr "Operació vàlida"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel11)
-#: kmymoney/widgets/ktransactionfilter.ui:651
+#: kmymoney/widgets/ktransactionfilter.ui:661
 #, kde-format
 msgctxt "@label reconciliation status"
 msgid "State"
 msgstr "Estat"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_nrButton)
-#: kmymoney/widgets/ktransactionfilter.ui:689
+#: kmymoney/widgets/ktransactionfilter.ui:699
 #, kde-format
 msgid "Search this number"
 msgstr "Cerca aquest número"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_nrRangeButton)
-#: kmymoney/widgets/ktransactionfilter.ui:702
+#: kmymoney/widgets/ktransactionfilter.ui:712
 #, kde-format
 msgid "Search number in range"
 msgstr "Cerca un número en l'interval"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel14)
-#: kmymoney/widgets/ktransactionfilter.ui:724
+#: kmymoney/widgets/ktransactionfilter.ui:734
 #, kde-format
 msgctxt "to (number)"
 msgid "to"
 msgstr "a"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel13)
-#: kmymoney/widgets/ktransactionfilter.ui:740
+#: kmymoney/widgets/ktransactionfilter.ui:750
 #, kde-format
 msgctxt "from (number)"
 msgid "from"
 msgstr "des de"
 
 #. i18n: ectx: property (text), widget (QLabel, m_selectedCriteria)
-#: kmymoney/widgets/ktransactionfilter.ui:793
+#: kmymoney/widgets/ktransactionfilter.ui:803
 #, kde-format
 msgid "text"
 msgstr "text"
