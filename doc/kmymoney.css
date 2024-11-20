@@ -1,0 +1,21 @@
+.inlinemediaobject object {
+  width: 32px;  /* or your desired icon size */
+  height: 32px;
+  vertical-align: middle;
+}
+
+.inlinemediaobject img {
+  width: 32px;  /* or your desired icon size */
+  height: 32px;
+  vertical-align: middle;
+}
+
+.mediaobject object {
+  width: 50%;
+  height: auto; /* prevents distortion */
+}
+
+.mediaobject img {
+  width: 50%;
+  height: auto; /* prevents distortion */
+}
