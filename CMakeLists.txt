@@ -527,6 +527,7 @@ if(KF${QT_MAJOR_VERSION}DocTools_FOUND)
   add_subdirectory( doc )
   if (${KMM_I18N_GENERATION})
     kdoctools_install( po )
+    kmm_kdoctools_install( po )
   endif()
 endif()
 

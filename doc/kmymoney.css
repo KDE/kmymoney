@@ -1,0 +1,13 @@
+.inlinemediaobject object {
+  width: 32px;
+  height: 32px;
+}
+
+.inlinemediaobject img {
+  width: 32px;
+  height: 32px;
+}
+
+.mediaobject img {
+  width: 400px;
+}
