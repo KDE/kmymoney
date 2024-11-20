@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-19 01:50+0000\n"
-"PO-Revision-Date: 2024-11-01 10:30+0100\n"
+"PO-Revision-Date: 2024-11-19 09:44+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -1794,6 +1794,9 @@ msgid ""
 "loaded if you have used it for a successful price update. Otherwise, the old "
 "setting will be shown."
 msgstr ""
+"La pròxima vegada que obriu este diàleg, la font de preus modificada només "
+"es carregarà si l'heu utilitzat per a una actualització de preus amb èxit. "
+"En cas contrari, es mostrarà la configuració antiga."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KEquityPriceUpdateDlg)
 #: kmymoney/dialogs/kequitypriceupdatedlg.ui:15
@@ -21983,11 +21986,13 @@ msgstr "(Cap)"
 msgid "Current selections: %1"
 msgstr "Seleccions actuals: %1"
 
+# skip-rule: ff-net
 #: kmymoney/widgets/ktransactionfilter.cpp:513
 #, kde-format
 msgctxt "@info Info why selection is disabled"
 msgid "Category selection is not possible for net worth reports."
 msgstr ""
+"La selecció de categories no és possible per als informes de valor net."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/widgets/ktransactionfilter.ui:23
