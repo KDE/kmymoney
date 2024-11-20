@@ -87,3 +87,100 @@ function(kmm_add_tests)
     ${test_args}
   )
 endfunction()
+
+#
+# provide option with three states AUTO, ON, OFF
+#
+macro(add_auto_option _name _text _default)
+    if(NOT DEFINED ${_name})
+        set(${_name} ${_default} CACHE STRING "${_text}" FORCE)
+    else()
+        set(${_name} ${_default} CACHE STRING "${_text}")
+    endif()
+    set_property(CACHE ${_name} PROPERTY STRINGS AUTO ON OFF)
+endmacro()
+
+#
+# Ensure that if a tristate ON/OFF/AUTO feature is set to ON,
+# its requirements have been met. Fail with a fatal error if not.
+#
+# _name:                name of a variable ENABLE_FOO representing a tristate ON/OFF/AUTO feature
+# _text:                human-readable description of the feature enabled by _name, for the
+#                       error message
+# CHECKS <var> [<var>]: List of variable names on which the specified option depends
+#                       and which are checked for values such as 1, ON, true, and not empty.
+#
+# If all requirements are met, the cmake variable named ${_name}_FOUND is set.
+#
+macro(check_auto_option _name _text)
+    set(options)
+    set(oneValueArgs NAME TEXT)
+    set(multiValueArgs CHECKS)
+    cmake_parse_arguments(CAOARGS "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+    set(_nameval ${${_name}})
+    foreach(_var ${CAOARGS_CHECKS})
+        set(_varval ${${_var}})
+        if(${_nameval} AND NOT ${_nameval} STREQUAL "AUTO" AND NOT ${_varval})
+            message(FATAL_ERROR "${_text} requested but ${_var} not found")
+        endif()
+    endforeach()
+    set(_varstate ${_name}_FOUND)
+    set(${_varstate} ON)
+    message(STATUS "Option '${_text}' enabled (${_varstate})")
+    #message("debug: _name ${_name} ${_nameval}  _var ${_var} ${_varval}")
+endmacro()
+
+function(add_docbook_manual)
+    set(one_value_keywords TARGET_NAME DOCBOOK_SRC SRC_DIR OUTPUT_DIR INSTALL_DIR CUSTOM_CSS)
+    cmake_parse_arguments(ARG "" "${one_value_keywords}" "" ${ARGN})
+
+    foreach(param TARGET_NAME DOCBOOK_SRC SRC_DIR OUTPUT_DIR INSTALL_DIR)
+        if(NOT ARG_${param})
+            message(FATAL_ERROR "add_docbook_manual: ${param} is required")
+        endif()
+    endforeach()
+
+    if(ARG_CUSTOM_CSS)
+        set(_css_param --stringparam html.stylesheet "${ARG_CUSTOM_CSS}")
+    else()
+        set(_css_param)
+    endif()
+
+    set(html_file "${ARG_OUTPUT_DIR}/index.html")
+    set(stamp_file "${ARG_OUTPUT_DIR}/images.stamp")
+
+    add_custom_command(
+        OUTPUT "${stamp_file}"
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${ARG_OUTPUT_DIR}"
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${ARG_SRC_DIR}" "${ARG_OUTPUT_DIR}"
+        COMMAND ${CMAKE_COMMAND} -E touch "${stamp_file}"
+        DEPENDS "${ARG_SRC_DIR}"
+    )
+
+    add_custom_command(
+        OUTPUT "${html_file}"
+        COMMAND ${XSLTPROC_EXECUTABLE}
+            --nonet
+            --param passivetex.extensions '1'
+            --param generate.consistent.ids '1'
+            --path ${KDOCTOOLS_CUSTOMIZATION_DIR}/dtd
+            --output "${html_file}"
+            ${_css_param}
+            --xinclude
+            "${DOCBOOKXSL_DIR}/xhtml/docbook.xsl"
+            "${ARG_DOCBOOK_SRC}"
+        DEPENDS "${ARG_DOCBOOK_SRC}" "${stamp_file}"
+        WORKING_DIRECTORY "${ARG_SRC_DIR}"
+        COMMENT "Generating HTML manual: ${ARG_TARGET_NAME}"
+    )
+
+    add_custom_target(${ARG_TARGET_NAME} DEPENDS "${html_file}")
+
+    install(DIRECTORY "${ARG_OUTPUT_DIR}/"
+        DESTINATION "${ARG_INSTALL_DIR}"
+        FILES_MATCHING
+            PATTERN "*.html" PATTERN "*.png" PATTERN "*.jpg"
+            PATTERN "*.jpeg" PATTERN "*.gif" PATTERN "*.svg"
+            PATTERN "*.css" PATTERN "*.js"
+    )
+endfunction()

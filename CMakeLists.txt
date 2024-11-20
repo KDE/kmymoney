@@ -405,6 +405,11 @@ add_feature_info(iCalendar ENABLE_LIBICAL "iCalendar integration.")
 option(ENABLE_COSTCENTER "Enable cost center support" OFF)
 add_feature_info("Cost center support" ENABLE_COSTCENTER "Adds support for cost centers (for devs only).")
 
+add_auto_option(ENABLE_DOCBOOK_HTML "build manuals in html" AUTO)
+find_package(DocBookXSL)
+find_program(XSLTPROC_EXECUTABLE xsltproc)
+check_auto_option(ENABLE_DOCBOOK_HTML "Docbook html export" CHECKS DocBookXSL_FOUND XSLTPROC_EXECUTABLE)
+
 # Setup translations
 ki18n_install(po)
 
