@@ -252,9 +252,9 @@ void ListTable::render(QString& result, QString& csv) const
                 if (!tempResult.isEmpty()) {
                     if (skippedColumn > 0) {
                         finishedResult.replace(QLatin1String("<td"), QString::fromLatin1("<td colspan=\"%1\"").arg(skippedColumn + 1));
-                        tempResult.clear();
                         skippedColumn = 0;
                     }
+                    tempResult.clear();
                 }
                 return finishedResult;
             };
