@@ -1362,6 +1362,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
         reportedDateRange = false;
         newEndingDate = newStartingDate;
         newStartingDate = newStartingDate.addYears(-1);
+        newEndingDate = newEndingDate.addDays(-1);
         report.setDateFilter(newStartingDate, newEndingDate); // search for matching buy transactions year earlier
 
     } while (
