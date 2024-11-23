@@ -1480,12 +1480,15 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
         break;
     case eMyMoney::Report::InvestmentSum::Owned:
         buysTotal = cfList.at(BuysOfOwned).total();
+        cashIncomeTotal = cfList.at(CashIncome).total();
         startingBal = MyMoneyMoney();
-        if (buysTotal.isZero() && endingBal.isZero())
+        if (buysTotal.isZero() && sellsTotal.isZero() && cashIncomeTotal.isZero())
             return;
         all.append(cfList.at(BuysOfOwned));
         all.append(CashFlowListItem(endingDate, endingBal));
+        all.append(cfList.at(CashIncome));
 
+        result[ctCashIncome] = cashIncomeTotal.toString();
         result[ctReinvestIncome] = reinvestIncomeTotal.toString();
         result[ctMarketValue] = endingBal.toString();
         break;
