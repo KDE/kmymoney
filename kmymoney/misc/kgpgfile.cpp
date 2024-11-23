@@ -50,6 +50,19 @@
 #define IO_THROUGH_DATA_BUFFER 0
 #endif
 
+// On newer versions of GpgME::Error asString is deprecated and
+// causes a compiler warning. If we have such a newer version,
+// we use asStdString() instead. For backward compatibility
+// we still have to provide the asString() variant.
+static QString gpgErrorString(GpgME::Error error)
+{
+#ifdef HAVE_GPGMEPP_AS_STD_STRING
+    return QString::fromStdString(error.asStdString());
+#else
+    return QLatin1String(error.asString());
+#endif
+}
+
 class GPGConfig
 {
 private:
@@ -87,7 +100,7 @@ private:
         /// FIXME This might be nasty if the underlying gpgme lib does not work on UTF-8
         auto lastError = ctx->setEngineHomeDirectory(m_homeDir.toUtf8());
         if (lastError.encodedError()) {
-            qDebug() << "Failure while setting GPG home directory to" << m_homeDir << "\n" << QLatin1String(lastError.asString());
+            qDebug() << "Failure while setting GPG home directory to" << m_homeDir << "\n" << gpgErrorString(lastError);
         }
 
         qDebug() << "GPG Home directory located in" << ctx->engineInfo().homeDirectory();
@@ -144,7 +157,7 @@ public:
         /// FIXME This might be nasty if the underlying gpgme lib does not work on UTF-8
         m_lastError = m_ctx->setEngineHomeDirectory(QDir::toNativeSeparators(gpgConfig->homeDir()).toUtf8());
         if (m_lastError.encodedError()) {
-            qDebug() << "Failure while setting GPG home directory to" << gpgConfig->homeDir() << "\n" << QLatin1String(m_lastError.asString());
+            qDebug() << "Failure while setting GPG home directory to" << gpgConfig->homeDir() << "\n" << gpgErrorString(m_lastError);
         }
     }
 
@@ -307,7 +320,7 @@ void KGPGFile::close()
 #endif
         d->m_lastError = d->m_ctx->encrypt(d->m_recipients, d->m_data, dcipher, GpgME::Context::AlwaysTrust).error();
         if (d->m_lastError.encodedError()) {
-            setErrorString(QLatin1String("Failure while writing temporary file for file: '") + QLatin1String(d->m_lastError.asString()) + QLatin1String("'"));
+            setErrorString(QLatin1String("Failure while writing temporary file for file: '") + gpgErrorString(d->m_lastError) + QLatin1String("'"));
         } else {
 #if IO_THROUGH_DATA_BUFFER
             const auto dataSize = dataProvider.data().size();
@@ -382,7 +395,7 @@ qint64 KGPGFile::readData(char* data, qint64 maxlen)
 
 QString KGPGFile::errorToString() const
 {
-    return QString::fromUtf8(d->m_lastError.asString());
+    return gpgErrorString(d->m_lastError);
 }
 
 bool KGPGFile::GPGAvailable()
@@ -390,7 +403,7 @@ bool KGPGFile::GPGAvailable()
     GpgME::initializeLibrary();
     const auto engineCheck = GpgME::checkEngine(GpgME::OpenPGP);
     if (engineCheck.code() != 0) {
-        qDebug() << "GpgME::checkEngine returns" << engineCheck.code() << engineCheck.asString();
+        qDebug() << "GpgME::checkEngine returns" << engineCheck.code() << gpgErrorString(engineCheck);
         return false;
     }
     return true;
