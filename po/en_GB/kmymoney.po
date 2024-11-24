@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-19 01:50+0000\n"
-"PO-Revision-Date: 2024-11-01 14:09+0000\n"
+"POT-Creation-Date: 2024-11-24 01:52+0000\n"
+"PO-Revision-Date: 2024-11-23 12:50+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 24.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1776,6 +1776,9 @@ msgid ""
 "loaded if you have used it for a successful price update. Otherwise, the old "
 "setting will be shown."
 msgstr ""
+"The next time you open this dialog the modified price source will only be "
+"loaded if you have used it for a successful price update. Otherwise, the old "
+"setting will be shown."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KEquityPriceUpdateDlg)
 #: kmymoney/dialogs/kequitypriceupdatedlg.ui:15
@@ -15917,8 +15920,8 @@ msgstr "Long-term Gain"
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
 #: kmymoney/plugins/views/reports/core/querytable.cpp:958
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1009
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1946
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1965
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1947
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1966
 #, kde-format
 msgid "Transfer from %1"
 msgstr "Transfer from %1"
@@ -15926,8 +15929,8 @@ msgstr "Transfer from %1"
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:222
 #: kmymoney/plugins/views/reports/core/querytable.cpp:959
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1008
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1945
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1964
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1946
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1965
 #, kde-format
 msgid "Transfer to %1"
 msgstr "Transfer to %1"
@@ -16020,13 +16023,13 @@ msgid "[No Tag]"
 msgstr "[No Tag]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:581
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1780
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1781
 #, kde-format
 msgid "Month of %1"
 msgstr "Month of %1"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:582
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1781
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1782
 #, kde-format
 msgid "Week of %1"
 msgstr "Week of %1"
@@ -16034,20 +16037,20 @@ msgstr "Week of %1"
 #: kmymoney/plugins/views/reports/core/querytable.cpp:798
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1014
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1157
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1907
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2079
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1908
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2080
 #, kde-format
 msgid "No Institution"
 msgstr "No Institution"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:802
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1918
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1919
 #, kde-format
 msgid "[Empty Payee]"
 msgstr "[Empty Payee]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:836
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1951
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1952
 #, kde-format
 msgid "[Split Transaction]"
 msgstr "[Split Transaction]"
@@ -16059,7 +16062,7 @@ msgctxt "Split transaction"
 msgid "Split"
 msgstr "Split"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1692
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1693
 #, kde-format
 msgctxt "No institution"
 msgid "None"
@@ -21748,7 +21751,7 @@ msgstr "Current selections: %1"
 #, kde-format
 msgctxt "@info Info why selection is disabled"
 msgid "Category selection is not possible for net worth reports."
-msgstr ""
+msgstr "Category selection is not possible for net worth reports."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/widgets/ktransactionfilter.ui:23

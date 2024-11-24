@@ -11,15 +11,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-19 01:50+0000\n"
-"PO-Revision-Date: 2024-10-19 16:43+0200\n"
+"POT-Creation-Date: 2024-11-24 01:52+0000\n"
+"PO-Revision-Date: 2024-11-23 17:09+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 24.08.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -1781,6 +1781,9 @@ msgid ""
 "loaded if you have used it for a successful price update. Otherwise, the old "
 "setting will be shown."
 msgstr ""
+"Nästa gång dialogrutan öppnas läses bara den ändrade kurskällan in om den "
+"har använts för en lyckad kursuppdatering. Annars visas den gamla "
+"inställningen."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KEquityPriceUpdateDlg)
 #: kmymoney/dialogs/kequitypriceupdatedlg.ui:15
@@ -3450,17 +3453,15 @@ msgstr "Visa kategorierna i kontovyns lista"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccountsHome)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:417
 #: kmymoney/dialogs/settings/ksettingshome.ui:238
-#, fuzzy, kde-format
-#| msgid "Hide accounts with a zero balance"
+#, kde-format
 msgid "Hide accounts with a zero balance from Home"
-msgstr "Dölj konton med nollsaldo"
+msgstr "Dölj konton med nollsaldo från Hem"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:424
-#, fuzzy, kde-format
-#| msgid "Hide accounts with a zero balance"
+#, kde-format
 msgid "Hide accounts with a zero balance from Accounts"
-msgstr "Dölj konton med nollsaldo"
+msgstr "Dölj konton med nollsaldo från Konton"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:431
@@ -5175,12 +5176,10 @@ msgid "Show transaction details"
 msgstr "Visa transaktionsinformation"
 
 #: kmymoney/kmymoney.cpp:1949
-#, fuzzy, kde-format
-#| msgctxt "To open a new report"
-#| msgid "&Open"
+#, kde-format
 msgctxt "Open URL"
 msgid "Open URL"
-msgstr "Ö&ppna"
+msgstr "Öppna webbadress"
 
 #: kmymoney/kmymoney.cpp:1950
 #, kde-format
@@ -13245,11 +13244,10 @@ msgid "OFX import file selection"
 msgstr "Filval för OFX-import"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:169
-#, fuzzy, kde-format
-#| msgid "XML files (*.xml);;All files (*)"
+#, kde-format
 msgctxt "Filter for QFileDialog"
 msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
-msgstr "XML-filer (*.xml);;Alla filer (*)"
+msgstr "OFX-filer (*.ofx *.qfx *.ofc);;Alla filer (*)"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:187
 #, kde-format
@@ -15942,8 +15940,8 @@ msgstr "Långsiktig vinst"
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
 #: kmymoney/plugins/views/reports/core/querytable.cpp:958
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1009
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1946
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1965
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1947
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1966
 #, kde-format
 msgid "Transfer from %1"
 msgstr "Överföring från %1"
@@ -15951,8 +15949,8 @@ msgstr "Överföring från %1"
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:222
 #: kmymoney/plugins/views/reports/core/querytable.cpp:959
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1008
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1945
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1964
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1946
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1965
 #, kde-format
 msgid "Transfer to %1"
 msgstr "Överföring till %1"
@@ -16045,13 +16043,13 @@ msgid "[No Tag]"
 msgstr "[Ingen etikett]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:581
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1780
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1781
 #, kde-format
 msgid "Month of %1"
 msgstr "Månad %1"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:582
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1781
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1782
 #, kde-format
 msgid "Week of %1"
 msgstr "Vecka under %1"
@@ -16059,20 +16057,20 @@ msgstr "Vecka under %1"
 #: kmymoney/plugins/views/reports/core/querytable.cpp:798
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1014
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1157
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1907
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2079
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1908
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2080
 #, kde-format
 msgid "No Institution"
 msgstr "Ingen institution"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:802
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1918
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1919
 #, kde-format
 msgid "[Empty Payee]"
 msgstr "[Tom betalningsmottagare]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:836
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1951
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1952
 #, kde-format
 msgid "[Split Transaction]"
 msgstr "[Delad transaktion]"
@@ -16084,7 +16082,7 @@ msgctxt "Split transaction"
 msgid "Split"
 msgstr "Delning"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1692
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1693
 #, kde-format
 msgctxt "No institution"
 msgid "None"
@@ -16498,11 +16496,10 @@ msgid "&Print"
 msgstr "S&kriv ut"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:743
-#, fuzzy, kde-format
-#| msgid "Exporting file..."
+#, kde-format
 msgctxt "To export a report"
 msgid "&Export to PDF file"
-msgstr "Exporterar fil..."
+msgstr "&Exportera till PDF-fil"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:745
 #, kde-format
@@ -16524,13 +16521,12 @@ msgstr "&Ta bort"
 #, kde-format
 msgctxt "To export reports"
 msgid "&Export to PDF files"
-msgstr ""
+msgstr "&Exportera till PDF-filer"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:816
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export into directory"
-msgstr "Exportera rapport"
+msgstr "Exportera till katalog"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KReportsView)
 #: kmymoney/plugins/views/reports/kreportsview.ui:14
@@ -18548,17 +18544,15 @@ msgstr "Dölj aktiekonton med nollsaldo"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:240
-#, fuzzy, kde-format
-#| msgid "Hide zero balance accounts"
+#, kde-format
 msgid "Hide zero balance accounts from Accounts"
-msgstr "Dölj konton med nollsaldo"
+msgstr "Dölj konton med nollsaldo från Konton"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:244
-#, fuzzy, kde-format
-#| msgid "Hide zero balance accounts"
+#, kde-format
 msgid "Hide zero balance accounts from Home"
-msgstr "Dölj konton med nollsaldo"
+msgstr "Dölj konton med nollsaldo från Hem"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:248
@@ -20210,64 +20204,57 @@ msgstr "Kontonummer"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tabLinks)
 #: kmymoney/views/kpayeesview.ui:503
-#, fuzzy, kde-format
-#| msgid "Matching"
+#, kde-format
 msgid "Link Matching"
-msgstr "Matchning"
+msgstr "Länkmatchning"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: kmymoney/views/kpayeesview.ui:511
-#, fuzzy, kde-format
-#| msgid "Matching"
+#, kde-format
 msgid "Matching setup"
-msgstr "Matchning"
+msgstr "Matchningsinställning"
 
 #. i18n: ectx: property (text), widget (KLineEdit, idPatternEdit)
 #: kmymoney/views/kpayeesview.ui:519
 #, kde-format
 msgid "\\d+-\\d+-\\d+"
-msgstr ""
+msgstr "\\d+-\\d+-\\d+"
 
 #. i18n: ectx: property (text), widget (QLabel, idPatternLabel)
 #: kmymoney/views/kpayeesview.ui:526
-#, fuzzy, kde-format
-#| msgid "Identifier"
+#, kde-format
 msgid "Identifier pattern"
-msgstr "Identifierare"
+msgstr "Identifierarmönster"
 
 #. i18n: ectx: property (text), widget (QLabel, urlTemplateLabel)
 #: kmymoney/views/kpayeesview.ui:533
-#, fuzzy, kde-format
-#| msgid "Templates"
+#, kde-format
 msgid "Url template"
-msgstr "Mallar"
+msgstr "Webbadressmall"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_3)
 #: kmymoney/views/kpayeesview.ui:548
-#, fuzzy, kde-format
-#| msgid "Matching"
+#, kde-format
 msgid "Matching check"
-msgstr "Matchning"
+msgstr "Matchningskontroll"
 
 #. i18n: ectx: property (text), widget (QLabel, label_1)
 #: kmymoney/views/kpayeesview.ui:563
-#, fuzzy, kde-format
-#| msgid "[No identifier]"
+#, kde-format
 msgid "Enter identifier"
-msgstr "[Identifierare saknas]"
+msgstr "Ange identifierare"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/views/kpayeesview.ui:570
 #, kde-format
 msgid "Captured result"
-msgstr ""
+msgstr "Hämtat resultat"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: kmymoney/views/kpayeesview.ui:580
-#, fuzzy, kde-format
-#| msgid "Result"
+#, kde-format
 msgid "Resulting URL"
-msgstr "Resultat"
+msgstr "Resulterade webbadress"
 
 #. i18n: ectx: property (text), widget (QLabel, m_leftLabel)
 #. i18n: ectx: property (text), widget (QLabel, m_centerLabel)
@@ -20997,12 +20984,10 @@ msgid "The transaction is missing a category assignment."
 msgstr "Transaktionen saknar en kategoritilldelning."
 
 #: kmymoney/views/newtransactioneditor.cpp:221
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "The amount is different from the sum of all splits."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits by %1."
-msgstr "Beloppet skiljer sig från summan av alla delningar."
+msgstr "Beloppet skiljer sig från summan av alla delningar med %1."
 
 #: kmymoney/views/newtransactioneditor.cpp:594
 #, kde-format
@@ -21017,7 +21002,7 @@ msgstr "Välj automatisk fyllnadstransaktion"
 #: kmymoney/views/newtransactionform.ui:179
 #, kde-format
 msgid "Link"
-msgstr ""
+msgstr "Länk"
 
 #: kmymoney/views/newtransactionform.cpp:129
 #, kde-format
@@ -21793,7 +21778,7 @@ msgstr "Aktuella val: %1"
 #, kde-format
 msgctxt "@info Info why selection is disabled"
 msgid "Category selection is not possible for net worth reports."
-msgstr ""
+msgstr "Kategorival är inte möjlig för nettotillgångsrapporter."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/widgets/ktransactionfilter.ui:23
