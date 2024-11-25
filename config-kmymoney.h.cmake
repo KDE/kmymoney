@@ -38,7 +38,7 @@
 /* No external component */
 
 #cmakedefine ENABLE_GPG 1
-#define ENABLE_GPG_VERSION "@QGpgme_VERSION@"
+#define ENABLE_GPG_VERSION "@GPG_VERSION@"
 #cmakedefine HAVE_GPGMEPP_AS_STD_STRING 1
 
 #cmakedefine ENABLE_COSTCENTER 1

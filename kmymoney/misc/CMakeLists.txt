@@ -195,6 +195,7 @@ PUBLIC
 Qt::Core
 $<$<BOOL:${Gpgmepp_FOUND}>:Gpgmepp>
 $<$<BOOL:${QGpgme_FOUND}>:QGpgme>
+$<$<BOOL:${GpgmeppQt6_FOUND}>:GpgmeppQt6>
 )
 set_target_properties(kmm_gpgfile PROPERTIES
 VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}

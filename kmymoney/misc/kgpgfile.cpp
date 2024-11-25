@@ -38,7 +38,9 @@
 #include <gpgme++/engineinfo.h>
 #include <gpgme++/key.h>
 #include <gpgme++/keylistresult.h>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <qgpgme/dataprovider.h>
+#endif
 
 // On Unix style systems we can use the file handle of
 // the file object to write out and read in the encrypted data
