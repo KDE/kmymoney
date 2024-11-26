@@ -398,7 +398,7 @@ void ListTable::render(QString& result, QString& csv) const
                 } else {
                     auto value = MyMoneyMoney(data) * MyMoneyMoney(100, 1);
                     auto valueStr = value.formatMoney(fraction);
-                    csv.append(QString::fromLatin1("\"%1%\",").arg(valueStr));
+                    csv.append(QString::fromLatin1("\"%1 %\",").arg(valueStr));
 
                     QString colorBegin;
                     QString colorEnd;
@@ -410,7 +410,7 @@ void ListTable::render(QString& result, QString& csv) const
                     if ((rowRank == 4 || rowRank == 5) && value.isNegative())
                         valueStr = QString::fromLatin1("<font color=%1>%2</font>")
                                    .arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name(), valueStr);
-                    result.append(QString::fromLatin1("<td>%2%4%1%%5%3</td>").arg(valueStr, tlinkBegin, tlinkEnd, colorBegin, colorEnd));
+                    result.append(QString::fromLatin1("<td>%2%4%1 %%5%3</td>").arg(valueStr, tlinkBegin, tlinkEnd, colorBegin, colorEnd));
                 }
                 break;
             case cgPrice:
