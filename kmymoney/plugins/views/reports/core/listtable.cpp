@@ -398,7 +398,7 @@ void ListTable::render(QString& result, QString& csv) const
                 } else {
                     auto value = MyMoneyMoney(data) * MyMoneyMoney(100, 1);
                     auto valueStr = value.formatMoney(fraction);
-                    csv.append(QString::fromLatin1("%1%,").arg(valueStr));
+                    csv.append(QString::fromLatin1("\"%1%\",").arg(valueStr));
 
                     QString colorBegin;
                     QString colorEnd;
