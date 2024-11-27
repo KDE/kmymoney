@@ -23,6 +23,8 @@
 
 struct _object;
 typedef _object PyObject;
+struct _ts;
+typedef _ts PyThreadState;
 
 class WoobInterface
 {
@@ -30,6 +32,8 @@ class WoobInterface
     PyObject* m_pythonSysPathVariable;
     PyObject* m_pythonWoobModuleLocation;
     PyObject* m_pythonWoobModule;
+
+    PyThreadState* m_pythonThreadState;
 
 public:
     struct Backend {

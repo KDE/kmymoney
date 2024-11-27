@@ -86,6 +86,7 @@ WoobInterface::WoobInterface()
                     PyErr_Print();
                 } else {
                     qDebug() << moduleName << "Python module loaded successfully";
+                    m_pythonThreadState = PyEval_SaveThread();
                 }
             }
         }
@@ -175,6 +176,7 @@ QList<WoobInterface::Backend> WoobInterface::getBackends()
     if (!isWoobInitialized())
         return backendsList;
 
+    PyGILState_STATE gstate = PyGILState_Ensure();
     auto pValue = execute("get_backends", QVariantList());
     if (pValue) {
         PyObject *key, *value;
@@ -188,6 +190,7 @@ QList<WoobInterface::Backend> WoobInterface::getBackends()
         Py_DECREF(pValue);
     }
 
+    PyGILState_Release(gstate);
     return backendsList;
 }
 
@@ -197,6 +200,7 @@ QList<WoobInterface::Account> WoobInterface::getAccounts(QString backend)
     if (!isWoobInitialized())
         return accountsList;
 
+    PyGILState_STATE gstate = PyGILState_Ensure();
     auto pValue = execute("get_accounts", QVariantList{backend});
     if (pValue) {
         PyObject *key, *value;
@@ -213,6 +217,7 @@ QList<WoobInterface::Account> WoobInterface::getAccounts(QString backend)
         Py_DECREF(pValue);
     }
 
+    PyGILState_Release(gstate);
     return accountsList;
 }
 
@@ -222,6 +227,7 @@ WoobInterface::Account WoobInterface::getAccount(QString backend, QString accid,
     if (!isWoobInitialized())
         return acc;
 
+    PyGILState_STATE gstate = PyGILState_Ensure();
     auto retVal = execute("get_transactions", QVariantList{backend, accid, max});
     if (retVal) {
         acc.id = extractDictStringValue(retVal, "id");
@@ -253,6 +259,7 @@ WoobInterface::Account WoobInterface::getAccount(QString backend, QString accid,
         Py_DECREF(key);
         Py_DECREF(retVal);
     }
+    PyGILState_Release(gstate);
     return acc;
 }
 
