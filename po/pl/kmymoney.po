@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2024-10-12 11:08+0200\n"
+"PO-Revision-Date: 2024-11-30 09:29+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -20604,7 +20604,7 @@ msgstr "* Ustawienia ogólne"
 #: kmymoney/views/kwelcomepage.cpp:226
 #, kde-format
 msgid "- Port to KDE frameworks and Qt5"
-msgstr "- Przeniesienie na Szkielety KDE i Qt5"
+msgstr "- Przeniesienie na KDE Frameworks i Qt5"
 
 #: kmymoney/views/kwelcomepage.cpp:228
 #, kde-format
