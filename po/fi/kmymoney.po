@@ -3,17 +3,17 @@
 # KDE Finnish translation sprint participants:
 # Author: Artnay
 # Author: Lliehu
+# SPDX-FileCopyrightText: 2019, 2020, 2021, 2022, 2023, 2024 Tommi Nieminen <translator@legisign.org>
 # Mikael Kujanpää <mikael.kujanpaa@iki.fi>, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2020, 2021.
 # Raimo Ikonen <raimo.ikonen@innotronics.fi>, 2008, 2009, 2010.
 # Marko Suvila <marko.suvila@gmail.com>, 2008, 2009.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016.
-# Tommi Nieminen <translator@legisign.org>, 2019, 2020, 2021, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2024-02-19 12:11+0200\n"
+"PO-Revision-Date: 2024-10-29 13:59+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -382,7 +382,7 @@ msgid ""
 msgstr "<p>Virhe luettaessa tiedostopohjaa <b>%1</b> rivi %2, sarake %3</p>"
 
 #: kmymoney/converter/mymoneytemplate.cpp:100
-#, fuzzy, kde-format
+#, kde-format
 msgid "Template Error"
 msgstr "Mallipohjavirhe"
 
@@ -397,7 +397,7 @@ msgid "<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>"
 msgstr "<p>Virheellinen tunniste <b>%1</b> mallipohjassa <b>%2</b></p>"
 
 #: kmymoney/converter/mymoneytemplate.cpp:214
-#, fuzzy, kde-format
+#, kde-format
 msgid "Loading template %1"
 msgstr "Ladataan mallipohjaa %1"
 
@@ -2694,7 +2694,7 @@ msgstr "Pohjavaluutta"
 #: kmymoney/widgets/ktransactionfilter.cpp:152
 #, kde-format
 msgid "Payees"
-msgstr "Maksujen saajat"
+msgstr "Maksunsaajat"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel6)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:108
@@ -5585,10 +5585,9 @@ msgstr ""
 "parannusehdotuksia."
 
 #: kmymoney/kcreditswindow.cpp:41
-#, fuzzy, kde-format
-#| msgid "(c) 2000-2019 The KMyMoney development team"
+#, kde-format
 msgid "(c) 2000-2022 The KMyMoney development team"
-msgstr "© 2000–2019 KMyMoney-kehitysryhmä"
+msgstr "© 2000–2024 KMyMoney-kehitysryhmä"
 
 #: kmymoney/kcreditswindow.cpp:44
 #, kde-format
@@ -5892,10 +5891,9 @@ msgstr "Piilota yhteensovitetut tapahtumat"
 
 #. i18n: ectx: label, entry (ShowReconciledBalances), group (List Options)
 #: kmymoney/kmymoney.cpp:1399 kmymoney/settings/kmymoney.kcfg:252
-#, fuzzy, kde-format
-#| msgid "Do not show reconciled transactions"
+#, kde-format
 msgid "Show reconciled balances"
-msgstr "Älä näytä yhteensovitettuja tapahtumia"
+msgstr "Näytä yhteensovitetut tapahtumia"
 
 #. i18n: ectx: label, entry (HideUnusedCategory), group (List Options)
 #: kmymoney/kmymoney.cpp:1400 kmymoney/settings/kmymoney.kcfg:228
@@ -6290,7 +6288,7 @@ msgid "Debug Timers"
 msgstr "Virheenpaikannustoimintojen ajastimet"
 
 #: kmymoney/kmymoney.cpp:1503
-#, fuzzy, kde-format
+#, kde-format
 msgid "Remove credit transfer"
 msgstr "Poista luottosiirto"
 
@@ -9822,11 +9820,9 @@ msgid "Account Type:"
 msgstr "Tilin tyyppi:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:101
-#, fuzzy, kde-format
-#| msgctxt "Header for AqBanking account list"
-#| msgid "Account Name"
+#, kde-format
 msgid "Account Name:"
-msgstr "Tilin nimi"
+msgstr "Tilin nimi:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #, kde-format
@@ -12087,9 +12083,10 @@ msgid ""
 "characters inserted after each purpose field are distracting and are removed "
 "when this option is enabled.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Joissakin instituutioissa monikäyttökenttää käytetään "
-"vain yhden tiedon varastoimiseen. Tässä tapauksessa rivinvaihtomerkit "
-"hämäävät ja ne poistetaan kun tämä asetus on valittuna.</p> </body></html>"
+"<html><head/><body><p>Joissakin rahalaitoksissa tapahtuman monikäyttökenttää "
+"käytetään vain yhden tiedon varastoimiseen. Tässä tapauksessa "
+"rivinvaihtomerkit häiritsevät, ja ne poistetaan, kun asetus on valittu.</p></"
+"body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_removeLineBreaksFromMemo)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:204
@@ -12099,16 +12096,13 @@ msgstr "Poista rivinvaihdot muistiinpanokentästä"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_includePayeeDetails)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:211
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>Flag this account to be an opening balance account</"
-#| "p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>Add additional payee details found in the transaction "
 "to the memo.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Merkitse tämä tili aloitussaldotiliksi</p></body></"
-"html>"
+"<html><head/><body><p>Lisää tapahtumasta löytyvät lisämaksunsaajan tiedot "
+"selitteeseen.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_includePayeeDetails)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:214
@@ -13065,9 +13059,9 @@ msgid ""
 "transaction amounts, e.g. if you need to reverse charges and payments "
 "because your institution provides them inverted.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Tarkista tämä jos tapahtumien summat täytyy kääntää, "
-"esimerkiksi jos veloitukset ja maksut täytyy kääntää koska instituutio "
-"tarjoaa ne käänteisesti.</p></body></html>"
+"<html><head/><body><p>Tarkista tämä, jos tapahtumien summien etumerkki "
+"täytyy kääntää, esim. jos veloitukset ja maksut täytyy kääntää, koska "
+"rahalaitos tarjoaa ne käänteisinä.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:501
