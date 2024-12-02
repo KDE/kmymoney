@@ -103,7 +103,7 @@ void KMyMoneySecuritySelector::update(const QString& id)
     // sort
     std::sort(d->m_list.begin(), d->m_list.end());
 
-    QList<MyMoneySecurity>::ConstIterator it;
+    QList<MyMoneySecurity>::const_iterator it;
 
     // construct a transparent 16x16 pixmap
     // clang-format off
@@ -136,7 +136,7 @@ void KMyMoneySecuritySelector::update(const QString& id)
 
     int itemId = 0;
     int m_selectedItemId = 0;
-    for (it = d->m_list.constBegin(); it != d->m_list.constEnd(); ++it) {
+    for (it = d->m_list.cbegin(); it != d->m_list.cend(); ++it) {
         QString display;
         switch (d->m_displayItem) {
         default:

@@ -16,6 +16,7 @@
 // Project Includes
 
 #include "kmm_mymoney_export.h"
+#include "kmmset.h"
 #include "mymoneyunittestable.h"
 
 class QString;
@@ -66,13 +67,13 @@ public:
     bool hasReferenceTo(const QString& id) const;
 
     /**
-     * This method returns a QSet of object ids that this object references.
+     * This method returns a std::unordered_set of object ids that this object references.
      *
-     * @returns QSet<QString> of referenced objects
+     * @returns KMMStringSet of referenced objects
      *
      * @sa hasReferenceTo()
      */
-    QSet<QString> referencedObjects() const;
+    KMMStringSet referencedObjects() const;
 
     bool operator == (const MyMoneyObject& right) const;
 

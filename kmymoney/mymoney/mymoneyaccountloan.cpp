@@ -17,7 +17,6 @@
 #include <QDate>
 #include <QMap>
 #include <QRegularExpression>
-#include <QSet>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -72,10 +71,10 @@ const MyMoneyMoney MyMoneyAccountLoan::interestRate(const QDate& date) const
     const auto key = QStringLiteral("ir-%1").arg(date.toString(Qt::ISODate));
     static const QRegularExpression interestRateExp("ir-(\\d{4})-(\\d{2})-(\\d{2})");
 
-    QMap<QString, QString>::ConstIterator it;
+    QMap<QString, QString>::const_iterator it;
     const auto map = pairs();
     QString val;
-    for (it = map.constBegin(); it != map.constEnd(); ++it) {
+    for (it = map.cbegin(); it != map.cend(); ++it) {
         const auto interestRateDate(interestRateExp.match(it.key()));
         if (interestRateDate.hasMatch()) {
             if (qstrcmp(it.key().toLatin1(), key.toLatin1()) <= 0)

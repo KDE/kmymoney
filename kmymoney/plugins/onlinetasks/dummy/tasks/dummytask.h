@@ -58,7 +58,8 @@ protected:
         Q_UNUSED(id);
         return false;
     }
-    QSet<QString> referencedObjects() const final override {
+    KMMStringSet referencedObjects() const final override
+    {
         return {};
     }
     dummyTask* createFromXml(QXmlStreamReader*) const final override

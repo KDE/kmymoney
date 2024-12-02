@@ -305,7 +305,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
 {
     Q_D(AccountSet);
     QStringList list;
-    QStringList::ConstIterator it_l;
+    QStringList::const_iterator it_l;
     int count = 0;
     int typeMask = 0;
     QString currentId;
@@ -416,7 +416,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
 
         if (item != 0) {
             // scan all matching accounts found in the engine
-            for (it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
+            for (it_l = list.cbegin(); it_l != list.cend(); ++it_l) {
                 const MyMoneyAccount& acc = d->m_file->account(*it_l);
                 ++d->m_count;
                 ++count;
@@ -483,8 +483,8 @@ int AccountSet::load(KMyMoneyAccountSelector* selector, const QString& baseName,
     item = selector->newItem(baseName);
     ++d->m_count;
 
-    QList<QString>::ConstIterator it;
-    for (it = accountIdList.constBegin(); it != accountIdList.constEnd(); ++it)   {
+    QList<QString>::const_iterator it;
+    for (it = accountIdList.cbegin(); it != accountIdList.cend(); ++it) {
         const MyMoneyAccount& acc = d->m_file->account(*it);
         if (acc.isClosed())
             continue;
@@ -526,10 +526,10 @@ bool AccountSet::isHidingClosedAccounts() const
 int AccountSet::loadSubAccounts(KMyMoneyAccountSelector* selector, QTreeWidgetItem* parent, const QString& key, const QStringList& list)
 {
     Q_D(AccountSet);
-    QStringList::ConstIterator it_l;
+    QStringList::const_iterator it_l;
     int count = 0;
 
-    for (it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
+    for (it_l = list.cbegin(); it_l != list.cend(); ++it_l) {
         const MyMoneyAccount& acc = d->m_file->account(*it_l);
         // don't include stock accounts if not in expert mode
         if (acc.isInvest() && !d->m_showInvestments)

@@ -11,13 +11,14 @@
 #include <QEvent>
 #include <QKeyEvent>
 #include <QMenu>
-#include <QSet>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include "kmmset.h"
 
 struct ExchangeAction {
     QMenu* menu;
@@ -76,7 +77,7 @@ void KMenuActionExchanger::addExchange(QMenu* menu, Qt::Key key, QAction* action
     newAction.actionReleased = actionReleased;
     newAction.actionPressed = actionPressed;
 
-    QSet<QMenu*> installedMenus;
+    KMMSet<QMenu*> installedMenus;
     for (int i = 0; i < d->m_actions.count(); ++i) {
         const auto& action = d->m_actions.at(i);
         if ((action.menu == menu) && (action.key == key)) {

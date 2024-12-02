@@ -80,8 +80,8 @@ public:
     {
         m_localeCodec = QTextCodec::codecForLocale();
         auto codecList = QTextCodec::availableCodecs();
-        QList<QByteArray>::ConstIterator itc;
-        for (itc = codecList.constBegin(); itc != codecList.constEnd(); ++itc) {
+        QList<QByteArray>::const_iterator itc;
+        for (itc = codecList.cbegin(); itc != codecList.cend(); ++itc) {
             if (*itc == m_localeCodec)
                 ui->comboDecode->insertItem(0, QString(*itc));
             else

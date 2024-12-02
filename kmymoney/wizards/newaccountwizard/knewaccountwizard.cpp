@@ -312,7 +312,7 @@ const MyMoneySchedule& Wizard::schedule()
             QList<MyMoneySplit>::const_iterator it;
             MyMoneyMoney factor(moneyBorrowed() ? 1 : -1, 1);
 
-            for (it = additionalSplits.constBegin(); it != additionalSplits.constEnd(); ++it) {
+            for (it = additionalSplits.cbegin(); it != additionalSplits.cend(); ++it) {
                 s = (*it);
                 s.clearId();
                 s.setShares(s.shares() * factor);

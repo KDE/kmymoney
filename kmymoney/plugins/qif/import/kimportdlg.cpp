@@ -194,9 +194,9 @@ void KImportDlg::addCategories(QStringList& strList, const QString& id, const QS
     MyMoneyAccount account = file->account(id);
 
     QStringList accList = account.accountList();
-    QStringList::ConstIterator it_a;
+    QStringList::const_iterator it_a;
 
-    for (it_a = accList.constBegin(); it_a != accList.constEnd(); ++it_a) {
+    for (it_a = accList.cbegin(); it_a != accList.cend(); ++it_a) {
         account = file->account(*it_a);
         strList << leadIn + account.name();
         addCategories(strList, *it_a, leadIn + account.name() + MyMoneyFile::AccountSeparator);

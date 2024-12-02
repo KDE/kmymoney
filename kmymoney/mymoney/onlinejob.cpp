@@ -4,8 +4,6 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include <QSet>
-
 #include "onlinejob.h"
 #include "onlinejob_p.h"
 

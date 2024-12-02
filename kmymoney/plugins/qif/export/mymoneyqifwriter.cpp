@@ -122,10 +122,10 @@ void MyMoneyQifWriter::writeAccountEntry(QTextStream& s, const QString& accountI
         s << Qt::endl;
         s << "^" << Qt::endl;
 
-        QList<MyMoneyTransaction>::ConstIterator it;
+        QList<MyMoneyTransaction>::const_iterator it;
         Q_EMIT signalProgress(0, list.count());
         int count = 0;
-        for (it = list.constBegin(); it != list.constEnd(); ++it) {
+        for (it = list.cbegin(); it != list.cend(); ++it) {
             // don't include the openingBalanceTransaction again
             if ((*it).id() != openingBalanceTransactionId)
                 writeTransactionEntry(s, *it, accountId);
@@ -220,8 +220,8 @@ void MyMoneyQifWriter::writeTransactionEntry(QTextStream &s, const MyMoneyTransa
             s << "L" << file->accountToCategory(sp.accountId()) << Qt::endl;
         }
         if (list.count() > 2) {
-            QList<MyMoneySplit>::ConstIterator it;
-            for (it = list.constBegin(); it != list.constEnd(); ++it) {
+            QList<MyMoneySplit>::const_iterator it;
+            for (it = list.cbegin(); it != list.cend(); ++it) {
                 if (!((*it) == split)) {
                     writeSplitEntry(s, *it);
                 }
@@ -258,16 +258,16 @@ void MyMoneyQifWriter::extractInvestmentEntries(QTextStream &s, const QString& a
 {
     MyMoneyFile* file = MyMoneyFile::instance();
     QList<QString> accList = file->account(accountId).accountList();
-    QList<QString>::ConstIterator itAcc;
-    for (itAcc = accList.constBegin(); itAcc != accList.constEnd(); ++itAcc) {
+    QList<QString>::const_iterator itAcc;
+    for (itAcc = accList.cbegin(); itAcc != accList.cend(); ++itAcc) {
         MyMoneyTransactionFilter filter((*itAcc));
         filter.setDateFilter(startDate, endDate);
         QList<MyMoneyTransaction> list;
         file->transactionList(list, filter);
-        QList<MyMoneyTransaction>::ConstIterator it;
+        QList<MyMoneyTransaction>::const_iterator it;
         Q_EMIT signalProgress(0, list.count());
         int count = 0;
-        for (it = list.constBegin(); it != list.constEnd(); ++it) {
+        for (it = list.cbegin(); it != list.cend(); ++it) {
             writeInvestmentEntry(s, *it, ++count);
             Q_EMIT signalProgress(count, 0);
         }

@@ -113,7 +113,7 @@ OfxAppVersion::OfxAppVersion(KComboBox* combo, KLineEdit* versionEdit, const QSt
 
     QMap<QString, QString>::const_iterator it_a;
     // check for an exact match
-    for (it_a = m_appMap.constBegin(); it_a != m_appMap.constEnd(); ++it_a) {
+    for (it_a = m_appMap.cbegin(); it_a != m_appMap.cend(); ++it_a) {
         if (*it_a == appId)
             break;
     }
@@ -121,9 +121,9 @@ OfxAppVersion::OfxAppVersion(KComboBox* combo, KLineEdit* versionEdit, const QSt
     // not found, check if we have a manual version of this product
     static const QRegularExpression appExp("(\\w+:)(\\d+|\\w+)");
     auto matcher = appExp.match(appId);
-    if (it_a == m_appMap.constEnd()) {
+    if (it_a == m_appMap.cend()) {
         if (matcher.hasMatch()) {
-            for (it_a = m_appMap.constBegin(); it_a != m_appMap.constEnd(); ++it_a) {
+            for (it_a = m_appMap.cbegin(); it_a != m_appMap.cend(); ++it_a) {
                 if (*it_a == matcher.captured(1))
                     break;
             }
@@ -131,7 +131,7 @@ OfxAppVersion::OfxAppVersion(KComboBox* combo, KLineEdit* versionEdit, const QSt
     }
 
     // if we still haven't found it, we use a default as last resort
-    if (it_a != m_appMap.constEnd()) {
+    if (it_a != m_appMap.cend()) {
         combo->setCurrentItem(it_a.key());
         if ((*it_a).endsWith(':')) {
             if (versionEdit) {

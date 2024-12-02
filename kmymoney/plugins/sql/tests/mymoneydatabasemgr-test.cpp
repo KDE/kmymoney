@@ -780,10 +780,10 @@ void MyMoneyStorageMgrTest::testAddTransactions()
         QVERIFY(t2.splitCount() == 4);
         QVERIFY(m->transactionCount(QString()) == 2);
 
-        //QMap<QString, QString>::ConstIterator it_k;
+        // QMap<QString, QString>::const_iterator it_k;
         MyMoneyTransactionFilter f;
         QList<MyMoneyTransaction> transactionList(m->transactionList(f));
-        QList<MyMoneyTransaction>::ConstIterator it_t(transactionList.constBegin());
+        QList<MyMoneyTransaction>::const_iterator it_t(transactionList.cbegin());
 
         QCOMPARE((*it_t).id(), QLatin1String("T000000000000000002"));
 
@@ -795,7 +795,7 @@ void MyMoneyStorageMgrTest::testAddTransactions()
         QCOMPARE((*it_t).id(), QLatin1String("T000000000000000001"));
 
         ++it_t;
-        QCOMPARE(it_t, transactionList.constEnd());
+        QCOMPARE(it_t, transactionList.cend());
 
         ch = m->account("A000006");
         QCOMPARE(ch.value("Key"), QLatin1String("Value"));
@@ -806,15 +806,15 @@ void MyMoneyStorageMgrTest::testAddTransactions()
         list = m->transactionList(filter);
         QCOMPARE(list.size(), 2);
 
-        QList<MyMoneyTransaction>::ConstIterator it;
-        it = list.constBegin();
+        QList<MyMoneyTransaction>::const_iterator it;
+        it = list.cbegin();
         //QVERIFY((*it).id() == "T000000000000000002");
         QCOMPARE((*it), t2);
         ++it;
 
         QCOMPARE((*it), t1);
         ++it;
-        QCOMPARE(it, list.constEnd());
+        QCOMPARE(it, list.cend());
 
     } catch (const MyMoneyException &e) {
         unexpectedException(e);
@@ -1043,10 +1043,10 @@ void MyMoneyStorageMgrTest::testModifyTransaction()
         QVERIFY(m->balance("A000006", QDate()) == MyMoneyMoney(100000 - 12600, 100));
         QVERIFY(m->totalBalance("A000001", QDate()) == MyMoneyMoney(1600, 100));
 
-        //QMap<QString, QString>::ConstIterator it_k;
+        // QMap<QString, QString>::const_iterator it_k;
         MyMoneyTransactionFilter f;
         QList<MyMoneyTransaction> transactionList(m->transactionList(f));
-        QList<MyMoneyTransaction>::ConstIterator it_t(transactionList.constBegin());
+        QList<MyMoneyTransaction>::const_iterator it_t(transactionList.cbegin());
         //it_k = m->m_transactionKeys.begin();
         //QVERIFY((*it_k) == "2002-05-10-T000000000000000001");
         QVERIFY((*it_t).id() == "T000000000000000001");
@@ -1061,7 +1061,7 @@ void MyMoneyStorageMgrTest::testModifyTransaction()
         //++it_k;
         ++it_t;
         //QVERIFY(it_k == m->m_transactionKeys.end());
-        QVERIFY(it_t == transactionList.constEnd());
+        QVERIFY(it_t == transactionList.cend());
 
         ch = m->account("A000006");
         QVERIFY(ch.value("Key") == "Value");
@@ -1072,13 +1072,13 @@ void MyMoneyStorageMgrTest::testModifyTransaction()
         list = m->transactionList(filter);
         QVERIFY(list.size() == 2);
 
-        QList<MyMoneyTransaction>::ConstIterator it;
-        it = list.constBegin();
+        QList<MyMoneyTransaction>::const_iterator it;
+        it = list.cbegin();
         QVERIFY((*it).id() == "T000000000000000001");
         ++it;
         QVERIFY((*it).id() == "T000000000000000002");
         ++it;
-        QVERIFY(it == list.constEnd());
+        QVERIFY(it == list.cend());
 
     } catch (const MyMoneyException &e) {
         unexpectedException(e);

@@ -64,7 +64,7 @@ void InstitutionPage::slotLoadWidgets()
 
     QList<MyMoneyInstitution>::const_iterator it_l;
     d->ui->m_institutionComboBox->addItem(QString());
-    for (it_l = d->m_list.constBegin(); it_l != d->m_list.constEnd(); ++it_l) {
+    for (it_l = d->m_list.cbegin(); it_l != d->m_list.cend(); ++it_l) {
         d->ui->m_institutionComboBox->addItem((*it_l).name());
     }
 }
@@ -79,7 +79,7 @@ void InstitutionPage::slotNewInstitution()
     if (!institution.id().isEmpty()) {
         QList<MyMoneyInstitution>::const_iterator it_l;
         int i = 0;
-        for (it_l = d->m_list.constBegin(); it_l != d->m_list.constEnd(); ++it_l) {
+        for (it_l = d->m_list.cbegin(); it_l != d->m_list.cend(); ++it_l) {
             if ((*it_l).id() == institution.id()) {
                 // select the item and remember that the very first one is the empty item
                 d->ui->m_institutionComboBox->setCurrentIndex(i + 1);

@@ -649,10 +649,10 @@ void MyMoneyQifReader::processQifEntry()
 
 const QString MyMoneyQifReader::extractLine(const QChar& id, int cnt)
 {
-    QStringList::ConstIterator it;
+    QStringList::const_iterator it;
 
     m_extractedLine = -1;
-    for (it = m_qifEntry.constBegin(); it != m_qifEntry.constEnd(); ++it) {
+    for (it = m_qifEntry.cbegin(); it != m_qifEntry.cend(); ++it) {
         ++m_extractedLine;
         if ((*it)[0] == id) {
             if (cnt-- == 1) {
@@ -666,34 +666,35 @@ const QString MyMoneyQifReader::extractLine(const QChar& id, int cnt)
 
 bool MyMoneyQifReader::extractSplits(QList<qSplit>& listqSplits) const
 {
-//     *** With apologies to QString MyMoneyQifReader::extractLine ***
-
-    QStringList::ConstIterator it;
+    QStringList::const_iterator it;
     bool ret = false;
     bool memoPresent = false;
     int neededCount = 0;
     qSplit q;
 
-    for (it = m_qifEntry.constBegin(); it != m_qifEntry.constEnd(); ++it) {
+    for (it = m_qifEntry.cbegin(); it != m_qifEntry.cend(); ++it) {
         if (((*it)[0] == 'S') || ((*it)[0] == '$') || ((*it)[0] == 'E')) {
-            memoPresent = false;  //                      in case no memo line in this split
+            memoPresent = false; // in case no memo line in this split
             if ((*it)[0] == 'E') {
-                q.m_strMemo = (*it).mid(1);  //             'E' = Memo
+                q.m_strMemo = (*it).mid(1); // 'E' = Memo
                 d->fixMultiLineMemo(q.m_strMemo);
-                memoPresent = true;  //                     This transaction contains memo
+                memoPresent = true; // This transaction contains memo
+
             } else if ((*it)[0] == 'S') {
-                q.m_strCategoryName = (*it).mid(1);  //   'S' = CategoryName
+                q.m_strCategoryName = (*it).mid(1); // 'S' = CategoryName
                 neededCount ++;
+
             } else if ((*it)[0] == '$') {
-                q.m_amount = (*it).mid(1);  //            '$' = Amount
+                q.m_amount = (*it).mid(1); // '$' = Amount
                 neededCount ++;
             }
-            if (neededCount > 1) {  //                         CategoryName & Amount essential
-                listqSplits += q;  //                       Add valid split
-                if (!memoPresent) {  //                     If no memo, clear previous
+
+            if (neededCount > 1) { // CategoryName & Amount essential
+                listqSplits += q; // Add valid split
+                if (!memoPresent) { // If no memo, clear previous
                     q.m_strMemo.clear();
                 }
-                q = qSplit();  //                               Start new split
+                q = qSplit(); // Start new split
                 neededCount = 0;
                 ret = true;
             }
@@ -871,7 +872,7 @@ MyMoneyAccount MyMoneyQifReader::findAccount(const MyMoneyAccount& acc, const My
             parents << parent;
         }
         QList<MyMoneyAccount>::const_iterator it_p;
-        for (it_p = parents.constBegin(); it_p != parents.constEnd(); ++it_p) {
+        for (it_p = parents.cbegin(); it_p != parents.cend(); ++it_p) {
             MyMoneyAccount parentAccount = *it_p;
             // search by name (allow hierarchy)
             int pos;
@@ -1035,7 +1036,7 @@ void MyMoneyQifReader::processTransactionEntry()
         hash = QString("%1-%2").arg(hashBase).arg(idx);
         QMap<QString, bool>::const_iterator it;
         it = d->m_hashMap.constFind(hash);
-        if (it == d->m_hashMap.constEnd()) {
+        if (it == d->m_hashMap.cend()) {
             d->m_hashMap[hash] = true;
             break;
         }
@@ -1339,7 +1340,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
         hash = QString("%1-%2").arg(hashBase).arg(idx);
         QMap<QString, bool>::const_iterator it;
         it = d->m_hashMap.constFind(hash);
-        if (it == d->m_hashMap.constEnd()) {
+        if (it == d->m_hashMap.cend()) {
             d->m_hashMap[hash] = true;
             break;
         }
@@ -1828,8 +1829,8 @@ const QString MyMoneyQifReader::findOrCreateIncomeAccount(const QString& searchn
     // First, try to find this account as an income account
     MyMoneyAccount acc = file->income();
     QStringList list = acc.accountList();
-    QStringList::ConstIterator it_accid = list.constBegin();
-    while (it_accid != list.constEnd()) {
+    QStringList::const_iterator it_accid = list.cbegin();
+    while (it_accid != list.cend()) {
         acc = file->account(*it_accid);
         if (acc.name() == searchname) {
             result = *it_accid;
@@ -1864,8 +1865,8 @@ const QString MyMoneyQifReader::findOrCreateExpenseAccount(const QString& search
     // First, try to find this account as an income account
     MyMoneyAccount acc = file->expense();
     QStringList list = acc.accountList();
-    QStringList::ConstIterator it_accid = list.constBegin();
-    while (it_accid != list.constEnd()) {
+    QStringList::const_iterator it_accid = list.cbegin();
+    while (it_accid != list.cend()) {
         acc = file->account(*it_accid);
         if (acc.name() == searchname) {
             result = *it_accid;
@@ -2027,11 +2028,11 @@ void MyMoneyQifReader::processPriceEntry()
 
     */
 
-    QStringList::const_iterator it_line = m_qifEntry.constBegin();
+    QStringList::const_iterator it_line = m_qifEntry.cbegin();
 
     // Make a price for each line
     static const QRegularExpression priceExp(QLatin1String("\"(.*)\",(.*),\"(.*)\""));
-    while (it_line != m_qifEntry.constEnd()) {
+    while (it_line != m_qifEntry.cend()) {
         const auto priceMatch(priceExp.match(*it_line));
         if (priceMatch.hasMatch()) {
             MyMoneyStatement::Price price;

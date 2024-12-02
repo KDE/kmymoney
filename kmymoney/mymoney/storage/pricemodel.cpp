@@ -199,7 +199,7 @@ void PriceModel::load(const QMap<MyMoneySecurityPair, MyMoneyPriceEntries>& list
 
     int row = 0;
     QMap<MyMoneySecurityPair, MyMoneyPriceEntries>::const_iterator itPairs;
-    for (itPairs = list.constBegin(); itPairs != list.constEnd(); ++itPairs) {
+    for (itPairs = list.cbegin(); itPairs != list.cend(); ++itPairs) {
         QDate lastDate(1900, 1, 1);
         for (const auto& priceInfo : *itPairs) {
             if (lastDate > priceInfo.date()) {

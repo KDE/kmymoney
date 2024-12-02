@@ -419,8 +419,8 @@ QString MyMoneyTransaction::accountSignature(bool includeSplitCount) const
 
     QMap<QString, int>::const_iterator it_a;
     QString rc;
-    for (it_a = accountList.constBegin(); it_a != accountList.constEnd(); ++it_a) {
-        if (it_a != accountList.constBegin())
+    for (it_a = accountList.cbegin(); it_a != accountList.cend(); ++it_a) {
+        if (it_a != accountList.cbegin())
             rc += '-';
         rc += it_a.key();
         if (includeSplitCount)

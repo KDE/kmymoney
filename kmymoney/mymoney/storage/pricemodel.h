@@ -54,7 +54,8 @@ public:
      */
     QPair<QString,QString> pricePair() const;
 
-    QSet<QString> referencedObjects() const {
+    KMMStringSet referencedObjects() const
+    {
         return {};
     }
     bool hasReferenceTo(const QString& id) const {

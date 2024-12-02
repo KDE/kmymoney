@@ -37,7 +37,7 @@ void KMyMoneyPayeeCombo::loadPayees(const QList<MyMoneyPayee>& list)
 
     //add all payees
     QList<MyMoneyPayee>::const_iterator it;
-    for (it = list.constBegin(); it != list.constEnd(); ++it) {
+    for (it = list.cbegin(); it != list.cend(); ++it) {
         addItem((*it).name(), QVariant((*it).id()));
     }
 

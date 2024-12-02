@@ -242,7 +242,7 @@ QString GncObject::hide(QString data, unsigned int anonClass)
             break;
         case NXTEQU:   // generate/return an equity name
             it = anonStocks.constFind(data);
-            if (it == anonStocks.constEnd()) {
+            if (it == anonStocks.cend()) {
                 result = ki18n("Stock%1").subs(++nextEquity, -6).toString();
                 anonStocks.insert(data, result);
             } else {
@@ -251,7 +251,7 @@ QString GncObject::hide(QString data, unsigned int anonClass)
             break;
         case NXTPAY:   // generate/return a payee name
             it = anonPayees.constFind(data);
-            if (it == anonPayees.constEnd()) {
+            if (it == anonPayees.cend()) {
                 result = ki18n("Payee%1").subs(++nextPayee, -6).toString();
                 anonPayees.insert(data, result);
             } else {
@@ -1727,7 +1727,7 @@ void MyMoneyGncReader::convertSplit(const GncSplit *gsp)
     // find the kmm account id corresponding to the gnc id
     QString kmmAccountId;
     map_accountIds::const_iterator id = m_mapIds.constFind(gsp->acct().toUtf8());
-    if (id != m_mapIds.constEnd()) {
+    if (id != m_mapIds.cend()) {
         kmmAccountId = id.value();
     } else { // for the case where the acs not found (which shouldn't happen?), create an account with gnc name
         kmmAccountId = createOrphanAccount(gsp->acct());
@@ -2024,7 +2024,7 @@ void MyMoneyGncReader::convertTemplateSplit(const QString& schedName, const GncT
     // find the kmm account id corresponding to the gnc id
     QString kmmAccountId;
     map_accountIds::const_iterator id = m_mapIds.constFind(gncAccountId.toUtf8());
-    if (id != m_mapIds.constEnd()) {
+    if (id != m_mapIds.cend()) {
         kmmAccountId = id.value();
     } else { // for the case where the acs not found (which shouldn't happen?), create an account with gnc name
         kmmAccountId = createOrphanAccount(gncAccountId);
@@ -2072,11 +2072,11 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
         sc.setName(gsc->name());
         // find the transaction template as stored earlier
         QList<GncTransaction*>::const_iterator itt;
-        for (itt = m_templateList.constBegin(); itt != m_templateList.constEnd(); ++itt) {
+        for (itt = m_templateList.cbegin(); itt != m_templateList.cend(); ++itt) {
             // the id to match against is the split:account value in the splits
             if (static_cast<const GncTemplateSplit *>((*itt)->getSplit(0))->acct() == gsc->templId()) break;
         }
-        if (itt == m_templateList.constEnd()) {
+        if (itt == m_templateList.cend()) {
             throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot find template transaction for schedule %1").arg(sc.name()));
         } else {
             tx = convertTemplateTransaction(sc.name(), *itt);
@@ -2249,15 +2249,14 @@ void MyMoneyGncReader::convertRecurrence(const GncRecurrence *)
 
 //**********************************************************************************************************
 //************************************* terminate **********************************************************
-void MyMoneyGncReader::terminate()
-{
-    TRY {
-        // All data has been converted and added to storage
-        // this code is just temporary to show us what is in the file.
-        if (gncdebug) qDebug("%d accounts found in the GnuCash file", (unsigned int)m_mapIds.count());
-        for (map_accountIds::const_iterator it = m_mapIds.constBegin(); it != m_mapIds.constEnd(); ++it) {
-            if (gncdebug) qDebug() << "key ="  << it.key() << "value =" << it.value();
-        }
+void MyMoneyGncReader::terminate(){TRY{// All data has been converted and added to storage
+                                       // this code is just temporary to show us what is in the file.
+                                       if (gncdebug) qDebug("%d accounts found in the GnuCash file", (unsigned int)m_mapIds.count());
+
+for (map_accountIds::const_iterator it = m_mapIds.cbegin(); it != m_mapIds.cend(); ++it) {
+    if (gncdebug)
+        qDebug() << "key =" << it.key() << "value =" << it.value();
+}
         // first step is to implement the users investment option, now we
         // have all the accounts available
         QList<QString>::iterator stocks;
@@ -2268,8 +2267,8 @@ void MyMoneyGncReader::terminate()
         // offer the most common account currency as a default
         QString mainCurrency;
         unsigned int maxCount = 0;
-        QMap<QString, unsigned int>::ConstIterator it;
-        for (it = m_currencyCount.constBegin(); it != m_currencyCount.constEnd(); ++it) {
+        QMap<QString, unsigned int>::const_iterator it;
+        for (it = m_currencyCount.cbegin(); it != m_currencyCount.cend(); ++it) {
             if (it.value() > maxCount) {
                 maxCount = it.value();
                 mainCurrency = it.key();
@@ -2285,9 +2284,12 @@ void MyMoneyGncReader::terminate()
         // now produce the end of job reports - first, work out which ones are required
         QList<QString> sectionsToReport; // list of sections needing report
         sectionsToReport.append("MN");  // always build the main section
-        if ((m_ccCount = m_messageList["CC"].count()) > 0) sectionsToReport.append("CC");
-        if ((m_orCount = m_messageList["OR"].count()) > 0) sectionsToReport.append("OR");
-        if ((m_scCount = m_messageList["SC"].count()) > 0) sectionsToReport.append("SC");
+        if ((m_ccCount = m_messageList["CC"].count()) > 0)
+            sectionsToReport.append("CC");
+        if ((m_orCount = m_messageList["OR"].count()) > 0)
+            sectionsToReport.append("OR");
+        if ((m_scCount = m_messageList["SC"].count()) > 0)
+            sectionsToReport.append("SC");
         // produce the sections in separate message boxes
         bool exit = false;
         int si;
@@ -2502,7 +2504,7 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
     MyMoneyAccount parent;
     QString parentKey = stockAcc.parentAccountId();
     map_accountIds::const_iterator id = m_mapIds.constFind(parentKey);
-    if (id != m_mapIds.constEnd()) {
+    if (id != m_mapIds.cend()) {
         parent = m_storage->account(id.value());
         if (parent.accountType() == Account::Type::Investment) return ;
     }
@@ -2650,7 +2652,7 @@ void MyMoneyGncReader::getPriceSource(MyMoneySecurity stock, QString gncSource)
     // (mapSources is initially empty. We may be able to pre-fill it with some equivalent
     //  sources, if such things do exist. User feedback may help here.)
     QMap<QString, QString>::const_iterator it;
-    for (it = m_mapSources.constBegin(); it != m_mapSources.constEnd(); ++it) {
+    for (it = m_mapSources.cbegin(); it != m_mapSources.cend(); ++it) {
         if (it.key() == gncSource) {
             stock.setValue("kmm-online-source", it.value());
             m_storage->modifySecurity(stock);

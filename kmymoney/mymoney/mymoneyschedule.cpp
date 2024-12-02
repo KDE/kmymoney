@@ -13,7 +13,6 @@
 
 #include <QList>
 #include <QMap>
-#include <QSet>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -709,12 +708,12 @@ MyMoneyAccount MyMoneySchedule::account(int cnt) const
 {
     Q_D(const MyMoneySchedule);
     QList<MyMoneySplit> splits = d->m_transaction.splits();
-    QList<MyMoneySplit>::ConstIterator it;
+    QList<MyMoneySplit>::const_iterator it;
     auto file = MyMoneyFile::instance();
     MyMoneyAccount acc;
 
     // search the first asset or liability account
-    for (it = splits.constBegin(); it != splits.constEnd() && (acc.id().isEmpty() || cnt); ++it) {
+    for (it = splits.cbegin(); it != splits.cend() && (acc.id().isEmpty() || cnt); ++it) {
         try {
             acc = file->account((*it).accountId());
             if (acc.isAssetLiability())

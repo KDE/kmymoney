@@ -13,10 +13,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QIcon>
 #include <QPixmap>
 #include <QPixmapCache>
-#include <QIcon>
-#include <QSet>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

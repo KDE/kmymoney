@@ -121,11 +121,11 @@ void CsvWriter::writeAccountEntry(QTextStream& stream, const QString& accountId,
 
         QList<MyMoneyTransaction> trList;
         file->transactionList(trList, filter);
-        QList<MyMoneyTransaction>::ConstIterator it;
+        QList<MyMoneyTransaction>::const_iterator it;
         Q_EMIT signalProgress(0, trList.count());
         int count = 0;
         m_highestSplitCount = 0;
-        for (it = trList.constBegin(); it != trList.constEnd(); ++it) {
+        for (it = trList.cbegin(); it != trList.cend(); ++it) {
             writeTransactionEntry(*it, accountId, ++count);
             if (m_noError)
                 Q_EMIT signalProgress(count, 0);
@@ -134,8 +134,8 @@ void CsvWriter::writeAccountEntry(QTextStream& stream, const QString& accountId,
     }
 
     QString result;
-    auto it_map = m_map.constBegin();
-    while (it_map != m_map.constEnd()) {
+    auto it_map = m_map.cbegin();
+    while (it_map != m_map.cend()) {
         result += it_map.value();
         ++it_map;
     }
@@ -226,10 +226,10 @@ void CsvWriter::writeTransactionEntry(const MyMoneyTransaction& t, const QString
     str += format(split.number(), false);
 
     if (splits.count() > 2) {
-        QList<MyMoneySplit>::ConstIterator it;
-        for (it = splits.constBegin(); it != splits.constEnd(); ++it) {
+        QList<MyMoneySplit>::const_iterator it;
+        for (it = splits.cbegin(); it != splits.cend(); ++it) {
             if (!((*it) == split)) {
-                writeSplitEntry(str, *it, splits.count() - 1, it+1 == splits.constEnd());
+                writeSplitEntry(str, *it, splits.count() - 1, it + 1 == splits.cend());
             }
         }
     }
@@ -267,10 +267,10 @@ void CsvWriter::extractInvestmentEntries(const QString& accountId, const QDate& 
         filter.setDateFilter(startDate, endDate);
         QList<MyMoneyTransaction> list;
         file->transactionList(list, filter);
-        QList<MyMoneyTransaction>::ConstIterator itList;
+        QList<MyMoneyTransaction>::const_iterator itList;
         Q_EMIT signalProgress(0, list.count());
         int count = 0;
-        for (itList = list.constBegin(); itList != list.constEnd(); ++itList) {
+        for (itList = list.cbegin(); itList != list.cend(); ++itList) {
             writeInvestmentEntry(*itList, ++count);
             Q_EMIT signalProgress(count, 0);
         }

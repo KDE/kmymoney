@@ -292,7 +292,7 @@ public:
       */
     void notify() {
         for (const BalanceNotifyList::value_type& i : qAsConst(m_balanceNotifyList)) {
-            m_balanceChangedSet += i.first;
+            m_balanceChangedSet.insert(i.first);
             if (i.second.isValid()) {
                 m_balanceCache.clear(i.first, i.second);
             } else {
@@ -317,7 +317,7 @@ public:
         QList<MyMoneyAccount> accList;
         m_file->accountList(accList);
         QList<MyMoneyAccount>::const_iterator account_it;
-        for (account_it = accList.constBegin(); account_it != accList.constEnd(); ++account_it) {
+        for (account_it = accList.cbegin(); account_it != accList.cend(); ++account_it) {
             QString currencyId = account_it->currencyId();
             if (currencyId != m_file->baseCurrency().id() && (currencyId == price.from() || currencyId == price.to())) {
                 // this account is not in the base currency and the price affects it's value
@@ -371,7 +371,7 @@ public:
       *
       * @sa MyMoneyFile::commitTransaction()
       */
-    QSet<QString>     m_balanceChangedSet;
+    KMMStringSet m_balanceChangedSet;
 
     /**
       * This member keeps a list of account ids for which
@@ -380,7 +380,7 @@ public:
       *
       * @sa MyMoneyFile::commitTransaction()
       */
-    QSet<QString>     m_valueChangedSet;
+    KMMStringSet m_valueChangedSet;
 
     /**
       * This member keeps the list of changes in the engine
@@ -651,7 +651,7 @@ void MyMoneyFile::commitTransaction()
             Q_EMIT objectRemoved(change.objectType(), change.id());
             // if there is a balance change recorded for this account remove it since the account itself will be removed
             // this can happen when deleting categories that have transactions and the reassign category feature was used
-            d->m_balanceChangedSet.remove(change.id());
+            d->m_balanceChangedSet.erase(change.id());
             break;
         case File::Mode::Add:
             if (!removedObjects.contains(change.id())) {
@@ -677,7 +677,7 @@ void MyMoneyFile::commitTransaction()
         if (!removedObjects.contains(id)) {
             // if we notify about balance change we don't need to notify about value change
             // for the same account since a balance change implies a value change
-            d->m_valueChangedSet.remove(id);
+            d->m_valueChangedSet.erase(id);
             Q_EMIT balanceChanged(account(id));
         }
     }
@@ -951,7 +951,7 @@ void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
         // there must be no unfinished schedule referencing the account
         QList<MyMoneySchedule> list = scheduleList();
         QList<MyMoneySchedule>::const_iterator it_l;
-        for (it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
+        for (it_l = list.cbegin(); it_l != list.cend(); ++it_l) {
             if ((*it_l).isFinished())
                 continue;
             if ((*it_l).hasReferenceTo(acc.id())) {
@@ -1547,13 +1547,13 @@ MyMoneyAccount MyMoneyFile::openingBalanceAccount_internal(const MyMoneySecurity
 
     MyMoneyAccount acc;
     QList<MyMoneyAccount> accounts;
-    QList<MyMoneyAccount>::ConstIterator it;
+    QList<MyMoneyAccount>::const_iterator it;
 
     accountList(accounts, equity().accountList(), true);
 
     // If an account is clearly marked as an opening balance account
     // for a specific currency we use it
-    for (it = accounts.constBegin(); it != accounts.constEnd(); ++it) {
+    for (it = accounts.cbegin(); it != accounts.cend(); ++it) {
         if ((it->value("OpeningBalanceAccount") == QLatin1String("Yes")) && (it->currencyId() == security.id())) {
             acc = *it;
             break;
@@ -1563,7 +1563,7 @@ MyMoneyAccount MyMoneyFile::openingBalanceAccount_internal(const MyMoneySecurity
     // If we did not find one, then we look for one with a
     // name starting with the opening balances prefix.
     if (acc.id().isEmpty()) {
-        for (it = accounts.constBegin(); it != accounts.constEnd(); ++it) {
+        for (it = accounts.cbegin(); it != accounts.cend(); ++it) {
             if (it->name().startsWith(MyMoneyFile::openingBalancesPrefix()) && (it->currencyId() == security.id())) {
                 acc = *it;
                 break;
@@ -1579,7 +1579,7 @@ MyMoneyAccount MyMoneyFile::openingBalanceAccount_internal(const MyMoneySecurity
     // has been replaced (e.g. anonymization or the language
     // of the application has been changed)
     if (acc.id().isEmpty()) {
-        for (it = accounts.constBegin(); it != accounts.constEnd(); ++it) {
+        for (it = accounts.cbegin(); it != accounts.cend(); ++it) {
             if ((it->accountType() == eMyMoney::Account::Type::Equity) && (it->currencyId() == security.id())) {
                 acc = *it;
                 break;
@@ -1599,7 +1599,7 @@ MyMoneyAccount MyMoneyFile::createOpeningBalanceAccount(const MyMoneySecurity& s
 
     MyMoneyAccount acc;
     QList<MyMoneyAccount> accounts;
-    QList<MyMoneyAccount>::ConstIterator it;
+    QList<MyMoneyAccount>::const_iterator it;
 
     accountList(accounts, equity().accountList(), true);
 
@@ -1608,7 +1608,7 @@ MyMoneyAccount MyMoneyFile::createOpeningBalanceAccount(const MyMoneySecurity& s
     QString parentAccountId;
     static const QRegularExpression currencyExp(QLatin1String("\\([A-Z]{3}\\)"));
 
-    for (it = accounts.constBegin(); it != accounts.constEnd(); ++it) {
+    for (it = accounts.cbegin(); it != accounts.cend(); ++it) {
         const auto currencyMatch(currencyExp.match(it->name()));
         if (it->value("OpeningBalanceAccount") == QLatin1String("Yes") && currencyMatch.hasMatch()) {
             name = it->name();
@@ -1938,10 +1938,10 @@ void MyMoneyFile::accountList(QList<MyMoneyAccount>& list, const QStringList& id
             }
         }
     } else {
-        QList<MyMoneyAccount>::ConstIterator it;
+        QList<MyMoneyAccount>::const_iterator it;
         QList<MyMoneyAccount> list_a = d->accountsModel.itemList();
 
-        for (it = list_a.constBegin(); it != list_a.constEnd(); ++it) {
+        for (it = list_a.cbegin(); it != list_a.cend(); ++it) {
             if (!isStandardAccount((*it).id())) {
                 if (idlist.indexOf((*it).id()) != -1) {
                     list.append(*it);
@@ -2082,9 +2082,9 @@ MyMoneyMoney MyMoneyFile::clearedBalance(const QString &id, const QDate& date) c
     filter.addState((int)TransactionFilter::State::NotReconciled);
     transactionList(list, filter);
 
-    for (QList<MyMoneyTransaction>::const_iterator it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
+    for (QList<MyMoneyTransaction>::const_iterator it_t = list.cbegin(); it_t != list.cend(); ++it_t) {
         const QList<MyMoneySplit>& splits = (*it_t).splits();
-        for (QList<MyMoneySplit>::const_iterator it_s = splits.constBegin(); it_s != splits.constEnd(); ++it_s) {
+        for (QList<MyMoneySplit>::const_iterator it_s = splits.cbegin(); it_s != splits.cend(); ++it_s) {
             const MyMoneySplit &split = (*it_s);
             if (split.accountId() != id)
                 continue;
@@ -2673,14 +2673,10 @@ QStringList MyMoneyFile::consistencyCheck()
                 interestAccounts[split.accountId()] = true;
         }
     }
-    QSet<Account::Type> supportedAccountTypes;
-    supportedAccountTypes << Account::Type::Checkings
-                          << Account::Type::Savings
-                          << Account::Type::Cash
-                          << Account::Type::CreditCard
-                          << Account::Type::Asset
-                          << Account::Type::Liability;
-    QSet<QString> reportedUnsupportedAccounts;
+    KMMSet<Account::Type> supportedAccountTypes;
+    supportedAccountTypes.insert(
+        {Account::Type::Checkings, Account::Type::Savings, Account::Type::Cash, Account::Type::CreditCard, Account::Type::Asset, Account::Type::Liability});
+    KMMStringSet reportedUnsupportedAccounts;
 
     const auto txProblemHeader(i18n("* Problems with transactions"));
     rc << txProblemHeader;
@@ -2741,7 +2737,7 @@ QStringList MyMoneyFile::consistencyCheck()
                                 && !reportedUnsupportedAccounts.contains(acc.id())) {
                             rc << i18n("  * Opening date of Account '%1' cannot be changed to support transaction '%2' post date.",
                                        this->accountToCategory(acc.id()), t.id());
-                            reportedUnsupportedAccounts << acc.id();
+                            reportedUnsupportedAccounts.insert(acc.id());
                             ++unfixedCount;
                         }
                     }
@@ -2977,7 +2973,7 @@ QStringList MyMoneyFile::consistencyCheck()
     QList<MyMoneyAccount> accList;
     accountList(accList);
     QList<MyMoneyAccount>::const_iterator account_it;
-    for (account_it = accList.constBegin(); account_it != accList.constEnd(); ++account_it) {
+    for (account_it = accList.cbegin(); account_it != accList.cend(); ++account_it) {
         MyMoneyAccount account = *account_it;
         if (!account.isIncomeExpense()
                 && !currencyList.contains(account.currencyId())
@@ -2994,8 +2990,8 @@ QStringList MyMoneyFile::consistencyCheck()
 
     //get the first date of the price for each security
     MyMoneyPriceList::const_iterator prices_it;
-    for (prices_it = pricesList.constBegin(); prices_it != pricesList.constEnd(); ++prices_it) {
-        MyMoneyPrice firstPrice = (*((*prices_it).constBegin()));
+    for (prices_it = pricesList.cbegin(); prices_it != pricesList.cend(); ++prices_it) {
+        MyMoneyPrice firstPrice = (*((*prices_it).cbegin()));
 
         //only check the price if the currency is in use
         if (currencyList.contains(firstPrice.from()) || currencyList.contains(firstPrice.to())) {
@@ -3009,7 +3005,7 @@ QStringList MyMoneyFile::consistencyCheck()
     // compare the dates with the dates of the first use of each currency
     QList<MyMoneyAccount>::const_iterator accForeignList_it;
     bool firstInvProblem = true;
-    for (accForeignList_it = accountForeignCurrency.constBegin(); accForeignList_it != accountForeignCurrency.constEnd(); ++accForeignList_it) {
+    for (accForeignList_it = accountForeignCurrency.cbegin(); accForeignList_it != accountForeignCurrency.cend(); ++accForeignList_it) {
         // setup the price pair correctly
         QPair<QString, QString> pricePair;
         //setup the reverse, which can also be used for rate conversion
@@ -3075,11 +3071,11 @@ QStringList MyMoneyFile::consistencyCheck()
     // Fix the budgets that somehow still reference invalid accounts
     QString problemBudget;
     QList<MyMoneyBudget> bList = budgetList();
-    for (QList<MyMoneyBudget>::const_iterator it_b = bList.constBegin(); it_b != bList.constEnd(); ++it_b) {
+    for (QList<MyMoneyBudget>::const_iterator it_b = bList.cbegin(); it_b != bList.cend(); ++it_b) {
         MyMoneyBudget b = *it_b;
         QList<MyMoneyBudget::AccountGroup> baccounts = b.getaccounts();
         bool bChanged = false;
-        for (QList<MyMoneyBudget::AccountGroup>::const_iterator it_bacc = baccounts.constBegin(); it_bacc != baccounts.constEnd(); ++it_bacc) {
+        for (QList<MyMoneyBudget::AccountGroup>::const_iterator it_bacc = baccounts.cbegin(); it_bacc != baccounts.cend(); ++it_bacc) {
             try {
                 account((*it_bacc).id());
             } catch (const MyMoneyException &) {
@@ -4048,9 +4044,9 @@ bool MyMoneyFile::isReferenced(const QString& id) const
     return isReferenced(id, QBitArray((int)eStorage::Reference::Count));
 }
 
-QSet<QString> MyMoneyFile::referencedObjects() const
+KMMStringSet MyMoneyFile::referencedObjects() const
 {
-    QSet<QString> ids(d->journalModel.referencedObjects());
+    KMMStringSet ids(d->journalModel.referencedObjects());
     ids.unite(d->accountsModel.referencedObjects());
     ids.unite(d->institutionsModel.referencedObjects());
     ids.unite(d->payeesModel.referencedObjects());
@@ -4062,7 +4058,7 @@ QSet<QString> MyMoneyFile::referencedObjects() const
     ids.unite(d->costCenterModel.referencedObjects());
     ids.unite(d->priceModel.referencedObjects());
     // we never report the empty id
-    ids.remove(QString());
+    ids.erase(QString());
     return ids;
 }
 
@@ -4328,7 +4324,7 @@ QUndoStack* MyMoneyFile::undoStack() const
 
 bool MyMoneyFile::hasValidId(const MyMoneyAccount& acc) const
 {
-    static const QSet<eMyMoney::Account::Standard> stdAccNames {
+    static const KMMSet<eMyMoney::Account::Standard> stdAccNames{
         eMyMoney::Account::Standard::Liability,
         eMyMoney::Account::Standard::Asset,
         eMyMoney::Account::Standard::Expense,

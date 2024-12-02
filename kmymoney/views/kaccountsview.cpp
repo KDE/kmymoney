@@ -331,7 +331,7 @@ void KAccountsView::slotAccountMapOnline()
         popup.addSection(i18nc("@title:menu Online provider selection", "Online provider"));
 
         // Populate the pick list with all the provider
-        for (it_p = d->m_onlinePlugins->constBegin(); it_p != d->m_onlinePlugins->constEnd(); ++it_p) {
+        for (it_p = d->m_onlinePlugins->cbegin(); it_p != d->m_onlinePlugins->cend(); ++it_p) {
             popup.addAction(it_p.key())->setData(it_p.key());
         }
 
@@ -355,7 +355,7 @@ void KAccountsView::slotAccountMapOnline()
 
     // find the provider
     it_p = d->m_onlinePlugins->constFind(provider.toLower());
-    if (it_p != d->m_onlinePlugins->constEnd()) {
+    if (it_p != d->m_onlinePlugins->cend()) {
         // plugin found, call it
         MyMoneyKeyValueContainer settings;
         if ((*it_p)->mapAccount(d->m_currentAccount, settings)) {

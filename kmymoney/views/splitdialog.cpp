@@ -24,6 +24,7 @@
 // Project Includes
 
 #include "icons.h"
+#include "kmmset.h"
 #include "mymoneysecurity.h"
 #include "splitadjustdialog.h"
 #include "splitmodel.h"
@@ -102,7 +103,7 @@ void SplitDialog::Private::deleteSplits(QModelIndexList indexList)
 
     blockEditorStart(true);
     const auto model = ui->splitView->model();
-    QMap<int, int>::const_iterator it = sortedList.constEnd();
+    QMap<int, int>::const_iterator it = sortedList.cend();
     do {
         --it;
         const auto idx = model->index(*it, 0);
@@ -113,7 +114,7 @@ void SplitDialog::Private::deleteSplits(QModelIndexList indexList)
                 model->removeRow(*it);
             }
         }
-    } while (it != sortedList.constBegin());
+    } while (it != sortedList.cbegin());
     blockEditorStart(false);
 }
 
@@ -419,7 +420,7 @@ void SplitDialog::updateButtonState()
         }
 
         QAbstractItemModel* model = d->ui->splitView->model();
-        QSet<QString> accountIDs;
+        KMMStringSet accountIDs;
         const auto rows = model->rowCount();
         for (int row = 0; row < rows; ++row) {
             const auto idx = model->index(row, 0);

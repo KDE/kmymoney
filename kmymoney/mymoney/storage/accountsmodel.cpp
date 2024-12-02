@@ -289,7 +289,7 @@ struct AccountsModel::Private
         if (needConvert) {
             QList<MyMoneyPrice>::const_iterator it_p;
             QString securityID = account.currencyId();
-            for (it_p = prices.constBegin(); it_p != prices.constEnd(); ++it_p) {
+            for (it_p = prices.cbegin(); it_p != prices.cend(); ++it_p) {
                 const auto prec = file->security(securityID).pricePrecision();
                 accountValue = (accountValue * (MyMoneyMoney::ONE / (*it_p).rate(securityID))).convertPrecision(prec);
                 if ((*it_p).from() == securityID)
@@ -1131,7 +1131,7 @@ void AccountsModel::updateAccountBalances(const QHash<QString, AccountBalances>&
     // suppress single updates while processing whole batch
     d->updateOnBalanceChange = false;
     bool approximate = false;
-    for(auto it = balances.constBegin(); it != balances.constEnd(); ++it) {
+    for (auto it = balances.cbegin(); it != balances.cend(); ++it) {
         MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(indexById(it.key()).internalPointer())->dataRef();
         account.setBalance(it.value().m_totalBalance);
 

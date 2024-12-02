@@ -280,7 +280,7 @@ KCurrencyEditDlg::~KCurrencyEditDlg()
 
 void KCurrencyEditDlg::slotLoadCurrencies()
 {
-    const QSet<QString> metalSymbols { "XAU", "XPD", "XPT", "XAG" };
+    const KMMStringSet metalSymbols{"XAU", "XPD", "XPT", "XAG"};
 
     Q_D(KCurrencyEditDlg);
 
@@ -293,7 +293,7 @@ void KCurrencyEditDlg::slotLoadCurrencies()
     disconnect(d->ui->m_currencyList, &QTreeWidget::itemChanged, this, static_cast<void (KCurrencyEditDlg::*)(QTreeWidgetItem *, int)>(&KCurrencyEditDlg::slotUpdateCurrency));
 
     QList<MyMoneySecurity> list = MyMoneyFile::instance()->currencyList();
-    QList<MyMoneySecurity>::ConstIterator it;
+    QList<MyMoneySecurity>::const_iterator it;
     QTreeWidgetItem *first = 0;
 
     // sort the currencies ...
@@ -327,7 +327,7 @@ void KCurrencyEditDlg::slotLoadCurrencies()
 
     d->ui->m_currencyList->setSortingEnabled(false);
     d->ui->m_currencyList->clear();
-    for (it = list.constBegin(); it != list.constEnd(); ++it) {
+    for (it = list.cbegin(); it != list.cend(); ++it) {
         QTreeWidgetItem *p = new QTreeWidgetItem(d->ui->m_currencyList);
         p->setText(0, (*it).name());
         p->setData(0, Qt::UserRole, QVariant::fromValue(*it));

@@ -165,11 +165,11 @@ public:
     }
 
     inline typename QMap<Key, T>::const_iterator begin(void) const {
-        return QMap<Key, T>::constBegin();
+        return QMap<Key, T>::cbegin();
     }
 
     inline typename QMap<Key, T>::const_iterator end(void) const {
-        return QMap<Key, T>::constEnd();
+        return QMap<Key, T>::cend();
     }
 
     typedef typename QMap<Key, T>::const_iterator const_iterator;
@@ -342,7 +342,7 @@ main()
         b = container["001"];
         printf("b.name() = %s\n", b.name().data());
 
-        QMap<QString, MyMoneyAccount>::ConstIterator it;
+        QMap<QString, MyMoneyAccount>::const_iterator it;
         it = container.find("001");
         it = container.begin();
 

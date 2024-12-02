@@ -197,10 +197,10 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
     file->transactionList(afterTransactionList, filter);
 
     MyMoneyMoney afterDepositAmount, afterPaymentAmount;
-    QList<QPair<MyMoneyTransaction, MyMoneySplit>>::ConstIterator it;
+    QList<QPair<MyMoneyTransaction, MyMoneySplit>>::const_iterator it;
     int afterDeposits = 0;
     int afterPayments = 0;
-    for (it = afterTransactionList.constBegin(); it != afterTransactionList.constEnd(); ++it) {
+    for (it = afterTransactionList.cbegin(); it != afterTransactionList.cend(); ++it) {
         // if this split is a stock split, we can't just add the amount of shares
         if ((*it).second.reconcileFlag() == eMyMoney::Split::State::NotReconciled) {
             if ((*it).second.shares().isNegative()) {

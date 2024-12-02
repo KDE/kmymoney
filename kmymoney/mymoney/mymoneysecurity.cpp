@@ -11,7 +11,6 @@
 // QT Includes
 
 #include <QString>
-#include <QSet>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

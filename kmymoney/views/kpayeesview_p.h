@@ -588,7 +588,7 @@ public:
             QStringList deletedMatchPattern;
 
             // now loop over all selected payees and remove them
-            for (QList<MyMoneyPayee>::const_iterator it = list.constBegin(); it != list.constEnd(); ++it) {
+            for (QList<MyMoneyPayee>::const_iterator it = list.cbegin(); it != list.cend(); ++it) {
                 if (newPayee.id() != (*it).id()) {
                     if (addToMatchList) {
                         QStringList matchPattern;
@@ -639,16 +639,16 @@ public:
                 }
 
                 QStringList::const_iterator it_n;
-                for (it_n = deletedMatchPattern.constBegin(); it_n != deletedMatchPattern.constEnd(); ++it_n) {
+                for (it_n = deletedMatchPattern.cbegin(); it_n != deletedMatchPattern.cend(); ++it_n) {
                     // make sure we really need it and it is not caught by an existing regexp
                     QStringList::const_iterator it_k;
-                    for (it_k = payeeNames.constBegin(); it_k != payeeNames.constEnd(); ++it_k) {
+                    for (it_k = payeeNames.cbegin(); it_k != payeeNames.cend(); ++it_k) {
                         const QRegularExpression exp(*it_k, ignorecase ? QRegularExpression::CaseInsensitiveOption : QRegularExpression::NoPatternOption);
                         const auto payee(exp.match(*it_n));
                         if (payee.hasMatch())
                             break;
                     }
-                    if (it_k == payeeNames.constEnd())
+                    if (it_k == payeeNames.cend())
                         payeeNames << *it_n;
                 }
 

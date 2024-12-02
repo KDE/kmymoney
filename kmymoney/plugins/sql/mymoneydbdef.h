@@ -345,20 +345,20 @@ public:
 
     typedef QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> >::const_iterator field_iterator;
     inline field_iterator begin() const {
-        return m_fields.constBegin();
+        return m_fields.cbegin();
     }
     inline field_iterator end() const {
-        return m_fields.constEnd();
+        return m_fields.cend();
     }
 
     int fieldNumber(const QString& name) const;
 
     typedef QList<MyMoneyDbIndex>::const_iterator index_iterator;
     inline index_iterator indexBegin() const {
-        return m_indices.constBegin();
+        return m_indices.cbegin();
     }
     inline index_iterator indexEnd() const {
-        return m_indices.constEnd();
+        return m_indices.cend();
     }
 private:
     QString m_name;
@@ -419,18 +419,18 @@ public:
 
     typedef QMap<QString, MyMoneyDbTable>::const_iterator table_iterator;
     inline table_iterator tableBegin() const {
-        return m_tables.constBegin();
+        return m_tables.cbegin();
     }
     inline table_iterator tableEnd() const {
-        return m_tables.constEnd();
+        return m_tables.cend();
     }
 
     typedef QMap<QString, MyMoneyDbView>::const_iterator view_iterator;
     inline view_iterator viewBegin() const {
-        return m_views.constBegin();
+        return m_views.cbegin();
     }
     inline view_iterator viewEnd() const {
-        return m_views.constEnd();
+        return m_views.cend();
     }
 
     inline unsigned int currentVersion() const {

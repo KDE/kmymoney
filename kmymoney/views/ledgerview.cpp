@@ -17,7 +17,6 @@
 #include <QPainter>
 #include <QResizeEvent>
 #include <QScrollBar>
-#include <QSet>
 #include <QSortFilterProxyModel>
 #include <QStackedWidget>
 #include <QToolTip>
@@ -319,7 +318,7 @@ public:
 
                 // remove those accounts that we currently reference
                 // with the selected items
-                QSet<QString> currencyIds;
+                KMMStringSet currencyIds;
                 for (const auto& journalId : selection.selection(SelectedObjects::JournalEntry)) {
                     const auto journalIdx = file->journalModel()->indexById(journalId);
                     const auto accId = journalIdx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString();
@@ -352,7 +351,7 @@ public:
                     // have sub-accounts denominated in all currencies
                     const auto list = moveToAccountSelector->accountList();
                     for (const auto& accId : list) {
-                        QSet<QString> securityIds;
+                        KMMStringSet securityIds;
                         const auto idx = file->accountsModel()->indexById(accId);
                         const auto rows = file->accountsModel()->rowCount(idx);
                         for (int row = 0; row < rows; ++row) {
@@ -1362,8 +1361,8 @@ void LedgerView::selectionChanged(const QItemSelection& selected, const QItemSel
     // call base class implementation
     QTableView::selectionChanged(selected, deselected);
 
-    QSet<int> allSelectedRows;
-    QSet<int> selectedRows;
+    KMMSet<int> allSelectedRows;
+    KMMSet<int> selectedRows;
 
     // we need to remember the first item selected as this
     // should always be reported as the first item in the
@@ -1388,14 +1387,14 @@ void LedgerView::selectionChanged(const QItemSelection& selected, const QItemSel
         for (const auto& idx : selectionModel()->selectedIndexes()) {
             if (idx.row() != lastRow) {
                 lastRow = idx.row();
-                allSelectedRows += lastRow;
+                allSelectedRows.insert(lastRow);
             }
         }
         lastRow = -1;
         for (const auto& idx : selected.indexes()) {
             if (idx.row() != lastRow) {
                 lastRow = idx.row();
-                selectedRows += lastRow;
+                selectedRows.insert(lastRow);
             }
         }
 
@@ -1404,7 +1403,7 @@ void LedgerView::selectionChanged(const QItemSelection& selected, const QItemSel
         // the first item in allSelectedRows. In case allSelectedRows
         // is empty, a single item was selected and we are good to go
         if (!allSelectedRows.isEmpty()) {
-            const auto baseIdx = model()->index(*allSelectedRows.constBegin(), 0);
+            const auto baseIdx = model()->index(*allSelectedRows.begin(), 0);
             const auto isSchedule = baseIdx.data(eMyMoney::Model::TransactionScheduleRole).toBool();
 
             // now scan all in selected to check if they are of the same type

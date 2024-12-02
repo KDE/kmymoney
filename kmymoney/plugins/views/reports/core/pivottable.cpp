@@ -211,8 +211,8 @@ void PivotTable::init()
             m_config.validDateRange(configbegin, configend);
 
             QList<MyMoneySchedule> schedules = file->scheduleList();
-            QList<MyMoneySchedule>::const_iterator it_schedule = schedules.constBegin();
-            while (it_schedule != schedules.constEnd()) {
+            QList<MyMoneySchedule>::const_iterator it_schedule = schedules.cbegin();
+            while (it_schedule != schedules.cend()) {
                 // If the transaction meets the filter
                 MyMoneyTransaction tx = (*it_schedule).transaction();
                 if (!(*it_schedule).isFinished() && schedulefilter.match(tx)) {
@@ -225,8 +225,8 @@ void PivotTable::init()
                     if (nextpayment.isValid()) {
                         // Add one transaction for each date
                         QList<QDate> paymentDates = (*it_schedule).paymentDates(nextpayment, configend);
-                        QList<QDate>::const_iterator it_date = paymentDates.constBegin();
-                        while (it_date != paymentDates.constEnd()) {
+                        QList<QDate>::const_iterator it_date = paymentDates.cbegin();
+                        while (it_date != paymentDates.cend()) {
                             //if the payment occurs in the past, enter it tomorrow
                             if (QDate::currentDate() >= *it_date) {
                                 tx.setPostDate(QDate::currentDate().addDays(1));
@@ -256,9 +256,9 @@ void PivotTable::init()
         //this is to store balance for loan accounts when not included in the report
         QMap<QString, MyMoneyMoney> loanBalances;
 
-        QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.constBegin();
+        QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.cbegin();
         int colofs = columnValue(m_beginDate) - m_startColumn;
-        while (it_transaction != transactions.constEnd()) {
+        while (it_transaction != transactions.cend()) {
             MyMoneyTransaction tx(*it_transaction);
             if (m_openingBalanceTransactions.contains(tx.id())) {
                 ++it_transaction;
@@ -312,8 +312,8 @@ void PivotTable::init()
             }
 
             QList<MyMoneySplit> splits = tx.splits();
-            QList<MyMoneySplit>::const_iterator it_split = splits.constBegin();
-            while (it_split != splits.constEnd()) {
+            QList<MyMoneySplit>::const_iterator it_split = splits.cbegin();
+            while (it_split != splits.cend()) {
                 ReportAccount splitAccount((*it_split).accountId());
 
                 // Each split must be further filtered, because if even one split matches,
@@ -640,9 +640,9 @@ void PivotTable::createAccountRows()
     QList<MyMoneyAccount> accounts;
     file->accountList(accounts);
 
-    QList<MyMoneyAccount>::const_iterator it_account = accounts.constBegin();
+    QList<MyMoneyAccount>::const_iterator it_account = accounts.cbegin();
 
-    while (it_account != accounts.constEnd()) {
+    while (it_account != accounts.cend()) {
         ReportAccount account(*it_account);
 
         // only include this item if its account group is included in this report
@@ -678,13 +678,13 @@ void PivotTable::calculateOpeningBalances()
     QList<MyMoneyAccount> accounts;
     file->accountList(accounts);
 
-    QList<MyMoneyAccount>::const_iterator it_account = accounts.constBegin();
+    QList<MyMoneyAccount>::const_iterator it_account = accounts.cbegin();
 
     JournalModel* journalModel = file->journalModel();
     const auto start = journalModel->MyMoneyModelBase::lowerBound(journalModel->keyForDate(m_beginDate)).row();
     const auto end = journalModel->MyMoneyModelBase::upperBound(journalModel->keyForDate(m_endDate)).row();
 
-    while (it_account != accounts.constEnd()) {
+    while (it_account != accounts.cend()) {
         ReportAccount account(*it_account);
 
         // only include this item if its account group is included in this report
@@ -734,7 +734,7 @@ void PivotTable::calculateOpeningBalances()
                         const auto t = file->transaction(tid);
                         const auto s0 = t.splitByAccount(account.id());
                         value = s0.shares();
-                        m_openingBalanceTransactions << tid;
+                        m_openingBalanceTransactions.insert(tid);
                     } catch (const MyMoneyException &e) {
                         qDebug() << "Error retrieving opening balance transaction " << tid << ": " << e.what();
                     }
@@ -867,8 +867,8 @@ void PivotTable::calculateBudgetMapping()
 
         //check that the selected budget is valid
         if (m_config.budget() != "Any") {
-            QList<MyMoneyBudget>::const_iterator budgets_it = budgets.constBegin();
-            while (budgets_it != budgets.constEnd()) {
+            QList<MyMoneyBudget>::const_iterator budgets_it = budgets.cbegin();
+            while (budgets_it != budgets.cend()) {
                 //pick the budget by id
                 if ((*budgets_it).id() == m_config.budget()) {
                     budget = file->budget((*budgets_it).id());
@@ -886,8 +886,8 @@ void PivotTable::calculateBudgetMapping()
                 return;
             }
 
-            QList<MyMoneyBudget>::const_iterator budgets_it = budgets.constBegin();
-            while (budgets_it != budgets.constEnd()) {
+            QList<MyMoneyBudget>::const_iterator budgets_it = budgets.cbegin();
+            while (budgets_it != budgets.cend()) {
                 //pick the first budget that matches the report start year
                 if ((*budgets_it).budgetStart().year() == QDate::currentDate().year()) {
                     budget = file->budget((*budgets_it).id());
@@ -1740,8 +1740,8 @@ QString PivotTable::renderHTML() const
         }
         std::sort(outergroups.begin(), outergroups.end());
 
-        QList<PivotOuterGroup>::const_iterator it_outergroup = outergroups.constBegin();
-        while (it_outergroup != outergroups.constEnd()) {
+        QList<PivotOuterGroup>::const_iterator it_outergroup = outergroups.cbegin();
+        while (it_outergroup != outergroups.cend()) {
             //
             // Outer Group Header
             //
@@ -2378,8 +2378,8 @@ QMap<QString, QDate> PivotTable::securityFirstPrice()
     QMap<QString, QDate> securityPriceDate;
 
     MyMoneyPriceList::const_iterator prices_it;
-    for (prices_it = priceList.constBegin(); prices_it != priceList.constEnd(); ++prices_it) {
-        MyMoneyPrice firstPrice = (*((*prices_it).constBegin()));
+    for (prices_it = priceList.cbegin(); prices_it != priceList.cend(); ++prices_it) {
+        MyMoneyPrice firstPrice = (*((*prices_it).cbegin()));
 
         //check the security in the from field
         //if it is there, check if it is older

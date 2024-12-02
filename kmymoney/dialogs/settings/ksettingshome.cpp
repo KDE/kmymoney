@@ -100,11 +100,11 @@ void KSettingsHome::slotLoadItems()
         return;
 
     QStringList list = KMyMoneySettings::listOfItems();
-    QStringList::ConstIterator it;
+    QStringList::const_iterator it;
     d->ui->m_homePageList->clear();
     QListWidgetItem *sel = 0;
 
-    for (it = list.constBegin(); it != list.constEnd(); ++it) {
+    for (it = list.cbegin(); it != list.cend(); ++it) {
         int idx = (*it).toInt();
         // skip over unknown item entries
         if (idx == 0)

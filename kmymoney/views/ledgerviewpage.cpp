@@ -261,7 +261,7 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
     }
 
     if(d->form) {
-        d->hideFormReasons.remove(QLatin1String("FormAvailable"));
+        d->hideFormReasons.erase(QLatin1String("FormAvailable"));
         // make sure we have a layout
         if(!d->ui->m_formWidget->layout()) {
             d->ui->m_formWidget->setLayout(new QHBoxLayout(d->ui->m_formWidget));
@@ -304,7 +304,7 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
 void LedgerViewPage::showTransactionForm(bool show)
 {
     if(show) {
-        d->hideFormReasons.remove(QLatin1String("General"));
+        d->hideFormReasons.erase(QLatin1String("General"));
     } else {
         d->hideFormReasons.insert(QLatin1String("General"));
     }
@@ -319,7 +319,7 @@ void LedgerViewPage::startEdit()
 
 void LedgerViewPage::finishEdit()
 {
-    d->hideFormReasons.remove(QLatin1String("Edit"));
+    d->hideFormReasons.erase(QLatin1String("Edit"));
     d->ui->m_formWidget->setVisible(d->hideFormReasons.isEmpty());
     // the focus should be on the ledger view once editing ends
     d->ui->m_ledgerView->setFocus();

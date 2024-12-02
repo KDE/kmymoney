@@ -88,7 +88,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
     filter.setReportAllSplits(false);
     QList<MyMoneyTransaction> list_t;
     file->transactionList(list_t, filter);
-    QList<MyMoneyTransaction>::ConstIterator it_t;
+    QList<MyMoneyTransaction>::const_iterator it_t;
     s << "transactions = " << list_t.count() << ", next id = " << file->journalModel()->peekNextId() << "\n";
     QMap<int, int> xferCount;
     for (const auto& transaction : qAsConst(list_t)) {
@@ -103,8 +103,8 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
         if (accountCount > 1)
             xferCount[accountCount] = xferCount[accountCount] + 1;
     }
-    QMap<int, int>::ConstIterator it_cnt;
-    for (it_cnt = xferCount.constBegin(); it_cnt != xferCount.constEnd(); ++it_cnt) {
+    QMap<int, int>::const_iterator it_cnt;
+    for (it_cnt = xferCount.cbegin(); it_cnt != xferCount.cend(); ++it_cnt) {
         s << "               " << *it_cnt << " of them references " << it_cnt.key() << " accounts\n";
     }
 
@@ -119,8 +119,8 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
     s << "------------\n";
 
     QList<MyMoneyInstitution> list_i = file->institutionList();
-    QList<MyMoneyInstitution>::ConstIterator it_i;
-    for (it_i = list_i.constBegin(); it_i != list_i.constEnd(); ++it_i) {
+    QList<MyMoneyInstitution>::const_iterator it_i;
+    for (it_i = list_i.cbegin(); it_i != list_i.cend(); ++it_i) {
         s << "  ID = " << (*it_i).id() << "\n";
         s << "  Name = " << (*it_i).name() << "\n";
         s << "\n";
@@ -131,8 +131,8 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
     s << "------" << "\n";
 
     QList<MyMoneyPayee> list_p = file->payeeList();
-    QList<MyMoneyPayee>::ConstIterator it_p;
-    for (it_p = list_p.constBegin(); it_p != list_p.constEnd(); ++it_p) {
+    QList<MyMoneyPayee>::const_iterator it_p;
+    for (it_p = list_p.cbegin(); it_p != list_p.cend(); ++it_p) {
         s << "  ID = " << (*it_p).id() << "\n";
         s << "  Name = " << (*it_p).name() << "\n";
         s << "  Address = " << (*it_p).address() << "\n";
@@ -150,8 +150,8 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
     s << "------" << "\n";
 
     QList<MyMoneyTag> list_ta = file->tagList();
-    QList<MyMoneyTag>::ConstIterator it_ta;
-    for (it_ta = list_ta.constBegin(); it_ta != list_ta.constEnd(); ++it_ta) {
+    QList<MyMoneyTag>::const_iterator it_ta;
+    for (it_ta = list_ta.cbegin(); it_ta != list_ta.cend(); ++it_ta) {
         s << "  ID = " << (*it_ta).id() << "\n";
         s << "  Name = " << (*it_ta).name() << "\n";
         s << "  Closed = " << (*it_ta).isClosed() << "\n";
@@ -169,8 +169,8 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
     list_a.push_front(file->income());
     list_a.push_front(file->liability());
     list_a.push_front(file->asset());
-    QList<MyMoneyAccount>::ConstIterator it_a;
-    for (it_a = list_a.constBegin(); it_a != list_a.constEnd(); ++it_a) {
+    QList<MyMoneyAccount>::const_iterator it_a;
+    for (it_a = list_a.cbegin(); it_a != list_a.cend(); ++it_a) {
         s << "  ID = " << (*it_a).id() << "\n";
         s << "  Name = " << (*it_a).name() << "\n";
         s << "  Number = " << (*it_a).number() << "\n";
@@ -212,11 +212,11 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
         dumpKVP("  OnlineBankingSettings: ", s, (*it_a).onlineBankingSettings());
 
         QStringList list_s = (*it_a).accountList();
-        QStringList::ConstIterator it_s;
+        QStringList::const_iterator it_s;
         if (list_s.count() > 0) {
             s << "  Children =" << "\n";
         }
-        for (it_s = list_s.constBegin(); it_s != list_s.constEnd(); ++it_s) {
+        for (it_s = list_s.cbegin(); it_s != list_s.cend(); ++it_s) {
             MyMoneyAccount child = file->account(*it_s);
             s << "    " << *it_s << " (" << child.name() << ")\n";
         }
@@ -229,7 +229,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
     s << "----------" << "\n";
 
     QList<MyMoneyCurrency> list_c = storage->currencyList();
-    QList<MyMoneyCurrency>::ConstIterator it_c;
+    QList<MyMoneyCurrency>::const_iterator it_c;
     for (it_c = list_c.begin(); it_c != list_c.end(); ++it_c) {
         s << "  Name = " << (*it_c).name() << "\n";
         s << "    ID = " << (*it_c).id() << "\n";
@@ -247,8 +247,8 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
     s << "----------" << "\n";
 
     QList<MyMoneySecurity> list_e = file->securityList();
-    QList<MyMoneySecurity>::ConstIterator it_e;
-    for (it_e = list_e.constBegin(); it_e != list_e.constEnd(); ++it_e) {
+    QList<MyMoneySecurity>::const_iterator it_e;
+    for (it_e = list_e.cbegin(); it_e != list_e.cend(); ++it_e) {
         s << "  Name = " << (*it_e).name() << "\n";
         s << "    ID = " << (*it_e).id() << "\n";
         s << "    Market   = " << (*it_e).tradingMarket() << "\n";
@@ -283,12 +283,12 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
     s << "--------" << "\n";
 
     MyMoneyPriceList list_pr = file->priceList();
-    MyMoneyPriceList::ConstIterator it_pr;
-    for (it_pr = list_pr.constBegin(); it_pr != list_pr.constEnd(); ++it_pr) {
+    MyMoneyPriceList::const_iterator it_pr;
+    for (it_pr = list_pr.cbegin(); it_pr != list_pr.cend(); ++it_pr) {
         s << "  From = " << it_pr.key().first << "\n";
         s << "    To = " << it_pr.key().second << "\n";
-        MyMoneyPriceEntries::ConstIterator it_pre;
-        for (it_pre = (*it_pr).constBegin(); it_pre != (*it_pr).constEnd(); ++it_pre) {
+        MyMoneyPriceEntries::const_iterator it_pre;
+        for (it_pre = (*it_pr).cbegin(); it_pre != (*it_pr).cend(); ++it_pre) {
             s << "      Date = " << (*it_pre).date().toString() << "\n";
             s << "        Price = " << (*it_pre).rate(QString()).formatMoney("", 8) << "\n";
             s << "        Source = " << (*it_pre).source() << "\n";
@@ -302,7 +302,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
     s << "Transactions" << "\n";
     s << "------------" << "\n";
 
-    for (it_t = list_t.constBegin(); it_t != list_t.constEnd(); ++it_t) {
+    for (it_t = list_t.cbegin(); it_t != list_t.cend(); ++it_t) {
         dumpTransaction(s, file, *it_t);
     }
     s << "\n";
@@ -313,8 +313,8 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
 
     auto list_s = file->scheduleList(QString(), eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any,
                                      QDate(), QDate(), false);
-    QList<MyMoneySchedule>::ConstIterator it_s;
-    for (it_s = list_s.constBegin(); it_s != list_s.constEnd(); ++it_s) {
+    QList<MyMoneySchedule>::const_iterator it_s;
+    for (it_s = list_s.cbegin(); it_s != list_s.cend(); ++it_s) {
         s << "  ID = " << (*it_s).id() << "\n";
         s << "  Name = " << (*it_s).name() << "\n";
         s << "  Startdate = " << (*it_s).startDate().toString(Qt::ISODate) << "\n";
@@ -343,12 +343,12 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
         }
 
         QList<QDate> list_d;
-        QList<QDate>::ConstIterator it_d;
+        QList<QDate>::const_iterator it_d;
 
         list_d = (*it_s).recordedPayments();
         if (list_d.count() > 0) {
             s << "  Recorded payments" << "\n";
-            for (it_d = list_d.constBegin(); it_d != list_d.constEnd(); ++it_d) {
+            for (it_d = list_d.cbegin(); it_d != list_d.cend(); ++it_d) {
                 s << "    " << (*it_d).toString(Qt::ISODate) << "\n";
             }
         }
@@ -361,8 +361,8 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
     s << "-------" << "\n";
 
     QList<MyMoneyReport> list_r = file->reportList();
-    QList<MyMoneyReport>::ConstIterator it_r;
-    for (it_r = list_r.constBegin(); it_r != list_r.constEnd(); ++it_r) {
+    QList<MyMoneyReport>::const_iterator it_r;
+    for (it_r = list_r.cbegin(); it_r != list_r.cend(); ++it_r) {
         s << "  ID = " << (*it_r).id() << "\n";
         s << "  Name = " << (*it_r).name() << "\n";
     }
@@ -371,8 +371,8 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
     s << "-------" << "\n";
 
     QList<MyMoneyBudget> list_b = file->budgetList();
-    QList<MyMoneyBudget>::ConstIterator it_b;
-    for (it_b = list_b.constBegin(); it_b != list_b.constEnd(); ++it_b) {
+    QList<MyMoneyBudget>::const_iterator it_b;
+    for (it_b = list_b.cbegin(); it_b != list_b.cend(); ++it_b) {
         s << "  ID = " << (*it_b).id() << "\n";
         s << "  Name = " << (*it_b).name() << "\n";
     }
@@ -385,7 +385,7 @@ void MyMoneyStorageDump::dumpKVP(const QString& headline, QTextStream& s, const 
     s << ind << headline << "\n";
     QMap<QString, QString>::const_iterator it;
     const auto pairs = kvp.pairs();
-    for (it = pairs.constBegin(); it != pairs.constEnd(); ++it) {
+    for (it = pairs.cbegin(); it != pairs.cend(); ++it) {
         s << ind << "  '" << it.key() << "' = '" << it.value() << "'\n";
     }
 }

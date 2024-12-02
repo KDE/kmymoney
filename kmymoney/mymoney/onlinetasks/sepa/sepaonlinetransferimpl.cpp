@@ -6,7 +6,6 @@
 
 #include "sepaonlinetransferimpl.h"
 
-#include <QSet>
 #include <QVariant>
 #include <QXmlStreamReader>
 
@@ -277,9 +276,9 @@ bool sepaOnlineTransferImpl::hasReferenceTo(const QString& id) const
     return (id == _originAccount);
 }
 
-QSet<QString> sepaOnlineTransferImpl::referencedObjects() const
+KMMStringSet sepaOnlineTransferImpl::referencedObjects() const
 {
-    return { _originAccount };
+    return KMMStringSet(QStringList{_originAccount});
 }
 
 QString sepaOnlineTransferImpl::jobTypeName() const

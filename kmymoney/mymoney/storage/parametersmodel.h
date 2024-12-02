@@ -41,7 +41,8 @@ public:
         return m_value;
     }
 
-    QSet<QString> referencedObjects() const {
+    KMMStringSet referencedObjects() const
+    {
         return {};
     }
     bool hasReferenceTo(const QString& id) const {

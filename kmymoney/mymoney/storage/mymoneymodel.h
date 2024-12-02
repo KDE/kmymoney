@@ -27,6 +27,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmmset.h"
 #include "mymoneyenums.h"
 #include "mymoneymodelbase.h"
 
@@ -635,7 +636,7 @@ public:
         return rc;
     }
 
-    QSet<QString> referencedObjects()
+    KMMStringSet referencedObjects()
     {
         if (m_referencedObjects.isEmpty()) {
             const int rows = rowCount();
@@ -838,7 +839,7 @@ protected:
     QConcatenateTablesProxyModel* m_emptyItemModel;
     QUndoStack* m_undoStack;
     QHash<QString, TreeItem<T>*>* m_idToItemMapper;
-    QSet<QString> m_referencedObjects;
+    KMMStringSet m_referencedObjects;
     bool m_fullTableScan;
 };
 

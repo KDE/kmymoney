@@ -52,7 +52,7 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
     ui->convertMessage->setWordWrap(true);
 
     auto edits = onlineJobAdministration::instance()->onlineJobEdits();
-    std::for_each(edits.constBegin(), edits.constEnd(), [this](onlineJobAdministration::onlineJobEditOffer in) {
+    std::for_each(edits.cbegin(), edits.cend(), [this](onlineJobAdministration::onlineJobEditOffer in) {
         this->loadOnlineJobEditPlugin(in);
     });
 

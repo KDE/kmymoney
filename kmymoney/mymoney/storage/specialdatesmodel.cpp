@@ -102,7 +102,7 @@ void SpecialDatesModel::load()
 
         int row = 0;
         QMap<QDate, QString>::const_iterator it;
-        for (it = entries.constBegin(); it != entries.constEnd(); ++it) {
+        for (it = entries.cbegin(); it != entries.cend(); ++it) {
             SpecialDateEntry entry(nextId(), it.key(), *it);
             static_cast<TreeItem<SpecialDateEntry>*>(index(row, 0).internalPointer())->dataRef() = entry;
             ++row;

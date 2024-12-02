@@ -63,7 +63,7 @@ public:
             const auto sourceLedgerSortOrder = sourceModel->ledgerSortOrder();
             if (!sourceLedgerSortOrder.isEmpty()) {
                 const auto role = sourceLedgerSortOrder.at(0).sortRole;
-                return dateRoles.contains(role);
+                return dateRoles.find(role) != dateRoles.end();
             }
         }
         return false;
@@ -79,7 +79,7 @@ public:
             const int maxIndex = qMin(sourceLedgerSortOrder.count(), 2);
             for (int i = 0; i < maxIndex; ++i) {
                 const auto role = sourceLedgerSortOrder.at(i).sortRole;
-                if (dateRoles.contains(role)) {
+                if (dateRoles.find(role) != dateRoles.end()) {
                     return true;
                 }
                 // if the first one is security then
@@ -192,7 +192,7 @@ public:
                 }
 
                 accountId = idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString();
-                if (balances.constFind(accountId) == balances.constEnd()) {
+                if (balances.constFind(accountId) == balances.cend()) {
                     balances[accountId] = MyMoneyFile::instance()->balance(accountId, startDate) * showValuesInverted;
                 }
 
@@ -320,7 +320,7 @@ public:
         return true;
     }
 
-    QSet<int> dateRoles = {
+    std::unordered_set<int> dateRoles = {
         eMyMoney::Model::TransactionPostDateRole,
         eMyMoney::Model::TransactionEntryDateRole,
         eMyMoney::Model::SplitReconcileDateRole,

@@ -709,12 +709,12 @@ bool KMyMoneyUtils::canUpdateAllAccounts()
     QList<MyMoneyAccount> accList;
     file->accountList(accList);
     QList<MyMoneyAccount>::const_iterator it_a;
-    auto it_p = pPlugins.online.constEnd();
-    for (it_a = accList.constBegin(); (it_p == pPlugins.online.constEnd()) && (it_a != accList.constEnd()); ++it_a) {
+    auto it_p = pPlugins.online.cend();
+    for (it_a = accList.cbegin(); (it_p == pPlugins.online.cend()) && (it_a != accList.cend()); ++it_a) {
         if ((*it_a).hasOnlineMapping()) {
             // check if provider is available
             it_p = pPlugins.online.constFind((*it_a).onlineBankingSettings().value("provider").toLower());
-            if (it_p != pPlugins.online.constEnd()) {
+            if (it_p != pPlugins.online.cend()) {
                 QStringList protocols;
                 (*it_p)->protocols(protocols);
                 if (!protocols.isEmpty()) {

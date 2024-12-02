@@ -301,7 +301,7 @@ void KCategoriesView::slotDeleteCategory()
             {
                 QList<MyMoneyBudget> blist = file->budgetList();
                 QList<MyMoneyBudget>::const_iterator it_b;
-                for (it_b = blist.constBegin(); it_b != blist.constEnd(); ++it_b) {
+                for (it_b = blist.cbegin(); it_b != blist.cend(); ++it_b) {
                     if ((*it_b).hasReferenceTo(d->m_currentCategory.id())) {
                         MyMoneyBudget b = (*it_b);
                         MyMoneyBudget::AccountGroup fromBudget = b.account(d->m_currentCategory.id());
@@ -407,7 +407,7 @@ void KCategoriesView::slotDeleteCategory()
         // all good, now first reparent selected sub-categories
         try {
             auto parent = file->account(d->m_currentCategory.parentAccountId());
-            for (QStringList::const_iterator it = accountsToReparent.constBegin(); it != accountsToReparent.constEnd(); ++it) {
+            for (QStringList::const_iterator it = accountsToReparent.cbegin(); it != accountsToReparent.cend(); ++it) {
                 auto child = file->account(*it);
                 file->reparentAccount(child, parent);
             }

@@ -74,7 +74,7 @@ int MyMoneyBalanceCache::size() const
 {
     int sum = 0;
 
-    for (BalanceCacheType::ConstIterator i = m_cache.constBegin(); i != m_cache.constEnd(); ++i) {
+    for (BalanceCacheType::const_iterator i = m_cache.cbegin(); i != m_cache.cend(); ++i) {
         sum += (*i).size();
     }
     return sum;
@@ -87,13 +87,13 @@ void MyMoneyBalanceCache::insert(const QString& accountId, const QDate& date, co
 
 MyMoneyBalanceCacheItem MyMoneyBalanceCache::balance(const QString& accountId, const QDate& date) const
 {
-    BalanceCacheType::ConstIterator acctPos = m_cache.constFind(accountId);
-    if (m_cache.constEnd() == acctPos)
+    BalanceCacheType::const_iterator acctPos = m_cache.constFind(accountId);
+    if (m_cache.cend() == acctPos)
         return MyMoneyBalanceCacheItem(MyMoneyMoney::minValue, QDate());
 
-    BalanceCacheType::mapped_type::ConstIterator datePos = (*acctPos).constFind(date);
+    BalanceCacheType::mapped_type::const_iterator datePos = (*acctPos).constFind(date);
 
-    if ((*acctPos).constEnd() == datePos)
+    if ((*acctPos).cend() == datePos)
         return MyMoneyBalanceCacheItem(MyMoneyMoney::minValue, QDate());
 
     return MyMoneyBalanceCacheItem(datePos.value(), datePos.key());
@@ -101,17 +101,17 @@ MyMoneyBalanceCacheItem MyMoneyBalanceCache::balance(const QString& accountId, c
 
 MyMoneyBalanceCacheItem MyMoneyBalanceCache::mostRecentBalance(const QString& accountId, const QDate& date) const
 {
-    BalanceCacheType::ConstIterator acctPos = m_cache.constFind(accountId);
-    if (m_cache.constEnd() == acctPos)
+    BalanceCacheType::const_iterator acctPos = m_cache.constFind(accountId);
+    if (m_cache.cend() == acctPos)
         return MyMoneyBalanceCacheItem(MyMoneyMoney::minValue, QDate());
 
-    BalanceCacheType::mapped_type::ConstIterator datePos = (*acctPos).lowerBound(date);
+    BalanceCacheType::mapped_type::const_iterator datePos = (*acctPos).lowerBound(date);
 
-    while ((*acctPos).constEnd() == datePos || ((*acctPos).constBegin() != datePos && datePos.key() > date)) {
+    while ((*acctPos).cend() == datePos || ((*acctPos).cbegin() != datePos && datePos.key() > date)) {
         --datePos;
     }
 
-    if ((*acctPos).constBegin() == datePos && datePos.key() > date)
+    if ((*acctPos).cbegin() == datePos && datePos.key() > date)
         return MyMoneyBalanceCacheItem(MyMoneyMoney::minValue, QDate());
 
     return MyMoneyBalanceCacheItem(datePos.value(), datePos.key());

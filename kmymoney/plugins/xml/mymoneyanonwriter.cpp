@@ -184,7 +184,7 @@ MyMoneyBudget MyMoneyAnonWriterPrivate::fakeBudget(const MyMoneyBudget& bx)
             account.setBudgetSubaccounts((*it).budgetSubaccounts());
             QMap<QDate, MyMoneyBudget::PeriodGroup> plist = (*it).getPeriods();
             QMap<QDate, MyMoneyBudget::PeriodGroup>::const_iterator it_p;
-            for (it_p = plist.constBegin(); it_p != plist.constEnd(); ++it_p) {
+            for (it_p = plist.cbegin(); it_p != plist.cend(); ++it_p) {
                 MyMoneyBudget::PeriodGroup pGroup;
                 pGroup.setAmount((*it_p).amount() * m_factor);
                 pGroup.setStartDate((*it_p).startDate());
@@ -207,7 +207,7 @@ QMap<QString, QString> MyMoneyAnonWriterPrivate::fakeKeyValuePair(const QMap<QSt
     QMap<QString, QString> newPairs;
     QMap<QString, QString>::const_iterator it;
 
-    for (it = pairs.constBegin(); it != pairs.constEnd(); ++it) {
+    for (it = pairs.cbegin(); it != pairs.cend(); ++it) {
         if (zKvpXNumber.contains(it.key()) || it.key().left(3) == "ir-")
             newPairs[it.key()] = hideNumber(MyMoneyMoney(it.value())).toString();
         else if (zKvpNoModify.contains(it.key()))

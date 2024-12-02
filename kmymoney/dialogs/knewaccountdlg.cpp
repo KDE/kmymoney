@@ -396,7 +396,7 @@ public:
 
         // if it is an investment type account only allow to re-parent to other investment
         if (m_account.isInvest()) {
-            m_filterProxyModel->setSelectableAccountTypes(QSet<eMyMoney::Account::Type>{eMyMoney::Account::Type::Investment});
+            m_filterProxyModel->setSelectableAccountTypes(KMMSet<eMyMoney::Account::Type>{eMyMoney::Account::Type::Investment});
         }
 
         if (!m_categoryEditor)
@@ -701,8 +701,8 @@ public:
         if (institutionNameText != i18n("(No Institution)")) {
             try {
                 QList<MyMoneyInstitution> list = MyMoneyFile::instance()->institutionList();
-                QList<MyMoneyInstitution>::ConstIterator institutionIterator;
-                for (institutionIterator = list.constBegin(); institutionIterator != list.constEnd(); ++institutionIterator) {
+                QList<MyMoneyInstitution>::const_iterator institutionIterator;
+                for (institutionIterator = list.cbegin(); institutionIterator != list.cend(); ++institutionIterator) {
                     if ((*institutionIterator).name() == institutionNameText) {
                         return *institutionIterator;
                     }

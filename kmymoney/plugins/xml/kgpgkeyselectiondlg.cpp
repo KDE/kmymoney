@@ -174,7 +174,7 @@ void KGpgKeySelectionDlg::slotIdChanged()
                 if (d->needCheckList) {
                     QStringList keys = d->ui->m_listWidget->items();
                     QStringList::const_iterator it_s;
-                    for (it_s = keys.constBegin(); keysOk && it_s != keys.constEnd(); ++it_s) {
+                    for (it_s = keys.cbegin(); keysOk && it_s != keys.cend(); ++it_s) {
                         if (!KGPGFile::keyAvailable(*it_s))
                             keysOk = false;
                     }

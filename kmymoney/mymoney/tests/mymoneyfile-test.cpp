@@ -338,14 +338,14 @@ void MyMoneyFileTest::testInstitutionListRetrieval()
     QCOMPARE(m->dirty(), false);
     QCOMPARE(list.count(), 2);
 
-    QList<MyMoneyInstitution>::ConstIterator it;
-    it = list.constBegin();
+    QList<MyMoneyInstitution>::const_iterator it;
+    it = list.cbegin();
 
     QVERIFY((*it).name() == "institution1" || (*it).name() == "institution2");
     ++it;
     QVERIFY((*it).name() == "institution2"  || (*it).name() == "institution1");
     ++it;
-    QVERIFY(it == list.constEnd());
+    QVERIFY(it == list.cend());
 }
 
 void MyMoneyFileTest::testInstitutionModify()

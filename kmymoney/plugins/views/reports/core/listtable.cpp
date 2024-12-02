@@ -143,9 +143,7 @@ void ListTable::render(QString& result, QString& csv) const
     // ***DV***
     MyMoneyMoney startingBalance;
     MyMoneyMoney balanceChange = MyMoneyMoney();
-    for (QList<TableRow>::ConstIterator it_row = m_rows.constBegin();
-            it_row != m_rows.constEnd();
-            ++it_row) {
+    for (QList<TableRow>::const_iterator it_row = m_rows.cbegin(); it_row != m_rows.cend(); ++it_row) {
         /* rank can be:
          * 0 - opening balance
          * 1 - major split of transaction
@@ -239,10 +237,10 @@ void ListTable::render(QString& result, QString& csv) const
         // Columns
         //
 
-        QList<cellTypeE>::ConstIterator it_column = columns.constBegin();
+        QList<cellTypeE>::const_iterator it_column = columns.cbegin();
         int skippedColumn = 0;
         QString tempResult;
-        while (it_column != columns.constEnd()) {
+        while (it_column != columns.cend()) {
             QString data = (*it_row).value(*it_column);
 
             // include a colspan information if we skipped some
@@ -311,7 +309,7 @@ void ListTable::render(QString& result, QString& csv) const
                 data = (balanceChange + startingBalance).toString();
             } else if ((rowRank == 4 || rowRank == 5)) {
                 // display total title but only if first column doesn't contain any data
-                if (it_column == columns.constBegin() && data.isEmpty()) {
+                if (it_column == columns.cbegin() && data.isEmpty()) {
                     tempResult.append(QString::fromLatin1("<td class=\"left%1\">").arg((*it_row).value(ctDepth)));
                     if (rowRank == 4) {
                         if (!(*it_row).value(ctDepth).isEmpty()) {
@@ -327,7 +325,7 @@ void ListTable::render(QString& result, QString& csv) const
                     ++it_column;
                     continue;
 
-                } else if (!m_subtotal.contains(*it_column)) {  // don't display e.g. account in totals row
+                } else if (!m_subtotal.contains(*it_column)) { // don't display e.g. account in totals row
                     ++skippedColumn;
                     csv.append(QLatin1Char(','));
                     ++it_column;
@@ -541,7 +539,7 @@ void ListTable::includeInvestmentSubAccounts()
         QList<MyMoneyAccount> accountList;
         file->accountList(accountList);
         QList<MyMoneyAccount>::const_iterator it_ma;
-        for (it_ma = accountList.constBegin(); it_ma != accountList.constEnd(); ++it_ma) {
+        for (it_ma = accountList.cbegin(); it_ma != accountList.cend(); ++it_ma) {
             if ((*it_ma).accountType() == eMyMoney::Account::Type::Investment) {
                 accountIdList.append((*it_ma).id());
             }
@@ -582,10 +580,10 @@ void ListTable::includeInvestmentSubAccounts()
 
         QList<MyMoneyTransaction> transactions;
         file->transactionList(transactions, filter);
-        QList<MyMoneyTransaction>::const_iterator it_t = transactions.constBegin();
+        QList<MyMoneyTransaction>::const_iterator it_t = transactions.cbegin();
 
         //Check each split for a matching account
-        for (; it_t != transactions.constEnd(); ++it_t) {
+        for (; it_t != transactions.cend(); ++it_t) {
             const QList<MyMoneySplit>& splits = (*it_t).splits();
             for (const auto& split : splits) {
                 const QString& accountId = split.accountId();

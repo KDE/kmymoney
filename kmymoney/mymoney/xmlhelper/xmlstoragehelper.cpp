@@ -1203,8 +1203,8 @@ void writeReport(const MyMoneyReport& report, QXmlStreamWriter* writer)
     QList<int> typelist;
     if (report.types(typelist) && !typelist.empty()) {
         // iterate over payees, and add each one
-        QList<int>::const_iterator it_type = typelist.constBegin();
-        while (it_type != typelist.constEnd()) {
+        QList<int>::const_iterator it_type = typelist.cbegin();
+        while (it_type != typelist.cend()) {
             writer->writeStartElement(elementName(Element::Report::Type));
             writer->writeAttribute(attributeName(Attribute::Report::Type), typeAttributeToString(*it_type));
             writer->writeEndElement();
@@ -1216,8 +1216,8 @@ void writeReport(const MyMoneyReport& report, QXmlStreamWriter* writer)
     QList<int> statelist;
     if (report.states(statelist) && !statelist.empty()) {
         // iterate over payees, and add each one
-        QList<int>::const_iterator it_state = statelist.constBegin();
-        while (it_state != statelist.constEnd()) {
+        QList<int>::const_iterator it_state = statelist.cbegin();
+        while (it_state != statelist.cend()) {
             writer->writeStartElement(elementName(Element::Report::State));
             writer->writeAttribute(attributeName(Attribute::Report::State), stateAttributeToString(*it_state));
             writer->writeEndElement();
@@ -1229,8 +1229,8 @@ void writeReport(const MyMoneyReport& report, QXmlStreamWriter* writer)
     QList<int> validitylist;
     if (report.validities(validitylist) && !validitylist.empty()) {
         // iterate over payees, and add each one
-        QList<int>::const_iterator it_validity = validitylist.constBegin();
-        while (it_validity != validitylist.constEnd()) {
+        QList<int>::const_iterator it_validity = validitylist.cbegin();
+        while (it_validity != validitylist.cend()) {
             writer->writeStartElement(elementName(Element::Report::Validity));
             writer->writeAttribute(attributeName(Attribute::Report::Validity), validityAttributeToString(*it_validity));
             writer->writeEndElement();
@@ -1274,8 +1274,8 @@ void writeReport(const MyMoneyReport& report, QXmlStreamWriter* writer)
         } else {
             // iterate over payees, and add each one
             payeelist.sort();
-            QStringList::const_iterator it_payee = payeelist.constBegin();
-            while (it_payee != payeelist.constEnd()) {
+            QStringList::const_iterator it_payee = payeelist.cbegin();
+            while (it_payee != payeelist.cend()) {
                 writer->writeStartElement(elementName(Element::Report::Payee));
                 writer->writeAttribute(attributeName(Attribute::Report::ID), *it_payee);
                 writer->writeEndElement();
@@ -1295,8 +1295,8 @@ void writeReport(const MyMoneyReport& report, QXmlStreamWriter* writer)
             writer->writeEmptyElement(elementName(Element::Report::Tag));
         } else {
             // iterate over tags, and add each one
-            QStringList::const_iterator it_tag = taglist.constBegin();
-            while (it_tag != taglist.constEnd()) {
+            QStringList::const_iterator it_tag = taglist.cbegin();
+            while (it_tag != taglist.cend()) {
                 writer->writeStartElement(elementName(Element::Report::Tag));
                 writer->writeAttribute(attributeName(Attribute::Report::ID), *it_tag);
                 writer->writeEndElement();
@@ -1313,8 +1313,8 @@ void writeReport(const MyMoneyReport& report, QXmlStreamWriter* writer)
     QList<eMyMoney::Account::Type> accountgrouplist;
     if (report.accountGroups(accountgrouplist)) {
         // iterate over accounts, and add each one
-        QList<eMyMoney::Account::Type>::const_iterator it_group = accountgrouplist.constBegin();
-        while (it_group != accountgrouplist.constEnd()) {
+        QList<eMyMoney::Account::Type>::const_iterator it_group = accountgrouplist.cbegin();
+        while (it_group != accountgrouplist.cend()) {
             writer->writeStartElement(elementName(Element::Report::AccountGroup));
             writer->writeAttribute(attributeName(Attribute::Report::Group), accountTypeAttributeToString(*it_group));
             writer->writeEndElement();
@@ -1331,8 +1331,8 @@ void writeReport(const MyMoneyReport& report, QXmlStreamWriter* writer)
     if (report.accounts(accountlist)) {
         // iterate over accounts, and add each one
         accountlist.sort();
-        QStringList::const_iterator it_account = accountlist.constBegin();
-        while (it_account != accountlist.constEnd()) {
+        QStringList::const_iterator it_account = accountlist.cbegin();
+        while (it_account != accountlist.cend()) {
             writer->writeStartElement(elementName(Element::Report::Account));
             writer->writeAttribute(attributeName(Attribute::Report::ID), *it_account);
             writer->writeEndElement();
@@ -1349,8 +1349,8 @@ void writeReport(const MyMoneyReport& report, QXmlStreamWriter* writer)
     if (report.categories(accountlist)) {
         // iterate over accounts, and add each one
         accountlist.sort();
-        QStringList::const_iterator it_account = accountlist.constBegin();
-        while (it_account != accountlist.constEnd()) {
+        QStringList::const_iterator it_account = accountlist.cbegin();
+        while (it_account != accountlist.cend()) {
             writer->writeStartElement(elementName(Element::Report::Category));
             writer->writeAttribute(attributeName(Attribute::Report::ID), *it_account);
             writer->writeEndElement();

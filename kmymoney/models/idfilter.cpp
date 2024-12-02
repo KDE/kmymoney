@@ -8,14 +8,13 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QSet>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmmset.h"
 #include "mymoneyenums.h"
 
 class IdFilterPrivate
@@ -25,7 +24,7 @@ public:
     {
     }
 
-    QSet<QString>         idList;
+    KMMStringSet idList;
 };
 
 
@@ -53,7 +52,7 @@ bool IdFilter::filterAcceptsRow(int source_row, const QModelIndex& source_parent
 void IdFilter::setFilterList(const QStringList& idList)
 {
     Q_D(IdFilter);
-    d->idList = QSet<QString>(idList.constBegin(), idList.constEnd());
+    d->idList = idList;
     invalidateFilter();
 }
 
@@ -67,7 +66,7 @@ void IdFilter::addFilter(const QString& id)
 void IdFilter::removeFilter(const QString& id)
 {
     Q_D(IdFilter);
-    if (d->idList.remove(id)) {
+    if (d->idList.erase(id)) {
         invalidateFilter();
     }
 }

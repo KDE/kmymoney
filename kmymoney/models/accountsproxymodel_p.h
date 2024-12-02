@@ -11,7 +11,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QSet>
 class QComboBox;
 
 // ----------------------------------------------------------------------------
@@ -62,7 +61,7 @@ public:
     bool m_showAllEntries;
     bool m_canSelectClosedAccounts;
     bool m_showSecuritySymbol;
-    QSet<eMyMoney::Account::Type> m_selectableAccountTypes;
+    KMMSet<eMyMoney::Account::Type> m_selectableAccountTypes;
     AccountsProxyModel::State m_state;
 };
 

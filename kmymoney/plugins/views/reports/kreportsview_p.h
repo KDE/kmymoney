@@ -613,7 +613,7 @@ public:
         QList<ReportGroup> defaultreports;
         defaultReports(defaultreports);
 
-        QList<ReportGroup>::const_iterator it_group = defaultreports.constBegin();
+        QList<ReportGroup>::const_iterator it_group = defaultreports.cbegin();
 
         // the item to be set as current item
         QTreeWidgetItem* currentItem = 0L;
@@ -634,7 +634,7 @@ public:
 
         m_allTocItemGroups.insert(groupName, chartTocItemGroup);
 
-        while (it_group != defaultreports.constEnd()) {
+        while (it_group != defaultreports.cend()) {
             groupName = (*it_group).name();
 
             TocItemGroup* defaultTocItemGroup = new TocItemGroup(ui.m_tocTreeWidget, defaultGroupNo++, (*it_group).title());
@@ -680,9 +680,8 @@ public:
         TocItemGroup* orphanTocItemGroup = 0;
 
         QList<MyMoneyReport> customreports = MyMoneyFile::instance()->reportList();
-        QList<MyMoneyReport>::const_iterator it_report = customreports.constBegin();
-        while (it_report != customreports.constEnd()) {
-
+        QList<MyMoneyReport>::const_iterator it_report = customreports.cbegin();
+        while (it_report != customreports.cend()) {
             MyMoneyReport report = *it_report;
 
             groupName = (*it_report).group();

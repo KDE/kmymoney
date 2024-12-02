@@ -22,6 +22,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmmset.h"
 #include "mymoneyenums.h"
 
 /**
@@ -97,7 +98,7 @@ public:
     void setHideFavoriteAccounts(bool hideFavoriteAccounts);
     bool hideFavoriteAccounts() const;
 
-    void setSelectableAccountTypes(QSet<eMyMoney::Account::Type> selectableAccountTypes);
+    void setSelectableAccountTypes(KMMSet<eMyMoney::Account::Type> selectableAccountTypes);
 
     void setHideAllEntries(bool hideAllEntries);
     bool hideAllEntries() const;

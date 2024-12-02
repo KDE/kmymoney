@@ -454,8 +454,8 @@ bool QSQLiteResult::execBatch(bool arrayBind)
     for (int i = 0; i < values.at(0).toList().count(); ++i) {
         d->values.clear();
         QScopedValueRollback<QHash<QString, QVector<int>>> indexesScope(d->indexes);
-        QHash<QString, QVector<int>>::const_iterator it = d->indexes.constBegin();
-        while (it != d->indexes.constEnd()) {
+        QHash<QString, QVector<int>>::const_iterator it = d->indexes.cbegin();
+        while (it != d->indexes.cend()) {
             bindValue(it.key(), values.at(it.value().first()).toList().at(i), QSql::In);
             ++it;
         }

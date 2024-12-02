@@ -10,7 +10,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QSet>
 #include <QString>
 
 // ----------------------------------------------------------------------------
@@ -57,7 +56,7 @@ public:
     }
 
     QString m_id;
-    QSet<QString> m_referencedObjects;
+    KMMStringSet m_referencedObjects;
 };
 
 #endif

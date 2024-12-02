@@ -213,8 +213,8 @@ void KEndingBalanceDlg::slotUpdateBalances()
 
     //first retrieve the oldest not reconciled transaction
     QDate oldestTransactionDate;
-    it = transactionList.constBegin();
-    if (it != transactionList.constEnd()) {
+    it = transactionList.cbegin();
+    if (it != transactionList.cend()) {
         oldestTransactionDate = (*it).first.postDate();
         d->ui->m_statementInfoPageCheckings->ui->m_oldestTransactionDate->setText(
             i18n("Oldest unmarked transaction: %1", MyMoneyUtils::formatDate(oldestTransactionDate)));
@@ -243,7 +243,7 @@ void KEndingBalanceDlg::slotUpdateBalances()
 
     // now adjust the balances by reading all transactions referencing the account
     // from beginning to the end of the ledger
-    for (it = transactionList.constBegin(); it != transactionList.constEnd(); ++it) {
+    for (it = transactionList.cbegin(); it != transactionList.cend(); ++it) {
         const MyMoneySplit& split = (*it).second;
         balance -= split.shares() * factor;
         if ((*it).first.postDate() > field("statementDate").toDate()) {

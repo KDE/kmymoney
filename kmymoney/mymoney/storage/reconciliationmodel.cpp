@@ -115,7 +115,7 @@ void ReconciliationModel::doLoad()
 
             int row = 0;
             QMap<QDate, MyMoneyMoney>::const_iterator it;
-            for (it = history.constBegin(); it != history.constEnd(); ++it) {
+            for (it = history.cbegin(); it != history.cend(); ++it) {
                 ReconciliationEntry entry(nextId(),
                                           accountId,
                                           it.key(),

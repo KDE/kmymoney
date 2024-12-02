@@ -96,7 +96,7 @@ public:
     /**
      * @copydoc MyMoneyObject::referencedObjects
      */
-    inline QSet<QString> referencedObjects() const
+    inline KMMStringSet referencedObjects() const
     {
         return m_transaction->referencedObjects();
     }

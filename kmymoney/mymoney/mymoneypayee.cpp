@@ -14,7 +14,6 @@
 // QT Includes
 
 #include <QRegularExpression>
-#include <QSet>
 #include <QString>
 #include <QStringList>
 #include <QUrl>

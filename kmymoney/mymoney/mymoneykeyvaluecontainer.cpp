@@ -49,7 +49,7 @@ MyMoneyKeyValueContainer::~MyMoneyKeyValueContainer()
 QString MyMoneyKeyValueContainer::value(const QString& key, const QString& defaultValue) const
 {
     Q_D(const MyMoneyKeyValueContainer);
-    QMap<QString, QString>::ConstIterator it;
+    QMap<QString, QString>::const_iterator it;
 
     it = d->m_kvp.find(key);
     if (it != d->m_kvp.end())
@@ -141,7 +141,7 @@ void MyMoneyKeyValueContainer::clear()
 bool MyMoneyKeyValueContainer::operator == (const MyMoneyKeyValueContainer& right) const
 {
     Q_D(const MyMoneyKeyValueContainer);
-    QMap<QString, QString>::ConstIterator it_a, it_b;
+    QMap<QString, QString>::const_iterator it_a, it_b;
 
     auto d2 = static_cast<const MyMoneyKeyValueContainerPrivate *>(right.d_func());
     it_a = d->m_kvp.begin();

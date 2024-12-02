@@ -156,7 +156,7 @@ public:
     gwenKdeGui* gui;
     QMap<QString, QStringList> jobList;
     QString fileId;
-    QSet<QAction*> actions;
+    KMMSet<QAction*> actions;
 };
 
 
@@ -1248,7 +1248,7 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
 
         bool needExtract = true;
         QStringList::const_iterator it_s;
-        for (it_s = exceptions.constBegin(); needExtract && it_s != exceptions.constEnd(); ++it_s) {
+        for (it_s = exceptions.cbegin(); needExtract && it_s != exceptions.cend(); ++it_s) {
             const QRegularExpression exceptionExp(*it_s, QRegularExpression::CaseInsensitiveOption);
             const auto memoRegExMatch(exceptionExp.match(kt.m_strMemo));
             if (memoRegExMatch.hasMatch()) {
@@ -1378,7 +1378,7 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
             hash = QString("%1-%2").arg(hashBase).arg(idx);
             QMap<QString, bool>::const_iterator it;
             it = m_hashMap.constFind(hash);
-            if (it == m_hashMap.constEnd()) {
+            if (it == m_hashMap.cend()) {
                 m_hashMap[hash] = true;
                 break;
             }

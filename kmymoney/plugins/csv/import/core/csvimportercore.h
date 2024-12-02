@@ -15,13 +15,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QSet>
-
 // Project Includes
 
-#include "mymoneystatement.h"
-#include "csvenums.h"
 #include "csv/import/core/kmm_csvimportercore_export.h"
+#include "csvenums.h"
+#include "mymoneyobject.h"
+#include "mymoneystatement.h"
 
 class MyMoneyAccount;
 class KConfigGroup;
@@ -108,7 +107,7 @@ protected:
     void readSettings(const KConfigGroup &profilesGroup);
     void writeSettings(KConfigGroup &profilesGroup);
     void initColNumType() {
-        for (auto it = m_colTypeNum.constBegin(); it != m_colTypeNum.constEnd(); ++it)
+        for (auto it = m_colTypeNum.cbegin(); it != m_colTypeNum.cend(); ++it)
             m_colNumType.insert(it.value(), it.key());
     }
 
@@ -430,7 +429,7 @@ public:
     * from KMM or from statement data.
     * In case it's not successful onlySymbols and onlyNames won't be empty.
     */
-    bool sortSecurities(QSet<QString>& onlySymbols, QSet<QString>& onlyNames, QMap<QString, QString>& mapSymbolName);
+    bool sortSecurities(KMMStringSet& onlySymbols, KMMStringSet& onlyNames, QMap<QString, QString>& mapSymbolName);
 
     /**
     * Helper method to set decimal symbol in case it was set to autodetect.
@@ -455,7 +454,7 @@ public:
     MyMoneyMoney m_firstBalance;
 
     QList<MyMoneyMoney>         m_priceFractions;
-    QSet<QString>               m_hashSet;
+    KMMStringSet m_hashSet;
     QMap<int, DecimalSymbol>    m_decimalSymbolIndexMap;
     QMap<QString, QString>      m_mapSymbolName;
     QMap<autodetectTypeE, bool> m_autodetect;

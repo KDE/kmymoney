@@ -493,16 +493,15 @@ bool InvestmentPage::validateSecurities()
 {
     if (m_securitiesDlg.isNull() &&
             m_imp->m_mapSymbolName.isEmpty()) {
-
-        QSet<QString> onlySymbols;
-        QSet<QString> onlyNames;
+        KMMStringSet onlySymbols;
+        KMMStringSet onlyNames;
         m_imp->sortSecurities(onlySymbols, onlyNames, m_imp->m_mapSymbolName);
 
         if (!onlySymbols.isEmpty() || !onlyNames.isEmpty()) {
             m_securitiesDlg = new SecuritiesDlg;
-            for (QSet<QString>::const_iterator symbol = onlySymbols.cbegin(); symbol != onlySymbols.cend(); ++symbol)
+            for (KMMStringSet::const_iterator symbol = onlySymbols.cbegin(); symbol != onlySymbols.cend(); ++symbol)
                 m_securitiesDlg->displayLine(*symbol, QString());
-            for (QSet<QString>::const_iterator name = onlyNames.cbegin(); name != onlyNames.cend(); ++name)
+            for (KMMStringSet::const_iterator name = onlyNames.cbegin(); name != onlyNames.cend(); ++name)
                 m_securitiesDlg->displayLine(QString(), *name);
         }
     }
@@ -585,7 +584,7 @@ void InvestmentPage::makeQIF(const MyMoneyStatement& st, const QString& outFileN
         buffer.append(QStringLiteral("^\n"));
     }
 
-    for (QList<MyMoneyStatement::Security>::const_iterator it = st.m_listSecurities.constBegin(); it != st.m_listSecurities.constEnd(); ++it) {
+    for (QList<MyMoneyStatement::Security>::const_iterator it = st.m_listSecurities.cbegin(); it != st.m_listSecurities.cend(); ++it) {
         buffer.append(QStringLiteral("!Type:Security\n"));
         buffer.append(QLatin1Char('N') + (*it).m_strName + eol);
         buffer.append(QLatin1Char('S') + (*it).m_strSymbol + eol);
@@ -601,7 +600,7 @@ void InvestmentPage::makeQIF(const MyMoneyStatement& st, const QString& outFileN
 
     buffer.append(QStringLiteral("!Type:") + strEType + eol);
 
-    for (QList<MyMoneyStatement::Transaction>::const_iterator it = st.m_listTransactions.constBegin(); it != st.m_listTransactions.constEnd(); ++it) {
+    for (QList<MyMoneyStatement::Transaction>::const_iterator it = st.m_listTransactions.cbegin(); it != st.m_listTransactions.cend(); ++it) {
         buffer.append(QLatin1Char('D') + qifProfile.date(it->m_datePosted) + eol);
         buffer.append(QLatin1Char('Y') + it->m_strSecurity + eol);
         QString txt;

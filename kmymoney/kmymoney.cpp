@@ -716,7 +716,7 @@ public:
                     (*it_r).accounts(list);
                     QStringList missing;
                     QStringList::const_iterator it_a, it_b;
-                    for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
+                    for (it_a = list.cbegin(); it_a != list.cend(); ++it_a) {
                         const auto acc = MyMoneyFile::instance()->account(*it_a);
                         if (acc.accountType() == eMyMoney::Account::Type::Investment) {
                             const auto accountList = acc.accountList();
@@ -824,16 +824,16 @@ public:
     {
         MyMoneyTransaction t = sched.transaction();
         QList<MyMoneySplit> splitList = t.splits();
-        QList<MyMoneySplit>::ConstIterator it_s;
+        QList<MyMoneySplit>::const_iterator it_s;
 
         try {
             bool updated = false;
             // Check if the splits contain valid data and set it to
             // be valid.
-            for (it_s = splitList.constBegin(); it_s != splitList.constEnd(); ++it_s) {
+            for (it_s = splitList.cbegin(); it_s != splitList.cend(); ++it_s) {
                 // the first split is always the account on which this transaction operates
                 // and if the transaction commodity is not set, we take this
-                if (it_s == splitList.constBegin() && t.commodity().isEmpty()) {
+                if (it_s == splitList.cbegin() && t.commodity().isEmpty()) {
                     qDebug() << Q_FUNC_INFO << " " << t.id() << " has no commodity";
                     try {
                         auto acc = MyMoneyFile::instance()->account((*it_s).accountId());
@@ -917,7 +917,7 @@ public:
         // scan the schedules to find interest accounts
         for (it_x = scheduleList.begin(); it_x != scheduleList.end(); ++it_x) {
             MyMoneyTransaction t = (*it_x).transaction();
-            QList<MyMoneySplit>::ConstIterator it_s;
+            QList<MyMoneySplit>::const_iterator it_s;
             QStringList accounts;
             bool hasDuplicateAccounts = false;
 
@@ -1283,8 +1283,8 @@ public:
     eMenu::Action qActionToId(const QAction* action)
     {
         if (action) {
-            auto it = pActions.constBegin();
-            for (; it != pActions.constEnd(); ++it) {
+            auto it = pActions.cbegin();
+            for (; it != pActions.cend(); ++it) {
                 if (*it == action) {
                     return it.key();
                 }
@@ -2595,8 +2595,8 @@ bool KMyMoneyApp::isImportableFile(const QUrl &url)
     bool result = false;
 
     // Iterate through the plugins and see if there's a loaded plugin who can handle it
-    QMap<QString, KMyMoneyPlugin::ImporterPlugin*>::const_iterator it_plugin = pPlugins.importer.constBegin();
-    while (it_plugin != pPlugins.importer.constEnd()) {
+    QMap<QString, KMyMoneyPlugin::ImporterPlugin*>::const_iterator it_plugin = pPlugins.importer.cbegin();
+    while (it_plugin != pPlugins.importer.cend()) {
         if ((*it_plugin)->isMyFormat(url.toLocalFile())) {
             result = true;
             break;
@@ -2607,7 +2607,7 @@ bool KMyMoneyApp::isImportableFile(const QUrl &url)
     // If we did not find a match, try importing it as a KMM statement file,
     // which is really just for testing.  the statement file is not exposed
     // to users.
-    if (it_plugin == pPlugins.importer.constEnd())
+    if (it_plugin == pPlugins.importer.cend())
         if (MyMoneyStatement::isStatementFile(url.path()))
             result = true;
 
@@ -3315,14 +3315,14 @@ void KMyMoneyApp::slotEnterOverdueSchedules()
                 KMMYesNo::yes(),
                 KMMYesNo::no())
             == KMessageBox::PrimaryAction) {
-            QSet<QString> skipMap;
+            KMMStringSet skipMap;
             bool processedOne(false);
             auto rc = eDialogs::ScheduleResultCode::Enter;
 
             do {
                 processedOne = false;
                 QList<MyMoneySchedule>::const_iterator it_sch;
-                for (it_sch = schedules.constBegin(); (rc != eDialogs::ScheduleResultCode::Cancel) && (it_sch != schedules.constEnd()); ++it_sch) {
+                for (it_sch = schedules.cbegin(); (rc != eDialogs::ScheduleResultCode::Cancel) && (it_sch != schedules.cend()); ++it_sch) {
                     MyMoneySchedule sch(*(it_sch));
 
                     // and enter it if it is not on the skip list
@@ -4386,10 +4386,10 @@ QList<QString> KMyMoneyApp::instanceList() const
 
     if (reply.isValid()) {
         QStringList apps = reply.value();
-        QStringList::ConstIterator it;
+        QStringList::const_iterator it;
 
         // build a list of service names of all running kmymoney applications without this one
-        for (it = apps.constBegin(); it != apps.constEnd(); ++it) {
+        for (it = apps.cbegin(); it != apps.cend(); ++it) {
             // please change this method of creating a list of 'all the other kmymoney instances that are running on the system'
             // since assuming that D-Bus creates service names with org.kde.kmymoney-PID is an observation I don't think that it's documented somewhere
             if ((*it).indexOf("org.kde.kmymoney-") == 0) {
@@ -4456,8 +4456,8 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
                 // remove the statement files
                 // d->unlinkStatementXML();
 
-                QMap<QString, KMyMoneyPlugin::ImporterPlugin*>::const_iterator it_plugin = pPlugins.importer.constBegin();
-                while (it_plugin != pPlugins.importer.constEnd()) {
+                QMap<QString, KMyMoneyPlugin::ImporterPlugin*>::const_iterator it_plugin = pPlugins.importer.cbegin();
+                while (it_plugin != pPlugins.importer.cend()) {
                     if ((*it_plugin)->isMyFormat(url)) {
                         if (!(*it_plugin)->import(url) && !(*it_plugin)->lastError().isEmpty()) {
                             QString pluginName;
@@ -4474,7 +4474,7 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
                 // If we did not find a match, try importing it as a KMM statement file,
                 // which is really just for testing.  the statement file is not exposed
                 // to users.
-                if (it_plugin == pPlugins.importer.constEnd()) {
+                if (it_plugin == pPlugins.importer.cend()) {
                     if (MyMoneyStatement::isStatementFile(url)) {
                         MyMoneyStatementReader::importStatement(url, false);
                     }
@@ -4617,7 +4617,7 @@ void KMyMoneyApp::preloadHolidays()
         KHolidays::Holiday::List holidayList = d->m_holidayRegion->holidays(QDate::currentDate(), endDate);
 #endif
         KHolidays::Holiday::List::const_iterator holiday_it;
-        for (holiday_it = holidayList.constBegin(); holiday_it != holidayList.constEnd(); ++holiday_it) {
+        for (holiday_it = holidayList.cbegin(); holiday_it != holidayList.cend(); ++holiday_it) {
             for (QDate holidayDate = (*holiday_it).observedStartDate(); holidayDate <= (*holiday_it).observedEndDate(); holidayDate = holidayDate.addDays(1))
                 d->m_holidayMap.insert(holidayDate, (*holiday_it).dayType() == KHolidays::Holiday::Workday);
         }
@@ -4931,9 +4931,8 @@ void KMyMoneyApp::slotFileQuit()
 
     QList<KMainWindow*> memberList = KMainWindow::memberList();
     if (!memberList.isEmpty()) {
-
-        QList<KMainWindow*>::const_iterator w_it = memberList.constBegin();
-        for (; w_it != memberList.constEnd(); ++w_it) {
+        QList<KMainWindow*>::const_iterator w_it = memberList.cbegin();
+        for (; w_it != memberList.cend(); ++w_it) {
             // only close the window if the closeEvent is accepted. If the user presses Cancel on the saveModified() dialog,
             // the window and the application stay open.
             if (!(*w_it)->close()) {

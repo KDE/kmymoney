@@ -414,7 +414,7 @@ bool KEditLoanWizard::validateCurrentPage()
             MyMoneyMoney balance = m_account.openingBalance();
 
             QList<MyMoneyTransaction> list;
-            QList<MyMoneyTransaction>::ConstIterator it;
+            QList<MyMoneyTransaction>::const_iterator it;
             MyMoneySplit split;
             MyMoneyTransactionFilter filter(m_account.id());
 

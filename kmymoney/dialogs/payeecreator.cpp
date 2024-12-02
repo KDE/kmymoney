@@ -48,7 +48,7 @@ void PayeeCreator::createPayee()
 
     QTimer::singleShot(150, this, [&]() {
         // wait another round if any of the buttons is pressed
-        if (std::any_of(m_buttons.constBegin(), m_buttons.constEnd(), [&](QAbstractButton* b) -> bool {
+        if (std::any_of(m_buttons.cbegin(), m_buttons.cend(), [&](QAbstractButton* b) -> bool {
                 return b->isDown();
             })) {
             createPayee();

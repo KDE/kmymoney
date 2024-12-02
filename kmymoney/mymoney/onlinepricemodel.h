@@ -48,7 +48,7 @@ public:
     QString source() const;
     bool isDirty() const;
 
-    QSet<QString> referencedObjects() const
+    KMMStringSet referencedObjects() const
     {
         return {};
     }

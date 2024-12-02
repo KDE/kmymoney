@@ -228,7 +228,7 @@ public:
     LedgerFilter* stateFilter;
     NewTransactionForm* form;
     LedgerViewPage* stackedView;
-    QSet<QString> hideFormReasons;
+    KMMStringSet hideFormReasons;
     QString accountId;
     QString accountName;
     QString sortOptionKey;

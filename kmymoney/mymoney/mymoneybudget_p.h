@@ -30,8 +30,7 @@ class MyMoneyBudgetPrivate : public MyMoneyObjectPrivate
 public:
     void collectReferencedObjects() override
     {
-        const auto keys = m_accounts.keys();
-        m_referencedObjects = QSet<QString>(keys.constBegin(), keys.constEnd());
+        m_referencedObjects = m_accounts.keys();
     }
 
     /**

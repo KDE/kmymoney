@@ -71,7 +71,7 @@ KMyMoneyPlugin::OnlinePluginExtended* onlineJobAdministration::getOnlinePlugin(c
     QMap<QString, KMyMoneyPlugin::OnlinePluginExtended*>::const_iterator it_p;
     it_p = m_onlinePlugins->constFind(acc.onlineBankingSettings().value("provider").toLower());
 
-    if (it_p != m_onlinePlugins->constEnd()) {
+    if (it_p != m_onlinePlugins->cend()) {
         // plugin found, use it
         return *it_p;
     }

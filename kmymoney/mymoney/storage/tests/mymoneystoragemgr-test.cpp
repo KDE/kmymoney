@@ -586,8 +586,8 @@ void MyMoneyStorageMgrTest::testAddTransactions()
         QCOMPARE(t2.splitCount(), 4u);
         QCOMPARE(m->transactionCount(QString()), 2u);
 
-        QMap<QString, QString>::ConstIterator it_k;
-        QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
+        QMap<QString, QString>::const_iterator it_k;
+        QMap<QString, MyMoneyTransaction>::const_iterator it_t;
         it_k = m->d_func()->m_transactionKeys.begin();
         it_t = m->d_func()->m_transactionList.begin();
 
@@ -610,13 +610,13 @@ void MyMoneyStorageMgrTest::testAddTransactions()
         list = m->transactionList(filter);
         QCOMPARE(list.size(), 2);
 
-        QList<MyMoneyTransaction>::ConstIterator it;
-        it = list.constBegin();
+        QList<MyMoneyTransaction>::const_iterator it;
+        it = list.cbegin();
         QCOMPARE((*it).id(), QLatin1String("T000000000000000002"));
         ++it;
         QCOMPARE((*it).id(), QLatin1String("T000000000000000001"));
         ++it;
-        QCOMPARE(it, list.constEnd());
+        QCOMPARE(it, list.cend());
     } catch (const MyMoneyException &e) {
         unexpectedException(e);
     }
@@ -688,8 +688,8 @@ void MyMoneyStorageMgrTest::testModifyTransaction()
         QCOMPARE(m->balance("A000006", QDate()),  MyMoneyMoney(100000 - 12600, 100));
         QCOMPARE(m->totalBalance("A000001", QDate()),  MyMoneyMoney(1600, 100));
 
-        QMap<QString, QString>::ConstIterator it_k;
-        QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
+        QMap<QString, QString>::const_iterator it_k;
+        QMap<QString, MyMoneyTransaction>::const_iterator it_t;
         it_k = m->d_func()->m_transactionKeys.begin();
         it_t = m->d_func()->m_transactionList.begin();
         QCOMPARE((*it_k), QLatin1String("2002-05-10-T000000000000000001"));
@@ -711,13 +711,13 @@ void MyMoneyStorageMgrTest::testModifyTransaction()
         list = m->transactionList(filter);
         QCOMPARE(list.size(), 2);
 
-        QList<MyMoneyTransaction>::ConstIterator it;
-        it = list.constBegin();
+        QList<MyMoneyTransaction>::const_iterator it;
+        it = list.cbegin();
         QCOMPARE((*it).id(), QLatin1String("T000000000000000001"));
         ++it;
         QCOMPARE((*it).id(), QLatin1String("T000000000000000002"));
         ++it;
-        QCOMPARE(it, list.constEnd());
+        QCOMPARE(it, list.cend());
     } catch (const MyMoneyException &) {
         QFAIL("Unexpected exception");
     }

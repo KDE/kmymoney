@@ -7,7 +7,6 @@
 
 #include "unavailabletask.h"
 
-#include <QSet>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 
@@ -70,7 +69,7 @@ bool unavailableTask::hasReferenceTo(const QString& id) const
     return false;
 }
 
-QSet<QString> unavailableTask::referencedObjects() const
+KMMStringSet unavailableTask::referencedObjects() const
 {
     return {};
 }

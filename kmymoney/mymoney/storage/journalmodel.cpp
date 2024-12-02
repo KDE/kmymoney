@@ -481,8 +481,8 @@ struct JournalModel::Private
     QHash<Column, QString> extendedHeaderData;
     QHash<QString, AccountBalances> balanceCache;
     QHash<QString, MyMoneyAccount> accountCache;
-    QSet<QString> fullBalanceRecalc;
-    QSet<QString> balanceChangedSet;
+    KMMStringSet fullBalanceRecalc;
+    KMMStringSet balanceChangedSet;
 };
 
 JournalModelNewTransaction::JournalModelNewTransaction(QObject* parent)
@@ -1145,7 +1145,7 @@ void JournalModel::load(const QMap<QString, QSharedPointer<MyMoneyTransaction>>&
 
     int row = 0;
     QMap<QString, QSharedPointer<MyMoneyTransaction>>::const_iterator it;
-    for (it = list.constBegin(); it != list.constEnd(); ++it) {
+    for (it = list.constBegin(); it != list.cend(); ++it) {
         const QString& id = (*it)->id();
         updateNextObjectId(id);
         d->addIdKeyMapping(id, it.key());

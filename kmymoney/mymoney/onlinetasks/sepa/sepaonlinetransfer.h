@@ -66,7 +66,7 @@ public:
     /**
      * @copydoc MyMoneyObject::referencedObjects
      */
-    virtual QSet<QString> referencedObjects() const override = 0;
+    virtual KMMStringSet referencedObjects() const override = 0;
 
     class settings : public IonlineTaskSettings
     {

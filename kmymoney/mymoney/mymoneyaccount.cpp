@@ -19,7 +19,6 @@
 #include <QPainter>
 #include <QPixmap>
 #include <QPixmapCache>
-#include <QSet>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -578,10 +577,7 @@ bool MyMoneyAccount::addReconciliation(const QDate& date, const MyMoneyMoney& am
     /// this whole block can be removed
     QString history, sep;
     QMap<QDate, MyMoneyMoney>::const_iterator it;
-    for (it = d->m_reconciliationHistory.constBegin();
-            it != d->m_reconciliationHistory.constEnd();
-            ++it) {
-
+    for (it = d->m_reconciliationHistory.cbegin(); it != d->m_reconciliationHistory.cend(); ++it) {
         history += QString("%1%2:%3").arg(sep,
                                           it.key().toString(Qt::ISODate),
                                           (*it).toString());

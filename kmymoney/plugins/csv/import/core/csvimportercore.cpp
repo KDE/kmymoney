@@ -468,8 +468,8 @@ bool CSVImporterCore::validateSecurity(const InvestmentProfile *profile)
 
 bool CSVImporterCore::validateSecurities()
 {
-    QSet<QString> onlySymbols;
-    QSet<QString> onlyNames;
+    KMMStringSet onlySymbols;
+    KMMStringSet onlyNames;
     sortSecurities(onlySymbols, onlyNames, m_mapSymbolName);
 
     if (!onlySymbols.isEmpty() || !onlyNames.isEmpty())
@@ -683,7 +683,7 @@ int CSVImporterCore::detectDecimalSymbols(const QList<int> &columns)
         eMyMoney::Account::Type::Liability,
     };
 
-    QSet<QString> currencySymbols;
+    KMMStringSet currencySymbols;
     for (const auto& account : qAsConst(accounts)) {
         if (accountTypes.contains(account.accountType())) {                             // account must actually have currency property
             currencySymbols.insert(account.currencyId());                                 // add currency id
@@ -986,8 +986,8 @@ bool CSVImporterCore::processBankRow(MyMoneyStatement &st, const BankingProfile 
     QString hash;
     for (uchar idx = 0; idx < 0xFF; ++idx) {  // assuming there will be no more than 256 transactions with the same hashBase
         hash = QString::fromLatin1("%1-%2").arg(hashBase).arg(idx);
-        QSet<QString>::const_iterator it = m_hashSet.constFind(hash);
-        if (it == m_hashSet.constEnd())
+        KMMStringSet::const_iterator it = m_hashSet.find(hash);
+        if (it == m_hashSet.cend())
             break;
     }
     m_hashSet.insert(hash);
@@ -1292,8 +1292,7 @@ QList<eMyMoney::Transaction::Action> CSVImporterCore::createValidActionTypes(MyM
     return validActionTypes;
 }
 
-
-bool CSVImporterCore::sortSecurities(QSet<QString>& onlySymbols, QSet<QString>& onlyNames, QMap<QString, QString>& mapSymbolName)
+bool CSVImporterCore::sortSecurities(KMMStringSet& onlySymbols, KMMStringSet& onlyNames, QMap<QString, QString>& mapSymbolName)
 {
     const QList<MyMoneySecurity> securityList = MyMoneyFile::instance()->securityList();
     int symbolCol = m_profile->m_colTypeNum.value(Column::Symbol, -1);
@@ -1319,7 +1318,7 @@ bool CSVImporterCore::sortSecurities(QSet<QString>& onlySymbols, QSet<QString>& 
     }
 
     // try to find names for symbols
-    for (QSet<QString>::iterator symbol = onlySymbols.begin(); symbol != onlySymbols.end();) {
+    for (KMMStringSet::iterator symbol = onlySymbols.begin(); symbol != onlySymbols.end();) {
         QList<MyMoneySecurity> filteredSecurities;
         for (const auto& sec : securityList) {
             if ((*symbol).compare(sec.tradingSymbol(), Qt::CaseInsensitive) == 0)
@@ -1338,7 +1337,7 @@ bool CSVImporterCore::sortSecurities(QSet<QString>& onlySymbols, QSet<QString>& 
     }
 
     // try to find symbols for names
-    for (QSet<QString>::iterator name = onlyNames.begin(); name != onlyNames.end();) {
+    for (KMMStringSet::iterator name = onlyNames.begin(); name != onlyNames.end();) {
         QList<MyMoneySecurity> filteredSecurities;
         for (const auto& sec : securityList) {
             if ((*name).compare(sec.name(), Qt::CaseInsensitive) == 0)

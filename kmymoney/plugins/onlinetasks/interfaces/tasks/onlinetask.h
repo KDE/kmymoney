@@ -14,6 +14,8 @@
 
 #include <qobject.h>
 
+#include <kmmset.h>
+
 class onlineJob;
 class QXmlStreamReader;
 class QXmlStreamWriter;
@@ -136,7 +138,7 @@ protected:
     /**
      * @copydoc MyMoneyObject::referencedObjects
      */
-    virtual QSet<QString> referencedObjects() const = 0;
+    virtual KMMStringSet referencedObjects() const = 0;
 
     /**
      * @brief Create a new instance of this task based on xml data

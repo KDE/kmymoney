@@ -535,7 +535,7 @@ void KOnlineJobOutboxView::slotOnlineJobSend(QList<onlineJob> jobs)
     for (const auto& pluginKey : qAsConst(usedPlugins)) {
         QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p = d->m_onlinePlugins->constFind(pluginKey);
 
-        if (it_p != d->m_onlinePlugins->constEnd()) {
+        if (it_p != d->m_onlinePlugins->cend()) {
             // plugin found, call it
             KMyMoneyPlugin::OnlinePluginExtended *pluginExt = dynamic_cast< KMyMoneyPlugin::OnlinePluginExtended* >(*it_p);
             if (pluginExt == 0) {

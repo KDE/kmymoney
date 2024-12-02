@@ -61,7 +61,7 @@ QString KCategoryReassignDlg::show(const MyMoneyAccount& category)
     QStringList list;
     QStringList::const_iterator it_a;
     ui->m_category->selector()->itemList(list);
-    for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
+    for (it_a = list.cbegin(); it_a != list.cend(); ++it_a) {
         MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
         if (acc.currencyId() != category.currencyId())
             ui->m_category->selector()->removeItem(*it_a);

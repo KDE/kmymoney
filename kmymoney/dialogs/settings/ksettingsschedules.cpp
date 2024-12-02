@@ -28,8 +28,8 @@ using namespace KHolidays;
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmmset.h"
 #include "ui_ksettingsschedules.h"
-
 
 class KSettingsSchedulesPrivate
 {
@@ -339,7 +339,7 @@ void KSettingsSchedules::loadList()
 #ifdef ENABLE_HOLIDAYS
     const QStringList regionCodes = HolidayRegion::regionCodes();
 
-    QSet<QString> m_regionalHolidays;
+    KMMStringSet m_regionalHolidays;
 
     /// @todo with KF5 >= 5.88 use KCountry to construct the list and get rid of the table above
     for (const QString& regionCode : regionCodes) {
@@ -353,7 +353,7 @@ void KSettingsSchedules::loadList()
             const QString region =
                 !description.isEmpty() ? description : i18nc("Holiday region (region language)", "Holidays for %1 (%2)", regionName, languageName);
 
-            m_regionalHolidays << QStringLiteral("%1\0%2\0%3").arg(countryName, region, regionCode);
+            m_regionalHolidays.insert(QStringLiteral("%1\0%2\0%3").arg(countryName, region, regionCode));
         } else {
             qDebug() << "Country code for" << countryCode << regionCode << HolidayRegion::name(regionCode) << "is missing";
         }

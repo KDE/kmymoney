@@ -37,7 +37,7 @@ protected:
     /**
      * @copydoc MyMoneyObject::referencedObjects
      */
-    QSet<QString> referencedObjects() const override;
+    KMMStringSet referencedObjects() const override;
 
     unavailableTask* clone() const override;
 

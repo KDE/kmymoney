@@ -232,8 +232,9 @@ Qt::ItemFlags AccountsProxyModel::flags(const QModelIndex& index) const
     if (!d->m_canSelectClosedAccounts && index.data(eMyMoney::Model::AccountIsClosedRole).toBool()) {
         flags.setFlag(Qt::ItemIsSelectable, false);
     }
-    if (!d->m_selectableAccountTypes.isEmpty()
-        && !d->m_selectableAccountTypes.contains(index.data(eMyMoney::Model::AccountTypeRole).value<eMyMoney::Account::Type>())) {
+    if (!d->m_selectableAccountTypes.empty()
+        && (d->m_selectableAccountTypes.find(index.data(eMyMoney::Model::AccountTypeRole).value<eMyMoney::Account::Type>())
+            == d->m_selectableAccountTypes.end())) {
         flags.setFlag(Qt::ItemIsEnabled, false);
         flags.setFlag(Qt::ItemIsSelectable, false);
     }
@@ -627,7 +628,7 @@ void AccountsProxyModel::setFilterComboBox(QComboBox* comboBox)
     });
 }
 
-void AccountsProxyModel::setSelectableAccountTypes(QSet<eMyMoney::Account::Type> selectableAccountTypes)
+void AccountsProxyModel::setSelectableAccountTypes(KMMSet<eMyMoney::Account::Type> selectableAccountTypes)
 {
     Q_D(AccountsProxyModel);
     d->m_selectableAccountTypes = selectableAccountTypes;

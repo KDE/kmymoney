@@ -129,7 +129,7 @@ public:
         }
 
         MyMoneyPriceList prices = file->priceList();
-        for (MyMoneyPriceList::ConstIterator it_price = prices.constBegin(); it_price != prices.constEnd(); ++it_price) {
+        for (MyMoneyPriceList::const_iterator it_price = prices.cbegin(); it_price != prices.cend(); ++it_price) {
             const MyMoneySecurityPair& pair = it_price.key();
             try {
                 if (file->security(pair.first).isCurrency() && (securityId.isEmpty() || (pair == currencyIds))) {
@@ -156,7 +156,7 @@ public:
         //
 
         QList<MyMoneySecurity> securities = file->securityList();
-        for (QList<MyMoneySecurity>::const_iterator it = securities.constBegin(); it != securities.constEnd(); ++it) {
+        for (QList<MyMoneySecurity>::const_iterator it = securities.cbegin(); it != securities.cend(); ++it) {
             if (!(*it).isCurrency() //
                     && (securityId.isEmpty() || ((*it).id() == securityId)) //
                     && !(*it).value("kmm-online-source").isEmpty()
@@ -273,7 +273,7 @@ public:
                     QList<MyMoneyAccount>::const_iterator it_a;
                     QList<MyMoneyAccount> list;
                     file->accountList(list);
-                    for (it_a = list.constBegin(); !dontCheckExistance && it_a != list.constEnd(); ++it_a) {
+                    for (it_a = list.cbegin(); !dontCheckExistance && it_a != list.cend(); ++it_a) {
                         // if it's an account denominated in the foreign currency
                         // keep it
                         if (((*it_a).currencyId() == foreignCurrency)
@@ -288,7 +288,7 @@ public:
                         }
                     }
                     // if it is in use, it_a is not equal to list.end()
-                    if (it_a == list.constEnd() && !dontCheckExistance)
+                    if (it_a == list.cend() && !dontCheckExistance)
                         keep = false;
                 }
 
@@ -319,12 +319,12 @@ public:
             QList<MyMoneyAccount>::const_iterator it_a;
             QList<MyMoneyAccount> list;
             file->accountList(list);
-            for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
+            for (it_a = list.cbegin(); it_a != list.cend(); ++it_a) {
                 if ((*it_a).isInvest() && ((*it_a).currencyId() == inv.id()) && !(*it_a).isClosed())
                     break;
             }
             // if it is in use, it_a is not equal to list.end()
-            if (it_a != list.constEnd()) {
+            if (it_a != list.cend()) {
                 QString webID;
                 AlkOnlineQuoteSource alkOnlineSource(inv.value(QLatin1String("kmm-online-source")),
                                                      quoteProfile(inv.value(QLatin1String("kmm-online-quote-system"))));

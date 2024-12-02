@@ -637,7 +637,7 @@ void KMyMoneyView::slotSwitchView(KPageWidgetItem* current, KPageWidgetItem* pre
             // remember last selected view
             // omit the initial page selection
             if (previous != nullptr) {
-                for (auto it = d->viewFrames.constBegin(); it != d->viewFrames.constEnd(); ++it) {
+                for (auto it = d->viewFrames.cbegin(); it != d->viewFrames.cend(); ++it) {
                     if (it.value() == current) {
                         Q_EMIT viewActivated(it.key());
                         break;

@@ -237,9 +237,8 @@ public:
             }
         }
 
-        QMap<QString, QString>::ConstIterator it_nc;
-        for (it_nc = nameIdx.constBegin(); it_nc != nameIdx.constEnd(); ++it_nc) {
-
+        QMap<QString, QString>::const_iterator it_nc;
+        for (it_nc = nameIdx.cbegin(); it_nc != nameIdx.cend(); ++it_nc) {
             const MyMoneyAccount subAccount = file->account(*it_nc);
             MyMoneySecurity currency;
             if (subAccount.isInvest()) {
@@ -333,17 +332,16 @@ public:
         //Get all accounts of the right type to calculate forecast
         m_nameIdx.clear();
         accList = forecast.accountList();
-        QList<MyMoneyAccount>::const_iterator accList_t = accList.constBegin();
-        for (; accList_t != accList.constEnd(); ++accList_t) {
+        QList<MyMoneyAccount>::const_iterator accList_t = accList.cbegin();
+        for (; accList_t != accList.cend(); ++accList_t) {
             MyMoneyAccount acc = *accList_t;
             if (m_nameIdx[acc.id()] != acc.id()) { //Check if the account is there
                 m_nameIdx[acc.id()] = acc.id();
             }
         }
 
-        QMap<QString, QString>::ConstIterator it_nc;
-        for (it_nc = m_nameIdx.constBegin(); it_nc != m_nameIdx.constEnd(); ++it_nc) {
-
+        QMap<QString, QString>::const_iterator it_nc;
+        for (it_nc = m_nameIdx.cbegin(); it_nc != m_nameIdx.cend(); ++it_nc) {
             const MyMoneyAccount& acc = file->account(*it_nc);
             MyMoneySecurity currency;
 
@@ -466,8 +464,8 @@ public:
         //Get all accounts of the right type to calculate forecast
         m_nameIdx.clear();
         accList = forecast.accountList();
-        QList<MyMoneyAccount>::const_iterator accList_t = accList.constBegin();
-        for (; accList_t != accList.constEnd(); ++accList_t) {
+        QList<MyMoneyAccount>::const_iterator accList_t = accList.cbegin();
+        for (; accList_t != accList.cend(); ++accList_t) {
             MyMoneyAccount acc = *accList_t;
             if (m_nameIdx[acc.id()] != acc.id()) { //Check if the account is there
                 m_nameIdx[acc.id()] = acc.id();
@@ -505,8 +503,8 @@ public:
 
         QTreeWidgetItem *advancedItem = 0;
 
-        QMap<QString, QString>::ConstIterator it_nc;
-        for (it_nc = m_nameIdx.constBegin(); it_nc != m_nameIdx.constEnd(); ++it_nc) {
+        QMap<QString, QString>::const_iterator it_nc;
+        for (it_nc = m_nameIdx.cbegin(); it_nc != m_nameIdx.cend(); ++it_nc) {
             const MyMoneyAccount& acc = file->account(*it_nc);
             QString amount;
             MyMoneyMoney amountMM;

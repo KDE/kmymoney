@@ -53,7 +53,8 @@ public:
     inline eMyMoney::Split::State state() const {
         return m_state;
     }
-    inline QSet<QString> referencedObjects() const {
+    inline KMMStringSet referencedObjects() const
+    {
         return {};
     }
     bool hasReferenceTo(const QString& id) const {

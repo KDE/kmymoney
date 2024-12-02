@@ -59,7 +59,7 @@ MyMoneyAccount KMyMoneyPlugin::KMMStatementInterface::account(const QString& key
     QList<MyMoneyAccount>::const_iterator it_a;
     MyMoneyFile::instance()->accountList(list);
     QString accId;
-    for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
+    for (it_a = list.cbegin(); it_a != list.cend(); ++it_a) {
         // search in the account's kvp container
         const auto& accountKvpValue = (*it_a).value(key);
         // search in the account's online settings kvp container

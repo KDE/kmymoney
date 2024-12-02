@@ -57,7 +57,7 @@ bool MyMoneyObject::hasReferenceTo(const QString& id) const
     return referencedObjects().contains(id);
 }
 
-QSet<QString> MyMoneyObject::referencedObjects() const
+KMMStringSet MyMoneyObject::referencedObjects() const
 {
     Q_D(const MyMoneyObject);
     if (d->m_referencedObjects.isEmpty()) {

@@ -211,7 +211,7 @@ void MyMoneyStatementReader::Private::previouslyUsedCategories(const QString& in
         QList< QPair<MyMoneyTransaction, MyMoneySplit> > list;
         file->transactionList(list, filter);
         QList< QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it_t;
-        for (it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
+        for (it_t = list.cbegin(); it_t != list.cend(); ++it_t) {
             const MyMoneyTransaction& t = (*it_t).first;
             MyMoneySplit s = (*it_t).second;
 
@@ -298,7 +298,7 @@ void MyMoneyStatementReader::Private::assignUniqueBankID(MyMoneySplit& s, const 
     for (;;) {
         QMap<QString, bool>::const_iterator it;
         it = uniqIds.constFind(hash);
-        if (it == uniqIds.constEnd()) {
+        if (it == uniqIds.cend()) {
             uniqIds[hash] = true;
             break;
         }
@@ -552,7 +552,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
     // delete all payees created in vain
     int payeeCount = d->payees.count();
     QList<MyMoneyPayee>::const_iterator it_p;
-    for (it_p = d->payees.constBegin(); it_p != d->payees.constEnd(); ++it_p) {
+    for (it_p = d->payees.cbegin(); it_p != d->payees.cend(); ++it_p) {
         try {
             MyMoneyFile::instance()->removePayee(*it_p);
             --payeeCount;
@@ -578,9 +578,9 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
     // remove the Don't ask again entries
     KSharedConfigPtr config = KSharedConfig::openConfig();
     KConfigGroup grp = config->group(QString::fromLatin1("Notification Messages"));
-    QStringList::ConstIterator it;
+    QStringList::const_iterator it;
 
-    for (it = m_dontAskAgain.constBegin(); it != m_dontAskAgain.constEnd(); ++it) {
+    for (it = m_dontAskAgain.cbegin(); it != m_dontAskAgain.cend(); ++it) {
         grp.deleteEntry(*it);
     }
     config->sync();
@@ -611,8 +611,8 @@ void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Securi
     // not use type as a matching factor.
     MyMoneySecurity security;
     QList<MyMoneySecurity> list = file->securityList();
-    QList<MyMoneySecurity>::ConstIterator it = list.constBegin();
-    while (it != list.constEnd() && security.id().isEmpty()) {
+    QList<MyMoneySecurity>::const_iterator it = list.cbegin();
+    while (it != list.cend() && security.id().isEmpty()) {
         if (matchNotEmpty(sec_in.m_strSymbol, (*it).tradingSymbol()) || matchNotEmpty(sec_in.m_strId, (*it).value("kmm-security-id"))
             || matchNotEmpty(sec_in.m_strName, (*it).name())) {
             security = *it;
@@ -747,8 +747,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                 } else {
                     MyMoneySecurity security;
                     QList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
-                    QList<MyMoneySecurity>::ConstIterator it = list.constBegin();
-                    while (it != list.constEnd() && security.id().isEmpty()) {
+                    QList<MyMoneySecurity>::const_iterator it = list.cbegin();
+                    while (it != list.cend() && security.id().isEmpty()) {
                         if (matchNotEmpty(statementTransactionUnderImport.m_strSymbol, (*it).tradingSymbol()) ||
                                 matchNotEmpty(statementTransactionUnderImport.m_strSecurity, (*it).name())) {
                             security = *it;
@@ -955,7 +955,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             QList<MyMoneyPayee> pList = file->payeeList();
             QList<MyMoneyPayee>::const_iterator it_p;
             QMap<int, QString> matchMap;
-            for (it_p = pList.constBegin(); it_p != pList.constEnd(); ++it_p) {
+            for (it_p = pList.cbegin(); it_p != pList.cend(); ++it_p) {
                 bool ignoreCase;
                 QStringList keys;
                 QStringList::const_iterator it_s;
@@ -974,7 +974,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                 // intentional fall through
 
                 case eMyMoney::Payee::MatchType::Key:
-                    for (it_s = keys.constBegin(); it_s != keys.constEnd(); ++it_s) {
+                    for (it_s = keys.cbegin(); it_s != keys.cend(); ++it_s) {
                         QRegularExpression exp(*it_s, ignoreCase ? QRegularExpression::CaseInsensitiveOption : QRegularExpression::NoPatternOption);
                         QRegularExpressionMatch match(exp.match(importedPayeeName));
                         if (match.hasMatch()) {
@@ -997,12 +997,12 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             // which happens to be the last one in the map
             qDebug() << "Done matching payee" << importedPayeeName << ", Result:";
             if (matchMap.count() > 1) {
-                QMap<int, QString>::const_iterator it_m = matchMap.constEnd();
+                QMap<int, QString>::const_iterator it_m = matchMap.cend();
                 --it_m;
                 payeeid = *it_m;
                 qDebug() << "Multiple matches: using" << file->payeesModel()->itemById(payeeid).name() << payeeid;
             } else if (matchMap.count() == 1) {
-                payeeid = *(matchMap.constBegin());
+                payeeid = *(matchMap.cbegin());
                 qDebug() << "Single match:" << file->payeesModel()->itemById(payeeid).name() << payeeid;
             } else {
                 qDebug() << "No match found";
@@ -1189,7 +1189,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                     // we find an exact match or use the one with the closest value
 
                     if (list.count() > 1) {
-                        QList<MyMoneyTransaction>::ConstIterator it_trans = list.constEnd();
+                        QList<MyMoneyTransaction>::const_iterator it_trans = list.cend();
                         MyMoneyMoney minDiff;
                         do {
                             --it_trans;
@@ -1212,7 +1212,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                                     }
                                 }
                             }
-                        } while (it_trans != list.constBegin());
+                        } while (it_trans != list.cbegin());
                     }
 
                     // Only copy the splits if the transaction found does not reference a closed account
@@ -1419,8 +1419,8 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
         file->accountList(accounts);
 
         // Iterate through them
-        QList<MyMoneyAccount>::const_iterator it_account = accounts.constBegin();
-        while (it_account != accounts.constEnd()) {
+        QList<MyMoneyAccount>::const_iterator it_account = accounts.cbegin();
+        while (it_account != accounts.cend()) {
             if (
                 ((*it_account).value("StatementKey") == accountNumber) ||
                 ((*it_account).number() == accountNumber)

@@ -125,7 +125,7 @@ public:
         if (!m_budgetId.isEmpty()) {
             list.append(m_budgetId);
         }
-        m_referencedObjects = QSet<QString>(list.constBegin(), list.constEnd());
+        m_referencedObjects = list;
     }
 
     MyMoneyReport* q;

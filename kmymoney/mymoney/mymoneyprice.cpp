@@ -14,9 +14,8 @@
 // QT Includes
 
 #include <QDate>
-#include <QString>
 #include <QDomElement>
-#include <QSet>
+#include <QString>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -162,8 +161,8 @@ bool MyMoneyPrice::hasReferenceTo(const QString& id) const
     return (id == d->m_fromSecurity) || (id == d->m_toSecurity);
 }
 
-QSet<QString> MyMoneyPrice::referencedObjects() const
+KMMStringSet MyMoneyPrice::referencedObjects() const
 {
     Q_D(const MyMoneyPrice);
-    return { d->m_fromSecurity, d->m_toSecurity };
+    return KMMStringSet(QStringList{d->m_fromSecurity, d->m_toSecurity});
 }

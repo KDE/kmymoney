@@ -149,8 +149,8 @@ void ObjectInfoTable::constructScheduleTable()
 
     schedules = file->scheduleList(QString(), eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any, m_config.fromDate(), m_config.toDate(), false);
 
-    QList<MyMoneySchedule>::const_iterator it_schedule = schedules.constBegin();
-    while (it_schedule != schedules.constEnd()) {
+    QList<MyMoneySchedule>::const_iterator it_schedule = schedules.cbegin();
+    while (it_schedule != schedules.cend()) {
         MyMoneySchedule schedule = *it_schedule;
 
         ReportAccount account(schedule.account());
@@ -192,8 +192,8 @@ void ObjectInfoTable::constructScheduleTable()
             if (m_config.detailLevel() == eMyMoney::Report::DetailLevel::All) {
                 //get the information for all splits
                 QList<MyMoneySplit> splits = transaction.splits();
-                QList<MyMoneySplit>::const_iterator split_it = splits.constBegin();
-                for (; split_it != splits.constEnd(); ++split_it) {
+                QList<MyMoneySplit>::const_iterator split_it = splits.cbegin();
+                for (; split_it != splits.cend(); ++split_it) {
                     if ((*split_it).id() == split.id()) {
                         continue;
                     }
@@ -251,8 +251,8 @@ void ObjectInfoTable::constructAccountTable()
 
     QList<MyMoneyAccount> accounts;
     file->accountList(accounts);
-    QList<MyMoneyAccount>::const_iterator it_account = accounts.constBegin();
-    while (it_account != accounts.constEnd()) {
+    QList<MyMoneyAccount>::const_iterator it_account = accounts.cbegin();
+    while (it_account != accounts.cend()) {
         TableRow accountRow;
         ReportAccount account(*it_account);
 
@@ -308,8 +308,8 @@ void ObjectInfoTable::constructAccountLoanTable()
 
     QList<MyMoneyAccount> accounts;
     file->accountList(accounts);
-    QList<MyMoneyAccount>::const_iterator it_account = accounts.constBegin();
-    while (it_account != accounts.constEnd()) {
+    QList<MyMoneyAccount>::const_iterator it_account = accounts.cbegin();
+    while (it_account != accounts.cend()) {
         TableRow accountRow;
         ReportAccount account(*it_account);
         MyMoneyAccountLoan loan = *it_account;

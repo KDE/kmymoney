@@ -177,7 +177,7 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport repor
 
     QList<MyMoneyBudget> list = MyMoneyFile::instance()->budgetList();
     QList<MyMoneyBudget>::const_iterator it_b;
-    for (it_b = list.constBegin(); it_b != list.constEnd(); ++it_b) {
+    for (it_b = list.cbegin(); it_b != list.cend(); ++it_b) {
         d->m_budgets.push_back(*it_b);
     }
 
@@ -471,7 +471,7 @@ void KReportConfigurationFilterDlg::slotReset()
             d->m_tabRowColPivot->ui->m_rowsLabel->setEnabled(false);
             d->m_tabRowColPivot->ui->m_budgetFrame->setEnabled(!d->m_budgets.empty());
             auto i = 0;
-            for (QVector<MyMoneyBudget>::const_iterator it_b = d->m_budgets.constBegin(); it_b != d->m_budgets.constEnd(); ++it_b) {
+            for (QVector<MyMoneyBudget>::const_iterator it_b = d->m_budgets.cbegin(); it_b != d->m_budgets.cend(); ++it_b) {
                 d->m_tabRowColPivot->ui->m_comboBudget->insertItem((*it_b).name(), i);
                 //set the current selected item
                 if ((d->m_initialState.budget() == "Any" && (*it_b).budgetStart().year() == QDate::currentDate().year())

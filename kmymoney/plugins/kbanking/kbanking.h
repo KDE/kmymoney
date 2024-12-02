@@ -16,8 +16,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QSet>
-
 // ----------------------------------------------------------------------------
 // KDE & Library Includes
 
@@ -234,7 +232,7 @@ private:
     KBanking* m_parent;
     QMap<QString, bool> m_hashMap;
     AB_TRANSACTION_LIST2 *_jobQueue;
-    QSet<QString>   m_sepaKeywords;
+    KMMStringSet m_sepaKeywords;
 };
 
 #endif // KBANKING

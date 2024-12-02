@@ -11,7 +11,6 @@
 #include <QCollator>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
-#include <QSet>
 
 // ----------------------------------------------------------------------------
 // Project Includes

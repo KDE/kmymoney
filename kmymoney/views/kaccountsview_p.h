@@ -209,14 +209,14 @@ public:
         // check for online modules
         QMap<QString, KMyMoneyPlugin::OnlinePlugin *>::const_iterator it_plugin;
         if (m_onlinePlugins) {
-            it_plugin = m_onlinePlugins->constEnd();
+            it_plugin = m_onlinePlugins->cend();
             const auto& kvp = m_currentAccount.onlineBankingSettings();
             if (!kvp["provider"].isEmpty()) {
                 // if we have an online provider for this account, we need to check
                 // that we have the corresponding plugin. If that exists, we ask it
                 // to provide an additional tab for the account editor.
                 it_plugin = m_onlinePlugins->constFind(kvp["provider"].toLower());
-                if (it_plugin != m_onlinePlugins->constEnd()) {
+                if (it_plugin != m_onlinePlugins->cend()) {
                     QString name;
                     auto w = (*it_plugin)->accountConfigTab(m_currentAccount, name);
                     dlg->addTab(w, name);
@@ -247,7 +247,7 @@ public:
 
                     MyMoneyFileTransaction ft(i18nc("Undo action description", "Edit account"), balanceTransactionChanges);
 
-                    if (m_onlinePlugins && it_plugin != m_onlinePlugins->constEnd()) {
+                    if (m_onlinePlugins && it_plugin != m_onlinePlugins->cend()) {
                         account.setOnlineBankingSettings((*it_plugin)->onlineBankingSettings(account.onlineBankingSettings()));
                     }
                     // we need to modify first, as reparent would override all other changes
@@ -332,7 +332,7 @@ public:
         // there must be no unfinished schedule referencing the account
         QList<MyMoneySchedule> list = MyMoneyFile::instance()->scheduleList();
         QList<MyMoneySchedule>::const_iterator it_l;
-        for (it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
+        for (it_l = list.cbegin(); it_l != list.cend(); ++it_l) {
             if ((*it_l).isFinished())
                 continue;
             if ((*it_l).hasReferenceTo(acc.id()))
@@ -386,7 +386,7 @@ public:
         auto processedAccounts = 0;
 
         Q_EMIT q->beginImportingStatements();
-        for (auto it_provider = m_onlinePlugins->constBegin(); it_provider != m_onlinePlugins->constEnd(); ++it_provider) {
+        for (auto it_provider = m_onlinePlugins->cbegin(); it_provider != m_onlinePlugins->cend(); ++it_provider) {
             auto nextAccount = accList.cend();
             for (auto it_a = accList.cbegin(); it_a != accList.cend(); ++it_a) {
                 if ((*it_a).hasOnlineMapping()
@@ -442,7 +442,7 @@ public:
                     // check if provider is available
                     QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
                     it_p = m_onlinePlugins->constFind(acc.onlineBankingSettings().value(QLatin1String("provider")).toLower());
-                    if (it_p != m_onlinePlugins->constEnd()) {
+                    if (it_p != m_onlinePlugins->cend()) {
                         QStringList protocols;
                         (*it_p)->protocols(protocols);
                         if (protocols.count() > 0) {

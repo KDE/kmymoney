@@ -420,8 +420,8 @@ void QueryTable::constructTotalRows()
             while (currencyGrp != totalCurrency.end()) {
                 TableRow totalsRow;
                 totalsRow[ctValueSourceLine] = QString("%1").arg(__LINE__);
-                QMap<cellTypeE, MyMoneyMoney>::const_iterator grandTotalGrp = (*currencyGrp)[0].constBegin();
-                while(grandTotalGrp != (*currencyGrp)[0].constEnd()) {
+                QMap<cellTypeE, MyMoneyMoney>::const_iterator grandTotalGrp = (*currencyGrp)[0].cbegin();
+                while (grandTotalGrp != (*currencyGrp)[0].cend()) {
                     totalsRow[grandTotalGrp.key()] = grandTotalGrp.value().toString();
                     ++grandTotalGrp;
                 }
@@ -527,8 +527,7 @@ void QueryTable::constructTransactionTable()
     QList<MyMoneyTransaction> transactions;
     file->transactionList(transactions, report);
 
-    for (QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.constBegin(); it_transaction != transactions.constEnd(); ++it_transaction) {
-
+    for (QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.cbegin(); it_transaction != transactions.cend(); ++it_transaction) {
         TableRow qA, qS;
         QList<TableRow> qStack;
         QDate pd;
@@ -589,7 +588,7 @@ void QueryTable::constructTransactionTable()
         QList<MyMoneySplit>::const_iterator myBegin, it_split;
 
         bool foundTaxAccount = false;
-        for (it_split = splits.constBegin(), myBegin = splits.constEnd(); it_split != splits.constEnd(); ++it_split) {
+        for (it_split = splits.cbegin(), myBegin = splits.cend(); it_split != splits.cend(); ++it_split) {
             ReportAccount splitAcc((*it_split).accountId());
             // always put split with a "stock" account if it exists
             if (splitAcc.isInvest())
@@ -1100,7 +1099,7 @@ void QueryTable::constructTransactionTable()
     QString strEndDate = endDate.toString(Qt::ISODate);
     startDate = startDate.addDays(-1);
 
-    for (auto it_account = accts.constBegin(); it_account != accts.constEnd(); ++it_account) {
+    for (auto it_account = accts.cbegin(); it_account != accts.cend(); ++it_account) {
         TableRow qA;
 
         ReportAccount account(*it_account);
@@ -1625,7 +1624,7 @@ void QueryTable::constructAccountTable()
     QMap<QString, QMap<QString, CashFlowList>> currencyCashFlow; // for total calculation
     QList<MyMoneyAccount> accounts;
     file->accountList(accounts);
-    for (auto it_account = accounts.constBegin(); it_account != accounts.constEnd(); ++it_account) {
+    for (auto it_account = accounts.cbegin(); it_account != accounts.cend(); ++it_account) {
         // Note, "Investment" accounts are never included in account rows because
         // they don't contain anything by themselves.  In reports, they are only
         // useful as a "topaccount" aggregator of stock accounts
@@ -1759,8 +1758,7 @@ void QueryTable::constructSplitsTable()
     //get all transactions for this report
     QList<MyMoneyTransaction> transactions;
     file->transactionList(transactions, report);
-    for (QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.constBegin(); it_transaction != transactions.constEnd(); ++it_transaction) {
-
+    for (QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.cbegin(); it_transaction != transactions.cend(); ++it_transaction) {
         TableRow qA, qS;
         QDate pd;
 
@@ -1788,7 +1786,7 @@ void QueryTable::constructSplitsTable()
         QList<MyMoneySplit>::const_iterator myBegin, it_split;
         //S_end = splits.end();
 
-        for (it_split = splits.constBegin(), myBegin = splits.constEnd(); it_split != splits.constEnd(); ++it_split) {
+        for (it_split = splits.cbegin(), myBegin = splits.cend(); it_split != splits.cend(); ++it_split) {
             ReportAccount splitAcc((* it_split).accountId());
             // always put split with a "stock" account if it exists
             if (splitAcc.isInvest())
@@ -1944,7 +1942,7 @@ void QueryTable::constructSplitsTable()
                         qA[ctAccount] = i18n("[Split Transaction]");
                     } else {
                         //fill the account name of the second split
-                        QList<MyMoneySplit>::const_iterator tempSplit = splits.constBegin();
+                        QList<MyMoneySplit>::const_iterator tempSplit = splits.cbegin();
 
                         //there are supposed to be only 2 splits if we ever get here
                         if (tempSplit == myBegin && splits.count() > 1)
@@ -2023,7 +2021,7 @@ void QueryTable::constructSplitsTable()
     QString strEndDate = endDate.toString(Qt::ISODate);
     startDate = startDate.addDays(-1);
 
-    for (auto it_account = accts.constBegin(); it_account != accts.constEnd(); ++it_account) {
+    for (auto it_account = accts.cbegin(); it_account != accts.cend(); ++it_account) {
         TableRow qA;
 
         ReportAccount account((* it_account));

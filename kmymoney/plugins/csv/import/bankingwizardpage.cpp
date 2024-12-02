@@ -445,7 +445,7 @@ void BankingPage::makeQIF(const MyMoneyStatement& st, const QString& outFileName
 
     buffer.append(QStringLiteral("!Type:") + strEType + eol);
 
-    for (QList<MyMoneyStatement::Transaction>::const_iterator it = st.m_listTransactions.constBegin(); it != st.m_listTransactions.constEnd(); ++it) {
+    for (QList<MyMoneyStatement::Transaction>::const_iterator it = st.m_listTransactions.cbegin(); it != st.m_listTransactions.cend(); ++it) {
         buffer.append(QLatin1Char('D') + qifProfile.date(it->m_datePosted) + eol);
         buffer.append(QLatin1Char('T') + qifProfile.value(QLatin1Char('T'), it->m_amount) + eol);
         buffer.append(QLatin1Char('P') + it->m_strPayee + eol);

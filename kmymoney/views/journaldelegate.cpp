@@ -635,7 +635,7 @@ QSize JournalDelegate::sizeHint(const QStyleOptionViewItem& option, const QModel
         auto rows = index.data(eMyMoney::Model::JournalSplitMaxLinesCountRole).toInt();
         if (rows == 0) {
             // Scan certain rows which may show multiple lines in a table row
-            QSet<int> columns = {JournalModel::Column::Detail, JournalModel::Column::Deposit, JournalModel::Column::Payment};
+            const QList<int> columns = {JournalModel::Column::Detail, JournalModel::Column::Deposit, JournalModel::Column::Payment};
             for (const auto& column : qAsConst(columns)) {
                 const auto idx = index.model()->index(index.row(), column);
                 const auto rowCount = d->displayString(idx, option).lines.count() + d->displayMatchedString(idx, option).lines.count();

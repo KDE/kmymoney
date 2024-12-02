@@ -13,7 +13,6 @@
 // QT Includes
 
 #include <QMap>
-#include <QSet>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -310,9 +309,9 @@ MyMoneyBudget::AccountGroup MyMoneyBudget::AccountGroup::operator += (const MyMo
     // in case the left side is empty, we add empty periods
     // so that both budgets are identical
     if (d->m_budgetlevel == eMyMoney::Budget::Level::None) {
-        it_pr = rPeriods.constBegin();
+        it_pr = rPeriods.cbegin();
         QDate date = (*it_pr).startDate();
-        while (it_pr != rPeriods.constEnd()) {
+        while (it_pr != rPeriods.cend()) {
             MyMoneyBudget::PeriodGroup period = *it_pr;
             period.setAmount(MyMoneyMoney());
             addPeriod(date, period);
@@ -328,12 +327,12 @@ MyMoneyBudget::AccountGroup MyMoneyBudget::AccountGroup::operator += (const MyMo
     // now both budgets should be of the same type and we simply need
     // to iterate over the period list and add the values
     d->m_periods.clear();
-    it_p = periods.constBegin();
-    it_pr = rPeriods.constBegin();
+    it_p = periods.cbegin();
+    it_pr = rPeriods.cbegin();
     QDate date = (*it_p).startDate();
-    while (it_p != periods.constEnd()) {
+    while (it_p != periods.cend()) {
         MyMoneyBudget::PeriodGroup period = *it_p;
-        if (it_pr != rPeriods.constEnd()) {
+        if (it_pr != rPeriods.cend()) {
             period.setAmount(period.amount() + (*it_pr).amount());
             ++it_pr;
         }
@@ -407,11 +406,11 @@ void MyMoneyBudget::removeReference(const QString& id)
 const MyMoneyBudget::AccountGroup& MyMoneyBudget::account(const QString& id) const
 {
     static AccountGroup empty;
-    QMap<QString, AccountGroup>::ConstIterator it;
+    QMap<QString, AccountGroup>::const_iterator it;
 
     Q_D(const MyMoneyBudget);
     it = d->m_accounts.constFind(id);
-    if (it != d->m_accounts.constEnd())
+    if (it != d->m_accounts.cend())
         return it.value();
     return empty;
 }

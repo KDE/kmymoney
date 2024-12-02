@@ -183,8 +183,8 @@ void KMandatoryFieldGroup::changed()
 {
     Q_D(KMandatoryFieldGroup);
     bool enable = d->m_externalMandatoryState;
-    QList<QWidget *>::ConstIterator i;
-    for (i = d->m_widgets.constBegin(); i != d->m_widgets.constEnd(); ++i) {
+    QList<QWidget*>::const_iterator i;
+    for (i = d->m_widgets.cbegin(); i != d->m_widgets.cend(); ++i) {
         QWidget *widget = *i;
         // disabled widgets don't count
         if (!(widget->isEnabled())) {

@@ -568,8 +568,8 @@ void MyMoneyDbTable::buildSQLStrings()
     // build the insert string with placeholders for each field
     QString qs = QString("INSERT INTO %1 (").arg(name());
     QString ws = ") VALUES (";
-    field_iterator ft = m_fields.constBegin();
-    while (ft != m_fields.constEnd()) {
+    field_iterator ft = m_fields.cbegin();
+    while (ft != m_fields.cend()) {
         qs += QString("%1, ").arg((*ft)->name());
         ws += QString(":%1, ").arg((*ft)->name());
         ++ft;
@@ -584,8 +584,8 @@ void MyMoneyDbTable::buildSQLStrings()
     // build an update string; key fields go in the where clause
     qs = "UPDATE " + name() + " SET ";
     ws.clear();
-    ft = m_fields.constBegin();
-    while (ft != m_fields.constEnd()) {
+    ft = m_fields.cbegin();
+    while (ft != m_fields.cend()) {
         if ((*ft)->isPrimaryKey()) {
             if (!ws.isEmpty()) ws += " AND ";
             ws += QString("%1 = :%2").arg((*ft)->name(), (*ft)->name());
@@ -603,10 +603,10 @@ void MyMoneyDbTable::buildSQLStrings()
     m_deleteString = qs + ';';
 
     // Setup the column name hash
-    ft = m_fields.constBegin();
+    ft = m_fields.cbegin();
     m_fieldOrder.reserve(m_fields.size());
     int i = 0;
-    while (ft != m_fields.constEnd()) {
+    while (ft != m_fields.cend()) {
         m_fieldOrder[(*ft)->name()] = i;
         ++i;
         ++ft;
@@ -667,8 +667,8 @@ const QString MyMoneyDbTable::dropPrimaryKeyString(const QExplicitlySharedDataPo
 
 bool MyMoneyDbTable::hasPrimaryKey(int version) const
 {
-    field_iterator ft = m_fields.constBegin();
-    while (ft != m_fields.constEnd()) {
+    field_iterator ft = m_fields.cbegin();
+    while (ft != m_fields.cend()) {
         if ((*ft)->initVersion() <= version && (*ft)->lastVersion() >= version) {
             if ((*ft)->isPrimaryKey())
                 return (true);
@@ -685,8 +685,8 @@ const QString MyMoneyDbTable::modifyColumnString(const QExplicitlySharedDataPoin
 
 int MyMoneyDbTable::fieldNumber(const QString& name) const
 {
-    QHash<QString, int>::ConstIterator i = m_fieldOrder.find(name);
-    if (m_fieldOrder.constEnd() == i) {
+    QHash<QString, int>::const_iterator i = m_fieldOrder.find(name);
+    if (m_fieldOrder.cend() == i) {
         throw MYMONEYEXCEPTION(QString::fromLatin1("Unknown field %1 in table %2").arg(name, m_name));
     }
     return i.value();
@@ -716,7 +716,7 @@ const QString MyMoneyDbIndex::generateDDL(const QExplicitlySharedDataPointer<MyM
     // the result of an SQL function, but not a partial column.  There should be
     // a way to merge these, and support other DBMSs like SQLite at the same time.
     // For now, if we just use plain columns, this will work fine.
-    for (QStringList::ConstIterator it = m_columns.constBegin(); it != m_columns.constEnd(); ++it) {
+    for (QStringList::const_iterator it = m_columns.cbegin(); it != m_columns.cend(); ++it) {
         qs += *it + ',';
     }
 

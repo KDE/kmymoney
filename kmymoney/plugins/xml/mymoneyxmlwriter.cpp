@@ -343,8 +343,8 @@ void MyMoneyXmlWriterPrivate::writeAccount(const MyMoneyAccount& account)
     const auto onlineBankSettingsPairs = account.onlineBankingSettings().pairs();
     if (!onlineBankSettingsPairs.isEmpty()) {
         m_writer->writeStartElement(elementName(Element::Account::OnlineBanking));
-        QMap<QString, QString>::const_iterator it_key = onlineBankSettingsPairs.constBegin();
-        while (it_key != onlineBankSettingsPairs.constEnd()) {
+        QMap<QString, QString>::const_iterator it_key = onlineBankSettingsPairs.cbegin();
+        while (it_key != onlineBankSettingsPairs.cend()) {
             m_writer->writeAttribute(it_key.key(), it_key.value());
             ++it_key;
         }
@@ -377,7 +377,7 @@ void MyMoneyXmlWriterPrivate::writeAccounts()
     m_writer->writeStartElement(tagName(Tag::Accounts));
 
     m_accountList = m_file->accountsModel()->itemList();
-    QList<MyMoneyAccount>::ConstIterator it;
+    QList<MyMoneyAccount>::const_iterator it;
 
     writeAccount(m_file->accountsModel()->itemByIndex(m_file->accountsModel()->assetIndex()));
     writeAccount(m_file->accountsModel()->itemByIndex(m_file->accountsModel()->liabilityIndex()));

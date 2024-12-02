@@ -204,8 +204,8 @@ void KGenerateSqlDlg::slotcreateTables()
         QSqlQuery q(dbase);
         QString message(i18n("Tables successfully created"));
         QStringList commands = d->ui->textSQL->toPlainText().split('\n');
-        QStringList::ConstIterator cit;
-        for (cit = commands.constBegin(); cit != commands.constEnd(); ++cit) {
+        QStringList::const_iterator cit;
+        for (cit = commands.cbegin(); cit != commands.cend(); ++cit) {
             if (!(*cit).isEmpty()) {
                 //qDebug() << "exec" << *cit;
                 q.prepare(*cit);

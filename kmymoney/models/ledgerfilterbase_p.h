@@ -10,7 +10,6 @@
 // QT Includes
 
 #include <QDate>
-#include <QSet>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -41,7 +40,7 @@ public:
     bool showValuesInverted;
     bool maintainBalances;
     bool enableEdit;
-    QSet<QAbstractItemModel*> sourceModels;
+    KMMSet<QAbstractItemModel*> sourceModels;
     QVector<MyMoneyMoney> balances;
     QVector<int> splitMaxLineCount;
 };

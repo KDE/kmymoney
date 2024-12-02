@@ -218,7 +218,7 @@ public:
 
         MyMoneyMoney deposit, payment;
         bool balanceAccurate = true;
-        QSet<QString> accountIds;
+        KMMStringSet accountIds;
 
         const auto viewModel = ui->m_register->model();
         const auto rows = viewModel->rowCount();

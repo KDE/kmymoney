@@ -11,10 +11,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QMap>
-#include <QSet>
-#include <QList>
 #include <QDate>
+#include <QList>
+#include <QMap>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -156,7 +155,7 @@ private:
       */
     QString coloredAmount(const MyMoneyMoney& amount, const QString& currencySymbol, int prec) const;
 
-    QSet<QString> m_openingBalanceTransactions;
+    KMMStringSet m_openingBalanceTransactions;
 
 protected:
     /**

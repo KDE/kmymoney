@@ -43,7 +43,8 @@ protected:
     bool hasReferenceTo(const QString&) const final override {
         return false;
     }
-    QSet<QString> referencedObjects() const final override {
+    KMMStringSet referencedObjects() const final override
+    {
         return {};
     }
     onlineTaskDummy3* createFromXml(QXmlStreamReader*) const final override

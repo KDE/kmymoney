@@ -480,11 +480,11 @@ public:
 
             QStringList settings = KMyMoneySettings::listOfItems();
 
-            QStringList::ConstIterator it;
+            QStringList::const_iterator it;
 
             QElapsedTimer t;
             t.start();
-            for (it = settings.constBegin(); it != settings.constEnd(); ++it) {
+            for (it = settings.cbegin(); it != settings.cend(); ++it) {
                 int option = (*it).toInt();
                 if (option > 0) {
                     switch (option) {
@@ -1028,7 +1028,7 @@ public:
 
             m_total = 0;
             QList<MyMoneyAccount>::const_iterator it_m;
-            for (it_m = accounts.constBegin(); it_m != accounts.constEnd(); ++it_m) {
+            for (it_m = accounts.cbegin(); it_m != accounts.cend(); ++it_m) {
                 m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
                 showAccountEntry(*it_m);
                 m_html += "</tr>";
@@ -1058,8 +1058,8 @@ public:
             });
             bool firstTime = 1;
             int row = 0;
-            QList<MyMoneyReport>::const_iterator it_report = reports.constBegin();
-            while (it_report != reports.constEnd()) {
+            QList<MyMoneyReport>::const_iterator it_report = reports.cbegin();
+            while (it_report != reports.cend()) {
                 if ((*it_report).isFavorite()) {
                     if (firstTime) {
                         m_html +=
@@ -1141,8 +1141,8 @@ public:
             // Now output entries
             i = 0;
 
-            QList<MyMoneyAccount>::ConstIterator it_account;
-            for (it_account = accList.constBegin(); it_account != accList.constEnd(); ++it_account) {
+            QList<MyMoneyAccount>::const_iterator it_account;
+            for (it_account = accList.cbegin(); it_account != accList.cend(); ++it_account) {
                 //MyMoneyAccount acc = (*it_n);
 
                 m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
@@ -1270,7 +1270,7 @@ public:
     void showAssetsLiabilities()
     {
         QList<MyMoneyAccount> accounts;
-        QList<MyMoneyAccount>::ConstIterator it;
+        QList<MyMoneyAccount>::const_iterator it;
         QList<MyMoneyAccount> assets;
         QList<MyMoneyAccount> liabilities;
         MyMoneyMoney netAssets;
@@ -1286,7 +1286,7 @@ public:
         const auto showAllAccounts = KMyMoneySettings::showAllAccounts();
         const bool hideZeroBalanceAccounts = KMyMoneySettings::hideZeroBalanceAccountsHome() && !showAllAccounts;
 
-        for (it = accounts.constBegin(); it != accounts.constEnd();) {
+        for (it = accounts.cbegin(); it != accounts.cend();) {
             if (!(*it).isClosed() || showAllAccounts) {
                 const auto value = MyMoneyFile::instance()->balance((*it).id(), QDate::currentDate());
                 switch ((*it).accountType()) {
@@ -1425,12 +1425,12 @@ public:
             if (KMyMoneySettings::showDateOfLastReconciliation()) placeHolder_Counts += "<td></td>";
 
             //get asset and liability accounts
-            QList<MyMoneyAccount>::const_iterator asset_it = assets.constBegin();
-            QList<MyMoneyAccount>::const_iterator liabilities_it = liabilities.constBegin();
-            for (; asset_it != assets.constEnd() || liabilities_it != liabilities.constEnd();) {
+            QList<MyMoneyAccount>::const_iterator asset_it = assets.cbegin();
+            QList<MyMoneyAccount>::const_iterator liabilities_it = liabilities.cbegin();
+            for (; asset_it != assets.cend() || liabilities_it != liabilities.cend();) {
                 m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
                 //write an asset account if we still have any
-                if (asset_it != assets.constEnd()) {
+                if (asset_it != assets.cend()) {
                     MyMoneyMoney value;
                     //investment accounts consolidate the balance of its subaccounts
                     if ((*asset_it).accountType() == Account::Type::Investment) {
@@ -1461,7 +1461,7 @@ public:
                 m_html += "<td class=\"setcolor\"></td>";
 
                 //write a liability account
-                if (liabilities_it != liabilities.constEnd()) {
+                if (liabilities_it != liabilities.cend()) {
                     MyMoneyMoney value;
                     value = MyMoneyFile::instance()->balance((*liabilities_it).id(), QDate::currentDate());
                     //calculate balance if foreign currency
@@ -1684,7 +1684,7 @@ public:
                 //go through the splits and assign to liquid or other transfers
                 const QList<MyMoneySplit> splits = transaction.splits();
                 QList<MyMoneySplit>::const_iterator split_it;
-                for (split_it = splits.constBegin(); split_it != splits.constEnd(); ++split_it) {
+                for (split_it = splits.cbegin(); split_it != splits.cend(); ++split_it) {
                     if ((*split_it).accountId() != acc.id()) {
                         auto repSplitAcc = file->account((*split_it).accountId());
 
@@ -1739,7 +1739,7 @@ public:
 
         // get list of all accounts
         file->accountList(accounts);
-        for (account_it = accounts.constBegin(); account_it != accounts.constEnd();) {
+        for (account_it = accounts.cbegin(); account_it != accounts.cend();) {
             if (!(*account_it).isClosed()) {
                 switch ((*account_it).accountType()) {
                 //group all assets into one list

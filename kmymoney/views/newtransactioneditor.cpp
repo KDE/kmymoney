@@ -594,7 +594,7 @@ void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
             dlg->setWindowTitle(i18nc("@title:window Autofill selection dialog", "Select autofill transaction"));
 
             QMap<QString, struct uniqTransaction>::const_iterator it_u;
-            for (it_u = uniqList.constBegin(); it_u != uniqList.constEnd(); ++it_u) {
+            for (it_u = uniqList.cbegin(); it_u != uniqList.cend(); ++it_u) {
                 dlg->addTransaction((*it_u).journalEntryId);
             }
 
@@ -610,7 +610,7 @@ void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
         } else {
             int maxCnt = 0;
             QMap<QString, struct uniqTransaction>::const_iterator it_u;
-            for (it_u = uniqList.constBegin(); it_u != uniqList.constEnd(); ++it_u) {
+            for (it_u = uniqList.cbegin(); it_u != uniqList.cend(); ++it_u) {
                 if ((*it_u).matches > maxCnt) {
                     journalEntryId = (*it_u).journalEntryId;
                     maxCnt = (*it_u).matches;

@@ -222,8 +222,8 @@ bool KOnlineBankingSetupWizard::finishFiPage()
             m_textDetails->clear();
             m_textDetails->append(QString("<p>Details for %1:</p>").arg(bank));
             QStringList fipids = OfxPartner::FipidForBank(bank);
-            QStringList::const_iterator it_fipid = fipids.constBegin();
-            while (it_fipid != fipids.constEnd()) {
+            QStringList::const_iterator it_fipid = fipids.cbegin();
+            while (it_fipid != fipids.cend()) {
                 // For each fipid, get the connection details
                 info = OfxPartner::ServiceInfo(*it_fipid);
 
@@ -318,8 +318,8 @@ bool KOnlineBankingSetupWizard::finishLoginPage()
     m_listAccount->clear();
 
     // Process an account request for each fipid
-    m_it_info = m_bankInfo.constBegin();
-    while (m_it_info != m_bankInfo.constEnd()) {
+    m_it_info = m_bankInfo.cbegin();
+    while (m_it_info != m_bankInfo.cend()) {
         OfxFiLogin fi;
         memset(&fi, 0, sizeof(OfxFiLogin));
         Q_ASSERT(sizeof(fi.fid) == sizeof((*m_it_info).fid));

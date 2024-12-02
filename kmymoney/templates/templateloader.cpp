@@ -129,11 +129,11 @@ public:
                 QDomElement accountElement = account.toElement();
                 if (accountElement.tagName() == "account") {
                     QList<MyMoneyAccount> subAccountList;
-                    QList<MyMoneyAccount>::ConstIterator it;
-                    it = subAccountList.constEnd();
+                    QList<MyMoneyAccount>::const_iterator it;
+                    it = subAccountList.cend();
                     if (!parent.accountList().isEmpty()) {
                         MyMoneyFile::instance()->accountList(subAccountList, parent.accountList());
-                        for (it = subAccountList.constBegin(); it != subAccountList.constEnd(); ++it) {
+                        for (it = subAccountList.cbegin(); it != subAccountList.cend(); ++it) {
                             if ((*it).name() == accountElement.attribute("name")) {
                                 acc = *it;
                                 QString id = accountElement.attribute("id");
@@ -143,7 +143,7 @@ public:
                             }
                         }
                     }
-                    if (it == subAccountList.constEnd()) {
+                    if (it == subAccountList.cend()) {
                         // not found, we need to create it
                         acc.setName(accountElement.attribute("name"));
                         acc.setAccountType(static_cast<eMyMoney::Account::Type>(accountElement.attribute("type").toUInt()));
@@ -282,7 +282,7 @@ void TemplateLoader::load(TemplatesModel* model)
 
     d->model->insertRows(0, d->countries.count());
     d->countryRow = 0;
-    d->it_m = d->countries.constBegin();
+    d->it_m = d->countries.cbegin();
 
     // in case we have found countries, we load them
     if (d->countryRow < d->countries.count()) {

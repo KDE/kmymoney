@@ -90,7 +90,7 @@ public:
     QAction* m_action;
     QDate m_updateStartDate;
     int m_timestampOffset;
-    QSet<QString> m_hashes;
+    KMMStringSet m_hashes;
 
     int constructTimeOffset(const QTimeEdit* timestampOffset, const KComboBox* timestampOffsetSign) const
     {
@@ -510,7 +510,7 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
         for (;;) {
             hash = QString("%1-%2").arg(hashBase).arg(idx);
             if (!d->m_hashes.contains(hash)) {
-                d->m_hashes += hash;
+                d->m_hashes.insert(hash);
                 break;
             }
             ++idx;

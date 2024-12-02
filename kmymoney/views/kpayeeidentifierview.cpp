@@ -119,7 +119,7 @@ void KPayeeIdentifierView::removeSelected()
     QAbstractItemModel* model = ui->view->model();
     Q_CHECK_PTR(model);
 
-    QModelIndexList::const_iterator end = selectedRows.constEnd();
-    for (QModelIndexList::const_iterator iter = selectedRows.constBegin(); iter != end; ++iter)
+    QModelIndexList::const_iterator end = selectedRows.cend();
+    for (QModelIndexList::const_iterator iter = selectedRows.cbegin(); iter != end; ++iter)
         model->removeRow(iter->row(), iter->parent());
 }

@@ -19,6 +19,7 @@
 // Project Includes
 
 #include "kmm_mymoney_export.h"
+#include "kmmset.h"
 
 class QString;
 class QDate;
@@ -141,7 +142,7 @@ public:
     /**
      * @copydoc MyMoneyObject::referencedObjects
      */
-    QSet<QString> referencedObjects() const;
+    KMMStringSet referencedObjects() const;
 };
 
 inline void swap(MyMoneyPrice& first, MyMoneyPrice& second) // krazy:exclude=inline

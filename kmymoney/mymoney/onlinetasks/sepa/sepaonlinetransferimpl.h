@@ -88,7 +88,7 @@ public:
     /**
      * @copydoc MyMoneyObject::referencedObjects
      */
-    QSet<QString> referencedObjects() const override;
+    KMMStringSet referencedObjects() const override;
 
     QSharedPointer<const sepaOnlineTransfer::settings> getSettings() const final override;
 

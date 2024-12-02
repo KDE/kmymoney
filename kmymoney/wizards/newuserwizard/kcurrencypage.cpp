@@ -61,7 +61,7 @@ CurrencyPage::CurrencyPage(Wizard* wizard) :
 
 
     ui->m_currencyList->clear();
-    for (it = list.constBegin(); it != list.constEnd(); ++it) {
+    for (it = list.cbegin(); it != list.cend(); ++it) {
         QTreeWidgetItem* p = insertCurrency(*it);
         if ((*it).id() == baseCurrency) {
             first = p;

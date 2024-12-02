@@ -234,7 +234,7 @@ void LedgerFilterBase::setShowEntryForNewTransaction(bool show)
 void LedgerFilterBase::addSourceModel(QAbstractItemModel* model)
 {
     Q_D(LedgerFilterBase);
-    if (model && !d->sourceModels.contains(model)) {
+    if (model && (d->sourceModels.find(model) == d->sourceModels.end())) {
         d->concatModel->addSourceModel(model);
         d->sourceModels.insert(model);
         invalidateFilter();
@@ -244,9 +244,9 @@ void LedgerFilterBase::addSourceModel(QAbstractItemModel* model)
 void LedgerFilterBase::removeSourceModel(QAbstractItemModel* model)
 {
     Q_D(LedgerFilterBase);
-    if (model && d->sourceModels.contains(model)) {
+    if (model && (d->sourceModels.find(model) != d->sourceModels.end())) {
         d->concatModel->removeSourceModel(model);
-        d->sourceModels.remove(model);
+        d->sourceModels.erase(model);
         invalidateFilter();
     }
 }

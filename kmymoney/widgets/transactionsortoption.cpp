@@ -104,7 +104,7 @@ void TransactionSortOption::setSettings(const QString& settings)
     // fill selected list
     QStringList::const_iterator it_s;
     QListWidgetItem* last = 0;
-    for (it_s = list.constBegin(); it_s != list.constEnd(); ++it_s) {
+    for (it_s = list.cbegin(); it_s != list.cend(); ++it_s) {
         int val = (*it_s).toInt();
         selectedMap[abs(val)] = true;
         last = addEntry(ui->m_selectedList, last, val);

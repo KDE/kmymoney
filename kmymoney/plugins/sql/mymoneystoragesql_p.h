@@ -637,8 +637,8 @@ public:
 
         const MyMoneyPriceList list = m_file->priceList();
         signalProgress(0, list.count(), "Writing Prices...");
-        MyMoneyPriceList::ConstIterator it;
-        for (it = list.constBegin(); it != list.constEnd(); ++it)   {
+        MyMoneyPriceList::const_iterator it;
+        for (it = list.cbegin(); it != list.cend(); ++it) {
             const auto& pair = it.key();
             try {
                 if (m_file->security(pair.first).isCurrency() && !m_file->security(pair.second).isCurrency()) {
@@ -1190,7 +1190,7 @@ public:
         query.prepare(m_db.m_tables["kmmSplits"].updateString());
         query2.prepare(m_db.m_tables["kmmSplits"].insertString());
         auto i = 0;
-        for (auto it = splitList.constBegin(); it != splitList.constEnd(); ++it) {
+        for (auto it = splitList.cbegin(); it != splitList.cend(); ++it) {
             if (dbList.contains(i)) {
                 dbList.removeAll(i);
                 updateList << *it;
@@ -1442,8 +1442,8 @@ public:
 
     void writePricePair(const MyMoneyPriceEntries& p)
     {
-        MyMoneyPriceEntries::ConstIterator it;
-        for (it = p.constBegin(); it != p.constEnd(); ++it) {
+        MyMoneyPriceEntries::const_iterator it;
+        for (it = p.cbegin(); it != p.cend(); ++it) {
             writePrice(*it);
             signalProgress(++m_prices, 0);
         }
@@ -1533,8 +1533,8 @@ public:
         int pairCount = 0;
 
         for (int i = 0; i < kvpId.size(); ++i) {
-            QMap<QString, QString>::ConstIterator it;
-            for (it = pairs[i].constBegin(); it != pairs[i].constEnd(); ++it) {
+            QMap<QString, QString>::const_iterator it;
+            for (it = pairs[i].cbegin(); it != pairs[i].cend(); ++it) {
                 type << kvpType;
                 id << kvpId[i];
                 key << it.key();
@@ -1660,7 +1660,7 @@ public:
 
         signalProgress(1, 0);
         const auto params = readKeyValuePairs("STORAGE", QString("")).pairs();
-        for (auto it = params.constBegin(); it != params.constEnd(); ++it) {
+        for (auto it = params.cbegin(); it != params.cend(); ++it) {
             m_file->parametersModel()->addItem(it.key(), it.value());
         }
     }
@@ -2161,7 +2161,7 @@ public:
             (*i) = (*i).toLower();
         }
 
-        for (QMap<QString, MyMoneyDbView>::ConstIterator tt = m_db.viewBegin(); tt != m_db.viewEnd(); ++tt) {
+        for (QMap<QString, MyMoneyDbView>::const_iterator tt = m_db.viewBegin(); tt != m_db.viewEnd(); ++tt) {
             if (lowerTables.contains(tt.key().toLower())) {
                 if (!query.exec("DROP VIEW " + tt.value().name() + ';')) // krazy:exclude=crashy
                     throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("dropping view %1").arg(tt.key()));
@@ -2232,7 +2232,7 @@ public:
             (*i) = (*i).toLower();
         }
 
-        for (QMap<QString, MyMoneyDbView>::ConstIterator tt = m_db.viewBegin(); tt != m_db.viewEnd(); ++tt) {
+        for (QMap<QString, MyMoneyDbView>::const_iterator tt = m_db.viewBegin(); tt != m_db.viewEnd(); ++tt) {
             if (!lowerTables.contains(tt.key().toLower())) {
                 if (!query.exec(tt.value().createString())) // krazy:exclude=crashy
                     throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("creating view %1").arg(tt.key()));
@@ -2278,8 +2278,8 @@ public:
         }
         QMap<QString, QDateTime> tids;
         while (query.next()) tids[query.value(0).toString()] = query.value(1).toDateTime();
-        QMap<QString, QDateTime>::ConstIterator it;
-        for (it = tids.constBegin(); it != tids.constEnd(); ++it) {
+        QMap<QString, QDateTime>::const_iterator it;
+        for (it = tids.cbegin(); it != tids.cend(); ++it) {
             query.prepare("UPDATE kmmSplits SET postDate=:postDate WHERE transactionId = :id;");
             query.bindValue(":postDate", it.value().toString(Qt::ISODate));
             query.bindValue(":id", it.key());
@@ -2352,9 +2352,9 @@ public:
             lastAcc = thisAcc;
             lastTx = thisTx;
         }
-        QHash<QString, ulong>::ConstIterator itm;
+        QHash<QString, ulong>::const_iterator itm;
         query.prepare("UPDATE kmmAccounts SET transactionCount = :txCount WHERE id = :id;");
-        for (itm = m_transactionCountMap.constBegin(); itm != m_transactionCountMap.constEnd(); ++itm) {
+        for (itm = m_transactionCountMap.cbegin(); itm != m_transactionCountMap.cend(); ++itm) {
             query.bindValue(":txCount", QString::number(itm.value()));
             query.bindValue(":id", itm.key());
             if (!query.exec()) { // krazy:exclude=crashy
@@ -2437,7 +2437,7 @@ public:
         // upgrade Mysql to InnoDB transaction-safe engine
         // the following is not a good way to test for mysql - think of a better way
         if (!m_driver->tableOptionString().isEmpty()) {
-            for (QMap<QString, MyMoneyDbTable>::ConstIterator tt = m_db.tableBegin(); tt != m_db.tableEnd(); ++tt) {
+            for (QMap<QString, MyMoneyDbTable>::const_iterator tt = m_db.tableBegin(); tt != m_db.tableEnd(); ++tt) {
                 if (!query.exec(QString("ALTER TABLE %1 ENGINE = InnoDB;").arg(tt.value().name()))) {
                     buildError(query, Q_FUNC_INFO, "Error updating to InnoDB");
                     return (1);
@@ -2467,7 +2467,7 @@ public:
             return(1);
 
         QMap<QString, MyMoneyReport>::const_iterator it_r;
-        for (it_r = reportList.constBegin(); it_r != reportList.constEnd(); ++it_r) {
+        for (it_r = reportList.cbegin(); it_r != reportList.cend(); ++it_r) {
             MyMoneyReport r = *it_r;
             query.prepare(m_db.m_tables["kmmReportConfig"].insertString());
             writeReport(*it_r, query);
@@ -2588,14 +2588,14 @@ public:
             (*i) = (*i).toLower();
         }
 
-        for (QMap<QString, MyMoneyDbTable>::ConstIterator tt = m_db.tableBegin(); tt != m_db.tableEnd(); ++tt) {
+        for (QMap<QString, MyMoneyDbTable>::const_iterator tt = m_db.tableBegin(); tt != m_db.tableEnd(); ++tt) {
             if (!lowerTables.contains(tt.key().toLower())) {
                 createTable(tt.value());
             }
         }
 
         QSqlQuery query(*q);
-        for (QMap<QString, MyMoneyDbView>::ConstIterator tt = m_db.viewBegin(); tt != m_db.viewEnd(); ++tt) {
+        for (QMap<QString, MyMoneyDbView>::const_iterator tt = m_db.viewBegin(); tt != m_db.viewEnd(); ++tt) {
             if (!lowerTables.contains(tt.key().toLower())) {
                 if (!query.exec(tt.value().createString())) throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("creating view %1").arg(tt.key()));
             }
@@ -2689,7 +2689,7 @@ public:
     {
         Q_Q(MyMoneyStorageSql);
         // delete all existing records
-        QMap<QString, MyMoneyDbTable>::ConstIterator it = m_db.tableBegin();
+        QMap<QString, MyMoneyDbTable>::const_iterator it = m_db.tableBegin();
         QSqlQuery query(*q);
         while (it != m_db.tableEnd()) {
             query.prepare(QString("DELETE from %1;").arg(it.key()));
@@ -2702,7 +2702,7 @@ public:
     {
         Q_Q(MyMoneyStorageSql);
         // check all tables are empty
-        QMap<QString, MyMoneyDbTable>::ConstIterator tt = m_db.tableBegin();
+        QMap<QString, MyMoneyDbTable>::const_iterator tt = m_db.tableBegin();
         int recordCount = 0;
         QSqlQuery query(*q);
         while ((tt != m_db.tableEnd()) && (recordCount == 0)) {
@@ -3375,7 +3375,7 @@ public:
     /**
       *
       */
-    QSet<QString> m_loadedStoragePlugins;
+    KMMStringSet m_loadedStoragePlugins;
 
     void (*m_progressCallback)(int, int, const QString&);
 };

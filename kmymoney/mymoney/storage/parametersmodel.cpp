@@ -152,7 +152,7 @@ void ParametersModel::load(const QMap<QString, QString>& pairs)
     insertRows(0, itemCount);
 
     int row = 0;
-    for (auto it = pairs.constBegin(); it != pairs.constEnd(); ++it) {
+    for (auto it = pairs.cbegin(); it != pairs.cend(); ++it) {
         ParameterItem item(it.key(), it.value());
         static_cast<TreeItem<ParameterItem>*>(index(row, 0).internalPointer())->dataRef() = item;
         ++row;

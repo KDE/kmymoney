@@ -21,6 +21,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "kmm_mymoney_export.h"
+#include "kmmset.h"
 #include "mymoneyunittestable.h"
 
 /**
@@ -1637,9 +1638,9 @@ public:
      * This method returns the set of ids that are referenced by
      * other objects in all of the data objects.
      *
-     * @returns QSet<QString> of referenced objects
+     * @returns KMMStringSet of referenced objects
      */
-    QSet<QString> referencedObjects() const;
+    KMMStringSet referencedObjects() const;
 
     /**
       * Returns true if any of the accounts referenced by the splits

@@ -551,9 +551,9 @@ void MyMoneyStorageSql::modifyPayee(MyMoneyPayee payee)
     identIdList.reserve(idents.size());
 
     {
-        QList<payeeIdentifier>::const_iterator end = idents.constEnd();
+        QList<payeeIdentifier>::const_iterator end = idents.cend();
         int i = 0;
-        for (QList<payeeIdentifier>::const_iterator iter = idents.constBegin(); iter != end; ++iter, ++i) {
+        for (QList<payeeIdentifier>::const_iterator iter = idents.cbegin(); iter != end; ++iter, ++i) {
             order << i;
             payeeIdList << payee.id();
             identIdList << iter->idString();
@@ -1192,8 +1192,8 @@ QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions(const QSt
     query.prepare(queryString);
 
     if (! idList.empty()) {
-        QStringList::ConstIterator bindVal = idList.constBegin();
-        for (int i = 0; bindVal != idList.constEnd(); ++i, ++bindVal) {
+        QStringList::const_iterator bindVal = idList.cbegin();
+        for (int i = 0; bindVal != idList.cend(); ++i, ++bindVal) {
             query.bindValue(QString(":id%1").arg(i), *bindVal);
         }
     }
@@ -1248,8 +1248,8 @@ QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions(const QSt
     if (kvpResult.isEmpty()) {
         kvpResult = kvpResultOld;
     }
-    const auto kvp_end = kvpResult.constEnd();
-    for (auto it_kvp = kvpResult.constBegin(); it_kvp != kvp_end; ++it_kvp) {
+    const auto kvp_end = kvpResult.cend();
+    for (auto it_kvp = kvpResult.cbegin(); it_kvp != kvp_end; ++it_kvp) {
         iList[it_kvp.key()].setPairs(it_kvp.value().pairs());
     }
     return iList;
@@ -1329,8 +1329,8 @@ QMap<QString, MyMoneyPayee> MyMoneyStorageSql::fetchPayees(const QStringList& id
 
     if (!idList.isEmpty()) {
         // Bind values
-        QStringList::const_iterator end = idList.constEnd();
-        for (QStringList::const_iterator iter = idList.constBegin(); iter != end; ++iter) {
+        QStringList::const_iterator end = idList.cend();
+        for (QStringList::const_iterator iter = idList.cbegin(); iter != end; ++iter) {
             query.addBindValue(*iter);
         }
     }
@@ -1507,8 +1507,8 @@ QMap<QString, onlineJob> MyMoneyStorageSql::fetchOnlineJobs(const QStringList& i
         queryIdSet.chop(2);
         query.prepare(QLatin1String("SELECT id, type, jobSend, bankAnswerDate, state, locked FROM kmmOnlineJobs WHERE id IN (") + queryIdSet + QLatin1String(");"));
 
-        QStringList::const_iterator end = idList.constEnd();
-        for (QStringList::const_iterator iter = idList.constBegin(); iter != end; ++iter) {
+        QStringList::const_iterator end = idList.cend();
+        for (QStringList::const_iterator iter = idList.cbegin(); iter != end; ++iter) {
             query.addBindValue(*iter);
         }
     }
@@ -1555,7 +1555,7 @@ payeeIdentifier MyMoneyStorageSql::fetchPayeeIdentifier(const QString& id) const
 {
     QMap<QString, payeeIdentifier> list = fetchPayeeIdentifiers(QStringList(id));
     QMap<QString, payeeIdentifier>::const_iterator iter = list.constFind(id);
-    if (iter == list.constEnd())
+    if (iter == list.cend())
         throw MYMONEYEXCEPTION(QString::fromLatin1("payeeIdentifier with id '%1' not found").arg(id)); // krazy:exclude=crashy
     return *iter;
 }
@@ -1573,8 +1573,8 @@ QMap< QString, payeeIdentifier > MyMoneyStorageSql::fetchPayeeIdentifiers(const 
         queryIdSet.chop(2);   // remove ", " from end
         query.prepare(QLatin1String("SELECT id, type FROM kmmPayeeIdentifier WHERE id IN (") + queryIdSet + QLatin1String(");"));
 
-        QStringList::const_iterator end = idList.constEnd();
-        for (QStringList::const_iterator iter = idList.constBegin(); iter != end; ++iter) {
+        QStringList::const_iterator end = idList.cend();
+        for (QStringList::const_iterator iter = idList.cbegin(); iter != end; ++iter) {
             query.addBindValue(*iter);
         }
     }
@@ -1641,8 +1641,8 @@ QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts(const QStringList
     sq.prepare(childQueryString);
 
     if (! idList.empty()) {
-        QStringList::ConstIterator bindVal = idList.constBegin();
-        for (int i = 0; bindVal != idList.constEnd(); ++i, ++bindVal) {
+        QStringList::const_iterator bindVal = idList.cbegin();
+        for (int i = 0; bindVal != idList.cend(); ++i, ++bindVal) {
             query.bindValue(QString(":id%1").arg(i), *bindVal);
             sq.bindValue(QString(":id%1").arg(i), *bindVal);
         }
@@ -1720,16 +1720,14 @@ QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts(const QStringList
     // The operator[] call in the loop is the most expensive call in this function, according
     // to several profile runs.
     QHash <QString, MyMoneyKeyValueContainer> kvpResult = d->readKeyValuePairs("ACCOUNT", kvpAccountList);
-    QHash <QString, MyMoneyKeyValueContainer>::const_iterator kvp_end = kvpResult.constEnd();
-    for (QHash <QString, MyMoneyKeyValueContainer>::const_iterator it_kvp = kvpResult.constBegin();
-            it_kvp != kvp_end; ++it_kvp) {
+    QHash<QString, MyMoneyKeyValueContainer>::const_iterator kvp_end = kvpResult.cend();
+    for (QHash<QString, MyMoneyKeyValueContainer>::const_iterator it_kvp = kvpResult.cbegin(); it_kvp != kvp_end; ++it_kvp) {
         accList[it_kvp.key()].setPairs(it_kvp.value().pairs());
     }
 
     kvpResult = d->readKeyValuePairs("ONLINEBANKING", kvpAccountList);
-    kvp_end = kvpResult.constEnd();
-    for (QHash <QString, MyMoneyKeyValueContainer>::const_iterator it_kvp = kvpResult.constBegin();
-            it_kvp != kvp_end; ++it_kvp) {
+    kvp_end = kvpResult.cend();
+    for (QHash<QString, MyMoneyKeyValueContainer>::const_iterator it_kvp = kvpResult.cbegin(); it_kvp != kvp_end; ++it_kvp) {
         accList[it_kvp.key()].setOnlineBankingSettings(it_kvp.value());
     }
 
@@ -2294,8 +2292,8 @@ QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QStringLi
     query.prepare(queryString);
 
     if (! idList.empty()) {
-        QStringList::ConstIterator bindVal = idList.constBegin();
-        for (int i = 0; bindVal != idList.constEnd(); ++i, ++bindVal) {
+        QStringList::const_iterator bindVal = idList.cbegin();
+        for (int i = 0; bindVal != idList.cend(); ++i, ++bindVal) {
             query.bindValue(QString(":id%1").arg(i), *bindVal);
         }
     }
@@ -2564,14 +2562,14 @@ MyMoneyPriceList MyMoneyStorageSql::fetchPrices(const QStringList& fromIdList, c
     query.prepare(queryString);
 
     if (! fromIdList.empty()) {
-        QStringList::ConstIterator bindVal = fromIdList.constBegin();
-        for (int i = 0; bindVal != fromIdList.constEnd(); ++i, ++bindVal) {
+        QStringList::const_iterator bindVal = fromIdList.cbegin();
+        for (int i = 0; bindVal != fromIdList.cend(); ++i, ++bindVal) {
             query.bindValue(QString(":fromId%1").arg(i), *bindVal);
         }
     }
     if (! toIdList.empty()) {
-        QStringList::ConstIterator bindVal = toIdList.constBegin();
-        for (int i = 0; bindVal != toIdList.constEnd(); ++i, ++bindVal) {
+        QStringList::const_iterator bindVal = toIdList.cbegin();
+        for (int i = 0; bindVal != toIdList.cend(); ++i, ++bindVal) {
             query.bindValue(QString(":toId%1").arg(i), *bindVal);
         }
     }
@@ -2632,7 +2630,7 @@ QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchCurrencies(const QStringL
     query.prepare(queryString);
 
     if (! idList.empty()) {
-        QStringList::ConstIterator bindVal = idList.constBegin();
+        QStringList::const_iterator bindVal = idList.cbegin();
         for (int i = 0; bindVal != idList.end(); ++i, ++bindVal) {
             query.bindValue(QString(":id%1").arg(i), *bindVal);
         }
