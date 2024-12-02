@@ -256,7 +256,7 @@ public:
         ui->m_balanceLabel->setText(
             i18n("Balance: %1%2", balanceAccurate ? QString() : QStringLiteral("~ "), balance.formatMoney(file->baseCurrency().smallestAccountFraction())));
         // only make balance visible if all transactions cover a single account
-        ui->m_balanceLabel->setVisible(accountIds.count() < 2);
+        ui->m_balanceLabel->setVisible(accountIds.size() < 2);
     }
 
     void ensureTagVisible(const QString& id)

@@ -344,7 +344,7 @@ public:
                     }
                     // in case we have transactions in multiple currencies selected,
                     // the move is not supported.
-                    pMenus[eMenu::Menu::MoveTransaction]->setDisabled(currencyIds.count() > 1);
+                    pMenus[eMenu::Menu::MoveTransaction]->setDisabled(currencyIds.size() > 1);
 
                 } else {
                     // remove those accounts from the list that do not

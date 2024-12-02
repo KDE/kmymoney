@@ -31,9 +31,9 @@ void KMMSetTest::testEmptyConstructor()
     QCOMPARE(qStringSet.size(), 0);
     QCOMPARE(stdStringSet.size(), 0);
 
-    QCOMPARE(intSet.count(), 0);
-    QCOMPARE(qStringSet.count(), 0);
-    QCOMPARE(stdStringSet.count(), 0);
+    QCOMPARE(intSet.size(), 0);
+    QCOMPARE(qStringSet.size(), 0);
+    QCOMPARE(stdStringSet.size(), 0);
 
     QCOMPARE(intSet.empty(), true);
     QCOMPARE(qStringSet.empty(), true);
@@ -51,7 +51,6 @@ void KMMSetTest::testConstructor()
     KMMSet<std::string> stdStringSet({"1", "2", "3"});
 
     QCOMPARE(intSet.size(), 3);
-    QCOMPARE(intSet.count(), 3);
     QCOMPARE(intSet.empty(), false);
     QCOMPARE(intSet.isEmpty(), false);
     QCOMPARE(intSet.count(1), 1);
@@ -60,7 +59,6 @@ void KMMSetTest::testConstructor()
     QCOMPARE(intSet.count(4), 0);
 
     QCOMPARE(qStringSet.size(), 3);
-    QCOMPARE(qStringSet.count(), 3);
     QCOMPARE(qStringSet.empty(), false);
     QCOMPARE(qStringSet.isEmpty(), false);
     QCOMPARE(qStringSet.count("1"), 1);
@@ -69,7 +67,6 @@ void KMMSetTest::testConstructor()
     QCOMPARE(qStringSet.count("4"), 0);
 
     QCOMPARE(stdStringSet.size(), 3);
-    QCOMPARE(stdStringSet.count(), 3);
     QCOMPARE(stdStringSet.empty(), false);
     QCOMPARE(stdStringSet.isEmpty(), false);
     QCOMPARE(stdStringSet.count("1"), 1);
@@ -93,21 +90,18 @@ void KMMSetTest::testCopyConstructor()
     QCOMPARE(stdStringSet1.size(), 3);
 
     QCOMPARE(intSet.size(), 3);
-    QCOMPARE(intSet.count(), 3);
     QCOMPARE(intSet.count(1), 1);
     QCOMPARE(intSet.count(2), 1);
     QCOMPARE(intSet.count(3), 1);
     QCOMPARE(intSet.count(4), 0);
 
     QCOMPARE(qStringSet.size(), 3);
-    QCOMPARE(qStringSet.count(), 3);
     QCOMPARE(qStringSet.count("1"), 1);
     QCOMPARE(qStringSet.count("2"), 1);
     QCOMPARE(qStringSet.count("3"), 1);
     QCOMPARE(qStringSet.count("4"), 0);
 
     QCOMPARE(stdStringSet.size(), 3);
-    QCOMPARE(stdStringSet.count(), 3);
     QCOMPARE(stdStringSet.count("1"), 1);
     QCOMPARE(stdStringSet.count("2"), 1);
     QCOMPARE(stdStringSet.count("3"), 1);
@@ -129,21 +123,18 @@ void KMMSetTest::testAssignmentConstructor()
     QCOMPARE(stdStringSet1.size(), 3);
 
     QCOMPARE(intSet.size(), 3);
-    QCOMPARE(intSet.count(), 3);
     QCOMPARE(intSet.count(1), 1);
     QCOMPARE(intSet.count(2), 1);
     QCOMPARE(intSet.count(3), 1);
     QCOMPARE(intSet.count(4), 0);
 
     QCOMPARE(qStringSet.size(), 3);
-    QCOMPARE(qStringSet.count(), 3);
     QCOMPARE(qStringSet.count("1"), 1);
     QCOMPARE(qStringSet.count("2"), 1);
     QCOMPARE(qStringSet.count("3"), 1);
     QCOMPARE(qStringSet.count("4"), 0);
 
     QCOMPARE(stdStringSet.size(), 3);
-    QCOMPARE(stdStringSet.count(), 3);
     QCOMPARE(stdStringSet.count("1"), 1);
     QCOMPARE(stdStringSet.count("2"), 1);
     QCOMPARE(stdStringSet.count("3"), 1);
@@ -157,21 +148,18 @@ void KMMSetTest::testDuplicateItems()
     KMMSet<std::string> stdStringSet({"1", "2", "3", "1"});
 
     QCOMPARE(intSet.size(), 3);
-    QCOMPARE(intSet.count(), 3);
     QCOMPARE(intSet.count(1), 1);
     QCOMPARE(intSet.count(2), 1);
     QCOMPARE(intSet.count(3), 1);
     QCOMPARE(intSet.count(4), 0);
 
     QCOMPARE(qStringSet.size(), 3);
-    QCOMPARE(qStringSet.count(), 3);
     QCOMPARE(qStringSet.count("1"), 1);
     QCOMPARE(qStringSet.count("2"), 1);
     QCOMPARE(qStringSet.count("3"), 1);
     QCOMPARE(qStringSet.count("4"), 0);
 
     QCOMPARE(stdStringSet.size(), 3);
-    QCOMPARE(stdStringSet.count(), 3);
     QCOMPARE(stdStringSet.count("1"), 1);
     QCOMPARE(stdStringSet.count("2"), 1);
     QCOMPARE(stdStringSet.count("3"), 1);
@@ -214,20 +202,20 @@ void KMMSetTest::testIntersect()
     qStringSet1 &= qStringSet2;
     stdStringSet1 &= stdStringSet2;
 
-    QCOMPARE(intSet1.count(), 1);
+    QCOMPARE(intSet1.size(), 1);
     QCOMPARE(intSet1.contains(2), true);
     QCOMPARE(intSet1.contains(3), false);
-    QCOMPARE(intSet2.count(), 2);
+    QCOMPARE(intSet2.size(), 2);
 
-    QCOMPARE(qStringSet1.count(), 1);
+    QCOMPARE(qStringSet1.size(), 1);
     QCOMPARE(qStringSet1.contains("2"), true);
     QCOMPARE(qStringSet1.contains("3"), false);
-    QCOMPARE(qStringSet2.count(), 2);
+    QCOMPARE(qStringSet2.size(), 2);
 
-    QCOMPARE(stdStringSet1.count(), 1);
+    QCOMPARE(stdStringSet1.size(), 1);
     QCOMPARE(stdStringSet1.contains("2"), true);
     QCOMPARE(stdStringSet1.contains("3"), false);
-    QCOMPARE(stdStringSet2.count(), 2);
+    QCOMPARE(stdStringSet2.size(), 2);
 }
 
 void KMMSetTest::testUnite()
@@ -244,23 +232,23 @@ void KMMSetTest::testUnite()
     qStringSet1.unite(qStringSet2);
     stdStringSet1.unite(stdStringSet2);
 
-    QCOMPARE(intSet1.count(), 3);
+    QCOMPARE(intSet1.size(), 3);
     QCOMPARE(intSet1.count(1), 1);
     QCOMPARE(intSet1.count(2), 1);
     QCOMPARE(intSet1.count(3), 1);
-    QCOMPARE(intSet2.count(), 2);
+    QCOMPARE(intSet2.size(), 2);
 
-    QCOMPARE(qStringSet1.count(), 3);
+    QCOMPARE(qStringSet1.size(), 3);
     QCOMPARE(qStringSet1.count("1"), 1);
     QCOMPARE(qStringSet1.count("2"), 1);
     QCOMPARE(qStringSet1.count("3"), 1);
-    QCOMPARE(qStringSet2.count(), 2);
+    QCOMPARE(qStringSet2.size(), 2);
 
-    QCOMPARE(stdStringSet1.count(), 3);
+    QCOMPARE(stdStringSet1.size(), 3);
     QCOMPARE(stdStringSet1.count("1"), 1);
     QCOMPARE(stdStringSet1.count("2"), 1);
     QCOMPARE(stdStringSet1.count("3"), 1);
-    QCOMPARE(stdStringSet2.count(), 2);
+    QCOMPARE(stdStringSet2.size(), 2);
 }
 
 void KMMSetTest::testSubtract()
@@ -277,26 +265,26 @@ void KMMSetTest::testSubtract()
     qStringSet1 -= qStringSet2;
     stdStringSet1 -= stdStringSet2;
 
-    QCOMPARE(intSet1.count(), 2);
+    QCOMPARE(intSet1.size(), 2);
     QCOMPARE(intSet1.contains(1), true);
     QCOMPARE(intSet1.contains(2), false);
     QCOMPARE(intSet1.contains(3), false);
     QCOMPARE(intSet1.contains(4), true);
-    QCOMPARE(intSet2.count(), 2);
+    QCOMPARE(intSet2.size(), 2);
 
-    QCOMPARE(qStringSet1.count(), 2);
+    QCOMPARE(qStringSet1.size(), 2);
     QCOMPARE(qStringSet1.contains("1"), true);
     QCOMPARE(qStringSet1.contains("2"), false);
     QCOMPARE(qStringSet1.contains("3"), false);
     QCOMPARE(qStringSet1.contains("4"), true);
-    QCOMPARE(qStringSet2.count(), 2);
+    QCOMPARE(qStringSet2.size(), 2);
 
-    QCOMPARE(stdStringSet1.count(), 2);
+    QCOMPARE(stdStringSet1.size(), 2);
     QCOMPARE(stdStringSet1.contains("1"), true);
     QCOMPARE(stdStringSet1.contains("2"), false);
     QCOMPARE(stdStringSet1.contains("3"), false);
     QCOMPARE(stdStringSet1.contains("4"), true);
-    QCOMPARE(stdStringSet2.count(), 2);
+    QCOMPARE(stdStringSet2.size(), 2);
 }
 
 void KMMSetTest::testValues()
@@ -309,19 +297,19 @@ void KMMSetTest::testValues()
     const auto qStringList = qStringSet1.values();
     const auto stdStringList = stdStringSet1.values();
 
-    QCOMPARE(intList.count(), 4);
+    QCOMPARE(intList.size(), 4);
     QCOMPARE(intList.contains(1), true);
     QCOMPARE(intList.contains(2), true);
     QCOMPARE(intList.contains(3), true);
     QCOMPARE(intList.contains(4), true);
 
-    QCOMPARE(qStringList.count(), 4);
+    QCOMPARE(qStringList.size(), 4);
     QCOMPARE(qStringList.contains("1"), true);
     QCOMPARE(qStringList.contains("2"), true);
     QCOMPARE(qStringList.contains("3"), true);
     QCOMPARE(qStringList.contains("4"), true);
 
-    QCOMPARE(stdStringList.count(), 4);
+    QCOMPARE(stdStringList.size(), 4);
     QCOMPARE(stdStringList.contains("1"), true);
     QCOMPARE(stdStringList.contains("2"), true);
     QCOMPARE(stdStringList.contains("3"), true);
