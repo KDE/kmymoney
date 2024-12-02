@@ -195,31 +195,23 @@ void QueryTable::init()
         m_subtotal.clear();
         switch (m_config.investmentSum()) {
         case eMyMoney::Report::InvestmentSum::OwnedAndSold:
-            m_columns << ctBuys << ctSells << ctReinvestIncome << ctCashIncome
-                      << ctEndingBalance << ctReturn << ctReturnInvestment;
-            m_subtotal << ctBuys << ctSells << ctReinvestIncome << ctCashIncome
-                       << ctEndingBalance << ctReturn << ctReturnInvestment;
+            m_columns << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingBalance << ctInternalRateOfReturn << ctReturnInvestment;
+            m_subtotal << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingBalance << ctInternalRateOfReturn << ctReturnInvestment;
             break;
         case eMyMoney::Report::InvestmentSum::Owned:
-            m_columns << ctBuys << ctReinvestIncome << ctMarketValue
-                      << ctReturn << ctReturnInvestment;
-            m_subtotal << ctBuys << ctReinvestIncome << ctMarketValue
-                       << ctReturn << ctReturnInvestment;
+            m_columns << ctBuys << ctReinvestIncome << ctMarketValue << ctInternalRateOfReturn << ctReturnInvestment;
+            m_subtotal << ctBuys << ctReinvestIncome << ctMarketValue << ctInternalRateOfReturn << ctReturnInvestment;
             break;
         case eMyMoney::Report::InvestmentSum::Sold:
-            m_columns << ctBuys << ctSells << ctCashIncome
-                      << ctReturn << ctReturnInvestment;
-            m_subtotal << ctBuys << ctSells << ctCashIncome
-                       << ctReturn << ctReturnInvestment;
+            m_columns << ctBuys << ctSells << ctCashIncome << ctInternalRateOfReturn << ctReturnInvestment;
+            m_subtotal << ctBuys << ctSells << ctCashIncome << ctInternalRateOfReturn << ctReturnInvestment;
             break;
         case eMyMoney::Report::InvestmentSum::Period:
         default:
-            m_columns << ctStartingBalance << ctBuys << ctSells
-                      << ctReinvestIncome << ctCashIncome << ctEndingBalance
-                      << ctReturn << ctReturnInvestment;
-            m_subtotal << ctStartingBalance << ctBuys << ctSells
-                       << ctReinvestIncome << ctCashIncome << ctEndingBalance
-                       << ctReturn << ctReturnInvestment;
+            m_columns << ctStartingBalance << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingBalance << ctInternalRateOfReturn
+                      << ctReturnInvestment;
+            m_subtotal << ctStartingBalance << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingBalance << ctInternalRateOfReturn
+                       << ctReturnInvestment;
             break;
         }
     }
@@ -391,8 +383,8 @@ void QueryTable::constructTotalRows()
                             if (stashedTotalRows.at(j).value(ctCurrency) != currencyID)
                                 continue;
                             for (const auto& subtotal : qAsConst(subtotals)) {
-                                if (subtotal == ctReturn)
-                                    totalsRow[ctReturn] = stashedTotalRows.takeAt(j).value(ctReturn);
+                                if (subtotal == ctInternalRateOfReturn)
+                                    totalsRow[ctInternalRateOfReturn] = stashedTotalRows.takeAt(j).value(ctInternalRateOfReturn);
                             }
                             break;
                         }
@@ -453,8 +445,8 @@ void QueryTable::constructTotalRows()
                 if (!stashedTotalRows.isEmpty()) {
                     for (int j = 0; j < stashedTotalRows.count(); ++j) {
                         for (const auto& subtotal : qAsConst(subtotals)) {
-                            if (subtotal == ctReturn)
-                                totalsRow[ctReturn] = stashedTotalRows.takeAt(j).value(ctReturn);
+                            if (subtotal == ctInternalRateOfReturn)
+                                totalsRow[ctInternalRateOfReturn] = stashedTotalRows.takeAt(j).value(ctInternalRateOfReturn);
                         }
                     }
                 }
@@ -1539,7 +1531,7 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
     }
 
     result[ctBuys] = buysTotal.toString();
-    result[ctReturn] = helperIRR(all);
+    result[ctInternalRateOfReturn] = helperIRR(all);
     result[ctReturnInvestment] = helperROI(buysTotal - reinvestIncomeTotal, sellsTotal, startingBal, endingBal, cashIncomeTotal);
     result[ctEquityType] = MyMoneySecurity::securityTypeToString(file->security(account.currencyId()).securityType());
 }
@@ -1726,7 +1718,7 @@ void QueryTable::constructAccountTable()
             // convert map of top accounts with cashflows to TableRow
             for (QMap<QString, CashFlowList>::iterator topAccount = (*currencyAccGrp).begin(); topAccount != (*currencyAccGrp).end(); ++topAccount) {
                 qtotalsrow[ctTopAccount] = topAccount.key();
-                qtotalsrow[ctReturn] = helperIRR(topAccount.value());
+                qtotalsrow[ctInternalRateOfReturn] = helperIRR(topAccount.value());
                 qtotalsrow[ctCurrency] = currencyAccGrp.key();
                 currencyGrandCashFlow[currencyAccGrp.key()] += topAccount.value();  // cumulative sum of cashflows of each topaccount
                 m_rows.append(qtotalsrow);            // rows aren't sorted yet, so no problem with adding them randomly at the end
@@ -1739,7 +1731,7 @@ void QueryTable::constructAccountTable()
         QMap<QString, CashFlowList>::iterator currencyGrp = currencyGrandCashFlow.begin();
         qtotalsrow[ctTopAccount].clear();          // empty topaccount because it's grand cashflow
         while (currencyGrp != currencyGrandCashFlow.end()) {
-            qtotalsrow[ctReturn] = helperIRR(currencyGrp.value());
+            qtotalsrow[ctInternalRateOfReturn] = helperIRR(currencyGrp.value());
             qtotalsrow[ctCurrency] = currencyGrp.key();
             m_rows.append(qtotalsrow);
             if (!m_containsNonBaseCurrency && qtotalsrow[ctCurrency] != file->baseCurrency().id()) {

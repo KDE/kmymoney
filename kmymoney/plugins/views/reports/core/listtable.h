@@ -92,7 +92,7 @@ public:
         /*Shares*/
         ctShares,
         /*Percent*/
-        ctReturn,
+        ctInternalRateOfReturn,
         ctReturnInvestment,
         ctInterestRate,
         ctPercentageGain,
