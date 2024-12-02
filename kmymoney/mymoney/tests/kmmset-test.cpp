@@ -7,6 +7,8 @@
 
 #include "kmmset-test.h"
 
+#include <string>
+
 #include <QTest>
 
 QTEST_GUILESS_MAIN(KMMSetTest)
