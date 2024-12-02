@@ -66,7 +66,7 @@ public:
     inline KMMSet& operator&=(const KMMSet& right)
     {
         for (auto it = this->begin(); it != this->end();) {
-            if (!right.count(*it))
+            if (!right.contains(*it))
                 it = this->erase(it);
             else
                 ++it;
@@ -112,12 +112,25 @@ public:
 
     inline size_t count(const T& key) const
     {
-        return this->std::unordered_set<T, _Hash>::count(key);
+        return countImpl(key);
     }
 
     inline bool contains(const T& key) const
     {
         return this->find(key) != this->end();
+    }
+
+private:
+    template<typename U = T, typename std::enable_if_t<std::is_same<U, QString>::value, int> = 0>
+    size_t countImpl(const QString& key) const
+    {
+        return this->std::unordered_set<QString>::count(key);
+    }
+
+    template<typename U = T, typename std::enable_if_t<!std::is_same<U, QString>::value, int> = 0>
+    size_t countImpl(const T& key) const
+    {
+        return this->std::unordered_set<T, _Hash>::count(key);
     }
 };
 
