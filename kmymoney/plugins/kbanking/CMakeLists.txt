@@ -6,6 +6,9 @@ if (NOT ${HAVE_REGISTRATION_FEATURE} STREQUAL "")
   add_definitions(-DENABLE_FINTS_REGISTRATION)
 endif()
 
+if ("${gwenhywfar_VERSION}" VERSION_LESS "5.11.0")
+  add_definitions(-UQT_DISABLE_DEPRECATED_BEFORE)
+endif()
 
 add_subdirectory( dialogs )
 add_subdirectory( widgets )
