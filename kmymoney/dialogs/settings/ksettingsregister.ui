@@ -332,7 +332,7 @@
            </property>
            <item>
             <property name="text">
-             <string>Not reconciled</string>
+             <string>Not marked</string>
             </property>
            </item>
            <item>
