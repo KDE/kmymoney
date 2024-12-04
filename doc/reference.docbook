@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="reference">
 <chapterinfo>
-  <date>2016-12-05</date>
-  <releaseinfo>5.0</releaseinfo>
+  <date>2024-12-01</date>
+  <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>Reference</title>
 
 <sect1 id="reference.menus">
 <sect1info>
   <author> &Roger.Lum; &Roger.Lum.mail; </author>
+  <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
 </sect1info>
 <title>Menus</title>
 
 <para>
-  Below is a complete list of the menu selections in &kmymoney;, with a very
-  brief description of what each one does.  Note that many of these menu choices
-  will be unavailable, or grayed out, depending on the current display or state
-  of the application.  For example, you are not able to edit an account unless
-  you have an account selected or displayed in the current view.
+  Below is a complete list of the menu selections in &kmymoney;, with a very brief
+  description of what each one does.  Note that many of these menu choices will be
+  unavailable, or grayed out, depending on the current display or state of the
+  application.  In addition, some may not be present if it relates to a feature not
+  included in your particular version.  For example, you are not able to edit an
+  account unless you have an account selected or displayed in the current view.
 </para>
 
-<sect2 id="reference.menus.file">
-<title>File Menu</title>
-
+<sect2 id="reference.menus.file"><title>File Menu</title>
 <variablelist>
   <varlistentry>
     <term><menuchoice>
       <shortcut>
         <keycombo>&Ctrl;<keycap>N</keycap></keycombo>
       </shortcut>
-      <guimenu>File</guimenu><guimenuitem>New</guimenuitem>
+      <guimenu>File</guimenu><guimenuitem>New book</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action> Creates a new empty &kmymoney; data file. Only one
-      &kmymoney; file can be open at once, so this will close your current file
-      first, if one is open.  </action></para>
+      <para>
+        Creates a new, empty &kmymoney; data file.  Only one &kmymoney; file can be
+        open at once, so this will close your current file first, if one is open.
+      </para>
     </listitem>
   </varlistentry>
 
@@ -47,19 +47,17 @@
       <guimenu>File</guimenu><guimenuitem>Open</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Opens an existing &kmymoney; data file.</action></para>
+      <para>Opens an existing &kmymoney; data file.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><menuchoice>
       <guimenu>File</guimenu>
-        <guimenuitem>Open Recent</guimenuitem>
-        <guimenuitem>...</guimenuitem>
+        <guimenuitem>Open Recent</guimenuitem><guimenuitem>...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Allows quick access to recently opened
-        files.</action></para>
+      <para>Provides quick access to recently opened files.</para>
     </listitem>
   </varlistentry>
 
@@ -68,7 +66,7 @@
       <guimenu>File</guimenu><guimenuitem>Open Database...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Opens an existing database.</action></para>
+      <para>Opens an existing database.</para>
     </listitem>
   </varlistentry>
 
@@ -80,9 +78,13 @@
       <guimenu>File</guimenu><guimenuitem>Save</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Saves the currently open file.</action></para>
+      <para>
+        Saves the currently open file.  Only enabled if there are any changes to
+        save.
+      </para>
     </listitem>
   </varlistentry>
+
 
   <varlistentry>
     <term><menuchoice>
@@ -92,18 +94,7 @@
       <guimenu>File</guimenu><guimenuitem>Save As...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Saves the currently open file with a different
-        filename.</action></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><menuchoice>
-    <guimenu>File</guimenu><guimenuitem>Save As Database...</guimenuitem>
-  </menuchoice></term>
-    <listitem>
-      <para><action>Saves the currently open file in a <link
-        linkend="details.database">Database</link>.</action></para>
+      <para>Saves the currently open file with a different filename.</para>
     </listitem>
   </varlistentry>
 
@@ -114,9 +105,11 @@
         <guimenuitem>...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Imports financial data from other file types, such as QIF
-        and &gnucash;, or a template file of accounts and categories that can be
-        used in setting up new accounts.</action></para>
+      <para>
+        Imports financial data from other file types, such as QIF and &gnucash;, or a
+        template file of accounts and categories that can be used in setting up new
+        accounts.
+      </para>
     </listitem>
   </varlistentry>
 
@@ -127,9 +120,10 @@
         <guimenuitem>...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Exports the current file as a different file type, such as
-        QIF, or exports a list of your accounts and categories as an template.
-        </action></para>
+      <para>
+        Exports the current file as a different file type, such as QIF, or exports a
+        list of your accounts and categories as a template.
+      </para>
     </listitem>
   </varlistentry>
 
@@ -138,41 +132,40 @@
       <shortcut>
         <keycombo>&Ctrl;<keycap>P</keycap></keycombo>
       </shortcut>
-      <guimenu>File</guimenu><guimenuitem>Print</guimenuitem>
+      <guimenu>File</guimenu><guimenuitem>Print...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Prints the current file.</action></para>
+      <para>Prints the current file.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><menuchoice>
-      <guimenu>File</guimenu><guimenuitem>Backup</guimenuitem>
+      <guimenu>File</guimenu><guimenuitem>Backup...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Saves a backup the current file.</action></para>
+      <para>Saves a backup the current file.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><menuchoice>
-      <guimenu>File</guimenu><guimenuitem>Personal Data</guimenuitem>
+      <guimenu>File</guimenu><guimenuitem>Personal Data...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Allows to edit personal data.</action></para>
+      <para>Allows to edit personal data.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><menuchoice>
-      <guimenu>File</guimenu><guimenuitem>File information</guimenuitem>
+      <guimenu>File</guimenu><guimenuitem>File information...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Displays information about the currently open &kmymoney;
-        file.</action></para>
+      <para>Displays information about the currently open &kmymoney; file.</para>
     </listitem>
   </varlistentry>
-  <!--Dump Memory what i sthis?-->
+
   <varlistentry>
     <term><menuchoice>
       <shortcut>
@@ -181,7 +174,7 @@
       <guimenu>File</guimenu><guimenuitem>Close</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Closes the current file.</action></para>
+      <para>Closes the currently open data file.</para>
     </listitem>
   </varlistentry>
 
@@ -193,33 +186,60 @@
       <guimenu>File</guimenu><guimenuitem>Quit</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Quit &kmymoney;.</action></para>
+      <para>
+        Quits &kmymoney;.  Offers to save the currenly open data file, if there are
+        any changes.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.edit">
-<title>Edit Menu</title>
+<sect2 id="reference.menus.edit"><title>Edit Menu</title>
+<variablelist>
+  <varlistentry>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;<keycap>Z</keycap></keycombo>
+      </shortcut>
+      <guimenu>Edit</guimenu><guimenuitem>Undo</guimenuitem>
+    </menuchoice></term>
+    <listitem>
+      <para>Reverses the most recent action.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
 
 <variablelist>
   <varlistentry>
     <term><menuchoice>
       <shortcut>
-        <keycombo>&Ctrl;<keycap>F</keycap></keycombo>
+        <keycombo>&Ctrl;&Shift;<keycap>Z</keycap></keycombo>
+      </shortcut>
+      <guimenu>Edit</guimenu><guimenuitem>Redo</guimenuitem>
+    </menuchoice></term>
+    <listitem>
+      <para>Re-applies the most recently undone action.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<variablelist>
+  <varlistentry>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;&Shift;<keycap>F</keycap></keycombo>
       </shortcut>
       <guimenu>Edit</guimenu><guimenuitem>Find transaction...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Search transactions.</action></para>
+      <para>Searches transactions.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.view">
-<title>View Menu</title>
-
+<sect2 id="reference.menus.view"><title>View Menu</title>
 <variablelist>
   <varlistentry id="reference.menus.settings.transactiondetail">
     <term><menuchoice>
@@ -230,15 +250,15 @@
         <guimenuitem>Show Transaction Detail</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>
-        Shows transaction details in the <link
-        linkend="details.ledgers">Ledger</link> view.  With this option turned
-        on, all lines of the transaction will be shown in the ledger.  When it
-        is turned off, only one line will be shown.
-      </action></para>
       <para>
-        If you only want to see details for the currently selected transaction,
-        but only one line for the others, you can turn on the <link
+        Shows transaction details in the <link
+        linkend="details.ledgers">Ledgers</link> View.  With this option turned on,
+        all lines of the transaction will be shown.  When it is turned off, only one
+        line will be shown.
+      </para>
+      <para>
+        If you only want to see details for the currently selected transaction, but
+        only one line for the others, you can turn on the <link
         linkend="details.settings.register.lens">Ledger Lens</link>.
       </para>
     </listitem>
@@ -253,8 +273,7 @@
         <guimenuitem>Hide reconciled transactions</guimenuitem>
       </menuchoice></term>
     <listitem>
-      <para><action>Hides reconciled transactions on the
-        register.</action></para>
+      <para>Hides reconciled transactions in the ledger.</para>
     </listitem>
   </varlistentry>
 
@@ -267,29 +286,28 @@
         <guimenuitem>Hide unused categories</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Hides unused categories in the views.</action></para>
+      <para>Hides unused categories in the views.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><menuchoice>
       <shortcut>
-        <keycombo>
-          &Ctrl;&Shift;<keycap>A</keycap>
-        </keycombo>
+        <keycombo>&Ctrl;&Shift;<keycap>A</keycap></keycombo>
       </shortcut>
       <guimenu>View</guimenu><guimenuitem>Show all accounts</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Shows all accounts in the views.</action></para>
+      <para>
+        Shows all accounts in the views, including closed accounts and accounts with
+        zero balance.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.institution">
-<title>Institution Menu</title>
-
+<sect2 id="reference.menus.institution"><title>Institution Menu</title>
 <variablelist>
   <varlistentry>
     <term><menuchoice>
@@ -297,7 +315,7 @@
         <guimenuitem>New institution...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Add a new institution.</action></para>
+      <para>Add a new institution.</para>
     </listitem>
   </varlistentry>
 
@@ -307,7 +325,7 @@
         <guimenuitem>Edit institution...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Edit an institution.</action></para>
+      <para>Edit an institution.</para>
     </listitem>
   </varlistentry>
 
@@ -317,15 +335,13 @@
         <guimenuitem>Delete institution...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Delete an institution.</action></para>
+      <para>Delete an institution.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.account">
-<title>Account Menu</title>
-
+<sect2 id="reference.menus.account"><title>Account Menu</title>
 <variablelist>
   <varlistentry>
     <term><menuchoice>
@@ -333,7 +349,7 @@
         <guimenuitem>New account...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Adds a new account.</action></para>
+      <para>Adds a new account.</para>
     </listitem>
   </varlistentry>
 
@@ -342,7 +358,7 @@
       <guimenu>Account</guimenu><guimenuitem>Edit account...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Edits an account.</action></para>
+      <para>Edits an account.</para>
     </listitem>
   </varlistentry>
 
@@ -351,7 +367,7 @@
       <guimenu>Account</guimenu><guimenuitem>Delete account...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Deletes an account.</action></para>
+      <para>Deletes an account.</para>
     </listitem>
   </varlistentry>
 
@@ -360,31 +376,28 @@
       <guimenu>Account</guimenu><guimenuitem>Open ledger</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Displays the ledger view of an account.</action></para>
+      <para>Displays the Ledgers View of the selected account.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><menuchoice>
       <shortcut>
-        <keycombo>
-          &Ctrl;&Shift;<keycap>R</keycap>
-        </keycombo>
+        <keycombo>&Ctrl;&Shift;<keycap>R</keycap></keycombo>
       </shortcut>
       <guimenu>Account</guimenu><guimenuitem>Reconcile...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Reconciles an account through the reconciliation
-        wizard.</action></para>
+      <para>Reconciles an account through the reconciliation wizard.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><menuchoice>
-      <guimenu>Account</guimenu><guimenuitem>Postpone reconciliation</guimenuitem>
+      <guimenu>Account</guimenu><guimenuitem>Postpone</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Postpones reconciliation of an account.</action></para>
+      <para>Postpones reconciliation of an account.</para>
     </listitem>
   </varlistentry>
 
@@ -393,7 +406,16 @@
       <guimenu>Account</guimenu><guimenuitem>Finish</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Finishes reconciliation of an account.</action></para>
+      <para>Finishes reconciliation of an account.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><menuchoice>
+      <guimenu>Account</guimenu><guimenuitem>Cancel</guimenuitem>
+    </menuchoice></term>
+    <listitem>
+      <para>Cancels reconciliation of an account.</para>
     </listitem>
   </varlistentry>
 
@@ -402,7 +424,16 @@
       <guimenu>Account</guimenu><guimenuitem>Transaction report</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Opens a transaction report of an account.</action></para>
+      <para>Opens a transaction report of the selected account.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><menuchoice>
+      <guimenu>Account</guimenu><guimenuitem>Show balance chart...</guimenuitem>
+    </menuchoice></term>
+    <listitem>
+      <para>Opens a YTD (Year to date) chart of the balance of the selected account.</para>
     </listitem>
   </varlistentry>
 
@@ -411,7 +442,7 @@
       <guimenu>Account</guimenu><guimenuitem>Close account</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Closes an account.</action></para>
+      <para>Closes an account.</para>
     </listitem>
   </varlistentry>
 
@@ -420,25 +451,25 @@
       <guimenu>Account</guimenu><guimenuitem>Reopen account</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Reopens an account, if closed.</action></para>
+      <para>Reopens an account, if closed.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><menuchoice>
-      <guimenu>Account</guimenu><guimenuitem>Unmap account</guimenuitem>
+      <guimenu>Account</guimenu><guimenuitem>Unmap account...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Unmaps an online account.</action></para>
+      <para>Unmaps an online account.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><menuchoice>
-      <guimenu>Account</guimenu><guimenuitem>Map to online account</guimenuitem>
+      <guimenu>Account</guimenu><guimenuitem>Map account...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Maps an account to an online account.</action></para>
+      <para>Maps an account to an online account.</para>
     </listitem>
   </varlistentry>
 
@@ -447,8 +478,7 @@
       <guimenu>Account</guimenu><guimenuitem>Update account...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Imports transactions from online banking for an
-        account.</action></para>
+      <para>Imports transactions from online banking for the selected account.</para>
     </listitem>
   </varlistentry>
 
@@ -458,24 +488,20 @@
         <guimenuitem>Update all accounts...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Import transactions from online banking for all
-        accounts.</action></para>
+      <para>Import transactions from online banking for all mapped accounts.</para>
     </listitem>
   </varlistentry>
-  <!--New credit transfer-->
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.category">
-<title>Category Menu</title>
-
+<sect2 id="reference.menus.category"><title>Category Menu</title>
 <variablelist>
   <varlistentry>
     <term><menuchoice>
       <guimenu>Category</guimenu><guimenuitem>New category...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Adds a new category.</action></para>
+      <para>Adds a new category.</para>
     </listitem>
   </varlistentry>
 
@@ -484,7 +510,7 @@
       <guimenu>Category</guimenu><guimenuitem>Edit category...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Edits a category.</action></para>
+      <para>Edits a category.</para>
     </listitem>
   </varlistentry>
 
@@ -493,7 +519,7 @@
       <guimenu>Category</guimenu><guimenuitem>Delete category...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Deletes a category.</action></para>
+      <para>Deletes a category.</para>
     </listitem>
   </varlistentry>
 
@@ -502,124 +528,138 @@
       <guimenu>Category</guimenu><guimenuitem>Open ledger</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Displays the ledger view of a category.</action></para>
+      <para>Displays the Ledgers View of a category.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.transaction">
-<title>Transaction Menu</title>
-
+<sect2 id="reference.menus.transaction"><title>Transaction Menu</title>
 <variablelist>
   <varlistentry>
     <term><menuchoice>
       <shortcut>
         <keycombo>&Ctrl;&Ins;</keycombo>
       </shortcut>
-      <guimenu>Transaction</guimenu><guimenuitem>New</guimenuitem>
+      <guimenu>Transaction</guimenu><guimenuitem>New transaction</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Adds a new transaction.</action></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><menuchoice>
-      <guimenu>Transaction</guimenu><guimenuitem>Edit</guimenuitem>
-    </menuchoice></term>
-    <listitem>
-      <para><action>Edits a transaction.</action></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><menuchoice>
-      <guimenu>Transaction</guimenu><guimenuitem>Edit splits</guimenuitem>
-    </menuchoice></term>
-    <listitem>
-      <para><action>Edits the splits of a transaction.</action></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><menuchoice>
-      <guimenu>Transaction</guimenu><guimenuitem>Delete</guimenuitem>
-    </menuchoice></term>
-    <listitem>
-      <para><action>Deletes a transaction.</action></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><menuchoice>
-      <guimenu>Transaction</guimenu><guimenuitem>Duplicate</guimenuitem>
-    </menuchoice></term>
-    <listitem>
-      <para><action>Duplicates a transaction.</action></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><menuchoice>
-      <guimenu>Transaction</guimenu>
-        <guimenuitem>Mark transaction as ...</guimenuitem>
-        <guimenuitem>Not Reconciled</guimenuitem>
-    </menuchoice></term>
-    <listitem>
-      <para><action>Changes a transaction to Not Reconciled
-        status.</action></para>
+      <para>Adds a new transaction.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><menuchoice>
       <shortcut>
-        <keycombo>
-          &Ctrl;&Alt;&Space;
-        </keycombo>
+        <keycombo>&Ctrl;<keycap>E</keycap></keycombo>
+      </shortcut>
+      <guimenu>Transaction</guimenu><guimenuitem>Edit</guimenuitem>
+    </menuchoice></term>
+    <listitem>
+      <para>Edits a transaction.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;&Shift;<keycap>E</keycap></keycombo>
+      </shortcut>
+      <guimenu>Transaction</guimenu><guimenuitem>Edit splits</guimenuitem>
+    </menuchoice></term>
+    <listitem>
+      <para>Edits the splits of a transaction.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;&Del;</keycombo>
+      </shortcut>
+      <guimenu>Transaction</guimenu><guimenuitem>Delete</guimenuitem>
+    </menuchoice></term>
+    <listitem>
+      <para>Deletes a transaction.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;<keycap>D</keycap></keycombo>
+      </shortcut>
+      <guimenu>Transaction</guimenu><guimenuitem>Duplicate</guimenuitem>
+    </menuchoice></term>
+    <listitem>
+      <para>Duplicates a transaction.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;&Alt;&Shift;&Space;</keycombo>
+      </shortcut>
+      <guimenu>Transaction</guimenu>
+        <guimenuitem>Mark transaction as ...</guimenuitem>
+        <guimenuitem>Not Reconciled</guimenuitem>
+    </menuchoice></term>
+    <listitem>
+      <para>
+        Changes the status of the selected transaction(s) to Not Reconciled status.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;&Alt;&Space;</keycombo>
       </shortcut>
       <guimenu>Transaction</guimenu>
         <guimenuitem>Mark transaction as ...</guimenuitem>
         <guimenuitem>Cleared</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Changes a transaction to Cleared status.</action></para>
+      <para> Changes the status of the selected transaction(s) to Cleared.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><menuchoice>
       <shortcut>
-        <keycombo>
-          &Ctrl;&Shift;&Space;
-        </keycombo>
+        <keycombo>&Ctrl;&Shift;&Space;</keycombo>
       </shortcut>
       <guimenu>Transaction</guimenu>
         <guimenuitem>Mark transaction as ...</guimenuitem>
         <guimenuitem>Reconciled</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Changes a transaction to Reconciled status.</action></para>
+      <para>Changes the status of the selected transaction(s) to Reconciled.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><menuchoice>
-      <guimenu>Transaction</guimenu><guimenuitem>Go to account</guimenuitem>
+      <guimenu>Transaction</guimenu><guimenuitem>Go to "account"</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Displays the other account of a transaction.</action></para>
+      <para>Displays the other account of a transaction in the Ledger.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;&Shift;<keycap>P</keycap></keycombo>
+      </shortcut>
       <guimenu>Transaction</guimenu><guimenuitem>Go to payee</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Displays the Payee view and focuses on the payee of the
-        selected transaction.</action></para>
+      <para>
+        Displays the Payees View and focuses on the payee of the selected transaction.
+      </para>
     </listitem>
   </varlistentry>
 
@@ -629,7 +669,10 @@
         <guimenuitem>Create scheduled transaction...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Creates a new scheduled transaction.</action></para>
+      <para>
+        Creates a new scheduled transaction using the details of the selected
+        transaction.
+      </para>
     </listitem>
   </varlistentry>
 
@@ -638,7 +681,10 @@
       <guimenu>Transaction</guimenu><guimenuitem>Match</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Matches imported transactions.</action></para>
+      <para>
+        Matches two transactions.  This is most commonly used to match an imported
+        and a manually entered transaction, but other combinations also work.
+      </para>
     </listitem>
   </varlistentry>
 
@@ -648,9 +694,9 @@
     </menuchoice></term>
     <listitem>
       <para>
-        <action>Unmatches a transactions that &kmymoney; has proposed
-        as a match of imported transactions.</action> Note that this
-        menu choice is only present if a matched transaction exists.
+        Unmatches a transaction that &kmymoney; has proposed as a match of imported
+        transactions.  Note that this menu choice is only present if a matched
+        transaction exists and is selected.
       </para>
     </listitem>
   </varlistentry>
@@ -660,8 +706,7 @@
       <guimenu>Transaction</guimenu><guimenuitem>Accept</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Accepts a proposed merge of imported
-        transactions.</action></para>
+      <para>Accepts a proposed merge of two transactions.</para>
     </listitem>
   </varlistentry>
 
@@ -673,7 +718,7 @@
       <guimenu>Transaction</guimenu><guimenuitem>Select all</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Selects all transactions on the register.</action></para>
+      <para>Selects all transactions in the ledger.</para>
     </listitem>
   </varlistentry>
 
@@ -683,38 +728,24 @@
     </menuchoice></term>
     <listitem>
       <para>
-        <action>Prints the contents of the selected transaction in the displayed
-        register, formatted according to the selected template.</action> Note
-        that this menu choice is only present if a transaction is selected in
-        the register.  See the section on configuring the <link
-        linkend="details.settings.plugins">Print check</link> plugin for more
-        information.
+        Prints the contents of the selected transaction in the displayed ledger,
+        formatted according to the selected template.  See the section on configuring
+        the <link linkend="details.settings.plugins">Print check</link> plugin for
+        more information.
       </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.tools">
-<title>Tools Menu</title>
-
+<sect2 id="reference.menus.tools"><title>Tools Menu</title>
 <variablelist>
-  <varlistentry>
-    <term><menuchoice>
-      <guimenu>Tools</guimenu><guimenuitem>QIF Profile Editor...</guimenuitem>
-    </menuchoice></term>
-    <listitem>
-      <para><action>Modifies the QIF profile used to import or export QIF
-        files.</action></para>
-    </listitem>
-  </varlistentry>
-
   <varlistentry>
     <term><menuchoice>
       <guimenu>Tools</guimenu><guimenuitem>Currencies...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Lists the currencies known to &kmymoney;.</action></para>
+      <para>Lists the currencies known to &kmymoney;.</para>
     </listitem>
   </varlistentry>
 
@@ -723,7 +754,7 @@
       <guimenu>Tools</guimenu><guimenuitem>Prices...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Lists stock and currency prices.</action></para>
+      <para>Lists stock and currency prices.</para>
     </listitem>
   </varlistentry>
 
@@ -733,9 +764,11 @@
       <guimenuitem>Update Stock and Currency Prices...</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Updates stock and currency prices from online sources using
-        the <link linkend="details.investments.onlinequotes">Online Price
-        Quotes</link> feature.</action></para>
+      <para>
+        Updates stock and currency prices from online sources using the <link
+        linkend="details.investments.onlinequotes">Online Price Quotes</link>
+        feature.
+      </para>
     </listitem>
   </varlistentry>
 
@@ -744,8 +777,10 @@
       <guimenu>Tools</guimenu><guimenuitem>Consistency Check</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Runs a check on your file and tries to fix any problem it
-        finds, if possible.</action></para>
+      <para>
+        Runs a check on your file, fixes any problems it can, and displayes a report
+        of the results.
+      </para>
       <para>Make a backup of your file before running this option.</para>
     </listitem>
   </varlistentry>
@@ -755,22 +790,36 @@
       <guimenu>Tools</guimenu><guimenuitem>Performance-Test</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Runs a performance test on your file and displays the
-        results.</action></para>
+      <para>Runs a performance test on your file and displays the results.</para>
     </listitem>
   </varlistentry>
-  <!--Generate Database SQL
-  Debug Traces
-  Debug Timers-->
+
+  <varlistentry>
+    <term><menuchoice>
+      <guimenu>Tools</guimenu><guimenuitem>Generate Database SQL</guimenuitem>
+    </menuchoice></term>
+    <listitem>
+      <para>Generates the SQL necessary to create a database.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><menuchoice>
+      <guimenu>Tools</guimenu><guimenuitem>Debug timers</guimenuitem>
+    </menuchoice></term>
+    <listitem>
+      <para>This is a tool for developers.</para>
+    </listitem>
+  </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.settings.help">
-<title>Settings and Help Menu</title>
-
-<para>&kmymoney; has the default &kde; Settings and Help menu as described in the
-<ulink url="help:/fundamentals/menus.html">&kde; Fundamentals</ulink>
-with one additional entry:</para>
+<sect2 id="reference.menus.settings.help"><title>Settings and Help Menus</title>
+<para>
+  The Settings and Help menus of &kmymoney; are based on those described in <ulink
+  url="help:/fundamentals/menus.html">&kde; Fundamentals</ulink> with some additional
+  items.
+</para>
 
 <variablelist>
   <varlistentry>
@@ -778,31 +827,93 @@ with one additional entry:</para>
       <guimenu>Settings</guimenu><guimenuitem>Enable all messages</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Re-enables any messages you may have turned off by checking
+      <para>Re-enables any messages you may have turned off by checking
         <guimenuitem>Don't tell me about this again</guimenuitem> in a dialog
-        box.</action></para>
+        box.</para>
     </listitem>
   </varlistentry>
+
   <varlistentry>
+    <term><menuchoice>
+      <guimenu>Settings</guimenu><guimenuitem>Configure Language...</guimenuitem>
+    </menuchoice></term>
+    <listitem>
+      <para>
+        By default, the language used by &kmymoney; depends on the system wide
+        seettings for location or locale.  This allows you to change that language,
+        and to set a fallback language, which is used for text whic has not been
+        translated into the primary language.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;&Alt;<keycap>,</keycap></keycombo>
+      </shortcut>
+      <guimenu>Settings</guimenu><guimenuitem>Configure Keyboard Shortcuts...</guimenuitem>
+    </menuchoice></term>
+    <listitem>
+      <para>
+        Allows you to add or modify keyboard shortcuts for various actions.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <!-- FIXME: There is some overlap between here and the KBanking Plugin section.
+              Better coordination would be good. -->
     <term><menuchoice>
       <guimenu>Settings</guimenu><guimenuitem>Configure Aqbanking</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Configure online banking settings</action>, see
-        <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F">How do I configure online banking</ulink>
-        for further details.
+      <para>
+        Configure online banking settings, but only if the KBanking module is
+        enabled.  More information may be found in the section on configuring the
+        <link linkend="details.settings.plugins.kbanking">KBanking plugin</link> as
+        well as in the <ulink
+        url="https://www.gnucash.org/docs/v5/C/gnucash-manual/tools-on-line-banking.html#tool-
+        aqb-modules">&gnucash; documentation</ulink>.
       </para>
-      <para>Note that this menu selection is only available if the KBanking
-        module is enabled. See the section on configuring the
-        <link linkend="details.settings.plugins.kbanking">KBanking plugin</link>
-        for more information.
+
+      <para>
+        The process of setting up online access in AqBanking is described in <ulink
+        url="https://wiki.gnucash.org/wiki/De/Onlinebanking-Einrichtungsassistent">the
+        &gnucash; wiki (German only)</ulink>.  This menu entry brings you to the
+        dialog shown in step #3.  The process until step #18 is the same for
+        KMyMoney.  Once done, you can map the account in &kmymoney; using
+        <guimenu>Account</guimenu> <guisubmenu>Map account</guisubmenu> and select
+        the account from the list provided.  From there, simply use
+        <guimenu>Account</guimenu> <guisubmenu>Update account</guisubmenu>, or in
+        case you have more than one online account mapped <guimenu>Account</guimenu>
+        <guisubmenu>Update all accounts</guisubmenu>.
+      </para>
+
+      <para>
+        See <ulink
+        url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F">How
+        do I configure online banking</ulink> for further details.
       </para>
     </listitem>
   </varlistentry>
 
+  <varlistentry>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;&Alt;<keycap>I</keycap></keycombo>
+      </shortcut>
+      <guimenu>Help</guimenu><guimenuitem>Find Action...</guimenuitem>
+    </menuchoice></term>
+    <listitem>
+      <para>
+        Displays the names and shortcuts of all actions in &kmymoney;.  Clicking on
+        one will invoke that action, if it is currently enabled.
+      </para>
+    </listitem>
+  </varlistentry>
 </variablelist>
 </sect2>
-
 </sect1>
 
 &details-widgets;

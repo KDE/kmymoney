@@ -3,334 +3,454 @@
 <chapterinfo>
   <authorgroup>
     <author> &Roger.Lum; &Roger.Lum.mail; </author>
-    <author>
-      <personname><firstname>Michael</firstname><surname>Carpino</surname></personname>
-      <email>mfcarpino@gmail.com</email>
-    </author>
+    <author>&Michael.Carpino; &Michael.Carpino.mail;</author>
     <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2019-03-31</date>
-  <releaseinfo>5.0.3</releaseinfo>
+  <date>2024-12-01</date>
+  <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>&kmymoney; Settings</title>
 
 <para>
-   The settings described below modify the behavior of &kmymoney;, allowing you
-   to customize it to meet the needs of your unique financial affairs, and to
-   modify its look and feel to match your personality.  These settings can be
-   changed through <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-   &kmymoney;...</guimenuitem></menuchoice> menu item or by using the keyboard
-   shortcut <keycombo action="simul">&Ctrl; &Shift;<keycap>,</keycap></keycombo>.
-   In order for any changes to take effect the <guibutton>Apply</guibutton>
-   button must be clicked.
+  The settings described in this chapter modify the behavior of &kmymoney;, allowing
+  you to customize it to meet the needs of your unique financial affairs, and to
+  modify its look and feel to match your personality.  These settings can be changed
+  through the <menuchoice> <guimenu>Settings</guimenu> <guimenuitem>Configure
+  &kmymoney;...</guimenuitem> </menuchoice> menu item or by using the keyboard
+  shortcut <keycombo action="simul">&Ctrl; &Shift;<keycap>,</keycap></keycombo>.  In
+  order for any changes to take effect the <guibutton>Apply</guibutton> button must
+  be clicked.
 </para>
 
 <para>
-    On the left of the settings dialog is a list of icons and labels, each
-    representing a particular area of the program.  When you click on one of
-    those icons, the right part of the dialog will display controls for
-    configuring that area of the program, often divided into several tabs.
+  On the left of the <guilabel>Configure</guilabel> or settings dialog is a list of
+  icons and labels, each representing a particular area of the program.  When you
+  click one of those icons, the right part of the dialog will display controls for
+  configuring that area of the program, often divided into several tabs.
 </para>
 
-<sect1 id="details.settings.general">
-<title>General</title>
+<sect1 id="details.settings.general"><title>General</title>
 
-<sect2 id="details.settings.general.global">
-<title>Global tab</title>
+<sect2 id="details.settings.general.global"><title>Global tab</title>
+<screenshot>
+  <screeninfo>KMyMoney configuration, general, global tab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_general_global.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>KMyMoney configuration, general, global tab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
+<!-- FIXME: I would prefer a more consistent hierarchy and use of levels here, such
+     as with using sectX and variablelist.  For now, I minimize layout changes. -->
 <variablelist>
   <varlistentry>
     <term><guilabel>Autosave options</guilabel></term>
-<!-- I would prefer to use a more consistent hierarchy and use of levels on this
-     page, but for now, I'm minimizing changes. -->
     <listitem>
-      <para>Checking the <guilabel>Autosave periodically</guilabel> box instructs
-      &kmymoney; to autosave your files at a defined interval.  The default value is
-      10 minutes.  You can change this setting from 0 (backup immediately after
-      entering a transaction) up to 60 minutes.</para>
+      <para>
+        An autosave file is just a copy of your data file.  The main point of these
+        is that they are automatically created, according to the configuration
+        settings, so you do not need to remember to take any action.  Any autosave
+        files created will be in the same directory as the data file currently open.
+      </para>
 
-      <para>Checking the <guilabel>Autosave when file is modified upon close</guilabel> box
-      instructs &kmymoney; to autosave your file when the program is closed. You also have the
-      option upon closing the program to backup your &kmymoney; file.  The Number of backup to
-      keep can be set at 0 (Off) upto to 20 backups.  Any backup files will be stored in the same
-      folder as the main file.  They will be labeled sequentially with 1 being the most current.</para>
+      <para>
+        Checking the <guilabel>Autosave periodically</guilabel> box instructs
+        &kmymoney; to automatically save your file at the interval defined by the
+        <guilabel>minutes</guilabel> field.  The default value is 10 minutes.  You
+        can change this setting from 0 (autosave immediately after entering a
+        transaction) up to 60 minutes.
+      </para>
+
+      <para>
+        Checking the <guilabel>Autosave when file is modified upon close</guilabel>
+        box instructs &kmymoney; to autosave your file when the program is closed,
+        but only if any changes have been made.  You also have the option upon
+        closing the program to backup your &kmymoney; file.
+      </para>
+
+      <para>
+        The <guilabel>Number of backup to keep</guilabel> can be set from 0 (Off) up
+        to to 20.  The autosave files will be stored in the same folder as the main
+        file.  If your data file is MyFinances.kmy, then when an autosave file is
+        created, it will be called MyFinances.kmy.1~.  Any existing autosave files
+        will have their number increased by 1, up to the specified number.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Fiscal Year</guilabel></term>
     <listitem>
-      <para>Enter the day and month of your fiscal year.  This value is used for
-      budgets and some reports.</para>
+      <para>
+        &kmymoney; allows you to specify a fiscal year different from the calendar
+        year.  To do so, enter the day and month on which your fiscal year begins.
+        This value is used for budgets and some reports.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>External programs</guilabel></term>
     <listitem>
-      <para>This setting does not directly affect the operation of &kmymoney;,
-      but provides a convenient way to launch any external utility, such as an
-      advanced calculator.  The first step is to enter the full path to your
-      chosen program in the <guilabel>Calculator</guilabel> text box.  There are
-      then two ways to launch the program.</para>
-      <para>First, you can use
-      <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-      Toolbars...</guimenuitem></menuchoice> menu item to place the
-      <guilabel>Calculator</guilabel> icon on the Toolbar.  Then, when you click
-      that icon on the Toolbar, &kmymoney; will launch the selected
-      application.</para>
-      <!-- FIXME since the Settings menu is deferred to the Frameworks docs and
-           not explicitly described in this manual, it would at least be nice to
-           refer to the actual Calculator icon here, but I cannot find the
-           source png.  It might also be nice to have a link to Settings Menu
-           doc page. -->
-      <para>Second, you can use
-      <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-      Shortcuts...</guimenuitem></menuchoice> menu item to set a custom keyboard
-      shortcut. (The entry is under &kmymoney;/Calculator in that list.)  You can
-      then use that shortcut to launch the application.</para>
-      <!-- FIXME is not currently possible to launch the calculator from some menu
-           item.  I have filed a wishlist, and when implemented, it should be
-           described here, probably as the first choice. -->
       <para>
+        This setting does not directly affect the operation of &kmymoney;, but
+        provides a convenient way to launch any external utility, such as an advanced
+        calculator.  The first step is to enter the full path to your chosen program
+        in the <guilabel>Calculator</guilabel> text box.
+      </para>
+
+      <para>
+        There is currently no direct menu item to launch the calculator, or whatever
+        external program you have set.  There are then two ways to launch the program.
+      </para>
+
+      <para>
+        First, you can use <guimenu>Settings</guimenu> <guimenuitem>Configure
+        Toolbars...</guimenuitem> menu item to place the <guiicon>
+        <inlinemediaobject> <imageobject> <imagedata
+        fileref="icon-accessories-calculator.svg" format="SVG"/> </imageobject>
+        </inlinemediaobject> </guiicon> Calculator icon on the Toolbar.  Then, when
+        you click that icon on the Toolbar, &kmymoney; will launch the selected
+        application.
+      </para>
+
+      <para>
+        Second, you can use <guimenu>Settings</guimenu> <guimenuitem>Configure
+        Shortcuts...</guimenuitem> menu item to set a custom keyboard shortcut. (The
+        entry is under &kmymoney;/Calculator in that list.)  You can then use that
+        shortcut to launch the application.
       </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="details.settings.general.views">
-<title>Views tab</title>
+<sect2 id="details.settings.general.views"><title>Views tab</title>
+<screenshot>
+  <screeninfo>KMyMoney configuration, general, views tab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_general_views.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>KMyMoney configuration, general, views tab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <variablelist>
   <varlistentry>
     <term><guilabel>Startup page options</guilabel></term>
     <listitem>
-      <para>When &kmymoney; starts up, this option indicates whether to start
-      with the Home View or with the view displayed when the program was last
-      closed.</para>
+      <para>
+        When &kmymoney; starts up, this option indicates whether to start with the
+        Home View (<guilabel>Start with homepage</guilabel>) or with the view
+        displayed when the program was last closed (<guilabel>Start with last
+        selected view</guilabel>.)
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
   <term><guilabel>Type of the &kmymoney; view</guilabel></term>
     <listitem>
-      <para> You can select one of three general layouts for &kmymoney; to use.  If
-      you select the List or Tree view, the icons and their labels will be located at
-      the left side of the window.  The List view displays larger icons while the Tree
-      view has smaller icons.  The Tabbed view locates the icons and labels across
-      the top of the window.</para>
+      <para>
+        This lets you select one of three layouts for the View Selector, where you
+        choose Selecting <guilabel>List</guilabel> or <guilabel>Tree</guilabel> view,
+        the icons and their labels will be located at the left side of the window.
+        The List view displays larger icons above the name of each view, while the
+        Tree view has smaller icons to the left of the names.  The
+        <guilabel>Tabbed</guilabel> view locates the icons and labels in tabs across
+        the top of the window.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term><guilabel>Show title bar on each page</guilabel></term>
+    <term>
+      <guilabel>
+        Synchronize account selection of Ledgers View and Investments View
+      </guilabel>
+    </term>
     <listitem>
-      <para>Checking this box will display the blue &kmymoney; title bar across the
-      top of each page.  Unchecking it will remove the title bar and provide a larger
-      area for viewing the content of each page.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Synchronize account selection of ledger and investment
-    view</guilabel></term>
-    <listitem>
-      <para>If this option is selected, the accounts displayed in the Ledger View and
-      Investment View will be synchronized, meaning if you change the account
-      displayed in one of the views, and then switch to the other view, the
-      information for the same account will be displayed.  This increases the
-      efficiency of navigating between these 2 tab views.  If it is not selected,
-      selecting either of those views will show the same account previously selected
-      in that view, regardless of the account selected in the other view.</para>
+      <para>
+        If this option is selected, the accounts displayed in the Ledgers View and
+        Investments View will be synchronized, meaning if you change the account
+        displayed in one of the views, and then switch to the other view, the
+        information for the same account will be displayed.  This increases the
+        efficiency of navigating between these 2 views.  If it is not selected,
+        selecting either of those views will show the same account previously
+        selected in that view, regardless of the account selected in the other view.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="details.settings.general.filter">
-<title>Filter tab</title>
+<sect2 id="details.settings.general.filter"><title>Filter tab</title>
+<screenshot>
+  <screeninfo>KMyMoney configuration, general, filter tab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_general_filter.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>KMyMoney configuration, general, filter tab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
-<sect3>
-<title>Accounts / Categories</title>
 <variablelist>
   <varlistentry>
-    <term><guilabel>Do not show unused categories</guilabel></term>
+    <term>Accounts / Categories</term>
     <listitem>
-      <para>Checking this box hides unused categories in the Categories View.  A
-      hidden category is still available should a transaction require it.  By typing
-      a hidden category in the ledger it will become available for use.</para>
+      <para>Checking the <guilabel>Do not show unused categories</guilabel> box hides
+      unused categories in the Categories View.  A hidden category is still available
+      should a transaction require it.  By typing a hidden category in the ledger it
+      will become available for use.
+      </para>
+
+      <para>
+        Equity accounts are used to track individual equities or investments held in
+        an Investment Account.  These should not be confused with the top level
+        <emphasis>Equity</emphasis> group of accounts, which includes the account(s)
+        which contain the opening balances for other accounts.  By default, equity
+        accounts are hidden in the Accounts View.  Checking the <guilabel>Show equity
+        accounts</guilabel> box will display the equity accounts in the Accounts
+        View.
+      </para>
+
+      <para>
+        By default, Categories are hidden in the Accounts View.  Checking the
+        <guilabel>Show categories in the accounts list view</guilabel> will display
+        the Categories in the Accounts View.
+      </para>
+
+      <para>
+        Checking the <guilabel>Do not show zero balance equities</guilabel> box will
+        remove any zero balance equity accounts from appearing in the Accounts View.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry> 
+    <term>Schedules</term>
+    <listitem>
+      <para>
+        Checking the <guilabel>Do not show finished schedules</guilabel> box hide all
+        finished schedules from appearing in the Scheduled transactions View.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term><guilabel>Show equity accounts</guilabel></term>
+    <term>Transactions</term>
     <listitem>
-      <para>By default, equity accounts are hidden in the Accounts View.  Selecting
-      this option will display the equity accounts in the Accounts View.  Equity
-      accounts are used to track individual equities or investments held in an
-      Investment Account.  This should not be confused with the top level
-      <emphasis>Equity</emphasis> group of accounts, which includes the account(s)
-      which contain the opening balances for other accounts.</para>
-    </listitem>
-  </varlistentry>
+      <para>
+        Transactions prior to the date in the <guilabel>Do not show transaction prior
+        to</guilabel> field will not be displayed in the Ledgers View.  This can be
+        useful if your data includes many years of transactions; setting this to one
+        or two years ago hides older transactions.
+      </para>
+      
+      <para>
+        Setting this option to January 1, 1900 (the default value) is a good way to
+        debug date-related data import problems, in case some dates were erroneously
+        very far in the past.
+      </para>
 
-  <varlistentry>
-  <term><guilabel>Show categories in the accounts list view</guilabel></term>
-    <listitem>
-      <para>By default, Categories are hidden in the Accounts View.  Selecting this
-      option will display the Categories in the Accounts View.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-  <term><guilabel>Do not show zero balance equities</guilabel></term>
-    <listitem>
-      <para>Checking this option will remove any zero balance equity accounts from
-      appearing in the Accounts View.</para>
+      <para>
+        Checking the <guilabel>Do not show reconciled transactions</guilabel> box
+        will filter transactions by reconciliation state.  Transactions that are
+        marked as <emphasis>Reconciled</emphasis> will not be shown in the Ledgers
+        View.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
-</sect3>
+</sect2>
 
-<sect3>
-<title>Schedules</title>
+<sect2 id="details.settings.general.support"><title>Support tab</title>
+<screenshot>
+  <screeninfo>KMyMoney configuration, general section, support tab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_general_support.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>KMyMoney configuration, general section, support tab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
 <variablelist>
-    <varlistentry>
-    <term><guilabel>Do not show finished schedules</guilabel></term>
+  <varlistentry>
+    <term>Logging</term>
     <listitem>
-      <para>Checking this box will hide all finished schedules from appearing in the
-      Scheduled transaction View.</para>
+      <para>
+        &kmymoney; can create a log file when it imports data.  This can be useful
+        for troubleshooting problems, but it is important to be careful, as these log
+        files can contain sensetive data, such as usernames and plain-text passwords,
+        as noted in the dialog.
+      </para>
+
+      <para>
+        For any logging to take place, specify the path to the directory where logs
+        will be created in the <guilabel>Log path</guilabel> field.  You can also
+        click <guibutton>...</guibutton> to the right of the field, and use the file
+        chooser dialog to navigate to the chosen directory.
+      </para>
+
+      <para>
+        If you check the <guilabel>Log imported statements</guilabel> box, whenever
+        &kmymoney; imports data, it will save a file called <quote>
+        <literal>kmm-statement-</literal>yyyy-mm-dd<literal>T</literal>hh-mm-ss.sss<literal>.txt</literal>
+        </quote> in the specified directory.  This file is an &XML; file with all the
+        data just imported.
+      </para>
+
+      <para>
+        If you check the <guilabel>Log OFX transactions</guilabel> box, whenever
+        &kmymoney; uses <link linkend="details.impexp.ofxdirectconnect">OFX direct
+        connect</link> to retrieve transaction data, it will log all the interactions
+        it has with the remote OFX server.  It will append these to a file called
+        <literal>ofxlog.txt</literal> in the specified directory.  As mentioned
+        above, this file is likely to contain account and user names and plain-text
+        passwords.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
-</sect3>
-
-<sect3>
-<title>Transactions</title>
-<variablelist>
-  <varlistentry>
-    <term><guilabel>Do not show transaction prior to</guilabel></term>
-    <listitem>
-      <para>Transactions prior to the date entered here will not be displayed in the
-      Ledger View.  This can be useful if your data includes many years of
-      transactions; setting this to one or two years ago hides older
-      transactions.</para>
-      <para>Setting this option to January 1, 1900 (the default value) is a good way
-      to debug date-related data import problems, in case some dates were erroneously
-      very far in the past.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Do not show reconciled transactions</guilabel></term>
-    <listitem>
-      <para>Checking this box will filter transactions by reconciliation state.
-      Transactions that are marked as <emphasis>Reconciled</emphasis> will not be
-      shown in the Ledger View.</para>
-    </listitem>
-  </varlistentry>
-</variablelist>
-</sect3>
 </sect2>
 </sect1>
 
-<sect1 id="details.settings.home">
-<title>Home</title>
+<sect1 id="details.settings.home"><title>Home</title>
 
-<sect2>
-<title>Home page display sections</title>
+<sect2><title>Home page display sections</title>
+<screenshot>
+  <screeninfo>KMyMoney configuration, home view</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_home.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>KMyMoney configuration, home view</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
 <para>
   These options allow you to customize the appearance of the <link
   linkend="firsttime.mainwindow">Home View</link> (also called the Home Page or Main
   Window) by choosing which information to display there and the order in which it
   appears.  Selected sections can be reordered by clicking the respective
-  <guibutton>Up</guibutton> or <guibutton>Down</guibutton> button.
+  <guibutton>Up</guibutton> or <guibutton>Down</guibutton> button.  A section may
+  not appear, even if the appropriate entry is checked, if it would be empty.
 </para>
-<!-- FIXME Many of these sections need a <link> to the doc section actually
-     describing the content. -->
 
 <variablelist>
   <varlistentry>
     <term><guilabel>Assets and Liabilities</guilabel></term>
     <listitem>
-      <para>This will display the asset and liability accounts that are open along
-      with their current balances.  This and other account lists on the Home Page are
-      sorted in alphabetical order, unless otherwise noted.</para>
+      <para>
+        This will display a listo of asset accountss on the left and liability
+        accounts on the right.  These and the other account lists on the Home Page
+        are sorted in alphabetical order, unless otherwise noted.  Normally, only
+        open accounts will be listed, unless <link
+        linkend="reference.menus.view">Show all accounts</link> has been selected.
+      </para>
+
+      <para>
+        For this and the other account lists on the Home View, the display will
+        include the account name, date last reconcilied, and current balance.  In
+        addition, there may be other columns displayed, as configured in the
+        <guilabel>Account information display</guilabel> Lower on this window.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term><guilabel>Payments</guilabel></term>
+    <term><guilabel>Scheduled payments</guilabel></term>
     <listitem>
-      <para>This will display upcoming occurrences of Scheduled transactions,
-      distinguishing Overdue payments from Future payments.  It shows the date,
-      schedule name, account and amount of the payment, and the account balance after
-      the payment.  By default it will show up to six transaction.  If six are
-      displayed, there is a link you can select to show more, up to 30 days in
-      advance.</para>
+      <para>
+        This will display upcoming occurrences of <link
+        linkend="details.schedules">Scheduled transactions</link>, distinguishing
+        those which are overdue, due today, or due in the future.  It shows the date,
+        schedule name, account, and amount of the payment, and the account balance
+        after the payment.  By default, it will show up to six transaction.  If six
+        are displayed, there is a link you can select to show more, up to 30 days in
+        advance.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term><guilabel>Preferred accounts</guilabel></term>
+    <term><guilabel>Favorite accounts</guilabel></term>
     <listitem>
-      <para>This will display the accounts that are identified as Preferred accounts
-      within the <menuchoice><guimenu>Account</guimenu><guimenuitem>Edit account...
-      </guimenuitem></menuchoice> Configuration dialog.</para>
-      <para>For this and all other account list sections addressed by this set of
-      options, the display will include the account name and current balance, and
-      other columns specific to that type of report, and in some cases, as configured
-      elsewhere.</para>
-      <!-- FIXME - the menu item (or maybe link to actual doc page) should point
-           to the actual other config location and perhaps which items for
-           which account type. -->
+      <para>
+        This will display the accounts that are identified as Favorite accounts in
+        the <guimenu>Account</guimenu> <guimenuitem>Edit account...</guimenuitem>
+        Configuration dialog.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Payment accounts</guilabel></term>
     <listitem>
-      <para>This will display all Payment accounts; these include any account into
-      which income can be deposited, and/or out of which bills can be paid.</para>
+      <para>
+        This will display all Payment accounts; these include any account into
+        which income can be deposited, and/or out of which bills can be paid.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Favorite Reports</guilabel></term>
     <listitem>
-      <para>This will display a list of all reports that have been identified as a
-      favorite in the Configuration dialog of the Report.  The list ordered
-      chronologically by when each report became a favorite.</para>
+      <para>
+        This will display a list of all reports that have been identified as a
+        favorite in the <link linkend="details.reports.config">Configuration
+        dialog</link> of the Report.  The list is in the order of the date when each
+        report became a favorite.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Forecast (schedule)</guilabel></term>
     <listitem>
-      <para>This will display a 30, 60, and 90 day forecast for asset and liability accounts with non zero
-      balances and with non reconciled transactions.</para>
-      <!-- FIXME What are the real criteria for inclusion in this (and these other) list(s). -->
+      <para>
+        This will display a forecast for asset and liability accounts, similar to the
+        <link linkend="details.forecast.summary">Summary Tab</link> of the Forecast
+        View.  Details of the display can be controlled with the <link
+        linkend="details.forecast.configure">Forecast Configuration</link> dialog.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Net worth forecast</guilabel></term>
     <listitem>
-      <para>This will display chart of your forecast net worth for the next 90
-      days.</para>
+      <para>
+        This will display a chart of your forecast net worth for the next 90 days.
+      </para>
     </listitem>
   </varlistentry>
-
-  <!-- FIXME "Forecast (history) removed as apparently not actually used. -->
 
   <varlistentry>
     <term><guilabel>Budget</guilabel></term>
     <listitem>
-      <para>This will display a current month summary and overruns for any defined
-      budget(s). If no budget is defined, it will display no budget or overruns, with
-      the actual current month spending.</para>
+      <para>
+        This will display a current month summary and overruns for any <link
+        linkend="details.budgets">defined budget(s)</link>. If no budget is defined,
+        it will display no budget or overruns, with the actual current month
+        spending.
+      </para>
     </listitem>
   </varlistentry>
 
@@ -343,15 +463,15 @@
 </variablelist>
 </sect2>
 
-<sect2>
-<title>Homepage/Summary page scaling</title>
+<sect2><title>Homepage/Summary page scaling</title>
 <variablelist>
-
   <varlistentry>
     <term><guilabel>Zoom factor:</guilabel></term>
     <listitem>
-      <para>This option allows for the selection of the font size as a percentage to
-      fit the Home View based on the user preference.</para>
+      <para>
+        This option allows for the selection of the font size as a percentage to fit
+        the Home View based on the user preference.
+      </para>
     </listitem>
   </varlistentry>
 
@@ -359,53 +479,71 @@
     <term><guilabel>Remember zoom factor when leaving the program if manually changed
     with mouse-wheel</guilabel></term>
     <listitem>
-      <para>Selecting this will save your font size preference if you have changed it
-      on the Home page by using the mouse-wheel.</para>
+      <para>
+        Selecting this will save your font size preference if you have changed it on
+        the Home page by using the mouse-wheel.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2>
-<title>Account information display</title>
-<para>These options allow you to customize what information is included in any list
-of accounts.</para>
+<sect2 id="details.settings.home.acctinfo"><title>Account information display</title>
+<para>
+  These options allow you to customize what information is included in any list of
+  accounts on the Home View.
+</para>
+
 <variablelist>
   <varlistentry>
     <term><guilabel>Show account limit information</guilabel></term>
     <listitem>
-      <para>Displays the account limit as set in the Account Edit dialog.  It affects
-      any list which includes Payment accounts.</para>
+      <para>
+        Displays the account limit as set in the <link
+        linkend="details.accounts.edit">Account Edit</link> dialog.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Show balance-status of mapped online accounts</guilabel></term>
     <listitem>
-      <para>Shows the balance-status of mapped accounts, symbolized by an icon in the
-      columns preceding the account name.  A green checkmark indicates the online
-      balance and local balance are the same.  A mailbox with a green arrow indicates
-      that the local file has transactions newer than the most recent online update.
-      This alerts the user to start an online-update.  A red warning sign indicates a
-      mismatch between the local file and online-balance.</para>
-      <!-- Note: the colors might be different depending on the selected theme
-           -->
+      <para>
+        Shows the balance status of mapped accounts, and accounts which have had
+        transactions imported.  The status is symbolized by an icon in the column
+        preceding the account name.  Note that the colors described here may be
+        different than displayed for you, depending on the display theme selected.  A
+        <guiicon> <inlinemediaobject> <imageobject> <imagedata
+        fileref="icon-dialog-ok.svg" format="SVG"/> </imageobject>
+        </inlinemediaobject> </guiicon> green checkmark indicates the online balance
+        and local balance are the same.  A <guiicon> <inlinemediaobject>
+        <imageobject> <imagedata fileref="icon-dialog-cancel.svg" format="SVG"/>
+        </imageobject> </inlinemediaobject> </guiicon> red warning sign indicates a
+        mismatch between the local file and online-balance.  A <guiicon>
+        <inlinemediaobject> <imageobject> <imagedata fileref="icon-mail-receive.svg"
+        format="SVG"/> </imageobject> </inlinemediaobject> </guiicon> mailbox with a
+        green arrow indicates that the local file has transactions newer than the
+        most recent online update.  This alerts the user to perform an online-update.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Show number of not marked transactions per account [!M]</guilabel></term>
     <listitem>
-      <para>Inserts an additional column next to the account name, showing the number
-      of not marked transactions in the account.</para>
+      <para>
+        Inserts a column after the account name, showing the number of not marked
+        transactions in the account.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Show number of cleared transactions per account [C]</guilabel></term>
     <listitem>
-      <para>Inserts an additional column showing the number of cleared transactions
-      for the account.</para>
+      <para>
+        Inserts a column showing the number of cleared transactions for the account.
+      </para>
     </listitem>
   </varlistentry>
 
@@ -413,194 +551,221 @@ of accounts.</para>
     <term><guilabel>Show number of not reconciled (not marked + cleared) transactions
     per account [!R]</guilabel></term>
     <listitem>
-      <para>Inserts an additional column showing the number of not reconciled
-      transactions for the account, &ie;, the sum of all not marked and cleared
-      transactions.</para>
+      <para>
+        Inserts a column showing the number of not reconciled transactions for the
+        account, &ie;, the sum of all not marked and cleared transactions.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Show date of last reconciliation</guilabel></term>
     <listitem>
-      <para>Inserts an additional column showing the last reconciliation date for the
-      account.</para>
+      <para>
+        Inserts an additional column showing the last reconciliation date for the
+        account.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 </sect1>
 
-<sect1 id="details.settings.register">
-<title>Ledger</title>
-
+<sect1 id="details.settings.register"><title>Ledger</title>
 <para>
-   The following options outlined within this section allow for the modification of the
-   transaction register contained within the Ledger view tab.
+   The settings and options in this section allow for the modification of the
+   transaction ledger displayed in the Ledgers View.
 </para>
 
-<sect2 id="details.settings.register.display">
-<title>Display tab</title>
-
+<sect2 id="details.settings.register.display"><title>Display tab</title>
 <variablelist>
   <varlistentry>
-    <term><guilabel>Show a grid in the register</guilabel></term>
+    <term><guilabel>Show a grid in the ledger</guilabel></term>
     <listitem>
-      <para>Selecting this option displays grid lines in the transaction
-      register or Ledger View.  It provides an additional viewing option that
-      may make it easier to visualize separate transactions and their component
-      parts.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Show all register entries in full detail</guilabel></term>
-    <listitem>
-      <para>Selecting this option makes the register show all the information
-      for all displayed transactions, with separate lines in the Detail Column
-      for Category and Tags and for the Memo.  If it is not selected, Category,
-      Tags, and Memo will not be displayed.</para>
-      <para>This has the same effect as selecting the <link
-      linkend="reference.menus.settings.transactiondetail">Show Transaction
-      Detail</link> menu option.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry id="details.settings.register.lens">
-    <term><guilabel>Use the ledger lens</guilabel></term>
-    <listitem>
-      <para>Selecting this option displays all the detail lines for the selected
-      transaction, even if <guilabel>Show all register entries in full
-      detail</guilabel> is not selected.</para>
+      <para>
+        Selecting this option displays grid lines in the Ledgers View.  This is an
+        additional viewing option that may make it easier to visualize separate
+        transactions and their component parts.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
   <term><guilabel>Show transaction form</guilabel></term>
     <listitem>
-      <para>Selecting this option displays the <link
-      linkend="details.ledger.transactionform">transaction form</link> at the
-      bottom of the register, and that is where you edit a transaction.  If the
-      transaction form is not displayed, you edit a transaction within the
-      ledger itself.  With this option enabled fewer transactions are visible in
-      the ledger, compared to when it is disabled.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Always show a No. field</guilabel></term>
-    <listitem>
-      <para>Always display the number (<quote>No.</quote>) field when entering or
-      editing a transaction.  With this enabled you'll be able to check numbers
-      entered in this field for checking accounts.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Show group header between transactions</guilabel></term>
-    <listitem>
-      <para>Selecting this option will display group headers in the register.
-      These refer to time periods or milestones such as Last month, Last week,
-      This month, Last reconciliation, Next week, and Next Month.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Show header for the previous and current fiscal year
-    </guilabel></term>
-    <listitem>
-      <para>Selecting this option will display group headers in the register for
-      the current and the previous fiscal year.</para>
+      <para>
+        Selecting this option displays the <link
+        linkend="details.ledger.transactionform">transaction form</link> at the
+        bottom of the ledger, and that is where you enter or edit a transaction.  If
+        the transaction form is not displayed, you edit a transaction within the
+        ledger itself.  With this option enabled, fewer transactions are visible in
+        the ledger, compared to when it is disabled.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Display overdue schedules with planned date</guilabel></term>
     <listitem>
-      <para>Scheduled transactions with future dates are shown in the Ledger
-      View for the relevant account.  When the date passes, and a scheduled
-      transaction becomes overdue, it is no longer shown in the ledger, unless
-      this option is selected.</para>
+      <para>
+        Scheduled transactions with future dates are shown in the Ledgers View for the
+        relevant account.  When the date passes, and a scheduled transaction becomes
+        overdue, it is no longer shown in the ledger, unless this option is selected.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><guilabel>Ledger entry details</guilabel></term>
+    <listitem>
+      <formalpara>
+        <title><guilabel>Show all ledger entries in full detail</guilabel></title>
+        <para>
+          Selecting this option makes the ledger show all the information for all
+          displayed transactions, with separate lines in the Detail Column for
+          Category, Tags, and the Memo.  If it is not selected, Category, Tags, and
+          Memo will not be displayed.  This has the same effect as selecting the
+          <link linkend="reference.menus.settings.transactiondetail">Show Transaction
+          Detail</link> menu option.
+      </para>
+      </formalpara>
+
+      <formalpara id="details.settings.register.lens">
+        <title><guilabel>Use the ledger lens</guilabel></title>
+        <para>
+          Selecting this option displays all the detail lines for the selected
+          transaction, even if <guilabel>Show all ledger entries in full
+          detail</guilabel> is not selected.
+        </para>
+      </formalpara>
+
+      <formalpara><title>Show all split details in ledger</title>
+      <para>
+        Selecting this option shows more details about split transactions.
+      </para>
+      </formalpara>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><guilabel>Information headers</guilabel></term>
+    <listitem>
+      <formalpara>
+        <title><guilabel>Show group headers between transactions</guilabel></title>
+        <para>
+          Selecting this option will display group headers in the ledger.  These
+          refer to time periods or milestones such as Last month, Last week, This
+          month, Last reconciliation, Next week, and Next month.
+        </para>
+      </formalpara>
+
+      <formalpara>
+        <title>
+          <guilabel>Show header for the previous and current fiscal year</guilabel>
+        </title>
+        <para>
+          Selecting this option will display group headers in the ledger for the
+          current and the previous fiscal year.
+        </para>
+      </formalpara>
+
+      <formalpara>
+        <title><guilabel>Reconciliation group headers</guilabel></title>
+        <para>
+          This dropdown controls the display of group headers for reconcilitations.
+          If <guilabel>Don't show reconciliation entries</guilabel> is selected, then
+          no group headers will be shown for reconciliations.  If <guilabel>Show last
+          reconciliation entry with date and balance in ledger</guilabel> is
+          selected, only the most recent reconciliation will be indicated by a group
+          header.  If <guilabel>Show all reconciliation entries with date and balance
+          in ledger</guilabel> is selected, then a group header will be shown for all
+          previous reconciliations.
+        </para>
+      </formalpara>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="details.settings.register.sorting">
-<title>Sorting tab</title>
+<sect2 id="details.settings.register.sorting"><title>Sorting tab</title>
 <para>
-  These three sections allow you to set the default sort order of transactions
-  in the Ledger View.  In all cases, the list on the left shows all the fields
-  available for sorting.  To sort on an item, select it (single mouse click) and
-  click the right arrow between the two lists.  The list on the right shows all
-  the fields which have been selected as part of the sort order for that view.
-  You can adjust the relative order of the fields by selecting one and adjusting
-  its position in the list using the up and down arrows to the right of the
-  list.  You can switch between ascending and descending sort for any item
-  by double clicking on it.
+  These three sections allow you to set the default sort order of transactions in the
+  Ledgers View.  In all cases, the list on the right shows the fields which have been
+  selected as part of the sort order for that view, and the list on the left shows
+  all the fields available for sorting whic have not yet been chosen.  To sort on an
+  item, select it (single mouse click) and click the right arrow between the two
+  lists.  You can adjust the relative order of the fields by selecting one and
+  adjusting its position in the list using the up and down arrows to the right of the
+  list.  You can switch between ascending and descending sort for any item by
+  double-clicking it.
 </para>
+
 <para>
   The fields available for sorting are the same for all three sections: Amount,
-  Category, Entry Order (date the transaction was created,) Number, Payee, Post
-  date, Reconcile state, Security, and Type.
+  Category, Entry Order (the date the transaction was created, not the internal
+  transaction id,) Number, Payee, Post date, Reconcile state, Reconciliation date,
+  Security, and Type.
 </para>
 
-<sect3 id="details.settings.register.sorting.normal">
-<title>Normal view tab</title>
+<sect3 id="details.settings.register.sorting.normal"><title>Normal view subtab</title>
 <para>
-  This tab controls the default sort order of the regular Ledger View.
-</para>
-</sect3>
-
-<sect3 id="details.settings.register.sorting.reconciliation">
-<title>Reconciliation view tab</title>
-<para>
-  This tab controls the default sort order of the ledger while in the
-  Reconciliation view.  This is the display of transactions shown during the
-  process of <link linkend="details.reconcile">Reconciliation</link>.
+  This tab controls the default sort order of the regular Ledgers View.
 </para>
 </sect3>
 
-<sect3 id="details.settings.register.sorting.search">
-<title>Search view tab</title>
+<sect3 id="details.settings.register.sorting.reconciliation"><title>Reconciliation view subtab</title>
 <para>
-  This tab controls the default sort order of the ledger while in the <link linkend="details.search">Search view</link>.
+  This tab controls the default sort order of the ledger while in the Reconciliation
+  View.  This is the display of transactions shown during the process of <link
+  linkend="details.reconcile">Reconciliation</link>.
+</para>
+</sect3>
+
+<sect3 id="details.settings.register.sorting.search"><title>Search view subtab</title>
+<para>
+  This tab controls the default sort order of the ledger while in the <link
+  linkend="details.search">Search view</link>.
 </para>
 </sect3>
 </sect2>
 
-<sect2 id="details.settings.register.dataentry">
-<title>Data Entry tab</title>
+<sect2 id="details.settings.register.dataentry"><title>Data Entry tab</title>
 <para>These options affect the process of creating new transactions.</para>
 
 <variablelist>
   <varlistentry>
     <term><guilabel>Auto increment check number</guilabel></term>
     <listitem>
-      <para>Enabling this will automatically increment the check number whenever
-      entering a new check transaction.  They have the same effect whether you
-      use the Ledger Lens or the Transaction Form.</para>
+      <para>
+        Enabling this will automatically increment the check number whenever entering
+        a new check transaction.  It has the same effect whether you use the Ledger
+        Lens or the Transaction Form.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term><guilabel>Keep changes when selecting a different
-    transaction/split</guilabel></term>
+    <term>
+      <guilabel>Keep changes when selecting a different transaction/split</guilabel>
+    </term>
     <listitem>
-      <para>When enabled, selecting a different transaction or split will save
-      edits to the current transaction.  When disabled, selecting a different
-      transaction split will prompt you whether or not to save any
-      changes.</para>
+      <para>
+        When enabled, selecting a different transaction or split will save any edits
+        made to the current transaction.  When disabled, selecting a different
+        transaction split will prompt you whether or not to save any changes.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Use Enter to move between fields</guilabel></term>
     <listitem>
-      <para>When enabled, pressing &Enter; will change the focus to the next field
-      of the transaction.  When in the last field, the transaction will be
-      saved.  When disabled, navigation between fields would occur by using the
-      &Tab; key or the mouse.  Pressing the &Enter; key would save the transaction,
-      no matter which field is currently in focus.
+      <para>
+        When enabled, pressing &Enter; will change the focus to the next field of the
+        transaction.  When in the last field, the transaction will be saved.  When
+        disabled, navigation between fields would occur by using the &Tab; key or the
+        mouse.  Pressing the &Enter; key would save the transaction, no matter which
+        field is currently in focus.
       </para>
     </listitem>
   </varlistentry>
@@ -608,20 +773,33 @@ of accounts.</para>
   <varlistentry>
     <term><guilabel>Match names from start</guilabel></term>
     <listitem>
-      <para>This option controls <link
-      linkend="details.payees.personalinformation.matching">payee
-      matching.</link> When enabled, payee names will always be matched from the
-      start.  When disabled, any substring will be matched.  Also, when enabled
-      additional options for matching can be established in the Matching Tab of
-      the Payees View.</para>
+      <para>
+        This option controls <link linkend="details.payees.details.matching">payee
+        matching</link>.  When enabled, payee names will always be matched from the
+        start.  When disabled, any substring will be matched.  Also, when enabled
+        additional options for matching can be established in the Matching Tab of the
+        Payees View.
+      </para>
     </listitem>
   </varlistentry>
 
-  <!--FIXME missing Automatic reconciliation-->
   <varlistentry>
+    <!-- FIXME:   missing description of Automatic reconciliation -->
     <term><guilabel>Automatic reconciliation</guilabel></term>
     <listitem>
-      <para>This option needs to be documented.
+      <para>
+        This option needs to be documented.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><guilabel>Initial cursor position within the date field</guilabel></term>
+    <listitem>
+      <para>
+        When you advance into a transaction's date field (either by creating or
+        editing a transaction, or using &Tab; or &Enter;, this dropdown determines
+        whether the cursor will start in the Day, Month, or Year portion of the date.
       </para>
     </listitem>
   </varlistentry>
@@ -629,43 +807,56 @@ of accounts.</para>
   <varlistentry>
     <term><guilabel>Default reconciliation state</guilabel></term>
     <listitem>
-      <para>Select the default reconciliation state for new transactions: Not
-      reconciled, Cleared, and Reconciled.</para>
+      <para>
+        This dropdown allows you to select the default reconciliation state for new
+        transactions: Not reconciled, Cleared, or Reconciled.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Autofill</guilabel></term>
     <listitem>
-      <para>This option allows you to select the desired behavior for autofill.
-      This controls which, if any, previous transactions for the same payee are
-      displayed, and which, if any, of those transactions are used to auto-fill
-      details of the new transaction.</para>
+      <para>
+        This option allows you to select the desired behavior for autofill.  This
+        controls which, if any, previous transactions for the same payee are
+        displayed, and which, if any, of those transactions are used to auto-fill
+        details of the new transaction.
+      </para>
+
       <itemizedlist>
         <listitem>
           <para>No Autofill</para>
-          <para>This will deactivate autofill, and you must manually enter all
-          details for the new transaction.</para>
+          <para>
+            This will deactivate autofill, and you must manually enter all details
+            for the new transaction.
+          </para>
         </listitem>
+        
         <listitem>
           <para>Same transaction if amount differs less than percentage set below</para>
-          <para>With this option selected, when you enter a new transaction,
-          &kmymoney; will display a list of previous transactions for the same
-          payee and account.  If the amount of a previous transactions differ
-          less than X percent from the amount you have entered, they will be
-          considered identical, and details from the previous transaction will
-          be used to autofill details of the new transaction.  The "X" above is
-          specified in the box next to <guilabel>Same transaction if amount
-          differs less than</guilabel>, and can range from 0 to 100%.  If the
-          percentage is 0, all previous transactions for the payee and account
-          will be displayed, and you can select one of those transactions to use
-          for autofill by clicking on it.</para>
+          <para>
+            With this option selected, when you enter a new transaction, &kmymoney;
+            will display a list of previous transactions for the same payee and
+            account.  If the amount of a previous transaction is closeenough to the
+            amount you have entered, it will be considered a match, and details from
+            that previous transaction will be used to autofill details of the new
+            transaction.  <quote>Close enough</quote> means within the percentage
+            specified in the box next to <guilabel>Same transaction if amount differs
+            less than</guilabel>, and can range from 0 to 100%.  If the percentage is
+            0, all previous transactions for the payee and account will be displayed,
+            and you can select one of those transactions to use for autofill by
+            clicking it.
+          </para>
         </listitem>
+
         <listitem>
           <para>With previously most often used transaction for the payee</para>
-          <para>With this option selected, when you enter new transaction,
-          &kmymoney; will fill in all the transaction details based on the
-          previously most often used transaction for the selected payee.</para>
+          <para>
+            With this option selected, when you enter new transaction, &kmymoney;
+            will fill in all the transaction details based on the previously most
+            often used transaction for the selected payee.
+          </para>
         </listitem>
       </itemizedlist>
     </listitem>
@@ -674,176 +865,191 @@ of accounts.</para>
   <varlistentry>
     <term><guilabel>Use memos from previous transaction</guilabel></term>
     <listitem>
-      <para>When selected, the memo from the previously entered transaction will
-      be automatically entered as the memo for the new transaction.
+      <para>
+        When selected, the memo from the previously entered transaction will be
+        automatically entered as the memo for the new transaction.
       </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="details.settings.register.import">
-<title>Import tab</title>
-
+<sect2 id="details.settings.register.import"><title>Import tab</title>
 <variablelist>
   <varlistentry>
     <term><guilabel>Match transaction within days</guilabel></term>
     <listitem>
-      <para>Search for matching transactions within the range of the imported
-      transaction +/- the given number of days, which can be set from 0 to
-      99.</para>
+      <para>
+        Search for matching transactions within the range of the imported transaction
+        +/- the given number of days, which can be set from 0 to 99.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Ask for a new payee's default category</guilabel></term>
     <listitem>
-      <para>If this option is selected, whenever a new payee is detected during
-      an import, the user will be asked for the default category for the
-      payee.</para>
+      <para>
+        If this option is selected, whenever a new payee is detected during an
+        import, the user will be asked for the default category for the payee.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 </sect1>
 
-<sect1 id="details.settings.schedules">
-<title>Scheduled Transactions</title>
-
+<sect1 id="details.settings.schedules"><title>Scheduled Transactions</title>
 <para>
   These options allow you to modify the behavior of <link
-  linkend="details.schedules">Scheduling Transactions</link>.
+  linkend="details.schedules">Scheduled Transactions</link>.
 </para>
 
-<sect2>
-<title>Startup options</title>
+<sect2><title>Startup options</title>
 <variablelist>
   <varlistentry>
     <term><guilabel>Check schedules upon startup</guilabel></term>
     <listitem>
-      <para>Enables checking the schedule upon startup of &kmymoney;.  If
-      a scheduled transaction matches the schedule criteria set then &kmymoney;
-      will produce a notification requiring handling of the transaction. </para>
+      <para>
+        Enables checking the schedule upon startup of &kmymoney;.  If a scheduled
+        transaction matches the schedule criteria set then &kmymoney; will produce a
+        notification requiring handling of the transaction.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term><guilabel>Enter transactions this number of days in
-    advance</guilabel></term>
-    <listitem><para>Specify how many days in advance a scheduled transaction
-    should be entered.</para>
+    <term>
+      <guilabel>Enter transactions this number of days in advance</guilabel>
+    </term>
+    <listitem>
+      <para>
+        Specify how many days in advance a scheduled transaction should be entered.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="details.settings.schedules.calendar">
-<title>Processing Days</title>
+<sect2 id="details.settings.schedules.calendar"><title>Processing Days</title>
 <variablelist>
   <varlistentry>
     <term><guilabel>Use holiday calendar for region</guilabel></term>
-    <listitem><para>Select the region of the world that best suits your needs.</para>
+    <listitem>
+      <para>Select the region of the world that best suits your needs.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2><title></title>
+<sect2><title>Ungrouped Item</title>
+<!-- FIXME: This is a good example of problems with the current mix of sectX and variablelist.  Without a title, this
+     sect has inadequate spacing above.  so it looks part of the previous group, but the actual title doesn't match the
+     lack of title in the actual config dialog.  I'm open to suggestions on how to deal with this.  Not using sect2 for
+     boxes might help, but would be a lot of effort.  Perhaps just adding a box and title to the config dialog?-->
+<literallayout>
+</literallayout>
 <variablelist>
   <varlistentry>
     <term><guilabel>Number of days to preview schedules in ledger</guilabel></term>
     <listitem>
-      <para>Specify how many days should the scheduled transactions show up in the
-        ledger.</para>
-      <para>The scheduled transactions will be listed in the ledger. You can
-        enter or skip the scheduled transactions by right-clicking on
-        them.</para>
+      <para>
+        Specify how many days in advance should scheduled transactions show up in the
+        ledger.  For future scheduled transactions displayed in the ledger, you can
+        enter or skip them by right-clicking them.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 </sect1>
 
-<sect1 id="details.settings.onlinequote">
-<title>Online Quotes</title>
-
+<sect1 id="details.settings.onlinequote"><title>Online Quotes</title>
 <para>
-  These settings modify how financial quotes are retrieved from different online
-  sources.  These include both stock, bond, and other equity prices, as well as
-  prices for precious metals and currency conversion.
+  These settings determine how price quotes are retrieved from different online
+  sources.  These include stock, bond, and other equity prices, as well as prices for
+  precious metals and currency conversion.
 </para>
 
 <para>
-  This tab allows you to change the online quote sources for &kmymoney;.
-  Generally speaking, this is an advanced feature, and should only be attempted
-  by the most technically adept users.
+  This section allows you to change the online quote sources for &kmymoney;.
+  Generally speaking, this is an advanced feature, and should only be attempted by
+  the most technically adept users.
 </para>
 
 <para>
   For more details, please refer to the <link
   linkend="details.investments.onlinequotes">Online Price Quotes</link> section.
 </para>
+
+<note>
+  <para>
+    The initial list and configuration of online quote sources is set up when
+    &kmymoney; first creates your data file.  If an online source makes a change
+    which requires a change to these settings in order for &kmymoney; to continue to
+    use it as a valid source, the user must make the necessary changes, using this
+    dialog, based on instructions posted at one of the suggested<link
+    linkend="firsttime.contact">support options</link>.  Hopefully, in the not to
+    distanct future, the way online source configuration is handled will be changed
+    so that &kmymoney; can automatically fetch any necessary updates to these
+    settings without requiring the user to make any manual edits.
+  </para>
+</note>
 </sect1>
 
-
-<sect1 id="details.settings.colors">
-<title>Colors</title>
-
+<sect1 id="details.settings.colors"><title>Colors</title>
 <para>
-   These section allows you to customize the colors used within &kmymoney;.  If
-   <guilabel>Custom colors</guilabel> is not checked, then default colors will
-   be used.
+  These section allows you to customize the colors used within &kmymoney;.  If
+  <guilabel>Custom colors</guilabel> is not checked, then default colors will be
+  used.
 </para>
 
 <para>
-   To customize colors check the box Custom colors.
-</para>
-
-<para>
-  Modify any of the colors by clicking on the color button, which will open
-  color select palette.  This will provide unlimited options in color selection.
-  You can select a defined basic color, pick a color by clicking anywhere on the
-  screen, input an &HTML; defined color, specify values for Hue, Saturation,
-  Value, Red, Green, and Blue.
-
+  To customize colors check the <guilabel>Custom colors</guilabel> checkbox.  You can
+  then modify any of the colors by clicking the color button, which will open color
+  select palette.  This will provide unlimited options in color selection.  You can
+  select a defined basic color, pick a color by clicking anywhere on the displayed
+  color palette, input an &HTML; defined color, or specify values for Hue,
+  Saturation, Value, Red, Green, and Blue.
 </para>
 </sect1>
 
-<sect1 id="details.settings.fonts">
-<title>Fonts</title>
-
+<sect1 id="details.settings.fonts"><title>Fonts</title>
 <para>
-  These options allow you to modify the fonts within the Cell or Header fields.
+  This section allows you to modify the fonts used within the Cell or Header fields.
 </para>
 
 <variablelist>
   <varlistentry>
     <term><guilabel>Use system fonts</guilabel></term>
     <listitem>
-      <para>Select this to use system fonts. Deselecting this option allows the select
-      the fonts of your choice.</para>
+      <para>
+        Select this to use system fonts.  Deselecting this option allows you to
+        select the fonts of your choice.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Cell font</guilabel></term>
     <listitem>
-      <para>Specify the custom font to use within each cell of the registers.</para>
+      <para>Specify the custom font to use within each cell of the ledgers.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Header font</guilabel></term>
     <listitem>
-      <para>Specify the custom font to use for the headers of each view within the register.</para>
+      <para>
+        Specify the custom font to use for the headers of each view within the
+        ledger.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect1>
 
-<sect1 id="details.settings.icons">
-<title>Icons</title>
-
+<sect1 id="details.settings.icons"><title>Icons</title>
 <para>
   This option allows for the selection of icons that will be displayed.
 </para>
@@ -852,80 +1058,90 @@ of accounts.</para>
   <varlistentry>
     <term><guilabel>Individual icon settings</guilabel></term>
     <listitem>
-      <para>Using the pull-down menu there is a selection of available icons available for use.
-      Additional icons may be available for downloading and use depending on the operating
-      system installed.</para>
+      <para>
+        The dropdown list presents a selection of icon themess available for use.
+        Additional icons may be available for downloading and use depending on the
+        operating system or &Linux; Distribution installed.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect1>
 
-<sect1 id="details.settings.plugins">
-<title>Plugins</title>
-
+<sect1 id="details.settings.plugins"><title>Plugins</title>
 <para>
-  This section provides information about the available plugins, and allow you
-  to modify the behavior of installed plugins.  Note that the list of plugins
-  displayed will depend on which plugins &kmymoney; found when it started.  It
-  does not matter whether the plugin was compiled as part of the application or
-  added as a separate package.
-  <screenshot>
-	<screeninfo>Configure Plugins</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="configure_plugins.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Configure Plugins</phrase>
-	</textobject>
-	</mediaobject>
-  </screenshot>
-  Every plugin can be enabled or disabled, according to the state of the
-  checkbox next to the name of the plugin.  In addition, at the right, there is
-  also an <guibutton>information</guibutton> (&infoicon;) button for each, which
-  will show the plugin version and author.  For some plugins, further
-  information on configuring and using it may be found by clicking the
-  configure, or tool icon just to the left of the information button.  There is
-  only one plugin that requires configuration, and that is the Check printing
-  plugin.
+  This section provides information about the available plugins, and allow you to
+  modify the behavior of some of them.  Note that the list of plugins displayed will
+  depend on which plugins &kmymoney; found when it started.  It does not matter
+  whether the plugin was compiled as part of the application or added as a separate
+  package.
 </para>
-
-<sect2 id="details.settings.plugins.printchecks">
-<title>Check printing plugin</title>
+  
+<screenshot>
+  <screeninfo>KMyMoney configuration, plugins</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="configure_plugins.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>KMyMoney configuration, plugins</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
-  As one example, there is a plugin for printing checks, which
-  is included with the source of &kmymoney;, and should always be
-  enabled.  It allows printing of a check based on the data from a selected
-  transaction, with the layout controlled by an &HTML; template. You need to use a
-  template which is matched to your pre-printed checks.  A default, built-in
-  template is provided. You may also choose a custom template. To do so, click on
-  the <guibutton>configure</guibutton> (&configicon;) button to get the
-  <guilabel>Check printing</guilabel> configuration dialog displayed.  At the top
-  you can check the box to use a custom template.  To the right of that is a
-  button which brings up a file chooser, to select an alternate template file.
+  Every plugin can be enabled or disabled, according to the state of the checkbox to
+  the left of the name of the plugin name and icon.  In addition, at the right, there
+  is an <guibutton>information</guibutton> &infoicon; button for each plugin, which
+  will show the plugin version and author(s.)  For some plugins, further information
+  on configuring and using it may be found by clicking &configicon;
+  <guibutton>configure</guibutton> just to the left of the information button.
 </para>
 
 <para>
-  A template file is an &HTML; file, in which specific strings are used to
-  reference the fields from the transaction and from the current account and
-  institution to show where they will be printed on the check.  &kmymoney;
-  ships with a default, built-in template.  At <ulink url="https://invent.kde.org/office/kmymoney/-/blob/master/kmymoney/plugins/checkprinting/templates/">this</ulink>
-  address you can find the HTML source file of default template, as well as some
-  additional templates.  You should either be able to use one of them, or modify
-  one to suit your needs.  Note that only a <emphasis>subset</emphasis> of the
-  HTML standard is supported — the detailed documentation on that can be found
+  Until recently, there was only one plugin that required configuration, the Check
+  printing plugin.  Now, there are several plugins which have configuration pages
+  which are invoked from this page.  These are listed in the following sections.
+  Note however, that many of them have already been described earlier in this
+  document.
+</para>
+
+<sect2 id="details.settings.plugins.printchecks"><title>Check printing plugin</title>
+<para>
+  There is a plugin for printing checks, which is included with the source of
+  &kmymoney;, and which should always be enabled.  It allows printing of a check
+  based on the data from a selected transaction, with the layout controlled by an
+  &HTML; template.  You need to use a template which is matched to your pre-printed
+  checks.  A default, built-in template is provided.  You may also choose a custom
+  template.  To do so, click &configicon; <guibutton>configure</guibutton> to get the
+  <guilabel>Check printing</guilabel> configuration dialog displayed.  At the top you
+  can check the box to use a custom template.  To the right of that is a button which
+  brings up a file chooser, to select an alternate template file.
+</para>
+
+<para>
+  A template file is an &HTML; file, in which specific strings are used to reference
+  fields from the transaction and from the current account and institution to show
+  where they will be printed on the check.  &kmymoney; ships with a default, built-in
+  template.  At <ulink
+  url="https://invent.kde.org/office/kmymoney/-/blob/master/kmymoney/plugins/checkprinting/templates/">
+  this address</ulink>, you can find the HTML source file of the default template, as
+  well as some additional templates.  You should either be able to use one of them or
+  to modify one to suit your needs.  Note that only a <emphasis>subset</emphasis> of
+  the HTML standard is supported — the detailed documentation on that can be found
   <ulink url="https://doc.qt.io/qt-5/richtext-html-subset.html">here</ulink>.
 </para>
 
-
-<!-- info from source code on substitution variables
+<!-- FIXME: do we want to actually include these checkwriting variables here, and if
+           so, with how much detail? -->
+<!-- info from source code on substitution variables.  Future exercise to list/describe them here.
     // data about the user
     checkHTML.replace("$OWNER_NAME", file->user().name());
     checkHTML.replace("$OWNER_ADDRESS", file->user().address());
     checkHTML.replace("$OWNER_CITY", file->user().city());
     checkHTML.replace("$OWNER_STATE", file->user().state());
-    // data about the account institution
+
+    // data about the account's institution
     checkHTML.replace("$INSTITUTION_NAME", institution.name());
     checkHTML.replace("$INSTITUTION_STREET", institution.street());
     checkHTML.replace("$INSTITUTION_TELEPHONE", institution.telephone());
@@ -933,6 +1149,7 @@ of accounts.</para>
     checkHTML.replace("$INSTITUTION_CITY", institution.city());
     checkHTML.replace("$INSTITUTION_POSTCODE", institution.postcode());
     checkHTML.replace("$INSTITUTION_MANAGER", institution.manager());
+
     // data about the transaction
     checkHTML.replace("$DATE", KGlobal::locale()->formatDate(QDate::currentDate(), KLocale::LongDate));
     checkHTML.replace("$CHECK_NUMBER", (*it).split().number());
@@ -945,18 +1162,143 @@ of accounts.</para>
     checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().shares().abs(), currency));
     checkHTML.replace("$MEMO", (*it).split().memo());
 -->
-
-
 </sect2>
-<sect2 id="details.settings.plugins.kbanking">
-<title>KBanking</title>
 
+<sect2 id="details.settings.plugins.csvimporter"><title>CSV Importer</title>
 <para>
-  This plugins adds support for HBCI/FinTs, OFX and PayPal online banking to KMyMoney.
-  After this plugin has been enabled, online banking can be configured in the
-  <link linkend="reference.menus.settings.help">Settings</link> menu.
+  Some aspects of configuring the CSV Importer plugin have already been discussed
+  <link linkend="details.settings.plugins.csvimporter">here</link>.  However, there
+  is also a dialog which can be invoked here.
 </para>
 
+<screenshot>
+  <screeninfo>configure csv importer plugin</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_plugins_csvimporter.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>configure csv importer plugin</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<sect3><title>Autodetecting</title>
+<para>
+  It is generally best to let the plugin autodetect the field delimiter, decimal
+  symbol, and date format.  However, it is possible to disable this behavior for each
+  of these items by unchecking the appropriate box.
+</para>
+
+<para>
+  In some cases, a csv file to be imported contains the name of the account somewhere
+  in the first lines of the file.  You can request the plugin to automatically look
+  for this by checking the appropriate box, separately for banking and for investment
+  imports.
+</para>
+</sect3>
+
+<sect3><title>QIF export profile</title>
+<para>
+  Although it is currently better just to use the QIF exporter plugin directly, it is
+  still possible to have the CSV Importer export a QIF file.  In this case, you can
+  use this dropdown to select the default QIF export profile to use.
+</para>
+</sect3>
+</sect2>
+
+<sect2 id="details.settings.plugins.forecast"><title>Forecast View</title>
+<para>
+  This is described in the <link linkend="details.forecast.configure">Configuring the
+  Forecast</link> section of the <link linkend="details.forecast">Forecast
+  Chapter.</link>
+</para>
+</sect2>
+
+<sect2><title>iCalendar</title>
+<para>
+  &kmymoney; is capable of exporting a file inb then <quote>iCalendar</quote> format,
+  so you can import your scheduled transactions into &korganizer;, or another
+  calendar program, so you can be reminded of scheduled transactions.  Actually
+  exporting the file is done with the <menuchoice> <guimenu>File</guimenu>
+  <guisubmenu>Export</guisubmenu> <guimenuitem>Schedules to iCalendar</guimenuitem>
+  </menuchoice>menu item.
+</para>
+
+<screenshot>
+  <screeninfo>configure icalendar export</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_plugins_ical.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>configure icalendar export</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para>
+  The exported file will contain one event for each scheduled transaction.  There are
+  controls to configure whether to have the calender show reminders for the events,
+  as well as how many reminders, and how far ahead of the events the reminders are
+  created, although these seem not to currently have any effect on the file created.
+</para>
+
+<para>
+  The final field on the dialog allows you to specify the default name and path of
+  the exported file.  As usual, you can either type the full path, or click the file
+  selector icon at the right and get a file selector dialog.  Currently, the file
+  save dialog does default to the folder specified here, but you still need to enter
+  the actual file name at the time of export.
+</para>
+</sect2>
+
+<!-- FIXME: There is some overlap between here and the Reference/Settings section.
+            There should be better coordination between the two areas.  -->
+<sect2 id="details.settings.plugins.kbanking"><title>KBanking</title>
+
+<para>
+  This plugin adds support for HBCI/FinTs, OFX, and PayPal online banking by using
+  <ulink url="https://www.aquamaniac.de/rdm/">AqBanking</ulink>, which is a an open
+  source project on its own.  Most of the protocols is uses to communicate with banks
+  are only used in Germany.
+</para>
+
+<para>
+  Configuring this plugin is not done through this dialog, but with the <link
+  linkend="reference.menus.settings.help"> <guimenu>Settings</guimenu>
+  <guisubmenu>Configure Aqbanking...</guisubmenu> </link> menu item, and there is
+  further information there.
+</para>
+</sect2>
+
+<sect2><title>QIF Exporter, QIF Importer</title>
+<para>
+  These are described in the section on <link
+  linkend="details.impexp.qif.profile">QIF Profiles</link>.  As pointed out in that
+  section, QIF Import and QIF Export are implemented as separate plugins, they both
+  utilize the same set of profiles.
+</para>
+</sect2>
+
+<sect2 id="details.settings.plugins.reports"><title>Reports view</title>
+<para>
+  This provides a dialog where you can configure some default values to be used when
+  displaying <link linkend="details.reports">Reports</link>.  The details are
+  described with the other <link linkend="details.reports.config.plugin">Report
+  Configuration</link> settings.
+</para>
+</sect2>
+
+<sect2><title>XML Storage</title>
+<para>
+  The default storage of your data is in &XML; format, described in the chapter on
+  <link linkend="details.formats">File Formats</link>.  Because the code which reads
+  and saves your data is implemented as a plugin, the configuration dialog which
+  controls some aspects of this storage is accessed through the Plugin section of the
+  general KMyMoney Configuration, although it is described in the above linked
+  section.
+</para>
 </sect2>
 </sect1>
 </chapter>

@@ -3,68 +3,72 @@
 <chapterinfo>
   <authorgroup>
     <author> &Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2014-08-30</date>
-  <releaseinfo>4.7.01</releaseinfo>
+  <date>2024-12-01</date>
+  <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>File Formats</title>
 
 <para>
   Unless you choose to use a <link linkend="details.database">relational
-  database</link>, &kmymoney; will store all your financial information in a
-  file ending in <filename class="extension">.kmy</filename>. Also, unless you use a <link
-  linkend="firsttime.launch">command line option</link> that tells it not to do
-  so, when you launch &kmymoney;, it will open the last file it had open.
-  However, it is important to know that there is more than one type of file
-  &kmymoney; can use to hold your financial data.
+  database</link>, &kmymoney; will store all your financial information in a file.
+  Most commonly, the file name will end in <filename
+  class="extension">.kmy</filename>.  Also, when you launch &kmymoney;, unless you
+  use a <link linkend="firsttime.launch">command line option</link> that tells it not
+  to do so, it will open the last file it had open.  However, it is important to know
+  that there is actually more than one type of file &kmymoney; can use to hold your
+  financial data.
 </para>
 
 <para>
-  This chapter describes the formats in which &kmymoney; stores its data in
-  permanent form on the user's storage device. In general, &kmymoney; stores its
-  information in form of an &XML; document. Depending on the actual format, this
-  &XML; document will be written:
-
-<itemizedlist>
-  <listitem><para>as a <link linkend="details.formats.plain">plain text
-    file</link> encoded in UTF-8,</para></listitem>
-
-  <listitem><para>as a <link linkend="details.formats.compressed">compressed
-    file</link> using GZIP compression,</para></listitem>
-
-  <listitem><para>as an <link linkend="details.formats.encrypted">encrypted
-  file</link> using GPG encryption, or</para></listitem>
-
-  <listitem><para>as an <link linkend="details.formats.anonymous">anonymous
-    plain text file</link> encoded in UTF-8 but with all your personal data
-    scrambled.</para></listitem>
-</itemizedlist>
+  This chapter describes the file formats in which &kmymoney; can store its data in
+  permanent form.  It also discusses backing up your data.
 </para>
 
-<sect1 id="details.formats.plain">
-<title>Plain text file</title>
+<sect1><title>Data File formats</title>
+<para>
+  In general, &kmymoney; stores its
+  information in form of an &XML; document.  Depending on the actual format, which is
+  set in &kmymoney;'s configuration, this &XML; document will be written:
+ 
+  <itemizedlist>
+    <listitem><para>as a plain text file, encoded in UTF-8,</para></listitem>
+
+    <listitem><para>as a compressed file, using GZIP compression,</para></listitem>
+
+    <listitem><para>as an encrypted file, using GPG encryption, or</para></listitem>
+
+    <listitem>
+      <para>
+        as an anonymous plain text file, encoded in UTF-8 but with all your personal data scrambled.
+      </para>
+    </listitem>
+  </itemizedlist>
+
+  Each of these is described in more detail in the following sections.
+</para>
+
+<sect2 id="details.formats.plain"><title>Plain text file</title>
 <para>
   This is the most space consuming format supported, as no compression is
-  performed. It is not intended for normal use, and is provided to support
-  debugging purposes and the capability to modify the file manually. If you end
+  performed.  It is not intended for normal use, and is provided to support
+  debugging purposes and the capability to modify the file manually.  If you end
   a filename in <filename class="extension">.xml</filename>, the file will be
   stored in this format.
 
-<caution>
+<note>
   <para>
-    Manual modification of the file is not recommended to the normal user, and
-    should only be performed if the internal working of &kmymoney; is fully
-    understood or if instructions from the developers tell you what to do. Don't
-    blame the &kmymoney; developers if you screw up your data: You have been
-    warned!
+    Manual modification of the file is not recommended to the normal user, and should
+    only be performed if the internal working of &kmymoney; is fully understood or if
+    instructions from the developers tell you what to do.  Don't blame the &kmymoney;
+    developers if you damage or destroy your data: You have been warned!
   </para>
-</caution>
+</note>
 </para>
-</sect1>
+</sect2>
 
-<sect1 id="details.formats.compressed">
-<title>GZIP-compressed file</title>
+<sect2 id="details.formats.compressed"><title>GZIP-compressed file</title>
 <para>
   This is the normal format used by &kmymoney; when you store a file with the
   extension <filename class="extension">.kmy</filename>.
@@ -72,130 +76,243 @@
 
 <note>
   <para>
-    If <link linkend="details.formats.encrypted">encryption</link> has been
-    selected, the file will be stored encrypted.
+    If <link linkend="details.formats.encrypted">encryption</link> has been selected
+    in the configuration, the file will be stored encrypted, as described in the next
+    section.
   </para>
 </note>
 
 <para>
   If you want to look at the contents of a GZIP compressed file, rename it to a
-  filename ending in <filename class="extension">.gz</filename> (&eg;,
-  rename <filename>myfinances.kmy</filename>
-  to <filename>myfinances.kmy.gz</filename>), then use <command>gunzip</command>
-  to uncompress the file and look at it. You don't have to compress it before
-  loading it into &kmymoney; the next time, because &kmymoney; can read the
-  uncompressed data as well. Nevertheless, if you save it thereafter, it will be
-  saved compressed again. Use the <link linkend="details.formats.plain"><filename
-  class="extension">.xml</filename></link> extension to write it in uncompressed
-  format.
+  filename ending in <filename class="extension">.gz</filename> (&eg;, rename
+  <filename>myfinances.kmy</filename> to <filename>myfinances.kmy.gz</filename>),
+  then use <command>gunzip</command> to uncompress the file and look at it.  You
+  don't have to compress it before loading it into &kmymoney; the next time, because
+  &kmymoney; can read the uncompressed data as well.  Nevertheless, if you save it
+  thereafter, it will be saved compressed again. Use the <link
+  linkend="details.formats.plain"><filename class="extension">.xml</filename></link>
+  extension to write it in uncompressed format.
 </para>
-</sect1>
+</sect2>
 
-<sect1 id="details.formats.encrypted">
-<title>GPG-encrypted file</title>
+<sect2 id="details.formats.encrypted"><title>GPG-encrypted file</title>
 <para>
   Using the GPG-encrypted file format is a very secure method of storing your
-  personal finance data on your storage device. When &kmymoney; has been
-  instructed through the settings dialog to store your data encrypted, it will
-  cipher the data using GPG and the key you provided before actually storing
-  it. When opening an encrypted file, you have to provide the passphrase
-  necessary to open your keyring. The encrypted file itself will be stored in
-  GPG's <emphasis>&ASCII; armored</emphasis> format.
+  personal finance data on your storage device.  When &kmymoney; has been instructed
+  through the settings dialog to store your data encrypted, it will cipher the data
+  using GPG and the key you provided before actually storing it.  When opening an
+  encrypted file, you have to provide the passphrase necessary to open your keyring.
+  The encrypted file itself will be stored in GPG's <emphasis>&ASCII;
+  armored</emphasis> format.
   <note>
     <para>
-      When using GPG encryption, GPG also compresses the file, so no extra
+      When using GPG encryption, GPG also compresses the file using gzip, so no extra
       compression is necessary.
     </para>
   </note>
 </para>
 
-<sect2 id="details.formats.encrypted.gpgkeys">
-<title>GPG-Keys</title>
+<sect3 id="details.formats.encrypted.gpgkeys"><title>GPG-Keys</title>
 <para>
   If you have not done so already for mail encryption, you need to generate a
-  key-pair in order to use the GPG encryption feature of
-  &kmymoney;. Also, <application>GPG</application> must be installed on your
-  system.
+  key-pair in order to use the GPG encryption feature of &kmymoney;.  Also,
+  <application>GPG</application> must be installed on your system.
 </para>
 
 <para>
-  The details about how to generate a key-pair and how to take care of it are
-  beyond the scope of this document.  A Mini Howto on this subject can be found
-  at <ulink url="https://www.gnupg.org/documentation/howtos.en.html">https://www.gnupg.org/documentation/howtos.en.html</ulink>.
+  The details about how to generate a key-pair and how to take care of it are beyond
+  the scope of this document.  A Mini Howto on this subject can be found at <ulink
+  url="https://www.gnupg.org/documentation/howtos.en.html">https://www.gnupg.org/documentation/howtos.en.html</ulink>.
+  The web sites of most &Linux; distributions also contain instructions on using GPG
+  in that distribution.
 </para>
-</sect2>
+</sect3>
 
-<sect2 id="details.formats.encrypted.keysettings">
-<title>Setting the keys in &kmymoney;</title>
+<sect3 id="details.formats.encrypted.keysettings"><title>Setting the keys in &kmymoney;</title>
 <para>
-  On the encryption page of the settings dialog, there is a drop down 
-  list where you can select the key that should be used for encryption and 
-  decryption. Additionally you can find a field where you can enter the 
-  key-id of a key not in the listbox. You can use either the key-id, the 
-  email address associated with this key, or any other valid GPG key 
-  identification as the value for this field. When you enter the key-id, 
-  &kmymoney; will check its validity and display a green LED icon in the 
-  dialog if a key is found.
+  On the encryption page of the settings dialog, there is a dropdown list where you
+  can select the key that should be used for encryption and decryption.
+  Additionally, there is a field where you can enter the key-id of a key not in the
+  listbox.  You can use either the key-id, the email address associated with this
+  key, or any other valid GPG key identification as the value for this field.  When
+  you enter the key-id, &kmymoney; will check its validity and display a green LED
+  icon in the dialog if a key is found.
   <caution>
     <para>
-      Make sure you have both the public and the private key for this id. If you
-      do not own the private key for the id entered, you will not be able to
-      open the file again.
+      Make sure you have both the public and the private key for this id. If you do
+      not own the private key for the id entered, you will not be able to open the
+      file again.
     </para>
   </caution>
 </para>
-</sect2>
+</sect3>
 
-<sect2 id="details.formats.encrypted.recoverkey">
-<title>The &kmymoney; recover key</title>
+<sect3 id="details.formats.encrypted.recoverkey"><title>The &kmymoney; recovery key</title>
 <para>
   Also on this page of the settings dialog you have the choice of selecting
-  supplemental encryption with the &kmymoney; recover key. This option is
-  available to you if that key is stored in your <application>GPG</application>
-  keyring. Selecting this option will allow you to recover your data even in the
-  case you lose your own private key. This is possible because the data is not
-  only encrypted for your own key, but also for the &kmymoney; recover key. This
-  key is only available to selected &kmymoney; developers (at the time of
-  writing only to the author).  As of the release of &kmymoney; version 4.7, the
-  recover key is set to expire on 3 January 2015.
+  supplemental encryption with the &kmymoney; recovery key.  This option is available
+  to you if that key is stored in your <application>GPG</application> keyring.
+  Selecting this option will allow you to recover your data even in the case you lose
+  your own private key.  This is possible because the data is not only encrypted for
+  your own key, but also for the &kmymoney; recovery key.  This key is only available
+  to selected &kmymoney; developers (at the time of writing only to the author.)  As
+  of the May, 2024, the recovery key is set to expire on 7 January 2025.
 </para>
 
 <para>
-  Under normal circumstances, you will open/save/close your file as usual. In
-  the abnormal case of loss of your key, you have the chance to contact one of
-  the developers who has access to the &kmymoney; recover key and request help
-  to recover your data. You may contact the developers via email to the
-  &kmymoney; developer mailing list at &devlist;.
+  Under normal circumstances, you will open/save/close your file as usual. In the
+  abnormal case of loss of your key, you have the chance to contact one of the
+  developers who has access to the &kmymoney; recover key and request help to recover
+  your data. You may contact the developers via email to the &kmymoney; developer
+  mailing list at &devlist;.
 </para>
+
+<para>
+  To get the recovery key, go to <ulink url="https://kmymoney.org/recovery.html"> The
+  KMyMoney recovery key</ulink> page of the &kmymoney; web site.  Copy and save the
+  <quote>PGP PUBLIC KEY BLOCK</quote> (including the <quote>BEGIN</quote> and
+  <quote>END</quote> lines) to a text file and then import it with gpg.
+</para>
+
+<para>
+  Remember that the developer can only help recover your data file if you acually do
+  encrypt it with the recovery key, in addition to your own key.
+</para>
+</sect3>
+</sect2>
+
+<sect2 id="details.formats.anonymous"><title>Anonymous file</title>
+<para>
+  This format is not intended to be used for normal data storage.  It is supported so
+  that in case of a problem, you can supply the &kmymoney; development team with your
+  file without disclosing any of the confidential details in your financial data.
+  For example, it changes institution, account, payee, and category names to strings
+  such as "I000001" and "A000001"; it makes similar changes to all data such as
+  account numbers, and it also randomly changes the amounts of transactions.
+</para>
+
+<para>
+  If instructed by the developers, use the <guimenuitem>Save as...</guimenuitem> menu
+  item to store your data in anonymous format by selecting <literal
+  role="filter">Anonymous files</literal> as the filter.  This also changes the file
+  extension to <filename class="extension">.anon.xml</filename>.
+</para>
+
+<para>
+  To verify that your problem still exists, reload this anonymized file and try to
+  duplicate your problem.  If the problem is still present, send the file to the
+  developer mailing list at &devlist; for further investigation.  If the problem does
+  not show ... well, I don't want to think about this scenario right now.
+</para>
+</sect2>
+
+<sect2><title>Data file locations</title>
+<para>
+  All of the above file types can be stored on a local hard drive, a removeable
+  devicee such as a usb thumb drive, or a network location.  Depending on your
+  Operating System, a remote location may need to be mapped or mounted prior to use.
+</para>
+
+<note><title>Limitation on Windows</title>
+  <para>
+    On &Windows;, in order to use a netork or remote file location, that mapped
+    location must be mapped to a drive letter.
+  </para>
+</note>
+
 </sect2>
 </sect1>
 
-<sect1 id="details.formats.anonymous">
-<title>Anonymous file</title>
+<sect1 id="details.formats.backup"><title>Backup</title>
 <para>
-  This format is not intended to be used for normal data storage.  It is
-  supported so that in case of a problem, you can supply the &kmymoney;
-  development team with your file without disclosing any of the confidential
-  details in your financial data.  For example, it changes institution, account,
-  payee, and category names to strings such as "I000001" and "A000001", it makes
-  similar changes to all data such as account numbers, and it also randomly
-  changes the amounts of transactions.
+  We will not attempt here to convince you that making backup copies of your data is
+  an extremely good idea; hopefully you are already convinced of that.  This section
+  describes three ways to do this, and you can use any one, two, or even all three of
+  them.  Note that this is about backing up a data file; if you use an SQL backend to
+  store your data, see the documentation for that database system for instructions on
+  making backups.
+</para>
+
+<sect2><title>Backup file location</title>
+<para>
+  If you need a backup copy of your data to confirm some aspect of your finances at a
+  previous point in time, or to revert to an earlier state, such as to undo importing
+  a lot of data to the wrong account, it doesn't matter whether the backup copy is
+  local or stored elsewhere, such as on an attached network drive.  However, if you
+  need a backup to recover from loss of data if you disk drive failed, for example,
+  it is essential that the backup is <emphasis>not</emphasis> on the same drive as
+  your primary data file.  In case of a larger disaster, such as a house fire, you
+  would need a backup copy stored in a fireproof safe or at a physically different
+  location.  Please keep this in mind as you establish your backup strategy.
+</para>
+</sect2>
+
+<sect2><title>Autosave</title>
+<para>
+  &kmymoney; has the ability to automatically save a copy of your data file at
+  regular intervals.  It can also do so on closing the program, if the data has
+  changed.  This behavior can be configured on the &kmymoney; <link
+  linkend="details.settings.general.global">configuration dialog, General section,
+  Global tab</link>.
+</para>
+</sect2>
+
+<sect2><title>File copy</title>
+<para>
+  Unless you are using SQL storage, your data may be compressed, and it may be
+  encrypted, but is kept in a regular file.  Whenever you save your data with the
+  <menuchoice><guimenu>File</guimenu><guimenuitem>Save</guimenuitem></menuchoice>
+  menu item, it writes all your data to a file, replacing the previous version.  The
+  most straightforward way of backing up your data is by making a copy of that file.
+  A single copy can even have the same file name if it is in a different folder than
+  your original file, but if you are going to keep multiple copies, it makes sense to
+  include some version of the current date and time in each file name.  You can save
+  these to a network drive, or to a USB storage device, or even to an optical device.
+  The primary downside of this method is that you need to keep track of all the
+  backups, but it does provide the most flexibility.
+</para>
+</sect2>
+
+<sect2><title>Backup command</title>
+<para>
+  To make things a bit easier, you can select the <menuchoice>
+  <guimenu>File</guimenu> <guimenuitem>Backup</guimenuitem> </menuchoice> menu item.
+</para>
+
+<screenshot>
+  <screeninfo>file backup</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="file-backup.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>file backup</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para>
+  When you click <guibutton>OK</guibutton> &kmymoney; will create a copy of your data
+  file, with the date (formatted as YYYY-MM-DD) appended to the name.  Note that this
+  means only one backup per day can be created by this method.  If you have already
+  created a backup on the same day, &kmymoney; will ask if you want to replace the
+  previous backup or cancel.
 </para>
 
 <para>
-  If instructed by the developers, use the <guimenuitem>Save as...</guimenuitem>
-  menu item to store your data in anonymous format by selecting <literal
-  role="filter">Anonymous files</literal> as the filter. This also changes the
-  file extension to <filename class="extension">.anon.xml</filename>.
+  &kmymoney; will save this file to the directory specified in the <guilabel>Mount
+  Point</guilabel> field.  You can either manually type the full path to the
+  directory or click <guibutton>Choose...</guibutton> and navigate to it using the
+  file browser.  The directory can be on a local storage device or it can be a
+  network folder.
 </para>
 
 <para>
-  To verify that your problem still exists, reload this anonymized
-  file and try to duplicate your problem. If the problem is still
-  present, send the file to the developer mailing list at &devlist;
-  for further investigation. If the problem does not show ... well, I
-  don't want to think about this scenario right now.
+  If the specified directory is actually a mount point for a storage device that is
+  not always mounted, you can check the <guilabel>Mount this directory before backing
+  up</guilabel> checkbox.  Do not use this for a regular network file share which is
+  always moutned.
 </para>
+</sect2>
 </sect1>
 </chapter>
-

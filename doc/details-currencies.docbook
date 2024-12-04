@@ -4,159 +4,275 @@
   <authorgroup>
     <author> &Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
     <author>&Michael.Carpino; &Michael.Carpino.mail;</author>
+    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2020-02-20</date>
-  <releaseinfo>5.0.8</releaseinfo>
+  <date>2024-12-01</date>
+  <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>Currencies</title>
 
 <para>
-  &kmymoney; supports the use of multiple currencies in different accounts. For
-  example, you can set up a bank account in Euros, another in British Pounds, and
-  still have your credit card account in US Dollars.
+  &kmymoney; supports the use of multiple currencies in different accounts.  For
+  example, you can set up a savings account in Euros, a checking account in British
+  Pounds, and still have your credit card account in US Dollars.
 </para>
 
-<sect1 id="details.currencies.basecurrency">
-<title>Base currency</title>
-
+<sect1 id="details.currencies.basecurrency"><title>Base currency</title>
 <para>
-  During the initial &kmymoney; New File Setup, you will be asked to select the
-  base currency.  Usually, the base currency is the currency you use in your
-  country.  The base currency is the one that all income and expense categories
-  use and that reports will be based on. When you set up a new account &kmymoney;
-  will automatically default to the base currency.  If your account requires you
-  to use a different currency, you can change it during the New Account Setup.
+  During the initial &kmymoney; <link linkend="firsttime.newfile"> New File
+  Setup</link>, you are asked to select the base currency.  Usually, the base
+  currency is the currency you use in your home country.  The base currency is the
+  one that all income and expense categories use and that reports will be based on.
+  When you set up a new account, &kmymoney; will automatically default to the base
+  currency.  If your account requires you to use a different currency, you can change
+  it during the <link linkend="details.accounts.create.account">New Account
+  Setup</link>.
 </para>
 
 <para>
-	<screenshot>
-	<screeninfo>The select currency dialog</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="select_currency.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>select currency</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
+  &kmymoney; is released with a list of all currencies known at the time, and that is
+  the list from which you chose the default currency when you created your data file.
+  The <guilabel>Currencies</guilabel> dialog is where you manage the list of
+  currencies used in your data file.  To display this dialog, select the
+  <menuchoice><guimenu>Tools</guimenu><guimenuitem>Currencies...</guimenuitem></menuchoice>
+  menu item.
 </para>
 
-<sect2 id="details.currencies.newcurrency">
-<title>Adding a new currency</title>
+<sect2 id="details.currencies.addcurrency"><title>Adding a currency to your data file</title>
+<screenshot>
+  <screeninfo>currencies dialog</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="currency_dialog1.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>currencies dialog</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
-  Although it does not happen often, sometimes a new currency is introduced.
-  This can be a new virtual currency, such as Bitcoin, or a change introduced by
-  a country for financial policy reasons.  While any such currency will be added
-  to the next version of &kmymoney; it is possible to add it manually, in case
+  For a newly created data file, the Currencies dialog will show only the currency
+  you chose as the default currency.  If you want to use a different currency for a
+  new account, you must first add that currency.  By clicking
+  <guibutton>Add</guibutton>, you will be presented with the same list of currencies
+  from which you chose the default currency.  You can either scroll through the list
+  or use the search box at the top to find the currency you wish to use.  Click that
+  currency, and click <guibutton>OK</guibutton>.  The Currencies dialog will then
+  include that currency in the list displayed, and you can now select that currency
+  when creating a new account.
+</para>
+</sect2>
+
+<sect2 id="details.currencies.newcurrency"><title>Adding a new currency</title>
+<screenshot>
+  <screeninfo>add a new currency</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="select_currency.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>add a new currency</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para>
+  Although it does not happen often, sometimes a new currency is introduced.  This
+  can be a new virtual currency, such as Bitcoin, or a change introduced by a country
+  for financial policy reasons.  While any such currency will be added to the next
+  version of &kmymoney;, it is possible to add it to your data file manually, in case
   you have a need to begin using it immediately.
 </para>
 
 <para>
-  To manually add a currency, select the
-  <menuchoice><guimenu>Tools</guimenu><guimenuitem>Currencies...</guimenuitem></menuchoice>
-  menu item to display the <guilabel>Currencies</guilabel> dialog, as shown above. Right
-  click on any existing currency and select <guimenuitem>New currency</guimenuitem>
-  from the <guimenu>Currency Options</guimenu> context menu.  Enter the official code for the
-  currency and click <guilabel>OK</guilabel>.  The currency will be created with
-  the name <quote>New Currency</quote>.  To change the name, either press
-  <keycap>F2</keycap> or right click and select <guimenuitem>Rename currency</guimenuitem>.
+  To manually add a currency, bring up the Currencies dialog, as shown above.
+  Right-click any existing currency and select <guimenuitem>New
+  currency</guimenuitem> from the <guimenu>Currency Options</guimenu> context menu,
+  or click <guibutton>New</guibutton>.  This will bring up the <guilabel>Currency
+  editor</guilabel>.
+</para>
+
+<screenshot>
+  <screeninfo>currency editor</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="currency_editor.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>currency editor</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para>
+  The Currency editor has some similarities to the dialog for editing details of securities
+</para>
+
+<itemizedlist>
+  <listitem>
+    <para>
+      ISO Code: the <ulink
+      url="https://www.iso.org/iso-4217-currency-codes.html">official alpha
+      code</ulink> for the currency.  ISO also specified a numeric code, but this is
+      not used in &kmymoney;.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      Name: the full name of the currency.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      Symbol: the graphic symbol that represents the currency, such as $ for United
+      States Dollar (USD) or € for the Euro (EUR.)  In some cases, the symbol can
+      only be specified in a particular character set that includes the appropriate
+      glyph.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      Smallest account unit: the smallest officially supported unit of the currency.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      Smallest cash unit: the smallest unit for which there is actually a bill or
+      coin.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      Rounding method: this dropdown provides a list of possible rules for rounding
+      amounts calculated with more precision than allowed by the smallest account
+      unit.
+    </para>
+  </listitem>
+  
+  <listitem>
+    <para>
+      Price precision: the number of digits or decimal places to be used for
+      recording values in the currency.
+    </para>
+  </listitem>
+</itemizedlist>
+
+<para>
+  Enter the information and click <guilabel>OK</guilabel>, and the currency will be
+  created.
 </para>
 </sect2>
 </sect1>
 
-<sect1 id="details.currencies.accountsetup">
-<title>Account setup</title>
-
-<para>
-  When you create a new account, you specify the currency in which it will be
-  managed. The New Account wizard defaults this setting to the <link
-  linkend="details.currencies.basecurrency">base currency</link>.  If you
-  require a different currency, you need to select it during this initial setup.
-  The ledger for the account will then show all values in the selected currency.
-</para>
-</sect1>
-
-<sect1 id="details.currencies.transactions">
-<title>Entering transactions using different currencies</title>
-
+<sect1 id="details.currencies.transactions"><title>Entering transactions using different currencies</title>
 <para>
   Whenever a transaction is entered that refers to more than one currency, the
-  exchange rate editor pops up and allows you to enter an exchange
-  rate. Initially, the current price available from the price database will be
-  used as exchange rate. See <link linkend="details.currencies.prices">Entering
-  exchange rates for currencies</link> for more information on how to provide
-  exchange rates manually and obtain online price information.
+  exchange rate editor pops up and allows you to enter an exchange rate.  Initially,
+  the most recent price available from the price database will be used as the
+  exchange rate.  See <link linkend="details.currencies.prices">Entering exchange
+  rates for currencies</link> for more information on how to provide exchange rates
+  manually and obtain online price information.
 </para>
 
 <para>
-  Optionally, the exchange rate is saved in the price database once entered by
-  the user.
+  Optionally, the exchange rate is saved in the price database once entered by the
+  user.
 </para>
 </sect1>
 
-<sect1 id="details.currencies.prices">
-<title>Exchange rates for currencies</title>
+<sect1 id="details.currencies.prices"><title>Exchange rates for currencies</title>
 
-<sect2>
-<title>Entering prices manually</title>
-
+<sect2><title>Entering prices manually</title>
 <para>
-  The price database editor allows you to enter exchange rates between
-  currencies or prices for investments.  You can pull it up using the
+  The <guilabel>Price Editor</guilabel>, also called the price database editor,
+  allows you to enter or modify prices for both investments and exchange rates
+  between currencies.  You can pull it up using the
   <menuchoice><guimenu>Tools</guimenu><guimenuitem>Prices...</guimenuitem></menuchoice>
   menu item.
 </para>
 
+<screenshot>
+  <screeninfo>security and Currency price editor</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="currency_priceeditor.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>security and currency price editor</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
 <para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="currency_priceeditor.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Currency Price Editor</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
+  The first column in the dialog is labelled <guilabel>Commodidty</guilabel>, which
+  displays both trading symbols of securites and the symbols of currencies.  In
+  &kmymoney;, a <quote>Price</quote> is the price of security in terms of a currency,
+  or of a currency in terms of a second currency.  For example, as I write this, the
+  price of 1 USD in terms of 1 EUR is 0.94; that is, 1 USD costs 0.94 EUR.  The first
+  currency is the one being bought or sold, and the second one is the currency used
+  to buy or sell it.
 </para>
 
 <para>
-  In &kmymoney; a <quote>Price</quote> is the price of one currency in terms of
-  a second currency.  For example, as I write this, the price of 1 USD in terms
-  of 1 EUR is 0.83; that is, 1 USD costs 0.83 EUR.  The first currency is the
-  one being bought or sold, and the second one is the currency used to buy or
-  sell it.
+  To manually enter a new exchange rate, press the <guibutton>New</guibutton> button,
+  and you get the New Price Entry dialog.
+</para>
+
+<screenshot>
+  <screeninfo>new price entry</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="currency_newpriceentry.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>new price entry</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para>
+  Enter the first currency (USD in the example above) in the Security field.
+  Enter the second currency (EUR in the example above) in the Currency field.  Enter
+  the effective date of the price in the Date field.
 </para>
 
 <para>
-  When you press the <guibutton>New</guibutton> button, you get the New Price
-  Entry dialog.  Enter the first currency (USD in the example above) in the
-  Security field.  Enter the second currency (EUR in the example above) in the
-  Currency field.  Enter the effective date of the price in the Date field.
+  Press the <guilabel>OK</guilabel> button, and you will then see the
+  <guilabel>Exchange Rate/Price Editor</guilabel> dialog.
 </para>
 
+<screenshot>
+  <screeninfo>exchange rate/price editor</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="exchange_rate_editor.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>exchange rate/price editor</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
 <para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="currency_newpriceentry.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>New Price Entry</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
+  You can specify a price in two ways.  You can enter the <guilabel>To
+  amount</guilabel> or total price of the first currency in terms of the second, or
+  you can enter the actual Exchange rate.  In this case, since you are entering the
+  number of EUR for 1 USD, those two values are the same.  However, this is the same
+  dialog used to enter an exchage rate when you enter a transaction which involves
+  two currencies.  In that case, you will generally enter the amount, and let
+  &kmymoney; calculate the exachange rate, taking care of any rounding.
 </para>
 </sect2>
 
-<sect2>
-<title>Online currency updates</title>
-
+<sect2><title>Online currency updates</title>
 <para>
-  &kmymoney; will fetch currency conversions from the web.  Once you have
+  &kmymoney; can fetch currency conversion rates from the web.  Once you have
   entered a single price for a pair of currencies, the online quote feature will
   always list that pair amongst its options.
 </para>

@@ -50,7 +50,7 @@
 
 <author>
   <firstname>Jack</firstname><othername>H.</othername><surname>Ostroff</surname>
-  <contrib>Documentation.</contrib>
+  <contrib>Documentation and user support.</contrib>
   <email>ostroffjh@users.sourceforge.net</email>
 </author>
 
@@ -74,9 +74,9 @@
     <contrib>Developer, previous versions.</contrib>
     <email>arniing@users.sourceforge.net</email></author>
 
-    These persons were not previously listed as authors here, but are included
-    in credits.docbook.  They should either be dropped from there or included
-    here.
+    These persons were not previously listed as authors here, but are included in
+    credits.docbook and as authors of some chapter(s).  They should either be dropped
+    from there or included here.
 
     <author><firstname>Ace</firstname><surname>Jones</surname>
     <contrib>Reports.  OFX Import.  Online Quotes.  Documentatation.  Previous versions.</contrib>
@@ -88,8 +88,8 @@
 
     There are eight additional people in credits.docbook for "Special Thanks."
     Should any of them be included here?  -->
-<date>2016-06-17</date>
-<releaseinfo>KMyMoney 5.0</releaseinfo>
+<date>2024-12-01</date>
+<releaseinfo>KMyMoney 5.2</releaseinfo>
 </refentryinfo>
 
 <refmeta>
@@ -115,17 +115,16 @@
 <group choice="opt"><option>--trace</option></group>
 <group choice="opt"><option><replaceable>file</replaceable></option></group>
 </cmdsynopsis>
-
 </refsynopsisdiv>
 
 <refsect1>
 <title>Description</title>
 
-<para>&kmymoney; is the Personal Finance Manager by &kde;.  It
-provides the functions required to balance your checkbooks, manage your personal
-loans and categories your incomes and expenses using a checkbook style graphical
-user interface.</para>
-
+<para>
+  &kmymoney; is the Personal Finance Manager by &kde;.  It provides the functions
+  required to balance your checkbooks, manage your personal loans and categories your
+  incomes and expenses using a checkbook style graphical user interface.
+</para>
 </refsect1>
 
 <refsect1>
@@ -136,36 +135,28 @@ user interface.</para>
 <varlistentry>
 <term><option>--lang</option></term>
 <listitem>
-<para>
-Language to be used
-</para>
+<para>Language to be used</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term><option>-n</option></term>
 <listitem>
-<para>
-Do not open last used file
-</para>
+<para>Do not open last used file</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term><option>--timers</option></term>
 <listitem>
-<para>
-Enable performance timers
-</para>
+<para>Enable performance timers</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term><option>--nocatch</option></term>
 <listitem>
-<para>
-Do not globally catch uncaught exceptions
-</para>
+<para>Do not globally catch uncaught exceptions</para>
 </listitem>
 </varlistentry>
 
@@ -173,7 +164,8 @@ Do not globally catch uncaught exceptions
 <term><option>--trace</option></term>
 <listitem>
 <para>
-Turn on program traces. This option is only available when &kmymoney; is compiled in debug mode.
+  Turn on program traces. This option is only available when &kmymoney; is compiled
+  in debug mode.
 </para>
 </listitem>
 </varlistentry>
@@ -182,7 +174,8 @@ Turn on program traces. This option is only available when &kmymoney; is compile
 <term><option>--dump-actions</option></term>
 <listitem>
 <para>
-Dump the names of all defined QAction objects to stdout and quit. This option is only available when &kmymoney; is compiled in debug mode.
+  Dump the names of all defined QAction objects to stdout and quit. This option is
+  only available when &kmymoney; is compiled in debug mode.
 </para>
 </listitem>
 </varlistentry>
@@ -196,13 +189,14 @@ Dump the names of all defined QAction objects to stdout and quit. This option is
 <title>See Also</title>
 
 <simplelist>
-<member>The full documentation for &kmymoney; is maintained as a docbook manual.
-If the &khelpcenter; program is properly installed at your site, the command
-<userinput><command>khelpcenter</command>
-<parameter>help:/kmymoney</parameter></userinput> should give you access to the
-complete manual.  Alternatively the manual can be browsed in &konqueror; giving
-it the <acronym>URL</acronym> <ulink
-url="help:/kmymoney">help:/kmymoney</ulink></member>
+<member>
+  The full documentation for &kmymoney; is maintained as a docbook manual.  If the
+  &khelpcenter; program is properly installed at your site, the command <userinput>
+  <command>khelpcenter</command> <parameter>help:/kmymoney</parameter> </userinput>
+  should give you access to the complete manual.  Alternatively the manual can be
+  browsed in &konqueror; giving it the <acronym>URL</acronym> <ulink
+  url="help:/kmymoney">help:/kmymoney</ulink>
+</member>
 <member>kf5options(7)</member>
 <member>qt5options(7)</member>
 </simplelist>

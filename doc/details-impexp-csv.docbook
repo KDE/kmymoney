@@ -1,269 +1,444 @@
 <sect1 id="details.impexp.csv">
 <sect1info>
-   <author> &Allan.Anderson; &Allan.Anderson.mail; </author>
+  <author>&Allan.Anderson;</author>
+  <author>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
 </sect1info>
 <title>CSV Importer Plugin</title>
 
-<sect2>
-<title>Reasons for importing CSV Files</title>
-
+<sect2><title>Reasons for importing CSV Files</title>
 <para>
-  In general, it is preferable to import OFX.  However, not all institutions
-  provide data in that format.  CSV (comma separated value) files are almost
-  always available, sometimes described as Excel or spreadsheet files.  Also,
-  they can often be created fairly easily by capturing the data you want to
-  import, such as in a text file, and manually editing it.
+  In general, it is preferable to import OFX.  However, not all institutions provide
+  data in that format.  CSV (comma separated value) files are almost always
+  available, sometimes described as Excel or spreadsheet files.  Also, they can often
+  be created fairly easily by capturing the data you want to import, such as in a
+  text file, and manually editing it.
 </para>
 
 <para>
-  The primary focus of the plugin is on importing data from bank statements, but
-  there is also a capability to import some investment statements.  This plugin
-  was initially created, before becoming a CSV importer, to produce QIF files
-  from CSV, which could then be imported.  This functionality is still present,
-  but is likely to be removed, as the plugin now focuses on directly importing
+  The initial focus of the CSV Importer was on handling data from bank statements,
+  but the ability to also import some investment statements was added.  In addition,
+  it has been further enhanced to import both currency and stock prices.  The
+  original code for this was initially created, before becoming a CSV importer, to
+  produce QIF files from CSV files, which could then be imported.  This ability is
+  still present, but is likely to be removed, as focus is now on directly importing
   CSV files.  Also, &kmymoney; has the native ability to <link
-  linkend="details.impexp.qifexp">export QIF files</link>, so there is no real
-  reason to produce a QIF file from a CSV file.
+  linkend="details.impexp.qifexp">export QIF files</link>, so there is no longer a
+  real reason to produce a QIF file from a CSV file.
 </para>
 </sect2>
 
-<sect2>
-<title>Getting the plugin</title>
-
+<sect2><title>Getting the plugin</title>
 <para>
-  &kmymoney; will import CSV files.  This functionality is provided as a plugin,
-  and it is now built into the core program, both in distro packages and in the
-  source files.  Once the distro package is installed, or the source files are
-  compiled and installed, the menu choice to import CSV files will automatically
-  show up under the
-  <menuchoice><guimenu>File</guimenu><guisubmenu>Import</guisubmenu></menuchoice>
-  submenu.
+  The CSV importer is one of the newer features to have been added to &kmymoney; in
+  the form of a plugin.  However, as with other plugins, the CSV Importer is included
+  with the core &kmymoney; source code, so it should be available in all &Linux;
+  distribution versions, as well as the versions for other platforms made available
+  through the &kmymoney; web site.  The menu choice to import CSV files should
+  automatically show up under the <menuchoice> <guimenu>File</guimenu>
+  <guisubmenu>Import</guisubmenu> </menuchoice> submenu.
 </para>
 
 <para>
-  The CSV importer plugin is much newer than the OFX plugin, but most
-  distributions are now built with the CSV importer already included or
-  available as a separate package.  Ensure that it is enabled within &kmymoney;.
-  Check the <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-  &kmymoney;...</guimenuitem><guimenuitem>Plugins</guimenuitem></menuchoice> menu item.
-  If the CSV importer does not seem to be installed in your version, the first
-  place to check is in the same place you got your base &kmymoney; package. See
-  if a later version is available, or if the importer is available as a separate
-  package.
+  To ensure that it is enabled within &kmymoney;, check the <menuchoice>
+  <guimenu>Settings</guimenu> <guimenuitem>Configure &kmymoney;...</guimenuitem>
+  </menuchoice> menu item, select <guilabel>Plugins</guilabel> on the left pane, and
+  look for the <guilabel>CSV Importer</guilabel> in the displayed list of plugins.
+  If the CSV importer does not seem to be installed in your version, the first place
+  to check is in the same place you got your base &kmymoney; package.  See if a later
+  version is available, or if the importer is available as a separate package.
 </para>
 
 <para> 
-  If you have installed from RPM or Deb, the CSV Importer Plugin should be
-  contained within the kmymoney package. If you have built from source, there
-  should be no additional requirements. The &kmymoney; build process should
-  detect the plugin source and compile the plugin.
+  If you have built from source, there should be no additional requirements. The
+  &kmymoney; build process should detect the plugin source and compile the plugin.
+  There are comfiguration settings which can be used to exclude this or other plugins
+  from being built, but these should rarely be needed.
 </para>
 </sect2>
 
-<sect2>
-<title>Importing a CSV file</title>
-
+<sect2><title>Importing a CSV file</title>
 <para>
-  To import a CSV file, choose the importer from the menu bar:
-  <menuchoice><guimenu>File</guimenu><guisubmenu>Import</guisubmenu> <guimenuitem>CSV...</guimenuitem></menuchoice>.
-  If CSV does not show up under Import, you do not have the CSV Importer Plugin
-  installed correctly.  Please see the previous section.
+  To import a CSV file, choose the importer from the main menu: <menuchoice>
+  <guimenu>File</guimenu> <guisubmenu>Import</guisubmenu>
+  <guimenuitem>CSV...</guimenuitem> </menuchoice>.  If CSV does not show up under
+  Import, the CSV Importer Plugin is not installed correctly or is not enabled.
+  Please see the previous section.
 </para>
 
 <para>
-  The CSV Importer is in the form of a wizard, with a separate page for each
-  individual step of the process.  There may be some minor differences between
-  the text in this handbook, the labels in the screenshots, and the labels you
-  actually see in the wizard.  In such cases, the handbook describes what the
-  wizard will look like in the next release.
+  The CSV Importer is presented in the form of a wizard, with a separate page for
+  each individual step of the process.
 </para>
 
-<sect3>
-<title>CSV Import Wizard: Start</title>
-
+<sect3><title>CSV Import Wizard: Start</title>
 <para>
-  When started, the CSV Importer displays the <guilabel>Start</guilabel>
-  page.  The upper area, where data will be displayed, is initially empty.
-  Below that, on the left, is a list of the steps of the import process, with
-  the current one highlighted.  To the right of that are some brief instructions
-  and two radio buttons, allowing the choice of either
-  <guilabel>Banking</guilabel> or <guilabel>Investment</guilabel>.  Next there is
-  a profile selector box, which is enabled once one of the radio buttons has
-  been selected.  At the bottom of the display are buttons to move on to the
-  next step of the wizard, go <guibutton>Back</guibutton> to the previous step,
-  or <guibutton>Cancel</guibutton> the import.  At the initial step, there is
-  also a button <guilabel>Select File</guilabel> to initially select the file to
-  import.
+  When launched, the CSV Importer displays the <guilabel>Start</guilabel> or
+  <guilabel>File</guilabel> page.  On the left is a list of the steps of the import
+  process, with the current one highlighted.  The upper right area is where data to
+  be imported will be displayed; before that it shows some brief instructions
+  relevant to the current stage of the wizard.  Below that is a set of radiobuttons
+  for selection of the type of data to be imported.  That list currently includes
+  <guilabel>Banking</guilabel>, <guilabel>Investment</guilabel>, <guilabel>Currency
+  prices</guilabel>, and <guilabel>Stock prices</guilabel>.  Next, there is a profile
+  selector dropdown, which is enabled if once the radio button has been selected for
+  one of the import file types.
 </para>
-<!-- want to use inlinemediaobject to avoid lines above and below. -->
-  <screenshot>
+
+<screenshot>
+  <screeninfo>csv import wizard: start</screeninfo>
   <mediaobject>
-  <imageobject>
-  <imagedata fileref="csvImporter_1.png" format="PNG" />
-  </imageobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_1.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>csv import wizard: start</phrase>
+    </textobject>
   </mediaobject>
-  </screenshot>
+</screenshot>
+</sect3>
 
+<sect3><title>CSV Import Profiles</title>
 <para>
-  Also, note the <guilabel>Skip setup</guilabel> checkbox next to the profile
-  selector.  Initially, you should not select this check-box.  Once you have set
-  up a profile and finished the wizard, those parameters are saved in the
-  resource file.  Next time you use that same profile, the parameters will be
-  loaded into the UI (User Interface).  The wizard would then plod through the
-  following pages of parameters that you won't need to change.  So, instead,
-  once you are happy with a profile, it may be helpful to check this box.  The
-  wizard will then move directly to the final page, and, assuming no problems
-  are found, you just have to click <guilabel>Import</guilabel>.
+  Each type of CSV file to be imported requires sepcification of several details
+  regarding the expected formatting of the data, as described in the following
+  sections.  Not only do the details differ for the different types of data files
+  imported, it is possilbe to need different configurations for the same type of data
+  from different sources.  So you do not need to enter all those details each time
+  you import a file, the CSV Importer allows you to specify the details once, and
+  save them in a named profile.
 </para>
 
 <para>
-  First select either <guilabel>Banking</guilabel> or
-  <guilabel>Investment</guilabel>, then click in the selector box, which displays
-  "Add New Profile."  If you have previously created any profiles, you can
-  select one of them, otherwise enter a new profile name, possibly the name of
-  the account into which you wish to import.  If you enter a new profile name,
-  hit &Enter; to create it.  Then, click on <guilabel>Select File</guilabel>,
-  and a standard file selector box will open, from which you should select the
-  CSV file you wish to import.
+  The name of a CSV import profile is completely arbitrary, but will be easier to
+  remember if it reflects both the type of data being imported (bank, credit card,
+  investment, ...) and the source of the data.  There is no need to reference the
+  account into which the data is imported, and it is possible to use the same profile
+  for importing into more than one account, such as two checking accounts at the same
+  bank.
+</para>
+
+<para>
+  The profile selecter dropdown includes the names of all CSV Importer profiles you
+  have previusly created, and it also lets you type the name of a new profile.  Below
+  the profile selecter dropdown, there are three buttons.  When you click
+  <guilabel>Add</guilabel>, which is always enabled, a new profile will be created
+  with the name entered in the dropdown.  Nothing will happen if that field is empty
+  or if it displays the name of an existing profile.  As you proceed through the rest
+  of the CSV import wizard, the various configuration settings you enter or modify
+  will be saved in the selected provfile.
+</para>
+
+<para>
+  If you have previously created one or more profiles, the other two buttons will be
+  enabled.  If you click <guilabel>Remove</guilabel>, the profile named in the
+  dropdown will be deleted.  If you click <guilabel>Rename</guilabel>, then alter the
+  name displayed in the dropdown, and click <guilabel>Rename</guilabel> again, the
+  profile will be renamed accordingly.
+</para>
+
+<para>
+  Next to the profile selector, there is a <guilabel>Skip setup</guilabel> checkbox.
+  Initially, you should not select this checkbox.  Once you have set up a profile and
+  finished the wizard, all the configuration parameters you enetered are saved in the
+  resource file under the profile name.  The next time you use that same profile, the
+  parameters will be loaded into the UI (User Interface).  The wizard would then plod
+  through the following pages of parameters that you won't need to change.  So, once
+  you are happy with a profile, it may be helpful to check this box.  The wizard will
+  then move directly to the final page, and, assuming no problems are found, you just
+  have to click <guilabel>Import</guilabel>.
+</para>
+
+<para>
+  At the bottom there is a <guilabel>Select File</guilabel> button.  Clicking this
+  will bring up a file selector dialog to let you choose the file to import.  At the
+  bottom of the remaining pages of the wizartd are buttons to go <guibutton>&lt;
+  Back</guibutton> to the previous step of the wizard, move on to the <guilabel>Next
+  &gt;</guilabel> step, or <guibutton>Cancel</guibutton> the import.
+</para>
+
+<para>
+  To review, on the Start page of the wizard, first select the checkbox for the type
+  of data you are importing.  In the profile selector dropdown, you can select the
+  name of a previously created CSV Importer profile, or enter a new name, possibly
+  the name of the account into which you wish to import, and click
+  <guilabel>Add</guilabel>.  Finally, click <guilabel>Select File</guilabel>, and a
+  file selector dialog will open, where you ` select the CSV file you wish to import.
 </para>
 </sect3>
 
-<sect3>
-<title>CSV Import Wizard: Separators</title>
+<sect3><title>CSV Import Wizard: Separators</title>
 <para>
-  The wizard will now have advanced to the <guilabel>Separators</guilabel> page,
-  and you should now see your data.
+  After opening your selected data file, the wizard will advance to the
+  <guilabel>Separators</guilabel> page, and you should now see your data.
 </para>
 
-  <screenshot>
+<screenshot>
+  <screeninfo>csv import wizard: separators</screeninfo>
   <mediaobject>
-  <imageobject>
-  <imagedata fileref="csvImporter_2.png" format="PNG" />
-  </imageobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_2.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>csv import wizard: separators</phrase>
+    </textobject>
   </mediaobject>
-  </screenshot>
+</screenshot>
 
-  <warning>
-    <para>
-      It may appear that the displayed entries in the upper section of the
-      plugin window may be edited, and in fact they may, but any edits are not
-      kept.  The table is purely for display, not for editing.  The input file
-      is never altered by the plugin, and the data actually imported comes from
-      the input file, not from the display.  The one exception to this is
-      covered in <link linkend="details.impexp.csv.secsym">Securities and
-      Symbols</link> below.
-    </para> 
-  </warning>
+<warning>
+  <para>
+    It may appear that the data displayed in the upper section of the plugin window
+    may be edited, and in fact they may, but any edits are not kept.  The table is
+    purely for display, not for editing.  The input file is never altered by the CSV
+    Importer, and the data actually imported comes from the input file, not from the
+    display.  The one exception to this is covered in <link
+    linkend="details.impexp.csv.secsym">Securities and Symbols</link> below.
+  </para> 
+</warning>
 
 <para>
-  The plugin should have detected the appropriate <guilabel>Field
-  Separator</guilabel> to use, and it is not usually possible to select a
-  different one.  In fact, attempting to do so will reset any field choices you
-  may already have made.  There is also a selector for the <guilabel>Text
-  Delimiter</guilabel>, but generally the quote (") is correct.  Now click on
-  the <guibutton>Next</guibutton> button. Depending upon the earlier selection
-  you made, you will now be on either the Banking page or the Investment page.
+  The CSV Importer should have detected the appropriate
+  <guilabel>Encoding</guilabel>, <guilabel>Field Delimiter</guilabel>, and
+  <guilabel>Text Delimiter</guilabel>.  You can change the encoding if the program
+  did not choose correctly.  If you need to change the Field Delimiter, such as if
+  your data is actually tab delimited, and not a comma delimited, be aware that doing
+  so will reset any field choices you may already have made.  Generally the quote
+  (&quot;) is the correct text delimiter, but you may change it as necessary.  Click
+  <guibutton>Next</guibutton> to proceed.
 </para>
 </sect3>
 
-<sect3>
-<title>CSV Import Wizard: Banking</title>
+<sect3><title>CSV Import Wizard: Rows</title>
 <para>
-  On this page, you select the column numbers from which to import the relevant fields.
+  You will now be on the <guilabel>Rows</guilabel> or <guilabel>Lines</guilabel>
+  page.  Here, you indicate if any lines should be ignored at the beginning or end of
+  the file.
 </para>
 
-  <screenshot>
+<screenshot>
+  <screeninfo>csv import wizard: rows</screeninfo>
   <mediaobject>
-  <imageobject>
-  <imagedata fileref="csvImporter_3.png" format="PNG" />
-  </imageobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_5.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>csv import wizard: rows</phrase>
+    </textobject>
   </mediaobject>
-  </screenshot>
+</screenshot>
 
 <para>
-  For most fields, you just need to use the appropriate dropdown to select the
-  appropriate column.  However, there are a few special considerations.
+  This page allows you to adjust the import to ignore header and footer rows at the
+  beginning or end of the file, which do not actually contain data to be imported.
+</para>
+
+<formalpara><title>Start line</title>
+<para>
+  Set this so the importer skips any header lines in the file.  Your choice will be
+  saved in this profile for future use.  The start and end lines interact, and the
+  start line may not be higher than the end line, nor may it be higher then the
+  actual number of lines in the file.  If the <guilabel>Start line</guilabel>
+  selector does not respond, check the end line setting.
+</para>
+</formalpara>
+
+<formalpara><title>End line</title>
+<para>
+  The importer will automatically set this to the last line in the file, or to the
+  setting last saved.  You will only need to adjust it if there are footer lines in
+  the file the importer should ignore.  Otherwise, you are likely to get a data error
+  warning when the plugin attempts to parse incorrect data.  Again, if the
+  <guilabel>End line</guilabel> selector does not respond, check the <guilabel>Start
+  line</guilabel> setting.
+</para>
+</formalpara>
+
+<para>
+  Above these two fields is a <guilabel>Header contains account name or
+  number</guilabel> checkbox.  If checked, the importer will look in the lines above
+  the start line for the name of number of the account to use for the import.  If
+  not, you will be prompted for that information.
+</para>
+
+<para>
+  When you are ready, click <guilabel>Next</guilabel> to proceed to the next step.
+</para>
+</sect3>
+
+<sect3><title>CSV Import Wizard: Columns</title>
+<para>
+  You should now be on the <guilabel>Columns</guilabel> page.  This is where you tell
+  the importer which columns in the file contain the data which maps to the specific
+  fields needed to create a meaningful record or transaction, depending on the type
+  of data being imported.  There is a different version of this page for each type of
+  data, as each requires a different combination of items.
+</para>
+
+<sect4><title>CSV Import Wizard: Banking</title>
+<screenshot>
+  <screeninfo>csv import wizard: banking</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_3.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>csv import wizard: banking</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+  
+<para>
+  For most fields, you just need to use the dropdown to select the appropriate
+  column.  Note that many fields have an <quote>x</quote> button to the right.
+  Clicking it will clear whatever value has been entered or selected in the field to
+  the left.  In addition, there are some special considerations.
 </para>
 
 <itemizedlist>
 <listitem>
+  <para>
+    To the right is an area with two tabs.  If your file has a single column for all
+    values, select the <guilabel>Amount</guilabel> tab.  However, if there are
+    separate columns for debits and credits, select the
+    <guilabel>Debit/credit</guilabel> tab.
+  </para>
+
+  <para>
+    On the Amount tab, start by selecting the column which contains the amount of the
+    transaction.  If there is a column which contains <quote>Credit</quote> or
+    <quote>Debit</quote> to indicate which the amount is, select that column as the
+    <guilabel>Debid/Credit Indicator</guilabel>.  Separately, if there is a string
+    included in the amount field which indicates the amount is either a credit or a
+    debit, enter that string in the appropriate <guilabel>Indicator</guilabel> field.
+    Finally, if despite setting all the above values correctly, the amount imported
+    is reversed from what it should be, check the <guilabel>Opposite signs</guilabel>
+    checkbox.
+  </para>
+
+  <para>
+    On the Debit/credit tab, simply enter the numbers of the columns with those
+    values in the appropriate fields.
+  </para>
+</listitem>
+
+<listitem>
 <para>
-  In the center are two radio buttons. If your file has a single column for all
-  values, select <guilabel>Amount</guilabel> column. However, if there are separate
-  columns for debits and credits, select <guilabel>Debit/credit</guilabel> column.
-  This will enable either the <guilabel>Amount</guilabel> column selector or the
-  <guilabel>Debit</guilabel> and <guilabel>Credit</guilabel> column selectors.
+  It is possible to select more than one column for the Memo field, by making
+  consecutive selections.  Memo columns already selected are indicated in the
+  <guilabel>Memo columns:</guilabel> field.  If you select multiple columns in this
+  way, their contents will be concatenated in the Memo field.
 </para>
 </listitem>
 
 <listitem>
 <para>
-  It is possible to select more than one column for the Memo field, by
-  consecutive selections.  Memo columns already selected are marked in the
-  drop-down with an asterisk (*).  If you select multiple columns in this way,
-  their contents will be concatenated in the Memo field.
+  If you attempt to choose the same column number for two fields, the importer will
+  alert you and clear both selections.  However, it is possible, if desired, to use
+  the same column in both the <guilabel>Payee/Description</guilabel> and
+  <guilabel>Memo</guilabel> fields.  If you select a column for the
+  <guilabel>Payee/Description</guilabel> field, and then select the same column for
+  the <guilabel>Memo</guilabel> field, you will receive a warning that duplicate
+  columns have been selected, but asking if you wish to proceed.  If you do, click
+  <guibutton>Yes</guibutton>, and the column will be used for both fields.
 </para>
 </listitem>
 
 <listitem>
 <para>
-  If you attempt to choose the same column number for two fields, the plugin
-  will alert you and clear both selections.  However, it is possible, if
-  desired, to use the same column in both the
-  <guilabel>Payee/Description</guilabel> and <guilabel>Memo</guilabel> fields.
-  If you select a column for the <guilabel>Payee/Description</guilabel> field,
-  and then select the same field for the <guilabel>Memo</guilabel> field, you
-  will receive a warning that duplicate columns have been selected, but asking
-  if you wish to proceed.  If you do, click <guibutton>Yes</guibutton>.
-</para>
-</listitem>
-
-<listitem>
-<para>
-  One particular reason to also capture the Payee/Descriptor field in the Memo
-  field is that the incoming Payee/Description field might get completely
-  changed on import when &kmymoney; does transaction matching.  Selecting that
-  field also as Memo will preserve that data, which would otherwise get lost.
+  One particular reason to also capture the Payee/Descriptor field in the Memo field
+  is that the incoming Payee/Description field might get completely changed on import
+  when &kmymoney; does transaction matching.  Selecting that field also as Memo will
+  preserve that data, which would otherwise get lost.
 </para>
 </listitem>
 </itemizedlist>
 
 <para>
-  If you notice you have made an incorrect choice, just change that selection.
-  If several changes need to be made, click the
-  <guilabel>Clear</guilabel> button. 
+  If you notice you have made an incorrect choice, just change that selection.  If
+  several changes need to be made, you can click <guilabel>Clear all</guilabel> and
+  start over.
 </para>
 
 <para>
   Once columns have been chosen for all the necessary fields, the
-  <guilabel>Next</guilabel> button will be enabled, and clicking it will advance
-  the wizard.
+  <guilabel>Next</guilabel> button will be enabled, and clicking it will advance the
+  wizard.
 </para>
-</sect3>
+</sect4>
 
-<sect3>
-<title>CSV Import Wizard: Investment</title>
+<sect4><title>CSV Import Wizard: Format</title>
+<para>
+  The next page of the wizart still shows the data to be imported on the top, but the
+  lower section provides three dropdowns.  The initial values are set by &kmymoney;
+  based on examining the actual data.
+</para>
+
+<screenshot>
+  <screeninfo>csv import wizard: investment</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_4.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>csv import wizard: investment</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para>
+  The <guilabel>Decimal Symbol</guilabel> defaults to <quote>auto,</quote> which
+  usually produces the correct results.  If not, you can explicitly specify the
+  <quote>dot</quote> or <quote>comma.</quote>
+</para>
+
+<para>
+  The <guilabel>Thousands Symbol</guilabel> is set automatically, and the field may
+  be disabled if it will not affect the results.
+</para>
+
+<para>
+  This needs to be set according to the order of year, month, and day in the dates in
+  the file.  If the plugin finds data incompatible with this setting, it will
+  complain when you try to import.  However, if the setting is wrong, but it produce
+  invalid results not detected (such as data with no days higher than 12, so month
+  and day could be switched) you will simply get incorrect data, because the plugin
+  cannot know you made a mistake.  In this case, the error will be obvious in the
+  ledger after import.
+</para>
+
+<para>
+  The <guilabel>Date format</guilabel> specifies the order of day, month, and year,
+  and is also set automatically.  However, in some cases, such as data with no day
+  higher than 12, you will notice the problem after the import.  In such cases, you
+  will need to repeat the import, and choose the actual order of the date components.
+</para>
+</sect4>
+
+<sect4><title>CSV Import Wizard: Investment</title>
 <para>
   This page is similar to the <guilabel>Banking</guilabel> page, although it
   is somewhat more complex.  Most selections are fairly obvious, but there are
   some items which can seem confusing until you have completed the process
   once or twice.
-
-  <screenshot>
-  <mediaobject>
-  <imageobject>
-  <imagedata fileref="csvImporter_4.png" format="PNG" />
-  </imageobject>
-  </mediaobject>
-  </screenshot>
 </para>
+
+<screenshot>
+  <screeninfo>csv import wizard: investment</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_4.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>csv import wizard: investment</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
 <itemizedlist>
 <listitem>
 <para>
-  As on the <guilabel>Banking</guilabel> page, you may select more than one
-  column for the Memo field
+  As on the <guilabel>Banking</guilabel> page, you may select more than one column
+  for the Memo field
 </para>
 </listitem>
 
@@ -279,21 +454,35 @@
   The <guilabel>Price Fraction</guilabel> selector is to indicate the
   fraction/multiplier for compatibility between imported and stored prices.  For
   instance, if the import file price is in cents, but your &kmymoney; account is
-  priced in dollars, select 0.01.  Or, if your &kmymoney; data file pricing is
-  in dollars, and so is the CSV file being imported, then set <guilabel>Price
+  priced in dollars, select 0.01.  Or, if your &kmymoney; data file pricing is in
+  dollars, and so is the CSV file being imported, then set <guilabel>Price
   Fraction</guilabel> to 1.0.
 </para>
 </listitem>
 
 <listitem>
 <para>
-  Use the <guilabel>Fee Column</guilabel> selector if your file has a distinct
-  column for fees.  Beware, though, that the fee might have been taken into
-  account in the price.  If there is a fee, and it is a percentage figure,
-  rather than a value, click the <guilabel>Fee is percentage</guilabel> check
-  box.  Note that on this page, this is the only field to explicitly include
-  "column" in the label, to emphasize that it is for the fee column, not for any
-  actual fee.
+  There are two ways to specify fees for transactions.  If your file has a distinct
+  column for fees, use the <guilabel>Fee Column</guilabel> selector.  Note that on
+  this page, this is the only field to explicitly include "column" in the label, to
+  emphasize that it is for the fee column, not for any actual fee.  Beware, though,
+  that the fee might have been taken into account in the price.
+</para>
+
+<para>
+  If there is a fee, but it is a percentage figure, rather than a specified value,
+  click the <guilabel>Fee is percentage</guilabel> check box, and enter the
+  percentage rate into the <guilabel>Fee rate</guilabel> field.  In addition, if
+  there is a minimum fee, specify it in the <guilabel>Minimal Fee</guilabel> field,
+  which becomes enabled when you enter the Fee rate (with a decimal point.)  At this
+  point, clicking <guibutton>Calculate Fees</guibutton> will add a column at the
+  right of the table above, and will indicate the calculated fee for each
+  transaction.
+</para>
+
+<para>
+  If you made a mistake in entering the fee information, clicking <guibutton>Clear
+  Fee</guibutton> will reset all the fee related fields to their initial values.
 </para>
 </listitem>
 
@@ -304,32 +493,32 @@
   only one or for several securities.
 
   <itemizedlist>
-  <listitem>
-  <para>
-  If the file contains transactions for just a single security, with the name
-  possibly in a header row, the name should be entered into the
-  <guilabel>Security Name</guilabel> box. The name you enter will be added to
-  the drop-down list for future use. You may subsequently wish to remove that
-  name from the list.  If so, select it, then click the <guilabel>Hide
-  security</guilabel> button.  This removes it only from this list, and has no
-  effect on your main &kmymoney; file.
-  </para>
-  </listitem>
+    <listitem>
+      <para>
+        If the file contains transactions for just a single security, with the name
+        possibly in a header row, the name should be entered into the
+        <guilabel>Security Name</guilabel> box. The name you enter will be added to
+        the dropdown list for future use. You may subsequently wish to remove that
+        name from the list.  If so, select it, then click <guilabel>Hide
+        security</guilabel>.  This removes it only from this list, and has no effect
+        on your main &kmymoney; file.
+      </para>
+    </listitem>
 
-  <listitem>
-  <para>
-  If the file includes transactions for several securities, each will be
-  identified by its ticker symbol in a column with further detail in another
-  column. Select those columns in the <guilabel>Symbol</guilabel> and
-  <guilabel>Detail</guilabel> selectors.  It may be that a security has no
-  official symbol, and in this case a pseudo-symbol may be invented; this is not
-  a problem, as long as it uniquely identifies that security in the import file.
-  Sometimes the actual activity type is embedded in the detail column, possibly
-  prefixed by a standard text. For instance, if the field contains <quote>type:
-  dividend</quote>, go to <guilabel>Filter</guilabel> text box and enter
-  <quote>type: </quote> including the trailing space.
-  </para>
-  </listitem>
+    <listitem>
+      <para>
+        If the file includes transactions for several securities, each will be
+        identified by its ticker symbol in a column with further detail in another
+        column. Select those columns in the <guilabel>Symbol</guilabel> and
+        <guilabel>Detail</guilabel> selectors.  It may be that a security has no
+        official symbol, and in this case a pseudo-symbol may be invented; this is
+        not a problem, as long as it uniquely identifies that security in the import
+        file.  Sometimes the actual activity type is embedded in the detail column,
+        possibly prefixed by a standard text. For instance, if the field contains
+        <quote>type: dividend</quote>, go to <guilabel>Filter</guilabel> text box and
+        enter <quote>type: </quote> including the trailing space.
+      </para>
+    </listitem>
   </itemizedlist>
 </para>
 </listitem>
@@ -337,85 +526,29 @@
 </para>
 
 <para>
-  When all required fields are selected,
-  the <guilabel>Next</guilabel> button will be enabled, and clicking it will
-  advance the wizard.
+  When all required fields are selected, the <guilabel>Next</guilabel> button will be
+  enabled, and clicking it will advance the wizard.
 </para>
-</sect3>
+</sect4>
 
-<sect3>
-<title>CSV Import Wizard: Lines</title>
+<sect4 id="details.impexp.csv.secsym"><title>CSV Import Wizard: Securities and Symbols</title>
 <para>
-  On this page, you indicate if any lines should be ignored at the beginning or
-  end of the file.  You also indicate the format of any date column.
-
-  <screenshot>
-  <mediaobject>
-  <imageobject>
-  <imagedata fileref="csvImporter_5.png" format="PNG" />
-  </imageobject>
-  </mediaobject>
-  </screenshot>
-</para>
-
-<formalpara><title>Start line</title>
-<para>
-  Set this so the importer skips any header lines in the file.  Your choice will
-  be saved in this profile for future use. The start and end lines interact, and
-  the start line may not be higher than the end line. If the <guilabel>Start
-  line</guilabel> selector does not respond, check the end line setting.
-</para>
-</formalpara>
-
-<formalpara><title>End line</title>
-<para>
-  The importer will automatically set this to the last line in the file, or to
-  the setting last saved.  You will only need to adjust it if there are footer
-  lines in the file the importer should ignore.  Otherwise, you are likely to
-  get a data error warning when the plugin attempts to parse incorrect
-  data.  Again, if the <guilabel>End line</guilabel> selector does not respond,
-  check the <guilabel>Start line</guilabel> setting.
-</para>
-</formalpara>
-
-<formalpara><title>Date format</title>
-<para>
-  This needs to be set according to the order of year, month, and day in the
-  dates in the file.  If the plugin finds data incompatible with this setting,
-  it will complain when you try to import.  However, if the setting is wrong,
-  but it produce invalid results not detected (such as data with no days higher
-  than 12, so month and day could be switched) you will simply get incorrect data,
-  because the plugin cannot know you made a mistake. In this case, the error will be
-  obvious in the ledger after import.
-</para>
-</formalpara>
-
-<para>
-  Once ready, the <guilabel>Next</guilabel> button will be enabled, and clicking
-  it will advance the wizard.
-</para>
-</sect3>
-
-<sect3 id="details.impexp.csv.secsym">
-<title>CSV Import Wizard: Securities and Symbols</title>
-
-<para>
-  For an Investment file, after the <guilabel>Lines</guilabel> page has been
+  For an Investment file, after the <guilabel>Columns</guilabel> page has been
   accepted, you need to assure that each security in the file is matched to the
   correct security in your &kmymoney; file, before import can proceed.  At this
-  point, another window will open, showing the securities and symbols contained
-  in the import file.  Note that unlike the data display in the main wizard
-  windows, the changes you make on this page <emphasis>are</emphasis> imported.
+  point, another window will open, showing the securities and symbols contained in
+  the import file.  Note that unlike the data display in the main wizard windows, the
+  changes you make on this page <emphasis>are</emphasis> imported.
 </para>
 
 <para>
   Completing this page is straightforward, if you consider these items:
   <itemizedlist>
     <listitem>
-    <para>
-      Each row represents one transaction, and so it may appear there are
-      duplicate rows.  This is OK.
-    </para>
+      <para>
+        Each row represents one transaction, and so it may appear there are duplicate
+        rows.  This is OK.
+      </para>
     </listitem>
 
     <listitem>
@@ -445,12 +578,12 @@
 </para>
 
 <para>
-  You can edit a symbol or security name by double clicking the cell.  For
-  each security, if necessary, edit the name in one of its rows, If the correct
-  security name appears in the imported file, double click on it to select it,
-  then copy and paste/edit, taking care if you have used a variation or
-  abbreviation within &kmymoney;.  If you edit a security name, that edit will
-  be applied to all rows with the same symbol.
+  You can edit a symbol or security name by double=clicking the cell.  For each
+  security, if necessary, edit the name in one of its rows, If the correct security
+  name appears in the imported file, double-click it to select it, then copy and
+  paste/edit, taking care if you have used a variation or abbreviation within
+  &kmymoney;.  If you edit a security name, that edit will be applied to all rows
+  with the same symbol.
 </para>
 
 <para>
@@ -471,18 +604,16 @@
 </para>
 
 <para>
-  If you have more that one transaction referring to the same security, you can
-  edit all of them at once, using multi-select.  For instance, to add a symbol for
-  several lines, press and hold the &Ctrl; key, and in the symbol column,
-  select each transaction.  While still holding the &Ctrl; key,
-  all those symbol cells should still be selected, so click on one and enter the
-  symbol.  Click inside the window but outside that column, or hit
-  &Enter; (not <guibutton>OK</guibutton>).  Now that those
-  transactions all have the same symbol, double click one detail entry and edit
-  the security name as you wish.  Click elsewhere on the window (or
-  &Enter;) to accept the edit, which will then change all
-  those entries.  The remaining entries will show the symbols picked up from the
-  transactions in the import file.
+  If you have more that one transaction referring to the same security, you can edit
+  all of them at once, using multi-select.  For instance, to add a symbol for several
+  lines, press and hold the &Ctrl; key, and in the symbol column, select each
+  transaction.  While still holding the &Ctrl; key, all those symbol cells should
+  still be selected, so click one and enter the symbol.  Click inside the window but
+  outside that column, or hit &Enter; (not <guibutton>OK</guibutton>).  Now that
+  those transactions all have the same symbol, double-click one detail entry and edit
+  the security name as you wish.  Click elsewhere on the window (or &Enter;) to
+  accept the edit, which will then change all those entries.  The remaining entries
+  will show the symbols picked up from the transactions in the import file.
 </para>
 
 <para>
@@ -496,7 +627,7 @@
   containing that detail. Now, on the <guilabel>Invalid transaction</guilabel>
   box you may get a few entries because the activity type does not match the
   qty/price/amount combination.  On each message, click <guilabel>Select
-  Transaction Type</guilabel>, and a drop down will appear indicating valid
+  Transaction Type</guilabel>, and a dropdown will appear indicating valid
   activity types for that combination of values.
 </para>
 
@@ -505,10 +636,22 @@
   account to use.  Then the checking account, if there were any brokerage type
   transactions.
 </para>
+</sect4>
+
+<sect4><title>CSV Import Wizard: Currency Prices</title>
+<para>
+  something about importing currency prices
+</para>
+</sect4>
+
+<sect4><title>CSV Import Wizard: Stock prices</title>
+<para>
+`something about imporing stock prices
+</para>
+</sect4>
 </sect3>
 
-<sect3>
-<title>CSV Import Wizard: Finish</title>
+<sect3><title>CSV Import Wizard: Finish</title>
 <para>
   On reaching the Final page, the plugin automatically validates the values.  If
   the numeric value column/s is/are highlighted in green, then the validation
@@ -562,8 +705,7 @@
 </formalpara>
 </sect3>
 
-<sect3>
-<title>Make QIF File</title>
+<sect3><title>Make QIF File</title>
 <para>
   This button gives you the ability, after the import has been completed, to
   save the data from the CSV file as a QIF file, should you require one for any
@@ -574,8 +716,7 @@
 </para>
 </sect3>
 
-<sect3>
-<title>Finishing up</title>
+<sect3><title>Finishing up</title>
 <para>
   For a <guilabel>Banking</guilabel> import, the plugin has finished, and
   &kmymoney; will prompt you, as stated above, for the correct account into
@@ -591,13 +732,12 @@
 </para>
 
 <para>
-  If you wish to save your settings, remember to click the
-  <guibutton>Finish</guibutton> button, and the plugin will then close.
+  If you wish to save your settings, remember to click <guibutton>Finish</guibutton>,
+  and the plugin will then close.
 </para>
 </sect3>
 
-<sect3>
-<title>Adding Investment Activity Types</title>
+<sect3><title>Adding Investment Activity Types</title>
 <para>
   If you find that your investment statements keep including activity types that
   are not recognized, just add them to the section in the resource file.  (See
@@ -618,25 +758,23 @@
 </para>
 </sect3>
 
-<sect3 id="details.impexp.csv.config">
-<title>Configuration of CSV importer plugin</title>
-
+<sect3 id="details.impexp.csv.config"><title>Configuration of CSV importer plugin</title>
 <para>
- A well-known drawback of QIF format is that it is a fairly loose format.
- With CSV files, there is this same problem, only more so, in that there  is
- no agreed standard at all.  With investment files, in particular, there is
- much more scope for variation in specifying the different types of activities
- represented in the data.  The plugin handles this by listing these activity
- types in a resource file, called <filename>csvimporterrc</filename>. The location
- of this file depends on your distribution. On a &Linux; system, this will be in
- <filename class="directory">$KDEHOME/share/config</filename> where
- <envar>$KDEHOME</envar> is usually <quote>.config</quote> within your home folder.
- If you are migrating from a version of &kmymoney; prior to 5.0 or later, the old
- location of <envar>$KDEHOME</envar> was <filename class="directory">.kde4</filename>.
- Using this resource file allows the user to add an activity type that the developer
- had not encountered. If the file does not exist when the importer first runs, the
- plugin will create a default version, containing a few of the more obvious
- descriptions.
+ A well-known drawback of QIF format is that it is a fairly loose format.  With CSV
+ files, there is this same problem, only more so, in that there is no agreed standard
+ at all.  With investment files, in particular, there is much more scope for
+ variation in specifying the different types of activities represented in the data.
+ The plugin handles this by listing these activity types in a resource file, called
+ <filename>csvimporterrc</filename>. The location of this file depends on your
+ opearintg system or distribution. On a &Linux; system, this will be <filename
+ class="directory">$KDEHOME/share/config</filename> where <envar>$KDEHOME</envar> is
+ usually <filename class="directory">.config</filename> within your home folder.  If
+ you are migrating from a version of &kmymoney; prior to 5.0, the old location of
+ <envar>$KDEHOME</envar> was <filename class="directory">.kde4</filename>, also
+ within your home folder.  Using this resource file allows the user to add an
+ activity type that the developer had not encountered. If the file does not exist
+ when the importer first runs, it will create a default version, containing a few of
+ the more obvious descriptions.
 </para>
 
 <para>
@@ -661,7 +799,82 @@
  &userlist; or developer list &devlist;, the developer will do his best to
  modify the plugin to handle it.
 </para>
+
+<sect4><title>CSV Importer configuration dialog</title>
+<para>
+  Finally, there are a few other items which may be configured in a dialog invoked
+  through the <link linkend="details.settings.plugins.csvimporter">CSV Importer
+  configuration dialog</link>, which can be invoked from the Plugins page of the main
+  KMyMoney configuration dialog.  This includes which items will be autodetected by
+  the importer and which profile will be used if you do have the importer export a
+  QIF file, as mentioned above.
+</para>
+</sect4>
 </sect3>
 </sect2>
 </sect1>
 
+<sect1 id="details.impexp.csvexp">
+<sect1info>
+  <author>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+</sect1info>
+<title>CSV Exporter</title>
+
+<para>
+  To export data to a CSV file, choose the <menuchoice><guimenu>File</guimenu>
+  <guisubmenu>Export</guisubmenu> <guimenuitem>CSV...</guimenuitem> </menuchoice>
+  menu item.  The dialog which appears gives you a number of choices which control
+  the data to be exported.
+</para>
+
+<screenshot>
+  <screeninfo>csv exporter</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvexport.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>csv exporter</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para>
+  Please note that an exported CSV file can include data from only one account.
+</para>
+
+<para>
+  Specify the name of the exported CSV file either by entering the complete path in
+  the <guilabel>File to export to</guilabel> field, or by clicking
+  <guilabel>Browse</guilabel> and navigating to it in the Save File dialog.  Choose
+  which account to export with the <guilabel>Account to export</guilabel> dropdown.
+</para>
+
+<para>
+  The time period of data exported is controlled by the <guilabel>Date
+  Range</guilabel> <guilabel>Start on</guilabel> and <guilabel>End on</guilabel> date
+  fields.  The default values represent the complete date range of your entire data
+  file, and they are adjusted when you select an account to export.
+</para>
+
+<para>
+  By default, the <guilabel>Field Separator</guilabel> is a comma, but you can also
+  choose to use a tab or semicolon.
+</para>
+
+<para>
+  If you check the <guilabel>Contents to Export</guilabel>
+  <guilabel>Account</guilabel> radio button, then the data exported will be the
+  transactions from the specified account and date range.  However, if you select the
+  <guilabel>Categories</guilabel> radio button, then the exported file will contain
+  one row for each category which has been defined.  For top level categories, the
+  category name is shown, and an <quote>I</quote> or <quote>E</quote> is shown to
+  indicate whether the Category is Income or Expense.  For non top-level categories,
+  the parent category is also shown.
+</para>
+
+<para>
+  The exporter will output a set of columns appropriate for the type of account being
+  exported.
+</para>
+</sect1>

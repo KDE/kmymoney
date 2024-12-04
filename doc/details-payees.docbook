@@ -4,24 +4,50 @@
   <authorgroup>
     <author> &Roger.Lum; &Roger.Lum.mail; </author>
     <author> &Ace.Jones; &Ace.Jones.mail; </author>
-    <author>
-      <personname><firstname>Michael</firstname><surname>Carpino</surname></personname>
-      <email>mfcarpino@gmail.com</email>
-    </author>
+    <author>&Michael.Carpino; &Michael.Carpino.mail;</author>
+    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2019-06-24</date>
-  <releaseinfo>5.0.5</releaseinfo>
+  <date>2024-12-01</date>
+  <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title>Payees</title>
 
 <para>
+  Payees represent people or organizations to whom you give money.  Payers are those
+  from whom you receive money.  They are handled identically in &kmymoney; and are
+  only distinguished by the direction in which the money moves.  It is possible for a
+  single person or organization to be both a Payee and a Payer.  An example is your
+  employer, who pays you money as a salary, but whom you might pay money when you eat
+  lunch in the cafeteria at work.  It is completely your choice whether to use the
+  same Payee for both of these transaction types, or to create a separate Payee and
+  Payer, if you want to track them separately.
+</para>
+
+<sect1 id="details.payees.view"><title>Payees View</title>
+
+<para>
   The Payees View provides detailed information about all the payees and payers
-  involved in transactions.  These are the entities to and from which you
-  transfer money.  &kmymoney; stores information about all the payees and payers
-  from all existing transactions.  This makes it possible to pick a payee from a
-  list instead of having to type the full name, which also decreases the chance
-  of misspelling or typing the wrong name.
+  involved in transactions.  &kmymoney; stores information about all the payees and
+  payers from all existing transactions.  This makes it possible to pick a payee from
+  a list instead of having to type the full name, which also decreases the chance of
+  misspelling or typing the wrong name.
+</para>
+
+<screenshot>
+  <screeninfo>payees view</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payeeview.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>payees view</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para>
+  Like the Tags View, the Payees View is split into two main areas: a payees and payers list on the
+  left, and a detail area on the right.
 </para>
 
 <para>
@@ -35,154 +61,171 @@
 </para>
 
 <para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="payeeview.png" format="PNG" />
-	</imageobject>
-	</mediaobject>
-	</screenshot>
+  The details area has several tabs: Transactions, Address, Matching, Default
+  Category, Account Numbers, and Link Matching.  Each of these is described in the
+  following sections.
 </para>
 
-<sect1 id="details.payees.list">
-<title>Payees List</title>
-
+<sect2><title>Adding a Payee or Payer</title>
 <para>
-  The list of all payees and payers in your data is shown on the left side of
-  this view. The payee list is sorted alphabetically.
-</para>
-
-<sect2>
-<title>Adding a Payee or Payer</title>
-
-<para>
-  To add a payee or payer, choose <guibutton>+New</guibutton>.  This creates a
-  new payee called <quote>New Payee</quote>.  You can also right-click on any
-  existing payee and select <guimenuitem>Add payee</guimenuitem>.
+  To add a payee or payer, click the <guiicon> <inlinemediaobject> <imageobject>
+  <imagedata fileref="list-add-user.svg" format="SVG"/> </imageobject>
+  </inlinemediaobject> </guiicon>New Payee button.  This creates a new payee called
+  <quote>New Payee</quote>.  You can also right-click any existing payee and select
+  <guimenuitem>Add payee</guimenuitem>.
 </para>
 </sect2>
 
-<sect2>
-<title>Renaming a Payee or Payer</title>
-
+<sect2><title>Renaming a Payee or Payer</title>
 <para>
-  To rename a payee or payer, either double-click on the name or right-click on
-  the name and select <guimenuitem>Rename payee</guimenuitem>.  The name then
-  becomes editable.  Changing the name will affect the name in all the
+  To rename a payee or payer, select the payee (left click the name) and click
+  <guiicon> <inlinemediaobject> <imageobject> <imagedata
+  fileref="user-group-properties.svg" format="SVG"/> </imageobject>
+  </inlinemediaobject> </guiicon>Rename Payee.  You can also double-click the name or
+  right-click the name and select <guimenuitem>Rename payee</guimenuitem>.  The name
+  then becomes editable.  Changing the name will affect the name in all the
   transactions in which it appears.
 </para>
 </sect2>
 
-<sect2>
-<title>Deleting a Payee or Payer</title>
-
+<sect2><title>Deleting a Payee or Payer</title>
 <para>
-  To remove a payee or payer, right-click the name and select
-  <guimenuitem>Delete payee</guimenuitem>.  If the payee has any transactions,
-  you will be presented with a dialog that allows you to reassign them to a
-  different payee, and also a check box to enable the deleted name to be added
-  to the new payee's matching list.  Another option for deleting an existing
-  payee is to select the payee or payer by left clicking it and then left
-  clicking <guibutton>Del</guibutton>.
+  To remove a payee or payer, select it and click <guiicon> <inlinemediaobject>
+  <imageobject> <imagedata fileref="list-remove-user.svg" format="SVG"/>
+  </imageobject> </inlinemediaobject> </guiicon> Delete Payee, or right-click the
+  name and select <guimenuitem>Delete payee</guimenuitem>.  If the payee has any
+  transactions, you will be presented with a dialog that allows you to reassign them
+  to a different payee, and also a checkbox to add the deleted name to the new
+  payee's matching list.
+</para>
+</sect2>
+
+<sect2 id="details.payees.merging"><title>Merging Payees</title>
+<para>
+  To merge two payees, select one of them (left-click the name) then select the other
+  (<keycombo>&Ctrl;<mousebutton>left click</mousebutton></keycombo>).  You can then
+  either click <guiicon> <inlinemediaobject> <imageobject> <imagedata
+  fileref="merge.svg" format="SVG"/> </imageobject> </inlinemediaobject> </guiicon>
+  Merge Payees or right-click either of the selected payees and select
+  <guilabel>Merge Payees</guilabel>..  You will get a pop-up asking if you really
+  want to merge the selected payees.  If you click <guibutton>Yes</guibutton>, you
+  will get another popup for you to specify thename of the payee for the combined
+  data.  There will be a drop-down with the names of the payess you selected for
+  merging (you can actually select more than two) and it also allows you to type in a
+  completely new name.  There is also a checkbox to add the names of the merged
+  payees to the matching list of the new payee.
 </para>
 </sect2>
 </sect1>
 
-<sect1 id="details.payees.personalinformation">
-<title>Additional Payee Details</title>
+<sect1 id="details.payees.transactionhistory"><title>Viewing Transactions for a Payee</title>
+<para>
+  To view all transactions associated with a particular payee, select the payee from
+  the list and select the <guilabel>Transactions</guilabel> tab in the details area.
+  Double-clicking a particular transaction will allow you to edit that transaction in
+  the context of the appropriate account.  Right-clicking a transaction will pop up a
+  context menu with appropriate actions, including the ability to go directly to the
+  ledger of the appropriate account, with that transaction selected.
+</para>
 
-<sect2>
-<title>Personal Information</title>
+<screenshot>
+  <screeninfo>payees view transaction tab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_history.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>payees veiw transaction tab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</sect1>
+  
+<sect1 id="details.payees.details"><title>Additional Payee Details</title>
 
+<sect2><title>Payee Personal Information</title>
 <para>
   To view and edit the personal information associated with a particular payee,
-  select the payee from the list and select the Address tab. Along with address
-  information you can also store a telephone number, email address, and notes
-  pertaining to the selected payee.  To modify this information, edit the detail
-  area directly and press the Update button when finished.
+  select the payee from the list and select the Address tab.  Although we call this
+  personal information, it is also applicable if the payee is a corporation or other
+  organization.  Along with address information you can also store a telephone
+  number, email address, and notes pertaining to the selected payee.  To modify this
+  information, edit the detail area directly and press the
+  <guibutton>Update</guibutton> button when finished.
 </para>
 
-<para>
 <screenshot>
-	<screeninfo>The personal information tab</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="payee_info.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Personal information</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo>payees view personal information tab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_info.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>payees view personal information tab</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
-</para>
 </sect2>
 
-<sect2 id="details.payees.personalinformation.matching">
-<title>Transaction Matching Settings</title>
+<sect2 id="details.payees.details.matching"><title>Transaction Matching Settings</title>
 
-<sect3>
-<title>Overview</title>
-
+<sect3><title>Overview</title>
 <para>
  &kmymoney; has the ability to automatically assign the proper payee to imported
- transactions.  This can be handy when importing transactions from your bank,
- when the payee name has extra unnecessary characters, or worse, if the payee
- names change. The ability to match transactions to a particualar payee assists
- in providing a consist naming of payees within the ledger and reports.
+ transactions.  This can be handy when importing transactions from your bank, when
+ the payee name has extra unnecessary characters, or worse, if the payee names
+ change.  The ability to match transactions to a particualar payee assists in
+ providing a consist naming of payees within the ledger and reports.
 </para>
 
 <para>
-  For example, let's say your monthly mortgage payment comes in from your bank
-  like this <quote>SUN TRUST BANK MAPLE VALLEY, GA 111506</quote> one month and
-  then <quote>SUN TRUST BANK MAPLE VALLEY, GA 121606</quote> the next month.  You
-  would really like both of those transactions to be assigned to your payee
-  <quote>Sun Trust</quote>.  The transaction matching feature is for you!
-</para>
-
-<para>
-<screenshot>
-	<screeninfo>The payee matching tab</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="payee_match.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Payee matching details</phrase>
-	</textobject>
-	</mediaobject>
-</screenshot>
+  For example, let's say your monthly mortgage payment comes in from your bank like
+  this <quote>SUN TRUST BANK, MAPLE VALLEY, GA 111506</quote> one month and then
+  <quote>SUN TRUST BANK MAPLE VALLEY, GA 121606</quote> the next month.  You would
+  really like both of those transactions to be assigned to your payee <quote>Sun
+  Trust</quote>.  In this case, the transaction matching feature is for you!
 </para>
 </sect3>
 
-<sect3>
-<title>Setting up</title>
+<sect3><title>Setting up Payee Matching</title>
+<screenshot>
+  <screeninfo>payees veiw matching tab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_match.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>payees view matching tab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para>
-  From the Matching tab, you can set the transaction matching settings.  You can
-  select one of four options with the <guilabel>Match method</guilabel>
-  dropdown.
+  On the Matching tab, you can set the matching settings for transactions imported
+  for this payee.  You can select one of four options with the <guilabel>Match
+  method</guilabel> dropdown.
 </para>
 
 <itemizedlist>
   <listitem>
     <para>
-      No Matching.  This disables the feature for this payee.  This is the
-      default setting for all payees.
+      <emphasis>No Matching</emphasis>: This disables the matching feature for this
+      payee.  This is the default setting for all payees.
     </para>
   </listitem>
 
   <listitem>
     <para>
-      Match Payees name (partial).  This enables the feature based on a partial
-      name matching of the Payee and and uses the payee name itself as the Match
-      Key.
+      <emphasis>Match Payees name (partial)</emphasis>: This enables the feature
+      based on a partial name matching of the Payee and and uses the payee name
+      itself as the Match Key.
     </para>
   </listitem>
 
   <listitem>
     <para>
-      Match Payees name (exact).  This enables the feature based on an exact
-      match of the Payee.  You would use this matching ability when you want to
+      <emphasis>Match Payees name (exact)</emphasis>: This enables the feature based
+      on an exact match of the Payee.  You might use this method when you want to
       keep track of different Payees that have the same business name but have
       different locations.
     </para>
@@ -190,11 +233,17 @@
 
   <listitem>
     <para>
-      Match on a name listed below.  This enables matching based on multiple
-      different or optional names for a Payee.  You would use this matching
-      ability when you have a particular Payee that has different business
-      names but you want all imported transactions identified by any of those
-      names to be associated with a single Payee in &kmymoney;.
+      <emphasis>Match on a name listed below</emphasis>: This enables matching based
+      on multiple different or optional names for a Payee.  You would use this
+      matching ability when you have a particular Payee that has different business
+      names but you want all imported transactions identified by any of those names
+      to be associated with a single Payee in &kmymoney;.
+    </para>
+    <para>
+      Another use of this method is if you want a payee for "Other food stores" to
+      group all food stores other than the one or two you use often enough to want to
+      track separately.  You would enter each of the different store's names on the
+      matching list, and all will then be matched to the same payee.
     </para>
   </listitem>
 </itemizedlist>
@@ -206,64 +255,40 @@
 </para>
 </sect3>
 
-<sect3>
-<title>Importing Transactions</title>
-
+<sect3><title>Importing Transactions</title>
 <para>
-  The Match Keys you have set will be considered whenever you import
-  transactions using the QIF import, or using a plugin such as OFX or AqBanking,
-  If the Match Key for one of your payees is found anywhere in the payee of the
-  imported transaction, the corresponding payee from your list will be assigned
-  to that transaction.  Thus, a Match Key of <quote>Sun Trust</quote> will match
-  <quote>SUN TRUST BANK MAPLE VALLEY,GA</quote> or even
-  <quote>MORGEN SUN TRUST&amp;LOAN</quote>.  So choose your Match Keys carefully.
+  The Match Keys you have set will be considered whenever you import transactions
+  using QIF, CSV, OFX, or AqBanking from a file or online source.  If the Match Key
+  for one of your payees is found anywhere in the payee of the imported transaction,
+  the corresponding payee from your list will be assigned to that transaction.  Thus,
+  a Match Key of <quote>Sun Trust</quote> will match <quote>SUN TRUST BANK MAPLE
+  VALLEY,GA</quote> or even <quote>MORGEN SUN TRUST&amp;LOAN</quote>.  So choose your
+  Match Keys carefully.
 </para>
-<para><note>
-    <para> If a transaction payee matches more than one Match Key, the behavior
-    is undefined.  &kmymoney; will arbitrarily pick one of the matching
-    payees.</para>
-</note></para>
+
+<note>
+  <para>
+    If a transaction payee matches more than one Match Key, the behavior is
+    undefined.  &kmymoney; will arbitrarily pick one of the matching payees.
+  </para>
+</note>
+
 </sect3>
 </sect2>
 </sect1>
 
-<sect1 id="details.payees.transactionhistory">
-<title>Viewing Transaction History</title>
+<sect1 id="details.payees.linkmatching"><title>Manage link matching</title>
 
 <para>
-  To view all transactions associated with a particular payee, select the payee
-  from the list and select the Transaction tab in the detail area.
-  Double-clicking a particular transaction will bring you directly to that
-  transaction in the Ledgers View for the appropriate account.
+  This tab can be used to link a part of the memo field of a transaction to a remote
+  or local URL, for example to make invoices or other documents accessible.
 </para>
 
 <para>
-<screenshot>
-	<screeninfo>The transaction tab</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="payee_history.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Transaction history</phrase>
-	</textobject>
-	</mediaobject>
-</screenshot>
-</para>
-</sect1>
-
-<sect1 id="details.payees.linkmatching">
-<title>Manage link matching</title>
-
-<para>
-  This tab can be used to link parts of contents of the memo field of a transaction to
-  a remote or local URL, for example to make invoices or other documents accessible.
-</para>
-
-<para>
-  The tab contains input fields for a pattern and a URL template. The specified pattern
-  is extracted via regular expressions in the memo field from transactions associated
-  with this payee and inserted into the URL template at designated locations.
+  The tab contains input fields for a pattern and a URL template.  The specified
+  pattern is treated as a regular expression, which is applied to the memo field of
+  transactions associated with this payee, and the resulting text is inserted into
+  the URL template at designated locations.
 
 <screenshot>
   <screeninfo>The link matching tab</screeninfo>
@@ -276,7 +301,9 @@
 </para>
 
 <para>
-  The resulting URL is displayed as link in the general ledger at the corresponding transactions (see column "Detail").
+  The resulting URL is displayed as link in the general ledger at the corresponding
+  transactions (see column "Detail").
+
 <screenshot>
   <screeninfo>Show link in the general ledger</screeninfo>
   <mediaobject>
@@ -297,17 +324,17 @@ The link can be accessed via the context menu of a transaction or via a keyboard
 </screenshot>
 </para>
 
-<sect2 id="details.payees.linkmatching.pattern">
-<title>Hints</title>
+<sect2 id="details.payees.linkmatching.pattern"><title>Hints</title>
 <para>
-  Found patterns, which must match Perl-compatible regular expressions, are inserted in the URL template in the place of the supported placeholders.
+  Found patterns, which must match Perl-compatible regular expressions, are inserted
+  in the URL template in the place of the supported placeholders.
 
-  Simple example are:
-
+  Simple examples are:
   <itemizedlist>
-    <listitem><para>\d+\b - one or more numbers followed by a word boundary.</para></listitem>
-    <listitem><para>\d{2,4}\b - 2 to 4 numbers followed by a word boundary</para></listitem>
-    <listitem><para>\d{3}-d{6}\b - 3 numbers followed by a hyphen and 6 numbers followed by a word boundary</para></listitem>
+    <listitem><para>\d+\b - one or more digits followed by a word boundary.</para></listitem>
+    <listitem><para>\d{2,4}\b - 2 to 4 digits followed by a word boundary</para></listitem>
+    <listitem><para>\d{3}-d{6}\b - 3 digits followed by a hyphen and 6 digits
+                    followed by a word boundary</para></listitem>
   </itemizedlist>
 </para>
 
@@ -317,13 +344,17 @@ The link can be accessed via the context menu of a transaction or via a keyboard
     <listitem><para>%1 - first found expression</para></listitem>
     <listitem><para>%2 - second found expression (optional)</para></listitem>
   </itemizedlist>
- When using two independent patterns, the individual expressions in the pattern are separated by round brackets, e.g. <code>(..)...(..)</code>.
+  When using two independent patterns, the individual expressions in the pattern are
+  separated by parentheses, &eg;, <code>(..)...(..)</code>.
 </para>
 
 <para>
-  In addition, predefined variables can be used in the URL template. Currently supported variables are:
+  In addition, predefined variables can be used in the URL template.  Currently
+  supported variables are:
   <itemizedlist>
-    <listitem><para>%year - the year from the date of the corresponding transaction</para></listitem>
+    <listitem>
+      <para>%year - the year from the date of the corresponding transaction</para>
+    </listitem>
   </itemizedlist>
 </para>
 </sect2>

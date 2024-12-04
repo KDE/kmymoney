@@ -4,41 +4,41 @@
   <authorgroup>
     <author> &Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
   </authorgroup>
-  <date>2010-07-25</date>
-  <releaseinfo>4.5</releaseinfo>
+  <date>2024-12-01</date>
+  <releaseinfo>5.2</releaseinfo>
 </sect1info>
 
 <title>Widgets</title>
 
 <para>
-  &kmymoney; has some specific widgets not found in other applications. The
-  usage of these widgets is explained in this chapter.
+  &kmymoney; has some specific widgets not found in other applications.  The usage of
+  these widgets is explained in this chapter.
 </para>
 
 <sect2 id="reference.widgets.datepicker">
-<title>Date entry widget</title>
+<title>Date entry and Date picker</title>
 
 <para>
-  Whenever &kmymoney; needs information about a specific date, &eg;, the posting
-  date of a transaction or the opening date of an account, it offers the user
-  the <emphasis>date entry widget</emphasis>. This widget consists of three
-  fields and a button. The fields present the <emphasis>day</emphasis>, the
-  <emphasis>month</emphasis>, and the <emphasis>year</emphasis>, separated by
-  the date separator characters specified by your locale settings. If you push
-  the button, will open the <emphasis>datepicker</emphasis> widget.
+  Whenever &kmymoney; needs information about a specific date, &eg;, the posting date
+  of a transaction or the opening date of an account, it offers the user the
+  <emphasis>date entry widget</emphasis>.  This widget consists of three fields,
+  which present the <emphasis>day</emphasis>, the <emphasis>month</emphasis>, and the
+  <emphasis>year</emphasis>, separated by the date separator characters specified by
+  your locale settings.  If you push the down arrow next to the date, the program
+  will open the <emphasis>date picker</emphasis> widget.
 </para>
 
 <para>
 <screenshot>
-	<screeninfo>Tip of the Day</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="date_widget.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Date widget</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo>Date widget</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="date_widget.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>Date widget</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 </para>
 
@@ -47,82 +47,86 @@
   between the <emphasis>day</emphasis>, the <emphasis>month</emphasis>, and the
   <emphasis>year</emphasis> fields. Using the &Up;/&Down; cursor keys, the value of
   the selected field can be incremented/decremented.  The <keycap>+</keycap> and
-  <keycap>-</keycap> keys can be used to increment/decrement a single day.
-  Month and year boundaries are considered and incremented/decremented if
-  necessary. Pressing <keycap>T</keycap> will set the date to today's date.
+  <keycap>-</keycap> keys can be used to increment/decrement a single day.  Month and
+  year boundaries are considered and incremented/decremented if necessary.  Pressing
+  <keycap>T</keycap> will set the date to today's date.
 </para>
 
 <para>
-  The date can also be changed using the mouse. Clicking on the
-  <emphasis>day</emphasis>, <emphasis>month</emphasis>, or
-  <emphasis>year</emphasis> field selects the field. The value can then be
-  incremented/decremented using the arrow buttons on the right of the
-  widget. They act exactly the same as the &Up;/&Down; cursor keys.
+  The date can also be changed using the mouse.  Clicking on the
+  <emphasis>day</emphasis>, <emphasis>month</emphasis>, or <emphasis>year</emphasis>
+  field selects the field.  The value can then be incremented/decremented using the
+  &Up;/&Down; cursor keys.  In addition, if you use the &Right;/&Left; cursor keys,
+  when you move to a different field, the entire field is selected, and you can just
+  type the new value for that field.
 </para>
 
 <para>
-  The datepicker opens when the button to the right of the arrow buttons is
-  pressed. It shows four arrow buttons at the top, two on each side of the
-  currently selected month name and year. The leftmost buttons are used to
-  decrement the year and the month; the buttons to the right of the year are
-  used to increment the month and the year. The button to the very right closes
-  the datepicker.
+  The date picker widget shows the currently selected month, name, and year.  Above
+  that are four arrow buttons, two on each side of the displayed month and year.  The
+  leftmost buttons are used to decrement the year and the month; the buttons to the
+  right of the year are used to increment the month and the year.  The button to the
+  very right closes the date picker.
 </para>
 
 <para>
-  Beneath the buttons, the widget presents a calendar page for the selected 
-  month. Clicking a day on the calendar selects that date, closes the
-  datepicker, and transfers the selected date into the <emphasis>day</emphasis>,
+  Beneath the buttons, the widget presents a calendar page for the selected month.
+  Clicking a day on the calendar selects that date, closes the date picker, and
+  transfers the selected date into the <emphasis>day</emphasis>,
   <emphasis>month</emphasis>, and <emphasis>year</emphasis> fields.
 </para>
 
 <para>
-  At the bottom of the datepicker widget, there are a button, a text edit field,
-  and a combo box. Pressing the button selects today's date in the
-  datepicker. The text field can be used to enter a specific date. Pressing the
-  &Enter; key shows that date in the datepicker widget.  The
-  combo box allows the user to select a specific week, and continue to pick a
-  date from there.
+  At the bottom of the date picker widget, there are a button, a text edit field, and
+  a combo box.  Pressing the button selects today's date in the date picker.  The
+  text field can be used to enter a specific date.  Pressing the &Enter; key shows
+  that date in the date picker widget.  The combo box allows the user to select a
+  specific week, and continue to pick a date from there.
+</para>
+
+<para>
+  In case an invalid date is entered, the date picker will show a red frame, and a
+  tooltip will show details about the error.
 </para>
 </sect2>
 
 <sect2 id="reference.widgets.value">
 <title>Value entry</title>
+
 <para>
-  The value entry widget consists of a text field (that accepts digits,
-  thousands separators, and decimal symbols) as well as a button to the
-  right. Use the digits to enter the value. Separate the fractional part by
-  entering the decimal separator for your locale. If you click on the button to
-  the right or press a key representing a numeric operation (&eg;, <keycap>+</keycap>,
-  <keycap>-</keycap>, <keycap>/</keycap>, <keycap>*</keycap> or <keycap>%</keycap>)
-  a little calculator will pop up and allow you to calculate the final value.
+  The value entry widget consists of a text field (that accepts digits, thousands
+  separators, and decimal symbols) as well as a button to the right.  Use the digits
+  to enter the value.  Separate the fractional part by entering the decimal separator
+  for your locale.  If you click on the button to the right or press a key
+  representing a numeric operation (&eg;, <keycap>+</keycap>, <keycap>-</keycap>,
+  <keycap>/</keycap>, <keycap>*</keycap> or <keycap>%</keycap>) a little calculator
+  will pop up and allow you to calculate the final value.
 </para>
 
 <para>
-  Negative values can be entered by preceding the value with a minus sign. In
-  case your locale is set to display negative numbers with parentheses around
-  the value, the value can also be enclosed in parenthesis in the value entry
-  widget.
+  Negative values can be entered by preceding the value with a minus sign.  In case
+  your locale is set to display negative numbers with parentheses around the value,
+  the value can also be enclosed in parenthesis in the value entry widget.
 </para>
 
 <para>
 <screenshot>
-	<screeninfo>Tip of the Day</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="value_widget.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Value widget</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo>Value widget</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="value_widget.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>Value widget</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 </para>
 
 <para>
-  Use the calculator widget just like a normal calculator and once done leave
-  it by clicking on the <guibutton>=</guibutton> button or press the <keycap>=</keycap>
-  key on your keyboard.
+  Use the calculator widget just like a normal calculator and once done leave it by
+  clicking on the <guibutton>=</guibutton> button or press the <keycap>=</keycap> key
+  on your keyboard.
 </para>
 </sect2>
 
@@ -130,81 +134,70 @@
 <title>Payee/Payer entry</title>
 
 <para>
-  When you are requested to enter a payee/payer for a transaction, you can start
-  entering the name by pressing keys on your keyboard.  As long as matching
-  entries exist in the list of payees/payers maintained by &kmymoney; they will
-  be presented in a box beneath or above the text entry area. Using the mouse or
-  the &Up;/&Down; keys one can select a name from that list. Using the keyboard
-  additionally requires you to select the entry by pressing the &Enter; key.
+  The widget for entering a Payee/Payer is very similar to a typical combo-box, but
+  has some additional features.
 </para>
 
 <para>
 <screenshot>
-	<screeninfo>Tip of the Day</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="payee_widget.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Payee widget</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo>Payee widget</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_widget.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>Payee widget</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 </para>
 
 <para>
-  If a name is entered that is not yet known to &kmymoney; you will be asked if
-  you want to create a new payee/payer record.  If you do not wish to do so,
-  then the field will be blanked. Otherwise, the record will be created and
-  added to the list.
+  When you are requested to enter a payee/payer for a transaction, you can start
+  entering the name by pressing keys on your keyboard.  As long as there are entries
+  in the list of payees/payers maintained by &kmymoney; which match the characters
+  entered, they will be presented in a box beneath or above the text entry area.
+  Using the mouse or the &Up;/&Down; keys, one can select a name from that list.
+  Using the keyboard additionally requires you to select the entry by pressing the
+  &Enter; key.  Clicking the X to the right of the entry area clears the field.
+  Clilcking the down arrow to the right of the X displays the complete list of
+  possible payees/payers.
 </para>
 
 <para>
-  Once the edit field contains characters, the list only shows those payees that
-  match the character sequence entered. Double-click on the arrow of the combo
-  box to show all payees in the list.
+  If a name is entered that is not yet known to &kmymoney; you will be asked if you
+  want to create a new payee/payer record.  If you do not wish to do so, then the
+  field will be blanked.  Otherwise, the record will be created and added to the
+  list.
 </para>
-
 </sect2>
 
 <sect2 id="reference.widgets.category">
-<title>Category/account entry</title>
+<title>Category/Account entry</title>
 
 <para>
-  When you are requested to enter the name of a category or account, you can
-  start entering the name by pressing keys on your keyboard.  As long as
-  matching entries exist in the list of categories/accounts known to &kmymoney;
-  they will be presented in a box beneath or above the text entry area. Using
-  the mouse or the &Up;/&Down; keys one can select a name from that list. Using the
-  keyboard additionally requires you to select the entry by pressing the &Enter;
-  key.
+  The field for entering a Category or Account is very similar to the one described above
+  for Payees/Payers.
 </para>
 
 <para>
 <screenshot>
-	<screeninfo>Tip of the Day</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="category_widget.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Category widget</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo>Category widget</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="category_widget.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>Category widget</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 </para>
 
 <para>
-  If a name is entered that is not yet known to &kmymoney; you will be asked if
-  you want to create a new category record.  If you do not wish to do so, then
-  the field will be blanked. Otherwise, the record will be created and added to
-  the list.
-</para>
-
-<para>
-  Once the edit field is filled with characters, the list only shows those
-  categories/accounts that match the character sequence entered. Double-click on
-  the arrow of the combo box to show the complete list.
+  To the right of the entry field, between the X for clearing it and the down arrow
+  for displaying the complete list, there is a split icon, which opens the <link
+  linkend="details.ledgers.split">Split Editor</link>
 </para>
 
 </sect2>
