@@ -650,18 +650,18 @@ void QueryTableTest::testInvestment()
         rows = invhold.rows();
 
         QVERIFY(rows.count() == 5);
-        QVERIFY(MyMoneyMoney(rows[0][ListTable::ctInternalRateOfReturn]) == MyMoneyMoney("669/10000"));
+        QVERIFY(MyMoneyMoney(rows[0][ListTable::ctExtendedInternalRateOfReturn]) == MyMoneyMoney("669/10000"));
         QVERIFY(MyMoneyMoney(rows[0][ListTable::ctReturnInvestment]) == MyMoneyMoney("-39/5000"));
         QVERIFY(MyMoneyMoney(rows[0][ListTable::ctBuys]) == MyMoneyMoney(-210000.00));
         QVERIFY(MyMoneyMoney(rows[0][ListTable::ctSells]) == MyMoneyMoney(44000.00));
         QVERIFY(MyMoneyMoney(rows[0][ListTable::ctReinvestIncome]) == MyMoneyMoney(9000.00));
         QVERIFY(MyMoneyMoney(rows[0][ListTable::ctCashIncome]) == MyMoneyMoney(3300.00));
 
-        QVERIFY(MyMoneyMoney(rows[1][ListTable::ctInternalRateOfReturn]) == MyMoneyMoney("1349/10000"));
+        QVERIFY(MyMoneyMoney(rows[1][ListTable::ctExtendedInternalRateOfReturn]) == MyMoneyMoney("1349/10000"));
         QVERIFY(MyMoneyMoney(rows[1][ListTable::ctReturnInvestment]) == MyMoneyMoney("1/10"));
         QVERIFY(MyMoneyMoney(rows[1][ListTable::ctStartingBalance]) == MyMoneyMoney(100000.00)); // this should stay non-zero to check if investment performance is calculated at non-zero starting balance
 
-        QVERIFY(MyMoneyMoney(rows[2][ListTable::ctInternalRateOfReturn]) == MyMoneyMoney("2501/2500"));
+        QVERIFY(MyMoneyMoney(rows[2][ListTable::ctExtendedInternalRateOfReturn]) == MyMoneyMoney("2501/2500"));
         QVERIFY(MyMoneyMoney(rows[2][ListTable::ctReturnInvestment]) == MyMoneyMoney("323/1250"));
         QVERIFY(MyMoneyMoney(rows[2][ListTable::ctBuys]) == MyMoneyMoney(-95200.00));
         QVERIFY(MyMoneyMoney(rows[2][ListTable::ctSells]) == MyMoneyMoney(119800.00));

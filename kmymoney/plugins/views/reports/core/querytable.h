@@ -57,7 +57,7 @@ protected:
     void constructPerformanceRow(const ReportAccount& account, TableRow& result, CashFlowList &all) const;
     void constructCapitalGainRow(const ReportAccount& account, TableRow& result) const;
     QString helperROI(const MyMoneyMoney& buys, const MyMoneyMoney& sells, const MyMoneyMoney& startingBal, const MyMoneyMoney& endingBal, const MyMoneyMoney& cashIncome) const;
-    QString helperIRR(const CashFlowList& all) const;
+    QString helperXIRR(const CashFlowList& all) const;
     void constructSplitsTable();
     bool linkEntries() const final override {
         return true;
