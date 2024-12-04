@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-03 01:50+0000\n"
+"POT-Creation-Date: 2024-12-04 01:51+0000\n"
 "PO-Revision-Date: 2024-11-01 09:01+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -4286,11 +4286,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:335
-#: kmymoney/models/ledgerfilter.cpp:78
-#: kmymoney/widgets/kmymoneyreconcilecombo.cpp:34
+#: kmymoney/models/ledgerfilter.cpp:77
 #, kde-format
-msgid "Not reconciled"
-msgstr "Berdinkatugabeak"
+msgid "Not marked"
+msgstr "Markatu gabe"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_stateBox)
@@ -6421,10 +6420,11 @@ msgstr "Okerra"
 msgid "Scheduled"
 msgstr "Antolatua"
 
-#: kmymoney/models/ledgerfilter.cpp:77
+#: kmymoney/models/ledgerfilter.cpp:78
+#: kmymoney/widgets/kmymoneyreconcilecombo.cpp:34
 #, kde-format
-msgid "Not marked"
-msgstr "Markatu gabe"
+msgid "Not reconciled"
+msgstr "Berdinkatugabeak"
 
 #: kmymoney/models/ledgerfilter.cpp:79 kmymoney/mymoney/statusmodel.cpp:37
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:33

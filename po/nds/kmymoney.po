@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-03 01:50+0000\n"
+"POT-Creation-Date: 2024-12-04 01:51+0000\n"
 "PO-Revision-Date: 2014-07-03 09:44+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -4245,11 +4245,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:335
-#: kmymoney/models/ledgerfilter.cpp:78
-#: kmymoney/widgets/kmymoneyreconcilecombo.cpp:34
+#: kmymoney/models/ledgerfilter.cpp:77
 #, kde-format
-msgid "Not reconciled"
-msgstr "Nich utgleken"
+msgid "Not marked"
+msgstr "Nich markeert"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_stateBox)
@@ -6480,10 +6479,11 @@ msgstr "Leeg"
 msgid "Scheduled"
 msgstr "Plaant"
 
-#: kmymoney/models/ledgerfilter.cpp:77
+#: kmymoney/models/ledgerfilter.cpp:78
+#: kmymoney/widgets/kmymoneyreconcilecombo.cpp:34
 #, kde-format
-msgid "Not marked"
-msgstr "Nich markeert"
+msgid "Not reconciled"
+msgstr "Nich utgleken"
 
 #: kmymoney/models/ledgerfilter.cpp:79 kmymoney/mymoney/statusmodel.cpp:37
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:33

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-03 01:50+0000\n"
+"POT-Creation-Date: 2024-12-04 01:51+0000\n"
 "PO-Revision-Date: 2024-04-22 16:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -4108,11 +4108,10 @@ msgstr "在账户对账时所输入的交易的默认对账状态"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:335
-#: kmymoney/models/ledgerfilter.cpp:78
-#: kmymoney/widgets/kmymoneyreconcilecombo.cpp:34
+#: kmymoney/models/ledgerfilter.cpp:77
 #, kde-format
-msgid "Not reconciled"
-msgstr "尚未对账"
+msgid "Not marked"
+msgstr "未标记"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_stateBox)
@@ -6190,10 +6189,11 @@ msgstr "有错"
 msgid "Scheduled"
 msgstr "已计划"
 
-#: kmymoney/models/ledgerfilter.cpp:77
+#: kmymoney/models/ledgerfilter.cpp:78
+#: kmymoney/widgets/kmymoneyreconcilecombo.cpp:34
 #, kde-format
-msgid "Not marked"
-msgstr "未标记"
+msgid "Not reconciled"
+msgstr "尚未对账"
 
 #: kmymoney/models/ledgerfilter.cpp:79 kmymoney/mymoney/statusmodel.cpp:37
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:33
@@ -24642,6 +24642,3 @@ msgstr ""
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr ""
-
-#~ msgid "Annualized Return"
-#~ msgstr "年度分红"

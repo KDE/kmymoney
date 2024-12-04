@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-03 01:50+0000\n"
+"POT-Creation-Date: 2024-12-04 01:51+0000\n"
 "PO-Revision-Date: 2009-05-18 00:20+0900\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -3983,10 +3983,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:335
-#: kmymoney/models/ledgerfilter.cpp:78
-#: kmymoney/widgets/kmymoneyreconcilecombo.cpp:34
+#: kmymoney/models/ledgerfilter.cpp:77
 #, kde-format
-msgid "Not reconciled"
+msgid "Not marked"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
@@ -6036,9 +6035,10 @@ msgstr ""
 msgid "Scheduled"
 msgstr ""
 
-#: kmymoney/models/ledgerfilter.cpp:77
+#: kmymoney/models/ledgerfilter.cpp:78
+#: kmymoney/widgets/kmymoneyreconcilecombo.cpp:34
 #, kde-format
-msgid "Not marked"
+msgid "Not reconciled"
 msgstr ""
 
 #: kmymoney/models/ledgerfilter.cpp:79 kmymoney/mymoney/statusmodel.cpp:37

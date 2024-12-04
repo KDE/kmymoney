@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-03 01:50+0000\n"
-"PO-Revision-Date: 2024-11-19 20:19+0300\n"
+"POT-Creation-Date: 2024-12-04 01:51+0000\n"
+"PO-Revision-Date: 2024-12-03 15:57+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -4254,11 +4254,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:335
-#: kmymoney/models/ledgerfilter.cpp:78
-#: kmymoney/widgets/kmymoneyreconcilecombo.cpp:34
+#: kmymoney/models/ledgerfilter.cpp:77
 #, kde-format
-msgid "Not reconciled"
-msgstr "Mutabakat yapılmamış"
+msgid "Not marked"
+msgstr "İmlenmeyen"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_stateBox)
@@ -6383,10 +6382,11 @@ msgstr "Hatalı"
 msgid "Scheduled"
 msgstr "Zamanlanmış"
 
-#: kmymoney/models/ledgerfilter.cpp:77
+#: kmymoney/models/ledgerfilter.cpp:78
+#: kmymoney/widgets/kmymoneyreconcilecombo.cpp:34
 #, kde-format
-msgid "Not marked"
-msgstr "İmlenmeyen"
+msgid "Not reconciled"
+msgstr "Mutabakat yapılmamış"
 
 #: kmymoney/models/ledgerfilter.cpp:79 kmymoney/mymoney/statusmodel.cpp:37
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:33
@@ -15774,7 +15774,7 @@ msgstr "Piyasa Değeri"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:728
 #, kde-format
 msgid "Internal rate of return"
-msgstr ""
+msgstr "Dönüşün içsel oranı"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:730
 #, kde-format

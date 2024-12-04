@@ -32,7 +32,7 @@
 <para
 >La vista dei beneficiari è divisa in due aree principali: un elenco di beneficiari e paganti sulla sinistra, e un'area dei dettagli sulla destra. La sezione <guilabel
 >I tuoi beneficiari</guilabel
-> consente di aggiungere, eliminare, rinominare e unire i beneficiari. L'area dei dettagli ha diverse schede, che mostrano le transazioni, l'indirizzo, le informazioni corrispondenti, la categoria predefinita e i numeri di conto dei beneficiari selezionati nell'elenco. </para>
+> consente di aggiungere, eliminare, rinominare e unire i beneficiari. L'area dei dettagli ha diverse schede, che mostrano le transazioni, l'indirizzo, le informazioni corrispondenti, la categoria predefinita e i numeri di conto dei beneficiari selezionati nell'elenco. Inoltre, possono essere creati e gestiti collegamenti tra i contenuti specifici del beneficiario del campo di memoria di una transazione e percorsi di file locale o URL remoto. </para>
 
 <para>
 	<screenshot>
@@ -235,5 +235,89 @@
 </screenshot>
 </para>
 </sect1>
-</chapter>
 
+<sect1 id="details.payees.linkmatching">
+<title
+>Gestisci la corrispondenza dei collegamenti</title>
+
+<para
+>Questa scheda può essere utilizzata per collegare parti dei contenuti del campo promemoria di una transazione a un URL remoto o locale, ad esempio per rendere accessibili fatture o altri documenti. </para>
+
+<para
+>La scheda contiene campi di inserimento per un modello e un modello URL. Il modello specificato viene estratto tramite espressioni regolari nel campo memo dalle transazioni associate a questo beneficiario e inserito nel modello URL nelle posizioni designate. <screenshot>
+  <screeninfo
+>La scheda di corrispondenza dei collegamenti</screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="payee_link-matching.png" format="PNG"/>
+      </imageobject>
+    </mediaobject>
+</screenshot>
+</para>
+
+<para
+>L'URL risultante viene visualizzato come collegamento nel registro generale nelle transazioni corrispondenti (vedere la colonna «Dettaglio»). <screenshot
+> <screeninfo>
+Mostra il collegamento nel registro generale</screeninfo
+> <mediaobject
+> <imageobject
+> <imagedata fileref="payee_link-matching-ledger.png" format="PNG"/> </imageobject
+> </mediaobject
+> </screenshot
+> È possibile accedere al collegamento tramite il menu contestuale di una transazione o tramite una scorciatoia da tastiera. <screenshot>
+  <screeninfo
+>....</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_link-matching-open-url.png" format="PNG"/>
+    </imageobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.payees.linkmatching.pattern">
+<title
+>Suggerimenti</title>
+<para
+>I modelli trovati, che devono corrispondere alle espressioni regolari compatibili con Perl, sono inseriti nel modello URL al posto dei segnaposto supportati. Esempio semplice sono: <itemizedlist>
+    <listitem
+><para
+>\d+\b - uno o più numeri seguiti da un confine di parole.</para
+></listitem>
+    <listitem
+><para
+>\d{2,4}\b - da 2 a 4 numeri seguiti da un confine di parole</para
+></listitem>
+    <listitem
+><para
+>\d{3}-d{6}\b - 3 numeri seguiti da un trattino e 6 numeri seguiti da un confine di parole</para
+></listitem>
+  </itemizedlist>
+</para>
+
+<para
+>I segnaposto supportati sono: <itemizedlist
+> <listitem
+><para
+>%1 - prima espressione trovata</para
+></listitem
+> <listitem
+><para
+>%2 - seconda espressione trovata (facoltativa)</para
+></listitem
+> </itemizedlist
+> Quando si utilizzano due pattern indipendenti, le singole espressioni nel pattern sono separate da parentesi tonde, ad es. <code
+>(..)...(..)</code
+>. </para>
+
+<para
+>Inoltre, nel modello URL possono essere utilizzate variabili predefinite. Le variabili attualmente supportate sono: <itemizedlist
+> <listitem
+><para
+>%anno - L'anno dalla data della transazione corrispondente</para
+></listitem>
+  </itemizedlist>
+</para>
+</sect2>
+</sect1>
+</chapter>

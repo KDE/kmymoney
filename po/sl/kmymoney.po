@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-03 01:50+0000\n"
-"PO-Revision-Date: 2024-11-19 07:14+0100\n"
+"POT-Creation-Date: 2024-12-04 01:51+0000\n"
+"PO-Revision-Date: 2024-12-03 07:20+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -4284,11 +4284,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:335
-#: kmymoney/models/ledgerfilter.cpp:78
-#: kmymoney/widgets/kmymoneyreconcilecombo.cpp:34
+#: kmymoney/models/ledgerfilter.cpp:77
 #, kde-format
-msgid "Not reconciled"
-msgstr "Neusklajeno"
+msgid "Not marked"
+msgstr "Ni označeno"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_stateBox)
@@ -6422,10 +6421,11 @@ msgstr "Napačen"
 msgid "Scheduled"
 msgstr "Načrtovano"
 
-#: kmymoney/models/ledgerfilter.cpp:77
+#: kmymoney/models/ledgerfilter.cpp:78
+#: kmymoney/widgets/kmymoneyreconcilecombo.cpp:34
 #, kde-format
-msgid "Not marked"
-msgstr "Ni označeno"
+msgid "Not reconciled"
+msgstr "Neusklajeno"
 
 #: kmymoney/models/ledgerfilter.cpp:79 kmymoney/mymoney/statusmodel.cpp:37
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:33
@@ -15862,7 +15862,7 @@ msgstr "Tržna vrednost"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:728
 #, kde-format
 msgid "Internal rate of return"
-msgstr ""
+msgstr "Interna hitrost vračanja"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:730
 #, kde-format
