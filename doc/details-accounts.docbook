@@ -59,7 +59,7 @@
 <para>
   The Accounts View provides a summary of all the accounts. It is similar to the
   Institutions View, except accounts are grouped by the type of account.  The list of
-  accounts under any account type (or under the parent acccount for any subaccounts)
+  accounts under any account type (or under the parent account for any subaccounts)
   can be expanded or collapsed by clicking the arrow to the left of the type or name.
 </para>
 
@@ -719,7 +719,7 @@
 <para>
   This is the penultimate step in creating any new account except a loan.  Depending
   on the type of account that is being created, a tree of your Asset or Liability
-  accounts will be displayed.  Most accounts are direct childred of the Asset or
+  accounts will be displayed.  Most accounts are direct children of the Asset or
   Liability account type.  However, most accounts may be created as subaccounts,
   using another account as the parent.  There is no financial impact of making an
   account a subaccount; it is only used for organizing the hierarchical display of
@@ -778,7 +778,7 @@
   </guiicon> ledgers icon in the View Selector.  If the account is not already
   displayed there, then click <quote>+</quote> in the right-most tab and select the
   account in the dropdown box which appears.  Alternatively, in the Accounts View or
-  the Institutionss View, either double-click the account name or right-click and
+  the Institutions View, either double-click the account name or right-click and
   select <guimenuitem>Open ledger</guimenuitem>.
 </para>
 </sect1>
@@ -843,7 +843,7 @@
         This shows where the account is in the overall hierarcy of accounts.  You can
         change the parent account by dragging the account and dropping it on a
         different parent account in this view of the account hierarchy, or in the
-        Accounts View or the Institutuions View.  You can also change the parent
+        Accounts View or the Institutions View.  You can also change the parent
         account here by clicking the new parent account and then clicking
         <guibutton>OK</guibutton>.
       </para>
@@ -866,7 +866,7 @@
     <listitem>
       <para>
         Here you can check whether this is a VAT account, and you can specify the
-        percentage of the VAT.  In additon, you can check whether to include this
+        percentage of the VAT.  In addition, you can check whether to include this
         account on tax reports.
       </para>
     </listitem>
@@ -933,11 +933,11 @@
               <listitem>
                 <para>
                   Some banks do not follow the OFX standard of providing a
-                  repeatable, uniqe FITID (Financial Institution Transaction
+                  repeatable, unique FITID (Financial Institution Transaction
                   Identification) which can cause duplicate transactions on repeated
                   downloads.  If this happens, you can change the method &kmymoney;
                   uses to detect duplicates from the <guilabel>OFX FITID</guilabel>
-                  to the internallly calculated <guilabel>KMyMoney ID</guilabel>.
+                  to the internally calculated <guilabel>KMyMoney ID</guilabel>.
                   This is not frequently necessary.
                 </para>
               </listitem>
@@ -1009,9 +1009,9 @@
 
 <para>
   Deleting an Account completely removes all data related to that account from your
-  data file.  Howevr, there may be cases where you have closed an account at the
+  data file.  However, there may be cases where you have closed an account at the
   bank, and although you do not want to see it in your daily use of &kmymoney; you
-  wnat to keep the data for use in historical reports, you can select
+  want to keep the data for use in historical reports, you can select
   <guimenu>Account</guimenu><guimenuitem>Close account</guimenuitem> or right-click
   the name in the Accounts View and select <guimenuitem>Close
   account...</guimenuitem> from the popup menu.  This will mark the account as
@@ -1032,7 +1032,7 @@
 
 <sect1 id="details.accounts.options"><title>Account Options</title>
 <para>
-  Right clicking an Account in either the Institiutions View or the Accounts View
+  Right clicking an Account in either the Institutions View or the Accounts View
   will bring up the Accounts Options.  You can also just select the
   <guimenu>Account</guimenu> menu.
 </para>
@@ -1091,7 +1091,7 @@
 </para>
 
 <para>
-  Selecting <guimenuitem>Transaction Report</guimenuitem> is onlyl enabled for a
+  Selecting <guimenuitem>Transaction Report</guimenuitem> is only enabled for a
   limited selection of Accounts, in which case it opens a <link
   linkend="details.reports.transaction">Transaction Report</link> for the selected
   account, showing transactions YTD.
@@ -1109,7 +1109,7 @@
   account...</guimenuitem> allows you to associate an account with an online account
   and to remove the association.  Selecting <guimenuitem>Update
   account...</guimenuitem> fetches transaction data from the online source for an
-  account which has alreay been mapped.  In addition, selecting <guimenuitem>Update
+  account which has already been mapped.  In addition, selecting <guimenuitem>Update
   all accounts...</guimenuitem>, which only appears on the main
   <guimenu>Account</guimenu> menu, updates all mapped accounts.  These are all
   described in the <link linkend="details.impexp">Importing and Exporting

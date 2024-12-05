@@ -50,7 +50,7 @@
 <para>
   To access the database, &kmymoney; uses the SQL module supplied by &Qt; Software as
   part of their &Qt; programming system.  This module supports many database systems
-  through a collection of drivers.  &Qt; has drivers for a large numeber of open
+  through a collection of drivers.  &Qt; has drivers for a large number of open
   source and proprietary relational database systems, including
   <trademark>MySQL</trademark>, PostgreSQL, and SQLCipher.  The module also supports
   some 'heavier', more industrial, systems such as <trademark

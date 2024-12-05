@@ -175,7 +175,7 @@
 </para>
 
 <para>
-  Remember that the developer can only help recover your data file if you acually do
+  Remember that the developer can only help recover your data file if you actually do
   encrypt it with the recovery key, in addition to your own key.
 </para>
 </sect3>
@@ -208,14 +208,14 @@
 
 <sect2><title>Data file locations</title>
 <para>
-  All of the above file types can be stored on a local hard drive, a removeable
-  devicee such as a usb thumb drive, or a network location.  Depending on your
+  All of the above file types can be stored on a local hard drive, a removable
+  device such as a usb thumb drive, or a network location.  Depending on your
   Operating System, a remote location may need to be mapped or mounted prior to use.
 </para>
 
 <note><title>Limitation on Windows</title>
   <para>
-    On &Windows;, in order to use a netork or remote file location, that mapped
+    On &Windows;, in order to use a network or remote file location, that mapped
     location must be mapped to a drive letter.
   </para>
 </note>
@@ -311,7 +311,7 @@
   If the specified directory is actually a mount point for a storage device that is
   not always mounted, you can check the <guilabel>Mount this directory before backing
   up</guilabel> checkbox.  Do not use this for a regular network file share which is
-  always moutned.
+  always mounted.
 </para>
 </sect2>
 </sect1>

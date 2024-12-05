@@ -51,7 +51,7 @@
 <para> 
   If you have built from source, there should be no additional requirements. The
   &kmymoney; build process should detect the plugin source and compile the plugin.
-  There are comfiguration settings which can be used to exclude this or other plugins
+  There are configuration settings which can be used to exclude this or other plugins
   from being built, but these should rarely be needed.
 </para>
 </sect2>
@@ -99,10 +99,10 @@
 
 <sect3><title>CSV Import Profiles</title>
 <para>
-  Each type of CSV file to be imported requires sepcification of several details
+  Each type of CSV file to be imported requires specification of several details
   regarding the expected formatting of the data, as described in the following
   sections.  Not only do the details differ for the different types of data files
-  imported, it is possilbe to need different configurations for the same type of data
+  imported, it is possible to need different configurations for the same type of data
   from different sources.  So you do not need to enter all those details each time
   you import a file, the CSV Importer allows you to specify the details once, and
   save them in a named profile.
@@ -118,14 +118,14 @@
 </para>
 
 <para>
-  The profile selecter dropdown includes the names of all CSV Importer profiles you
-  have previusly created, and it also lets you type the name of a new profile.  Below
-  the profile selecter dropdown, there are three buttons.  When you click
+  The profile selector dropdown includes the names of all CSV Importer profiles you
+  have previously created, and it also lets you type the name of a new profile.  Below
+  the profile selector dropdown, there are three buttons.  When you click
   <guilabel>Add</guilabel>, which is always enabled, a new profile will be created
   with the name entered in the dropdown.  Nothing will happen if that field is empty
   or if it displays the name of an existing profile.  As you proceed through the rest
   of the CSV import wizard, the various configuration settings you enter or modify
-  will be saved in the selected provfile.
+  will be saved in the selected profile.
 </para>
 
 <para>
@@ -139,7 +139,7 @@
 <para>
   Next to the profile selector, there is a <guilabel>Skip setup</guilabel> checkbox.
   Initially, you should not select this checkbox.  Once you have set up a profile and
-  finished the wizard, all the configuration parameters you enetered are saved in the
+  finished the wizard, all the configuration parameters you entered are saved in the
   resource file under the profile name.  The next time you use that same profile, the
   parameters will be loaded into the UI (User Interface).  The wizard would then plod
   through the following pages of parameters that you won't need to change.  So, once
@@ -151,7 +151,7 @@
 <para>
   At the bottom there is a <guilabel>Select File</guilabel> button.  Clicking this
   will bring up a file selector dialog to let you choose the file to import.  At the
-  bottom of the remaining pages of the wizartd are buttons to go <guibutton>&lt;
+  bottom of the remaining pages of the wizard are buttons to go <guibutton>&lt;
   Back</guibutton> to the previous step of the wizard, move on to the <guilabel>Next
   &gt;</guilabel> step, or <guibutton>Cancel</guibutton> the import.
 </para>
@@ -306,7 +306,7 @@
     On the Amount tab, start by selecting the column which contains the amount of the
     transaction.  If there is a column which contains <quote>Credit</quote> or
     <quote>Debit</quote> to indicate which the amount is, select that column as the
-    <guilabel>Debid/Credit Indicator</guilabel>.  Separately, if there is a string
+    <guilabel>Debit/Credit Indicator</guilabel>.  Separately, if there is a string
     included in the amount field which indicates the amount is either a credit or a
     debit, enter that string in the appropriate <guilabel>Indicator</guilabel> field.
     Finally, if despite setting all the above values correctly, the amount imported
@@ -367,7 +367,7 @@
 
 <sect4><title>CSV Import Wizard: Format</title>
 <para>
-  The next page of the wizart still shows the data to be imported on the top, but the
+  The next page of the wizard still shows the data to be imported on the top, but the
   lower section provides three dropdowns.  The initial values are set by &kmymoney;
   based on examining the actual data.
 </para>
@@ -646,7 +646,7 @@
 
 <sect4><title>CSV Import Wizard: Stock prices</title>
 <para>
-`something about imporing stock prices
+Something about importing stock prices
 </para>
 </sect4>
 </sect3>

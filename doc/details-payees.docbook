@@ -135,7 +135,7 @@
       <imagedata fileref="payee_history.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>payees veiw transaction tab</phrase>
+      <phrase>payees view transaction tab</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
@@ -189,7 +189,7 @@
 
 <sect3><title>Setting up Payee Matching</title>
 <screenshot>
-  <screeninfo>payees veiw matching tab</screeninfo>
+  <screeninfo>payees view matching tab</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="payee_match.png" format="PNG" />

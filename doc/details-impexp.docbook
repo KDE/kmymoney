@@ -758,7 +758,7 @@
   <guibutton>New</guibutton> button.  You can rename an existing profile by selecting
   it in the Profile selector and clicking <guibutton>Rename</guibutton>, and delete
   one with the <guibutton>Delete</guibutton> button.  Clicking
-  <guibutton>Reset</guibutton> resets all the fields of the currenlty displayed
+  <guibutton>Reset</guibutton> resets all the fields of the currently displayed
   profile to their default values.
 </para>
 
@@ -840,7 +840,7 @@
 
 <para>
   The <quote>Amounts</quote> tab is used on QIF Export to specify the Decimal Symbol
-  and Thousands Separator to be used.  However, you need to speicfy those for each
+  and Thousands Separator to be used.  However, you need to specify those for each
   line in the QIF file which can contain an amount.  To alter those settings, click
   one of the lines in the upper part of the display, then use the dropdowns below to
   set the characters to be used.
@@ -1009,7 +1009,7 @@
   will only list QFX, which is equivalent.)  Your browser should ask whether you want
   to save the file, or else what program you would like to use to open the file.
   Point your browser to &kmymoney;.  It will then import the downloaded OFX file
-  directly into the &kmymoney; file you currenlty have open, or the file you most
+  directly into the &kmymoney; file you currently have open, or the file you most
   recently had open.  You can also change the file associations of your desktop
   environment, and have the system automatically open &kmymoney; if you click an OFX
   file in your file browser.

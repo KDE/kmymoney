@@ -30,7 +30,7 @@
 <para>
   Some &Linux; distributions package Woob, and that is the preferred method of
   installation, if it is available.  If not, you need to install a recent version of
-  Python 3 first before continuing.  All major &Linux; distribuitons package Python,
+  Python 3 first before continuing.  All major &Linux; distributions package Python,
   and you should use that version, if possible.  Otherwise, you can download a
   package for your system from the <ulink
   url="https://www.python.org/downloads/">official Python website</ulink>.  The exact

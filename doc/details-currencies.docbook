@@ -264,9 +264,9 @@
   amount</guilabel> or total price of the first currency in terms of the second, or
   you can enter the actual Exchange rate.  In this case, since you are entering the
   number of EUR for 1 USD, those two values are the same.  However, this is the same
-  dialog used to enter an exchage rate when you enter a transaction which involves
+  dialog used to enter an exchange rate when you enter a transaction which involves
   two currencies.  In that case, you will generally enter the amount, and let
-  &kmymoney; calculate the exachange rate, taking care of any rounding.
+  &kmymoney; calculate the exchange rate, taking care of any rounding.
 </para>
 </sect2>
 

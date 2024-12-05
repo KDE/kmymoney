@@ -98,13 +98,13 @@
 
 <sect2 id="details.investments.view.equities"><title>The Equities tab</title>
 <screenshot>
-  <screeninfo>investments veiw equities tab</screeninfo>
+  <screeninfo>investments view equities tab</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="investments_view_equities.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>investments veiw equities tab</phrase>
+      <phrase>investments view equities tab</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
@@ -209,13 +209,13 @@
 
 <sect2 id="details.investments.view.securities"><title>The Securities tab</title>
 <screenshot>
-  <screeninfo>investments veiw securities tab</screeninfo>
+  <screeninfo>investments view securities tab</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="investments_view_securities.png" format="PNG" />
     </imageobject>
     <textobject>
-      <phrase>investments veiw securities tab</phrase>
+      <phrase>investments view securities tab</phrase>
     </textobject>
   </mediaobject>
 </screenshot>
@@ -223,7 +223,7 @@
 <para>
   At the top of the list of securities is a search box.  Beacuse this tab lists all
   investments you own in all Investment accounts, it can grow lengthy, and you can
-  use the search box to find a speicific entry on the list, by typing any part of its
+  use the search box to find a specific entry on the list, by typing any part of its
   name.
 </para>
 

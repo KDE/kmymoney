@@ -103,7 +103,7 @@
   </varlistentry>
 
   <varlistentry>
-    <term>Day of Month to start Forecase</term>
+    <term>Day of Month to start Forecast</term>
     <listitem>
       <para>
         This sets the day of the current month which is used as the starting point of
@@ -148,7 +148,7 @@
           <listitem>
             <para>
               Selecting one of the three radio buttons, <guilabel>Simple Moving
-              Average</guilabel>, <guilabel>Weighted Moving Averate</guilabel> (this
+              Average</guilabel>, <guilabel>Weighted Moving Average</guilabel> (this
               is the default setting,) and <guilabel>Linear Regression</guilabel>,
               sets the mathematical formula &kmymoney; will use for a history based
               Forecast.
@@ -193,9 +193,9 @@
 
 <para>
   The top area of the Forecast View is the <guilabel>Forecast Settings</guilabel>.
-  At the left are several fields to control the forecase calculations.  The defaulsts
+  At the left are several fields to control the forecast calculations.  The defaults
   for these values are set on the Forecast View configuration dialog, as described in
-  the preceeding section.  The values (with the name used on the configuration dialog
+  the preceding section.  The values (with the name used on the configuration dialog
   shown in parentheses if it differs) are:
 </para>
 
@@ -213,12 +213,12 @@
   </listitem>
     
   <listitem>
-        <para>Historic Cycles (Numberof Cycles to use in Forecast)</para>
+        <para>Historic Cycles (Number of Cycles to use in Forecast)</para>
   </listitem>
     
   <listitem>
     <para>
-      Chart Detail: This item is not set on the configuratiohn dialog.  Choose one of
+      Chart Detail: This item is not set on the configuration dialog.  Choose one of
       the following values to control the results as displayed in the
       <guilabel>Chart</guilabel> tab.
       <itemizedlist>
@@ -459,7 +459,7 @@
 <sect2><title>Budget Forecast Tab</title>
 <para>
   The Budget tab displays a forecast calculation for all Income and Expense
-  categories.  Unlike the Summary Tab, there is one colum per month, starting with
+  categories.  Unlike the Summary Tab, there is one column per month, starting with
   January of the current year, and ending with the month which includes the end of
   the Forecast period.  The final column is a total, rather than a predicted value or
   a value calculated based on any predicted value.
@@ -468,7 +468,7 @@
 
 <sect2><title>Chart Tab</title>
 <para>
-  This displays the Forecase in a chart or graphical form.  The level of detail
+  This displays the Forecast in a chart or graphical form.  The level of detail
   varies depending on the detail level selected on the option above.
 </para>
 </sect2>

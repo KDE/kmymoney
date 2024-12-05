@@ -125,7 +125,7 @@
     <listitem>
       <para>
         Edit the name of the selected Budget.  You can also edit the name of a Budget
-        by double-clickin the name of a Budget in the list.
+        by double-clicking the name of a Budget in the list.
       </para>
     </listitem>
   </varlistentry>
@@ -201,7 +201,7 @@
   Aside from the Name column, all other columns may be shown or hidden by
   right-clicking any column header, and checking or unchecking the checkbox next to
   the column name.  For more details about the meaning of each column, see the <link
-  linkend="details.categories.view">Categories Veiw</link> section.  Only the columns
+  linkend="details.categories.view">Categories View</link> section.  Only the columns
   specifically relevant to Budgets are listed below, but all Category columns may be
   displayed.
 </para>
