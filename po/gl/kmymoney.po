@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-04 01:51+0000\n"
-"PO-Revision-Date: 2024-11-10 13:26+0100\n"
+"POT-Creation-Date: 2024-12-05 01:51+0000\n"
+"PO-Revision-Date: 2024-12-04 10:17+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -1784,6 +1784,9 @@ msgid ""
 "loaded if you have used it for a successful price update. Otherwise, the old "
 "setting will be shown."
 msgstr ""
+"A próxima vez que abra o diálogo, a orixe de prezo modificada só se cargará "
+"se a usou para unha actualización de prezo que funcionase. Senón, amosarase "
+"a opción anterior."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KEquityPriceUpdateDlg)
 #: kmymoney/dialogs/kequitypriceupdatedlg.ui:15
@@ -15853,9 +15856,10 @@ msgid "Market Value"
 msgstr "Valor de mercado"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:728
-#, kde-format
-msgid "Internal rate of return"
-msgstr ""
+#, fuzzy, kde-format
+#| msgid "Internal rate of return"
+msgid "Extended internal rate of return"
+msgstr "Taxa de retorno interna"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:730
 #, kde-format
@@ -21849,7 +21853,7 @@ msgstr "Seleccións actuais: %1"
 #, kde-format
 msgctxt "@info Info why selection is disabled"
 msgid "Category selection is not possible for net worth reports."
-msgstr ""
+msgstr "Non é posíbel seleccionar unha categoría en informes de valor neto."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/widgets/ktransactionfilter.ui:23

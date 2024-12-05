@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-04 01:51+0000\n"
+"POT-Creation-Date: 2024-12-05 01:51+0000\n"
 "PO-Revision-Date: 2024-12-03 17:11+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -15911,8 +15911,9 @@ msgid "Market Value"
 msgstr "Precio de mercado"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:728
-#, kde-format
-msgid "Internal rate of return"
+#, fuzzy, kde-format
+#| msgid "Internal rate of return"
+msgid "Extended internal rate of return"
 msgstr "Tasa interna de retorno"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:730

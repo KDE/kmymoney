@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-04 01:51+0000\n"
+"POT-Creation-Date: 2024-12-05 01:51+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -15766,7 +15766,7 @@ msgstr "TURGUS"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:728
 #, kde-format
-msgid "Internal rate of return"
+msgid "Extended internal rate of return"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:730
