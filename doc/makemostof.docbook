@@ -164,8 +164,8 @@
 <para>
   As described below, accounts can either hold money which is actually yours (assets)
   or money which you owe (liabilities.)  Liabilities can be thought of as magic pots,
-  which you can take beans from even if there are not acatually any beans there, but
-  which you eventually need to replace.  
+  which you can take beans from even if there are not actually any beans there, but
+  which you eventually need to replace.
 </para>
 
 
@@ -313,7 +313,7 @@
 <para>
   Tags are very similar to Categories, as they are also non-managed accounts that do
   not have a value.  However, unlike Categories, the use of Tags is completely
-  optional.  They can be used to group transactions for reporting purpses.
+  optional.  They can be used to group transactions for reporting purposes.
 </para>
 </sect2>
 
@@ -370,7 +370,7 @@
 </para>
 
 <para>
-  To add other transactions go to th Ledger View; you can add new payees and
+  To add other transactions go to the Ledger View; you can add new payees and
   categories while entering a transaction or by going to the Payees or Categories
   View before entering the transaction.
 </para>

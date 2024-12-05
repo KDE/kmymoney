@@ -317,7 +317,7 @@
   For income/expense and net worth reports:
   <itemizedlist>
     <listitem>
-      <para>Budgets: If you have have any <link
+      <para>Budgets: If you have any <link
       linkend="details.budgets">budgets</link> defined, you can select one as well as
       whether differences between budget and actual amounts should be propagated from
       one time period to the next</para>

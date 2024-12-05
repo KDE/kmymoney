@@ -16,7 +16,7 @@
 <para>
   The Ledgers View is functionally the data integration center of &kmymoney;.  This
   view is for entering, examining, editing, and deleting transactions in your defined
-  accounts.  This view has had a major overaul since the 5.1 series of &kmymoney;
+  accounts.  This view has had a major overhaul since the 5.1 series of &kmymoney;
   releases.  The main difference is that it is now a tabbed display, so you can have
   more than one account displayed at once.  You can actually only see one at a time,
   but switching by simply clicking a different tab is significantly more convenient
@@ -27,7 +27,7 @@
   The main display area shows zero or more tabs, each one for the ledger display on
   one account.  The rightmost tab will always have a <guilabel>+</guilabel>.
   Clicking this will display a dropdown where you can select the account to view, and
-  a new tab will be created for that account.  The rest of this chapter will descirbe
+  a new tab will be created for that account.  The rest of this chapter will describe
   using the ledger for any single account.
 </para>
 
@@ -94,7 +94,7 @@
 
 <formalpara><title>Date</title>
 <para>
-  the post date, or the the actual date the transaction occurred
+  the post date, or the actual date the transaction occurred
 </para>
 </formalpara>
 
@@ -259,7 +259,7 @@
 <para>
   <guilabel>Imported</guilabel> selects transactions which have been imported, even
   if they have been matched with a non-imported transaction.
-  <guilabel>Matched</guilabel> selects transactions which have beem matched, either
+  <guilabel>Matched</guilabel> selects transactions which have been matched, either
   by &kmymoney; as part of the import process or manually matched by the user.
   However, once you have clicked <guilabel>Accept</guilabel> on such a transaction,
   it will not be selected by this filter.
@@ -291,7 +291,7 @@
 </para>
 
 <para>
-  When it is displayed, the transaction form is a read-only display of the currentlys
+  When it is displayed, the transaction form is a read-only display of the currently
   selected transaction.  It is always at the bottom of the Transactions View, below
   the filter area, if that is displayed.  It is separated from everything above it by
   a splitter bar, which can be dragged up or down to change the height of the form.
@@ -369,7 +369,7 @@
 
 <para>
   Note also that the actual fields displayed for a transaction depend on the type of
-  accont.  For example, <link linkend="details.investments.ledger"> Investment
+  account.  For example, <link linkend="details.investments.ledger"> Investment
   Account transactions</link> include fields for activity type, security, and other
   investment specific items.
 </para>
@@ -460,7 +460,7 @@
 </para>
 
 <para>
-  Note you cannot explcitly enter the Entry Date, which is the date the transaction
+  Note you cannot explicitly enter the Entry Date, which is the date the transaction
   is actually entered into the ledger.  This is always set by &kmymoney;
 </para>
 </sect3>
@@ -502,7 +502,7 @@
 <para>
   In previous versions of &kmymoney; it was possible to enter or edit data in the
   Transaction Form.  As of version 5.2 the Transaction Form is a read-only display of
-  the transaction selected in the transaction list, possbly showing more details than
+  the transaction selected in the transaction list, possibly showing more details than
   are displayed in the list above.
 </para>
 </sect1>
@@ -516,7 +516,7 @@
 
 <para>
   A transaction always contains one or more splits.  Each split represents money
-  moving into or out of a sigle account.  Most of the time, a transaction contains
+  moving into or out of a single account.  Most of the time, a transaction contains
   exactly two splits, one for the account the money is coming from and the other for
   the account the money is going to.  The term <quote>Split Transaction</quote> is
   used when there are actually three or more splits, when one side of the transaction
@@ -531,7 +531,7 @@
   going anywhere (or vice versa.)  Such transactions are typically flagged by being
   displayed in red in the Ledger.  Valid transactions with a single split are usually
   in Investment Accounts: Add, Remove, or Split shares.  The other case is where the
-  amount of the transaction is 0, which banks somtimes produce.
+  amount of the transaction is 0, which banks sometimes produce.
 </para>
 
 <para>
@@ -709,7 +709,7 @@
   <guilabel>Match</guilabel>, you will see a <guilabel>Match Transactions</guilabel>
   dialog.  This dialog allows you to choose which of the two transactions is used as
   the source of the other fields in the matched transaction.  Note that if one of the
-  transactions is imported, the date of that transactoin will always be used in the
+  transactions is imported, the date of that transaction will always be used in the
   matched transaction, even if all other fields are taken from the non-imported
   transaction.  That dialog also gives you the option of reversing the transactions
   in terms of which is used as a source of fields which differ.

@@ -70,7 +70,7 @@
 <para>
   To rename a tag, either click the tag name to select it and then click <guiicon>
   <inlinemediaobject> <imageobject> <imagedata fileref="tag-edit.svg"
-  format="SVG"/></imageobject> </inlinemediaobject> </guiicon> Renaname Tag, or
+  format="SVG"/></imageobject> </inlinemediaobject> </guiicon> Rename Tag, or
   right-click the name and then select <guimenuitem>Rename tag</guimenuitem>.  The
   name then becomes editable.  Changing the name will affect the name in all the
   transactions in which it appears.

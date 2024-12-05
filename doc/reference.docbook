@@ -187,7 +187,7 @@
     </menuchoice></term>
     <listitem>
       <para>
-        Quits &kmymoney;.  Offers to save the currenly open data file, if there are
+        Quits &kmymoney;.  Offers to save the currently open data file, if there are
         any changes.
       </para>
     </listitem>
@@ -778,7 +778,7 @@
     </menuchoice></term>
     <listitem>
       <para>
-        Runs a check on your file, fixes any problems it can, and displayes a report
+        Runs a check on your file, fixes any problems it can, and displays a report
         of the results.
       </para>
       <para>Make a backup of your file before running this option.</para>
@@ -840,8 +840,8 @@
     <listitem>
       <para>
         By default, the language used by &kmymoney; depends on the system wide
-        seettings for location or locale.  This allows you to change that language,
-        and to set a fallback language, which is used for text whic has not been
+        settings for location or locale.  This allows you to change that language,
+        and to set a fallback language, which is used for text which has not been
         translated into the primary language.
       </para>
     </listitem>

@@ -14,7 +14,7 @@
   You can use the <guilabel>Search transactions</guilabel> dialog to search your data
   for transactions based on criteria that you specify.  You can access the dialog by
   selecting the <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Find
-  transaction...</guimenuitem></menuchoice> menu item, or typeing <keycombo
+  transaction...</guimenuitem></menuchoice> menu item, or typing <keycombo
   action="simul">&Ctrl; &Shift;<keycap>F</keycap></keycombo>..
 </para>
 

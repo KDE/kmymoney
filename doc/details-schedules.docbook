@@ -68,7 +68,7 @@
 <formalpara><title>Bills/Withdrawals</title>
 <para>
   These are for money going out of your account, such as a membership, utility bill,
-  taxe payment, or car registration.
+  tax payment, or car registration.
 </para>
 </formalpara>
 
@@ -107,7 +107,7 @@
 </screenshot>
 	
 <para>
-  The Schedules View consists of a sinngle display area with a <guibutton>New
+  The Schedules View consists of a single display area with a <guibutton>New
   Schedule...</guibutton> button and a <guilabel>Filter</guilabel> text box above it.
 </para>
 	
@@ -157,7 +157,7 @@
   interval, and the transaction will happen every <emphasis>Frequency</emphasis>
   occurrences of that interval.  Note that some intervals can be indicated in more than
   one way, such as 6 x "weekly" or 3 x "every other week" or 2 x "every three weeks."
-  you cannot indicat fractions of an interval, such as twice per month; you need use
+  you cannot indicate fractions of an interval, such as twice per month; you need use
   a shorter interval, such as 1 x "every half month."
 </para>
 
@@ -264,7 +264,7 @@
 
 <sect1 id="details.schedules.entering"><title>Entering scheduled transactions</title>
 <para>
-  Entering a scheduled transaction means actually enteringcreating a transaction in
+  Entering a scheduled transaction means actually creating a transaction in
   the appropriate ledger, using the details specified in the schedule.  Scheduled
   transactions can be entered in one of 3 different ways:
 </para>
@@ -293,7 +293,7 @@
 <sect2><title>Confirming the transaction to enter</title>
 <para>
   The first and third methods will display an <guilabel>Enter scheduled
-  transaction</guilabel> dialog (possibley after displaying an informational window
+  transaction</guilabel> dialog (possibly after displaying an informational window
   about the process.)  This dialog prompts you to confirm or update the required
   information that was entered when you created the schedule.
 </para>

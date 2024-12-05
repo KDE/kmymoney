@@ -113,8 +113,8 @@
   The distinction between equities and securities on these two tabs may seem somewhat
   arbitrary, and is known to cause confusion.  Perhaps the terminology may be changed
   in the future, if anyone can proposed a different set of terms that doesn't have
-  the same or other problems.  However, as stated above, in the current terminoloty,
-  an equity as shown on the Equtites Tab currently refers to the details of an
+  the same or other problems.  However, as stated above, in the current terminology,
+  an equity as shown on the Equities Tab currently refers to the details of an
   investment within an investment account.  Within &kmymoney;, it is a sub-account of
   an investment account, denominated in a security.  A security as shown on the
   Securities Tab provides access to the security information unrelated to any
@@ -133,7 +133,7 @@
 </para>
 
 <para>
-  Simlar to the Institutions and several other views, the Equities tab displays
+  Similar to the Institutions and several other views, the Equities tab displays
   several columns with descriptive and summary information about each equity.  As
   with the Institutions View, you can select which columns are shown by
   right-clicking any column heading and selecting or unselecting the checkbox next to
@@ -146,7 +146,7 @@
     <listitem>
       <para>
         The name of the equity.  This column is always displayed.  All the other
-        columns are optionally display, as desribed above.
+        columns are optionally display, as described above.
       </para>
     </listitem>
   </varlistentry>
@@ -194,7 +194,7 @@
     <term>Last Price Update</term>
     <listitem>
       <para>
-        This is the date of the mose recent price.  Prices can be updated in several
+        This is the date of the most recent price.  Prices can be updated in several
         ways, all described later in this section.
       </para>
     </listitem>
@@ -221,7 +221,7 @@
 </screenshot>
 
 <para>
-  At the top of the list of securities is a search box.  Beacuse this tab lists all
+  At the top of the list of securities is a search box.  Because this tab lists all
   investments you own in all Investment accounts, it can grow lengthy, and you can
   use the search box to find a specific entry on the list, by typing any part of its
   name.
@@ -233,7 +233,7 @@
     <listitem>
       <para>
         The name of the security.  This column is always displayed.  All the other
-        columns are optionally display, as desribed above.  The names should be the
+        columns are optionally display, as described above.  The names should be the
         same names as shown in the Name column on the Equities tab.
       </para>
     </listitem>
@@ -253,7 +253,7 @@
     <term>Type</term>
     <listitem>
       <para>
-        This is the specific type of investment beting tracked.  Currently, only
+        This is the specific type of investment being tracked.  Currently, only
         Stocks, Bonds, and Mutual Funds are possibly values.
       </para>
     </listitem>
@@ -263,7 +263,7 @@
     <term>Market</term>
     <listitem>
       <para>
-        This is the market where this investment is traded, 
+        This is the market where this investment is traded.
       </para>
     </listitem>
   </varlistentry>
@@ -272,7 +272,7 @@
     <term>Currency</term>
     <listitem>
       <para>
-        This displays the symbol of the currency in which this investmente is traded.
+        This displays the symbol of the currency in which this investment is traded.
       </para>
     </listitem>
   </varlistentry>
@@ -511,7 +511,7 @@
       Note that although &kmymoney; knows how to extract security prices from web
       pages retrieved from Yahoo and many other sources, those sources have been
       known to change the format of those pages, which can prevent &kmymoney; from
-      succesfully extracting the desired information.  This is an unfortuantely too
+      successfully extracting the desired information.  This is an unfortunately too
       frequent topic of discussion on the various support channels.  However, if
       fetching prices works for a long time and then you start to get errors, please
       consider this possibility.
@@ -573,8 +573,8 @@
 </para>
 
 <para>
-  Right-clicking an entry in the Securities tab produces a <guilabel>Securites
-  Options</guilabel> conext menu, where you can edit or delete a security.  Actually
+  Right-clicking an entry in the Securities tab produces a <guilabel>Securities
+  Options</guilabel> context menu, where you can edit or delete a security.  Actually
   creating a security is done when you create an equity in an Investment account, and
   do not choose to reuse an existing security, as discussed above.
 </para>

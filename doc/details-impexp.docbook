@@ -660,7 +660,7 @@
   shell script, a perl script, a compiled program written in C/C++, or anything else
   you can dream of, as long as the system can run it.  The filter will be run with
   the input file as stdin and stdout is assumed to be a valid qif file to pass on to
-  the the actual QIF importer.
+  the actual QIF importer.
 </para>
 
 <para>

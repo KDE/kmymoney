@@ -24,11 +24,11 @@
 
 <para>
   Completing the reconciliation process for an account says that you are sure that
-  the the records for that account, up to the date of the reconciliation, are
+  the records for that account, up to the date of the reconciliation, are
   correct.  This is most commonly done for accounts at institutions like banks or
   stores, but some users choose do to this for other accounts, such as cash.  In that
   case, it means that you are sure of the records up to the reconciliation date, and
-  are certain you will not find any further cash receits, and that the balance of the
+  are certain you will not find any further cash receipts, and that the balance of the
   account in &kmymoney; is the same as the actual amount of cash in your pocket.
 </para>
 
@@ -80,12 +80,12 @@
 <sect2 id="details.reconcile.wizard.statement"><title>Statement details</title>
 <para>
   The initial statement date presented by &kmymoney; is typically 30 days after the
-  more recent reconcilion for that account.  The starting balance presented is the
+  more recent reconciliation for that account.  The starting balance presented is the
   final balance as of the previous reconciliation.  This is actually calculated as
   the sum of the amounts of all transactions in the account which are cleared or
   reconciled, up to the date of the previous reconciliation.  The ending balance
   presented is the starting balance plus the amounts (added for deposits and
-  subracted for withdrawals) for all cleared transactions for the account since the
+  subtracted for withdrawals) for all cleared transactions for the account since the
   previous reconciliation.  (This also includes cleared transactions prior to the
   date of the previous reconciliation.)  If the starting balance does not match the
   statement, then you need to confirm that the previous reconciliation was done
@@ -93,7 +93,7 @@
 </para>
 
 <para>
-  Theoretiaclly, the ending balance at the time of the previous reconciliation should
+  Theoretically, the ending balance at the time of the previous reconciliation should
   not be different from the starting balance at this time.  However, &kmymoney; does
   not prevent you from making changes to transactions prior to the most recent
   reconciliation.  Edits of this type are the usual cause of such discrepancies.  At
@@ -104,7 +104,7 @@
 <para>
   The statement date, starting balance, and ending balance can be found in your
   statement.  Make sure that the figures match and click <guibutton>Next</guibutton>.
-  If the starting balanc does not match, see the previous paragraphs.  If the
+  If the starting balance does not match, see the previous paragraphs.  If the
   statement date or ending balance does not match then enter the figures as listed on
   your statement and click <guibutton>Next</guibutton>.
 </para>
@@ -141,7 +141,7 @@
 </note>
 
 <screenshot>
-  <screeninfo>reconciliation wizard interest and chanrges</screeninfo>
+  <screeninfo>reconciliation wizard interest and charges</screeninfo>
   <mediaobject>
     <imageobject>
       <imagedata fileref="reconcile3.png" format="PNG" />
@@ -171,7 +171,7 @@
   statement, and new transactions can be created as usual.  To mark a transaction as
   cleared, click the <guilabel>C</guilabel> column of the transaction in the ledger.
   You can also select the <menuchoice><guimenu>Transactions</guimenu></menuchoice>
-  menu or right-click the transaction to bring up the "Transaction options" contxt
+  menu or right-click the transaction to bring up the "Transaction options" context
   menu, and then select <menuchoice> <shortcut> <keycombo> <keysym>&Ctrl;</keysym>
   <keysym>&Alt;</keysym> <keysym>&Space;</keysym> </keycombo></shortcut>
   <guisubmenu>Mark transaction as...</guisubmenu> <guimenuitem>Cleared</guimenuitem>
@@ -228,7 +228,7 @@
 <sect4><title>Summary Tab</title>
 <para>
   This tab shows a summary of the reconciliation, including the starting and ending
-  balances, and the number and amount of payments and deposits: cleared, outsanding,
+  balances, and the number and amount of payments and deposits: cleared, outstanding,
   and those after the reconciliation date.
 </para>
 </sect4>

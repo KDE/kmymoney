@@ -74,7 +74,7 @@
 
       <para>
         The <guilabel>Number of backup to keep</guilabel> can be set from 0 (Off) up
-        to to 20.  The autosave files will be stored in the same folder as the main
+        to 20.  The autosave files will be stored in the same folder as the main
         file.  If your data file is MyFinances.kmy, then when an autosave file is
         created, it will be called MyFinances.kmy.1~.  Any existing autosave files
         will have their number increased by 1, up to the specified number.
@@ -294,7 +294,7 @@
       <para>
         &kmymoney; can create a log file when it imports data.  This can be useful
         for troubleshooting problems, but it is important to be careful, as these log
-        files can contain sensetive data, such as usernames and plain-text passwords,
+        files can contain sensitive data, such as usernames and plain-text passwords,
         as noted in the dialog.
       </para>
 
@@ -357,7 +357,7 @@
     <term><guilabel>Assets and Liabilities</guilabel></term>
     <listitem>
       <para>
-        This will display a listo of asset accountss on the left and liability
+        This will display a list of asset accounts on the left and liability
         accounts on the right.  These and the other account lists on the Home Page
         are sorted in alphabetical order, unless otherwise noted.  Normally, only
         open accounts will be listed, unless <link
@@ -672,7 +672,7 @@
       <formalpara>
         <title><guilabel>Reconciliation group headers</guilabel></title>
         <para>
-          This dropdown controls the display of group headers for reconcilitations.
+          This dropdown controls the display of group headers for reconciliations.
           If <guilabel>Don't show reconciliation entries</guilabel> is selected, then
           no group headers will be shown for reconciliations.  If <guilabel>Show last
           reconciliation entry with date and balance in ledger</guilabel> is
@@ -692,7 +692,7 @@
   These three sections allow you to set the default sort order of transactions in the
   Ledgers View.  In all cases, the list on the right shows the fields which have been
   selected as part of the sort order for that view, and the list on the left shows
-  all the fields available for sorting whic have not yet been chosen.  To sort on an
+  all the fields available for sorting which have not yet been chosen.  To sort on an
   item, select it (single mouse click) and click the right arrow between the two
   lists.  You can adjust the relative order of the fields by selecting one and
   adjusting its position in the list using the up and down arrows to the right of the
@@ -838,7 +838,7 @@
           <para>
             With this option selected, when you enter a new transaction, &kmymoney;
             will display a list of previous transactions for the same payee and
-            account.  If the amount of a previous transaction is closeenough to the
+            account.  If the amount of a previous transaction is close enough to the
             amount you have entered, it will be considered a match, and details from
             that previous transaction will be used to autofill details of the new
             transaction.  <quote>Close enough</quote> means within the percentage
@@ -990,7 +990,7 @@
     use it as a valid source, the user must make the necessary changes, using this
     dialog, based on instructions posted at one of the suggested<link
     linkend="firsttime.contact">support options</link>.  Hopefully, in the not to
-    distanct future, the way online source configuration is handled will be changed
+    distant future, the way online source configuration is handled will be changed
     so that &kmymoney; can automatically fetch any necessary updates to these
     settings without requiring the user to make any manual edits.
   </para>
@@ -1059,7 +1059,7 @@
     <term><guilabel>Individual icon settings</guilabel></term>
     <listitem>
       <para>
-        The dropdown list presents a selection of icon themess available for use.
+        The dropdown list presents a selection of icon themes available for use.
         Additional icons may be available for downloading and use depending on the
         operating system or &Linux; Distribution installed.
       </para>
@@ -1239,7 +1239,7 @@
 
 <para>
   The exported file will contain one event for each scheduled transaction.  There are
-  controls to configure whether to have the calender show reminders for the events,
+  controls to configure whether to have the calendar show reminders for the events,
   as well as how many reminders, and how far ahead of the events the reminders are
   created, although these seem not to currently have any effect on the file created.
 </para>

@@ -94,7 +94,7 @@
       <para>
         The <ulink url="https://en.wikipedia.org/wiki/Bank_code">Bank Code</ulink>.
         This identifier is formatted and used differently in different countries.  It
-        is is known as the routing or routing transit number in the US and as the
+        is known as the routing or routing transit number in the US and as the
         sort code in the UK.  It is not currently used by &kmymoney;.
       </para>
     </listitem>

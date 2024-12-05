@@ -109,8 +109,8 @@
   Merge Payees or right-click either of the selected payees and select
   <guilabel>Merge Payees</guilabel>..  You will get a pop-up asking if you really
   want to merge the selected payees.  If you click <guibutton>Yes</guibutton>, you
-  will get another popup for you to specify thename of the payee for the combined
-  data.  There will be a drop-down with the names of the payess you selected for
+  will get another popup for you to specify the name of the payee for the combined
+  data.  There will be a drop-down with the names of the payees you selected for
   merging (you can actually select more than two) and it also allows you to type in a
   completely new name.  There is also a checkbox to add the names of the merged
   payees to the matching list of the new payee.
@@ -217,7 +217,7 @@
   <listitem>
     <para>
       <emphasis>Match Payees name (partial)</emphasis>: This enables the feature
-      based on a partial name matching of the Payee and and uses the payee name
+      based on a partial name matching of the Payee and uses the payee name
       itself as the Match Key.
     </para>
   </listitem>

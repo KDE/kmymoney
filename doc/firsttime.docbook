@@ -403,7 +403,7 @@
 <para>
   Enter the name of the account and a possible account or reference number assigned
   by the institution managing the account.  The name is arbitrary, and is simply how
-  the account will be referenced and displayd by &kmymoney;. Enter the opening date
+  the account will be referenced and displayed by &kmymoney;. Enter the opening date
   and the opening balance of the account.  For example, if you want to use &kmymoney;
   to manage all your finances as of 2008-01-01, then enter the balance of the account
   at the beginning of this date.  The number can possibly be obtained from a paper
@@ -606,7 +606,7 @@
 </para>
 
 <para>
-  A more detaioled description of this topic can be found in the <link
+  A more detailed description of this topic can be found in the <link
   linkend="details.tags">Tags</link> section.
 </para>
 </sect1>
@@ -670,7 +670,7 @@
 <para>
   At some point, you will want to reconcile your records and details of an account
   with the actual account to assure they match.  This is generally done by comparing
-  the account in &kmymoney; with a printed or electronic statement for the accout
+  the account in &kmymoney; with a printed or electronic statement for the account
   issued by the institution, such as bank, credit card, loan, or any other statement.
   Reconciliation involves matching what you have entered, specifically the
   transactions since the previous reconciliation, with what the statement lists.  If
@@ -718,7 +718,7 @@
 </para>
 
 <para>
-  For more details about the actaul format of the data file, and the backpu process,
+  For more details about the actual format of the data file, and the backup process,
   see the <link linkend="details.formats">File Formats</link>.
 </para>
 </sect1>
@@ -840,7 +840,7 @@
 
 <sect1 id="firsttime.contact"><title>Getting Help / Contacting the Developers / Reporting Bugs</title>
 <para>
-  Since support channnels change over time, you can refer to the <ulink
+  Since support channels change over time, you can refer to the <ulink
   url="https://kmymoney.org/support.html">Support page</ulink> at the <ulink
   url="https://kmymoney.org/">&kmymoney; web site</ulink> for the most up-to-date
   information on where to get help with &kmymoney;.
@@ -848,7 +848,7 @@
 
 <para>
   If you simply have questions about using &kmymoney;, you want to confirm you
-  understanding of how the application works, or need assistance finguring out the
+  understanding of how the application works, or need assistance figuring out the
   best way to handle a particular financial situation, please consider using one of
   the information sources, forums, mailing lists, or chat channels listed at the
   above link.
@@ -869,7 +869,7 @@
 
 <para>
   Note that the developers generally monitor the various contact channels mentioned
-  above, so direct email contact is rarelly necessary.  However, we're happy to hear
+  above, so direct email contact is rarely necessary.  However, we're happy to hear
   about your experiences using &kmymoney; over whatever channel you prefer.
 </para>
 </sect2>
@@ -889,7 +889,7 @@
   In any case, before reporting a bug, please read through the guidelines below.
   Following them will make it more likely that the developers will be able to quickly
   identify the problem without having to ask you for more information.  Also try to
-  be sure that what you are reporting really is a bug (or wishilst/enhancement
+  be sure that what you are reporting really is a bug (or wishlist/enhancement
   request.)  If things are just not working they way you expect, or you need help
   using some feature of &kmymoney;, please use one of the alternate support channels
   listed above.
