@@ -1074,6 +1074,20 @@ QModelIndex LedgerView::moveCursor(QAbstractItemView::CursorAction cursorAction,
     QModelIndex newIndex;
     bool skipSchedules(false);
 
+    // make sure, that the currentIndex() points to a visible cell
+    // since the logic usually selects column 0 this may not always
+    // be the case and distracts the call to moveCursor below. In
+    // case it's hidden, we search the first visible and use it.
+    if (isColumnHidden(currentIndex().column())) {
+        for (auto column = 0; column < model()->columnCount(); ++column) {
+            if (!isColumnHidden(column)) {
+                const auto index = model()->index(currentIndex().row(), column, currentIndex().parent());
+                setCurrentIndex(index);
+                break;
+            }
+        }
+    }
+
     if (!(modifiers & Qt::ControlModifier)) {
         // for home and end we need to have the ControlModifier set so
         // that the base class implementation works on rows instead of
