@@ -56,8 +56,9 @@
 
 using namespace Icons;
 
-class NewTransactionEditor::Private
+class NewTransactionEditor::Private : public QObject
 {
+    Q_OBJECT
     Q_DISABLE_COPY_MOVE(Private)
 
 public:
@@ -107,7 +108,7 @@ public:
     bool postdateChanged(const QDate& date);
     bool costCenterChanged(int costCenterIndex);
     void payeeChanged(int payeeIndex);
-    void autoFillTransaction(const QString& payeeId);
+    Q_SLOT void autoFillTransaction(const QString& payeeId);
     void accountChanged(const QString& id);
     bool categoryChanged(const QString& id);
     bool numberChanged(const QString& newNumber);
@@ -500,13 +501,19 @@ void NewTransactionEditor::Private::payeeChanged(int payeeIndex)
     // in the selected account.
     if (m_transaction.id().isEmpty() && (splitModel.rowCount() == 0) && !ui->creditDebitEdit->haveValue() && ui->memoEdit->toPlainText().isEmpty()
         && !m_account.id().isEmpty() && (autoFillMethod != AutoFillMethod::NoAutoFill)) {
-        // if we got here, we have to autofill
-        autoFillTransaction(payeeId);
-    }
-    // copy payee information to second split if there are only two splits
-    if (splitModel.rowCount() == 1) {
-        const auto idx = splitModel.index(0, 0);
-        splitModel.setData(idx, payeeId, eMyMoney::Model::SplitPayeeIdRole);
+        // if we got here, we have to autofill. Because we will open a dialog,
+        // we simply postpone the call until we reach the main event loop. We
+        // do this because running the dialog directly has some unknown influence
+        // when controlled by the keyboard on the payee completer object which
+        // we can avoid by postponing.
+        QMetaObject::invokeMethod(this, "autoFillTransaction", Qt::QueuedConnection, Q_ARG(QString, payeeId));
+
+    } else {
+        // copy payee information to second split if there are only two splits
+        if (splitModel.rowCount() == 1) {
+            const auto idx = splitModel.index(0, 0);
+            splitModel.setData(idx, payeeId, eMyMoney::Model::SplitPayeeIdRole);
+        }
     }
 }
 
@@ -650,6 +657,10 @@ void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
 
                 if (needClearSplitAction(idx.data(eMyMoney::Model::SplitActionRole).toString())) {
                     splitModel.setData(idx, QString(), eMyMoney::Model::SplitActionRole);
+                }
+                // copy payee information to second split if there are only two splits
+                if (splitModel.rowCount() == 1) {
+                    splitModel.setData(idx, payeeId, eMyMoney::Model::SplitPayeeIdRole);
                 }
             }
         }
@@ -1688,3 +1699,5 @@ bool NewTransactionEditor::isTransactionDataValid() const
 {
     return d->checkForValidTransaction(false);
 }
+
+#include "newtransactioneditor.moc"
