@@ -59,6 +59,12 @@ public:
     void setColumnSelectorGroupName(const QString& groupName);
 
     /**
+     * This method is used to allow only a selection of a transaction from the view.
+     * The editor cannot be started in this case.
+     */
+    void setSelectOnly(bool selectOnly);
+
+    /**
      * If @a show is @c true, the payee name is shown in the
      * detail column if no payee column is present. This defaults
      * to @c true.

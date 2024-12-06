@@ -94,6 +94,7 @@ public:
         , showValuesInverted(false)
         , newTransactionPresent(false)
         , reselectAfterResetPending(false)
+        , selectOnly(false)
     {
         infoMessage->hide();
 
@@ -528,6 +529,7 @@ public:
     bool showValuesInverted;
     bool newTransactionPresent;
     bool reselectAfterResetPending;
+    bool selectOnly;
     QString accountId;
     QString groupName;
     QPersistentModelIndex editIndex;
@@ -1045,24 +1047,31 @@ void LedgerView::keyPressEvent(QKeyEvent* kev)
         d->infoMessage->animatedHide();
     } else {
 #ifndef Q_OS_OSX
-        // on non OSX operating systems, we turn a return or enter
-        // key press into an F2 to start editing the transaction.
-        // This is otherwise suppressed. Comment from QAbstractItemView:
-        //
-        // ### we can't open the editor on enter, becuse
-        // some widgets will forward the enter event back
-        // to the viewport, starting an endless loop
+        if (d->selectOnly) {
+            // suppress starting the editor
+            if (kev->key() == Qt::Key_F2) {
+                return;
+            }
+        } else {
+            // on non OSX operating systems, we turn a return or enter
+            // key press into an F2 to start editing the transaction.
+            // This is otherwise suppressed. Comment from QAbstractItemView:
+            //
+            // ### we can't open the editor on enter, becuse
+            // some widgets will forward the enter event back
+            // to the viewport, starting an endless loop
 
-        QKeyEvent evt(kev->type(), Qt::Key_F2, kev->modifiers(), QString(), kev->isAutoRepeat(), kev->count());
-        switch (kev->key()) {
-        case Qt::Key_Return:
-        case Qt::Key_Enter:
-            // send out the modified key event
-            // and don't process this one any further
-            QApplication::sendEvent(this, &evt);
-            return;
-        default:
-            break;
+            QKeyEvent evt(kev->type(), Qt::Key_F2, kev->modifiers(), QString(), kev->isAutoRepeat(), kev->count());
+            switch (kev->key()) {
+            case Qt::Key_Return:
+            case Qt::Key_Enter:
+                // send out the modified key event
+                // and don't process this one any further
+                QApplication::sendEvent(this, &evt);
+                return;
+            default:
+                break;
+            }
         }
 #endif
         QTableView::keyPressEvent(kev);
@@ -1343,30 +1352,32 @@ void LedgerView::selectMostRecentTransaction()
 
 void LedgerView::editNewTransaction()
 {
-    auto startEditing = [&](const QModelIndex& idx) {
-        if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
-            scrollTo(idx, QAbstractItemView::EnsureVisible);
-            selectRow(idx.row());
-            // if the empty row is already selected, we have to start editing here
-            // otherwise, it will happen in currentChanged()
-            const auto currentRow = currentIndex().row();
-            setCurrentIndex(idx);
-            if (idx.row() == currentRow) {
-                edit(idx);
+    if (d->selectOnly == false) {
+        auto startEditing = [&](const QModelIndex& idx) {
+            if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
+                scrollTo(idx, QAbstractItemView::EnsureVisible);
+                selectRow(idx.row());
+                // if the empty row is already selected, we have to start editing here
+                // otherwise, it will happen in currentChanged()
+                const auto currentRow = currentIndex().row();
+                setCurrentIndex(idx);
+                if (idx.row() == currentRow) {
+                    edit(idx);
+                }
+                return true;
             }
-            return true;
-        }
-        return false;
-    };
+            return false;
+        };
 
-    // sorting takes care that the new transaction
-    // (the one with an empty id) is either at the
-    // top or the bottom of the view. So we simply
-    // look in both locations and start editing if
-    // we find the transaction.
-    const auto row = model()->rowCount() - 1;
-    if (!startEditing(model()->index(row, 0))) {
-        startEditing(model()->index(0, 0));
+        // sorting takes care that the new transaction
+        // (the one with an empty id) is either at the
+        // top or the bottom of the view. So we simply
+        // look in both locations and start editing if
+        // we find the transaction.
+        const auto row = model()->rowCount() - 1;
+        if (!startEditing(model()->index(row, 0))) {
+            startEditing(model()->index(0, 0));
+        }
     }
 }
 
@@ -1721,4 +1732,9 @@ void LedgerView::setFocus()
     } else {
         QTableView::setFocus();
     }
+}
+
+void LedgerView::setSelectOnly(bool selectOnly)
+{
+    d->selectOnly = selectOnly;
 }
