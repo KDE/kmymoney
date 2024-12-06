@@ -128,7 +128,7 @@
   specific investments.  If you have checked <link
   linkend="details.settings.general.views">Synchronize account selection of Ledgers
   View and Investments View</link> in the configuration dialog, then if you are
-  looking at an investment account in the Legders View, and then switch to the
+  looking at an investment account in the Ledgers View, and then switch to the
   Investments View, that account will already be selected.
 </para>
 
@@ -441,7 +441,7 @@
     <para>
       Identification number.  An optional field to enter additional identification
       information you might like to keep track of.  Stocks often have such a number,
-      which can sometimes be used as well as the symbol for retreiving information
+      which can sometimes be used as well as the symbol for retrieving information
       about it.  Again, this information is not used anywhere else.
     </para>
   </listitem>

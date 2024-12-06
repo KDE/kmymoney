@@ -339,7 +339,7 @@
 <para>
   The <guilabel>Result</guilabel> tab displays the Entry (entry date, optional,) Date
   (posting date,) Account, Payee, Details (memo,) C (reconciliation status,)
-  Decrease, and Increast for each transaction that matches the search criteria you
+  Decrease, and Increase for each transaction that matches the search criteria you
   have entered.  Clicking the &RMB; on the header row of the results list allows you
   to toggle the display of the optional columns.
 </para>

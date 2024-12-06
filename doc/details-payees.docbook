@@ -174,7 +174,7 @@
  &kmymoney; has the ability to automatically assign the proper payee to imported
  transactions.  This can be handy when importing transactions from your bank, when
  the payee name has extra unnecessary characters, or worse, if the payee names
- change.  The ability to match transactions to a particualar payee assists in
+ change.  The ability to match transactions to a particular payee assists in
  providing a consist naming of payees within the ledger and reports.
 </para>
 

@@ -954,7 +954,7 @@
   your bank or other financial institution as an OFX file.  In most cases, when you
   are logged into the bank's web site, on the page which displays your transactions,
   there is a button or link for downloading that data.  It may say OFX or QFX, or you
-  may reqeuest the data for Quicken or Web Connect (see below for more on this term.)
+  may request the data for Quicken or Web Connect (see below for more on this term.)
   You also have the option of specifying the date range of transactions to download
   (although that is sometimes restricted to periods matching the available
   statements,) as well as filtering by type of transaction.
@@ -992,7 +992,7 @@
 
 <sect2><title>Importing Investments</title>
 <para>
-  <!-- FIXME: Was this true in the past?  Currently, KMM will create securites in OFX
+  <!-- FIXME: Was this true in the past?  Currently, KMM will create securities in OFX
        data if they do not already exist.  -->
   Please note that if you are importing a file with investment transactions, those
   investments must first exist in your &kmymoney; file.  The trading symbol is used
@@ -1051,8 +1051,8 @@
 <para>
   If Direct Connect works for you, it allows you to update your records by
   downloading recent transactions with a single button push.  If it does not work on
-  your first attempt, you may find an easy soltuion to your issue, or it may take a
-  lot of research, and there is no guarantee that it will work in any particulat
+  your first attempt, you may find an easy solution to your issue, or it may take a
+  lot of research, and there is no guarantee that it will work in any particular
   situation.  However, plese do not take any of this as a reason to not try it.
 </para>
 

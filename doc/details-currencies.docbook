@@ -210,8 +210,8 @@
 </screenshot>
 
 <para>
-  The first column in the dialog is labelled <guilabel>Commodidty</guilabel>, which
-  displays both trading symbols of securites and the symbols of currencies.  In
+  The first column in the dialog is labelled <guilabel>Commodity</guilabel>, which
+  displays both trading symbols of securities and the symbols of currencies.  In
   &kmymoney;, a <quote>Price</quote> is the price of security in terms of a currency,
   or of a currency in terms of a second currency.  For example, as I write this, the
   price of 1 USD in terms of 1 EUR is 0.94; that is, 1 USD costs 0.94 EUR.  The first

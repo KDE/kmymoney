@@ -467,7 +467,7 @@
 
 <sect3><title>Amount</title>
 <para>
-  Finally, enter the transaction amount into either the <guilabel>Paymenet</guilabel>
+  Finally, enter the transaction amount into either the <guilabel>Payment</guilabel>
   or <guilabel>Deposit</guilabel> field.  Note that a simple calculator can be
   displayed, either by clicking the icon to the right of the field, or by entering
   the % character into the field, or by entering any of these mathematical symbols: +
@@ -655,7 +655,7 @@
   Transactions, and also imported from your bank or credit card.  To allow for
   differences in the dates, there is a default setting of 4 days, which may be
   changed in <guimenu>Settings</guimenu> <guimenuitem>Configure
-  MyMopney...</guimenuitem> Ledger section, <link
+  KMyMoney...</guimenuitem> Ledger section, <link
   linkend="details.settings.register.import">Import Tab</link>.  Any transactions so
   matched will be indicated in the ledger with an <guiicon> <inlinemediaobject>
   <imageobject> <imagedata fileref="link.svg" format="SVG"
