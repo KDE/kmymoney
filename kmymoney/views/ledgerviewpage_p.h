@@ -142,7 +142,7 @@ public:
                                             "Investment value: %1%2",
                                             balanceIsApproximated ? QLatin1String("~") : QString(),
                                             balance.formatMoney(baseCurrency.tradingSymbol(), precision)));
-            ui->m_rightLabel->setToolTip(i18nc("@label:textbox Total value of investment",
+            ui->m_rightLabel->setToolTip(i18nc("@info:toolbox Total value of investment",
                                                "The value is calculated on the basis of the last available prices, "
                                                "may therefore not be up-to-date and may differ from the account balance."));
         } else {
