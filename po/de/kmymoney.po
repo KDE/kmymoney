@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-05 01:51+0000\n"
+"POT-Creation-Date: 2024-12-07 01:51+0000\n"
 "PO-Revision-Date: 2022-11-07 20:00+0100\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -19247,7 +19247,7 @@ msgstr "Zinseinkünfte"
 
 #: kmymoney/views/investtransactioneditor.cpp:262
 #: kmymoney/views/multitransactioneditor.cpp:184
-#: kmymoney/views/newtransactioneditor.cpp:277
+#: kmymoney/views/newtransactioneditor.cpp:278
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
 msgid "The posting date of the transaction."
@@ -19255,7 +19255,7 @@ msgstr "Kontoauszug ohne Buchungen wird importiert"
 
 #: kmymoney/views/investtransactioneditor.cpp:286
 #: kmymoney/views/multitransactioneditor.cpp:214
-#: kmymoney/views/newtransactioneditor.cpp:297
+#: kmymoney/views/newtransactioneditor.cpp:298
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr ""
@@ -21000,12 +21000,12 @@ msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
 msgstr "Buchungen ohne Empfänger auswählen"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:126
+#: kmymoney/views/ktransactionselectdlg.cpp:127
 #, kde-format
 msgid "Merge Transactions"
 msgstr "Buchungen zusammenführen"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:128
+#: kmymoney/views/ktransactionselectdlg.cpp:129
 #, kde-format
 msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
@@ -21014,7 +21014,7 @@ msgid ""
 "the other one press the exchange button on the right."
 msgstr ""
 
-#: kmymoney/views/ktransactionselectdlg.cpp:134
+#: kmymoney/views/ktransactionselectdlg.cpp:135
 #, fuzzy, kde-format
 #| msgid "Unable to match the selected transactions"
 msgctxt "@info:tooltip Exchange transactions about to merge"
@@ -21058,31 +21058,31 @@ msgstr "Eine vorhandene KMyMoney-Datei öffnen"
 msgid "Open the Handbook and learn how to use KMyMoney"
 msgstr "Lernen, KMyMoney zu benutzen"
 
-#: kmymoney/views/ledgerview.cpp:209
+#: kmymoney/views/ledgerview.cpp:210
 #, kde-format
 msgctxt "@action:inmenu open account"
 msgid "Go to account"
 msgstr "Gehe zu Konto"
 
-#: kmymoney/views/ledgerview.cpp:211
+#: kmymoney/views/ledgerview.cpp:212
 #, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to payee"
 msgstr "Gehe zu Zahlungsempfänger"
 
-#: kmymoney/views/ledgerview.cpp:256
+#: kmymoney/views/ledgerview.cpp:257
 #, kde-format
 msgctxt "@action:inmenu open account"
 msgid "Go to '%1'"
 msgstr "Gehe zu „%1“"
 
-#: kmymoney/views/ledgerview.cpp:266
+#: kmymoney/views/ledgerview.cpp:267
 #, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Gehe zu „%1“"
 
-#: kmymoney/views/ledgerview.cpp:741
+#: kmymoney/views/ledgerview.cpp:743
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -21090,33 +21090,33 @@ msgid ""
 "to current editor</a>"
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:857
+#: kmymoney/views/ledgerview.cpp:859
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Dieser Buchung wurde keine Kategorie zugewiesenen."
 
-#: kmymoney/views/ledgerview.cpp:864
+#: kmymoney/views/ledgerview.cpp:866
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Die Buchung hat eine fehlende Zuordnung von <b>%1</b>."
 
-#: kmymoney/views/ledgerview.cpp:873
+#: kmymoney/views/ledgerview.cpp:875
 #, fuzzy, kde-format
 #| msgid "This schedule will end at some time"
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "Zahlungen enden zu einem bestimmten Termin"
 
-#: kmymoney/views/ledgerview.cpp:879
+#: kmymoney/views/ledgerview.cpp:881
 #, fuzzy, kde-format
 #| msgid "First transaction does not match requirement for matching"
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "Erste Buchung erfüllt die Anforderungen für eine Zuordnung nicht"
 
-#: kmymoney/views/ledgerview.cpp:884
+#: kmymoney/views/ledgerview.cpp:886
 #, fuzzy, kde-format
 #| msgid "First transaction does not match requirement for matching"
 msgctxt "@info:tooltip icon description"
@@ -21124,7 +21124,7 @@ msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
 msgstr "Erste Buchung erfüllt die Anforderungen für eine Zuordnung nicht"
 
-#: kmymoney/views/ledgerview.cpp:960
+#: kmymoney/views/ledgerview.cpp:962
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -21132,14 +21132,14 @@ msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Möchten Sie den gewählten Kurseintrag wirklich löschen?"
 
-#: kmymoney/views/ledgerview.cpp:961
+#: kmymoney/views/ledgerview.cpp:963
 #, fuzzy, kde-format
 #| msgid "Enter scheduled transaction"
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Geplante Buchung eintragen"
 
-#: kmymoney/views/ledgerview.cpp:964
+#: kmymoney/views/ledgerview.cpp:966
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -21147,7 +21147,7 @@ msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Möchten Sie den gewählten Kurseintrag wirklich löschen?"
 
-#: kmymoney/views/ledgerview.cpp:965
+#: kmymoney/views/ledgerview.cpp:967
 #, fuzzy, kde-format
 #| msgctxt "Dialog caption for 'Enter or schedule' dialog"
 #| msgid "Enter or schedule?"
@@ -21155,7 +21155,7 @@ msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Eintragen oder planen?"
 
-#: kmymoney/views/ledgerview.cpp:985
+#: kmymoney/views/ledgerview.cpp:987
 #, fuzzy, kde-format
 #| msgid ""
 #| "Use this to schedule the transaction for later entry into the ledger."
@@ -21167,7 +21167,7 @@ msgstr ""
 "Verwenden Sie dies, um die Buchung für einen späteren Eintrag in das "
 "Kontenbuch vorzusehen."
 
-#: kmymoney/views/ledgerview.cpp:987
+#: kmymoney/views/ledgerview.cpp:989
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21175,7 +21175,7 @@ msgid ""
 "transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:991
+#: kmymoney/views/ledgerview.cpp:993
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -21183,7 +21183,7 @@ msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Sind Sie sicher, dass Sie die ausgewählte Buchung löschen möchten?"
 
-#: kmymoney/views/ledgerview.cpp:992
+#: kmymoney/views/ledgerview.cpp:994
 #, fuzzy, kde-format
 #| msgid "Attempt to match similar transactions"
 msgctxt "@title:window"
@@ -21233,21 +21233,21 @@ msgid "Balance: %1"
 msgstr "Saldo: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:192
-#: kmymoney/views/newtransactioneditor.cpp:280
+#: kmymoney/views/newtransactioneditor.cpp:281
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
 msgid "The posting date is invalid."
 msgstr "Kontoauszug ohne Buchungen wird importiert"
 
 #: kmymoney/views/multitransactioneditor.cpp:225
-#: kmymoney/views/newtransactioneditor.cpp:315
+#: kmymoney/views/newtransactioneditor.cpp:316
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
 msgid "The cost center this transaction should be assigned to."
 msgstr "Nehmen Sie hiermit die Buchung in das Kontenbuch auf."
 
 #: kmymoney/views/multitransactioneditor.cpp:228
-#: kmymoney/views/newtransactioneditor.cpp:324
+#: kmymoney/views/newtransactioneditor.cpp:325
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgid ""
@@ -21336,19 +21336,19 @@ msgid "A category assignment is required for a split."
 msgstr "Im Kontext einer Kategorie können keine Buchungen erstellt werden."
 
 #: kmymoney/views/newspliteditor.cpp:237
-#: kmymoney/views/newtransactioneditor.cpp:439
+#: kmymoney/views/newtransactioneditor.cpp:440
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Die Schecknummer für diese Buchung."
 
 #: kmymoney/views/newspliteditor.cpp:246
-#: kmymoney/views/newtransactioneditor.cpp:449
+#: kmymoney/views/newtransactioneditor.cpp:450
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Die Schecknummer <b>%1</b> wird bereits in diesem Konto benutzt."
 
 #: kmymoney/views/newspliteditor.cpp:748
-#: kmymoney/views/newtransactioneditor.cpp:168
+#: kmymoney/views/newtransactioneditor.cpp:169
 #, fuzzy, kde-format
 #| msgid "Cannot remove transaction that references a closed account."
 msgctxt "@info:tooltip Protected"
@@ -21376,34 +21376,34 @@ msgstr "Zahler/Empfänger"
 msgid "Costcenter"
 msgstr "Kostenstelle"
 
-#: kmymoney/views/newtransactioneditor.cpp:212
+#: kmymoney/views/newtransactioneditor.cpp:213
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Enter the amount of the transaction."
 msgstr "Verwenden Sie dies, um die Buchung aufzunehmen"
 
-#: kmymoney/views/newtransactioneditor.cpp:213
+#: kmymoney/views/newtransactioneditor.cpp:214
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Enter the category or counter account of the transaction."
 msgstr "Verwenden Sie dies, um die Buchung aufzunehmen"
 
-#: kmymoney/views/newtransactioneditor.cpp:217
+#: kmymoney/views/newtransactioneditor.cpp:218
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
 msgstr "Dieser Buchung wurde keine Kategorie zugewiesenen."
 
-#: kmymoney/views/newtransactioneditor.cpp:221
+#: kmymoney/views/newtransactioneditor.cpp:222
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits by %1."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:594
+#: kmymoney/views/newtransactioneditor.cpp:601
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@title:window Autofill selection dialog"
@@ -21411,7 +21411,7 @@ msgid "Select autofill transaction"
 msgstr "Automatisch ausgefüllte Buchung wählen"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1060
+#: kmymoney/views/newtransactioneditor.cpp:1071
 #: kmymoney/views/newtransactioneditor.ui:305
 #: kmymoney/views/newtransactionform.cpp:98
 #: kmymoney/views/newtransactionform.ui:179
