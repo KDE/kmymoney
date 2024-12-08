@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-07 01:51+0000\n"
+"POT-Creation-Date: 2024-12-08 01:48+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -21976,6 +21976,14 @@ msgid "Investment value: %1%2"
 msgstr "Ποσό επένδυσης: %1%2"
 
 #: kmymoney/views/ledgerviewpage_p.h:146
+#, kde-format
+msgctxt "@info:toolbox Total value of investment"
+msgid ""
+"The value is calculated on the basis of the last available prices, may "
+"therefore not be up-to-date and may differ from the account balance."
+msgstr ""
+
+#: kmymoney/views/ledgerviewpage_p.h:149
 #: kmymoney/views/reconciliationledgerviewpage.cpp:443
 #, fuzzy, kde-format
 #| msgctxt "Cleared balance"
@@ -21984,14 +21992,14 @@ msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
 msgstr "Καθαρό: %1"
 
-#: kmymoney/views/ledgerviewpage_p.h:149
+#: kmymoney/views/ledgerviewpage_p.h:152
 #, fuzzy, kde-format
 #| msgid "%1 of %2"
 msgctxt "@label:textbox %1 sum symbol, %2 number of selected tx, %3 sum of tx"
 msgid "%1 of %2: %3"
 msgstr "%1 από %2"
 
-#: kmymoney/views/ledgerviewpage_p.h:154
+#: kmymoney/views/ledgerviewpage_p.h:157
 #, fuzzy, kde-format
 #| msgid "Balance: %1"
 msgctxt "@label:textbox Total balance"

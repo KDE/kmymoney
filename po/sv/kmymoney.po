@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-07 01:51+0000\n"
+"POT-Creation-Date: 2024-12-08 01:48+0000\n"
 "PO-Revision-Date: 2024-12-03 21:47+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -20808,19 +20808,27 @@ msgid "Investment value: %1%2"
 msgstr "Investeringsvärde: %1%2"
 
 #: kmymoney/views/ledgerviewpage_p.h:146
+#, kde-format
+msgctxt "@info:toolbox Total value of investment"
+msgid ""
+"The value is calculated on the basis of the last available prices, may "
+"therefore not be up-to-date and may differ from the account balance."
+msgstr ""
+
+#: kmymoney/views/ledgerviewpage_p.h:149
 #: kmymoney/views/reconciliationledgerviewpage.cpp:443
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
 msgstr "Kontrollerad: %1"
 
-#: kmymoney/views/ledgerviewpage_p.h:149
+#: kmymoney/views/ledgerviewpage_p.h:152
 #, kde-format
 msgctxt "@label:textbox %1 sum symbol, %2 number of selected tx, %3 sum of tx"
 msgid "%1 of %2: %3"
 msgstr "%1 av %2: %3"
 
-#: kmymoney/views/ledgerviewpage_p.h:154
+#: kmymoney/views/ledgerviewpage_p.h:157
 #, kde-format
 msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
