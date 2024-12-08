@@ -137,6 +137,8 @@ public:
 
         accountCombo->installEventFilter(q);
         accountCombo->popup()->installEventFilter(q);
+        ui->ledgerTab->installEventFilter(q);
+
         updateTitlePage();
 
         q->tabSelected(0);
@@ -446,6 +448,33 @@ public:
         }
     }
 
+    void showAccountSelector(SimpleLedgerView* q)
+    {
+        const auto idx = ui->ledgerTab->count() - 1;
+        const auto rect = ui->ledgerTab->tabBar()->tabRect(idx);
+        if (!accountCombo->isVisible()) {
+            accountCombo->lineEdit()->clear();
+            accountCombo->lineEdit()->setFocus();
+            // Using the QMetaObject::invokeMethod calls showPopup too early
+            // so we delay it a bit (not recongnizable for the user)
+            QTimer::singleShot(50, accountCombo, SLOT(showPopup()));
+        }
+        // make the combo box visible
+        accountCombo->raise();
+        accountCombo->show();
+        // and adjust the size to the largest account
+        // shown in the popup treeview
+        const auto popupView = accountCombo->popup();
+        popupView->resizeColumnToContents(0);
+        accountCombo->resize(popupView->header()->sectionSize(0), accountCombo->height());
+        // now place the combobox either left or right aligned to the tab button
+        if (rect.left() + popupView->header()->sectionSize(0) < q->width()) {
+            accountCombo->move(rect.left(), rect.bottom());
+        } else {
+            accountCombo->move(rect.left() + rect.width() - popupView->header()->sectionSize(0), rect.bottom());
+        }
+    }
+
     Ui_SimpleLedgerView*          ui;
     AccountNamesFilterProxyModel* accountsModel;
     QWidget*                      newTabWidget;
@@ -495,10 +524,16 @@ bool SimpleLedgerView::eventFilter(QObject* o, QEvent* e)
     Q_D(SimpleLedgerView);
 
     if (e->type() == QEvent::KeyPress) {
+        const auto kev = static_cast<QKeyEvent*>(e);
         if (o == d->accountCombo) {
-            const auto kev = static_cast<QKeyEvent*>(e);
             if (kev->key() == Qt::Key_Escape) {
                 d->accountCombo->hide();
+                return true;
+            }
+        } else if (o == d->ui->ledgerTab) {
+            // Pressing the + key on the active tab opens the account selector
+            if ((kev->key() == Qt::Key_Plus) && (kev->modifiers() == Qt::NoModifier)) {
+                d->showAccountSelector(this);
                 return true;
             }
         }
@@ -516,28 +551,7 @@ void SimpleLedgerView::tabClicked(int idx)
 {
     Q_D(SimpleLedgerView);
     if (idx == (d->ui->ledgerTab->count()-1)) {
-        const auto rect = d->ui->ledgerTab->tabBar()->tabRect(idx);
-        if (!d->accountCombo->isVisible()) {
-            d->accountCombo->lineEdit()->clear();
-            d->accountCombo->lineEdit()->setFocus();
-            // Using the QMetaObject::invokeMethod calls showPopup too early
-            // so we delay it a bit (not recongnizable for the user)
-            QTimer::singleShot(50, d->accountCombo, SLOT(showPopup()));
-        }
-        // make the combo box visible
-        d->accountCombo->raise();
-        d->accountCombo->show();
-        // and adjust the size to the largest account
-        // shown in the popup treeview
-        const auto popupView = d->accountCombo->popup();
-        popupView->resizeColumnToContents(0);
-        d->accountCombo->resize(popupView->header()->sectionSize(0), d->accountCombo->height());
-        // now place the combobox either left or right aligned to the tab button
-        if (rect.left() + popupView->header()->sectionSize(0) < width()) {
-            d->accountCombo->move(rect.left(), rect.bottom());
-        } else {
-            d->accountCombo->move(rect.left()+rect.width()- popupView->header()->sectionSize(0), rect.bottom());
-        }
+        d->showAccountSelector(this);
     } else {
         // make sure the view's model is initialized before
         // the view is shown
