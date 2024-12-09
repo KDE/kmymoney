@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-08 01:48+0000\n"
-"PO-Revision-Date: 2024-12-05 07:12+0100\n"
+"POT-Creation-Date: 2024-12-09 01:58+0000\n"
+"PO-Revision-Date: 2024-12-08 09:50+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -20906,6 +20906,8 @@ msgid ""
 "The value is calculated on the basis of the last available prices, may "
 "therefore not be up-to-date and may differ from the account balance."
 msgstr ""
+"Vrednost je izračunana na podlagi zadnjih razpoložljivih cen, zato lahko ni "
+"ažurna in se lahko razlikuje od stanja na računu."
 
 #: kmymoney/views/ledgerviewpage_p.h:149
 #: kmymoney/views/reconciliationledgerviewpage.cpp:443
@@ -21191,7 +21193,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Razlika: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:326
+#: kmymoney/views/simpleledgerview.cpp:328
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21201,7 +21203,7 @@ msgstr ""
 "Gumb za zapiranje tega računa je bil odstranjen, ker ga usklajujete. "
 "Končajte, prekličite ali odložite usklajevanje, da ga dobite nazaj."
 
-#: kmymoney/views/simpleledgerview.cpp:439
+#: kmymoney/views/simpleledgerview.cpp:441
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21211,7 +21213,7 @@ msgstr ""
 "Ta stran prikazuje glavno knjigo računov. Trenutno ni nobenih računov, zato "
 "je namesto tega prikazano to besedilo."
 
-#: kmymoney/views/simpleledgerview.cpp:442
+#: kmymoney/views/simpleledgerview.cpp:444
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21221,12 +21223,12 @@ msgstr ""
 "Ta stran prikazuje glavno knjigo računov. Trenutno ni izbranega nobenega "
 "računa, zato je namesto tega prikazano to besedilo."
 
-#: kmymoney/views/simpleledgerview.cpp:698
+#: kmymoney/views/simpleledgerview.cpp:712
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Odprite spletno mesto <b>%1</b> v brskalniku."
 
-#: kmymoney/views/simpleledgerview.cpp:882
+#: kmymoney/views/simpleledgerview.cpp:896
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -21235,7 +21237,7 @@ msgstr ""
 "Tega pogleda ne morete zapreti, ker usklajujete račun. Najprej končajte, "
 "prekličite ali odložite usklajevanje."
 
-#: kmymoney/views/simpleledgerview.cpp:883
+#: kmymoney/views/simpleledgerview.cpp:897
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"

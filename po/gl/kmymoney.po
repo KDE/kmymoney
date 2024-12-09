@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-08 01:48+0000\n"
-"PO-Revision-Date: 2024-12-06 11:48+0100\n"
+"POT-Creation-Date: 2024-12-09 01:58+0000\n"
+"PO-Revision-Date: 2024-12-08 20:01+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -1461,7 +1461,7 @@ msgid ""
 "and 1.5 -&gt; 2.0</p></body></html>"
 msgstr ""
 "<html><head/><body><p><span style=\" font-weight:600;\">RoundNever</span></"
-"p><p>Non arredondar, só recortar e amosar unha advertencia a modo de "
+"p><p>Non arredondar, só recortar e amosar unha advertencia amodo de "
 "lembranza. Polo demais é idéntico a «RoundTrunc».</p><p><span style=\" font-"
 "weight:600;\">RoundFloor</span></p><p>Arredondar ao maior valor enteiro non "
 "superior ao valor. P. ex. 0.5 → 0.0 e -0.5 → -1.0</p><p><span style=\" font-"
@@ -6149,7 +6149,7 @@ msgid ""
 "still want to continue?</p>"
 msgstr ""
 "<p>Perderanse todos os tipos de cambio para a divisa <b>%1</b>.</p><p>Quere "
-"continuar de todos xeitos?</p>"
+"continuar de todos os xeitos?</p>"
 
 #: kmymoney/kmymoneyutils.cpp:478
 #, kde-format
@@ -6163,7 +6163,7 @@ msgid ""
 "to continue?</p>"
 msgstr ""
 "<p>Perderanse todas as cotizacións de prezos para %1 <b>%2</b>.</p> <p>Quere "
-"continuar de todos xeitos?</p>"
+"continuar de todos os xeitos?</p>"
 
 #: kmymoney/kmymoneyutils.cpp:483
 #, kde-format
@@ -14009,7 +14009,7 @@ msgstr ""
 "Se escolle <b>Extracto bancario</b> activará a busca automática de "
 "coincidencias da categoría, que no caso de <b>Outra aplicación</b> estará "
 "desactivada. Use esta última alternativa se importa ficheiros desde outros "
-"aplicativos de xestión das finanzas persoais,"
+"programas de xestión das finanzas persoais,"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeComboBox)
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:106
@@ -14447,7 +14447,7 @@ msgid ""
 "In order to use a database, you need to install some additional software. "
 "Click Help for more information"
 msgstr ""
-"Para usar unha base de datos hai que instalar software adicional. Prema "
+"Para usar unha base de datos hai que instalar programas adicionais. Prema "
 "Axuda para máis información."
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:165
@@ -14496,7 +14496,7 @@ msgid ""
 "Please report any problems to the developer mailing list at kmymoney-"
 "devel@kde.org"
 msgstr ""
-"O base de datos tipo %1 non ten sido probada abondo nun contexto con "
+"A base de datos tipo %1 non ten sido probada abondo nun contexto con "
 "KMyMoney.\n"
 "Asegúrese de dispor de salvagardas bos dos seus datos.\n"
 "Informe de calquera problema na lista de correo dos desenvolvedores en "
@@ -14577,7 +14577,7 @@ msgid ""
 "known response time problems. Please be patient; we are working on them.\n"
 "As always, please make sure you have adequate backups of your data."
 msgstr ""
-"Este software aínda está en fase experimental e aínda ten algúns problemas "
+"Este programa aínda está en fase experimental e ten algúns problemas "
 "coñecidos cos tempos de resposta. Estamos a traballar neles.\n"
 "Como sempre, asegúrese de que ten unha salvagarda dos seus datos."
 
@@ -20889,6 +20889,8 @@ msgid ""
 "The value is calculated on the basis of the last available prices, may "
 "therefore not be up-to-date and may differ from the account balance."
 msgstr ""
+"O valor calcúlase en base aos últimos prezos dispoñíbeis, polo que podería "
+"non estar ao día e non coincidir co saldo da conta."
 
 #: kmymoney/views/ledgerviewpage_p.h:149
 #: kmymoney/views/reconciliationledgerviewpage.cpp:443
@@ -21180,7 +21182,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Diferenza: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:326
+#: kmymoney/views/simpleledgerview.cpp:328
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21190,7 +21192,7 @@ msgstr ""
 "O botón de pechar da conta retirouse porque está conciliándoa. Remate, "
 "cancele ou pospoña a conciliación para recuperalo."
 
-#: kmymoney/views/simpleledgerview.cpp:439
+#: kmymoney/views/simpleledgerview.cpp:441
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21200,7 +21202,7 @@ msgstr ""
 "Esta páxina amosa o libro maior de contas. De momento non existe ningunha "
 "conta, así que se amosa este texto."
 
-#: kmymoney/views/simpleledgerview.cpp:442
+#: kmymoney/views/simpleledgerview.cpp:444
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21210,12 +21212,12 @@ msgstr ""
 "Esta páxina amosa o libro maior de contas. De momento non hai ningunha conta "
 "seleccionada, así que se amosa este texto."
 
-#: kmymoney/views/simpleledgerview.cpp:698
+#: kmymoney/views/simpleledgerview.cpp:712
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Abra o sitio web de <b>%1</b> no seu navegador."
 
-#: kmymoney/views/simpleledgerview.cpp:882
+#: kmymoney/views/simpleledgerview.cpp:896
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -21224,7 +21226,7 @@ msgstr ""
 "Non pode pechar esta vista porque está conciliando a conta. Primeiro remate, "
 "cancele ou pospoña a conciliación."
 
-#: kmymoney/views/simpleledgerview.cpp:883
+#: kmymoney/views/simpleledgerview.cpp:897
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
@@ -25473,7 +25475,7 @@ msgid ""
 "to be created. Select the groups that are relevant to you. You can always "
 "create additional accounts manually later."
 msgstr ""
-"Escolla grupos de contas que se correspondan co xeito co que vaia a usar "
+"Escolla grupos de contas que se correspondan co xeito co que vaia usar "
 "KMyMoney. Cada grupo que escolla fará que se creen varias contas e "
 "categorías. Escolla os grupos que sexan relevantes para vostede. Sempre "
 "poderá crear contas adicionais despois."

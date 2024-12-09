@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-08 01:48+0000\n"
-"PO-Revision-Date: 2024-12-05 11:58+0100\n"
+"POT-Creation-Date: 2024-12-09 01:58+0000\n"
+"PO-Revision-Date: 2024-12-08 16:00+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -20957,6 +20957,8 @@ msgid ""
 "The value is calculated on the basis of the last available prices, may "
 "therefore not be up-to-date and may differ from the account balance."
 msgstr ""
+"De waarde wordt berekend op basis van de laatst beschikbare koersen, kan "
+"daarom niet up-to-date zijn en verschillen van het saldo van de rekening."
 
 #: kmymoney/views/ledgerviewpage_p.h:149
 #: kmymoney/views/reconciliationledgerviewpage.cpp:443
@@ -21250,7 +21252,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Verschil: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:326
+#: kmymoney/views/simpleledgerview.cpp:328
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21261,7 +21263,7 @@ msgstr ""
 "aan het doen bent. Maak af, annuleer of stel de verificatie uit om deze "
 "terug te krijgen."
 
-#: kmymoney/views/simpleledgerview.cpp:439
+#: kmymoney/views/simpleledgerview.cpp:441
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21271,7 +21273,7 @@ msgstr ""
 "Deze pagina toont het grootboek van de rekening. Er bestaan op dit moment "
 "geen rekeningen dus wordt in plaats daarvan deze tekst getoond."
 
-#: kmymoney/views/simpleledgerview.cpp:442
+#: kmymoney/views/simpleledgerview.cpp:444
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21281,12 +21283,12 @@ msgstr ""
 "Deze pagina toont het grootboek van de rekening. Er zijn op dit moment geen "
 "rekeningen geselecteerd dus wordt in plaats daarvan deze tekst getoond."
 
-#: kmymoney/views/simpleledgerview.cpp:698
+#: kmymoney/views/simpleledgerview.cpp:712
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Website van <b>%1</b> in uw browser openen."
 
-#: kmymoney/views/simpleledgerview.cpp:882
+#: kmymoney/views/simpleledgerview.cpp:896
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -21296,7 +21298,7 @@ msgstr ""
 "rekening te controleren. Beëindig, annuleer het controleren eerst of stel "
 "uit."
 
-#: kmymoney/views/simpleledgerview.cpp:883
+#: kmymoney/views/simpleledgerview.cpp:897
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"

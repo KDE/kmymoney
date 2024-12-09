@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-08 01:48+0000\n"
-"PO-Revision-Date: 2024-12-05 21:03+0300\n"
+"POT-Creation-Date: 2024-12-09 01:58+0000\n"
+"PO-Revision-Date: 2024-12-08 19:35+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -20784,6 +20784,8 @@ msgid ""
 "The value is calculated on the basis of the last available prices, may "
 "therefore not be up-to-date and may differ from the account balance."
 msgstr ""
+"Değer, kullanılabilir son fiyatlara göre hesaplanır, bu nedenle güncel "
+"olmayabilir ve hesap bakiyesinden farklı olabilir."
 
 #: kmymoney/views/ledgerviewpage_p.h:149
 #: kmymoney/views/reconciliationledgerviewpage.cpp:443
@@ -21072,7 +21074,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Fark: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:326
+#: kmymoney/views/simpleledgerview.cpp:328
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21082,7 +21084,7 @@ msgstr ""
 "Mutabakat yaptığınız için bu hesabın kapat düğmesi kaldırıldı. Geri almak "
 "için mutabakatı bitirin, iptal edin veya erteleyin."
 
-#: kmymoney/views/simpleledgerview.cpp:439
+#: kmymoney/views/simpleledgerview.cpp:441
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21092,7 +21094,7 @@ msgstr ""
 "Bu sayfa hesap defterini gösterir. Şu anda hiçbir hesap bulunmadığından "
 "bunun yerine bu metin gösteriliyor."
 
-#: kmymoney/views/simpleledgerview.cpp:442
+#: kmymoney/views/simpleledgerview.cpp:444
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21102,12 +21104,12 @@ msgstr ""
 "Bu sayfa hesap defterini gösterir. Şu anda seçili hesap olmadığından bu "
 "metin gösteriliyor."
 
-#: kmymoney/views/simpleledgerview.cpp:698
+#: kmymoney/views/simpleledgerview.cpp:712
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Tarayıcınızda <b>%1</b> web sitesini açın."
 
-#: kmymoney/views/simpleledgerview.cpp:882
+#: kmymoney/views/simpleledgerview.cpp:896
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -21116,7 +21118,7 @@ msgstr ""
 "Hesabın mutabakatını yaptığınız için bu görünümü kapatamazsınız. Önce "
 "mutabakatı bitirin, iptal edin veya erteleyin."
 
-#: kmymoney/views/simpleledgerview.cpp:883
+#: kmymoney/views/simpleledgerview.cpp:897
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"

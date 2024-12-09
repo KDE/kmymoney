@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-08 01:48+0000\n"
-"PO-Revision-Date: 2024-12-07 10:35+0100\n"
+"POT-Creation-Date: 2024-12-09 01:58+0000\n"
+"PO-Revision-Date: 2024-12-08 07:54+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -21015,6 +21015,8 @@ msgid ""
 "The value is calculated on the basis of the last available prices, may "
 "therefore not be up-to-date and may differ from the account balance."
 msgstr ""
+"El valor es calcula sobre la base dels últims preus disponibles, per tant, "
+"podria no estar actualitzat i podria diferir del saldo del compte."
 
 #: kmymoney/views/ledgerviewpage_p.h:149
 #: kmymoney/views/reconciliationledgerviewpage.cpp:443
@@ -21308,7 +21310,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Diferència: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:326
+#: kmymoney/views/simpleledgerview.cpp:328
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21319,7 +21321,7 @@ msgstr ""
 "conciliant. Per a recuperar-lo, podeu finalitzar, cancel·lar o posposar la "
 "conciliació."
 
-#: kmymoney/views/simpleledgerview.cpp:439
+#: kmymoney/views/simpleledgerview.cpp:441
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21329,7 +21331,7 @@ msgstr ""
 "Aquesta pàgina mostra el llibre major dels comptes. Actualment, no existeix "
 "cap compte i, per tant, es mostra aquest text."
 
-#: kmymoney/views/simpleledgerview.cpp:442
+#: kmymoney/views/simpleledgerview.cpp:444
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21339,12 +21341,12 @@ msgstr ""
 "Aquesta pàgina mostra el llibre major dels comptes. Actualment, no hi ha cap "
 "compte seleccionat i, per tant, es mostra aquest text."
 
-#: kmymoney/views/simpleledgerview.cpp:698
+#: kmymoney/views/simpleledgerview.cpp:712
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Obre el lloc web de <b>%1</b> al navegador."
 
-#: kmymoney/views/simpleledgerview.cpp:882
+#: kmymoney/views/simpleledgerview.cpp:896
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -21353,7 +21355,7 @@ msgstr ""
 "No es pot tancar aquesta vista perquè esteu conciliant el compte. Primer cal "
 "finalitzar, cancel·lar o posposar la conciliació."
 
-#: kmymoney/views/simpleledgerview.cpp:883
+#: kmymoney/views/simpleledgerview.cpp:897
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
