@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2024-08-25 15:52+0200\n"
+"PO-Revision-Date: 2024-12-08 15:26+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -1916,7 +1916,7 @@ msgid ""
 "and 1.5 -&gt; 2.0</p></body></html>"
 msgstr ""
 "<html><head/><body><p><span style=\" font-weight:600;\">RoundNever</span></"
-"p><p>Non arredondar, só recortar e amosar unha advertencia a modo de "
+"p><p>Non arredondar, só recortar e amosar unha advertencia amodo de "
 "lembranza. Polo demais é idéntico a «RoundTrunc».</p><p><span style=\" font-"
 "weight:600;\">RoundFloor</span></p><p>Arredondar ao maior valor enteiro non "
 "superior ao valor. P. ex. 0.5 → 0.0 e -0.5 → -1.0</p><p><span style=\" font-"
@@ -7023,7 +7023,7 @@ msgid ""
 "still want to continue?</p>"
 msgstr ""
 "<p>Perderanse todos os tipos de cambio para a divisa <b>%1</b>.</p><p>Quere "
-"continuar de todos xeitos?</p>"
+"continuar de todos os xeitos?</p>"
 
 #: kmymoney/kmymoneyutils.cpp:571
 #, kde-format
@@ -7037,7 +7037,7 @@ msgid ""
 "to continue?</p>"
 msgstr ""
 "<p>Perderanse todas as cotizacións de prezos para %1 <b>%2</b>.</p> <p>Quere "
-"continuar de todos xeitos?</p>"
+"continuar de todos os xeitos?</p>"
 
 #: kmymoney/kmymoneyutils.cpp:576
 #, kde-format
@@ -14017,7 +14017,7 @@ msgstr ""
 "Se escolle <b>Extracto bancario</b> activará a busca automática de "
 "coincidencias da categoría, que no caso de <b>Outra aplicación</b> estará "
 "desactivada. Use esta última alternativa se importa ficheiros desde outros "
-"aplicativos de xestión das finanzas persoais,"
+"programas de xestión das finanzas persoais,"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeComboBox)
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:106
@@ -14443,7 +14443,7 @@ msgid ""
 "In order to use a database, you need to install some additional software. "
 "Click Help for more information"
 msgstr ""
-"Para usar unha base de datos hai que instalar software adicional. Prema "
+"Para usar unha base de datos hai que instalar programas adicionais. Prema "
 "Axuda para máis información."
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:170
@@ -14492,7 +14492,7 @@ msgid ""
 "Please report any problems to the developer mailing list at kmymoney-"
 "devel@kde.org"
 msgstr ""
-"O base de datos tipo %1 non ten sido probada abondo nun contexto con "
+"A base de datos tipo %1 non ten sido probada abondo nun contexto con "
 "KMyMoney.\n"
 "Asegúrese de dispor de salvagardas bos dos seus datos.\n"
 "Informe de calquera problema na lista de correo dos desenvolvedores en "
@@ -14573,7 +14573,7 @@ msgid ""
 "known response time problems. Please be patient; we are working on them.\n"
 "As always, please make sure you have adequate backups of your data."
 msgstr ""
-"Este software aínda está en fase experimental e aínda ten algúns problemas "
+"Este programa aínda está en fase experimental e ten algúns problemas "
 "coñecidos cos tempos de resposta. Estamos a traballar neles.\n"
 "Como sempre, asegúrese de que ten unha salvagarda dos seus datos."
 
@@ -19260,9 +19260,8 @@ msgid ""
 "p>"
 msgstr ""
 "<p>Escolla o que queira facer: descartar os cambios, gardar os cambios ou "
-"continuar editando o asento.</p><p>Tamén pode Tamén pode escoller unha "
-"opción para gardar o asento automaticamente cando, p.ex. escolla outro "
-"asento.</p>"
+"continuar editando o asento.</p><p>Tamén pode escoller unha opción para "
+"gardar o asento automaticamente cando, p.ex. escolla outro asento.</p>"
 
 #: kmymoney/views/kgloballedgerview.cpp:1351
 #: kmymoney/views/kgloballedgerview.cpp:1354
@@ -19278,8 +19277,8 @@ msgid ""
 "selecting another transaction.</p>"
 msgstr ""
 "<p>Escolla o que queira facer: descartar ou gardar os cambios.</p><p>Tamén "
-"pode Tamén pode escoller unha opción para gardar o asento automaticamente "
-"cando, p.ex. escolla outro asento.</p>"
+"pode escoller unha opción para gardar o asento automaticamente cando, p.ex. "
+"escolla outro asento.</p>"
 
 #: kmymoney/views/kgloballedgerview.cpp:1466
 #, kde-format
@@ -20583,7 +20582,7 @@ msgstr ""
 #: kmymoney/views/kwelcomepage.cpp:203
 #, kde-format
 msgid "The KMyMoney Development Team"
-msgstr "A equipa de desenvolvemento de KMyMoney"
+msgstr "O equipo desenvolvedor de KMyMoney"
 
 #: kmymoney/views/kwelcomepage.cpp:225
 #, kde-format
@@ -25053,7 +25052,7 @@ msgid ""
 "to be created. Select the groups that are relevant to you. You can always "
 "create additional accounts manually later."
 msgstr ""
-"Escolla grupos de contas que se correspondan co xeito co que vaia a usar "
+"Escolla grupos de contas que se correspondan co xeito co que vaia usar "
 "KMyMoney. Cada grupo que escolla fará que se creen varias contas e "
 "categorías. Escolla os grupos que sexan relevantes para vostede. Sempre "
 "poderá crear contas adicionais despois."
@@ -25184,8 +25183,7 @@ msgstr ""
 #, kde-format
 msgid "<p>...that the KMyMoney development team wishes you a nice day?\n"
 msgstr ""
-"<p>…que a equipa de desenvolvemento de KMyMoney lle desexa que teña un bo "
-"día?\n"
+"<p>…que o equipo desenvolvedor de KMyMoney lle desexa que teña un bo día?\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tips:59
@@ -25289,7 +25287,7 @@ msgid ""
 "To verify, how the data looks like you are about to send away, you can open\n"
 "this file in KMyMoney and see how the developers see your data.\n"
 msgstr ""
-"<p> … que pode apoiar activamente á equipa de desenvolvemento de\n"
+"<p> … que pode apoiar activamente ao equipo desenvolvedor de\n"
 "KMyMoney nos casos que dependan dos seus datos? Pode gardalos\n"
 "dun xeito anónimo para esta fin.<p>\n"
 "Simplemente abra o seu ficheiro e escolla\n"
