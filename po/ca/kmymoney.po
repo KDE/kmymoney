@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2024-11-18 09:44+0100\n"
+"PO-Revision-Date: 2024-12-07 10:35+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -18603,15 +18603,15 @@ msgstr "Ordre dels elements en la pàgina principal"
 #: kmymoney/settings/kmymoney.kcfg:160
 #, kde-format
 msgid "Zoom factor used for home view HTML page"
-msgstr "Factor de zoom usat per a la vista inicial de la pàgina HTML"
+msgstr "Factor de zoom usat a la vista principal de la pàgina HTML"
 
 #. i18n: ectx: label, entry (RememberZoomFactor), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:164
 #, kde-format
 msgid "Remember (manually adjusted) zoom factor in home view on program end."
 msgstr ""
-"Recorda el factor de zoom (ajustat manualment) a la vista inicial en sortir "
-"del programa."
+"Recorda el factor de zoom (ajustat manualment) a la vista principal en "
+"sortir del programa."
 
 #. i18n: ectx: label, entry (ShowLimitInfo), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:168
