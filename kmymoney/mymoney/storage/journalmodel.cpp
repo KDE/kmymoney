@@ -76,6 +76,9 @@ struct JournalModel::Private
               {CostCenter, i18nc("@title:column CostCenter (ext)", "Cost center")},
               {EntryDate, i18nc("@title:column Entry date (ext)", "Entry date")},
           }))
+        , headerToolTipData(QHash<Column, QString>({
+              {Balance, i18nc("@info:toolbox Balance)", "Account balance or security units")},
+          }))
     {
     }
 
@@ -479,6 +482,7 @@ struct JournalModel::Private
     QMap<QString, QString> transactionIdKeyMap;
     QHash<Column, QString> headerData;
     QHash<Column, QString> extendedHeaderData;
+    QHash<Column, QString> headerToolTipData;
     QHash<QString, AccountBalances> balanceCache;
     QHash<QString, MyMoneyAccount> accountCache;
     KMMStringSet fullBalanceRecalc;
@@ -565,6 +569,9 @@ QVariant JournalModel::headerData(int section, Qt::Orientation orientation, int 
 
         case eMyMoney::Model::LongDisplayRole:
             return d->extendedHeaderData.value(static_cast<Column>(section), d->headerData.value(static_cast<Column>(section)));
+
+        case Qt::ToolTipRole:
+            return d->headerToolTipData.value(static_cast<Column>(section));
         }
     }
     if (orientation == Qt::Vertical && role == Qt::SizeHintRole) {
