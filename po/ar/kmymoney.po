@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-09 01:58+0000\n"
+"POT-Creation-Date: 2024-12-11 01:49+0000\n"
 "PO-Revision-Date: 2022-01-04 22:18+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -8339,7 +8339,7 @@ msgid "Split transaction"
 msgstr "جزّئ المعاملة"
 
 #: kmymoney/mymoney/splitmodel.cpp:118
-#: kmymoney/mymoney/storage/journalmodel.cpp:198
+#: kmymoney/mymoney/storage/journalmodel.cpp:201
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1002
 #, kde-format
 msgid "*** UNASSIGNED ***"
@@ -8364,14 +8364,14 @@ msgid "Not reconciled"
 msgstr "لم يُسوّى"
 
 #: kmymoney/mymoney/statusmodel.cpp:36
-#: kmymoney/mymoney/storage/journalmodel.cpp:89
+#: kmymoney/mymoney/storage/journalmodel.cpp:92
 #, fuzzy, kde-format
 msgctxt "Reconciliation flag C"
 msgid "C"
 msgstr "C"
 
 #: kmymoney/mymoney/statusmodel.cpp:41
-#: kmymoney/mymoney/storage/journalmodel.cpp:91
+#: kmymoney/mymoney/storage/journalmodel.cpp:94
 #, fuzzy, kde-format
 msgctxt "Reconciliation flag R"
 msgid "R"
@@ -8384,7 +8384,7 @@ msgid "Reconciled"
 msgstr "مُسوًّى"
 
 #: kmymoney/mymoney/statusmodel.cpp:46
-#: kmymoney/mymoney/storage/journalmodel.cpp:93
+#: kmymoney/mymoney/storage/journalmodel.cpp:96
 #, kde-format
 msgctxt "Reconciliation flag F"
 msgid "F"
@@ -8770,100 +8770,106 @@ msgctxt "@title:column Entry date (ext)"
 msgid "Entry date"
 msgstr "تاريخ البدء"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:103
+#: kmymoney/mymoney/storage/journalmodel.cpp:80
+#, kde-format
+msgctxt "@info:toolbox Balance)"
+msgid "Account balance or security units"
+msgstr ""
+
+#: kmymoney/mymoney/storage/journalmodel.cpp:106
 #, kde-format
 msgctxt "Reconciliation flag empty"
 msgid "Not reconciled"
 msgstr "لم يُسوّى"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:105
+#: kmymoney/mymoney/storage/journalmodel.cpp:108
 #, kde-format
 msgctxt "Reconciliation flag C"
 msgid "Cleared"
 msgstr "مسح"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:107
+#: kmymoney/mymoney/storage/journalmodel.cpp:110
 #, kde-format
 msgctxt "Reconciliation flag R"
 msgid "Reconciled"
 msgstr "مُسوًّى"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:109
+#: kmymoney/mymoney/storage/journalmodel.cpp:112
 #, kde-format
 msgctxt "Reconciliation flag F"
 msgid "Frozen"
 msgstr "مجمّد"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:118
+#: kmymoney/mymoney/storage/journalmodel.cpp:121
 #, kde-format
 msgctxt "Add securities/shares/bonds"
 msgid "Add shares"
 msgstr ""
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:120
+#: kmymoney/mymoney/storage/journalmodel.cpp:123
 #, fuzzy, kde-format
 #| msgid "Remove Payee"
 msgctxt "Remove securities/shares/bonds"
 msgid "Remove shares"
 msgstr "أزل المُتسلِّم"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:122
+#: kmymoney/mymoney/storage/journalmodel.cpp:125
 #, fuzzy, kde-format
 #| msgid "Buy Price"
 msgctxt "Buy securities/shares/bonds"
 msgid "Buy shares"
 msgstr "ثمن البيع"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:124
+#: kmymoney/mymoney/storage/journalmodel.cpp:127
 #, fuzzy, kde-format
 #| msgid "Total Value"
 msgctxt "Sell securities/shares/bonds"
 msgid "Sell shares"
 msgstr "القيمة الكلية"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:126
+#: kmymoney/mymoney/storage/journalmodel.cpp:129
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:45
 #, kde-format
 msgid "Dividend"
 msgstr "معاد استثماره"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:128
+#: kmymoney/mymoney/storage/journalmodel.cpp:131
 #, kde-format
 msgid "Reinvest Dividend"
 msgstr "أعد استثمار المعاد استثماره"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:130
+#: kmymoney/mymoney/storage/journalmodel.cpp:133
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:47
 #, kde-format
 msgid "Yield"
 msgstr "الحصيلة"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:132
+#: kmymoney/mymoney/storage/journalmodel.cpp:135
 #, fuzzy, kde-format
 #| msgid "Splits"
 msgctxt "Split securities/shares/bonds"
 msgid "Split shares"
 msgstr "التّجزئات"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:134
+#: kmymoney/mymoney/storage/journalmodel.cpp:137
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:51
 #, kde-format
 msgid "Interest Income"
 msgstr ""
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:136
+#: kmymoney/mymoney/storage/journalmodel.cpp:139
 #, kde-format
 msgctxt "Unknown investment activity"
 msgid "Unknown"
 msgstr "مجهول"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:232
+#: kmymoney/mymoney/storage/journalmodel.cpp:235
 #, fuzzy, kde-format
 #| msgid "Expense categories"
 msgid "Multiple fee categories"
 msgstr "فئات المصروفات"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:232
+#: kmymoney/mymoney/storage/journalmodel.cpp:235
 #, fuzzy, kde-format
 #| msgid "Interest category"
 msgid "Multiple interest categories"
