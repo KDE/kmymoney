@@ -10,25 +10,7 @@ ki18n_wrap_ui( sepaOnlineTasks_SRCS
   ui/sepacredittransferedit.ui
 )
 
-add_library(konlinetasks_sepa_interface INTERFACE)
-
-if (BUILD_STATIC_PLUGINS)
-    kcoreaddons_add_plugin(konlinetasks_sepa SOURCES ${sepaOnlineTasks_SRCS} STATIC INSTALL_NAMESPACE "kmymoney_plugins/onlinetasks")
-else()
-    kcoreaddons_add_plugin(konlinetasks_sepa SOURCES ${sepaOnlineTasks_SRCS} INSTALL_NAMESPACE "kmymoney_plugins/onlinetasks")
-endif()
-
-# TODO some dependencies can be moved to konlinetasks_sepa
-target_link_libraries( konlinetasks_sepa_interface
-  INTERFACE
-  kmm_mymoney
-  kmm_base_widgets
-  kmm_plugin
-  onlinetask_interfaces
-  Qt::Xml
-  Qt::Core
-  Qt::Gui
-)
+kmymoney_add_plugin(konlinetasks_sepa SOURCES ${sepaOnlineTasks_SRCS})
 
 target_link_libraries(konlinetasks_sepa
   PUBLIC
@@ -41,3 +23,16 @@ target_link_libraries(konlinetasks_sepa
     KF5::ItemModels
 )
 
+add_library(konlinetasks_sepa_interface INTERFACE)
+
+# TODO some dependencies can be moved to konlinetasks_sepa
+target_link_libraries( konlinetasks_sepa_interface
+  INTERFACE
+  kmm_mymoney
+  kmm_base_widgets
+  kmm_plugin
+  onlinetask_interfaces
+  Qt::Xml
+  Qt::Core
+  Qt::Gui
+)

@@ -92,7 +92,7 @@ void onlineJobAdministration::updateActions()
 
 QStringList onlineJobAdministration::availableOnlineTasks()
 {
-    const auto plugins = KPluginMetaData::findPlugins("kmymoney_plugins/onlinetasks", [](const KPluginMetaData& data) {
+    const auto plugins = KPluginMetaData::findPlugins("kmymoney_plugins", [](const KPluginMetaData& data) {
         return !(data.rawData()["KMyMoney"].toObject()["OnlineTask"].isNull());
     });
 
@@ -179,7 +179,7 @@ onlineTask* onlineJobAdministration::createOnlineTaskByXml(QXmlStreamReader* rea
  */
 onlineTask* onlineJobAdministration::rootOnlineTask(const QString& name) const
 {
-    auto plugins = KPluginMetaData::findPlugins("kmymoney_plugins/onlinetasks", [&name](const KPluginMetaData& data) {
+    auto plugins = KPluginMetaData::findPlugins("kmymoney_plugins", [&name](const KPluginMetaData& data) {
         QJsonValue array = data.rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["Iids"];
         if (array.isArray())
             return (array.toVariant().toStringList().contains(name));
@@ -327,7 +327,7 @@ void onlineJobAdministration::registerOnlineTaskConverter(onlineTaskConverter* c
 
 onlineJobAdministration::onlineJobEditOffers onlineJobAdministration::onlineJobEdits()
 {
-    auto plugins = KPluginMetaData::findPlugins("kmymoney_plugins/onlinetasks", [](const KPluginMetaData& data) {
+    auto plugins = KPluginMetaData::findPlugins("kmymoney_plugins", [](const KPluginMetaData& data) {
         return !(data.rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["Editors"].isNull());
     });
 
