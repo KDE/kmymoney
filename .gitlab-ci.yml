@@ -40,3 +40,18 @@ build_local_ubuntu_2110:
     - echo "Building."
     - cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug
     - ninja
+
+distro_kf5_leap:
+  stage: build
+  #when: manual
+  image: opensuse/leap:15.6
+  variables:
+    ci_distro: "opensuse-leap-15.6"
+    ci_in_docker: "yes"
+    ci_parallel: "8"
+    ci_sudo: "yes"
+    ci_variant: "kf5"
+  before_script:
+    - ./tools/ci-install.sh
+  script:
+    - ./tools/ci-build.sh
