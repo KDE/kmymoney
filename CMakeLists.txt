@@ -99,6 +99,21 @@ include(KMyMoneyMacros)
 include(KDEGitCommitHooks)
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 
+if(BUILD_WITH_QT6)
+    message(WARNING
+      "Qt6/KF6 support is not fully tested, may not work in specific cases"
+      " and may corrupt your data."
+      " If you find an error, please open a bug report at"
+      " https://bugs.kde.org/enter_bug.cgi?product=kmymoney."
+    )
+    if(NOT BUILD_WITH_QT6_CONFIRMED)
+        message(FATAL_ERROR
+            "Add -DBUILD_WITH_QT6_CONFIRMED to the"
+            " cmake configure line to confirm that you have read the previous note."
+        )
+    endif()
+endif()
+
 add_definitions(
     -DKF_DEPRECATED_WARNINGS_SINCE=0x60000
     -DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x56200C

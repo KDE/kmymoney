@@ -97,7 +97,7 @@ if test "$ci_build" = "yes"; then
     # kmymoney specific command line
     case $ci_variant in
         (kf6*)
-            cmake -D CMAKE_BUILD_TYPE=RelWithDebInfo .. -DBUILD_WITH_QT6=1 -DSQLCIPHER_LIBRARIES=/usr/lib64/libsqlcipher.so
+            cmake -D CMAKE_BUILD_TYPE=RelWithDebInfo .. -DBUILD_WITH_QT6=1 -DBUILD_WITH_QT6_CONFIRMED=1 -DSQLCIPHER_LIBRARIES=/usr/lib64/libsqlcipher.so
             ;;
         (*)
             cmake -D CMAKE_BUILD_TYPE=RelWithDebInfo .. -DSQLCIPHER_LIBRARIES=/usr/lib64/libsqlcipher.so
