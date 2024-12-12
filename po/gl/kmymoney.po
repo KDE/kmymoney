@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-11 01:49+0000\n"
-"PO-Revision-Date: 2024-12-08 20:01+0100\n"
+"PO-Revision-Date: 2024-12-11 20:12+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -8738,11 +8738,10 @@ msgid "Entry date"
 msgstr "Data da entrada"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:80
-#, fuzzy, kde-format
-#| msgid "Account Balances by Institution"
+#, kde-format
 msgctxt "@info:toolbox Balance)"
 msgid "Account balance or security units"
-msgstr "Saldos de conta por entidade"
+msgstr "Saldo da conta ou unidades do valor bolsista"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:106
 #, kde-format

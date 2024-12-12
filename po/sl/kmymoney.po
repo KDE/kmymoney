@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-11 01:49+0000\n"
-"PO-Revision-Date: 2024-12-08 09:50+0100\n"
+"PO-Revision-Date: 2024-12-11 09:20+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -8735,11 +8735,10 @@ msgid "Entry date"
 msgstr "Datum vnosa"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:80
-#, fuzzy, kde-format
-#| msgid "Account Balances by Institution"
+#, kde-format
 msgctxt "@info:toolbox Balance)"
 msgid "Account balance or security units"
-msgstr "Stanja na računih po institucijah"
+msgstr "Stanje računa ali število vrednostnih papirjev"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:106
 #, kde-format
