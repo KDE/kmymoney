@@ -178,23 +178,6 @@ target_link_libraries(kmymoney
     $<$<BOOL:${ENABLE_SQLCIPHER}>:PkgConfig::SQLCIPHER>
 )
 
-# create symlink to let kcoreaddons find plugins
-if(WIN32 AND NOT CMAKE_CROSSCOMPILING)
-  # First make sure that nothing is in the way so mklink will always work
-  if(EXISTS ${CMAKE_BINARY_DIR}/bin/kmymoney)
-    add_custom_command(TARGET kmymoney POST_BUILD
-      COMMAND rmdir kmymoney
-      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-  endif()
-  add_custom_command(TARGET kmymoney POST_BUILD
-    COMMAND mklink /J kmymoney .
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-else()
-  add_custom_command(TARGET kmymoney POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E create_symlink . kmymoney
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-endif()
-
 # own plist magic for mac os
 if(APPLE)
     string(TIMESTAMP CURRENT_YEAR "%Y")
