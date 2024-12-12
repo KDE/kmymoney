@@ -55,3 +55,17 @@ distro_kf5_leap:
     - ./tools/ci-install.sh
   script:
     - ./tools/ci-build.sh
+
+distro_kf6_tumbleweed:
+  stage: build
+  #when: manual
+  image: opensuse/tumbleweed
+  variables:
+    ci_in_docker: "yes"
+    ci_parallel: "8"
+    ci_sudo: "yes"
+    ci_variant: "kf6"
+  before_script:
+    - ./tools/ci-install.sh
+  script:
+    - ./tools/ci-build.sh
