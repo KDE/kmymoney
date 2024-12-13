@@ -732,6 +732,33 @@ bool NewSplitEditor::eventFilter(QObject* o, QEvent* e)
                     }
                 }
             }
+        } else if ((e->type() == QEvent::KeyPress) && (cb != nullptr)) {
+            // if it is a key press on a combobox
+            const auto kev = static_cast<QKeyEvent*>(e);
+            if (kev->modifiers() == Qt::NoModifier) {
+                // no shift, ctrl, meta or alt
+                if ((kev->key() == Qt::Key_Enter) || (kev->key() == Qt::Key_Return)) {
+                    // and the return key and we use it to move between fields
+                    if (d->baseEditor->enterMovesBetweenFields()) {
+                        focusNextChild();
+                        return true;
+                    }
+                }
+            }
+        } else if ((e->type() == QEvent::KeyPress) && (o == d->ui->memoEdit)) {
+            auto kev = static_cast<QKeyEvent*>(e);
+            if ((kev->key() == Qt::Key_Enter) || (kev->key() == Qt::Key_Return)) {
+                // and the return key and we use it to move between fields
+                if (d->baseEditor->enterMovesBetweenFields()) {
+                    if (kev->modifiers() == Qt::AltModifier) {
+                        d->ui->memoEdit->insertPlainText(QLatin1String("\n"));
+                        d->ui->memoEdit->textCursor().movePosition(QTextCursor::Right);
+                    } else {
+                        focusNextChild();
+                    }
+                    return true;
+                }
+            }
         }
     }
     return QWidget::eventFilter(o, e);

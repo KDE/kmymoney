@@ -14,6 +14,7 @@
 #include <QKeyEvent>
 #include <QLineEdit>
 #include <QModelIndex>
+#include <QPlainTextEdit>
 #include <QTreeView>
 
 // ----------------------------------------------------------------------------
@@ -30,6 +31,7 @@
 #include "creditdebitedit.h"
 #include "kcurrencyconverter.h"
 #include "kmymoneyaccountcombo.h"
+#include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
 #include "mymoneyfile.h"
 #include "mymoneyprice.h"
@@ -47,6 +49,7 @@ public:
         , focusFrame(nullptr)
         , readOnly(false)
         , accepted(false)
+        , enterMovesBetweenFields(false)
     {
     }
 
@@ -55,7 +58,7 @@ public:
     WidgetHintFrame* focusFrame;
     bool readOnly;
     bool accepted;
-
+    bool enterMovesBetweenFields;
     KCurrencyConverter currencyConverter;
 };
 
@@ -101,7 +104,11 @@ void TransactionEditorBase::keyPressEvent(QKeyEvent* e)
                 switch (e->key()) {
                 case Qt::Key_Enter:
                 case Qt::Key_Return:
-                    processReturnKey();
+                    if (d->enterMovesBetweenFields) {
+                        focusNextPrevChild(true);
+                    } else {
+                        processReturnKey();
+                    }
                     break;
 
                 case Qt::Key_Escape:
@@ -327,4 +334,60 @@ void TransactionEditorBase::updateConversionRate(MultiCurrencyEdit* amountEdit) 
         amountEdit->setShares(amountEdit->value() / rate);
         break;
     }
+}
+
+void TransactionEditorBase::slotSettingsChanged()
+{
+    d->enterMovesBetweenFields = KMyMoneySettings::enterMovesBetweenFields();
+}
+
+bool TransactionEditorBase::enterMovesBetweenFields() const
+{
+    return d->enterMovesBetweenFields;
+}
+
+bool TransactionEditorBase::eventFilter(QObject* o, QEvent* e)
+{
+    if (e->type() == QEvent::KeyPress) {
+        auto combobox = qobject_cast<QComboBox*>(o);
+        auto textedit = qobject_cast<QPlainTextEdit*>(o);
+
+        if (combobox != nullptr) {
+            // filter out wheel events for combo boxes if the popup view is not visible
+            if (combobox->view()) {
+                if ((e->type() == QEvent::Wheel) && !combobox->view()->isVisible()) {
+                    return true;
+                }
+            }
+
+            // if it is a key press on a combobox
+            const auto kev = static_cast<QKeyEvent*>(e);
+            if (kev->modifiers() == Qt::NoModifier) {
+                // no shift, ctrl, meta or alt
+                if ((kev->key() == Qt::Key_Enter) || (kev->key() == Qt::Key_Return)) {
+                    // and the return key and we use it to move between fields
+                    if (d->enterMovesBetweenFields) {
+                        focusNextChild();
+                        return true;
+                    }
+                }
+            }
+
+        } else if (textedit != nullptr) {
+            auto kev = static_cast<QKeyEvent*>(e);
+            if ((kev->key() == Qt::Key_Enter) || (kev->key() == Qt::Key_Return)) {
+                // and the return key and we use it to move between fields
+                if (d->enterMovesBetweenFields) {
+                    if (kev->modifiers() == Qt::AltModifier) {
+                        textedit->insertPlainText(QLatin1String("\n"));
+                        textedit->textCursor().movePosition(QTextCursor::Right);
+                    } else {
+                        focusNextChild();
+                    }
+                    return true;
+                }
+            }
+        }
+    }
+    return QWidget::eventFilter(o, e);
 }

@@ -14,6 +14,7 @@
 #include <QDebug>
 #include <QGlobalStatic>
 #include <QHeaderView>
+#include <QKeyEvent>
 #include <QSortFilterProxyModel>
 #include <QStandardItemModel>
 #include <QStringList>
@@ -1250,6 +1251,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     d->ui->tagContainer->tagCombo()->installEventFilter(this);
     d->ui->categoryCombo->installEventFilter(this);
     d->ui->statusCombo->installEventFilter(this);
+    d->ui->memoEdit->installEventFilter(this);
 
     setCancelButton(d->ui->cancelButton);
     setEnterButton(d->ui->enterButton);
@@ -1577,32 +1579,28 @@ QStringList NewTransactionEditor::saveTransaction(const QStringList& selectedJou
 
 bool NewTransactionEditor::eventFilter(QObject* o, QEvent* e)
 {
-    auto cb = qobject_cast<QComboBox*>(o);
     if (o) {
-        // filter out wheel events for combo boxes if the popup view is not visible
-        if ((e->type() == QEvent::Wheel) && !cb->view()->isVisible()) {
-            return true;
-        }
+        auto combobox = qobject_cast<QComboBox*>(o);
 
         if (e->type() == QEvent::FocusOut) {
-            if (cb == d->ui->categoryCombo) {
+            if (combobox == d->ui->categoryCombo) {
                 if (needCreateCategory(d->ui->categoryCombo)) {
                     createCategory(d->ui->categoryCombo, defaultCategoryType(d->ui->creditDebitEdit));
                 }
 
             } else if (o == d->ui->payeeEdit) {
-                if (needCreatePayee(cb)) {
-                    createPayee(cb);
+                if (needCreatePayee(combobox)) {
+                    createPayee(combobox);
 
-                } else if (!cb->currentText().isEmpty()) {
-                    const auto index(cb->findText(cb->currentText()));
-                    cb->setCurrentIndex(index);
+                } else if (!combobox->currentText().isEmpty()) {
+                    const auto index(combobox->findText(combobox->currentText()));
+                    combobox->setCurrentIndex(index);
                     // check if category is filled and fill with
                     // default for payee if one is setup
                     d->defaultCategoryAssignment();
                 }
             } else if (o == d->ui->tagContainer->tagCombo()) {
-                if (needCreateTag(cb)) {
+                if (needCreateTag(combobox)) {
                     createTag(d->ui->tagContainer);
                 }
             }
@@ -1616,7 +1614,7 @@ bool NewTransactionEditor::eventFilter(QObject* o, QEvent* e)
             }
         }
     }
-    return QWidget::eventFilter(o, e);
+    return TransactionEditorBase::eventFilter(o, e);
 }
 
 QDate NewTransactionEditor::postDate() const
@@ -1681,6 +1679,8 @@ void NewTransactionEditor::storeTabOrder(const QStringList& tabOrder)
 
 void NewTransactionEditor::slotSettingsChanged()
 {
+    TransactionEditorBase::slotSettingsChanged();
+
     d->categoriesModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
     d->accountsModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
 }

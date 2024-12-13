@@ -955,6 +955,7 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     d->ui->feesCombo->installEventFilter(this);
     d->ui->interestCombo->installEventFilter(this);
     d->ui->assetAccountCombo->installEventFilter(this);
+    d->ui->memoEdit->installEventFilter(this);
 
     d->ui->totalAmountEdit->setCalculatorButtonVisible(false);
 
@@ -975,6 +976,8 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
         }
     });
     d->setupTabOrder();
+
+    slotSettingsChanged();
 }
 
 InvestTransactionEditor::~InvestTransactionEditor()
@@ -1369,10 +1372,6 @@ bool InvestTransactionEditor::eventFilter(QObject* o, QEvent* e)
 {
     auto cb = qobject_cast<QComboBox*>(o);
     if (cb) {
-        // filter out wheel events for combo boxes if the popup view is not visible
-        if ((e->type() == QEvent::Wheel) && !cb->view()->isVisible()) {
-            return true;
-        }
         if (e->type() == QEvent::KeyPress) {
             // the activity combo needs special handling, because it does
             // not process the return/enter key directly but ignores it
@@ -1399,7 +1398,7 @@ bool InvestTransactionEditor::eventFilter(QObject* o, QEvent* e)
             }
         }
     }
-    return QWidget::eventFilter(o, e);
+    return TransactionEditorBase::eventFilter(o, e);
 }
 
 void InvestTransactionEditor::setupUi(QWidget* parent)
@@ -1418,6 +1417,8 @@ void InvestTransactionEditor::storeTabOrder(const QStringList& tabOrder)
 
 void InvestTransactionEditor::slotSettingsChanged()
 {
+    TransactionEditorBase::slotSettingsChanged();
+
     d->securityFilterModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
 }
 

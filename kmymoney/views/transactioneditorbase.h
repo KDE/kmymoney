@@ -80,10 +80,15 @@ public:
 
     void setVisible(bool visible) override;
 
+    bool enterMovesBetweenFields() const;
+
+    /**
+     * Reimplemented to suppress some events in certain conditions
+     */
+    bool eventFilter(QObject* o, QEvent* e) override;
+
 public Q_SLOTS:
-    virtual void slotSettingsChanged()
-    {
-    }
+    virtual void slotSettingsChanged();
 
 protected:
     void keyPressEvent(QKeyEvent* e) override;
