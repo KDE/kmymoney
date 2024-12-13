@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-11 01:49+0000\n"
-"PO-Revision-Date: 2024-12-08 16:00+0100\n"
+"PO-Revision-Date: 2024-12-11 11:29+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -8756,11 +8756,10 @@ msgid "Entry date"
 msgstr "Invoerdatum"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:80
-#, fuzzy, kde-format
-#| msgid "Account Balances by Institution"
+#, kde-format
 msgctxt "@info:toolbox Balance)"
 msgid "Account balance or security units"
-msgstr "Saldo van rekeningen per instituut"
+msgstr "Saldo van rekening of eenheden van waardepapier"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:106
 #, kde-format

@@ -8462,11 +8462,10 @@ msgid "Entry date"
 msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:80
-#, fuzzy, kde-format
-#| msgid "Account Balances by Institution"
+#, kde-format
 msgctxt "@info:toolbox Balance)"
 msgid "Account balance or security units"
-msgstr "账户余额（按金融机构分类）"
+msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:106
 #, kde-format
