@@ -9,11 +9,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPushButton>
-#include <QTemporaryFile>
-#include <QTimer>
 #include <QDesktopServices>
+#include <QPushButton>
 #include <QRegularExpression>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
