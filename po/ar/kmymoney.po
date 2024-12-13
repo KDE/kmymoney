@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-11 01:49+0000\n"
+"POT-Creation-Date: 2024-12-13 10:56+0000\n"
 "PO-Revision-Date: 2022-01-04 22:18+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -2192,7 +2192,7 @@ msgid "<b>%1</b> is a sub account of <b>%2</b>"
 msgstr "حساب فرعي من %1"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:691
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:190
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:189
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -2742,12 +2742,12 @@ msgstr "رمز التّجارة للمخزون أو صناديق الاستثم�
 msgid "Name of the company, or mutual fund."
 msgstr "اسم الشركة، أو صناديق الاستثمار المشترك."
 
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:141
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:140
 #, kde-format
 msgid "The institution name field is empty.  Please enter the name."
 msgstr "اسم المؤسسة فارغ. يرجى إدخال اسم."
 
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:141
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:140
 #, kde-format
 msgid "Adding New Institution"
 msgstr "يضيف المؤسسة الجديدة"
@@ -5547,7 +5547,7 @@ msgstr "لا ملف أموالي.ك مفتوح"
 
 #: kmymoney/kmymoney.cpp:3528 kmymoney/kmymoney.cpp:3530
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1364
-#: kmymoney/plugins/xml/xmlstorage.cpp:414
+#: kmymoney/plugins/xml/xmlstorage.cpp:416
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
@@ -9699,7 +9699,7 @@ msgstr "اكتمل التصدير.\n"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:85
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
-#: kmymoney/plugins/xml/xmlstorage.cpp:528
+#: kmymoney/plugins/xml/xmlstorage.cpp:530
 #, kde-format
 msgid "Unable to open file '%1' for writing"
 msgstr "تعذّر فتح الملفّ ’%1‘ للقراءة"
@@ -18004,42 +18004,42 @@ msgctxt "Error message when reading XML file"
 msgid "Unknown payee identifier type %1"
 msgstr "نوع QIF ‏%1 مجهول"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:347
+#: kmymoney/plugins/xml/xmlstorage.cpp:349
 #, kde-format
 msgid "Save As"
 msgstr "احفظ كـ"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:349
+#: kmymoney/plugins/xml/xmlstorage.cpp:351
 #, kde-format
 msgctxt "KMyMoney (Filefilter)"
 msgid "KMyMoney files"
 msgstr "ملفات أموالي.ك"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:350
+#: kmymoney/plugins/xml/xmlstorage.cpp:352
 #, kde-format
 msgctxt "Anonymous (Filefilter)"
 msgid "Anonymous files"
 msgstr "ملفّات مجهّلة"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:351
+#: kmymoney/plugins/xml/xmlstorage.cpp:353
 #, kde-format
 msgctxt "XML (Filefilter)"
 msgid "XML files"
 msgstr "ملفات XML"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:352
+#: kmymoney/plugins/xml/xmlstorage.cpp:354
 #, kde-format
 msgctxt "All files (Filefilter)"
 msgid "All files"
 msgstr "كل الملفات"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:426
+#: kmymoney/plugins/xml/xmlstorage.cpp:428
 #, fuzzy, kde-format
 #| msgid "KMyMoney files (*.kmy *.xml);;All files"
 msgid "KMyMoney files (*.kmy *.xml)"
 msgstr "ملفّات أموالك (*.kmy *.xml);;كلّ الملفّات"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:447
+#: kmymoney/plugins/xml/xmlstorage.cpp:449
 #, kde-format
 msgid ""
 "GPG does not seem to be installed on your system. Please make sure that GPG "
@@ -18047,12 +18047,12 @@ msgid ""
 "disabled."
 msgstr ""
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:447
+#: kmymoney/plugins/xml/xmlstorage.cpp:449
 #, kde-format
 msgid "GPG not found"
 msgstr "GPG غير موجود"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:454
+#: kmymoney/plugins/xml/xmlstorage.cpp:456
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>You have selected to encrypt your data also with the KMyMoney recover "
@@ -18075,13 +18075,13 @@ msgstr ""
 "عليها في <a href=\"https://kmymoney.org/\">موقعِ وي أموالي.ك</a>. هذه المرة "
 "لن تُعمّى بياناتك بمفتاح استعادة أموالي.ك.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:459
-#: kmymoney/plugins/xml/xmlstorage.cpp:467
+#: kmymoney/plugins/xml/xmlstorage.cpp:461
+#: kmymoney/plugins/xml/xmlstorage.cpp:469
 #, kde-format
 msgid "GPG Key not found"
 msgstr "مفتاح GPG غير موجود"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:467
+#: kmymoney/plugins/xml/xmlstorage.cpp:469
 #, kde-format
 msgid ""
 "<p>You have specified to encrypt your data for the user-id</p><p><center><b>"
@@ -18090,7 +18090,7 @@ msgid ""
 "id. This time, encryption is disabled.</p>"
 msgstr ""
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:474
+#: kmymoney/plugins/xml/xmlstorage.cpp:476
 #, kde-format
 msgid ""
 "<p>You have configured to save your data in encrypted form using GPG. Make "
@@ -18098,12 +18098,12 @@ msgid ""
 "cannot decrypt it later on. If unsure, answer <b>No</b>.</p>"
 msgstr ""
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:475
+#: kmymoney/plugins/xml/xmlstorage.cpp:477
 #, kde-format
 msgid "Store GPG encrypted"
 msgstr ""
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:591
+#: kmymoney/plugins/xml/xmlstorage.cpp:593
 #, kde-format
 msgid ""
 "You have configured KMyMoney to use GPG to protect your data and to encrypt "
@@ -18122,7 +18122,7 @@ msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:591
+#: kmymoney/plugins/xml/xmlstorage.cpp:593
 #, kde-format
 msgid "Recover key expires soon"
 msgstr ""

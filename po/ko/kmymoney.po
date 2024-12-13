@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-11 01:49+0000\n"
+"POT-Creation-Date: 2024-12-13 10:56+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -2186,7 +2186,7 @@ msgid "<b>%1</b> is a sub account of <b>%2</b>"
 msgstr "<b>%1</b>은(는) <b>%2</b>의 하위 계좌임"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:691
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:190
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:189
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -2735,12 +2735,12 @@ msgstr "주식 또는 투자 신탁의 종목 코드입니다. 선택 사항입�
 msgid "Name of the company, or mutual fund."
 msgstr "회사나 투자 신탁의 이름입니다."
 
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:141
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:140
 #, kde-format
 msgid "The institution name field is empty.  Please enter the name."
 msgstr "금융기관 이름 필드가 비어 있습니다.  이름을 입력하십시오."
 
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:141
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:140
 #, kde-format
 msgid "Adding New Institution"
 msgstr "새 금융기관 추가"
@@ -5519,7 +5519,7 @@ msgstr "KMyMoneyFile이 열려 있지 않음"
 
 #: kmymoney/kmymoney.cpp:3528 kmymoney/kmymoney.cpp:3530
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1364
-#: kmymoney/plugins/xml/xmlstorage.cpp:414
+#: kmymoney/plugins/xml/xmlstorage.cpp:416
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
@@ -9594,7 +9594,7 @@ msgstr "내보내기가 완료되었습니다.\n"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:85
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
-#: kmymoney/plugins/xml/xmlstorage.cpp:528
+#: kmymoney/plugins/xml/xmlstorage.cpp:530
 #, kde-format
 msgid "Unable to open file '%1' for writing"
 msgstr "파일 '%1'에 쓰려고 열 수 없음"
@@ -17856,41 +17856,41 @@ msgctxt "Error message when reading XML file"
 msgid "Unknown payee identifier type %1"
 msgstr "알 수 없는 수취인 식별자 형식 %1"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:347
+#: kmymoney/plugins/xml/xmlstorage.cpp:349
 #, kde-format
 msgid "Save As"
 msgstr "다른 이름으로 저장"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:349
+#: kmymoney/plugins/xml/xmlstorage.cpp:351
 #, kde-format
 msgctxt "KMyMoney (Filefilter)"
 msgid "KMyMoney files"
 msgstr "KMyMoney 파일"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:350
+#: kmymoney/plugins/xml/xmlstorage.cpp:352
 #, kde-format
 msgctxt "Anonymous (Filefilter)"
 msgid "Anonymous files"
 msgstr "익명 파일"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:351
+#: kmymoney/plugins/xml/xmlstorage.cpp:353
 #, kde-format
 msgctxt "XML (Filefilter)"
 msgid "XML files"
 msgstr "XML 파일"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:352
+#: kmymoney/plugins/xml/xmlstorage.cpp:354
 #, kde-format
 msgctxt "All files (Filefilter)"
 msgid "All files"
 msgstr "모든 파일"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:426
+#: kmymoney/plugins/xml/xmlstorage.cpp:428
 #, kde-format
 msgid "KMyMoney files (*.kmy *.xml)"
 msgstr "KMyMoney 파일 (*.kmy *.xml)"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:447
+#: kmymoney/plugins/xml/xmlstorage.cpp:449
 #, kde-format
 msgid ""
 "GPG does not seem to be installed on your system. Please make sure that GPG "
@@ -17900,12 +17900,12 @@ msgstr ""
 "시스템에 GPG가 설치되지 않은 것 같습니다. 표준 검색 경로에서 GPG를 찾을 수 있"
 "는지 확인하십시오. 이번에는 암호화가 비활성화되었습니다."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:447
+#: kmymoney/plugins/xml/xmlstorage.cpp:449
 #, kde-format
 msgid "GPG not found"
 msgstr "GPG 찾을 수 없음"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:454
+#: kmymoney/plugins/xml/xmlstorage.cpp:456
 #, kde-format
 msgid ""
 "<p>You have selected to encrypt your data also with the KMyMoney recover "
@@ -17921,13 +17921,13 @@ msgstr ""
 "\">KMyMoney 웹사이트</a>에서 찾을 수 있습니다. 이번에는 KMyMoney 복구 키로 데"
 "이터가 암호화되지 않습니다.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:459
-#: kmymoney/plugins/xml/xmlstorage.cpp:467
+#: kmymoney/plugins/xml/xmlstorage.cpp:461
+#: kmymoney/plugins/xml/xmlstorage.cpp:469
 #, kde-format
 msgid "GPG Key not found"
 msgstr "GPG 키를 찾을 수 없음"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:467
+#: kmymoney/plugins/xml/xmlstorage.cpp:469
 #, kde-format
 msgid ""
 "<p>You have specified to encrypt your data for the user-id</p><p><center><b>"
@@ -17940,7 +17940,7 @@ msgstr ""
 "수 없습니다. 해당 사용자 ID의 키를 가져왔는지 확인하십시오. 이번에는 암호화"
 "가 비활성화되었습니다.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:474
+#: kmymoney/plugins/xml/xmlstorage.cpp:476
 #, kde-format
 msgid ""
 "<p>You have configured to save your data in encrypted form using GPG. Make "
@@ -17951,12 +17951,12 @@ msgstr ""
 "데이터를 복호화할 수 없다면 지금까지의 모든 데이터를 잃어버릴 수 있다는 점을 "
 "유의하십시오. 확신하지 않으면 <b>아니요</b>를 선택하십시오.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:475
+#: kmymoney/plugins/xml/xmlstorage.cpp:477
 #, kde-format
 msgid "Store GPG encrypted"
 msgstr "암호화된 GPG 저장"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:591
+#: kmymoney/plugins/xml/xmlstorage.cpp:593
 #, kde-format
 msgid ""
 "You have configured KMyMoney to use GPG to protect your data and to encrypt "
@@ -17973,7 +17973,7 @@ msgstr[0] ""
 "암호화하도록 설정했습니다. 이 키는 %1일 후에 만료됩니다. GPG 프론트 엔드(예: "
 "KGPG)를 사용하여 키 서버에서 키를 업데이트하십시오."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:591
+#: kmymoney/plugins/xml/xmlstorage.cpp:593
 #, kde-format
 msgid "Recover key expires soon"
 msgstr "복구 키가 곧 만료됨"

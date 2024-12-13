@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-11 01:49+0000\n"
+"POT-Creation-Date: 2024-12-13 10:56+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -2282,7 +2282,7 @@ msgid "<b>%1</b> is a sub account of <b>%2</b>"
 msgstr "Είναι ένας υπο-λογαριασμός του %1"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:691
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:190
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:189
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -2842,12 +2842,12 @@ msgstr ""
 msgid "Name of the company, or mutual fund."
 msgstr "Όνομα εταιρίας ή αμοιβαίου κεφαλαίου."
 
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:141
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:140
 #, kde-format
 msgid "The institution name field is empty.  Please enter the name."
 msgstr "Το όνομα ιδρύματος είναι κενό. Παρακαλώ συμπληρώστε το όνομα."
 
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:141
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:140
 #, kde-format
 msgid "Adding New Institution"
 msgstr "Προσθήκη νέου ιδρύματος"
@@ -5811,7 +5811,7 @@ msgstr "Κανένα αρχείο KMyMoney ανοιχτό"
 
 #: kmymoney/kmymoney.cpp:3528 kmymoney/kmymoney.cpp:3530
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1364
-#: kmymoney/plugins/xml/xmlstorage.cpp:414
+#: kmymoney/plugins/xml/xmlstorage.cpp:416
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
@@ -10221,7 +10221,7 @@ msgstr "Η εξαγωγή ολοκληρώθηκε.\n"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:85
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
-#: kmymoney/plugins/xml/xmlstorage.cpp:528
+#: kmymoney/plugins/xml/xmlstorage.cpp:530
 #, kde-format
 msgid "Unable to open file '%1' for writing"
 msgstr "Αδυναμία ανοίγματος του αρχείου '%1' για εγγραφή"
@@ -18939,36 +18939,36 @@ msgctxt "Error message when reading XML file"
 msgid "Unknown payee identifier type %1"
 msgstr "Άγνωστος τύπος QIF %1"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:347
+#: kmymoney/plugins/xml/xmlstorage.cpp:349
 #, kde-format
 msgid "Save As"
 msgstr "Αποθήκευση ως"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:349
+#: kmymoney/plugins/xml/xmlstorage.cpp:351
 #, kde-format
 msgctxt "KMyMoney (Filefilter)"
 msgid "KMyMoney files"
 msgstr "Αρχεία KMyMoney"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:350
+#: kmymoney/plugins/xml/xmlstorage.cpp:352
 #, kde-format
 msgctxt "Anonymous (Filefilter)"
 msgid "Anonymous files"
 msgstr "Ανώνυμα αρχεία"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:351
+#: kmymoney/plugins/xml/xmlstorage.cpp:353
 #, kde-format
 msgctxt "XML (Filefilter)"
 msgid "XML files"
 msgstr "Αρχεία XML"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:352
+#: kmymoney/plugins/xml/xmlstorage.cpp:354
 #, kde-format
 msgctxt "All files (Filefilter)"
 msgid "All files"
 msgstr "Όλα τα αρχεία"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:426
+#: kmymoney/plugins/xml/xmlstorage.cpp:428
 #, fuzzy, kde-format
 #| msgid ""
 #| "*.kmy *.xml|KMyMoney files\n"
@@ -18978,7 +18978,7 @@ msgstr ""
 "*.kmy *.xml|KMyMoney αρχεία\n"
 " *|Όλα τα αρχεία"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:447
+#: kmymoney/plugins/xml/xmlstorage.cpp:449
 #, fuzzy, kde-format
 #| msgid ""
 #| "GPG does not seem to be installed on your system. Please make sure, that "
@@ -18993,12 +18993,12 @@ msgstr ""
 "σιγουρευτείτε ότι το GPG μπορεί να βρεθεί χρησιμοποιώντας την τοποθεσία της "
 "τυπικής αναζήτησης. Η κρυπτογράφηση αυτή τη φορά θα είναι απενεργοποιημένη."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:447
+#: kmymoney/plugins/xml/xmlstorage.cpp:449
 #, kde-format
 msgid "GPG not found"
 msgstr "Αδυναμία εύρεσης του GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:454
+#: kmymoney/plugins/xml/xmlstorage.cpp:456
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>You have selected to encrypt your data also with the KMyMoney recover "
@@ -19023,13 +19023,13 @@ msgstr ""
 "φορά τα δεδομένα σας δεν θα κρυπτογραφηθούν με το κλειδί ανάκτησης του "
 "KMyMoney.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:459
-#: kmymoney/plugins/xml/xmlstorage.cpp:467
+#: kmymoney/plugins/xml/xmlstorage.cpp:461
+#: kmymoney/plugins/xml/xmlstorage.cpp:469
 #, kde-format
 msgid "GPG Key not found"
 msgstr "Δεν βρέθηκε το GPG κλειδί"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:467
+#: kmymoney/plugins/xml/xmlstorage.cpp:469
 #, kde-format
 msgid ""
 "<p>You have specified to encrypt your data for the user-id</p><p><center><b>"
@@ -19043,7 +19043,7 @@ msgstr ""
 "εισαγάγει ένα έγκυρο κλειδί γι' αυτόν το χρήστη. Αυτήν τη φορά, η "
 "κρυπτογράφηση θα απενεργοποιηθεί.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:474
+#: kmymoney/plugins/xml/xmlstorage.cpp:476
 #, kde-format
 msgid ""
 "<p>You have configured to save your data in encrypted form using GPG. Make "
@@ -19056,12 +19056,12 @@ msgstr ""
 "θέση να το αποκρυπτογραφήσετε αργότερα. Σε περίπτωση αμφιβολίας απαντήστε "
 "<b>Όχι</b>.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:475
+#: kmymoney/plugins/xml/xmlstorage.cpp:477
 #, kde-format
 msgid "Store GPG encrypted"
 msgstr "Αποθήκευση με κρυπτογράφηση GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:591
+#: kmymoney/plugins/xml/xmlstorage.cpp:593
 #, kde-format
 msgid ""
 "You have configured KMyMoney to use GPG to protect your data and to encrypt "
@@ -19076,7 +19076,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:591
+#: kmymoney/plugins/xml/xmlstorage.cpp:593
 #, kde-format
 msgid "Recover key expires soon"
 msgstr ""
