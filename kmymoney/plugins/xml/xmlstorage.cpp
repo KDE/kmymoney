@@ -301,6 +301,8 @@ bool XMLStorage::save(const QUrl &url)
                 throw MYMONEYEXCEPTION(QString::fromLatin1("Unable to upload to '%1'.<br />%2").arg(url.toDisplayString(), putjob->errorString()));
             }
             file.close();
+            // remove the temporary file from the local medium
+            file.remove();
         }
     } catch (const MyMoneyException &e) {
         KMessageBox::error(nullptr, QString::fromLatin1(e.what()));
