@@ -772,6 +772,9 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
     d->ui->securityAccountCombo->setModel(d->securitiesModel);
     d->ui->securityAccountCombo->lineEdit()->setClearButtonEnabled(true);
+    d->ui->securityAccountCombo->completer()->setCompletionMode(QCompleter::PopupCompletion);
+    d->ui->securityAccountCombo->completer()->setCaseSensitivity(Qt::CaseInsensitive);
+    d->ui->securityAccountCombo->completer()->setFilterMode(Qt::MatchContains);
 
     d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> { eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability } );
     d->accountsModel->setHideEquityAccounts(false);
