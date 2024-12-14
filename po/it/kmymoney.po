@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2024-09-29 14:04+0200\n"
+"PO-Revision-Date: 2024-12-11 16:08+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -397,7 +397,7 @@ msgstr "File «%1» non trovato."
 #: kmymoney/converter/mymoneytemplate.cpp:150
 #, kde-format
 msgid "<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>"
-msgstr "<p>Tag non valido <b>%1</b> nel file modello <b>%2</b></p>"
+msgstr "<p>Etichetta non valida <b>%1</b> nel file modello <b>%2</b></p>"
 
 #: kmymoney/converter/mymoneytemplate.cpp:214
 #, kde-format
@@ -1584,7 +1584,7 @@ msgstr "in"
 #: kmymoney/dialogs/kcurrencycalculator.ui:227
 #, kde-format
 msgid "To a&mount"
-msgstr "All'a&mmontare"
+msgstr "All'i&mporto"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_rateButton)
 #: kmymoney/dialogs/kcurrencycalculator.ui:237
@@ -8080,7 +8080,7 @@ msgstr "Kuna croata"
 #: kmymoney/mymoney/mymoneyfile.cpp:2764
 #, kde-format
 msgid "Afghanistan Afghani"
-msgstr "Afghani afghanistano"
+msgstr "Afghani afgano"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2765
 #, kde-format
@@ -8130,12 +8130,12 @@ msgstr "Dollaro australiano"
 #: kmymoney/mymoney/mymoneyfile.cpp:2775
 #, kde-format
 msgid "Bahamian Dollar"
-msgstr "Dollaro bahamense"
+msgstr "Dollaro delle Bahamas"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2776
 #, kde-format
 msgid "Bahraini Dinar"
-msgstr "Dinaro bahrainiano"
+msgstr "Dinaro del Bahrein"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2777
 #, kde-format
@@ -8605,7 +8605,7 @@ msgstr "Corona norvegese"
 #: kmymoney/mymoney/mymoneyfile.cpp:2871
 #, kde-format
 msgid "Omani Rial"
-msgstr "Real omanita"
+msgstr "Rial omanita"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2872
 #, kde-format
@@ -14771,7 +14771,7 @@ msgstr "Apri database..."
 #: kmymoney/plugins/sql/sqlstorage.cpp:285
 #, kde-format
 msgid "Generate Database SQL"
-msgstr "Genera database SQL"
+msgstr "Genera SQL database"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:346
 #, kde-format
@@ -15298,7 +15298,7 @@ msgstr "Numero di cicli da utilizzare nella previsione:"
 #: kmymoney/plugins/views/forecast/kforecastview.ui:272
 #, kde-format
 msgid "History Forecast Method"
-msgstr "Metodo di previsione dallo storico"
+msgstr "Metodo di previsione storico"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton11)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:168
