@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-13 10:56+0000\n"
-"PO-Revision-Date: 2024-12-03 20:42+0100\n"
+"POT-Creation-Date: 2024-12-14 02:39+0000\n"
+"PO-Revision-Date: 2024-12-11 16:08+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -1131,7 +1131,7 @@ msgstr "in"
 #: kmymoney/dialogs/kcurrencycalculator.ui:227
 #, kde-format
 msgid "To a&mount"
-msgstr "All'a&mmontare"
+msgstr "All'i&mporto"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_rateButton)
 #: kmymoney/dialogs/kcurrencycalculator.ui:237
@@ -4981,7 +4981,7 @@ msgstr "Fine"
 #, kde-format
 msgctxt "Postpone reconciliation"
 msgid "Postpone"
-msgstr "CAP:"
+msgstr "Rinvia"
 
 #: kmymoney/kmymoney.cpp:1892
 #, kde-format
@@ -7114,7 +7114,7 @@ msgstr "Kuna croata"
 #: kmymoney/mymoney/mymoneyfile.cpp:3405
 #, kde-format
 msgid "Afghanistan Afghani"
-msgstr "Afghani afghanistano"
+msgstr "Afghani afgano"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3406
 #, kde-format
@@ -7164,12 +7164,12 @@ msgstr "Dollaro australiano"
 #: kmymoney/mymoney/mymoneyfile.cpp:3416
 #, kde-format
 msgid "Bahamian Dollar"
-msgstr "Dollaro bahamense"
+msgstr "Dollaro delle Bahamas"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3417
 #, kde-format
 msgid "Bahraini Dinar"
-msgstr "Dinaro bahrainiano"
+msgstr "Dinaro del Bahrein"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3418
 #, kde-format
@@ -7639,7 +7639,7 @@ msgstr "Corona norvegese"
 #: kmymoney/mymoney/mymoneyfile.cpp:3512
 #, kde-format
 msgid "Omani Rial"
-msgstr "Real omanita"
+msgstr "Rial omanita"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3513
 #, kde-format
@@ -8252,7 +8252,7 @@ msgstr "HalfUp"
 #: kmymoney/mymoney/mymoneytemplate.cpp:99
 #, kde-format
 msgid "<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>"
-msgstr "<p>Tag non valido <b>%1</b> nel file modello <b>%2</b></p>"
+msgstr "<p>Etichetta non valida <b>%1</b> nel file modello <b>%2</b></p>"
 
 #: kmymoney/mymoney/mymoneytemplate.cpp:106
 #: kmymoney/mymoney/mymoneytemplate.cpp:108
@@ -8260,7 +8260,7 @@ msgstr "<p>Tag non valido <b>%1</b> nel file modello <b>%2</b></p>"
 #: kmymoney/mymoney/mymoneytemplate.cpp:112
 #, kde-format
 msgid "<p>Missing tag <b>%1</b> in template file <b>%2</b></p>"
-msgstr "<p>Tag mancante <b>%1</b> nel file di modello <b>%2</b></p>"
+msgstr "<p>Etichetta mancante <b>%1</b> nel file di modello <b>%2</b></p>"
 
 #: kmymoney/mymoney/mymoneytemplate.cpp:116
 #, kde-format
@@ -8759,11 +8759,10 @@ msgid "Entry date"
 msgstr "Data di inserimento"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:80
-#, fuzzy, kde-format
-#| msgid "Account Balances by Institution"
+#, kde-format
 msgctxt "@info:toolbox Balance)"
 msgid "Account balance or security units"
-msgstr "Saldi dei conti per istituto"
+msgstr "Saldo del conto o unità di strumenti finanziari"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:106
 #, kde-format
@@ -14770,7 +14769,7 @@ msgstr "Apri database..."
 #: kmymoney/plugins/sql/sqlstorage.cpp:270
 #, kde-format
 msgid "Generate Database SQL"
-msgstr "Genera database SQL"
+msgstr "Genera SQL database"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:329
 #, kde-format
@@ -15271,7 +15270,7 @@ msgstr "Numero di cicli da utilizzare nella previsione:"
 #: kmymoney/plugins/views/forecast/kforecastview.ui:281
 #, kde-format
 msgid "History Forecast Method"
-msgstr "Metodo di previsione dallo storico"
+msgstr "Metodo di previsione storico"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton11)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:168
@@ -15905,10 +15904,9 @@ msgid "Market Value"
 msgstr "Valore di mercato"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:728
-#, fuzzy, kde-format
-#| msgid "Internal rate of return"
+#, kde-format
 msgid "Extended internal rate of return"
-msgstr "Tasso interno di rendimento"
+msgstr "Tasso interno di rendimento esteso"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:730
 #, kde-format
@@ -19063,14 +19061,14 @@ msgstr "Tasso d'interesse"
 
 #: kmymoney/views/investtransactioneditor.cpp:262
 #: kmymoney/views/multitransactioneditor.cpp:184
-#: kmymoney/views/newtransactioneditor.cpp:278
+#: kmymoney/views/newtransactioneditor.cpp:279
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "La data di registrazione della transazione."
 
 #: kmymoney/views/investtransactioneditor.cpp:286
 #: kmymoney/views/multitransactioneditor.cpp:214
-#: kmymoney/views/newtransactioneditor.cpp:298
+#: kmymoney/views/newtransactioneditor.cpp:299
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr ""
@@ -20985,6 +20983,8 @@ msgid ""
 "The value is calculated on the basis of the last available prices, may "
 "therefore not be up-to-date and may differ from the account balance."
 msgstr ""
+"Il valore è calcolato sulla base degli ultimi prezzi disponibili, potrebbe "
+"quindi non essere aggiornato e potrebbe differire dal saldo del conto."
 
 #: kmymoney/views/ledgerviewpage_p.h:149
 #: kmymoney/views/reconciliationledgerviewpage.cpp:443
@@ -21006,20 +21006,20 @@ msgid "Balance: %1"
 msgstr "Saldo: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:192
-#: kmymoney/views/newtransactioneditor.cpp:281
+#: kmymoney/views/newtransactioneditor.cpp:282
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "La data di pubblicazione non è valida."
 
 #: kmymoney/views/multitransactioneditor.cpp:225
-#: kmymoney/views/newtransactioneditor.cpp:316
+#: kmymoney/views/newtransactioneditor.cpp:317
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
 msgstr ""
 "Il centro di costo al quale questa transazione dovrebbe essere assegnata."
 
 #: kmymoney/views/multitransactioneditor.cpp:228
-#: kmymoney/views/newtransactioneditor.cpp:325
+#: kmymoney/views/newtransactioneditor.cpp:326
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -21109,19 +21109,19 @@ msgid "A category assignment is required for a split."
 msgstr "L'assegnazione di una categoria è necessaria per una suddivisione."
 
 #: kmymoney/views/newspliteditor.cpp:237
-#: kmymoney/views/newtransactioneditor.cpp:440
+#: kmymoney/views/newtransactioneditor.cpp:441
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Il numero dell'assegno utilizzato per la transazione."
 
 #: kmymoney/views/newspliteditor.cpp:246
-#: kmymoney/views/newtransactioneditor.cpp:450
+#: kmymoney/views/newtransactioneditor.cpp:451
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Il numero di assegno <b>%1</b> è già stato utilizzato in questo conto."
 
-#: kmymoney/views/newspliteditor.cpp:748
-#: kmymoney/views/newtransactioneditor.cpp:169
+#: kmymoney/views/newspliteditor.cpp:775
+#: kmymoney/views/newtransactioneditor.cpp:170
 #, kde-format
 msgctxt "@info:tooltip Protected"
 msgid ""
@@ -21149,38 +21149,38 @@ msgstr "Debitore/Beneficiario"
 msgid "Costcenter"
 msgstr "Costcenter"
 
-#: kmymoney/views/newtransactioneditor.cpp:213
+#: kmymoney/views/newtransactioneditor.cpp:214
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the amount of the transaction."
 msgstr "Digita l'importo della transazione."
 
-#: kmymoney/views/newtransactioneditor.cpp:214
+#: kmymoney/views/newtransactioneditor.cpp:215
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the category or counter account of the transaction."
 msgstr "Digita la categoria o il conto corrente della transazione."
 
-#: kmymoney/views/newtransactioneditor.cpp:218
+#: kmymoney/views/newtransactioneditor.cpp:219
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
 msgstr "La transazione non è assegnata a una categoria."
 
-#: kmymoney/views/newtransactioneditor.cpp:222
+#: kmymoney/views/newtransactioneditor.cpp:223
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount is different from the sum of all splits by %1."
 msgstr "L'importo è diverso dalla somma di tutte le suddivisioni di %1."
 
-#: kmymoney/views/newtransactioneditor.cpp:601
+#: kmymoney/views/newtransactioneditor.cpp:602
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
 msgstr "Seleziona completamento automatico transazione"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1071
+#: kmymoney/views/newtransactioneditor.cpp:1072
 #: kmymoney/views/newtransactioneditor.ui:305
 #: kmymoney/views/newtransactionform.cpp:98
 #: kmymoney/views/newtransactionform.ui:179
