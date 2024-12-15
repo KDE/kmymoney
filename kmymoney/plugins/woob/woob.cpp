@@ -17,6 +17,7 @@
 // QT Includes
 
 #include <QFutureWatcher>
+#include <QPointer>
 #include <QProgressDialog>
 #include <QtConcurrentRun>
 
