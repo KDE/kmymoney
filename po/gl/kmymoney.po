@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2024-12-08 15:26+0100\n"
+"PO-Revision-Date: 2024-12-14 11:36+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -1228,9 +1228,9 @@ msgid ""
 msgstr ""
 "Escolla o tipo de importación a realizar. Ten unha explicación\n"
 "do tipo ao fondo da pantalla, que se actualiza cando\n"
-"escolle un eliminar na caixa de selección.\n"
+"escolle un elemento na caixa de selección.\n"
 "\n"
-"Cando teña escollido o tipo que desexe prema o botón «Aceptar»."
+"Unha vez escollido prema «Aceptar»."
 
 #. i18n: ectx: property (text), widget (QLabel, promptLabel)
 #: kmymoney/dialogs/kchooseimportexportdlg.cpp:76
@@ -1258,9 +1258,9 @@ msgid ""
 msgstr ""
 "Escolla o tipo de exportación a realizar. Ten unha explicación\n"
 "do tipo ao fondo da pantalla, que se actualiza cando\n"
-"escolle un eliminar na caixa de selección.\n"
+"escolle un elemento na caixa de selección.\n"
 "\n"
-"Cando teño escollido o tipo que desexe prema o botón «Aceptar»."
+"Una vez escollido, prema «Aceptar»."
 
 #: kmymoney/dialogs/kchooseimportexportdlg.cpp:83
 #, kde-format
@@ -1664,7 +1664,7 @@ msgstr "Renomear a divisa"
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
 #, kde-format
 msgid "Delete currency"
-msgstr "Borrar a divisa"
+msgstr "Eliminar a divisa"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:495
 #, kde-format
@@ -3007,7 +3007,7 @@ msgstr "Duplicar"
 #: kmymoney/views/kinvestmentview.ui:179
 #, kde-format
 msgid "Delete..."
-msgstr "Borrar…"
+msgstr "Eliminar…"
 
 #: kmymoney/dialogs/kmymoneysplittable.cpp:628
 #, kde-format
@@ -3934,9 +3934,9 @@ msgid ""
 "a different tag before the selected tags can be deleted. Please select a tag "
 "from the list below."
 msgstr ""
-"As operacións asociadas das etiquetas escollidas deben ser asignadas a outro "
-"beneficiario antes de poder borrar os escollidos. Por favor, escolla un "
-"beneficiario na lista de embaixo."
+"As operacións asociadas das etiquetas escollidas deben ser asignadas a outra "
+"beneficiaria antes de poder eliminar os escollidos. Escolla unha "
+"beneficiaria na lista de embaixo."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/dialogs/ktagreassigndlg.ui:61
@@ -6054,7 +6054,7 @@ msgstr "Editar a categoría…"
 #: kmymoney/kmymoney.cpp:1432
 #, kde-format
 msgid "Delete category..."
-msgstr "Borrar a categoría…"
+msgstr "Eliminar a categoría…"
 
 #: kmymoney/kmymoney.cpp:1436
 #, kde-format
@@ -6231,7 +6231,7 @@ msgstr "Editar o investimento…"
 #: kmymoney/kmymoney.cpp:1477
 #, kde-format
 msgid "Delete investment..."
-msgstr "Borrar o investimento…"
+msgstr "Eliminar o investimento…"
 
 #: kmymoney/kmymoney.cpp:1478
 #, kde-format
@@ -6256,7 +6256,7 @@ msgstr "Editar o asento planificado"
 #: kmymoney/kmymoney.cpp:1483
 #, kde-format
 msgid "Delete scheduled transaction"
-msgstr "Borrar o asento planificado"
+msgstr "Eliminar o asento planificado"
 
 #: kmymoney/kmymoney.cpp:1484
 #, kde-format
@@ -6286,7 +6286,7 @@ msgstr "Renomear o beneficiario"
 #: kmymoney/kmymoney.cpp:1490
 #, kde-format
 msgid "Delete payee"
-msgstr "Borrar o beneficiario"
+msgstr "Eliminar o beneficiario"
 
 #: kmymoney/kmymoney.cpp:1491
 #, kde-format
@@ -7042,7 +7042,7 @@ msgstr ""
 #: kmymoney/kmymoneyutils.cpp:576
 #, kde-format
 msgid "Delete security"
-msgstr "Borrar o valor"
+msgstr "Eliminar o valor"
 
 #: kmymoney/kmymoneyutils.cpp:584
 #, kde-format
@@ -14918,7 +14918,7 @@ msgstr "Renomear o orzamento"
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:304
 #, kde-format
 msgid "Delete budget"
-msgstr "Borrar o orzamento"
+msgstr "Eliminar o orzamento"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:305
 #, kde-format
@@ -14999,13 +14999,13 @@ msgstr "Renomear"
 #: kmymoney/plugins/views/budget/kbudgetview.ui:73
 #, kde-format
 msgid "Delete the current selected budget"
-msgstr "Borrar o orzamento escollido"
+msgstr "Eliminar o orzamento escollido"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_deleteButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:76
 #, kde-format
 msgid "Use this to delete the selected budget."
-msgstr "Use isto para borrar o orzamento escollido."
+msgstr "Use isto para eliminar o orzamento escollido."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_deleteButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:79
@@ -16500,7 +16500,7 @@ msgstr "<b>%1</b> é un informe predeterminado, polo que non pode eliminarse."
 #: kmymoney/plugins/views/reports/kreportsview_p.h:554
 #, kde-format
 msgid "Delete Report?"
-msgstr "Borrar o informe?"
+msgstr "Eliminar o informe?"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:604
 #, kde-format
@@ -16568,7 +16568,7 @@ msgid ""
 "<qt>Are you sure you want to delete report <b>%1</b>?  There is no way to "
 "recover it.</qt>"
 msgstr ""
-"<qt>Seguro que quere borrar o informe <b>%1</b>? Non haberá maneira de "
+"<qt>Seguro que quere eliminar o informe <b>%1</b>? Non haberá maneira de "
 "recuperalo.</qt>"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:627
@@ -19093,7 +19093,7 @@ msgstr ""
 #: kmymoney/views/kcategoriesview.cpp:396
 #, kde-format
 msgid "<qt>Do you really want to delete category <b>%1</b>?</qt>"
-msgstr "<qt>Seguro que quere borrar a categoría <b>%1</b>?</qt>"
+msgstr "<qt>Seguro que quere eliminar a categoría <b>%1</b>?</qt>"
 
 #: kmymoney/views/kcategoriesview.cpp:403
 #, kde-format
@@ -19107,14 +19107,14 @@ msgid ""
 "only the category itself? If you only delete the category itself, all its "
 "sub-categories will be made sub-categories of <b>%2</b>.</qt>"
 msgstr ""
-"<qt>Quere borrar a categoría <b>%1</b> con todas as súas subcategorías ou só "
-"a categoría en si? Se só borra a categoría, todas as súas fillas han ser "
-"adoptadas por <b>%2</b>.</qt>"
+"<qt>Quere eliminar a categoría <b>%1</b> con todas as súas subcategorías ou "
+"só a categoría en si? Se só elimina a categoría, todas as súas fillas han "
+"ser adoptadas por <b>%2</b>.</qt>"
 
 #: kmymoney/views/kcategoriesview.cpp:418
 #, kde-format
 msgid "Delete all"
-msgstr "Borrar todas"
+msgstr "Eliminar todo"
 
 #: kmymoney/views/kcategoriesview.cpp:419
 #, kde-format
@@ -19134,7 +19134,8 @@ msgstr ""
 #, kde-format
 msgid ""
 "<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>"
-msgstr "<qt>Non se pode borrar unha subcategoría de <b>%1</b>. Motivo: %2</qt>"
+msgstr ""
+"<qt>Non se pode eliminar unha subcategoría de <b>%1</b>. Motivo: %2</qt>"
 
 #: kmymoney/views/kcategoriesview.cpp:480
 #, kde-format
@@ -19299,7 +19300,7 @@ msgstr[1] "Seguro que quere eliminar os %1 asentos escollidos?"
 #: kmymoney/views/kgloballedgerview.cpp:1476
 #, kde-format
 msgid "Delete transaction"
-msgstr "Borrar o asento"
+msgstr "Eliminar o asento"
 
 #: kmymoney/views/kgloballedgerview.cpp:1528
 #, kde-format
@@ -19722,7 +19723,7 @@ msgstr "<p>Seguro que quere eliminar o investimento <b>%1</b>?</p>"
 #: kmymoney/views/kinvestmentview.cpp:282
 #, kde-format
 msgid "Delete investment"
-msgstr "Borrar o investimento"
+msgstr "Eliminar o investimento"
 
 #: kmymoney/views/kinvestmentview.cpp:292
 #, kde-format
@@ -19893,7 +19894,7 @@ msgstr "Eliminar o beneficiario"
 #: kmymoney/views/kpayeesview.cpp:720
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
-msgstr "<p>Seguro que quere eliminar todos os beneficiarios escollidos?"
+msgstr "<p>Seguro que quere fusionar as beneficiarias escollidas?"
 
 #: kmymoney/views/kpayeesview.cpp:721 kmymoney/views/kpayeesview_p.h:628
 #, kde-format
