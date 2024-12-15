@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-14 02:39+0000\n"
-"PO-Revision-Date: 2024-12-13 20:48+0100\n"
+"PO-Revision-Date: 2024-12-14 11:36+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -757,9 +757,9 @@ msgid ""
 msgstr ""
 "Escolla o tipo de importación a realizar. Ten unha explicación\n"
 "do tipo ao fondo da pantalla, que se actualiza cando\n"
-"escolle un eliminar na caixa de selección.\n"
+"escolle un elemento na caixa de selección.\n"
 "\n"
-"Cando teña escollido o tipo que desexe prema o botón «Aceptar»."
+"Unha vez escollido prema «Aceptar»."
 
 #. i18n: ectx: property (text), widget (QLabel, promptLabel)
 #: kmymoney/dialogs/kchooseimportexportdlg.cpp:76
@@ -787,9 +787,9 @@ msgid ""
 msgstr ""
 "Escolla o tipo de exportación a realizar. Ten unha explicación\n"
 "do tipo ao fondo da pantalla, que se actualiza cando\n"
-"escolle un eliminar na caixa de selección.\n"
+"escolle un elemento na caixa de selección.\n"
 "\n"
-"Cando teño escollido o tipo que desexe prema o botón «Aceptar»."
+"Una vez escollido, prema «Aceptar»."
 
 #: kmymoney/dialogs/kchooseimportexportdlg.cpp:83
 #, kde-format
@@ -1209,7 +1209,7 @@ msgstr "Renomear a divisa"
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
 #, kde-format
 msgid "Delete currency"
-msgstr "Borrar a divisa"
+msgstr "Eliminar a divisa"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:494
 #, kde-format
@@ -5033,7 +5033,7 @@ msgstr "Editar a categoría…"
 #: kmymoney/kmymoney.cpp:1909
 #, kde-format
 msgid "Delete category..."
-msgstr "Borrar a categoría…"
+msgstr "Eliminar a categoría…"
 
 #: kmymoney/kmymoney.cpp:1913
 #, kde-format
@@ -5247,7 +5247,7 @@ msgstr "Editar o investimento…"
 #: kmymoney/kmymoney.cpp:1962
 #, kde-format
 msgid "Delete investment..."
-msgstr "Borrar o investimento…"
+msgstr "Eliminar o investimento…"
 
 #: kmymoney/kmymoney.cpp:1963
 #, kde-format
@@ -5282,7 +5282,7 @@ msgstr "Editar o asento planificado"
 #: kmymoney/kmymoney.cpp:1972
 #, kde-format
 msgid "Delete scheduled transaction"
-msgstr "Borrar o asento planificado"
+msgstr "Eliminar o asento planificado"
 
 #: kmymoney/kmymoney.cpp:1973
 #, kde-format
@@ -5312,7 +5312,7 @@ msgstr "Renomear o beneficiario"
 #: kmymoney/kmymoney.cpp:1979
 #, kde-format
 msgid "Delete payee"
-msgstr "Borrar o beneficiario"
+msgstr "Eliminar o beneficiario"
 
 #: kmymoney/kmymoney.cpp:1980
 #, kde-format
@@ -5464,7 +5464,7 @@ msgstr[1] "Seguro que quere eliminar os %1 asentos escollidos?"
 #: kmymoney/kmymoney.cpp:2674
 #, kde-format
 msgid "Delete transaction"
-msgstr "Borrar o asento"
+msgstr "Eliminar o asento"
 
 #: kmymoney/kmymoney.cpp:2751
 #, kde-format
@@ -6168,7 +6168,7 @@ msgstr ""
 #: kmymoney/kmymoneyutils.cpp:483
 #, kde-format
 msgid "Delete security"
-msgstr "Borrar o valor"
+msgstr "Eliminar o valor"
 
 #: kmymoney/kmymoneyutils.cpp:491
 #, kde-format
@@ -14921,7 +14921,7 @@ msgstr "Renomear o orzamento"
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:444
 #, kde-format
 msgid "Delete budget"
-msgstr "Borrar o orzamento"
+msgstr "Eliminar o orzamento"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:445
 #, kde-format
@@ -16544,7 +16544,7 @@ msgstr "<b>%1</b> é un informe predeterminado, polo que non pode eliminarse."
 #: kmymoney/plugins/views/reports/kreportsview_p.h:570
 #, kde-format
 msgid "Delete Report?"
-msgstr "Borrar o informe?"
+msgstr "Eliminar o informe?"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:735
 #, kde-format
@@ -16644,7 +16644,7 @@ msgid ""
 "<qt>Are you sure you want to delete report <b>%1</b>?  There is no way to "
 "recover it.</qt>"
 msgstr ""
-"<qt>Seguro que quere borrar o informe <b>%1</b>? Non haberá maneira de "
+"<qt>Seguro que quere eliminar o informe <b>%1</b>? Non haberá maneira de "
 "recuperalo.</qt>"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:631
@@ -19389,7 +19389,7 @@ msgstr ""
 #: kmymoney/views/kcategoriesview.cpp:338
 #, kde-format
 msgid "<qt>Do you really want to delete category <b>%1</b>?</qt>"
-msgstr "<qt>Seguro que quere borrar a categoría <b>%1</b>?</qt>"
+msgstr "<qt>Seguro que quere eliminar a categoría <b>%1</b>?</qt>"
 
 #: kmymoney/views/kcategoriesview.cpp:339
 #: kmymoney/views/kcategoriesview.cpp:400
@@ -19410,14 +19410,14 @@ msgid ""
 "only the category itself? If you only delete the category itself, all its "
 "sub-categories will be made sub-categories of <b>%2</b>.</qt>"
 msgstr ""
-"<qt>Quere borrar a categoría <b>%1</b> con todas as súas subcategorías ou só "
-"a categoría en si? Se só borra a categoría, todas as súas fillas han ser "
-"adoptadas por <b>%2</b>.</qt>"
+"<qt>Quere eliminar a categoría <b>%1</b> con todas as súas subcategorías ou "
+"só a categoría en si? Se só elimina a categoría, todas as súas fillas han "
+"ser adoptadas por <b>%2</b>.</qt>"
 
 #: kmymoney/views/kcategoriesview.cpp:365
 #, kde-format
 msgid "Delete all"
-msgstr "Borrar todas"
+msgstr "Eliminar todo"
 
 #: kmymoney/views/kcategoriesview.cpp:366
 #, kde-format
@@ -19437,7 +19437,8 @@ msgstr ""
 #, kde-format
 msgid ""
 "<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>"
-msgstr "<qt>Non se pode borrar unha subcategoría de <b>%1</b>. Motivo: %2</qt>"
+msgstr ""
+"<qt>Non se pode eliminar unha subcategoría de <b>%1</b>. Motivo: %2</qt>"
 
 #: kmymoney/views/kcategoriesview.cpp:432
 #, kde-format
@@ -19979,7 +19980,7 @@ msgstr "<p>Seguro que quere eliminar o investimento <b>%1</b>?</p>"
 #: kmymoney/views/kinvestmentview.cpp:550
 #, kde-format
 msgid "Delete investment"
-msgstr "Borrar o investimento"
+msgstr "Eliminar o investimento"
 
 #: kmymoney/views/kinvestmentview.cpp:561
 #, kde-format
@@ -20130,7 +20131,7 @@ msgstr "Eliminar o beneficiario"
 #: kmymoney/views/kpayeesview.cpp:603
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
-msgstr "<p>Seguro que quere eliminar todos os beneficiarios escollidos?"
+msgstr "<p>Seguro que quere fusionar as beneficiarias escollidas?"
 
 #: kmymoney/views/kpayeesview.cpp:604 kmymoney/views/kpayeesview_p.h:580
 #, kde-format
