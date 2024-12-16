@@ -12,26 +12,26 @@
 </sect1info>
 
 <title
->Widget</title>
+>Oggetti</title>
 
 <para
->&kmymoney; ha dei widget specifici che non si trovano in altre applicazioni. Questo capitolo spiega l'uso di questi widget. </para>
+>&kmymoney; ha degli oggetti specifici che non si trovano in altre applicazioni. Questo capitolo spiega l'uso di questi oggetti. </para>
 
 <sect2 id="reference.widgets.datepicker">
 <title
->Widget per l'inserimento della data</title>
+>Oggetto per l'inserimento della data</title>
 
 <para
->Quando &kmymoney; ha bisogno di informazioni relative a una data specifica, &eg; la data di una transazione o la data di apertura di un conto, permette di usare il <emphasis
->widget per l'inserimento della data</emphasis
->. Questo widget consiste di tre campi e un pulsante. I campi contengono il <emphasis
+>Quando &kmymoney; ha bisogno di informazioni relative a una data specifica, &eg; la data di una transazione o la data di apertura di un conto, permette di usare l'<emphasis
+>oggetto per l'inserimento della data</emphasis
+>. Questo oggetto consiste di tre campi e un pulsante. I campi contengono il <emphasis
 >giorno</emphasis
 >, il <emphasis
 >mese</emphasis
 > e l'<emphasis
 >anno</emphasis
->, separati dai caratteri di separazione della data specificati dalle proprie impostazioni di localizzazione. La pressione del pulsante aprirà il widget di <emphasis
->selezione della data</emphasis
+>, separati dai caratteri di separazione della data specificati dalle proprie impostazioni di localizzazione. La pressione del pulsante aprirà l'oggetto di <emphasis
+>selettore della data</emphasis
 >. </para>
 
 <para>
@@ -44,14 +44,14 @@
 	</imageobject>
 	<textobject>
 	<phrase
->Widget della data</phrase>
+>Oggetto della data</phrase>
 	</textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
 <para
->Nel widget di inserimento della data, i tasti freccia &Left;/&Right; possono essere usati per navigare tra i campi <emphasis
+>Nell'oggetto di inserimento della data, i tasti freccia &Left;/&Right; possono essere usati per navigare tra i campi <emphasis
 >giorno</emphasis
 >, <emphasis
 >mese</emphasis
@@ -72,7 +72,7 @@
 >mese</emphasis
 > o <emphasis
 >anno</emphasis
-> lo si seleziona. Il valore può essere incrementato/decrementato utilizzando le frecce nella parte destra del widget. Il loro funzionamento è esattamente uguale alle frecce direzionali &Up;/&Down; della tastiera. </para>
+> lo si seleziona. Il valore può essere incrementato/decrementato utilizzando le frecce nella parte destra dell'oggetto. Il loro funzionamento è esattamente uguale alle frecce direzionali &Up;/&Down; della tastiera. </para>
 
 <para
 >Il selezionatore della data verrà aperto quando si fa clic sul pulsante alla destra dei pulsanti freccia. Contiene quatto pulsanti freccia nella parte alta, due da ogni parte. I pulsanti a sinistra permettono di diminuire il mese o l'anno selezionati, mentre quelli alla destra permettono di aumentarli. Il pulsante più a destra permette di chiudere il selezionatore della data. </para>
@@ -87,14 +87,14 @@
 >. </para>
 
 <para
->Nella parte bassa del widget di selezione della data ci sono un pulsante, un campo per l'immissione di testo e un menu a discesa. Facendo clic sul pulsante si seleziona la data di oggi. Il campo può essere usato per immettere una data specifica. Premendo il tasto &Enter; sarà visualizzata quella data. Il menu a tendina permette di andare ad una certa settimana e selezionare una data a partire da essa. </para>
+>Nella parte bassa del selettore della data ci sono un pulsante, un campo per l'immissione di testo e un menu a discesa. Facendo clic sul pulsante si seleziona la data di oggi. Il campo può essere usato per immettere una data specifica. Premendo il tasto &Enter; sarà visualizzata quella data. Il menu a tendina permette di andare ad una certa settimana e selezionare una data a partire da essa. </para>
 </sect2>
 
 <sect2 id="reference.widgets.value">
 <title
 >Inserimento di valori</title>
 <para
->Il widget per l'inserimento di valori consiste in un campo di testo (che accetta cifre, separatori delle migliaia e separatore dei decimali) e un pulsante sulla destra. Utilizzare le cifre per inserire il valore. Separare la parte frazionale digitando il separatore dei decimali della propria localizzazione. Se si fa clic sul pulsante sulla destra o si preme un tasto associato ad un'operazione matematica (&eg;, <keycap
+>L'oggetto per l'inserimento di valori consiste in un campo di testo (che accetta cifre, separatori delle migliaia e separatore dei decimali) e un pulsante sulla destra. Utilizzare le cifre per inserire il valore. Separare la parte frazionale digitando il separatore dei decimali della propria localizzazione. Se si fa clic sul pulsante sulla destra o si preme un tasto associato ad un'operazione matematica (&eg;, <keycap
 >+</keycap
 >, <keycap
 >-</keycap
@@ -107,7 +107,7 @@
 >) sarà visualizzata una piccola calcolatrice che permette di calcolare il valore finale. </para>
 
 <para
->Possono essere inseriti valori negativi immettendo il simbolo meno prima del numero. Se la tua lingua permette di visualizzare i numeri negativi racchiudendoli tra parentesi, lo si può fare anche in questo widget. </para>
+>Possono essere inseriti valori negativi immettendo il simbolo meno prima del numero. Se la tua lingua permette di visualizzare i numeri negativi racchiudendoli tra parentesi, lo si può fare anche in questo oggetto. </para>
 
 <para>
 <screenshot>
@@ -119,14 +119,14 @@
 	</imageobject>
 	<textobject>
 	<phrase
->Widget del valore</phrase>
+>Oggetto del valore</phrase>
 	</textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
 <para
->Usare il widget della calcolatrice come una normale calcolatrice e chiuderlo premendo il pulsante <guibutton
+>Usare l'oggetto della calcolatrice come una normale calcolatrice e chiuderlo premendo il pulsante <guibutton
 >=</guibutton
 > o premendo il tasto <keycap
 >=</keycap
@@ -150,7 +150,7 @@
 	</imageobject>
 	<textobject>
 	<phrase
->Widget dei beneficiari</phrase>
+>Oggetto dei beneficiari</phrase>
 	</textobject>
 	</mediaobject>
 </screenshot>
@@ -166,7 +166,7 @@
 
 <sect2 id="reference.widgets.category">
 <title
->Inserimento di conti/categorie</title>
+>Inserimento categoria/conto</title>
 
 <para
 >Quando è richiesto l'inserimento del nome di una categoria o di un conto, si può iniziare ad inserire il nome premendo di tasti della la tastiera. Finché ci saranno delle corrispondenze nella lista dei conti e delle categorie di &kmymoney;, saranno visualizzate in un riquadro sopra o sotto al campo di inserimento del testo. Si può selezionare un conto dalla lista usando il mouse o i tasti &Up;/&Down;. Se si usa la tastiera, bisogna confermare la scelta premendo il tasto &Enter;. </para>
@@ -181,7 +181,7 @@
 	</imageobject>
 	<textobject>
 	<phrase
->Widget delle categorie</phrase>
+>Oggetto delle categorie</phrase>
 	</textobject>
 	</mediaobject>
 </screenshot>

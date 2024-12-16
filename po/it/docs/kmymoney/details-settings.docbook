@@ -568,7 +568,7 @@
 ></term>
     <listitem>
       <para
->La selezione di questa opzione fa in modo che il registro mostri tutte le informazioni per le transazioni visualizzate, con righe separate nell colonna dei dettagli per Categoria, Etichette e per Promemoria. Se non è selezionata, Categoria, Etichette e Promemoria non saranno visualizzate.</para>
+>La selezione di questa opzione fa in modo che il registro mostri tutte le informazioni per le transazioni visualizzate, con righe separate nellacolonna dei dettagli per Categoria, Etichette e per Promemoria. Se non è selezionata, Categoria, Etichette e Promemoria non saranno visualizzate.</para>
       <para
 >Questa opzione ha lo stesso effetto della selezione dell'opzione di menu <link linkend="reference.menus.settings.transactiondetail"
 >Mostra dettagli della transazione</link

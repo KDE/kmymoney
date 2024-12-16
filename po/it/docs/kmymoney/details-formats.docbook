@@ -80,7 +80,7 @@
   <para
 >Se è stata selezionata la <link linkend="details.formats.encrypted"
 >cifratura</link
->, questo file verrà memorizzato in modo cifrato. </para>
+>, il file sarà memorizzato con cifratura. </para>
 </note>
 
 <para

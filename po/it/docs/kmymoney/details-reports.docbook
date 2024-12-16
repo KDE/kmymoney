@@ -20,7 +20,7 @@
 <title
 >Problemi noti</title>
   <para
->I recenti aggiornamenti di questo capitolo lo aggiornano per quanto riguarda effettivamente la selezione, la configurazione, la visualizzazione, l'esportazione e il salvataggio dei report. Tuttavia, ci sono problemi noti con il contenuto di alcuni report che saranno affrontati più dettagliatamente in un futuro aggiornamento, sia di &kmymoney; stesso così come diquesto manuale. Questi sono elencati di seguito per informazione e per evitare sorprese e inutili segnalazioni di bug. </para>
+>I recenti aggiornamenti di questo capitolo lo aggiornano per quanto riguarda effettivamente la selezione, la configurazione, la visualizzazione, l'esportazione e il salvataggio dei report. Tuttavia, ci sono problemi noti con il contenuto di alcuni report che saranno affrontati più dettagliatamente in un futuro aggiornamento, sia di &kmymoney; stesso così come di questo manuale. Questi sono elencati di seguito per informazione e per evitare sorprese e inutili segnalazioni di bug. </para>
 
   <itemizedlist>
     <listitem>
@@ -47,21 +47,21 @@
 <para>
 <screenshot>
 	<screeninfo
->Vista dei Report</screeninfo>
+>Vista dei report</screeninfo>
 	<mediaobject>
 	<imageobject>
 	<imagedata fileref="reports_view-all.png" format="PNG"/>
 	</imageobject>
 	<textobject>
 	<phrase
->Vista dei Report</phrase>
+>Vista dei report</phrase>
 	</textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
 <para
->La vista dei Report visualizza tutti i report disponibili, raggruppandoli in base alle intestazioni seguenti. </para>
+>La vista dei report visualizza tutti i report disponibili, raggruppandoli in base alle intestazioni seguenti. </para>
 
 <sect2>
 <title
@@ -190,7 +190,7 @@
 
 <sect1 id="details.reports.working">
 <title
->Gestione dei report</title>
+>Lavorare con i report</title>
 
 <para
 >Esiste una serie di azioni che è possibile intraprendere su ogni report. È possibile accedere ad alcuni di queste facendo clic con il pulsante destro del mouse sul nome del report nell'elenco dei report e selezionando l'azione dal menu contestuale. Queste includono: </para>

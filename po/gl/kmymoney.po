@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2024-12-14 11:36+0100\n"
+"PO-Revision-Date: 2024-12-16 01:18+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -6443,7 +6443,8 @@ msgstr "Montando %1"
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr ""
-"Xa existe unha salvagarda de hoxe nese dispositivo. Desexa substituíla?"
+"Xa existe un ficheiro de salvagarda de hoxe nese dispositivo. Quere "
+"substituílo?"
 
 #: kmymoney/kmymoney.cpp:2428
 #, kde-format
@@ -10382,7 +10383,7 @@ msgstr "Importar CSV"
 #: kmymoney/plugins/csv/import/csvwizard.cpp:950
 #, kde-format
 msgid "Make QIF File"
-msgstr "Crear un perfil QIF"
+msgstr "Crear un ficheiro QIF"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:987
 #, kde-format
@@ -15012,7 +15013,7 @@ msgstr "Use isto para eliminar o orzamento escollido."
 #: kmymoney/views/kpayeesview.ui:76 kmymoney/views/ktagsview.ui:84
 #, kde-format
 msgid "Del"
-msgstr "Borrar"
+msgstr "Supr"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_budgetList)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:101
@@ -16102,11 +16103,12 @@ msgstr "Semana de %1"
 msgid "No Institution"
 msgstr "Sen entidade"
 
+# skip-rule: trasno-empty
 #: kmymoney/plugins/views/reports/core/querytable.cpp:748
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1880
 #, kde-format
 msgid "[Empty Payee]"
-msgstr "[Sen beneficiario]"
+msgstr "[Sen beneficiaria]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:792
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1912
@@ -16934,7 +16936,7 @@ msgstr "Copiar"
 #: kmymoney/plugins/views/reports/reportcontrol.ui:102
 #, kde-format
 msgid "Export this report as an HTML or CSV file"
-msgstr "Exportar este informe en formato HTML ou CSV"
+msgstr "Exportar este informe como un ficheiro HTML ou CSV."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonDelete)
 #: kmymoney/plugins/views/reports/reportcontrol.ui:118
@@ -18234,8 +18236,8 @@ msgid ""
 "This combo box lists all the secret keys you have in your keyring. Select "
 "the one you want to use for encryption when saving to a file."
 msgstr ""
-"Esta lista despregábel enumera todas as chaves secretas que ten no seu "
-"chaveiro. Escolla a que queira usar para gardar nun ficheiro."
+"Esta lista despregábel lista as chaves secretas do seu chaveiro. Seleccione "
+"a que queira usar para cifrar ao gardar un ficheiro."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #. i18n: ectx: property (title), widget (KEditListWidget, kcfg_GpgRecipientList)
@@ -18359,7 +18361,7 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:37
 #, kde-format
 msgid "Number of backup files to keep"
-msgstr "Número de salvagardas que manter"
+msgstr "Número de ficheiros de salvagarda que manter"
 
 #. i18n: ectx: label, entry (AutoSavePeriod), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:43
@@ -20370,7 +20372,7 @@ msgstr "Seguro que quere retirar todas as etiquetas escollidas?"
 #: kmymoney/views/ktagsview.cpp:626
 #, kde-format
 msgid "Remove Tag"
-msgstr "Borrar a etiqueta"
+msgstr "Retirar a etiqueta"
 
 #: kmymoney/views/ktagsview.cpp:663
 #, kde-format

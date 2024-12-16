@@ -73,7 +73,7 @@
 >. Si aprirà una finestra con le stesse tre schede della finestra di creazione delle nuove categorie: Generale, Gerarchia e Imposte. Ogni scheda consente di modificare determinati dettagli della categoria. </para>
 
 <para
->La scheda Generale consente di modificare il nome della categoria, eventuali note immesse al momento della creazione della categoria, il numero dell'ultimo controllo e lo stato della casella di controllo richiesta per l'assegnazione del centro di costo. Le voci Tipo, Valuta e Prezzo non possono essere modificate dai loro valori iniziali. </para>
+>La scheda Generale consente di modificare il nome della categoria, eventuali note immesse al momento della creazione della categoria, il numero dell'ultimo assegno e lo stato della casella di controllo richiesta per l'assegnazione del centro di costo. Le voci Tipo, Valuta e Prezzo non possono essere modificate dai loro valori iniziali. </para>
 
 <para
 >La scheda Gerarchia consente di cambiare la categoria superiore facendo clic su un'altra categoria in questa vista della gerarchia delle categorie. In una versione precedente di &kmymoney;, era possibile cambiare la categoria superiore tramite trascinamento e rilascio. Il ritorno di questa funzionalità è atteso in una versione futura dell'applicazione. </para>
