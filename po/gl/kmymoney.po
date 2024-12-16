@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-14 02:39+0000\n"
-"PO-Revision-Date: 2024-12-14 11:36+0100\n"
+"PO-Revision-Date: 2024-12-16 01:18+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -5647,7 +5647,8 @@ msgstr "Montando %1"
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr ""
-"Xa existe unha salvagarda de hoxe nese dispositivo. Desexa substituíla?"
+"Xa existe un ficheiro de salvagarda de hoxe nese dispositivo. Quere "
+"substituílo?"
 
 #: kmymoney/kmymoney.cpp:3924
 #, kde-format
@@ -10299,7 +10300,7 @@ msgstr "Importar CSV"
 #: kmymoney/plugins/csv/import/csvwizard.cpp:957
 #, kde-format
 msgid "Make QIF File"
-msgstr "Crear un perfil QIF"
+msgstr "Crear un ficheiro QIF"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:994
 #, kde-format
@@ -16130,11 +16131,12 @@ msgstr "Semana de %1"
 msgid "No Institution"
 msgstr "Sen entidade"
 
+# skip-rule: trasno-empty
 #: kmymoney/plugins/views/reports/core/querytable.cpp:793
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1909
 #, kde-format
 msgid "[Empty Payee]"
-msgstr "[Sen beneficiario]"
+msgstr "[Sen beneficiaria]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:827
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1942
@@ -17002,7 +17004,7 @@ msgstr "Novo"
 #: kmymoney/plugins/views/reports/reportcontrol.ui:86
 #, kde-format
 msgid "Export this report as an HTML or CSV file"
-msgstr "Exportar este informe en formato HTML ou CSV"
+msgstr "Exportar este informe como un ficheiro HTML ou CSV."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonDelete)
 #: kmymoney/plugins/views/reports/reportcontrol.ui:102
@@ -18237,8 +18239,8 @@ msgid ""
 "This combo box lists all the secret keys you have in your keyring. Select "
 "the one you want to use for encryption when saving to a file."
 msgstr ""
-"Esta lista despregábel enumera todas as chaves secretas que ten no seu "
-"chaveiro. Escolla a que queira usar para gardar nun ficheiro."
+"Esta lista despregábel lista as chaves secretas do seu chaveiro. Seleccione "
+"a que queira usar para cifrar ao gardar un ficheiro."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #. i18n: ectx: property (title), widget (KEditListWidget, kcfg_GpgRecipientList)
@@ -18356,7 +18358,7 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:33
 #, kde-format
 msgid "Number of backup files to keep"
-msgstr "Número de salvagardas que manter"
+msgstr "Número de ficheiros de salvagarda que manter"
 
 #. i18n: ectx: label, entry (AutoSavePeriod), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:39
@@ -18903,7 +18905,7 @@ msgstr "Non é posíbel abrir o ficheiro de modelo «%1»"
 #: kmymoney/templates/templatewriter.cpp:215
 #, kde-format
 msgid "Unable to upload to '%1'.<br />%2"
-msgstr "Non é posíbel enviar o ficheiro a «%1».<br />%2"
+msgstr "Non é posíbel enviar a «%1».<br />%2"
 
 #: kmymoney/views/investactivities.cpp:257
 #, kde-format
@@ -20162,7 +20164,7 @@ msgstr "Renomear"
 #: kmymoney/views/kpayeesview.ui:73 kmymoney/views/ktagsview.ui:84
 #, kde-format
 msgid "Del"
-msgstr "Borrar"
+msgstr "Supr"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_mergeButton)
 #: kmymoney/views/kpayeesview.ui:80
@@ -21479,15 +21481,14 @@ msgstr "Os valores preséntanse en %1."
 msgid "Deposit"
 msgstr "Imposición"
 
+# skip-rule: trasno-empty, trasno-search
 #: kmymoney/widgets/daterangedlg.cpp:72
 #, kde-format
 msgctxt "@info:tooltip Date range error"
 msgid ""
 "The date provided as start lies past the one provided for the end of the "
 "search. This will result in an empty set."
-msgstr ""
-"A data fornecida como inicial cae despois da fornecida como final da busca. "
-"Non haberá coincidencias."
+msgstr "A data inicial é posterior á final. Non haberá coincidencias."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
 #: kmymoney/widgets/daterangedlg.ui:22
