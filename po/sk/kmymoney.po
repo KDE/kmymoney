@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-14 02:39+0000\n"
+"POT-Creation-Date: 2024-12-17 02:06+0000\n"
 "PO-Revision-Date: 2020-01-02 16:30+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -141,14 +141,14 @@ msgstr ""
 "Tieto transakcie budú ignorované."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:745
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1443
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1447
 #, kde-format
 msgid "Security not found"
 msgstr "Bezpečnosť nenájdená"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:790
 #: kmymoney/converter/mymoneystatementreader.cpp:793
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1427
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1431
 #, kde-format
 msgid "Statement Importer"
 msgstr "Importer informácií"
@@ -210,7 +210,7 @@ msgstr ""
 "\"%1\"."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1047
-#: kmymoney/kmymoneyutils.cpp:572
+#: kmymoney/kmymoneyutils.cpp:576
 #, kde-format
 msgid "New payee/receiver"
 msgstr "Nový doručiteľ/príjemca"
@@ -626,10 +626,10 @@ msgid "Backup location:"
 msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3924
-#: kmymoney/kmymoney.cpp:3995 kmymoney/kmymoney.cpp:4011
-#: kmymoney/kmymoney.cpp:4017 kmymoney/kmymoney.cpp:4031
-#: kmymoney/kmymoney.cpp:4033
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3932
+#: kmymoney/kmymoney.cpp:4003 kmymoney/kmymoney.cpp:4019
+#: kmymoney/kmymoney.cpp:4025 kmymoney/kmymoney.cpp:4039
+#: kmymoney/kmymoney.cpp:4041
 #, kde-format
 msgid "Backup"
 msgstr "Zálohovať"
@@ -2173,7 +2173,7 @@ msgstr "Celkovo za všetky podiely"
 msgid "VAT account"
 msgstr "Účet VAT"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:549 kmymoney/kmymoney.cpp:433
+#: kmymoney/dialogs/knewaccountdlg.cpp:549 kmymoney/kmymoney.cpp:439
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:188
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:370
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:73
@@ -2181,7 +2181,7 @@ msgstr "Účet VAT"
 msgid "Asset"
 msgstr "Aktíva"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:551 kmymoney/kmymoney.cpp:434
+#: kmymoney/dialogs/knewaccountdlg.cpp:551 kmymoney/kmymoney.cpp:440
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:189
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:378
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:75
@@ -2189,7 +2189,7 @@ msgstr "Aktíva"
 msgid "Liability"
 msgstr "Pasíva"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:553 kmymoney/kmymoney.cpp:435
+#: kmymoney/dialogs/knewaccountdlg.cpp:553 kmymoney/kmymoney.cpp:441
 #: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1809
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
@@ -2198,7 +2198,7 @@ msgstr "Pasíva"
 msgid "Income"
 msgstr "Príjem"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:555 kmymoney/kmymoney.cpp:436
+#: kmymoney/dialogs/knewaccountdlg.cpp:555 kmymoney/kmymoney.cpp:442
 #: kmymoney/models/ledgerfilterbase.cpp:97
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:79
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:191
@@ -3768,12 +3768,12 @@ msgstr "Ikony"
 msgid "Plugins"
 msgstr "Moduly"
 
-#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:132
+#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:136
 #, kde-format
 msgid "CSV profile <b>%1</b> already exists.<br>Do you want to overwrite it?"
 msgstr "CSV súbor <b>%1</b> už existuje.<br>Naozaj ho chcete prepísať?"
 
-#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:135
+#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:139
 #, kde-format
 msgid "CSV Profile Already Exists"
 msgstr "CSV Profil už existuje"
@@ -4835,7 +4835,7 @@ msgctxt "Roles in project"
 msgid "CSV import/export"
 msgstr "CSV import/export"
 
-#: kmymoney/kmymoney.cpp:437 kmymoney/models/equitiesmodel.cpp:424
+#: kmymoney/kmymoney.cpp:443 kmymoney/models/equitiesmodel.cpp:424
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:192
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:408
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:78
@@ -4843,19 +4843,19 @@ msgstr "CSV import/export"
 msgid "Equity"
 msgstr "Majetok"
 
-#: kmymoney/kmymoney.cpp:518
+#: kmymoney/kmymoney.cpp:524
 #, kde-format
 msgid "The file has been changed, save it?"
 msgstr "Súbor bol zmenený, uložiť?"
 
-#: kmymoney/kmymoney.cpp:519
+#: kmymoney/kmymoney.cpp:525
 #, fuzzy, kde-format
 #| msgid "Save to file"
 msgctxt "@title:window"
 msgid "Save file"
 msgstr "Uložiť do súboru"
 
-#: kmymoney/kmymoney.cpp:892
+#: kmymoney/kmymoney.cpp:898
 #, kde-format
 msgid ""
 "<p>The account \"%1\" was previously created as loan account but some "
@@ -4869,39 +4869,39 @@ msgstr ""
 "KMyMoney verzie 0.8.7 alebo novšej a staršej ako verzia 0.9 na opravu "
 "problému.</p>"
 
-#: kmymoney/kmymoney.cpp:894
+#: kmymoney/kmymoney.cpp:900
 #, kde-format
 msgid "Account problem"
 msgstr "Chyba účtu"
 
-#: kmymoney/kmymoney.cpp:913
+#: kmymoney/kmymoney.cpp:919
 #, kde-format
 msgid "Fix transactions"
 msgstr "Opraviť transakcie"
 
-#: kmymoney/kmymoney.cpp:1182
+#: kmymoney/kmymoney.cpp:1188
 #, kde-format
 msgid "Untitled"
 msgstr "Bez názvu"
 
-#: kmymoney/kmymoney.cpp:1356
+#: kmymoney/kmymoney.cpp:1364
 #, kde-format
 msgid "Unable to match the selected transactions"
 msgstr "Nemožno priradiť vybrané transakcie"
 
-#: kmymoney/kmymoney.cpp:1383
+#: kmymoney/kmymoney.cpp:1391
 #, kde-format
 msgid "Unable to unmatch the selected transactions"
 msgstr "Nemožno zrušiť zhodu vybraných transakcií"
 
-#: kmymoney/kmymoney.cpp:1551
+#: kmymoney/kmymoney.cpp:1559
 #, fuzzy, kde-format
 #| msgid "New account..."
 msgctxt "@action New file/database"
 msgid "New book..."
 msgstr "Nový účet..."
 
-#: kmymoney/kmymoney.cpp:1718
+#: kmymoney/kmymoney.cpp:1726
 #, kde-format
 msgid ""
 "This is the consistency check log, use the context menu to copy or save it."
@@ -4909,247 +4909,247 @@ msgstr ""
 "Toto je kontrolný záznam konzistencie, použite kontextovú ponuku na "
 "kopírovanie alebo uloženie."
 
-#: kmymoney/kmymoney.cpp:1731
+#: kmymoney/kmymoney.cpp:1739
 #, kde-format
 msgid "Copy to clipboard"
 msgstr "Kopírovať do schránky"
 
-#: kmymoney/kmymoney.cpp:1732
+#: kmymoney/kmymoney.cpp:1740
 #, kde-format
 msgid "Save to file"
 msgstr "Uložiť do súboru"
 
-#: kmymoney/kmymoney.cpp:1858
+#: kmymoney/kmymoney.cpp:1866
 #, kde-format
 msgid "Backup..."
 msgstr "Záloha..."
 
-#: kmymoney/kmymoney.cpp:1859
+#: kmymoney/kmymoney.cpp:1867
 #, kde-format
 msgid "Statement file..."
 msgstr "Súbor výpisu..."
 
-#: kmymoney/kmymoney.cpp:1860 kmymoney/kmymoney.cpp:1861
+#: kmymoney/kmymoney.cpp:1868 kmymoney/kmymoney.cpp:1869
 #, kde-format
 msgid "Account Template..."
 msgstr "Šablóna účtu..."
 
-#: kmymoney/kmymoney.cpp:1862
+#: kmymoney/kmymoney.cpp:1870
 #, kde-format
 msgid "Personal Data..."
 msgstr "Osobné Dáta."
 
-#: kmymoney/kmymoney.cpp:1864
+#: kmymoney/kmymoney.cpp:1872
 #, kde-format
 msgid "Dump Memory"
 msgstr "Výpis pamäti"
 
-#: kmymoney/kmymoney.cpp:1866
+#: kmymoney/kmymoney.cpp:1874
 #, kde-format
 msgid "File-Information..."
 msgstr "Informácia o súbore..."
 
-#: kmymoney/kmymoney.cpp:1870
+#: kmymoney/kmymoney.cpp:1878
 #, kde-format
 msgid "Find transaction..."
 msgstr "Nájsť transakciu..."
 
-#: kmymoney/kmymoney.cpp:1874
+#: kmymoney/kmymoney.cpp:1882
 #, kde-format
 msgid "Show Transaction Detail"
 msgstr "Zobraziť podrobnosti transakcie"
 
 #. i18n: ectx: label, entry (HideReconciledTransactions), group (List Options)
-#: kmymoney/kmymoney.cpp:1875 kmymoney/settings/kmymoney.kcfg:252
+#: kmymoney/kmymoney.cpp:1883 kmymoney/settings/kmymoney.kcfg:252
 #, kde-format
 msgid "Hide reconciled transactions"
 msgstr "Skryť zosúladené transakcie"
 
 #. i18n: ectx: label, entry (HideUnusedCategory), group (List Options)
-#: kmymoney/kmymoney.cpp:1876 kmymoney/settings/kmymoney.kcfg:224
+#: kmymoney/kmymoney.cpp:1884 kmymoney/settings/kmymoney.kcfg:224
 #, kde-format
 msgid "Hide unused categories"
 msgstr "Skryť nepoužité kategórie"
 
 #. i18n: ectx: label, entry (ShowAllAccounts), group (List Options)
-#: kmymoney/kmymoney.cpp:1877 kmymoney/settings/kmymoney.kcfg:228
+#: kmymoney/kmymoney.cpp:1885 kmymoney/settings/kmymoney.kcfg:228
 #, kde-format
 msgid "Show all accounts"
 msgstr "Ukazovať všetky účty"
 
-#: kmymoney/kmymoney.cpp:1881
+#: kmymoney/kmymoney.cpp:1889
 #, kde-format
 msgid "New institution..."
 msgstr "Nová inštitúcia..."
 
-#: kmymoney/kmymoney.cpp:1882
+#: kmymoney/kmymoney.cpp:1890
 #, kde-format
 msgid "Edit institution..."
 msgstr "Upraviť inštitúciu..."
 
-#: kmymoney/kmymoney.cpp:1883
+#: kmymoney/kmymoney.cpp:1891
 #, kde-format
 msgid "Delete institution..."
 msgstr "Vymazať inštitúciu..."
 
-#: kmymoney/kmymoney.cpp:1887
+#: kmymoney/kmymoney.cpp:1895
 #, kde-format
 msgid "New account..."
 msgstr "Nový účet..."
 
-#: kmymoney/kmymoney.cpp:1888
+#: kmymoney/kmymoney.cpp:1896
 #, kde-format
 msgid "Open ledger"
 msgstr "Otvoriť účtovnú knihu"
 
-#: kmymoney/kmymoney.cpp:1889
+#: kmymoney/kmymoney.cpp:1897
 #, kde-format
 msgid "Reconcile..."
 msgstr "Vysporiadať..."
 
-#: kmymoney/kmymoney.cpp:1890
+#: kmymoney/kmymoney.cpp:1898
 #, kde-format
 msgctxt "Finish reconciliation"
 msgid "Finish"
 msgstr "Dokončiť"
 
-#: kmymoney/kmymoney.cpp:1891
+#: kmymoney/kmymoney.cpp:1899
 #, fuzzy, kde-format
 #| msgid "Postal Code:"
 msgctxt "Postpone reconciliation"
 msgid "Postpone"
 msgstr "PSČ:"
 
-#: kmymoney/kmymoney.cpp:1892
+#: kmymoney/kmymoney.cpp:1900
 #, fuzzy, kde-format
 #| msgid "Cancel"
 msgctxt "Cancel reconciliation"
 msgid "Cancel"
 msgstr "Zrušiť"
 
-#: kmymoney/kmymoney.cpp:1893
+#: kmymoney/kmymoney.cpp:1901
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgid "Report reconciliation"
 msgstr "Posledné zosúladenie"
 
-#: kmymoney/kmymoney.cpp:1894
+#: kmymoney/kmymoney.cpp:1902
 #, kde-format
 msgid "Edit account..."
 msgstr "Upraviť účet..."
 
-#: kmymoney/kmymoney.cpp:1895
+#: kmymoney/kmymoney.cpp:1903
 #, kde-format
 msgid "Delete account..."
 msgstr "&Odstrániť účet..."
 
-#: kmymoney/kmymoney.cpp:1896
+#: kmymoney/kmymoney.cpp:1904
 #, kde-format
 msgid "Close account"
 msgstr "Uzavrieť účet"
 
-#: kmymoney/kmymoney.cpp:1897
+#: kmymoney/kmymoney.cpp:1905
 #, kde-format
 msgid "Reopen account"
 msgstr "Znovu otvoriť účet"
 
-#: kmymoney/kmymoney.cpp:1898
+#: kmymoney/kmymoney.cpp:1906
 #, kde-format
 msgid "Transaction report"
 msgstr "Výkaz transakcie"
 
-#: kmymoney/kmymoney.cpp:1899
+#: kmymoney/kmymoney.cpp:1907
 #, kde-format
 msgid "Show balance chart..."
 msgstr "Ukazovať zostatkový graf..."
 
-#: kmymoney/kmymoney.cpp:1900
+#: kmymoney/kmymoney.cpp:1908
 #, fuzzy, kde-format
 #| msgid "Unmap account..."
 msgid "Map account..."
 msgstr "Zrušiť mapovanie účtu..."
 
-#: kmymoney/kmymoney.cpp:1901
+#: kmymoney/kmymoney.cpp:1909
 #, kde-format
 msgid "Unmap account..."
 msgstr "Zrušiť mapovanie účtu..."
 
-#: kmymoney/kmymoney.cpp:1902
+#: kmymoney/kmymoney.cpp:1910
 #, kde-format
 msgid "Update account..."
 msgstr "Aktualizovať účet..."
 
-#: kmymoney/kmymoney.cpp:1903
+#: kmymoney/kmymoney.cpp:1911
 #, kde-format
 msgid "Update all accounts..."
 msgstr "Aktualizovať všetky účty..."
 
-#: kmymoney/kmymoney.cpp:1907
+#: kmymoney/kmymoney.cpp:1915
 #, kde-format
 msgid "New category..."
 msgstr "Nová kategória..."
 
-#: kmymoney/kmymoney.cpp:1908
+#: kmymoney/kmymoney.cpp:1916
 #, kde-format
 msgid "Edit category..."
 msgstr "Upraviť kategóriu..."
 
-#: kmymoney/kmymoney.cpp:1909
+#: kmymoney/kmymoney.cpp:1917
 #, kde-format
 msgid "Delete category..."
 msgstr "Vymazať kategóriu..."
 
-#: kmymoney/kmymoney.cpp:1913
+#: kmymoney/kmymoney.cpp:1921
 #, kde-format
 msgid "Currencies..."
 msgstr "Meny..."
 
-#: kmymoney/kmymoney.cpp:1914
+#: kmymoney/kmymoney.cpp:1922
 #, kde-format
 msgid "Prices..."
 msgstr "Ceny..."
 
-#: kmymoney/kmymoney.cpp:1915
+#: kmymoney/kmymoney.cpp:1923
 #, kde-format
 msgid "Update Stock and Currency Prices..."
 msgstr "Aktualizovať akciové a menové ceny..."
 
-#: kmymoney/kmymoney.cpp:1916
+#: kmymoney/kmymoney.cpp:1924
 #, kde-format
 msgid "Consistency Check"
 msgstr "Kontrolovať účet"
 
-#: kmymoney/kmymoney.cpp:1917
+#: kmymoney/kmymoney.cpp:1925
 #, kde-format
 msgid "Performance-Test"
 msgstr "Test výkonnosti"
 
-#: kmymoney/kmymoney.cpp:1918
+#: kmymoney/kmymoney.cpp:1926
 #, kde-format
 msgid "Calculator..."
 msgstr "Kalkulačka..."
 
-#: kmymoney/kmymoney.cpp:1922
+#: kmymoney/kmymoney.cpp:1930
 #, kde-format
 msgid "Enable all messages"
 msgstr "Povoliť všetky správy"
 
-#: kmymoney/kmymoney.cpp:1926 kmymoney/views/kwelcomepage.cpp:82
+#: kmymoney/kmymoney.cpp:1934 kmymoney/views/kwelcomepage.cpp:82
 #, kde-format
 msgid "Get help from our community"
 msgstr "Získať pomoc od našej komunity"
 
-#: kmymoney/kmymoney.cpp:1927 kmymoney/views/kwelcomepage.cpp:84
+#: kmymoney/kmymoney.cpp:1935 kmymoney/views/kwelcomepage.cpp:84
 #, kde-format
 msgid "See what's new in this version"
 msgstr "Pozrieť, čo je nové v tejto verzii"
 
-#: kmymoney/kmymoney.cpp:1928 kmymoney/views/kwelcomepage.cpp:80
+#: kmymoney/kmymoney.cpp:1936 kmymoney/views/kwelcomepage.cpp:80
 #, kde-format
 msgid "Visit our website"
 msgstr "Navštíviť vašu webovú stránku"
 
-#: kmymoney/kmymoney.cpp:1932
+#: kmymoney/kmymoney.cpp:1940
 #, fuzzy, kde-format
 #| msgid "%1 transaction\n"
 #| msgid_plural "%1 transactions\n"
@@ -5157,101 +5157,101 @@ msgctxt "New transaction button"
 msgid "New transaction"
 msgstr "%1 prevod\n"
 
-#: kmymoney/kmymoney.cpp:1933
+#: kmymoney/kmymoney.cpp:1941
 #, kde-format
 msgctxt "Edit transaction button"
 msgid "Edit"
 msgstr "Upraviť"
 
-#: kmymoney/kmymoney.cpp:1934
+#: kmymoney/kmymoney.cpp:1942
 #, kde-format
 msgctxt "Enter transaction"
 msgid "Enter"
 msgstr "Vstup"
 
-#: kmymoney/kmymoney.cpp:1935
+#: kmymoney/kmymoney.cpp:1943
 #, kde-format
 msgctxt "Edit split button"
 msgid "Edit splits"
 msgstr "Upraviť rozdelenia"
 
-#: kmymoney/kmymoney.cpp:1936
+#: kmymoney/kmymoney.cpp:1944
 #, kde-format
 msgctxt "Cancel transaction edit"
 msgid "Cancel"
 msgstr "Zrušiť"
 
-#: kmymoney/kmymoney.cpp:1937
+#: kmymoney/kmymoney.cpp:1945
 #, kde-format
 msgctxt "Delete transaction"
 msgid "Delete"
 msgstr "Vymazať"
 
-#: kmymoney/kmymoney.cpp:1938
+#: kmymoney/kmymoney.cpp:1946
 #, kde-format
 msgctxt "Duplicate transaction"
 msgid "Duplicate"
 msgstr "Duplikovať"
 
-#: kmymoney/kmymoney.cpp:1939
+#: kmymoney/kmymoney.cpp:1947
 #, fuzzy, kde-format
 #| msgid "Add shares"
 msgctxt "Add reversing transaction"
 msgid "Add reversing"
 msgstr "Pridať akcie"
 
-#: kmymoney/kmymoney.cpp:1940
+#: kmymoney/kmymoney.cpp:1948
 #, kde-format
 msgctxt "Accept 'imported' and 'matched' transaction"
 msgid "Accept"
 msgstr "Akceptovať"
 
-#: kmymoney/kmymoney.cpp:1941
+#: kmymoney/kmymoney.cpp:1949
 #, kde-format
 msgctxt "Toggle reconciliation flag"
 msgid "Toggle"
 msgstr "Prepnúť"
 
-#: kmymoney/kmymoney.cpp:1942
+#: kmymoney/kmymoney.cpp:1950
 #, kde-format
 msgctxt "Mark transaction cleared"
 msgid "Cleared"
 msgstr "Zmazané"
 
-#: kmymoney/kmymoney.cpp:1943
+#: kmymoney/kmymoney.cpp:1951
 #, kde-format
 msgctxt "Mark transaction reconciled"
 msgid "Reconciled"
 msgstr "Vysporiadané"
 
-#: kmymoney/kmymoney.cpp:1944
+#: kmymoney/kmymoney.cpp:1952
 #, kde-format
 msgctxt "Mark transaction not reconciled"
 msgid "Not reconciled"
 msgstr "Nezosúladené"
 
-#: kmymoney/kmymoney.cpp:1945
+#: kmymoney/kmymoney.cpp:1953
 #, fuzzy, kde-format
 #| msgid "Move transaction to..."
 msgctxt "Move transaction"
 msgid "Move transaction"
 msgstr "Presunúť transakciu do..."
 
-#: kmymoney/kmymoney.cpp:1946
+#: kmymoney/kmymoney.cpp:1954
 #, fuzzy, kde-format
 #| msgid "Show transaction form"
 msgctxt "Show transaction"
 msgid "Show transaction"
 msgstr "Ukazovať formulár transakcie"
 
-#: kmymoney/kmymoney.cpp:1947
+#: kmymoney/kmymoney.cpp:1955
 #, fuzzy, kde-format
 #| msgid "Show Transaction Detail"
 msgctxt "Display transaction details"
 msgid "Show transaction details"
 msgstr "Zobraziť podrobnosti transakcie"
 
-#: kmymoney/kmymoney.cpp:1949
+#: kmymoney/kmymoney.cpp:1957
 #, fuzzy, kde-format
 #| msgctxt "To open a new report"
 #| msgid "&Open"
@@ -5259,230 +5259,230 @@ msgctxt "Open URL"
 msgid "Open URL"
 msgstr "&Otvoriť"
 
-#: kmymoney/kmymoney.cpp:1950
+#: kmymoney/kmymoney.cpp:1958
 #, kde-format
 msgctxt "Select all transactions"
 msgid "Select all"
 msgstr "Vybrať všetko"
 
-#: kmymoney/kmymoney.cpp:1951
+#: kmymoney/kmymoney.cpp:1959
 #, kde-format
 msgid "Go to account"
 msgstr "Prejsť do účtu"
 
-#: kmymoney/kmymoney.cpp:1952
+#: kmymoney/kmymoney.cpp:1960
 #, kde-format
 msgid "Go to payee"
 msgstr "Prejsť na príjemcu"
 
-#: kmymoney/kmymoney.cpp:1953
+#: kmymoney/kmymoney.cpp:1961
 #, kde-format
 msgid "Create scheduled transaction..."
 msgstr "Vytvoriť plánovanú transakciu..."
 
-#: kmymoney/kmymoney.cpp:1954
+#: kmymoney/kmymoney.cpp:1962
 #, kde-format
 msgid "Assign next number"
 msgstr "Priradiť nasledujúce číslo"
 
-#: kmymoney/kmymoney.cpp:1955
+#: kmymoney/kmymoney.cpp:1963
 #, kde-format
 msgctxt "Combine transactions"
 msgid "Combine"
 msgstr "Kombinovať"
 
-#: kmymoney/kmymoney.cpp:1956
+#: kmymoney/kmymoney.cpp:1964
 #, fuzzy, kde-format
 #| msgid "As of today"
 msgid "Move to today"
 msgstr "od dnešného dňa"
 
-#: kmymoney/kmymoney.cpp:1957
+#: kmymoney/kmymoney.cpp:1965
 #, kde-format
 msgid "Copy splits"
 msgstr "Kopírovať rozdelenia"
 
-#: kmymoney/kmymoney.cpp:1958
+#: kmymoney/kmymoney.cpp:1966
 #, kde-format
 msgid "Show filter widget"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1960
+#: kmymoney/kmymoney.cpp:1968
 #, kde-format
 msgid "New investment..."
 msgstr "Nová investícia..."
 
-#: kmymoney/kmymoney.cpp:1961
+#: kmymoney/kmymoney.cpp:1969
 #, kde-format
 msgid "Edit investment..."
 msgstr "Upraviť investíciu..."
 
-#: kmymoney/kmymoney.cpp:1962
+#: kmymoney/kmymoney.cpp:1970
 #, kde-format
 msgid "Delete investment..."
 msgstr "Odstrániť investíciu..."
 
-#: kmymoney/kmymoney.cpp:1963
+#: kmymoney/kmymoney.cpp:1971
 #, kde-format
 msgid "Online price update..."
 msgstr "Online cenová aktualizácia..."
 
-#: kmymoney/kmymoney.cpp:1964
+#: kmymoney/kmymoney.cpp:1972
 #, kde-format
 msgid "Manual price update..."
 msgstr "Ručná cenová aktualizácia..."
 
-#: kmymoney/kmymoney.cpp:1965
+#: kmymoney/kmymoney.cpp:1973
 #, fuzzy, kde-format
 #| msgid "Hide security"
 msgid "Edit security..."
 msgstr "Skryť cenný papier"
 
-#: kmymoney/kmymoney.cpp:1966
+#: kmymoney/kmymoney.cpp:1974
 #, fuzzy, kde-format
 #| msgid "Delete security"
 msgid "Delete security..."
 msgstr "Zmazať cenný papier"
 
-#: kmymoney/kmymoney.cpp:1969
+#: kmymoney/kmymoney.cpp:1977
 #, fuzzy, kde-format
 #| msgid "&New Schedule..."
 msgid "New schedule..."
 msgstr "&Nový plán"
 
-#: kmymoney/kmymoney.cpp:1970 kmymoney/kmymoney.cpp:1971
+#: kmymoney/kmymoney.cpp:1978 kmymoney/kmymoney.cpp:1979
 #, kde-format
 msgid "Edit scheduled transaction"
 msgstr "Upraviť plánovanú transakciu"
 
-#: kmymoney/kmymoney.cpp:1972
+#: kmymoney/kmymoney.cpp:1980
 #, kde-format
 msgid "Delete scheduled transaction"
 msgstr "Vymazať plánovanú transakciu"
 
-#: kmymoney/kmymoney.cpp:1973
+#: kmymoney/kmymoney.cpp:1981
 #, kde-format
 msgid "Duplicate scheduled transaction"
 msgstr "Duplikovať plánovanú transakciu"
 
-#: kmymoney/kmymoney.cpp:1974
+#: kmymoney/kmymoney.cpp:1982
 #, kde-format
 msgid "Enter next transaction..."
 msgstr "Zadať nasledujúcu transakciu..."
 
-#: kmymoney/kmymoney.cpp:1975
+#: kmymoney/kmymoney.cpp:1983
 #, kde-format
 msgid "Skip next transaction..."
 msgstr "Preskočiť nasledujúcu transakciu..."
 
-#: kmymoney/kmymoney.cpp:1977
+#: kmymoney/kmymoney.cpp:1985
 #, fuzzy, kde-format
 #| msgid "New payee"
 msgid "New payee..."
 msgstr "Nový príjemca"
 
-#: kmymoney/kmymoney.cpp:1978
+#: kmymoney/kmymoney.cpp:1986
 #, kde-format
 msgid "Rename payee"
 msgstr "Premenovať príjemcu"
 
-#: kmymoney/kmymoney.cpp:1979
+#: kmymoney/kmymoney.cpp:1987
 #, kde-format
 msgid "Delete payee"
 msgstr "Vymazať príjemcu"
 
-#: kmymoney/kmymoney.cpp:1980
+#: kmymoney/kmymoney.cpp:1988
 #, kde-format
 msgid "Merge payees"
 msgstr "Zlúčiť príjemcov"
 
-#: kmymoney/kmymoney.cpp:1982
+#: kmymoney/kmymoney.cpp:1990
 #, fuzzy, kde-format
 #| msgid "New tag"
 msgid "New tag..."
 msgstr "Nová značka"
 
-#: kmymoney/kmymoney.cpp:1983
+#: kmymoney/kmymoney.cpp:1991
 #, kde-format
 msgid "Rename tag"
 msgstr "Premenovať značku"
 
-#: kmymoney/kmymoney.cpp:1984
+#: kmymoney/kmymoney.cpp:1992
 #, kde-format
 msgid "Delete tag"
 msgstr "Odstrániť značku"
 
-#: kmymoney/kmymoney.cpp:1986
+#: kmymoney/kmymoney.cpp:1994
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Open report"
 msgstr "&Nový výkaz"
 
-#: kmymoney/kmymoney.cpp:1987
+#: kmymoney/kmymoney.cpp:1995
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "New report"
 msgstr "&Nový výkaz"
 
-#: kmymoney/kmymoney.cpp:1988
+#: kmymoney/kmymoney.cpp:1996
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Copy report"
 msgstr "&Nový výkaz"
 
-#: kmymoney/kmymoney.cpp:1989
+#: kmymoney/kmymoney.cpp:1997
 #, fuzzy, kde-format
 #| msgid "Configure this report"
 msgid "Configure report"
 msgstr "Nastaviť tento výkaz"
 
-#: kmymoney/kmymoney.cpp:1990
+#: kmymoney/kmymoney.cpp:1998
 #, fuzzy, kde-format
 #| msgid "Favorite reports"
 msgid "Export report"
 msgstr "Obľúbené výkazy"
 
-#: kmymoney/kmymoney.cpp:1991
+#: kmymoney/kmymoney.cpp:1999
 #, fuzzy, kde-format
 #| msgid "Delete Report?"
 msgid "Delete report"
 msgstr "Zmazať výkaz?"
 
-#: kmymoney/kmymoney.cpp:1992
+#: kmymoney/kmymoney.cpp:2000
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Close report"
 msgstr "&Nový výkaz"
 
-#: kmymoney/kmymoney.cpp:1993
+#: kmymoney/kmymoney.cpp:2001
 #, fuzzy, kde-format
 #| msgctxt "Toggle reconciliation flag"
 #| msgid "Toggle"
 msgid "Toggle chart"
 msgstr "Prepnúť"
 
-#: kmymoney/kmymoney.cpp:1994
+#: kmymoney/kmymoney.cpp:2002
 #, fuzzy, kde-format
 #| msgid "Edit credit transfer"
 msgid "Edit tab order"
 msgstr "Upraviť kreditný prevod"
 
-#: kmymoney/kmymoney.cpp:1997
+#: kmymoney/kmymoney.cpp:2005
 #, kde-format
 msgid "Test new feature"
 msgstr "Testovať novú funkciu"
 
-#: kmymoney/kmymoney.cpp:1998
+#: kmymoney/kmymoney.cpp:2006
 #, kde-format
 msgid "Debug Traces"
 msgstr "Ladiace stopy"
 
-#: kmymoney/kmymoney.cpp:2000
+#: kmymoney/kmymoney.cpp:2008
 #, kde-format
 msgid "Debug Timers"
 msgstr "Ladiace časovače"
 
-#: kmymoney/kmymoney.cpp:2019
+#: kmymoney/kmymoney.cpp:2027
 #, fuzzy, kde-format
 #| msgctxt "Button text for match transaction"
 #| msgid "Match"
@@ -5490,7 +5490,7 @@ msgctxt "Match transactions"
 msgid "Match"
 msgstr "Zhoda"
 
-#: kmymoney/kmymoney.cpp:2020
+#: kmymoney/kmymoney.cpp:2028
 #, fuzzy, kde-format
 #| msgctxt "Button text for unmatch transaction"
 #| msgid "Unmatch"
@@ -5498,45 +5498,45 @@ msgctxt "Unmatch transactions"
 msgid "Unmatch"
 msgstr "Zrušiť zhodu"
 
-#: kmymoney/kmymoney.cpp:2146
+#: kmymoney/kmymoney.cpp:2154
 #, fuzzy, kde-format
 #| msgid "Duplicate the current selected transactions"
 msgctxt "@info:tooltip"
 msgid "Start reconciling the currently selected account"
 msgstr "Duplikovať aktuálne vybrané transakcie"
 
-#: kmymoney/kmymoney.cpp:2147
+#: kmymoney/kmymoney.cpp:2155
 #, fuzzy, kde-format
 #| msgid "Postpone reconciliation"
 msgctxt "@info:tooltip"
 msgid "Postpone the current reconciliation"
 msgstr "Odložiť zosúladenie"
 
-#: kmymoney/kmymoney.cpp:2148
+#: kmymoney/kmymoney.cpp:2156
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgctxt "@info:tooltip"
 msgid "Finish the current reconciliation"
 msgstr "Posledné zosúladenie"
 
-#: kmymoney/kmymoney.cpp:2149
+#: kmymoney/kmymoney.cpp:2157
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgctxt "@info:tooltip"
 msgid "Cancel the current reconciliation"
 msgstr "Posledné zosúladenie"
 
-#: kmymoney/kmymoney.cpp:2257
+#: kmymoney/kmymoney.cpp:2265
 #, kde-format
 msgid "View back"
 msgstr "Spätný pohľad"
 
-#: kmymoney/kmymoney.cpp:2258
+#: kmymoney/kmymoney.cpp:2266
 #, kde-format
 msgid "View forward"
 msgstr "Pohľad vpred"
 
-#: kmymoney/kmymoney.cpp:2663
+#: kmymoney/kmymoney.cpp:2671
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
@@ -5545,12 +5545,12 @@ msgstr ""
 "Najmenej jedno rozdelenie vybraných transakcií bolo zosúladené. Prajete si "
 "aj tak vymazať transakcie?"
 
-#: kmymoney/kmymoney.cpp:2665
+#: kmymoney/kmymoney.cpp:2673
 #, kde-format
 msgid "Transaction already reconciled"
 msgstr "Transakcia je už zosúladená"
 
-#: kmymoney/kmymoney.cpp:2670
+#: kmymoney/kmymoney.cpp:2678
 #, kde-format
 msgid "Do you really want to delete the selected transaction?"
 msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -5558,24 +5558,24 @@ msgstr[0] "Naozaj chcete vymazať vybranú transakciu?"
 msgstr[1] "Naozaj chcete vymazať všetky %1 vybrané transakcie?"
 msgstr[2] "Naozaj chcete vymazať všetkých %1 vybraných transakcií?"
 
-#: kmymoney/kmymoney.cpp:2674
+#: kmymoney/kmymoney.cpp:2682
 #, kde-format
 msgid "Delete transaction"
 msgstr "Odstrániť transakciu"
 
-#: kmymoney/kmymoney.cpp:2751
+#: kmymoney/kmymoney.cpp:2759
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to duplicate transaction(s)"
 msgstr "Nemožno pridať transakcie"
 
-#: kmymoney/kmymoney.cpp:3039
+#: kmymoney/kmymoney.cpp:3047
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to modify transaction"
 msgstr "Nemožno pridať transakcie"
 
-#: kmymoney/kmymoney.cpp:3175
+#: kmymoney/kmymoney.cpp:3183
 #, fuzzy, kde-format
 #| msgid ""
 #| "At least one split of the selected transactions has been reconciled. Do "
@@ -5587,14 +5587,14 @@ msgstr ""
 "Najmenej jedno rozdelenie vybraných transakcií bolo zosúladené. Prajete si "
 "aj tak vymazať transakcie?"
 
-#: kmymoney/kmymoney.cpp:3177
+#: kmymoney/kmymoney.cpp:3185
 #, fuzzy, kde-format
 #| msgid "Transaction already reconciled"
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "Transakcia je už zosúladená"
 
-#: kmymoney/kmymoney.cpp:3182
+#: kmymoney/kmymoney.cpp:3190
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -5604,20 +5604,20 @@ msgstr[0] "Naozaj chcete vymazať vybranú transakciu?"
 msgstr[1] "Naozaj chcete vymazať všetky %1 vybrané transakcie?"
 msgstr[2] "Naozaj chcete vymazať všetkých %1 vybraných transakcií?"
 
-#: kmymoney/kmymoney.cpp:3186
+#: kmymoney/kmymoney.cpp:3194
 #, fuzzy, kde-format
 #| msgid "Any transaction"
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "Ľubovoľné prevody"
 
-#: kmymoney/kmymoney.cpp:3271
+#: kmymoney/kmymoney.cpp:3279
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to accept transaction"
 msgstr "Nemožno pridať transakcie"
 
-#: kmymoney/kmymoney.cpp:3311
+#: kmymoney/kmymoney.cpp:3319
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has detected some overdue scheduled transactions for this "
@@ -5629,12 +5629,12 @@ msgstr ""
 "Aplikácia KMyMoney zistila, že niektoré plánované transakcie pre tento účet "
 "sú po termíne. Chcete teraz zadať tieto plánované transakcie?"
 
-#: kmymoney/kmymoney.cpp:3314
+#: kmymoney/kmymoney.cpp:3322
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "Plánované transakcie nájdené"
 
-#: kmymoney/kmymoney.cpp:3389
+#: kmymoney/kmymoney.cpp:3397
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have closed this account. It remains in the system because you have "
@@ -5654,61 +5654,61 @@ msgstr ""
 "všetky účty</b> alebo zrušením výberu nastavenia <b>Neukazovať uzatvorené "
 "účty</b>."
 
-#: kmymoney/kmymoney.cpp:3391
+#: kmymoney/kmymoney.cpp:3399
 #, kde-format
 msgid "Information"
 msgstr "Informácia"
 
-#: kmymoney/kmymoney.cpp:3495 kmymoney/kmymoney.cpp:3591
+#: kmymoney/kmymoney.cpp:3503 kmymoney/kmymoney.cpp:3599
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "Žiadny súbor KMyMoney otvorený"
 
-#: kmymoney/kmymoney.cpp:3528 kmymoney/kmymoney.cpp:3530
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1364
+#: kmymoney/kmymoney.cpp:3536 kmymoney/kmymoney.cpp:3538
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1365
 #: kmymoney/plugins/xml/xmlstorage.cpp:416
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "Pripravený."
 
-#: kmymoney/kmymoney.cpp:3595
+#: kmymoney/kmymoney.cpp:3603
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "Pozrieť osobné dáta..."
 
-#: kmymoney/kmymoney.cpp:3602
+#: kmymoney/kmymoney.cpp:3610
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "Upraviť osobné dáta"
 
-#: kmymoney/kmymoney.cpp:3617
+#: kmymoney/kmymoney.cpp:3625
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr "Nemožno uložiť používateľskú informáciu: %1"
 
-#: kmymoney/kmymoney.cpp:3625
+#: kmymoney/kmymoney.cpp:3633
 #, kde-format
 msgid "Importing account templates."
 msgstr "Import šablóny konta"
 
-#: kmymoney/kmymoney.cpp:3639
+#: kmymoney/kmymoney.cpp:3647
 #, fuzzy, kde-format
 #| msgid "Unable to import template(s): %1, thrown in %2:%3"
 msgid "Unable to import template(s)"
 msgstr "Nemožno importovať šablónu(y): %1, vložené do %2:%3"
 
-#: kmymoney/kmymoney.cpp:3647
+#: kmymoney/kmymoney.cpp:3655
 #, kde-format
 msgid "Exporting account templates."
 msgstr "Export šablón účtu."
 
-#: kmymoney/kmymoney.cpp:3653
+#: kmymoney/kmymoney.cpp:3661
 #, kde-format
 msgid "Save as..."
 msgstr "Uložiť ako..."
 
-#: kmymoney/kmymoney.cpp:3654
+#: kmymoney/kmymoney.cpp:3662
 #, fuzzy, kde-format
 #| msgid ""
 #| "*.kmt|KMyMoney template files\n"
@@ -5718,24 +5718,24 @@ msgstr ""
 "*.kmt|Súbory šablón KMyMoney\n"
 "*|Všetky súbory"
 
-#: kmymoney/kmymoney.cpp:3685
+#: kmymoney/kmymoney.cpp:3693
 #, fuzzy, kde-format
 #| msgid "Template Error"
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "Cbyba šablóny "
 
-#: kmymoney/kmymoney.cpp:3703
+#: kmymoney/kmymoney.cpp:3711
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr "Súbor <b>%1</b> už existuje. Naozaj ho chcete prepísať?"
 
-#: kmymoney/kmymoney.cpp:3705 kmymoney/plugins/csv/export/csvexporter.cpp:102
+#: kmymoney/kmymoney.cpp:3713 kmymoney/plugins/csv/export/csvexporter.cpp:106
 #, kde-format
 msgid "File already exists"
 msgstr "Súbor už existuje"
 
-#: kmymoney/kmymoney.cpp:3830
+#: kmymoney/kmymoney.cpp:3838
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
@@ -5743,13 +5743,13 @@ msgid ""
 msgstr ""
 "Súbor musí byť uložený pred tým, než sa môže zálohovať. Chcete pokračovať?"
 
-#: kmymoney/kmymoney.cpp:3832
+#: kmymoney/kmymoney.cpp:3840
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3849
+#: kmymoney/kmymoney.cpp:3857
 #, kde-format
 msgid ""
 "The current implementation of the backup functionality only supports local "
@@ -5758,70 +5758,70 @@ msgstr ""
 "Súčasná implementácia funkcie zálohovania podporuje iba lokálne súbory ako "
 "zdrojové súbory. Váš aktuálny zdrojový súbor je '%1'."
 
-#: kmymoney/kmymoney.cpp:3851
+#: kmymoney/kmymoney.cpp:3859
 #, kde-format
 msgid "Local files only"
 msgstr "Iba lokálne súbory"
 
-#: kmymoney/kmymoney.cpp:3890
+#: kmymoney/kmymoney.cpp:3898
 #, kde-format
 msgid "Mounting %1"
 msgstr "Pripájam %1"
 
-#: kmymoney/kmymoney.cpp:3924
+#: kmymoney/kmymoney.cpp:3932
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr "Záložný súbor pre dnešok existuje na tomto zariadení. Nahradiť?"
 
-#: kmymoney/kmymoney.cpp:3924
+#: kmymoney/kmymoney.cpp:3932
 #, kde-format
 msgid "&Replace"
 msgstr "&Nahradiť"
 
-#: kmymoney/kmymoney.cpp:3932
+#: kmymoney/kmymoney.cpp:3940
 #, fuzzy, kde-format
 #| msgid "Unable to create account: %1"
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
 msgstr "Nemožno vytvoriť účet: %1"
 
-#: kmymoney/kmymoney.cpp:3937
+#: kmymoney/kmymoney.cpp:3945
 #, kde-format
 msgid "Writing %1"
 msgstr "Zapisuje sa %1"
 
-#: kmymoney/kmymoney.cpp:3958
+#: kmymoney/kmymoney.cpp:3966
 #, kde-format
 msgid "Unmounting %1"
 msgstr "Odpájam %1"
 
-#: kmymoney/kmymoney.cpp:3995
+#: kmymoney/kmymoney.cpp:4003
 #, kde-format
 msgid "Error mounting device"
 msgstr "Chyba zariadenia"
 
-#: kmymoney/kmymoney.cpp:4010 kmymoney/kmymoney.cpp:4029
+#: kmymoney/kmymoney.cpp:4018 kmymoney/kmymoney.cpp:4037
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "Hotovo"
 
-#: kmymoney/kmymoney.cpp:4011 kmymoney/kmymoney.cpp:4031
+#: kmymoney/kmymoney.cpp:4019 kmymoney/kmymoney.cpp:4039
 #, kde-format
 msgid "File successfully backed up"
 msgstr "Súbor bol úspešne zálohovaný"
 
-#: kmymoney/kmymoney.cpp:4017
+#: kmymoney/kmymoney.cpp:4025
 #, kde-format
 msgid "Error copying file to device"
 msgstr "Chyba pri kopírovaní súboru na zariadenie"
 
-#: kmymoney/kmymoney.cpp:4033
+#: kmymoney/kmymoney.cpp:4041
 #, kde-format
 msgid "Error unmounting device"
 msgstr "Chyba zariadenie"
 
-#: kmymoney/kmymoney.cpp:4080
+#: kmymoney/kmymoney.cpp:4088
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5838,30 +5838,30 @@ msgstr ""
 "Prosím, kliknite na Nie ponechanie sumy ako %2,\n"
 "Prosím, kliknite na Zrušiť na zrušenie vytvorenia účtu."
 
-#: kmymoney/kmymoney.cpp:4090
+#: kmymoney/kmymoney.cpp:4098
 #, fuzzy, kde-format
 #| msgid "Opening balance problem"
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "Problém s počiatočným stavom"
 
-#: kmymoney/kmymoney.cpp:4101
+#: kmymoney/kmymoney.cpp:4109
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "Nemožno pridať účet: %1"
 
-#: kmymoney/kmymoney.cpp:4171
+#: kmymoney/kmymoney.cpp:4179
 #, kde-format
 msgid "Running consistency check..."
 msgstr "Spustenie kontroly konzistencie..."
 
-#: kmymoney/kmymoney.cpp:4178
+#: kmymoney/kmymoney.cpp:4186
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "Kontrola konzistencie zlyhala: %1"
 
-#: kmymoney/kmymoney.cpp:4188
+#: kmymoney/kmymoney.cpp:4196
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -5870,7 +5870,7 @@ msgstr ""
 "Kontrola konzistencie nezistila žiadne problémy v dátach. Podrobnosti sú "
 "uvedené nižšie."
 
-#: kmymoney/kmymoney.cpp:4190
+#: kmymoney/kmymoney.cpp:4198
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5881,29 +5881,29 @@ msgstr ""
 "nižšie. Tie problémy, ktoré nemohli byť opravené automaticky, treba vyriešiť "
 "používateľom."
 
-#: kmymoney/kmymoney.cpp:4193
+#: kmymoney/kmymoney.cpp:4201
 #, kde-format
 msgid "Consistency check result"
 msgstr "Výsledok kontroly konzistencie"
 
-#: kmymoney/kmymoney.cpp:4259
+#: kmymoney/kmymoney.cpp:4267
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Kontrola na plánované transakcie po termíne..."
 
-#: kmymoney/kmymoney.cpp:4449
+#: kmymoney/kmymoney.cpp:4457
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr ""
 "Než budete môcť importovať výpis, musíte najskôr vybrať súbor KMyMoney."
 
-#: kmymoney/kmymoney.cpp:4454
+#: kmymoney/kmymoney.cpp:4462
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Importovanie výpisu cez Web Connect"
 
-#: kmymoney/kmymoney.cpp:4466
+#: kmymoney/kmymoney.cpp:4474
 #, fuzzy, kde-format
 #| msgid ""
 #| "Unable to import %1 using %2 plugin.  The plugin returned the following "
@@ -5916,71 +5916,71 @@ msgstr ""
 "Nemožno importovať %1 pomocou zásuvného modulu %2. Zásuvný modul vrátil "
 "nasledujúcu chybu: %3"
 
-#: kmymoney/kmymoney.cpp:4466 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
+#: kmymoney/kmymoney.cpp:4474 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
 #, kde-format
 msgid "Importing error"
 msgstr "Chyba importu"
 
-#: kmymoney/kmymoney.cpp:4494
+#: kmymoney/kmymoney.cpp:4502
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Všetky správy boli povolené."
 
-#: kmymoney/kmymoney.cpp:4494
+#: kmymoney/kmymoney.cpp:4502
 #, kde-format
 msgid "All messages"
 msgstr "Všetky správy"
 
-#: kmymoney/kmymoney.cpp:4530
+#: kmymoney/kmymoney.cpp:4538
 #, kde-format
 msgid "Auto saving..."
 msgstr "Automatické uloženie..."
 
-#: kmymoney/kmymoney.cpp:4650
+#: kmymoney/kmymoney.cpp:4658
 #, kde-format
 msgid "Creating new document..."
 msgstr "Vytváram nový dokument..."
 
-#: kmymoney/kmymoney.cpp:4710
+#: kmymoney/kmymoney.cpp:4718
 #, fuzzy, kde-format
 #| msgid "Create a new profile"
 msgid "Couldn't create a new file."
 msgstr "Vytvoriť nový profil"
 
-#: kmymoney/kmymoney.cpp:4721
+#: kmymoney/kmymoney.cpp:4729
 #, kde-format
 msgid "Open a file."
 msgstr "Otvoriť súbor."
 
-#: kmymoney/kmymoney.cpp:4735
+#: kmymoney/kmymoney.cpp:4743
 #, fuzzy, kde-format
 #| msgid "Could not load responsible plugin to view this task."
 msgid "Couldn't find any plugin for opening storage."
 msgstr "Nemôžem načítať zodpovedný plugin na zobrazenie tejto úlohy."
 
-#: kmymoney/kmymoney.cpp:4739
+#: kmymoney/kmymoney.cpp:4747
 #, fuzzy, kde-format
 #| msgctxt "All files (Filefilter)"
 #| msgid "All files"
 msgid "All files (*)"
 msgstr "Všetky súbory (*)"
 
-#: kmymoney/kmymoney.cpp:4752
+#: kmymoney/kmymoney.cpp:4760
 #, kde-format
 msgid "Loading file..."
 msgstr "Načítavam súbor..."
 
-#: kmymoney/kmymoney.cpp:4758
+#: kmymoney/kmymoney.cpp:4766
 #, kde-format
 msgid "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
 msgstr "<p>Súbor <b>%1</b> je už otvorený v inej inštancii KMyMoney</p>"
 
-#: kmymoney/kmymoney.cpp:4758
+#: kmymoney/kmymoney.cpp:4766
 #, kde-format
 msgid "Duplicate open"
 msgstr "Duplikovať otvorené"
 
-#: kmymoney/kmymoney.cpp:4765
+#: kmymoney/kmymoney.cpp:4773
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5989,54 +5989,54 @@ msgstr ""
 "<p><b>%1</b> je buď neplatný názov súboru alebo súbor neexistuje. Môžete "
 "otvoriť iný súbor alebo vytvoriť nový.</p>"
 
-#: kmymoney/kmymoney.cpp:4765
+#: kmymoney/kmymoney.cpp:4773
 #, kde-format
 msgid "File not found"
 msgstr "Súbor nenájdený"
 
-#: kmymoney/kmymoney.cpp:4796
+#: kmymoney/kmymoney.cpp:4804
 #, fuzzy, kde-format
 #| msgid "Cannot open file as requested. Error was: %1"
 msgid "Cannot open file as requested."
 msgstr "Nie je možné otvoriť súbor, ako je požadované. Chyba bola: %1"
 
-#: kmymoney/kmymoney.cpp:4803
+#: kmymoney/kmymoney.cpp:4811
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
 "necessary plugin is enabled."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4814
+#: kmymoney/kmymoney.cpp:4822
 #, kde-format
 msgid "Saving file..."
 msgstr "Ukladá sa súbor..."
 
-#: kmymoney/kmymoney.cpp:4826
+#: kmymoney/kmymoney.cpp:4834
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your data."
 msgstr "Zlyhalo uloženie: %1"
 
-#: kmymoney/kmymoney.cpp:4832
+#: kmymoney/kmymoney.cpp:4840
 #, fuzzy, kde-format
 #| msgid "Could not load responsible plugin to view this task."
 msgid "Couldn't find suitable plugin to save your data."
 msgstr "Nemôžem načítať zodpovedný plugin na zobrazenie tejto úlohy."
 
-#: kmymoney/kmymoney.cpp:4838
+#: kmymoney/kmymoney.cpp:4846
 #, fuzzy, kde-format
 #| msgid "Saving file..."
 msgid "Saving file as...."
 msgstr "Ukladá sa súbor..."
 
-#: kmymoney/kmymoney.cpp:4854
+#: kmymoney/kmymoney.cpp:4862
 #, fuzzy, kde-format
 #| msgid "Could not load responsible plugin to view this task."
 msgid "Couldn't find any plugin for saving data."
 msgstr "Nemôžem načítať zodpovedný plugin na zobrazenie tejto úlohy."
 
-#: kmymoney/kmymoney.cpp:4883
+#: kmymoney/kmymoney.cpp:4891
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your storage."
@@ -6313,66 +6313,66 @@ msgstr "Zmazať cenný papier"
 msgid "Delete prices"
 msgstr "Vymazať cenu..."
 
-#: kmymoney/kmymoneyutils.cpp:548
-#: kmymoney/plugins/qif/import/kimportdlg.cpp:138
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:432
+#: kmymoney/kmymoneyutils.cpp:552
+#: kmymoney/plugins/qif/import/kimportdlg.cpp:142
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:436
 #: kmymoney/templates/templateloader.cpp:78
 #, kde-format
 msgid "Error while loading file '%1'."
 msgstr "Chyba pri načítavaní súboru '%1'."
 
-#: kmymoney/kmymoneyutils.cpp:550
-#: kmymoney/plugins/qif/import/kimportdlg.cpp:138
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:434
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1006
+#: kmymoney/kmymoneyutils.cpp:554
+#: kmymoney/plugins/qif/import/kimportdlg.cpp:142
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:438
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1010
 #: kmymoney/templates/templateloader.cpp:80
 #, kde-format
 msgid "File access error"
 msgstr "Chyba pri prístupe k súboru"
 
-#: kmymoney/kmymoneyutils.cpp:568 kmymoney/views/kpayeesview.cpp:562
+#: kmymoney/kmymoneyutils.cpp:572 kmymoney/views/kpayeesview.cpp:562
 #, kde-format
 msgid "New Payee"
 msgstr "Nový Príjemca"
 
-#: kmymoney/kmymoneyutils.cpp:570
+#: kmymoney/kmymoneyutils.cpp:574
 #, fuzzy, kde-format
 #| msgid "Do you want to add <b>%1</b> as payer/receiver?"
 msgid "<qt>Do you want to add <b>%1</b> as payee/receiver?</qt>"
 msgstr "Chcete sa pridať <b>%1</b> ako doručiteľa/príjemcu?"
 
-#: kmymoney/kmymoneyutils.cpp:609
+#: kmymoney/kmymoneyutils.cpp:613
 #, kde-format
 msgid "Unable to add payee"
 msgstr "Nemožno pridať príjemcu"
 
-#: kmymoney/kmymoneyutils.cpp:621 kmymoney/views/ktagsview.cpp:641
+#: kmymoney/kmymoneyutils.cpp:625 kmymoney/views/ktagsview.cpp:641
 #, kde-format
 msgid "New Tag"
 msgstr "Nová značka"
 
-#: kmymoney/kmymoneyutils.cpp:623
+#: kmymoney/kmymoneyutils.cpp:627
 #, fuzzy, kde-format
 #| msgid "Do you want to add <b>%1</b> as tag?"
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 msgstr "Chcete pridať <b>%1</b> ako značku?"
 
-#: kmymoney/kmymoneyutils.cpp:625
+#: kmymoney/kmymoneyutils.cpp:629
 #, kde-format
 msgid "New tag"
 msgstr "Nová značka"
 
-#: kmymoney/kmymoneyutils.cpp:659
+#: kmymoney/kmymoneyutils.cpp:663
 #, kde-format
 msgid "Unable to add tag"
 msgstr "Nemožno pridať značku"
 
-#: kmymoney/kmymoneyutils.cpp:676 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:680 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "Nie je možné pridať inštitúciu: %1"
 
-#: kmymoney/kmymoneyutils.cpp:733
+#: kmymoney/kmymoneyutils.cpp:737
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:50
 #, fuzzy, kde-format
 #| msgid "The statement has been processed with the following results:"
@@ -6382,7 +6382,7 @@ msgstr[0] "Príkaz bol spracovaný s nasledovnými výsledkami:"
 msgstr[1] "Príkaz bol spracovaný s nasledovnými výsledkami:"
 msgstr[2] "Príkaz bol spracovaný s nasledovnými výsledkami:"
 
-#: kmymoney/kmymoneyutils.cpp:738
+#: kmymoney/kmymoneyutils.cpp:742
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:52
 #, fuzzy, kde-format
 #| msgid "Do not show transactions prior to"
@@ -6392,7 +6392,7 @@ msgstr[0] "Neukazovať transakcie pred"
 msgstr[1] "Neukazovať transakcie pred"
 msgstr[2] "Neukazovať transakcie pred"
 
-#: kmymoney/kmymoneyutils.cpp:739
+#: kmymoney/kmymoneyutils.cpp:743
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:53
 #, fuzzy, kde-format
 #| msgid "Statement stats"
@@ -9979,7 +9979,7 @@ msgctxt "CSV Exporter dialog title"
 msgid "CSV Exporter"
 msgstr "CSV exportér"
 
-#: kmymoney/plugins/csv/export/csvexporter.cpp:101
+#: kmymoney/plugins/csv/export/csvexporter.cpp:105
 #, fuzzy, kde-format
 #| msgid ""
 #| "The file <b>%1</b> already exists. Do you really want to overwrite it?"
@@ -11266,13 +11266,13 @@ msgstr "Zmazané"
 msgid "Calculate Fee"
 msgstr "Spočítať"
 
-#: kmymoney/plugins/csv/import/kcm_csvimporter.cpp:35
+#: kmymoney/plugins/csv/import/kcm_csvimporter.cpp:34
 #, kde-format
 msgctxt "@item:inlistbox No QIF profile defined"
 msgid "No profile setup"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/kcm_csvimporter.cpp:66
+#: kmymoney/plugins/csv/import/kcm_csvimporter.cpp:65
 #, fuzzy, kde-format
 #| msgid "Please select a profile type and enter a profile name."
 msgctxt "@info:tooltip No QIF profile defined"
@@ -11934,7 +11934,7 @@ msgstr "Plán%1"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1214
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1253
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1358
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1359
 #, kde-format
 msgid ""
 "Import failed:\n"
@@ -11945,17 +11945,17 @@ msgstr ""
 "\n"
 "%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1362
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1363
 #, kde-format
 msgid "Import complete"
 msgstr "Import kompletný"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1419
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1420
 #, kde-format
 msgid "Disguise your wealth"
 msgstr "Zamaskujte svoje bohatstvo"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1420
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1421
 #, kde-format
 msgid ""
 "Each monetary value on your file will be multiplied by a random number "
@@ -11974,33 +11974,33 @@ msgstr ""
 "hodnoty.\n"
 "Tieto čísla nebudú uložené v súbore."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1435
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1436
 #, kde-format
 msgid "Loading commodities..."
 msgstr "Načítavam komodity..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1487
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1488
 #, kde-format
 msgid "Loading prices..."
 msgstr "Načítavam ceny..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1491
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1499
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1492
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1500
 #, kde-format
 msgid "Imported History"
 msgstr "Importovaná História"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1520
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1521
 #, kde-format
 msgid "Loading accounts..."
 msgstr "Načítavam účty..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1665
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1666
 #, kde-format
 msgid "Loading transactions..."
 msgstr "Načítavam.prevody"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1768
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1769
 #, kde-format
 msgid ""
 "Account or Category %1, transaction date %2; split contains invalid value; "
@@ -12009,37 +12009,37 @@ msgstr ""
 "Účet alebo kategória %1, dátum transakcie %2; rozdelenie obsahuje neplatnú "
 "hodnotu; prosím, skontrolujte"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1810
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1811
 #, kde-format
 msgid "Imported Transaction"
 msgstr "Importované prevody"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1859
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1860
 #, kde-format
 msgid "Loading templates..."
 msgstr "Načítavam.šablóny..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1873
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1874
 #, kde-format
 msgid "Unknown payee"
 msgstr "Neznámy príjemca"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2001
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2002
 #, kde-format
 msgid "Schedule %1 contains unknown action (key = %2, type = %3)"
 msgstr "Harmonogram %1 obsahuje neznámu akciu (kľúč = %2, typ = %3)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2009
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2010
 #, kde-format
 msgid "Schedule %1 contains multiple actions; only one has been imported"
 msgstr "Harmonogram %1 obsahuje viac akcií; len jedna bola importovaná"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2015
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2016
 #, kde-format
 msgid "Schedule %1 contains no valid splits"
 msgstr "Harmonogram %1 obsahuje neplatné rozdelenia"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2020
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2021
 #, kde-format
 msgid ""
 "Schedule %1 appears to contain a formula. GnuCash formulae are not "
@@ -12047,18 +12047,18 @@ msgid ""
 msgstr ""
 "Harmonogram %1 zrejme obsahuje vzorec. Vzorce GnuCash nie sú konvertibilné"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2070
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2071
 #, kde-format
 msgid "Loading schedules..."
 msgstr "Načítavam.úlohy"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2158
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2159
 #, kde-format
 msgid "Schedule %1 has interval of %2 which is not currently available"
 msgstr ""
 "Harmonogram %1 má interval %2, ktorý nie je v súčasnej dobe k dispozícii"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2165
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2166
 #, kde-format
 msgid ""
 "Schedule %1 contains unknown interval specification; please check for "
@@ -12067,7 +12067,7 @@ msgstr ""
 "Harmonogram %1 obsahuje špecifikáciu neznámeho intervalu; prosím, "
 "skontrolujte správne fungovanie"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2201
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2202
 #, kde-format
 msgid ""
 "Schedule %1 contains a deferred interval specification; please check for "
@@ -12076,12 +12076,12 @@ msgstr ""
 "Harmonogram %1 obsahuje špecifikáciu odloženého intervalu; prosím, "
 "skontrolujte správne fungovanie"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2226
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2227
 #, kde-format
 msgid "Schedule %1 dropped at user request"
 msgstr "Harmonogram %1 spustený na žiadosť používateľa"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2279
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2280
 #, kde-format
 msgid ""
 "Your main currency seems to be %1 (%2); do you want to set this as your base "
@@ -12089,24 +12089,24 @@ msgid ""
 msgstr ""
 "Vašou hlavnou menou sa zdá byť %1 (%2); chcete ju nastaviť ako základnú menu?"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2297
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2298
 #, kde-format
 msgctxt "Button to show more detailed data"
 msgid "More"
 msgstr "Viac"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2299
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2300
 #, kde-format
 msgctxt "Button to close the current dialog"
 msgid "Done"
 msgstr "Hotovo"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2301
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2302
 #, kde-format
 msgid "Save Report"
 msgstr "Správa o uložení"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2318
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2319
 #, fuzzy, kde-format
 #| msgid ""
 #| "Problems were encountered in converting schedule '%1'.\n"
@@ -12116,7 +12116,7 @@ msgstr ""
 "Nastali problémy pri harmonograme konverzie '%1'.\n"
 "Chcete ho teraz skontrolovať alebo upraviť?"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2343
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2344
 #, kde-format
 msgid ""
 "Found:\n"
@@ -12125,7 +12125,7 @@ msgstr ""
 "Nájdené:\n"
 "\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2344
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2345
 #, kde-format
 msgid "%1 commodity (equity)\n"
 msgid_plural "%1 commodities (equities)\n"
@@ -12133,7 +12133,7 @@ msgstr[0] "%1 komodita (majetok)\n"
 msgstr[1] "%1 komodity (majetok)\n"
 msgstr[2] "%1 komodít (majetok)\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2345
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2346
 #, kde-format
 msgid "%1 price\n"
 msgid_plural "%1 prices\n"
@@ -12141,7 +12141,7 @@ msgstr[0] "%1 cena\n"
 msgstr[1] "%1 ceny\n"
 msgstr[2] "%1 cien\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2346
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2347
 #, kde-format
 msgid "%1 account\n"
 msgid_plural "%1 accounts\n"
@@ -12149,7 +12149,7 @@ msgstr[0] "%1 účet\n"
 msgstr[1] "%1 účty\n"
 msgstr[2] "%1 účtov\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2347
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2348
 #, kde-format
 msgid "%1 transaction\n"
 msgid_plural "%1 transactions\n"
@@ -12157,7 +12157,7 @@ msgstr[0] "%1 prevod\n"
 msgstr[1] "%1 prevody\n"
 msgstr[2] "%1 prevodov\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2348
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2349
 #, kde-format
 msgid "%1 schedule\n"
 msgid_plural "%1 schedules\n"
@@ -12165,12 +12165,12 @@ msgstr[0] "%1 harmonogram\n"
 msgstr[1] "%1 harmonogramy\n"
 msgstr[2] "%1 harmonogramov\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2351
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2352
 #, kde-format
 msgid "No inconsistencies were detected\n"
 msgstr "Žiadne nezrovnalosti neboli zistené\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2353
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2354
 #, kde-format
 msgid "%1 inconsistency was detected and corrected\n"
 msgid_plural "%1 inconsistencies were detected and corrected\n"
@@ -12178,7 +12178,7 @@ msgstr[0] "%1 nezrovnalosť bola zistená a opravená\n"
 msgstr[1] "%1 nezrovnalosti boli zistené a opravené\n"
 msgstr[2] "%1 nezrovnalostí bolo zistených a opravených\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2358
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2359
 #, kde-format
 msgid "%1 orphan account was created\n"
 msgid_plural "%1 orphan accounts were created\n"
@@ -12186,7 +12186,7 @@ msgstr[0] "Bol vytvorený %1 osirelý účet\n"
 msgstr[1] "Boli vytvorené %1 osirelé účty\n"
 msgstr[2] "Bolo vytvorených %1 osirelých účtov\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2363
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2364
 #, kde-format
 msgid "%1 possible schedule problem was noted\n"
 msgid_plural "%1 possible schedule problems were noted\n"
@@ -12194,30 +12194,30 @@ msgstr[0] "Bol zaznamenaný %1 možný problém harmonogramu\n"
 msgstr[1] "Boli zaznamenané %1 možné problémy harmonogramu\n"
 msgstr[2] "Bolo zaznamenaných %1 možných problémov harmonogramu\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2368
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2369
 #, kde-format
 msgid "Small Business Features (Customers, Invoices, etc.)"
 msgstr "Funkcie Small Business (zákazníci, faktúry, atď.)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2369
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2370
 #: kmymoney/plugins/views/budget/budgetview.cpp:53
 #, kde-format
 msgid "Budgets"
 msgstr "Rozpočty"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2370
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2371
 #, kde-format
 msgid "Lots"
 msgstr "Veľa"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2372
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2373
 #, kde-format
 msgid "The following features found in your file are not currently supported:"
 msgstr ""
 "Nasledujúce vlastnosti nájdené vo vašom súbore nie sú v súčasnej dobe "
 "podporované:"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2375
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2376
 #, kde-format
 msgid ""
 "\n"
@@ -12228,17 +12228,17 @@ msgstr ""
 "\n"
 "Pre ďalšie stlačiť Viac"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2390
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2391
 #, kde-format
 msgid "Save report as"
 msgstr "Uložiť výkaz ako"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2426
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2427
 #, kde-format
 msgid "Orphan created from unknown GnuCash account"
 msgstr "Sirota vytvorená z neznámeho GnuCash účtu"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2441
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2442
 #, kde-format
 msgid ""
 "One or more transactions contain a reference to an otherwise unknown "
@@ -12248,7 +12248,7 @@ msgstr ""
 "Jeden alebo viac transakcií obsahuje odkaz na inak neznámy účet\n"
 "Účet aktív s názvom %1 bol vytvorený na držanie dát"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2475
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2476
 #, kde-format
 msgid ""
 "An Investment account must be a child of an Asset account\n"
@@ -12257,7 +12257,7 @@ msgstr ""
 "Investičný účet musí byť potomkom účtu aktív\n"
 "Účet %1 sa uloží pod hlavným účtom aktív"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2482
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2483
 #, kde-format
 msgid ""
 "An Income account must be a child of an Income account\n"
@@ -12266,7 +12266,7 @@ msgstr ""
 "Príjmový účet musí byť potomkom príjmového účtu\n"
 "Účet %1 sa uloží pod hlavným príjmovým účtom"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2489
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2490
 #, kde-format
 msgid ""
 "An Expense account must be a child of an Expense account\n"
@@ -12275,44 +12275,44 @@ msgstr ""
 "Výdajový účet musí byť potomkom výdajového účtu\n"
 "Účet %1 sa uloží pod hlavným výdavkovým účtom"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2537
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2538
 #, kde-format
 msgid "Enter the investment account name "
 msgstr "Zadať názov investičného účtu "
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2538
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2539
 #, kde-format
 msgid "My Investments"
 msgstr "Moje investície"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2576
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2577
 #, kde-format
 msgid "Select parent investment account or enter new name. Stock %1"
 msgstr "Vybrať rodičovský investičný účet alebo zadať nový názov. Akcia %1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2601
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2618
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2602
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2619
 #, kde-format
 msgid "%1 is not an Investment Account. Do you wish to make it one?"
 msgstr "%1 nie je investičný účet. Prajete si vytvoriť ho z neho?"
 
-#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:56
+#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:72
 #, kde-format
 msgid "Schedules to iCalendar"
 msgstr "Harmonogramy pre iCalendar"
 
-#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:76
+#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:92
 #, kde-format
 msgid "Schedules to iCalendar [%1]"
 msgstr "Harmonogramy pre iCalendar [%1]"
 
-#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:94
+#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:110
 #, kde-format
 msgctxt "ICS (Filefilter)"
 msgid "iCalendar files"
 msgstr "iCalendar súbory"
 
-#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:97
+#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:113
 #: kmymoney/plugins/views/reports/kreportsview.cpp:348
 #, kde-format
 msgid "Export as"
@@ -13067,13 +13067,13 @@ msgid "To confirm this order enter the tan displayed by your &generator"
 msgstr ""
 "Na potvrdenie tohto prevodu zadajte odtieň zobrazený na vašom generátore"
 
-#: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:203
+#: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:205
 #: kmymoney/plugins/ofx/import/ofxpartner.cpp:411
 #, kde-format
 msgid "The HTTP request failed."
 msgstr "HTTP požiadavka zlyhala"
 
-#: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:203
+#: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:205
 #: kmymoney/plugins/ofx/import/ofxpartner.cpp:411
 #, kde-format
 msgctxt "The HTTP request failed"
@@ -13913,7 +13913,7 @@ msgstr "Výber profilu QIF"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:219
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:129
-#: kmymoney/plugins/qif/import/kimportdlg.cpp:167
+#: kmymoney/plugins/qif/import/kimportdlg.cpp:171
 #, kde-format
 msgid "The default QIF profile"
 msgstr "Štandardný QIF profil"
@@ -14456,7 +14456,7 @@ msgstr "Bankový výpis"
 msgid "Other application"
 msgstr "Iná aplikácia"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:168
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:172
 #, fuzzy, kde-format
 #| msgctxt "Category name"
 #| msgid "Reinvested dividend"
@@ -14464,150 +14464,150 @@ msgctxt "Category name"
 msgid "Reinvested interest"
 msgstr "Reinvestované dividendy"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:171
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:175
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested dividend"
 msgstr "Reinvestované dividendy"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:174
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:178
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested dividend (long term)"
 msgstr "Reinvestované dividendy (dlhodobé)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:177
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:181
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested dividend (short term)"
 msgstr "Reinvestované dividendy (krátkodobé)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:180
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:184
 #, kde-format
 msgctxt "Category name"
 msgid "Dividend"
 msgstr "Dividenda"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:183
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:187
 #, kde-format
 msgctxt "Category name"
 msgid "Interest"
 msgstr "Úrok"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:186
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:190
 #, kde-format
 msgctxt "Category name"
 msgid "Capital Gain (short term)"
 msgstr "Kapitálový zisk (krátkodobý)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:189
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:193
 #, kde-format
 msgctxt "Category name"
 msgid "Capital Gain (mid term)"
 msgstr "Kapitálový zisk (strednodobý)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:192
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:196
 #, kde-format
 msgctxt "Category name"
 msgid "Capital Gain (long term)"
 msgstr "Kapitálový zisk (dlhodobý)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:195
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:199
 #, kde-format
 msgctxt "Category name"
 msgid "Returned capital"
 msgstr "Vrátený kapitál"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:198
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:202
 #, kde-format
 msgctxt "Category name"
 msgid "Miscellaneous income"
 msgstr "Rozličné príjmy"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:201
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:205
 #, kde-format
 msgctxt "Category name"
 msgid "Miscellaneous expense"
 msgstr "Rozličné výdavky"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:204
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:208
 #, kde-format
 msgctxt "Category name"
 msgid "Investment fees"
 msgstr "Investičné poplatky"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:206
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:210
 #, kde-format
 msgid "Unknown QIF type %1"
 msgstr "Neznámy typ QIF %1"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:365
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:369
 #, kde-format
 msgid "Date format selection"
 msgstr "Výber formátu dátumu"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:365
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:369
 #, kde-format
 msgid "Pick the date format that suits your input file"
 msgstr "Vyberte formát dátumu, ktorý vyhovuje vášmu vstupnému súboru"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:380
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:384
 #, kde-format
 msgid "Importing QIF..."
 msgstr "Importovanie QIF..."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:482
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:486
 #, kde-format
 msgid "Reading QIF..."
 msgstr "Čítanie QIF..."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:487
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:491
 #, kde-format
 msgid "Error while running the filter '%1'."
 msgstr "Chyba pri spustení filtra '%1'."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:489
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:493
 #, kde-format
 msgid "Filter error"
 msgstr "Chyba filtra"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:523
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:527
 #, kde-format
 msgctxt "QIF tag for liability account"
 msgid "Oth L"
 msgstr "Oth L"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:528
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:532
 #, kde-format
 msgctxt "QIF tag for investment account"
 msgid "Invst"
 msgstr "Invst"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:542
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:546
 #, kde-format
 msgctxt "QIF tag for category"
 msgid "Cat"
 msgstr "Mačka"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:545
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:549
 #, kde-format
 msgctxt "QIF tag for security"
 msgid "Security"
 msgstr "Cenný papier"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:548
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:552
 #, kde-format
 msgctxt "QIF tag for prices"
 msgid "Prices"
 msgstr "Ceny"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:557
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:561
 #, kde-format
 msgctxt "QIF tag for a class"
 msgid "Class"
 msgstr "Trieda"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:738
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:742
 #, kde-format
 msgid ""
 "The %1 account currently has an opening balance of %2. This QIF file reports "
@@ -14617,29 +14617,29 @@ msgstr ""
 "%1 účet má v súčasnej dobe počiatočný stav %2. Tento súbor QIF hlási "
 "počiatočný stav %3. Chcete prepísať aktuálny stav s tým zo súboru QIF?"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:739
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:743
 #, kde-format
 msgid "Overwrite opening balance"
 msgstr "Prepísať počiatočný stav"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:906
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:910
 #, kde-format
 msgid "Unable to find account: %1"
 msgstr "Nemožno nájsť účet: %1"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:920
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:930
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:955
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:924
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:934
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:959
 #, kde-format
 msgid "Autogenerated by QIF importer"
 msgstr "Automaticky generované importérom QIF"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:947
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:951
 #, kde-format
 msgid "QIF imported, no account name supplied"
 msgstr "QIF importovaný, nebol poskytnutý žiadny názov účtu"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:981
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:985
 #, kde-format
 msgid ""
 "KMyMoney has imported a second opening balance transaction into account <b>"
@@ -14650,18 +14650,18 @@ msgstr ""
 "<b>%1</b>, ktorý sa líši od toho, ktorý bol už nájdený v súbore. Prosím, "
 "opravte ho ručne, keď bude import hotový."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:981
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:985
 #, kde-format
 msgid "Opening balance problem"
 msgstr "Problém s počiatočným stavom"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1004
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1008
 #, kde-format
 msgid "Error while creating opening balance transaction"
 msgstr "Chyba pri vytváraní transakcie počiatočného stavu"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1083
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1311
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1087
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1315
 #, kde-format
 msgid ""
 "The date entry \"%1\" read from the file cannot be interpreted through the "
@@ -14678,13 +14678,13 @@ msgstr ""
 "\"Zrušiť\" sa preruší operácia importu. Potom môžete znovu spustiť import a "
 "a vybrať iný QIF profil alebo vytvoriť nový."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1088
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1316
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1092
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1320
 #, kde-format
 msgid "Invalid date format"
 msgstr "Neplatný formát dátumu"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1441
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1445
 #, kde-format
 msgid ""
 "This investment account does not contain the \"%1\" security.  Transactions "
@@ -14693,12 +14693,12 @@ msgstr ""
 "Tento investičný účet neobsahuje cenný papier \"%1\". Transakcie zahŕňajúce "
 "tento cenný papier budú ignorované."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1952
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1956
 #, kde-format
 msgid "%1 (Investment)"
 msgstr "%1 (Investícia)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1953
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1957
 #, kde-format
 msgid "Autogenerated by QIF importer from type Mutual account entry"
 msgstr "Automaticky generované importérom QIF z položky typu Podielového účtu"
@@ -15095,17 +15095,17 @@ msgstr ""
 "Otvorená %1 na %2 v %3.\n"
 "Napriek tomu otvoriť?"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:929
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:936
 #, kde-format
 msgid "Inserting online jobs."
 msgstr "Vkladám online úlohy."
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2026
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2033
 #, kde-format
 msgid "SQLite file %1 does not exist"
 msgstr "SQLite súbor %1 neexistuje"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2079
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2086
 #, kde-format
 msgid ""
 "Automatic database creation for type %1 is not currently implemented.\n"
@@ -15114,34 +15114,34 @@ msgstr ""
 "Automatická tvorba databázy typu %1 nie je v súčasnej dobe implementovaná.\n"
 "Prosím, vytvorte databázu %2 ručne"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2098
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2105
 #, kde-format
 msgid "Error in create database %1; do you have create permissions?"
 msgstr "Chyba pri vytváraní databázy %1; máte práva na vytvorenie?"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:136
+#: kmymoney/plugins/sql/sqlstorage.cpp:137
 #, kde-format
 msgid "Cannot open database %1\n"
 msgstr "Nie je možné otvoriť databázu %1\n"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:169
+#: kmymoney/plugins/sql/sqlstorage.cpp:170
 #, kde-format
 msgid "An unrecoverable error occurred while reading the database"
 msgstr "Pri čítaní databázy došlo k neodstrániteľnej chybe"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:171
-#: kmymoney/plugins/sql/sqlstorage.cpp:199
+#: kmymoney/plugins/sql/sqlstorage.cpp:172
+#: kmymoney/plugins/sql/sqlstorage.cpp:200
 #, kde-format
 msgid "Database malfunction"
 msgstr "Zlyhanie databázy"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:188
+#: kmymoney/plugins/sql/sqlstorage.cpp:189
 #: kmymoney/plugins/xml/xmlstorage.cpp:240
 #, kde-format
 msgid "Tried to access a file when it has not been opened"
 msgstr "Snaha o prístup k súboru, ktorý nebol otvorený"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:196
+#: kmymoney/plugins/sql/sqlstorage.cpp:197
 #, kde-format
 msgid ""
 "An unrecoverable error occurred while writing to the database.\n"
@@ -15150,32 +15150,32 @@ msgstr ""
 "Pri zápise do databázy došlo k neodstrániteľnej chybe.\n"
 "Môže byť aj poškodená."
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:231
+#: kmymoney/plugins/sql/sqlstorage.cpp:232
 #, kde-format
 msgid "Cannot save to current database."
 msgstr "Nie je možné uložiť do aktuálnej databázy."
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:236
+#: kmymoney/plugins/sql/sqlstorage.cpp:237
 #, kde-format
 msgid "Cannot save to current database: %1"
 msgstr "Nie je možné uložiť do aktuálnej databázy: %1"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:259
+#: kmymoney/plugins/sql/sqlstorage.cpp:260
 #, kde-format
 msgid "Database files (*.db *.sql)"
 msgstr "Databázové súbory (*.db *.sql)"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:265
+#: kmymoney/plugins/sql/sqlstorage.cpp:266
 #, kde-format
 msgid "Open database..."
 msgstr "Otvoriť databázu..."
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:270
+#: kmymoney/plugins/sql/sqlstorage.cpp:271
 #, kde-format
 msgid "Generate Database SQL"
 msgstr "Generovať SQL databázu"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:329
+#: kmymoney/plugins/sql/sqlstorage.cpp:330
 #, kde-format
 msgid ""
 "Database contains data which must be removed before using Save As.\n"
@@ -15185,7 +15185,7 @@ msgstr ""
 "ako.\n"
 "Chcete pokračovať?"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:349
+#: kmymoney/plugins/sql/sqlstorage.cpp:350
 #, kde-format
 msgid ""
 "Cannot open or create database %1.\n"
@@ -18381,32 +18381,32 @@ msgstr "Načítavam účty..."
 msgid "Getting list of backends."
 msgstr "Získavam zoznam backendov."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:139
-#: kmymoney/plugins/woob/woob.cpp:171
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:142
+#: kmymoney/plugins/woob/woob.cpp:172
 #, kde-format
 msgid "Connecting to bank..."
 msgstr "Pripájam sa do banky..."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:140
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:143
 #, kde-format
 msgid "Getting list of accounts from your bank."
 msgstr ""
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:166
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:173
 #, kde-format
 msgid ""
 "No backends available.\n"
 "Add one using woob config-qt."
 msgstr ""
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:179
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:186
 #, kde-format
 msgid ""
 "No accounts available.\n"
 "Check your backend configuration in woob config-qt."
 msgstr ""
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:188
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:195
 #, fuzzy, kde-format
 #| msgid "Store password"
 msgid "Incorrect password."
@@ -18446,7 +18446,7 @@ msgstr ""
 "Prosím, zvoľte <b>online</b> účet, ktorý chcete, aby bol mapovaný účtom "
 "<b>aplikácie</b>..."
 
-#: kmymoney/plugins/woob/woob.cpp:59
+#: kmymoney/plugins/woob/woob.cpp:60
 #, kde-format
 msgid ""
 "Woob plugin failed to fully initialize, most likely due to a missing or a "
@@ -18454,7 +18454,7 @@ msgid ""
 "it."
 msgstr ""
 
-#: kmymoney/plugins/woob/woob.cpp:65
+#: kmymoney/plugins/woob/woob.cpp:66
 #, kde-format
 msgid ""
 "Woob plugin failed to fully initialize, most likely due to a missing or a "
@@ -18462,13 +18462,13 @@ msgid ""
 "it."
 msgstr ""
 
-#: kmymoney/plugins/woob/woob.cpp:120
+#: kmymoney/plugins/woob/woob.cpp:121
 #, fuzzy, kde-format
 #| msgid "Weboob configuration"
 msgid "Woob configuration"
 msgstr "Nastavenie Weboob"
 
-#: kmymoney/plugins/woob/woob.cpp:172
+#: kmymoney/plugins/woob/woob.cpp:173
 #, kde-format
 msgid "Retrieving transactions..."
 msgstr "Získavam transakcie..."

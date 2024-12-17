@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-14 02:39+0000\n"
+"POT-Creation-Date: 2024-12-17 02:06+0000\n"
 "PO-Revision-Date: 2020-05-02 10:27+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -138,14 +138,14 @@ msgstr ""
 "väärtpaberita. Selliseid tehinguid eiratakse."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:745
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1443
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1447
 #, kde-format
 msgid "Security not found"
 msgstr "Väärtpaberit ei leitud"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:790
 #: kmymoney/converter/mymoneystatementreader.cpp:793
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1427
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1431
 #, kde-format
 msgid "Statement Importer"
 msgstr "Pangaväljavõtte importija"
@@ -206,7 +206,7 @@ msgstr ""
 "kõigis edasistes tehingutes maksesaaja \"%1\" kohta käiv teave."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1047
-#: kmymoney/kmymoneyutils.cpp:572
+#: kmymoney/kmymoneyutils.cpp:576
 #, kde-format
 msgid "New payee/receiver"
 msgstr "Uus maksesaaja"
@@ -608,10 +608,10 @@ msgid "Backup location:"
 msgstr "Varukoopiafaili asukoht::"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3924
-#: kmymoney/kmymoney.cpp:3995 kmymoney/kmymoney.cpp:4011
-#: kmymoney/kmymoney.cpp:4017 kmymoney/kmymoney.cpp:4031
-#: kmymoney/kmymoney.cpp:4033
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3932
+#: kmymoney/kmymoney.cpp:4003 kmymoney/kmymoney.cpp:4019
+#: kmymoney/kmymoney.cpp:4025 kmymoney/kmymoney.cpp:4039
+#: kmymoney/kmymoney.cpp:4041
 #, kde-format
 msgid "Backup"
 msgstr "Varundamine"
@@ -2139,7 +2139,7 @@ msgstr "Kõigi aktsiate hind"
 msgid "VAT account"
 msgstr "Käibemaksukonto"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:549 kmymoney/kmymoney.cpp:433
+#: kmymoney/dialogs/knewaccountdlg.cpp:549 kmymoney/kmymoney.cpp:439
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:188
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:370
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:73
@@ -2147,7 +2147,7 @@ msgstr "Käibemaksukonto"
 msgid "Asset"
 msgstr "Vara"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:551 kmymoney/kmymoney.cpp:434
+#: kmymoney/dialogs/knewaccountdlg.cpp:551 kmymoney/kmymoney.cpp:440
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:189
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:378
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:75
@@ -2155,7 +2155,7 @@ msgstr "Vara"
 msgid "Liability"
 msgstr "Kohustis"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:553 kmymoney/kmymoney.cpp:435
+#: kmymoney/dialogs/knewaccountdlg.cpp:553 kmymoney/kmymoney.cpp:441
 #: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1809
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
@@ -2164,7 +2164,7 @@ msgstr "Kohustis"
 msgid "Income"
 msgstr "Tulu"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:555 kmymoney/kmymoney.cpp:436
+#: kmymoney/dialogs/knewaccountdlg.cpp:555 kmymoney/kmymoney.cpp:442
 #: kmymoney/models/ledgerfilterbase.cpp:97
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:79
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:191
@@ -3760,12 +3760,12 @@ msgstr "Ikoonid"
 msgid "Plugins"
 msgstr "Pluginad"
 
-#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:132
+#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:136
 #, kde-format
 msgid "CSV profile <b>%1</b> already exists.<br>Do you want to overwrite it?"
 msgstr "CSV profiil <b>%1</b> on juba olemas.<br>Kas kirjutada see üle?"
 
-#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:135
+#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:139
 #, kde-format
 msgid "CSV Profile Already Exists"
 msgstr "CSV profiil on juba olemas"
@@ -4817,7 +4817,7 @@ msgctxt "Roles in project"
 msgid "CSV import/export"
 msgstr "CSV import/eksport"
 
-#: kmymoney/kmymoney.cpp:437 kmymoney/models/equitiesmodel.cpp:424
+#: kmymoney/kmymoney.cpp:443 kmymoney/models/equitiesmodel.cpp:424
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:192
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:408
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:78
@@ -4825,19 +4825,19 @@ msgstr "CSV import/eksport"
 msgid "Equity"
 msgstr "Finantsinstrument"
 
-#: kmymoney/kmymoney.cpp:518
+#: kmymoney/kmymoney.cpp:524
 #, kde-format
 msgid "The file has been changed, save it?"
 msgstr "Faili on muudetud, kas salvestada see?"
 
-#: kmymoney/kmymoney.cpp:519
+#: kmymoney/kmymoney.cpp:525
 #, fuzzy, kde-format
 #| msgid "Save to file"
 msgctxt "@title:window"
 msgid "Save file"
 msgstr "Salvesta faili"
 
-#: kmymoney/kmymoney.cpp:892
+#: kmymoney/kmymoney.cpp:898
 #, kde-format
 msgid ""
 "<p>The account \"%1\" was previously created as loan account but some "
@@ -4850,39 +4850,39 @@ msgstr ""
 "kasuta probleemi lahendamiseks KMyMoney versiooni 0.8.7 või uuem ja varasem "
 "kui 0.9.</p>"
 
-#: kmymoney/kmymoney.cpp:894
+#: kmymoney/kmymoney.cpp:900
 #, kde-format
 msgid "Account problem"
 msgstr "Konto probleem"
 
-#: kmymoney/kmymoney.cpp:913
+#: kmymoney/kmymoney.cpp:919
 #, kde-format
 msgid "Fix transactions"
 msgstr "Tehingute parandamine"
 
-#: kmymoney/kmymoney.cpp:1182
+#: kmymoney/kmymoney.cpp:1188
 #, kde-format
 msgid "Untitled"
 msgstr "Nimetu"
 
-#: kmymoney/kmymoney.cpp:1356
+#: kmymoney/kmymoney.cpp:1364
 #, kde-format
 msgid "Unable to match the selected transactions"
 msgstr "Valitud tehingute sobitamine nurjus"
 
-#: kmymoney/kmymoney.cpp:1383
+#: kmymoney/kmymoney.cpp:1391
 #, kde-format
 msgid "Unable to unmatch the selected transactions"
 msgstr "Valitud tehingutelt sobivuse eemaldamine nurjus"
 
-#: kmymoney/kmymoney.cpp:1551
+#: kmymoney/kmymoney.cpp:1559
 #, fuzzy, kde-format
 #| msgid "New account..."
 msgctxt "@action New file/database"
 msgid "New book..."
 msgstr "Uus konto..."
 
-#: kmymoney/kmymoney.cpp:1718
+#: kmymoney/kmymoney.cpp:1726
 #, kde-format
 msgid ""
 "This is the consistency check log, use the context menu to copy or save it."
@@ -4890,246 +4890,246 @@ msgstr ""
 "See on ühtlusekontrolli logi, kontekstimenüü abil saab seda kopeerida või "
 "salvestada."
 
-#: kmymoney/kmymoney.cpp:1731
+#: kmymoney/kmymoney.cpp:1739
 #, kde-format
 msgid "Copy to clipboard"
 msgstr "Kopeeri lõikepuhvrisse"
 
-#: kmymoney/kmymoney.cpp:1732
+#: kmymoney/kmymoney.cpp:1740
 #, kde-format
 msgid "Save to file"
 msgstr "Salvesta faili"
 
-#: kmymoney/kmymoney.cpp:1858
+#: kmymoney/kmymoney.cpp:1866
 #, kde-format
 msgid "Backup..."
 msgstr "Varunda ..."
 
-#: kmymoney/kmymoney.cpp:1859
+#: kmymoney/kmymoney.cpp:1867
 #, kde-format
 msgid "Statement file..."
 msgstr "Pangaväljavõtte fail..."
 
-#: kmymoney/kmymoney.cpp:1860 kmymoney/kmymoney.cpp:1861
+#: kmymoney/kmymoney.cpp:1868 kmymoney/kmymoney.cpp:1869
 #, kde-format
 msgid "Account Template..."
 msgstr "Kontomall..."
 
-#: kmymoney/kmymoney.cpp:1862
+#: kmymoney/kmymoney.cpp:1870
 #, kde-format
 msgid "Personal Data..."
 msgstr "Isiklikud andmed..."
 
-#: kmymoney/kmymoney.cpp:1864
+#: kmymoney/kmymoney.cpp:1872
 #, kde-format
 msgid "Dump Memory"
 msgstr "Mälutõmmis"
 
-#: kmymoney/kmymoney.cpp:1866
+#: kmymoney/kmymoney.cpp:1874
 #, kde-format
 msgid "File-Information..."
 msgstr "Failiteave..."
 
-#: kmymoney/kmymoney.cpp:1870
+#: kmymoney/kmymoney.cpp:1878
 #, kde-format
 msgid "Find transaction..."
 msgstr "Otsi tehingut..."
 
-#: kmymoney/kmymoney.cpp:1874
+#: kmymoney/kmymoney.cpp:1882
 #, kde-format
 msgid "Show Transaction Detail"
 msgstr "Tehingu üksikasjade näitamine"
 
 #. i18n: ectx: label, entry (HideReconciledTransactions), group (List Options)
-#: kmymoney/kmymoney.cpp:1875 kmymoney/settings/kmymoney.kcfg:252
+#: kmymoney/kmymoney.cpp:1883 kmymoney/settings/kmymoney.kcfg:252
 #, kde-format
 msgid "Hide reconciled transactions"
 msgstr "Kooskõlastatud tehingute peitmine"
 
 #. i18n: ectx: label, entry (HideUnusedCategory), group (List Options)
-#: kmymoney/kmymoney.cpp:1876 kmymoney/settings/kmymoney.kcfg:224
+#: kmymoney/kmymoney.cpp:1884 kmymoney/settings/kmymoney.kcfg:224
 #, kde-format
 msgid "Hide unused categories"
 msgstr "Kasutamata kategooriate peitmine"
 
 #. i18n: ectx: label, entry (ShowAllAccounts), group (List Options)
-#: kmymoney/kmymoney.cpp:1877 kmymoney/settings/kmymoney.kcfg:228
+#: kmymoney/kmymoney.cpp:1885 kmymoney/settings/kmymoney.kcfg:228
 #, kde-format
 msgid "Show all accounts"
 msgstr "Kõigi kontode näitamine"
 
-#: kmymoney/kmymoney.cpp:1881
+#: kmymoney/kmymoney.cpp:1889
 #, kde-format
 msgid "New institution..."
 msgstr "Uus rahaasutus..."
 
-#: kmymoney/kmymoney.cpp:1882
+#: kmymoney/kmymoney.cpp:1890
 #, kde-format
 msgid "Edit institution..."
 msgstr "Muuda rahaasutust..."
 
-#: kmymoney/kmymoney.cpp:1883
+#: kmymoney/kmymoney.cpp:1891
 #, kde-format
 msgid "Delete institution..."
 msgstr "Kustuta rahaasutus..."
 
-#: kmymoney/kmymoney.cpp:1887
+#: kmymoney/kmymoney.cpp:1895
 #, kde-format
 msgid "New account..."
 msgstr "Uus konto..."
 
-#: kmymoney/kmymoney.cpp:1888
+#: kmymoney/kmymoney.cpp:1896
 #, kde-format
 msgid "Open ledger"
 msgstr "Ava pearaamat"
 
-#: kmymoney/kmymoney.cpp:1889
+#: kmymoney/kmymoney.cpp:1897
 #, kde-format
 msgid "Reconcile..."
 msgstr "Kooskõlasta..."
 
-#: kmymoney/kmymoney.cpp:1890
+#: kmymoney/kmymoney.cpp:1898
 #, kde-format
 msgctxt "Finish reconciliation"
 msgid "Finish"
 msgstr "Lõpeta"
 
-#: kmymoney/kmymoney.cpp:1891
+#: kmymoney/kmymoney.cpp:1899
 #, fuzzy, kde-format
 #| msgid "Postal Code:"
 msgctxt "Postpone reconciliation"
 msgid "Postpone"
 msgstr "Postiindeks:"
 
-#: kmymoney/kmymoney.cpp:1892
+#: kmymoney/kmymoney.cpp:1900
 #, fuzzy, kde-format
 #| msgid "Cancel"
 msgctxt "Cancel reconciliation"
 msgid "Cancel"
 msgstr "Loobu"
 
-#: kmymoney/kmymoney.cpp:1893
+#: kmymoney/kmymoney.cpp:1901
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgid "Report reconciliation"
 msgstr "Viimane kooskõlastus"
 
-#: kmymoney/kmymoney.cpp:1894
+#: kmymoney/kmymoney.cpp:1902
 #, kde-format
 msgid "Edit account..."
 msgstr "Muuda kontot..."
 
-#: kmymoney/kmymoney.cpp:1895
+#: kmymoney/kmymoney.cpp:1903
 #, kde-format
 msgid "Delete account..."
 msgstr "Kustuta konto..."
 
-#: kmymoney/kmymoney.cpp:1896
+#: kmymoney/kmymoney.cpp:1904
 #, kde-format
 msgid "Close account"
 msgstr "Sulge konto"
 
-#: kmymoney/kmymoney.cpp:1897
+#: kmymoney/kmymoney.cpp:1905
 #, kde-format
 msgid "Reopen account"
 msgstr "Ava konto uuesti"
 
-#: kmymoney/kmymoney.cpp:1898
+#: kmymoney/kmymoney.cpp:1906
 #, kde-format
 msgid "Transaction report"
 msgstr "Tehingu aruanne"
 
-#: kmymoney/kmymoney.cpp:1899
+#: kmymoney/kmymoney.cpp:1907
 #, kde-format
 msgid "Show balance chart..."
 msgstr "Bilansidiagrammi näitamine..."
 
-#: kmymoney/kmymoney.cpp:1900
+#: kmymoney/kmymoney.cpp:1908
 #, kde-format
 msgid "Map account..."
 msgstr "Seosta konto ..."
 
-#: kmymoney/kmymoney.cpp:1901
+#: kmymoney/kmymoney.cpp:1909
 #, kde-format
 msgid "Unmap account..."
 msgstr "Kustuta konto seostamine ..."
 
-#: kmymoney/kmymoney.cpp:1902
+#: kmymoney/kmymoney.cpp:1910
 #, kde-format
 msgid "Update account..."
 msgstr "Uuenda kontot..."
 
-#: kmymoney/kmymoney.cpp:1903
+#: kmymoney/kmymoney.cpp:1911
 #, kde-format
 msgid "Update all accounts..."
 msgstr "Uuenda kõiki kontosid..."
 
-#: kmymoney/kmymoney.cpp:1907
+#: kmymoney/kmymoney.cpp:1915
 #, kde-format
 msgid "New category..."
 msgstr "Uus kategooria..."
 
-#: kmymoney/kmymoney.cpp:1908
+#: kmymoney/kmymoney.cpp:1916
 #, kde-format
 msgid "Edit category..."
 msgstr "Muuda kategooriat..."
 
-#: kmymoney/kmymoney.cpp:1909
+#: kmymoney/kmymoney.cpp:1917
 #, kde-format
 msgid "Delete category..."
 msgstr "Kustuta kategooria..."
 
-#: kmymoney/kmymoney.cpp:1913
+#: kmymoney/kmymoney.cpp:1921
 #, kde-format
 msgid "Currencies..."
 msgstr "Valuutad..."
 
-#: kmymoney/kmymoney.cpp:1914
+#: kmymoney/kmymoney.cpp:1922
 #, kde-format
 msgid "Prices..."
 msgstr "Hinnad..."
 
-#: kmymoney/kmymoney.cpp:1915
+#: kmymoney/kmymoney.cpp:1923
 #, kde-format
 msgid "Update Stock and Currency Prices..."
 msgstr "Börsi- ja valuutahindade uuendamine..."
 
-#: kmymoney/kmymoney.cpp:1916
+#: kmymoney/kmymoney.cpp:1924
 #, kde-format
 msgid "Consistency Check"
 msgstr "Ühtlusekontroll"
 
-#: kmymoney/kmymoney.cpp:1917
+#: kmymoney/kmymoney.cpp:1925
 #, kde-format
 msgid "Performance-Test"
 msgstr "Jõudlustest"
 
-#: kmymoney/kmymoney.cpp:1918
+#: kmymoney/kmymoney.cpp:1926
 #, kde-format
 msgid "Calculator..."
 msgstr "Kalkulaator..."
 
-#: kmymoney/kmymoney.cpp:1922
+#: kmymoney/kmymoney.cpp:1930
 #, kde-format
 msgid "Enable all messages"
 msgstr "Kõigi teadete lubamine"
 
-#: kmymoney/kmymoney.cpp:1926 kmymoney/views/kwelcomepage.cpp:82
+#: kmymoney/kmymoney.cpp:1934 kmymoney/views/kwelcomepage.cpp:82
 #, kde-format
 msgid "Get help from our community"
 msgstr "Hangi abi meie kogukonnalt"
 
-#: kmymoney/kmymoney.cpp:1927 kmymoney/views/kwelcomepage.cpp:84
+#: kmymoney/kmymoney.cpp:1935 kmymoney/views/kwelcomepage.cpp:84
 #, kde-format
 msgid "See what's new in this version"
 msgstr "Tutvu käesoleva versiooni uuendustega"
 
-#: kmymoney/kmymoney.cpp:1928 kmymoney/views/kwelcomepage.cpp:80
+#: kmymoney/kmymoney.cpp:1936 kmymoney/views/kwelcomepage.cpp:80
 #, kde-format
 msgid "Visit our website"
 msgstr "Külasta meie kodulehekülge"
 
-#: kmymoney/kmymoney.cpp:1932
+#: kmymoney/kmymoney.cpp:1940
 #, fuzzy, kde-format
 #| msgid "%1 transaction\n"
 #| msgid_plural "%1 transactions\n"
@@ -5137,100 +5137,100 @@ msgctxt "New transaction button"
 msgid "New transaction"
 msgstr "%1 tehing\n"
 
-#: kmymoney/kmymoney.cpp:1933
+#: kmymoney/kmymoney.cpp:1941
 #, kde-format
 msgctxt "Edit transaction button"
 msgid "Edit"
 msgstr "Muuda"
 
-#: kmymoney/kmymoney.cpp:1934
+#: kmymoney/kmymoney.cpp:1942
 #, kde-format
 msgctxt "Enter transaction"
 msgid "Enter"
 msgstr "Sisesta"
 
-#: kmymoney/kmymoney.cpp:1935
+#: kmymoney/kmymoney.cpp:1943
 #, kde-format
 msgctxt "Edit split button"
 msgid "Edit splits"
 msgstr "Muuda alltehinguid"
 
-#: kmymoney/kmymoney.cpp:1936
+#: kmymoney/kmymoney.cpp:1944
 #, kde-format
 msgctxt "Cancel transaction edit"
 msgid "Cancel"
 msgstr "Loobu"
 
-#: kmymoney/kmymoney.cpp:1937
+#: kmymoney/kmymoney.cpp:1945
 #, kde-format
 msgctxt "Delete transaction"
 msgid "Delete"
 msgstr "Kustuta"
 
-#: kmymoney/kmymoney.cpp:1938
+#: kmymoney/kmymoney.cpp:1946
 #, kde-format
 msgctxt "Duplicate transaction"
 msgid "Duplicate"
 msgstr "Klooni"
 
-#: kmymoney/kmymoney.cpp:1939
+#: kmymoney/kmymoney.cpp:1947
 #, kde-format
 msgctxt "Add reversing transaction"
 msgid "Add reversing"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1940
+#: kmymoney/kmymoney.cpp:1948
 #, kde-format
 msgctxt "Accept 'imported' and 'matched' transaction"
 msgid "Accept"
 msgstr "Nõus"
 
-#: kmymoney/kmymoney.cpp:1941
+#: kmymoney/kmymoney.cpp:1949
 #, kde-format
 msgctxt "Toggle reconciliation flag"
 msgid "Toggle"
 msgstr "Lülita"
 
-#: kmymoney/kmymoney.cpp:1942
+#: kmymoney/kmymoney.cpp:1950
 #, kde-format
 msgctxt "Mark transaction cleared"
 msgid "Cleared"
 msgstr "Kontrollitud"
 
-#: kmymoney/kmymoney.cpp:1943
+#: kmymoney/kmymoney.cpp:1951
 #, kde-format
 msgctxt "Mark transaction reconciled"
 msgid "Reconciled"
 msgstr "Kooskõlastatud"
 
-#: kmymoney/kmymoney.cpp:1944
+#: kmymoney/kmymoney.cpp:1952
 #, kde-format
 msgctxt "Mark transaction not reconciled"
 msgid "Not reconciled"
 msgstr "Kooskõlastamata"
 
-#: kmymoney/kmymoney.cpp:1945
+#: kmymoney/kmymoney.cpp:1953
 #, fuzzy, kde-format
 #| msgid "Move transaction to..."
 msgctxt "Move transaction"
 msgid "Move transaction"
 msgstr "Tehingu liigutamine..."
 
-#: kmymoney/kmymoney.cpp:1946
+#: kmymoney/kmymoney.cpp:1954
 #, fuzzy, kde-format
 #| msgid "Show transaction form"
 msgctxt "Show transaction"
 msgid "Show transaction"
 msgstr "Tehinguvormi näitamine"
 
-#: kmymoney/kmymoney.cpp:1947
+#: kmymoney/kmymoney.cpp:1955
 #, fuzzy, kde-format
 #| msgid "Show Transaction Detail"
 msgctxt "Display transaction details"
 msgid "Show transaction details"
 msgstr "Tehingu üksikasjade näitamine"
 
-#: kmymoney/kmymoney.cpp:1949
+#: kmymoney/kmymoney.cpp:1957
 #, fuzzy, kde-format
 #| msgctxt "To open a new report"
 #| msgid "&Open"
@@ -5238,231 +5238,231 @@ msgctxt "Open URL"
 msgid "Open URL"
 msgstr "&Ava"
 
-#: kmymoney/kmymoney.cpp:1950
+#: kmymoney/kmymoney.cpp:1958
 #, kde-format
 msgctxt "Select all transactions"
 msgid "Select all"
 msgstr "Vali kõik"
 
-#: kmymoney/kmymoney.cpp:1951
+#: kmymoney/kmymoney.cpp:1959
 #, kde-format
 msgid "Go to account"
 msgstr "Liigu kontosse"
 
-#: kmymoney/kmymoney.cpp:1952
+#: kmymoney/kmymoney.cpp:1960
 #, kde-format
 msgid "Go to payee"
 msgstr "Liigu maksesaajale"
 
-#: kmymoney/kmymoney.cpp:1953
+#: kmymoney/kmymoney.cpp:1961
 #, kde-format
 msgid "Create scheduled transaction..."
 msgstr "Loo planeeritud tehing..."
 
-#: kmymoney/kmymoney.cpp:1954
+#: kmymoney/kmymoney.cpp:1962
 #, kde-format
 msgid "Assign next number"
 msgstr "Omista järgmine number"
 
-#: kmymoney/kmymoney.cpp:1955
+#: kmymoney/kmymoney.cpp:1963
 #, kde-format
 msgctxt "Combine transactions"
 msgid "Combine"
 msgstr "Kombineeri"
 
-#: kmymoney/kmymoney.cpp:1956
+#: kmymoney/kmymoney.cpp:1964
 #, fuzzy, kde-format
 #| msgid "As of today"
 msgid "Move to today"
 msgstr "Tänase seisuga"
 
-#: kmymoney/kmymoney.cpp:1957
+#: kmymoney/kmymoney.cpp:1965
 #, kde-format
 msgid "Copy splits"
 msgstr "Kopeeri alltehingud"
 
-#: kmymoney/kmymoney.cpp:1958
+#: kmymoney/kmymoney.cpp:1966
 #, fuzzy, kde-format
 #| msgid "Show ledgers page"
 msgid "Show filter widget"
 msgstr "Pearaamatute lehe näitamine"
 
-#: kmymoney/kmymoney.cpp:1960
+#: kmymoney/kmymoney.cpp:1968
 #, kde-format
 msgid "New investment..."
 msgstr "Uus investeering..."
 
-#: kmymoney/kmymoney.cpp:1961
+#: kmymoney/kmymoney.cpp:1969
 #, kde-format
 msgid "Edit investment..."
 msgstr "Muuda investeeringut..."
 
-#: kmymoney/kmymoney.cpp:1962
+#: kmymoney/kmymoney.cpp:1970
 #, kde-format
 msgid "Delete investment..."
 msgstr "Kustuta investeering..."
 
-#: kmymoney/kmymoney.cpp:1963
+#: kmymoney/kmymoney.cpp:1971
 #, kde-format
 msgid "Online price update..."
 msgstr "Hinna uuendamine internetist..."
 
-#: kmymoney/kmymoney.cpp:1964
+#: kmymoney/kmymoney.cpp:1972
 #, kde-format
 msgid "Manual price update..."
 msgstr "Hinna uuendamine käsitsi..."
 
-#: kmymoney/kmymoney.cpp:1965
+#: kmymoney/kmymoney.cpp:1973
 #, fuzzy, kde-format
 #| msgid "Existing security"
 msgid "Edit security..."
 msgstr "Olemasolev väärtpaber"
 
-#: kmymoney/kmymoney.cpp:1966
+#: kmymoney/kmymoney.cpp:1974
 #, fuzzy, kde-format
 #| msgid "Delete security"
 msgid "Delete security..."
 msgstr "Väärtpaberi kustutamine"
 
-#: kmymoney/kmymoney.cpp:1969
+#: kmymoney/kmymoney.cpp:1977
 #, fuzzy, kde-format
 #| msgid "&New Schedule..."
 msgid "New schedule..."
 msgstr "&Uus ajaplaan..."
 
-#: kmymoney/kmymoney.cpp:1970 kmymoney/kmymoney.cpp:1971
+#: kmymoney/kmymoney.cpp:1978 kmymoney/kmymoney.cpp:1979
 #, kde-format
 msgid "Edit scheduled transaction"
 msgstr "Muuda planeeritud tehingut"
 
-#: kmymoney/kmymoney.cpp:1972
+#: kmymoney/kmymoney.cpp:1980
 #, kde-format
 msgid "Delete scheduled transaction"
 msgstr "Kustuta planeeritud tehing"
 
-#: kmymoney/kmymoney.cpp:1973
+#: kmymoney/kmymoney.cpp:1981
 #, kde-format
 msgid "Duplicate scheduled transaction"
 msgstr "Klooni planeeritud tehing"
 
-#: kmymoney/kmymoney.cpp:1974
+#: kmymoney/kmymoney.cpp:1982
 #, kde-format
 msgid "Enter next transaction..."
 msgstr "Sisesta järgmine tehing..."
 
-#: kmymoney/kmymoney.cpp:1975
+#: kmymoney/kmymoney.cpp:1983
 #, kde-format
 msgid "Skip next transaction..."
 msgstr "Jäta järgmine tehing vahele..."
 
-#: kmymoney/kmymoney.cpp:1977
+#: kmymoney/kmymoney.cpp:1985
 #, fuzzy, kde-format
 #| msgid "New payee"
 msgid "New payee..."
 msgstr "Uus maksesaaja"
 
-#: kmymoney/kmymoney.cpp:1978
+#: kmymoney/kmymoney.cpp:1986
 #, kde-format
 msgid "Rename payee"
 msgstr "Muuda maksesaaja nime"
 
-#: kmymoney/kmymoney.cpp:1979
+#: kmymoney/kmymoney.cpp:1987
 #, kde-format
 msgid "Delete payee"
 msgstr "Kustuta maksesaaja"
 
-#: kmymoney/kmymoney.cpp:1980
+#: kmymoney/kmymoney.cpp:1988
 #, kde-format
 msgid "Merge payees"
 msgstr "Ühenda maksesaajad"
 
-#: kmymoney/kmymoney.cpp:1982
+#: kmymoney/kmymoney.cpp:1990
 #, fuzzy, kde-format
 #| msgid "New tag"
 msgid "New tag..."
 msgstr "Uus silt"
 
-#: kmymoney/kmymoney.cpp:1983
+#: kmymoney/kmymoney.cpp:1991
 #, kde-format
 msgid "Rename tag"
 msgstr "Muuda sildi nime"
 
-#: kmymoney/kmymoney.cpp:1984
+#: kmymoney/kmymoney.cpp:1992
 #, kde-format
 msgid "Delete tag"
 msgstr "Kustuta silt"
 
-#: kmymoney/kmymoney.cpp:1986
+#: kmymoney/kmymoney.cpp:1994
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Open report"
 msgstr "&Uus aruanne"
 
-#: kmymoney/kmymoney.cpp:1987
+#: kmymoney/kmymoney.cpp:1995
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "New report"
 msgstr "&Uus aruanne"
 
-#: kmymoney/kmymoney.cpp:1988
+#: kmymoney/kmymoney.cpp:1996
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Copy report"
 msgstr "&Uus aruanne"
 
-#: kmymoney/kmymoney.cpp:1989
+#: kmymoney/kmymoney.cpp:1997
 #, fuzzy, kde-format
 #| msgid "Configure your report"
 msgid "Configure report"
 msgstr "Aruande seadistamine"
 
-#: kmymoney/kmymoney.cpp:1990
+#: kmymoney/kmymoney.cpp:1998
 #, fuzzy, kde-format
 #| msgid "Favorite reports"
 msgid "Export report"
 msgstr "Lemmikaruanded"
 
-#: kmymoney/kmymoney.cpp:1991
+#: kmymoney/kmymoney.cpp:1999
 #, fuzzy, kde-format
 #| msgid "Delete Report?"
 msgid "Delete report"
 msgstr "Kas kustutada aruanne?"
 
-#: kmymoney/kmymoney.cpp:1992
+#: kmymoney/kmymoney.cpp:2000
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Close report"
 msgstr "&Uus aruanne"
 
-#: kmymoney/kmymoney.cpp:1993
+#: kmymoney/kmymoney.cpp:2001
 #, fuzzy, kde-format
 #| msgctxt "Toggle reconciliation flag"
 #| msgid "Toggle"
 msgid "Toggle chart"
 msgstr "Lülita"
 
-#: kmymoney/kmymoney.cpp:1994
+#: kmymoney/kmymoney.cpp:2002
 #, fuzzy, kde-format
 #| msgid "Edit credit transfer"
 msgid "Edit tab order"
 msgstr "Muuda krediidiülekannet"
 
-#: kmymoney/kmymoney.cpp:1997
+#: kmymoney/kmymoney.cpp:2005
 #, kde-format
 msgid "Test new feature"
 msgstr "Uue omaduse testimine"
 
-#: kmymoney/kmymoney.cpp:1998
+#: kmymoney/kmymoney.cpp:2006
 #, kde-format
 msgid "Debug Traces"
 msgstr "Jälituse silumine"
 
-#: kmymoney/kmymoney.cpp:2000
+#: kmymoney/kmymoney.cpp:2008
 #, kde-format
 msgid "Debug Timers"
 msgstr "Taimerite silumine"
 
-#: kmymoney/kmymoney.cpp:2019
+#: kmymoney/kmymoney.cpp:2027
 #, fuzzy, kde-format
 #| msgctxt "Button text for match transaction"
 #| msgid "Match"
@@ -5470,7 +5470,7 @@ msgctxt "Match transactions"
 msgid "Match"
 msgstr "Sobita"
 
-#: kmymoney/kmymoney.cpp:2020
+#: kmymoney/kmymoney.cpp:2028
 #, fuzzy, kde-format
 #| msgctxt "Button text for unmatch transaction"
 #| msgid "Unmatch"
@@ -5478,45 +5478,45 @@ msgctxt "Unmatch transactions"
 msgid "Unmatch"
 msgstr "Eemalda sobivus"
 
-#: kmymoney/kmymoney.cpp:2146
+#: kmymoney/kmymoney.cpp:2154
 #, fuzzy, kde-format
 #| msgid "Duplicate the current selected transactions"
 msgctxt "@info:tooltip"
 msgid "Start reconciling the currently selected account"
 msgstr "Valitud tehingute kloonimine"
 
-#: kmymoney/kmymoney.cpp:2147
+#: kmymoney/kmymoney.cpp:2155
 #, fuzzy, kde-format
 #| msgid "Postpone reconciliation"
 msgctxt "@info:tooltip"
 msgid "Postpone the current reconciliation"
 msgstr "Lükka kooskõlastamine edasi"
 
-#: kmymoney/kmymoney.cpp:2148
+#: kmymoney/kmymoney.cpp:2156
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgctxt "@info:tooltip"
 msgid "Finish the current reconciliation"
 msgstr "Viimane kooskõlastus"
 
-#: kmymoney/kmymoney.cpp:2149
+#: kmymoney/kmymoney.cpp:2157
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgctxt "@info:tooltip"
 msgid "Cancel the current reconciliation"
 msgstr "Viimane kooskõlastus"
 
-#: kmymoney/kmymoney.cpp:2257
+#: kmymoney/kmymoney.cpp:2265
 #, kde-format
 msgid "View back"
 msgstr "Vaade tagasi"
 
-#: kmymoney/kmymoney.cpp:2258
+#: kmymoney/kmymoney.cpp:2266
 #, kde-format
 msgid "View forward"
 msgstr "Vaade edasi"
 
-#: kmymoney/kmymoney.cpp:2663
+#: kmymoney/kmymoney.cpp:2671
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
@@ -5525,34 +5525,34 @@ msgstr ""
 "Vähemalt üks valitud tehingute alltehing on kooskõlastatud. Kas sellest "
 "hoolimata kustutada tehingud?"
 
-#: kmymoney/kmymoney.cpp:2665
+#: kmymoney/kmymoney.cpp:2673
 #, kde-format
 msgid "Transaction already reconciled"
 msgstr "Tehing on juba kooskõlastatud"
 
-#: kmymoney/kmymoney.cpp:2670
+#: kmymoney/kmymoney.cpp:2678
 #, kde-format
 msgid "Do you really want to delete the selected transaction?"
 msgid_plural "Do you really want to delete all %1 selected transactions?"
 msgstr[0] "Kas tõesti kustutada valitud tehing?"
 msgstr[1] "Kas tõesti kustutada kõik %1 valitud tehingut?"
 
-#: kmymoney/kmymoney.cpp:2674
+#: kmymoney/kmymoney.cpp:2682
 #, kde-format
 msgid "Delete transaction"
 msgstr "Tehingu kustutamine"
 
-#: kmymoney/kmymoney.cpp:2751
+#: kmymoney/kmymoney.cpp:2759
 #, kde-format
 msgid "Unable to duplicate transaction(s)"
 msgstr "Tehingu(te) kloonimine nurjus"
 
-#: kmymoney/kmymoney.cpp:3039
+#: kmymoney/kmymoney.cpp:3047
 #, kde-format
 msgid "Unable to modify transaction"
 msgstr "Tehingu muutmine nurjus"
 
-#: kmymoney/kmymoney.cpp:3175
+#: kmymoney/kmymoney.cpp:3183
 #, fuzzy, kde-format
 #| msgid ""
 #| "At least one split of the selected transactions has been reconciled. Do "
@@ -5564,14 +5564,14 @@ msgstr ""
 "Vähemalt üks valitud tehingute alltehing on kooskõlastatud. Kas sellest "
 "hoolimata kustutada tehingud?"
 
-#: kmymoney/kmymoney.cpp:3177
+#: kmymoney/kmymoney.cpp:3185
 #, fuzzy, kde-format
 #| msgid "Transaction already reconciled"
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "Tehing on juba kooskõlastatud"
 
-#: kmymoney/kmymoney.cpp:3182
+#: kmymoney/kmymoney.cpp:3190
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -5580,19 +5580,19 @@ msgid_plural "Do you really want to change all %1 selected transactions?"
 msgstr[0] "Kas tõesti kustutada valitud tehing?"
 msgstr[1] "Kas tõesti kustutada kõik %1 valitud tehingut?"
 
-#: kmymoney/kmymoney.cpp:3186
+#: kmymoney/kmymoney.cpp:3194
 #, fuzzy, kde-format
 #| msgid "Any transaction"
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "Suvaline tehing"
 
-#: kmymoney/kmymoney.cpp:3271
+#: kmymoney/kmymoney.cpp:3279
 #, kde-format
 msgid "Unable to accept transaction"
 msgstr "Tehinguga nõustumine nurjus"
 
-#: kmymoney/kmymoney.cpp:3311
+#: kmymoney/kmymoney.cpp:3319
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has detected some overdue scheduled transactions for this "
@@ -5604,12 +5604,12 @@ msgstr ""
 "KMyMoney avastas selle konto puhul mõned hilinenud planeeritud tehingud. Kas "
 "sisestada need planeeritud tehingud nüüd?"
 
-#: kmymoney/kmymoney.cpp:3314
+#: kmymoney/kmymoney.cpp:3322
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "Leiti planeeritud tehingud"
 
-#: kmymoney/kmymoney.cpp:3389
+#: kmymoney/kmymoney.cpp:3397
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>You have closed this account. It remains in the system because you "
@@ -5629,82 +5629,82 @@ msgstr ""
 "<b>Kõigi kontode näitamine</b> või eemaldad märke valiku <b>Suletud kontosid "
 "ei näidata</b> eest.</qt>"
 
-#: kmymoney/kmymoney.cpp:3391
+#: kmymoney/kmymoney.cpp:3399
 #, kde-format
 msgid "Information"
 msgstr "Teave"
 
-#: kmymoney/kmymoney.cpp:3495 kmymoney/kmymoney.cpp:3591
+#: kmymoney/kmymoney.cpp:3503 kmymoney/kmymoney.cpp:3599
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "Pole ühtegi KMyMoney faili avada"
 
-#: kmymoney/kmymoney.cpp:3528 kmymoney/kmymoney.cpp:3530
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1364
+#: kmymoney/kmymoney.cpp:3536 kmymoney/kmymoney.cpp:3538
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1365
 #: kmymoney/plugins/xml/xmlstorage.cpp:416
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "Valmis."
 
-#: kmymoney/kmymoney.cpp:3595
+#: kmymoney/kmymoney.cpp:3603
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "Isiklike andmete näitamine..."
 
-#: kmymoney/kmymoney.cpp:3602
+#: kmymoney/kmymoney.cpp:3610
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "Isiklike andmete muutmine"
 
-#: kmymoney/kmymoney.cpp:3617
+#: kmymoney/kmymoney.cpp:3625
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr "Kasutaja teabe salvestamine nurjus: %1"
 
-#: kmymoney/kmymoney.cpp:3625
+#: kmymoney/kmymoney.cpp:3633
 #, kde-format
 msgid "Importing account templates."
 msgstr "Kontomallide import."
 
-#: kmymoney/kmymoney.cpp:3639
+#: kmymoney/kmymoney.cpp:3647
 #, kde-format
 msgid "Unable to import template(s)"
 msgstr "Mallide import nurjus"
 
-#: kmymoney/kmymoney.cpp:3647
+#: kmymoney/kmymoney.cpp:3655
 #, kde-format
 msgid "Exporting account templates."
 msgstr "Kontomallide eksport."
 
-#: kmymoney/kmymoney.cpp:3653
+#: kmymoney/kmymoney.cpp:3661
 #, kde-format
 msgid "Save as..."
 msgstr "Salvesta kui..."
 
-#: kmymoney/kmymoney.cpp:3654
+#: kmymoney/kmymoney.cpp:3662
 #, kde-format
 msgid "KMyMoney template files (*.kmt);;All files (*)"
 msgstr "KMyMoney mallifailid (*.kmt);;Kõik failid (*)"
 
-#: kmymoney/kmymoney.cpp:3685
+#: kmymoney/kmymoney.cpp:3693
 #, fuzzy, kde-format
 #| msgid "Template Error"
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "Malli tõrge"
 
-#: kmymoney/kmymoney.cpp:3703
+#: kmymoney/kmymoney.cpp:3711
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr "Fail <b>%1</b> on juba olemas. Kas tõesti kirjutada see üle?"
 
-#: kmymoney/kmymoney.cpp:3705 kmymoney/plugins/csv/export/csvexporter.cpp:102
+#: kmymoney/kmymoney.cpp:3713 kmymoney/plugins/csv/export/csvexporter.cpp:106
 #, kde-format
 msgid "File already exists"
 msgstr "Fail on juba olemas"
 
-#: kmymoney/kmymoney.cpp:3830
+#: kmymoney/kmymoney.cpp:3838
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
@@ -5712,13 +5712,13 @@ msgid ""
 msgstr ""
 "Fail peab olema salvestatud, enne kui seda saab varundada. Kas jätkata?"
 
-#: kmymoney/kmymoney.cpp:3832
+#: kmymoney/kmymoney.cpp:3840
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3849
+#: kmymoney/kmymoney.cpp:3857
 #, kde-format
 msgid ""
 "The current implementation of the backup functionality only supports local "
@@ -5727,70 +5727,70 @@ msgstr ""
 "Praegu toetab varundamine lähtefailidena ainult kohalikke faile. Sinu "
 "praegune lähtefail on \"%1\"."
 
-#: kmymoney/kmymoney.cpp:3851
+#: kmymoney/kmymoney.cpp:3859
 #, kde-format
 msgid "Local files only"
 msgstr "Ainult kohalikud failid"
 
-#: kmymoney/kmymoney.cpp:3890
+#: kmymoney/kmymoney.cpp:3898
 #, kde-format
 msgid "Mounting %1"
 msgstr "%1 ühendamine"
 
-#: kmymoney/kmymoney.cpp:3924
+#: kmymoney/kmymoney.cpp:3932
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr "Tänane varukoopia on seadmes juba olemas. Kas asendada see?"
 
-#: kmymoney/kmymoney.cpp:3924
+#: kmymoney/kmymoney.cpp:3932
 #, kde-format
 msgid "&Replace"
 msgstr "&Asenda"
 
-#: kmymoney/kmymoney.cpp:3932
+#: kmymoney/kmymoney.cpp:3940
 #, fuzzy, kde-format
 #| msgid "Unable to create account: %1"
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
 msgstr "Kontot loomine nurjus: %1"
 
-#: kmymoney/kmymoney.cpp:3937
+#: kmymoney/kmymoney.cpp:3945
 #, kde-format
 msgid "Writing %1"
 msgstr "%1 kirjutamine"
 
-#: kmymoney/kmymoney.cpp:3958
+#: kmymoney/kmymoney.cpp:3966
 #, kde-format
 msgid "Unmounting %1"
 msgstr "%1 lahutamine"
 
-#: kmymoney/kmymoney.cpp:3995
+#: kmymoney/kmymoney.cpp:4003
 #, kde-format
 msgid "Error mounting device"
 msgstr "Tõrge seadme ühendamisel"
 
-#: kmymoney/kmymoney.cpp:4010 kmymoney/kmymoney.cpp:4029
+#: kmymoney/kmymoney.cpp:4018 kmymoney/kmymoney.cpp:4037
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "Valmis"
 
-#: kmymoney/kmymoney.cpp:4011 kmymoney/kmymoney.cpp:4031
+#: kmymoney/kmymoney.cpp:4019 kmymoney/kmymoney.cpp:4039
 #, kde-format
 msgid "File successfully backed up"
 msgstr "Fail on edukalt varundatud"
 
-#: kmymoney/kmymoney.cpp:4017
+#: kmymoney/kmymoney.cpp:4025
 #, kde-format
 msgid "Error copying file to device"
 msgstr "Tõrge faili kopeerimisel seadmesse"
 
-#: kmymoney/kmymoney.cpp:4033
+#: kmymoney/kmymoney.cpp:4041
 #, kde-format
 msgid "Error unmounting device"
 msgstr "Tõrge seadme lahutamisel"
 
-#: kmymoney/kmymoney.cpp:4080
+#: kmymoney/kmymoney.cpp:4088
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5807,30 +5807,30 @@ msgstr ""
 "Klõpsa Ei, et algsaldo oleks endiselt %2\n"
 "Klõpsa Loobu, et katkestada konto loomine"
 
-#: kmymoney/kmymoney.cpp:4090
+#: kmymoney/kmymoney.cpp:4098
 #, fuzzy, kde-format
 #| msgid "Opening balance problem"
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "Algsaldo probleem"
 
-#: kmymoney/kmymoney.cpp:4101
+#: kmymoney/kmymoney.cpp:4109
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "Konto lisamine nurjus: %1"
 
-#: kmymoney/kmymoney.cpp:4171
+#: kmymoney/kmymoney.cpp:4179
 #, kde-format
 msgid "Running consistency check..."
 msgstr "Ühtlusekontroll..."
 
-#: kmymoney/kmymoney.cpp:4178
+#: kmymoney/kmymoney.cpp:4186
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "Ühtlusekontroll nurjus: %1"
 
-#: kmymoney/kmymoney.cpp:4188
+#: kmymoney/kmymoney.cpp:4196
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -5838,7 +5838,7 @@ msgid ""
 msgstr ""
 "Ühtlusekontroll ei leidnud andmetes ühtegi probleemi. Üksikasju näeb allpool."
 
-#: kmymoney/kmymoney.cpp:4190
+#: kmymoney/kmymoney.cpp:4198
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5849,28 +5849,28 @@ msgstr ""
 "Probleemid, mida ei saa automaatselt parandada, tuleb kasutajal käsitsi "
 "lahendada."
 
-#: kmymoney/kmymoney.cpp:4193
+#: kmymoney/kmymoney.cpp:4201
 #, kde-format
 msgid "Consistency check result"
 msgstr "Ühtlusekontrolli tulemus"
 
-#: kmymoney/kmymoney.cpp:4259
+#: kmymoney/kmymoney.cpp:4267
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Hilinenud planeeritud tehingute otsimine..."
 
-#: kmymoney/kmymoney.cpp:4449
+#: kmymoney/kmymoney.cpp:4457
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr "Enne pangaväljavõtte importimist tuleb esmalt valida KMyMoney fail."
 
-#: kmymoney/kmymoney.cpp:4454
+#: kmymoney/kmymoney.cpp:4462
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Pangaväljavõtte import veebiühenduse vahendusel"
 
-#: kmymoney/kmymoney.cpp:4466
+#: kmymoney/kmymoney.cpp:4474
 #, fuzzy, kde-format
 #| msgid ""
 #| "Unable to import %1 using %2 plugin.  The plugin returned the following "
@@ -5882,67 +5882,67 @@ msgid ""
 msgstr ""
 "%1 importimine plugina %2 abil nurjus. Plugin tagastas järgmise tõrke: %3"
 
-#: kmymoney/kmymoney.cpp:4466 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
+#: kmymoney/kmymoney.cpp:4474 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
 #, kde-format
 msgid "Importing error"
 msgstr "Impordi tõrge"
 
-#: kmymoney/kmymoney.cpp:4494
+#: kmymoney/kmymoney.cpp:4502
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Kõik teated on lubatud."
 
-#: kmymoney/kmymoney.cpp:4494
+#: kmymoney/kmymoney.cpp:4502
 #, kde-format
 msgid "All messages"
 msgstr "Kõik teated"
 
-#: kmymoney/kmymoney.cpp:4530
+#: kmymoney/kmymoney.cpp:4538
 #, kde-format
 msgid "Auto saving..."
 msgstr "Automaatne salvestamine..."
 
-#: kmymoney/kmymoney.cpp:4650
+#: kmymoney/kmymoney.cpp:4658
 #, kde-format
 msgid "Creating new document..."
 msgstr "Uue dokumendi loomine..."
 
-#: kmymoney/kmymoney.cpp:4710
+#: kmymoney/kmymoney.cpp:4718
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "Uue faili loomine nurjus."
 
-#: kmymoney/kmymoney.cpp:4721
+#: kmymoney/kmymoney.cpp:4729
 #, kde-format
 msgid "Open a file."
 msgstr "Faili avamine."
 
-#: kmymoney/kmymoney.cpp:4735
+#: kmymoney/kmymoney.cpp:4743
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr "Salvesti avamiseks ei leitud ühtegi pluginat."
 
-#: kmymoney/kmymoney.cpp:4739
+#: kmymoney/kmymoney.cpp:4747
 #, kde-format
 msgid "All files (*)"
 msgstr "Kõik failid (*)"
 
-#: kmymoney/kmymoney.cpp:4752
+#: kmymoney/kmymoney.cpp:4760
 #, kde-format
 msgid "Loading file..."
 msgstr "Faili laadimine..."
 
-#: kmymoney/kmymoney.cpp:4758
+#: kmymoney/kmymoney.cpp:4766
 #, kde-format
 msgid "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
 msgstr "<p>Fail <b>%1</b> on juba avatud KMyMoney teises isendis</p>"
 
-#: kmymoney/kmymoney.cpp:4758
+#: kmymoney/kmymoney.cpp:4766
 #, kde-format
 msgid "Duplicate open"
 msgstr "Topeltavamine"
 
-#: kmymoney/kmymoney.cpp:4765
+#: kmymoney/kmymoney.cpp:4773
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5951,17 +5951,17 @@ msgstr ""
 "<p><b>%1</b> on vigane failinimi või ei ole faili olemas. Võid avada mõne "
 "muu faili või luua uue.</p>"
 
-#: kmymoney/kmymoney.cpp:4765
+#: kmymoney/kmymoney.cpp:4773
 #, kde-format
 msgid "File not found"
 msgstr "Faili ei leitud"
 
-#: kmymoney/kmymoney.cpp:4796
+#: kmymoney/kmymoney.cpp:4804
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "Nõutava faili avamine nurjus."
 
-#: kmymoney/kmymoney.cpp:4803
+#: kmymoney/kmymoney.cpp:4811
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -5970,35 +5970,35 @@ msgstr ""
 "Andmeallika lugemine nurjus. Palun kontrolli, kas KMyMoney seadistustes on "
 "vajalik plugin ikka sisse lülitatud."
 
-#: kmymoney/kmymoney.cpp:4814
+#: kmymoney/kmymoney.cpp:4822
 #, kde-format
 msgid "Saving file..."
 msgstr "Faili salvestamine..."
 
-#: kmymoney/kmymoney.cpp:4826
+#: kmymoney/kmymoney.cpp:4834
 #, fuzzy, kde-format
 #| msgid "Failed to save your storage."
 msgid "Failed to save your data."
 msgstr "Salvesti salvestamine nurjus."
 
-#: kmymoney/kmymoney.cpp:4832
+#: kmymoney/kmymoney.cpp:4840
 #, fuzzy, kde-format
 #| msgid "Couldn't find suitable plugin to save your storage."
 msgid "Couldn't find suitable plugin to save your data."
 msgstr "Salvesti salvestamiseks ei leitud ühtegi sobivat pluginat."
 
-#: kmymoney/kmymoney.cpp:4838
+#: kmymoney/kmymoney.cpp:4846
 #, kde-format
 msgid "Saving file as...."
 msgstr "Faili salvestamine ..."
 
-#: kmymoney/kmymoney.cpp:4854
+#: kmymoney/kmymoney.cpp:4862
 #, fuzzy, kde-format
 #| msgid "Couldn't find any plugin for saving storage."
 msgid "Couldn't find any plugin for saving data."
 msgstr "Salvesti salvestamiseks ei leitud ühtegi pluginat."
 
-#: kmymoney/kmymoney.cpp:4883
+#: kmymoney/kmymoney.cpp:4891
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "Salvesti salvestamine nurjus."
@@ -6275,65 +6275,65 @@ msgstr "Väärtpaberi kustutamine"
 msgid "Delete prices"
 msgstr "Hindade kustutamine"
 
-#: kmymoney/kmymoneyutils.cpp:548
-#: kmymoney/plugins/qif/import/kimportdlg.cpp:138
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:432
+#: kmymoney/kmymoneyutils.cpp:552
+#: kmymoney/plugins/qif/import/kimportdlg.cpp:142
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:436
 #: kmymoney/templates/templateloader.cpp:78
 #, kde-format
 msgid "Error while loading file '%1'."
 msgstr "Tõrge faili \"%1\" laadimisel."
 
-#: kmymoney/kmymoneyutils.cpp:550
-#: kmymoney/plugins/qif/import/kimportdlg.cpp:138
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:434
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1006
+#: kmymoney/kmymoneyutils.cpp:554
+#: kmymoney/plugins/qif/import/kimportdlg.cpp:142
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:438
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1010
 #: kmymoney/templates/templateloader.cpp:80
 #, kde-format
 msgid "File access error"
 msgstr "Faili lugemise viga"
 
-#: kmymoney/kmymoneyutils.cpp:568 kmymoney/views/kpayeesview.cpp:562
+#: kmymoney/kmymoneyutils.cpp:572 kmymoney/views/kpayeesview.cpp:562
 #, kde-format
 msgid "New Payee"
 msgstr "Uus maksesaaja"
 
-#: kmymoney/kmymoneyutils.cpp:570
+#: kmymoney/kmymoneyutils.cpp:574
 #, fuzzy, kde-format
 #| msgid "<qt>Do you want to add <b>%1</b> as payer/receiver?</qt>"
 msgid "<qt>Do you want to add <b>%1</b> as payee/receiver?</qt>"
 msgstr "<qt>Kas lisada <b>%1</b> maksesaajate hulka?</qt>"
 
-#: kmymoney/kmymoneyutils.cpp:609
+#: kmymoney/kmymoneyutils.cpp:613
 #, kde-format
 msgid "Unable to add payee"
 msgstr "Maksesaaja lisamine nurjus"
 
-#: kmymoney/kmymoneyutils.cpp:621 kmymoney/views/ktagsview.cpp:641
+#: kmymoney/kmymoneyutils.cpp:625 kmymoney/views/ktagsview.cpp:641
 #, kde-format
 msgid "New Tag"
 msgstr "Uus silt"
 
-#: kmymoney/kmymoneyutils.cpp:623
+#: kmymoney/kmymoneyutils.cpp:627
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 msgstr "<qt>Kas lisada <b>%1</b> siltide hulka?</qt>"
 
-#: kmymoney/kmymoneyutils.cpp:625
+#: kmymoney/kmymoneyutils.cpp:629
 #, kde-format
 msgid "New tag"
 msgstr "Uus silt"
 
-#: kmymoney/kmymoneyutils.cpp:659
+#: kmymoney/kmymoneyutils.cpp:663
 #, kde-format
 msgid "Unable to add tag"
 msgstr "Sildi lisamine nurjus"
 
-#: kmymoney/kmymoneyutils.cpp:676 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:680 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "Rahaasutuse lisamine nurjus: %1"
 
-#: kmymoney/kmymoneyutils.cpp:733
+#: kmymoney/kmymoneyutils.cpp:737
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:50
 #, kde-format
 msgid "One statement has been processed with the following results:"
@@ -6341,7 +6341,7 @@ msgid_plural "%1 statements have been processed with the following results:"
 msgstr[0] "Ühe pangaväljavõtte töötlemisel saadi järgmised tulemused:"
 msgstr[1] "%1 pangaväljavõtte töötlemisel saadi järgmised tulemused:"
 
-#: kmymoney/kmymoneyutils.cpp:738
+#: kmymoney/kmymoneyutils.cpp:742
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:52
 #, kde-format
 msgid "No new transaction has been imported."
@@ -6349,7 +6349,7 @@ msgid_plural "No new transactions have been imported."
 msgstr[0] "Ühtegi uut tehingut ei imporditud."
 msgstr[1] "Ühtegi uut tehingut ei imporditud."
 
-#: kmymoney/kmymoneyutils.cpp:739
+#: kmymoney/kmymoneyutils.cpp:743
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:53
 #, kde-format
 msgid "Statement import statistics"
@@ -9860,7 +9860,7 @@ msgctxt "CSV Exporter dialog title"
 msgid "CSV Exporter"
 msgstr "CSV eksportija"
 
-#: kmymoney/plugins/csv/export/csvexporter.cpp:101
+#: kmymoney/plugins/csv/export/csvexporter.cpp:105
 #, kde-format
 msgid ""
 "<qt>The file <b>%1</b> already exists. Do you really want to overwrite it?</"
@@ -11104,13 +11104,13 @@ msgstr "Puhasta teenustasu"
 msgid "Calculate Fee"
 msgstr "Arvuta teenustasu"
 
-#: kmymoney/plugins/csv/import/kcm_csvimporter.cpp:35
+#: kmymoney/plugins/csv/import/kcm_csvimporter.cpp:34
 #, kde-format
 msgctxt "@item:inlistbox No QIF profile defined"
 msgid "No profile setup"
 msgstr ""
 
-#: kmymoney/plugins/csv/import/kcm_csvimporter.cpp:66
+#: kmymoney/plugins/csv/import/kcm_csvimporter.cpp:65
 #, fuzzy, kde-format
 #| msgid "Please select a parent account."
 msgctxt "@info:tooltip No QIF profile defined"
@@ -11745,7 +11745,7 @@ msgstr "Ajaplaan%1"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1214
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1253
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1358
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1359
 #, kde-format
 msgid ""
 "Import failed:\n"
@@ -11756,17 +11756,17 @@ msgstr ""
 "\n"
 "%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1362
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1363
 #, kde-format
 msgid "Import complete"
 msgstr "Import lõpetatud"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1419
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1420
 #, kde-format
 msgid "Disguise your wealth"
 msgstr "Varja oma vara!"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1420
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1421
 #, kde-format
 msgid ""
 "Each monetary value on your file will be multiplied by a random number "
@@ -11784,33 +11784,33 @@ msgstr ""
 "%2,\n"
 "mida kasutatakse kõigi väärtuste puhul. Neid arve faili ei salvestata."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1435
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1436
 #, kde-format
 msgid "Loading commodities..."
 msgstr "Rahatoodete laadimine..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1487
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1488
 #, kde-format
 msgid "Loading prices..."
 msgstr "Hindade laadimine..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1491
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1499
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1492
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1500
 #, kde-format
 msgid "Imported History"
 msgstr "Imporditud ajalugu"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1520
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1521
 #, kde-format
 msgid "Loading accounts..."
 msgstr "Kontode laadimine..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1665
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1666
 #, kde-format
 msgid "Loading transactions..."
 msgstr "Tehingute laadimine..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1768
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1769
 #, kde-format
 msgid ""
 "Account or Category %1, transaction date %2; split contains invalid value; "
@@ -11819,37 +11819,37 @@ msgstr ""
 "Konto või kategooria %1, tehingu kuupäev %2; alltehing sisaldab vigast "
 "väärtust; palun kontrolli seda"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1810
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1811
 #, kde-format
 msgid "Imported Transaction"
 msgstr "Imporditud tehing"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1859
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1860
 #, kde-format
 msgid "Loading templates..."
 msgstr "Mallide laadimine..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1873
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1874
 #, kde-format
 msgid "Unknown payee"
 msgstr "Tundmatu maksesaaja"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2001
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2002
 #, kde-format
 msgid "Schedule %1 contains unknown action (key = %2, type = %3)"
 msgstr "Ajaplaan %1 sisaldab tundmatut toimingut (võti = %2, tüüp = %3)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2009
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2010
 #, kde-format
 msgid "Schedule %1 contains multiple actions; only one has been imported"
 msgstr "Ajaplaan %1 sisaldab mitut toimingut; ainult üks imporditi"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2015
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2016
 #, kde-format
 msgid "Schedule %1 contains no valid splits"
 msgstr "Ajaplaan %1 ei sisalda kehtivaid alltehinguid"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2020
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2021
 #, kde-format
 msgid ""
 "Schedule %1 appears to contain a formula. GnuCash formulae are not "
@@ -11857,17 +11857,17 @@ msgid ""
 msgstr ""
 "Ajaplaan %1 paistab sisaldavat valemit. GnuCashi valemeid ei saa teisendada"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2070
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2071
 #, kde-format
 msgid "Loading schedules..."
 msgstr "Ajaplaanide laadimine..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2158
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2159
 #, kde-format
 msgid "Schedule %1 has interval of %2 which is not currently available"
 msgstr "Ajaplaanil %1 on intervall %2, mis ei ole praegu saadaval"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2165
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2166
 #, kde-format
 msgid ""
 "Schedule %1 contains unknown interval specification; please check for "
@@ -11876,7 +11876,7 @@ msgstr ""
 "Ajaplaan %1 sisaldab tundmatut intervallimäärangut, palun kontrolli, et "
 "toiming oleks võimalik sooritada"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2201
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2202
 #, kde-format
 msgid ""
 "Schedule %1 contains a deferred interval specification; please check for "
@@ -11885,12 +11885,12 @@ msgstr ""
 "Ajaplaan %1 sisaldab edasi lükatud intervalli määrangut, palun kontrolli, et "
 "toiming oleks võimalik sooritada"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2226
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2227
 #, kde-format
 msgid "Schedule %1 dropped at user request"
 msgstr "Ajaplaan %1 hüljati kasutaja soovil"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2279
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2280
 #, kde-format
 msgid ""
 "Your main currency seems to be %1 (%2); do you want to set this as your base "
@@ -11899,29 +11899,29 @@ msgstr ""
 "Sinu praegune valuuta paistab olevat %1 (%2); kas soovid määrata selle oma "
 "baasvaluutaks?"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2297
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2298
 #, kde-format
 msgctxt "Button to show more detailed data"
 msgid "More"
 msgstr "Rohkem"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2299
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2300
 #, kde-format
 msgctxt "Button to close the current dialog"
 msgid "Done"
 msgstr "Valmis"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2301
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2302
 #, kde-format
 msgid "Save Report"
 msgstr "Salvesta aruanne"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2318
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2319
 #, kde-format
 msgid "Problems were encountered in converting schedule '%1'."
 msgstr "Ajaplaani \"%1\" teisendamisel tekkis probleeme."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2343
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2344
 #, kde-format
 msgid ""
 "Found:\n"
@@ -11930,89 +11930,89 @@ msgstr ""
 "Leiti:\n"
 "\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2344
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2345
 #, kde-format
 msgid "%1 commodity (equity)\n"
 msgid_plural "%1 commodities (equities)\n"
 msgstr[0] "%1 kaup (finantsinstrument)\n"
 msgstr[1] "%1 kaupa (finantsinstrumenti)\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2345
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2346
 #, kde-format
 msgid "%1 price\n"
 msgid_plural "%1 prices\n"
 msgstr[0] "%1 hind\n"
 msgstr[1] "%1 hinda\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2346
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2347
 #, kde-format
 msgid "%1 account\n"
 msgid_plural "%1 accounts\n"
 msgstr[0] "%1 konto\n"
 msgstr[1] "%1 kontot\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2347
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2348
 #, kde-format
 msgid "%1 transaction\n"
 msgid_plural "%1 transactions\n"
 msgstr[0] "%1 tehing\n"
 msgstr[1] "%1 tehingut\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2348
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2349
 #, kde-format
 msgid "%1 schedule\n"
 msgid_plural "%1 schedules\n"
 msgstr[0] "%1 ajaplaan\n"
 msgstr[1] "%1 ajaplaani\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2351
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2352
 #, kde-format
 msgid "No inconsistencies were detected\n"
 msgstr "Ebaühtlust ei tuvastatud\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2353
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2354
 #, kde-format
 msgid "%1 inconsistency was detected and corrected\n"
 msgid_plural "%1 inconsistencies were detected and corrected\n"
 msgstr[0] "%1 ebaühtlus tuvastati ja parandati\n"
 msgstr[1] "%1 ebaühtlust tuvastati ja parandati\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2358
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2359
 #, kde-format
 msgid "%1 orphan account was created\n"
 msgid_plural "%1 orphan accounts were created\n"
 msgstr[0] "%1 orbkonto loodi\n"
 msgstr[1] "%1 orbkontot loodi\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2363
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2364
 #, kde-format
 msgid "%1 possible schedule problem was noted\n"
 msgid_plural "%1 possible schedule problems were noted\n"
 msgstr[0] "%1 võimalik probleem ajaplaanidega täheldati\n"
 msgstr[1] "%1 võimalikku probleemi ajaplaanidega täheldati\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2368
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2369
 #, kde-format
 msgid "Small Business Features (Customers, Invoices, etc.)"
 msgstr "Väikeettevõtluse võimalused (kliendid, arved jne.)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2369
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2370
 #: kmymoney/plugins/views/budget/budgetview.cpp:53
 #, kde-format
 msgid "Budgets"
 msgstr "Eelarved"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2370
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2371
 #, kde-format
 msgid "Lots"
 msgstr "Kaubasaadetised"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2372
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2373
 #, kde-format
 msgid "The following features found in your file are not currently supported:"
 msgstr "Failis leiti järgmised omadused, mis ei ole veel toetatud:"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2375
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2376
 #, kde-format
 msgid ""
 "\n"
@@ -12023,17 +12023,17 @@ msgstr ""
 "\n"
 "Täpsema teabe jaoks klõpsa Rohkem"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2390
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2391
 #, kde-format
 msgid "Save report as"
 msgstr "Aruande salvestamine"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2426
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2427
 #, kde-format
 msgid "Orphan created from unknown GnuCash account"
 msgstr "Tundmatu GnuCashi konto põhjal loodi orbkonto"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2441
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2442
 #, kde-format
 msgid ""
 "One or more transactions contain a reference to an otherwise unknown "
@@ -12043,7 +12043,7 @@ msgstr ""
 "Vähemalt üks tehing viitas tundmatule kontole\n"
 "Andmete jaoks loodi varakonto nimega %1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2475
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2476
 #, kde-format
 msgid ""
 "An Investment account must be a child of an Asset account\n"
@@ -12052,7 +12052,7 @@ msgstr ""
 "Investeerimiskonto peab olema varakonto järglane\n"
 "Konto %1 salvestatakse peamise varakonto alla"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2482
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2483
 #, kde-format
 msgid ""
 "An Income account must be a child of an Income account\n"
@@ -12061,7 +12061,7 @@ msgstr ""
 "Tulukonto peab olema tulukonto järglane\n"
 "Konto %1 salvestatakse peamise tulukonto alla"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2489
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2490
 #, kde-format
 msgid ""
 "An Expense account must be a child of an Expense account\n"
@@ -12070,45 +12070,45 @@ msgstr ""
 "Kulukonto peab olema kulukonto järglane\n"
 "Konto %1 salvestatakse peamise kulukonto alla"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2537
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2538
 #, kde-format
 msgid "Enter the investment account name "
 msgstr "Sisesta investeerimiskonto nimi"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2538
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2539
 #, kde-format
 msgid "My Investments"
 msgstr "Minu investeeringud"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2576
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2577
 #, kde-format
 msgid "Select parent investment account or enter new name. Stock %1"
 msgstr "Vali üleminvesteerimiskonto või sisesta uus nimi. Aktsia%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2601
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2618
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2602
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2619
 #, kde-format
 msgid "%1 is not an Investment Account. Do you wish to make it one?"
 msgstr ""
 "%1 ei ole investeerimiskonto. Kas soovid selle investeerimiskontoks muuta?"
 
-#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:56
+#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:72
 #, kde-format
 msgid "Schedules to iCalendar"
 msgstr "Ajaplaanid iCalendari"
 
-#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:76
+#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:92
 #, kde-format
 msgid "Schedules to iCalendar [%1]"
 msgstr "Ajaplaanid iCalendari [%1]"
 
-#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:94
+#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:110
 #, kde-format
 msgctxt "ICS (Filefilter)"
 msgid "iCalendar files"
 msgstr "iCalendari failid"
 
-#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:97
+#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:113
 #: kmymoney/plugins/views/reports/kreportsview.cpp:348
 #, kde-format
 msgid "Export as"
@@ -12862,13 +12862,13 @@ msgstr "Konto"
 msgid "To confirm this order enter the tan displayed by your &generator"
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:203
+#: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:205
 #: kmymoney/plugins/ofx/import/ofxpartner.cpp:411
 #, kde-format
 msgid "The HTTP request failed."
 msgstr "HTTP päring nurjus."
 
-#: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:203
+#: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:205
 #: kmymoney/plugins/ofx/import/ofxpartner.cpp:411
 #, kde-format
 msgctxt "The HTTP request failed"
@@ -13701,7 +13701,7 @@ msgstr "QIF profiili valija"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:219
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:129
-#: kmymoney/plugins/qif/import/kimportdlg.cpp:167
+#: kmymoney/plugins/qif/import/kimportdlg.cpp:171
 #, kde-format
 msgid "The default QIF profile"
 msgstr "Vaikimisi QIF profiil"
@@ -14238,156 +14238,156 @@ msgstr "Pangaväljavõte"
 msgid "Other application"
 msgstr "Muu rakendus"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:168
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:172
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested interest"
 msgstr "Reinvesteeritud intress"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:171
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:175
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested dividend"
 msgstr "Reinvesteeritud dividend"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:174
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:178
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested dividend (long term)"
 msgstr "Reinvesteeritud dividend (pikaajaline)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:177
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:181
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested dividend (short term)"
 msgstr "Reinvesteeritud dividend (lühiajaline)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:180
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:184
 #, kde-format
 msgctxt "Category name"
 msgid "Dividend"
 msgstr "Dividend"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:183
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:187
 #, kde-format
 msgctxt "Category name"
 msgid "Interest"
 msgstr "Intress"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:186
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:190
 #, kde-format
 msgctxt "Category name"
 msgid "Capital Gain (short term)"
 msgstr "Kapitalitulum (lühiajaline)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:189
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:193
 #, kde-format
 msgctxt "Category name"
 msgid "Capital Gain (mid term)"
 msgstr "Kapitalitulum (keskpikk)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:192
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:196
 #, kde-format
 msgctxt "Category name"
 msgid "Capital Gain (long term)"
 msgstr "Kapitalitulum (pikaajaline)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:195
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:199
 #, kde-format
 msgctxt "Category name"
 msgid "Returned capital"
 msgstr "Tagasi saadud kapital"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:198
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:202
 #, kde-format
 msgctxt "Category name"
 msgid "Miscellaneous income"
 msgstr "Muu tulu"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:201
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:205
 #, kde-format
 msgctxt "Category name"
 msgid "Miscellaneous expense"
 msgstr "Muu kulu"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:204
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:208
 #, kde-format
 msgctxt "Category name"
 msgid "Investment fees"
 msgstr "Investeeringu teenustasud"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:206
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:210
 #, kde-format
 msgid "Unknown QIF type %1"
 msgstr "Tundmatu QIF tüüp %1"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:365
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:369
 #, kde-format
 msgid "Date format selection"
 msgstr "Kuupäevavormingu valimine"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:365
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:369
 #, kde-format
 msgid "Pick the date format that suits your input file"
 msgstr "Vali sisendfailile sobiv kuupäevavorming"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:380
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:384
 #, kde-format
 msgid "Importing QIF..."
 msgstr "QIF import..."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:482
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:486
 #, kde-format
 msgid "Reading QIF..."
 msgstr "QIF lugemine..."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:487
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:491
 #, kde-format
 msgid "Error while running the filter '%1'."
 msgstr "Tõrge filtri \"%1\" töös."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:489
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:493
 #, kde-format
 msgid "Filter error"
 msgstr "Filtri tõrge"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:523
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:527
 #, kde-format
 msgctxt "QIF tag for liability account"
 msgid "Oth L"
 msgstr "Muu P"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:528
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:532
 #, kde-format
 msgctxt "QIF tag for investment account"
 msgid "Invst"
 msgstr "Invest"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:542
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:546
 #, kde-format
 msgctxt "QIF tag for category"
 msgid "Cat"
 msgstr "Kat"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:545
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:549
 #, kde-format
 msgctxt "QIF tag for security"
 msgid "Security"
 msgstr "Väärtpaber"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:548
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:552
 #, kde-format
 msgctxt "QIF tag for prices"
 msgid "Prices"
 msgstr "Hinnad"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:557
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:561
 #, kde-format
 msgctxt "QIF tag for a class"
 msgid "Class"
 msgstr "Klass"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:738
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:742
 #, kde-format
 msgid ""
 "The %1 account currently has an opening balance of %2. This QIF file reports "
@@ -14397,29 +14397,29 @@ msgstr ""
 "%1 konto algsaldo on praegu %2. See QIF-fail annab teada algsaldost %3. Kas "
 "kirjutada praegune algsaldo üle QIF-faili algsaldoga?"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:739
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:743
 #, kde-format
 msgid "Overwrite opening balance"
 msgstr "Algsaldo ülekirjutamine"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:906
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:910
 #, kde-format
 msgid "Unable to find account: %1"
 msgstr "Kontot ei leitud: %1"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:920
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:930
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:955
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:924
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:934
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:959
 #, kde-format
 msgid "Autogenerated by QIF importer"
 msgstr "Automaatselt genereeritud QIF importija poolt"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:947
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:951
 #, kde-format
 msgid "QIF imported, no account name supplied"
 msgstr "QIF on imporditud, konto nime ei antud"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:981
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:985
 #, kde-format
 msgid ""
 "KMyMoney has imported a second opening balance transaction into account <b>"
@@ -14429,18 +14429,18 @@ msgstr ""
 "KMyMoney importis teise algsaldo tehingu kontosse <b>%1</b>, mis erineb "
 "failis juba leiduvast. Palun paranda see pärast importimist käsitsi."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:981
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:985
 #, kde-format
 msgid "Opening balance problem"
 msgstr "Algsaldo probleem"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1004
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1008
 #, kde-format
 msgid "Error while creating opening balance transaction"
 msgstr "Tõrge algsaldo tehingu loomisel"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1083
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1311
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1087
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1315
 #, kde-format
 msgid ""
 "The date entry \"%1\" read from the file cannot be interpreted through the "
@@ -14457,13 +14457,13 @@ msgstr ""
 "\", importimine katkestatakse. Seejärel saab importimist uuesti alustada ja "
 "valida mõne muu QIF profiili või luua uue."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1088
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1316
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1092
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1320
 #, kde-format
 msgid "Invalid date format"
 msgstr "Vigane kuupäevavorming"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1441
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1445
 #, kde-format
 msgid ""
 "This investment account does not contain the \"%1\" security.  Transactions "
@@ -14472,12 +14472,12 @@ msgstr ""
 "Investeerimiskonto ei sisalda \"%1\" väärtpaberit. Selle väärtpaberiga "
 "seotud tehinguid eiratakse."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1952
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1956
 #, kde-format
 msgid "%1 (Investment)"
 msgstr "%1 (investeering)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1953
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1957
 #, kde-format
 msgid "Autogenerated by QIF importer from type Mutual account entry"
 msgstr ""
@@ -14860,17 +14860,17 @@ msgstr ""
 "Selle avas %1 masinas %2 %3\n"
 "Kas ikkagi avada?"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:929
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:936
 #, kde-format
 msgid "Inserting online jobs."
 msgstr "Võrgutööde lisamine."
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2026
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2033
 #, kde-format
 msgid "SQLite file %1 does not exist"
 msgstr "SQLite'i faili %1 ei ole olemas"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2079
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2086
 #, kde-format
 msgid ""
 "Automatic database creation for type %1 is not currently implemented.\n"
@@ -14879,35 +14879,35 @@ msgstr ""
 "Automaatne %1 tüüpi andmebaasi loomine pole veel võimalik.\n"
 "Palun loo andmebaas %2 käsitsi"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2098
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2105
 #, kde-format
 msgid "Error in create database %1; do you have create permissions?"
 msgstr ""
 "Tõrge andmebaasi %1 loomisel, kas sul on ikka selleks vajalikud õigused?"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:136
+#: kmymoney/plugins/sql/sqlstorage.cpp:137
 #, kde-format
 msgid "Cannot open database %1\n"
 msgstr "Andmebaasi %1 avamine nurjus\n"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:169
+#: kmymoney/plugins/sql/sqlstorage.cpp:170
 #, kde-format
 msgid "An unrecoverable error occurred while reading the database"
 msgstr "Andmebaasi lugemisel tekkis parandamatu tõrge"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:171
-#: kmymoney/plugins/sql/sqlstorage.cpp:199
+#: kmymoney/plugins/sql/sqlstorage.cpp:172
+#: kmymoney/plugins/sql/sqlstorage.cpp:200
 #, kde-format
 msgid "Database malfunction"
 msgstr "Andmebaas ei toimi"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:188
+#: kmymoney/plugins/sql/sqlstorage.cpp:189
 #: kmymoney/plugins/xml/xmlstorage.cpp:240
 #, kde-format
 msgid "Tried to access a file when it has not been opened"
 msgstr "Püüti kasutada faili, mida polnud avatud."
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:196
+#: kmymoney/plugins/sql/sqlstorage.cpp:197
 #, kde-format
 msgid ""
 "An unrecoverable error occurred while writing to the database.\n"
@@ -14916,32 +14916,32 @@ msgstr ""
 "Andmebaasi kirjutamisel tekkis parandamatu tõrge.\n"
 "See võib olla riknenud."
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:231
+#: kmymoney/plugins/sql/sqlstorage.cpp:232
 #, kde-format
 msgid "Cannot save to current database."
 msgstr "Salvestamine aktiivsesse andmebaasi nurjus."
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:236
+#: kmymoney/plugins/sql/sqlstorage.cpp:237
 #, kde-format
 msgid "Cannot save to current database: %1"
 msgstr "Salvestamine aktiivsesse andmebaasi nurjus: %1"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:259
+#: kmymoney/plugins/sql/sqlstorage.cpp:260
 #, kde-format
 msgid "Database files (*.db *.sql)"
 msgstr "Andmebaasifailid (*.db *.sql)"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:265
+#: kmymoney/plugins/sql/sqlstorage.cpp:266
 #, kde-format
 msgid "Open database..."
 msgstr "Ava andmebaas..."
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:270
+#: kmymoney/plugins/sql/sqlstorage.cpp:271
 #, kde-format
 msgid "Generate Database SQL"
 msgstr "Andmebaasi SQL-i genereerimine"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:329
+#: kmymoney/plugins/sql/sqlstorage.cpp:330
 #, kde-format
 msgid ""
 "Database contains data which must be removed before using Save As.\n"
@@ -14950,7 +14950,7 @@ msgstr ""
 "Andmebaas sisaldab andmeid, mis tuleb eemaldada enne salvestamist.\n"
 "Kas jätkata?"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:349
+#: kmymoney/plugins/sql/sqlstorage.cpp:350
 #, kde-format
 msgid ""
 "Cannot open or create database %1.\n"
@@ -18102,18 +18102,18 @@ msgstr "Weboobi taustaprogrammi laadimine ..."
 msgid "Getting list of backends."
 msgstr "Taustaprogrammine loendi hankimine."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:139
-#: kmymoney/plugins/woob/woob.cpp:171
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:142
+#: kmymoney/plugins/woob/woob.cpp:172
 #, kde-format
 msgid "Connecting to bank..."
 msgstr "Ühenduse võtmine pangaga ..."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:140
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:143
 #, kde-format
 msgid "Getting list of accounts from your bank."
 msgstr "Kontode hankimine pangast."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:166
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:173
 #, fuzzy, kde-format
 #| msgid ""
 #| "No backends available.\n"
@@ -18125,7 +18125,7 @@ msgstr ""
 "Ühtegi taustaprogrammi pole saada.\n"
 "Lisa vähemalt üks (weboob-config-qt abil)."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:179
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:186
 #, fuzzy, kde-format
 #| msgid ""
 #| "No accounts available.\n"
@@ -18137,7 +18137,7 @@ msgstr ""
 "Ühtegi kontot pole saada.\n"
 "Kontrolli oma taustaprogrammi seadistust (weboob-config-qt abil)."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:188
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:195
 #, kde-format
 msgid "Incorrect password."
 msgstr "Vigane parool."
@@ -18175,7 +18175,7 @@ msgid ""
 msgstr ""
 "<b>Võrgu</b>konto valimine, millega <b>rakenduse</b> konto seostada ..."
 
-#: kmymoney/plugins/woob/woob.cpp:59
+#: kmymoney/plugins/woob/woob.cpp:60
 #, kde-format
 msgid ""
 "Woob plugin failed to fully initialize, most likely due to a missing or a "
@@ -18183,7 +18183,7 @@ msgid ""
 "it."
 msgstr ""
 
-#: kmymoney/plugins/woob/woob.cpp:65
+#: kmymoney/plugins/woob/woob.cpp:66
 #, kde-format
 msgid ""
 "Woob plugin failed to fully initialize, most likely due to a missing or a "
@@ -18191,13 +18191,13 @@ msgid ""
 "it."
 msgstr ""
 
-#: kmymoney/plugins/woob/woob.cpp:120
+#: kmymoney/plugins/woob/woob.cpp:121
 #, fuzzy, kde-format
 #| msgid "Weboob configuration"
 msgid "Woob configuration"
 msgstr "Weboobi seadistamine"
 
-#: kmymoney/plugins/woob/woob.cpp:172
+#: kmymoney/plugins/woob/woob.cpp:173
 #, kde-format
 msgid "Retrieving transactions..."
 msgstr "Tehingute tõmbamine ..."

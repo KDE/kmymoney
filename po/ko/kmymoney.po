@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-14 02:39+0000\n"
+"POT-Creation-Date: 2024-12-17 02:06+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -133,14 +133,14 @@ msgstr ""
 "래는 무시됩니다."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:745
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1443
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1447
 #, kde-format
 msgid "Security not found"
 msgstr "유가증권을 찾을 수 없음"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:790
 #: kmymoney/converter/mymoneystatementreader.cpp:793
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1427
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1431
 #, kde-format
 msgid "Statement Importer"
 msgstr "명세서 가져오기 도구"
@@ -206,7 +206,7 @@ msgstr ""
 "(를) 참조하는 이후 모든 거래의 수취인 정보가 삭제됩니다."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1047
-#: kmymoney/kmymoneyutils.cpp:572
+#: kmymoney/kmymoneyutils.cpp:576
 #, kde-format
 msgid "New payee/receiver"
 msgstr "새 수취인/파산관재인"
@@ -599,10 +599,10 @@ msgid "Backup location:"
 msgstr "백업 위치:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3924
-#: kmymoney/kmymoney.cpp:3995 kmymoney/kmymoney.cpp:4011
-#: kmymoney/kmymoney.cpp:4017 kmymoney/kmymoney.cpp:4031
-#: kmymoney/kmymoney.cpp:4033
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3932
+#: kmymoney/kmymoney.cpp:4003 kmymoney/kmymoney.cpp:4019
+#: kmymoney/kmymoney.cpp:4025 kmymoney/kmymoney.cpp:4039
+#: kmymoney/kmymoney.cpp:4041
 #, kde-format
 msgid "Backup"
 msgstr "백업"
@@ -2129,7 +2129,7 @@ msgstr "모든 주식 총액"
 msgid "VAT account"
 msgstr "부가가치세 계좌"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:549 kmymoney/kmymoney.cpp:433
+#: kmymoney/dialogs/knewaccountdlg.cpp:549 kmymoney/kmymoney.cpp:439
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:188
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:370
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:73
@@ -2137,7 +2137,7 @@ msgstr "부가가치세 계좌"
 msgid "Asset"
 msgstr "자산"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:551 kmymoney/kmymoney.cpp:434
+#: kmymoney/dialogs/knewaccountdlg.cpp:551 kmymoney/kmymoney.cpp:440
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:189
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:378
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:75
@@ -2145,7 +2145,7 @@ msgstr "자산"
 msgid "Liability"
 msgstr "부채"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:553 kmymoney/kmymoney.cpp:435
+#: kmymoney/dialogs/knewaccountdlg.cpp:553 kmymoney/kmymoney.cpp:441
 #: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1809
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
@@ -2154,7 +2154,7 @@ msgstr "부채"
 msgid "Income"
 msgstr "수입"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:555 kmymoney/kmymoney.cpp:436
+#: kmymoney/dialogs/knewaccountdlg.cpp:555 kmymoney/kmymoney.cpp:442
 #: kmymoney/models/ledgerfilterbase.cpp:97
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:79
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:191
@@ -3727,12 +3727,12 @@ msgstr "아이콘"
 msgid "Plugins"
 msgstr "플러그인"
 
-#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:132
+#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:136
 #, kde-format
 msgid "CSV profile <b>%1</b> already exists.<br>Do you want to overwrite it?"
 msgstr "CSV 프로필 <b>%1</b>이(가) 이미 존재합니다. <br>덮어쓰시겠습니까?"
 
-#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:135
+#: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:139
 #, kde-format
 msgid "CSV Profile Already Exists"
 msgstr "CSV 프로필이 이미 있음"
@@ -4751,7 +4751,7 @@ msgctxt "Roles in project"
 msgid "CSV import/export"
 msgstr "CSV 가져오기/내보내기"
 
-#: kmymoney/kmymoney.cpp:437 kmymoney/models/equitiesmodel.cpp:424
+#: kmymoney/kmymoney.cpp:443 kmymoney/models/equitiesmodel.cpp:424
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:192
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:408
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:78
@@ -4759,18 +4759,18 @@ msgstr "CSV 가져오기/내보내기"
 msgid "Equity"
 msgstr "자본"
 
-#: kmymoney/kmymoney.cpp:518
+#: kmymoney/kmymoney.cpp:524
 #, kde-format
 msgid "The file has been changed, save it?"
 msgstr "파일이 변경되었습니다. 저장하시겠습니까?"
 
-#: kmymoney/kmymoney.cpp:519
+#: kmymoney/kmymoney.cpp:525
 #, kde-format
 msgctxt "@title:window"
 msgid "Save file"
 msgstr "파일 저장"
 
-#: kmymoney/kmymoney.cpp:892
+#: kmymoney/kmymoney.cpp:898
 #, kde-format
 msgid ""
 "<p>The account \"%1\" was previously created as loan account but some "
@@ -4782,378 +4782,378 @@ msgstr ""
 "p><p>새로운 대출 마법사가 실행되어 필요한 모든 정보를 수집합니다.</p><p>문제"
 "를 해결하려면 KMyMoney 버전 0.8.7 이상 0.9 미만을 사용하십시오.</p>"
 
-#: kmymoney/kmymoney.cpp:894
+#: kmymoney/kmymoney.cpp:900
 #, kde-format
 msgid "Account problem"
 msgstr "계좌 문제"
 
-#: kmymoney/kmymoney.cpp:913
+#: kmymoney/kmymoney.cpp:919
 #, kde-format
 msgid "Fix transactions"
 msgstr "거래 수정"
 
-#: kmymoney/kmymoney.cpp:1182
+#: kmymoney/kmymoney.cpp:1188
 #, kde-format
 msgid "Untitled"
 msgstr "제목 없음"
 
-#: kmymoney/kmymoney.cpp:1356
+#: kmymoney/kmymoney.cpp:1364
 #, kde-format
 msgid "Unable to match the selected transactions"
 msgstr "선택한 거래를 일치시킬 수 없음"
 
-#: kmymoney/kmymoney.cpp:1383
+#: kmymoney/kmymoney.cpp:1391
 #, kde-format
 msgid "Unable to unmatch the selected transactions"
 msgstr "선택한 거래를 일치 해제시킬 수 없음"
 
-#: kmymoney/kmymoney.cpp:1551
+#: kmymoney/kmymoney.cpp:1559
 #, kde-format
 msgctxt "@action New file/database"
 msgid "New book..."
 msgstr "새 장부..."
 
-#: kmymoney/kmymoney.cpp:1718
+#: kmymoney/kmymoney.cpp:1726
 #, kde-format
 msgid ""
 "This is the consistency check log, use the context menu to copy or save it."
 msgstr ""
 "일관성 검사 로그입니다. 상황에 맞는 메뉴를 사용하여 복사하거나 저장하십시오."
 
-#: kmymoney/kmymoney.cpp:1731
+#: kmymoney/kmymoney.cpp:1739
 #, kde-format
 msgid "Copy to clipboard"
 msgstr "클립보드에 복사"
 
-#: kmymoney/kmymoney.cpp:1732
+#: kmymoney/kmymoney.cpp:1740
 #, kde-format
 msgid "Save to file"
 msgstr "파일로 저장"
 
-#: kmymoney/kmymoney.cpp:1858
+#: kmymoney/kmymoney.cpp:1866
 #, kde-format
 msgid "Backup..."
 msgstr "백업..."
 
-#: kmymoney/kmymoney.cpp:1859
+#: kmymoney/kmymoney.cpp:1867
 #, kde-format
 msgid "Statement file..."
 msgstr "명세서 파일..."
 
-#: kmymoney/kmymoney.cpp:1860 kmymoney/kmymoney.cpp:1861
+#: kmymoney/kmymoney.cpp:1868 kmymoney/kmymoney.cpp:1869
 #, kde-format
 msgid "Account Template..."
 msgstr "계좌 템플릿..."
 
-#: kmymoney/kmymoney.cpp:1862
+#: kmymoney/kmymoney.cpp:1870
 #, kde-format
 msgid "Personal Data..."
 msgstr "개인 정보..."
 
-#: kmymoney/kmymoney.cpp:1864
+#: kmymoney/kmymoney.cpp:1872
 #, kde-format
 msgid "Dump Memory"
 msgstr "메모리 덤프"
 
-#: kmymoney/kmymoney.cpp:1866
+#: kmymoney/kmymoney.cpp:1874
 #, kde-format
 msgid "File-Information..."
 msgstr "파일 정보..."
 
-#: kmymoney/kmymoney.cpp:1870
+#: kmymoney/kmymoney.cpp:1878
 #, kde-format
 msgid "Find transaction..."
 msgstr "거래 찾기..."
 
-#: kmymoney/kmymoney.cpp:1874
+#: kmymoney/kmymoney.cpp:1882
 #, kde-format
 msgid "Show Transaction Detail"
 msgstr "거래 정보 표시"
 
 #. i18n: ectx: label, entry (HideReconciledTransactions), group (List Options)
-#: kmymoney/kmymoney.cpp:1875 kmymoney/settings/kmymoney.kcfg:252
+#: kmymoney/kmymoney.cpp:1883 kmymoney/settings/kmymoney.kcfg:252
 #, kde-format
 msgid "Hide reconciled transactions"
 msgstr "조정된 거래 숨기기"
 
 #. i18n: ectx: label, entry (HideUnusedCategory), group (List Options)
-#: kmymoney/kmymoney.cpp:1876 kmymoney/settings/kmymoney.kcfg:224
+#: kmymoney/kmymoney.cpp:1884 kmymoney/settings/kmymoney.kcfg:224
 #, kde-format
 msgid "Hide unused categories"
 msgstr "사용하지 않는 분류 숨기기"
 
 #. i18n: ectx: label, entry (ShowAllAccounts), group (List Options)
-#: kmymoney/kmymoney.cpp:1877 kmymoney/settings/kmymoney.kcfg:228
+#: kmymoney/kmymoney.cpp:1885 kmymoney/settings/kmymoney.kcfg:228
 #, kde-format
 msgid "Show all accounts"
 msgstr "모든 계좌 표시"
 
-#: kmymoney/kmymoney.cpp:1881
+#: kmymoney/kmymoney.cpp:1889
 #, kde-format
 msgid "New institution..."
 msgstr "새 금융기관..."
 
-#: kmymoney/kmymoney.cpp:1882
+#: kmymoney/kmymoney.cpp:1890
 #, kde-format
 msgid "Edit institution..."
 msgstr "금융기관 편집..."
 
-#: kmymoney/kmymoney.cpp:1883
+#: kmymoney/kmymoney.cpp:1891
 #, kde-format
 msgid "Delete institution..."
 msgstr "금융기관 삭제..."
 
-#: kmymoney/kmymoney.cpp:1887
+#: kmymoney/kmymoney.cpp:1895
 #, kde-format
 msgid "New account..."
 msgstr "새 계좌..."
 
-#: kmymoney/kmymoney.cpp:1888
+#: kmymoney/kmymoney.cpp:1896
 #, kde-format
 msgid "Open ledger"
 msgstr "원장 열기"
 
-#: kmymoney/kmymoney.cpp:1889
+#: kmymoney/kmymoney.cpp:1897
 #, kde-format
 msgid "Reconcile..."
 msgstr "조정하기..."
 
-#: kmymoney/kmymoney.cpp:1890
+#: kmymoney/kmymoney.cpp:1898
 #, kde-format
 msgctxt "Finish reconciliation"
 msgid "Finish"
 msgstr "끝내기"
 
-#: kmymoney/kmymoney.cpp:1891
+#: kmymoney/kmymoney.cpp:1899
 #, kde-format
 msgctxt "Postpone reconciliation"
 msgid "Postpone"
 msgstr "연기"
 
-#: kmymoney/kmymoney.cpp:1892
+#: kmymoney/kmymoney.cpp:1900
 #, kde-format
 msgctxt "Cancel reconciliation"
 msgid "Cancel"
 msgstr "취소"
 
-#: kmymoney/kmymoney.cpp:1893
+#: kmymoney/kmymoney.cpp:1901
 #, kde-format
 msgid "Report reconciliation"
 msgstr "조정 보고"
 
-#: kmymoney/kmymoney.cpp:1894
+#: kmymoney/kmymoney.cpp:1902
 #, kde-format
 msgid "Edit account..."
 msgstr "계좌 편집..."
 
-#: kmymoney/kmymoney.cpp:1895
+#: kmymoney/kmymoney.cpp:1903
 #, kde-format
 msgid "Delete account..."
 msgstr "계좌 삭제..."
 
-#: kmymoney/kmymoney.cpp:1896
+#: kmymoney/kmymoney.cpp:1904
 #, kde-format
 msgid "Close account"
 msgstr "계좌 폐쇄"
 
-#: kmymoney/kmymoney.cpp:1897
+#: kmymoney/kmymoney.cpp:1905
 #, kde-format
 msgid "Reopen account"
 msgstr "계좌 재개"
 
-#: kmymoney/kmymoney.cpp:1898
+#: kmymoney/kmymoney.cpp:1906
 #, kde-format
 msgid "Transaction report"
 msgstr "거래 보고서"
 
-#: kmymoney/kmymoney.cpp:1899
+#: kmymoney/kmymoney.cpp:1907
 #, kde-format
 msgid "Show balance chart..."
 msgstr "잔액 차트 표시..."
 
-#: kmymoney/kmymoney.cpp:1900
+#: kmymoney/kmymoney.cpp:1908
 #, kde-format
 msgid "Map account..."
 msgstr "계좌 매핑..."
 
-#: kmymoney/kmymoney.cpp:1901
+#: kmymoney/kmymoney.cpp:1909
 #, kde-format
 msgid "Unmap account..."
 msgstr "계좌 매핑 해제..."
 
-#: kmymoney/kmymoney.cpp:1902
+#: kmymoney/kmymoney.cpp:1910
 #, kde-format
 msgid "Update account..."
 msgstr "계좌 업데이트..."
 
-#: kmymoney/kmymoney.cpp:1903
+#: kmymoney/kmymoney.cpp:1911
 #, kde-format
 msgid "Update all accounts..."
 msgstr "모든 계좌 업데이트..."
 
-#: kmymoney/kmymoney.cpp:1907
+#: kmymoney/kmymoney.cpp:1915
 #, kde-format
 msgid "New category..."
 msgstr "새 분류..."
 
-#: kmymoney/kmymoney.cpp:1908
+#: kmymoney/kmymoney.cpp:1916
 #, kde-format
 msgid "Edit category..."
 msgstr "분류 편집..."
 
-#: kmymoney/kmymoney.cpp:1909
+#: kmymoney/kmymoney.cpp:1917
 #, kde-format
 msgid "Delete category..."
 msgstr "분류 삭제..."
 
-#: kmymoney/kmymoney.cpp:1913
+#: kmymoney/kmymoney.cpp:1921
 #, kde-format
 msgid "Currencies..."
 msgstr "통화..."
 
-#: kmymoney/kmymoney.cpp:1914
+#: kmymoney/kmymoney.cpp:1922
 #, kde-format
 msgid "Prices..."
 msgstr "가격..."
 
-#: kmymoney/kmymoney.cpp:1915
+#: kmymoney/kmymoney.cpp:1923
 #, kde-format
 msgid "Update Stock and Currency Prices..."
 msgstr "주식 및 통화 가격 업데이트..."
 
-#: kmymoney/kmymoney.cpp:1916
+#: kmymoney/kmymoney.cpp:1924
 #, kde-format
 msgid "Consistency Check"
 msgstr "일관성 검사"
 
-#: kmymoney/kmymoney.cpp:1917
+#: kmymoney/kmymoney.cpp:1925
 #, kde-format
 msgid "Performance-Test"
 msgstr "성능 테스트"
 
-#: kmymoney/kmymoney.cpp:1918
+#: kmymoney/kmymoney.cpp:1926
 #, kde-format
 msgid "Calculator..."
 msgstr "계산기..."
 
-#: kmymoney/kmymoney.cpp:1922
+#: kmymoney/kmymoney.cpp:1930
 #, kde-format
 msgid "Enable all messages"
 msgstr "모든 메시지 활성화"
 
-#: kmymoney/kmymoney.cpp:1926 kmymoney/views/kwelcomepage.cpp:82
+#: kmymoney/kmymoney.cpp:1934 kmymoney/views/kwelcomepage.cpp:82
 #, kde-format
 msgid "Get help from our community"
 msgstr "커뮤니티의 도움 받기"
 
-#: kmymoney/kmymoney.cpp:1927 kmymoney/views/kwelcomepage.cpp:84
+#: kmymoney/kmymoney.cpp:1935 kmymoney/views/kwelcomepage.cpp:84
 #, kde-format
 msgid "See what's new in this version"
 msgstr "이 버전의 새로운 기능 보기"
 
-#: kmymoney/kmymoney.cpp:1928 kmymoney/views/kwelcomepage.cpp:80
+#: kmymoney/kmymoney.cpp:1936 kmymoney/views/kwelcomepage.cpp:80
 #, kde-format
 msgid "Visit our website"
 msgstr "웹사이트 방문"
 
-#: kmymoney/kmymoney.cpp:1932
+#: kmymoney/kmymoney.cpp:1940
 #, kde-format
 msgctxt "New transaction button"
 msgid "New transaction"
 msgstr "새 거래"
 
-#: kmymoney/kmymoney.cpp:1933
+#: kmymoney/kmymoney.cpp:1941
 #, kde-format
 msgctxt "Edit transaction button"
 msgid "Edit"
 msgstr "편집"
 
-#: kmymoney/kmymoney.cpp:1934
+#: kmymoney/kmymoney.cpp:1942
 #, kde-format
 msgctxt "Enter transaction"
 msgid "Enter"
 msgstr "입력"
 
-#: kmymoney/kmymoney.cpp:1935
+#: kmymoney/kmymoney.cpp:1943
 #, kde-format
 msgctxt "Edit split button"
 msgid "Edit splits"
 msgstr "분할 편집"
 
-#: kmymoney/kmymoney.cpp:1936
+#: kmymoney/kmymoney.cpp:1944
 #, kde-format
 msgctxt "Cancel transaction edit"
 msgid "Cancel"
 msgstr "취소"
 
-#: kmymoney/kmymoney.cpp:1937
+#: kmymoney/kmymoney.cpp:1945
 #, kde-format
 msgctxt "Delete transaction"
 msgid "Delete"
 msgstr "삭제"
 
-#: kmymoney/kmymoney.cpp:1938
+#: kmymoney/kmymoney.cpp:1946
 #, kde-format
 msgctxt "Duplicate transaction"
 msgid "Duplicate"
 msgstr "복제"
 
-#: kmymoney/kmymoney.cpp:1939
+#: kmymoney/kmymoney.cpp:1947
 #, kde-format
 msgctxt "Add reversing transaction"
 msgid "Add reversing"
 msgstr "반전 추가"
 
-#: kmymoney/kmymoney.cpp:1940
+#: kmymoney/kmymoney.cpp:1948
 #, kde-format
 msgctxt "Accept 'imported' and 'matched' transaction"
 msgid "Accept"
 msgstr "수락"
 
-#: kmymoney/kmymoney.cpp:1941
+#: kmymoney/kmymoney.cpp:1949
 #, kde-format
 msgctxt "Toggle reconciliation flag"
 msgid "Toggle"
 msgstr "전환"
 
-#: kmymoney/kmymoney.cpp:1942
+#: kmymoney/kmymoney.cpp:1950
 #, kde-format
 msgctxt "Mark transaction cleared"
 msgid "Cleared"
 msgstr "확정됨"
 
-#: kmymoney/kmymoney.cpp:1943
+#: kmymoney/kmymoney.cpp:1951
 #, kde-format
 msgctxt "Mark transaction reconciled"
 msgid "Reconciled"
 msgstr "조정됨"
 
-#: kmymoney/kmymoney.cpp:1944
+#: kmymoney/kmymoney.cpp:1952
 #, kde-format
 msgctxt "Mark transaction not reconciled"
 msgid "Not reconciled"
 msgstr "조정되지 않음"
 
-#: kmymoney/kmymoney.cpp:1945
+#: kmymoney/kmymoney.cpp:1953
 #, kde-format
 msgctxt "Move transaction"
 msgid "Move transaction"
 msgstr "거래 이동"
 
-#: kmymoney/kmymoney.cpp:1946
+#: kmymoney/kmymoney.cpp:1954
 #, kde-format
 msgctxt "Show transaction"
 msgid "Show transaction"
 msgstr "거래 표시"
 
-#: kmymoney/kmymoney.cpp:1947
+#: kmymoney/kmymoney.cpp:1955
 #, fuzzy, kde-format
 #| msgid "Show Transaction Detail"
 msgctxt "Display transaction details"
 msgid "Show transaction details"
 msgstr "거래 정보 표시"
 
-#: kmymoney/kmymoney.cpp:1949
+#: kmymoney/kmymoney.cpp:1957
 #, fuzzy, kde-format
 #| msgctxt "To open a new report"
 #| msgid "&Open"
@@ -5161,260 +5161,260 @@ msgctxt "Open URL"
 msgid "Open URL"
 msgstr "열기(&O)"
 
-#: kmymoney/kmymoney.cpp:1950
+#: kmymoney/kmymoney.cpp:1958
 #, kde-format
 msgctxt "Select all transactions"
 msgid "Select all"
 msgstr "모두 선택"
 
-#: kmymoney/kmymoney.cpp:1951
+#: kmymoney/kmymoney.cpp:1959
 #, kde-format
 msgid "Go to account"
 msgstr "계좌로 이동"
 
-#: kmymoney/kmymoney.cpp:1952
+#: kmymoney/kmymoney.cpp:1960
 #, kde-format
 msgid "Go to payee"
 msgstr "수취인으로 이동"
 
-#: kmymoney/kmymoney.cpp:1953
+#: kmymoney/kmymoney.cpp:1961
 #, kde-format
 msgid "Create scheduled transaction..."
 msgstr "예정된 거래 만들기..."
 
-#: kmymoney/kmymoney.cpp:1954
+#: kmymoney/kmymoney.cpp:1962
 #, kde-format
 msgid "Assign next number"
 msgstr "다음 번호 할당"
 
-#: kmymoney/kmymoney.cpp:1955
+#: kmymoney/kmymoney.cpp:1963
 #, kde-format
 msgctxt "Combine transactions"
 msgid "Combine"
 msgstr "결합"
 
-#: kmymoney/kmymoney.cpp:1956
+#: kmymoney/kmymoney.cpp:1964
 #, kde-format
 msgid "Move to today"
 msgstr "오늘로 이동"
 
-#: kmymoney/kmymoney.cpp:1957
+#: kmymoney/kmymoney.cpp:1965
 #, kde-format
 msgid "Copy splits"
 msgstr "분할 복사"
 
-#: kmymoney/kmymoney.cpp:1958
+#: kmymoney/kmymoney.cpp:1966
 #, kde-format
 msgid "Show filter widget"
 msgstr "필터 위젯 표시"
 
-#: kmymoney/kmymoney.cpp:1960
+#: kmymoney/kmymoney.cpp:1968
 #, kde-format
 msgid "New investment..."
 msgstr "새 투자..."
 
-#: kmymoney/kmymoney.cpp:1961
+#: kmymoney/kmymoney.cpp:1969
 #, kde-format
 msgid "Edit investment..."
 msgstr "투자 편집..."
 
-#: kmymoney/kmymoney.cpp:1962
+#: kmymoney/kmymoney.cpp:1970
 #, kde-format
 msgid "Delete investment..."
 msgstr "투자 삭제..."
 
-#: kmymoney/kmymoney.cpp:1963
+#: kmymoney/kmymoney.cpp:1971
 #, kde-format
 msgid "Online price update..."
 msgstr "온라인 가격 업데이트..."
 
-#: kmymoney/kmymoney.cpp:1964
+#: kmymoney/kmymoney.cpp:1972
 #, kde-format
 msgid "Manual price update..."
 msgstr "수동 가격 업데이트..."
 
-#: kmymoney/kmymoney.cpp:1965
+#: kmymoney/kmymoney.cpp:1973
 #, kde-format
 msgid "Edit security..."
 msgstr "유가증권 편집..."
 
-#: kmymoney/kmymoney.cpp:1966
+#: kmymoney/kmymoney.cpp:1974
 #, kde-format
 msgid "Delete security..."
 msgstr "유가증권 삭제..."
 
-#: kmymoney/kmymoney.cpp:1969
+#: kmymoney/kmymoney.cpp:1977
 #, kde-format
 msgid "New schedule..."
 msgstr "새 일정..."
 
-#: kmymoney/kmymoney.cpp:1970 kmymoney/kmymoney.cpp:1971
+#: kmymoney/kmymoney.cpp:1978 kmymoney/kmymoney.cpp:1979
 #, kde-format
 msgid "Edit scheduled transaction"
 msgstr "예정된 거래 수정"
 
-#: kmymoney/kmymoney.cpp:1972
+#: kmymoney/kmymoney.cpp:1980
 #, kde-format
 msgid "Delete scheduled transaction"
 msgstr "예정된 거래 삭제"
 
-#: kmymoney/kmymoney.cpp:1973
+#: kmymoney/kmymoney.cpp:1981
 #, kde-format
 msgid "Duplicate scheduled transaction"
 msgstr "예정된 거래 복제"
 
-#: kmymoney/kmymoney.cpp:1974
+#: kmymoney/kmymoney.cpp:1982
 #, kde-format
 msgid "Enter next transaction..."
 msgstr "다음 거래 입력..."
 
-#: kmymoney/kmymoney.cpp:1975
+#: kmymoney/kmymoney.cpp:1983
 #, kde-format
 msgid "Skip next transaction..."
 msgstr "다음 거래 건너뛰기..."
 
-#: kmymoney/kmymoney.cpp:1977
+#: kmymoney/kmymoney.cpp:1985
 #, kde-format
 msgid "New payee..."
 msgstr "새 수취인..."
 
-#: kmymoney/kmymoney.cpp:1978
+#: kmymoney/kmymoney.cpp:1986
 #, kde-format
 msgid "Rename payee"
 msgstr "수취인 이름 바꾸기"
 
-#: kmymoney/kmymoney.cpp:1979
+#: kmymoney/kmymoney.cpp:1987
 #, kde-format
 msgid "Delete payee"
 msgstr "수취인 삭제"
 
-#: kmymoney/kmymoney.cpp:1980
+#: kmymoney/kmymoney.cpp:1988
 #, kde-format
 msgid "Merge payees"
 msgstr "수취인 병합"
 
-#: kmymoney/kmymoney.cpp:1982
+#: kmymoney/kmymoney.cpp:1990
 #, kde-format
 msgid "New tag..."
 msgstr "새 태그..."
 
-#: kmymoney/kmymoney.cpp:1983
+#: kmymoney/kmymoney.cpp:1991
 #, kde-format
 msgid "Rename tag"
 msgstr "태그 이름 바꾸기"
 
-#: kmymoney/kmymoney.cpp:1984
+#: kmymoney/kmymoney.cpp:1992
 #, kde-format
 msgid "Delete tag"
 msgstr "태그 삭제"
 
-#: kmymoney/kmymoney.cpp:1986
+#: kmymoney/kmymoney.cpp:1994
 #, kde-format
 msgid "Open report"
 msgstr "보고서 열기"
 
-#: kmymoney/kmymoney.cpp:1987
+#: kmymoney/kmymoney.cpp:1995
 #, kde-format
 msgid "New report"
 msgstr "새 보고서"
 
-#: kmymoney/kmymoney.cpp:1988
+#: kmymoney/kmymoney.cpp:1996
 #, kde-format
 msgid "Copy report"
 msgstr "보고서 복사"
 
-#: kmymoney/kmymoney.cpp:1989
+#: kmymoney/kmymoney.cpp:1997
 #, kde-format
 msgid "Configure report"
 msgstr "보고서 설정"
 
-#: kmymoney/kmymoney.cpp:1990
+#: kmymoney/kmymoney.cpp:1998
 #, kde-format
 msgid "Export report"
 msgstr "보고서 내보내기"
 
-#: kmymoney/kmymoney.cpp:1991
+#: kmymoney/kmymoney.cpp:1999
 #, kde-format
 msgid "Delete report"
 msgstr "보고서 삭제"
 
-#: kmymoney/kmymoney.cpp:1992
+#: kmymoney/kmymoney.cpp:2000
 #, kde-format
 msgid "Close report"
 msgstr "보고서 닫기"
 
-#: kmymoney/kmymoney.cpp:1993
+#: kmymoney/kmymoney.cpp:2001
 #, kde-format
 msgid "Toggle chart"
 msgstr "차트 전환"
 
-#: kmymoney/kmymoney.cpp:1994
+#: kmymoney/kmymoney.cpp:2002
 #, kde-format
 msgid "Edit tab order"
 msgstr "탭 순서 편집"
 
-#: kmymoney/kmymoney.cpp:1997
+#: kmymoney/kmymoney.cpp:2005
 #, kde-format
 msgid "Test new feature"
 msgstr "새로운 기능 테스트"
 
-#: kmymoney/kmymoney.cpp:1998
+#: kmymoney/kmymoney.cpp:2006
 #, kde-format
 msgid "Debug Traces"
 msgstr "디버그 추적"
 
-#: kmymoney/kmymoney.cpp:2000
+#: kmymoney/kmymoney.cpp:2008
 #, kde-format
 msgid "Debug Timers"
 msgstr "디버그 타이머"
 
-#: kmymoney/kmymoney.cpp:2019
+#: kmymoney/kmymoney.cpp:2027
 #, kde-format
 msgctxt "Match transactions"
 msgid "Match"
 msgstr "일치"
 
-#: kmymoney/kmymoney.cpp:2020
+#: kmymoney/kmymoney.cpp:2028
 #, kde-format
 msgctxt "Unmatch transactions"
 msgid "Unmatch"
 msgstr "불일치"
 
-#: kmymoney/kmymoney.cpp:2146
+#: kmymoney/kmymoney.cpp:2154
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start reconciling the currently selected account"
 msgstr "현재 선택한 계좌 조정 시작"
 
-#: kmymoney/kmymoney.cpp:2147
+#: kmymoney/kmymoney.cpp:2155
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Postpone the current reconciliation"
 msgstr "현재 조정 연기"
 
-#: kmymoney/kmymoney.cpp:2148
+#: kmymoney/kmymoney.cpp:2156
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Finish the current reconciliation"
 msgstr "현재 조정 완료"
 
-#: kmymoney/kmymoney.cpp:2149
+#: kmymoney/kmymoney.cpp:2157
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Cancel the current reconciliation"
 msgstr "현재 조정 취소"
 
-#: kmymoney/kmymoney.cpp:2257
+#: kmymoney/kmymoney.cpp:2265
 #, kde-format
 msgid "View back"
 msgstr "뒷면 보기"
 
-#: kmymoney/kmymoney.cpp:2258
+#: kmymoney/kmymoney.cpp:2266
 #, kde-format
 msgid "View forward"
 msgstr "앞면 보기"
 
-#: kmymoney/kmymoney.cpp:2663
+#: kmymoney/kmymoney.cpp:2671
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
@@ -5423,33 +5423,33 @@ msgstr ""
 "선택한 거래 중 하나 이상의 분할이 조정되었습니다. 그래도 거래를 삭제하시겠습"
 "니까?"
 
-#: kmymoney/kmymoney.cpp:2665
+#: kmymoney/kmymoney.cpp:2673
 #, kde-format
 msgid "Transaction already reconciled"
 msgstr "이미 조정된 거래"
 
-#: kmymoney/kmymoney.cpp:2670
+#: kmymoney/kmymoney.cpp:2678
 #, kde-format
 msgid "Do you really want to delete the selected transaction?"
 msgid_plural "Do you really want to delete all %1 selected transactions?"
 msgstr[0] "선택한 모든 거래 %1개를 삭제하시겠습니까?"
 
-#: kmymoney/kmymoney.cpp:2674
+#: kmymoney/kmymoney.cpp:2682
 #, kde-format
 msgid "Delete transaction"
 msgstr "거래 삭제"
 
-#: kmymoney/kmymoney.cpp:2751
+#: kmymoney/kmymoney.cpp:2759
 #, kde-format
 msgid "Unable to duplicate transaction(s)"
 msgstr "거래를 복제할 수 없음"
 
-#: kmymoney/kmymoney.cpp:3039
+#: kmymoney/kmymoney.cpp:3047
 #, kde-format
 msgid "Unable to modify transaction"
 msgstr "거래를 수정할 수 없음"
 
-#: kmymoney/kmymoney.cpp:3175
+#: kmymoney/kmymoney.cpp:3183
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
@@ -5458,30 +5458,30 @@ msgstr ""
 "선택한 거래 중 하나 이상의 분할이 조정되었습니다. 그래도 거래를 변경하시겠습"
 "니까?"
 
-#: kmymoney/kmymoney.cpp:3177
+#: kmymoney/kmymoney.cpp:3185
 #, kde-format
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "이미 조정된 거래"
 
-#: kmymoney/kmymoney.cpp:3182
+#: kmymoney/kmymoney.cpp:3190
 #, kde-format
 msgid "Do you really want to change the selected transaction?"
 msgid_plural "Do you really want to change all %1 selected transactions?"
 msgstr[0] "선택한 모든 거래 %1개를 변경하시겠습니까?"
 
-#: kmymoney/kmymoney.cpp:3186
+#: kmymoney/kmymoney.cpp:3194
 #, kde-format
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "거래 변경"
 
-#: kmymoney/kmymoney.cpp:3271
+#: kmymoney/kmymoney.cpp:3279
 #, kde-format
 msgid "Unable to accept transaction"
 msgstr "거래를 수락할 수 없음"
 
-#: kmymoney/kmymoney.cpp:3311
+#: kmymoney/kmymoney.cpp:3319
 #, kde-format
 msgid ""
 "KMyMoney has detected some overdue scheduled transactions for the account <b>"
@@ -5490,12 +5490,12 @@ msgstr ""
 "KMyMoney에서 계좌 <b>%1</b>에 예정된 기한이 지난 거래를 감지했습니다. 예정된 "
 "거래를 지금 입력하시겠습니까?"
 
-#: kmymoney/kmymoney.cpp:3314
+#: kmymoney/kmymoney.cpp:3322
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "예정된 거래 발견됨"
 
-#: kmymoney/kmymoney.cpp:3389
+#: kmymoney/kmymoney.cpp:3397
 #, kde-format
 msgid ""
 "<qt>You have closed this account. It remains in the system because you have "
@@ -5507,96 +5507,96 @@ msgstr ""
 "있지만 보기에는 표시되지 않습니다. 보기 메뉴의 <b>모든 계좌 표시</b>를 선택하"
 "여 다시 표시할 수 있습니다.</qt>"
 
-#: kmymoney/kmymoney.cpp:3391
+#: kmymoney/kmymoney.cpp:3399
 #, kde-format
 msgid "Information"
 msgstr "정보"
 
-#: kmymoney/kmymoney.cpp:3495 kmymoney/kmymoney.cpp:3591
+#: kmymoney/kmymoney.cpp:3503 kmymoney/kmymoney.cpp:3599
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "KMyMoneyFile이 열려 있지 않음"
 
-#: kmymoney/kmymoney.cpp:3528 kmymoney/kmymoney.cpp:3530
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1364
+#: kmymoney/kmymoney.cpp:3536 kmymoney/kmymoney.cpp:3538
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1365
 #: kmymoney/plugins/xml/xmlstorage.cpp:416
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "준비."
 
-#: kmymoney/kmymoney.cpp:3595
+#: kmymoney/kmymoney.cpp:3603
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "개인 데이터를 보는 중..."
 
-#: kmymoney/kmymoney.cpp:3602
+#: kmymoney/kmymoney.cpp:3610
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "개인 정보 편집"
 
-#: kmymoney/kmymoney.cpp:3617
+#: kmymoney/kmymoney.cpp:3625
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr "사용자 정보를 저장할 수 없음: %1"
 
-#: kmymoney/kmymoney.cpp:3625
+#: kmymoney/kmymoney.cpp:3633
 #, kde-format
 msgid "Importing account templates."
 msgstr "계좌 템플릿 가져오는 중."
 
-#: kmymoney/kmymoney.cpp:3639
+#: kmymoney/kmymoney.cpp:3647
 #, kde-format
 msgid "Unable to import template(s)"
 msgstr "템플릿을 가져올 수 없음"
 
-#: kmymoney/kmymoney.cpp:3647
+#: kmymoney/kmymoney.cpp:3655
 #, kde-format
 msgid "Exporting account templates."
 msgstr "계좌 템플릿 내보내는 중."
 
-#: kmymoney/kmymoney.cpp:3653
+#: kmymoney/kmymoney.cpp:3661
 #, kde-format
 msgid "Save as..."
 msgstr "다른 이름으로 저장..."
 
-#: kmymoney/kmymoney.cpp:3654
+#: kmymoney/kmymoney.cpp:3662
 #, kde-format
 msgid "KMyMoney template files (*.kmt);;All files (*)"
 msgstr "KMyMoney 템플릿 파일 (*.kmt);;모든 파일 (*)"
 
-#: kmymoney/kmymoney.cpp:3685
+#: kmymoney/kmymoney.cpp:3693
 #, kde-format
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "템플릿 내보내기"
 
-#: kmymoney/kmymoney.cpp:3703
+#: kmymoney/kmymoney.cpp:3711
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr ""
 "파일 <b>%1</b>이(가) 이미 존재합니다. 덮어쓰시겠습니까?|/|파일 <b>%1</b>$[이"
 "가 %1] 이미 존재합니다. 덮어쓰시겠습니까?"
 
-#: kmymoney/kmymoney.cpp:3705 kmymoney/plugins/csv/export/csvexporter.cpp:102
+#: kmymoney/kmymoney.cpp:3713 kmymoney/plugins/csv/export/csvexporter.cpp:106
 #, kde-format
 msgid "File already exists"
 msgstr "파일이 이미 존재함"
 
-#: kmymoney/kmymoney.cpp:3830
+#: kmymoney/kmymoney.cpp:3838
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
 "continue?"
 msgstr "파일을 백업하기 전에 먼저 저장해야 합니다. 계속 진행하시겠습니까?"
 
-#: kmymoney/kmymoney.cpp:3832
+#: kmymoney/kmymoney.cpp:3840
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr "백업 확인"
 
-#: kmymoney/kmymoney.cpp:3849
+#: kmymoney/kmymoney.cpp:3857
 #, kde-format
 msgid ""
 "The current implementation of the backup functionality only supports local "
@@ -5605,69 +5605,69 @@ msgstr ""
 "현재 백업 기능 구현은 로컬 파일만 원본 파일로 지원합니다. 현재 원본 파일은 "
 "'%1'입니다."
 
-#: kmymoney/kmymoney.cpp:3851
+#: kmymoney/kmymoney.cpp:3859
 #, kde-format
 msgid "Local files only"
 msgstr "로컬 파일만"
 
-#: kmymoney/kmymoney.cpp:3890
+#: kmymoney/kmymoney.cpp:3898
 #, kde-format
 msgid "Mounting %1"
 msgstr "%1 마운트 중"
 
-#: kmymoney/kmymoney.cpp:3924
+#: kmymoney/kmymoney.cpp:3932
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr "오늘의 백업 파일이 해당 장치에 이미 존재합니다. 바꾸시겠습니까?"
 
-#: kmymoney/kmymoney.cpp:3924
+#: kmymoney/kmymoney.cpp:3932
 #, kde-format
 msgid "&Replace"
 msgstr "바꾸기(&R)"
 
-#: kmymoney/kmymoney.cpp:3932
+#: kmymoney/kmymoney.cpp:3940
 #, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
 msgstr "백업 디렉터리 '%1'을(를) 만들 수 없습니다."
 
-#: kmymoney/kmymoney.cpp:3937
+#: kmymoney/kmymoney.cpp:3945
 #, kde-format
 msgid "Writing %1"
 msgstr "%1을(를) 기록하는 중"
 
-#: kmymoney/kmymoney.cpp:3958
+#: kmymoney/kmymoney.cpp:3966
 #, kde-format
 msgid "Unmounting %1"
 msgstr "%1 마운트 해제 중"
 
-#: kmymoney/kmymoney.cpp:3995
+#: kmymoney/kmymoney.cpp:4003
 #, kde-format
 msgid "Error mounting device"
 msgstr "장치 마운트 오류"
 
-#: kmymoney/kmymoney.cpp:4010 kmymoney/kmymoney.cpp:4029
+#: kmymoney/kmymoney.cpp:4018 kmymoney/kmymoney.cpp:4037
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "완료"
 
-#: kmymoney/kmymoney.cpp:4011 kmymoney/kmymoney.cpp:4031
+#: kmymoney/kmymoney.cpp:4019 kmymoney/kmymoney.cpp:4039
 #, kde-format
 msgid "File successfully backed up"
 msgstr "파일이 성공적으로 백업됨"
 
-#: kmymoney/kmymoney.cpp:4017
+#: kmymoney/kmymoney.cpp:4025
 #, kde-format
 msgid "Error copying file to device"
 msgstr "파일을 장치로 복사하는 중 오류 발생"
 
-#: kmymoney/kmymoney.cpp:4033
+#: kmymoney/kmymoney.cpp:4041
 #, kde-format
 msgid "Error unmounting device"
 msgstr "장치 마운트 해제 중 오류"
 
-#: kmymoney/kmymoney.cpp:4080
+#: kmymoney/kmymoney.cpp:4088
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5684,29 +5684,29 @@ msgstr ""
 "기초 잔액을 %2(으)로 유지하려면 아니요를 클릭하십시오.\n"
 "계좌 생성을 중단하려면 취소를 클릭하십시오."
 
-#: kmymoney/kmymoney.cpp:4090
+#: kmymoney/kmymoney.cpp:4098
 #, kde-format
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "책임을 위한 기초 잔액"
 
-#: kmymoney/kmymoney.cpp:4101
+#: kmymoney/kmymoney.cpp:4109
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "계좌를 추가할 수 없음: %1"
 
-#: kmymoney/kmymoney.cpp:4171
+#: kmymoney/kmymoney.cpp:4179
 #, kde-format
 msgid "Running consistency check..."
 msgstr "일관성 검사 실행 중..."
 
-#: kmymoney/kmymoney.cpp:4178
+#: kmymoney/kmymoney.cpp:4186
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "일관성 검사 실패: %1"
 
-#: kmymoney/kmymoney.cpp:4188
+#: kmymoney/kmymoney.cpp:4196
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -5714,7 +5714,7 @@ msgid ""
 msgstr ""
 "일관성 검사 결과 데이터에 문제가 없습니다. 자세한 내용은 아래를 참조하십시오."
 
-#: kmymoney/kmymoney.cpp:4190
+#: kmymoney/kmymoney.cpp:4198
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5724,28 +5724,28 @@ msgstr ""
 "일관성 검사 결과 데이터에서 일부 문제를 발견했습니다. 자세한 내용은 아래를 참"
 "조하십시오. 해당 문제는 자동으로 수정할 수 없으며 사용자가 해결해야 합니다."
 
-#: kmymoney/kmymoney.cpp:4193
+#: kmymoney/kmymoney.cpp:4201
 #, kde-format
 msgid "Consistency check result"
 msgstr "일관성 검사 결과"
 
-#: kmymoney/kmymoney.cpp:4259
+#: kmymoney/kmymoney.cpp:4267
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "예정된 기한이 지난 거래 확인 중..."
 
-#: kmymoney/kmymoney.cpp:4449
+#: kmymoney/kmymoney.cpp:4457
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr "명세서를 가져오기 전에 먼저 KMyMoney 파일을 선택해야 합니다."
 
-#: kmymoney/kmymoney.cpp:4454
+#: kmymoney/kmymoney.cpp:4462
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Web Connect로 명세서 가져오기"
 
-#: kmymoney/kmymoney.cpp:4466
+#: kmymoney/kmymoney.cpp:4474
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5755,68 +5755,68 @@ msgstr ""
 "%2 플러그인을 사용하여 %1을(를) 가져올 수 없습니다. 플러그인이 다음 오류를 반"
 "환했습니다: %3"
 
-#: kmymoney/kmymoney.cpp:4466 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
+#: kmymoney/kmymoney.cpp:4474 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
 #, kde-format
 msgid "Importing error"
 msgstr "가져오기 오류"
 
-#: kmymoney/kmymoney.cpp:4494
+#: kmymoney/kmymoney.cpp:4502
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "모든 메시지가 활성화되었습니다."
 
-#: kmymoney/kmymoney.cpp:4494
+#: kmymoney/kmymoney.cpp:4502
 #, kde-format
 msgid "All messages"
 msgstr "모든 메시지"
 
-#: kmymoney/kmymoney.cpp:4530
+#: kmymoney/kmymoney.cpp:4538
 #, kde-format
 msgid "Auto saving..."
 msgstr "자동 저장 중..."
 
-#: kmymoney/kmymoney.cpp:4650
+#: kmymoney/kmymoney.cpp:4658
 #, kde-format
 msgid "Creating new document..."
 msgstr "새 문서를 만드는 중..."
 
-#: kmymoney/kmymoney.cpp:4710
+#: kmymoney/kmymoney.cpp:4718
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "새 파일을 만들 수 없습니다."
 
-#: kmymoney/kmymoney.cpp:4721
+#: kmymoney/kmymoney.cpp:4729
 #, kde-format
 msgid "Open a file."
 msgstr "파일을 엽니다."
 
-#: kmymoney/kmymoney.cpp:4735
+#: kmymoney/kmymoney.cpp:4743
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr "저장소를 여는 플러그인을 찾을 수 없습니다."
 
-#: kmymoney/kmymoney.cpp:4739
+#: kmymoney/kmymoney.cpp:4747
 #, kde-format
 msgid "All files (*)"
 msgstr "모든 파일 (*)"
 
-#: kmymoney/kmymoney.cpp:4752
+#: kmymoney/kmymoney.cpp:4760
 #, kde-format
 msgid "Loading file..."
 msgstr "파일 불러오는 중..."
 
-#: kmymoney/kmymoney.cpp:4758
+#: kmymoney/kmymoney.cpp:4766
 #, kde-format
 msgid "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
 msgstr ""
 "<p>파일 <b>%1</b>이(가) KMyMoney의 다른 인스턴스에서 이미 열려 있습니다</p>"
 
-#: kmymoney/kmymoney.cpp:4758
+#: kmymoney/kmymoney.cpp:4766
 #, kde-format
 msgid "Duplicate open"
 msgstr "동시에 열기"
 
-#: kmymoney/kmymoney.cpp:4765
+#: kmymoney/kmymoney.cpp:4773
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5825,17 +5825,17 @@ msgstr ""
 "<p><b>%1</b>이(가) 잘못된 파일 이름이거나 파일이 없습니다. 다른 파일을 열거 "
 "나 새 파일을 만들 수 있습니다.</p>"
 
-#: kmymoney/kmymoney.cpp:4765
+#: kmymoney/kmymoney.cpp:4773
 #, kde-format
 msgid "File not found"
 msgstr "파일을 찾을 수 없음"
 
-#: kmymoney/kmymoney.cpp:4796
+#: kmymoney/kmymoney.cpp:4804
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "요청한 대로 파일을 열 수 없습니다."
 
-#: kmymoney/kmymoney.cpp:4803
+#: kmymoney/kmymoney.cpp:4811
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -5844,32 +5844,32 @@ msgstr ""
 "데이터 원본을 읽을 수 없습니다. KMyMoney 설정에서 필요한 플러그인이 활성화되"
 "어 있는지 확인하십시오."
 
-#: kmymoney/kmymoney.cpp:4814
+#: kmymoney/kmymoney.cpp:4822
 #, kde-format
 msgid "Saving file..."
 msgstr "파일 저장 중..."
 
-#: kmymoney/kmymoney.cpp:4826
+#: kmymoney/kmymoney.cpp:4834
 #, kde-format
 msgid "Failed to save your data."
 msgstr "데이터를 저장하지 못했습니다."
 
-#: kmymoney/kmymoney.cpp:4832
+#: kmymoney/kmymoney.cpp:4840
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr "데이터를 저장할 올바른 플러그인을 찾을 수 없습니다."
 
-#: kmymoney/kmymoney.cpp:4838
+#: kmymoney/kmymoney.cpp:4846
 #, kde-format
 msgid "Saving file as...."
 msgstr "다른 이름으로 파일 저장 중..."
 
-#: kmymoney/kmymoney.cpp:4854
+#: kmymoney/kmymoney.cpp:4862
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr "데이터를 저장하는 플러그인을 찾을 수 없습니다."
 
-#: kmymoney/kmymoney.cpp:4883
+#: kmymoney/kmymoney.cpp:4891
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "저장소를 저장하지 못했습니다."
@@ -6142,78 +6142,78 @@ msgstr "유가증권 삭제"
 msgid "Delete prices"
 msgstr "가격 삭제"
 
-#: kmymoney/kmymoneyutils.cpp:548
-#: kmymoney/plugins/qif/import/kimportdlg.cpp:138
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:432
+#: kmymoney/kmymoneyutils.cpp:552
+#: kmymoney/plugins/qif/import/kimportdlg.cpp:142
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:436
 #: kmymoney/templates/templateloader.cpp:78
 #, kde-format
 msgid "Error while loading file '%1'."
 msgstr "파일 '%1'을(를) 불러오는 중 오류가 발생했습니다."
 
-#: kmymoney/kmymoneyutils.cpp:550
-#: kmymoney/plugins/qif/import/kimportdlg.cpp:138
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:434
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1006
+#: kmymoney/kmymoneyutils.cpp:554
+#: kmymoney/plugins/qif/import/kimportdlg.cpp:142
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:438
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1010
 #: kmymoney/templates/templateloader.cpp:80
 #, kde-format
 msgid "File access error"
 msgstr "파일 접근 오류"
 
-#: kmymoney/kmymoneyutils.cpp:568 kmymoney/views/kpayeesview.cpp:562
+#: kmymoney/kmymoneyutils.cpp:572 kmymoney/views/kpayeesview.cpp:562
 #, kde-format
 msgid "New Payee"
 msgstr "새 수취인"
 
-#: kmymoney/kmymoneyutils.cpp:570
+#: kmymoney/kmymoneyutils.cpp:574
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as payee/receiver?</qt>"
 msgstr "<qt><b>%1</b>을(를) 수취인으로 추가하시겠습니까?</qt>"
 
-#: kmymoney/kmymoneyutils.cpp:609
+#: kmymoney/kmymoneyutils.cpp:613
 #, kde-format
 msgid "Unable to add payee"
 msgstr "수취인을 추가할 수 없음"
 
-#: kmymoney/kmymoneyutils.cpp:621 kmymoney/views/ktagsview.cpp:641
+#: kmymoney/kmymoneyutils.cpp:625 kmymoney/views/ktagsview.cpp:641
 #, kde-format
 msgid "New Tag"
 msgstr "새 태그"
 
-#: kmymoney/kmymoneyutils.cpp:623
+#: kmymoney/kmymoneyutils.cpp:627
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 msgstr "<qt><b>%1</b>을(를) 태그로 추가하시겠습니까?</qt>"
 
-#: kmymoney/kmymoneyutils.cpp:625
+#: kmymoney/kmymoneyutils.cpp:629
 #, kde-format
 msgid "New tag"
 msgstr "새 태그"
 
-#: kmymoney/kmymoneyutils.cpp:659
+#: kmymoney/kmymoneyutils.cpp:663
 #, kde-format
 msgid "Unable to add tag"
 msgstr "태그를 추가할 수 없음"
 
-#: kmymoney/kmymoneyutils.cpp:676 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:680 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "금융기관을 추가할 수 없음: %1"
 
-#: kmymoney/kmymoneyutils.cpp:733
+#: kmymoney/kmymoneyutils.cpp:737
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:50
 #, kde-format
 msgid "One statement has been processed with the following results:"
 msgid_plural "%1 statements have been processed with the following results:"
 msgstr[0] "명세서 %1개 처리가 다음 결과를 반환했습니다:"
 
-#: kmymoney/kmymoneyutils.cpp:738
+#: kmymoney/kmymoneyutils.cpp:742
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:52
 #, kde-format
 msgid "No new transaction has been imported."
 msgid_plural "No new transactions have been imported."
 msgstr[0] "가져온 새 거래가 없습니다."
 
-#: kmymoney/kmymoneyutils.cpp:739
+#: kmymoney/kmymoneyutils.cpp:743
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:53
 #, kde-format
 msgid "Statement import statistics"
@@ -9574,7 +9574,7 @@ msgctxt "CSV Exporter dialog title"
 msgid "CSV Exporter"
 msgstr "CSV 내보내기"
 
-#: kmymoney/plugins/csv/export/csvexporter.cpp:101
+#: kmymoney/plugins/csv/export/csvexporter.cpp:105
 #, kde-format
 msgid ""
 "<qt>The file <b>%1</b> already exists. Do you really want to overwrite it?</"
@@ -10780,13 +10780,13 @@ msgstr "요금 지우기"
 msgid "Calculate Fee"
 msgstr "요금 계산"
 
-#: kmymoney/plugins/csv/import/kcm_csvimporter.cpp:35
+#: kmymoney/plugins/csv/import/kcm_csvimporter.cpp:34
 #, kde-format
 msgctxt "@item:inlistbox No QIF profile defined"
 msgid "No profile setup"
 msgstr "설정한 프로필 없음"
 
-#: kmymoney/plugins/csv/import/kcm_csvimporter.cpp:66
+#: kmymoney/plugins/csv/import/kcm_csvimporter.cpp:65
 #, kde-format
 msgctxt "@info:tooltip No QIF profile defined"
 msgid ""
@@ -11417,7 +11417,7 @@ msgstr "일정%1"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1214
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1253
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1358
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1359
 #, kde-format
 msgid ""
 "Import failed:\n"
@@ -11428,17 +11428,17 @@ msgstr ""
 "\n"
 "%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1362
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1363
 #, kde-format
 msgid "Import complete"
 msgstr "가져오기 완료"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1419
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1420
 #, kde-format
 msgid "Disguise your wealth"
 msgstr "내 부 숨기기"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1420
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1421
 #, kde-format
 msgid ""
 "Each monetary value on your file will be multiplied by a random number "
@@ -11454,33 +11454,33 @@ msgstr ""
 "지정한 값을 곱할 수도 있습니다.\n"
 "이 숫자는 파일에 저장되지 않습니다."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1435
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1436
 #, kde-format
 msgid "Loading commodities..."
 msgstr "상품 불러오는 중..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1487
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1488
 #, kde-format
 msgid "Loading prices..."
 msgstr "가격 불러오는 중..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1491
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1499
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1492
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1500
 #, kde-format
 msgid "Imported History"
 msgstr "가져온 내역"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1520
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1521
 #, kde-format
 msgid "Loading accounts..."
 msgstr "계좌 불러오는 중..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1665
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1666
 #, kde-format
 msgid "Loading transactions..."
 msgstr "거래 불러오는 중..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1768
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1769
 #, kde-format
 msgid ""
 "Account or Category %1, transaction date %2; split contains invalid value; "
@@ -11489,54 +11489,54 @@ msgstr ""
 "계좌 또는 분류 %1, 거래 날짜 %2의 분할에 잘못된 값이 있습니다. 확인해 주십시"
 "오"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1810
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1811
 #, kde-format
 msgid "Imported Transaction"
 msgstr "가져온 거래"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1859
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1860
 #, kde-format
 msgid "Loading templates..."
 msgstr "템플릿 불러오는 중..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1873
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1874
 #, kde-format
 msgid "Unknown payee"
 msgstr "알 수 없는 수취인"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2001
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2002
 #, kde-format
 msgid "Schedule %1 contains unknown action (key = %2, type = %3)"
 msgstr "%1 일정에 알 수 없는 작업이 포함되어 있습니다(키 = %2, 형식 = %3)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2009
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2010
 #, kde-format
 msgid "Schedule %1 contains multiple actions; only one has been imported"
 msgstr "%1 일정에 여러 작업이 포함되어 있습니다. 하나만 가져왔습니다"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2015
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2016
 #, kde-format
 msgid "Schedule %1 contains no valid splits"
 msgstr "%1 일정에 올바른 분할이 없습니다"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2020
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2021
 #, kde-format
 msgid ""
 "Schedule %1 appears to contain a formula. GnuCash formulae are not "
 "convertible"
 msgstr "%1 일정에 수식이 포함된 것 같습니다. GnuCash 수식은 변환할 수 없습니다"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2070
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2071
 #, kde-format
 msgid "Loading schedules..."
 msgstr "일정 불러오는 중..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2158
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2159
 #, kde-format
 msgid "Schedule %1 has interval of %2 which is not currently available"
 msgstr "%1 일정의 간격이 %2이며 현재 사용할 수 없습니다"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2165
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2166
 #, kde-format
 msgid ""
 "Schedule %1 contains unknown interval specification; please check for "
@@ -11544,7 +11544,7 @@ msgid ""
 msgstr ""
 "%1 일정에 알 수 없는 간격이 지정되었습니다. 올바르게 작동하는지 확인하십시오"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2201
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2202
 #, kde-format
 msgid ""
 "Schedule %1 contains a deferred interval specification; please check for "
@@ -11552,12 +11552,12 @@ msgid ""
 msgstr ""
 "%1 일정에 지연된 간격이 지정되었습니다. 올바르게 작동하는지 확인하십시오"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2226
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2227
 #, kde-format
 msgid "Schedule %1 dropped at user request"
 msgstr "사용자 요청에 따라 %1 일정이 삭제되었습니다"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2279
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2280
 #, kde-format
 msgid ""
 "Your main currency seems to be %1 (%2); do you want to set this as your base "
@@ -11565,29 +11565,29 @@ msgid ""
 msgstr ""
 "주 통화가 %1(%2)인 것 같습니다. 이 통화를 기본 통화로 설정하시겠습니까?"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2297
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2298
 #, kde-format
 msgctxt "Button to show more detailed data"
 msgid "More"
 msgstr "더 보기"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2299
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2300
 #, kde-format
 msgctxt "Button to close the current dialog"
 msgid "Done"
 msgstr "완료"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2301
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2302
 #, kde-format
 msgid "Save Report"
 msgstr "보고서 저장"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2318
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2319
 #, kde-format
 msgid "Problems were encountered in converting schedule '%1'."
 msgstr "'%1' 일정을 변환하는 데 문제가 발생했습니다."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2343
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2344
 #, kde-format
 msgid ""
 "Found:\n"
@@ -11596,82 +11596,82 @@ msgstr ""
 "발견됨:\n"
 "\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2344
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2345
 #, kde-format
 msgid "%1 commodity (equity)\n"
 msgid_plural "%1 commodities (equities)\n"
 msgstr[0] "상품(주식) %1개\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2345
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2346
 #, kde-format
 msgid "%1 price\n"
 msgid_plural "%1 prices\n"
 msgstr[0] "가격 %1개\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2346
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2347
 #, kde-format
 msgid "%1 account\n"
 msgid_plural "%1 accounts\n"
 msgstr[0] "계좌 %1개\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2347
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2348
 #, kde-format
 msgid "%1 transaction\n"
 msgid_plural "%1 transactions\n"
 msgstr[0] "거래 %1건\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2348
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2349
 #, kde-format
 msgid "%1 schedule\n"
 msgid_plural "%1 schedules\n"
 msgstr[0] "일정 %1개\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2351
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2352
 #, kde-format
 msgid "No inconsistencies were detected\n"
 msgstr "불일치가 감지되지 않았습니다\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2353
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2354
 #, kde-format
 msgid "%1 inconsistency was detected and corrected\n"
 msgid_plural "%1 inconsistencies were detected and corrected\n"
 msgstr[0] "불일치 %1개가 감지되어 수정했습니다\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2358
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2359
 #, kde-format
 msgid "%1 orphan account was created\n"
 msgid_plural "%1 orphan accounts were created\n"
 msgstr[0] "고아 계좌 %1개가 생성되었습니다\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2363
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2364
 #, kde-format
 msgid "%1 possible schedule problem was noted\n"
 msgid_plural "%1 possible schedule problems were noted\n"
 msgstr[0] "가능한 일정 문제 %1개가 지적되었습니다\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2368
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2369
 #, kde-format
 msgid "Small Business Features (Customers, Invoices, etc.)"
 msgstr "소규모 비즈니스 기능(고객, 송장 등)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2369
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2370
 #: kmymoney/plugins/views/budget/budgetview.cpp:53
 #, kde-format
 msgid "Budgets"
 msgstr "예산"
 
 # https://wiki.gnucash.org/wiki/Concept_of_Lots
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2370
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2371
 #, kde-format
 msgid "Lots"
 msgstr "로트"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2372
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2373
 #, kde-format
 msgid "The following features found in your file are not currently supported:"
 msgstr "파일에 있는 다음 기능은 현재 지원되지 않습니다:"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2375
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2376
 #, kde-format
 msgid ""
 "\n"
@@ -11682,17 +11682,17 @@ msgstr ""
 "\n"
 "자세한 내용을 보려면 더 보기를 누르십시오"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2390
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2391
 #, kde-format
 msgid "Save report as"
 msgstr "보고서를 다른 이름으로 저장"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2426
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2427
 #, kde-format
 msgid "Orphan created from unknown GnuCash account"
 msgstr "알 수 없는 GnuCash 계좌에서 생성된 고아"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2441
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2442
 #, kde-format
 msgid ""
 "One or more transactions contain a reference to an otherwise unknown "
@@ -11702,7 +11702,7 @@ msgstr ""
 "하나 이상의 거래에서 알 수 없는 계좌를 참조합니다.\n"
 "데이터를 보관하는 이름이 %1인 자산 계좌가 생성되었습니다"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2475
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2476
 #, kde-format
 msgid ""
 "An Investment account must be a child of an Asset account\n"
@@ -11711,7 +11711,7 @@ msgstr ""
 "투자 계좌는 자산 계좌의 하위 계좌여야 합니다.\n"
 "%1 계좌는 기본 자산 계좌 아래에 저장됩니다"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2482
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2483
 #, kde-format
 msgid ""
 "An Income account must be a child of an Income account\n"
@@ -11720,7 +11720,7 @@ msgstr ""
 "수입 계좌는 수입 계좌의 하위 계좌여야 합니다.\n"
 "%1 계좌는 기본 수입 계좌 아래에 저장됩니다"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2489
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2490
 #, kde-format
 msgid ""
 "An Expense account must be a child of an Expense account\n"
@@ -11729,44 +11729,44 @@ msgstr ""
 "지출 계좌는 지출 계좌의 하위 계좌여야 합니다.\n"
 "%1 계좌는 기본 지출 계좌 아래에 저장됩니다"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2537
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2538
 #, kde-format
 msgid "Enter the investment account name "
 msgstr "투자 계좌 이름 입력 "
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2538
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2539
 #, kde-format
 msgid "My Investments"
 msgstr "내 투자"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2576
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2577
 #, kde-format
 msgid "Select parent investment account or enter new name. Stock %1"
 msgstr "부모 투자 계좌를 선택하거나 새 이름을 입력하십시오. 주식 %1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2601
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2618
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2602
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2619
 #, kde-format
 msgid "%1 is not an Investment Account. Do you wish to make it one?"
 msgstr "%1이(가) 투자 계좌가 아닙니다. 투자 계좌를 생성하시겠습니까?"
 
-#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:56
+#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:72
 #, kde-format
 msgid "Schedules to iCalendar"
 msgstr "일정을 iCalendar로"
 
-#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:76
+#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:92
 #, kde-format
 msgid "Schedules to iCalendar [%1]"
 msgstr "일정을 iCalendar로 [%1]"
 
-#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:94
+#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:110
 #, kde-format
 msgctxt "ICS (Filefilter)"
 msgid "iCalendar files"
 msgstr "iCalendar 파일"
 
-#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:97
+#: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:113
 #: kmymoney/plugins/views/reports/kreportsview.cpp:348
 #, kde-format
 msgid "Export as"
@@ -12524,13 +12524,13 @@ msgstr "계좌"
 msgid "To confirm this order enter the tan displayed by your &generator"
 msgstr "이 주문을 확인하려면 생성기에 표시된 TAN을 입력하십시오(&G)"
 
-#: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:203
+#: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:205
 #: kmymoney/plugins/ofx/import/ofxpartner.cpp:411
 #, kde-format
 msgid "The HTTP request failed."
 msgstr "HTTP 요청이 실패했습니다."
 
-#: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:203
+#: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:205
 #: kmymoney/plugins/ofx/import/ofxpartner.cpp:411
 #, kde-format
 msgctxt "The HTTP request failed"
@@ -13348,7 +13348,7 @@ msgstr "QIF 프로필 선택기"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:219
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:129
-#: kmymoney/plugins/qif/import/kimportdlg.cpp:167
+#: kmymoney/plugins/qif/import/kimportdlg.cpp:171
 #, kde-format
 msgid "The default QIF profile"
 msgstr "기본 QIF 프로필"
@@ -13881,156 +13881,156 @@ msgstr "은행 명세서"
 msgid "Other application"
 msgstr "다른 앱"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:168
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:172
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested interest"
 msgstr "재투자된 이자"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:171
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:175
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested dividend"
 msgstr "재투자된 배당금"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:174
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:178
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested dividend (long term)"
 msgstr "재투자된 배당금(장기)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:177
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:181
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested dividend (short term)"
 msgstr "재투자된 배당금(단기)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:180
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:184
 #, kde-format
 msgctxt "Category name"
 msgid "Dividend"
 msgstr "배당금"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:183
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:187
 #, kde-format
 msgctxt "Category name"
 msgid "Interest"
 msgstr "이자"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:186
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:190
 #, kde-format
 msgctxt "Category name"
 msgid "Capital Gain (short term)"
 msgstr "자본 이득(단기)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:189
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:193
 #, kde-format
 msgctxt "Category name"
 msgid "Capital Gain (mid term)"
 msgstr "자본 이득(중기)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:192
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:196
 #, kde-format
 msgctxt "Category name"
 msgid "Capital Gain (long term)"
 msgstr "자본 이득(장기)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:195
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:199
 #, kde-format
 msgctxt "Category name"
 msgid "Returned capital"
 msgstr "반환된 자본"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:198
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:202
 #, kde-format
 msgctxt "Category name"
 msgid "Miscellaneous income"
 msgstr "기타 수입"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:201
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:205
 #, kde-format
 msgctxt "Category name"
 msgid "Miscellaneous expense"
 msgstr "기타 지출"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:204
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:208
 #, kde-format
 msgctxt "Category name"
 msgid "Investment fees"
 msgstr "투자 요금"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:206
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:210
 #, kde-format
 msgid "Unknown QIF type %1"
 msgstr "알 수 없는 QIF 형식 %1"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:365
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:369
 #, kde-format
 msgid "Date format selection"
 msgstr "날짜 형식 선택"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:365
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:369
 #, kde-format
 msgid "Pick the date format that suits your input file"
 msgstr "입력 파일에 맞는 날짜 형식을 선택하십시오"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:380
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:384
 #, kde-format
 msgid "Importing QIF..."
 msgstr "QIF 가져오는 중..."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:482
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:486
 #, kde-format
 msgid "Reading QIF..."
 msgstr "QIF 읽는 중..."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:487
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:491
 #, kde-format
 msgid "Error while running the filter '%1'."
 msgstr "필터 '%1'을(를) 실행하는 동안 오류가 발생했습니다."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:489
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:493
 #, kde-format
 msgid "Filter error"
 msgstr "필터 오류"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:523
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:527
 #, kde-format
 msgctxt "QIF tag for liability account"
 msgid "Oth L"
 msgstr "기타 부채"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:528
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:532
 #, kde-format
 msgctxt "QIF tag for investment account"
 msgid "Invst"
 msgstr "투자"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:542
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:546
 #, kde-format
 msgctxt "QIF tag for category"
 msgid "Cat"
 msgstr "분류"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:545
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:549
 #, kde-format
 msgctxt "QIF tag for security"
 msgid "Security"
 msgstr "유가증권"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:548
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:552
 #, kde-format
 msgctxt "QIF tag for prices"
 msgid "Prices"
 msgstr "가격"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:557
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:561
 #, kde-format
 msgctxt "QIF tag for a class"
 msgid "Class"
 msgstr "등급"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:738
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:742
 #, kde-format
 msgid ""
 "The %1 account currently has an opening balance of %2. This QIF file reports "
@@ -14040,29 +14040,29 @@ msgstr ""
 "%1 계좌의 현재 잔액은 %2입니다. 이 QIF 파일의 기초 잔액은 %3입니다. 현재 잔액"
 "을 QIF 파일의 잔액으로 덮어쓰시겠습니까?"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:739
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:743
 #, kde-format
 msgid "Overwrite opening balance"
 msgstr "기초 잔액 덮어쓰기"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:906
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:910
 #, kde-format
 msgid "Unable to find account: %1"
 msgstr "계좌를 찾을 수 없음: %1"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:920
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:930
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:955
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:924
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:934
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:959
 #, kde-format
 msgid "Autogenerated by QIF importer"
 msgstr "QIF 가져오기 도구에서 자동 ​​생성함"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:947
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:951
 #, kde-format
 msgid "QIF imported, no account name supplied"
 msgstr "QIF 가져옴, 계좌 이름을 지정하지 않았음"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:981
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:985
 #, kde-format
 msgid ""
 "KMyMoney has imported a second opening balance transaction into account <b>"
@@ -14073,18 +14073,18 @@ msgstr ""
 "의 내용은 파일에 이미 있는 것과 다릅니다. 가져오기가 완료되면 수동으로 수정하"
 "십시오."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:981
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:985
 #, kde-format
 msgid "Opening balance problem"
 msgstr "기초 잔액 문제"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1004
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1008
 #, kde-format
 msgid "Error while creating opening balance transaction"
 msgstr "기초 잔액 거래 생성 오류"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1083
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1311
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1087
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1315
 #, kde-format
 msgid ""
 "The date entry \"%1\" read from the file cannot be interpreted through the "
@@ -14101,13 +14101,13 @@ msgstr ""
 "작업이 중단됩니다. 그 다음 가져오기를 다시 시작하고 다른 QIF 프로필을 선택하"
 "거나 새 프로필을 작성할 수 있습니다."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1088
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1316
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1092
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1320
 #, kde-format
 msgid "Invalid date format"
 msgstr "잘못된 날짜 형식"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1441
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1445
 #, kde-format
 msgid ""
 "This investment account does not contain the \"%1\" security.  Transactions "
@@ -14116,12 +14116,12 @@ msgstr ""
 "이 투자 계좌에 \"%1\" 유가증권이 없습니다. 이 유가증권과 관련된 거래를 무시합"
 "니다."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1952
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1956
 #, kde-format
 msgid "%1 (Investment)"
 msgstr "%1(투자)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1953
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1957
 #, kde-format
 msgid "Autogenerated by QIF importer from type Mutual account entry"
 msgstr "QIF 가져오기 도구가 신탁 계좌 항목 형식에서 자동 ​​생성함"
@@ -14493,17 +14493,17 @@ msgstr ""
 "%2의 %1에서 %3에 열었습니다.\n"
 "그래도 여시겠습니까?"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:929
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:936
 #, kde-format
 msgid "Inserting online jobs."
 msgstr "온라인 작업을 삽입합니다."
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2026
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2033
 #, kde-format
 msgid "SQLite file %1 does not exist"
 msgstr "SQLite 파일 %1이(가) 없음"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2079
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2086
 #, kde-format
 msgid ""
 "Automatic database creation for type %1 is not currently implemented.\n"
@@ -14512,34 +14512,34 @@ msgstr ""
 "%1 형식 데이터베이스 자동 생성이 현재 구현되지 않았습니다.\n"
 "데이터베이스 %2을(를) 수동으로 작성하십시오"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2098
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2105
 #, kde-format
 msgid "Error in create database %1; do you have create permissions?"
 msgstr "%1 데이터베이스 생성 오류. 작성 권한이 있습니까?"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:136
+#: kmymoney/plugins/sql/sqlstorage.cpp:137
 #, kde-format
 msgid "Cannot open database %1\n"
 msgstr "%1 데이터베이스를 열 수 없음\n"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:169
+#: kmymoney/plugins/sql/sqlstorage.cpp:170
 #, kde-format
 msgid "An unrecoverable error occurred while reading the database"
 msgstr "데이터베이스를 읽는 중 복구할 수 없는 오류 발생"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:171
-#: kmymoney/plugins/sql/sqlstorage.cpp:199
+#: kmymoney/plugins/sql/sqlstorage.cpp:172
+#: kmymoney/plugins/sql/sqlstorage.cpp:200
 #, kde-format
 msgid "Database malfunction"
 msgstr "데이터베이스 오작동"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:188
+#: kmymoney/plugins/sql/sqlstorage.cpp:189
 #: kmymoney/plugins/xml/xmlstorage.cpp:240
 #, kde-format
 msgid "Tried to access a file when it has not been opened"
 msgstr "파일을 열지 않은 상태에서 파일에 접근하려고 시도함"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:196
+#: kmymoney/plugins/sql/sqlstorage.cpp:197
 #, kde-format
 msgid ""
 "An unrecoverable error occurred while writing to the database.\n"
@@ -14548,32 +14548,32 @@ msgstr ""
 "데이터베이스에 쓰는 중 복구할 수 없는 오류가 발생했습니다.\n"
 "손상되었을 수 있습니다."
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:231
+#: kmymoney/plugins/sql/sqlstorage.cpp:232
 #, kde-format
 msgid "Cannot save to current database."
 msgstr "현재 데이터베이스에 저장할 수 없습니다."
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:236
+#: kmymoney/plugins/sql/sqlstorage.cpp:237
 #, kde-format
 msgid "Cannot save to current database: %1"
 msgstr "현재 데이터베이스에 저장할 수 없음: %1"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:259
+#: kmymoney/plugins/sql/sqlstorage.cpp:260
 #, kde-format
 msgid "Database files (*.db *.sql)"
 msgstr "데이터베이스 파일 (*.db *.sql)"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:265
+#: kmymoney/plugins/sql/sqlstorage.cpp:266
 #, kde-format
 msgid "Open database..."
 msgstr "데이터베이스 열기..."
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:270
+#: kmymoney/plugins/sql/sqlstorage.cpp:271
 #, kde-format
 msgid "Generate Database SQL"
 msgstr "데이터베이스 SQL 생성"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:329
+#: kmymoney/plugins/sql/sqlstorage.cpp:330
 #, kde-format
 msgid ""
 "Database contains data which must be removed before using Save As.\n"
@@ -14583,7 +14583,7 @@ msgstr ""
 "습니다.\n"
 "계속 진행하시겠습니까?"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:349
+#: kmymoney/plugins/sql/sqlstorage.cpp:350
 #, kde-format
 msgid ""
 "Cannot open or create database %1.\n"
@@ -17662,18 +17662,18 @@ msgstr "Woob 백엔드 불러오는 중..."
 msgid "Getting list of backends."
 msgstr "백엔드 목록을 가져옵니다."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:139
-#: kmymoney/plugins/woob/woob.cpp:171
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:142
+#: kmymoney/plugins/woob/woob.cpp:172
 #, kde-format
 msgid "Connecting to bank..."
 msgstr "은행에 연결하는 중..."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:140
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:143
 #, kde-format
 msgid "Getting list of accounts from your bank."
 msgstr "은행에서 계좌 목록을 가져오는 중입니다."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:166
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:173
 #, kde-format
 msgid ""
 "No backends available.\n"
@@ -17682,7 +17682,7 @@ msgstr ""
 "사용 가능한 백엔드가 없습니다.\n"
 "woob config-qt를 사용하여 추가하십시오."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:179
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:186
 #, kde-format
 msgid ""
 "No accounts available.\n"
@@ -17691,7 +17691,7 @@ msgstr ""
 "사용 가능한 계좌가 없습니다.\n"
 "woob config-qt에서 백엔드 설정을 확인하십시오."
 
-#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:188
+#: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:195
 #, kde-format
 msgid "Incorrect password."
 msgstr "암호가 잘못되었습니다."
@@ -17728,7 +17728,7 @@ msgid ""
 "account..."
 msgstr "<b>앱</b> 계좌에 매핑할 <b>온라인</b> 계좌를 선택하십시오..."
 
-#: kmymoney/plugins/woob/woob.cpp:59
+#: kmymoney/plugins/woob/woob.cpp:60
 #, kde-format
 msgid ""
 "Woob plugin failed to fully initialize, most likely due to a missing or a "
@@ -17738,7 +17738,7 @@ msgstr ""
 "Woob 플러그인을 초기화할 수 없습니다. Python 환경이 없거나 잘못 설정되었을 수"
 "도 있습니다. 문제 해결 방법은 도움말을 참조하십시오."
 
-#: kmymoney/plugins/woob/woob.cpp:65
+#: kmymoney/plugins/woob/woob.cpp:66
 #, kde-format
 msgid ""
 "Woob plugin failed to fully initialize, most likely due to a missing or a "
@@ -17748,12 +17748,12 @@ msgstr ""
 "Woob 플러그인을 초기화할 수 없습니다. Woob Python 모듈이 없거나 잘못 설정되었"
 "을 수도 있습니다. 문제 해결 방법은 도움말을 참조하십시오."
 
-#: kmymoney/plugins/woob/woob.cpp:120
+#: kmymoney/plugins/woob/woob.cpp:121
 #, kde-format
 msgid "Woob configuration"
 msgstr "Woob 설정"
 
-#: kmymoney/plugins/woob/woob.cpp:172
+#: kmymoney/plugins/woob/woob.cpp:173
 #, kde-format
 msgid "Retrieving transactions..."
 msgstr "거래 내역을 가져오는 중..."
