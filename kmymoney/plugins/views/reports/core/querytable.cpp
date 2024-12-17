@@ -366,8 +366,10 @@ void QueryTable::constructTotalRows()
                     // custom total values calculations
                     for (const auto& subtotal : qAsConst(subtotals)) {
                         if (subtotal == ctReturnInvestment)
-                            totalsRow[subtotal] = helperROI((*currencyGrp).at(i + 1).value(ctBuys) - (*currencyGrp).at(i + 1).value(ctReinvestIncome), (*currencyGrp).at(i + 1).value(ctSells),
-                                                            (*currencyGrp).at(i + 1).value(ctStartingBalance), (*currencyGrp).at(i + 1).value(ctEndingBalance) + (*currencyGrp).at(i + 1).value(ctMarketValue),
+                            totalsRow[subtotal] = helperROI((*currencyGrp).at(i + 1).value(ctBuys) - (*currencyGrp).at(i + 1).value(ctReinvestIncome),
+                                                            (*currencyGrp).at(i + 1).value(ctSells),
+                                                            (*currencyGrp).at(i + 1).value(ctStartingBalance),
+                                                            (*currencyGrp).at(i + 1).value(ctEndingBalance),
                                                             (*currencyGrp).at(i + 1).value(ctCashIncome));
                         else if (subtotal == ctPercentageGain) {
                             const MyMoneyMoney denominator = (*currencyGrp).at(i + 1).value(ctBuys).abs();
@@ -428,8 +430,10 @@ void QueryTable::constructTotalRows()
 
                 for (const auto& subtotal : qAsConst(subtotals)) {
                     if (subtotal == ctReturnInvestment) {
-                        totalsRow[subtotal] = helperROI((*currencyGrp).at(0).value(ctBuys) - (*currencyGrp).at(0).value(ctReinvestIncome), (*currencyGrp).at(0).value(ctSells),
-                                                        (*currencyGrp).at(0).value(ctStartingBalance), (*currencyGrp).at(0).value(ctEndingBalance) + (*currencyGrp).at(0).value(ctMarketValue),
+                        totalsRow[subtotal] = helperROI((*currencyGrp).at(0).value(ctBuys) - (*currencyGrp).at(0).value(ctReinvestIncome),
+                                                        (*currencyGrp).at(0).value(ctSells),
+                                                        (*currencyGrp).at(0).value(ctStartingBalance),
+                                                        (*currencyGrp).at(0).value(ctEndingBalance),
                                                         (*currencyGrp).at(0).value(ctCashIncome));
                     } else if (subtotal == ctPercentageGain) {
                         if (!(*currencyGrp).at(0).value(ctBuys).abs().isZero()) {
