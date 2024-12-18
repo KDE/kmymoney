@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2024-12-16 01:18+0100\n"
+"PO-Revision-Date: 2024-12-17 22:38+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -1310,6 +1310,7 @@ msgstr ""
 "follas de cálculo máis populares dispoñíbeis en Linux\n"
 "e outros sistemas operativos."
 
+# skip-rule: trasno-item
 #. i18n: ectx: property (text), widget (QLabel, topLabel)
 #: kmymoney/dialogs/kchooseimportexportdlg.ui:56
 #, kde-format
@@ -2847,7 +2848,7 @@ msgstr "Editor de prezos"
 #: kmymoney/dialogs/kmymoneypricedlg.ui:32
 #, kde-format
 msgid "Remove this price item from the file"
-msgstr "Eliminar este prezo do ficheiro"
+msgstr "Eliminar este elemento de prezo do ficheiro."
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_priceList)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:45
@@ -6336,7 +6337,7 @@ msgstr "Editar a transferencia"
 #: kmymoney/kmymoney.cpp:1505
 #, kde-format
 msgid "Show log"
-msgstr "Amosar o historial"
+msgstr "Amosar o rexistro"
 
 #: kmymoney/kmymoney.cpp:1664
 #, kde-format
@@ -6915,7 +6916,7 @@ msgstr "Prognóstico do valor neto"
 #: kmymoney/kmymoneyutils.cpp:125
 #, kde-format
 msgid "Forecast (history)"
-msgstr "Prognóstico (histórico)"
+msgstr "Prognóstico (historial)"
 
 #: kmymoney/kmymoneyutils.cpp:126
 #, kde-format
@@ -11557,7 +11558,7 @@ msgstr "Estanse a cargar os prezos…"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1493
 #, kde-format
 msgid "Imported History"
-msgstr "Historia importada"
+msgstr "Historial importado"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1514
 #: kmymoney/plugins/xml/mymoneystoragexml.cpp:252
@@ -15255,7 +15256,7 @@ msgstr "Número de ciclos a usar no prognóstico:"
 #: kmymoney/plugins/views/forecast/kforecastview.ui:272
 #, kde-format
 msgid "History Forecast Method"
-msgstr "Método de prognóstico"
+msgstr "Método de prognóstico de historial"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton11)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:168
@@ -17013,7 +17014,7 @@ msgstr "Configuración dos informes"
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:26
 #, kde-format
 msgid "Maximum number of legend items to display"
-msgstr "Número máximo de lendas que amosar"
+msgstr "Número máximo de elementos de lenda que amosar"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_MaximumLegendItems)
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:35
@@ -19766,11 +19767,12 @@ msgstr ""
 msgid "Change the security information of the selected entry."
 msgstr "Cambiar a información do valor escollido."
 
+# skip-rule: trasno-item
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_deleteSecurityButton)
 #: kmymoney/views/kinvestmentview.ui:176
 #, kde-format
 msgid "Remove this security item from the file"
-msgstr "Eliminar este valor bolsista do ficheiro"
+msgstr "Eliminar este valor bolsista do ficheiro."
 
 #: kmymoney/views/kmymoneyview.cpp:146
 #, kde-format
@@ -22179,6 +22181,7 @@ msgstr "Efectivo"
 msgid "Investment"
 msgstr "Investimento"
 
+# skip-rule: trasno-provide
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:185
 #, kde-format
 msgid ""
@@ -25242,7 +25245,7 @@ msgid ""
 "The date can be modified via <i>Configure/General/Filter</i>.\n"
 msgstr ""
 "<p>…que pode agochar os asentos anteriores a unha certa data?\n"
-"A data pode escollela mediante <i>Configurar/Xeral/Filtro</i>.\n"
+"A data pode modificala mediante <i>Configurar/Xeral/Filtro</i>.\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tips:97
