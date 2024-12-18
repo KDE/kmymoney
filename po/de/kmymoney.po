@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-17 02:06+0000\n"
+"POT-Creation-Date: 2024-12-18 01:57+0000\n"
 "PO-Revision-Date: 2022-11-07 20:00+0100\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -14833,17 +14833,17 @@ msgstr ""
 "Geöffnet von %1 am %2 um %3.\n"
 "Trotzdem öffnen?"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:936
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:930
 #, kde-format
 msgid "Inserting online jobs."
 msgstr "Online-Aufträge werden eingefügt."
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2033
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2027
 #, kde-format
 msgid "SQLite file %1 does not exist"
 msgstr "Die SQLite-Datei %1 existiert nicht"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2086
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2080
 #, kde-format
 msgid ""
 "Automatic database creation for type %1 is not currently implemented.\n"
@@ -14853,7 +14853,7 @@ msgstr ""
 "implementiert.\n"
 "Bitte erzeugen Sie Datenbank %2 manuell"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2105
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2099
 #, kde-format
 msgid "Error in create database %1; do you have create permissions?"
 msgstr ""

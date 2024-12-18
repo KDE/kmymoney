@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-17 02:06+0000\n"
+"POT-Creation-Date: 2024-12-18 01:57+0000\n"
 "PO-Revision-Date: 2024-12-11 10:13+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -14723,17 +14723,17 @@ msgstr ""
 "Oberta per a %1 en %2 a %3.\n"
 "L'obro igualment?"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:936
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:930
 #, kde-format
 msgid "Inserting online jobs."
 msgstr "S'estan inserint treballs en línia."
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2033
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2027
 #, kde-format
 msgid "SQLite file %1 does not exist"
 msgstr "El fitxer SQLite %1 no existeix"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2086
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2080
 #, kde-format
 msgid ""
 "Automatic database creation for type %1 is not currently implemented.\n"
@@ -14743,7 +14743,7 @@ msgstr ""
 "de tipus %1.\n"
 "Si us plau, creeu manualment la base de dades %2"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2105
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2099
 #, kde-format
 msgid "Error in create database %1; do you have create permissions?"
 msgstr "Error en crear la base de dades %1; teniu permís de creació?"

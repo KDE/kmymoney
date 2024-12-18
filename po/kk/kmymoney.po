@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-17 02:06+0000\n"
+"POT-Creation-Date: 2024-12-18 01:57+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -15150,17 +15150,17 @@ msgstr ""
 "%1 дегенмен %2 дегенде %3 ашылған.\n"
 "Аша берейік пе?"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:936
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:930
 #, kde-format
 msgid "Inserting online jobs."
 msgstr ""
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2033
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2027
 #, kde-format
 msgid "SQLite file %1 does not exist"
 msgstr "%1 SQLite файлы жоқ"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2086
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2080
 #, kde-format
 msgid ""
 "Automatic database creation for type %1 is not currently implemented.\n"
@@ -15169,7 +15169,7 @@ msgstr ""
 "Түрі %1 деректер қоры автоматты түрде құруы әлі іске асырылмаған.\n"
 "%2 деректер қорын қолмен құрып беріңіз."
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2105
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2099
 #, kde-format
 msgid "Error in create database %1; do you have create permissions?"
 msgstr "%1 деректер қорын құру қатесі; құруға рұқсатыңыз бар ма?"
