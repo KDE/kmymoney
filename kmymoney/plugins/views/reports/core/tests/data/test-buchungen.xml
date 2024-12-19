@@ -3,10 +3,10 @@
 <KMYMONEY-FILE>
   <FILEINFO>
     <CREATION_DATE date=""/>
-    <LAST_MODIFIED_DATE date="2024-09-09T21:23:04+02:00"/>
+    <LAST_MODIFIED_DATE date="2024-12-19T23:28:58+01:00"/>
     <VERSION id="1"/>
     <FIXVERSION date=""/>
-    <APPVERSION id="5.1.80-84eec8fe7"/>
+    <APPVERSION id="5.1.80-a4d0924fe"/>
   </FILEINFO>
   <USER name="" email="">
     <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
@@ -51,19 +51,19 @@
     </TRANSACTION>
     <TRANSACTION id="T000000000000000002" postdate="2024-01-02" memo="" entrydate="2024-09-09" commodity="EUR">
       <SPLITS>
-        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="445/1" shares="445/1" price="1/1" memo="" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="1" value="445/1" shares="445/1" price="1/1" memo="" account="A000001" number="" bankid=""/>
         <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="-445/1" shares="-445/1" price="1/1" memo="" account="A000003" number="" bankid=""/>
       </SPLITS>
     </TRANSACTION>
     <TRANSACTION id="T000000000000000003" postdate="2024-01-03" memo="" entrydate="2024-09-09" commodity="EUR">
       <SPLITS>
-        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="-100/1" shares="-100/1" price="1/1" memo="" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="2" value="-100/1" shares="-100/1" price="1/1" memo="" account="A000001" number="" bankid=""/>
         <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="100/1" shares="100/1" price="1/1" memo="" account="A000004" number="" bankid=""/>
       </SPLITS>
     </TRANSACTION>
   </TRANSACTIONS>
   <KEYVALUEPAIRS>
-    <PAIR key="LastModificationDate" value="2024-09-09T21:23:04+02:00"/>
+    <PAIR key="LastModificationDate" value="2024-12-19T23:28:58+01:00"/>
     <PAIR key="kmm-baseCurrency" value="EUR"/>
     <PAIR key="kmm-id" value="{f8f47595-3cac-4ace-8579-b740638b1629}"/>
   </KEYVALUEPAIRS>
@@ -101,6 +101,9 @@
       <ACCOUNTGROUP group="liability"/>
       <DATES from="2024-01-01" to="2024-12-31"/>
     </REPORT>
+    <REPORT id="R000012" type="querytable 1.15" group="Transactions" name="Buchungen nach Zahlungsempfänger (angepasst)" comment="Benutzerdefinierter Bericht" convertcurrency="1" favorite="0" skipZero="0" datelock="yeartodate" rowtype="payee" querycolumns="number,category,tag" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0"/>
+    <REPORT id="R000013" type="querytable 1.15" group="Transactions" name="Buchungen nach Wochen (angepasst)" comment="Benutzerdefinierter Bericht" convertcurrency="1" favorite="0" skipZero="0" datelock="yeartodate" rowtype="week" querycolumns="number,payee,category,tag" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0"/>
+    <REPORT id="R000014" type="querytable 1.15" group="Transactions" name="Buchungen nach Abgleichstatus (angepasst)" comment="Benutzerdefinierter Bericht" convertcurrency="1" favorite="0" skipZero="0" datelock="untiltoday" rowtype="accountreconcile" querycolumns="number,payee,category,balance" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0"/>
   </REPORTS>
   <BUDGETS/>
   <ONLINEJOBS/>

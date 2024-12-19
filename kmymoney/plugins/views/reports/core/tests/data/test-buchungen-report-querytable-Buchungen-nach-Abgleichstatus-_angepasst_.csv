@@ -1,0 +1,18 @@
+Date,Num,Payee,Category,Amount,Balance
+"Verbindlichkeiten"
+"Reconciled"
+"2024-01-03","","[Empty Payee]","Transfer from checking"," 100.00"," 100.00"
+Total Reconciled,,,," 100.00",
+Total Verbindlichkeiten,,,," 100.00",
+"checking"
+"Cleared"
+"2024-01-02","","[Empty Payee]","Einnahme"," 445.00"," 545.00"
+Total Cleared,,,," 445.00",
+"Not reconciled"
+"2024-01-01","","[Empty Payee]","Ausgabe"," -123.00"," 422.00"
+Total Not reconciled,,,," -123.00",
+"Reconciled"
+"2024-01-03","","[Empty Payee]","Transfer to Verbindlichkeiten"," -100.00"," 322.00"
+Total Reconciled,,,," -100.00",
+Total checking,,,," 222.00",
+Grand Total,,,," 322.00",
