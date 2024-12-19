@@ -829,6 +829,7 @@ void LedgerView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint
 
     d->editIndex = QModelIndex();
     QMetaObject::invokeMethod(this, &LedgerView::ensureCurrentItemIsVisible, Qt::QueuedConnection);
+    QMetaObject::invokeMethod(this, &LedgerView::setFocus, Qt::QueuedConnection);
 }
 
 QModelIndex LedgerView::editIndex() const
