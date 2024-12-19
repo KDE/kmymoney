@@ -1314,7 +1314,27 @@ void LedgerView::adjustDetailColumn(int newViewportWidth, bool informOtherViews)
 
 void LedgerView::ensureCurrentItemIsVisible()
 {
-    scrollTo(currentIndex(), EnsureVisible);
+    // make sure scrollTo has an effect which is only the case
+    // when the QModelIndex points to a visible cell.
+    const auto idx = currentIndex();
+    if (idx.isValid()) {
+        const auto column = horizontalHeader()->logicalIndexAt(0);
+        const auto parentIdx = idx.parent();
+        auto row = idx.row();
+
+        // if it's not the first transaction, we scroll to the one before
+        if (row > 0) {
+            --row;
+        }
+        scrollTo(idx.model()->index(row, column, parentIdx), EnsureVisible);
+
+        row = idx.row();
+        // if it's not the last transaction, we scroll to the one after
+        if (row + 1 < idx.model()->rowCount(parentIdx)) {
+            ++row;
+        }
+        scrollTo(idx.model()->index(row, column, parentIdx), EnsureVisible);
+    }
 }
 
 void LedgerView::slotSettingsChanged()
