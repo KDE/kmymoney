@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2024-12-17 22:38+0100\n"
+"PO-Revision-Date: 2024-12-19 23:12+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -4810,6 +4810,7 @@ msgstr ""
 "</ul>\n"
 "</p>"
 
+# skip-rule: trasno-remove_reverse
 #. i18n: ectx: property (text), widget (QCheckBox, m_skipStripping)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:158
 #, kde-format
@@ -10656,7 +10657,7 @@ msgstr "Prema este botón para renomear o seu perfil."
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:624
 #, kde-format
 msgid "Rename"
-msgstr "Cambiar o nome"
+msgstr "Renomear"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_profiles)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:241
@@ -12370,6 +12371,7 @@ msgstr ""
 "Tras un reloxo a primeira barra do campo tremelucente cambia (cada medio "
 "byte transmítese no que duran 2 reloxos)."
 
+# skip-rule: trasno-remove_reverse
 #. i18n: ectx: property (text), widget (QPushButton, dequeueButton)
 #: kmymoney/plugins/kbanking/views/kbjobview.cpp:66
 #: kmymoney/plugins/kbanking/views/kbjobview.ui:32
@@ -12377,6 +12379,7 @@ msgstr ""
 msgid "Dequeue"
 msgstr "Retirar da fila"
 
+# skip-rule: trasno-remove_reverse
 #: kmymoney/plugins/kbanking/views/kbjobview.cpp:68
 #, kde-format
 msgid "Dequeue selected job"
@@ -14988,8 +14991,9 @@ msgstr "Renomear o orzamento escollido."
 #: kmymoney/plugins/views/budget/kbudgetview.ui:63
 #, kde-format
 msgid "Use this to start renaming the selected budget."
-msgstr "Use isto para cambiar o nome do orzamento escollido."
+msgstr "Use isto para renomear o orzamento seleccionado."
 
+# trasno-rename_reverse
 #. i18n: ectx: property (text), widget (QPushButton, m_renameButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:66
 #: kmymoney/views/kpayeesview.ui:63 kmymoney/views/ktagsview.ui:71
@@ -17922,8 +17926,8 @@ msgstr ""
 "novos gardaranse cifrados.</p><p>Os ficheiros existentes non se cifrarán "
 "automaticamente. Para cifrar os ficheiros xa existentes, use <b>Ficheiro → "
 "Gardar como…</b> e garde o ficheiro cun nome diferente.<br/>Cando confíe no "
-"resultado, elimine o ficheiro vello e cambie o nome do ficheiro cifrado ao "
-"que tiña antes.</p>"
+"resultado, elimine o ficheiro vello e renomee o ficheiro cifrado ao que tiña "
+"antes.</p>"
 
 #: kmymoney/plugins/xml/kcm_xmlstorage.cpp:168
 #: kmymoney/plugins/xml/ksettingsgpg.cpp:206
@@ -19940,7 +19944,7 @@ msgstr "Renomear o beneficiario escollido"
 #: kmymoney/views/kpayeesview.ui:60
 #, kde-format
 msgid "Use this to start renaming the selected payee."
-msgstr "Use isto para cambiar o nome do beneficiario escollido."
+msgstr "Use isto para renomear a beneficiaria seleccionada."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_deleteButton)
 #: kmymoney/views/kpayeesview.ui:70
@@ -20425,7 +20429,7 @@ msgstr "Renomear a etiqueta escollida"
 #: kmymoney/views/ktagsview.ui:68
 #, kde-format
 msgid "Use this to start renaming the selected tag."
-msgstr "Use isto para cambiar o nome da etiqueta escollida."
+msgstr "Use isto para renomear a etiqueta seleccionada."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_deleteButton)
 #: kmymoney/views/ktagsview.ui:78
