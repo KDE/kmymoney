@@ -429,10 +429,6 @@ bool LedgerViewPage::executeAction(eMenu::Action action, const SelectedObjects& 
             QPointer<TabOrderDialog> tabOrderDialog = new TabOrderDialog(d->ui->m_ledgerView);
             auto tabOrderWidget = static_cast<TabOrderEditorInterface*>(editor->qt_metacast("TabOrderEditorInterface"));
             tabOrderDialog->setTarget(tabOrderWidget);
-            auto tabOrder = editor->property("kmm_defaulttaborder").toStringList();
-            tabOrderDialog->setDefaultTabOrder(tabOrder);
-            tabOrder = editor->property("kmm_currenttaborder").toStringList();
-            tabOrderDialog->setTabOrder(tabOrder);
 
             if ((tabOrderDialog->exec() == QDialog::Accepted) && tabOrderDialog) {
                 tabOrderWidget->storeTabOrder(tabOrderDialog->tabOrder());

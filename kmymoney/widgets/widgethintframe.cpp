@@ -121,8 +121,6 @@ void WidgetHintFrameStyle::drawControl(ControlElement element, const QStyleOptio
 class WidgetHintFrameCollection::Private
 {
 public:
-    bool haveChainedCollection = false;
-    bool chainedCollectionState = true;
     QList<WidgetHintFrame*> frameList;
 };
 
@@ -135,25 +133,6 @@ WidgetHintFrameCollection::WidgetHintFrameCollection(QObject* parent)
 WidgetHintFrameCollection::~WidgetHintFrameCollection()
 {
     delete d;
-}
-
-bool WidgetHintFrameCollection::chainFrameCollection(WidgetHintFrameCollection* chainedCollection)
-{
-    if ((chainedCollection == nullptr) || (d->haveChainedCollection)) {
-        return false;
-    }
-    d->haveChainedCollection = true;
-    connect(chainedCollection, &WidgetHintFrameCollection::inputIsValid, this, &WidgetHintFrameCollection::changeChainedCollectionState);
-    connect(chainedCollection, &WidgetHintFrameCollection::destroyed, this, &WidgetHintFrameCollection::unchainFrameCollection);
-    return true;
-}
-
-void WidgetHintFrameCollection::unchainFrameCollection()
-{
-    if (d->haveChainedCollection) {
-        d->haveChainedCollection = false;
-        d->chainedCollectionState = true;
-    }
 }
 
 void WidgetHintFrameCollection::connectNotify(const QMetaMethod& signal)
@@ -169,22 +148,26 @@ void WidgetHintFrameCollection::addFrame(WidgetHintFrame* frame)
 {
     if (!d->frameList.contains(frame)) {
         connect(frame, &QObject::destroyed, this, &WidgetHintFrameCollection::frameDestroyed);
-        connect(frame, &WidgetHintFrame::changed, this, [=] {
-            QMetaObject::invokeMethod(this, "updateWidgets", Qt::QueuedConnection);
-        });
+        connect(frame, &WidgetHintFrame::changed, this, &WidgetHintFrameCollection::updateWidgets, Qt::QueuedConnection);
         d->frameList.append(frame);
+    }
+}
+
+void WidgetHintFrameCollection::inheritFrameCollection(WidgetHintFrameCollection* chainedCollection)
+{
+    while (!chainedCollection->d->frameList.isEmpty()) {
+        auto frame = chainedCollection->d->frameList.takeFirst();
+        // remove it from the source
+        disconnect(frame, &QObject::destroyed, chainedCollection, &WidgetHintFrameCollection::frameDestroyed);
+        disconnect(frame, &WidgetHintFrame::changed, chainedCollection, &WidgetHintFrameCollection::updateWidgets);
+        // and add it here
+        addFrame(frame);
     }
 }
 
 void WidgetHintFrameCollection::addWidget(QWidget* w)
 {
     connect(this, &WidgetHintFrameCollection::inputIsValid, w, &QWidget::setEnabled, Qt::UniqueConnection);
-}
-
-void WidgetHintFrameCollection::changeChainedCollectionState(bool valid)
-{
-    d->chainedCollectionState = valid;
-    updateWidgets();
 }
 
 void WidgetHintFrameCollection::removeWidget(QWidget* w)
@@ -203,7 +186,7 @@ void WidgetHintFrameCollection::frameDestroyed(QObject* o)
 
 void WidgetHintFrameCollection::updateWidgets()
 {
-    bool enabled = d->chainedCollectionState;
+    bool enabled = true;
     for (const auto& frame : qAsConst(d->frameList)) {
         if (frame->isVisible()) {
             enabled &= !frame->isErroneous();
@@ -214,6 +197,24 @@ void WidgetHintFrameCollection::updateWidgets()
     }
 
     Q_EMIT inputIsValid(enabled);
+}
+
+bool WidgetHintFrameCollection::isFrameVisible(QWidget* w) const
+{
+    for (const auto& frame : qAsConst(d->frameList)) {
+        if (w == frame->editWidget()) {
+            return frame->isFrameVisible();
+        }
+    }
+    return false;
+}
+
+WidgetHintFrame* WidgetHintFrameCollection::frameForWidget(QWidget* w) const
+{
+    const auto it = std::find_if(d->frameList.cbegin(), d->frameList.cend(), [&](WidgetHintFrame* frame) {
+        return frame->editWidget() == w;
+    });
+    return it != d->frameList.cend() ? *it : nullptr;
 }
 
 class WidgetHintFrame::Private
@@ -278,6 +279,11 @@ WidgetHintFrame::WidgetHintFrame(QWidget* editWidget, FrameStyle style, Qt::Wind
 WidgetHintFrame::~WidgetHintFrame()
 {
     delete d;
+}
+
+bool WidgetHintFrame::isFrameVisible() const
+{
+    return d->m_status;
 }
 
 bool WidgetHintFrame::isErroneous() const

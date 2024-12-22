@@ -52,6 +52,7 @@
 #include "splitdialog.h"
 #include "splitmodel.h"
 #include "statusmodel.h"
+#include "taborder.h"
 #include "tagsmodel.h"
 #include "widgethintframe.h"
 
@@ -83,8 +84,23 @@ public:
         , loadedFromModel(false)
         , counterAccountIsClosed(false)
         , splitModel(parent, &undoStack)
-        , frameCollection(nullptr)
         , m_splitHelper(nullptr)
+        , m_externalTabOrder(nullptr)
+        , m_tabOrder(QLatin1String("stdTransactionEditor"),
+                     QStringList{
+                         QLatin1String("accountCombo"),
+                         QLatin1String("dateEdit"),
+                         QLatin1String("creditDebitEdit"),
+                         QLatin1String("payeeEdit"),
+                         QLatin1String("numberEdit"),
+                         QLatin1String("categoryCombo"),
+                         QLatin1String("costCenterCombo"),
+                         QLatin1String("tagContainer"),
+                         QLatin1String("statusCombo"),
+                         QLatin1String("memoEdit"),
+                         QLatin1String("enterButton"),
+                         QLatin1String("cancelButton"),
+                     })
     {
         accountsModel->setObjectName(QLatin1String("NewTransactionEditor::accountsModel"));
         categoriesModel->setObjectName(QLatin1String("NewTransactionEditor::categoriesModel"));
@@ -105,7 +121,6 @@ public:
     }
 
     void updateWidgetState();
-    void setupTabOrder();
     bool checkForValidTransaction(bool doUserInteraction = true);
     bool isDatePostOpeningDate(const QDate& date, const QString& accountId);
     bool postdateChanged(const QDate& date);
@@ -129,6 +144,7 @@ public:
     void loadTransaction(QModelIndex idx);
     MyMoneySplit prepareSplit(const MyMoneySplit& sp);
     bool needClearSplitAction(const QString& action) const;
+    void updateMemoLink();
 
     NewTransactionEditor* q;
     Ui_NewTransactionEditor* ui;
@@ -147,9 +163,9 @@ public:
     MyMoneyAccount m_account;
     MyMoneyTransaction m_transaction;
     MyMoneySplit m_split;
-    WidgetHintFrameCollection* frameCollection;
     KMyMoneyAccountComboSplitHelper* m_splitHelper;
-    void updateMemoLink();
+    TabOrder* m_externalTabOrder;
+    TabOrder m_tabOrder;
 };
 
 void NewTransactionEditor::Private::updateWidgetAccess()
@@ -944,28 +960,6 @@ void NewTransactionEditor::Private::updateVAT(TaxValueChange amountChanged)
     }
 }
 
-void NewTransactionEditor::Private::setupTabOrder()
-{
-    const auto defaultTabOrder = QStringList{
-        QLatin1String("accountCombo"),
-        QLatin1String("dateEdit"),
-        QLatin1String("creditDebitEdit"),
-        QLatin1String("payeeEdit"),
-        QLatin1String("numberEdit"),
-        QLatin1String("categoryCombo"),
-        QLatin1String("costCenterCombo"),
-        QLatin1String("tagContainer"),
-        QLatin1String("statusCombo"),
-        QLatin1String("memoEdit"),
-        QLatin1String("enterButton"),
-        QLatin1String("cancelButton"),
-    };
-    q->setProperty("kmm_defaulttaborder", defaultTabOrder);
-    q->setProperty("kmm_currenttaborder", q->tabOrder(QLatin1String("stdTransactionEditor"), defaultTabOrder));
-
-    q->setupTabOrder(q->property("kmm_currenttaborder").toStringList());
-}
-
 void NewTransactionEditor::Private::defaultCategoryAssignment()
 {
     if (splitModel.rowCount() == 0) {
@@ -1111,7 +1105,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     // default is to hide the account selection combobox
     setShowAccountCombo(false);
 
-    d->setupTabOrder();
+    d->m_tabOrder.setWidget(this);
 
     // determine order of credit and debit edit widgets
     // based on their visual order in the ledger
@@ -1214,13 +1208,12 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
 
     d->ui->creditDebitEdit->setAllowEmpty(true);
 
-    d->frameCollection = new WidgetHintFrameCollection(this);
-    d->frameCollection->addFrame(new WidgetHintFrame(d->ui->dateEdit));
-    d->frameCollection->addFrame(new WidgetHintFrame(d->ui->costCenterCombo));
-    d->frameCollection->addFrame(new WidgetHintFrame(d->ui->numberEdit, WidgetHintFrame::Warning));
-    d->frameCollection->addFrame(new WidgetHintFrame(d->ui->creditDebitEdit, WidgetHintFrame::Warning));
-    d->frameCollection->addFrame(new WidgetHintFrame(d->ui->categoryCombo, WidgetHintFrame::Warning));
-    d->frameCollection->addWidget(d->ui->enterButton);
+    widgetHintFrameCollection()->addFrame(new WidgetHintFrame(d->ui->dateEdit));
+    widgetHintFrameCollection()->addFrame(new WidgetHintFrame(d->ui->costCenterCombo));
+    widgetHintFrameCollection()->addFrame(new WidgetHintFrame(d->ui->numberEdit, WidgetHintFrame::Warning));
+    widgetHintFrameCollection()->addFrame(new WidgetHintFrame(d->ui->creditDebitEdit, WidgetHintFrame::Warning));
+    widgetHintFrameCollection()->addFrame(new WidgetHintFrame(d->ui->categoryCombo, WidgetHintFrame::Warning));
+    widgetHintFrameCollection()->addWidget(d->ui->enterButton);
 
     connect(d->ui->numberEdit, &QLineEdit::textChanged, this, [&](const QString& newNumber) {
         d->numberChanged(newNumber);
@@ -1456,17 +1449,7 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
         d->loadTransaction(idx);
     }
 
-    // set focus to first tab field once we return to event loop
-    const auto tabOrder = property("kmm_currenttaborder").toStringList();
-    if (!tabOrder.isEmpty()) {
-        for (const auto& widgetName : tabOrder) {
-            const auto focusWidget = findChild<QWidget*>(widgetName);
-            if (focusWidget && focusWidget->isVisibleTo(this)) {
-                QMetaObject::invokeMethod(focusWidget, "setFocus", Qt::QueuedConnection);
-                break;
-            }
-        }
-    }
+    setInitialFocus();
 }
 
 
@@ -1707,29 +1690,47 @@ void NewTransactionEditor::setReadOnly(bool readOnly)
     if (isReadOnly() != readOnly) {
         TransactionEditorBase::setReadOnly(readOnly);
         if (readOnly) {
-            d->frameCollection->removeWidget(d->ui->enterButton);
+            widgetHintFrameCollection()->removeWidget(d->ui->enterButton);
             d->ui->enterButton->setDisabled(true);
         } else {
             // no need to enable the enter button here as the
             // frameCollection will take care of it anyway
-            d->frameCollection->addWidget(d->ui->enterButton);
+            widgetHintFrameCollection()->addWidget(d->ui->enterButton);
         }
     }
 }
 
-void NewTransactionEditor::setupUi(QWidget* parent)
+QWidget* NewTransactionEditor::setupUi(QWidget* parent)
 {
     if (d->tabOrderUi == nullptr) {
         d->tabOrderUi = new Ui::NewTransactionEditor;
     }
     d->tabOrderUi->setupUi(parent);
-    d->tabOrderUi->accountLabel->setVisible(false);
-    d->tabOrderUi->accountCombo->setVisible(false);
+    d->tabOrderUi->accountLabel->setVisible(d->ui->accountLabel->isVisible());
+    d->tabOrderUi->accountCombo->setVisible(d->ui->accountCombo->isVisible());
+    return this;
 }
 
 void NewTransactionEditor::storeTabOrder(const QStringList& tabOrder)
 {
-    TransactionEditorBase::storeTabOrder(QLatin1String("stdTransactionEditor"), tabOrder);
+    // if we are embedded into another widget (e.g. KEditScheduleDlg) then
+    // we never save our own tab order even if called accidentally.
+    if (!d->m_externalTabOrder) {
+        d->m_tabOrder.setTabOrder(tabOrder);
+    }
+}
+
+void NewTransactionEditor::setExternalTabOrder(TabOrder* tabOrder)
+{
+    d->m_externalTabOrder = tabOrder;
+}
+
+TabOrder* NewTransactionEditor::tabOrder() const
+{
+    if (d->m_externalTabOrder) {
+        return d->m_externalTabOrder;
+    }
+    return &d->m_tabOrder;
 }
 
 void NewTransactionEditor::slotSettingsChanged()
@@ -1738,11 +1739,6 @@ void NewTransactionEditor::slotSettingsChanged()
 
     d->categoriesModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
     d->accountsModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
-}
-
-WidgetHintFrameCollection* NewTransactionEditor::widgetHintFrameCollection() const
-{
-    return d->frameCollection;
 }
 
 void NewTransactionEditor::setKeepCategoryAmount(bool keepCategoryAmount)

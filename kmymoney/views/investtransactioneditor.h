@@ -44,13 +44,14 @@ public:
     MyMoneyMoney totalAmount() const;
 
     // Implement TabOrderEditorInterface methods
-    void setupUi(QWidget* parent) override;
+    QWidget* setupUi(QWidget* parent) override;
     void storeTabOrder(const QStringList& tabOrder) override;
 
     QDate postDate() const override;
 
 protected:
     bool isTransactionDataValid() const override;
+    TabOrder* tabOrder() const override;
 
 public Q_SLOTS:
     void slotSettingsChanged() override;

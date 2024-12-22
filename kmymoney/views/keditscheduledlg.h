@@ -52,7 +52,7 @@ public:
     static void editSchedule(const MyMoneySchedule& inputSchedule, bool alwaysUseEditor = false);
 
     // Implement TabOrderEditorInterface methods
-    void setupUi(QWidget* parent) override;
+    QWidget* setupUi(QWidget* parent) override;
     void storeTabOrder(const QStringList& tabOrder) override;
 
 protected:

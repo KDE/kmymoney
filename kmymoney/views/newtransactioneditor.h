@@ -68,19 +68,42 @@ public:
     void setReadOnly(bool readOnly) override;
 
     // Implement TabOrderEditorInterface methods
-    void setupUi(QWidget* parent) override;
-    void storeTabOrder(const QStringList& tabOrder) override;
+    /**
+     * Setup the tab order dialog with the UI elements of this object
+     * Use @a parent as the parent widget and return a pointer
+     * to myself.
+     */
+    QWidget* setupUi(QWidget* parent) override;
 
     /**
-     * This method is used to embed the transaction editor in other dialogs
-     * e.g. KEditScheduleDlg
+     * Called by the taborder editor to store the new
+     * @a tabOrder settings.
      */
-    virtual WidgetHintFrameCollection* widgetHintFrameCollection() const override;
+    void storeTabOrder(const QStringList& tabOrder) override;
 
     void setKeepCategoryAmount(bool keepCategoryAmount);
 
+    /**
+     * If @a tabOrder is not equal to @c nullptr it is returned instead
+     * of our own order object. This allows to embed the transaction editor
+     * into the tab order of another widget (e.g. KEditScheduleDlg)
+     * If @a tabOrder is equal to @c nullptr a pointer to our own object is
+     * returned.
+     *
+     * @sa tabOrder()
+     */
+    void setExternalTabOrder(TabOrder* tabOrder);
+
 protected:
     bool isTransactionDataValid() const override;
+
+    /**
+     * Return a pointer to our own TabOrder object or the
+     * one passed in using setExternalTabOrder.
+     *
+     * @sa setExternalTabOrder()
+     */
+    TabOrder* tabOrder() const override;
 
 public Q_SLOTS:
     void slotSettingsChanged() override;

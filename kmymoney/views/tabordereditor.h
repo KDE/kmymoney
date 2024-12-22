@@ -22,7 +22,7 @@ class TabOrderEditorInterface
 {
 public:
     virtual ~TabOrderEditorInterface() = default;
-    virtual void setupUi(QWidget* parent) = 0;
+    virtual QWidget* setupUi(QWidget* parent) = 0;
     virtual void storeTabOrder(const QStringList& tabOrder) = 0;
 };
 

@@ -37,6 +37,7 @@
 #include "mymoneyprice.h"
 #include "mymoneysecurity.h"
 #include "payeecreator.h"
+#include "taborder.h"
 #include "tagcreator.h"
 #include "widgethintframe.h"
 
@@ -47,6 +48,7 @@ public:
         : cancelButton(nullptr)
         , enterButton(nullptr)
         , focusFrame(nullptr)
+        , frameCollection(nullptr)
         , readOnly(false)
         , accepted(false)
         , enterMovesBetweenFields(false)
@@ -56,6 +58,7 @@ public:
     QAbstractButton* cancelButton;
     QAbstractButton* enterButton;
     WidgetHintFrame* focusFrame;
+    WidgetHintFrameCollection* frameCollection;
     bool readOnly;
     bool accepted;
     bool enterMovesBetweenFields;
@@ -68,6 +71,7 @@ TransactionEditorBase::TransactionEditorBase(QWidget* parent, const QString& acc
 {
     Q_UNUSED(accountId)
     d->focusFrame = new WidgetHintFrame(this, WidgetHintFrame::Focus);
+    d->frameCollection = new WidgetHintFrameCollection(this);
     WidgetHintFrame::show(this);
     connect(d->focusFrame, &QObject::destroyed, this, [&]() {
         d->focusFrame = nullptr;
@@ -88,12 +92,13 @@ TransactionEditorBase::QWidget* TransactionEditorBase::focusFrame() const
 
 bool TransactionEditorBase::focusNextPrevChild(bool next)
 {
-    auto rc = KMyMoneyUtils::tabFocusHelper(this, next);
+    const auto widget = tabOrder()->tabFocusHelper(next);
 
-    if (rc == false) {
-        rc = QWidget::focusNextPrevChild(next);
+    if (widget != nullptr) {
+        widget->setFocus(next ? Qt::TabFocusReason : Qt::BacktabFocusReason);
+        return true;
     }
-    return rc;
+    return QWidget::focusNextPrevChild(next);
 }
 
 void TransactionEditorBase::keyPressEvent(QKeyEvent* e)
@@ -153,24 +158,9 @@ bool TransactionEditorBase::isReadOnly() const
     return d->readOnly;
 }
 
-QStringList TransactionEditorBase::tabOrder(const QString& name, const QStringList& defaultTabOrder) const
-{
-    return KMyMoneyUtils::tabOrder(name, defaultTabOrder);
-}
-
-void TransactionEditorBase::setupTabOrder(const QStringList& tabOrder)
-{
-    KMyMoneyUtils::setupTabOrder(this, tabOrder);
-}
-
-void TransactionEditorBase::storeTabOrder(const QString& name, const QStringList& tabOrder)
-{
-    KMyMoneyUtils::storeTabOrder(name, tabOrder);
-}
-
 WidgetHintFrameCollection* TransactionEditorBase::widgetHintFrameCollection() const
 {
-    return nullptr;
+    return d->frameCollection;
 }
 
 void TransactionEditorBase::setVisible(bool visible)
@@ -404,4 +394,12 @@ void TransactionEditorBase::changeEvent(QEvent* ev)
         });
     }
     QWidget::changeEvent(ev);
+}
+
+void TransactionEditorBase::setInitialFocus()
+{
+    const auto widget = tabOrder()->initialFocusWidget(widgetHintFrameCollection());
+    if (widget) {
+        QMetaObject::invokeMethod(widget, "setFocus", Qt::QueuedConnection);
+    }
 }

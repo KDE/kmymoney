@@ -123,7 +123,7 @@ void TabOrderDialog::setTarget(TabOrderEditorInterface* targetWidget)
         auto list = d->ui.m_targetWidget->findChildren<QObject*>();
         qDeleteAll(list);
     }
-    targetWidget->setupUi(d->ui.m_targetWidget);
+    auto editWidget = targetWidget->setupUi(d->ui.m_targetWidget);
 
     // force the focus on our own button box (in case the targetWidget
     // contains another one which will be found prior to ours when
@@ -132,6 +132,10 @@ void TabOrderDialog::setTarget(TabOrderEditorInterface* targetWidget)
     d->m_defaultOrder.clear();
     d->m_widgetList.clear();
     d->m_indicatorRegion = QRegion();
+
+    // now load the current and default order from the target widget
+    d->m_currentOrder = editWidget->property("kmm_currenttaborder").toStringList();
+    d->m_defaultOrder = editWidget->property("kmm_defaulttaborder").toStringList();
 }
 
 void TabOrderDialog::setDefaultTabOrder(const QStringList& widgetNames)

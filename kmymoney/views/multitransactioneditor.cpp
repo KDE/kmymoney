@@ -48,6 +48,7 @@
 #include "securitiesmodel.h"
 #include "splitdialog.h"
 #include "statusmodel.h"
+#include "taborder.h"
 #include "tagsmodel.h"
 #include "widgethintframe.h"
 
@@ -74,6 +75,21 @@ public:
         , payeesModel(new QSortFilterProxyModel(parent))
         , frameCollection(nullptr)
         , costCenterRequired(false)
+        , m_tabOrder(QLatin1String("multiTransactionEditor"),
+                     QStringList{
+                         QLatin1String("accountCombo"),
+                         QLatin1String("dateEdit"),
+                         QLatin1String("creditDebitEdit"),
+                         QLatin1String("payeeEdit"),
+                         QLatin1String("numberEdit"),
+                         QLatin1String("categoryCombo"),
+                         QLatin1String("costCenterCombo"),
+                         QLatin1String("tagContainer"),
+                         QLatin1String("statusCombo"),
+                         QLatin1String("memoEdit"),
+                         QLatin1String("enterButton"),
+                         QLatin1String("cancelButton"),
+                     })
     {
         accountsModel->setObjectName(QLatin1String("MultiTransactionEditor::accountsModel"));
         categoriesModel->setObjectName(QLatin1String("MultiTransactionEditor::categoriesModel"));
@@ -92,7 +108,6 @@ public:
         delete ui;
     }
 
-    void setupTabOrder();
     bool anyChanges() const;
     bool isDatePostOpeningDate(const QDate& date, const QString& accountId);
     bool checkForValidTransaction(bool doUserInteraction);
@@ -120,6 +135,7 @@ public:
     StatusModel statusModel;
     QStringList selectedJournalEntryIds;
     bool costCenterRequired;
+    TabOrder m_tabOrder;
 };
 
 bool MultiTransactionEditor::Private::anyChanges() const
@@ -297,28 +313,6 @@ void MultiTransactionEditor::Private::tagsChanged(const QStringList& tagIds)
     Q_UNUSED(tagIds)
 }
 
-void MultiTransactionEditor::Private::setupTabOrder()
-{
-    const auto defaultTabOrder = QStringList{
-        QLatin1String("accountCombo"),
-        QLatin1String("dateEdit"),
-        QLatin1String("creditDebitEdit"),
-        QLatin1String("payeeEdit"),
-        QLatin1String("numberEdit"),
-        QLatin1String("categoryCombo"),
-        QLatin1String("costCenterCombo"),
-        QLatin1String("tagContainer"),
-        QLatin1String("statusCombo"),
-        QLatin1String("memoEdit"),
-        QLatin1String("enterButton"),
-        QLatin1String("cancelButton"),
-    };
-    q->setProperty("kmm_defaulttaborder", defaultTabOrder);
-    q->setProperty("kmm_currenttaborder", q->tabOrder(QLatin1String("multiTransactionEditor"), defaultTabOrder));
-
-    q->setupTabOrder(q->property("kmm_currenttaborder").toStringList());
-}
-
 MultiTransactionEditor::MultiTransactionEditor(QWidget* parent, const QString& accountId)
     : TransactionEditorBase(parent, accountId)
     , d(new Private(this))
@@ -333,7 +327,7 @@ MultiTransactionEditor::MultiTransactionEditor(QWidget* parent, const QString& a
     setShowAccountCombo(false);
     setShowNumberWidget(false);
 
-    d->setupTabOrder();
+    d->m_tabOrder.setWidget(this);
 
     // determine order of credit and debit edit widgets
     // based on their visual order in the ledger
@@ -688,7 +682,7 @@ void MultiTransactionEditor::setReadOnly(bool readOnly)
     }
 }
 
-void MultiTransactionEditor::setupUi(QWidget* parent)
+QWidget* MultiTransactionEditor::setupUi(QWidget* parent)
 {
     if (d->tabOrderUi == nullptr) {
         d->tabOrderUi = new Ui::NewTransactionEditor;
@@ -696,11 +690,12 @@ void MultiTransactionEditor::setupUi(QWidget* parent)
     d->tabOrderUi->setupUi(parent);
     d->tabOrderUi->accountLabel->setVisible(false);
     d->tabOrderUi->accountCombo->setVisible(false);
+    return this;
 }
 
 void MultiTransactionEditor::storeTabOrder(const QStringList& tabOrder)
 {
-    TransactionEditorBase::storeTabOrder(QLatin1String("multiTransactionEditor"), tabOrder);
+    d->m_tabOrder.setTabOrder(tabOrder);
 }
 
 void MultiTransactionEditor::slotSettingsChanged()
@@ -768,4 +763,9 @@ QString MultiTransactionEditor::errorMessage() const
 bool MultiTransactionEditor::isTransactionDataValid() const
 {
     return true;
+}
+
+TabOrder* MultiTransactionEditor::tabOrder() const
+{
+    return &d->m_tabOrder;
 }

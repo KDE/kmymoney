@@ -63,6 +63,7 @@ set(kmm_base_widgets_SOURCES
   popuppositioner.cpp
   styleditemdelegateforwarder.cpp
   kmymoneytreeview.cpp
+  taborder.cpp
   transactionsortoption.cpp
   widgethintframe.cpp
   onlinesourcedelegate.cpp

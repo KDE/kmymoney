@@ -6,7 +6,7 @@
 #ifndef AMOUNTVALIDATOR_H
 #define AMOUNTVALIDATOR_H
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -26,7 +26,7 @@
   *
   * @author Thomas Baumgart
   */
-class AmountValidator : public QDoubleValidator
+class KMM_BASE_WIDGETS_EXPORT AmountValidator : public QDoubleValidator
 {
     Q_OBJECT
 

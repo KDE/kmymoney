@@ -53,7 +53,7 @@ public:
     void setReadOnly(bool readOnly) override;
 
     // Implement TabOrderEditorInterface methods
-    void setupUi(QWidget* parent) override;
+    QWidget* setupUi(QWidget* parent) override;
     void storeTabOrder(const QStringList& tabOrder) override;
 
     /**
@@ -68,6 +68,7 @@ public:
 
 protected:
     bool isTransactionDataValid() const override;
+    TabOrder* tabOrder() const override;
 
 public Q_SLOTS:
     void slotSettingsChanged() override;

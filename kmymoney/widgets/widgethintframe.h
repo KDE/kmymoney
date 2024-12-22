@@ -120,6 +120,13 @@ public:
      */
     static WidgetHintFrame* frameForWidget(QWidget* editWidget);
 
+    /**
+     * Provides information if a frame is currently shown or not
+     *
+     * @returns true if the frame is visible
+     */
+    bool isFrameVisible() const;
+
 protected:
     bool eventFilter(QObject* o, QEvent* e) final override;
 
@@ -143,20 +150,30 @@ public:
     void removeWidget(QWidget* w);
 
     /**
-     * Connect the @a chainedCollection so that its result affects this
-     * collection. Only one collection can be chained.
-     *
-     * @returns true if the connection was setup correctly.
+     * Inherits the widgets from @a chainedCollection and removes them from
+     * their original source
      */
-    bool chainFrameCollection(WidgetHintFrameCollection* chainedCollection);
+    void inheritFrameCollection(WidgetHintFrameCollection* chainedCollection);
+
+    /**
+     * Provides information if a frame around the edit widget
+     * @a w is currently shown or not.
+     *
+     * @returns true if the frame is visible
+     */
+    bool isFrameVisible(QWidget* w) const;
+
+    /**
+     * Returns the frame for widget @a w or @c nullptr
+     * if no frame is found.
+     */
+    WidgetHintFrame* frameForWidget(QWidget* w) const;
 
 protected:
     void connectNotify(const QMetaMethod& signal) override;
 
 protected Q_SLOTS:
-    virtual void unchainFrameCollection();
     virtual void frameDestroyed(QObject* o);
-    virtual void changeChainedCollectionState(bool valid);
     virtual void updateWidgets();
 
 Q_SIGNALS:

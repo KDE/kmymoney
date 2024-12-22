@@ -43,6 +43,7 @@
 #include "splitdialog.h"
 #include "splitmodel.h"
 #include "statusmodel.h"
+#include "taborder.h"
 #include "ui_investtransactioneditor.h"
 #include "widgethintframe.h"
 
@@ -71,6 +72,23 @@ public:
         , interestSplitModel(new SplitModel(parent, &undoStack))
         , loadedFromModel(false)
         , bypassUserPriceUpdate(false)
+        , m_tabOrder(QLatin1String("investTransactionEditor"),
+                     QStringList{
+                         QLatin1String("activityCombo"),
+                         QLatin1String("dateEdit"),
+                         QLatin1String("securityAccountCombo"),
+                         QLatin1String("sharesAmountEdit"),
+                         QLatin1String("assetAccountCombo"),
+                         QLatin1String("priceAmountEdit"),
+                         QLatin1String("feesCombo"),
+                         QLatin1String("feesAmountEdit"),
+                         QLatin1String("interestCombo"),
+                         QLatin1String("interestAmountEdit"),
+                         QLatin1String("memoEdit"),
+                         QLatin1String("statusCombo"),
+                         QLatin1String("enterButton"),
+                         QLatin1String("cancelButton"),
+                     })
     {
         accountsModel->setObjectName("InvestTransactionEditor::accountsModel");
         feeSplitModel->setObjectName("FeesSplitModel");
@@ -122,7 +140,6 @@ public:
     void scheduleUpdateTotalAmount();
     void updateWidgetState();
     void protectWidgetsForClosedAccount();
-    void setupTabOrder();
 
     void editSplits(SplitModel* sourceSplitModel, AmountEdit* amountEdit, const MyMoneyMoney& transactionFactor);
     void removeUnusedSplits(MyMoneyTransaction& t, SplitModel* splitModel);
@@ -186,6 +203,8 @@ public:
      * wanted.
      */
     bool bypassUserPriceUpdate;
+
+    TabOrder m_tabOrder;
 };
 
 void InvestTransactionEditor::Private::removeUnusedSplits(MyMoneyTransaction& t, SplitModel* splitModel)
@@ -724,30 +743,6 @@ void InvestTransactionEditor::Private::scheduleUpdateTotalAmount()
     QMetaObject::invokeMethod(q, "updateTotalAmount", Qt::QueuedConnection);
 }
 
-void InvestTransactionEditor::Private::setupTabOrder()
-{
-    const auto defaultTabOrder = QStringList{
-        QLatin1String("activityCombo"),
-        QLatin1String("dateEdit"),
-        QLatin1String("securityAccountCombo"),
-        QLatin1String("sharesAmountEdit"),
-        QLatin1String("assetAccountCombo"),
-        QLatin1String("priceAmountEdit"),
-        QLatin1String("feesCombo"),
-        QLatin1String("feesAmountEdit"),
-        QLatin1String("interestCombo"),
-        QLatin1String("interestAmountEdit"),
-        QLatin1String("memoEdit"),
-        QLatin1String("statusCombo"),
-        QLatin1String("enterButton"),
-        QLatin1String("cancelButton"),
-    };
-    q->setProperty("kmm_defaulttaborder", defaultTabOrder);
-    q->setProperty("kmm_currenttaborder", q->tabOrder(QLatin1String("investTransactionEditor"), defaultTabOrder));
-
-    q->setupTabOrder(q->property("kmm_currenttaborder").toStringList());
-}
-
 InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString& accId)
     : TransactionEditorBase(parent, accId)
     , d(new Private(this))
@@ -991,7 +986,8 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
             updateTotalAmount();
         }
     });
-    d->setupTabOrder();
+
+    d->m_tabOrder.setWidget(this);
 
     slotSettingsChanged();
 }
@@ -1178,14 +1174,7 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
     // delay update until next run of event loop so that all necessary widgets are visible
     QMetaObject::invokeMethod(this, "updateWidgets", Qt::QueuedConnection);
 
-    // set focus to first tab field once we return to event loop
-    const auto tabOrder = property("kmm_currenttaborder").toStringList();
-    if (!tabOrder.isEmpty()) {
-        const auto focusWidget = findChild<QWidget*>(tabOrder.first());
-        if (focusWidget) {
-            QMetaObject::invokeMethod(focusWidget, "setFocus", Qt::QueuedConnection);
-        }
-    }
+    setInitialFocus();
 }
 
 void InvestTransactionEditor::updateWidgets()
@@ -1432,18 +1421,19 @@ bool InvestTransactionEditor::eventFilter(QObject* o, QEvent* e)
     return TransactionEditorBase::eventFilter(o, e);
 }
 
-void InvestTransactionEditor::setupUi(QWidget* parent)
+QWidget* InvestTransactionEditor::setupUi(QWidget* parent)
 {
     if (d->tabOrderUi == nullptr) {
         d->tabOrderUi = new Ui::InvestTransactionEditor;
     }
     d->tabOrderUi->setupUi(parent);
     d->tabOrderUi->infoMessage->setHidden(true);
+    return this;
 }
 
 void InvestTransactionEditor::storeTabOrder(const QStringList& tabOrder)
 {
-    TransactionEditorBase::storeTabOrder(QLatin1String("investTransactionEditor"), tabOrder);
+    d->m_tabOrder.setTabOrder(tabOrder);
 }
 
 void InvestTransactionEditor::slotSettingsChanged()
@@ -1461,4 +1451,9 @@ bool InvestTransactionEditor::isTransactionDataValid() const
 QDate InvestTransactionEditor::postDate() const
 {
     return d->ui->dateEdit->date();
+}
+
+TabOrder* InvestTransactionEditor::tabOrder() const
+{
+    return &d->m_tabOrder;
 }

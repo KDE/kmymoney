@@ -29,6 +29,7 @@ class SplitModel;
 class WidgetHintFrameCollection;
 class KCurrencyConverter;
 class NewSplitEditor;
+class TabOrder;
 
 class TransactionEditorBase : public QWidget
 {
@@ -76,7 +77,7 @@ public:
      * e.g. KEditScheduleDlg. If the editor does not have a WidgetHintFrameCollection
      * then @c nullptr is returned. This is the default implementation.
      */
-    virtual WidgetHintFrameCollection* widgetHintFrameCollection() const;
+    WidgetHintFrameCollection* widgetHintFrameCollection() const;
 
     void setVisible(bool visible) override;
 
@@ -96,9 +97,6 @@ protected:
     bool focusNextPrevChild(bool next) override;
     void setCancelButton(QAbstractButton* button);
     void setEnterButton(QAbstractButton* button);
-    QStringList tabOrder(const QString& name, const QStringList& defaultTabOrder) const;
-    void setupTabOrder(const QStringList& tabOrder);
-    void storeTabOrder(const QString& name, const QStringList& tabOrder);
     virtual bool isTransactionDataValid() const = 0;
     void processReturnKey();
 
@@ -158,6 +156,10 @@ protected:
     KCurrencyConverter* currencyConverter() const;
 
     void updateConversionRate(MultiCurrencyEdit* amountEdit) const;
+
+    void setInitialFocus();
+
+    virtual TabOrder* tabOrder() const = 0;
 
 protected Q_SLOTS:
     virtual void reject();

@@ -1,23 +1,11 @@
 include(ECMAddTests)
 
-set(testwidgets_SOURCES
-    ../amountvalidator.cpp
-    )
-
-add_library(testwidgets STATIC ${testwidgets_SOURCES})
-target_link_libraries(testwidgets PUBLIC
-    Qt::Gui
-    Qt::Core
-    kmm_mymoney
-    kmm_testutils
-)
-
 file(GLOB tests_sources "*-test.cpp")
 kmm_add_tests(${tests_sources}
   LINK_LIBRARIES
     Qt::Gui
     Qt::Core
     Qt::Test
-    Qt::Xml
-    testwidgets
+    kmm_base_widgets
+    kmm_testutils
 )
