@@ -3,10 +3,10 @@
 <KMYMONEY-FILE>
   <FILEINFO>
     <CREATION_DATE date=""/>
-    <LAST_MODIFIED_DATE date="2024-11-10T17:39:38+01:00"/>
+    <LAST_MODIFIED_DATE date="2024-12-22T14:48:47+01:00"/>
     <VERSION id="1"/>
     <FIXVERSION date=""/>
-    <APPVERSION id="5.1.80-a39a9614e"/>
+    <APPVERSION id="5.1.90-c1d4d7c70"/>
   </FILEINFO>
   <USER name="" email="">
     <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
@@ -34,6 +34,7 @@
     <ACCOUNT id="AStd::Expense" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="13" name="Expense" description="" currency="EUR">
       <SUBACCOUNTS>
         <SUBACCOUNT id="A000005"/>
+        <SUBACCOUNT id="A000008"/>
       </SUBACCOUNTS>
     </ACCOUNT>
     <ACCOUNT id="AStd::Income" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="12" name="Income" description="" currency="EUR"/>
@@ -67,6 +68,7 @@
         <PAIR key="term" value="203"/>
       </KEYVALUEPAIRS>
     </ACCOUNT>
+    <ACCOUNT id="A000008" parentaccount="AStd::Expense" lastreconciled="" lastmodified="" institution="" opened="1900-01-01" number="" type="13" name="Fees" description="" currency="EUR"/>
   </ACCOUNTS>
   <TRANSACTIONS>
     <TRANSACTION id="T000000000000000005" postdate="2000-01-01" memo="" entrydate="2024-11-10" commodity="EUR">
@@ -77,9 +79,10 @@
     </TRANSACTION>
     <TRANSACTION id="T000000000000000006" postdate="2000-01-31" memo="" entrydate="2024-11-10" commodity="EUR">
       <SPLITS>
-        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="-100/1" shares="-100/1" price="1/1" memo="Loan payment" account="A000004" number="" bankid=""/>
+        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="-105/1" shares="-105/1" price="1/1" memo="Loan payment" account="A000004" number="" bankid=""/>
         <SPLIT id="S0002" payee="" reconciledate="" action="Amortization" reconcileflag="0" value="8333/100" shares="8333/100" price="1/1" memo="Amortization" account="A000006" number="" bankid=""/>
         <SPLIT id="S0003" payee="" reconciledate="" action="Interest" reconcileflag="0" value="1667/100" shares="1667/100" price="1/1" memo="Interest" account="A000005" number="" bankid=""/>
+        <SPLIT id="S0004" payee="" reconciledate="" action="" reconcileflag="0" value="5/1" shares="5/1" price="1/1" memo="" account="A000008" number="" bankid=""/>
       </SPLITS>
     </TRANSACTION>
     <TRANSACTION id="T000000000000000007" postdate="2000-02-29" memo="" entrydate="2024-11-10" commodity="EUR">
@@ -167,14 +170,15 @@
     </TRANSACTION>
     <TRANSACTION id="T000000000000000019" postdate="2001-01-31" memo="" entrydate="2024-11-10" commodity="EUR">
       <SPLITS>
-        <SPLIT id="S0001" payee="P000001" reconciledate="" action="" reconcileflag="0" value="-100/1" shares="-100/1" price="1/1" memo="Loan payment" account="A000004" number="" bankid=""/>
+        <SPLIT id="S0001" payee="P000001" reconciledate="" action="" reconcileflag="0" value="-105/1" shares="-105/1" price="1/1" memo="Loan payment" account="A000004" number="" bankid=""/>
         <SPLIT id="S0002" payee="P000001" reconciledate="" action="Amortization" reconcileflag="0" value="4367/50" shares="4367/50" price="1/1" memo="Amortization" account="A000007" number="" bankid=""/>
         <SPLIT id="S0003" payee="" reconciledate="" action="Interest" reconcileflag="0" value="633/50" shares="633/50" price="1/1" memo="Interest" account="A000005" number="" bankid=""/>
+        <SPLIT id="S0004" payee="" reconciledate="" action="" reconcileflag="0" value="5/1" shares="5/1" price="1/1" memo="" account="A000008" number="" bankid=""/>
       </SPLITS>
     </TRANSACTION>
   </TRANSACTIONS>
   <KEYVALUEPAIRS>
-    <PAIR key="LastModificationDate" value="2024-11-10T17:39:38+01:00"/>
+    <PAIR key="LastModificationDate" value="2024-12-22T14:48:47+01:00"/>
     <PAIR key="kmm-baseCurrency" value="EUR"/>
     <PAIR key="kmm-id" value="{35115cee-fe22-46e8-98ef-ac5b4070bb67}"/>
   </KEYVALUEPAIRS>

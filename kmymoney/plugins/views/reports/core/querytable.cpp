@@ -864,27 +864,23 @@ void QueryTable::constructTransactionTable()
                 if (include_me) {
 
                     if (loan_special_case) {
-                        MyMoneyMoney value = ((*it_split).shares() * xr).convert(fraction);
+                        MyMoneyMoney value = -(((*it_split).shares() * xr).convert(fraction));
 
                         if ((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization)) {
-                            // put the payment in the "payment" column and convert to lowest fraction
-                            qA[ctPayee] = value.toString();
+                            // put the amortization in the "value" and "payment" column
+                            qA[ctValue] = value.toString();
                         } else if ((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Interest)) {
                             // put the interest in the "interest" column and convert to lowest fraction
                             qA[ctInterest] = value.toString();
-                        } else if (splits.count() > 2) {
-                            // [dv: This comment carried from the original code. I am
-                            // not exactly clear on what it means or why we do this.]
-                            // Put the initial pay-in nowhere (that is, ignore it). This
-                            // is dangerous, though. The only way I can tell the initial
-                            // pay-in apart from fees is if there are only 2 splits in
-                            // the transaction.  I wish there was a better way.
                         } else {
                             // accumulate everything else in the "fees" column if
                             // the split references an income or expense account
                             if (splitAcc.isIncomeExpense()) {
                                 MyMoneyMoney n0 = MyMoneyMoney(qA[ctFees]);
                                 qA[ctFees] = (n0 + value).toString();
+                            } else {
+                                MyMoneyMoney n0 = MyMoneyMoney(qA[ctPayment]);
+                                qA[ctPayment] = (n0 + value).toString();
                             }
                         }
                         // we don't add qA here for a loan transaction. we'll add one
@@ -986,6 +982,8 @@ void QueryTable::constructTransactionTable()
                     if (! splitAcc.isIncomeExpense()) {
                         //multiply by currency and convert to lowest fraction
                         qS[ctValue] = ((*it_split).shares() * xr).convert(fraction).toString();
+                        // also keep the value in the "payment" column for loan payment reports
+                        qS[ctPayment] = qS[ctValue];
                         qA[ctValueSourceLine] = QString("%1").arg(__LINE__);
 
                         qS[ctRank] = QLatin1Char('1');
