@@ -1592,7 +1592,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
     // and setup the shared action dynamics
     connect(d->m_myMoneyView, &KMyMoneyView::selectSharedActionButton, this, [&](eMenu::Action action, QAction* newAction) {
-        if (d->m_sharedActionButtons.contains(action) && newAction) {
+        if (d->m_sharedActionButtons.contains(action) && d->m_sharedActionButtons.value(action).button && newAction) {
             d->m_sharedActionButtons.value(action).button->setDefaultAction(newAction);
         } else {
             for (auto buttonInfo : d->m_sharedActionButtons) {
