@@ -322,6 +322,35 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
 
     if(index.isValid()) {
         d->m_editor = nullptr;
+        // check that no selected transaction references a closed account
+        const auto file = MyMoneyFile::instance();
+        const auto transactionIndexList = d->m_view->selectionModel()->selectedRows();
+        QStringList closedAccounts;
+        std::for_each(transactionIndexList.cbegin(), transactionIndexList.cend(), [&](const QModelIndex idx) -> void {
+            const auto journalEntryIdx = MyMoneyModelBase::mapToBaseSource(idx);
+            const auto journalEntry = file->journalModel()->itemByIndex(journalEntryIdx);
+            const auto splits = journalEntry.transaction().splits();
+            std::for_each(splits.cbegin(), splits.cend(), [&](const MyMoneySplit split) -> void {
+                const auto accountIdx = file->accountsModel()->indexById(split.accountId());
+                if (accountIdx.data(eMyMoney::Model::AccountIsClosedRole).toBool()) {
+                    closedAccounts.append(accountIdx.data(eMyMoney::Model::AccountNameRole).toString());
+                }
+            });
+        });
+        if (!closedAccounts.isEmpty()) {
+            const auto accountList = closedAccounts.join("<br>");
+            const auto details = i18ncp("@info %2 contains list of account names separated by <br>",
+                                        "<qt>Closed account:<br><br>%2</qt>",
+                                        "<qt>Closed accounts:<br><br>%2</qt>",
+                                        closedAccounts.count(),
+                                        accountList);
+            KMessageBox::detailedError(parent,
+                                       i18nc("@info Unable to edit ", "KMyMoney does not support to edit transaction that reference closed accounts."),
+                                       details,
+                                       i18nc("@title:window", "Prevent editing transactions"));
+            return nullptr;
+        }
+
         if(d->m_view->selectionModel()->selectedRows().count() > 1) {
             auto accountId = d->m_view->accountId();
             if (!accountId.isEmpty()) {
@@ -332,8 +361,7 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
                     d->m_editor = new MultiTransactionEditor(parent, accountId);
                 }
             } else {
-                errorMessage =
-                    i18nc("@info Editing multiple transactions", "The current implementation cannot modify multiple transactions in different accounts.");
+                errorMessage = i18nc("@info Editing multiple transactions", "The current implementation cannot modify multiple transactions in this view.");
                 // Message that multiple edit is only available in ledger (within a single account)
             }
 
