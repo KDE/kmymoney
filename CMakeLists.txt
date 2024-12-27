@@ -486,6 +486,10 @@ option(USE_QT_DESIGNER
 
 add_feature_info("QtDesigner" USE_QT_DESIGNER "Qt-Designer library support (for devs only).")
 
+option(KMM_I18N_GENERATION
+  "Generate i18n messages and documentation (default=ON)" ON)
+add_feature_info("Internationalization" KMM_I18N_GENERATION "Generation of i18n files (messages and docs)")
+
 ######################### The Actual Targets ##########################
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
@@ -499,7 +503,9 @@ add_subdirectory( tools )
 add_subdirectory( kmymoney )
 if(KF${QT_MAJOR_VERSION}DocTools_FOUND)
   add_subdirectory( doc )
-  kdoctools_install( po )
+  if (${KMM_I18N_GENERATION})
+    kdoctools_install( po )
+  endif()
 endif()
 
 ######################### Output Results #############################
