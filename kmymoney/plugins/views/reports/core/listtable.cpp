@@ -633,6 +633,8 @@ ListTable::cellGroupE ListTable::cellGroup(const cellTypeE cellType)
     case ctPeriodicPayment:
     case ctFinalPayment:
     case ctPayment:
+    case ctStartingMarketValue:
+    case ctEndingMarketValue:
         return cgMoney;
     case ctPrice:
     case ctLastPrice:
@@ -786,6 +788,10 @@ QString ListTable::tableHeader(const cellTypeE cellType)
         return i18n("Short-term Gain");
     case ctCapitalGainLT:
         return i18n("Long-term Gain");
+    case ctStartingMarketValue:
+        return i18n("Starting Market Value");
+    case ctEndingMarketValue:
+        return i18n("Ending Market Value");
     default:
         break;
     }

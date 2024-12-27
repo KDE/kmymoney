@@ -195,12 +195,12 @@ void QueryTable::init()
         m_subtotal.clear();
         switch (m_config.investmentSum()) {
         case eMyMoney::Report::InvestmentSum::OwnedAndSold:
-            m_columns << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingBalance << ctExtendedInternalRateOfReturn << ctReturnInvestment;
-            m_subtotal << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingBalance << ctExtendedInternalRateOfReturn << ctReturnInvestment;
+            m_columns << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingMarketValue << ctExtendedInternalRateOfReturn << ctReturnInvestment;
+            m_subtotal << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingMarketValue << ctExtendedInternalRateOfReturn << ctReturnInvestment;
             break;
         case eMyMoney::Report::InvestmentSum::Owned:
-            m_columns << ctBuys << ctReinvestIncome << ctMarketValue << ctExtendedInternalRateOfReturn << ctReturnInvestment;
-            m_subtotal << ctBuys << ctReinvestIncome << ctMarketValue << ctExtendedInternalRateOfReturn << ctReturnInvestment;
+            m_columns << ctBuys << ctReinvestIncome << ctEndingMarketValue << ctExtendedInternalRateOfReturn << ctReturnInvestment;
+            m_subtotal << ctBuys << ctReinvestIncome << ctEndingMarketValue << ctExtendedInternalRateOfReturn << ctReturnInvestment;
             break;
         case eMyMoney::Report::InvestmentSum::Sold:
             m_columns << ctBuys << ctSells << ctCashIncome << ctExtendedInternalRateOfReturn << ctReturnInvestment;
@@ -208,10 +208,10 @@ void QueryTable::init()
             break;
         case eMyMoney::Report::InvestmentSum::Period:
         default:
-            m_columns << ctStartingBalance << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingBalance << ctExtendedInternalRateOfReturn
+            m_columns << ctStartingMarketValue << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingMarketValue << ctExtendedInternalRateOfReturn
                       << ctReturnInvestment;
-            m_subtotal << ctStartingBalance << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingBalance << ctExtendedInternalRateOfReturn
-                       << ctReturnInvestment;
+            m_subtotal << ctStartingMarketValue << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingMarketValue
+                       << ctExtendedInternalRateOfReturn << ctReturnInvestment;
             break;
         }
     }
@@ -219,12 +219,8 @@ void QueryTable::init()
         m_subtotal.clear();
         switch (m_config.investmentSum()) {
         case eMyMoney::Report::InvestmentSum::Owned:
-            m_columns << ctShares << ctBuyPrice << ctLastPrice
-                      << ctBuys << ctMarketValue << ctPercentageGain
-                      << ctCapitalGain;
-            m_subtotal << ctShares << ctBuyPrice << ctLastPrice
-                       << ctBuys << ctMarketValue << ctPercentageGain
-                       << ctCapitalGain;
+            m_columns << ctShares << ctBuyPrice << ctLastPrice << ctBuys << ctEndingMarketValue << ctPercentageGain << ctCapitalGain;
+            m_subtotal << ctShares << ctBuyPrice << ctLastPrice << ctBuys << ctEndingMarketValue << ctPercentageGain << ctCapitalGain;
             break;
         case eMyMoney::Report::InvestmentSum::Sold:
         default:
@@ -366,13 +362,16 @@ void QueryTable::constructTotalRows()
                     // custom total values calculations
                     for (const auto& subtotal : qAsConst(subtotals)) {
                         if (subtotal == ctReturnInvestment)
-                            totalsRow[subtotal] = helperROI((*currencyGrp).at(i + 1).value(ctBuys) - (*currencyGrp).at(i + 1).value(ctReinvestIncome), (*currencyGrp).at(i + 1).value(ctSells),
-                                                            (*currencyGrp).at(i + 1).value(ctStartingBalance), (*currencyGrp).at(i + 1).value(ctEndingBalance) + (*currencyGrp).at(i + 1).value(ctMarketValue),
+                            totalsRow[subtotal] = helperROI((*currencyGrp).at(i + 1).value(ctBuys) - (*currencyGrp).at(i + 1).value(ctReinvestIncome),
+                                                            (*currencyGrp).at(i + 1).value(ctSells),
+                                                            (*currencyGrp).at(i + 1).value(ctStartingMarketValue),
+                                                            (*currencyGrp).at(i + 1).value(ctEndingMarketValue),
                                                             (*currencyGrp).at(i + 1).value(ctCashIncome));
                         else if (subtotal == ctPercentageGain) {
                             const MyMoneyMoney denominator = (*currencyGrp).at(i + 1).value(ctBuys).abs();
-                            totalsRow[subtotal] = denominator.isZero() ? QString():
-                                                  (((*currencyGrp).at(i + 1).value(ctBuys) + (*currencyGrp).at(i + 1).value(ctMarketValue)) / denominator).toString();
+                            totalsRow[subtotal] = denominator.isZero()
+                                ? QString()
+                                : (((*currencyGrp).at(i + 1).value(ctBuys) + (*currencyGrp).at(i + 1).value(ctEndingMarketValue)) / denominator).toString();
                         } else if (subtotal == ctPrice)
                             totalsRow[subtotal] = MyMoneyMoney((*currencyGrp).at(i + 1).value(ctPrice) / (*currencyGrp).at(i + 1).value(ctRowsCount)).toString();
                     }
@@ -428,14 +427,16 @@ void QueryTable::constructTotalRows()
 
                 for (const auto& subtotal : qAsConst(subtotals)) {
                     if (subtotal == ctReturnInvestment) {
-                        totalsRow[subtotal] = helperROI((*currencyGrp).at(0).value(ctBuys) - (*currencyGrp).at(0).value(ctReinvestIncome), (*currencyGrp).at(0).value(ctSells),
-                                                        (*currencyGrp).at(0).value(ctStartingBalance), (*currencyGrp).at(0).value(ctEndingBalance) + (*currencyGrp).at(0).value(ctMarketValue),
+                        totalsRow[subtotal] = helperROI((*currencyGrp).at(0).value(ctBuys) - (*currencyGrp).at(0).value(ctReinvestIncome),
+                                                        (*currencyGrp).at(0).value(ctSells),
+                                                        (*currencyGrp).at(0).value(ctStartingMarketValue),
+                                                        (*currencyGrp).at(0).value(ctEndingMarketValue),
                                                         (*currencyGrp).at(0).value(ctCashIncome));
                     } else if (subtotal == ctPercentageGain) {
                         if (!(*currencyGrp).at(0).value(ctBuys).abs().isZero()) {
-                            totalsRow[subtotal] =
-                                (((*currencyGrp).at(0).value(ctBuys) + (*currencyGrp).at(0).value(ctMarketValue)) / (*currencyGrp).at(0).value(ctBuys).abs())
-                                    .toString();
+                            totalsRow[subtotal] = (((*currencyGrp).at(0).value(ctBuys) + (*currencyGrp).at(0).value(ctEndingMarketValue))
+                                                   / (*currencyGrp).at(0).value(ctBuys).abs())
+                                                      .toString();
                         }
                     } else if (subtotal == ctPrice) {
                         totalsRow[subtotal] = MyMoneyMoney((*currencyGrp).at(0).value(ctPrice) / (*currencyGrp).at(0).value(ctRowsCount)).toString();
@@ -1424,27 +1425,31 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
     MyMoneyFile* file = MyMoneyFile::instance();
     //get fraction depending on type of account
     int fraction = account.currency().smallestAccountFraction();
-    MyMoneyMoney price;
+    // calculate starting market value
+    MyMoneyMoney startingPrice;
     if (m_config.isConvertCurrency())
-        price = account.deepCurrencyPrice(startingDate) * account.baseCurrencyPrice(startingDate);
+        startingPrice = account.deepCurrencyPrice(startingDate) * account.baseCurrencyPrice(startingDate);
     else
-        price = account.deepCurrencyPrice(startingDate);
+        startingPrice = account.deepCurrencyPrice(startingDate);
 
-    MyMoneyMoney startingBal = file->balance(account.id(), startingDate) * price;
+    // file->balance is number of shares
+    MyMoneyMoney startingMarketValue = file->balance(account.id(), startingDate) * startingPrice;
 
     //convert to lowest fraction
-    startingBal = startingBal.convert(fraction);
+    startingMarketValue = startingMarketValue.convert(fraction);
 
-    //calculate ending balance
+    // calculate ending market value
+    MyMoneyMoney endingPrice;
     if (m_config.isConvertCurrency())
-        price = account.deepCurrencyPrice(endingDate) * account.baseCurrencyPrice(endingDate);
+        endingPrice = account.deepCurrencyPrice(endingDate) * account.baseCurrencyPrice(endingDate);
     else
-        price = account.deepCurrencyPrice(endingDate);
+        endingPrice = account.deepCurrencyPrice(endingDate);
 
-    MyMoneyMoney endingBal = file->balance((account).id(), endingDate) * price;
+    // file->balance is number of shares
+    MyMoneyMoney endingMarketValue = file->balance((account).id(), endingDate) * endingPrice;
 
     //convert to lowest fraction
-    endingBal = endingBal.convert(fraction);
+    endingMarketValue = endingMarketValue.convert(fraction);
 
     QList<CashFlowList> cfList;
     QList<MyMoneyMoney> shList;
@@ -1461,7 +1466,7 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
         sellsTotal = cfList.at(Sells).total();
         cashIncomeTotal = cfList.at(CashIncome).total();
         reinvestIncomeTotal = cfList.at(ReinvestIncome).total();
-        startingBal = MyMoneyMoney();
+        startingMarketValue = MyMoneyMoney();
         if (buysTotal.isZero() && sellsTotal.isZero() &&
                 cashIncomeTotal.isZero() && reinvestIncomeTotal.isZero())
             return;
@@ -1474,24 +1479,26 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
         result[ctSells] = sellsTotal.toString();
         result[ctCashIncome] = cashIncomeTotal.toString();
         result[ctReinvestIncome] = reinvestIncomeTotal.toString();
-        result[ctEndingBalance] = endingBal.toString();
+        result[ctEndingMarketValue] = endingMarketValue.toString();
         break;
     case eMyMoney::Report::InvestmentSum::Owned:
         buysTotal = cfList.at(BuysOfOwned).total();
-        startingBal = MyMoneyMoney();
-        if (buysTotal.isZero() && endingBal.isZero())
+        cashIncomeTotal = cfList.at(CashIncome).total();
+        startingMarketValue = MyMoneyMoney();
+        if (buysTotal.isZero() && sellsTotal.isZero() && cashIncomeTotal.isZero())
             return;
         all.append(cfList.at(BuysOfOwned));
-        all.append(CashFlowListItem(endingDate, endingBal));
+        all.append(CashFlowListItem(endingDate, endingMarketValue));
+        all.append(cfList.at(CashIncome));
 
         result[ctReinvestIncome] = reinvestIncomeTotal.toString();
-        result[ctMarketValue] = endingBal.toString();
+        result[ctEndingMarketValue] = endingMarketValue.toString();
         break;
     case eMyMoney::Report::InvestmentSum::Sold:
         buysTotal = cfList.at(BuysOfSells).total();
         sellsTotal = cfList.at(Sells).total();
         cashIncomeTotal = cfList.at(CashIncome).total();
-        startingBal = endingBal = MyMoneyMoney();
+        startingMarketValue = endingMarketValue = MyMoneyMoney();
         // check if there are any meaningful values before adding them to results
         if (buysTotal.isZero() && sellsTotal.isZero() && cashIncomeTotal.isZero())
             return;
@@ -1508,28 +1515,27 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
         sellsTotal = cfList.at(Sells).total();
         cashIncomeTotal = cfList.at(CashIncome).total();
         reinvestIncomeTotal = cfList.at(ReinvestIncome).total();
-        if (buysTotal.isZero() && sellsTotal.isZero() &&
-                cashIncomeTotal.isZero() && reinvestIncomeTotal.isZero() &&
-                startingBal.isZero() && endingBal.isZero())
+        if (buysTotal.isZero() && sellsTotal.isZero() && cashIncomeTotal.isZero() && reinvestIncomeTotal.isZero() && startingMarketValue.isZero()
+            && endingMarketValue.isZero())
             return;
 
         all.append(cfList.at(Buys));
         all.append(cfList.at(Sells));
         all.append(cfList.at(CashIncome));
-        all.append(CashFlowListItem(startingDate, -startingBal));
-        all.append(CashFlowListItem(endingDate, endingBal));
+        all.append(CashFlowListItem(startingDate, -startingMarketValue));
+        all.append(CashFlowListItem(endingDate, endingMarketValue));
 
         result[ctSells] = sellsTotal.toString();
         result[ctCashIncome] = cashIncomeTotal.toString();
         result[ctReinvestIncome] = reinvestIncomeTotal.toString();
-        result[ctStartingBalance] = startingBal.toString();
-        result[ctEndingBalance] = endingBal.toString();
+        result[ctStartingMarketValue] = startingMarketValue.toString();
+        result[ctEndingMarketValue] = endingMarketValue.toString();
         break;
     }
 
     result[ctBuys] = buysTotal.toString();
     result[ctExtendedInternalRateOfReturn] = helperXIRR(all);
-    result[ctReturnInvestment] = helperROI(buysTotal - reinvestIncomeTotal, sellsTotal, startingBal, endingBal, cashIncomeTotal);
+    result[ctReturnInvestment] = helperROI(buysTotal - reinvestIncomeTotal, sellsTotal, startingMarketValue, endingMarketValue, cashIncomeTotal);
     result[ctEquityType] = MyMoneySecurity::securityTypeToString(file->security(account.currencyId()).securityType());
 }
 
@@ -1558,18 +1564,18 @@ void QueryTable::constructCapitalGainRow(const ReportAccount& account, TableRow&
 
         //get fraction depending on type of account
         int fraction = account.currency().smallestAccountFraction();
-        MyMoneyMoney price;
+        MyMoneyMoney lastPrice;
 
-        //calculate ending balance
+        // calculate ending market value
         if (m_config.isConvertCurrency())
-            price = account.deepCurrencyPrice(endingDate) * account.baseCurrencyPrice(endingDate);
+            lastPrice = account.deepCurrencyPrice(endingDate) * account.baseCurrencyPrice(endingDate);
         else
-            price = account.deepCurrencyPrice(endingDate);
+            lastPrice = account.deepCurrencyPrice(endingDate);
 
-        MyMoneyMoney endingBal = shList.at(BuysOfOwned) * price;
+        MyMoneyMoney endingMarketValue = shList.at(BuysOfOwned) * lastPrice;
 
         //convert to lowest fraction
-        endingBal = endingBal.convert(fraction);
+        endingMarketValue = endingMarketValue.convert(fraction);
 
         buysTotal = cfList.at(BuysOfOwned).total() - cfList.at(ReinvestIncome).total();
 
@@ -1577,11 +1583,10 @@ void QueryTable::constructCapitalGainRow(const ReportAccount& account, TableRow&
         result[ctBuys] = buysTotal.toString();
         result[ctShares] = shList.at(BuysOfOwned).toString();
         result[ctBuyPrice] = (buysTotal.abs() / shList.at(BuysOfOwned)).convertPrecision(pricePrecision).toString();
-        result[ctLastPrice] = price.toString();
-        result[ctMarketValue] = endingBal.toString();
-        result[ctCapitalGain] = (buysTotal + endingBal).toString();
-        result[ctPercentageGain] = buysTotal.isZero() ? QString() :
-                                   ((buysTotal + endingBal)/buysTotal.abs()).toString();
+        result[ctLastPrice] = lastPrice.toString();
+        result[ctEndingMarketValue] = endingMarketValue.toString();
+        result[ctCapitalGain] = (buysTotal + endingMarketValue).toString();
+        result[ctPercentageGain] = buysTotal.isZero() ? QString() : ((buysTotal + endingMarketValue) / buysTotal.abs()).toString();
         break;
     }
     case eMyMoney::Report::InvestmentSum::Sold:

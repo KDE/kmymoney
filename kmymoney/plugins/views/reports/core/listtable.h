@@ -136,7 +136,9 @@ public:
         ctDescription,
         ctOccurrence,
         ctPaymentType,
-        ctValueSourceLine
+        ctValueSourceLine,
+        ctStartingMarketValue,
+        ctEndingMarketValue,
     };
     Q_ENUM(cellTypeE)
 

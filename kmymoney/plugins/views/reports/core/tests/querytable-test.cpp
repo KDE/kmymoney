@@ -659,15 +659,17 @@ void QueryTableTest::testInvestment()
 
         QVERIFY(MyMoneyMoney(rows[1][ListTable::ctExtendedInternalRateOfReturn]) == MyMoneyMoney("1349/10000"));
         QVERIFY(MyMoneyMoney(rows[1][ListTable::ctReturnInvestment]) == MyMoneyMoney("1/10"));
-        QVERIFY(MyMoneyMoney(rows[1][ListTable::ctStartingBalance]) == MyMoneyMoney(100000.00)); // this should stay non-zero to check if investment performance is calculated at non-zero starting balance
+        QVERIFY(MyMoneyMoney(rows[1][ListTable::ctStartingMarketValue])
+                == MyMoneyMoney(100000.00)); // this should stay non-zero to check if investment performance is calculated at non-zero starting market value
 
         QVERIFY(MyMoneyMoney(rows[2][ListTable::ctExtendedInternalRateOfReturn]) == MyMoneyMoney("2501/2500"));
         QVERIFY(MyMoneyMoney(rows[2][ListTable::ctReturnInvestment]) == MyMoneyMoney("323/1250"));
         QVERIFY(MyMoneyMoney(rows[2][ListTable::ctBuys]) == MyMoneyMoney(-95200.00));
         QVERIFY(MyMoneyMoney(rows[2][ListTable::ctSells]) == MyMoneyMoney(119800.00));
-        QVERIFY(MyMoneyMoney(rows[2][ListTable::ctEndingBalance]) == MyMoneyMoney(0.00)); // this should stay zero to check if investment performance is calculated at zero ending balance
+        QVERIFY(MyMoneyMoney(rows[2][ListTable::ctEndingMarketValue])
+                == MyMoneyMoney(0.00)); // this should stay zero to check if investment performance is calculated at zero ending market value
 
-        QVERIFY(MyMoneyMoney(rows[4][ListTable::ctEndingBalance]) == MyMoneyMoney(280000.00));
+        QVERIFY(MyMoneyMoney(rows[4][ListTable::ctEndingMarketValue]) == MyMoneyMoney(280000.00));
 
 #if 0
         // Dump file & reports
