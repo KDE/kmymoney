@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-23 01:52+0000\n"
+"POT-Creation-Date: 2024-12-27 01:57+0000\n"
 "PO-Revision-Date: 2024-05-09 17:33+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -19287,12 +19287,33 @@ msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "%1 的複本"
 
-#: kmymoney/views/journaldelegate.cpp:336
+#: kmymoney/views/journaldelegate.cpp:343
+#, kde-format
+msgctxt "@info %2 contains list of account names separated by <br>"
+msgid "<qt>Closed account:<br><br>%2</qt>"
+msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
+msgstr[0] ""
+
+#: kmymoney/views/journaldelegate.cpp:348
+#, fuzzy, kde-format
+#| msgid "Cannot create transactions in a closed account."
+msgctxt "@info Unable to edit "
+msgid ""
+"KMyMoney does not support to edit transaction that reference closed accounts."
+msgstr "無法在關閉的帳戶中建立交易。"
+
+#: kmymoney/views/journaldelegate.cpp:350
+#, fuzzy, kde-format
+#| msgid "Storing transactions"
+msgctxt "@title:window"
+msgid "Prevent editing transactions"
+msgstr "儲存交易中"
+
+#: kmymoney/views/journaldelegate.cpp:364
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
-"The current implementation cannot modify multiple transactions in different "
-"accounts."
+"The current implementation cannot modify multiple transactions in this view."
 msgstr ""
 
 #: kmymoney/views/kaccountsview.cpp:170
@@ -26365,9 +26386,6 @@ msgstr ""
 #~ msgid "Duplicate number"
 #~ msgstr "編號重複"
 
-#~ msgid "Storing transactions"
-#~ msgstr "儲存交易中"
-
 #~ msgid "&Enter"
 #~ msgstr "輸入(&E)"
 
@@ -26484,9 +26502,6 @@ msgstr ""
 
 #~ msgid "Cannot create transactions in the context of a category."
 #~ msgstr "無法在類別的內文中建立交易。"
-
-#~ msgid "Cannot create transactions in a closed account."
-#~ msgstr "無法在關閉的帳戶中建立交易。"
 
 #~ msgid "Cannot edit transactions with frozen splits."
 #~ msgstr "無法用凍結的分割編輯交易。"

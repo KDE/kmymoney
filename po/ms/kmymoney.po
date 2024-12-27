@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-23 01:52+0000\n"
+"POT-Creation-Date: 2024-12-27 01:57+0000\n"
 "PO-Revision-Date: 2009-09-18 17:20+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <kedidiemas@yahoogroups.com>\n"
@@ -18329,12 +18329,32 @@ msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Salin"
 
-#: kmymoney/views/journaldelegate.cpp:336
+#: kmymoney/views/journaldelegate.cpp:343
+#, kde-format
+msgctxt "@info %2 contains list of account names separated by <br>"
+msgid "<qt>Closed account:<br><br>%2</qt>"
+msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: kmymoney/views/journaldelegate.cpp:348
+#, kde-format
+msgctxt "@info Unable to edit "
+msgid ""
+"KMyMoney does not support to edit transaction that reference closed accounts."
+msgstr ""
+
+#: kmymoney/views/journaldelegate.cpp:350
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Prevent editing transactions"
+msgstr "Pilih tahun"
+
+#: kmymoney/views/journaldelegate.cpp:364
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
-"The current implementation cannot modify multiple transactions in different "
-"accounts."
+"The current implementation cannot modify multiple transactions in this view."
 msgstr ""
 
 #: kmymoney/views/kaccountsview.cpp:170

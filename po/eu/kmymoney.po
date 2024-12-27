@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-23 01:52+0000\n"
+"POT-Creation-Date: 2024-12-27 01:57+0000\n"
 "PO-Revision-Date: 2024-11-01 09:01+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -19173,12 +19173,43 @@ msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Ohar-eremua hutsik"
 
-#: kmymoney/views/journaldelegate.cpp:336
+#: kmymoney/views/journaldelegate.cpp:343
 #, kde-format
+msgctxt "@info %2 contains list of account names separated by <br>"
+msgid "<qt>Closed account:<br><br>%2</qt>"
+msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: kmymoney/views/journaldelegate.cpp:348
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip Protected"
+#| msgid ""
+#| "This widget is currently protected because the transaction references a "
+#| "closed account."
+msgctxt "@info Unable to edit "
+msgid ""
+"KMyMoney does not support to edit transaction that reference closed accounts."
+msgstr ""
+"Trepeta hau une honetan babestuta dago, transakzioak itxitako kontu batu "
+"erreferentzia egiten diolako."
+
+#: kmymoney/views/journaldelegate.cpp:350
+#, fuzzy, kde-format
+#| msgid "Deleting transactions"
+msgctxt "@title:window"
+msgid "Prevent editing transactions"
+msgstr "Transakzioak ezabatzen"
+
+#: kmymoney/views/journaldelegate.cpp:364
+#, fuzzy, kde-format
+#| msgctxt "@info Editing multiple transactions"
+#| msgid ""
+#| "The current implementation cannot modify multiple transactions in "
+#| "different accounts."
 msgctxt "@info Editing multiple transactions"
 msgid ""
-"The current implementation cannot modify multiple transactions in different "
-"accounts."
+"The current implementation cannot modify multiple transactions in this view."
 msgstr ""
 "Uneko inplementazioak ezin ditu hainbat transakzio aldatu kontu ezberdinetan."
 
@@ -27718,9 +27749,6 @@ msgstr "'%1' txostena '%2'(e)an gordetzea"
 
 #~ msgid "Unable to setup online parameters for account '%1'"
 #~ msgstr "Ezin zaio lerroko parametrorik ezarri '%1' kontuari"
-
-#~ msgid "Deleting transactions"
-#~ msgstr "Transakzioak ezabatzen"
 
 #~ msgid "Duplicating transactions"
 #~ msgstr "Transakzioak bikoizten"

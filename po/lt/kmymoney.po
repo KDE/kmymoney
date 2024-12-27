@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-23 01:52+0000\n"
+"POT-Creation-Date: 2024-12-27 01:57+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -19044,12 +19044,34 @@ msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "%1 kopija"
 
-#: kmymoney/views/journaldelegate.cpp:336
+#: kmymoney/views/journaldelegate.cpp:343
+#, kde-format
+msgctxt "@info %2 contains list of account names separated by <br>"
+msgid "<qt>Closed account:<br><br>%2</qt>"
+msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: kmymoney/views/journaldelegate.cpp:348
+#, fuzzy, kde-format
+msgctxt "@info Unable to edit "
+msgid ""
+"KMyMoney does not support to edit transaction that reference closed accounts."
+msgstr "Išrinkti operacijas be korespondento"
+
+#: kmymoney/views/journaldelegate.cpp:350
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Prevent editing transactions"
+msgstr "Trinti operaciją"
+
+#: kmymoney/views/journaldelegate.cpp:364
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
-"The current implementation cannot modify multiple transactions in different "
-"accounts."
+"The current implementation cannot modify multiple transactions in this view."
 msgstr ""
 
 #: kmymoney/views/kaccountsview.cpp:170
@@ -26512,10 +26534,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Unable to setup online parameters for account '%1'"
 #~ msgstr "Nepavyksta pridėti operacijos: "
-
-#, fuzzy
-#~ msgid "Deleting transactions"
-#~ msgstr "Trinti operaciją"
 
 #, fuzzy
 #~ msgid "Duplicating transactions"

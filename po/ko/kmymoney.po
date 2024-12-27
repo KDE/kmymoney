@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-23 01:52+0000\n"
+"POT-Creation-Date: 2024-12-27 01:57+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -18962,12 +18962,33 @@ msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "빈 메모"
 
-#: kmymoney/views/journaldelegate.cpp:336
+#: kmymoney/views/journaldelegate.cpp:343
+#, kde-format
+msgctxt "@info %2 contains list of account names separated by <br>"
+msgid "<qt>Closed account:<br><br>%2</qt>"
+msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
+msgstr[0] ""
+
+#: kmymoney/views/journaldelegate.cpp:348
+#, fuzzy, kde-format
+#| msgid "Cannot create transactions in a closed account."
+msgctxt "@info Unable to edit "
+msgid ""
+"KMyMoney does not support to edit transaction that reference closed accounts."
+msgstr "해지한 계좌에서 거래를 생성할 수 없습니다."
+
+#: kmymoney/views/journaldelegate.cpp:350
+#, fuzzy, kde-format
+#| msgid "Storing transactions"
+msgctxt "@title:window"
+msgid "Prevent editing transactions"
+msgstr "거래 저장"
+
+#: kmymoney/views/journaldelegate.cpp:364
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
-"The current implementation cannot modify multiple transactions in different "
-"accounts."
+"The current implementation cannot modify multiple transactions in this view."
 msgstr ""
 
 #: kmymoney/views/kaccountsview.cpp:170
@@ -26136,9 +26157,6 @@ msgstr ""
 #~ msgid "Duplicate number"
 #~ msgstr "중복 번호"
 
-#~ msgid "Storing transactions"
-#~ msgstr "거래 저장"
-
 #~ msgid "&Enter"
 #~ msgstr "입력(&E)"
 
@@ -26257,9 +26275,6 @@ msgstr ""
 
 #~ msgid "Cannot create transactions in the context of a category."
 #~ msgstr "분류 콘텍스트에서 거래를 작성할 수 없습니다."
-
-#~ msgid "Cannot create transactions in a closed account."
-#~ msgstr "해지한 계좌에서 거래를 생성할 수 없습니다."
 
 #~ msgid "Cannot edit transactions with frozen splits."
 #~ msgstr "동결된 분할이 포함된 거래를 편집할 수 없습니다."

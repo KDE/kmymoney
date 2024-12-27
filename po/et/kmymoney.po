@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-23 01:52+0000\n"
+"POT-Creation-Date: 2024-12-27 01:57+0000\n"
 "PO-Revision-Date: 2020-05-02 10:27+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -19466,12 +19466,34 @@ msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Memo kopeerimine"
 
-#: kmymoney/views/journaldelegate.cpp:336
+#: kmymoney/views/journaldelegate.cpp:343
+#, kde-format
+msgctxt "@info %2 contains list of account names separated by <br>"
+msgid "<qt>Closed account:<br><br>%2</qt>"
+msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: kmymoney/views/journaldelegate.cpp:348
+#, fuzzy, kde-format
+#| msgid "Cannot remove transaction that references a closed account."
+msgctxt "@info Unable to edit "
+msgid ""
+"KMyMoney does not support to edit transaction that reference closed accounts."
+msgstr "Suletud kontole viitavat tehingut ei saa eemaldada."
+
+#: kmymoney/views/journaldelegate.cpp:350
+#, fuzzy, kde-format
+#| msgid "Deleting transactions"
+msgctxt "@title:window"
+msgid "Prevent editing transactions"
+msgstr "Tehingute kustutamine"
+
+#: kmymoney/views/journaldelegate.cpp:364
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
-"The current implementation cannot modify multiple transactions in different "
-"accounts."
+"The current implementation cannot modify multiple transactions in this view."
 msgstr ""
 
 #: kmymoney/views/kaccountsview.cpp:170
@@ -28012,9 +28034,6 @@ msgstr ""
 
 #~ msgid "Unable to setup online parameters for account '%1'"
 #~ msgstr "Konto \"%1\" võrguparameetrite häälestamine nurjus"
-
-#~ msgid "Deleting transactions"
-#~ msgstr "Tehingute kustutamine"
 
 #~ msgid "Duplicating transactions"
 #~ msgstr "Tehingute kloonimine"

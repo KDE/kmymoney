@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-23 01:52+0000\n"
+"POT-Creation-Date: 2024-12-27 01:57+0000\n"
 "PO-Revision-Date: 2024-12-12 08:57+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -19407,14 +19407,45 @@ msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "La note est vide"
 
+#: kmymoney/views/journaldelegate.cpp:343
+#, kde-format
+msgctxt "@info %2 contains list of account names separated by <br>"
+msgid "<qt>Closed account:<br><br>%2</qt>"
+msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: kmymoney/views/journaldelegate.cpp:348
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip Protected"
+#| msgid ""
+#| "This widget is currently protected because the transaction references a "
+#| "closed account."
+msgctxt "@info Unable to edit "
+msgid ""
+"KMyMoney does not support to edit transaction that reference closed accounts."
+msgstr ""
+"Ce composant graphique est actuellement protégé car la transaction fait "
+"référence à un compte clos."
+
+#: kmymoney/views/journaldelegate.cpp:350
+#, fuzzy, kde-format
+#| msgid "Deleting transactions"
+msgctxt "@title:window"
+msgid "Prevent editing transactions"
+msgstr "Supprimer les opérations"
+
 # Je ne suis pas certain du sens du terme implémentation ici, j'espère l'avoir
 # interprété correctement
-#: kmymoney/views/journaldelegate.cpp:336
-#, kde-format
+#: kmymoney/views/journaldelegate.cpp:364
+#, fuzzy, kde-format
+#| msgctxt "@info Editing multiple transactions"
+#| msgid ""
+#| "The current implementation cannot modify multiple transactions in "
+#| "different accounts."
 msgctxt "@info Editing multiple transactions"
 msgid ""
-"The current implementation cannot modify multiple transactions in different "
-"accounts."
+"The current implementation cannot modify multiple transactions in this view."
 msgstr ""
 "L'état actuel du logiciel ne permet pas de modifier simultanément plusieurs "
 "opérations comptabilisées dans des comptes différents."
@@ -28114,9 +28145,6 @@ msgstr "enregistrement du rapport « %1 » dans « %2 »"
 #~ msgid "Unable to setup online parameters for account '%1'"
 #~ msgstr ""
 #~ "Impossible d'initialiser les paramètres en ligne pour le compte « %1 »"
-
-#~ msgid "Deleting transactions"
-#~ msgstr "Supprimer les opérations"
 
 #~ msgid "Duplicating transactions"
 #~ msgstr "Dupliquer les opérations"

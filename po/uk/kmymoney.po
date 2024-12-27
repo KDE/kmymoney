@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-23 01:52+0000\n"
+"POT-Creation-Date: 2024-12-27 01:57+0000\n"
 "PO-Revision-Date: 2024-12-11 09:29+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -19348,12 +19348,45 @@ msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Порожня нотатка"
 
-#: kmymoney/views/journaldelegate.cpp:336
+#: kmymoney/views/journaldelegate.cpp:343
 #, kde-format
+msgctxt "@info %2 contains list of account names separated by <br>"
+msgid "<qt>Closed account:<br><br>%2</qt>"
+msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: kmymoney/views/journaldelegate.cpp:348
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip Protected"
+#| msgid ""
+#| "This widget is currently protected because the transaction references a "
+#| "closed account."
+msgctxt "@info Unable to edit "
+msgid ""
+"KMyMoney does not support to edit transaction that reference closed accounts."
+msgstr ""
+"Зараз цей віджет заблоковано, оскільки операція посилається на закритий "
+"рахунок."
+
+#: kmymoney/views/journaldelegate.cpp:350
+#, fuzzy, kde-format
+#| msgid "Storing transactions"
+msgctxt "@title:window"
+msgid "Prevent editing transactions"
+msgstr "Збереження операцій"
+
+#: kmymoney/views/journaldelegate.cpp:364
+#, fuzzy, kde-format
+#| msgctxt "@info Editing multiple transactions"
+#| msgid ""
+#| "The current implementation cannot modify multiple transactions in "
+#| "different accounts."
 msgctxt "@info Editing multiple transactions"
 msgid ""
-"The current implementation cannot modify multiple transactions in different "
-"accounts."
+"The current implementation cannot modify multiple transactions in this view."
 msgstr ""
 "У поточній реалізації програми не можна одночасно вносити зміни до декількох "
 "операцій на різних рахунках."
@@ -26714,9 +26747,6 @@ msgstr "зберігаємо звіт «%1» до «%2»"
 #~ msgstr ""
 #~ "Номер <b>%1</b> вже було використано для рахунку <b>%2</b>."
 #~ "<center>Бажаєте замінити його на наступний незайнятий номер?</center>"
-
-#~ msgid "Storing transactions"
-#~ msgstr "Збереження операцій"
 
 #~ msgid "&Enter"
 #~ msgstr "&Ввести"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-23 01:52+0000\n"
+"POT-Creation-Date: 2024-12-27 01:57+0000\n"
 "PO-Revision-Date: 2024-11-23 12:50+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -19099,12 +19099,43 @@ msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Empty memo"
 
-#: kmymoney/views/journaldelegate.cpp:336
+#: kmymoney/views/journaldelegate.cpp:343
 #, kde-format
+msgctxt "@info %2 contains list of account names separated by <br>"
+msgid "<qt>Closed account:<br><br>%2</qt>"
+msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: kmymoney/views/journaldelegate.cpp:348
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip Protected"
+#| msgid ""
+#| "This widget is currently protected because the transaction references a "
+#| "closed account."
+msgctxt "@info Unable to edit "
+msgid ""
+"KMyMoney does not support to edit transaction that reference closed accounts."
+msgstr ""
+"This widget is currently protected because the transaction references a "
+"closed account."
+
+#: kmymoney/views/journaldelegate.cpp:350
+#, fuzzy, kde-format
+#| msgid "Deleting transactions"
+msgctxt "@title:window"
+msgid "Prevent editing transactions"
+msgstr "Deleting transactions"
+
+#: kmymoney/views/journaldelegate.cpp:364
+#, fuzzy, kde-format
+#| msgctxt "@info Editing multiple transactions"
+#| msgid ""
+#| "The current implementation cannot modify multiple transactions in "
+#| "different accounts."
 msgctxt "@info Editing multiple transactions"
 msgid ""
-"The current implementation cannot modify multiple transactions in different "
-"accounts."
+"The current implementation cannot modify multiple transactions in this view."
 msgstr ""
 "The current implementation cannot modify multiple transactions in different "
 "accounts."
@@ -27621,9 +27652,6 @@ msgstr "saving report '%1' into '%2'"
 
 #~ msgid "Unable to setup online parameters for account '%1'"
 #~ msgstr "Unable to setup online parameters for account '%1'"
-
-#~ msgid "Deleting transactions"
-#~ msgstr "Deleting transactions"
 
 #~ msgid "Duplicating transactions"
 #~ msgstr "Duplicating transactions"

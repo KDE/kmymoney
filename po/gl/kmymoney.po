@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-23 01:52+0000\n"
+"POT-Creation-Date: 2024-12-27 01:57+0000\n"
 "PO-Revision-Date: 2024-12-19 23:12+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -19204,12 +19204,43 @@ msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Concepto baleiro"
 
-#: kmymoney/views/journaldelegate.cpp:336
+#: kmymoney/views/journaldelegate.cpp:343
 #, kde-format
+msgctxt "@info %2 contains list of account names separated by <br>"
+msgid "<qt>Closed account:<br><br>%2</qt>"
+msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: kmymoney/views/journaldelegate.cpp:348
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip Protected"
+#| msgid ""
+#| "This widget is currently protected because the transaction references a "
+#| "closed account."
+msgctxt "@info Unable to edit "
+msgid ""
+"KMyMoney does not support to edit transaction that reference closed accounts."
+msgstr ""
+"Este trebello está actualmente protexido porque o asento fai referencia a "
+"unha conta pechada."
+
+#: kmymoney/views/journaldelegate.cpp:350
+#, fuzzy, kde-format
+#| msgid "Deleting transactions"
+msgctxt "@title:window"
+msgid "Prevent editing transactions"
+msgstr "Estanse a eliminar os asentos"
+
+#: kmymoney/views/journaldelegate.cpp:364
+#, fuzzy, kde-format
+#| msgctxt "@info Editing multiple transactions"
+#| msgid ""
+#| "The current implementation cannot modify multiple transactions in "
+#| "different accounts."
 msgctxt "@info Editing multiple transactions"
 msgid ""
-"The current implementation cannot modify multiple transactions in different "
-"accounts."
+"The current implementation cannot modify multiple transactions in this view."
 msgstr ""
 "A implementación actual non pode modificar varios asentos en contas "
 "distintas."
@@ -27752,9 +27783,6 @@ msgstr "gardando o informe «%1» en «%2»"
 
 #~ msgid "Unable to setup online parameters for account '%1'"
 #~ msgstr "Non foi posíbel configurar os parámetros en internet da conta «%1»"
-
-#~ msgid "Deleting transactions"
-#~ msgstr "Estanse a eliminar os asentos"
 
 #~ msgid "Duplicating transactions"
 #~ msgstr "Estanse a duplicar os asentos"

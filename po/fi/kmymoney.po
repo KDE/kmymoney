@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-23 01:52+0000\n"
+"POT-Creation-Date: 2024-12-27 01:57+0000\n"
 "PO-Revision-Date: 2024-10-29 13:59+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -19141,12 +19141,38 @@ msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Tyhjä muistio"
 
-#: kmymoney/views/journaldelegate.cpp:336
+#: kmymoney/views/journaldelegate.cpp:343
 #, kde-format
+msgctxt "@info %2 contains list of account names separated by <br>"
+msgid "<qt>Closed account:<br><br>%2</qt>"
+msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: kmymoney/views/journaldelegate.cpp:348
+#, fuzzy, kde-format
+#| msgid "Cannot remove transaction that references a closed account."
+msgctxt "@info Unable to edit "
+msgid ""
+"KMyMoney does not support to edit transaction that reference closed accounts."
+msgstr "Suljettuun tiliin viittaavaa tapahtumaa ei voida poistaa."
+
+#: kmymoney/views/journaldelegate.cpp:350
+#, fuzzy, kde-format
+#| msgid "Deleting transactions"
+msgctxt "@title:window"
+msgid "Prevent editing transactions"
+msgstr "Poistaa tapahtumia"
+
+#: kmymoney/views/journaldelegate.cpp:364
+#, fuzzy, kde-format
+#| msgctxt "@info Editing multiple transactions"
+#| msgid ""
+#| "The current implementation cannot modify multiple transactions in "
+#| "different accounts."
 msgctxt "@info Editing multiple transactions"
 msgid ""
-"The current implementation cannot modify multiple transactions in different "
-"accounts."
+"The current implementation cannot modify multiple transactions in this view."
 msgstr "Nykyinen toteutus ei voi muokata useaa tapahtumaa eri tileiltä."
 
 #: kmymoney/views/kaccountsview.cpp:170
@@ -27661,9 +27687,6 @@ msgstr "tallennetaan raporttia ”%1” tiedostoon ”%2”"
 
 #~ msgid "Unable to setup online parameters for account '%1'"
 #~ msgstr "Ei voitu asettaa online-parametreja tilille ”%1”"
-
-#~ msgid "Deleting transactions"
-#~ msgstr "Poistaa tapahtumia"
 
 #~ msgid "Duplicating transactions"
 #~ msgstr "Monistaa tapahtumia"

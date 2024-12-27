@@ -4,121 +4,155 @@
   <authorgroup>
     <author
 >&Tony.Bloomfield; &Tony.Bloomfield.mail;</author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->21/07/2011</date>
+>1/12/2024</date>
   <releaseinfo
->4.6</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Database</title>
 
-<sect1 id="details.database.usage">
-<title
+<sect1 id="details.database.usage"
+><title
 >Uso di database relazionali</title>
 
-<sect2>
-<title
+<sect2
+><title
 >Introduzione</title>
 <para
 >Fin dalla versione 1.0, &kmymoney; permette di conservare i propri dati in un database relazionale. Uno dei vantaggi dell'uso di questo formato comune è che ti consente di visualizzare i dati usando l'interfaccia grafica di programmi come <trademark
 >OpenOffice.org</trademark
 > o <trademark
 >LibreOffice</trademark
->, magari in formati che &kmymoney; ancora non fornisce. Inoltre, una conoscenza di base di SQL (Structured Query Language, il linguaggio usato comunemente per accedere ai database relazionali) dovrebbe consentirti di esportare più facilmente i dati verso programmi esterni come, ad esempio, applicazioni per la redazione di budget. </para>
-<para/>
+>, magari in formati che &kmymoney; ancora non fornisce. Inoltre, una conoscenza di base di <acronym
+><ulink url="https://en.wikipedia.org/wiki/SQL"
+>SQL</ulink
+> </acronym
+> (<quote
+>Structured Query Language</quote
+>, il linguaggio usato comunemente per accedere ai database relazionali) dovrebbe consentirti di esportare più facilmente i dati verso programmi esterni come, ad esempio, applicazioni per la redazione di budget. </para>
+
+<note>
+  <para
+>Sebbene la maggior parte dei sistemi di database relazionali consenta l'accesso simultaneo a un database da parte di più di un utente, questo non è possibile con &kmymoney;. Anche se &kmymoney; può memorizzare i suoi dati in un database relazionale, in realtà usa il database semplicemente come un diverso tipo di archiviazione di file. Quando apri il tuo file, il programma legge tutti i dati dal database. Mentre lavori con i tuoi dati, le modifiche vengono apportate solo all'archiviazione interna; non vengono immediatamente riscritte nel database. Solo quando salvi i tuoi dati &kmymoney; riscrive l'intero file nel database. </para>
+
+  <para
+>Abbiamo ricevuto richieste affinché &kmymoney; aggiorni la banca dati per ogni modifica dei dati, ma ciò richiederebbe una modifica significativa all'intero modo in cui il programma gestisce le sue strutture dati interne, quindi è estremamente improbabile che ciò accada nel prossimo futuro. </para>
+</note>
 </sect2>
 
 <sect2
 ><title
 >Preparazione</title>
-
 <para
->Per accedere al database, &kmymoney; usa il modulo SQL fornito da &Qt; Software come parte del loro sistema di programmazione &Qt;. Questo modulo supporta diversi sistemi di database, attraverso una serie di driver. I più famosi tra i sistemi open-source supportati sono <trademark
+>Per accedere al database, &kmymoney; usa il modulo SQL fornito da &Qt; Software come parte del loro sistema di programmazione &Qt;. Questo modulo supporta diversi sistemi di database, attraverso una serie di driver. &Qt; ha driver per un gran numero di sistemi di database relazionali open source e proprietari, tra cui <trademark
 >MySQL</trademark
->, SQLite (solo versione 3 e successive), e PostgreSQL. Questo modulo supporta anche i sistemi «più pesanti», industriali, come <trademark class="registered"
+>, PostgreSQL e SQLCipher. Il modulo supporta anche alcuni sistemi 'più pesanti' e industriali, come <trademark class="registered"
 >Oracle</trademark
-> e <trademark class="registered"
+> e IBM <trademark class="registered"
 >DB2</trademark
-> di IBM. </para>
+>. </para>
 
 <para
->Con l'eccezione di SQLite, questi sistemi usano un modello client/server, in cui il programma «client» viene eseguito sul proprio computer e il «server» viene eseguito nel computer che contiene il database stesso, che potrebbe essere un altro computer connesso in rete. Ovviamente, nell'uso normale di questa funzione in &kmymoney;, il computer in uso agisce sia da client sia da server. Il primo passo quindi, dopo aver deciso il sistema da usare, consiste nell'installazione del programma client e, probabilmente, anche di quello server. </para>
+>Le versioni precedenti di &kmymoney; supportavano <ulink url="https://www.sqlite.org"
+>SQLite</ulink
+>. Questo è stato sostituito con il supporto per <ulink url="https://www.zetetic.net/sqlcipher"
+>SQLCipher</ulink
+>, che è un fork autonomo della libreria di database SQLite che aggiunge la cifratura AES a 256 bit e altre funzionalità di sicurezza. Il driver SQLCipher leggerà i file SQLite esistenti. Consulta la sezione sottostante su <link linkend="details.database.sqlcipher"
+>SQLCipher</link
+> per maggiori dettagli. </para>
 
 <para
->Oltre al programma stesso di gestione della base dati, è necessario installare anche il modulo di &Qt; con il driver corrispondente. La maggior parte delle distribuzioni include i moduli dei driver per le basi dati più comuni. Altrimenti, cercare «SQL drivers» nel <ulink url="https://www.qt.io/"
+>Ad eccezione di SQLCipher, questi sistemi utilizzano un modello client/server, in cui il software «client» risiede sulla «tua» macchina, mentre il server risiede sulla stessa macchina del database stesso, che potrebbe trovarsi altrove in una rete. Naturalmente, nello scenario normale per un'applicazione di finanza personale come &kmymoney;, la «tua» macchina può fungere sia da client che da server. Il tuo primo compito, quindi, una volta deciso quale sistema di database desideri utilizzare, è installare il software client e, molto probabilmente, server. </para>
+
+<para
+>Oltre al programma stesso di gestione del database, è necessario installare anche il modulo di &Qt; con il driver corrispondente. La maggior parte delle distribuzioni &Linux; include i moduli dei driver per i database più conosciuti. Altrimenti, cercare <quote
+>SQL drivers</quote
+>. nel <ulink url="https://www.qt.io/"
 >sito web di &Qt;</ulink
 >. </para>
 
 <note>
   <para
->SQLite non usa un modello client/server; ogni database è memorizzato in un file, locale o remoto, a cui accede attraverso i metodi comuni forniti dal sistema operativo. In questo caso, quindi, c'è da installare un solo programma oltre al driver. Alcune delle informazioni seguenti, in particolare quelle relative all'amministrazione, potrebbero non essere applicabili a SQLite. </para>
+>SQLCipher e SQLite non usano un modello client/server; ogni database è memorizzato in un file, locale o remoto, a cui accedono attraverso i metodi comuni forniti dal sistema operativo. In questo caso, quindi, c'è da installare un solo pacchetto e il driver. Alcune delle informazioni seguenti, in particolare quelle relative all'amministrazione, potrebbero non essere applicabili. </para>
 </note>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Amministrazione</title>
-
 <para
->L'amministrazione dei database è più complessa di quella dei file normali. Ogni sistema ha un modo diverso di eseguire le operazioni di amministrazione, come la creazione di database, l'assegnazione di permessi agli utenti, la creazione di copie di sicurezza, &etc;. Questo documento non ha come obiettivo la descrizione di queste operazioni, ma ognuno dei sistemi supportati fornisce una documentazione completa, e basterà una breve ricerca su Internet per trovare queste informazioni. </para>
+>Gestire i database è più complesso che gestire file normali. Ogni sistema ha un modo diverso di eseguire le operazioni di amministrazione, come la creazione di database, l'assegnazione di permessi agli utenti, la creazione di copie di sicurezza, &etc;. Questo documento non ha come obiettivo la descrizione di queste operazioni, ma ognuno dei sistemi supportati fornisce una documentazione completa, e basterà una breve ricerca su Internet per trovare queste informazioni. </para>
 
-<sect3>
-<title
+<sect3
+><title
 >Creazione del database</title>
-
 <para
->È stato aggiunto del codice per creare un database iniziale per memorizzare i dati, se non ne esiste già uno. Comunque, si raccomanda vivamente di creare manualmente un database, perché molti di questi sistemi permettono di fornire delle opzioni importanti. Una che potrebbe essere particolarmente importante è l'impostazione della codifica (ad esempio UTF-8) usata per i campi di testo. </para>
+>&kmymoney; include codice SQL per creare un database iniziale per contenere i tuoi dati se non ne esiste uno. Tuttavia, è fortemente consigliato di pre-creare un database, perché la maggior parte dei prodotti fornisce una serie di opzioni che potrebbero essere rilevanti. Una che potrebbe essere di particolare importanza per alcuni sarebbe la designazione del set di caratteri (&eg;, UTF-8) da utilizzare per i campi di testo. </para>
 
 <para
 >Attualmente, è anche necessario specificare i permessi per i vari utenti relativi alle operazioni consentite sul database. Nella maggior parte dei sistemi vengono assegnati tutti i privilegi all'utente che crea il database, ma è meglio controllare nella documentazione. </para>
 
 <para
->Per usare per la prima volta il database, e in altri casi in cui cambia l'organizzazione del database, sono necessari i permessi (chiamati anche privilegi) di creazione e modifica di tabelle e visualizzazioni (vedere il paragrafo successivo). I vari sistemi possono chiamare i privilegi in modi diversi, ma <literal
+>Per il primo utilizzo del database e occasionalmente in altri momenti in cui cambia la struttura del database, avrai bisogno dei permessi (chiamati anche privilegi) per creare e modificare tabelle e viste (vedi paragrafo successivo). Potrebbero esserci nomi diversi per il permesso/privilegio in sistemi diversi, ma qualcosa come <literal
 >CREATE</literal
 > e <literal
 >ALTER</literal
-> dovrebbero essere comuni a tutti. Per l'utilizzo normale, è necessario essere in grado di leggere e scrivere record; questi permessi sono normalmente chiamati <literal
+> dovrebbe essere comuni. Per l'esecuzione normale, dovrai essere in grado di leggere e scrivere record; questi sono normalmente definiti in SQL come permessi <literal
 >SELECT</literal
 >, <literal
 >INSERT</literal
 >, <literal
 >UPDATE</literal
->, e <literal
+> e <literal
 >DELETE</literal
-> in SQL. </para>
+>. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Creazione di tabelle</title>
-
 <para
->Al primo utilizzo, &kmymoney; proverà a creare la struttura di tabelle necessaria. Per poter ottenere la massima compatibilità con i vari sistemi di database, vengono usati solo alcuni dei tipi di dato comuni. Comunque, ci potrebbero essere situazioni in cui un certo tipo non è supportato e, in questo caso, viene fornito il codice SQL necessario alla creazione di tabelle. Questo codice può essere modificato come richiesto e usato per la creazione delle tabelle al di fuori di &kmymoney;. Se ci si trova in questa situazione, è possibile ottenere aiuto dalla lista di distribuzione &devlist;. Vedere <link linkend="details.database.generatesql"
->Creazione manuale del database</link
+>Al primo utilizzo, &kmymoney; proverà a creare le strutture delle tabelle necessarie. Per ottenere la massima compatibilità tra vari tipi di database, viene utilizzato solo un sottoinsieme di tipi di dati comuni. Tuttavia, potrebbero esserci situazioni in cui un tipo particolare non è supportato e, in questo caso, è stato previsto di generare il codice SQL necessario per creare le tabelle. Questo codice può quindi essere modificato come richiesto e utilizzato per creare le tabelle al di fuori di &kmymoney;. Se ti trovi in ​​questa situazione, di solito puoi ottenere assistenza da uno dei canali elencati nella sezione su <link linkend="firsttime.contact"
+>Come ottenere aiuto</link
+>. Consulta <link linkend="details.database.generatesql"
+>Creazione manuale di database</link
 > per maggiori informazioni. </para>
 </sect3>
 </sect2>
 
-<sect2 id="details.database.selectdatabase">
-<title
+<sect2 id="details.database.selectdatabase"
+><title
 >Creazione di un database</title>
-
 <para
->Usando &kmymoney;, aprire o importare un file di dati esistente, o crearne uno nuovo. Poi selezionare la voce di menu <menuchoice
+>Usando &kmymoney;, aprire o importare un file di dati esistente, o crearne uno nuovo. Selezionare poi la voce di menu <menuchoice
 ><guimenu
 >File</guimenu
 ><guimenuitem
 >Salva come database</guimenuitem
 ></menuchoice
->. Si aprirà la finestra seguente: </para>
+>. Selezionare <guilabel
+>SQL</guilabel
+> dal menu a tendina <guilabel
+>Tipo di archiviazione da utilizzare per i tuoi dati</guilabel
+> e fare clic su <guibutton
+>OK</guibutton
+>. Sarà visualizzerai quindi la seguente finestra: </para>
 
 <screenshot>
+  <screeninfo
+>creare un database</screeninfo>
   <mediaobject>
-  <imageobject>
-  <imagedata fileref="select_database.png" format="PNG"/>
-  </imageobject>
+    <imageobject>
+      <imagedata fileref="select_database.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>creare un database</phrase>
+    </textobject>
   </mediaobject>
 </screenshot>
 
@@ -127,27 +161,33 @@
 >OK</guibutton
 > per creare il database. </para>
 
-<sect3>
-<title
+<sect3
+><title
 >Tipo di database</title>
-
 <para
->Questa casella elenca i driver &Qt; per SQL installati sul proprio sistema. Selezionare il driver relativo al tipo di database utilizzato. Se non viene elencato il driver desiderato, è necessario installarlo. Vedere la documentazione della distribuzione, o cercare «SQL drivers» nel <ulink url="https://www.qt.io/"
+>Questa casella elenca tutti i driver SQL di &Qt; installati sul proprio sistema. Selezionare il driver relativo al tipo di database utilizzato. Se non viene elencato il driver desiderato, è necessario installarlo. Vedere la documentazione della propria distribuzione, o cercare «SQL drivers» nel <ulink url="https://www.qt.io/"
 >sito web di &Qt;</ulink
 >. </para>
 </sect3>
 
-<sect3>
-<title
->File (solo per SQLite)</title>
+<sect3 id="details.database.sqlcipher"
+><title
+>File (solo per SQLite/SQLCipher)</title>
 <para
->SQLite ha un database per file, quindi inserire il nome del file in cui creare il database. Per sfogliare le cartelle, fare clic sull'icona a destra del nome del file.Per i database SQLite, i campi <guilabel
+>SQLCipher ha un database per file, quindi inserire il nome file in cui si desidera creare il database. Per esplorare il file system, fare clic sull'icona a destra del nome del file. Per i database SQLCipher, i campi <guilabel
+>Nome database</guilabel
+>, <guilabel
 >Nome host</guilabel
 >, <guilabel
 >Nome utente</guilabel
-> e <guilabel
->Password</guilabel
-> non sono rilevanti. Il file SQLite deve avere i corretti permessi in lettura/scrittura, impostati dal sistema operativo, per permettere l'accesso all'utente corrente. </para>
+> non sono rilevanti. Il file SQLCipher deve avere i permessi di lettura/scrittura appropriate impostate dal file system sottostante per abilitare l'accesso appropriato per l'utente attualmente connesso. </para>
+
+<para
+>Gli autori di <ulink url="https://www zetatic.net/sqlcipher"
+>SQLCipher</ulink
+> hanno rilasciato la versione 4.0 a novembre 2018. Tuttavia, molti utenti di &kmymoney;, in particolare quelli che non effettuano aggiornamenti molto spesso o che utilizzano distribuzioni LTS (Long Term Support) &Linux;, potrebbero ancora utilizzare un database creato con la versione 3 di SQLCipher. A un certo punto, di solito dopo aver aggiornato &kmymoney; o la loro distribuzione, scoprono di non essere in grado di aprire il loro database, con un errore che non è particolarmente informativo o utile. Ciò che è richiesto in questo caso è aggiornare il database stesso dalla versione 3 alla versione 4. Le istruzioni per questo possono essere trovate sul <ulink url="https://discuss.zetetic.net/t/upgrading-to-sqlcipher-4/3283"
+>sito web di SQLCipher</ulink
+>. </para>
 </sect3>
 
 <sect3>
@@ -165,28 +205,26 @@
 ><title
 >Nome host</title>
 <para
->Comunemente va bene il nome predefinito (<quote
+>Per l'utente medio, il nome predefinito di <quote
 >localhost</quote
->), che si riferisce al computer in uso. Per l'uso di database in rete, inserire il nome dell'host. </para>
-
+>, ovvero la macchina che stai attualmente utilizzando, è corretto. Per i database in rete, inserisci il nome host connesso del server del database. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Nome utente e password</title>
 <para
 >Per sapere i valori da utilizzare controllare i permessi impostati nel database, o contattare l'amministratore del database. Il nome utente inserito deve avere i permessi di selezione, di inserimento, di modifica e di cancellazione sui record. Se il nome utente è quello in uso nel computer, spesso la password non è richiesta. </para>
 </sect3>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Accedere ai dati</title>
 
-<sect3>
-<title
+<sect3
+><title
 >Organizzazione delle tabelle</title>
-
 <para
 >Per accedere ai dati in &kmymoney;, utilizzare la voce di menu <menuchoice
 ><guimenu
@@ -197,16 +235,22 @@
 >. Si aprirà una finestra simile alla precedente. </para>
 
 <note>
-<para
->Se hai creato il tuo database aprendo prima un file e selezionando quindi <guimenuitem
->Salva come database</guimenuitem
->, come descritto sopra, ogni successiva modifica ai tuoi dati sarà memorizzata solo nel database, non nel file. Ciò significa che puoi utilizzare il file come una copia di sicurezza o istantanea dei tuoi dati a una certa data. Per fare una nuova copia di sicurezza come questa, apri il tuo database, seleziona <menuchoice
-><guimenu
+  <para
+>Se hai creato il tuo database aprendo prima un file, e poi <guimenu
 >File</guimenu
-><guimenuitem
->Salva come...</guimenuitem
+> <guimenuitem
+>Salva</guimenuitem
+> e scegliendo <guilabel
+>SQL</guilabel
+> come descritto sopra, allora tutte le modifiche successive ai tuoi dati saranno salvate solo nel database, non nel file. Ciò significa che puoi usare il file come copia di sicurezza o istantanea dei tuoi dati in un momento particolare. Per fare un nuovo copia di sicurezza in questo modo, apri il tuo database, scegli la voce di menu <menuchoice
+> <guimenu
+>File</guimenu
+> <guimenuitem
+>Salva con nome...</guimenuitem
 ></menuchoice
->, indicando un nome appropriato per il file. Ricordati di riaprire quindi il tuo database, così che &kmymoney; non continui a usare il file. </para>
+>, scegli <guilabel
+>XML</guilabel
+> come tipo di archiviazione e assegna un nome file appropriato. Ricordati di riaprire il tuo database, così &kmymoney; non continuerà a usare il file. </para>
 </note>
 
 <para
@@ -215,9 +259,11 @@
 >. Sarà visualizzata un elenco delle tabelle che compongono il database, e si potrà vedere la loro struttura. </para>
 
 <para
->Per estrarre dati, ad esempio in un foglio di calcolo o in un file esterno, è quasi sempre necessario selezionare dati correlati da più tabelle, Questo viene fatto «associando» le tabelle usando un campo comune. È possibile trovare sul web maggiori informazioni sull'associazione delle tabelle. La tabella seguente elenca i campi usati per definire queste relazioni tra le tabelle. </para>
+>Per estrarre dati, ad esempio in un foglio di calcolo o in un file esterno, è quasi sempre necessario selezionare dati collegati da più di una tabella. Questo viene fatto tramite l'operazione di <quote
+>join</quote
+> delle tabelle, usando un campo comune. È possibile trovare molte più informazioni su come farlo nelle guide in linea sui database menzionati sopra. La seguente tabella elenca i campi utilizzati per definire queste relazioni tra tabelle. </para>
 
-<informaltable>
+<informaltable pgwide="1">
   <tgroup cols="3">
     <thead>
       <row>
@@ -429,24 +475,28 @@
 <para
 >Note: </para>
 
+<!-- For ndash and right and left double quotes I switched from Unicode &#x2013,
+     &#x201C, and &#x201D. to direct names, but couldn't find one for left double
+     quote.  JHO -->
 <para
->1 &#x2013; txType = &#x201C;N&#x201D; per le transazioni normali, &#x201C;S&#x201D; per le transazioni pianificate </para>
+>1 &ndash; txType = "N&rdquor; per le transazioni normali, "S&rdquor; per le transazioni pianificate </para>
 
 <para
->2 &#x2013; se kmmAccounts.isStockAccount = &#x201C;Y&#x201D; </para>
+>2 &ndash; if kmmAccounts.isStockAccount = "Y&rdquor; </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Formato dei campi</title>
-
 <para
 >Diversi campi dati sono memorizzati in un formato interno che potrebbe non essere immediatamente utilizzabile da altri programmi. In questi casi, le informazioni sono duplicate in formati interni ed esterni. </para>
 
 <para
->Gli importi monetari e i valori delle azioni sono visualizzati sia nel formato numeratore/denominatore e, in un campo il cui nome termina con <literal
->Formatted</literal
->, nella forma visualizzata sullo schermo. </para>
+>Gli importi monetari e i valori delle azioni vengono visualizzati sia nel formato numeratore/denominatore, sia con un nome di campo con suffisso <quote
+> <literal
+>Formattato</literal
+> </quote
+>, nel formato normalmente visualizzato. </para>
 
 <para
 >In modo simile, alcuni campi, come il tipo di conto, sono memorizzati sia come codice numerico sia in un campo il cui nome termina con <literal
@@ -454,18 +504,16 @@
 > usando il formato e la lingua del programma. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Aggiornamento dei dati</title>
-
 <para
 >Avere i dati in un formato standard dà la possibilità di modificarli con un programma esterno. NON FARLO a meno che non si sappia veramente quello che si sta facendo, e fare sempre una copia di sicurezza dei dati prima della modifica. Se si sbaglia, &kmymoney; potrebbe non essere più in grado di accedere ai dati, e si potrebbe persino perderli tutti. Sei stato avvisato! </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Query memorizzate</title>
-
 <para
 >La maggior parte dei sistemi di database permette di memorizzare le query e le procedure utilizzate più spesso; in alcuni casi, potrebbero essere memorizzate come tabelle o altri oggetti nel database stesso. Come si può intuire dalla tabella sopra, tutte le tabelle usate da &kmymoney; iniziano con le lettere minuscole <literal
 >kmm</literal
@@ -473,41 +521,49 @@
 </sect3>
 </sect2>
 
-<sect2 id="details.database.generatesql">
-<title
+<sect2 id="details.database.generatesql"
+><title
 >Creazione manuale del database</title>
 <note>
   <para
 >Questa sezione tratta l'utilizzo avanzato del database; la maggior parte degli utenti può evitare di leggerla. </para>
 </note>
 
-<sect3>
-<title
+<sect3
+><title
 >Quando usarla</title>
 <para
 >Ci sono casi in cui &kmymoney; non riesce a creare automaticamente un database, o lo crea senza utilizzare delle opzioni richieste dall'utente. Ad esempio, il sistema di database in uso potrebbe non rispettare completamente lo standard SQL, o non essere stato testato completamente con &kmymoney;. </para>
+
 <para
 >Prima di usare questa funzione, si dovrebbe provare a creare la banca dati stessa (&ie; con l'istruzione <literal
 >CREATE DATABASE</literal
 >). Una volta creata la banca dati, &kmymoney; dovrebbe essere in grado di creare le tabelle, &etc; nella procedura normale di salvataggio come base di dati, descritta sopra. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Generazione dei comandi SQL</title>
 <para
->Se non riesce, è possibile generare i comandi SQL di base necessari per creare le varie tabelle, viste e indici richiesti dall'applicazione. Selezionare la voce di menu <menuchoice
-><guimenu
+>Se questo non funziona, è possibile generare i comandi SQL di base necessari per creare le varie tabelle, viste e indici richiesti dall'applicazione. Selezionare la voce di menu <menuchoice
+> <guimenu
 >Strumenti</guimenu
-><guimenuitem
->Genera SQL della base dati</guimenuitem
-></menuchoice
-> dal menu. Si aprirà la seguente finestra: </para>
+> <guimenuitem
+>Genera SQL database</guimenuitem
+> </menuchoice
+>. Sarà visualizzata la seguente finestra: </para>
+
 <screenshot>
+  <screeninfo
+>generare sql per creare un database</screeninfo>
   <mediaobject>
-  <imageobject>
-  <imagedata fileref="generate_sql.png" format="PNG"/>
-  </imageobject>
+    <imageobject>
+      <imagedata fileref="generate_sql.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>generare sql per creare un database</phrase>
+    </textobject>
   </mediaobject>
 </screenshot>
 
@@ -517,6 +573,7 @@
 >; può essere modificato dall'utente o salvato in un file di testo facendo clic sul pulsante <guibutton
 >Salva SQL</guibutton
 >. In quest'ultimo caso, si deve creare database usando le funzioni di amministrazione fornite dal sistema di database. </para>
+
 <para
 >Se, dopo aver modificato il testo nella finestra, si vuole che &kmymoney; crei il database, è necessario completare gli altri campi della finestra, come descritto sopra nel capitolo <link linkend="details.database.selectdatabase"
 >Creazione di un database</link
@@ -527,23 +584,22 @@
 > come primo comando, se non si è già eseguito questo comando all'esterno di &kmymoney;. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Attenzione</title>
 <para
 >Bisogna stare molto attenti nella modifica delle definizioni delle tabelle e delle viste di base (quelle i cui nomi iniziano con <literal
 >kmm</literal
->). Alcune modifiche, come l'aumento della lunghezza di un campo intero, possono non creare danni, ma non si dovrebbe rimuovere o modificare l'ordine dei campi, altrimenti &kmymoney; potrebbe non funzionare più o danneggiare i dati. </para>
-<para
->L'aggiunta e la rimozione di indici potrebbero migliorare le prestazioni, ma potrebbe accadere anche l'opposto. In questi casi, conoscere il funzionamento interno di &kmymoney; può aiutare a ottenere le massime prestazioni. </para>
-</sect3>
+>). Alcune modifiche, come l'aumento della lunghezza di un campo intero,  potrebbe avere un impatto trascurabile, ma non si dovrebbe rimuovere o modificare l'ordine dei campi, altrimenti &kmymoney; potrebbe non funzionare più o danneggiare i dati. </para>
 
+<para
+>Mentre aggiungere o rimuovere indici può migliorare le prestazioni, dovresti anche essere consapevole che potrebbe accadere il contrario. Una certa conoscenza del funzionamento interno di &kmymoney; potrebbe aiutare a ottenere le migliori prestazioni in queste circostanze. </para>
+</sect3>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Cifratura</title>
-
 <para
 >La cifratura dei dati nel database non è attualmente supportata. </para>
 </sect2>

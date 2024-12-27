@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-23 01:52+0000\n"
+"POT-Creation-Date: 2024-12-27 01:57+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -19467,12 +19467,34 @@ msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "%1 másolata"
 
-#: kmymoney/views/journaldelegate.cpp:336
+#: kmymoney/views/journaldelegate.cpp:343
+#, kde-format
+msgctxt "@info %2 contains list of account names separated by <br>"
+msgid "<qt>Closed account:<br><br>%2</qt>"
+msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: kmymoney/views/journaldelegate.cpp:348
+#, fuzzy, kde-format
+#| msgid "Cannot create transactions in a closed account."
+msgctxt "@info Unable to edit "
+msgid ""
+"KMyMoney does not support to edit transaction that reference closed accounts."
+msgstr "Nem lehet lezárt számlában tranzakciókat létrehozni."
+
+#: kmymoney/views/journaldelegate.cpp:350
+#, fuzzy, kde-format
+#| msgid "Deleting transactions"
+msgctxt "@title:window"
+msgid "Prevent editing transactions"
+msgstr "Tranzakciók törlése"
+
+#: kmymoney/views/journaldelegate.cpp:364
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
-"The current implementation cannot modify multiple transactions in different "
-"accounts."
+"The current implementation cannot modify multiple transactions in this view."
 msgstr ""
 
 #: kmymoney/views/kaccountsview.cpp:170
@@ -26681,9 +26703,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Nem lehet ebben a kontextusban létrehozni tranzakciókat a kategóriának."
 
-#~ msgid "Cannot create transactions in a closed account."
-#~ msgstr "Nem lehet lezárt számlában tranzakciókat létrehozni."
-
 #~ msgid "Cannot edit transactions with frozen splits."
 #~ msgstr ""
 #~ "Nem lehet rögzített rekordokat tartalmazó tranzakciókat szerkeszteni."
@@ -27641,9 +27660,6 @@ msgstr ""
 
 #~ msgid "Importing an XML Statement."
 #~ msgstr "XML számlakivonat importálása."
-
-#~ msgid "Deleting transactions"
-#~ msgstr "Tranzakciók törlése"
 
 #~ msgid "Duplicating transactions"
 #~ msgstr "Tranzakciók duplikálása"
