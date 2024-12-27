@@ -31,4 +31,4 @@ Dependencies:
 
 Options:
   require-passing-tests-on: [ 'Linux', 'FreeBSD', 'Windows' ]
-  cmake-options: '-DUSE_MODELTEST=on -DWARNINGS_AS_ERRORS=on -Werror=dev'
+  cmake-options: '-DUSE_MODELTEST=on -DWARNINGS_AS_ERRORS=on -Werror=dev -DKMM_I18N_GENERATION=off'
