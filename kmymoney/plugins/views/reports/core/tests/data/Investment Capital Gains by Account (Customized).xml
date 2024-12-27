@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <ListTable name="Investment Capital Gains by Account (Customized)">
+  <TableRow ctAccount="BHP" ctAccountID="A000003" ctBuyPrice="556/25" ctBuys="-81851/4" ctCapitalGain="48169/20" ctCurrency="AUD" ctEndingMarketValue="114356/5" ctEquityType="Stock" ctLastPrice="1243/50" ctPercentageGain="4379/37205" ctRank="1" ctShares="920/1" ctTopAccount="Shares" />
+  <TableRow ctBuyPrice="556/25" ctBuys="-81851/4" ctCapitalGain="48169/20" ctCurrency="AUD" ctDepth="0" ctEndingMarketValue="114356/5" ctLastPrice="1243/50" ctPercentageGain="-1/1" ctRank="4" ctShares="920/1" ctTopAccount="Shares" ctValueSourceLine="349" />
+  <TableRow ctBuyPrice="556/25" ctBuys="-81851/4" ctCapitalGain="48169/20" ctCurrency="AUD" ctDepth="" ctEndingMarketValue="114356/5" ctLastPrice="1243/50" ctPercentageGain="4379/37205" ctRank="4" ctRowsCount="1/1" ctShares="920/1" ctTopAccount="" ctValueSourceLine="420" />
+ </ListTable>
