@@ -21,6 +21,10 @@ NULL=
 # clean the build root
 : "${ci_clean:=yes}"
 
+# ci_cmake_options
+# additional cmake options
+: "${ci_cmake_options:=}"
+
 # ci_distro:
 # OS distribution in which we are testing
 # Typical values: ubuntu, debian; maybe fedora in future
@@ -94,13 +98,14 @@ fi
 cd ci-build-${ci_variant}-${ci_host}
 
 if test "$ci_build" = "yes"; then
+    cmake_options="-DCMAKE_BUILD_TYPE=RelWithDebInfo -DSQLCIPHER_LIBRARIES=/usr/lib64/libsqlcipher.so $ci_cmake_options"
     # kmymoney specific command line
     case $ci_variant in
         (kf6*)
-            cmake -D CMAKE_BUILD_TYPE=RelWithDebInfo .. -DBUILD_WITH_QT6=1 -DBUILD_WITH_QT6_CONFIRMED=1 -DSQLCIPHER_LIBRARIES=/usr/lib64/libsqlcipher.so
+            cmake $cmake_options -DBUILD_WITH_QT6=1 -DBUILD_WITH_QT6_CONFIRMED=1 ..
             ;;
         (*)
-            cmake -D CMAKE_BUILD_TYPE=RelWithDebInfo .. -DSQLCIPHER_LIBRARIES=/usr/lib64/libsqlcipher.so
+            cmake $cmake_options ..
             ;;
     esac
 
