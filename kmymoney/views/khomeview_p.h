@@ -493,7 +493,7 @@ public:
                         break;
 
                     case 2: // preferred accounts
-                        showAccounts(Preferred, i18n("Preferred Accounts"));
+                        showAccounts(Preferred, i18nc("@title Home page section", "Preferred Accounts"));
                         break;
 
                     case 3: // payment accounts
@@ -501,7 +501,7 @@ public:
                         if (settings.contains("2")) {
                             showAccounts(static_cast<paymentTypeE>(Payment | Preferred), i18n("Payment Accounts"));
                         } else {
-                            showAccounts(Payment, i18n("Payment Accounts"));
+                            showAccounts(Payment, i18nc("@title Home page section", "Payment Accounts"));
                         }
                         break;
                     case 4: // favorite reports
@@ -554,7 +554,7 @@ public:
         m_html +=
             "<table width=\"97%\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" class=\"displayblock\" >"
             "<tr><td class=\"summaryheader\">"
-            + i18n("Net Worth Forecast") + "</td></tr>";
+            + i18nc("@title Home page section", "Net Worth Forecast") + "</td></tr>";
 
         m_html += "<tr class=\"gap\"><td>&nbsp;\n</td></tr>";
         m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" ><tr>";
@@ -674,7 +674,7 @@ public:
         m_html +=
             "<table width=\"97%\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" class=\"displayblock\" >"
             "<tr><td class=\"summaryheader\">"
-            + i18n("Scheduled Payments") + "</td></tr>";
+            + i18nc("@title Home page section", "Scheduled Payments") + "</td></tr>";
 
         if (!overdues.isEmpty()) {
             m_html += "<tr class=\"gap\"><td>&nbsp;\n</td></tr>";
@@ -684,7 +684,7 @@ public:
             QList<MyMoneySchedule>::Iterator it_f;
 
             m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
-            addScheduleHeader(i18n("Overdue payments"), QLatin1String("itemtitle negativetext"));
+            addScheduleHeader(i18nc("@title Home page sub-section", "Overdue payments"), QLatin1String("itemtitle negativetext"));
 
             int i = 0;
             for (it = overdues.begin(); it != overdues.end(); ++it) {
@@ -721,7 +721,7 @@ public:
             if (todays.count() > 0) {
                 m_html += "<tr class=\"gap\"><td>&nbsp;\n</td></tr>";
                 m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
-                addScheduleHeader(i18n("Today's due payments"), QLatin1String("itemtitle"));
+                addScheduleHeader(i18nc("@title Home page sub-section", "Payments due today"), QLatin1String("itemtitle"));
 
                 int i = 0;
                 for (t_it = todays.begin(); t_it != todays.end(); ++t_it) {
@@ -736,7 +736,7 @@ public:
                 QList<MyMoneySchedule>::Iterator it;
 
                 m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
-                addScheduleHeader(i18n("Future payments"), QLatin1String("itemtitle"));
+                addScheduleHeader(i18nc("@title Home page sub-section", "Future payments"), QLatin1String("itemtitle"));
 
                 // show all or the first 6 entries
                 int cnt;
@@ -1065,7 +1065,7 @@ public:
                         m_html +=
                             "<table width=\"97%\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" class=\"displayblock\" >"
                             "<tr><td class=\"summaryheader\">"
-                            + i18n("Favorite Reports") + "</td></tr>";
+                            + i18nc("@title Home page section", "Favorite Reports") + "</td></tr>";
 
                         m_html += "<tr class=\"gap\"><td>&nbsp;\n</td></tr>";
                         m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
@@ -1121,7 +1121,7 @@ public:
             m_html +=
                 "<table width=\"97%\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" class=\"displayblock\" >"
                 "<tr><td class=\"summaryheader\">"
-                + i18ncp("Forecast days", "%1 Day Forecast", "%1 Day Forecast", m_forecast.forecastDays()) + "</td></tr>";
+                + i18ncp("@title Home page section Forecast days", "%1 Day Forecast", "%1 Day Forecast", m_forecast.forecastDays()) + "</td></tr>";
             m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
 
             auto numberOfColumns = m_forecast.forecastDays() / m_forecast.accountsCycle();
@@ -1355,7 +1355,7 @@ public:
             m_html +=
                 "<table width=\"97%\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" class=\"displayblock\" >"
                 "<tr><td class=\"summaryheader\">"
-                + i18n("Assets and Liabilities Summary") + "</td></tr>";
+                + i18nc("@title Home page section", "Assets and Liabilities Summary") + "</td></tr>";
             m_html += "<tr><td><table align=\"center\" width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
 
             //column titles
@@ -1369,7 +1369,7 @@ public:
             }
 
             m_html += "<td class=\"left\" width=\"30%\">";
-            m_html += i18n("Asset Accounts");
+            m_html += i18nc("@title:column table on home page", "Asset Accounts");
             m_html += "</td>";
 
             if (KMyMoneySettings::showCountOfUnmarkedTransactions())
@@ -1385,7 +1385,7 @@ public:
                 m_html += "<td width=\"1%\" class=\"setcolor\">" + i18n("Reconciled") + "</td>";
 
             m_html += "<td width=\"5%\" class=\"right nowrap\">";
-            m_html += i18n("Balance");
+            m_html += i18nc("@title:column table on home page", "Balance");
             m_html += "</td>";
 
             //intermediate row to separate both columns
@@ -1398,7 +1398,7 @@ public:
             }
 
             m_html += "<td class=\"left\" width=\"30%\">";
-            m_html += i18n("Liability Accounts");
+            m_html += i18nc("@title:column table on home page", "Liability Accounts");
             m_html += "</td>";
 
             if (KMyMoneySettings::showCountOfUnmarkedTransactions())
@@ -1414,7 +1414,7 @@ public:
                 m_html += "<td width=\"1%\" class=\"setcolor nowrap\">" + i18n("Reconciled") + "</td>";
 
             m_html += "<td width=\"5%\" class=\"right nowrap\">";
-            m_html += i18n("Balance");
+            m_html += i18nc("@title:column table on home page", "Balance");
             m_html += "</td></tr>";
 
             QString placeHolder_Status, placeHolder_Counts;
@@ -1541,7 +1541,7 @@ public:
             m_html +=
                 "<table width=\"97%\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" class=\"displayblock\" >"
                 "<tr><td class=\"summaryheader\">"
-                + i18n("Budget") + "</td></tr>";
+                + i18nc("@title Home page section", "Budget") + "</td></tr>";
             m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
 
             m_html += "<tr>";
@@ -1796,7 +1796,7 @@ public:
         m_html +=
             "<table width=\"97%\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" class=\"displayblock\" >"
             "<tr><td class=\"summaryheader\">"
-            + i18n("Cash Flow Summary") + "</td></tr>";
+            + i18nc("@title Home page section", "Cash Flow Summary") + "</td></tr>";
         m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
         //income and expense title
         m_html += "<tr class=\"itemtitle\">";

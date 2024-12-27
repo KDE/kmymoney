@@ -151,7 +151,7 @@ QString ReportsView::budget() const
     html +=
         "<table width=\"97%\" align=\"center\" class=\"displayblock\" >"
         "<tr><td class=\"summaryheader\">"
-        + i18n("Budget") + "</td></tr>";
+        + i18nc("@title Home page section", "Budget") + "</td></tr>";
 
     if (file->countBudgets() == 0) {
         html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
