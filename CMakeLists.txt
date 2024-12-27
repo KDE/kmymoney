@@ -112,6 +112,8 @@ if(BUILD_WITH_QT6)
             " cmake configure line to confirm that you have read the previous note."
         )
     endif()
+    # allow QString("...")
+    add_definitions(-DQT_RESTRICTED_CAST_FROM_ASCII)
 endif()
 
 add_definitions(
