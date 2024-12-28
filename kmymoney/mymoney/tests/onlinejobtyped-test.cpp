@@ -92,7 +92,7 @@ void onlineJobTypedTest::constructWithIncompatibleType()
 void onlineJobTypedTest::constructWithNull()
 {
     try {
-        onlineJobTyped<dummyTask> job(0);
+        onlineJobTyped<dummyTask> job(nullptr);
         QFAIL("Missing expected exception");
     } catch (const onlineJob::emptyTask&) {
     } catch (...) {
