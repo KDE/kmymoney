@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2024-09-03 15:34+0200\n"
+"PO-Revision-Date: 2024-12-25 10:27+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 24.11.90\n"
+"X-Generator: Lokalize 24.12.0\n"
 "X-Text-Markup: kde4\n"
 
 #, kde-format
@@ -7465,7 +7465,7 @@ msgstr "Commissions"
 #, kde-format
 msgctxt "Decrease of asset/liability value"
 msgid "Decrease"
-msgstr "Diminuer"
+msgstr "Dépense"
 
 #: kmymoney/models/ledgerproxymodel.cpp:61
 #: kmymoney/models/ledgerproxymodel.cpp:79 kmymoney/widgets/register.cpp:308
@@ -7473,7 +7473,7 @@ msgstr "Diminuer"
 #, kde-format
 msgctxt "Increase of asset/liability value"
 msgid "Increase"
-msgstr "Augmenter"
+msgstr "Recette"
 
 #: kmymoney/models/ledgerproxymodel.cpp:75 kmymoney/widgets/register.cpp:303
 #, kde-format
