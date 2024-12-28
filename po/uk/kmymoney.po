@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-27 01:57+0000\n"
-"PO-Revision-Date: 2024-12-11 09:29+0200\n"
+"POT-Creation-Date: 2024-12-28 02:06+0000\n"
+"PO-Revision-Date: 2024-12-27 22:01+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -3221,7 +3221,7 @@ msgstr "Шрифт комірки"
 msgid "Header font"
 msgstr "Шрифт заголовка"
 
-#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:88
+#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:90
 #, kde-format
 msgid "Choose file path"
 msgstr "Виберіть шлях до файла"
@@ -6151,9 +6151,7 @@ msgstr "Активи і зобов'язання"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:68
-#: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1544
 #, kde-format
 msgid "Budget"
 msgstr "Бюджет"
@@ -10078,8 +10076,7 @@ msgstr "Зняти вибір поля нотаток."
 #: kmymoney/plugins/views/reports/core/listtable.cpp:738
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1018 kmymoney/views/khomeview_p.h:1388
-#: kmymoney/views/khomeview_p.h:1417
+#: kmymoney/views/khomeview_p.h:1018
 #, kde-format
 msgid "Balance"
 msgstr "Баланс"
@@ -16774,8 +16771,6 @@ msgid "Charts"
 msgstr "Діаграми"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:674
-#: kmymoney/views/khomeview_p.h:1068
-#, kde-format
 msgid "Favorite Reports"
 msgstr "Улюблені звіти"
 
@@ -17134,10 +17129,17 @@ msgstr "Остаточно вилучити цей звіт"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:82
 #: kmymoney/plugins/views/reports/reportsview.cpp:118
-#: kmymoney/views/khomeview_p.h:557
 #, kde-format
 msgid "Net Worth Forecast"
 msgstr "Прогноз залишкової вартості"
+
+#: kmymoney/plugins/views/reports/reportsview.cpp:154
+#: kmymoney/views/khomeview_p.h:1544
+#, fuzzy, kde-format
+#| msgid "Budget"
+msgctxt "@title Home page section"
+msgid "Budget"
+msgstr "Бюджет"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:159
 #, kde-format
@@ -19353,43 +19355,34 @@ msgstr "Порожня нотатка"
 msgctxt "@info %2 contains list of account names separated by <br>"
 msgid "<qt>Closed account:<br><br>%2</qt>"
 msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "<qt>Закриті рахунки:<br><br>%2</qt>"
+msgstr[1] "<qt>Закриті рахунки:<br><br>%2</qt>"
+msgstr[2] "<qt>Закриті рахунки:<br><br>%2</qt>"
+msgstr[3] "<qt>Закритий рахунок:<br><br>%2</qt>"
 
 #: kmymoney/views/journaldelegate.cpp:348
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip Protected"
-#| msgid ""
-#| "This widget is currently protected because the transaction references a "
-#| "closed account."
+#, kde-format
 msgctxt "@info Unable to edit "
 msgid ""
 "KMyMoney does not support to edit transaction that reference closed accounts."
 msgstr ""
-"Зараз цей віджет заблоковано, оскільки операція посилається на закритий "
-"рахунок."
+"У KMyMoney не передбачено підтримки редагування операцій, у яких використано "
+"закриті рахунки."
 
 #: kmymoney/views/journaldelegate.cpp:350
-#, fuzzy, kde-format
-#| msgid "Storing transactions"
+#, kde-format
 msgctxt "@title:window"
 msgid "Prevent editing transactions"
-msgstr "Збереження операцій"
+msgstr "Запобігання редагуванню операцій"
 
 #: kmymoney/views/journaldelegate.cpp:364
-#, fuzzy, kde-format
-#| msgctxt "@info Editing multiple transactions"
-#| msgid ""
-#| "The current implementation cannot modify multiple transactions in "
-#| "different accounts."
+#, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
 "The current implementation cannot modify multiple transactions in this view."
 msgstr ""
 "У поточній реалізації програми не можна одночасно вносити зміни до декількох "
-"операцій на різних рахунках."
+"операцій на цій панелі перегляду."
 
 #: kmymoney/views/kaccountsview.cpp:170
 #: kmymoney/views/kinstitutionsview.cpp:208
@@ -19666,24 +19659,24 @@ msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "Змінено частоту у розкладі"
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:611
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Не вдалося додати заплановану дію: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:611
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Додати заплановану операцію"
 
-#: kmymoney/views/keditscheduledlg.cpp:639
-#: kmymoney/views/keditscheduledlg.cpp:682
-#: kmymoney/views/keditscheduledlg.cpp:692
+#: kmymoney/views/keditscheduledlg.cpp:641
+#: kmymoney/views/keditscheduledlg.cpp:684
+#: kmymoney/views/keditscheduledlg.cpp:694
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Не вдалося змінити заплановану операцію «%1»"
 
-#: kmymoney/views/keditscheduledlg.cpp:668
+#: kmymoney/views/keditscheduledlg.cpp:670
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -19697,7 +19690,7 @@ msgstr ""
 "дату запланованої операції на наступну дату, якщо дату останньої сплати не "
 "буде скинуто. Бажаєте скинути значення дати останньої сплати?</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:673
+#: kmymoney/views/keditscheduledlg.cpp:675
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Відновити попередню дату сплати"
@@ -19902,14 +19895,30 @@ msgid "Loading..."
 msgstr "Завантаження…"
 
 #: kmymoney/views/khomeview_p.h:496
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Preferred Accounts"
+msgctxt "@title Home page section"
 msgid "Preferred Accounts"
 msgstr "Основні рахунки"
 
-#: kmymoney/views/khomeview_p.h:502 kmymoney/views/khomeview_p.h:504
+#: kmymoney/views/khomeview_p.h:502
 #, kde-format
 msgid "Payment Accounts"
 msgstr "Рахунки сплат"
+
+#: kmymoney/views/khomeview_p.h:504
+#, fuzzy, kde-format
+#| msgid "Payment Accounts"
+msgctxt "@title Home page section"
+msgid "Payment Accounts"
+msgstr "Рахунки сплат"
+
+#: kmymoney/views/khomeview_p.h:557
+#, fuzzy, kde-format
+#| msgid "Net Worth Forecast"
+msgctxt "@title Home page section"
+msgid "Net Worth Forecast"
+msgstr "Прогноз залишкової вартості"
 
 #: kmymoney/views/khomeview_p.h:608
 #, kde-format
@@ -19935,22 +19944,30 @@ msgid "Balance after"
 msgstr "Баланс після"
 
 #: kmymoney/views/khomeview_p.h:677
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Scheduled Payments"
+msgctxt "@title Home page section"
 msgid "Scheduled Payments"
 msgstr "Заплановані сплати"
 
 #: kmymoney/views/khomeview_p.h:687
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Overdue payments"
+msgctxt "@title Home page sub-section"
 msgid "Overdue payments"
 msgstr "Прострочені платежі"
 
 #: kmymoney/views/khomeview_p.h:724
-#, kde-format
-msgid "Today's due payments"
-msgstr "Сьогоднішні сплати"
+#, fuzzy, kde-format
+#| msgid "Payments to"
+msgctxt "@title Home page sub-section"
+msgid "Payments due today"
+msgstr "Внески до"
 
 #: kmymoney/views/khomeview_p.h:739
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Future payments"
+msgctxt "@title Home page sub-section"
 msgid "Future payments"
 msgstr "Майбутні сплати"
 
@@ -20013,9 +20030,19 @@ msgstr "!У"
 msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr "До мінімального балансу<br>/максимального кредиту"
 
+#: kmymoney/views/khomeview_p.h:1068
+#, fuzzy, kde-format
+#| msgid "Favorite Reports"
+msgctxt "@title Home page section"
+msgid "Favorite Reports"
+msgstr "Улюблені звіти"
+
 #: kmymoney/views/khomeview_p.h:1124
-#, kde-format
-msgctxt "Forecast days"
+#, fuzzy, kde-format
+#| msgctxt "Forecast days"
+#| msgid "%1 Day Forecast"
+#| msgid_plural "%1 Day Forecast"
+msgctxt "@title Home page section Forecast days"
 msgid "%1 Day Forecast"
 msgid_plural "%1 Day Forecast"
 msgstr[0] "%1-денний прогноз"
@@ -20034,17 +20061,30 @@ msgstr[2] "%1 днів"
 msgstr[3] "%1 день"
 
 #: kmymoney/views/khomeview_p.h:1358
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Assets and Liabilities Summary"
+msgctxt "@title Home page section"
 msgid "Assets and Liabilities Summary"
 msgstr "Резюме активів і зобов'язань"
 
 #: kmymoney/views/khomeview_p.h:1372
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Asset Accounts"
+msgctxt "@title:column table on home page"
 msgid "Asset Accounts"
 msgstr "Рахунки активів"
 
+#: kmymoney/views/khomeview_p.h:1388 kmymoney/views/khomeview_p.h:1417
+#, fuzzy, kde-format
+#| msgid "Balance"
+msgctxt "@title:column table on home page"
+msgid "Balance"
+msgstr "Баланс"
+
 #: kmymoney/views/khomeview_p.h:1401
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Liability Accounts"
+msgctxt "@title:column table on home page"
 msgid "Liability Accounts"
 msgstr "Рахунки пасивів"
 
@@ -20059,7 +20099,9 @@ msgid "Total Liabilities"
 msgstr "Загальні пасиви"
 
 #: kmymoney/views/khomeview_p.h:1799
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Cash Flow Summary"
+msgctxt "@title Home page section"
 msgid "Cash Flow Summary"
 msgstr "Резюме грошової активності"
 
@@ -25829,6 +25871,9 @@ msgstr "Передбачено підтримку лише одного з ва�
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr "зберігаємо звіт «%1» до «%2»"
+
+#~ msgid "Today's due payments"
+#~ msgstr "Сьогоднішні сплати"
 
 #~ msgid "Annualized Return"
 #~ msgstr "Щорічний прибуток"

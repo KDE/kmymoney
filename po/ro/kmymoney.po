@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-27 01:57+0000\n"
+"POT-Creation-Date: 2024-12-28 02:06+0000\n"
 "PO-Revision-Date: 2024-02-24 16:23+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -3261,7 +3261,7 @@ msgstr "Fontul celulei"
 msgid "Header font"
 msgstr "Fontul antetului"
 
-#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:88
+#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:90
 #, fuzzy, kde-format
 #| msgid "Choose Style"
 msgid "Choose file path"
@@ -6345,9 +6345,7 @@ msgstr "Active și pasive"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:68
-#: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1544
 #, kde-format
 msgid "Budget"
 msgstr "Buget"
@@ -10598,8 +10596,7 @@ msgstr "Șterge selecțiile"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:738
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1018 kmymoney/views/khomeview_p.h:1388
-#: kmymoney/views/khomeview_p.h:1417
+#: kmymoney/views/khomeview_p.h:1018
 #, kde-format
 msgid "Balance"
 msgstr "Sold"
@@ -17461,8 +17458,6 @@ msgid "Charts"
 msgstr "Grafice"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:674
-#: kmymoney/views/khomeview_p.h:1068
-#, kde-format
 msgid "Favorite Reports"
 msgstr "Rapoarte favorite"
 
@@ -17827,10 +17822,17 @@ msgstr "Șterge pentru totdeauna acest raport"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:82
 #: kmymoney/plugins/views/reports/reportsview.cpp:118
-#: kmymoney/views/khomeview_p.h:557
 #, kde-format
 msgid "Net Worth Forecast"
 msgstr "Prognoza valorii nete"
+
+#: kmymoney/plugins/views/reports/reportsview.cpp:154
+#: kmymoney/views/khomeview_p.h:1544
+#, fuzzy, kde-format
+#| msgid "Budget"
+msgctxt "@title Home page section"
+msgid "Budget"
+msgstr "Buget"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:159
 #, kde-format
@@ -20486,24 +20488,24 @@ msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "A fost găsit un program"
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:611
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Nu s-a putut adăuga tranzacția programată: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:611
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Adăugați o tranzacție programată"
 
-#: kmymoney/views/keditscheduledlg.cpp:639
-#: kmymoney/views/keditscheduledlg.cpp:682
-#: kmymoney/views/keditscheduledlg.cpp:692
+#: kmymoney/views/keditscheduledlg.cpp:641
+#: kmymoney/views/keditscheduledlg.cpp:684
+#: kmymoney/views/keditscheduledlg.cpp:694
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Nu s-a putut modifica tranzacția programată '%1'"
 
-#: kmymoney/views/keditscheduledlg.cpp:668
+#: kmymoney/views/keditscheduledlg.cpp:670
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -20524,7 +20526,7 @@ msgstr ""
 "cazul în care ultima dată a tranzacției nu este reactualizată. Doriți să "
 "reactualizați data ultimului transfer?"
 
-#: kmymoney/views/keditscheduledlg.cpp:673
+#: kmymoney/views/keditscheduledlg.cpp:675
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Resetează ultima dată de plată"
@@ -20727,14 +20729,30 @@ msgid "Loading..."
 msgstr "Se încarcă %1..."
 
 #: kmymoney/views/khomeview_p.h:496
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Preferred Accounts"
+msgctxt "@title Home page section"
 msgid "Preferred Accounts"
 msgstr "Conturi preferate"
 
-#: kmymoney/views/khomeview_p.h:502 kmymoney/views/khomeview_p.h:504
+#: kmymoney/views/khomeview_p.h:502
 #, kde-format
 msgid "Payment Accounts"
 msgstr "Conturi de plată"
+
+#: kmymoney/views/khomeview_p.h:504
+#, fuzzy, kde-format
+#| msgid "Payment Accounts"
+msgctxt "@title Home page section"
+msgid "Payment Accounts"
+msgstr "Conturi de plată"
+
+#: kmymoney/views/khomeview_p.h:557
+#, fuzzy, kde-format
+#| msgid "Net Worth Forecast"
+msgctxt "@title Home page section"
+msgid "Net Worth Forecast"
+msgstr "Prognoza valorii nete"
 
 #: kmymoney/views/khomeview_p.h:608
 #, fuzzy, kde-format
@@ -20764,21 +20782,28 @@ msgstr "Soldul după"
 #: kmymoney/views/khomeview_p.h:677
 #, fuzzy, kde-format
 #| msgid "Scheduled Income"
+msgctxt "@title Home page section"
 msgid "Scheduled Payments"
 msgstr "Venit programat"
 
 #: kmymoney/views/khomeview_p.h:687
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Overdue payments"
+msgctxt "@title Home page sub-section"
 msgid "Overdue payments"
 msgstr "Plăți cu termen depășit"
 
 #: kmymoney/views/khomeview_p.h:724
-#, kde-format
-msgid "Today's due payments"
-msgstr "Plățile de efectuat astăzi"
+#, fuzzy, kde-format
+#| msgid "Payments to"
+msgctxt "@title Home page sub-section"
+msgid "Payments due today"
+msgstr "Plăți în"
 
 #: kmymoney/views/khomeview_p.h:739
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Future payments"
+msgctxt "@title Home page sub-section"
 msgid "Future payments"
 msgstr "Plăți viitoare"
 
@@ -20844,10 +20869,17 @@ msgstr "R"
 msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr "La soldul minim / Credit maxim"
 
+#: kmymoney/views/khomeview_p.h:1068
+#, fuzzy, kde-format
+#| msgid "Favorite Reports"
+msgctxt "@title Home page section"
+msgid "Favorite Reports"
+msgstr "Rapoarte favorite"
+
 #: kmymoney/views/khomeview_p.h:1124
 #, fuzzy, kde-format
 #| msgid "%1 Day Forecast"
-msgctxt "Forecast days"
+msgctxt "@title Home page section Forecast days"
 msgid "%1 Day Forecast"
 msgid_plural "%1 Day Forecast"
 msgstr[0] "Prognoză pe %1 zile"
@@ -20864,17 +20896,30 @@ msgstr[1] "%1 zile"
 msgstr[2] "%1 de zile"
 
 #: kmymoney/views/khomeview_p.h:1358
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Assets and Liabilities Summary"
+msgctxt "@title Home page section"
 msgid "Assets and Liabilities Summary"
 msgstr "Sumarul activelor și pasivelor"
 
 #: kmymoney/views/khomeview_p.h:1372
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Asset Accounts"
+msgctxt "@title:column table on home page"
 msgid "Asset Accounts"
 msgstr "Conturi de active"
 
+#: kmymoney/views/khomeview_p.h:1388 kmymoney/views/khomeview_p.h:1417
+#, fuzzy, kde-format
+#| msgid "Balance"
+msgctxt "@title:column table on home page"
+msgid "Balance"
+msgstr "Sold"
+
 #: kmymoney/views/khomeview_p.h:1401
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Liability Accounts"
+msgctxt "@title:column table on home page"
 msgid "Liability Accounts"
 msgstr "Conturi de pasive"
 
@@ -20889,7 +20934,9 @@ msgid "Total Liabilities"
 msgstr "Total pasive"
 
 #: kmymoney/views/khomeview_p.h:1799
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Cash Flow Summary"
+msgctxt "@title Home page section"
 msgid "Cash Flow Summary"
 msgstr "Sumarul fluxului financiar"
 
@@ -26838,6 +26885,9 @@ msgstr ""
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr ""
+
+#~ msgid "Today's due payments"
+#~ msgstr "Plățile de efectuat astăzi"
 
 #~ msgid "Annualized Return"
 #~ msgstr "Întoarcere anuală"

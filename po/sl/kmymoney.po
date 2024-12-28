@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-27 01:57+0000\n"
-"PO-Revision-Date: 2024-12-11 09:20+0100\n"
+"POT-Creation-Date: 2024-12-28 02:06+0000\n"
+"PO-Revision-Date: 2024-12-27 06:57+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -3194,7 +3194,7 @@ msgstr "Pisava celice"
 msgid "Header font"
 msgstr "Pisava naslova"
 
-#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:88
+#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:90
 #, kde-format
 msgid "Choose file path"
 msgstr "Izberi pot datoteke"
@@ -6114,9 +6114,7 @@ msgstr "Imetja in obveznosti"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:68
-#: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1544
 #, kde-format
 msgid "Budget"
 msgstr "Proračun"
@@ -10023,8 +10021,7 @@ msgstr "Očisti izbiro polja opombe."
 #: kmymoney/plugins/views/reports/core/listtable.cpp:738
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1018 kmymoney/views/khomeview_p.h:1388
-#: kmymoney/views/khomeview_p.h:1417
+#: kmymoney/views/khomeview_p.h:1018
 #, kde-format
 msgid "Balance"
 msgstr "Saldo"
@@ -16656,8 +16653,6 @@ msgid "Charts"
 msgstr "Grafikoni"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:674
-#: kmymoney/views/khomeview_p.h:1068
-#, kde-format
 msgid "Favorite Reports"
 msgstr "Priljubljena poročila"
 
@@ -17016,10 +17011,17 @@ msgstr "Permanentni izbriši to poročilo"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:82
 #: kmymoney/plugins/views/reports/reportsview.cpp:118
-#: kmymoney/views/khomeview_p.h:557
 #, kde-format
 msgid "Net Worth Forecast"
 msgstr "Napoved neto vrednosti"
+
+#: kmymoney/plugins/views/reports/reportsview.cpp:154
+#: kmymoney/views/khomeview_p.h:1544
+#, fuzzy, kde-format
+#| msgid "Budget"
+msgctxt "@title Home page section"
+msgid "Budget"
+msgstr "Proračun"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:159
 #, kde-format
@@ -19208,41 +19210,31 @@ msgstr "Prazna zabeležka"
 msgctxt "@info %2 contains list of account names separated by <br>"
 msgid "<qt>Closed account:<br><br>%2</qt>"
 msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "<qt>Zaprti računi:<br><br>%2</qt>"
+msgstr[1] "<qt>Zaprti račun:<br><br>%2</qt>"
+msgstr[2] "<qt>Zaprti računa:<br><br>%2</qt>"
+msgstr[3] "<qt>Zaprti računi:<br><br>%2</qt>"
 
 #: kmymoney/views/journaldelegate.cpp:348
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip Protected"
-#| msgid ""
-#| "This widget is currently protected because the transaction references a "
-#| "closed account."
+#, kde-format
 msgctxt "@info Unable to edit "
 msgid ""
 "KMyMoney does not support to edit transaction that reference closed accounts."
 msgstr ""
-"Ta gradnik je trenutno zaščiten, ker se transakcija nanaša na zaprt račun."
+"KMyMoney ne podpira urejanja transakcij, ki se nanašajo na zaprte račune."
 
 #: kmymoney/views/journaldelegate.cpp:350
-#, fuzzy, kde-format
-#| msgid "Retrieving transactions..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Prevent editing transactions"
-msgstr "Pridobivanje transakcij..."
+msgstr "Prepreči urejanje transakcij"
 
 #: kmymoney/views/journaldelegate.cpp:364
-#, fuzzy, kde-format
-#| msgctxt "@info Editing multiple transactions"
-#| msgid ""
-#| "The current implementation cannot modify multiple transactions in "
-#| "different accounts."
+#, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
 "The current implementation cannot modify multiple transactions in this view."
-msgstr ""
-"Trenutna izvedba ne omogoča spremembe več transakcij po različnih računih."
+msgstr "Trenutna izvedba ne more spremeniti več transakcij v tem pogledu."
 
 #: kmymoney/views/kaccountsview.cpp:170
 #: kmymoney/views/kinstitutionsview.cpp:208
@@ -19517,24 +19509,24 @@ msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "Sprememba frekvence v časovnem planu"
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:611
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Ni mogoče dodatni načrtovano transakcijo: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:611
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Dodaj načrtovano transakcijo"
 
-#: kmymoney/views/keditscheduledlg.cpp:639
-#: kmymoney/views/keditscheduledlg.cpp:682
-#: kmymoney/views/keditscheduledlg.cpp:692
+#: kmymoney/views/keditscheduledlg.cpp:641
+#: kmymoney/views/keditscheduledlg.cpp:684
+#: kmymoney/views/keditscheduledlg.cpp:694
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Ni bilo mogoče spremeniti načrtovane transakcije '%1'"
 
-#: kmymoney/views/keditscheduledlg.cpp:668
+#: kmymoney/views/keditscheduledlg.cpp:670
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -19549,7 +19541,7 @@ msgstr ""
 "ponastavite zadnji datum plačila. Ali želite ponastaviti zadnji datum "
 "plačila?</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:673
+#: kmymoney/views/keditscheduledlg.cpp:675
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Ponastavi zadnji datum plačila"
@@ -19754,14 +19746,30 @@ msgid "Loading..."
 msgstr "Nalaganje..."
 
 #: kmymoney/views/khomeview_p.h:496
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Preferred Accounts"
+msgctxt "@title Home page section"
 msgid "Preferred Accounts"
 msgstr "Prednostni računi"
 
-#: kmymoney/views/khomeview_p.h:502 kmymoney/views/khomeview_p.h:504
+#: kmymoney/views/khomeview_p.h:502
 #, kde-format
 msgid "Payment Accounts"
 msgstr "Plačilni računi"
+
+#: kmymoney/views/khomeview_p.h:504
+#, fuzzy, kde-format
+#| msgid "Payment Accounts"
+msgctxt "@title Home page section"
+msgid "Payment Accounts"
+msgstr "Plačilni računi"
+
+#: kmymoney/views/khomeview_p.h:557
+#, fuzzy, kde-format
+#| msgid "Net Worth Forecast"
+msgctxt "@title Home page section"
+msgid "Net Worth Forecast"
+msgstr "Napoved neto vrednosti"
 
 #: kmymoney/views/khomeview_p.h:608
 #, kde-format
@@ -19787,22 +19795,30 @@ msgid "Balance after"
 msgstr "Stanje po"
 
 #: kmymoney/views/khomeview_p.h:677
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Scheduled Payments"
+msgctxt "@title Home page section"
 msgid "Scheduled Payments"
 msgstr "Časovni plan plačil"
 
 #: kmymoney/views/khomeview_p.h:687
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Overdue payments"
+msgctxt "@title Home page sub-section"
 msgid "Overdue payments"
 msgstr "Zapadla plačila"
 
 #: kmymoney/views/khomeview_p.h:724
-#, kde-format
-msgid "Today's due payments"
-msgstr "Današnja zapadla plačila"
+#, fuzzy, kde-format
+#| msgid "Payments to"
+msgctxt "@title Home page sub-section"
+msgid "Payments due today"
+msgstr "Plačila za"
 
 #: kmymoney/views/khomeview_p.h:739
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Future payments"
+msgctxt "@title Home page sub-section"
 msgid "Future payments"
 msgstr "Bodoča plačila"
 
@@ -19865,9 +19881,19 @@ msgstr "!R"
 msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr "Do minimalnega stanja<br>/ Največji dobropis"
 
+#: kmymoney/views/khomeview_p.h:1068
+#, fuzzy, kde-format
+#| msgid "Favorite Reports"
+msgctxt "@title Home page section"
+msgid "Favorite Reports"
+msgstr "Priljubljena poročila"
+
 #: kmymoney/views/khomeview_p.h:1124
-#, kde-format
-msgctxt "Forecast days"
+#, fuzzy, kde-format
+#| msgctxt "Forecast days"
+#| msgid "%1 Day Forecast"
+#| msgid_plural "%1 Day Forecast"
+msgctxt "@title Home page section Forecast days"
 msgid "%1 Day Forecast"
 msgid_plural "%1 Day Forecast"
 msgstr[0] "%1 dnevna napoved"
@@ -19886,17 +19912,30 @@ msgstr[2] "%1 dni"
 msgstr[3] "%1 dni"
 
 #: kmymoney/views/khomeview_p.h:1358
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Assets and Liabilities Summary"
+msgctxt "@title Home page section"
 msgid "Assets and Liabilities Summary"
 msgstr "Povzetek imetij in obveznosti"
 
 #: kmymoney/views/khomeview_p.h:1372
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Asset Accounts"
+msgctxt "@title:column table on home page"
 msgid "Asset Accounts"
 msgstr "Računi imetij"
 
+#: kmymoney/views/khomeview_p.h:1388 kmymoney/views/khomeview_p.h:1417
+#, fuzzy, kde-format
+#| msgid "Balance"
+msgctxt "@title:column table on home page"
+msgid "Balance"
+msgstr "Saldo"
+
 #: kmymoney/views/khomeview_p.h:1401
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Liability Accounts"
+msgctxt "@title:column table on home page"
 msgid "Liability Accounts"
 msgstr "Računi obveznosti"
 
@@ -19911,7 +19950,9 @@ msgid "Total Liabilities"
 msgstr "Skupaj obveznosti"
 
 #: kmymoney/views/khomeview_p.h:1799
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Cash Flow Summary"
+msgctxt "@title Home page section"
 msgid "Cash Flow Summary"
 msgstr "Povzetek denarnega toka"
 
@@ -25642,6 +25683,9 @@ msgstr "Podprt je samo eden od --csv in --html"
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr "shranjevanje poročila '%1' v '%2'"
+
+#~ msgid "Today's due payments"
+#~ msgstr "Današnja zapadla plačila"
 
 #~ msgid "Annualized Return"
 #~ msgstr "Letni donos"

@@ -12,15 +12,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-27 01:57+0000\n"
-"PO-Revision-Date: 2024-12-11 11:29+0100\n"
+"POT-Creation-Date: 2024-12-28 02:06+0000\n"
+"PO-Revision-Date: 2024-12-27 11:19+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.0\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -3202,7 +3202,7 @@ msgstr "Lettertype voor Cel"
 msgid "Header font"
 msgstr "Lettertype voor Kop"
 
-#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:88
+#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:90
 #, kde-format
 msgid "Choose file path"
 msgstr "Bestandspad kiezen"
@@ -6138,9 +6138,7 @@ msgstr "Bezittingen en schulden"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:68
-#: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1544
 #, kde-format
 msgid "Budget"
 msgstr "Budget"
@@ -10050,8 +10048,7 @@ msgstr "Selectie van memoveld wissen."
 #: kmymoney/plugins/views/reports/core/listtable.cpp:738
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1018 kmymoney/views/khomeview_p.h:1388
-#: kmymoney/views/khomeview_p.h:1417
+#: kmymoney/views/khomeview_p.h:1018
 #, kde-format
 msgid "Balance"
 msgstr "Saldo"
@@ -16688,8 +16685,6 @@ msgid "Charts"
 msgstr "Grafieken"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:674
-#: kmymoney/views/khomeview_p.h:1068
-#, kde-format
 msgid "Favorite Reports"
 msgstr "Favoriete Rapporten"
 
@@ -17048,10 +17043,17 @@ msgstr "Verwijder dit rapport permanent"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:82
 #: kmymoney/plugins/views/reports/reportsview.cpp:118
-#: kmymoney/views/khomeview_p.h:557
 #, kde-format
 msgid "Net Worth Forecast"
 msgstr "Netto waarde prognose"
+
+#: kmymoney/plugins/views/reports/reportsview.cpp:154
+#: kmymoney/views/khomeview_p.h:1544
+#, fuzzy, kde-format
+#| msgid "Budget"
+msgctxt "@title Home page section"
+msgid "Budget"
+msgstr "Budget"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:159
 #, kde-format
@@ -19258,41 +19260,32 @@ msgstr "Leeg memo"
 msgctxt "@info %2 contains list of account names separated by <br>"
 msgid "<qt>Closed account:<br><br>%2</qt>"
 msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<qt>Gesloten rekening:<br><br>%2</qt>"
+msgstr[1] "<qt>Gesloten rekeningen:<br><br>%2</qt>"
 
 #: kmymoney/views/journaldelegate.cpp:348
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip Protected"
-#| msgid ""
-#| "This widget is currently protected because the transaction references a "
-#| "closed account."
+#, kde-format
 msgctxt "@info Unable to edit "
 msgid ""
 "KMyMoney does not support to edit transaction that reference closed accounts."
 msgstr ""
-"Dit widget is op dit moment beschermd omdat de transactie verwijst naar een "
-"gesloten rekening."
+"KMyMoney ondersteunt het bewerken van transacties die verwijzen naar "
+"gesloten rekeningen."
 
 #: kmymoney/views/journaldelegate.cpp:350
-#, fuzzy, kde-format
-#| msgid "Deleting transactions"
+#, kde-format
 msgctxt "@title:window"
 msgid "Prevent editing transactions"
-msgstr "Transacties verwijderen"
+msgstr "Bewerken van transacties voorkomen"
 
 #: kmymoney/views/journaldelegate.cpp:364
-#, fuzzy, kde-format
-#| msgctxt "@info Editing multiple transactions"
-#| msgid ""
-#| "The current implementation cannot modify multiple transactions in "
-#| "different accounts."
+#, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
 "The current implementation cannot modify multiple transactions in this view."
 msgstr ""
-"De huidige implementatie kan geen meerdere transacties in verschillende "
-"rekeningen wijzigen."
+"De huidige implementatie kan niet meerdere transacties in deze weergave "
+"wijzigen."
 
 #: kmymoney/views/kaccountsview.cpp:170
 #: kmymoney/views/kinstitutionsview.cpp:208
@@ -19573,24 +19566,24 @@ msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "Frequentie periodieke transactie gewijzigd"
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:611
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Kan periodieke transactie niet toevoegen: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:611
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Periodieke transactie toevoegen"
 
-#: kmymoney/views/keditscheduledlg.cpp:639
-#: kmymoney/views/keditscheduledlg.cpp:682
-#: kmymoney/views/keditscheduledlg.cpp:692
+#: kmymoney/views/keditscheduledlg.cpp:641
+#: kmymoney/views/keditscheduledlg.cpp:684
+#: kmymoney/views/keditscheduledlg.cpp:694
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Kan periodieke transactie '%1' niet wijzigen"
 
-#: kmymoney/views/keditscheduledlg.cpp:668
+#: kmymoney/views/keditscheduledlg.cpp:670
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -19605,7 +19598,7 @@ msgstr ""
 "van de laatste betaling zelf invoert. Wilt u de datum van de laatste "
 "betaling zelf invoeren?</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:673
+#: kmymoney/views/keditscheduledlg.cpp:675
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Herstel laatste betaaldatum"
@@ -19809,14 +19802,30 @@ msgid "Loading..."
 msgstr "Bezig met laden..."
 
 #: kmymoney/views/khomeview_p.h:496
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Preferred Accounts"
+msgctxt "@title Home page section"
 msgid "Preferred Accounts"
 msgstr "Voorkeursrekeningen"
 
-#: kmymoney/views/khomeview_p.h:502 kmymoney/views/khomeview_p.h:504
+#: kmymoney/views/khomeview_p.h:502
 #, kde-format
 msgid "Payment Accounts"
 msgstr "Betaalrekeningen"
+
+#: kmymoney/views/khomeview_p.h:504
+#, fuzzy, kde-format
+#| msgid "Payment Accounts"
+msgctxt "@title Home page section"
+msgid "Payment Accounts"
+msgstr "Betaalrekeningen"
+
+#: kmymoney/views/khomeview_p.h:557
+#, fuzzy, kde-format
+#| msgid "Net Worth Forecast"
+msgctxt "@title Home page section"
+msgid "Net Worth Forecast"
+msgstr "Netto waarde prognose"
 
 #: kmymoney/views/khomeview_p.h:608
 #, kde-format
@@ -19842,22 +19851,30 @@ msgid "Balance after"
 msgstr "Saldo na"
 
 #: kmymoney/views/khomeview_p.h:677
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Scheduled Payments"
+msgctxt "@title Home page section"
 msgid "Scheduled Payments"
 msgstr "Geplande betalingen"
 
 #: kmymoney/views/khomeview_p.h:687
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Overdue payments"
+msgctxt "@title Home page sub-section"
 msgid "Overdue payments"
 msgstr "Achterstallige betalingen"
 
 #: kmymoney/views/khomeview_p.h:724
-#, kde-format
-msgid "Today's due payments"
-msgstr "Betalingen voor vandaag"
+#, fuzzy, kde-format
+#| msgid "Payments to"
+msgctxt "@title Home page sub-section"
+msgid "Payments due today"
+msgstr "Betalingen aan"
 
 #: kmymoney/views/khomeview_p.h:739
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Future payments"
+msgctxt "@title Home page sub-section"
 msgid "Future payments"
 msgstr "Toekomstige betalingen"
 
@@ -19918,9 +19935,19 @@ msgstr "!R"
 msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr "Naar minimum saldo<br>/ maximale krediet"
 
+#: kmymoney/views/khomeview_p.h:1068
+#, fuzzy, kde-format
+#| msgid "Favorite Reports"
+msgctxt "@title Home page section"
+msgid "Favorite Reports"
+msgstr "Favoriete Rapporten"
+
 #: kmymoney/views/khomeview_p.h:1124
-#, kde-format
-msgctxt "Forecast days"
+#, fuzzy, kde-format
+#| msgctxt "Forecast days"
+#| msgid "%1 Day Forecast"
+#| msgid_plural "%1 Day Forecast"
+msgctxt "@title Home page section Forecast days"
 msgid "%1 Day Forecast"
 msgid_plural "%1 Day Forecast"
 msgstr[0] "%1 dagen prognose"
@@ -19935,17 +19962,30 @@ msgstr[0] "%1 dag"
 msgstr[1] "%1 dagen"
 
 #: kmymoney/views/khomeview_p.h:1358
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Assets and Liabilities Summary"
+msgctxt "@title Home page section"
 msgid "Assets and Liabilities Summary"
 msgstr "Samenvatting van bezittingen en schulden"
 
 #: kmymoney/views/khomeview_p.h:1372
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Asset Accounts"
+msgctxt "@title:column table on home page"
 msgid "Asset Accounts"
 msgstr "Activarekeningen"
 
+#: kmymoney/views/khomeview_p.h:1388 kmymoney/views/khomeview_p.h:1417
+#, fuzzy, kde-format
+#| msgid "Balance"
+msgctxt "@title:column table on home page"
+msgid "Balance"
+msgstr "Saldo"
+
 #: kmymoney/views/khomeview_p.h:1401
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Liability Accounts"
+msgctxt "@title:column table on home page"
 msgid "Liability Accounts"
 msgstr "Rekening voor schulden"
 
@@ -19960,7 +20000,9 @@ msgid "Total Liabilities"
 msgstr "Bezittingen en schulden"
 
 #: kmymoney/views/khomeview_p.h:1799
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Cash Flow Summary"
+msgctxt "@title Home page section"
 msgid "Cash Flow Summary"
 msgstr "Samenvatting van cashflow"
 
@@ -25717,6 +25759,9 @@ msgstr "Slechts een van --csv en --html wordt ondersteund"
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr "rapport '%1' wordt opgeslagen in '%2'"
+
+#~ msgid "Today's due payments"
+#~ msgstr "Betalingen voor vandaag"
 
 #~ msgid "Annualized Return"
 #~ msgstr "Jaarlijkse opbrengst"

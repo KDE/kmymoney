@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-27 01:57+0000\n"
+"POT-Creation-Date: 2024-12-28 02:06+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -3021,7 +3021,7 @@ msgstr ""
 msgid "Header font"
 msgstr ""
 
-#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:88
+#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:90
 #, kde-format
 msgid "Choose file path"
 msgstr ""
@@ -5880,9 +5880,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:68
-#: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1544
 #, kde-format
 msgid "Budget"
 msgstr ""
@@ -9908,8 +9906,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/core/listtable.cpp:738
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1018 kmymoney/views/khomeview_p.h:1388
-#: kmymoney/views/khomeview_p.h:1417
+#: kmymoney/views/khomeview_p.h:1018
 #, kde-format
 msgid "Balance"
 msgstr "تەڭپۇڭ"
@@ -16305,8 +16302,6 @@ msgid "Charts"
 msgstr "دىئاگرامما"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:674
-#: kmymoney/views/khomeview_p.h:1068
-#, kde-format
 msgid "Favorite Reports"
 msgstr ""
 
@@ -16665,10 +16660,17 @@ msgstr ""
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:82
 #: kmymoney/plugins/views/reports/reportsview.cpp:118
-#: kmymoney/views/khomeview_p.h:557
 #, kde-format
 msgid "Net Worth Forecast"
 msgstr ""
+
+#: kmymoney/plugins/views/reports/reportsview.cpp:154
+#: kmymoney/views/khomeview_p.h:1544
+#, fuzzy, kde-format
+#| msgid "Reports"
+msgctxt "@title Home page section"
+msgid "Budget"
+msgstr "دوكلات"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:159
 #, kde-format
@@ -19038,24 +19040,24 @@ msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:611
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:611
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:639
-#: kmymoney/views/keditscheduledlg.cpp:682
-#: kmymoney/views/keditscheduledlg.cpp:692
+#: kmymoney/views/keditscheduledlg.cpp:641
+#: kmymoney/views/keditscheduledlg.cpp:684
+#: kmymoney/views/keditscheduledlg.cpp:694
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:668
+#: kmymoney/views/keditscheduledlg.cpp:670
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -19065,7 +19067,7 @@ msgid ""
 "</qt>"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:673
+#: kmymoney/views/keditscheduledlg.cpp:675
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr ""
@@ -19253,14 +19255,30 @@ msgid "Loading..."
 msgstr "ھېساباتلارنى يۈكلەۋاتىدۇ…"
 
 #: kmymoney/views/khomeview_p.h:496
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Online Accounts"
+msgctxt "@title Home page section"
 msgid "Preferred Accounts"
-msgstr ""
+msgstr "توردىكى ھېساباتلار"
 
-#: kmymoney/views/khomeview_p.h:502 kmymoney/views/khomeview_p.h:504
+#: kmymoney/views/khomeview_p.h:502
 #, kde-format
 msgid "Payment Accounts"
 msgstr ""
+
+#: kmymoney/views/khomeview_p.h:504
+#, fuzzy, kde-format
+#| msgid "Select Account"
+msgctxt "@title Home page section"
+msgid "Payment Accounts"
+msgstr "ھېسابات تاللاش"
+
+#: kmymoney/views/khomeview_p.h:557
+#, fuzzy, kde-format
+#| msgid "Forecast"
+msgctxt "@title Home page section"
+msgid "Net Worth Forecast"
+msgstr "ئالدىن مەلۇمات"
 
 #: kmymoney/views/khomeview_p.h:608
 #, fuzzy, kde-format
@@ -19291,23 +19309,32 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgctxt "Scheduled method"
 #| msgid "Scheduled"
+msgctxt "@title Home page section"
 msgid "Scheduled Payments"
 msgstr "كۈنتەرتىپكە قويۇلغان"
 
 #: kmymoney/views/khomeview_p.h:687
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Scheduled method"
+#| msgid "Scheduled"
+msgctxt "@title Home page sub-section"
 msgid "Overdue payments"
-msgstr ""
+msgstr "كۈنتەرتىپكە قويۇلغان"
 
 #: kmymoney/views/khomeview_p.h:724
-#, kde-format
-msgid "Today's due payments"
-msgstr ""
+#, fuzzy, kde-format
+#| msgid "Payment Method"
+msgctxt "@title Home page sub-section"
+msgid "Payments due today"
+msgstr "پۇل تۆلەش ئۇسۇلى"
 
 #: kmymoney/views/khomeview_p.h:739
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Scheduled method"
+#| msgid "Scheduled"
+msgctxt "@title Home page sub-section"
 msgid "Future payments"
-msgstr ""
+msgstr "كۈنتەرتىپكە قويۇلغان"
 
 #: kmymoney/views/khomeview_p.h:802
 #, kde-format
@@ -19368,10 +19395,17 @@ msgstr "R"
 msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr ""
 
+#: kmymoney/views/khomeview_p.h:1068
+#, fuzzy, kde-format
+#| msgid "Save Report"
+msgctxt "@title Home page section"
+msgid "Favorite Reports"
+msgstr "دوكلات ساقلا"
+
 #: kmymoney/views/khomeview_p.h:1124
 #, fuzzy, kde-format
 #| msgid "Forecast"
-msgctxt "Forecast days"
+msgctxt "@title Home page section Forecast days"
 msgid "%1 Day Forecast"
 msgid_plural "%1 Day Forecast"
 msgstr[0] "ئالدىن مەلۇمات"
@@ -19385,18 +19419,30 @@ msgstr[0] "%1 كۈن"
 
 #: kmymoney/views/khomeview_p.h:1358
 #, kde-format
+msgctxt "@title Home page section"
 msgid "Assets and Liabilities Summary"
 msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1372
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Accounts"
+msgctxt "@title:column table on home page"
 msgid "Asset Accounts"
-msgstr ""
+msgstr "ھېساباتلار"
+
+#: kmymoney/views/khomeview_p.h:1388 kmymoney/views/khomeview_p.h:1417
+#, fuzzy, kde-format
+#| msgid "Balance"
+msgctxt "@title:column table on home page"
+msgid "Balance"
+msgstr "تەڭپۇڭ"
 
 #: kmymoney/views/khomeview_p.h:1401
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Online Accounts"
+msgctxt "@title:column table on home page"
 msgid "Liability Accounts"
-msgstr ""
+msgstr "توردىكى ھېساباتلار"
 
 #: kmymoney/views/khomeview_p.h:1503
 #, kde-format
@@ -19410,6 +19456,7 @@ msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1799
 #, kde-format
+msgctxt "@title Home page section"
 msgid "Cash Flow Summary"
 msgstr ""
 

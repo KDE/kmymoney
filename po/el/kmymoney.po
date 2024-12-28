@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-27 01:57+0000\n"
+"POT-Creation-Date: 2024-12-28 02:06+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -3298,7 +3298,7 @@ msgstr "Γραμματοσειρά κυψέλης"
 msgid "Header font"
 msgstr "Γραμματοσειρά κεφαλίδας"
 
-#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:88
+#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:90
 #, fuzzy, kde-format
 #| msgid "Choose Style"
 msgid "Choose file path"
@@ -6394,9 +6394,7 @@ msgstr "Ενεργητικό και παθητικό"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:68
-#: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1544
 #, kde-format
 msgid "Budget"
 msgstr "Προϋπολογισμός"
@@ -10623,8 +10621,7 @@ msgstr "Καθαρισμός των επιλογών"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:738
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1018 kmymoney/views/khomeview_p.h:1388
-#: kmymoney/views/khomeview_p.h:1417
+#: kmymoney/views/khomeview_p.h:1018
 #, kde-format
 msgid "Balance"
 msgstr "Υπόλοιπο"
@@ -17485,8 +17482,6 @@ msgid "Charts"
 msgstr "Διαγράμματα"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:674
-#: kmymoney/views/khomeview_p.h:1068
-#, kde-format
 msgid "Favorite Reports"
 msgstr "Προτιμώμενες αναφορές"
 
@@ -17850,10 +17845,17 @@ msgstr "Μόνιμη διαγραφή αυτής της αναφοράς"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:82
 #: kmymoney/plugins/views/reports/reportsview.cpp:118
-#: kmymoney/views/khomeview_p.h:557
 #, kde-format
 msgid "Net Worth Forecast"
 msgstr "Πρόβλεψη καθαρής αξίας"
+
+#: kmymoney/plugins/views/reports/reportsview.cpp:154
+#: kmymoney/views/khomeview_p.h:1544
+#, fuzzy, kde-format
+#| msgid "Budget"
+msgctxt "@title Home page section"
+msgid "Budget"
+msgstr "Προϋπολογισμός"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:159
 #, kde-format
@@ -20492,24 +20494,24 @@ msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "Βρέθηκε προγραμματισμένη συναλλαγή"
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:611
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Αδυναμία προσθήκης προγραμματισμένης συναλλαγής: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:611
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Προσθήκη προγραμματισμένης συναλλαγής"
 
-#: kmymoney/views/keditscheduledlg.cpp:639
-#: kmymoney/views/keditscheduledlg.cpp:682
-#: kmymoney/views/keditscheduledlg.cpp:692
+#: kmymoney/views/keditscheduledlg.cpp:641
+#: kmymoney/views/keditscheduledlg.cpp:684
+#: kmymoney/views/keditscheduledlg.cpp:694
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Αδυναμία τροποποίησης προγραμματισμένης συναλλαγής '%1'"
 
-#: kmymoney/views/keditscheduledlg.cpp:668
+#: kmymoney/views/keditscheduledlg.cpp:670
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -20531,7 +20533,7 @@ msgstr ""
 "τελευταίας πληρωμής.  Θέλετε να μηδενίσετε την ημερομηνία τελευταίας "
 "πληρωμής;"
 
-#: kmymoney/views/keditscheduledlg.cpp:673
+#: kmymoney/views/keditscheduledlg.cpp:675
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Μηδενισμός ημερομηνίας τελευταίας πληρωμής"
@@ -20737,14 +20739,30 @@ msgid "Loading..."
 msgstr "Φόρτωση %1..."
 
 #: kmymoney/views/khomeview_p.h:496
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Preferred Accounts"
+msgctxt "@title Home page section"
 msgid "Preferred Accounts"
 msgstr "Προτιμώμενοι λογαριασμοί"
 
-#: kmymoney/views/khomeview_p.h:502 kmymoney/views/khomeview_p.h:504
+#: kmymoney/views/khomeview_p.h:502
 #, kde-format
 msgid "Payment Accounts"
 msgstr "Λογαριασμοί πληρωμών"
+
+#: kmymoney/views/khomeview_p.h:504
+#, fuzzy, kde-format
+#| msgid "Payment Accounts"
+msgctxt "@title Home page section"
+msgid "Payment Accounts"
+msgstr "Λογαριασμοί πληρωμών"
+
+#: kmymoney/views/khomeview_p.h:557
+#, fuzzy, kde-format
+#| msgid "Net Worth Forecast"
+msgctxt "@title Home page section"
+msgid "Net Worth Forecast"
+msgstr "Πρόβλεψη καθαρής αξίας"
 
 #: kmymoney/views/khomeview_p.h:608
 #, fuzzy, kde-format
@@ -20774,21 +20792,28 @@ msgstr "Υπόλοιπο μετά"
 #: kmymoney/views/khomeview_p.h:677
 #, fuzzy, kde-format
 #| msgid "Schedule name:"
+msgctxt "@title Home page section"
 msgid "Scheduled Payments"
 msgstr "Όνομα προγραμματισμένης συναλλαγής:"
 
 #: kmymoney/views/khomeview_p.h:687
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Overdue payments"
+msgctxt "@title Home page sub-section"
 msgid "Overdue payments"
 msgstr "Καθυστερήσεις πληρωμών"
 
 #: kmymoney/views/khomeview_p.h:724
-#, kde-format
-msgid "Today's due payments"
-msgstr "Πληρωμές με λήξη πληρωμής σήμερα"
+#, fuzzy, kde-format
+#| msgid "Payments to"
+msgctxt "@title Home page sub-section"
+msgid "Payments due today"
+msgstr "Πληρωμές προς"
 
 #: kmymoney/views/khomeview_p.h:739
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Future payments"
+msgctxt "@title Home page sub-section"
 msgid "Future payments"
 msgstr "Μελλοντικές πληρωμές"
 
@@ -20853,10 +20878,17 @@ msgstr "R"
 msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr "Προς το ελάχιστο υπόλοιπο / μέγιστη πίστωση"
 
+#: kmymoney/views/khomeview_p.h:1068
+#, fuzzy, kde-format
+#| msgid "Favorite Reports"
+msgctxt "@title Home page section"
+msgid "Favorite Reports"
+msgstr "Προτιμώμενες αναφορές"
+
 #: kmymoney/views/khomeview_p.h:1124
 #, fuzzy, kde-format
 #| msgid "%1 Day Forecast"
-msgctxt "Forecast days"
+msgctxt "@title Home page section Forecast days"
 msgid "%1 Day Forecast"
 msgid_plural "%1 Day Forecast"
 msgstr[0] "Πρόβλεψη %1 ημερών"
@@ -20871,17 +20903,30 @@ msgstr[0] "%1 ημέρα"
 msgstr[1] "%1 ημέρες"
 
 #: kmymoney/views/khomeview_p.h:1358
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Assets and Liabilities Summary"
+msgctxt "@title Home page section"
 msgid "Assets and Liabilities Summary"
 msgstr "Περίληψη ενεργητικού και παθητικού"
 
 #: kmymoney/views/khomeview_p.h:1372
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Asset Accounts"
+msgctxt "@title:column table on home page"
 msgid "Asset Accounts"
 msgstr "Λογαριασμοί ενεργητικού"
 
+#: kmymoney/views/khomeview_p.h:1388 kmymoney/views/khomeview_p.h:1417
+#, fuzzy, kde-format
+#| msgid "Balance"
+msgctxt "@title:column table on home page"
+msgid "Balance"
+msgstr "Υπόλοιπο"
+
 #: kmymoney/views/khomeview_p.h:1401
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Liability Accounts"
+msgctxt "@title:column table on home page"
 msgid "Liability Accounts"
 msgstr "Λογαριασμοί παθητικού"
 
@@ -20896,7 +20941,9 @@ msgid "Total Liabilities"
 msgstr "Σύνολο παθητικού"
 
 #: kmymoney/views/khomeview_p.h:1799
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Cash Flow Summary"
+msgctxt "@title Home page section"
 msgid "Cash Flow Summary"
 msgstr "Περίληψη ταμειακής ρευστότητας"
 
@@ -26866,6 +26913,9 @@ msgstr ""
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr ""
+
+#~ msgid "Today's due payments"
+#~ msgstr "Πληρωμές με λήξη πληρωμής σήμερα"
 
 #~ msgid "Annualized Return"
 #~ msgstr "Απόδοση σε ετήσια βάση"

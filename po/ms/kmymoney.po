@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-27 01:57+0000\n"
+"POT-Creation-Date: 2024-12-28 02:06+0000\n"
 "PO-Revision-Date: 2009-09-18 17:20+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <kedidiemas@yahoogroups.com>\n"
@@ -2976,7 +2976,7 @@ msgstr ""
 msgid "Header font"
 msgstr ""
 
-#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:88
+#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:90
 #, kde-format
 msgid "Choose file path"
 msgstr ""
@@ -5760,9 +5760,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:68
-#: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1544
 #, kde-format
 msgid "Budget"
 msgstr ""
@@ -9633,8 +9631,7 @@ msgstr "Seting warna"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:738
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1018 kmymoney/views/khomeview_p.h:1388
-#: kmymoney/views/khomeview_p.h:1417
+#: kmymoney/views/khomeview_p.h:1018
 #, fuzzy, kde-format
 msgid "Balance"
 msgstr "Baki"
@@ -15951,8 +15948,6 @@ msgid "Charts"
 msgstr "Carta"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:674
-#: kmymoney/views/khomeview_p.h:1068
-#, kde-format
 msgid "Favorite Reports"
 msgstr ""
 
@@ -16311,10 +16306,16 @@ msgstr ""
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:82
 #: kmymoney/plugins/views/reports/reportsview.cpp:118
-#: kmymoney/views/khomeview_p.h:557
 #, fuzzy, kde-format
 msgid "Net Worth Forecast"
 msgstr "Seting Fon"
+
+#: kmymoney/plugins/views/reports/reportsview.cpp:154
+#: kmymoney/views/khomeview_p.h:1544
+#, fuzzy, kde-format
+msgctxt "@title Home page section"
+msgid "Budget"
+msgstr "Pilihan"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:159
 #, kde-format
@@ -18616,24 +18617,24 @@ msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "Jadual"
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:611
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:611
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:639
-#: kmymoney/views/keditscheduledlg.cpp:682
-#: kmymoney/views/keditscheduledlg.cpp:692
+#: kmymoney/views/keditscheduledlg.cpp:641
+#: kmymoney/views/keditscheduledlg.cpp:684
+#: kmymoney/views/keditscheduledlg.cpp:694
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:668
+#: kmymoney/views/keditscheduledlg.cpp:670
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -18643,7 +18644,7 @@ msgid ""
 "</qt>"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:673
+#: kmymoney/views/keditscheduledlg.cpp:675
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr ""
@@ -18830,14 +18831,27 @@ msgid "Loading..."
 msgstr "Menyimpan fail..."
 
 #: kmymoney/views/khomeview_p.h:496
-#, kde-format
+#, fuzzy, kde-format
+msgctxt "@title Home page section"
 msgid "Preferred Accounts"
-msgstr ""
+msgstr "Akaun"
 
-#: kmymoney/views/khomeview_p.h:502 kmymoney/views/khomeview_p.h:504
+#: kmymoney/views/khomeview_p.h:502
 #, kde-format
 msgid "Payment Accounts"
 msgstr ""
+
+#: kmymoney/views/khomeview_p.h:504
+#, fuzzy, kde-format
+msgctxt "@title Home page section"
+msgid "Payment Accounts"
+msgstr "akaun"
+
+#: kmymoney/views/khomeview_p.h:557
+#, fuzzy, kde-format
+msgctxt "@title Home page section"
+msgid "Net Worth Forecast"
+msgstr "Seting Fon"
 
 #: kmymoney/views/khomeview_p.h:608
 #, fuzzy, kde-format
@@ -18864,23 +18878,27 @@ msgstr ""
 
 #: kmymoney/views/khomeview_p.h:677
 #, fuzzy, kde-format
+msgctxt "@title Home page section"
 msgid "Scheduled Payments"
 msgstr "Jadual"
 
 #: kmymoney/views/khomeview_p.h:687
-#, kde-format
+#, fuzzy, kde-format
+msgctxt "@title Home page sub-section"
 msgid "Overdue payments"
-msgstr ""
+msgstr "Jadual"
 
 #: kmymoney/views/khomeview_p.h:724
-#, kde-format
-msgid "Today's due payments"
-msgstr ""
+#, fuzzy, kde-format
+msgctxt "@title Home page sub-section"
+msgid "Payments due today"
+msgstr "Bayaran"
 
 #: kmymoney/views/khomeview_p.h:739
-#, kde-format
+#, fuzzy, kde-format
+msgctxt "@title Home page sub-section"
 msgid "Future payments"
-msgstr ""
+msgstr "Bayaran"
 
 #: kmymoney/views/khomeview_p.h:802
 #, kde-format
@@ -18939,9 +18957,15 @@ msgstr "R"
 msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr ""
 
+#: kmymoney/views/khomeview_p.h:1068
+#, fuzzy, kde-format
+msgctxt "@title Home page section"
+msgid "Favorite Reports"
+msgstr "Seting Fon"
+
 #: kmymoney/views/khomeview_p.h:1124
 #, fuzzy, kde-format
-msgctxt "Forecast days"
+msgctxt "@title Home page section Forecast days"
 msgid "%1 Day Forecast"
 msgid_plural "%1 Day Forecast"
 msgstr[0] "Format Tarikh"
@@ -18957,18 +18981,28 @@ msgstr[1] "%1 hari"
 
 #: kmymoney/views/khomeview_p.h:1358
 #, kde-format
+msgctxt "@title Home page section"
 msgid "Assets and Liabilities Summary"
 msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1372
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Account"
+msgctxt "@title:column table on home page"
 msgid "Asset Accounts"
-msgstr ""
+msgstr "Akaun"
+
+#: kmymoney/views/khomeview_p.h:1388 kmymoney/views/khomeview_p.h:1417
+#, fuzzy, kde-format
+msgctxt "@title:column table on home page"
+msgid "Balance"
+msgstr "Baki"
 
 #: kmymoney/views/khomeview_p.h:1401
-#, kde-format
+#, fuzzy, kde-format
+msgctxt "@title:column table on home page"
 msgid "Liability Accounts"
-msgstr ""
+msgstr "Akaun"
 
 #: kmymoney/views/khomeview_p.h:1503
 #, kde-format
@@ -18982,6 +19016,7 @@ msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1799
 #, kde-format
+msgctxt "@title Home page section"
 msgid "Cash Flow Summary"
 msgstr ""
 
@@ -24614,10 +24649,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Dequeue"
 #~ msgstr "Padam"
-
-#, fuzzy
-#~ msgid "Filter Accounts"
-#~ msgstr "Akaun"
 
 #, fuzzy
 #~ msgid "Type/Name"
