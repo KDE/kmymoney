@@ -65,7 +65,9 @@ KSettingsGeneral::KSettingsGeneral(QWidget* parent) :
     connect(d->ui->choosePath, &QAbstractButton::pressed, this, &KSettingsGeneral::slotChooseLogPath);
     d->initialHideZeroBalanceEquities = d->ui->kcfg_HideZeroBalanceEquities->isChecked();
 
-    connect(d->ui->kcfg_HideZeroBalanceAccountsHome, &QCheckBox::stateChanged, this, &KSettingsGeneral::hideZeroBalanceAccountsHomeChanged);
+    connect(d->ui->kcfg_HideZeroBalanceAccountsHome, &QCheckBox::stateChanged, this, [&](int state) {
+        hideZeroBalanceAccountsHomeChanged(state == Qt::Checked);
+    });
 }
 
 KSettingsGeneral::~KSettingsGeneral()

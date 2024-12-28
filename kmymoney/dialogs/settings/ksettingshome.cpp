@@ -73,7 +73,9 @@ KSettingsHome::KSettingsHome(QWidget* parent) :
     connect(d->ui->m_upButton, &QAbstractButton::clicked, this, &KSettingsHome::slotMoveUp);
     connect(d->ui->m_downButton, &QAbstractButton::clicked, this, &KSettingsHome::slotMoveDown);
 
-    connect(d->ui->kcfg_HideZeroBalanceAccountsHome, &QCheckBox::stateChanged, this, &KSettingsHome::hideZeroBalanceAccountsHomeChanged);
+    connect(d->ui->kcfg_HideZeroBalanceAccountsHome, &QCheckBox::stateChanged, this, [&](int state) {
+        hideZeroBalanceAccountsHomeChanged(state == Qt::Checked);
+    });
 
     // Don't show it to the user, we only need it to load and save the settings
     d->ui->kcfg_ItemList->hide();
