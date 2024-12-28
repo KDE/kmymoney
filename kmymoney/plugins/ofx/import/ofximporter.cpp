@@ -184,7 +184,9 @@ void OFXImporter::slotImportFile()
             statementInterface()->showMessages(d->m_statementlist.count());
 
         } else {
-            KMessageBox::error(0, i18n("Unable to import %1 using the OFX importer plugin.  This file is not the correct format.", url.toDisplayString()), i18n("Incorrect format"));
+            KMessageBox::error(nullptr,
+                               i18n("Unable to import %1 using the OFX importer plugin.  This file is not the correct format.", url.toDisplayString()),
+                               i18n("Incorrect format"));
         }
     }
     delete option;
@@ -879,7 +881,7 @@ void OFXImporter::protocols(QStringList& protocolList) const
 QWidget* OFXImporter::accountConfigTab(const MyMoneyAccount& acc, QString& name)
 {
     name = i18n("Online settings");
-    d->m_statusDlg = new KOnlineBankingStatus(acc, 0);
+    d->m_statusDlg = new KOnlineBankingStatus(acc, nullptr);
     return d->m_statusDlg;
 }
 
@@ -946,7 +948,7 @@ bool OFXImporter::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer
     Q_UNUSED(acc);
 
     bool rc = false;
-    QPointer<KOnlineBankingSetupWizard> wiz = new KOnlineBankingSetupWizard(0);
+    QPointer<KOnlineBankingSetupWizard> wiz = new KOnlineBankingSetupWizard(nullptr);
     if (wiz->isInit()) {
         if (wiz->exec() == QDialog::Accepted) {
             rc = wiz->chosenSettings(settings);
@@ -1010,7 +1012,7 @@ bool OFXImporter::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
             d->m_timestampOffset = 0;
         }
     } catch (const MyMoneyException &e) {
-        KMessageBox::information(0, i18n("Error connecting to bank: %1", QString::fromLatin1(e.what())));
+        KMessageBox::information(nullptr, i18n("Error connecting to bank: %1", QString::fromLatin1(e.what())));
     }
 
     return false;
@@ -1020,7 +1022,13 @@ void OFXImporter::slotImportFile(const QString& url)
 {
     qDebug() << "OfxImporterPlugin::slotImportFile";
     if (!import(url)) {
-        KMessageBox::error(0, QString("<qt>%1</qt>").arg(i18n("<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The plugin returned the following error:</p><p>%2</p>", url, lastError())), i18n("Importing error"));
+        KMessageBox::error(
+            nullptr,
+            QString("<qt>%1</qt>")
+                .arg(i18n("<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The plugin returned the following error:</p><p>%2</p>",
+                          url,
+                          lastError())),
+            i18n("Importing error"));
     }
 }
 

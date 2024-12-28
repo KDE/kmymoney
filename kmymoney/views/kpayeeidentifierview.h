@@ -45,7 +45,7 @@ class payeeIdentifierDelegate : public StyledItemDelegateForwarder
 {
     Q_OBJECT
 public:
-    explicit payeeIdentifierDelegate(QObject* parent = 0);
+    explicit payeeIdentifierDelegate(QObject* parent = nullptr);
     virtual QAbstractItemDelegate* getItemDelegate(const QModelIndex& index) const override;
 };
 

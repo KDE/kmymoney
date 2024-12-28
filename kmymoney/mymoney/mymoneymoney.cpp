@@ -256,13 +256,13 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
     // if requested, insert thousand separators every three digits
     if (showThousandSeparator) {
         int pos = res.length();
-        while ((0 < (pos -= 3)) && thousandSeparator() != 0)
+        while ((0 < (pos -= 3)) && thousandSeparator() != nullptr)
             res.insert(pos, thousandSeparator());
     }
 
     // take care of the fractional part
     if (prec > 0 || (prec == -1 && right != 0)) {
-        if (decimalSeparator() != 0)
+        if (decimalSeparator() != nullptr)
             res += decimalSeparator();
 
         auto rs  = QString::fromLatin1("%1").arg(right.get_str().c_str());

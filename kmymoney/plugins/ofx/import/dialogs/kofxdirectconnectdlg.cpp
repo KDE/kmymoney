@@ -42,12 +42,12 @@ public:
     bool     m_firstData;
 };
 
-KOfxDirectConnectDlg::KOfxDirectConnectDlg(const MyMoneyAccount& account, QWidget *parent) :
-    KOfxDirectConnectDlgDecl(parent),
-    d(new Private),
-    m_tmpfile(0),
-    m_connector(account),
-    m_job(0)
+KOfxDirectConnectDlg::KOfxDirectConnectDlg(const MyMoneyAccount& account, QWidget* parent)
+    : KOfxDirectConnectDlgDecl(parent)
+    , d(new Private)
+    , m_tmpfile(nullptr)
+    , m_connector(account)
+    , m_job(nullptr)
 {
 }
 
@@ -210,7 +210,7 @@ void KOfxDirectConnectDlg::slotOfxFinished(KJob* /* e */)
         qDebug("Return from signal statementReady() processing");
     }
     delete m_tmpfile;
-    m_tmpfile = 0;
+    m_tmpfile = nullptr;
     hide();
     qDebug("Finishing slotOfxFinished");
 }
@@ -222,7 +222,7 @@ void KOfxDirectConnectDlg::reject()
     if (m_tmpfile) {
         m_tmpfile->close();
         delete m_tmpfile;
-        m_tmpfile = 0;
+        m_tmpfile = nullptr;
     }
     QDialog::reject();
 }

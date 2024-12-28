@@ -40,7 +40,7 @@ class KMM_BASE_WIDGETS_EXPORT KMyMoneyReconcileCombo : public KMyMoneyMVCCombo
     Q_DISABLE_COPY(KMyMoneyReconcileCombo)
 
 public:
-    explicit KMyMoneyReconcileCombo(QWidget *w = 0);
+    explicit KMyMoneyReconcileCombo(QWidget* w = nullptr);
     ~KMyMoneyReconcileCombo() override;
 
     void setState(eMyMoney::Split::State state);

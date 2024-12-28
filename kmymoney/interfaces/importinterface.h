@@ -33,7 +33,7 @@ class KMM_PLUGIN_EXPORT ImportInterface : public QObject
     Q_OBJECT
 
 public:
-    explicit ImportInterface(QObject* parent, const char* name = 0);
+    explicit ImportInterface(QObject* parent, const char* name = nullptr);
     virtual ~ImportInterface();
 
     /**

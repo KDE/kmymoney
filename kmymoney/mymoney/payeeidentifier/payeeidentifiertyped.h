@@ -51,7 +51,7 @@ payeeIdentifierTyped<T>::payeeIdentifierTyped(T* pid)
     : payeeIdentifier(pid),
       m_payeeIdentifierTyped(pid)
 {
-    if (m_payeeIdentifierTyped == 0)
+    if (m_payeeIdentifierTyped == nullptr)
         throw PAYEEIDENTIFIEREMPTYEXCEPTION;
 }
 
@@ -83,8 +83,8 @@ payeeIdentifierTyped<T>::payeeIdentifierTyped(const payeeIdentifier& other)
     : payeeIdentifier(other)
 {
     m_payeeIdentifierTyped = dynamic_cast<T*>(payeeIdentifier::data());
-    if (m_payeeIdentifierTyped == 0) {
-        if (payeeIdentifier::data() == 0)
+    if (m_payeeIdentifierTyped == nullptr) {
+        if (payeeIdentifier::data() == nullptr)
             throw PAYEEIDENTIFIEREMPTYEXCEPTION;
         throw PAYEEIDENTIFIERBADCASTEXCEPTION;
     }

@@ -134,7 +134,7 @@ public:
         QPointer<KEditLoanWizard> wizard = new KEditLoanWizard(m_currentAccount);
         q->connect(wizard, &KEditLoanWizard::newCategory, q, &KAccountsView::slotNewCategory);
         q->connect(wizard, &KEditLoanWizard::createPayee, q, &KAccountsView::slotNewPayee);
-        if (wizard->exec() == QDialog::Accepted && wizard != 0) {
+        if (wizard->exec() == QDialog::Accepted && wizard != nullptr) {
             MyMoneySchedule sch;
             try {
                 sch = file->schedule(m_currentAccount.value("schedule").toLatin1());
@@ -188,8 +188,7 @@ public:
         auto tid = file->openingBalanceTransaction(m_currentAccount);
         MyMoneyTransaction t;
         MyMoneySplit s0, s1;
-        QPointer<KNewAccountDlg> dlg =
-            new KNewAccountDlg(m_currentAccount, true, false, 0, i18n("Edit account '%1'", m_currentAccount.name()));
+        QPointer<KNewAccountDlg> dlg = new KNewAccountDlg(m_currentAccount, true, false, nullptr, i18n("Edit account '%1'", m_currentAccount.name()));
 
         if (!tid.isEmpty()) {
             try {

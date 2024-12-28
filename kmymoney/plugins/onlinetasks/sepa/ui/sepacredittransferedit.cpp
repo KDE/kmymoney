@@ -46,7 +46,7 @@ protected:
                                           ? ibanBicDelegate
                                           : defaultDelegate;
 
-        if (delegate == 0) {
+        if (delegate == nullptr) {
             if (ibanBicRequested) {
                 // Use this->parent() as parent because "this" is const
                 ibanBicDelegate = new ibanBicItemDelegate(this->parent());
@@ -68,8 +68,9 @@ class payeeIdentifierCompleterPopup : public QTreeView
     Q_OBJECT
 
 public:
-    payeeIdentifierCompleterPopup(QWidget* parent = 0)
-        : QTreeView(parent) {
+    payeeIdentifierCompleterPopup(QWidget* parent = nullptr)
+        : QTreeView(parent)
+    {
         setRootIsDecorated(false);
         setAlternatingRowColors(true);
         setAnimated(true);
@@ -88,8 +89,10 @@ public:
         payeeIban = payeeIdentifierModel::payeeIdentifierUserRole, /**< electornic IBAN of payee */
     };
 
-    ibanBicFilterProxyModel(QObject* parent = 0)
-        : QSortFilterProxyModel(parent) {}
+    ibanBicFilterProxyModel(QObject* parent = nullptr)
+        : QSortFilterProxyModel(parent)
+    {
+    }
 
     QVariant data(const QModelIndex &index, int role) const final override {
         if (role == payeeIban) {
@@ -125,7 +128,7 @@ class ibanBicCompleter : public QCompleter
     Q_OBJECT
 
 public:
-    ibanBicCompleter(QObject* parent = 0);
+    ibanBicCompleter(QObject* parent = nullptr);
 
 Q_SIGNALS:
     void activatedName(const QString& name) const;

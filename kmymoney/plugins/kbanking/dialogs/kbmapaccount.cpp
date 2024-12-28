@@ -41,7 +41,7 @@ KBMapAccount::KBMapAccount(KBankingExt *kb,
     d(new Private)
 {
     d->banking = kb;
-    d->account = 0;
+    d->account = nullptr;
     d->ui.setupUi(this);
 
     d->ui.accountList->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -85,7 +85,7 @@ void KBMapAccount::slotSelectionChanged()
     al = d->ui.accountList->getSelectedAccounts();
     if (al.empty()) {
         d->ui.assignButton->setEnabled(false);
-        d->account = 0;
+        d->account = nullptr;
         return;
     }
     a = al.front();

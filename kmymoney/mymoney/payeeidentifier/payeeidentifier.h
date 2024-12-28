@@ -44,7 +44,7 @@ public:
 
     /** @brief Check if any data is associated */
     bool isNull() const {
-        return (m_payeeIdentifier == 0);
+        return (m_payeeIdentifier == nullptr);
     }
 
     /**
@@ -145,7 +145,7 @@ template<class T>
 T* payeeIdentifier::data()
 {
     T *const ident = dynamic_cast<T*>(operator->());
-    if (ident == 0)
+    if (ident == nullptr)
         throw PAYEEIDENTIFIERBADCASTEXCEPTION;
     return ident;
 }
@@ -154,7 +154,7 @@ template<class T>
 const T* payeeIdentifier::data() const
 {
     const T *const ident = dynamic_cast<const T*>(operator->());
-    if (ident == 0)
+    if (ident == nullptr)
         throw PAYEEIDENTIFIERBADCASTEXCEPTION;
     return ident;
 }

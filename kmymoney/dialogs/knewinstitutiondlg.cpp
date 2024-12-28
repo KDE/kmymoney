@@ -170,7 +170,7 @@ void KNewInstitutionDlg::newInstitution(MyMoneyInstitution& institution)
 {
     institution.clearId();
     QPointer<KNewInstitutionDlg> dlg = new KNewInstitutionDlg(institution);
-    if (dlg->exec() == QDialog::Accepted && dlg != 0) {
+    if (dlg->exec() == QDialog::Accepted && dlg != nullptr) {
         institution = dlg->institution();
         KMyMoneyUtils::newInstitution(institution);
     }

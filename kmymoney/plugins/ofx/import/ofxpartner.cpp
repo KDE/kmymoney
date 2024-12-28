@@ -292,8 +292,8 @@ OfxHttpRequest::OfxHttpRequest(const QString& method,
     : d(new Private)
     , m_dst(dst.toLocalFile())
     , m_error(-1)
-    , m_postJob(0)
-    , m_getJob(0)
+    , m_postJob(nullptr)
+    , m_getJob(nullptr)
 {
 #if defined(Q_OS_WIN)
     // on MS windows, the local file could be presented as
@@ -408,7 +408,7 @@ void OfxHttpRequest::slotOfxFinished(KJob* /* e */)
                 }
                 f.close();
             }
-            KMessageBox::detailedError(0, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed"));
+            KMessageBox::detailedError(nullptr, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed"));
             QFile::remove(m_dst);
 #endif
         }

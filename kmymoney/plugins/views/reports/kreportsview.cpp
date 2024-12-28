@@ -192,7 +192,7 @@ void KReportsView::showEvent(QShowEvent * event)
         QTabBar* bar = d->ui.m_reportTabWidget->findChild<QTabBar*>();
         if (bar) {
             QTabBar::ButtonPosition closeSide =
-                (QTabBar::ButtonPosition)style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition, 0, d->ui.m_reportTabWidget->widget(0));
+                (QTabBar::ButtonPosition)style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition, nullptr, d->ui.m_reportTabWidget->widget(0));
             QWidget* w = bar->tabButton(0, closeSide);
             bar->setTabButton(0, closeSide, nullptr);
             w->deleteLater();
@@ -548,7 +548,7 @@ void KReportsView::slotOpenReport(const QString& id)
         return;
     }
 
-    KReportTab* page = 0;
+    KReportTab* page = nullptr;
 
     // Find the tab which contains the report
     int index = 1;
@@ -575,7 +575,7 @@ void KReportsView::slotOpenReport(const MyMoneyReport& report)
     Q_D(KReportsView);
     if (d->m_needLoad)
         d->init();
-    KReportTab* page = 0;
+    KReportTab* page = nullptr;
 
     // Find the tab which contains the report indicated by this list item
     int index = 1;
@@ -623,7 +623,7 @@ void KReportsView::doItemDoubleClicked(QTreeWidgetItem* item, int column, OpenOp
 
     MyMoneyReport& report = reportTocItem->getReport();
 
-    KReportTab* page = 0;
+    KReportTab* page = nullptr;
 
     // Find the tab which contains the report indicated by this list item
     int index = 1;

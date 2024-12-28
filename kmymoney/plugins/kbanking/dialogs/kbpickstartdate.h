@@ -23,11 +23,11 @@ class KBPickStartDate : public QDialog
     Q_OBJECT
 public:
     KBPickStartDate(KBankingExt* qb,
-                    const QDate &firstPossible,
-                    const QDate &lastUpdate,
+                    const QDate& firstPossible,
+                    const QDate& lastUpdate,
                     const QString& accountName,
                     int defaultChoice,
-                    QWidget* parent = 0,
+                    QWidget* parent = nullptr,
                     bool modal = false);
     ~KBPickStartDate();
 

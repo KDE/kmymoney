@@ -31,7 +31,7 @@ class KMMImportInterface : public ImportInterface
     Q_OBJECT
 
 public:
-    explicit KMMImportInterface(QObject* parent, const char* name = 0);
+    explicit KMMImportInterface(QObject* parent, const char* name = nullptr);
     ~KMMImportInterface() override
     {
     }

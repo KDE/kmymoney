@@ -52,7 +52,7 @@ QUrl KMyMoneyPlugin::KMMImportInterface::selectFile(const QString& title,
     dialog->resize(dialog->width(), dialog->height() + widget->height());
 
     QUrl url;
-    if (dialog->exec() == QDialog::Accepted && dialog != 0) {
+    if (dialog->exec() == QDialog::Accepted && dialog != nullptr) {
         QList<QUrl> selectedUrls = dialog->selectedUrls();
         if (!selectedUrls.isEmpty()) {
             url = selectedUrls.first();
@@ -67,7 +67,7 @@ QUrl KMyMoneyPlugin::KMMImportInterface::selectFile(const QString& title,
     // the callers responsibility to delete the object
 
     if (widget)
-        widget->setParent(0);
+        widget->setParent(nullptr);
 
     delete dialog;
 

@@ -45,7 +45,7 @@ InstitutionPage::InstitutionPage(Wizard* wizard) :
     connect(d_func()->ui->m_institutionComboBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &InstitutionPage::slotSelectInstitution);
 
     slotLoadWidgets();
-    d_func()->ui->m_institutionComboBox->setCurrentItem(0);
+    d_func()->ui->m_institutionComboBox->setCurrentItem(nullptr);
     slotSelectInstitution(0);
 }
 

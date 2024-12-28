@@ -208,7 +208,7 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     , m_needReload(openOption == KReportsView::OpenImmediately)
     , m_isChartViewValid(false)
     , m_isTableViewValid(false)
-    , m_table(0)
+    , m_table(nullptr)
 {
     m_layout->setSpacing(6);
     // TODO
@@ -593,7 +593,7 @@ public:
         QString visibleTopItemText;
 
         bool visibleTopItemFound = true;
-        if (visibleTopItem == NULL) {
+        if (visibleTopItem == nullptr) {
             visibleTopItemFound = false;
         } else {
             // this assumes, that all item-texts in column 0 are unique,
@@ -616,7 +616,7 @@ public:
         QList<ReportGroup>::const_iterator it_group = defaultreports.cbegin();
 
         // the item to be set as current item
-        QTreeWidgetItem* currentItem = 0L;
+        QTreeWidgetItem* currentItem = nullptr;
 
         // group number, this will be used as sort key for reportgroup items
         // we have:
@@ -677,7 +677,7 @@ public:
 
         m_allTocItemGroups.insert(groupName, favoriteTocItemGroup);
 
-        TocItemGroup* orphanTocItemGroup = 0;
+        TocItemGroup* orphanTocItemGroup = nullptr;
 
         QList<MyMoneyReport> customreports = MyMoneyFile::instance()->reportList();
         QList<MyMoneyReport>::const_iterator it_report = customreports.cbegin();
@@ -750,7 +750,7 @@ public:
                 visibleTopItemFound = false;
             } else {
                 visibleTopItem = visibleTopItemList.at(0);
-                if (visibleTopItem == NULL) {
+                if (visibleTopItem == nullptr) {
                     visibleTopItemFound = false;
                 }
             }

@@ -335,7 +335,7 @@ MyMoneyStatementReader::MyMoneyStatementReader()
     : d(new Private)
     , m_userAbort(false)
     , m_payeeCreationMode(eMyMoney::Account::PayeeCreation::AskUser)
-    , m_ft(0)
+    , m_ft(nullptr)
 {
     m_askPayeeCategory = KMyMoneySettings::askForPayeeCategory();
 }
@@ -592,7 +592,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
     if (rc)
         m_ft->commit();
     delete m_ft;
-    m_ft = 0;
+    m_ft = nullptr;
 
     qDebug("Importing statement for '%s' done", qPrintable(d->m_account.name()));
 
@@ -636,7 +636,7 @@ void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Securi
             ft.commit();
             qDebug() << "Created " << security.name() << " with id " << security.id();
         } catch (const MyMoneyException &e) {
-            KMessageBox::error(0, i18n("Error creating security record: %1", QString::fromLatin1(e.what())), i18n("Error"));
+            KMessageBox::error(nullptr, i18n("Error creating security record: %1", QString::fromLatin1(e.what())), i18n("Error"));
         }
     } else {
         qDebug() << "Found " << security.name() << " with id " << security.id();
@@ -742,7 +742,11 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                 // and when we found a security, we added it to the file.
 
                 if (statementTransactionUnderImport.m_strSecurity.isEmpty()) {
-                    KMessageBox::information(0, i18n("This imported statement contains investment transactions with no security.  These transactions will be ignored."), i18n("Security not found"), QString("BlankSecurity"));
+                    KMessageBox::information(
+                        nullptr,
+                        i18n("This imported statement contains investment transactions with no security.  These transactions will be ignored."),
+                        i18n("Security not found"),
+                        QString("BlankSecurity"));
                     return;
                 } else {
                     MyMoneySecurity security;
@@ -807,7 +811,11 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                 s1.setPrice(statementTransactionUnderImport.m_price);
             } else {
                 if (statementTransactionUnderImport.m_shares.isZero()) {
-                    KMessageBox::information(0, i18n("This imported statement contains investment transactions with no share amount.  These transactions will be ignored."), i18n("No share amount provided"), QString("BlankAmount"));
+                    KMessageBox::information(
+                        nullptr,
+                        i18n("This imported statement contains investment transactions with no share amount.  These transactions will be ignored."),
+                        i18n("No share amount provided"),
+                        QString("BlankAmount"));
                     return;
                 }
                 MyMoneyMoney total = -statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees;
@@ -1042,7 +1050,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                 if (!m_dontAskAgain.contains(askKey)) {
                     m_dontAskAgain += askKey;
                 }
-                rc = KMessageBox::questionTwoActionsCancel(0,
+                rc = KMessageBox::questionTwoActionsCancel(nullptr,
                                                            msg,
                                                            i18n("New payee/receiver"),
                                                            KMMYesNo::yes(),
@@ -1383,7 +1391,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         QString message(i18n("Problem adding or matching imported transaction with id '%1': %2", statementTransactionUnderImport.m_strBankID, e.what()));
         qDebug("%s", qPrintable(message));
 
-        int result = KMessageBox::warningContinueCancel(0, message);
+        int result = KMessageBox::warningContinueCancel(nullptr, message);
         if (result == KMessageBox::Cancel)
             throw MYMONEYEXCEPTION_CSTRING("USERABORT");
     }
@@ -1479,7 +1487,7 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
     // and add an option to show all accounts in the dialog.
     type = static_cast<eDialogs::Category>(eDialogs::Category::asset | eDialogs::Category::liability);
 
-    QPointer<KAccountSelectDlg> accountSelect = new KAccountSelectDlg(type, "StatementImport", 0);
+    QPointer<KAccountSelectDlg> accountSelect = new KAccountSelectDlg(type, "StatementImport", nullptr);
     connect(accountSelect, &KAccountSelectDlg::createAccount, this, &MyMoneyStatementReader::slotNewAccount);
 
     accountSelect->setHeader(i18n("Import transactions"));
@@ -1524,7 +1532,9 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
                 //throw MYMONEYEXCEPTION_CSTRING("USERABORT");
                 done = true;
             else
-                KMessageBox::error(0, QLatin1String("<html>") + i18n("You must select an account, create a new one, or press the <b>Abort</b> button.") + QLatin1String("</html>"));
+                KMessageBox::error(nullptr,
+                                   QLatin1String("<html>") + i18n("You must select an account, create a new one, or press the <b>Abort</b> button.")
+                                       + QLatin1String("</html>"));
         }
     }
     delete accountSelect;
@@ -1666,7 +1676,7 @@ bool MyMoneyStatementReader::askUserToEnterScheduleForMatching(const MyMoneySche
                             "Do you want KMyMoney to enter this schedule now so that the transaction can be matched?",
                             gap,scheduleName, splitValue, payeeName);
 
-    const int userAnswer = KMessageBox::questionTwoActions(0,
+    const int userAnswer = KMessageBox::questionTwoActions(nullptr,
                                                            QLatin1String("<html>") + questionMsg + QLatin1String("</html>"),
                                                            i18n("Schedule found"),
                                                            KMMYesNo::yes(),

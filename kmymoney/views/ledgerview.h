@@ -32,7 +32,7 @@ class LedgerView : public QTableView
 {
     Q_OBJECT
 public:
-    explicit LedgerView(QWidget* parent = 0);
+    explicit LedgerView(QWidget* parent = nullptr);
     virtual ~LedgerView();
 
     void setSingleLineDetailRole(eMyMoney::Model::Roles role);

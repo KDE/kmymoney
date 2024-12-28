@@ -76,7 +76,7 @@ void MyMoneyQifWriter::write(const QString& filename, const QString& profile,
         qifFile.close();
         qDebug() << "Export completed.\n";
     } else {
-        KMessageBox::error(0, i18n("Unable to open file '%1' for writing", filename).append(QString::fromLatin1(": ") + qifFile.errorString()));
+        KMessageBox::error(nullptr, i18n("Unable to open file '%1' for writing", filename).append(QString::fromLatin1(": ") + qifFile.errorString()));
     }
 }
 
@@ -341,9 +341,10 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
             }
             if ((action == "DivX") || (action == "IntIncX")) {
                 if (map.value(eMyMoney::Account::Type::Checkings).isEmpty()) {
-                    KMessageBox::error(0,
-                                       QString("<qt>%1</qt>").arg(i18n("Transaction number <b>%1</b> is missing an account assignment.\nTransaction dropped.", count)),
-                                       i18n("Invalid transaction"));
+                    KMessageBox::error(
+                        nullptr,
+                        QString("<qt>%1</qt>").arg(i18n("Transaction number <b>%1</b> is missing an account assignment.\nTransaction dropped.", count)),
+                        i18n("Invalid transaction"));
                     return;
                 }
                 MyMoneySplit sp = t.splitByAccount(map.value(eMyMoney::Account::Type::Checkings), true);

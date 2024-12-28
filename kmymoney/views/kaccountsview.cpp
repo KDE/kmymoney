@@ -341,7 +341,7 @@ void KAccountsView::slotAccountMapOnline()
         }
 
         // cancelled
-        if ((item = popup.exec(QCursor::pos(), item)) == 0) {
+        if ((item = popup.exec(QCursor::pos(), item)) == nullptr) {
             return;
         }
 

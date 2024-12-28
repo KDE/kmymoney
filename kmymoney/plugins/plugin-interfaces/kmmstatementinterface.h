@@ -32,7 +32,7 @@ class KMMStatementInterface : public StatementInterface
     Q_OBJECT
 
 public:
-    explicit KMMStatementInterface(QObject* parent, const char* name = 0);
+    explicit KMMStatementInterface(QObject* parent, const char* name = nullptr);
     ~KMMStatementInterface()
     {
     }

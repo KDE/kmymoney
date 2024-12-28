@@ -14,7 +14,7 @@ class KMM_MODELS_EXPORT OnlineBankingAccountsFilterProxyModel : public QSortFilt
     Q_OBJECT
 
 public:
-    explicit OnlineBankingAccountsFilterProxyModel(QObject* parent = 0);
+    explicit OnlineBankingAccountsFilterProxyModel(QObject* parent = nullptr);
 
     /**
      * @brief Makes accounts which do not support any onlineJob non-selectable

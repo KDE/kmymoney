@@ -8,16 +8,16 @@
 #include "payeeidentifierdata.h"
 
 payeeIdentifier::payeeIdentifier()
-    : m_id(0),
-      m_payeeIdentifier(0)
+    : m_id(0)
+    , m_payeeIdentifier(nullptr)
 {
 }
 
 payeeIdentifier::payeeIdentifier(const payeeIdentifier& other)
-    : m_id(other.m_id),
-      m_payeeIdentifier(0)
+    : m_id(other.m_id)
+    , m_payeeIdentifier(nullptr)
 {
-    if (other.m_payeeIdentifier != 0)
+    if (other.m_payeeIdentifier != nullptr)
         m_payeeIdentifier = other.m_payeeIdentifier->clone();
 }
 
@@ -42,10 +42,10 @@ payeeIdentifier::payeeIdentifier(const QString& id, payeeIdentifierData* const i
 }
 
 payeeIdentifier::payeeIdentifier(const payeeIdentifier::id_t& id, const payeeIdentifier& other)
-    : m_id(id),
-      m_payeeIdentifier(0)
+    : m_id(id)
+    , m_payeeIdentifier(nullptr)
 {
-    if (other.m_payeeIdentifier != 0)
+    if (other.m_payeeIdentifier != nullptr)
         m_payeeIdentifier = other.m_payeeIdentifier->clone();
 }
 
@@ -65,14 +65,14 @@ payeeIdentifier::~payeeIdentifier()
 
 payeeIdentifierData* payeeIdentifier::operator->()
 {
-    if (m_payeeIdentifier == 0)
+    if (m_payeeIdentifier == nullptr)
         throw PAYEEIDENTIFIEREMPTYEXCEPTION;
     return m_payeeIdentifier;
 }
 
 const payeeIdentifierData* payeeIdentifier::operator->() const
 {
-    if (m_payeeIdentifier == 0)
+    if (m_payeeIdentifier == nullptr)
         throw PAYEEIDENTIFIEREMPTYEXCEPTION;
     return m_payeeIdentifier;
 }
@@ -89,14 +89,14 @@ const payeeIdentifierData* payeeIdentifier::data() const
 
 bool payeeIdentifier::isValid() const
 {
-    if (m_payeeIdentifier != 0)
+    if (m_payeeIdentifier != nullptr)
         return m_payeeIdentifier->isValid();
     return false;
 }
 
 QString payeeIdentifier::iid() const
 {
-    if (m_payeeIdentifier != 0)
+    if (m_payeeIdentifier != nullptr)
         return m_payeeIdentifier->payeeIdentifierId();
     return QString();
 }
@@ -107,8 +107,8 @@ payeeIdentifier& payeeIdentifier::operator=(const payeeIdentifier & other)
         return *this;
 
     m_id = other.m_id;
-    if (other.m_payeeIdentifier == 0)
-        m_payeeIdentifier = 0;
+    if (other.m_payeeIdentifier == nullptr)
+        m_payeeIdentifier = nullptr;
     else
         m_payeeIdentifier = other.m_payeeIdentifier->clone();
 

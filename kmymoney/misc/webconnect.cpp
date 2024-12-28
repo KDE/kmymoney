@@ -21,7 +21,7 @@ public:
     explicit Private(WebConnect* parent)
         : q(parent)
         , clientSocket(new QLocalSocket(parent))
-        , serverSocket(0)
+        , serverSocket(nullptr)
         , server(new QLocalServer(parent))
         , serverFail(false)
         , blockSize(0)
@@ -112,7 +112,7 @@ void WebConnect::clientDisconnected()
 {
     qCDebug(WebConnectLog) << "Client disconnected";
     d->serverSocket->deleteLater();
-    d->serverSocket = 0;
+    d->serverSocket = nullptr;
     if (d->server->hasPendingConnections()) {
         qCDebug(WebConnectLog) << "Processing next pending connection";
         clientConnected();

@@ -111,7 +111,7 @@ class KMM_BASE_WIDGETS_EXPORT WidgetHintFrameCollection : public QObject
 {
     Q_OBJECT
 public:
-    explicit WidgetHintFrameCollection(QObject* parent = 0);
+    explicit WidgetHintFrameCollection(QObject* parent = nullptr);
     ~WidgetHintFrameCollection();
 
     void addFrame(WidgetHintFrame* frame);

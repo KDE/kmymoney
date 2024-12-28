@@ -400,7 +400,7 @@ public:
             }
 
         } catch (const MyMoneyException &) {
-            KMessageBox::error(0,
+            KMessageBox::error(nullptr,
                                i18n("You have entered mis-matching information. Please backup to the "
                                     "appropriate page and update your figures or leave one value empty "
                                     "to let KMyMoney calculate it for you"),
@@ -410,7 +410,7 @@ public:
 
         result += i18n("\n\nAccept this or modify the loan information and recalculate.");
 
-        KMessageBox::information(0, result, i18n("Calculation successful"));
+        KMessageBox::information(nullptr, result, i18n("Calculation successful"));
         return 1;
     }
 

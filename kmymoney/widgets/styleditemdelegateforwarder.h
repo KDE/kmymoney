@@ -21,7 +21,7 @@ class KMM_BASE_WIDGETS_EXPORT StyledItemDelegateForwarder : public QAbstractItem
     Q_OBJECT
 
 public:
-    explicit StyledItemDelegateForwarder(QObject* parent = 0);
+    explicit StyledItemDelegateForwarder(QObject* parent = nullptr);
     void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
     QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override;
     QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const override;

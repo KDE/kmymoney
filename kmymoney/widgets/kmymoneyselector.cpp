@@ -141,17 +141,17 @@ QTreeWidgetItem* KMyMoneySelector::newItem(const QString& name, QTreeWidgetItem*
 
 QTreeWidgetItem* KMyMoneySelector::newItem(const QString& name, const QString& key, const QString& id)
 {
-    return newItem(name, 0, key, id);
+    return newItem(name, nullptr, key, id);
 }
 
 QTreeWidgetItem* KMyMoneySelector::newItem(const QString& name, const QString& key)
 {
-    return newItem(name, 0, key, QString());
+    return newItem(name, nullptr, key, QString());
 }
 
 QTreeWidgetItem* KMyMoneySelector::newItem(const QString& name)
 {
-    return newItem(name, 0, QString(), QString());
+    return newItem(name, nullptr, QString(), QString());
 }
 
 QTreeWidgetItem* KMyMoneySelector::newTopItem(const QString& name, const QString& key, const QString& id)
@@ -177,7 +177,7 @@ void KMyMoneySelector::protectItem(const QString& itemId, const bool protect)
     QTreeWidgetItem* it_v;
 
     // scan items
-    while ((it_v = *it) != 0) {
+    while ((it_v = *it) != nullptr) {
         if (it_v->data(0, (int)Selector::Role::Id).toString() == itemId) {
             setSelectable(it_v, !protect);
             break;
@@ -192,7 +192,7 @@ QTreeWidgetItem* KMyMoneySelector::item(const QString& id) const
     QTreeWidgetItemIterator it(d->m_treeWidget, QTreeWidgetItemIterator::Selectable);
     QTreeWidgetItem* it_v;
 
-    while ((it_v = *it) != 0) {
+    while ((it_v = *it) != nullptr) {
         if (it_v->data(0, (int)Selector::Role::Id).toString() == id)
             break;
         ++it;
@@ -239,7 +239,7 @@ void KMyMoneySelector::removeItem(const QString& id)
     QTreeWidgetItem* it_v;
     QTreeWidgetItemIterator it(d->m_treeWidget);
 
-    while ((it_v = *it) != 0) {
+    while ((it_v = *it) != nullptr) {
         if (id == it_v->data(0, (int)Selector::Role::Id).toString()) {
             if (it_v->childCount() > 0) {
                 setSelectable(it_v, false);
@@ -252,7 +252,7 @@ void KMyMoneySelector::removeItem(const QString& id)
 
     // get rid of top items that just lost the last children (e.g. Favorites)
     it = QTreeWidgetItemIterator(d->m_treeWidget, QTreeWidgetItemIterator::NotSelectable);
-    while ((it_v = *it) != 0) {
+    while ((it_v = *it) != nullptr) {
         if (it_v->childCount() == 0)
             delete it_v;
         it++;
@@ -304,7 +304,7 @@ void KMyMoneySelector::selectedItems(QStringList& list) const
     list.clear();
     if (d->m_selMode == QTreeWidget::SingleSelection) {
         QTreeWidgetItem* it_c = d->m_treeWidget->currentItem();
-        if (it_c != 0 && it_c->isSelected())
+        if (it_c != nullptr && it_c->isSelected())
             list << it_c->data(0, (int)Selector::Role::Id).toString();
     } else {
         QTreeWidgetItem* rootItem = d->m_treeWidget->invisibleRootItem();
@@ -337,7 +337,7 @@ void KMyMoneySelector::itemList(QStringList& list) const
     QTreeWidgetItemIterator it(d->m_treeWidget, QTreeWidgetItemIterator::Selectable);
     QTreeWidgetItem* it_v;
 
-    while ((it_v = *it) != 0) {
+    while ((it_v = *it) != nullptr) {
         list << it_v->data(0, (int)Selector::Role::Id).toString();
         it++;
     }
@@ -348,9 +348,9 @@ void KMyMoneySelector::setSelected(const QString& id, const bool state)
     Q_D(const KMyMoneySelector);
     QTreeWidgetItemIterator it(d->m_treeWidget, QTreeWidgetItemIterator::Selectable);
     QTreeWidgetItem* item;
-    QTreeWidgetItem* it_visible = 0;
+    QTreeWidgetItem* it_visible = nullptr;
 
-    while ((item = *it) != 0) {
+    while ((item = *it) != nullptr) {
         if (item->data(0, (int)Selector::Role::Id).toString() == id) {
             if (item->flags().testFlag(Qt::ItemIsUserCheckable)) {
                 item->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
@@ -412,16 +412,16 @@ int KMyMoneySelector::slotMakeCompletion(const QRegularExpression& _exp)
     // perform the check. Then check recursively on the parent of this
     // leaf that it has no visible children. If that is the case, make the
     // parent invisible and continue this check with it's parent.
-    while ((it_v = *it) != 0) {
+    while ((it_v = *it) != nullptr) {
         it_v->setHidden(false);
         ++it;
     }
 
-    QTreeWidgetItem* firstMatch = 0;
+    QTreeWidgetItem* firstMatch = nullptr;
 
     if (!exp.pattern().isEmpty()) {
         it = QTreeWidgetItemIterator(d->m_treeWidget, QTreeWidgetItemIterator::Selectable);
-        while ((it_v = *it) != 0) {
+        while ((it_v = *it) != nullptr) {
             if (it_v->childCount() == 0) {
                 if (!match(exp, it_v)) {
                     // this is a node which does not contain the
@@ -460,9 +460,9 @@ int KMyMoneySelector::slotMakeCompletion(const QRegularExpression& _exp)
                 // parent or grandparent node.
                 QTreeWidgetItem* curr = it_v;
                 QTreeWidgetItem* item;
-                while ((item = curr->treeWidget()->itemBelow(curr)) == 0) {
+                while ((item = curr->treeWidget()->itemBelow(curr)) == nullptr) {
                     curr = curr->parent();
-                    if (curr == 0)
+                    if (curr == nullptr)
                         break;
                     if (match(exp, curr))
                         firstMatch = curr;
@@ -492,7 +492,7 @@ int KMyMoneySelector::slotMakeCompletion(const QRegularExpression& _exp)
     auto cnt = 0;
 
     it = QTreeWidgetItemIterator(d->m_treeWidget, QTreeWidgetItemIterator::Selectable | QTreeWidgetItemIterator::NotHidden);
-    while ((*it) != 0) {
+    while ((*it) != nullptr) {
         cnt++;
         it++;
     }
@@ -504,7 +504,7 @@ bool KMyMoneySelector::contains(const QString& txt) const
     Q_D(const KMyMoneySelector);
     QTreeWidgetItemIterator it(d->m_treeWidget, QTreeWidgetItemIterator::Selectable);
     QTreeWidgetItem* it_v;
-    while ((it_v = *it) != 0) {
+    while ((it_v = *it) != nullptr) {
         if (it_v->text(0) == txt) {
             return true;
         }

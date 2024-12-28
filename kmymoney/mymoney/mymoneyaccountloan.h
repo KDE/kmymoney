@@ -65,7 +65,7 @@ public:
     void setFinalPayment(const MyMoneyMoney& finalPayment);
     unsigned int term() const;
     void setTerm(const unsigned int payments);
-    int interestChangeFrequency(int* unit = 0) const;
+    int interestChangeFrequency(int* unit = nullptr) const;
     void setInterestChangeFrequency(const int amount, const int unit);
     const MyMoneyMoney periodicPayment() const;
     void setPeriodicPayment(const MyMoneyMoney& payment);

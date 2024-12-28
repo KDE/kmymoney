@@ -27,7 +27,7 @@ class SecurityAccountNameDelegate : public KMMStyledItemDelegate
 {
     Q_OBJECT
 public:
-    explicit SecurityAccountNameDelegate(LedgerView* parent = 0);
+    explicit SecurityAccountNameDelegate(LedgerView* parent = nullptr);
     virtual ~SecurityAccountNameDelegate();
 
     void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;

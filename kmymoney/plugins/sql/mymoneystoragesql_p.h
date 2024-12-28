@@ -150,8 +150,8 @@ private:
 class MyMoneySqlQuery : public QSqlQuery
 {
 public:
-    explicit MyMoneySqlQuery(MyMoneyStorageSql* db = 0) :
-        QSqlQuery(*db)
+    explicit MyMoneySqlQuery(MyMoneyStorageSql* db = nullptr)
+        : QSqlQuery(*db)
     {
     }
 
@@ -3249,7 +3249,7 @@ public:
 
     void signalProgress(qint64 current, qint64 total, const QString& msg) const
     {
-        if (m_progressCallback != 0)
+        if (m_progressCallback != nullptr)
             (*m_progressCallback)(current, total, msg);
     }
 

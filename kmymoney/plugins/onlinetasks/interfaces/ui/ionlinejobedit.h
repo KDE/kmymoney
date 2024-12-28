@@ -24,7 +24,7 @@ class ONLINETASK_INTERFACES_EXPORT IonlineJobEdit : public QWidget
     Q_OBJECT
 
 public:
-    explicit IonlineJobEdit(QWidget* parent = 0, QVariantList args = QVariantList());
+    explicit IonlineJobEdit(QWidget* parent = nullptr, QVariantList args = QVariantList());
 
     /**
      * @brief Reads interface and creates an onlineJob

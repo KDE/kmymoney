@@ -97,7 +97,7 @@ bool GNCImporter::open(const QUrl &url)
 
     pReader.setProgressCallback(appInterface()->progressCallback());
     pReader.readFile(qfile.data(), MyMoneyFile::instance());
-    pReader.setProgressCallback(0);
+    pReader.setProgressCallback(nullptr);
 
     qfile->close();
     return true;

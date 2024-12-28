@@ -153,7 +153,7 @@ protected:
 
 protected:
     KMyMoneyComboPrivate * const d_ptr;
-    KMyMoneyCombo(KMyMoneyComboPrivate &dd, bool rw = false, QWidget *parent = 0);
+    KMyMoneyCombo(KMyMoneyComboPrivate& dd, bool rw = false, QWidget* parent = nullptr);
 
 Q_SIGNALS:
     void itemSelected(const QString& id);

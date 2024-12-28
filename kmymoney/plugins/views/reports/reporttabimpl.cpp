@@ -281,8 +281,8 @@ void ReportTabRange::slotEditingFinishedMinor()
 
 void ReportTabRange::slotYLabelsPrecisionChanged(const int& value)
 {
-    ui->m_dataMajorTick->setValidator(0);
-    ui->m_dataMinorTick->setValidator(0);
+    ui->m_dataMajorTick->setValidator(nullptr);
+    ui->m_dataMinorTick->setValidator(nullptr);
 
     MyDoubleValidator *dblVal2 = new MyDoubleValidator(value + 1);
     ui->m_dataMajorTick->setValidator(dblVal2);

@@ -145,7 +145,7 @@ int MyMoneyAccountLoan::interestChangeFrequency(int* unit) const
     const auto frequency(frequencyExp.match(value("interest-changefrequency")));
     if (frequency.hasMatch()) {
         rc = frequency.captured(1).toInt();
-        if (unit != 0) {
+        if (unit != nullptr) {
             *unit = frequency.captured(2).toInt();
         }
     }

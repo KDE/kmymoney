@@ -32,7 +32,7 @@
 
 using namespace eMyMoney;
 
-static IMyMoneyProcessingCalendar* processingCalendarPtr = 0;
+static IMyMoneyProcessingCalendar* processingCalendarPtr = nullptr;
 
 MyMoneySchedule::MyMoneySchedule()
     : MyMoneyObject(*new MyMoneySchedulePrivate)

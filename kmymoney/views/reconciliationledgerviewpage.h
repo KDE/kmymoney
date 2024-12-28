@@ -23,7 +23,7 @@ class ReconciliationLedgerViewPage : public LedgerViewPage
 {
     Q_OBJECT
 public:
-    explicit ReconciliationLedgerViewPage(QWidget* parent = 0, const QString& configGroupName = QString());
+    explicit ReconciliationLedgerViewPage(QWidget* parent = nullptr, const QString& configGroupName = QString());
     virtual ~ReconciliationLedgerViewPage();
 
     /** overridden for internal reasons */

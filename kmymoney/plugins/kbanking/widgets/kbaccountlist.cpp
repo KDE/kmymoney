@@ -25,9 +25,9 @@ KBAccountListViewItem::KBAccountListViewItem(KBAccountListView *parent,
     _populate();
 }
 
-KBAccountListViewItem::KBAccountListViewItem(const KBAccountListViewItem &item)
+KBAccountListViewItem::KBAccountListViewItem(const KBAccountListViewItem& item)
     : QTreeWidgetItem(item)
-    , _account(0)
+    , _account(nullptr)
 {
     if (item._account) {
         _account = item._account;
@@ -148,7 +148,7 @@ AB_ACCOUNT_SPEC *KBAccountListView::getCurrentAccount()
 
     entry = dynamic_cast<KBAccountListViewItem*>(currentItem());
     if (!entry) {
-        return 0;
+        return nullptr;
     }
     return entry->getAccount();
 }

@@ -31,7 +31,7 @@ class KMMViewInterface : public ViewInterface
     Q_OBJECT
 
 public:
-    KMMViewInterface(KMyMoneyView* view, QObject* parent, const char* name = 0);
+    KMMViewInterface(KMyMoneyView* view, QObject* parent, const char* name = nullptr);
     ~KMMViewInterface()
     {
     }

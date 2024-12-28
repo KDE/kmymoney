@@ -113,7 +113,7 @@ void KMyMoneyCombo::setEditable(bool y)
         setLineEdit(d->m_edit);
         d->m_edit->setPalette(palette());
     } else {
-        d->m_edit = 0;
+        d->m_edit = nullptr;
     }
 }
 

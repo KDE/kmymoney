@@ -241,7 +241,7 @@ void KBanking::plug(KXMLGUIFactory* guiFactory)
         } else {
             qWarning("Could not initialize KBanking online banking interface");
             delete m_kbanking;
-            m_kbanking = 0;
+            m_kbanking = nullptr;
         }
 
         if (AlkEnvironment::isRunningAsAppImage()) {
@@ -308,11 +308,11 @@ QWidget* KBanking::accountConfigTab(const MyMoneyAccount& acc, QString& name)
     const MyMoneyKeyValueContainer& kvp = acc.onlineBankingSettings();
     name = i18n("Online settings");
     if (m_kbanking) {
-        m_accountSettings = new KBAccountSettings(acc, 0);
+        m_accountSettings = new KBAccountSettings(acc, nullptr);
         m_accountSettings->loadUi(kvp);
         return m_accountSettings;
     }
-    QLabel* label = new QLabel(i18n("KBanking module not correctly initialized"), 0);
+    QLabel* label = new QLabel(i18n("KBanking module not correctly initialized"), nullptr);
     label->setAlignment(Qt::AlignVCenter | Qt::AlignHCenter);
     return label;
 }
@@ -378,13 +378,13 @@ void KBanking::slotSettings()
 {
     if (m_kbanking) {
         GWEN_DIALOG* dlg = AB_Banking_CreateSetupDialog(m_kbanking->getCInterface());
-        if (dlg == NULL) {
-            DBG_ERROR(0, "Could not create setup dialog.");
+        if (dlg == nullptr) {
+            DBG_ERROR(nullptr, "Could not create setup dialog.");
             return;
         }
 
         if (GWEN_Gui_ExecDialog(dlg, 0) == 0) {
-            DBG_ERROR(0, "Aborted by user");
+            DBG_ERROR(nullptr, "Aborted by user");
             GWEN_Dialog_free(dlg);
             return;
         }
@@ -416,14 +416,14 @@ bool KBanking::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& s
 
 AB_ACCOUNT_SPEC* KBanking::aqbAccount(const MyMoneyAccount& acc) const
 {
-    if (m_kbanking == 0) {
-        return 0;
+    if (m_kbanking == nullptr) {
+        return nullptr;
     }
 
     // certainly looking for an expense or income account does not make sense at this point
     // so we better get out right away
     if (acc.isIncomeExpense()) {
-        return 0;
+        return nullptr;
     }
 
     AB_ACCOUNT_SPEC *ab_acc = AB_Banking_GetAccountSpecByAlias(m_kbanking->getCInterface(), m_kbanking->mappingId(acc).toUtf8().data());
@@ -494,7 +494,7 @@ void KBanking::setupAccountReference(const MyMoneyAccount& acc, AB_ACCOUNT_SPEC*
 
 bool KBanking::accountIsMapped(const MyMoneyAccount& acc)
 {
-    return aqbAccount(acc) != 0;
+    return aqbAccount(acc) != nullptr;
 }
 
 
@@ -512,7 +512,7 @@ bool KBanking::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
     bool rc = false;
 
     if (!acc.id().isEmpty()) {
-        AB_TRANSACTION *job = 0;
+        AB_TRANSACTION* job = nullptr;
         int rv;
 
         /* get AqBanking account */
@@ -522,7 +522,7 @@ bool KBanking::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
         setupAccountReference(acc, ba);
 
         if (!ba) {
-            KMessageBox::error(0,
+            KMessageBox::error(nullptr,
                                i18n("<qt>"
                                     "The given application account <b>%1</b> "
                                     "has not been mapped to an online "
@@ -578,8 +578,8 @@ bool KBanking::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
                     // case the dateOption is 0 or the date option is > 1
                     // and the qd is invalid
                     if (dateOption == 0 || (dateOption > 1 && !qd.isValid())) {
-                        QPointer<KBPickStartDate> psd = new KBPickStartDate(m_kbanking, qd, lastUpdate, acc.name(),
-                                lastUpdate.isValid() ? 2 : 3, 0, true);
+                        QPointer<KBPickStartDate> psd =
+                            new KBPickStartDate(m_kbanking, qd, lastUpdate, acc.name(), lastUpdate.isValid() ? 2 : 3, nullptr, true);
                         if (psd->exec() == QDialog::Accepted) {
                             qd = psd->date();
                         } else {
@@ -599,8 +599,8 @@ bool KBanking::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
 
                         rv = m_kbanking->enqueueJob(job);
                         if (rv) {
-                            DBG_ERROR(0, "Error %d", rv);
-                            KMessageBox::error(0,
+                            DBG_ERROR(nullptr, "Error %d", rv);
+                            KMessageBox::error(nullptr,
                                                i18n("<qt>"
                                                     "Could not enqueue the job.\n"
                                                     "</qt>"),
@@ -621,8 +621,8 @@ bool KBanking::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
                     rv = m_kbanking->enqueueJob(job);
                     AB_Transaction_free(job);
                     if (rv) {
-                        DBG_ERROR(0, "Error %d", rv);
-                        KMessageBox::error(0,
+                        DBG_ERROR(nullptr, "Error %d", rv);
+                        KMessageBox::error(nullptr,
                                            i18n("<qt>"
                                                 "Could not enqueue the job.\n"
                                                 "</qt>"),
@@ -653,7 +653,7 @@ void KBanking::executeQueue()
         if (!rv) {
             m_kbanking->importContext(ctx, 0);
         } else {
-            DBG_ERROR(0, "Error: %d", rv);
+            DBG_ERROR(nullptr, "Error: %d", rv);
         }
         AB_ImExporterContext_free(ctx);
     }
@@ -751,13 +751,13 @@ public:
 IonlineTaskSettings::ptr KBanking::settings(QString accountId, QString taskName)
 {
     AB_ACCOUNT_SPEC* abAcc = aqbAccount(accountId);
-    if (abAcc == 0)
+    if (abAcc == nullptr)
         return IonlineTaskSettings::ptr();
 
     if (sepaOnlineTransfer::name() == taskName) {
         // Get limits for sepaonlinetransfer
         const AB_TRANSACTION_LIMITS *limits=AB_AccountSpec_GetTransactionLimitsForCommand(abAcc, AB_Transaction_CommandSepaTransfer);
-        if (limits==NULL)
+        if (limits == nullptr)
             return IonlineTaskSettings::ptr();
         return AB_TransactionLimits_toSepaOnlineTaskSettings(limits).dynamicCast<IonlineTaskSettings>();
     }
@@ -782,7 +782,7 @@ bool KBanking::enqueTransaction(onlineJobTyped<sepaOnlineTransfer>& job)
     }
     //setupAccountReference(acc, ba); // needed?
 
-    if (AB_AccountSpec_GetTransactionLimitsForCommand(abAccount, AB_Transaction_CommandSepaTransfer)==NULL) {
+    if (AB_AccountSpec_GetTransactionLimitsForCommand(abAccount, AB_Transaction_CommandSepaTransfer) == nullptr) {
         qDebug("AB_ERROR_OFFSET is %i", AB_ERROR_OFFSET);
         job.addJobMessage(onlineJobMessage(eMyMoney::OnlineJob::MessageType::Error, "AqBanking",
                                            QString("Sepa credit transfers for account \"%1\" are not available.").arg(MyMoneyFile::instance()->account(accId).name())
@@ -790,7 +790,6 @@ bool KBanking::enqueTransaction(onlineJobTyped<sepaOnlineTransfer>& job)
                          );
         return false;
     }
-
 
     AB_TRANSACTION *abJob = AB_Transaction_new();
 
@@ -876,11 +875,10 @@ void KBanking::setAccountOnlineParameters(const MyMoneyAccount& acc, const MyMon
     return statementInterface()->setAccountOnlineParameters(acc, kvps);
 }
 
-
 KBankingExt::KBankingExt(KBanking* parent, const char* appname, const char* fname)
     : AB_Banking(appname, fname)
     , m_parent(parent)
-    , _jobQueue(0)
+    , _jobQueue(nullptr)
 {
     m_sepaKeywords = {QString::fromUtf8("SEPA-BASISLASTSCHRIFT"), QString::fromUtf8("SEPA-ÜBERWEISUNG")};
     QRegularExpression exp("(\\d+\\.\\d+\\.\\d+).*");
@@ -913,7 +911,7 @@ int KBankingExt::fini()
 {
     if (_jobQueue) {
         AB_Transaction_List2_freeAll(_jobQueue);
-        _jobQueue = 0;
+        _jobQueue = nullptr;
     }
 
     return AB_Banking::fini();
@@ -991,7 +989,7 @@ int KBankingExt::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
 void KBankingExt::clearPasswordCache()
 {
     /* clear password DB */
-    GWEN_Gui_SetPasswordStatus(NULL, NULL, GWEN_Gui_PasswordStatus_Remove, 0);
+    GWEN_Gui_SetPasswordStatus(nullptr, nullptr, GWEN_Gui_PasswordStatus_Remove, 0);
 }
 
 
@@ -1082,7 +1080,7 @@ bool KBankingExt::askMapAccount(const MyMoneyAccount& acc)
 
         a = w->getAccount();
         assert(a);
-        DBG_NOTICE(0,
+        DBG_NOTICE(nullptr,
                    "Mapping application account \"%s\" to "
                    "online account \"%s/%s\"",
                    qPrintable(acc.name()),
@@ -1118,23 +1116,23 @@ bool KBankingExt::interactiveImport()
     int rv;
 
     ctx = AB_ImExporterContext_new();
-    dlg = AB_Banking_CreateImporterDialog(getCInterface(), ctx, NULL);
-    if (dlg == NULL) {
-        DBG_ERROR(0, "Could not create importer dialog.");
+    dlg = AB_Banking_CreateImporterDialog(getCInterface(), ctx, nullptr);
+    if (dlg == nullptr) {
+        DBG_ERROR(nullptr, "Could not create importer dialog.");
         AB_ImExporterContext_free(ctx);
         return false;
     }
 
     rv = GWEN_Gui_ExecDialog(dlg, 0);
     if (rv == 0) {
-        DBG_ERROR(0, "Aborted by user");
+        DBG_ERROR(nullptr, "Aborted by user");
         GWEN_Dialog_free(dlg);
         AB_ImExporterContext_free(ctx);
         return false;
     }
 
     if (!importContext(ctx, 0)) {
-        DBG_ERROR(0, "Error on importContext");
+        DBG_ERROR(nullptr, "Error on importContext");
         GWEN_Dialog_free(dlg);
         AB_ImExporterContext_free(ctx);
         return false;
@@ -1306,7 +1304,7 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
 
     // make sure, datePosted and dateProcessed are set for the transaction
     if (!(kt.m_dateProcessed.isValid() || kt.m_datePosted.isValid())) {
-        DBG_WARN(0, "No date for transaction found, use today");
+        DBG_WARN(nullptr, "No date for transaction found, use today");
         kt.m_dateProcessed = QDate::currentDate();
         kt.m_datePosted = kt.m_dateProcessed;
 
@@ -1345,7 +1343,7 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
                 s = p;
             if (ks.m_strCurrency.toLower() != s.toLower()) {
                 // TODO: handle currency difference
-                DBG_ERROR(0, "Mixed currencies currently not allowed");
+                DBG_ERROR(nullptr, "Mixed currencies currently not allowed");
             }
         }
 
@@ -1359,7 +1357,7 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
         tmpVal += QLatin1String("/100");
         h = MyMoneyTransaction::hash(tmpVal, h);
     } else {
-        DBG_WARN(0, "No value for transaction");
+        DBG_WARN(nullptr, "No value for transaction");
     }
 
     // add information about remote account to memo in case we have something
@@ -1479,7 +1477,7 @@ bool KBankingExt::importAccountInfo(AB_IMEXPORTER_CONTEXT *ctx,
 {
     const char *p;
 
-    DBG_INFO(0, "Importing account...");
+    DBG_INFO(nullptr, "Importing account...");
 
     // account number
     MyMoneyStatement ks;
@@ -1533,7 +1531,7 @@ bool KBankingExt::importAccountInfo(AB_IMEXPORTER_CONTEXT *ctx,
     if (bal) {
         const AB_VALUE* val = AB_Balance_GetValue(bal);
         if (val) {
-            DBG_INFO(0, "Importing balance");
+            DBG_INFO(nullptr, "Importing balance");
             ks.m_closingBalance = AB_Value_toMyMoneyMoney(val);
             p = AB_Value_GetCurrency(val);
             if (p)
@@ -1543,10 +1541,10 @@ bool KBankingExt::importAccountInfo(AB_IMEXPORTER_CONTEXT *ctx,
         if (dt) {
             ks.m_dateEnd = QDate(GWEN_Date_GetYear(dt), GWEN_Date_GetMonth(dt), GWEN_Date_GetDay(dt));
         } else {
-            DBG_WARN(0, "No date for balance");
+            DBG_WARN(nullptr, "No date for balance");
         }
     } else {
-        DBG_WARN(0, "No account balance");
+        DBG_WARN(nullptr, "No account balance");
     }
 
     // clear hash map
@@ -1569,13 +1567,13 @@ bool KBankingExt::importAccountInfo(AB_IMEXPORTER_CONTEXT *ctx,
 
     // import them
     if (!m_parent->importStatement(ks)) {
-        if (KMessageBox::warningTwoActions(0,
+        if (KMessageBox::warningTwoActions(nullptr,
                                            i18n("Error importing statement. Do you want to continue?"),
                                            i18n("Critical Error"),
                                            KMMYesNo::yes(),
                                            KMMYesNo::no())
             == KMessageBox::SecondaryAction) {
-            DBG_ERROR(0, "User aborted");
+            DBG_ERROR(nullptr, "User aborted");
             return false;
         }
     }

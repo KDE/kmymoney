@@ -75,7 +75,10 @@ void KBAccountSettings::loadKvp(MyMoneyKeyValueContainer& kvp)
         kvp["kbanking-memo-regexp"] = d->ui.m_memoRegExpEdit->text();
         kvp["kbanking-payee-exceptions"] = d->ui.m_payeeExceptions->items().join(";");
     } else if (d->ui.m_extractPayeeButton->isChecked()) {
-        KMessageBox::information(0, i18n("You selected to extract the payee from the memo field but did not supply a regular expression for payee and memo extraction. The option will not be activated."), i18n("Missing information"));
+        KMessageBox::information(nullptr,
+                                 i18n("You selected to extract the payee from the memo field but did not supply a regular expression for payee and memo "
+                                      "extraction. The option will not be activated."),
+                                 i18n("Missing information"));
     }
     if (!d->ui.m_transactionDownload->isChecked())
         kvp["kbanking-txn-download"] = "no";

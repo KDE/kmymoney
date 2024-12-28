@@ -43,7 +43,7 @@ public:
     /**
       * Create a combo box that contains the entries "Buy", "Sell" etc.
       */
-    explicit KMyMoneyActivityCombo(QWidget *w = 0);
+    explicit KMyMoneyActivityCombo(QWidget* w = nullptr);
     ~KMyMoneyActivityCombo() override;
 
     void setActivity(eMyMoney::Split::InvestmentTransactionType activity);

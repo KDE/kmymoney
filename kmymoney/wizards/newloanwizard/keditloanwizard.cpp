@@ -104,7 +104,7 @@ KEditLoanWizard::KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent)
     d->m_pages.clearBit(Page_NewCalculateLoan);
     d->m_pages.clearBit(Page_NewPayments);
     removePage(Page_AssetAccount);
-    d->ui->m_assetAccountPage = 0;
+    d->ui->m_assetAccountPage = nullptr;
 
     // turn on all pages that are contained here for derived classes
     d->m_pages.setBit(Page_EditIntro);
@@ -275,10 +275,7 @@ bool KEditLoanWizard::validateCurrentPage()
     QAbstractButton* button = d->ui->m_editSelectionPage->ui->m_selectionButtonGroup->button(d->m_lastSelection);
 
     if (currentPage() == d->ui->m_editSelectionPage) {
-
-        if (button != 0
-                && d->m_lastSelection != d->ui->m_editSelectionPage->ui->m_selectionButtonGroup->checkedId()) {
-
+        if (button != nullptr && d->m_lastSelection != d->ui->m_editSelectionPage->ui->m_selectionButtonGroup->checkedId()) {
             QString errMsg = i18n(
                                  "Your previous selection was \"%1\". If you select another option, "
                                  "KMyMoney will dismiss the changes you have just entered. "
@@ -328,7 +325,7 @@ bool KEditLoanWizard::validateCurrentPage()
 
             d->m_pages.setBit(Page_EffectiveDate);
 
-            if (page(Page_Summary) != 0) {
+            if (page(Page_Summary) != nullptr) {
                 removePage(Page_Summary);
             }
 

@@ -37,11 +37,11 @@
 #include "mymoneytransactionfilter.h"
 #include "securitiesmodel.h"
 
-CsvWriter::CsvWriter() :
-    m_plugin(0),
-    m_firstSplit(false),
-    m_highestSplitCount(0),
-    m_noError(true)
+CsvWriter::CsvWriter()
+    : m_plugin(nullptr)
+    , m_firstSplit(false)
+    , m_highestSplitCount(0)
+    , m_noError(true)
 {
 }
 
@@ -82,7 +82,7 @@ void CsvWriter::write(const QString& filename,
         qDebug() << i18n("Export completed.\n");
         delete m_plugin->exporterDialog();  //  Can now delete as export finished
     } else {
-        KMessageBox::error(0, i18n("Unable to open file '%1' for writing", filename).append(QString::fromLatin1(": ") + csvFile.errorString()));
+        KMessageBox::error(nullptr, i18n("Unable to open file '%1' for writing", filename).append(QString::fromLatin1(": ") + csvFile.errorString()));
     }
 }
 
@@ -185,8 +185,12 @@ void CsvWriter::writeTransactionEntry(const MyMoneyTransaction& t, const QString
     MyMoneySplit split = t.splitByAccount(accountId);
     QList<MyMoneySplit> splits = t.splits();
     if (splits.count() < 2) {
-        KMessageBox::error(0, i18n("Transaction number '%1' is missing an account assignment.\n"
-                                   "Date '%2', Payee '%3'.\nTransaction dropped.\n", count, t.postDate().toString(Qt::ISODate), file->payee(split.payeeId()).name()),
+        KMessageBox::error(nullptr,
+                           i18n("Transaction number '%1' is missing an account assignment.\n"
+                                "Date '%2', Payee '%3'.\nTransaction dropped.\n",
+                                count,
+                                t.postDate().toString(Qt::ISODate),
+                                file->payee(split.payeeId()).name()),
                            i18n("Invalid transaction"));
         m_noError = false;
         return;
@@ -366,8 +370,12 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
             }
             if ((strAction == QLatin1String("DivX")) || (strAction == QLatin1String("IntIncX"))) {
                 if ((map.value(eMyMoney::Account::Type::Checkings).isEmpty()) && (map.value(eMyMoney::Account::Type::Cash).isEmpty())) {
-                    KMessageBox::error(0, i18n("Transaction number '%1' is missing an account assignment.\n"
-                                               "Date '%2', Amount '%3'.\nTransaction dropped.\n", count, t.postDate().toString(Qt::ISODate), strAmount),
+                    KMessageBox::error(nullptr,
+                                       i18n("Transaction number '%1' is missing an account assignment.\n"
+                                            "Date '%2', Amount '%3'.\nTransaction dropped.\n",
+                                            count,
+                                            t.postDate().toString(Qt::ISODate),
+                                            strAmount),
                                        i18n("Invalid transaction"));
                     return;
                 }

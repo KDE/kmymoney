@@ -220,7 +220,7 @@ void LoanDetailsPage::slotCalculate()
         } else if (d->ui->m_termAmount->value() == 0) {
             // calculate the number of payments out of the other information
             val = MyMoneyMoney(calc.numPayments());
-            if (val == 0)
+            if (val == nullptr)
                 throw MYMONEYEXCEPTION_CSTRING("incorrect financial calculation");
 
             // if the number of payments has a fractional part, then we
@@ -257,7 +257,7 @@ void LoanDetailsPage::slotCalculate()
             } else if ((moneyBorrowed && val < MyMoneyMoney() && qAbs(val.toDouble()) <= qAbs(calc.payment()))
                        || (moneyLend && val > MyMoneyMoney() && qAbs(val.toDouble()) <= qAbs(calc.payment()))) {
                 // case b)
-                val = 0;
+                val = nullptr;
             }
 
             result = i18n("KMyMoney has calculated a balloon payment of %1 for this loan.", val.abs().formatMoney(QString(), d->m_wizard->d_func()->precision()));
@@ -272,7 +272,7 @@ void LoanDetailsPage::slotCalculate()
         }
 
     } catch (const MyMoneyException &) {
-        KMessageBox::error(0,
+        KMessageBox::error(nullptr,
                            i18n("You have entered mis-matching information. Please modify "
                                 "your figures or leave one value empty "
                                 "to let KMyMoney calculate it for you"),
@@ -282,7 +282,7 @@ void LoanDetailsPage::slotCalculate()
 
     result += i18n("\n\nAccept this or modify the loan information and recalculate.");
 
-    KMessageBox::information(0, result, i18n("Calculation successful"));
+    KMessageBox::information(nullptr, result, i18n("Calculation successful"));
     d->m_needCalculate = false;
 
     // now update change

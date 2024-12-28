@@ -106,9 +106,9 @@ int gwenKdeGui::getPasswordHhd(uint32_t /*flags*/,
     QString infoText;
     const char *sChallenge;
 
-    sChallenge=GWEN_DB_GetCharValue(methodParams, "challenge", 0, NULL);
+    sChallenge = GWEN_DB_GetCharValue(methodParams, "challenge", 0, nullptr);
     if (! (sChallenge && *sChallenge)) {
-        DBG_ERROR(0, "Empty optical data");
+        DBG_ERROR(nullptr, "Empty optical data");
         return GWEN_ERROR_NO_DATA;
     }
 
@@ -156,15 +156,15 @@ int gwenKdeGui::getPasswordPhoto(uint32_t /*flags*/,
     const uchar * pictureData;
     unsigned int pictureDataSize;
 
-    pictureData = (const uchar *)GWEN_DB_GetBinValue(methodParams, "imageData", 0, NULL, 0, &pictureDataSize);
+    pictureData = (const uchar*)GWEN_DB_GetBinValue(methodParams, "imageData", 0, nullptr, 0, &pictureDataSize);
     if (! (pictureData && pictureDataSize > 0)) {
-        DBG_ERROR(0, "Empty optical data");
+        DBG_ERROR(nullptr, "Empty optical data");
         return GWEN_ERROR_NO_DATA;
     }
 
     bool loadSuccessful = picture.loadFromData(pictureData, pictureDataSize);
     if (! loadSuccessful) {
-        DBG_ERROR(0, "Unable to read tan picture from image data");
+        DBG_ERROR(nullptr, "Unable to read tan picture from image data");
         return GWEN_ERROR_NO_DATA;
     }
 
@@ -208,7 +208,7 @@ int gwenKdeGui::getPassword(uint32_t flags, const char* token, const char* title
     switch( (methodId & GWEN_Gui_PasswordMethod_Mask)) {
     case GWEN_Gui_PasswordMethod_Unknown:
     case GWEN_Gui_PasswordMethod_Mask:
-        DBG_ERROR(0, "Invalid password method id %08x", methodId);
+        DBG_ERROR(nullptr, "Invalid password method id %08x", methodId);
         return GWEN_ERROR_INVALID;
 
     case GWEN_Gui_PasswordMethod_Text:
@@ -247,7 +247,7 @@ int gwenKdeGui::getPassword(uint32_t flags, const char* token, const char* title
                                     methodId, methodParams,
                                     guiid);
         default:
-            DBG_ERROR(0, "Unknown tan method ID %i", tanMethodId);
+            DBG_ERROR(nullptr, "Unknown tan method ID %i", tanMethodId);
             return GWEN_ERROR_NO_DATA;
         }
 
@@ -255,6 +255,6 @@ int gwenKdeGui::getPassword(uint32_t flags, const char* token, const char* title
          * gwen which have not been implemented. */
     }
 
-    DBG_ERROR(0, "Unhandled password method id %08x", methodId);
+    DBG_ERROR(nullptr, "Unhandled password method id %08x", methodId);
     return GWEN_ERROR_INVALID;
 }

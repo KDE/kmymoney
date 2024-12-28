@@ -77,9 +77,9 @@ public:
         QTabBar* bar = ui->ledgerTab->findChild<QTabBar*>();
         if (bar) {
             QTabBar::ButtonPosition closeSide =
-                (QTabBar::ButtonPosition)q->style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition, 0, ui->ledgerTab->widget(idx));
+                (QTabBar::ButtonPosition)q->style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition, nullptr, ui->ledgerTab->widget(idx));
             QWidget* w = bar->tabButton(idx, closeSide);
-            bar->setTabButton(idx, closeSide, 0);
+            bar->setTabButton(idx, closeSide, nullptr);
             bar->setTabToolTip(idx, tooltip);
             w->deleteLater();
         }
@@ -277,7 +277,7 @@ public:
 
         // check the position of the new tab
         auto newPos = ui->ledgerTab->count() - 1;
-        LedgerViewPage* view = 0;
+        LedgerViewPage* view = nullptr;
         // check if ledger is already opened
         for (int idx = 0; idx < ui->ledgerTab->count() - 1; ++idx) {
             view = qobject_cast<LedgerViewPage*>(ui->ledgerTab->widget(idx));
@@ -359,7 +359,7 @@ public:
 
         // collect account ids of open ledgers
         QStringList openLedgers;
-        LedgerViewPage* view = 0;
+        LedgerViewPage* view = nullptr;
         for(int idx = 0; idx < ui->ledgerTab->count()-1; ++idx) {
             view = qobject_cast<LedgerViewPage*>(ui->ledgerTab->widget(idx));
             if(view) {
@@ -391,7 +391,7 @@ public:
     void propagateActionToViews(eMenu::Action action, const SelectedObjects& selections)
     {
         if (!m_needInit) {
-            LedgerViewPage* view = 0;
+            LedgerViewPage* view = nullptr;
             for (int idx = 0; idx < ui->ledgerTab->count() - 1; ++idx) {
                 view = qobject_cast<LedgerViewPage*>(ui->ledgerTab->widget(idx));
                 if (view) {

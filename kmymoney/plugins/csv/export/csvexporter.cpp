@@ -101,7 +101,7 @@ bool CSVExporter::okToWriteFile(const QUrl &url)
 
     if (fileExists) {
         if (KMessageBox::warningTwoActions(
-                0,
+                nullptr,
                 i18n("<qt>The file <b>%1</b> already exists. Do you really want to overwrite it?</qt>", url.toDisplayString(QUrl::PreferLocalFile)),
                 i18n("File already exists"),
                 KMMYesNo::yes(),

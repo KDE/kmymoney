@@ -252,8 +252,8 @@ MyMoneyQifReader::MyMoneyQifReader() :
     m_skipAccount = false;
     m_transactionsProcessed =
         m_transactionsSkipped = 0;
-    m_progressCallback = 0;
-    m_file = 0;
+    m_progressCallback = nullptr;
+    m_file = nullptr;
     m_entryType = EntryUnknown;
     m_processingData = false;
     m_userAbort = false;
@@ -366,7 +366,8 @@ void MyMoneyQifReader::slotProcessData()
     QString format;
     if (dateFormats.count() > 1) {
         bool ok;
-        format = QInputDialog::getItem(0, i18n("Date format selection"), i18n("Pick the date format that suits your input file"), dateFormats, 05, false, &ok);
+        format =
+            QInputDialog::getItem(nullptr, i18n("Date format selection"), i18n("Pick the date format that suits your input file"), dateFormats, 05, false, &ok);
         if (!ok) {
             m_userAbort = true;
         }
@@ -433,9 +434,7 @@ bool MyMoneyQifReader::startImport()
         KIO::FileCopyJob *job = KIO::file_copy(m_url, QUrl::fromUserInput(m_filename), -1, KIO::Overwrite);
 //    KJobWidgets::setWindow(job, kmymoney);
         if (job->exec() && job->error()) {
-            KMessageBox::detailedError(0, i18n("Error while loading file '%1'.", m_url.toDisplayString()),
-                                       job->errorString(),
-                                       i18n("File access error"));
+            KMessageBox::detailedError(nullptr, i18n("Error while loading file '%1'.", m_url.toDisplayString()), job->errorString(), i18n("File access error"));
             return rc;
         }
     }
@@ -488,9 +487,7 @@ bool MyMoneyQifReader::startImport()
             rc = true;
 //      Q_EMIT statementsReady(d->statements);
         } else {
-            KMessageBox::detailedError(0, i18n("Error while running the filter '%1'.", m_filter.program()),
-                                       m_filter.errorString(),
-                                       i18n("Filter error"));
+            KMessageBox::detailedError(nullptr, i18n("Error while running the filter '%1'.", m_filter.program()), m_filter.errorString(), i18n("Filter error"));
         }
 #endif
     }
@@ -907,7 +904,7 @@ MyMoneyAccount MyMoneyQifReader::findAccount(const MyMoneyAccount& acc, const My
             }
         }
     } catch (const MyMoneyException &e) {
-        KMessageBox::error(0, i18n("Unable to find account: %1", QString::fromLatin1(e.what())));
+        KMessageBox::error(nullptr, i18n("Unable to find account: %1", QString::fromLatin1(e.what())));
     }
     return nullAccount;
 }
@@ -982,7 +979,12 @@ void MyMoneyQifReader::createOpeningBalance(eMyMoney::Account::Type accType)
             }
             if (needCreate) {
                 // in case we create it anyway, we issue a warning to the user to check it manually
-                KMessageBox::error(0, QString("<qt>%1</qt>").arg(i18n("KMyMoney has imported a second opening balance transaction into account <b>%1</b> which differs from the one found already on file. Please correct this manually once the import is done.", acc.name())), i18n("Opening balance problem"));
+                KMessageBox::error(nullptr,
+                                   QString("<qt>%1</qt>")
+                                       .arg(i18n("KMyMoney has imported a second opening balance transaction into account <b>%1</b> which differs from the one "
+                                                 "found already on file. Please correct this manually once the import is done.",
+                                                 acc.name())),
+                                   i18n("Opening balance problem"));
             }
         }
 
@@ -1083,13 +1085,15 @@ void MyMoneyQifReader::processTransactionEntry()
 
     tr.m_datePosted = (m_qifProfile.date(extractLine('D')));
     if (!tr.m_datePosted.isValid()) {
-        int rc = KMessageBox::warningContinueCancel(0,
-                 i18n("The date entry \"%1\" read from the file cannot be interpreted through the current "
-                      "date profile setting of \"%2\".\n\nPressing \"Continue\" will "
-                      "assign todays date to the transaction. Pressing \"Cancel\" will abort "
-                      "the import operation. You can then restart the import and select a different "
-                      "QIF profile or create a new one.", extractLine('D'), m_qifProfile.inputDateFormat()),
-                 i18n("Invalid date format"));
+        int rc = KMessageBox::warningContinueCancel(nullptr,
+                                                    i18n("The date entry \"%1\" read from the file cannot be interpreted through the current "
+                                                         "date profile setting of \"%2\".\n\nPressing \"Continue\" will "
+                                                         "assign todays date to the transaction. Pressing \"Cancel\" will abort "
+                                                         "the import operation. You can then restart the import and select a different "
+                                                         "QIF profile or create a new one.",
+                                                         extractLine('D'),
+                                                         m_qifProfile.inputDateFormat()),
+                                                    i18n("Invalid date format"));
         switch (rc) {
         case KMessageBox::Continue:
             tr.m_datePosted = (QDate::currentDate());
@@ -1311,13 +1315,15 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
     if (date.isValid())
         tr.m_datePosted = date;
     else {
-        int rc = KMessageBox::warningContinueCancel(0,
-                 i18n("The date entry \"%1\" read from the file cannot be interpreted through the current "
-                      "date profile setting of \"%2\".\n\nPressing \"Continue\" will "
-                      "assign todays date to the transaction. Pressing \"Cancel\" will abort "
-                      "the import operation. You can then restart the import and select a different "
-                      "QIF profile or create a new one.", extractLine('D'), m_qifProfile.inputDateFormat()),
-                 i18n("Invalid date format"));
+        int rc = KMessageBox::warningContinueCancel(nullptr,
+                                                    i18n("The date entry \"%1\" read from the file cannot be interpreted through the current "
+                                                         "date profile setting of \"%2\".\n\nPressing \"Continue\" will "
+                                                         "assign todays date to the transaction. Pressing \"Cancel\" will abort "
+                                                         "the import operation. You can then restart the import and select a different "
+                                                         "QIF profile or create a new one.",
+                                                         extractLine('D'),
+                                                         m_qifProfile.inputDateFormat()),
+                                                    i18n("Invalid date format"));
         switch (rc) {
         case KMessageBox::Continue:
             tr.m_datePosted = QDate::currentDate();
@@ -2008,7 +2014,7 @@ void MyMoneyQifReader::setProgressCallback(void(*callback)(qint64, qint64, const
 
 void MyMoneyQifReader::signalProgress(qint64 current, qint64 total, const QString& msg)
 {
-    if (m_progressCallback != 0)
+    if (m_progressCallback != nullptr)
         (*m_progressCallback)(current, total, msg);
 }
 

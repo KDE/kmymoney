@@ -215,7 +215,7 @@ void KInstitutionsView::slotNewInstitution()
     MyMoneyInstitution institution;
 
     QPointer<KNewInstitutionDlg> dlg = new KNewInstitutionDlg(institution);
-    if (dlg->exec() == QDialog::Accepted && dlg != 0) {
+    if (dlg->exec() == QDialog::Accepted && dlg != nullptr) {
         d->m_currentInstitution = dlg->institution();
 
         const auto file = MyMoneyFile::instance();
@@ -249,7 +249,7 @@ void KInstitutionsView::slotEditInstitution()
         // bankSuccess is not checked anymore because d->m_file->institution will throw anyway
         QPointer<KNewInstitutionDlg> dlg = new KNewInstitutionDlg(institution);
         dlg->setWindowTitle(i18nc("@info:title Dialog title", "Edit Institution"));
-        if (dlg->exec() == QDialog::Accepted && dlg != 0) {
+        if (dlg->exec() == QDialog::Accepted && dlg != nullptr) {
             MyMoneyFileTransaction ft;
             try {
                 file->modifyInstitution(dlg->institution());

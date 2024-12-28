@@ -197,20 +197,20 @@ protected:
     }
     // a sub object has completed; process the data it gathered
     virtual void endSubEl(GncObject *) {
-        m_dataPtr = 0;
+        m_dataPtr = nullptr;
         return ;
     }
     // store data for data element
     void storeData(const QString& pData) { // NB - data MAY come in chunks, and may need to be anonymized
-        if (m_dataPtr != 0)
+        if (m_dataPtr != nullptr)
             m_dataPtr->append(hide(pData, m_anonClass));
     }
     // following is provided only for a future file anonymizer
     QString getData() const {
-        return ((m_dataPtr != 0) ? *m_dataPtr : "");
+        return ((m_dataPtr != nullptr) ? *m_dataPtr : "");
     }
     void resetDataPtr() {
-        m_dataPtr = 0;
+        m_dataPtr = nullptr;
     }
     // process end element for 'this'; usually to convert to KMM format
     virtual void terminate() {
@@ -241,7 +241,7 @@ protected:
 
     // called by isSubElement to create appropriate sub object
     virtual GncObject *startSubEl() {
-        return (0);
+        return nullptr;
     }
     // called by isDataElement to set variable pointer
     virtual void dataEl(const QXmlStreamAttributes& /*elAttrs*/)
@@ -538,7 +538,7 @@ protected:
     }
     const QDate reconDate() const {
         QDate x = QDate();
-        return (m_vpDateReconciled == NULL ? x : m_vpDateReconciled->date());
+        return (m_vpDateReconciled == nullptr ? x : m_vpDateReconciled->date());
     }
 private:
     // subsidiary objects/elements
@@ -568,7 +568,7 @@ protected:
         return (var(DESC));
     }
     QString currency() const {
-        return (m_vpCurrency == NULL ? QString() : m_vpCurrency->id());
+        return (m_vpCurrency == nullptr ? QString() : m_vpCurrency->id());
     }
     QDate dateEntered() const {
         return (m_vpDateEntered->date());
@@ -687,15 +687,15 @@ protected:
     }
     QDate startDate() const {
         QDate x = QDate();
-        return (m_vpStartDate == NULL ? x : m_vpStartDate->date());
+        return (m_vpStartDate == nullptr ? x : m_vpStartDate->date());
     }
     QDate lastDate() const {
         QDate x = QDate();
-        return (m_vpLastDate == NULL ? x : m_vpLastDate->date());
+        return (m_vpLastDate == nullptr ? x : m_vpLastDate->date());
     }
     QDate endDate() const {
         QDate x = QDate();
-        return (m_vpEndDate == NULL ? x : m_vpEndDate->date());
+        return (m_vpEndDate == nullptr ? x : m_vpEndDate->date());
     }
     const GncFreqSpec *getFreqSpec() const {
         return (m_vpFreqSpec);
@@ -753,7 +753,7 @@ protected:
     // access data values
     QDate startDate() const {
         QDate x = QDate();
-        return (m_vpStartDate == NULL ? x : m_vpStartDate->date());
+        return (m_vpStartDate == nullptr ? x : m_vpStartDate->date());
     }
     QString mult() const {
         return (var(MULT));

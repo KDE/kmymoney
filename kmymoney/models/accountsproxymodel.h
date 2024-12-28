@@ -192,7 +192,7 @@ template <class baseProxyModel>
 class AccountNamesFilterProxyModelTpl : public baseProxyModel
 {
 public:
-    explicit AccountNamesFilterProxyModelTpl(QObject *parent = 0)
+    explicit AccountNamesFilterProxyModelTpl(QObject* parent = nullptr)
         : baseProxyModel(parent)
     {}
 
@@ -248,8 +248,10 @@ class KMM_MODELS_EXPORT AccountNamesFilterProxyModel : public AccountNamesFilter
 {
     Q_OBJECT
 public:
-    explicit AccountNamesFilterProxyModel(QObject* parent = 0)
-        : AccountNamesFilterProxyModelTpl< AccountsProxyModel >(parent) {}
+    explicit AccountNamesFilterProxyModel(QObject* parent = nullptr)
+        : AccountNamesFilterProxyModelTpl<AccountsProxyModel>(parent)
+    {
+    }
 };
 
 

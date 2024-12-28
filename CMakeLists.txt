@@ -450,13 +450,13 @@ add_feature_info("Warnings as errors" WARNINGS_AS_ERRORS "Enforces all warnings 
 
 # Set compiler flags
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-  add_compile_options(-Wall -Wextra -Wlogical-op -Wno-null-dereference -Wshadow -Wunused -Wno-misleading-indentation -Wsuggest-override -Wcast-qual -Wformat=2 -fno-common -Werror=return-type)
+  add_compile_options(-Wall -Wextra -Wlogical-op -Wno-null-dereference -Wshadow -Wunused -Wno-misleading-indentation -Wsuggest-override -Wcast-qual -Wformat=2 -fno-common -Werror=return-type -Wzero-as-null-pointer-constant)
 
   if(WARNINGS_AS_ERRORS)
     add_compile_options(-Werror)
   endif()
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
-  add_compile_options(-Wall -Wextra -Wno-null-dereference -Wshadow -Wunused -Wno-misleading-indentation -Wsuggest-override -Wcast-qual -Wformat=2 -Wunreachable-code -fno-common -Werror=return-type)
+  add_compile_options(-Wall -Wextra -Wno-null-dereference -Wshadow -Wunused -Wno-misleading-indentation -Wsuggest-override -Wcast-qual -Wformat=2 -Wunreachable-code -fno-common -Werror=return-type -Wzero-as-null-pointer-constant)
 
   if(WARNINGS_AS_ERRORS)
     add_compile_options(-Werror)

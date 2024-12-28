@@ -27,7 +27,7 @@ class JournalDelegate : public KMMStyledItemDelegate
 {
     Q_OBJECT
 public:
-    explicit JournalDelegate(LedgerView* parent = 0);
+    explicit JournalDelegate(LedgerView* parent = nullptr);
     virtual ~JournalDelegate();
 
     void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;

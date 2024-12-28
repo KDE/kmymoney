@@ -34,7 +34,7 @@ class KMM_PLUGIN_EXPORT StatementInterface : public QObject
     Q_OBJECT
 
 public:
-    explicit StatementInterface(QObject* parent, const char* name = 0);
+    explicit StatementInterface(QObject* parent, const char* name = nullptr);
     virtual ~StatementInterface();
 
     virtual void resetMessages() const = 0;

@@ -194,8 +194,7 @@ void KCategoriesView::slotEditCategory()
         return;
     }
 
-    QPointer<KNewAccountDlg> dlg =
-        new KNewAccountDlg(d->m_currentCategory, true, true, 0, i18n("Edit category '%1'", d->m_currentCategory.name()));
+    QPointer<KNewAccountDlg> dlg = new KNewAccountDlg(d->m_currentCategory, true, true, nullptr, i18n("Edit category '%1'", d->m_currentCategory.name()));
 
     dlg->setOpeningBalanceShown(false);
     dlg->setOpeningDateShown(false);

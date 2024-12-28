@@ -1026,7 +1026,7 @@ public:
             }
             m_html += "</tr>";
 
-            m_total = 0;
+            m_total = nullptr;
             QList<MyMoneyAccount>::const_iterator it_m;
             for (it_m = accounts.cbegin(); it_m != accounts.cend(); ++it_m) {
                 m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");

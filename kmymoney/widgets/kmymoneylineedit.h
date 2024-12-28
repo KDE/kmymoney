@@ -43,7 +43,7 @@ public:
       * @param alignment Controls the alignment of the text. Default is Qt::AlignLeft | Qt::AlignVCenter.
       *                  See Qt::AlignmentFlags for other possible values.
       */
-    explicit KMyMoneyLineEdit(QWidget *w = 0, bool forceMonetaryDecimalSymbol = false, Qt::Alignment alignment = (Qt::AlignLeft | Qt::AlignVCenter));
+    explicit KMyMoneyLineEdit(QWidget* w = nullptr, bool forceMonetaryDecimalSymbol = false, Qt::Alignment alignment = (Qt::AlignLeft | Qt::AlignVCenter));
     ~KMyMoneyLineEdit();
 
     /**

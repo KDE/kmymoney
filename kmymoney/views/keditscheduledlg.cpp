@@ -600,7 +600,7 @@ void KEditScheduleDlg::newSchedule(const MyMoneyTransaction& _t, eMyMoney::Sched
         committed = true;
         QPointer<KEditScheduleDlg> dlg = new KEditScheduleDlg(schedule, nullptr);
         KMyMoneyMVCCombo::setSubstringSearchForChildren(dlg, !KMyMoneySettings::stringMatchFromStart());
-        if (dlg->exec() == QDialog::Accepted && dlg != 0) {
+        if (dlg->exec() == QDialog::Accepted && dlg != nullptr) {
             MyMoneyFileTransaction ft;
             try {
                 schedule = dlg->schedule();
@@ -651,7 +651,7 @@ void KEditScheduleDlg::editSchedule(const MyMoneySchedule& inputSchedule, bool a
         case eMyMoney::Schedule::Type::Transfer: {
             QScopedPointer<KEditScheduleDlg> dlg(new KEditScheduleDlg(schedule, nullptr));
             KMyMoneyMVCCombo::setSubstringSearchForChildren(dlg.data(), !KMyMoneySettings::stringMatchFromStart());
-            if (dlg->exec() == QDialog::Accepted && dlg != 0) {
+            if (dlg->exec() == QDialog::Accepted && dlg != nullptr) {
                 MyMoneyFileTransaction ft;
                 try {
                     MyMoneySchedule sched = dlg->schedule();

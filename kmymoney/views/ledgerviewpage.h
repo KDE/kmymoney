@@ -34,7 +34,7 @@ protected:
     Private* d;
 
 public:
-    explicit LedgerViewPage(QWidget* parent = 0, const QString& configGroupName = QString());
+    explicit LedgerViewPage(QWidget* parent = nullptr, const QString& configGroupName = QString());
     virtual ~LedgerViewPage();
 
     virtual void setAccount(const MyMoneyAccount& id);

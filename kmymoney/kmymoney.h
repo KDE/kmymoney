@@ -298,7 +298,7 @@ public:
     /**
       * constructor of KMyMoneyApp, calls all init functions to create the application.
       */
-    explicit KMyMoneyApp(QWidget* parent = 0);
+    explicit KMyMoneyApp(QWidget* parent = nullptr);
 
     /**
       * Destructor

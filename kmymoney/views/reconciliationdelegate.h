@@ -26,7 +26,7 @@ class ReconciliationDelegate : public KMMStyledItemDelegate
 {
     Q_OBJECT
 public:
-    explicit ReconciliationDelegate(QWidget* parent = 0);
+    explicit ReconciliationDelegate(QWidget* parent = nullptr);
     virtual ~ReconciliationDelegate();
 
     void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;

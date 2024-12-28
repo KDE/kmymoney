@@ -104,7 +104,7 @@ void KSettingsHome::slotLoadItems()
     QStringList list = KMyMoneySettings::listOfItems();
     QStringList::const_iterator it;
     d->ui->m_homePageList->clear();
-    QListWidgetItem *sel = 0;
+    QListWidgetItem* sel = nullptr;
 
     for (it = list.cbegin(); it != list.cend(); ++it) {
         int idx = (*it).toInt();
@@ -126,7 +126,7 @@ void KSettingsHome::slotLoadItems()
 
         item->setCheckState(enabled ? Qt::Checked : Qt::Unchecked);
 
-        if (sel == 0)
+        if (sel == nullptr)
             sel = item;
     }
 

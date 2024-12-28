@@ -49,7 +49,7 @@ class KMM_PLUGIN_EXPORT ViewInterface : public QObject
     Q_OBJECT
 
 public:
-    explicit ViewInterface(QObject* parent, const char* name = 0);
+    explicit ViewInterface(QObject* parent, const char* name = nullptr);
     virtual ~ViewInterface();
 
     virtual void addView(KMyMoneyViewBase* view, const QString& name, View idView, Icons::Icon icon) = 0;

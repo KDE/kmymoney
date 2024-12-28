@@ -25,7 +25,7 @@ class photoTanDialog : public QDialog
     Q_PROPERTY(QPixmap picture READ picture() WRITE setPicture)
 
 public:
-    explicit photoTanDialog(QWidget* parent = 0);
+    explicit photoTanDialog(QWidget* parent = nullptr);
     ~photoTanDialog();
 
     enum Result { Accepted = 0, Rejected, InternalError };

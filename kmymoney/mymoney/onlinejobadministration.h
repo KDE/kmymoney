@@ -58,7 +58,7 @@ class KMM_MYMONEY_EXPORT onlineJobAdministration : public QObject
     Q_PROPERTY(bool canSendCreditTransfer READ canSendCreditTransfer NOTIFY canSendCreditTransferChanged STORED false);
 
 protected:
-    explicit onlineJobAdministration(QObject *parent = 0);
+    explicit onlineJobAdministration(QObject* parent = nullptr);
 
 public:
     ~onlineJobAdministration();

@@ -2450,7 +2450,7 @@ bool KMyMoneyApp::queryClose()
 /////////////////////////////////////////////////////////////////////
 void KMyMoneyApp::slotFileInfoDialog()
 {
-    QPointer<KMyMoneyFileInfoDlg> dlg = new KMyMoneyFileInfoDlg(0);
+    QPointer<KMyMoneyFileInfoDlg> dlg = new KMyMoneyFileInfoDlg(nullptr);
     dlg->exec();
     delete dlg;
 }
@@ -3609,7 +3609,7 @@ void KMyMoneyApp::slotFileViewPersonal()
             user.city(), user.state(), user.postcode(), user.telephone(),
             user.email(), this, i18n("Edit Personal Data"));
 
-    if (editPersonalDataDlg->exec() == QDialog::Accepted && editPersonalDataDlg != 0) {
+    if (editPersonalDataDlg->exec() == QDialog::Accepted && editPersonalDataDlg != nullptr) {
         user.setName(editPersonalDataDlg->userName());
         user.setAddress(editPersonalDataDlg->userStreet());
         user.setCity(editPersonalDataDlg->userTown());
@@ -3633,7 +3633,7 @@ void KMyMoneyApp::slotLoadAccountTemplates()
     KMSTATUS(i18n("Importing account templates."));
 
     QPointer<KLoadTemplateDlg> dlg = new KLoadTemplateDlg();
-    if (dlg->exec() == QDialog::Accepted && dlg != 0) {
+    if (dlg->exec() == QDialog::Accepted && dlg != nullptr) {
         MyMoneyFileTransaction ft;
         TemplateLoader loader(this);
         try {
@@ -3863,7 +3863,7 @@ void KMyMoneyApp::slotBackupFile()
     QPointer<KBackupDlg> backupDlg = new KBackupDlg(this);
     int returncode = backupDlg->exec();
 
-    if (returncode == QDialog::Accepted && backupDlg != 0) {
+    if (returncode == QDialog::Accepted && backupDlg != nullptr) {
         d->m_backupMount = backupDlg->mountCheckBoxChecked();
         d->m_proc.clearProgram();
         d->m_backupState = BACKUP_MOUNTING;
@@ -4198,7 +4198,7 @@ void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
             msg = i18n("The consistency check has found some issues in your data. Details are presented below. Those issues that could not be corrected automatically need to be solved by the user.");
         // install a context menu for the list after the dialog is displayed
         QTimer::singleShot(500, q, SLOT(slotInstallConsistencyCheckContextMenu()));
-        KMessageBox::informationList(0, msg, m_consistencyCheckResult, i18n("Consistency check result"));
+        KMessageBox::informationList(nullptr, msg, m_consistencyCheckResult, i18n("Consistency check result"));
     }
     // this data is no longer needed
     m_consistencyCheckResult.clear();
@@ -4416,7 +4416,7 @@ QList<QString> KMyMoneyApp::instanceList() const
 void KMyMoneyApp::slotEquityPriceUpdate()
 {
     QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this);
-    if (dlg->exec() == QDialog::Accepted && dlg != 0)
+    if (dlg->exec() == QDialog::Accepted && dlg != nullptr)
         dlg->storePrices();
     delete dlg;
 }

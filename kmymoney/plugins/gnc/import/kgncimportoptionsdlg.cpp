@@ -114,7 +114,7 @@ void KGncImportOptionsDlg::slotDecodeOptionChanged(bool isOn)
     Q_D(KGncImportOptionsDlg);
     if (isOn) {
         d->ui->comboDecode->setEnabled(true);
-        d->ui->comboDecode->setCurrentItem(0);
+        d->ui->comboDecode->setCurrentItem(nullptr);
     } else {
         d->ui->comboDecode->setEnabled(false);
     }

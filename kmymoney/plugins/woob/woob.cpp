@@ -120,7 +120,7 @@ QWidget* Woob::accountConfigTab(const MyMoneyAccount& account, QString& tabName)
     const MyMoneyKeyValueContainer& kvp = account.onlineBankingSettings();
     tabName = i18n("Woob configuration");
 
-    d->accountSettings = new AccountSettings(account, 0);
+    d->accountSettings = new AccountSettings(account, nullptr);
     d->accountSettings->loadUi(kvp);
 
     return d->accountSettings;

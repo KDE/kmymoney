@@ -32,9 +32,9 @@
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneyofxconnector.h"
 
-KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *parent) :
-    KOnlineBankingStatusDecl(parent),
-    m_appId(0)
+KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget* parent)
+    : KOnlineBankingStatusDecl(parent)
+    , m_appId(nullptr)
 {
     m_ledOnlineStatus->off();
 

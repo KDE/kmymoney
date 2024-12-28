@@ -30,7 +30,7 @@ class sepaCreditTransferEdit : public IonlineJobEdit
     Q_INTERFACES(IonlineJobEdit);
 
 public:
-    explicit sepaCreditTransferEdit(QWidget *parent = 0, QVariantList args = QVariantList());
+    explicit sepaCreditTransferEdit(QWidget* parent = nullptr, QVariantList args = QVariantList());
     ~sepaCreditTransferEdit();
     onlineJobTyped<sepaOnlineTransfer> getOnlineJobTyped() const;
     onlineJob getOnlineJob() const final override {

@@ -246,8 +246,8 @@ void WidgetHintFrame::attachToWidget(QWidget* w)
 bool WidgetHintFrame::eventFilter(QObject* o, QEvent* e)
 {
     if (o == d->editWidget) {
-        QMoveEvent* mev = 0;
-        QResizeEvent* sev = 0;
+        QMoveEvent* mev = nullptr;
+        QResizeEvent* sev = nullptr;
         const auto increment = d->offset * 2;
         switch (e->type()) {
         case QEvent::EnabledChange:

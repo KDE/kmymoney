@@ -201,7 +201,7 @@ bool SQLStorage::save(const QUrl &url)
     } else {
         rc = true;
     }
-    writer->setProgressCallback(0);
+    writer->setProgressCallback(nullptr);
     delete writer;
     return rc;
 }
@@ -221,7 +221,7 @@ bool SQLStorage::saveAs()
         return rc;
     }
 
-    while (oldUrl == url && dialog->exec() == QDialog::Accepted && dialog != 0) {
+    while (oldUrl == url && dialog->exec() == QDialog::Accepted && dialog != nullptr) {
         url = dialog->selectedURL();
         // If the protocol is SQL for the old and new, and the hostname and database names match
         // Let the user know that the current database cannot be saved on top of itself.
@@ -280,7 +280,7 @@ void SQLStorage::slotOpenDatabase()
         return;
     }
 
-    if (dialog->exec() == QDialog::Accepted && dialog != 0) {
+    if (dialog->exec() == QDialog::Accepted && dialog != nullptr) {
         auto url = dialog->selectedURL();
         QUrl newurl = url;
         if ((newurl.scheme() == QLatin1String("sql"))) {

@@ -574,7 +574,7 @@ void KInvestmentView::slotUpdatePriceOnline()
 {
     Q_D(KInvestmentView);
     if (!d->currentEquity().id().isEmpty()) {
-        QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(0, d->currentEquity().currencyId());
+        QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(nullptr, d->currentEquity().currencyId());
         if ((dlg->exec() == QDialog::Accepted) && (dlg != nullptr))
             dlg->storePrices();
         delete dlg;

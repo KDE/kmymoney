@@ -1784,7 +1784,7 @@ QMap<QString, MyMoneyMoney> MyMoneyStorageSql::fetchBalance(const QStringList& i
         if (id != oldId) {
             if (!oldId.isEmpty()) {
                 returnValue.insert(oldId, temp);
-                temp = 0;
+                temp = nullptr;
             }
             oldId = id;
         }

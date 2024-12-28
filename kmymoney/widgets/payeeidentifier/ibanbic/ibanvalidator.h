@@ -23,7 +23,7 @@ class KMM_BASE_WIDGETS_EXPORT ibanValidator : public QValidator
     Q_OBJECT
 
 public:
-    explicit ibanValidator(QObject* parent = 0);
+    explicit ibanValidator(QObject* parent = nullptr);
     State validate(QString& input, int& pos) const final override;
     void fixup(QString& input) const final override;
 

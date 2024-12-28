@@ -104,7 +104,7 @@ void MyMoneyGncReader::setOptions()
         m_investmentOption = 0;
         m_useFinanceQuote = false;
         m_useTxNotes = false;
-        m_decoder = 0;
+        m_decoder = nullptr;
         gncdebug = false; // general debug messages
         xmldebug = false; // xml trace
         bAnonymize = false; // anonymize input
@@ -117,16 +117,16 @@ void MyMoneyGncReader::setOptions()
 #endif // _GNCFILEANON
 }
 
-GncObject::GncObject() :
-    pMain(0),
-    m_subElementList(0),
-    m_subElementListCount(0),
-    m_dataElementList(0),
-    m_dataElementListCount(0),
-    m_dataPtr(0),
-    m_state(0),
-    m_anonClassList(0),
-    m_anonClass(0)
+GncObject::GncObject()
+    : pMain(nullptr)
+    , m_subElementList(nullptr)
+    , m_subElementListCount(0)
+    , m_dataElementList(nullptr)
+    , m_dataElementListCount(0)
+    , m_dataPtr(nullptr)
+    , m_state(0)
+    , m_anonClassList(nullptr)
+    , m_anonClass(0)
 {
 }
 
@@ -146,12 +146,12 @@ GncObject* GncObject::isSubElement(const QString& elName, const QXmlStreamAttrib
 {
     TRY {
         uint i;
-        GncObject *next = 0;
+        GncObject* next = nullptr;
         for (i = 0; i < m_subElementListCount; i++) {
             if (elName == m_subElementList[i]) {
                 m_state = i;
                 next = startSubEl(); // go create the sub object
-                if (next != 0) {
+                if (next != nullptr) {
                     next->initiate(elName, elAttrs); // initialize it
                     next->m_elementName = elName;    // save it's name so we can identify the end
                 }
@@ -174,8 +174,8 @@ bool GncObject::isDataElement(const QString& elName, const QXmlStreamAttributes&
                 return (true);
             }
     }
-        m_dataPtr = 0; // we don't need this, so make sure we don't store extraneous data
-        return (false);
+    m_dataPtr = nullptr; // we don't need this, so make sure we don't store extraneous data
+    return (false);
     }
     PASS
 }
@@ -189,9 +189,7 @@ QString GncObject::var(int i) const
      to prove this conclusively.
      If true, we can remove the encoding option in the import options dialog
      and this code too.*/
-    return (pMain->m_decoder == 0
-            ? m_v[i]
-            : pMain->m_decoder->toUnicode(m_v[i].toUtf8()));
+    return (pMain->m_decoder == nullptr ? m_v[i] : pMain->m_decoder->toUnicode(m_v[i].toUtf8()));
 }
 
 const QString GncObject::getKvpValue(const QString& key, const QString& type) const
@@ -311,7 +309,7 @@ GncObject *GncFile::startSubEl()
 {
     TRY {
         if (pMain->xmldebug) qDebug("File start subel m_state %d", m_state);
-        GncObject *next = 0;
+        GncObject* next = nullptr;
         switch (m_state) {
         case BOOK:
             if (m_bookFound) MYMONEYEXCEPTION(QString::fromLatin1("This version of the importer cannot handle multi-book files."));
@@ -352,7 +350,7 @@ void GncFile::endSubEl(GncObject *subObj)
 {
     if (pMain->xmldebug) qDebug("File end subel");
     if (!m_processingTemplates) delete subObj; // template txs must be saved awaiting schedules
-    m_dataPtr = 0;
+    m_dataPtr = nullptr;
     return ;
 }
 //****************************************** GncDate *********************************************
@@ -427,7 +425,7 @@ GncObject *GncKvp::startSubEl()
 {
     if (pMain->xmldebug) qDebug("Kvp start subel m_state %d", m_state);
     TRY {
-        GncObject *next = 0;
+        GncObject* next = nullptr;
         switch (m_state) {
         case KVP:
             next = new GncKvp;
@@ -444,7 +442,7 @@ void GncKvp::endSubEl(GncObject *subObj)
 {
     if (pMain->xmldebug) qDebug("Kvp end subel");
     m_kvpList.append(*(static_cast <GncKvp*>(subObj)));
-    m_dataPtr = 0;
+    m_dataPtr = nullptr;
     return ;
 }
 //*********************************GncLot*********************************************
@@ -533,9 +531,9 @@ GncPrice::GncPrice()
     static const unsigned int anonClasses[] = {ASIS};
     m_anonClassList = anonClasses;
     for (uint i = 0; i < m_dataElementListCount; i++) m_v.append(QString());
-    m_vpCommodity = 0;
-    m_vpCurrency = 0;
-    m_vpPriceDate = 0;
+    m_vpCommodity = nullptr;
+    m_vpCurrency = nullptr;
+    m_vpPriceDate = nullptr;
 }
 
 GncPrice::~GncPrice()
@@ -548,7 +546,7 @@ GncPrice::~GncPrice()
 GncObject *GncPrice::startSubEl()
 {
     TRY {
-        GncObject *next = 0;
+        GncObject* next = nullptr;
         switch (m_state) {
         case CMDTY:
             next = new GncCmdtySpec;
@@ -610,7 +608,7 @@ GncAccount::GncAccount()
     static const unsigned int anonClasses[] = {ASIS, NXTACC, SUPPRESS, ASIS, ASIS};
     m_anonClassList = anonClasses;
     for (uint i = 0; i < m_dataElementListCount; i++) m_v.append(QString());
-    m_vpCommodity = 0;
+    m_vpCommodity = nullptr;
 }
 
 GncAccount::~GncAccount()
@@ -622,7 +620,7 @@ GncObject *GncAccount::startSubEl()
 {
     TRY {
         if (pMain->xmldebug) qDebug("Account start subel m_state %d", m_state);
-        GncObject *next = 0;
+        GncObject* next = nullptr;
         switch (m_state) {
         case CMDTY:
             next = new GncCmdtySpec;
@@ -679,8 +677,8 @@ GncTransaction::GncTransaction(bool processingTemplates)
     adjustHideFactor();
     m_template = processingTemplates;
     for (uint i = 0; i < m_dataElementListCount; i++) m_v.append(QString());
-    m_vpCurrency = 0;
-    m_vpDateEntered = m_vpDatePosted = 0;
+    m_vpCurrency = nullptr;
+    m_vpDateEntered = m_vpDatePosted = nullptr;
 }
 
 GncTransaction::~GncTransaction()
@@ -694,7 +692,7 @@ GncObject *GncTransaction::startSubEl()
 {
     TRY {
         if (pMain->xmldebug) qDebug("Transaction start subel m_state %d", m_state);
-        GncObject *next = 0;
+        GncObject* next = nullptr;
         switch (m_state) {
         case CURRCY:
             next = new GncCmdtySpec;
@@ -769,7 +767,7 @@ GncSplit::GncSplit()
     static const unsigned int anonClasses[] = {ASIS, SUPPRESS, ASIS, MONEY1, MONEY1, ASIS};
     m_anonClassList = anonClasses;
     for (uint i = 0; i < m_dataElementListCount; i++) m_v.append(QString());
-    m_vpDateReconciled = 0;
+    m_vpDateReconciled = nullptr;
 }
 
 GncSplit::~GncSplit()
@@ -780,7 +778,7 @@ GncSplit::~GncSplit()
 GncObject *GncSplit::startSubEl()
 {
     TRY {
-        GncObject *next = 0;
+        GncObject* next = nullptr;
         switch (m_state) {
         case RECDATE:
             next = new GncDate;
@@ -825,7 +823,7 @@ GncObject *GncTemplateSplit::startSubEl()
 {
     if (pMain->xmldebug) qDebug("TemplateSplit start subel m_state %d", m_state);
     TRY {
-        GncObject *next = 0;
+        GncObject* next = nullptr;
         switch (m_state) {
         case KVP:
             next = new GncKvp;
@@ -842,7 +840,7 @@ void GncTemplateSplit::endSubEl(GncObject *subObj)
 {
     if (pMain->xmldebug) qDebug("TemplateSplit end subel");
     m_kvpList.append(*(static_cast <GncKvp*>(subObj)));
-    m_dataPtr = 0;
+    m_dataPtr = nullptr;
     return ;
 }
 //************* GncSchedule********************************************
@@ -861,10 +859,10 @@ GncSchedule::GncSchedule()
     static const unsigned int anonClasses[] = {NXTSCHD, ASIS, ASIS, ASIS, ASIS, ASIS, ASIS, ASIS, ASIS, ASIS, ASIS};
     m_anonClassList = anonClasses;
     for (uint i = 0; i < m_dataElementListCount; i++) m_v.append(QString());
-    m_vpStartDate = m_vpLastDate = m_vpEndDate = 0;
-    m_vpFreqSpec = 0;
+    m_vpStartDate = m_vpLastDate = m_vpEndDate = nullptr;
+    m_vpFreqSpec = nullptr;
     m_vpRecurrence.clear();
-    m_vpSchedDef = 0;
+    m_vpSchedDef = nullptr;
 }
 
 GncSchedule::~GncSchedule()
@@ -880,7 +878,7 @@ GncObject *GncSchedule::startSubEl()
 {
     if (pMain->xmldebug) qDebug("Schedule start subel m_state %d", m_state);
     TRY {
-        GncObject *next = 0;
+        GncObject* next = nullptr;
         switch (m_state) {
         case STARTDATE:
         case LASTDATE:
@@ -961,7 +959,7 @@ GncObject *GncFreqSpec::startSubEl()
     TRY {
         if (pMain->xmldebug) qDebug("FreqSpec start subel m_state %d", m_state);
 
-        GncObject *next = 0;
+        GncObject* next = nullptr;
         switch (m_state) {
         case COMPO:
             next = new GncFreqSpec;
@@ -982,7 +980,7 @@ void GncFreqSpec::endSubEl(GncObject *subObj)
         m_fsList.append(subObj);
         break;
     }
-    m_dataPtr = 0;
+    m_dataPtr = nullptr;
     return ;
 }
 
@@ -992,8 +990,8 @@ void GncFreqSpec::terminate()
     return ;
 }
 //************* GncRecurrence********************************************
-GncRecurrence::GncRecurrence() :
-    m_vpStartDate(0)
+GncRecurrence::GncRecurrence()
+    : m_vpStartDate(nullptr)
 {
     m_subElementListCount = END_Recurrence_SELS;
     static const QString subEls[] = {"recurrence:start"};
@@ -1016,7 +1014,7 @@ GncObject *GncRecurrence::startSubEl()
     TRY {
         if (pMain->xmldebug) qDebug("Recurrence start subel m_state %d", m_state);
 
-        GncObject *next = 0;
+        GncObject* next = nullptr;
         switch (m_state) {
         case STARTDATE:
             next = new GncDate;
@@ -1037,7 +1035,7 @@ void GncRecurrence::endSubEl(GncObject *subObj)
         m_vpStartDate = static_cast<GncDate *>(subObj);
         break;
     }
-    m_dataPtr = 0;
+    m_dataPtr = nullptr;
     return ;
 }
 
@@ -1084,7 +1082,7 @@ GncSchedDef::~GncSchedDef() {}
                          XML Reader
 ************************************************************************************************/
 XmlReader::XmlReader(MyMoneyGncReader* pM)
-    : m_co(0)
+    : m_co(nullptr)
     , pMain(pM)
     , m_headerFound(false)
 #ifdef _GNCFILEANON
@@ -1192,7 +1190,7 @@ bool XmlReader::startElement(int /*lineNumber*/, int /*columnNumber*/, const QSt
         m_co->checkVersion(elName, elAttrs, pMain->m_versionList);
         // check if this is a sub object element; if so, push stack and initialize
         GncObject *temp = m_co->isSubElement(elName, elAttrs);
-        if (temp != 0) {
+        if (temp != nullptr) {
             m_os.push(temp);
             m_co = m_os.top();
             m_co->setVersion(elAttrs.value("version").toString());
@@ -1211,7 +1209,7 @@ bool XmlReader::startElement(int /*lineNumber*/, int /*columnNumber*/, const QSt
     } catch (const MyMoneyException &e) {
 #ifndef _GNCFILEANON
         // we can't pass on exceptions here coz the XML reader won't catch them and we just abort
-        KMessageBox::error(0, i18n("Import failed:\n\n%1", QString::fromLatin1(e.what())), PACKAGE);
+        KMessageBox::error(nullptr, i18n("Import failed:\n\n%1", QString::fromLatin1(e.what())), PACKAGE);
         qWarning("%s", e.what());
 #else
         qWarning("%s", e->toLatin1());
@@ -1250,7 +1248,7 @@ bool XmlReader::endElement(int /*lineNumber*/, int /*columnNumber*/, const QStri
     } catch (const MyMoneyException &e) {
 #ifndef _GNCFILEANON
         // we can't pass on exceptions here coz the XML reader won't catch them and we just abort
-        KMessageBox::error(0, i18n("Import failed:\n\n%1", QString::fromLatin1(e.what())), PACKAGE);
+        KMessageBox::error(nullptr, i18n("Import failed:\n\n%1", QString::fromLatin1(e.what())), PACKAGE);
         qWarning("%s", e.what());
 #else
         qWarning("%s", e->toLatin1());
@@ -1297,29 +1295,29 @@ bool XmlReader::endDocument()
   Controls overall operation of the importer
 ********************************************************************************************/
 //***************** Constructor ***********************
-MyMoneyGncReader::MyMoneyGncReader() :
-    m_dropSuspectSchedules(0),
-    m_investmentOption(0),
-    m_useFinanceQuote(0),
-    m_useTxNotes(0),
-    gncdebug(0),
-    xmldebug(0),
-    bAnonymize(0),
-    developerDebug(0),
-    m_xr(0),
-    m_progressCallback(0),
-    m_ccCount(0),
-    m_orCount(0),
-    m_scCount(0),
-    m_potentialTransfer(0),
-    m_suspectSchedule(false)
+MyMoneyGncReader::MyMoneyGncReader()
+    : m_dropSuspectSchedules(0)
+    , m_investmentOption(0)
+    , m_useFinanceQuote(0)
+    , m_useTxNotes(0)
+    , gncdebug(0)
+    , xmldebug(0)
+    , bAnonymize(0)
+    , developerDebug(0)
+    , m_xr(nullptr)
+    , m_progressCallback(nullptr)
+    , m_ccCount(0)
+    , m_orCount(0)
+    , m_scCount(0)
+    , m_potentialTransfer(0)
+    , m_suspectSchedule(false)
 {
 // to hold gnucash count data (only used for progress bar)
     m_storage = MyMoneyFile::instance();
     m_gncCommodityCount = m_gncAccountCount = m_gncTransactionCount = m_gncScheduleCount = 0;
     m_smallBusinessFound = m_budgetsFound = m_lotsFound = false;
     m_commodityCount = m_priceCount = m_accountCount = m_transactionCount = m_templateCount = m_scheduleCount = 0;
-    m_decoder = 0;
+    m_decoder = nullptr;
     // build a list of valid versions
     static const QString versionList[] = {"gnc:book 2.0.0", "gnc:commodity 2.0.0", "gnc:pricedb 1",
                                           "gnc:account 2.0.0", "gnc:transaction 2.0.0", "gnc:schedxaction 1.0.0",
@@ -1356,7 +1354,7 @@ void MyMoneyGncReader::readFile(QIODevice* pDevice, MyMoneyFile* file)
         terminate();  // do all the wind-up things
         ft.commit();
     } catch (const MyMoneyException &e) {
-        KMessageBox::error(0, i18n("Import failed:\n\n%1", QString::fromLatin1(e.what())), PACKAGE);
+        KMessageBox::error(nullptr, i18n("Import failed:\n\n%1", QString::fromLatin1(e.what())), PACKAGE);
         qWarning("%s", e.what());
     } // end catch
     MyMoneyFile::instance()->blockSignals(blocked);
@@ -1416,14 +1414,18 @@ void MyMoneyGncReader::setFileHideFactor()
 #define MAXFILEHIDEF 99.99
     m_fileHideFactor = 0.0;
     while (m_fileHideFactor == 0.0) {
-        m_fileHideFactor = QInputDialog::getDouble(0,
-                           i18n("Disguise your wealth"),
-                           i18n("Each monetary value on your file will be multiplied by a random number between 0.01 and 1.99\n"
-                                "with a different value used for each transaction. In addition, to further disguise the true\n"
-                                "values, you may enter a number between %1 and %2 which will be applied to all values.\n"
-                                "These numbers will not be stored in the file.", MINFILEHIDEF, MAXFILEHIDEF),
-                           (1.0 + (int)(1000.0 * QRandomGenerator::system()->generate() / (RAND_MAX + 1.0))) / 100.0,
-                           MINFILEHIDEF, MAXFILEHIDEF, 2);
+        m_fileHideFactor = QInputDialog::getDouble(nullptr,
+                                                   i18n("Disguise your wealth"),
+                                                   i18n("Each monetary value on your file will be multiplied by a random number between 0.01 and 1.99\n"
+                                                        "with a different value used for each transaction. In addition, to further disguise the true\n"
+                                                        "values, you may enter a number between %1 and %2 which will be applied to all values.\n"
+                                                        "These numbers will not be stored in the file.",
+                                                        MINFILEHIDEF,
+                                                        MAXFILEHIDEF),
+                                                   (1.0 + (int)(1000.0 * QRandomGenerator::system()->generate() / (RAND_MAX + 1.0))) / 100.0,
+                                                   MINFILEHIDEF,
+                                                   MAXFILEHIDEF,
+                                                   2);
     }
 }
 #ifndef _GNCFILEANON
@@ -1981,7 +1983,7 @@ void MyMoneyGncReader::convertTemplateSplit(const QString& schedName, const GncT
                 crdr = 'D';
                 numericTest = gncDebitFormula;
             }
-            KMyMoneyMoneyValidator v(0);
+            KMyMoneyMoneyValidator v(nullptr);
             int pos; // useless, but required for validator
             if (v.validate(numericTest, pos) == QValidator::Acceptable) {
                 switch (crdr) {
@@ -2141,7 +2143,7 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
         } else {
             // find this interval
             const GncFreqSpec *fs = gsc->getFreqSpec();
-            if (fs == 0) {
+            if (fs == nullptr) {
                 unknownOccurs = true;
             } else {
                 frequency = fs->intervalType();
@@ -2197,7 +2199,7 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
             sc.setEndDate(endDate);
         }
         // Check for sched deferred interval. Don't know how/if we can handle it, or even what it means...
-        if (gsc->getSchedDef() != 0) {
+        if (gsc->getSchedDef() != nullptr) {
             m_messageList["SC"].append(
                 i18n("Schedule %1 contains a deferred interval specification; please check for correct operation",
                      sc.name()));
@@ -2278,7 +2280,7 @@ for (map_accountIds::const_iterator it = m_mapIds.cbegin(); it != m_mapIds.cend(
 
         if (!mainCurrency.isEmpty()) {
             QString question = i18n("Your main currency seems to be %1 (%2); do you want to set this as your base currency?", mainCurrency, m_storage->currency(mainCurrency.toUtf8()).name());
-            if (KMessageBox::questionTwoActions(0, question, PACKAGE, KMMYesNo::yes(), KMMYesNo::no()) == KMessageBox::PrimaryAction) {
+            if (KMessageBox::questionTwoActions(nullptr, question, PACKAGE, KMMYesNo::yes(), KMMYesNo::no()) == KMessageBox::PrimaryAction) {
                 m_storage->setValue("kmm-baseCurrency", mainCurrency);
             }
         }
@@ -2301,7 +2303,7 @@ for (map_accountIds::const_iterator it = m_mapIds.cbegin(); it != m_mapIds.cend(
             KGuiItem yesItem(button0Text, QIcon(), "", "");
             KGuiItem noItem(i18n("Save Report"), QIcon(), "", "");
 
-            switch (KMessageBox::questionTwoActionsCancel(0, buildReportSection(sectionsToReport[si]), PACKAGE, yesItem, noItem)) {
+            switch (KMessageBox::questionTwoActionsCancel(nullptr, buildReportSection(sectionsToReport[si]), PACKAGE, yesItem, noItem)) {
             case KMessageBox::PrimaryAction:
                 break;
             case KMessageBox::SecondaryAction:
@@ -2316,7 +2318,7 @@ for (map_accountIds::const_iterator it = m_mapIds.cbegin(); it != m_mapIds.cend(
 
         for (si = 0; si < m_suspectList.count(); ++si) {
             auto sc = m_storage->schedule(m_suspectList[si]);
-            KMessageBox::information(0, i18n("Problems were encountered in converting schedule '%1'.", sc.name()), PACKAGE);
+            KMessageBox::information(nullptr, i18n("Problems were encountered in converting schedule '%1'.", sc.name()), PACKAGE);
             //      TODO: return this feature
             //      switch (KMessageBox::warningTwoActions(0, i18n("Problems were encountered in converting schedule '%1'.\nDo you want to review or edit it
             //      now?", sc.name()), PACKAGE, KMMYesNo::yes(), KMMYesNo::no())) {
@@ -2387,13 +2389,13 @@ bool MyMoneyGncReader::writeReportToFile(const QList<QString>& sectionsToReport)
 {
     TRY {
         int i;
-        QString fd = QFileDialog::getSaveFileName(0, QString(), QString(),
-                i18n("Save report as"));
-        if (fd.isEmpty()) return (false);
-        QFile reportFile(fd);
-        if (!reportFile.open(QIODevice::WriteOnly))  {
-            return (false);
-        }
+QString fd = QFileDialog::getSaveFileName(nullptr, QString(), QString(), i18n("Save report as"));
+if (fd.isEmpty())
+    return (false);
+QFile reportFile(fd);
+if (!reportFile.open(QIODevice::WriteOnly)) {
+    return (false);
+}
         QTextStream stream(&reportFile);
         for (i = 0; i < sectionsToReport.count(); i++)
             stream << buildReportSection(sectionsToReport[i]) << Qt::endl;
@@ -2534,9 +2536,12 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
         if (singleInvAccId.isEmpty()) { // if the account has not yet been created
             QString invAccName;
             while (!ok) {
-                invAccName = QInputDialog::getText(0, QStringLiteral(PACKAGE),
+                invAccName = QInputDialog::getText(nullptr,
+                                                   QStringLiteral(PACKAGE),
                                                    i18n("Enter the investment account name "),
-                                                   QLineEdit::Normal, i18n("My Investments"), &ok);
+                                                   QLineEdit::Normal,
+                                                   i18n("My Investments"),
+                                                   &ok);
             }
             singleInvAcc.setName(invAccName);
             singleInvAcc.setAccountType(Account::Type::Investment);
@@ -2572,11 +2577,13 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
         //if (accList.isEmpty()) qWarning ("No available accounts");
         bool ok = false;
         while (!ok) { // keep going till we have a valid investment parent
-            QString invAccName = QInputDialog::getItem(0,
-                                 PACKAGE,
-                                 i18n("Select parent investment account or enter new name. Stock %1", stockAcc.name()),
-                                 accList,
-                                 lastSelected, true, &ok);
+            QString invAccName = QInputDialog::getItem(nullptr,
+                                                       PACKAGE,
+                                                       i18n("Select parent investment account or enter new name. Stock %1", stockAcc.name()),
+                                                       accList,
+                                                       lastSelected,
+                                                       true,
+                                                       &ok);
             if (ok) {
                 lastSelected = accList.indexOf(invAccName);  // preserve selection for next time
                 for (acc = list.begin(); acc != list.end(); ++acc) {
@@ -2615,7 +2622,7 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
                         break;
                     }
 #endif
-                    switch (KMessageBox::questionTwoActions(0,
+                    switch (KMessageBox::questionTwoActions(nullptr,
                                                             i18n("%1 is not an Investment Account. Do you wish to make it one?", invAcc.name()),
                                                             PACKAGE,
                                                             KMMYesNo::yes(),
@@ -2683,7 +2690,7 @@ void MyMoneyGncReader::setProgressCallback(void(*callback)(int, int, const QStri
 //************************** signalProgress *******************************
 void MyMoneyGncReader::signalProgress(int current, int total, const QString& msg)
 {
-    if (m_progressCallback != 0)
+    if (m_progressCallback != nullptr)
         (*m_progressCallback)(current, total, msg);
     return ;
 }

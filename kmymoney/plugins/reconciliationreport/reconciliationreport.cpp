@@ -334,7 +334,7 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
         // end of the table
         + "</table>\n";
 
-    QPointer<KReportDlg> dlg = new KReportDlg(0, header + report + footer, header + detailsReport + footer);
+    QPointer<KReportDlg> dlg = new KReportDlg(nullptr, header + report + footer, header + detailsReport + footer);
     dlg->exec();
     delete dlg;
 }

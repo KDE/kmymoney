@@ -40,7 +40,7 @@ class KBJobListView: public QTreeWidget
 {
 private:
 public:
-    explicit KBJobListView(QWidget *parent = 0);
+    explicit KBJobListView(QWidget* parent = nullptr);
     virtual ~KBJobListView();
 
     void addJob(AB_TRANSACTION *j);

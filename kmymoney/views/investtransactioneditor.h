@@ -25,7 +25,7 @@ class InvestTransactionEditor : public TransactionEditorBase, TabOrderEditorInte
     Q_OBJECT
 
 public:
-    explicit InvestTransactionEditor(QWidget* parent = 0, const QString& accountId = QString());
+    explicit InvestTransactionEditor(QWidget* parent = nullptr, const QString& accountId = QString());
     virtual ~InvestTransactionEditor();
 
     /**

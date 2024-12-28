@@ -20,7 +20,10 @@
 class bicItemDelegate : public QStyledItemDelegate
 {
 public:
-    explicit bicItemDelegate(QObject* parent = 0) : QStyledItemDelegate(parent) {}
+    explicit bicItemDelegate(QObject* parent = nullptr)
+        : QStyledItemDelegate(parent)
+    {
+    }
     void paint(QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex & index) const final override;
     QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
 

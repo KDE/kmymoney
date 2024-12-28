@@ -103,11 +103,11 @@ void MapAccountWizard::slotCheckNextButton(void)
     auto enableButton = false;
     switch (currentId()) {
     case BACKENDS_PAGE:
-        enableButton = d->ui->backendsList->currentItem() != 0 && d->ui->backendsList->currentItem()->isSelected();
+        enableButton = (d->ui->backendsList->currentItem() != nullptr) && d->ui->backendsList->currentItem()->isSelected();
         button(QWizard::NextButton)->setEnabled(enableButton);
         break;
     case ACCOUNTS_PAGE:
-        enableButton = d->ui->accountsList->currentItem() != 0 && d->ui->accountsList->currentItem()->isSelected();
+        enableButton = (d->ui->accountsList->currentItem() != nullptr) && d->ui->accountsList->currentItem()->isSelected();
         button(QWizard::FinishButton)->setEnabled(enableButton);
         break;
     }

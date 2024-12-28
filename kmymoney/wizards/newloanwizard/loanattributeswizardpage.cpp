@@ -88,7 +88,7 @@ void LoanAttributesWizardPage::slotNewClicked()
     MyMoneyInstitution institution;
 
     QPointer<KNewInstitutionDlg> dlg = new KNewInstitutionDlg(institution, this);
-    if (dlg->exec() && dlg != 0) {
+    if (dlg->exec() && dlg != nullptr) {
         MyMoneyFileTransaction ft;
         try {
             MyMoneyFile *file = MyMoneyFile::instance();

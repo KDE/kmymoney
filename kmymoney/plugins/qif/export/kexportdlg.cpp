@@ -141,7 +141,7 @@ void KExportDlg::loadProfiles(const bool selectLast)
         current = grp.readEntry(QLatin1String("KExportDlg_LastProfile"));
     }
 
-    m_profileComboBox->setCurrentItem(0);
+    m_profileComboBox->setCurrentItem(nullptr);
     if (list.contains(current))
         m_profileComboBox->setCurrentIndex(m_profileComboBox->findText(current, Qt::MatchExactly));
 }

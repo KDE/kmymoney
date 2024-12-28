@@ -36,7 +36,7 @@ QSqlDriver* QSQLCipherDriverPlugin::create(const QString &name)
         QSQLiteDriver* driver = new QSQLiteDriver();
         return driver;
     }
-    return 0;
+    return nullptr;
 }
 
 QT_END_NAMESPACE

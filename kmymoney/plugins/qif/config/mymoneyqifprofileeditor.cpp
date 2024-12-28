@@ -66,12 +66,12 @@ QValidator::State MyMoneyQifProfileNameValidator::validate(QString& name, int&) 
     return QValidator::Acceptable;
 }
 
-MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *parent)
-    : QWidget(parent),
-      m_inEdit(edit),
-      m_isDirty(false),
-      m_isAccepted(false),
-      m_selectedAmountType(0)
+MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget* parent)
+    : QWidget(parent)
+    , m_inEdit(edit)
+    , m_isDirty(false)
+    , m_isAccepted(false)
+    , m_selectedAmountType(nullptr)
 {
     setupUi(this);
     loadWidgets();
@@ -293,7 +293,7 @@ void MyMoneyQifProfileEditor::showProfile()
         (*it)->setTextAlignment(2, Qt::AlignCenter);
         (*it)->setText(3, m_profile.amountThousands(key));
         (*it)->setTextAlignment(3, Qt::AlignCenter);
-        if (m_selectedAmountType == 0 && key == 'T' && m_inEdit) {
+        if (m_selectedAmountType == nullptr && key == 'T' && m_inEdit) {
             (*it)->setSelected(true);
             slotAmountTypeSelected();
         } else if ((*it) == m_selectedAmountType) {
@@ -448,7 +448,7 @@ void MyMoneyQifProfileEditor::slotAmountTypeSelected()
 
 void MyMoneyQifProfileEditor::slotDecimalChanged(const QString& val)
 {
-    if (m_selectedAmountType != 0) {
+    if (m_selectedAmountType != nullptr) {
         QChar key = m_selectedAmountType->text(1).at(0);
         m_profile.setAmountDecimal(key, val[0]);
         m_selectedAmountType->setText(2, val);
@@ -457,7 +457,7 @@ void MyMoneyQifProfileEditor::slotDecimalChanged(const QString& val)
 
 void MyMoneyQifProfileEditor::slotThousandsChanged(const QString& val)
 {
-    if (m_selectedAmountType != 0) {
+    if (m_selectedAmountType != nullptr) {
         QChar key = m_selectedAmountType->text(1).at(0);
         m_profile.setAmountThousands(key, val[0]);
         m_selectedAmountType->setText(3, val);

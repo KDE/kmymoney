@@ -780,7 +780,7 @@ void KReportChartView::drawLimitLine(const double limit)
     // This speeds up the runtime of drawLimitLine() by a factor of
     // approx. 60 on my box (1831ms vs. 31ms).
     AbstractDiagram* planeDiagram = coordinatePlane()->diagram();
-    planeDiagram->setModel(0);
+    planeDiagram->setModel(nullptr);
 
     //we get the current number of rows and we add one after that
     int row = m_model.rowCount();

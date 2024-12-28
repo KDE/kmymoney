@@ -56,7 +56,7 @@ using namespace Icons;
 class KCurrencyEditDelegate : public QStyledItemDelegate
 {
 public:
-    explicit KCurrencyEditDelegate(QObject *parent = 0);
+    explicit KCurrencyEditDelegate(QObject* parent = nullptr);
 
 protected:
     QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const final override;
@@ -69,7 +69,7 @@ KCurrencyEditDelegate::KCurrencyEditDelegate(QObject* parent): QStyledItemDelega
 QWidget *KCurrencyEditDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     if (index.column() == 1)
-        return 0;
+        return nullptr;
     return QStyledItemDelegate::createEditor(parent, option, index);
 }
 
@@ -262,7 +262,7 @@ void KCurrencyEditDlg::finishCtor()
     if (!d->m_currentCurrency.id().isEmpty()) {
         QTreeWidgetItemIterator it(d->ui->m_currencyList);
         QTreeWidgetItem* q;
-        while ((q = *it) != 0) {
+        while ((q = *it) != nullptr) {
             if (q->text(1) == d->m_currentCurrency.id()) {
                 d->ui->m_currencyList->scrollToItem(q);
                 break;
@@ -294,7 +294,7 @@ void KCurrencyEditDlg::slotLoadCurrencies()
 
     QList<MyMoneySecurity> list = MyMoneyFile::instance()->currencyList();
     QList<MyMoneySecurity>::const_iterator it;
-    QTreeWidgetItem *first = 0;
+    QTreeWidgetItem* first = nullptr;
 
     // sort the currencies ...
     // ... and make sure a few precious metals are at the end
@@ -363,9 +363,9 @@ void KCurrencyEditDlg::slotLoadCurrencies()
     connect(d->ui->m_currencyList, &QTreeWidget::currentItemChanged, this, static_cast<void (KCurrencyEditDlg::*)(QTreeWidgetItem *, QTreeWidgetItem *)>(&KCurrencyEditDlg::slotSelectCurrency));
     connect(d->ui->m_currencyList, &QTreeWidget::itemChanged, this, static_cast<void (KCurrencyEditDlg::*)(QTreeWidgetItem *, int)>(&KCurrencyEditDlg::slotUpdateCurrency));
 
-    if (first == 0)
+    if (first == nullptr)
         first = d->ui->m_currencyList->invisibleRootItem()->child(0);
-    if (first != 0) {
+    if (first != nullptr) {
         d->ui->m_currencyList->setCurrentItem(first);
         d->ui->m_currencyList->scrollToItem(first);
     }

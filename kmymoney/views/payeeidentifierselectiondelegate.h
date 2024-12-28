@@ -14,7 +14,7 @@ class payeeIdentifierSelectionDelegate : public QStyledItemDelegate
     Q_OBJECT
 
 public:
-    explicit payeeIdentifierSelectionDelegate(QObject* parent = 0);
+    explicit payeeIdentifierSelectionDelegate(QObject* parent = nullptr);
     QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
     void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const final override;
     void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
@@ -25,7 +25,7 @@ class payeeIdentifierTypeSelectionWidget : public QComboBox
 {
     Q_OBJECT
 public:
-    explicit payeeIdentifierTypeSelectionWidget(QWidget* parent = 0);
+    explicit payeeIdentifierTypeSelectionWidget(QWidget* parent = nullptr);
 
 Q_SIGNALS:
     void commitData(QWidget* editor);

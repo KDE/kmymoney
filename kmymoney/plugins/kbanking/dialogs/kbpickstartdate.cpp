@@ -150,7 +150,7 @@ QDate KBPickStartDate::date()
     else if (d->ui.lastUpdateButton->isChecked())
         return d->lastUpdate;
     else {
-        DBG_ERROR(0, "Unknown date state");
+        DBG_ERROR(nullptr, "Unknown date state");
         return QDate();
     }
 }

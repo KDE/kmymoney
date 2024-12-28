@@ -13,7 +13,7 @@ class charValidator : public QValidator
     Q_OBJECT
 
 public:
-    explicit charValidator(QObject* parent = 0, const QString& characters = QString());
+    explicit charValidator(QObject* parent = nullptr, const QString& characters = QString());
     QValidator::State validate(QString&, int&) const final override;
 
     void setAllowedCharacters(const QString&);

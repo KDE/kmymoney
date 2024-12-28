@@ -340,8 +340,8 @@ void KGPGFile::close()
 
     delete d->m_fileWrite;
     delete d->m_fileRead;
-    d->m_fileWrite = 0;
-    d->m_fileRead = 0;
+    d->m_fileWrite = nullptr;
+    d->m_fileRead = nullptr;
     d->m_recipients.clear();
     setOpenMode(NotOpen);
 }

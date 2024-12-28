@@ -189,7 +189,11 @@ void KBudgetView::slotBudgetForecast()
                 auto budget = file->budgetsModel()->itemByIndex(idx);
                 bool calcBudget = budget.getaccounts().count() == 0;
                 if (!calcBudget) {
-                    if (KMessageBox::warningContinueCancel(0, i18n("The current budget already contains data. Continuing will replace all current values of this budget."), i18nc("Warning message box", "Warning")) == KMessageBox::Continue)
+                    if (KMessageBox::warningContinueCancel(
+                            nullptr,
+                            i18n("The current budget already contains data. Continuing will replace all current values of this budget."),
+                            i18nc("Warning message box", "Warning"))
+                        == KMessageBox::Continue)
                         calcBudget = true;
                 }
 

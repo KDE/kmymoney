@@ -263,12 +263,13 @@ void KGenerateSqlDlg::slotdriverSelected()
 
     d->m_dbDriver = MyMoneyDbDriver::create(driverName);
     if (!d->m_dbDriver->isTested()) {
-        int rc = KMessageBox::warningContinueCancel(0,
-                 i18n("Database type %1 has not been fully tested in a KMyMoney environment.\n"
-                      "Please make sure you have adequate backups of your data.\n"
-                      "Please report any problems to the developer mailing list at "
-                      "kmymoney-devel@kde.org", driverName),
-                 "");
+        int rc = KMessageBox::warningContinueCancel(nullptr,
+                                                    i18n("Database type %1 has not been fully tested in a KMyMoney environment.\n"
+                                                         "Please make sure you have adequate backups of your data.\n"
+                                                         "Please report any problems to the developer mailing list at "
+                                                         "kmymoney-devel@kde.org",
+                                                         driverName),
+                                                    "");
         if (rc == KMessageBox::Cancel) {
             d->ui->listDrivers->clearSelection();
             d->initializeForm();

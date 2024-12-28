@@ -57,12 +57,12 @@ const char *AB_Banking::getAppName()
 AB_ACCOUNT_SPEC *AB_Banking::getAccount(uint32_t uniqueId)
 {
     int rv;
-    AB_ACCOUNT_SPEC *as=NULL;
+    AB_ACCOUNT_SPEC* as = nullptr;
 
     rv=AB_Banking_GetAccountSpecByUniqueId(_banking, uniqueId, &as);
     if (rv<0) {
-        DBG_ERROR(0, "Account spec not found (%d)", rv);
-        return NULL;
+        DBG_ERROR(nullptr, "Account spec not found (%d)", rv);
+        return nullptr;
     }
     return as;
 }
@@ -70,7 +70,7 @@ AB_ACCOUNT_SPEC *AB_Banking::getAccount(uint32_t uniqueId)
 std::list<AB_ACCOUNT_SPEC*> AB_Banking::getAccounts()
 {
     std::list<AB_ACCOUNT_SPEC*> accountSpecList;
-    AB_ACCOUNT_SPEC_LIST *abAccountSpecList=NULL;
+    AB_ACCOUNT_SPEC_LIST* abAccountSpecList = nullptr;
     int rv;
 
     rv=AB_Banking_GetAccountSpecList(_banking, &abAccountSpecList);

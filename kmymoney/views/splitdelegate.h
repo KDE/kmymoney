@@ -23,7 +23,7 @@ class SplitDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 public:
-    explicit SplitDelegate(QObject* parent = 0);
+    explicit SplitDelegate(QObject* parent = nullptr);
     virtual ~SplitDelegate();
 
     void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;

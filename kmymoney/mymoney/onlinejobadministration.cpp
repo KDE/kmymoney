@@ -75,7 +75,7 @@ KMyMoneyPlugin::OnlinePluginExtended* onlineJobAdministration::getOnlinePlugin(c
         // plugin found, use it
         return *it_p;
     }
-    return 0;
+    return nullptr;
 }
 
 void onlineJobAdministration::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePluginExtended*>& plugins)
@@ -244,8 +244,10 @@ onlineJob onlineJobAdministration::convert(const onlineJob& original, const QStr
     for (const onlineTaskConverter* converter : converterList) {
         if (converter->convertibleTasks().contains(original.taskIid())) {
             onlineTask* task = converter->convert(*original.task(), convertType, userInformation);
-            Q_ASSERT_X(convertType != onlineTaskConverter::convertImpossible || task != 0, qPrintable("converter for " + converter->convertedTask()), "Converter returned convertType 'impossible' but return was not null_ptr.");
-            if (task != 0) {
+            Q_ASSERT_X(convertType != onlineTaskConverter::convertImpossible || task != nullptr,
+                       qPrintable("converter for " + converter->convertedTask()),
+                       "Converter returned convertType 'impossible' but return was not null_ptr.");
+            if (task != nullptr) {
                 newJob = onlineJob(task, onlineJobId);
                 break;
             }
@@ -302,7 +304,7 @@ void onlineJobAdministration::registerAllOnlineTasks()
 
 void onlineJobAdministration::registerOnlineTask(onlineTask *const task)
 {
-    if (Q_UNLIKELY(task == 0))
+    if (Q_UNLIKELY(task == nullptr))
         return;
 
     const bool sendAnyTask = canSendAnyTask();
@@ -318,7 +320,7 @@ void onlineJobAdministration::registerOnlineTask(onlineTask *const task)
 
 void onlineJobAdministration::registerOnlineTaskConverter(onlineTaskConverter* const converter)
 {
-    if (Q_UNLIKELY(converter == 0))
+    if (Q_UNLIKELY(converter == nullptr))
         return;
 
     m_onlineTaskConverter.insert(converter->convertedTask(), converter);
@@ -347,7 +349,7 @@ onlineJobAdministration::onlineJobEditOffers onlineJobAdministration::onlineJobE
 IonlineTaskSettings::ptr onlineJobAdministration::taskSettings(const QString& taskName, const QString& accountId) const
 {
     KMyMoneyPlugin::OnlinePluginExtended* plugin = getOnlinePlugin(accountId);
-    if (plugin != 0)
+    if (plugin != nullptr)
         return (plugin->settings(accountId, taskName));
     return IonlineTaskSettings::ptr();
 }
@@ -395,7 +397,7 @@ bool onlineJobAdministration::canSendCreditTransfer()
         if (account.hasOnlineMapping()) {
             for (const onlineTask* task : qAsConst(m_onlineTasks)) {
                 // Check if a online task has the correct type
-                if (dynamic_cast<const creditTransfer*>(task) != 0) {
+                if (dynamic_cast<const creditTransfer*>(task) != nullptr) {
                     for (KMyMoneyPlugin::OnlinePluginExtended* plugin : qAsConst(*m_onlinePlugins)) {
                         if (plugin->availableJobs(account.id()).contains(task->taskName()))
                             return true;

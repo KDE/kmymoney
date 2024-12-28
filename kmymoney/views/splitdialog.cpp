@@ -296,7 +296,7 @@ void SplitDialog::adjustSummary()
         currencySymbol.clear();
     }
 
-    d->splitsTotal = 0;
+    d->splitsTotal = nullptr;
     const auto model = d->ui->splitView->model();
 
     bool haveAutoCalcSplits(false);

@@ -39,12 +39,12 @@ class KMyMoneyAccountSelectorPrivate : public KMyMoneySelectorPrivate
     Q_DISABLE_COPY(KMyMoneyAccountSelectorPrivate)
 
 public:
-    KMyMoneyAccountSelectorPrivate(KMyMoneyAccountSelector *qq) :
-        KMyMoneySelectorPrivate(qq),
-        m_allAccountsButton(0),
-        m_noAccountButton(0),
-        m_incomeCategoriesButton(0),
-        m_expenseCategoriesButton(0)
+    KMyMoneyAccountSelectorPrivate(KMyMoneyAccountSelector* qq)
+        : KMyMoneySelectorPrivate(qq)
+        , m_allAccountsButton(nullptr)
+        , m_noAccountButton(nullptr)
+        , m_incomeCategoriesButton(nullptr)
+        , m_expenseCategoriesButton(nullptr)
     {
     }
 
@@ -123,7 +123,7 @@ void KMyMoneyAccountSelector::selectCategories(const bool income, const bool exp
     Q_D(KMyMoneyAccountSelector);
     QTreeWidgetItemIterator it_v(d->m_treeWidget);
 
-    for (; *it_v != 0; ++it_v) {
+    for (; *it_v != nullptr; ++it_v) {
         if ((*it_v)->text(0) == i18n("Income categories"))
             selectAllSubItems(*it_v, income);
         else if ((*it_v)->text(0) == i18n("Expense categories"))
@@ -192,7 +192,7 @@ bool KMyMoneyAccountSelector::contains(const QString& txt) const
                        i18n("Equity") + '|' +
                        i18n("Security");
 
-    while ((it_v = *it) != 0) {
+    while ((it_v = *it) != nullptr) {
         const QRegularExpression exp(QString("^(?:%1):%2$").arg(baseName).arg(QRegularExpression::escape(txt)));
         const auto matchingItem(exp.match(it_v->data(0, static_cast<int>(eWidgets::Selector::Role::Key)).toString().mid(1)));
         if (matchingItem.hasMatch()) {
@@ -218,7 +218,7 @@ public:
     AccountSetPrivate()
         : m_count(0)
         , m_file(MyMoneyFile::instance())
-        , m_favorites(0)
+        , m_favorites(nullptr)
         , m_hideClosedAccounts(true)
         , m_showInvestments(false)
     {
@@ -347,7 +347,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
     QTreeWidget* lv = selector->listView();
     d->m_count = 0;
     QString key;
-    QTreeWidgetItem* after = 0;
+    QTreeWidgetItem* after = nullptr;
 
     // create the favorite section first and sort it to the beginning
     key = QString("A%1").arg(i18n("Favorites"));
@@ -364,7 +364,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
     d->m_favorites->setIcon(0, QIcon(accountPixmap));
 
     for (auto mask = 0x01; mask != eDialogs::Category::last; mask <<= 1) {
-        QTreeWidgetItem* item = 0;
+        QTreeWidgetItem* item = nullptr;
         if ((typeMask & mask & eDialogs::Category::asset) != 0) {
             ++d->m_count;
             key = QString("B%1").arg(i18n("Asset"));
@@ -414,7 +414,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
         if (!after)
             after = item;
 
-        if (item != 0) {
+        if (item != nullptr) {
             // scan all matching accounts found in the engine
             for (it_l = list.cbegin(); it_l != list.cend(); ++it_l) {
                 const MyMoneyAccount& acc = d->m_file->account(*it_l);
@@ -453,7 +453,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
     // we get rid of the favorite entry and subentries.
     if (d->m_favorites->childCount() == 0 || selector->selectionMode() == QTreeWidget::MultiSelection) {
         delete d->m_favorites;
-        d->m_favorites = 0;
+        d->m_favorites = nullptr;
     }
 
     if (lv->itemAt(0, 0)) {
@@ -472,7 +472,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector, const QString& baseName,
 {
     Q_D(AccountSet);
     int count = 0;
-    QTreeWidgetItem* item = 0;
+    QTreeWidgetItem* item = nullptr;
 
     d->m_typeList.clear();
     if (clear) {

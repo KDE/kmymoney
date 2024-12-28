@@ -22,7 +22,7 @@ class KMMStyledItemDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 public:
-    explicit KMMStyledItemDelegate(QWidget* parent = 0);
+    explicit KMMStyledItemDelegate(QWidget* parent = nullptr);
     virtual ~KMMStyledItemDelegate();
 
     /**

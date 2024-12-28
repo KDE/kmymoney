@@ -28,11 +28,9 @@ KBJobListViewItem::KBJobListViewItem(KBJobListView *parent,
     _populate();
 }
 
-
-
-KBJobListViewItem::KBJobListViewItem(const KBJobListViewItem &item)
+KBJobListViewItem::KBJobListViewItem(const KBJobListViewItem& item)
     : QTreeWidgetItem(item)
-    , _job(0)
+    , _job(nullptr)
 {
 
     if (item._job) {
@@ -194,7 +192,7 @@ AB_TRANSACTION *KBJobListView::getCurrentJob()
     entry = dynamic_cast<KBJobListViewItem*>(currentItem());
     if (!entry) {
         fprintf(stderr, "No item selected in list.\n");
-        return 0;
+        return nullptr;
     }
     return entry->getJob();
 }

@@ -45,7 +45,7 @@ class KBAccountListView: public QTreeWidget
 {
 private:
 public:
-    explicit KBAccountListView(QWidget *parent = 0);
+    explicit KBAccountListView(QWidget* parent = nullptr);
     virtual ~KBAccountListView();
 
     void addAccount(AB_ACCOUNT_SPEC *acc);

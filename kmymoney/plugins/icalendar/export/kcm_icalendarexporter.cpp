@@ -21,7 +21,7 @@
 class PluginSettingsWidget : public QWidget, public Ui::ICalendarSettingsDecl
 {
 public:
-    explicit PluginSettingsWidget(QWidget* parent = 0)
+    explicit PluginSettingsWidget(QWidget* parent = nullptr)
         : QWidget(parent)
     {
         setupUi(this);

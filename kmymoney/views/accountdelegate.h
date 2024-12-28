@@ -27,7 +27,7 @@ class AccountDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 public:
-    explicit AccountDelegate(QObject* parent = 0);
+    explicit AccountDelegate(QObject* parent = nullptr);
     virtual ~AccountDelegate();
 
     void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;

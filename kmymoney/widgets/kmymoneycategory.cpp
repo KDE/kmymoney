@@ -37,11 +37,11 @@ using namespace Icons;
 class KMyMoneyCategoryPrivate : public KMyMoneyComboPrivate
 {
 public:
-    KMyMoneyCategoryPrivate() :
-        splitButton(0),
-        frame(0),
-        recursive(false),
-        isSplit(false)
+    KMyMoneyCategoryPrivate()
+        : splitButton(nullptr)
+        , frame(nullptr)
+        , recursive(false)
+        , isSplit(false)
     {
     }
 

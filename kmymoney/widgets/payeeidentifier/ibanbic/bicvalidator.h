@@ -21,7 +21,7 @@ class KMM_BASE_WIDGETS_EXPORT bicValidator : public QValidator
     Q_OBJECT
 
 public:
-    explicit bicValidator(QObject* parent = 0);
+    explicit bicValidator(QObject* parent = nullptr);
     QValidator::State validate(QString&, int&) const final override;
 
     static QPair<eWidgets::ValidationFeedback::MessageType, QString> validateWithMessage(const QString&);

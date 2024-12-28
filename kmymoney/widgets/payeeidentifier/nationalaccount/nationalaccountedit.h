@@ -22,7 +22,7 @@ class nationalAccountEdit : public QWidget
     Q_PROPERTY(QString institutionCode READ institutionCode WRITE setInstitutionCode NOTIFY institutionCodeChanged STORED false DESIGNABLE true)
 
 public:
-    explicit nationalAccountEdit(QWidget* parent = 0);
+    explicit nationalAccountEdit(QWidget* parent = nullptr);
 
     payeeIdentifier identifier() const;
     QString accountNumber() const;

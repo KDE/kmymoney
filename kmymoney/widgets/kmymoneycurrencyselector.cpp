@@ -131,7 +131,7 @@ void KMyMoneySecuritySelector::update(const QString& id)
     // clang-format on
 
     QPixmap empty;
-    empty.loadFromData(empty_png, sizeof(empty_png), 0, Qt::AutoColor);
+    empty.loadFromData(empty_png, sizeof(empty_png), nullptr, Qt::AutoColor);
     QIcon emptyIcon(empty);
 
     int itemId = 0;

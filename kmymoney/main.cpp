@@ -270,7 +270,7 @@ int main(int argc, char *argv[])
         try {
             rc = runKMyMoney(app, url, isNoFileOption);
         } catch (const MyMoneyException &e) {
-            KMessageBox::detailedError(0, i18n("Uncaught error. Please report the details to the developers"), QString::fromLatin1(e.what()));
+            KMessageBox::detailedError(nullptr, i18n("Uncaught error. Please report the details to the developers"), QString::fromLatin1(e.what()));
             throw;
         }
     }

@@ -36,7 +36,7 @@ class TransactionEditorBase : public QWidget
     friend NewSplitEditor;
 
 public:
-    explicit TransactionEditorBase(QWidget* parent = 0, const QString& accountId = QString());
+    explicit TransactionEditorBase(QWidget* parent = nullptr, const QString& accountId = QString());
     virtual ~TransactionEditorBase();
 
     /**

@@ -135,7 +135,10 @@ class QSQLiteDriverPrivate : public QSqlDriverPrivate
     Q_DECLARE_PUBLIC(QSQLiteDriver)
 
 public:
-    inline QSQLiteDriverPrivate() : QSqlDriverPrivate(), access(0) {
+    inline QSQLiteDriverPrivate()
+        : QSqlDriverPrivate()
+        , access(nullptr)
+    {
         dbmsType = QSqlDriver::SQLite;
     }
     sqlite3 *access;
@@ -165,11 +168,11 @@ public:
     QVector<QVariant> firstRow;
 };
 
-QSQLiteResultPrivate::QSQLiteResultPrivate(QSQLiteResult *q, const QSQLiteDriver *drv)
-    : QSqlCachedResultPrivate(q, drv),
-      stmt(0),
-      skippedStatus(false),
-      skipRow(false)
+QSQLiteResultPrivate::QSQLiteResultPrivate(QSQLiteResult* q, const QSQLiteDriver* drv)
+    : QSqlCachedResultPrivate(q, drv)
+    , stmt(nullptr)
+    , skippedStatus(false)
+    , skipRow(false)
 {
 }
 
@@ -191,7 +194,7 @@ void QSQLiteResultPrivate::finalize()
         return;
 
     sqlite3_finalize(stmt);
-    stmt = 0;
+    stmt = nullptr;
 }
 
 void QSQLiteResultPrivate::initColumns(bool emptyResultset)
@@ -392,7 +395,7 @@ bool QSQLiteResult::prepare(const QString &query)
 
     setSelect(false);
 
-    const void *pzTail = NULL;
+    const void* pzTail = nullptr;
 
 #if (SQLITE_VERSION_NUMBER >= 3003011)
     int res = sqlite3_prepare16_v2(d->drv_d_func()->access, query.constData(), (query.size() + 1) * sizeof(QChar),
@@ -801,22 +804,21 @@ bool QSQLiteDriver::open(const QString & db, const QString &, const QString &, c
 
     openMode |= SQLITE_OPEN_NOMUTEX;
 
-    if (sqlite3_open_v2(db.toUtf8().constData(), &d->access, openMode, NULL) == SQLITE_OK) {
+    if (sqlite3_open_v2(db.toUtf8().constData(), &d->access, openMode, nullptr) == SQLITE_OK) {
         sqlite3_busy_timeout(d->access, timeOut);
         setOpen(true);
         setOpenError(false);
 #if QT_CONFIG(regularexpression)
         if (defineRegexp) {
             auto cache = new QCache<QString, QRegularExpression>(regexpCacheSize);
-            sqlite3_create_function_v2(d->access, "regexp", 2, SQLITE_UTF8, cache, &_q_regexp, NULL,
-                                       NULL, &_q_regexp_cleanup);
+            sqlite3_create_function_v2(d->access, "regexp", 2, SQLITE_UTF8, cache, &_q_regexp, nullptr, nullptr, &_q_regexp_cleanup);
         }
 #endif
         return true;
     } else {
         if (d->access) {
             sqlite3_close(d->access);
-            d->access = 0;
+            d->access = nullptr;
         }
 
         setLastError(qMakeError(d->access, tr("Error opening database"),
@@ -835,12 +837,12 @@ void QSQLiteDriver::close()
 
         if (d->access && (d->notificationid.count() > 0)) {
             d->notificationid.clear();
-            sqlite3_update_hook(d->access, NULL, NULL);
+            sqlite3_update_hook(d->access, nullptr, nullptr);
         }
 
         if (sqlite3_close(d->access) != SQLITE_OK)
             setLastError(qMakeError(d->access, tr("Error closing database"), QSqlError::ConnectionError));
-        d->access = 0;
+        d->access = nullptr;
         setOpen(false);
         setOpenError(false);
     }
@@ -1050,7 +1052,7 @@ bool QSQLiteDriver::unsubscribeFromNotification(const QString &name)
 
     d->notificationid.removeAll(name);
     if (d->notificationid.isEmpty())
-        sqlite3_update_hook(d->access, NULL, NULL);
+        sqlite3_update_hook(d->access, nullptr, nullptr);
 
     return true;
 }

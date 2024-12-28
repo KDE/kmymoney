@@ -428,7 +428,7 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
 
         } else {
             if (!errorMessage.isEmpty()) {
-                KMessageBox::information(0, errorMessage);
+                KMessageBox::information(nullptr, errorMessage);
             }
             JournalDelegate* that = const_cast<JournalDelegate*>(this);
             Q_EMIT that->closeEditor(d->m_editor, NoHint);

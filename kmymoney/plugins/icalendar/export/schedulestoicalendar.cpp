@@ -244,7 +244,7 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool writeEv
     // create the calendar
     bool newCalendar = false;
     icalcomponent* vCalendar = nullptr;
-    struct icaltimetype atime = icaltime_from_timet_with_zone(time(0), 0, icaltimezone_get_utc_timezone());
+    struct icaltimetype atime = icaltime_from_timet_with_zone(time(nullptr), 0, icaltimezone_get_utc_timezone());
 
     if (d->m_icalendarAsString.isEmpty()) {
         newCalendar = true;

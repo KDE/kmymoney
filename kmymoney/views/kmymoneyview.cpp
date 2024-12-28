@@ -214,7 +214,7 @@ KMyMoneyView::KMyMoneyView()
     if (gridLayout) {
         QLayoutItem* headerItem = gridLayout->itemAtPosition(1, 1);
         // make sure that we remove only the header - we avoid surprises if the header is not at (1,1) in the layout
-        if (headerItem && qobject_cast<KTitleWidget*>(headerItem->widget()) != NULL) {
+        if (headerItem && qobject_cast<KTitleWidget*>(headerItem->widget()) != nullptr) {
             gridLayout->removeItem(headerItem);
         }
     }

@@ -266,7 +266,7 @@ public:
       *
       * @sa attachStorage()
       */
-    void detachStorage(MyMoneyStorageMgr* const storage = 0);
+    void detachStorage(MyMoneyStorageMgr* const storage = nullptr);
 
     /**
       * This method returns whether a storage is currently attached to

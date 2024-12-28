@@ -15,13 +15,13 @@ class KMyMoneyTextEditPrivate
     Q_DECLARE_PUBLIC(KMyMoneyTextEdit)
 
 public:
-    explicit KMyMoneyTextEditPrivate(KMyMoneyTextEdit *qq) :
-        q_ptr(qq),
-        m_maxLength(-1),
-        m_maxLineLength(-1),
-        m_maxLines(-1),
-        m_allowedChars(QString(QString())),
-        m_highligther(0)
+    explicit KMyMoneyTextEditPrivate(KMyMoneyTextEdit* qq)
+        : q_ptr(qq)
+        , m_maxLength(-1)
+        , m_maxLineLength(-1)
+        , m_maxLines(-1)
+        , m_allowedChars(QString())
+        , m_highligther(nullptr)
     {
     }
 

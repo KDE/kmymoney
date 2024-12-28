@@ -18,7 +18,7 @@ class KBMapAccount: public QDialog
 {
     Q_OBJECT
 public:
-    KBMapAccount(KBankingExt* kb, const char* bankCode, const char* accountId, QWidget* parent = 0, Qt::WindowFlags fl = {});
+    KBMapAccount(KBankingExt* kb, const char* bankCode, const char* accountId, QWidget* parent = nullptr, Qt::WindowFlags fl = {});
     ~KBMapAccount();
 
     AB_ACCOUNT_SPEC *getAccount();

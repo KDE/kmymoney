@@ -890,7 +890,7 @@ MyMoneyReport readReport(QXmlStreamReader* reader)
             report.setDataFilter(eMyMoney::Report::DataLock::Automatic);
         }
 
-        report.setDataRangeStart(readStringAttribute(reader, attributeName(Attribute::Report::DataRangeStart), 0));
+        report.setDataRangeStart(readStringAttribute(reader, attributeName(Attribute::Report::DataRangeStart), nullptr));
         report.setDataRangeEnd(readStringAttribute(reader, attributeName(Attribute::Report::DataRangeEnd), "0"));
         report.setDataMajorTick(readStringAttribute(reader, attributeName(Attribute::Report::DataMajorTick), "0"));
         report.setDataMinorTick(readStringAttribute(reader, attributeName(Attribute::Report::DataMinorTick), "0"));

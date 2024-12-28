@@ -49,7 +49,7 @@ Q_GLOBAL_STATIC(AmountEditHelper, s_globalAmountEdit)
 AmountEdit* AmountEdit::global()
 {
     if (!s_globalAmountEdit()->q) {
-        s_globalAmountEdit()->q = new AmountEdit(0, 2);
+        s_globalAmountEdit()->q = new AmountEdit(nullptr, 2);
     }
 
     return s_globalAmountEdit()->q;
@@ -728,13 +728,13 @@ void AmountEdit::theTextChanged(const QString & theText)
 void AmountEdit::slotCalculatorOpen()
 {
     Q_D(AmountEdit);
-    d->calculatorOpen(0);
+    d->calculatorOpen(nullptr);
 }
 
 void AmountEdit::slotCalculatorClose()
 {
     Q_D(AmountEdit);
-    if (d->m_calculator != 0) {
+    if (d->m_calculator != nullptr) {
         d->m_calculatorFrame->hide();
     }
 }
@@ -761,7 +761,7 @@ void AmountEdit::slotCalculatorResult()
 {
     Q_D(AmountEdit);
     slotCalculatorClose();
-    if (d->m_calculator != 0) {
+    if (d->m_calculator != nullptr) {
         MyMoneyMoney amount(d->m_calculator->result());
         amount = d->adjustToPrecision(d->m_state, amount);
         setText(amount.formatMoney(QString(), d->precision(d->m_state), false));

@@ -15,7 +15,7 @@ class onlineJobMessagesModel : public QAbstractTableModel
     Q_OBJECT
 
 public:
-    explicit onlineJobMessagesModel(QObject* parent = 0);
+    explicit onlineJobMessagesModel(QObject* parent = nullptr);
     QVariant data(const QModelIndex& index, int role) const final override;
     int columnCount(const QModelIndex& parent) const final override;
     int rowCount(const QModelIndex& parent) const final override;

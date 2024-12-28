@@ -79,7 +79,7 @@ public:
         m_finishButton = new QPushButton(i18nc("Finish the wizard", "&Finish"), q);
         m_helpButton = new QPushButton(i18n("&Help"), q);
 
-        if (q->style()->styleHint(QStyle::SH_DialogButtonBox_ButtonsHaveIcons, 0, q)) {
+        if (q->style()->styleHint(QStyle::SH_DialogButtonBox_ButtonsHaveIcons, nullptr, q)) {
             m_backButton->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
             m_nextButton->setIcon(KStandardGuiItem::forward(KStandardGuiItem::UseRTL).icon());
             m_finishButton->setIcon(Icons::get(Icon::DialogOKApply));
@@ -232,7 +232,7 @@ public:
         page->resetPage();
         m_history.clear();
         m_history.append(page);
-        switchPage(0);
+        switchPage(nullptr);
     }
 
     /**

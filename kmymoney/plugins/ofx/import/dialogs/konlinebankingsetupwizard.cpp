@@ -50,12 +50,12 @@ public:
     int m_prevPage;
 };
 
-KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
-    QWizard(parent),
-    d(new Private),
-    m_fDone(false),
-    m_fInit(false),
-    m_appId(0)
+KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget* parent)
+    : QWizard(parent)
+    , d(new Private)
+    , m_fDone(false)
+    , m_fInit(false)
+    , m_appId(nullptr)
 {
     setupUi(this);
 
@@ -70,7 +70,7 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
     dlg->setWindowTitle(i18n("Loading banklist"));
     dlg->setLabelText(i18n("Getting list of banks from https://www.ofxhome.com/\nThis may take some time depending on the available bandwidth."));
     dlg->setModal(true);
-    dlg->setCancelButton(0);
+    dlg->setCancelButton(nullptr);
     // force to show immediately as the call to OfxPartner::BankNames()
     // does not call the processEvents() loop
     dlg->setMinimumDuration(0);
@@ -140,8 +140,7 @@ void KOnlineBankingSetupWizard::checkNextButton()
     switch (currentId()) {
     case 0:
         if (m_selectionTab->currentIndex() == 0) {
-            enableButton = (m_listFi->currentItem() != 0)
-                           && m_listFi->currentItem()->isSelected();
+            enableButton = (m_listFi->currentItem() != nullptr) && m_listFi->currentItem()->isSelected();
         } else {
             enableButton = !(m_url->url().isEmpty()
                              || m_bankName->text().isEmpty());
@@ -155,8 +154,7 @@ void KOnlineBankingSetupWizard::checkNextButton()
         break;
 
     case 2:
-        enableButton = (m_listAccount->currentItem() != 0)
-                       && m_listAccount->currentItem()->isSelected();
+        enableButton = (m_listAccount->currentItem() != nullptr) && m_listAccount->currentItem()->isSelected();
         break;
     }
     button(QWizard::NextButton)->setEnabled(enableButton);
@@ -164,7 +162,7 @@ void KOnlineBankingSetupWizard::checkNextButton()
 
 void KOnlineBankingSetupWizard::newPage(int id)
 {
-    QWidget* focus = 0;
+    QWidget* focus = nullptr;
 
     m_problemMessages->setHidden(true);
     bool ok = true;

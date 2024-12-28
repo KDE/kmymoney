@@ -639,12 +639,12 @@ public:
             }
         }
 
-        QPointer<KNewAccountDlg> dialog = new KNewAccountDlg(account, false, isCategory, 0, title);
+        QPointer<KNewAccountDlg> dialog = new KNewAccountDlg(account, false, isCategory, nullptr, title);
 
         dialog->setOpeningBalanceShown(false);
         dialog->setOpeningDateShown(false);
 
-        if (dialog->exec() == QDialog::Accepted && dialog != 0) {
+        if (dialog->exec() == QDialog::Accepted && dialog != nullptr) {
             MyMoneyAccount parentAccount, brokerageAccount;
             account = dialog->account();
             parentAccount = dialog->parentAccount();

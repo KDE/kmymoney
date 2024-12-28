@@ -39,7 +39,7 @@ public:
         payeeIdentifier = payeeIdentifierModel::payeeIdentifier, /**< actual payeeIdentifier */
     };
 
-    explicit payeeIdentifierContainerModel(QObject* parent = 0);
+    explicit payeeIdentifierContainerModel(QObject* parent = nullptr);
 
     QVariant data(const QModelIndex& index, int role) const final override;
 

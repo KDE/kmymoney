@@ -23,7 +23,7 @@ class CheckPrintingSettingsWidget : public QWidget, public Ui::CheckPrintingSett
 Q_OBJECT
 
 public:
-    explicit CheckPrintingSettingsWidget(QWidget* parent = 0);
+    explicit CheckPrintingSettingsWidget(QWidget* parent = nullptr);
     ~CheckPrintingSettingsWidget();
 
 public Q_SLOTS:

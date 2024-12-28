@@ -32,7 +32,7 @@ class KMMAppInterface : public AppInterface
     Q_OBJECT
 
 public:
-    explicit KMMAppInterface(KMyMoneyApp* app, QObject* parent, const char* name = 0);
+    explicit KMMAppInterface(KMyMoneyApp* app, QObject* parent, const char* name = nullptr);
     ~KMMAppInterface() override = default;
 
     /**

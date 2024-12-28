@@ -27,7 +27,7 @@ class OnlineBalanceDelegate : public KMMStyledItemDelegate
 {
     Q_OBJECT
 public:
-    explicit OnlineBalanceDelegate(LedgerView* parent = 0);
+    explicit OnlineBalanceDelegate(LedgerView* parent = nullptr);
     virtual ~OnlineBalanceDelegate();
 
     void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;

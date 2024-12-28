@@ -41,8 +41,8 @@ QAbstractItemDelegate* payeeIdentifierDelegate::getItemDelegate(const QModelInde
         delegate = new nationalAccountDelegate(this->parent());
     }
 
-    if (delegate == 0) {
-        if (defaultDelegate == 0)
+    if (delegate == nullptr) {
+        if (defaultDelegate == nullptr)
             defaultDelegate = new QStyledItemDelegate(this->parent());
         delegate = defaultDelegate;
     }
@@ -66,7 +66,7 @@ KPayeeIdentifierView::~KPayeeIdentifierView()
 
 void KPayeeIdentifierView::setSource(MyMoneyPayeeIdentifierContainer container)
 {
-    if (ui->view->model() == 0) {
+    if (ui->view->model() == nullptr) {
         // this model must be closed after each KMyMoneyApp::fileLoaded signal
         // to limit includes, it is connected outside of this class
         auto model = new payeeIdentifierContainerModel(ui->view);
@@ -92,7 +92,7 @@ void KPayeeIdentifierView::closeSource()
 QList< payeeIdentifier > KPayeeIdentifierView::identifiers() const
 {
     const QAbstractItemModel* model = ui->view->model();
-    if (model != 0)
+    if (model != nullptr)
         return static_cast<const payeeIdentifierContainerModel*>(model)->identifiers();
     return QList< payeeIdentifier >();
 }

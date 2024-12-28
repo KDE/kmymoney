@@ -52,7 +52,7 @@ class KMandatoryFieldGroupPrivate
 
 public:
     KMandatoryFieldGroupPrivate()
-        : m_okButton(0)
+        : m_okButton(nullptr)
         , m_enabled(true)
         , m_externalMandatoryState(true)
     {
@@ -280,7 +280,7 @@ void KMandatoryFieldGroup::clear()
     d->m_widgets.clear();
     if (d->m_okButton) {
         d->m_okButton->setEnabled(true);
-        d->m_okButton = 0;
+        d->m_okButton = nullptr;
         d->m_enabled = true;
     }
 }

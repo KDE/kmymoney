@@ -30,7 +30,7 @@ class KMM_PLUGIN_EXPORT AppInterface : public QObject
     Q_OBJECT
 
 public:
-    explicit AppInterface(QObject* parent, const char* name = 0);
+    explicit AppInterface(QObject* parent, const char* name = nullptr);
     virtual ~AppInterface();
 
     /**

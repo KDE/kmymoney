@@ -51,8 +51,7 @@ public:
 
     QTreeWidgetItem* hierarchyItem(const QString& parent, const QString& name)
     {
-        if (!templateHierarchy.contains(parent)
-                || templateHierarchy[parent] == 0) {
+        if (!templateHierarchy.contains(parent) || templateHierarchy[parent] == nullptr) {
             static const QRegularExpression hierarchyExp(QLatin1String("(.*):(.*)"));
             const auto hierarchyParts(hierarchyExp.match(parent));
             if (hierarchyParts.hasMatch())
@@ -71,7 +70,7 @@ public:
                 QDomElement accountElement = account.toElement();
                 if (accountElement.tagName() == QLatin1String("account")) {
                     QString name = QString("%1:%2").arg(parent, accountElement.attribute("name"));
-                    list[name] = 0;
+                    list[name] = nullptr;
                     hierarchy(list, name, account.firstChild());
                 }
             }
@@ -97,7 +96,7 @@ public:
                 case eMyMoney::Account::Type::Equity:
                     if (name.isEmpty())
                         name = MyMoneyAccount::accountTypeToString(type);
-                    list[name] = 0;
+                    list[name] = nullptr;
                     rc = hierarchy(list, name, rootNode);
                     break;
 

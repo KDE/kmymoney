@@ -13,7 +13,7 @@
 class KCMiCalendarExporter : public KMMKCModule
 {
 public:
-    explicit KCMiCalendarExporter(QObject* parent = 0, const QVariantList& args = QVariantList());
+    explicit KCMiCalendarExporter(QObject* parent = nullptr, const QVariantList& args = QVariantList());
     ~KCMiCalendarExporter();
 };
 

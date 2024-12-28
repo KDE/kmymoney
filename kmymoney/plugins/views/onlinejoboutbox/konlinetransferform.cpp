@@ -160,7 +160,7 @@ void kOnlineTransferForm::convertCurrentJob(const int& index)
 void kOnlineTransferForm::duplicateCurrentJob()
 {
     IonlineJobEdit* widget = qobject_cast< IonlineJobEdit* >(ui->creditTransferEdit->widget());
-    if (widget == 0)
+    if (widget == nullptr)
         return;
 
     onlineJob duplicate(QString(), activeOnlineJob());
@@ -197,7 +197,7 @@ bool kOnlineTransferForm::setOnlineJob(const onlineJob job)
     setCurrentAccount(job.responsibleAccount());
     if (showEditWidget(name)) {
         IonlineJobEdit* widget = qobject_cast<IonlineJobEdit*>(ui->creditTransferEdit->widget());
-        if (widget != 0) { // This can happen if there are no widgets
+        if (widget != nullptr) { // This can happen if there are no widgets
             const bool ret = widget->setOnlineJob(job);
             setJobReadOnly(!job.isEditable());
             return ret;
@@ -229,7 +229,7 @@ bool kOnlineTransferForm::checkEditWidget()
 
 bool kOnlineTransferForm::checkEditWidget(IonlineJobEdit* widget)
 {
-    if (widget != 0 && onlineJobAdministration::instance()->isJobSupported(ui->originAccount->getSelected(), widget->supportedOnlineTasks())) {
+    if (widget != nullptr && onlineJobAdministration::instance()->isJobSupported(ui->originAccount->getSelected(), widget->supportedOnlineTasks())) {
         return true;
     }
     return false;
@@ -253,7 +253,7 @@ void kOnlineTransferForm::setCurrentAccount(const QString& accountId)
 onlineJob kOnlineTransferForm::activeOnlineJob() const
 {
     IonlineJobEdit* widget = qobject_cast<IonlineJobEdit*>(ui->creditTransferEdit->widget());
-    if (widget == 0)
+    if (widget == nullptr)
         return onlineJob();
 
     return widget->getOnlineJob();
@@ -313,7 +313,7 @@ void kOnlineTransferForm::showEditWidget(IonlineJobEdit* widget)
     Q_CHECK_PTR(widget);
 
     QWidget* oldWidget = ui->creditTransferEdit->takeWidget();
-    if (oldWidget != 0) { // This is true at the first call of showEditWidget() and if there are no widgets.
+    if (oldWidget != nullptr) { // This is true at the first call of showEditWidget() and if there are no widgets.
         oldWidget->setEnabled(false);
         disconnect(qobject_cast<IonlineJobEdit*>(oldWidget), &IonlineJobEdit::readOnlyChanged, this, &kOnlineTransferForm::setJobReadOnly);
     }

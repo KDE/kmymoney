@@ -83,12 +83,12 @@ void KMyMoneyWizardPage::leavePage()
 
 KMyMoneyWizardPage* KMyMoneyWizardPage::nextPage() const
 {
-    return 0;
+    return nullptr;
 }
 
 bool KMyMoneyWizardPage::isLastPage() const
 {
-    return nextPage() == 0;
+    return nextPage() == nullptr;
 }
 
 bool KMyMoneyWizardPage::isComplete() const

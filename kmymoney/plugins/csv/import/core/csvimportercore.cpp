@@ -212,10 +212,14 @@ bool CSVImporterCore::updateConfigFile(QList<int> &confVer)
     int kmmVersion = kmmVer.at(0) * 100 + kmmVer.at(1) * 10 + kmmVer.at(2);
     int confVersion = confVer.at(0) * 100 + confVer.at(1) * 10 + confVer.at(2);
     if (confVersion > kmmVersion) {
-        KMessageBox::information(0,
+        KMessageBox::information(nullptr,
                                  i18n("Version of your CSV config file is %1.%2.%3 and is newer than supported version %4.%5.%6. Expect troubles.",
-                                      confVer.at(0), confVer.at(1), confVer.at(2),
-                                      kmmVer.at(0), kmmVer.at(1), kmmVer.at(2)));
+                                      confVer.at(0),
+                                      confVer.at(1),
+                                      confVer.at(2),
+                                      kmmVer.at(0),
+                                      kmmVer.at(1),
+                                      kmmVer.at(2)));
         ret = false;
         return ret;
     } else if (confVersion == kmmVersion)

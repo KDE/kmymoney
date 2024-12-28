@@ -538,7 +538,7 @@ void KOnlineJobOutboxView::slotOnlineJobSend(QList<onlineJob> jobs)
         if (it_p != d->m_onlinePlugins->cend()) {
             // plugin found, call it
             KMyMoneyPlugin::OnlinePluginExtended *pluginExt = dynamic_cast< KMyMoneyPlugin::OnlinePluginExtended* >(*it_p);
-            if (pluginExt == 0) {
+            if (pluginExt == nullptr) {
                 qWarning("Job given for plugin which is not an extended plugin");
                 continue;
             }

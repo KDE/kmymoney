@@ -94,7 +94,7 @@ QWidget* SplitDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem
     if(index.isValid()) {
         Q_ASSERT(parent);
         auto view = qobject_cast<SplitView*>(parent->parentWidget());
-        Q_ASSERT(view != 0);
+        Q_ASSERT(view != nullptr);
 
         if(view->selectionModel()->selectedRows().count() > 1) {
             qDebug() << "Editing multiple splits at once is not yet supported";
@@ -104,7 +104,7 @@ QWidget* SplitDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem
              * editor that can handle multiple splits at once or show a message to the user
              * that this is not possible
              */
-            d->m_editor = 0;
+            d->m_editor = nullptr;
             SplitDelegate* that = const_cast<SplitDelegate*>(this);
             Q_EMIT that->closeEditor(d->m_editor, NoHint);
 

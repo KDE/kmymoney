@@ -214,14 +214,14 @@ public:
         adjustHeadersAndResizeToContents(ui->m_forecastList);
 
         // add the fixed column only if the horizontal scroll bar is visible
-        m_fixedColumnView.reset(ui->m_forecastList->horizontalScrollBar()->isVisible() ? new FixedColumnTreeView(ui->m_forecastList) : 0);
+        m_fixedColumnView.reset(ui->m_forecastList->horizontalScrollBar()->isVisible() ? new FixedColumnTreeView(ui->m_forecastList) : nullptr);
     }
 
     void loadAccounts(MyMoneyForecast& forecast, const MyMoneyAccount& account, QTreeWidgetItem* parentItem, int forecastType)
     {
         QMap<QString, QString> nameIdx;
         const auto file = MyMoneyFile::instance();
-        QTreeWidgetItem *forecastItem = 0;
+        QTreeWidgetItem* forecastItem = nullptr;
 
         //Get all accounts of the right type to calculate forecast
         const auto accList = account.accountList();
@@ -501,7 +501,7 @@ public:
         ui->m_advancedList->setColumnCount(headerLabels.count());
         ui->m_advancedList->setHeaderLabels(headerLabels);
 
-        QTreeWidgetItem *advancedItem = 0;
+        QTreeWidgetItem* advancedItem = nullptr;
 
         QMap<QString, QString>::const_iterator it_nc;
         for (it_nc = m_nameIdx.cbegin(); it_nc != m_nameIdx.cend(); ++it_nc) {

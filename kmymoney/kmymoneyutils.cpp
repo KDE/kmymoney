@@ -124,7 +124,7 @@ const char* homePageItems[] = {
     kli18n("Budget").untranslatedText(),
     kli18n("Cash Flow").untranslatedText(),
     // insert new items above this comment
-    0,
+    nullptr,
 };
 
 const QString KMyMoneyUtils::homePageItemToString(const int idx)
@@ -139,7 +139,7 @@ const QString KMyMoneyUtils::homePageItemToString(const int idx)
 int KMyMoneyUtils::stringToHomePageItem(const QString& txt)
 {
     int idx = 0;
-    for (idx = 0; homePageItems[idx] != 0; ++idx) {
+    for (idx = 0; homePageItems[idx] != nullptr; ++idx) {
         if (txt == i18n(homePageItems[idx]))
             return idx + 1;
     }
@@ -275,7 +275,7 @@ void KMyMoneyUtils::calculateAutoLoan(const MyMoneySchedule& schedule, MyMoneyTr
     try {
         MyMoneyForecast::calculateAutoLoan(schedule, transaction, balances);
     } catch (const MyMoneyException &e) {
-        KMessageBox::detailedError(0, i18n("Unable to load schedule details"), QString::fromLatin1(e.what()));
+        KMessageBox::detailedError(nullptr, i18n("Unable to load schedule details"), QString::fromLatin1(e.what()));
     }
 }
 
@@ -365,7 +365,7 @@ KXmlGuiWindow* KMyMoneyUtils::mainWindow()
         if (result)
             return result;
     }
-    return 0;
+    return nullptr;
 }
 
 void KMyMoneyUtils::updateWizardButtons(QWizard* wizard)

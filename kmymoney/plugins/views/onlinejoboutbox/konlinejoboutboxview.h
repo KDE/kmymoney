@@ -48,7 +48,7 @@ class KOnlineJobOutboxView : public KMyMoneyViewBase
     Q_OBJECT
 
 public:
-    explicit KOnlineJobOutboxView(QWidget *parent = 0);
+    explicit KOnlineJobOutboxView(QWidget* parent = nullptr);
     ~KOnlineJobOutboxView() override;
 
     void executeAction(eMenu::Action action, const SelectedObjects& selections) override;

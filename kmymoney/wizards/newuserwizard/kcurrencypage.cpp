@@ -51,7 +51,7 @@ CurrencyPage::CurrencyPage(Wizard* wizard) :
     Currency(wizard),
     WizardPage<Wizard>(*new CurrencyPagePrivate(wizard), stepCount++, this, wizard)
 {
-    QTreeWidgetItem *first = 0;
+    QTreeWidgetItem* first = nullptr;
 
     QList<MyMoneySecurity> list = MyMoneyFile::instance()->availableCurrencyList();
     QList<MyMoneySecurity>::const_iterator it;
@@ -76,9 +76,9 @@ CurrencyPage::CurrencyPage(Wizard* wizard) :
 
     QTreeWidgetItemIterator itemsIt = QTreeWidgetItemIterator(ui->m_currencyList, QTreeWidgetItemIterator::All);
 
-    if (first == 0)
+    if (first == nullptr)
         first = *itemsIt;
-    if (first != 0) {
+    if (first != nullptr) {
         ui->m_currencyList->setCurrentItem(first);
         first->setSelected(true);
         ui->m_currencyList->scrollToItem(first, QTreeView::PositionAtTop);

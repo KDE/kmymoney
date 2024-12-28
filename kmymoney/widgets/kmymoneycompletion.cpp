@@ -190,7 +190,7 @@ bool KMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
                 hide();
             }
             if (e->type() == QEvent::KeyPress) {
-                QTreeWidgetItem* item = 0;
+                QTreeWidgetItem* item = nullptr;
                 QKeyEvent* ev = static_cast<QKeyEvent*>(e);
                 switch (ev->key()) {
                 case Qt::Key_Tab:

@@ -18,7 +18,7 @@ class KMM_BASE_WIDGETS_EXPORT KBicEdit : public KLineEdit
     Q_OBJECT
 
 public:
-    explicit KBicEdit(QWidget* parent = 0);
+    explicit KBicEdit(QWidget* parent = nullptr);
     virtual ~KBicEdit();
 
 private:

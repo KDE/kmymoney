@@ -27,7 +27,7 @@ class SpecialDateDelegate : public KMMStyledItemDelegate
 {
     Q_OBJECT
 public:
-    explicit SpecialDateDelegate(LedgerView* parent = 0);
+    explicit SpecialDateDelegate(LedgerView* parent = nullptr);
     virtual ~SpecialDateDelegate();
 
     void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;

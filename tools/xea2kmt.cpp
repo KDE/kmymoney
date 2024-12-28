@@ -324,7 +324,7 @@ public:
             if (account.id == id)
                 return &account;
         }
-        return 0;
+        return nullptr;
     }
 
     TemplateAccount::PointerList accountsByType(const QString &type)

@@ -221,7 +221,7 @@ QString MyMoneyOfxConnector::password() const
 
     // in case we don't have a password on file, we ask the user
     if (pwd.isEmpty()) {
-        QPointer<KPasswordDialog> dlg = new KPasswordDialog(0);
+        QPointer<KPasswordDialog> dlg = new KPasswordDialog(nullptr);
         dlg->setPrompt(i18n("Enter your password for account <b>%1</b>", m_account.name()));
         if (dlg->exec())
             pwd = dlg->password();

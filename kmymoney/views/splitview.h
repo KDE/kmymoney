@@ -28,7 +28,7 @@ class SplitView : public QTableView
 {
     Q_OBJECT
 public:
-    explicit SplitView(QWidget* parent = 0);
+    explicit SplitView(QWidget* parent = nullptr);
     virtual ~SplitView();
 
     /**

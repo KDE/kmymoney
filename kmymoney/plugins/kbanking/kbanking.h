@@ -200,7 +200,7 @@ class KBankingExt : public AB_Banking
     friend class KBanking;
 
 public:
-    explicit KBankingExt(KBanking* parent, const char* appname, const char* fname = 0);
+    explicit KBankingExt(KBanking* parent, const char* appname, const char* fname = nullptr);
     virtual ~KBankingExt() {}
 
     int executeQueue(AB_IMEXPORTER_CONTEXT *ctx);
