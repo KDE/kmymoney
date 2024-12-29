@@ -1,0 +1,14 @@
+Date,Num,Payee,Tags,Category,Amount,Balance
+"checking"
+"2024-01-01","","Opening Balance","","",""," 0.00"
+"2024-01-01","","[Empty Payee]","tag1","expense"," -123.00"," -123.00"
+"2024-01-02","","[Empty Payee]","tag2","income"," 445.00"," 322.00"
+"2024-01-03","","[Empty Payee]","[No Tag]","Transfer to liabilities"," -100.00"," 222.00"
+"2024-12-31","","Closing Balance","","",""," 222.00"
+Total checking,,,,," 222.00",
+"liabilities"
+"2024-01-01","","Opening Balance","","",""," 0.00"
+"2024-01-03","","[Empty Payee]","[No Tag]","Transfer from checking"," 100.00"," 100.00"
+"2024-12-31","","Closing Balance","","",""," 100.00"
+Total liabilities,,,,," 100.00",
+Grand Total,,,,," 322.00",

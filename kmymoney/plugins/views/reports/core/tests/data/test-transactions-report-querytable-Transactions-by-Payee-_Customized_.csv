@@ -1,0 +1,6 @@
+Date,Num,Payee,Tags,Category,Account,Amount
+"[Empty Payee]"
+"2024-01-01","","[Empty Payee]","tag1","expense","checking"," -123.00"
+"2024-01-02","","[Empty Payee]","tag2","income","checking"," 445.00"
+Total [Empty Payee],,,,,," 322.00"
+Grand Total,,,,,," 322.00"

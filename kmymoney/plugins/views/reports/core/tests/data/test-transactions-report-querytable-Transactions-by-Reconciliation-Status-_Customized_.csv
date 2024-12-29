@@ -1,0 +1,17 @@
+Date,Num,Payee,Category,Amount,Balance
+"checking"
+"Cleared"
+"2024-01-02","","[Empty Payee]","income"," 445.00"," 445.00"
+Total Cleared,,,," 445.00",
+"Not reconciled"
+"2024-01-01","","[Empty Payee]","expense"," -123.00"," 322.00"
+Total Not reconciled,,,," -123.00",
+"Reconciled"
+"2024-01-03","","[Empty Payee]","Transfer to liabilities"," -100.00"," 222.00"
+Total Reconciled,,,," -100.00",
+Total checking,,,," 222.00",
+"liabilities"
+"2024-01-03","","[Empty Payee]","Transfer from checking"," 100.00"," 322.00"
+Total Reconciled,,,," 100.00",
+Total liabilities,,,," 100.00",
+Grand Total,,,," 322.00",

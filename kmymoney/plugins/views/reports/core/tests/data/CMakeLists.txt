@@ -9,9 +9,10 @@ set(querytable_test_files
   test-448788.xml
   test-453033.xml
   test-469195.xml
-  test-buchungen.xml
+  test-cash-flow.xml
   test-eigenkapital.xml
   test-investment.xml
+  test-transactions.xml
   refinance-loan.xml
 )
 

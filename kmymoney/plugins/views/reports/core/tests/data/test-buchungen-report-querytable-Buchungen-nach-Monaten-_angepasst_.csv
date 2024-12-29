@@ -1,8 +1,0 @@
-Date,Num,Payee,Tags,Category,Amount
-"Month of 2024-01-01"
-"2024-01-01","","[Empty Payee]","[No Tag]","Ausgabe"," -123.00"
-"2024-01-02","","[Empty Payee]","[No Tag]","Einnahme"," 445.00"
-"2024-01-03","","[Empty Payee]","[No Tag]","Transfer from checking"," 100.00"
-"2024-01-03","","[Empty Payee]","[No Tag]","Transfer to Verbindlichkeiten"," -100.00"
-Total Month of 2024-01-01,,,,," 322.00"
-Grand Total,,,,," 322.00"

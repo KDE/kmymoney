@@ -1,0 +1,5 @@
+Date,Num,Category,Account,Amount
+"tag1"
+"2024-01-01","","expense","checking"," -123.00"
+"tag2"
+"2024-01-02","","income","checking"," 445.00"
