@@ -2,4 +2,4 @@ Next Due Date,Name,Payee,Payment Method,Occurrence,Next Due Date,Amount
 "Bill"
 "2024-08-29","testplan","","Other","Monthly","2024-08-29"," -123.00"
 "Loan payment"
-"2024-01-01","Kreditzahlung für Kredit","","Direct debit","Monthly","2024-01-01"," -84.24"
+"2024-01-01","Loan payment for credit","","Direct debit","Monthly","2024-01-01"," -84.24"

@@ -1,9 +1,0 @@
-Type,Name,Num,Description,Opening Date,Currency,Balance Early Warning,Credit Early Warning,Credit Max Limit,Tax,Preferred
-"Asset"
-"Accounts with no institution assigned"
-"Checking","girokonto","","","2024-01-01","Euro","","","","",""
-"Geldinstitute"
-"Checking","girokonto-geldinstitut","Kontonummer","","2024-01-01","Euro","","","","",""
-"Liability"
-"Accounts with no institution assigned"
-"Loan","Kredit","","","2024-01-01","Euro","","","","",""

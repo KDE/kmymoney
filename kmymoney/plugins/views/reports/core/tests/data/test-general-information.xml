@@ -3,17 +3,17 @@
 <KMYMONEY-FILE>
   <FILEINFO>
     <CREATION_DATE date=""/>
-    <LAST_MODIFIED_DATE date="2024-09-06T18:34:54+02:00"/>
+    <LAST_MODIFIED_DATE date="2024-12-29T20:53:22+01:00"/>
     <VERSION id="1"/>
     <FIXVERSION date=""/>
-    <APPVERSION id="5.1.80-0b17b59b1"/>
+    <APPVERSION id="5.1.90-12fa993df"/>
   </FILEINFO>
   <USER name="" email="">
     <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
   </USER>
   <INSTITUTIONS>
-    <INSTITUTION id="I000001" name="Geldinstitute" manager="" sortcode="Bank Code">
-      <ADDRESS street="Straße" city="Ort" state="" zip="PLZ" telephone="Telefon" country="" county="" zipcode="PLZ" postcode="PLZ"/>
+    <INSTITUTION id="I000001" name="Financial institutions" manager="" sortcode="Bank Code">
+      <ADDRESS street="street" city="town" state="" zip="postcode" telephone="telefone" country="" county="" zipcode="postcode" postcode="postcode"/>
       <ACCOUNTIDS>
         <ACCOUNTID id="A000002"/>
       </ACCOUNTIDS>
@@ -25,50 +25,50 @@
     </INSTITUTION>
   </INSTITUTIONS>
   <PAYEES>
-    <PAYEE id="P000001" name="Bank" reference="" email="" matchingenabled="1" usingmatchkey="0" matchignorecase="1" matchkey="^$">
+    <PAYEE id="P000001" name="bank" reference="" email="" matchingenabled="1" usingmatchkey="0" matchignorecase="1" matchkey="^$">
       <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
     </PAYEE>
   </PAYEES>
   <COSTCENTERS/>
   <TAGS/>
   <ACCOUNTS>
-    <ACCOUNT id="AStd::Asset" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="9" name="Anlagen" description="" currency="EUR">
+    <ACCOUNT id="AStd::Asset" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="9" name="Asset" description="" currency="EUR">
       <SUBACCOUNTS>
         <SUBACCOUNT id="A000001"/>
         <SUBACCOUNT id="A000002"/>
       </SUBACCOUNTS>
     </ACCOUNT>
-    <ACCOUNT id="AStd::Liability" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="10" name="Verbindlichkeiten" description="" currency="EUR">
+    <ACCOUNT id="AStd::Liability" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="10" name="Liability" description="" currency="EUR">
       <SUBACCOUNTS>
         <SUBACCOUNT id="A000006"/>
       </SUBACCOUNTS>
     </ACCOUNT>
-    <ACCOUNT id="AStd::Expense" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="13" name="Ausgabe" description="" currency="EUR">
+    <ACCOUNT id="AStd::Expense" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="13" name="Expense" description="" currency="EUR">
       <SUBACCOUNTS>
         <SUBACCOUNT id="A000004"/>
         <SUBACCOUNT id="A000005"/>
       </SUBACCOUNTS>
     </ACCOUNT>
-    <ACCOUNT id="AStd::Income" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="12" name="Einnahme" description="" currency="EUR"/>
-    <ACCOUNT id="AStd::Equity" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="16" name="Eigenkapital" description="" currency="EUR">
+    <ACCOUNT id="AStd::Income" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="12" name="Income" description="" currency="EUR"/>
+    <ACCOUNT id="AStd::Equity" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="16" name="Equity" description="" currency="EUR">
       <SUBACCOUNTS>
         <SUBACCOUNT id="A000003"/>
       </SUBACCOUNTS>
     </ACCOUNT>
-    <ACCOUNT id="A000001" parentaccount="AStd::Asset" lastreconciled="" lastmodified="" institution="" opened="2024-01-01" number="" type="1" name="girokonto" description="" currency="EUR"/>
-    <ACCOUNT id="A000002" parentaccount="AStd::Asset" lastreconciled="" lastmodified="2024-09-06" institution="I000001" opened="2024-01-01" number="Kontonummer" type="1" name="girokonto-geldinstitut" description="" currency="EUR">
+    <ACCOUNT id="A000001" parentaccount="AStd::Asset" lastreconciled="" lastmodified="" institution="" opened="2024-01-01" number="" type="1" name="checking" description="" currency="EUR"/>
+    <ACCOUNT id="A000002" parentaccount="AStd::Asset" lastreconciled="" lastmodified="2024-09-06" institution="I000001" opened="2024-01-01" number="account number" type="1" name="checking-institution" description="" currency="EUR">
       <KEYVALUEPAIRS>
         <PAIR key="iban" value="IBAN"/>
       </KEYVALUEPAIRS>
     </ACCOUNT>
-    <ACCOUNT id="A000003" parentaccount="AStd::Equity" lastreconciled="" lastmodified="2024-09-06" institution="" opened="2024-01-01" number="" type="16" name="Eröffnungssaldo" description="" currency="EUR">
+    <ACCOUNT id="A000003" parentaccount="AStd::Equity" lastreconciled="" lastmodified="2024-09-06" institution="" opened="2024-01-01" number="" type="16" name="opening balance" description="" currency="EUR">
       <KEYVALUEPAIRS>
         <PAIR key="OpeningBalanceAccount" value="Yes"/>
       </KEYVALUEPAIRS>
     </ACCOUNT>
-    <ACCOUNT id="A000004" parentaccount="AStd::Expense" lastreconciled="" lastmodified="" institution="" opened="1900-01-01" number="" type="13" name="Ausgabe" description="" currency="EUR"/>
-    <ACCOUNT id="A000005" parentaccount="AStd::Expense" lastreconciled="" lastmodified="" institution="" opened="1900-01-01" number="" type="13" name="Kreditzinsen" description="" currency="EUR"/>
-    <ACCOUNT id="A000006" parentaccount="AStd::Liability" lastreconciled="" lastmodified="2024-09-06" institution="" opened="2024-01-01" number="" type="5" name="Kredit" description="" currency="EUR">
+    <ACCOUNT id="A000004" parentaccount="AStd::Expense" lastreconciled="" lastmodified="" institution="" opened="1900-01-01" number="" type="13" name="expenses" description="" currency="EUR"/>
+    <ACCOUNT id="A000005" parentaccount="AStd::Expense" lastreconciled="" lastmodified="" institution="" opened="1900-01-01" number="" type="13" name="loan interest" description="" currency="EUR"/>
+    <ACCOUNT id="A000006" parentaccount="AStd::Liability" lastreconciled="" lastmodified="2024-09-06" institution="" opened="2024-01-01" number="" type="5" name="loan" description="" currency="EUR">
       <KEYVALUEPAIRS>
         <PAIR key="compoundingFrequency" value="32"/>
         <PAIR key="final-payment" value="8409/100"/>
@@ -76,6 +76,7 @@
         <PAIR key="interest-calculation" value="paymentReceived"/>
         <PAIR key="ir-2024-01-01" value="2/1"/>
         <PAIR key="ir-2024-09-01" value="2/1"/>
+        <PAIR key="ir-2024-12-29" value="2/1"/>
         <PAIR key="loan-amount" value="1000/1"/>
         <PAIR key="periodic-payment" value="2106/25"/>
         <PAIR key="schedule" value="SCH000002"/>
@@ -98,7 +99,7 @@
     </TRANSACTION>
   </TRANSACTIONS>
   <KEYVALUEPAIRS>
-    <PAIR key="LastModificationDate" value="2024-09-06T18:34:54+02:00"/>
+    <PAIR key="LastModificationDate" value="2024-12-29T20:53:22+01:00"/>
     <PAIR key="kmm-baseCurrency" value="EUR"/>
     <PAIR key="kmm-id" value="{994f9512-1fe0-48da-9ffc-43c575339c0d}"/>
   </KEYVALUEPAIRS>
@@ -112,7 +113,7 @@
         </SPLITS>
       </TRANSACTION>
     </SCHEDULED_TX>
-    <SCHEDULED_TX id="SCH000002" name="Kreditzahlung für Kredit" type="5" occurence="32" occurenceMultiplier="1" paymentType="1" startDate="2024-01-01" endDate="" fixed="1" lastDayInMonth="0" autoEnter="0" lastPayment="" weekendOption="2">
+    <SCHEDULED_TX id="SCH000002" name="Loan payment for credit" type="5" occurence="32" occurenceMultiplier="1" paymentType="1" startDate="2024-01-01" endDate="" fixed="1" lastDayInMonth="0" autoEnter="0" lastPayment="" weekendOption="2">
       <PAYMENTS/>
       <TRANSACTION id="" postdate="2024-01-01" memo="" entrydate="" commodity="EUR">
         <SPLITS>
@@ -129,12 +130,12 @@
   </CURRENCIES>
   <PRICES/>
   <REPORTS>
-    <REPORT id="R000001" type="infotable 1.0" group="Information" name="Konto-Informationen (angepasst)" comment="Benutzerdefinierter Bericht" convertcurrency="0" favorite="0" skipZero="0" datelock="today" rowtype="accountinfo" showrowtotals="0">
+    <REPORT id="R000001" type="infotable 1.0" group="Information" name="Account Information (customized)" comment="Custom Report" convertcurrency="0" favorite="0" skipZero="0" datelock="alldates" rowtype="accountinfo" showrowtotals="0">
       <ACCOUNTGROUP group="asset"/>
       <ACCOUNTGROUP group="liability"/>
     </REPORT>
-    <REPORT id="R000002" type="infotable 1.0" group="Information" name="Informationen zu geplanten Buchungen (angepasst)" comment="Benutzerdefinierter Bericht" convertcurrency="1" favorite="0" skipZero="0" datelock="next12months" rowtype="schedule" showrowtotals="0"/>
-    <REPORT id="R000005" type="infotable 1.0" group="Information" name="Darlehen-Informationen (angepasst)" comment="Benutzerdefinierter Bericht" convertcurrency="0" favorite="0" skipZero="0" datelock="today" rowtype="accountloaninfo" showrowtotals="0"/>
+    <REPORT id="R000002" type="infotable 1.0" group="Information" name="Schedule Information (customized)" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="alldates" rowtype="schedule" showrowtotals="0"/>
+    <REPORT id="R000005" type="infotable 1.0" group="Information" name="Loan Information (customized)" comment="Custom Report" convertcurrency="0" favorite="0" skipZero="0" datelock="alldates" rowtype="accountloaninfo" showrowtotals="0"/>
   </REPORTS>
   <BUDGETS/>
   <ONLINEJOBS/>

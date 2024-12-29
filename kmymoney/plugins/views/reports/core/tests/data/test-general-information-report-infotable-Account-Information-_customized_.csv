@@ -1,0 +1,9 @@
+Type,Name,Num,Description,Opening Date,Currency,Balance Early Warning,Credit Early Warning,Credit Max Limit,Tax,Preferred
+"Asset"
+"Accounts with no institution assigned"
+"Checking","checking","","","2024-01-01","Euro","","","","",""
+"Financial institutions"
+"Checking","checking-institution","account number","","2024-01-01","Euro","","","","",""
+"Liability"
+"Accounts with no institution assigned"
+"Loan","loan","","","2024-01-01","Euro","","","","",""
