@@ -28,6 +28,7 @@
 #include "accountsmodel.h"
 #include "columnselector.h"
 #include "icons.h"
+#include "kmymoneysettings.h"
 #include "mymoneyaccount.h"
 #include "mymoneyenums.h"
 #include "mymoneyfile.h"
@@ -179,6 +180,22 @@ public:
         menu->exec(q->viewport()->mapToGlobal(pos));
     }
 
+    void setFonts()
+    {
+        q->horizontalHeader()->setMinimumSectionSize(20);
+
+        QFont font = KMyMoneySettings::listHeaderFontEx();
+        QFontMetrics fm(font);
+        int height = fm.lineSpacing() + 6;
+        q->horizontalHeader()->setMinimumHeight(height);
+        q->horizontalHeader()->setMaximumHeight(height);
+        q->horizontalHeader()->setFont(font);
+
+        // setup cell font
+        font = KMyMoneySettings::listCellFontEx();
+        q->setFont(font);
+    }
+
     SplitView* q;
     SplitDelegate* splitDelegate;
     MyMoneyAccount account;
@@ -224,6 +241,8 @@ SplitView::SplitView(QWidget* parent)
     setAlternatingRowColors(true);
 
     setSelectionBehavior(SelectRows);
+
+    d->setFonts();
 
     // setup the context menu
     setContextMenuPolicy(Qt::CustomContextMenu);
@@ -509,6 +528,8 @@ int SplitView::sizeHintForRow(int row) const
 
         if(splitDelegate&& (splitDelegate->editorRow() != row)) {
             QStyleOptionViewItem opt;
+            opt.font = font();
+            opt.fontMetrics = fontMetrics();
             opt.state |= (row == currentIndex().row()) ? QStyle::State_Selected : QStyle::State_None;
             int hint = delegate->sizeHint(opt, index).height();
             if(showGrid())

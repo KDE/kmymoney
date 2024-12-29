@@ -391,3 +391,17 @@ bool TransactionEditorBase::eventFilter(QObject* o, QEvent* e)
     }
     return QWidget::eventFilter(o, e);
 }
+
+void TransactionEditorBase::changeEvent(QEvent* ev)
+{
+    if (ev->type() == QEvent::FontChange) {
+        // since AmountEdit widgets internally use a stylesheet, they don't receive
+        // the font update via the Qt event system. We simply update them here.
+        const auto children = findChildren<AmountEdit*>();
+        const auto newFont = font();
+        std::for_each(children.cbegin(), children.cend(), [&](AmountEdit* w) {
+            w->setFont(newFont);
+        });
+    }
+    QWidget::changeEvent(ev);
+}

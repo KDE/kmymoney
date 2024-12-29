@@ -259,6 +259,11 @@ public:
      */
     void setAllowModifyShares(bool allowModifyShares);
 
+    /**
+     * Reimplemented for internal reasons
+     */
+    void setFont(const QFont& font);
+
 private:
 public Q_SLOTS:
 

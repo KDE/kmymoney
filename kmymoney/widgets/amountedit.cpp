@@ -121,6 +121,7 @@ public:
         m_currencyButton->setAutoRaise(true);
         m_currencyButton->hide();
         m_currencyButton->setFocusPolicy(Qt::ClickFocus);
+        m_currencyButton->setFont(q->font());
 
         // setup items
         KSharedConfig::Ptr kconfig = KSharedConfig::openConfig();
@@ -185,8 +186,21 @@ public:
         m_calculatorButton->move(q->width() - m_calculatorButton->width() - frameWidth, btnX);
         widget->move(q->width() - m_calculatorButton->width() - widget->width() - gaps * frameWidth, currencyX);
 
+        // It was reported in https://bugs.kde.org/show_bug.cgi?id=497255 that
+        // changing the font of the ledger cells updates all widgets in the
+        // transaction editors except the amount widgets. While investigating
+        // the problem, it has been noticed, that when setting the style sheet
+        // a second time, a previously modified font size gets reset to the system
+        // size. So in case we are about to change the stylesheet, we keep a copy
+        // of the font and set it back to that copy after changing the stylesheet.
+        //
+        // The observed behavior may have something to do with the default setting of
+        // Qt::AA_UseStyleSheetPropagationInWidgetStyles.
         const int padding = m_calculatorButton->width() + widget->width() + ((gaps - 1) * frameWidth);
-        q->setStyleSheet(QString("QLineEdit { padding-right: %1px }").arg(padding));
+        const auto font(q->font());
+        q->setStyleSheet(QStringLiteral("QLineEdit { padding-right: %1px }").arg(padding));
+        // avoid infinite recursive calls here
+        q->QLineEdit::setFont(font);
         q->setMinimumHeight(height);
     }
 
@@ -928,4 +942,11 @@ void AmountEdit::setAllowModifyShares(bool allowModifyShares)
     if (d->m_isReadOnly && displayState() == DisplayState::DisplayShares) {
         d->setReadOnly(!allowModifyShares);
     }
+}
+
+void AmountEdit::setFont(const QFont& font)
+{
+    Q_D(AmountEdit);
+    QLineEdit::setFont(font);
+    d->updateLineEditSize(d->m_calculatorButton);
 }
