@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE KMYMONEY-FILE>
+<KMYMONEY-FILE>
+  <FILEINFO>
+    <CREATION_DATE date=""/>
+    <LAST_MODIFIED_DATE date="2024-12-29T20:34:20+01:00"/>
+    <VERSION id="1"/>
+    <FIXVERSION date=""/>
+    <APPVERSION id="5.1.90-12fa993df"/>
+  </FILEINFO>
+  <USER name="" email="">
+    <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
+  </USER>
+  <INSTITUTIONS/>
+  <PAYEES/>
+  <COSTCENTERS/>
+  <TAGS/>
+  <ACCOUNTS>
+    <ACCOUNT id="AStd::Asset" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="9" name="Asset" description="" currency="EUR">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000001"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Liability" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="10" name="Liability" description="" currency="EUR">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000004"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Expense" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="13" name="Expense" description="" currency="EUR">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000002"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Income" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="12" name="Income" description="" currency="EUR">
+      <SUBACCOUNTS>
+        <SUBACCOUNT id="A000003"/>
+      </SUBACCOUNTS>
+    </ACCOUNT>
+    <ACCOUNT id="AStd::Equity" parentaccount="" lastreconciled="" lastmodified="" institution="" opened="" number="" type="16" name="Equity" description="" currency="EUR"/>
+    <ACCOUNT id="A000001" parentaccount="AStd::Asset" lastreconciled="" lastmodified="2024-09-09" institution="" opened="2024-01-01" number="" type="1" name="checking" description="" currency="EUR"/>
+    <ACCOUNT id="A000002" parentaccount="AStd::Expense" lastreconciled="" lastmodified="2024-09-06" institution="" opened="1900-01-01" number="" type="13" name="expense" description="" currency="EUR"/>
+    <ACCOUNT id="A000003" parentaccount="AStd::Income" lastreconciled="" lastmodified="2024-09-09" institution="" opened="1900-01-01" number="" type="12" name="income" description="" currency="EUR"/>
+    <ACCOUNT id="A000004" parentaccount="AStd::Liability" lastreconciled="" lastmodified="2024-09-09" institution="" opened="2024-01-01" number="" type="10" name="liabilities" description="" currency="EUR"/>
+  </ACCOUNTS>
+  <TRANSACTIONS>
+    <TRANSACTION id="T000000000000000001" postdate="2024-01-01" memo="" entrydate="2024-09-06" commodity="EUR">
+      <SPLITS>
+        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="-123/1" shares="-123/1" price="1/1" memo="" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="123/1" shares="123/1" price="1/1" memo="" account="A000002" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000002" postdate="2024-01-02" memo="" entrydate="2024-09-09" commodity="EUR">
+      <SPLITS>
+        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="445/1" shares="445/1" price="1/1" memo="" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="-445/1" shares="-445/1" price="1/1" memo="" account="A000003" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+    <TRANSACTION id="T000000000000000003" postdate="2024-01-03" memo="" entrydate="2024-09-09" commodity="EUR">
+      <SPLITS>
+        <SPLIT id="S0001" payee="" reconciledate="" action="" reconcileflag="0" value="-100/1" shares="-100/1" price="1/1" memo="" account="A000001" number="" bankid=""/>
+        <SPLIT id="S0002" payee="" reconciledate="" action="" reconcileflag="0" value="100/1" shares="100/1" price="1/1" memo="" account="A000004" number="" bankid=""/>
+      </SPLITS>
+    </TRANSACTION>
+  </TRANSACTIONS>
+  <KEYVALUEPAIRS>
+    <PAIR key="LastModificationDate" value="2024-12-29T20:34:20+01:00"/>
+    <PAIR key="kmm-baseCurrency" value="EUR"/>
+    <PAIR key="kmm-id" value="{f8f47595-3cac-4ace-8579-b740638b1629}"/>
+  </KEYVALUEPAIRS>
+  <SCHEDULES/>
+  <SECURITIES/>
+  <CURRENCIES>
+    <CURRENCY id="EUR" name="Euro" symbol="€" type="3" rounding-method="7" saf="100" pp="4" scf="100"/>
+  </CURRENCIES>
+  <PRICES/>
+  <REPORTS>
+    <REPORT id="R000004" type="pivottable 1.16" group="Income and Expenses" name="Income and Expenses By Year (Customized)" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="expenseincome" includesactuals="0" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" showrowtotals="1" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="years" datalock="automatic" dataRangeStart="1" dataRangeEnd="10" dataMajorTick="1" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="expense"/>
+      <ACCOUNTGROUP group="income"/>
+      <DATES from="2024-01-01" to="2024-12-31"/>
+    </REPORT>
+    <REPORT id="R000005" type="pivottable 1.16" group="Income and Expenses" name="Assets and Liabilities By Year (Customized)" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="userdefined" rowtype="assetliability" includesactuals="0" includesforecast="0" includesprice="0" includesaverageprice="0" mixedtime="0" investments="0" showrowtotals="0" showcolumntotals="1" detail="all" includesmovingaverage="0" includeschedules="0" includestransfers="0" includeunused="0" columnsaredays="0" charttype="line" chartpalette="application" chartchgridlines="1" chartsvgridlines="1" chartdatalabels="1" chartbydefault="0" logYaxis="0" negexpenses="0" chartlinewidth="2" columntype="years" datalock="automatic" dataRangeStart="1" dataRangeEnd="10" dataMajorTick="1" dataMinorTick="0" yLabelsPrecision="2">
+      <ACCOUNTGROUP group="asset"/>
+      <ACCOUNTGROUP group="liability"/>
+      <DATES from="2024-01-01" to="2024-12-31"/>
+    </REPORT>
+  </REPORTS>
+  <BUDGETS/>
+  <ONLINEJOBS/>
+</KMYMONEY-FILE>
