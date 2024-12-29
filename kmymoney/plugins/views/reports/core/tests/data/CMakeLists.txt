@@ -10,16 +10,16 @@ set(querytable_test_files
   test-453033.xml
   test-469195.xml
   test-cash-flow.xml
-  test-eigenkapital.xml
   test-investment.xml
+  test-net-worth.xml
   test-transactions.xml
   refinance-loan.xml
 )
 
 set(pivottable_test_files
   test-income-and-expenses.xml
+  test-net-worth.xml
   test-pivottable.xml
-  test-eigenkapital.xml
 )
 
 macro(fetch_report_names file)

@@ -3,6 +3,6 @@ Account,Amount
 "checking"," 222.00"
 Total Checking," 222.00"
 "Liability"
-"Verbindlichkeiten"," 100.00"
+"liabilities"," 100.00"
 Total Liability," 100.00"
 Grand Total," 322.00"
