@@ -219,8 +219,8 @@ void QueryTable::init()
         m_subtotal.clear();
         switch (m_config.investmentSum()) {
         case eMyMoney::Report::InvestmentSum::Owned:
-            m_columns << ctShares << ctBuyPrice << ctLastPrice << ctBuys << ctEndingMarketValue << ctPercentageGain << ctCapitalGain;
-            m_subtotal << ctShares << ctBuyPrice << ctLastPrice << ctBuys << ctEndingMarketValue << ctPercentageGain << ctCapitalGain;
+            m_columns << ctShares << ctBuyPrice << ctBuys << ctLastPrice << ctEndingMarketValue << ctPercentageGain << ctCapitalGain;
+            m_subtotal << ctShares << ctBuyPrice << ctBuys << ctLastPrice << ctEndingMarketValue << ctPercentageGain << ctCapitalGain;
             break;
         case eMyMoney::Report::InvestmentSum::Sold:
         default:

@@ -1,5 +1,5 @@
-Account,Shares,Buy Price,Last Price,Buy Value,Ending Market Value,Percentage Gain,Capital Gain
+Account,Shares,Buy Price,Buy Value,Last Price,Ending Market Value,Percentage Gain,Capital Gain
 "Shares"
-"BHP","460.00"," 44.46"," 44.90"," -20,451.75"," 20,654.00","0.98 %"," 202.25"
-Total Shares,"460.00"," 44.4600"," 44.9000"," -20,451.75"," 20,654.00","0.98 %"," 202.25"
-Grand Total,"460.00"," 44.4600"," 44.9000"," -20,451.75"," 20,654.00","0.98 %"," 202.25"
+"BHP","460.00"," 44.46"," -20,451.75"," 44.90"," 20,654.00","0.98 %"," 202.25"
+Total Shares,"460.00"," 44.4600"," -20,451.75"," 44.9000"," 20,654.00","0.98 %"," 202.25"
+Grand Total,"460.00"," 44.4600"," -20,451.75"," 44.9000"," 20,654.00","0.98 %"," 202.25"
