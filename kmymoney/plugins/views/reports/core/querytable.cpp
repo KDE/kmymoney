@@ -1491,6 +1491,7 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
         all.append(CashFlowListItem(endingDate, endingMarketValue));
         all.append(cfList.at(CashIncome));
 
+        result[ctCashIncome] = cashIncomeTotal.toString();
         result[ctReinvestIncome] = reinvestIncomeTotal.toString();
         result[ctEndingMarketValue] = endingMarketValue.toString();
         break;
