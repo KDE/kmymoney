@@ -1039,18 +1039,25 @@ public:
                                                 eMyMoney::Report::DetailLevel::Top,
                                                 "Yearly Budgeted vs. Actual", "Default Report")) {}
 
-    void testHelperROI() {
-        // (10 + 50 - 110 + 60 + 70) / (110 - 10)
-        QString result1 = helperROI(MyMoneyMoney(10), MyMoneyMoney(50), MyMoneyMoney(110), MyMoneyMoney(60), MyMoneyMoney(70));
-        QVERIFY(MyMoneyMoney(result1) == MyMoneyMoney(80, 100));
 
-        // (110 + 50 - 110 + 60 + 70) / (110 - 110)
-        QString result2 = helperROI(MyMoneyMoney(110), MyMoneyMoney(50), MyMoneyMoney(110), MyMoneyMoney(60), MyMoneyMoney(70));
-        QVERIFY(result2 == "");
+    void testHelperROI()
+    {
+        MyMoneyMoney buys(10);
+        MyMoneyMoney sells(50);
+        MyMoneyMoney reinvestIncome(0);
+        MyMoneyMoney cashIncome(70);
+        MyMoneyMoney startingBalance(110);
+        MyMoneyMoney endingBalance(60);
+        QString result1 = helperROI(buys, sells, reinvestIncome, cashIncome, startingBalance, endingBalance);
+        QCOMPARE(result1, MyMoneyMoney(80, 100).convert(10000).toString());
+
+        buys = MyMoneyMoney(110);
+        QString result2 = helperROI(buys, sells, reinvestIncome, cashIncome, startingBalance, endingBalance);
+        QCOMPARE(result2, QString());
     }
 };
 
-void QueryTableTest::testProtectedMethods()
+void QueryTableTest::testROI()
 {
     try {
         QueryTableProtectedTester().testHelperROI();
