@@ -1001,7 +1001,7 @@ void QueryTable::constructTransactionTable()
                             qS[ctCategory] = ((*it_split).shares().isNegative())
                                              ? i18n("Transfer to %1", a_fullname)
                                              : i18n("Transfer from %1", a_fullname);
-                        } else {
+                        } else if ((*it_split).action() != MyMoneySplit::actionName(eMyMoney::Split::Action::AddShares)) {
                             qS[ctCategory] = i18n("*** UNASSIGNED ***");
                         }
                         qS[ctInstitution] = institution.isEmpty()
