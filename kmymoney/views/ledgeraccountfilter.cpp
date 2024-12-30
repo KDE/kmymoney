@@ -160,7 +160,10 @@ QVariant LedgerAccountFilter::data(const QModelIndex& index, int role) const
                     const auto file = MyMoneyFile::instance();
                     const auto accountId = index.data(eMyMoney::Model::SplitAccountIdRole).toString();
                     const auto acc = file->accountsModel()->itemById(accountId);
-                    const auto security = file->securitiesModel()->itemById(acc.currencyId());
+                    auto security = file->currenciesModel()->itemById(acc.currencyId());
+                    if (security.id().isEmpty()) {
+                        security = file->securitiesModel()->itemById(acc.currencyId());
+                    }
                     const auto fraction =
                         (acc.accountType() == eMyMoney::Account::Type::Cash) ? security.smallestCashFraction() : security.smallestAccountFraction();
                     return d->balances.at(index.row()).formatMoney(fraction);
