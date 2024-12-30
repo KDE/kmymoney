@@ -1055,6 +1055,19 @@ public:
         QString result2 = helperROI(buys, sells, reinvestIncome, cashIncome, startingBalance, endingBalance);
         QCOMPARE(result2, QString());
     }
+
+    void testHelperXIRR()
+    {
+        // see https://help.libreoffice.org/latest/de/text/scalc/01/04060118.html
+        CashFlowList all;
+        all.append(CashFlowListItem(QDate(2001, 1, 1), MyMoneyMoney(-10000)));
+        all.append(CashFlowListItem(QDate(2001, 2, 1), MyMoneyMoney(2000)));
+        all.append(CashFlowListItem(QDate(2001, 3, 15), MyMoneyMoney(2500)));
+        all.append(CashFlowListItem(QDate(2001, 5, 12), MyMoneyMoney(5000)));
+        all.append(CashFlowListItem(QDate(2001, 8, 10), MyMoneyMoney(1000)));
+        QString result1 = helperXIRR(all);
+        QCOMPARE(result1, MyMoneyMoney(457, 2500).convert(10000).toString());
+    }
 };
 
 void QueryTableTest::testROI()
@@ -1062,6 +1075,15 @@ void QueryTableTest::testROI()
     try {
         QueryTableProtectedTester().testHelperROI();
     } catch (const MyMoneyException &e) {
+        QFAIL(e.what());
+    }
+}
+
+void QueryTableTest::testXIRR()
+{
+    try {
+        QueryTableProtectedTester().testHelperXIRR();
+    } catch (const MyMoneyException& e) {
         QFAIL(e.what());
     }
 }

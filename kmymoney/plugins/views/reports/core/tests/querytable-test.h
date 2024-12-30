@@ -30,6 +30,7 @@ private Q_SLOTS:
     void testBalanceColumnWithMultipleCurrencies();
     void testTaxReport();
     void testROI();
+    void testXIRR();
 };
 
 #endif
