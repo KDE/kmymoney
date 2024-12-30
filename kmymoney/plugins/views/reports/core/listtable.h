@@ -205,5 +205,14 @@ private:
 
 }
 
+#define FORCED_FIRST_RANK QLatin1String("0")
+#define FIRST_SPLIT_RANK QLatin1String("1")
+#define SECONDARY_SPLIT_RANK QLatin1String("2")
+#define END_BALANCE_RANK QLatin1String("3")
+#define BASE_CURRENCY_TOTAL_RANK QLatin1String("4")
+#define FOREIGN_CURRENCY_TOTAL_RANK QLatin1String("5")
+
+#define FIRST_ID_SORT QLatin1String("A")
+#define LAST_ID_SORT QLatin1String("Z")
 #endif
 

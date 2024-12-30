@@ -165,7 +165,7 @@ void ObjectInfoTable::constructScheduleTable()
             }
 
             // help for sort and render functions
-            scheduleRow[ctRank] = QLatin1Char('1');
+            scheduleRow[ctRank] = FIRST_SPLIT_RANK;
 
             //schedule data
             scheduleRow[ctID] = schedule.id();
@@ -200,7 +200,7 @@ void ObjectInfoTable::constructScheduleTable()
                     TableRow splitRow;
                     ReportAccount splitAcc((*split_it).accountId());
 
-                    splitRow[ctRank] = QLatin1Char('2');
+                    splitRow[ctRank] = SECONDARY_SPLIT_RANK;
                     splitRow[ctID] = schedule.id();
                     splitRow[ctName] = schedule.name();
                     splitRow[ctPayee] = payee.name();
@@ -260,7 +260,7 @@ void ObjectInfoTable::constructAccountTable()
                 && account.accountType() != eMyMoney::Account::Type::Stock
                 && !account.isClosed()) {
             MyMoneyMoney value;
-            accountRow[ctRank] = QLatin1Char('1');
+            accountRow[ctRank] = FIRST_SPLIT_RANK;
             accountRow[ctTopCategory] = MyMoneyAccount::accountTypeToString(account.accountGroup());
             if (!account.institutionId().isEmpty()) {
                 accountRow[ctInstitution] = (file->institution(account.institutionId())).name();
@@ -321,7 +321,7 @@ void ObjectInfoTable::constructAccountLoanTable()
                 xr = account.baseCurrencyPrice(QDate::currentDate()).reduce();
             }
 
-            accountRow[ctRank] = QLatin1Char('1');
+            accountRow[ctRank] = FIRST_SPLIT_RANK;
             accountRow[ctTopCategory] = MyMoneyAccount::accountTypeToString(account.accountGroup());
             if (!account.institutionId().isEmpty()) {
                 accountRow[ctInstitution] = (file->institution(account.institutionId())).name();

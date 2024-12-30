@@ -208,7 +208,7 @@ void ListTable::render(QString& result, QString& csv) const
                         if (isLowestGroupTotal && m_config.isHideTransactions()) {
                             result.append(QLatin1String("<tr class=\"sectionfootermiddle\">"));
                             isLowestGroupTotal = false;
-                        } else if ((*nextRow).value(ctRank) == QLatin1String("5")) {
+                        } else if ((*nextRow).value(ctRank) == FOREIGN_CURRENCY_TOTAL_RANK) {
                             result.append(QLatin1String("<tr class=\"sectionfooterfirst\">"));
                         } else {
                             result.append(QLatin1String("<tr class=\"sectionfooter\">"));
@@ -218,7 +218,7 @@ void ListTable::render(QString& result, QString& csv) const
                     }
                 } else if (rowRank == 5) {
                     if (nextRow != m_rows.end()) {
-                        if ((*nextRow).value(ctRank) == QLatin1String("5"))
+                        if ((*nextRow).value(ctRank) == FOREIGN_CURRENCY_TOTAL_RANK)
                             result.append(QLatin1String("<tr class=\"sectionfootermiddle\">"));
                         else
                             result.append(QLatin1String("<tr class=\"sectionfooterlast\">"));

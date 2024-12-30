@@ -258,16 +258,16 @@ void QueryTable::constructTotalRows()
     const auto rows = m_rows.count();
     for (int i = 0; i < rows-1; ++i) {
         // it should be unlikely that total row is at the top of rows, so...
-        if ((m_rows.at(i)[ctRank] == QLatin1String("5")) || (m_rows.at(i)[ctTopAccount].isEmpty())) {
+        if ((m_rows.at(i)[ctRank] == FOREIGN_CURRENCY_TOTAL_RANK) || (m_rows.at(i)[ctTopAccount].isEmpty())) {
             // check if there are other entries than totals so moving makes sense
             for (int j = i+1; j <= rows-1; ++j) {
-                if ((m_rows.at(j)[ctRank] != QLatin1String("5")) && (!m_rows.at(j)[ctTopAccount].isEmpty())) {
+                if ((m_rows.at(j)[ctRank] != FOREIGN_CURRENCY_TOTAL_RANK) && (!m_rows.at(j)[ctTopAccount].isEmpty())) {
                     m_rows.move(i, rows - 1);                   // ...move it at the end
                     --i;                                        // check the same slot again
                     break;
                 }
             }
-        } else if (m_rows.at(i)[ctRank] == QLatin1String("4")) {
+        } else if (m_rows.at(i)[ctRank] == BASE_CURRENCY_TOTAL_RANK) {
             // search last entry of same topAccount
             auto last = i+1;
             while ((m_rows.at(i)[ctTopAccount] == m_rows.at(last)[ctTopAccount]) && (last < (rows - 1))) {
@@ -311,7 +311,8 @@ void QueryTable::constructTotalRows()
         iNextRow = iCurrentRow + 1;
 
         // total rows are useless at summing so remove whole block of them at once
-        while (iNextRow != m_rows.count() && (m_rows.at(iNextRow).value(ctRank) == QLatin1String("4") || m_rows.at(iNextRow).value(ctRank) == QLatin1String("5"))) {
+        while (iNextRow != m_rows.count()
+               && (m_rows.at(iNextRow).value(ctRank) == BASE_CURRENCY_TOTAL_RANK || m_rows.at(iNextRow).value(ctRank) == FOREIGN_CURRENCY_TOTAL_RANK)) {
             stashedTotalRows.append(m_rows.takeAt(iNextRow)); // ...but stash them just in case
         }
 
@@ -319,7 +320,7 @@ void QueryTable::constructTotalRows()
 
         // sum all subtotal values for lowest group
         QString currencyID = m_rows.at(iCurrentRow).value(ctCurrency);
-        if (m_rows.at(iCurrentRow).value(ctRank) == QLatin1String("1")) { // don't sum up on balance (rank = 0 || rank = 3) and minor split (rank = 2)
+        if (m_rows.at(iCurrentRow).value(ctRank) == FIRST_SPLIT_RANK) { // only sum up on FIRST_SPLIT_RANK
             for (const auto& subtotal : qAsConst(subtotals)) {
                 if (!totalCurrency.contains(currencyID))
                     totalCurrency[currencyID].append(totalGroups);
@@ -399,10 +400,10 @@ void QueryTable::constructTotalRows()
                         currencyID = file->baseCurrency().id();
                     totalsRow[ctCurrency] = currencyID;
                     if (isMainCurrencyTotal) {
-                        totalsRow[ctRank] = QLatin1Char('4');
+                        totalsRow[ctRank] = BASE_CURRENCY_TOTAL_RANK;
                         isMainCurrencyTotal = false;
                     } else
-                        totalsRow[ctRank] = QLatin1Char('5');
+                        totalsRow[ctRank] = FOREIGN_CURRENCY_TOTAL_RANK;
                     totalsRow[ctDepth] = QString::number(i);
                     totalsRow.remove(ctRowsCount);
 
@@ -461,10 +462,10 @@ void QueryTable::constructTotalRows()
                     currencyID = file->baseCurrency().id();
                 totalsRow[ctCurrency] = currencyID;
                 if (isMainCurrencyTotal) {
-                    totalsRow[ctRank] = QLatin1Char('4');
+                    totalsRow[ctRank] = BASE_CURRENCY_TOTAL_RANK;
                     isMainCurrencyTotal = false;
                 } else
-                    totalsRow[ctRank] = QLatin1Char('5');
+                    totalsRow[ctRank] = FOREIGN_CURRENCY_TOTAL_RANK;
                 totalsRow[ctDepth] = QString();
 
                 m_rows.append(totalsRow);
@@ -816,7 +817,7 @@ void QueryTable::constructTransactionTable()
                         // put the principal amount in the "value" column and convert to lowest fraction
                         qA[ctValue] = ((*it_split).shares() * xr).convert(fraction).toString();
                         qA[ctValueSourceLine] = QString("%1").arg(__LINE__);
-                        qA[ctRank] = QLatin1Char('1');
+                        qA[ctRank] = FIRST_SPLIT_RANK;
                         qA[ctSplit].clear();
 
                     } else {
@@ -824,7 +825,7 @@ void QueryTable::constructTransactionTable()
                             // add the "summarized" split transaction
                             // this is the sub-total of the split detail
                             // convert to lowest fraction
-                            qA[ctRank] = QLatin1Char('1');
+                            qA[ctRank] = FIRST_SPLIT_RANK;
                             qA[ctCategory] = i18n("[Split Transaction]");
                             qA[ctTopCategory] = i18nc("Split transaction", "Split");
                             qA[ctCategoryType] = i18nc("Split transaction", "Split");
@@ -852,7 +853,7 @@ void QueryTable::constructTransactionTable()
                                 break;
                             }
                             qA[ctSplit].clear();
-                            qA[ctRank] = QLatin1Char('1');
+                            qA[ctRank] = FIRST_SPLIT_RANK;
                             // keep it for now and don't add the data immediately
                             // as we may find a better match in one of the other splits
                             qStack += qA;
@@ -902,7 +903,7 @@ void QueryTable::constructTransactionTable()
 
                             //convert to lowest fraction
                             qA[ctSplit] = (-(*it_split).shares() * xr).convert(fraction).toString();
-                            qA[ctRank] = QLatin1Char('2');
+                            qA[ctRank] = SECONDARY_SPLIT_RANK;
                         } else {
                             // this applies when the transaction has only 2 splits, or each split is going to be
                             // shown separately, eg. transactions by category
@@ -931,7 +932,7 @@ void QueryTable::constructTransactionTable()
                                 break;
                             }
                             qA[ctSplit].clear();
-                            qA[ctRank] = QLatin1Char('1');
+                            qA[ctRank] = FIRST_SPLIT_RANK;
                         }
 
                         qA [ctMemo] = (*it_split).memo();
@@ -987,7 +988,7 @@ void QueryTable::constructTransactionTable()
                         qS[ctPayment] = qS[ctValue];
                         qA[ctValueSourceLine] = QString("%1").arg(__LINE__);
 
-                        qS[ctRank] = QLatin1Char('1');
+                        qS[ctRank] = FIRST_SPLIT_RANK;
 
                         qS[ctAccount] = splitAcc.name();
                         qS[ctAccountID] = splitAcc.id();
@@ -1145,7 +1146,7 @@ void QueryTable::constructTransactionTable()
         qA[ctAccount] = account.name();
         qA[ctTopAccount] = account.topParentName();
         qA[ctInstitution] = institution.isEmpty() ? i18n("No Institution") : file->institution(institution).name();
-        qA[ctRank] = QLatin1Char('0');
+        qA[ctRank] = FORCED_FIRST_RANK;
 
         qA[ctPrice] = startPrice.convertPrecision(account.currency().pricePrecision()).toString();
         if (account.isInvest()) {
@@ -1155,7 +1156,7 @@ void QueryTable::constructTransactionTable()
         qA[ctPostDate] = strStartDate;
         qA[ctBalance] = startBalance.convert(fraction).toString();
         qA[ctValue].clear();
-        qA[ctID] = QLatin1Char('A');
+        qA[ctID] = FIRST_ID_SORT;
         m_rows += qA;
 
         //ending balance
@@ -1167,8 +1168,8 @@ void QueryTable::constructTransactionTable()
 
         qA[ctPostDate] = strEndDate;
         qA[ctBalance] = endBalance.toString();
-        qA[ctRank] = QLatin1Char('3');
-        qA[ctID] = QLatin1Char('Z');
+        qA[ctRank] = END_BALANCE_RANK;
+        qA[ctID] = LAST_ID_SORT;
         m_rows += qA;
         if (!m_containsNonBaseCurrency && qA[ctCurrency] != file->baseCurrency().id()) {
             m_containsNonBaseCurrency = true;
@@ -1696,7 +1697,7 @@ void QueryTable::constructAccountTable()
             if (qaccountrow.isEmpty()) // don't add the account if there are no calculated values
                 continue;
 
-            qaccountrow[ctRank] = QLatin1Char('1');
+            qaccountrow[ctRank] = FIRST_SPLIT_RANK;
             qaccountrow[ctAccount] = account.name();
             qaccountrow[ctAccountID] = account.id();
             qaccountrow[ctTopAccount] = account.topParentName();
@@ -1713,7 +1714,7 @@ void QueryTable::constructAccountTable()
 
     if (m_config.queryColumns() == eMyMoney::Report::QueryColumn::Performance && m_config.isShowingColumnTotals()) {
         TableRow qtotalsrow;
-        qtotalsrow[ctRank] = QLatin1Char('4'); // add identification of row as total
+        qtotalsrow[ctRank] = BASE_CURRENCY_TOTAL_RANK; // add identification of row as total
         QMap<QString, CashFlowList> currencyGrandCashFlow;
 
         QMap<QString, QMap<QString, CashFlowList>>::iterator currencyAccGrp = currencyCashFlow.begin();
@@ -1932,7 +1933,7 @@ void QueryTable::constructSplitsTable()
                 // convert to lowest fraction
                 qA[ctValue] = ((*it_split).shares() * xr).convert(fraction).toString();
                 qA[ctValueSourceLine] = QString("%1").arg(__LINE__);
-                qA[ctRank] = QLatin1Char('1');
+                qA[ctRank] = FIRST_SPLIT_RANK;
 
                 //fill in account information
                 if (! splitAcc.isIncomeExpense() && it_split != myBegin) {
@@ -2072,7 +2073,7 @@ void QueryTable::constructSplitsTable()
         qA[ctAccount] = account.name();
         qA[ctTopAccount] = account.topParentName();
         qA[ctInstitution] = institution.isEmpty() ? i18n("No Institution") : file->institution(institution).name();
-        qA[ctRank] = QLatin1Char('0');
+        qA[ctRank] = FORCED_FIRST_RANK;
 
         int pricePrecision = file->security(account.currencyId()).pricePrecision();
         qA[ctPrice] = startPrice.convertPrecision(pricePrecision).toString();
@@ -2083,10 +2084,10 @@ void QueryTable::constructSplitsTable()
         qA[ctPostDate] = strStartDate;
         qA[ctBalance] = startBalance.convert(fraction).toString();
         qA[ctValue].clear();
-        qA[ctID] = QLatin1Char('A');
+        qA[ctID] = FIRST_ID_SORT;
         m_rows += qA;
 
-        qA[ctRank] = QLatin1Char('3');
+        qA[ctRank] = END_BALANCE_RANK;
         //ending balance
         qA[ctPrice] = endPrice.convertPrecision(pricePrecision).toString();
 
@@ -2096,7 +2097,7 @@ void QueryTable::constructSplitsTable()
 
         qA[ctPostDate] = strEndDate;
         qA[ctBalance] = endBalance.toString();
-        qA[ctID] = QLatin1Char('Z');
+        qA[ctID] = LAST_ID_SORT;
         m_rows += qA;
         if (!m_containsNonBaseCurrency && qA[ctCurrency] != file->baseCurrency().id()) {
             m_containsNonBaseCurrency = true;
