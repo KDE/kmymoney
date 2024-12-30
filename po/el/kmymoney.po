@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-29 02:03+0000\n"
+"POT-Creation-Date: 2024-12-30 02:01+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -1072,7 +1072,7 @@ msgstr "Ισοτιμία/Επεξεργαστής τιμών"
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:59
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:61
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:245
-#: kmymoney/plugins/views/reports/core/listtable.cpp:670
+#: kmymoney/plugins/views/reports/core/listtable.cpp:672
 #: kmymoney/views/khomeview_p.h:620 kmymoney/views/newspliteditor.ui:32
 #: kmymoney/views/newtransactioneditor.ui:56
 #: kmymoney/views/newtransactionform.ui:145
@@ -1150,7 +1150,7 @@ msgstr "xxx"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:274
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:240
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:120
-#: kmymoney/plugins/views/reports/core/listtable.cpp:668
+#: kmymoney/plugins/views/reports/core/listtable.cpp:670
 #: kmymoney/views/investtransactioneditor.ui:245
 #: kmymoney/views/khomeview_p.h:605 kmymoney/views/newtransactioneditor.ui:78
 #: kmymoney/views/newtransactionform.ui:110
@@ -2053,7 +2053,7 @@ msgstr "Τιμές"
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:84
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:54
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:381
-#: kmymoney/plugins/views/reports/core/listtable.cpp:740
+#: kmymoney/plugins/views/reports/core/listtable.cpp:742
 #: kmymoney/widgets/ktransactionfilter.ui:584
 #: kmymoney/widgets/transactionsortoption.cpp:42
 #, kde-format
@@ -2577,7 +2577,7 @@ msgstr "Κείμενο ισολογισμού ανοίγματος"
 #. i18n: ectx: property (title), widget (QGroupBox, m_institutionBox)
 #: kmymoney/dialogs/knewaccountdlg.ui:310
 #: kmymoney/dialogs/knewaccountdlg.ui:316
-#: kmymoney/plugins/views/reports/core/listtable.cpp:750
+#: kmymoney/plugins/views/reports/core/listtable.cpp:752
 #: kmymoney/wizards/newaccountwizard/kinstitutionpage.ui:44
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:72
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:19
@@ -3170,7 +3170,7 @@ msgstr "Νέα τιμή εισαγωγής"
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:75
 #: kmymoney/mymoney/storage/pricemodel.cpp:40
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:88
-#: kmymoney/plugins/views/reports/core/listtable.cpp:756
+#: kmymoney/plugins/views/reports/core/listtable.cpp:758
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:113
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:61
 #, kde-format
@@ -3967,7 +3967,7 @@ msgstr "Κανονική έκφραση για εξαγωγή της ημερο�
 #: kmymoney/plugins/csv/import/priceswizardpage.ui:144
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:465
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:163
-#: kmymoney/plugins/views/reports/core/listtable.cpp:698
+#: kmymoney/plugins/views/reports/core/listtable.cpp:700
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:185
 #, kde-format
 msgid "Price"
@@ -4417,7 +4417,7 @@ msgstr "Ημέρα"
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_initialDateFieldCursorPosition)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:292
-#: kmymoney/plugins/views/reports/core/listtable.cpp:688
+#: kmymoney/plugins/views/reports/core/listtable.cpp:690
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:519
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:96
 #, kde-format
@@ -4467,7 +4467,7 @@ msgstr "Εκκαθαρισμένο"
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkReconciled)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:345
-#: kmymoney/plugins/views/reports/core/listtable.cpp:692
+#: kmymoney/plugins/views/reports/core/listtable.cpp:694
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
 #: kmymoney/views/khomeview_p.h:1015 kmymoney/views/khomeview_p.h:1385
 #: kmymoney/views/khomeview_p.h:1414
@@ -8715,13 +8715,13 @@ msgstr "Διαχωρισμός συναλλαγής"
 
 #: kmymoney/mymoney/splitmodel.cpp:118
 #: kmymoney/mymoney/storage/journalmodel.cpp:201
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1000
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1001
 #, kde-format
 msgid "*** UNASSIGNED ***"
 msgstr "*** ΧΩΡΙΣ ΑΝΑΘΕΣΗ ***"
 
 #: kmymoney/mymoney/splitmodel.cpp:199 kmymoney/mymoney/splitmodel.cpp:204
-#: kmymoney/widgets/amountedit.cpp:276 kmymoney/widgets/amountedit.cpp:327
+#: kmymoney/widgets/amountedit.cpp:290 kmymoney/widgets/amountedit.cpp:341
 #: kmymoney/widgets/creditdebitedit.cpp:126
 #: kmymoney/widgets/creditdebitedit.cpp:127
 #: kmymoney/widgets/creditdebitedit.cpp:156
@@ -9431,7 +9431,7 @@ msgstr "Αξία"
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:21
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:68
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:242
-#: kmymoney/plugins/views/reports/core/listtable.cpp:674
+#: kmymoney/plugins/views/reports/core/listtable.cpp:676
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:268
 #: kmymoney/widgets/ktransactionfilter.ui:455
 #: kmymoney/widgets/ktransactionfilter.ui:497
@@ -10583,7 +10583,7 @@ msgstr "Επιλογή κατηγορίας"
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:78
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:192
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:243
-#: kmymoney/plugins/views/reports/core/listtable.cpp:682
+#: kmymoney/plugins/views/reports/core/listtable.cpp:684
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:159
 #: kmymoney/views/investtransactioneditor.ui:155
 #: kmymoney/views/newspliteditor.ui:191
@@ -10618,7 +10618,7 @@ msgstr "Καθαρισμός των επιλογών"
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_balance)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:325
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:165
-#: kmymoney/plugins/views/reports/core/listtable.cpp:738
+#: kmymoney/plugins/views/reports/core/listtable.cpp:740
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
 #: kmymoney/views/khomeview_p.h:1018
@@ -11954,7 +11954,7 @@ msgstr "Αφαίρεση μετοχών"
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
 #. i18n: ectx: property (text), item, widget (QComboBox, cbActionTypes)
 #: kmymoney/plugins/csv/import/transactiondlg.ui:127
-#: kmymoney/plugins/views/reports/core/listtable.cpp:734
+#: kmymoney/plugins/views/reports/core/listtable.cpp:736
 #: kmymoney/views/investtransactioneditor.ui:61
 #: kmymoney/views/investtransactioneditor.ui:174
 #: kmymoney/views/investtransactioneditor.ui:238
@@ -13197,8 +13197,8 @@ msgid "Get Transactions"
 msgstr "Λήψη συναλλαγών"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:74
-#: kmymoney/plugins/views/reports/core/querytable.cpp:810
-#: kmymoney/plugins/views/reports/core/querytable.cpp:948
+#: kmymoney/plugins/views/reports/core/querytable.cpp:811
+#: kmymoney/plugins/views/reports/core/querytable.cpp:949
 #, kde-format
 msgid "Transfer"
 msgstr "Μεταφορά"
@@ -13335,7 +13335,7 @@ msgstr "Ίδρυμα"
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:293
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:481
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:613
-#: kmymoney/plugins/views/reports/core/listtable.cpp:680
+#: kmymoney/plugins/views/reports/core/listtable.cpp:682
 #: kmymoney/plugins/views/reports/reportsview.cpp:227
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
 #: kmymoney/views/investtransactioneditor.ui:92
@@ -14286,7 +14286,7 @@ msgstr "Οριοθέτης λογαριασμού"
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:146
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:134
-#: kmymoney/plugins/views/reports/core/listtable.cpp:752
+#: kmymoney/plugins/views/reports/core/listtable.cpp:754
 #, kde-format
 msgid "Description"
 msgstr "Περιγραφή"
@@ -15125,7 +15125,7 @@ msgstr "Εγγραφή τελικού υπολοίπου"
 #. i18n: ectx: attribute (title), widget (QWidget, m_categoryTab)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkCategory)
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:244
-#: kmymoney/plugins/views/reports/core/listtable.cpp:678
+#: kmymoney/plugins/views/reports/core/listtable.cpp:680
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:287
 #: kmymoney/views/newspliteditor.ui:160
 #: kmymoney/views/newtransactioneditor.ui:212
@@ -16503,6 +16503,7 @@ msgid "Initial Market Value"
 msgstr "Αρχική αγοραία αξία"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:294
+#: kmymoney/plugins/views/reports/core/listtable.cpp:794
 #, kde-format
 msgid "Ending Market Value"
 msgstr "Τελική αγοραία αξία"
@@ -16531,7 +16532,7 @@ msgstr "Ολικό σύνολο"
 msgid "Calculated"
 msgstr "Υπολογισμένο"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:672
+#: kmymoney/plugins/views/reports/core/listtable.cpp:674
 #, kde-format
 msgid "Num"
 msgstr "Αριθμός"
@@ -16539,7 +16540,7 @@ msgstr "Αριθμός"
 #. i18n: ectx: property (text), widget (QLabel, tagsLabel)
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:676
+#: kmymoney/plugins/views/reports/core/listtable.cpp:678
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:507
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:76
 #: kmymoney/views/kmymoneyview.cpp:191 kmymoney/views/newspliteditor.ui:110
@@ -16550,18 +16551,18 @@ msgstr "Αριθμός"
 msgid "Tags"
 msgstr "Ετικέτες"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:684
+#: kmymoney/plugins/views/reports/core/listtable.cpp:686
 #, kde-format
 msgid "Top Category"
 msgstr "Κορυφαία κατηγορία"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:686
+#: kmymoney/plugins/views/reports/core/listtable.cpp:688
 #, kde-format
 msgid "Category Type"
 msgstr "Τύπος κατηγορίας"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:690
+#: kmymoney/plugins/views/reports/core/listtable.cpp:692
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:522
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:101
 #, kde-format
@@ -16569,7 +16570,7 @@ msgid "Week"
 msgstr "Εβδομάδα"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkAction)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:694
+#: kmymoney/plugins/views/reports/core/listtable.cpp:696
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:300
 #, kde-format
 msgid "Action"
@@ -16577,94 +16578,94 @@ msgstr "Ενέργεια"
 
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, sharesAmountEdit)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkShares)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:696
+#: kmymoney/plugins/views/reports/core/listtable.cpp:698
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:172
 #: kmymoney/views/investtransactioneditor.ui:362
 #, kde-format
 msgid "Shares"
 msgstr "Μετοχές"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:700
+#: kmymoney/plugins/views/reports/core/listtable.cpp:702
 #, fuzzy, kde-format
 #| msgid "Price"
 msgid "Last Price"
 msgstr "Τιμή"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:702
+#: kmymoney/plugins/views/reports/core/listtable.cpp:704
 #, fuzzy, kde-format
 #| msgid "Price"
 msgid "Buy Price"
 msgstr "Τιμή"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:704
+#: kmymoney/plugins/views/reports/core/listtable.cpp:706
 #, kde-format
 msgid "Net Value"
 msgstr "Καθαρή αξία"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:706
+#: kmymoney/plugins/views/reports/core/listtable.cpp:708
 #, fuzzy, kde-format
 #| msgid "Value"
 msgid "Buy Value"
 msgstr "Αξία"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:708
+#: kmymoney/plugins/views/reports/core/listtable.cpp:710
 #, fuzzy, kde-format
 #| msgid "Net Value"
 msgid "Sell Value"
 msgstr "Καθαρή αξία"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:710
+#: kmymoney/plugins/views/reports/core/listtable.cpp:712
 #, kde-format
 msgid "Short-term Buy Value"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:712
+#: kmymoney/plugins/views/reports/core/listtable.cpp:714
 #, kde-format
 msgid "Short-term Sell Value"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:714
+#: kmymoney/plugins/views/reports/core/listtable.cpp:716
 #, kde-format
 msgid "Long-term Buy Value"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:716
+#: kmymoney/plugins/views/reports/core/listtable.cpp:718
 #, kde-format
 msgid "Long-term Sell Value"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:718
+#: kmymoney/plugins/views/reports/core/listtable.cpp:720
 #, kde-format
 msgid "Dividends Reinvested"
 msgstr "Επανεπενδυθέντα μερίσματα"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:720
+#: kmymoney/plugins/views/reports/core/listtable.cpp:722
 #, kde-format
 msgid "Dividends Paid Out"
 msgstr "Καταβληθέντα μερίσματα"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:722
+#: kmymoney/plugins/views/reports/core/listtable.cpp:724
 #, kde-format
 msgid "Starting Balance"
 msgstr "Υπόλοιπο έναρξης"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:724
+#: kmymoney/plugins/views/reports/core/listtable.cpp:726
 #, kde-format
 msgid "Ending Balance"
 msgstr "Υπόλοιπο κλεισίματος"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:726
+#: kmymoney/plugins/views/reports/core/listtable.cpp:728
 #, fuzzy, kde-format
 #| msgid "Ending Market Value"
 msgid "Market Value"
 msgstr "Τελική αγοραία αξία"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:728
+#: kmymoney/plugins/views/reports/core/listtable.cpp:730
 #, kde-format
 msgid "Extended internal rate of return"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:730
+#: kmymoney/plugins/views/reports/core/listtable.cpp:732
 #, kde-format
 msgid "Return On Investment"
 msgstr "Απόδοση επένδυσης"
@@ -16672,7 +16673,7 @@ msgstr "Απόδοση επένδυσης"
 #. i18n: ectx: property (text), widget (QLabel, feesAmountLabel)
 #. i18n: ectx: property (text), widget (QLabel, feesLabel)
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, feesAmountEdit)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:732
+#: kmymoney/plugins/views/reports/core/listtable.cpp:734
 #: kmymoney/views/investtransactioneditor.ui:106
 #: kmymoney/views/investtransactioneditor.ui:214
 #: kmymoney/views/investtransactioneditor.ui:343
@@ -16685,7 +16686,7 @@ msgstr "Αμοιβές"
 #. i18n: ectx: attribute (title), widget (QWizardPage, PaymentEditWizardPage)
 #. i18n: ectx: property (title), widget (QGroupBox, GroupBox1)
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, creditAmount)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:736
+#: kmymoney/plugins/views/reports/core/listtable.cpp:738
 #: kmymoney/widgets/creditdebitedit.ui:35
 #: kmymoney/wizards/newloanwizard/paymenteditwizardpage.ui:6
 #: kmymoney/wizards/newloanwizard/paymentwizardpage.ui:6
@@ -16694,132 +16695,138 @@ msgstr "Αμοιβές"
 msgid "Payment"
 msgstr "Πληρωμή"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:742
+#: kmymoney/plugins/views/reports/core/listtable.cpp:744
 #, kde-format
 msgctxt "Account name"
 msgid "Name"
 msgstr "Όνομα"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:744
+#: kmymoney/plugins/views/reports/core/listtable.cpp:746
 #, kde-format
 msgid "Next Due Date"
 msgstr "Επόμενη ημερομηνία πληρωμής"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:746
+#: kmymoney/plugins/views/reports/core/listtable.cpp:748
 #, kde-format
 msgid "Occurrence"
 msgstr "Συμβάν"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:748
+#: kmymoney/plugins/views/reports/core/listtable.cpp:750
 #, kde-format
 msgid "Payment Method"
 msgstr "Τρόπος πληρωμής"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:754
+#: kmymoney/plugins/views/reports/core/listtable.cpp:756
 #, kde-format
 msgid "Opening Date"
 msgstr "Ημερομηνία έναρξης"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:758
+#: kmymoney/plugins/views/reports/core/listtable.cpp:760
 #, kde-format
 msgid "Balance Early Warning"
 msgstr "Πρώτη προειδοποίηση υπολοίπου"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:760
+#: kmymoney/plugins/views/reports/core/listtable.cpp:762
 #, kde-format
 msgid "Balance Max Limit"
 msgstr "Μέγιστο όριο υπολοίπου"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:762
+#: kmymoney/plugins/views/reports/core/listtable.cpp:764
 #, kde-format
 msgid "Credit Early Warning"
 msgstr "Πρώτη προειδοποίηση πίστωσης"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:764
+#: kmymoney/plugins/views/reports/core/listtable.cpp:766
 #, kde-format
 msgid "Credit Max Limit"
 msgstr "Μέγιστο όριο πίστωσης"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:766
+#: kmymoney/plugins/views/reports/core/listtable.cpp:768
 #, kde-format
 msgid "Tax"
 msgstr "Φόρος"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:768
+#: kmymoney/plugins/views/reports/core/listtable.cpp:770
 #, kde-format
 msgid "Preferred"
 msgstr "Προτιμώμενη"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:770
+#: kmymoney/plugins/views/reports/core/listtable.cpp:772
 #, kde-format
 msgid "Loan Amount"
 msgstr "Ποσό δανείου"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, InterestEditWizardPage)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:772
+#: kmymoney/plugins/views/reports/core/listtable.cpp:774
 #: kmymoney/wizards/newloanwizard/interesteditwizardpage.ui:6
 #, kde-format
 msgid "Interest Rate"
 msgstr "Επιτόκιο"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:774
+#: kmymoney/plugins/views/reports/core/listtable.cpp:776
 #, kde-format
 msgid "Next Interest Change"
 msgstr "Επόμενη αλλαγή επιτοκίου"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:776
+#: kmymoney/plugins/views/reports/core/listtable.cpp:778
 #, kde-format
 msgid "Periodic Payment"
 msgstr "Δόση"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:778
+#: kmymoney/plugins/views/reports/core/listtable.cpp:780
 #, kde-format
 msgid "Final Payment"
 msgstr "Τελική δόση"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:780
+#: kmymoney/plugins/views/reports/core/listtable.cpp:782
 #, kde-format
 msgid "Current Balance"
 msgstr "Τρέχον υπόλοιπο"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:782
+#: kmymoney/plugins/views/reports/core/listtable.cpp:784
 #, fuzzy, kde-format
 #| msgctxt "Category name"
 #| msgid "Capital Gain (mid term)"
 msgid "Capital Gain"
 msgstr "Κεφαλαιακή απόδοση (μεσοπρόθεσμη)"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:784
+#: kmymoney/plugins/views/reports/core/listtable.cpp:786
 #, fuzzy, kde-format
 #| msgctxt "select if fee is a percentage (not value)"
 #| msgid "Fee is  Percentage "
 msgid "Percentage Gain"
 msgstr "Η αμοιβή είναι σε ποσοστό "
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:786
+#: kmymoney/plugins/views/reports/core/listtable.cpp:788
 #, kde-format
 msgid "Short-term Gain"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:788
+#: kmymoney/plugins/views/reports/core/listtable.cpp:790
 #, kde-format
 msgid "Long-term Gain"
 msgstr ""
 
+#: kmymoney/plugins/views/reports/core/listtable.cpp:792
+#, fuzzy, kde-format
+#| msgid "Ending Market Value"
+msgid "Starting Market Value"
+msgstr "Τελική αγοραία αξία"
+
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
-#: kmymoney/plugins/views/reports/core/querytable.cpp:945
-#: kmymoney/plugins/views/reports/core/querytable.cpp:998
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1935
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1954
+#: kmymoney/plugins/views/reports/core/querytable.cpp:946
+#: kmymoney/plugins/views/reports/core/querytable.cpp:999
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1940
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1959
 #, kde-format
 msgid "Transfer from %1"
 msgstr "Μεταφορά από %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:222
-#: kmymoney/plugins/views/reports/core/querytable.cpp:946
-#: kmymoney/plugins/views/reports/core/querytable.cpp:997
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1934
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1953
+#: kmymoney/plugins/views/reports/core/querytable.cpp:947
+#: kmymoney/plugins/views/reports/core/querytable.cpp:998
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1939
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1958
 #, kde-format
 msgid "Transfer to %1"
 msgstr "Μεταφορά σε %1"
@@ -16916,53 +16923,53 @@ msgctxt "@title:column report header"
 msgid "Price"
 msgstr "Τιμή"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:546
-#: kmymoney/plugins/views/reports/core/querytable.cpp:559
+#: kmymoney/plugins/views/reports/core/querytable.cpp:547
+#: kmymoney/plugins/views/reports/core/querytable.cpp:560
 #, kde-format
 msgid "[No Tag]"
 msgstr "[Χωρίς ετικέτα]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:572
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1769
+#: kmymoney/plugins/views/reports/core/querytable.cpp:573
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1774
 #, kde-format
 msgid "Month of %1"
 msgstr "Μήνας %1"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:573
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1770
+#: kmymoney/plugins/views/reports/core/querytable.cpp:574
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1775
 #, kde-format
 msgid "Week of %1"
 msgstr "Εβδομάδα %1"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:789
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1003
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1146
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1896
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2068
+#: kmymoney/plugins/views/reports/core/querytable.cpp:790
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1004
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1147
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1901
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2073
 #, kde-format
 msgid "No Institution"
 msgstr "Κανένα ίδρυμα"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:793
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1907
+#: kmymoney/plugins/views/reports/core/querytable.cpp:794
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1912
 #, kde-format
 msgid "[Empty Payee]"
 msgstr "[Κενός δικαιούχος]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:827
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1940
+#: kmymoney/plugins/views/reports/core/querytable.cpp:828
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1945
 #, kde-format
 msgid "[Split Transaction]"
 msgstr "[Διαχωρισμός συναλλαγής]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:828
 #: kmymoney/plugins/views/reports/core/querytable.cpp:829
+#: kmymoney/plugins/views/reports/core/querytable.cpp:830
 #, kde-format
 msgctxt "Split transaction"
 msgid "Split"
 msgstr "Διαχωρισμός"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1682
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1687
 #, kde-format
 msgctxt "No institution"
 msgid "None"
@@ -22572,14 +22579,14 @@ msgstr "&Εντάξει"
 msgid "&Cancel"
 msgstr "Ακύρωση"
 
-#: kmymoney/views/splitview.cpp:110
+#: kmymoney/views/splitview.cpp:111
 #, fuzzy, kde-format
 #| msgid "Split Options"
 msgctxt "@title:menu split context menu"
 msgid "Split Options"
 msgstr "Επιλογές"
 
-#: kmymoney/views/splitview.cpp:112
+#: kmymoney/views/splitview.cpp:113
 #, fuzzy, kde-format
 #| msgctxt "create new institution"
 #| msgid "New..."
@@ -22587,14 +22594,14 @@ msgctxt "@item:inmenu Create a split"
 msgid "New..."
 msgstr "Νέο..."
 
-#: kmymoney/views/splitview.cpp:127
+#: kmymoney/views/splitview.cpp:128
 #, fuzzy, kde-format
 #| msgid "Edit..."
 msgctxt "@item:inmenu Edit a split"
 msgid "Edit..."
 msgstr "Επεξεργασία..."
 
-#: kmymoney/views/splitview.cpp:132
+#: kmymoney/views/splitview.cpp:133
 #, fuzzy, kde-format
 #| msgctxt "Duplicate transaction"
 #| msgid "Duplicate"
@@ -22602,7 +22609,7 @@ msgctxt "@item:inmenu Duplicate selected split(s)"
 msgid "Duplicate"
 msgstr "Δημιουργία αντιγράφου"
 
-#: kmymoney/views/splitview.cpp:174
+#: kmymoney/views/splitview.cpp:175
 #, fuzzy, kde-format
 #| msgid "Delete"
 msgctxt "@item:inmenu Delete selected split(s)"
@@ -22658,14 +22665,14 @@ msgstr ""
 msgid "Tab Order Editor"
 msgstr "Επεξεργαστής τιμών"
 
-#: kmymoney/widgets/amountedit.cpp:257
+#: kmymoney/widgets/amountedit.cpp:271
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid ""
 "Value are presented in %1. Press this button to switch the currency to %2."
 msgstr ""
 
-#: kmymoney/widgets/amountedit.cpp:264
+#: kmymoney/widgets/amountedit.cpp:278
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid "Values are presented in %1."
