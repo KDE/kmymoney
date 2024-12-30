@@ -62,7 +62,14 @@ protected:
                       const MyMoneyMoney& cashIncome,
                       const MyMoneyMoney& startingBalance,
                       const MyMoneyMoney& endingBalance) const;
+
+    /**
+     * Calculates the extended internal rate of return
+     * @param all list with cash flow items
+     * @return string with extended internal rate of return
+     */
     QString helperXIRR(const CashFlowList& all) const;
+
     void constructSplitsTable();
     bool linkEntries() const final override {
         return true;

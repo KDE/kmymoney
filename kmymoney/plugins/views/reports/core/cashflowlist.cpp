@@ -20,7 +20,7 @@
 #include <QtDebug>
 
 /**
- * Calculates the internal rate of return for a non-periodic
+ * Calculates the extended internal rate of return for a non-periodic
  * series of cash flows. The calculation is based on a 365 days
  * per year basis, ignoring leap years.
  * In case the internal rate of return could not be calculated
