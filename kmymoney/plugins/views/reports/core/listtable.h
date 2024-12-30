@@ -139,6 +139,7 @@ public:
         ctValueSourceLine,
         ctStartingMarketValue,
         ctEndingMarketValue,
+        csID,
     };
     Q_ENUM(cellTypeE)
 

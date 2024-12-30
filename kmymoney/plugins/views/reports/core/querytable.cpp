@@ -154,7 +154,7 @@ void QueryTable::init()
         throw MYMONEYEXCEPTION_CSTRING("QueryTable::QueryTable(): unhandled row type");
     }
 
-    QVector<cellTypeE> sort = QVector<cellTypeE>::fromList(m_group) << QVector<cellTypeE>::fromList(m_columns) << ctID << ctRank;
+    QVector<cellTypeE> sort = QVector<cellTypeE>::fromList(m_group) << QVector<cellTypeE>::fromList(m_columns) << ctID << ctRank << csID;
 
     m_columns.clear();
     switch (m_config.rowType()) {
@@ -664,6 +664,8 @@ void QueryTable::constructTransactionTable()
         do {
             MyMoneyMoney xr;
             ReportAccount splitAcc((* it_split).accountId());
+            qA[csID] = qS[csID] = (*it_split).id();
+
             QString splitCurrency;
             if (splitAcc.isInvest())
                 splitCurrency = file->account(file->account((*it_split).accountId()).parentAccountId()).currencyId();
@@ -757,6 +759,7 @@ void QueryTable::constructTransactionTable()
                                 splitAcc = ReportAccount(assetAccountSplit.accountId()); // switch over from stock split to asset split because amount in stock split doesn't take fees/interests into account
                                 include_me |= m_config.includes(splitAcc);
                                 myBegin = it_split;                       // set myBegin to asset split, so stock split can be listed in details under splits
+                                qA[csID] = (*it_split).id();
                                 myBeginCurrency = (file->account((*myBegin).accountId())).currencyId();
                                 if (m_config.isConvertCurrency()) {
                                     if (myBeginCurrency != baseCurrency) {
