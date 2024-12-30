@@ -173,6 +173,7 @@ void AccountTypePage::slotGetOnlineQuote()
         const MyMoneyPrice &price = dlg->price(id);
         if (price.isValid()) {
             d->ui->m_conversionRate->setValue(price.rate(d->ui->m_currencyComboBox->security().id()));
+            slotUpdateConversionRate(d->ui->m_conversionRate->text());
             if (price.date() != d->ui->m_openingDate->date()) {
                 priceWarning(true);
             }
