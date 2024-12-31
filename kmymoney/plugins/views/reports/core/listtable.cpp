@@ -645,6 +645,7 @@ ListTable::cellGroupE ListTable::cellGroup(const cellTypeE cellType)
     case ctShares:
         return cgShares;
     // the list of columns which represent a percentage, so we can display them correctly
+    case ctAnnualizedReturn:
     case ctExtendedInternalRateOfReturn:
     case ctReturnInvestment:
     case ctInterestRate:
@@ -726,6 +727,8 @@ QString ListTable::tableHeader(const cellTypeE cellType)
         return i18n("Ending Balance");
     case ctMarketValue:
         return i18n("Market Value");
+    case ctAnnualizedReturn:
+        return i18n("Annualized Return");
     case ctExtendedInternalRateOfReturn:
         return i18n("Extended internal rate of return");
     case ctReturnInvestment:

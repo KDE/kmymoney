@@ -56,6 +56,21 @@ protected:
     void sumInvestmentValues(const ReportAccount &account, QList<CashFlowList> &cfList, QList<MyMoneyMoney> &shList) const;
     void constructPerformanceRow(const ReportAccount& account, TableRow& result, CashFlowList &all) const;
     void constructCapitalGainRow(const ReportAccount& account, TableRow& result) const;
+    bool ROI(MyMoneyMoney& returnInvestment,
+             const MyMoneyMoney& buys,
+             const MyMoneyMoney& sells,
+             const MyMoneyMoney& reinvestIncome,
+             const MyMoneyMoney& cashIncome,
+             const MyMoneyMoney& startingBalance,
+             const MyMoneyMoney& endingBalance) const;
+    QString helperAROI(const MyMoneyMoney& buys,
+                       const MyMoneyMoney& sells,
+                       const MyMoneyMoney& reinvestIncome,
+                       const MyMoneyMoney& cashIncome,
+                       const MyMoneyMoney& startingBalance,
+                       const MyMoneyMoney& endingBalance,
+                       const QDate& startingDate,
+                       const QDate& endingDate) const;
     QString helperROI(const MyMoneyMoney& buys,
                       const MyMoneyMoney& sells,
                       const MyMoneyMoney& reinvestIncome,

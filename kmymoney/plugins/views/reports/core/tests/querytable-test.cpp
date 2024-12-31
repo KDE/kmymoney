@@ -1039,6 +1039,41 @@ public:
                                                 eMyMoney::Report::DetailLevel::Top,
                                                 "Yearly Budgeted vs. Actual", "Default Report")) {}
 
+    void testHelperAROI()
+    {
+        MyMoneyMoney buys(10);
+        MyMoneyMoney sells(50);
+        MyMoneyMoney reinvestIncome(0);
+        MyMoneyMoney cashIncome(70);
+        MyMoneyMoney startingBalance(110);
+        MyMoneyMoney endingBalance(60);
+        QDate startingDate(2023, 1, 1);
+        QDate endingDate(2024, 1, 1);
+
+        // one year
+        QString result = helperAROI(buys, sells, reinvestIncome, cashIncome, startingBalance, endingBalance, startingDate, endingDate);
+        QCOMPARE(result, MyMoneyMoney(4, 5).convert(10000).toString());
+
+        // two years
+        endingDate = startingDate.addDays(2 * 365);
+        result = helperAROI(buys, sells, reinvestIncome, cashIncome, startingBalance, endingBalance, startingDate, endingDate);
+        QCOMPARE(result, MyMoneyMoney(17, 50).convert(10000).toString());
+
+        // half year
+        endingDate = startingDate.addDays(365 / 2);
+        result = helperAROI(buys, sells, reinvestIncome, cashIncome, startingBalance, endingBalance, startingDate, endingDate);
+        QCOMPARE(result, MyMoneyMoney(9, 4).convert(10000).toString());
+
+        // quarter year
+        endingDate = startingDate.addDays(365 / 4);
+        result = helperAROI(buys, sells, reinvestIncome, cashIncome, startingBalance, endingBalance, startingDate, endingDate);
+        QCOMPARE(result, MyMoneyMoney(957, 100).convert(10000).toString());
+
+        // invalid
+        buys = MyMoneyMoney(110);
+        result = helperAROI(buys, sells, reinvestIncome, cashIncome, startingBalance, endingBalance, startingDate, endingDate);
+        QCOMPARE(result, QString());
+    }
 
     void testHelperROI()
     {
@@ -1069,6 +1104,15 @@ public:
         QCOMPARE(result1, MyMoneyMoney(457, 2500).convert(10000).toString());
     }
 };
+
+void QueryTableTest::testAROI()
+{
+    try {
+        QueryTableProtectedTester().testHelperAROI();
+    } catch (const MyMoneyException& e) {
+        QFAIL(e.what());
+    }
+}
 
 void QueryTableTest::testROI()
 {

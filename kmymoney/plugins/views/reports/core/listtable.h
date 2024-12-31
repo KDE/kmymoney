@@ -92,6 +92,7 @@ public:
         /*Shares*/
         ctShares,
         /*Percent*/
+        ctAnnualizedReturn,
         ctExtendedInternalRateOfReturn,
         ctReturnInvestment,
         ctInterestRate,
