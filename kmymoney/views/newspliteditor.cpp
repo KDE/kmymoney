@@ -422,6 +422,9 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
 
     d->ui->accountCombo->installEventFilter(this);
     d->ui->payeeEdit->installEventFilter(this);
+    d->ui->memoEdit->installEventFilter(this);
+    d->ui->tagContainer->tagCombo()->installEventFilter(this);
+    d->ui->accountCombo->installEventFilter(this);
 
     // setup the tab order
     d->setupTabOrder();
@@ -499,18 +502,20 @@ void NewSplitEditor::keyPressEvent(QKeyEvent* event)
         switch (event->key()) {
         case Qt::Key_Enter:
         case Qt::Key_Return:
-        {
-            if(focusWidget() == d->ui->cancelButton) {
-                reject();
+            if (d->baseEditor->enterMovesBetweenFields()) {
+                focusNextPrevChild(true);
             } else {
-                if (d->ui->enterButton->isEnabled() && !d->readOnly) {
-                    d->ui->enterButton->setFocus();
-                    d->ui->enterButton->click();
+                if (focusWidget() == d->ui->cancelButton) {
+                    reject();
+                } else {
+                    if (d->ui->enterButton->isEnabled() && !d->readOnly) {
+                        d->ui->enterButton->setFocus();
+                        d->ui->enterButton->click();
+                    }
+                    event->ignore();
                 }
-                return;
             }
-        }
-        break;
+            break;
 
         case Qt::Key_Escape:
             reject();
@@ -539,9 +544,10 @@ void NewSplitEditor::keyPressEvent(QKeyEvent* event)
                 }
             }
             tabOrderDialog->deleteLater();
+            return;
         }
-        event->ignore();
     }
+    QWidget::keyPressEvent(event);
 }
 
 QString NewSplitEditor::accountId() const
