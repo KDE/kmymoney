@@ -79,6 +79,7 @@ public:
         , m_precisionOverridesFraction(false)
         , m_isReadOnly(false)
         , m_allowModifyShares(true)
+        , m_isEnabled(qq->isEnabled())
         , m_actionIcons(NoItem)
         , m_initialExchangeRate(MyMoneyMoney::ONE)
         , m_state(AmountEdit::DisplayValue)
@@ -323,8 +324,9 @@ public:
     void setWidgetText(QString& widgetTextCache, const MyMoneyMoney& amount, const QString& txt, MultiCurrencyEdit::DisplayState state)
     {
         Q_Q(AmountEdit);
+        bool enabled = false;
         if (!amount.isAutoCalc()) {
-            q->setEnabled(true);
+            enabled = m_isEnabled;
             widgetTextCache = txt;
             if (q->isEnabled() && !txt.isEmpty()) {
                 ensureFractionalPart(widgetTextCache, state);
@@ -336,10 +338,11 @@ public:
                 q->QLineEdit::setText(widgetTextCache);
             }
         } else {
-            q->setEnabled(false);
             QSignalBlocker block(q);
             q->QLineEdit::setText(i18nc("@info:placeholder amount widget", "calculated"));
         }
+        // use the base class version to keep m_isEnabled as it is
+        q->QLineEdit::setEnabled(enabled);
     }
 
     void setValueText(const QString& txt)
@@ -369,6 +372,7 @@ public:
     bool m_precisionOverridesFraction;
     bool m_isReadOnly; // read only state as set by application
     bool m_allowModifyShares; // allow to override shares even if read only state
+    bool m_isEnabled;
     QString m_previousText; // keep track of what has been typed
 
     QString m_valueText; // keep track of what was the original value
@@ -949,4 +953,11 @@ void AmountEdit::setFont(const QFont& font)
     Q_D(AmountEdit);
     QLineEdit::setFont(font);
     d->updateLineEditSize(d->m_calculatorButton);
+}
+
+void AmountEdit::setEnabled(bool enable)
+{
+    Q_D(AmountEdit);
+    d->m_isEnabled = enable;
+    QLineEdit::setEnabled(enable);
 }

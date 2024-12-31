@@ -289,6 +289,11 @@ public Q_SLOTS:
      */
     void setReadOnly(bool ro);
 
+    /**
+     * overridden for internal reasons (keep external state of widget)
+     */
+    void setEnabled(bool enable);
+
 Q_SIGNALS:
     /**
      * This signal is emitted, when the focus leaves this widget and
