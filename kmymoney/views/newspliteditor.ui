@@ -197,6 +197,9 @@
    </item>
    <item row="3" column="1" rowspan="2">
     <widget class="KTagContainer" name="tagContainer">
+     <property name="focusPolicy">
+      <enum>Qt::WheelFocus</enum>
+     </property>
      <property name="kmm_taborder" stdset="0">
       <bool>true</bool>
      </property>
