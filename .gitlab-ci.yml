@@ -19,8 +19,6 @@ craft_macos_x86_64:
   when: manual
 
 # custom builds
-variables:
-  ci_cmake_options: "-DKMM_I18N_GENERATION=off"
 
 build_local_ubuntu_2110:
 # make it manual for now, since 21.10 alkimia is at 5.7 and as such incompatible with master
