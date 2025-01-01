@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-31 01:54+0000\n"
+"POT-Creation-Date: 2025-01-01 01:53+0000\n"
 "PO-Revision-Date: 2024-12-30 20:19+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -8278,7 +8278,7 @@ msgid "*** UNASSIGNED ***"
 msgstr "*** ATANMAMIŞ ***"
 
 #: kmymoney/mymoney/splitmodel.cpp:199 kmymoney/mymoney/splitmodel.cpp:204
-#: kmymoney/widgets/amountedit.cpp:290 kmymoney/widgets/amountedit.cpp:341
+#: kmymoney/widgets/amountedit.cpp:291 kmymoney/widgets/amountedit.cpp:342
 #: kmymoney/widgets/creditdebitedit.cpp:126
 #: kmymoney/widgets/creditdebitedit.cpp:127
 #: kmymoney/widgets/creditdebitedit.cpp:156
@@ -20984,7 +20984,7 @@ msgstr "Bu işlem için kullanılan çek numarası."
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "<b>%1</b> çek numarası bu hesapta halihazırda kullanılmış."
 
-#: kmymoney/views/newspliteditor.cpp:775
+#: kmymoney/views/newspliteditor.cpp:781
 #: kmymoney/views/newtransactioneditor.cpp:170
 #, kde-format
 msgctxt "@info:tooltip Protected"
@@ -21411,7 +21411,7 @@ msgstr "Sekme Sırası Listesi…"
 msgid "Tab Order Editor"
 msgstr "Fiyat Sırası Düzenleyicisi"
 
-#: kmymoney/widgets/amountedit.cpp:271
+#: kmymoney/widgets/amountedit.cpp:272
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid ""
@@ -21420,7 +21420,7 @@ msgstr ""
 "Değerler %1 olarak sunulur. Para birimini %2 olarak değiştirmek için bu "
 "düğmeye basın."
 
-#: kmymoney/widgets/amountedit.cpp:278
+#: kmymoney/widgets/amountedit.cpp:279
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid "Values are presented in %1."
@@ -22502,7 +22502,7 @@ msgstr "Nakit"
 msgid "Investment"
 msgstr "Yatırım"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:193
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:194
 #, kde-format
 msgid ""
 "Please make sure to enter the correct conversion for the selected opening "
@@ -22512,22 +22512,22 @@ msgstr ""
 "Lütfen seçili açılış tarihi için doğru dönüştürmeyi girdiğinizden emin olun. "
 "Çevrimiçi bir kur talep ettiyseniz farklı bir tarih için sağlanmış olabilir."
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:193
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:194
 #, kde-format
 msgid "Check date"
 msgstr "Çek tarihi"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:201
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:202
 #, kde-format
 msgid "1 %1 equals %2"
 msgstr "1 %1 eşittir %2"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:210
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:211
 #, kde-format
 msgid "Conversion rate is not positive"
 msgstr "Dönüşüm oranı pozitif değil"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:216
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:217
 #, kde-format
 msgid "No account name supplied"
 msgstr "Hesap adı girilmedi"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-31 01:54+0000\n"
+"POT-Creation-Date: 2025-01-01 01:53+0000\n"
 "PO-Revision-Date: 2024-12-30 17:40+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -8350,7 +8350,7 @@ msgid "*** UNASSIGNED ***"
 msgstr "*** Niet toegewezen ***"
 
 #: kmymoney/mymoney/splitmodel.cpp:199 kmymoney/mymoney/splitmodel.cpp:204
-#: kmymoney/widgets/amountedit.cpp:290 kmymoney/widgets/amountedit.cpp:341
+#: kmymoney/widgets/amountedit.cpp:291 kmymoney/widgets/amountedit.cpp:342
 #: kmymoney/widgets/creditdebitedit.cpp:126
 #: kmymoney/widgets/creditdebitedit.cpp:127
 #: kmymoney/widgets/creditdebitedit.cpp:156
@@ -21160,7 +21160,7 @@ msgstr "Het nummer van de cheque gebruikt voor deze transactie."
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Het number <b>%1</b> voor een cheque is al gebruikt in dit account."
 
-#: kmymoney/views/newspliteditor.cpp:775
+#: kmymoney/views/newspliteditor.cpp:781
 #: kmymoney/views/newtransactioneditor.cpp:170
 #, kde-format
 msgctxt "@info:tooltip Protected"
@@ -21595,7 +21595,7 @@ msgstr "Lijst met tabbladvolgorde..."
 msgid "Tab Order Editor"
 msgstr "Bewerker van tabbladvolgorde"
 
-#: kmymoney/widgets/amountedit.cpp:271
+#: kmymoney/widgets/amountedit.cpp:272
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid ""
@@ -21604,7 +21604,7 @@ msgstr ""
 "Waarde wordt gepresenteerd in %1. Druk op deze knop om de valuta om te "
 "schakelen naar %2."
 
-#: kmymoney/widgets/amountedit.cpp:278
+#: kmymoney/widgets/amountedit.cpp:279
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid "Values are presented in %1."
@@ -22690,7 +22690,7 @@ msgstr "Kasrekening"
 msgid "Investment"
 msgstr "Investering"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:193
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:194
 #, kde-format
 msgid ""
 "Please make sure to enter the correct conversion for the selected opening "
@@ -22701,22 +22701,22 @@ msgstr ""
 "ingevoerd.  Als u een online aanbieding hebt gevraagd, dan kan het voor een "
 "andere datum worden gegeven."
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:193
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:194
 #, kde-format
 msgid "Check date"
 msgstr "Datum controleren"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:201
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:202
 #, kde-format
 msgid "1 %1 equals %2"
 msgstr "1 %1 is gelijk aan %2"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:210
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:211
 #, kde-format
 msgid "Conversion rate is not positive"
 msgstr "Conversiekoers is niet positief"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:216
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:217
 #, kde-format
 msgid "No account name supplied"
 msgstr "Geen rekeningnaam ingevuld"

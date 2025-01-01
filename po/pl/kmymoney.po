@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-31 01:54+0000\n"
+"POT-Creation-Date: 2025-01-01 01:53+0000\n"
 "PO-Revision-Date: 2024-10-19 13:10+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -8315,7 +8315,7 @@ msgid "*** UNASSIGNED ***"
 msgstr "*** NIEPRZYDZIELONY ***"
 
 #: kmymoney/mymoney/splitmodel.cpp:199 kmymoney/mymoney/splitmodel.cpp:204
-#: kmymoney/widgets/amountedit.cpp:290 kmymoney/widgets/amountedit.cpp:341
+#: kmymoney/widgets/amountedit.cpp:291 kmymoney/widgets/amountedit.cpp:342
 #: kmymoney/widgets/creditdebitedit.cpp:126
 #: kmymoney/widgets/creditdebitedit.cpp:127
 #: kmymoney/widgets/creditdebitedit.cpp:156
@@ -21122,7 +21122,7 @@ msgstr "Numer rozliczeniowy użyty dla tej transakcji."
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Numer rozliczeniowy <b>%1</b> został już użyty w tym koncie."
 
-#: kmymoney/views/newspliteditor.cpp:775
+#: kmymoney/views/newspliteditor.cpp:781
 #: kmymoney/views/newtransactioneditor.cpp:170
 #, kde-format
 msgctxt "@info:tooltip Protected"
@@ -21551,7 +21551,7 @@ msgstr "Lista porządku kart..."
 msgid "Tab Order Editor"
 msgstr "Edytor porządku kart"
 
-#: kmymoney/widgets/amountedit.cpp:271
+#: kmymoney/widgets/amountedit.cpp:272
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid ""
@@ -21560,7 +21560,7 @@ msgstr ""
 "Wartości prezentowane są w %1. Naciśnij ten przycisk, aby przełączyć walutę "
 "na %2."
 
-#: kmymoney/widgets/amountedit.cpp:278
+#: kmymoney/widgets/amountedit.cpp:279
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid "Values are presented in %1."
@@ -22645,7 +22645,7 @@ msgstr "Gotówka"
 msgid "Investment"
 msgstr "Inwestycyjne"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:193
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:194
 #, kde-format
 msgid ""
 "Please make sure to enter the correct conversion for the selected opening "
@@ -22656,22 +22656,22 @@ msgstr ""
 "otwarcia. Jeśli złożyłeś wniosek internetowy, może być przewidziana inna "
 "data."
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:193
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:194
 #, kde-format
 msgid "Check date"
 msgstr "Sprawdź datę"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:201
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:202
 #, kde-format
 msgid "1 %1 equals %2"
 msgstr "1 %1 równe %2"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:210
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:211
 #, kde-format
 msgid "Conversion rate is not positive"
 msgstr "Kurs wymiany nie jest korzystny"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:216
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:217
 #, kde-format
 msgid "No account name supplied"
 msgstr "Nie podano nazwy konta"

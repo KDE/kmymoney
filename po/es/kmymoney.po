@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-31 01:54+0000\n"
+"POT-Creation-Date: 2025-01-01 01:53+0000\n"
 "PO-Revision-Date: 2024-12-29 00:49+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -8359,7 +8359,7 @@ msgid "*** UNASSIGNED ***"
 msgstr "*** SIN ASIGNAR ***"
 
 #: kmymoney/mymoney/splitmodel.cpp:199 kmymoney/mymoney/splitmodel.cpp:204
-#: kmymoney/widgets/amountedit.cpp:290 kmymoney/widgets/amountedit.cpp:341
+#: kmymoney/widgets/amountedit.cpp:291 kmymoney/widgets/amountedit.cpp:342
 #: kmymoney/widgets/creditdebitedit.cpp:126
 #: kmymoney/widgets/creditdebitedit.cpp:127
 #: kmymoney/widgets/creditdebitedit.cpp:156
@@ -21163,7 +21163,7 @@ msgstr "El número de cheque usado para esta transacción."
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "El cheque con número <b>%1</b> ya se ha usado en esta cuenta."
 
-#: kmymoney/views/newspliteditor.cpp:775
+#: kmymoney/views/newspliteditor.cpp:781
 #: kmymoney/views/newtransactioneditor.cpp:170
 #, kde-format
 msgctxt "@info:tooltip Protected"
@@ -21592,7 +21592,7 @@ msgstr "Lista del orden de pestañas..."
 msgid "Tab Order Editor"
 msgstr "Editor del orden de pestañas"
 
-#: kmymoney/widgets/amountedit.cpp:271
+#: kmymoney/widgets/amountedit.cpp:272
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid ""
@@ -21600,7 +21600,7 @@ msgid ""
 msgstr ""
 "El valor se muestra en %1. Pulse este botón para cambiar la divisa a %2."
 
-#: kmymoney/widgets/amountedit.cpp:278
+#: kmymoney/widgets/amountedit.cpp:279
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid "Values are presented in %1."
@@ -22686,7 +22686,7 @@ msgstr "Efectivo"
 msgid "Investment"
 msgstr "Inversión"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:193
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:194
 #, kde-format
 msgid ""
 "Please make sure to enter the correct conversion for the selected opening "
@@ -22697,22 +22697,22 @@ msgstr ""
 "seleccionada. Si solicitó una cotización en línea, esta puede ser para una "
 "fecha diferente."
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:193
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:194
 #, kde-format
 msgid "Check date"
 msgstr "Fecha del cheque"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:201
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:202
 #, kde-format
 msgid "1 %1 equals %2"
 msgstr "1 %1 es igual a %2"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:210
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:211
 #, kde-format
 msgid "Conversion rate is not positive"
 msgstr "La tasa de conversión no es positiva"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:216
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:217
 #, kde-format
 msgid "No account name supplied"
 msgstr "No se ha proporcionado ningún nombre de cuenta"

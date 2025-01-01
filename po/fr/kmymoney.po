@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-31 01:54+0000\n"
-"PO-Revision-Date: 2024-12-28 09:31+0100\n"
+"POT-Creation-Date: 2025-01-01 01:53+0000\n"
+"PO-Revision-Date: 2024-12-29 11:23+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -8432,7 +8432,7 @@ msgid "*** UNASSIGNED ***"
 msgstr "*** NON ASSIGNÉ ***"
 
 #: kmymoney/mymoney/splitmodel.cpp:199 kmymoney/mymoney/splitmodel.cpp:204
-#: kmymoney/widgets/amountedit.cpp:290 kmymoney/widgets/amountedit.cpp:341
+#: kmymoney/widgets/amountedit.cpp:291 kmymoney/widgets/amountedit.cpp:342
 #: kmymoney/widgets/creditdebitedit.cpp:126
 #: kmymoney/widgets/creditdebitedit.cpp:127
 #: kmymoney/widgets/creditdebitedit.cpp:156
@@ -17194,8 +17194,7 @@ msgstr "Valeur nette prévisionnelle"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/views/khomeview_p.h:1544
-#, fuzzy, kde-format
-#| msgid "Budget"
+#, kde-format
 msgctxt "@title Home page section"
 msgid "Budget"
 msgstr "Budget"
@@ -19973,8 +19972,7 @@ msgid "Loading..."
 msgstr "Chargement en cours..."
 
 #: kmymoney/views/khomeview_p.h:496
-#, fuzzy, kde-format
-#| msgid "Preferred Accounts"
+#, kde-format
 msgctxt "@title Home page section"
 msgid "Preferred Accounts"
 msgstr "Comptes préférés"
@@ -19985,15 +19983,13 @@ msgid "Payment Accounts"
 msgstr "Comptes de paiement"
 
 #: kmymoney/views/khomeview_p.h:504
-#, fuzzy, kde-format
-#| msgid "Payment Accounts"
+#, kde-format
 msgctxt "@title Home page section"
 msgid "Payment Accounts"
 msgstr "Comptes de paiement"
 
 #: kmymoney/views/khomeview_p.h:557
-#, fuzzy, kde-format
-#| msgid "Net Worth Forecast"
+#, kde-format
 msgctxt "@title Home page section"
 msgid "Net Worth Forecast"
 msgstr "Valeur nette prévisionnelle"
@@ -20022,32 +20018,28 @@ msgid "Balance after"
 msgstr "Solde résultant"
 
 #: kmymoney/views/khomeview_p.h:677
-#, fuzzy, kde-format
-#| msgid "Scheduled Payments"
+#, kde-format
 msgctxt "@title Home page section"
 msgid "Scheduled Payments"
-msgstr "Dépenses planifiées"
+msgstr "Paiements planifiées"
 
 #: kmymoney/views/khomeview_p.h:687
-#, fuzzy, kde-format
-#| msgid "Overdue payments"
+#, kde-format
 msgctxt "@title Home page sub-section"
 msgid "Overdue payments"
 msgstr "Paiements en retard"
 
 #: kmymoney/views/khomeview_p.h:724
-#, fuzzy, kde-format
-#| msgid "Payments to"
+#, kde-format
 msgctxt "@title Home page sub-section"
 msgid "Payments due today"
-msgstr "Versements à"
+msgstr "Paiements dus pour aujourd'hui"
 
 #: kmymoney/views/khomeview_p.h:739
-#, fuzzy, kde-format
-#| msgid "Future payments"
+#, kde-format
 msgctxt "@title Home page sub-section"
 msgid "Future payments"
-msgstr "Versements futurs"
+msgstr "Paiements à venir"
 
 #: kmymoney/views/khomeview_p.h:802
 #, kde-format
@@ -20107,21 +20099,17 @@ msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr "Vers le solde minimum <br> / Crédit maximum"
 
 #: kmymoney/views/khomeview_p.h:1068
-#, fuzzy, kde-format
-#| msgid "Favorite Reports"
+#, kde-format
 msgctxt "@title Home page section"
 msgid "Favorite Reports"
-msgstr "Rapports favoris"
+msgstr "Rapports préférés"
 
 #: kmymoney/views/khomeview_p.h:1124
-#, fuzzy, kde-format
-#| msgctxt "Forecast days"
-#| msgid "%1 Day Forecast"
-#| msgid_plural "%1 Day Forecast"
+#, kde-format
 msgctxt "@title Home page section Forecast days"
 msgid "%1 Day Forecast"
 msgid_plural "%1 Day Forecast"
-msgstr[0] "Prévisions à %1 jour"
+msgstr[0] "Prévisions à %1 jours"
 msgstr[1] "Prévisions à %1 jours"
 
 #: kmymoney/views/khomeview_p.h:1135
@@ -20133,32 +20121,28 @@ msgstr[0] "%1 jour"
 msgstr[1] "%1 jours"
 
 #: kmymoney/views/khomeview_p.h:1358
-#, fuzzy, kde-format
-#| msgid "Assets and Liabilities Summary"
+#, kde-format
 msgctxt "@title Home page section"
 msgid "Assets and Liabilities Summary"
-msgstr "Résumé de l'actif et du passif"
+msgstr "Résumé des actifs et des passifs"
 
 #: kmymoney/views/khomeview_p.h:1372
-#, fuzzy, kde-format
-#| msgid "Asset Accounts"
+#, kde-format
 msgctxt "@title:column table on home page"
 msgid "Asset Accounts"
-msgstr "Comptes d'actif"
+msgstr "Comptes d'actifs"
 
 #: kmymoney/views/khomeview_p.h:1388 kmymoney/views/khomeview_p.h:1417
-#, fuzzy, kde-format
-#| msgid "Balance"
+#, kde-format
 msgctxt "@title:column table on home page"
 msgid "Balance"
 msgstr "Solde"
 
 #: kmymoney/views/khomeview_p.h:1401
-#, fuzzy, kde-format
-#| msgid "Liability Accounts"
+#, kde-format
 msgctxt "@title:column table on home page"
 msgid "Liability Accounts"
-msgstr "Comptes de Passif"
+msgstr "Comptes de passifs"
 
 #: kmymoney/views/khomeview_p.h:1503
 #, kde-format
@@ -20171,8 +20155,7 @@ msgid "Total Liabilities"
 msgstr "Passif Total"
 
 #: kmymoney/views/khomeview_p.h:1799
-#, fuzzy, kde-format
-#| msgid "Cash Flow Summary"
+#, kde-format
 msgctxt "@title Home page section"
 msgid "Cash Flow Summary"
 msgstr "Résumé du flux de trésorerie"
@@ -21349,7 +21332,7 @@ msgstr "Le numéro du chèque utilisé pour cette opération."
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Le numéro de chèque <b>%1</b> a déjà été utilisé sur ce compte."
 
-#: kmymoney/views/newspliteditor.cpp:775
+#: kmymoney/views/newspliteditor.cpp:781
 #: kmymoney/views/newtransactioneditor.cpp:170
 #, kde-format
 msgctxt "@info:tooltip Protected"
@@ -21788,7 +21771,7 @@ msgstr "Liste ordonnée des onglets…"
 msgid "Tab Order Editor"
 msgstr "Éditeur pour l'ordre des onglets"
 
-#: kmymoney/widgets/amountedit.cpp:271
+#: kmymoney/widgets/amountedit.cpp:272
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid ""
@@ -21797,7 +21780,7 @@ msgstr ""
 "Les valeurs sont présentées dans %1. Veuillez appuyer sur ce bouton pour "
 "basculer la devise vers %2."
 
-#: kmymoney/widgets/amountedit.cpp:278
+#: kmymoney/widgets/amountedit.cpp:279
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid "Values are presented in %1."
@@ -22888,7 +22871,7 @@ msgstr "Espèces"
 msgid "Investment"
 msgstr "Placement"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:193
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:194
 #, kde-format
 msgid ""
 "Please make sure to enter the correct conversion for the selected opening "
@@ -22899,22 +22882,22 @@ msgstr ""
 "date d'ouverture. Si vous avez demandé une cotation en ligne, elle peut vous "
 "être fournie pour une date différente."
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:193
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:194
 #, kde-format
 msgid "Check date"
 msgstr "Vérifier la date"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:201
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:202
 #, kde-format
 msgid "1 %1 equals %2"
 msgstr "1 %1 est égal à %2"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:210
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:211
 #, kde-format
 msgid "Conversion rate is not positive"
 msgstr "Le taux de conversion n'est pas positif"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:216
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:217
 #, kde-format
 msgid "No account name supplied"
 msgstr "Pas de nom de compte fourni"
