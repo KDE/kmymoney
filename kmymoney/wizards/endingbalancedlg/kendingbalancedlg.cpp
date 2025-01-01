@@ -288,7 +288,7 @@ void KEndingBalanceDlg::slotUpdateBalances()
                 // we need to check if the transaction is found after
                 // the current start date. If so, we need to adjust the
                 // startBalance but don't touch the endBalance
-                if ((*it).first.postDate() >= d->m_startDate) {
+                if ((*it).first.postDate() > d->m_startDate) {
                     tracer.printf("Reducing start balance by %s because %s/%s(%s) is cleared/reconciled",
                                   qPrintable((split.shares() * factor).formatMoney(QString(), 2)),
                                   qPrintable((*it).first.id()),
