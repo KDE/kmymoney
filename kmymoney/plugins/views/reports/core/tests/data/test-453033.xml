@@ -106,7 +106,7 @@
     </PRICEPAIR>
   </PRICES>
   <REPORTS>
-    <REPORT id="R000002" type="querytable 1.15" group="Transactions" name="Transactions by Tag (Customised)" comment="Custom report" convertcurrency="1" favorite="0" skipZero="0" datelock="yeartodate" rowtype="tag" querycolumns="number,category" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0"/>
+    <REPORT id="R000002" type="querytable 1.15" group="Transactions" name="Transactions by Tag (Customised)" comment="Custom report" convertcurrency="1" favorite="0" skipZero="0" datelock="alldates" rowtype="tag" querycolumns="number,category" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0"/>
   </REPORTS>
   <BUDGETS/>
   <ONLINEJOBS/>

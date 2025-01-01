@@ -55,11 +55,11 @@
   </CURRENCIES>
   <PRICES/>
   <REPORTS>
-    <REPORT id="R000002" type="querytable 1.15" group="Transactions" name="Transactions by category (Customised)" comment="Custom report" convertcurrency="1" favorite="0" skipZero="0" datelock="yeartodate" rowtype="payee" querycolumns="number,payee,tag,account" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0">
+    <REPORT id="R000002" type="querytable 1.15" group="Transactions" name="Transactions by category (Customised)" comment="Custom report" convertcurrency="1" favorite="0" skipZero="0" datelock="alldates" rowtype="payee" querycolumns="number,payee,tag,account" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0">
       <TYPE type="deposits"/>
       <ACCOUNT id="A000002"/>
     </REPORT>
-    <REPORT id="R000003" type="querytable 1.15" group="Transactions" name="Transactions by account (Customised)" comment="Custom report" convertcurrency="1" favorite="0" skipZero="0" datelock="yeartodate" rowtype="payee" querycolumns="number,payee,category,tag,balance" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0">
+    <REPORT id="R000003" type="querytable 1.15" group="Transactions" name="Transactions by account (Customised)" comment="Custom report" convertcurrency="1" favorite="0" skipZero="0" datelock="alldates" rowtype="payee" querycolumns="number,payee,category,tag,balance" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0">
       <TYPE type="deposits"/>
       <ACCOUNT id="A000002"/>
     </REPORT>

@@ -3,10 +3,10 @@
 <KMYMONEY-FILE>
   <FILEINFO>
     <CREATION_DATE date=""/>
-    <LAST_MODIFIED_DATE date="2024-12-29T20:16:28+01:00"/>
+    <LAST_MODIFIED_DATE date="2025-01-01T07:55:17+01:00"/>
     <VERSION id="1"/>
     <FIXVERSION date=""/>
-    <APPVERSION id="5.1.90-12fa993df"/>
+    <APPVERSION id="5.1.90-b1ddcd966"/>
   </FILEINFO>
   <USER name="" email="">
     <ADDRESS street="" city="" state="" zip="" telephone="" country="" county="" zipcode="" postcode=""/>
@@ -70,7 +70,7 @@
     </TRANSACTION>
   </TRANSACTIONS>
   <KEYVALUEPAIRS>
-    <PAIR key="LastModificationDate" value="2024-12-29T20:16:28+01:00"/>
+    <PAIR key="LastModificationDate" value="2025-01-01T07:55:17+01:00"/>
     <PAIR key="kmm-baseCurrency" value="EUR"/>
     <PAIR key="kmm-id" value="{f8f47595-3cac-4ace-8579-b740638b1629}"/>
   </KEYVALUEPAIRS>
@@ -99,9 +99,9 @@
       <DATES from="2024-01-01" to="2024-12-31"/>
     </REPORT>
     <REPORT id="R000015" type="querytable 1.15" group="Transactions" name="Transactions by Payee (Customized)" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="alldates" rowtype="payee" querycolumns="number,payee,category,tag,account" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0"/>
-    <REPORT id="R000016" type="querytable 1.15" group="Transactions" name="Transactions by Month (Customized)" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="yeartodate" rowtype="month" querycolumns="number,payee,category,tag,account" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0"/>
-    <REPORT id="R000017" type="querytable 1.15" group="Transactions" name="Transactions by Week (Customized)" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="yeartodate" rowtype="week" querycolumns="number,payee,category,tag,account" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0"/>
-    <REPORT id="R000018" type="querytable 1.15" group="Transactions" name="Transactions by Tag (Customized)" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="yeartodate" rowtype="tag" querycolumns="number,category,account" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0"/>
+    <REPORT id="R000016" type="querytable 1.15" group="Transactions" name="Transactions by Month (Customized)" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="alldates" rowtype="month" querycolumns="number,payee,category,tag,account" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0"/>
+    <REPORT id="R000017" type="querytable 1.15" group="Transactions" name="Transactions by Week (Customized)" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="alldates" rowtype="week" querycolumns="number,payee,category,tag,account" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0"/>
+    <REPORT id="R000018" type="querytable 1.15" group="Transactions" name="Transactions by Tag (Customized)" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="alldates" rowtype="tag" querycolumns="number,category,account" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0"/>
     <REPORT id="R000019" type="querytable 1.15" group="Transactions" name="Transactions by Reconciliation Status (Customized)" comment="Custom Report" convertcurrency="1" favorite="0" skipZero="0" datelock="alldates" rowtype="accountreconcile" querycolumns="number,payee,category,balance" tax="0" propBudgetDiff="0" investments="0" loans="0" hidetransactions="0" showcolumntotals="1" detail="all" includestransfers="0"/>
   </REPORTS>
   <BUDGETS/>
