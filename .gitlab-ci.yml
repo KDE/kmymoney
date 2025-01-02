@@ -18,6 +18,14 @@ craft_macos_arm64:
 craft_macos_x86_64:
   when: manual
 
+# appimage and windows are currently broken due to changes in craft
+# that do not support Qt5 builds anymore. Switched to manual execution.
+craft_appimage_qt515_x86_64:
+  when: manual
+
+craft_windows_qt515_x86_64:
+  when: manual
+
 # custom builds
 
 build_local_ubuntu_2110:
