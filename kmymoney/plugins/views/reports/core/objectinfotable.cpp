@@ -181,7 +181,7 @@ void ObjectInfoTable::constructScheduleTable()
             MyMoneyTransaction transaction = schedule.transaction();
             MyMoneySplit split = transaction.splitByAccount(account.id(), true);
             scheduleRow[ctValue] = (split.value() * xr).toString();
-            scheduleRow[ctValueSourceLine] = QString("%1").arg(__LINE__);
+            scheduleRow.addSourceLine(ctValue, __LINE__);
             MyMoneyPayee payee = file->payee(split.payeeId());
             scheduleRow[ctPayee] = payee.name();
             m_rows += scheduleRow;

@@ -347,7 +347,6 @@ void QueryTable::constructTotalRows()
             while (currencyGrp != totalCurrency.end()) {
                 if (!MyMoneyMoney((*currencyGrp).at(i + 1).value(ctRowsCount)).isZero()) {    // if no rows summed up, then no totals row
                     TableRow totalsRow;
-                    totalsRow[ctValueSourceLine] = QString("%1").arg(__LINE__);
                     // sum all subtotal values for higher groups (excluding grand total) and reset lowest group values
                     QMap<cellTypeE, MyMoneyMoney>::iterator upperGrp = (*currencyGrp)[i].begin();
                     QMap<cellTypeE, MyMoneyMoney>::iterator lowerGrp = (*currencyGrp)[i + 1].begin();
@@ -362,6 +361,7 @@ void QueryTable::constructTotalRows()
 
                     // custom total values calculations
                     for (const auto& subtotal : qAsConst(subtotals)) {
+                        totalsRow.addSourceLine(subtotal, __LINE__);
                         if (subtotal == ctReturnInvestment) {
                             totalsRow[subtotal] = helperROI((*currencyGrp).at(i + 1).value(ctBuys),
                                                             (*currencyGrp).at(i + 1).value(ctSells),
@@ -420,7 +420,6 @@ void QueryTable::constructTotalRows()
             QMap<QString, QList<QMap<cellTypeE, MyMoneyMoney>>>::iterator currencyGrp = totalCurrency.begin();
             while (currencyGrp != totalCurrency.end()) {
                 TableRow totalsRow;
-                totalsRow[ctValueSourceLine] = QString("%1").arg(__LINE__);
                 QMap<cellTypeE, MyMoneyMoney>::const_iterator grandTotalGrp = (*currencyGrp)[0].cbegin();
                 while (grandTotalGrp != (*currencyGrp)[0].cend()) {
                     totalsRow[grandTotalGrp.key()] = grandTotalGrp.value().toString();
@@ -428,6 +427,7 @@ void QueryTable::constructTotalRows()
                 }
 
                 for (const auto& subtotal : qAsConst(subtotals)) {
+                    totalsRow.addSourceLine(subtotal, __LINE__);
                     if (subtotal == ctReturnInvestment) {
                         totalsRow[subtotal] = helperROI((*currencyGrp).at(0).value(ctBuys),
                                                         (*currencyGrp).at(0).value(ctSells),
@@ -741,6 +741,7 @@ void QueryTable::constructTransactionTable()
                     qA[ctAction] = (*it_split).action();
                     qA[ctShares] = shares.isZero() ? QString() : shares.toString();
                     qA[ctPrice] = shares.isZero() ? QString() : xr.convertPrecision(pricePrecision).toString();
+                    qA.addSourceLine(ctPrice, __LINE__);
 
                     if (((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) && shares.isNegative())
                         qA[ctAction] = "Sell";
@@ -775,6 +776,7 @@ void QueryTable::constructTransactionTable()
                                         xr = MyMoneyMoney::ONE;
 
                                     qA[ctPrice] = shares.isZero() ? QString() : (stockSplit.price() * xr / (*it_split).price()).toString();
+                                    qA.addSourceLine(ctPrice, __LINE__);
                                     // put conversion rate for all splits with this currency, so...
                                     // every split of transaction have the same conversion rate
                                     xrMap.insert(splitCurrency, MyMoneyMoney::ONE / (*it_split).price());
@@ -784,8 +786,10 @@ void QueryTable::constructTransactionTable()
                             }
                         }
                     }
-                } else
+                } else {
                     qA[ctPrice] = xr.toString();
+                    qA.addSourceLine(ctPrice, __LINE__);
+                }
 
                 a_fullname = splitAcc.fullName();
                 a_memo = (*it_split).memo();
@@ -807,7 +811,7 @@ void QueryTable::constructTransactionTable()
                 qA[ctMemo] = a_memo;
 
                 qA[ctValue] = ((*it_split).shares() * xr).convert(fraction).toString();
-                qA[ctValueSourceLine] = QString("%1").arg(__LINE__);
+                qA.addSourceLine(ctValue, __LINE__);
 
                 qS[ctReconcileDate] = qA[ctReconcileDate];
                 qS[ctReconcileFlag] = qA[ctReconcileFlag];
@@ -821,7 +825,7 @@ void QueryTable::constructTransactionTable()
                     if (loan_special_case) {
                         // put the principal amount in the "value" column and convert to lowest fraction
                         qA[ctValue] = ((*it_split).shares() * xr).convert(fraction).toString();
-                        qA[ctValueSourceLine] = QString("%1").arg(__LINE__);
+                        qA.addSourceLine(ctValue, __LINE__);
                         qA[ctRank] = FIRST_SPLIT_RANK;
                         qA[ctSplit].clear();
 
@@ -848,7 +852,7 @@ void QueryTable::constructTransactionTable()
                             case eMyMoney::Report::RowType::Payee:
                                 if (splitAcc.isAssetLiability()) {
                                     qA[ctValue] = ((*it_split).shares() * xr).convert(fraction).toString(); // needed for category reports, in case of multicurrency transaction it breaks it
-                                    qA[ctValueSourceLine] = QString("%1").arg(__LINE__);
+                                    qA.addSourceLine(ctValue, __LINE__);
                                     // make sure we use the right currency of the category
                                     // (will be ignored when converting to base currency)
                                     qA[ctCurrency] = splitAcc.currencyId();
@@ -876,6 +880,7 @@ void QueryTable::constructTransactionTable()
                         if ((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization)) {
                             // put the amortization in the "value" and "payment" column
                             qA[ctValue] = value.toString();
+                            qA.addSourceLine(ctValue, __LINE__);
                         } else if ((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Interest)) {
                             // put the interest in the "interest" column and convert to lowest fraction
                             qA[ctInterest] = value.toString();
@@ -905,6 +910,7 @@ void QueryTable::constructTransactionTable()
                         //this is when the splits are going to be shown as children of the main split
                         if ((splits.count() > 2) && use_summary) {
                             qA[ctValue].clear();
+                            qA.addSourceLine(ctValue, __LINE__);
 
                             //convert to lowest fraction
                             qA[ctSplit] = (-(*it_split).shares() * xr).convert(fraction).toString();
@@ -930,7 +936,7 @@ void QueryTable::constructTransactionTable()
                                         qA[ctCurrency] = splitAcc.currencyId();
                                     }
                                     qA[ctValue] = ((-(*it_split).shares()) * ieXr).convert(fraction).toString();
-                                    qA[ctValueSourceLine] = QString("%1").arg(__LINE__);
+                                    qA.addSourceLine(ctValue, __LINE__);
                                 }
                                 break;
                             default:
@@ -989,9 +995,10 @@ void QueryTable::constructTransactionTable()
                     if (! splitAcc.isIncomeExpense()) {
                         //multiply by currency and convert to lowest fraction
                         qS[ctValue] = ((*it_split).shares() * xr).convert(fraction).toString();
+                        qS.addSourceLine(ctValue, __LINE__);
+
                         // also keep the value in the "payment" column for loan payment reports
                         qS[ctPayment] = qS[ctValue];
-                        qA[ctValueSourceLine] = QString("%1").arg(__LINE__);
 
                         qS[ctRank] = FIRST_SPLIT_RANK;
 
@@ -1154,6 +1161,8 @@ void QueryTable::constructTransactionTable()
         qA[ctRank] = FORCED_FIRST_RANK;
 
         qA[ctPrice] = startPrice.convertPrecision(account.currency().pricePrecision()).toString();
+        qA.addSourceLine(ctPrice, __LINE__);
+
         if (account.isInvest()) {
             qA[ctShares] = startShares.toString();
         }
@@ -1161,11 +1170,13 @@ void QueryTable::constructTransactionTable()
         qA[ctPostDate] = strStartDate;
         qA[ctBalance] = startBalance.convert(fraction).toString();
         qA[ctValue].clear();
+        qA.addSourceLine(ctValue, __LINE__);
         qA[ctID] = FIRST_ID_SORT;
         m_rows += qA;
 
         //ending balance
         qA[ctPrice] = endPrice.convertPrecision(account.currency().pricePrecision()).toString();
+        qA.addSourceLine(ctPrice, __LINE__);
 
         if (account.isInvest()) {
             qA[ctShares] = endShares.toString();
@@ -1694,8 +1705,9 @@ void QueryTable::constructAccountTable()
                 shares = shares.reduce();
                 int pricePrecision = file->security(account.currencyId()).pricePrecision();
                 qaccountrow[ctPrice] = netprice.convertPrecision(pricePrecision).toString();
+                qaccountrow.addSourceLine(ctPrice, __LINE__);
                 qaccountrow[ctValue] = (netprice * shares).convert(fraction).toString();
-                qaccountrow[ctValueSourceLine] = QString("%1").arg(__LINE__);
+                qaccountrow.addSourceLine(ctValue, __LINE__);
                 qaccountrow[ctShares] = shares.toString();
 
                 const auto iid = account.institutionId();
@@ -1896,6 +1908,7 @@ void QueryTable::constructSplitsTable()
                 qA[ctAction] = (*it_split).action();
                 qA[ctShares] = shares.isZero() ? QString() : (*it_split).shares().toString();
                 qA[ctPrice] = shares.isZero() ? QString() : xr.convertPrecision(pricePrecision).toString();
+                qA.addSourceLine(ctPrice, __LINE__);
 
                 if (((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) && (*it_split).shares().isNegative())
                     qA[ctAction] = "Sell";
@@ -1909,6 +1922,7 @@ void QueryTable::constructSplitsTable()
 
             int pricePrecision = file->security(splitAcc.currencyId()).pricePrecision();
             qA[ctPrice] = xr.convertPrecision(pricePrecision).toString();
+            qA.addSourceLine(ctPrice, __LINE__);
             qA[ctAccount] = splitAcc.name();
             qA[ctAccountID] = splitAcc.id();
             qA[ctTopAccount] = splitAcc.topParentName();
@@ -1946,7 +1960,7 @@ void QueryTable::constructSplitsTable()
                 // this is the sub-total of the split detail
                 // convert to lowest fraction
                 qA[ctValue] = ((*it_split).shares() * xr).convert(fraction).toString();
-                qA[ctValueSourceLine] = QString("%1").arg(__LINE__);
+                qA.addSourceLine(ctValue, __LINE__);
                 qA[ctRank] = FIRST_SPLIT_RANK;
 
                 //fill in account information
@@ -2091,6 +2105,8 @@ void QueryTable::constructSplitsTable()
 
         int pricePrecision = file->security(account.currencyId()).pricePrecision();
         qA[ctPrice] = startPrice.convertPrecision(pricePrecision).toString();
+        qA.addSourceLine(ctPrice, __LINE__);
+
         if (account.isInvest()) {
             qA[ctShares] = startShares.toString();
         }
@@ -2098,12 +2114,14 @@ void QueryTable::constructSplitsTable()
         qA[ctPostDate] = strStartDate;
         qA[ctBalance] = startBalance.convert(fraction).toString();
         qA[ctValue].clear();
+        qA.addSourceLine(ctValue, __LINE__);
         qA[ctID] = FIRST_ID_SORT;
         m_rows += qA;
 
         qA[ctRank] = END_BALANCE_RANK;
         //ending balance
         qA[ctPrice] = endPrice.convertPrecision(pricePrecision).toString();
+        qA.addSourceLine(ctPrice, __LINE__);
 
         if (account.isInvest()) {
             qA[ctShares] = endShares.toString();

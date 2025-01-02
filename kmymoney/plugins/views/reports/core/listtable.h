@@ -136,7 +136,7 @@ public:
         ctDescription,
         ctOccurrence,
         ctPaymentType,
-        ctValueSourceLine,
+        ctSourceLines,
         ctStartingMarketValue,
         ctEndingMarketValue,
         csID,
@@ -161,6 +161,12 @@ public:
         static void setSortCriteria(const QVector<cellTypeE>& _criteria) {
             m_sortCriteria = _criteria;
         }
+
+        void addSourceLine(cellTypeE type, int line)
+        {
+            QMap::operator[](ctSourceLines).append(QString(" %1:%2").arg(type).arg(line));
+        }
+
     private:
         static QVector<cellTypeE> m_sortCriteria;
     };
