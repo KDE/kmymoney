@@ -388,7 +388,7 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
                 //
                 //  Add price.
                 //
-                txt = (*it).price().formatMoney("", 6);
+                txt = (*it).possiblyCalculatedPrice().formatMoney("", 6);
                 s += 'I' + txt + '\n';
                 if (!qty.isZero()) {
                     //

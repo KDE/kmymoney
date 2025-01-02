@@ -299,7 +299,7 @@ struct SplitModel::Private
         // will cause MyMoneySplit::price to recalculate the price
         // based on value and shares of the split
         s.setPrice(MyMoneyMoney());
-        s.setPrice(s.price());
+        s.setPrice(s.possiblyCalculatedPrice());
     }
 
     SplitModel* q;

@@ -83,10 +83,16 @@ public:
     void negateShares();
 
     /**
-     * This method returns the price. If the member m_price is not zero
-     * its value is returned. Otherwise, if m_shares is not zero the quotient
-     * of m_value / m_shares is returned. If m_values equals to zero, 1
-     * will be returned.
+     * This method returns the price that may have been calculated.
+     * If the member m_price is not zero its value is returned.
+     * Otherwise, if m_shares is not zero the quotient of
+     * m_value / m_shares is returned. If m_values equals to
+     * zero, 1 will be returned.
+     */
+    MyMoneyMoney possiblyCalculatedPrice() const;
+
+    /**
+     * This method returns the stored price.
      */
     MyMoneyMoney price() const;
     void setPrice(const MyMoneyMoney& price);

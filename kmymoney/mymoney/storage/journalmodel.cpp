@@ -675,8 +675,8 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
             case eMyMoney::Split::InvestmentTransactionType::SellShares:
             case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
                 if (!split.shares().isZero()) {
-                    return split.price().formatMoney(MyMoneyFile::instance()->currency(transaction.commodity()).tradingSymbol(), d->security(journalEntry).pricePrecision());
-
+                    return split.possiblyCalculatedPrice().formatMoney(MyMoneyFile::instance()->currency(transaction.commodity()).tradingSymbol(),
+                                                                       d->security(journalEntry).pricePrecision());
                 }
                 break;
             default:
@@ -900,7 +900,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::SplitPriceRole:
     {
         QVariant rc;
-        rc.setValue(split.price());
+        rc.setValue(split.possiblyCalculatedPrice());
         return rc;
     }
 
@@ -1041,7 +1041,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         case eMyMoney::Split::InvestmentTransactionType::SellShares:
         case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
             if (!split.shares().isZero()) {
-                return QVariant::fromValue(split.price());
+                return QVariant::fromValue(split.possiblyCalculatedPrice());
             }
             return QVariant::fromValue(MyMoneyMoney());
         default:

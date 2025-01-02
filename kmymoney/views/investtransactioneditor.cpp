@@ -1239,7 +1239,7 @@ void InvestTransactionEditor::activityChanged(int index)
         } else if (type != eMyMoney::Split::InvestmentTransactionType::SplitShares && oldType == eMyMoney::Split::InvestmentTransactionType::SplitShares) {
             // switch away from split
             d->stockSplit.setPrice(d->ui->priceAmountEdit->value());
-            d->stockSplit.setValue(d->stockSplit.shares() * d->stockSplit.price());
+            d->stockSplit.setValue(d->stockSplit.shares() * d->stockSplit.possiblyCalculatedPrice());
             d->ui->sharesAmountEdit->setPrecision(MyMoneyMoney::denomToPrec(d->security.smallestAccountFraction()));
         }
 
@@ -1252,7 +1252,7 @@ void InvestTransactionEditor::activityChanged(int index)
             // switch away from dividend/yield
             d->stockSplit.setShares(d->ui->sharesAmountEdit->shares());
             d->stockSplit.setPrice(d->ui->priceAmountEdit->value());
-            d->stockSplit.setValue(d->stockSplit.shares() * d->stockSplit.price());
+            d->stockSplit.setValue(d->stockSplit.shares() * d->stockSplit.possiblyCalculatedPrice());
         }
 
         updateTotalAmount();

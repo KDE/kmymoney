@@ -280,7 +280,7 @@ void Activity::loadPriceWidget(const MyMoneySplit & split)
         if (d->priceMode() == eMyMoney::Invest::PriceMode::PricePerTransaction) {
             priceEdit->setValue(split.value());
         } else {
-            priceEdit->setValue(split.price());
+            priceEdit->setValue(split.possiblyCalculatedPrice());
         }
     }
 }

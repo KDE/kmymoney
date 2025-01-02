@@ -366,6 +366,12 @@ void MyMoneySplit::setPrice(const MyMoneyMoney& price)
 MyMoneyMoney MyMoneySplit::price() const
 {
     Q_D(const MyMoneySplit);
+    return d->m_price;
+}
+
+MyMoneyMoney MyMoneySplit::possiblyCalculatedPrice() const
+{
+    Q_D(const MyMoneySplit);
     if (!d->m_price.isZero())
         return d->m_price;
     if (!d->m_value.isZero() && !d->m_shares.isZero())

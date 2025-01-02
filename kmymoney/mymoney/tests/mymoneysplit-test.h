@@ -35,6 +35,8 @@ private Q_SLOTS:
     void testSetAction();
     void testIsAutoCalc();
     void testUnaryMinus();
+    void testPrice();
+    void testSetPrice();
     void testPriceCalculation();
     void testPriceAssignment();
 };

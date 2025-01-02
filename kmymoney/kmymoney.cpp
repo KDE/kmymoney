@@ -2823,8 +2823,9 @@ void KMyMoneyApp::slotDisplayTransactionDetails()
                     splits += "</td><td>" + split.reconcileDate().toString(Qt::ISODate) + "</td><td>" + split.action() + "</td><td>";
                     splits += split.shares().formatMoney(splitAccount.fraction(), true) + "<br/>(" + splitSymbol + " ";
                     splits += QString::number(splitAccount.fraction()) + ")</td><td>";
-                    splits +=
-                        split.price().formatMoney(safraction > splitAccount.fraction() ? safraction / splitAccount.fraction() : splitAccount.fraction(), true);
+                    splits += split.possiblyCalculatedPrice().formatMoney(safraction > splitAccount.fraction() ? safraction / splitAccount.fraction()
+                                                                                                               : splitAccount.fraction(),
+                                                                          true);
                     splits += "</td><td>" + split.value().formatMoney(safraction, true) + "<br/>(" + t.commodity() + " " + QString::number(safraction);
                     splits += ")</td><td>" + split.bankID() + "</td></tr><tr><td>&nbsp;</td><td colspan=\"10\">" + split.memo() + "</td></tr>";
 
@@ -2944,7 +2945,7 @@ void KMyMoneyApp::slotCopySplits()
                                 // of different currencies
                                 if (selectedSourceTransaction.splitCount() == 2) {
                                     sp.setValue(-baseSplit.value());
-                                    sp.setShares(-(baseSplit.shares() * baseSplit.price()));
+                                    sp.setShares(-(baseSplit.shares() * baseSplit.possiblyCalculatedPrice()));
                                 }
                                 t.addSplit(sp);
                             }

@@ -720,9 +720,9 @@ void QueryTable::constructTransactionTable()
             if (m_config.isConvertCurrency()) {
                 xr = xrMap.value(splitCurrency, xr);  // check if there is conversion rate to myBeginCurrency already stored...
                 if (xr == MyMoneyMoney())             // ...if not...
-                    xr = (*it_split).price();         // ...take conversion rate to myBeginCurrency from split
+                    xr = (*it_split).possiblyCalculatedPrice(); // ...take conversion rate to myBeginCurrency from split
                 else if (splitAcc.isInvest())         // if it's stock split...
-                    xr *= (*it_split).price();          // ...multiply it by stock price stored in split
+                    xr *= (*it_split).possiblyCalculatedPrice(); // ...multiply it by stock price stored in split
 
                 if (myBeginCurrency != baseCurrency) {                             // myBeginCurrency can differ from baseCurrency...
                     MyMoneyPrice price = file->price(myBeginCurrency, baseCurrency,
@@ -734,7 +734,7 @@ void QueryTable::constructTransactionTable()
                         qA[ctCurrency] = qS[ctCurrency] = myBeginCurrency;             // ...and set information about non-baseCurrency
                 }
             } else if (splitAcc.isInvest())
-                xr = (*it_split).price();
+                xr = (*it_split).possiblyCalculatedPrice();
             else {
                 // for the very first split we adjust the currency to the
                 // currency used for the split to make sure the right one
@@ -803,13 +803,15 @@ void QueryTable::constructTransactionTable()
                                     } else
                                         xr = MyMoneyMoney::ONE;
 
-                                    qA[ctPrice] = shares.isZero() ? QString() : (stockSplit.price() * xr / (*it_split).price()).toString();
+                                    qA[ctPrice] = shares.isZero()
+                                        ? QString()
+                                        : (stockSplit.possiblyCalculatedPrice() * xr / (*it_split).possiblyCalculatedPrice()).toString();
                                     qA.addSourceLine(ctPrice, __LINE__);
                                     // put conversion rate for all splits with this currency, so...
                                     // every split of transaction have the same conversion rate
-                                    xrMap.insert(splitCurrency, MyMoneyMoney::ONE / (*it_split).price());
+                                    xrMap.insert(splitCurrency, MyMoneyMoney::ONE / (*it_split).possiblyCalculatedPrice());
                                 } else
-                                    xr = (*it_split).price();
+                                    xr = (*it_split).possiblyCalculatedPrice();
                                 break;
                             }
                         }

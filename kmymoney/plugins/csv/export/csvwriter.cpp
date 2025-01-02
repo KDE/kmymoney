@@ -418,7 +418,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
                 //
                 //  Add price.
                 //
-                strPrice = format((*itSplit).price(), security.pricePrecision());
+                strPrice = format((*itSplit).possiblyCalculatedPrice(), security.pricePrecision());
                 if (!qty.isZero()) {
                     //
                     //  Add quantity.
