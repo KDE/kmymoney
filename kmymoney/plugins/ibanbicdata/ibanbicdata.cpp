@@ -58,7 +58,7 @@ QVariant ibanBicData::requestData(const QString &arg, uint type)
 
 int ibanBicData::bankIdentifierLength(const QString& countryCode)
 {
-    const QVariant value = findPropertyByCountry(countryCode, QLatin1String("X-KMyMoney-BankIdentifier-Length"), QVariant::Int);
+    const QVariant value = findPropertyByCountry(countryCode, QLatin1String("X-KMyMoney-BankIdentifier-Length"), QMetaType::Int);
     if (value.isValid())
         return value.toInt();
     return 0;
@@ -66,7 +66,7 @@ int ibanBicData::bankIdentifierLength(const QString& countryCode)
 
 int ibanBicData::bankIdentifierPosition(const QString& countryCode)
 {
-    const QVariant value = findPropertyByCountry(countryCode, QLatin1String("X-KMyMoney-BankIdentifier-Position"), QVariant::Int);
+    const QVariant value = findPropertyByCountry(countryCode, QLatin1String("X-KMyMoney-BankIdentifier-Position"), QMetaType::Int);
     if (value.isValid())
         return value.toInt();
     return -1;
@@ -74,7 +74,7 @@ int ibanBicData::bankIdentifierPosition(const QString& countryCode)
 
 int ibanBicData::bbanLength(const QString& countryCode)
 {
-    const QVariant value = findPropertyByCountry(countryCode, QLatin1String("X-KMyMoney-BBAN-Length"), QVariant::Int);
+    const QVariant value = findPropertyByCountry(countryCode, QLatin1String("X-KMyMoney-BBAN-Length"), QMetaType::Int);
     if (value.isValid())
         return value.toInt();
     // Something went wrong, so return the allowed maximum
@@ -248,7 +248,7 @@ eIBANBIC::bicAllocationStatus ibanBicData::isBicAllocated(const QString& bic)
     return eIBANBIC::bicAllocationStatus::bicAllocationUncertain;
 }
 
-QVariant ibanBicData::findPropertyByCountry(const QString& countryCode, const QString& property, const QVariant::Type type)
+QVariant ibanBicData::findPropertyByCountry(const QString& countryCode, const QString& property, const QMetaType::Type type)
 {
     const KService::List services = KServiceTypeTrader::self()->query("KMyMoney/IbanBicData",
                                     QString("'%1' ~in [X-KMyMoney-CountryCodes] and exist [%2]").arg(countryCode).arg(property)

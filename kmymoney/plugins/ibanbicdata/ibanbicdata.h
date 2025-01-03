@@ -71,7 +71,7 @@ public:
     eIBANBIC::bicAllocationStatus isBicAllocated(const QString& bic);
 
 private:
-    QVariant findPropertyByCountry(const QString& countryCode, const QString& property, const QVariant::Type type);
+    QVariant findPropertyByCountry(const QString& countryCode, const QString& property, const QMetaType::Type type);
 
     /**
      * @brief Create/get QSqlDatabase

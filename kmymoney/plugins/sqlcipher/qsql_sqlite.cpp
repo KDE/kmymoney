@@ -76,6 +76,86 @@ static QString _q_escapeIdentifier(const QString &identifier)
     return res;
 }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+using KMMMetaType = QMetaType::Type;
+
+static QMetaType::Type qGetColumnType(int stp)
+{
+    QMetaType::Type fieldType;
+
+    // Get the proper type for the field based on stp value
+    switch (stp) {
+    case SQLITE_INTEGER:
+        fieldType = QMetaType::Int;
+        break;
+    case SQLITE_FLOAT:
+        fieldType = QMetaType::Double;
+        break;
+    case SQLITE_BLOB:
+        fieldType = QMetaType::QByteArray;
+        break;
+    case SQLITE_TEXT:
+        fieldType = QMetaType::QString;
+        break;
+    case SQLITE_NULL:
+    default:
+        fieldType = QMetaType::UnknownType;
+        break;
+    }
+
+    return fieldType;
+}
+
+static QMetaType::Type qGetColumnType(const QString& tpName)
+{
+    const QString typeName = tpName.toLower();
+
+    if (typeName == QLatin1String("integer") || typeName == QLatin1String("int"))
+        return QMetaType::Int;
+    if (typeName == QLatin1String("double") || typeName == QLatin1String("float") || typeName == QLatin1String("real")
+        || typeName.startsWith(QLatin1String("numeric")))
+        return QMetaType::Double;
+    if (typeName == QLatin1String("blob"))
+        return QMetaType::QByteArray;
+    if (typeName == QLatin1String("boolean") || typeName == QLatin1String("bool"))
+        return QMetaType::Bool;
+    return QMetaType::QString;
+}
+
+QMetaType::Type qVariantTypeToMetaType(const QVariant& v)
+{
+    return v.metaType();
+}
+#else
+using KMMMetaType = QVariant::Type;
+
+static QVariant::Type qGetColumnType(int stp)
+{
+    QVariant::Type fieldType;
+
+    // Get the proper type for the field based on stp value
+    switch (stp) {
+    case SQLITE_INTEGER:
+        fieldType = QVariant::Int;
+        break;
+    case SQLITE_FLOAT:
+        fieldType = QVariant::Double;
+        break;
+    case SQLITE_BLOB:
+        fieldType = QVariant::ByteArray;
+        break;
+    case SQLITE_TEXT:
+        fieldType = QVariant::String;
+        break;
+    case SQLITE_NULL:
+    default:
+        fieldType = QVariant::Invalid;
+        break;
+    }
+
+    return fieldType;
+}
+
 static QVariant::Type qGetColumnType(const QString &tpName)
 {
     const QString typeName = tpName.toLower();
@@ -95,6 +175,12 @@ static QVariant::Type qGetColumnType(const QString &tpName)
         return QVariant::Bool;
     return QVariant::String;
 }
+
+QMetaType::Type qVariantTypeToMetaType(const QVariant& v)
+{
+    return static_cast<QMetaType::Type>(v.userType());
+}
+#endif
 
 static QSqlError qMakeError(sqlite3 *access, const QString &descr, QSqlError::ErrorType type,
                             int errorCode = -1)
@@ -221,30 +307,13 @@ void QSQLiteResultPrivate::initColumns(bool emptyResultset)
         // sqlite3_column_type is documented to have undefined behavior if the result set is empty
         int stp = emptyResultset ? -1 : sqlite3_column_type(stmt, i);
 
-        QVariant::Type fieldType;
+        KMMMetaType fieldType;
 
         if (!typeName.isEmpty()) {
             fieldType = qGetColumnType(typeName);
         } else {
             // Get the proper type for the field based on stp value
-            switch (stp) {
-            case SQLITE_INTEGER:
-                fieldType = QVariant::Int;
-                break;
-            case SQLITE_FLOAT:
-                fieldType = QVariant::Double;
-                break;
-            case SQLITE_BLOB:
-                fieldType = QVariant::ByteArray;
-                break;
-            case SQLITE_TEXT:
-                fieldType = QVariant::String;
-                break;
-            case SQLITE_NULL:
-            default:
-                fieldType = QVariant::Invalid;
-                break;
-            }
+            fieldType = qGetColumnType(stp);
         }
 #ifdef ENABLE_COLUMN_METADATA
         QSqlField fld(colName, fieldType, tableName);
@@ -534,39 +603,40 @@ bool QSQLiteResult::exec()
             if (value.isNull()) {
                 res = sqlite3_bind_null(d->stmt, i + 1);
             } else {
-                switch (value.type()) {
-                case QVariant::ByteArray: {
+                QMetaType::Type type = qVariantTypeToMetaType(value);
+                switch (type) {
+                case QMetaType::QByteArray: {
                     const QByteArray *ba = static_cast<const QByteArray*>(value.constData());
                     res = sqlite3_bind_blob(d->stmt, i + 1, ba->constData(),
                                             ba->size(), SQLITE_STATIC);
                     break;
                 }
-                case QVariant::Int:
-                case QVariant::Bool:
+                case QMetaType::Int:
+                case QMetaType::Bool:
                     res = sqlite3_bind_int(d->stmt, i + 1, value.toInt());
                     break;
-                case QVariant::Double:
+                case QMetaType::Double:
                     res = sqlite3_bind_double(d->stmt, i + 1, value.toDouble());
                     break;
-                case QVariant::UInt:
-                case QVariant::LongLong:
+                case QMetaType::UInt:
+                case QMetaType::LongLong:
                     res = sqlite3_bind_int64(d->stmt, i + 1, value.toLongLong());
                     break;
-                case QVariant::DateTime: {
+                case QMetaType::QDateTime: {
                     const QDateTime dateTime = value.toDateTime();
                     const QString str = dateTime.toString(QLatin1String("yyyy-MM-ddThh:mm:ss.zzz") + timespecToString(dateTime));
                     res = sqlite3_bind_text16(d->stmt, i + 1, str.utf16(),
                                               str.size() * sizeof(ushort), SQLITE_TRANSIENT);
                     break;
                 }
-                case QVariant::Time: {
+                case QMetaType::QTime: {
                     const QTime time = value.toTime();
                     const QString str = time.toString(QStringView(u"hh:mm:ss.zzz"));
                     res = sqlite3_bind_text16(d->stmt, i + 1, str.utf16(),
                                               str.size() * sizeof(ushort), SQLITE_TRANSIENT);
                     break;
                 }
-                case QVariant::String: {
+                case QMetaType::QString: {
                     // lifetime of string == lifetime of its qvariant
                     const QString *str = static_cast<const QString*>(value.constData());
                     res = sqlite3_bind_text16(d->stmt, i + 1, str->utf16(),
