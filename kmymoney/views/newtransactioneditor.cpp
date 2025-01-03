@@ -850,7 +850,7 @@ void NewTransactionEditor::Private::updateVAT(TaxValueChange amountChanged)
         cleanupHelper(bool* lockVariable)
             : m_lockVariable(lockVariable)
         {
-            *lockVariable = true;
+            *m_lockVariable = true;
         }
         ~cleanupHelper()
         {
@@ -875,22 +875,23 @@ void NewTransactionEditor::Private::updateVAT(TaxValueChange amountChanged)
         return;
 
     // more splits than category and tax are not supported
-    if (splitModel.rowCount() > 2)
+    if (splitModel.rowCount() > 2) {
         return;
+    }
 
     // in order to do anything, we need an amount
     MyMoneyMoney amount, newAmount;
     amount = ui->creditDebitEdit->value();
-    if (amount.isZero())
+    if (amount.isZero()) {
         return;
-
-    MyMoneyAccount category;
+    }
 
     // If the transaction has a tax and a category split, remove the tax split
     if (splitModel.rowCount() == 2) {
         newAmount = removeVatSplit();
-        if (splitModel.rowCount() == 2) // not removed?
+        if (splitModel.rowCount() == 2) { // not removed?
             return;
+        }
 
         // now we have a single split with a category and check if the
         // value has changed and we need to update that split
@@ -909,14 +910,21 @@ void NewTransactionEditor::Private::updateVAT(TaxValueChange amountChanged)
     if (amountChanged == ValueChanged)
         newAmount = amount;
 
-    if (splitModel.rowCount() != 1)
+    // to be able to assign a tax split, the only thing
+    // we should have is the split assigned to the category.
+    // if we have anything else, bail out
+    if (splitModel.rowCount() != 1) {
         return;
+    }
 
+    // create a transaction with a single split
     auto t = q->transaction();
     t.setCommodity(m_transaction.commodity());
+
+    // and add the VAT part
     MyMoneyFile::instance()->updateVAT(t);
 
-    // clear current splits and add them again
+    // keep the split model in sync with the new data
     splitModel.unload();
     for (const auto& split : t.splits()) {
         if ((split.accountId() == taxId) || split.accountId() == categoryId) {
