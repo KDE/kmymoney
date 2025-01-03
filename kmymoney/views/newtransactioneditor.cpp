@@ -835,7 +835,7 @@ MyMoneyMoney NewTransactionEditor::Private::removeVatSplit()
     }
 
     // remove the tax split
-    splitModel.removeRow(netSplitIdx.row());
+    splitModel.removeRow(taxSplitIdx.row());
 
     return amount;
 }
@@ -859,7 +859,7 @@ void NewTransactionEditor::Private::updateVAT(TaxValueChange amountChanged)
         bool* m_lockVariable;
     } cleanupHelper(&inUpdateVat);
 
-    const auto categoryId = ui->categoryCombo->getSelected();
+    auto categoryId = ui->categoryCombo->getSelected();
 
     auto taxCategoryId = [&]() {
         if (categoryId.isEmpty()) {
@@ -891,6 +891,15 @@ void NewTransactionEditor::Private::updateVAT(TaxValueChange amountChanged)
         newAmount = removeVatSplit();
         if (splitModel.rowCount() == 2) { // not removed?
             return;
+        }
+
+        // categoryId can be empty in case we update the amount
+        // of an already existing split transaction and the VAT
+        // split has just been removed. In that case, the splitModel
+        // contains a single row from which we can extract the
+        // categoryId and continue.
+        if (categoryId.isEmpty()) {
+            categoryId = splitModel.index(0, 0).data(eMyMoney::Model::SplitAccountIdRole).toString();
         }
 
         // now we have a single split with a category and check if the
