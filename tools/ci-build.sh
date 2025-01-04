@@ -101,7 +101,7 @@ fi
 cd ci-build-${ci_variant}-${ci_host}
 
 if test "$ci_build" = "yes"; then
-    cmake_options="-DCMAKE_BUILD_TYPE=RelWithDebInfo -DSQLCIPHER_LIBRARIES=/usr/lib64/libsqlcipher.so $ci_cmake_options"
+    cmake_options="-DCMAKE_BUILD_TYPE=RelWithDebInfo $ci_cmake_options"
     # kmymoney specific command line
     case $ci_variant in
         (kf6*)

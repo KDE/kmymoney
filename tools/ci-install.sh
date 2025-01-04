@@ -193,6 +193,7 @@ case "$ci_distro" in
                     gmp-devel
                     libical-devel
                     python3-devel
+                    sqlcipher-devel
                 )
             ;;
         esac
@@ -215,6 +216,7 @@ case "$ci_distro" in
                     "cmake(QGpgmeQt6)"
                     "cmake(PlasmaActivities)"
                     "kf6-extra-cmake-modules"
+                    "qt6-sql-private-devel"
                     "qt6qmlimport(org.kde.newstuff)"
                 )
                 ;;
