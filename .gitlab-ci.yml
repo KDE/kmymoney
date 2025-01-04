@@ -54,8 +54,6 @@ distro_kf5_leap:
   #when: manual
   image: rhabacker/suse_leap_kf5_qt515
   variables:
-    ci_distro: "opensuse-leap-15.6"
-    ci_in_docker: "yes"
     ci_parallel: "8"
     ci_sudo: "yes"
     ci_variant: "kf5"
@@ -69,7 +67,6 @@ distro_kf6_tumbleweed:
   #when: manual
   image: rhabacker/suse_tumbleweed_kf6_qt68
   variables:
-    ci_in_docker: "yes"
     ci_parallel: "8"
     ci_sudo: "yes"
     ci_variant: "kf6"
