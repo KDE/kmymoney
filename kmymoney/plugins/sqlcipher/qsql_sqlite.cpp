@@ -77,9 +77,9 @@ static QString _q_escapeIdentifier(const QString &identifier)
 }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-using KMMMetaType = QMetaType::Type;
+using KMMMetaType = QMetaType;
 
-static QMetaType::Type qGetColumnType(int stp)
+static QMetaType qGetColumnType(int stp)
 {
     QMetaType::Type fieldType;
 
@@ -103,28 +103,32 @@ static QMetaType::Type qGetColumnType(int stp)
         break;
     }
 
-    return fieldType;
+    return QMetaType(fieldType);
 }
 
-static QMetaType::Type qGetColumnType(const QString& tpName)
+static QMetaType qGetColumnType(const QString& tpName)
 {
     const QString typeName = tpName.toLower();
+    QMetaType::Type fieldType;
 
     if (typeName == QLatin1String("integer") || typeName == QLatin1String("int"))
-        return QMetaType::Int;
-    if (typeName == QLatin1String("double") || typeName == QLatin1String("float") || typeName == QLatin1String("real")
-        || typeName.startsWith(QLatin1String("numeric")))
-        return QMetaType::Double;
-    if (typeName == QLatin1String("blob"))
-        return QMetaType::QByteArray;
-    if (typeName == QLatin1String("boolean") || typeName == QLatin1String("bool"))
-        return QMetaType::Bool;
-    return QMetaType::QString;
+        fieldType = QMetaType::Int;
+    else if (typeName == QLatin1String("double") || typeName == QLatin1String("float") || typeName == QLatin1String("real")
+             || typeName.startsWith(QLatin1String("numeric")))
+        fieldType = QMetaType::Double;
+    else if (typeName == QLatin1String("blob"))
+        fieldType = QMetaType::QByteArray;
+    else if (typeName == QLatin1String("boolean") || typeName == QLatin1String("bool"))
+        fieldType = QMetaType::Bool;
+    else
+        fieldType = QMetaType::QString;
+
+    return QMetaType(fieldType);
 }
 
 QMetaType::Type qVariantTypeToMetaType(const QVariant& v)
 {
-    return v.metaType();
+    return static_cast<QMetaType::Type>(v.metaType().id());
 }
 #else
 using KMMMetaType = QVariant::Type;
