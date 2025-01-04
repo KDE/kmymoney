@@ -114,8 +114,9 @@ case "$ci_distro" in
 
         # setup packages
         packages=(
-            cmake
             AppStream
+            ccache
+            cmake
         )
         source_packages=()
 
