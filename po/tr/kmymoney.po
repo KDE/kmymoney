@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-03 01:53+0000\n"
+"POT-Creation-Date: 2025-01-04 01:52+0000\n"
 "PO-Revision-Date: 2024-12-30 20:19+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -21043,7 +21043,7 @@ msgid "Select autofill transaction"
 msgstr "Kendiliğinden Doldurulacak İşlem Seç"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1072
+#: kmymoney/views/newtransactioneditor.cpp:1089
 #: kmymoney/views/newtransactioneditor.ui:305
 #: kmymoney/views/newtransactionform.cpp:98
 #: kmymoney/views/newtransactionform.ui:179
