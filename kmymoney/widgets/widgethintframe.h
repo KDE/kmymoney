@@ -81,6 +81,15 @@ public:
     QWidget* editWidget() const;
 
     /**
+     * Set the @a tooltip that should be shown on editWidget when frame is visible.
+     * A possible tooltip on the editWidget will be kept and re-assigned once
+     * the frame is removed or hidden.
+     *
+     * @sa hide()
+     */
+    void setToolTip(const QString& tooltip);
+
+    /**
      * Shows the info frame around @a editWidget and in case @a tooltip
      * is not null (@sa QString::isNull()) the respective message will
      * be loaded into the @a editWidget's tooltip. In case @a tooltip is null
@@ -92,9 +101,17 @@ public:
      * Hides the info frame around @a editWidget and in case @a tooltip
      * is not null (@sa QString::isNull()) the respective message will
      * be loaded into the @a editWidget's tooltip. In case @a tooltip is null
-     * (the default) the @a editWidget's tooltip will not be changed.
+     * (the default) the tooltip set using setToolTip() will be shown.
+     *
+     * @sa setToolTip()
      */
     static void hide(QWidget* editWidget, const QString& tooltip = QString());
+
+    /**
+     * Returns the pointer to the WidgetHintFrame around the
+     * @a editWidget or @c nullptr if none is present.
+     */
+    static WidgetHintFrame* frameForWidget(QWidget* editWidget);
 
 protected:
     bool eventFilter(QObject* o, QEvent* e) final override;
