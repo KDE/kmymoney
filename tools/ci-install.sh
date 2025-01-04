@@ -233,6 +233,7 @@ case "$ci_distro" in
                     gcc-c++
                     extra-cmake-modules
                     kinit
+                    libQt5Sql-private-headers-devel
                 )
                 ;;
             (kf5*-mingw*)
