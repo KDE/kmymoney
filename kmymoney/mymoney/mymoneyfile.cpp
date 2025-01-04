@@ -2364,7 +2364,6 @@ QStringList MyMoneyFile::consistencyCheck()
     QList<MyMoneyAccount>::Iterator it_a;
     QList<MyMoneySchedule>::Iterator it_sch;
     QList<MyMoneyPayee>::Iterator it_p;
-    QList<MyMoneyTransaction>::Iterator it_t;
     QList<MyMoneyReport>::Iterator it_r;
     QStringList accountRebuild;
 
