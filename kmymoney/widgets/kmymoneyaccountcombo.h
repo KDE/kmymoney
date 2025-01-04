@@ -64,7 +64,7 @@ public:
      */
     void clearSelection();
 
-    void setModel(QAbstractItemModel* model) QT6_ONLY(override);
+    void setModel(QAbstractItemModel* model) KMM_QT6_ONLY(override);
 
     /**
      * Overridden to get specific behavior
