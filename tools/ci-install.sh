@@ -6,7 +6,7 @@
 # SPDX-License-Identifier: MIT
 
 # add timestamps
-export PS4="["$(date "+%T.%3N")"] $PS4"
+export PS4='[$(date "+%T.%3N")]'" $PS4"
 
 set -euo pipefail
 set -x
