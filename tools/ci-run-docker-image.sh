@@ -2,22 +2,25 @@
 #
 # @author Ralf Habacker <ralf.habacker@freenet.de>
 #
-: "${image:=opensuse/leap:15.6}"
 
-: "${ci_distro:=opensuse-leap}"
+# the docker image to use
+: "${ci_image:=opensuse/leap:15.6}"
+
+# the distribution to use
+: "${ci_distro:=}"
 
 # enter source dir
 # cd ~/src/kmymoney
 
 case "$ci_distro" in
     (opensuse-leap|opensuse-leap-15.6)
-        image=opensuse/leap:15.6
+        ci_image=opensuse/leap:15.6
         ;;
     (opensuse-tumbleweed)
-        image=opensuse/tumbleweed
+        ci_image=opensuse/tumbleweed
         ;;
     (ubuntu)
-        image=ubuntu:20.10
+        ci_image=ubuntu:20.10
         ;;
 esac
 
@@ -38,10 +41,10 @@ if [ "$1" == "--use-host-display" ]; then
     shopts+=" export DISPLAY=$DISPLAY;"
 fi
 
-sudo docker pull $image
+sudo docker pull $ci_image
 sudo docker run \
     -v $PWD:/mnt \
     $options \
-    -it $image \
+    -it $ci_image \
     /bin/bash -c "cd /mnt; $shopts tools/ci-install.sh; tools/ci-build.sh; bash"
 
