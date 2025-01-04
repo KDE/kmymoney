@@ -22,6 +22,9 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="toolTip">
+      <string comment="@info:tooltip">Price information for this transaction</string>
+     </property>
      <property name="text">
       <string/>
      </property>
@@ -66,6 +69,9 @@
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
       <widget class="KMyMoneyDateEdit" name="dateEdit">
+       <property name="toolTip">
+        <string comment="@info:tooltip">The posting date of the transaction.</string>
+       </property>
        <property name="kmm_taborder" stdset="0">
         <bool>true</bool>
        </property>
@@ -116,6 +122,9 @@
    </item>
    <item row="5" column="1">
     <widget class="KMyMoneyAccountCombo" name="feesCombo">
+     <property name="toolTip">
+      <string comment="@info:tooltip">Category for fees</string>
+     </property>
      <property name="editable">
       <bool>true</bool>
      </property>
@@ -167,6 +176,9 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="toolTip">
+      <string comment="@info:tooltip">Amount of interest</string>
+     </property>
      <property name="text">
       <string/>
      </property>
@@ -194,6 +206,9 @@
    </item>
    <item row="4" column="1">
     <widget class="KMyMoneyAccountCombo" name="assetAccountCombo">
+     <property name="toolTip">
+      <string comment="@info:tooltip">Asset or brokerage account</string>
+     </property>
      <property name="editable">
       <bool>true</bool>
      </property>
@@ -248,6 +263,9 @@
    </item>
    <item row="3" column="1">
     <widget class="QComboBox" name="securityAccountCombo">
+     <property name="toolTip">
+      <string comment="@info:tooltip">Security for this transaction</string>
+     </property>
      <property name="editable">
       <bool>true</bool>
      </property>
@@ -264,6 +282,9 @@
    </item>
    <item row="6" column="1">
     <widget class="KMyMoneyAccountCombo" name="interestCombo">
+     <property name="toolTip">
+      <string comment="@info:tooltip">Category for interest</string>
+     </property>
      <property name="editable">
       <bool>true</bool>
      </property>
@@ -336,6 +357,9 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="toolTip">
+      <string comment="@info:tooltip">Amount of fees</string>
+     </property>
      <property name="text">
       <string/>
      </property>
@@ -398,6 +422,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>KDateComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kdatecombobox.h</header>
+  </customwidget>
   <customwidget>
    <class>KMessageWidget</class>
    <extends>QFrame</extends>

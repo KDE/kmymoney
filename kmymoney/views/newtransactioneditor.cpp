@@ -211,8 +211,8 @@ void NewTransactionEditor::Private::updateWidgetState()
 
 bool NewTransactionEditor::Private::checkForValidAmount()
 {
-    WidgetHintFrame::hide(ui->creditDebitEdit, i18nc("@info:tooltip", "Enter the amount of the transaction."));
-    WidgetHintFrame::hide(ui->categoryCombo, i18nc("@info:tooltip", "Enter the category or counter account of the transaction."));
+    WidgetHintFrame::hide(ui->creditDebitEdit);
+    WidgetHintFrame::hide(ui->categoryCombo);
     const auto difference = (q->transactionAmount() - (-splitsSum())).abs();
     if (!difference.isZero()) {
         if (splitModel.rowCount() == 0) {
@@ -276,7 +276,7 @@ bool NewTransactionEditor::Private::isDatePostOpeningDate(const QDate& date, con
  */
 bool NewTransactionEditor::Private::postdateChanged(const QDate& date)
 {
-    WidgetHintFrame::hide(ui->dateEdit, i18n("The posting date of the transaction."));
+    WidgetHintFrame::hide(ui->dateEdit);
 
     if (!date.isValid()) {
         WidgetHintFrame::show(ui->dateEdit, i18n("The posting date is invalid."));
@@ -314,7 +314,7 @@ bool NewTransactionEditor::Private::postdateChanged(const QDate& date)
 bool NewTransactionEditor::Private::costCenterChanged(int costCenterIndex)
 {
     bool rc = true;
-    WidgetHintFrame::hide(ui->costCenterCombo, i18n("The cost center this transaction should be assigned to."));
+    WidgetHintFrame::hide(ui->costCenterCombo);
     if (costCenterIndex != -1) {
         if (costCenterRequired && ui->costCenterCombo->currentText().isEmpty()) {
 #ifndef ENABLE_COSTCENTER
@@ -438,7 +438,7 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
 bool NewTransactionEditor::Private::numberChanged(const QString& newNumber)
 {
     bool rc = true; // number did change
-    WidgetHintFrame::hide(ui->numberEdit, i18n("The check number used for this transaction."));
+    WidgetHintFrame::hide(ui->numberEdit);
     if (!newNumber.isEmpty()) {
         auto model = MyMoneyFile::instance()->journalModel();
         const QModelIndexList list = model->match(model->index(0, 0), eMyMoney::Model::SplitNumberRole,

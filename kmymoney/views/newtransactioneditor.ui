@@ -20,6 +20,9 @@
    </item>
    <item row="3" column="4">
     <widget class="QLineEdit" name="numberEdit">
+     <property name="toolTip">
+      <string comment="@info:tooltip">The check number used for this transaction.</string>
+     </property>
      <property name="kmm_taborder" stdset="0">
       <bool>true</bool>
      </property>
@@ -64,6 +67,9 @@
          <width>220</width>
          <height>0</height>
         </size>
+       </property>
+       <property name="toolTip">
+        <string comment="@info:tooltip">Enter the amount of the transaction.</string>
        </property>
        <property name="kmm_taborder" stdset="0">
         <bool>true</bool>
@@ -184,6 +190,9 @@
    </item>
    <item row="4" column="4">
     <widget class="QComboBox" name="costCenterCombo">
+     <property name="toolTip">
+      <string comment="@info:tooltip">The cost center this transaction should be assigned to.</string>
+     </property>
      <property name="editable">
       <bool>true</bool>
      </property>
@@ -243,6 +252,9 @@
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
       <widget class="KMyMoneyDateEdit" name="dateEdit">
+       <property name="toolTip">
+        <string comment="@info:tooltip">The posting date of the transaction.</string>
+       </property>
        <property name="kmm_taborder" stdset="0">
         <bool>true</bool>
        </property>
@@ -265,6 +277,9 @@
    </item>
    <item row="4" column="1" colspan="2">
     <widget class="KMyMoneyAccountCombo" name="categoryCombo">
+     <property name="toolTip">
+      <string comment="@info:tooltip">Enter the category or counter account of the transaction.</string>
+     </property>
      <property name="editable">
       <bool>true</bool>
      </property>
@@ -315,15 +330,15 @@
    <header>kdatecombobox.h</header>
   </customwidget>
   <customwidget>
+   <class>KMyMoneyAccountCombo</class>
+   <extends>QComboBox</extends>
+   <header>kmymoneyaccountcombo.h</header>
+  </customwidget>
+  <customwidget>
    <class>KMyMoneyDateEdit</class>
    <extends>KDateComboBox</extends>
    <header>kmymoneydateedit.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>KMyMoneyAccountCombo</class>
-   <extends>QComboBox</extends>
-   <header>kmymoneyaccountcombo.h</header>
   </customwidget>
   <customwidget>
    <class>KTagContainer</class>

@@ -181,7 +181,7 @@ bool MultiTransactionEditor::Private::isDatePostOpeningDate(const QDate& date, c
 
 bool MultiTransactionEditor::Private::postdateChanged(const QDate& date)
 {
-    WidgetHintFrame::hide(ui->dateEdit, i18n("The posting date of the transaction."));
+    WidgetHintFrame::hide(ui->dateEdit);
 
     // if the date field is empty, we have a valid date
     if (ui->dateEdit->isNull()) {
@@ -222,7 +222,7 @@ bool MultiTransactionEditor::Private::postdateChanged(const QDate& date)
 bool MultiTransactionEditor::Private::costCenterChanged(int costCenterIndex)
 {
     bool rc = true;
-    WidgetHintFrame::hide(ui->costCenterCombo, i18n("The cost center this transaction should be assigned to."));
+    WidgetHintFrame::hide(ui->costCenterCombo);
     if (costCenterIndex != -1) {
         if (costCenterRequired && ui->costCenterCombo->currentText().isEmpty()) {
             WidgetHintFrame::show(ui->costCenterCombo, i18n("A cost center assignment is required for a transaction in the selected category."));
@@ -244,7 +244,7 @@ bool MultiTransactionEditor::Private::isIncomeExpense(const QString& categoryId)
 
 bool MultiTransactionEditor::Private::categoryChanged(const QString& accountId)
 {
-    WidgetHintFrame::hide(ui->categoryCombo, i18n("Select category or account."));
+    WidgetHintFrame::hide(ui->categoryCombo);
     bool rc = true;
     if (!accountId.isEmpty()) {
         try {

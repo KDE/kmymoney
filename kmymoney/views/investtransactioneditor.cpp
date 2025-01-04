@@ -259,7 +259,7 @@ bool InvestTransactionEditor::Private::isDatePostOpeningDate(const QDate& date, 
 bool InvestTransactionEditor::Private::postdateChanged(const QDate& date)
 {
     bool rc = true;
-    WidgetHintFrame::hide(ui->dateEdit, i18n("The posting date of the transaction."));
+    WidgetHintFrame::hide(ui->dateEdit);
 
     QStringList accountIds;
 
@@ -569,20 +569,20 @@ void InvestTransactionEditor::Private::protectWidgetsForClosedAccount()
 
 void InvestTransactionEditor::Private::updateWidgetState()
 {
-    WidgetHintFrame::hide(ui->feesCombo, i18nc("@info:tooltip", "Category for fees"));
-    WidgetHintFrame::hide(ui->feesAmountEdit, i18nc("@info:tooltip", "Amount of fees"));
-    WidgetHintFrame::hide(ui->interestCombo, i18nc("@info:tooltip", "Category for interest"));
-    WidgetHintFrame::hide(ui->interestAmountEdit, i18nc("@info:tooltip", "Amount of interest"));
-    WidgetHintFrame::hide(ui->assetAccountCombo, i18nc("@info:tooltip", "Asset or brokerage account"));
-    WidgetHintFrame::hide(ui->priceAmountEdit, i18nc("@info:tooltip", "Price information for this transaction"));
+    WidgetHintFrame::hide(ui->feesCombo);
+    WidgetHintFrame::hide(ui->feesAmountEdit);
+    WidgetHintFrame::hide(ui->interestCombo);
+    WidgetHintFrame::hide(ui->interestAmountEdit);
+    WidgetHintFrame::hide(ui->assetAccountCombo);
+    WidgetHintFrame::hide(ui->priceAmountEdit);
 
     if (ui->securityAccountCombo->isEnabled()) {
-        WidgetHintFrame::hide(ui->securityAccountCombo, i18nc("@info:tooltip", "Security for this transaction"));
+        WidgetHintFrame::hide(ui->securityAccountCombo);
         ui->activityCombo->setToolTip(i18nc("@info:tooltip", "Select the activity for this transaction."));
     } else {
         WidgetHintFrame::hide(ui->securityAccountCombo,
                               i18nc("@info:tooltip", "The security for this transaction cannot be modified because the security account is closed."));
-        ui->activityCombo->setToolTip(i18nc("@info:tooltip", "This activity cannot be modified because the security account is closed."));
+        // ui->activityCombo->setToolTip(i18nc("@info:tooltip", "This activity cannot be modified because the security account is closed."));
     }
 
     // all the other logic needs a valid activity
@@ -599,7 +599,7 @@ void InvestTransactionEditor::Private::updateWidgetState()
             WidgetHintFrame::hide(widget, i18nc("@info:tooltip", "The number of shares cannot be modified because the security account is closed."));
         }
         if (widget->isVisible()) {
-            if (widget->value().isZero()) {
+            if (widget->value().isZero() || widget->text().isEmpty()) {
                 WidgetHintFrame::show(widget, i18nc("@info:tooltip", "Enter number of shares for this transaction"));
             }
         }
@@ -611,7 +611,7 @@ void InvestTransactionEditor::Private::updateWidgetState()
             WidgetHintFrame::hide(widget, i18nc("@info:tooltip", "The split ratio cannot be modified because the security account is closed."));
         }
         if (widget->isVisible()) {
-            if (widget->value().isZero()) {
+            if (widget->value().isZero() || widget->text().isEmpty()) {
                 WidgetHintFrame::show(widget, i18nc("@info:tooltip", "Enter the split ratio for this transaction"));
             }
         }
@@ -623,7 +623,7 @@ void InvestTransactionEditor::Private::updateWidgetState()
         break;
     case Invest::Activity::Optional:
     case Invest::Activity::Mandatory:
-        if (ui->priceAmountEdit->value().isZero()) {
+        if (ui->priceAmountEdit->value().isZero() || ui->priceAmountEdit->text().isEmpty()) {
             WidgetHintFrame::show(ui->priceAmountEdit, i18nc("@info:tooltip", "Enter price information for this transaction"));
         }
         break;
@@ -959,6 +959,12 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     d->ui->interestCombo->installEventFilter(this);
     d->ui->assetAccountCombo->installEventFilter(this);
     d->ui->memoEdit->installEventFilter(this);
+
+    // make sure that an empty widget causes the hint frame to show
+    d->ui->sharesAmountEdit->installEventFilter(this);
+    d->ui->priceAmountEdit->installEventFilter(this);
+    d->ui->feesAmountEdit->installEventFilter(this);
+    d->ui->interestAmountEdit->installEventFilter(this);
 
     d->ui->totalAmountEdit->setCalculatorButtonVisible(false);
 
@@ -1374,6 +1380,7 @@ QStringList InvestTransactionEditor::saveTransaction(const QStringList& selected
 bool InvestTransactionEditor::eventFilter(QObject* o, QEvent* e)
 {
     auto cb = qobject_cast<QComboBox*>(o);
+    auto ae = qobject_cast<AmountEdit*>(o);
     if (cb) {
         if (e->type() == QEvent::KeyPress) {
             // the activity combo needs special handling, because it does
@@ -1399,8 +1406,18 @@ bool InvestTransactionEditor::eventFilter(QObject* o, QEvent* e)
                     createCategory(d->ui->assetAccountCombo, eMyMoney::Account::Type::Asset);
                 }
             }
+            updateWidgets();
         }
     }
+
+    if (ae && (e->type() == QEvent::FocusOut)) {
+        // in case an AmountEdit is cleared, the value must also be zero
+        if (!ae->shares().isZero() && ae->text().isEmpty()) {
+            ae->clear();
+        }
+        updateWidgets();
+    }
+
     return TransactionEditorBase::eventFilter(o, e);
 }
 
