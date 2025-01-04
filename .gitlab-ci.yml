@@ -54,7 +54,7 @@ distro_kf5_leap:
   #when: manual
   image: rhabacker/suse_leap_kf5_qt515
   variables:
-    ci_parallel: "8"
+    ci_parallel: "16"
     ci_sudo: "yes"
     ci_variant: "kf5"
   before_script:
@@ -67,7 +67,7 @@ distro_kf6_tumbleweed:
   #when: manual
   image: rhabacker/suse_tumbleweed_kf6_qt68
   variables:
-    ci_parallel: "8"
+    ci_parallel: "16"
     ci_sudo: "yes"
     ci_variant: "kf6"
   before_script:
