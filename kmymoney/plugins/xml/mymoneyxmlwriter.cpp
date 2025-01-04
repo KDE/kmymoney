@@ -377,7 +377,6 @@ void MyMoneyXmlWriterPrivate::writeAccounts()
     m_writer->writeStartElement(tagName(Tag::Accounts));
 
     m_accountList = m_file->accountsModel()->itemList();
-    QList<MyMoneyAccount>::const_iterator it;
 
     writeAccount(m_file->accountsModel()->itemByIndex(m_file->accountsModel()->assetIndex()));
     writeAccount(m_file->accountsModel()->itemByIndex(m_file->accountsModel()->liabilityIndex()));
