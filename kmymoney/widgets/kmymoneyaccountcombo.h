@@ -145,7 +145,7 @@ Q_SIGNALS:
     void accountComboDisabled(bool disabled);
 
 private:
-    Q_DECLARE_PRIVATE(KMyMoneyAccountComboSplitHelper);
+    Q_DECLARE_PRIVATE(KMyMoneyAccountComboSplitHelper)
     QScopedPointer<KMyMoneyAccountComboSplitHelperPrivate>  d_ptr;
 };
 

@@ -44,7 +44,7 @@ Q_SIGNALS:
     void closed();
 
 private:
-    Q_DECLARE_PRIVATE(KMMSearchWidget);
+    Q_DECLARE_PRIVATE(KMMSearchWidget)
     KMMSearchWidgetPrivate* d_ptr;
 };
 #endif // KMMSEARCHWIDGET_H

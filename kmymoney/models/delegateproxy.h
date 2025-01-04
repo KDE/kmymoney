@@ -80,7 +80,7 @@ public:
 
 private:
     DelegateProxyPrivate * const d_ptr;
-    Q_DECLARE_PRIVATE(DelegateProxy);
+    Q_DECLARE_PRIVATE(DelegateProxy)
 };
 
 #endif // DELEGATEPROXY_H

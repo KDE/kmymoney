@@ -23,7 +23,7 @@ class KSearchTransactionDlgPrivate;
 class KSearchTransactionDlg : public QDialog
 {
     Q_OBJECT
-    Q_DECLARE_PRIVATE(KSearchTransactionDlg);
+    Q_DECLARE_PRIVATE(KSearchTransactionDlg)
     Q_DISABLE_COPY(KSearchTransactionDlg)
 
 public:

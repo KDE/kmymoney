@@ -30,7 +30,7 @@ protected:
     bool lessThan(const QModelIndex& left, const QModelIndex& right) const override;
 
 private:
-    Q_DECLARE_PRIVATE_D(LedgerFilterBase::d_ptr, LedgerJournalIdFilter);
+    Q_DECLARE_PRIVATE_D(LedgerFilterBase::d_ptr, LedgerJournalIdFilter)
 };
 
 #endif

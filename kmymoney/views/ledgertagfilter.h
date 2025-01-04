@@ -46,7 +46,7 @@ protected:
     bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
 
 private:
-    Q_DECLARE_PRIVATE_D(LedgerFilterBase::d_ptr, LedgerTagFilter);
+    Q_DECLARE_PRIVATE_D(LedgerFilterBase::d_ptr, LedgerTagFilter)
 };
 
 #endif // LEDGERTAGFILTER_H

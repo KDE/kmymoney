@@ -55,7 +55,7 @@ private:
 
 private:
     OnlineBalanceProxyModelPrivate* d_ptr;
-    Q_DECLARE_PRIVATE(OnlineBalanceProxyModel);
+    Q_DECLARE_PRIVATE(OnlineBalanceProxyModel)
 };
 
 #endif // ONLINEBALANCEPROXYMODEL_H

@@ -35,7 +35,7 @@ public:
 
 private:
     OccurrencesModelPrivate* d_ptr;
-    Q_DECLARE_PRIVATE(OccurrencesModel);
+    Q_DECLARE_PRIVATE(OccurrencesModel)
 };
 
 class PaymentMethodModelPrivate;
@@ -52,7 +52,7 @@ public:
 
 private:
     PaymentMethodModelPrivate* d_ptr;
-    Q_DECLARE_PRIVATE(PaymentMethodModel);
+    Q_DECLARE_PRIVATE(PaymentMethodModel)
 };
 
 #endif // COMBOBOXMODELS_H

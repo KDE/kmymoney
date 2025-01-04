@@ -43,7 +43,7 @@ private:
 
 private:
     EquitiesModelPrivate* d_ptr;
-    Q_DECLARE_PRIVATE(EquitiesModel);
+    Q_DECLARE_PRIVATE(EquitiesModel)
 };
 
 #endif // EQUITIESMODEL_H

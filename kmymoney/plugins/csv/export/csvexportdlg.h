@@ -38,7 +38,7 @@ class CsvExportDlgPrivate;
 class CsvExportDlg : public QDialog
 {
     Q_OBJECT
-    Q_DECLARE_PRIVATE(CsvExportDlg);
+    Q_DECLARE_PRIVATE(CsvExportDlg)
 
 public:
     explicit CsvExportDlg(QWidget* parent = nullptr);

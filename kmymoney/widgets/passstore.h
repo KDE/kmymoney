@@ -56,7 +56,7 @@ class PassStorePrivate;
  */
 class KMM_BASE_WIDGETS_EXPORT PassStore : public QObject
 {
-    Q_DECLARE_PRIVATE(PassStore);
+    Q_DECLARE_PRIVATE(PassStore)
     Q_OBJECT
 public:
     explicit PassStore(QLineEdit* parent, const QString& applicationPrefix, const QString& id = QString());
