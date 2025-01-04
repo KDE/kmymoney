@@ -63,7 +63,7 @@ public:
      */
     void clearSelection();
 
-    void setModel(QSortFilterProxyModel *model);
+    void setModel(QAbstractItemModel* model);
 
     /**
      * Overridden to get specific behavior

@@ -361,7 +361,7 @@ const QString& KMyMoneyAccountCombo::getSelected() const
     return d->m_lastSelectedAccount;
 }
 
-void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
+void KMyMoneyAccountCombo::setModel(QAbstractItemModel* model)
 {
     // CAUTION! Assumption is being made that AccountName column number is always 0
     if (AccountsModel::Column::AccountName != 0) {
@@ -374,9 +374,15 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
     // call base class implementation
     KComboBox::setModel(model);
 
-    // setup filtering criteria
-    model->setFilterKeyColumn(AccountsModel::Column::AccountName);
-    model->setFilterRole(eMyMoney::Model::Roles::AccountFullHierarchyNameRole);
+    // setup filtering criteria, but only if called with a QSPF model
+    auto qsfp_model = qobject_cast<QSortFilterProxyModel*>(model);
+    if (qsfp_model) {
+        qsfp_model->setFilterKeyColumn(AccountsModel::Column::AccountName);
+        qsfp_model->setFilterRole(eMyMoney::Model::Roles::AccountFullHierarchyNameRole);
+    } else {
+        // warn that some functionality might not be working
+        qDebug() << "KMyMoneyAccountCombo::setModel not call with QSortFilterProxyModel";
+    }
 
     // create popup view, attach model and allow to select a single item
     d->m_popupView = new QTreeView(this);
