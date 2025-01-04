@@ -206,16 +206,14 @@ set( kmm_gpgfile_SRCS
 kgpgfile.cpp
 )
 add_library(kmm_gpgfile ${kmm_gpgfile_SRCS})
-
-target_link_libraries( kmm_gpgfile
-PUBLIC
-Qt::Core
-$<$<BOOL:${Gpgmepp_FOUND}>:Gpgmepp>
-$<$<BOOL:${QGpgme_FOUND}>:QGpgme>
-$<$<BOOL:${GpgmeppQt6_FOUND}>:GpgmeppQt6>
+target_link_libraries(kmm_gpgfile
+    PUBLIC
+        Qt::Core
+        ${GPG_LIBRARY}
 )
+
 set_target_properties(kmm_gpgfile PROPERTIES
-VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
+    VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
 )
 generate_export_header(kmm_gpgfile)
 

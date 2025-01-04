@@ -27,6 +27,16 @@
 #include <qglobal.h>
 #include <vector>
 
+// On Unix style systems we can use the file handle of
+// the file object to write out and read in the encrypted data
+// directly. On Windows this does not work and we encrypt and
+// decrypt the data through a local buffer in a separate step.
+#if defined(Q_OS_WIN32)
+#define IO_THROUGH_DATA_BUFFER 1
+#else
+#define IO_THROUGH_DATA_BUFFER 0
+#endif
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -38,18 +48,8 @@
 #include <gpgme++/engineinfo.h>
 #include <gpgme++/key.h>
 #include <gpgme++/keylistresult.h>
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#if IO_THROUGH_DATA_BUFFER == 1
 #include <qgpgme/dataprovider.h>
-#endif
-
-// On Unix style systems we can use the file handle of
-// the file object to write out and read in the encrypted data
-// directly. On Windows this does not work and we encrypt and
-// decrypt the data through a local buffer in a separate step.
-#if defined(Q_OS_WIN32)
-#define IO_THROUGH_DATA_BUFFER 1
-#else
-#define IO_THROUGH_DATA_BUFFER 0
 #endif
 
 // On newer versions of GpgME::Error asString is deprecated and
