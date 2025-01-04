@@ -29,10 +29,11 @@
 // Project Includes
 
 #include "amountedit.h"
-#include "kmymoneysettings.h"
-#include "onlinetasks/interfaces/ui/ionlinejobedit.h"
-#include "kmymoneytextedit.h"
 #include "kmymoneypayeecombo.h"
+#include "kmymoneysettings.h"
+#include "kmymoneytextedit.h"
+#include "onlinetasks/interfaces/ui/ionlinejobedit.h"
+#include "widgethintframe.h"
 
 /**************************************************************************
  *                                                                        *
@@ -53,21 +54,25 @@ class KMandatoryFieldGroupPrivate
 public:
     KMandatoryFieldGroupPrivate()
         : m_okButton(nullptr)
+        , m_frameCollection(nullptr)
         , m_enabled(true)
         , m_externalMandatoryState(true)
     {
     }
 
-    QList<QWidget *>      m_widgets;
-    QPushButton*          m_okButton;
-    bool                  m_enabled;
-    bool                  m_externalMandatoryState;
+    QList<QWidget*> m_widgets;
+    QPushButton* m_okButton;
+    WidgetHintFrameCollection* m_frameCollection;
+    bool m_enabled;
+    bool m_externalMandatoryState;
 };
 
 KMandatoryFieldGroup::KMandatoryFieldGroup(QObject *parent) :
     QObject(parent),
     d_ptr(new KMandatoryFieldGroupPrivate)
 {
+    Q_D(KMandatoryFieldGroup);
+    d->m_frameCollection = new WidgetHintFrameCollection(this);
 }
 
 KMandatoryFieldGroup::~KMandatoryFieldGroup()
@@ -126,7 +131,7 @@ void KMandatoryFieldGroup::add(QWidget *widget)
                     &IonlineJobEdit::validityChanged,
                     this, &KMandatoryFieldGroup::changed);
 
-            // Do not set palette for IonlineJobEdits as they contain subwidgets
+            // Do not use WidgetHintFrame on IonlineJobEdits as they contain subwidgets
             d->m_widgets.append(widget);
             changed();
             return;
@@ -137,9 +142,7 @@ void KMandatoryFieldGroup::add(QWidget *widget)
             return;
         }
 
-        QPalette palette = widget->palette();
-        palette.setColor(QPalette::Base, KMyMoneySettings::schemeColor(SchemeColor::FieldRequired));
-        widget->setPalette(palette);
+        d->m_frameCollection->addFrame(new WidgetHintFrame(widget));
         d->m_widgets.append(widget);
         changed();
     }
@@ -149,14 +152,20 @@ void KMandatoryFieldGroup::removeAll()
 {
     Q_D(KMandatoryFieldGroup);
     while(!d->m_widgets.isEmpty()) {
-        remove(d->m_widgets.at(0));
+        const auto widget = d->m_widgets.at(0);
+        const auto frame = WidgetHintFrame::frameForWidget(widget);
+        delete frame;
+        remove(widget);
     }
+    changed();
 }
 
 void KMandatoryFieldGroup::remove(QWidget *widget)
 {
     Q_D(KMandatoryFieldGroup);
-    widget->setPalette(QApplication::palette());
+
+    const auto frame = WidgetHintFrame::frameForWidget(widget);
+    delete frame;
     d->m_widgets.removeOne(widget);
     changed();
 }
@@ -183,82 +192,68 @@ void KMandatoryFieldGroup::changed()
 {
     Q_D(KMandatoryFieldGroup);
     bool enable = d->m_externalMandatoryState;
-    QList<QWidget*>::const_iterator i;
-    for (i = d->m_widgets.cbegin(); i != d->m_widgets.cend(); ++i) {
-        QWidget *widget = *i;
+
+    for (auto widget : qAsConst(d->m_widgets)) {
+        bool widgetEmpty = false;
+
+        auto showFrame = [](QWidget* editWidget, bool visible) -> void {
+            (visible) ? WidgetHintFrame::show(editWidget) : WidgetHintFrame::hide(editWidget);
+        };
+
+        auto setWidgetEmpty = [&]() -> void {
+            widgetEmpty = true;
+            enable = false;
+        };
+
         // disabled widgets don't count
         if (!(widget->isEnabled())) {
             continue;
         }
+
         if (qobject_cast<KMyMoneyPayeeCombo*>(widget)) {
             if ((dynamic_cast<KMyMoneyPayeeCombo*>(widget))->lineEdit()->text().isEmpty()) {
-                enable = false;
-                break;
-            } else
-                continue;
-        }
-        if (qobject_cast<QCheckBox*>(widget)) {
+                setWidgetEmpty();
+            }
+
+        } else if (qobject_cast<QCheckBox*>(widget)) {
             if ((qobject_cast<QCheckBox*>(widget))->checkState() == Qt::PartiallyChecked) {
-                enable = false;
-                break;
-            } else
-                continue;
-        }
-        if (qobject_cast<KComboBox*>(widget)) {
+                setWidgetEmpty();
+            }
+        } else if (qobject_cast<KComboBox*>(widget)) {
             if ((qobject_cast<KComboBox*>(widget))->currentText().isEmpty()) {
-                enable = false;
-                break;
-            } else
-                continue;
-        }
-        if (qobject_cast<QLineEdit*>(widget)) {
+                setWidgetEmpty();
+            }
+        } else if (qobject_cast<QLineEdit*>(widget)) {
             if ((qobject_cast<QLineEdit*>(widget))->text().isEmpty()) {
-                enable = false;
-                break;
-            } else
-                continue;
-        }
-        if ((qobject_cast<QListWidget*>(widget))) {
+                setWidgetEmpty();
+            }
+        } else if ((qobject_cast<QListWidget*>(widget))) {
             if ((qobject_cast<QListWidget*>(widget))->selectedItems().count() == 0) {
-                enable = false;
-                break;
-            } else
-                continue;
-        }
-        if ((qobject_cast<KUrlRequester*>(widget))) {
+                setWidgetEmpty();
+            }
+        } else if ((qobject_cast<KUrlRequester*>(widget))) {
             if ((qobject_cast<KUrlRequester*>(widget))->text().isEmpty()) {
-                enable = false;
-                break;
-            } else
-                continue;
-        }
-        if ((qobject_cast<AmountEdit*>(widget))) {
+                setWidgetEmpty();
+            }
+        } else if ((qobject_cast<AmountEdit*>(widget))) {
             if (!(qobject_cast<AmountEdit*>(widget))->value().isZero()) {
-                enable = false;
-                break;
-            } else
-                continue;
-        }
-        if (qobject_cast<KMyMoneyTextEdit*>(widget)) {
+                setWidgetEmpty();
+            }
+        } else if (qobject_cast<KMyMoneyTextEdit*>(widget)) {
             if (!(qobject_cast<KMyMoneyTextEdit*>(widget))->isValid()) {
-                enable = false;
-                break;
-            } else {
-                continue;
+                setWidgetEmpty();
             }
-        }
-        if (qobject_cast<IonlineJobEdit*>(widget)) {
+        } else if (qobject_cast<IonlineJobEdit*>(widget)) {
             if (!(qobject_cast<IonlineJobEdit*>(widget))->isValid()) {
-                enable = false;
-                break;
-            } else {
-                continue;
+                setWidgetEmpty();
             }
         }
+        showFrame(widget, widgetEmpty);
     }
 
-    if (d->m_okButton)
+    if (d->m_okButton) {
         d->m_okButton->setEnabled(enable);
+    }
     d->m_enabled = enable;
 
     Q_EMIT stateChanged();
@@ -274,10 +269,14 @@ bool KMandatoryFieldGroup::isEnabled() const
 void KMandatoryFieldGroup::clear()
 {
     Q_D(KMandatoryFieldGroup);
-    QList<QWidget *>::Iterator i;
-    for (i = d->m_widgets.begin(); i != d->m_widgets.end(); ++i)
-        (*i)->setPalette(QApplication::palette());
+
+    for (auto widget : qAsConst(d->m_widgets)) {
+        const auto frame = WidgetHintFrame::frameForWidget(widget);
+        delete frame;
+    }
+
     d->m_widgets.clear();
+
     if (d->m_okButton) {
         d->m_okButton->setEnabled(true);
         d->m_okButton = nullptr;
