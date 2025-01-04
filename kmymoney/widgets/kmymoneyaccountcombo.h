@@ -7,6 +7,7 @@
 #ifndef KMYMONEYACCOUNTCOMBO_H
 #define KMYMONEYACCOUNTCOMBO_H
 
+#include "config-kmymoney.h"
 #include "kmm_base_widgets_export.h"
 
 // ----------------------------------------------------------------------------
@@ -63,7 +64,7 @@ public:
      */
     void clearSelection();
 
-    void setModel(QAbstractItemModel* model);
+    void setModel(QAbstractItemModel* model) QT6_ONLY(override);
 
     /**
      * Overridden to get specific behavior

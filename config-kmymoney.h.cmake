@@ -57,3 +57,11 @@
 #else
 #define QT6_IF(a, b) b
 #endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#define QT6_ONLY(a) a
+#define QT5_ONLY(a)
+#else
+#define QT5_ONLY(a) a
+#define QT6_ONLY(a)
+#endif
