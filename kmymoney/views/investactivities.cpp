@@ -194,11 +194,11 @@ bool Activity::haveCategoryAndAmount(const QString& categoryWidget, const QStrin
             break;
         case Optional:
             // both must be filled or empty to be OK
-            rc = cat->currentText().isEmpty() == amount->value().isZero();
+            rc = cat->currentText().isEmpty() == (amount->value().isZero() || amount->text().isEmpty());
             break;
         case Mandatory:
             // both must be filled to be OK
-            rc = !(cat->currentText().isEmpty() || amount->value().isZero());
+            rc = !(cat->currentText().isEmpty() || (amount->value().isZero() || amount->text().isEmpty()));
             break;
         }
     }
