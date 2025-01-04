@@ -29,7 +29,7 @@
 
 class OnlineBalanceProxyModelPrivate
 {
-    Q_DECLARE_PUBLIC(OnlineBalanceProxyModel);
+    Q_DECLARE_PUBLIC(OnlineBalanceProxyModel)
     OnlineBalanceProxyModel* q_ptr;
 
 public:

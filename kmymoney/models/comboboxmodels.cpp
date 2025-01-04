@@ -25,7 +25,7 @@ using namespace eMyMoney::Model;
 
 class OccurrencesModelPrivate
 {
-    Q_DECLARE_PUBLIC(OccurrencesModel);
+    Q_DECLARE_PUBLIC(OccurrencesModel)
     OccurrencesModel* q_ptr;
 
 public:
@@ -110,7 +110,7 @@ QModelIndex OccurrencesModel::indexByOccurrence(eMyMoney::Schedule::Occurrence o
 
 class PaymentMethodModelPrivate
 {
-    Q_DECLARE_PUBLIC(PaymentMethodModel);
+    Q_DECLARE_PUBLIC(PaymentMethodModel)
     PaymentMethodModel* q_ptr;
 
 public:

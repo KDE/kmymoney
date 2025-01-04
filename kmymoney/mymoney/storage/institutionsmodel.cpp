@@ -30,7 +30,7 @@
 
 struct InstitutionsModel::Private
 {
-    Q_DECLARE_PUBLIC(InstitutionsModel);
+    Q_DECLARE_PUBLIC(InstitutionsModel)
 
     Private(InstitutionsModel* qq, QObject* parent)
         : q_ptr(qq)

@@ -28,7 +28,7 @@
 
 class EquitiesModelPrivate
 {
-    Q_DECLARE_PUBLIC(EquitiesModel);
+    Q_DECLARE_PUBLIC(EquitiesModel)
     EquitiesModel* q_ptr;
 
 public:

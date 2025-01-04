@@ -82,7 +82,7 @@ using namespace eMyMoney;
 
 class KMyMoneyViewPrivate
 {
-    Q_DECLARE_PUBLIC(KMyMoneyView);
+    Q_DECLARE_PUBLIC(KMyMoneyView)
 
 public:
     KMyMoneyViewPrivate(KMyMoneyView* qq)
