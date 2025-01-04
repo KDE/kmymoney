@@ -7,7 +7,7 @@ if (BUILD_TESTING AND ENABLE_REPORTSVIEW)
     )
     target_include_directories(kmmreport-export
     PRIVATE
-        ../plugins/xml
+        ${CMAKE_SOURCE_DIR}/kmymoney/plugins/xml
     )
     target_link_libraries(kmmreport-export
     PRIVATE
