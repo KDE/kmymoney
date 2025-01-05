@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2024-12-11 16:08+0100\n"
+"PO-Revision-Date: 2025-01-01 01:53+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3494,7 +3494,7 @@ msgstr ""
 #: kmymoney/dialogs/knewbankdlg.ui:14
 #, kde-format
 msgid "New Institution Dialog"
-msgstr "Finestra di Nuovo istituto"
+msgstr "Finestra Nuovo istituto"
 
 #. i18n: ectx: property (title), widget (QGroupBox, GroupBox1)
 #: kmymoney/dialogs/knewbankdlg.ui:26
@@ -6039,7 +6039,7 @@ msgstr "Riapri conto"
 #: kmymoney/kmymoney.cpp:1420
 #, kde-format
 msgid "Transaction report"
-msgstr "Report della transazione"
+msgstr "Report delle transazioni"
 
 #: kmymoney/kmymoney.cpp:1421
 #, kde-format
@@ -13620,7 +13620,7 @@ msgstr "Posizione del filtro di esportazione"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:222
 #, kde-format
 msgid "Input filter file type"
-msgstr "Tipo di file per il filtro di importazione"
+msgstr "Tipo di file per il filtro d'ingresso"
 
 #. i18n: ectx: property (text), widget (KLineEdit, m_editInputFilterFileType)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:232
@@ -13632,7 +13632,7 @@ msgstr "*.qif"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:245
 #, kde-format
 msgid "Input filter location"
-msgstr "Posizione del filtro di importazione"
+msgstr "Posizione del filtro d'ingresso"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, m_editDateFormat)
 #. i18n: ectx: property (whatsThis), widget (QLabel, TextLabel3)
@@ -23785,7 +23785,7 @@ msgstr "Creazione strumento finanziario"
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.ui:17
 #, kde-format
 msgid "New Investment wizard"
-msgstr "Nuova procedura guidata d'investimento"
+msgstr "Procedura guidata nuovo investimento"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, KOnlineUpdateWizardPage)
 #: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:6
