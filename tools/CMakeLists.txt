@@ -5,10 +5,6 @@ if (BUILD_TESTING AND ENABLE_REPORTSVIEW)
     add_executable(kmmreport-export
     kmmreport-export.cpp
     )
-    target_include_directories(kmmreport-export
-    PRIVATE
-        ${CMAKE_SOURCE_DIR}/kmymoney/plugins/xml
-    )
     target_link_libraries(kmmreport-export
     PRIVATE
         kmm_mymoney
