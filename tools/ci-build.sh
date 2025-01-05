@@ -101,6 +101,7 @@ fi
 cd ci-build-${ci_variant}-${ci_host}
 
 if test "$ci_build" = "yes"; then
+    export QT_QPA_PLATFORM=offscreen
     cmake_options="-DCMAKE_BUILD_TYPE=RelWithDebInfo $ci_cmake_options"
     # kmymoney specific command line
     case $ci_variant in
@@ -141,7 +142,7 @@ fi
 kdeinit5
 
 # run tests
-[ "$ci_test" = no ] || ctest -VV -E reports-chart-test -j $ci_parallel || maybe_fail_tests
+[ "$ci_test" = no ] || ctest -VV -j $ci_parallel || maybe_fail_tests
 
 # install files
 cmake --build . -t install DESTDIR=$(pwd)/DESTDIR
