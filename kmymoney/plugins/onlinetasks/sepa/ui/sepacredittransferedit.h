@@ -27,7 +27,7 @@ class sepaCreditTransferEdit : public IonlineJobEdit
     Q_OBJECT
     Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly NOTIFY readOnlyChanged)
     Q_PROPERTY(onlineJob job READ getOnlineJob WRITE setOnlineJob)
-    Q_INTERFACES(IonlineJobEdit);
+    Q_INTERFACES(IonlineJobEdit)
 
 public:
     explicit sepaCreditTransferEdit(QWidget* parent = nullptr, QVariantList args = QVariantList());
