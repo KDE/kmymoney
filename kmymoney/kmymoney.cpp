@@ -721,7 +721,7 @@ public:
                     QStringList list;
                     (*it_r).accounts(list);
                     QStringList missing;
-                    QStringList::const_iterator it_a, it_b;
+                    QStringList::const_iterator it_a;
                     for (it_a = list.cbegin(); it_a != list.cend(); ++it_a) {
                         const auto acc = MyMoneyFile::instance()->account(*it_a);
                         if (acc.accountType() == eMyMoney::Account::Type::Investment) {
