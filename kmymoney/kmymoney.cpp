@@ -923,7 +923,6 @@ public:
         // scan the schedules to find interest accounts
         for (it_x = scheduleList.begin(); it_x != scheduleList.end(); ++it_x) {
             MyMoneyTransaction t = (*it_x).transaction();
-            QList<MyMoneySplit>::const_iterator it_s;
             QStringList accounts;
             bool hasDuplicateAccounts = false;
 
