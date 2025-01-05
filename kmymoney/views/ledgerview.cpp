@@ -486,7 +486,7 @@ public:
         journalDelegate->setProperty("transactionMatchedColor", KMyMoneySettings::schemeColor(SchemeColor::TransactionMatched));
         journalDelegate->setProperty("transactionMatchedText", KMyMoneySettings::schemeColor(SchemeColor::TransactionMatchedText));
 
-        journalDelegate->setProperty("erroneousText", KMyMoneySettings::schemeColor(SchemeColor::TransactionErroneous));
+        journalDelegate->setProperty("transactionErroneousColor", KMyMoneySettings::schemeColor(SchemeColor::TransactionErroneous));
     }
 
     void allowSectionResize()
