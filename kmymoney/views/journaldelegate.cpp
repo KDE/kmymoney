@@ -524,6 +524,7 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
                 cg = QPalette::Inactive;
             }
 
+            opt.backgroundBrush = opt.palette.base();
             if (selected) {
                 // always use the normal palette since the background is also in normal
                 painter->setPen(opt.palette.color(QPalette::ColorGroup(QPalette::Normal), QPalette::HighlightedText));
@@ -532,12 +533,10 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
                 painter->setPen(property("transactionErroneousColor").value<QColor>());
 
             } else if (matched) {
-                opt.backgroundBrush = opt.palette.base();
                 opt.backgroundBrush.setColor(property("transactionMatchedColor").value<QColor>());
                 opt.palette.setColor(QPalette::Normal, QPalette::Text, property("transactionMatchedColor").value<QColor>());
 
             } else if (imported) {
-                opt.backgroundBrush = opt.palette.base();
                 opt.backgroundBrush.setColor(property("transactionImportedColor").value<QColor>());
                 opt.palette.setColor(QPalette::Normal, QPalette::Text, property("transactionImportedColor").value<QColor>());
 
