@@ -680,19 +680,16 @@ public:
             m_html += "<tr class=\"gap\"><td>&nbsp;\n</td></tr>";
 
             std::sort(overdues.begin(), overdues.end());
-            QList<MyMoneySchedule>::Iterator it;
-            QList<MyMoneySchedule>::Iterator it_f;
 
             m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
             addScheduleHeader(i18nc("@title Home page sub-section", "Overdue payments"), QLatin1String("itemtitle negativetext"));
 
             int i = 0;
-            for (it = overdues.begin(); it != overdues.end(); ++it) {
+            for (const auto& overDueSchedule : qAsConst(overdues)) {
                 // determine number of overdue payments
-                int cnt =
-                    (*it).transactionsRemainingUntil(QDate::currentDate().addDays(-1));
+                const int cnt = overDueSchedule.transactionsRemainingUntil(QDate::currentDate().addDays(-1));
 
-                i = showPaymentEntry(*it, i, cnt);
+                i = showPaymentEntry(overDueSchedule, i, cnt);
             }
             m_html += "</table></td></tr>";
         }
