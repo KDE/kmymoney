@@ -199,7 +199,6 @@ WidgetHintFrame* WidgetHintFrame::frameForWidget(QWidget* editWidget)
 {
     if (editWidget && editWidget->parentWidget()) {
         const QList<WidgetHintFrame*> allErrorFrames = editWidget->parentWidget()->findChildren<WidgetHintFrame*>();
-        QList<WidgetHintFrame*>::const_iterator it;
         for (const auto& f : qAsConst(allErrorFrames)) {
             if (f->editWidget() == editWidget) {
                 return f;
