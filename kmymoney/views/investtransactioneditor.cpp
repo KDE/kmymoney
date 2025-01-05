@@ -26,7 +26,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "dialogenums.h"
 #include "icons.h"
 #include "investactivities.h"
 #include "journalmodel.h"

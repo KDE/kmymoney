@@ -16,8 +16,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyexception.h"
-
 Q_GLOBAL_STATIC(QString, nullString)
 
 QString MyMoneyKeyValueContainerPrivate::toString(bool value) const

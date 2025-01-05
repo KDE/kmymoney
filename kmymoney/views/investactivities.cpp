@@ -19,21 +19,19 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "investtransactioneditor.h"
-#include "mymoneymoney.h"
-#include "kmymoneyaccountcombo.h"
 #include "amountedit.h"
-#include "kmymoneyaccountselector.h"
-#include "kmymoneycompletion.h"
-#include "kmymoneysettings.h"
-#include "mymoneyfile.h"
-#include "mymoneysplit.h"
-#include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
 #include "dialogenums.h"
+#include "investtransactioneditor.h"
+#include "kmymoneyaccountcombo.h"
+#include "kmymoneyaccountselector.h"
+#include "mymoneyaccount.h"
 #include "mymoneyenums.h"
-#include "widgethintframe.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
+#include "mymoneysecurity.h"
+#include "mymoneysplit.h"
 #include "splitmodel.h"
+#include "widgethintframe.h"
 
 using namespace Invest;
 

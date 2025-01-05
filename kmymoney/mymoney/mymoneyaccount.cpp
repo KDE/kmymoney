@@ -29,7 +29,6 @@
 // Project Includes
 
 #include "icons.h"
-#include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
 #include "mymoneypayee.h"

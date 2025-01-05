@@ -14,7 +14,6 @@
 #include "mymoneyaccount_p.h"
 #include "mymoneyaccountloan.h"
 #include "mymoneyenums.h"
-#include "mymoneyexception.h"
 #include "mymoneymoney.h"
 #include "mymoneysplit.h"
 
