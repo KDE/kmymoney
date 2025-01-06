@@ -367,6 +367,16 @@ eMyMoney::Account::PayeeCreation MyMoneyAccount::payeeCreation() const
     return value<eMyMoney::Account::PayeeCreation>(QLatin1String("PayeeCreation"), eMyMoney::Account::PayeeCreation::ApplicationDefault);
 }
 
+void MyMoneyAccount::setPriceMode(eMyMoney::Invest::PriceMode priceMode)
+{
+    setValue(QLatin1String("priceMode"), priceMode, eMyMoney::Invest::PriceMode::Price);
+}
+
+eMyMoney::Invest::PriceMode MyMoneyAccount::priceMode() const
+{
+    return value<eMyMoney::Invest::PriceMode>(QLatin1String("priceMode"), eMyMoney::Invest::PriceMode::Price);
+}
+
 void MyMoneyAccount::setPayeeCreation(eMyMoney::Account::PayeeCreation creationMode)
 {
     setValue(QLatin1String("PayeeCreation"), creationMode, eMyMoney::Account::PayeeCreation::ApplicationDefault);

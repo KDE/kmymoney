@@ -174,17 +174,14 @@ public:
         ui->typeCombo->setEnabled(true);
 
         // load the price mode combo
-        ui->m_priceMode->insertItem(i18nc("default price mode", "(default)"), 0);
-        ui->m_priceMode->insertItem(i18n("Price per share"), 1);
-        ui->m_priceMode->insertItem(i18n("Total for all shares"), 2);
+        ui->m_priceMode->insertItem(i18nc("default price mode", "(default)"), (int)eMyMoney::Invest::PriceMode::Price);
+        ui->m_priceMode->insertItem(i18n("Price per share"), (int)eMyMoney::Invest::PriceMode::PricePerShare);
+        ui->m_priceMode->insertItem(i18n("Total for all shares"), (int)eMyMoney::Invest::PriceMode::PricePerTransaction);
 
-        int priceMode = 0;
         if (m_account.accountType() == Account::Type::Investment) {
             ui->m_priceMode->setEnabled(true);
-            if (!m_account.value("priceMode").isEmpty())
-                priceMode = m_account.value("priceMode").toInt();
         }
-        ui->m_priceMode->setCurrentItem(priceMode);
+        ui->m_priceMode->setCurrentItem((int)m_account.priceMode());
 
         bool haveMinBalance = false;
         bool haveMaxCredit = false;
@@ -942,15 +939,7 @@ void KNewAccountDlg::okClicked()
     }
 
     // update the price mode
-    switch (d->ui->m_priceMode->currentItem()) {
-    case 0:
-        d->m_account.deletePair("priceMode");
-        break;
-    case 1:
-    case 2:
-        d->m_account.setValue("priceMode", QString("%1").arg(d->ui->m_priceMode->currentItem()));
-        break;
-    }
+    d->m_account.setPriceMode(d->ui->m_priceMode->currentData().value<eMyMoney::Invest::PriceMode>());
 
     accept();
 }

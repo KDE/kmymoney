@@ -88,9 +88,9 @@ public:
         return total;
     }
 
-    eDialogs::PriceMode priceMode() const
+    eMyMoney::Invest::PriceMode priceMode() const
     {
-        eDialogs::PriceMode mode = eDialogs::PriceMode::Price;
+        eMyMoney::Invest::PriceMode mode = eMyMoney::Invest::PriceMode::Price;
         auto sec = haveWidget<QComboBox>("securityAccountCombo");
 
         QString accId;
@@ -98,17 +98,15 @@ public:
             const auto idx = sec->model()->index(sec->currentIndex(), 0);
             accId = idx.data(eMyMoney::Model::IdRole).toString();
         }
-        while (!accId.isEmpty() && mode == eDialogs::PriceMode::Price) {
+        while (!accId.isEmpty() && mode == eMyMoney::Invest::PriceMode::Price) {
             auto acc = MyMoneyFile::instance()->account(accId);
-            if (acc.value("priceMode").isEmpty())
-                accId = acc.parentAccountId();
-            else
-                mode = static_cast<eDialogs::PriceMode>(acc.value("priceMode").toInt());
+            mode = acc.priceMode();
+            accId = acc.parentAccountId();
         }
 
         // if mode is still <Price> then use that
-        if (mode == eDialogs::PriceMode::Price) {
-            mode = eDialogs::PriceMode::PricePerShare;
+        if (mode == eMyMoney::Invest::PriceMode::Price) {
+            mode = eMyMoney::Invest::PriceMode::PricePerShare;
         }
         return mode;
     }
@@ -119,7 +117,7 @@ public:
         const auto price = haveVisibleWidget<AmountEdit>("priceAmountEdit");
         MyMoneyMoney result;
         if (shares && price) {
-            if (priceMode() == eDialogs::PriceMode::PricePerShare) {
+            if (priceMode() == eMyMoney::Invest::PriceMode::PricePerShare) {
                 result = shares->value() * price->value();
             } else {
                 result = price->value();
@@ -262,11 +260,11 @@ QString Activity::priceLabelText() const
     Q_D(const Activity);
     switch (d->priceMode()) {
     default:
-    case eDialogs::PriceMode::Price:
+    case eMyMoney::Invest::PriceMode::Price:
         break;
-    case eDialogs::PriceMode::PricePerShare:
+    case eMyMoney::Invest::PriceMode::PricePerShare:
         return i18nc("@label:textbox", "Price/share");
-    case eDialogs::PriceMode::PricePerTransaction:
+    case eMyMoney::Invest::PriceMode::PricePerTransaction:
         return i18nc("@label:textbox", "Transaction amount");
     }
     return i18nc("@label:textbox", "Price");
@@ -281,7 +279,7 @@ void Activity::loadPriceWidget(const MyMoneySplit & split)
         const auto account = MyMoneyFile::instance()->account(split.accountId());
         const auto currency = MyMoneyFile::instance()->currency(account.tradingCurrencyId());
         priceEdit->setCommodity(currency);
-        if (d->priceMode() == eDialogs::PriceMode::PricePerTransaction) {
+        if (d->priceMode() == eMyMoney::Invest::PriceMode::PricePerTransaction) {
             priceEdit->setValue(split.value());
         } else {
             priceEdit->setValue(split.price());
@@ -316,7 +314,7 @@ MyMoneyMoney Activity::valueAllShares() const
     return d->valueAllShares();
 }
 
-eDialogs::PriceMode Activity::priceMode() const
+eMyMoney::Invest::PriceMode Activity::priceMode() const
 {
     Q_D(const Activity);
     return d->priceMode();

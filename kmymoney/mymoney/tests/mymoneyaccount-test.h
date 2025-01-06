@@ -41,6 +41,8 @@ private Q_SLOTS:
     void testBalanceFactor_data();
     void testPayeeCreation();
     void testPayeeCreation_data();
+    void testPriceMode();
+    void testPriceMode_data();
 };
 
 #endif

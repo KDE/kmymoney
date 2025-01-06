@@ -77,6 +77,14 @@ inline qHashSeedType qHash(const Standard key, qHashSeedType seed)
 }
 }
 
+namespace Invest {
+enum class PriceMode {
+    Price = 0,
+    PricePerShare,
+    PricePerTransaction,
+};
+}
+
 namespace Payee {
 enum class MatchType {
     Disabled = 0,
@@ -732,6 +740,7 @@ typedef enum {
 } // namespace Model
 } // namespace eMyMoney
 
+Q_DECLARE_METATYPE(eMyMoney::Invest::PriceMode)
 Q_DECLARE_METATYPE(eMyMoney::Split::State)
 Q_DECLARE_METATYPE(eMyMoney::Split::InvestmentTransactionType)
 Q_DECLARE_METATYPE(eMyMoney::Schedule::Occurrence)

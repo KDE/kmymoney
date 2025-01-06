@@ -36,12 +36,6 @@ enum class UpdatePrice {
     Ask,
 };
 
-enum class PriceMode {
-    Price = 0,
-    PricePerShare,
-    PricePerTransaction,
-};
-
 enum class ScheduleResultCode {
     Cancel = 0,    // cancel the operation
     Enter,         // enter the schedule

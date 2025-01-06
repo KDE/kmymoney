@@ -478,3 +478,22 @@ void MyMoneyAccountTest::testPayeeCreation()
     account.setPayeeCreation(creationMode);
     QCOMPARE(account.payeeCreation(), creationMode);
 }
+
+void MyMoneyAccountTest::testPriceMode_data()
+{
+    QTest::addColumn<eMyMoney::Invest::PriceMode>("priceMode");
+
+    QTest::newRow("Price") << eMyMoney::Invest::PriceMode::Price;
+    QTest::newRow("PricePerShare") << eMyMoney::Invest::PriceMode::PricePerShare;
+    QTest::newRow("PricePerTransaction") << eMyMoney::Invest::PriceMode::PricePerTransaction;
+}
+
+void MyMoneyAccountTest::testPriceMode()
+{
+    QFETCH(eMyMoney::Invest::PriceMode, priceMode);
+
+    MyMoneyAccount account;
+    QCOMPARE(account.priceMode(), eMyMoney::Invest::PriceMode::Price);
+    account.setPriceMode(priceMode);
+    QCOMPARE(account.priceMode(), priceMode);
+}

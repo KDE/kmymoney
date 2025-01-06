@@ -40,6 +40,13 @@ enum class PayeeCreation;
 namespace Icons {
 enum class Icon;
 }
+
+namespace eMyMoney {
+namespace Invest {
+enum class PriceMode;
+}
+}
+
 template <class T> class payeeIdentifierTyped;
 
 /**
@@ -595,6 +602,17 @@ public:
      * return how payee creation should be handled for this account during import
      */
     eMyMoney::Account::PayeeCreation payeeCreation() const;
+
+    /**
+     * set the pricing mode for this account used for investments
+     */
+    void setPriceMode(eMyMoney::Invest::PriceMode priceMode);
+
+    /**
+     * return the pricing mode for this account with
+     * eMyMoney::Invest::PriceMode::Price as default
+     */
+    eMyMoney::Invest::PriceMode priceMode() const;
 
     /**
      * This method returns a name that has a brokerage suffix of

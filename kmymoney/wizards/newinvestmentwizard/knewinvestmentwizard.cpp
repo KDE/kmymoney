@@ -151,7 +151,10 @@ public:
                     m_account.setAccountType(eMyMoney::Account::Type::Stock);
 
                 m_account.setCurrencyId(m_security.id());
-                m_account.setValue("priceMode", q->field("priceMode").toInt(), 0);
+                if (!q->field("priceMode").toString().isEmpty())
+                    m_account.setPriceMode(q->field("priceMode").value<eMyMoney::Invest::PriceMode>());
+                else
+                    m_account.setPriceMode(eMyMoney::Invest::PriceMode::Price);
 
                 // update account's fraction in case its security fraction has changed
                 // otherwise KMM restart is required because this won't happen automatically
@@ -199,7 +202,7 @@ KNewInvestmentWizard::KNewInvestmentWizard(const MyMoneyAccount& account, QWidge
     setField("accountName", account.name());
     setField("investmentName", d->m_security.name());
     setField("investmentIdentification", d->m_security.value("kmm-security-id"));
-    setField("priceMode", d->m_account.value("priceMode", 0));
+    setField("priceMode", QVariant::fromValue<eMyMoney::Invest::PriceMode>(d->m_account.priceMode()));
 }
 
 KNewInvestmentWizard::KNewInvestmentWizard(const MyMoneySecurity& security, QWidget *parent) :
@@ -221,7 +224,7 @@ KNewInvestmentWizard::KNewInvestmentWizard(const MyMoneySecurity& security, QWid
     setField("investmentIdentification", security.value("kmm-security-id"));
 
     // no chance to change the price mode here
-    setField("priceMode", 0);
+    setField("priceMode", QVariant::fromValue<eMyMoney::Invest::PriceMode>(eMyMoney::Invest::PriceMode::Price));
 
     // start with the details page if editing a security
     setStartId(d->pageId(d->ui->m_investmentDetailsPage));

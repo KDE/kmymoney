@@ -9,6 +9,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include "mymoneyenums.h"
 #include "qcontainerfwd.h"
 #include <qglobal.h>
 
@@ -27,10 +28,6 @@ namespace eMyMoney {
 namespace Split {
 enum class InvestmentTransactionType;
 }
-}
-
-namespace eDialogs {
-enum class PriceMode;
 }
 
 namespace Invest
@@ -65,7 +62,7 @@ public:
      * The default is to return MyMoneyMoney().
      *
      * Widgets with names @c sharesAmountEdit and @c priceAmountEdit must
-     * be present. If the priceMode is eDialogs::PriceMode::PricePerShare
+     * be present. If the priceMode is eMyMoney::Invest::PriceMode::PricePerShare
      * the product of shares times the price will be returned. In other
      * cases, the value of price is returned.
      */
@@ -87,7 +84,7 @@ public:
         return Unused;
     }
 
-    eDialogs::PriceMode priceMode() const;
+    eMyMoney::Invest::PriceMode priceMode() const;
 
     bool haveFees( fieldRequired_t = Mandatory) const;
     bool haveInterest( fieldRequired_t = Mandatory) const;
