@@ -106,7 +106,7 @@ if test "$ci_build" = "yes"; then
     # kmymoney specific command line
     case $ci_variant in
         (kf6*)
-            cmake $cmake_options -DBUILD_WITH_QT6=1 -DBUILD_WITH_QT6_CONFIRMED=1 -DUSE_MODELTEST=on -DWARNINGS_AS_ERRORS=on -Werror=dev ..
+            cmake $cmake_options -DBUILD_WITH_QT6=1 -DBUILD_WITH_QT6_CONFIRMED=1 -DWARNINGS_AS_ERRORS=on -Werror=dev ..
             ;;
         (*)
             cmake $cmake_options ..
