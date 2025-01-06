@@ -11,8 +11,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QVector>
 #include <QMap>
+#include <QMetaEnum>
+#include <QVector>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -165,7 +166,10 @@ public:
 
         void addSourceLine(cellTypeE type, int line)
         {
-            QMap::operator[](ctSourceLines).append(QString(" %1:%2").arg(type).arg(line));
+            QMetaEnum metaEnum = QMetaEnum::fromType<cellTypeE>();
+            QString typeName = metaEnum.valueToKey(type);
+
+            QMap::operator[](ctSourceLines).append(QString(" %1:%2").arg(typeName).arg(line));
         }
 
     private:
