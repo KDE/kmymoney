@@ -34,7 +34,7 @@
   The Categories View provides a summary of all the existing categories in your
   current data file.  Similar to the Accounts View, categories are grouped into
   Income and Expense.  As with the Institutions View and Accounts View, the list of
-  categories can be expanded or collapse by clicking the arrow to the left of the
+  categories can be expanded or collapsed by clicking the arrow to the left of the
   type or name.  As with Asset and Liability Accounts, Categories can be considered
   subcategories, with a parent of another category instead of the top-level Income or
   Expense.
