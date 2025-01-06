@@ -31,6 +31,7 @@ target_link_libraries(reports-chart-test
 
 set_tests_properties(reports-pivottable-test PROPERTIES ENVIRONMENT "LANG=C")
 set_tests_properties(reports-querytable-test PROPERTIES ENVIRONMENT "LANG=C")
+set_tests_properties(reports-chart-test PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
 
 add_subdirectory(data)
 

@@ -56,3 +56,4 @@ Dependencies:
 Options:
   require-passing-tests-on: [ 'Linux', 'FreeBSD', 'Windows' ]
   cmake-options: '-DWARNINGS_AS_ERRORS=on -Werror=dev -DBUILD_WITH_QT6_CONFIRMED=ON'
+  ctest-arguments: '-VV'
