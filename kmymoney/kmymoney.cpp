@@ -21,6 +21,7 @@
 // QT Includes
 
 #include <QApplication>
+#include <QBitArray>
 #include <QBoxLayout>
 #include <QByteArray>
 #include <QClipboard>
@@ -42,6 +43,7 @@
 #include <QMenu>
 #include <QProgressBar>
 #include <QPushButton>
+#include <QQueue>
 #include <QStatusBar>
 #include <QTextBrowser>
 #include <QTimer>
