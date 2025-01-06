@@ -108,7 +108,9 @@
 #include "journalmodel.h"
 #include "keditscheduledlg.h"
 #include "kmm_menuactionexchanger.h"
+#ifdef KMM_DBUS
 #include "kmymoneyadaptor.h"
+#endif
 #include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
 #include "kmymoneyview.h"

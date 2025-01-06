@@ -109,7 +109,9 @@ set( kmymoney_SRCS
   pluginloader.cpp
 )
 
-qt_add_dbus_adaptor(kmymoney_SRCS org.kde.kmymoney.xml kmymoney.h KMyMoneyApp)
+if(KMM_DBUS)
+    qt_add_dbus_adaptor(kmymoney_SRCS org.kde.kmymoney.xml kmymoney.h KMyMoneyApp)
+endif()
 qt_add_resources(kmymoney_SRCS kmymoney.qrc)
 
 # collect application icons
