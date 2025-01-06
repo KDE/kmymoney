@@ -1,17 +1,17 @@
 # Spanish translations for kmymoney.po package.
-# Copyright (C) 2014 This_file_is_part_of_KDE
+# Copyright (C) 2014-2025 This_file_is_part_of_KDE
 # This file is distributed under the same license as the kmymoney package.
 #
 # Automatically generated, 2014.
-# SPDX-FileCopyrightText: 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
-# Raul Gonzalez <raulgf83@gmail.com>, 2014, 2015.
-# Sofia Priego <spriego@darksylvania.net>, 2016.
+# SPDX-FileCopyrightText: 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2014, 2015 Raul Gonzalez <raulgf83@gmail.com>
+# SPDX-FileCopyrightText: 2016 Sofia Priego <spriego@darksylvania.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2024-08-15 19:10+0200\n"
+"PO-Revision-Date: 2025-01-05 12:02+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3297,7 +3297,7 @@ msgstr "Cuenta preferida"
 #: kmymoney/dialogs/knewaccountdlg.ui:268
 #, kde-format
 msgid "Cost Center assignment required"
-msgstr "Se necesita asignación de centro de costos"
+msgstr "Se necesita asignación de centro de costes"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_qcheckboxOpeningBalance)
 #: kmymoney/dialogs/knewaccountdlg.ui:278
@@ -7280,7 +7280,7 @@ msgstr "Cuentas sin una institución asignada"
 #: kmymoney/models/costcentermodel.cpp:79
 #, kde-format
 msgid "Cost center"
-msgstr "Centro de costos"
+msgstr "Centro de costes"
 
 #. i18n: ectx: property (text), widget (QTableWidget, tableWidget)
 #: kmymoney/models/equitiesmodel.cpp:350
@@ -7488,7 +7488,7 @@ msgstr "Fracción"
 #: kmymoney/models/splitmodel.cpp:110
 #, kde-format
 msgid "Cost Center"
-msgstr "Centro de costos"
+msgstr "Centro de costes"
 
 #: kmymoney/models/splitmodel.cpp:114
 #, kde-format
@@ -18066,7 +18066,7 @@ msgstr "Cargando informes..."
 #: kmymoney/plugins/xml/mymoneystoragexml.cpp:288
 #, kde-format
 msgid "Loading cost center..."
-msgstr "Cargando centro de costos..."
+msgstr "Cargando centro de costes..."
 
 #: kmymoney/plugins/xml/mymoneystoragexml.cpp:387
 #, kde-format
@@ -18116,7 +18116,7 @@ msgstr "Guardando los pagos domiciliados en línea..."
 #: kmymoney/plugins/xml/mymoneystoragexml.cpp:1829
 #, kde-format
 msgid "Saving costcenters..."
-msgstr "Guardando centros de costos..."
+msgstr "Guardando centros de costes..."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:66
 #, kde-format
@@ -20842,7 +20842,7 @@ msgstr "Extracto de banca electrónica: %1"
 #: kmymoney/views/newtransactioneditor.cpp:234
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
-msgstr "El centro de costos al que se debe asignar esta transacción."
+msgstr "El centro de costes al que se debe asignar esta transacción."
 
 #: kmymoney/views/newspliteditor.cpp:124
 #: kmymoney/views/newtransactioneditor.cpp:237
@@ -20851,7 +20851,7 @@ msgid ""
 "A cost center assignment is required for a transaction in the selected "
 "category."
 msgstr ""
-"Se necesita asignar un centro de costos para las transacciones de la "
+"Se necesita asignar un centro de costes para las transacciones de la "
 "categoría seleccionada."
 
 #: kmymoney/views/newspliteditor.cpp:156
@@ -20896,7 +20896,7 @@ msgstr "Pagar a"
 #: kmymoney/views/newtransactionform.ui:82
 #, kde-format
 msgid "Costcenter"
-msgstr "Centro de costos"
+msgstr "Centro de costes"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, statusCombo)
 #: kmymoney/views/newtransactioneditor.ui:197

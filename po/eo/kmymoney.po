@@ -2,15 +2,15 @@
 # Copyright (C) 2009 Free Software Foundation, Inc.
 # This file is distributed under the same license as the kmymoney package.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
-# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
+# Oliver Kellogg <olivermkellogg@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2024-04-23 21:12+0100\n"
-"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
+"PO-Revision-Date: 2025-01-05 23:54+0100\n"
+"Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgstr "Axel Rousseau,Oliver Kellogg"
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "axel@esperanto-jeunes.org,okellogg@users.sourceforge.net"
+msgstr "axel@esperanto-jeunes.org,olivermkellogg@gmail.com"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:129
 #, kde-format
@@ -1116,7 +1116,7 @@ msgstr ""
 #: kmymoney/dialogs/kbackupdlg.ui:61
 #, kde-format
 msgid "Device options"
-msgstr "Opcioj de aparato"
+msgstr "Elektebloj de aparato"
 
 #. i18n: ectx: property (text), widget (QLabel, lblMountPoint)
 #: kmymoney/dialogs/kbackupdlg.ui:99
@@ -1899,21 +1899,22 @@ msgstr ""
 "p><p>Ne faru ajnan rondigon, simple detranĉu kaj presi averton en kazo de "
 "restaĵo. Alie same kiel RoundTrunc.</p><p><span style=\" font-weight:600;"
 "\">RoundFloor</span></p><p>Rondigi al la plej granda integra valoro ne pli "
-"granda ol la valoro. ekz. 0.5 -> 0.0 kaj -0.5 -> -1.0</p><p><span style=\" "
-"font-weight:600;\">RoundCeil</span></p><p>Rondigi al la plej malgranda "
-"integralo valoro ne malpli ol la valoro. ekz. 0.5 -> 1.0 kaj -0.5 -> -0.0</"
-"p><p><span style=\" font-weight:600;\">RoundTruncate</span></p><p>Neniu "
-"rondigo, simple detranĉi ajnan frakcion</p><p><span style=\" font-weight:600;"
-"\">RoundPromote</span></p><p>Uzi RoundCeil por pozitivaj kaj RoundFloor por "
-"negativaj valoroj. ekz. 0.5 -> 1.0 kaj -0.5 -> -1.0</p><p><span style=\" "
-"font-weight:600;\">RoundHalfDown</span></p><p>Rondigi supren aŭ malsupren "
-"kun jenaj limoj: 0.1 .. 0.5 -> 0.0 kaj 0.6 .. 0.9 -> 1.0</p><p><span style="
-"\" font-weight:600;\">RoundHalfUp</span></p><p>Rondigi supren aŭ malsupren "
-"kun jenaj limigoj: 0.1 .. 0.4 -> 0.0 kaj 0.5 .. 0.9 -> 1.0</p><p><span style="
-"\" font-weight:600; \">RoundRound</span></p><p>Uzi RoundHalfDown por 0.1 .. "
-"0.4 kaj RoundHalfUp por 0.6 .. 0.9. Uzi RoundHalfUp por 0.5 se la rezulta "
-"numeratoro estas nepara, RoundHalfDown se la rezulta numeratoro estas para. "
-"ekz. 0.5 -> 0.0 kaj 1.5 -> 2.0</p></body></html>"
+"granda ol la valoro. ekz. 0.5 -&gt; 0.0 kaj -0.5 -&gt; -1.0</p><p><span "
+"style=\" font-weight:600;\">RoundCeil</span></p><p>Rondigi al la plej "
+"malgranda integralo valoro ne malpli ol la valoro. ekz. 0.5 -&gt; 1.0 kaj "
+"-0.5 -&gt; -0.0</p><p><span style=\" font-weight:600;\">RoundTruncate</"
+"span></p><p>Neniu rondigo, simple detranĉi ajnan frakcion</p><p><span style="
+"\" font-weight:600;\">RoundPromote</span></p><p>Uzi RoundCeil por pozitivaj "
+"kaj RoundFloor por negativaj valoroj. ekz. 0.5 -&gt; 1.0 kaj -0.5 -&gt; "
+"-1.0</p><p><span style=\" font-weight:600;\">RoundHalfDown</span></"
+"p><p>Rondigi supren aŭ malsupren kun jenaj limoj: 0.1 .. 0.5 -&gt; 0.0 kaj "
+"0.6 .. 0.9 -&gt; 1.0</p><p><span style=\" font-weight:600;\">RoundHalfUp</"
+"span></p><p>Rondigi supren aŭ malsupren kun jenaj limigoj: 0.1 .. 0.4 -&gt; "
+"0.0 kaj 0.5 .. 0.9 -&gt; 1.0</p><p><span style=\" font-weight:600; "
+"\">RoundRound</span></p><p>Uzi RoundHalfDown por 0.1 .. 0.4 kaj RoundHalfUp "
+"por 0.6 .. 0.9. Uzi RoundHalfUp por 0.5 se la rezulta numeratoro estas "
+"nepara, RoundHalfDown se la rezulta numeratoro estas para. ekz. 0.5 -&gt; "
+"0.0 kaj 1.5 -&gt; 2.0</p></body></html>"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:135
@@ -2221,7 +2222,7 @@ msgstr "Pagmaniero"
 #: kmymoney/dialogs/knewaccountdlg.ui:154
 #, kde-format
 msgid "Options"
-msgstr "Opcioj"
+msgstr "Elektebloj"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_weekendOptionEdit)
 #: kmymoney/dialogs/keditscheduledlg.ui:169
@@ -2638,7 +2639,7 @@ msgstr[1] ""
 #: kmymoney/dialogs/kimportverifydlg.ui:17
 #, kde-format
 msgid "Verify Import"
-msgstr "Kontroli Importon"
+msgstr "Konfirmi Importon"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KLoadTemplateDlg)
 #: kmymoney/dialogs/kloadtemplatedlg.ui:14
@@ -2810,7 +2811,7 @@ msgstr "Forigi prezon..."
 #, kde-format
 msgctxt "Menu header"
 msgid "Price options"
-msgstr "Prezopcioj"
+msgstr "Elektebloj pri prezo"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KMyMoneyPriceDlg)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:14
@@ -2962,7 +2963,7 @@ msgstr "Kategorio"
 #: kmymoney/dialogs/kmymoneysplittable.cpp:193
 #, kde-format
 msgid "Split Options"
-msgstr "Disig-Opcioj"
+msgstr "Disig-Elektebloj"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_editSecurityButton)
 #: kmymoney/dialogs/kmymoneysplittable.cpp:195
@@ -3082,7 +3083,7 @@ msgid ""
 "Option has been disabled because there are transactions assigned to this "
 "account"
 msgstr ""
-"Opcio estis malŝaltita ĉar estas transakcioj atribuitaj al ĉi tiu konto"
+"Elekteblo estis malŝaltita ĉar estas transakcioj atribuitaj al ĉi tiu konto"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:551
 #, kde-format
@@ -3090,7 +3091,7 @@ msgid ""
 "Option has been disabled because there is another account flagged to be an "
 "opening balance account for this currency"
 msgstr ""
-"Opcio estis malŝaltita ĉar ekzistas alia konto markita kiel komenca "
+"Elekteblo estis malŝaltita ĉar ekzistas alia konto markita kiel komenca "
 "saldokonto por ĉi tiu valuto"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:622
@@ -3683,7 +3684,7 @@ msgstr ""
 #: kmymoney/widgets/transactionsortoption.ui:23
 #, kde-format
 msgid "Sort options"
-msgstr "Ordigaj opcioj"
+msgstr "Ordigaj elektebloj"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_useDefault)
 #: kmymoney/dialogs/ksortoptiondlg.ui:23
@@ -4031,7 +4032,7 @@ msgstr "Malloka"
 #: kmymoney/dialogs/settings/ksettingsschedules.ui:23
 #, kde-format
 msgid "Startup options"
-msgstr "Komencaj opcioj"
+msgstr "Komencaj elektebloj"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowSplash)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:36
@@ -4043,7 +4044,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:46
 #, kde-format
 msgid "Autosave options"
-msgstr "Aŭtomatkonservaj opcioj"
+msgstr "Aŭtomatkonservaj elektebloj"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoSaveFile)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:54
@@ -4268,9 +4269,9 @@ msgid ""
 "at least a single transaction. They are still shown in the category "
 "selection lists."
 msgstr ""
-"Ĉi tiu opcio kaŝas ĉiujn kategoriojn en la kategorioj, kiuj ne estas uzataj "
-"en almenaŭ unu transakcio. Ili ankoraŭ estas montritaj en la kategorio-"
-"elektolistoj."
+"Ĉi tiu elekteblo kaŝas ĉiujn kategoriojn en la kategorioj, kiuj ne estas "
+"uzataj en almenaŭ unu transakcio. Ili ankoraŭ estas montritaj en la "
+"kategorio-elektolistoj."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideUnusedCategory)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:416
@@ -4288,7 +4289,7 @@ msgstr "Montri akciajn kontojn"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:430
 #, kde-format
 msgid "This option will display the categories in the accounts view also."
-msgstr "Ĉi tiu opcio ankaŭ montros la kategoriojn en la konta vido."
+msgstr "Ĉi tiu elekteblo ankaŭ montros la kategoriojn en la konta vido."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowCategoriesInAccountsView)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:433
@@ -4306,7 +4307,7 @@ msgstr "Ne montri nul-saldajn akciojn"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:456
 #, kde-format
 msgid "This option hides all finished schedules in the schedules view."
-msgstr "Ĉi tiu opcio kaŝas ĉiujn finitajn horarojn en la horara vido."
+msgstr "Ĉi tiu elekteblo kaŝas ĉiujn finitajn horarojn en la horara vido."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideFinishedSchedules)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:459
@@ -4324,7 +4325,8 @@ msgstr "Ne montru transakciojn antaŭ"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:511
 #, kde-format
 msgid "This option hides all reconciled transactions in the ledger view."
-msgstr "Ĉi tiu opcio kaŝas ĉiujn repacigitajn transakciojn en la ĉeflibrovido."
+msgstr ""
+"Ĉi tiu elekteblo kaŝas ĉiujn repacigitajn transakciojn en la ĉeflibrovido."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideReconciledTransactions)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:514
@@ -4742,7 +4744,7 @@ msgstr ""
 "<p>Por pli facila prilaborado de la datumoj resenditaj de la interreta "
 "fonto, KMyMoney kutime forigas neuzatajn partojn antaŭ ol ĝi estas analizita "
 "kun la regulaj esprimoj. Se kongruo de la kampoj dependas de tiuj eroj, tiam "
-"uzu ĉi tiun opcion por malŝalti nudigon.</p>\n"
+"uzu ĉi tiun elekteblon por malŝalti nudigon.</p>\n"
 "\n"
 "<p>La jenaj eroj estas kutime forigitaj per senigo:\n"
 "\n"
@@ -4944,8 +4946,8 @@ msgid ""
 "posting date. With this option, the originally planned date is used instead."
 msgstr ""
 "Se planita transakcio estas prokrastita, la hodiaŭa dato estas uzata "
-"defaŭlte kiel la afiŝdato. Kun ĉi tiu opcio, la origine planita dato estas "
-"uzata anstataŭe."
+"defaŭlte kiel la afiŝdato. Kun ĉi tiu elekteblo, la origine planita dato "
+"estas uzata anstataŭe."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowPlannedScheduleDates)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:103
@@ -4987,8 +4989,8 @@ msgid ""
 "<i>descending</i>."
 msgstr ""
 "Uzi la <i>maldekstren</i> kaj <i>dekstren</i> por aldoni kaj forigi ordigajn "
-"opciojn. Uzu la butonojn <i>supren</i> kaj <i>malsupren</i> por modifi la "
-"ordigon. Duoble alklaku elektitan eniron por ŝanĝi la ordigon inter "
+"elekteblojn. Uzu la butonojn <i>supren</i> kaj <i>malsupren</i> por modifi "
+"la ordigon. Duoble alklaku elektitan eniron por ŝanĝi la ordigon inter "
 "<i>kreskanta</i> kaj <i>malkreskanta</i>."
 
 #. i18n: ectx: attribute (title), widget (QWidget, TabPage1)
@@ -5026,8 +5028,8 @@ msgid ""
 "Mark this option, if you always want to match names e.g. for payees from the "
 "start. If unset, any substring is matched."
 msgstr ""
-"Marku ĉi tiun opcion, se vi ĉiam volas kongrui nomojn ekz. por pagitoj de la "
-"komenco. Se neagordita, ajna subĉeno estas kongrua."
+"Marku ĉi tiun elekteblon, se vi ĉiam volas kongrui nomojn ekz. por pagitoj "
+"de la komenco. Se neagordita, ajna subĉeno estas kongrua."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_stringMatchFromStart)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:223
@@ -5217,8 +5219,8 @@ msgid ""
 "used otherwise the memos will not be considered when the transaction is "
 "autofilled."
 msgstr ""
-"Se ĉi tiu opcio estas markita, la notoj de la antaŭa transakcio estos uzataj "
-"alie la notoj ne estos konsiderataj kiam la transakcio estas aŭtomate "
+"Se ĉi tiu elekteblo estas markita, la notoj de la antaŭa transakcio estos "
+"uzataj alie la notoj ne estos konsiderataj kiam la transakcio estas aŭtomate "
 "plenigita."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoFillUseMemos)
@@ -5258,7 +5260,7 @@ msgid ""
 "selected."
 msgstr ""
 "Kiam ajn nova pagato estas detektita dum importo de deklaro, la uzanto estos "
-"petita atribui defaŭltan kategorion por ĉi tiu uzanto kiam ĉi tiu opcio "
+"petita atribui defaŭltan kategorion por ĉi tiu uzanto kiam ĉi tiu elekteblo "
 "estas elektita."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_askForPayeeCategory)
@@ -6698,7 +6700,7 @@ msgstr "Il&oj"
 #: kmymoney/kmymoneyui.rc:119
 #, kde-format
 msgid "Account options"
-msgstr "Opcioj de konto"
+msgstr "Elektebloj de konto"
 
 #. i18n: ectx: Menu (category_context_menu)
 #: kmymoney/kmymoneyui.rc:143
@@ -6728,13 +6730,13 @@ msgstr "Etikedoj"
 #: kmymoney/kmymoneyui.rc:171
 #, kde-format
 msgid "Investment options"
-msgstr "Opcioj de investo"
+msgstr "Elektebloj de investo"
 
 #. i18n: ectx: Menu (schedule_context_menu)
 #: kmymoney/kmymoneyui.rc:184
 #, kde-format
 msgid "Scheduled transactions options"
-msgstr "Opcioj pri planitaj transakcioj"
+msgstr "Elektebloj pri planitaj transakcioj"
 
 #. i18n: ectx: Menu (transaction_context_menu)
 #: kmymoney/kmymoneyui.rc:199
@@ -6758,7 +6760,7 @@ msgstr "Elekti konton"
 #: kmymoney/kmymoneyui.rc:228
 #, kde-format
 msgid "Credit transfer options"
-msgstr "Opcioj pri kredittransigo"
+msgstr "Elektebloj pri kredittransigo"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: kmymoney/kmymoneyui.rc:239
@@ -7264,7 +7266,7 @@ msgstr "Deponejo"
 #: kmymoney/widgets/register.cpp:159
 #, kde-format
 msgid "Balance"
-msgstr "Kompensi"
+msgstr "Saldo"
 
 #: kmymoney/models/ledgerproxymodel.cpp:53 kmymoney/widgets/register.cpp:302
 #, kde-format
@@ -11215,13 +11217,13 @@ msgstr "GnuCash-dosieroj (*.gnucash *.xac *.gnc)"
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:20
 #, kde-format
 msgid "GnuCash Import Options"
-msgstr "GnuCash Import Opcioj"
+msgstr "GnuCash Import-Elektebloj"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:26
 #, kde-format
 msgid "Use 'Help' for more information on these options"
-msgstr "Uzu 'Helpon' por pliaj informoj pri ĉi tiuj opcioj"
+msgstr "Uzu 'Helpon' por pliaj informoj pri ĉi tiuj elektebloj"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonInvestGroupBox)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:39
@@ -11275,7 +11277,7 @@ msgstr "Forigi suspektajn planitajn transakciojn"
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:119
 #, kde-format
 msgid "Decoding option"
-msgstr "Malkoda opcio"
+msgstr "Malkoda elekteblo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkDecode)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:142
@@ -11287,7 +11289,7 @@ msgstr "Malkodi uzante"
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:176
 #, kde-format
 msgid "Transaction Notes option"
-msgstr "Opcio de Transakciaj Notoj"
+msgstr "Elekteblo de Transakciaj Notoj"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkTxNotes)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:182
@@ -11299,7 +11301,7 @@ msgstr "Uzi transakciajn notojn pri ne-dividitaj transakcioj"
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:205
 #, kde-format
 msgid "Debug Options"
-msgstr "Sencimigaj Opcioj"
+msgstr "Sencimigaj Elektebloj"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkDebugGeneral)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:211
@@ -11491,7 +11493,7 @@ msgstr "Nekonata pagato"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1979
 #, kde-format
 msgid "Schedule %1 contains unknown action (key = %2, type = %3)"
-msgstr "Horaro %1 enhavas nekonatan agon (ŝlosilo = %2, tajpu = %3)"
+msgstr "Horaro %1 enhavas nekonatan agon (ŝlosilo = %2, tipo = %3)"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1987
 #, kde-format
@@ -11943,7 +11945,7 @@ msgid ""
 "activated."
 msgstr ""
 "Vi elektis ĉerpi la pagaton el la notokampo sed ne provizis regulan esprimon "
-"por pagito kaj memo eltiro. La opcio ne estos aktivigita."
+"por pagito kaj memo eltiro. La elekteblo ne estos aktivigita."
 
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.cpp:78
 #, kde-format
@@ -11985,7 +11987,7 @@ msgid ""
 msgstr ""
 "La kromaĵo kutime elŝutas la kontan saldon kaj transakciojn. En iuj "
 "cirkonstancoj, la elŝuto de transakciaj datumoj ne estas subtenata por "
-"certaj kontoj. La sekva opcio permesas malŝalti la peton pri transakciaj "
+"certaj kontoj. La sekva elekteblo permesas malŝalti la peton pri transakciaj "
 "datumoj."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_transactionDownload)
@@ -12046,8 +12048,8 @@ msgid ""
 msgstr ""
 "<html><head/><body><p>Kelkaj institucioj prenas plurcelajn kampojn de "
 "transakcio kaj traktas ĝin kiel ununuran. Ĉi-kaze la linirompaj signoj "
-"enmetitaj post ĉiu celo-kampo distras kaj estas forigitaj kiam ĉi tiu opcio "
-"estas ebligita.</p></body></html>"
+"enmetitaj post ĉiu celo-kampo distras kaj estas forigitaj kiam ĉi tiu "
+"elekteblo estas ebligita.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_removeLineBreaksFromMemo)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:204
@@ -12772,7 +12774,7 @@ msgstr "Identigi kiel"
 #, kde-format
 msgid ""
 "Expert option to enter the four digit version information of the application"
-msgstr "Faka opcio por enigi la kvarciferajn versiojn de la aplikaĵo"
+msgstr "Faka elekteblo por enigi la kvarciferajn versiojn de la aplikaĵo"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_6)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_3)
@@ -12923,7 +12925,7 @@ msgstr "Lasta &ĝisdatigo"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:328
 #, kde-format
 msgid "To&day minus"
-msgstr "Hodiaŭ minuso"
+msgstr "Ho&diaŭ minuso"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:348
@@ -12945,7 +12947,7 @@ msgstr "Ele&kti daton"
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:76
 #, kde-format
 msgid "Import options"
-msgstr "Importi opciojn"
+msgstr "Import-elektebloj"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:419
@@ -14805,7 +14807,7 @@ msgstr "Buĝeto bazita sur prognozo"
 #, kde-format
 msgctxt "Menu header"
 msgid "Budget options"
-msgstr "Buĝetaj opcioj"
+msgstr "Buĝetaj elektebloj"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:344
 #, kde-format
@@ -16890,7 +16892,7 @@ msgstr "Charts liniolarĝo"
 #: kmymoney/settings/kmymoney.kcfg:390
 #, kde-format
 msgid "Line width for diagrams, in pixels"
-msgstr "Liniolarĝo por diagramoj, en pikseloj"
+msgstr "Liniolarĝo por diagramoj, en rastrumeroj"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:88
@@ -17211,7 +17213,7 @@ msgid ""
 msgstr ""
 "\n"
 "              <p>\n"
-"              Ĉi tiu opcio estas nur por investaj raportoj, kiuj\n"
+"              Ĉi tiu elekteblo estas nur por investaj raportoj, kiuj\n"
 "              montras prezojn anstataŭ saldojn kiel ĉiuj aliaj raportoj "
 "faras.\n"
 "              </p>\n"
@@ -17222,8 +17224,8 @@ msgstr ""
 "preterlasita.\n"
 "              </p>\n"
 "              <p>\n"
-"              Se ĉi tiu opcio estas malŝaltita, la lasta ekzistanta prezo "
-"estas montrata por periodo, se\n"
+"              Se ĉi tiu elekteblo estas malŝaltita, la lasta ekzistanta "
+"prezo estas montrata por periodo, se\n"
 "              ĝi estas ŝaltita, en tabelo la valoro estas '0' montrita kaj "
 "en diagramo linia\n"
 "              interpolado por la mankantaj valoroj estos farita.\n"
@@ -18672,7 +18674,7 @@ msgstr "Intereza Enspezo"
 #: kmymoney/views/newtransactioneditor.cpp:209
 #, kde-format
 msgid "The posting date of the transaction."
-msgstr "La afiŝdato de la transakcio."
+msgstr "La publikiga dato de la transakcio."
 
 #: kmymoney/views/investtransactioneditor.cpp:269
 #: kmymoney/views/newtransactioneditor.cpp:222
@@ -19325,7 +19327,7 @@ msgstr ""
 #: kmymoney/views/khomeview_p.h:598
 #, kde-format
 msgid "Overdue payments"
-msgstr "Malfruaj pagoj"
+msgstr "Posttempaj pagoj"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, ScheduleWizardPage)
 #: kmymoney/views/khomeview_p.h:604 kmymoney/views/khomeview_p.h:659
@@ -19350,7 +19352,7 @@ msgstr "La hodiaŭaj pagoj"
 #: kmymoney/views/khomeview_p.h:686
 #, kde-format
 msgid "Future payments"
-msgstr "Estontaj pagoj"
+msgstr "Estontaj pagendoj"
 
 #: kmymoney/views/khomeview_p.h:768
 #, kde-format
@@ -19420,8 +19422,8 @@ msgstr ""
 msgctxt "Forecast days"
 msgid "%1 Day Forecast"
 msgid_plural "%1 Day Forecast"
-msgstr[0] "%1-taga prognozo"
-msgstr[1] "%1-taga prognozo"
+msgstr[0] "%1-Taga Prognozo"
+msgstr[1] "%1-Taga Prognozo"
 
 #: kmymoney/views/khomeview_p.h:1057
 #, kde-format
@@ -19439,22 +19441,22 @@ msgstr "Resumo de Aktivoj kaj Pasivoj"
 #: kmymoney/views/khomeview_p.h:1277
 #, kde-format
 msgid "Asset Accounts"
-msgstr "Aktivaj Kontoj"
+msgstr "Kontoj de Aktivoj"
 
 #: kmymoney/views/khomeview_p.h:1306
 #, kde-format
 msgid "Liability Accounts"
-msgstr "Kontoj de Respondeco"
+msgstr "Kontoj de Pasivoj"
 
 #: kmymoney/views/khomeview_p.h:1406
 #, kde-format
 msgid "Total Assets"
-msgstr "Tutaj Aktivoj"
+msgstr "Sumaj Aktivoj"
 
 #: kmymoney/views/khomeview_p.h:1412
 #, kde-format
 msgid "Total Liabilities"
-msgstr "Totalaj Pasivoj"
+msgstr "Sumaj Pasivoj"
 
 #: kmymoney/views/khomeview_p.h:1686
 #, kde-format
@@ -20595,7 +20597,7 @@ msgstr ""
 #: kmymoney/views/newtransactioneditor.cpp:298
 #, kde-format
 msgid "The check number used for this transaction."
-msgstr "La ĉeknumero uzata por ĉi tiu transakcio."
+msgstr "La kontrolnumero uzata por ĉi tiu transakcio."
 
 #: kmymoney/views/newspliteditor.cpp:167
 #: kmymoney/views/newtransactioneditor.cpp:309
@@ -24840,7 +24842,7 @@ msgid ""
 "dialog. Just select the <b>Configure KMyMoney...</b> option in the "
 "<b>Settings</b> menu."
 msgstr ""
-"Vi povas ŝanĝi la agordajn opciojn iam ajn uzante la agordan dialogon. "
+"Vi povas ŝanĝi la agordajn elekteblojn iam ajn uzante la agordan dialogon. "
 "Simple elektu la opcion <b>Agordu KMyMoney...</b> en la menuo <b>Agordoj</b>."
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel2)
