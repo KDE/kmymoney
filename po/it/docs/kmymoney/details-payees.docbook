@@ -105,7 +105,7 @@
 ><title
 >Unire i beneficiari</title>
 <para
->Per unire due beneficiari, selezionane uno (clic sinistro sul nome) quindi seleziona l'altro (<keycombo
+>Per unire due beneficiari, selezionane uno (clic sinistro sul nome) quindi selezionare l'altro (<keycombo
 >&Ctrl;<mousebutton
 >clic sinistro</mousebutton
 ></keycombo
@@ -117,7 +117,7 @@
 > </guiicon
 > Unisci beneficiari oppure fare clic destro su uno dei beneficiari selezionati e selezionare <guilabel
 >Unisci beneficiari</guilabel
->. Apparirà una finestra a comparsa che ti chiederà se vuoi davvero unire i beneficiari selezionati. Se fai clic su <guibutton
+>. Apparirà una finestra a comparsa che chiederà se si vuole davvero unire i beneficiari selezionati. Se fai clic su <guibutton
 >Sì</guibutton
 >, apparirà un'altra finestra a comparsa per specificare il nome del beneficiario per i dati combinati. Ci sarà un menu a tendina con i nomi dei beneficiari selezionati per l'unione (in realtà puoi selezionarne più di due) e ti consentirà anche di digitare un nome completamente nuovo. C'è anche una casella di selezione per aggiungere i nomi dei beneficiari uniti all'elenco corrispondente del nuovo beneficiario. </para>
 </sect2>
