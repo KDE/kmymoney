@@ -11,11 +11,11 @@
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyForecastTest;
 
 #include "mymoneyfile.h"
-#include "mymoneymoney.h"
-
 #include "mymoneyforecast.h"
+#include "mymoneymoney.h"
+#include "mymoneytestutils.h"
 
-class MyMoneyForecastTest : public QObject
+class MyMoneyForecastTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 public:

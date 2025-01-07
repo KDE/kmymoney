@@ -10,9 +10,11 @@
 #include <QLocale>
 #include <QString>
 
+#include "mymoneytestutils.h"
+
 class AmountValidator;
 
-class AmountValidatorTest : public QObject
+class AmountValidatorTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 

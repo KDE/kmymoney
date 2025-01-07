@@ -9,8 +9,9 @@
 #include <QObject>
 
 #include "mymoneybalancecache.h"
+#include "mymoneytestutils.h"
 
-class MyMoneyBalanceCacheTest : public QObject
+class MyMoneyBalanceCacheTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 

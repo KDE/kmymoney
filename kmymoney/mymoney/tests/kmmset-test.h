@@ -8,9 +8,10 @@
 
 #include <QObject>
 
+#include "mymoneytestutils.h"
 #include <kmmset.h>
 
-class KMMSetTest : public QObject
+class KMMSetTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 

@@ -8,13 +8,15 @@
 
 #include <QObject>
 
+#include "mymoneytestutils.h"
+
 class CSVImporterCore;
 class BankingProfile;
 class PricesProfile;
 class InvestmentProfile;
 class MyMoneyFile;
 
-class CSVImporterCoreTest : public QObject
+class CSVImporterCoreTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 

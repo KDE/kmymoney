@@ -6,5 +6,6 @@ ecm_add_tests(${tests_sources}
     "ibanandbic-"
   LINK_LIBRARIES
     Qt::Test
+    kmm_testutils
     kmm_mymoney
 )

@@ -9,9 +9,11 @@
 
 #include <QObject>
 
+#include "mymoneytestutils.h"
+
 class MyMoneyAccount;
 
-class MyMoneyAccountTest : public QObject
+class MyMoneyAccountTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 

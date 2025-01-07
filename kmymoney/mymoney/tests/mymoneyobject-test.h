@@ -8,9 +8,11 @@
 
 #include <QObject>
 
+#include "mymoneytestutils.h"
+
 #include "mymoneyobject.h"
 
-class MyMoneyObjectTest : public QObject
+class MyMoneyObjectTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 private Q_SLOTS:

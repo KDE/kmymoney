@@ -12,8 +12,9 @@
 
 #include "mymoneyobject.h"
 #include "mymoneystoragemgr.h"
+#include "mymoneytestutils.h"
 
-class MyMoneyStorageMgrTest : public QObject
+class MyMoneyStorageMgrTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 

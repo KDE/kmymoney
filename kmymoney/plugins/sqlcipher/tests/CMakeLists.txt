@@ -5,6 +5,7 @@ ecm_add_tests(${tests_sources}
   LINK_LIBRARIES
     Qt::Test
     Qt::Sql
+    kmm_testutils
 )
 
 target_compile_definitions(qsqlcipher-test

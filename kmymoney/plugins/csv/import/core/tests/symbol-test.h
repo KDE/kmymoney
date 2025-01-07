@@ -10,9 +10,11 @@
 
 #include <QObject>
 
+#include "mymoneytestutils.h"
+
 class Parse;
 
-class SymbolTest : public QObject
+class SymbolTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 

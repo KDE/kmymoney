@@ -7,14 +7,15 @@
 #ifndef KMYMONEYUTILSTEST_H
 #define KMYMONEYUTILSTEST_H
 
-#include <QObject>
 #include <QList>
+#include <QObject>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class KMyMoneyUtilsTest;
 
 #include "kmymoneyutils.h"
+#include "mymoneytestutils.h"
 
-class KMyMoneyUtilsTest : public QObject
+class KMyMoneyUtilsTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 protected:

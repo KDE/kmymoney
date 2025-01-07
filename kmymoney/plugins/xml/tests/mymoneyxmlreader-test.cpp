@@ -13,8 +13,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocalizedString>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -56,7 +54,6 @@ static void hideDebugMessages(QtMsgType type, const QMessageLogContext& context,
 void MyMoneyXmlReaderTest::initTestCase()
 {
     oldHandler = qInstallMessageHandler(hideDebugMessages);
-    KLocalizedString::setApplicationDomain("kmymoney");
 }
 
 void MyMoneyXmlReaderTest::cleanupTestCase()

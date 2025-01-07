@@ -9,6 +9,8 @@
 
 #include <QObject>
 
+#include "mymoneytestutils.h"
+
 namespace reports
 {
 class PivotGridTest;
@@ -21,7 +23,7 @@ class PivotGridTest;
 namespace reports
 {
 
-class PivotGridTest : public QObject
+class PivotGridTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 
@@ -29,7 +31,6 @@ private:
     MyMoneyFile* file;
 
 private Q_SLOTS:
-    void initTestCase();
     void init();
     void cleanup();
     void testCellAddValue();

@@ -8,9 +8,12 @@
 #define MYMONEYTRANSACTIONFILTERTEST_H
 
 #include <QObject>
+
+#include "mymoneytestutils.h"
+
 class MyMoneyFile;
 
-class MyMoneyTransactionFilterTest : public QObject
+class MyMoneyTransactionFilterTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 public:

@@ -16,10 +16,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneytestutils.h"
+
 class MyMoneyXmlReader;
 class MyMoneyFile;
 
-class MyMoneyXmlReaderTest : public QObject
+class MyMoneyXmlReaderTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 

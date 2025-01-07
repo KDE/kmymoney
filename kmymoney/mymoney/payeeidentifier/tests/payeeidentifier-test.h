@@ -8,7 +8,9 @@
 
 #include <QObject>
 
-class payeeidentifier_test : public QObject
+#include "mymoneytestutils.h"
+
+class payeeidentifier_test : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 private Q_SLOTS:

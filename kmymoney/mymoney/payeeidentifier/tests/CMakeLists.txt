@@ -8,4 +8,5 @@ ecm_add_tests(${tests_sources}
     Qt::Test
     kmm_payeeidentifier
     kmm_mymoney
+    kmm_testutils
 )

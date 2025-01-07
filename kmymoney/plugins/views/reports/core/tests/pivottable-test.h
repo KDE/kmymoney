@@ -17,19 +17,19 @@ class PivotTableTest;
 #define KMM_MYMONEY_UNIT_TESTABLE friend class reports::PivotTableTest;
 
 #include "mymoneyfile.h"
+#include "mymoneytestutils.h"
 #include "reporttable.h"
 
 namespace reports
 {
 
-class PivotTableTest : public QObject
+class PivotTableTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 private:
     MyMoneyFile* file;
 
 private Q_SLOTS:
-    void initTestCase();
     void init();
     void cleanup();
     void testNetWorthSingle();

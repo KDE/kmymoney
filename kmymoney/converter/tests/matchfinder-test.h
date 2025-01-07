@@ -11,14 +11,15 @@
 #include <QObject>
 #include <QScopedPointer>
 
+#include "existingtransactionmatchfinder.h"
 #include "mymoneyaccount.h"
 #include "mymoneypayee.h"
-#include "existingtransactionmatchfinder.h"
+#include "mymoneytestutils.h"
 #include "scheduledtransactionmatchfinder.h"
 
 class MyMoneyFile;
 
-class MatchFinderTest : public QObject
+class MatchFinderTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 

@@ -6,8 +6,6 @@
 
 #include "pivotgrid-test.h"
 
-#include <KLocalizedString>
-
 #include <QTest>
 
 #include "tests/testutilities.h"
@@ -22,11 +20,6 @@ using namespace reports;
 using namespace test;
 
 QTEST_GUILESS_MAIN(PivotGridTest)
-
-void PivotGridTest::initTestCase()
-{
-    KLocalizedString::setApplicationDomain(QByteArrayLiteral("kmymoney"));
-}
 
 void PivotGridTest::init()
 {

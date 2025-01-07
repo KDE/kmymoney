@@ -21,5 +21,6 @@ ecm_add_tests(${tests_sources}
   LINK_LIBRARIES
     Qt::Test
     mymoneystoragexml
+    kmm_testutils
     kmm_testutilities
 )

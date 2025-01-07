@@ -9,11 +9,13 @@
 #include <QObject>
 #include <QString>
 
-class MyMoneyFile;
-
 #define KMM_MYMONEY_UNIT_TESTABLE friend class onlineJobAdministrationTest;
 
-class onlineJobAdministrationTest : public QObject
+#include "mymoneytestutils.h"
+
+class MyMoneyFile;
+
+class onlineJobAdministrationTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 

@@ -8,10 +8,12 @@
 #define KREPORTSVIEWTEST_H
 
 #include <QObject>
+
 #include "mymoneyfile.h"
 #include "mymoneystoragemgr.h"
+#include "mymoneytestutils.h"
 
-class KReportsViewTest : public QObject
+class KReportsViewTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 

@@ -10,7 +10,9 @@
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class onlineJobTypedTest;
 
-class onlineJobTypedTest : public QObject
+#include "mymoneytestutils.h"
+
+class onlineJobTypedTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 private Q_SLOTS:

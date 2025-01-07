@@ -8,16 +8,17 @@
 #define QUERYTABLETEST_H
 
 #include <QObject>
-#include "mymoneyfile.h"
 
-class QueryTableTest : public QObject
+#include "mymoneyfile.h"
+#include "mymoneytestutils.h"
+
+class QueryTableTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 private:
     MyMoneyFile* file;
 
 private Q_SLOTS:
-    void initTestCase();
     void init();
     void cleanup();
     void testQueryBasics();

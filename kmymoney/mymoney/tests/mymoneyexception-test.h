@@ -8,7 +8,9 @@
 
 #include <QObject>
 
-class MyMoneyExceptionTest : public QObject
+#include "mymoneytestutils.h"
+
+class MyMoneyExceptionTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 

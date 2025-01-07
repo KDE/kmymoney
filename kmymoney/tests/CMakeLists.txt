@@ -7,6 +7,7 @@ ecm_add_tests(${tests_sources}
   LINK_LIBRARIES
     Qt::Core
     Qt::Test
+    kmm_testutils
     kmymoney_common
 )
 

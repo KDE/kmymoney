@@ -17,5 +17,6 @@ ecm_add_tests(${tests_sources}
   LINK_LIBRARIES
     Qt::Test
     kmm_csvimportercore
+    kmm_testutils
     csvimport_testcommon
 )

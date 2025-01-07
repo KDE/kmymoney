@@ -9,6 +9,7 @@ target_link_libraries(testwidgets PUBLIC
     Qt::Gui
     Qt::Core
     kmm_mymoney
+    kmm_testutils
 )
 
 file(GLOB tests_sources "*-test.cpp")

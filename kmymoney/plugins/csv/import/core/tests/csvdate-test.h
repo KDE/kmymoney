@@ -9,9 +9,11 @@
 
 #include <QObject>
 
+#include "mymoneytestutils.h"
+
 class ConvertDate;
 
-class CsvDateTest : public QObject
+class CsvDateTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 public:

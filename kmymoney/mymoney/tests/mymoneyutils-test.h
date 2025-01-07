@@ -9,7 +9,9 @@
 #include <QLocale>
 #include <QObject>
 
-class MyMoneyUtilsTest : public QObject
+#include "mymoneytestutils.h"
+
+class MyMoneyUtilsTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 

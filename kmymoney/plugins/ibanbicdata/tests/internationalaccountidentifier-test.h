@@ -10,7 +10,9 @@
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class internationalAccountIdentifierTest;
 
-class internationalAccountIdentifierTest : public QObject
+#include "mymoneytestutils.h"
+
+class internationalAccountIdentifierTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 

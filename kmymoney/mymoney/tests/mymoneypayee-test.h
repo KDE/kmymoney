@@ -11,7 +11,9 @@
 
 #include <QObject>
 
-class MyMoneyPayeeTest : public QObject
+#include "mymoneytestutils.h"
+
+class MyMoneyPayeeTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 private Q_SLOTS:

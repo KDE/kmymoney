@@ -11,7 +11,9 @@
 #include <QSqlDatabase>
 #include <QTemporaryFile>
 
-class qsqlciphertest : public QObject
+#include "mymoneytestutils.h"
+
+class qsqlciphertest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 private:

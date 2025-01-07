@@ -9,7 +9,9 @@
 #include <QObject>
 #include <QString>
 
-class onlineJobTest : public QObject
+#include "mymoneytestutils.h"
+
+class onlineJobTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 

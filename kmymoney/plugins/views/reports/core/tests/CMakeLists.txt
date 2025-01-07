@@ -17,6 +17,7 @@ ecm_add_tests(${tests_sources}
     Qt::Test
     reports
     kmm_mymoney
+    kmm_testutils
     kmm_testutilities
 )
 

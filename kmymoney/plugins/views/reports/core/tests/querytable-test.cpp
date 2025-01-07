@@ -6,8 +6,6 @@
 
 #include "querytable-test.h"
 
-#include <KLocalizedString>
-
 #include <QFile>
 #include <QTest>
 
@@ -88,11 +86,6 @@ void writeTable(const QueryTable& table, const QString& basename = QString())
     writeTabletoCSV(table, basename);
     writeTabletoHTML(table, basename);
     writeTabletoXML(table, basename);
-}
-
-void QueryTableTest::initTestCase()
-{
-    KLocalizedString::setApplicationDomain(QByteArrayLiteral("kmymoney"));
 }
 
 void QueryTableTest::init()

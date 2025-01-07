@@ -11,8 +11,9 @@
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyReportTest;
 
 #include "mymoneyreport.h"
+#include "mymoneytestutils.h"
 
-class MyMoneyReportTest : public QObject
+class MyMoneyReportTest : public QObject, public MyMoneyTestBase
 {
     Q_OBJECT
 
