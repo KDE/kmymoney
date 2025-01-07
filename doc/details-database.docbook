@@ -202,7 +202,7 @@
 </para>
 
 <para>
-  The creators of <ulink url="https://www zetatic.net/sqlcipher">SQLCipher</ulink>
+  The creators of <ulink url="https://www.zetetic.net/sqlcipher">SQLCipher</ulink>
   released version 4.0 in November, 2018.  However, many &kmymoney; users, especially
   those who do not upgrade very often, or who use LTS (Long Term Support) &Linux;
   distributions, may still be using a database created with version 3 of SQLCipher.
