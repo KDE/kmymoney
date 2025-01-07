@@ -1338,7 +1338,7 @@ public:
             ++it;
         }
 
-        //only do it if we have assets or liabilities account
+        // only do it if we have assets or liabilities account
         if (assets.count() > 0 || liabilities.count() > 0) {
             // sort the accounts by name
             std::stable_sort(assets.begin(), assets.end(), accountNameLess);
@@ -1348,71 +1348,59 @@ public:
                 statusHeader = QString("<img src=\"%1\" border=\"0\">").arg(pathStatusHeader);
             }
 
-            //print header
+            // print header
             m_html +=
                 "<table width=\"97%\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" class=\"displayblock\" >"
                 "<tr><td class=\"summaryheader\">"
                 + i18nc("@title Home page section", "Assets and Liabilities Summary") + "</td></tr>";
             m_html += "<tr><td><table align=\"center\" width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
 
-            //column titles
+            // column titles
 
-            m_html += "<tr class=\"item\">";
+            m_html += QLatin1String("<tr class=\"item\">");
 
-            if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
-                m_html += "<td class=\"setcolor center\">";
-                m_html += statusHeader;
-                m_html += "</td>";
-            }
+            const QString endCell = QLatin1String("</td>");
+            const QString startCell = QLatin1String("<td width=\"%1%\" class=\"setcolor center\">");
 
-            m_html += "<td class=\"left\" width=\"30%\">";
-            m_html += i18nc("@title:column table on home page", "Asset Accounts");
-            m_html += "</td>";
+            auto columnHeader = [&](const QString& text, int width) -> QString {
+                return startCell.arg(width) + text + endCell;
+            };
 
-            if (KMyMoneySettings::showCountOfUnmarkedTransactions())
-                m_html += "<td width=\"1%\" class=\"setcolor center\">!M</td>";
+            auto createHeaders = [&](const QString& type) -> void {
+                if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
+                    m_html += QLatin1String("<td class=\"setcolor center\">") + statusHeader + endCell;
+                }
 
-            if (KMyMoneySettings::showCountOfClearedTransactions())
-                m_html += "<td width=\"1%\" class=\"setcolor center\">C</td>";
+                m_html += QLatin1String("<td class=\"left\" width=\"30%\">");
+                m_html += type;
+                m_html += endCell;
 
-            if (KMyMoneySettings::showCountOfNotReconciledTransactions())
-                m_html += "<td width=\"1%\" class=\"setcolor center\">!R</td>";
+                if (KMyMoneySettings::showCountOfUnmarkedTransactions()) {
+                    m_html += columnHeader(i18nc("@title:column table on home page: not marked", "!M"), 1);
+                }
 
-            if (KMyMoneySettings::showDateOfLastReconciliation())
-                m_html += "<td width=\"1%\" class=\"setcolor\">" + i18n("Reconciled") + "</td>";
+                if (KMyMoneySettings::showCountOfClearedTransactions()) {
+                    m_html += columnHeader(i18nc("@title:column table on home page: cleared", "C"), 1);
+                }
 
-            m_html += "<td width=\"5%\" class=\"right nowrap\">";
-            m_html += i18nc("@title:column table on home page", "Balance");
-            m_html += "</td>";
+                if (KMyMoneySettings::showCountOfNotReconciledTransactions()) {
+                    m_html += columnHeader(i18nc("@title:column table on home page: not reconciled", "!R"), 1);
+                }
 
-            //intermediate row to separate both columns
-            m_html += "<td width=\"5%\" class=\"setcolor\"></td>";
+                if (KMyMoneySettings::showDateOfLastReconciliation()) {
+                    m_html += columnHeader(i18nc("@title:column table on home page: last reconciliation date", "Reconciled"), 5);
+                }
+                m_html += QLatin1String("<td width=\"5%\" class=\"right nowrap\">");
+                m_html += i18nc("@title:column table on home page", "Balance");
+                m_html += endCell;
+            };
 
-            if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
-                m_html += "<td class=\"setcolor center\">";
-                m_html += statusHeader;
-                m_html += "</td>";
-            }
+            createHeaders(i18nc("@title:column table on home page", "Asset Accounts"));
 
-            m_html += "<td class=\"left\" width=\"30%\">";
-            m_html += i18nc("@title:column table on home page", "Liability Accounts");
-            m_html += "</td>";
+            // intermediate row to separate both columns
+            m_html += QLatin1String("<td width=\"5%\" class=\"setcolor\"></td>");
 
-            if (KMyMoneySettings::showCountOfUnmarkedTransactions())
-                m_html += "<td width=\"1%\" class=\"setcolor nowrap\">!M</td>";
-
-            if (KMyMoneySettings::showCountOfClearedTransactions())
-                m_html += "<td width=\"1%\" class=\"setcolor nowrap\">C</td>";
-
-            if (KMyMoneySettings::showCountOfNotReconciledTransactions())
-                m_html += "<td width=\"1%\" class=\"setcolor nowrap\">!R</td>";
-
-            if (KMyMoneySettings::showDateOfLastReconciliation())
-                m_html += "<td width=\"1%\" class=\"setcolor nowrap\">" + i18n("Reconciled") + "</td>";
-
-            m_html += "<td width=\"5%\" class=\"right nowrap\">";
-            m_html += i18nc("@title:column table on home page", "Balance");
-            m_html += "</td></tr>";
+            createHeaders(i18nc("@title:column table on home page", "Liability Accounts"));
 
             QString placeHolder_Status, placeHolder_Counts;
             if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) placeHolder_Status = "<td></td>";
@@ -1421,22 +1409,22 @@ public:
             if (KMyMoneySettings::showCountOfNotReconciledTransactions()) placeHolder_Counts += "<td></td>";
             if (KMyMoneySettings::showDateOfLastReconciliation()) placeHolder_Counts += "<td></td>";
 
-            //get asset and liability accounts
+            // get asset and liability accounts
             QList<MyMoneyAccount>::const_iterator asset_it = assets.cbegin();
             QList<MyMoneyAccount>::const_iterator liabilities_it = liabilities.cbegin();
             for (; asset_it != assets.cend() || liabilities_it != liabilities.cend();) {
                 m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
-                //write an asset account if we still have any
+                // write an asset account if we still have any
                 if (asset_it != assets.cend()) {
                     MyMoneyMoney value;
-                    //investment accounts consolidate the balance of its subaccounts
+                    // investment accounts consolidate the balance of its subaccounts
                     if ((*asset_it).accountType() == Account::Type::Investment) {
                         value = investmentBalance(*asset_it);
                     } else {
                         value = MyMoneyFile::instance()->balance((*asset_it).id(), QDate::currentDate());
                     }
 
-                    //calculate balance for foreign currency accounts
+                    // calculate balance for foreign currency accounts
                     if ((*asset_it).currencyId() != file->baseCurrency().id()) {
                         const auto curPrice = file->price((*asset_it).tradingCurrencyId(), file->baseCurrency().id(), QDate::currentDate());
                         const auto curRate = curPrice.rate(file->baseCurrency().id());
@@ -1446,22 +1434,22 @@ public:
                     } else {
                         netAssets += value;
                     }
-                    //show the account without minimum balance
+                    // show the account without minimum balance
                     showAccountEntry(*asset_it, value, MyMoneyMoney(), false);
                     ++asset_it;
                 } else {
-                    //write a white space if we don't
+                    // write a white space if we don't
                     m_html += QString("%1<td></td>%2<td></td>").arg(placeHolder_Status, placeHolder_Counts);
                 }
 
-                //leave the intermediate column empty
+                // leave the intermediate column empty
                 m_html += "<td class=\"setcolor\"></td>";
 
-                //write a liability account
+                // write a liability account
                 if (liabilities_it != liabilities.cend()) {
                     MyMoneyMoney value;
                     value = MyMoneyFile::instance()->balance((*liabilities_it).id(), QDate::currentDate());
-                    //calculate balance if foreign currency
+                    // calculate balance if foreign currency
                     if ((*liabilities_it).currencyId() != file->baseCurrency().id()) {
                         const auto curPrice = file->price((*liabilities_it).tradingCurrencyId(), file->baseCurrency().id(), QDate::currentDate());
                         const auto curRate = curPrice.rate(file->baseCurrency().id());
@@ -1471,20 +1459,20 @@ public:
                     } else {
                         netLiabilities += value;
                     }
-                    //show the account without minimum balance
+                    // show the account without minimum balance
                     showAccountEntry(*liabilities_it, value * MyMoneyAccount::balanceFactor((*liabilities_it).accountType()), MyMoneyMoney(), false);
                     ++liabilities_it;
                 } else {
-                    //leave the space empty if we run out of liabilities
+                    // leave the space empty if we run out of liabilities
                     m_html += QString("%1<td></td>%2<td></td>").arg(placeHolder_Status, placeHolder_Counts);
                 }
                 m_html += "</tr>";
             }
 
-            //calculate net worth
+            // calculate net worth
             MyMoneyMoney netWorth = netAssets + netLiabilities;
 
-            //format assets, liabilities and net worth
+            // format assets, liabilities and net worth
             QString amountAssets = netAssets.formatMoney(file->baseCurrency().tradingSymbol(), prec);
             QString amountLiabilities =
                 (netLiabilities * MyMoneyAccount::balanceFactor(eMyMoney::Account::Type::Liability)).formatMoney(file->baseCurrency().tradingSymbol(), prec);
@@ -1495,14 +1483,14 @@ public:
 
             m_html += QString("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(i++ & 0x01 ? "even" : "odd");
 
-            //print total for assets
+            // print total for assets
             m_html += QString("%1<td class=\"left\">%2</td>%3<td class=\"right nowrap\">%4</td>")
                           .arg(placeHolder_Status, i18n("Total Assets"), placeHolder_Counts, showColoredAmount(amountAssets, netAssets.isNegative()));
 
-            //leave the intermediate column empty
+            // leave the intermediate column empty
             m_html += "<td class=\"setcolor\"></td>";
 
-            //print total liabilities
+            // print total liabilities
             m_html += QString("%1<td class=\"left\">%2</td>%3<td class=\"right nowrap\">%4</td>")
                           .arg(placeHolder_Status,
                                i18n("Total Liabilities"),
@@ -1511,7 +1499,7 @@ public:
                                                  (netLiabilities * MyMoneyAccount::balanceFactor(eMyMoney::Account::Type::Liability)).isNegative()));
             m_html += "</tr>";
 
-            //print net worth
+            // print net worth
             m_html += QString("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(i++ & 0x01 ? "even" : "odd");
 
             m_html += QString("%1<td></td><td></td>%2<td class=\"setcolor\"></td>").arg(placeHolder_Status, placeHolder_Counts);
