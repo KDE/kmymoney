@@ -496,7 +496,7 @@ const QString MyMoneyDbDef::generateSQL(const QExplicitlySharedDataPointer<MyMon
             replace = QString::number(m_currentVersion);
         if ((*fit)->name() == "fixLevel") {
             const auto file = MyMoneyFile::instance();
-            replace = file->parametersModel()->itemById(file->fixedKey(MyMoneyFile::FileFixVersion)).value();
+            replace = file->fileInfoModel()->itemById(file->fixedKey(MyMoneyFile::FileFixVersion)).value();
         }
         if ((*fit)->name() == "created")
             replace = QLatin1Char('\'')

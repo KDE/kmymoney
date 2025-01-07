@@ -175,6 +175,7 @@ public:
         , journalModel(qq, &undoStack)
         , priceModel(qq, &undoStack)
         , parametersModel(qq, &undoStack)
+        , fileInfoModel(qq, &undoStack)
         , onlineJobsModel(qq, &undoStack)
         , reportsModel(qq, &undoStack)
         , specialDatesModel(qq, &undoStack)
@@ -197,6 +198,7 @@ public:
         new QAbstractItemModelTester(&journalModel, QAbstractItemModelTester::FailureReportingMode::Warning);
         new QAbstractItemModelTester(&priceModel, QAbstractItemModelTester::FailureReportingMode::Warning);
         new QAbstractItemModelTester(&parametersModel, QAbstractItemModelTester::FailureReportingMode::Warning);
+        new QAbstractItemModelTester(&fileInfoModel, QAbstractItemModelTester::FailureReportingMode::Warning);
         new QAbstractItemModelTester(&onlineJobsModel, QAbstractItemModelTester::FailureReportingMode::Warning);
         new QAbstractItemModelTester(&reportsModel, QAbstractItemModelTester::FailureReportingMode::Warning);
         new QAbstractItemModelTester(&specialDatesModel, QAbstractItemModelTester::FailureReportingMode::Warning);
@@ -406,6 +408,7 @@ public:
     JournalModel        journalModel;
     PriceModel          priceModel;
     ParametersModel     parametersModel;
+    ParametersModel     fileInfoModel;
     OnlineJobsModel     onlineJobsModel;
     ReportsModel        reportsModel;
     SpecialDatesModel   specialDatesModel;
@@ -516,7 +519,7 @@ void MyMoneyFile::unload()
 
 int MyMoneyFile::fileFixVersion() const
 {
-    QString version = d->parametersModel.itemById(fixedKey(FileFixVersion)).value();
+    QString version = d->fileInfoModel.itemById(fixedKey(FileFixVersion)).value();
     if (version.isEmpty()) {
         return availableFixVersion();
     }
@@ -527,7 +530,7 @@ void MyMoneyFile::setFileFixVersion(int version)
 {
     if (version > availableFixVersion())
         version = availableFixVersion();
-    d->parametersModel.addItem(fixedKey(FileFixVersion), QString("%1").arg(version));
+    d->fileInfoModel.addItem(fixedKey(FileFixVersion), QString("%1").arg(version));
 }
 
 #if 0
@@ -698,7 +701,7 @@ void MyMoneyFile::commitTransaction()
 
     // as a last action, update the last modification date and send out the global dataChanged signal
     if (changed) {
-        d->parametersModel.addItem(fixedKey(MyMoneyFile::LastModificationDate), MyMoneyUtils::dateTimeToIsoString(QDateTime::currentDateTime()));
+        d->fileInfoModel.addItem(fixedKey(MyMoneyFile::LastModificationDate), MyMoneyUtils::dateTimeToIsoString(QDateTime::currentDateTime()));
 
         Q_EMIT dataChanged();
     }
@@ -1804,6 +1807,11 @@ PriceModel* MyMoneyFile::priceModel() const
 ParametersModel* MyMoneyFile::parametersModel() const
 {
     return &d->parametersModel;
+}
+
+ParametersModel* MyMoneyFile::fileInfoModel() const
+{
+    return &d->fileInfoModel;
 }
 
 OnlineJobsModel* MyMoneyFile::onlineJobsModel() const

@@ -337,6 +337,7 @@ public:
             }
             m_reader->skipCurrentElement();
         }
+        m_file->fileInfoModel()->load(m_fileInformation);
     }
 
     void readUser()
@@ -1220,9 +1221,6 @@ public:
         if (!m_reader->hasError()) {
             auto pairs = m_kvp.pairs();
 
-            // add in the fileinformation so that it is contained
-            // in the parametersModel
-            pairs.insert(m_fileInformation);
             m_file->parametersModel()->load(m_kvp.pairs());
 
             // loading does not count as making dirty

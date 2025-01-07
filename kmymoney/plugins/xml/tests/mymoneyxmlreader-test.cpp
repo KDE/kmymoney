@@ -502,9 +502,7 @@ void MyMoneyXmlReaderTest::testReadKeyValuePairs()
         "<FIXVERSION id=\"5\"/>"
         "</FILEINFO>"
         "<KEYVALUEPAIRS>"
-        "<PAIR key=\"CreationDate\" value=\"2003-09-29\"/>"
-        "<PAIR key=\"FixVersion\" value=\"5\"/>"
-        "<PAIR key=\"LastModificationDate\" value=\"2022-01-05\"/>"
+        "<PAIR key=\"LastModificationDate\" value=\"2022-01-06\"/>"
         "<PAIR key=\"kmm-baseCurrency\" value=\"EUR\"/>"
         "<PAIR key=\"kmm-encryption-key\" value=\"0xB7BA5DD3\"/>"
         "<PAIR key=\"kmm-id\" value=\"{7bc9cc97-d690-4540-90c2-6e8f88b27581}\"/>"
@@ -512,14 +510,17 @@ void MyMoneyXmlReaderTest::testReadKeyValuePairs()
 
     QCOMPARE(r->read(createFile(data)), true);
 
-    const auto model = MyMoneyFile::instance()->parametersModel();
-    QCOMPARE(model->rowCount(), 6);
+    const auto model = MyMoneyFile::instance()->fileInfoModel();
+    QCOMPARE(model->rowCount(), 3);
     QCOMPARE(model->itemById(QLatin1String("CreationDate")).value(), QLatin1String("2003-09-29"));
     QCOMPARE(model->itemById(QLatin1String("FixVersion")).value().toUInt(), 5);
     QCOMPARE(model->itemById(QLatin1String("LastModificationDate")).value(), QLatin1String("2022-01-05"));
-    QCOMPARE(model->itemById(QLatin1String("kmm-baseCurrency")).value(), QLatin1String("EUR"));
-    QCOMPARE(model->itemById(QLatin1String("kmm-encryption-key")).value(), QLatin1String("0xB7BA5DD3"));
-    QCOMPARE(model->itemById(QLatin1String("kmm-id")).value(), QLatin1String("{7bc9cc97-d690-4540-90c2-6e8f88b27581}"));
+    const auto parametersModel = MyMoneyFile::instance()->parametersModel();
+    QCOMPARE(parametersModel->rowCount(), 4);
+    QCOMPARE(parametersModel->itemById(QLatin1String("LastModificationDate")).value(), QLatin1String("2022-01-06"));
+    QCOMPARE(parametersModel->itemById(QLatin1String("kmm-baseCurrency")).value(), QLatin1String("EUR"));
+    QCOMPARE(parametersModel->itemById(QLatin1String("kmm-encryption-key")).value(), QLatin1String("0xB7BA5DD3"));
+    QCOMPARE(parametersModel->itemById(QLatin1String("kmm-id")).value(), QLatin1String("{7bc9cc97-d690-4540-90c2-6e8f88b27581}"));
 }
 
 void MyMoneyXmlReaderTest::testReadSchedules()

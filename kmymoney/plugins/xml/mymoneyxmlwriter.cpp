@@ -147,17 +147,17 @@ void MyMoneyXmlWriterPrivate::writeFileInformation()
     m_writer->writeStartElement(tagName(Tag::FileInfo));
 
     m_writer->writeStartElement(elementName(Element::General::CreationDate));
-    m_writer->writeAttribute(attributeName(Attribute::General::Date), m_file->parametersModel()->itemById(m_file->fixedKey(MyMoneyFile::CreationDate)).value());
+    m_writer->writeAttribute(attributeName(Attribute::General::Date), m_file->fileInfoModel()->itemById(m_file->fixedKey(MyMoneyFile::CreationDate)).value());
     m_writer->writeEndElement();
     m_writer->writeStartElement(elementName(Element::General::LastModifiedDate));
     m_writer->writeAttribute(attributeName(Attribute::General::Date),
-                             m_file->parametersModel()->itemById(m_file->fixedKey(MyMoneyFile::LastModificationDate)).value());
+                             m_file->fileInfoModel()->itemById(m_file->fixedKey(MyMoneyFile::LastModificationDate)).value());
     m_writer->writeEndElement();
     m_writer->writeStartElement(elementName(Element::General::Version));
     m_writer->writeAttribute(attributeName(Attribute::General::ID), QLatin1String("1"));
     m_writer->writeEndElement();
     m_writer->writeStartElement(elementName(Element::General::FixVersion));
-    m_writer->writeAttribute(attributeName(Attribute::General::ID), m_file->parametersModel()->itemById(m_file->fixedKey(MyMoneyFile::FileFixVersion)).value());
+    m_writer->writeAttribute(attributeName(Attribute::General::ID), m_file->fileInfoModel()->itemById(m_file->fixedKey(MyMoneyFile::FileFixVersion)).value());
     m_writer->writeEndElement();
     m_writer->writeStartElement(elementName(Element::General::ApplicationVersion));
     m_writer->writeAttribute(attributeName(Attribute::General::ID), QLatin1String(VERSION));
@@ -721,8 +721,8 @@ void MyMoneyXmlWriterPrivate::writeKMyMoney()
     writeAccounts();
     writeTransactions();
     QMap<QString, QString> map = m_file->parametersModel()->pairs();
-    // do not duplicate key 'FixVersion' into KeyValuePairs tag, see https://bugs.kde.org/show_bug.cgi?id=498419
-    map.remove(m_file->fixedKey(MyMoneyFile::FileFixVersion));
+    // for compatibility, see https://bugs.kde.org/show_bug.cgi?id=498419
+    map[m_file->fixedKey(MyMoneyFile::LastModificationDate)] = m_file->fileInfoModel()->itemById(m_file->fixedKey(MyMoneyFile::LastModificationDate)).value();
     writeKeyValueContainer(m_writer, map);
     writeSchedules();
     writeSecurities();

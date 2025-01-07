@@ -74,8 +74,8 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
     s << "user zip = " << user.postcode() << "\n";
     s << "user telephone = " << user.telephone() << "\n";
     s << "user e-mail = " << user.email() << "\n";
-    s << "creation date = " << file->parametersModel()->itemById(file->fixedKey(MyMoneyFile::CreationDate)).value() << "\n";
-    s << "last modification date = " << file->parametersModel()->itemById(file->fixedKey(MyMoneyFile::LastModificationDate)).value() << "\n";
+    s << "creation date = " << file->fileInfoModel()->itemById(file->fixedKey(MyMoneyFile::CreationDate)).value() << "\n";
+    s << "last modification date = " << file->fileInfoModel()->itemById(file->fixedKey(MyMoneyFile::LastModificationDate)).value() << "\n";
     s << "base currency = " << file->value("kmm-baseCurrency") << "\n";
     s << "\n";
 

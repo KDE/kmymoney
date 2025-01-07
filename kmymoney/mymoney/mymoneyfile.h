@@ -969,6 +969,11 @@ public:
     ParametersModel* parametersModel() const;
 
     /**
+     * The file info model instance
+     */
+    ParametersModel* fileInfoModel() const;
+
+    /**
      * The online jobs model instance
      */
     OnlineJobsModel* onlineJobsModel() const;
