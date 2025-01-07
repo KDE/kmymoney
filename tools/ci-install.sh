@@ -318,6 +318,9 @@ case "$ci_distro" in
             $zypper ar --no-refresh --no-check --no-gpgcheck $r || true
         done
 
+        # refresh repos to prevent outdated meta data
+        $zypper ref
+
         if test -v "source_packages"; then
             # enable source repo
             $zypper modifyrepo --enable repo-source
