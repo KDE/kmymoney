@@ -212,7 +212,7 @@ public:
      * This returns the currently implemented highest fix version
      */
     constexpr static int availableFixVersion() {
-        return 5;
+        return 6;
     }
 
     /**

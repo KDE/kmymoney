@@ -494,6 +494,11 @@ public:
                         file->setFileFixVersion(5);
                         break;
 
+                    case 5:
+                        fixFile_5();
+                        file->setFileFixVersion(6);
+                        break;
+
                     // add new levels above. Don't forget to increase currentFixVersion() for all
                     // the storage backends this fix applies to
                     default:
@@ -632,10 +637,36 @@ public:
         return MyMoneyFile::instance()->dirty();
     }
 
-
     /* DO NOT ADD code to this function or any of it's called ones.
        Instead, create a new function, fixFile_n, and modify the initializeStorage()
        logic above to call it */
+
+    void fixFile_5()
+    {
+        const auto file = MyMoneyFile::instance();
+        const auto model = file->journalModel();
+
+        // scan the transactions and modify investment transactions with
+        // "Add/Remove shares" action and a price which differs from 0
+        auto count = 0;
+        const auto rows = model->rowCount();
+        for (int row = 0; row < rows; ++row) {
+            const auto idx = model->index(row, 0);
+            const auto splitCount = idx.data(eMyMoney::Model::TransactionSplitCountRole).toInt();
+            if (splitCount == 1) {
+                MyMoneyTransaction transaction = model->itemByIndex(idx).transaction();
+                MyMoneySplit split = transaction.splits().at(0);
+                if (!split.price().isZero() && (split.actionStringToAction(split.action()) == eMyMoney::Split::Action::AddShares)) {
+                    split.setPrice(MyMoneyMoney());
+                    transaction.modifySplit(split);
+                    file->modifyTransaction(transaction);
+                    ++count;
+                }
+            }
+            row += splitCount;
+        }
+        qDebug() << count << "transaction(s) fixed in" << __FUNCTION__;
+    }
 
     void fixFile_4()
     {
