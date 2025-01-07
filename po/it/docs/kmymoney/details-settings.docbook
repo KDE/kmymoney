@@ -180,7 +180,7 @@
   <varlistentry>
     <term
 ><guilabel
->Sincronizza la selezione del libro mastro con la vista investimenti</guilabel
+>Sincronizzare la selezione del libro mastro con la vista investimenti</guilabel
 ></term>
     <listitem>
       <para
@@ -434,7 +434,7 @@
 
 <sect2>
 <title
->Riscalatura pagina principale/Riepilogo</title>
+>Ridimensionamento della pagina principale/Riepilogo</title>
 <variablelist>
 
   <varlistentry>

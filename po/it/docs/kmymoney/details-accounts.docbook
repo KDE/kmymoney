@@ -95,7 +95,7 @@
       </imageobject>
       <textobject>
         <phrase
->Procedura guidata di creazione di un account</phrase>
+>Procedura guidata di creazione di un conto</phrase>
       </textobject>
     </mediaobject>
   </screenshot>
@@ -111,7 +111,7 @@
 ><acronym
 >IBAN</acronym
 > (International Bank Account Number)</ulink
-> non vengono usati da &kmymoney;, per il momento. Questi campi possono essere lasciati vuoti e compilati in un secondo momento; sono richiesti solo per l'online banking. </para>
+> non vengono usati da &kmymoney;, per il momento. Questi campi possono essere lasciati vuoti e compilati in un secondo momento; sono richiesti solo per i servizi bancari in linea. </para>
 
 <para
 >Per andare al passo successivo premere <guibutton
@@ -131,7 +131,7 @@
             </imageobject>
             <textobject>
               <phrase
->Procedura guidata di creazione di un account</phrase>
+>Procedura guidata di creazione di un conto</phrase>
             </textobject>
           </mediaobject>
   </screenshot>
@@ -256,7 +256,7 @@
               </imageobject>
               <textobject>
                 <phrase
->Procedura guidata di creazione di un account</phrase>
+>Procedura guidata di creazione di un conto</phrase>
               </textobject>
             </mediaobject>
   </screenshot>
@@ -290,7 +290,7 @@
               </imageobject>
               <textobject>
                 <phrase
->Procedura guidata di creazione di un account</phrase>
+>Procedura guidata di creazione di un conto</phrase>
               </textobject>
             </mediaobject>
   </screenshot>
@@ -315,7 +315,7 @@
               </imageobject>
               <textobject>
                 <phrase
->Procedura guidata di creazione di un account</phrase>
+>Procedura guidata di creazione di un conto</phrase>
               </textobject>
             </mediaobject>
   </screenshot>
@@ -358,7 +358,7 @@
               </imageobject>
               <textobject>
                 <phrase
->Procedura guidata di creazione di un account</phrase>
+>Procedura guidata di creazione di un conto</phrase>
               </textobject>
             </mediaobject>
   </screenshot>
@@ -441,7 +441,7 @@
               </imageobject>
               <textobject>
                 <phrase
->Procedura guidata di creazione di un account</phrase>
+>Procedura guidata di creazione di un conto</phrase>
               </textobject>
             </mediaobject>
   </screenshot>
@@ -463,7 +463,7 @@
               </imageobject>
               <textobject>
                 <phrase
->Procedura guidata di creazione di un account</phrase>
+>Procedura guidata di creazione di un conto</phrase>
               </textobject>
             </mediaobject>
   </screenshot>
@@ -488,7 +488,7 @@
               </imageobject>
               <textobject>
                 <phrase
->Procedura guidata di creazione di un account</phrase>
+>Procedura guidata di creazione di un conto</phrase>
               </textobject>
             </mediaobject>
   </screenshot>
@@ -528,7 +528,7 @@
 	  </imageobject>
 	  <textobject>
 	    <phrase
->Procedura guidata di creazione di un account</phrase>
+>Procedura guidata di creazione di un conto</phrase>
 	  </textobject>
 	</mediaobject>
   </screenshot>
@@ -559,7 +559,7 @@
             </imageobject>
             <textobject>
               <phrase
->Procedura guidata di creazione di un account</phrase>
+>Procedura guidata di creazione di un conto</phrase>
             </textobject>
           </mediaobject>
   </screenshot>

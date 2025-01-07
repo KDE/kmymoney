@@ -323,7 +323,7 @@
 >Transazioni bilanciate</title>
 
 <para
->Come in &gnucash;, i dati sono inseriti sotto forma di transazioni, ognuna generalmente costituita da due o più parti. Di fatto, le transazioni valide di &gnucash; contengono sempre almeno due parti, e per essere conformi allo standard contabile della partita doppia, devono essere bilanciate (&ie; devono avere somma zero). &kmymoney; incoraggia a seguire questo schema, ma non obbliga a farlo; comunque, ogni transazione importata che non è bilanciata sarà segnalata nel registro come un problema. </para>
+>Come in &gnucash;, i dati sono inseriti sotto forma di transazioni, ognuna generalmente costituita da due o più parti. Di fatto, le transazioni valide di &gnucash; contengono sempre almeno due parti, e per essere conformi allo standard contabile della partita doppia, devono essere bilanciate (&ie; devono avere somma zero). &kmymoney; incoraggia a seguire questo schema, ma non obbliga a farlo; comunque, ogni transazione importata che non è bilanciata sarà segnalata nella vista del registro come un problema. </para>
 </sect4>
 
 <sect4>
@@ -611,7 +611,7 @@
 </sect1info>
 
 <title
->Importazione QIF</title>
+>Modulo di importazione QIF</title>
 
 <sect2>
 <title
@@ -861,7 +861,7 @@
 >Come indicato in precedenza, uno dei punti deboli del formato QIF è la mancanza di un identificatore univoco per le transazioni. Quindi se si importa un file QIF e alcune delle transazioni sono già nel registro, si otterranno dei duplicati. &kmymoney; cerca di evitare questa situazione cercando transazioni simili a quelle che si hanno già. Se trova una possibile corrispondenza, abbina le transazioni simili. </para>
 
 <para
->Questo può dare problemi se si hanno transazioni simili ma diverse. In questo caso, è possibile rimuovere l'abbinamento tra le transazioni nella vista del Registro. </para>
+>Questo può dare problemi se si hanno transazioni simili ma diverse. In questo caso, è possibile rimuovere l'abbinamento tra le transazioni nella vista Registro. </para>
 </sect2>
 
 <sect2>
@@ -1085,7 +1085,7 @@
 <para
 >Il primo passo consiste nella configurazione di ogni conto per cui si desidera scaricare gli estratti. Portarsi nella vista Conti, fare clic con il tasto destro del mouse sul conto che si vuole configurare e scegliere <guimenuitem
 >Mappa a un conto in linea...</guimenuitem
->. Se è installata più di una estensione per l'online banking, sarà chiesto quale utilizzare. Per il metodo OFX interno, selezionare <guimenuitem
+>. Se è installata più di un'estensione per i servizi bancari in linea, sarà chiesto quale utilizzare. Per il metodo OFX interno, selezionare <guimenuitem
 >&kmymoney; OFX</guimenuitem
 >. Sarà scaricato da Internet un elenco di banche, e una procedura guidata permetterà di scegliere una banca, digitare nome utente e password e selezionare un conto. Se la propria banca non è nell'elenco, si può provare a utilizzare l'opzione manuale. La propria banca potrebbe essere in grado di fornire i parametri richiesti, o potrebbe essere necessaria qualche ricerca per reperirli. </para>
 
