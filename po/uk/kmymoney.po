@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-07 01:55+0000\n"
+"POT-Creation-Date: 2025-01-08 01:56+0000\n"
 "PO-Revision-Date: 2025-01-05 11:58+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -2208,7 +2208,7 @@ msgid "Liability"
 msgstr "Пасиви"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:550 kmymoney/kmymoney.cpp:445
-#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1806
+#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1794
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -4341,8 +4341,7 @@ msgstr "Звірено"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:345
 #: kmymoney/plugins/views/reports/core/listtable.cpp:695
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
-#: kmymoney/views/khomeview_p.h:1012 kmymoney/views/khomeview_p.h:1382
-#: kmymoney/views/khomeview_p.h:1411
+#: kmymoney/views/khomeview_p.h:1012
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:32
 #, kde-format
 msgid "Reconciled"
@@ -15602,7 +15601,7 @@ msgid "No data provided by reports plugin for this chart."
 msgstr "Для цієї діаграми додатком звітування не надано жодних даних."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:666
-#: kmymoney/views/khomeview_p.h:571 kmymoney/views/khomeview_p.h:1545
+#: kmymoney/views/khomeview_p.h:571 kmymoney/views/khomeview_p.h:1533
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "Щоб переглянути цю діаграму, увімкніть додаток звітів."
@@ -16825,7 +16824,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr "Кругова діаграма прибутків і витрат"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:880
-#: kmymoney/views/khomeview_p.h:1519
+#: kmymoney/views/khomeview_p.h:1507
 #, kde-format
 msgid "Net Worth"
 msgstr "Залишкова вартість"
@@ -17145,7 +17144,7 @@ msgid "Net Worth Forecast"
 msgstr "Прогноз залишкової вартості"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
-#: kmymoney/views/khomeview_p.h:1541
+#: kmymoney/views/khomeview_p.h:1529
 #, kde-format
 msgctxt "@title Home page section"
 msgid "Budget"
@@ -20064,13 +20063,38 @@ msgctxt "@title Home page section"
 msgid "Assets and Liabilities Summary"
 msgstr "Резюме активів і зобов'язань"
 
-#: kmymoney/views/khomeview_p.h:1369
-#, kde-format
-msgctxt "@title:column table on home page"
-msgid "Asset Accounts"
-msgstr "Рахунки активів"
+#: kmymoney/views/khomeview_p.h:1379
+#, fuzzy, kde-format
+#| msgctxt "Header not marked"
+#| msgid "!M"
+msgctxt "@title:column table on home page: not marked"
+msgid "!M"
+msgstr "!П"
 
-#: kmymoney/views/khomeview_p.h:1385 kmymoney/views/khomeview_p.h:1414
+#: kmymoney/views/khomeview_p.h:1383
+#, fuzzy, kde-format
+#| msgctxt "Reconciliation flag C"
+#| msgid "C"
+msgctxt "@title:column table on home page: cleared"
+msgid "C"
+msgstr "З"
+
+#: kmymoney/views/khomeview_p.h:1387
+#, fuzzy, kde-format
+#| msgctxt "Header not reconciled"
+#| msgid "!R"
+msgctxt "@title:column table on home page: not reconciled"
+msgid "!R"
+msgstr "!У"
+
+#: kmymoney/views/khomeview_p.h:1391
+#, fuzzy, kde-format
+#| msgid "Reconciled"
+msgctxt "@title:column table on home page: last reconciliation date"
+msgid "Reconciled"
+msgstr "Узгоджено"
+
+#: kmymoney/views/khomeview_p.h:1394
 #, kde-format
 msgctxt "@title:column table on home page"
 msgid "Balance"
@@ -20079,86 +20103,92 @@ msgstr "Баланс"
 #: kmymoney/views/khomeview_p.h:1398
 #, kde-format
 msgctxt "@title:column table on home page"
+msgid "Asset Accounts"
+msgstr "Рахунки активів"
+
+#: kmymoney/views/khomeview_p.h:1403
+#, kde-format
+msgctxt "@title:column table on home page"
 msgid "Liability Accounts"
 msgstr "Рахунки пасивів"
 
-#: kmymoney/views/khomeview_p.h:1500
+#: kmymoney/views/khomeview_p.h:1488
 #, kde-format
 msgid "Total Assets"
 msgstr "Загальні активи"
 
-#: kmymoney/views/khomeview_p.h:1508
+#: kmymoney/views/khomeview_p.h:1496
 #, kde-format
 msgid "Total Liabilities"
 msgstr "Загальні пасиви"
 
-#: kmymoney/views/khomeview_p.h:1796
+#: kmymoney/views/khomeview_p.h:1784
 #, kde-format
 msgctxt "@title Home page section"
 msgid "Cash Flow Summary"
 msgstr "Резюме грошової активності"
 
-#: kmymoney/views/khomeview_p.h:1801
+#: kmymoney/views/khomeview_p.h:1789
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "Прибутки і витрати поточного місяця"
 
-#: kmymoney/views/khomeview_p.h:1809
+#: kmymoney/views/khomeview_p.h:1797
 #, kde-format
 msgid "Scheduled Income"
 msgstr "Запланований прибуток"
 
-#: kmymoney/views/khomeview_p.h:1812
+#: kmymoney/views/khomeview_p.h:1800
 #, kde-format
 msgid "Expenses"
 msgstr "Витрати"
 
-#: kmymoney/views/khomeview_p.h:1815
+#: kmymoney/views/khomeview_p.h:1803
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "Заплановані витрати"
 
-#: kmymoney/views/khomeview_p.h:1843
+#: kmymoney/views/khomeview_p.h:1831
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "Ліквідні активи і зобов'язання"
 
-#: kmymoney/views/khomeview_p.h:1848
+#: kmymoney/views/khomeview_p.h:1836
 #, kde-format
 msgid "Liquid Assets"
 msgstr "Ліквідні активи"
 
-#: kmymoney/views/khomeview_p.h:1851
+#: kmymoney/views/khomeview_p.h:1839
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "Трансферти на ліквідні зобов'язання"
 
-#: kmymoney/views/khomeview_p.h:1854
+#: kmymoney/views/khomeview_p.h:1842
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "Ліквідні зобов'язання"
 
-#: kmymoney/views/khomeview_p.h:1857
+#: kmymoney/views/khomeview_p.h:1845
 #, kde-format
 msgid "Other Transfers"
 msgstr "Інші трансферти"
 
-#: kmymoney/views/khomeview_p.h:1900
+#: kmymoney/views/khomeview_p.h:1888
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "Стан грошової активності"
 
-#: kmymoney/views/khomeview_p.h:1905
+#: kmymoney/views/khomeview_p.h:1893
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "Очікувані ліквідні активи"
 
-#: kmymoney/views/khomeview_p.h:1908
+#: kmymoney/views/khomeview_p.h:1896
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "Очікувані ліквідні зобов'язання"
 
-#: kmymoney/views/khomeview_p.h:1911
+#: kmymoney/views/khomeview_p.h:1899
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "Очікувані доходи/втрати"
