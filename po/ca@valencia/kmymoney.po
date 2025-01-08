@@ -3,14 +3,14 @@
 # This file is put in the public domain.
 #
 # SPDX-FileCopyrightText: 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Antoni Bella Pérez <antonibella5@yahoo.com>
-# SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Josep M. Ferrer <txemaq@gmail.com>
 # Orestes Mas Casals <orestes@tsc.upc.edu>, 2006, 2010, 2011.
+# Josep M. Ferrer <txemaq@gmail.com>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2024-12-07 10:35+0100\n"
+"PO-Revision-Date: 2025-01-06 16:29+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -6035,22 +6035,22 @@ msgstr "Edita un compte…"
 #: kmymoney/kmymoney.cpp:1417
 #, kde-format
 msgid "Delete account..."
-msgstr "Suprimix un compte…"
+msgstr "Suprimix el compte…"
 
 #: kmymoney/kmymoney.cpp:1418
 #, kde-format
 msgid "Close account"
-msgstr "Tanca un compte"
+msgstr "Tanca el compte"
 
 #: kmymoney/kmymoney.cpp:1419
 #, kde-format
 msgid "Reopen account"
-msgstr "Torna a obrir un compte"
+msgstr "Torna a obrir el compte"
 
 #: kmymoney/kmymoney.cpp:1420
 #, kde-format
 msgid "Transaction report"
-msgstr "Informe d'operació"
+msgstr "Informe d'operacions"
 
 #: kmymoney/kmymoney.cpp:1421
 #, kde-format
@@ -13167,7 +13167,7 @@ msgstr "El nom del beneficiari està basat en el contingut de l'etiqueta OFX"
 #: kmymoney/plugins/ofx/import/importoption.ui:91
 #, kde-format
 msgid "Timezone offset"
-msgstr "Desplaçament de la zona horària"
+msgstr "Decalatge de la zona horària"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel21_1_2)
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)

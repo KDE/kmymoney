@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2025-01-06 16:29+0100\n"
+"PO-Revision-Date: 2025-01-07 17:56+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -1492,7 +1492,7 @@ msgstr "Usuari"
 #: kmymoney/dialogs/kcurrencycalculator.ui:17
 #, kde-format
 msgid "Exchange Rate/Price Editor"
-msgstr "Editor del tipus/preu de canvi"
+msgstr "Editor de tipus de canvi/preu"
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
 #. i18n: ectx: property (text), widget (QLabel, amountLabel)
@@ -1590,13 +1590,13 @@ msgstr "a"
 #: kmymoney/dialogs/kcurrencycalculator.ui:227
 #, kde-format
 msgid "To a&mount"
-msgstr "A i&mport"
+msgstr "Per i&mport"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_rateButton)
 #: kmymoney/dialogs/kcurrencycalculator.ui:237
 #, kde-format
 msgid "Exchange &rate / Price"
-msgstr "Tipus/p&reu de canvi"
+msgstr "Tipus de canvi/p&reu"
 
 #. i18n: ectx: property (text), widget (QLabel, m_conversionExample)
 #: kmymoney/dialogs/kcurrencycalculator.ui:301
