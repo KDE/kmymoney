@@ -1050,7 +1050,7 @@ public:
         // two years
         endingDate = startingDate.addDays(2 * 365);
         result = helperAROI(buys, sells, reinvestIncome, cashIncome, startingBalance, endingBalance, startingDate, endingDate);
-        QCOMPARE(result, MyMoneyMoney(17, 50).convert(10000).toString());
+        QCOMPARE(result, MyMoneyMoney(4271, 1250).convert(10000).toString());
 
         // half year
         endingDate = startingDate.addDays(365 / 2);

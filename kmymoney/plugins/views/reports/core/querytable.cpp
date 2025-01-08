@@ -1257,7 +1257,7 @@ QString QueryTable::helperAROI(const MyMoneyMoney& buys,
         return QString();
     }
     MyMoneyMoney annualizedReturn =
-        MyMoneyMoney(pow((MyMoneyMoney::ONE + returnInvestment).toDouble(), (MyMoneyMoney::ONE / numberOfYears).toDouble())) - MyMoneyMoney::ONE;
+        MyMoneyMoney(pow((MyMoneyMoney::ONE + returnInvestment).toDouble(), (MyMoneyMoney::ONE / numberOfYears).toDouble()), 10000) - MyMoneyMoney::ONE;
     return annualizedReturn.convert(10000).toString();
 }
 
