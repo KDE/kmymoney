@@ -201,8 +201,10 @@ void QueryTable::init()
                        << ctAnnualizedReturn;
             break;
         case eMyMoney::Report::InvestmentSum::Owned:
-            m_columns << ctBuys << ctReinvestIncome << ctEndingMarketValue << ctExtendedInternalRateOfReturn << ctReturnInvestment << ctAnnualizedReturn;
-            m_subtotal << ctBuys << ctReinvestIncome << ctEndingMarketValue << ctExtendedInternalRateOfReturn << ctReturnInvestment << ctAnnualizedReturn;
+            m_columns << ctBuys << ctReinvestIncome << ctCashIncome << ctEndingMarketValue << ctExtendedInternalRateOfReturn << ctReturnInvestment
+                      << ctAnnualizedReturn;
+            m_subtotal << ctBuys << ctReinvestIncome << ctCashIncome << ctEndingMarketValue << ctExtendedInternalRateOfReturn << ctReturnInvestment
+                       << ctAnnualizedReturn;
             break;
         case eMyMoney::Report::InvestmentSum::Sold:
             m_columns << ctBuys << ctSells << ctCashIncome << ctExtendedInternalRateOfReturn << ctReturnInvestment << ctAnnualizedReturn;
