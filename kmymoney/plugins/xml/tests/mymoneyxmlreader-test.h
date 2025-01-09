@@ -21,7 +21,7 @@
 class MyMoneyXmlReader;
 class MyMoneyFile;
 
-class MyMoneyXmlReaderTest : public QObject, public MyMoneyTestBase
+class MyMoneyXmlReaderTest : public QObject, public MyMoneyHideDebugTestBase
 {
     Q_OBJECT
 
@@ -40,8 +40,6 @@ protected:
     QString createCategoryData() const;
 
 private Q_SLOTS:
-    void initTestCase();
-    void cleanupTestCase();
     void init();
     void cleanup();
     void testReadFileInfo();

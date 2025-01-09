@@ -23,4 +23,28 @@ public:
     }
 };
 
+class MyMoneyHideDebugTestBase : public MyMoneyTestBase
+{
+public:
+    MyMoneyHideDebugTestBase()
+        : MyMoneyTestBase()
+    {
+        oldHandler = qInstallMessageHandler(hideDebugMessages);
+    }
+
+    ~MyMoneyHideDebugTestBase()
+    {
+        qInstallMessageHandler(oldHandler);
+    }
+
+protected:
+    static QtMessageHandler oldHandler;
+    static void hideDebugMessages(QtMsgType type, const QMessageLogContext& context, const QString& msg)
+    {
+        if (type != QtDebugMsg && oldHandler) {
+            oldHandler(type, context, msg);
+        }
+    }
+};
+
 #endif // MYMONEYTESTUTILS_H

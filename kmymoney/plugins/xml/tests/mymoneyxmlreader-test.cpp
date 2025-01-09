@@ -43,24 +43,6 @@
 
 QTEST_GUILESS_MAIN(MyMoneyXmlReaderTest)
 
-static QtMessageHandler oldHandler(nullptr);
-static void hideDebugMessages(QtMsgType type, const QMessageLogContext& context, const QString& msg)
-{
-    if (type != QtDebugMsg && oldHandler) {
-        oldHandler(type, context, msg);
-    }
-}
-
-void MyMoneyXmlReaderTest::initTestCase()
-{
-    oldHandler = qInstallMessageHandler(hideDebugMessages);
-}
-
-void MyMoneyXmlReaderTest::cleanupTestCase()
-{
-    qInstallMessageHandler(oldHandler);
-}
-
 void MyMoneyXmlReaderTest::init()
 {
     m_file = MyMoneyFile::instance();
