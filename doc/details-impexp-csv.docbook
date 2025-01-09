@@ -162,7 +162,7 @@
   name of a previously created CSV Importer profile, or enter a new name, possibly
   the name of the account into which you wish to import, and click
   <guilabel>Add</guilabel>.  Finally, click <guilabel>Select File</guilabel>, and a
-  file selector dialog will open, where you ` select the CSV file you wish to import.
+  file selector dialog will open, where you select the CSV file you wish to import.
 </para>
 </sect3>
 
@@ -578,7 +578,7 @@
 </para>
 
 <para>
-  You can edit a symbol or security name by double=clicking the cell.  For each
+  You can edit a symbol or security name by double-clicking the cell.  For each
   security, if necessary, edit the name in one of its rows, If the correct security
   name appears in the imported file, double-click it to select it, then copy and
   paste/edit, taking care if you have used a variation or abbreviation within
