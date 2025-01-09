@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-08 01:56+0000\n"
+"POT-Creation-Date: 2025-01-09 01:55+0000\n"
 "PO-Revision-Date: 2025-01-06 09:19+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -8425,7 +8425,7 @@ msgstr "Opération répartie"
 
 #: kmymoney/mymoney/splitmodel.cpp:118
 #: kmymoney/mymoney/storage/journalmodel.cpp:201
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1040
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1042
 #, kde-format
 msgid "*** UNASSIGNED ***"
 msgstr "*** NON ASSIGNÉ ***"
@@ -12633,8 +12633,8 @@ msgid "Get Transactions"
 msgstr "Obtenir les opérations"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:74
-#: kmymoney/plugins/views/reports/core/querytable.cpp:847
-#: kmymoney/plugins/views/reports/core/querytable.cpp:987
+#: kmymoney/plugins/views/reports/core/querytable.cpp:849
+#: kmymoney/plugins/views/reports/core/querytable.cpp:989
 #, kde-format
 msgid "Transfer"
 msgstr "Virement"
@@ -16185,19 +16185,19 @@ msgid "Starting Market Value"
 msgstr "Valeur de marché de départ"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
-#: kmymoney/plugins/views/reports/core/querytable.cpp:984
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1038
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2036
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2055
+#: kmymoney/plugins/views/reports/core/querytable.cpp:986
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1040
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2038
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2057
 #, kde-format
 msgid "Transfer from %1"
 msgstr "Virement depuis %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:222
-#: kmymoney/plugins/views/reports/core/querytable.cpp:985
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1037
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2035
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2054
+#: kmymoney/plugins/views/reports/core/querytable.cpp:987
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1039
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2037
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2056
 #, kde-format
 msgid "Transfer to %1"
 msgstr "Virement vers %1"
@@ -16283,53 +16283,53 @@ msgctxt "@title:column report header"
 msgid "Price"
 msgstr "Cours"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:576
-#: kmymoney/plugins/views/reports/core/querytable.cpp:589
+#: kmymoney/plugins/views/reports/core/querytable.cpp:578
+#: kmymoney/plugins/views/reports/core/querytable.cpp:591
 #, kde-format
 msgid "[No Tag]"
 msgstr "[Aucune étiquette]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:602
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1868
+#: kmymoney/plugins/views/reports/core/querytable.cpp:604
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1870
 #, kde-format
 msgid "Month of %1"
 msgstr "Mois de %1"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:603
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1869
+#: kmymoney/plugins/views/reports/core/querytable.cpp:605
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1871
 #, kde-format
 msgid "Week of %1"
 msgstr "Semaine de %1"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:826
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1043
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1186
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1997
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2169
+#: kmymoney/plugins/views/reports/core/querytable.cpp:828
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1045
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1188
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1999
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2171
 #, kde-format
 msgid "No Institution"
 msgstr "Pas d'établissement"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:830
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2008
+#: kmymoney/plugins/views/reports/core/querytable.cpp:832
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2010
 #, kde-format
 msgid "[Empty Payee]"
 msgstr "[Bénéficiaire vide]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:864
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2041
+#: kmymoney/plugins/views/reports/core/querytable.cpp:866
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2043
 #, kde-format
 msgid "[Split Transaction]"
 msgstr "[Opération Répartie]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:865
-#: kmymoney/plugins/views/reports/core/querytable.cpp:866
+#: kmymoney/plugins/views/reports/core/querytable.cpp:867
+#: kmymoney/plugins/views/reports/core/querytable.cpp:868
 #, kde-format
 msgctxt "Split transaction"
 msgid "Split"
 msgstr "Répartition"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1781
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1783
 #, kde-format
 msgctxt "No institution"
 msgid "None"

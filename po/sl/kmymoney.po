@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-08 01:56+0000\n"
-"PO-Revision-Date: 2025-01-05 08:31+0100\n"
+"POT-Creation-Date: 2025-01-09 01:55+0000\n"
+"PO-Revision-Date: 2025-01-08 05:28+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -8320,7 +8320,7 @@ msgstr "Razdeli transakcijo"
 
 #: kmymoney/mymoney/splitmodel.cpp:118
 #: kmymoney/mymoney/storage/journalmodel.cpp:201
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1040
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1042
 #, kde-format
 msgid "*** UNASSIGNED ***"
 msgstr "*** NEDODELJENO ***"
@@ -12478,8 +12478,8 @@ msgid "Get Transactions"
 msgstr "Pridobi transakcije"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:74
-#: kmymoney/plugins/views/reports/core/querytable.cpp:847
-#: kmymoney/plugins/views/reports/core/querytable.cpp:987
+#: kmymoney/plugins/views/reports/core/querytable.cpp:849
+#: kmymoney/plugins/views/reports/core/querytable.cpp:989
 #, kde-format
 msgid "Transfer"
 msgstr "Prenos"
@@ -16016,19 +16016,19 @@ msgid "Starting Market Value"
 msgstr "Začetna tržna vrednost"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
-#: kmymoney/plugins/views/reports/core/querytable.cpp:984
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1038
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2036
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2055
+#: kmymoney/plugins/views/reports/core/querytable.cpp:986
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1040
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2038
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2057
 #, kde-format
 msgid "Transfer from %1"
 msgstr "Prenos od %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:222
-#: kmymoney/plugins/views/reports/core/querytable.cpp:985
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1037
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2035
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2054
+#: kmymoney/plugins/views/reports/core/querytable.cpp:987
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1039
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2037
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2056
 #, kde-format
 msgid "Transfer to %1"
 msgstr "Prenos na %1"
@@ -16114,53 +16114,53 @@ msgctxt "@title:column report header"
 msgid "Price"
 msgstr "Cena"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:576
-#: kmymoney/plugins/views/reports/core/querytable.cpp:589
+#: kmymoney/plugins/views/reports/core/querytable.cpp:578
+#: kmymoney/plugins/views/reports/core/querytable.cpp:591
 #, kde-format
 msgid "[No Tag]"
 msgstr "[Ni oznake]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:602
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1868
+#: kmymoney/plugins/views/reports/core/querytable.cpp:604
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1870
 #, kde-format
 msgid "Month of %1"
 msgstr "Mesec %1"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:603
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1869
+#: kmymoney/plugins/views/reports/core/querytable.cpp:605
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1871
 #, kde-format
 msgid "Week of %1"
 msgstr "Teden %1"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:826
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1043
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1186
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1997
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2169
+#: kmymoney/plugins/views/reports/core/querytable.cpp:828
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1045
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1188
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1999
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2171
 #, kde-format
 msgid "No Institution"
 msgstr "Ni institucije"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:830
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2008
+#: kmymoney/plugins/views/reports/core/querytable.cpp:832
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2010
 #, kde-format
 msgid "[Empty Payee]"
 msgstr "[Prazni prejemnik plačila]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:864
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2041
+#: kmymoney/plugins/views/reports/core/querytable.cpp:866
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2043
 #, kde-format
 msgid "[Split Transaction]"
 msgstr "[Deljena transakcija]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:865
-#: kmymoney/plugins/views/reports/core/querytable.cpp:866
+#: kmymoney/plugins/views/reports/core/querytable.cpp:867
+#: kmymoney/plugins/views/reports/core/querytable.cpp:868
 #, kde-format
 msgctxt "Split transaction"
 msgid "Split"
 msgstr "Razdeli"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1781
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1783
 #, kde-format
 msgctxt "No institution"
 msgid "None"
@@ -19916,32 +19916,25 @@ msgid "Assets and Liabilities Summary"
 msgstr "Povzetek imetij in obveznosti"
 
 #: kmymoney/views/khomeview_p.h:1379
-#, fuzzy, kde-format
-#| msgctxt "Header not marked"
-#| msgid "!M"
+#, kde-format
 msgctxt "@title:column table on home page: not marked"
 msgid "!M"
 msgstr "!M"
 
 #: kmymoney/views/khomeview_p.h:1383
-#, fuzzy, kde-format
-#| msgctxt "Reconciliation flag C"
-#| msgid "C"
+#, kde-format
 msgctxt "@title:column table on home page: cleared"
 msgid "C"
 msgstr "C"
 
 #: kmymoney/views/khomeview_p.h:1387
-#, fuzzy, kde-format
-#| msgctxt "Header not reconciled"
-#| msgid "!R"
+#, kde-format
 msgctxt "@title:column table on home page: not reconciled"
 msgid "!R"
 msgstr "!R"
 
 #: kmymoney/views/khomeview_p.h:1391
-#, fuzzy, kde-format
-#| msgid "Reconciled"
+#, kde-format
 msgctxt "@title:column table on home page: last reconciliation date"
 msgid "Reconciled"
 msgstr "Usklajeno"
