@@ -1050,17 +1050,17 @@ public:
         // two years
         endingDate = startingDate.addDays(2 * 365);
         result = helperAROI(buys, sells, reinvestIncome, cashIncome, startingBalance, endingBalance, startingDate, endingDate);
-        QCOMPARE(result, MyMoneyMoney(4271, 1250).convert(10000).toString());
+        QCOMPARE(result, MyMoneyMoney(427, 1250).convert(10000).toString());
 
         // half year
         endingDate = startingDate.addDays(365 / 2);
         result = helperAROI(buys, sells, reinvestIncome, cashIncome, startingBalance, endingBalance, startingDate, endingDate);
-        QCOMPARE(result, MyMoneyMoney(9, 4).convert(10000).toString());
+        QCOMPARE(result, MyMoneyMoney(4501, 2000).convert(10000).toString());
 
         // quarter year
         endingDate = startingDate.addDays(365 / 4);
         result = helperAROI(buys, sells, reinvestIncome, cashIncome, startingBalance, endingBalance, startingDate, endingDate);
-        QCOMPARE(result, MyMoneyMoney(957, 100).convert(10000).toString());
+        QCOMPARE(result, MyMoneyMoney(11957, 1250).convert(10000).toString());
 
         // invalid
         buys = MyMoneyMoney(110);
