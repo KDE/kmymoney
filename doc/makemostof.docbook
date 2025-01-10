@@ -147,7 +147,7 @@
 
 <sect2 id="makingmostof.mapping.accounts"><title>Accounts</title>
 <para>
-  An <quote>Account</quote> in &kmymoney; represents one ot the <quote>pots</quote>
+  An <quote>Account</quote> in &kmymoney; represents one of the <quote>pots</quote>
   of the previous section: it can be anywhere which holds your money and possessions
   that you wish to monitor.  You generally create an account in &kmymoney; to
   represent each different account you have in <quote>real life,</quote> whether it

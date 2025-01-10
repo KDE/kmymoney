@@ -766,7 +766,7 @@ Something about importing stock prices
  variation in specifying the different types of activities represented in the data.
  The plugin handles this by listing these activity types in a resource file, called
  <filename>csvimporterrc</filename>. The location of this file depends on your
- opearintg system or distribution. On a &Linux; system, this will be <filename
+ operating system or distribution. On a &Linux; system, this will be <filename
  class="directory">$KDEHOME/share/config</filename> where <envar>$KDEHOME</envar> is
  usually <filename class="directory">.config</filename> within your home folder.  If
  you are migrating from a version of &kmymoney; prior to 5.0, the old location of
