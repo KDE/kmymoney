@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-09 01:55+0000\n"
-"PO-Revision-Date: 2025-01-06 09:19+0100\n"
+"PO-Revision-Date: 2025-01-09 12:15+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -20129,32 +20129,25 @@ msgid "Assets and Liabilities Summary"
 msgstr "Résumé des actifs et des passifs"
 
 #: kmymoney/views/khomeview_p.h:1379
-#, fuzzy, kde-format
-#| msgctxt "Header not marked"
-#| msgid "!M"
+#, kde-format
 msgctxt "@title:column table on home page: not marked"
 msgid "!M"
 msgstr " ! M"
 
 #: kmymoney/views/khomeview_p.h:1383
-#, fuzzy, kde-format
-#| msgctxt "Reconciliation flag C"
-#| msgid "C"
+#, kde-format
 msgctxt "@title:column table on home page: cleared"
 msgid "C"
 msgstr "C"
 
 #: kmymoney/views/khomeview_p.h:1387
-#, fuzzy, kde-format
-#| msgctxt "Header not reconciled"
-#| msgid "!R"
+#, kde-format
 msgctxt "@title:column table on home page: not reconciled"
 msgid "!R"
 msgstr " ! R"
 
 #: kmymoney/views/khomeview_p.h:1391
-#, fuzzy, kde-format
-#| msgid "Reconciled"
+#, kde-format
 msgctxt "@title:column table on home page: last reconciliation date"
 msgid "Reconciled"
 msgstr "Rapprochée"
