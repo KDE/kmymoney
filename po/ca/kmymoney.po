@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-09 01:55+0000\n"
-"PO-Revision-Date: 2025-01-09 13:48+0100\n"
+"PO-Revision-Date: 2025-01-10 18:10+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -5053,7 +5053,7 @@ msgstr "Desvincula el compte..."
 #: kmymoney/kmymoney.cpp:1913
 #, kde-format
 msgid "Update account..."
-msgstr "Actualitza un compte..."
+msgstr "Actualitza el compte..."
 
 #: kmymoney/kmymoney.cpp:1914
 #, kde-format
@@ -12719,7 +12719,7 @@ msgstr "Ha fallat"
 #: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlgdecl.ui:14
 #, kde-format
 msgid "OFX Direct Connect"
-msgstr "Connexió OFX directa"
+msgstr "Connexió directa OFX"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlgdecl.ui:23
