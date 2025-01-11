@@ -23,10 +23,9 @@
 // Project Includes
 
 #include "keditloanwizard.h"
-#include "kmymoneyutils.h"
 #include "kmymoneysettings.h"
+#include "kmymoneyutils.h"
 #include "mymoneyexception.h"
-#include "keditscheduledlg.h"
 
 KScheduledView::KScheduledView(QWidget *parent) :
     KMyMoneyViewBase(*new KScheduledViewPrivate(this), parent)
@@ -36,7 +35,7 @@ KScheduledView::KScheduledView(QWidget *parent) :
     const QHash<eMenu::Action, KScheduledViewFunc> actionConnections {
         {eMenu::Action::NewSchedule,        &KScheduledView::slotNewSchedule},
         {eMenu::Action::EditSchedule,       &KScheduledView::slotEditSchedule},
-        {eMenu::Action::EditScheduleForce,  &KScheduledView::slotEditLoanSchedule},
+        {eMenu::Action::EditScheduleForce,  &KScheduledView::slotEditSchedule},
         {eMenu::Action::DeleteSchedule,     &KScheduledView::slotDeleteSchedule},
         {eMenu::Action::DuplicateSchedule,  &KScheduledView::slotDuplicateSchedule},
         {eMenu::Action::EnterSchedule,      &KScheduledView::slotEnterSchedule},
@@ -72,7 +71,7 @@ void KScheduledView::showEvent(QShowEvent* event)
             Q_D(KScheduledView);
             Q_EMIT requestCustomContextMenu(eMenu::Menu::Schedule, d->ui->m_scheduleTree->viewport()->mapToGlobal(pos));
         });
-        connect(d->ui->m_scheduleTree, &KMyMoneyTreeView::startEdit, this, &KScheduledView::slotEditSchedule);
+        connect(d->ui->m_scheduleTree, &KMyMoneyTreeView::startEdit, this, QOverload<const QModelIndex&>::of(&KScheduledView::slotEditSchedule));
 
         connect(d->ui->m_scheduleTree->header(), &QHeaderView::sortIndicatorChanged, this, [&](int logicalIndex, Qt::SortOrder order) {
             Q_D(KScheduledView);
@@ -162,26 +161,16 @@ void KScheduledView::slotNewSchedule()
     KEditScheduleDlg::newSchedule(MyMoneyTransaction(), eMyMoney::Schedule::Occurrence::Monthly);
 }
 
-void KScheduledView::slotEditLoanSchedule()
+void KScheduledView::slotEditSchedule([[maybe_unused]] const QModelIndex& index)
 {
     Q_D(KScheduledView);
-    const auto schedule = d->selectedSchedule(pActions[eMenu::Action::EditSchedule]);
-    try {
-        KEditScheduleDlg::editSchedule(schedule, true);
-    } catch (const MyMoneyException& e) {
-        KMessageBox::detailedError(this, i18n("Unknown scheduled transaction '%1'", schedule.name()), QString::fromLatin1(e.what()));
-    }
+    d->editSchedule();
 }
 
 void KScheduledView::slotEditSchedule()
 {
     Q_D(KScheduledView);
-    const auto schedule = d->selectedSchedule(pActions[eMenu::Action::EditSchedule]);
-    try {
-        KEditScheduleDlg::editSchedule(schedule);
-    } catch (const MyMoneyException& e) {
-        KMessageBox::detailedError(this, i18n("Unknown scheduled transaction '%1'", schedule.name()), QString::fromLatin1(e.what()));
-    }
+    d->editSchedule(pActions[eMenu::Action::EditSchedule]);
 }
 
 void KScheduledView::slotDeleteSchedule()

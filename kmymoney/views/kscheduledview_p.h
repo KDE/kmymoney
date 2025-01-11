@@ -33,30 +33,30 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kscheduledview.h"
-#include "kmymoneyviewbase_p.h"
-#include "kmymoneysettings.h"
-#include "kenterscheduledlg.h"
+#include "dialogenums.h"
 #include "kbalancewarning.h"
 #include "kconfirmmanualenterdlg.h"
+#include "keditscheduledlg.h"
+#include "kenterscheduledlg.h"
 #include "kmymoneymvccombo.h"
-#include "kmymoneyutils.h"
 #include "kmymoneysettings.h"
-#include "mymoneyexception.h"
-#include "mymoneyutils.h"
+#include "kmymoneyutils.h"
+#include "kmymoneyviewbase_p.h"
+#include "menuenums.h"
 #include "mymoneyaccount.h"
-#include "mymoneymoney.h"
-#include "mymoneysecurity.h"
-#include "mymoneyschedule.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
 #include "mymoneyfile.h"
+#include "mymoneymoney.h"
 #include "mymoneypayee.h"
+#include "mymoneyschedule.h"
+#include "mymoneysecurity.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
-#include "mymoneyenums.h"
-#include "menuenums.h"
-#include "dialogenums.h"
-#include "schedulesmodel.h"
+#include "mymoneyutils.h"
 #include "scheduleproxymodel.h"
+#include "schedulesmodel.h"
+#include "ui_kscheduledview.h"
 
 class KScheduledViewPrivate : public KMyMoneyViewBasePrivate
 {
@@ -397,6 +397,17 @@ public:
             return MyMoneyFile::instance()->schedulesModel()->itemByIndex(baseIndex);
         }
         return {};
+    }
+
+    void editSchedule(QAction* action = nullptr)
+    {
+        Q_Q(KScheduledView);
+        const auto schedule = selectedSchedule(action);
+        try {
+            KEditScheduleDlg::editSchedule(schedule);
+        } catch (const MyMoneyException& e) {
+            KMessageBox::detailedError(q, i18n("Unknown scheduled transaction '%1'", schedule.name()), QString::fromLatin1(e.what()));
+        }
     }
 
     Ui::KScheduledView* ui;
