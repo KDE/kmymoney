@@ -161,8 +161,9 @@ void KScheduledView::slotNewSchedule()
     KEditScheduleDlg::newSchedule(MyMoneyTransaction(), eMyMoney::Schedule::Occurrence::Monthly);
 }
 
-void KScheduledView::slotEditSchedule([[maybe_unused]] const QModelIndex& index)
+void KScheduledView::slotEditSchedule(const QModelIndex& index)
 {
+    Q_UNUSED(index);
     Q_D(KScheduledView);
     d->editSchedule();
 }
