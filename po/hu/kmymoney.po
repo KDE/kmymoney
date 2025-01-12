@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-09 01:55+0000\n"
+"POT-Creation-Date: 2025-01-12 02:01+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -20889,47 +20889,47 @@ msgstr ""
 msgid "Unable to remove payee(s)"
 msgstr "Nem lehet eltávolítani a kedvezményezett(ek)et"
 
-#: kmymoney/views/kscheduledview.cpp:172 kmymoney/views/kscheduledview.cpp:183
-#: kmymoney/views/kscheduledview.cpp:260 kmymoney/views/kscheduledview.cpp:273
-#, kde-format
-msgid "Unknown scheduled transaction '%1'"
-msgstr "Ismeretlen ütemezett tranzakció: '%1'"
-
-#: kmymoney/views/kscheduledview.cpp:194
+#: kmymoney/views/kscheduledview.cpp:183
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr "<p>Biztosan törölni akarja a/az<b>%1</b> ütemezett tranzakciót?</p>"
 
-#: kmymoney/views/kscheduledview.cpp:197
+#: kmymoney/views/kscheduledview.cpp:186
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
 "scheduled transaction."
 msgstr ""
 
-#: kmymoney/views/kscheduledview.cpp:199
+#: kmymoney/views/kscheduledview.cpp:188
 #, fuzzy, kde-format
 #| msgid "Select Schedules"
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Ütemezések kiválasztása"
 
-#: kmymoney/views/kscheduledview.cpp:207
+#: kmymoney/views/kscheduledview.cpp:196
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "Nem lehet eltávolítani a(z) „%1” ütemezett tranzakciót"
 
-#: kmymoney/views/kscheduledview.cpp:221
+#: kmymoney/views/kscheduledview.cpp:210
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "%1 másolása"
 
-#: kmymoney/views/kscheduledview.cpp:246
+#: kmymoney/views/kscheduledview.cpp:235
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "Nem lehet kettőzni az ütemezett tranzakciót: „%1”"
+
+#: kmymoney/views/kscheduledview.cpp:249 kmymoney/views/kscheduledview.cpp:262
+#: kmymoney/views/kscheduledview_p.h:409
+#, kde-format
+msgid "Unknown scheduled transaction '%1'"
+msgstr "Ismeretlen ütemezett tranzakció: '%1'"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonNew)
 #: kmymoney/views/kscheduledview.ui:31

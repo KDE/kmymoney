@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-09 01:55+0000\n"
+"POT-Creation-Date: 2025-01-12 02:01+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -20318,46 +20318,46 @@ msgstr "병합할 항목이 없습니다."
 msgid "Unable to remove payee(s)"
 msgstr "수취인을 삭제할 수 없음"
 
-#: kmymoney/views/kscheduledview.cpp:172 kmymoney/views/kscheduledview.cpp:183
-#: kmymoney/views/kscheduledview.cpp:260 kmymoney/views/kscheduledview.cpp:273
-#, kde-format
-msgid "Unknown scheduled transaction '%1'"
-msgstr "알 수 없는 예정된 '%1' 거래"
-
-#: kmymoney/views/kscheduledview.cpp:194
+#: kmymoney/views/kscheduledview.cpp:183
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr "<p>예정된 거래 <b>%1</b>을(를) 삭제하시겠습니까?</p>"
 
-#: kmymoney/views/kscheduledview.cpp:197
+#: kmymoney/views/kscheduledview.cpp:186
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
 "scheduled transaction."
 msgstr "대출 지급에서는 현재 예정된 거래를 다시 생성할 수 없습니다."
 
-#: kmymoney/views/kscheduledview.cpp:199
+#: kmymoney/views/kscheduledview.cpp:188
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "일정 삭제"
 
-#: kmymoney/views/kscheduledview.cpp:207
+#: kmymoney/views/kscheduledview.cpp:196
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "예정된 '%1' 거래를 삭제할 수 없음"
 
-#: kmymoney/views/kscheduledview.cpp:221
+#: kmymoney/views/kscheduledview.cpp:210
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "%1의 사본"
 
-#: kmymoney/views/kscheduledview.cpp:246
+#: kmymoney/views/kscheduledview.cpp:235
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "예정된 거래를 복제할 수 없음: '%1'"
+
+#: kmymoney/views/kscheduledview.cpp:249 kmymoney/views/kscheduledview.cpp:262
+#: kmymoney/views/kscheduledview_p.h:409
+#, kde-format
+msgid "Unknown scheduled transaction '%1'"
+msgstr "알 수 없는 예정된 '%1' 거래"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonNew)
 #: kmymoney/views/kscheduledview.ui:31

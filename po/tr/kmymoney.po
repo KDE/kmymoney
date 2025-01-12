@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-09 01:55+0000\n"
+"POT-Creation-Date: 2025-01-12 02:01+0000\n"
 "PO-Revision-Date: 2025-01-08 15:02+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -20441,19 +20441,13 @@ msgstr "Birleştirilecek bir şey yok."
 msgid "Unable to remove payee(s)"
 msgstr "Alacaklılar kaldırılamıyor"
 
-#: kmymoney/views/kscheduledview.cpp:172 kmymoney/views/kscheduledview.cpp:183
-#: kmymoney/views/kscheduledview.cpp:260 kmymoney/views/kscheduledview.cpp:273
-#, kde-format
-msgid "Unknown scheduled transaction '%1'"
-msgstr "Bilinmeyen planlı işlem “%1”"
-
-#: kmymoney/views/kscheduledview.cpp:194
+#: kmymoney/views/kscheduledview.cpp:183
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr "<p><b>%1</b> planlı işlemini silmeyi gerçekten istiyor musunuz?</p>"
 
-#: kmymoney/views/kscheduledview.cpp:197
+#: kmymoney/views/kscheduledview.cpp:186
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
@@ -20462,27 +20456,33 @@ msgstr ""
 "Kredi ödemeleri durumunda, planlı işlemi yeniden oluşturmak şu anda olanaklı "
 "değildir."
 
-#: kmymoney/views/kscheduledview.cpp:199
+#: kmymoney/views/kscheduledview.cpp:188
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Planı Sil"
 
-#: kmymoney/views/kscheduledview.cpp:207
+#: kmymoney/views/kscheduledview.cpp:196
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "“%1” planlı işlemi silinemiyor"
 
-#: kmymoney/views/kscheduledview.cpp:221
+#: kmymoney/views/kscheduledview.cpp:210
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "%1 kopyası"
 
-#: kmymoney/views/kscheduledview.cpp:246
+#: kmymoney/views/kscheduledview.cpp:235
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "Planlı işlem çoğaltılamıyor: “%1”"
+
+#: kmymoney/views/kscheduledview.cpp:249 kmymoney/views/kscheduledview.cpp:262
+#: kmymoney/views/kscheduledview_p.h:409
+#, kde-format
+msgid "Unknown scheduled transaction '%1'"
+msgstr "Bilinmeyen planlı işlem “%1”"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonNew)
 #: kmymoney/views/kscheduledview.ui:31

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-09 01:55+0000\n"
+"POT-Creation-Date: 2025-01-12 02:01+0000\n"
 "PO-Revision-Date: 2024-02-24 16:23+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -21611,20 +21611,14 @@ msgstr "Nimic de îmbinat."
 msgid "Unable to remove payee(s)"
 msgstr "Nu s-a putut șterge beneficiarul(ii)"
 
-#: kmymoney/views/kscheduledview.cpp:172 kmymoney/views/kscheduledview.cpp:183
-#: kmymoney/views/kscheduledview.cpp:260 kmymoney/views/kscheduledview.cpp:273
-#, kde-format
-msgid "Unknown scheduled transaction '%1'"
-msgstr "Tranzacție programată necunoscută '%1'"
-
-#: kmymoney/views/kscheduledview.cpp:194
+#: kmymoney/views/kscheduledview.cpp:183
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr ""
 "<p>Sînteți siguri că doriți să ștergeți tranzacția programată <b>%1</b>?</p>"
 
-#: kmymoney/views/kscheduledview.cpp:197
+#: kmymoney/views/kscheduledview.cpp:186
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
@@ -21633,28 +21627,34 @@ msgstr ""
 "În cazul plăților pentru împrumuturi, în acest moment, nu este posibilă "
 "recreerea tranzacției programate."
 
-#: kmymoney/views/kscheduledview.cpp:199
+#: kmymoney/views/kscheduledview.cpp:188
 #, fuzzy, kde-format
 #| msgid "Delete schedule..."
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Șterge programarea..."
 
-#: kmymoney/views/kscheduledview.cpp:207
+#: kmymoney/views/kscheduledview.cpp:196
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "Tranzacția programată '%1' nu a putut fi ștearsă"
 
-#: kmymoney/views/kscheduledview.cpp:221
+#: kmymoney/views/kscheduledview.cpp:210
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "Copie a %1"
 
-#: kmymoney/views/kscheduledview.cpp:246
+#: kmymoney/views/kscheduledview.cpp:235
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "Nu s-a putut duplica tranzacția programată: '%1'"
+
+#: kmymoney/views/kscheduledview.cpp:249 kmymoney/views/kscheduledview.cpp:262
+#: kmymoney/views/kscheduledview_p.h:409
+#, kde-format
+msgid "Unknown scheduled transaction '%1'"
+msgstr "Tranzacție programată necunoscută '%1'"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonNew)
 #: kmymoney/views/kscheduledview.ui:31

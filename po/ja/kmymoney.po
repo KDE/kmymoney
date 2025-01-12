@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-09 01:55+0000\n"
+"POT-Creation-Date: 2025-01-12 02:01+0000\n"
 "PO-Revision-Date: 2009-05-18 00:20+0900\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -19502,45 +19502,45 @@ msgstr ""
 msgid "Unable to remove payee(s)"
 msgstr ""
 
-#: kmymoney/views/kscheduledview.cpp:172 kmymoney/views/kscheduledview.cpp:183
-#: kmymoney/views/kscheduledview.cpp:260 kmymoney/views/kscheduledview.cpp:273
-#, kde-format
-msgid "Unknown scheduled transaction '%1'"
-msgstr ""
-
-#: kmymoney/views/kscheduledview.cpp:194
+#: kmymoney/views/kscheduledview.cpp:183
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr ""
 
-#: kmymoney/views/kscheduledview.cpp:197
+#: kmymoney/views/kscheduledview.cpp:186
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
 "scheduled transaction."
 msgstr ""
 
-#: kmymoney/views/kscheduledview.cpp:199
+#: kmymoney/views/kscheduledview.cpp:188
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr ""
 
-#: kmymoney/views/kscheduledview.cpp:207
+#: kmymoney/views/kscheduledview.cpp:196
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr ""
 
-#: kmymoney/views/kscheduledview.cpp:221
+#: kmymoney/views/kscheduledview.cpp:210
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr ""
 
-#: kmymoney/views/kscheduledview.cpp:246
+#: kmymoney/views/kscheduledview.cpp:235
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
+msgstr ""
+
+#: kmymoney/views/kscheduledview.cpp:249 kmymoney/views/kscheduledview.cpp:262
+#: kmymoney/views/kscheduledview_p.h:409
+#, kde-format
+msgid "Unknown scheduled transaction '%1'"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonNew)
