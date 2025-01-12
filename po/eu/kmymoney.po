@@ -1,10 +1,10 @@
 # Translation for kmymoney.po to Euskara/Basque (eu).
-# Copyright (C) 2010-2024 This file is copyright:
+# Copyright (C) 2010-2025 This file is copyright:
 # This file is distributed under the same license as the kmymoney package.
-# SPDX-FileCopyrightText: 2023, 2024 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2010, 2011, 2013, 2014, 2018, 2020, 2022, 2023, 2024.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2010, 2011, 2013, 2014, 2018, 2020, 2022, 2023, 2024, 2025.
 # Hizkuntza Politikarako Sailburuordetza <hizpol@ej-gv.es>, 2013.
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2013.
 # Ander Elortondo <ander.elor@gmail.com>, 2018, 2020, 2022.
@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2024-10-30 17:28+0100\n"
+"PO-Revision-Date: 2025-01-11 18:38+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -15720,12 +15720,12 @@ msgstr "Legenda"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:272
 #, kde-format
 msgid "Initial Market Value"
-msgstr "Hasierako merkatu-balioa"
+msgstr "Merkatuaren hasierako balioa"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:273
 #, kde-format
 msgid "Ending Market Value"
-msgstr "Amaierako merkatu-balioa"
+msgstr "Merkatuaren bukaerako balioa"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:276
 #, kde-format
@@ -15841,7 +15841,7 @@ msgstr "Amaierako saldoa"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:663
 #, kde-format
 msgid "Market Value"
-msgstr "Merkatu-balioa"
+msgstr "Merkatuaren balioa"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:665
 #, kde-format
@@ -19564,7 +19564,7 @@ msgstr "G"
 #, kde-format
 msgctxt "Header not reconciled"
 msgid "!R"
-msgstr "B"
+msgstr "!B"
 
 #: kmymoney/views/khomeview_p.h:951 kmymoney/views/khomeview_p.h:1290
 #: kmymoney/views/khomeview_p.h:1319
