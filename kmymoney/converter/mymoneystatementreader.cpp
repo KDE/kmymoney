@@ -1581,7 +1581,13 @@ void MyMoneyStatementReader::handleMatchingOfScheduledTransaction(MyMoneySchedul
     if (askUserToEnterScheduleForMatching(schedule, importedSplit, importedTransaction)) {
         const auto origDueDate = schedule.nextDueDate();
 
-        MyMoneyTransaction t = schedule.transaction();
+        MyMoneyTransaction t = MyMoneyFile::instance()->scheduledTransaction(schedule);
+
+        // since the previous call returns a transaction with a
+        // cleared id and date, the date will be set based on the
+        // date from the imported transaction.
+        t.setPostDate(importedTransaction.postDate());
+
         // in case the amounts of the scheduled transaction and the
         // imported transaction differ, we need to update the amount
         // using the transaction editor.
