@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2025-01-06 20:36+0100\n"
+"PO-Revision-Date: 2025-01-12 17:25+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -5762,7 +5762,7 @@ msgstr "Kevin Tambascio"
 #: kmymoney/kcreditswindow.cpp:61
 #, kde-format
 msgid "Initial investment support"
-msgstr "Soporte inicial de investimentos"
+msgstr "Funcionalidade inicial de investimentos."
 
 #: kmymoney/kcreditswindow.cpp:62
 #, kde-format
@@ -14634,8 +14634,8 @@ msgid ""
 "supported.\n"
 "Please save your database under a new name."
 msgstr ""
-"Sobrescribir unha base de datos existente cunha base de datos cifrada non é "
-"posíbel aínda.\n"
+"Aínda non se permite sobrescribir unha base de datos existente cunha base de "
+"datos cifrada.\n"
 "Garde a base de datos con outro nome."
 
 #: kmymoney/plugins/sql/mymoneystoragesql.cpp:192
@@ -17922,12 +17922,12 @@ msgid ""
 ">Once confident with the result, feel free to delete the old file and rename "
 "the encrypted one to the old name.</p>"
 msgstr ""
-"<p>Activou o soporte de cifrado con GPG. Isto significa que os ficheiros "
-"novos gardaranse cifrados.</p><p>Os ficheiros existentes non se cifrarán "
-"automaticamente. Para cifrar os ficheiros xa existentes, use <b>Ficheiro → "
-"Gardar como…</b> e garde o ficheiro cun nome diferente.<br/>Cando confíe no "
-"resultado, elimine o ficheiro vello e renomee o ficheiro cifrado ao que tiña "
-"antes.</p>"
+"<p>Activou a funcionalidade de cifrado con GPG. Isto significa que os "
+"ficheiros novos gardaranse cifrados.</p><p>Os ficheiros existentes non se "
+"cifrarán automaticamente. Para cifrar os ficheiros xa existentes, use "
+"<b>Ficheiro → Gardar como…</b> e garde o ficheiro cun nome diferente.<br/"
+">Cando confíe no resultado, elimine o ficheiro vello e renomee o ficheiro "
+"cifrado ao que tiña antes.</p>"
 
 #: kmymoney/plugins/xml/kcm_xmlstorage.cpp:168
 #: kmymoney/plugins/xml/ksettingsgpg.cpp:206
@@ -20695,7 +20695,7 @@ msgstr ""
 #: kmymoney/views/kwelcomepage.cpp:246
 #, kde-format
 msgid "- Support price download by ISIN"
-msgstr "- Descarga de prezos de ISIN."
+msgstr "- Permitir a descarga de prezos mediante ISIN."
 
 #: kmymoney/views/ledgerdelegate.cpp:189 kmymoney/widgets/register.cpp:1729
 #, kde-format
@@ -24466,7 +24466,7 @@ msgid ""
 "schedules for your loan payments."
 msgstr ""
 "\n"
-"Nos seguintes pasos, KMyMoney axudarao a configurar as categorías e "
+"Nos seguintes pasos, KMyMoney asísteo na configuración das categorías e "
 "transaccións planificadas para os pagamentos do seu empréstito."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel16_2)

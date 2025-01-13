@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2025-01-10 18:10+0100\n"
+"PO-Revision-Date: 2025-01-12 21:43+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -6160,7 +6160,7 @@ msgstr "Edita"
 #, kde-format
 msgctxt "Enter transaction"
 msgid "Enter"
-msgstr "Retorn"
+msgstr "Introdueix"
 
 #: kmymoney/kmymoney.cpp:1456
 #, kde-format
@@ -6880,7 +6880,7 @@ msgstr "Mou l'operació a..."
 #: kmymoney/kmymoneyui.rc:209
 #, kde-format
 msgid "Select account"
-msgstr "Escolliu un compte"
+msgstr "Seleccioneu un compte"
 
 #. i18n: ectx: Menu (onlinejob_context_menu)
 #: kmymoney/kmymoneyui.rc:228
@@ -25150,7 +25150,7 @@ msgstr "Escolliu la divisa"
 #: kmymoney/wizards/newuserwizard/knewuserwizard.cpp:60
 #, kde-format
 msgid "Select Accounts"
-msgstr "Escolliu els comptes"
+msgstr "Seleccioneu els comptes"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newuserwizard/kpasswordpage.ui:23
