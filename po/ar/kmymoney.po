@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-12 02:01+0000\n"
+"POT-Creation-Date: 2025-01-13 01:57+0000\n"
 "PO-Revision-Date: 2022-01-04 22:18+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -324,14 +324,14 @@ msgid ""
 "button."
 msgstr "عليك اختيار حساب، أو إنشاء واحد جديد، أو نقر زرّ <b>أجهض</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1638
+#: kmymoney/converter/mymoneystatementreader.cpp:1644
 #: kmymoney/views/kscheduledview_p.h:200 kmymoney/views/kscheduledview_p.h:315
 #: kmymoney/views/kscheduledview_p.h:319
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "تعذّر الدخول للمعاملة المجدولة: '%1'"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1658
+#: kmymoney/converter/mymoneystatementreader.cpp:1664
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -343,7 +343,7 @@ msgstr ""
 "الجدول: <b>%1</b><br/>المعاملة: <i>%2 ‏%3</i><br/>أتريد أن يدخل «أموالك» إلى "
 "هذا الجدول الآن ليمكنه مطابقة المعاملة؟"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1667
+#: kmymoney/converter/mymoneystatementreader.cpp:1673
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -362,7 +362,7 @@ msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1681
+#: kmymoney/converter/mymoneystatementreader.cpp:1687
 #, kde-format
 msgid "Schedule found"
 msgstr "عُثر على جدول"
@@ -20498,43 +20498,43 @@ msgstr "لا شيء لدمجه."
 msgid "Unable to remove payee(s)"
 msgstr "تعذّر إزالة المُتسلِّمين"
 
-#: kmymoney/views/kscheduledview.cpp:183
+#: kmymoney/views/kscheduledview.cpp:184
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr "<p>أأنت متأكد من حذف المعاملة المجدولة <b>%1</b>؟</p>"
 
-#: kmymoney/views/kscheduledview.cpp:186
+#: kmymoney/views/kscheduledview.cpp:187
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
 "scheduled transaction."
 msgstr ""
 
-#: kmymoney/views/kscheduledview.cpp:188
+#: kmymoney/views/kscheduledview.cpp:189
 #, fuzzy, kde-format
 #| msgid "Enter schedule"
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "أُدخل الجدول"
 
-#: kmymoney/views/kscheduledview.cpp:196
+#: kmymoney/views/kscheduledview.cpp:197
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "تعذّر إزالة المعاملة المجدولة '%1'"
 
-#: kmymoney/views/kscheduledview.cpp:210
+#: kmymoney/views/kscheduledview.cpp:211
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "نسخة من %1"
 
-#: kmymoney/views/kscheduledview.cpp:235
+#: kmymoney/views/kscheduledview.cpp:236
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "تعذّر تكرار المعاملة المجدولة '%1'"
 
-#: kmymoney/views/kscheduledview.cpp:249 kmymoney/views/kscheduledview.cpp:262
+#: kmymoney/views/kscheduledview.cpp:250 kmymoney/views/kscheduledview.cpp:263
 #: kmymoney/views/kscheduledview_p.h:409
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"

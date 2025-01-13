@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-12 02:01+0000\n"
+"POT-Creation-Date: 2025-01-13 01:57+0000\n"
 "PO-Revision-Date: 2015-02-09 11:02+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -320,14 +320,14 @@ msgid ""
 msgstr ""
 "Morate odabrati račun, kreirati novi, ili pritisnuti na <b>Prekini</b> dugme."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1638
+#: kmymoney/converter/mymoneystatementreader.cpp:1644
 #: kmymoney/views/kscheduledview_p.h:200 kmymoney/views/kscheduledview_p.h:315
 #: kmymoney/views/kscheduledview_p.h:319
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Nemoguće pristupiti planiranoj transakciji '%1'"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1658
+#: kmymoney/converter/mymoneystatementreader.cpp:1664
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has found a scheduled transaction which matches an imported "
@@ -345,7 +345,7 @@ msgstr ""
 "i> <br/> Želite li da KMyMoney unese ovaj raspored sada, tako da se "
 "transakcija može uskladiti? "
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1667
+#: kmymoney/converter/mymoneystatementreader.cpp:1673
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has found a scheduled transaction which matches an imported "
@@ -378,7 +378,7 @@ msgstr[2] ""
 "i> <br/> Želite li da KMyMoney unese ovaj raspored sada, tako da se "
 "transakcija može uskladiti? "
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1681
+#: kmymoney/converter/mymoneystatementreader.cpp:1687
 #, kde-format
 msgid "Schedule found"
 msgstr "Raspored pronađen"
@@ -21371,14 +21371,14 @@ msgstr "Ništa za spojiti."
 msgid "Unable to remove payee(s)"
 msgstr "Nije moguće izbrisati primatelja(e)"
 
-#: kmymoney/views/kscheduledview.cpp:183
+#: kmymoney/views/kscheduledview.cpp:184
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr ""
 "<p>Jeste li sigurni da želite izbrisati planiranu transakciju <b>%1</b>?</p>"
 
-#: kmymoney/views/kscheduledview.cpp:186
+#: kmymoney/views/kscheduledview.cpp:187
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
@@ -21387,30 +21387,30 @@ msgstr ""
 "U slučaju isplate kredita trenutno nije moguće ponovo stvoriti planiranu "
 "transakciju."
 
-#: kmymoney/views/kscheduledview.cpp:188
+#: kmymoney/views/kscheduledview.cpp:189
 #, fuzzy, kde-format
 #| msgid "Select Schedules"
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Odaberi Rasporede"
 
-#: kmymoney/views/kscheduledview.cpp:196
+#: kmymoney/views/kscheduledview.cpp:197
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "Nemoguće ukloniti planiranu transakciju '%1'"
 
-#: kmymoney/views/kscheduledview.cpp:210
+#: kmymoney/views/kscheduledview.cpp:211
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "Kopija %1"
 
-#: kmymoney/views/kscheduledview.cpp:235
+#: kmymoney/views/kscheduledview.cpp:236
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "Nemoguće dupliciranje planirane transakcije: '%1'"
 
-#: kmymoney/views/kscheduledview.cpp:249 kmymoney/views/kscheduledview.cpp:262
+#: kmymoney/views/kscheduledview.cpp:250 kmymoney/views/kscheduledview.cpp:263
 #: kmymoney/views/kscheduledview_p.h:409
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"

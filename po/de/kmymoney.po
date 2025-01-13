@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-12 02:01+0000\n"
+"POT-Creation-Date: 2025-01-13 01:57+0000\n"
 "PO-Revision-Date: 2022-11-07 20:00+0100\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -331,14 +331,14 @@ msgstr ""
 "Sie müssen entweder ein Konto auswählen, ein neues erstellen oder den Knopf "
 "<b>Abbrechen</b> drücken."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1638
+#: kmymoney/converter/mymoneystatementreader.cpp:1644
 #: kmymoney/views/kscheduledview_p.h:200 kmymoney/views/kscheduledview_p.h:315
 #: kmymoney/views/kscheduledview_p.h:319
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Kann geplante Buchung „%1“ nicht eintragen"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1658
+#: kmymoney/converter/mymoneystatementreader.cpp:1664
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -351,7 +351,7 @@ msgstr ""
 "> Möchten Sie, dass KMyMoney diese geplante Buchung nun einträgt, sodass ihr "
 "die Buchung zugeordnet werden kann?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1667
+#: kmymoney/converter/mymoneystatementreader.cpp:1673
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -376,7 +376,7 @@ msgstr[1] ""
 "geplante Buchung nun eingetragen wird, sodass ihr die Buchung zugeordnet "
 "werden kann?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1681
+#: kmymoney/converter/mymoneystatementreader.cpp:1687
 #, kde-format
 msgid "Schedule found"
 msgstr "Geplante Buchung gefunden"
@@ -20879,7 +20879,7 @@ msgstr "Nichts zum Zusammenführen."
 msgid "Unable to remove payee(s)"
 msgstr "Zahlungsempfänger kann nicht entfernt werden"
 
-#: kmymoney/views/kscheduledview.cpp:183
+#: kmymoney/views/kscheduledview.cpp:184
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
@@ -20887,7 +20887,7 @@ msgstr ""
 "<p>Sind Sie sicher, dass Sie die geplante Buchung <b>%1</b> löschen möchten?"
 "</p>"
 
-#: kmymoney/views/kscheduledview.cpp:186
+#: kmymoney/views/kscheduledview.cpp:187
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
@@ -20896,30 +20896,30 @@ msgstr ""
 "Im Falle von Kreditzahlungen ist es derzeit nicht möglich, eine geplante "
 "Buchung neu zu erstellen."
 
-#: kmymoney/views/kscheduledview.cpp:188
+#: kmymoney/views/kscheduledview.cpp:189
 #, fuzzy, kde-format
 #| msgid "Select Schedules"
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Planungen wählen"
 
-#: kmymoney/views/kscheduledview.cpp:196
+#: kmymoney/views/kscheduledview.cpp:197
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "Kann geplante Buchung „%1“ nicht löschen"
 
-#: kmymoney/views/kscheduledview.cpp:210
+#: kmymoney/views/kscheduledview.cpp:211
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "Kopie von %1"
 
-#: kmymoney/views/kscheduledview.cpp:235
+#: kmymoney/views/kscheduledview.cpp:236
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "Die geplante Buchung „%1“ kann nicht dupliziert werden."
 
-#: kmymoney/views/kscheduledview.cpp:249 kmymoney/views/kscheduledview.cpp:262
+#: kmymoney/views/kscheduledview.cpp:250 kmymoney/views/kscheduledview.cpp:263
 #: kmymoney/views/kscheduledview_p.h:409
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"

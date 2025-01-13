@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-12 02:01+0000\n"
-"PO-Revision-Date: 2025-01-08 20:10+0100\n"
+"POT-Creation-Date: 2025-01-13 01:57+0000\n"
+"PO-Revision-Date: 2025-01-12 17:25+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -323,14 +323,14 @@ msgstr ""
 "Debe seleccionar unha conta, crear unha nova ou premer o botón de "
 "<b>Interromper</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1638
+#: kmymoney/converter/mymoneystatementreader.cpp:1644
 #: kmymoney/views/kscheduledview_p.h:200 kmymoney/views/kscheduledview_p.h:315
 #: kmymoney/views/kscheduledview_p.h:319
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Non é posíbel inserir a transacción planificada «%1»"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1658
+#: kmymoney/converter/mymoneystatementreader.cpp:1664
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -343,7 +343,7 @@ msgstr ""
 "KMyMoney insira agora esta planificación de tal xeito que poida emparellar o "
 "asento?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1667
+#: kmymoney/converter/mymoneystatementreader.cpp:1673
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -366,7 +366,7 @@ msgstr[1] ""
 "dos asentos teñen unha diferenza de %1 días.<br/>Quere que KMyMoney insira "
 "agora esta planificación de tal xeito que poida emparellar o asento?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1681
+#: kmymoney/converter/mymoneystatementreader.cpp:1687
 #, kde-format
 msgid "Schedule found"
 msgstr "Atopouse unha planificación"
@@ -14638,8 +14638,8 @@ msgid ""
 "supported.\n"
 "Please save your database under a new name."
 msgstr ""
-"Sobrescribir unha base de datos existente cunha base de datos cifrada non é "
-"posíbel aínda.\n"
+"Aínda non se permite sobrescribir unha base de datos existente cunha base de "
+"datos cifrada.\n"
 "Garde a base de datos con outro nome."
 
 #: kmymoney/plugins/sql/mymoneystoragesql.cpp:209
@@ -17997,12 +17997,12 @@ msgid ""
 ">Once confident with the result, feel free to delete the old file and rename "
 "the encrypted one to the old name.</p>"
 msgstr ""
-"<p>Activou o soporte de cifrado con GPG. Isto significa que os ficheiros "
-"novos gardaranse cifrados.</p><p>Os ficheiros existentes non se cifrarán "
-"automaticamente. Para cifrar os ficheiros xa existentes, use <b>Ficheiro → "
-"Gardar como…</b> e garde o ficheiro cun nome diferente.<br/>Cando confíe no "
-"resultado, elimine o ficheiro vello e renomee o ficheiro cifrado ao que tiña "
-"antes.</p>"
+"<p>Activou a funcionalidade de cifrado con GPG. Isto significa que os "
+"ficheiros novos gardaranse cifrados.</p><p>Os ficheiros existentes non se "
+"cifrarán automaticamente. Para cifrar os ficheiros xa existentes, use "
+"<b>Ficheiro → Gardar como…</b> e garde o ficheiro cun nome diferente.<br/"
+">Cando confíe no resultado, elimine o ficheiro vello e renomee o ficheiro "
+"cifrado ao que tiña antes.</p>"
 
 #: kmymoney/plugins/xml/kcm_xmlstorage.cpp:215
 #, kde-format
@@ -20553,13 +20553,13 @@ msgstr "Non hai nada para fusionar."
 msgid "Unable to remove payee(s)"
 msgstr "Non é posíbel retirar os beneficiarios"
 
-#: kmymoney/views/kscheduledview.cpp:183
+#: kmymoney/views/kscheduledview.cpp:184
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr "<p>Seguro que quere eliminar a planificación <b>%1</b>?</p>"
 
-#: kmymoney/views/kscheduledview.cpp:186
+#: kmymoney/views/kscheduledview.cpp:187
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
@@ -20568,29 +20568,29 @@ msgstr ""
 "No caso de pagamento de empréstitos, na actualidade non é posíbel crear de "
 "novo a planificación dos pagamentos."
 
-#: kmymoney/views/kscheduledview.cpp:188
+#: kmymoney/views/kscheduledview.cpp:189
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Eliminar a planificación"
 
-#: kmymoney/views/kscheduledview.cpp:196
+#: kmymoney/views/kscheduledview.cpp:197
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "Non é posíbel retirar a planificación «%1»"
 
-#: kmymoney/views/kscheduledview.cpp:210
+#: kmymoney/views/kscheduledview.cpp:211
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "Copia de %1"
 
-#: kmymoney/views/kscheduledview.cpp:235
+#: kmymoney/views/kscheduledview.cpp:236
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "Non é posíbel asentar a transacción planificada: «%1»"
 
-#: kmymoney/views/kscheduledview.cpp:249 kmymoney/views/kscheduledview.cpp:262
+#: kmymoney/views/kscheduledview.cpp:250 kmymoney/views/kscheduledview.cpp:263
 #: kmymoney/views/kscheduledview_p.h:409
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"
@@ -24985,7 +24985,7 @@ msgid ""
 "schedules for your loan payments."
 msgstr ""
 "\n"
-"Nos seguintes pasos, KMyMoney axudarao a configurar as categorías e "
+"Nos seguintes pasos, KMyMoney asísteo na configuración das categorías e "
 "transaccións planificadas para os pagamentos do seu empréstito."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel16_2)
@@ -25682,7 +25682,7 @@ msgstr "Procesar un informe específico"
 #: tools/kmmreport-export.cpp:160
 #, kde-format
 msgid "Only one of --csv and --html is supported"
-msgstr "Só pode usar --csv ou --html."
+msgstr "Só se permite usar ou --csv ou --html."
 
 #: tools/kmmreport-export.cpp:195
 #, kde-format

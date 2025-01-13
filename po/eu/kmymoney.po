@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-12 02:01+0000\n"
+"POT-Creation-Date: 2025-01-13 01:57+0000\n"
 "PO-Revision-Date: 2025-01-11 18:40+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -326,14 +326,14 @@ msgid ""
 msgstr ""
 "Kontu bat hautatu behar duzu, berria sortu edo <b>Abortatu</b> botoia sakatu."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1638
+#: kmymoney/converter/mymoneystatementreader.cpp:1644
 #: kmymoney/views/kscheduledview_p.h:200 kmymoney/views/kscheduledview_p.h:315
 #: kmymoney/views/kscheduledview_p.h:319
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Ezin da sartu '%1' transakzio antolatua"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1658
+#: kmymoney/converter/mymoneystatementreader.cpp:1664
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -346,7 +346,7 @@ msgstr ""
 "%3</i><br/>KMyMoney-k antolatu hori orain sartzea nahi duzu transakzioak bat "
 "etorri daitezen?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1667
+#: kmymoney/converter/mymoneystatementreader.cpp:1673
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -369,7 +369,7 @@ msgstr[1] ""
 "%4</i><br/>Transakzio datek %1 eguneko aldea dute.<br/>KMyMoney-k antolatu "
 "hori orain sartzea nahi duzu transakzioak bat etorri daitezen?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1681
+#: kmymoney/converter/mymoneystatementreader.cpp:1687
 #, kde-format
 msgid "Schedule found"
 msgstr "Antolaketa bat aurkitu da"
@@ -20529,13 +20529,13 @@ msgstr "Bateratzeko ezer ez."
 msgid "Unable to remove payee(s)"
 msgstr "Ezin d(ir)a onuraduna(k) kendu"
 
-#: kmymoney/views/kscheduledview.cpp:183
+#: kmymoney/views/kscheduledview.cpp:184
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr "<p>Ziur zaude <b>%1</b> transakzio antolatua ezabatu nahi duzula?</p>"
 
-#: kmymoney/views/kscheduledview.cpp:186
+#: kmymoney/views/kscheduledview.cpp:187
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
@@ -20544,29 +20544,29 @@ msgstr ""
 "Mailegu-ordainketen kasuan, une honetan ezin da transakzio antolatua berriz "
 "sortu."
 
-#: kmymoney/views/kscheduledview.cpp:188
+#: kmymoney/views/kscheduledview.cpp:189
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Ezabatu antolaketa"
 
-#: kmymoney/views/kscheduledview.cpp:196
+#: kmymoney/views/kscheduledview.cpp:197
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "Ezin da kendu '%1' transakzio antolatua"
 
-#: kmymoney/views/kscheduledview.cpp:210
+#: kmymoney/views/kscheduledview.cpp:211
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "%1(r)en kopia"
 
-#: kmymoney/views/kscheduledview.cpp:235
+#: kmymoney/views/kscheduledview.cpp:236
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "Ezin da bikoiztu transakzio antolatua: '%1'"
 
-#: kmymoney/views/kscheduledview.cpp:249 kmymoney/views/kscheduledview.cpp:262
+#: kmymoney/views/kscheduledview.cpp:250 kmymoney/views/kscheduledview.cpp:263
 #: kmymoney/views/kscheduledview_p.h:409
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"

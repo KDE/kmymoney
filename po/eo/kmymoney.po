@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-12 02:01+0000\n"
-"PO-Revision-Date: 2025-01-07 14:53+0100\n"
+"POT-Creation-Date: 2025-01-13 01:57+0000\n"
+"PO-Revision-Date: 2025-01-12 18:44+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
@@ -315,14 +315,14 @@ msgid ""
 "button."
 msgstr "Vi devas elekti konton, krei novan aŭ premi la butonon <b>Ĉeligi</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1638
+#: kmymoney/converter/mymoneystatementreader.cpp:1644
 #: kmymoney/views/kscheduledview_p.h:200 kmymoney/views/kscheduledview_p.h:315
 #: kmymoney/views/kscheduledview_p.h:319
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Ne eblas enigi planitan transakcion '%1'"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1658
+#: kmymoney/converter/mymoneystatementreader.cpp:1664
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -334,7 +334,7 @@ msgstr ""
 "<br/>Horarnomo: <b>%1</b><br/>Transakcio: <i>%2 %3</i><br/>Ĉu vi volas, ke "
 "KMyMoney enigu ĉi tiun horaron nun, por ke la transakcio estu kongrua?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1667
+#: kmymoney/converter/mymoneystatementreader.cpp:1673
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -357,7 +357,7 @@ msgstr[1] ""
 "datoj estas %1 tagojn dise.<br/>Ĉu vi volas, ke KMyMoney enigu ĉi tiun "
 "horaron nun por ke la transakcio estu kongrua?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1681
+#: kmymoney/converter/mymoneystatementreader.cpp:1687
 #, kde-format
 msgid "Schedule found"
 msgstr "Horaro trovita"
@@ -19797,32 +19797,25 @@ msgid "Assets and Liabilities Summary"
 msgstr "Resumo de Aktivoj kaj Pasivoj"
 
 #: kmymoney/views/khomeview_p.h:1379
-#, fuzzy, kde-format
-#| msgctxt "Header not marked"
-#| msgid "!M"
+#, kde-format
 msgctxt "@title:column table on home page: not marked"
 msgid "!M"
 msgstr "!M"
 
 #: kmymoney/views/khomeview_p.h:1383
-#, fuzzy, kde-format
-#| msgctxt "Reconciliation flag C"
-#| msgid "C"
+#, kde-format
 msgctxt "@title:column table on home page: cleared"
 msgid "C"
 msgstr "C"
 
 #: kmymoney/views/khomeview_p.h:1387
-#, fuzzy, kde-format
-#| msgctxt "Header not reconciled"
-#| msgid "!R"
+#, kde-format
 msgctxt "@title:column table on home page: not reconciled"
 msgid "!R"
 msgstr "!R"
 
 #: kmymoney/views/khomeview_p.h:1391
-#, fuzzy, kde-format
-#| msgid "Reconciled"
+#, kde-format
 msgctxt "@title:column table on home page: last reconciliation date"
 msgid "Reconciled"
 msgstr "Repacigita"
@@ -20445,14 +20438,14 @@ msgstr "Nenio por kunfandi."
 msgid "Unable to remove payee(s)"
 msgstr "Ne eblas forigi pagato(j)n"
 
-#: kmymoney/views/kscheduledview.cpp:183
+#: kmymoney/views/kscheduledview.cpp:184
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr ""
 "<p>Ĉu vi certas, ke vi volas forigi la planitan transakcion <b>%1</b>?</p>"
 
-#: kmymoney/views/kscheduledview.cpp:186
+#: kmymoney/views/kscheduledview.cpp:187
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
@@ -20460,29 +20453,29 @@ msgid ""
 msgstr ""
 "En kazo de pruntpagoj nuntempe ne eblas rekrei la planitan transakcion."
 
-#: kmymoney/views/kscheduledview.cpp:188
+#: kmymoney/views/kscheduledview.cpp:189
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Forigi horaron"
 
-#: kmymoney/views/kscheduledview.cpp:196
+#: kmymoney/views/kscheduledview.cpp:197
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "Ne eblas forigi planitan transakcion '%1'"
 
-#: kmymoney/views/kscheduledview.cpp:210
+#: kmymoney/views/kscheduledview.cpp:211
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "Kopio de %1"
 
-#: kmymoney/views/kscheduledview.cpp:235
+#: kmymoney/views/kscheduledview.cpp:236
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "Ne eblas duobligi planitan transakcion: '%1'"
 
-#: kmymoney/views/kscheduledview.cpp:249 kmymoney/views/kscheduledview.cpp:262
+#: kmymoney/views/kscheduledview.cpp:250 kmymoney/views/kscheduledview.cpp:263
 #: kmymoney/views/kscheduledview_p.h:409
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"

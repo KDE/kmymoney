@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-12 02:01+0000\n"
-"PO-Revision-Date: 2025-01-10 18:10+0100\n"
+"POT-Creation-Date: 2025-01-13 01:57+0000\n"
+"PO-Revision-Date: 2025-01-12 21:43+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -321,14 +321,14 @@ msgstr ""
 "Cal seleccionar un compte, crear-ne un de nou, o prémer el botó "
 "<b>Interromp</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1638
+#: kmymoney/converter/mymoneystatementreader.cpp:1644
 #: kmymoney/views/kscheduledview_p.h:200 kmymoney/views/kscheduledview_p.h:315
 #: kmymoney/views/kscheduledview_p.h:319
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "No s'ha pogut introduir l'operació planificada «%1»"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1658
+#: kmymoney/converter/mymoneystatementreader.cpp:1664
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -341,7 +341,7 @@ msgstr ""
 "i><br/>Voleu que el KMyMoney introdueixi ara aquesta planificació per tal "
 "que es pugui concordar l'operació?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1667
+#: kmymoney/converter/mymoneystatementreader.cpp:1673
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -366,7 +366,7 @@ msgstr[1] ""
 "KMyMoney introdueixi ara aquesta planificació per tal que es pugui concordar "
 "l'operació?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1681
+#: kmymoney/converter/mymoneystatementreader.cpp:1687
 #, kde-format
 msgid "Schedule found"
 msgstr "S'ha trobat una planificació"
@@ -5141,7 +5141,7 @@ msgstr "Edita"
 #, kde-format
 msgctxt "Enter transaction"
 msgid "Enter"
-msgstr "Retorn"
+msgstr "Introdueix"
 
 #: kmymoney/kmymoney.cpp:1946
 #, kde-format
@@ -6077,7 +6077,7 @@ msgstr "Mou l'operació a..."
 #: kmymoney/kmymoneyui.rc:226
 #, kde-format
 msgid "Select account"
-msgstr "Escolliu un compte"
+msgstr "Seleccioneu un compte"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: kmymoney/kmymoneyui.rc:250
@@ -20665,14 +20665,14 @@ msgstr "No hi ha res a fusionar."
 msgid "Unable to remove payee(s)"
 msgstr "No s'ha pogut eliminar el/s beneficiari/s"
 
-#: kmymoney/views/kscheduledview.cpp:183
+#: kmymoney/views/kscheduledview.cpp:184
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr ""
 "<p>Esteu segur que voleu suprimir l'operació planificada <b>%1</b>?</p>"
 
-#: kmymoney/views/kscheduledview.cpp:186
+#: kmymoney/views/kscheduledview.cpp:187
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
@@ -20681,29 +20681,29 @@ msgstr ""
 "En cas de pagaments de préstecs, actualment no es pot tornar a crear "
 "l'operació planificada."
 
-#: kmymoney/views/kscheduledview.cpp:188
+#: kmymoney/views/kscheduledview.cpp:189
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
 msgstr "Supressió de planificació"
 
-#: kmymoney/views/kscheduledview.cpp:196
+#: kmymoney/views/kscheduledview.cpp:197
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
 msgstr "No s'ha pogut eliminar l'operació planificada: «%1»"
 
-#: kmymoney/views/kscheduledview.cpp:210
+#: kmymoney/views/kscheduledview.cpp:211
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
 msgstr "Còpia de %1"
 
-#: kmymoney/views/kscheduledview.cpp:235
+#: kmymoney/views/kscheduledview.cpp:236
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "No s'ha pogut duplicar l'operació planificada: «%1»"
 
-#: kmymoney/views/kscheduledview.cpp:249 kmymoney/views/kscheduledview.cpp:262
+#: kmymoney/views/kscheduledview.cpp:250 kmymoney/views/kscheduledview.cpp:263
 #: kmymoney/views/kscheduledview_p.h:409
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"
@@ -25691,7 +25691,7 @@ msgstr "Escolliu la divisa"
 #: kmymoney/wizards/newuserwizard/knewuserwizard.cpp:59
 #, kde-format
 msgid "Select Accounts"
-msgstr "Escolliu els comptes"
+msgstr "Seleccioneu els comptes"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newuserwizard/kpasswordpage.ui:23
