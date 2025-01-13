@@ -780,7 +780,7 @@
 <para>
   If you try to edit a transaction with at least one split marked as reconciled (R),
   you will be warned.  There is a further discussion about why this is important in
-  the section on Reconciliation.  about
+  the section on Reconciliation.
 </para>
 </sect1>
 
