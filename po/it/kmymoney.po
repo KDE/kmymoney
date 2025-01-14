@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2025-01-01 01:53+0100\n"
+"PO-Revision-Date: 2025-01-13 15:00+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2573,8 +2573,7 @@ msgstr "Aggiorna i prezzi di azioni e valute"
 #, kde-format
 msgid "List of known Equities, and the date they were last updated on."
 msgstr ""
-"Lista delle quote di capitale conosciute, e l'ultima data in cui sono state "
-"aggiornate."
+"Elenco dei titoli conosciuti, e l'ultima data in cui sono stati aggiornati."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/kequitypriceupdatedlg.ui:59
@@ -3581,7 +3580,7 @@ msgstr "..."
 #: kmymoney/dialogs/knewequityentrydlg.ui:14
 #, kde-format
 msgid "New Equity"
-msgstr "Nuova quota di capitale"
+msgstr "Nuovo titolo"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, edtMarketSymbol)
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, edtMarketSymbol)
@@ -4347,7 +4346,7 @@ msgstr "Non mostrare le categorie non utilizzate"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:423
 #, kde-format
 msgid "Show equity accounts"
-msgstr "Mostra i conti di capitale"
+msgstr "Mostra i conti di titoli"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_ShowCategoriesInAccountsView)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:430
@@ -5185,7 +5184,7 @@ msgstr ""
 #: kmymoney/widgets/registersearchline.cpp:79
 #, kde-format
 msgid "Not reconciled"
-msgstr "Non riconciliato"
+msgstr "Non riconciliate"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_stateBox)
@@ -5862,7 +5861,7 @@ msgstr "Importazione/Esportazione CSV"
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:72
 #, kde-format
 msgid "Equity"
-msgstr "Capitale"
+msgstr "Titolo"
 
 #: kmymoney/kmymoney.cpp:516
 #, kde-format
@@ -6981,7 +6980,7 @@ msgstr "Non riconciliato"
 #, kde-format
 msgctxt "Reconciliation state 'Cleared'"
 msgid "Cleared"
-msgstr "Compensata"
+msgstr "Compensate"
 
 #: kmymoney/kmymoneyutils.cpp:402 kmymoney/mymoney/statusmodel.cpp:30
 #, kde-format
@@ -7222,7 +7221,7 @@ msgstr "Categorie di uscita"
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:400
 #, kde-format
 msgid "Equity accounts"
-msgstr "Conti di capitale"
+msgstr "Conti di titoli"
 
 #: kmymoney/models/accountsmodel.cpp:766
 #, kde-format
@@ -7603,7 +7602,7 @@ msgstr "Azione"
 #, kde-format
 msgctxt "Account type"
 msgid "Equity"
-msgstr "Capitale"
+msgstr "Titolo"
 
 #: kmymoney/mymoney/mymoneyaccount.cpp:510
 #, kde-format
@@ -11746,8 +11745,8 @@ msgstr ""
 #, kde-format
 msgid "%1 commodity (equity)\n"
 msgid_plural "%1 commodities (equities)\n"
-msgstr[0] "%1 merce (capitale)\n"
-msgstr[1] "%1 merci (capitali)\n"
+msgstr[0] "%1 merce (titolo)\n"
+msgstr[1] "%1 merci (titoli)\n"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2371
 #, kde-format
@@ -19831,7 +19830,7 @@ msgstr "Riepilogo investimento"
 #: kmymoney/views/kinvestmentview.ui:24
 #, kde-format
 msgid "Equities"
-msgstr "Patrimonio"
+msgstr "Titoli"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/views/kinvestmentview.ui:44
@@ -19846,8 +19845,8 @@ msgid ""
 "Summary of the equities contained in this account, showing your holdings and "
 "their most recent price."
 msgstr ""
-"Sommario delle partecipazioni azionarie contenute in questo conto, mostrando "
-"le azioni detenute ed il loro prezzo più recente."
+"Riepilogo dei titoli contenuti in questo conto,con indicazione delle azioni "
+"detenute e del loro prezzo più recente."
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_editSecurityButton)
 #: kmymoney/views/kinvestmentview.ui:163
@@ -21744,22 +21743,22 @@ msgstr "Qualsiasi stato"
 #: kmymoney/widgets/registersearchline.cpp:74
 #, kde-format
 msgid "Imported"
-msgstr "Importato"
+msgstr "Importate"
 
 #: kmymoney/widgets/registersearchline.cpp:75
 #, kde-format
 msgid "Matched"
-msgstr "Verificato"
+msgstr "Verificate"
 
 #: kmymoney/widgets/registersearchline.cpp:76
 #, kde-format
 msgid "Erroneous"
-msgstr "Errato"
+msgstr "Errate"
 
 #: kmymoney/widgets/registersearchline.cpp:77
 #, kde-format
 msgid "Scheduled"
-msgstr "Pianificato"
+msgstr "Pianificate"
 
 #: kmymoney/widgets/registersearchline.cpp:78
 #, kde-format

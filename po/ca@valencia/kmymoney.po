@@ -1,5 +1,5 @@
 # Translation of kmymoney.po to Catalan (Valencian)
-# Copyright (C) 2006-2024 This_file_is_part_of_KDE
+# Copyright (C) 2006-2025 This_file_is_part_of_KDE
 # This file is put in the public domain.
 #
 # SPDX-FileCopyrightText: 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Antoni Bella Pérez <antonibella5@yahoo.com>
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2025-01-06 16:29+0100\n"
+"PO-Revision-Date: 2025-01-12 21:43+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -1489,7 +1489,7 @@ msgstr "Usuari"
 #: kmymoney/dialogs/kcurrencycalculator.ui:17
 #, kde-format
 msgid "Exchange Rate/Price Editor"
-msgstr "Editor del tipus/preu de canvi"
+msgstr "Editor de tipus de canvi/preu"
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
 #. i18n: ectx: property (text), widget (QLabel, amountLabel)
@@ -1587,13 +1587,13 @@ msgstr "a"
 #: kmymoney/dialogs/kcurrencycalculator.ui:227
 #, kde-format
 msgid "To a&mount"
-msgstr "A i&mport"
+msgstr "Per i&mport"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_rateButton)
 #: kmymoney/dialogs/kcurrencycalculator.ui:237
 #, kde-format
 msgid "Exchange &rate / Price"
-msgstr "Tipus/p&reu de canvi"
+msgstr "Tipus de canvi/p&reu"
 
 #. i18n: ectx: property (text), widget (QLabel, m_conversionExample)
 #: kmymoney/dialogs/kcurrencycalculator.ui:301
@@ -6070,7 +6070,7 @@ msgstr "Desvincula el compte…"
 #: kmymoney/kmymoney.cpp:1424
 #, kde-format
 msgid "Update account..."
-msgstr "Actualitza un compte…"
+msgstr "Actualitza el compte…"
 
 #: kmymoney/kmymoney.cpp:1425
 #, kde-format
@@ -6155,7 +6155,7 @@ msgstr "Edita"
 #, kde-format
 msgctxt "Enter transaction"
 msgid "Enter"
-msgstr "Retorn"
+msgstr "Introduïx"
 
 #: kmymoney/kmymoney.cpp:1456
 #, kde-format
@@ -6876,7 +6876,7 @@ msgstr "Mou l'operació a…"
 #: kmymoney/kmymoneyui.rc:209
 #, kde-format
 msgid "Select account"
-msgstr "Escolliu un compte"
+msgstr "Seleccioneu un compte"
 
 #. i18n: ectx: Menu (onlinejob_context_menu)
 #: kmymoney/kmymoneyui.rc:228
@@ -11074,7 +11074,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/rowswizardpage.ui:20
 #, kde-format
 msgid "Rows Wizard Page"
-msgstr "Pàgina de l'assistent de columnes"
+msgstr "Pàgina de l'assistent de files"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/csv/import/rowswizardpage.ui:42
@@ -12737,7 +12737,7 @@ msgstr "No s'ha pogut"
 #: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlgdecl.ui:14
 #, kde-format
 msgid "OFX Direct Connect"
-msgstr "Connexió OFX directa"
+msgstr "Connexió directa OFX"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlgdecl.ui:23
@@ -25139,7 +25139,7 @@ msgstr "Escolliu la divisa"
 #: kmymoney/wizards/newuserwizard/knewuserwizard.cpp:60
 #, kde-format
 msgid "Select Accounts"
-msgstr "Escolliu els comptes"
+msgstr "Seleccioneu els comptes"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newuserwizard/kpasswordpage.ui:23
