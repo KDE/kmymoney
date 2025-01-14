@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-13 01:57+0000\n"
-"PO-Revision-Date: 2025-01-06 16:29+0100\n"
+"PO-Revision-Date: 2025-01-12 21:43+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -1016,7 +1016,7 @@ msgstr "Usuari"
 #: kmymoney/dialogs/kcurrencycalculator.ui:17
 #, kde-format
 msgid "Exchange Rate/Price Editor"
-msgstr "Editor del tipus/preu de canvi"
+msgstr "Editor de tipus de canvi/preu"
 
 #. i18n: ectx: property (text), widget (QLabel, amountLabel)
 #. i18n: ectx: property (text), widget (QLabel, label_7)
@@ -1133,13 +1133,13 @@ msgstr "a"
 #: kmymoney/dialogs/kcurrencycalculator.ui:227
 #, kde-format
 msgid "To a&mount"
-msgstr "A i&mport"
+msgstr "Per i&mport"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_rateButton)
 #: kmymoney/dialogs/kcurrencycalculator.ui:237
 #, kde-format
 msgid "Exchange &rate / Price"
-msgstr "Tipus/p&reu de canvi"
+msgstr "Tipus de canvi/p&reu"
 
 #. i18n: ectx: property (text), widget (QLabel, m_conversionExample)
 #: kmymoney/dialogs/kcurrencycalculator.ui:298
@@ -5050,7 +5050,7 @@ msgstr "Desvincula el compte…"
 #: kmymoney/kmymoney.cpp:1913
 #, kde-format
 msgid "Update account..."
-msgstr "Actualitza un compte…"
+msgstr "Actualitza el compte…"
 
 #: kmymoney/kmymoney.cpp:1914
 #, kde-format
@@ -5138,7 +5138,7 @@ msgstr "Edita"
 #, kde-format
 msgctxt "Enter transaction"
 msgid "Enter"
-msgstr "Retorn"
+msgstr "Introduïx"
 
 #: kmymoney/kmymoney.cpp:1946
 #, kde-format
@@ -6073,7 +6073,7 @@ msgstr "Mou l'operació a…"
 #: kmymoney/kmymoneyui.rc:226
 #, kde-format
 msgid "Select account"
-msgstr "Escolliu un compte"
+msgstr "Seleccioneu un compte"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: kmymoney/kmymoneyui.rc:250
@@ -11023,7 +11023,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/rowswizardpage.ui:20
 #, kde-format
 msgid "Rows Wizard Page"
-msgstr "Pàgina de l'assistent de columnes"
+msgstr "Pàgina de l'assistent de files"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/csv/import/rowswizardpage.ui:42
@@ -12716,7 +12716,7 @@ msgstr "No s'ha pogut"
 #: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlgdecl.ui:14
 #, kde-format
 msgid "OFX Direct Connect"
-msgstr "Connexió OFX directa"
+msgstr "Connexió directa OFX"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlgdecl.ui:23
@@ -20021,32 +20021,25 @@ msgid "Assets and Liabilities Summary"
 msgstr "Resum d'Actius i Passius"
 
 #: kmymoney/views/khomeview_p.h:1379
-#, fuzzy, kde-format
-#| msgctxt "Header not marked"
-#| msgid "!M"
+#, kde-format
 msgctxt "@title:column table on home page: not marked"
 msgid "!M"
 msgstr "!M"
 
 #: kmymoney/views/khomeview_p.h:1383
-#, fuzzy, kde-format
-#| msgctxt "Reconciliation flag C"
-#| msgid "C"
+#, kde-format
 msgctxt "@title:column table on home page: cleared"
 msgid "C"
 msgstr "C"
 
 #: kmymoney/views/khomeview_p.h:1387
-#, fuzzy, kde-format
-#| msgctxt "Header not reconciled"
-#| msgid "!R"
+#, kde-format
 msgctxt "@title:column table on home page: not reconciled"
 msgid "!R"
 msgstr "!R"
 
 #: kmymoney/views/khomeview_p.h:1391
-#, fuzzy, kde-format
-#| msgid "Reconciled"
+#, kde-format
 msgctxt "@title:column table on home page: last reconciliation date"
 msgid "Reconciled"
 msgstr "Conciliada"
@@ -25691,7 +25684,7 @@ msgstr "Escolliu la divisa"
 #: kmymoney/wizards/newuserwizard/knewuserwizard.cpp:59
 #, kde-format
 msgid "Select Accounts"
-msgstr "Escolliu els comptes"
+msgstr "Seleccioneu els comptes"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newuserwizard/kpasswordpage.ui:23

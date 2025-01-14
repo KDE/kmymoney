@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-13 01:57+0000\n"
-"PO-Revision-Date: 2025-01-05 13:30+0100\n"
+"PO-Revision-Date: 2025-01-13 15:00+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2735,7 +2735,7 @@ msgstr "Includi nei budget come entrata"
 #: kmymoney/dialogs/knewequityentrydlg.ui:14
 #, kde-format
 msgid "New Equity"
-msgstr "Nuova quota di capitale"
+msgstr "Nuovo titolo"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, edtMarketSymbol)
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, edtMarketSymbol)
@@ -3451,7 +3451,7 @@ msgstr "Non mostrare le categorie non utilizzate"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:400
 #, kde-format
 msgid "Show equity accounts"
-msgstr "Mostra i conti di capitale"
+msgstr "Mostra i conti di titoli"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_ShowCategoriesInAccountsView)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:407
@@ -4806,7 +4806,7 @@ msgstr "Importazione/Esportazione CSV"
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:78
 #, kde-format
 msgid "Equity"
-msgstr "Capitale"
+msgstr "Titolo"
 
 #: kmymoney/kmymoney.cpp:528
 #, kde-format
@@ -6414,35 +6414,35 @@ msgstr "Qualsiasi stato"
 #: kmymoney/models/ledgerfilter.cpp:73
 #, kde-format
 msgid "Imported"
-msgstr "Importato"
+msgstr "Importate"
 
 #: kmymoney/models/ledgerfilter.cpp:74
 #, kde-format
 msgid "Matched"
-msgstr "Verificato"
+msgstr "Verificate"
 
 #: kmymoney/models/ledgerfilter.cpp:75
 #, kde-format
 msgid "Erroneous"
-msgstr "Errato"
+msgstr "Errate"
 
 #: kmymoney/models/ledgerfilter.cpp:76
 #, kde-format
 msgid "Scheduled"
-msgstr "Pianificato"
+msgstr "Pianificate"
 
 #: kmymoney/models/ledgerfilter.cpp:78
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:34
 #, kde-format
 msgid "Not reconciled"
-msgstr "Non riconciliato"
+msgstr "Non riconciliate"
 
 #: kmymoney/models/ledgerfilter.cpp:79 kmymoney/mymoney/statusmodel.cpp:37
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:33
 #, kde-format
 msgctxt "Reconciliation state 'Cleared'"
 msgid "Cleared"
-msgstr "Compensata"
+msgstr "Compensate"
 
 #: kmymoney/models/ledgerfilterbase.cpp:63
 #, kde-format
@@ -6576,7 +6576,7 @@ msgstr "Azione"
 #, kde-format
 msgctxt "Account type"
 msgid "Equity"
-msgstr "Capitale"
+msgstr "Titolo"
 
 #: kmymoney/mymoney/mymoneyaccount.cpp:573
 #, kde-format
@@ -8438,7 +8438,7 @@ msgstr "Categorie di uscita"
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:409
 #, kde-format
 msgid "Equity accounts"
-msgstr "Conti di capitale"
+msgstr "Conti di titoli"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:467
 #, kde-format
@@ -11722,8 +11722,8 @@ msgstr ""
 #, kde-format
 msgid "%1 commodity (equity)\n"
 msgid_plural "%1 commodities (equities)\n"
-msgstr[0] "%1 merce (capitale)\n"
-msgstr[1] "%1 merci (capitali)\n"
+msgstr[0] "%1 merce (titolo)\n"
+msgstr[1] "%1 merci (titoli)\n"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2348
 #, kde-format
@@ -19985,32 +19985,25 @@ msgid "Assets and Liabilities Summary"
 msgstr "Riepilogo attività e passività"
 
 #: kmymoney/views/khomeview_p.h:1379
-#, fuzzy, kde-format
-#| msgctxt "Header not marked"
-#| msgid "!M"
+#, kde-format
 msgctxt "@title:column table on home page: not marked"
 msgid "!M"
 msgstr "!M"
 
 #: kmymoney/views/khomeview_p.h:1383
-#, fuzzy, kde-format
-#| msgctxt "Reconciliation flag C"
-#| msgid "C"
+#, kde-format
 msgctxt "@title:column table on home page: cleared"
 msgid "C"
 msgstr "C"
 
 #: kmymoney/views/khomeview_p.h:1387
-#, fuzzy, kde-format
-#| msgctxt "Header not reconciled"
-#| msgid "!R"
+#, kde-format
 msgctxt "@title:column table on home page: not reconciled"
 msgid "!R"
 msgstr "!R"
 
 #: kmymoney/views/khomeview_p.h:1391
-#, fuzzy, kde-format
-#| msgid "Reconciled"
+#, kde-format
 msgctxt "@title:column table on home page: last reconciliation date"
 msgid "Reconciled"
 msgstr "Riconciliato"
@@ -20172,7 +20165,7 @@ msgstr "Riepilogo investimento"
 #: kmymoney/views/kinvestmentview.ui:24
 #, kde-format
 msgid "Equities"
-msgstr "Patrimonio"
+msgstr "Titoli"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/views/kinvestmentview.ui:44
@@ -20187,8 +20180,8 @@ msgid ""
 "Summary of the equities contained in this account, showing your holdings and "
 "their most recent price."
 msgstr ""
-"Sommario delle partecipazioni azionarie contenute in questo conto, mostrando "
-"le azioni detenute ed il loro prezzo più recente."
+"Riepilogo dei titoli contenuti in questo conto,con indicazione delle azioni "
+"detenute e del loro prezzo più recente."
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_searchSecurities)
 #: kmymoney/views/kinvestmentview.ui:122
