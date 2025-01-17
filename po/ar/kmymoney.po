@@ -22048,7 +22048,8 @@ msgstr "مُسوًّى"
 msgid "All types"
 msgstr "كلّ الأنواع"
 
-# حالة سداد: kloandetailspage.cpp و durationwizardpage.cpp (يُعرض كوصف لـcombobox به رقم (كذا حالة سداد) بدون معدود
+# حالة سداد: kloandetailspage.cpp و durationwizardpage.cpp (يُعرض كوصف
+# لـcombobox به رقم (كذا حالة سداد) بدون معدود
 #. i18n: ectx: attribute (title), widget (QWizardPage, NewPaymentsWizardPage)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeBox)
 #: kmymoney/widgets/ktransactionfilter.ui:624
