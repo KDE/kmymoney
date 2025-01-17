@@ -39,7 +39,9 @@ public:
     /**
      * This method is provided by KMyMoney to select a file to
      * be imported. A caption for the dialog can be provided via
-     * @a title, a specific directory to be started with as @a path.
+     * @a title, @a recentDirId if not empty is an identifier to be used
+     * to load and store the selected directory in KRecentDirs.
+     *
      * Which files are selectable is controlled via the contents
      * of @a mask. @a mode controls the behavior of the dialog. In case
      * the importer requires additional information, it can provide
@@ -49,7 +51,7 @@ public:
      * you are responsible to delete the widget. It will not be deleted
      * automatically during the destruction of the dialog.
      */
-    virtual QUrl selectFile(const QString& title, const QString& path, const QString& mask, QFileDialog::FileMode mode, QWidget* widget) const = 0;
+    virtual QUrl selectFile(const QString& title, const QString& recentDirId, const QString& mask, QFileDialog::FileMode mode, QWidget* widget) const = 0;
 
 Q_SIGNALS:
 };

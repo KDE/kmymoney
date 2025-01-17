@@ -16,6 +16,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include "KRecentDirs"
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -25,18 +27,13 @@ KMyMoneyPlugin::KMMImportInterface::KMMImportInterface(QObject* parent, const ch
 }
 
 QUrl KMyMoneyPlugin::KMMImportInterface::selectFile(const QString& title,
-                                                    const QString& path,
+                                                    const QString& recentDirId,
                                                     const QString& mask,
                                                     QFileDialog::FileMode mode,
                                                     QWidget* widget) const
 {
-    //    QString path(_path);
-
-    // if the path is not specified open the file dialog in the last used directory
-    // 'kmymoney' is the keyword that identifies the last used directory in KFileDialog
-    //    if (path.isEmpty()) {
-    //      path = KRecentDirs::dir(":kmymoney-import");
-    //    }
+    const auto recentDirSelector = QStringLiteral(":%1").arg(recentDirId);
+    auto path = KRecentDirs::dir(recentDirSelector);
 
     QPointer<QFileDialog> dialog = new QFileDialog(nullptr, title, path, mask);
     dialog->setFileMode(mode);
@@ -56,9 +53,9 @@ QUrl KMyMoneyPlugin::KMMImportInterface::selectFile(const QString& title,
         QList<QUrl> selectedUrls = dialog->selectedUrls();
         if (!selectedUrls.isEmpty()) {
             url = selectedUrls.first();
-            //        if (_path.isEmpty()) {
-            //          KRecentDirs::add(":kmymoney-import", url.adjusted(QUrl::RemoveFilename | QUrl::StripTrailingSlash).path());
-            //        }
+            if (!recentDirId.isEmpty()) {
+                KRecentDirs::add(recentDirSelector, url.adjusted(QUrl::RemoveFilename | QUrl::StripTrailingSlash).path());
+            }
         }
     }
 

@@ -17,6 +17,7 @@
 #include <QSpinBox>
 #include <QTextCodec>
 #include <QTextStream>
+#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -27,7 +28,6 @@
 #include <KMessageBox>
 #include <KPluginFactory>
 #include <KSharedConfig>
-#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -165,7 +165,7 @@ void OFXImporter::slotImportFile()
     option->m_uniqueIdSource->setCurrentIndex(defaultIdSource());
 
     QUrl url = importInterface()->selectFile(i18n("OFX import file selection"),
-                                             QString(),
+                                             QLatin1String("kmymoney-ofx-import"),
                                              i18nc("Filter for QFileDialog", "OFX files (*.ofx *.qfx *.ofc);;All files (*)"),
                                              QFileDialog::ExistingFile,
                                              widget);

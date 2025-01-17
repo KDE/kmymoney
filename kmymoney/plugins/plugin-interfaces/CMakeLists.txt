@@ -12,6 +12,7 @@ add_library(interfaces STATIC ${libinterfaces_a_SOURCES})
 target_link_libraries(interfaces
     KF${QT_MAJOR_VERSION}::Service
     KF${QT_MAJOR_VERSION}::XmlGui
+    KF${QT_MAJOR_VERSION}::KIOFileWidgets
     Alkimia::alkimia
     Qt::Xml
     KF${QT_MAJOR_VERSION}::I18n
