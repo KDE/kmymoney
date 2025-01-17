@@ -6726,7 +6726,8 @@ msgstr "رشّح الحسابات"
 msgid "Use this to filter out accounts"
 msgstr "استخدم هذا لترشيح الحسابات"
 
-# حالة سداد: kloandetailspage.cpp و durationwizardpage.cpp (يُعرض كوصف لـcombobox به رقم (كذا حالة سداد) بدون معدود
+# حالة سداد: kloandetailspage.cpp و durationwizardpage.cpp (يُعرض كوصف
+# لـcombobox به رقم (كذا حالة سداد) بدون معدود
 #. i18n: ectx: attribute (title), widget (QWizardPage, NewPaymentsWizardPage)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeBox)
 #: kmymoney/kmymoneyutils.cpp:119 kmymoney/views/khomeview_p.h:588
