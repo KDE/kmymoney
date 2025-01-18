@@ -720,7 +720,10 @@ void MyMoneyXmlWriterPrivate::writeKMyMoney()
     writeTags();
     writeAccounts();
     writeTransactions();
-    writeKeyValueContainer(m_writer, m_file->parametersModel()->pairs());
+    QMap<QString, QString> map = m_file->parametersModel()->pairs();
+    // do not duplicate key 'FixVersion' into KeyValuePairs tag, see https://bugs.kde.org/show_bug.cgi?id=498419
+    map.remove(m_file->fixedKey(MyMoneyFile::FileFixVersion));
+    writeKeyValueContainer(m_writer, map);
     writeSchedules();
     writeSecurities();
     writeCurrencies();
