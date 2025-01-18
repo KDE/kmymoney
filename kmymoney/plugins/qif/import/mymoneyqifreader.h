@@ -62,9 +62,10 @@ private:
     } QifEntryTypeE;
 
     struct qSplit {
-        QString      m_strCategoryName;
-        QString      m_strMemo;
-        QString      m_amount;
+        QString m_strCategoryName;
+        QString m_strMemo;
+        QString m_amount;
+        QString m_tags;
     };
 
 public:
@@ -273,6 +274,9 @@ private:
 
     // void processQifLine();
     void createOpeningBalance(eMyMoney::Account::Type accType = eMyMoney::Account::Type::Checkings);
+
+    std::tuple<QString, QString> extractCategoryAndTags(const QString& txt) const;
+    void createTags(const QString& tags) const;
 
 Q_SIGNALS:
     void statementsReady(const QList<MyMoneyStatement> &);

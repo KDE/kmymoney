@@ -44,8 +44,8 @@
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "mymoneysplit.h"
-
 #include "mymoneystatement.h"
+#include "tagsmodel.h"
 
 #include "kmmyesno.h"
 
@@ -682,7 +682,7 @@ bool MyMoneyQifReader::extractSplits(QList<qSplit>& listqSplits) const
                 memoPresent = true; // This transaction contains memo
 
             } else if ((*it)[0] == 'S') {
-                q.m_strCategoryName = (*it).mid(1); // 'S' = CategoryName
+                std::tie(q.m_strCategoryName, q.m_tags) = extractCategoryAndTags((*it).mid(1)); // 'S' = CategoryName
                 neededCount ++;
 
             } else if ((*it)[0] == '$') {
@@ -1176,7 +1176,9 @@ void MyMoneyQifReader::processTransactionEntry()
 //    s2.clearId();
 
         // standard transaction
-        tmp = extractLine('L');
+        QString tags;
+        std::tie(tmp, tags) = extractCategoryAndTags(extractLine('L'));
+
         if (d->isTransfer(tmp, m_qifProfile.accountDelimiter().at(0), m_qifProfile.accountDelimiter().mid(1, 1))) {
             accountId = transferAccount(tmp, false);
 
@@ -1215,6 +1217,7 @@ void MyMoneyQifReader::processTransactionEntry()
         if (!accountId.isEmpty()) {
             s2.m_accountId = accountId;
             s2.m_strCategoryName = tmp;
+            s2.m_tags = tags;
             tr.m_listSplits.append(s2);
         }
 
@@ -1224,6 +1227,7 @@ void MyMoneyQifReader::processTransactionEntry()
             MyMoneyStatement::Split s2 = s1;
             s2.m_amount = (-m_qifProfile.value('$', listqSplits[count-1].m_amount));   // Amount of split
             s2.m_strMemo = listqSplits[count-1].m_strMemo;                             // Memo in split
+            s2.m_tags = listqSplits[count - 1].m_tags;
             tmp = listqSplits[count-1].m_strCategoryName;                              // Category in split
 
             if (d->isTransfer(tmp, m_qifProfile.accountDelimiter().at(0), m_qifProfile.accountDelimiter().mid(1, 1))) {
@@ -2086,4 +2090,42 @@ void MyMoneyQifReader::processSecurityEntry()
 int MyMoneyQifReader::statementCount() const
 {
     return d->statements.count();
+}
+
+void MyMoneyQifReader::createTags(const QString& tags) const
+{
+    const auto file = MyMoneyFile::instance();
+    const auto tagList = tags.split(QLatin1Char(':'));
+    MyMoneyFileTransaction ft;
+    std::for_each(tagList.cbegin(), tagList.cend(), [&](const QString& tagName) {
+        if (file->tagsModel()->indexListByName(tagName).isEmpty()) {
+            try {
+                MyMoneyTag tag(tagName, QColor("black"));
+                file->addTag(tag);
+                qDebug() << "Tag" << tagName << "created as" << tag.id();
+            } catch (const MyMoneyException&) {
+            }
+        }
+    });
+    ft.commit();
+}
+
+std::tuple<QString, QString> MyMoneyQifReader::extractCategoryAndTags(const QString& txt) const
+{
+    int separatorPos;
+    int dialogPos;
+    // with MS-Money, the category lines could be appended with a
+    // sequence of two dashes and the name of a special dialog that
+    // was used to create the transaction. We simply discard this
+    // information. If it is not present, we set its position to the
+    // end of the input text.
+    if ((dialogPos = txt.indexOf(QLatin1String("--"))) == -1) {
+        dialogPos = txt.length();
+    }
+    if ((separatorPos = txt.indexOf(QLatin1Char('/'))) != -1) {
+        const auto tags = txt.mid(separatorPos + 1, dialogPos - (separatorPos + 1)).trimmed();
+        createTags(tags);
+        return std::make_tuple(txt.left(separatorPos).trimmed(), tags);
+    }
+    return std::make_tuple(txt, QString());
 }

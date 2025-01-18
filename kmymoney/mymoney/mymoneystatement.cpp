@@ -66,6 +66,7 @@ enum class Attribute {
     BrokerageAccount,
     Category,
     SmallestFraction,
+    Tags,
 };
 qHashSeedType qHash(const Attribute key, qHashSeedType seed)
 {
@@ -151,6 +152,7 @@ QString getAttrName(const Statement::Attribute attr)
         {Statement::Attribute::BrokerageAccount,     QStringLiteral("brokerageaccount")},
         {Statement::Attribute::Category,             QStringLiteral("version")},
         {Statement::Attribute::SmallestFraction,     QStringLiteral("smallestFraction")},
+        {Statement::Attribute::Tags,                 QStringLiteral("tags")},
         // clang-format on
     };
     return attrNames[attr];
@@ -200,10 +202,10 @@ void MyMoneyStatement::write(QDomElement& _root, QDomDocument* _doc) const
             auto el = _doc->createElement(getElName(Statement::Element::Split));
             el.setAttribute(getAttrName(Statement::Attribute::AccountID), split.m_accountId);
             el.setAttribute(getAttrName(Statement::Attribute::Amount), split.m_amount.toString());
-            el.setAttribute(getAttrName(Statement::Attribute::Reconcile), (int)split.m_reconcile);
             el.setAttribute(getAttrName(Statement::Attribute::Category), split.m_strCategoryName);
             el.setAttribute(getAttrName(Statement::Attribute::Memo), split.m_strMemo);
             el.setAttribute(getAttrName(Statement::Attribute::Reconcile), (int)split.m_reconcile);
+            el.setAttribute(getAttrName(Statement::Attribute::Tags), split.m_tags);
             p.appendChild(el);
         }
         e.appendChild(p);
@@ -290,6 +292,7 @@ bool MyMoneyStatement::read(const QDomElement& _e)
                         s.m_reconcile = static_cast<eMyMoney::Split::State>(c.attribute(getAttrName(Statement::Attribute::Reconcile)).toInt());
                         s.m_strCategoryName = c.attribute(getAttrName(Statement::Attribute::Category));
                         s.m_strMemo = c.attribute(getAttrName(Statement::Attribute::Memo));
+                        s.m_tags = c.attribute(getAttrName(Statement::Attribute::Tags));
                         t.m_listSplits += s;
                     }
                     splitChild = splitChild.nextSibling();

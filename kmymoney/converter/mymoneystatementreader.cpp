@@ -57,6 +57,7 @@
 #include "mymoneyutils.h"
 #include "payeesmodel.h"
 #include "scheduledtransactionmatchfinder.h"
+#include "tagsmodel.h"
 #include "transactionmatcher.h"
 
 #include "kmmyesno.h"
@@ -1344,6 +1345,18 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
         QList<MyMoneyStatement::Split>::const_iterator it_s;
         for (it_s = statementTransactionUnderImport.m_listSplits.begin(); it_s != statementTransactionUnderImport.m_listSplits.end(); ++it_s) {
+            auto tagIdList = [&](const QString& tags) {
+                QList<QString> idList;
+                const auto tagList = tags.split(QLatin1Char(':'));
+                std::for_each(tagList.cbegin(), tagList.cend(), [&](const QString& tagName) {
+                    const auto tagsIdxList = file->tagsModel()->indexListByName(tagName);
+                    std::for_each(tagsIdxList.cbegin(), tagsIdxList.cend(), [&](const QModelIndex& idx) {
+                        idList.append(idx.data(eMyMoney::Model::IdRole).toString());
+                    });
+                });
+                return idList;
+            };
+
             MyMoneySplit s3;
             s3.setAccountId((*it_s).m_accountId);
             MyMoneyAccount acc = file->account(s3.accountId());
@@ -1353,6 +1366,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             s3.setValue((*it_s).m_amount);
             s3.setReconcileFlag((*it_s).m_reconcile);
             d->setupPrice(s3, acc, d->m_account, statementTransactionUnderImport.m_datePosted);
+            s3.setTagIdList(tagIdList((*it_s).m_tags));
             transactionUnderImport.addSplit(s3);
         }
     }

@@ -40,6 +40,7 @@ public:
         QString      m_accountId;
         eMyMoney::Split::State m_reconcile = eMyMoney::Split::State::NotReconciled;
         MyMoneyMoney m_amount;
+        QString m_tags;
     };
 
     struct Transaction
