@@ -10,6 +10,7 @@
 // QT Includes
 
 #include <QDate>
+#include <QSequentialIterable>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
