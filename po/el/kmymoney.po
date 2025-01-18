@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-13 01:57+0000\n"
+"POT-Creation-Date: 2025-01-18 12:45+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -31,61 +31,61 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "dglent@gmail.com, sstavra@gmail.com"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:129
+#: kmymoney/converter/mymoneystatementreader.cpp:130
 #, kde-format
 msgid "_Fees"
 msgstr "_Αμοιβές"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:135
+#: kmymoney/converter/mymoneystatementreader.cpp:136
 #, kde-format
 msgid "_Dividend"
 msgstr "_Μέρισμα"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:370
+#: kmymoney/converter/mymoneystatementreader.cpp:371
 #, kde-format
 msgid "Error importing %1: This file is not a valid KMM statement file."
 msgstr ""
 "Σφάλμα κατά την εισαγωγή %1: Αυτό το αρχείο δεν είναι ένα έγκυρο αρχείο "
 "αποσπάσματος κίνησης λογαριασμού KMM."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:370
+#: kmymoney/converter/mymoneystatementreader.cpp:371
 #, kde-format
 msgid "Invalid Statement"
 msgstr "Μη έγκυρο απόσπασμα"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:488
+#: kmymoney/converter/mymoneystatementreader.cpp:489
 #, kde-format
 msgid "Importing statement for account %1"
 msgstr "Εισαγωγή αποσπάσματος κίνησης για τον λογαριασμό %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:490
+#: kmymoney/converter/mymoneystatementreader.cpp:491
 #, kde-format
 msgid "Importing statement without transactions"
 msgstr "Εισαγωγή αποσπάσματος κίνησης λογαριασμού χωρίς συναλλαγές"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:565
+#: kmymoney/converter/mymoneystatementreader.cpp:566
 #, kde-format
 msgid "  Statement balance is not contained in statement."
 msgstr "Το υπόλοιπο δεν περιέχεται στο απόσπασμα κίνησης."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:567
+#: kmymoney/converter/mymoneystatementreader.cpp:568
 #, kde-format
 msgid "  Statement balance on %1 is reported to be %2"
 msgstr "  Η κατάσταση υπολοίπου του %1 μεταφέρθηκε για να γίνει %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:569
+#: kmymoney/converter/mymoneystatementreader.cpp:570
 #, kde-format
 msgid "  Transactions"
 msgstr "  Συναλλαγές"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:570
+#: kmymoney/converter/mymoneystatementreader.cpp:571
 #, kde-format
 msgid "    %1 processed"
 msgid_plural "    %1 processed"
 msgstr[0] "    %1 επεξεργάστηκε"
 msgstr[1] "    %1 επεξεργάστηκαν"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:571
+#: kmymoney/converter/mymoneystatementreader.cpp:572
 #, kde-format
 msgctxt "x transactions have been added"
 msgid "    %1 added"
@@ -93,26 +93,26 @@ msgid_plural "    %1 added"
 msgstr[0] "    %1 προστέθηκε"
 msgstr[1] "    %1 προστέθηκαν"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:572
+#: kmymoney/converter/mymoneystatementreader.cpp:573
 #, kde-format
 msgid "    %1 matched"
 msgid_plural "    %1 matched"
 msgstr[0] "    %1 συσχετίστηκε"
 msgstr[1] "    %1 συσχετίστηκαν"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:573
+#: kmymoney/converter/mymoneystatementreader.cpp:574
 #, kde-format
 msgid "    %1 duplicate"
 msgid_plural "    %1 duplicates"
 msgstr[0] "    %1 διπλό"
 msgstr[1] "    %1 διπλά"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:574
+#: kmymoney/converter/mymoneystatementreader.cpp:575
 #, kde-format
 msgid "  Payees"
 msgstr "  Δικαιούχοι"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:575
+#: kmymoney/converter/mymoneystatementreader.cpp:576
 #, kde-format
 msgctxt "x transactions have been created"
 msgid "    %1 created"
@@ -120,12 +120,12 @@ msgid_plural "    %1 created"
 msgstr[0] "    %1 νέα εγγραφή"
 msgstr[1] "    %1 νέες εγγραφές"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:639
+#: kmymoney/converter/mymoneystatementreader.cpp:640
 #, kde-format
 msgid "Error creating security record: %1"
 msgstr "Σφάλμα κατά τη δημιουργία εγγραφής αξιόγραφου: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:639
+#: kmymoney/converter/mymoneystatementreader.cpp:640
 #: kmymoney/plugins/kbanking/kbanking.cpp:607
 #: kmymoney/plugins/kbanking/kbanking.cpp:629
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:60
@@ -133,7 +133,7 @@ msgstr "Σφάλμα κατά τη δημιουργία εγγραφής αξι�
 msgid "Error"
 msgstr "Σφάλμα"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:747
+#: kmymoney/converter/mymoneystatementreader.cpp:748
 #, kde-format
 msgid ""
 "This imported statement contains investment transactions with no security.  "
@@ -142,20 +142,20 @@ msgstr ""
 "Το απόσπασμα περιέχει συναλλαγές επενδύσεων χωρίς κανένα αξιόγραφο. Οι "
 "συναλλαγές αυτές θα αγνοηθούν."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:748
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1453
+#: kmymoney/converter/mymoneystatementreader.cpp:749
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1457
 #, kde-format
 msgid "Security not found"
 msgstr "Δεν βρέθηκε αξιόγραφο"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:794
-#: kmymoney/converter/mymoneystatementreader.cpp:797
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1437
+#: kmymoney/converter/mymoneystatementreader.cpp:795
+#: kmymoney/converter/mymoneystatementreader.cpp:798
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1441
 #, kde-format
 msgid "Statement Importer"
 msgstr "Οδηγός εισαγωγής αποσπάσματος κίνησης λογαριασμού"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:816
+#: kmymoney/converter/mymoneystatementreader.cpp:817
 #, kde-format
 msgid ""
 "This imported statement contains investment transactions with no share "
@@ -164,17 +164,17 @@ msgstr ""
 "Το απόσπασμα περιέχει συναλλαγές επενδύσεων χωρίς κανένα μετοχικό ποσό. Οι "
 "συναλλαγές αυτές θα αγνοηθούν."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:817
+#: kmymoney/converter/mymoneystatementreader.cpp:818
 #, kde-format
 msgid "No share amount provided"
 msgstr "Δεν παρέχεται κανένα μετοχικό ποσό"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:938
+#: kmymoney/converter/mymoneystatementreader.cpp:939
 #, kde-format
 msgid "(Fees) %1"
 msgstr "(Αμοιβές) %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1031
+#: kmymoney/converter/mymoneystatementreader.cpp:1032
 #, fuzzy, kde-format
 #| msgid "Additional Fees: %1"
 msgctxt "Prepend name of payee (%1) to original memo (%2)"
@@ -183,7 +183,7 @@ msgid ""
 "%2"
 msgstr "Πρόσθετες αμοιβές: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1039
+#: kmymoney/converter/mymoneystatementreader.cpp:1040
 #, kde-format
 msgid ""
 "Do you want to add \"%1\" as payee/receiver?\n"
@@ -192,7 +192,7 @@ msgstr ""
 "Θέλετε να προσθέσετε τον «%1» ως δικαιούχο;\n"
 "\n"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1041
+#: kmymoney/converter/mymoneystatementreader.cpp:1042
 #, kde-format
 msgid ""
 "Selecting \"Yes\" will create the payee, \"No\" will skip creation of a "
@@ -212,53 +212,53 @@ msgstr ""
 "ερώτηση», οι πληροφορίες του δικαιούχου για όλες τις ακόλουθες συναλλαγές "
 "σχετικές με «%1» θα διαγράφονται."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1055
+#: kmymoney/converter/mymoneystatementreader.cpp:1056
 #: kmymoney/kmymoneyutils.cpp:576
 #, kde-format
 msgid "New payee/receiver"
 msgstr "Νέος δικαιούχος"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1086
+#: kmymoney/converter/mymoneystatementreader.cpp:1087
 #, kde-format
 msgid "Default Category for Payee"
 msgstr "Προεπιλεγμένη κατηγορία για τον δικαιούχο"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1093
+#: kmymoney/converter/mymoneystatementreader.cpp:1094
 #, kde-format
 msgid "Please select a default category for payee '%1'"
 msgstr "Παρακαλώ επιλέξτε την προκαθορισμένη κατηγορία για τον δικαιούχο «%1»"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1116
+#: kmymoney/converter/mymoneystatementreader.cpp:1117
 #, kde-format
 msgid "Save Category"
 msgstr "Αποθήκευση κατηγορίας"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1117
+#: kmymoney/converter/mymoneystatementreader.cpp:1118
 #, kde-format
 msgid "No Category"
 msgstr "Καμία κατηγορία"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonAbort)
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: kmymoney/converter/mymoneystatementreader.cpp:1118
+#: kmymoney/converter/mymoneystatementreader.cpp:1119
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:132
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:257
 #, kde-format
 msgid "Abort"
 msgstr "Εγκατάλειψη"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1144
+#: kmymoney/converter/mymoneystatementreader.cpp:1145
 #, kde-format
 msgid "Unable to add payee/receiver"
 msgstr "Αδυναμία προσθήκης του δικαιούχου"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1391
+#: kmymoney/converter/mymoneystatementreader.cpp:1405
 #, kde-format
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr ""
 "Πρόβλημα στην προσθήκη ή συσχέτιση συναλλαγών με το αναγνωριστικό '%1': %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1449
+#: kmymoney/converter/mymoneystatementreader.cpp:1463
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
@@ -266,27 +266,27 @@ msgstr ""
 "<b>Έχει γίνει λήψη ενός αποσπάσματος κίνησης για τον ακόλουθο λογαριασμό:</"
 "b><br/><br/> "
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1450
+#: kmymoney/converter/mymoneystatementreader.cpp:1464
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " - Όνομα λογαριασμού: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1451
+#: kmymoney/converter/mymoneystatementreader.cpp:1465
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " - Τύπος λογαριασμού: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1452
+#: kmymoney/converter/mymoneystatementreader.cpp:1466
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " - Αριθμός λογαριασμού: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1457
+#: kmymoney/converter/mymoneystatementreader.cpp:1471
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "Επιθυμείτε την εισαγωγή συναλλαγών σε αυτόν το λογαριασμό;"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1460
+#: kmymoney/converter/mymoneystatementreader.cpp:1474
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -298,7 +298,7 @@ msgstr ""
 "πατώντας στο κουμπί <b>Δημιουργία</b> ή να επιλέξετε έναν άλλο χειροκίνητα "
 "από το παρακάτω κουτί επιλογής."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1464
+#: kmymoney/converter/mymoneystatementreader.cpp:1478
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -310,12 +310,12 @@ msgstr ""
 "κουμπί επιλογής σε αυτόν τον διάλογο, ή δημιουργείστε ένα νέο λογαριασμό "
 "πατώντας στο κουμπί <b>Δημιουργία</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1493
+#: kmymoney/converter/mymoneystatementreader.cpp:1507
 #, kde-format
 msgid "Import transactions"
 msgstr "Εισαγωγή συναλλαγών"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1536
+#: kmymoney/converter/mymoneystatementreader.cpp:1550
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
@@ -324,14 +324,14 @@ msgstr ""
 "Πρέπει να επιλέξετε ένα λογαριασμό, να δημιουργήσετε ένα νέο ή να πατήσετε "
 "στο κουμπί «Εγκατάλειψη»."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1644
+#: kmymoney/converter/mymoneystatementreader.cpp:1658
 #: kmymoney/views/kscheduledview_p.h:200 kmymoney/views/kscheduledview_p.h:315
 #: kmymoney/views/kscheduledview_p.h:319
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Αδυναμία εισαγωγής προγραμματισμένης συναλλαγής '%1'"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1664
+#: kmymoney/converter/mymoneystatementreader.cpp:1678
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has found a scheduled transaction which matches an imported "
@@ -349,7 +349,7 @@ msgstr ""
 "%2 %3</i><br/>Θέλετε το KMyMoney να συσχετίσει την εισαγωγή με την "
 "προγραμματισμένη συναλλαγή; "
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1673
+#: kmymoney/converter/mymoneystatementreader.cpp:1687
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has found a scheduled transaction which matches an imported "
@@ -377,7 +377,7 @@ msgstr[1] ""
 "%2 %3</i><br/>Θέλετε το KMyMoney να συσχετίσει την εισαγωγή με την "
 "προγραμματισμένη συναλλαγή; "
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1687
+#: kmymoney/converter/mymoneystatementreader.cpp:1701
 #, kde-format
 msgid "Schedule found"
 msgstr "Βρέθηκε προγραμματισμένη συναλλαγή"
@@ -2243,7 +2243,7 @@ msgid "Liability"
 msgstr "Παθητικού"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:550 kmymoney/kmymoney.cpp:445
-#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1794
+#: kmymoney/models/ledgerfilterbase.cpp:76 kmymoney/views/khomeview_p.h:1794
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -2252,7 +2252,7 @@ msgid "Income"
 msgstr "Έσοδα"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:552 kmymoney/kmymoney.cpp:446
-#: kmymoney/models/ledgerfilterbase.cpp:97
+#: kmymoney/models/ledgerfilterbase.cpp:98
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:79
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:191
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:397
@@ -6734,27 +6734,27 @@ msgctxt "Reconciliation state 'Cleared'"
 msgid "Cleared"
 msgstr "Εκκαθαρισμένο"
 
-#: kmymoney/models/ledgerfilterbase.cpp:63
+#: kmymoney/models/ledgerfilterbase.cpp:64
 #, kde-format
 msgctxt "Payment made with credit card"
 msgid "Charge"
 msgstr "Χρέωση"
 
-#: kmymoney/models/ledgerfilterbase.cpp:67
-#: kmymoney/models/ledgerfilterbase.cpp:93
+#: kmymoney/models/ledgerfilterbase.cpp:68
+#: kmymoney/models/ledgerfilterbase.cpp:94
 #, kde-format
 msgctxt "Decrease of asset/liability value"
 msgid "Decrease"
 msgstr "Μείωση"
 
-#: kmymoney/models/ledgerfilterbase.cpp:71
-#: kmymoney/models/ledgerfilterbase.cpp:89
+#: kmymoney/models/ledgerfilterbase.cpp:72
+#: kmymoney/models/ledgerfilterbase.cpp:90
 #, kde-format
 msgctxt "Increase of asset/liability value"
 msgid "Increase"
 msgstr "Αύξηση"
 
-#: kmymoney/models/ledgerfilterbase.cpp:85
+#: kmymoney/models/ledgerfilterbase.cpp:86
 #, kde-format
 msgctxt "Payment towards credit card"
 msgid "Payment"
@@ -14967,7 +14967,7 @@ msgid "Error while creating opening balance transaction"
 msgstr "Σφάλμα κατά τη δημιουργία της συναλλαγής του ισολογισμού ανοίγματος"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1089
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1319
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1323
 #, kde-format
 msgid ""
 "The date entry \"%1\" read from the file cannot be interpreted through the "
@@ -14986,12 +14986,12 @@ msgstr ""
 "επιλέξετε ένα προφίλ QIF διαφορετικό ή να δημιουργήσετε ένα νέο."
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1096
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1326
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1330
 #, kde-format
 msgid "Invalid date format"
 msgstr "Άκυρη μορφή ημερομηνίας"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1451
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1455
 #, kde-format
 msgid ""
 "This investment account does not contain the \"%1\" security.  Transactions "
@@ -15000,12 +15000,12 @@ msgstr ""
 "Αυτός ο λογαριασμός επενδύσεων δεν περιέχει το αξιόγραφο «%1». Οι συναλλαγές "
 "που έχουν σχέση με αυτό το αξιόγραφο θα αγνοηθούν."
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1962
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1966
 #, kde-format
 msgid "%1 (Investment)"
 msgstr "%1 (Επενδύσεων)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1963
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1967
 #, kde-format
 msgid "Autogenerated by QIF importer from type Mutual account entry"
 msgstr ""

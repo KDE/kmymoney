@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-13 01:57+0000\n"
+"POT-Creation-Date: 2025-01-18 12:45+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -30,52 +30,52 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "liudas@akmc.lt"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:129
+#: kmymoney/converter/mymoneystatementreader.cpp:130
 #, fuzzy, kde-format
 msgid "_Fees"
 msgstr "Savaitės"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:135
+#: kmymoney/converter/mymoneystatementreader.cpp:136
 #, kde-format
 msgid "_Dividend"
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:370
+#: kmymoney/converter/mymoneystatementreader.cpp:371
 #, kde-format
 msgid "Error importing %1: This file is not a valid KMM statement file."
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:370
+#: kmymoney/converter/mymoneystatementreader.cpp:371
 #, kde-format
 msgid "Invalid Statement"
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:488
+#: kmymoney/converter/mymoneystatementreader.cpp:489
 #, kde-format
 msgid "Importing statement for account %1"
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:490
+#: kmymoney/converter/mymoneystatementreader.cpp:491
 #, fuzzy, kde-format
 msgid "Importing statement without transactions"
 msgstr "Priderinimo operacija"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:565
+#: kmymoney/converter/mymoneystatementreader.cpp:566
 #, fuzzy, kde-format
 msgid "  Statement balance is not contained in statement."
 msgstr "Šio pranešimo pradžios balansas:"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:567
+#: kmymoney/converter/mymoneystatementreader.cpp:568
 #, kde-format
 msgid "  Statement balance on %1 is reported to be %2"
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:569
+#: kmymoney/converter/mymoneystatementreader.cpp:570
 #, kde-format
 msgid "  Transactions"
 msgstr "  Operacijos"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:570
+#: kmymoney/converter/mymoneystatementreader.cpp:571
 #, fuzzy, kde-format
 msgid "    %1 processed"
 msgid_plural "    %1 processed"
@@ -84,7 +84,7 @@ msgstr[1] "Apdorota"
 msgstr[2] "Apdorota"
 msgstr[3] "Apdorota"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:571
+#: kmymoney/converter/mymoneystatementreader.cpp:572
 #, fuzzy, kde-format
 msgctxt "x transactions have been added"
 msgid "    %1 added"
@@ -94,7 +94,7 @@ msgstr[1] "Pridėtas"
 msgstr[2] "Pridėtas"
 msgstr[3] "Pridėtas"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:572
+#: kmymoney/converter/mymoneystatementreader.cpp:573
 #, fuzzy, kde-format
 msgid "    %1 matched"
 msgid_plural "    %1 matched"
@@ -103,7 +103,7 @@ msgstr[1] "Atitiko:"
 msgstr[2] "Atitiko:"
 msgstr[3] "Atitiko:"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:573
+#: kmymoney/converter/mymoneystatementreader.cpp:574
 #, fuzzy, kde-format
 msgid "    %1 duplicate"
 msgid_plural "    %1 duplicates"
@@ -112,12 +112,12 @@ msgstr[1] "Dublikatai"
 msgstr[2] "Dublikatai"
 msgstr[3] "Dublikatai"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:574
+#: kmymoney/converter/mymoneystatementreader.cpp:575
 #, fuzzy, kde-format
 msgid "  Payees"
 msgstr "Korespondentai"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:575
+#: kmymoney/converter/mymoneystatementreader.cpp:576
 #, fuzzy, kde-format
 msgctxt "x transactions have been created"
 msgid "    %1 created"
@@ -127,12 +127,12 @@ msgstr[1] "Sukurta"
 msgstr[2] "Sukurta"
 msgstr[3] "Sukurta"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:639
+#: kmymoney/converter/mymoneystatementreader.cpp:640
 #, kde-format
 msgid "Error creating security record: %1"
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:639
+#: kmymoney/converter/mymoneystatementreader.cpp:640
 #: kmymoney/plugins/kbanking/kbanking.cpp:607
 #: kmymoney/plugins/kbanking/kbanking.cpp:629
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:60
@@ -140,45 +140,45 @@ msgstr ""
 msgid "Error"
 msgstr "Klaida"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:747
+#: kmymoney/converter/mymoneystatementreader.cpp:748
 #, kde-format
 msgid ""
 "This imported statement contains investment transactions with no security.  "
 "These transactions will be ignored."
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:748
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1453
+#: kmymoney/converter/mymoneystatementreader.cpp:749
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1457
 #, kde-format
 msgid "Security not found"
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:794
-#: kmymoney/converter/mymoneystatementreader.cpp:797
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1437
+#: kmymoney/converter/mymoneystatementreader.cpp:795
+#: kmymoney/converter/mymoneystatementreader.cpp:798
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1441
 #, kde-format
 msgid "Statement Importer"
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:816
+#: kmymoney/converter/mymoneystatementreader.cpp:817
 #, kde-format
 msgid ""
 "This imported statement contains investment transactions with no share "
 "amount.  These transactions will be ignored."
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:817
+#: kmymoney/converter/mymoneystatementreader.cpp:818
 #, kde-format
 msgid "No share amount provided"
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:938
+#: kmymoney/converter/mymoneystatementreader.cpp:939
 #, fuzzy, kde-format
 #| msgid "Fees"
 msgid "(Fees) %1"
 msgstr "Mokesčiai"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1031
+#: kmymoney/converter/mymoneystatementreader.cpp:1032
 #, fuzzy, kde-format
 #| msgid "Additional fees"
 msgctxt "Prepend name of payee (%1) to original memo (%2)"
@@ -187,14 +187,14 @@ msgid ""
 "%2"
 msgstr "Papildomi mokesčiai"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1039
+#: kmymoney/converter/mymoneystatementreader.cpp:1040
 #, kde-format
 msgid ""
 "Do you want to add \"%1\" as payee/receiver?\n"
 "\n"
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1041
+#: kmymoney/converter/mymoneystatementreader.cpp:1042
 #, kde-format
 msgid ""
 "Selecting \"Yes\" will create the payee, \"No\" will skip creation of a "
@@ -206,78 +206,78 @@ msgid ""
 "removed."
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1055
+#: kmymoney/converter/mymoneystatementreader.cpp:1056
 #: kmymoney/kmymoneyutils.cpp:576
 #, kde-format
 msgid "New payee/receiver"
 msgstr "Naujas korespondentas"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1086
+#: kmymoney/converter/mymoneystatementreader.cpp:1087
 #, fuzzy, kde-format
 msgid "Default Category for Payee"
 msgstr "Nauja kategorija..."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1093
+#: kmymoney/converter/mymoneystatementreader.cpp:1094
 #, fuzzy, kde-format
 msgid "Please select a default category for payee '%1'"
 msgstr "Nauja kategorija..."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1116
+#: kmymoney/converter/mymoneystatementreader.cpp:1117
 #, fuzzy, kde-format
 msgid "Save Category"
 msgstr "Kategorija"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1117
+#: kmymoney/converter/mymoneystatementreader.cpp:1118
 #, kde-format
 msgid "No Category"
 msgstr "Be kategorijos"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonAbort)
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: kmymoney/converter/mymoneystatementreader.cpp:1118
+#: kmymoney/converter/mymoneystatementreader.cpp:1119
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:132
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:257
 #, kde-format
 msgid "Abort"
 msgstr "Nutraukti"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1144
+#: kmymoney/converter/mymoneystatementreader.cpp:1145
 #, kde-format
 msgid "Unable to add payee/receiver"
 msgstr "Nepavyko pridėti korespondento"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1391
+#: kmymoney/converter/mymoneystatementreader.cpp:1405
 #, fuzzy, kde-format
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr "Nepavyksta pridėti operacijos: "
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1449
+#: kmymoney/converter/mymoneystatementreader.cpp:1463
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1450
+#: kmymoney/converter/mymoneystatementreader.cpp:1464
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " – Sąskaitos pavadinimas: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1451
+#: kmymoney/converter/mymoneystatementreader.cpp:1465
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " – Sąskaitos tipas: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1452
+#: kmymoney/converter/mymoneystatementreader.cpp:1466
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " – Sąskaitos numeris: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1457
+#: kmymoney/converter/mymoneystatementreader.cpp:1471
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1460
+#: kmymoney/converter/mymoneystatementreader.cpp:1474
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -285,7 +285,7 @@ msgid ""
 "manually from the selection box below."
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1464
+#: kmymoney/converter/mymoneystatementreader.cpp:1478
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -293,26 +293,26 @@ msgid ""
 "account by pressing the <b>Create</b> button."
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1493
+#: kmymoney/converter/mymoneystatementreader.cpp:1507
 #, kde-format
 msgid "Import transactions"
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1536
+#: kmymoney/converter/mymoneystatementreader.cpp:1550
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
 "button."
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1644
+#: kmymoney/converter/mymoneystatementreader.cpp:1658
 #: kmymoney/views/kscheduledview_p.h:200 kmymoney/views/kscheduledview_p.h:315
 #: kmymoney/views/kscheduledview_p.h:319
 #, fuzzy, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Įvesti operaciją pagal tvarkaraštį"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1664
+#: kmymoney/converter/mymoneystatementreader.cpp:1678
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -321,7 +321,7 @@ msgid ""
 "be matched?"
 msgstr ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1673
+#: kmymoney/converter/mymoneystatementreader.cpp:1687
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -338,7 +338,7 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1687
+#: kmymoney/converter/mymoneystatementreader.cpp:1701
 #, fuzzy, kde-format
 msgid "Schedule found"
 msgstr "Tvarkaraštis"
@@ -2093,7 +2093,7 @@ msgid "Liability"
 msgstr "Įsipareigojimas"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:550 kmymoney/kmymoney.cpp:445
-#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1794
+#: kmymoney/models/ledgerfilterbase.cpp:76 kmymoney/views/khomeview_p.h:1794
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -2102,7 +2102,7 @@ msgid "Income"
 msgstr "Įplaukos"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:552 kmymoney/kmymoney.cpp:446
-#: kmymoney/models/ledgerfilterbase.cpp:97
+#: kmymoney/models/ledgerfilterbase.cpp:98
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:79
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:191
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:397
@@ -6246,27 +6246,27 @@ msgctxt "Reconciliation state 'Cleared'"
 msgid "Cleared"
 msgstr "Išvalytas"
 
-#: kmymoney/models/ledgerfilterbase.cpp:63
+#: kmymoney/models/ledgerfilterbase.cpp:64
 #, fuzzy, kde-format
 msgctxt "Payment made with credit card"
 msgid "Charge"
 msgstr "krūvis"
 
-#: kmymoney/models/ledgerfilterbase.cpp:67
-#: kmymoney/models/ledgerfilterbase.cpp:93
+#: kmymoney/models/ledgerfilterbase.cpp:68
+#: kmymoney/models/ledgerfilterbase.cpp:94
 #, kde-format
 msgctxt "Decrease of asset/liability value"
 msgid "Decrease"
 msgstr "Mažinti"
 
-#: kmymoney/models/ledgerfilterbase.cpp:71
-#: kmymoney/models/ledgerfilterbase.cpp:89
+#: kmymoney/models/ledgerfilterbase.cpp:72
+#: kmymoney/models/ledgerfilterbase.cpp:90
 #, kde-format
 msgctxt "Increase of asset/liability value"
 msgid "Increase"
 msgstr "Didinti"
 
-#: kmymoney/models/ledgerfilterbase.cpp:85
+#: kmymoney/models/ledgerfilterbase.cpp:86
 #, kde-format
 msgctxt "Payment towards credit card"
 msgid "Payment"
@@ -14126,7 +14126,7 @@ msgid "Error while creating opening balance transaction"
 msgstr "Įvesti operaciją pagal tvarkaraštį"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1089
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1319
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1323
 #, kde-format
 msgid ""
 "The date entry \"%1\" read from the file cannot be interpreted through the "
@@ -14138,24 +14138,24 @@ msgid ""
 msgstr ""
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1096
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1326
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1330
 #, kde-format
 msgid "Invalid date format"
 msgstr ""
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1451
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1455
 #, kde-format
 msgid ""
 "This investment account does not contain the \"%1\" security.  Transactions "
 "involving this security will be ignored."
 msgstr ""
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1962
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1966
 #, kde-format
 msgid "%1 (Investment)"
 msgstr "%1 (Investicija)"
 
-#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1963
+#: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1967
 #, kde-format
 msgid "Autogenerated by QIF importer from type Mutual account entry"
 msgstr ""
