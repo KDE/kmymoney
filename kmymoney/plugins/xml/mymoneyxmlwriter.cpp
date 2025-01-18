@@ -711,6 +711,8 @@ void MyMoneyXmlWriterPrivate::writeOnlineJobs()
 
 void MyMoneyXmlWriterPrivate::writeKMyMoney()
 {
+    // init kmm-id
+    m_file->storageId();
     writeFileInformation();
     writeUserInformation();
     writeInstitutions();
