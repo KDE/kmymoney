@@ -69,7 +69,11 @@ PassStore::PassStore(QLineEdit* parent, const QString& applicationPrefix, const 
     setPasswordId(id);
 
     const auto buttons = d->m_lineEdit->findChildren<QToolButton*>();
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    const auto actionButtons = d->m_loadPasswordAction->associatedObjects();
+#else
     const auto actionButtons = d->m_loadPasswordAction->associatedWidgets();
+#endif
     std::for_each(buttons.cbegin(), buttons.cend(), [&](QToolButton* button) {
         if (actionButtons.contains(button)) {
             d->m_passwordButton = button;
