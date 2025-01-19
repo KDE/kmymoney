@@ -83,6 +83,16 @@ public:
      */
     bool isActionVisible() const;
 
+    bool eventFilter(QObject* o, QEvent* event) override;
+
+Q_SIGNALS:
+    /**
+     * This signal is emitted in case the user double clicks
+     * the passstore icon. It can be connected e.g. to the
+     * enclosing dialog's accept() slot.
+     */
+    void doubleClicked();
+
 private:
     PassStorePrivate* d_ptr;
 };

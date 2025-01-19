@@ -62,6 +62,7 @@ int gwenKdeGui::execDialog(GWEN_DIALOG *dlg, GWEN_UNUSED uint32_t guiid)
             if (!passStore->isActionVisible()) {
                 qDebug() << "No password found for KMyMoney/KBanking/" << passStore->passwordId();
             }
+            QObject::connect(passStore, &PassStore::doubleClicked, dialog, &QDialog::accept);
             new PasswordToggle(edit);
             break;
         }

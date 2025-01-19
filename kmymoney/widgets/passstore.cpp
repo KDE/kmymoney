@@ -6,6 +6,8 @@
 #include "passstore.h"
 #include "config-kmymoney.h"
 
+#include <algorithm>
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -13,7 +15,9 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QLineEdit>
+#include <QMouseEvent>
 #include <QTextStream>
+#include <QToolButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -35,12 +39,14 @@ public:
         : q_ptr(qq)
         , m_lineEdit(nullptr)
         , m_loadPasswordAction(nullptr)
+        , m_passwordButton(nullptr)
     {
     }
 
     PassStore* q_ptr;
     QLineEdit* m_lineEdit;
     QAction* m_loadPasswordAction;
+    QToolButton* m_passwordButton;
     QString m_applicationPrefix;
     QString m_passwordId;
 
@@ -62,6 +68,15 @@ PassStore::PassStore(QLineEdit* parent, const QString& applicationPrefix, const 
 
     setPasswordId(id);
 
+    const auto buttons = d->m_lineEdit->findChildren<QToolButton*>();
+    const auto actionButtons = d->m_loadPasswordAction->associatedWidgets();
+    std::for_each(buttons.cbegin(), buttons.cend(), [&](QToolButton* button) {
+        if (actionButtons.contains(button)) {
+            d->m_passwordButton = button;
+            button->installEventFilter(this);
+        }
+    });
+
 #ifdef ENABLE_GPG
     connect(d->m_loadPasswordAction, &QAction::triggered, this, [&]() {
         Q_D(PassStore);
@@ -80,6 +95,16 @@ PassStore::~PassStore()
 {
     Q_D(PassStore);
     delete d;
+}
+
+bool PassStore::eventFilter(QObject* o, QEvent* event)
+{
+    Q_D(PassStore);
+    if ((o == d->m_passwordButton) && (event->type() == QEvent::MouseButtonDblClick)) {
+        Q_EMIT doubleClicked();
+        return true;
+    }
+    return QObject::eventFilter(o, event);
 }
 
 void PassStore::setPasswordId(const QString& id)
