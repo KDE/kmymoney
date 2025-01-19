@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-18 12:45+0000\n"
+"POT-Creation-Date: 2025-01-19 01:53+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -6233,27 +6233,27 @@ msgstr "تۆلەش"
 msgid "The plugin to show this information could not be found."
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:444
+#: kmymoney/mymoney/mymoneyaccount.cpp:443
 #, kde-format
 msgctxt "Brokerage (suffix for account names)"
 msgid "Brokerage"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:541
+#: kmymoney/mymoney/mymoneyaccount.cpp:540
 #, fuzzy, kde-format
 #| msgid "Checking"
 msgctxt "Account type"
 msgid "Checking"
 msgstr "تەكشۈرۈۋاتىدۇ"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:543
+#: kmymoney/mymoney/mymoneyaccount.cpp:542
 #, fuzzy, kde-format
 #| msgid "Settings"
 msgctxt "Account type"
 msgid "Savings"
 msgstr "تەڭشەكلەر"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:545
+#: kmymoney/mymoney/mymoneyaccount.cpp:544
 #, fuzzy, kde-format
 #| msgctxt "location of credit column"
 #| msgid "Credits"
@@ -6261,95 +6261,95 @@ msgctxt "Account type"
 msgid "Credit Card"
 msgstr "تەشەككۈر"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:547
+#: kmymoney/mymoney/mymoneyaccount.cpp:546
 #, fuzzy, kde-format
 #| msgid "Cash"
 msgctxt "Account type"
 msgid "Cash"
 msgstr "پۇل"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:549
+#: kmymoney/mymoney/mymoneyaccount.cpp:548
 #, fuzzy, kde-format
 #| msgid "Loans"
 msgctxt "Account type"
 msgid "Loan"
 msgstr "قەرز"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:551
+#: kmymoney/mymoney/mymoneyaccount.cpp:550
 #, kde-format
 msgctxt "Account type"
 msgid "Certificate of Deposit"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:553
+#: kmymoney/mymoney/mymoneyaccount.cpp:552
 #, fuzzy, kde-format
 #| msgid "Investment"
 msgctxt "Account type"
 msgid "Investment"
 msgstr "مەبلەغ"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:555
+#: kmymoney/mymoney/mymoneyaccount.cpp:554
 #, fuzzy, kde-format
 #| msgid "Market"
 msgctxt "Account type"
 msgid "Money Market"
 msgstr "بازار"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:557
+#: kmymoney/mymoney/mymoneyaccount.cpp:556
 #, fuzzy, kde-format
 #| msgid "Assets"
 msgctxt "Account type"
 msgid "Asset"
 msgstr "مال-مۈلۈك"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:559
+#: kmymoney/mymoney/mymoneyaccount.cpp:558
 #, kde-format
 msgctxt "Account type"
 msgid "Liability"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:561
+#: kmymoney/mymoney/mymoneyaccount.cpp:560
 #, fuzzy, kde-format
 #| msgid "Currency"
 msgctxt "Account type"
 msgid "Currency"
 msgstr "پۇل"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:563
+#: kmymoney/mymoney/mymoneyaccount.cpp:562
 #, fuzzy, kde-format
 #| msgid "Income"
 msgctxt "Account type"
 msgid "Income"
 msgstr "كىرىم"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:565
+#: kmymoney/mymoney/mymoneyaccount.cpp:564
 #, fuzzy, kde-format
 #| msgid "Expenses"
 msgctxt "Account type"
 msgid "Expense"
 msgstr "چىقىم"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:567
+#: kmymoney/mymoney/mymoneyaccount.cpp:566
 #, fuzzy, kde-format
 #| msgid "Investment"
 msgctxt "Account type"
 msgid "Investment Loan"
 msgstr "مەبلەغ"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:569
+#: kmymoney/mymoney/mymoneyaccount.cpp:568
 #, fuzzy, kde-format
 #| msgid "Stock"
 msgctxt "Account type"
 msgid "Stock"
 msgstr "پاي چېكى دىئاگرامما"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:571
+#: kmymoney/mymoney/mymoneyaccount.cpp:570
 #, kde-format
 msgctxt "Account type"
 msgid "Equity"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:573
+#: kmymoney/mymoney/mymoneyaccount.cpp:572
 #, fuzzy, kde-format
 #| msgid "Unknown"
 msgctxt "Account type"
@@ -18451,112 +18451,112 @@ msgstr "ھۆججەت ‹%1› نى يېزىش ئۈچۈن ئاچقىلى بولم
 msgid "Unable to upload to '%1'.<br />%2"
 msgstr "ھۆججەت ‹%1› نى يېزىش ئۈچۈن ئاچقىلى بولمىدى."
 
-#: kmymoney/views/investactivities.cpp:255
+#: kmymoney/views/investactivities.cpp:253
 #, fuzzy, kde-format
 #| msgid "Shares"
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "ھەمبەھىرلەر"
 
-#: kmymoney/views/investactivities.cpp:266
+#: kmymoney/views/investactivities.cpp:264
 #, fuzzy, kde-format
 #| msgid "Prices"
 msgctxt "@label:textbox"
 msgid "Price/share"
 msgstr "باھالار"
 
-#: kmymoney/views/investactivities.cpp:268
+#: kmymoney/views/investactivities.cpp:266
 #, fuzzy, kde-format
 #| msgid "Transactions"
 msgctxt "@label:textbox"
 msgid "Transaction amount"
 msgstr "سودا"
 
-#: kmymoney/views/investactivities.cpp:270
+#: kmymoney/views/investactivities.cpp:268
 #, fuzzy, kde-format
 #| msgid "Price"
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "باھاسى"
 
-#: kmymoney/views/investactivities.cpp:614
+#: kmymoney/views/investactivities.cpp:612
 #, fuzzy, kde-format
 #| msgid "Ratio"
 msgctxt "@label:textbox"
 msgid "Ratio 1/"
 msgstr "نىسبەت"
 
-#: kmymoney/views/investtransactioneditor.cpp:82
+#: kmymoney/views/investtransactioneditor.cpp:81
 #, fuzzy, kde-format
 #| msgid "Price"
 msgctxt "@item:inlistbox transaction type"
 msgid "Buy shares"
 msgstr "باھاسى"
 
-#: kmymoney/views/investtransactioneditor.cpp:83
+#: kmymoney/views/investtransactioneditor.cpp:82
 #, fuzzy, kde-format
 #| msgid "Shares"
 msgctxt "@item:inlistbox transaction type"
 msgid "Sell shares"
 msgstr "ھەمبەھىرلەر"
 
-#: kmymoney/views/investtransactioneditor.cpp:84
+#: kmymoney/views/investtransactioneditor.cpp:83
 #, fuzzy, kde-format
 #| msgid "Dividend"
 msgctxt "@item:inlistbox transaction type"
 msgid "Dividend"
 msgstr "سۈرەت"
 
-#: kmymoney/views/investtransactioneditor.cpp:85
+#: kmymoney/views/investtransactioneditor.cpp:84
 #, fuzzy, kde-format
 #| msgid "Dividend"
 msgctxt "@item:inlistbox transaction type"
 msgid "Reinvest dividend"
 msgstr "سۈرەت"
 
-#: kmymoney/views/investtransactioneditor.cpp:86
+#: kmymoney/views/investtransactioneditor.cpp:85
 #, fuzzy, kde-format
 #| msgid "Yield"
 msgctxt "@item:inlistbox transaction type"
 msgid "Yield"
 msgstr "Yield"
 
-#: kmymoney/views/investtransactioneditor.cpp:87
+#: kmymoney/views/investtransactioneditor.cpp:86
 #, fuzzy, kde-format
 #| msgid "Shares"
 msgctxt "@item:inlistbox transaction type"
 msgid "Add shares"
 msgstr "ھەمبەھىرلەر"
 
-#: kmymoney/views/investtransactioneditor.cpp:88
+#: kmymoney/views/investtransactioneditor.cpp:87
 #, fuzzy, kde-format
 #| msgid "Remove"
 msgctxt "@item:inlistbox transaction type"
 msgid "Remove shares"
 msgstr "چىقىرىۋەت"
 
-#: kmymoney/views/investtransactioneditor.cpp:89
+#: kmymoney/views/investtransactioneditor.cpp:88
 #, fuzzy, kde-format
 #| msgid "Shares"
 msgctxt "@item:inlistbox transaction type"
 msgid "Split shares"
 msgstr "ھەمبەھىرلەر"
 
-#: kmymoney/views/investtransactioneditor.cpp:90
+#: kmymoney/views/investtransactioneditor.cpp:89
 #, fuzzy, kde-format
 #| msgid "Interest"
 msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
 msgstr "ئۆسۈم"
 
-#: kmymoney/views/investtransactioneditor.cpp:286
+#: kmymoney/views/investtransactioneditor.cpp:285
 #: kmymoney/views/multitransactioneditor.cpp:214
 #: kmymoney/views/newtransactioneditor.cpp:299
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:402
+#: kmymoney/views/investtransactioneditor.cpp:401
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -18564,14 +18564,14 @@ msgid ""
 "price information invalid. Please check them."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:581
+#: kmymoney/views/investtransactioneditor.cpp:580
 #, fuzzy, kde-format
 #| msgid "  Transactions"
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
 msgstr "  سودا"
 
-#: kmymoney/views/investtransactioneditor.cpp:584
+#: kmymoney/views/investtransactioneditor.cpp:583
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -18579,14 +18579,14 @@ msgid ""
 "account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:597
+#: kmymoney/views/investtransactioneditor.cpp:596
 #, fuzzy, kde-format
 #| msgid "Remove"
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "چىقىرىۋەت"
 
-#: kmymoney/views/investtransactioneditor.cpp:599
+#: kmymoney/views/investtransactioneditor.cpp:598
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -18594,72 +18594,72 @@ msgid ""
 "closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:603
+#: kmymoney/views/investtransactioneditor.cpp:602
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:609
+#: kmymoney/views/investtransactioneditor.cpp:608
 #, fuzzy, kde-format
 #| msgid "Application"
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "پروگرامما"
 
-#: kmymoney/views/investtransactioneditor.cpp:611
+#: kmymoney/views/investtransactioneditor.cpp:610
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:615
+#: kmymoney/views/investtransactioneditor.cpp:614
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:627
+#: kmymoney/views/investtransactioneditor.cpp:626
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:643
+#: kmymoney/views/investtransactioneditor.cpp:642
 #, fuzzy, kde-format
 #| msgid "  Transactions"
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "  سودا"
 
-#: kmymoney/views/investtransactioneditor.cpp:650
+#: kmymoney/views/investtransactioneditor.cpp:649
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:653
+#: kmymoney/views/investtransactioneditor.cpp:652
 #, fuzzy, kde-format
 #| msgid "Amount"
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "مىقدارى"
 
-#: kmymoney/views/investtransactioneditor.cpp:659
+#: kmymoney/views/investtransactioneditor.cpp:658
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:662
+#: kmymoney/views/investtransactioneditor.cpp:661
 #, fuzzy, kde-format
 #| msgid "Amount"
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "مىقدارى"
 
-#: kmymoney/views/investtransactioneditor.cpp:667
+#: kmymoney/views/investtransactioneditor.cpp:666
 #, fuzzy, kde-format
 #| msgid "  Transactions"
 msgctxt "@info:tooltip"
