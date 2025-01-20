@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-19 01:53+0000\n"
+"POT-Creation-Date: 2025-01-20 02:00+0000\n"
 "PO-Revision-Date: 2024-02-24 16:23+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -23292,7 +23292,7 @@ msgstr "Filtru"
 msgid "Close"
 msgstr "Închide"
 
-#: kmymoney/widgets/passstore.cpp:61
+#: kmymoney/widgets/passstore.cpp:67
 #, kde-format
 msgid "Read the password from pass store"
 msgstr ""

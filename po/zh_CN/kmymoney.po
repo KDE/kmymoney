@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-19 01:53+0000\n"
+"POT-Creation-Date: 2025-01-20 02:00+0000\n"
 "PO-Revision-Date: 2024-04-22 16:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -21384,7 +21384,7 @@ msgstr "过滤器(&L)"
 msgid "Close"
 msgstr "关闭"
 
-#: kmymoney/widgets/passstore.cpp:61
+#: kmymoney/widgets/passstore.cpp:67
 #, kde-format
 msgid "Read the password from pass store"
 msgstr ""

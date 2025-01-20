@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-19 01:53+0000\n"
+"POT-Creation-Date: 2025-01-20 02:00+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -21693,7 +21693,7 @@ msgstr "سۈزگۈچ"
 msgid "Close"
 msgstr "ياپ"
 
-#: kmymoney/widgets/passstore.cpp:61
+#: kmymoney/widgets/passstore.cpp:67
 #, kde-format
 msgid "Read the password from pass store"
 msgstr ""

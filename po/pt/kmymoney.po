@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-19 01:53+0000\n"
+"POT-Creation-Date: 2025-01-20 02:00+0000\n"
 "PO-Revision-Date: 2023-07-13 00:39+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -22451,7 +22451,7 @@ msgstr "Fi&ltro:"
 msgid "Close"
 msgstr "Fechar"
 
-#: kmymoney/widgets/passstore.cpp:61
+#: kmymoney/widgets/passstore.cpp:67
 #, kde-format
 msgid "Read the password from pass store"
 msgstr "Ler a senha do armazenamento de senhas"
