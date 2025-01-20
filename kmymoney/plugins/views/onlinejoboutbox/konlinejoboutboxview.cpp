@@ -467,6 +467,9 @@ void KOnlineJobOutboxView::showEvent(QShowEvent* event)
         const auto header = d->ui->m_onlineJobView->header();
         d->setSortRole(header->sortIndicatorSection());
         d->ui->m_onlineJobView->sortByColumn(header->sortIndicatorSection(), header->sortIndicatorOrder());
+
+        // Initialize the actions
+        updateActions(d->m_selections);
     }
     // don't forget base class implementation
     QWidget::showEvent(event);
