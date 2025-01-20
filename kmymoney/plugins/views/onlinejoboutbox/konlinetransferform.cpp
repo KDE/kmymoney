@@ -170,12 +170,14 @@ void kOnlineTransferForm::duplicateCurrentJob()
 
 void kOnlineTransferForm::accept()
 {
+    hide();
     Q_EMIT acceptedForSave(activeOnlineJob());
     QDialog::accept();
 }
 
 void kOnlineTransferForm::sendJob()
 {
+    hide();
     Q_EMIT acceptedForSend(activeOnlineJob());
     QDialog::accept();
 }
