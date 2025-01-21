@@ -15,7 +15,6 @@
 // Std C++ / STL Includes
 
 #include <iostream>
-#include <memory>
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -124,12 +123,10 @@
 #include "widgets/amountedit.h"
 #include "widgets/kmymoneyaccountselector.h"
 #include "widgets/kmymoneydateedit.h"
-#include "widgets/kmymoneymvccombo.h"
 #include "widgets/kmymoneypayeecombo.h"
 #include "wizards/endingbalancedlg/kendingbalancedlg.h"
 #include "wizards/newaccountwizard/knewaccountwizard.h"
 #include "wizards/newinvestmentwizard/knewinvestmentwizard.h"
-#include "wizards/newloanwizard/keditloanwizard.h"
 #include "wizards/newuserwizard/knewuserwizard.h"
 
 #include "mymoney/mymoneyaccount.h"
@@ -160,7 +157,6 @@
 #include "converter/mymoneystatementreader.h"
 
 #include "interfaces/interfaceloader.h"
-#include "interfaces/onlinepluginextended.h"
 #include "kmymoneyplugin.h"
 #include "pluginloader.h"
 #include "plugins/plugin-interfaces/kmmappinterface.h"
@@ -179,7 +175,6 @@
 #include "kmymoneyutils.h"
 #include "kcreditswindow.h"
 
-#include "storageenums.h"
 #include "mymoneyenums.h"
 #include "dialogenums.h"
 #include "viewenums.h"
