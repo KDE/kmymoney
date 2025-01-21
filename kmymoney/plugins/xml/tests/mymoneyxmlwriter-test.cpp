@@ -11,11 +11,16 @@
 // QT Includes
 
 #include <QBuffer>
+#include <QRegularExpression>
 #include <QTest>
-#include <iostream>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
+
+// ----------------------------------------------------------------------------
+// std Includes
+
+#include <iostream>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -23,7 +28,6 @@
 #include "../mymoneyxmlwriter.h"
 #include "mymoneyfile.h"
 #include "mymoneyutils.h"
-#include "parametersmodel.h"
 
 #define KMMCOMPARE(actual, expected, _file, _line)                                                                                                             \
     do {                                                                                                                                                       \
