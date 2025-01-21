@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-20 02:00+0000\n"
+"POT-Creation-Date: 2025-01-21 01:53+0000\n"
 "PO-Revision-Date: 2009-10-17 16:25+0300\n"
 "Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -14903,14 +14903,14 @@ msgid ""
 "During the change of the order your previous entries could not be converted."
 msgstr ""
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.cpp:283
+#: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.cpp:285
 #, kde-format
 msgid ""
 "This credit-transfer was sent to your bank at %1 therefore cannot be edited "
 "anymore. You may create a copy for editing."
 msgstr ""
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.cpp:286
+#: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.cpp:288
 #, kde-format
 msgid ""
 "This credit-transfer is not editable. You may create a copy for editing."

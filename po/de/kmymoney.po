@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-20 02:00+0000\n"
+"POT-Creation-Date: 2025-01-21 01:53+0000\n"
 "PO-Revision-Date: 2022-11-07 20:00+0100\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -15798,7 +15798,7 @@ msgstr ""
 "Während der Änderung der Bestellung können Ihre bisherigen Eingaben nicht "
 "umgewandelt werden."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.cpp:283
+#: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.cpp:285
 #, kde-format
 msgid ""
 "This credit-transfer was sent to your bank at %1 therefore cannot be edited "
@@ -15807,7 +15807,7 @@ msgstr ""
 "Diese Überweisung wurde am %1 zu Ihrer Bank gesendet und kann daher nicht "
 "geändert werden. Sie können jedoch eine Kopie zum Bearbeiten erstellen."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.cpp:286
+#: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.cpp:288
 #, kde-format
 msgid ""
 "This credit-transfer is not editable. You may create a copy for editing."

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-20 02:00+0000\n"
+"POT-Creation-Date: 2025-01-21 01:53+0000\n"
 "PO-Revision-Date: 2025-01-12 21:43+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -15673,7 +15673,7 @@ msgid ""
 msgstr ""
 "Durant el canvi de l'ordre, no es poden convertir les entrades prèvies."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.cpp:283
+#: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.cpp:285
 #, kde-format
 msgid ""
 "This credit-transfer was sent to your bank at %1 therefore cannot be edited "
@@ -15682,7 +15682,7 @@ msgstr ""
 "Este crèdit-transferència es va enviar al vostre banc a %1 i, per tant, ja "
 "no es pot editar. Podeu crear una còpia per a editar-la."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.cpp:286
+#: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.cpp:288
 #, kde-format
 msgid ""
 "This credit-transfer is not editable. You may create a copy for editing."

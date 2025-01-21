@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-20 02:00+0000\n"
+"POT-Creation-Date: 2025-01-21 01:53+0000\n"
 "PO-Revision-Date: 2025-01-11 18:40+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -15574,7 +15574,7 @@ msgid ""
 "During the change of the order your previous entries could not be converted."
 msgstr "Agindu aldatzen ari zarela ezin dira aurreko sarrerak bihurtu."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.cpp:283
+#: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.cpp:285
 #, kde-format
 msgid ""
 "This credit-transfer was sent to your bank at %1 therefore cannot be edited "
@@ -15583,7 +15583,7 @@ msgstr ""
 "Transferentzia %1-(e)n bidali zen zure bankura, beraz ezin da editatu. Sortu "
 "kopia bat editatzeko."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.cpp:286
+#: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.cpp:288
 #, kde-format
 msgid ""
 "This credit-transfer is not editable. You may create a copy for editing."
