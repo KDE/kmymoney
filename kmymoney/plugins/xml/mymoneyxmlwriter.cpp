@@ -408,9 +408,7 @@ void MyMoneyXmlWriterPrivate::writeSplit(QXmlStreamWriter* writer, const MyMoney
     writer->writeAttribute(attributeName(Attribute::Split::ReconcileFlag), QString::number(static_cast<int>(split.reconcileFlag())));
     writer->writeAttribute(attributeName(Attribute::Split::Value), split.value().toString());
     writer->writeAttribute(attributeName(Attribute::Split::Shares), split.shares().toString());
-    if (!split.possiblyCalculatedPrice().isZero()) {
-        writer->writeAttribute(attributeName(Attribute::Split::Price), split.possiblyCalculatedPrice().toString());
-    }
+    writer->writeAttribute(attributeName(Attribute::Split::Price), split.price().toString());
     writer->writeAttribute(attributeName(Attribute::Split::Memo), split.memo());
     writer->writeAttribute(attributeName(Attribute::Split::Account), split.accountId());
     writer->writeAttribute(attributeName(Attribute::Split::Number), split.number());

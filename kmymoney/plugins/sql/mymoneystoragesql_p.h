@@ -1304,7 +1304,7 @@ public:
             sharesFormattedList << s.shares()
                                        .formatMoney(QString(), MyMoneyMoney::denomToPrec(sec.smallestAccountFraction()), false)
                                        .replace(QLatin1Char(','), QLatin1Char('.'));
-            const MyMoneyMoney price = s.possiblyCalculatedPrice();
+            const MyMoneyMoney price = s.price();
             priceList << price.toString();
             priceFormattedList << price.formatMoney(QString(), sec.pricePrecision(), false).replace(QLatin1Char(','), QLatin1Char('.'));
             memoList << s.memo();
