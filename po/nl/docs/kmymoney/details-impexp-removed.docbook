@@ -1,0 +1,48 @@
+<!-- This is stuff that was commented out in details.impexp.docbook, from the QIF
+     import section.  I am moving it here to clean up that file, but it is still not
+     sure if this material is still needed anywhere.  I've modified the nesting to
+     make it look more legal.  -->
+
+<sect2
+><title
+>De geïmporteerde transacties accepteren</title>
+
+<para>
+<screenshot>
+  <screeninfo
+>Geïmporteerde transacties</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qifimportverify.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Geïmporteerde transacties</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<para
+>Sommige van uw transacties kunnen rood gemarkeerd zijn in het grootboek. Dit is vanwege de noodzaak om er een categorie aan toe te kennen. Het importprogramma was niet in staat om een categorie toe te kennen gebaseerd op eerdere transactiegeschiedenis. </para>
+
+<para
+>Transactiegegevens kunnen bewerkt worden of zelfs verwijderd indien nodig. Om een transactie te bewerken dubbelklik eenvoudig op het item of druk op Enter wanneer het item geaccentueerd is. Na beëindiging klik op <guibutton
+>OK</guibutton
+> om de geïmporteerde transacties te accepteren of op <guibutton
+>Annuleren</guibutton
+> om remove de geïmporteerde transacties te verwijderen. </para>
+</sect2>
+
+
+<sect2
+><title
+>Importing Investments</title>
+<para>
+  Please note that if you are importing a file with investment transactions, those
+  investments must first exist in your &kmymoney; file.  The trading symbol is used
+  to match, so please ensure that the symbol in &kmymoney; is exactly the same as the
+  one in the file you're importing.
+</para>
+</sect2>
+
