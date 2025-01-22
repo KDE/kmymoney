@@ -326,7 +326,19 @@ public:
                 m_fileVersionRead = readUintAttribute(attributeName(Attribute::General::ID), 0, 16);
 
             } else if (tag == elementName(Element::General::FixVersion)) {
-                auto strFixVersion = readUintAttribute(attributeName(Attribute::General::ID));
+                // older versions stored the fixversion in the date attribute and
+                // some intermediate versions had a missing fix version in the id
+                // attribute. The following logic tries to recover from all
+                // scenarios.
+                auto strFixVersion = readUintAttribute(attributeName(Attribute::General::Date));
+                if (strFixVersion == 0) { // not found as date attribute
+                    if (readStringAttribute(attributeName(Attribute::General::ID)).isEmpty()) {
+                        strFixVersion = 5;
+                    } else {
+                        strFixVersion = readUintAttribute(attributeName(Attribute::General::ID));
+                    }
+                }
+
                 // skip KMyMoneyView::fixFile_2()
                 if (strFixVersion == 2)
                     strFixVersion = 3;
