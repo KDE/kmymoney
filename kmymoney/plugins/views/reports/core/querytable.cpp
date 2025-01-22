@@ -1023,6 +1023,11 @@ void QueryTable::constructTransactionTable()
                 if ((m_config.includes(splitAcc) && use_transfers &&
                         !(splitAcc.isInvest() && include_me)) || splits.count() == 1) { // otherwise stock split is displayed twice in report
                     if (! splitAcc.isIncomeExpense()) {
+                        // Add/Remove shares
+                        if (splitAcc.isInvest()) {
+                            qS[ctShares] = (*it_split).shares().convert(fraction).toString();
+                        }
+
                         //multiply by currency and convert to lowest fraction
                         qS[ctValue] = ((*it_split).shares() * xr).convert(fraction).toString();
                         qS.addSourceLine(ctValue, __LINE__);
