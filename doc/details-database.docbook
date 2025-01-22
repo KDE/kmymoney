@@ -264,7 +264,7 @@
     the file as a backup or snapshot of your data at a particular time.  To make a new
     backup like this, open your database, choose the <menuchoice>
     <guimenu>File</guimenu> <guimenuitem>Save As...</guimenuitem></menuchoice> menu
-    item, chose <guilabel>XML</guilabel> as the storage type, and giving an
+    item, choose <guilabel>XML</guilabel> as the storage type, and giving an
     appropriate file name.  Remember to re-open your database, so &kmymoney; does not
     continue to use the file.
   </para>

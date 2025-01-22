@@ -72,7 +72,7 @@
 
 <sect2><title>Base Currency</title>
 <para>
-  You &kmymoney; data file has a base currency, specified when the file was created.
+  Your &kmymoney; data file has a base currency, specified when the file was created.
   In addition, an Investment account has a base currency, specified when it is
   created.  Separately, each security has its own base currency.  This is the
   currency in which it is traded.  When a price quote is entered for an investment,
