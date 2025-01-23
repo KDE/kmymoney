@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-22 01:52+0000\n"
-"PO-Revision-Date: 2025-01-12 21:43+0100\n"
+"POT-Creation-Date: 2025-01-23 01:51+0000\n"
+"PO-Revision-Date: 2025-01-22 19:27+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -16396,7 +16396,7 @@ msgstr "Mensual"
 #, kde-format
 msgctxt "All accounts"
 msgid "All"
-msgstr "Tots"
+msgstr "Totes"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboRows)
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:438
@@ -18165,7 +18165,7 @@ msgstr " (valors)"
 msgid "%1 (Brokerage)"
 msgstr "%1 (valors)"
 
-#: kmymoney/plugins/xml/mymoneyxmlreader.cpp:433
+#: kmymoney/plugins/xml/mymoneyxmlreader.cpp:445
 #, kde-format
 msgctxt "Error message when reading XML file"
 msgid "Unknown payee identifier type %1"
@@ -19759,7 +19759,7 @@ msgstr "Aquesta planificació acabarà en algun moment"
 #: kmymoney/views/keditscheduledlg.ui:312
 #, kde-format
 msgid "Number of transactions remaining:"
-msgstr "Nombre d'operacions que manquen:"
+msgstr "Nombre d'operacions restants:"
 
 #. i18n: ectx: property (text), widget (QLabel, endLabel2)
 #: kmymoney/views/keditscheduledlg.ui:335
