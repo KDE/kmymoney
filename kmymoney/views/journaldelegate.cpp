@@ -528,23 +528,26 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
             if (selected) {
                 // always use the normal palette since the background is also in normal
                 painter->setPen(opt.palette.color(QPalette::ColorGroup(QPalette::Normal), QPalette::HighlightedText));
+                style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
             } else if (erroneous) {
                 painter->setPen(property("transactionErroneousColor").value<QColor>());
+                style->drawPrimitive(QStyle::PE_PanelItemViewRow, &opt, painter, opt.widget);
 
             } else if (matched) {
                 opt.backgroundBrush.setColor(property("transactionMatchedColor").value<QColor>());
                 opt.palette.setColor(QPalette::Normal, QPalette::Text, property("transactionMatchedColor").value<QColor>());
+                style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
             } else if (imported) {
                 opt.backgroundBrush.setColor(property("transactionImportedColor").value<QColor>());
                 opt.palette.setColor(QPalette::Normal, QPalette::Text, property("transactionImportedColor").value<QColor>());
+                style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
             } else {
                 painter->setPen(opt.palette.color(cg, QPalette::Text));
+                style->drawPrimitive(QStyle::PE_PanelItemViewRow, &opt, painter, opt.widget);
             }
-
-            style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
             if (opt.state & QStyle::State_Editing) {
                 painter->setPen(opt.palette.color(cg, QPalette::Text));
