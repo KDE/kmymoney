@@ -420,7 +420,7 @@
       measured.  For example, in the US most mutual funds measure holdings to three
       decimal places, so you would enter 1000 in this field.  Stocks are often
       measured to only whole units, so you could enter 1 for a stock like this, but
-      you would use 10000 for a stock measured to four decimal digite.  You'll want
+      you would use 10000 for a stock measured to four decimal digits.  You'll want
       to mirror the same decimal places that your brokerage uses to record your
       securities so the transactions amounts match within &kmymoney;.  Using extra
       precision will not cause a problem, but using too little precision can cause
@@ -494,7 +494,7 @@
     <para>
       Use Finance::Quote.  This is an option for &gnucash; users who are used to this
       style of quotes.  Most users can leave this unchecked.  Finance::Quote is a
-      Perl module, so to use it, you would need to have both Perl and it's
+      Perl module, so to use it, you would need to have both Perl and its
       Finance::Quote module installed.
     </para>
   </listitem>
