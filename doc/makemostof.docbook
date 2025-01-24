@@ -429,7 +429,7 @@
   so additional functionality could be added in a way that did not require
   modification of any of the core source code files.  When &kmymoney; starts, it
   looks in a specific directory for any plugins, and it creates the appropriate menu
-  menu and configuration entries for those it finds.
+  and configuration entries for those it finds.
 </para>
 
 <para>
