@@ -1193,7 +1193,7 @@ void QueryTable::constructTransactionTable()
         qA[ctAccount] = account.name();
         qA[ctTopAccount] = account.topParentName();
         qA[ctInstitution] = institution.isEmpty() ? i18n("No Institution") : file->institution(institution).name();
-        qA[ctRank] = FORCED_FIRST_RANK;
+        qA[ctRank] = OPEN_BALANCE_RANK;
 
         qA[ctPrice] = startPrice.convertPrecision(account.currency().pricePrecision()).toString();
         qA.addSourceLine(ctPrice, __LINE__);
@@ -2176,7 +2176,7 @@ void QueryTable::constructSplitsTable()
         qA[ctAccount] = account.name();
         qA[ctTopAccount] = account.topParentName();
         qA[ctInstitution] = institution.isEmpty() ? i18n("No Institution") : file->institution(institution).name();
-        qA[ctRank] = FORCED_FIRST_RANK;
+        qA[ctRank] = OPEN_BALANCE_RANK;
 
         int pricePrecision = file->security(account.currencyId()).pricePrecision();
         qA[ctPrice] = startPrice.convertPrecision(pricePrecision).toString();

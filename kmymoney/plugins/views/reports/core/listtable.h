@@ -221,7 +221,7 @@ private:
 }
 
 // keep in sync with reports::ListTable::Rank enum class
-#define FORCED_FIRST_RANK QLatin1String("0")
+#define OPEN_BALANCE_RANK QLatin1String("0")
 #define FIRST_SPLIT_RANK QLatin1String("1")
 #define SECONDARY_SPLIT_RANK QLatin1String("2")
 #define END_BALANCE_RANK QLatin1String("3")
