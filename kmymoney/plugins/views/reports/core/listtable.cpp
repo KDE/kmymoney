@@ -222,6 +222,8 @@ void ListTable::render(QString& result, QString& csv) const
                             result.append(QLatin1String("<tr class=\"sectionfootermiddle\">"));
                         else
                             result.append(QLatin1String("<tr class=\"sectionfooterlast\">"));
+                    } else {
+                        result.append(QLatin1String("<tr class=\"sectionfooterlast\">"));
                     }
                 }/* else { dead code
           result.append(QLatin1String("<tr class=\"sectionfooter\">"));
