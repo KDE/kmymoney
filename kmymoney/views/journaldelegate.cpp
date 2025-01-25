@@ -515,7 +515,7 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
         // draw the text items
         if (!opt.text.isEmpty() || (lineCount > 0) || (matchedLineCount > 0)) {
             // check if it is a scheduled transaction and display it as inactive
-            if (MyMoneyFile::baseModel()->baseModel(index) == MyMoneyFile::instance()->schedulesJournalModel()) {
+            if ((MyMoneyFile::baseModel()->baseModel(index) == MyMoneyFile::instance()->schedulesJournalModel()) && !selected) {
                 opt.state &= ~QStyle::State_Enabled;
             }
             cg = (opt.state & QStyle::State_Enabled) ? QPalette::Normal : QPalette::Disabled;
