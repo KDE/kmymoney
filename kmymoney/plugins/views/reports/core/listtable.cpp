@@ -144,15 +144,9 @@ void ListTable::render(QString& result, QString& csv) const
     MyMoneyMoney startingBalance;
     MyMoneyMoney balanceChange = MyMoneyMoney();
     for (QList<TableRow>::const_iterator it_row = m_rows.cbegin(); it_row != m_rows.cend(); ++it_row) {
-        /* rank can be:
-         * 0 - opening balance
-         * 1 - major split of transaction
-         * 2 - minor split of transaction
-         * 3 - closing balance
-         * 4 - first totals row
-         * 5 - middle totals row
-         */
-        const int rowRank = (*it_row).value(ctRank).toInt();
+        bool ok;
+        const Rank rowRank = static_cast<Rank>((*it_row).value(ctRank).toInt(&ok));
+        Q_ASSERT(ok);
         // detect whether any of groups changed and display new group header in that case
         for (int i = 0; i < m_group.count(); ++i) {
             QString curGrpName = (*it_row).value(m_group.at(i));
@@ -181,8 +175,9 @@ void ListTable::render(QString& result, QString& csv) const
 
         QString tlink;  // link information to account and transaction
 
-        if (!m_config.isHideTransactions() || rowRank == 4 || rowRank == 5) { // if hide transaction is enabled display only total rows i.e. rank = 4 || rank = 5
-            if (rowRank == 0 || rowRank == 3) {
+        if (!m_config.isHideTransactions() || rowRank == Rank::BaseCurrencyTotals
+            || rowRank == Rank::ForeignCurrencyTotals) { // if hide transaction is enabled display only total rows i.e. rank == *CurrencyTotals
+            if (rowRank == Rank::OpeningBalance || rowRank == Rank::ClosingBalance) {
                 // skip the opening and closing balance row,
                 // if the balance column is not shown
                 // rank = 0 for opening balance, rank = 3 for closing balance
@@ -190,20 +185,20 @@ void ListTable::render(QString& result, QString& csv) const
                     continue;
                 result.append(QString::fromLatin1("<tr class=\"item%1\">").arg((*it_row).value(ctID)));
                 // ***DV***
-            } else if (rowRank == 1) {
+            } else if (rowRank == Rank::FirstSplitOfTransaction) {
                 row_odd = ! row_odd;
                 if (linkEntries()) {
                     tlink = QString::fromLatin1("id=%1&tid=%2").arg((*it_row).value(ctAccountID), (*it_row).value(ctID));
                 }
                 result.append(QString::fromLatin1("<tr class=\"row-%1\">").arg(row_odd ? QLatin1String("odd") : QLatin1String("even")));
 
-            } else if (rowRank == 2) {
+            } else if (rowRank == Rank::SecondarySplitOfTransaction) {
                 result.append(QString::fromLatin1("<tr class=\"item%1\">").arg(row_odd ? QLatin1Char('1') : QLatin1Char('0')));
-            } else if (rowRank == 4 || rowRank == 5) {
+            } else if (rowRank == Rank::BaseCurrencyTotals || rowRank == Rank::ForeignCurrencyTotals) {
                 QList<TableRow>::const_iterator nextRow = std::next(it_row);
                 if ((m_config.rowType() == eMyMoney::Report::RowType::Tag)) { //If we order by Tags don't show the Grand total as we can have multiple tags per transaction
                     continue;
-                } else if (rowRank == 4) {
+                } else if (rowRank == Rank::BaseCurrencyTotals) {
                     if (nextRow != m_rows.end()) {
                         if (isLowestGroupTotal && m_config.isHideTransactions()) {
                             result.append(QLatin1String("<tr class=\"sectionfootermiddle\">"));
@@ -216,7 +211,7 @@ void ListTable::render(QString& result, QString& csv) const
                     } else {
                         result.append(QLatin1String("<tr class=\"sectionfooter\">"));
                     }
-                } else if (rowRank == 5) {
+                } else if (rowRank == Rank::ForeignCurrencyTotals) {
                     if (nextRow != m_rows.end()) {
                         if ((*nextRow).value(ctRank) == FOREIGN_CURRENCY_TOTAL_RANK)
                             result.append(QLatin1String("<tr class=\"sectionfootermiddle\">"));
@@ -225,9 +220,9 @@ void ListTable::render(QString& result, QString& csv) const
                     } else {
                         result.append(QLatin1String("<tr class=\"sectionfooterlast\">"));
                     }
-                }/* else { dead code
-          result.append(QLatin1String("<tr class=\"sectionfooter\">"));
-        }*/
+                } /* else { dead code
+           result.append(QLatin1String("<tr class=\"sectionfooter\">"));
+         }*/
             } else {
                 result.append(QString::fromLatin1("<tr class=\"row-%1\">").arg(row_odd ? QLatin1String("odd") : QLatin1String("even")));
             }
@@ -260,7 +255,7 @@ void ListTable::render(QString& result, QString& csv) const
             };
 
             // ***DV***
-            if (rowRank == 2) {
+            if (rowRank == Rank::SecondarySplitOfTransaction) {
                 if (*it_column == ctValue)
                     data = (*it_row).value(ctSplit);
                 else if (*it_column == ctPostDate //
@@ -277,7 +272,7 @@ void ListTable::render(QString& result, QString& csv) const
             }
 
             // ***DV***
-            else if (rowRank == 0 || rowRank == 3) {
+            else if (rowRank == Rank::OpeningBalance || rowRank == Rank::ClosingBalance) {
                 if (*it_column == ctBalance) {
                     data = (*it_row).value(ctBalance);
                     if ((*it_row).value(ctID) == QLatin1String("A")) {          // opening balance?
@@ -305,15 +300,15 @@ void ListTable::render(QString& result, QString& csv) const
             }
             // The 'balance' column is calculated at render-time
             // but not printed on split lines
-            else if (*it_column == ctBalance && rowRank == 1) {
+            else if (*it_column == ctBalance && rowRank == Rank::FirstSplitOfTransaction) {
                 // Take the balance off the deepest group iterator
                 balanceChange += MyMoneyMoney((*it_row).value(ctValue, QLatin1String("0")));
                 data = (balanceChange + startingBalance).toString();
-            } else if ((rowRank == 4 || rowRank == 5)) {
+            } else if ((rowRank == Rank::BaseCurrencyTotals || rowRank == Rank::ForeignCurrencyTotals)) {
                 // display total title but only if first column doesn't contain any data
                 if (it_column == columns.cbegin() && data.isEmpty()) {
                     tempResult.append(QString::fromLatin1("<td class=\"left%1\">").arg((*it_row).value(ctDepth)));
-                    if (rowRank == 4) {
+                    if (rowRank == Rank::BaseCurrencyTotals) {
                         if (!(*it_row).value(ctDepth).isEmpty()) {
                             tempResult += i18nc("Total balance", "Total") + QLatin1Char(' ') + prevGrpNames.at((*it_row).value(ctDepth).toInt());
                             csv.append(i18nc("Total balance", "Total") + QLatin1Char(' ') + prevGrpNames.at((*it_row).value(ctDepth).toInt())
@@ -378,7 +373,7 @@ void ListTable::render(QString& result, QString& csv) const
 
                     QString colorBegin;
                     QString colorEnd;
-                    if ((rowRank == 4 || rowRank == 5) && value.isNegative()) {
+                    if ((rowRank == Rank::BaseCurrencyTotals || rowRank == Rank::ForeignCurrencyTotals) && value.isNegative()) {
                         colorBegin = QString::fromLatin1("<font color=%1>").arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name());
                         colorEnd = QLatin1String("</font>");
                     }
@@ -402,12 +397,12 @@ void ListTable::render(QString& result, QString& csv) const
 
                     QString colorBegin;
                     QString colorEnd;
-                    if ((rowRank == 4 || rowRank == 5) && value.isNegative()) {
+                    if ((rowRank == Rank::BaseCurrencyTotals || rowRank == Rank::ForeignCurrencyTotals) && value.isNegative()) {
                         colorBegin = QString::fromLatin1("<font color=%1>").arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name());
                         colorEnd = QLatin1String("</font>");
                     }
 
-                    if ((rowRank == 4 || rowRank == 5) && value.isNegative())
+                    if ((rowRank == Rank::BaseCurrencyTotals || rowRank == Rank::ForeignCurrencyTotals) && value.isNegative())
                         valueStr = QString::fromLatin1("<font color=%1>%2</font>")
                                    .arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name(), valueStr);
                     result.append(QString::fromLatin1("<td>%2%4%1 %%5%3</td>").arg(valueStr, tlinkBegin, tlinkEnd, colorBegin, colorEnd));

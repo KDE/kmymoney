@@ -46,6 +46,9 @@ class ListTable : public ReportTable
 {
     Q_OBJECT
 public:
+    enum class Rank { OpeningBalance = 0, FirstSplitOfTransaction, SecondarySplitOfTransaction, ClosingBalance, BaseCurrencyTotals, ForeignCurrencyTotals };
+    Q_ENUM(Rank)
+
     explicit ListTable(const MyMoneyReport&);
     QString renderHTML() const final override;
     QString renderCSV() const final override;
@@ -217,6 +220,7 @@ private:
 
 }
 
+// keep in sync with reports::ListTable::Rank enum class
 #define FORCED_FIRST_RANK QLatin1String("0")
 #define FIRST_SPLIT_RANK QLatin1String("1")
 #define SECONDARY_SPLIT_RANK QLatin1String("2")
