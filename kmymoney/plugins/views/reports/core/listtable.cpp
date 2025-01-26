@@ -305,6 +305,18 @@ void ListTable::render(QString& result, QString& csv) const
                 balanceChange += MyMoneyMoney((*it_row).value(ctValue, QLatin1String("0")));
                 data = (balanceChange + startingBalance).toString();
             } else if ((rowRank == Rank::BaseCurrencyTotals || rowRank == Rank::ForeignCurrencyTotals)) {
+                // process the columns for which we don't create totals
+                if (*it_column == ctPostDate //
+                    || *it_column == ctNumber //
+                    || *it_column == ctPayee //
+                    || *it_column == ctAction //
+                    || *it_column == ctNextDueDate //
+                    || *it_column == ctBalance //
+                    || *it_column == ctBuyPrice //
+                    || *it_column == ctLastPrice) {
+                    data.clear();
+                }
+
                 // display total title but only if first column doesn't contain any data
                 if (it_column == columns.cbegin() && data.isEmpty()) {
                     tempResult.append(QString::fromLatin1("<td class=\"left%1\">").arg((*it_row).value(ctDepth)));
@@ -410,12 +422,15 @@ void ListTable::render(QString& result, QString& csv) const
                 break;
             case cgPrice:
             {
-                int pricePrecision = file->security(file->account((*it_row).value(ctAccountID)).currencyId()).pricePrecision();
-                result.append(QString::fromLatin1("<td>%3%2&nbsp;%1%4</td>")
-                              .arg(MyMoneyMoney(data).formatMoney(QString(), pricePrecision),
-                                   currencyID, tlinkBegin, tlinkEnd));
-                csv.append(QString::fromLatin1("\"%1 %2\",").arg(currencyID,
-                           MyMoneyMoney(data).formatMoney(QString(), pricePrecision, false)));
+                if (data.isEmpty()) {
+                    result.append(QLatin1String("<td></td>"));
+                    csv.append(QLatin1String("\"\","));
+                } else {
+                    int pricePrecision = file->security(file->account((*it_row).value(ctAccountID)).currencyId()).pricePrecision();
+                    result.append(QString::fromLatin1("<td>%3%2&nbsp;%1%4</td>")
+                                      .arg(MyMoneyMoney(data).formatMoney(QString(), pricePrecision), currencyID, tlinkBegin, tlinkEnd));
+                    csv.append(QString::fromLatin1("\"%1 %2\",").arg(currencyID, MyMoneyMoney(data).formatMoney(QString(), pricePrecision, false)));
+                }
             }
             break;
             case cgShares:
