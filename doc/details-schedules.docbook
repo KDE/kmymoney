@@ -157,7 +157,7 @@
   interval, and the transaction will happen every <emphasis>Frequency</emphasis>
   occurrences of that interval.  Note that some intervals can be indicated in more than
   one way, such as 6 x "weekly" or 3 x "every other week" or 2 x "every three weeks."
-  you cannot indicate fractions of an interval, such as twice per month; you need use
+  You cannot indicate fractions of an interval, such as twice per month; you need to use
   a shorter interval, such as 1 x "every half month."
 </para>
 
