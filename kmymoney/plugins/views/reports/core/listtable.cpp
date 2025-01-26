@@ -404,7 +404,7 @@ void ListTable::render(QString& result, QString& csv) const
                     csv.append(QLatin1String("\"\","));
                 } else {
                     auto value = MyMoneyMoney(data) * MyMoneyMoney(100, 1);
-                    auto valueStr = value.formatMoney(fraction);
+                    auto valueStr = value.formatMoney(100); // percentage always with 2 fractional digits
                     csv.append(QString::fromLatin1("\"%1 %\",").arg(valueStr));
 
                     QString colorBegin;
