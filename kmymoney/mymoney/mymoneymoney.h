@@ -15,11 +15,12 @@
 #ifndef MYMONEYMONEY_H
 #define MYMONEYMONEY_H
 
-// So we can save this object
-#include <QMetaType>
-
 #include "kmm_mymoney_export.h"
 #include "mymoneyunittestable.h"
+
+#include <QDebug>
+// So we can save this object
+#include <QMetaType>
 
 #include <alkimia/alkvalue.h>
 
@@ -392,6 +393,8 @@ inline const MyMoneyMoney MyMoneyMoney::operator*(int factor) const
   * inside @ref QVariant objects.
   */
 Q_DECLARE_METATYPE(MyMoneyMoney)
+
+KMM_MYMONEY_EXPORT QDebug operator<<(QDebug out, const MyMoneyMoney& v);
 
 #endif
 

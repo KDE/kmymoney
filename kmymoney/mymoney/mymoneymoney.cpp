@@ -603,3 +603,9 @@ void MyMoneyMoney::detectCurrencyFormatting()
     setThousandSeparator(eMyMoney::Money::_locale.groupSeparator());
     setDecimalSeparator(eMyMoney::Money::_locale.decimalPoint());
 }
+
+QDebug operator<<(QDebug out, const MyMoneyMoney& v)
+{
+    out << v.toDouble() << v.toString();
+    return out;
+}
