@@ -819,7 +819,7 @@
   an assumed default century, and an apostrophe is used as the year separator to
   specify that entry is in the OTHER century.  However, since which century is
   assumed to be the default is not standardized, the <guilabel>Apostrophe
-  Handling</guilabel> field is use for this purpose, indicating the intended century
+  Handling</guilabel> field is used for this purpose, indicating the intended century
   when an apostrophe is used as the year separator.  As an example, you would set the
   Apostrophe Format to &quot;2000-2099&quot;, so dates with an apostrophe will be
   interpreted as being &gt; year 2000.  In this case, dates without an apostrophe
