@@ -729,7 +729,7 @@
   <keycombo>&Ctrl;&Shift;<keycap>,</keycap> </keycombo> </shortcut>
   <guimenu>Settings</guimenu> <guimenuitem>Configure &kmymoney;...</guimenuitem>
   </menuchoice> from the main menu, clicking <inlinemediaobject> <imageobject>
-  <imagedata fileref='preferences-plugin.svg' format='SVG'/> </imageobject>
+  <imagedata fileref="preferences-plugin.svg" format="SVG"/> </imageobject>
   </inlinemediaobject> <guilabel>Plugins</guilabel> at the bottom of the left panel,
   and clicking &configicon; Configure on the entry for <quote>QIF Importer</quote>.
 </para>
@@ -754,7 +754,7 @@
 
 <para>
   On the left, the Profile selector displays a list of all existing QIF Profiles;
-  select one to edit its configuration.  To create an new profile, press the
+  select one to edit its configuration.  To create a new profile, press the
   <guibutton>New</guibutton> button.  You can rename an existing profile by selecting
   it in the Profile selector and clicking <guibutton>Rename</guibutton>, and delete
   one with the <guibutton>Delete</guibutton> button.  Clicking
