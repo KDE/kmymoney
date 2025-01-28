@@ -112,7 +112,7 @@
 <para>
   The distinction between equities and securities on these two tabs may seem somewhat
   arbitrary, and is known to cause confusion.  Perhaps the terminology may be changed
-  in the future, if anyone can proposed a different set of terms that doesn't have
+  in the future, if anyone can propose a different set of terms that doesn't have
   the same or other problems.  However, as stated above, in the current terminology,
   an equity as shown on the Equities Tab currently refers to the details of an
   investment within an investment account.  Within &kmymoney;, it is a sub-account of
