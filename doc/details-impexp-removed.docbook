@@ -3,6 +3,12 @@
      sure if this material is still needed anywhere.  I've modified the nesting to
      make it look more legal.  -->
 
+<sect1 id="details.impexp.removed">
+<sect1info>
+  <author>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+</sect1info>
+<title>Removed stuff</title>
+
 <sect2><title>Accepting the imported transactions</title>
 
 <para>
@@ -42,4 +48,5 @@
   one in the file you're importing.
 </para>
 </sect2>
+</sect1>
 
