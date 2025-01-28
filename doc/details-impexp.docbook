@@ -897,8 +897,8 @@
   Plugin.  At that time, there were only a few plugins included in the source code,
   and they were not always included in versions built for &Linux; distributions, so
   it was sometimes necessary for users to be able to compile the plugins themselves.
-  This is rarely the case any more, but see the section on <link linkend=
-  "makingmostof.plugins">Plugins</link> for more information.  Currently, many of the
+  This is rarely the case any more, but see the section on
+  <link linkend="makingmostof.plugins">Plugins</link> for more information.  Currently, many of the
   features considered core parts of &kmymoney; are implemented as plugins, so that
   fact is not always mentioned in this handbook where those features are discussed.
   See also the <link linkend="details.settings.plugins">Plugins</link> section in the
