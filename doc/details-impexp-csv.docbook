@@ -812,12 +812,11 @@ Something about importing stock prices
 </sect4>
 </sect3>
 </sect2>
-</sect1>
 
-<sect1 id="details.impexp.csvexp">
-<sect1info>
+<sect2 id="details.impexp.csvexp">
+<sect2info>
   <author>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
-</sect1info>
+</sect2info>
 <title>CSV Exporter</title>
 
 <para>
@@ -877,4 +876,5 @@ Something about importing stock prices
   The exporter will output a set of columns appropriate for the type of account being
   exported.
 </para>
+</sect2>
 </sect1>
