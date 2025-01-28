@@ -92,7 +92,7 @@
 > nella parte inferiore della vista. </para>
 
 <para
->Alla destra dell'elenco a discesa dei conti, ci sono due campi aggiuntivi. La casella del filtro fornisce la possibilità di cercare le transazioni corrispondenti che saranno visualizzate nell'elenco. Il testo specificato può essere in un campo qualsiasi della transazione per il conto. L'elenco dei campi di stato consente la selezione di: Qualsiasi stato, Importata, Verificata, Errata, Non marcata, Non riconciliata, Compensata e transazioni pianificate. </para>
+>Alla destra dell'elenco a discesa dei conti, ci sono due campi aggiuntivi. La casella del filtro fornisce la possibilità di cercare le transazioni corrispondenti che saranno visualizzate nell'elenco. Il testo specificato può essere in un campo qualsiasi della transazione per il conto. L'elenco dei campi di stato consente la selezione di: Qualsiasi stato, Importate, Verificate, Errate, Non contrassegnate, Non riconciliate, Compensate e transazioni pianificate. </para>
 
 </sect2>
 
@@ -138,7 +138,7 @@
 
 <formalpara
 ><title
->Compensata</title>
+>Compensate</title>
   <para
 >Questo è il totale delle transazioni compensate e riconciliate in questo conto. Vedere <link linkend="details.ledgers.cleared"
 >questa sezione</link

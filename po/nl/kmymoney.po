@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2025-01-20 14:06+0100\n"
+"PO-Revision-Date: 2025-01-27 14:57+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -7050,7 +7050,7 @@ msgstr "Volge&nde"
 #: kmymoney/kmymoneyutils.cpp:556
 #, kde-format
 msgid "Prices Importer"
-msgstr "Importeerprogramma van prijzen"
+msgstr "Importprogramma van prijzen"
 
 #: kmymoney/kmymoneyutils.cpp:566
 #, kde-format
@@ -10362,7 +10362,7 @@ msgstr "verwijderen"
 #: kmymoney/plugins/csv/import/csvimporter.cpp:41
 #, kde-format
 msgid "CSV importer"
-msgstr "CSV-importeerprogramma"
+msgstr "CSV-importprogramma"
 
 #: kmymoney/plugins/csv/import/csvimporter.cpp:69
 #, kde-format
@@ -11354,7 +11354,7 @@ msgstr "Aandelen verwijderen"
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:42
 #, kde-format
 msgid "GnuCash importer"
-msgstr "GnuCash-importeerprogramma"
+msgstr "GnuCash-importprogramma"
 
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:137
 #, kde-format
@@ -13346,7 +13346,7 @@ msgstr "Voer uw wachtwoord in voor rekening <b>%1</b>"
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:126
 #, kde-format
 msgid "OFX Importer"
-msgstr "QFX-importeren"
+msgstr "QFX-importprogramma"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:154
 #, kde-format
@@ -14321,7 +14321,7 @@ msgstr ""
 #: kmymoney/plugins/qif/import/qifimporter.cpp:41
 #, kde-format
 msgid "QIF importer"
-msgstr "QIF importeren"
+msgstr "QIF-importprogramma"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KReconciliationReportDlgDecl)
 #: kmymoney/plugins/reconciliationreport/kreconciliationreportdlgdecl.ui:14

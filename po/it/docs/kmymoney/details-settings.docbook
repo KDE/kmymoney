@@ -212,12 +212,12 @@
   <varlistentry>
     <term
 ><guilabel
->Mostra conti di capitale</guilabel
+>Mostra i conti di titoli</guilabel
 ></term>
     <listitem>
       <para
->In modo predefinito, i conti di capitale sono nascosti nella vista Conti. La selezione di questa opzione visualizzerà i conti di capitale nella vista Conti. I conti di capitale sono utilizzate per tracciare titoli singoli o investimenti detenuti in un conto Investimenti. Questo non dovrebbe essere confuso con il gruppo <emphasis
->Capitale</emphasis
+>In modo predefinito, i conti di titoli sono nascosti nella vista Conti. La selezione di questa opzione visualizzerà i conti di titoli nella vista Conti. I conti di titoli sono utilizzati per tracciare titoli singoli o investimenti detenuti in un conto Investimenti. Questo non dovrebbe essere confuso con il gruppo <emphasis
+>Patrimonio</emphasis
 > del livello principale, che include i conti che contengono i saldi di apertura per gli altri conti.</para>
     </listitem>
   </varlistentry>
@@ -236,11 +236,11 @@
   <varlistentry>
   <term
 ><guilabel
->Non mostrare i conti patrimoniali a saldo zero</guilabel
+>Non mostrare i conti di titoli a saldo zero</guilabel
 ></term>
     <listitem>
       <para
->La selezione di questa opzione rimuoverà qualsiasi conto patrimoniale a saldo zero dalla vista Conti.</para>
+>La selezione di questa opzione rimuoverà qualsiasi conto di titoli a saldo zero dalla vista Conti.</para>
     </listitem>
   </varlistentry>
 </variablelist>
