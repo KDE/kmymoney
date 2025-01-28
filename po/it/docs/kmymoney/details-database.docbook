@@ -183,9 +183,9 @@
 > non sono rilevanti. Il file SQLCipher deve avere i permessi di lettura/scrittura appropriate impostate dal file system sottostante per abilitare l'accesso appropriato per l'utente attualmente connesso. </para>
 
 <para
->Gli autori di <ulink url="https://www zetatic.net/sqlcipher"
+>Gli autori di <ulink url="https://www zetetic.net/sqlcipher"
 >SQLCipher</ulink
-> hanno rilasciato la versione 4.0 a novembre 2018. Tuttavia, molti utenti di &kmymoney;, in particolare quelli che non effettuano aggiornamenti molto spesso o che utilizzano distribuzioni LTS (Long Term Support) &Linux;, potrebbero ancora utilizzare un database creato con la versione 3 di SQLCipher. A un certo punto, di solito dopo aver aggiornato &kmymoney; o la loro distribuzione, scoprono di non essere in grado di aprire il loro database, con un errore che non è particolarmente informativo o utile. Ciò che è richiesto in questo caso è aggiornare il database stesso dalla versione 3 alla versione 4. Le istruzioni per questo possono essere trovate sul <ulink url="https://discuss.zetetic.net/t/upgrading-to-sqlcipher-4/3283"
+> hanno rilasciato la versione 4.0 a novembre 2018. Tuttavia, molti utenti di &kmymoney;, in particolare quelli che non effettuano aggiornamenti molto spesso o che utilizzano distribuzioni LTS (Long Term Support) &Linux;, potrebbero ancora utilizzare un database creato con la versione 3 di SQLCipher. A un certo punto, di solito dopo aver aggiornato &kmymoney; o la loro distribuzione, scoprono di non essere in grado di aprire il loro database, con un errore che non è particolarmente informativo o utile. Ciò che è richiesto in questo caso è aggiornare il database stesso dalla versione 3 alla versione 4. Le istruzioni per questo sono disponibili sul <ulink url="https://www.zetetic.net/sqlcipher"
 >sito web di SQLCipher</ulink
 >. </para>
 </sect3>
@@ -236,21 +236,21 @@
 
 <note>
   <para
->Se hai creato il tuo database aprendo prima un file, e poi <guimenu
+>Se è stato creato il proprio database aprendo prima un file, e poi <guimenu
 >File</guimenu
 > <guimenuitem
 >Salva</guimenuitem
 > e scegliendo <guilabel
 >SQL</guilabel
-> come descritto sopra, allora tutte le modifiche successive ai tuoi dati saranno salvate solo nel database, non nel file. Ciò significa che puoi usare il file come copia di sicurezza o istantanea dei tuoi dati in un momento particolare. Per fare un nuovo copia di sicurezza in questo modo, apri il tuo database, scegli la voce di menu <menuchoice
+> come descritto sopra, allora tutte le modifiche successive ai propri dati saranno salvate solo nel database, non nel file. Ciò significa che è possibile usare il file come copia di sicurezza o istantanea dei propri dati in un momento particolare. Per creare una nuova copia di sicurezza in questo modo, aprire il proprio database, scegliere la voce di menu <menuchoice
 > <guimenu
 >File</guimenu
 > <guimenuitem
 >Salva con nome...</guimenuitem
 ></menuchoice
->, scegli <guilabel
+>, scegliere <guilabel
 >XML</guilabel
-> come tipo di archiviazione e assegna un nome file appropriato. Ricordati di riaprire il tuo database, così &kmymoney; non continuerà a usare il file. </para>
+> come tipo di archiviazione e assegnare un nome file appropriato. Ricordarsi di riaprire il proprio database, così &kmymoney; non continuerà a utilizzare il file. </para>
 </note>
 
 <para

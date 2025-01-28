@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-27 01:58+0000\n"
-"PO-Revision-Date: 2025-01-13 15:00+0100\n"
+"PO-Revision-Date: 2025-01-18 02:28+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -93,8 +93,8 @@ msgstr[1] "    %1 aggiunte"
 #, kde-format
 msgid "    %1 matched"
 msgid_plural "    %1 matched"
-msgstr[0] "    %1 verificata"
-msgstr[1] "    %1 verificate"
+msgstr[0] "    %1 abbinata"
+msgstr[1] "    %1 abbinate"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:574
 #, kde-format
@@ -4437,7 +4437,7 @@ msgstr "Importa"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:507
 #, kde-format
 msgid "Match transactions within days"
-msgstr "Verifica le transazioni entro giorni"
+msgstr "Abbina le transazioni entro giorni"
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_matchInterval)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:517
@@ -5421,13 +5421,13 @@ msgstr "Timer di debug"
 #, kde-format
 msgctxt "Match transactions"
 msgid "Match"
-msgstr "Verifica"
+msgstr "Corrispondenza"
 
 #: kmymoney/kmymoney.cpp:2057
 #, kde-format
 msgctxt "Unmatch transactions"
 msgid "Unmatch"
-msgstr "Non verificato"
+msgstr "Non abbinare"
 
 #: kmymoney/kmymoney.cpp:2183
 #, kde-format
@@ -6419,7 +6419,7 @@ msgstr "Importate"
 #: kmymoney/models/ledgerfilter.cpp:74
 #, kde-format
 msgid "Matched"
-msgstr "Verificate"
+msgstr "Abbinate"
 
 #: kmymoney/models/ledgerfilter.cpp:75
 #, kde-format
@@ -21044,7 +21044,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
-msgstr "Accetta o rimuovi la corrispondenza della transazione"
+msgstr "Accetta o non abbinare la transazione"
 
 #: kmymoney/views/ledgerviewpage_p.h:98
 #, kde-format
@@ -21455,7 +21455,7 @@ msgstr "Somma delle suddivisioni"
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Overassigned"
-msgstr "Sovra-assegnato"
+msgstr "Sovrassegnato"
 
 #: kmymoney/views/splitdialog.cpp:335
 #, kde-format

@@ -171,7 +171,7 @@
 ><title
 >Completare le informazioni relative al nome della pianificazione, frequenza e pagamento.</title>
 <para
->Digitare il nome della pianificazione e la data della prossima occorrenza nei rispettivi campi. Il nome è il modo in cui la pianificazione sarà etichettata nella vista delle pianificazioni e in altre visualizzazioni e in altre viste. Specificare quanto spesso si verificherà la pianificazione, utilizzando il campo Frequenza e l'elenco a tendina. Se il menu a tendina è impostato su <quote
+>Digitare il nome della pianificazione e la data della prossima occorrenza nei rispettivi campi. Il nome è il modo in cui la pianificazione sarà etichettata nella vista delle pianificazioni e in altre viste. Specificare quanto spesso si verificherà la pianificazione, utilizzando il campo Frequenza e l'elenco a tendina. Se il menu a tendina è impostato su <quote
 >Una volta</quote
 >, il campo Frequenza sarà disabilitato. Altrimenti, il menu a tendina indica un intervallo di tempo e la transazione avverrà ogni <emphasis
 >Frequenza</emphasis
