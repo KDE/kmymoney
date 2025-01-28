@@ -1023,7 +1023,7 @@
 
 <sect2 id="details.impexp.ofxdirectconnect"><title>Direct Connect</title>
 <para>
-  &kmymoney; also supports OFX Direct Connect.  This gives allows &kmymoney; the
+  &kmymoney; also supports OFX Direct Connect.  This gives &kmymoney; the
   ability to contact your bank directly to download transactions, assuming the bank
   supports it.
 </para>
