@@ -49,16 +49,22 @@
 >Allan</firstname
 ><surname
 >Anderson</surname
+><lineage
+>✝</lineage
 ></personname
 >">
-  <!ENTITY Allan.Anderson.mail "<email
+  <!-- <!ENTITY Allan.Anderson.mail "<email
 >agander93@gmail.com</email
+>"
+> -->
+  <!ENTITY Allan.Anderson.mail "<email
+>deceased</email
 >">
-
+  
   <!-- the following author entities were added to contributor.entities for the 5.0 release
        they can be removed from this file once they are present in the kdelibs minimum version required by &kmymoney; -->
 
-  <!ENTITY Lukasz.Wojnilowiczs "<personname
+  <!ENTITY Lukasz.Wojnilowicz "<personname
 ><firstname
 >Łukasz</firstname
 ><surname
@@ -243,7 +249,7 @@
 <title
 >Підручник з &kmymoney;</title>
 <subtitle
->для програми &kmymoney; версії 4.7</subtitle>
+>для програми &kmymoney; версії 5.2</subtitle>
 
 <authorgroup>
 <!-- This is just put in as an example.  For real documentation, please
@@ -278,8 +284,6 @@ and use `&George.N.Ugnacious; &George.N.Ugnacious.mail;' in the author element.
 >&Roger.Lum; &Roger.Lum.mail; </author>
 <author
 >&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
-<author
->&Dawid.Wrobel; &Dawid.Wrobel.mail; </author>
 <othercredit role="translator"
 ><firstname
 >Юрій</firstname
@@ -299,7 +303,7 @@ and use `&George.N.Ugnacious; &George.N.Ugnacious.mail;' in the author element.
 
 <copyright>
 <year
->2000-2018</year>
+>2000-2024</year>
 <holder
 >Команда з розробки &kmymoney;</holder>
 </copyright>
@@ -317,9 +321,9 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 Do NOT change these in the translation. -->
 
 <date
->13 січня 2018 року</date>
+>1 грудня 2024 року</date>
 <releaseinfo
->5.0.0</releaseinfo>
+>5.2.0</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
@@ -328,7 +332,7 @@ Do NOT change these in the translation. -->
 >&kmymoney;, інструмент керування особистими фінансами від &kde;. </para>
 
 <para
->У цьому підручнику описано &kmymoney; версії 5.0. </para>
+>У цьому підручнику описано &kmymoney; версії 5.2. </para>
 </abstract>
 
 <!-- This is a set of Keywords for indexing by search engines.
@@ -392,10 +396,10 @@ consistent documentation style across all KDE apps. -->
 &details-loans;
 &details-budgets;
 &details-forecast;
-&details-settings;
 &details-search;
 &details-formats;
 &details-database;
+&details-settings;
 &faq;
 &reference;
 &credits;

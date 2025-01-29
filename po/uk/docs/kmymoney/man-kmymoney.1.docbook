@@ -93,7 +93,7 @@
 ><surname
 >Ostroff</surname
 > <contrib
->Документація.</contrib
+>Документація і підтримка користувачів.</contrib
 > <email
 >ostroffjh@users.sourceforge.net</email
 > </author>
@@ -135,9 +135,9 @@
 >arniing@users.sourceforge.net</email
 ></author>
 
-    These persons were not previously listed as authors here, but are included
-    in credits.docbook.  They should either be dropped from there or included
-    here.
+    These persons were not previously listed as authors here, but are included in
+    credits.docbook and as authors of some chapter(s).  They should either be dropped
+    from there or included here.
 
     <author
 ><firstname
@@ -145,7 +145,7 @@
 ><surname
 >Jones</surname>
     <contrib
->Reports.  OFX Import.  Online Quotes.  Documentatation.  Previous versions.</contrib>
+>Reports.  OFX Import.  Online Quotes.  Documentation.  Previous versions.</contrib>
     <email
 >acejones@users.sourceforge.net</email
 ></author>
@@ -164,9 +164,9 @@
     There are eight additional people in credits.docbook for "Special Thanks."
     Should any of them be included here?  -->
 <date
->17 червня 2016 року</date>
+>1 грудня 2024 року</date>
 <releaseinfo
->KMyMoney 5.0</releaseinfo>
+>KMyMoney 5.2</releaseinfo>
 </refentryinfo>
 
 <refmeta>
@@ -224,7 +224,6 @@
 ></option
 ></group
 > </cmdsynopsis>
-
 </refsynopsisdiv>
 
 <refsect1>
@@ -232,8 +231,7 @@
 >Опис</title>
 
 <para
->&kmymoney; — це інструмент керування вашими особистими фінансами, створений розробниками &kde;. Програма надасть вам можливість керувати балансом ваших чекових книжок, керувати кредитними зобов’язаннями або впорядковувати ваші дані щодо прибутків і витрат. У програмі використовується графічний інтерфейс користувача, що імітує роботу зі звичайною бухгалтерською книгою.</para>
-
+>&kmymoney; — це інструмент керування вашими особистими фінансами, створений розробниками &kde;. Програма надасть вам можливість керувати балансом ваших чекових книжок, керувати кредитними зобов’язаннями або впорядковувати ваші дані щодо прибутків і витрат. У програмі використовується графічний інтерфейс користувача, що імітує роботу зі звичайною бухгалтерською книгою. </para>
 </refsect1>
 
 <refsect1>
@@ -249,7 +247,7 @@
 ></term>
 <listitem>
 <para
->мова, яку слід використовувати </para>
+>мова, яку слід використовувати</para>
 </listitem>
 </varlistentry>
 
@@ -260,7 +258,7 @@
 ></term>
 <listitem>
 <para
->не відкривати попередній використаний файл </para>
+>не відкривати попередній використаний файл</para>
 </listitem>
 </varlistentry>
 
@@ -271,7 +269,7 @@
 ></term>
 <listitem>
 <para
->Увімкнути таймери швидкодії </para>
+>Увімкнути таймери швидкодії</para>
 </listitem>
 </varlistentry>
 
@@ -282,7 +280,7 @@
 ></term>
 <listitem>
 <para
->Не перехоплювати на загальному рівні неперехоплені виключення </para>
+>Не перехоплювати на загальному рівні неперехоплені виключення</para>
 </listitem>
 </varlistentry>
 
@@ -329,7 +327,7 @@
 >URL</acronym
 > <ulink url="help:/kmymoney"
 >help:/kmymoney</ulink
-> до рядка адреси &konqueror;.</member>
+> до рядка адреси &konqueror;. </member>
 <member
 >kf5options(7)</member>
 <member

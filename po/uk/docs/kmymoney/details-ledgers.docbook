@@ -7,48 +7,45 @@
     <author
 >&Roger.Lum; &Roger.Lum.mail; </author>
     <author
-><personname
-><firstname
->Michael</firstname
-><surname
->Carpino</surname
-></personname
-> <email
->mfcarpino@gmail.com</email
-> </author>
+>&Michael.Carpino; &Michael.Carpino.mail;</author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->2 квітня 2019 року</date>
+>1 грудня 2024 року</date>
   <releaseinfo
->5.0.3</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Облікові книги</title>
 
-<sect1 id="details.ledgers.view">
-<title
+<sect1 id="details.ledgers.view"
+><title
 >Перегляд облікових книг</title>
-
 <para
->Панель перегляду облікової книги є центром інтеграції даних &kmymoney;. Цей режим перегляду призначено для перевірки і введення даних, вилучення і редагування операцій для визначених вами рахунків. Область перегляду поділено на три частини: область фільтрування, список операцій і область введення даних. </para>
-
-<para
->За допомогою цього перегляду можна виконувати декілька основних дій: шукати і переглядати записи операції, вводити записи операції і змінювати, дублювати або вилучати вже наявні записи операцій. Також передбачено можливість пересувати, позначати і переходити до додаткових параметрів операцій із рахунком. Серед інших функціональних можливостей панелі перегляду облікових книгзміна параметрів рахунку та узгодження рахунку. </para>
+>The Ledgers View is functionally the data integration center of &kmymoney;. This view is for entering, examining, editing, and deleting transactions in your defined accounts. This view has had a major overhaul since the 5.1 series of &kmymoney; releases. The main difference is that it is now a tabbed display, so you can have more than one account displayed at once. You can actually only see one at a time, but switching by simply clicking a different tab is significantly more convenient than having to select the other account in a dropdown. </para>
   
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="ledgerview-numbered.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Перегляд облікових книг</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+<para
+>The main display area shows zero or more tabs, each one for the ledger display on one account. The rightmost tab will always have a <guilabel
+>+</guilabel
+>. Clicking this will display a dropdown where you can select the account to view, and a new tab will be created for that account. The rest of this chapter will describe using the ledger for any single account. </para>
+
+<para
+>За допомогою цього панелі облікових книг можна виконувати декілька основних дій: шукати і переглядати записи операції, вводити записи операції і змінювати, дублювати або вилучати вже наявні записи операцій. Також передбачено можливість пересувати, позначати і показувати додаткові параметри операцій. Серед інших функціональних можливостей панелі перегляду облікових книгзміна параметрів рахунку та узгодження рахунку. </para>
+  
+<screenshot>
+  <screeninfo
+>Панель облікових книг</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="ledgerview-numbered.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Панель облікових книг</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
 >У перегляді ви побачите три елементи: </para>
@@ -56,73 +53,120 @@
 <itemizedlist>
   <listitem
 ><para
->Область фільтрування</para
-></listitem>
-  <listitem
-><para
 >Список операцій</para
 ></listitem>
+  <listitem>
+    <para
+>Панель фільтрування, яку може бути показано або не показано</para>
+  </listitem>
   <listitem>
     <para
 >Програма може відкрити або не відкривати форму введення операції. Її поява залежить від вказаних вами налаштувань на сторінці облікової книги налаштувань &kmymoney;. </para>
   </listitem>
 </itemizedlist>
 
-<sect2 id="details.ledgers.view.filter">
-<title
->Область фільтрування</title>
-
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="accountdropdown.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Область фільтрування</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
-	
 <para
->Вибрати запис рахунку можна за допомогою спадного списку рахунків, розташованого у верхній частині області перегляду. Зауважте, що залежно від типу рахунку може змінюватиметься і вигляд <link linkend="details.ledger.transactionform"
->форми операції</link
->, розташованої у нижній частині області перегляду. </para>
+>У попередніх версіях &kmymoney; був спадний список, у якому ви могли вибрати рахунок, дані якого було показано в обліковій книзі. Тепер у цьому немає потреби, оскільки для перегляду іншого рахунку вам достатньо відкрити нову вкладку. </para>
 
-<para
->Праворуч від спадного списку рахунків ви побачите два додаткових поля. Поле фільтрування надає змогу шукати відповідні операції, які буде показано на панелі списку. Відповідний фрагмент тексту може містити у будь-якому з полів даних операції. Поле стану містить спадний список. За допомогою списку поля стану можна вибрати один з варіантів: будь-який стан, імпортовано, встановлено відповідність, помилковий, не позначено, не узгоджено, звірено та заплановані операції. </para>
-
-</sect2>
-
-<sect2>
-<title
+<sect2
+><title
 >Список операцій</title>
-
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="translist.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Список операцій</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>Список операцій на панелі облікових книг</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="translist.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Список операцій на панелі облікових книг</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 	
 <para
->Після введення вами запису операції, цей запис з’являться у списку операцій. За допомогою цього списку ви зможете змінити властивості операції або навіть створити операції безпосередньо у списку. Типовим впорядкуванням записів операцій у списку є впорядкування за датою (останні операції буде наведено наприкінці списку). Наведення вказівника миші на заголовок списку операцій з наступним клацанням правою кнопкою миші відкриє діалогове вікно, за допомогою якого ви зможете змінити впорядкування операцій. Типове впорядкування можна змінити на вкладці <link linkend="details.settings.register.sorting"
+>У списку операцій буде показано усі (можливо фільтровані) операції на рахунку. Завжди буде показано такі стовпчики: </para>
+
+<formalpara
+><title
+>Дата</title>
+<para
+>дата операції, справжня дата, коли відбулася операція </para>
+</formalpara>
+
+<formalpara
+><title
+>Подробиці</title>
+<para
+>the category/categories, other account (for transfers,) and memo for the transaction </para>
+</formalpara>
+
+<formalpara
+><title
+>Сплата і вклад</title>
+<para
+>the amount of money either leaving or entering the account in this transaction. A value will appear in one or the other column, as appropriate. </para>
+</formalpara>
+
+<formalpara
+><title
+>Баланс</title>
+<para
+>Залежить від поточного порядку показу, його не буде змінено, якщо список буде фільтровано за допомогою поля фільтрування або спадного списку стану операцій, як це описано вище. </para>
+</formalpara>
+
+<para
+>The following columns are optional, and their presence can be toggled by right clicking any column header and selecting or deselecting the appropriate checkbox. Currently, the columns cannot be reordered. The width of a column can be adjusted by using the mouse to grab the line between that column header and the one to its right. </para>
+
+<formalpara
+><title
+>№</title>
+<para
+>номер операції, який завжди є необов'язковим </para>
+</formalpara>
+
+<formalpara
+><title
+>Запис</title>
+<para
+>the Entry Date, which is the date the transaction was entered into the ledger. </para>
+</formalpara>
+
+<formalpara
+><title
+>Отримувач</title>
+<para
+>особа або установа, якій ви надаєте гроші або від якої ви отримуєте гроші. </para>
+</formalpara>
+
+<formalpara
+><title
+>C</title>
+<para
+>the Reconciliation Status. The value can be blank, <quote
+>C</quote
+> for Cleared, or <quote
+>R</quote
+> for Reconciled. The meaning of these terms is discussed further <link linkend="details.ledgers.cleared"
+>below</link
+>. </para>
+</formalpara>
+	
+<para
+>Після введення вами запису операції, цей запис з’являться у списку операцій. За допомогою цього списку ви зможете змінити властивості операції або навіть створити операції безпосередньо у списку. Типовим впорядкуванням записів операцій у списку є впорядкування за датою (останні операції буде наведено наприкінці списку). Наведення вказівника миші на заголовок списку операцій з наступним клацанням лівою кнопкою миші відкриє діалогове вікно, за допомогою якого ви зможете змінити впорядкування операцій. Типове впорядкування можна змінити на вкладці <link linkend="details.settings.register.sorting"
 >Впорядкування</link
 > діалогового вікна <link linkend="details.settings"
 >Параметри &kmymoney;</link
 >. </para>
 
 <para
->Зауважте, що порядок пунктів у стовпчику балансу засновано на поточному порядку показу, його не буде змінено, якщо список буде фільтровано за допомогою поля фільтрування або спадного списку операцій, як це описано вище. </para>
+>Note that altering the sort order can be useful in special circumstances, but for many sort orders, especially where the transaction post date is not the first sort key, the balance column will not be very meaningful, and will almost certainly not match the balance of any statement or display by the bank or institution. To minimize confusion, in such cases, the balance column will show all values as <quote
+>---</quote
+> and headers which are date dependent (&eg; online balance or reconciliation) are not shown. </para>
+
+<para
+>In previous versions of &kmymoney; you needed to right-click a column header to change the sort order. Now, right-clicking allows you to toggle display of the optional columns, and you need to left-click to change the sort order. </para>
 
 <para
 >У нижній частині списку операцій буде показано три значення &kmymoney;: </para>
@@ -130,16 +174,16 @@
 <formalpara
 ><title
 >Попереднє узгодження</title>
-  <para
+<para
 >Це остання дата, коли ви виконували узгодження даних цього рахунку. Узгодження є важливою процедурою для багатьох рахунків. Її описано <link linkend="details.reconcile"
->тут</link
+>у власному розділі</link
 >. </para>
 </formalpara>
 
 <formalpara
 ><title
 >Звірено</title>
-  <para
+<para
 >Загальна сума за всіма звіреними і узгодженими операціями за цим рахунком. Докладніші відомості щодо звірення та узгодження операцій можна знайти у <link linkend="details.ledgers.cleared"
 >цьому розділі</link
 >. </para>
@@ -148,87 +192,175 @@
 <formalpara
 ><title
 >Баланс</title>
-  <para
->Тут &kmymoney; показує загальний баланс рахунку, тобто суму всіх операцій за цим рахунком. Якщо вами буде позначено декілька операцій у списку операцій, тут буде показано суму за позначеними операціями. Баланс буде показано, якщо позначено лише одну операцію. </para>
+<para
+>Тут &kmymoney; показує поточний баланс рахунку, тобто суму всіх операцій за цим рахунком. Якщо вами буде позначено декілька операцій у списку операцій, тут буде показано суму за позначеними операціями. Баланс буде показано, якщо операцій немає або позначено лише одну операцію. </para>
 </formalpara>
 </sect2>
 
-<sect2>
-<title
->Форма запису операції</title>
+<sect2 id="details.ledgers.view.filter"
+><title
+>Область фільтрування</title>
 
 <para
+>In previous versions of &kmymoney;, the filter area was above the transaction list, and it was always displayed. Now, when shown, it is below the list. It is normally hidden, but can be displayed by typing <keycombo
+>&Ctrl;<keycap
+>F</keycap
+> </keycombo
+>. At the left of the filter area is a <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="icon-dialog-close.svg" format="SVG" depth="1em"/> </imageobject
+></inlinemediaobject
+></guiicon
+>dialog close icon. Clicking this will clear any filters in place and hide the filter area. </para>
+
+<screenshot>
+  <screeninfo
+>Область фільтрування панелі облікових книг</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="ledger_filter.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Область фільтрування панелі облікових книг</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>When displayed, most of the filter area is a text entry box. Typing here will cause &kmymoney; to display only transactions containing the text typed in the box. The text specified can be in any of the fields of the transaction for the displayed account. Clicking the <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="edit-clear.svg" format="SVG" depth="1em"/></imageobject
+> </inlinemediaobject
+> </guiicon
+> clear text icon at the right end of the text entry box will clear any text that has been entered. </para>
+
+<para
+>At the right of the text entry is a status filter dropdown. The default value is <guilabel
+>Any status</guilabel
+>, which does not apply any filter to the list. The <guilabel
+>Not marked</guilabel
+> and <guilabel
+>Cleared</guilabel
+> choices have been previously explained. <guilabel
+>Not reconciled</guilabel
+> includes transactions in either of the above groups. There is currently so specific filter for <guilabel
+>Reconciled</guilabel
+> transactions. </para>
+
+<para
+><guilabel
+>Imported</guilabel
+> selects transactions which have been imported, even if they have been matched with a non-imported transaction. <guilabel
+>Matched</guilabel
+> selects transactions which have been matched, either by &kmymoney; as part of the import process or manually matched by the user. However, once you have clicked <guilabel
+>Accept</guilabel
+> on such a transaction, it will not be selected by this filter. </para>
+
+<para
+><guilabel
+>Erroneous</guilabel
+> selects transactions where &kmymoney; has detected some problem. Most commonly, these are <link linkend="details.ledgers.split"
+>unbalanced transactions</link
+>, which is often the case for imported transactions where a category was not assigned. </para>
+
+<para
+><guilabel
+>Scheduled</guilabel
+> selects upcoming <link linkend="details.schedules"
+>Scheduled Transactions</link
+>. These are displayed in the Transactions List for your convenience, but have not actually been entered into the ledger yet. When you right-click on one of them, the context menu displayed is <guimenu
+>Scheduled transaction options</guimenu
+> which is not the same as <guimenu
+>Transaction options</guimenu
+> displayed for regular transactions. </para>
+</sect2>
+
+<sect2
+><title
+>Форма введення операцій</title>
+<para
 >Компонування нижньої частини перегляду облікової книги залежить від вказаних вами налаштувань та типу показаного рахунку. Але, загалом кажучи, там містяться поля для всіх параметрів окремого запису операції, а також кнопки різноманітних дій, які можна виконати над операцією. Докладніше цю частину описано у наступних розділах. </para>
+
+<para
+>When it is displayed, the transaction form is a read-only display of the currently selected transaction. It is always at the bottom of the Transactions View, below the filter area, if that is displayed. It is separated from everything above it by a splitter bar, which can be dragged up or down to change the height of the form. If dragged to the bottom, it will hide the form, although the height of the form set that way is not persistent, and will revert to its default when &kmymoney; is restarted. The splitter, like the transaction form itself, is only available when the appropriate configuration to show the form is activated. </para>
 </sect2>
 </sect1>
 
-<sect1 id="details.ledger.transactions">
-<title
->Введення операцій</title>
-
+<sect1 id="details.ledger.transactions"
+><title
+>Введення і редагування операцій</title>
 <para
->Існує два способи введення операцій у облікову книгу: за допомогою форми введення операції і за допомогою безпосереднього введення даних до списку операцій. Оскільки типово буде показано форму операції, саме цей спосіб ми і обговоримо першим. Вимикання форми операції можна виконати за допомогою розділу облікової книги у налаштуваннях &kmymoney; (відповідний пункт можна знайти у меню <guimenu
->Параметри</guimenu
->). </para>
+>Entering and editing transactions is now done directly in the transaction list, whether or not the transaction form is displayed. </para>
 
 <para
 >Полі у області введення відповідають полям інформації у списку операцій. Серед додаткових полів поле приміток, у якому можна вказати докладніший опис операції, та поле вибору категорії. За допомогою кнопки дроблення ви можете розділити операцію між декількома категоріями. </para>
-</sect1>
 
-<sect1 id="details.ledger.transactionform">
-<title
->Користування формою операцій</title>
-
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="transactionform.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Форма операцій</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
-	
-<para
->Форму операцій, розташовану у нижній частині панелі перегляду облікової книги, призначено для введення записів операцій вручну. </para>
+<screenshot>
+  <screeninfo
+>Запис безпосередньої операції на панелі облікових книг</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="transactionform-off.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Запис безпосередньої операції на панелі облікових книг</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->За допомогою переліку вкладок форми введення операцій ви зможете обрати потрібний вам різновид операції. Натисніть ту з вкладок, напис на якій найкраще описує вашу операцію (депозит, трансферт або зняття з рахунку). У відповідь програма завантажить у форму операції декілька полів, у які ви зможете ввести потрібні дані. </para>
+>Щоб ввести нову операцію до списку, достатньо навести вказівник на відповідний пункт списку і клацнути лівою кнопкою миші, натиснути комбінацію клавіш <keycombo action="simul"
+>&Ctrl;<keycap
+>Ins</keycap
+></keycombo
+> або кнопку <guibutton
+>Створити</guibutton
+>, розташовану у нижній частині вікна. Пересувати курсор позначення списком можна за допомогою натискання клавіш <keycap
+>Стрілка вгору</keycap
+> і <keycap
+>Стрілка вниз</keycap
+>. Після натискання клавіші &Enter; або подвійного клацання лівою кнопкою миші у списку буде відкрито для редагування поля, у які вам слід ввести відповідні дані. </para>
 
 <para
->Будь ласка, зауважте, що дані щодо способу виконання операції безпосередньо &kmymoney; не використовуються, їх призначено лише для групування/створення звітів. </para>
+>Note that the layout of the transaction entry area has been revised in &kmymoney; 5.2. Whether a new transaction is a deposit, withdrawal, or transfer is determined by the data you enter in the amount and category fields. You do not need to explicitly choose a specific tab or specify To: or From:. </para>
 
 <para
->Якщо ви не певні щодо вибору способу, просто скористайтеся варіантом «Депозит» для всіх грошей, що надходять на рахунок, «Зняття» для всіх грошей, які знімаються з рахунку і «Трансферт» для пересування грошових сум між рахунками. Способи виконання операцій та відмінності між ними ми докладніше обговоримо у інших розділах. </para>
+>Для пересування між полями скористайтесь натисканням клавіші &Tab;. Після введення даних натисніть клавішу &Enter;, щоб зберегти зміни. Натискання клавіші &Esc; призведе до скасування внесених вами змін. </para>
 
 <para
->Виберіть спосіб виконання операції натисканням відповідного заголовка вкладки. </para>
-
-<sect2>
-<title
+>Якщо було позначено пункт <guilabel
+>Enter пересуває фокус між полями</guilabel
+>, натискання клавіші &Enter; пересуватиме фокус у наступне поле, подібно до натискання клавіші &Tab;, окрім випадку останнього поля з даними. </para>
+<sect2
+><title
 >Поля операції</title>
-
 <para
 >Введіть відомості за допомогою наведених нижче зауважень у поля форми. Зауважте, що у багатьох полях увімкнено можливість автоматичного заповнення. Тобто, після введення вами декількох символів потрібного запису &kmymoney; запропонує вам список варіантів, що відповідають введеним даним. Щоб обрати один з варіантів, наведіть на нього вказівник миші і клацніть лівою кнопкою миші або наведіть курсор списку за допомогою клавіш зі стрілочками і натисніть клавішу &Enter;. Якщо бажаного запису у списку не буде, продовжіть введення запису. Наступного разу, коли ви вводитимете це значення, &kmymoney; знайде його у журналі і покаже у відповідному списку підказок. </para>
 
-<sect3>
-<title
->Отримувач</title>
+<para
+>Note also that the actual fields displayed for a transaction depend on the type of account. For example, <link linkend="details.investments.ledger"
+> Investment Account transactions</link
+> include fields for activity type, security, and other investment specific items. </para>
 
+<sect3
+><title
+>Платник/Отримувач</title>
 <para
 >Отримувач — це особа чи установа, від якої або до якої надходять гроші. Якщо введений вами запис отримувача виявиться новим для &kmymoney;, програма запитає вас про те, чи бажаєте ви додати відповідний запис до списку отримувачів. Всі інші дані, пов’язані з отримувачем або платником, зокрема його адресу, номер телефону та номер рахунку, а також нотатки можна ввести у перегляді отримувачів. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Категорія</title>
-
 <para
 >Визначення категорії пов’язує операцію з категорією прибутків або витрат з метою обліку та створення звітів. За його допомогою ви можете групувати операції. Введіть назву категорії у відповідне поле. Якщо вами буде введено нову назву категорії, про яку ще не відомо &kmymoney;, програма попросить вас створити новий запис категорії. Якщо буде вибрано варіант «Так», &kmymoney; відкриє діалогове вікно, за допомогою якого можна буде докладніше визначити категорію на основі характеристик «Загальне», «Ієрархія» та «Податок». </para>
+
+<para
+>For Transfer transactions, you select the other account in the Category field. </para>
 
 <para
 >Якщо ви бажаєте пов’язати частини операції з різними категоріями, у &kmymoney; передбачено і таку можливість. Прикладом подібної операції є зняття з касового рахунку 50 грошових одиниць, з яких ви 10 витратили на їжу, 20 — на пиво і ще 20 — на поточні витрати. Отже таку операцію можна пов’язати з трьома категоріями: Їжа, Пиво і Готівка. Щоб зробити це, вам слід скористатися <link linkend="details.ledgers.split"
@@ -241,44 +373,42 @@
 >. </para>
 </sect3>
 
-<sect3>
-<title
->Мітка</title>
-
+<sect3
+><title
+>Мітки</title>
 <para
 >Мітки подібні до категорій. Ними можна скористатися для створення якоїсь системи, яка є перпендикулярною до категорій. За допомогою міток можна згрупувати операції у категорії на основі визначених вами потреб. Потребу можна визначити як специфічну для особи, місця або речі. Наприклад, ви можете створити категорію для кожного з типу витрат на автотранспорт, а потім створити мітку для кожного із засобів пересування. Так само, як з категоріями, ви можете вибрати мітку зі спадного списку або ввести назву нової мітки (програма попросить вас підтвердити створення мітки з відповідною назвою). У поле мітки &kmymoney; можна вводити декілька міток для одної операції. Крім того, можна вказувати мітку для окремих дроблень операції. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Нотатка</title>
-
 <para
 >Ви можете ввести багаторядкову нотатку, яка допоможе вам згадати подробиці щодо певної операції. </para>
 </sect3>
 
-<sect3>
-<title
->Номер чека</title>
-
+<sect3
+><title
+>Номер</title>
 <para
->За потреби можна вказати номер чека. Зауважте, якщо ви цього захочете, ви можете зробити поле номера чека видимим або невидимим у обліковій книзі. Налаштувати поведінку програми можна за допомогою діалогового вікна параметрів (сторінка облікової книги). </para>
+>За потреби можна вказати номер операції. Зауважте, якщо ви цього захочете, ви можете зробити поле номера чека видимим або невидимим у обліковій книзі. Налаштувати поведінку програми можна за допомогою діалогового вікна параметрів (сторінка облікової книги). Хоча це найчастіше використовують для номера чека на поточному рахунку, його можна використовувати в будь-якому типі рахунку, будь-яким способом, яким ви можете нумерувати свої операції. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Дата</title>
-
 <para
 >Слід ввести дату операції, щоб визначити, коли вона відбулася. Ознайомтеся із спеціальним <link linkend="reference.widgets"
 >розділом щодо полів &kmymoney;</link
->, щоб дізнатися більше про те, як можна скористатися полем введення дати для пришвидшення і спрощення введення дат. Для операцій із чековими або кредитними рахунками ви можете використовувати справжню дату (коли ви підписали чек або купили щось) або дату сплати, яку було зареєстровано банком або компанією, якою було випущено кредитну картку. Використання справжньої дати, наприклад, може допомогти вам визначити дату купівлі, але у виписці або отриманих з сайта банку даних, ймовірно, фігуруватиме дата сплати (списання коштів). </para>
+>, щоб дізнатися більше про те, як можна скористатися полем введення дати для пришвидшення і спрощення введення дат. Для операцій із чековими або кредитними рахунками ви можете використовувати справжню дату (коли ви підписали чек або купили щось) або дату сплати, яку було зареєстровано банком або компанією, якою було випущено кредитну картку. Використання справжньої дати, наприклад, може допомогти вам визначити дату купівлі, але у виписці або отриманих з сайта банку даних, ймовірно, фігуруватиме дата сплати (списання коштів). &kmymoney; автоматично зберігає дату введення операції у книгу, але це в іншому полі, яке необов’язково буде показано у списку книги. </para>
+
+<para
+>Note you cannot explicitly enter the Entry Date, which is the date the transaction is actually entered into the ledger. This is always set by &kmymoney; </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Сума</title>
-
 <para
 >Нарешті, введіть суму операції до відповідного поля. Зауважте, що, якщо натиснути піктограму, розташовану праворуч від поля суми, ввести у поле символ «%» або будь-які математичні символи, + - * /, у формулі, наприклад <emphasis
 >12+3</emphasis
@@ -296,88 +426,42 @@
 </sect2>
 </sect1>
 
-<sect1 id="details.ledger.direct">
-<title
->Безпосереднє введення операцій до списку</title>
-
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="transactionform-off.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Запис безпосередньої операції</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
-
-<para
->Другий спосіб введення операцій у облікову книгу полягає у безпосередній зміні списку операцій. </para>
+<sect1 id="details.ledger.transactionform"
+><title
+>Форма введення операцій</title>
+<screenshot>
+  <screeninfo
+>Форма операції на панелі облікових книг</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="transactionform.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Форма операції на панелі облікових книг</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->Щоб зробити це, вам слід спочатку повідомити &kmymoney; про те, що ви не бажаєте використовувати форму введення операцій. Для цього відкрийте діалогове вікно параметрів і зніміть позначку з пункту <guilabel
->Показати форму операції</guilabel
->. </para>
-
-<para
->Відкрити відповідне діалогове вікно можна за допомогою пункту меню <menuchoice
-><guimenu
->Параметри</guimenu
-> <guimenuitem
->Налаштувати &kmymoney;</guimenuitem
-></menuchoice
-> з наступним вибором пункту <guiicon
-><inlinemediaobject
-><imageobject
-><imagedata fileref="ledgers_view.png"/></imageobject
-></inlinemediaobject
->Список</guiicon
-> зі списку, розташованого ліворуч. Пункт, позначку з якого слід зняти, називається <guilabel
->Показати форму операції</guilabel
->. Після зняття позначки натисніть кнопку <guibutton
->Гаразд</guibutton
->, щоб перейти до режиму безпосереднього введення або редагування операцій. </para>
-
-<sect2>
-<title
->Запуск редагування</title>
-
-<para
->Щоб ввести нову операцію до списку, достатньо навести вказівник на відповідний пункт списку і клацнути лівою кнопкою миші, натиснути комбінацію клавіш <keycombo action="simul"
->&Ctrl;<keycap
->Ins</keycap
-></keycombo
-> або кнопку <guibutton
->Створити</guibutton
->, розташовану у нижній частині вікна. Пересувати курсор позначення списком можна за допомогою натискання клавіш <keycap
->Стрілка вгору</keycap
-> і <keycap
->Стрілка вниз</keycap
->. Після натискання клавіші &Enter; або подвійного клацання лівою кнопкою миші у списку буде відкрито для редагування поля, у які вам слід ввести відповідні дані. </para>
-
-<para
->Для пересування між полями скористайтесь натисканням клавіші &Tab;. Після введення даних натисніть клавішу &Enter;, щоб зберегти зміни. Натискання клавіші &Esc; призведе до скасування внесених вами змін. </para>
-
-<para
->Якщо було позначено пункт <guilabel
->Enter пересуває фокус між полями</guilabel
->, натискання клавіші &Enter; пересуватиме фокус у наступне поле, подібно до натискання клавіші &Tab;, окрім випадку останнього поля з даними. </para>
-
-<para
->Вибір способу введення параметрів операцій є питанням ваших особистих уподобань. </para>
-</sect2>
+>Показати форму операції (на вкладці «Показ») — позначення або зняття позначки з цього пункту призведе до показу або приховування форми, розташованої у нижній частині вікна. Якщо область буде приховано, операції можна буде вводити безпосередньо у порожній рядок у нижній частині списку операцій. </para>
 </sect1>
 
-<sect1 id="details.ledgers.split">
-<title id="details.ledgers.split.title"
+<sect1 id="details.ledgers.split"
+><title
 >Дроблення операцій</title>
+<para
+>За допомогою можливості дроблення операцій ви можете розділити операцію між декількома категоріями, які відповідають, наприклад, різним типам покупок, зробленим під час одного відвідання крамниці. </para>
 
 <para
->За допомогою можливості дроблення операцій ви можете розділити операцію між декількома категоріями, які відповідають, наприклад, різним покупкам, зробленим під час одного відвідання крамниці. </para
-> 
+>A transaction always contains one or more splits. Each split represents money moving into or out of a single account. Most of the time, a transaction contains exactly two splits, one for the account the money is coming from and the other for the account the money is going to. The term <quote
+>Split Transaction</quote
+> is used when there are actually three or more splits, when one side of the transaction is further divided into more than one split. This is most commonly done when money moves in or out of a typical bank account, but is allocated to more than one category. </para>
+
+<para
+>If a transaction has only one split, it is almost always said to be <quote
+>unbalanced,</quote
+> meaning that money is coming from somewhere, but not going anywhere (or vice versa.) Such transactions are typically flagged by being displayed in red in the Ledger. Valid transactions with a single split are usually in Investment Accounts: Add, Remove, or Split shares. The other case is where the amount of the transaction is 0, which banks sometimes produce. </para>
 
 <para
 >Щоб ввести розділену операцію, скористайтесь або формою операцій або списком операцій і введіть загальну суму операції. Замість вибору категорії натисніть кнопку <guibutton
@@ -386,138 +470,200 @@
 >Категорія</guilabel
 >. Якщо ви все ж вже вибрали якусь категорію, вона стане першим пунктом у списку редактора дроблення. </para
 > 
- 
+
 <para
->У вікні редактора дроблення наведіть вказівник миші на порожній рядок і двічі клацніть лівою кнопкою миші, щоб ввести нову підоперацію, або натисніть комбінацію клавіш <keycombo action="simul"
->&Ctrl;<keycap
->Ins</keycap
-></keycombo
->. Вкажіть категорію, додайте (необов’язкову) примітку і введіть суму. Щоб зберегти цю частину дроблення, натисніть кнопку з зеленою позначкою, розташовану під записом категорії. Щоб скасувати дроблення, натисніть кнопку з червоним хрестиком. </para
+>This will display the Split Editor, which shows the Category, Memo, and Payment or Deposit for each split. It also shows the total of the splits, the amount of the transaction, and the difference between them. </para
+> 
+ 
+<screenshot>
+  <screeninfo
+>Редактор дроблень із непризначеною сумою</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="split_unassigned.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Редактор дроблень із непризначеною сумою</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>To enter a new split or sub-transaction click <guibutton
+>New</guibutton
+>, press <keycombo action="simul"
+>&Ctrl;&Ins;</keycombo
+>, or double-click an empty row. Double-clicking an existing row lets you edit the split. This will expand the row into form where you can enter or edit a split. </para
+> 
+
+<screenshot>
+  <screeninfo
+>Форма редагування дроблення операції</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="single_split.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Форма редагування дроблення операції</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Here you specify the category and amount, as well as optional payee, memo, and tag(s). Note that if a payee and memo were entered into the transaction before entering the split editor, they will be included in the first split. It often makes sense to enter a specific memo for each split. This can also be done for the Payee, but it may make more sense to enter that only once for the transaction. To save this the split, press <guibutton
+>Enter</guibutton
+>. To cancel, press <guibutton
+>Cancel</guibutton
+>. </para
 > 
  
 <para
 >Після введення дроблення у нижній частині редактора дроблення буде показано суму операції, яку ще не було пов’язано з жодною з категорій. Після введення всіх дроблень натисніть кнопку <guibutton
 >Гаразд</guibutton
->, щоб зберегти параметри операції. Якщо у операції залишаться суми, не пов’язані з жодною з категорій, програма попросить вас повернутися до редагування дроблень, змінити загальну суму операції або залишити частину суми операції не пов’язаною з категоріями. </para>
-
-<para>
-	<screenshot>
-	<screeninfo
->Поділ із непризначеною сумою</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="split_unasigned.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Поділ із непризначеною сумою</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+>, щоб зберегти параметри операції. Якщо у операції залишаться суми, не пов’язані з жодною з категорій, програма попросить вас повернутися до редагування дроблень, змінити загальну суму операції або залишити частину суми операції не пов’язаною з категоріями. Те ж саме стосується випадку, коли сума перепризначена, і в цьому випадку загальна сума поділів перевищує суму транзакції. </para>
 
 <para
 >Щоб перерозподілити суму «Не призначено» або «Перепризначено», позначте пункт поділу, який слід скоригувати. Після цього, натисніть кнопку <guibutton
 >Застосувати різницю</guibutton
 >. Якщо раніше було показано суму «Не призначено», і вона була ненульовою, цю суму буде додано до величини позначеного запису рядка. Якщо раніше було показано суму «Перепризначено», і вона була ненульовою, цю суму буде віднято від значення позначеного запису рядка. Після цього, сума «Не призначено» стане нульовою, і запис операції можна буде успішно зберегти. </para>
 
+<screenshot>
+  <screeninfo
+>Поділ операції у обліковій книзі</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="split_transaction.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Поділ операції у обліковій книзі</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
 <para
 >Зауважте, що у полі категорії у формі операції або списку операцій тепер передбачено пункт <emphasis
 >Розділити операцію</emphasis
 >. </para
 > 
-
-<para>
-	<screenshot>
-	<screeninfo
->Дроблення операцій</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="split_transaction.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Дроблення операції</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
-
 </sect1>
 
-<sect1 id="details.ledger.edit">
-<title
+<sect1 id="details.ledger.actions"
+><title
+>Інші дії з операціями</title>
+
+<sect2 id="details.ledger.edit"
+><title
 >Редагування операцій</title>
-
-<para
->Щоб змінити параметри операції, позначте її пункт у списку операцій і натисніть кнопку <guibutton
->Змінити</guibutton
-> у формі операції або наведіть вказівник миші на пункт операції, клацніть правою кнопкою миші і оберіть пункт <guimenuitem
->Змінити</guimenuitem
-> у контекстному меню. Якщо ви змінюєте параметри операції безпосередньо у списку, ви можете розпочати редагування простим подвійним клацанням лівою кнопкою миші, коли вказівник наведено на пункт списку, або натисканням клавіші &Enter;, коли відповідний пункт списку позначено. </para>
-</sect1>
-
-<sect1 id="details.ledger.delete">
-<title
->Вилучення операцій</title>
-
 <para
 >Щоб вилучити запис операції, позначте його у списку, наведіть вказівник миші на запис, клацніть правою кнопкою миші і оберіть пункт <guimenuitem
 >Вилучити</guimenuitem
 > у спадному меню або натисніть кнопку <guibutton
 >Вилучити</guibutton
 > у формі введення операції. </para>
-</sect1>
+</sect2>
 
-<sect1 id="details.ledgers.match">
-<title id="details.ledgers.match.title"
+<sect2 id="details.ledger.delete"
+><title
+>Вилучення операцій</title>
+<para
+>Щоб вилучити запис операції, наведіть вказівник миші на запис, клацніть правою кнопкою миші і оберіть пункт <guimenuitem
+>Вилучити</guimenuitem
+> у спадному меню або натисніть кнопку <guibutton
+>Вилучити</guibutton
+> у формі введення операції. </para>
+</sect2>
+
+<sect2 id="details.ledgers.match"
+><title
 >Встановлення відповідності операцій</title>
-
 <para
 >Загалом кажучи, під час імпортування записів операцій з файлів у форматах QIF, OFX або HBCI, &kmymoney; автоматично виконає спробу встановити відповідність записів наявним записам операцій. Передбачено можливість розбіжностей у датах, типовою максимальною розбіжністю є 4 дні. Це значення можна змінити у параметрах програми (розділ Список/Імпорт). Всі записи, відповідність яких буде встановлено у такий спосіб, буде позначено світло-зеленим тлом. Після завершення процедури імпортування вам слід переглянути ці записи і або підтвердити, або скасувати встановлення відповідності. </para>
 
 <para
->Якщо ви виявите, що відповідність імпортованого запису операції з наявним записом не було встановлено автоматично, ви можете встановити таку відповідність вручну. Зауважте, що існує відмінність між встановленням відповідності вручну і простим вилученням зайвого запису, навіть якщо результати цих дій на перший погляд є однаковими. Особливо після імпортування операцій з OFX або HBCI, важливо не вилучати імпортовані записи, оскільки під час наступних сеансів імпортування такі записи можуть знову з’являтимуться у списку. Причиною цього є те, що у сучасних форматах імпортування даних, зокрема OFX і HBCI, для позначення операції використовується «Ідентифікатор операції». Якщо ви вилучите імпортовану операцію, буде вилучено і ідентифікатор такої операції, отже інструментові імпортування не буде відомо про те, що вилучену операцію вже було колись імпортовано. </para
+>Якщо ви виявите, що відповідність імпортованого запису операції з наявним записом не було встановлено автоматично, ви можете встановити таку відповідність вручну. Зауважте, що існує відмінність між встановленням відповідності вручну і простим вилученням зайвого запису, навіть якщо результати цих дій на перший погляд є однаковими. Особливо після імпортування операцій, важливо не вилучати імпортовані записи, оскільки під час наступних сеансів імпортування такі записи можуть знову з’являтимуться у списку. Причиною цього є те, що у сучасних форматах імпортування даних, зокрема OFX і HBCI, для позначення операції використовується «Ідентифікатор операції». Якщо ви вилучите імпортовану операцію, буде вилучено і ідентифікатор такої операції, отже інструментові імпортування не буде відомо про те, що вилучену операцію вже було колись імпортовано. При імпортуванні CSV і QIF &kmymoney; створює ідентифікатор для кожної операції, який має слугувати тій самій меті. </para
 > 
 
 <para
->Усунути цю проблему можна повідомивши &kmymoney;, що операції є тотожними, за допомогою інтерфейсу встановлення відповідності вручну. За його допомогою ви можете встановити відповідність між імпортованим записом операції і записом операції введеним вручну (неімпортованим). Щоб встановити таку відповідність позначте одну з операцій, відповідність яких ви бажаєте встановити наведенням на її пункт вказівника миші з наступним клацанням лівою кнопкою миші, потім позначте запис іншої операції у той самий спосіб, але утримуючи натиснутою клавішу &Ctrl;, після цього оберіть у контекстному меню пункт <guimenuitem
+>Якщо таке сталося, усунути цю проблему можна повідомивши &kmymoney;, що операції є тотожними, за допомогою інтерфейсу встановлення відповідності вручну. За його допомогою ви можете встановити відповідність між імпортованим записом операції і записом операції введеним вручну (неімпортованим). Щоб встановити таку відповідність позначте одну з операцій, відповідність яких ви бажаєте встановити наведенням на її пункт вказівника миші з наступним клацанням лівою кнопкою миші, потім позначте запис іншої операції у той самий спосіб, але утримуючи натиснутою клавішу &Ctrl;, після цього оберіть у контекстному меню пункт <guimenuitem
 >Відповідність</guimenuitem
->. Замість двох пунктів у списку тепер буде лише один пункт. Для того, щоб встановлення відповідності було можливим, суми обох пунктів мають бути однаковими, відмінними можуть бути лише дати, максимальну різницю між якими можна встановити у параметрах програми, як це було описано вище. Якщо результат вас задовольнятиме, наведіть вказівник миші на запис відповідної операції, клацніть правою кнопкою миші і оберіть у контекстному меню пункт <guibutton
->Прийняти</guibutton
->. </para>
+>. Замість двох пунктів у списку тепер буде лише один пункт. Для того, щоб встановлення відповідності було можливим, суми обох пунктів мають бути однаковими, відмінними можуть бути лише дати, максимальну різницю між якими можна встановити у параметрах програми, як це було описано вище. </para
+> 
+
+<screenshot>
+  <screeninfo
+>Вікно прив'язки операції</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="match_transaction.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Вікно прив'язки операції</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Since the value is the only field in the two transaction which must absolutely be the same, the value of other fields may differ. Note that although the two Payees may not be identical, they must have been matched by the import process. <guilabel
+>Match</guilabel
+>, you will see a <guilabel
+>Match Transactions</guilabel
+> dialog. This dialog allows you to choose which of the two transactions is used as the source of the other fields in the matched transaction. Note that if one of the transactions is imported, the date of that transaction will always be used in the matched transaction, even if all other fields are taken from the non-imported transaction. That dialog also gives you the option of reversing the transactions in terms of which is used as a source of fields which differ. </para
+> 
+
+<para
+>If you are happy with the status of the match dialog, click <guibutton
+>OK</guibutton
+>. The transaction is then displayed as a Matched Transaction in the Ledger. You can then click <guimenu
+>Transaction</guimenu
+> <guimenuitem
+>Accept</guimenuitem
+> or right-click the matched transaction and select <guibutton
+>Accept</guibutton
+> from the context menu. </para>
 
 <para
 >Під час імпортування електронних виписок (безпосереднього або за допомогою отриманого файла) &kmymoney; намагається виконати якомога краще порівняння записів на основі назви отримувача і суми операції. Якщо у такий спосіб буде встановлено неправильну відповідність, ви зможете скасувати встановлення відповідності. </para>
 
 <note>
   <para
->За допомогою інтерфейсу встановлення відповідності поточної версії програми ви не зможете встановити відповідність між двома імпортованими операціями. Крім того, за його допомогою не можна встановити відповідність і двох операцій, параметри яких було введено вручну. </para>
+>За допомогою інтерфейсу встановлення відповідності поточної версії програми ви не зможете встановити відповідність між двома імпортованими операціями. Крім того, за його допомогою також не можна встановити відповідність і двох операцій, параметри яких було введено вручну. </para>
 </note>
+</sect2>
 </sect1>
 
-<sect1 id="details.ledgers.cleared">
-<title
+<sect1 id="details.ledgers.cleared"
+><title
 >Поняття про стан операції</title>
-
 <para
->У кожного з записів операцій може бути три стани: неузгоджений (порожній), звірений (З) і узгоджений (У). Після введення даних операції станом запису буде «неузгоджений». Після реєстрації банком операції користувач може виконати сплату за нею, отже перевести запис операції у стан (З). Після отримання виписки від банку всі сплачені операції має бути узгоджено. </para>
+>A later section of this handbook discusses <link linkend="details.reconcile"
+>reconciliation</link
+> in more detail. For now, it is only important to know that transaction can have one of three states: not marked (blank), cleared (C), or reconciled (R). When a transaction is entered, it's state is set to the value specified in the <quote
+>Data entry</quote
+> tab of the <quote
+>Ledger</quote
+> section of the &kmymoney; configuration dialog, which defaults to <quote
+>not marked</quote
+>. Once the bank posts the transaction, the user can mark it as cleared and thus transform it to state (C). Note that these are only a subset of the states described earlier as available in the <link linkend="details.ledgers.view.filter"
+>Ledger Filter</link
+>. </para>
 
-<para>
-	<screenshot>
-	<screeninfo
->Поняття про звірений стан</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="cleared_state.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->звірений стан</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>Поняття про стан операції</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="cleared_state.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Поняття про стан операції</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
 >Під час <link linkend="details.reconcile"
@@ -525,13 +671,12 @@
 > ви позначаєте виписки як звірені і перевіряєте, чи різниця між початковим балансом і сплатами за операціями дорівнює кінцевому балансу на рахунку. Якщо це так, ви можете «завершити узгодження», що переведе всі записи звірених операцій (З) у стан узгоджених (У). </para>
 
 <para
->Якщо ви намагатиметеся змінити параметри операції, у якій хоча б одне дроблення позначено як узгоджене (У), програма надішле вам попередження. </para>
+>Якщо ви намагатиметеся змінити параметри операції, у якій хоча б одне дроблення позначено як узгоджене (У), програма надішле вам попередження. Подальше обговорення важливості цього наведено у розділі щодо узгодження. </para>
 </sect1>
 
-<sect1 id="details.ledgers.settings">
-<title
+<sect1 id="details.ledgers.settings"
+><title
 >Зміна параметрів операції</title>
-
 <para
 >Передбачено декілька пунктів, за допомогою яких можна змінити вигляд і поведінку перегляду облікової книги з точки зору операцій. Відкрити діалогове вікно з цими пунктами можна за допомогою пункту меню <guimenu
 >Параметри</guimenu
@@ -549,92 +694,81 @@
 > 
 
 <para
->Призначення більшості з цих пунктів очевидне з назви. Нижче ми все ж спробуємо пояснити призначення деяких з цих пунктів. </para>
-<!-- FIXME - if these are explained in the chapter on settings, just refer to that
-     as is done above, and don't duplicate here.  Leaving for now, but should clean
-     up later. -->
+>Most of the settings are self explanatory. The section linked above has a more detailed explanation of each of the settings. Some of these settings have already been mentions, but for clarity, several of them are explained briefly below. </para>
 
-<itemizedlist>
-  <listitem>
-    <para
+<formalpara
+><title
+>Показати форму операції</title>
+<para
 >Показати форму операції (на вкладці «Показ») — позначення або зняття позначки з цього пункту призведе до показу або приховування форми, розташованої у нижній частині вікна. Якщо область буде приховано, операції можна буде вводити безпосередньо у порожній рядок у нижній частині списку операцій. </para>
-  </listitem>
-</itemizedlist>
+</formalpara>
 
 <para
 >На цих зображеннях показано, як виглядатиме введення запису операції, порівняно з введенням за допомогою форми введення операції. </para>
 
 <para
->Форма запису операції</para>
+>Форма введення операцій:</para>
 
-<para>
-	<screenshot>
-	<screeninfo
+<screenshot>
+  <screeninfo
 >Форма запису операції</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="transactionform.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Форма операцій</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="transactionform.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Форма запису операції</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->Безпосередньо введені операції</para>
+>Операції, параметри яких вводять вручну:</para>
 
-<para>
-	<screenshot>
-	<screeninfo
->Безпосередньо введені операції</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="transactionform-off.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Безпосереднє введення</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>Введення операцій безпосередньо в облікову книгу</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="transactionform-off.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Введення операції безпосередньо в облікову книгу</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
-<itemizedlist>
-  <listitem>
-    <para
->Зберігати зміни після вибору іншої операції/дроблення — якщо ви позначите наступний рядок у списку операцій або редакторі дроблення, зміни буде збережено. За типової ж поведінки (коли пункт не позначено), для збереження внесених змін вам доведеться натиснути кнопку з зеленою пташечкою. </para>
-  </listitem>
-</itemizedlist>
-
+<formalpara
+><title
+>Зберігати зміни після вибору іншої операції/дроблення</title>
+<para
+>Якщо ви позначите наступний рядок у списку операцій або редакторі дроблення, зміни буде збережено. За типової ж поведінки (коли пункт не позначено), для збереження внесених змін вам доведеться натиснути кнопку з зеленою пташечкою. </para>
+</formalpara>
 </sect1>
 
-<sect1 id="details.ledgers.other">
-<title id="details.ledgers.other.title"
->Інші функціональні можливості</title>
-
+<sect1 id="details.ledgers.other"
+><title
+>Інші функціональні можливості операцій</title>
 <para
 >Доступ до додаткових пунктів можна отримати за допомогою меню <guimenu
 >Параметри операції</guimenu
 >, доступ до якого можна отримати наведенням вказівника миші на пункт операції у списку з наступним клацанням правою кнопкою миші. </para>
 
-<para>
-	<screenshot>
-	<screeninfo
+<screenshot>
+  <screeninfo
 >Підменю параметрів операції</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="ledger_more.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Параметри операції</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="ledger_more.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Підменю параметрів операції</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
 >Серед додаткових пунктів: перехід на панель отримувачів до запису отримувача у операції, створення розкладу і зміна позначення операції як узгодженої або звіреної за станом. </para>
