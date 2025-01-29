@@ -510,9 +510,10 @@ void NewSplitEditor::keyPressEvent(QKeyEvent* event)
                 } else {
                     if (d->ui->enterButton->isEnabled() && !d->readOnly) {
                         d->ui->enterButton->setFocus();
-                        d->ui->enterButton->click();
+                        QMetaObject::invokeMethod(d->ui->enterButton, &QAbstractButton::click, Qt::QueuedConnection);
+                    } else {
+                        event->ignore();
                     }
-                    event->ignore();
                 }
             }
             break;
