@@ -84,7 +84,7 @@
         "Name[ka]": "OFX -ის შემომტანი",
         "Name[ko]": "OFX 가져오기 도구",
         "Name[nb]": "OFX-import",
-        "Name[nl]": "QFX-importeren",
+        "Name[nl]": "QFX-importprogramma",
         "Name[pl]": "Importer OFX",
         "Name[pt]": "Importação de OFX",
         "Name[pt_BR]": "Importador OFX",

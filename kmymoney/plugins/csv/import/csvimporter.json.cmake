@@ -86,7 +86,7 @@
         "Name[ka]": "CSV შემომტანი",
         "Name[ko]": "CSV 가져오기 도구",
         "Name[nb]": "CSV-import",
-        "Name[nl]": "CSV-importeerprogramma",
+        "Name[nl]": "CSV-importprogramma",
         "Name[pl]": "Importer CSV",
         "Name[pt]": "Importação de CSV",
         "Name[pt_BR]": "Importador CSV",
