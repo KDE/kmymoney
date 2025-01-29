@@ -289,9 +289,8 @@ void QueryTable::constructTotalRows()
     QList<cellTypeE> columns = m_columns;
     if (!m_subtotal.isEmpty() && subtotals.count() == 1)
         columns.append(m_subtotal);
-    QList<cellTypeE> postcolumns = m_postcolumns;
     if (!m_postcolumns.isEmpty())
-        columns.append(postcolumns);
+        columns.append(m_postcolumns);
 
     QMap<QString, QList<QMap<cellTypeE, MyMoneyMoney>>> totalCurrency;
     QList<QMap<cellTypeE, MyMoneyMoney>> totalGroups;
