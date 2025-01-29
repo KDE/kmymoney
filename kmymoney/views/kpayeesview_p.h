@@ -182,6 +182,10 @@ public:
         ui->m_balanceLabel->hide();
 #endif
 
+        // overwrite the mnemonic Alt+A which colides with the Account menu
+        ui->matchKeyEditList->addButton()->setText(
+            i18nc("@action:button Replacement for Add button on match tab to avoid duplicate assignment of Alt+A", "Add"));
+
         m_contact = new MyMoneyContact(q);
         q->connect(m_contact, &MyMoneyContact::contactFetched, q, &KPayeesView::slotContactFetched);
 
