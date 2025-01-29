@@ -86,21 +86,16 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
     reportCfg.setChartDataLabels(false);
     reportCfg.setChartType(eMyMoney::Report::ChartType::Line);
     reportCfg.setChartPalette(eMyMoney::Report::ChartPalette::Application);
+    reportCfg.setIncludingForecast(true);
     reportCfg.setIncludingBudgetActuals(true);
     if (account.accountType() == eMyMoney::Account::Type::Investment) {
         const auto subAccountList = account.accountList();
         for (const auto& accountID : qAsConst(subAccountList))
             reportCfg.addAccount(accountID);
-        // Does it make sense to add forecasts for investments ?
-        reportCfg.setIncludingForecast(false);
-        reportCfg.setDateFilter(eMyMoney::TransactionFilter::Date::Last6Months);
     } else {
         reportCfg.addAccount(account.id());
-        // TODO adding forecasts is broken, see https://bugs.kde.org/show_bug.cgi?id=499211
-        reportCfg.setIncludingForecast(false);
-        reportCfg.setDateFilter(eMyMoney::TransactionFilter::Date::Last6Months);
     }
-    reportCfg.setColumnsAreDays(true);
+    reportCfg.setColumnsAreDays(false);
     reportCfg.setConvertCurrency(false);
     reportCfg.setMixedTime(true);
     reportCfg.setNegExpenses(MyMoneyAccount::balanceFactor(account.accountType()).isNegative());
