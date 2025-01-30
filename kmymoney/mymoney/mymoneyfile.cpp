@@ -22,6 +22,7 @@
 #include <QDebug>
 #include <QList>
 #include <QRegularExpression>
+#include <QSet>
 #include <QString>
 #include <QTimer>
 #include <QUuid>
@@ -403,6 +404,11 @@ public:
                     m_file->setFileFixVersion(10);
                     break;
 
+                case 10:
+                    fixFile_10();
+                    m_file->setFileFixVersion(11);
+                    break;
+
                 // add new levels above. Don't forget to add a corresponding fix routine
                 // to MyMoneyStorageSqlPrivate::upgradeDb()
                 default:
@@ -419,6 +425,38 @@ public:
     /* DO NOT ADD code to this function or any of it's called ones.
        Instead, create a new function, fixFile_n, and modify the applyFileFixes()
        logic above to call it */
+
+    void fixFile_10()
+    {
+        const auto file = MyMoneyFile::instance();
+        const auto model = file->reportsModel();
+
+        auto count = 0;
+        const auto rows = model->rowCount();
+        for (int row = 0; row < rows; ++row) {
+            const auto idx = model->index(row, 0);
+            MyMoneyReport report = model->itemByIndex(idx);
+            unsigned qc = report.queryColumns();
+            unsigned newQc = qc;
+            if (report.isConvertCurrency()) {
+                // Non-investment converted reports should no longer show the price column.
+                if (!report.isInvestmentsOnly() && !report.isLoansOnly())
+                    newQc &= ~eMyMoney::Report::QueryColumn::Price;
+
+                // We only need to force-enable the rate column when the file really contains more
+                // than one currency in use and related conversion rates are available
+                if (report.hasMultipleCurrencies() && report.hasConversionRates())
+                    newQc |= eMyMoney::Report::QueryColumn::Rate;
+            }
+            if (newQc != qc) {
+                report.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(newQc));
+                file->modifyReport(report);
+                ++count;
+            }
+        }
+        qDebug() << count << "reports(s) fixed in" << __FUNCTION__;
+    }
+
 
     void fixFile_9()
     {

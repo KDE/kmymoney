@@ -1438,8 +1438,8 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             // The tools menu
             // **************
             {Action::ToolCurrencies,                QStringLiteral("tools_currency_editor"),          i18n("Currencies..."),                              Icon::Currencies},
-            {Action::ToolPrices,                    QStringLiteral("tools_price_editor"),             i18n("Prices..."),                                  Icon::Empty},
-            {Action::ToolUpdatePrices,              QStringLiteral("tools_update_prices"),            i18n("Update Stock and Currency Prices..."),        Icon::OnlinePriceUpdate},
+            {Action::ToolPrices,                    QStringLiteral("tools_price_editor"),             i18n("Stock prices and exchange rates..."),         Icon::Empty},
+            {Action::ToolUpdatePrices,              QStringLiteral("tools_update_prices"),            i18n("Update stock prices and exchange rates..."),  Icon::OnlinePriceUpdate},
             {Action::ToolConsistency,               QStringLiteral("tools_consistency_check"),        i18n("Consistency Check"),                          Icon::Empty},
             {Action::ToolPerformance,               QStringLiteral("tools_performancetest"),          i18n("Performance-Test"),                           Icon::PerformanceTest},
             {Action::ToolCalculator,                QStringLiteral("tools_kcalc"),                    i18n("Calculator..."),                              Icon::Calculator},

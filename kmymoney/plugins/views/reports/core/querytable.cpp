@@ -6,6 +6,7 @@
 
 #include "querytable.h"
 
+#include <algorithm>
 #include <cmath>
 
 // ----------------------------------------------------------------------------
@@ -80,6 +81,8 @@ void QueryTable::init()
     m_group.clear();
     m_subtotal.clear();
     m_postcolumns.clear();
+    m_priceColumn.clear();
+    m_rateColumn.clear();
     switch (m_config.rowType()) {
     case eMyMoney::Report::RowType::AccountByTopAccount:
     case eMyMoney::Report::RowType::EquityType:
@@ -195,16 +198,16 @@ void QueryTable::init()
         m_columns << ctAction;
     if (qc & eMyMoney::Report::QueryColumn::Shares)
         m_columns << ctShares;
-    // When loading reports from a file, it is ensured that the price column is displayed
-    // when using currency conversion and there are prices available. However, there are
-    // cases where this does not apply (e.g. test cases), so here it is ensured that the
-    // corresponding column is displayed.
-    if (qc & eMyMoney::Report::QueryColumn::Price || (m_config.isConvertCurrency() && MyMoneyFile::instance()->priceModel()->rowCount() > 0))
+    // Automatically adding the price column makes sense ...
+    if (qc & eMyMoney::Report::QueryColumn::Price || m_config.isInvestmentsOnly())
         m_priceColumn << ctPrice;
+    // Automatically adding the rate column makes sense if there is actually more than one currency in the report.
+    if (qc & eMyMoney::Report::QueryColumn::Rate || (m_config.isConvertCurrency() && m_config.hasMultipleCurrencies()))
+        m_rateColumn << ctRate;
     if (qc & eMyMoney::Report::QueryColumn::Performance) {
         m_subtotal.clear();
-        m_priceColumn.clear();
-        m_columns.removeAll(ctPrice);
+        m_rateColumn.clear();
+        m_columns.removeAll(ctRate);
         QList<cellTypeE> commonPerformanceColumns = QList<cellTypeE>()
             << ctReturn << ctReturnInvestment << ctAnnualizedReturn << ctExtendedInternalRateOfReturn;
         switch (m_config.investmentSum()) {
@@ -228,8 +231,8 @@ void QueryTable::init()
         }
     } else if (qc & eMyMoney::Report::QueryColumn::CapitalGain) {
         m_subtotal.clear();
-        m_priceColumn.clear();
-        m_columns.removeAll(ctPrice);
+        m_rateColumn.clear();
+        m_columns.removeAll(ctRate);
         switch (m_config.investmentSum()) {
         case eMyMoney::Report::InvestmentSum::Owned:
             m_columns << ctShares << ctBuyPrice << ctBuys << ctLastPrice << ctEndingMarketValue << ctPercentageGain << ctCapitalGain;
@@ -248,10 +251,13 @@ void QueryTable::init()
             break;
         }
     } else if (qc & eMyMoney::Report::QueryColumn::Loan) {
-        m_columns << ctPayment << ctInterest << ctFees << m_priceColumn;
+        m_columns << ctPayment << ctInterest << ctFees << m_rateColumn;
         m_postcolumns << ctBalance;
     } else if (!m_columns.contains(ctPrice))
         m_columns << m_priceColumn;
+
+    if (!m_columns.contains(ctRate))
+        m_columns << m_rateColumn;
 
     if (qc & eMyMoney::Report::QueryColumn::Balance)
         m_postcolumns << ctBalance;
@@ -794,21 +800,26 @@ void QueryTable::constructTransactionTable()
                 if (splitAcc.isInvest()) {
                     // use the institution of the parent for stock accounts
                     institution = splitAcc.parent().institutionId();
-                    MyMoneyMoney shares = (*it_split).shares();
+                    const auto shares = (*it_split).shares();
+                    const auto stockPrice = (*it_split).possiblyCalculatedPrice();
+                    const auto rate = stockPrice.isZero() ? MyMoneyMoney::ONE : (xr / stockPrice).reduce();
 
-                    int pricePrecision = file->security(splitAcc.currencyId()).pricePrecision();
+                    const int pricePrecision = file->security(splitAcc.currencyId()).pricePrecision();
                     if (((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) && shares.isNegative())
                         qA[ctAction] = i18nc("Investment action", "Sell shares");
                     else
                         qA[ctAction] = MyMoneySplit::actionI18nName((*it_split).action());
                     qA[ctShares] = shares.isZero() ? QString() : shares.toString();
-                    qA[ctPrice] = shares.isZero() ? QString() : xr.convertPrecision(pricePrecision).toString();
+                    qA[ctPrice] = shares.isZero() ? QString() : stockPrice.convertPrecision(pricePrecision).toString();
                     qA.addSourceLine(ctPrice, __LINE__);
+                    qA[ctRate] = rate.convertPrecision(pricePrecision).toString();
+                    qA.addSourceLine(ctRate, __LINE__);
 
                     qA[ctInvestAccount] = splitAcc.parent().name();
                 } else {
-                    qA[ctPrice] = xr.toString();
-                    qA.addSourceLine(ctPrice, __LINE__);
+                    qA[ctPrice].clear();
+                    qA[ctRate] = xr.convertPrecision(splitAcc.currency().pricePrecision()).toString();
+                    qA.addSourceLine(ctRate, __LINE__);
                 }
 
                 a_fullname = splitAcc.fullName();
@@ -1019,8 +1030,17 @@ void QueryTable::constructTransactionTable()
                         if (splitAcc.isInvest()) {
                             qS[ctShares] = (*it_split).shares().convert(fraction).toString();
                         }
-                        qS[ctPrice] = xr.convert(fraction).toString();
-                        qS.addSourceLine(ctPrice, __LINE__);
+                        if (splitAcc.isInvest()) {
+                            const auto stockPrice = (*it_split).possiblyCalculatedPrice();
+                            const auto rate = stockPrice.isZero() ? MyMoneyMoney::ONE : (xr / stockPrice).reduce();
+                            qS[ctPrice] = stockPrice.convertPrecision(splitAcc.currency().pricePrecision()).toString();
+                            qS.addSourceLine(ctPrice, __LINE__);
+                            qS[ctRate] = rate.convertPrecision(splitAcc.currency().pricePrecision()).toString();
+                        } else {
+                            qS[ctPrice].clear();
+                            qS[ctRate] = xr.convertPrecision(splitAcc.currency().pricePrecision()).toString();
+                        }
+                        qS.addSourceLine(ctRate, __LINE__);
 
                         //multiply by currency and convert to lowest fraction
                         qS[ctValue] = ((*it_split).shares() * xr).convert(fraction).toString();
@@ -1189,8 +1209,11 @@ void QueryTable::constructTransactionTable()
         qA[ctInstitution] = institution.isEmpty() ? i18n("No Institution") : file->institution(institution).name();
         qA[ctRank] = OPEN_BALANCE_RANK;
 
-        qA[ctPrice] = startPrice.convertPrecision(account.currency().pricePrecision()).toString();
+        const auto startRate = m_config.isConvertCurrency() ? account.baseCurrencyPrice(startDate).reduce() : MyMoneyMoney::ONE;
+        qA[ctPrice] = account.isInvest() ? account.deepCurrencyPrice(startDate).convertPrecision(account.currency().pricePrecision()).toString() : QString();
         qA.addSourceLine(ctPrice, __LINE__);
+        qA[ctRate] = startRate.convertPrecision(account.currency().pricePrecision()).toString();
+        qA.addSourceLine(ctRate, __LINE__);
 
         if (account.isInvest()) {
             qA[ctShares] = startShares.toString();
@@ -1204,8 +1227,11 @@ void QueryTable::constructTransactionTable()
         m_rows += qA;
 
         //ending balance
-        qA[ctPrice] = endPrice.convertPrecision(account.currency().pricePrecision()).toString();
+        const auto endRate = m_config.isConvertCurrency() ? account.baseCurrencyPrice(endDate).reduce() : MyMoneyMoney::ONE;
+        qA[ctPrice] = account.isInvest() ? account.deepCurrencyPrice(endDate).convertPrecision(account.currency().pricePrecision()).toString() : QString();
         qA.addSourceLine(ctPrice, __LINE__);
+        qA[ctRate] = endRate.convertPrecision(account.currency().pricePrecision()).toString();
+        qA.addSourceLine(ctRate, __LINE__);
 
         if (account.isInvest()) {
             qA[ctShares] = endShares.toString();
@@ -1765,9 +1791,8 @@ void QueryTable::constructAccountTable()
             ReportAccount account(*it_account);
             TableRow qaccountrow;
             CashFlowList accountCashflow; // for total calculation
-            switch(m_config.queryColumns()) {
-            case eMyMoney::Report::QueryColumn::Performance:
-            {
+            const auto queryColumns = m_config.queryColumns();
+            if (queryColumns & eMyMoney::Report::QueryColumn::Performance) {
                 constructPerformanceRow(account, qaccountrow, accountCashflow);
                 if (!qaccountrow.isEmpty()) {
                     // assuming that that report is grouped by topaccount
@@ -1782,13 +1807,9 @@ void QueryTable::constructAccountTable()
                     else
                         currencyCashFlow[qaccountrow.value(ctCurrency)][qaccountrow.value(ctTopAccount)] += accountCashflow;        // ...or add cashflow for known account
                 }
-                break;
-            }
-            case eMyMoney::Report::QueryColumn::CapitalGain:
+            } else if (queryColumns & eMyMoney::Report::QueryColumn::CapitalGain) {
                 constructCapitalGainRow(account, qaccountrow);
-                break;
-            default:
-            {
+            } else {
                 //get fraction for account
                 int fraction = account.currency().smallestAccountFraction() != -1 ?
                                account.currency().smallestAccountFraction() : file->baseCurrency().smallestAccountFraction();
@@ -1813,7 +1834,6 @@ void QueryTable::constructAccountTable()
                     qaccountrow[ctInstitution] = file->institution(iid).name();
 
                 qaccountrow[ctType] = MyMoneyAccount::accountTypeToString(account.accountType());
-            }
             }
 
             if (qaccountrow.isEmpty()) // don't add the account if there are no calculated values
@@ -1996,19 +2016,14 @@ void QueryTable::constructSplitsTable()
             }
 
             if (splitAcc.isInvest()) {
-
                 // use the institution of the parent for stock accounts
                 institution = splitAcc.parent().institutionId();
                 MyMoneyMoney shares = (*it_split).shares();
-                int pricePrecision = file->security(splitAcc.currencyId()).pricePrecision();
                 if (((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) && (*it_split).shares().isNegative())
                     qA[ctAction] = i18nc("Investment action", "Sell shares");
                 else
                     qA[ctAction] = MyMoneySplit::actionI18nName((*it_split).action());
                 qA[ctShares] = shares.isZero() ? QString() : (*it_split).shares().toString();
-                qA[ctPrice] = shares.isZero() ? QString() : xr.convertPrecision(pricePrecision).toString();
-                qA.addSourceLine(ctPrice, __LINE__);
-
                 qA[ctInvestAccount] = splitAcc.parent().name();
             }
 
@@ -2016,10 +2031,16 @@ void QueryTable::constructSplitsTable()
             a_fullname = splitAcc.fullName();
             a_memo = (*it_split).memo();
 
-            int pricePrecision = file->security(splitAcc.currencyId()).pricePrecision();
-            qA[ctPrice] = xr.convertPrecision(pricePrecision).toString();
+            const int pricePrecision = file->security(splitAcc.currencyId()).pricePrecision();
+            const auto stockPrice = splitAcc.isInvest() ? (*it_split).possiblyCalculatedPrice() : MyMoneyMoney();
+            const auto rate = (splitAcc.isInvest() && !stockPrice.isZero())
+                ? (xr / stockPrice).reduce()
+                : (m_config.isConvertCurrency() ? splitAcc.baseCurrencyPrice((*it_transaction).postDate()).reduce() : MyMoneyMoney::ONE);
+            qA[ctPrice] = splitAcc.isInvest() ? stockPrice.convertPrecision(pricePrecision).toString() : QString();
             qA.addSourceLine(ctPrice, __LINE__);
+            qA[ctRate] = rate.convertPrecision(pricePrecision).toString();
             qA[ctAccount] = splitAcc.name();
+            qA.addSourceLine(ctRate, __LINE__);
             qA[ctAccountID] = splitAcc.id();
             qA[ctTopAccount] = splitAcc.topParentName();
 
@@ -2199,9 +2220,12 @@ void QueryTable::constructSplitsTable()
         qA[ctInstitution] = institution.isEmpty() ? i18n("No Institution") : file->institution(institution).name();
         qA[ctRank] = OPEN_BALANCE_RANK;
 
-        int pricePrecision = file->security(account.currencyId()).pricePrecision();
-        qA[ctPrice] = startPrice.convertPrecision(pricePrecision).toString();
+        const int pricePrecision = file->security(account.currencyId()).pricePrecision();
+        const auto startRate = m_config.isConvertCurrency() ? account.baseCurrencyPrice(startDate).reduce() : MyMoneyMoney::ONE;
+        qA[ctPrice] = account.isInvest() ? account.deepCurrencyPrice(startDate).convertPrecision(pricePrecision).toString() : QString();
         qA.addSourceLine(ctPrice, __LINE__);
+        qA[ctRate] = startRate.convertPrecision(pricePrecision).toString();
+        qA.addSourceLine(ctRate, __LINE__);
 
         if (account.isInvest()) {
             qA[ctShares] = startShares.toString();
@@ -2216,8 +2240,11 @@ void QueryTable::constructSplitsTable()
 
         qA[ctRank] = END_BALANCE_RANK;
         //ending balance
-        qA[ctPrice] = endPrice.convertPrecision(pricePrecision).toString();
+        const auto endRate = m_config.isConvertCurrency() ? account.baseCurrencyPrice(endDate).reduce() : MyMoneyMoney::ONE;
+        qA[ctPrice] = account.isInvest() ? account.deepCurrencyPrice(endDate).convertPrecision(pricePrecision).toString() : QString();
         qA.addSourceLine(ctPrice, __LINE__);
+        qA[ctRate] = endRate.convertPrecision(pricePrecision).toString();
+        qA.addSourceLine(ctRate, __LINE__);
 
         if (account.isInvest()) {
             qA[ctShares] = endShares.toString();

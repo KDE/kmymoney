@@ -228,14 +228,29 @@ void KReportConfigurationFilterDlg::slotConvertCurrencyChanged(int state)
     if (!d->m_tabRowColQuery)
         return;
 
-    QCheckBox* box = d->m_tabRowColQuery->ui->m_checkPrice;
-    // The price column is mandatory when currency conversion is enabled,
+    QCheckBox* box = nullptr;
+    auto reportState = d->m_currentState;
+    reportState.assignFilter(d->m_tabFilters->setupFilter());
+    reportState.setTax(d->m_tabRowColQuery->ui->m_checkTax->isChecked());
+    reportState.setInvestmentsOnly(d->m_tabRowColQuery->ui->m_checkInvestments->isChecked());
+    reportState.setLoansOnly(d->m_tabRowColQuery->ui->m_checkLoans->isChecked());
+
+    bool condition = false;
+    if (reportState.isInvestmentsOnly()) {
+        condition = reportState.isConvertCurrency() && reportState.hasConversionRates();
+        box = d->m_tabRowColQuery->ui->m_checkPrice;
+    } else {
+        condition = reportState.isConvertCurrency() && reportState.hasConversionRates() && reportState.hasMultipleCurrencies();
+        box = d->m_tabRowColQuery->ui->m_checkRate;
+    }
+
+    // The rate column is mandatory when currency conversion is enabled,
     // see https://bugs.kde.org/show_bug.cgi?id=345550
 
     // Previous state is saved into the tristate flag
     if (state) {
         box->setTristate(box->checkState());
-        if (MyMoneyFile::instance()->priceModel()->rowCount() > 0) {
+        if (condition) {
             box->setChecked(true);
             box->setEnabled(false);
         }
@@ -333,6 +348,8 @@ void KReportConfigurationFilterDlg::slotSearch()
             qc |= eMyMoney::Report::QueryColumn::Shares;
         if (d->m_tabRowColQuery->ui->m_checkPrice->isChecked())
             qc |= eMyMoney::Report::QueryColumn::Price;
+        if (d->m_tabRowColQuery->ui->m_checkRate->isChecked())
+            qc |= eMyMoney::Report::QueryColumn::Rate;
         if (d->m_tabRowColQuery->ui->m_checkBalance->isChecked())
             qc |= eMyMoney::Report::QueryColumn::Balance;
 
@@ -591,6 +608,7 @@ void KReportConfigurationFilterDlg::slotReset()
         d->m_tabRowColQuery->ui->m_checkAction->setChecked(qc & eMyMoney::Report::QueryColumn::Action);
         d->m_tabRowColQuery->ui->m_checkShares->setChecked(qc & eMyMoney::Report::QueryColumn::Shares);
         d->m_tabRowColQuery->ui->m_checkPrice->setChecked(qc & eMyMoney::Report::QueryColumn::Price);
+        d->m_tabRowColQuery->ui->m_checkRate->setChecked(qc & eMyMoney::Report::QueryColumn::Rate);
         d->m_tabRowColQuery->ui->m_checkBalance->setChecked(qc & eMyMoney::Report::QueryColumn::Balance);
 
         d->m_tabRowColQuery->ui->m_checkTax->setChecked(d->m_initialState.isTax());

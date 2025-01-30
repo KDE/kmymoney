@@ -305,6 +305,13 @@
          </widget>
         </item>
         <item row="1" column="4">
+         <widget class="QCheckBox" name="m_checkRate">
+          <property name="text">
+           <string>Rate</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="5">
          <widget class="QCheckBox" name="m_checkBalance">
           <property name="toolTip">
            <string>&lt;p&gt;Select this option to show the Running balance column&lt;/p&gt;</string>
@@ -441,10 +448,12 @@
   <tabstop>m_checkMemo</tabstop>
   <tabstop>m_checkReconciled</tabstop>
   <tabstop>m_checkPrice</tabstop>
+  <tabstop>m_checkRate</tabstop>
   <tabstop>m_checkBalance</tabstop>
   <tabstop>m_checkTax</tabstop>
   <tabstop>m_checkInvestments</tabstop>
   <tabstop>m_checkLoans</tabstop>
+  <tabstop>m_checkTransfers</tabstop>
   <tabstop>m_checkHideSplitDetails</tabstop>
   <tabstop>m_checkHideTransactions</tabstop>
   <tabstop>m_checkHideTotals</tabstop>

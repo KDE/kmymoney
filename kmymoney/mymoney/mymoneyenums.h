@@ -132,7 +132,26 @@ enum class Origin {
 enum class ReportType { NoReport = 0, PivotTable, QueryTable, InfoTable, Invalid };
 // if you add bits to this bitmask, start with the value currently assigned to QCend and update its value afterwards
 // also don't forget to add column names to kQueryColumnsText in mymoneyreport.cpp
-enum QueryColumn : int { None = 0x0, Begin = 0x1, Number = 0x1, Payee = 0x2, Category = 0x4, Tag = 0x8, Memo = 0x10, Account = 0x20, Reconciled = 0x40, Action = 0x80, Shares = 0x100, Price = 0x200, Performance = 0x400, Loan = 0x800, Balance = 0x1000, CapitalGain = 0x2000, End = 0x4000 };
+enum QueryColumn : int {
+    None = 0x0,
+    Begin = 0x1,
+    Number = 0x1,
+    Payee = 0x2,
+    Category = 0x4,
+    Tag = 0x8,
+    Memo = 0x10,
+    Account = 0x20,
+    Reconciled = 0x40,
+    Action = 0x80,
+    Shares = 0x100,
+    Price = 0x200,
+    Performance = 0x400,
+    Loan = 0x800,
+    Balance = 0x1000,
+    CapitalGain = 0x2000,
+    Rate = 0x4000,
+    End = 0x8000
+};
 
 enum class DetailLevel { None = 0, All, Top, Group, Total, End };
 inline qHashSeedType qHash(const DetailLevel key, qHashSeedType seed)

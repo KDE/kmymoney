@@ -283,6 +283,7 @@ QHash<eMyMoney::Report::QueryColumn, QString> queryColumnsLUT()
         {eMyMoney::Report::QueryColumn::Loan,        QStringLiteral("loan")},
         {eMyMoney::Report::QueryColumn::Balance,     QStringLiteral("balance")},
         {eMyMoney::Report::QueryColumn::CapitalGain, QStringLiteral("capitalgain")},
+        {eMyMoney::Report::QueryColumn::Rate,        QStringLiteral("rate")},
     };
     // clang-format on
     return lut;

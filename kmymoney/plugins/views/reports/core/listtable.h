@@ -148,6 +148,7 @@ public:
         ctEndingMarketValue,
         csID,
         ctState,
+        ctRate,
     };
     Q_ENUM(cellTypeE)
 
@@ -213,6 +214,11 @@ protected:
     QList<cellTypeE> m_priceColumn;
 
     /**
+     * Temporary storage for the rate column
+     */
+    QList<cellTypeE> m_rateColumn;
+
+    /**
      * Name of the subtotal column
      */
     QList<cellTypeE> m_subtotal;
@@ -227,6 +233,7 @@ private:
     enum cellGroupE { cgMoney, cgShares, cgPercent, cgDate, cgPrice, cgMisc };
     static cellGroupE cellGroup(const cellTypeE cellType);
     static QString tableHeader(const cellTypeE cellType);
+    static QString tableToolTip(const cellTypeE cellType);
 };
 
 }

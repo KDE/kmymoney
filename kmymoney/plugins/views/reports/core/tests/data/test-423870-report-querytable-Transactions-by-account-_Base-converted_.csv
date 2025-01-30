@@ -1,4 +1,4 @@
-Date,Num,Payee,Tags,Category,Price,Amount,Balance
+Date,Num,Payee,Tags,Category,Rate,Amount,Balance
 "Account (GBP)"
 "2020-01-01","","Opening Balance","",""," 1.0000",""," 0.00"
 "2020-04-05","","[Empty Payee]","[No Tag]","Transfer from Opening Balances (GBP)"," 1.3087"," 130.87"," 130.87"

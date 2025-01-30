@@ -797,9 +797,11 @@ void QueryTableTest::testConversionRate()
 
         QVERIFY(rows.count() == 5);
         QVERIFY(MyMoneyMoney(rows[1][ListTable::ctValue]) == amountWithdrawn * firsConversionRate * MyMoneyMoney(-1));
-        QVERIFY(MyMoneyMoney(rows[1][ListTable::ctPrice]) == firsConversionRate);
+        QVERIFY(MyMoneyMoney(rows[1][ListTable::ctRate]) == firsConversionRate);
+        QVERIFY(rows[1][ListTable::ctPrice].isEmpty());
         QVERIFY(MyMoneyMoney(rows[2][ListTable::ctBalance]) == amountWithdrawn * secondConversionRate * MyMoneyMoney(-1));
-        QVERIFY(MyMoneyMoney(rows[2][ListTable::ctPrice]) == secondConversionRate);
+        QVERIFY(MyMoneyMoney(rows[2][ListTable::ctRate]) == secondConversionRate);
+        QVERIFY(rows[2][ListTable::ctPrice].isEmpty());
 
     } catch (const MyMoneyException &e) {
         QFAIL(e.what());

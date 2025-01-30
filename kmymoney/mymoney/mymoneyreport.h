@@ -428,6 +428,23 @@ public:
     bool includes(const MyMoneyAccount& acc) const;
 
     /**
+     * Returns whether this report may contain more than one currency.
+     *
+     * The decision is based on the report filters and the currencies of all
+     * accounts included by the report.
+     * @return true if the report contains more than one currency
+     */
+    bool hasMultipleCurrencies() const;
+
+    /**
+     * Returns whether the price data required for currency conversion is available.
+     *
+     * Investment/loan reports require security prices, all others require
+     * exchange rates against the base currency.
+     */
+    bool hasConversionRates() const;
+
+    /**
      * Return row type as string.
      *
      * @param type type to get string for

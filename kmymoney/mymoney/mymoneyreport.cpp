@@ -25,8 +25,11 @@
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"
+#include "mymoneyprice.h"
+#include "mymoneysecurity.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
+#include "securitiesmodel.h"
 
 MyMoneyReport::MyMoneyReport()
     : MyMoneyObject(*new MyMoneyReportPrivate(this))
@@ -1100,6 +1103,79 @@ int MyMoneyReport::lineWidth()
 void MyMoneyReport::setExpertMode(bool expertMode)
 {
     m_expertMode = expertMode;
+}
+
+bool MyMoneyReport::hasMultipleCurrencies() const
+{
+    const auto file = MyMoneyFile::instance();
+    const auto securitiesModel = file->securitiesModel();
+    QList<MyMoneyAccount> accountList;
+    file->accountList(accountList);
+
+    QSet<QString> currencies;
+    for (const auto& account : accountList) {
+        if (!includes(account))
+            continue;
+
+        auto currencyId = account.currencyId();
+        if (currencyId.isEmpty())
+            continue;
+
+        if (account.isInvest()) {
+            const auto security = securitiesModel->itemById(currencyId);
+            if (!security.tradingCurrency().isEmpty())
+                currencyId = security.tradingCurrency();
+        }
+
+        currencies.insert(currencyId);
+        if (currencies.size() > 1)
+            return true;
+    }
+
+    return false;
+}
+
+bool MyMoneyReport::hasConversionRates() const
+{
+    const auto file = MyMoneyFile::instance();
+    const auto baseCurrencyId = file->baseCurrency().id();
+    const auto securitiesModel = file->securitiesModel();
+
+    QList<MyMoneyAccount> accountList;
+    file->accountList(accountList);
+
+    QSet<QString> currencies;
+    for (const auto& account : accountList) {
+        if (!includes(account))
+            continue;
+
+        auto currencyId = account.currencyId();
+        if (currencyId.isEmpty())
+            continue;
+
+        if (account.isInvest()) {
+            const auto security = securitiesModel->itemById(currencyId);
+            const auto tradingCurrencyId = security.tradingCurrency();
+
+            if (!tradingCurrencyId.isEmpty()) {
+                if (!file->price(currencyId, tradingCurrencyId).isValid())
+                    return false;
+                currencyId = tradingCurrencyId;
+            }
+        }
+
+        currencies.insert(currencyId);
+    }
+
+    if (isInvestmentsOnly())
+        return true;
+
+    for (const auto& currencyId : currencies) {
+        if (currencyId != baseCurrencyId && !file->price(currencyId, baseCurrencyId).isValid())
+            return false;
+    }
+
+    return true;
 }
 
 QString MyMoneyReport::toString(eMyMoney::Report::RowType type)
