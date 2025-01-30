@@ -92,14 +92,14 @@
 >Розрізнення між акціями та цінними паперами на цих двох вкладках може здатися дещо довільним і, як відомо, викликає плутанину. Можливо, термінологія може бути змінена в майбутньому, якщо хтось зможе запропонувати інший набір термінів, який не має тих самих або інших проблем. Однак, як зазначено вище, згідно з поточною термінологією, власний капітал, як показано на вкладці «Маржа», наразі належить до параметрів інвестицій на інвестиційному рахунку. У межах &kmymoney; це субрахунок інвестиційного рахунку, деномінований у цінних паперах. Цінні папери, як показано на вкладці «Цінні папери», надають доступ до інформації про цінні папери, не пов’язану з жодним рахунком. На цінний папір можна посилатися у декількох розділах маржі, що також можна висловити тим, що різні маржі можуть бути деноміновані в одному цінному папері. </para>
 
 <para
->At the top of the list of equities is the <guilabel
->Select Account:</guilabel
-> dropdown, where you can select the investment account for which you want to see the specific investments. If you have checked <link linkend="details.settings.general.views"
->Synchronize account selection of Ledgers View and Investments View</link
-> in the configuration dialog, then if you are looking at an investment account in the Ledgers View, and then switch to the Investments View, that account will already be selected. </para>
+>У верхній частині списку акцій передбачено спадне меню <guilabel
+>Виберіть рахунок:</guilabel
+>, де ви можете вибрати інвестиційний рахунок, для якого ви хочете переглянути конкретні інвестиції. Якщо ви позначили пункт <link linkend="details.settings.general.views"
+>Синхронізувати вибір рахунку у переглядах облікової книги і інвестицій</link
+> у діалоговому вікні налаштувань, тоді, якщо ви переглядаєте інвестиційний рахунок на панелі рахунків, а потім перейдете до режиму інвестицій, цей рахунок уже буде позначено. </para>
 
 <para
->Similar to the Institutions and several other views, the Equities tab displays several columns with descriptive and summary information about each equity. As with the Institutions View, you can select which columns are shown by right-clicking any column heading and selecting or unselecting the checkbox next to the name of the column. </para>
+>Подібно до панелі «Установи» та кількох інших панелей, на панелі «Маржа» буде показано декілька стовпців з описовою та підсумковою інформацією про кожен цінний папір. Як і у випадку з установами, ви можете вибрати, які стовпчики буде показано, клацнувши правою кнопкою миші на заголовку будь-якого стовпчика і встановивши або знявши позначку поряд із назвою стовпчика. </para>
 
 <variablelist>
   <varlistentry>
@@ -125,7 +125,7 @@
 >Кількість</term>
     <listitem>
       <para
->This is the number of shares of the equity you own in this investment account. The precision of this and the other value columns can be adjusted, as described later in this section. </para>
+>Це кількість акцій, які є вашою власністю на цьому інвестиційному рахунку. Точність значень цього та інших стовпчиків можна налаштувати у спосіб, який описано далі в цьому розділі. </para>
     </listitem>
   </varlistentry>
 
@@ -143,7 +143,7 @@
 >Значення</term>
     <listitem>
       <para
->This is the total value of this investment in this investment account. It should be the same as the product of the Quantity and the Price. </para>
+>Це загальна вартість цієї інвестиції на цьому інвестиційному рахунку. Вона має дорівнювати добутку кількості та ціни. </para>
     </listitem>
   </varlistentry>
 
@@ -152,13 +152,13 @@
 >Останнє оновлення ціни</term>
     <listitem>
       <para
->This is the date of the most recent price. Prices can be updated in several ways, all described later in this section. </para>
+>Це дата останньої ціни. Ціни можна оновити у декілька способів, усі описані далі у цьому розділі. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 
 <para
->The order for any of the columns except Name can be changed by left clicking the column header, and dragging it to the left or right. </para>
+>Порядок для будь-якого зі стовпчиків, окрім назви, можна змінити, клацнувши лівою кнопкою миші заголовок стовпчика та перетягнувши його ліворуч або праворуч. </para>
 </sect2>
 
 <sect2 id="details.investments.view.securities"
@@ -179,7 +179,7 @@
 </screenshot>
 
 <para
->At the top of the list of securities is a search box. Because this tab lists all investments you own in all Investment accounts, it can grow lengthy, and you can use the search box to find a specific entry on the list, by typing any part of its name. </para>
+>У верхній частині списку цінних паперів розташовано поле пошуку. Оскільки на цій вкладці перераховано всі інвестиції, якими ви володієте на всіх інвестиційних рахунках, список може бути досить довгим, і ви можете скористатися полем пошуку, щоб знайти певний запис у списку, ввівши будь-яку частину його назви. </para>
 
 <variablelist>
   <varlistentry>
@@ -187,7 +187,7 @@
 >Цінний папір</term>
     <listitem>
       <para
->The name of the security. This column is always displayed. All the other columns are optionally display, as described above. The names should be the same names as shown in the Name column on the Equities tab. </para>
+>Назва рахунку маржі. Цей стовпчик буде показано завжди. Усі інші стовпчики теж може бути показано, як це описано вище. Назви мають збігатися із назвами, які показано у стовпчику назв на вкладці «Маржа». </para>
     </listitem>
   </varlistentry>
 
@@ -238,7 +238,7 @@
 </variablelist>
 
 <para
->As with the Equities tab, the order for any of the columns except Security can changed by left clicking the column header and dragging it to the left or right. </para>
+>Як і з вкладкою «Маржа», порядок для будь-якого зі стовпчиків, окрім цінного паперу, можна змінити, клацнувши лівою кнопкою миші заголовок стовпчика та перетягнувши його ліворуч або праворуч. </para>
 </sect2>
 </sect1>
 
@@ -257,20 +257,20 @@
 > і не забудьте вказати у полі типу рахунку «Інвестиція». </para>
 
 <para
->To work with the new investment account, open that account in the Ledgers View, as previously described. </para>
+>Щоб попрацювати із новим інвестиційним рахунком, відкрийте цей рахунок на панелі «Облікові книги», як це описано раніше. </para>
 
 <sect2
 ><title
 >Запис ціни</title>
 <para
->Whenever you enter or edit a buy, sell, or reinvest transaction, you need to specify the number of shares, price per share, and the total amount of the transaction. As described <link linkend="details.investments.priceentry"
->here</link
-> you actually specify only two of those values, and &kmymoney; calculates the third. The default price entry setting for new Investment Accounts is <quote
->Price per share</quote
->, but this can be changed to <quote
->Total amount</quote
-> when you <link linkend="details.accounts.edit"
->edit the account</link
+>Щоразу, коли ви вводите або редагуєте операцію купівлі, продажу чи реінвестування, вам слід вказати кількість акцій, ціну за акцію та загальну суму операції. Як описано <link linkend="details.investments.priceentry"
+>тут</link
+>, насправді ви вказуєте лише два з цих значень, і &kmymoney; обчислює третє. Типовим варіантом введення ціни для нових інвестицій є <quote
+>Ціна за акцію</quote
+>, але його можна змінити на <quote
+>Загальну суму</quote
+> під час <link linkend="details.accounts.edit"
+>редагування рахунку</link
 >. </para>
 </sect2>
 </sect1>
@@ -301,7 +301,7 @@
 >Майстер нових інвестицій</title>
 
 <para
->The first thing you will be asked to enter is the name of the investment. This is the name which will be used on the Equities Tab. You will also be asked to specify the type of investment. The currently available values are Stock, Bond, and Mutual Fund. If your investment is not strictly one of these types, it is ok to mislabel here, as the type is not currently used to restrict or control what you can do with the investment. </para>
+>Перше, що вас попросять ввести, це назва інвестиції. Це назва, яку буде використано на вкладці «Маржа». Вас також попросять вказати тип інвестицій. У поточній версії можна вибрати один з таких варіантів: акції, облігації та взаємний фонд. Якщо ваші інвестиції не належать до одного з цих типів, можна вибрати найближчий варіант, оскільки тип у поточній версії не використовується для обмеження чи керування тим, що ви можете робити з інвестиціями. </para>
 
 <screenshot>
   <screeninfo
@@ -340,7 +340,7 @@
 >Торговельний код. Символ тікера, який використовують для позначення інвестиції, на якому б з ринків нею не торгували. У &kmymoney; торговельний код потрібен для всіх інвестицій, але у деяких з інвестицій таких кодів немає. У такому разі вам слід просто самостійно придумати такий символ. </para>
 
     <para
->The dropdown includes all trading symbols which currently exist in your data file. If you select one of these &kmymoney; will reuse the referenced security for the new equity, unless you check the "Create duplicates of symbol," in which case a new security will be created with the same symbol. </para>
+>У спадному списку міститимуться усі торгові символи, які на поточний момент є у вашому файлі даних. Якщо вибрати один із них, &kmymoney; повторно використає вказаний цінний папір для нового запису капіталу, якщо ви не позначите пункт «Створити дублікати символу», у випадку чого новий цінний папір буде створено з тим самим символом. </para>
 
     <para
 >Якщо ви плануєте скористатися <link linkend="details.investments.onlinequotes"
@@ -375,17 +375,17 @@
 
   <listitem>
     <para
->Price entry. When you enter or edit a buy, sell, or reinvest transaction for this investment, this dropdown indicates whether you want to enter the price per share or the total for all shares or to follow the default for the account, which was specified when the Investment Account was created. </para>
+>Введення ціни. Коли ви вводите або редагуєте дані операції купівлі, продажу чи реінвестування для цієї інвестиції, у цьому спадному списку буде вказано, хочете ви ввести ціну за акцію, загальну суму для всіх акцій, чи слідувати стандартним значенням для рахунку, указаним під час створення інвестиційного рахунку. </para>
   </listitem>
 
   <listitem>
     <para
->Price Precision. This is a small integer, specifying the number of decimal places used to specify the price of this investment in the specified currency. This is used for both purchase and sale price, the current price, and also for the total value of the investment. </para>
+>Точність ціни. Це маленьке ціле число, яке вказує кількість десяткових знаків, які використовуються для визначення ціни цієї інвестиції у вказаній валюті. Це значення використовують як для ціни купівлі, так і для ціни продажу, поточної ціни, а також для загальної вартості інвестицій. </para>
   </listitem>
 
   <listitem>
     <para
->Remainder. This is a dropdown with values Round, Ceil, Floor, and Truncate, which specifies what &kmymoney; should do in the last decimal place of values. For example, this can be relevant when you specify the total price of a purchase rather than an exact price per share. </para>
+>Лишок. Це спадне меню варіанта округлення зі значеннями «Округлення», «Стеля», «Підлога» та «Обрізання», де ви визначаєте, що &kmymoney; слід робити з останньою позицією десяткового дробу значень. Наприклад, це може бути важливим, коли ви вказуєте загальну ціну покупки, а не точну ціну за акцію. </para>
   </listitem>
 </itemizedlist>
 
@@ -403,7 +403,7 @@
 >Мережеве джерело. Мережеве джерело, яким ви бажаєте скористатися для цієї інвестиції. Найпоширенішим є використання «Yahoo Finance». Спробуйте скористатися цим джерелом, якщо ж дані не буде знайдено, спробуйте використати інші джерела. </para>
 
     <para
->Note that although &kmymoney; knows how to extract security prices from web pages retrieved from Yahoo and many other sources, those sources have been known to change the format of those pages, which can prevent &kmymoney; from successfully extracting the desired information. This is an unfortunately too frequent topic of discussion on the various support channels. However, if fetching prices works for a long time and then you start to get errors, please consider this possibility. </para>
+>Зауважте, що хоча &kmymoney; знає, як отримати ціни паперів з вебсторінок, отриманих з Yahoo та багатьох інших джерел, ці джерела, як відомо, змінюють формат сторінок, що може завадити успішному видобуванню даних за допомогою &kmymoney;. На жаль, про те, що це трапляється надто часто, свідчать теми обговорень на різних каналах підтримки. Однак, якщо пошук цін працює протягом тривалого часу, а потім починають з'являтися помилки, варто зважити на можливість такої неприємності. </para>
   </listitem>
 
   <listitem>
@@ -786,6 +786,6 @@
 >З інвестиціями, зазвичай, пов'язують деякі властивості, які ще не реалізовано у &kmymoney;. Серед них похідні, опціони та ф'ючерси. Крім того, якщо ви продаєте цінний папір, &kmymoney; не може визначити, які саме цінні папери було продано, тобто нещодавно придбані чи придбані давно, отже не може обчислити прибуток від інвестиції. Нарешті, програма не може знайти про специфічні для країни вимоги щодо податкової звітності, але це можна, зазвичай, виправити позначенням усіх пов'язаних із податками категорій, які використовуються для операцій, які може бути обкладено податками. </para>
 
 <para
->The &kmymoney; development team is aware of these and additional issues, and has been collecting requirements and notes for an eventual major re-write of how the program handles investments. When that process begins (there is not current schedule) there will be an opportunity for users to provide input on any additional needs and desires in this area. </para>
+>Команда розробників &kmymoney; знає про ці та інші проблеми, і збирає вимоги та зауваження з метою можливого значного переписування коду, пов'язаного із тим, як програма обробляє інвестиції. Коли цей процес розпочнеться (поки ми не маємо точної дати), користувачі матимуть можливість надати інформацію щодо будь-яких додаткових потреб і побажань з цього приводу. </para>
 </sect1>
 </chapter>

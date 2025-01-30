@@ -9,7 +9,7 @@
 >&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
 </sect1info>
 <title
->Removed stuff</title>
+>Вилучені дані</title>
 
 <sect2
 ><title
@@ -45,9 +45,9 @@
 
 <sect2
 ><title
->Importing Investments</title>
+>Імпортування даних щодо інвестування</title>
 <para
->Please note that if you are importing a file with investment transactions, those investments must first exist in your &kmymoney; file. The trading symbol is used to match, so please ensure that the symbol in &kmymoney; is exactly the same as the one in the file you're importing. </para>
+>Будь ласка, зауважте, що якщо ви імпортуєте файл з записами щодо операцій з інвестування, ці записи від початку мають міститися у вашому файлі &kmymoney;. Для встановлення відповідності використовується стандартний символ акції, отже переконайтеся, що цей символ у &kmymoney; точно збігається з символом у файлі, який ви імпортуєте. </para>
 </sect2>
 </sect1>
 

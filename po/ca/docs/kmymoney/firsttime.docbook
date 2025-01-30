@@ -8,50 +8,45 @@
 >&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->1 de febrer de 2018</date>
+>1 de desembre de 2024</date>
   <releaseinfo
->5.0.0</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Emprar el &kmymoney; per primera vegada</title>
 
-<sect1 id="firstime-1">
-<title
+<sect1 id="firstime"
+><title
 >Executar el &kmymoney; per primera vegada</title>
-
-<note>
+<note
+><title
+>Les captures de pantalla poden ser diferents</title>
   <para
->Quan executeu el &kmymoney;, podria ser que no es vegi exactament com a les captures de pantalla d'aquest manual. Molts detalls, com els tipus de lletra, colors i icones, es poden personalitzar, sigui utilitzant l'element de menú <menuchoice
+>Quan executeu el &kmymoney;, podria ser que no es vegi exactament com a les captures de pantalla d'aquest manual. Molts detalls, com les lletres, colors i icones, es poden personalitzar, sigui utilitzant l'element de menú <menuchoice
 ><guimenu
 >Arranjament</guimenu
 ><guimenuitem
 >Configura el &kmymoney;...</guimenuitem
 ></menuchoice
-> o l'aplicació &systemsettings; del &plasma;, depenent del sistema operatiu. </para>
+> o l'aplicació &systemsettings; de &kde;, depenent del sistema operatiu o la distribució. </para>
 </note>
 
-</sect1>
-
-<sect1 id="firsttime.mainwindow">
-<title
+<sect2 id="firsttime.mainwindow"
+><title
 >La finestra principal</title>
-
-<para>
-	<screenshot>
-	<screeninfo
+<screenshot>
+  <screeninfo
 >La finestra principal</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="mainwindow_numbered.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="mainwindow_numbered.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
 >La finestra principal</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
 >La finestra principal del &kmymoney; consta de quatre parts principals </para>
@@ -76,12 +71,12 @@
 </itemizedlist>
 
 <para
->El menú i les barres d'eines proporcionen accés a les característiques del &kmymoney; i permeten <link linkend="firsttime.3"
->crear</link
-> fitxers o configurar com operarà el &kmymoney;. </para>
+>El menú i la barra d'eines proporcionen accés a les característiques del &kmymoney; i permeten <link linkend="firsttime.newfile"
+>crear un fitxer de dades nou</link
+>, obrir un fitxer de dades existent o configurar com funcionarà el &kmymoney;. La barra d'eines es pot configurar per a mostrar icones de les operacions que utilitzeu amb més freqüència. </para>
 
 <para
->Al costat esquerre de la finestra principal, el selector de vistes consisteix d'almenys 11 icones amb etiquetes opcionals, depenent del programari proporcionat pel sistema. Es podrien afegir més icones mitjançant diversos connectors. En fer clic a una icona, la finestra de vista en el costat dret es carregarà amb la vista adequada de les dades financeres. Cada vista proporciona una representació única de la situació financera i permet veure o editar la informació que es mostra. </para>
+>Al costat esquerre de la finestra principal, el selector de vistes consisteix d'almenys onze icones amb etiquetes opcionals, depenent del programari proporcionat pel sistema, ja que algunes característiques es poden incloure o excloure quan es compila el programa. Es podrien afegir més icones mitjançant diversos connectors. En fer clic a una de les icones, la finestra de vista en el costat dret es carregarà amb la vista adequada de les dades financeres. Cada vista proporciona una representació única de la situació financera i permet veure o editar la informació que es mostra. </para>
 
 <para
 >El selector de vistes pot contenir les icones següents </para>
@@ -95,11 +90,11 @@
 > <imagedata fileref="home_view.png" format="PNG"/> </imageobject
 > <textobject
 > <phrase
->Vista d'inici</phrase
+>Vista principal</phrase
 > </textobject
 > </inlinemediaobject
 > </guiicon
-> Inici: un resum configurable de la situació financera actual (o una pàgina d'introducció quan no hi hagi obert un fitxer de dades). </para>
+> Inici: un resum configurable de la situació financera actual (o una pàgina d'introducció quan no hi hagi obert un fitxer de dades.) </para>
   </listitem>
 
   <listitem>
@@ -110,11 +105,11 @@
 > <imagedata fileref="institutions_view.png" format="PNG"/> </imageobject
 > <textobject
 > <phrase
->Vista de les institucions</phrase
+>Vista d'institucions</phrase
 > </textobject
 > </inlinemediaobject
 > </guiicon
-> Institucions: totes les institucions i comptes que es mostraran en una jerarquia. </para>
+> Institucions: les institucions i comptes que es mostraran en una jerarquia. </para>
   </listitem>
 
   <listitem>
@@ -129,7 +124,7 @@
 > </textobject
 > </inlinemediaobject
 > </guiicon
-> Comptes: tots els comptes es mostren en una jerarquia. </para>
+> Comptes: els comptes es mostren en una jerarquia. </para>
   </listitem>
 
   <listitem>
@@ -144,7 +139,7 @@
 > </textobject
 > </inlinemediaobject
 > </guiicon
-> Operacions planificades: les factures i ingressos recurrents. </para>
+> Operacions planificades: pagaments, ingressos i transferències recurrents. </para>
   </listitem>
 
   <listitem>
@@ -174,7 +169,7 @@
 > </textobject
 > </inlinemediaobject
 > </guiicon
-> Etiquetes: comptes especials que proporcionen un mitjà addicional a les Categories perquè agrupeu les operacions associades. </para>
+> Etiquetes: comptes especials que proporcionen un mitjà addicional semblant a les categories perquè agrupeu les operacions associades. </para>
   </listitem>
 
   <listitem>
@@ -189,7 +184,7 @@
 > </textobject
 > </inlinemediaobject
 > </guiicon
-> Beneficiaris: tots els beneficiaris utilitzats pel &kmymoney;. Aquestes són totes les persones o organitzacions a les quals pagueu o de les quals rebeu diners. </para>
+> Beneficiaris: els beneficiaris, les persones o organitzacions a les quals pagueu o de les quals rebeu diners. </para>
   </listitem>
 
   <listitem>
@@ -200,11 +195,11 @@
 > <imagedata fileref="ledgers_view.png" format="PNG"/> </imageobject
 > <textobject
 > <phrase
->Vista del llibre major</phrase
+>Vista dels llibres majors</phrase
 > </textobject
 > </inlinemediaobject
 > </guiicon
-> Llibres majors: les operacions del compte. </para>
+> Llibres majors: les operacions de cada compte. </para>
   </listitem>
 
   <listitem>
@@ -215,11 +210,11 @@
 > <imagedata fileref="investments_view.png" format="PNG"/> </imageobject
 > <textobject
 > <phrase
->Vista de les inversions</phrase
+>Vista d'inversions</phrase
 > </textobject
 > </inlinemediaobject
 > </guiicon
-> Inversions: resum de la cartera. </para>
+> Inversions: resum de la cartera </para>
   </listitem>
 
   <listitem>
@@ -234,7 +229,7 @@
 > </textobject
 > </inlinemediaobject
 > </guiicon
-> Informes: una col·lecció d'informes útils, que proporcionen vistes alternatives i personalitzables de les dades financeres. </para>
+> Informes: una col·lecció de visualitzacions diverses i personalitzables de les dades financeres. </para>
   </listitem>
 
   <listitem>
@@ -264,7 +259,7 @@
 > </textobject
 > </inlinemediaobject
 > </guiicon
-> Previsió: aquesta vista proporciona una previsió dels comptes i categories. </para>
+> Previsió: proporciona una previsió de saldos dels comptes i categories. </para>
   </listitem>
 
   <listitem>
@@ -279,15 +274,17 @@
 > </textobject
 > </inlinemediaobject
 > </guiicon
-> Safata de sortida: utilitzada pel mòdul de banca en línia per a proporcionar comentaris sobre els processos en execució. Aquesta vista és proporcionada pel connector KBanking i podria no estar present en el sistema. </para>
+> Safata de sortida: una visualització proporcionada pel connector KBanking que proporciona retroalimentació dels processos en execució. </para>
   </listitem>
 </itemizedlist>
+<para
+>Recordeu que algunes d'aquestes poden no estar presents en el vostre sistema; depèn de com s'hagi configurat i construït la vostra còpia del &kmymoney;. </para>
+</sect2>
 </sect1>
 
-<sect1 id="firsttime.3">
-<title
+<sect1 id="firsttime.newfile"
+><title
 >Crear un fitxer nou</title>
-
 <para
 >El &kmymoney; manté totes les dades sobre les vostres finances en un fitxer. Com s'ha indicat en <link linkend="makingmostof.basicaccounting.personalaccounts"
 >Definir els comptes (registres personals)</link
@@ -296,18 +293,23 @@
 > per a obtenir més detalls sobre els fitxers de dades del &kmymoney;. </para>
 
 <para
+>A més d'aquest fitxer de dades amb totes les dades financeres d'aquest conjunt de comptes, el &kmymoney; utilitza fitxers addicionals per a emmagatzemar dades relatives a la configuració i les preferències de visualització. La ubicació exacta d'aquests fitxers depèn del sistema operatiu o distribució específica. </para>
+
+<para
 >Per a crear un fitxer nou, podeu seleccionar l'element de menú <menuchoice
 ><guimenu
 >Fitxer</guimenu
 ><guimenuitem
 >Nou</guimenuitem
 ></menuchoice
-> o triar la icona Nou <guiicon
+> o triar la icona <guiicon
 ><inlinemediaobject
 ><imageobject
 ><imagedata fileref="new.png" format="PNG"/></imageobject
 ></inlinemediaobject
 ></guiicon
+> <guilabel
+>neu</guilabel
 > de la barra d'eines. A més, si es mostra la pàgina de benvinguda principal, també podreu seleccionar el primer enllaç: «Comença i inicia els comptes». </para>
 
 <para
@@ -315,29 +317,24 @@
 >Assistent de configuració del fitxer nou</quote
 >, el qual us guiarà a través del procés de creació del fitxer. </para>
 
-<para>
-	<screenshot>
-	<screeninfo
+<screenshot>
+  <screeninfo
 >Pàgina de les dades personals</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="newfile.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newfile-1.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
 >Pàgina de les dades personals</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->Com tots els camps són opcionals, podreu utilitzar el &kmymoney; sense introduir cap informació ara. Qualsevol informació introduïda aquí només s'emprarà per a personalitzar el fitxer. En el futur, podrà emprar-se en alguns informes i per a la banca en línia. Si el &kmymoney; requereix informació personal en futures versions i no la troba, se us demanarà que introduïu les dades rellevants en aquell moment. </para>
-
-<para
->Escriviu el nom i adreça o res i premeu <guibutton
->Següent</guibutton
->. </para>
+>Qualsevol informació introduïda a la pàgina <guilabel
+>Dades personals</guilabel
+> només s'emprarà per a personalitzar el fitxer. Tots aquests camps són opcionals, així que podreu utilitzar el &kmymoney; sense introduir cap informació ara. En el futur, aquesta informació podrà emprar-se en alguns informes i per a la banca en línia. Si el &kmymoney; requereix qualsevol informació personal en futures versions i no la troba, se us demanarà que introduïu les dades rellevants en aquell moment. </para>
 
 <para
 >En cas que es tingui una adreça emmagatzemada en el &kaddressbook;, el botó <guibutton
@@ -345,75 +342,84 @@
 > estarà habilitat i en prémer-lo s'importarà tota la informació al &kmymoney;. </para>
 
 <para
+>Un cop hàgiu completat la introducció de les dades, premeu <guibutton
+>Següent</guibutton
+>. </para>
+
+<para
+>Si cal canviar qualsevol d'aquesta informació en el futur, podeu accedir a aquest formulari amb l'element de menú <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Dades personals...</guimenuitem
+></menuchoice
+>. </para>
+
+<para
 >El &kmymoney; admet múltiples divises. Per a establir la divisa base (la divisa que feu servir dia a dia i que es farà servir per als informes), seleccioneu l'entrada apropiada des de la llista proveïda i premeu <guibutton
 >Següent</guibutton
->. Se seleccionarà un valor predeterminat des del &kmymoney; segons la configuració regional. </para>
+>. Se seleccionarà un valor predeterminat basat en la vostra configuració regional, però podeu triar fàcilment una moneda diferent, si és l'apropiada per a la vostra situació. </para>
 
-<para
->A l'exemple següent, s'ha seleccionat el dòlar nord-americà com la divisa base. </para>
-
-<para>
-	<screenshot>
-	<screeninfo
+<screenshot>
+  <screeninfo
 >Pàgina de selecció de la divisa base</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="newfile-2.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newfile-2.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
 >Pàgina de selecció de la divisa base</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->La pàgina següent permet crear un compte inicial. Per a l'usuari típic del &kmymoney;, aquest és un compte corrent. </para>
+>En aquest exemple, s'ha seleccionat el dòlar nord-americà com la divisa base. </para>
 
-<para>
-	<screenshot>
-	<screeninfo
+<para
+>Després de clicar <guibutton
+>Següent</guibutton
+>, la pàgina següent permet crear un compte inicial. Per a l'usuari típic del &kmymoney;, aquest és un compte corrent. </para>
+
+<screenshot>
+  <screeninfo
 >Pàgina de creació del compte corrent</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="newfile-3.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newfile-3.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
 >Pàgina de creació del compte corrent</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->Introduïu el nom del compte i un possible compte o número de referència assignat per la institució que gestiona el compte. Introduïu la data d'obertura del compte i el saldo d'obertura del compte. Per exemple, voldreu utilitzar el &kmymoney; per a gestionar totes les vostres finances a partir del 01/01/2008, després introduïu el saldo del compte al començament d'aquesta data. El número possiblement es pot obtenir d'un extracte en paper. També podeu introduir el nom i el codi bancari de la institució. Aquest últim, conegut com el nombre de ruta (routing number) en els E.U.A. O el codi de classificació (sort code) en el Regne Unit, és opcional i només es requereix per a fins bancaris en línia, però també pot ser útil en importar extractes bancaris en alguns dels formats admesos (OFX, QFX). </para>
+>Introduïu el nom del compte i un possible compte o número de referència assignat per la institució que gestiona el compte. El nom és arbitrari, i és simplement com el compte es referenciarà i mostrarà al &kmymoney;. Introduïu la data d'obertura del compte i el saldo d'obertura del compte. Per exemple, si voleu utilitzar el &kmymoney; per a gestionar totes les vostres finances a partir del 01/01/2008, després introduïu el saldo del compte al començament d'aquesta data. El número possiblement es pot obtenir d'un extracte en paper. També podeu introduir el nom i el codi bancari de la institució. Aquest últim, conegut com el número de ruta (routing number) en els EUA. O el codi de classificació (sort code) en el Regne Unit, és opcional i només es requereix per motius bancaris en línia, però també pot ser útil en importar extractes bancaris en alguns dels formats admesos (OFX, QFX.) </para>
 
 <para
->En cas que no vulgueu configurar un compte inicial, desmarqueu la casella de selecció. </para>
+>En cas que no vulgueu configurar un compte inicial o no tingueu un compte corrent, només cal que desmarqueu la casella de selecció. </para>
 
 <para
 >Un cop acabat, premeu <guibutton
 >Següent</guibutton
 > per a continuar. </para>
 
-<para>
-	<screenshot>
-	<screeninfo
+<screenshot>
+  <screeninfo
 >Pàgina de selecció de la plantilla del compte</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="newfile-4.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newfile-4.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
 >Pàgina de selecció de la plantilla del compte</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
-
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
 >Trieu el país apropiat i la/es plantilla/es del compte. Cada plantilla proporciona un conjunt diferent de categories per a organitzar les finances. Es poden seleccionar múltiples plantilles, fins i tot de diferents països, utilitzant una combinació de &Ctrl; i &Maj; juntament amb el &BER;. La jerarquia del compte que es configura es mostrarà a una part de la vista prèvia de l'assistent. En cas que no pugueu trobar una plantilla que s'adapti a les vostres necessitats, no seleccioneu cap plantilla en aquest moment, i podreu configurar manualment les categories més endavant. </para>
@@ -423,59 +429,55 @@
 >Següent</guibutton
 > per a continuar. </para>
 
-<para
->La pàgina següent de l'assistent permet configurar les preferències de l'usuari. Si seleccioneu la casella de selecció, es mostrarà el diàleg de configuració de l'aplicació un cop hàgiu completat l'assistent de configuració del compte. Premeu <guibutton
->Següent</guibutton
-> si heu acabat i voleu continuar. </para>
-
-<para>
-	<screenshot>
-	<screeninfo
+<screenshot>
+  <screeninfo
 >Pàgina de preferències</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="newfile-5.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newfile-5.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
 >Pàgina de preferències</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->L'última pàgina de l'assistent permet seleccionar la ubicació i el nom del fitxer que s'utilitzaran per a emmagatzemar les dades financeres. Els valors inicials es construiran a partir de la carpeta d'inici i nom d'usuari. En el cas que el fitxer ja existeixi, es mostrarà un avís recordant-vos que seleccioneu un nom d'un fitxer que no existeixi. </para>
+>Aquesta és la pàgina final de l'assistent. Si seleccioneu la casella de selecció <quote
+>Configura les preferències després de finalitzar l'assistent</quote
+>, es mostrarà el diàleg de configuració de l'aplicació després d'haver completat l'assistent de configuració del compte. </para>
 
-<para>
-	<screenshot>
-	<screeninfo
+<screenshot>
+  <screeninfo
 >Pàgina de selecció del nom de fitxer</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="newfile-6.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newfile-6.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
 >Pàgina de selecció del nom de fitxer</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->Ara que ja heu introduït tota la informació rellevant per a crear el fitxer. Premeu <guibutton
->Finalitza</guibutton
-> i el &kmymoney; crearà el fitxer i l'obrirà. </para>
+>En aquest punt, en fer clic a <quote
+>Finalitza</quote
+> s'iniciarà el diàleg «Desa l'emmagatzematge com a...», on triareu el tipus d'emmagatzematge (XML, possiblement amb encriptatge, o SQL) i especificareu els detalls d'aquest mètode d'emmagatzematge, com ara el nom de fitxer i la ubicació o els detalls de la base de dades SQL. Vegeu els capítols <link linkend="details.formats"
+>Formats de fitxer</link
+> i <link linkend="details.database"
+>Formats de fitxer</link
+> per a més informació sobre cada tipus d'emmagatzematge. </para>
 
 </sect1>
 
-<sect1 id="firsttime.4">
-<title
+<sect1 id="firsttime.4"
+><title
 >Crear comptes</title>
-
 <para
->Hi ha múltiples maneres de crear un compte, les quals es descriuen aquí: </para>
+>Hi ha diverses maneres de crear un compte: </para>
 
 <variablelist>
   <varlistentry>
@@ -504,9 +506,11 @@
 ><imagedata fileref="accounts_view.png" format="PNG"/></imageobject
 ></inlinemediaobject
 ></guiicon
-> en el selector de vistes per a mostrar la vista dels comptes. Feu clic dret sobre la icona de l'arbre d'Actius o la icona de l'arbre de Passiu en la vista de la dreta i seleccioneu <guimenuitem
+> en el selector de vistes per a mostrar la vista dels comptes. Feu clic dret sobre la icona de l'arbre d'Actiu o la icona de l'arbre de Passiu en la visualització i seleccioneu <guimenuitem
 >Compte nou</guimenuitem
-> al menú emergent. L'arbre d'Actius conté tots els comptes que són un actiu, com els estalvis i les inversions. El de Passius conté els comptes que representen diners que deveu, com préstecs i targetes de crèdit. Aquests i tots els altres tipus de compte s'analitzaran amb més detall més endavant en aquest manual. </para>
+> al menú emergent. L'arbre d'Actiu conté tots els comptes que són actius, com els estalvis i les inversions. L'arbre de Passiu conté els comptes que representen diners que deveu, com préstecs i targetes de crèdit. Aquests i tots els altres tipus de compte es debaten amb més detall al <link linkend="details.accounts"
+>Capítol de comptes.</link
+> </para>
     </listitem>
   </varlistentry>
 
@@ -525,42 +529,40 @@
 
 <tip>
   <para
->Recordeu que el &kmymoney; utilitza molt els menús contextuals en tota l'aplicació. Si us trobeu encallat mirant de descobrir com fer alguna cosa, intenteu fer clic dret en el lloc on esperaríeu veure una característica. </para>
+>Recordeu que el &kmymoney; utilitza els menús contextuals a tota l'aplicació. Si us trobeu encallat mirant de descobrir com fer alguna cosa, intenteu fer clic amb el &BDR; en el lloc on esperaríeu veure una característica. </para>
 </tip>
 
 <para
->La creació d'un compte nou per a qualsevol dels mètodes obrirà l'<emphasis
+>La creació d'un compte nou per a qualsevol dels mètodes anteriors obrirà l'<emphasis
 >Assistent de compte nou</emphasis
 >. Aquest assistent us portarà pas a pas a través del procés de creació d'un compte, reunint la informació requerida en cada pas. Per a navegar per les pàgines, feu clic als botons <guibutton
 >Següent</guibutton
 > i <guibutton
 >Enrere</guibutton
->. </para>
-
-<para
->Per a continuar, creeu un compte utilitzant qualsevol dels mètodes mencionats. Trobareu una descripció completa de la creació de comptes a la secció <link linkend="details.accounts"
+>. Es pot trobar una descripció completa de creació de comptes a la secció <link linkend="details.accounts"
 >Comptes</link
 >. </para>
 
 <para
->Ara que hi ha un o més comptes en el &kmymoney;, el resum del vostre compte es mostrarà a la vista d'Inici. Podreu crear operacions manualment a la vista <link linkend="details.ledgers"
+>Ara que hi ha un o més comptes en el &kmymoney;, el resum del vostre compte es mostrarà a la vista principal. Podreu crear operacions manualment a la vista <link linkend="details.ledgers"
 >Llibres majors</link
 >, o configurar operacions automàtiques mitjançant la vista <link linkend="details.schedules"
 >Planificacions</link
 >. </para>
 </sect1>
 
-<sect1 id="firsttime.schedules">
-<title
->Planificacions</title>
-
+<sect1 id="firsttime.schedules"
+><title
+>Operacions planificades</title>
 <para
->Anomenada a vegades operació recurrent, una planificació és una operació que ocorre una o més vegades durant un cert període de temps. Un exemple típic és el vostre xec de pagament que rebeu cada mes o setmana. En lloc d'haver d'introduir els detalls de l'operació cada vegada que us paguen, podreu instruir al &kmymoney; perquè creï una planificació que introdueixi una operació quan us paguin. </para>
+>Una <link linkend="details.schedules"
+>operació planificada</link
+>, anomenada a vegades una planificació o operació recurrent, és una operació que ocorre una o més vegades en un interval específic durant un cert període de temps. Un exemple típic és el vostre xec de pagament que rebeu cada mes o setmana, o una factura de subministrament que pagueu cada mes. En lloc d'haver d'introduir els detalls de l'operació cada vegada que us paguen, podreu instruir al &kmymoney; perquè creï una planificació que introdueixi una operació quan us paguin. </para>
 
 <para
 >Per a mantenir les <link linkend="details.schedules"
 >planificacions</link
->, feu clic a la icona Planificacions <guiicon
+>, feu clic a la icona d'operació planificada <guiicon
 ><inlinemediaobject
 ><imageobject
 ><imagedata fileref="schedule_view.png" format="PNG"/></imageobject
@@ -569,10 +571,9 @@
 > al selector de vistes. </para>
 </sect1>
 
-<sect1 id="firsttime.categories">
-<title
+<sect1 id="firsttime.categories"
+><title
 >Categories</title>
-
 <para
 >Per a mantenir les <link linkend="details.categories"
 >categories</link
@@ -590,10 +591,9 @@
 >. </para>
 </sect1>
 
-<sect1 id="firsttime.tags">
-<title
+<sect1 id="firsttime.tags"
+><title
 >Etiquetes</title>
-
 <para
 >Per a mantenir les <link linkend="details.tags"
 >etiquetes</link
@@ -606,47 +606,51 @@
 > al selector de vistes. </para>
 
 <para
->Trobareu una descripció completa d'aquest tema a la secció <link linkend="details.tags"
+>Trobareu una descripció més detallada d'aquest tema a la secció <link linkend="details.tags"
 >Etiquetes</link
 >. </para>
 </sect1>
 
-<sect1 id="firsttime.payees">
-<title
+<sect1 id="firsttime.payees"
+><title
 >Beneficiaris</title>
-
 <para
->Per a mantenir la llista de beneficiaris, feu clic a la icona de Beneficiaris <guiicon
+>Per a mantenir els <link linkend="details.payees"
+>beneficiaris</link
+>, feu clic a la icona Categories <guiicon
 ><inlinemediaobject
-> <imageobject
+><imageobject
 ><imagedata fileref="payees_view.png" format="PNG"/></imageobject
 > </inlinemediaobject
 ></guiicon
 > al selector de vistes. </para>
 
 <para
->Trobareu una descripció completa d'aquest tema a la secció <link linkend="details.payees"
+>Trobareu una descripció més detallada d'aquest tema a la secció <link linkend="details.payees"
 >Beneficiaris</link
 >. </para>
 </sect1>
 
-<sect1 id="firsttime.import">
-<title
->Importar amb el format d'intercanvi ràpid (QIF)</title>
+<sect1 id="firsttime.import"
+><title
+>Importació de dades financeres des d'altres aplicacions</title>
+<para
+>Si actualment feu servir una altra aplicació de gestió financera, segurament el &kmymoney; pot importar moltes o totes les dades d'aquest programa, sempre que es puguin exportar o desar en un format que el &kmymoney; entengui. El més habitual és el format d'intercanvi ràpid (QIF -Quicken Interchange Format-). La majoria dels programes financers poden exportar a aquest format, tot i que els diferents mètodes d'exportació de QIF no s'analitzaran aquí per a abreujar. </para>
 
 <para
->Si actualment feu servir una altra aplicació com a gestor financer, el &kmymoney; pot importar les operacions d'un compte sempre que es puguin exportar o desar en un format que entengui el &kmymoney;. El més habitual és el format d'intercanvi ràpid (QIF -Quicken Interchange Format-). La majoria dels programes financers poden exportar aquest format, tot i que els diferents mètodes d'exportació de QIF no s'analitzaran aquí per a abreujar. </para>
-
-<para
->Trobareu una descripció completa d'aquest tema a la secció <link linkend="details.impexp.qifimp"
+>Trobareu una descripció completa sobre importar dades en aquest format a la secció <link linkend="details.impexp.qifimp"
 >Importar QIF</link
+>. </para>
+
+<para
+>A més d'importar fitxers en format QIF, el &kmymoney; pot obrir directament fitxers de dades utilitzats pel fitxer <link linkend="details.impexp.gnucash"
+>&gnucash;</link
 >. </para>
 </sect1>
 
-<sect1 id="firsttime.find">
-<title
+<sect1 id="firsttime.find"
+><title
 >Cercar operacions</title>
-
 <para
 >El &kmymoney; proporciona una eina útil i potent per a la cerca d'operacions en forma de diàleg de cerca. </para>
 
@@ -669,15 +673,13 @@
 >Trobareu una descripció completa d'aquest tema a la secció <link linkend="details.search"
 >Cercar</link
 >. </para>
-
 </sect1>
 
-<sect1 id="firsttime.reconcile">
-<title
+<sect1 id="firsttime.reconcile"
+><title
 >Conciliació</title>
-
 <para
->En algun moment, voldreu conciliar les operacions que heu introduït amb les operacions llistades en un extracte, sigui un extracte bancari, un extracte de targeta de crèdit, un extracte de préstec o qualsevol altre extracte. La conciliació implica fer coincidir el que heu introduït amb el que llista l'extracte. Si es troben discrepàncies, vosaltres o la persona que va crear l'extracte ha comès un error. </para>
+>En algun moment, voldreu conciliar els vostres registres i detalls d'un compte amb el compte real per a assegurar que coincideixin. Això es fa generalment comparant el compte del &kmymoney; amb un extracte imprès o electrònic del compte emès per la institució, com ara el banc, la targeta de crèdit, el préstec o qualsevol altre extracte. La conciliació implica aparellar el que heu introduït, específicament les operacions des de la conciliació anterior, amb el que l'extracte llista. Si es troba alguna discrepància, vós o la persona que va crear l'extracte ha comès un error. </para>
 
 <para
 >Per a conciliar un compte, primer seleccioneu el compte, sigui des de la vista <guiicon
@@ -686,7 +688,7 @@
 >Llibres majors</guiicon
 >. Després, feu clic a la icona <guiicon
 >Concilia</guiicon
-> a la barra d'eines o seleccioneu l'element de menú <menuchoice
+> a la barra d'eines si és visible, o seleccioneu l'element de menú <menuchoice
 ><guimenu
 >Compte</guimenu
 > <guimenuitem
@@ -695,17 +697,16 @@
 >. </para>
 
 <para
->Trobareu una descripció completa d'aquest tema a la secció <link linkend="details.reconcile"
+>Trobareu una descripció més detallada d'aquest tema a la secció <link linkend="details.reconcile"
 >Conciliació</link
 >. </para>
 </sect1>
 
-<sect1 id="firsttime.backup">
-<title
+<sect1 id="firsttime.backup"
+><title
 >Còpia de seguretat</title>
-
 <para
->Ara que heu creat alguns comptes i introduït les operacions, és una bona idea fer una còpia de seguretat. A causa que el fitxer utilitzat pel &kmymoney; és un fitxer estàndard d'Unix, podreu copiar-lo a una altra ubicació per a fer una còpia de seguretat o utilitzar el diàleg proporcionat pel &kmymoney;. L'ús del diàleg és el mètode preferit per si el &kmymoney; alguna vegada comença a fer servir altres formats de fitxer, com SQL, llavors seria molt més difícil copiar el fitxer manualment. </para>
+>Ara que heu creat alguns comptes i introduït les operacions, és una bona idea fer una còpia de seguretat. A causa que el fitxer utilitzat pel &kmymoney; és un fitxer estàndard del &Linux; (o fitxer &macOS; o &Windows;, depenent del sistema operatiu), podreu copiar-lo a una altra ubicació per a fer una còpia de seguretat o utilitzar el diàleg proporcionat pel &kmymoney;. L'ús del diàleg és el mètode preferit per si el &kmymoney; alguna vegada comença a fer servir altres formats de fitxer, com SQL, llavors seria molt més difícil copiar el fitxer manualment. </para>
 
 <para
 >Per a fer una còpia de seguretat del fitxer mitjançant el &kmymoney;, seleccioneu l'element de menú <menuchoice
@@ -722,14 +723,18 @@
 
 <para
 >El fitxer es desarà a la carpeta especificada amb la data actual adjunta al nom del fitxer perquè sigui fàcil veure la data en què es va realitzar la còpia de seguretat del fitxer. </para>
-</sect1>
-
-<sect1 id="firsttime.launch">
-<title
->Llançar el &kmymoney;</title>
 
 <para
->En general, llançareu el &kmymoney; des d'una icona o un menú d'inici del vostre gestor de finestres. En aquest cas, el comportament predeterminat és que el &kmymoney; obrirà l'últim fitxer que tenia obert. No obstant això, en algunes circumstàncies, voldreu o necessitareu llançar el &kmymoney; des de la línia d'ordres. </para>
+>Per a més detalls sobre el format real del fitxer de dades, i el procés de còpia de seguretat, vegeu els <link linkend="details.formats"
+>Formats de fitxer</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.launch"
+><title
+>Llançar el &kmymoney;</title>
+<para
+>En general, llançareu el &kmymoney; des d'una icona o un menú d'inici del vostre gestor de finestres o entorn d'escriptori. En aquest cas, el comportament predeterminat és que el &kmymoney; obrirà l'últim fitxer que tenia obert. No obstant això, en algunes circumstàncies, voldreu o necessitareu llançar el &kmymoney; des de la línia d'ordres. </para>
 
 <para
 >Per a obtenir una descripció completa de totes les opcions disponibles de la línia d'ordres, vegeu la pàgina man del &kmymoney;. No obstant això, hi ha dos casos especials que descrivim aquí. </para>
@@ -739,7 +744,7 @@
 ><command
 >kmymoney -n</command
 ></title>
-  <para
+<para
 >L'opció <option
 >-n</option
 > li indica al &kmymoney; que no obri l'últim fitxer que tenia obert. Això pot ser útil si el programa es bloqueja a l'inici. </para>
@@ -750,7 +755,7 @@
 ><command
 >kmymoney &lt;camí al fitxer&gt;</command
 ></title>
-  <para
+<para
 >Donar-li al &kmymoney; un nom de fitxer a la línia d'ordres li indicarà que obri aquest fitxer en lloc de l'últim fitxer que tenia obert. Podreu emprar el nom de qualsevol fitxer vàlid del &kmymoney;, com es descriu en el capítol sobre <link linkend="details.formats"
 >Formats de fitxer</link
 >. A més, això es pot fer servir per a importar un fitxer del <link linkend="details.impexp.gnucash"
@@ -759,16 +764,15 @@
 </formalpara>
 </sect1>
 
-<sect1 id="firsttime.newpc">
-<title
+<sect1 id="firsttime.newpc"
+><title
 >Com moure el &kmymoney; a un altre ordinador</title>
 
-<sect2 id="firsttime.newpc.data">
-<title
+<sect2 id="firsttime.newpc.data"
+><title
 >Moure les dades</title>
-
 <para
->Si teniu un ordinador nou, serà molt fàcil moure les dades. De fet, tot el que haureu de fer és copiar el vostre fitxer de dades del &kmymoney;. El nom del fitxer es mostra a la barra de títol quan s'està executant el &kmymoney;, generalment acaba en <filename class="extension"
+>Si teniu un ordinador nou, serà molt fàcil moure les dades. De fet, tot el que haureu de fer és copiar el vostre fitxer de dades del &kmymoney;. El nom del fitxer es mostra a la barra de títol quan s'està executant el &kmymoney;; generalment acaba en <filename class="extension"
 >.kmy</filename
 >. La primera vegada que executeu l'aplicació a l'ordinador nou, haureu d'indicar-li on heu col·locat el fitxer de dades, sigui executant des de la línia d'ordres o des de l'element de menú <menuchoice
 ><guimenu
@@ -788,36 +792,32 @@
 >Recordeu que això assumeix que heu instal·lat la mateixa versió del &kmymoney; a l'ordinador nou que estàveu executant a l'ordinador anterior. La instal·lació d'una versió més nova també hauria de ser segur, però haureu de tenir en compte qualsevol problema relacionat amb aquesta actualització. Qualsevol d'aquests problemes hauria d'estar anotat en les notes de la versió per a la versió nova. </para>
 </sect2>
 
-<sect2 id="firsttime.newpc.settings">
-<title
+<sect2 id="firsttime.newpc.settings"
+><title
 >Moure la configuració</title>
-
+<!-- FIXME: confirm we don't need to consider/mention that there might also be KMM related files under .local/share or
+     even elsewhere.  Also, do we want/need a section on OS specific issues beyond what is mentioned here? -->
 <para
->Si només moveu el fitxer de dades a la màquina nova, com es descriu a la secció anterior, el &kmymoney; funcionarà correctament, però haureu perdut qualsevol opció que hàgiu canviat de la configuració predeterminada al sistema anterior. Per a mantenir aquestes opcions, també haureu de copiar el fitxer de configuració. Aquest fitxer s'anomena <filename
+>Si només moveu el fitxer de dades a la màquina nova, com es descriu a la secció anterior, el &kmymoney; funcionarà correctament, però haureu perdut qualsevol opció de configuració que hàgiu canviat de la configuració predeterminada del sistema anterior. Per a mantenir aquestes opcions, també caldrà copiar el fitxer de configuració. Aquest fitxer s'anomena <filename
 >kmymoneyrc</filename
->. Aquest fitxer estarà en una carpeta amb els altres fitxers de configuració de les aplicacions &kde;. En un sistema &Linux;, aquest estarà a <filename class="directory"
->$KDEHOME/share/config</filename
-> a on <envar
->$KDEHOME</envar
-> generalment és «.config» dins de la carpeta d'inici. Si esteu migrant des d'una versió anterior del &kmymoney; 5.0 o posterior, la ubicació anterior de <envar
->$KDEHOME</envar
-> era <filename class="directory"
+>. La ubicació d'aquest fitxer depèn del sistema operatiu i la distribució. En un sistema &Linux;, aquest estarà a <filename class="directory"
+>.config</filename
+> dins de la carpeta d'inici. Si esteu migrant des d'una versió anterior del &kmymoney; 5.0 o posterior, la ubicació anterior era <filename class="directory"
 >.kde4</filename
 >. </para>
 
-<sect3 id="firsttime.newpc.settings.plugins">
-<title
+<sect3 id="firsttime.newpc.settings.plugins"
+><title
 >Moure la configuració dels connectors</title>
-
 <para
 >Si heu executat algun connector del &kmymoney;, com l'importador o exportador CSV, també es podria haver creat un fitxer de configuració en aquesta mateixa carpeta, com <filename
 >csvimporterrc</filename
 > o <filename
 >csvexporterrc</filename
->. Aquests també s'hauran de copiar a l'ordinador nou. </para>
+>. Aquests fitxers també s'hauran de copiar a l'ordinador nou. </para>
 
 <para
->Igual que el fitxer de dades principal, això assumeix la mateixa versió del connector als dos ordinadors. Les actualitzacions generalment seran segures, però si la funcionalitat del connector ha canviat molt, és aconsellable provar amb cura emprant el fitxer de configuració anterior, per tal d'assegurar-se que el connector es comporta com espereu. </para>
+>Igual que el fitxer de dades principal, això assumeix la mateixa versió del connector als dos ordinadors. Les actualitzacions generalment seran segures, però si la funcionalitat del connector ha canviat molt, és aconsellable provar amb cura emprant el fitxer de configuració anterior, per tal d'assegurar-se que el connector es comporta com espereu. Per descomptat, això s'aplica fins i tot quan s'actualitza la versió de &kmymoney; en un PC individual. </para>
 
 <para
 >Recordeu que en actualitzar des d'una versió anterior a la versió 5.0 o superior, que ha canviat la ubicació dels fitxers de plantilla emprats pel connector per a imprimir xecs. Per a més detalls, consulteu les notes de la versió o el <ulink url="https://www.kmymoney.org/faq.php"
@@ -834,29 +834,36 @@
 </sect2>
 </sect1>
 
-<sect1 id="firsttime.contact">
-<title
->Com contactar amb els desenvolupadors / informar dels errors</title>
+<sect1 id="firsttime.contact"
+><title
+>Com obtenir ajuda / contactar amb els desenvolupadors / informar dels errors</title>
+<para
+>Atès que els canals de suport canvien amb el temps, podeu consultar la <ulink url="https://kmymoney.org/support.html"
+>Pàgina de suport</ulink
+> al <ulink url="https://kmymoney.org/"
+>lloc web del &kmymoney;</ulink
+> la informació més actualitzada sobre com obtenir ajuda sobre el &kmymoney;. </para>
 
-<sect2>
-<title
+<para
+>Si simplement teniu preguntes sobre l'ús del &kmymoney;, voleu confirmar que enteneu com funciona l'aplicació, o necessiteu ajuda per a esbrinar la millor manera de gestionar una situació financera concreta, considereu utilitzar una de les fonts d'informació, fòrums, llistes de correu o canals de xat que figuren a l'enllaç anterior. </para>
+
+<sect2
+><title
 >Com contactar amb els desenvolupadors</title>
+<para
+>Per a preguntes o comentaris generals sobre el &kmymoney;, hi ha una llista de correu d'usuaris &userlist; amb més detalls <ulink url="https://mail.kde.org/mailman/listinfo/kmymoney"
+>aquí</ulink
+>. Aquesta llista és adequada per a preguntes i debats generals. També hi ha una llista de correu dels desenvolupadors &devlist; amb més detalls <ulink url="https://mail.kde.org/mailman/listinfo/kmymoney-devel"
+>aquí</ulink
+>. Aquesta llista està destinada a debats més tècnics. Atès que les respostes sovint s'envien només a la llista, és possible que no rebeu cap resposta llevat que us subscriviu a la llista abans d'enviar la pregunta. </para>
 
 <para
->Per a preguntes o comentaris generals sobre el &kmymoney;, hi ha una llista de correu d'usuaris &userlist; (<ulink url="https://mail.kde.org/mailman/listinfo/kmymoney"
->més detalls aquí</ulink
->). A més, podreu contactar amb els desenvolupadors a través de la seva llista de correu &devlist; (<ulink url="https://mail.kde.org/mailman/listinfo/kmymoney-devel"
->més detalls aquí</ulink
->). Atès que les respostes sovint s'envien només a la llista, és possible que no rebeu cap resposta llevat que us subscriviu a una de les llistes abans d'enviar la pregunta. </para>
-
-<para
->Ens complau escoltar les vostres experiències amb el &kmymoney;. </para>
+>Tingueu en compte que els desenvolupadors generalment controlen els diversos canals de contacte esmentats anteriorment, de manera que el contacte directe per correu electrònic rarament és necessari. No obstant això, estem encantats d'escoltar les vostres experiències utilitzant el &kmymoney; per qualsevol canal que preferiu. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Informar dels errors</title>
-
 <para
 >Per a informar d'un error, utilitzeu la interfície proporcionada pel &kmymoney; seleccionant l'element de menú <menuchoice
 ><guimenu
@@ -871,69 +878,68 @@
 >. </para>
 
 <para
->En qualsevol cas, abans d'informar d'un error, llegiu les directrius a continuació. Seguir-les farà que sigui més probable que els desenvolupadors puguin identificar ràpidament el problema sense haver de demanar-vos més informació. </para>
+>En qualsevol cas, abans d'informar d'un error, llegiu les directrius a continuació. Seguir-les farà que sigui més probable que els desenvolupadors puguin identificar ràpidament el problema sense haver de demanar-vos més informació. També intenteu assegurar-vos que el que esteu informant realment sigui un error (o una sol·licitud de llista de desitjos/millora). Si les coses simplement no funcionen de la manera que espereu, o necessiteu ajuda utilitzant alguna característica del &kmymoney;, si us plau, utilitzeu un dels canals de suport alternatius que s'enumeren a dalt. </para>
 
-<sect3 id="firsttime.bugs.quality">
-<title
+<sect3 id="firsttime.bugs.quality"
+><title
 >Escriure informes d'error d'alta qualitat</title>
-
 <para
 >Encoratgem als usuaris a prendre un temps addicional per a escriure informes d'error d'alta qualitat abans d'enviar-los. Això reduirà l'esforç desaprofitat per ambdues bandes, ja que l'informant i el desenvolupador que ho arreglarà intercanviaran correus electrònics fins que aquesta informació estigui realment al seu lloc. </para>
 
 <para
 >Eli Goldberg va escriure unes directrius per a la redacció canònica dels errors, disponible a <ulink url="https://issues.apache.org/bugwritinghelp.html"
 >https://issues.apache.org/bugwritinghelp.html</ulink
->. En general, estareu ben servit seguint aquestes directrius: </para>
+>. En general, estareu ben servit seguint les directrius i consells d'aquesta pàgina. A sota es repeteixen alguns d'aquests punts: </para>
 
 <formalpara
 ><title
 >Incloure la informació del vostre sistema</title>
-  <para
+<para
 >L'element de menú <menuchoice
 ><guimenu
 >Ajuda</guimenu
 ><guimenuitem
 >Informeu d'un error</guimenuitem
 ></menuchoice
-> ho completarà automàticament, però si preferiu no fer servir aquesta interfície, hi ha diversos elements que haureu d'incloure a l'informe. Ens caldrà saber quin sistema operatiu utilitzeu (&Linux;, &MacOS; o &Windows;), la versió del &kde; així com la versió del &kmymoney; que esteu executant, i la versió de &MacOS; o &Windows;, o el nom i la versió de la distribució de &Linux; amb la versió del nucli. </para>
+> ho completarà automàticament, però si preferiu no fer servir aquesta interfície, hi ha diversos elements que haureu d'incloure a l'informe. Ens caldrà saber quin sistema operatiu utilitzeu (&Linux;, &MacOS; o &Windows;), la versió del &kde; així com la versió del &kmymoney; que esteu executant, i la versió de &MacOS; o &Windows;, o el nom i la versió de la distribució de &Linux; amb la versió del nucli. Aquesta informació és extremadament important, ja que molts errors (així com comportaments mal identificats com a errors) depenen del sistema operatiu. </para>
 </formalpara>
 
 <formalpara
 ><title
 >Incloure una traça inversa per a les fallades</title>
-  <para
+<para
 >La traça inversa sovint és la peça d'informació més útil per a resoldre fallades. </para>
 </formalpara>
 
 <formalpara
 ><title
 >Intentar reproduir-lo</title>
-  <para
->Feu-nos saber si ho heu pogut fer. És útil saber si l'error només va ocórrer una vegada i no s'ha pogut aconseguir que torni a passar o si passa sempre o algunes vegades, però no altres. </para>
+<para
+>Feu-nos saber si ho heu pogut fer. És útil saber si l'error només va ocórrer una vegada i no s'ha pogut aconseguir que torni a passar o si passa sempre o si passa algunes vegades però no altres. </para>
 </formalpara>
 
 <formalpara
 ><title
 >Incloure els passos específics</title>
-  <para
+<para
 >Aquest és un informe d'error: <quote
 >I entered a transaction, and &kmymoney; crashed.</quote
 > Un informe d'error molt millor és: <quote
->Using the transaction form, I entered a new transaction in my Credit Card account. I selected the Transfer tab, entered in an amount, then changed to the Deposit tab, and back to the Transfer tab. When I returned to the Transfer tab, &kmymoney; crashed. This bug is fully reproducible for me.</quote
+>Using the transaction form, I entered a new transaction in my Credit Card account. I selected the Transfer tab, entered an amount, then changed to the Deposit tab, and back to the Transfer tab. When I returned to the Transfer tab, &kmymoney; crashed. This bug is fully reproducible for me.</quote
 > </para>
 </formalpara>
 
 <formalpara
 ><title
 >Expliqueu-nos què esperàveu quan ha succeït</title>
-  <para
->En alguns casos, això és obvi, però en errors més subtils, de vegades veureu un informe d'error on no és obvi el que l'informant esperava que passés. Heu de dir sempre què creieu que hauria d'haver succeït. </para>
+<para
+>En alguns casos, això és obvi, però en errors més subtils, de vegades veureu un informe d'error on no és obvi el que l'informant esperava que passés. Heu de dir sempre què creieu que hauria d'haver succeït, així com què ha passat. </para>
 </formalpara>
 
 <formalpara
 ><title
 >Considereu executar-lo amb la depuració habilitada</title>
-  <para
+<para
 >En compilar una versió configurada amb <option
 >--enable-debug=full</option
 >, podreu assegurar-vos que es generen les millors traces inverses possibles. Si trobeu una fallada, executeu el &kmymoney; de nou des de «gdb» i reproduïu la fallada. Quan es bloquegi, escriviu <quote

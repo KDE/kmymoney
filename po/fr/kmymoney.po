@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-27 01:58+0000\n"
+"POT-Creation-Date: 2025-01-30 01:54+0000\n"
 "PO-Revision-Date: 2025-01-22 15:03+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -8425,7 +8425,7 @@ msgstr "Opération répartie"
 
 #: kmymoney/mymoney/splitmodel.cpp:118
 #: kmymoney/mymoney/storage/journalmodel.cpp:201
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1049
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1048
 #, kde-format
 msgid "*** UNASSIGNED ***"
 msgstr "*** NON ASSIGNÉ ***"
@@ -12633,8 +12633,8 @@ msgid "Get Transactions"
 msgstr "Obtenir les opérations"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:74
-#: kmymoney/plugins/views/reports/core/querytable.cpp:851
-#: kmymoney/plugins/views/reports/core/querytable.cpp:991
+#: kmymoney/plugins/views/reports/core/querytable.cpp:850
+#: kmymoney/plugins/views/reports/core/querytable.cpp:990
 #, kde-format
 msgid "Transfer"
 msgstr "Virement"
@@ -15228,13 +15228,13 @@ msgid "Include subaccounts"
 msgstr "Inclure les sous-comptes"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:145
-#: kmymoney/views/kpayeesview_p.h:804
+#: kmymoney/views/kpayeesview_p.h:808
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<qt>Voulez-vous enregistrer les modifications pour <b>%1</b> ?</qt>"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
-#: kmymoney/views/kpayeesview_p.h:805 kmymoney/views/ktagsview.cpp:290
+#: kmymoney/views/kpayeesview_p.h:809 kmymoney/views/ktagsview.cpp:290
 #, kde-format
 msgid "Save changes"
 msgstr "Enregistrer les modifications"
@@ -16185,19 +16185,19 @@ msgid "Starting Market Value"
 msgstr "Valeur de marché de départ"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
-#: kmymoney/plugins/views/reports/core/querytable.cpp:988
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1047
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2045
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2064
+#: kmymoney/plugins/views/reports/core/querytable.cpp:987
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1046
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2044
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2063
 #, kde-format
 msgid "Transfer from %1"
 msgstr "Virement depuis %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:222
-#: kmymoney/plugins/views/reports/core/querytable.cpp:989
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1046
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2044
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2063
+#: kmymoney/plugins/views/reports/core/querytable.cpp:988
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1045
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2043
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2062
 #, kde-format
 msgid "Transfer to %1"
 msgstr "Virement vers %1"
@@ -16283,53 +16283,53 @@ msgctxt "@title:column report header"
 msgid "Price"
 msgstr "Cours"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:578
-#: kmymoney/plugins/views/reports/core/querytable.cpp:591
+#: kmymoney/plugins/views/reports/core/querytable.cpp:577
+#: kmymoney/plugins/views/reports/core/querytable.cpp:590
 #, kde-format
 msgid "[No Tag]"
 msgstr "[Aucune étiquette]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:604
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1877
+#: kmymoney/plugins/views/reports/core/querytable.cpp:603
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1876
 #, kde-format
 msgid "Month of %1"
 msgstr "Mois de %1"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:605
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1878
+#: kmymoney/plugins/views/reports/core/querytable.cpp:604
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1877
 #, kde-format
 msgid "Week of %1"
 msgstr "Semaine de %1"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:830
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1052
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1195
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2006
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2178
+#: kmymoney/plugins/views/reports/core/querytable.cpp:829
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1051
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1194
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2005
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2177
 #, kde-format
 msgid "No Institution"
 msgstr "Pas d'établissement"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:834
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2017
+#: kmymoney/plugins/views/reports/core/querytable.cpp:833
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2016
 #, kde-format
 msgid "[Empty Payee]"
 msgstr "[Bénéficiaire vide]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:868
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2050
+#: kmymoney/plugins/views/reports/core/querytable.cpp:867
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2049
 #, kde-format
 msgid "[Split Transaction]"
 msgstr "[Opération Répartie]"
 
+#: kmymoney/plugins/views/reports/core/querytable.cpp:868
 #: kmymoney/plugins/views/reports/core/querytable.cpp:869
-#: kmymoney/plugins/views/reports/core/querytable.cpp:870
 #, kde-format
 msgctxt "Split transaction"
 msgid "Split"
 msgstr "Répartition"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1790
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1789
 #, kde-format
 msgctxt "No institution"
 msgid "None"
@@ -20446,7 +20446,7 @@ msgstr "Supprimer le bénéficiaire"
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>Voulez-vous vraiment fusionner les bénéficiaires sélectionnés ?"
 
-#: kmymoney/views/kpayeesview.cpp:604 kmymoney/views/kpayeesview_p.h:580
+#: kmymoney/views/kpayeesview.cpp:604 kmymoney/views/kpayeesview_p.h:584
 #, kde-format
 msgid "Merge Payees"
 msgstr "Fusionner les bénéficiaires"
@@ -20737,17 +20737,26 @@ msgctxt "Placeholder text"
 msgid "Search"
 msgstr "Rechercher"
 
-#: kmymoney/views/kpayeesview_p.h:360 kmymoney/views/ktagsview.cpp:213
+#: kmymoney/views/kpayeesview_p.h:187
+#, fuzzy, kde-format
+#| msgid "Add"
+msgctxt ""
+"@action:button Replacement for Add button on match tab to avoid duplicate "
+"assignment of Alt+A"
+msgid "Add"
+msgstr "Ajouter"
+
+#: kmymoney/views/kpayeesview_p.h:364 kmymoney/views/ktagsview.cpp:213
 #, kde-format
 msgid "Balance: %1"
 msgstr "Solde : %1"
 
-#: kmymoney/views/kpayeesview_p.h:404 kmymoney/views/ktagsview.cpp:257
+#: kmymoney/views/kpayeesview_p.h:408 kmymoney/views/ktagsview.cpp:257
 #, kde-format
 msgid "Balance: %1%2"
 msgstr "Solde : %1%2"
 
-#: kmymoney/views/kpayeesview_p.h:489
+#: kmymoney/views/kpayeesview_p.h:493
 #, kde-format
 msgid ""
 "At least one transaction/scheduled transaction or loan account is still "
@@ -20760,18 +20769,18 @@ msgstr ""
 "Cependant, au moins un bénéficiaire doit rester pour que les opérations ou "
 "opérations récurrentes puissent être réassignées."
 
-#: kmymoney/views/kpayeesview_p.h:576
+#: kmymoney/views/kpayeesview_p.h:580
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
 msgstr ""
 "Impossible de réassigner le bénéficiaire pour l'opération ou la répartition"
 
-#: kmymoney/views/kpayeesview_p.h:580
+#: kmymoney/views/kpayeesview_p.h:584
 #, kde-format
 msgid "Nothing to merge."
 msgstr "Rien à fusionner."
 
-#: kmymoney/views/kpayeesview_p.h:663
+#: kmymoney/views/kpayeesview_p.h:667
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "Impossible de supprimer le(s) bénéficiaire(s)"
@@ -21346,7 +21355,7 @@ msgstr "Le numéro du chèque utilisé pour cette opération."
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Le numéro de chèque <b>%1</b> a déjà été utilisé sur ce compte."
 
-#: kmymoney/views/newspliteditor.cpp:781
+#: kmymoney/views/newspliteditor.cpp:782
 #: kmymoney/views/newtransactioneditor.cpp:170
 #, kde-format
 msgctxt "@info:tooltip Protected"

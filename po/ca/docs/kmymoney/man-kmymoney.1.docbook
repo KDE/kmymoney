@@ -93,7 +93,7 @@
 ><surname
 >Ostroff</surname
 > <contrib
->Documentació.</contrib
+>Documentació i suport d'usuaris.</contrib
 > <email
 >ostroffjh@users.sourceforge.net</email
 > </author>
@@ -135,9 +135,9 @@
 >arniing@users.sourceforge.net</email
 ></author>
 
-    These persons were not previously listed as authors here, but are included
-    in credits.docbook.  They should either be dropped from there or included
-    here.
+    These persons were not previously listed as authors here, but are included in
+    credits.docbook and as authors of some chapter(s).  They should either be dropped
+    from there or included here.
 
     <author
 ><firstname
@@ -145,7 +145,7 @@
 ><surname
 >Jones</surname>
     <contrib
->Reports.  OFX Import.  Online Quotes.  Documentatation.  Previous versions.</contrib>
+>Reports.  OFX Import.  Online Quotes.  Documentation.  Previous versions.</contrib>
     <email
 >acejones@users.sourceforge.net</email
 ></author>
@@ -164,9 +164,9 @@
     There are eight additional people in credits.docbook for "Special Thanks."
     Should any of them be included here?  -->
 <date
->17 de juny de 2016</date>
+>1 de desembre de 2024</date>
 <releaseinfo
->KMyMoney 5.0</releaseinfo>
+>KMyMoney 5.2</releaseinfo>
 </refentryinfo>
 
 <refmeta>
@@ -224,7 +224,6 @@
 ></option
 ></group
 > </cmdsynopsis>
-
 </refsynopsisdiv>
 
 <refsect1>
@@ -232,8 +231,7 @@
 >Descripció</title>
 
 <para
->El &kmymoney; és el gestor de les finances personals per al &kde;. Proporciona les funcions necessàries per a consolidar els talonaris de xecs, gestionar els préstecs personals i ordenar els ingressos i despeses, utilitzant una interfície gràfica d'usuari similar a un talonari de xecs.</para>
-
+>El &kmymoney; és el gestor de les finances personals per al &kde;. Proporciona les funcions necessàries per a consolidar els talonaris de xecs, gestionar els préstecs personals i ordenar els ingressos i despeses, utilitzant una interfície gràfica d'usuari similar a un talonari de xecs. </para>
 </refsect1>
 
 <refsect1>
@@ -249,7 +247,7 @@
 ></term>
 <listitem>
 <para
->L'idioma a emprar. </para>
+>L'idioma a emprar.</para>
 </listitem>
 </varlistentry>
 
@@ -260,7 +258,7 @@
 ></term>
 <listitem>
 <para
->No obris el darrer fitxer utilitzat. </para>
+>No obris el darrer fitxer utilitzat.</para>
 </listitem>
 </varlistentry>
 
@@ -271,7 +269,7 @@
 ></term>
 <listitem>
 <para
->Activa els temporitzadors de rendiment. </para>
+>Activa els temporitzadors de rendiment.</para>
 </listitem>
 </varlistentry>
 
@@ -282,7 +280,7 @@
 ></term>
 <listitem>
 <para
->No captura globalment les excepcions no capturades. </para>
+>No captura globalment les excepcions no capturades.</para>
 </listitem>
 </varlistentry>
 
@@ -320,16 +318,16 @@
 <simplelist>
 <member
 >La documentació completa per al &kmymoney; es manté com un manual en el format docbook. Si es troba adequadament instal·lat el programa &khelpcenter;, l'ordre <userinput
-><command
+> <command
 >khelpcenter</command
 > <parameter
 >help:/kmymoney</parameter
-></userinput
+> </userinput
 > hauria de donar accés a tot el manual. De manera alternativa, podeu navegar pel manual emprant el &konqueror; donant-li l'<acronym
 >URL</acronym
 > <ulink url="help:/kmymoney"
 >help:/kmymoney</ulink
-></member>
+> </member>
 <member
 >kf5options(7)</member>
 <member

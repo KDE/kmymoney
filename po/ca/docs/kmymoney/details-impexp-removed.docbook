@@ -1,0 +1,53 @@
+<!-- This is stuff that was commented out in details.impexp.docbook, from the QIF
+     import section.  I am moving it here to clean up that file, but it is still not
+     sure if this material is still needed anywhere.  I've modified the nesting to
+     make it look more legal.  -->
+
+<sect1 id="details.impexp.removed">
+<sect1info>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+</sect1info>
+<title
+>Material eliminat</title>
+
+<sect2
+><title
+>Acceptació de les operacions importades</title>
+
+<para>
+<screenshot>
+  <screeninfo
+>Operacions importades</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qifimportverify.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Operacions importades</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<para
+>Algunes de les operacions podrien estar en vermell al llibre major. Això es deu al fet que se'ls ha d'assignar una categoria. L'importador no ha pogut assignar automàticament cap categoria basada en l'historial passat d'operacions. </para>
+
+<para
+>Les dades de l'operació es poden editar o fins i tot suprimir si cal. Per a editar una operació simplement feu doble clic a l'entrada o premeu retorn quan l'entrada estigui ressaltada. Un cop acabat feu clic a <guibutton
+>D'acord</guibutton
+> per a acceptar les operacions importades o <guibutton
+>Cancel·la</guibutton
+> per a eliminar les operacions importades. </para>
+</sect2>
+
+
+<sect2
+><title
+>Importar les inversions</title>
+<para
+>Cal tenir en compte que si esteu important un fitxer amb operacions d'inversió, aquestes inversions primer hauran d'existir al fitxer del &kmymoney;. S'utilitza el símbol comercial per a aparellar, així que assegureu-vos que el símbol al &kmymoney; sigui exactament el mateix que al fitxer que esteu important. </para>
+</sect2>
+</sect1>
+

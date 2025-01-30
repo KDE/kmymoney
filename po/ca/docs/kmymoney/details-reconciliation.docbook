@@ -4,25 +4,38 @@
   <authorgroup>
     <author
 >&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->21 de juliol de 2010</date>
+>1 de desembre de 2024</date>
   <releaseinfo
->4.5</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Conciliació</title>
 
-<sect1 id="details.reconcile.whatis">
-<title
+<sect1 id="details.reconcile.whatis"
+><title
 >Què és una conciliació?</title>
+<para
+>La conciliació és el procés d'assegurar que els vostres registres d'un compte estiguin d'acord amb els registres de la institució d'aquest compte. Això es fa fent coincidir les operacions que heu introduït al &kmymoney; amb les operacions llistades d'aquest compte per a la institució. Això es fa molt habitualment amb la llista d'operacions d'un extracte del compte, ja sigui un extracte bancari, extracte de la targeta de crèdit, extracte del préstec o qualsevol altre extracte. També es pot fer amb una llista en línia del compte, encara que això és menys habitual. Si es troben discrepàncies, vostè o la persona que va crear l'extracte haurà comès un error. </para>
 
 <para
->La conciliació és el procés d'aparellar les operacions que heu introduït al &kmymoney; amb les operacions llistades d'aquest compte per a la institució. Això es fa més habitualment amb la llista d'operacions d'un extracte del compte, ja sigui un extracte bancari, extracte de la targeta de crèdit, extracte del préstec o qualsevol altre extracte. També es pot fer amb una llista en línia del compte, encara que això és menys habitual. Si es troben discrepàncies, vostè o la persona que va crear l'extracte haurà comès un error. </para>
+>Completar el procés de conciliació d'un compte vol dir que esteu segur que els registres d'aquest compte, actualitzats a la data de la conciliació, són correctes. Això es fa normalment per a comptes en institucions com bancs o botigues, però alguns usuaris trien fer-ho per a altres comptes, com ara diners en efectiu. En aquest cas, significa que esteu segur dels registres fins a la data de conciliació, i segur que no trobareu més rebuts d'efectiu, i que el saldo del compte en el &kmymoney; és el mateix que la quantitat real d'efectiu a la butxaca. </para>
 
 <para
->Per a conciliar un compte, trieu el compte a la llista desplegable i feu clic a la icona Concilia <guiicon
+>La conciliació no és necessària per a cap compte, però en conciliar un compte de forma rutinària, com ara mensual, tindreu menys registres per a examinar si trobeu una discrepància. </para>
+</sect1>
+
+<sect1 id="details.reconcile.wizard"
+><title
+>L'assistent de conciliació</title>
+<para
+>Tingueu en compte que a mesura que progresseu en el procés de conciliació, hi ha múltiples camins possibles per a introduir totes les dades necessàries, especialment si necessiteu trobar i corregir alguna discrepància entre el &kmymoney; i l'extracte. Tots són vàlids, i cap és millor que un altre. Amb el temps, com amb moltes activitats dins del &kmymoney; trobareu la manera que millor s'ajusta a les vostres necessitats i l'enfocament per a gestionar les vostres finances. </para>
+
+<para
+>Per a conciliar un compte, seleccioneu el compte a la vista de comptes o d'institucions, o visualitzeu-lo en el registre, i feu clic a la icona Concilia <guiicon
 ><inlinemediaobject
 ><imageobject
 ><imagedata fileref="reconcile.png" format="PNG"/></imageobject
@@ -34,179 +47,213 @@
 ><guimenuitem
 >Concilia...</guimenuitem
 ></menuchoice
-> o bé mitjançant la drecera <keycombo
+> o utilitzeu la drecera <keycombo
 >&Ctrl;&Maj;<keycap
 >R</keycap
 ></keycombo
 >. </para>
-</sect1>
 
-<sect1 id="details.reconcile.wizard">
-<title
->L'assistent de conciliació</title>
 <para
->Això obrirà l'assistent de la conciliació. La primera pàgina de l'assistent descriu breument el procés que seguireu. Feu clic a <guibutton
+>Això obrirà l'assistent de conciliació. La primera pàgina de l'assistent descriu breument el procés que seguireu. Feu clic a <guibutton
 >Següent</guibutton
 > per a iniciar realment l'assistent. </para>
 
-<para>
 <screenshot>
-	<screeninfo
->Assistent de conciliació</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="reconcile1.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Assistent de conciliació</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo
+>Entrada a l'assistent de conciliació</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="reconcile1.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Entrada a l'assistent de conciliació</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
-</para>
 
-<sect2 id="details.reconcile.wizard.statement">
-<title
+<sect2 id="details.reconcile.wizard.statement"
+><title
 >Detalls de l'extracte</title>
+<para
+>La data d'extracte inicial presentada pel &kmymoney; és típicament 30 dies després de la conciliació més recent per a aquest compte. El saldo de partida presentat és el saldo final a partir de la conciliació anterior. Això es calcula com la suma de les quantitats de totes les operacions del compte que estan liquidades o reconciliades, fins a la data de la conciliació anterior. El saldo final presentat és el saldo inicial més les quantitats (afegides per a ingressos i restades per a reintegraments) de totes les operacions liquidades en el compte des de la conciliació anterior. (Això també inclou les operacions liquidades abans de la data de la conciliació anterior.) Si el saldo inicial no coincideix amb l'extracte, llavors cal que confirmeu que la conciliació anterior es va fer correctament. </para>
+
+<para
+>Teòricament, el saldo final en el moment de la conciliació anterior no hauria de ser diferent del saldo inicial en aquest moment. No obstant això, el &kmymoney; no impedeix que feu canvis a les operacions abans de la conciliació més recent. Les edicions d'aquest tipus són la causa habitual d'aquestes discrepàncies. En algun moment, el &kmymoney; probablement es millorarà per a fer-lo molt més obvi per a l'usuari si es fa aquesta edició. </para>
+
 <para
 >La data de l'extracte, el saldo inicial i el saldo final es poden trobar a l'extracte. Comproveu que les xifres coincideixin i feu clic al botó <guibutton
 >Següent</guibutton
->. Si les xifres no coincideixen, introduïu les que es llisten a l'extracte i feu clic al botó <guibutton
+>. Si el saldo inicial no coincideix, vegeu els paràgrafs anteriors. Si la data de l'extracte o el saldo final no coincideixen, introduïu les xifres que figuren a l'extracte i feu clic a <guibutton
 >Següent</guibutton
 >. </para>
 
-<para>
 <screenshot>
-	<screeninfo
->Assistent de conciliació</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="reconcile2.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Assistent de conciliació</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo
+>Informació iniciant l'assistent de conciliació</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="reconcile2.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Informació iniciant l'assistent de conciliació</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
-</para>
 </sect2>
 
-<sect2 id="details.reconcile.wizard.interest">
-<title
+<sect2 id="details.reconcile.wizard.interest"
+><title
 >Interès</title>
 <para
->Si la conciliació de l'extracte es troba en un compte bancari o en qualsevol compte amb despeses d'interessos i/o càrrecs, llavors introduïu aquests valors en els camps corresponents. Es podrà assignar una categoria per a cadascun d'aquests imports. </para>
+>Si esteu conciliant un compte bancari o qualsevol compte amb interessos i/o càrrecs o despeses, introduïu aquests valors en els camps adequats. Ambdós camps són opcionals, però si s'utilitzen, llavors s'ha d'assignar una categoria per a cada quantitat introduïda. Tingueu en compte que aquestes quantitats ja s'han introduït si importeu operacions directament o a través d'un fitxer descarregat, en aquest cas no les hauríeu d'introduir aquí de nou, o tindreu una operació duplicada. </para>
 
-<note>
+<note
+><title
+>Interès o càrrec</title>
 <para
->El camp de l'interès és per a l'interès que heu guanyat. Si heu de pagar interessos, &pex;, per a un compte de targeta de crèdit, els haureu d'introduir com a un càrrec. </para>
+>El camp de l'interès és per a l'interès que heu guanyat. Si heu de pagar interessos, &pex;, per a un compte de targeta de crèdit, l'haureu d'introduir com a càrrec. En tots dos casos, cal triar la categoria adequada per a l'import. </para>
 </note>
 
-<para>
 <screenshot>
-	<screeninfo
->Assistent de conciliació</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="reconcile3.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Assistent de conciliació</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo
+>Interès i càrrecs de l'assistent de conciliació</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="reconcile3.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Interès i càrrecs de l'assistent de conciliació</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
-</para>
 
 <para
 >Feu clic a <guibutton
 >Continua</guibutton
-> per a començar a aparellar l'extracte amb el que heu introduït. Cal tenir en compte que això completarà l'Assistent per a la conciliació, però no el procés de la conciliació. També canviarà la vista del llibre major per a només mostrar les operacions que encara no s'han marcat com a conciliades. Com es descriu a continuació, encara caldrà que liquideu les operacions i després indicar-li al &kmymoney; que el compte està conciliat. </para>
+> per a començar a aparellar l'extracte amb el que heu introduït. Cal tenir en compte que això completarà l'Assistent per a la conciliació, però no el procés de la conciliació. En aquest punt, el &kmymoney; mostra la vista de llibres majors d'aquest compte, però canvia la visualització del llibre major de dues maneres. En primer lloc, només mostra les operacions que encara no s'han marcat com a conciliades. En segon lloc, la línia sota la pantalla del llibre major principal mostra el saldo final de l'extracte a l'esquerra, el saldo liquidat del compte al centre i la diferència entre els dos a la dreta. Com es descriu a continuació, encara necessiteu liquidar les operacions i després dir-li a &kmymoney; que el compte està conciliat. </para>
 </sect2>
 
-<sect2 id="details.reconcile.wizard.clearing">
-<title
+<sect2 id="details.reconcile.wizard.clearing"
+><title
 >Liquidar les operacions</title>
 <para
->Durant la conciliació, es podrà editar qualsevol operació perquè coincideixi amb l'extracte, i es podran crear operacions noves com de costum. Per a marcar una operació com a liquidada, feu clic a la columna <guilabel
->L</guilabel
-> a la vista de llista. Una operació es liquidarà quan coincideixi amb l'operació a l'extracte. </para>
+>Durant la conciliació, qualsevol operació es pot editar perquè coincideixi amb l'extracte, i es poden crear noves operacions com de costum. Per a marcar una operació com a liquidada, feu clic a la columna <guilabel
+>C</guilabel
+> de l'operació al llibre major. També podeu seleccionar el menú <menuchoice
+><guimenu
+>Operacions</guimenu
+></menuchoice
+> o fer clic amb el botó dret a l'operació per a mostrar el menú contextual «Opcions d'operació», i després seleccionar <menuchoice
+><shortcut
+> <keycombo
+> <keysym
+>&Ctrl;</keysym
+> <keysym
+>&Alt;</keysym
+> <keysym
+>&Space;</keysym
+> </keycombo
+></shortcut
+> <guisubmenu
+>Marca l'operació com a...</guisubmenu
+> <guimenuitem
+>Liquidada</guimenuitem
+> </menuchoice
+>; es considera que una operació està liquidada quan coincideix amb l'operació en el vostre extracte. </para>
 
 <para
->El marc de l'ordre (just a sota de l'àrea de la llista d'operacions) mostrarà l'import de l'extracte a l'esquerra, l'import liquidat al centre i la diferència a la dreta. A mesura que marqueu les operacions com a liquidades, aquests valors s'actualitzaran per a mostrar el canvi. </para>
+>A mesura que marqueu les operacions com a liquidades, s'actualitzaran les quantitats liquidades i les diferències que es mostren a sota del llibre major. </para>
 
 <para
->No obstant això, cal tenir en compte que, atès que la conciliació és el procés d'aparellar les dades del compte amb les d'un extracte, es desaran els canvis en qualsevol operació amb dates posteriors a la data de l'extracte que vàreu introduir en l'assistent, però no tindran cap efecte en l'import liquidat que es mostra en el marc de l'ordre. </para>
+>No obstant això, cal tenir en compte que, atès que la conciliació és el procés d'aparellar les dades del compte amb les d'un extracte, l'import liquidat que es mostra a sota del llibre major és l'import liquidat en la data de l'extracte. Els canvis a qualsevol operació es desaran amb una data posterior a la data de l'extracte que vàreu introduir en l'assistent, però no tindran cap efecte en l'import liquidat que es mostra sota de la visualització del llibre major. </para>
 
 <screenshot>
-	<screeninfo
->Assistent de conciliació</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="reconcile4.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Assistent de conciliació</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo
+>Llibre major durant la conciliació</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="reconcile4.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Llibre major durant la conciliació</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 </sect2>
 
-<sect2 id="details.reconcile.complete">
-<title
+<sect2 id="details.reconcile.complete"
+><title
 >Completar la conciliació</title>
 
-<sect3 id="details.reconcile.finish">
-<title
+<sect3 id="details.reconcile.finish"
+><title
 >Finalitzar la conciliació</title>
 <para
 >Quan la diferència entre l'extracte i el saldo liquidat sigui zero, el compte es conciliarà i podreu prémer el botó <guibutton
 >Finalitza</guibutton
->. Quan ho feu, el &kmymoney; prendrà totes les operacions que s'han marcat com a liquidades i les marcarà com a conciliades, i el valor a la columna <guilabel
+>. Quan ho feu, el &kmymoney; prendrà totes les operacions que s'han marcat com a liquidades (només les que tenen una data anterior a la data de l'extracte) i les marcarà com a conciliades, i el valor a la columna <guilabel
 >L</guilabel
-> canviarà de <quote
->L</quote
-> a <quote
->C</quote
-> per a reflectir el canvi. A més, desarà els canvis i registres del compte que s'ha conciliat. (Encara haureu de desar el fitxer per a desar permanentment tots els canvis). </para>
+> canviarà de «L» a «C». A més, desarà els canvis i registres del compte que s'ha conciliat. (Encara haureu de desar el fitxer per a desar permanentment tots els canvis). </para>
 </sect3>
 
-<sect3 id="details.reconcile.postpone">
-<title
+<sect3 id="details.reconcile.report"
+><title
+>L'informe de conciliació</title>
+<para
+>L'última cosa que fa l'assistent de conciliació és presentar un informe, en forma d'una finestra emergent amb dues pestanyes. </para>
+
+<sect4
+><title
+>La pestanya Resum</title>
+<para
+>Aquesta pestanya mostra un resum de la conciliació, inclosos els saldos d'inici i final, i el nombre i l'import dels pagaments i dipòsits: liquidats, pendents i els posteriors a la data de conciliació. </para>
+</sect4>
+
+<sect4
+><title
+>La pestanya Detalls</title>
+<para
+>Aquesta pestanya mostra una llista de pagaments i càrrecs pendents. Aquestes són operacions sense marcar abans de la data d'extracte de la conciliació. </para>
+</sect4>
+</sect3>
+
+<sect3 id="details.reconcile.postpone"
+><title
 >Posposar la conciliació</title>
 <para
->Si teniu problemes per a completar la conciliació, o necessiteu reunir informació addicional abans de poder completar el procés, podreu posposar-la per a després fent clic al botó <guibutton
->Posposa la conciliació</guibutton
->. Quan ho feu, el &kmymoney; recordarà els valors que vàreu introduir, no marcarà les operacions autoritzades com a conciliades i tornarà el llibre major a la seva vista normal. Si sortiu del &kmymoney; abans de fer clic a <guibutton
+>Si teniu problemes per a completar la conciliació, o necessiteu reunir informació addicional abans de poder completar el procés, podreu posposar-la per a un moment posterior fent clic al botó <guibutton
+>Posposa</guibutton
+>. Quan ho feu, el &kmymoney; recordarà els valors que vàreu introduir, no marcarà les operacions liquidades com a conciliades i tornarà el llibre major a la seva vista normal. Si sortiu del &kmymoney; abans de fer clic a <guibutton
 >Finalitza</guibutton
 > o <guibutton
->Posposa la conciliació</guibutton
+>Posposa</guibutton
 >, tindrà el mateix efecte que fer clic a <guibutton
->Posposa la conciliació</guibutton
+>Posposa</guibutton
 >. Qualsevol edició que hàgiu realitzat, com marcar operacions liquidades o introduir operacions noves, no es tocarà, i encara les podreu desar abans de sortir del &kmymoney;. No obstant això, haureu d'executar de nou l'assistent per a la conciliació, per a conciliar el compte. </para>
 
 <para
->Quan executeu l'assistent per a la conciliació en aquest compte la pròxima vegada, el &kmymoney; recordarà els valors que vàreu introduir quan es va executar l'assistent anteriorment i, si cal, podreu canviar-los. En aquest cas, la pantalla inicial de l'assistent serà diferent, per a recordar això. </para>
+>Si feu clic a <guilabel
+>Posposa</guilabel
+>, la pròxima vegada que executeu l'assistent de conciliació en aquest compte, el &kmymoney; recordarà els valors que vàreu introduir quan es va executar l'assistent anteriorment i, si cal, podreu canviar-los. En aquest cas, la pantalla inicial de l'assistent serà diferent, per a recordar això. </para>
 
 <screenshot>
-	<screeninfo
->Assistent de conciliació</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="reconcile-redo.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Assistent de conciliació</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo
+>finalització de l'assistent de conciliació</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="reconcile-redo.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>conciliació;finalització de l'assistent</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
-
 </sect3>
 </sect2>
 </sect1>
-
 </chapter>
-
