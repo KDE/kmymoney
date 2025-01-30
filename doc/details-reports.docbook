@@ -446,7 +446,7 @@
   The Range subtab has two sections, <guilabel>Date range</guilabel> and
   <guilabel>Data range</guilabel> for controlling the limits and subdivisions of the
   displayed data.  Note that this only controls the display, to control the data used
-  by &kmymoney; to created the report, see the section on the <link
+  by &kmymoney; to create the report, see the section on the <link
   linkend="details.reports.config.report">Filters tab</link>.
 </para>
 

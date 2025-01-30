@@ -366,7 +366,7 @@
 
       <para>
         For this and the other account lists on the Home View, the display will
-        include the account name, date last reconcilied, and current balance.  In
+        include the account name, date last reconciled, and current balance.  In
         addition, there may be other columns displayed, as configured in the
         <guilabel>Account information display</guilabel> Lower on this window.
       </para>
@@ -798,7 +798,7 @@
     <listitem>
       <para>
         When you advance into a transaction's date field (either by creating or
-        editing a transaction, or using &Tab; or &Enter;, this dropdown determines
+        editing a transaction, or using &Tab; or &Enter;), this dropdown determines
         whether the cursor will start in the Day, Month, or Year portion of the date.
       </para>
     </listitem>
@@ -1217,12 +1217,12 @@
 
 <sect2><title>iCalendar</title>
 <para>
-  &kmymoney; is capable of exporting a file inb then <quote>iCalendar</quote> format,
+  &kmymoney; is capable of exporting a file in the <quote>iCalendar</quote> format,
   so you can import your scheduled transactions into &korganizer;, or another
   calendar program, so you can be reminded of scheduled transactions.  Actually
   exporting the file is done with the <menuchoice> <guimenu>File</guimenu>
   <guisubmenu>Export</guisubmenu> <guimenuitem>Schedules to iCalendar</guimenuitem>
-  </menuchoice>menu item.
+  </menuchoice> menu item.
 </para>
 
 <screenshot>
@@ -1259,8 +1259,8 @@
 
 <para>
   This plugin adds support for HBCI/FinTs, OFX, and PayPal online banking by using
-  <ulink url="https://www.aquamaniac.de/rdm/">AqBanking</ulink>, which is a an open
-  source project on its own.  Most of the protocols is uses to communicate with banks
+  <ulink url="https://www.aquamaniac.de/rdm/">AqBanking</ulink>, which is an open
+  source project on its own.  Most of the protocols used to communicate with banks
   are only used in Germany.
 </para>
 
