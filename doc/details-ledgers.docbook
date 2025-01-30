@@ -586,7 +586,7 @@
   entering the split editor, they will be included in the first split.  It often
   makes sense to enter a specific memo for each split.  This can also be done for the
   Payee, but it may make more sense to enter that only once for the transaction.  To
-  save this the split, press <guibutton>Enter</guibutton>.  To cancel, press
+  save the split, press <guibutton>Enter</guibutton>.  To cancel, press
   <guibutton>Cancel</guibutton>.
 </para> 
  
@@ -703,7 +703,7 @@
 </screenshot>
 
 <para>
-  Since the value is the only field in the two transaction which must absolutely be
+  Since the value is the only field in the two transactions which must absolutely be
   the same, the value of other fields may differ.  Note that although the two Payees
   may not be identical, they must have been matched by the import process.
   <guilabel>Match</guilabel>, you will see a <guilabel>Match Transactions</guilabel>
@@ -797,15 +797,15 @@
 <para>
   Most of the settings are self explanatory.  The section linked above has a more
   detailed explanation of each of the settings.  Some of these settings have already
-  been mentions, but for clarity, several of them are explained briefly below.
+  been mentioned, but for clarity, several of them are explained briefly below.
 </para>
 
 <formalpara><title>Show transaction form</title>
 <para>
   This setting is under the Display tab in the Settings dialog: toggle to hide the
   transaction form at the bottom of the Ledgers View.  The transaction form is now a
-  display only area for the transaction selected in the Transaction List.  All entry
-  and editing of transactions is now done directly within the list.
+  display only area for the transaction selected in the Transaction List.  All entries
+  and edits of transactions are now made directly on the list.
 </para>
 </formalpara>
 
