@@ -182,16 +182,10 @@ bool LedgerFilterBase::filterAcceptsRow(int source_row, const QModelIndex& sourc
     }
 
     if (LedgerSortProxyModel::filterAcceptsRow(source_row, source_parent)) {
-        const QVariant dataItem = idx.data(filterRole());
+        const auto dataItems = idx.data(filterRole()).toStringList();
         bool rc = false;
-        if (dataItem.canConvert<QVariantList>()) {
-            QSequentialIterable vList = dataItem.value<QSequentialIterable>();
-            for (const auto& v : vList) {
-                rc |= d->filterIds.contains(v.toString());
-            }
-        } else {
-            const auto id = idx.data(filterRole()).toString();
-            rc = d->filterIds.contains(id);
+        for (const auto& dataItem : dataItems) {
+            rc |= d->filterIds.contains(dataItem);
         }
 
         // in case a journal entry has no id, it is the new transaction placeholder
