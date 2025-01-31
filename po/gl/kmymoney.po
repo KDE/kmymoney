@@ -17292,7 +17292,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabchart.ui:149
 #, kde-format
 msgid "Logarithmic vertical axis"
-msgstr "Eixo vertical logarítmico"
+msgstr "Eixe vertical logarítmico"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_negExpenses)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:156

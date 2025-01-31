@@ -463,9 +463,9 @@
 > використовується, коли фактично є три або більше дроблень, коли одна сторона операції додатково поділена на кілька дроблень. Найчастіше це робиться, коли гроші переміщуються на типовий банківський рахунок або з нього, але вони належать до кількох категорій. </para>
 
 <para
->If a transaction has only one split, it is almost always said to be <quote
->unbalanced,</quote
-> meaning that money is coming from somewhere, but not going anywhere (or vice versa.) Such transactions are typically flagged by being displayed in red in the Ledger. Valid transactions with a single split are usually in Investment Accounts: Add, Remove, or Split shares. The other case is where the amount of the transaction is 0, which banks sometimes produce. </para>
+>Якщо операція складається лише з одного дроблення, майже завжди кажуть, що вона <quote
+>незбалансована</quote
+>, тобто гроші надходять звідкись, але нікуди не йдуть (або навпаки). Такі операції зазвичай позначаються в обліковій книзі червоним кольором. Коректні операції з одним дробленням зазвичай відбуваються на інвестиційних рахунках: додавання, вилучення або поділ акцій. Іншим випадком є операції із сумою, що дорівнює 0, про яку іноді повідомляють банки. </para>
 
 <para
 >Щоб ввести розділену операцію, створіть операцію і введіть загальну суму операції. Замість вибору категорії натисніть кнопку <guiicon
@@ -498,11 +498,11 @@
 </screenshot>
 
 <para
->To enter a new split or sub-transaction click <guibutton
->New</guibutton
->, press <keycombo action="simul"
+>Щоб ввести нове дроблення або підлеглу операцію, натисніть кнопку <guibutton
+>Створити</guibutton
+>, натисніть комбінацію клавіш <keycombo action="simul"
 >&Ctrl;&Ins;</keycombo
->, or double-click an empty row. Double-clicking an existing row lets you edit the split. This will expand the row into form where you can enter or edit a split. </para
+> або двічі клацніть на порожньому рядку. Для редагування наявного дроблення двічі клацніть на наявному рядку. У відповідь програма розгорне рядок у форму, де ви зможете ввести або змінити дроблення. </para
 > 
 
 <screenshot>
@@ -520,10 +520,10 @@
 </screenshot>
 
 <para
->Here you specify the category and amount, as well as optional payee, memo, and tag(s). Note that if a payee and memo were entered into the transaction before entering the split editor, they will be included in the first split. It often makes sense to enter a specific memo for each split. This can also be done for the Payee, but it may make more sense to enter that only once for the transaction. To save this the split, press <guibutton
->Enter</guibutton
->. To cancel, press <guibutton
->Cancel</guibutton
+>Тут ви можна вказати категорію та суму, а також, необов’язково, отримувача платежу, нотатку та мітки. Зауважте, що якщо отримувача платежу та нотатку було введено для операції перед входом у редактор дроблення, їхні дані буде включено до першого дроблення. Часто має сенс вводити окрему нотатку для кожного дроблення. Це також можна зробити для отримувача платежу, але зручнішим може бути введення лише один раз для операції. Щоб зберегти дроблення, натисніть кнопку <guibutton
+>Ввести</guibutton
+>. Щоб скасувати введення, натисніть кнопку <guibutton
+>Скасувати</guibutton
 >. </para
 > 
  
@@ -533,21 +533,9 @@
 >, щоб зберегти параметри операції. Якщо у операції залишаться суми, не пов’язані з жодною з категорій, програма попросить вас повернутися до редагування дроблень, змінити загальну суму операції або залишити частину суми операції не пов’язаною з категоріями. Те ж саме стосується випадку, коли сума перепризначена, і в цьому випадку загальна сума поділів перевищує суму операції. </para>
 
 <para
->To redistribute an <quote
->Unassigned</quote
-> or <quote
->Overassigned</quote
-> amount, select the split to be adjusted, and click <guibutton
->Apply Difference</guibutton
->. If <quote
->Unassigned</quote
-> was previously shown and non-zero, that amount will be added to the selected line item value. If <quote
->Overassigned</quote
-> was previously shown and non-zero, that amount will be subtracted from the selected line item value. As a result, the <quote
->Unassigned</quote
-> or <quote
->Overassigned</quote
-> amount will be set to zero and the transaction can be saved successfully. </para>
+>Щоб перерозподілити суму «Не призначено» або «Перепризначено», позначте пункт поділу, який слід скоригувати Після цього, натисніть кнопку <guibutton
+>Застосувати різницю</guibutton
+>. Якщо раніше було показано суму «Не призначено», і вона була ненульовою, цю суму буде додано до величини позначеного запису рядка. Якщо раніше було показано суму «Перепризначено», і вона була ненульовою, цю суму буде віднято від значення позначеного запису рядка. Після цього, сума «Не призначено» стане нульовою, і запис операції можна буде успішно зберегти. </para>
 
 <screenshot>
   <screeninfo
@@ -637,23 +625,25 @@
 </screenshot>
 
 <para
->Since the value is the only field in the two transaction which must absolutely be the same, the value of other fields may differ. Note that although the two Payees may not be identical, they must have been matched by the import process. <guilabel
->Match</guilabel
->, you will see a <guilabel
->Match Transactions</guilabel
-> dialog. This dialog allows you to choose which of the two transactions is used as the source of the other fields in the matched transaction. Note that if one of the transactions is imported, the date of that transaction will always be used in the matched transaction, even if all other fields are taken from the non-imported transaction. That dialog also gives you the option of reversing the transactions in terms of which is used as a source of fields which differ. </para
+>Оскільки значення є єдиним полем у двох операціях, яке має бути абсолютно однаковим, значення інших полів можуть відрізнятися. Зауважте, що хоча два записи отримувачів можуть не бути ідентичними, їхню відповідність має бути встановлено під час процесу імпортування. <guilabel
+>Відповідність</guilabel
+>, ви побачите діалогове вікно <guilabel
+>Відповідність операцій</guilabel
+>. За допомогою цього вікна можна вибрати, яку з двох операцій використовувати як джерело для інших полів у єдиній операції. Зауважте, що якщо одну з операцій імпортовано, дата цієї операції завжди використовуватиметься у відповідній операції, навіть якщо всі інші поля взято з неімпортованої операції. Це діалогове вікно також надає вам можливість інвертувати запис операції, у сенсі того, що буде використано як джерело даних полів, які відрізняються. </para
 > 
 
 <para
->If you are happy with the status of the match dialog, click <guibutton
->OK</guibutton
->. The transaction is then displayed as a Matched Transaction in the Ledger. You can then click <guimenu
+>Якщо все у діалоговому вікні встановлення відповідності вас влаштовує, натисніть кнопку <guibutton
+>Гаразд</guibutton
+>. Після цього операцію буде показано як «Встановлено відповідність» в обліковій книзі. Після цього ви зможете вибрати пункт меню <menuchoice
+> <guimenu
 >Transaction</guimenu
 > <guimenuitem
 >Accept</guimenuitem
-> or right-click the matched transaction and select <guibutton
->Accept</guibutton
-> from the context menu. </para>
+> </menuchoice
+> або клацнути правою кнопкою миші на пунктів відповідної операції і вибрати пункт <guibutton
+>Прийняти</guibutton
+> у контекстному меню. </para>
 
 <para
 >Під час імпортування електронних виписок (безпосереднього або за допомогою отриманого файла) &kmymoney; намагається виконати якомога краще порівняння записів на основі назви отримувача і суми операції. Якщо у такий спосіб буде встановлено неправильну відповідність, ви зможете скасувати встановлення відповідності. </para>
@@ -669,16 +659,16 @@
 ><title
 >Поняття про стан операції</title>
 <para
->A later section of this handbook discusses <link linkend="details.reconcile"
->reconciliation</link
-> in more detail. For now, it is only important to know that transaction can have one of three states: not marked (blank), cleared (C), or reconciled (R). When a transaction is entered, it's state is set to the value specified in the <quote
->Data entry</quote
-> tab of the <quote
->Ledger</quote
-> section of the &kmymoney; configuration dialog, which defaults to <quote
->not marked</quote
->. Once the bank posts the transaction, the user can mark it as cleared and thus transform it to state (C). Note that these are only a subset of the states described earlier as available in the <link linkend="details.ledgers.view.filter"
->Ledger Filter</link
+>У наступному розділі цього посібника докладніше розглянуто <link linkend="details.reconcile"
+>узгодження</link
+>. Наразі важливо знати лише те, що операція може перебувати в одному із трьох станів: не позначено (порожній запис), звірено (C) або узгоджено (R). Під час введення даних запису операції для її стану встановлюється значення, вказане на вкладці <quote
+>Введення даних</quote
+> розділу <quote
+>Облікова книга</quote
+> діалогового вікна налаштовування &kmymoney;, типовим значенням якого є <quote
+>не позначено</quote
+>. Після того, як банк затверджує операцію, користувач може позначити її як звірену і таким чином перевести у стан (C). Зауважте, що це лише частина станів, описаних раніше як доступних у <link linkend="details.ledgers.view.filter"
+>фільтрі облікової книги</link
 >. </para>
 
 <screenshot>
@@ -696,7 +686,7 @@
 </screenshot>
 
 <para
->When you receive a statement from the bank, all cleared transactions should be on the statement. When you reconcile your account, you confirm that the transactions marked Cleared and the transactions listed on the statement are the same, and that the beginning balance plus the sum of the cleared transactions equals the ending balance of the statement. When this is the case, you can 'finish reconciling' which changes the state of all cleared (C) transactions prior to the date of reconciliation to reconciled (R). </para>
+>Коли ви отримуєте виписку з банку, у виписці мають бути всі розрахункові операції. Коли ви звіряєте свій рахунок, ви підтверджуєте, що операції, позначені як «Звірено» і операції, зазначені у виписці, є тотожними введеним, і що початковий баланс плюс сума звірених операцій дорівнює кінцевому балансу виписки. У цьому випадку ви можете «завершити звірку», що змінює стан усіх звірених (C) операцій до дати звірювання на узгоджені (R). </para>
 
 <para
 >Якщо ви намагатиметеся змінити параметри операції, у якій хоча б одне дроблення позначено як узгоджене (У), програма надішле вам попередження. Подальше обговорення важливості цього наведено у розділі щодо узгодження. </para>
@@ -722,13 +712,13 @@
 > 
 
 <para
->Most of the settings are self explanatory. The section linked above has a more detailed explanation of each of the settings. Some of these settings have already been mentions, but for clarity, several of them are explained briefly below. </para>
+>Більшість налаштувань зрозумілі з їхніх назв. У розділі, на який посилалися вище, містяться докладніші пояснення щодо кожного з параметрів. Деякі з цих параметрів ми вже згадували, але для ясності деякі з них коротко описано нижче. </para>
 
 <formalpara
 ><title
 >Показати форму операції</title>
 <para
->This setting is under the Display tab in the Settings dialog: toggle to hide the transaction form at the bottom of the Ledgers View. The transaction form is now a display only area for the transaction selected in the Transaction List. All entry and editing of transactions is now done directly within the list. </para>
+>Пункт цього параметра перебуває на вкладці «Показ» у діалоговому вікні «Параметри»: перемкніть, щоб приховати форму операції в нижній частині панелі рахунків. Форма операції у поточній версії є областю лише для показу параметрів операції, вибраної у списку операцій. Усі записи та редагування операцій тепер здійснюються безпосередньо у списку. </para>
 </formalpara>
 
 <para

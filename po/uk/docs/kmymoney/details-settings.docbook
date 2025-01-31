@@ -68,7 +68,7 @@
 ></term>
     <listitem>
       <para
->An autosave file is just a copy of your data file. The main point of these is that they are automatically created, according to the configuration settings, so you do not need to remember to take any action. Any autosave files created will be in the same directory as the data file currently open. </para>
+>Файл автозбереження – це лише копія вашого файла даних. Основна його особливість полягає у тому, що програма створює його автоматично відповідно до налаштувань, тому вам не доведеться власноруч виконувати будь-які дії. Усі створені файли автозбереження будуть зберігатися у тому самому каталозі, що і поточний відкритий файл даних. </para>
 
       <para
 >Якщо позначити пункт <guilabel
@@ -83,9 +83,9 @@
 > наказує &kmymoney; автоматично зберігати файл, коли ви завершуєте роботу програми, але лише якщо до даних було внесено якісь зміни. Крім того, ви можете наказати програмі створювати резервні копії ваших файлів під час завершення роботи &kmymoney;. </para>
 
       <para
->The <guilabel
->Number of backup to keep</guilabel
-> can be set from 0 (Off) up to 20. The autosave files will be stored in the same folder as the main file. If your data file is MyFinances.kmy, then when an autosave file is created, it will be called MyFinances.kmy.1~. Any existing autosave files will have their number increased by 1, up to the specified number. </para>
+>Для параметра <guilabel
+>Кількість файлів резервних копій</guilabel
+> можна встановити значення від 0 (вимкнено) до 20. Файли автозбереження зберігатимуться у тій самій теці, що й основний файл. Якщо ваш файл даних — MyFinances.kmy, тоді при створенні файла автозбереження програма вибере назву MyFinances.kmy.1~. Кількість усіх наявних файлів автозбереження послідовно збільшуватиметься на 1 до вказаної кількості. </para>
     </listitem>
   </varlistentry>
 
@@ -112,7 +112,7 @@
 >. </para>
 
       <para
->There is currently no direct menu item to launch the calculator, or whatever external program you have set. There are then two ways to launch the program. </para>
+>У поточній версії програми немає безпосереднього пункту меню для запуску калькулятора чи іншої зовнішньої програми, яку ви налаштували. Отже, є два способи запуску програми. </para>
 
       <para
 >По-перше, можна скористатися пунктом меню <menuchoice
@@ -182,13 +182,13 @@
 ></term>
     <listitem>
       <para
->This lets you select one of three layouts for the View Selector, where you choose Selecting <guilabel
->List</guilabel
-> or <guilabel
->Tree</guilabel
-> view, the icons and their labels will be located at the left side of the window. The List view displays larger icons above the name of each view, while the Tree view has smaller icons to the left of the names. The <guilabel
->Tabbed</guilabel
-> view locates the icons and labels in tabs across the top of the window. </para>
+>Надає змогу вибрати одне із трьох компонувань для засобу вибору перегляду, де ви можете вибрати перегляд <guilabel
+>Список</guilabel
+> або <guilabel
+>Ієрархія</guilabel
+>, піктограми та їхні мітки буде розташовано у ліворуч у вікні. У перегляді списком буде показано більші піктограми над назвою кожної панелі перегляду, тоді як у режимі перегляду ієрархії буде показано менші піктограми ліворуч від назв. У режимі перегляду <guilabel
+>З вкладками</guilabel
+> програма розташує піктограми та мітки у вкладках у верхній частині вікна. </para>
     </listitem>
   </varlistentry>
 
@@ -240,9 +240,9 @@
 >, програма покаже рахунки маржі на панелі перегляду рахунків. </para>
 
       <para
->By default, Categories are hidden in the Accounts View. Checking the <guilabel
->Show categories in the accounts list view</guilabel
-> will display the Categories in the Accounts View. </para>
+>Типово, категорії приховано на панелі перегляду рахунків. Якщо позначити пункт <guilabel
+>Показувати категорії у списку рахунків</guilabel
+>, можна наказати програми показувати категорії у перегляді рахунків. </para>
 
       <para
 >Якщо позначити пункт <guilabel
@@ -309,36 +309,36 @@
 >Журналювання</term>
     <listitem>
       <para
->&kmymoney; can create a log file when it imports data. This can be useful for troubleshooting problems, but it is important to be careful, as these log files can contain sensitive data, such as usernames and plain-text passwords, as noted in the dialog. </para>
+>&kmymoney; може створювати файл журналу під час імпортування даних. Це може бути корисним для усування проблем, але слід бути обережним, оскільки такі файли журналу можуть містити конфіденційні дані, як-от імена користувачів і паролі у форматі звичайного тексту, як зазначено у діалоговому вікні. </para>
 
       <para
->For any logging to take place, specify the path to the directory where logs will be created in the <guilabel
->Log path</guilabel
-> field. You can also click <guibutton
+>Щоб здійснювати журналювання, у полі <guilabel
+>Шлях до журналу</guilabel
+> вкажіть шлях до каталогу, де буде створено журнали. Ви також можете натиснути кнопку <guibutton
 >...</guibutton
-> to the right of the field, and use the file chooser dialog to navigate to the chosen directory. </para>
+> праворуч від поля і скористатися діалоговим вікном вибору файлів, щоб перейти до вибраного каталогу. </para>
 
       <para
->If you check the <guilabel
->Log imported statements</guilabel
-> box, whenever &kmymoney; imports data, it will save a file called <quote
-> <literal
+>Якщо ви позначите поле <guilabel
+>Записувати до журналу імпортовані виписки</guilabel
+>, кожного разу, коли &kmymoney; імпортуватиме дані, програма зберігатиме файл із назвою <quote
+><literal
 >kmm-statement-</literal
->yyyy-mm-dd<literal
+>рррр-мм-дд<literal
 >T</literal
->hh-mm-ss.sss<literal
+>гг-хх-сс.ссс<literal
 >.txt</literal
 > </quote
-> in the specified directory. This file is an &XML; file with all the data just imported. </para>
+> у вказаному каталозі. Цей файл буде файлом &XML; з усіма щойно імпортованими даними. </para>
 
       <para
->If you check the <guilabel
->Log OFX transactions</guilabel
-> box, whenever &kmymoney; uses <link linkend="details.impexp.ofxdirectconnect"
->OFX direct connect</link
-> to retrieve transaction data, it will log all the interactions it has with the remote OFX server. It will append these to a file called <literal
+>Якщо ви позначите пункт <guilabel
+>Записувати до журналу операції OFX</guilabel
+>, кожного разу, коли &kmymoney; використовуватиме <link linkend="details.impexp.ofxdirectconnect"
+>безпосереднє з'єднання з OFX</link
+> для отримання даних операцій. Програма записуватиме до журналу усі етапи взаємодії з віддаленим сервером OFX. Вона додаватиме повідомлення до файла із назвою <literal
 >ofxlog.txt</literal
-> in the specified directory. As mentioned above, this file is likely to contain account and user names and plain-text passwords. </para>
+> у вказаному каталозі. Як згадувалося вище, цей файл, імовірно, міститиме записи рахунків та імена користувачів, а також паролі у форматі звичайного тексту. </para>
     </listitem>
   </varlistentry>
 </variablelist>
@@ -383,14 +383,14 @@
 ></term>
     <listitem>
       <para
->This will display a list of asset accounts on the left and liability accounts on the right. These and the other account lists on the Home Page are sorted in alphabetical order, unless otherwise noted. Normally, only open accounts will be listed, unless <link linkend="reference.menus.view"
->Show all accounts</link
-> has been selected. </para>
+>Тут буде показано список рахунків активів ліворуч і рахунків зобов'язань праворуч. Ці та інші списки рахунків на домашній сторінці буде впорядковано за абеткою, якщо не зазначено інше. Зазвичай буде показано лише відкриті рахунки, якщо не позначено пункт <link linkend="reference.menus.view"
+>Показувати усі рахунки</link
+>. </para>
 
       <para
->For this and the other account lists on the Home View, the display will include the account name, date last reconcilied, and current balance. In addition, there may be other columns displayed, as configured in the <guilabel
->Account information display</guilabel
-> Lower on this window. </para>
+>Для цього та інших списків рахунків на домашній сторінці буде показано назву рахунку, дата останньої звірки та поточний баланс. Крім того, може бути показано інші стовпчики, як налаштовано на панелі <guilabel
+>Показ даних щодо рахунку</guilabel
+> у нижній частині цього вікна. </para>
     </listitem>
   </varlistentry>
 
@@ -455,11 +455,11 @@
 ></term>
     <listitem>
       <para
->This will display a forecast for asset and liability accounts, similar to the <link linkend="details.forecast.summary"
->Summary Tab</link
-> of the Forecast View. Details of the display can be controlled with the <link linkend="details.forecast.configure"
->Forecast Configuration</link
-> dialog. </para>
+>Тут буде показано прогноз для рахунків активів і зобов'язань, подібно до вкладки <link linkend="details.forecast.summary"
+>Резюме</link
+> перегляду прогнозу. Параметрами показу можна керувати за допомогою діалогового вікна <link linkend="details.forecast.configure"
+>Налаштування прогнозу</link
+>. </para>
     </listitem>
   </varlistentry>
 
@@ -542,9 +542,9 @@
 ></term>
     <listitem>
       <para
->Displays the account limit as set in the <link linkend="details.accounts.edit"
->Account Edit</link
-> dialog. </para>
+>Тут буде показано обмеження рахунку, встановлені у діалоговому вікні <link linkend="details.accounts.edit"
+>Редагування рахунку</link
+>. </para>
     </listitem>
   </varlistentry>
 
@@ -555,25 +555,25 @@
 ></term>
     <listitem>
       <para
->Shows the balance status of mapped accounts, and accounts which have had transactions imported. The status is symbolized by an icon in the column preceding the account name. Note that the colors described here may be different than displayed for you, depending on the display theme selected. A <guiicon
+>Тут буде показано стан балансу пов'язаних рахунків і рахунків, для яких було імпортовано операції. Стан позначається піктограмою у стовпчику перед назвою облікового запису. Зауважте, що описані тут кольори можуть відрізнятися від показаних у вашій системі залежно від вибраної теми кольорів. Зелена позначка <guiicon
 > <inlinemediaobject
 > <imageobject
 > <imagedata fileref="icon-dialog-ok.svg" format="SVG"/> </imageobject
 > </inlinemediaobject
 > </guiicon
-> green checkmark indicates the online balance and local balance are the same. A <guiicon
+> вказує на те, що інтернет-баланс і локальний баланс однакові. Червоний попереджувальний знак <guiicon
 > <inlinemediaobject
 > <imageobject
 > <imagedata fileref="icon-dialog-cancel.svg" format="SVG"/> </imageobject
 > </inlinemediaobject
 > </guiicon
-> red warning sign indicates a mismatch between the local file and online-balance. A <guiicon
+> вказує на невідповідність між локальним файлом і інтернет-балансом. Поштова скринька <guiicon
 > <inlinemediaobject
 > <imageobject
 > <imagedata fileref="icon-mail-receive.svg" format="SVG"/> </imageobject
 > </inlinemediaobject
 > </guiicon
-> mailbox with a green arrow indicates that the local file has transactions newer than the most recent online update. This alerts the user to perform an online-update. </para>
+> із зеленою стрілкою вказує на те, що локальний файл містить записи операцій, новіші за останні в інтернет-оновленні. Це порада користувачеві щодо потреби в оновленні даних з інтернету. </para>
     </listitem>
   </varlistentry>
 
@@ -628,7 +628,7 @@
 ><title
 >Облікова книга</title>
 <para
->The settings and options in this section allow for the modification of the transaction ledger displayed in the Ledgers View. </para>
+>Параметри і пункти цього розділу уможливлюють внесення змін до облікової книги операцій, яку буде показано на панелі облікових книг. </para>
 
 <sect2 id="details.settings.register.display"
 ><title
@@ -736,13 +736,13 @@
 >Заголовки групи узгодження</guilabel
 ></title>
         <para
->This dropdown controls the display of group headers for reconciliations. If <guilabel
->Don't show reconciliation entries</guilabel
-> is selected, then no group headers will be shown for reconciliations. If <guilabel
->Show last reconciliation entry with date and balance in ledger</guilabel
-> is selected, only the most recent reconciliation will be indicated by a group header. If <guilabel
->Show all reconciliation entries with date and balance in ledger</guilabel
-> is selected, then a group header will be shown for all previous reconciliations. </para>
+>Цей спадний список керує показом заголовків груп для узгодження. Якщо позначено пункт <guilabel
+>Не показувати записи звірки</guilabel
+>, для звірок не буде показано заголовки груп. Якщо позначено пункт <guilabel
+>Показувати в обліковій книзі запис останнього узгодження із датою і балансом</guilabel
+>, у заголовку груп буде вказано лише останню звірку. Якщо позначено пункт <guilabel
+>Показувати в обліковій книзі усі записи узгодження із датою і балансом</guilabel
+>, буде показано заголовки груп для всіх попередніх звірок. </para>
       </formalpara>
     </listitem>
   </varlistentry>
@@ -856,7 +856,7 @@
 ></term>
     <listitem>
       <para
->When you advance into a transaction's date field (either by creating or editing a transaction, or using &Tab; or &Enter;, this dropdown determines whether the cursor will start in the Day, Month, or Year portion of the date. </para>
+>Коли ви переходите до поля дати операції (шляхом створення чи редагування запису операції, чи за допомогою &Tab; або &Enter;), цей список визначатиме, чи буде на початку пересунуто курсор до частини дати: дня, місяця чи року. </para>
     </listitem>
   </varlistentry>
 
@@ -1020,7 +1020,7 @@
 ></term>
     <listitem>
       <para
->Specify how many days in advance should scheduled transactions show up in the ledger. For future scheduled transactions displayed in the ledger, you can enter or skip them by right-clicking them. </para>
+>Тут можна вказати, за скільки днів наперед має бути показано заплановані операції в книзі. Для майбутніх запланованих операцій, які буде показано у книзі, ви можете додати або пропустити їх, клацнувши на їхніх записах правою кнопкою миші. </para>
     </listitem>
   </varlistentry>
 </variablelist>
@@ -1043,9 +1043,9 @@
 
 <note>
   <para
->The initial list and configuration of online quote sources is set up when &kmymoney; first creates your data file. If an online source makes a change which requires a change to these settings in order for &kmymoney; to continue to use it as a valid source, the user must make the necessary changes, using this dialog, based on instructions posted at one of the suggested<link linkend="firsttime.contact"
->support options</link
->. Hopefully, in the not to distant future, the way online source configuration is handled will be changed so that &kmymoney; can automatically fetch any necessary updates to these settings without requiring the user to make any manual edits. </para>
+>Початковий список і налаштування джерел інтернет-курсів можна налаштувати, коли &kmymoney; на початку створюватиме ваш файл даних. Якщо до інтернет-джерела буде внесено зміни, які вимагатимуть зміни цих налаштувань, щоб &kmymoney; змогла продовжувати використання його як коректного джерела, користувач має внести необхідні зміни за допомогою цього діалогового вікна, на основі настанов, оприлюднених в одному із запропонованих <link linkend="firsttime.contact"
+>варіантів підтримки</link
+>. Сподіваємося, що в недалекому майбутньому спосіб обробки інтернет-налаштувань джерела буде змінено таким чином, що &kmymoney; зможе автоматично отримувати будь-які необхідні оновлення для цих налаштувань, не вимагаючи від користувача будь-яких дій з редагування вручну. </para>
 </note>
 </sect1>
 
@@ -1129,7 +1129,7 @@
 ><title
 >Додатки</title>
 <para
->This section provides information about the available plugins, and allow you to modify the behavior of some of them. Note that the list of plugins displayed will depend on which plugins &kmymoney; found when it started. It does not matter whether the plugin was compiled as part of the application or added as a separate package. </para>
+>Цей розділ містить відомості щодо доступних додатків надає змогу змінювати поведінку деяких із них. Зауважте, що список показаних додатків залежатиме від того, які додатки виявлено &kmymoney; під час запуску. Немає значення, було скомпільовано додаток як частину програми чи додано як окремий пакет. </para>
   
 <screenshot>
   <screeninfo
@@ -1146,14 +1146,14 @@
 </screenshot>
 
 <para
->Every plugin can be enabled or disabled, according to the state of the checkbox to the left of the name of the plugin name and icon. In addition, at the right, there is an <guibutton
->information</guibutton
-> &infoicon; button for each plugin, which will show the plugin version and author(s.) For some plugins, further information on configuring and using it may be found by clicking &configicon; <guibutton
->configure</guibutton
-> just to the left of the information button. </para>
+>Кожен додаток можна увімкнути або вимкнути відповідно до стану позначення пункту ліворуч від назви додатка та піктограми. Крім того, праворуч є кнопка <guibutton
+>відомостей</guibutton
+> &infoicon; для кожного додатка, натискання якої відкриватиме вікно із даними щодо версії додатка та авторів. Для деяких додатків вікно із додатковими відомостями щодо налаштовування та використання додатка можна знайти, натиснувши кнопку &configicon; <guibutton
+>налаштувати</guibutton
+> ліворуч від кнопки відомостей. </para>
 
 <para
->Until recently, there was only one plugin that required configuration, the Check printing plugin. Now, there are several plugins which have configuration pages which are invoked from this page. These are listed in the following sections. Note however, that many of them have already been described earlier in this document. </para>
+>Донедавна існував лише один додаток, який потребував налаштовування, додаток друку чеків. У поточній версії є декілька додатків, які мають сторінки налаштовування, які можна викликати за допомогою цієї сторінки. Їх перелічено у наступних розділах. Однак зауважте, що багато з них уже описані раніше у цьому документі. </para>
 
 <sect2 id="details.settings.plugins.printchecks"
 ><title
@@ -1210,9 +1210,9 @@
 ><title
 >Імпортування CSV</title>
 <para
->Some aspects of configuring the CSV Importer plugin have already been discussed <link linkend="details.settings.plugins.csvimporter"
->here</link
->. However, there is also a dialog which can be invoked here. </para>
+>Деякі аспекти налаштовування додатка засобу імпортування CSV уже було обговорено <link linkend="details.settings.plugins.csvimporter"
+>тут</link
+>. Втім, звідси також можна відкрити окреме вікно налаштовування. </para>
 
 <screenshot>
   <screeninfo
@@ -1232,17 +1232,17 @@
 ><title
 >Автовизначення</title>
 <para
->It is generally best to let the plugin autodetect the field delimiter, decimal symbol, and date format. However, it is possible to disable this behavior for each of these items by unchecking the appropriate box. </para>
+>Як правило, найкраще дозволити додатку автоматично визначати роздільник полів, десяткових дробів та формат дати. Однак можна вимкнути цю поведінку для кожного з цих елементів, знявши позначку з відповідного пункту. </para>
 
 <para
->In some cases, a csv file to be imported contains the name of the account somewhere in the first lines of the file. You can request the plugin to automatically look for this by checking the appropriate box, separately for banking and for investment imports. </para>
+>У деяких випадках файл csv, який потрібно імпортувати, містить назву рахунку десь у перших рядках файла. Ви можете наказати додатку автоматично шукати цю назву, позначивши відповідний пункт окремо для імпортування банківських та інвестиційних даних. </para>
 </sect3>
 
 <sect3
 ><title
 >Профіль експортування QIF</title>
 <para
->Although it is currently better just to use the QIF exporter plugin directly, it is still possible to have the CSV Importer export a QIF file. In this case, you can use this dropdown to select the default QIF export profile to use. </para>
+>Хоча у поточній версії краще просто скористатися додатком експортування QIF безпосередньо, все ще можна експортувати файл QIF із засобу імпортування CSV. У цьому випадку ви можете скористатися цим спадним меню, щоб вибрати типовий профіль експортування QIF. </para>
 </sect3>
 </sect2>
 
@@ -1250,28 +1250,28 @@
 ><title
 >Перегляд прогнозів</title>
 <para
->This is described in the <link linkend="details.forecast.configure"
->Configuring the Forecast</link
-> section of the <link linkend="details.forecast"
->Forecast Chapter.</link
-> </para>
+>Цю панель описано у розділі <link linkend="details.forecast.configure"
+>Налаштування прогнозу</link
+> <link linkend="details.forecast"
+>глави щодо прогнозів</link
+>. </para>
 </sect2>
 
 <sect2
 ><title
 >iCalendar</title>
 <para
->&kmymoney; is capable of exporting a file inb then <quote
+>&kmymoney; може експортувати файл у форматі <quote
 >iCalendar</quote
-> format, so you can import your scheduled transactions into &korganizer;, or another calendar program, so you can be reminded of scheduled transactions. Actually exporting the file is done with the <menuchoice
+>, тож ви можете імпортувати свої заплановані операції до &korganizer; або іншої програми-календаря, щоб система могла нагадувати вам про заплановані операції. Насправді експорт файлу виконується за допомогою пункту меню <menuchoice
 > <guimenu
->File</guimenu
+>Файл</guimenu
 > <guisubmenu
->Export</guisubmenu
+>Експортувати</guisubmenu
 > <guimenuitem
->Schedules to iCalendar</guimenuitem
+>Розклади до iCalendar</guimenuitem
 > </menuchoice
->menu item. </para>
+>. </para>
 
 <screenshot>
   <screeninfo
@@ -1288,10 +1288,20 @@
 </screenshot>
 
 <para
->The exported file will contain one event for each scheduled transaction. There are controls to configure whether to have the calendar show reminders for the events, as well as how many reminders, and how far ahead of the events the reminders are created, although these seem not to currently have any effect on the file created. </para>
+>&kmymoney; може експортувати файл у форматі <quote
+>iCalendar</quote
+>, тож ви можете імпортувати свої заплановані операції до &korganizer; або іншої програми-календаря, щоб система нагадувала вам про заплановані операції. Насправді експорт файлу виконується за допомогою пункту меню <menuchoice
+> <guimenu
+>Файл</guimenu
+> <guisubmenu
+>Експортувати</guisubmenu
+> <guimenuitem
+>Розклади до iCalendar</guimenuitem
+> </menuchoice
+>. </para>
 
 <para
->The final field on the dialog allows you to specify the default name and path of the exported file. As usual, you can either type the full path, or click the file selector icon at the right and get a file selector dialog. Currently, the file save dialog does default to the folder specified here, but you still need to enter the actual file name at the time of export. </para>
+>За допомогою останнього поля діалогового вікна можна вказати типову назву та шлях для експортованого файла. Як і всюди в інших випадках, ви можете ввести повний шлях або натиснути піктограму вибору файлів праворуч і відкрити діалогове вікно вибору файлів. У поточній версії діалогове вікно збереження файлів типово використовує вказану тут теку, але вам все одно потрібно ввести фактичну назву файла під час експортування. </para>
 </sect2>
 
 <!-- FIXME: There is some overlap between here and the Reference/Settings section.
@@ -1301,47 +1311,47 @@
 >KBanking</title>
 
 <para
->This plugin adds support for HBCI/FinTs, OFX, and PayPal online banking by using <ulink url="https://www.aquamaniac.de/rdm/"
+>Цей додаток додає у програму підтримку для онлайн-банкінгу HBCI/FinTs, OFX і PayPal за допомогою <ulink url="https://www.aquamaniac.de/rdm/"
 >AqBanking</ulink
->, which is a an open source project on its own. Most of the protocols is uses to communicate with banks are only used in Germany. </para>
+>, окремого проєкту із відкритим кодом. Більшість протоколів, які використано для зв’язку з банками, використовуються лише у Німеччині. </para>
 
 <para
->Configuring this plugin is not done through this dialog, but with the <link linkend="reference.menus.settings.help"
+>Налаштовування цього додатка можна виконати не за допомогою цього діалогового вікна, а за допомогою пункту меню <link linkend="reference.menus.settings.help"
 > <guimenu
->Settings</guimenu
+>Параметри</guimenu
 > <guisubmenu
->Configure Aqbanking...</guisubmenu
+>Налаштувати Aqbanking...</guisubmenu
 > </link
-> menu item, and there is further information there. </para>
+>, який відкриє діалогове вікно із додатковими відомостями. </para>
 </sect2>
 
 <sect2
 ><title
 >Засіб експортування QIF, засіб імпортування QIF</title>
 <para
->These are described in the section on <link linkend="details.impexp.qif.profile"
->QIF Profiles</link
->. As pointed out in that section, QIF Import and QIF Export are implemented as separate plugins, they both utilize the same set of profiles. </para>
+>Опис можна знайти у розділі <link linkend="details.impexp.qif.profile"
+>Профілі QIF</link
+>. Як зазначено у відповідному розділі, імпортування QIF і експортування QIF реалізовані як окремі додатки. В обох цих додатках використано однаковий набір профілів. </para>
 </sect2>
 
 <sect2 id="details.settings.plugins.reports"
 ><title
 >Перегляд звітів</title>
 <para
->This provides a dialog where you can configure some default values to be used when displaying <link linkend="details.reports"
->Reports</link
->. The details are described with the other <link linkend="details.reports.config.plugin"
->Report Configuration</link
-> settings. </para>
+>Відкриває діалогове вікно, у якому ви можете налаштувати деякі типові значення, які буде використано під час показу <link linkend="details.reports"
+>Звітів</link
+>. Подробиці описано у інших параметрах <link linkend="details.reports.config.plugin"
+>Налаштовування звіту</link
+>. </para>
 </sect2>
 
 <sect2
 ><title
 >Сховище XML</title>
 <para
->The default storage of your data is in &XML; format, described in the chapter on <link linkend="details.formats"
->File Formats</link
->. Because the code which reads and saves your data is implemented as a plugin, the configuration dialog which controls some aspects of this storage is accessed through the Plugin section of the general KMyMoney Configuration, although it is described in the above linked section. </para>
+>Типово, ваші дані зберігатимуться у форматі &XML;, описаному у розділі щодо <link linkend="details.formats"
+>форматів файлів</link
+>. Оскільки код, який зчитує та зберігає ваші дані, реалізовано як додаток, доступ до діалогового вікна налаштовування, яке керує деякими аспектами сховища даних, можна отримати за допомогою розділу додатків у загальних налаштуваннях KMyMoney, який описано у розділі за наведеним вище посиланням. </para>
 </sect2>
 </sect1>
 </chapter>

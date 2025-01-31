@@ -16,23 +16,23 @@
 >Звіти</title>
 
 <para
->The Reports View is a tabbed display. The <guilabel
->Reports</guilabel
-> tab is always displayed, and lists all available reports, grouped under the headings listed and described below. You can click <quote
+>Панель звітів поділено на вкладки. Вкладку <guilabel
+>Звіти</guilabel
+>, яку показано завжди і на якій наведено список усіх доступних звітів, згрупованих під заголовками, описано нижче. Ви можете натиснути кнопку <quote
 >
 ></quote
-> to expand or collapse the specific reports under each heading. When you open any report, it is displayed in an additional tab, labelled with the name of that report. </para>
+>, щоб розгорнути або згорнути певні звіти під кожним заголовком. Коли ви відкриватимете будь-який звіт, його буде показано на додатковій вкладці з назвою цього звіту. </para>
 
 <para
->The list of reports is always sorted first by the group name (by number) and then by report name. Clicking the <quote
->Reports</quote
-> heading will reverse the sort order. You can also click the <quote
->Comment</quote
-> header to sort by the report comment instead of name. The report's name and comment can be set or edited on the <guilabel
->General</guilabel
-> tab of the <link linkend="details.reports.config"
->Report Configuration</link
-> dialog. </para>
+>Список звітів завжди буде впорядковано спочатку за назвою групи (за номером), а потім за назвою звіту. Натискання заголовка <quote
+>Звіти</quote
+> призведе до зміни порядку сортування. Ви також можете натиснути заголовок <quote
+>Коментар</quote
+>, щоб упорядкувати список за коментарем до звіту замість назви. Назву та коментар звіту можна встановити або змінити на вкладці <guilabel
+>Загальне</guilabel
+> діалогового вікна <link linkend="details.reports.config"
+>Налаштування звіту</link
+>. </para>
 
 <sect1 id="details.reports.avail"
 ><title
@@ -208,7 +208,7 @@
   </listitem>
   <listitem>
     <para
->Export report: Reports can be exported, or saved, in &HTML; or CSV format. &HTML; is intended to preserve the displayed formatting of the report. CSV exports the data underlying the report.</para>
+>Експортувати звіт: звіти можна експортувати або зберігати у форматі &HTML; або CSV. &HTML; призначено для збереження показаного форматування звіту. До CSV експортують лише дані, що лежать в основі звіту.</para>
   </listitem>
   <listitem>
     <para
@@ -216,11 +216,11 @@
   </listitem>
   <listitem>
     <para
->The <guilabel
->Close report</guilabel
-> button was removed in 5.2. To close the current report tab, click the small <guilabel
+>Кнопку <guilabel
+>Закрити звіт</guilabel
+> було вилучено у версії 5.2. Щоб закрити поточну вкладку звіту, натисніть маленьку кнопку <guilabel
 >x</guilabel
-> to the right of the report name on the tab. </para>
+> праворуч від назви звіту на вкладці. </para>
   </listitem>
 </itemizedlist>
 </sect1>
@@ -242,18 +242,18 @@
 >. Початковою назвою вашого звіту буде назва звіту, на якому його засновано, з додаванням суфікса «Нетиповий». Ви можете змінити цю назву на будь-яку бажану. Ви навіть можете використати назву типового звіту або назву, яку ви вже визначили для іншого нетипового звіту. Крім того, для полегшення розрізнення звітів ви можете скористатися полем «Коментар». </para>
 
 <para
->The Report Configuration dialog has a <guilabel
->Report</guilabel
-> tab and a <guilabel
->Filters</guilabel
-> tab, which each have a number of subtabs. Each subtab displays options for configuring different aspects of the report. Note that specific subtabs and options within them may not appear if they are not relevant to the report being configured. </para>
+>У діалоговому вікні налаштувань звіту є вкладка <guilabel
+>Звіт</guilabel
+> і вкладка <guilabel
+>Фільтри</guilabel
+>, кожна з яких має низку підвкладок. На кожній з підвкладок буде показано параметри для налаштовування різних аспектів звіту. Зауважте, що окремі підвкладки та параметри на них може бути не показано, якщо вони не стосуються звіту, який ви налаштовуєте. </para>
 </sect2>
 
 <sect2 id="details.reports.config.report"
 ><title
 >Вкладка звіту</title>
 <para
->This is where you configure general information about the report as well as controlling details about what data is presented and how it is presented. </para>
+>Тут можна налаштувати загальні відомості щодо звіту, а також керувати подробицями щодо того, які дані буде представлено та як їх буде представлено. </para>
 
 <sect3 id="details.reports.config.general"
 ><title
@@ -294,9 +294,9 @@
     </listitem>
     <listitem>
       <para
->Skip value if price is zero: This option is only used for investments reports which show prices instead of balances as all other reports do. Selecting this option includes prices only if there is an actual price for the date; otherwise 0 will be shown. In a graph, the value will be skipped. If this option is off, the last existing price is shown for a period. If it is on, in a table <quote
+>Пропустити значення, якщо ціна нульова: цей пункт використовують лише для звітів про інвестиції, де показано ціни замість балансів, як це зроблено для усіх інших звітів. Вибір цього варіанта призведе до включення цін, лише якщо існує фактична ціна на дату; інакше буде показано 0. На графіку значення буде пропущено. Якщо цей пункт не позначено, буде показано останню наявну ціну за період. Якщо його позначено, у таблиці буде показано <quote
 >0</quote
-> is shown, and in a chart a linear interpolation for the missing values will be performed. </para>
+>, а на діаграмі буде виконано лінійну інтерполяцію для пропущених значень. </para>
     </listitem>
   </itemizedlist>
 </para>
@@ -326,9 +326,9 @@
 >Для звітів щодо прибутків/витрат та звітів щодо залишкової вартості: <itemizedlist>
     <listitem>
       <para
->Budgets: If you have any <link linkend="details.budgets"
->budgets</link
-> defined, you can select one as well as whether differences between budget and actual amounts should be propagated from one time period to the next</para>
+>Бюджети: якщо у вас є визначені <link linkend="details.budgets"
+>бюджети</link
+>, ви можете вибрати один із них, а також чи слід поширювати різницю між бюджетом і фактичними сумами з одного періоду часу на наступний</para>
     </listitem>
     <listitem>
       <para
@@ -399,11 +399,11 @@
     </listitem>
     <listitem>
       <para
->Hide Split Transaction Details: When this option is available, it lets you specify that only the total amount of a split transaction is to be displayed.</para>
+>Сховати дані дроблених операцій: якщо цей пункт доступний, за його допомогою можна буде вказати, що має бути показано лише загальну суму дробленої операції.</para>
     </listitem>
     <listitem>
       <para
->Hide totals: Selecting this prevents Total lines from being calculated and displayed</para>
+>Приховати «Разом»: вибір цього варіанта, забороняє обчислювати і показувати рядки «Загалом»</para>
     </listitem>
   </itemizedlist>
 </para>
@@ -468,12 +468,12 @@
 ><title
 >Підвкладка діапазону</title>
 <para
->The Range subtab has two sections, <guilabel
->Date range</guilabel
-> and <guilabel
->Data range</guilabel
-> for controlling the limits and subdivisions of the displayed data. Note that this only controls the display, to control the data used by &kmymoney; to created the report, see the section on the <link linkend="details.reports.config.report"
->Filters tab</link
+>На підвкладці «Діапазон» буде показано два розділи, <guilabel
+>Діапазон дат</guilabel
+> і <guilabel
+>Діапазон даних</guilabel
+> для керування обмеженнями та підрозділами показаних даних. Зауважте, що це керує лише показом. Щоб керувати даними, які використовує &kmymoney; для створення звітів, скористайтеся розділом на <link linkend="details.reports.config.report"
+>вкладці «Фільтри»</link
 >. </para>
 
 <screenshot>
@@ -494,14 +494,14 @@
 ><title
 >Діапазон дат</title>
 <para
->Selecting one of the descriptive values from the <guilabel
->Range</guilabel
-> dropdown automatically sets the values of the <guilabel
->From</guilabel
-> and <guilabel
->To</guilabel
-> date fields. You can override either or both of those dates, in which case the first dropdown will show <quote
->User defined</quote
+>Вибір одного з описових значень зі спадного списку <guilabel
+>Діапазон</guilabel
+> автоматично встановлює значення полів дати <guilabel
+>Від</guilabel
+> і <guilabel
+>До</guilabel
+>. Ви можете замінити будь-яку з цих дат або обидві, і в цьому випадку у першому спадному списку буде показано <quote
+>Визначене користувачем</quote
 >. </para>
 
 <para
@@ -514,23 +514,23 @@
 ><title
 >Діапазон даних</title>
 <para
->This lets you control the limits, ticks, and labels on the vertical data axis. The default value for the <guilabel
->Range</guilabel
-> dropdown is <quote
->Automatic</quote
->, lets &kmymoney; choose reasonable values for the other fields. If you select <quote
->User defined</quote
-> you need to specify all the other fields. <guilabel
->From</guilabel
-> and <guilabel
->To</guilabel
-> set the lower and upper limits of the axis. <guilabel
->Major tick length</guilabel
-> and <guilabel
->Minor tick length</guilabel
-> control the positioning of larger and smaller tick marks along the axis. <guilabel
->Labels Precision</guilabel
-> controls the number of decimal places used in the numbers displayed along the axis. </para>
+>Тут можна керувати межами, поділками та мітками на вертикальній вісі даних. Типовим значенням для спадного меню <guilabel
+>Діапазон</guilabel
+> є <quote
+>Автоматично</quote
+>, що дозволяє &kmymoney; вибрати гнучкі значення для інших полів. Якщо ви вибрали <quote
+>Визначене користувачем</quote
+>, вам доведеться вказати всі інші поля. <guilabel
+>Від</guilabel
+> і <guilabel
+>До</guilabel
+> встановлюють нижню та верхню межі вісі. <guilabel
+>Довжина основної поділки</guilabel
+> і <guilabel
+>Довжина вторинної поділи</guilabel
+> керують розташуванням більших і менших поділок уздовж осі. <guilabel
+>Точність міток</guilabel
+> керує кількістю десяткових знаків, які буде використано у числових мітках, які буде показано вздовж вісі. </para>
 </sect3>
 </sect2>
 
@@ -547,9 +547,9 @@
 ><title
 >Налаштування додатка звіту</title>
 <para
->Behind the scenes, Reports are actually implemented as a plugin in &kmymoney;, and there are some items which can be configured through the <link linkend="details.settings.plugins.reports"
->Reports View Plugin Configuration</link
-> dialog. </para>
+>За лаштунками звіти фактично реалізовано як додаток до &kmymoney;, і є деякі елементи, які можна налаштувати за допомогою діалогового вікна <link linkend="details.settings.plugins.reports"
+>Налаштування додатка перегляду звітів</link
+>. </para>
 
 <screenshot>
   <screeninfo
@@ -567,8 +567,8 @@
 
 <para
 ><guilabel
->Maximum number of legend items to display</guilabel
-> limits the number of items to list in the legend of the graph or chart display of a report. This can be useful if there are enough items that the legend would otherwise overwhelm the main display. </para>
+>Максимальна кількість пунктів умовних позначень</guilabel
+> обмежує кількість записів для списку умовних позначень графіка чи діаграми у звіті. Це може бути корисним, якщо маєте доволі багато записів, список умовних позначень для яких переповнив би основну панель показу. </para>
 
 <para
 ><guilabel

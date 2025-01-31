@@ -772,6 +772,6 @@
 >Hi ha algunes característiques que normalment estan associades amb les inversions que encara no s'implementen al &kmymoney;. Aquestes inclouen, entre altres; derivats, opcions i futurs. A més, quan veneu un títol, el &kmymoney; no sabrà quines accions específiques esteu venent, &ead;, la més antiga o la més recent, així que no podrà calcular la rendibilitat de la inversió. Finalment, no tindrà coneixement directe sobre cap dels requisits específics del país per als informes d'impostos, encara que generalment aquests es poden manejar marcant com Impostos totes les categories que empreu per a les operacions que podrien tenir conseqüències fiscals. </para>
 
 <para
->The &kmymoney; development team is aware of these and additional issues, and has been collecting requirements and notes for an eventual major re-write of how the program handles investments. When that process begins (there is no current schedule) there will be an opportunity for users to provide input on any additional needs and desires in this area. </para>
+>L'equip de desenvolupament del &kmymoney; és conscient d'aquests i altres problemes addicionals, i ha estat recollint requisits i notes per a una possible reescriptura important de com el programa gestiona les inversions. Quan aquest procés comenci (no hi ha una planificació actual) hi haurà una oportunitat perquè els usuaris proporcionin informació sobre les necessitats i desitjos addicionals en aquesta àrea. </para>
 </sect1>
 </chapter>

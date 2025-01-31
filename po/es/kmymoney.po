@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-30 01:54+0000\n"
-"PO-Revision-Date: 2025-01-08 17:10+0100\n"
+"PO-Revision-Date: 2025-01-30 16:28+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -20576,8 +20576,7 @@ msgid "Search"
 msgstr "Buscar"
 
 #: kmymoney/views/kpayeesview_p.h:187
-#, fuzzy, kde-format
-#| msgid "Add"
+#, kde-format
 msgctxt ""
 "@action:button Replacement for Add button on match tab to avoid duplicate "
 "assignment of Alt+A"

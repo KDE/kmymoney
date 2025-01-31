@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-30 01:54+0000\n"
-"PO-Revision-Date: 2025-01-12 09:49+0100\n"
+"PO-Revision-Date: 2025-01-30 19:57+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -20430,8 +20430,7 @@ msgid "Search"
 msgstr "Sök"
 
 #: kmymoney/views/kpayeesview_p.h:187
-#, fuzzy, kde-format
-#| msgid "Add"
+#, kde-format
 msgctxt ""
 "@action:button Replacement for Add button on match tab to avoid duplicate "
 "assignment of Alt+A"
