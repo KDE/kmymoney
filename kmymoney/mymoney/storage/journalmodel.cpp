@@ -1762,14 +1762,14 @@ QModelIndex JournalModel::adjustToFirstSplitIdx(const QModelIndex& index) const
         return {};
     }
 
-    const auto id = index.data(eMyMoney::Model::IdRole).toString();
+    const auto id = index.data(eMyMoney::Model::JournalTransactionIdRole).toString();
 
     // find the first split of this transaction in the journal
     QModelIndex idx;
     int startRow;
     for (startRow = index.row()-1; startRow >= 0; --startRow) {
         idx = this->index(startRow, 0);
-        const auto cid = idx.data(eMyMoney::Model::IdRole).toString();
+        const auto cid = idx.data(eMyMoney::Model::JournalTransactionIdRole).toString();
         if (cid != id)
             break;
     }
