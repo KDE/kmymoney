@@ -1981,7 +1981,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::MarkNotReconciled,             QStringLiteral("transaction_mark_notreconciled"), i18nc("Mark transaction not reconciled", "Not reconciled"),     Icon::Empty},
             {Action::MoveTransactionTo,             QStringLiteral("transaction_move"),               i18nc("Move transaction", "Move transaction"),      Icon::Empty},     // not directly available in UI
             {Action::ShowTransaction,               QStringLiteral("transaction_show"),               i18nc("Show transaction", "Show transaction"),      Icon::Empty},     // not directly available in UI
-	    {Action::DisplayTransactionDetails,     QStringLiteral("transaction_display_details"),    i18nc("Display transaction details", "Show transaction details"),   Icon::DocumentProperties},
+            {Action::DisplayTransactionDetails,     QStringLiteral("transaction_display_details"),    i18nc("Display transaction details", "Show transaction details"),   Icon::DocumentProperties},
 
             {Action::TransactionOpenURL,            QStringLiteral("transaction_open_url"),           i18nc("Open URL", "Open URL"),                      Icon::Empty},     // not directly available in UI
             {Action::SelectAllTransactions,         QStringLiteral("transaction_select_all"),         i18nc("Select all transactions", "Select all"),     Icon::SelectAll},
@@ -2136,7 +2136,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::DeleteTransaction,             &KMyMoneyApp::slotDeleteTransactions},
             {Action::DuplicateTransaction,          &KMyMoneyApp::slotDuplicateTransactions},
             {Action::AddReversingTransaction,       &KMyMoneyApp::slotDuplicateTransactions},
-	    {Action::DisplayTransactionDetails,     &KMyMoneyApp::slotDisplayTransactionDetails},
+            {Action::DisplayTransactionDetails,     &KMyMoneyApp::slotDisplayTransactionDetails},
             {Action::CopySplits,                    &KMyMoneyApp::slotCopySplits},
             {Action::MarkCleared,                   &KMyMoneyApp::slotMarkTransactions},
             {Action::MarkReconciled,                &KMyMoneyApp::slotMarkTransactions},
@@ -2892,17 +2892,19 @@ void KMyMoneyApp::slotDisplayTransactionDetails()
         QString all = head + trans + kvpt + splits + foot;
 
         QDialog* txInfo = new QDialog;
-        txInfo->setMinimumSize(700, 450);
+        txInfo->setAttribute(Qt::WA_DeleteOnClose);
+
+        txInfo->setMinimumSize(900, 600);
         QTextBrowser* text = new QTextBrowser();
         text->setHtml(all);
-        QPushButton* doneButton = new QPushButton("Done");
+        QPushButton* doneButton = new QPushButton(i18nc("@action:button", "Close"), txInfo);
         doneButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        connect(doneButton, SIGNAL(clicked()), txInfo, SLOT(accept()));
+        connect(doneButton, &QPushButton::clicked, txInfo, &QDialog::deleteLater);
         QVBoxLayout* layout = new QVBoxLayout(txInfo);
         layout->addWidget(text);
         layout->addWidget(doneButton);
         layout->setAlignment(doneButton, Qt::AlignHCenter);
-        txInfo->exec();
+        txInfo->show();
     }
 }
 
