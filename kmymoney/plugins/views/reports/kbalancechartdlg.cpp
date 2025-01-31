@@ -88,6 +88,7 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
     reportCfg.setChartPalette(eMyMoney::Report::ChartPalette::Application);
     reportCfg.setIncludingForecast(true);
     reportCfg.setIncludingBudgetActuals(true);
+    reportCfg.setDateFilter(QDate::currentDate().addMonths(-2), QDate::currentDate().addMonths(2));
     if (account.accountType() == eMyMoney::Account::Type::Investment) {
         const auto subAccountList = account.accountList();
         for (const auto& accountID : qAsConst(subAccountList))
@@ -95,7 +96,7 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
     } else {
         reportCfg.addAccount(account.id());
     }
-    reportCfg.setColumnsAreDays(false);
+    reportCfg.setColumnsAreDays(true);
     reportCfg.setConvertCurrency(false);
     reportCfg.setMixedTime(true);
     reportCfg.setNegExpenses(MyMoneyAccount::balanceFactor(account.accountType()).isNegative());
