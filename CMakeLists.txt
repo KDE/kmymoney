@@ -511,7 +511,7 @@ option(USE_QT_DESIGNER
 add_feature_info("QtDesigner" USE_QT_DESIGNER "Qt-Designer library support (for devs only).")
 
 option(KMM_I18N_GENERATION
-  "Generate i18n messages and documentation (default=ON)" OFF)
+  "Generate i18n messages and documentation (default=ON)" ON)
 add_feature_info("Internationalization" KMM_I18N_GENERATION "Generation of i18n files (messages and docs)")
 
 ######################### The Actual Targets ##########################
