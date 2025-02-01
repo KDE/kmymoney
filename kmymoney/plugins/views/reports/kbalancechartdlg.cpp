@@ -88,7 +88,6 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
     reportCfg.setChartPalette(eMyMoney::Report::ChartPalette::Application);
     reportCfg.setIncludingForecast(true);
     reportCfg.setIncludingBudgetActuals(true);
-    reportCfg.setDateFilter(QDate::currentDate().addMonths(-2), QDate::currentDate().addMonths(2));
     if (account.accountType() == eMyMoney::Account::Type::Investment) {
         const auto subAccountList = account.accountList();
         for (const auto& accountID : qAsConst(subAccountList))
