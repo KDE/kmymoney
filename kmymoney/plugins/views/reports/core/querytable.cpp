@@ -749,6 +749,13 @@ void QueryTable::constructTransactionTable()
 
             if (it_split == myBegin && splits.count() > 1) {
                 include_me = m_config.includes(splitAcc);
+                // in case the account is not part of the selection, it is an invest account
+                // and the investment only flag is off, we need to check if the parent account
+                // is part of the selection.
+                if (!include_me && splitAcc.isInvest() && !m_config.isInvestmentsOnly()) {
+                    const auto parentAccount = MyMoneyFile::instance()->account(splitAcc.parentAccountId());
+                    include_me = m_config.includes(parentAccount);
+                }
                 if (include_me)
                     // track accts that will need opening and closing balances
                     //FIXME in some cases it will show the opening and closing
