@@ -741,6 +741,10 @@ typedef enum {
 } // namespace eMyMoney
 
 Q_DECLARE_METATYPE(eMyMoney::Invest::PriceMode)
+Q_DECLARE_METATYPE(eMyMoney::Report::ChartType)
+Q_DECLARE_METATYPE(eMyMoney::Report::ChartPalette)
+Q_DECLARE_METATYPE(eMyMoney::Report::DataLock)
+Q_DECLARE_METATYPE(eMyMoney::Report::InvestmentSum)
 Q_DECLARE_METATYPE(eMyMoney::Split::State)
 Q_DECLARE_METATYPE(eMyMoney::Split::InvestmentTransactionType)
 Q_DECLARE_METATYPE(eMyMoney::Schedule::Occurrence)

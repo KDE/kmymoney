@@ -86,18 +86,18 @@ ReportTabChart::ReportTabChart(QWidget *parent)
     ui = new Ui::ReportTabChart;
     ui->setupUi(this);
 
-    ui->m_comboType->addItem(i18nc("type of graphic chart", "Line"), static_cast<int>(eMyMoney::Report::ChartType::Line));
-    ui->m_comboType->addItem(i18nc("type of graphic chart", "Bar"), static_cast<int>(eMyMoney::Report::ChartType::Bar));
-    ui->m_comboType->addItem(i18nc("type of graphic chart", "Stacked Bar"), static_cast<int>(eMyMoney::Report::ChartType::StackedBar));
-    ui->m_comboType->addItem(i18nc("type of graphic chart", "Pie"), static_cast<int>(eMyMoney::Report::ChartType::Pie));
-    ui->m_comboType->addItem(i18nc("type of graphic chart", "Ring"), static_cast<int>(eMyMoney::Report::ChartType::Ring));
-    connect(ui->m_comboType, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &ReportTabChart::slotChartTypeChanged);
+    ui->m_comboType->addItem(i18nc("type of graphic chart", "Line"), QVariant::fromValue(eMyMoney::Report::ChartType::Line));
+    ui->m_comboType->addItem(i18nc("type of graphic chart", "Bar"), QVariant::fromValue(eMyMoney::Report::ChartType::Bar));
+    ui->m_comboType->addItem(i18nc("type of graphic chart", "Stacked Bar"), QVariant::fromValue(eMyMoney::Report::ChartType::StackedBar));
+    ui->m_comboType->addItem(i18nc("type of graphic chart", "Pie"), QVariant::fromValue(eMyMoney::Report::ChartType::Pie));
+    ui->m_comboType->addItem(i18nc("type of graphic chart", "Ring"), QVariant::fromValue(eMyMoney::Report::ChartType::Ring));
+    connect(ui->m_comboType, &QComboBox::currentIndexChanged, this, &ReportTabChart::slotChartTypeChanged);
     Q_EMIT ui->m_comboType->currentIndexChanged(ui->m_comboType->currentIndex());
 
-    ui->m_comboPalette->addItem(i18nc("type of graphic palette", "Use application setting"), static_cast<int>(eMyMoney::Report::ChartPalette::Application));
-    ui->m_comboPalette->addItem(i18nc("type of graphic palette", "Default"), static_cast<int>(eMyMoney::Report::ChartPalette::Default));
-    ui->m_comboPalette->addItem(i18nc("type of graphic palette", "Rainbow"), static_cast<int>(eMyMoney::Report::ChartPalette::Rainbow));
-    ui->m_comboPalette->addItem(i18nc("type of graphic palette", "Subdued"), static_cast<int>(eMyMoney::Report::ChartPalette::Subdued));
+    ui->m_comboPalette->addItem(i18nc("type of graphic palette", "Use application setting"), QVariant::fromValue(eMyMoney::Report::ChartPalette::Application));
+    ui->m_comboPalette->addItem(i18nc("type of graphic palette", "Default"), QVariant::fromValue(eMyMoney::Report::ChartPalette::Default));
+    ui->m_comboPalette->addItem(i18nc("type of graphic palette", "Rainbow"), QVariant::fromValue(eMyMoney::Report::ChartPalette::Rainbow));
+    ui->m_comboPalette->addItem(i18nc("type of graphic palette", "Subdued"), QVariant::fromValue(eMyMoney::Report::ChartPalette::Subdued));
 }
 
 ReportTabChart::~ReportTabChart()
@@ -107,8 +107,8 @@ ReportTabChart::~ReportTabChart()
 
 void ReportTabChart::slotChartTypeChanged(int index)
 {
-    if (index == static_cast<int>(eMyMoney::Report::ChartType::Pie) ||
-            index == static_cast<int>(eMyMoney::Report::ChartType::Ring)) {
+    eMyMoney::Report::ChartType chartType = ui->m_comboType->itemData(index).value<eMyMoney::Report::ChartType>();
+    if (chartType == eMyMoney::Report::ChartType::Pie || chartType == eMyMoney::Report::ChartType::Ring) {
         ui->m_checkCHGridLines->setText(i18n("Show circular grid lines"));
         ui->m_checkSVGridLines->setText(i18n("Show sagittal grid lines"));
         ui->m_logYaxis->setChecked(false);
@@ -136,17 +136,8 @@ void ReportTabChart::setNegExpenses(bool set)
 
 bool ReportTabChart::apply(MyMoneyReport* report)
 {
-    eMyMoney::Report::ChartType ct[5] = {eMyMoney::Report::ChartType::Line,
-                                         eMyMoney::Report::ChartType::Bar,
-                                         eMyMoney::Report::ChartType::StackedBar,
-                                         eMyMoney::Report::ChartType::Pie,
-                                         eMyMoney::Report::ChartType::Ring};
-    eMyMoney::Report::ChartPalette cp[4] = {eMyMoney::Report::ChartPalette::Application,
-                                            eMyMoney::Report::ChartPalette::Default,
-                                            eMyMoney::Report::ChartPalette::Rainbow,
-                                            eMyMoney::Report::ChartPalette::Subdued};
-    report->setChartType(ct[ui->m_comboType->currentIndex()]);
-    report->setChartPalette(cp[ui->m_comboPalette->currentIndex()]);
+    report->setChartType(ui->m_comboType->currentData().value<eMyMoney::Report::ChartType>());
+    report->setChartPalette(ui->m_comboPalette->currentData().value<eMyMoney::Report::ChartPalette>());
     report->setChartCHGridLines(ui->m_checkCHGridLines->isChecked());
     report->setChartSVGridLines(ui->m_checkSVGridLines->isChecked());
     report->setChartDataLabels(ui->m_checkValues->isChecked());
@@ -162,14 +153,14 @@ bool ReportTabChart::load(MyMoneyReport* report)
     KMyMoneyGeneralCombo* combo = ui->m_comboType;
     switch (report->chartType()) {
     case eMyMoney::Report::ChartType::None:
-        combo->setCurrentItem(static_cast<int>(eMyMoney::Report::ChartType::Line));
+        combo->setCurrentIndex(combo->findData(QVariant::fromValue(eMyMoney::Report::ChartType::Line)));
         break;
     case eMyMoney::Report::ChartType::Line:
     case eMyMoney::Report::ChartType::Bar:
     case eMyMoney::Report::ChartType::StackedBar:
     case eMyMoney::Report::ChartType::Pie:
     case eMyMoney::Report::ChartType::Ring:
-        combo->setCurrentItem(static_cast<int>(report->chartType()));
+        combo->setCurrentIndex(combo->findData(QVariant::fromValue(report->chartType())));
         break;
     default:
         throw MYMONEYEXCEPTION_CSTRING("KReportConfigurationFilterDlg::slotReset(): Report has invalid charttype");
@@ -180,7 +171,7 @@ bool ReportTabChart::load(MyMoneyReport* report)
     case eMyMoney::Report::ChartPalette::Default:
     case eMyMoney::Report::ChartPalette::Rainbow:
     case eMyMoney::Report::ChartPalette::Subdued:
-        combo->setCurrentItem(static_cast<int>(report->chartPalette()));
+        combo->setCurrentItem(combo->findData(QVariant::fromValue(report->chartPalette())));
         break;
     default:
         throw MYMONEYEXCEPTION_CSTRING("KReportConfigurationFilterDlg::slotReset(): Report has invalid chartpalette");
@@ -204,13 +195,13 @@ ReportTabRange::ReportTabRange(QWidget *parent)
     ui->setupUi(this);
     m_dateRange = new DateRangeDlg;
     ui->dateRangeGrid->addWidget(m_dateRange, 0, 0, 1, 2);
-    connect(ui->m_yLabelsPrecision, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &ReportTabRange::slotYLabelsPrecisionChanged);
+    connect(ui->m_yLabelsPrecision, &QSpinBox::valueChanged, this, &ReportTabRange::slotYLabelsPrecisionChanged);
     Q_EMIT ui->m_yLabelsPrecision->valueChanged(ui->m_yLabelsPrecision->value());
     connect(ui->m_dataRangeStart, &QLineEdit::editingFinished, this, &ReportTabRange::slotEditingFinishedStart);
     connect(ui->m_dataRangeEnd, &QLineEdit::editingFinished, this, &ReportTabRange::slotEditingFinishedEnd);
     connect(ui->m_dataMajorTick, &QLineEdit::editingFinished, this, &ReportTabRange::slotEditingFinishedMajor);
     connect(ui->m_dataMinorTick, &QLineEdit::editingFinished, this, &ReportTabRange::slotEditingFinishedMinor);
-    connect(ui->m_dataLock, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &ReportTabRange::slotDataLockChanged);
+    connect(ui->m_dataLock, &QComboBox::currentIndexChanged, this, &ReportTabRange::slotDataLockChanged);
     Q_EMIT ui->m_dataLock->currentIndexChanged(ui->m_dataLock->currentIndex());
 }
 
@@ -354,7 +345,7 @@ void ReportTabRange::slotYLabelsPrecisionChanged(const int& value)
 }
 
 void ReportTabRange::slotDataLockChanged(int index) {
-    if (index == static_cast<int>(eMyMoney::Report::DataLock::Automatic)) {
+    if (ui->m_dataLock->itemData(index).value<eMyMoney::Report::DataLock>() == eMyMoney::Report::DataLock::Automatic) {
         ui->m_dataRangeStart->setText(QStringLiteral("0"));
         ui->m_dataRangeEnd->setText(QStringLiteral("0"));
         ui->m_dataMajorTick->setText(QStringLiteral("0"));
@@ -376,7 +367,7 @@ ReportTabCapitalGain::ReportTabCapitalGain(QWidget *parent)
 {
     ui = new Ui::ReportTabCapitalGain;
     ui->setupUi(this);
-    connect(ui->m_investmentSum, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &ReportTabCapitalGain::slotInvestmentSumChanged);
+    connect(ui->m_investmentSum, &QComboBox::currentIndexChanged, this, &ReportTabCapitalGain::slotInvestmentSumChanged);
 }
 
 ReportTabCapitalGain::~ReportTabCapitalGain()
@@ -386,7 +377,7 @@ ReportTabCapitalGain::~ReportTabCapitalGain()
 
 void ReportTabCapitalGain::slotInvestmentSumChanged(int index) {
     Q_UNUSED(index);
-    if (ui->m_investmentSum->currentData() == static_cast<int>(eMyMoney::Report::InvestmentSum::Owned)) {
+    if (ui->m_investmentSum->currentData().value<eMyMoney::Report::InvestmentSum>() == eMyMoney::Report::InvestmentSum::Owned) {
         ui->m_settlementPeriod->setValue(0);
         ui->m_settlementPeriod->setEnabled(false);
         ui->m_showSTLTCapitalGains->setChecked(false);
