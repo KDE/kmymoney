@@ -36,6 +36,9 @@ public:
     explicit KBalanceChartDlg(const MyMoneyAccount& account, QWidget* parent = nullptr);
     ~KBalanceChartDlg();
 
+public Q_SLOTS:
+    void configureReport();
+
 protected:
     MyMoneyReport* m_reportCfg;
     BalanceChartView* m_chartView;

@@ -11,8 +11,11 @@
 #include <KLocalizedString>
 #include <QtMath>
 
-#include "kmymoneyutils.h"
 #include "daterangedlg.h"
+#include "kmymoneyutils.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyreport.h"
 
 #include "ui_reporttabgeneral.h"
 #include "ui_reporttabrowcolpivot.h"
@@ -21,9 +24,6 @@
 #include "ui_reporttabrange.h"
 #include "ui_reporttabcapitalgain.h"
 #include "ui_reporttabperformance.h"
-
-#include "mymoney/mymoneyreport.h"
-#include "mymoneyenums.h"
 
 ReportTabGeneral::ReportTabGeneral(QWidget *parent)
     : QWidget(parent)
@@ -132,6 +132,68 @@ void ReportTabChart::setNegExpenses(bool set)
     } else {
         ui->m_logYaxis->setEnabled(true);
     }
+}
+
+bool ReportTabChart::apply(MyMoneyReport* report)
+{
+    eMyMoney::Report::ChartType ct[5] = {eMyMoney::Report::ChartType::Line,
+                                         eMyMoney::Report::ChartType::Bar,
+                                         eMyMoney::Report::ChartType::StackedBar,
+                                         eMyMoney::Report::ChartType::Pie,
+                                         eMyMoney::Report::ChartType::Ring};
+    eMyMoney::Report::ChartPalette cp[4] = {eMyMoney::Report::ChartPalette::Application,
+                                            eMyMoney::Report::ChartPalette::Default,
+                                            eMyMoney::Report::ChartPalette::Rainbow,
+                                            eMyMoney::Report::ChartPalette::Subdued};
+    report->setChartType(ct[ui->m_comboType->currentIndex()]);
+    report->setChartPalette(cp[ui->m_comboPalette->currentIndex()]);
+    report->setChartCHGridLines(ui->m_checkCHGridLines->isChecked());
+    report->setChartSVGridLines(ui->m_checkSVGridLines->isChecked());
+    report->setChartDataLabels(ui->m_checkValues->isChecked());
+    report->setChartByDefault(ui->m_checkShowChart->isChecked());
+    report->setChartLineWidth(ui->m_lineWidth->value());
+    report->setLogYAxis(ui->m_logYaxis->isChecked());
+    report->setNegExpenses(ui->m_negExpenses->isChecked());
+    return true;
+}
+
+bool ReportTabChart::load(MyMoneyReport* report)
+{
+    KMyMoneyGeneralCombo* combo = ui->m_comboType;
+    switch (report->chartType()) {
+    case eMyMoney::Report::ChartType::None:
+        combo->setCurrentItem(static_cast<int>(eMyMoney::Report::ChartType::Line));
+        break;
+    case eMyMoney::Report::ChartType::Line:
+    case eMyMoney::Report::ChartType::Bar:
+    case eMyMoney::Report::ChartType::StackedBar:
+    case eMyMoney::Report::ChartType::Pie:
+    case eMyMoney::Report::ChartType::Ring:
+        combo->setCurrentItem(static_cast<int>(report->chartType()));
+        break;
+    default:
+        throw MYMONEYEXCEPTION_CSTRING("KReportConfigurationFilterDlg::slotReset(): Report has invalid charttype");
+    }
+    combo = ui->m_comboPalette;
+    switch (report->chartPalette()) {
+    case eMyMoney::Report::ChartPalette::Application:
+    case eMyMoney::Report::ChartPalette::Default:
+    case eMyMoney::Report::ChartPalette::Rainbow:
+    case eMyMoney::Report::ChartPalette::Subdued:
+        combo->setCurrentItem(static_cast<int>(report->chartPalette()));
+        break;
+    default:
+        throw MYMONEYEXCEPTION_CSTRING("KReportConfigurationFilterDlg::slotReset(): Report has invalid chartpalette");
+    }
+
+    ui->m_checkCHGridLines->setChecked(report->isChartCHGridLines());
+    ui->m_checkSVGridLines->setChecked(report->isChartSVGridLines());
+    ui->m_checkValues->setChecked(report->isChartDataLabels());
+    ui->m_checkShowChart->setChecked(report->isChartByDefault());
+    ui->m_lineWidth->setValue(report->chartLineWidth());
+    ui->m_logYaxis->setChecked(report->isLogYAxis());
+    ui->m_negExpenses->setChecked(report->isNegExpenses());
+    return true;
 }
 
 ReportTabRange::ReportTabRange(QWidget *parent)

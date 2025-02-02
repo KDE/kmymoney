@@ -293,17 +293,7 @@ void KReportConfigurationFilterDlg::slotSearch()
     }
 
     if (d->m_tabChart) {
-        eMyMoney::Report::ChartType ct[5] = { eMyMoney::Report::ChartType::Line, eMyMoney::Report::ChartType::Bar, eMyMoney::Report::ChartType::StackedBar, eMyMoney::Report::ChartType::Pie, eMyMoney::Report::ChartType::Ring };
-        eMyMoney::Report::ChartPalette cp[4] = { eMyMoney::Report::ChartPalette::Application, eMyMoney::Report::ChartPalette::Default, eMyMoney::Report::ChartPalette::Rainbow, eMyMoney::Report::ChartPalette::Subdued };
-        d->m_currentState.setChartType(ct[d->m_tabChart->ui->m_comboType->currentIndex()]);
-        d->m_currentState.setChartPalette(cp[d->m_tabChart->ui->m_comboPalette->currentIndex()]);
-        d->m_currentState.setChartCHGridLines(d->m_tabChart->ui->m_checkCHGridLines->isChecked());
-        d->m_currentState.setChartSVGridLines(d->m_tabChart->ui->m_checkSVGridLines->isChecked());
-        d->m_currentState.setChartDataLabels(d->m_tabChart->ui->m_checkValues->isChecked());
-        d->m_currentState.setChartByDefault(d->m_tabChart->ui->m_checkShowChart->isChecked());
-        d->m_currentState.setChartLineWidth(d->m_tabChart->ui->m_lineWidth->value());
-        d->m_currentState.setLogYAxis(d->m_tabChart->ui->m_logYaxis->isChecked());
-        d->m_currentState.setNegExpenses(d->m_tabChart->ui->m_negExpenses->isChecked());
+        d->m_tabChart->apply(&d->m_currentState);
     }
 
     if (d->m_tabRange) {
@@ -552,39 +542,7 @@ void KReportConfigurationFilterDlg::slotReset()
     }
 
     if (d->m_tabChart) {
-        KMyMoneyGeneralCombo* combo = d->m_tabChart->ui->m_comboType;
-        switch (d->m_initialState.chartType()) {
-        case eMyMoney::Report::ChartType::None:
-            combo->setCurrentItem(static_cast<int>(eMyMoney::Report::ChartType::Line));
-            break;
-        case eMyMoney::Report::ChartType::Line:
-        case eMyMoney::Report::ChartType::Bar:
-        case eMyMoney::Report::ChartType::StackedBar:
-        case eMyMoney::Report::ChartType::Pie:
-        case eMyMoney::Report::ChartType::Ring:
-            combo->setCurrentItem(static_cast<int>(d->m_initialState.chartType()));
-            break;
-        default:
-            throw MYMONEYEXCEPTION_CSTRING("KReportConfigurationFilterDlg::slotReset(): Report has invalid charttype");
-        }
-        combo = d->m_tabChart->ui->m_comboPalette;
-        switch (d->m_initialState.chartPalette()) {
-        case eMyMoney::Report::ChartPalette::Application:
-        case eMyMoney::Report::ChartPalette::Default:
-        case eMyMoney::Report::ChartPalette::Rainbow:
-        case eMyMoney::Report::ChartPalette::Subdued:
-            combo->setCurrentItem(static_cast<int>(d->m_initialState.chartPalette()));
-            break;
-        default:
-            throw MYMONEYEXCEPTION_CSTRING("KReportConfigurationFilterDlg::slotReset(): Report has invalid chartpalette");
-        }
-        d->m_tabChart->ui->m_checkCHGridLines->setChecked(d->m_initialState.isChartCHGridLines());
-        d->m_tabChart->ui->m_checkSVGridLines->setChecked(d->m_initialState.isChartSVGridLines());
-        d->m_tabChart->ui->m_checkValues->setChecked(d->m_initialState.isChartDataLabels());
-        d->m_tabChart->ui->m_checkShowChart->setChecked(d->m_initialState.isChartByDefault());
-        d->m_tabChart->ui->m_lineWidth->setValue(d->m_initialState.chartLineWidth());
-        d->m_tabChart->ui->m_logYaxis->setChecked(d->m_initialState.isLogYAxis());
-        d->m_tabChart->ui->m_negExpenses->setChecked(d->m_initialState.isNegExpenses());
+        d->m_tabChart->load(&d->m_initialState);
     }
 
     if (d->m_tabRange) {

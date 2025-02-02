@@ -12,6 +12,7 @@
 #include <QDoubleValidator>
 
 class DateRangeDlg;
+class MyMoneyReport;
 
 namespace Ui
 {
@@ -71,6 +72,8 @@ public:
 
     Ui::ReportTabChart* ui;
     void setNegExpenses(bool set);
+    bool apply(MyMoneyReport* report);
+    bool load(MyMoneyReport* report);
 
 private Q_SLOTS:
     void slotChartTypeChanged(int index);

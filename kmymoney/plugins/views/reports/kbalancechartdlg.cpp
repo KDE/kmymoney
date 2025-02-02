@@ -11,6 +11,7 @@
 
 #include <QDialogButtonBox>
 #include <QLocale>
+#include <QPushButton>
 #include <QVBoxLayout>
 #include <QWindow>
 
@@ -25,10 +26,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "icons.h"
 #include "kreportchartview.h"
 #include "mymoneyenums.h"
 #include "mymoneyreport.h"
 #include "pivottable.h"
+#include "reporttabimpl.h"
 
 using namespace reports;
 
@@ -166,9 +169,12 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
     reports::PivotTable(*m_reportCfg).drawChart(*m_chartView);
 
     // add the buttons
-    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
+    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close | QDialogButtonBox::Reset);
+    buttonBox->button(QDialogButtonBox::Reset)->setText(i18n("Configure report"));
+    buttonBox->button(QDialogButtonBox::Reset)->setIcon(Icons::get(Icons::Icon::DocumentProperties));
     connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
+    connect(buttonBox->button(QDialogButtonBox::Reset), &QPushButton::pressed, this, &KBalanceChartDlg::configureReport);
     mainLayout->addWidget(buttonBox);
 }
 
@@ -178,5 +184,24 @@ KBalanceChartDlg::~KBalanceChartDlg()
     KConfigGroup grp = KSharedConfig::openConfig()->group("KBalanceChartDlg");
     if (grp.isValid()) {
         KWindowConfig::saveWindowSize(windowHandle(), grp);
+    }
+}
+
+void KBalanceChartDlg::configureReport()
+{
+    QDialog dialog;
+    QVBoxLayout* layout = new QVBoxLayout;
+    dialog.setLayout(layout);
+    ReportTabChart* chartWidget = new ReportTabChart(&dialog);
+    layout->addWidget(chartWidget);
+    QDialogButtonBox* box = new QDialogButtonBox(QDialogButtonBox::Cancel | QDialogButtonBox::Ok);
+    layout->addWidget(box);
+    box->addButton(box->button(QDialogButtonBox::Ok), QDialogButtonBox::AcceptRole);
+    connect(box, &QDialogButtonBox::accepted, &dialog, &QDialog::accept);
+    connect(box, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
+    chartWidget->load(m_reportCfg);
+    if (dialog.exec() == QDialog::Accepted) {
+        chartWidget->apply(m_reportCfg);
+        reports::PivotTable(*m_reportCfg).drawChart(*m_chartView);
     }
 }
