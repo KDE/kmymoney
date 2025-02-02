@@ -13,7 +13,6 @@
 
 #include "daterangedlg.h"
 #include "kmymoneyutils.h"
-#include "mymoneyenums.h"
 #include "mymoneyexception.h"
 #include "mymoneyreport.h"
 
@@ -132,6 +131,16 @@ void ReportTabChart::setNegExpenses(bool set)
     } else {
         ui->m_logYaxis->setEnabled(true);
     }
+}
+
+void ReportTabChart::setPlotExpensesDownwardVisible(bool state)
+{
+    ui->m_negExpenses->setVisible(state);
+}
+
+void ReportTabChart::removeChartType(eMyMoney::Report::ChartType type)
+{
+    ui->m_comboType->model()->removeRow(ui->m_comboType->findData(QVariant::fromValue(type)));
 }
 
 bool ReportTabChart::apply(MyMoneyReport* report)

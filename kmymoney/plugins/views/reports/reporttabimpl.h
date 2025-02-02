@@ -11,6 +11,8 @@
 #include <QWidget>
 #include <QDoubleValidator>
 
+#include "mymoneyenums.h"
+
 class DateRangeDlg;
 class MyMoneyReport;
 
@@ -72,6 +74,8 @@ public:
 
     Ui::ReportTabChart* ui;
     void setNegExpenses(bool set);
+    void setPlotExpensesDownwardVisible(bool state);
+    void removeChartType(eMyMoney::Report::ChartType type);
     bool apply(MyMoneyReport* report);
     bool load(MyMoneyReport* report);
 

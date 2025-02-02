@@ -193,6 +193,9 @@ void KBalanceChartDlg::configureReport()
     QVBoxLayout* layout = new QVBoxLayout;
     dialog.setLayout(layout);
     ReportTabChart* chartWidget = new ReportTabChart(&dialog);
+    chartWidget->setPlotExpensesDownwardVisible(false);
+    chartWidget->removeChartType(eMyMoney::Report::ChartType::StackedBar);
+    chartWidget->removeChartType(eMyMoney::Report::ChartType::Ring);
     layout->addWidget(chartWidget);
     QDialogButtonBox* box = new QDialogButtonBox(QDialogButtonBox::Cancel | QDialogButtonBox::Ok);
     layout->addWidget(box);
