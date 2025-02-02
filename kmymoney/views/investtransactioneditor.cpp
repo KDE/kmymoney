@@ -574,6 +574,7 @@ void InvestTransactionEditor::Private::updateWidgetState()
     WidgetHintFrame::hide(ui->interestAmountEdit);
     WidgetHintFrame::hide(ui->assetAccountCombo);
     WidgetHintFrame::hide(ui->priceAmountEdit);
+    WidgetHintFrame::hide(ui->totalAmountEdit);
 
     if (ui->securityAccountCombo->isEnabled()) {
         WidgetHintFrame::hide(ui->securityAccountCombo);
@@ -664,6 +665,12 @@ void InvestTransactionEditor::Private::updateWidgetState()
 
     if (ui->securityAccountCombo->currentIndex() == -1) {
         WidgetHintFrame::show(ui->securityAccountCombo, i18nc("@info:tooltip", "Select the security for this transaction"));
+    }
+
+    if (currentActivity->type() == eMyMoney::Split::InvestmentTransactionType::ReinvestDividend && !ui->totalAmountEdit->value().isZero()) {
+        if (ui->assetAccountCombo->getSelected().isEmpty()) {
+            WidgetHintFrame::show(ui->totalAmountEdit, i18nc("@info:tooltip", "Transaction is not balanced. Either correct values or assign an account."));
+        }
     }
 }
 
@@ -861,6 +868,7 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     frameCollection->addFrame(new WidgetHintFrame(d->ui->feesAmountEdit));
     frameCollection->addFrame(new WidgetHintFrame(d->ui->interestCombo));
     frameCollection->addFrame(new WidgetHintFrame(d->ui->interestAmountEdit));
+    frameCollection->addFrame(new WidgetHintFrame(d->ui->totalAmountEdit, WidgetHintFrame::Warning));
     frameCollection->addWidget(d->ui->enterButton);
 
     connect(d->ui->assetAccountCombo, &KMyMoneyAccountCombo::accountSelected, this, [&](const QString& accountId) {

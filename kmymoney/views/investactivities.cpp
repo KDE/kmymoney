@@ -484,13 +484,10 @@ void Reinvest::adjustStockSplit(MyMoneySplit& stockSplit)
     }
 }
 
-MyMoneyMoney Invest::Reinvest::totalAmount(const MyMoneySplit & stockSplit, const SplitModel * feesModel, const SplitModel * interestModel) const
+Invest::Activity::fieldRequired_t Invest::Reinvest::assetAccountRequired() const
 {
-    Q_UNUSED(stockSplit)
-    Q_UNUSED(feesModel)
-    Q_UNUSED(interestModel)
-
-    return {};
+    Q_D(const Activity);
+    return d->editor->totalAmount().isZero() ? Unused : Mandatory;
 }
 
 Add::Add(InvestTransactionEditor* editor)
