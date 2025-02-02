@@ -161,6 +161,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
         if (config.isIncludingPrice())
             yAxis->setTitleText(i18n("Price"));
+        else if (config.isInvestmentsOnly())
+            yAxis->setTitleText(i18n("Value"));
         else
             yAxis->setTitleText(i18n("Balance"));
 
