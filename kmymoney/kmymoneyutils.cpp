@@ -29,8 +29,6 @@
 #include <QTemporaryFile>
 #include <QWidget>
 #include <QWizard>
-#include <amountedit.h>
-#include <creditdebitedit.h>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -49,29 +47,32 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymoney.h"
-#include "mymoneyexception.h"
-#include "mymoneytransactionfilter.h"
-#include "mymoneyfile.h"
-#include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
-#include "mymoneyschedule.h"
-#include "mymoneypayee.h"
-#include "mymoneytag.h"
-#include "mymoneyprice.h"
-#include "mymoneystatement.h"
-#include "mymoneyforecast.h"
-#include "mymoneysplit.h"
-#include "mymoneytransaction.h"
-#include "kmymoneysettings.h"
-#include "icons.h"
-#include "storageenums.h"
-#include "mymoneyenums.h"
-#include "kmymoneyplugin.h"
-#include "statusmodel.h"
-#include "journalmodel.h"
-#include "splitmodel.h"
 #include "accountsmodel.h"
+#include "amountedit.h"
+#include "creditdebitedit.h"
+#include "icons.h"
+#include "journalmodel.h"
+#include "kmymoneyplugin.h"
+#include "kmymoneysettings.h"
+#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneyforecast.h"
+#include "mymoneymoney.h"
+#include "mymoneypayee.h"
+#include "mymoneyprice.h"
+#include "mymoneyreport.h"
+#include "mymoneyschedule.h"
+#include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "mymoneystatement.h"
+#include "mymoneytag.h"
+#include "mymoneytransaction.h"
+#include "mymoneytransactionfilter.h"
+#include "splitmodel.h"
+#include "statusmodel.h"
+#include "storageenums.h"
 
 #include "kmmyesno.h"
 
