@@ -87,6 +87,10 @@ public:
         ui->setupUi(q);
 
         ui->m_messageWidget->hide();
+        ui->m_maxCreditEarlyEdit->setAllowEmpty();
+        ui->m_maxCreditAbsoluteEdit->setAllowEmpty();
+        ui->m_minBalanceEarlyEdit->setAllowEmpty();
+        ui->m_minBalanceAbsoluteEdit->setAllowEmpty();
 
         auto file = MyMoneyFile::instance();
 
