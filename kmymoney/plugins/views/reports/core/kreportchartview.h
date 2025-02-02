@@ -122,22 +122,6 @@ private:
     }
 
     /**
-      * Set the number of columns
-      * @see m_numColumns
-      */
-    void setNumColumns(int numColumns) {
-        m_numColumns = numColumns;
-    }
-
-    /**
-      * Returns number of columns
-      * @see m_numColumns
-      */
-    int numColumns() {
-        return m_numColumns;
-    }
-
-    /**
       * The labels of the X axis
       */
     QStringList m_abscissaNames;

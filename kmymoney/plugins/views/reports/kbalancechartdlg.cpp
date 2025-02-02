@@ -18,6 +18,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KChartCartesianCoordinatePlane.h>
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <KSharedConfig>
@@ -38,59 +39,83 @@ using namespace reports;
 class BalanceChartView : public reports::KReportChartView
 {
 public:
-    BalanceChartView(MyMoneyReport* report, const MyMoneyAccount& account, QWidget* parent = nullptr);
+    BalanceChartView(const MyMoneyAccount& account, bool showLegend, QWidget* parent = nullptr);
+    void addMarker();
+
+    MyMoneyAccount m_account;
 };
 
-BalanceChartView::BalanceChartView(MyMoneyReport* report, const MyMoneyAccount& account, QWidget* parent)
+BalanceChartView::BalanceChartView(const MyMoneyAccount& account, bool showLegend, QWidget* parent)
     : reports::KReportChartView(parent)
+    , m_account(account)
 {
+    if (!showLegend) {
+        removeLegend();
+    }
+}
+
+void BalanceChartView::addMarker()
+{
+    // prevent crashing if called too early
+    if (!coordinatePlane()->diagram()) {
+        return;
+    }
+
     // add another row for limit
     bool needRow = false;
     bool haveMinBalance = false;
     bool haveMaxCredit = false;
     MyMoneyMoney minBalance, maxCredit;
     MyMoneyMoney factor(1, 1);
-    if (account.accountGroup() == eMyMoney::Account::Type::Asset)
+    if (m_account.accountGroup() == eMyMoney::Account::Type::Asset)
         factor = -factor;
 
-    if (!account.value("maxCreditEarly").isEmpty()) {
+    if (!m_account.value("maxCreditEarly").isEmpty()) {
         needRow = true;
         haveMaxCredit = true;
-        maxCredit = MyMoneyMoney(account.value("maxCreditEarly")) * factor;
+        maxCredit = MyMoneyMoney(m_account.value("maxCreditEarly")) * factor;
     }
-    if (!account.value("maxCreditAbsolute").isEmpty()) {
+    if (!m_account.value("maxCreditAbsolute").isEmpty()) {
         needRow = true;
         haveMaxCredit = true;
-        maxCredit = MyMoneyMoney(account.value("maxCreditAbsolute")) * factor;
+        maxCredit = MyMoneyMoney(m_account.value("maxCreditAbsolute")) * factor;
     }
 
-    if (!account.value("minBalanceEarly").isEmpty()) {
+    if (!m_account.value("minBalanceEarly").isEmpty()) {
         needRow = true;
         haveMinBalance = true;
-        minBalance = MyMoneyMoney(account.value("minBalanceEarly"));
+        minBalance = MyMoneyMoney(m_account.value("minBalanceEarly"));
     }
-    if (!account.value("minBalanceAbsolute").isEmpty()) {
+    if (!m_account.value("minBalanceAbsolute").isEmpty()) {
         needRow = true;
         haveMinBalance = true;
-        minBalance = MyMoneyMoney(account.value("minBalanceAbsolute"));
+        minBalance = MyMoneyMoney(m_account.value("minBalanceAbsolute"));
     }
 
+    bool paintZeroLine(true);
     if (needRow) {
         if (haveMinBalance) {
+            paintZeroLine &= !minBalance.isZero();
             drawLimitLine(minBalance.toDouble());
         }
         if (haveMaxCredit) {
+            paintZeroLine &= !maxCredit.isZero();
             drawLimitLine(maxCredit.toDouble());
         }
     }
 
-    // always draw the y axis zero value line
-    // TODO: port to KF5 - this crashes KChart
-    // drawLimitLine(0);
+    // draw the zero value line if needed
+    KChart::CartesianCoordinatePlane* cartesianPlane = qobject_cast<CartesianCoordinatePlane*>(coordinatePlane());
+    if (cartesianPlane) {
+        const auto verticalRange = cartesianPlane->verticalRange();
+        // check if vertical range does not cross the abscissa and reset the flag
+        if ((verticalRange.first >= 0.0) || (verticalRange.second <= 0.0)) {
+            paintZeroLine = false;
+        }
+    }
 
-    // remove the legend if only one graph displayed
-    if (report->accounts().size() > 1) {
-        removeLegend();
+    if (paintZeroLine) {
+        drawLimitLine(0);
     }
 }
 
@@ -119,6 +144,8 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
     m_reportCfg->setConvertCurrency(false);
     m_reportCfg->setMixedTime(true);
     m_reportCfg->setNegExpenses(MyMoneyAccount::balanceFactor(account.accountType()).isNegative());
+
+    bool showLegend(false);
     if (account.accountType() == eMyMoney::Account::Type::Investment || account.accountType() == eMyMoney::Account::Type::Stock) {
         m_reportCfg->setName(i18nc("@title:window Value chart for investments", "%1 Value History", account.name()));
         m_reportCfg->setDateFilter(eMyMoney::TransactionFilter::Date::Last6Months);
@@ -127,13 +154,16 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
         m_reportCfg->setIncludingBudgetActuals(true);
         m_reportCfg->setInvestmentsOnly(true);
         setWindowTitle(i18n("Value of %1", account.name()));
+
     } else {
         m_reportCfg->setName(i18nc("@title:window Balance chart for account", "%1 Balance History", account.name()));
-        m_reportCfg->setDateFilter(QDate::currentDate().addMonths(-2), QDate::currentDate().addMonths(2));
         m_reportCfg->setDetailLevel(eMyMoney::Report::DetailLevel::Total);
         m_reportCfg->setIncludingForecast(true);
         m_reportCfg->setIncludingBudgetActuals(true);
         m_reportCfg->setInvestmentsOnly(false);
+        m_reportCfg->setDataRangeEnd(QLatin1String("0"));
+        m_reportCfg->setDataMajorTick(QLatin1String("0"));
+        m_reportCfg->setDataMinorTick(QLatin1String("0"));
         setWindowTitle(i18n("Balance of %1", account.name()));
     }
 
@@ -143,6 +173,9 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
         for (const auto& accountID : qAsConst(subAccountList)) {
             m_reportCfg->addAccount(accountID);
         }
+        // show the legend when more than one graph is displayed
+        showLegend = (subAccountList.count() > 1);
+
     } else {
         m_reportCfg->addAccount(account.id());
     }
@@ -162,11 +195,20 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
     QVBoxLayout* mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
     // add chart to the main layout
-    m_chartView = new BalanceChartView(m_reportCfg, account);
+    m_chartView = new BalanceChartView(account, showLegend);
     mainLayout->addWidget(m_chartView);
 
     // draw the chart
     reports::PivotTable(*m_reportCfg).drawChart(*m_chartView);
+
+    // add the min/max marker lines but only, if we don't show
+    // a legend because the markers create too many entries in
+    // the legend. The markers usually only make sense in regular
+    // accounts (which don't show a legend) and not in investment
+    // accounts
+    if (!showLegend) {
+        m_chartView->addMarker();
+    }
 
     // add the buttons
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close | QDialogButtonBox::Reset);
@@ -176,6 +218,10 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
     connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
     connect(buttonBox->button(QDialogButtonBox::Reset), &QPushButton::pressed, this, &KBalanceChartDlg::configureReport);
     mainLayout->addWidget(buttonBox);
+
+    if (!showLegend) {
+        m_chartView->removeLegend();
+    }
 }
 
 KBalanceChartDlg::~KBalanceChartDlg()

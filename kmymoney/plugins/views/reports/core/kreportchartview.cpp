@@ -67,8 +67,6 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 {
     if (numberColumns == 0)
         return;
-    //set the number of columns
-    setNumColumns(numberColumns);
 
     //set skipZero
     m_skipZero = config.isSkippingZero();
@@ -784,11 +782,14 @@ void KReportChartView::drawLimitLine(const double limit)
     AbstractDiagram* planeDiagram = coordinatePlane()->diagram();
     planeDiagram->setModel(nullptr);
 
-    //we get the current number of rows and we add one after that
-    int row = m_model.rowCount();
-    justifyModelSize(m_numColumns, row + 1);
-    for (int col = 0; col < m_numColumns; ++col) {
-        setDataCell(col, row, limit);
+    // we get the current number of graphs and we add one after that
+    // the rows contains the number x-axis values and the columns
+    // the data for the graph
+    int rows = m_model.rowCount();
+    int cols = m_model.columnCount();
+    justifyModelSize(rows, cols + 1);
+    for (int row = 0; row < rows; ++row) {
+        setDataCell(row, cols, limit);
     }
 
     planeDiagram->setModel(&m_model);
