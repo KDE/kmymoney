@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-01 01:54+0000\n"
-"PO-Revision-Date: 2025-01-30 16:49+0300\n"
+"PO-Revision-Date: 2025-02-01 16:44+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -5443,8 +5443,7 @@ msgid "Unable to duplicate transaction(s)"
 msgstr "İşlem(ler) çoğaltılamıyor"
 
 #: kmymoney/kmymoney.cpp:2900
-#, fuzzy, kde-format
-#| msgid "Close"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close"
 msgstr "Kapat"
