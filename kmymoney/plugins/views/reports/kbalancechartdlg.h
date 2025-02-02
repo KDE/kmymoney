@@ -21,6 +21,8 @@ namespace reports {
 class KReportChartView;
 }
 class MyMoneyAccount;
+class MyMoneyReport;
+class BalanceChartView;
 
 /**
  * @author Thomas Baumgart <ipwizard@users.sourceforge.net>
@@ -35,11 +37,8 @@ public:
     ~KBalanceChartDlg();
 
 protected:
-    /**
-      * Draw the chart and calculate and draw the account limits if any
-      */
-    reports::KReportChartView* drawChart(const MyMoneyAccount& account);
-
+    MyMoneyReport* m_reportCfg;
+    BalanceChartView* m_chartView;
 };
 
 #endif

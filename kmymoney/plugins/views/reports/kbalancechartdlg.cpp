@@ -17,116 +17,30 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KSharedConfig>
-#include <KWindowConfig>
 #include <KConfigGroup>
 #include <KLocalizedString>
+#include <KSharedConfig>
+#include <KWindowConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyreport.h"
-#include "pivottable.h"
 #include "kreportchartview.h"
 #include "mymoneyenums.h"
+#include "mymoneyreport.h"
+#include "pivottable.h"
 
 using namespace reports;
 
-KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* parent) :
-    QDialog(parent)
+class BalanceChartView : public reports::KReportChartView
 {
-    setWindowTitle(i18n("Balance of %1", account.name()));
-    setSizeGripEnabled(true);
-    setModal(true);
+public:
+    BalanceChartView(MyMoneyReport* report, const MyMoneyAccount& account, QWidget* parent = nullptr);
+};
 
-    // restore the last used dialog size
-    winId(); // needs to be called to create the QWindow
-    KConfigGroup grp = KSharedConfig::openConfig()->group("KBalanceChartDlg");
-    if (grp.isValid()) {
-        KWindowConfig::restoreWindowSize(windowHandle(), grp);
-    }
-    // let the minimum size be 700x500
-    resize(QSize(700, 500).expandedTo(windowHandle() ? windowHandle()->size() : QSize()));
-
-    QVBoxLayout *mainLayout = new QVBoxLayout;
-    setLayout(mainLayout);
-    //draw the chart and add it to the main layout
-    KReportChartView* chartWidget = drawChart(account);
-    mainLayout->addWidget(chartWidget);
-
-    // add the buttons
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
-    connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
-    connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
-    mainLayout->addWidget(buttonBox);
-}
-
-
-KBalanceChartDlg::~KBalanceChartDlg()
+BalanceChartView::BalanceChartView(MyMoneyReport* report, const MyMoneyAccount& account, QWidget* parent)
+    : reports::KReportChartView(parent)
 {
-    // store the last used dialog size
-    KConfigGroup grp = KSharedConfig::openConfig()->group("KBalanceChartDlg");
-    if (grp.isValid()) {
-        KWindowConfig::saveWindowSize(windowHandle(), grp);
-    }
-}
-
-KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
-{
-    MyMoneyReport reportCfg = MyMoneyReport(eMyMoney::Report::RowType::AssetLiability,
-                                            static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
-                                            eMyMoney::TransactionFilter::Date::Last3ToNext3Months,
-                                            eMyMoney::Report::DetailLevel::Total,
-                                            i18nc("@title:window Value chart for investments", "%1 Value History", account.name()),
-                                            QString());
-    reportCfg.setChartByDefault(true);
-    reportCfg.setChartCHGridLines(false);
-    reportCfg.setChartSVGridLines(false);
-    reportCfg.setChartDataLabels(false);
-    reportCfg.setChartType(eMyMoney::Report::ChartType::Line);
-    reportCfg.setChartPalette(eMyMoney::Report::ChartPalette::Application);
-    reportCfg.setIncludingForecast(false);
-    reportCfg.setDateFilter(eMyMoney::TransactionFilter::Date::Last6Months);
-    reportCfg.setDetailLevel(eMyMoney::Report::DetailLevel::All);
-    reportCfg.setColumnsAreDays(true);
-    reportCfg.setConvertCurrency(false);
-    reportCfg.setMixedTime(true);
-    reportCfg.setNegExpenses(MyMoneyAccount::balanceFactor(account.accountType()).isNegative());
-
-    QLocale locale;
-    reportCfg.setDataRangeEnd(locale.toString(1.1));
-    reportCfg.setDataMajorTick(locale.toString(0.1));
-    reportCfg.setDataMinorTick(locale.toString(0.02));
-    reportCfg.setInvestmentsOnly(true);
-
-    bool legendNeeded(false);
-
-    if (account.accountType() == eMyMoney::Account::Type::Investment) {
-        const auto subAccountList = account.accountList();
-        for (const auto& accountID : qAsConst(subAccountList)) {
-            reportCfg.addAccount(accountID);
-        }
-        legendNeeded = (subAccountList.count() > 1);
-
-    } else if (account.isInvest()) {
-        reportCfg.addAccount(account.id());
-
-    } else {
-        reportCfg.setName(i18nc("@title:window Balance chart for account", "%1 Balance History", account.name()));
-        reportCfg.addAccount(account.id());
-        reportCfg.setInvestmentsOnly(false);
-        reportCfg.setIncludingForecast(true);
-        reportCfg.setIncludingBudgetActuals(true);
-        reportCfg.setDetailLevel(eMyMoney::Report::DetailLevel::Total);
-        reportCfg.setDateFilter(QDate::currentDate().addMonths(-2), QDate::currentDate().addMonths(2));
-    }
-
-    reports::PivotTable table(reportCfg);
-
-    reports::KReportChartView* chartWidget = new reports::KReportChartView(this);
-
-    table.drawChart(*chartWidget);
-
     // add another row for limit
     bool needRow = false;
     bool haveMinBalance = false;
@@ -160,21 +74,109 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
 
     if (needRow) {
         if (haveMinBalance) {
-            chartWidget->drawLimitLine(minBalance.toDouble());
+            drawLimitLine(minBalance.toDouble());
         }
         if (haveMaxCredit) {
-            chartWidget->drawLimitLine(maxCredit.toDouble());
+            drawLimitLine(maxCredit.toDouble());
         }
     }
 
     // always draw the y axis zero value line
     // TODO: port to KF5 - this crashes KChart
-    //chartWidget->drawLimitLine(0);
+    // drawLimitLine(0);
 
-    // remove the legend if only a single graph is shown
-    if (!legendNeeded) {
-        chartWidget->removeLegend();
+    // remove the legend if only one graph displayed
+    if (report->accounts().size() > 1) {
+        removeLegend();
+    }
+}
+
+KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* parent)
+    : QDialog(parent)
+    , m_reportCfg(new MyMoneyReport(MyMoneyReport(eMyMoney::Report::RowType::AssetLiability,
+                                                  static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
+                                                  eMyMoney::TransactionFilter::Date::Last3ToNext3Months,
+                                                  eMyMoney::Report::DetailLevel::Total,
+                                                  QString(),
+                                                  QString())))
+{
+    // setup report
+    QLocale locale;
+    m_reportCfg->setDataRangeEnd(locale.toString(1.1));
+    m_reportCfg->setDataMajorTick(locale.toString(0.1));
+    m_reportCfg->setDataMinorTick(locale.toString(0.02));
+
+    m_reportCfg->setChartByDefault(true);
+    m_reportCfg->setChartCHGridLines(false);
+    m_reportCfg->setChartSVGridLines(false);
+    m_reportCfg->setChartDataLabels(false);
+    m_reportCfg->setChartType(eMyMoney::Report::ChartType::Line);
+    m_reportCfg->setChartPalette(eMyMoney::Report::ChartPalette::Application);
+    m_reportCfg->setColumnsAreDays(true);
+    m_reportCfg->setConvertCurrency(false);
+    m_reportCfg->setMixedTime(true);
+    m_reportCfg->setNegExpenses(MyMoneyAccount::balanceFactor(account.accountType()).isNegative());
+    if (account.accountType() == eMyMoney::Account::Type::Investment || account.accountType() == eMyMoney::Account::Type::Stock) {
+        m_reportCfg->setName(i18nc("@title:window Value chart for investments", "%1 Value History", account.name()));
+        m_reportCfg->setDateFilter(eMyMoney::TransactionFilter::Date::Last6Months);
+        m_reportCfg->setDetailLevel(eMyMoney::Report::DetailLevel::All);
+        m_reportCfg->setIncludingForecast(false);
+        m_reportCfg->setIncludingBudgetActuals(true);
+        m_reportCfg->setInvestmentsOnly(true);
+        setWindowTitle(i18n("Value of %1", account.name()));
+    } else {
+        m_reportCfg->setName(i18nc("@title:window Balance chart for account", "%1 Balance History", account.name()));
+        m_reportCfg->setDateFilter(QDate::currentDate().addMonths(-2), QDate::currentDate().addMonths(2));
+        m_reportCfg->setDetailLevel(eMyMoney::Report::DetailLevel::Total);
+        m_reportCfg->setIncludingForecast(true);
+        m_reportCfg->setIncludingBudgetActuals(true);
+        m_reportCfg->setInvestmentsOnly(false);
+        setWindowTitle(i18n("Balance of %1", account.name()));
     }
 
-    return chartWidget;
+    // setup accounts
+    if (account.accountType() == eMyMoney::Account::Type::Investment) {
+        const auto subAccountList = account.accountList();
+        for (const auto& accountID : qAsConst(subAccountList)) {
+            m_reportCfg->addAccount(accountID);
+        }
+    } else {
+        m_reportCfg->addAccount(account.id());
+    }
+
+    setSizeGripEnabled(true);
+    setModal(true);
+
+    // restore the last used dialog size
+    winId(); // needs to be called to create the QWindow
+    KConfigGroup grp = KSharedConfig::openConfig()->group("KBalanceChartDlg");
+    if (grp.isValid()) {
+        KWindowConfig::restoreWindowSize(windowHandle(), grp);
+    }
+    // let the minimum size be 700x500
+    resize(QSize(700, 500).expandedTo(windowHandle() ? windowHandle()->size() : QSize()));
+
+    QVBoxLayout* mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    // add chart to the main layout
+    m_chartView = new BalanceChartView(m_reportCfg, account);
+    mainLayout->addWidget(m_chartView);
+
+    // draw the chart
+    reports::PivotTable(*m_reportCfg).drawChart(*m_chartView);
+
+    // add the buttons
+    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
+    connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+    connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
+    mainLayout->addWidget(buttonBox);
+}
+
+KBalanceChartDlg::~KBalanceChartDlg()
+{
+    // store the last used dialog size
+    KConfigGroup grp = KSharedConfig::openConfig()->group("KBalanceChartDlg");
+    if (grp.isValid()) {
+        KWindowConfig::saveWindowSize(windowHandle(), grp);
+    }
 }
