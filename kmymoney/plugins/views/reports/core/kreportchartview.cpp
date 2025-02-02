@@ -674,14 +674,10 @@ void KReportChartView::adjustVerticalRange(const int precision)
         if (!dataRangeEndAdjusted)
             dataRangeEnd = gridEnd;
         cartesianPlane->setVerticalRange(qMakePair(dataRangeStart, dataRangeEnd));
-    } else if (dataRangeStart == dataRangeEnd) { // vertical axis type must be Linear then
+    } else if (dataRangeStart == dataRangeEnd) // vertical axis type must be Linear then
         // if data model is represented by a horizontal line,
         // extend vertical range by two upwards and downwards
         cartesianPlane->setVerticalRange(qMakePair(dataRangeStart - 2, dataRangeEnd + 2));
-    } else {
-        // catch remaining cases https://bugs.kde.org/show_bug.cgi?id=499211
-        cartesianPlane->setVerticalRange(qMakePair(dataRangeStart - 10, dataRangeEnd + 10));
-    }
 }
 
 int reports::KReportChartView::drawPivotGridRow ( int rowNum, const reports::PivotGridRow& gridRow, const QString& legendText, const int startColumn, const int columnsToDraw, const int precision, const bool invertValue )

@@ -9,8 +9,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QVBoxLayout>
 #include <QDialogButtonBox>
+#include <QLocale>
+#include <QVBoxLayout>
 #include <QWindow>
 
 // ----------------------------------------------------------------------------
@@ -72,33 +73,53 @@ KBalanceChartDlg::~KBalanceChartDlg()
 
 KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
 {
-    MyMoneyReport reportCfg = MyMoneyReport(
-                                  eMyMoney::Report::RowType::AssetLiability,
-                                  static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
-                                  eMyMoney::TransactionFilter::Date::Last3ToNext3Months,
-                                  eMyMoney::Report::DetailLevel::Total,
-                                  i18n("%1 Balance History", account.name()),
-                                  i18n("Generated Report")
-                              );
+    MyMoneyReport reportCfg = MyMoneyReport(eMyMoney::Report::RowType::AssetLiability,
+                                            static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
+                                            eMyMoney::TransactionFilter::Date::Last3ToNext3Months,
+                                            eMyMoney::Report::DetailLevel::Total,
+                                            i18nc("@title:window Value chart for investments", "%1 Value History", account.name()),
+                                            QString());
     reportCfg.setChartByDefault(true);
     reportCfg.setChartCHGridLines(false);
     reportCfg.setChartSVGridLines(false);
     reportCfg.setChartDataLabels(false);
     reportCfg.setChartType(eMyMoney::Report::ChartType::Line);
     reportCfg.setChartPalette(eMyMoney::Report::ChartPalette::Application);
-    reportCfg.setIncludingForecast(true);
-    reportCfg.setIncludingBudgetActuals(true);
-    if (account.accountType() == eMyMoney::Account::Type::Investment) {
-        const auto subAccountList = account.accountList();
-        for (const auto& accountID : qAsConst(subAccountList))
-            reportCfg.addAccount(accountID);
-    } else {
-        reportCfg.addAccount(account.id());
-    }
+    reportCfg.setIncludingForecast(false);
+    reportCfg.setDateFilter(eMyMoney::TransactionFilter::Date::Last6Months);
+    reportCfg.setDetailLevel(eMyMoney::Report::DetailLevel::All);
     reportCfg.setColumnsAreDays(true);
     reportCfg.setConvertCurrency(false);
     reportCfg.setMixedTime(true);
     reportCfg.setNegExpenses(MyMoneyAccount::balanceFactor(account.accountType()).isNegative());
+
+    QLocale locale;
+    reportCfg.setDataRangeEnd(locale.toString(1.1));
+    reportCfg.setDataMajorTick(locale.toString(0.1));
+    reportCfg.setDataMinorTick(locale.toString(0.02));
+    reportCfg.setInvestmentsOnly(true);
+
+    bool legendNeeded(false);
+
+    if (account.accountType() == eMyMoney::Account::Type::Investment) {
+        const auto subAccountList = account.accountList();
+        for (const auto& accountID : qAsConst(subAccountList)) {
+            reportCfg.addAccount(accountID);
+        }
+        legendNeeded = (subAccountList.count() > 1);
+
+    } else if (account.isInvest()) {
+        reportCfg.addAccount(account.id());
+
+    } else {
+        reportCfg.setName(i18nc("@title:window Balance chart for account", "%1 Balance History", account.name()));
+        reportCfg.addAccount(account.id());
+        reportCfg.setInvestmentsOnly(false);
+        reportCfg.setIncludingForecast(true);
+        reportCfg.setIncludingBudgetActuals(true);
+        reportCfg.setDetailLevel(eMyMoney::Report::DetailLevel::Total);
+        reportCfg.setDateFilter(QDate::currentDate().addMonths(-2), QDate::currentDate().addMonths(2));
+    }
 
     reports::PivotTable table(reportCfg);
 
@@ -150,8 +171,10 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
     // TODO: port to KF5 - this crashes KChart
     //chartWidget->drawLimitLine(0);
 
-    //remove the legend
-    chartWidget->removeLegend();
+    // remove the legend if only a single graph is shown
+    if (!legendNeeded) {
+        chartWidget->removeLegend();
+    }
 
     return chartWidget;
 }
