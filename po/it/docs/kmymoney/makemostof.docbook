@@ -12,28 +12,39 @@
 > <email
 >joe1011010_km@users.sourceforge.net</email
 > </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->05/04/2019</date>
+>1/12/2024</date>
   <releaseinfo
->5.0.4</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Sfruttare al meglio &kmymoney;</title>
 
-<para
->Nonostante si potrebbe continuare così, facendo clic sui pulsanti e inserendo dei dati, dopo un certo tempo si potrebbe decidere di aver sbagliato e ricominciare da capo, anche se si è letta la documentazione di ogni parte di &kmymoney;. </para>
+<note
+><title
+>Aiutaci a migliorare questo manuale</title>
+  <para
+>Questa e le sezioni seguenti non hanno ricevuto aggiornamenti significativi dalle primissime versioni di &kmymoney;. Sebbene le basi della contabilità non siano cambiate nel corso degli anni e non ci sia nulla di impreciso o fuorviante qui, ci sono state richieste di aggiornamento di quest'area. Se hai suggerimenti o idee specifiche a riguardo, l'autore vorrebbe conoscerli, tramite uno dei percorsi elencati nella <ulink url="https://kmymoney.org/support.html"
+>pagina di supporto</ulink
+> sul <ulink url="https://kmymoney.org/"
+>sito web di &kmymoney;</ulink
+> </para>
+</note>
 
 <para
->Si otterrà un sistema più efficiente se si spende un po' di tempo a pianificare come si userà &kmymoney;, quindi è bene seguire i passi qui sotto. </para>
+>Sebbene gran parte di &kmymoney; possa risultare ovvia per un utente inesperto, e si possa procedere facendo clic su alcuni pulsanti e inserendo alcuni dati, dopo un po' si potrebbe decidere di aver sbagliato e voler ricominciare da capo, anche se si è letta la documentazione su ogni parte di &kmymoney;. </para>
 
-<sect1 id="makingmostof.basicaccounting">
-<title
+<para
+>Otterrai un sistema più efficiente ed efficace e un uso molto migliore del tuo tempo se prima dedichi un po' di tempo a pianificare come utilizzerai &kmymoney;, quindi segui i passaggi indicati qui. Questo può sembrare molto semplice, e in effetti lo è, ma prenderti il tempo per assicurarti che la tua comprensione di come funzionano le cose sia la stessa di &kmymoney; ti farà quasi sicuramente risparmiare tempo in seguito. </para>
+
+<sect1 id="makingmostof.basicaccounting"
+><title
 >Contabilità di base</title>
-
 <para
->Immagina i soldi come palline, o fagioli, e di aver bisogno di una scatola, o un vaso per contenerli. La contabilità consiste nel contare e tenere traccia dei fagioli nel vaso, o in tanti vasi. </para>
+>Immagina i tuoi soldi come palline, o fagioli, e per evitare che rotolino e si perdano li tieni in una scatola, o in una pentola. La contabilità, o tenuta dei libri contabili, è il processo di conteggio e di tracciamento dei fagioli nella pentola, o più importante, dei fagioli in diverse pentole. </para>
 
 <para
 >Ci sono dei fagioli nel vaso chiamata <quote
@@ -70,24 +81,21 @@
 > è stata divisa. </para>
 
 <para
->Questo verrà trattato più in dettaglio nel corso del manuale. </para>
-<!-- **** don't forget to make sure this is actually covered, and linked to from
-     here.  Also, I have removed "in setting up accounts for Businesses." and
-     modified the section below, since we explicitly say that KMM is not for
-     business use. -->
+>Questo argomento sarà trattato con maggiori dettagli più avanti in questo manuale, nella sezione dedicata alle <link linkend="details.ledgers.split"
+>transazioni suddivise</link
+>. </para>
 
 <sect2 id="makingmostof.basicaccounting.personalaccounts">
-<title
+  <title
 >Definizione dei conti (personali)</title>
-
 <para
->La maggior parte dei conti, o vasi, sopra rappresentano una misura del proprio <quote
->Patrimonio</quote
->. La liquidità e i beni rappresentano le <quote
+>La maggior parte dei conti, o vasi, come descritto sopra, rappresentano una misura del nostro <quote
+>Valore</quote
+>. Il denaro e i beni rappresentano i nostri <quote
 >Attività</quote
->; se il compratore non avesse pagato subito, anche questo valore sarebbe stato considerato una attività. I soldi che dobbiamo, ad esempio se non abbiamo pagato il fornitore, rappresentano le <quote
+>, che includono anche qualsiasi importo che qualcuno ci deve per i beni che abbiamo fornito o denaro che abbiamo prestato loro. Il denaro che dobbiamo ad altri, ad esempio se non avessimo pagato i nostri fornitori, sono le nostre <quote
 >Passività</quote
->. Questi conti possono essere trasferiti come Liquidità e hanno un valore. </para>
+>. Questi conti sono trasferibili a Contante e hanno un valore. </para>
 
 <para
 >I vasi che non possono essere valutati sono <quote
@@ -107,13 +115,12 @@
 >Considerare come si vogliono tracciare e analizzare le entrate e le uscite. In base a questo, si deciderà come impostarle in &kmymoney;. </para>
 
 <para
->Infine, considera se si vuole tutto in un gruppo di conti, o due o più. Questo può dipendere dall'impostazione legislativa, o solo dal modo in cui si vogliono analizzare le cose. Ogni gruppo di conti sarà gestito separatamente. </para>
+>Infine, considera se vuoi tutto in un insieme di conti, o due o più. Questo potrebbe dipendere dal quadro giuridico del luogo in cui vivi, o semplicemente da come vuoi analizzare le cose. Ogni insieme di conti verrebbe gestito separatamente. </para>
 </sect2>
 
-<sect2 id="makingmostof.basicaccounting.businessaccounts">
-<title
+<sect2 id="makingmostof.basicaccounting.businessaccounts"
+><title
 >Definizione dei conti (delle aziende)</title>
-
 <para
 >Per certi aspetti, è simile alla definizione di conti per uso personale, ma ci sono considerazioni aggiuntive, tra cui le linee guida ed i requisiti legali. &kmymoney; non è pensato per risolvere questi problemi, perché è pensato per essere un gestore delle finanze <quote
 >personali</quote
@@ -121,26 +128,36 @@
 </sect2>
 </sect1>
 
-<sect1 id="makingmostof.mapping">
-<title
+<sect1 id="makingmostof.mapping"
+><title
 >Mappatura delle finanze in &kmymoney;</title>
-
 <para
->Raccogliere le proprie carte e vedere le sezioni seguenti per ogni voce in &kmymoney;. </para>
+>Quindi, raccogli i tuoi documenti finanziari recenti ed esplora le sezioni seguenti per maggiori informazioni su come puoi mappare le tue finanze in ciascuna delle diverse aree di &kmymoney;. Nota che ciascuna di queste sezioni di seguito è presentata in modo più dettagliato nei capitoli successivi di questo manuale. </para>
 
-<sect2 id="makingmostof.mapping.accounts">
-<title
+<sect2 id="makingmostof.mapping.accounts"
+><title
 >Conti</title>
+<para
+>Un <quote
+>Conto</quote
+> in &kmymoney; rappresenta uno dei <quote
+>vasi</quote
+> della sezione precedente: può essere un posto qualsiasi contenga il proprio denaro e i beni che si desideri monitorare. Generalmente si crea un conto in &kmymoney; per rappresentare ogni diverso conto che si ha nella <quote
+>vita reale</quote
+>, che sia presso una banca o un altro istituto finanziario, o un negozio, o anche solo i contanti nel proprio portafoglio. Sono disponibili diversi tipi di conto, che rappresentano diversi tipi di posti in cui potrebbe trovarsi il denaro. </para>
 
 <para
->Contengono un valore. Le transazioni si riferiscono a uno o più conti. </para>
+>Le transazioni (che saranno descritte più dettagliatamente in seguito) vengono create per indicare il denaro che entra o esce da uno o più conti. </para>
 
-<sect3 id="makingmostof.mapping.accounts.asset">
-<title
+<para
+>Come descritto di seguito, i conti possono contenere denaro che in realtà è tuo (attività) o denaro che devi (passività). Le passività possono essere considerate come dei contenitori magici da cui puoi prendere dei fagioli anche se in realtà non ce ne sono, ma che alla fine dovrai sostituire. </para>
+
+
+<sect3 id="makingmostof.mapping.accounts.asset"
+><title
 >Conti - Attività</title>
-
 <para
->Questi conti contengono i soldi e i beni che si vogliono tenere controllati. Sono disponibili i tipi seguenti: </para>
+>Esistono diversi tipi di conti patrimoniali. Sono tutti essenzialmente uguali, nel custodire il tuo denaro, ma ci sono alcune differenze nei dettagli di come il denaro entra ed esce dai diversi tipi di conti. </para>
 
 <variablelist>
   <varlistentry>
@@ -166,7 +183,7 @@
 >Liquidità</term>
     <listitem>
       <para
->Soldi che si hanno in mano o nel portafoglio. </para>
+>Soldi in tasca, nel portafoglio, in un barattolo o in una scatola sullo scaffale o sotto il letto. </para>
     </listitem>
   </varlistentry>
 
@@ -199,12 +216,11 @@
 </variablelist>
 </sect3>
 
-<sect3 id="makingmostof.mapping.accounts.liability">
-<title
+<sect3 id="makingmostof.mapping.accounts.liability"
+><title
 >Conti - Passività</title>
-
 <para
->Questi conti rappresentano i tuoi debiti e i soldi che devi a qualcuno e vuoi tenere controllati. </para>
+>Questi conti rappresentano i tuoi debiti e il denaro che devi ad altri. </para>
 
 <variablelist>
   <varlistentry>
@@ -230,65 +246,65 @@
 >Passività</term>
     <listitem>
       <para
->Gli altri debiti che non sono prestiti. </para>
+>Qualsiasi altro importo dovuto che non rientra negli altri tipi di conti passivi. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect3>
 </sect2>
 
-<sect2 id="makingmostof.mapping.institutions">
-<title
+<sect2 id="makingmostof.mapping.institutions"
+><title
 >Istituti</title>
-
 <para
->Sono completamente facoltativi e possono essere usati per raggruppare i conti, e visualizzare un totale per i conti di ogni gruppo. </para>
+>Rappresentano istituti finanziari, come banche o negozi o intermediari di investimento. Possono essere utilizzati per raggruppare conti e possono mostrare il valore totale di tutti i tuoi conti all'interno di quell'istituto. Non devono necessariamente riflettere organizzazioni effettive, ma sono per la tua comodità nel raggruppare i tuoi conti. Il loro utilizzo è completamente facoltativo. </para>
 </sect2>
 
-<sect2 id="makingmostof.mapping.categories">
-<title
+<sect2 id="makingmostof.mapping.categories"
+><title
 >Categorie</title>
+<para
+>Una categoria è un tipo speciale di conto utilizzato internamente da &kmymoney; per tracciare entrate e uscite. Questi conti non sono gestiti, perché come detto in precedenza, non hanno valori reali e mostrano solo ciò che hai ricevuto da essi o hai contribuito a essi. Ogni categoria mostra il valore totale delle transazioni che la menzionano. Il principio della partita doppia richiede che ogni transazione includa una categoria o un conto di trasferimento. Questo sarà spiegato più in dettaglio più avanti nel manuale. </para>
 
 <para
->Rappresentano le entrate e le uscite non gestite, che non hanno un valore. Per ogni categoria viene visualizzato il valore totale delle transazioni. Per ogni transazione è necessaria una categoria o un conto per i trasferimenti associato. </para>
-</sect2>
+>Le categorie di entrata sono utilizzate come risorse da cui ricevi denaro, mentre le categorie di spesa rappresentano gli scopi per cui spendi denaro. In rare occasioni, il denaro può fluire nel modo «sbagliato», come ottenere un rimborso per un pagamento in eccesso di una bolletta. </para>
 
-<sect2 id="makingmostof.mapping.subcategories">
-<title
+<sect3 id="makingmostof.mapping.subcategories"
+><title
 >Sotto-categorie</title>
-
 <para
->Le categorie possono essere divise in sottocategorie, ma ciò è solo a scopi di visualizzazione, poiché i totali delle sottocategorie non sono inclusi nel totale della categoria principale. </para>
+>Le categorie possono essere suddivise in sottocategorie, ma questa relazione è principalmente per la tua comodità e viene utilizzata per scopi di visualizzazione. Nella maggior parte dei casi, i totali delle sottocategorie non sono inclusi nel totale della categoria di livello superiore, sebbene vi siano report e visualizzazioni specifici in cui ciò può essere fatto. </para>
+</sect3>
+
 </sect2>
 
-<sect2 id="makingmostof.mapping.tags">
-<title
+<sect2 id="makingmostof.mapping.tags"
+><title
 >Etichette</title>
-
 <para
->Le etichette sono molto simili alle categorie, poiché sono anche conti non gestiti che non hanno un valore. Tuttavia, a differenza delle categorie, l'utilizzo delle etichette è completamente facoltativo. </para>
+>Le etichette sono molto simili alle categorie, in quanto sono anche conti non gestiti che non hanno un valore. Tuttavia, a differenza delle categorie, l'uso delle etichette è completamente facoltativo. Possono essere utilizzati per raggruppare le transazioni a fini della creazione di report. </para>
 </sect2>
 
-<sect2 id="makingmostof.mapping.payees">
-<title
+<sect2 id="makingmostof.mapping.payees"
+><title
 >Beneficiari</title>
-
 <para
->Per le transazioni normali, sono facoltativi. Sono invece richiesti per le transazioni pianificate. Per ogni beneficiario viene visualizzato uno storico delle transazioni, con la relativa categoria. </para>
+>Un beneficiario (o pagante) rappresenta qualcuno o un gruppo a cui paghi denaro o che ti paga denaro. Come per le etichette, non sono gestiti e non hanno un valore. Sono principalmente una comodità per poter segnalare quanti soldi hai inviato a qualcuno o speso in un particolare negozio. Sono facoltativi per la maggior parte delle transazioni, ma sono obbligatori per le transazioni pianificate, descritte di seguito. Per ogni beneficiario può essere visualizzata una cronologia delle transazioni, con categorie. </para>
 </sect2>
 
-<sect2 id="makingmostof.mapping.schedules">
-<title
+<sect2 id="makingmostof.mapping.schedules"
+><title
 >Transazioni pianificate</title>
-
 <para
->Quando ci sono delle transazioni che avvengono con regolarità, possono essere impostate come una pianificazione. Dalle pianificazioni vengono create delle transazioni; quelle passate possono essere visualizzate nella pagina iniziale. </para>
+>Laddove le transazioni avvengano regolarmente, come stipendi o bollette, queste possono essere impostate in base a una pianificazione. Le transazioni vengono create da Pianificazioni. Le prossime transazioni pianificate e quelle in ritardo possono essere visualizzate nella pagina iniziale. </para>
 </sect2>
 </sect1>
 
-<sect1 id="makingmostof.usefultips">
-<title
+<sect1 id="makingmostof.usefultips"
+><title
 >Consigli utili</title>
+<para
+>Quando avvii &kmymoney;, la vista principale, o pagina iniziale, mostra una panoramica di alto livello delle tue finanze. È divisa in diverse sezioni, e puoi personalizzare quali visualizzare e in quale ordine. Sulla sinistra, ci sono icone per ciascuna delle principali viste. Ogni vista è usata da &kmymoney; per presentare un diverso tipo di dati per l'inserimento o la revisione. </para>
 
 <para
 >A meno che non si tengano soldi sotto il materasso o sotto le assi del pavimento, probabilmente si hanno dei conti in almeno un istituto, e ognuno può essere in credito o in debito. Per familiarizzare con il funzionamento di &kmymoney;, scegliere un conto che si vuole tenere sotto controllo con &kmymoney; e selezionare la voce di menu <menuchoice
@@ -297,33 +313,56 @@
 > <guimenuitem
 >Nuovo</guimenuitem
 ></menuchoice
-> per configurare il file di un conto. </para>
+> per configurare un file di dati. </para>
 
 <para
 >Se hai già usato un gestore delle finanze personali, potresti essere in grado di importare i dati in &kmymoney;. </para>
 
 <para
->Se si hanno delle entrate o delle uscite regolari dal conto, andare in Beneficiario e digitare i nomi dei paganti e dei beneficiari; poi andare in Pianificazione e compilare una Nuova pianificazione per ogni transazione ricorrente. Se non si è digitato il beneficiario o il pagante, &kmymoney; offre la possibilità di farlo durante la creazione della pianificazione. </para>
+>Se si hanno delle entrate o delle uscite regolari da questo conto, andare nella vista dei beneficiari e digitare i nomi dei paganti e dei beneficiari; poi andare  nella vista delle transazioni pianificate e compilare una nuova pianificazione per ogni transazione ricorrente. Se non si è digitato il beneficiario o il pagante, &kmymoney; offre la possibilità di farlo durante la creazione della pianificazione. </para>
 
 <para
->Per aggiungere altre transazioni, andare in Registri; anche qui, è possibile aggiungere nuovi beneficiari e categorie mentre si inserisce una transazione oppure inserirli prima in Beneficiari o in Categorie. </para>
+>Per aggiungere altre transazioni, vai alla vista dei registri; puoi aggiungere nuovi beneficiari e categorie durante l'inserimento di una transazione oppure andando alla vista dei beneficiari o delle categorie prima di inserire la transazione. </para>
 
 <para
->Probabilmente, le categorie predefinite non corrispondono esattamente ai tuoi bisogni; si possono cancellare con facilità quelle di cui non si ha bisogno e aggiungere quelle utili. Quando si inserisce una transazione, è necessario digitare solo alcune lettere del nome della categoria, e &kmymoney; aprirà un menu a tendina che elenca le categorie corrispondenti da cui è possibile scegliere. </para>
+>A seconda dell'opzione scelta durante la configurazione del file di dati, probabilmente scoprirai che le categorie predefinite non corrispondono esattamente alle tue esigenze; ​ ​puoi facilmente eliminare quelle di cui sai che non avrai mai bisogno e aggiungerne altre di cui hai bisogno. Ma quando inserisci una transazione, devi solo digitare alcune lettere di una categoria e &kmymoney; ti offrirà un elenco a tendina delle categorie corrispondenti tra cui scegliere. </para>
 
 <para
->È possibile aggiungere diversi conti, gestiti da diversi istituti; all'apertura di &kmymoney; sarà visualizzato quello preferito, ma è possibile selezionarne facilmente un altro. </para>
+>Puoi aggiungere diversi conti gestiti da istituti diversi; quelli preferiti (anche detti «preferiti») saranno visualizzati quando apri &kmymoney;, ma puoi passare rapidamente a uno qualsiasi degli altri. </para>
 
 <para
 >Quando si esegue un pagamento, &kmymoney; calcolerà il numero successivo dell'assegno; lo si può eliminare se non si sta facendo un assegno o modificarlo se il primo assegno inserito non è il numero 1. In alternativa, è possibile disabilitare l'auto-incremento del numero degli assegni. </para>
 
 <para
->Ogni tanto potresti ricevere degli estratti conto dai tuoi istituti; è possibile riconciliare i conti di &kmymoney; con questi estratti conto, in modo da avere sempre una registrazione corretta dello stato delle tue finanze. </para>
+>Ogni tanto potresti ricevere estratti conto del tuo conto dagli istituti che utilizzi. Puoi riconciliare i tuoi conti &kmymoney; con questi estratti conto in modo da sapere di avere una rappresentazione accurata dello stato attuale delle tue finanze. </para>
 
 <para
->Se si va in Report, si possono trovare diversi report; per personalizzarli, aprirne uno simile a quello che si vuole e selezionare «Nuovo» (non «Copia»). Poi, lo si può personalizzare in base alle proprie esigenze e anche marcarlo come report preferito se lo si desidera. </para>
+>Se si va nella vista dei report, si troveranno diversi report predefiniti. Per personalizzarli, aprirne uno simile a quello che si vuole e selezionare «Nuovo» (non «Copia»). Poi, lo si può personalizzare in base alle proprie esigenze e anche marcarlo come report preferito se lo si desidera. </para>
 
 <para
->Nonostante &kmymoney; non sia inteso per un utilizzo aziendale, se si ha un'azienda personale e quindi non si devono pagare degli stipendi, probabilmente è possibile personalizzare &kmymoney; in modo da soddisfare i propri bisogni, soprattutto per quanto riguarda i budget e le previsioni; è possibile anche esportare i report personalizzati in CSV, per l'utilizzo in altre applicazioni. </para>
+>Nonostante &kmymoney; non sia pensato per l'utilizzo in un contesto aziendale, se si ha un'azienda personale e quindi non si devono pagare degli stipendi, è possibile personalizzare &kmymoney; in modo da soddisfare le proprie esigenze, soprattutto per quanto riguarda i budget e le previsioni; è possibile anche esportare i report personalizzati in CSV, per l'utilizzo in altre applicazioni. </para>
+</sect1>
+
+<sect1 id="makingmostof.plugins"
+><title
+>Estensioni</title>
+<para
+>Sebbene non sia necessaria una conoscenza dettagliata delle estensioni per utilizzare &kmymoney;, una conoscenza di base è utile, poiché il concetto è menzionato in molti punti di questo manuale. Quando &kmymoney; è stato originariamente progettato, tutte le caratteristiche e le funzionalità sono state implementate all'interno del codice sorgente del programma. Man mano che venivano aggiunte più caratteristiche e funzionalità al programma, è stato progettato un sistema di estensioni, in modo che funzionalità aggiuntive potessero essere aggiunte in un modo che non richiedesse la modifica di nessuno dei file del codice sorgente principale. Quando &kmymoney; si avvia, cerca in una cartella specifica tutte le estensioni e crea il menu appropriato e le voci di configurazione per quelle che trova. </para>
+
+<para
+>Quando furono scritte le prime estensioni, nonostante il loro codice sorgente fosse incluso nel codice sorgente completo di &kmymoney;, non tutte le distribuzioni &Linux; li includevano nelle versioni che compilavano. Per un certo periodo, il manuale includeva istruzioni per controllare questo e per compilarli da soli, se necessario. A questo punto, molte delle funzionalità di base di &kmymoney; sono state implementate come estensioni e sono incluse in tutte le distribuzioni, così come in &Windows;, &macOS;, Appimage e altre versioni distribuite sul <ulink url="https://www.kmymoney.org"
+>sito web di &kmymoney;</ulink
+>. </para>
+
+<para
+>Per maggiori informazioni su come determinare quali estensioni sono installate e attive e su come configurarli, consultare la sezione sulle <link linkend="details.settings.plugins"
+>Estensioni</link
+> nel capitolo relativo alle <link linkend="details.settings"
+>Impostazioni</link
+>. </para>
+
+<para
+>Se desideri scrivere la tua estensione per implementare una nuova funzionalità, come l'importazione o l'esportazione di dati in un formato personalizzato, dovresti usare una delle estensioni di importazione o esportazione esistenti come esempio. Se lo fai, scrivi alla lista di distribuzione degli sviluppatori &devlist;, nel caso in cui qualcuno abbia già iniziato uno sforzo simile e perché il tuo lavoro potrebbe essere di interesse per altri utenti. </para>
+
 </sect1>
 </chapter>

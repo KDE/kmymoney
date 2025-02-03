@@ -4,28 +4,41 @@
   <authorgroup>
     <author
 >&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->21/07/2010</date>
+>1/12/2024</date>
   <releaseinfo
->4.5</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Riconciliazione</title>
 
-<sect1 id="details.reconcile.whatis">
-<title
+<sect1 id="details.reconcile.whatis"
+><title
 >Cos'è la riconciliazione?</title>
+<para
+>La riconciliazione è il processo di verifica che i tuoi dati per un conto siano coerenti con i dati dell'istituto per quel conto. Ciò avviene confrontando le transazioni che hai inserito in &kmymoney; con le transazioni elencate per quel conto dall'istituto. Ciò avviene più comunemente con l'elenco delle transazioni in un estratto conto, che sia un estratto conto bancario, un estratto conto della carta di credito, un estratto conto del prestito o qualsiasi altro estratto conto. Può anche essere fatto rispetto a un elenco in linea del conto, sebbene ciò sia meno comune. Se vengono rilevate delle discrepanze, allora tu o la persona che ha creato l'estratto conto avete commesso un errore. </para>
 
 <para
->La riconciliazione è la messa in corrispondenza delle transazioni inserite in &kmymoney; con quelle presenti nella lista fornita dall'istituto. Di solito si usa un estratto conto, ad esempio quello di un conto corrente, di una carta di credito o di un mutuo. Può essere fatta anche con la lista in linea delle transazioni del conto, anche se questo è meno comune. Se vengono rilevate delle discrepanze, è stato commesso un errore: da te o da chi ha fatto l'estratto conto. </para>
+>Completare il processo di riconciliazione per un account significa essere certi che i record per quel conto, fino alla data della riconciliazione, siano corretti. Questo viene fatto più comunemente per gli account presso istituti come banche o negozi, ma alcuni utenti scelgono di farlo per altri conti, come il contante. In tal caso, significa che sei sicuro delle registrazioni fino alla data di riconciliazione e sei certo che non troverai ulteriori ricevute di cassa e che il saldo del conto in &kmymoney; è lo stesso dell'importo effettivo di denaro contante nelle tue tasche. </para>
 
 <para
->Per riconciliare un conto, scegliere il conto dalla casella a discesa, fare clic sull'icona  di riconciliazione <guiicon
+>La riconciliazione non è richiesta per nessun conto, ma riconciliando un conto regolarmente, ad esempio mensilmente, avrai meno registrazioni da esaminare se trovi una discrepanza. </para>
+</sect1>
+
+<sect1 id="details.reconcile.wizard"
+><title
+>La procedura guidata di riconciliazione</title>
+<para
+>Notare che man mano che si avanza nel processo di riconciliazione, ci sono più percorsi possibili per immettere tutti i dati necessari, soprattutto se è necessario trovare e correggere qualche discrepanza tra &kmymoney; e l'estratto conto. Sono tutti validi e uno non è migliore dell'altro. Con il passare del tempo, come per molte attività all'interno di &kmymoney;, si troverà il modo che meglio soddisfa le proprie esigenze e il proprio approccio alla gestione delle finanze. </para>
+
+<para
+>Per riconciliare un conto, selezionare il conto nella vista dei conti o degli istituti o visualizzare il registro, quindi fare clic sull'icona di riconciliazione <guiicon
 ><inlinemediaobject
-><imageobject
-><imagedata fileref="reconcile.png" format="PNG"/></imageobject
+><imageobject>
+<imagedata fileref="reconcile.png" format="PNG"/></imageobject
 ></inlinemediaobject
 ></guiicon
 >, selezionare la voce di menu <menuchoice
@@ -34,137 +47,155 @@
 > <guimenuitem
 >Riconcilia...</guimenuitem
 ></menuchoice
-> o usare la scorciatoia <keycombo
+> o utilizzare la scorciatoia <keycombo
 >&Ctrl;&Shift;<keycap
 >R</keycap
 ></keycombo
 >. </para>
-</sect1>
 
-<sect1 id="details.reconcile.wizard">
-<title
->La procedura guidata di riconciliazione</title>
 <para
->Questo avvierà la procedura guidata di riconciliazione. La prima pagina spiega brevemente il processo. Fare clic su <guibutton
+>Questo avvierà la procedura guidata di riconciliazione. La prima pagina descrive brevemente il processo da seguire. Fare clic su <guibutton
 >Avanti</guibutton
-> per iniziare veramente la procedura. </para>
+> per iniziare effettivamente la procedura. </para>
 
-<para>
 <screenshot>
-	<screeninfo
->Procedura guidata di riconciliazione</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="reconcile1.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Procedura guidata di riconciliazione</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo
+>introduzione alla procedura guidata di riconciliazione</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="reconcile1.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>introduzione alla procedura guidata di riconciliazione</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
-</para>
 
-<sect2 id="details.reconcile.wizard.statement">
-<title
+<sect2 id="details.reconcile.wizard.statement"
+><title
 >Dettagli dell'estratto conto</title>
 <para
->La data, il bilancio iniziale e finale si possono trovare nell'estratto conto. Assicurarsi che i valori corrispondano e fare clic sul pulsante <guibutton
+>La data di estratto conto iniziale presentata da &kmymoney; è in genere 30 giorni dopo la riconciliazione più recente per quel conto. Il saldo iniziale presentato è il saldo finale della riconciliazione precedente. Questo è in realtà calcolato come la somma degli importi di tutte le transazioni nel conto che sono state compensate o riconciliate, fino alla data della riconciliazione precedente. Il saldo finale presentato è il saldo iniziale più gli importi (aggiunti per i depositi e sottratti per i prelievi) per tutte le transazioni compensate per il conto dalla riconciliazione precedente. (Questo include anche le transazioni compensate prima della data della riconciliazione precedente.) Se il saldo iniziale non corrisponde all'estratto conto, allora devi confermare che la riconciliazione precedente è stata eseguita correttamente. </para>
+
+<para
+>In teoria, il saldo finale al momento della riconciliazione precedente non dovrebbe essere diverso dal saldo iniziale in questo momento. Tuttavia, &kmymoney; non ti impedisce di apportare modifiche alle transazioni prima della riconciliazione più recente. Modifiche di questo tipo sono la causa usuale di tali discrepanze. A un certo punto, &kmymoney; verrà probabilmente migliorato per rendere molto più evidente all'utente se viene apportata una modifica del genere. </para>
+
+<para
+>La data, il saldo iniziale e finale si possono trovare nell'estratto conto. Assicurarsi che le cifre corrispondano e fare clic su <guibutton
 >Avanti</guibutton
->. Se i valori non corrispondono, inserire i valori presenti sull'estratto e fare clic sul pulsante <guibutton
+>. Se il saldo iniziale non corrisponde, vedere i paragrafi precedenti. Se la data dell'estratto conto o il saldo finale non corrispondono, immettere le cifre come elencate nell'estratto conto e fare clic su <guibutton
 >Avanti</guibutton
 >. </para>
 
-<para>
 <screenshot>
-	<screeninfo
->Procedura guidata di riconciliazione</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="reconcile2.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Procedura guidata di riconciliazione</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo
+>informazioni di avvio della procedura guidata di riconciliazione</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="reconcile2.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>informazioni di avvio della procedura guidata di riconciliazione</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
-</para>
 </sect2>
 
-<sect2 id="details.reconcile.wizard.interest">
-<title
+<sect2 id="details.reconcile.wizard.interest"
+><title
 >Interessi</title>
 <para
->Se la riconciliazione dell'estratto conto è fatta su un conto bancario con interessi e/o spese, inserire i valori nei rispettivi campi. Si può associare una categoria ad ognuna di queste voci. </para>
+>Se si sta riconciliando un conto bancario o qualsiasi conto con interessi e/o spese o commissioni, inserire questi valori nei campi appropriati. Entrambi questi campi sono facoltativi, ma se vengono utilizzati, allora deve essere assegnata una categoria per ogni importo immesso. Nota che questi importi potrebbero essere già stati immessi se importi transazioni direttamente o tramite un file scaricato, in questo caso non dovresti immetterli di nuovo qui, altrimenti avrai una transazione duplicata. </para>
 
-<note>
+<note
+><title
+>Interessi o addebito</title>
 <para
->Il campo Interesse è per l'interesse guadagnato. Se si deve pagare un interesse, ad esempio per un conto di una carta di credito, questo valore deve essere inserito come spesa. </para>
+>Il campo Interesse è per gli interessi che hai guadagnato. Se devi pagare interessi, ad esempio, per un conto di carta di credito, questo dovrebbe essere inserito come addebito. In entrambi i casi, puoi scegliere la categoria appropriata per l'importo. </para>
 </note>
 
-<para>
 <screenshot>
-	<screeninfo
->Procedura guidata di riconciliazione</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="reconcile3.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Procedura guidata di riconciliazione</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo
+>procedura di riconciliazione interessi e spese</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="reconcile3.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>procedura di riconciliazione interessi e spese</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
-</para>
 
 <para
 >Fare clic su <guibutton
 >Continua</guibutton
-> per iniziare a mettere in corrispondenza l'estratto conto con i dati inseriti. È bene notare che si conclude la procedura guidata di riconciliazione, ma non il processo di riconciliazione. La vista dei registri non è quella solita, visualizza solo le transazioni non ancora marcate come riconciliate. Come viene spiegato sotto, è comunque necessario compensare le transazioni e dire a &kmymoney; che il conto è riconciliato. </para>
+> per iniziare a verificare la corrispondenza dell'estratto conto con i dati inseriti. È bene notare che questo conclude la procedura guidata di riconciliazione, ma non il processo di riconciliazione. A questo punto, &kmymoney; visualizza la vista dei registri per questo conto, ma modifica la visualizzazione dei registri in due modi. Innanzitutto, mostra solo le transazioni che non sono ancora state contrassegnate come riconciliate. In secondo luogo, la riga sotto la visualizzazione del registro principale mostra il saldo finale dall'estratto conto a sinistra, il saldo compensato del conto al centro e la differenza tra questi due sulla destra. Come descritto di seguito, devi comunque compensare le transazioni e poi dire a &kmymoney; che il conto è riconciliato. </para>
 </sect2>
 
-<sect2 id="details.reconcile.wizard.clearing">
-<title
+<sect2 id="details.reconcile.wizard.clearing"
+><title
 >Compensare le transazioni</title>
 <para
->Durante la riconciliazione, si possono modificare le transazioni per farle corrispondere all'estratto conto, e si possono creare nuove transazioni, come al solito. Per marcare una transazione come compensata, fare clic sulla colonna <guilabel
+>Durante la riconciliazione, qualsiasi transazione può essere modificata per farla corrispondere all'estratto conto e nuove transazioni possono essere create come di consueto. Per contrassegnare una transazione come compensata, fare clic sulla colonna <guilabel
 >C</guilabel
-> nella lista. Una transazione è Compensata quando corrisponde alla transazione dell'estratto conto. </para>
+> della transazione nel registro. È anche possibile selezionare il menu <menuchoice
+><guimenu
+>Transazioni</guimenu
+></menuchoice
+> o fare clic con il pulsante destro del mouse sulla transazione per visualizzare il menu contestuale «Opzioni della transazione», quindi selezionare <menuchoice
+> <shortcut
+> <keycombo
+> <keysym
+>&Ctrl;</keysym
+> <keysym
+>&Alt;</keysym
+> <keysym
+>&Space;</keysym
+> </keycombo
+></shortcut
+> <guisubmenu
+>Contrassegna transazione come...</guisubmenu
+> <guimenuitem
+>Compensata</guimenuitem
+> </menuchoice
+>; Una transazione è considerata compensata quando corrisponde alla transazione nell'estratto conto. </para>
 
 <para
->Il riquadro dei comandi (appena sotto all'area con l'elenco delle transazioni) visualizza l'importo dell'estratto conto a sinistra, l'importo compensato al centro e la differenza a destra. Man mano che marchi le transazioni come completate, questi valori vengono aggiornati. </para>
+>Quando contrassegni le transazioni come compensate, gli importi compensati e differenziali indicati sotto il registro saranno aggiornati. </para>
 
 <para
->È bene notare che, essendo la riconciliazione un processo per mettere in corrispondenza i dati nel conto con quelli nell'estratto conto, le modifiche a transazioni con date successive alla data dell'estratto conto saranno sì salvate, ma non modificheranno l'importo compensato visualizzato nel riquadro dei comandi. </para>
+>Si noti, tuttavia, che poiché la riconciliazione è il processo di corrispondenza dei dati nel proprio conto con quelli di un estratto conto, l'importo compensato mostrato sotto il registro è l'importo compensato alla data dell'estratto conto. Le modifiche a qualsiasi transazione con una data successiva alla data dell'estratto conto immessa nella procedura guidata saranno salvate, ma non avranno alcun effetto sull'importo compensato mostrato sotto la visualizzazione del registro. </para>
 
 <screenshot>
-	<screeninfo
->Procedura guidata di riconciliazione</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="reconcile4.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Procedura guidata di riconciliazione</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo
+>registro durante la riconciliazione</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="reconcile4.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>registro durante la riconciliazione</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 </sect2>
 
-<sect2 id="details.reconcile.complete">
-<title
+<sect2 id="details.reconcile.complete"
+><title
 >Completamento della riconciliazione</title>
 
-<sect3 id="details.reconcile.finish">
-<title
+<sect3 id="details.reconcile.finish"
+><title
 >Fine della riconciliazione</title>
 <para
->Quando la differenza tra l'estratto conto e il bilancio delle transazioni compensate è zero, il conto è riconciliato ed è possibile fare clic sul pulsante <guibutton
+>Quando la differenza tra l'estratto conto e il saldo delle transazioni compensate è zero, il conto è riconciliato ed è possibile fare clic sul pulsante <guibutton
 >Fine</guibutton
->. A questo punto, &kmymoney; marcherà come riconciliate tutte le transazioni che erano marcate come compensate, e la colonna <guilabel
+>. A questo punto, &kmymoney; prende tutte le transazioni che sono state contrassegnate come compensate (solo quelle con una data precedente alla data dell'estratto conto) e le contrassegna come riconciliate, e la colonna <guilabel
 >C</guilabel
 > mostrerà delle <quote
 >R</quote
@@ -173,38 +204,60 @@
 > per mostrare all'utente il cambiamento. Inoltre, salva i cambiamenti e memorizza anche che il conto è riconciliato. (È comunque necessario salvare il file se si vogliono salvare le modifiche effettuate.) </para>
 </sect3>
 
-<sect3 id="details.reconcile.postpone">
-<title
+<sect3 id="details.reconcile.report"
+><title
+>Il report di riconciliazione</title>
+<para
+>L'ultima cosa che fa la procedura guidata di riconciliazione è presentare un report, sotto forma di finestra a comparsa con due schede. </para>
+
+<sect4
+><title
+>Scheda Riepilogo</title>
+<para
+>Questa scheda mostra un riepilogo della riconciliazione, inclusi i saldi iniziali e finali, nonché il numero e l'importo dei pagamenti e dei depositi: compensati, in sospeso e successivi alla data di riconciliazione. </para>
+</sect4>
+
+<sect4
+><title
+>Scheda Dettagli</title>
+<para
+>Questa scheda mostra un elenco di pagamenti e addebiti in sospeso. Si tratta di transazioni non contrassegnate prima della data di rendicontazione della riconciliazione. </para>
+</sect4>
+</sect3>
+
+<sect3 id="details.reconcile.postpone"
+><title
 >Rimandare la riconciliazione</title>
 <para
->Se hai dei problemi nel completamento della riconciliazione, o hai bisogno di ottenere informazioni aggiuntive prima di completarla, la puoi rimandare, facendo clic sul pulsante <guibutton
->Rinvia la riconciliazione</guibutton
->. In questo caso, &kmymoney; si ricorderà i valori inseriti all'inizio della procedura guidata, ma non marcherà come riconciliate le transazioni compensate, e ripristinerà la visualizzazione normale del registro. Se esci da &kmymoney; prima di fare clic su <guibutton
+>Se hai dei problemi nel completamento della riconciliazione, o hai bisogno di ottenere informazioni aggiuntive prima di completare il processo, la puoi posticipare, facendo clic sul pulsante <guibutton
+>Rinvia</guibutton
+>. In questo caso, &kmymoney; ricorderà i valori inseriti all'inizio della procedura guidata, ma non marcherà come riconciliate le transazioni compensate, e ripristinerà la visualizzazione normale del registro. Se esci da &kmymoney; prima di fare clic su <guibutton
 >Fine</guibutton
 > o <guibutton
->Rinvia la riconciliazione</guibutton
->, la riconciliazione viene rinviata. Tutte le modifiche fatte, ad esempio le transazioni marcate come compensate e le nuove transazioni inserite, non ne sono influenzate, e possono comunque essere salvate prima di uscire da &kmymoney;. Comunque, per riprendere la riconciliazione del conto, dovrai avviare di nuovo la procedura guidata di riconciliazione. </para>
+>Rinvia</guibutton
+>, ha lo stesso effetto di fare clic su <guibutton
+>Rinvia</guibutton
+>. Tutte le modifiche che hai apportato, come contrassegnare le transazioni come compensate o inserire nuove transazioni, non vengono toccate e puoi ancora salvarle prima di uscire da &kmymoney;. Tuttavia, dovrai eseguire di nuovo la procedura guidata di riconciliazione per riconciliare il conto. </para>
 
 <para
->La prossima volta che si avvierà la procedura guidata di riconciliazione, &kmymoney; ricorderà i valori inseriti la volta precedente (ma sarà possibile comunque modificarli se si vuole). Per ricordarlo, la schermata iniziale della procedura guidata sarà diversa. </para>
+>Se fai clic su <guilabel
+>Rinvia</guilabel
+>, la prossima volta che esegui la procedura guidata di riconciliazione su questo conto, &kmymoney; ricorderà i valori immessi quando hai eseguito la procedura guidata in precedenza e potrai modificarli, se necessario. In questo caso, la schermata iniziale della procedura guidata è diversa, per ricordartelo. </para>
 
 <screenshot>
-	<screeninfo
->Procedura guidata di riconciliazione</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="reconcile-redo.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Procedura guidata di riconciliazione</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo
+>completamento della procedura guidata di riconciliazione</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="reconcile-redo.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>riconciliazione; completamento della procedura guidata</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
-
 </sect3>
 </sect2>
 </sect1>
-
 </chapter>
-

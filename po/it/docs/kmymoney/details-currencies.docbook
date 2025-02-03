@@ -24,7 +24,7 @@
 ><title
 >Valuta di base</title>
 <para
->Durante la <link linkend="firsttime.3"
+>Durante la <link linkend="firsttime.newfile"
 >configurazione iniziale di un nuovo file</link
 > di &kmymoney;, si riceverà la richiesta di selezionare la valuta di base. Di solito, la valuta di base è la valuta utilizzata nel proprio paese. La valuta di base è quella che sarà utilizzata come predefinita per tutte le categorie di entrata e uscita e su cui si baseranno i report. Quando si configura un nuovo conto, &kmymoney; imposterà automaticamente come predefinita la valuta di base. Se il proprio conto richiede l'utilizzo di una valuta diversa, è possibile cambiarla durante la <link linkend="details.accounts.create"
 >configurazione del nuovo conto</link

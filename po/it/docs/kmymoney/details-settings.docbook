@@ -671,7 +671,7 @@
 >Mostra il dettaglio completo delle voci di registro</guilabel
 ></title>
         <para
->La selezione di questa opzione fa in modo che il registro mostri tutte le informazioni per le transazioni visualizzate, con righe separate nella colonna dei dettagli per Categoria, Etichette e Promemoria. Se non è selezionata, Categoria, Etichette e Promemoria non saranno visualizzate. Questo ha lo stesso effetto della selezione dell'opzione di menu <linklinkend="reference.menus.settings.transactiondetail"
+>La selezione di questa opzione fa in modo che il registro mostri tutte le informazioni per le transazioni visualizzate, con righe separate nella colonna dei dettagli per Categoria, Etichette e Promemoria. Se non è selezionata, Categoria, Etichette e Promemoria non saranno visualizzate. Questo ha lo stesso effetto della selezione dell'opzione di menu <link linkend="reference.menus.settings.transactiondetail"
 >Mostra dettagli della transazione</link
 >. </para>
       </formalpara>

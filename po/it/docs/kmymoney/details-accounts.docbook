@@ -175,7 +175,7 @@
 >Creazione di un conto</title>
 <note
 ><para
->Bisogna avere un file aperto prima di poter creare un nuovo conto. In mancanza di un file, sarà necessario <link linkend="firsttime.3"
+>Bisogna avere un file aperto prima di poter creare un nuovo conto. In mancanza di un file, sarà necessario <link linkend="firsttime.newfile"
 >crearne uno</link
 >. </para
 ></note>
