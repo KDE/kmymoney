@@ -530,6 +530,9 @@ void KPayeesView::executeAction(eMenu::Action action, const SelectedObjects& sel
 
     case eMenu::Action::FileClose:
         d->ui->payeeIdentifiers->closeSource();
+        // clear out data of payee if shown
+        d->ui->m_payees->selectionModel()->clear();
+        d->selectPayee();
         break;
 
     case eMenu::Action::ShowTransaction:
