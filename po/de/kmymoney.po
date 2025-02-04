@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:52+0000\n"
+"POT-Creation-Date: 2025-02-04 01:53+0000\n"
 "PO-Revision-Date: 2022-11-07 20:00+0100\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -6304,7 +6304,7 @@ msgstr "Fehler beim Laden von „%1“."
 msgid "File access error"
 msgstr "Dateizugriffsfehler"
 
-#: kmymoney/kmymoneyutils.cpp:573 kmymoney/views/kpayeesview.cpp:562
+#: kmymoney/kmymoneyutils.cpp:573 kmymoney/views/kpayeesview.cpp:565
 #, kde-format
 msgid "New Payee"
 msgstr "Neuer Zahlungsempfänger"
@@ -20551,28 +20551,28 @@ msgstr "Duplikat geöffnet"
 msgid "Unable to modify payee"
 msgstr "Zahlungsempfänger kann nicht geändert werden"
 
-#: kmymoney/views/kpayeesview.cpp:585
+#: kmymoney/views/kpayeesview.cpp:588
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "<p>Möchten Sie den Zahlungsempfänger <b>%1</b> wirklich entfernen?</p>"
 
-#: kmymoney/views/kpayeesview.cpp:587
+#: kmymoney/views/kpayeesview.cpp:590
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr "Möchten alle ausgewählten Zahlungsempfänger wirklich entfernen?"
 
-#: kmymoney/views/kpayeesview.cpp:589
+#: kmymoney/views/kpayeesview.cpp:592
 #, kde-format
 msgid "Remove Payee"
 msgstr "Zahlungsempfänger entfernen"
 
-#: kmymoney/views/kpayeesview.cpp:603
+#: kmymoney/views/kpayeesview.cpp:606
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr ""
 "<p>Möchten Sie die ausgewählten Zahlungsempfänger wirklich zusammenführen?"
 
-#: kmymoney/views/kpayeesview.cpp:604 kmymoney/views/kpayeesview_p.h:584
+#: kmymoney/views/kpayeesview.cpp:607 kmymoney/views/kpayeesview_p.h:584
 #, kde-format
 msgid "Merge Payees"
 msgstr "Empfänger zusammenführen"

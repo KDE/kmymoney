@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:52+0000\n"
-"PO-Revision-Date: 2025-02-01 08:23+0100\n"
+"POT-Creation-Date: 2025-02-04 01:53+0000\n"
+"PO-Revision-Date: 2025-02-03 20:46+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -6187,7 +6187,7 @@ msgstr "Fel när filen '%1' skulle laddas."
 msgid "File access error"
 msgstr "Filåtkomstfel"
 
-#: kmymoney/kmymoneyutils.cpp:573 kmymoney/views/kpayeesview.cpp:562
+#: kmymoney/kmymoneyutils.cpp:573 kmymoney/views/kpayeesview.cpp:565
 #, kde-format
 msgid "New Payee"
 msgstr "Ny betalningsmottagare"
@@ -16143,21 +16143,18 @@ msgstr ""
 "Rapportera gärna felet till utvecklarnas lista: kmymoney-devel@kde.org"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:150
-#, fuzzy, kde-format
-#| msgid "%1 Balance History"
+#, kde-format
 msgctxt "@title:window Value chart for investments"
 msgid "%1 Value History"
-msgstr "Behållningshistorik för %1"
+msgstr "Värdehistorik för %1"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:156
-#, fuzzy, kde-format
-#| msgid "Balance of %1"
+#, kde-format
 msgid "Value of %1"
-msgstr "Behållning för %1"
+msgstr "Värde på %1"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:159
-#, fuzzy, kde-format
-#| msgid "%1 Balance History"
+#, kde-format
 msgctxt "@title:window Balance chart for account"
 msgid "%1 Balance History"
 msgstr "Behållningshistorik för %1"
@@ -19067,6 +19064,8 @@ msgctxt "@info:tooltip"
 msgid ""
 "Transaction is not balanced. Either correct values or assign an account."
 msgstr ""
+"Transaktionen är inte balanserad. Antingen korrigera värden eller tilldela "
+"ett konto."
 
 #. i18n: ectx: property (toolTip), widget (AmountEdit, priceAmountEdit)
 #: kmymoney/views/investtransactioneditor.ui:26
@@ -20152,27 +20151,27 @@ msgstr "Duplicerat betalningsmottagarnamn"
 msgid "Unable to modify payee"
 msgstr "Kan inte ändra betalningsmottagare"
 
-#: kmymoney/views/kpayeesview.cpp:585
+#: kmymoney/views/kpayeesview.cpp:588
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "<p>Vill du verkligen ta bort betalningsmottagaren <b>%1</b>?</p>"
 
-#: kmymoney/views/kpayeesview.cpp:587
+#: kmymoney/views/kpayeesview.cpp:590
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr "Vill du verkligen ta bort alla markerade betalningsmottagare?"
 
-#: kmymoney/views/kpayeesview.cpp:589
+#: kmymoney/views/kpayeesview.cpp:592
 #, kde-format
 msgid "Remove Payee"
 msgstr "Ta bort betalningsmottagare"
 
-#: kmymoney/views/kpayeesview.cpp:603
+#: kmymoney/views/kpayeesview.cpp:606
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>Vill du verkligen sammanfoga markerade betalningsmottagare?"
 
-#: kmymoney/views/kpayeesview.cpp:604 kmymoney/views/kpayeesview_p.h:584
+#: kmymoney/views/kpayeesview.cpp:607 kmymoney/views/kpayeesview_p.h:584
 #, kde-format
 msgid "Merge Payees"
 msgstr "Sammanfoga betalningsmottagare"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:52+0000\n"
+"POT-Creation-Date: 2025-02-04 01:53+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -6488,7 +6488,7 @@ msgstr "Σφάλμα κατά τη φόρτωση του αρχείου «%1»."
 msgid "File access error"
 msgstr "Σφάλμα πρόσβασης στο αρχείο"
 
-#: kmymoney/kmymoneyutils.cpp:573 kmymoney/views/kpayeesview.cpp:562
+#: kmymoney/kmymoneyutils.cpp:573 kmymoney/views/kpayeesview.cpp:565
 #, kde-format
 msgid "New Payee"
 msgstr "Νέος δικαιούχος"
@@ -21276,27 +21276,27 @@ msgstr "Διπλό άνοιγμα"
 msgid "Unable to modify payee"
 msgstr "Αδυναμία τροποποίησης του δικαιούχου"
 
-#: kmymoney/views/kpayeesview.cpp:585
+#: kmymoney/views/kpayeesview.cpp:588
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "<p>Θέλετε πράγματι να αφαιρεθεί ο δικαιούχος <b>%1</b>;</p>"
 
-#: kmymoney/views/kpayeesview.cpp:587
+#: kmymoney/views/kpayeesview.cpp:590
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr "Θέλετε πράγματι να αφαιρεθούν όλοι οι επιλεγμένοι δικαιούχοι;"
 
-#: kmymoney/views/kpayeesview.cpp:589
+#: kmymoney/views/kpayeesview.cpp:592
 #, kde-format
 msgid "Remove Payee"
 msgstr "Αφαίρεση δικαιούχου"
 
-#: kmymoney/views/kpayeesview.cpp:603
+#: kmymoney/views/kpayeesview.cpp:606
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>Θέλετε πράγματι να συγχωνευτούν οι επιλεγμένοι δικαιούχοι;"
 
-#: kmymoney/views/kpayeesview.cpp:604 kmymoney/views/kpayeesview_p.h:584
+#: kmymoney/views/kpayeesview.cpp:607 kmymoney/views/kpayeesview_p.h:584
 #, kde-format
 msgid "Merge Payees"
 msgstr "Συγχωνευμένοι δικαιούχοι"

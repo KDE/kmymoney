@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:52+0000\n"
+"POT-Creation-Date: 2025-02-04 01:53+0000\n"
 "PO-Revision-Date: 2023-09-18 10:19-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -6311,7 +6311,7 @@ msgstr "Erro carregando arquivo '%1'."
 msgid "File access error"
 msgstr "Erro de acesso ao arquivo"
 
-#: kmymoney/kmymoneyutils.cpp:573 kmymoney/views/kpayeesview.cpp:562
+#: kmymoney/kmymoneyutils.cpp:573 kmymoney/views/kpayeesview.cpp:565
 #, kde-format
 msgid "New Payee"
 msgstr "Novo beneficiário"
@@ -20508,27 +20508,27 @@ msgstr "Abrir duplicata"
 msgid "Unable to modify payee"
 msgstr "Não foi possível modificar o beneficiário"
 
-#: kmymoney/views/kpayeesview.cpp:585
+#: kmymoney/views/kpayeesview.cpp:588
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "<p>Deseja realmente remover o beneficiário <b>%1</b>?</p>"
 
-#: kmymoney/views/kpayeesview.cpp:587
+#: kmymoney/views/kpayeesview.cpp:590
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr "Deseja realmente remover todos os beneficiários selecionados?"
 
-#: kmymoney/views/kpayeesview.cpp:589
+#: kmymoney/views/kpayeesview.cpp:592
 #, kde-format
 msgid "Remove Payee"
 msgstr "Remover beneficiário"
 
-#: kmymoney/views/kpayeesview.cpp:603
+#: kmymoney/views/kpayeesview.cpp:606
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>Deseja realmente mesclar todos os beneficiários selecionados?"
 
-#: kmymoney/views/kpayeesview.cpp:604 kmymoney/views/kpayeesview_p.h:584
+#: kmymoney/views/kpayeesview.cpp:607 kmymoney/views/kpayeesview_p.h:584
 #, kde-format
 msgid "Merge Payees"
 msgstr "Mesclar beneficiários"

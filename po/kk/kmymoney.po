@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:52+0000\n"
+"POT-Creation-Date: 2025-02-04 01:53+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -6362,7 +6362,7 @@ msgstr "'%1' файлын жүктеу қатесі."
 msgid "File access error"
 msgstr "Файлға қатынау қатесі"
 
-#: kmymoney/kmymoneyutils.cpp:573 kmymoney/views/kpayeesview.cpp:562
+#: kmymoney/kmymoneyutils.cpp:573 kmymoney/views/kpayeesview.cpp:565
 #, kde-format
 msgid "New Payee"
 msgstr "Жаңа төлем алушысы"
@@ -20918,28 +20918,28 @@ msgstr "Қайталап ашу"
 msgid "Unable to modify payee"
 msgstr "Төлем алушы өзгертілмейді"
 
-#: kmymoney/views/kpayeesview.cpp:585
+#: kmymoney/views/kpayeesview.cpp:588
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "<p><b>%1</b> деген төлем алушыны өшіргіңіз келгені рас па?</p>"
 
-#: kmymoney/views/kpayeesview.cpp:587
+#: kmymoney/views/kpayeesview.cpp:590
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr "Шынымен таңдағандарды алып тастағыңыз келе ме?"
 
-#: kmymoney/views/kpayeesview.cpp:589
+#: kmymoney/views/kpayeesview.cpp:592
 #, kde-format
 msgid "Remove Payee"
 msgstr "Төлем алушыны өшіру"
 
-#: kmymoney/views/kpayeesview.cpp:603
+#: kmymoney/views/kpayeesview.cpp:606
 #, fuzzy, kde-format
 #| msgid "Do you really want to remove all selected payees?"
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "Шынымен таңдағандарды алып тастағыңыз келе ме?"
 
-#: kmymoney/views/kpayeesview.cpp:604 kmymoney/views/kpayeesview_p.h:584
+#: kmymoney/views/kpayeesview.cpp:607 kmymoney/views/kpayeesview_p.h:584
 #, fuzzy, kde-format
 #| msgid "  Payees"
 msgid "Merge Payees"

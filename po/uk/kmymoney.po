@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:52+0000\n"
-"PO-Revision-Date: 2025-02-01 09:19+0200\n"
+"POT-Creation-Date: 2025-02-04 01:53+0000\n"
+"PO-Revision-Date: 2025-02-03 08:45+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -6242,7 +6242,7 @@ msgstr "Під час спроби завантаження файла «%1» с
 msgid "File access error"
 msgstr "Помилка під час спроби доступу до файла"
 
-#: kmymoney/kmymoneyutils.cpp:573 kmymoney/views/kpayeesview.cpp:562
+#: kmymoney/kmymoneyutils.cpp:573 kmymoney/views/kpayeesview.cpp:565
 #, kde-format
 msgid "New Payee"
 msgstr "Створити запис отримувача"
@@ -16325,21 +16325,18 @@ msgstr ""
 "kmymoney-devel@kde.org"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:150
-#, fuzzy, kde-format
-#| msgid "%1 Balance History"
+#, kde-format
 msgctxt "@title:window Value chart for investments"
 msgid "%1 Value History"
-msgstr "Журнал балансу %1"
+msgstr "Журнал значень %1"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:156
-#, fuzzy, kde-format
-#| msgid "Balance of %1"
+#, kde-format
 msgid "Value of %1"
-msgstr "Баланс %1"
+msgstr "Значення %1"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:159
-#, fuzzy, kde-format
-#| msgid "%1 Balance History"
+#, kde-format
 msgctxt "@title:window Balance chart for account"
 msgid "%1 Balance History"
 msgstr "Журнал балансу %1"
@@ -19295,6 +19292,8 @@ msgctxt "@info:tooltip"
 msgid ""
 "Transaction is not balanced. Either correct values or assign an account."
 msgstr ""
+"Операцію не збалансовано. Виправте значення або пов'яжіть з операцією "
+"рахунок."
 
 #. i18n: ectx: property (toolTip), widget (AmountEdit, priceAmountEdit)
 #: kmymoney/views/investtransactioneditor.ui:26
@@ -20390,27 +20389,27 @@ msgstr "Дублювання назви платника"
 msgid "Unable to modify payee"
 msgstr "Не вдалося змінити отримувача"
 
-#: kmymoney/views/kpayeesview.cpp:585
+#: kmymoney/views/kpayeesview.cpp:588
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "<p>Ви справді бажаєте вилучити отримувача <b>%1</b>?</p>"
 
-#: kmymoney/views/kpayeesview.cpp:587
+#: kmymoney/views/kpayeesview.cpp:590
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr "Ви справді бажаєте вилучити всіх позначених отримувачів?"
 
-#: kmymoney/views/kpayeesview.cpp:589
+#: kmymoney/views/kpayeesview.cpp:592
 #, kde-format
 msgid "Remove Payee"
 msgstr "Вилучити отримувача"
 
-#: kmymoney/views/kpayeesview.cpp:603
+#: kmymoney/views/kpayeesview.cpp:606
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>Ви справді бажаєте об'єднати записи позначених отримувачів?"
 
-#: kmymoney/views/kpayeesview.cpp:604 kmymoney/views/kpayeesview_p.h:584
+#: kmymoney/views/kpayeesview.cpp:607 kmymoney/views/kpayeesview_p.h:584
 #, kde-format
 msgid "Merge Payees"
 msgstr "Об'єднання записів отримувачів"

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:52+0000\n"
-"PO-Revision-Date: 2025-02-01 15:38+0100\n"
+"POT-Creation-Date: 2025-02-04 01:53+0000\n"
+"PO-Revision-Date: 2025-02-03 10:46+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -6242,7 +6242,7 @@ msgstr "S'ha produït un error en carregar el fitxer «%1»."
 msgid "File access error"
 msgstr "Error d'accés al fitxer"
 
-#: kmymoney/kmymoneyutils.cpp:573 kmymoney/views/kpayeesview.cpp:562
+#: kmymoney/kmymoneyutils.cpp:573 kmymoney/views/kpayeesview.cpp:565
 #, kde-format
 msgid "New Payee"
 msgstr "Beneficiari nou"
@@ -16284,21 +16284,18 @@ msgstr ""
 "devel@kde.org"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:150
-#, fuzzy, kde-format
-#| msgid "%1 Balance History"
+#, kde-format
 msgctxt "@title:window Value chart for investments"
 msgid "%1 Value History"
-msgstr "Historial del saldo de %1"
+msgstr "Historial del valor de %1"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:156
-#, fuzzy, kde-format
-#| msgid "Balance of %1"
+#, kde-format
 msgid "Value of %1"
-msgstr "Saldo de %1"
+msgstr "Valor de %1"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:159
-#, fuzzy, kde-format
-#| msgid "%1 Balance History"
+#, kde-format
 msgctxt "@title:window Balance chart for account"
 msgid "%1 Balance History"
 msgstr "Historial del saldo de %1"
@@ -19254,7 +19251,7 @@ msgstr "Seleccioneu el títol per a aquesta operació"
 msgctxt "@info:tooltip"
 msgid ""
 "Transaction is not balanced. Either correct values or assign an account."
-msgstr ""
+msgstr "L'operació no està saldada. Corregiu els valors o assigneu un compte."
 
 #. i18n: ectx: property (toolTip), widget (AmountEdit, priceAmountEdit)
 #: kmymoney/views/investtransactioneditor.ui:26
@@ -20348,27 +20345,27 @@ msgstr "Nom de beneficiari duplicat"
 msgid "Unable to modify payee"
 msgstr "No s'ha pogut modificar el beneficiari"
 
-#: kmymoney/views/kpayeesview.cpp:585
+#: kmymoney/views/kpayeesview.cpp:588
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "<p>Esteu segur que voleu eliminar el beneficiari <b>%1</b>?</p>"
 
-#: kmymoney/views/kpayeesview.cpp:587
+#: kmymoney/views/kpayeesview.cpp:590
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr "Esteu segur que voleu eliminar tots els beneficiaris seleccionats?"
 
-#: kmymoney/views/kpayeesview.cpp:589
+#: kmymoney/views/kpayeesview.cpp:592
 #, kde-format
 msgid "Remove Payee"
 msgstr "Elimina beneficiari"
 
-#: kmymoney/views/kpayeesview.cpp:603
+#: kmymoney/views/kpayeesview.cpp:606
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>Esteu segur que voleu fusionar els beneficiaris seleccionats?"
 
-#: kmymoney/views/kpayeesview.cpp:604 kmymoney/views/kpayeesview_p.h:584
+#: kmymoney/views/kpayeesview.cpp:607 kmymoney/views/kpayeesview_p.h:584
 #, kde-format
 msgid "Merge Payees"
 msgstr "Fusiona els beneficiaris"

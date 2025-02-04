@@ -314,9 +314,9 @@
 
 <sect4
 ><title
->Operacions equilibrades</title>
+>Operacions saldades</title>
 <para
->En els dos programes, les dades s'introdueixen en forma d'operacions, cadascuna de les quals generalment constarà de 2 o més entrades desglossades. De fet, les operacions vàlides del &gnucash; sempre contindran almenys 2 desglossaments, i per a complir amb l'estàndard de comptabilitat de doble entrada del &gnucash;, aquestes hauran d'estar en equilibri monetari (&ead;, hauran d'equilibrar-se a zero). El &kmymoney; encoratja a seguir aquest estàndard, però no el força, qualsevol operació importada que no estigui equilibrada es marcarà a la vista del llibre major com un problema. </para>
+>En els dos programes, les dades s'introdueixen en forma d'operacions, cadascuna de les quals generalment constarà de 2 o més entrades desglossades. De fet, les operacions vàlides del &gnucash; sempre contindran almenys 2 desglossaments, i per a complir amb l'estàndard de comptabilitat de doble entrada del &gnucash;, aquestes hauran d'estar en equilibri monetari (&ead;, hauran de saldar-se a zero). El &kmymoney; encoratja a seguir aquest estàndard, però no el força, qualsevol operació importada que no estigui saldada es marcarà a la vista del llibre major com un problema. </para>
 </sect4>
 
 <sect4
@@ -786,7 +786,7 @@
 >Per a editar un perfil QIF existent, o per a crear-ne un de nou, obriu el diàleg Importador de QIF seleccionant <menuchoice
 > <shortcut
 > <keycombo
->&Ctrl;+&Maj;<keycap
+>&Ctrl;&Maj;<keycap
 >,</keycap
 > </keycombo
 > </shortcut

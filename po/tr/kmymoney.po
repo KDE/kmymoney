@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:52+0000\n"
-"PO-Revision-Date: 2025-02-01 16:44+0300\n"
+"POT-Creation-Date: 2025-02-04 01:53+0000\n"
+"PO-Revision-Date: 2025-02-03 11:40+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -6169,7 +6169,7 @@ msgstr "“%1” dosyası yüklenirken hata."
 msgid "File access error"
 msgstr "Dosya erişim hatası"
 
-#: kmymoney/kmymoneyutils.cpp:573 kmymoney/views/kpayeesview.cpp:562
+#: kmymoney/kmymoneyutils.cpp:573 kmymoney/views/kpayeesview.cpp:565
 #, kde-format
 msgid "New Payee"
 msgstr "Yeni Alacaklı"
@@ -16120,24 +16120,21 @@ msgstr ""
 "Lütfen bu hatayı geliştirici listesine bildirin: kmymoney-devel@kde.org"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:150
-#, fuzzy, kde-format
-#| msgid "%1 Balance History"
+#, kde-format
 msgctxt "@title:window Value chart for investments"
 msgid "%1 Value History"
-msgstr "%1 Bakiye Geçmişi"
+msgstr "%1 Değeri Geçmişi"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:156
-#, fuzzy, kde-format
-#| msgid "Balance of %1"
+#, kde-format
 msgid "Value of %1"
-msgstr "%1 Bakiyesi"
+msgstr "%1 Değeri"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:159
-#, fuzzy, kde-format
-#| msgid "%1 Balance History"
+#, kde-format
 msgctxt "@title:window Balance chart for account"
 msgid "%1 Balance History"
-msgstr "%1 Bakiye Geçmişi"
+msgstr "%1 Bakiyesi Geçmişi"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:167
 #, kde-format
@@ -19041,7 +19038,7 @@ msgstr "Bu işlemin menkul kıymetini girin"
 msgctxt "@info:tooltip"
 msgid ""
 "Transaction is not balanced. Either correct values or assign an account."
-msgstr ""
+msgstr "İşlem dengelenmemiş. Ya değerleri düzeltin ya da bir hesap atayın."
 
 #. i18n: ectx: property (toolTip), widget (AmountEdit, priceAmountEdit)
 #: kmymoney/views/investtransactioneditor.ui:26
@@ -20126,27 +20123,27 @@ msgstr "Yinelenmiş Alacaklı Adı"
 msgid "Unable to modify payee"
 msgstr "Alacaklı değiştirilemiyor"
 
-#: kmymoney/views/kpayeesview.cpp:585
+#: kmymoney/views/kpayeesview.cpp:588
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "<p><b>%1</b> alacaklısını silmeyi gerçekten istiyor musunuz?</p>"
 
-#: kmymoney/views/kpayeesview.cpp:587
+#: kmymoney/views/kpayeesview.cpp:590
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr "Seçili tüm alacaklıları silmeyi gerçekten istiyor musunuz?"
 
-#: kmymoney/views/kpayeesview.cpp:589
+#: kmymoney/views/kpayeesview.cpp:592
 #, kde-format
 msgid "Remove Payee"
 msgstr "Alacaklıyı Kaldır"
 
-#: kmymoney/views/kpayeesview.cpp:603
+#: kmymoney/views/kpayeesview.cpp:606
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>Seçili tüm alacaklıları birleştirmeyi gerçekten istiyor musunuz?"
 
-#: kmymoney/views/kpayeesview.cpp:604 kmymoney/views/kpayeesview_p.h:584
+#: kmymoney/views/kpayeesview.cpp:607 kmymoney/views/kpayeesview_p.h:584
 #, kde-format
 msgid "Merge Payees"
 msgstr "Alacaklıları Birleştir"

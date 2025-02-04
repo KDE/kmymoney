@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:52+0000\n"
-"PO-Revision-Date: 2025-02-01 06:59+0100\n"
+"POT-Creation-Date: 2025-02-04 01:53+0000\n"
+"PO-Revision-Date: 2025-02-03 07:22+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -6205,7 +6205,7 @@ msgstr "Napaka pri nalaganju datoteke '%1'."
 msgid "File access error"
 msgstr "Napaka pri dostopu do datoteke"
 
-#: kmymoney/kmymoneyutils.cpp:573 kmymoney/views/kpayeesview.cpp:562
+#: kmymoney/kmymoneyutils.cpp:573 kmymoney/views/kpayeesview.cpp:565
 #, kde-format
 msgid "New Payee"
 msgstr "Nov prejemnik plačil"
@@ -16208,24 +16208,21 @@ msgstr ""
 "Prijavite to napako na seznam razvijalcev: kmymoney-devel@kde.org"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:150
-#, fuzzy, kde-format
-#| msgid "%1 Balance History"
+#, kde-format
 msgctxt "@title:window Value chart for investments"
 msgid "%1 Value History"
-msgstr "%1 zgodovina stanj"
+msgstr "%1 zgodovina vrednosti"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:156
-#, fuzzy, kde-format
-#| msgid "Balance of %1"
+#, kde-format
 msgid "Value of %1"
-msgstr "Stanje %1"
+msgstr "Vrednost %1"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:159
-#, fuzzy, kde-format
-#| msgid "%1 Balance History"
+#, kde-format
 msgctxt "@title:window Balance chart for account"
 msgid "%1 Balance History"
-msgstr "%1 zgodovina stanj"
+msgstr "%1 Zgodovina stanja"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:167
 #, kde-format
@@ -19150,7 +19147,7 @@ msgstr "Izberi vrednostni papir za to transakcijo"
 msgctxt "@info:tooltip"
 msgid ""
 "Transaction is not balanced. Either correct values or assign an account."
-msgstr ""
+msgstr "Transakcija ni uravnotežena. Popravite vrednosti ali dodelite račun."
 
 #. i18n: ectx: property (toolTip), widget (AmountEdit, priceAmountEdit)
 #: kmymoney/views/investtransactioneditor.ui:26
@@ -20242,27 +20239,27 @@ msgstr "Podvoji ime prejemnika"
 msgid "Unable to modify payee"
 msgstr "Ni mogoče spremeniti prejemnika plačila"
 
-#: kmymoney/views/kpayeesview.cpp:585
+#: kmymoney/views/kpayeesview.cpp:588
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "<p>Ali zares želite odstraniti prejemnika plačil <b>%1</b>?</p>"
 
-#: kmymoney/views/kpayeesview.cpp:587
+#: kmymoney/views/kpayeesview.cpp:590
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr "Ali res želite odstraniti vse izbrane prejemnike plačil?"
 
-#: kmymoney/views/kpayeesview.cpp:589
+#: kmymoney/views/kpayeesview.cpp:592
 #, kde-format
 msgid "Remove Payee"
 msgstr "Odstrani prejemnika plačil"
 
-#: kmymoney/views/kpayeesview.cpp:603
+#: kmymoney/views/kpayeesview.cpp:606
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p> Ali res želite zliti izbrane prejemnike plačil?"
 
-#: kmymoney/views/kpayeesview.cpp:604 kmymoney/views/kpayeesview_p.h:584
+#: kmymoney/views/kpayeesview.cpp:607 kmymoney/views/kpayeesview_p.h:584
 #, kde-format
 msgid "Merge Payees"
 msgstr "Zlij prejemnike plačil"

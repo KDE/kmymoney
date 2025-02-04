@@ -850,7 +850,7 @@
 ></term>
     <listitem>
       <para
->Quan avanceu al camp de data d'una operació (sigui creant o editant una operació, o utilitzant &Tab; o &Intro;, aquesta llista desplegable determina si el cursor començarà en la porció Dia, Mes o Any de la data. </para>
+>Quan avanceu al camp de data d'una operació (sigui creant o editant una operació, o utilitzant &Tab; o &Intro;), aquesta llista desplegable determina si el cursor començarà en la porció Dia, Mes o Any de la data. </para>
     </listitem>
   </varlistentry>
 
@@ -1295,7 +1295,7 @@
 <para
 >Aquest connector afegeix suport per a la banca en línia HBCI/FinTs, OFX i PayPal utilitzant <ulink url="https://www.aquamaniac.de/rdm/"
 >AqBanking</ulink
->, que és un projecte de codi obert per si mateix. La majoria dels protocols per a comunicar-se amb els bancs només s'utilitzen a Alemanya. </para>
+>, que és un projecte de codi obert per si mateix. La majoria dels protocols utilitzats per a comunicar-se amb els bancs només es fan servir a Alemanya. </para>
 
 <para
 >La configuració d'aquest connector no es fa a través d'aquest diàleg, sinó amb l'element de menú <link linkend="reference.menus.settings.help"

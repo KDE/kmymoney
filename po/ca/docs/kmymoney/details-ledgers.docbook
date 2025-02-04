@@ -257,7 +257,7 @@
 ><guilabel
 >Errònia</guilabel
 > selecciona les operacions on el &kmymoney; ha detectat algun problema. El més habitual és que es tracti d'<link linkend="details.ledgers.split"
->operacions desquadrades</link
+>operacions no saldades</link
 >, que sovint és el cas de les operacions importades on no s'ha assignat cap categoria. </para>
 
 <para
@@ -457,7 +457,7 @@
 >Una operació sempre conté un o més desglossaments. Cada desglossament representa diners que es mouen dins o fora d'un compte individual. La majoria de les vegades, una operació conté exactament dos desglossaments, un per al compte del qual prové els diners i l'altre per al compte al qual van els diners. El terme «Operació desglossada» s'utilitza quan en realitat hi ha tres o més desglossaments, quan una part de l'operació es divideix en més d'un desglossament. Això es fa normalment quan els diners es mouen dins o fora d'un compte bancari típic, però s'assigna a més d'una categoria. </para>
 
 <para
->Si una operació només té un desglossament, gairebé sempre es diu que és «desequilibrada», el que significa que els diners venen d'algun lloc, però no van enlloc (o viceversa). Aquestes operacions es marquen normalment per a mostrar-se en vermell al Llibre major. Les operacions vàlides amb un únic desglossament solen ser en comptes d'inversió: afegir, eliminar o dividir accions. L'altre cas és on la quantitat de l'operació és 0, que els bancs a vegades fan. </para>
+>Si una operació només té un desglossament, gairebé sempre es diu que és «no saldada», el que significa que els diners venen d'algun lloc, però no van enlloc (o viceversa). Aquestes operacions es marquen normalment per a mostrar-se en vermell al Llibre major. Les operacions vàlides amb un únic desglossament solen ser en comptes d'inversió: afegir, eliminar o dividir accions. L'altre cas és on la quantitat de l'operació és 0, que els bancs a vegades fan. </para>
 
 <para
 >Per a introduir un desglossament d'operació, creeu una operació nova, introduint l'import total. Després, en lloc de seleccionar una categoria, feu clic a la icona <guiicon
@@ -512,10 +512,10 @@
 </screenshot>
 
 <para
->Here you specify the category and amount, as well as optional payee, memo, and tag(s). Note that if a payee and memo were entered into the transaction before entering the split editor, they will be included in the first split. It often makes sense to enter a specific memo for each split. This can also be done for the Payee, but it may make more sense to enter that only once for the transaction. To save the split, press <guibutton
->Enter</guibutton
->. To cancel, press <guibutton
->Cancel</guibutton
+>Aquí especifiqueu la categoria i l'import, així com un beneficiari, recordatori i etiqueta/es opcionals. Tingueu en compte que si un beneficiari i un recordatori s'han introduït a l'operació abans d'introduir l'editor de desglossament, s'inclouran en el primer desglossament. Sovint té sentit introduir una anotació específica per a cada desglossament. Això també es pot fer per al beneficiari, però pot tenir més sentit introduir-lo només una vegada a l'operació. Per a desar el desglossament, premeu <guibutton
+>Introdueix</guibutton
+>. Per a cancel·lar, premeu <guibutton
+>Cancel·la</guibutton
 >. </para
 > 
  
@@ -617,11 +617,11 @@
 </screenshot>
 
 <para
->Since the value is the only field in the two transactions which must absolutely be the same, the value of other fields may differ. Note that although the two Payees may not be identical, they must have been matched by the import process. <guilabel
->Match</guilabel
->, you will see a <guilabel
->Match Transactions</guilabel
-> dialog. This dialog allows you to choose which of the two transactions is used as the source of the other fields in the matched transaction. Note that if one of the transactions is imported, the date of that transaction will always be used in the matched transaction, even if all other fields are taken from the non-imported transaction. That dialog also gives you the option of reversing the transactions in terms of which is used as a source of fields which differ. </para
+>Atès que el valor és l'únic camp de les dues operacions que ha de ser absolutament el mateix, el valor d'altres camps pot diferir. Tingueu en compte que encara que els dos beneficiaris no siguin idèntics, han d'haver estat coincidents amb el procés d'importació. <guilabel
+>Coincidència</guilabel
+>, veureu un diàleg de <guilabel
+>Coincidència d'operacions</guilabel
+>. Aquest diàleg permet triar quina de les dues operacions s'utilitza com a font dels altres camps de l'operació coincident. Tingueu en compte que si s'importa una de les operacions, la data d'aquesta operació sempre s'utilitzarà en l'operació coincident, fins i tot si tots els altres camps es prenen de l'operació no importada. Aquest diàleg també us dona l'opció d'invertir les operacions en termes de les quals s'utilitza com a font dels camps que difereixen. </para
 > 
 
 <para
@@ -696,13 +696,13 @@
 > 
 
 <para
->Most of the settings are self explanatory. The section linked above has a more detailed explanation of each of the settings. Some of these settings have already been mentioned, but for clarity, several of them are explained briefly below. </para>
+>La majoria dels ajustos s'expliquen per si mateixos. La secció enllaçada anteriorment té una explicació més detallada de cada una de les opcions. Algunes d'aquestes opcions ja s'han esmentat, però per a la claredat, diverses d'elles s'expliquen breument a continuació. </para>
 
 <formalpara
 ><title
 >Mostra el formulari de l'operació</title>
 <para
->This setting is under the Display tab in the Settings dialog: toggle to hide the transaction form at the bottom of the Ledgers View. The transaction form is now a display only area for the transaction selected in the Transaction List. All entries and edits of transactions are now made directly on the list. </para>
+>Aquesta opció està a la pestanya Visualització en el diàleg de configuració: alterneu-la per a ocultar el formulari de l'operació que hi ha a la part inferior d'aquesta pantalla. El formulari de l'operació ara és una àrea de només visualització de l'operació seleccionada de la llista d'operacions. Totes les introduccions i edicions d'operacions ara es fan directament des de la llista. </para>
 </formalpara>
 
 <para
