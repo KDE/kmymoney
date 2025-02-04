@@ -43,6 +43,9 @@ private Q_SLOTS:
     void testHistoryDays();
     void testCreateBudget();
     void testLinearRegression();
+    void testEvaluationDate();
+    void testForecastWindow();
+    void testForecastProducesData();
 
 protected:
     MyMoneyForecast* m;

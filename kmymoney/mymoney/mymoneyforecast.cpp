@@ -63,6 +63,7 @@ public:
         , m_forecastDone(false)
         , m_includeFutureTransactions(true)
         , m_includeScheduledTransactions(true)
+        , m_evaluationDate(QDate::currentDate())
     {
     }
 
@@ -132,7 +133,7 @@ public:
             }
             break;
             case 2: {
-                QDate baseDate = QDate::currentDate().addDays(-q->accountsCycle());
+                QDate baseDate = m_evaluationDate.addDays(-q->accountsCycle());
                 for (auto t_day = 1; t_day <= q->accountsCycle(); ++t_day) {
                     auto f_day = 1;
                     QDate fDate = baseDate.addDays(q->accountsCycle() + 1);
@@ -234,7 +235,7 @@ public:
                     //set the default value
                     MyMoneyMoney rate = MyMoneyMoney::ONE;
 
-                    for (QDate it_day = QDate::currentDate(); it_day <= q->forecastEndDate();) {
+                    for (QDate it_day = m_evaluationDate; it_day <= q->forecastEndDate();) {
                         //get the price for the tradingCurrency that day
                         const MyMoneyPrice &price = file->price(undersecurity.id(), undersecurity.tradingCurrency(), it_day);
                         if (price.isValid()) {
@@ -368,12 +369,12 @@ public:
                                     if (q->isForecastAccount(accountFromSplit)) {
                                         // collect all overdues on the first day
                                         QDate forecastDate = nextDate;
-                                        if (QDate::currentDate() >= nextDate)
-                                            forecastDate = QDate::currentDate().addDays(1);
+                                        if (m_evaluationDate >= nextDate)
+                                            forecastDate = m_evaluationDate.addDays(1);
 
                                         dailyBalances balance;
                                         balance = m_accountList[accountFromSplit.id()];
-                                        for (QDate f_day = QDate::currentDate(); f_day < forecastDate;) {
+                                        for (QDate f_day = m_evaluationDate; f_day < forecastDate;) {
                                             balanceMap[accountFromSplit.id()] += m_accountList[accountFromSplit.id()][f_day];
                                             f_day = f_day.addDays(1);
                                         }
@@ -381,7 +382,7 @@ public:
                                 }
 
                                 // take care of the autoCalc stuff
-                                q->calculateAutoLoan(*it, t, balanceMap);
+                                q->calculateAutoLoan(*it, t, balanceMap, m_evaluationDate);
 
                                 // now add the splits to the balances
                                 for (const auto& split : qAsConst(t.splits())) {
@@ -389,14 +390,14 @@ public:
                                     if (q->isForecastAccount(accountFromSplit)) {
                                         dailyBalances balance;
                                         balance = m_accountList[accountFromSplit.id()];
-                                        //auto offset = QDate::currentDate().daysTo(nextDate);
-                                        //if(offset <= 0) {  // collect all overdues on the first day
-                                        //  offset = 1;
-                                        //}
-                                        // collect all overdues on the first day
+                                        // auto offset = m_evaluationDate.daysTo(nextDate);
+                                        // if(offset <= 0) {  // collect all overdues on the first day
+                                        //   offset = 1;
+                                        // }
+                                        //  collect all overdues on the first day
                                         QDate forecastDate = nextDate;
-                                        if (QDate::currentDate() >= nextDate)
-                                            forecastDate = QDate::currentDate().addDays(1);
+                                        if (m_evaluationDate >= nextDate)
+                                            forecastDate = m_evaluationDate.addDays(1);
 
                                         if (accountFromSplit.accountType() == eMyMoney::Account::Type::Income) {
                                             balance[forecastDate] += (split.shares() * MyMoneyMoney::MINUS_ONE);
@@ -482,14 +483,14 @@ public:
                 //set the default value
                 MyMoneyMoney rate = MyMoneyMoney::ONE;
                 //get te
-                const MyMoneyPrice &price = file->price(undersecurity.id(), undersecurity.tradingCurrency(), QDate::currentDate());
+                const MyMoneyPrice& price = file->price(undersecurity.id(), undersecurity.tradingCurrency(), m_evaluationDate);
                 if (price.isValid()) {
                     rate = price.rate(undersecurity.tradingCurrency());
                 }
-                m_accountList[acc.id()][QDate::currentDate()] = file->balance(acc.id(), QDate::currentDate()) * rate;
+                m_accountList[acc.id()][m_evaluationDate] = file->balance(acc.id(), m_evaluationDate) * rate;
             }
         } else {
-            m_accountList[acc.id()][QDate::currentDate()] = file->balance(acc.id(), QDate::currentDate());
+            m_accountList[acc.id()][m_evaluationDate] = file->balance(acc.id(), m_evaluationDate);
         }
 
         //if the method is linear regression, we have to add the opening balance to m_accountListPast
@@ -828,35 +829,35 @@ public:
 
         //if 0, beginDate is current date and forecastDays remains unchanged
         if (beginDay == 0) {
-            q->setBeginForecastDate(QDate::currentDate());
+            q->setBeginForecastDate(m_evaluationDate);
             return fDays;
         }
 
         //adjust if beginDay more than days of current month
-        if (QDate::currentDate().daysInMonth() < beginDay)
-            beginDay = QDate::currentDate().daysInMonth();
+        if (m_evaluationDate.daysInMonth() < beginDay)
+            beginDay = m_evaluationDate.daysInMonth();
 
         //if beginDay still to come, calculate and return
-        if (QDate::currentDate().day() <= beginDay) {
-            beginDate = QDate(QDate::currentDate().year(), QDate::currentDate().month(), beginDay);
-            fDays += QDate::currentDate().daysTo(beginDate);
+        if (m_evaluationDate.day() <= beginDay) {
+            beginDate = QDate(m_evaluationDate.year(), m_evaluationDate.month(), beginDay);
+            fDays += m_evaluationDate.daysTo(beginDate);
             q->setBeginForecastDate(beginDate);
             return fDays;
         }
 
         //adjust beginDay for next month
-        if (QDate::currentDate().addMonths(1).daysInMonth() < beginDay)
-            beginDay = QDate::currentDate().addMonths(1).daysInMonth();
+        if (m_evaluationDate.addMonths(1).daysInMonth() < beginDay)
+            beginDay = m_evaluationDate.addMonths(1).daysInMonth();
 
         //if beginDay of next month comes before 1 interval, use beginDay next month
-        if (QDate::currentDate().addDays(accCycle) >=
-                (QDate(QDate::currentDate().addMonths(1).year(), QDate::currentDate().addMonths(1).month(), 1).addDays(beginDay - 1))) {
-            beginDate = QDate(QDate::currentDate().addMonths(1).year(), QDate::currentDate().addMonths(1).month(), 1).addDays(beginDay - 1);
-            fDays += QDate::currentDate().daysTo(beginDate);
-        } else { //add intervals to current beginDay and take the first after current date
-            beginDay = ((((QDate::currentDate().day() - beginDay) / accCycle) + 1) * accCycle) + beginDay;
-            beginDate = QDate::currentDate().addDays(beginDay - QDate::currentDate().day());
-            fDays += QDate::currentDate().daysTo(beginDate);
+        if (m_evaluationDate.addDays(accCycle)
+            >= (QDate(m_evaluationDate.addMonths(1).year(), m_evaluationDate.addMonths(1).month(), 1).addDays(beginDay - 1))) {
+            beginDate = QDate(m_evaluationDate.addMonths(1).year(), m_evaluationDate.addMonths(1).month(), 1).addDays(beginDay - 1);
+            fDays += m_evaluationDate.daysTo(beginDate);
+        } else { // add intervals to current beginDay and take the first after current date
+            beginDay = ((((m_evaluationDate.day() - beginDay) / accCycle) + 1) * accCycle) + beginDay;
+            beginDate = m_evaluationDate.addDays(beginDay - m_evaluationDate.day());
+            fDays += m_evaluationDate.daysTo(beginDate);
         }
 
         q->setBeginForecastDate(beginDate);
@@ -973,13 +974,24 @@ public:
      * include scheduled transactions when doing a scheduled-based forecast
      */
     bool m_includeScheduledTransactions;
+
+    /**
+     * Date at which calculations are evaluated
+     *
+     * This date defines the logical "current date" used as a reference
+     * for calculations such as historical balance evaluation and
+     * forecast trend derivation.
+     *
+     * By default, this value is initialized to the system's current date.
+     */
+    QDate m_evaluationDate;
 };
 
 MyMoneyForecast::MyMoneyForecast() :
     d_ptr(new MyMoneyForecastPrivate(this))
 {
-    setHistoryStartDate(QDate::currentDate().addDays(-forecastCycles()*accountsCycle()));
-    setHistoryEndDate(QDate::currentDate().addDays(-1));
+    setHistoryStartDate(evaluationDate().addDays(-forecastCycles() * accountsCycle()));
+    setHistoryEndDate(evaluationDate().addDays(-1));
 }
 
 MyMoneyForecast::MyMoneyForecast(const MyMoneyForecast& other) :
@@ -1029,12 +1041,12 @@ void MyMoneyForecast::doForecast()
 
     //initialize global variables
     setForecastDays(fDays);
-    setForecastStartDate(QDate::currentDate().addDays(1));
-    setForecastEndDate(QDate::currentDate().addDays(fDays));
+    setForecastStartDate(evaluationDate().addDays(1));
+    setForecastEndDate(evaluationDate().addDays(fDays));
     setAccountsCycle(fAccCycle);
     setForecastCycles(fCycles);
     setHistoryStartDate(forecastCycles() * accountsCycle());
-    setHistoryEndDate(QDate::currentDate().addDays(-1)); //yesterday
+    setHistoryEndDate(evaluationDate().addDays(-1));
 
     //clear all data before calculating
     d->m_accountListPast.clear();
@@ -1090,13 +1102,17 @@ QList<MyMoneyAccount> MyMoneyForecast::accountList()
     return accList;
 }
 
-MyMoneyMoney MyMoneyForecast::calculateAccountTrend(const MyMoneyAccount& acc, qint64 trendDays)
+MyMoneyMoney MyMoneyForecast::calculateAccountTrend(const MyMoneyAccount& acc, qint64 trendDays, const QDate& evaluationDate)
 {
     auto file = MyMoneyFile::instance();
     MyMoneyTransactionFilter filter;
     MyMoneyMoney netIncome;
     QDate startDate;
     QDate openingDate = acc.openingDate();
+
+    if (!evaluationDate.isValid()) {
+        throw MYMONEYEXCEPTION_CSTRING("Illegal arguments when calling calculateAccountTrend. evaluationDate must be set");
+    }
 
     //validate arguments
     if (trendDays < 1) {
@@ -1105,13 +1121,13 @@ MyMoneyMoney MyMoneyForecast::calculateAccountTrend(const MyMoneyAccount& acc, q
 
     //If it is a new account, we don't take into account the first day
     //because it is usually a weird one and it would mess up the trend
-    if (openingDate.daysTo(QDate::currentDate()) < trendDays) {
+    if (openingDate.daysTo(evaluationDate) < trendDays) {
         startDate = (acc.openingDate()).addDays(1);
     } else {
-        startDate = QDate::currentDate().addDays(-trendDays);
+        startDate = evaluationDate.addDays(-trendDays);
     }
     //get all transactions for the period
-    filter.setDateFilter(startDate, QDate::currentDate());
+    filter.setDateFilter(startDate, evaluationDate);
     if (acc.accountGroup() == eMyMoney::Account::Type::Income //
             || acc.accountGroup() == eMyMoney::Account::Type::Expense) {
         filter.addCategory(acc.id());
@@ -1137,8 +1153,11 @@ MyMoneyMoney MyMoneyForecast::calculateAccountTrend(const MyMoneyAccount& acc, q
     MyMoneyMoney accTrend;
 
     //don't take into account the first day of the account
-    if (openingDate.daysTo(QDate::currentDate()) < trendDays) {
-        accTrend = netIncome / MyMoneyMoney(openingDate.daysTo(QDate::currentDate()) - 1, 1);
+    const int days = openingDate.daysTo(evaluationDate) - 1;
+    if (days <= 0) {
+        accTrend = MyMoneyMoney(); // zero trend
+    } else if (days < trendDays) {
+        accTrend = netIncome / MyMoneyMoney(days, 1);
     } else {
         accTrend = netIncome / MyMoneyMoney(trendDays, 1);
     }
@@ -1172,7 +1191,7 @@ MyMoneyMoney MyMoneyForecast::forecastBalance(const MyMoneyAccount& acc, const Q
  */
 MyMoneyMoney MyMoneyForecast::forecastBalance(const MyMoneyAccount& acc, qint64 offset)
 {
-    QDate forecastDate = QDate::currentDate().addDays(offset);
+    QDate forecastDate = evaluationDate().addDays(offset);
     return forecastBalance(acc, forecastDate);
 }
 
@@ -1190,9 +1209,9 @@ qint64 MyMoneyForecast::daysToMinimumBalance(const MyMoneyAccount& acc)
 
     balance = d->m_accountList[acc.id()];
 
-    for (QDate it_day = QDate::currentDate() ; it_day <= forecastEndDate();) {
+    for (QDate it_day = evaluationDate(); it_day <= forecastEndDate();) {
         if (minBalance > balance[it_day]) {
-            return QDate::currentDate().daysTo(it_day);
+            return evaluationDate().daysTo(it_day);
         }
         it_day = it_day.addDays(1);
     }
@@ -1212,16 +1231,16 @@ qint64 MyMoneyForecast::daysToZeroBalance(const MyMoneyAccount& acc)
     balance = d->m_accountList[acc.id()];
 
     if (acc.accountGroup() == eMyMoney::Account::Type::Asset) {
-        for (QDate it_day = QDate::currentDate() ; it_day <= forecastEndDate();) {
+        for (QDate it_day = evaluationDate(); it_day <= forecastEndDate();) {
             if (balance[it_day] < MyMoneyMoney()) {
-                return QDate::currentDate().daysTo(it_day);
+                return evaluationDate().daysTo(it_day);
             }
             it_day = it_day.addDays(1);
         }
     } else if (acc.accountGroup() == eMyMoney::Account::Type::Liability) {
-        for (QDate it_day = QDate::currentDate() ; it_day <= forecastEndDate();) {
+        for (QDate it_day = evaluationDate(); it_day <= forecastEndDate();) {
             if (balance[it_day] > MyMoneyMoney()) {
-                return QDate::currentDate().daysTo(it_day);
+                return evaluationDate().daysTo(it_day);
             }
             it_day = it_day.addDays(1);
         }
@@ -1245,7 +1264,7 @@ MyMoneyMoney MyMoneyForecast::accountCycleVariation(const MyMoneyAccount& acc)
         }
         break;
         case 2: {
-            cycleVariation = d->m_accountList[acc.id()][QDate::currentDate().addDays(accountsCycle())] - d->m_accountList[acc.id()][QDate::currentDate()];
+            cycleVariation = d->m_accountList[acc.id()][evaluationDate().addDays(accountsCycle())] - d->m_accountList[acc.id()][evaluationDate()];
             break;
         }
         }
@@ -1257,7 +1276,7 @@ MyMoneyMoney MyMoneyForecast::accountTotalVariation(const MyMoneyAccount& acc)
 {
     MyMoneyMoney totalVariation;
 
-    totalVariation = forecastBalance(acc, forecastEndDate()) - forecastBalance(acc, QDate::currentDate());
+    totalVariation = forecastBalance(acc, forecastEndDate()) - forecastBalance(acc, evaluationDate());
     return totalVariation;
 }
 
@@ -1266,15 +1285,15 @@ QList<QDate> MyMoneyForecast::accountMinimumBalanceDateList(const MyMoneyAccount
     QList<QDate> minBalanceList;
     qint64 daysToBeginDay;
 
-    daysToBeginDay = QDate::currentDate().daysTo(beginForecastDate());
+    daysToBeginDay = evaluationDate().daysTo(beginForecastDate());
 
     for (auto t_cycle = 0; ((t_cycle * accountsCycle()) + daysToBeginDay) < forecastDays() ; ++t_cycle) {
         MyMoneyMoney minBalance = forecastBalance(acc, (t_cycle * accountsCycle() + daysToBeginDay));
-        QDate minDate = QDate::currentDate().addDays(t_cycle * accountsCycle() + daysToBeginDay);
+        QDate minDate = evaluationDate().addDays(t_cycle * accountsCycle() + daysToBeginDay);
         for (auto t_day = 1; t_day <= accountsCycle() ; ++t_day) {
             if (minBalance > forecastBalance(acc, (t_cycle * accountsCycle()) + daysToBeginDay + t_day)) {
                 minBalance = forecastBalance(acc, (t_cycle * accountsCycle()) + daysToBeginDay + t_day);
-                minDate = QDate::currentDate().addDays((t_cycle * accountsCycle()) + daysToBeginDay + t_day);
+                minDate = evaluationDate().addDays((t_cycle * accountsCycle()) + daysToBeginDay + t_day);
             }
         }
         minBalanceList.append(minDate);
@@ -1287,16 +1306,16 @@ QList<QDate> MyMoneyForecast::accountMaximumBalanceDateList(const MyMoneyAccount
     QList<QDate> maxBalanceList;
     qint64 daysToBeginDay;
 
-    daysToBeginDay = QDate::currentDate().daysTo(beginForecastDate());
+    daysToBeginDay = evaluationDate().daysTo(beginForecastDate());
 
     for (auto t_cycle = 0; ((t_cycle * accountsCycle()) + daysToBeginDay) < forecastDays() ; ++t_cycle) {
         MyMoneyMoney maxBalance = forecastBalance(acc, ((t_cycle * accountsCycle()) + daysToBeginDay));
-        QDate maxDate = QDate::currentDate().addDays((t_cycle * accountsCycle()) + daysToBeginDay);
+        QDate maxDate = evaluationDate().addDays((t_cycle * accountsCycle()) + daysToBeginDay);
 
         for (auto t_day = 0; t_day < accountsCycle() ; ++t_day) {
             if (maxBalance < forecastBalance(acc, (t_cycle * accountsCycle()) + daysToBeginDay + t_day)) {
                 maxBalance = forecastBalance(acc, (t_cycle * accountsCycle()) + daysToBeginDay + t_day);
-                maxDate = QDate::currentDate().addDays((t_cycle * accountsCycle()) + daysToBeginDay + t_day);
+                maxDate = evaluationDate().addDays((t_cycle * accountsCycle()) + daysToBeginDay + t_day);
             }
         }
         maxBalanceList.append(maxDate);
@@ -1419,6 +1438,12 @@ void MyMoneyForecast::setAccountsCycle(qint64 accountsCycle)
     d->m_accountsCycle = accountsCycle;
 }
 
+void MyMoneyForecast::setEvaluationDate(const QDate& date)
+{
+    Q_D(MyMoneyForecast);
+    d->m_evaluationDate = date;
+}
+
 void MyMoneyForecast::setForecastCycles(qint64 forecastCycles)
 {
     Q_D(MyMoneyForecast);
@@ -1463,12 +1488,12 @@ void MyMoneyForecast::setHistoryEndDate(const QDate &historyEndDate)
 
 void MyMoneyForecast::setHistoryStartDate(qint64 daysToStartDate)
 {
-    setHistoryStartDate(QDate::currentDate().addDays(-daysToStartDate));
+    setHistoryStartDate(evaluationDate().addDays(-daysToStartDate));
 }
 
 void MyMoneyForecast::setHistoryEndDate(qint64 daysToEndDate)
 {
-    setHistoryEndDate(QDate::currentDate().addDays(-daysToEndDate));
+    setHistoryEndDate(evaluationDate().addDays(-daysToEndDate));
 }
 
 void MyMoneyForecast::setForecastStartDate(const QDate &_startDate)
@@ -1523,6 +1548,12 @@ qint64 MyMoneyForecast::accountsCycle() const
 {
     Q_D(const MyMoneyForecast);
     return d->m_accountsCycle;
+}
+
+QDate MyMoneyForecast::evaluationDate() const
+{
+    Q_D(const MyMoneyForecast);
+    return d->m_evaluationDate;
 }
 
 qint64 MyMoneyForecast::forecastCycles() const
@@ -1615,7 +1646,10 @@ bool MyMoneyForecast::isIncludingScheduledTransactions() const
     return d->m_includeScheduledTransactions;
 }
 
-void MyMoneyForecast::calculateAutoLoan(const MyMoneySchedule& schedule, MyMoneyTransaction& transaction, const QMap<QString, MyMoneyMoney>& balances)
+void MyMoneyForecast::calculateAutoLoan(const MyMoneySchedule& schedule,
+                                        MyMoneyTransaction& transaction,
+                                        const QMap<QString, MyMoneyMoney>& balances,
+                                        const QDate& evaluationDate)
 {
     if (schedule.type() == eMyMoney::Schedule::Type::LoanPayment) {
 
@@ -1635,8 +1669,8 @@ void MyMoneyForecast::calculateAutoLoan(const MyMoneySchedule& schedule, MyMoney
             // the payment is overdue then take the current date
             dueDate = schedule.nextDueDate();
             if (acc.interestCalculation() == MyMoneyAccountLoan::paymentReceived) {
-                if (dueDate < QDate::currentDate())
-                    dueDate = QDate::currentDate();
+                if (dueDate < evaluationDate)
+                    dueDate = evaluationDate;
             }
 
             // we need to calculate the balance at the time the payment is due

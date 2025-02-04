@@ -107,6 +107,7 @@ void MyMoneyForecastTest::testEmptyConstructor()
     QVERIFY(a.historyStartDate() == QDate::currentDate().addDays(-3 * 30));
     QVERIFY(a.historyEndDate() == QDate::currentDate().addDays(-1));
     QVERIFY(a.historyDays() == 30 * 3);
+    QVERIFY(a.evaluationDate() == QDate::currentDate());
 }
 
 void MyMoneyForecastTest::testDoForecastInit()
@@ -258,36 +259,58 @@ void MyMoneyForecastTest::testCalculateAccountTrend()
     // set up environment
     TransactionHelper t1(QDate::currentDate().addDays(-3), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), -moT2, acChecking, acSolo);
     MyMoneyAccount a_checking = file->account(acChecking);
+    QDate today = QDate::currentDate();
 
     // test invalid arguments
 
     try {
-        MyMoneyForecast::calculateAccountTrend(a_checking, 0);
+        MyMoneyForecast::calculateAccountTrend(a_checking, 0, today);
     } catch (const MyMoneyException& e) {
         QVERIFY(
             QString::fromLatin1(e.what()).startsWith(QLatin1String("Illegal arguments when calling calculateAccountTrend. trendDays must be higher than 0")));
     }
     try {
-        MyMoneyForecast::calculateAccountTrend(a_checking, -10);
+        MyMoneyForecast::calculateAccountTrend(a_checking, -10, today);
     } catch (const MyMoneyException& e) {
         QVERIFY(
             QString::fromLatin1(e.what()).startsWith(QLatin1String("Illegal arguments when calling calculateAccountTrend. trendDays must be higher than 0")));
     }
 
     // test that it calculates correctly
-    QVERIFY(MyMoneyForecast::calculateAccountTrend(a_checking, 3) == moT2 / MyMoneyMoney(3, 1));
+    QVERIFY(MyMoneyForecast::calculateAccountTrend(a_checking, 3, today) == moT2 / MyMoneyMoney(3, 1));
 
     // test that it works for all kind of accounts
     MyMoneyAccount a_solo = file->account(acSolo);
-    MyMoneyMoney soloTrend = MyMoneyForecast::calculateAccountTrend(a_solo, 3);
+    MyMoneyMoney soloTrend = MyMoneyForecast::calculateAccountTrend(a_solo, 3, today);
     MyMoneyMoney soloTrendExp = -moT2 / MyMoneyMoney(3, 1);
-    QVERIFY(MyMoneyForecast::calculateAccountTrend(a_solo, 3) == -moT2 / MyMoneyMoney(3, 1));
+    QVERIFY(MyMoneyForecast::calculateAccountTrend(a_solo, 3, today) == -moT2 / MyMoneyMoney(3, 1));
 
     // test that it does not take into account the transactions of the opening date of the account
     MyMoneyAccount a_cash = file->account(acCash);
     TransactionHelper t2(QDate::currentDate().addDays(-2), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), moT2, acCash, acParent);
     TransactionHelper t3(QDate::currentDate().addDays(-1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), moT1, acCash, acParent);
-    QVERIFY(MyMoneyForecast::calculateAccountTrend(a_cash, 3) == -moT1);
+    QVERIFY(MyMoneyForecast::calculateAccountTrend(a_cash, 3, today) == -moT1);
+
+    // --- test that evaluationDate is honored (not currentDate) ---
+
+    // Transactions already exist at:
+    // today-3 : t1
+    // today-2 : t2
+    // today-1 : t3
+
+    // Evaluate one day earlier -> last transaction excluded
+    const QDate evalDateEarly = today.addDays(-1);
+    MyMoneyMoney earlyTrend = MyMoneyForecast::calculateAccountTrend(a_cash, 3, evalDateEarly);
+
+    // Not enough history days -> zero trend
+    QCOMPARE(earlyTrend, MyMoneyMoney());
+
+    // Evaluate one day later -> all transactions included
+    const QDate evalDateLate = today.addDays(1);
+    MyMoneyMoney lateTrend = MyMoneyForecast::calculateAccountTrend(a_cash, 3, evalDateLate);
+
+    // t2 + t3 are both included
+    QCOMPARE(lateTrend, -(moT2 + moT1) / MyMoneyMoney(2, 1));
 }
 
 void MyMoneyForecastTest::testGetForecastBalance()
@@ -819,6 +842,17 @@ void MyMoneyForecastTest::testBeginForecastDate()
         // test is not valid if today is 1st of month
         std::cout << std::endl << "testBeginForecastDate(): test of first day of month skipped because current day is 1st of month" << std::endl;
     }
+
+    const QDate refDate(2021, 2, 10);
+    a.setEvaluationDate(refDate);
+    a.setForecastMethod(1);
+    a.setForecastDays(90);
+    a.setAccountsCycle(14);
+    a.setForecastCycles(3);
+    a.setBeginForecastDay(0);
+    a.doForecast();
+
+    QCOMPARE(a.beginForecastDate(), refDate);
 }
 
 void MyMoneyForecastTest::testHistoryDays()
@@ -839,6 +873,15 @@ void MyMoneyForecastTest::testHistoryDays()
     QVERIFY(a.historyStartDate() == QDate::currentDate().addDays(-14 * 3));
     QVERIFY(a.historyDays() == (14 * 3));
     QVERIFY(a.historyEndDate() == (QDate::currentDate().addDays(-1)));
+
+    const QDate refDate(2019, 12, 31);
+    a.setEvaluationDate(refDate);
+    a.setForecastCycles(3);
+    a.setAccountsCycle(10);
+    a.doForecast();
+
+    QCOMPARE(a.historyEndDate(), refDate.addDays(-1));
+    QCOMPARE(a.historyStartDate(), refDate.addDays(-30));
 }
 
 void MyMoneyForecastTest::testCreateBudget()
@@ -957,4 +1000,54 @@ void MyMoneyForecastTest::testLinearRegression()
     TransactionHelper t3(QDate::currentDate().addDays(-1), MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer), this->moT1, acCredit, acChecking);
 
     // TODO Add tests specific for linear regression
+}
+
+void MyMoneyForecastTest::testEvaluationDate()
+{
+    MyMoneyForecast a;
+
+    const QDate refDate(2020, 5, 15);
+    a.setEvaluationDate(refDate);
+
+    a.setForecastMethod(1);
+    a.setForecastDays(10);
+    a.setAccountsCycle(5);
+    a.setForecastCycles(2);
+    a.setBeginForecastDay(0);
+
+    a.doForecast();
+
+    QCOMPARE(a.beginForecastDate(), refDate);
+    QCOMPARE(a.historyEndDate(), refDate.addDays(-1));
+    QCOMPARE(a.historyStartDate(), refDate.addDays(-a.accountsCycle() * a.forecastCycles()));
+
+    QVERIFY(a.forecastStartDate().isValid());
+    QVERIFY(a.forecastStartDate() >= refDate);
+}
+
+void MyMoneyForecastTest::testForecastWindow()
+{
+    MyMoneyForecast a;
+    a.setEvaluationDate(QDate(2020, 1, 1));
+
+    a.setForecastDays(10);
+    a.setBeginForecastDay(0);
+
+    a.doForecast();
+
+    QCOMPARE(a.forecastStartDate(), QDate(2020, 1, 2));
+    QCOMPARE(a.forecastEndDate(), QDate(2020, 1, 11));
+}
+
+void MyMoneyForecastTest::testForecastProducesData()
+{
+    MyMoneyForecast a;
+    a.setEvaluationDate(QDate(2020, 6, 1));
+
+    a.setForecastDays(5);
+    a.doForecast();
+
+    QVERIFY(a.forecastStartDate().isValid());
+    QVERIFY(a.forecastEndDate().isValid());
+    QVERIFY(a.forecastEndDate() >= a.forecastStartDate());
 }
