@@ -79,11 +79,21 @@ public:
     QList<MyMoneyAccount> accountList();
 
     /**
-     * Returns the balance trend for account @a acc based on a number of days @p forecastDays
-     * Collects and processes all transactions in the past for the
-     * same period of forecast and calculates the balance trend
+     * Returns the balance trend for account @a acc based on a historical
+     * period of @p trendDays, evaluated relative to @p evaluationDate.
+     *
+     * The method collects and processes all transactions in the historical
+     * period of length @p trendDays ending at @p evaluationDate and derives
+     * a balance trend which can be used for forecasting.
+     *
+     * @param acc            Account for which the trend is calculated
+     * @param trendDays      Length of the historical period (in days)
+     *                       used to calculate the trend
+     * @param evaluationDate Date which defines the end of the historical
+     *                       evaluation period (typically the report
+     *                       evaluation date)
      */
-    static MyMoneyMoney calculateAccountTrend(const MyMoneyAccount& acc, qint64 forecastDays);
+    static MyMoneyMoney calculateAccountTrend(const MyMoneyAccount& acc, qint64 trendDays, const QDate& evaluationDate);
 
     /**
      * Returns the forecast balance trend for account @a acc for day @p QDate
@@ -151,6 +161,7 @@ public:
     qint64 historyDays() const;
 
     void setAccountsCycle(qint64 accountsCycle);
+    void setEvaluationDate(const QDate& date);
     void setForecastCycles(qint64 forecastCycles);
     void setForecastDays(qint64 forecastDays);
     void setBeginForecastDate(const QDate &beginForecastDate);
@@ -169,6 +180,7 @@ public:
     void setIncludeFutureTransactions(bool _bool);
     void setIncludeScheduledTransactions(bool _bool);
     qint64 accountsCycle() const;
+    QDate evaluationDate() const;
     qint64 forecastCycles() const;
     qint64 forecastDays() const;
     QDate beginForecastDate() const;
@@ -186,16 +198,20 @@ public:
     eForecastMethod forecastMethod() const;
 
     /**
-      * This method modifies a scheduled loan transaction such that all
-      * references to automatic calculated values are resolved to actual values.
-      *
-      * @param schedule const reference to the schedule the transaction is based on
-      * @param transaction reference to the transaction to be checked and modified
-      * @param balances QMap of (account-id,balance) pairs to be used as current balance
-      *                 for the calculation of interest. If map is empty, the engine
-      *                 will be interrogated for current balances.
-      */
-    static void calculateAutoLoan(const MyMoneySchedule& schedule, MyMoneyTransaction& transaction, const QMap<QString, MyMoneyMoney>& balances);
+     * This method modifies a scheduled loan transaction such that all
+     * references to automatic calculated values are resolved to actual values.
+     *
+     * @param schedule const reference to the schedule the transaction is based on
+     * @param transaction reference to the transaction to be checked and modified
+     * @param balances QMap of (account-id,balance) pairs to be used as current balance
+     *                 for the calculation of interest. If map is empty, the engine
+     *                 will be interrogated for current balances.
+     * @param evaluationDate The date considered as "today" for trend calculation
+     */
+    static void calculateAutoLoan(const MyMoneySchedule& schedule,
+                                  MyMoneyTransaction& transaction,
+                                  const QMap<QString, MyMoneyMoney>& balances,
+                                  const QDate& evaluationDate);
 
     /**
      * Returns the list of accounts to be forecast. Only Asset and Liability are returned.
