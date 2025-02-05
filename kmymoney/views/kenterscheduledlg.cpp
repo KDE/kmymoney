@@ -115,9 +115,9 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget* parent, const MyMoneySchedule& sch
             auto t = loanSchedule.transaction();
             KMyMoneyUtils::calculateAutoLoan(loanSchedule, t, QMap<QString, MyMoneyMoney>());
             loanSchedule.setTransaction(t);
-            d->m_editor->loadSchedule(loanSchedule);
+            d->m_editor->loadSchedule(loanSchedule, NewTransactionEditor::EnterSchedule);
         } else {
-            d->m_editor->loadSchedule(d->m_schedule);
+            d->m_editor->loadSchedule(d->m_schedule, NewTransactionEditor::EnterSchedule);
             d->m_editor->setKeepCategoryAmount(d->m_schedule.keepMultiCurrencyAmount());
         }
     } catch (const MyMoneyException& e) {

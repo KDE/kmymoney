@@ -181,7 +181,7 @@ public:
             });
         }
 
-        transactionEditor->loadSchedule(m_schedule);
+        transactionEditor->loadSchedule(m_schedule, NewTransactionEditor::EditSchedule);
 
         // setup widget contents
         ui->nameEdit->setText(m_schedule.name());

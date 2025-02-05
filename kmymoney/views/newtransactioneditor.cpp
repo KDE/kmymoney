@@ -1287,7 +1287,7 @@ void NewTransactionEditor::setAmountPlaceHolderText(const QAbstractItemModel* mo
                                                model->headerData(JournalModel::Column::Deposit, Qt::Horizontal).toString());
 }
 
-void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
+void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule, ScheduleEditType editType)
 {
     if (schedule.transaction().splitCount() == 0) {
         // new schedule
@@ -1347,7 +1347,11 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
 
         for (const auto& split : d->m_transaction.splits()) {
             if (split.id() == d->m_split.id()) {
-                d->ui->dateEdit->setDate(d->m_transaction.postDate());
+                if (editType == EditSchedule) {
+                    d->ui->dateEdit->setDate(d->m_transaction.postDate());
+                } else {
+                    d->ui->dateEdit->setDate(schedule.adjustedNextDueDate());
+                }
 
                 const auto payeeId = split.payeeId();
                 const QModelIndex payeeIdx = MyMoneyFile::instance()->payeesModel()->indexById(payeeId);

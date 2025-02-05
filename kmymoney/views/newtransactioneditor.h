@@ -27,6 +27,11 @@ class NewTransactionEditor : public TransactionEditorBase, TabOrderEditorInterfa
     Q_OBJECT
 
 public:
+    typedef enum {
+        EditSchedule,
+        EnterSchedule,
+    } ScheduleEditType;
+
     explicit NewTransactionEditor(QWidget* parent = nullptr, const QString& accountId = QString());
     virtual ~NewTransactionEditor();
 
@@ -44,7 +49,7 @@ public:
 
     MyMoneyTransaction transaction() const;
 
-    void loadSchedule(const MyMoneySchedule& schedule);
+    void loadSchedule(const MyMoneySchedule& schedule, ScheduleEditType editType);
 
     /**
      * Reimplemented to suppress some events in certain conditions
