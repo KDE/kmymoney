@@ -192,7 +192,6 @@ case "$ci_distro" in
                     "cmake(${qt}Widgets)"
                     doxygen
                     gmp-devel
-                    libgwengui-cpp79
                     libical-devel
                     python3-devel
                     sqlcipher-devel
