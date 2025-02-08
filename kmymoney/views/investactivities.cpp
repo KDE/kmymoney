@@ -38,23 +38,25 @@ using namespace Invest;
 class Invest::ActivityPrivate
 {
     Q_DISABLE_COPY(ActivityPrivate)
+    Q_DECLARE_PUBLIC(Activity)
 
 public:
-    ActivityPrivate(InvestTransactionEditor* parent)
-        : editor(parent)
+    ActivityPrivate(Activity* qq, InvestTransactionEditor* editor)
+        : q_ptr(qq)
+        , m_editor(editor)
     {
     }
 
     template <typename T>
     inline T* haveWidget(const QString &aName) const
     {
-        return editor->findChild<T*>(aName);
+        return m_editor->findChild<T*>(aName);
     }
 
     template <typename T>
     inline T* haveVisibleWidget(const QString &aName) const
     {
-        auto widget = editor->findChild<T*>(aName);
+        auto widget = m_editor->findChild<T*>(aName);
         if (!widget) {
             qDebug() << "Widget with name" << aName << "not found";
         }
@@ -124,12 +126,35 @@ public:
         return result;
     }
 
-    InvestTransactionEditor* editor;
+    void priceConsistency() const
+    {
+        Q_Q(const Activity);
+        auto sharesWidget = haveWidget<AmountEdit>(QLatin1String("sharesAmountEdit"));
+        auto priceWidget = haveWidget<AmountEdit>(QLatin1String("priceAmountEdit"));
+        auto feesWidget = haveWidget<AmountEdit>(QLatin1String("feesAmountEdit"));
+        auto interestWidget = haveWidget<AmountEdit>(QLatin1String("interestAmountEdit"));
+
+        if (sharesWidget && priceWidget && feesWidget && interestWidget) {
+            const auto shares = sharesWidget->shares();
+            const auto totalAmount = m_editor->totalAmount();
+            const auto price = priceWidget->value();
+            const auto fees = feesWidget->value();
+            const auto interest = interestWidget->value();
+            const auto calculatedPrice = ((-totalAmount + interest - fees) / shares) * q->sharesFactor();
+            if (calculatedPrice != price) {
+                qDebug() << "Correcting price from" << price.toDouble() << "to" << calculatedPrice.toDouble();
+                priceWidget->setValue(calculatedPrice);
+            }
+        }
+    }
+
+    Activity* q_ptr;
+    InvestTransactionEditor* m_editor;
     QString actionString;
 };
 
 Activity::Activity(InvestTransactionEditor* editor, const QString& action)
-    : d_ptr(new ActivityPrivate(editor))
+    : d_ptr(new ActivityPrivate(this, editor))
 {
     Q_D(Activity);
     d->actionString = action;
@@ -318,6 +343,10 @@ eMyMoney::Invest::PriceMode Activity::priceMode() const
     return d->priceMode();
 }
 
+void Invest::Activity::consistencyCheck() const
+{
+}
+
 Buy::Buy(InvestTransactionEditor* editor)
     : Activity(editor, QLatin1String("Buy"))
 {
@@ -346,6 +375,12 @@ void Buy::showWidgets() const
     };
 
     setupWidgets(activityWidgets);
+}
+
+void Buy::consistencyCheck() const
+{
+    Q_D(const Activity);
+    d->priceConsistency();
 }
 
 Sell::Sell(InvestTransactionEditor* editor)
@@ -381,12 +416,18 @@ void Sell::showWidgets() const
 Invest::Activity::fieldRequired_t Invest::Sell::assetAccountRequired() const
 {
     Q_D(const Activity);
-    return d->editor->totalAmount().isZero() ? Unused : Mandatory;
+    return d->m_editor->totalAmount().isZero() ? Unused : Mandatory;
 }
 
 MyMoneyMoney Sell::sharesFactor() const
 {
     return MyMoneyMoney::MINUS_ONE;
+}
+
+void Sell::consistencyCheck() const
+{
+    Q_D(const Activity);
+    d->priceConsistency();
 }
 
 Div::Div(InvestTransactionEditor* editor)
@@ -487,7 +528,7 @@ void Reinvest::adjustStockSplit(MyMoneySplit& stockSplit)
 Invest::Activity::fieldRequired_t Invest::Reinvest::assetAccountRequired() const
 {
     Q_D(const Activity);
-    return d->editor->totalAmount().isZero() ? Unused : Mandatory;
+    return d->m_editor->totalAmount().isZero() ? Unused : Mandatory;
 }
 
 Add::Add(InvestTransactionEditor* editor)

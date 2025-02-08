@@ -1169,6 +1169,8 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
         d->protectWidgetsForClosedAccount();
 
         updateTotalAmount();
+
+        d->currentActivity->consistencyCheck();
     }
 
     d->bypassUserPriceUpdate = false;
@@ -1277,6 +1279,8 @@ MyMoneyMoney InvestTransactionEditor::totalAmount() const
 QStringList InvestTransactionEditor::saveTransaction(const QStringList& selectedJournalEntries)
 {
     MyMoneyTransaction t;
+
+    updateTotalAmount();
 
     auto selection(selectedJournalEntries);
     connect(MyMoneyFile::instance()->journalModel(), &JournalModel::idChanged, this, [&](const QString& currentId, const QString& previousId) {

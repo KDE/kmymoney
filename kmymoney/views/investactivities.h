@@ -86,6 +86,8 @@ public:
 
     eMyMoney::Invest::PriceMode priceMode() const;
 
+    virtual void consistencyCheck() const;
+
     bool haveFees( fieldRequired_t = Mandatory) const;
     bool haveInterest( fieldRequired_t = Mandatory) const;
 
@@ -131,6 +133,7 @@ public:
     {
         return Mandatory;
     }
+    void consistencyCheck() const override;
 };
 
 class Sell : public Activity
@@ -153,6 +156,7 @@ public:
     fieldRequired_t priceRequired() const override {
         return Mandatory;
     }
+    void consistencyCheck() const override;
 };
 
 class Div : public Activity
