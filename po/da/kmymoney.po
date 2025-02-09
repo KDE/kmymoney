@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-04 01:53+0000\n"
+"POT-Creation-Date: 2025-02-09 01:51+0000\n"
 "PO-Revision-Date: 2015-02-19 20:48+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -19626,35 +19626,35 @@ msgstr "Kunne ikke åbne filen \"%1\" til skrivning"
 msgid "Unable to upload to '%1'.<br />%2"
 msgstr "Kan ikke uploade til \"%1\""
 
-#: kmymoney/views/investactivities.cpp:253
+#: kmymoney/views/investactivities.cpp:278
 #, fuzzy, kde-format
 #| msgid "Shares"
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "Aktier"
 
-#: kmymoney/views/investactivities.cpp:264
+#: kmymoney/views/investactivities.cpp:289
 #, fuzzy, kde-format
 #| msgid "Price/share"
 msgctxt "@label:textbox"
 msgid "Price/share"
 msgstr "Pris/aktie"
 
-#: kmymoney/views/investactivities.cpp:266
+#: kmymoney/views/investactivities.cpp:291
 #, fuzzy, kde-format
 #| msgid "Transaction amount"
 msgctxt "@label:textbox"
 msgid "Transaction amount"
 msgstr "Transaktionsbeløb"
 
-#: kmymoney/views/investactivities.cpp:268
+#: kmymoney/views/investactivities.cpp:293
 #, fuzzy, kde-format
 #| msgid "Price"
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "Pris"
 
-#: kmymoney/views/investactivities.cpp:609
+#: kmymoney/views/investactivities.cpp:650
 #, fuzzy, kde-format
 #| msgid "Ratio 1/"
 msgctxt "@label:textbox"

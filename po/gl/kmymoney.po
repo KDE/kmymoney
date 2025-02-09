@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-04 01:53+0000\n"
+"POT-Creation-Date: 2025-02-09 01:51+0000\n"
 "PO-Revision-Date: 2025-01-26 21:12+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -18945,31 +18945,31 @@ msgstr "Non é posíbel abrir o ficheiro de modelo «%1»"
 msgid "Unable to upload to '%1'.<br />%2"
 msgstr "Non é posíbel enviar a «%1».<br />%2"
 
-#: kmymoney/views/investactivities.cpp:253
+#: kmymoney/views/investactivities.cpp:278
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "Participacións"
 
-#: kmymoney/views/investactivities.cpp:264
+#: kmymoney/views/investactivities.cpp:289
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price/share"
 msgstr "Prezo/participación"
 
-#: kmymoney/views/investactivities.cpp:266
+#: kmymoney/views/investactivities.cpp:291
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Transaction amount"
 msgstr "Importe do asento"
 
-#: kmymoney/views/investactivities.cpp:268
+#: kmymoney/views/investactivities.cpp:293
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "Prezo"
 
-#: kmymoney/views/investactivities.cpp:609
+#: kmymoney/views/investactivities.cpp:650
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Ratio 1/"

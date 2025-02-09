@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-04 01:53+0000\n"
+"POT-Creation-Date: 2025-02-09 01:51+0000\n"
 "PO-Revision-Date: 2022-01-04 22:18+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -18845,19 +18845,19 @@ msgstr "تعذّر فتح الملفّ ’%1‘ للقراءة"
 msgid "Unable to upload to '%1'.<br />%2"
 msgstr "تعذّر الرّفع إلى ’%1‘<br />%2"
 
-#: kmymoney/views/investactivities.cpp:253
+#: kmymoney/views/investactivities.cpp:278
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "الأسهم"
 
-#: kmymoney/views/investactivities.cpp:264
+#: kmymoney/views/investactivities.cpp:289
 #, fuzzy, kde-format
 msgctxt "@label:textbox"
 msgid "Price/share"
 msgstr "الثّمن/المشاركة"
 
-#: kmymoney/views/investactivities.cpp:266
+#: kmymoney/views/investactivities.cpp:291
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Transaction amount"
@@ -18865,13 +18865,13 @@ msgstr "مبلغ المعاملة"
 
 # غالبا سنواجه خطأ ما بسبب كثرة استخدامه في كل مكان
 # قد نحتاج سياقا
-#: kmymoney/views/investactivities.cpp:268
+#: kmymoney/views/investactivities.cpp:293
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "الثّمن"
 
-#: kmymoney/views/investactivities.cpp:609
+#: kmymoney/views/investactivities.cpp:650
 #, fuzzy, kde-format
 msgctxt "@label:textbox"
 msgid "Ratio 1/"

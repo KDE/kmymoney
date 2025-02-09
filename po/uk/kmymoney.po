@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-04 01:53+0000\n"
+"POT-Creation-Date: 2025-02-09 01:51+0000\n"
 "PO-Revision-Date: 2025-02-03 08:45+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -19084,31 +19084,31 @@ msgstr "Не вдалося відкрити файл шаблону «%1»"
 msgid "Unable to upload to '%1'.<br />%2"
 msgstr "Не вдалося вивантажити дані до файла «%1».<br />%2"
 
-#: kmymoney/views/investactivities.cpp:253
+#: kmymoney/views/investactivities.cpp:278
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "Акції"
 
-#: kmymoney/views/investactivities.cpp:264
+#: kmymoney/views/investactivities.cpp:289
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price/share"
 msgstr "Ціна за акцію"
 
-#: kmymoney/views/investactivities.cpp:266
+#: kmymoney/views/investactivities.cpp:291
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Transaction amount"
 msgstr "Сума операції"
 
-#: kmymoney/views/investactivities.cpp:268
+#: kmymoney/views/investactivities.cpp:293
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "Ціна"
 
-#: kmymoney/views/investactivities.cpp:609
+#: kmymoney/views/investactivities.cpp:650
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Ratio 1/"
