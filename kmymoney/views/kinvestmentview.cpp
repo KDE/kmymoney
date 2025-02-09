@@ -280,6 +280,7 @@ public:
     SelectedObjects m_equitySelections;
     SelectedObjects m_securitySelections;
     SelectedObjects m_externalSelections;
+    int m_selectedRow;
 };
 
 KInvestmentView::KInvestmentView(QWidget *parent) :
@@ -292,6 +293,36 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
     connect(pActions[eMenu::Action::UpdatePriceManually], &QAction::triggered, this, &KInvestmentView::slotUpdatePriceManually);
     connect(pActions[eMenu::Action::EditSecurity], &QAction::triggered, this, &KInvestmentView::slotEditSecurity);
     connect(pActions[eMenu::Action::DeleteSecurity], &QAction::triggered, this, &KInvestmentView::slotDeleteSecurity);
+
+    // For an unknown reason, the model structure setup for this view causes a crash
+    // in case the last visible item is removed from the base model. This can be avoided
+    // by blocking all signals between the topmost model and the view during the deletion
+    // of the object in the base model (accountsModel). A bit of house cleaning needs to
+    // be done after the signals are unblocked because the current selected object
+    // certainly has changed.
+    connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::aboutToRemoveAccounts, this, [&]() {
+        Q_D(KInvestmentView);
+        d->m_equitiesProxyModel->blockSignals(true);
+        d->m_selectedRow = d->ui->m_equitiesTree->currentIndex().row();
+    });
+
+    connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::accountsRemoved, this, [&]() {
+        Q_D(KInvestmentView);
+        d->m_equitiesProxyModel->blockSignals(false);
+        d->m_equitiesProxyModel->invalidate();
+
+        if (d->m_selectedRow >= d->m_equitiesProxyModel->rowCount()) {
+            --d->m_selectedRow;
+        }
+
+        const auto idx = d->m_equitiesProxyModel->index(d->m_selectedRow, 0, d->ui->m_equitiesTree->rootIndex());
+        d->ui->m_equitiesTree->setCurrentIndex(idx);
+        if (!idx.isValid()) {
+            d->m_equitySelections.clearSelections(SelectedObjects::Account);
+            d->m_selections = d->m_equitySelections;
+            Q_EMIT requestSelectionChange(d->m_selections);
+        }
+    });
 }
 
 KInvestmentView::~KInvestmentView()

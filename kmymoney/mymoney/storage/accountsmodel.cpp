@@ -1235,10 +1235,12 @@ void AccountsModel::doRemoveItem(const MyMoneyAccount& before)
 {
     const auto idx = indexById(before.id());
     if (idx.isValid()) {
+        Q_EMIT aboutToRemoveAccounts();
         const auto itemId = idx.data(eMyMoney::Model::IdRole).toString();
         static_cast<TreeItem<MyMoneyAccount>*>(idx.parent().internalPointer())->dataRef().removeAccountId(itemId);
         MyMoneyModel::doRemoveItem(before);
         removeFavorite(itemId);
+        Q_EMIT accountsRemoved();
     }
 }
 

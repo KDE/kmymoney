@@ -203,6 +203,8 @@ Q_SIGNALS:
     void profitLossChanged(const MyMoneyMoney& amount, bool approximate);
     void reconciliationInfoChanged();
     void reparentAccountRequest(const QString& accountId, const QString& newParentId);
+    void aboutToRemoveAccounts();
+    void accountsRemoved();
 
 private:
     struct Private;
