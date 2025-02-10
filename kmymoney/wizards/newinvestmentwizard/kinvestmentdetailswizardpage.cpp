@@ -195,10 +195,14 @@ KInvestmentDetailsWizardPage::KInvestmentDetailsWizardPage(QWidget* parent)
 
     registerField("pricePrecision", d->ui->m_pricePrecision, "value", SIGNAL(valueChanged()));
 
+    d->ui->m_roundingMethod->addItem(i18nc("Rounding method", "HalfUp"), AlkValue::RoundHalfUp);
+    d->ui->m_roundingMethod->addItem(i18nc("Rounding method", "HalfDown"), AlkValue::RoundHalfDown);
     d->ui->m_roundingMethod->addItem(i18nc("Rounding method", "Round"), AlkValue::RoundRound);
     d->ui->m_roundingMethod->addItem(i18nc("Rounding method", "Ceil"), AlkValue::RoundCeil);
     d->ui->m_roundingMethod->addItem(i18nc("Rounding method", "Floor"), AlkValue::RoundFloor);
     d->ui->m_roundingMethod->addItem(i18nc("Rounding method", "Truncate"), AlkValue::RoundTruncate);
+    d->ui->m_roundingMethod->addItem(i18nc("Rounding method", "Promote"), AlkValue::RoundPromote);
+
     registerField("roundingMethod", d->ui->m_roundingMethod, "currentData", SIGNAL(currentIndexChanged(int)));
 
     registerField("priceMode", d->ui->m_priceMode, "currentItem", SIGNAL(currentIndexChanged(int)));
