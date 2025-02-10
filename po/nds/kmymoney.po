@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-09 01:51+0000\n"
+"POT-Creation-Date: 2025-02-10 01:52+0000\n"
 "PO-Revision-Date: 2014-07-03 09:44+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -20591,17 +20591,17 @@ msgstr "Bank wegdoon...."
 msgid "Unable to delete institution: %1"
 msgstr "Bank lett sik nich wegmaken: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:549
+#: kmymoney/views/kinvestmentview.cpp:580
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>Wullt Du de Geldanlaag <b>%1</b> redig wegmaken?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:550
+#: kmymoney/views/kinvestmentview.cpp:581
 #, kde-format
 msgid "Delete investment"
 msgstr "Geldanlaag wegmaken"
 
-#: kmymoney/views/kinvestmentview.cpp:561
+#: kmymoney/views/kinvestmentview.cpp:592
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "Geldanlaag lett sik nich wegmaken: %1"
