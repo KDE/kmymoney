@@ -132,6 +132,8 @@ add_definitions(
     -DQT_DISABLE_DEPRECATED_BEFORE=0x50f02
 )
 
+message(STATUS "cmake version: ${CMAKE_VERSION}")
+
 # GPG Encryption checks
 # ---------------------
 set(GPG_FOUND FALSE)

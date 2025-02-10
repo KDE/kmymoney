@@ -144,7 +144,6 @@ set_target_properties(kmm_mymoney PROPERTIES VERSION ${PROJECT_VERSION} SOVERSIO
 # create gdb pretty printer in build directory
 add_custom_command(TARGET kmm_mymoney POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/kmm_mymoney-gdb.py" "$<TARGET_FILE_DIR:kmm_mymoney>/$<TARGET_FILE_NAME:kmm_mymoney>-gdb.py"
-    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/kmm_mymoney-gdb.py"
 )
 
 ########### install files ###############
