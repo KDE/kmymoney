@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>638</width>
-    <height>435</height>
+    <height>468</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -390,43 +390,17 @@
          <property name="title">
           <string>Import options</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout_3" rowstretch="2,0,0,0,0">
-          <item row="0" column="1">
-           <widget class="QComboBox" name="m_preferredPayee">
+         <layout class="QGridLayout" name="gridLayout_3" rowstretch="2,0,0,0,0,0">
+          <item row="2" column="1">
+           <widget class="QComboBox" name="m_preferredPrice">
             <item>
              <property name="text">
-              <string notr="true">PAYEEID</string>
+              <string>Price information</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string notr="true">NAME</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">MEMO</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>Method to detect duplicate transactions during import</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QComboBox" name="m_uniqueTransactionId">
-            <item>
-             <property name="text">
-              <string comment="@item:inlistbox Method to identify duplicate transactions">OFX FITID</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string comment="@item:inlistbox Method to identify duplicate transactions">KMyMoney ID</string>
+              <string>Value and number of shares</string>
              </property>
             </item>
            </widget>
@@ -447,15 +421,8 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Timezone offset</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <layout class="QHBoxLayout" name="hl2" stretch="0,1">
+          <item row="3" column="1">
+           <layout class="QHBoxLayout" name="hl2" stretch="0,1,0">
             <item>
              <widget class="KComboBox" name="m_timestampOffsetSign">
               <item>
@@ -473,16 +440,43 @@
             <item>
              <widget class="QTimeEdit" name="m_timestampOffset"/>
             </item>
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
            </layout>
           </item>
-          <item row="3" column="0">
+          <item row="1" column="1">
+           <widget class="QComboBox" name="m_uniqueTransactionId">
+            <item>
+             <property name="text">
+              <string comment="@item:inlistbox Method to identify duplicate transactions">OFX FITID</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string comment="@item:inlistbox Method to identify duplicate transactions">KMyMoney ID</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="4" column="0">
            <widget class="QLabel" name="label_3">
             <property name="text">
              <string>Invert sign of transaction amount</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="4" column="1">
            <widget class="QCheckBox" name="m_invertAmount">
             <property name="toolTip">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check this if you need to invert the sign of imported transaction amounts, e.g. if you need to reverse charges and payments because your institution provides them inverted.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -492,20 +486,60 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="0">
+          <item row="5" column="0">
            <widget class="QLabel" name="label_4">
             <property name="text">
              <string>Fix sign of the investment transaction amount and quantity</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
+          <item row="5" column="1">
            <widget class="QCheckBox" name="m_fixBuySellSignage">
             <property name="toolTip">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check this if the investment transactions after importing have incorrect Buy/Sell type assigned, which may be caused by your institution not applying the correct negative/positive sign to the share amount or quantity value.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Price is derived from</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="m_preferredPayee">
+            <item>
+             <property name="text">
+              <string notr="true">PAYEEID</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">NAME</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">MEMO</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Timezone offset</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Method to detect duplicate transactions during import</string>
             </property>
            </widget>
           </item>
@@ -539,14 +573,19 @@
    <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
-   <class>KMyMoneyDateEdit</class>
-   <extends>KDateComboBox</extends>
-   <header>kmymoneydateedit.h</header>
-  </customwidget>
-  <customwidget>
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KDateComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kdatecombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KLed</class>
+   <extends>QWidget</extends>
+   <header>kled.h</header>
   </customwidget>
   <customwidget>
    <class>KPasswordLineEdit</class>
@@ -554,9 +593,9 @@
    <header>kpasswordlineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KLed</class>
-   <extends>QWidget</extends>
-   <header>kled.h</header>
+   <class>KMyMoneyDateEdit</class>
+   <extends>KDateComboBox</extends>
+   <header>kmymoneydateedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

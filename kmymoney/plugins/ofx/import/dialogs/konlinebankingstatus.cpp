@@ -85,8 +85,9 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget* p
     else
         m_specificDate->setDate(QDate::currentDate());
     m_specificDate->setMaximumDate(QDate::currentDate());
-    m_preferredPayee->setCurrentIndex(settings.value("kmmofx-preferName").toInt());
-    m_uniqueTransactionId->setCurrentIndex(settings.value("kmmofx-uniqueIdSource").toInt());
+    m_preferredPayee->setCurrentIndex(settings.value("kmmofx-preferName", 0));
+    m_preferredPrice->setCurrentIndex(settings.value("kmmofx-preferredPrice", 0));
+    m_uniqueTransactionId->setCurrentIndex(settings.value("kmmofx-uniqueIdSource", 0));
 
     const int offset = settings.value("kmmofx-timestampOffset").toInt();
     m_timestampOffsetSign->setCurrentIndex(offset < 0 ? 1 : 0);

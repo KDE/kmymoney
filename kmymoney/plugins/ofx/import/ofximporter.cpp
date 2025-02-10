@@ -63,6 +63,7 @@ public:
     Private()
         : m_valid(false)
         , m_preferName(PreferId)
+        , m_preferredPrice(PriceField)
         , m_uniqueIdSource(UniqueIdUnknown)
         , m_invertAmount(false)
         , m_fixBuySellSignage(false)
@@ -79,6 +80,10 @@ public:
         PreferName,
         PreferMemo,
     } m_preferName;
+    enum PricePreference {
+        PriceField,
+        ValueAndShares,
+    } m_preferredPrice;
     UniqueTransactionIdSource m_uniqueIdSource;
     bool m_invertAmount;
     bool m_fixBuySellSignage;
@@ -174,6 +179,7 @@ void OFXImporter::slotImportFile()
                                              widget);
 
     d->m_preferName = static_cast<OFXImporter::Private::NamePreference>(option->m_preferName->currentIndex());
+    d->m_preferredPrice = static_cast<OFXImporter::Private::PricePreference>(option->m_preferredPrice->currentIndex());
     d->m_uniqueIdSource = static_cast<UniqueTransactionIdSource>(option->m_uniqueIdSource->currentIndex());
     d->m_timestampOffset = d->constructTimeOffset(option->m_timestampOffset, option->m_timestampOffsetSign);
     d->m_invertAmount = option->m_invertAmount->isChecked();
@@ -621,6 +627,13 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
     if (data.unitprice_valid) {
         t.m_price = MyMoneyMoney(data.unitprice, 100000).reduce();
     }
+    // if there is no price provided or the price shall be
+    // derived from value and shares then calculate it but
+    // only if the dividend is not zero. the result certainly
+    // is always positive
+    if ((t.m_price.isZero() || d->m_preferredPrice == Private::ValueAndShares) && (!t.m_shares.isZero())) {
+        t.m_price = (t.m_amount / t.m_shares).abs();
+    }
 
     t.m_fees = MyMoneyMoney();
     if (data.fees_valid) {
@@ -915,8 +928,9 @@ MyMoneyKeyValueContainer OFXImporter::onlineBankingSettings(const MyMoneyKeyValu
         kvp.setValue(QStringLiteral("kmmofx-lastUpdate"), QString::number(d->m_statusDlg->m_lastUpdateRB->isChecked()));
         kvp.setValue(QStringLiteral("kmmofx-pickDate"), QString::number(d->m_statusDlg->m_pickDateRB->isChecked()));
         kvp.setValue(QStringLiteral("kmmofx-specificDate"), d->m_statusDlg->m_specificDate->date().toString());
-        kvp.setValue(QStringLiteral("kmmofx-preferName"), QString::number(d->m_statusDlg->m_preferredPayee->currentIndex()));
-        kvp.setValue(QStringLiteral("kmmofx-uniqueIdSource"), QString::number(d->m_statusDlg->m_uniqueTransactionId->currentIndex()));
+        kvp.setValue(QStringLiteral("kmmofx-preferName"), d->m_statusDlg->m_preferredPayee->currentIndex(), 0);
+        kvp.setValue(QStringLiteral("kmmofx-preferredPrice"), d->m_statusDlg->m_preferredPrice->currentIndex(), 0);
+        kvp.setValue(QStringLiteral("kmmofx-uniqueIdSource"), d->m_statusDlg->m_uniqueTransactionId->currentIndex(), 0);
         if (!d->m_statusDlg->m_clientUidEdit->text().isEmpty())
             kvp.setValue(QStringLiteral("clientUid"), d->m_statusDlg->m_clientUidEdit->text());
         else
@@ -973,11 +987,13 @@ bool OFXImporter::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
         d->m_uniqueIdSource = UniqueIdUnknown;
         if (!acc.id().isEmpty()) {
             // Save the value of preferName to be used by ofxTransactionCallback
-            d->m_preferName = static_cast<OFXImporter::Private::NamePreference>(acc.onlineBankingSettings().value(QStringLiteral("kmmofx-preferName")).toInt());
+            d->m_preferName = static_cast<OFXImporter::Private::NamePreference>(acc.onlineBankingSettings().value(QStringLiteral("kmmofx-preferName"), 0));
+            d->m_preferredPrice =
+                static_cast<OFXImporter::Private::PricePreference>(acc.onlineBankingSettings().value(QStringLiteral("kmmofx-preferredPrice"), 0));
             if (acc.onlineBankingSettings().value(QStringLiteral("kmmofx-uniqueIdSource")).isEmpty())
                 d->m_uniqueIdSource = defaultIdSource();
             else
-                d->m_uniqueIdSource = static_cast<UniqueTransactionIdSource>(acc.onlineBankingSettings().value(QStringLiteral("kmmofx-uniqueIdSource")).toInt());
+                d->m_uniqueIdSource = static_cast<UniqueTransactionIdSource>(acc.onlineBankingSettings().value(QStringLiteral("kmmofx-uniqueIdSource"), 0));
             QPointer<KOfxDirectConnectDlg> dlg = new KOfxDirectConnectDlg(acc);
 
             connect(dlg.data(), &KOfxDirectConnectDlg::statementReady, this, static_cast<void (OFXImporter::*)(const QString &)>(&OFXImporter::slotImportFile));
