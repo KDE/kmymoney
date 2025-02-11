@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-10 01:52+0000\n"
+"POT-Creation-Date: 2025-02-11 02:00+0000\n"
 "PO-Revision-Date: 2024-04-22 16:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -23133,30 +23133,51 @@ msgid "Unable to create account: %1"
 msgstr "无法创建账户：%1"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:198
+#, fuzzy, kde-format
+#| msgid "Half Up"
+msgctxt "Rounding method"
+msgid "HalfUp"
+msgstr "正向四舍五入"
+
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:199
+#, fuzzy, kde-format
+#| msgid "Half Down"
+msgctxt "Rounding method"
+msgid "HalfDown"
+msgstr "负向四舍五入"
+
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:200
 #, kde-format
 msgctxt "Rounding method"
 msgid "Round"
 msgstr "取整"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:199
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:201
 #, kde-format
 msgctxt "Rounding method"
 msgid "Ceil"
 msgstr "向上取整"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:200
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:202
 #, kde-format
 msgctxt "Rounding method"
 msgid "Floor"
 msgstr "向下取整"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:201
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:203
 #, kde-format
 msgctxt "Rounding method"
 msgid "Truncate"
 msgstr ""
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:243
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:204
+#, fuzzy, kde-format
+#| msgid "Promote"
+msgctxt "Rounding method"
+msgid "Promote"
+msgstr "升变"
+
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:247
 #, kde-format
 msgctxt "@info Warning that security is used in multiple accounts"
 msgid ""

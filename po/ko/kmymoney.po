@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-10 01:52+0000\n"
+"POT-Creation-Date: 2025-02-11 02:00+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -23729,30 +23729,51 @@ msgid "Unable to create account: %1"
 msgstr "계좌를 만들 수 없음: %1"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:198
+#, fuzzy, kde-format
+#| msgid "HalfUp"
+msgctxt "Rounding method"
+msgid "HalfUp"
+msgstr "절반을 올림"
+
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:199
+#, fuzzy, kde-format
+#| msgid "HalfDown"
+msgctxt "Rounding method"
+msgid "HalfDown"
+msgstr "절반을 버림"
+
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:200
 #, kde-format
 msgctxt "Rounding method"
 msgid "Round"
 msgstr "반올림"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:199
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:201
 #, kde-format
 msgctxt "Rounding method"
 msgid "Ceil"
 msgstr "올림"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:200
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:202
 #, kde-format
 msgctxt "Rounding method"
 msgid "Floor"
 msgstr "내림"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:201
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:203
 #, kde-format
 msgctxt "Rounding method"
 msgid "Truncate"
 msgstr "끝 수 버림"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:243
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:204
+#, fuzzy, kde-format
+#| msgid "Promote"
+msgctxt "Rounding method"
+msgid "Promote"
+msgstr "끝 수 올림"
+
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:247
 #, kde-format
 msgctxt "@info Warning that security is used in multiple accounts"
 msgid ""

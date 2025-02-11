@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-10 01:52+0000\n"
+"POT-Creation-Date: 2025-02-11 02:00+0000\n"
 "PO-Revision-Date: 2025-02-03 10:46+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -24145,30 +24145,51 @@ msgid "Unable to create account: %1"
 msgstr "No s'ha pogut crear el compte: %1"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:198
+#, fuzzy, kde-format
+#| msgid "HalfUp"
+msgctxt "Rounding method"
+msgid "HalfUp"
+msgstr "MeitatAmunt"
+
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:199
+#, fuzzy, kde-format
+#| msgid "HalfDown"
+msgctxt "Rounding method"
+msgid "HalfDown"
+msgstr "MeitatAvall"
+
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:200
 #, kde-format
 msgctxt "Rounding method"
 msgid "Round"
 msgstr "Arredoniment"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:199
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:201
 #, kde-format
 msgctxt "Rounding method"
 msgid "Ceil"
 msgstr "Sostre"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:200
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:202
 #, kde-format
 msgctxt "Rounding method"
 msgid "Floor"
 msgstr "Terra"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:201
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:203
 #, kde-format
 msgctxt "Rounding method"
 msgid "Truncate"
 msgstr "Trunca"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:243
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:204
+#, fuzzy, kde-format
+#| msgid "Promote"
+msgctxt "Rounding method"
+msgid "Promote"
+msgstr "Promociona"
+
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:247
 #, kde-format
 msgctxt "@info Warning that security is used in multiple accounts"
 msgid ""

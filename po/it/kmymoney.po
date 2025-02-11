@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-10 01:52+0000\n"
+"POT-Creation-Date: 2025-02-11 02:00+0000\n"
 "PO-Revision-Date: 2025-02-01 20:54+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -24108,30 +24108,51 @@ msgid "Unable to create account: %1"
 msgstr "Impossibile creare il conto: %1"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:198
+#, fuzzy, kde-format
+#| msgid "HalfUp"
+msgctxt "Rounding method"
+msgid "HalfUp"
+msgstr "HalfUp"
+
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:199
+#, fuzzy, kde-format
+#| msgid "HalfDown"
+msgctxt "Rounding method"
+msgid "HalfDown"
+msgstr "HalfDown"
+
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:200
 #, kde-format
 msgctxt "Rounding method"
 msgid "Round"
 msgstr "Arrotondamento"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:199
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:201
 #, kde-format
 msgctxt "Rounding method"
 msgid "Ceil"
 msgstr "Arrotondamento per eccesso"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:200
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:202
 #, kde-format
 msgctxt "Rounding method"
 msgid "Floor"
 msgstr "Arrotondamento per difetto"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:201
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:203
 #, kde-format
 msgctxt "Rounding method"
 msgid "Truncate"
 msgstr "Troncamento"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:243
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:204
+#, fuzzy, kde-format
+#| msgid "Promote"
+msgctxt "Rounding method"
+msgid "Promote"
+msgstr "Promozione"
+
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:247
 #, kde-format
 msgctxt "@info Warning that security is used in multiple accounts"
 msgid ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-10 01:52+0000\n"
+"POT-Creation-Date: 2025-02-11 02:00+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -23687,28 +23687,48 @@ msgstr "Nepavyksta pridėti operacijos: "
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:198
 #, kde-format
 msgctxt "Rounding method"
-msgid "Round"
+msgid "HalfUp"
 msgstr ""
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:199
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action move item down"
+#| msgid "Down"
 msgctxt "Rounding method"
-msgid "Ceil"
-msgstr ""
+msgid "HalfDown"
+msgstr "Žemyn"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:200
 #, kde-format
 msgctxt "Rounding method"
-msgid "Floor"
+msgid "Round"
 msgstr ""
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:201
 #, kde-format
 msgctxt "Rounding method"
+msgid "Ceil"
+msgstr ""
+
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:202
+#, kde-format
+msgctxt "Rounding method"
+msgid "Floor"
+msgstr ""
+
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:203
+#, kde-format
+msgctxt "Rounding method"
 msgid "Truncate"
 msgstr ""
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:243
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:204
+#, kde-format
+msgctxt "Rounding method"
+msgid "Promote"
+msgstr ""
+
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:247
 #, kde-format
 msgctxt "@info Warning that security is used in multiple accounts"
 msgid ""

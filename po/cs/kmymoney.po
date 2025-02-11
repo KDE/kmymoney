@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-10 01:52+0000\n"
+"POT-Creation-Date: 2025-02-11 02:00+0000\n"
 "PO-Revision-Date: 2024-09-17 15:29+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -4987,12 +4987,10 @@ msgid "Show transaction details"
 msgstr "Zobrazit podrobnosti o transakci"
 
 #: kmymoney/kmymoney.cpp:1986
-#, fuzzy, kde-format
-#| msgctxt "To open a new report"
-#| msgid "&Open"
+#, kde-format
 msgctxt "Open URL"
 msgid "Open URL"
-msgstr "&Otevřít"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1987
 #, kde-format
@@ -5281,8 +5279,7 @@ msgid "Unable to duplicate transaction(s)"
 msgstr ""
 
 #: kmymoney/kmymoney.cpp:2900
-#, fuzzy, kde-format
-#| msgid "Close"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close"
 msgstr "Zavřít"
@@ -8495,11 +8492,10 @@ msgid "Entry date"
 msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:80
-#, fuzzy, kde-format
-#| msgid "Account Balances by Institution"
+#, kde-format
 msgctxt "@info:toolbox Balance)"
 msgid "Account balance or security units"
-msgstr "Zůstatek na účtech podle institucí"
+msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:106
 #, kde-format
@@ -15541,10 +15537,9 @@ msgid "Long-term Gain"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:807
-#, fuzzy, kde-format
-#| msgid "Starting Balance"
+#, kde-format
 msgid "Starting Market Value"
-msgstr "Počáteční zůstatek"
+msgstr ""
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
 #: kmymoney/plugins/views/reports/core/querytable.cpp:994
@@ -15729,24 +15724,21 @@ msgid ""
 msgstr ""
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:150
-#, fuzzy, kde-format
-#| msgid "%1 Balance History"
+#, kde-format
 msgctxt "@title:window Value chart for investments"
 msgid "%1 Value History"
-msgstr "Historie zůstatku na účtu '%1'"
+msgstr ""
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:156
-#, fuzzy, kde-format
-#| msgid "Balance of %1"
+#, kde-format
 msgid "Value of %1"
-msgstr "Historie zůstatku na účtu %1"
+msgstr ""
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:159
-#, fuzzy, kde-format
-#| msgid "%1 Balance History"
+#, kde-format
 msgctxt "@title:window Balance chart for account"
 msgid "%1 Balance History"
-msgstr "Historie zůstatku na účtu '%1'"
+msgstr ""
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:167
 #, kde-format
@@ -16146,10 +16138,9 @@ msgid "&Export to PDF files"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:816
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export into directory"
-msgstr "Exportovat hlášení"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KReportsView)
 #: kmymoney/plugins/views/reports/kreportsview.ui:14
@@ -16569,11 +16560,10 @@ msgstr "Předpověď čistého jmění"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/views/khomeview_p.h:1529
-#, fuzzy, kde-format
-#| msgid "Budget"
+#, kde-format
 msgctxt "@title Home page section"
 msgid "Budget"
-msgstr "Rozpočet"
+msgstr ""
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:159
 #, kde-format
@@ -18596,12 +18586,10 @@ msgstr "Cena akcie "
 #. i18n: ectx: property (toolTip), widget (KMyMoneyDateEdit, dateEdit)
 #: kmymoney/views/investtransactioneditor.ui:73
 #: kmymoney/views/newtransactioneditor.ui:256
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the amount of the transaction."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The posting date of the transaction."
-msgstr "Zadejte částku transakce."
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (KMyMoneyAccountCombo, feesCombo)
 #: kmymoney/views/investtransactioneditor.ui:126
@@ -18690,11 +18678,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/journaldelegate.cpp:350
-#, fuzzy, kde-format
-#| msgid "Retrieving transactions..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Prevent editing transactions"
-msgstr "Získávám transakce..."
+msgstr ""
 
 #: kmymoney/views/journaldelegate.cpp:364
 #, kde-format
@@ -19185,11 +19172,10 @@ msgid "Loading..."
 msgstr "Probíhá načítání..."
 
 #: kmymoney/views/khomeview_p.h:496
-#, fuzzy, kde-format
-#| msgid "Preferred Accounts"
+#, kde-format
 msgctxt "@title Home page section"
 msgid "Preferred Accounts"
-msgstr "Upřednostňované účty"
+msgstr ""
 
 #: kmymoney/views/khomeview_p.h:502
 #, kde-format
@@ -19197,18 +19183,16 @@ msgid "Payment Accounts"
 msgstr "Platební účty"
 
 #: kmymoney/views/khomeview_p.h:504
-#, fuzzy, kde-format
-#| msgid "Payment Accounts"
+#, kde-format
 msgctxt "@title Home page section"
 msgid "Payment Accounts"
-msgstr "Platební účty"
+msgstr ""
 
 #: kmymoney/views/khomeview_p.h:557
-#, fuzzy, kde-format
-#| msgid "Net Worth Forecast"
+#, kde-format
 msgctxt "@title Home page section"
 msgid "Net Worth Forecast"
-msgstr "Předpověď čistého jmění"
+msgstr ""
 
 #: kmymoney/views/khomeview_p.h:608
 #, kde-format
@@ -19234,32 +19218,28 @@ msgid "Balance after"
 msgstr "Zůstatek poté"
 
 #: kmymoney/views/khomeview_p.h:677
-#, fuzzy, kde-format
-#| msgid "Schedule name:"
+#, kde-format
 msgctxt "@title Home page section"
 msgid "Scheduled Payments"
-msgstr "Název naplánované transakce:"
+msgstr ""
 
 #: kmymoney/views/khomeview_p.h:685
-#, fuzzy, kde-format
-#| msgid "Overdue payments"
+#, kde-format
 msgctxt "@title Home page sub-section"
 msgid "Overdue payments"
-msgstr "Platby po splatnosti"
+msgstr ""
 
 #: kmymoney/views/khomeview_p.h:721
-#, fuzzy, kde-format
-#| msgid "Payments to"
+#, kde-format
 msgctxt "@title Home page sub-section"
 msgid "Payments due today"
-msgstr "Platím tomuto plátci:"
+msgstr ""
 
 #: kmymoney/views/khomeview_p.h:736
-#, fuzzy, kde-format
-#| msgid "Future payments"
+#, kde-format
 msgctxt "@title Home page sub-section"
 msgid "Future payments"
-msgstr "Budoucí platby"
+msgstr ""
 
 #: kmymoney/views/khomeview_p.h:799
 #, kde-format
@@ -19320,23 +19300,19 @@ msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1065
-#, fuzzy, kde-format
-#| msgid "Favorite Reports"
+#, kde-format
 msgctxt "@title Home page section"
 msgid "Favorite Reports"
-msgstr "Oblíbené výkazy"
+msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1121
-#, fuzzy, kde-format
-#| msgctxt "Forecast days"
-#| msgid "%1 Day Forecast"
-#| msgid_plural "%1 Day Forecast"
+#, kde-format
 msgctxt "@title Home page section Forecast days"
 msgid "%1 Day Forecast"
 msgid_plural "%1 Day Forecast"
-msgstr[0] "%1 denní předpověď"
-msgstr[1] "%1 denní předpověď"
-msgstr[2] "%1 denní předpověď"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: kmymoney/views/khomeview_p.h:1132
 #, kde-format
@@ -19348,11 +19324,10 @@ msgstr[1] "%1 dny"
 msgstr[2] "%1 dnů"
 
 #: kmymoney/views/khomeview_p.h:1355
-#, fuzzy, kde-format
-#| msgid "Assets and Liabilities Summary"
+#, kde-format
 msgctxt "@title Home page section"
 msgid "Assets and Liabilities Summary"
-msgstr "Přehled Aktiv a Pasiv"
+msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1379
 #, kde-format
@@ -19361,48 +19336,40 @@ msgid "!M"
 msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1383
-#, fuzzy, kde-format
-#| msgctxt "Reconciliation flag C"
-#| msgid "C"
+#, kde-format
 msgctxt "@title:column table on home page: cleared"
 msgid "C"
-msgstr "C"
+msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1387
-#, fuzzy, kde-format
-#| msgctxt "Reconciliation flag R"
-#| msgid "R"
+#, kde-format
 msgctxt "@title:column table on home page: not reconciled"
 msgid "!R"
-msgstr "R"
+msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1391
-#, fuzzy, kde-format
-#| msgid "Reconciled"
+#, kde-format
 msgctxt "@title:column table on home page: last reconciliation date"
 msgid "Reconciled"
-msgstr "Schváleno"
+msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1394
-#, fuzzy, kde-format
-#| msgid "Balance"
+#, kde-format
 msgctxt "@title:column table on home page"
 msgid "Balance"
-msgstr "Zůstatek "
+msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1398
-#, fuzzy, kde-format
-#| msgid "Asset Accounts"
+#, kde-format
 msgctxt "@title:column table on home page"
 msgid "Asset Accounts"
-msgstr "Účty aktiv"
+msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1403
-#, fuzzy, kde-format
-#| msgid "Liability Accounts"
+#, kde-format
 msgctxt "@title:column table on home page"
 msgid "Liability Accounts"
-msgstr "Účty pasiv"
+msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1488
 #, kde-format
@@ -19415,11 +19382,10 @@ msgid "Total Liabilities"
 msgstr "Celková pasiva"
 
 #: kmymoney/views/khomeview_p.h:1784
-#, fuzzy, kde-format
-#| msgid "Cash Flow Summary"
+#, kde-format
 msgctxt "@title Home page section"
 msgid "Cash Flow Summary"
-msgstr "Přehled cash flow"
+msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1789
 #, kde-format
@@ -19833,17 +19799,15 @@ msgstr "Čísla účtu"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tabLinks)
 #: kmymoney/views/kpayeesview.ui:503
-#, fuzzy, kde-format
-#| msgid "Matching"
+#, kde-format
 msgid "Link Matching"
-msgstr "Párování"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: kmymoney/views/kpayeesview.ui:511
-#, fuzzy, kde-format
-#| msgid "Matching"
+#, kde-format
 msgid "Matching setup"
-msgstr "Párování"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (KLineEdit, idPatternEdit)
 #: kmymoney/views/kpayeesview.ui:519
@@ -19853,10 +19817,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, idPatternLabel)
 #: kmymoney/views/kpayeesview.ui:526
-#, fuzzy, kde-format
-#| msgid "Identifier"
+#, kde-format
 msgid "Identifier pattern"
-msgstr "Identifikátor"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, urlTemplateLabel)
 #: kmymoney/views/kpayeesview.ui:533
@@ -19866,17 +19829,15 @@ msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_3)
 #: kmymoney/views/kpayeesview.ui:548
-#, fuzzy, kde-format
-#| msgid "Matching"
+#, kde-format
 msgid "Matching check"
-msgstr "Párování"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_1)
 #: kmymoney/views/kpayeesview.ui:563
-#, fuzzy, kde-format
-#| msgid "Identifier"
+#, kde-format
 msgid "Enter identifier"
-msgstr "Identifikátor"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/views/kpayeesview.ui:570
@@ -19886,10 +19847,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: kmymoney/views/kpayeesview.ui:580
-#, fuzzy, kde-format
-#| msgid "Result"
+#, kde-format
 msgid "Resulting URL"
-msgstr "Výsledek"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, m_leftLabel)
 #. i18n: ectx: property (text), widget (QLabel, m_centerLabel)
@@ -19968,13 +19928,12 @@ msgid "Search"
 msgstr "Hledat"
 
 #: kmymoney/views/kpayeesview_p.h:187
-#, fuzzy, kde-format
-#| msgid "Add"
+#, kde-format
 msgctxt ""
 "@action:button Replacement for Add button on match tab to avoid duplicate "
 "assignment of Alt+A"
 msgid "Add"
-msgstr "Přidat"
+msgstr ""
 
 #: kmymoney/views/kpayeesview_p.h:364 kmymoney/views/ktagsview.cpp:213
 #, kde-format
@@ -20599,12 +20558,10 @@ msgstr "Odkaz"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, numberEdit)
 #: kmymoney/views/newtransactioneditor.ui:24
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the amount of the transaction."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The check number used for this transaction."
-msgstr "Zadejte částku transakce."
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (CreditDebitEdit, creditDebitEdit)
 #: kmymoney/views/newtransactioneditor.ui:72
@@ -23368,28 +23325,49 @@ msgstr "Nelze vytvořit účet: %1"
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:198
 #, kde-format
 msgctxt "Rounding method"
+msgid "HalfUp"
+msgstr ""
+
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:199
+#, fuzzy, kde-format
+#| msgctxt "@action move item down"
+#| msgid "Down"
+msgctxt "Rounding method"
+msgid "HalfDown"
+msgstr "Dolů"
+
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:200
+#, kde-format
+msgctxt "Rounding method"
 msgid "Round"
 msgstr "Kolo"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:199
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:201
 #, kde-format
 msgctxt "Rounding method"
 msgid "Ceil"
 msgstr ""
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:200
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:202
 #, kde-format
 msgctxt "Rounding method"
 msgid "Floor"
 msgstr "Podlaha"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:201
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:203
 #, kde-format
 msgctxt "Rounding method"
 msgid "Truncate"
 msgstr "Zkrátit"
 
-#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:243
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:204
+#, fuzzy, kde-format
+#| msgid "Promote"
+msgctxt "Rounding method"
+msgid "Promote"
+msgstr "Proměnit"
+
+#: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:247
 #, kde-format
 msgctxt "@info Warning that security is used in multiple accounts"
 msgid ""
@@ -25013,10 +24991,9 @@ msgid "Export in HTML format"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:126
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export in xml format"
-msgstr "Exportovat hlášení"
+msgstr ""
 
 #: tools/kmmreport-export.cpp:129
 #, kde-format
@@ -25062,9 +25039,3 @@ msgstr ""
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr ""
-
-#~ msgid "Select category or account."
-#~ msgstr "Vyberte kategorii nebo účet."
-
-#~ msgid "Today's due payments"
-#~ msgstr "Dnešní platby"
