@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-11 02:00+0000\n"
-"PO-Revision-Date: 2025-02-03 11:40+0300\n"
+"PO-Revision-Date: 2025-02-11 10:28+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -23876,18 +23876,16 @@ msgid "Unable to create account: %1"
 msgstr "Hesap oluşturulamadı: %1"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:198
-#, fuzzy, kde-format
-#| msgid "HalfUp"
+#, kde-format
 msgctxt "Rounding method"
 msgid "HalfUp"
-msgstr "YarımYukarı"
+msgstr "Yarım Yukarı"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:199
-#, fuzzy, kde-format
-#| msgid "HalfDown"
+#, kde-format
 msgctxt "Rounding method"
 msgid "HalfDown"
-msgstr "YarımAşağı"
+msgstr "Yarım Aşağı"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:200
 #, kde-format
@@ -23914,8 +23912,7 @@ msgid "Truncate"
 msgstr "Kırp"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:204
-#, fuzzy, kde-format
-#| msgid "Promote"
+#, kde-format
 msgctxt "Rounding method"
 msgid "Promote"
 msgstr "Yükselt"

@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-11 02:00+0000\n"
-"PO-Revision-Date: 2025-02-03 20:46+0100\n"
+"PO-Revision-Date: 2025-02-11 22:15+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -23921,18 +23921,16 @@ msgid "Unable to create account: %1"
 msgstr "Kan inte skapa konto: %1"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:198
-#, fuzzy, kde-format
-#| msgid "HalfUp"
+#, kde-format
 msgctxt "Rounding method"
 msgid "HalfUp"
-msgstr "Halva uppåt"
+msgstr "Halvt uppåt"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:199
-#, fuzzy, kde-format
-#| msgid "HalfDown"
+#, kde-format
 msgctxt "Rounding method"
 msgid "HalfDown"
-msgstr "Halva nedåt"
+msgstr "Halvt nedåt"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:200
 #, kde-format
@@ -23959,8 +23957,7 @@ msgid "Truncate"
 msgstr "Avkorta"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:204
-#, fuzzy, kde-format
-#| msgid "Promote"
+#, kde-format
 msgctxt "Rounding method"
 msgid "Promote"
 msgstr "Befordra"
