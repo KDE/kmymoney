@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-11 02:00+0000\n"
+"POT-Creation-Date: 2025-02-13 02:04+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -2047,7 +2047,7 @@ msgstr "Trinti šį įrašą"
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:196
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:617
 #: kmymoney/plugins/views/reports/reportcontrol.ui:105
-#: kmymoney/views/splitdialog.ui:688
+#: kmymoney/views/splitdialog.ui:694
 #, fuzzy, kde-format
 msgid "Delete"
 msgstr "Trinti"
@@ -20110,7 +20110,7 @@ msgstr "Sąskaitos pavadinimas"
 #. i18n: ectx: property (text), widget (QToolButton, m_newButton)
 #. i18n: ectx: property (text), widget (QPushButton, newSplitButton)
 #: kmymoney/views/kpayeesview.ui:53 kmymoney/views/ktagsview.ui:58
-#: kmymoney/views/splitdialog.ui:633
+#: kmymoney/views/splitdialog.ui:639
 #, fuzzy, kde-format
 #| msgid "New"
 msgid "New"
@@ -21229,32 +21229,32 @@ msgid "Split editor"
 msgstr "Skelti operaciją"
 
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
-#: kmymoney/views/splitdialog.ui:547
+#: kmymoney/views/splitdialog.ui:553
 #, fuzzy, kde-format
 msgid "Sum of splits"
 msgstr "&Skelti"
 
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
-#: kmymoney/views/splitdialog.ui:585
+#: kmymoney/views/splitdialog.ui:591
 #, fuzzy, kde-format
 #| msgid "Transactions by Account"
 msgid "Transaction amount"
 msgstr "Operacijos pagal sąskaitas"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSplitButton)
-#: kmymoney/views/splitdialog.ui:630
+#: kmymoney/views/splitdialog.ui:636
 #, fuzzy, kde-format
 msgid "Create a new split"
 msgstr "Sukurti naują tvarkaraštį."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, mergeButton)
-#: kmymoney/views/splitdialog.ui:653
+#: kmymoney/views/splitdialog.ui:659
 #, kde-format
 msgid "Merges splits with the same category to one split"
 msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, mergeButton)
-#: kmymoney/views/splitdialog.ui:656
+#: kmymoney/views/splitdialog.ui:662
 #, kde-format
 msgid ""
 "In case you have multiple split entries to the same category and you like to "
@@ -21263,13 +21263,13 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, mergeButton)
-#: kmymoney/views/splitdialog.ui:659
+#: kmymoney/views/splitdialog.ui:665
 #, fuzzy, kde-format
 msgid "&Merge"
 msgstr "Sulieti"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, adjustUnassigned)
-#: kmymoney/views/splitdialog.ui:668
+#: kmymoney/views/splitdialog.ui:674
 #, kde-format
 msgid ""
 "Apply 'Unassigned' or 'Overassigned' amount to the current split.\n"
@@ -21278,52 +21278,52 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, adjustUnassigned)
-#: kmymoney/views/splitdialog.ui:671
+#: kmymoney/views/splitdialog.ui:677
 #, fuzzy, kde-format
 #| msgid "Difference"
 msgid "Apply Difference"
 msgstr "Skirtumas"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteZeroButton)
-#: kmymoney/views/splitdialog.ui:678
+#: kmymoney/views/splitdialog.ui:684
 #, kde-format
 msgid "Removes all splits that have a value of zero"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteZeroButton)
-#: kmymoney/views/splitdialog.ui:681
+#: kmymoney/views/splitdialog.ui:687
 #, fuzzy, kde-format
 msgid "Delete &Zero"
 msgstr "Patvirtintos"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteAllButton)
-#: kmymoney/views/splitdialog.ui:695
+#: kmymoney/views/splitdialog.ui:701
 #, kde-format
 msgid "Clear all splits"
 msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, deleteAllButton)
-#: kmymoney/views/splitdialog.ui:698
+#: kmymoney/views/splitdialog.ui:704
 #, fuzzy, kde-format
 msgid "Use this to delete all splits of this transaction."
 msgstr "Išrinkti operacijas be korespondento"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteAllButton)
-#: kmymoney/views/splitdialog.ui:701
+#: kmymoney/views/splitdialog.ui:707
 #, fuzzy, kde-format
 #| msgid "Delete all"
 msgid "Delete &All"
 msgstr "Ištrinti visus"
 
 #. i18n: ectx: property (text), widget (QPushButton, okButton)
-#: kmymoney/views/splitdialog.ui:721
+#: kmymoney/views/splitdialog.ui:727
 #, fuzzy, kde-format
 #| msgid "&Ok"
 msgid "&OK"
 msgstr "&Gerai"
 
 #. i18n: ectx: property (text), widget (QPushButton, cancelButton)
-#: kmymoney/views/splitdialog.ui:734 kmymoney/wizards/kmymoneywizard_p.h:76
+#: kmymoney/views/splitdialog.ui:740 kmymoney/wizards/kmymoneywizard_p.h:76
 #, fuzzy, kde-format
 msgid "&Cancel"
 msgstr "&Atšaukti"
