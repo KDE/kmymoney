@@ -553,7 +553,7 @@ public:
                     }
                     try {
                         fromCurrency = MyMoneyFile::instance()->security(id);
-                        toCurrency = MyMoneyFile::instance()->security(toCurrency.tradingCurrency());
+                        toCurrency = MyMoneyFile::instance()->security(fromCurrency.tradingCurrency());
                         precision = fromCurrency.pricePrecision();
                     } catch (const MyMoneyException&) {
                         fromCurrency = toCurrency = MyMoneySecurity();
