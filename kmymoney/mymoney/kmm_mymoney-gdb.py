@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 Ralf Habacker <ralf.habacker@freenet.de>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 import gdb.printing
 
 in_qt_creator = False
