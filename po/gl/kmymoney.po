@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-13 02:04+0000\n"
-"PO-Revision-Date: 2025-01-26 21:12+0100\n"
+"PO-Revision-Date: 2025-02-14 08:14+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.1\n"
+"X-Generator: Lokalize 24.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -31,7 +31,7 @@ msgstr "Marce Villarino, Xosé, Adrián Chaves (Gallaecio)"
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "mvillarino@kde-espana.es, xosecalvo@gmail.com, adrian@chaves.io"
+msgstr "mvillarino@kde-espana.es, xosecalvo@gmail.com, adrian@chaves.gal"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:130
 #, kde-format
@@ -5474,8 +5474,7 @@ msgid "Unable to duplicate transaction(s)"
 msgstr "Non é posíbel duplicar os asentos"
 
 #: kmymoney/kmymoney.cpp:2900
-#, fuzzy, kde-format
-#| msgid "Close"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close"
 msgstr "Pechar"
@@ -16211,21 +16210,18 @@ msgstr ""
 "kmymoney-devel@kde.org"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:150
-#, fuzzy, kde-format
-#| msgid "%1 Balance History"
+#, kde-format
 msgctxt "@title:window Value chart for investments"
 msgid "%1 Value History"
-msgstr "Historial de saldos de %1"
+msgstr "Historial de valores de %1"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:156
-#, fuzzy, kde-format
-#| msgid "Balance of %1"
+#, kde-format
 msgid "Value of %1"
-msgstr "Saldo de %1"
+msgstr "Valor de %1"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:159
-#, fuzzy, kde-format
-#| msgid "%1 Balance History"
+#, kde-format
 msgctxt "@title:window Balance chart for account"
 msgid "%1 Balance History"
 msgstr "Historial de saldos de %1"
@@ -19154,6 +19150,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "Transaction is not balanced. Either correct values or assign an account."
 msgstr ""
+"A transacción non está equilibrada. Corrixa os valores ou asigne unha conta."
 
 #. i18n: ectx: property (toolTip), widget (AmountEdit, priceAmountEdit)
 #: kmymoney/views/investtransactioneditor.ui:26
@@ -20547,8 +20544,7 @@ msgid "Search"
 msgstr "Buscar"
 
 #: kmymoney/views/kpayeesview_p.h:187
-#, fuzzy, kde-format
-#| msgid "Add"
+#, kde-format
 msgctxt ""
 "@action:button Replacement for Add button on match tab to avoid duplicate "
 "assignment of Alt+A"
@@ -24005,24 +24001,22 @@ msgid "Unable to create account: %1"
 msgstr "Non é posíbel crear conta: %1"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:198
-#, fuzzy, kde-format
-#| msgid "HalfUp"
+#, kde-format
 msgctxt "Rounding method"
 msgid "HalfUp"
 msgstr "Metade cara arriba"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:199
-#, fuzzy, kde-format
-#| msgid "HalfDown"
+#, kde-format
 msgctxt "Rounding method"
 msgid "HalfDown"
-msgstr "Metade cara arriba"
+msgstr "Metade cara abaixo"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:200
 #, kde-format
 msgctxt "Rounding method"
 msgid "Round"
-msgstr "Ronda"
+msgstr "Redondear"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:201
 #, kde-format
@@ -24034,20 +24028,19 @@ msgstr "Redondear cara arriba"
 #, kde-format
 msgctxt "Rounding method"
 msgid "Floor"
-msgstr "Chan"
+msgstr "Redondear cara abaixo"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:203
 #, kde-format
 msgctxt "Rounding method"
 msgid "Truncate"
-msgstr "Acurtar"
+msgstr "Recortar"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:204
-#, fuzzy, kde-format
-#| msgid "Promote"
+#, kde-format
 msgctxt "Rounding method"
 msgid "Promote"
-msgstr "Promover"
+msgstr "Ascender"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:247
 #, kde-format
