@@ -215,6 +215,9 @@ public:
         qq->connect(&schedulesModel, &SchedulesModel::rowsAboutToBeRemoved, &schedulesJournalModel, &SchedulesJournalModel::updateData);
         qq->connect(&accountsModel, &AccountsModel::reconciliationInfoChanged, &reconciliationModel, &ReconciliationModel::updateData);
         qq->connect(&accountsModel, &AccountsModel::reparentAccountRequest, qq, &MyMoneyFile::reparentAccountByIds);
+
+        // provide access for schedules to calculate balances
+        schedulesJournalModel.setJournalModel(&journalModel);
     }
 
     ~Private()
@@ -2340,20 +2343,16 @@ QList<MyMoneySchedule> MyMoneyFile::scheduleList() const
                         QDate(), QDate(), false);
 }
 
-MyMoneyTransaction MyMoneyFile::scheduledTransaction(const MyMoneySchedule& schedule)
+MyMoneyTransaction MyMoneyFile::scheduledTransaction(const MyMoneySchedule& schedule, const AccountBalanceCache& balances) const
 {
     MyMoneyTransaction t = schedule.transaction();
 
-    try {
-        if (schedule.type() == eMyMoney::Schedule::Type::LoanPayment) {
-            try {
-                MyMoneyForecast::calculateAutoLoan(schedule, t, QMap<QString, MyMoneyMoney>());
-            } catch (const MyMoneyException &e) {
-                qDebug() <<  "Unable to load schedule details" << QString::fromLatin1(e.what());
-            }
+    if (schedule.type() == eMyMoney::Schedule::Type::LoanPayment) {
+        try {
+            MyMoneyForecast::calculateAutoLoan(schedule, t, balances);
+        } catch (const MyMoneyException& e) {
+            qDebug() << "Unable to load schedule details" << QString::fromLatin1(e.what());
         }
-    } catch (const MyMoneyException &e) {
-        qDebug() << "Unable to load schedule details for" << schedule.name() << "during transaction match:" << e.what();
     }
 
     t.clearId();

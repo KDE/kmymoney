@@ -123,15 +123,16 @@ class MyMoneyAccount;
 class MyMoneyInstitution;
 class MyMoneySecurity;
 class MyMoneyPrice;
+class MyMoneyMoney;
 typedef QPair<QString, QString> MyMoneySecurityPair;
 typedef QMap<QDate, MyMoneyPrice> MyMoneyPriceEntries;
 typedef QMap<MyMoneySecurityPair, MyMoneyPriceEntries> MyMoneyPriceList;
+typedef QMap<QString, MyMoneyMoney> AccountBalanceCache;
 class MyMoneySchedule;
 class MyMoneyTag;
 class MyMoneyPayee;
 class MyMoneyBudget;
 class MyMoneyReport;
-class MyMoneyMoney;
 class MyMoneySplit;
 class MyMoneyObject;
 class MyMoneyTransaction;
@@ -1205,8 +1206,7 @@ public:
      *
      * @returns adjusted transaction
      */
-    MyMoneyTransaction scheduledTransaction(const MyMoneySchedule& schedule);
-
+    MyMoneyTransaction scheduledTransaction(const MyMoneySchedule& schedule, const AccountBalanceCache& balances) const;
 
     QStringList consistencyCheck();
 

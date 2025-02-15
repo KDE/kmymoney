@@ -27,11 +27,13 @@
 struct SchedulesJournalModel::Private
 {
     Private()
-        : previewPeriod(0)
+        : m_journalModel(nullptr)
+        , previewPeriod(0)
         , updateRequested(false)
         , showPlannedDate(false)
     {}
 
+    const JournalModel* m_journalModel;
     int  previewPeriod;
     bool updateRequested;
     bool showPlannedDate;
@@ -158,7 +160,8 @@ void SchedulesJournalModel::doLoad()
     // create scheduled transactions which have a scheduled postdate
     // within the next 'period' days.
     const auto endDate = QDate::currentDate().addDays(d->previewPeriod);
-    QList<MyMoneySchedule> scheduleList = MyMoneyFile::instance()->scheduleList();
+    const auto file = MyMoneyFile::instance();
+    QList<MyMoneySchedule> scheduleList = file->scheduleList();
 
     // in case we don't have a single schedule, there are certainly no transactions
     if (scheduleList.isEmpty()) {
@@ -169,12 +172,34 @@ void SchedulesJournalModel::doLoad()
 
         while (!scheduleList.isEmpty()) {
             MyMoneySchedule& s = scheduleList.first();
+
+            // make sure we have all 'starting balances' so that the autocalc works
+            AccountBalanceCache balances;
+            if (d->m_journalModel != nullptr) {
+                const auto transaction = s.transaction();
+                for (const auto& split : transaction.splits()) {
+                    const auto nextDate = s.nextPayment(s.lastPayment());
+                    // collect all overdues on the first day
+                    QDate schedDate = nextDate;
+                    if (QDate::currentDate() >= nextDate)
+                        schedDate = QDate::currentDate().addDays(1);
+
+                    balances[split.accountId()] += d->m_journalModel->balance(split.accountId(), schedDate);
+                }
+            }
+
             for (;;) {
                 if (s.isFinished() || s.adjustedNextDueDate() > endDate) {
                     break;
                 }
 
-                MyMoneyTransaction t(s.id(), MyMoneyFile::instance()->scheduledTransaction(s));
+                MyMoneyTransaction t(s.id(), file->scheduledTransaction(s, balances));
+
+                // update the balances (assuming single currency)
+                for (const auto& split : t.splits()) {
+                    balances[split.accountId()] += split.shares();
+                }
+
                 if (s.isOverdue()) {
                     if (!d->showPlannedDate) {
                         // if the transaction is scheduled and overdue, it can't
@@ -235,4 +260,9 @@ void SchedulesJournalModel::setShowPlannedDate(bool showPlannedDate)
         d->showPlannedDate = showPlannedDate;
         updateData();
     }
+}
+
+void SchedulesJournalModel::setJournalModel(const JournalModel* journalModel)
+{
+    d->m_journalModel = journalModel;
 }

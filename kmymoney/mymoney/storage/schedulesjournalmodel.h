@@ -47,6 +47,8 @@ public:
     void setPreviewPeriod(int days);
     void setShowPlannedDate(bool showPlannedDate = true);
 
+    void setJournalModel(const JournalModel* journalModel);
+
 public Q_SLOTS:
     void updateData();
 
