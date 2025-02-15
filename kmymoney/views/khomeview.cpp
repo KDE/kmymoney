@@ -220,7 +220,7 @@ void KHomeView::slotOpenUrl(const QUrl &url)
                 MyMoneyFile::instance()->accountList(list);
             } catch (const MyMoneyException&) {
             }
-            if (list.count() == 0) {
+            if (list.isEmpty()) {
                 KMessageBox::information(this, i18n("Before KMyMoney can give you detailed information about your financial status, you need to create at least one account. Until then, KMyMoney shows the welcome page instead."));
             }
             d->loadView();

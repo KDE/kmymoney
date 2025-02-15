@@ -825,7 +825,7 @@ public:
 
         MyMoneyAccount equity = file->equity();
         MyMoneyAccount asset = file->asset();
-        bool equityListEmpty = equity.accountList().count() == 0;
+        bool equityListEmpty = equity.accountList().isEmpty();
 
         for (it_a = accountList.begin(); it_a != accountList.end(); ++it_a) {
             if ((*it_a).accountType() == eMyMoney::Account::Type::Loan

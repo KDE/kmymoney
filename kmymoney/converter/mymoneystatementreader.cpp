@@ -487,7 +487,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
 
     if (!d->m_account.name().isEmpty())
         messages += i18n("Importing statement for account %1", d->m_account.name());
-    else if (s.m_listTransactions.count() == 0)
+    else if (s.m_listTransactions.isEmpty())
         messages += i18n("Importing statement without transactions");
 
     qDebug("Importing statement for '%s'", qPrintable(d->m_account.name()));

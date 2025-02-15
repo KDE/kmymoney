@@ -214,7 +214,7 @@ void MyMoneyQifProfileEditor::loadProfileListFromConfig()
     KConfigGroup grp = config->group("Profiles");
     list = grp.readEntry("profiles", QStringList());
 
-    if (list.count() == 0) {
+    if (list.isEmpty()) {
         m_profile.clear();
         m_profile.setProfileDescription(i18n("The default QIF profile"));
         addProfile("Default");

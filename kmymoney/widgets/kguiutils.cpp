@@ -228,7 +228,7 @@ void KMandatoryFieldGroup::changed()
                 setWidgetEmpty();
             }
         } else if ((qobject_cast<QListWidget*>(widget))) {
-            if ((qobject_cast<QListWidget*>(widget))->selectedItems().count() == 0) {
+            if ((qobject_cast<QListWidget*>(widget))->selectedItems().isEmpty()) {
                 setWidgetEmpty();
             }
         } else if ((qobject_cast<KUrlRequester*>(widget))) {

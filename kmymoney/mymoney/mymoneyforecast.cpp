@@ -1642,7 +1642,7 @@ void MyMoneyForecast::calculateAutoLoan(const MyMoneySchedule& schedule, MyMoney
             // we need to calculate the balance at the time the payment is due
 
             MyMoneyMoney balance;
-            if (balances.count() == 0)
+            if (balances.isEmpty())
                 balance = MyMoneyFile::instance()->balance(acc.id(), dueDate.addDays(-1));
             else
                 balance = balances[acc.id()];

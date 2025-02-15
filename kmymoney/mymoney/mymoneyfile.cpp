@@ -1341,7 +1341,7 @@ void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
     if (!account.id().isEmpty())
         throw MYMONEYEXCEPTION_CSTRING("New account must have no id");
 
-    if (account.accountList().count() != 0)
+    if (!account.accountList().isEmpty())
         throw MYMONEYEXCEPTION_CSTRING("New account must have no sub-accounts");
 
     if (!account.parentAccountId().isEmpty())
@@ -2585,7 +2585,7 @@ QStringList MyMoneyFile::consistencyCheck()
         }
     }
 
-    if (accountRebuild.count() != 0) {
+    if (!accountRebuild.isEmpty()) {
         rc << i18n("* Reconstructing the child lists for");
     }
 

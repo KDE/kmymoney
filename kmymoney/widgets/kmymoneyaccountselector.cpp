@@ -159,7 +159,7 @@ QStringList KMyMoneyAccountSelector::accountList(const  QList<Account::Type>& fi
     while (*it) {
         QVariant id = (*it)->data(0, (int)eWidgets::Selector::Role::Id);
         MyMoneyAccount acc = MyMoneyFile::instance()->account(id.toString());
-        if (filterList.count() == 0 || filterList.contains(acc.accountType()))
+        if (filterList.isEmpty() || filterList.contains(acc.accountType()))
             list << id.toString();
         it++;
     }

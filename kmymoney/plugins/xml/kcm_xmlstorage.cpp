@@ -128,7 +128,7 @@ void XMLStorageSettingsWidget::slotIdChanged()
                 }
             }
 
-            m_userKeysFound->setState(static_cast<KLed::State>(keysOk && (kcfg_GpgRecipientList->items().count() != 0) ? KLed::On : KLed::Off));
+            m_userKeysFound->setState(static_cast<KLed::State>(keysOk && !kcfg_GpgRecipientList->items().isEmpty() ? KLed::On : KLed::Off));
             break;
         }
 

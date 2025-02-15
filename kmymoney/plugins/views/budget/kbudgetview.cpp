@@ -187,7 +187,7 @@ void KBudgetView::slotBudgetForecast()
             idx = MyMoneyFile::baseModel()->mapToBaseSource(idx);
             if (idx.isValid()) {
                 auto budget = file->budgetsModel()->itemByIndex(idx);
-                bool calcBudget = budget.getaccounts().count() == 0;
+                bool calcBudget = budget.getaccounts().isEmpty();
                 if (!calcBudget) {
                     if (KMessageBox::warningContinueCancel(
                             nullptr,

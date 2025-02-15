@@ -485,7 +485,7 @@ QList<MyMoneySchedule> SchedulesModel::scheduleList(const QString& accountId,
         }
 
         if (startDate.isValid() && endDate.isValid()) {
-            if (schedule.paymentDates(startDate, endDate).count() == 0) {
+            if (schedule.paymentDates(startDate, endDate).isEmpty()) {
                 continue;
             }
         }
@@ -539,7 +539,7 @@ QList<MyMoneySchedule> SchedulesModel::scheduleListEx(int scheduleTypes,
         if (schedulePaymentTypes && !(schedulePaymentTypes & (int)schedule.paymentType()))
             continue;
 
-        if (schedule.paymentDates(date, date).count() == 0)
+        if (schedule.paymentDates(date, date).isEmpty())
             continue;
 
         if (schedule.isFinished())

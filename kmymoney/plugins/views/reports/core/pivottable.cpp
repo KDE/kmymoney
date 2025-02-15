@@ -882,7 +882,7 @@ void PivotTable::calculateBudgetMapping()
         //if no valid budget has been selected
         if (!validBudget) {
             //if the budget list is empty, just return
-            if (budgets.count() == 0) {
+            if (budgets.isEmpty()) {
                 return;
             }
 

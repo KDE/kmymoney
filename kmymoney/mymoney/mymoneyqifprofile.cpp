@@ -775,7 +775,7 @@ void MyMoneyQifProfile::possibleDateFormats(QStringList& list) const
     }
     // if we haven't found any, then there's something wrong.
     // in this case, we present the full list and let the user decide
-    if (list.count() == 0) {
+    if (list.isEmpty()) {
         for (it_d = defaultList.cbegin(); it_d != defaultList.cend(); ++it_d) {
             QString format = *it_d;
             format.replace('y', "%y");

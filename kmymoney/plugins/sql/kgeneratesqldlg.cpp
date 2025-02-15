@@ -158,7 +158,7 @@ int  KGenerateSqlDlg::exec()
         }
         ++it;
     }
-    if (d->m_supportedDrivers.count() == 0) {
+    if (d->m_supportedDrivers.isEmpty()) {
         // why does KMessageBox not have a standard dialog with Help button?
         if ((KMessageBox::questionTwoActions(this,
                                              i18n("In order to use a database, you need to install some additional software. Click Help for more information"),

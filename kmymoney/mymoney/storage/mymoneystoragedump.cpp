@@ -476,7 +476,7 @@ const QString MyMoneyStorageDump::reconcileToString(eMyMoney::Split::State flag)
 #if 0
 void MyMoneyStorageDump::dumpPriceHistory(QTextStream& s, const equity_price_history history)
 {
-    if (history.count() != 0) {
+    if (!history.isEmpty()) {
         s << "    Price History:\n";
 
         equity_price_history::const_iterator it_price = history.begin();

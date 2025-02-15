@@ -322,7 +322,7 @@ bool OFXImporter::import(const QString& filename)
 
 QString OFXImporter::lastError() const
 {
-    if (d->m_errors.count() == 0)
+    if (d->m_errors.isEmpty())
         return d->m_fatalerror;
     return d->m_errors.join(QStringLiteral("<p>"));
 }
