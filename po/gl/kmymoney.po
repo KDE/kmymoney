@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2025-01-26 21:12+0100\n"
+"PO-Revision-Date: 2025-02-14 08:14+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.1\n"
+"X-Generator: Lokalize 24.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -31,7 +31,7 @@ msgstr "Marce Villarino, Xosé, Adrián Chaves (Gallaecio)"
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "mvillarino@kde-espana.es, xosecalvo@gmail.com, adrian@chaves.io"
+msgstr "mvillarino@kde-espana.es, xosecalvo@gmail.com, adrian@chaves.gal"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:129
 #, kde-format
@@ -23453,7 +23453,7 @@ msgstr "Non é posíbel crear conta: %1"
 #, kde-format
 msgctxt "Rounding method"
 msgid "Round"
-msgstr "Ronda"
+msgstr "Redondear"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:65
 #, kde-format
@@ -23465,13 +23465,13 @@ msgstr "Redondear cara arriba"
 #, kde-format
 msgctxt "Rounding method"
 msgid "Floor"
-msgstr "Chan"
+msgstr "Redondear cara abaixo"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:67
 #, kde-format
 msgctxt "Rounding method"
 msgid "Truncate"
-msgstr "Acurtar"
+msgstr "Recortar"
 
 #. i18n: ectx: property (title), widget (QWizardPage, KInvestmentDetailsWizardPage)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:14
