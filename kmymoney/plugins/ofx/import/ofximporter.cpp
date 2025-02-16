@@ -42,9 +42,11 @@
 #include "mymoneyexception.h"
 #include "mymoneystatement.h"
 #include "mymoneystatementreader.h"
+#include "selectedobjects.h"
 #include "statementinterface.h"
 #include "ui_importoption.h"
 #include "viewinterface.h"
+
 #include <libofx/libofx.h>
 
 // #define DEBUG_LIBOFX
@@ -91,6 +93,7 @@ public:
     QDate m_updateStartDate;
     int m_timestampOffset;
     KMMStringSet m_hashes;
+    SelectedObjects m_selections;
 
     int constructTimeOffset(const QTimeEdit* timestampOffset, const KComboBox* timestampOffsetSign) const
     {
@@ -212,7 +215,7 @@ bool OFXImporter::isMyFormat(const QString& filename) const
 
         int lineCount = 20;
         while (!ts.atEnd() && !result  && lineCount != 0) {
-            // get a line of data and remove all unnecessary whitepace chars
+            // get a line of data and remove all unnecessary whitespace chars
             QString line = ts.readLine().simplified();
             if (line.contains(QStringLiteral("<OFX>"), Qt::CaseInsensitive)
                     || line.contains(QStringLiteral("<OFC>"), Qt::CaseInsensitive))
@@ -1106,6 +1109,11 @@ const QStringList& OFXImporter::warnings() const
 const QStringList& OFXImporter::errors() const
 {
     return d->m_errors;
+}
+
+void OFXImporter::updateActions(const SelectedObjects& selections)
+{
+    d->m_selections = selections;
 }
 
 K_PLUGIN_CLASS_WITH_JSON(OFXImporter, "ofximporter.json")

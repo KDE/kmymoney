@@ -451,7 +451,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
 
 
         // we ask the user only if we have some transactions to process
-        if (!m_userAbort && s.m_listTransactions.count() > 0)
+        if (!m_userAbort && !s.m_listTransactions.isEmpty())
             m_userAbort = ! selectOrCreateAccount(Select, d->m_account);
     }
 

@@ -95,6 +95,8 @@ public:
     bool mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& settings) override;
     bool updateAccount(const MyMoneyAccount& acc, bool moreAccounts) override;
 
+    void updateActions(const SelectedObjects& selections) override;
+
 protected Q_SLOTS:
     void slotImportFile();
     void slotImportFile(const QString& url);

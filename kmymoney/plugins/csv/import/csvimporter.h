@@ -48,16 +48,11 @@ public:
       */
     virtual QString lastError() const override;
 
+    void updateActions(const SelectedObjects& selections) override;
+
 private:
-    bool m_silent;
-    QAction* m_action;
-    QWidget* m_parentWidget;
-
-protected Q_SLOTS:
-    void startWizardRun();
-
-protected:
-    void createActions();
+    class Private;
+    Private* const d;
 };
 
 #endif
