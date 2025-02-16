@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui version="56" name="kmymoney" >
+<kpartgui version="57" name="kmymoney" >
  <MenuBar>
   <Menu name="file" >
    <DefineGroup name="open_db_group" append="open_merge"/>
@@ -193,6 +193,10 @@
   <title>Security options</title>
   <Action name="security_edit" />
   <Action name="security_delete" />
+  <Action name="investment_online_price_update" />
+  <Action name="investment_manual_price_update" />
+  <Separator />
+  <Action name="tools_update_prices" />
  </Menu>
  <Menu name="schedule_context_menu">
   <title>Scheduled transactions options</title>

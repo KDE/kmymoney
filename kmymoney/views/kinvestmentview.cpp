@@ -394,7 +394,7 @@ void KInvestmentView::showEvent(QShowEvent* event)
 
         connect(d->ui->m_securitiesTree, &QWidget::customContextMenuRequested, this, [&](const QPoint& pos) {
             Q_D(KInvestmentView);
-            Q_EMIT requestCustomContextMenu(eMenu::Menu::Security, d->ui->m_equitiesTree->viewport()->mapToGlobal(pos));
+            Q_EMIT requestCustomContextMenu(eMenu::Menu::Security, d->ui->m_securitiesTree->viewport()->mapToGlobal(pos));
         });
 
         connect(d->ui->m_equitiesTree->selectionModel(),
@@ -552,7 +552,10 @@ void KInvestmentView::updateActions(const SelectedObjects& selections)
         skip.fill(false);
         skip.setBit((int)eStorage::Reference::Price);
         pActions[eMenu::Action::EditSecurity]->setEnabled(true);
+        pActions[eMenu::Action::UpdatePriceManually]->setEnabled(true);
         pActions[eMenu::Action::DeleteSecurity]->setDisabled(file->isReferenced(securityId, skip));
+        const auto sec = file->securitiesModel()->itemById(securityId);
+        pActions[eMenu::Action::UpdatePriceOnline]->setDisabled(sec.value("kmm-online-source").isEmpty());
     }
 
     d->m_externalSelections = selections;
@@ -604,8 +607,17 @@ void KInvestmentView::slotDeleteInvestment()
 void KInvestmentView::slotUpdatePriceOnline()
 {
     Q_D(KInvestmentView);
-    if (!d->currentEquity().id().isEmpty()) {
-        QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(nullptr, d->currentEquity().currencyId());
+
+    QString currencyId;
+    auto tab = static_cast<eView::Investment::Tab>(d->ui->m_tab->currentIndex());
+
+    if (tab == eView::Investment::Equities) {
+        currencyId = d->currentEquity().currencyId();
+    } else {
+        currencyId = d->currentSecurity().id();
+    }
+    if (!currencyId.isEmpty()) {
+        QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(nullptr, currencyId);
         if ((dlg->exec() == QDialog::Accepted) && (dlg != nullptr))
             dlg->storePrices();
         delete dlg;
