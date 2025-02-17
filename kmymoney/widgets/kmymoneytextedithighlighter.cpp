@@ -13,11 +13,11 @@ class KMyMoneyTextEditHighlighterPrivate
     Q_DISABLE_COPY(KMyMoneyTextEditHighlighterPrivate)
 
 public:
-    KMyMoneyTextEditHighlighterPrivate() :
-        m_allowedChars(QString(QString())),
-        m_maxLines(-1),
-        m_maxLineLength(-1),
-        m_maxLength(-1)
+    KMyMoneyTextEditHighlighterPrivate()
+        : m_allowedChars(QString())
+        , m_maxLines(-1)
+        , m_maxLineLength(-1)
+        , m_maxLength(-1)
     {
     }
 
@@ -88,7 +88,7 @@ void KMyMoneyTextEditHighlighter::highlightBlock(const QString& text)
     }
 
     if (d->m_maxLines != -1) {
-        //! @todo Is using QTextBlock::blockNumber() as line number dangerous?
+        // currentBlock().blockNumber() returns value base 0
         if (currentBlock().blockNumber() >= d->m_maxLines) {
             setFormat(0, length, invalidFormat);
             return;

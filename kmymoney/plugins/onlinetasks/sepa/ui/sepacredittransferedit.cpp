@@ -211,13 +211,6 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList arg
 
     connect(qApp, &QApplication::focusChanged, this, &sepaCreditTransferEdit::updateEveryStatus);
 
-    connect(ui->beneficiaryName, &KLineEdit::textChanged, this, &sepaCreditTransferEdit::onlineJobChanged);
-    connect(ui->beneficiaryIban, &KIbanLineEdit::textChanged, this, &sepaCreditTransferEdit::onlineJobChanged);
-    connect(ui->beneficiaryBankCode, &KBicEdit::textChanged, this, &sepaCreditTransferEdit::onlineJobChanged);
-    connect(ui->value, &AmountEdit::amountChanged, this, &sepaCreditTransferEdit::onlineJobChanged);
-    connect(ui->sepaReference, &KLineEdit::textChanged, this, &sepaCreditTransferEdit::onlineJobChanged);
-    connect(ui->purpose, &KMyMoneyTextEdit::textChanged, this, &sepaCreditTransferEdit::onlineJobChanged);
-
     // Connect signals for read only
     connect(this, &sepaCreditTransferEdit::readOnlyChanged, ui->beneficiaryName, &KLineEdit::setReadOnly);
     connect(this, &sepaCreditTransferEdit::readOnlyChanged, ui->beneficiaryIban, &KIbanLineEdit::setReadOnly);

@@ -57,7 +57,6 @@ public:
     void showEvent(QShowEvent*) final override;
 
 Q_SIGNALS:
-    void onlineJobChanged();
     void readOnlyChanged(bool);
 
 public Q_SLOTS:
