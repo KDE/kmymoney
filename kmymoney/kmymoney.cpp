@@ -4448,6 +4448,8 @@ QList<QString> KMyMoneyApp::instanceList() const
 void KMyMoneyApp::slotEquityPriceUpdate()
 {
     QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this);
+    dlg->setSearchShortcut(pActions[eMenu::Action::ShowFilterWidget]->shortcut());
+
     if (dlg->exec() == QDialog::Accepted && dlg != nullptr)
         dlg->storePrices();
     delete dlg;

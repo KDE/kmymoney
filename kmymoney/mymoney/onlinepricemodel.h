@@ -9,6 +9,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDate>
 #include <QString>
 
 // ----------------------------------------------------------------------------
@@ -35,7 +36,7 @@ public:
 
     void setSymbol(const QString& symbol);
     void setName(const QString& name);
-    void setDate(const QString& date);
+    void setDate(const QDate& date);
     void setPrice(const QString& price);
     void setSource(const QString& source);
     void setDirty();
@@ -43,7 +44,7 @@ public:
     QString id() const;
     QString symbol() const;
     QString name() const;
-    QString date() const;
+    QDate date() const;
     QString price() const;
     QString source() const;
     bool isDirty() const;
@@ -66,7 +67,7 @@ private:
     QString m_id;
     QString m_symbol;
     QString m_name;
-    QString m_date;
+    QDate m_date;
     QString m_price;
     QString m_source;
     bool m_dirty = false;
@@ -113,7 +114,7 @@ public:
      * @param date the date of the price information
      * @param source the source of the price information
      */
-    void addOnlinePrice(const QString& id, const QString& symbol, const QString& name, const QString& price, const QString& date, const QString& source);
+    void addOnlinePrice(const QString& id, const QString& symbol, const QString& name, const QString& price, const QDate& date, const QString& source);
 
     bool setData(const QModelIndex& idx, const QVariant& value, int role = Qt::EditRole) override;
 

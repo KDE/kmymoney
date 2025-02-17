@@ -11,9 +11,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QLineEdit>
 #include <QList>
 #include <QPointer>
 #include <QPushButton>
+#include <QSortFilterProxyModel>
 #include <QTimer>
 #include <QToolButton>
 
@@ -42,7 +44,9 @@
 #include "icons.h"
 #include "kequitypriceupdateconfdlg.h"
 #include "kmmonlinequotesprofilemanager.h"
+#include "kmmyesno.h"
 #include "kmymoneyutils.h"
+#include "menuenums.h"
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
@@ -55,7 +59,29 @@
 #include "onlinesourcedelegate.h"
 #include "widgethintframe.h"
 
-#include "kmmyesno.h"
+class KEquityFilterModel : public QSortFilterProxyModel
+{
+    Q_OBJECT
+    Q_DISABLE_COPY(KEquityFilterModel)
+
+public:
+    explicit KEquityFilterModel(QObject* parent)
+        : QSortFilterProxyModel(parent)
+    {
+    }
+
+protected:
+    bool lessThan(const QModelIndex& source_left, const QModelIndex& source_right) const override
+    {
+        switch (source_left.column()) {
+        case OnlinePriceModel::Date:
+            return source_left.data(eMyMoney::Model::PriceDateRole).toDate() < source_right.data(eMyMoney::Model::PriceDateRole).toDate();
+
+        default:
+            return QSortFilterProxyModel::lessThan(source_left, source_right);
+        }
+    }
+};
 
 class KEquityPriceUpdateDlgPrivate : public QObject
 {
@@ -68,6 +94,7 @@ public:
         : QObject(qq)
         , q_ptr(qq)
         , ui(new Ui::KEquityPriceUpdateDlg)
+        , m_filterModel(nullptr)
         , m_fUpdateAll(false)
         , m_abortUpdate(false)
         , m_updatingPricePolicy(eDialogs::UpdatePrice::All)
@@ -99,8 +126,18 @@ public:
         Q_Q(KEquityPriceUpdateDlg);
         ui->setupUi(q);
 
-        ui->equityView->setModel(&m_onlinePriceModel);
+        m_filterModel = new KEquityFilterModel(this);
+        m_filterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+        m_filterModel->setSortLocaleAware(true);
+        m_filterModel->setSourceModel(&m_onlinePriceModel);
+        m_filterModel->setFilterKeyColumn(-1); // filter on all columns
+
+        connect(ui->searchWidget->lineEdit(), &QLineEdit::textChanged, m_filterModel, &QSortFilterProxyModel::setFilterFixedString);
+
+        ui->equityView->setModel(m_filterModel);
         ui->equityView->setFocus();
+        ui->equityView->setSortingEnabled(true);
+        ui->equityView->header()->setSortIndicatorShown(true);
 
         auto delegate = new OnlineSourceDelegate(ui->equityView);
         ui->equityView->setItemDelegateForColumn(OnlinePriceModel::Source, delegate);
@@ -111,6 +148,9 @@ public:
         // hide the widgets until there is activity
         ui->statusContainer->hide();
         ui->messageWidget->hide();
+
+        // We don't use the combobox in the searchWidget
+        ui->searchWidget->comboBox()->hide();
 
         m_fUpdateAll = false;
 
@@ -242,7 +282,7 @@ public:
     {
         if (ui->m_fromDate->date().isValid() && ui->m_toDate->date().isValid()) {
             // Only enable the update all button if there is an item in the list
-            ui->btnUpdateAll->setEnabled(m_onlinePriceModel.rowCount() > 0);
+            ui->btnUpdateAll->setEnabled(m_filterModel->rowCount() > 0);
             // Only enable the update button if there is a selection
             ui->btnUpdateSelected->setEnabled(!ui->equityView->selectionModel()->selectedRows().isEmpty());
         } else {
@@ -294,16 +334,17 @@ public:
 
                 if (keep) {
                     QString price;
-                    QString date;
+                    QDate date;
                     QString source = QLatin1String("KMyMoney Currency");
                     if (pr.isValid()) {
                         MyMoneySecurity fromCurrency = file->currency(pair.first);
                         MyMoneySecurity toCurrency = file->currency(pair.second);
                         price = pr.rate(pair.second).formatMoney(fromCurrency.tradingSymbol(), toCurrency.pricePrecision());
-                        date = MyMoneyUtils::formatDate(pr.date());
+                        date = pr.date();
                         source = pr.source();
                     }
                     m_onlinePriceModel.addOnlinePrice(id, symbol, i18n("%1 units for one %2", pair.first, pair.second), price, date, source);
+                    m_filterModel->invalidate();
                 }
             }
         }
@@ -346,11 +387,11 @@ public:
                 MyMoneySecurity currency = file->currency(inv.tradingCurrency());
                 const MyMoneyPrice pr = file->price(id, inv.tradingCurrency());
                 QString price;
-                QString date;
+                QDate date;
                 QString source = QLatin1String("KMyMoney Currency");
                 if (pr.isValid()) {
                     price = pr.rate(currency.id()).formatMoney(currency.tradingSymbol(), inv.pricePrecision());
-                    date = MyMoneyUtils::formatDate(pr.date());
+                    date = pr.date();
                 }
                 if (inv.value("kmm-online-quote-system") == m_fqName) {
                     source = QString("%1 %2").arg(m_fqName, inv.value("kmm-online-source"));
@@ -364,15 +405,16 @@ public:
                 if (currency.id() != file->baseCurrency().id()) {
                     addCurrencyConversion(MyMoneySecurityPair(currency.id(), file->baseCurrency().id()), false);
                 }
+                m_filterModel->invalidate();
             }
         }
     }
 
     bool haveSourceWithDateRange() const
     {
-        const auto rows = m_onlinePriceModel.rowCount();
+        const auto rows = m_filterModel->rowCount();
         for (int row = 0; row < rows; ++row) {
-            const auto idx = m_onlinePriceModel.index(row, OnlinePriceModel::Source);
+            const auto idx = m_filterModel->index(row, OnlinePriceModel::Source);
             const auto source = idx.data().toString();
             const auto profileName = source.startsWith(m_fqName) ? m_fqName : QString();
             AlkOnlineQuoteSource alkOnlineSource(source, quoteProfile(profileName));
@@ -402,9 +444,9 @@ public:
         auto selectedItems = [&]() {
             if (m_fUpdateAll) {
                 QModelIndexList indexList;
-                const auto rows = m_onlinePriceModel.rowCount();
+                const auto rows = m_filterModel->rowCount();
                 for (int row = 0; row < rows; ++row) {
-                    indexList.append(m_onlinePriceModel.index(row, 0));
+                    indexList.append(m_filterModel->index(row, 0));
                 }
                 return indexList;
             } else {
@@ -433,9 +475,9 @@ public:
         m_abortUpdate = false;
         for (int row = 0; !m_abortUpdate && row < rows; ++row) {
             m_currentRow = selectedIndexes.at(row).row();
-            const auto symbol = m_onlinePriceModel.index(m_currentRow, OnlinePriceModel::Symbol).data().toString();
-            const auto id = m_onlinePriceModel.index(m_currentRow, OnlinePriceModel::Id).data().toString();
-            const auto source = m_onlinePriceModel.index(m_currentRow, OnlinePriceModel::Source).data().toString();
+            const auto symbol = m_filterModel->index(m_currentRow, OnlinePriceModel::Symbol).data().toString();
+            const auto id = m_filterModel->index(m_currentRow, OnlinePriceModel::Id).data().toString();
+            const auto source = m_filterModel->index(m_currentRow, OnlinePriceModel::Source).data().toString();
             const auto profileName = source.startsWith(m_fqName) ? m_fqName : QString();
             m_quote.setProfile(quoteProfile(profileName));
             m_quote.launch(symbol, id, source);
@@ -461,7 +503,7 @@ public:
 
     void slotUpdateAll()
     {
-        if (m_onlinePriceModel.rowCount() > 0) {
+        if (m_filterModel->rowCount() > 0) {
             m_fUpdateAll = true;
             slotUpdateSelected();
         } else {
@@ -485,7 +527,7 @@ public:
         // Give the user some options
         int result;
         if (m_currentRow != -1) {
-            const auto source = m_onlinePriceModel.index(m_currentRow, OnlinePriceModel::Source).data().toString();
+            const auto source = m_filterModel->index(m_currentRow, OnlinePriceModel::Source).data().toString();
             if (_kmmID.contains(" ")) {
                 result = KMessageBox::warningContinueCancel(
                     q,
@@ -582,10 +624,10 @@ public:
                 m_prices.insert(key, MyMoneyPrice(fromCurrencyId, toCurrencyId, date, price, source));
 
                 // update model for the display purposes
-                m_onlinePriceModel.setData(m_onlinePriceModel.index(m_currentRow, OnlinePriceModel::Price),
-                                           price.formatMoney(toCurrency.tradingSymbol(), precision),
-                                           Qt::EditRole);
-                m_onlinePriceModel.setData(m_onlinePriceModel.index(m_currentRow, OnlinePriceModel::Date), MyMoneyUtils::formatDate(date), Qt::EditRole);
+                m_filterModel->setData(m_filterModel->index(m_currentRow, OnlinePriceModel::Price),
+                                       price.formatMoney(toCurrency.tradingSymbol(), precision),
+                                       Qt::EditRole);
+                m_filterModel->setData(m_filterModel->index(m_currentRow, OnlinePriceModel::Date), MyMoneyUtils::formatDate(date), Qt::EditRole);
 
                 logStatusMessage(i18nc("@info Online price update %1 online id, %2 internal id, %3 price, %4 date",
                                        "Price for %1 updated to %3 for %4 (id %2)",
@@ -610,11 +652,25 @@ public:
      */
     QString modelData(int row, int column) const
     {
-        return m_onlinePriceModel.index(row, column).data().toString();
+        return m_filterModel->index(row, column).data().toString();
+    }
+
+    void showSearchWidget()
+    {
+        Q_Q(KEquityPriceUpdateDlg);
+        if (q->isVisible()) {
+            ui->searchWidget->show();
+        }
+    }
+
+    void clearFilter()
+    {
+        ui->searchWidget->lineEdit()->setText(QString());
     }
 
     KEquityPriceUpdateDlg* q_ptr;
     Ui::KEquityPriceUpdateDlg* ui;
+    QSortFilterProxyModel* m_filterModel;
     bool m_fUpdateAll;
     bool m_abortUpdate;
     eDialogs::UpdatePrice m_updatingPricePolicy;
@@ -626,6 +682,7 @@ public:
     QString m_kmmName;
     QMap<QString, MyMoneyPrice> m_prices;
     QTimer m_progressDelay;
+    QKeySequence m_searchShortCut;
 };
 
 KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& securityId) :
@@ -682,6 +739,12 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
             d->ui->messageWidget->animatedShow();
         }
     });
+
+    connect(d->ui->searchWidget, &KMMSearchWidget::closed, this, [&]() {
+        Q_D(KEquityPriceUpdateDlg);
+        d->clearFilter();
+        d->ui->equityView->setFocus();
+    });
 }
 
 KEquityPriceUpdateDlg::~KEquityPriceUpdateDlg()
@@ -692,6 +755,23 @@ KEquityPriceUpdateDlg::~KEquityPriceUpdateDlg()
     grp.writeEntry("PriceUpdatingPolicy", static_cast<int>(d->m_updatingPricePolicy));
     grp.sync();
     delete d;
+}
+
+void KEquityPriceUpdateDlg::keyPressEvent(QKeyEvent* event)
+{
+    Q_D(KEquityPriceUpdateDlg);
+
+    const auto keySeq = QKeySequence(event->modifiers() | event->key());
+
+    if (keySeq.matches(d->m_searchShortCut)) {
+        d->showSearchWidget();
+    }
+}
+
+void KEquityPriceUpdateDlg::setSearchShortcut(const QKeySequence& shortcut)
+{
+    Q_D(KEquityPriceUpdateDlg);
+    d->m_searchShortCut = shortcut;
 }
 
 MyMoneyPrice KEquityPriceUpdateDlg::price(const QString& id) const

@@ -48,12 +48,12 @@ QString OnlinePriceEntry::name() const
     return m_name;
 }
 
-void OnlinePriceEntry::setDate(const QString& date)
+void OnlinePriceEntry::setDate(const QDate& date)
 {
     m_date = date;
 }
 
-QString OnlinePriceEntry::date() const
+QDate OnlinePriceEntry::date() const
 {
     return m_date;
 }
@@ -170,7 +170,7 @@ QVariant OnlinePriceModel::data(const QModelIndex& idx, int role) const
             return onlinePriceEntry.name();
 
         case Date:
-            return onlinePriceEntry.date();
+            return MyMoneyUtils::formatDate(onlinePriceEntry.date());
 
         case Price:
             return onlinePriceEntry.price();
@@ -196,6 +196,9 @@ QVariant OnlinePriceModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::IsDirtyRole:
         return onlinePriceEntry.isDirty();
 
+    case eMyMoney::Model::PriceDateRole:
+        return onlinePriceEntry.date();
+
     default:
         if (role >= Qt::UserRole)
             qDebug() << "OnlinePriceModel::data(), role" << role << "offset" << role - Qt::UserRole << "not implemented";
@@ -212,14 +215,15 @@ bool OnlinePriceModel::setData(const QModelIndex& idx, const QVariant& value, in
 
     OnlinePriceEntry& onlinePriceEntry = static_cast<TreeItem<OnlinePriceEntry>*>(idx.internalPointer())->dataRef();
     const auto newValue = value.toString();
+    const auto newDate = value.toDate();
 
     switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
         switch (idx.column()) {
         case Date:
-            if (onlinePriceEntry.date() != newValue) {
-                onlinePriceEntry.setDate(value.toString());
+            if (onlinePriceEntry.date() != newDate) {
+                onlinePriceEntry.setDate(newDate);
                 onlinePriceEntry.setDirty();
                 Q_EMIT dataChanged(idx, idx);
             }
@@ -227,7 +231,7 @@ bool OnlinePriceModel::setData(const QModelIndex& idx, const QVariant& value, in
 
         case Price:
             if (onlinePriceEntry.price() != newValue) {
-                onlinePriceEntry.setPrice(value.toString());
+                onlinePriceEntry.setPrice(newValue);
                 onlinePriceEntry.setDirty();
                 Q_EMIT dataChanged(idx, idx);
             }
@@ -235,7 +239,7 @@ bool OnlinePriceModel::setData(const QModelIndex& idx, const QVariant& value, in
 
         case Source:
             if (onlinePriceEntry.source() != newValue) {
-                onlinePriceEntry.setSource(value.toString());
+                onlinePriceEntry.setSource(newValue);
                 onlinePriceEntry.setDirty();
                 Q_EMIT dataChanged(idx, idx);
             }
@@ -254,7 +258,7 @@ void OnlinePriceModel::addOnlinePrice(const QString& id,
                                       const QString& symbol,
                                       const QString& name,
                                       const QString& price,
-                                      const QString& date,
+                                      const QDate& date,
                                       const QString& source)
 {
     OnlinePriceEntry newEntry(id, OnlinePriceEntry());

@@ -51,6 +51,9 @@
     </widget>
    </item>
    <item>
+    <widget class="KMMSearchWidget" name="searchWidget" native="true"/>
+   </item>
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <widget class="QWidget" name="m_dateContainer" native="true">
@@ -215,6 +218,12 @@
    <class>KMessageWidget</class>
    <extends>QFrame</extends>
    <header>kmessagewidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMMSearchWidget</class>
+   <extends>QWidget</extends>
+   <header>kmmsearchwidget.h</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
    <class>KMyMoneyDateEdit</class>

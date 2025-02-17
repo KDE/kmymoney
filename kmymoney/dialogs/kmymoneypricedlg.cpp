@@ -171,6 +171,7 @@ public:
     KMyMoneyPriceDlg* q_ptr;
     Ui::KMyMoneyPriceDlg* ui;
     PriceSortFilterModel* m_sortModel;
+    QKeySequence m_searchShortCut;
 };
 
 KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
@@ -305,6 +306,8 @@ void KMyMoneyPriceDlg::slotOnlinePriceUpdate()
 {
     Q_D(KMyMoneyPriceDlg);
     QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this);
+    dlg->setSearchShortcut(d->m_searchShortCut);
+
     if (dlg->exec() == Accepted && dlg) {
         dlg->storePrices();
 
@@ -354,6 +357,12 @@ void KMyMoneyPriceDlg::slotShowPriceMenu(const QPoint& p)
     menu->addSection(i18nc("@title:menu", "Price options"));
     menu->addActions(LUTActions);
     menu->exec(QCursor::pos());
+}
+
+void KMyMoneyPriceDlg::setSearchShortcut(const QKeySequence& shortcut)
+{
+    Q_D(KMyMoneyPriceDlg);
+    d->m_searchShortCut = shortcut;
 }
 
 #include "kmymoneypricedlg.moc"

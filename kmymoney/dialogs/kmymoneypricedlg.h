@@ -30,6 +30,8 @@ public:
     explicit KMyMoneyPriceDlg(QWidget* parent);
     ~KMyMoneyPriceDlg();
 
+    void setSearchShortcut(const QKeySequence& shortcut);
+
 protected Q_SLOTS:
     void slotNewPrice();
     void slotDeletePrice();

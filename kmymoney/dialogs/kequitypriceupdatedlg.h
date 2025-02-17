@@ -46,6 +46,11 @@ public:
     void storePrices();
     MyMoneyPrice price(const QString& id) const;
 
+    void setSearchShortcut(const QKeySequence& shortcut);
+
+protected:
+    void keyPressEvent(QKeyEvent* ev) override;
+
 private:
     KEquityPriceUpdateDlgPrivate * const d_ptr;
     Q_DECLARE_PRIVATE(KEquityPriceUpdateDlg)
