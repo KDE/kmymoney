@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-16 01:58+0000\n"
+"POT-Creation-Date: 2025-02-17 01:52+0000\n"
 "PO-Revision-Date: 2025-02-11 07:08+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -5802,7 +5802,7 @@ msgid ""
 msgstr ""
 "Ni mogoče uvoziti %1 z uporabo vtičnika %2. Vtičnik je vrnil napako: %3"
 
-#: kmymoney/kmymoney.cpp:4506 kmymoney/plugins/ofx/import/ofximporter.cpp:1031
+#: kmymoney/kmymoney.cpp:4506 kmymoney/plugins/ofx/import/ofximporter.cpp:1034
 #, kde-format
 msgid "Importing error"
 msgstr "Napaka pri uvažanju"
@@ -5965,14 +5965,14 @@ msgstr "Transakcija"
 
 #. i18n: ectx: Menu (transaction_mark_menu)
 #. i18n: ectx: Menu (transaction_context_mark_menu)
-#: kmymoney/kmymoneyui.rc:87 kmymoney/kmymoneyui.rc:230
+#: kmymoney/kmymoneyui.rc:87 kmymoney/kmymoneyui.rc:234
 #, kde-format
 msgid "Mark transaction as..."
 msgstr "Označi transakcijo kot..."
 
 #. i18n: ectx: Menu (transaction_mark_menu)
 #. i18n: ectx: Menu (transaction_context_mark_menu)
-#: kmymoney/kmymoneyui.rc:88 kmymoney/kmymoneyui.rc:231
+#: kmymoney/kmymoneyui.rc:88 kmymoney/kmymoneyui.rc:235
 #, kde-format
 msgid "Mark transaction"
 msgstr "Označi transakcijo"
@@ -6027,31 +6027,31 @@ msgid "Security options"
 msgstr "Opcije vrednostnih papirjev"
 
 #. i18n: ectx: Menu (schedule_context_menu)
-#: kmymoney/kmymoneyui.rc:198
+#: kmymoney/kmymoneyui.rc:202
 #, kde-format
 msgid "Scheduled transactions options"
 msgstr "Možnosti načrtovanih transakcij"
 
 #. i18n: ectx: Menu (transaction_context_menu)
-#: kmymoney/kmymoneyui.rc:214
+#: kmymoney/kmymoneyui.rc:218
 #, kde-format
 msgid "Transaction options"
 msgstr "Možnosti transakcije"
 
 #. i18n: ectx: Menu (transaction_move_menu)
-#: kmymoney/kmymoneyui.rc:225
+#: kmymoney/kmymoneyui.rc:229
 #, kde-format
 msgid "Move transaction to..."
 msgstr "Prenesi transakcijo na..."
 
 #. i18n: ectx: Menu (transaction_move_menu)
-#: kmymoney/kmymoneyui.rc:226
+#: kmymoney/kmymoneyui.rc:230
 #, kde-format
 msgid "Select account"
 msgstr "Izberi račun"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kmymoney/kmymoneyui.rc:250
+#: kmymoney/kmymoneyui.rc:254
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Glavna orodna vrstica"
@@ -10241,7 +10241,7 @@ msgctxt "Type of operation as in financial statement"
 msgid "remove"
 msgstr "odstrani"
 
-#: kmymoney/plugins/csv/import/csvimporter.cpp:60
+#: kmymoney/plugins/csv/import/csvimporter.cpp:52
 #, kde-format
 msgid "CSV..."
 msgstr "CSV..."
@@ -12285,7 +12285,7 @@ msgid "Pick &date"
 msgstr "Izberite datum"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:309
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:883
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:886
 #, kde-format
 msgid "Online settings"
 msgstr "Spletne nastavitve"
@@ -13289,23 +13289,23 @@ msgstr "OFX FITID"
 msgid "KMyMoney Hash"
 msgstr "KMyMoney razpršitev"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:153
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:156
 #, kde-format
 msgid "OFX..."
 msgstr "OFX..."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:167
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:170
 #, kde-format
 msgid "OFX import file selection"
 msgstr "Izbira vhodne datoteke OFX"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:169
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:172
 #, kde-format
 msgctxt "Filter for QFileDialog"
 msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
 msgstr "Datoteke OFX (*.ofx *.qfx *.ofc);;Vse datoteke (*)"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:188
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:191
 #, kde-format
 msgid ""
 "Unable to import %1 using the OFX importer plugin.  This file is not the "
@@ -13314,27 +13314,27 @@ msgstr ""
 "Ni mogoče uvoziti %1 z uporabo vtičnika OFX uvoznika. Ta datoteka ni v "
 "pravilni obliki."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:189
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:192
 #, kde-format
 msgid "Incorrect format"
 msgstr "Nepravilen format"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:234
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:237
 #, kde-format
 msgid "Unable to parse file"
 msgstr "Datoteke ni mogoče razčleniti"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:830
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:833
 #, kde-format
 msgid "No accounts found."
 msgstr "Ni najdenih računov."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1015
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1018
 #, kde-format
 msgid "Error connecting to bank: %1"
 msgstr "Napaka pri povezovanju z banko: %1"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1028
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1031
 #, kde-format
 msgid ""
 "<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The plugin "
@@ -13343,12 +13343,12 @@ msgstr ""
 "<p>Ni mogoče uvoziti <b>'%1'</b> z uporabo vtičnika OFX. Vtičnik je vrnil "
 "naslednjo napako:</p><p>%2</p>"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1065
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1068
 #, kde-format
 msgid "Importing process terminated unexpectedly."
 msgstr "Vsi procesi uvažanja so se končali nepričakovano."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1065
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1068
 #, kde-format
 msgid "Failed to import all statements."
 msgstr "Ni bilo mogoče uvoziti vse izkaze."
@@ -20097,17 +20097,17 @@ msgstr "Zbriši institucijo"
 msgid "Unable to delete institution: %1"
 msgstr "Ni mogoče izbrisati institucije: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:580
+#: kmymoney/views/kinvestmentview.cpp:583
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>Ali res želite izbrisati naložbo<b>%1</b>?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:581
+#: kmymoney/views/kinvestmentview.cpp:584
 #, kde-format
 msgid "Delete investment"
 msgstr "Briši naložbo"
 
-#: kmymoney/views/kinvestmentview.cpp:592
+#: kmymoney/views/kinvestmentview.cpp:595
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "Ni mogoče izbrisati naložbe: %1"

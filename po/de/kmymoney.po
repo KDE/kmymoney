@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-16 01:58+0000\n"
+"POT-Creation-Date: 2025-02-17 01:52+0000\n"
 "PO-Revision-Date: 2022-11-07 20:00+0100\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -5899,7 +5899,7 @@ msgstr ""
 "%1 kann nicht mit dem Modul %2 importiert werden. Das Modul berichtet den "
 "folgenden Fehler: %3"
 
-#: kmymoney/kmymoney.cpp:4506 kmymoney/plugins/ofx/import/ofximporter.cpp:1031
+#: kmymoney/kmymoney.cpp:4506 kmymoney/plugins/ofx/import/ofximporter.cpp:1034
 #, kde-format
 msgid "Importing error"
 msgstr "Importfehler"
@@ -6067,14 +6067,14 @@ msgstr "&Buchung"
 
 #. i18n: ectx: Menu (transaction_mark_menu)
 #. i18n: ectx: Menu (transaction_context_mark_menu)
-#: kmymoney/kmymoneyui.rc:87 kmymoney/kmymoneyui.rc:230
+#: kmymoney/kmymoneyui.rc:87 kmymoney/kmymoneyui.rc:234
 #, kde-format
 msgid "Mark transaction as..."
 msgstr "Buchung markieren als ..."
 
 #. i18n: ectx: Menu (transaction_mark_menu)
 #. i18n: ectx: Menu (transaction_context_mark_menu)
-#: kmymoney/kmymoneyui.rc:88 kmymoney/kmymoneyui.rc:231
+#: kmymoney/kmymoneyui.rc:88 kmymoney/kmymoneyui.rc:235
 #, kde-format
 msgid "Mark transaction"
 msgstr "Buchung markieren"
@@ -6129,31 +6129,31 @@ msgid "Security options"
 msgstr "Wertpapier-Einstellungen"
 
 #. i18n: ectx: Menu (schedule_context_menu)
-#: kmymoney/kmymoneyui.rc:198
+#: kmymoney/kmymoneyui.rc:202
 #, kde-format
 msgid "Scheduled transactions options"
 msgstr "Optionen für geplante Buchungen"
 
 #. i18n: ectx: Menu (transaction_context_menu)
-#: kmymoney/kmymoneyui.rc:214
+#: kmymoney/kmymoneyui.rc:218
 #, kde-format
 msgid "Transaction options"
 msgstr "Buchungsoptionen"
 
 #. i18n: ectx: Menu (transaction_move_menu)
-#: kmymoney/kmymoneyui.rc:225
+#: kmymoney/kmymoneyui.rc:229
 #, kde-format
 msgid "Move transaction to..."
 msgstr "Buchungen verschieben nach ..."
 
 #. i18n: ectx: Menu (transaction_move_menu)
-#: kmymoney/kmymoneyui.rc:226
+#: kmymoney/kmymoneyui.rc:230
 #, kde-format
 msgid "Select account"
 msgstr "Konto wählen"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kmymoney/kmymoneyui.rc:250
+#: kmymoney/kmymoneyui.rc:254
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Haupt-Werkzeugleiste"
@@ -10436,7 +10436,7 @@ msgctxt "Type of operation as in financial statement"
 msgid "remove"
 msgstr "Entfernen"
 
-#: kmymoney/plugins/csv/import/csvimporter.cpp:60
+#: kmymoney/plugins/csv/import/csvimporter.cpp:52
 #, kde-format
 msgid "CSV..."
 msgstr "CSV ..."
@@ -12478,7 +12478,7 @@ msgid "Pick &date"
 msgstr "&Datum wählen"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:309
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:883
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:886
 #, kde-format
 msgid "Online settings"
 msgstr "Online-Einstellungen"
@@ -13479,24 +13479,24 @@ msgstr ""
 msgid "KMyMoney Hash"
 msgstr "KMyMoney-Hash"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:153
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:156
 #, kde-format
 msgid "OFX..."
 msgstr "OFX ..."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:167
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:170
 #, kde-format
 msgid "OFX import file selection"
 msgstr "OFX-Import-Dateiauswahl"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:169
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:172
 #, fuzzy, kde-format
 #| msgid "XML files (*.xml);;All files (*)"
 msgctxt "Filter for QFileDialog"
 msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
 msgstr "XML-Dateien (*.xml);;Alle Dateien (*)"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:188
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:191
 #, kde-format
 msgid ""
 "Unable to import %1 using the OFX importer plugin.  This file is not the "
@@ -13505,27 +13505,27 @@ msgstr ""
 "%1 kann nicht mit dem OFX-Import-Modul importiert werden. Diese Datei hat "
 "nicht das richtige Format."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:189
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:192
 #, kde-format
 msgid "Incorrect format"
 msgstr "Falsches Format"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:234
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:237
 #, kde-format
 msgid "Unable to parse file"
 msgstr "Datei kann nicht verarbeitet werden"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:830
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:833
 #, kde-format
 msgid "No accounts found."
 msgstr "Keine Konten gefunden."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1015
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1018
 #, kde-format
 msgid "Error connecting to bank: %1"
 msgstr "Fehler beim Verbindungsaufbau mit der Bank: %1"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1028
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1031
 #, kde-format
 msgid ""
 "<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The plugin "
@@ -13534,12 +13534,12 @@ msgstr ""
 "<p><b>%1</b> kann nicht mit dem OFX-Import-Modul importiert werden. Das "
 "Modul meldet folgenden Fehler:</p><p>%2</p>"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1065
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1068
 #, kde-format
 msgid "Importing process terminated unexpectedly."
 msgstr "Importprozess unvorhergesehen abgebrochen."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1065
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1068
 #, kde-format
 msgid "Failed to import all statements."
 msgstr "Fehler beim Import aller Kontoauszüge."
@@ -20404,18 +20404,18 @@ msgstr "Geldinstitut löschen ..."
 msgid "Unable to delete institution: %1"
 msgstr "Das Geldinstitut %1 kann nicht gelöscht werden"
 
-#: kmymoney/views/kinvestmentview.cpp:580
+#: kmymoney/views/kinvestmentview.cpp:583
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr ""
 "<p>Sind Sie sicher, dass Sie die Investition <b>%1</b> löschen möchten?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:581
+#: kmymoney/views/kinvestmentview.cpp:584
 #, kde-format
 msgid "Delete investment"
 msgstr "Investition löschen"
 
-#: kmymoney/views/kinvestmentview.cpp:592
+#: kmymoney/views/kinvestmentview.cpp:595
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "Die Investition kann nicht gelöscht werden: %1"
