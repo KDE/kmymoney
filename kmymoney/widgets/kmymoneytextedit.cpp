@@ -47,6 +47,11 @@ public:
             } else if (m_maxLines != -1 && text.at(0) == '\r' && q->toPlainText().count('\n') + 1 >= m_maxLines) {
                 // Does this work on non-linux OSes as well?
                 return false;
+            } else if (e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter) {
+                // we do not support Shift- or Ctrl-Return in this widget
+                if (e->modifiers() & (Qt::Modifier::SHIFT | Qt::Modifier::CTRL)) {
+                    return false;
+                }
             }
         }
         return true;
