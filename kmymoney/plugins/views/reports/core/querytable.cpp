@@ -914,9 +914,11 @@ void QueryTable::constructTransactionTable()
                         MyMoneyMoney value = -(((*it_split).shares() * xr).convert(fraction));
 
                         if ((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization)) {
-                            // put the amortization in the "value" and "payment" column
-                            qA[ctValue] = value.toString();
-                            qA.addSourceLine(ctValue, __LINE__);
+                            // put the amortization in the "payment" column. Since the split for
+                            // the loan account is processed as the first split, this is the opposite
+                            // side of the transfer and is treated as payment
+                            MyMoneyMoney n0 = MyMoneyMoney(qA[ctPayment]);
+                            qA[ctPayment] = (n0 + value).toString();
                         } else if ((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Interest)) {
                             // put the interest in the "interest" column and convert to lowest fraction
                             qA[ctInterest] = value.toString();
