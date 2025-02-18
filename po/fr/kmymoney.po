@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-17 01:52+0000\n"
+"POT-Creation-Date: 2025-02-18 01:56+0000\n"
 "PO-Revision-Date: 2025-02-12 09:32+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -1731,35 +1731,35 @@ msgstr "Mettre à jour depuis la même source"
 msgid "Ask"
 msgstr "Demander"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:192
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:232
 #, kde-format
 msgctxt "@action:button Configuration of price update"
 msgid "Configure"
 msgstr "Configurer"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:306
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:346
 #, kde-format
 msgid "%1 units for one %2"
 msgstr "%1 unités pour une unité %2"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:343
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:384
 #, kde-format
 msgid "[No identifier]"
 msgstr "[Pas d'identifiant]"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:458
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:500
 #, kde-format
 msgctxt "@info online update price info"
 msgid "No security selected."
 msgstr "Aucune sécurité sélectionnée."
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:468
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:510
 #, kde-format
 msgctxt "@info online update price info"
 msgid "No Security to be updated."
 msgstr "Aucune sécurité devant être mise à jour."
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:492
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:534
 #, kde-format
 msgid ""
 "Failed to retrieve an exchange rate for %1 from %2. It will be skipped this "
@@ -1768,14 +1768,14 @@ msgstr ""
 "Erreur lors de la réception d'un taux de change pour %1 depuis %2. Cette "
 "étape sera sautée pour cette fois."
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:493
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:503
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:526
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:535
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:545
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:568
 #, kde-format
 msgid "Price Update Failed"
 msgstr "Échec de la mise à jour des cours"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:499
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:541
 #, kde-format
 msgid ""
 "Failed to retrieve a quote for %1 from %2.  Press <b>No</b> to remove the "
@@ -1789,25 +1789,25 @@ msgstr ""
 "des prochaines mises à jour ou <b>Annuler</b> pour arrêter l'opération de "
 "mise à jour en cours."
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:525
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:567
 #, kde-format
 msgid "Cannot update security <b>%1</b>: %2"
 msgstr "Impossible de mettre à jour ce titre <b>%1</b> : %2"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:591
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:633
 #, kde-format
 msgctxt ""
 "@info Online price update %1 online id, %2 internal id, %3 price, %4 date"
 msgid "Price for %1 updated to %3 for %4 (id %2)"
 msgstr "Les cours pour %1 ont été mis à jour vers %3 pour %4 (Id %2)"
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:597
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:639
 #, kde-format
 msgctxt "@info Online price update %1 online id"
 msgid "Received an invalid price for %1, unable to update."
 msgstr "A reçu un cours non valable pour %1, impossible de le mettre à jour."
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:642
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:699
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:38
 #: kmymoney/widgets/daterangedlg.cpp:64 kmymoney/widgets/daterangedlg.cpp:67
@@ -1818,7 +1818,7 @@ msgctxt "@info:tooltip"
 msgid "The date is invalid."
 msgstr "la date n'est pas valable."
 
-#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:680
+#: kmymoney/dialogs/kequitypriceupdatedlg.cpp:737
 #, kde-format
 msgctxt "@info Persistence of price source"
 msgid ""
@@ -1838,33 +1838,33 @@ msgid "Update Stock and Currency Prices"
 msgstr "Mettre à jour le cours des devises et des titres"
 
 #. i18n: ectx: property (text), widget (QLabel, m_fromLabel)
-#: kmymoney/dialogs/kequitypriceupdatedlg.ui:73
+#: kmymoney/dialogs/kequitypriceupdatedlg.ui:76
 #, kde-format
 msgctxt "@label:chooser Date"
 msgid "From"
 msgstr "De"
 
 #. i18n: ectx: property (text), widget (QLabel, m_toLabel)
-#: kmymoney/dialogs/kequitypriceupdatedlg.ui:83
+#: kmymoney/dialogs/kequitypriceupdatedlg.ui:86
 #, kde-format
 msgctxt "@label:chooser Date"
 msgid "To"
 msgstr "À"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdateAll)
-#: kmymoney/dialogs/kequitypriceupdatedlg.ui:109
+#: kmymoney/dialogs/kequitypriceupdatedlg.ui:112
 #, kde-format
 msgid "Update All"
 msgstr "Tout mettre à jour"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnUpdateSelected)
-#: kmymoney/dialogs/kequitypriceupdatedlg.ui:116
+#: kmymoney/dialogs/kequitypriceupdatedlg.ui:119
 #, kde-format
 msgid "Update Selected"
 msgstr "Mettre à jour la sélection"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#: kmymoney/dialogs/kequitypriceupdatedlg.ui:145
+#: kmymoney/dialogs/kequitypriceupdatedlg.ui:148
 #, kde-format
 msgid "Status:"
 msgstr "État :"
@@ -1890,7 +1890,7 @@ msgstr "État :"
 #. i18n: ectx: property (text), widget (QToolButton, m_creditDebitIndicatorColClear)
 #. i18n: ectx: property (text), widget (QToolButton, m_debitColClear)
 #. i18n: ectx: property (text), widget (QToolButton, m_creditColClear)
-#: kmymoney/dialogs/kequitypriceupdatedlg.ui:168
+#: kmymoney/dialogs/kequitypriceupdatedlg.ui:171
 #: kmymoney/dialogs/knewaccountdlg.ui:409
 #: kmymoney/dialogs/knewinstitutiondlg.ui:88
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:569
@@ -2053,39 +2053,39 @@ msgstr "Total"
 msgid "Closed"
 msgstr "Fermé"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:271
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:272
 #, kde-format
 msgid "Do you really want to delete the selected price entry?"
 msgid_plural "Do you really want to delete the selected price entries?"
 msgstr[0] "Voulez-vous vraiment supprimer le cours sélectionné ?"
 msgstr[1] "Voulez-vous vraiment supprimer les prix sélectionnés ?"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:272
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:273
 #, kde-format
 msgid "Delete price information"
 msgstr "Supprimer l'information sur le cours"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:339
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:342
 #, kde-format
 msgid "New price..."
 msgstr "Nouveau cours…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:340
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:343
 #, kde-format
 msgid "Edit price..."
 msgstr "Éditer le cours…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:341
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:344
 #, kde-format
 msgid "Online Price Update..."
 msgstr "Mise à jour du cours en ligne…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:342
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:345
 #, kde-format
 msgid "Delete price..."
 msgstr "Supprimer le cours…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:354
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:357
 #, kde-format
 msgctxt "@title:menu"
 msgid "Price options"
@@ -5864,19 +5864,19 @@ msgstr "Résultat de la vérification de cohérence"
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Vérification des échéances arriérées…"
 
-#: kmymoney/kmymoney.cpp:4489
+#: kmymoney/kmymoney.cpp:4491
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr ""
 "Vous devez d'abord choisir un fichier KMyMoney avant d'importer un relevé."
 
-#: kmymoney/kmymoney.cpp:4494
+#: kmymoney/kmymoney.cpp:4496
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Importation d'un relevé grâce à une connexion internet"
 
-#: kmymoney/kmymoney.cpp:4506
+#: kmymoney/kmymoney.cpp:4508
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5886,70 +5886,70 @@ msgstr ""
 "Impossible d'importer %1 en utilisant le module externe %2. Le module "
 "externe a renvoyé l'erreur suivante : %3"
 
-#: kmymoney/kmymoney.cpp:4506 kmymoney/plugins/ofx/import/ofximporter.cpp:1034
+#: kmymoney/kmymoney.cpp:4508 kmymoney/plugins/ofx/import/ofximporter.cpp:1034
 #, kde-format
 msgid "Importing error"
 msgstr "Erreur durant l'importation"
 
-#: kmymoney/kmymoney.cpp:4534
+#: kmymoney/kmymoney.cpp:4536
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Tous les messages ont été activés."
 
-#: kmymoney/kmymoney.cpp:4534
+#: kmymoney/kmymoney.cpp:4536
 #, kde-format
 msgid "All messages"
 msgstr "Tous les messages"
 
-#: kmymoney/kmymoney.cpp:4570
+#: kmymoney/kmymoney.cpp:4572
 #, kde-format
 msgid "Auto saving..."
 msgstr "Enregistrement automatique…"
 
-#: kmymoney/kmymoney.cpp:4690
+#: kmymoney/kmymoney.cpp:4692
 #, kde-format
 msgid "Creating new document..."
 msgstr "Création d'un nouveau document…"
 
-#: kmymoney/kmymoney.cpp:4750
+#: kmymoney/kmymoney.cpp:4752
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "Impossible de créer un nouveau fichier."
 
-#: kmymoney/kmymoney.cpp:4761
+#: kmymoney/kmymoney.cpp:4763
 #, kde-format
 msgid "Open a file."
 msgstr "Ouvrir un fichier."
 
-#: kmymoney/kmymoney.cpp:4775
+#: kmymoney/kmymoney.cpp:4777
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr ""
 "Impossible de trouver un module externe adapté pour ouvrir votre stockage."
 
-#: kmymoney/kmymoney.cpp:4779
+#: kmymoney/kmymoney.cpp:4781
 #, kde-format
 msgid "All files (*)"
 msgstr "Tous les fichiers (*)"
 
-#: kmymoney/kmymoney.cpp:4792
+#: kmymoney/kmymoney.cpp:4794
 #, kde-format
 msgid "Loading file..."
 msgstr "Chargement du fichier…"
 
-#: kmymoney/kmymoney.cpp:4798
+#: kmymoney/kmymoney.cpp:4800
 #, kde-format
 msgid "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
 msgstr ""
 "<p>Le fichier <b>%1</b> est déjà ouvert par une autre instance de KMyMoney</"
 "p>"
 
-#: kmymoney/kmymoney.cpp:4798
+#: kmymoney/kmymoney.cpp:4800
 #, kde-format
 msgid "Duplicate open"
 msgstr "Ouverture dupliquée"
 
-#: kmymoney/kmymoney.cpp:4805
+#: kmymoney/kmymoney.cpp:4807
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5958,17 +5958,17 @@ msgstr ""
 "<p>Le fichier <b>%1</b> a un nom non valable ou n'existe pas. Vous pouvez "
 "ouvrir un autre fichier ou en créer un nouveau.</p>"
 
-#: kmymoney/kmymoney.cpp:4805
+#: kmymoney/kmymoney.cpp:4807
 #, kde-format
 msgid "File not found"
 msgstr "Impossible de trouver le fichier"
 
-#: kmymoney/kmymoney.cpp:4836
+#: kmymoney/kmymoney.cpp:4838
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "Impossible d'ouvrir le fichier demandé."
 
-#: kmymoney/kmymoney.cpp:4843
+#: kmymoney/kmymoney.cpp:4845
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -5977,36 +5977,36 @@ msgstr ""
 "Impossible de lire votre source de données. Veuillez vérifier dans la "
 "configuration de KMyMoney que le module externe nécessaire est activé."
 
-#: kmymoney/kmymoney.cpp:4854
+#: kmymoney/kmymoney.cpp:4856
 #, kde-format
 msgid "Saving file..."
 msgstr "Enregistrement du fichier…"
 
 # unreviewed-context
-#: kmymoney/kmymoney.cpp:4866
+#: kmymoney/kmymoney.cpp:4868
 #, kde-format
 msgid "Failed to save your data."
 msgstr "Impossible d'enregistrer votre données."
 
-#: kmymoney/kmymoney.cpp:4872
+#: kmymoney/kmymoney.cpp:4874
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 "Impossible de trouver un module externe adapté pour enregistrer vos données."
 
-#: kmymoney/kmymoney.cpp:4878
+#: kmymoney/kmymoney.cpp:4880
 #, kde-format
 msgid "Saving file as...."
 msgstr "Enregistrement du fichier sous…"
 
-#: kmymoney/kmymoney.cpp:4894
+#: kmymoney/kmymoney.cpp:4896
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr ""
 "Impossible de trouver un module externe adapté pour enregistrer vos données."
 
 # unreviewed-context
-#: kmymoney/kmymoney.cpp:4923
+#: kmymoney/kmymoney.cpp:4925
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "Impossible d'enregistrer votre stockage."
@@ -13515,24 +13515,24 @@ msgstr "L'importation s'est terminée de façon inattendue."
 msgid "Failed to import all statements."
 msgstr "L'importation de certains relevés a échoué."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:435
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:428
 #, kde-format
 msgid "For this beneficiary's country the BIC is mandatory."
 msgstr "Vous devez saisir un BIC en raison du pays du bénéficiaire."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:451
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:444
 #, kde-format
 msgid "A beneficiary name is needed."
 msgid_plural "The beneficiary name must be at least %1 characters long"
 msgstr[0] "Vous devez saisir le nom du bénéficiaire."
 msgstr[1] "Le nom du bénéficiaire doit contenir au moins %1 caractères"
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:462
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:455
 #, kde-format
 msgid "A positive amount to transfer is needed."
 msgstr "Vous devez saisir un montant positif."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:473
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:466
 #, kde-format
 msgid ""
 "After this credit transfer the account's balance will be below your credit "
@@ -13541,14 +13541,14 @@ msgstr ""
 "Après ce virement, le solde du compte sera inférieur à votre limite de "
 "crédit."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:475
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:468
 #, kde-format
 msgid ""
 "After this credit transfer the account's balance will be below the minimal "
 "balance."
 msgstr "Après ce virement, le solde du compte sera inférieur au solde minimum."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:485
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:478
 #, kde-format
 msgid "The end-to-end reference cannot contain more than one character."
 msgid_plural "The end-to-end reference cannot contain more than %1 characters."
@@ -13556,14 +13556,14 @@ msgstr[0] "La référence de bout en bout ne peut contenir plus de un caractère
 msgstr[1] ""
 "La référence de bout en bout ne peut contenir plus de %1 caractères."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:501
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:494
 #, kde-format
 msgid "The maximal line length of %1 character per line is exceeded."
 msgid_plural "The maximal line length of %1 characters per line is exceeded."
 msgstr[0] "La longueur maximale de %1 caractère par ligne est dépassée."
 msgstr[1] "La longueur maximale de %1 caractères par ligne est dépassée."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:505
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:498
 #, kde-format
 msgid ""
 "The purpose can only contain the letters A-Z, spaces and ':?.,-()+ and /"
@@ -13571,14 +13571,14 @@ msgstr ""
 "Le motif ne peut contenir que les lettres A-Z, des espaces ou les caractères "
 "' :  ? . , - ( ) + et /."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:507
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:500
 #, kde-format
 msgid "In the purpose only a single line is allowed."
 msgid_plural "The purpose cannot contain more than %1 lines."
 msgstr[0] "Vous ne pouvez saisir qu'une seule ligne pour le motif."
 msgstr[1] "Le motif ne peut contenir plus de %1 lignes."
 
-#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:511
+#: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:504
 #, kde-format
 msgid "A purpose is needed."
 msgid_plural "The purpose must be at least %1 characters long."
