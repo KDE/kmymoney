@@ -574,35 +574,31 @@ void QueryTableTest::testInvestment()
 
         QList<ListTable::TableRow> rows = invtran.rows();
 
-        QVERIFY(rows.count() == 32);
-        QVERIFY(MyMoneyMoney(rows[1][ListTable::ctValue]) == MyMoneyMoney(-100000.00));
-        QVERIFY(MyMoneyMoney(rows[2][ListTable::ctValue]) == MyMoneyMoney(-110000.00));
-        QVERIFY(MyMoneyMoney(rows[3][ListTable::ctValue]) == MyMoneyMoney(24000.00));
-        QVERIFY(MyMoneyMoney(rows[4][ListTable::ctValue]) == MyMoneyMoney(20000.00));
-        QVERIFY(MyMoneyMoney(rows[5][ListTable::ctValue]) == MyMoneyMoney(5000.00));
-        QVERIFY(MyMoneyMoney(rows[6][ListTable::ctValue]) == MyMoneyMoney(4000.00));
-        QVERIFY(MyMoneyMoney(rows[19][ListTable::ctValue]) == MyMoneyMoney(-50100.00));
-        QVERIFY(MyMoneyMoney(rows[22][ListTable::ctValue]) == MyMoneyMoney(-45100.00));
-        // need to fix these... fundamentally different from the original test
-        //QVERIFY(MyMoneyMoney(invtran.m_rows[8][ListTable::ctValue])==MyMoneyMoney( -1000.00));
-        //QVERIFY(MyMoneyMoney(invtran.m_rows[11][ListTable::ctValue])==MyMoneyMoney( -1200.00));
-        //QVERIFY(MyMoneyMoney(invtran.m_rows[14][ListTable::ctValue])==MyMoneyMoney( -1100.00));
+        QCOMPARE(rows.count(), 32);
+        QCOMPARE(MyMoneyMoney(rows[1][ListTable::ctValue]), MyMoneyMoney(100000.00));
+        QCOMPARE(MyMoneyMoney(rows[2][ListTable::ctValue]), MyMoneyMoney(110000.00));
+        QCOMPARE(MyMoneyMoney(rows[3][ListTable::ctValue]), MyMoneyMoney(-24000.00));
+        QCOMPARE(MyMoneyMoney(rows[4][ListTable::ctValue]), MyMoneyMoney(-20000.00));
+        QCOMPARE(MyMoneyMoney(rows[5][ListTable::ctValue]), MyMoneyMoney(5000.00));
+        QCOMPARE(MyMoneyMoney(rows[6][ListTable::ctValue]), MyMoneyMoney(4000.00));
+        QCOMPARE(MyMoneyMoney(rows[19][ListTable::ctValue]), MyMoneyMoney(50000.00));
+        QCOMPARE(MyMoneyMoney(rows[22][ListTable::ctValue]), MyMoneyMoney(45000.00));
 
-        QVERIFY(MyMoneyMoney(rows[1][ListTable::ctPrice]) == MyMoneyMoney(100.00));
-        QVERIFY(MyMoneyMoney(rows[3][ListTable::ctPrice]) == MyMoneyMoney(120.00));
-        QVERIFY(MyMoneyMoney(rows[5][ListTable::ctPrice]) == MyMoneyMoney(100.00));
-        QVERIFY(MyMoneyMoney(rows[7][ListTable::ctPrice]) == MyMoneyMoney());
-        QVERIFY(MyMoneyMoney(rows[10][ListTable::ctPrice]) == MyMoneyMoney());
-        QVERIFY(MyMoneyMoney(rows[19][ListTable::ctPrice]) == MyMoneyMoney(100.00));
-        QVERIFY(MyMoneyMoney(rows[22][ListTable::ctPrice]) == MyMoneyMoney(90.00));
+        QCOMPARE(MyMoneyMoney(rows[1][ListTable::ctPrice]), MyMoneyMoney(100.00));
+        QCOMPARE(MyMoneyMoney(rows[3][ListTable::ctPrice]), MyMoneyMoney(120.00));
+        QCOMPARE(MyMoneyMoney(rows[5][ListTable::ctPrice]), MyMoneyMoney(100.00));
+        QCOMPARE(MyMoneyMoney(rows[7][ListTable::ctPrice]), MyMoneyMoney());
+        QCOMPARE(MyMoneyMoney(rows[10][ListTable::ctPrice]), MyMoneyMoney());
+        QCOMPARE(MyMoneyMoney(rows[19][ListTable::ctPrice]), MyMoneyMoney(100.00));
+        QCOMPARE(MyMoneyMoney(rows[22][ListTable::ctPrice]), MyMoneyMoney(90.00));
 
-        QVERIFY(MyMoneyMoney(rows[2][ListTable::ctShares]) == MyMoneyMoney(1000.00));
-        QVERIFY(MyMoneyMoney(rows[4][ListTable::ctShares]) == MyMoneyMoney(-200.00));
-        QVERIFY(MyMoneyMoney(rows[6][ListTable::ctShares]) == MyMoneyMoney(50.00));
-        QVERIFY(MyMoneyMoney(rows[8][ListTable::ctShares]) == MyMoneyMoney(0.00));
-        QVERIFY(MyMoneyMoney(rows[11][ListTable::ctShares]) == MyMoneyMoney(0.00));
-        QVERIFY(MyMoneyMoney(rows[19][ListTable::ctShares]) == MyMoneyMoney(500.00));
-        QVERIFY(MyMoneyMoney(rows[22][ListTable::ctShares]) == MyMoneyMoney(500.00));
+        QCOMPARE(MyMoneyMoney(rows[2][ListTable::ctShares]), MyMoneyMoney(1000.00));
+        QCOMPARE(MyMoneyMoney(rows[4][ListTable::ctShares]), MyMoneyMoney(-200.00));
+        QCOMPARE(MyMoneyMoney(rows[6][ListTable::ctShares]), MyMoneyMoney(50.00));
+        QCOMPARE(MyMoneyMoney(rows[8][ListTable::ctShares]), MyMoneyMoney(0.00));
+        QCOMPARE(MyMoneyMoney(rows[11][ListTable::ctShares]), MyMoneyMoney(0.00));
+        QCOMPARE(MyMoneyMoney(rows[19][ListTable::ctShares]), MyMoneyMoney(500.00));
+        QCOMPARE(MyMoneyMoney(rows[22][ListTable::ctShares]), MyMoneyMoney(500.00));
 
         QVERIFY(rows[1][ListTable::ctAction] == "Buy");
         QVERIFY(rows[3][ListTable::ctAction] == "Sell");
@@ -643,10 +639,9 @@ void QueryTableTest::testInvestment()
 #endif
 
 #if 1
-        // i think this is the correct amount. different treatment of dividend and yield
-        QVERIFY(MyMoneyMoney(rows[17][ListTable::ctValue]) == MyMoneyMoney(-153700.00));
-        QVERIFY(MyMoneyMoney(rows[29][ListTable::ctValue]) == MyMoneyMoney(24600.00));
-        QVERIFY(MyMoneyMoney(rows[31][ListTable::ctValue]) == MyMoneyMoney(-129100.00));
+        QVERIFY(MyMoneyMoney(rows[17][ListTable::ctValue]) == MyMoneyMoney(175000.00));
+        QVERIFY(MyMoneyMoney(rows[29][ListTable::ctValue]) == MyMoneyMoney(-25000.00));
+        QVERIFY(MyMoneyMoney(rows[31][ListTable::ctValue]) == MyMoneyMoney(150000.00));
 #else
         QVERIFY(searchHTML(html, i18n("Total Stock 1")) == MyMoneyMoney(171700.00));
         QVERIFY(searchHTML(html, i18n("Grand Total")) == MyMoneyMoney(171700.00));
