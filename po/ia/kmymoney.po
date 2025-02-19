@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 01:56+0000\n"
+"POT-Creation-Date: 2025-02-19 01:57+0000\n"
 "PO-Revision-Date: 2024-04-30 12:31+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -7971,7 +7971,7 @@ msgstr ""
 
 #: kmymoney/mymoney/splitmodel.cpp:118
 #: kmymoney/mymoney/storage/journalmodel.cpp:201
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1055
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1057
 #, kde-format
 msgid "*** UNASSIGNED ***"
 msgstr "*** Non assignate ***"
@@ -11932,7 +11932,7 @@ msgstr ""
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:74
 #: kmymoney/plugins/views/reports/core/querytable.cpp:857
-#: kmymoney/plugins/views/reports/core/querytable.cpp:997
+#: kmymoney/plugins/views/reports/core/querytable.cpp:999
 #, kde-format
 msgid "Transfer"
 msgstr "Transferentia"
@@ -15317,19 +15317,19 @@ msgid "Starting Market Value"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
-#: kmymoney/plugins/views/reports/core/querytable.cpp:994
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1053
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2051
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2070
+#: kmymoney/plugins/views/reports/core/querytable.cpp:996
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1055
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2053
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2072
 #, kde-format
 msgid "Transfer from %1"
 msgstr "Transferer ex %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:222
-#: kmymoney/plugins/views/reports/core/querytable.cpp:995
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1052
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2050
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2069
+#: kmymoney/plugins/views/reports/core/querytable.cpp:997
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1054
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2052
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2071
 #, kde-format
 msgid "Transfer to %1"
 msgstr "Transferer a %1"
@@ -15422,34 +15422,34 @@ msgid "[No Tag]"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:603
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1883
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1885
 #, kde-format
 msgid "Month of %1"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:604
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1884
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1886
 #, kde-format
 msgid "Week of %1"
 msgstr "Septimana de  %1"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:836
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1058
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1201
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2012
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2184
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1060
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1203
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2014
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2186
 #, kde-format
 msgid "No Institution"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:840
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2023
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2025
 #, kde-format
 msgid "[Empty Payee]"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:874
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2056
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2058
 #, kde-format
 msgid "[Split Transaction]"
 msgstr ""
@@ -15461,7 +15461,7 @@ msgctxt "Split transaction"
 msgid "Split"
 msgstr "Scinde"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1796
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1798
 #, kde-format
 msgctxt "No institution"
 msgid "None"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 01:56+0000\n"
+"POT-Creation-Date: 2025-02-19 01:57+0000\n"
 "PO-Revision-Date: 2024-05-09 17:33+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -8360,7 +8360,7 @@ msgstr "分割交易"
 
 #: kmymoney/mymoney/splitmodel.cpp:118
 #: kmymoney/mymoney/storage/journalmodel.cpp:201
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1055
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1057
 #, kde-format
 msgid "*** UNASSIGNED ***"
 msgstr "*** 未指定 ***"
@@ -12622,7 +12622,7 @@ msgstr "取得交易紀錄"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:74
 #: kmymoney/plugins/views/reports/core/querytable.cpp:857
-#: kmymoney/plugins/views/reports/core/querytable.cpp:997
+#: kmymoney/plugins/views/reports/core/querytable.cpp:999
 #, kde-format
 msgid "Transfer"
 msgstr "轉帳"
@@ -16130,19 +16130,19 @@ msgid "Starting Market Value"
 msgstr "結束市值"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
-#: kmymoney/plugins/views/reports/core/querytable.cpp:994
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1053
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2051
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2070
+#: kmymoney/plugins/views/reports/core/querytable.cpp:996
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1055
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2053
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2072
 #, kde-format
 msgid "Transfer from %1"
 msgstr "從 %1 轉帳"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:222
-#: kmymoney/plugins/views/reports/core/querytable.cpp:995
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1052
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2050
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2069
+#: kmymoney/plugins/views/reports/core/querytable.cpp:997
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1054
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2052
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2071
 #, kde-format
 msgid "Transfer to %1"
 msgstr "轉帳到 %1"
@@ -16236,34 +16236,34 @@ msgid "[No Tag]"
 msgstr "【無標籤】"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:603
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1883
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1885
 #, kde-format
 msgid "Month of %1"
 msgstr "第 %1 個月"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:604
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1884
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1886
 #, kde-format
 msgid "Week of %1"
 msgstr "第 %1 週"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:836
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1058
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1201
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2012
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2184
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1060
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1203
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2014
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2186
 #, kde-format
 msgid "No Institution"
 msgstr "沒有機構"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:840
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2023
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2025
 #, kde-format
 msgid "[Empty Payee]"
 msgstr "【收款人空白】"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:874
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2056
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2058
 #, kde-format
 msgid "[Split Transaction]"
 msgstr "【分割交易】"
@@ -16275,7 +16275,7 @@ msgctxt "Split transaction"
 msgid "Split"
 msgstr "分割"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1796
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1798
 #, kde-format
 msgctxt "No institution"
 msgid "None"
