@@ -76,9 +76,13 @@ class MyMoneyPricePrinter(MyMoneyMethodsPrinterBase):
     "Print a MyMoneyPrice"
 
     def __init__(self, val):
+        self.__val = val
         methods = [ 'date', 'source', 'from', 'to' ]
         types = { 'date': 'QDate' }
         super().__init__(val, methods, types)
+
+    def to_string(self):
+        return call_sub_method(self.__val, 'rate', 'MyMoneyMoney', 'toDouble')
 
 class MyMoneySecurityPrinter(MyMoneyPrinterBase):
     "Print a MyMoneySecurity"
