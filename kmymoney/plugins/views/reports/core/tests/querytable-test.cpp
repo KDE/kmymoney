@@ -6,6 +6,7 @@
 
 #include "querytable-test.h"
 
+#include <QBuffer>
 #include <QFile>
 #include <QTest>
 
@@ -24,6 +25,7 @@
 #include "mymoneyutils.h"
 #include "querytable.h"
 #include "tests/testutilities.h"
+#include "xml/mymoneyxmlwriter.h"
 
 using namespace reports;
 using namespace test;
@@ -81,11 +83,38 @@ void writeTabletoXML(const QueryTable& table, const QString& basename = QString(
     g.close();
 }
 
+void writeFile(const QString& basename)
+{
+    MyMoneyFileTransaction ft;
+
+    MyMoneyFile* file = MyMoneyFile::instance();
+
+    // store the user info
+    file->setUser(MyMoneyPayee());
+
+    ft.commit();
+
+    MyMoneyXmlWriter writer;
+    writer.setFile(file);
+    QByteArray data;
+    QBuffer buffer;
+    buffer.setBuffer(&data);
+    buffer.open(QIODevice::WriteOnly);
+    writer.write(&buffer);
+
+    QString filename = QString::fromLatin1("%1/test-%2.xml").arg(CMAKE_CURRENT_BINARY_DIR).arg(basename);
+    QFile g(filename);
+    g.open(QIODevice::WriteOnly);
+    QTextStream(&g) << data;
+    g.close();
+}
+
 void writeTable(const QueryTable& table, const QString& basename = QString())
 {
     writeTabletoCSV(table, basename);
     writeTabletoHTML(table, basename);
     writeTabletoXML(table, basename);
+    writeFile(basename);
 }
 
 void QueryTableTest::init()
