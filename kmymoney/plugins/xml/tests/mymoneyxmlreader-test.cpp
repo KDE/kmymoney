@@ -679,7 +679,7 @@ void MyMoneyXmlReaderTest::testReadPrices()
 
     QCOMPARE(price.date(), date);
     QCOMPARE(price.pricePair(), pair);
-    QCOMPARE(price.rate(QString()), value);
+    QCOMPARE(price.rate(), value);
     QCOMPARE(price.source(), source);
 }
 

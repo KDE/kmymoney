@@ -626,7 +626,7 @@ void MyMoneyXmlWriterPrivate::writePrices()
         }
         m_writer->writeStartElement(nodeName(Node::Price));
         m_writer->writeAttribute(attributeName(Attribute::General::Date), MyMoneyUtils::dateToIsoString(entry.date()));
-        m_writer->writeAttribute(attributeName(Attribute::General::Price), entry.rate(QString()).toString());
+        m_writer->writeAttribute(attributeName(Attribute::General::Price), entry.rate().toString());
         m_writer->writeAttribute(attributeName(Attribute::General::Source), entry.source());
         m_writer->writeEndElement();
     }

@@ -108,6 +108,11 @@ MyMoneyMoney MyMoneyPrice::rate(const QString& id) const
     throw MYMONEYEXCEPTION(QString::fromLatin1("Unknown security id %1 for price info %2/%3.").arg(id, d->m_fromSecurity, d->m_toSecurity));
 }
 
+MyMoneyMoney MyMoneyPrice::rate() const
+{
+    return rate(QString());
+}
+
 QDate MyMoneyPrice::date() const
 {
     Q_D(const MyMoneyPrice);

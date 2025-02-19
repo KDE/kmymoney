@@ -290,7 +290,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyFile* file)
         MyMoneyPriceEntries::const_iterator it_pre;
         for (it_pre = (*it_pr).cbegin(); it_pre != (*it_pr).cend(); ++it_pre) {
             s << "      Date = " << (*it_pre).date().toString() << "\n";
-            s << "        Price = " << (*it_pre).rate(QString()).formatMoney("", 8) << "\n";
+            s << "        Price = " << (*it_pre).rate().formatMoney("", 8) << "\n";
             s << "        Source = " << (*it_pre).source() << "\n";
             s << "        From = " << (*it_pre).from() << "\n";
             s << "        To   = " << (*it_pre).to() << "\n";

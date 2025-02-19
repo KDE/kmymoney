@@ -113,7 +113,8 @@ void AccountSummaryPage::enterPage()
     d->ui->m_dataList->append(i18n("Currency: %1", d->m_wizard->d_func()->currency().name()));
     d->ui->m_dataList->append(i18n("Opening date: %1", MyMoneyUtils::formatDate(acc.openingDate())));
     if (d->m_wizard->d_func()->currency().id() != MyMoneyFile::instance()->baseCurrency().id()) {
-        d->ui->m_dataList->append(i18n("Conversion rate: %1", d->m_wizard->conversionRate().rate(QString()).formatMoney(QString(), d->m_wizard->d_func()->currency().pricePrecision())));
+        d->ui->m_dataList->append(
+            i18n("Conversion rate: %1", d->m_wizard->conversionRate().rate().formatMoney(QString(), d->m_wizard->d_func()->currency().pricePrecision())));
     }
     if ((!acc.isLoan() && acc.accountType() != Account::Type::Investment) || !d->m_wizard->openingBalance().isZero())
         d->ui->m_dataList->append(i18n("Opening balance: %1", MyMoneyUtils::formatMoney(d->m_wizard->openingBalance(), acc, sec)));

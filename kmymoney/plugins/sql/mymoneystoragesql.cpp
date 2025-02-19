@@ -875,10 +875,9 @@ void MyMoneyStorageSql::addPrice(const MyMoneyPrice& p)
     query.bindValue(":fromId", p.from());
     query.bindValue(":toId", p.to());
     query.bindValue(":priceDate", p.date().toString(Qt::ISODate));
-    query.bindValue(":price", p.rate(QString()).toString());
+    query.bindValue(":price", p.rate().toString());
     const MyMoneySecurity sec = d->m_file->security(p.to());
-    query.bindValue(":priceFormatted",
-                    p.rate(QString()).formatMoney("", sec.pricePrecision()));
+    query.bindValue(":priceFormatted", p.rate().formatMoney("", sec.pricePrecision()));
     query.bindValue(":priceSource", p.source());
     if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("writing Price")); // krazy:exclude=crashy
 

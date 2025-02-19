@@ -3625,7 +3625,7 @@ void MyMoneyFile::setBaseCurrency(const MyMoneySecurity& curr)
 
 void MyMoneyFile::addPrice(const MyMoneyPrice& price)
 {
-    if (price.rate(QString()).isZero())
+    if (price.rate().isZero())
         return;
 
     d->checkTransaction(Q_FUNC_INFO);

@@ -61,7 +61,7 @@ void MyMoneyPriceTest::testRate()
     try {
         QVERIFY(n1.rate("to") == MyMoneyMoney(1, 3));
         QVERIFY(n1.rate("from") == MyMoneyMoney(3, 1));
-        QVERIFY(n1.rate(QString()) == MyMoneyMoney(1, 3));
+        QVERIFY(n1.rate() == MyMoneyMoney(1, 3));
 
         QVERIFY(n2.isValid() == false);
         QVERIFY(n2.rate("to") == MyMoneyMoney::ONE);

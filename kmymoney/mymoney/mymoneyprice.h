@@ -107,6 +107,15 @@ public:
       */
     MyMoneyMoney rate(const QString& id) const;
 
+    /**
+     * This method returns the price information based on the
+     * security based on the toSecurity. If this price
+     * object is invalid (see isValid()) MyMoneyMoney(1,1) is returned.
+     *
+     * @return returns the exchange rate (price) as MyMoneyMoney object.
+     */
+    MyMoneyMoney rate() const;
+
     QDate date() const;
     QString source() const;
     QString from() const;
