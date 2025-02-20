@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-19 01:57+0000\n"
+"POT-Creation-Date: 2025-02-20 01:55+0000\n"
 "PO-Revision-Date: 2009-10-17 16:25+0300\n"
 "Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -21465,7 +21465,7 @@ msgid "Type: %1"
 msgstr "Вид:"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:113
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:138
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:139
 #, fuzzy, kde-format
 msgid "Currency: %1"
 msgstr "Валута:"
@@ -21475,158 +21475,158 @@ msgstr "Валута:"
 msgid "Opening date: %1"
 msgstr ""
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:116
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:117
 #, fuzzy, kde-format
 msgid "Conversion rate: %1"
 msgstr "Лихвен процент"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:119
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:120
 #, fuzzy, kde-format
 msgid "Opening balance: %1"
 msgstr "Краен баланс:"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:122
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:123
 #, fuzzy, kde-format
 msgid "Institution: %1"
 msgstr "Институция"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:124
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:140
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:125
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:141
 #, fuzzy, kde-format
 msgid "Number: %1"
 msgstr "Число:"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:127
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:142
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:128
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:143
 #, fuzzy, kde-format
 msgid "IBAN: %1"
 msgstr "IBAN"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:134
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:135
 #, kde-format
 msgid "Brokerage Account"
 msgstr ""
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:137
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:138
 #, kde-format
 msgctxt "Account name"
 msgid "Name: %1 (Brokerage)"
 msgstr ""
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:149
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:150
 #, kde-format
 msgid "Loan information"
 msgstr "Информация за заемане"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:152
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:153
 #, kde-format
 msgid "Amount borrowed: %1"
 msgstr ""
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:154
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:155
 #, fuzzy, kde-format
 msgid "Amount lent: %1"
 msgstr "Демонтиране на %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:156
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:157
 #, fuzzy, kde-format
 msgid "Interest rate: %1 %"
 msgstr "Лихвен процент"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:157
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:158
 #, fuzzy, kde-format
 msgid "Interest rate is %1"
 msgstr "Лихвен процент"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:158
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:159
 #, kde-format
 msgid "Principal and interest: %1"
 msgstr ""
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:159
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:160
 #, kde-format
 msgid "Additional Fees: %1"
 msgstr ""
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:160
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:161
 #, kde-format
 msgid "Payment frequency: %1"
 msgstr ""
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:161
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:162
 #, fuzzy, kde-format
 msgid "Payment account: %1"
 msgstr "Име на сметката"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:165
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:166
 #, kde-format
 msgid "Payout information"
 msgstr ""
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:168
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:169
 #, fuzzy, kde-format
 msgid "Refinance: %1"
 msgstr "Баланс:"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:171
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:172
 #, fuzzy, kde-format
 msgid "Transfer amount to %1"
 msgstr "Прехвърляне към"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:173
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:174
 #, fuzzy, kde-format
 msgid "Transfer amount from %1"
 msgstr "Прехвърляне от"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:176
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:177
 #, kde-format
 msgid "Payment date: %1 "
 msgstr ""
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:184
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:185
 #, kde-format
 msgid "Schedule information"
 msgstr ""
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:186
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:187
 #, fuzzy, kde-format
 msgctxt "Schedule name"
 msgid "Name: %1"
 msgstr "Име:"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:189
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:190
 #, fuzzy, kde-format
 msgid "Occurrence: Monthly"
 msgstr "Повторяемост"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:190
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:191
 #, fuzzy, kde-format
 msgid "Paid from %1"
 msgstr "Валидност от:"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:191
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:192
 #, fuzzy, kde-format
 msgid "Pay to %1"
 msgstr "Копие на %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:192
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:198
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:193
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:199
 #, fuzzy, kde-format
 msgid "Amount: %1"
 msgstr "Сума"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:193
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:200
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:194
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:201
 #, kde-format
 msgid "First payment due on %1"
 msgstr ""
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:194
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:195
 #, fuzzy, kde-format
 msgid "Payment method: %1"
 msgstr "Начин на плащане"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:197
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:198
 #, fuzzy, kde-format
 msgid "Occurrence: %1"
 msgstr "Повторяемост"

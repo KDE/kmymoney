@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-19 01:57+0000\n"
+"POT-Creation-Date: 2025-02-20 01:55+0000\n"
 "PO-Revision-Date: 2023-09-18 10:19-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -22814,7 +22814,7 @@ msgid "Type: %1"
 msgstr "Tipo: %1"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:113
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:138
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:139
 #, kde-format
 msgid "Currency: %1"
 msgstr "Moeda: %1"
@@ -22824,158 +22824,158 @@ msgstr "Moeda: %1"
 msgid "Opening date: %1"
 msgstr "Data de abertura: %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:116
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:117
 #, kde-format
 msgid "Conversion rate: %1"
 msgstr "Taxa de câmbio: %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:119
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:120
 #, kde-format
 msgid "Opening balance: %1"
 msgstr "Saldo de abertura: %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:122
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:123
 #, kde-format
 msgid "Institution: %1"
 msgstr "Instituição: %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:124
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:140
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:125
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:141
 #, kde-format
 msgid "Number: %1"
 msgstr "Número: %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:127
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:142
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:128
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:143
 #, kde-format
 msgid "IBAN: %1"
 msgstr "IBAN: %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:134
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:135
 #, kde-format
 msgid "Brokerage Account"
 msgstr "Conta de corretagem"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:137
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:138
 #, kde-format
 msgctxt "Account name"
 msgid "Name: %1 (Brokerage)"
 msgstr "Nome: %1 (Corretagem)"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:149
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:150
 #, kde-format
 msgid "Loan information"
 msgstr "Informações do empréstimo"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:152
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:153
 #, kde-format
 msgid "Amount borrowed: %1"
 msgstr "Montante emprestado: %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:154
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:155
 #, kde-format
 msgid "Amount lent: %1"
 msgstr "Montante devido: %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:156
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:157
 #, kde-format
 msgid "Interest rate: %1 %"
 msgstr "Taxa de juros: %1 %"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:157
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:158
 #, kde-format
 msgid "Interest rate is %1"
 msgstr "Taxa de juros de %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:158
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:159
 #, kde-format
 msgid "Principal and interest: %1"
 msgstr "Principal e juros: %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:159
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:160
 #, kde-format
 msgid "Additional Fees: %1"
 msgstr "Taxas adicionais: %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:160
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:161
 #, kde-format
 msgid "Payment frequency: %1"
 msgstr "Frequência de pagamento: %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:161
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:162
 #, kde-format
 msgid "Payment account: %1"
 msgstr "Conta de pagamento: %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:165
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:166
 #, kde-format
 msgid "Payout information"
 msgstr "Informações do pagamento"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:168
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:169
 #, kde-format
 msgid "Refinance: %1"
 msgstr "Refinanciar: %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:171
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:172
 #, kde-format
 msgid "Transfer amount to %1"
 msgstr "Transferir o montante para %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:173
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:174
 #, kde-format
 msgid "Transfer amount from %1"
 msgstr "Transferir o montante de %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:176
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:177
 #, kde-format
 msgid "Payment date: %1 "
 msgstr "Data de pagamento: %1 "
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:184
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:185
 #, kde-format
 msgid "Schedule information"
 msgstr "Informações do agendamento"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:186
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:187
 #, kde-format
 msgctxt "Schedule name"
 msgid "Name: %1"
 msgstr "Nome: %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:189
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:190
 #, kde-format
 msgid "Occurrence: Monthly"
 msgstr "Ocorrência: Mensal"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:190
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:191
 #, kde-format
 msgid "Paid from %1"
 msgstr "Pago de %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:191
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:192
 #, kde-format
 msgid "Pay to %1"
 msgstr "Pagar para %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:192
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:198
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:193
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:199
 #, kde-format
 msgid "Amount: %1"
 msgstr "Quantidade: %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:193
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:200
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:194
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:201
 #, kde-format
 msgid "First payment due on %1"
 msgstr "Primeiro pagamento vence em %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:194
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:195
 #, kde-format
 msgid "Payment method: %1"
 msgstr "Forma de pagamento: %1"
 
-#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:197
+#: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:198
 #, kde-format
 msgid "Occurrence: %1"
 msgstr "Ocorrência: %1"
