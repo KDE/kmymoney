@@ -826,13 +826,22 @@ public:
                 if (!sched.isFinished()) {
                     // walk over splits in two rounds: the first takes
                     // care of the main split and the second of all
-                    // others
+                    // others. For transfers, we only do one round, though.
                     bool processMainSplit(true);
+
+                    const auto splits = t.splits();
+                    QVector<MyMoneyAccount> accounts;
+                    for (const auto& sp : qAsConst(splits)) {
+                        accounts.append(file->account(sp.accountId()));
+                    }
+                    bool isTransfer =
+                        ((splits.count() == 2) && (accounts.count() == 2) && (accounts[0].isAssetLiability()) && (accounts[1].isAssetLiability()));
+
                     do {
-                        const auto splits = t.splits();
+                        int idx = 0;
                         for (const auto& sp : qAsConst(splits)) {
                             if (processMainSplit == (sp.accountId() == mainAccount.id())) {
-                                const auto account = file->account(sp.accountId());
+                                const auto& account = accounts.at(idx);
                                 if (account.isAssetLiability()) {
                                     QString tmp = QString("<tr class=\"row-%1\">").arg(index++ & 0x01 ? "even" : "odd");
 
@@ -863,35 +872,64 @@ public:
                                     tmp += "</td><td>";
                                     tmp += link(VIEW_LEDGER, QString("?id=%1").arg(account.id())) + account.name() + linkend();
 
+                                    if (isTransfer) {
+                                        const auto& counterAccount = accounts.at(idx ^ 1);
+                                        tmp += QLatin1String("<br>") + link(VIEW_LEDGER, QString("?id=%1").arg(counterAccount.id())) + counterAccount.name()
+                                            + linkend();
+                                    }
+
                                     // show amount of the schedule
                                     tmp += "</td><td class=\"right nowrap\">";
 
-                                    const MyMoneySecurity& currency = MyMoneyFile::instance()->currency(account.currencyId());
-                                    MyMoneyMoney payment = MyMoneyMoney(sp.value(t.commodity(), account.currencyId()) * cnt);
-                                    QString amount = MyMoneyUtils::formatMoney(payment, account, currency);
-                                    amount.replace(QChar(' '), "&nbsp;");
-                                    tmp += showColoredAmount(amount, payment.isNegative());
+                                    auto addAmount = [&](int idx) -> QString {
+                                        MyMoneySecurity currency = MyMoneyFile::instance()->currency(accounts.at(idx).currencyId());
+                                        MyMoneyMoney payment = MyMoneyMoney(splits.at(idx).value(t.commodity(), currency.id()) * cnt);
+                                        QString amount = MyMoneyUtils::formatMoney(payment, accounts.at(idx), currency);
+                                        amount.replace(QChar(' '), "&nbsp;");
+                                        return showColoredAmount(amount, payment.isNegative());
+                                    };
+
+                                    tmp += addAmount(idx);
+                                    if (isTransfer) {
+                                        tmp += QLatin1String("<br>") + addAmount(idx ^ 1);
+                                    }
                                     tmp += "</td>";
+
                                     // show balance after payments
                                     tmp += "<td class=\"right nowrap\">";
                                     QDate paymentDate = QDate(sched.adjustedNextDueDate());
-                                    MyMoneyMoney balanceAfter = forecastPaymentBalance(account, payment, paymentDate);
-                                    QString balance = MyMoneyUtils::formatMoney(balanceAfter, account, currency);
-                                    balance.replace(QChar(' '), "&nbsp;");
-                                    tmp += showColoredAmount(balance, balanceAfter.isNegative());
+
+                                    auto addBalance = [&](int idx) -> QString {
+                                        MyMoneySecurity currency = MyMoneyFile::instance()->currency(accounts.at(idx).currencyId());
+                                        MyMoneyMoney payment = MyMoneyMoney(splits.at(idx).value(t.commodity(), currency.id()) * cnt);
+                                        MyMoneyMoney balanceAfter = forecastPaymentBalance(accounts.at(idx), payment, paymentDate);
+                                        QString balance = MyMoneyUtils::formatMoney(balanceAfter, accounts.at(idx), currency);
+                                        balance.replace(QChar(' '), "&nbsp;");
+                                        return showColoredAmount(balance, balanceAfter.isNegative());
+                                    };
+
+                                    tmp += addBalance(idx);
+                                    if (isTransfer) {
+                                        tmp += QLatin1String("<br>") + addBalance(idx ^ 1);
+                                    }
                                     tmp += "</td></tr>";
 
                                     // qDebug("paymentEntry = '%s'", tmp.toLatin1());
                                     m_html += tmp;
+
+                                    if (isTransfer) {
+                                        break;
+                                    }
                                 }
                             }
+                            ++idx;
                         }
                         if (processMainSplit) {
                             processMainSplit = false;
                             continue;
                         }
                         break;
-                    } while (true);
+                    } while (!isTransfer);
                 }
             }
         } catch (const MyMoneyException &e) {
