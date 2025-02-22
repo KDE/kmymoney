@@ -1,0 +1,16 @@
+version = 1
+SPDX-PackageName = "kmymoney"
+SPDX-PackageSupplier = "Thomas Baumgart <tbaumgart@kde.org>"
+SPDX-PackageDownloadLocation = "https://invent.kde.org/office/kmymoney"
+
+[[annotations]]
+path = "kmymoney/templates/**/**.kmt"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "GnuCash project"
+SPDX-License-Identifier = "GPL-2.0-or-later"
+
+[[annotations]]
+path = "kmymoney/icons/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "KDE Community"
+SPDX-License-Identifier = "LGPL-3.0-only"
