@@ -881,10 +881,10 @@ public:
                                     // show amount of the schedule
                                     tmp += "</td><td class=\"right nowrap\">";
 
-                                    auto addAmount = [&](int idx) -> QString {
-                                        MyMoneySecurity currency = MyMoneyFile::instance()->currency(accounts.at(idx).currencyId());
-                                        MyMoneyMoney payment = MyMoneyMoney(splits.at(idx).value(t.commodity(), currency.id()) * cnt);
-                                        QString amount = MyMoneyUtils::formatMoney(payment, accounts.at(idx), currency);
+                                    auto addAmount = [&](int i) -> QString {
+                                        MyMoneySecurity currency = MyMoneyFile::instance()->currency(accounts.at(i).currencyId());
+                                        MyMoneyMoney payment = MyMoneyMoney(splits.at(i).value(t.commodity(), currency.id()) * cnt);
+                                        QString amount = MyMoneyUtils::formatMoney(payment, accounts.at(i), currency);
                                         amount.replace(QChar(' '), "&nbsp;");
                                         return showColoredAmount(amount, payment.isNegative());
                                     };
@@ -899,11 +899,11 @@ public:
                                     tmp += "<td class=\"right nowrap\">";
                                     QDate paymentDate = QDate(sched.adjustedNextDueDate());
 
-                                    auto addBalance = [&](int idx) -> QString {
-                                        MyMoneySecurity currency = MyMoneyFile::instance()->currency(accounts.at(idx).currencyId());
-                                        MyMoneyMoney payment = MyMoneyMoney(splits.at(idx).value(t.commodity(), currency.id()) * cnt);
-                                        MyMoneyMoney balanceAfter = forecastPaymentBalance(accounts.at(idx), payment, paymentDate);
-                                        QString balance = MyMoneyUtils::formatMoney(balanceAfter, accounts.at(idx), currency);
+                                    auto addBalance = [&](int i) -> QString {
+                                        MyMoneySecurity currency = MyMoneyFile::instance()->currency(accounts.at(i).currencyId());
+                                        MyMoneyMoney payment = MyMoneyMoney(splits.at(i).value(t.commodity(), currency.id()) * cnt);
+                                        MyMoneyMoney balanceAfter = forecastPaymentBalance(accounts.at(i), payment, paymentDate);
+                                        QString balance = MyMoneyUtils::formatMoney(balanceAfter, accounts.at(i), currency);
                                         balance.replace(QChar(' '), "&nbsp;");
                                         return showColoredAmount(balance, balanceAfter.isNegative());
                                     };
