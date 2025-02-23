@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-21 01:54+0000\n"
+"POT-Creation-Date: 2025-02-23 01:52+0000\n"
 "PO-Revision-Date: 2024-05-09 17:33+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -1958,7 +1958,7 @@ msgstr "類型"
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:237
 #: kmymoney/views/investtransactioneditor.ui:54
 #: kmymoney/views/investtransactioneditor.ui:236
-#: kmymoney/views/khomeview_p.h:1036
+#: kmymoney/views/khomeview_p.h:1074
 #, kde-format
 msgid "Total"
 msgstr "總計"
@@ -2133,7 +2133,7 @@ msgid "Liability"
 msgstr "負債"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:554 kmymoney/kmymoney.cpp:440
-#: kmymoney/models/ledgerfilterbase.cpp:76 kmymoney/views/khomeview_p.h:1794
+#: kmymoney/models/ledgerfilterbase.cpp:76 kmymoney/views/khomeview_p.h:1832
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -4239,7 +4239,7 @@ msgstr "已清算"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:345
 #: kmymoney/plugins/views/reports/core/listtable.cpp:707
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
-#: kmymoney/views/khomeview_p.h:1012
+#: kmymoney/views/khomeview_p.h:1050
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:32
 #, kde-format
 msgid "Reconciled"
@@ -10152,7 +10152,7 @@ msgstr "OFX 匯入檔選擇"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:755
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1015
+#: kmymoney/views/khomeview_p.h:1053
 #, kde-format
 msgid "Balance"
 msgstr "餘額"
@@ -12759,8 +12759,8 @@ msgstr "機構"
 #: kmymoney/plugins/views/reports/reportsview.cpp:227
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
 #: kmymoney/views/investtransactioneditor.ui:98
-#: kmymoney/views/khomeview_p.h:617 kmymoney/views/khomeview_p.h:999
-#: kmymoney/views/khomeview_p.h:1127 kmymoney/views/newtransactioneditor.ui:17
+#: kmymoney/views/khomeview_p.h:617 kmymoney/views/khomeview_p.h:1037
+#: kmymoney/views/khomeview_p.h:1165 kmymoney/views/newtransactioneditor.ui:17
 #: kmymoney/widgets/ktransactionfilter.cpp:102
 #: kmymoney/widgets/ktransactionfilter.ui:113
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:73
@@ -15488,13 +15488,13 @@ msgid_plural "%1 days"
 msgstr[0] "%1 天"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:379
-#: kmymoney/views/khomeview_p.h:1196
+#: kmymoney/views/khomeview_p.h:1234
 #, kde-format
 msgid "The balance of %1 is below the minimum balance %2 today."
 msgstr "%1 的餘額今天會低於最小餘額 %2。"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:384
-#: kmymoney/views/khomeview_p.h:1200
+#: kmymoney/views/khomeview_p.h:1238
 #, kde-format
 msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
 msgid_plural ""
@@ -15502,26 +15502,26 @@ msgid_plural ""
 msgstr[0] "%2 的餘額會在 %1 天內低於最小餘額 %3。"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:403
-#: kmymoney/views/khomeview_p.h:1218
+#: kmymoney/views/khomeview_p.h:1256
 #, kde-format
 msgid "The balance of %1 is below %2 today."
 msgstr "%1 的餘額今日會低於 %2。"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:408
-#: kmymoney/views/khomeview_p.h:1223
+#: kmymoney/views/khomeview_p.h:1261
 #, kde-format
 msgid "The balance of %1 is above %2 today."
 msgstr "%1 的餘額今日會高於 %2。"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:415
-#: kmymoney/views/khomeview_p.h:1229
+#: kmymoney/views/khomeview_p.h:1267
 #, kde-format
 msgid "The balance of %2 will drop below %3 in %1 day."
 msgid_plural "The balance of %2 will drop below %3 in %1 days."
 msgstr[0] "%2 的餘額會在 %1 天內低於 %3。"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:422
-#: kmymoney/views/khomeview_p.h:1236
+#: kmymoney/views/khomeview_p.h:1274
 #, kde-format
 msgid "The balance of %2 will raise above %3 in %1 day."
 msgid_plural "The balance of %2 will raise above %3 in %1 days."
@@ -15591,7 +15591,7 @@ msgid "No data provided by reports plugin for this chart."
 msgstr "顯示此圖表的報告版本"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:666
-#: kmymoney/views/khomeview_p.h:571 kmymoney/views/khomeview_p.h:1533
+#: kmymoney/views/khomeview_p.h:571 kmymoney/views/khomeview_p.h:1571
 #, fuzzy, kde-format
 #| msgid "Show the report version of this chart"
 msgid "Enable reports plugin to see this chart."
@@ -16424,7 +16424,7 @@ msgstr "範圍"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:171
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:27
 #: kmymoney/plugins/views/reports/kreportsview_p.h:438
-#: kmymoney/views/khomeview_p.h:1070
+#: kmymoney/views/khomeview_p.h:1108
 #, kde-format
 msgid "Report"
 msgstr "報告"
@@ -16767,7 +16767,7 @@ msgstr "報告"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
 #: kmymoney/plugins/views/reports/kreportsview.ui:54
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:49
-#: kmymoney/views/khomeview_p.h:1072
+#: kmymoney/views/khomeview_p.h:1110
 #, kde-format
 msgid "Comment"
 msgstr "備註"
@@ -16843,7 +16843,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr "收入與支出圓餅圖"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:880
-#: kmymoney/views/khomeview_p.h:1507
+#: kmymoney/views/khomeview_p.h:1545
 #, kde-format
 msgid "Net Worth"
 msgstr "淨值"
@@ -17166,7 +17166,7 @@ msgid "Net Worth Forecast"
 msgstr "淨值預測"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
-#: kmymoney/views/khomeview_p.h:1529
+#: kmymoney/views/khomeview_p.h:1567
 #, fuzzy, kde-format
 #| msgid "Budget"
 msgctxt "@title Home page section"
@@ -19971,59 +19971,59 @@ msgctxt "More..."
 msgid "Show more schedules on the list"
 msgstr "清單中顯示較多排程"
 
-#: kmymoney/views/khomeview_p.h:845
+#: kmymoney/views/khomeview_p.h:854
 #, kde-format
 msgid "Enter schedule"
 msgstr "輸入排程"
 
-#: kmymoney/views/khomeview_p.h:850
+#: kmymoney/views/khomeview_p.h:859
 #, kde-format
 msgid "Skip schedule"
 msgstr "跳過排程"
 
-#: kmymoney/views/khomeview_p.h:856
+#: kmymoney/views/khomeview_p.h:865
 #, kde-format
 msgid "Edit schedule"
 msgstr "編輯排程"
 
-#: kmymoney/views/khomeview_p.h:860
+#: kmymoney/views/khomeview_p.h:869
 #, kde-format
 msgid " (%1 payment)"
 msgid_plural " (%1 payments)"
 msgstr[0] "（%1 筆付款）"
 
-#: kmymoney/views/khomeview_p.h:1003
+#: kmymoney/views/khomeview_p.h:1041
 #, kde-format
 msgctxt "Header not marked"
 msgid "!M"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1006
+#: kmymoney/views/khomeview_p.h:1044
 #, kde-format
 msgctxt "Header cleared"
 msgid "C"
 msgstr "C"
 
-#: kmymoney/views/khomeview_p.h:1009
+#: kmymoney/views/khomeview_p.h:1047
 #, kde-format
 msgctxt "Header not reconciled"
 msgid "!R"
 msgstr "!R"
 
-#: kmymoney/views/khomeview_p.h:1021
+#: kmymoney/views/khomeview_p.h:1059
 #, fuzzy, kde-format
 #| msgid "To Minimum Balance / Maximum Credit"
 msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr "到最小餘額 / 最大信用額度"
 
-#: kmymoney/views/khomeview_p.h:1065
+#: kmymoney/views/khomeview_p.h:1103
 #, fuzzy, kde-format
 #| msgid "Favorite Reports"
 msgctxt "@title Home page section"
 msgid "Favorite Reports"
 msgstr "最常看的報告"
 
-#: kmymoney/views/khomeview_p.h:1121
+#: kmymoney/views/khomeview_p.h:1159
 #, fuzzy, kde-format
 #| msgid "%1 Day Forecast"
 msgctxt "@title Home page section Forecast days"
@@ -20031,27 +20031,27 @@ msgid "%1 Day Forecast"
 msgid_plural "%1 Day Forecast"
 msgstr[0] "%1 天預測"
 
-#: kmymoney/views/khomeview_p.h:1132
+#: kmymoney/views/khomeview_p.h:1170
 #, kde-format
 msgctxt "Forecast days"
 msgid "%1 day"
 msgid_plural "%1 days"
 msgstr[0] "%1 天"
 
-#: kmymoney/views/khomeview_p.h:1355
+#: kmymoney/views/khomeview_p.h:1393
 #, fuzzy, kde-format
 #| msgid "Assets and Liabilities Summary"
 msgctxt "@title Home page section"
 msgid "Assets and Liabilities Summary"
 msgstr "資產與負債摘要"
 
-#: kmymoney/views/khomeview_p.h:1379
+#: kmymoney/views/khomeview_p.h:1417
 #, kde-format
 msgctxt "@title:column table on home page: not marked"
 msgid "!M"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1383
+#: kmymoney/views/khomeview_p.h:1421
 #, fuzzy, kde-format
 #| msgctxt "Reconciliation flag C"
 #| msgid "C"
@@ -20059,7 +20059,7 @@ msgctxt "@title:column table on home page: cleared"
 msgid "C"
 msgstr "C"
 
-#: kmymoney/views/khomeview_p.h:1387
+#: kmymoney/views/khomeview_p.h:1425
 #, fuzzy, kde-format
 #| msgctxt "Header not reconciled"
 #| msgid "!R"
@@ -20067,112 +20067,112 @@ msgctxt "@title:column table on home page: not reconciled"
 msgid "!R"
 msgstr "!R"
 
-#: kmymoney/views/khomeview_p.h:1391
+#: kmymoney/views/khomeview_p.h:1429
 #, fuzzy, kde-format
 #| msgid "Reconciled"
 msgctxt "@title:column table on home page: last reconciliation date"
 msgid "Reconciled"
 msgstr "已對帳"
 
-#: kmymoney/views/khomeview_p.h:1394
+#: kmymoney/views/khomeview_p.h:1432
 #, fuzzy, kde-format
 #| msgid "Balance"
 msgctxt "@title:column table on home page"
 msgid "Balance"
 msgstr "餘額"
 
-#: kmymoney/views/khomeview_p.h:1398
+#: kmymoney/views/khomeview_p.h:1436
 #, fuzzy, kde-format
 #| msgid "Asset Accounts"
 msgctxt "@title:column table on home page"
 msgid "Asset Accounts"
 msgstr "資產帳戶"
 
-#: kmymoney/views/khomeview_p.h:1403
+#: kmymoney/views/khomeview_p.h:1441
 #, fuzzy, kde-format
 #| msgid "Liability Accounts"
 msgctxt "@title:column table on home page"
 msgid "Liability Accounts"
 msgstr "負債帳戶"
 
-#: kmymoney/views/khomeview_p.h:1488
+#: kmymoney/views/khomeview_p.h:1526
 #, kde-format
 msgid "Total Assets"
 msgstr "總共資產"
 
-#: kmymoney/views/khomeview_p.h:1496
+#: kmymoney/views/khomeview_p.h:1534
 #, kde-format
 msgid "Total Liabilities"
 msgstr "總共負債"
 
-#: kmymoney/views/khomeview_p.h:1784
+#: kmymoney/views/khomeview_p.h:1822
 #, fuzzy, kde-format
 #| msgid "Cash Flow Summary"
 msgctxt "@title Home page section"
 msgid "Cash Flow Summary"
 msgstr "現金流摘要"
 
-#: kmymoney/views/khomeview_p.h:1789
+#: kmymoney/views/khomeview_p.h:1827
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "本月份收入與支出"
 
-#: kmymoney/views/khomeview_p.h:1797
+#: kmymoney/views/khomeview_p.h:1835
 #, kde-format
 msgid "Scheduled Income"
 msgstr "排程收入"
 
-#: kmymoney/views/khomeview_p.h:1800
+#: kmymoney/views/khomeview_p.h:1838
 #, kde-format
 msgid "Expenses"
 msgstr "支出"
 
-#: kmymoney/views/khomeview_p.h:1803
+#: kmymoney/views/khomeview_p.h:1841
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "排程支出"
 
-#: kmymoney/views/khomeview_p.h:1831
+#: kmymoney/views/khomeview_p.h:1869
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "流動資產與負債"
 
-#: kmymoney/views/khomeview_p.h:1836
+#: kmymoney/views/khomeview_p.h:1874
 #, kde-format
 msgid "Liquid Assets"
 msgstr "流動資產"
 
-#: kmymoney/views/khomeview_p.h:1839
+#: kmymoney/views/khomeview_p.h:1877
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "轉移到流動資產"
 
-#: kmymoney/views/khomeview_p.h:1842
+#: kmymoney/views/khomeview_p.h:1880
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "流動負債"
 
-#: kmymoney/views/khomeview_p.h:1845
+#: kmymoney/views/khomeview_p.h:1883
 #, kde-format
 msgid "Other Transfers"
 msgstr "其他轉帳"
 
-#: kmymoney/views/khomeview_p.h:1888
+#: kmymoney/views/khomeview_p.h:1926
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "現金流狀態"
 
-#: kmymoney/views/khomeview_p.h:1893
+#: kmymoney/views/khomeview_p.h:1931
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "預期的流動資產"
 
-#: kmymoney/views/khomeview_p.h:1896
+#: kmymoney/views/khomeview_p.h:1934
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "預期的流動負債"
 
-#: kmymoney/views/khomeview_p.h:1899
+#: kmymoney/views/khomeview_p.h:1937
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "預期的損益"
