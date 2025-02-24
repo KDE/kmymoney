@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-20 01:55+0000\n"
+"POT-Creation-Date: 2025-02-23 01:52+0000\n"
 "PO-Revision-Date: 2024-03-29 14:27+0100\n"
 "Last-Translator: Kjetil Sørlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -1992,7 +1992,7 @@ msgstr "Type"
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:237
 #: kmymoney/views/investtransactioneditor.ui:54
 #: kmymoney/views/investtransactioneditor.ui:236
-#: kmymoney/views/khomeview_p.h:1036
+#: kmymoney/views/khomeview_p.h:1074
 #, kde-format
 msgid "Total"
 msgstr "Totalt"
@@ -2166,7 +2166,7 @@ msgid "Liability"
 msgstr "Gjeld"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:554 kmymoney/kmymoney.cpp:440
-#: kmymoney/models/ledgerfilterbase.cpp:76 kmymoney/views/khomeview_p.h:1794
+#: kmymoney/models/ledgerfilterbase.cpp:76 kmymoney/views/khomeview_p.h:1832
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -4283,7 +4283,7 @@ msgstr "Klarert"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:345
 #: kmymoney/plugins/views/reports/core/listtable.cpp:707
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
-#: kmymoney/views/khomeview_p.h:1012
+#: kmymoney/views/khomeview_p.h:1050
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:32
 #, kde-format
 msgid "Reconciled"
@@ -8288,7 +8288,7 @@ msgstr "Fordel transaksjon"
 
 #: kmymoney/mymoney/splitmodel.cpp:118
 #: kmymoney/mymoney/storage/journalmodel.cpp:201
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1057
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1016
 #, kde-format
 msgid "*** UNASSIGNED ***"
 msgstr "*** IKKE TILDELT ***"
@@ -9991,7 +9991,7 @@ msgstr "Rens valg av notatfelt."
 #: kmymoney/plugins/views/reports/core/listtable.cpp:755
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1015
+#: kmymoney/views/khomeview_p.h:1053
 #, kde-format
 msgid "Balance"
 msgstr "Saldo"
@@ -12436,8 +12436,8 @@ msgid "Get Transactions"
 msgstr "Hent transaksjoner"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:74
-#: kmymoney/plugins/views/reports/core/querytable.cpp:857
-#: kmymoney/plugins/views/reports/core/querytable.cpp:999
+#: kmymoney/plugins/views/reports/core/querytable.cpp:816
+#: kmymoney/plugins/views/reports/core/querytable.cpp:958
 #, kde-format
 msgid "Transfer"
 msgstr "Overfør"
@@ -12569,8 +12569,8 @@ msgstr "Institusjon"
 #: kmymoney/plugins/views/reports/reportsview.cpp:227
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
 #: kmymoney/views/investtransactioneditor.ui:98
-#: kmymoney/views/khomeview_p.h:617 kmymoney/views/khomeview_p.h:999
-#: kmymoney/views/khomeview_p.h:1127 kmymoney/views/newtransactioneditor.ui:17
+#: kmymoney/views/khomeview_p.h:617 kmymoney/views/khomeview_p.h:1037
+#: kmymoney/views/khomeview_p.h:1165 kmymoney/views/newtransactioneditor.ui:17
 #: kmymoney/widgets/ktransactionfilter.cpp:102
 #: kmymoney/widgets/ktransactionfilter.ui:113
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:73
@@ -15311,13 +15311,13 @@ msgstr[0] "1 dag"
 msgstr[1] "%1 dager"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:379
-#: kmymoney/views/khomeview_p.h:1196
+#: kmymoney/views/khomeview_p.h:1234
 #, kde-format
 msgid "The balance of %1 is below the minimum balance %2 today."
 msgstr "Saldoen på %1 er under minimumssaldo %2 i dag."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:384
-#: kmymoney/views/khomeview_p.h:1200
+#: kmymoney/views/khomeview_p.h:1238
 #, kde-format
 msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
 msgid_plural ""
@@ -15326,19 +15326,19 @@ msgstr[0] "Saldoen på %2 vil synke under minimumssaldoen %3 om %1 dag."
 msgstr[1] "Saldoen på %2 vil synke under minimumssaldoen %3 om %1 dager."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:403
-#: kmymoney/views/khomeview_p.h:1218
+#: kmymoney/views/khomeview_p.h:1256
 #, kde-format
 msgid "The balance of %1 is below %2 today."
 msgstr "Saldoen på %1 er under %2 i dag."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:408
-#: kmymoney/views/khomeview_p.h:1223
+#: kmymoney/views/khomeview_p.h:1261
 #, kde-format
 msgid "The balance of %1 is above %2 today."
 msgstr "Saldoen på %1 er over %2 i dag."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:415
-#: kmymoney/views/khomeview_p.h:1229
+#: kmymoney/views/khomeview_p.h:1267
 #, kde-format
 msgid "The balance of %2 will drop below %3 in %1 day."
 msgid_plural "The balance of %2 will drop below %3 in %1 days."
@@ -15346,7 +15346,7 @@ msgstr[0] "Saldoen på %2 vil synke under %3 om %1 dag."
 msgstr[1] "Saldoen på %2 vil synke under %3 om %1 dager."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:422
-#: kmymoney/views/khomeview_p.h:1236
+#: kmymoney/views/khomeview_p.h:1274
 #, kde-format
 msgid "The balance of %2 will raise above %3 in %1 day."
 msgid_plural "The balance of %2 will raise above %3 in %1 days."
@@ -15417,7 +15417,7 @@ msgstr ""
 "Programtillegget for rapporter hadde ingen informasjon til dette diagrammet."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:666
-#: kmymoney/views/khomeview_p.h:571 kmymoney/views/khomeview_p.h:1533
+#: kmymoney/views/khomeview_p.h:571 kmymoney/views/khomeview_p.h:1571
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "Tillat programtillegget for rapporter å se dette diagrammet."
@@ -15947,19 +15947,19 @@ msgid "Starting Market Value"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
-#: kmymoney/plugins/views/reports/core/querytable.cpp:996
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1055
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2053
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2072
+#: kmymoney/plugins/views/reports/core/querytable.cpp:955
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1014
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2012
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2031
 #, kde-format
 msgid "Transfer from %1"
 msgstr "Overfør fra %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:222
-#: kmymoney/plugins/views/reports/core/querytable.cpp:997
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1054
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2052
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2071
+#: kmymoney/plugins/views/reports/core/querytable.cpp:956
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1013
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2011
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2030
 #, kde-format
 msgid "Transfer to %1"
 msgstr "Overfør til %1"
@@ -16052,46 +16052,46 @@ msgid "[No Tag]"
 msgstr "[Ingen merker]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:603
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1885
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1844
 #, kde-format
 msgid "Month of %1"
 msgstr "Måneden som starter med %1"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:604
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1886
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1845
 #, kde-format
 msgid "Week of %1"
 msgstr "Uken som starter med %1"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:836
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1060
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1203
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2014
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2186
+#: kmymoney/plugins/views/reports/core/querytable.cpp:795
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1019
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1162
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1973
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2145
 #, kde-format
 msgid "No Institution"
 msgstr "(Ingen institusjon)"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:840
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2025
+#: kmymoney/plugins/views/reports/core/querytable.cpp:799
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1984
 #, kde-format
 msgid "[Empty Payee]"
 msgstr "[Tom mottaker]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:874
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2058
+#: kmymoney/plugins/views/reports/core/querytable.cpp:833
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2017
 #, kde-format
 msgid "[Split Transaction]"
 msgstr "[Fordelt transaksjon]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:875
-#: kmymoney/plugins/views/reports/core/querytable.cpp:876
+#: kmymoney/plugins/views/reports/core/querytable.cpp:834
+#: kmymoney/plugins/views/reports/core/querytable.cpp:835
 #, kde-format
 msgctxt "Split transaction"
 msgid "Split"
 msgstr "Del"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1798
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1757
 #, kde-format
 msgctxt "No institution"
 msgid "None"
@@ -16234,7 +16234,7 @@ msgstr "Intervall"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:171
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:27
 #: kmymoney/plugins/views/reports/kreportsview_p.h:438
-#: kmymoney/views/khomeview_p.h:1070
+#: kmymoney/views/khomeview_p.h:1108
 #, kde-format
 msgid "Report"
 msgstr "Rapport"
@@ -16572,7 +16572,7 @@ msgstr "Rapporter"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
 #: kmymoney/plugins/views/reports/kreportsview.ui:54
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:49
-#: kmymoney/views/khomeview_p.h:1072
+#: kmymoney/views/khomeview_p.h:1110
 #, kde-format
 msgid "Comment"
 msgstr "Kommentar"
@@ -16646,7 +16646,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr "Kakediagram over inntekter og utgifter"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:880
-#: kmymoney/views/khomeview_p.h:1507
+#: kmymoney/views/khomeview_p.h:1545
 #, kde-format
 msgid "Net Worth"
 msgstr "Nettoverdi"
@@ -16966,7 +16966,7 @@ msgid "Net Worth Forecast"
 msgstr "Prognose på nettoverdi"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
-#: kmymoney/views/khomeview_p.h:1529
+#: kmymoney/views/khomeview_p.h:1567
 #, kde-format
 msgctxt "@title Home page section"
 msgid "Budget"
@@ -19752,58 +19752,58 @@ msgctxt "More..."
 msgid "Show more schedules on the list"
 msgstr "Vis flere tidsplaner på listen"
 
-#: kmymoney/views/khomeview_p.h:845
+#: kmymoney/views/khomeview_p.h:854
 #, kde-format
 msgid "Enter schedule"
 msgstr "Legg inn tidsplan"
 
-#: kmymoney/views/khomeview_p.h:850
+#: kmymoney/views/khomeview_p.h:859
 #, kde-format
 msgid "Skip schedule"
 msgstr "Hopp over tidsplan"
 
-#: kmymoney/views/khomeview_p.h:856
+#: kmymoney/views/khomeview_p.h:865
 #, kde-format
 msgid "Edit schedule"
 msgstr "Endre tidsplan"
 
-#: kmymoney/views/khomeview_p.h:860
+#: kmymoney/views/khomeview_p.h:869
 #, kde-format
 msgid " (%1 payment)"
 msgid_plural " (%1 payments)"
 msgstr[0] " (%1 betaling)"
 msgstr[1] " (%1 betalinger)"
 
-#: kmymoney/views/khomeview_p.h:1003
+#: kmymoney/views/khomeview_p.h:1041
 #, kde-format
 msgctxt "Header not marked"
 msgid "!M"
 msgstr "!M"
 
-#: kmymoney/views/khomeview_p.h:1006
+#: kmymoney/views/khomeview_p.h:1044
 #, kde-format
 msgctxt "Header cleared"
 msgid "C"
 msgstr "K"
 
-#: kmymoney/views/khomeview_p.h:1009
+#: kmymoney/views/khomeview_p.h:1047
 #, kde-format
 msgctxt "Header not reconciled"
 msgid "!R"
 msgstr "!A"
 
-#: kmymoney/views/khomeview_p.h:1021
+#: kmymoney/views/khomeview_p.h:1059
 #, kde-format
 msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr "Til minimumssaldo<br>/ maksimumskreditt"
 
-#: kmymoney/views/khomeview_p.h:1065
+#: kmymoney/views/khomeview_p.h:1103
 #, kde-format
 msgctxt "@title Home page section"
 msgid "Favorite Reports"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1121
+#: kmymoney/views/khomeview_p.h:1159
 #, kde-format
 msgctxt "@title Home page section Forecast days"
 msgid "%1 Day Forecast"
@@ -19811,7 +19811,7 @@ msgid_plural "%1 Day Forecast"
 msgstr[0] ""
 msgstr[1] ""
 
-#: kmymoney/views/khomeview_p.h:1132
+#: kmymoney/views/khomeview_p.h:1170
 #, kde-format
 msgctxt "Forecast days"
 msgid "%1 day"
@@ -19819,131 +19819,131 @@ msgid_plural "%1 days"
 msgstr[0] "%1 dag"
 msgstr[1] "%1 dager"
 
-#: kmymoney/views/khomeview_p.h:1355
+#: kmymoney/views/khomeview_p.h:1393
 #, kde-format
 msgctxt "@title Home page section"
 msgid "Assets and Liabilities Summary"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1379
+#: kmymoney/views/khomeview_p.h:1417
 #, kde-format
 msgctxt "@title:column table on home page: not marked"
 msgid "!M"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1383
+#: kmymoney/views/khomeview_p.h:1421
 #, kde-format
 msgctxt "@title:column table on home page: cleared"
 msgid "C"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1387
+#: kmymoney/views/khomeview_p.h:1425
 #, kde-format
 msgctxt "@title:column table on home page: not reconciled"
 msgid "!R"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1391
+#: kmymoney/views/khomeview_p.h:1429
 #, kde-format
 msgctxt "@title:column table on home page: last reconciliation date"
 msgid "Reconciled"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1394
+#: kmymoney/views/khomeview_p.h:1432
 #, kde-format
 msgctxt "@title:column table on home page"
 msgid "Balance"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1398
+#: kmymoney/views/khomeview_p.h:1436
 #, kde-format
 msgctxt "@title:column table on home page"
 msgid "Asset Accounts"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1403
+#: kmymoney/views/khomeview_p.h:1441
 #, kde-format
 msgctxt "@title:column table on home page"
 msgid "Liability Accounts"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1488
+#: kmymoney/views/khomeview_p.h:1526
 #, kde-format
 msgid "Total Assets"
 msgstr "Totale eiendeler"
 
-#: kmymoney/views/khomeview_p.h:1496
+#: kmymoney/views/khomeview_p.h:1534
 #, kde-format
 msgid "Total Liabilities"
 msgstr "Total gjeld"
 
-#: kmymoney/views/khomeview_p.h:1784
+#: kmymoney/views/khomeview_p.h:1822
 #, kde-format
 msgctxt "@title Home page section"
 msgid "Cash Flow Summary"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1789
+#: kmymoney/views/khomeview_p.h:1827
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "Inntekter og utgifter for inneværende måned"
 
-#: kmymoney/views/khomeview_p.h:1797
+#: kmymoney/views/khomeview_p.h:1835
 #, kde-format
 msgid "Scheduled Income"
 msgstr "Planlagte inntekter"
 
-#: kmymoney/views/khomeview_p.h:1800
+#: kmymoney/views/khomeview_p.h:1838
 #, kde-format
 msgid "Expenses"
 msgstr "Utgifter"
 
-#: kmymoney/views/khomeview_p.h:1803
+#: kmymoney/views/khomeview_p.h:1841
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "Planlagte utgifter"
 
-#: kmymoney/views/khomeview_p.h:1831
+#: kmymoney/views/khomeview_p.h:1869
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "Likvide eiendeler og gjeld"
 
-#: kmymoney/views/khomeview_p.h:1836
+#: kmymoney/views/khomeview_p.h:1874
 #, kde-format
 msgid "Liquid Assets"
 msgstr "Likvide eiendeler"
 
-#: kmymoney/views/khomeview_p.h:1839
+#: kmymoney/views/khomeview_p.h:1877
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "Overføringer til likvid gjeld"
 
-#: kmymoney/views/khomeview_p.h:1842
+#: kmymoney/views/khomeview_p.h:1880
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "Likvid gjeld"
 
-#: kmymoney/views/khomeview_p.h:1845
+#: kmymoney/views/khomeview_p.h:1883
 #, kde-format
 msgid "Other Transfers"
 msgstr "Andre overføringer"
 
-#: kmymoney/views/khomeview_p.h:1888
+#: kmymoney/views/khomeview_p.h:1926
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "Status på kontantstrøm"
 
-#: kmymoney/views/khomeview_p.h:1893
+#: kmymoney/views/khomeview_p.h:1931
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "Forventede likvide eiendeler"
 
-#: kmymoney/views/khomeview_p.h:1896
+#: kmymoney/views/khomeview_p.h:1934
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "Forventede likvid gjeld"
 
-#: kmymoney/views/khomeview_p.h:1899
+#: kmymoney/views/khomeview_p.h:1937
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "Forventet gevinst/tap"
