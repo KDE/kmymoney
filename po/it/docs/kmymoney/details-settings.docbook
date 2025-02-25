@@ -227,9 +227,11 @@
 > nasconde le categorie inutilizzate nella vista Categorie. Una categoria nascosta è comunque disponibile se una transazione la richiede. Digitando una categoria nascosta nel registro, questa diventerà disponibile per l'uso. </para>
 
       <para
->In modo predefinito, i conti di titoli sono nascosti nella vista Conti. La selezione di questa opzione visualizzerà i conti di titoli nella vista Conti. I conti di titoli sono utilizzati per tracciare titoli singoli o investimenti detenuti in un conto Investimenti. Questo non dovrebbe essere confuso con il gruppo <emphasis
+>I conti di titoli sono utilizzati per tracciare i singoli titoli azionari o investimenti detenuti in un conto di investimento. Questi non devono essere confusi con il gruppo di conti di livello superiore <emphasis
 >Patrimonio</emphasis
-> del livello principale, che include i conti che contengono i saldi di apertura per gli altri conti. </para>
+>, che include il/i conto/i che contengono i saldi di apertura per altri conti. Per impostazione predefinita, i conti di titolo sono nascosti nella vista dei conti. Selezionando la casella <guilabel
+>Mostra conti di titoli</guilabel
+> saranno visualizzati i conti di titoli nella vista dei conti. </para>
 
       <para
 >In modo predefinito, le Categorie sono nascoste nella vista Conti. La selezione di <guilabel

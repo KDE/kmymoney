@@ -271,9 +271,9 @@
 >Pianificate</guilabel
 > seleziona le prossime <link linkend="details.schedules"
 >Transazioni pianificate</link
->. Questi vengono visualizzati nell'elenco delle transazioni per comodità, ma non sono stati ancora effettivamente inseriti nel registro. Quando fai clic con il tasto destro su uno di essi, il menu contestuale visualizzato è <guimenu
+>. Questi vengono visualizzati nell'elenco delle transazioni per comodità, ma non sono stati ancora effettivamente inseriti nel registro. Quando si fa clic con il tasto destro su uno di essi, il menu contestuale visualizzato è <guimenu
 >Opzioni delle transazioni pianificate </guimenu
-> che non è lo stesso di <guimenu 
+> che non è lo stesso di <guimenu
 >Opzioni di transazione</guimenu
 > visualizzato per le transazioni regolari. </para>
 </sect2>
@@ -296,7 +296,9 @@
 >L'inserimento e la modifica delle transazioni avviene ora direttamente nell'elenco delle transazioni, indipendentemente dal fatto che il modulo della transazione sia visualizzato o meno. </para>
 
 <para
->I campi nell'area di inserimento corrispondono ai campi nell'elenco delle transazioni. Campi aggiuntivi includono il campo Promemoria, per una descrizione più dettagliata della transazione e la selezione di una categoria. Il pulsante Suddividi permette di dividere la transazione in più categorie. </para>
+>I campi nell'area di inserimento corrispondono ai campi nell'elenco delle transazioni. Campi aggiuntivi includono il campo Promemoria, per una descrizione più dettagliata della transazione e la selezione di una categoria. Il pulsante Suddividi permette di <link linkend="details.ledgers.split"
+>suddividere la transazione</link
+> in più categorie. </para>
 
 <screenshot>
   <screeninfo
@@ -522,7 +524,7 @@
 </screenshot>
 
 <para
->Qui è possibile specificare la categoria e l'importo, nonché il beneficiario, il promemoria e le etichette opzionali. Notare che se un beneficiario e un promemoria sono stati inseriti nella transazione prima di accedere all'editor di suddivisione, saranno inclusi nella prima suddivisione. Spesso ha senso inserire un promemoria specifico per ogni suddivisione. Questo può essere fatto anche per il beneficiario, ma potrebbe avere più senso inserirlo solo una volta per la transazione. Per salvare la suddivisione, premere <guibutton 
+>Qui è possibile specificare la categoria e l'importo, nonché il beneficiario, il promemoria e le etichette opzionali. Notare che se un beneficiario e un promemoria sono stati inseriti nella transazione prima di accedere all'editor di suddivisione, saranno inclusi nella prima suddivisione. Spesso ha senso inserire un promemoria specifico per ogni suddivisione. Questo può essere fatto anche per il beneficiario, ma potrebbe avere più senso inserirlo solo una volta per la transazione. Per salvare la suddivisione, premere <guibutton
 >Inserisci</guibutton
 >. Per annullare, premere <guibutton
 >Annulla</guibutton
@@ -532,7 +534,7 @@
 <para
 >Dopo l'inserimento di una suddivisione, la parte inferiore dell'editor delle suddivisioni mostra quanto dell'importo totale non è ancora assegnato. Dopo aver inserito tutte le suddivisioni, premere il pulsante <guibutton
 >OK</guibutton
-> per salvare l'intera transazione. Se una parte dell'importo non è ancora assegnata, sarà chiesto se si vogliono modificare le suddivisioni, modificare l'importo totale della transazione o lasciare una parte della transazione non assegnata. Lo stesso vale se l'importo è sovrassegnato,nel qual caso il totale delle suddivisioni è maggiore dell'importo dellatransazione. </para>
+> per salvare l'intera transazione. Se una parte dell'importo non è ancora assegnata, sarà chiesto se si vogliono modificare le suddivisioni, modificare l'importo totale della transazione o lasciare una parte della transazione non assegnata. Lo stesso vale se l'importo è sovrassegnato,nel qual caso il totale delle suddivisioni è maggiore dell'importo della transazione. </para>
 
 <para
 >Per ridistribuire un importo <quote
@@ -645,7 +647,7 @@
 <para
 >Poiché il valore è l'unico campo nelle due transazioni che deve assolutamente essere lo stesso, il valore degli altri campi potrebbe differire. Notare che, anche se i due beneficiari potrebbero non essere identici, devono essere stati abbinati dal processo di importazione. <guilabel
 >Corrispondenza</guilabel
->, si vedrà la finestra <guilabel 
+>, si vedrà la finestra <guilabel
 >Abbina transazioni</guilabel
 >. Questa finestra consente di scegliere quale delle due transazioni viene utilizzata come origine degli altri campi nella transazione abbinata. Notare che se una delle transazioni viene importata, la data di tale transazione sarà sempre utilizzata nella transazione abbinata, anche se tutti gli altri campi vengono presi dalla transazione non importata. Questa finestra offre anche la possibilità di invertire le transazioni in base alle quali viene utilizzata come origine di campi diversi. </para
 > 

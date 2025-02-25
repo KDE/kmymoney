@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-23 01:52+0000\n"
-"PO-Revision-Date: 2025-02-01 20:54+0100\n"
+"PO-Revision-Date: 2025-02-13 15:46+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.12.1\n"
+"X-Generator: Lokalize 24.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -16246,24 +16246,21 @@ msgstr ""
 "Segnala questo errore alla lista degli sviluppatori: kmymoney-devel@kde.org"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:150
-#, fuzzy, kde-format
-#| msgid "%1 Balance History"
+#, kde-format
 msgctxt "@title:window Value chart for investments"
 msgid "%1 Value History"
-msgstr "Cronologia saldo per %1"
+msgstr "Storico del valore per %1"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:156
-#, fuzzy, kde-format
-#| msgid "Balance of %1"
+#, kde-format
 msgid "Value of %1"
-msgstr "Saldo di %1"
+msgstr "Valore di %1"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:159
-#, fuzzy, kde-format
-#| msgid "%1 Balance History"
+#, kde-format
 msgctxt "@title:window Balance chart for account"
 msgid "%1 Balance History"
-msgstr "Cronologia saldo per %1"
+msgstr "Storico del saldo per %1"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:167
 #, kde-format
@@ -19217,7 +19214,7 @@ msgstr "Seleziona lo strumento finanziario per questa transazione"
 msgctxt "@info:tooltip"
 msgid ""
 "Transaction is not balanced. Either correct values or assign an account."
-msgstr ""
+msgstr "La transazione non è bilanciata. Correggi i valori o assegna un conto."
 
 #. i18n: ectx: property (toolTip), widget (AmountEdit, priceAmountEdit)
 #: kmymoney/views/investtransactioneditor.ui:26
@@ -24108,15 +24105,13 @@ msgid "Unable to create account: %1"
 msgstr "Impossibile creare il conto: %1"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:198
-#, fuzzy, kde-format
-#| msgid "HalfUp"
+#, kde-format
 msgctxt "Rounding method"
 msgid "HalfUp"
 msgstr "HalfUp"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:199
-#, fuzzy, kde-format
-#| msgid "HalfDown"
+#, kde-format
 msgctxt "Rounding method"
 msgid "HalfDown"
 msgstr "HalfDown"
@@ -24146,8 +24141,7 @@ msgid "Truncate"
 msgstr "Troncamento"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:204
-#, fuzzy, kde-format
-#| msgid "Promote"
+#, kde-format
 msgctxt "Rounding method"
 msgid "Promote"
 msgstr "Promozione"
