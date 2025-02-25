@@ -302,25 +302,29 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
     // certainly has changed.
     connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::aboutToRemoveAccounts, this, [&]() {
         Q_D(KInvestmentView);
-        d->m_equitiesProxyModel->blockSignals(true);
-        d->m_selectedRow = d->ui->m_equitiesTree->currentIndex().row();
+        if (d->m_equitiesProxyModel) {
+            d->m_equitiesProxyModel->blockSignals(true);
+            d->m_selectedRow = d->ui->m_equitiesTree->currentIndex().row();
+        }
     });
 
     connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::accountsRemoved, this, [&]() {
         Q_D(KInvestmentView);
-        d->m_equitiesProxyModel->blockSignals(false);
-        d->m_equitiesProxyModel->invalidate();
+        if (d->m_equitiesProxyModel) {
+            d->m_equitiesProxyModel->blockSignals(false);
+            d->m_equitiesProxyModel->invalidate();
 
-        if (d->m_selectedRow >= d->m_equitiesProxyModel->rowCount()) {
-            --d->m_selectedRow;
-        }
+            if (d->m_selectedRow >= d->m_equitiesProxyModel->rowCount()) {
+                --d->m_selectedRow;
+            }
 
-        const auto idx = d->m_equitiesProxyModel->index(d->m_selectedRow, 0, d->ui->m_equitiesTree->rootIndex());
-        d->ui->m_equitiesTree->setCurrentIndex(idx);
-        if (!idx.isValid()) {
-            d->m_equitySelections.clearSelections(SelectedObjects::Account);
-            d->m_selections = d->m_equitySelections;
-            Q_EMIT requestSelectionChange(d->m_selections);
+            const auto idx = d->m_equitiesProxyModel->index(d->m_selectedRow, 0, d->ui->m_equitiesTree->rootIndex());
+            d->ui->m_equitiesTree->setCurrentIndex(idx);
+            if (!idx.isValid()) {
+                d->m_equitySelections.clearSelections(SelectedObjects::Account);
+                d->m_selections = d->m_equitySelections;
+                Q_EMIT requestSelectionChange(d->m_selections);
+            }
         }
     });
 }
