@@ -221,7 +221,14 @@ void PivotTable::init()
                     tx.setValue("kmm-schedule-id", (*it_schedule).id());
 
                     // Get the dates when a payment will be made within the report window
-                    QDate nextpayment = (*it_schedule).adjustedNextPayment(configbegin);
+                    // If the next due date is on the configured begin, we simply take
+                    // that and don't need adjust which would otherwise set the nextpayment
+                    // to the one after and would skip a payment in the report
+                    // (see https://bugs.kde.org/show_bug.cgi?id=500771)
+                    auto nextpayment = (*it_schedule).nextDueDate();
+                    if (nextpayment > configbegin) {
+                        nextpayment = (*it_schedule).adjustedNextPayment(configbegin);
+                    }
                     if (nextpayment.isValid()) {
                         // Add one transaction for each date
                         QList<QDate> paymentDates = (*it_schedule).paymentDates(nextpayment, configend);
