@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-23 01:52+0000\n"
+"POT-Creation-Date: 2025-02-26 01:56+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -20396,17 +20396,17 @@ msgstr "Intézet törlése…t"
 msgid "Unable to delete institution: %1"
 msgstr "Nem lehet öröltni az intézményt: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:583
+#: kmymoney/views/kinvestmentview.cpp:587
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>Valóban törölni akarja a befektetést: <b>%1</b>?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:584
+#: kmymoney/views/kinvestmentview.cpp:588
 #, kde-format
 msgid "Delete investment"
 msgstr "Befektetés törlése"
 
-#: kmymoney/views/kinvestmentview.cpp:595
+#: kmymoney/views/kinvestmentview.cpp:599
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "Nem lehet törölni a befektetést: %1"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-23 01:52+0000\n"
+"POT-Creation-Date: 2025-02-26 01:56+0000\n"
 "PO-Revision-Date: 2025-02-11 10:28+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -19981,17 +19981,17 @@ msgstr "Kurumu Sil"
 msgid "Unable to delete institution: %1"
 msgstr "Kurum silinemiyor: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:583
+#: kmymoney/views/kinvestmentview.cpp:587
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p><b>%1</b> yatırımını silmeyi gerçekten istiyor musunuz?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:584
+#: kmymoney/views/kinvestmentview.cpp:588
 #, kde-format
 msgid "Delete investment"
 msgstr "Yatırımı sil"
 
-#: kmymoney/views/kinvestmentview.cpp:595
+#: kmymoney/views/kinvestmentview.cpp:599
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "Yatırım silinemedi: %1"

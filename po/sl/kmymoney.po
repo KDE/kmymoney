@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-23 01:52+0000\n"
+"POT-Creation-Date: 2025-02-26 01:56+0000\n"
 "PO-Revision-Date: 2025-02-11 07:08+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -20097,17 +20097,17 @@ msgstr "Zbriši institucijo"
 msgid "Unable to delete institution: %1"
 msgstr "Ni mogoče izbrisati institucije: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:583
+#: kmymoney/views/kinvestmentview.cpp:587
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>Ali res želite izbrisati naložbo<b>%1</b>?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:584
+#: kmymoney/views/kinvestmentview.cpp:588
 #, kde-format
 msgid "Delete investment"
 msgstr "Briši naložbo"
 
-#: kmymoney/views/kinvestmentview.cpp:595
+#: kmymoney/views/kinvestmentview.cpp:599
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "Ni mogoče izbrisati naložbe: %1"
