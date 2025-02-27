@@ -1,8 +1,8 @@
-Account,Amount
+Account,Price,Amount
 "Checking"
-"checking"," 222.00"
-Total Checking," 222.00"
+"checking"," 1.0000"," 222.00"
+Total Checking,," 222.00"
 "Liability"
-"liabilities"," 100.00"
-Total Liability," 100.00"
-Grand Total," 322.00"
+"liabilities"," 1.0000"," 100.00"
+Total Liability,," 100.00"
+Grand Total,," 322.00"

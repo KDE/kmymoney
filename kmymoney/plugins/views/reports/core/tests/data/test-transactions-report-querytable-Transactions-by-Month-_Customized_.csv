@@ -1,8 +1,8 @@
-Date,Num,Payee,Tags,Category,Account,Amount
+Date,Num,Payee,Tags,Category,Account,Price,Amount
 "Month of 2024-01-01"
-"2024-01-01","","[Empty Payee]","tag1","expense","checking"," -123.00"
-"2024-01-02","","[Empty Payee]","tag2","income","checking"," 445.00"
-"2024-01-03","","[Empty Payee]","[No Tag]","Transfer to liabilities","checking"," -100.00"
-"2024-01-03","","[Empty Payee]","[No Tag]","Transfer from checking","liabilities"," 100.00"
-Total Month of 2024-01-01,,,,,," 322.00"
-Grand Total,,,,,," 322.00"
+"2024-01-01","","[Empty Payee]","tag1","expense","checking"," 1.0000"," -123.00"
+"2024-01-02","","[Empty Payee]","tag2","income","checking"," 1.0000"," 445.00"
+"2024-01-03","","[Empty Payee]","[No Tag]","Transfer to liabilities","checking"," 1.0000"," -100.00"
+"2024-01-03","","[Empty Payee]","[No Tag]","Transfer from checking","liabilities"," 1.0000"," 100.00"
+Total Month of 2024-01-01,,,,,,," 322.00"
+Grand Total,,,,,,," 322.00"

@@ -10,6 +10,7 @@
 #include <config-kmymoney.h>
 
 #include "kmymoney.h"
+#include "reportsmodel.h"
 
 // ----------------------------------------------------------------------------
 // Std C++ / STL Includes
@@ -499,6 +500,11 @@ public:
                         file->setFileFixVersion(6);
                         break;
 
+                    case 6:
+                        fixFile_6();
+                        file->setFileFixVersion(7);
+                        break;
+
                     // add new levels above. Don't forget to increase currentFixVersion() for all
                     // the storage backends this fix applies to
                     default:
@@ -640,6 +646,28 @@ public:
     /* DO NOT ADD code to this function or any of it's called ones.
        Instead, create a new function, fixFile_n, and modify the initializeStorage()
        logic above to call it */
+
+    void fixFile_6()
+    {
+        const auto file = MyMoneyFile::instance();
+        const auto model = file->reportsModel();
+
+        // scan the reports and add price column if currency conversion is activated
+        auto count = 0;
+        const auto rows = model->rowCount();
+        for (int row = 0; row < rows; ++row) {
+            const auto idx = model->index(row, 0);
+            MyMoneyReport report = model->itemByIndex(idx);
+            unsigned qc = report.queryColumns();
+            if (report.isConvertCurrency() && !(qc & eMyMoney::Report::QueryColumn::Price)) {
+                qc |= eMyMoney::Report::QueryColumn::Price;
+                report.setQueryColumns((eMyMoney::Report::QueryColumn)qc);
+            }
+            file->modifyReport(report);
+            ++count;
+        }
+        qDebug() << count << "reports(s) fixed in" << __FUNCTION__;
+    }
 
     void fixFile_5()
     {

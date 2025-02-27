@@ -49,6 +49,7 @@ protected Q_SLOTS:
     void slotRowTypeChanged(int);
     void slotColumnTypeChanged(int);
     void slotReset();
+    void slotConvertCurrencyChanged(int state);
     void slotSearch();
     void slotShowHelp();
     void slotUpdateCheckTransfers();

@@ -201,6 +201,12 @@ protected:
      * Comma-separated list of columns to place BEFORE the subtotal column
      */
     QList<cellTypeE> m_columns;
+
+    /**
+     * Temporary storage for the price column
+     */
+    QList<cellTypeE> m_priceColumn;
+
     /**
      * Name of the subtotal column
      */

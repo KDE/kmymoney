@@ -1,9 +1,9 @@
-Date,Num,Payee,Tags,Account,Amount
+Date,Num,Payee,Tags,Account,Price,Amount
 "Income"
 "dividend"
 "dividend"
-"2024-08-29","","[Empty Payee]","[No Tag]","checking (BTC)"," 570.00"
-Total dividend,,,,," 570.00"
-Total dividend,,,,," 570.00"
-Total Income,,,,," 570.00"
-Grand Total,,,,," 570.00"
+"2024-08-29","","[Empty Payee]","[No Tag]","checking (BTC)"," 57000.0000"," 570.00"
+Total dividend,,,,,," 570.00"
+Total dividend,,,,,," 570.00"
+Total Income,,,,,," 570.00"
+Grand Total,,,,,," 570.00"

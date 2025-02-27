@@ -172,6 +172,8 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport repor
         }
     }
 
+    connect(d->m_tabGeneral->ui->m_checkCurrency, &QCheckBox::stateChanged, this, &KReportConfigurationFilterDlg::slotConvertCurrencyChanged);
+
     d->ui->m_criteriaTab->setCurrentIndex(d->ui->m_criteriaTab->indexOf(d->m_tabGeneral));
     d->ui->m_criteriaTab->setMinimumSize(500, 200);
 
@@ -195,6 +197,29 @@ MyMoneyReport KReportConfigurationFilterDlg::getConfig() const
 {
     Q_D(const KReportConfigurationFilterDlg);
     return d->m_currentState;
+}
+
+void KReportConfigurationFilterDlg::slotConvertCurrencyChanged(int state)
+{
+    Q_D(KReportConfigurationFilterDlg);
+
+    if (!d->m_tabRowColQuery)
+        return;
+
+    QCheckBox* box = d->m_tabRowColQuery->ui->m_checkPrice;
+    // The price column is mandatory when currency conversion is enabled,
+    // see https://bugs.kde.org/show_bug.cgi?id=345550
+
+    // Previous state is saved into the tristate flag
+    if (state) {
+        box->setTristate(box->checkState());
+        box->setChecked(true);
+        box->setEnabled(false);
+    } else {
+        box->setChecked(box->isTristate());
+        box->setTristate(false);
+        box->setEnabled(true);
+    }
 }
 
 void KReportConfigurationFilterDlg::slotSearch()

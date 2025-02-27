@@ -1,7 +1,7 @@
-Date,Num,Category,Amount
+Date,Num,Category,Price,Amount
 "tag1"
-"2024-01-26","","category1"," -12.00"
+"2024-01-26","","category1"," 1.0000"," -12.00"
 "tag2"
-"2024-01-26","","category2"," -111.00"
+"2024-01-26","","category2"," 1.0000"," -111.00"
 "tag3"
-"2024-01-27","","category1"," -222.00"
+"2024-01-27","","category1"," 1.0000"," -222.00"

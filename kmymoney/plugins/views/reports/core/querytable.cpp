@@ -189,10 +189,14 @@ void QueryTable::init()
         m_columns << ctAction;
     if (qc & eMyMoney::Report::QueryColumn::Shares)
         m_columns << ctShares;
-    if (qc & eMyMoney::Report::QueryColumn::Price)
-        m_columns << ctPrice;
+    // When loading reports from a file, it is ensured that the price column is displayed
+    // when using currency conversion. However, there are cases where this does not apply
+    // (e.g. test cases), so here it is ensured that the corresponding column is displayed.
+    if (qc & eMyMoney::Report::QueryColumn::Price || m_config.isConvertCurrency())
+        m_priceColumn << ctPrice;
     if (qc & eMyMoney::Report::QueryColumn::Performance) {
         m_subtotal.clear();
+        m_priceColumn.clear();
         switch (m_config.investmentSum()) {
         case eMyMoney::Report::InvestmentSum::OwnedAndSold:
             m_columns << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingMarketValue << ctExtendedInternalRateOfReturn << ctReturnInvestment
@@ -221,6 +225,7 @@ void QueryTable::init()
     }
     if (qc & eMyMoney::Report::QueryColumn::CapitalGain) {
         m_subtotal.clear();
+        m_priceColumn.clear();
         switch (m_config.investmentSum()) {
         case eMyMoney::Report::InvestmentSum::Owned:
             m_columns << ctShares << ctBuyPrice << ctBuys << ctLastPrice << ctEndingMarketValue << ctPercentageGain << ctCapitalGain;
@@ -240,9 +245,13 @@ void QueryTable::init()
         }
     }
     if (qc & eMyMoney::Report::QueryColumn::Loan) {
-        m_columns << ctPayment << ctInterest << ctFees;
+        m_columns << ctPayment << ctInterest << ctFees << m_priceColumn;
         m_postcolumns << ctBalance;
     }
+
+    if (!m_columns.contains(ctPrice))
+        m_columns << m_priceColumn;
+
     if (qc & eMyMoney::Report::QueryColumn::Balance)
         m_postcolumns << ctBalance;
 
@@ -994,6 +1003,8 @@ void QueryTable::constructTransactionTable()
                         if (splitAcc.isInvest()) {
                             qS[ctShares] = (*it_split).shares().convert(fraction).toString();
                         }
+                        qS[ctPrice] = xr.convert(fraction).toString();
+                        qS.addSourceLine(ctPrice, __LINE__);
 
                         //multiply by currency and convert to lowest fraction
                         qS[ctValue] = ((*it_split).shares() * xr).convert(fraction).toString();

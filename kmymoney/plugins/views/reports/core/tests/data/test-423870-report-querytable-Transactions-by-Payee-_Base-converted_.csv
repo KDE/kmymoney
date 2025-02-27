@@ -1,6 +1,6 @@
-Date,Num,Tags,Category,Amount
+Date,Num,Tags,Category,Price,Amount
 "Amazon"
-"2020-06-27","","[No Tag]","Clothes"," -65.44"
-"2020-06-27","","[No Tag]","Books"," -50.00"
-Total Amazon,,,," -115.44"
-Grand Total,,,," -115.44"
+"2020-06-27","","[No Tag]","Clothes"," 1.3088"," -65.44"
+"2020-06-27","","[No Tag]","Books"," 1.0000"," -50.00"
+Total Amazon,,,,," -115.44"
+Grand Total,,,,," -115.44"

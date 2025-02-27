@@ -1,5 +1,5 @@
-Date,Num,Category,Account,Amount
+Date,Num,Category,Account,Price,Amount
 "tag1"
-"2024-01-01","","expense","checking"," -123.00"
+"2024-01-01","","expense","checking"," 1.0000"," -123.00"
 "tag2"
-"2024-01-02","","income","checking"," 445.00"
+"2024-01-02","","income","checking"," 1.0000"," 445.00"
