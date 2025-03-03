@@ -3114,14 +3114,22 @@ void KMyMoneyApp::slotMoveTransactionTo()
     // const auto actionId = d->qActionToId(action);
     const auto file = MyMoneyFile::instance();
     const auto accountId = action->data().toString();
-    const auto journalEntryList = d->m_selections.selection(SelectedObjects::JournalEntry);
+    auto journalEntryList = d->m_selections.selection(SelectedObjects::JournalEntry);
 
     if (!journalEntryList.isEmpty()) {
         MyMoneyFileTransaction ft;
         try {
+            // sort the journalentrylist so that the splits of one transaction
+            // are located next to each other
+            std::sort(journalEntryList.begin(), journalEntryList.end());
+            MyMoneyTransaction t;
             for (const auto& journalId : journalEntryList) {
                 const auto journalIdx = file->journalModel()->indexById(journalId);
-                auto t = file->transaction(journalIdx.data(eMyMoney::Model::JournalTransactionIdRole).toString());
+                // load a new transaction, otherwise reuse it
+                const auto tid = journalIdx.data(eMyMoney::Model::JournalTransactionIdRole).toString();
+                if (t.id() != tid) {
+                    t = file->transaction(tid);
+                }
                 auto s = t.splitById(journalIdx.data(eMyMoney::Model::JournalSplitIdRole).toString());
                 const auto acc = file->accountsModel()->itemById(s.accountId());
                 if (acc.isInvest()) {
