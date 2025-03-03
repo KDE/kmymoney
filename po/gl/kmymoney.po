@@ -18939,7 +18939,7 @@ msgstr "Non é posíbel abrir o ficheiro de modelo «%1»"
 #: kmymoney/templates/templatewriter.cpp:215
 #, kde-format
 msgid "Unable to upload to '%1'.<br />%2"
-msgstr "Non é posíbel enviar a «%1».<br />%2"
+msgstr "Non é posíbel subir a «%1».<br />%2"
 
 #: kmymoney/views/investactivities.cpp:278
 #, kde-format
@@ -21391,7 +21391,8 @@ msgid ""
 msgstr ""
 "<html><head/><body><p>As contas marcadas como favoritas abriranse "
 "automaticamente cando KMyMoney abra o ficheiro ou base de datos. Use o botón "
-"+ da barra de lapelas enriba para seleccionar unha conta.</p></body></html>"
+"+ da barra de separadores enriba para seleccionar unha conta.</p></body></"
+"html>"
 
 #: kmymoney/views/splitdialog.cpp:314
 #, kde-format
