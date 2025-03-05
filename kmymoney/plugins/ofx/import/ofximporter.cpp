@@ -208,6 +208,7 @@ bool OFXImporter::isMyFormat(const QString& filename) const
     // the tag "<OFX>" or "<OFC>" in the first 20 lines.
     // which contain some data
     bool result = false;
+    QRegularExpression re(QStringLiteral("<\\s*OF[XC]\\s*>"), QRegularExpression::CaseInsensitiveOption);
 
     QFile f(filename);
     if (f.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -217,9 +218,9 @@ bool OFXImporter::isMyFormat(const QString& filename) const
         while (!ts.atEnd() && !result  && lineCount != 0) {
             // get a line of data and remove all unnecessary whitespace chars
             QString line = ts.readLine().simplified();
-            if (line.contains(QStringLiteral("<OFX>"), Qt::CaseInsensitive)
-                    || line.contains(QStringLiteral("<OFC>"), Qt::CaseInsensitive))
+            if (re.match(line).hasMatch()) {
                 result = true;
+            }
             // count only lines that contain some non white space chars
             if (!line.isEmpty())
                 lineCount--;
