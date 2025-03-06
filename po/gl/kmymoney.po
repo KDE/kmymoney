@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-04 01:56+0000\n"
+"POT-Creation-Date: 2025-03-06 02:00+0000\n"
 "PO-Revision-Date: 2025-02-14 08:14+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -5795,7 +5795,7 @@ msgstr ""
 "Non é posíbel importar %1 usando o complemento %2. Este complemento devolveu "
 "o seguinte erro: %3"
 
-#: kmymoney/kmymoney.cpp:4544 kmymoney/plugins/ofx/import/ofximporter.cpp:1034
+#: kmymoney/kmymoney.cpp:4544 kmymoney/plugins/ofx/import/ofximporter.cpp:1035
 #, kde-format
 msgid "Importing error"
 msgstr "Produciuse un erro ao importar"
@@ -12298,7 +12298,7 @@ msgid "Pick &date"
 msgstr "Escoller unha &data"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:309
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:886
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:887
 #, kde-format
 msgid "Online settings"
 msgstr "Configuración de Internet"
@@ -13337,22 +13337,22 @@ msgstr ""
 msgid "Incorrect format"
 msgstr "O formato é incorrecto"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:237
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:238
 #, kde-format
 msgid "Unable to parse file"
 msgstr "Non é posíbel procesar o ficheiro"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:833
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:834
 #, kde-format
 msgid "No accounts found."
 msgstr "Non se atopou ningunha conta."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1018
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1019
 #, kde-format
 msgid "Error connecting to bank: %1"
 msgstr "Erro ao conectar ao banco: %1"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1031
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1032
 #, kde-format
 msgid ""
 "<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The plugin "
@@ -13361,12 +13361,12 @@ msgstr ""
 "<p>Non se pode importar <b>«%1»</b> usando o complemento de importación de "
 "OFX. A extensión devolveu o erro seguinte:</p><p>%2</p>"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1068
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1069
 #, kde-format
 msgid "Importing process terminated unexpectedly."
 msgstr "O proceso de importación rematou inesperadamente."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1068
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1069
 #, kde-format
 msgid "Failed to import all statements."
 msgstr "Non foi posíbel importar todos os extractos."

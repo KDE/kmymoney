@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-04 01:56+0000\n"
+"POT-Creation-Date: 2025-03-06 02:00+0000\n"
 "PO-Revision-Date: 2024-04-22 16:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -5583,7 +5583,7 @@ msgid ""
 "error: %3"
 msgstr "无法使用插件 %2 将其导入至 %1。插件返回了如下错误：%3"
 
-#: kmymoney/kmymoney.cpp:4544 kmymoney/plugins/ofx/import/ofximporter.cpp:1034
+#: kmymoney/kmymoney.cpp:4544 kmymoney/plugins/ofx/import/ofximporter.cpp:1035
 #, kde-format
 msgid "Importing error"
 msgstr "导入出错"
@@ -11898,7 +11898,7 @@ msgid "Pick &date"
 msgstr "选择日期(&D)"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:309
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:886
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:887
 #, kde-format
 msgid "Online settings"
 msgstr "在线设置"
@@ -12906,34 +12906,34 @@ msgstr "无法使用OFX导入插件导入%1。此文件格式不正确。"
 msgid "Incorrect format"
 msgstr "格式错误"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:237
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:238
 #, kde-format
 msgid "Unable to parse file"
 msgstr "无法解析文件"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:833
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:834
 #, kde-format
 msgid "No accounts found."
 msgstr "未找到账户."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1018
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1019
 #, kde-format
 msgid "Error connecting to bank: %1"
 msgstr "连接到银行时出错：%1"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1031
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1032
 #, kde-format
 msgid ""
 "<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The plugin "
 "returned the following error:</p><p>%2</p>"
 msgstr "无法使用OFX导入插件导入%1。插件返回下列错误：<p>%2"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1068
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1069
 #, kde-format
 msgid "Importing process terminated unexpectedly."
 msgstr "导入过程异常终止。"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1068
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1069
 #, kde-format
 msgid "Failed to import all statements."
 msgstr "未能完成全部对账单导入。"

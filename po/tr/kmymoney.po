@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-04 01:56+0000\n"
+"POT-Creation-Date: 2025-03-06 02:00+0000\n"
 "PO-Revision-Date: 2025-02-11 10:28+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -5765,7 +5765,7 @@ msgstr ""
 "%2 eklentisi kullanılarak %1 içe aktarılamadı. Eklenti aşağıdaki hatayı "
 "döndürdü: %3"
 
-#: kmymoney/kmymoney.cpp:4544 kmymoney/plugins/ofx/import/ofximporter.cpp:1034
+#: kmymoney/kmymoney.cpp:4544 kmymoney/plugins/ofx/import/ofximporter.cpp:1035
 #, kde-format
 msgid "Importing error"
 msgstr "İçe aktarma hatası"
@@ -12220,7 +12220,7 @@ msgid "Pick &date"
 msgstr "Tarih &seç"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:309
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:886
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:887
 #, kde-format
 msgid "Online settings"
 msgstr "Çevrimiçi ayarlar"
@@ -13252,22 +13252,22 @@ msgstr ""
 msgid "Incorrect format"
 msgstr "Yanlış biçim"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:237
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:238
 #, kde-format
 msgid "Unable to parse file"
 msgstr "Dosya ayrıştırılamadı"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:833
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:834
 #, kde-format
 msgid "No accounts found."
 msgstr "Hiçbir hesap bulunmadı."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1018
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1019
 #, kde-format
 msgid "Error connecting to bank: %1"
 msgstr "Bankaya bağlanırken hata: %1"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1031
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1032
 #, kde-format
 msgid ""
 "<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The plugin "
@@ -13276,12 +13276,12 @@ msgstr ""
 "<p>OFX içe aktarma eklentisi kullanılarak <b>“%1”</b> içe aktarılamıyor. "
 "Eklenti şu hatayı verdi:</p><p>%2</p>"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1068
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1069
 #, kde-format
 msgid "Importing process terminated unexpectedly."
 msgstr "İçe aktarma süreci beklenmedik bir biçimde sonlandı."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1068
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1069
 #, kde-format
 msgid "Failed to import all statements."
 msgstr "Tüm hesap özetleri içe aktarılamadı."

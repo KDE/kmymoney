@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-04 01:56+0000\n"
+"POT-Creation-Date: 2025-03-06 02:00+0000\n"
 "PO-Revision-Date: 2025-02-11 07:08+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -5802,7 +5802,7 @@ msgid ""
 msgstr ""
 "Ni mogoče uvoziti %1 z uporabo vtičnika %2. Vtičnik je vrnil napako: %3"
 
-#: kmymoney/kmymoney.cpp:4544 kmymoney/plugins/ofx/import/ofximporter.cpp:1034
+#: kmymoney/kmymoney.cpp:4544 kmymoney/plugins/ofx/import/ofximporter.cpp:1035
 #, kde-format
 msgid "Importing error"
 msgstr "Napaka pri uvažanju"
@@ -12285,7 +12285,7 @@ msgid "Pick &date"
 msgstr "Izberite datum"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:309
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:886
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:887
 #, kde-format
 msgid "Online settings"
 msgstr "Spletne nastavitve"
@@ -13319,22 +13319,22 @@ msgstr ""
 msgid "Incorrect format"
 msgstr "Nepravilen format"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:237
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:238
 #, kde-format
 msgid "Unable to parse file"
 msgstr "Datoteke ni mogoče razčleniti"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:833
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:834
 #, kde-format
 msgid "No accounts found."
 msgstr "Ni najdenih računov."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1018
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1019
 #, kde-format
 msgid "Error connecting to bank: %1"
 msgstr "Napaka pri povezovanju z banko: %1"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1031
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1032
 #, kde-format
 msgid ""
 "<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The plugin "
@@ -13343,12 +13343,12 @@ msgstr ""
 "<p>Ni mogoče uvoziti <b>'%1'</b> z uporabo vtičnika OFX. Vtičnik je vrnil "
 "naslednjo napako:</p><p>%2</p>"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1068
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1069
 #, kde-format
 msgid "Importing process terminated unexpectedly."
 msgstr "Vsi procesi uvažanja so se končali nepričakovano."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1068
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1069
 #, kde-format
 msgid "Failed to import all statements."
 msgstr "Ni bilo mogoče uvoziti vse izkaze."
