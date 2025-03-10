@@ -3,7 +3,7 @@
 # KDE Finnish translation sprint participants:
 # Author: Artnay
 # Author: Lliehu
-# SPDX-FileCopyrightText: 2019, 2020, 2021, 2022, 2023, 2024 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2019, 2020, 2021, 2022, 2023, 2024, 2025 Tommi Nieminen <translator@legisign.org>
 # Mikael Kujanpää <mikael.kujanpaa@iki.fi>, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2020, 2021.
 # Raimo Ikonen <raimo.ikonen@innotronics.fi>, 2008, 2009, 2010.
 # Marko Suvila <marko.suvila@gmail.com>, 2008, 2009.
@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-06 02:00+0000\n"
-"PO-Revision-Date: 2024-12-22 22:16+0200\n"
+"PO-Revision-Date: 2025-02-21 17:01+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -5158,12 +5158,10 @@ msgid "Show transaction details"
 msgstr "Näytä tapahtuman tiedot"
 
 #: kmymoney/kmymoney.cpp:2014
-#, fuzzy, kde-format
-#| msgctxt "To open a new report"
-#| msgid "&Open"
+#, kde-format
 msgctxt "Open URL"
 msgid "Open URL"
-msgstr "&Avaa"
+msgstr "Avaa verkko-osoite"
 
 #: kmymoney/kmymoney.cpp:2015
 #, kde-format
@@ -5455,8 +5453,7 @@ msgid "Unable to duplicate transaction(s)"
 msgstr "Tapahtumia ei voitu kahdentaa"
 
 #: kmymoney/kmymoney.cpp:2928
-#, fuzzy, kde-format
-#| msgid "Close"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close"
 msgstr "Sulje"
@@ -5875,16 +5872,14 @@ msgid "Saving file..."
 msgstr "Tiedostoa tallennetaan…"
 
 #: kmymoney/kmymoney.cpp:4904
-#, fuzzy, kde-format
-#| msgid "Failed to save your storage."
+#, kde-format
 msgid "Failed to save your data."
-msgstr "Tallennus epäonnistui."
+msgstr "Tiedon tallennus epäonnistui."
 
 #: kmymoney/kmymoney.cpp:4910
-#, fuzzy, kde-format
-#| msgid "Couldn't find suitable plugin to save your storage."
+#, kde-format
 msgid "Couldn't find suitable plugin to save your data."
-msgstr "Varaston tallentamiseen sopivaa liitännäistä ei löytynyt."
+msgstr "Tiedon tallentamiseen ei löytynyt sopivaa liitännäistä."
 
 #: kmymoney/kmymoney.cpp:4916
 #, kde-format
@@ -5892,10 +5887,9 @@ msgid "Saving file as...."
 msgstr "Tiedostoa tallennetaan nimellä…"
 
 #: kmymoney/kmymoney.cpp:4932
-#, fuzzy, kde-format
-#| msgid "Couldn't find any plugin for saving storage."
+#, kde-format
 msgid "Couldn't find any plugin for saving data."
-msgstr "Tarvittavaa liitännäistä ei löytynyt tämän varaston tallentamiseksi."
+msgstr "Tiedon tallentamiseen ei löytynyt liitännäisiä."
 
 #: kmymoney/kmymoney.cpp:4961
 #, kde-format
@@ -6372,10 +6366,9 @@ msgid "Value"
 msgstr "Arvo"
 
 #: kmymoney/models/equitiesmodel.cpp:197 kmymoney/models/equitiesmodel.cpp:434
-#, fuzzy, kde-format
-#| msgid "&Last Update"
+#, kde-format
 msgid "Last Price Update"
-msgstr "&Viimeksi päivitetty"
+msgstr "Viimeisin hintapäivitys"
 
 #: kmymoney/models/equitiesmodel.cpp:540
 #: kmymoney/widgets/columnselector.cpp:219
@@ -8724,11 +8717,10 @@ msgid "Cost center"
 msgstr "Kustannuspaikka"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:77
-#, fuzzy, kde-format
-#| msgid "Entry order"
+#, kde-format
 msgctxt "@title:column Entry date (ext)"
 msgid "Entry date"
-msgstr "Kirjausten järjestys"
+msgstr "Kirjauspäivämäärä"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:80
 #, fuzzy, kde-format
@@ -13266,15 +13258,10 @@ msgid "OFX import file selection"
 msgstr "OFX-tuonnin tiedoston valinta"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:172
-#, fuzzy, kde-format
-#| msgid ""
-#| "%1|KMyMoney files (*.kmy)\n"
-#| "%2|All files (*.*)"
+#, kde-format
 msgctxt "Filter for QFileDialog"
 msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
-msgstr ""
-"%1|KMyMoney-tiedostot (*.kmy)\n"
-"%2|Kaikki tiedostot (*.*)"
+msgstr "OFX-tiedostot (*.ofx *.qfx *.ofc);;Kaikki tiedostot (*)"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:191
 #, kde-format
@@ -16537,11 +16524,10 @@ msgid "&Print"
 msgstr "&Tulosta"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:743
-#, fuzzy, kde-format
-#| msgid "Exporting file..."
+#, kde-format
 msgctxt "To export a report"
 msgid "&Export to PDF file"
-msgstr "Tiedoston vienti…"
+msgstr "Vie P&DF-tiedostoksi"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:745
 #, kde-format
@@ -16563,7 +16549,7 @@ msgstr "P&oista…"
 #, kde-format
 msgctxt "To export reports"
 msgid "&Export to PDF files"
-msgstr ""
+msgstr "Vie PD&F-tiedostoiksi"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:816
 #, fuzzy, kde-format
@@ -16990,8 +16976,7 @@ msgstr "Nettovarallisuusennuste"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/views/khomeview_p.h:1567
-#, fuzzy, kde-format
-#| msgid "Budget"
+#, kde-format
 msgctxt "@title Home page section"
 msgid "Budget"
 msgstr "Budjetti"
@@ -18526,10 +18511,9 @@ msgstr "Tuotujen maksujen taustaväri "
 
 #. i18n: ectx: label, entry (transactionImportedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:190
-#, fuzzy, kde-format
-#| msgid "Background color for imported transactions"
+#, kde-format
 msgid "Text color for imported transactions"
-msgstr "Tuotujen maksujen taustaväri "
+msgstr "Tuotujen tapahtumien tekstiväri"
 
 #. i18n: ectx: label, entry (transactionMatchedColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:194
@@ -18539,10 +18523,9 @@ msgstr "Täsmättyjen maksujen taustaväri "
 
 #. i18n: ectx: label, entry (transactionMatchedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:198
-#, fuzzy, kde-format
-#| msgid "Background color for matched transactions"
+#, kde-format
 msgid "Text color for matched transactions"
-msgstr "Täsmättyjen maksujen taustaväri "
+msgstr "Täsmäävien tapahtumien tekstiväri"
 
 #. i18n: ectx: label, entry (transactionErroneousColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:202
@@ -18589,17 +18572,15 @@ msgstr "Piilota nollataseet"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:240
-#, fuzzy, kde-format
-#| msgid "Hide zero balance equities"
+#, kde-format
 msgid "Hide zero balance accounts from Accounts"
-msgstr "Piilota nollataseet"
+msgstr "Piilota tilinäkymässä nollasaldon tilit"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:244
-#, fuzzy, kde-format
-#| msgid "Hide zero balance equities"
+#, kde-format
 msgid "Hide zero balance accounts from Home"
-msgstr "Piilota nollataseet"
+msgstr "Piilota kotinäkymässä nollasaldon tilit"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:248
@@ -19079,7 +19060,7 @@ msgstr "Valitse tälle toimenpiteelle arvopaperi"
 msgctxt "@info:tooltip"
 msgid ""
 "Transaction is not balanced. Either correct values or assign an account."
-msgstr ""
+msgstr "Tapahtuma ei ole tasapainossa. Korjaa joko arvot tai osoita tili."
 
 #. i18n: ectx: property (toolTip), widget (AmountEdit, priceAmountEdit)
 #: kmymoney/views/investtransactioneditor.ui:26
@@ -19178,16 +19159,16 @@ msgstr "Tyhjä muistio"
 msgctxt "@info %2 contains list of account names separated by <br>"
 msgid "<qt>Closed account:<br><br>%2</qt>"
 msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<qt>Suljettu tili:<br><br>%2</qt>"
+msgstr[1] "<qt>Suljetut tilit:<br><br>%2</qt>"
 
 #: kmymoney/views/journaldelegate.cpp:348
-#, fuzzy, kde-format
-#| msgid "Cannot remove transaction that references a closed account."
+#, kde-format
 msgctxt "@info Unable to edit "
 msgid ""
 "KMyMoney does not support to edit transaction that reference closed accounts."
-msgstr "Suljettuun tiliin viittaavaa tapahtumaa ei voida poistaa."
+msgstr ""
+"KMyMoney ei tue suljettuihin tileihin viittaavien tapahtumien muokkausta."
 
 #: kmymoney/views/journaldelegate.cpp:350
 #, fuzzy, kde-format
@@ -19468,6 +19449,9 @@ msgid ""
 "adjust the next due date after each such change.<br><i>Note:</i> This "
 "information will only be shown once for this schedule's edit session.</qt>"
 msgstr ""
+"<qt>Aikataulun tapahtumaväliä on muutettu.<br>Muista tarkistaa seuraava "
+"eräpäivä tällaisten muutosten jälkeen.<br><i>Huom!</i> Tämä varoitus "
+"näytetään vain kerran aikataulun tässä muokkausistunnossa.</qt>"
 
 #: kmymoney/views/keditscheduledlg.cpp:316
 #, fuzzy, kde-format
@@ -19571,6 +19555,9 @@ msgid ""
 "transaction will be adjusted instead when the schedule is entered with a "
 "modified amount.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Valitse tämä, ellet haluat muuttaa monivaluuttaisen "
+"tapahtuman luokan puolen summaa. Tapahtuman vaihtokurssia säädetään sen "
+"sijaan syötettäessä ajastusta muuttuneella summalla.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, keepMultiCurrencyAmount)
 #: kmymoney/views/keditscheduledlg.ui:238
@@ -19718,8 +19705,7 @@ msgid "Payment Accounts"
 msgstr "Maksutilit"
 
 #: kmymoney/views/khomeview_p.h:504
-#, fuzzy, kde-format
-#| msgid "Payment Accounts"
+#, kde-format
 msgctxt "@title Home page section"
 msgid "Payment Accounts"
 msgstr "Maksutilit"
@@ -19755,31 +19741,28 @@ msgid "Balance after"
 msgstr "Jäljelle jäävä saldo"
 
 #: kmymoney/views/khomeview_p.h:677
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title Home page section"
 msgid "Scheduled Payments"
-msgstr "Aikataulu"
+msgstr "Ajastetut maksut"
 
 #: kmymoney/views/khomeview_p.h:685
-#, fuzzy, kde-format
-#| msgid "Overdue payments"
+#, kde-format
 msgctxt "@title Home page sub-section"
 msgid "Overdue payments"
 msgstr "Myöhässä olevat maksut"
 
 #: kmymoney/views/khomeview_p.h:721
-#, fuzzy, kde-format
-#| msgid "Payments to"
+#, kde-format
 msgctxt "@title Home page sub-section"
 msgid "Payments due today"
-msgstr "Maksut kenelle"
+msgstr "Tänään erääntyvät maksut"
 
 #: kmymoney/views/khomeview_p.h:736
-#, fuzzy, kde-format
-#| msgid "Future payments"
+#, kde-format
 msgctxt "@title Home page sub-section"
 msgid "Future payments"
-msgstr "Lähitulevaisuuden maksut"
+msgstr "Tulevat maksut"
 
 #: kmymoney/views/khomeview_p.h:799
 #, kde-format
@@ -19840,8 +19823,7 @@ msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr "Käytettävissä"
 
 #: kmymoney/views/khomeview_p.h:1103
-#, fuzzy, kde-format
-#| msgid "Favorite Reports"
+#, kde-format
 msgctxt "@title Home page section"
 msgid "Favorite Reports"
 msgstr "Suosikkiraportit"
@@ -20007,11 +19989,10 @@ msgid "Expected Profit/Loss"
 msgstr "Odotettu netto / tappio"
 
 #: kmymoney/views/kinstitutionsview.cpp:251
-#, fuzzy, kde-format
-#| msgid "Edit institution..."
+#, kde-format
 msgctxt "@info:title Dialog title"
 msgid "Edit Institution"
-msgstr "Muokkaa rahalaitosta…"
+msgstr "Muokkaa rahalaitosta"
 
 #: kmymoney/views/kinstitutionsview.cpp:258
 #, kde-format
@@ -20029,11 +20010,10 @@ msgid "<p>Do you really want to delete the institution <b>%1</b>?</p>"
 msgstr "<p>Haluatko varmasti poistaa rahalaitoksen <b>%1</b> ?</p>"
 
 #: kmymoney/views/kinstitutionsview.cpp:276
-#, fuzzy, kde-format
-#| msgid "Delete institution..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete institution"
-msgstr "Poista rahalaitos…"
+msgstr "Poista rahalaitos"
 
 #: kmymoney/views/kinstitutionsview.cpp:287
 #: kmymoney/views/kinstitutionsview.cpp:290
@@ -20070,10 +20050,9 @@ msgstr "Pääomat"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/views/kinvestmentview.ui:44
-#, fuzzy, kde-format
-#| msgid "Select new investment type"
+#, kde-format
 msgid "Select investment account:"
-msgstr "Valitse uusi sijoitustyyppi"
+msgstr "Valitse sijoitustili:"
 
 #. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
 #: kmymoney/views/kinvestmentview.ui:80
@@ -20171,11 +20150,10 @@ msgstr ""
 "maksunsaajien käyttöä ei suositella. Haluatko muuttaa maksunsaajan nimeä?"
 
 #: kmymoney/views/kpayeesview.cpp:159
-#, fuzzy, kde-format
-#| msgid "Duplicate open"
+#, kde-format
 msgctxt "@title:window"
 msgid "Duplicate payee name"
-msgstr "Kahdesti avattu."
+msgstr "Toistuva maksunsaajan nimi"
 
 #: kmymoney/views/kpayeesview.cpp:183 kmymoney/views/kpayeesview.cpp:410
 #: kmymoney/views/kpayeesview.cpp:433
@@ -20377,7 +20355,7 @@ msgstr "Täsmäys"
 #: kmymoney/views/kpayeesview.ui:519
 #, kde-format
 msgid "\\d+-\\d+-\\d+"
-msgstr ""
+msgstr "\\d+-\\d+-\\d+"
 
 #. i18n: ectx: property (text), widget (QLabel, idPatternLabel)
 #: kmymoney/views/kpayeesview.ui:526
@@ -20388,10 +20366,9 @@ msgstr "Tunniste"
 
 #. i18n: ectx: property (text), widget (QLabel, urlTemplateLabel)
 #: kmymoney/views/kpayeesview.ui:533
-#, fuzzy, kde-format
-#| msgid "Templates"
+#, kde-format
 msgid "Url template"
-msgstr "Pohjat"
+msgstr "Verkko-osoitemalli"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_3)
 #: kmymoney/views/kpayeesview.ui:548
@@ -20402,23 +20379,21 @@ msgstr "Täsmäys"
 
 #. i18n: ectx: property (text), widget (QLabel, label_1)
 #: kmymoney/views/kpayeesview.ui:563
-#, fuzzy, kde-format
-#| msgid "[No identifier]"
+#, kde-format
 msgid "Enter identifier"
-msgstr "[Ei tunnistetta]"
+msgstr "Syötä tunniste"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/views/kpayeesview.ui:570
 #, kde-format
 msgid "Captured result"
-msgstr ""
+msgstr "Kaapattu tulos"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: kmymoney/views/kpayeesview.ui:580
-#, fuzzy, kde-format
-#| msgid "Result"
+#, kde-format
 msgid "Resulting URL"
-msgstr "Tulos"
+msgstr "Tulosverkko-osoite"
 
 #. i18n: ectx: property (text), widget (QLabel, m_leftLabel)
 #. i18n: ectx: property (text), widget (QLabel, m_centerLabel)
@@ -20497,8 +20472,7 @@ msgid "Search"
 msgstr "Etsi"
 
 #: kmymoney/views/kpayeesview_p.h:187
-#, fuzzy, kde-format
-#| msgid "Add"
+#, kde-format
 msgctxt ""
 "@action:button Replacement for Add button on match tab to avoid duplicate "
 "assignment of Alt+A"
@@ -20559,11 +20533,10 @@ msgstr ""
 "uudelleen."
 
 #: kmymoney/views/kscheduledview.cpp:189
-#, fuzzy, kde-format
-#| msgid "Delete schedule..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
-msgstr "Poista ajoitettu tapahtuma..."
+msgstr "Poista ajastus"
 
 #: kmymoney/views/kscheduledview.cpp:197
 #, kde-format
@@ -20601,11 +20574,10 @@ msgid "Filter"
 msgstr "Suodatin"
 
 #: kmymoney/views/kscheduledview_p.h:104
-#, fuzzy, kde-format
-#| msgid "Schedule found"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "No schedules found"
-msgstr "Ajoitettu tapahtuma löytyi"
+msgstr "Ajastuksia ei löytynyt"
 
 #: kmymoney/views/kscheduledview_p.h:254
 #, kde-format
@@ -20622,11 +20594,10 @@ msgstr ""
 "kirjatakäsin myöhemmin."
 
 #: kmymoney/views/kscheduledview_p.h:256
-#, fuzzy, kde-format
-#| msgid "Enter schedule"
+#, kde-format
 msgctxt "@title:window"
 msgid "Stop entering schedule"
-msgstr "Kirjaa ajoitettu tapahtuma"
+msgstr "Lopeta ajastuksen syöttäminen"
 
 #: kmymoney/views/kscheduledview_p.h:355
 #, kde-format
@@ -20731,11 +20702,10 @@ msgstr ""
 "käyttämään. Haluatko varmasti muuttaa luokituksen nimen?"
 
 #: kmymoney/views/ktagsview.cpp:380
-#, fuzzy, kde-format
-#| msgid "Duplicate tag"
+#, kde-format
 msgctxt "@title:window"
 msgid "Duplicate tag name"
-msgstr "Olemassa oleva tunniste"
+msgstr "Toistuva luokituksen nimi"
 
 #: kmymoney/views/ktagsview.cpp:403 kmymoney/views/ktagsview.cpp:527
 #, kde-format
@@ -20985,11 +20955,10 @@ msgid "Never reconciled"
 msgstr "Ei koskaan yhteensovitettu"
 
 #: kmymoney/views/ledgerviewpage_p.h:142
-#, fuzzy, kde-format
-#| msgid "Investment value: %1%2"
+#, kde-format
 msgctxt "@label:textbox Total value of investment"
 msgid "Investment value: %1%2"
-msgstr "Sijoitusten arvo: %1%2"
+msgstr "Sijoituksen arvo: %1%2"
 
 #: kmymoney/views/ledgerviewpage_p.h:146
 #, kde-format
@@ -20998,6 +20967,8 @@ msgid ""
 "The value is calculated on the basis of the last available prices, may "
 "therefore not be up-to-date and may differ from the account balance."
 msgstr ""
+"Arvo lasketaan viimeksi saatavilla olleiden hintojen perusteella, joten se "
+"ei välttämättä ole ajantasainen ja voi poiketa tilin saldosta."
 
 #: kmymoney/views/ledgerviewpage_p.h:149
 #: kmymoney/views/reconciliationledgerviewpage.cpp:443
@@ -21058,6 +21029,8 @@ msgid ""
 "Selection of category or account is not possible when split transactions are "
 "part of the selection."
 msgstr ""
+"Luokan tai tilin valinta ei ole mahdollista, kun valinnan osana on jaettuja "
+"tapahtumia."
 
 #: kmymoney/views/multitransactioneditor.cpp:740
 #, kde-format
@@ -21579,7 +21552,7 @@ msgstr "Palaa oletuksiin"
 #, kde-format
 msgctxt "@action:inmenu Open tab order dialog"
 msgid "Tab Order List..."
-msgstr ""
+msgstr "Sarkausjärjestysluettelo…"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, TabOrderEditor)
 #: kmymoney/views/tabordereditor.ui:14
@@ -25654,10 +25627,9 @@ msgstr ""
 "kirjanpitosi mukauttamiseen.</p>"
 
 #: tools/kmmreport-export.cpp:116
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export KMyMoney reports"
-msgstr "Vie raportti"
+msgstr "Vie KMyMoney-raportteja"
 
 #: tools/kmmreport-export.cpp:120
 #, kde-format
@@ -25670,10 +25642,9 @@ msgid "Export in HTML format"
 msgstr "Vie HTML-muotoon"
 
 #: tools/kmmreport-export.cpp:126
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export in xml format"
-msgstr "Vie raportti"
+msgstr "Vie XML-muotoon"
 
 #: tools/kmmreport-export.cpp:129
 #, kde-format
@@ -25693,19 +25664,17 @@ msgstr ""
 #: tools/kmmreport-export.cpp:138
 #, kde-format
 msgid "Use query table for exporting (default)"
-msgstr ""
+msgstr "Käytä vientiin kyselytaulukkoa (oletus)"
 
 #: tools/kmmreport-export.cpp:141
-#, fuzzy, kde-format
-#| msgid "Old Customized Reports"
+#, kde-format
 msgid "List all custom reports"
-msgstr "Vanhat, mukautetut raportit"
+msgstr "Luettele kaikki mukautetut raportit"
 
 #: tools/kmmreport-export.cpp:144
-#, fuzzy, kde-format
-#| msgid "Unable to generate report"
+#, kde-format
 msgid "Filename for generated output"
-msgstr "Raporttia ei voitu generoida"
+msgstr "Luodun tulosteen tiedostonimi"
 
 #: tools/kmmreport-export.cpp:147
 #, kde-format
