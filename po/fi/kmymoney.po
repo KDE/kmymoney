@@ -3,7 +3,7 @@
 # KDE Finnish translation sprint participants:
 # Author: Artnay
 # Author: Lliehu
-# SPDX-FileCopyrightText: 2019, 2020, 2021, 2022, 2023, 2024 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2019, 2020, 2021, 2022, 2023, 2024, 2025 Tommi Nieminen <translator@legisign.org>
 # Mikael Kujanpää <mikael.kujanpaa@iki.fi>, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2020, 2021.
 # Raimo Ikonen <raimo.ikonen@innotronics.fi>, 2008, 2009, 2010.
 # Marko Suvila <marko.suvila@gmail.com>, 2008, 2009.
@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-04 03:41+0000\n"
-"PO-Revision-Date: 2024-10-29 13:59+0200\n"
+"PO-Revision-Date: 2025-02-21 17:01+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -6648,16 +6648,14 @@ msgid "Saving file..."
 msgstr "Tiedostoa tallennetaan…"
 
 #: kmymoney/kmymoney.cpp:3513
-#, fuzzy, kde-format
-#| msgid "Failed to save your storage."
+#, kde-format
 msgid "Failed to save your data."
-msgstr "Tallennus epäonnistui."
+msgstr "Tiedon tallennus epäonnistui."
 
 #: kmymoney/kmymoney.cpp:3519
-#, fuzzy, kde-format
-#| msgid "Couldn't find suitable plugin to save your storage."
+#, kde-format
 msgid "Couldn't find suitable plugin to save your data."
-msgstr "Varaston tallentamiseen sopivaa liitännäistä ei löytynyt."
+msgstr "Tiedon tallentamiseen ei löytynyt sopivaa liitännäistä."
 
 #: kmymoney/kmymoney.cpp:3525
 #, kde-format
@@ -6665,10 +6663,9 @@ msgid "Saving file as...."
 msgstr "Tiedostoa tallennetaan nimellä…"
 
 #: kmymoney/kmymoney.cpp:3541
-#, fuzzy, kde-format
-#| msgid "Couldn't find any plugin for saving storage."
+#, kde-format
 msgid "Couldn't find any plugin for saving data."
-msgstr "Tarvittavaa liitännäistä ei löytynyt tämän varaston tallentamiseksi."
+msgstr "Tiedon tallentamiseen ei löytynyt liitännäisiä."
 
 #: kmymoney/kmymoney.cpp:3570
 #, kde-format
@@ -20094,7 +20091,7 @@ msgstr "Tiliä ei voitu suodattaa"
 
 #: kmymoney/views/kscheduledview.cpp:312 kmymoney/views/kscheduledview.cpp:327
 #: kmymoney/views/kscheduledview_p.h:190
-#, fuzzy, kde-format
+#, kde-format
 msgid "Bills"
 msgstr "Laskut"
 
@@ -20108,7 +20105,7 @@ msgstr "Talletukset"
 
 #: kmymoney/views/kscheduledview.cpp:318 kmymoney/views/kscheduledview.cpp:333
 #: kmymoney/views/kscheduledview_p.h:206
-#, fuzzy, kde-format
+#, kde-format
 msgid "Loans"
 msgstr "Lainat"
 
@@ -20510,10 +20507,9 @@ msgid "* Im-/Exporter"
 msgstr "* Im-/Viejä"
 
 #: kmymoney/views/kwelcomepage.cpp:237
-#, fuzzy, kde-format
-#| msgid "- Added support for Weboob"
+#, kde-format
 msgid "- Added support for Woob"
-msgstr "- Lisätty tuki Weboobille"
+msgstr "– Lisätty tuki Woobille"
 
 #: kmymoney/views/kwelcomepage.cpp:238
 #, kde-format
@@ -24665,13 +24661,13 @@ msgstr "Rahalaitoksen nimi jolle tili on avattu."
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, m_institutionNumberEdit)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:59
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "Each institution has a routing number. Enter it here. If uncertain, leave "
 "the field blank. You can modify it later."
 msgstr ""
-"Jokaisella rahalaitoksella on reittinumero. Syötä se tähän. Jos olet "
-"epävarma, jätä kenttä tyhjäksi. Sitä voidaan muuttaa myöhemmin."
+"Kullakin rahalaitoksella on reititysnumero. Syötä se tähän. Jos olet "
+"epävarma, jätä tyhjäksi. Sitä voi muuttaa myöhemmin."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:66
