@@ -416,10 +416,13 @@ public:
             MyMoneyReport report = model->itemByIndex(idx);
             unsigned qc = report.queryColumns();
             if (report.isInvestmentsOnly() || report.isLoansOnly()) {
-                if (report.isConvertCurrency() && !(qc & eMyMoney::Report::QueryColumn::Price)) {
-                    qc |= eMyMoney::Report::QueryColumn::Price;
+                if (report.isConvertCurrency() && (qc & eMyMoney::Report::QueryColumn::Price)) {
+                    qc &= ~eMyMoney::Report::QueryColumn::Price;
                     report.setQueryColumns((eMyMoney::Report::QueryColumn)qc);
                 }
+            } else if (report.isConvertCurrency() && !(qc & eMyMoney::Report::QueryColumn::Price)) {
+                qc |= eMyMoney::Report::QueryColumn::Price;
+                report.setQueryColumns((eMyMoney::Report::QueryColumn)qc);
             }
             file->modifyReport(report);
             ++count;

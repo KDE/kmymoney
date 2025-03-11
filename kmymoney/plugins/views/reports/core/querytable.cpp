@@ -197,6 +197,7 @@ void QueryTable::init()
     if (qc & eMyMoney::Report::QueryColumn::Performance) {
         m_subtotal.clear();
         m_priceColumn.clear();
+        m_columns.removeAll(ctPrice);
         switch (m_config.investmentSum()) {
         case eMyMoney::Report::InvestmentSum::OwnedAndSold:
             m_columns << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingMarketValue << ctExtendedInternalRateOfReturn << ctReturnInvestment
@@ -222,10 +223,10 @@ void QueryTable::init()
                        << ctExtendedInternalRateOfReturn << ctReturnInvestment << ctAnnualizedReturn;
             break;
         }
-    }
-    if (qc & eMyMoney::Report::QueryColumn::CapitalGain) {
+    } else if (qc & eMyMoney::Report::QueryColumn::CapitalGain) {
         m_subtotal.clear();
         m_priceColumn.clear();
+        m_columns.removeAll(ctPrice);
         switch (m_config.investmentSum()) {
         case eMyMoney::Report::InvestmentSum::Owned:
             m_columns << ctShares << ctBuyPrice << ctBuys << ctLastPrice << ctEndingMarketValue << ctPercentageGain << ctCapitalGain;
@@ -243,13 +244,10 @@ void QueryTable::init()
             }
             break;
         }
-    }
-    if (qc & eMyMoney::Report::QueryColumn::Loan) {
+    } else if (qc & eMyMoney::Report::QueryColumn::Loan) {
         m_columns << ctPayment << ctInterest << ctFees << m_priceColumn;
         m_postcolumns << ctBalance;
-    }
-
-    if (!m_columns.contains(ctPrice))
+    } else if (!m_columns.contains(ctPrice))
         m_columns << m_priceColumn;
 
     if (qc & eMyMoney::Report::QueryColumn::Balance)
