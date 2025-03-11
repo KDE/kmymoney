@@ -1778,6 +1778,8 @@ public:
     bool hasValidId (const MyMoneyAccount& acc) const;
     bool hasValidId (const MyMoneyPayee& payee) const;
 
+    bool applyFileFixes(bool expertMode);
+
 protected:
     /**
       * This is the constructor for a new empty file description

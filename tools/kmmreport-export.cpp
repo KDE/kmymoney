@@ -180,6 +180,7 @@ int main(int argc, char** argv)
         reader.setFile(MyMoneyFile::instance());
         reader.read(&f);
         f.close();
+        MyMoneyFile::instance()->applyFileFixes(false);
 
         for (const auto& report : MyMoneyFile::instance()->reportList()) {
             if (!options.useReportName.isEmpty() && options.useReportName != report.name())

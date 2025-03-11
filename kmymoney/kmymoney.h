@@ -376,6 +376,8 @@ public:
 
     void consistencyCheck(bool alwaysDisplayResult);
 
+    void applyFileFixes() const;
+
 protected:
     /** save general Options like all bar positions and status as well as the geometry and the recent file list to the configuration
      * file
