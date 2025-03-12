@@ -43,7 +43,7 @@ WoobInterface::WoobInterface()
 
     Py_Initialize();
     qDebug() << "Python interpreter found:" << Py_GetVersion();
-#if PY_VERSION_HEX < 0x03130000
+#if PY_VERSION_HEX < 0x030d0000
     qDebug() << "Python interpreter module search paths:" << QString::fromWCharArray(Py_GetPath());
 #endif
 
