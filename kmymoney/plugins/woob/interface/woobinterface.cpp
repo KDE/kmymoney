@@ -14,6 +14,7 @@
 #pragma push_macro("slots")
 #undef slots
 #include <Python.h>
+#include <patchlevel.h>
 #pragma pop_macro("slots")
 
 #include <memory>
@@ -42,7 +43,9 @@ WoobInterface::WoobInterface()
 
     Py_Initialize();
     qDebug() << "Python interpreter found:" << Py_GetVersion();
+#if PY_VERSION_HEX < 0x03130000
     qDebug() << "Python interpreter module search paths:" << QString::fromWCharArray(Py_GetPath());
+#endif
 
     const auto scriptResourceName = ":/plugins/woob/kmymoneywoob.py";
     auto nativeScript = std::unique_ptr<QTemporaryFile>(QTemporaryFile::createNativeFile(scriptResourceName));
