@@ -740,11 +740,11 @@ public:
                 file->modifyTransaction(transaction);
             }
 
-            bool isLoan = false;
             // Determine default action
             if (transaction.splitCount() == 2) {
                 // check for transfer
                 int accountCount = 0;
+                bool isLoan = false;
                 MyMoneyMoney val;
                 for (const auto& split : splits) {
                     auto acc = file->account(split.accountId());
@@ -848,7 +848,7 @@ public:
         }
     }
 
-    void fixDuplicateAccounts_0(MyMoneyTransaction& t)
+    void fixDuplicateAccounts_0(const MyMoneyTransaction& t)
     {
         qDebug("Duplicate account in transaction %s", qPrintable(t.id()));
     }
