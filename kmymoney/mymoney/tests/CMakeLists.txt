@@ -9,6 +9,8 @@ target_link_libraries(kmm_testutils
 
 file(GLOB tests_sources "*-test.cpp")
 ecm_add_tests(${tests_sources}
+  ENV
+    "LANG=C"
   LINK_LIBRARIES
     Qt::Core
     Qt::Test
