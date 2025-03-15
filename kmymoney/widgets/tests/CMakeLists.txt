@@ -13,7 +13,7 @@ target_link_libraries(testwidgets PUBLIC
 )
 
 file(GLOB tests_sources "*-test.cpp")
-ecm_add_tests(${tests_sources}
+kmm_add_tests(${tests_sources}
   LINK_LIBRARIES
     Qt::Gui
     Qt::Core

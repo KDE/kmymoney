@@ -11,7 +11,7 @@ target_link_libraries(csvimport_testcommon
 )
 
 file(GLOB tests_sources "*-test.cpp")
-ecm_add_tests(${tests_sources}
+kmm_add_tests(${tests_sources}
   NAME_PREFIX
     "csvimport-"
   LINK_LIBRARIES

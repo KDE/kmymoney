@@ -99,6 +99,7 @@ include(CMakeDependentOption)
 
 include(GenerateExportHeader)
 include(KMyMoneyMacros)
+set(KMM_ADD_TESTS_ENVIRONMENT "LANG=C")
 
 include(KDEGitCommitHooks)
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
