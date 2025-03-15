@@ -24784,15 +24784,3 @@ msgstr ""
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr ""
-
-#~ msgid ""
-#~ "<p>The account \"%1\" was previously created as loan account but some "
-#~ "information is missing.</p><p>The new loan wizard will be started to "
-#~ "collect all relevant information.</p><p>Please use KMyMoney version 0.8.7 "
-#~ "or later and earlier than version 0.9 to correct the problem.</p>"
-#~ msgstr ""
-#~ "账户“%1”之前作为贷款账户被创建，但是缺少必要的信息。将会启动新贷款向导以收"
-#~ "集所有相关的信息。 请使用版本号>=0.8.7并且<0.9的KMyMoney来解决该问题。"
-
-#~ msgid "Account problem"
-#~ msgstr "账户问题"
