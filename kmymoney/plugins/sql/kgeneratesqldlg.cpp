@@ -168,7 +168,7 @@ int  KGenerateSqlDlg::exec()
             == KMessageBox::PrimaryAction) {
             KHelpClient::invokeHelp("details.database.usage");
         }
-        return (1);
+        return 1;
     }
     d->ui->listDrivers->clear();
     d->ui->listDrivers->addItems(d->m_supportedDrivers);

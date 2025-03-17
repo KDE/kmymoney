@@ -195,13 +195,14 @@ int MyMoneyStorageSql::open(const QUrl &url, int openMode, bool clear)
         default:
             qWarning("%s", qPrintable(QString("%1 - unknown open mode %2").arg(Q_FUNC_INFO).arg(openMode)));
         }
-        if (rc != 0) return (rc);
+        if (rc != 0)
+            return rc;
         // bypass logon check if we are creating a database
         if (d->m_newDatabase) {
             d->m_logonUser = url.userName() + '@' + url.host();
             d->m_logonAt = QDateTime::currentDateTime();
             d->writeFileInfo();
-            return(0);
+            return 0;
         }
         // check if the database is locked, if not lock it
         d->readFileInfo();
@@ -217,10 +218,10 @@ int MyMoneyStorageSql::open(const QUrl &url, int openMode, bool clear)
             d->m_logonUser = url.userName() + '@' + url.host();
             d->m_logonAt = QDateTime::currentDateTime();
         }
-        return(rc);
+        return rc;
     } catch (const QString& s) {
         qDebug("%s", qPrintable(s));
-        return (1);
+        return 1;
     }
 }
 

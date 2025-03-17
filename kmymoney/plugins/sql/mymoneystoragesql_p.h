@@ -2116,7 +2116,7 @@ public:
         if (!query.exec() || !query.next()) { // krazy:exclude=crashy
             if (!m_newDatabase) {
                 buildError(query, Q_FUNC_INFO, "Error retrieving file info (version)");
-                return(1);
+                return 1;
             } else {
                 m_dbVersion = m_db.currentVersion();
                 const auto fixVersion = QString("%1").arg(m_file->availableFixVersion());
@@ -2128,9 +2128,9 @@ public:
                 query2.bindValue(":fixLevel", fixVersion);
                 if (!query2.exec()) { // krazy:exclude=crashy
                     buildError(query2, Q_FUNC_INFO, "Error updating file info(version)");
-                    return(1);
+                    return 1;
                 }
-                return (0);
+                return 0;
             }
         }
         // prior to dbv6, 'version' format was 'dbversion.fixLevel+1'
@@ -2145,7 +2145,7 @@ public:
             query.prepare("SELECT fixLevel FROM kmmFileInfo;");
             if (!query.exec() || !query.next()) { // krazy:exclude=crashy
                 buildError(query, Q_FUNC_INFO, "Error retrieving file info (fixLevel)");
-                return(1);
+                return 1;
             }
             fixVersion = query.value(0).toString();
         }
@@ -2174,51 +2174,63 @@ public:
             query.finish();
             switch (m_dbVersion) {
             case 0:
-                if ((rc = upgradeToV1()) != 0) return (1);
+                if ((rc = upgradeToV1()) != 0)
+                    return 1;
                 ++m_dbVersion;
                 break;
             case 1:
-                if ((rc = upgradeToV2()) != 0) return (1);
+                if ((rc = upgradeToV2()) != 0)
+                    return 1;
                 ++m_dbVersion;
                 break;
             case 2:
-                if ((rc = upgradeToV3()) != 0) return (1);
+                if ((rc = upgradeToV3()) != 0)
+                    return 1;
                 ++m_dbVersion;
                 break;
             case 3:
-                if ((rc = upgradeToV4()) != 0) return (1);
+                if ((rc = upgradeToV4()) != 0)
+                    return 1;
                 ++m_dbVersion;
                 break;
             case 4:
-                if ((rc = upgradeToV5()) != 0) return (1);
+                if ((rc = upgradeToV5()) != 0)
+                    return 1;
                 ++m_dbVersion;
                 break;
             case 5:
-                if ((rc = upgradeToV6()) != 0) return (1);
+                if ((rc = upgradeToV6()) != 0)
+                    return 1;
                 ++m_dbVersion;
                 break;
             case 6:
-                if ((rc = upgradeToV7()) != 0) return (1);
+                if ((rc = upgradeToV7()) != 0)
+                    return 1;
                 ++m_dbVersion;
                 break;
             case 7:
-                if ((rc = upgradeToV8()) != 0) return (1);
+                if ((rc = upgradeToV8()) != 0)
+                    return 1;
                 ++m_dbVersion;
                 break;
             case 8:
-                if ((rc = upgradeToV9()) != 0) return (1);
+                if ((rc = upgradeToV9()) != 0)
+                    return 1;
                 ++m_dbVersion;
                 break;
             case 9:
-                if ((rc = upgradeToV10()) != 0) return (1);
+                if ((rc = upgradeToV10()) != 0)
+                    return 1;
                 ++m_dbVersion;
                 break;
             case 10:
-                if ((rc = upgradeToV11()) != 0) return (1);
+                if ((rc = upgradeToV11()) != 0)
+                    return 1;
                 ++m_dbVersion;
                 break;
             case 11:
-                if ((rc = upgradeToV12()) != 0) return (1);
+                if ((rc = upgradeToV12()) != 0)
+                    return 1;
                 ++m_dbVersion;
                 break;
             default:
@@ -2246,10 +2258,10 @@ public:
         query.bindValue(":version", m_dbVersion);
         if (!query.exec()) { // krazy:exclude=crashy
             buildError(query, Q_FUNC_INFO, "Error updating db version");
-            return (1);
+            return 1;
         }
         //signalProgress(-1,-1);
-        return (0);
+        return 0;
     }
 
     int upgradeToV1()
@@ -2260,22 +2272,22 @@ public:
         // change kmmSplits pkey to (transactionId, splitId)
         if (!query.exec("ALTER TABLE kmmSplits ADD PRIMARY KEY (transactionId, splitId);")) { // krazy:exclude=crashy
             buildError(query, Q_FUNC_INFO, "Error updating kmmSplits pkey");
-            return (1);
+            return 1;
         }
         // change kmmSplits alter checkNumber varchar(32)
         if (!query.exec(m_db.m_tables["kmmSplits"].modifyColumnString(m_driver, "checkNumber", // krazy:exclude=crashy
                         MyMoneyDbColumn("checkNumber", "varchar(32)")))) {
             buildError(query, Q_FUNC_INFO, "Error expanding kmmSplits.checkNumber");
-            return (1);
+            return 1;
         }
         // change kmmSplits add postDate datetime
         if (!alterTable(m_db.m_tables["kmmSplits"], m_dbVersion))
-            return (1);
+            return 1;
         // initialize it to same value as transaction (do it the long way round)
         query.prepare("SELECT id, postDate FROM kmmTransactions WHERE txType = 'N';");
         if (!query.exec()) { // krazy:exclude=crashy
             buildError(query, Q_FUNC_INFO, "Error priming kmmSplits.postDate");
-            return (1);
+            return 1;
         }
         QMap<QString, QDateTime> tids;
         while (query.next()) tids[query.value(0).toString()] = query.value(1).toDateTime();
@@ -2286,7 +2298,7 @@ public:
             query.bindValue(":id", it.key());
             if (!query.exec()) { // krazy:exclude=crashy
                 buildError(query, Q_FUNC_INFO, "priming kmmSplits.postDate");
-                return(1);
+                return 1;
             }
         }
         // add index to kmmKeyValuePairs to (kvpType,kvpId)
@@ -2294,39 +2306,39 @@ public:
         list << "kvpType" << "kvpId";
         if (!query.exec(MyMoneyDbIndex("kmmKeyValuePairs", "kmmKVPtype_id", list, false).generateDDL(m_driver) + ';')) {
             buildError(query, Q_FUNC_INFO, "Error adding kmmKeyValuePairs index");
-            return (1);
+            return 1;
         }
         // add index to kmmSplits to (accountId, txType)
         list.clear();
         list << "accountId" << "txType";
         if (!query.exec(MyMoneyDbIndex("kmmSplits", "kmmSplitsaccount_type", list, false).generateDDL(m_driver) + ';')) {
             buildError(query, Q_FUNC_INFO, "Error adding kmmSplits index");
-            return (1);
+            return 1;
         }
         // change kmmSchedulePaymentHistory pkey to (schedId, payDate)
         if (!query.exec("ALTER TABLE kmmSchedulePaymentHistory ADD PRIMARY KEY (schedId, payDate);")) {
             buildError(query, Q_FUNC_INFO, "Error updating kmmSchedulePaymentHistory pkey");
-            return (1);
+            return 1;
         }
         // change kmmPrices pkey to (fromId, toId, priceDate)
         if (!query.exec("ALTER TABLE kmmPrices ADD PRIMARY KEY (fromId, toId, priceDate);")) {
             buildError(query, Q_FUNC_INFO, "Error updating kmmPrices pkey");
-            return (1);
+            return 1;
         }
         // change kmmReportConfig pkey to (name)
         // There wasn't one previously, so no need to drop it.
         if (!query.exec("ALTER TABLE kmmReportConfig ADD PRIMARY KEY (name);")) {
             buildError(query, Q_FUNC_INFO, "Error updating kmmReportConfig pkey");
-            return (1);
+            return 1;
         }
         // change kmmFileInfo add budgets, hiBudgetId unsigned bigint
         // change kmmFileInfo add logonUser
         // change kmmFileInfo add logonAt datetime
         if (!alterTable(m_db.m_tables["kmmFileInfo"], m_dbVersion))
-            return (1);
+            return 1;
         // change kmmAccounts add transactionCount unsigned bigint as last field
         if (!alterTable(m_db.m_tables["kmmAccounts"], m_dbVersion))
-            return (1);
+            return 1;
         // calculate the transaction counts. the application logic defines an account's tx count
         // in such a way as to count multiple splits in a tx which reference the same account as one.
         // this is the only way I can think of to do this which will work in sqlite too.
@@ -2335,7 +2347,7 @@ public:
         query.prepare("SELECT id FROM kmmAccounts");
         if (!query.exec()) { // krazy:exclude=crashy
             buildError(query, Q_FUNC_INFO, "Error retrieving accounts for transaction counting");
-            return(1);
+            return 1;
         }
         while (query.next()) {
             m_transactionCountMap[query.value(0).toString()] = 0;
@@ -2343,7 +2355,7 @@ public:
         query.prepare("SELECT accountId, transactionId FROM kmmSplits WHERE txType = 'N' ORDER BY 1, 2");
         if (!query.exec()) { // krazy:exclude=crashy
             buildError(query, Q_FUNC_INFO, "Error retrieving splits for transaction counting");
-            return(1);
+            return 1;
         }
         QString lastAcc, lastTx;
         while (query.next()) {
@@ -2360,11 +2372,11 @@ public:
             query.bindValue(":id", itm.key());
             if (!query.exec()) { // krazy:exclude=crashy
                 buildError(query, Q_FUNC_INFO, "Error updating transaction count");
-                return (1);
+                return 1;
             }
         }
         m_transactionCountMap.clear();
-        return (0);
+        return 0;
     }
 
     int upgradeToV2()
@@ -2373,8 +2385,8 @@ public:
         MyMoneyDbTransaction t(*q, Q_FUNC_INFO);
         // change kmmSplits add price, priceFormatted fields
         if (!alterTable(m_db.m_tables["kmmSplits"], m_dbVersion))
-            return (1);
-        return (0);
+            return 1;
+        return 0;
     }
 
     int upgradeToV3()
@@ -2389,7 +2401,7 @@ public:
                                            MyMoneyDbIntColumn::SMALL, false, false, true)
                         .generateDDL(m_driver) + " DEFAULT 0;")) {
             buildError(query, Q_FUNC_INFO, "Error adding kmmSchedules.occurenceMultiplier");
-            return (1);
+            return 1;
         }
         //The default is less than any useful value, so as each schedule is hit, it will update
         //itself to the appropriate value.
@@ -2405,7 +2417,7 @@ public:
         QStringList list{"transactionId", "splitId"};
         if (!query.exec(MyMoneyDbIndex("kmmSplits", "kmmTx_Split", list, false).generateDDL(m_driver) + ';')) {
             buildError(query, Q_FUNC_INFO, "Error adding kmmSplits index on (transactionId, splitId)");
-            return (1);
+            return 1;
         }
         return 0;
     }
@@ -2416,13 +2428,13 @@ public:
         MyMoneyDbTransaction dbtrans(*q, Q_FUNC_INFO);
         // kmmSplits - add bankId
         if (!alterTable(m_db.m_tables["kmmSplits"], m_dbVersion))
-            return (1);
+            return 1;
         //kmmPayees - add columns "notes" "defaultAccountId" "matchData" "matchIgnoreCase" "matchKeys";
         if (!alterTable(m_db.m_tables["kmmPayees"], m_dbVersion))
-            return (1);
+            return 1;
         // kmmReportConfig - drop primary key on name since duplicate names are allowed
         if (!alterTable(m_db.m_tables["kmmReportConfig"], m_dbVersion))
-            return (1);
+            return 1;
         //}
         return 0;
     }
@@ -2434,14 +2446,14 @@ public:
         QSqlQuery query(*q);
         // kmmFileInfo - add fixLevel
         if (!alterTable(m_db.m_tables["kmmFileInfo"], m_dbVersion))
-            return (1);
+            return 1;
         // upgrade Mysql to InnoDB transaction-safe engine
         // the following is not a good way to test for mysql - think of a better way
         if (!m_driver->tableOptionString().isEmpty()) {
             for (QMap<QString, MyMoneyDbTable>::const_iterator tt = m_db.tableBegin(); tt != m_db.tableEnd(); ++tt) {
                 if (!query.exec(QString("ALTER TABLE %1 ENGINE = InnoDB;").arg(tt.value().name()))) {
                     buildError(query, Q_FUNC_INFO, "Error updating to InnoDB");
-                    return (1);
+                    return 1;
                 }
             }
         }
@@ -2452,7 +2464,7 @@ public:
         if (!query.exec("ALTER TABLE kmmReportConfig ADD COLUMN " +
                         MyMoneyDbColumn("id", "varchar(32)").generateDDL(m_driver) + ';')) {
             buildError(query, Q_FUNC_INFO, "adding id to report table");
-            return(1);
+            return 1;
         }
         QMap<QString, MyMoneyReport> reportList = q->fetchReports();
         // the V5 database allowed lots of duplicate reports with no
@@ -2461,11 +2473,11 @@ public:
         // so we now delete from the db and re-write them
         if (!query.exec("DELETE FROM kmmReportConfig;")) {
             buildError(query, Q_FUNC_INFO, "Error deleting reports");
-            return (1);
+            return 1;
         }
         // add unique id to reports table
         if (!alterTable(m_db.m_tables["kmmReportConfig"], m_dbVersion))
-            return(1);
+            return 1;
 
         QMap<QString, MyMoneyReport>::const_iterator it_r;
         for (it_r = reportList.cbegin(); it_r != reportList.cend(); ++it_r) {
@@ -2486,7 +2498,7 @@ public:
         // add tags support
         // kmmFileInfo - add tags and hiTagId
         if (!alterTable(m_db.m_tables["kmmFileInfo"], m_dbVersion))
-            return (1);
+            return 1;
 
         m_tags = 0;
         return 0;
@@ -2499,7 +2511,7 @@ public:
 
         // Added onlineJobs and payeeIdentifier
         if (!alterTable(m_db.m_tables["kmmFileInfo"], m_dbVersion))
-            return (1);
+            return 1;
 
         return 0;
     }
@@ -2511,7 +2523,7 @@ public:
 
         // kmmSplits - add bankId
         if (!alterTable(m_db.m_tables["kmmSplits"], m_dbVersion))
-            return (1);
+            return 1;
 
         return 0;
     }
@@ -2522,9 +2534,9 @@ public:
         MyMoneyDbTransaction dbtrans(*q, Q_FUNC_INFO);
 
         if (!alterTable(m_db.m_tables["kmmPayeesPayeeIdentifier"], m_dbVersion))
-            return (1);
+            return 1;
         if (!alterTable(m_db.m_tables["kmmAccountsPayeeIdentifier"], m_dbVersion))
-            return (1);
+            return 1;
 
         return 0;
     }
