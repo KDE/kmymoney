@@ -2233,6 +2233,11 @@ public:
                     return 1;
                 ++m_dbVersion;
                 break;
+            case 12:
+                if ((rc = upgradeToV13()) != 0)
+                    return 1;
+                ++m_dbVersion;
+                break;
             default:
                 qWarning("Unknown version number in database - %d", m_dbVersion);
             }
@@ -2585,6 +2590,42 @@ public:
             // add column pricePrecision to kmmCurrencies. Simply redo the update for 10 .. 11
             if (!alterTable(m_db.m_tables["kmmCurrencies"], m_dbVersion-1))
                 return 1;
+            break;
+        }
+        return 0;
+    }
+
+    int upgradeToV13()
+    {
+        Q_Q(MyMoneyStorageSql);
+        MyMoneyDbTransaction dbtrans(*q, Q_FUNC_INFO);
+
+        switch (haveColumnInTable(QLatin1String("kmmPayees"), QLatin1String("idPattern"))) {
+        case -1:
+            return 1;
+        case 1: // column exists, nothing to do
+            break;
+        case 0: // need update of kmmPayees
+            QSqlQuery query(*q);
+            if (!query.exec("ALTER TABLE kmmPayees ADD COLUMN "
+                            + MyMoneyDbTextColumn("idPattern", MyMoneyDbTextColumn::NORMAL, false, false, true).generateDDL(m_driver))) {
+                buildError(query, Q_FUNC_INFO, "Error adding kmmPayees.idPattern");
+                return 1;
+            }
+        }
+
+        switch (haveColumnInTable(QLatin1String("kmmPayees"), QLatin1String("urlTemplate"))) {
+        case -1:
+            return 1;
+        case 1: // column exists, nothing to do
+            break;
+        case 0: // need update of kmmPayees
+            QSqlQuery query(*q);
+            if (!query.exec("ALTER TABLE kmmPayees ADD COLUMN "
+                            + MyMoneyDbTextColumn("urlTemplate", MyMoneyDbTextColumn::NORMAL, false, false, true).generateDDL(m_driver))) {
+                buildError(query, Q_FUNC_INFO, "Error adding kmmPayees.urlTemplate");
+                return 1;
+            }
             break;
         }
         return 0;
