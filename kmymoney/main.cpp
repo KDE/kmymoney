@@ -125,6 +125,8 @@ int main(int argc, char *argv[])
     aboutData.setOrganizationDomain("kde.org");
     KAboutData::setApplicationData(aboutData);
 
+    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("kmymoney")));
+
     QStringList fileUrls;
     bool isNoCatchOption = false;
     bool isNoFileOption = false;
