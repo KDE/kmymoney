@@ -24,7 +24,7 @@
 #include <alkimia/alkvalue.h>
 
 //***************** THE CURRENT VERSION OF THE DATABASE LAYOUT ****************
-unsigned int MyMoneyDbDef::m_currentVersion = 12;
+unsigned int MyMoneyDbDef::m_currentVersion = 12; ///< @note keep in sync with MyMoneyFile::availableFixVersion()
 
 // ************************* Build table descriptions ****************************
 MyMoneyDbDef::MyMoneyDbDef()
