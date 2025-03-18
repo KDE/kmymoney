@@ -386,7 +386,12 @@ public:
                     m_file->setFileFixVersion(7);
                     break;
 
-                // add new levels above. Don't forget to increase currentFixVersion() for all
+                case 7:
+                    fixFile_7();
+                    m_file->setFileFixVersion(8);
+                    break;
+
+                // add new levels above. Don't forget to increase availableFixVersion() for all
                 // the storage backends this fix applies to
                 default:
                     throw MYMONEYEXCEPTION(QString::fromLatin1("Unknown fix level in input file"));
@@ -403,7 +408,7 @@ public:
        Instead, create a new function, fixFile_n, and modify the applyFileFixes()
        logic above to call it */
 
-    void fixFile_6()
+    void fixFile_7()
     {
         const auto file = MyMoneyFile::instance();
         const auto model = file->reportsModel();
@@ -419,8 +424,32 @@ public:
                 if (report.isConvertCurrency() && (qc & eMyMoney::Report::QueryColumn::Price)) {
                     qc &= ~eMyMoney::Report::QueryColumn::Price;
                     report.setQueryColumns((eMyMoney::Report::QueryColumn)qc);
+                    file->modifyReport(report);
+                    ++count;
                 }
             } else if (report.isConvertCurrency() && !(qc & eMyMoney::Report::QueryColumn::Price)) {
+                qc |= eMyMoney::Report::QueryColumn::Price;
+                report.setQueryColumns((eMyMoney::Report::QueryColumn)qc);
+                file->modifyReport(report);
+                ++count;
+            }
+        }
+        qDebug() << count << "reports(s) fixed in" << __FUNCTION__;
+    }
+
+    void fixFile_6()
+    {
+        const auto file = MyMoneyFile::instance();
+        const auto model = file->reportsModel();
+
+        // scan the reports and add price column if currency conversion is activated
+        auto count = 0;
+        const auto rows = model->rowCount();
+        for (int row = 0; row < rows; ++row) {
+            const auto idx = model->index(row, 0);
+            MyMoneyReport report = model->itemByIndex(idx);
+            unsigned qc = report.queryColumns();
+            if (report.isConvertCurrency() && !(qc & eMyMoney::Report::QueryColumn::Price)) {
                 qc |= eMyMoney::Report::QueryColumn::Price;
                 report.setQueryColumns((eMyMoney::Report::QueryColumn)qc);
             }
