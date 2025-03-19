@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-14 02:04+0000\n"
+"POT-Creation-Date: 2025-03-19 01:56+0000\n"
 "PO-Revision-Date: 2015-02-09 11:02+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -15189,7 +15189,7 @@ msgid ""
 "Please save your database under a new name."
 msgstr ""
 
-#: kmymoney/plugins/sql/mymoneystoragesql.cpp:209
+#: kmymoney/plugins/sql/mymoneystoragesql.cpp:210
 #, kde-format
 msgid ""
 "Database apparently in use\n"

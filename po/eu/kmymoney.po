@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-14 02:04+0000\n"
+"POT-Creation-Date: 2025-03-19 01:56+0000\n"
 "PO-Revision-Date: 2025-01-11 18:40+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -14606,7 +14606,7 @@ msgstr ""
 "oraindik.\n"
 "Mesedez gorde datu-basea beste izen batekin. "
 
-#: kmymoney/plugins/sql/mymoneystoragesql.cpp:209
+#: kmymoney/plugins/sql/mymoneystoragesql.cpp:210
 #, kde-format
 msgid ""
 "Database apparently in use\n"

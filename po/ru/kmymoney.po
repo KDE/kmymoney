@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-14 02:04+0000\n"
+"POT-Creation-Date: 2025-03-19 01:56+0000\n"
 "PO-Revision-Date: 2024-02-09 23:23+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -14789,7 +14789,7 @@ msgstr ""
 "Перезапись существующей базы данных зашифрованной ещё не поддерживается.\n"
 "Сохраните базу данных под новым именем."
 
-#: kmymoney/plugins/sql/mymoneystoragesql.cpp:209
+#: kmymoney/plugins/sql/mymoneystoragesql.cpp:210
 #, kde-format
 msgid ""
 "Database apparently in use\n"

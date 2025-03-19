@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-14 02:04+0000\n"
+"POT-Creation-Date: 2025-03-19 01:56+0000\n"
 "PO-Revision-Date: 2025-02-12 09:32+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -14786,7 +14786,7 @@ msgstr ""
 "chiffrée n'est pas encore pris en charge.\n"
 "Veuillez enregistrer votre base de données sous un nouveau nom."
 
-#: kmymoney/plugins/sql/mymoneystoragesql.cpp:209
+#: kmymoney/plugins/sql/mymoneystoragesql.cpp:210
 #, kde-format
 msgid ""
 "Database apparently in use\n"

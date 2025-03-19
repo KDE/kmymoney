@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-14 02:04+0000\n"
+"POT-Creation-Date: 2025-03-19 01:56+0000\n"
 "PO-Revision-Date: 2022-11-07 20:00+0100\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -14809,7 +14809,7 @@ msgstr ""
 "Datenbank wird noch nicht unterstützt.\n"
 "Bitte speichern Sie Ihre Datenbank unter einem anderen Namen."
 
-#: kmymoney/plugins/sql/mymoneystoragesql.cpp:209
+#: kmymoney/plugins/sql/mymoneystoragesql.cpp:210
 #, kde-format
 msgid ""
 "Database apparently in use\n"
