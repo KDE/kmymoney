@@ -105,7 +105,7 @@ macro(add_report_tests)
         set_tests_properties(${test_name}-${format}
           PROPERTIES
             SKIP_REGULAR_EXPRESSION "is missing" "SKIP" "Skipped"
-            ENVIRONMENT LANG=c
+            ENVIRONMENT LANG=C
           )
       endforeach()
     endwhile()
