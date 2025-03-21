@@ -154,7 +154,8 @@ void OnlineBalanceDelegate::paint(QPainter* painter, const QStyleOptionViewItem&
         onlineBalanceValueTxt = onlineBalanceValue.formatMoney(index.data(eMyMoney::Model::AccountFractionRole).toInt());
     }
 
-    KColorScheme::BackgroundRole role = (accountBalance == onlineBalanceValue) ? KColorScheme::PositiveBackground : KColorScheme::NegativeBackground;
+    KColorScheme::BackgroundRole role =
+        (accountBalance.abs() == onlineBalanceValue.abs()) ? KColorScheme::PositiveBackground : KColorScheme::NegativeBackground;
 
     KColorScheme::adjustBackground(opt.palette, role, QPalette::Base, KColorScheme::View, KSharedConfigPtr());
     opt.backgroundBrush = opt.palette.base();
