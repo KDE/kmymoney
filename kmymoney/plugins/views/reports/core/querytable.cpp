@@ -1237,6 +1237,7 @@ bool QueryTable::ROI(MyMoneyMoney& returnInvestment,
                      const MyMoneyMoney& endingBalance) const
 {
     Q_UNUSED(reinvestIncome);
+    // reinvestments are added to the endingBalance
     MyMoneyMoney allBuys = buys;
     MyMoneyMoney costs(startingBalance - allBuys);
     MyMoneyMoney income(sells + cashIncome + endingBalance);

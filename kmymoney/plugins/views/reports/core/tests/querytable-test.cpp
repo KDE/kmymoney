@@ -1126,6 +1126,34 @@ public:
         QCOMPARE(result2, QString());
     }
 
+    // https://bugs.kde.org/show_bug.cgi?id=396301
+    // Dividend paid out
+    void testHelperROI2()
+    {
+        MyMoneyMoney buys(-1200);
+        MyMoneyMoney sells(1000);
+        MyMoneyMoney reinvestedDividend(0);
+        MyMoneyMoney dividendsPaidOut(150);
+        MyMoneyMoney startingBalance(0);
+        MyMoneyMoney endingBalance(200);
+        QString result1 = helperROI(buys, sells, reinvestedDividend, dividendsPaidOut, startingBalance, endingBalance);
+        QCOMPARE(result1, MyMoneyMoney(125, 1000).convert(10000).toString());
+    }
+
+    // https://bugs.kde.org/show_bug.cgi?id=396301
+    // Dividend reinvested
+    void testHelperROI3()
+    {
+        MyMoneyMoney buys(-1200);
+        MyMoneyMoney sells(1000);
+        MyMoneyMoney reinvestedDividend(150);
+        MyMoneyMoney dividendsPaidOut(0);
+        MyMoneyMoney startingBalance(0);
+        MyMoneyMoney endingBalance(350);
+        QString result1 = helperROI(buys, sells, reinvestedDividend, dividendsPaidOut, startingBalance, endingBalance);
+        QCOMPARE(result1, MyMoneyMoney(125, 1000).convert(10000).toString());
+    }
+
     void testHelperXIRR()
     {
         // see https://help.libreoffice.org/latest/de/text/scalc/01/04060118.html
@@ -1154,6 +1182,16 @@ void QueryTableTest::testROI()
     try {
         QueryTableProtectedTester().testHelperROI();
     } catch (const MyMoneyException &e) {
+        QFAIL(e.what());
+    }
+    try {
+        QueryTableProtectedTester().testHelperROI2();
+    } catch (const MyMoneyException& e) {
+        QFAIL(e.what());
+    }
+    try {
+        QueryTableProtectedTester().testHelperROI3();
+    } catch (const MyMoneyException& e) {
         QFAIL(e.what());
     }
 }
