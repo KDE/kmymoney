@@ -668,8 +668,8 @@ void QueryTableTest::testInvestment()
 
         QVERIFY(rows.count() == 5);
         QVERIFY(MyMoneyMoney(rows[0][ListTable::ctExtendedInternalRateOfReturn]) == MyMoneyMoney("669/10000"));
-        QVERIFY(MyMoneyMoney(rows[0][ListTable::ctReturn]) == MyMoneyMoney("-1700/1"));
-        QVERIFY(MyMoneyMoney(rows[0][ListTable::ctReturnInvestment]) == MyMoneyMoney("-39/5000"));
+        QVERIFY(MyMoneyMoney(rows[0][ListTable::ctReturn]) == MyMoneyMoney("7300/1"));
+        QVERIFY(MyMoneyMoney(rows[0][ListTable::ctReturnInvestment]) == MyMoneyMoney("87/2500"));
         QVERIFY(MyMoneyMoney(rows[0][ListTable::ctBuys]) == MyMoneyMoney(-210000.00));
         QVERIFY(MyMoneyMoney(rows[0][ListTable::ctSells]) == MyMoneyMoney(44000.00));
         QVERIFY(MyMoneyMoney(rows[0][ListTable::ctReinvestIncome]) == MyMoneyMoney(9000.00));

@@ -1221,7 +1221,8 @@ MyMoneyMoney QueryTable::returnValue(const MyMoneyMoney& buys,
                                      const MyMoneyMoney& startingBalance,
                                      const MyMoneyMoney& endingBalance) const
 {
-    MyMoneyMoney allBuys = buys - reinvestIncome;
+    Q_UNUSED(reinvestIncome);
+    MyMoneyMoney allBuys = buys;
     MyMoneyMoney costs(startingBalance - allBuys);
     MyMoneyMoney income(sells + cashIncome + endingBalance);
     return income - costs;
@@ -1235,7 +1236,8 @@ bool QueryTable::ROI(MyMoneyMoney& returnInvestment,
                      const MyMoneyMoney& startingBalance,
                      const MyMoneyMoney& endingBalance) const
 {
-    MyMoneyMoney allBuys = buys - reinvestIncome;
+    Q_UNUSED(reinvestIncome);
+    MyMoneyMoney allBuys = buys;
     MyMoneyMoney costs(startingBalance - allBuys);
     MyMoneyMoney income(sells + cashIncome + endingBalance);
     // see https://www.calculator.net/roi-calculator.html
