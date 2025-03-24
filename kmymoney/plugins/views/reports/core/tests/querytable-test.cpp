@@ -1112,14 +1112,14 @@ public:
 
     void testHelperROI()
     {
-        MyMoneyMoney buys(10);
+        MyMoneyMoney buys(-10);
         MyMoneyMoney sells(50);
         MyMoneyMoney reinvestIncome(0);
         MyMoneyMoney cashIncome(70);
         MyMoneyMoney startingBalance(110);
         MyMoneyMoney endingBalance(60);
         QString result1 = helperROI(buys, sells, reinvestIncome, cashIncome, startingBalance, endingBalance);
-        QCOMPARE(result1, MyMoneyMoney(80, 100).convert(10000).toString());
+        QCOMPARE(result1, MyMoneyMoney(1, 2).convert(10000).toString());
 
         buys = MyMoneyMoney(110);
         QString result2 = helperROI(buys, sells, reinvestIncome, cashIncome, startingBalance, endingBalance);
