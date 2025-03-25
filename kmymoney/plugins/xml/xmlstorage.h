@@ -1,6 +1,8 @@
 /*
     SPDX-FileCopyrightText: 2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
+    SPDX-FileCopyrightText: 2025 Thomas Baumgart <tbaumgart@kde.org>
+
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -13,6 +15,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QLockFile>
 #include <QUrl>
 
 // Project Includes
@@ -24,6 +27,7 @@ class QIODevice;
 class MyMoneyStorageMgr;
 class MyMoneyXmlWriter;
 
+class XMLStoragePrivate;
 class XMLStorage : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::StoragePlugin
 {
     Q_OBJECT
@@ -34,38 +38,16 @@ public:
     ~XMLStorage() override;
 
     bool open(const QUrl &url) override;
+    void close() override;
     bool save(const QUrl &url) override;
     bool saveAs() override;
     eKMyMoney::StorageType storageType() const override;
     QString fileExtension() const override;
     QUrl openUrl() const override;
+    QString openErrorMessage() const override;
 
 private:
-    void createActions();
-    void ungetString(QIODevice *qfile, char *buf, int len);
-
-    /**
-      * This method is used by saveFile() to store the data
-      * either directly in the destination file if it is on
-      * the local file system or in a temporary file when
-      * the final destination is reached over a network
-      * protocol (e.g. FTP)
-      *
-      * @param localFile the name of the local file
-      * @param writer pointer to the formatter
-      * @param plaintext whether to override any compression & encryption settings
-      * @param keyList QString containing a comma separated list of keys to be used for encryption
-      *            If @p keyList is empty, the file will be saved unencrypted
-      *
-      * @note This method will close the file when it is written.
-      */
-    void saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWriter, bool plaintext, const QString& keyList);
-
-    void checkRecoveryKeyValidity();
-
-    QString m_encryptionKeys;
-
-    QUrl fileUrl;
+    XMLStoragePrivate* d;
 };
 
 #endif

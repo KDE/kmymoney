@@ -29,6 +29,7 @@ public:
     ~GNCImporter() override;
 
     bool open(const QUrl &url) override;
+    void close() override;
     bool save(const QUrl &url) override;
     bool saveAs() override;
 

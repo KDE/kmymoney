@@ -103,6 +103,10 @@ bool GNCImporter::open(const QUrl &url)
     return true;
 }
 
+void GNCImporter::close()
+{
+}
+
 QUrl GNCImporter::openUrl() const
 {
     return QUrl();
