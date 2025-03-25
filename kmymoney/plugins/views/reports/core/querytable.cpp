@@ -198,29 +198,25 @@ void QueryTable::init()
         m_subtotal.clear();
         m_priceColumn.clear();
         m_columns.removeAll(ctPrice);
+        QList<cellTypeE> commonPerformanceColumns = QList<cellTypeE>()
+            << ctReturn << ctReturnInvestment << ctAnnualizedReturn << ctExtendedInternalRateOfReturn;
         switch (m_config.investmentSum()) {
         case eMyMoney::Report::InvestmentSum::OwnedAndSold:
-            m_columns << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingMarketValue << ctExtendedInternalRateOfReturn << ctReturnInvestment
-                      << ctAnnualizedReturn;
-            m_subtotal << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingMarketValue << ctExtendedInternalRateOfReturn << ctReturnInvestment
-                       << ctAnnualizedReturn;
+            m_columns << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingMarketValue << commonPerformanceColumns;
+            m_subtotal << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingMarketValue << commonPerformanceColumns;
             break;
         case eMyMoney::Report::InvestmentSum::Owned:
-            m_columns << ctBuys << ctReinvestIncome << ctCashIncome << ctEndingMarketValue << ctExtendedInternalRateOfReturn << ctReturnInvestment
-                      << ctAnnualizedReturn;
-            m_subtotal << ctBuys << ctReinvestIncome << ctCashIncome << ctEndingMarketValue << ctExtendedInternalRateOfReturn << ctReturnInvestment
-                       << ctAnnualizedReturn;
+            m_columns << ctBuys << ctReinvestIncome << ctCashIncome << ctEndingMarketValue << commonPerformanceColumns;
+            m_subtotal << ctBuys << ctReinvestIncome << ctCashIncome << ctEndingMarketValue << commonPerformanceColumns;
             break;
         case eMyMoney::Report::InvestmentSum::Sold:
-            m_columns << ctBuys << ctSells << ctCashIncome << ctExtendedInternalRateOfReturn << ctReturnInvestment << ctAnnualizedReturn;
-            m_subtotal << ctBuys << ctSells << ctCashIncome << ctExtendedInternalRateOfReturn << ctReturnInvestment << ctAnnualizedReturn;
+            m_columns << ctBuys << ctSells << ctCashIncome << commonPerformanceColumns;
+            m_subtotal << ctBuys << ctSells << ctCashIncome << commonPerformanceColumns;
             break;
         case eMyMoney::Report::InvestmentSum::Period:
         default:
-            m_columns << ctStartingMarketValue << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingMarketValue << ctExtendedInternalRateOfReturn
-                      << ctReturnInvestment << ctAnnualizedReturn;
-            m_subtotal << ctStartingMarketValue << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingMarketValue
-                       << ctExtendedInternalRateOfReturn << ctReturnInvestment << ctAnnualizedReturn;
+            m_columns << ctStartingMarketValue << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingMarketValue << commonPerformanceColumns;
+            m_subtotal << ctStartingMarketValue << ctBuys << ctSells << ctReinvestIncome << ctCashIncome << ctEndingMarketValue << commonPerformanceColumns;
             break;
         }
     } else if (qc & eMyMoney::Report::QueryColumn::CapitalGain) {
@@ -372,7 +368,14 @@ void QueryTable::constructTotalRows()
                     // custom total values calculations
                     for (const auto& subtotal : qAsConst(subtotals)) {
                         totalsRow.addSourceLine(subtotal, __LINE__);
-                        if (subtotal == ctReturnInvestment) {
+                        if (subtotal == ctReturn) {
+                            totalsRow[subtotal] = helperReturnValue((*currencyGrp).at(i + 1).value(ctBuys),
+                                                                    (*currencyGrp).at(i + 1).value(ctSells),
+                                                                    (*currencyGrp).at(i + 1).value(ctReinvestIncome),
+                                                                    (*currencyGrp).at(i + 1).value(ctCashIncome),
+                                                                    (*currencyGrp).at(i + 1).value(ctStartingMarketValue),
+                                                                    (*currencyGrp).at(i + 1).value(ctEndingMarketValue));
+                        } else if (subtotal == ctReturnInvestment) {
                             totalsRow[subtotal] = helperROI((*currencyGrp).at(i + 1).value(ctBuys),
                                                             (*currencyGrp).at(i + 1).value(ctSells),
                                                             (*currencyGrp).at(i + 1).value(ctReinvestIncome),
@@ -450,7 +453,14 @@ void QueryTable::constructTotalRows()
 
                 for (const auto& subtotal : qAsConst(subtotals)) {
                     totalsRow.addSourceLine(subtotal, __LINE__);
-                    if (subtotal == ctReturnInvestment) {
+                    if (subtotal == ctReturn) {
+                        totalsRow[subtotal] = helperReturnValue((*currencyGrp).at(0).value(ctBuys),
+                                                                (*currencyGrp).at(0).value(ctSells),
+                                                                (*currencyGrp).at(0).value(ctReinvestIncome),
+                                                                (*currencyGrp).at(0).value(ctCashIncome),
+                                                                (*currencyGrp).at(0).value(ctStartingMarketValue),
+                                                                (*currencyGrp).at(0).value(ctEndingMarketValue));
+                    } else if (subtotal == ctReturnInvestment) {
                         totalsRow[subtotal] = helperROI((*currencyGrp).at(0).value(ctBuys),
                                                         (*currencyGrp).at(0).value(ctSells),
                                                         (*currencyGrp).at(0).value(ctReinvestIncome),
@@ -1204,6 +1214,19 @@ void QueryTable::constructTransactionTable()
     }
 }
 
+MyMoneyMoney QueryTable::returnValue(const MyMoneyMoney& buys,
+                                     const MyMoneyMoney& sells,
+                                     const MyMoneyMoney& reinvestIncome,
+                                     const MyMoneyMoney& cashIncome,
+                                     const MyMoneyMoney& startingBalance,
+                                     const MyMoneyMoney& endingBalance) const
+{
+    MyMoneyMoney allBuys = buys - reinvestIncome;
+    MyMoneyMoney costs(startingBalance - allBuys);
+    MyMoneyMoney income(sells + cashIncome + endingBalance);
+    return income - costs;
+}
+
 bool QueryTable::ROI(MyMoneyMoney& returnInvestment,
                      const MyMoneyMoney& buys,
                      const MyMoneyMoney& sells,
@@ -1244,6 +1267,16 @@ QString QueryTable::helperAROI(const MyMoneyMoney& buys,
     MyMoneyMoney annualizedReturn =
         MyMoneyMoney(pow((MyMoneyMoney::ONE + returnInvestment).toDouble(), (MyMoneyMoney::ONE / numberOfYears).toDouble()), 10000) - MyMoneyMoney::ONE;
     return annualizedReturn.convert(10000).toString();
+}
+
+QString QueryTable::helperReturnValue(const MyMoneyMoney& buys,
+                                      const MyMoneyMoney& sells,
+                                      const MyMoneyMoney& reinvestIncome,
+                                      const MyMoneyMoney& cashIncome,
+                                      const MyMoneyMoney& startingBalance,
+                                      const MyMoneyMoney& endingBalance) const
+{
+    return returnValue(buys, sells, reinvestIncome, cashIncome, startingBalance, endingBalance).convert(10000).toString();
 }
 
 QString QueryTable::helperROI(const MyMoneyMoney& buys,
@@ -1613,6 +1646,7 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
     result[ctAnnualizedReturn] =
         helperAROI(buysTotal, sellsTotal, reinvestIncomeTotal, cashIncomeTotal, startingMarketValue, endingMarketValue, startingDate, endingDate);
     result[ctExtendedInternalRateOfReturn] = helperXIRR(all);
+    result[ctReturn] = helperReturnValue(buysTotal, sellsTotal, reinvestIncomeTotal, cashIncomeTotal, startingMarketValue, endingMarketValue);
     result[ctReturnInvestment] = helperROI(buysTotal, sellsTotal, reinvestIncomeTotal, cashIncomeTotal, startingMarketValue, endingMarketValue);
     result[ctEquityType] = MyMoneySecurity::securityTypeToString(file->security(account.currencyId()).securityType());
 }

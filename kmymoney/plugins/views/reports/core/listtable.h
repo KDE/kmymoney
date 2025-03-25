@@ -93,6 +93,7 @@ public:
         ctPeriodicPayment,
         ctFinalPayment,
         ctPayment,
+        ctReturn,
         /*Shares*/
         ctShares,
         /*Percent*/

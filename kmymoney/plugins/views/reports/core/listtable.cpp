@@ -645,6 +645,7 @@ ListTable::cellGroupE ListTable::cellGroup(const cellTypeE cellType)
     case ctPeriodicPayment:
     case ctFinalPayment:
     case ctPayment:
+    case ctReturn:
     case ctStartingMarketValue:
     case ctEndingMarketValue:
         return cgMoney;
@@ -743,6 +744,8 @@ QString ListTable::tableHeader(const cellTypeE cellType)
         return i18n("Annualized Return");
     case ctExtendedInternalRateOfReturn:
         return i18n("Extended internal rate of return");
+    case ctReturn:
+        return i18n("Return");
     case ctReturnInvestment:
         return i18n("Return On Investment");
     case ctFees:

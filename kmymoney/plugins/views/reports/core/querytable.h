@@ -56,6 +56,12 @@ protected:
     void sumInvestmentValues(const ReportAccount &account, QList<CashFlowList> &cfList, QList<MyMoneyMoney> &shList) const;
     void constructPerformanceRow(const ReportAccount& account, TableRow& result, CashFlowList &all) const;
     void constructCapitalGainRow(const ReportAccount& account, TableRow& result) const;
+    MyMoneyMoney returnValue(const MyMoneyMoney& buys,
+                             const MyMoneyMoney& sells,
+                             const MyMoneyMoney& reinvestIncome,
+                             const MyMoneyMoney& cashIncome,
+                             const MyMoneyMoney& startingBalance,
+                             const MyMoneyMoney& endingBalance) const;
     bool ROI(MyMoneyMoney& returnInvestment,
              const MyMoneyMoney& buys,
              const MyMoneyMoney& sells,
@@ -77,6 +83,12 @@ protected:
                       const MyMoneyMoney& cashIncome,
                       const MyMoneyMoney& startingBalance,
                       const MyMoneyMoney& endingBalance) const;
+    QString helperReturnValue(const MyMoneyMoney& buys,
+                              const MyMoneyMoney& sells,
+                              const MyMoneyMoney& reinvestIncome,
+                              const MyMoneyMoney& cashIncome,
+                              const MyMoneyMoney& startingBalance,
+                              const MyMoneyMoney& endingBalance) const;
 
     /**
      * Calculates the extended internal rate of return
