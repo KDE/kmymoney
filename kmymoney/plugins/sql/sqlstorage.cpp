@@ -177,6 +177,10 @@ bool SQLStorage::open(const QUrl &url)
     return true;
 }
 
+void SQLStorage::close()
+{
+}
+
 QUrl SQLStorage::openUrl() const
 {
     return dbUrl;

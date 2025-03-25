@@ -133,3 +133,8 @@ bool KMyMoneyPlugin::ImporterPlugin::isMyFormat(const QString& filename) const
 KMyMoneyPlugin::ImporterPlugin::~ImporterPlugin()
 {
 }
+
+QString KMyMoneyPlugin::StoragePlugin::openErrorMessage() const
+{
+    return {};
+}

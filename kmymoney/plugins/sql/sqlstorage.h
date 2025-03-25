@@ -33,6 +33,7 @@ public:
     QAction *m_generateDB;
 
     bool open(const QUrl &url) override;
+    void close() override;
     bool save(const QUrl &url) override;
     bool saveAs() override;
     eKMyMoney::StorageType storageType() const override;

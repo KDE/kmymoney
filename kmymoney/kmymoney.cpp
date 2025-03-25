@@ -745,6 +745,17 @@ public:
             disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
             // make sure to not catch view activations anymore
             m_myMoneyView->executeAction(Action::FileClose, SelectedObjects());
+            // notify the plugin that we close the file
+            for (auto& plugin : pPlugins.storage) {
+                try {
+                    if (m_storageInfo.type == plugin->storageType()) {
+                        plugin->close();
+                        break;
+                    }
+                } catch (const MyMoneyException& e) {
+                    KMessageBox::detailedError(q, i18n("Plugin responded with error during close."), QString::fromLatin1(e.what()));
+                }
+            }
             // notify the models that the file is going to be closed (we should have something like dataChanged that reaches the models first)
             MyMoneyFile::instance()->unload();
             break;
@@ -2113,25 +2124,6 @@ bool KMyMoneyApp::isImportableFile(const QUrl &url)
     // the webConnect function.
 
     return result;
-}
-
-bool KMyMoneyApp::isFileOpenedInAnotherInstance(const QUrl &url)
-{
-    const auto instances = instanceList();
-#ifdef KMM_DBUS
-    // check if there are other instances which might have this file open
-    for (const auto& instance : instances) {
-        QDBusInterface remoteApp(instance, "/KMymoney", "org.kde.kmymoney");
-        QDBusReply<QString> reply = remoteApp.call("filename");
-        if (!reply.isValid())
-            qDebug("D-Bus error while calling app->filename()");
-        else if (reply.value() == url.url())
-            return true;
-    }
-#else
-    Q_UNUSED(url)
-#endif
-    return false;
 }
 
 void KMyMoneyApp::slotShowTransactionDetail()
@@ -4264,11 +4256,6 @@ bool KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
     if (!url.isValid())
         throw MYMONEYEXCEPTION(QString::fromLatin1("Invalid URL %1").arg(qPrintable(url.url())));
 
-    if (isFileOpenedInAnotherInstance(url)) {
-        KMessageBox::error(this, i18n("<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>", url.toDisplayString(QUrl::PreferLocalFile)), i18n("Duplicate open"));
-        return false;
-    }
-
     qDebug() << "Open file" << url;
 
     if (url.scheme() != QLatin1String("sql") && !KMyMoneyUtils::fileExists(url)) {
@@ -4301,6 +4288,13 @@ bool KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
                 }
                 d->m_storageInfo.isOpened = true;
                 break;
+            } else {
+                const auto msg = plugin->openErrorMessage();
+                if (!msg.isEmpty()) {
+                    KMessageBox::error(nullptr, msg, i18nc("@title:window", "Problem opening storage"));
+                    d->executeCustomAction(eView::Action::UnblockViewAfterFileOpen);
+                    return false;
+                }
             }
         } catch (const MyMoneyException &e) {
             KMessageBox::detailedError(this, i18n("Cannot open file as requested."), QString::fromLatin1(e.what()));

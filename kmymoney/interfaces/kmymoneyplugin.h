@@ -297,6 +297,12 @@ public:
     virtual bool open(const QUrl& url) = 0;
 
     /**
+     * @brief Closes the currently opened file
+     * If no file is opened, nothing will be done
+     */
+    virtual void close() = 0;
+
+    /**
      * @brief Saves storage into file
      * @param url URL of the file
      * @return true if successfully saved
@@ -323,6 +329,20 @@ public:
      * @return QUrl to re-open the database
      */
     virtual QUrl openUrl() const = 0;
+
+    /**
+     * @brief returns a descriptive message why opening failed
+     *
+     * Returns a descriptive error message when open() returned
+     * @c false because it could not read the file but the plugin
+     * is otherwise handling this file.
+     *
+     * Returns an empty string if the plugin is not responsible
+     * for this file.
+     *
+     * @return QString containing message.
+     */
+    virtual QString openErrorMessage() const;
 };
 
 /**

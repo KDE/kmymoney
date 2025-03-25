@@ -63,22 +63,278 @@ static constexpr KCompressionDevice::CompressionType const& COMPRESSION_TYPE = K
 #define RECOVER_KEY_EXPIRATION_WARNING 30
 #endif
 
-XMLStorage::XMLStorage(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, metaData, args)
+class XMLStoragePrivate
+{
+public:
+    XMLStoragePrivate(XMLStorage* qq)
+        : q(qq)
+    {
+    }
+
+    ~XMLStoragePrivate()
+    {
+        unlock();
+    }
+
+    void ungetString(QIODevice* qfile, char* buf, int len)
+    {
+        buf = &buf[len - 1];
+        while (len--) {
+            qfile->ungetChar(*buf--);
+        }
+    }
+
+    /**
+     * This method is used by saveFile() to store the data
+     * either directly in the destination file if it is on
+     * the local file system or in a temporary file when
+     * the final destination is reached over a network
+     * protocol (e.g. FTP)
+     *
+     * @param localFile the name of the local file
+     * @param writer pointer to the formatter
+     * @param plaintext whether to override any compression & encryption settings
+     * @param keyList QString containing a comma separated list of keys to be used for encryption
+     *            If @p keyList is empty, the file will be saved unencrypted
+     *
+     * @note This method will close the file when it is written.
+     */
+    void saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWriter, bool plaintext, const QString& keyList)
+    {
+#ifndef ENABLE_GPG
+        Q_UNUSED(keyList)
+#else
+        // Check GPG encryption
+        bool encryptFile = true;
+        bool encryptRecover = false;
+        if (!keyList.isEmpty()) {
+            if (!KGPGFile::GPGAvailable()) {
+                KMessageBox::error(nullptr,
+                                   i18n("GPG does not seem to be installed on your system. Please make sure that GPG can be found using the standard search "
+                                        "path. This time, encryption is disabled."),
+                                   i18n("GPG not found"));
+                encryptFile = false;
+            } else {
+                if (KMyMoneySettings::encryptRecover()) {
+                    encryptRecover = true;
+                    if (!KGPGFile::keyAvailable(QLatin1String(RECOVER_KEY_ID))) {
+                        KMessageBox::error(
+                            nullptr,
+                            i18n("<p>You have selected to encrypt your data also with the KMyMoney recover key, but the key with "
+                                 "id</p><p><center><b>%1</b></center></p><p>has not been found in your keyring at this time. Please make sure to "
+                                 "import this key into your keyring. You can find it on the <a href=\"https://kmymoney.org/\">KMyMoney "
+                                 "web-site</a>. This time your data will not be encrypted with the KMyMoney recover key.</p>",
+                                 QLatin1String(RECOVER_KEY_ID)),
+                            i18n("GPG Key not found"));
+                        encryptRecover = false;
+                    }
+                }
+
+                const auto keys = keyList.split(',', Qt::SkipEmptyParts);
+                for (const QString& key : qAsConst(keys)) {
+                    if (!KGPGFile::keyAvailable(key)) {
+                        KMessageBox::error(nullptr,
+                                           i18n("<p>You have specified to encrypt your data for the "
+                                                "user-id</p><p><center><b>%1</b>.</center></p><p>Unfortunately, a valid key for this user-id was not found in "
+                                                "your keyring. Please make sure to import a valid key for this user-id. This time, encryption is disabled.</p>",
+                                                key),
+                                           i18n("GPG Key not found"));
+                        encryptFile = false;
+                        break;
+                    }
+                }
+
+                if (encryptFile == true) {
+                    QString msg = i18n(
+                        "<p>You have configured to save your data in encrypted form using GPG. Make sure you understand that you might lose all your data if "
+                        "you encrypt it, but cannot decrypt it later on. If unsure, answer <b>No</b>.</p>");
+                    if (KMessageBox::questionTwoActions(nullptr, msg, i18n("Store GPG encrypted"), KMMYesNo::yes(), KMMYesNo::no(), "StoreEncrypted")
+                        == KMessageBox::SecondaryAction) {
+                        encryptFile = false;
+                    }
+                }
+            }
+        }
+#endif
+        // Permissions to apply to new file
+        QFileDevice::Permissions fmode = QFileDevice::ReadUser | QFileDevice::WriteUser;
+
+        // Create a temporary file if needed
+        QString writeFile = localFile;
+        if (QFile::exists(localFile)) {
+            QTemporaryFile tmpFile(writeFile);
+            tmpFile.open();
+            writeFile = tmpFile.fileName();
+            // Since file is going to be replaced, stash the original permissions so they can be restored
+            fmode = QFile::permissions(localFile);
+        }
+
+        QSignalBlocker blockMyMoneyFile(MyMoneyFile::instance());
+
+        MyMoneyFileTransaction ft;
+        MyMoneyFile::instance()->deletePair("kmm-encryption-key");
+        std::unique_ptr<QIODevice> device;
+
+#ifdef ENABLE_GPG
+        if (!keyList.isEmpty() && encryptFile && !plaintext) {
+            std::unique_ptr<KGPGFile> kgpg = std::unique_ptr<KGPGFile>(new KGPGFile{writeFile});
+            if (kgpg) {
+                const auto keys = keyList.split(',', Qt::SkipEmptyParts);
+                for (const QString& key : qAsConst(keys)) {
+                    kgpg->addRecipient(key.toLatin1());
+                }
+
+                if (encryptRecover) {
+                    kgpg->addRecipient(QLatin1String(RECOVER_KEY_ID));
+                }
+                MyMoneyFile::instance()->setValue("kmm-encryption-key", keyList);
+                device = std::unique_ptr<decltype(device)::element_type>(kgpg.release());
+            }
+        } else
+#endif
+        {
+            QFile* file = new QFile(writeFile);
+            // The second parameter of KCompressionDevice means that KCompressionDevice will delete the QFile object
+            device =
+                std::unique_ptr<decltype(device)::element_type>(new KCompressionDevice{file, true, (plaintext) ? KCompressionDevice::None : COMPRESSION_TYPE});
+        }
+
+        ft.commit();
+
+        if (!device || !device->open(QIODevice::WriteOnly)) {
+            throw MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing").arg(localFile).append(QString::fromLatin1(": ") + device->errorString()));
+        }
+
+        pWriter->setFile(MyMoneyFile::instance());
+        const auto xmlWrittenOk = pWriter->write(device.get());
+        device->close();
+
+        if (!xmlWrittenOk) {
+            throw MYMONEYEXCEPTION(QString::fromLatin1("XML write failure while writing to '%1'").arg(localFile));
+        }
+
+        // Check for errors if possible, only possible for KGPGFile
+        QFileDevice* fileDevice = qobject_cast<QFileDevice*>(device.get());
+        if (fileDevice && fileDevice->error() != QFileDevice::NoError) {
+            throw MYMONEYEXCEPTION(QString::fromLatin1("Failure while writing to '%1'").arg(localFile));
+        }
+
+        if (writeFile != localFile) {
+            // This simple comparison is possible because the strings are equal if no temporary file was created.
+            // If a temporary file was created, it is made in a way that the name is definitely different. So no
+            // symlinks etc. have to be evaluated.
+
+            // on Windows QTemporaryFile does not release file handle even after close()
+            // so QFile::rename(writeFile, localFile) will fail since Windows does not allow moving files in use
+            // as a workaround QFile::copy is used instead of QFile::rename below
+            // writeFile (i.e. tmpFile) will be deleted by QTemporaryFile dtor when it falls out of scope
+            if (!QFile::remove(localFile)) {
+                throw MYMONEYEXCEPTION(QString::fromLatin1("Failure while removing '%1'").arg(localFile));
+            }
+            if (!QFile::rename(writeFile, localFile)) {
+                throw MYMONEYEXCEPTION(QString::fromLatin1("Failure while renaming '%1' to '%2'").arg(writeFile, localFile));
+            }
+        }
+        QFile::setPermissions(localFile, fmode);
+    }
+
+    void checkRecoveryKeyValidity()
+    {
+#ifdef ENABLE_GPG
+        // check if the recovery key is still valid or expires soon
+
+        if (KMyMoneySettings::writeDataEncrypted() && KMyMoneySettings::encryptRecover()) {
+            if (KGPGFile::GPGAvailable()) {
+                KGPGFile file;
+                QDateTime expirationDate = file.keyExpires(QLatin1String(RECOVER_KEY_ID));
+                if (expirationDate.isValid() && QDateTime::currentDateTime().daysTo(expirationDate) <= RECOVER_KEY_EXPIRATION_WARNING) {
+                    bool skipMessage = false;
+
+                    // get global config object for our app.
+                    KSharedConfigPtr kconfig = KSharedConfig::openConfig();
+                    KConfigGroup grp;
+                    QDate lastWarned;
+                    if (kconfig) {
+                        grp = kconfig->group("General Options");
+                        lastWarned = grp.readEntry("LastRecoverKeyExpirationWarning", QDate());
+                        if (QDate::currentDate() == lastWarned) {
+                            skipMessage = true;
+                        }
+                    }
+                    if (!skipMessage) {
+                        if (kconfig) {
+                            grp.writeEntry("LastRecoverKeyExpirationWarning", QDate::currentDate());
+                        }
+                        KMessageBox::information(
+                            nullptr,
+                            i18np("You have configured KMyMoney to use GPG to protect your data and to encrypt your data also with the KMyMoney recover key. "
+                                  "This key is about to expire in %1 day. Please update the key from a keyserver using your GPG frontend (e.g. KGPG).",
+                                  "You have configured KMyMoney to use GPG to protect your data and to encrypt your data also with the KMyMoney recover key. "
+                                  "This key is about to expire in %1 days. Please update the key from a keyserver using your GPG frontend (e.g. KGPG).",
+                                  QDateTime::currentDateTime().daysTo(expirationDate)),
+                            i18n("Recover key expires soon"));
+                    }
+                }
+            }
+        }
+#endif
+    }
+
+    bool lock(const QString& filename)
+    {
+        if (m_lockFile && (filename == m_curLockName)) {
+            return true;
+        }
+
+        auto newLock = new QLockFile(filename + ".lck");
+        newLock->setStaleLockTime(0);
+        if (!newLock->tryLock()) {
+            delete newLock;
+            return false;
+        }
+        unlock();
+        m_lockFile.reset(newLock);
+        m_curLockName = filename;
+        return true;
+    }
+
+    void unlock()
+    {
+        if (!m_lockFile) {
+            return;
+        }
+
+        m_lockFile->unlock();
+        m_lockFile.reset();
+        m_curLockName.clear();
+    }
+
+    XMLStorage* q;
+    QString m_encryptionKeys;
+    QString m_openErrorMessage;
+    QUrl m_fileUrl;
+    QString m_curLockName;
+    std::unique_ptr<QLockFile> m_lockFile;
+};
+XMLStorage::XMLStorage(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
+    : KMyMoneyPlugin::Plugin(parent, metaData, args)
+    , d(new XMLStoragePrivate(this))
 {
     // For information, announce that we have been loaded.
     qDebug("Plugins: xmlstorage loaded");
-    checkRecoveryKeyValidity();
+    d->checkRecoveryKeyValidity();
 }
 
 XMLStorage::~XMLStorage()
 {
+    delete d;
     qDebug("Plugins: xmlstorage unloaded");
 }
 
 bool XMLStorage::open(const QUrl &url)
 {
-    fileUrl.clear();
+    d->m_fileUrl.clear();
+    d->m_openErrorMessage.clear();
 
     if (url.scheme() == QLatin1String("sql"))
         return false;
@@ -87,6 +343,10 @@ bool XMLStorage::open(const QUrl &url)
     auto downloadedFile = false;
     if (url.isLocalFile()) {
         fileName = url.toLocalFile();
+        if (!d->lock(fileName)) {
+            d->m_openErrorMessage = i18nc("@info Problem opening data file", "File <b>%1</b> is already opened by another process.").arg(fileName);
+            return false;
+        }
     } else {
         fileName = KMyMoneyUtils::downloadFile(url);
         downloadedFile = true;
@@ -152,7 +412,7 @@ bool XMLStorage::open(const QUrl &url)
     if (haveAt)
         qfile->seek(0);
     else
-        ungetString(qfile, qbaFileHeader.data(), 8);
+        d->ungetString(qfile, qbaFileHeader.data(), 8);
 
     // Ok, we got the first block of 8 bytes. Read in the two
     // unsigned long int's by preserving endianness. This is
@@ -189,13 +449,15 @@ bool XMLStorage::open(const QUrl &url)
     if (haveAt)
         qfile->seek(0);
     else
-        ungetString(qfile, qbaFileHeader.data(), 70);
+        d->ungetString(qfile, qbaFileHeader.data(), 70);
 
     static const QRegularExpression kmyexp(QLatin1String("<!DOCTYPE KMYMONEY-FILE>"));
     QByteArray txt(qbaFileHeader, 70);
     const auto docType(kmyexp.match(txt));
-    if (!docType.hasMatch())
+    if (!docType.hasMatch()) {
+        d->m_openErrorMessage = i18nc("@info Problem opening data file", "File <b>%1</b> is not a KMyMoney data file.").arg(fileName);
         return false;
+    }
 
     MyMoneyXmlReader reader;
     reader.setFile(MyMoneyFile::instance());
@@ -220,16 +482,21 @@ bool XMLStorage::open(const QUrl &url)
         }
     }
 
-    fileUrl = url;
+    d->m_fileUrl = url;
     //write the directory used for this file as the default one for next time.
     appInterface()->writeLastUsedDir(url.toDisplayString(QUrl::RemoveFilename | QUrl::PreferLocalFile | QUrl::StripTrailingSlash));
 
     return true;
 }
 
+void XMLStorage::close()
+{
+    d->unlock();
+}
+
 QUrl XMLStorage::openUrl() const
 {
-    return fileUrl;
+    return d->m_fileUrl;
 }
 
 bool XMLStorage::save(const QUrl &url)
@@ -255,7 +522,7 @@ bool XMLStorage::save(const QUrl &url)
     if (!appInterface()->filenameURL().isEmpty())
         keyList = MyMoneyFile::instance()->value("kmm-encryption-key");
     if (keyList.isEmpty())
-        keyList = m_encryptionKeys;
+        keyList = d->m_encryptionKeys;
 
     // actually, url should be the parameter to this function
     // but for now, this would involve too many changes
@@ -272,7 +539,7 @@ bool XMLStorage::save(const QUrl &url)
                 if (nbak) {
                     KBackup::numberedBackupFile(filename, QString(), QStringLiteral("~"), nbak);
                 }
-                saveToLocalFile(filename, storageWriter.get(), plaintext, keyList);
+                d->saveToLocalFile(filename, storageWriter.get(), plaintext, keyList);
             } catch (const MyMoneyException &e) {
                 qWarning("Unable to write changes to: %s\nReason: %s", qPrintable(filename), e.what());
                 throw;
@@ -291,7 +558,7 @@ bool XMLStorage::save(const QUrl &url)
             const auto fileName = tmpfile->fileName();
             delete tmpfile;
 
-            saveToLocalFile(fileName, storageWriter.get(), plaintext, keyList);
+            d->saveToLocalFile(fileName, storageWriter.get(), plaintext, keyList);
 
             Q_CONSTEXPR int permission = -1;
             QFile file(fileName);
@@ -316,7 +583,7 @@ bool XMLStorage::saveAs()
 {
     auto rc = false;
     QStringList m_additionalGpgKeys;
-    m_encryptionKeys.clear();
+    d->m_encryptionKeys.clear();
 
     QString selectedKeyName;
 #ifdef ENABLE_GPG
@@ -389,11 +656,11 @@ bool XMLStorage::saveAs()
                 static const QRegularExpression keyExp(QLatin1String(".* \\((.*)\\)"));
                 const auto key(keyExp.match(selectedKeyName));
                 if (key.hasMatch()) {
-                    m_encryptionKeys = key.captured(1);
+                    d->m_encryptionKeys = key.captured(1);
                     if (!m_additionalGpgKeys.isEmpty()) {
-                        if (!m_encryptionKeys.isEmpty())
-                            m_encryptionKeys.append(QLatin1Char(','));
-                        m_encryptionKeys.append(m_additionalGpgKeys.join(QLatin1Char(',')));
+                        if (!d->m_encryptionKeys.isEmpty())
+                            d->m_encryptionKeys.append(QLatin1Char(','));
+                        d->m_encryptionKeys.append(m_additionalGpgKeys.join(QLatin1Char(',')));
                     }
                 }
                 // clear out any existing keys so that the new ones will be used
@@ -428,174 +695,9 @@ QString XMLStorage::fileExtension() const
     return i18n("KMyMoney files (*.kmy *.xml)");
 }
 
-void XMLStorage::ungetString(QIODevice *qfile, char *buf, int len)
+QString XMLStorage::openErrorMessage() const
 {
-    buf = &buf[len-1];
-    while (len--) {
-        qfile->ungetChar(*buf--);
-    }
-}
-
-void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWriter, bool plaintext, const QString& keyList)
-{
-#ifndef ENABLE_GPG
-    Q_UNUSED(keyList)
-#else
-    // Check GPG encryption
-    bool encryptFile = true;
-    bool encryptRecover = false;
-    if (!keyList.isEmpty()) {
-        if (!KGPGFile::GPGAvailable()) {
-            KMessageBox::error(nullptr, i18n("GPG does not seem to be installed on your system. Please make sure that GPG can be found using the standard search path. This time, encryption is disabled."), i18n("GPG not found"));
-            encryptFile = false;
-        } else {
-            if (KMyMoneySettings::encryptRecover()) {
-                encryptRecover = true;
-                if (!KGPGFile::keyAvailable(QLatin1String(RECOVER_KEY_ID))) {
-                    KMessageBox::error(nullptr,
-                                       i18n("<p>You have selected to encrypt your data also with the KMyMoney recover key, but the key with "
-                                            "id</p><p><center><b>%1</b></center></p><p>has not been found in your keyring at this time. Please make sure to "
-                                            "import this key into your keyring. You can find it on the <a href=\"https://kmymoney.org/\">KMyMoney "
-                                            "web-site</a>. This time your data will not be encrypted with the KMyMoney recover key.</p>",
-                                            QLatin1String(RECOVER_KEY_ID)),
-                                       i18n("GPG Key not found"));
-                    encryptRecover = false;
-                }
-            }
-
-            const auto keys = keyList.split(',', Qt::SkipEmptyParts);
-            for (const QString& key : qAsConst(keys)) {
-                if (!KGPGFile::keyAvailable(key)) {
-                    KMessageBox::error(nullptr, i18n("<p>You have specified to encrypt your data for the user-id</p><p><center><b>%1</b>.</center></p><p>Unfortunately, a valid key for this user-id was not found in your keyring. Please make sure to import a valid key for this user-id. This time, encryption is disabled.</p>", key), i18n("GPG Key not found"));
-                    encryptFile = false;
-                    break;
-                }
-            }
-
-            if (encryptFile == true) {
-                QString msg = i18n("<p>You have configured to save your data in encrypted form using GPG. Make sure you understand that you might lose all your data if you encrypt it, but cannot decrypt it later on. If unsure, answer <b>No</b>.</p>");
-                if (KMessageBox::questionTwoActions(nullptr, msg, i18n("Store GPG encrypted"), KMMYesNo::yes(), KMMYesNo::no(), "StoreEncrypted")
-                    == KMessageBox::SecondaryAction) {
-                    encryptFile = false;
-                }
-            }
-        }
-    }
-#endif
-    // Permissions to apply to new file
-    QFileDevice::Permissions fmode = QFileDevice::ReadUser | QFileDevice::WriteUser;
-
-    // Create a temporary file if needed
-    QString writeFile = localFile;
-    if (QFile::exists(localFile)) {
-        QTemporaryFile tmpFile(writeFile);
-        tmpFile.open();
-        writeFile = tmpFile.fileName();
-        // Since file is going to be replaced, stash the original permissions so they can be restored
-        fmode = QFile::permissions(localFile);
-    }
-
-    QSignalBlocker blockMyMoneyFile(MyMoneyFile::instance());
-
-    MyMoneyFileTransaction ft;
-    MyMoneyFile::instance()->deletePair("kmm-encryption-key");
-    std::unique_ptr<QIODevice> device;
-
-#ifdef ENABLE_GPG
-    if (!keyList.isEmpty() && encryptFile && !plaintext) {
-        std::unique_ptr<KGPGFile> kgpg = std::unique_ptr<KGPGFile>(new KGPGFile{writeFile});
-        if (kgpg) {
-            const auto keys = keyList.split(',', Qt::SkipEmptyParts);
-            for (const QString& key : qAsConst(keys)) {
-                kgpg->addRecipient(key.toLatin1());
-            }
-
-            if (encryptRecover) {
-                kgpg->addRecipient(QLatin1String(RECOVER_KEY_ID));
-            }
-            MyMoneyFile::instance()->setValue("kmm-encryption-key", keyList);
-            device = std::unique_ptr<decltype(device)::element_type>(kgpg.release());
-        }
-    } else
-#endif
-    {
-        QFile *file = new QFile(writeFile);
-        // The second parameter of KCompressionDevice means that KCompressionDevice will delete the QFile object
-        device = std::unique_ptr<decltype(device)::element_type>(new KCompressionDevice{file, true, (plaintext) ? KCompressionDevice::None : COMPRESSION_TYPE});
-    }
-
-    ft.commit();
-
-    if (!device || !device->open(QIODevice::WriteOnly)) {
-        throw MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing").arg(localFile).append(QString::fromLatin1(": ") + device->errorString()));
-    }
-
-    pWriter->setFile(MyMoneyFile::instance());
-    const auto xmlWrittenOk = pWriter->write(device.get());
-    device->close();
-
-    if (!xmlWrittenOk) {
-        throw MYMONEYEXCEPTION(QString::fromLatin1("XML write failure while writing to '%1'").arg(localFile));
-    }
-
-    // Check for errors if possible, only possible for KGPGFile
-    QFileDevice *fileDevice = qobject_cast<QFileDevice*>(device.get());
-    if (fileDevice && fileDevice->error() != QFileDevice::NoError) {
-        throw MYMONEYEXCEPTION(QString::fromLatin1("Failure while writing to '%1'").arg(localFile));
-    }
-
-    if (writeFile != localFile) {
-        // This simple comparison is possible because the strings are equal if no temporary file was created.
-        // If a temporary file was created, it is made in a way that the name is definitely different. So no
-        // symlinks etc. have to be evaluated.
-
-        // on Windows QTemporaryFile does not release file handle even after close()
-        // so QFile::rename(writeFile, localFile) will fail since Windows does not allow moving files in use
-        // as a workaround QFile::copy is used instead of QFile::rename below
-        // writeFile (i.e. tmpFile) will be deleted by QTemporaryFile dtor when it falls out of scope
-        if (!QFile::remove(localFile)) {
-            throw MYMONEYEXCEPTION(QString::fromLatin1("Failure while removing '%1'").arg(localFile));
-        }
-        if (!QFile::rename(writeFile, localFile)) {
-            throw MYMONEYEXCEPTION(QString::fromLatin1("Failure while renaming '%1' to '%2'").arg(writeFile, localFile));
-        }
-    }
-    QFile::setPermissions(localFile, fmode);
-}
-
-void XMLStorage::checkRecoveryKeyValidity()
-{
-#ifdef ENABLE_GPG
-    // check if the recovery key is still valid or expires soon
-
-    if (KMyMoneySettings::writeDataEncrypted() && KMyMoneySettings::encryptRecover()) {
-        if (KGPGFile::GPGAvailable()) {
-            KGPGFile file;
-            QDateTime expirationDate = file.keyExpires(QLatin1String(RECOVER_KEY_ID));
-            if (expirationDate.isValid() && QDateTime::currentDateTime().daysTo(expirationDate) <= RECOVER_KEY_EXPIRATION_WARNING) {
-                bool skipMessage = false;
-
-                //get global config object for our app.
-                KSharedConfigPtr kconfig = KSharedConfig::openConfig();
-                KConfigGroup grp;
-                QDate lastWarned;
-                if (kconfig) {
-                    grp = kconfig->group("General Options");
-                    lastWarned = grp.readEntry("LastRecoverKeyExpirationWarning", QDate());
-                    if (QDate::currentDate() == lastWarned) {
-                        skipMessage = true;
-                    }
-                }
-                if (!skipMessage) {
-                    if (kconfig) {
-                        grp.writeEntry("LastRecoverKeyExpirationWarning", QDate::currentDate());
-                    }
-                    KMessageBox::information(nullptr, i18np("You have configured KMyMoney to use GPG to protect your data and to encrypt your data also with the KMyMoney recover key. This key is about to expire in %1 day. Please update the key from a keyserver using your GPG frontend (e.g. KGPG).", "You have configured KMyMoney to use GPG to protect your data and to encrypt your data also with the KMyMoney recover key. This key is about to expire in %1 days. Please update the key from a keyserver using your GPG frontend (e.g. KGPG).", QDateTime::currentDateTime().daysTo(expirationDate)), i18n("Recover key expires soon"));
-                }
-            }
-        }
-    }
-#endif
+    return d->m_openErrorMessage;
 }
 
 K_PLUGIN_CLASS_WITH_JSON(XMLStorage, "xmlstorage.json")

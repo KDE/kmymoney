@@ -442,8 +442,6 @@ public Q_SLOTS:
 
     void slotFileInfoDialog();
 
-    bool isFileOpenedInAnotherInstance(const QUrl &url);
-
     void slotFileConsistencyCheck();
 
     /**
