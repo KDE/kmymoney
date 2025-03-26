@@ -3289,6 +3289,7 @@ QStringList MyMoneyFile::consistencyCheck()
                         rc << i18n("  * Transaction '%1' post date '%2' is older than opening date '%4' of account '%3'.",
                                    t.id(),
                                    MyMoneyUtils::formatDate(t.postDate()),
+                                   acc.name(),
                                    MyMoneyUtils::formatDate(acc.openingDate()));
 
                         rc << i18n("    Account opening date updated.");
