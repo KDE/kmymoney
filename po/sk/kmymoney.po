@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 02:00+0000\n"
+"POT-Creation-Date: 2025-03-27 01:58+0000\n"
 "PO-Revision-Date: 2020-01-02 16:30+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -1011,7 +1011,7 @@ msgstr ""
 "hodnotami."
 
 #: kmymoney/dialogs/kcurrencycalculator.cpp:433
-#: kmymoney/mymoney/mymoneyfile.cpp:3601
+#: kmymoney/mymoney/mymoneyfile.cpp:3602
 #, fuzzy, kde-format
 #| msgid "User"
 msgctxt "@info price source"
@@ -1034,7 +1034,7 @@ msgstr "Editor výmenného kurzu/ceny"
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:59
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:61
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:245
-#: kmymoney/plugins/views/reports/core/listtable.cpp:685
+#: kmymoney/plugins/views/reports/core/listtable.cpp:686
 #: kmymoney/views/khomeview_p.h:620 kmymoney/views/newspliteditor.ui:32
 #: kmymoney/views/newtransactioneditor.ui:59
 #: kmymoney/views/newtransactionform.ui:145
@@ -1112,7 +1112,7 @@ msgstr "xxx"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:274
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:240
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:120
-#: kmymoney/plugins/views/reports/core/listtable.cpp:683
+#: kmymoney/plugins/views/reports/core/listtable.cpp:684
 #: kmymoney/views/investtransactioneditor.ui:260
 #: kmymoney/views/khomeview_p.h:605 kmymoney/views/newtransactioneditor.ui:84
 #: kmymoney/views/newtransactionform.ui:110
@@ -1999,7 +1999,7 @@ msgstr "Ceny"
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:84
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:54
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:381
-#: kmymoney/plugins/views/reports/core/listtable.cpp:757
+#: kmymoney/plugins/views/reports/core/listtable.cpp:760
 #: kmymoney/widgets/ktransactionfilter.ui:584
 #: kmymoney/widgets/transactionsortoption.cpp:42
 #, kde-format
@@ -2523,7 +2523,7 @@ msgstr "Text počiatočného stavu"
 #. i18n: ectx: property (title), widget (QGroupBox, m_institutionBox)
 #: kmymoney/dialogs/knewaccountdlg.ui:310
 #: kmymoney/dialogs/knewaccountdlg.ui:316
-#: kmymoney/plugins/views/reports/core/listtable.cpp:767
+#: kmymoney/plugins/views/reports/core/listtable.cpp:770
 #: kmymoney/wizards/newaccountwizard/kinstitutionpage.ui:44
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:72
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:19
@@ -3080,7 +3080,7 @@ msgstr "Nový cenový údaj"
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:75
 #: kmymoney/mymoney/storage/pricemodel.cpp:40
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:88
-#: kmymoney/plugins/views/reports/core/listtable.cpp:773
+#: kmymoney/plugins/views/reports/core/listtable.cpp:776
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:113
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:61
 #, kde-format
@@ -3842,7 +3842,7 @@ msgstr "Regulárny výraz na extrahovanie dátumu zo stiahnutých dát"
 #: kmymoney/plugins/csv/import/priceswizardpage.ui:144
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:465
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:161
-#: kmymoney/plugins/views/reports/core/listtable.cpp:713
+#: kmymoney/plugins/views/reports/core/listtable.cpp:714
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:185
 #, kde-format
 msgid "Price"
@@ -4277,7 +4277,7 @@ msgstr "Deň"
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_initialDateFieldCursorPosition)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:292
-#: kmymoney/plugins/views/reports/core/listtable.cpp:703
+#: kmymoney/plugins/views/reports/core/listtable.cpp:704
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:534
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:96
 #, kde-format
@@ -4326,7 +4326,7 @@ msgstr "Zmazané"
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkReconciled)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:345
-#: kmymoney/plugins/views/reports/core/listtable.cpp:707
+#: kmymoney/plugins/views/reports/core/listtable.cpp:708
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
 #: kmymoney/views/khomeview_p.h:1050
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:32
@@ -6880,22 +6880,22 @@ msgstr ""
 "  * Transakcia '%1' s dátumom po '%2' je staršia ako dátum otvorenia '%4' "
 "účtu '%3'."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3294
+#: kmymoney/mymoney/mymoneyfile.cpp:3295
 #, kde-format
 msgid "    Account opening date updated."
 msgstr "    Dátum otvorenia účtu aktualizovaný."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3308
+#: kmymoney/mymoney/mymoneyfile.cpp:3309
 #, kde-format
 msgid "  * shares set to value in split of transaction '%1'."
 msgstr "  * akcie nastavené na hodnotu v rozdelení transakcie '%1'."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3311
+#: kmymoney/mymoney/mymoneyfile.cpp:3312
 #, kde-format
 msgid "  * value set to shares in split of transaction '%1'."
 msgstr "  * hodnota nastavená na akcie v rozdelení transakcie '%1'."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3320
+#: kmymoney/mymoney/mymoneyfile.cpp:3321
 #, fuzzy, kde-format
 #| msgid ""
 #| "  * Split %2 in transaction '%1' contains a reference to invalid account "
@@ -6907,7 +6907,7 @@ msgstr ""
 "  * Rozdelenie %2 v transakcii '%1' obsahuje odkaz na neplatný účet %3. "
 "Prosím, opravte ručne."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3332
+#: kmymoney/mymoney/mymoneyfile.cpp:3333
 #, kde-format
 msgid ""
 "  * Split %2 in transaction '%1' contains a reference to invalid account %3. "
@@ -6916,22 +6916,22 @@ msgstr ""
 "  * Rozdelenie %2 v transakcii '%1' obsahuje odkaz na neplatný účet %3. "
 "Prosím, opravte ručne."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3341
+#: kmymoney/mymoney/mymoneyfile.cpp:3342
 #, kde-format
 msgid "  * action marked as interest in split of transaction '%1'."
 msgstr "  * akcia označená ako úrok v rozdelení transakcie '%1'."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3355
+#: kmymoney/mymoney/mymoneyfile.cpp:3356
 #, kde-format
 msgid "  * Transaction '%1' has an invalid post date."
 msgstr "  * Transakcia '%1' má neplatný dátum odoslania."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3356
+#: kmymoney/mymoney/mymoneyfile.cpp:3357
 #, kde-format
 msgid "    The post date was updated to '%1'."
 msgstr "    Dátum odoslania bol aktualizovaný na '%1'."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3390
+#: kmymoney/mymoney/mymoneyfile.cpp:3391
 #, kde-format
 msgid ""
 "  * Transaction '%1' has a post date '%2' before one of the referenced "
@@ -6940,22 +6940,22 @@ msgstr ""
 "  * Transakcia '%1' má dátum po '%2' pred jedným z referencovaných dátumov "
 "otvorenia účtu."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3393
+#: kmymoney/mymoney/mymoneyfile.cpp:3394
 #, kde-format
 msgid "    Referenced accounts: %1"
 msgstr "    Referované účty: %1"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3394
+#: kmymoney/mymoney/mymoneyfile.cpp:3395
 #, kde-format
 msgid "    The post date was not updated to '%1'."
 msgstr "    Dátum odoslania nebol aktualizovaný na '%1'."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3420
+#: kmymoney/mymoney/mymoneyfile.cpp:3421
 #, kde-format
 msgid "  * Payee id updated in split of schedule '%1'."
 msgstr "  * ID príjemcu aktualizované v rozdelení harmonogramu '%1'."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3426
+#: kmymoney/mymoney/mymoneyfile.cpp:3427
 #, kde-format
 msgid ""
 "  * Split in scheduled transaction '%1' contained value != 0 and shares == 0."
@@ -6963,27 +6963,27 @@ msgstr ""
 "  * Rozdelenie v plánovanej transakcii '%1' obsahovalo hodnotu != 0 a akcie "
 "== 0."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3427
+#: kmymoney/mymoney/mymoneyfile.cpp:3428
 #, kde-format
 msgid "    Shares set to value."
 msgstr "    Akcie nastavené na hodnotu"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3435
+#: kmymoney/mymoney/mymoneyfile.cpp:3436
 #, kde-format
 msgid "  * Removed bankid from split in scheduled transaction '%1'."
 msgstr "  * Odstránený bankid z rozdelenia v plánovanej transakcii '%1'."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3448
+#: kmymoney/mymoney/mymoneyfile.cpp:3449
 #, kde-format
 msgid "  * shares set to value in split in schedule '%1'."
 msgstr "  * akcie nastavené na hodnotu v rozdelení v harmonograme '%1'."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3451
+#: kmymoney/mymoney/mymoneyfile.cpp:3452
 #, kde-format
 msgid "  * value set to shares in split in schedule '%1'."
 msgstr "  * hodnota nastavená na akcie v rozdelení v harmonograme '%1'."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3457
+#: kmymoney/mymoney/mymoneyfile.cpp:3458
 #, kde-format
 msgid ""
 "  * Split %2 in schedule '%1' contains a reference to invalid account %3. "
@@ -6992,29 +6992,29 @@ msgstr ""
 "  * Rozdelenie %2 v harmonograme '%1' obsahuje odkaz na neplatný účet %3. "
 "Prosím, opravte ručne."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3466
+#: kmymoney/mymoney/mymoneyfile.cpp:3467
 #, kde-format
 msgid "  * Imported flag removed from schedule '%1'"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3486
+#: kmymoney/mymoney/mymoneyfile.cpp:3487
 #, kde-format
 msgid "  * Payee id updated in report '%1'."
 msgstr "  * ID príjemcu aktualizované vo výkaze '%1'."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3503
+#: kmymoney/mymoney/mymoneyfile.cpp:3504
 #, kde-format
 msgid "  * Payee '%1' removed."
 msgstr "  * Príjemca '%1' odstránený."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3577
+#: kmymoney/mymoney/mymoneyfile.cpp:3578
 #, fuzzy, kde-format
 #| msgid "* Potential problem with investments/currencies"
 msgctxt "@info consistency check"
 msgid "* Potential problem with securities/currencies"
 msgstr "* Potenciálny problém s investíciami/menami"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3582
+#: kmymoney/mymoney/mymoneyfile.cpp:3583
 #, fuzzy, kde-format
 #| msgid ""
 #| "  * The account '%1' in currency '%2' has no price set for the opening "
@@ -7026,7 +7026,7 @@ msgid ""
 msgstr ""
 "  * Účet '%1' v mene '%2' nemá nastavenú cenu pre počiatočný dátum '%3'."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3587
+#: kmymoney/mymoney/mymoneyfile.cpp:3588
 #, fuzzy, kde-format
 #| msgid ""
 #| "    Please enter a price for the currency on or before the opening date."
@@ -7034,14 +7034,14 @@ msgctxt "@info consistency check"
 msgid "    Please enter a price for the currency on or before '%1'."
 msgstr "    Zadajte, prosím, cenu za menu na alebo pred počiatočným dátumom."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3592
+#: kmymoney/mymoney/mymoneyfile.cpp:3593
 #, fuzzy, kde-format
 #| msgid "  * The investment '%1' has no price set for the opening date '%2'."
 msgctxt "@info consistency check"
 msgid "  * The security '%1' has no price set for the first use on '%2'."
 msgstr "  * Investícia '%1' nemá nastavenú cenu pre počiatočný dátum '%2'."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3603
+#: kmymoney/mymoney/mymoneyfile.cpp:3604
 #, kde-format
 msgctxt "@info consistency check"
 msgid ""
@@ -7049,7 +7049,7 @@ msgid ""
 "price history."
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3606
+#: kmymoney/mymoney/mymoneyfile.cpp:3607
 #, fuzzy, kde-format
 #| msgid ""
 #| "    Please enter a price for the currency on or before the opening date."
@@ -7057,28 +7057,28 @@ msgctxt "@info consistency check"
 msgid "    Please enter a price for the security on or before this date."
 msgstr "    Zadajte, prosím, cenu za menu na alebo pred počiatočným dátumom."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3628
+#: kmymoney/mymoney/mymoneyfile.cpp:3629
 #, kde-format
 msgid "* Problem with budget '%1'"
 msgstr "* Problém s rozpočtom '%1'"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3630
+#: kmymoney/mymoney/mymoneyfile.cpp:3631
 #, kde-format
 msgid ""
 "  * The account with id %1 referenced by the budget does not exist anymore."
 msgstr "  * Účet s id %1, na ktorý odkazuje rozpočet, už neexistuje."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3631
+#: kmymoney/mymoney/mymoneyfile.cpp:3632
 #, kde-format
 msgid "    The account reference will be removed."
 msgstr "    Odkaz na účet bude odstránený."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3645
+#: kmymoney/mymoney/mymoneyfile.cpp:3646
 #, kde-format
 msgid "Finished: data is consistent."
 msgstr "Dokončené: dáta sú konzistentné."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3647
+#: kmymoney/mymoney/mymoneyfile.cpp:3648
 #, kde-format
 msgid "%1 problem corrected."
 msgid_plural "%1 problems corrected."
@@ -7086,7 +7086,7 @@ msgstr[0] "%1 problém opravený."
 msgstr[1] "%1 problémy opravené."
 msgstr[2] "%1 problémov opravených."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3648
+#: kmymoney/mymoney/mymoneyfile.cpp:3649
 #, kde-format
 msgid "%1 problem still present."
 msgid_plural "%1 problems still present."
@@ -7094,7 +7094,7 @@ msgstr[0] "%1 problém stále prítomný."
 msgstr[1] "%1 problémy stále prítomné."
 msgstr[2] "%1 problémov stále prítomných."
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3651
+#: kmymoney/mymoney/mymoneyfile.cpp:3652
 #, kde-format
 msgctxt ""
 "%1 is a string, e.g. 7 problems corrected; %2 is a string, e.g. 3 problems "
@@ -7102,946 +7102,946 @@ msgctxt ""
 msgid "Finished: %1 %2"
 msgstr "Ukončené: %1 %2"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3864
+#: kmymoney/mymoney/mymoneyfile.cpp:3865
 #, kde-format
 msgid "Austrian Schilling"
 msgstr "Austrálsky šiling"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3866
+#: kmymoney/mymoney/mymoneyfile.cpp:3867
 #, kde-format
 msgid "German Mark"
 msgstr "Nemecká marka"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3868
+#: kmymoney/mymoney/mymoneyfile.cpp:3869
 #, kde-format
 msgid "French Franc"
 msgstr "Francúzsky frank"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3870
+#: kmymoney/mymoney/mymoneyfile.cpp:3871
 #, kde-format
 msgid "Italian Lira"
 msgstr "Talianska líra"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3872
+#: kmymoney/mymoney/mymoneyfile.cpp:3873
 #, kde-format
 msgid "Spanish Peseta"
 msgstr "Španielska peseta"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3874
+#: kmymoney/mymoney/mymoneyfile.cpp:3875
 #, kde-format
 msgid "Dutch Guilder"
 msgstr "Holandský guilder"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3876
+#: kmymoney/mymoney/mymoneyfile.cpp:3877
 #, kde-format
 msgid "Belgian Franc"
 msgstr "Belgický frank"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3878
+#: kmymoney/mymoney/mymoneyfile.cpp:3879
 #, kde-format
 msgid "Luxembourg Franc"
 msgstr "Luxemburský frank"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3880
+#: kmymoney/mymoney/mymoneyfile.cpp:3881
 #, kde-format
 msgid "Portuguese Escudo"
 msgstr "Portugalské escudo"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3882
+#: kmymoney/mymoney/mymoneyfile.cpp:3883
 #, kde-format
 msgid "Irish Pound"
 msgstr "Írska libra"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3884
+#: kmymoney/mymoney/mymoneyfile.cpp:3885
 #, kde-format
 msgid "Finnish Markka"
 msgstr "Fínska marka"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3886
+#: kmymoney/mymoney/mymoneyfile.cpp:3887
 #, kde-format
 msgid "Greek Drachma"
 msgstr "Grécka drachma"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3890
+#: kmymoney/mymoney/mymoneyfile.cpp:3891
 #, kde-format
 msgid "Bulgarian Lev"
 msgstr "Bulharský lev"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3893
+#: kmymoney/mymoney/mymoneyfile.cpp:3894
 #, kde-format
 msgid "Romanian Leu"
 msgstr "Rumunský lei"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3896
+#: kmymoney/mymoney/mymoneyfile.cpp:3897
 #, kde-format
 msgid "Russian Ruble (old)"
 msgstr "Ruský rubeľ (starý)"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3899
+#: kmymoney/mymoney/mymoneyfile.cpp:3900
 #, kde-format
 msgid "Slovenian Tolar"
 msgstr "Slovinský toliar"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3903
+#: kmymoney/mymoney/mymoneyfile.cpp:3904
 #, kde-format
 msgid "Turkish Lira (old)"
 msgstr "Turecká Lira (stará)"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3907
+#: kmymoney/mymoney/mymoneyfile.cpp:3908
 #, kde-format
 msgid "Maltese Lira"
 msgstr "Maltská líra"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3909
+#: kmymoney/mymoney/mymoneyfile.cpp:3910
 #, kde-format
 msgid "Cyprus Pound"
 msgstr "Cyperská libra"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3913
+#: kmymoney/mymoney/mymoneyfile.cpp:3914
 #, kde-format
 msgid "Slovak Koruna"
 msgstr "Slovenská koruna"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3917 kmymoney/mymoney/mymoneyfile.cpp:4046
+#: kmymoney/mymoney/mymoneyfile.cpp:3918 kmymoney/mymoney/mymoneyfile.cpp:4047
 #, kde-format
 msgid "Mozambique Metical"
 msgstr "Mozambik metical"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3921 kmymoney/mymoney/mymoneyfile.cpp:3958
+#: kmymoney/mymoney/mymoneyfile.cpp:3922 kmymoney/mymoney/mymoneyfile.cpp:3959
 #, kde-format
 msgid "Azerbaijani Manat"
 msgstr "Azerbajdžánsky manat"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3925
+#: kmymoney/mymoney/mymoneyfile.cpp:3926
 #, kde-format
 msgid "Lithuanian Litas"
 msgstr "Litovský litas"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3929
+#: kmymoney/mymoney/mymoneyfile.cpp:3930
 #, fuzzy, kde-format
 #| msgid "Belarusian Ruble"
 msgid "Belarusian Ruble (old)"
 msgstr "Bieloruský rubeľ"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3933
+#: kmymoney/mymoney/mymoneyfile.cpp:3934
 #, fuzzy, kde-format
 #| msgid "Zambian Kwacha"
 msgid "Zambian Kwacha (old)"
 msgstr "Zambijská kwacha"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3937
+#: kmymoney/mymoney/mymoneyfile.cpp:3938
 #, kde-format
 msgid "Croatian Kuna"
 msgstr "Chorvátska kuna"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3948
+#: kmymoney/mymoney/mymoneyfile.cpp:3949
 #, kde-format
 msgid "Afghanistan Afghani"
 msgstr "Avgánsky afghani"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3949
+#: kmymoney/mymoney/mymoneyfile.cpp:3950
 #, kde-format
 msgid "Albanian Lek"
 msgstr "Albánsky lek"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3950
+#: kmymoney/mymoney/mymoneyfile.cpp:3951
 #, kde-format
 msgid "Netherland Antillian Guilder"
 msgstr "Holanské Antili guilder"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3951
+#: kmymoney/mymoney/mymoneyfile.cpp:3952
 #, kde-format
 msgid "Algerian Dinar"
 msgstr "Alžírsky dinár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3952
+#: kmymoney/mymoney/mymoneyfile.cpp:3953
 #, kde-format
 msgid "Andorran Franc"
 msgstr "Andorský frank"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3953
+#: kmymoney/mymoney/mymoneyfile.cpp:3954
 #, kde-format
 msgid "Andorran Peseta"
 msgstr "Andorská peseta"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3954
+#: kmymoney/mymoney/mymoneyfile.cpp:3955
 #, fuzzy, kde-format
 #| msgid "Angolan New Kwanza"
 msgid "Angolan Kwanza"
 msgstr "Angolská kwanza"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3955
+#: kmymoney/mymoney/mymoneyfile.cpp:3956
 #, kde-format
 msgid "Argentine Peso"
 msgstr "Argentínske peso"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3956
+#: kmymoney/mymoney/mymoneyfile.cpp:3957
 #, kde-format
 msgid "Aruban Florin"
 msgstr "Arubanský florin"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3957
+#: kmymoney/mymoney/mymoneyfile.cpp:3958
 #, kde-format
 msgid "Australian Dollar"
 msgstr "Austrálsky dolár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3959
+#: kmymoney/mymoney/mymoneyfile.cpp:3960
 #, kde-format
 msgid "Bahamian Dollar"
 msgstr "Bahamský dolár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3960
+#: kmymoney/mymoney/mymoneyfile.cpp:3961
 #, kde-format
 msgid "Bahraini Dinar"
 msgstr "Bahrajnský dinár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3961
+#: kmymoney/mymoney/mymoneyfile.cpp:3962
 #, kde-format
 msgid "Bangladeshi Taka"
 msgstr "Bangladéžska taka"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3962
+#: kmymoney/mymoney/mymoneyfile.cpp:3963
 #, kde-format
 msgid "Barbados Dollar"
 msgstr "Barbadoský dolár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3963
+#: kmymoney/mymoney/mymoneyfile.cpp:3964
 #, kde-format
 msgid "Bitcoin"
 msgstr "Bitcoin"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3964
+#: kmymoney/mymoney/mymoneyfile.cpp:3965
 #, kde-format
 msgid "Belarusian Ruble"
 msgstr "Bieloruský rubeľ"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3965
+#: kmymoney/mymoney/mymoneyfile.cpp:3966
 #, kde-format
 msgid "Belize Dollar"
 msgstr "Belizský dolár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3966
+#: kmymoney/mymoney/mymoneyfile.cpp:3967
 #, kde-format
 msgid "Bermudian Dollar"
 msgstr "Bermudský dolár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3967
+#: kmymoney/mymoney/mymoneyfile.cpp:3968
 #, kde-format
 msgid "Bhutan Ngultrum"
 msgstr "Bhutánsky ngultrum"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3968
+#: kmymoney/mymoney/mymoneyfile.cpp:3969
 #, kde-format
 msgid "Bolivian Boliviano"
 msgstr "Bolívijské boliviano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3969
+#: kmymoney/mymoney/mymoneyfile.cpp:3970
 #, kde-format
 msgid "Bosnian Convertible Mark"
 msgstr "Bosnianska konvertibilná marka"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3970
+#: kmymoney/mymoney/mymoneyfile.cpp:3971
 #, kde-format
 msgid "Botswana Pula"
 msgstr "Botswanská pula"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3971
+#: kmymoney/mymoney/mymoneyfile.cpp:3972
 #, kde-format
 msgid "Brazilian Real"
 msgstr "Brazílsky real"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3972
+#: kmymoney/mymoney/mymoneyfile.cpp:3973
 #, kde-format
 msgid "British Pound"
 msgstr "Britská libra"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3973
+#: kmymoney/mymoney/mymoneyfile.cpp:3974
 #, kde-format
 msgid "Brunei Dollar"
 msgstr "Brunejský dolár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3974
+#: kmymoney/mymoney/mymoneyfile.cpp:3975
 #, kde-format
 msgid "Bulgarian Lev (new)"
 msgstr "Bulharský lev (nový)"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3975
+#: kmymoney/mymoney/mymoneyfile.cpp:3976
 #, kde-format
 msgid "Burundi Franc"
 msgstr "Burundský frank"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3976
+#: kmymoney/mymoney/mymoneyfile.cpp:3977
 #, kde-format
 msgid "CFA Franc BEAC"
 msgstr "CFA Franc BEAC"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3977
+#: kmymoney/mymoney/mymoneyfile.cpp:3978
 #, kde-format
 msgid "CFA Franc BCEAO"
 msgstr "CFA Franc BCEAO"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3978
+#: kmymoney/mymoney/mymoneyfile.cpp:3979
 #, kde-format
 msgid "CFP Franc Pacifique"
 msgstr "CFP Franc Pacifique"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3979
+#: kmymoney/mymoney/mymoneyfile.cpp:3980
 #, kde-format
 msgid "Cambodia Riel"
 msgstr "Kambodža Riel"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3980
+#: kmymoney/mymoney/mymoneyfile.cpp:3981
 #, kde-format
 msgid "Canadian Dollar"
 msgstr "Kanadský dolár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3981
+#: kmymoney/mymoney/mymoneyfile.cpp:3982
 #, kde-format
 msgid "Cape Verde Escudo"
 msgstr "Kapverdské escudo"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3982
+#: kmymoney/mymoney/mymoneyfile.cpp:3983
 #, kde-format
 msgid "Cayman Islands Dollar"
 msgstr "Kajmanský dolár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3983
+#: kmymoney/mymoney/mymoneyfile.cpp:3984
 #, kde-format
 msgid "Chilean Peso"
 msgstr "Čilské peso"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3984
+#: kmymoney/mymoney/mymoneyfile.cpp:3985
 #, kde-format
 msgid "Chinese Yuan Renminbi"
 msgstr "Čínsky yuan"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3985
+#: kmymoney/mymoney/mymoneyfile.cpp:3986
 #, kde-format
 msgid "Colombian Peso"
 msgstr "Kolumbijské peso"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3986
+#: kmymoney/mymoney/mymoneyfile.cpp:3987
 #, kde-format
 msgid "Comoros Franc"
 msgstr "Komorský Frank"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3987
+#: kmymoney/mymoney/mymoneyfile.cpp:3988
 #, kde-format
 msgid "Costa Rican Colon"
 msgstr "Kostarický colon"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3988
+#: kmymoney/mymoney/mymoneyfile.cpp:3989
 #, kde-format
 msgid "Cuban Peso"
 msgstr "Kubánske peso"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3989
+#: kmymoney/mymoney/mymoneyfile.cpp:3990
 #, fuzzy, kde-format
 #| msgid "Bosnian Convertible Mark"
 msgid "Cuban Convertible Peso"
 msgstr "Bosnianska konvertibilná marka"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3990
+#: kmymoney/mymoney/mymoneyfile.cpp:3991
 #, kde-format
 msgid "Czech Koruna"
 msgstr "Česká koruna"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3991
+#: kmymoney/mymoney/mymoneyfile.cpp:3992
 #, kde-format
 msgid "Danish Krone"
 msgstr "Dánska koruna"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3992
+#: kmymoney/mymoney/mymoneyfile.cpp:3993
 #, kde-format
 msgid "Djibouti Franc"
 msgstr "Džibutský frank"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3993
+#: kmymoney/mymoney/mymoneyfile.cpp:3994
 #, kde-format
 msgid "Dominican Peso"
 msgstr "Dominikánske peso"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3994
+#: kmymoney/mymoney/mymoneyfile.cpp:3995
 #, kde-format
 msgid "East Caribbean Dollar"
 msgstr "Východokaribský dolár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3995
+#: kmymoney/mymoney/mymoneyfile.cpp:3996
 #, kde-format
 msgid "Egyptian Pound"
 msgstr "Egyptská libra"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3996
+#: kmymoney/mymoney/mymoneyfile.cpp:3997
 #, kde-format
 msgid "El Salvador Colon"
 msgstr "Salvádorský colon"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3997
+#: kmymoney/mymoney/mymoneyfile.cpp:3998
 #, kde-format
 msgid "Eritrean Nakfa"
 msgstr "Eritrejská nafka"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3998
+#: kmymoney/mymoney/mymoneyfile.cpp:3999
 #, kde-format
 msgid "Estonian Kroon"
 msgstr "Estónska koruna"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3999
+#: kmymoney/mymoney/mymoneyfile.cpp:4000
 #, kde-format
 msgid "Ethiopian Birr"
 msgstr "Etiópsky birr"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4000
+#: kmymoney/mymoney/mymoneyfile.cpp:4001
 #, kde-format
 msgid "Euro"
 msgstr "Euro"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4001
+#: kmymoney/mymoney/mymoneyfile.cpp:4002
 #, kde-format
 msgid "Falkland Islands Pound"
 msgstr "Falklandská libra"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4002
+#: kmymoney/mymoney/mymoneyfile.cpp:4003
 #, kde-format
 msgid "Fiji Dollar"
 msgstr "Fidžijský dolár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4003
+#: kmymoney/mymoney/mymoneyfile.cpp:4004
 #, kde-format
 msgid "Gambian Dalasi"
 msgstr "Gambijské dalasi"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4004
+#: kmymoney/mymoney/mymoneyfile.cpp:4005
 #, kde-format
 msgid "Georgian Lari"
 msgstr "Gruzínsky lari"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4005
+#: kmymoney/mymoney/mymoneyfile.cpp:4006
 #, kde-format
 msgid "Ghanaian Cedi"
 msgstr "Ghanský cedi"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4006
+#: kmymoney/mymoney/mymoneyfile.cpp:4007
 #, kde-format
 msgid "Gibraltar Pound"
 msgstr "Gibraltárská libra"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4007
+#: kmymoney/mymoney/mymoneyfile.cpp:4008
 #, kde-format
 msgid "Guatemalan Quetzal"
 msgstr "Guatemalský quetzal"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4008
+#: kmymoney/mymoney/mymoneyfile.cpp:4009
 #, kde-format
 msgid "Guinea-Bissau Peso"
 msgstr "Guinea-Bissau peso"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4009
+#: kmymoney/mymoney/mymoneyfile.cpp:4010
 #, kde-format
 msgid "Guyanan Dollar"
 msgstr "Guyana dolar"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4010
+#: kmymoney/mymoney/mymoneyfile.cpp:4011
 #, kde-format
 msgid "Haitian Gourde"
 msgstr "Haitský gourde"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4011
+#: kmymoney/mymoney/mymoneyfile.cpp:4012
 #, kde-format
 msgid "Honduran Lempira"
 msgstr "Honduraská lempira"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4012
+#: kmymoney/mymoney/mymoneyfile.cpp:4013
 #, kde-format
 msgid "Hong Kong Dollar"
 msgstr "Hongkongský dolár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4013
+#: kmymoney/mymoney/mymoneyfile.cpp:4014
 #, kde-format
 msgid "Hungarian Forint"
 msgstr "Maďarský forint"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4014
+#: kmymoney/mymoney/mymoneyfile.cpp:4015
 #, kde-format
 msgid "Iceland Krona"
 msgstr "Islandská koruna"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4015
+#: kmymoney/mymoney/mymoneyfile.cpp:4016
 #, kde-format
 msgid "Indian Rupee"
 msgstr "Indická rupia"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4016
+#: kmymoney/mymoney/mymoneyfile.cpp:4017
 #, kde-format
 msgid "Indonesian Rupiah"
 msgstr "Indonézska rupia"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4017
+#: kmymoney/mymoney/mymoneyfile.cpp:4018
 #, kde-format
 msgid "Iranian Rial"
 msgstr "Iránsky rial"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4018
+#: kmymoney/mymoney/mymoneyfile.cpp:4019
 #, kde-format
 msgid "Iraqi Dinar"
 msgstr "Iracký dinár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4019
+#: kmymoney/mymoney/mymoneyfile.cpp:4020
 #, kde-format
 msgid "Israeli New Shekel"
 msgstr "Izraelský nový šekel"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4020
+#: kmymoney/mymoney/mymoneyfile.cpp:4021
 #, kde-format
 msgid "Jamaican Dollar"
 msgstr "Jamajský dolár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4021
+#: kmymoney/mymoney/mymoneyfile.cpp:4022
 #, kde-format
 msgid "Japanese Yen"
 msgstr "Japonský jen"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4022
+#: kmymoney/mymoney/mymoneyfile.cpp:4023
 #, kde-format
 msgid "Jordanian Dinar"
 msgstr "Jordánsky dinár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4023
+#: kmymoney/mymoney/mymoneyfile.cpp:4024
 #, kde-format
 msgid "Kazakhstan Tenge"
 msgstr "Kazachstan Tenge"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4024
+#: kmymoney/mymoney/mymoneyfile.cpp:4025
 #, kde-format
 msgid "Kenyan Shilling"
 msgstr "Kenský šiling"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4025
+#: kmymoney/mymoney/mymoneyfile.cpp:4026
 #, kde-format
 msgid "Kuwaiti Dinar"
 msgstr "Kuvajtský dinár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4026
+#: kmymoney/mymoney/mymoneyfile.cpp:4027
 #, kde-format
 msgid "Kyrgyzstan Som"
 msgstr "Kirgistán Som"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4027
+#: kmymoney/mymoney/mymoneyfile.cpp:4028
 #, kde-format
 msgid "Laos Kip"
 msgstr "Laos Kip"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4028
+#: kmymoney/mymoney/mymoneyfile.cpp:4029
 #, kde-format
 msgid "Latvian Lats"
 msgstr "Lotyšský lat"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4029
+#: kmymoney/mymoney/mymoneyfile.cpp:4030
 #, kde-format
 msgid "Lebanese Pound"
 msgstr "Libanonská libra"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4030
+#: kmymoney/mymoney/mymoneyfile.cpp:4031
 #, kde-format
 msgid "Lesotho Loti"
 msgstr "Lesothský loti"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4031
+#: kmymoney/mymoney/mymoneyfile.cpp:4032
 #, kde-format
 msgid "Liberian Dollar"
 msgstr "Libérijský dolár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4032
+#: kmymoney/mymoney/mymoneyfile.cpp:4033
 #, kde-format
 msgid "Libyan Dinar"
 msgstr "Líbyjský dinár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4033
+#: kmymoney/mymoney/mymoneyfile.cpp:4034
 #, kde-format
 msgid "Macau Pataca"
 msgstr "Macao Pataca"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4034
+#: kmymoney/mymoney/mymoneyfile.cpp:4035
 #, kde-format
 msgid "Macedonian Denar"
 msgstr "Macedónsky denár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4035
+#: kmymoney/mymoney/mymoneyfile.cpp:4036
 #, kde-format
 msgid "Malagasy Franc"
 msgstr "Malagaský frank"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4036
+#: kmymoney/mymoney/mymoneyfile.cpp:4037
 #, kde-format
 msgid "Malawi Kwacha"
 msgstr "Malawi kwacha"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4037
+#: kmymoney/mymoney/mymoneyfile.cpp:4038
 #, kde-format
 msgid "Malaysian Ringgit"
 msgstr "Malajský ringgit"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4038
+#: kmymoney/mymoney/mymoneyfile.cpp:4039
 #, kde-format
 msgid "Maldive Rufiyaa"
 msgstr "Maledivská rufiyaa"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4039
+#: kmymoney/mymoney/mymoneyfile.cpp:4040
 #, kde-format
 msgid "Mali Republic Franc"
 msgstr "Mali frank"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4040
+#: kmymoney/mymoney/mymoneyfile.cpp:4041
 #, kde-format
 msgid "Mauritanian Ouguiya"
 msgstr "Mauritánska ukija"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4041
+#: kmymoney/mymoney/mymoneyfile.cpp:4042
 #, kde-format
 msgid "Mauritius Rupee"
 msgstr "Maurícijská rupia"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4042
+#: kmymoney/mymoney/mymoneyfile.cpp:4043
 #, kde-format
 msgid "Mexican Peso"
 msgstr "Mexické peso"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4043
+#: kmymoney/mymoney/mymoneyfile.cpp:4044
 #, kde-format
 msgid "Moldavian Leu"
 msgstr "Moldavský lei"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4044
+#: kmymoney/mymoney/mymoneyfile.cpp:4045
 #, kde-format
 msgid "Mongolian Tugrik"
 msgstr "Mongolský tugrik"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4045
+#: kmymoney/mymoney/mymoneyfile.cpp:4046
 #, kde-format
 msgid "Moroccan Dirham"
 msgstr "Marocký dirham"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4047
+#: kmymoney/mymoney/mymoneyfile.cpp:4048
 #, kde-format
 msgid "Myanmar Kyat"
 msgstr "Myanmar (Barma) kyat"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4048
+#: kmymoney/mymoney/mymoneyfile.cpp:4049
 #, kde-format
 msgid "Namibian Dollar"
 msgstr "Namíbijský dolár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4049
+#: kmymoney/mymoney/mymoneyfile.cpp:4050
 #, kde-format
 msgid "Nepalese Rupee"
 msgstr "Nepálska rupia"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4050
+#: kmymoney/mymoney/mymoneyfile.cpp:4051
 #, kde-format
 msgid "New Zealand Dollar"
 msgstr "Novozélandský dolár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4051
+#: kmymoney/mymoney/mymoneyfile.cpp:4052
 #, kde-format
 msgid "Nicaraguan Cordoba Oro"
 msgstr "Nikaragujská cordoba"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4052
+#: kmymoney/mymoney/mymoneyfile.cpp:4053
 #, kde-format
 msgid "Nigerian Naira"
 msgstr "Nigérijská naira"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4053
+#: kmymoney/mymoney/mymoneyfile.cpp:4054
 #, kde-format
 msgid "North Korean Won"
 msgstr "Severokórejský won"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4054
+#: kmymoney/mymoney/mymoneyfile.cpp:4055
 #, kde-format
 msgid "Norwegian Kroner"
 msgstr "Nórska koruna"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4055
+#: kmymoney/mymoney/mymoneyfile.cpp:4056
 #, kde-format
 msgid "Omani Rial"
 msgstr "Ománsky rial"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4056
+#: kmymoney/mymoney/mymoneyfile.cpp:4057
 #, kde-format
 msgid "Pakistan Rupee"
 msgstr "Pakistanská rupia"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4057
+#: kmymoney/mymoney/mymoneyfile.cpp:4058
 #, kde-format
 msgid "Panamanian Balboa"
 msgstr "Panamská balboa"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4058
+#: kmymoney/mymoney/mymoneyfile.cpp:4059
 #, kde-format
 msgid "Papua New Guinea Kina"
 msgstr "Nová Guinea Kina"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4059
+#: kmymoney/mymoney/mymoneyfile.cpp:4060
 #, kde-format
 msgid "Paraguay Guarani"
 msgstr "Paraguajské guarani"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4060
+#: kmymoney/mymoney/mymoneyfile.cpp:4061
 #, kde-format
 msgid "Peruvian Nuevo Sol"
 msgstr "Peruánsky nuevo sol"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4061
+#: kmymoney/mymoney/mymoneyfile.cpp:4062
 #, kde-format
 msgid "Philippine Peso"
 msgstr "Filipínske peso"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4062
+#: kmymoney/mymoney/mymoneyfile.cpp:4063
 #, kde-format
 msgid "Polish Zloty"
 msgstr "Poľský zlotý"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4063
+#: kmymoney/mymoney/mymoneyfile.cpp:4064
 #, kde-format
 msgid "Qatari Rial"
 msgstr "Katarský rial"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4064
+#: kmymoney/mymoney/mymoneyfile.cpp:4065
 #, kde-format
 msgid "Romanian Leu (new)"
 msgstr "Rumunské leu (nové)"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4065
+#: kmymoney/mymoney/mymoneyfile.cpp:4066
 #, kde-format
 msgid "Russian Ruble"
 msgstr "Ruský rubeľ"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4066
+#: kmymoney/mymoney/mymoneyfile.cpp:4067
 #, kde-format
 msgid "Rwanda Franc"
 msgstr "Rwandský frank"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4067
+#: kmymoney/mymoney/mymoneyfile.cpp:4068
 #, kde-format
 msgid "Samoan Tala"
 msgstr "Samojská tala"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4068
+#: kmymoney/mymoney/mymoneyfile.cpp:4069
 #, kde-format
 msgid "Sao Tome and Principe Dobra"
 msgstr "Sao Tome and Principe Dobra"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4069
+#: kmymoney/mymoney/mymoneyfile.cpp:4070
 #, kde-format
 msgid "Saudi Riyal"
 msgstr "Saudský rial"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4070
+#: kmymoney/mymoney/mymoneyfile.cpp:4071
 #, kde-format
 msgid "Serbian Dinar"
 msgstr "Srbský dinár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4071
+#: kmymoney/mymoney/mymoneyfile.cpp:4072
 #, kde-format
 msgid "Seychelles Rupee"
 msgstr "Seychelská rupia"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4072
+#: kmymoney/mymoney/mymoneyfile.cpp:4073
 #, kde-format
 msgid "Sierra Leone Leone"
 msgstr "Sierra Leone leone"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4073
+#: kmymoney/mymoney/mymoneyfile.cpp:4074
 #, kde-format
 msgid "Singapore Dollar"
 msgstr "Singapurský dolár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4074
+#: kmymoney/mymoney/mymoneyfile.cpp:4075
 #, kde-format
 msgid "Solomon Islands Dollar"
 msgstr "Dolár Šalamúnových ostrovov"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4075
+#: kmymoney/mymoney/mymoneyfile.cpp:4076
 #, kde-format
 msgid "Somali Shilling"
 msgstr "Somálsky šiling"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4076
+#: kmymoney/mymoney/mymoneyfile.cpp:4077
 #, kde-format
 msgid "South African Rand"
 msgstr "Juhoafrický rand"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4077
+#: kmymoney/mymoney/mymoneyfile.cpp:4078
 #, kde-format
 msgid "South Korean Won"
 msgstr "Juhokórejský won"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4078
+#: kmymoney/mymoney/mymoneyfile.cpp:4079
 #, kde-format
 msgid "Sri Lanka Rupee"
 msgstr "Srílanská rupia"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4079
+#: kmymoney/mymoney/mymoneyfile.cpp:4080
 #, kde-format
 msgid "St. Helena Pound"
 msgstr "St. Helena pound"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4080
+#: kmymoney/mymoney/mymoneyfile.cpp:4081
 #, kde-format
 msgid "Sudanese Dinar"
 msgstr "Sudánsky dinár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4081
+#: kmymoney/mymoney/mymoneyfile.cpp:4082
 #, kde-format
 msgid "Suriname Guilder"
 msgstr "Surinamský guilder"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4082
+#: kmymoney/mymoney/mymoneyfile.cpp:4083
 #, kde-format
 msgid "Swaziland Lilangeni"
 msgstr "Svazijsko lilangeni"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4083
+#: kmymoney/mymoney/mymoneyfile.cpp:4084
 #, kde-format
 msgid "Swedish Krona"
 msgstr "Švédska koruna"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4084
+#: kmymoney/mymoney/mymoneyfile.cpp:4085
 #, kde-format
 msgid "Swiss Franc"
 msgstr "Švajčiarsky frank"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4085
+#: kmymoney/mymoney/mymoneyfile.cpp:4086
 #, kde-format
 msgid "Syrian Pound"
 msgstr "Sýrska libra"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4086
+#: kmymoney/mymoney/mymoneyfile.cpp:4087
 #, kde-format
 msgid "Taiwan Dollar"
 msgstr "Taiwanský dolar"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4087
+#: kmymoney/mymoney/mymoneyfile.cpp:4088
 #, kde-format
 msgid "Tajikistan Somoni"
 msgstr "Tajikistan Somoni"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4088
+#: kmymoney/mymoney/mymoneyfile.cpp:4089
 #, kde-format
 msgid "Tanzanian Shilling"
 msgstr "Tanzánsky šiling"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4089
+#: kmymoney/mymoney/mymoneyfile.cpp:4090
 #, kde-format
 msgid "Thai Baht"
 msgstr "Thajský baht"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4090
+#: kmymoney/mymoney/mymoneyfile.cpp:4091
 #, kde-format
 msgid "Tongan Pa'anga"
 msgstr "Tonžská paanga"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4091
+#: kmymoney/mymoney/mymoneyfile.cpp:4092
 #, kde-format
 msgid "Trinidad and Tobago Dollar"
 msgstr "Dolár Trinidadu a Tobaga"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4092
+#: kmymoney/mymoney/mymoneyfile.cpp:4093
 #, kde-format
 msgid "Tunisian Dinar"
 msgstr "Tuniský dinár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4093
+#: kmymoney/mymoney/mymoneyfile.cpp:4094
 #, kde-format
 msgid "Turkish Lira"
 msgstr "Turecká líra"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4094
+#: kmymoney/mymoney/mymoneyfile.cpp:4095
 #, kde-format
 msgid "Turkmenistan Manat"
 msgstr "Turkmenistán manat"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4095
+#: kmymoney/mymoney/mymoneyfile.cpp:4096
 #, kde-format
 msgid "US Dollar"
 msgstr "Americký dolár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4096
+#: kmymoney/mymoney/mymoneyfile.cpp:4097
 #, kde-format
 msgid "Uganda Shilling"
 msgstr "Ugandský šiling"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4097
+#: kmymoney/mymoney/mymoneyfile.cpp:4098
 #, kde-format
 msgid "Ukraine Hryvnia"
 msgstr "Ukrajinská hryvna"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4098
+#: kmymoney/mymoney/mymoneyfile.cpp:4099
 #, kde-format
 msgid "Unidad de Fometo"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4099
+#: kmymoney/mymoney/mymoneyfile.cpp:4100
 #, kde-format
 msgid "United Arab Emirates Dirham"
 msgstr "Dirham Spojených arabských emirátov"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4100
+#: kmymoney/mymoney/mymoneyfile.cpp:4101
 #, kde-format
 msgid "Uruguayan Peso"
 msgstr "Uruguajské peso"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4101
+#: kmymoney/mymoney/mymoneyfile.cpp:4102
 #, kde-format
 msgid "Uzbekistani Sum"
 msgstr "Uzbekistan sum"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4102
+#: kmymoney/mymoney/mymoneyfile.cpp:4103
 #, kde-format
 msgid "Vanuatu Vatu"
 msgstr "Vanuatský vatu"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4103
+#: kmymoney/mymoney/mymoneyfile.cpp:4104
 #, kde-format
 msgid "Venezuelan Bolivar"
 msgstr "Venezuelský bolivar"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4104
+#: kmymoney/mymoney/mymoneyfile.cpp:4105
 #, kde-format
 msgid "Vietnamese Dong"
 msgstr "Vietnamský dong"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4105
+#: kmymoney/mymoney/mymoneyfile.cpp:4106
 #, kde-format
 msgid "Zambian Kwacha"
 msgstr "Zambijská kwacha"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4106
+#: kmymoney/mymoney/mymoneyfile.cpp:4107
 #, kde-format
 msgid "Zimbabwe Dollar"
 msgstr "Zimbabwiansky dolár"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4120
+#: kmymoney/mymoney/mymoneyfile.cpp:4121
 #, kde-format
 msgid "Gold"
 msgstr "Zlato"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4121
+#: kmymoney/mymoney/mymoneyfile.cpp:4122
 #, kde-format
 msgid "Palladium"
 msgstr "Paládium"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4122
+#: kmymoney/mymoney/mymoneyfile.cpp:4123
 #, kde-format
 msgid "Platinum"
 msgstr "Platinum"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4123
+#: kmymoney/mymoney/mymoneyfile.cpp:4124
 #, kde-format
 msgid "Silver"
 msgstr "Striebro"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4739
+#: kmymoney/mymoney/mymoneyfile.cpp:4740
 #, kde-format
 msgid "Opening Balances"
 msgstr "Počiatočný stav"
@@ -8501,7 +8501,7 @@ msgstr "Rozdeliť transakciu"
 
 #: kmymoney/mymoney/splitmodel.cpp:118
 #: kmymoney/mymoney/storage/journalmodel.cpp:201
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1025
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1035
 #, kde-format
 msgid "*** UNASSIGNED ***"
 msgstr "*** Nepriradené ***"
@@ -9219,7 +9219,7 @@ msgstr "Hodnota"
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:21
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:68
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:242
-#: kmymoney/plugins/views/reports/core/listtable.cpp:689
+#: kmymoney/plugins/views/reports/core/listtable.cpp:690
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:268
 #: kmymoney/widgets/ktransactionfilter.ui:455
 #: kmymoney/widgets/ktransactionfilter.ui:497
@@ -10349,7 +10349,7 @@ msgstr "Výber kategórie"
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:78
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:192
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:243
-#: kmymoney/plugins/views/reports/core/listtable.cpp:697
+#: kmymoney/plugins/views/reports/core/listtable.cpp:698
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:159
 #: kmymoney/views/investtransactioneditor.ui:164
 #: kmymoney/views/newspliteditor.ui:191
@@ -10384,7 +10384,7 @@ msgstr "Vyčistiť výbery"
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_balance)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:325
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:165
-#: kmymoney/plugins/views/reports/core/listtable.cpp:755
+#: kmymoney/plugins/views/reports/core/listtable.cpp:758
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
 #: kmymoney/views/khomeview_p.h:1053
@@ -11694,7 +11694,7 @@ msgstr "Odstrániť akcie"
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
 #. i18n: ectx: property (text), item, widget (QComboBox, cbActionTypes)
 #: kmymoney/plugins/csv/import/transactiondlg.ui:127
-#: kmymoney/plugins/views/reports/core/listtable.cpp:751
+#: kmymoney/plugins/views/reports/core/listtable.cpp:754
 #: kmymoney/views/investtransactioneditor.ui:64
 #: kmymoney/views/investtransactioneditor.ui:186
 #: kmymoney/views/investtransactioneditor.ui:253
@@ -12899,8 +12899,8 @@ msgid "Get Transactions"
 msgstr "Získať transakcie"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:74
-#: kmymoney/plugins/views/reports/core/querytable.cpp:823
-#: kmymoney/plugins/views/reports/core/querytable.cpp:965
+#: kmymoney/plugins/views/reports/core/querytable.cpp:833
+#: kmymoney/plugins/views/reports/core/querytable.cpp:975
 #, kde-format
 msgid "Transfer"
 msgstr "Prenos"
@@ -13032,7 +13032,7 @@ msgstr "Inštitút"
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:293
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:481
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:613
-#: kmymoney/plugins/views/reports/core/listtable.cpp:695
+#: kmymoney/plugins/views/reports/core/listtable.cpp:696
 #: kmymoney/plugins/views/reports/reportsview.cpp:227
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
 #: kmymoney/views/investtransactioneditor.ui:98
@@ -13971,7 +13971,7 @@ msgstr "Oddelený účet"
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:146
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:134
-#: kmymoney/plugins/views/reports/core/listtable.cpp:769
+#: kmymoney/plugins/views/reports/core/listtable.cpp:772
 #, kde-format
 msgid "Description"
 msgstr "Popis"
@@ -14807,7 +14807,7 @@ msgstr "Koncový stav registra"
 #. i18n: ectx: attribute (title), widget (QWidget, m_categoryTab)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkCategory)
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:244
-#: kmymoney/plugins/views/reports/core/listtable.cpp:693
+#: kmymoney/plugins/views/reports/core/listtable.cpp:694
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:287
 #: kmymoney/views/newspliteditor.ui:160
 #: kmymoney/views/newtransactioneditor.ui:221
@@ -16172,7 +16172,7 @@ msgid "Initial Market Value"
 msgstr "Počiatočná tržná hodnota"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:291
-#: kmymoney/plugins/views/reports/core/listtable.cpp:809
+#: kmymoney/plugins/views/reports/core/listtable.cpp:812
 #, kde-format
 msgid "Ending Market Value"
 msgstr "Koncová tržná hodnota"
@@ -16201,7 +16201,7 @@ msgstr "Celkový súčet"
 msgid "Calculated"
 msgstr "Vypočítané"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:687
+#: kmymoney/plugins/views/reports/core/listtable.cpp:688
 #, kde-format
 msgid "Num"
 msgstr "Num"
@@ -16209,7 +16209,7 @@ msgstr "Num"
 #. i18n: ectx: property (text), widget (QLabel, tagsLabel)
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:691
+#: kmymoney/plugins/views/reports/core/listtable.cpp:692
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:522
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:76
 #: kmymoney/views/kmymoneyview.cpp:191 kmymoney/views/newspliteditor.ui:110
@@ -16220,18 +16220,18 @@ msgstr "Num"
 msgid "Tags"
 msgstr "Značky"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:699
+#: kmymoney/plugins/views/reports/core/listtable.cpp:700
 #, kde-format
 msgid "Top Category"
 msgstr "Horná kategória"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:701
+#: kmymoney/plugins/views/reports/core/listtable.cpp:702
 #, kde-format
 msgid "Category Type"
 msgstr "Typ kategórie"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:705
+#: kmymoney/plugins/views/reports/core/listtable.cpp:706
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:537
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:101
 #, kde-format
@@ -16239,7 +16239,7 @@ msgid "Week"
 msgstr "Týždeň"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkAction)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:709
+#: kmymoney/plugins/views/reports/core/listtable.cpp:710
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:300
 #, kde-format
 msgid "Action"
@@ -16247,94 +16247,99 @@ msgstr "Akcia"
 
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, sharesAmountEdit)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkShares)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:711
+#: kmymoney/plugins/views/reports/core/listtable.cpp:712
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:172
 #: kmymoney/views/investtransactioneditor.ui:386
 #, kde-format
 msgid "Shares"
 msgstr "Zdieľania"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:715
+#: kmymoney/plugins/views/reports/core/listtable.cpp:716
 #, kde-format
 msgid "Last Price"
 msgstr "Posledná cena"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:717
+#: kmymoney/plugins/views/reports/core/listtable.cpp:718
 #, kde-format
 msgid "Buy Price"
 msgstr "Kúpna cena"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:719
+#: kmymoney/plugins/views/reports/core/listtable.cpp:720
 #, kde-format
 msgid "Net Value"
 msgstr "Čistá hodnota"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:721
+#: kmymoney/plugins/views/reports/core/listtable.cpp:722
 #, kde-format
 msgid "Buy Value"
 msgstr "Kúpna hodnota"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:723
+#: kmymoney/plugins/views/reports/core/listtable.cpp:724
 #, kde-format
 msgid "Sell Value"
 msgstr "Predajná hodnota"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:725
+#: kmymoney/plugins/views/reports/core/listtable.cpp:726
 #, kde-format
 msgid "Short-term Buy Value"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:727
+#: kmymoney/plugins/views/reports/core/listtable.cpp:728
 #, kde-format
 msgid "Short-term Sell Value"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:729
+#: kmymoney/plugins/views/reports/core/listtable.cpp:730
 #, kde-format
 msgid "Long-term Buy Value"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:731
+#: kmymoney/plugins/views/reports/core/listtable.cpp:732
 #, kde-format
 msgid "Long-term Sell Value"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:733
+#: kmymoney/plugins/views/reports/core/listtable.cpp:734
 #, kde-format
 msgid "Dividends Reinvested"
 msgstr "Reinvestované dividendy"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:735
+#: kmymoney/plugins/views/reports/core/listtable.cpp:736
 #, kde-format
 msgid "Dividends Paid Out"
 msgstr "Dividendy vyplatené"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:737
+#: kmymoney/plugins/views/reports/core/listtable.cpp:738
 #, kde-format
 msgid "Starting Balance"
 msgstr "Počiatočný stav"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:739
+#: kmymoney/plugins/views/reports/core/listtable.cpp:740
 #, kde-format
 msgid "Ending Balance"
 msgstr "Koncový stav"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:741
+#: kmymoney/plugins/views/reports/core/listtable.cpp:742
 #, kde-format
 msgid "Market Value"
 msgstr "Tržná hodnota"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:743
+#: kmymoney/plugins/views/reports/core/listtable.cpp:744
 #, kde-format
 msgid "Annualized Return"
 msgstr "Ročný výnos"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:745
+#: kmymoney/plugins/views/reports/core/listtable.cpp:746
 #, kde-format
 msgid "Extended internal rate of return"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:747
+#: kmymoney/plugins/views/reports/core/listtable.cpp:748
+#, kde-format
+msgid "Return"
+msgstr ""
+
+#: kmymoney/plugins/views/reports/core/listtable.cpp:750
 #, kde-format
 msgid "Return On Investment"
 msgstr "Vrátiť sa na investíciu"
@@ -16342,7 +16347,7 @@ msgstr "Vrátiť sa na investíciu"
 #. i18n: ectx: property (text), widget (QLabel, feesAmountLabel)
 #. i18n: ectx: property (text), widget (QLabel, feesLabel)
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, feesAmountEdit)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:749
+#: kmymoney/plugins/views/reports/core/listtable.cpp:752
 #: kmymoney/views/investtransactioneditor.ui:112
 #: kmymoney/views/investtransactioneditor.ui:229
 #: kmymoney/views/investtransactioneditor.ui:367
@@ -16355,7 +16360,7 @@ msgstr "Poplatky"
 #. i18n: ectx: attribute (title), widget (QWizardPage, PaymentEditWizardPage)
 #. i18n: ectx: property (title), widget (QGroupBox, GroupBox1)
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, creditAmount)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:753
+#: kmymoney/plugins/views/reports/core/listtable.cpp:756
 #: kmymoney/widgets/creditdebitedit.ui:35
 #: kmymoney/wizards/newloanwizard/paymenteditwizardpage.ui:6
 #: kmymoney/wizards/newloanwizard/paymentwizardpage.ui:6
@@ -16364,137 +16369,137 @@ msgstr "Poplatky"
 msgid "Payment"
 msgstr "Platba"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:759
+#: kmymoney/plugins/views/reports/core/listtable.cpp:762
 #, kde-format
 msgctxt "Account name"
 msgid "Name"
 msgstr "Meno"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:761
+#: kmymoney/plugins/views/reports/core/listtable.cpp:764
 #, kde-format
 msgid "Next Due Date"
 msgstr "Ďalší dátum splatnosti"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:763
+#: kmymoney/plugins/views/reports/core/listtable.cpp:766
 #, kde-format
 msgid "Occurrence"
 msgstr "Výskyt"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:765
+#: kmymoney/plugins/views/reports/core/listtable.cpp:768
 #, kde-format
 msgid "Payment Method"
 msgstr "Spôsob platby"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:771
+#: kmymoney/plugins/views/reports/core/listtable.cpp:774
 #, kde-format
 msgid "Opening Date"
 msgstr "Dátum otvorenia"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:775
+#: kmymoney/plugins/views/reports/core/listtable.cpp:778
 #, kde-format
 msgid "Balance Early Warning"
 msgstr "Včasné varovanie zostatku"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:777
+#: kmymoney/plugins/views/reports/core/listtable.cpp:780
 #, kde-format
 msgid "Balance Max Limit"
 msgstr "Max Limit zostatku"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:779
+#: kmymoney/plugins/views/reports/core/listtable.cpp:782
 #, kde-format
 msgid "Credit Early Warning"
 msgstr "Včasné kreditné varovanie"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:781
+#: kmymoney/plugins/views/reports/core/listtable.cpp:784
 #, kde-format
 msgid "Credit Max Limit"
 msgstr "Kreditný max limit"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:783
+#: kmymoney/plugins/views/reports/core/listtable.cpp:786
 #, kde-format
 msgid "Tax"
 msgstr "Daň"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:785
+#: kmymoney/plugins/views/reports/core/listtable.cpp:788
 #, kde-format
 msgid "Preferred"
 msgstr "Preferované"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:787
+#: kmymoney/plugins/views/reports/core/listtable.cpp:790
 #, kde-format
 msgid "Loan Amount"
 msgstr "Suma pôžičky"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, InterestEditWizardPage)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:789
+#: kmymoney/plugins/views/reports/core/listtable.cpp:792
 #: kmymoney/wizards/newloanwizard/interesteditwizardpage.ui:6
 #, kde-format
 msgid "Interest Rate"
 msgstr "Úroková miera"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:791
+#: kmymoney/plugins/views/reports/core/listtable.cpp:794
 #, kde-format
 msgid "Next Interest Change"
 msgstr "Nasledujúca zmena úroku"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:793
+#: kmymoney/plugins/views/reports/core/listtable.cpp:796
 #, kde-format
 msgid "Periodic Payment"
 msgstr "Pravidelná spátka"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:795
+#: kmymoney/plugins/views/reports/core/listtable.cpp:798
 #, kde-format
 msgid "Final Payment"
 msgstr "Konečná platba"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:797
+#: kmymoney/plugins/views/reports/core/listtable.cpp:800
 #, kde-format
 msgid "Current Balance"
 msgstr "Súčasný zostatok"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:799
+#: kmymoney/plugins/views/reports/core/listtable.cpp:802
 #, fuzzy, kde-format
 #| msgctxt "Category name"
 #| msgid "Capital Gain (mid term)"
 msgid "Capital Gain"
 msgstr "Kapitálový zisk (strednodobý)"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:801
+#: kmymoney/plugins/views/reports/core/listtable.cpp:804
 #, fuzzy, kde-format
 #| msgid "Fee is Percentage"
 msgid "Percentage Gain"
 msgstr "Poplatok je percento"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:803
+#: kmymoney/plugins/views/reports/core/listtable.cpp:806
 #, kde-format
 msgid "Short-term Gain"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:805
+#: kmymoney/plugins/views/reports/core/listtable.cpp:808
 #, kde-format
 msgid "Long-term Gain"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:807
+#: kmymoney/plugins/views/reports/core/listtable.cpp:810
 #, fuzzy, kde-format
 #| msgid "Ending Market Value"
 msgid "Starting Market Value"
 msgstr "Koncová tržná hodnota"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
-#: kmymoney/plugins/views/reports/core/querytable.cpp:962
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1023
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2021
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2040
+#: kmymoney/plugins/views/reports/core/querytable.cpp:972
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1033
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2058
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2077
 #, kde-format
 msgid "Transfer from %1"
 msgstr "Preniesť z %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:222
-#: kmymoney/plugins/views/reports/core/querytable.cpp:963
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1022
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2020
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2039
+#: kmymoney/plugins/views/reports/core/querytable.cpp:973
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1032
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2057
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2076
 #, kde-format
 msgid "Transfer to %1"
 msgstr "Preniesť do %1"
@@ -16589,53 +16594,53 @@ msgctxt "@title:column report header"
 msgid "Price"
 msgstr "Cena"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:584
-#: kmymoney/plugins/views/reports/core/querytable.cpp:597
+#: kmymoney/plugins/views/reports/core/querytable.cpp:594
+#: kmymoney/plugins/views/reports/core/querytable.cpp:607
 #, kde-format
 msgid "[No Tag]"
 msgstr "[Žiadna značka]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:610
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1853
+#: kmymoney/plugins/views/reports/core/querytable.cpp:620
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1890
 #, kde-format
 msgid "Month of %1"
 msgstr "Mesiac z %1"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:611
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1854
+#: kmymoney/plugins/views/reports/core/querytable.cpp:621
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1891
 #, kde-format
 msgid "Week of %1"
 msgstr "Týždeň z %1"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:802
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1028
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1171
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1982
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2154
+#: kmymoney/plugins/views/reports/core/querytable.cpp:812
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1038
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1181
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2019
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2191
 #, kde-format
 msgid "No Institution"
 msgstr "Žiadna inštitúcia"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:806
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1993
+#: kmymoney/plugins/views/reports/core/querytable.cpp:816
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2030
 #, kde-format
 msgid "[Empty Payee]"
 msgstr "[Prázdny príjemca]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:840
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2026
+#: kmymoney/plugins/views/reports/core/querytable.cpp:850
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2063
 #, kde-format
 msgid "[Split Transaction]"
 msgstr "[Rozdeliť transakciu]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:841
-#: kmymoney/plugins/views/reports/core/querytable.cpp:842
+#: kmymoney/plugins/views/reports/core/querytable.cpp:851
+#: kmymoney/plugins/views/reports/core/querytable.cpp:852
 #, kde-format
 msgctxt "Split transaction"
 msgid "Split"
 msgstr "Rozdeliť"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1766
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1803
 #, kde-format
 msgctxt "No institution"
 msgid "None"
