@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-27 01:58+0000\n"
-"PO-Revision-Date: 2025-02-11 10:42+0100\n"
+"PO-Revision-Date: 2025-03-27 09:11+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -15935,10 +15935,11 @@ msgstr "Rendibilitat anual equivalent"
 msgid "Extended internal rate of return"
 msgstr "Taxa interna de rendibilitat ampliada"
 
+# skip-rule: k-Enter-1
 #: kmymoney/plugins/views/reports/core/listtable.cpp:748
 #, kde-format
 msgid "Return"
-msgstr ""
+msgstr "Rendibilitat"
 
 # skip-rule: k-Enter-1
 #: kmymoney/plugins/views/reports/core/listtable.cpp:750
@@ -25889,18 +25890,3 @@ msgstr "Només s'admet un d'entre --csv o --html"
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr "s'està guardant l'informe «%1» en «%2»"
-
-#~ msgid ""
-#~ "<p>The account \"%1\" was previously created as loan account but some "
-#~ "information is missing.</p><p>The new loan wizard will be started to "
-#~ "collect all relevant information.</p><p>Please use KMyMoney version 0.8.7 "
-#~ "or later and earlier than version 0.9 to correct the problem.</p>"
-#~ msgstr ""
-#~ "<p>El compte «%1» es va crear anteriorment com a compte de préstec, però "
-#~ "s'ha perdut alguna informació.</p><p>L'assistent nou de préstec "
-#~ "s'iniciarà per a arreplegar tota la informació important.</p><p>Utilitzeu "
-#~ "la versió 0.8.7 o posterior de KMyMoney i anterior a la versió 0.9 per a "
-#~ "corregir el problema.</p>"
-
-#~ msgid "Account problem"
-#~ msgstr "Problema de compte"
