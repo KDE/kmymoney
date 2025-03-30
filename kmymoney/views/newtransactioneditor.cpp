@@ -220,7 +220,7 @@ bool NewTransactionEditor::Private::checkForValidAmount()
         } else {
             WidgetHintFrame::show(
                 ui->creditDebitEdit,
-                i18nc("@info:tooltip", "The amount is different from the sum of all splits by %1.").arg(difference.formatMoney(m_account.fraction())));
+                i18nc("@info:tooltip", "The new amount is different from the sum of all splits by %1.", difference.formatMoney(m_account.fraction())));
         }
     }
     return true;
