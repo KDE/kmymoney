@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-27 01:58+0000\n"
+"POT-Creation-Date: 2025-04-01 01:55+0000\n"
 "PO-Revision-Date: 2024-11-23 12:50+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -21174,7 +21174,7 @@ msgctxt "text for online balance date if not available"
 msgid "n/a"
 msgstr "n/a"
 
-#: kmymoney/views/onlinebalancedelegate.cpp:175
+#: kmymoney/views/onlinebalancedelegate.cpp:176
 #, kde-format
 msgctxt "Label in ledger for online balance row"
 msgid "Online Balance"
