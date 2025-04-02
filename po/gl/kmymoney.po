@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-01 01:55+0000\n"
+"POT-Creation-Date: 2025-04-02 01:55+0000\n"
 "PO-Revision-Date: 2025-02-14 08:14+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -620,10 +620,10 @@ msgid "Backup location:"
 msgstr "Localización da salvagarda:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3432
-#: kmymoney/kmymoney.cpp:3503 kmymoney/kmymoney.cpp:3519
-#: kmymoney/kmymoney.cpp:3525 kmymoney/kmymoney.cpp:3539
-#: kmymoney/kmymoney.cpp:3541
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3424
+#: kmymoney/kmymoney.cpp:3495 kmymoney/kmymoney.cpp:3511
+#: kmymoney/kmymoney.cpp:3517 kmymoney/kmymoney.cpp:3531
+#: kmymoney/kmymoney.cpp:3533
 #, kde-format
 msgid "Backup"
 msgstr "Salvagarda"
@@ -4802,23 +4802,28 @@ msgstr "Gardar o ficheiro"
 msgid "Untitled"
 msgstr "Sen título"
 
-#: kmymoney/kmymoney.cpp:853
+#: kmymoney/kmymoney.cpp:756
+#, kde-format
+msgid "Plugin responded with error during close."
+msgstr ""
+
+#: kmymoney/kmymoney.cpp:864
 #, kde-format
 msgid "Unable to match the selected transactions"
 msgstr "Non é posíbel emparellar os asentos escollidos"
 
-#: kmymoney/kmymoney.cpp:880
+#: kmymoney/kmymoney.cpp:891
 #, kde-format
 msgid "Unable to unmatch the selected transactions"
 msgstr "Non é posíbel desemparellar o asento escollido"
 
-#: kmymoney/kmymoney.cpp:1048
+#: kmymoney/kmymoney.cpp:1059
 #, kde-format
 msgctxt "@action New file/database"
 msgid "New book..."
 msgstr "Novo libro…"
 
-#: kmymoney/kmymoney.cpp:1215
+#: kmymoney/kmymoney.cpp:1226
 #, kde-format
 msgid ""
 "This is the consistency check log, use the context menu to copy or save it."
@@ -4826,599 +4831,599 @@ msgstr ""
 "Este é o rexistro de comprobacións de consistencia, use o menú de contexto "
 "para copialo ou gardalo."
 
-#: kmymoney/kmymoney.cpp:1228
+#: kmymoney/kmymoney.cpp:1239
 #, kde-format
 msgid "Copy to clipboard"
 msgstr "Copiar no portapapeis"
 
-#: kmymoney/kmymoney.cpp:1229
+#: kmymoney/kmymoney.cpp:1240
 #, kde-format
 msgid "Save to file"
 msgstr "Gardar no ficheiro"
 
-#: kmymoney/kmymoney.cpp:1355
+#: kmymoney/kmymoney.cpp:1366
 #, kde-format
 msgid "Backup..."
 msgstr "Salvagarda…"
 
-#: kmymoney/kmymoney.cpp:1356
+#: kmymoney/kmymoney.cpp:1367
 #, kde-format
 msgid "Statement file..."
 msgstr "Ficheiro de extracto bancario…"
 
-#: kmymoney/kmymoney.cpp:1357 kmymoney/kmymoney.cpp:1358
+#: kmymoney/kmymoney.cpp:1368 kmymoney/kmymoney.cpp:1369
 #, kde-format
 msgid "Account Template..."
 msgstr "Modelo de contas…"
 
-#: kmymoney/kmymoney.cpp:1359
+#: kmymoney/kmymoney.cpp:1370
 #, kde-format
 msgid "Personal Data..."
 msgstr "Datos persoais…"
 
-#: kmymoney/kmymoney.cpp:1361
+#: kmymoney/kmymoney.cpp:1372
 #, kde-format
 msgid "Dump Memory"
 msgstr "Envorcado de memoria"
 
-#: kmymoney/kmymoney.cpp:1363
+#: kmymoney/kmymoney.cpp:1374
 #, kde-format
 msgid "File-Information..."
 msgstr "Información do ficheiro…"
 
-#: kmymoney/kmymoney.cpp:1367
+#: kmymoney/kmymoney.cpp:1378
 #, kde-format
 msgid "Find transaction..."
 msgstr "Atopar un asento…"
 
-#: kmymoney/kmymoney.cpp:1371
+#: kmymoney/kmymoney.cpp:1382
 #, kde-format
 msgid "Show Transaction Detail"
 msgstr "Amosar os detalles do asento"
 
 #. i18n: ectx: label, entry (HideReconciledTransactions), group (List Options)
-#: kmymoney/kmymoney.cpp:1372 kmymoney/settings/kmymoney.kcfg:252
+#: kmymoney/kmymoney.cpp:1383 kmymoney/settings/kmymoney.kcfg:252
 #, kde-format
 msgid "Hide reconciled transactions"
 msgstr "Agochar os asentos conciliados"
 
 #. i18n: ectx: label, entry (HideUnusedCategory), group (List Options)
-#: kmymoney/kmymoney.cpp:1373 kmymoney/settings/kmymoney.kcfg:224
+#: kmymoney/kmymoney.cpp:1384 kmymoney/settings/kmymoney.kcfg:224
 #, kde-format
 msgid "Hide unused categories"
 msgstr "Agochar as categorías non usadas"
 
 #. i18n: ectx: label, entry (ShowAllAccounts), group (List Options)
-#: kmymoney/kmymoney.cpp:1374 kmymoney/settings/kmymoney.kcfg:228
+#: kmymoney/kmymoney.cpp:1385 kmymoney/settings/kmymoney.kcfg:228
 #, kde-format
 msgid "Show all accounts"
 msgstr "Amosar todas as contas"
 
-#: kmymoney/kmymoney.cpp:1378
+#: kmymoney/kmymoney.cpp:1389
 #, kde-format
 msgid "New institution..."
 msgstr "Nova entidade…"
 
-#: kmymoney/kmymoney.cpp:1379
+#: kmymoney/kmymoney.cpp:1390
 #, kde-format
 msgid "Edit institution..."
 msgstr "Editar a entidade…"
 
-#: kmymoney/kmymoney.cpp:1380
+#: kmymoney/kmymoney.cpp:1391
 #, kde-format
 msgid "Delete institution..."
 msgstr "Eliminar a entidade…"
 
-#: kmymoney/kmymoney.cpp:1384
+#: kmymoney/kmymoney.cpp:1395
 #, kde-format
 msgid "New account..."
 msgstr "Nova conta…"
 
-#: kmymoney/kmymoney.cpp:1385
+#: kmymoney/kmymoney.cpp:1396
 #, kde-format
 msgid "Open ledger"
 msgstr "Abrir o libro maior"
 
-#: kmymoney/kmymoney.cpp:1386
+#: kmymoney/kmymoney.cpp:1397
 #, kde-format
 msgid "Reconcile..."
 msgstr "Conciliar…"
 
-#: kmymoney/kmymoney.cpp:1387
+#: kmymoney/kmymoney.cpp:1398
 #, kde-format
 msgctxt "Finish reconciliation"
 msgid "Finish"
 msgstr "Rematar"
 
-#: kmymoney/kmymoney.cpp:1388
+#: kmymoney/kmymoney.cpp:1399
 #, kde-format
 msgctxt "Postpone reconciliation"
 msgid "Postpone"
 msgstr "Pospor"
 
-#: kmymoney/kmymoney.cpp:1389
+#: kmymoney/kmymoney.cpp:1400
 #, kde-format
 msgctxt "Cancel reconciliation"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: kmymoney/kmymoney.cpp:1390
+#: kmymoney/kmymoney.cpp:1401
 #, kde-format
 msgid "Report reconciliation"
 msgstr "Conciliación de informes"
 
-#: kmymoney/kmymoney.cpp:1391
+#: kmymoney/kmymoney.cpp:1402
 #, kde-format
 msgid "Edit account..."
 msgstr "Editar a conta…"
 
-#: kmymoney/kmymoney.cpp:1392
+#: kmymoney/kmymoney.cpp:1403
 #, kde-format
 msgid "Delete account..."
 msgstr "Eliminar a conta…"
 
-#: kmymoney/kmymoney.cpp:1393
+#: kmymoney/kmymoney.cpp:1404
 #, kde-format
 msgid "Close account"
 msgstr "Pechar a conta"
 
-#: kmymoney/kmymoney.cpp:1394
+#: kmymoney/kmymoney.cpp:1405
 #, kde-format
 msgid "Reopen account"
 msgstr "Reabrir a conta"
 
-#: kmymoney/kmymoney.cpp:1395
+#: kmymoney/kmymoney.cpp:1406
 #, kde-format
 msgid "Transaction report"
 msgstr "Informe de asentos"
 
-#: kmymoney/kmymoney.cpp:1396
+#: kmymoney/kmymoney.cpp:1407
 #, kde-format
 msgid "Show balance chart..."
 msgstr "Amosar a gráfica do saldo…"
 
-#: kmymoney/kmymoney.cpp:1397
+#: kmymoney/kmymoney.cpp:1408
 #, kde-format
 msgid "Map account..."
 msgstr "Asociar a conta…"
 
-#: kmymoney/kmymoney.cpp:1398
+#: kmymoney/kmymoney.cpp:1409
 #, kde-format
 msgid "Unmap account..."
 msgstr "Anular a asociación da conta…"
 
-#: kmymoney/kmymoney.cpp:1399
+#: kmymoney/kmymoney.cpp:1410
 #, kde-format
 msgid "Update account..."
 msgstr "Actualizar a conta…"
 
-#: kmymoney/kmymoney.cpp:1400
+#: kmymoney/kmymoney.cpp:1411
 #, kde-format
 msgid "Update all accounts..."
 msgstr "Actualizar todas as contas…"
 
-#: kmymoney/kmymoney.cpp:1404
+#: kmymoney/kmymoney.cpp:1415
 #, kde-format
 msgid "New category..."
 msgstr "Nova categoría…"
 
-#: kmymoney/kmymoney.cpp:1405
+#: kmymoney/kmymoney.cpp:1416
 #, kde-format
 msgid "Edit category..."
 msgstr "Editar a categoría…"
 
-#: kmymoney/kmymoney.cpp:1406
+#: kmymoney/kmymoney.cpp:1417
 #, kde-format
 msgid "Delete category..."
 msgstr "Eliminar a categoría…"
 
-#: kmymoney/kmymoney.cpp:1410
+#: kmymoney/kmymoney.cpp:1421
 #, kde-format
 msgid "Currencies..."
 msgstr "Divisas…"
 
-#: kmymoney/kmymoney.cpp:1411
+#: kmymoney/kmymoney.cpp:1422
 #, kde-format
 msgid "Prices..."
 msgstr "Prezos…"
 
-#: kmymoney/kmymoney.cpp:1412
+#: kmymoney/kmymoney.cpp:1423
 #, kde-format
 msgid "Update Stock and Currency Prices..."
 msgstr "Actualizar os prezos das accións e divisas…"
 
-#: kmymoney/kmymoney.cpp:1413
+#: kmymoney/kmymoney.cpp:1424
 #, kde-format
 msgid "Consistency Check"
 msgstr "Comprobación de consistencia"
 
-#: kmymoney/kmymoney.cpp:1414
+#: kmymoney/kmymoney.cpp:1425
 #, kde-format
 msgid "Performance-Test"
 msgstr "Probas de rendemento"
 
-#: kmymoney/kmymoney.cpp:1415
+#: kmymoney/kmymoney.cpp:1426
 #, kde-format
 msgid "Calculator..."
 msgstr "Calculadora…"
 
-#: kmymoney/kmymoney.cpp:1419
+#: kmymoney/kmymoney.cpp:1430
 #, kde-format
 msgid "Enable all messages"
 msgstr "Permitir todas as mensaxes"
 
-#: kmymoney/kmymoney.cpp:1423 kmymoney/views/kwelcomepage.cpp:82
+#: kmymoney/kmymoney.cpp:1434 kmymoney/views/kwelcomepage.cpp:82
 #, kde-format
 msgid "Get help from our community"
 msgstr "Obter axuda da nosa comunidade"
 
-#: kmymoney/kmymoney.cpp:1424 kmymoney/views/kwelcomepage.cpp:84
+#: kmymoney/kmymoney.cpp:1435 kmymoney/views/kwelcomepage.cpp:84
 #, kde-format
 msgid "See what's new in this version"
 msgstr "Ver o que hai de novo nesta versión"
 
-#: kmymoney/kmymoney.cpp:1425 kmymoney/views/kwelcomepage.cpp:80
+#: kmymoney/kmymoney.cpp:1436 kmymoney/views/kwelcomepage.cpp:80
 #, kde-format
 msgid "Visit our website"
 msgstr "Visitar o noso sitio web"
 
-#: kmymoney/kmymoney.cpp:1429
+#: kmymoney/kmymoney.cpp:1440
 #, kde-format
 msgctxt "New transaction button"
 msgid "New transaction"
 msgstr "Novo asento"
 
-#: kmymoney/kmymoney.cpp:1430
+#: kmymoney/kmymoney.cpp:1441
 #, kde-format
 msgctxt "Edit transaction button"
 msgid "Edit"
 msgstr "Editar"
 
-#: kmymoney/kmymoney.cpp:1431
+#: kmymoney/kmymoney.cpp:1442
 #, kde-format
 msgctxt "Enter transaction"
 msgid "Enter"
 msgstr "Introducir"
 
-#: kmymoney/kmymoney.cpp:1432
+#: kmymoney/kmymoney.cpp:1443
 #, kde-format
 msgctxt "Edit split button"
 msgid "Edit splits"
 msgstr "Editar as partidas"
 
-#: kmymoney/kmymoney.cpp:1433
+#: kmymoney/kmymoney.cpp:1444
 #, kde-format
 msgctxt "Cancel transaction edit"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: kmymoney/kmymoney.cpp:1434
+#: kmymoney/kmymoney.cpp:1445
 #, kde-format
 msgctxt "Delete transaction"
 msgid "Delete"
 msgstr "Eliminar"
 
-#: kmymoney/kmymoney.cpp:1435
+#: kmymoney/kmymoney.cpp:1446
 #, kde-format
 msgctxt "Duplicate transaction"
 msgid "Duplicate"
 msgstr "Duplicar"
 
-#: kmymoney/kmymoney.cpp:1436
+#: kmymoney/kmymoney.cpp:1447
 #, kde-format
 msgctxt "Add reversing transaction"
 msgid "Add reversing"
 msgstr "Engadir unha inversión"
 
-#: kmymoney/kmymoney.cpp:1437
+#: kmymoney/kmymoney.cpp:1448
 #, kde-format
 msgctxt "Accept 'imported' and 'matched' transaction"
 msgid "Accept"
 msgstr "Aceptar"
 
-#: kmymoney/kmymoney.cpp:1438
+#: kmymoney/kmymoney.cpp:1449
 #, kde-format
 msgctxt "Toggle reconciliation flag"
 msgid "Toggle"
 msgstr "Conmutar"
 
-#: kmymoney/kmymoney.cpp:1439
+#: kmymoney/kmymoney.cpp:1450
 #, kde-format
 msgctxt "Mark transaction cleared"
 msgid "Cleared"
 msgstr "Compensado"
 
-#: kmymoney/kmymoney.cpp:1440
+#: kmymoney/kmymoney.cpp:1451
 #, kde-format
 msgctxt "Mark transaction reconciled"
 msgid "Reconciled"
 msgstr "Conciliado"
 
-#: kmymoney/kmymoney.cpp:1441
+#: kmymoney/kmymoney.cpp:1452
 #, kde-format
 msgctxt "Mark transaction not reconciled"
 msgid "Not reconciled"
 msgstr "Non conciliado"
 
-#: kmymoney/kmymoney.cpp:1442
+#: kmymoney/kmymoney.cpp:1453
 #, kde-format
 msgctxt "Move transaction"
 msgid "Move transaction"
 msgstr "Mover o asento"
 
-#: kmymoney/kmymoney.cpp:1443
+#: kmymoney/kmymoney.cpp:1454
 #, kde-format
 msgctxt "Show transaction"
 msgid "Show transaction"
 msgstr "Amosar o asento"
 
-#: kmymoney/kmymoney.cpp:1444
+#: kmymoney/kmymoney.cpp:1455
 #, kde-format
 msgctxt "Display transaction details"
 msgid "Show transaction details"
 msgstr "Amosar os detalles do asento"
 
-#: kmymoney/kmymoney.cpp:1446
+#: kmymoney/kmymoney.cpp:1457
 #, kde-format
 msgctxt "Open URL"
 msgid "Open URL"
 msgstr "Abrir o URL"
 
-#: kmymoney/kmymoney.cpp:1447
+#: kmymoney/kmymoney.cpp:1458
 #, kde-format
 msgctxt "Select all transactions"
 msgid "Select all"
 msgstr "Escoller todo"
 
-#: kmymoney/kmymoney.cpp:1448
+#: kmymoney/kmymoney.cpp:1459
 #, kde-format
 msgid "Go to account"
 msgstr "Ir á conta"
 
-#: kmymoney/kmymoney.cpp:1449
+#: kmymoney/kmymoney.cpp:1460
 #, kde-format
 msgid "Go to payee"
 msgstr "Ir ao beneficiario"
 
-#: kmymoney/kmymoney.cpp:1450
+#: kmymoney/kmymoney.cpp:1461
 #, kde-format
 msgid "Create scheduled transaction..."
 msgstr "Crear unha transacción planificada…"
 
-#: kmymoney/kmymoney.cpp:1451
+#: kmymoney/kmymoney.cpp:1462
 #, kde-format
 msgid "Assign next number"
 msgstr "Asignar o número seguinte"
 
-#: kmymoney/kmymoney.cpp:1452
+#: kmymoney/kmymoney.cpp:1463
 #, kde-format
 msgctxt "Combine transactions"
 msgid "Combine"
 msgstr "Combinar"
 
-#: kmymoney/kmymoney.cpp:1453
+#: kmymoney/kmymoney.cpp:1464
 #, kde-format
 msgid "Move to today"
 msgstr "Mover a hoxe"
 
-#: kmymoney/kmymoney.cpp:1454
+#: kmymoney/kmymoney.cpp:1465
 #, kde-format
 msgid "Copy splits"
 msgstr "Copiar as partidas"
 
-#: kmymoney/kmymoney.cpp:1455
+#: kmymoney/kmymoney.cpp:1466
 #, kde-format
 msgid "Show filter widget"
 msgstr "Amosar o trebello de filtrar"
 
-#: kmymoney/kmymoney.cpp:1457
+#: kmymoney/kmymoney.cpp:1468
 #, kde-format
 msgid "New investment..."
 msgstr "Novo investimento…"
 
-#: kmymoney/kmymoney.cpp:1458
+#: kmymoney/kmymoney.cpp:1469
 #, kde-format
 msgid "Edit investment..."
 msgstr "Editar o investimento…"
 
-#: kmymoney/kmymoney.cpp:1459
+#: kmymoney/kmymoney.cpp:1470
 #, kde-format
 msgid "Delete investment..."
 msgstr "Eliminar o investimento…"
 
-#: kmymoney/kmymoney.cpp:1460
+#: kmymoney/kmymoney.cpp:1471
 #, kde-format
 msgid "Online price update..."
 msgstr "Actualización do prezo por Internet…"
 
-#: kmymoney/kmymoney.cpp:1461
+#: kmymoney/kmymoney.cpp:1472
 #, kde-format
 msgid "Manual price update..."
 msgstr "Actualizar un prezo á man …"
 
-#: kmymoney/kmymoney.cpp:1462
+#: kmymoney/kmymoney.cpp:1473
 #, kde-format
 msgid "Edit security..."
 msgstr "Editar o valor bolsista…"
 
-#: kmymoney/kmymoney.cpp:1463
+#: kmymoney/kmymoney.cpp:1474
 #, kde-format
 msgid "Delete security..."
 msgstr "Eliminar o valor bolsista…"
 
-#: kmymoney/kmymoney.cpp:1466
+#: kmymoney/kmymoney.cpp:1477
 #, kde-format
 msgid "New schedule..."
 msgstr "Nova planificación…"
 
-#: kmymoney/kmymoney.cpp:1467 kmymoney/kmymoney.cpp:1468
+#: kmymoney/kmymoney.cpp:1478 kmymoney/kmymoney.cpp:1479
 #, kde-format
 msgid "Edit scheduled transaction"
 msgstr "Editar o asento planificado"
 
-#: kmymoney/kmymoney.cpp:1469
+#: kmymoney/kmymoney.cpp:1480
 #, kde-format
 msgid "Delete scheduled transaction"
 msgstr "Eliminar o asento planificado"
 
-#: kmymoney/kmymoney.cpp:1470
+#: kmymoney/kmymoney.cpp:1481
 #, kde-format
 msgid "Duplicate scheduled transaction"
 msgstr "Duplicar o asento planificado"
 
-#: kmymoney/kmymoney.cpp:1471
+#: kmymoney/kmymoney.cpp:1482
 #, kde-format
 msgid "Enter next transaction..."
 msgstr "Inserir a seguinte transacción…"
 
-#: kmymoney/kmymoney.cpp:1472
+#: kmymoney/kmymoney.cpp:1483
 #, kde-format
 msgid "Skip next transaction..."
 msgstr "Omitir a seguinte transacción…"
 
-#: kmymoney/kmymoney.cpp:1474
+#: kmymoney/kmymoney.cpp:1485
 #, kde-format
 msgid "New payee..."
 msgstr "Nova beneficiaria…"
 
-#: kmymoney/kmymoney.cpp:1475
+#: kmymoney/kmymoney.cpp:1486
 #, kde-format
 msgid "Rename payee"
 msgstr "Renomear o beneficiario"
 
-#: kmymoney/kmymoney.cpp:1476
+#: kmymoney/kmymoney.cpp:1487
 #, kde-format
 msgid "Delete payee"
 msgstr "Eliminar o beneficiario"
 
-#: kmymoney/kmymoney.cpp:1477
+#: kmymoney/kmymoney.cpp:1488
 #, kde-format
 msgid "Merge payees"
 msgstr "Fusionar as partes"
 
-#: kmymoney/kmymoney.cpp:1479
+#: kmymoney/kmymoney.cpp:1490
 #, kde-format
 msgid "New tag..."
 msgstr "Nova etiqueta…"
 
-#: kmymoney/kmymoney.cpp:1480
+#: kmymoney/kmymoney.cpp:1491
 #, kde-format
 msgid "Rename tag"
 msgstr "Renomear a etiqueta"
 
-#: kmymoney/kmymoney.cpp:1481
+#: kmymoney/kmymoney.cpp:1492
 #, kde-format
 msgid "Delete tag"
 msgstr "Eliminar a etiqueta"
 
-#: kmymoney/kmymoney.cpp:1483
+#: kmymoney/kmymoney.cpp:1494
 #, kde-format
 msgid "Open report"
 msgstr "Abrir o informe"
 
-#: kmymoney/kmymoney.cpp:1484
+#: kmymoney/kmymoney.cpp:1495
 #, kde-format
 msgid "New report"
 msgstr "Novo informe"
 
-#: kmymoney/kmymoney.cpp:1485
+#: kmymoney/kmymoney.cpp:1496
 #, kde-format
 msgid "Copy report"
 msgstr "Copiar o informe"
 
-#: kmymoney/kmymoney.cpp:1486
+#: kmymoney/kmymoney.cpp:1497
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:215
 #, kde-format
 msgid "Configure report"
 msgstr "Configurar o informe"
 
-#: kmymoney/kmymoney.cpp:1487
+#: kmymoney/kmymoney.cpp:1498
 #, kde-format
 msgid "Export report"
 msgstr "Exportar o informe"
 
-#: kmymoney/kmymoney.cpp:1488
+#: kmymoney/kmymoney.cpp:1499
 #, kde-format
 msgid "Delete report"
 msgstr "Eliminar o informe"
 
-#: kmymoney/kmymoney.cpp:1489
+#: kmymoney/kmymoney.cpp:1500
 #, kde-format
 msgid "Close report"
 msgstr "Pechar o informe"
 
-#: kmymoney/kmymoney.cpp:1490
+#: kmymoney/kmymoney.cpp:1501
 #, kde-format
 msgid "Toggle chart"
 msgstr "Conmutar a gráfica"
 
-#: kmymoney/kmymoney.cpp:1491
+#: kmymoney/kmymoney.cpp:1502
 #, kde-format
 msgid "Edit tab order"
 msgstr "Editar a orde das lapelas"
 
-#: kmymoney/kmymoney.cpp:1494
+#: kmymoney/kmymoney.cpp:1505
 #, kde-format
 msgid "Test new feature"
 msgstr "Probar unha funcionalidade nova"
 
-#: kmymoney/kmymoney.cpp:1495
+#: kmymoney/kmymoney.cpp:1506
 #, kde-format
 msgid "Debug Traces"
 msgstr "Trazas de depuración"
 
-#: kmymoney/kmymoney.cpp:1497
+#: kmymoney/kmymoney.cpp:1508
 #, kde-format
 msgid "Debug Timers"
 msgstr "Cronómetros de depuración"
 
-#: kmymoney/kmymoney.cpp:1516
+#: kmymoney/kmymoney.cpp:1527
 #, kde-format
 msgctxt "Match transactions"
 msgid "Match"
 msgstr "Emparellar"
 
-#: kmymoney/kmymoney.cpp:1517
+#: kmymoney/kmymoney.cpp:1528
 #, kde-format
 msgctxt "Unmatch transactions"
 msgid "Unmatch"
 msgstr "Desemparellar"
 
-#: kmymoney/kmymoney.cpp:1643
+#: kmymoney/kmymoney.cpp:1654
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start reconciling the currently selected account"
 msgstr "Comezar a reconciliar a conta seleccionada"
 
-#: kmymoney/kmymoney.cpp:1644
+#: kmymoney/kmymoney.cpp:1655
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Postpone the current reconciliation"
 msgstr "Pospor a conciliación actual."
 
-#: kmymoney/kmymoney.cpp:1645
+#: kmymoney/kmymoney.cpp:1656
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Finish the current reconciliation"
 msgstr "Rematar a conciliación actual."
 
-#: kmymoney/kmymoney.cpp:1646
+#: kmymoney/kmymoney.cpp:1657
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Cancel the current reconciliation"
 msgstr "Cancelar a conciliación actual."
 
-#: kmymoney/kmymoney.cpp:1754
+#: kmymoney/kmymoney.cpp:1765
 #, kde-format
 msgid "View back"
 msgstr "Vista atrás"
 
-#: kmymoney/kmymoney.cpp:1755
+#: kmymoney/kmymoney.cpp:1766
 #, kde-format
 msgid "View forward"
 msgstr "Vista adiante"
 
-#: kmymoney/kmymoney.cpp:2160
+#: kmymoney/kmymoney.cpp:2152
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
@@ -5427,40 +5432,40 @@ msgstr ""
 "Polo menos unha partida dos asentos escollidos foi conciliada. Desexa "
 "eliminar os asentos aínda así?"
 
-#: kmymoney/kmymoney.cpp:2162
+#: kmymoney/kmymoney.cpp:2154
 #, kde-format
 msgid "Transaction already reconciled"
 msgstr "O asento xa foi conciliado"
 
-#: kmymoney/kmymoney.cpp:2167
+#: kmymoney/kmymoney.cpp:2159
 #, kde-format
 msgid "Do you really want to delete the selected transaction?"
 msgid_plural "Do you really want to delete all %1 selected transactions?"
 msgstr[0] "Seguro que quere eliminar o asento escollido?"
 msgstr[1] "Seguro que quere eliminar os %1 asentos escollidos?"
 
-#: kmymoney/kmymoney.cpp:2171
+#: kmymoney/kmymoney.cpp:2163
 #, kde-format
 msgid "Delete transaction"
 msgstr "Eliminar o asento"
 
-#: kmymoney/kmymoney.cpp:2248
+#: kmymoney/kmymoney.cpp:2240
 #, kde-format
 msgid "Unable to duplicate transaction(s)"
 msgstr "Non é posíbel duplicar os asentos"
 
-#: kmymoney/kmymoney.cpp:2360
+#: kmymoney/kmymoney.cpp:2352
 #, kde-format
 msgctxt "@action:button"
 msgid "Close"
 msgstr "Pechar"
 
-#: kmymoney/kmymoney.cpp:2539
+#: kmymoney/kmymoney.cpp:2531
 #, kde-format
 msgid "Unable to modify transaction"
 msgstr "Non é posíbel modificar o asento"
 
-#: kmymoney/kmymoney.cpp:2683
+#: kmymoney/kmymoney.cpp:2675
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
@@ -5469,31 +5474,31 @@ msgstr ""
 "Polo menos unha partida dos asentos escollidos foi conciliada. Quere cambiar "
 "os asentos aínda así?"
 
-#: kmymoney/kmymoney.cpp:2685
+#: kmymoney/kmymoney.cpp:2677
 #, kde-format
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "O asento xa foi conciliado"
 
-#: kmymoney/kmymoney.cpp:2690
+#: kmymoney/kmymoney.cpp:2682
 #, kde-format
 msgid "Do you really want to change the selected transaction?"
 msgid_plural "Do you really want to change all %1 selected transactions?"
 msgstr[0] "Seguro que quere cambiar o asento seleccionado?"
 msgstr[1] "Seguro que quere cambiar os %1 asentos seleccionado?"
 
-#: kmymoney/kmymoney.cpp:2694
+#: kmymoney/kmymoney.cpp:2686
 #, kde-format
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "Cambiar o asento"
 
-#: kmymoney/kmymoney.cpp:2779
+#: kmymoney/kmymoney.cpp:2771
 #, kde-format
 msgid "Unable to accept transaction"
 msgstr "Non é posíbel aceptar o asento"
 
-#: kmymoney/kmymoney.cpp:2819
+#: kmymoney/kmymoney.cpp:2811
 #, kde-format
 msgid ""
 "KMyMoney has detected some overdue scheduled transactions for the account <b>"
@@ -5502,12 +5507,12 @@ msgstr ""
 "KMyMoney detectou algunhas planificacións vencidas na conta <b>%1</b>. Quere "
 "inserir agora estas transaccións planificadas?"
 
-#: kmymoney/kmymoney.cpp:2822
+#: kmymoney/kmymoney.cpp:2814
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "Atopáronse asentos planificados"
 
-#: kmymoney/kmymoney.cpp:2897
+#: kmymoney/kmymoney.cpp:2889
 #, kde-format
 msgid ""
 "<qt>You have closed this account. It remains in the system because you have "
@@ -5519,81 +5524,81 @@ msgstr ""
 "refiren a ela, pero non é amosada nas vistas. Pode facela visíbel de novo "
 "indo ao menú Vista e escollendo <b>Amosar todas as contas</b>.</qt>"
 
-#: kmymoney/kmymoney.cpp:2899
+#: kmymoney/kmymoney.cpp:2891
 #, kde-format
 msgid "Information"
 msgstr "Información"
 
-#: kmymoney/kmymoney.cpp:3003 kmymoney/kmymoney.cpp:3099
+#: kmymoney/kmymoney.cpp:2995 kmymoney/kmymoney.cpp:3091
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "Non hai ningún ficheiro de KMyMoney aberto"
 
-#: kmymoney/kmymoney.cpp:3036 kmymoney/kmymoney.cpp:3038
+#: kmymoney/kmymoney.cpp:3028 kmymoney/kmymoney.cpp:3030
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1363
-#: kmymoney/plugins/xml/xmlstorage.cpp:416
+#: kmymoney/plugins/xml/xmlstorage.cpp:683
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "Listo."
 
-#: kmymoney/kmymoney.cpp:3103
+#: kmymoney/kmymoney.cpp:3095
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "Estanse a ver os datos persoais…"
 
-#: kmymoney/kmymoney.cpp:3110
+#: kmymoney/kmymoney.cpp:3102
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "Editar os datos persoais"
 
-#: kmymoney/kmymoney.cpp:3125
+#: kmymoney/kmymoney.cpp:3117
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr "Non é posíbel gardar a información do usuario: %1"
 
-#: kmymoney/kmymoney.cpp:3133
+#: kmymoney/kmymoney.cpp:3125
 #, kde-format
 msgid "Importing account templates."
 msgstr "Estanse a importar os modelos de contas."
 
-#: kmymoney/kmymoney.cpp:3147
+#: kmymoney/kmymoney.cpp:3139
 #, kde-format
 msgid "Unable to import template(s)"
 msgstr "Non é posíbel importar os modelos"
 
-#: kmymoney/kmymoney.cpp:3155
+#: kmymoney/kmymoney.cpp:3147
 #, kde-format
 msgid "Exporting account templates."
 msgstr "Estanse a exportar os modelos de contas."
 
-#: kmymoney/kmymoney.cpp:3161
+#: kmymoney/kmymoney.cpp:3153
 #, kde-format
 msgid "Save as..."
 msgstr "Gardar como…"
 
-#: kmymoney/kmymoney.cpp:3162
+#: kmymoney/kmymoney.cpp:3154
 #, kde-format
 msgid "KMyMoney template files (*.kmt);;All files (*)"
 msgstr "Ficheiros de modelo do KMyMoney (*.kmt);;Todos os ficheiros (*)"
 
-#: kmymoney/kmymoney.cpp:3193
+#: kmymoney/kmymoney.cpp:3185
 #, kde-format
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "Exportación de modelo"
 
-#: kmymoney/kmymoney.cpp:3211
+#: kmymoney/kmymoney.cpp:3203
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr "O ficheiro <b>%1</b> xa existe. Seguro que quere sobrescribilo?"
 
-#: kmymoney/kmymoney.cpp:3213 kmymoney/plugins/csv/export/csvexporter.cpp:106
+#: kmymoney/kmymoney.cpp:3205 kmymoney/plugins/csv/export/csvexporter.cpp:106
 #, kde-format
 msgid "File already exists"
 msgstr "O ficheiro xa existe"
 
-#: kmymoney/kmymoney.cpp:3338
+#: kmymoney/kmymoney.cpp:3330
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
@@ -5602,13 +5607,13 @@ msgstr ""
 "O ficheiro debe ser gardado antes de poder facerlle unha salvagarda. Quere "
 "continuar?"
 
-#: kmymoney/kmymoney.cpp:3340
+#: kmymoney/kmymoney.cpp:3332
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr "Confirmación de salvagarda"
 
-#: kmymoney/kmymoney.cpp:3357
+#: kmymoney/kmymoney.cpp:3349
 #, kde-format
 msgid ""
 "The current implementation of the backup functionality only supports local "
@@ -5617,71 +5622,71 @@ msgstr ""
 "A implementación actual da función de salvagarda só permite usar ficheiros "
 "locais como orixes. O ficheiro orixe actual é «%1»."
 
-#: kmymoney/kmymoney.cpp:3359
+#: kmymoney/kmymoney.cpp:3351
 #, kde-format
 msgid "Local files only"
 msgstr "Só ficheiros locais"
 
-#: kmymoney/kmymoney.cpp:3398
+#: kmymoney/kmymoney.cpp:3390
 #, kde-format
 msgid "Mounting %1"
 msgstr "Montando %1"
 
-#: kmymoney/kmymoney.cpp:3432
+#: kmymoney/kmymoney.cpp:3424
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr ""
 "Xa existe un ficheiro de salvagarda de hoxe nese dispositivo. Quere "
 "substituílo?"
 
-#: kmymoney/kmymoney.cpp:3432
+#: kmymoney/kmymoney.cpp:3424
 #, kde-format
 msgid "&Replace"
 msgstr "Substituí&r"
 
-#: kmymoney/kmymoney.cpp:3440
+#: kmymoney/kmymoney.cpp:3432
 #, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
 msgstr "Non é posíbel crear o cartafol de salvagarda «%1»."
 
-#: kmymoney/kmymoney.cpp:3445
+#: kmymoney/kmymoney.cpp:3437
 #, kde-format
 msgid "Writing %1"
 msgstr "Escribindo %1"
 
-#: kmymoney/kmymoney.cpp:3466
+#: kmymoney/kmymoney.cpp:3458
 #, kde-format
 msgid "Unmounting %1"
 msgstr "Desmontando %1"
 
-#: kmymoney/kmymoney.cpp:3503
+#: kmymoney/kmymoney.cpp:3495
 #, kde-format
 msgid "Error mounting device"
 msgstr "Produciuse un erro ao montar un dispositivo"
 
-#: kmymoney/kmymoney.cpp:3518 kmymoney/kmymoney.cpp:3537
+#: kmymoney/kmymoney.cpp:3510 kmymoney/kmymoney.cpp:3529
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "Feito"
 
-#: kmymoney/kmymoney.cpp:3519 kmymoney/kmymoney.cpp:3539
+#: kmymoney/kmymoney.cpp:3511 kmymoney/kmymoney.cpp:3531
 #, kde-format
 msgid "File successfully backed up"
 msgstr "Creouse unha salvagarda do ficheiro"
 
-#: kmymoney/kmymoney.cpp:3525
+#: kmymoney/kmymoney.cpp:3517
 #, kde-format
 msgid "Error copying file to device"
 msgstr "Produciuse un erro ao copiar o ficheiro ao dispositivo"
 
-#: kmymoney/kmymoney.cpp:3541
+#: kmymoney/kmymoney.cpp:3533
 #, kde-format
 msgid "Error unmounting device"
 msgstr "Produciuse un erro ao desmontar o dispositivo"
 
-#: kmymoney/kmymoney.cpp:3588
+#: kmymoney/kmymoney.cpp:3580
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5698,29 +5703,29 @@ msgstr ""
 "Prema Non para deixar o importe como está, %2,\n"
 "Prema Cancelar para interromper a creación da conta."
 
-#: kmymoney/kmymoney.cpp:3598
+#: kmymoney/kmymoney.cpp:3590
 #, kde-format
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "Abrindo o saldo de pasivos"
 
-#: kmymoney/kmymoney.cpp:3609
+#: kmymoney/kmymoney.cpp:3601
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "Non é posíbel engadir a conta: %1"
 
-#: kmymoney/kmymoney.cpp:3679
+#: kmymoney/kmymoney.cpp:3671
 #, kde-format
 msgid "Running consistency check..."
 msgstr "Facendo unha comprobación da consistencia…"
 
-#: kmymoney/kmymoney.cpp:3686
+#: kmymoney/kmymoney.cpp:3678
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "A comprobación de consistencia fallou: %1"
 
-#: kmymoney/kmymoney.cpp:3696
+#: kmymoney/kmymoney.cpp:3688
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -5729,7 +5734,7 @@ msgstr ""
 "A comprobación da consistencia non atopou ningún problema cos datos. Os "
 "detalles preséntanse embaixo."
 
-#: kmymoney/kmymoney.cpp:3698
+#: kmymoney/kmymoney.cpp:3690
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5740,28 +5745,28 @@ msgstr ""
 "detalles preséntanse embaixo. Os problemas que non se puido corrixir "
 "automaticamente tennos que resolver o usuario."
 
-#: kmymoney/kmymoney.cpp:3701
+#: kmymoney/kmymoney.cpp:3693
 #, kde-format
 msgid "Consistency check result"
 msgstr "Resultado da comprobación da consistencia"
 
-#: kmymoney/kmymoney.cpp:3767
+#: kmymoney/kmymoney.cpp:3759
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Estanse a comprobar os asentos planificados vencidos…"
 
-#: kmymoney/kmymoney.cpp:3959
+#: kmymoney/kmymoney.cpp:3951
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr "Antes de importar un extracto, debe escoller un ficheiro de KMyMoney."
 
-#: kmymoney/kmymoney.cpp:3964
+#: kmymoney/kmymoney.cpp:3956
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Importando un extracto mediante Conexión á Web"
 
-#: kmymoney/kmymoney.cpp:3976
+#: kmymoney/kmymoney.cpp:3968
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5771,68 +5776,57 @@ msgstr ""
 "Non é posíbel importar %1 usando o complemento %2. Este complemento devolveu "
 "o seguinte erro: %3"
 
-#: kmymoney/kmymoney.cpp:3976 kmymoney/plugins/ofx/import/ofximporter.cpp:1035
+#: kmymoney/kmymoney.cpp:3968 kmymoney/plugins/ofx/import/ofximporter.cpp:1035
 #, kde-format
 msgid "Importing error"
 msgstr "Produciuse un erro ao importar"
 
-#: kmymoney/kmymoney.cpp:4004
+#: kmymoney/kmymoney.cpp:3996
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Permítense todas as mensaxes."
 
-#: kmymoney/kmymoney.cpp:4004
+#: kmymoney/kmymoney.cpp:3996
 #, kde-format
 msgid "All messages"
 msgstr "Todas as mensaxes"
 
-#: kmymoney/kmymoney.cpp:4040
+#: kmymoney/kmymoney.cpp:4032
 #, kde-format
 msgid "Auto saving..."
 msgstr "Gardando automaticamente…"
 
-#: kmymoney/kmymoney.cpp:4160
+#: kmymoney/kmymoney.cpp:4152
 #, kde-format
 msgid "Creating new document..."
 msgstr "Creando un documento novo…"
 
-#: kmymoney/kmymoney.cpp:4220
+#: kmymoney/kmymoney.cpp:4212
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "Non foi posíbel crear un ficheiro novo."
 
-#: kmymoney/kmymoney.cpp:4231
+#: kmymoney/kmymoney.cpp:4223
 #, kde-format
 msgid "Open a file."
 msgstr "Abrir un ficheiro."
 
-#: kmymoney/kmymoney.cpp:4245
+#: kmymoney/kmymoney.cpp:4237
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr "Non foi posíbel atopar ningún complemento para abrir o almacenamento."
 
-#: kmymoney/kmymoney.cpp:4249
+#: kmymoney/kmymoney.cpp:4241
 #, kde-format
 msgid "All files (*)"
 msgstr "Todos os ficheiros (*)"
 
-#: kmymoney/kmymoney.cpp:4262
+#: kmymoney/kmymoney.cpp:4254
 #, kde-format
 msgid "Loading file..."
 msgstr "Cargando o ficheiro…"
 
-#: kmymoney/kmymoney.cpp:4268
-#, kde-format
-msgid "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
-msgstr ""
-"<p>O ficheiro <b>%1</b> xa está aberto noutra instancia de KMyMoney</p>"
-
-#: kmymoney/kmymoney.cpp:4268
-#, kde-format
-msgid "Duplicate open"
-msgstr "Duplicado aberto"
-
-#: kmymoney/kmymoney.cpp:4275
+#: kmymoney/kmymoney.cpp:4262
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5841,17 +5835,23 @@ msgstr ""
 "<p><b>%1</b> é ou un nome de ficheiro incorrecto ou non existe. Pode abrir "
 "outro ficheiro ou crear un novo.</p>"
 
-#: kmymoney/kmymoney.cpp:4275
+#: kmymoney/kmymoney.cpp:4262
 #, kde-format
 msgid "File not found"
 msgstr "Ficheiro non atopado"
 
-#: kmymoney/kmymoney.cpp:4306
+#: kmymoney/kmymoney.cpp:4294
+#, kde-format
+msgctxt "@title:window"
+msgid "Problem opening storage"
+msgstr ""
+
+#: kmymoney/kmymoney.cpp:4300
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "Non é posíbel abrir o ficheiro como solicitou."
 
-#: kmymoney/kmymoney.cpp:4313
+#: kmymoney/kmymoney.cpp:4307
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -5860,33 +5860,33 @@ msgstr ""
 "Non foi posíbel ler a súa fonte de datos. Comprobe que na configuración de "
 "KMyMoney están activados os complementos necesarios."
 
-#: kmymoney/kmymoney.cpp:4324
+#: kmymoney/kmymoney.cpp:4318
 #, kde-format
 msgid "Saving file..."
 msgstr "Gardando o ficheiro…"
 
-#: kmymoney/kmymoney.cpp:4336
+#: kmymoney/kmymoney.cpp:4330
 #, kde-format
 msgid "Failed to save your data."
 msgstr "Non foi posíbel gardar os seus datos."
 
-#: kmymoney/kmymoney.cpp:4342
+#: kmymoney/kmymoney.cpp:4336
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 "Non foi posíbel atopar un complemento axeitado para gardar os seus datos."
 
-#: kmymoney/kmymoney.cpp:4348
+#: kmymoney/kmymoney.cpp:4342
 #, kde-format
 msgid "Saving file as...."
 msgstr "Gardando o ficheiro como…"
 
-#: kmymoney/kmymoney.cpp:4364
+#: kmymoney/kmymoney.cpp:4358
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr "Non foi posíbel atopar ningún complemento para gardar os datos."
 
-#: kmymoney/kmymoney.cpp:4393
+#: kmymoney/kmymoney.cpp:4387
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "Non foi posíbel gardar o seu almacenamento."
@@ -9646,7 +9646,7 @@ msgstr "Completouse a exportación.\n"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:85
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
-#: kmymoney/plugins/xml/xmlstorage.cpp:530
+#: kmymoney/plugins/xml/xmlstorage.cpp:205
 #, kde-format
 msgid "Unable to open file '%1' for writing"
 msgstr "Non é posíbel abrir o ficheiro «%1» para escritura"
@@ -11296,7 +11296,7 @@ msgstr ""
 "Non se permite o formato de ficheiro SQLite de GnuCash. Gárdeo no formato "
 "XML en GnuCash e inténteo de novo."
 
-#: kmymoney/plugins/gnc/import/gncimporter.cpp:129
+#: kmymoney/plugins/gnc/import/gncimporter.cpp:133
 #, kde-format
 msgid "GnuCash files (*.gnucash *.xac *.gnc)"
 msgstr "Ficheiros de GnuCash (*.gnucash *.xac *.gnc)"
@@ -14680,18 +14680,18 @@ msgid "An unrecoverable error occurred while reading the database"
 msgstr "Produciuse un erro irrecuperábel mentres se lía a base de dados"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:172
-#: kmymoney/plugins/sql/sqlstorage.cpp:200
+#: kmymoney/plugins/sql/sqlstorage.cpp:204
 #, kde-format
 msgid "Database malfunction"
 msgstr "Mal funcionamento da base de dados"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:189
-#: kmymoney/plugins/xml/xmlstorage.cpp:240
+#: kmymoney/plugins/sql/sqlstorage.cpp:193
+#: kmymoney/plugins/xml/xmlstorage.cpp:507
 #, kde-format
 msgid "Tried to access a file when it has not been opened"
 msgstr "Intentou acceder a un ficheiro cando este non estaba aberto"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:197
+#: kmymoney/plugins/sql/sqlstorage.cpp:201
 #, kde-format
 msgid ""
 "An unrecoverable error occurred while writing to the database.\n"
@@ -14700,32 +14700,32 @@ msgstr ""
 "Produciuse un erro non recuperábel ao escribir na base de datos.\n"
 "Pode ser estea corrompida."
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:232
+#: kmymoney/plugins/sql/sqlstorage.cpp:236
 #, kde-format
 msgid "Cannot save to current database."
 msgstr "Non é posíbel gardar na base de datos actual."
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:237
+#: kmymoney/plugins/sql/sqlstorage.cpp:241
 #, kde-format
 msgid "Cannot save to current database: %1"
 msgstr "Non é posíbel gardar na base de datos actual: %1"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:260
+#: kmymoney/plugins/sql/sqlstorage.cpp:264
 #, kde-format
 msgid "Database files (*.db *.sql)"
 msgstr "Ficheiros de base de datos (*.db *.sql)"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:266
+#: kmymoney/plugins/sql/sqlstorage.cpp:270
 #, kde-format
 msgid "Open database..."
 msgstr "Abrir unha base de datos…"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:271
+#: kmymoney/plugins/sql/sqlstorage.cpp:275
 #, kde-format
 msgid "Generate Database SQL"
 msgstr "Xerar o SQL da base de datos"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:330
+#: kmymoney/plugins/sql/sqlstorage.cpp:334
 #, kde-format
 msgid ""
 "Database contains data which must be removed before using Save As.\n"
@@ -14735,7 +14735,7 @@ msgstr ""
 "Como.\n"
 "Desexa continuar?"
 
-#: kmymoney/plugins/sql/sqlstorage.cpp:350
+#: kmymoney/plugins/sql/sqlstorage.cpp:354
 #, kde-format
 msgid ""
 "Cannot open or create database %1.\n"
@@ -18080,41 +18080,7 @@ msgctxt "Error message when reading XML file"
 msgid "Unknown payee identifier type %1"
 msgstr "Descoñécese o tipo de identificador de beneficiaria %1"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:349
-#, kde-format
-msgid "Save As"
-msgstr "Gardar como"
-
-#: kmymoney/plugins/xml/xmlstorage.cpp:351
-#, kde-format
-msgctxt "KMyMoney (Filefilter)"
-msgid "KMyMoney files"
-msgstr "Ficheiros de KMyMoney"
-
-#: kmymoney/plugins/xml/xmlstorage.cpp:352
-#, kde-format
-msgctxt "Anonymous (Filefilter)"
-msgid "Anonymous files"
-msgstr "Ficheiros anónimos"
-
-#: kmymoney/plugins/xml/xmlstorage.cpp:353
-#, kde-format
-msgctxt "XML (Filefilter)"
-msgid "XML files"
-msgstr "Ficheiros XML"
-
-#: kmymoney/plugins/xml/xmlstorage.cpp:354
-#, kde-format
-msgctxt "All files (Filefilter)"
-msgid "All files"
-msgstr "Todos os ficheiros"
-
-#: kmymoney/plugins/xml/xmlstorage.cpp:428
-#, kde-format
-msgid "KMyMoney files (*.kmy *.xml)"
-msgstr "Ficheiros de KMyMoney (*.kmy *.xml)"
-
-#: kmymoney/plugins/xml/xmlstorage.cpp:449
+#: kmymoney/plugins/xml/xmlstorage.cpp:113
 #, kde-format
 msgid ""
 "GPG does not seem to be installed on your system. Please make sure that GPG "
@@ -18124,12 +18090,12 @@ msgstr ""
 "GPG non parece estar instalado no sistema. Asegúrese de que GPG pode "
 "atoparse na ruta estándar de busca. Polo momento desactivouse o cifrado."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:449
+#: kmymoney/plugins/xml/xmlstorage.cpp:115
 #, kde-format
 msgid "GPG not found"
 msgstr "Non se atopou GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:456
+#: kmymoney/plugins/xml/xmlstorage.cpp:123
 #, kde-format
 msgid ""
 "<p>You have selected to encrypt your data also with the KMyMoney recover "
@@ -18146,13 +18112,13 @@ msgstr ""
 "ocasión os seus datos non se han cifrar coa chave de recuperación de "
 "KMyMoney.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:461
-#: kmymoney/plugins/xml/xmlstorage.cpp:469
+#: kmymoney/plugins/xml/xmlstorage.cpp:128
+#: kmymoney/plugins/xml/xmlstorage.cpp:141
 #, kde-format
 msgid "GPG Key not found"
 msgstr "Non se atopou a chave GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:469
+#: kmymoney/plugins/xml/xmlstorage.cpp:137
 #, kde-format
 msgid ""
 "<p>You have specified to encrypt your data for the user-id</p><p><center><b>"
@@ -18166,7 +18132,7 @@ msgstr ""
 "Asegúrese de importar unha chave correcta para identificador de usuario. "
 "Nesta ocasión, o cifrado está desactivado."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:476
+#: kmymoney/plugins/xml/xmlstorage.cpp:149
 #, kde-format
 msgid ""
 "<p>You have configured to save your data in encrypted form using GPG. Make "
@@ -18178,12 +18144,12 @@ msgstr ""
 "pode perder todos os seus datos se os garda cifrados e despois non os pode "
 "descifrar!. Se non está seguro, conteste que <b>Non</b>.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:477
+#: kmymoney/plugins/xml/xmlstorage.cpp:151
 #, kde-format
 msgid "Store GPG encrypted"
 msgstr "Gardar cifrado con GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:593
+#: kmymoney/plugins/xml/xmlstorage.cpp:270
 #, kde-format
 msgid ""
 "You have configured KMyMoney to use GPG to protect your data and to encrypt "
@@ -18206,10 +18172,60 @@ msgstr[1] ""
 "piques de caducar, en %1 días. Obteña unha chave actualizada dun servidor de "
 "chaves mediante o seu programa de GPG (por exemplo, KGPG)."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:593
+#: kmymoney/plugins/xml/xmlstorage.cpp:275
 #, kde-format
 msgid "Recover key expires soon"
 msgstr "A chave de recuperación caduca en breves"
+
+#: kmymoney/plugins/xml/xmlstorage.cpp:347
+#, fuzzy, kde-format
+#| msgid ""
+#| "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
+msgctxt "@info Problem opening data file"
+msgid "File <b>%1</b> is already opened by another process."
+msgstr ""
+"<p>O ficheiro <b>%1</b> xa está aberto noutra instancia de KMyMoney</p>"
+
+#: kmymoney/plugins/xml/xmlstorage.cpp:458
+#, fuzzy, kde-format
+#| msgid "<p><b>%1</b> is not a KMyMoney file.</p>"
+msgctxt "@info Problem opening data file"
+msgid "File <b>%1</b> is not a KMyMoney data file."
+msgstr "<p><b>%1</b> non é un ficheiro de KMyMoney.</p>"
+
+#: kmymoney/plugins/xml/xmlstorage.cpp:616
+#, kde-format
+msgid "Save As"
+msgstr "Gardar como"
+
+#: kmymoney/plugins/xml/xmlstorage.cpp:618
+#, kde-format
+msgctxt "KMyMoney (Filefilter)"
+msgid "KMyMoney files"
+msgstr "Ficheiros de KMyMoney"
+
+#: kmymoney/plugins/xml/xmlstorage.cpp:619
+#, kde-format
+msgctxt "Anonymous (Filefilter)"
+msgid "Anonymous files"
+msgstr "Ficheiros anónimos"
+
+#: kmymoney/plugins/xml/xmlstorage.cpp:620
+#, kde-format
+msgctxt "XML (Filefilter)"
+msgid "XML files"
+msgstr "Ficheiros XML"
+
+#: kmymoney/plugins/xml/xmlstorage.cpp:621
+#, kde-format
+msgctxt "All files (Filefilter)"
+msgid "All files"
+msgstr "Todos os ficheiros"
+
+#: kmymoney/plugins/xml/xmlstorage.cpp:695
+#, kde-format
+msgid "KMyMoney files (*.kmy *.xml)"
+msgstr "Ficheiros de KMyMoney (*.kmy *.xml)"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, XMLStorageSettings)
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:14
@@ -25730,6 +25746,9 @@ msgstr "Só se permite usar ou --csv ou --html."
 msgid "saving report '%1' into '%2'"
 msgstr "gardando o informe «%1» en «%2»"
 
+#~ msgid "Duplicate open"
+#~ msgstr "Duplicado aberto"
+
 #~ msgid ""
 #~ "<p>The account \"%1\" was previously created as loan account but some "
 #~ "information is missing.</p><p>The new loan wizard will be started to "
@@ -27798,9 +27817,6 @@ msgstr "gardando o informe «%1» en «%2»"
 #~ msgid ""
 #~ "You cannot import GnuCash data into an existing file. Please close it."
 #~ msgstr "Non pode importar datos de GnuCash a un ficheiro existente. Pécheo."
-
-#~ msgid "<p><b>%1</b> is not a KMyMoney file.</p>"
-#~ msgstr "<p><b>%1</b> non é un ficheiro de KMyMoney.</p>"
 
 #~ msgid "Cannot load file <b>%1</b>. Reason: %2"
 #~ msgstr "Non se pode cargar o ficheiro <b>%1</b>. Motivo: %2"
