@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-02 01:55+0000\n"
-"PO-Revision-Date: 2025-03-27 20:21+0300\n"
+"PO-Revision-Date: 2025-04-02 14:41+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -4776,7 +4776,7 @@ msgstr "Başlıksız"
 #: kmymoney/kmymoney.cpp:756
 #, kde-format
 msgid "Plugin responded with error during close."
-msgstr ""
+msgstr "Kapatma sırasında eklenti hatayla karşılık verdi."
 
 #: kmymoney/kmymoney.cpp:864
 #, kde-format
@@ -5815,7 +5815,7 @@ msgstr "Dosya bulunamadı"
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
-msgstr ""
+msgstr "Depolama Açılırken Hata"
 
 #: kmymoney/kmymoney.cpp:4300
 #, kde-format
@@ -18086,19 +18086,16 @@ msgid "Recover key expires soon"
 msgstr "Kurtarma anahtarı yakında geçerliliğini yitirecek"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:347
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
+#, kde-format
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is already opened by another process."
-msgstr "<p><b>%1</b> dosyası başka bir K Param örneğinde halihazırda açık</p>"
+msgstr "<b>%1</b> dosyası halihazırda başka bir süreç tarafından açılmış."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:458
-#, fuzzy, kde-format
-#| msgid "<p><b>%1</b> is not a template file.</p>"
+#, kde-format
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is not a KMyMoney data file."
-msgstr "<p><b>%1</b>, bir şablon dosyası değil.</p>"
+msgstr "<b>%1</b> dosyası bir K Param veri dosyası değil."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:616
 #, kde-format

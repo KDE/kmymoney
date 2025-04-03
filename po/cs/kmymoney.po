@@ -15384,7 +15384,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/core/listtable.cpp:748
 #, kde-format
 msgid "Return"
-msgstr ""
+msgstr "Enter"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:750
 #, kde-format

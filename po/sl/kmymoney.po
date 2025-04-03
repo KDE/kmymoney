@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-02 01:55+0000\n"
-"PO-Revision-Date: 2025-03-27 06:50+0100\n"
+"PO-Revision-Date: 2025-04-02 06:23+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -4810,7 +4810,7 @@ msgstr "Brez naslova"
 #: kmymoney/kmymoney.cpp:756
 #, kde-format
 msgid "Plugin responded with error during close."
-msgstr ""
+msgstr "Vtičnik se je med zapiranjem odzval z napako."
 
 #: kmymoney/kmymoney.cpp:864
 #, kde-format
@@ -5852,7 +5852,7 @@ msgstr "Datoteke ni mogoče najti"
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
-msgstr ""
+msgstr "Težava pri odpiranju hrambe"
 
 #: kmymoney/kmymoney.cpp:4300
 #, kde-format
@@ -18188,19 +18188,16 @@ msgid "Recover key expires soon"
 msgstr "Ključ za obnovo kmalu poteče"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:347
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
+#, kde-format
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is already opened by another process."
-msgstr "<p>Datoteka <b>%1</b> je že odprta v drugem pojavku KMyMoneya</p>"
+msgstr "Datoteko <b>%1</b> je že odprl drug proces."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:458
-#, fuzzy, kde-format
-#| msgid "<p><b>%1</b> is not a template file.</p>"
+#, kde-format
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is not a KMyMoney data file."
-msgstr "<p><b>%1</b> ni datoteka s predlogo.</p>"
+msgstr "Datoteka <b>%1</b> ni podatkovna datoteka KMyMoney."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:616
 #, kde-format

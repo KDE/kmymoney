@@ -17569,19 +17569,16 @@ msgid "Recover key expires soon"
 msgstr ""
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:347
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
+#, kde-format
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is already opened by another process."
-msgstr "<p>已有另一个 KMyMoney 进程打开了此文件 <b>%1</b></p>"
+msgstr ""
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:458
-#, fuzzy, kde-format
-#| msgid "<p><b>%1</b> is not a template file.</p>"
+#, kde-format
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is not a KMyMoney data file."
-msgstr "“<p><b>%1</b> 不是模板文件.</p>"
+msgstr ""
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:616
 #, kde-format
@@ -24805,6 +24802,3 @@ msgstr ""
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr ""
-
-#~ msgid "Duplicate open"
-#~ msgstr "重复打开文件"
