@@ -569,9 +569,9 @@ void KInvestmentView::slotNewInvestment()
 {
     Q_D(KInvestmentView);
     if (!isVisible())
-        KNewInvestmentWizard::newInvestment(d->currentEquity());
+        KNewInvestmentWizard::newInvestment(d->currentEquity(), QString());
     else
-        KNewInvestmentWizard::newInvestment(MyMoneyFile::instance()->account(d->m_idInvAcc));
+        KNewInvestmentWizard::newInvestment(MyMoneyFile::instance()->account(d->m_idInvAcc), QString());
 }
 
 void KInvestmentView::slotEditInvestment()

@@ -46,13 +46,19 @@ class KNewInvestmentWizard : public QWizard
       */
     explicit KNewInvestmentWizard(const MyMoneySecurity& sec, QWidget *parent = nullptr);
 
+    /**
+     * Use this to prefill the @a name of the security and account
+     */
+    void setName(const QString& name);
+
 public:
     ~KNewInvestmentWizard();
 
     /**
-      * Create a new investment in a given @p parent investment account
-      */
-    static void newInvestment(const MyMoneyAccount& parent);
+     * Create a new investment in a given @p parent investment account
+     * and prefills the name with @p name.
+     */
+    static QString newInvestment(const MyMoneyAccount& parent, const QString& name);
 
     /**
      * Create a new investment in a given @p parent investment account and

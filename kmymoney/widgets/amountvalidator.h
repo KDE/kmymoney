@@ -26,7 +26,7 @@
   *
   * @author Thomas Baumgart
   */
-class AmountValidator : public QDoubleValidator
+class KMM_WIDGETS_EXPORT AmountValidator : public QDoubleValidator
 {
     Q_OBJECT
 

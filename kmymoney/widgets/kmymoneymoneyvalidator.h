@@ -19,7 +19,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 /**
   * This class is derived from KDoubleValidator and uses
@@ -28,7 +28,7 @@
   *
   * @author Thomas Baumgart
   */
-class KMyMoneyMoneyValidator : public QDoubleValidator
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyMoneyValidator : public QDoubleValidator
 {
     Q_OBJECT
     Q_DISABLE_COPY(KMyMoneyMoneyValidator)

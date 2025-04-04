@@ -150,7 +150,7 @@ bool MultiTransactionEditor::Private::checkForValidTransaction(bool doUserIntera
         rc = false;
     }
 
-    if (q->needCreateCategory(ui->categoryCombo) || q->needCreatePayee(ui->payeeEdit)) {
+    if (q->needCreateCategory(ui->categoryCombo) || q->needCreateObject(ui->payeeEdit)) {
         rc = false;
     }
 
@@ -634,7 +634,7 @@ bool MultiTransactionEditor::eventFilter(QObject* o, QEvent* e)
                 }
 
             } else if (cb == d->ui->payeeEdit) {
-                if (needCreatePayee(cb)) {
+                if (needCreateObject(cb)) {
                     createPayee(cb);
                 }
             }

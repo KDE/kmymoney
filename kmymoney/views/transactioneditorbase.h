@@ -122,13 +122,13 @@ protected:
     eMyMoney::Account::Type defaultCategoryType(CreditDebitEdit* valueWidget) const;
 
     /**
-     * Check if a payee with the name entered into the
+     * Check if an object with the name entered into the
      * lineedit of @a comboBox needs to be created
      *
      * @note As a side effect: sets combobox's completer case
      *       sensitivity to @c Qt::CaseSensitive
      */
-    bool needCreatePayee(QComboBox* comboBox) const;
+    bool needCreateObject(QComboBox* comboBox) const;
 
     /**
      * Create a payee based on the name provided
@@ -137,15 +137,6 @@ protected:
      * @note This starts the creation editor and returns immediately
      */
     void createPayee(QComboBox* comboBox);
-
-    /**
-     * Check if a tag with the name entered into the
-     * lineedit of @a comboBox needs to be created
-     *
-     * @note As a side effect: sets combobox's completer case
-     *       sensitivity to @c Qt::CaseSensitive
-     */
-    bool needCreateTag(QComboBox* comboBox) const;
 
     /**
      * Create a tag based on the name provided
