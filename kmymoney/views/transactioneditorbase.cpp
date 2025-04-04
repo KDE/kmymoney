@@ -247,7 +247,7 @@ eMyMoney::Account::Type TransactionEditorBase::defaultCategoryType(CreditDebitEd
     return type;
 }
 
-bool TransactionEditorBase::needCreatePayee(QComboBox* comboBox) const
+bool TransactionEditorBase::needCreateObject(QComboBox* comboBox) const
 {
     if (comboBox != nullptr) {
         // set case sensitivity so that a payee with the same spelling
@@ -271,23 +271,6 @@ void TransactionEditorBase::createPayee(QComboBox* comboBox)
     creator->addButton(d->cancelButton);
     creator->addButton(d->enterButton);
     creator->createPayee();
-}
-
-bool TransactionEditorBase::needCreateTag(QComboBox* comboBox) const
-{
-    if (comboBox != nullptr) {
-        // set case sensitivity so that a tag with the same spelling
-        // but different case can be created and is not found by accident
-        // inside the Qt logic (see QComboBoxPrivate::_q_editingFinished())
-        comboBox->completer()->setCaseSensitivity(Qt::CaseSensitive);
-        if (!comboBox->currentText().isEmpty()) {
-            const auto index(comboBox->findText(comboBox->currentText()));
-            if (index == -1) {
-                return true;
-            }
-        }
-    }
-    return false;
 }
 
 void TransactionEditorBase::createTag(KTagContainer* tagContainer)

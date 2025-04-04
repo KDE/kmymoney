@@ -51,6 +51,7 @@ public:
 
 protected:
     bool isTransactionDataValid() const override;
+    void createInvestment(QComboBox* comboBox);
 
 public Q_SLOTS:
     void slotSettingsChanged() override;

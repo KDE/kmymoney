@@ -28,6 +28,7 @@
 
 #include "icons.h"
 #include "investactivities.h"
+#include "investmentcreator.h"
 #include "journalmodel.h"
 #include "kcurrencyconverter.h"
 #include "kmymoneysettings.h"
@@ -965,6 +966,7 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     d->ui->feesCombo->installEventFilter(this);
     d->ui->interestCombo->installEventFilter(this);
     d->ui->assetAccountCombo->installEventFilter(this);
+    d->ui->securityAccountCombo->installEventFilter(this);
     d->ui->memoEdit->installEventFilter(this);
 
     // make sure that an empty widget causes the hint frame to show
@@ -1416,6 +1418,10 @@ bool InvestTransactionEditor::eventFilter(QObject* o, QEvent* e)
                 if (needCreateCategory(d->ui->assetAccountCombo)) {
                     createCategory(d->ui->assetAccountCombo, eMyMoney::Account::Type::Asset);
                 }
+            } else if (o == d->ui->securityAccountCombo) {
+                if (needCreateObject(d->ui->securityAccountCombo)) {
+                    createInvestment(d->ui->securityAccountCombo);
+                }
             }
             updateWidgets();
         }
@@ -1461,4 +1467,14 @@ bool InvestTransactionEditor::isTransactionDataValid() const
 QDate InvestTransactionEditor::postDate() const
 {
     return d->ui->dateEdit->date();
+}
+
+void InvestTransactionEditor::createInvestment(QComboBox* comboBox)
+{
+    auto creator = new InvestmentCreator(this);
+    creator->setComboBox(comboBox);
+    creator->addButton(d->ui->cancelButton);
+    creator->addButton(d->ui->enterButton);
+    creator->setInvestmentAccount(d->parentAccount);
+    creator->createInvestment();
 }

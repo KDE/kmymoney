@@ -240,7 +240,7 @@ bool NewTransactionEditor::Private::checkForValidTransaction(bool doUserInteract
         rc = false;
     }
 
-    if (q->needCreateCategory(ui->categoryCombo) || q->needCreatePayee(ui->payeeEdit)) {
+    if (q->needCreateCategory(ui->categoryCombo) || q->needCreateObject(ui->payeeEdit)) {
         rc = false;
     }
 
@@ -1610,7 +1610,7 @@ bool NewTransactionEditor::eventFilter(QObject* o, QEvent* e)
                 }
 
             } else if (o == d->ui->payeeEdit) {
-                if (needCreatePayee(combobox)) {
+                if (needCreateObject(combobox)) {
                     createPayee(combobox);
 
                 } else if (!combobox->currentText().isEmpty()) {
@@ -1621,7 +1621,7 @@ bool NewTransactionEditor::eventFilter(QObject* o, QEvent* e)
                     d->defaultCategoryAssignment();
                 }
             } else if (o == d->ui->tagContainer->tagCombo()) {
-                if (needCreateTag(combobox)) {
+                if (needCreateObject(combobox)) {
                     createTag(d->ui->tagContainer);
                 }
             }

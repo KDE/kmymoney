@@ -94,7 +94,7 @@ public:
         return -1;
     }
 
-    void createAccountAndSecurity(const QString& parentAccountId)
+    QString createAccountAndSecurity(const QString& parentAccountId)
     {
         Q_Q(KNewInvestmentWizard);
         const auto file = MyMoneyFile::instance();
@@ -102,6 +102,7 @@ public:
         const auto type = static_cast<eMyMoney::Security::Type>(q->field("securityType").toInt());
         const auto roundingMethod = static_cast<AlkValue::RoundingMethod>(q->field("roundingMethod").toInt());
         MyMoneyFileTransaction ft;
+        QString result;
         try {
             // update all relevant attributes only, if we create a stock
             // account and the security is unknown or we modify the security
@@ -164,11 +165,13 @@ public:
                     file->addAccount(m_account, parent);
                 } else
                     file->modifyAccount(m_account);
+                result = m_account.id();
             }
             ft.commit();
         } catch (const MyMoneyException& e) {
             KMessageBox::detailedError(q, i18n("Unexpected error occurred while adding new investment"), QString::fromLatin1(e.what()));
         }
+        return result;
     }
 
     KNewInvestmentWizard      *q_ptr;
@@ -235,12 +238,24 @@ KNewInvestmentWizard::~KNewInvestmentWizard()
 {
 }
 
-void KNewInvestmentWizard::newInvestment(const MyMoneyAccount& parent)
+void KNewInvestmentWizard::setName(const QString& name)
 {
+    setField("investmentName", name);
+    setField("accountName", name);
+}
+
+QString KNewInvestmentWizard::newInvestment(const MyMoneyAccount& parent, const QString& name)
+{
+    QString newAccountId;
     QPointer<KNewInvestmentWizard> dlg = new KNewInvestmentWizard;
-    if (dlg->exec() == QDialog::Accepted)
-        dlg->d_func()->createAccountAndSecurity(parent.id());
+    dlg->setName(name);
+
+    if (dlg->exec() == QDialog::Accepted) {
+        newAccountId = dlg->d_func()->createAccountAndSecurity(parent.id());
+    }
+
     delete dlg;
+    return newAccountId;
 }
 
 void KNewInvestmentWizard::newInvestment(MyMoneyAccount& account, const MyMoneyAccount& parent)

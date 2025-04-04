@@ -6,6 +6,7 @@ set(kmm_base_dialogs_SOURCES
   accountcreator.cpp
   amounteditcurrencyhelper.cpp
   editpersonaldatadlg.cpp
+  investmentcreator.cpp
   kaccountselectdlg.cpp
   kavailablecurrencydlg.cpp
   kbackupdlg.cpp
@@ -76,6 +77,7 @@ target_link_libraries(kmm_base_dialogs
     Alkimia::alkimia
     kmm_mymoney
     onlinetask_interfaces
+    newinvestmentwizard
     kmm_base_widgets
     kmm_utils_platformtools
     kmm_yesno
