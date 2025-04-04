@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-02 01:55+0000\n"
+"POT-Creation-Date: 2025-04-04 02:02+0000\n"
 "PO-Revision-Date: 2009-05-18 00:20+0900\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -20099,7 +20099,7 @@ msgstr ""
 #: kmymoney/views/newtransactioneditor.cpp:223
 #, kde-format
 msgctxt "@info:tooltip"
-msgid "The amount is different from the sum of all splits by %1."
+msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 
 #: kmymoney/views/newtransactioneditor.cpp:602

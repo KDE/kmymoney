@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-02 01:55+0000\n"
+"POT-Creation-Date: 2025-04-04 02:02+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -22306,7 +22306,7 @@ msgstr "Στη συναλλαγή λείπει η ανάθεση μιας κατ
 #: kmymoney/views/newtransactioneditor.cpp:223
 #, kde-format
 msgctxt "@info:tooltip"
-msgid "The amount is different from the sum of all splits by %1."
+msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 
 #: kmymoney/views/newtransactioneditor.cpp:602
