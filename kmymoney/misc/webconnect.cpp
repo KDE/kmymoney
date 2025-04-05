@@ -5,10 +5,14 @@
 
 #include "webconnect.h"
 
-#include <QLocalSocket>
-#include <QLocalServer>
-#include <QStandardPaths>
+// ----------------------------------------------------------------------------
+// QT Includes
+
 #include <QDataStream>
+#include <QLocalServer>
+#include <QLocalSocket>
+#include <QLockFile>
+#include <QStandardPaths>
 #include <QUrl>
 
 Q_LOGGING_CATEGORY(WebConnectLog, "WebConnect")
@@ -20,6 +24,7 @@ class WebConnect::Private
 public:
     explicit Private(WebConnect* parent)
         : q(parent)
+        , socketName(QStringLiteral("%1/KMyMoney-WebConnect").arg(QStandardPaths::writableLocation(QStandardPaths::RuntimeLocation)))
         , clientSocket(new QLocalSocket(parent))
         , serverSocket(nullptr)
         , server(new QLocalServer(parent))
@@ -39,8 +44,13 @@ public:
 
     void startup()
     {
-        // create a per user socket name
-        socketName = QString("%1/KMyMoney-WebConnect").arg(QStandardPaths::writableLocation(QStandardPaths::RuntimeLocation));
+        serverFail = false;
+
+        // make sure only one process can enter this routine at a time
+        const QString socketLock(socketName + QLatin1String(".lck"));
+        QLockFile serverLock(socketLock);
+        serverLock.lock();
+
         // try to find a server
         if (!connectToServer()) {
             // no other instance seems to be running, so we start the server
@@ -59,7 +69,6 @@ public:
             }
         } else {
             qCInfo(WebConnectLog) << "Running in client mode";
-            clientSocket->disconnectFromServer();
         }
     }
 
@@ -130,6 +139,7 @@ void WebConnect::serverConnected()
 void WebConnect::serverDisconnected()
 {
     qCDebug(WebConnectLog) << "Server disconnected";
+    d->startup();
 }
 
 void WebConnect::dataAvailable()
