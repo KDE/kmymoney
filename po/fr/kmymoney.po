@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-04 02:02+0000\n"
-"PO-Revision-Date: 2025-03-28 09:46+0100\n"
+"POT-Creation-Date: 2025-04-05 02:00+0000\n"
+"PO-Revision-Date: 2025-04-03 09:26+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -4887,7 +4887,7 @@ msgstr "Sans titre"
 #: kmymoney/kmymoney.cpp:756
 #, kde-format
 msgid "Plugin responded with error during close."
-msgstr ""
+msgstr "Le module externe a répondu avec une erreur lors de la fermeture."
 
 #: kmymoney/kmymoney.cpp:864
 #, kde-format
@@ -5867,7 +5867,7 @@ msgstr ""
 "Impossible d'importer %1 en utilisant le module externe %2. Le module "
 "externe a renvoyé l'erreur suivante : %3"
 
-#: kmymoney/kmymoney.cpp:3968 kmymoney/plugins/ofx/import/ofximporter.cpp:1035
+#: kmymoney/kmymoney.cpp:3968 kmymoney/plugins/ofx/import/ofximporter.cpp:1051
 #, kde-format
 msgid "Importing error"
 msgstr "Erreur durant l'importation"
@@ -5936,7 +5936,7 @@ msgstr "Impossible de trouver le fichier"
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
-msgstr ""
+msgstr "Problème d'ouverture de la zone d'enregistrement"
 
 #: kmymoney/kmymoney.cpp:4300
 #, kde-format
@@ -12419,7 +12419,7 @@ msgid "Pick &date"
 msgstr "Choisir la &date"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:309
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:887
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:900
 #, kde-format
 msgid "Online settings"
 msgstr "Paramètres en ligne"
@@ -13191,46 +13191,35 @@ msgstr "jours"
 msgid "Pi&ck date"
 msgstr "&Choisir la date"
 
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:416
-#: kmymoney/plugins/ofx/import/importoption.ui:70
-#, kde-format
-msgid "Method to detect duplicate transactions during import"
-msgstr "Méthode de détection des transactions en doublon lors de l'importation"
+#. i18n: ectx: property (text), item, widget (QComboBox, m_preferredPrice)
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:398
+#: kmymoney/plugins/ofx/import/importoption.ui:174
+#, fuzzy, kde-format
+#| msgid "File Information"
+msgid "Price information"
+msgstr "Informations sur le fichier"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:424
-#, kde-format
-msgctxt "@item:inlistbox Method to identify duplicate transactions"
-msgid "OFX FITID"
-msgstr "OFX FITID"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:429
-#, kde-format
-msgctxt "@item:inlistbox Method to identify duplicate transactions"
-msgid "KMyMoney ID"
-msgstr "Identifiant KMyMoney"
+#. i18n: ectx: property (text), item, widget (QComboBox, m_preferredPrice)
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:403
+#: kmymoney/plugins/ofx/import/importoption.ui:179
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Number of shares"
+msgid "Value and number of shares"
+msgstr "Nombre de partages"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:443
-#: kmymoney/plugins/ofx/import/importoption.ui:41
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:417
+#: kmymoney/plugins/ofx/import/importoption.ui:103
 #, kde-format
 msgid "Payee's name is based on contents of the OFX tag"
 msgstr "Le nom du bénéficiaire est fondé sur le contenu de la balise OFX"
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:453
-#: kmymoney/plugins/ofx/import/importoption.ui:91
-#, kde-format
-msgid "Timezone offset"
-msgstr "Décalage du fuseau horaire"
-
 #. i18n: ectx: property (text), widget (QLabel, TextLabel21_1_2)
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_timestampOffsetSign)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:463
-#: kmymoney/plugins/ofx/import/importoption.ui:101
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:430
+#: kmymoney/plugins/ofx/import/importoption.ui:135
 #: kmymoney/wizards/newaccountwizard/kloanpaymentpage.ui:81
 #: kmymoney/wizards/newloanwizard/additionalfeeswizardpage.ui:126
 #, kde-format
@@ -13238,22 +13227,36 @@ msgid "+"
 msgstr "+"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_timestampOffsetSign)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:468
-#: kmymoney/plugins/ofx/import/importoption.ui:106
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:435
+#: kmymoney/plugins/ofx/import/importoption.ui:140
 #, kde-format
 msgid "-"
 msgstr "-"
 
+#. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:462
+#, kde-format
+msgctxt "@item:inlistbox Method to identify duplicate transactions"
+msgid "OFX FITID"
+msgstr "OFX FITID"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:467
+#, kde-format
+msgctxt "@item:inlistbox Method to identify duplicate transactions"
+msgid "KMyMoney ID"
+msgstr "Identifiant KMyMoney"
+
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:481
-#: kmymoney/plugins/ofx/import/importoption.ui:119
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:475
+#: kmymoney/plugins/ofx/import/importoption.ui:56
 #, kde-format
 msgid "Invert sign of transaction amount"
 msgstr "Inverser le signe du montant de la transaction"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_invertAmount)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:488
-#: kmymoney/plugins/ofx/import/importoption.ui:126
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:482
+#: kmymoney/plugins/ofx/import/importoption.ui:70
 #, kde-format
 msgid ""
 "<html><head/><body><p>Check this if you need to invert the sign of imported "
@@ -13266,15 +13269,15 @@ msgstr ""
 "inversée.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:498
-#: kmymoney/plugins/ofx/import/importoption.ui:136
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:492
+#: kmymoney/plugins/ofx/import/importoption.ui:63
 #, kde-format
 msgid "Fix sign of the investment transaction amount and quantity"
 msgstr "Corriger le signe du montant et de la quantité de l'investissement"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_fixBuySellSignage)
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:505
-#: kmymoney/plugins/ofx/import/importoption.ui:143
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:499
+#: kmymoney/plugins/ofx/import/importoption.ui:80
 #, kde-format
 msgid ""
 "<html><head/><body><p>Check this if the investment transactions after "
@@ -13286,6 +13289,29 @@ msgstr ""
 "transactions lors de l'importation est incorrect, ce qui peut se produire "
 "lorsque votre institution n'applique pas le bon signe positif / négatif sur "
 "le notionnel ou la quantité d'actions.</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:509
+#: kmymoney/plugins/ofx/import/importoption.ui:166
+#, fuzzy, kde-format
+#| msgid "Name is derived from"
+msgid "Price is derived from"
+msgstr "Le nom est dérivé de"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:535
+#: kmymoney/plugins/ofx/import/importoption.ui:49
+#, kde-format
+msgid "Timezone offset"
+msgstr "Décalage du fuseau horaire"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:542
+#: kmymoney/plugins/ofx/import/importoption.ui:90
+#, kde-format
+msgid "Method to detect duplicate transactions during import"
+msgstr "Méthode de détection des transactions en doublon lors de l'importation"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:71
 #, kde-format
@@ -13420,34 +13446,34 @@ msgid "Enter your password for account <b>%1</b>"
 msgstr "Saisissez votre mot de passe pour le compte <b>%1</b>"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueIdSource)
-#: kmymoney/plugins/ofx/import/importoption.ui:78
+#: kmymoney/plugins/ofx/import/importoption.ui:36
 #, kde-format
 msgid "OFX FITID"
 msgstr "OFX FITID"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueIdSource)
-#: kmymoney/plugins/ofx/import/importoption.ui:83
+#: kmymoney/plugins/ofx/import/importoption.ui:41
 #, kde-format
 msgid "KMyMoney Hash"
 msgstr "Hash KMyMoney"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:156
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:161
 #, kde-format
 msgid "OFX..."
 msgstr "OFX…"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:170
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:175
 #, kde-format
 msgid "OFX import file selection"
 msgstr "Sélection du fichier OFX à importer"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:172
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:177
 #, kde-format
 msgctxt "Filter for QFileDialog"
 msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
 msgstr "Fichiers OFX (*.ofx *.qfx *.ofc) ; ; Tous les fichiers (*)"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:191
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:197
 #, kde-format
 msgid ""
 "Unable to import %1 using the OFX importer plugin.  This file is not the "
@@ -13456,27 +13482,27 @@ msgstr ""
 "Impossible d'importer %1 en utilisant le module d'importation OFX. Ce "
 "fichier n'est pas dans le bon format."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:192
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:198
 #, kde-format
 msgid "Incorrect format"
 msgstr "Format incorrect"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:238
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:244
 #, kde-format
 msgid "Unable to parse file"
 msgstr "Impossible de lire le fichier"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:834
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:847
 #, kde-format
 msgid "No accounts found."
 msgstr "Pas de compte trouvé."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1019
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1035
 #, kde-format
 msgid "Error connecting to bank: %1"
 msgstr "Erreur lors de la connexion à votre banque : %1"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1032
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1048
 #, kde-format
 msgid ""
 "<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The plugin "
@@ -13485,12 +13511,12 @@ msgstr ""
 "<p>Impossible d'importer<b> « %1 » </b>en utilisant le module d'importation "
 "OFX. Le module a renvoyé l'erreur suivante : </p><p>%2</p>"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1069
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1085
 #, kde-format
 msgid "Importing process terminated unexpectedly."
 msgstr "L'importation s'est terminée de façon inattendue."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1069
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1085
 #, kde-format
 msgid "Failed to import all statements."
 msgstr "L'importation de certains relevés a échoué."
@@ -18366,21 +18392,16 @@ msgid "Recover key expires soon"
 msgstr "La clé de récupération va bientôt expirer"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:347
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
+#, kde-format
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is already opened by another process."
-msgstr ""
-"<p>Le fichier <b>%1</b> est déjà ouvert par une autre instance de KMyMoney</"
-"p>"
+msgstr "Le fichier <b>%1</b> est déjà ouvert par une autre processus."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:458
-#, fuzzy, kde-format
-#| msgid "<p><b>%1</b> is not a KMyMoney file.</p>"
+#, kde-format
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is not a KMyMoney data file."
-msgstr "<p><b>%1</b> n'est pas un fichier KMyMoney.</p>"
+msgstr "Le fichier <b>%1</b> n'est pas un fichier de données pour KMyMoney."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:616
 #, kde-format
@@ -30609,9 +30630,6 @@ msgstr "enregistrement du rapport « %1 » dans « %2 »"
 #~ "La vérification d'intégrité est lancée automatiquement avant "
 #~ "l'enregistrement de vos données, elle vérifie désormais un spectre plus "
 #~ "élargi de problèmes, et corrige automatiquement beaucoup d'entre eux."
-
-#~ msgid "Name is derived from"
-#~ msgstr "Le nom est dérivé de"
 
 #~ msgid "P&AYEEID"
 #~ msgstr "P&AYEEID"
