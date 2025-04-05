@@ -6,6 +6,8 @@
 #ifndef TABORDEREDITOR_H
 #define TABORDEREDITOR_H
 
+#include "kmm_ledgerviews_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -28,7 +30,7 @@ public:
 
 class TabOrderDialogPrivate;
 class TabOrderEditorPrivate;
-class TabOrderDialog : public QDialog
+class KMM_LEDGERVIEWS_EXPORT TabOrderDialog : public QDialog
 {
     Q_OBJECT
     Q_DECLARE_PRIVATE(TabOrderDialog)
@@ -99,7 +101,7 @@ private:
     TabOrderDialogPrivate* d_ptr;
 };
 
-class TabOrderEditor : public QWidget
+class KMM_LEDGERVIEWS_EXPORT TabOrderEditor : public QWidget
 {
     Q_OBJECT
     Q_DECLARE_PRIVATE(TabOrderEditor)

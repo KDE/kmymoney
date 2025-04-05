@@ -6,6 +6,8 @@
 #ifndef SPLITVIEW_H
 #define SPLITVIEW_H
 
+#include "kmm_ledgerviews_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -24,7 +26,7 @@ class MyMoneyAccount;
 class MyMoneyMoney;
 class MyMoneySecurity;
 
-class SplitView : public QTableView
+class KMM_LEDGERVIEWS_EXPORT SplitView : public QTableView
 {
     Q_OBJECT
 public:

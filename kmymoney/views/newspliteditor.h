@@ -7,6 +7,8 @@
 #ifndef NEWSPLITEDITOR_H
 #define NEWSPLITEDITOR_H
 
+#include "kmm_ledgerviews_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -26,7 +28,7 @@ class QWidget;
 class TransactionEditorBase;
 class MyMoneySecurity;
 
-class NewSplitEditor : public QWidget, TabOrderEditorInterface
+class KMM_LEDGERVIEWS_EXPORT NewSplitEditor : public QWidget, TabOrderEditorInterface
 {
     Q_OBJECT
 

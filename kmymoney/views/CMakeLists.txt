@@ -33,17 +33,19 @@ set(libviews_a_SOURCES
   specialdatedelegate.cpp
   investtransactioneditor.cpp
   investactivities.cpp
-  newspliteditor.cpp
-  transactioneditorbase.cpp
   ksearchtransactiondlg.cpp
   ktransactionselectdlg.cpp
   newtransactioneditor.cpp
   newtransactionform.cpp
   securityaccountnamedelegate.cpp
+)
+
+set(ledgerviews_SOURCES
+  newspliteditor.cpp
   splitview.cpp
-  splitdialog.cpp
   splitdelegate.cpp
   tabordereditor.cpp
+  transactioneditorbase.cpp
 )
 
 set(libviews_a_UI
@@ -61,17 +63,20 @@ set(libviews_a_UI
   ktransactionselectdlg.ui
   simpleledgerview.ui
   ledgerviewpage.ui
-  splitdialog.ui
   newspliteditor.ui
   newtransactioneditor.ui
   newtransactionform.ui
   investtransactioneditor.ui
+)
+
+set(ledgerviews_UI
   tabordereditor.ui
 )
 
 # The handling of these ui files depends
 # on libkmymoney.so (the widgets library)
 ki18n_wrap_ui(libviews_a_SOURCES ${libviews_a_UI})
+ki18n_wrap_ui(ledgerviews_SOURCES ${ledgerviews_UI})
 
 add_library(views STATIC ${libviews_a_SOURCES})
 
@@ -82,6 +87,8 @@ target_link_libraries( views PUBLIC
   KF${QT_MAJOR_VERSION}::TextWidgets
   Qt::PrintSupport
   kmm_base_dialogs
+  kmm_extended_dialogs
+  kmm_ledgerviews
   kmm_mymoney # needed to load payeeIdentifier
   kmm_widgets
   kmm_printer
@@ -90,3 +97,23 @@ target_link_libraries( views PUBLIC
 
 # we rely on some of the dialogs to be generated
 add_dependencies(views newinvestmentwizard newaccountwizard newloanwizard endingbalancedlg)
+
+add_library(kmm_ledgerviews ${ledgerviews_SOURCES})
+
+generate_export_header(kmm_ledgerviews BASE_NAME kmm_ledgerviews)
+
+target_link_libraries(kmm_ledgerviews PUBLIC
+  KF${QT_MAJOR_VERSION}::TextWidgets
+  kmm_mymoney # needed to load payeeIdentifier
+  kmm_base_widgets
+  kmm_base_dialogs
+  PRIVATE
+  settings
+)
+
+########### install files ###############
+
+install(TARGETS
+  kmm_ledgerviews
+  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
+

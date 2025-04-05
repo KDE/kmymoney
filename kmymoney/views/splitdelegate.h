@@ -6,6 +6,8 @@
 #ifndef SPLITDELEGATE_H
 #define SPLITDELEGATE_H
 
+#include "kmm_ledgerviews_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -19,7 +21,7 @@
 
 class MyMoneySecurity;
 
-class SplitDelegate : public QStyledItemDelegate
+class KMM_LEDGERVIEWS_EXPORT SplitDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 public:

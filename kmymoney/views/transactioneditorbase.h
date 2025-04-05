@@ -6,6 +6,8 @@
 #ifndef TRANSACTIONEDITORBASE_H
 #define TRANSACTIONEDITORBASE_H
 
+#include "kmm_ledgerviews_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -30,7 +32,7 @@ class WidgetHintFrameCollection;
 class KCurrencyConverter;
 class NewSplitEditor;
 
-class TransactionEditorBase : public QWidget
+class KMM_LEDGERVIEWS_EXPORT TransactionEditorBase : public QWidget
 {
     Q_OBJECT
     friend NewSplitEditor;

@@ -6,6 +6,8 @@
 #ifndef SPLITDIALOG_H
 #define SPLITDIALOG_H
 
+#include "kmm_extended_dialogs_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -31,7 +33,7 @@ class SplitModel;
  * @a mainAmount equals to MyMoneyMoney::autoCalc then the total
  * will automatically be adjusted.
  */
-class SplitDialog : public QDialog
+class KMM_EXTENDED_DIALOGS_EXPORT SplitDialog : public QDialog
 {
     Q_OBJECT
 public:

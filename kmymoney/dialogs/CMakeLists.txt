@@ -102,6 +102,7 @@ set(kmm_extended_dialogs_SOURCES
   kequitypriceupdatedlg.cpp
   kmymoneypricedlg.cpp
   splitadjustdialog.cpp
+  splitdialog.cpp
 )
 
 set(kmm_extended_dialogs_UI
@@ -109,6 +110,7 @@ set(kmm_extended_dialogs_UI
   kequitypriceupdatedlg.ui
   kmymoneypricedlg.ui
   ksplitcorrectiondlg.ui
+  splitdialog.ui
 )
 
 ki18n_wrap_ui(kmm_extended_dialogs_SOURCES ${kmm_extended_dialogs_UI})
@@ -129,6 +131,7 @@ target_link_libraries(kmm_extended_dialogs
     onlinetask_interfaces
     kmm_base_widgets
     kmm_utils_platformtools
+    kmm_ledgerviews
     kmm_webconnect
     kmm_widgets
   PRIVATE
@@ -138,6 +141,7 @@ target_link_libraries(kmm_extended_dialogs
 target_link_libraries(kmm_extended_dialogs LINK_PUBLIC
   kmm_base_widgets
   kmm_mymoney
+  kmm_ledgerviews
   onlinetask_interfaces
 )
 

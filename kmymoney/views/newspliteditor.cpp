@@ -22,7 +22,9 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KActionCollection>
 #include <KLocalizedString>
+#include <KXmlGuiWindow>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -79,6 +81,7 @@ struct NewSplitEditor::Private
         , protectClosedAccount(false)
         , postDate(QDate::currentDate())
         , frameCollection(nullptr)
+        , editTabOrderAction(nullptr)
     {
         accountsModel->setObjectName("AccountNamesFilterProxyModel");
         costCenterModel->setObjectName("SortedCostCenterModel");
@@ -89,6 +92,15 @@ struct NewSplitEditor::Private
 
         payeesModel->setSortLocaleAware(true);
         payeesModel->setSortCaseSensitivity(Qt::CaseInsensitive);
+
+        // locate the editTabOrderAction
+        for (QObject* p = parent; p != nullptr; p = p->parent()) {
+            auto xmlGuiWindow = qobject_cast<KXmlGuiWindow*>(p);
+            if (xmlGuiWindow) {
+                editTabOrderAction = xmlGuiWindow->actionCollection()->action(QLatin1String("edit_taborder"));
+                break;
+            }
+        }
     }
 
     ~Private()
@@ -130,6 +142,7 @@ struct NewSplitEditor::Private
     MyMoneyMoney shares;
     QDate postDate;
     WidgetHintFrameCollection* frameCollection;
+    QAction* editTabOrderAction;
 };
 
 bool NewSplitEditor::Private::checkForValidSplit(bool doUserInteraction)
@@ -529,7 +542,7 @@ void NewSplitEditor::keyPressEvent(QKeyEvent* event)
     } else {
         const auto keySeq = QKeySequence(event->modifiers() | event->key());
 
-        if (keySeq.matches(pActions[eMenu::Action::EditTabOrder]->shortcut())) {
+        if (d->editTabOrderAction && keySeq.matches(d->editTabOrderAction->shortcut())) {
             QPointer<TabOrderDialog> tabOrderDialog = new TabOrderDialog(this);
             auto tabOrderWidget = static_cast<TabOrderEditorInterface*>(qt_metacast("TabOrderEditorInterface"));
             if (tabOrderWidget) {
