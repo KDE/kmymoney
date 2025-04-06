@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-05 02:00+0000\n"
-"PO-Revision-Date: 2025-04-02 12:01+0100\n"
+"PO-Revision-Date: 2025-04-05 10:57+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -13088,19 +13088,16 @@ msgstr "Es&coger fecha"
 #. i18n: ectx: property (text), item, widget (QComboBox, m_preferredPrice)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:398
 #: kmymoney/plugins/ofx/import/importoption.ui:174
-#, fuzzy, kde-format
-#| msgid "File Information"
+#, kde-format
 msgid "Price information"
-msgstr "Información del archivo"
+msgstr "Información del precio"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_preferredPrice)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:403
 #: kmymoney/plugins/ofx/import/importoption.ui:179
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Number of shares"
+#, kde-format
 msgid "Value and number of shares"
-msgstr "Número de participaciones"
+msgstr "Valor y número de participaciones"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:417
@@ -13193,7 +13190,7 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/importoption.ui:166
 #, kde-format
 msgid "Price is derived from"
-msgstr ""
+msgstr "El precio se obtiene de"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:535
@@ -21271,12 +21268,11 @@ msgid "The transaction is missing a category assignment."
 msgstr "Falta asignar una categoría al asiento."
 
 #: kmymoney/views/newtransactioneditor.cpp:223
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "The amount is different from the sum of all splits by %1."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
-msgstr "El importe es distinto a la suma de todas las partidas por %1."
+msgstr ""
+"El importe introducido es distinto a la suma de todas las partidas por %1."
 
 #: kmymoney/views/newtransactioneditor.cpp:602
 #, kde-format

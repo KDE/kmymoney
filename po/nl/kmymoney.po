@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-05 02:00+0000\n"
-"PO-Revision-Date: 2025-04-02 15:27+0200\n"
+"PO-Revision-Date: 2025-04-05 23:26+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -13077,19 +13077,16 @@ msgstr "Datum &kiezen"
 #. i18n: ectx: property (text), item, widget (QComboBox, m_preferredPrice)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:398
 #: kmymoney/plugins/ofx/import/importoption.ui:174
-#, fuzzy, kde-format
-#| msgid "File Information"
+#, kde-format
 msgid "Price information"
-msgstr "Bestandsinformatie"
+msgstr "Koersinformatie"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_preferredPrice)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:403
 #: kmymoney/plugins/ofx/import/importoption.ui:179
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Number of shares"
+#, kde-format
 msgid "Value and number of shares"
-msgstr "Aantal aandelen"
+msgstr "Waarde en aantal aandelen"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:417
@@ -13180,7 +13177,7 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/importoption.ui:166
 #, kde-format
 msgid "Price is derived from"
-msgstr ""
+msgstr "Koers is afgeleid van"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:535
@@ -21271,12 +21268,11 @@ msgid "The transaction is missing a category assignment."
 msgstr "Aan de transactie is geen categorie toegewezen."
 
 #: kmymoney/views/newtransactioneditor.cpp:223
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "The amount is different from the sum of all splits by %1."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
-msgstr "De som verschilt van de som van alle splitsingen door %1."
+msgstr ""
+"De ingevoerde hoeveelheid verschilt van de som van alle splitsingen door %1."
 
 #: kmymoney/views/newtransactioneditor.cpp:602
 #, kde-format

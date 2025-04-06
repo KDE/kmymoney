@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-05 02:00+0000\n"
-"PO-Revision-Date: 2025-04-02 17:58+0300\n"
+"PO-Revision-Date: 2025-04-05 14:35+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -13112,19 +13112,16 @@ msgstr "Ви&брати дату"
 #. i18n: ectx: property (text), item, widget (QComboBox, m_preferredPrice)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:398
 #: kmymoney/plugins/ofx/import/importoption.ui:174
-#, fuzzy, kde-format
-#| msgid "File Information"
+#, kde-format
 msgid "Price information"
-msgstr "Інформація про файл"
+msgstr "Дані щодо ціни"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_preferredPrice)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:403
 #: kmymoney/plugins/ofx/import/importoption.ui:179
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Number of shares"
+#, kde-format
 msgid "Value and number of shares"
-msgstr "Кількість акцій"
+msgstr "Ціна і кількість акцій"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:417
@@ -13214,7 +13211,7 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/importoption.ui:166
 #, kde-format
 msgid "Price is derived from"
-msgstr ""
+msgstr "Ціну розраховано на основі"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:535
@@ -21367,12 +21364,10 @@ msgid "The transaction is missing a category assignment."
 msgstr "Операцію не пов'язано з категорією."
 
 #: kmymoney/views/newtransactioneditor.cpp:223
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "The amount is different from the sum of all splits by %1."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
-msgstr "Сума є відмінною від суми усіх дроблень від %1."
+msgstr "Введена сума є відмінною від суми усіх дроблень від %1."
 
 #: kmymoney/views/newtransactioneditor.cpp:602
 #, kde-format
