@@ -435,6 +435,9 @@ bool MyMoneySplit::replaceId(const QString& newId, const QString& oldId)
         }
     }
 
+    if (changed) {
+        d->clearReferences();
+    }
     return changed;
 }
 

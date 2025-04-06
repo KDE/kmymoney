@@ -452,5 +452,9 @@ bool MyMoneyTransaction::replaceId(const QString& newId, const QString& oldId)
     for (MyMoneySplit& split : d->m_splits)
         changed |= split.replaceId(newId, oldId);
 
+    if (changed) {
+        d->clearReferences();
+    }
+
     return changed;
 }

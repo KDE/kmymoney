@@ -1420,7 +1420,13 @@ IMyMoneyProcessingCalendar* MyMoneySchedule::processingCalendar() const
 bool MyMoneySchedule::replaceId(const QString& newId, const QString& oldId)
 {
     Q_D(MyMoneySchedule);
-    return d->m_transaction.replaceId(newId, oldId);
+
+    const bool changed = d->m_transaction.replaceId(newId, oldId);
+    if (changed) {
+        d->clearReferences();
+    }
+
+    return changed;
 }
 
 void MyMoneySchedule::setKeepMultiCurrencyAmount(bool keepAmount)
