@@ -365,6 +365,8 @@ struct JournalModel::Private
                 // must be a change of a balance
                 return true;
             }
+
+            bool splitFound = false;
             for (int i = 0; i < splitCount; ++i) {
                 const MyMoneySplit& nextSplit = nextSplits.at(i);
                 if ((nextSplit.accountId() == currSplit.accountId()) && (nextSplit.value() == currSplit.value()) && (nextSplit.shares() == currSplit.shares())
@@ -374,8 +376,14 @@ struct JournalModel::Private
                     // from the list and continue with
                     // the next one to check
                     nextSplits.removeAt(i);
+                    splitFound = true;
                     break;
                 }
+            }
+            // if we did not find the corresponding split
+            // at least one balance must have changed
+            if (!splitFound) {
+                return true;
             }
         }
 
