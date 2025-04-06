@@ -68,6 +68,7 @@ Wizard::Wizard(QWidget *parent, bool modal, Qt::WindowFlags flags)
     : KMyMoneyWizard(*new WizardPrivate(this), parent, modal, flags)
 {
     Q_D(Wizard);
+    d->m_currencyCalculator = MyMoneyFactory::create<KCurrencyCalculator>();
     setTitle(i18n("KMyMoney New Account Setup"));
     addStep(i18n("Institution"));
     addStep(i18n("Account"));
@@ -186,7 +187,7 @@ MyMoneyTransaction Wizard::payoutTransaction()
         s.setValue(-s.value());
         s.setAccountId(d->m_loanPayoutPage->payoutAccountId());
         MyMoneyMoney shares;
-        KCurrencyCalculator::setupSplitPrice(shares, t, s, QMap<QString, MyMoneyMoney>(), this);
+        d->m_currencyCalculator->setupSplitPrice(shares, t, s, QMap<QString, MyMoneyMoney>(), this);
         s.setShares(shares);
         t.addSplit(s);
     }
@@ -280,7 +281,7 @@ const MyMoneySchedule& Wizard::schedule()
             if (d->m_account.id() != QLatin1String("Phony-ID")) {
                 // if the real account is already set perform the currency conversion if it's necessary
                 MyMoneyMoney paymentShares;
-                KCurrencyCalculator::setupSplitPrice(paymentShares, t, s, QMap<QString, MyMoneyMoney>(), this);
+                d->m_currencyCalculator->setupSplitPrice(paymentShares, t, s, QMap<QString, MyMoneyMoney>(), this);
                 s.setShares(paymentShares);
             }
             t.addSplit(s);

@@ -21,12 +21,14 @@ class QWidget;
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyfactory.h"
 #include "mymoneymoney.h"
 #include "tabordereditor.h"
+
 class TransactionEditorBase;
 class MyMoneySecurity;
 
-class NewSplitEditor : public QWidget, TabOrderEditorInterface
+class NewSplitEditor : public QWidget, TabOrderEditorInterface, MyMoneyFactory
 {
     Q_OBJECT
 

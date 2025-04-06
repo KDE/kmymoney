@@ -23,6 +23,8 @@
 #include "mymoneyschedule.h"
 #include "mymoneysecurity.h"
 
+class KCurrencyCalculator;
+
 namespace NewAccountWizard
 {
 class AccountTypePage;
@@ -42,19 +44,20 @@ class WizardPrivate : public KMyMoneyWizardPrivate
     Q_DISABLE_COPY(WizardPrivate)
 
 public:
-    explicit WizardPrivate(Wizard *qq):
-        KMyMoneyWizardPrivate(qq),
-        m_institutionPage(nullptr),
-        m_accountTypePage(nullptr),
-        m_brokeragepage(nullptr),
-        m_schedulePage(nullptr),
-        m_generalLoanInfoPage(nullptr),
-        m_loanDetailsPage(nullptr),
-        m_loanPaymentPage(nullptr),
-        m_loanSchedulePage(nullptr),
-        m_loanPayoutPage(nullptr),
-        m_hierarchyPage(nullptr),
-        m_accountSummaryPage(nullptr)
+    explicit WizardPrivate(Wizard* qq)
+        : KMyMoneyWizardPrivate(qq)
+        , m_institutionPage(nullptr)
+        , m_accountTypePage(nullptr)
+        , m_brokeragepage(nullptr)
+        , m_schedulePage(nullptr)
+        , m_generalLoanInfoPage(nullptr)
+        , m_loanDetailsPage(nullptr)
+        , m_loanPaymentPage(nullptr)
+        , m_loanSchedulePage(nullptr)
+        , m_loanPayoutPage(nullptr)
+        , m_hierarchyPage(nullptr)
+        , m_accountSummaryPage(nullptr)
+        , m_currencyCalculator(nullptr)
     {
     }
 
@@ -90,6 +93,8 @@ public:
     LoanPayoutPage* m_loanPayoutPage;
     HierarchyPage* m_hierarchyPage;
     AccountSummaryPage* m_accountSummaryPage;
+
+    KCurrencyCalculator* m_currencyCalculator;
 
     MyMoneyAccountLoan m_account;
     MyMoneySchedule m_schedule;

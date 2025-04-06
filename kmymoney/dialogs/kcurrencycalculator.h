@@ -105,6 +105,8 @@ public:
      */
     static void updateConversion(MultiCurrencyEdit* amountEdit, const QDate date);
 
+    static KCurrencyCalculator* createObject(QWidget* parent);
+
     /**
      * Passing @c true as argument allows to suppress sending out
      * update signals from the MyMoneyFile object during price

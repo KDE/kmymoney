@@ -81,7 +81,6 @@ target_link_libraries( views PUBLIC
   newaccountwizard
   KF${QT_MAJOR_VERSION}::TextWidgets
   Qt::PrintSupport
-  kmm_base_dialogs
   kmm_mymoney # needed to load payeeIdentifier
   kmm_widgets
   kmm_printer

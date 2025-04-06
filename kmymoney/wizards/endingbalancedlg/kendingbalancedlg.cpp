@@ -55,6 +55,7 @@ public:
     KEndingBalanceDlgPrivate(KEndingBalanceDlg* qq, int numPages)
         : q(qq)
         , ui(new Ui::KEndingBalanceDlg)
+        , m_currencyCalculator(q->MyMoneyFactory::create<KCurrencyCalculator>())
         , m_pages(numPages, true)
     {
     }
@@ -66,6 +67,7 @@ public:
 
     KEndingBalanceDlg* q;
     Ui::KEndingBalanceDlg* ui;
+    KCurrencyCalculator* m_currencyCalculator;
     MyMoneyTransaction m_tInterest;
     MyMoneyTransaction m_tCharges;
     MyMoneyAccount m_account;
@@ -76,6 +78,7 @@ public:
 
 KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget* parent)
     : QWizard(parent)
+    , MyMoneyFactory(this)
     , d_ptr(new KEndingBalanceDlgPrivate(this, Page_InterestChargeCheckings + 1))
 {
     Q_D(KEndingBalanceDlg);
@@ -442,7 +445,7 @@ bool KEndingBalanceDlg::createTransaction(MyMoneyTransaction &t, const int sign,
 
         QMap<QString, MyMoneyMoney> priceInfo; // just empty
         MyMoneyMoney shares;
-        if (!KCurrencyCalculator::setupSplitPrice(shares, t, s2, priceInfo, this)) {
+        if (!d->m_currencyCalculator->setupSplitPrice(shares, t, s2, priceInfo, this)) {
             t = MyMoneyTransaction();
             return false;
         }

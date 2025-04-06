@@ -79,6 +79,7 @@ struct NewSplitEditor::Private
         , protectClosedAccount(false)
         , postDate(QDate::currentDate())
         , frameCollection(nullptr)
+        , currencyCalculator(q->MyMoneyFactory::create<KCurrencyCalculator>())
     {
         accountsModel->setObjectName("AccountNamesFilterProxyModel");
         costCenterModel->setObjectName("SortedCostCenterModel");
@@ -130,6 +131,7 @@ struct NewSplitEditor::Private
     MyMoneyMoney shares;
     QDate postDate;
     WidgetHintFrameCollection* frameCollection;
+    KCurrencyCalculator* currencyCalculator;
 };
 
 bool NewSplitEditor::Private::checkForValidSplit(bool doUserInteraction)
@@ -213,7 +215,7 @@ bool NewSplitEditor::Private::categoryChanged(const QString& accountId)
                     if (baseEditor) {
                         baseEditor->updateConversionRate(ui->creditDebitEdit);
                     } else {
-                        KCurrencyCalculator::updateConversion(ui->creditDebitEdit, postDate);
+                        currencyCalculator->updateConversion(ui->creditDebitEdit, postDate);
                     }
                 }
             }
@@ -259,7 +261,7 @@ bool NewSplitEditor::Private::amountChanged()
     if ((shares != -ui->creditDebitEdit->shares()) || (value != -ui->creditDebitEdit->value())) {
         // and if there is no real change, don't call the currency calculator
         if ((shares != ui->creditDebitEdit->shares()) || (value != ui->creditDebitEdit->value())) {
-            KCurrencyCalculator::updateConversion(ui->creditDebitEdit, postDate);
+            currencyCalculator->updateConversion(ui->creditDebitEdit, postDate);
             shares = ui->creditDebitEdit->shares();
             value = ui->creditDebitEdit->value();
         }
@@ -340,6 +342,7 @@ void NewSplitEditor::Private::updateFocusWidget()
 
 NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity, const QString& counterAccountId)
     : QWidget(parent)
+    , MyMoneyFactory(this)
     , d(new Private(this))
 {
     d->commodity = commodity;

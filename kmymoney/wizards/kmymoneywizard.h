@@ -20,6 +20,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyfactory.h"
+
 class KMyMoneyWizardPage;
 
 template <class T> class QList;
@@ -122,7 +124,7 @@ template <class T> class QList;
  *       https://doc.qt.io/qt-5/qtwidgets-dialogs-licensewizard-example.html
  */
 class KMyMoneyWizardPrivate;
-class KMM_WIZARD_EXPORT KMyMoneyWizard : public QDialog
+class KMM_WIZARD_EXPORT KMyMoneyWizard : public QDialog, public MyMoneyFactory
 {
     friend class KMyMoneyWizardPage;
 

@@ -23,6 +23,7 @@ set(kmm_mymoney_LIB_SRCS
   mymoneyqifprofile.cpp
   mymoneytemplate.cpp
   mymoneybalancecache.cpp
+  mymoneyfactory.cpp
   onlinejob.cpp
   onlinejobadministration.cpp
   onlinejobmessage.cpp

@@ -1095,6 +1095,7 @@ void NewTransactionEditor::Private::updateMemoLink()
 
 NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accountId)
     : TransactionEditorBase(parent, accountId)
+    , MyMoneyFactory(this)
     , d(new Private(this))
 {
     auto const file = MyMoneyFile::instance();

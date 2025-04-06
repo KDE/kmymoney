@@ -1003,9 +1003,10 @@ public:
     }
 };
 
-KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
-    KXmlGuiWindow(parent),
-    d(new Private(this))
+KMyMoneyApp::KMyMoneyApp(QWidget* parent)
+    : KXmlGuiWindow(parent)
+    , MyMoneyFactory(this)
+    , d(new Private(this))
 {
 #ifdef KMM_DBUS
     new KmymoneyAdaptor(this);
@@ -1017,6 +1018,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
     qRegisterMetaType<MyMoneyMoney>("MyMoneyMoney");
     qRegisterMetaType<MyMoneySecurity>("MyMoneySecurity");
 
+    registerCreator<KCurrencyCalculator, QWidget>(&KCurrencyCalculator::createObject);
 #ifdef ENABLE_SQLCIPHER
     /* Issues:
      * 1) libsqlite3 loads implicitly before libsqlcipher
@@ -4450,6 +4452,11 @@ void KMyMoneyApp::slotFileQuit()
     if (quitApplication) {
         QCoreApplication::quit();
     }
+}
+
+QObject* KMyMoneyApp::createFactoryObject(QObject* parent, const QString& objectName)
+{
+    return createObject(parent, objectName);
 }
 
 KMStatus::KMStatus(const QString &text)

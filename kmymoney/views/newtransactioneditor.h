@@ -15,6 +15,7 @@ class QWidget;
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyfactory.h"
 #include "mymoneymoney.h"
 #include "mymoneytransaction.h"
 #include "tabordereditor.h"
@@ -22,7 +23,7 @@ class QWidget;
 
 class MyMoneySchedule;
 
-class NewTransactionEditor : public TransactionEditorBase, TabOrderEditorInterface
+class NewTransactionEditor : public TransactionEditorBase, TabOrderEditorInterface, MyMoneyFactory
 {
     Q_OBJECT
 

@@ -27,14 +27,15 @@
 
 #include "kmymoneyutils.h"
 
-#include "mymoneyaccount.h"
 #include "mymoney/onlinejob.h"
-#include "onlinejobtyped.h"
+#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyfactory.h"
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneymoney.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
-#include "mymoneyenums.h"
+#include "onlinejobtyped.h"
 #include "viewenums.h"
 
 class QResizeEvent;
@@ -88,7 +89,7 @@ enum class Menu;
   *
   * @short Main application class.
   */
-class KMyMoneyApp : public KXmlGuiWindow, public IMyMoneyProcessingCalendar
+class KMyMoneyApp : public KXmlGuiWindow, public IMyMoneyProcessingCalendar, public MyMoneyFactory
 {
     Q_OBJECT
 
@@ -439,6 +440,8 @@ protected:
     bool event(QEvent * event) override;
 
 public Q_SLOTS:
+
+    QObject* createFactoryObject(QObject* parent, const QString& objectName) override;
 
     void slotFileInfoDialog();
 

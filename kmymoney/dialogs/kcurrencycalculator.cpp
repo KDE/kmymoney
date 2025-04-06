@@ -197,6 +197,11 @@ KCurrencyCalculator::KCurrencyCalculator(QWidget* parent)
     d->init();
 }
 
+KCurrencyCalculator* KCurrencyCalculator::createObject(QWidget* parent)
+{
+    return new KCurrencyCalculator(parent);
+}
+
 KCurrencyCalculator::KCurrencyCalculator(const MyMoneySecurity& from,
         const MyMoneySecurity& to,
         const MyMoneyMoney& value,

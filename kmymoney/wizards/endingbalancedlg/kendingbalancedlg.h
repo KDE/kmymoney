@@ -18,6 +18,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyfactory.h"
+
 class QDate;
 
 class MyMoneyMoney;
@@ -34,7 +36,7 @@ class MyMoneyTransaction;
   */
 
 class KEndingBalanceDlgPrivate;
-class KEndingBalanceDlg : public QWizard
+class KEndingBalanceDlg : public QWizard, MyMoneyFactory
 {
     Q_OBJECT
     Q_DISABLE_COPY(KEndingBalanceDlg)

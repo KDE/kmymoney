@@ -26,18 +26,19 @@
 
 #include "kmymoneywizardpage.h"
 
-
-KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WindowFlags f) :
-    QDialog(parent, f),
-    d_ptr(new KMyMoneyWizardPrivate(this))
+KMyMoneyWizard::KMyMoneyWizard(QWidget* parent, bool modal, Qt::WindowFlags f)
+    : QDialog(parent, f)
+    , MyMoneyFactory(this)
+    , d_ptr(new KMyMoneyWizardPrivate(this))
 {
     Q_D(KMyMoneyWizard);
     d->init(modal);
 }
 
-KMyMoneyWizard::KMyMoneyWizard(KMyMoneyWizardPrivate &dd, QWidget* parent, bool modal, Qt::WindowFlags f) :
-    QDialog(parent, f),
-    d_ptr(&dd)
+KMyMoneyWizard::KMyMoneyWizard(KMyMoneyWizardPrivate& dd, QWidget* parent, bool modal, Qt::WindowFlags f)
+    : QDialog(parent, f)
+    , MyMoneyFactory(this)
+    , d_ptr(&dd)
 {
     Q_D(KMyMoneyWizard);
     d->init(modal);
