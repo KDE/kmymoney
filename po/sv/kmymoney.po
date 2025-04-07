@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-05 02:00+0000\n"
-"PO-Revision-Date: 2025-02-16 15:10+0100\n"
+"PO-Revision-Date: 2025-04-06 14:48+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 24.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -4797,7 +4797,7 @@ msgstr "Namnlös"
 #: kmymoney/kmymoney.cpp:756
 #, kde-format
 msgid "Plugin responded with error during close."
-msgstr ""
+msgstr "Insticksprogram svarade med fel när det stängdes."
 
 #: kmymoney/kmymoney.cpp:864
 #, kde-format
@@ -5835,7 +5835,7 @@ msgstr "Filen hittades inte"
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
-msgstr ""
+msgstr "Problem att öppna lagring"
 
 #: kmymoney/kmymoney.cpp:4300
 #, kde-format
@@ -12989,19 +12989,16 @@ msgstr "&Välj datum"
 #. i18n: ectx: property (text), item, widget (QComboBox, m_preferredPrice)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:398
 #: kmymoney/plugins/ofx/import/importoption.ui:174
-#, fuzzy, kde-format
-#| msgid "File Information"
+#, kde-format
 msgid "Price information"
-msgstr "Filinformation"
+msgstr "Kursinformation"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_preferredPrice)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:403
 #: kmymoney/plugins/ofx/import/importoption.ui:179
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Number of shares"
+#, kde-format
 msgid "Value and number of shares"
-msgstr "Antal aktier"
+msgstr "Värde och antal aktier"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:417
@@ -13089,10 +13086,9 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:509
 #: kmymoney/plugins/ofx/import/importoption.ui:166
-#, fuzzy, kde-format
-#| msgid "Name is derived from"
+#, kde-format
 msgid "Price is derived from"
-msgstr "Namnet är härlett från"
+msgstr "Kursen är härledd från"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:535
@@ -15827,7 +15823,7 @@ msgstr "Utökad Intern avkastning"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:748
 #, kde-format
 msgid "Return"
-msgstr ""
+msgstr "Avkastning"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:750
 #, kde-format
@@ -18138,19 +18134,16 @@ msgid "Recover key expires soon"
 msgstr "Återställningsnyckel går snart ut"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:347
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
+#, kde-format
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is already opened by another process."
-msgstr "<p>Filen <b>%1</b> är redan öppnad i en annan instans av KMyMoney</p>"
+msgstr "Filen <b>%1</b> är redan öppnad av en annan process."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:458
-#, fuzzy, kde-format
-#| msgid "<p><b>%1</b> is not a KMyMoney file.</p>"
+#, kde-format
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is not a KMyMoney data file."
-msgstr "<p><b>%1</b> är inte en KMyMoney-fil.</p>"
+msgstr "Filen <b>%1</b> är inte en KMyMoney datafil."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:616
 #, kde-format
@@ -21132,12 +21125,10 @@ msgid "The transaction is missing a category assignment."
 msgstr "Transaktionen saknar en kategoritilldelning."
 
 #: kmymoney/views/newtransactioneditor.cpp:223
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "The amount is different from the sum of all splits by %1."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
-msgstr "Beloppet skiljer sig från summan av alla delningar med %1."
+msgstr "Inmatat beloppet skiljer sig från summan av alla delningar med %1."
 
 #: kmymoney/views/newtransactioneditor.cpp:602
 #, kde-format
