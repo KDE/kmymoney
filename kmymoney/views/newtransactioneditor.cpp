@@ -25,6 +25,7 @@
 // KDE Includes
 
 #include <KLocalizedString>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -33,6 +34,7 @@
 #include "icons.h"
 #include "idfilter.h"
 #include "journalmodel.h"
+#include "kmmyesno.h"
 #include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
 #include "knewaccountdlg.h"
@@ -1565,6 +1567,37 @@ MyMoneyTransaction NewTransactionEditor::transaction() const
         t.modifySplit(sp);
     }
     t.setPostDate(d->ui->dateEdit->date());
+
+    // memo handling only takes place when we have two splits
+    // in all other cases, we do not touch the memo items
+    if (d->splitModel.rowCount() == 1) {
+        // if the memo in the split model is empty, we use the one from the widget in the other split
+        const auto idx = d->splitModel.index(0, 0);
+        QString counterMemo = idx.data(eMyMoney::Model::SplitMemoRole).toString();
+        if (counterMemo.isEmpty()) {
+            counterMemo = sp.memo();
+        } else if (sp.memo() != counterMemo) {
+            // in case the two memos differ, the next step is dependent on the account type
+            // of the counter account:
+            //   case a) income/expense account or
+            //   case b) any other account type
+            // in case a) we copy the memo from the widget and
+            // in case b) we ask the user what to do
+            if (MyMoneyAccount::isIncomeExpense(idx.data(eMyMoney::Model::AccountTypeRole).value<eMyMoney::Account::Type>())) {
+                counterMemo = sp.memo();
+            } else if (KMessageBox::questionTwoActions(
+                           parentWidget(),
+                           i18n("Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the other split?", counterMemo, sp.memo()),
+                           i18n("Copy memo"),
+                           KMMYesNo::yes(),
+                           KMMYesNo::no(),
+                           QStringLiteral("CopyMemoOver"))
+                       == KMessageBox::PrimaryAction) {
+                counterMemo = sp.memo();
+            }
+        }
+        d->splitModel.setData(idx, counterMemo, eMyMoney::Model::SplitMemoRole);
+    }
 
     // now update and add what we have in the model
     d->splitModel.addSplitsToTransaction(t);

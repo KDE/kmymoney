@@ -462,6 +462,9 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::SplitAccountIdRole:
         return split.accountId();
 
+    case eMyMoney::Model::AccountTypeRole:
+        return QVariant::fromValue<eMyMoney::Account::Type>(file->accountsModel()->itemById(split.accountId()).accountType());
+
     case eMyMoney::Model::AccountIsClosedRole:
         return file->accountsModel()->itemById(split.accountId()).isClosed();
 
