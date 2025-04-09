@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-08 02:00+0000\n"
+"POT-Creation-Date: 2025-04-09 01:54+0000\n"
 "PO-Revision-Date: 2023-09-18 10:19-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -19291,7 +19291,7 @@ msgstr "Juros recebidos"
 
 #: kmymoney/views/investtransactioneditor.cpp:285
 #: kmymoney/views/multitransactioneditor.cpp:214
-#: kmymoney/views/newtransactioneditor.cpp:299
+#: kmymoney/views/newtransactioneditor.cpp:301
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "A data de publicação é anterior à data de abertura da conta <b>%1</b>."
@@ -21382,14 +21382,14 @@ msgid "Balance: %1"
 msgstr "Saldo: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:192
-#: kmymoney/views/newtransactioneditor.cpp:282
+#: kmymoney/views/newtransactioneditor.cpp:284
 #, fuzzy, kde-format
 #| msgid "The posting date of the transaction."
 msgid "The posting date is invalid."
 msgstr "A data de publicação da transação."
 
 #: kmymoney/views/multitransactioneditor.cpp:228
-#: kmymoney/views/newtransactioneditor.cpp:326
+#: kmymoney/views/newtransactioneditor.cpp:328
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -21486,13 +21486,13 @@ msgid "The check number used for this transaction."
 msgstr "O número de cheque usado para esta transação."
 
 #: kmymoney/views/newspliteditor.cpp:248
-#: kmymoney/views/newtransactioneditor.cpp:451
+#: kmymoney/views/newtransactioneditor.cpp:453
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "O número de cheque <b>%1</b> já foi usado nesta conta."
 
 #: kmymoney/views/newspliteditor.cpp:785
-#: kmymoney/views/newtransactioneditor.cpp:170
+#: kmymoney/views/newtransactioneditor.cpp:172
 #, kde-format
 msgctxt "@info:tooltip Protected"
 msgid ""
@@ -21519,20 +21519,20 @@ msgstr "Beneficiário/Recebedor"
 msgid "Costcenter"
 msgstr "Centro de custo"
 
-#: kmymoney/views/newtransactioneditor.cpp:219
+#: kmymoney/views/newtransactioneditor.cpp:221
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
 msgstr "Está faltando atribuir uma categoria para a transação."
 
-#: kmymoney/views/newtransactioneditor.cpp:223
+#: kmymoney/views/newtransactioneditor.cpp:225
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:602
+#: kmymoney/views/newtransactioneditor.cpp:604
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@title:window Autofill selection dialog"
@@ -21540,13 +21540,28 @@ msgid "Select autofill transaction"
 msgstr "Selecionar transação auto-preenchida"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1089
+#: kmymoney/views/newtransactioneditor.cpp:1091
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:98
 #: kmymoney/views/newtransactionform.ui:179
 #, kde-format
 msgid "Link"
 msgstr ""
+
+#: kmymoney/views/newtransactioneditor.cpp:1590
+#, kde-format
+msgid ""
+"Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
+"other split?"
+msgstr ""
+"Deseja substituir o memorando<p><i>%1</i></p>pelo memorando<p><i>%2</i></"
+"p>na outra parcela?"
+
+#: kmymoney/views/newtransactioneditor.cpp:1591
+#, fuzzy, kde-format
+#| msgid "Copy memo"
+msgid "Copy memo"
+msgstr "Copiar memorando"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, numberEdit)
 #: kmymoney/views/newtransactioneditor.ui:24
@@ -27045,13 +27060,6 @@ msgstr ""
 
 #~ msgid "Category/Account"
 #~ msgstr "Categoria/Conta"
-
-#~ msgid ""
-#~ "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in "
-#~ "the other split?"
-#~ msgstr ""
-#~ "Deseja substituir o memorando<p><i>%1</i></p>pelo memorando<p><i>%2</i></"
-#~ "p>na outra parcela?"
 
 #~ msgid "KMyMoney has matched the two selected transactions (result above)"
 #~ msgstr ""

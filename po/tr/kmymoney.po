@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-08 02:00+0000\n"
+"POT-Creation-Date: 2025-04-09 01:54+0000\n"
 "PO-Revision-Date: 2025-04-07 00:53+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -18943,7 +18943,7 @@ msgstr "Faiz Geliri"
 
 #: kmymoney/views/investtransactioneditor.cpp:285
 #: kmymoney/views/multitransactioneditor.cpp:214
-#: kmymoney/views/newtransactioneditor.cpp:299
+#: kmymoney/views/newtransactioneditor.cpp:301
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "<b>%1</b> hesabının kayıt tarihi açılış tarihinden önce."
@@ -20959,13 +20959,13 @@ msgid "Balance: %1"
 msgstr "Bakiye: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:192
-#: kmymoney/views/newtransactioneditor.cpp:282
+#: kmymoney/views/newtransactioneditor.cpp:284
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "Kayıt tarihi geçersiz."
 
 #: kmymoney/views/multitransactioneditor.cpp:228
-#: kmymoney/views/newtransactioneditor.cpp:326
+#: kmymoney/views/newtransactioneditor.cpp:328
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -21052,13 +21052,13 @@ msgid "The check number used for this transaction."
 msgstr "Bu işlem için kullanılan çek numarası."
 
 #: kmymoney/views/newspliteditor.cpp:248
-#: kmymoney/views/newtransactioneditor.cpp:451
+#: kmymoney/views/newtransactioneditor.cpp:453
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "<b>%1</b> çek numarası bu hesapta halihazırda kullanılmış."
 
 #: kmymoney/views/newspliteditor.cpp:785
-#: kmymoney/views/newtransactioneditor.cpp:170
+#: kmymoney/views/newtransactioneditor.cpp:172
 #, kde-format
 msgctxt "@info:tooltip Protected"
 msgid ""
@@ -21085,32 +21085,46 @@ msgstr "Ödeyen/Alacaklı"
 msgid "Costcenter"
 msgstr "Maliyet Merkezi"
 
-#: kmymoney/views/newtransactioneditor.cpp:219
+#: kmymoney/views/newtransactioneditor.cpp:221
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
 msgstr "İşlemde bir kategori ataması eksik."
 
-#: kmymoney/views/newtransactioneditor.cpp:223
+#: kmymoney/views/newtransactioneditor.cpp:225
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr "Girilen tutar, tüm bölmelerin toplamından %1 kadar farklı."
 
-#: kmymoney/views/newtransactioneditor.cpp:602
+#: kmymoney/views/newtransactioneditor.cpp:604
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
 msgstr "Kendiliğinden Doldurulacak İşlem Seç"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1089
+#: kmymoney/views/newtransactioneditor.cpp:1091
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:98
 #: kmymoney/views/newtransactionform.ui:179
 #, kde-format
 msgid "Link"
 msgstr "Bağlantı"
+
+#: kmymoney/views/newtransactioneditor.cpp:1590
+#, kde-format
+msgid ""
+"Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
+"other split?"
+msgstr ""
+
+#: kmymoney/views/newtransactioneditor.cpp:1591
+#, fuzzy, kde-format
+#| msgctxt "@info placeholder for memo of matched transaction if empty"
+#| msgid "Empty memo"
+msgid "Copy memo"
+msgstr "Boş not"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, numberEdit)
 #: kmymoney/views/newtransactioneditor.ui:24
@@ -25642,31 +25656,3 @@ msgstr "--csv veya --html bayraklarından yalnızca biri kullanılabilir"
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr "“%1” raporu “%2” içine kaydediliyor"
-
-#~ msgid "Duplicate open"
-#~ msgstr "Aynısı açık"
-
-#~ msgid ""
-#~ "<p>The account \"%1\" was previously created as loan account but some "
-#~ "information is missing.</p><p>The new loan wizard will be started to "
-#~ "collect all relevant information.</p><p>Please use KMyMoney version 0.8.7 "
-#~ "or later and earlier than version 0.9 to correct the problem.</p>"
-#~ msgstr ""
-#~ "<p>“%1” hesabı daha önceden kredi hesabı olarak oluşturuldu; ancak bazı "
-#~ "bilgiler eksik.</p><p>İlgili tüm bilgileri toplamak için yeni kredi "
-#~ "sihirbazı başlatılacak.</p><p>Sorunu düzeltmek için lütfen K Param 0.8.7 "
-#~ "veya üzeri ve 0.9’dan önceki sürümleri kullanın.</p>"
-
-#~ msgid "Account problem"
-#~ msgstr "Hesap sorunu"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid ""
-#~ "This activity cannot be modified because the security account is closed."
-#~ msgstr "Menkul kıymet hesabı kapalı olduğundan bu etkinlik değiştirilemez."
-
-#~ msgid "Select category or account."
-#~ msgstr "Kategori veya hesap seçin."
-
-#~ msgid "Today's due payments"
-#~ msgstr "Bugünün vadesi gelmiş ödemeleri"

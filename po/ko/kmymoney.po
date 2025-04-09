@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-08 02:00+0000\n"
+"POT-Creation-Date: 2025-04-09 01:54+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -18827,7 +18827,7 @@ msgstr "이자 수입"
 
 #: kmymoney/views/investtransactioneditor.cpp:285
 #: kmymoney/views/multitransactioneditor.cpp:214
-#: kmymoney/views/newtransactioneditor.cpp:299
+#: kmymoney/views/newtransactioneditor.cpp:301
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "게시일은 계좌 <b>%1</b>의 개설일 이전입니다."
@@ -20846,14 +20846,14 @@ msgid "Balance: %1"
 msgstr "잔액: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:192
-#: kmymoney/views/newtransactioneditor.cpp:282
+#: kmymoney/views/newtransactioneditor.cpp:284
 #, fuzzy, kde-format
 #| msgid "The posting date of the transaction."
 msgid "The posting date is invalid."
 msgstr "거래 전기 일입니다."
 
 #: kmymoney/views/multitransactioneditor.cpp:228
-#: kmymoney/views/newtransactioneditor.cpp:326
+#: kmymoney/views/newtransactioneditor.cpp:328
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -20936,13 +20936,13 @@ msgid "The check number used for this transaction."
 msgstr "이 거래에 사용된 수표 번호입니다."
 
 #: kmymoney/views/newspliteditor.cpp:248
-#: kmymoney/views/newtransactioneditor.cpp:451
+#: kmymoney/views/newtransactioneditor.cpp:453
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "이 계좌에서 수표 번호 <b>%1</b>이(가) 이미 사용되었습니다."
 
 #: kmymoney/views/newspliteditor.cpp:785
-#: kmymoney/views/newtransactioneditor.cpp:170
+#: kmymoney/views/newtransactioneditor.cpp:172
 #, kde-format
 msgctxt "@info:tooltip Protected"
 msgid ""
@@ -20968,20 +20968,20 @@ msgstr "지불인/수취인"
 msgid "Costcenter"
 msgstr "원가 중심점"
 
-#: kmymoney/views/newtransactioneditor.cpp:219
+#: kmymoney/views/newtransactioneditor.cpp:221
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
 msgstr "거래에 할당된 분류가 없습니다."
 
-#: kmymoney/views/newtransactioneditor.cpp:223
+#: kmymoney/views/newtransactioneditor.cpp:225
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:602
+#: kmymoney/views/newtransactioneditor.cpp:604
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@title:window Autofill selection dialog"
@@ -20989,13 +20989,28 @@ msgid "Select autofill transaction"
 msgstr "거래 자동 완성 선택"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1089
+#: kmymoney/views/newtransactioneditor.cpp:1091
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:98
 #: kmymoney/views/newtransactionform.ui:179
 #, kde-format
 msgid "Link"
 msgstr ""
+
+#: kmymoney/views/newtransactioneditor.cpp:1590
+#, kde-format
+msgid ""
+"Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
+"other split?"
+msgstr ""
+"다른 분할의 메모<p><i>%1</i></p>을(를)<p><i>%2</i></p>(으)로 바꾸시겠습니까?"
+
+#: kmymoney/views/newtransactioneditor.cpp:1591
+#, fuzzy, kde-format
+#| msgctxt "@info placeholder for memo of matched transaction if empty"
+#| msgid "Empty memo"
+msgid "Copy memo"
+msgstr "빈 메모"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, numberEdit)
 #: kmymoney/views/newtransactioneditor.ui:24
@@ -26311,13 +26326,6 @@ msgstr ""
 
 #~ msgid "Category/Account"
 #~ msgstr "분류/계좌"
-
-#~ msgid ""
-#~ "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in "
-#~ "the other split?"
-#~ msgstr ""
-#~ "다른 분할의 메모<p><i>%1</i></p>을(를)<p><i>%2</i></p>(으)로 바꾸시겠습니"
-#~ "까?"
 
 #~ msgid "KMyMoney has matched the two selected transactions (result above)"
 #~ msgstr "KMyMoney가 선택한 두 거래를 일치시켰습니다(결과는 위 참조)."
