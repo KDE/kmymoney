@@ -68,6 +68,12 @@ KSettingsGeneral::KSettingsGeneral(QWidget* parent) :
     connect(d->ui->kcfg_HideZeroBalanceAccountsHome, &QCheckBox::stateChanged, this, [&](int state) {
         hideZeroBalanceAccountsHomeChanged(state == Qt::Checked);
     });
+    connect(d->ui->kcfg_BackupExtension, &QLineEdit::textChanged, this, [&](const QString& txt) {
+        if (txt.isEmpty()) {
+            Q_D(KSettingsGeneral);
+            d->ui->kcfg_BackupExtension->setText(QLatin1String("~"));
+        }
+    });
 }
 
 KSettingsGeneral::~KSettingsGeneral()

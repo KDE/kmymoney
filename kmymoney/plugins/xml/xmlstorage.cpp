@@ -537,7 +537,7 @@ bool XMLStorage::save(const QUrl &url)
             try {
                 const unsigned int nbak = KMyMoneySettings::autoBackupCopies();
                 if (nbak) {
-                    KBackup::numberedBackupFile(filename, QString(), QStringLiteral("~"), nbak);
+                    KBackup::numberedBackupFile(filename, QString(), KMyMoneySettings::backupExtension(), nbak);
                 }
                 d->saveToLocalFile(filename, storageWriter.get(), plaintext, keyList);
             } catch (const MyMoneyException &e) {

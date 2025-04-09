@@ -35,6 +35,10 @@
    <min>0</min>
    <max>100</max>
   </entry>
+    <entry name="BackupExtension" type="String">
+   <label>Character or string appended to backup filename</label>
+   <default>~</default>
+  </entry>
   <entry name="AutoSavePeriod" type="Int">
    <label>Autosave interval in minutes</label>
    <default>10</default>

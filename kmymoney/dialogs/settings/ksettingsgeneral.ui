@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>499</height>
+    <height>482</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,6 +30,9 @@
           <string>Autosave options</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_3">
             <item>
@@ -90,38 +93,68 @@
             </property>
            </widget>
           </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="title">
+          <string>Backup options</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_11">
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_6">
             <item>
-             <widget class="QSpinBox" name="kcfg_AutoBackupCopies">
-              <property name="toolTip">
-               <string>Setup number of backups to keep (local file only)</string>
-              </property>
-              <property name="whatsThis">
-               <string>Whenever the current data is saved into a local file, KMyMoney keeps the selected number of previous states of the file.
+             <layout class="QGridLayout" name="gridLayout">
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="kcfg_BackupExtension">
+                <property name="toolTip">
+                 <string>Enter a character or string that will be added to backup files. Default is ~</string>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QSpinBox" name="kcfg_AutoBackupCopies">
+                <property name="toolTip">
+                 <string>Setup number of backups to keep (local file only)</string>
+                </property>
+                <property name="whatsThis">
+                 <string>Whenever the current data is saved into a local file, KMyMoney keeps the selected number of previous states of the file.
 
 Set it to 0 to turn the feature off.</string>
-              </property>
-              <property name="frame">
-               <bool>true</bool>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="maximum">
-               <number>20</number>
-              </property>
-              <property name="singleStep">
-               <number>1</number>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_2">
-              <property name="text">
-               <string>Number of backups to keep (0=off)</string>
-              </property>
-             </widget>
+                </property>
+                <property name="frame">
+                 <bool>true</bool>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="maximum">
+                 <number>20</number>
+                </property>
+                <property name="singleStep">
+                 <number>1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>Extension for backup files</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="label_5">
+                <property name="text">
+                 <string>Number of backups to keep (0=off)</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
             <item>
              <spacer name="horizontalSpacer">
