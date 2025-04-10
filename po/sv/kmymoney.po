@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-09 01:54+0000\n"
+"POT-Creation-Date: 2025-04-10 01:54+0000\n"
 "PO-Revision-Date: 2025-04-06 14:48+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -1146,7 +1146,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QCheckBox, m_updateButton)
 #. i18n: ectx: label, entry (PriceHistoryUpdate), group (General Options)
 #: kmymoney/dialogs/kcurrencycalculator.ui:310
-#: kmymoney/settings/kmymoney.kcfg:84
+#: kmymoney/settings/kmymoney.kcfg:88
 #, kde-format
 msgid "Update price history"
 msgstr "Uppdatera kurshistorik"
@@ -1847,7 +1847,7 @@ msgstr "Status:"
 #: kmymoney/dialogs/kequitypriceupdatedlg.ui:171
 #: kmymoney/dialogs/knewaccountdlg.ui:409
 #: kmymoney/dialogs/knewinstitutiondlg.ui:88
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:569
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:602
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:122
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:170
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:212
@@ -1859,7 +1859,7 @@ msgstr "Status:"
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:612
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:657
 #: kmymoney/plugins/views/reports/kreportsview.ui:80
-#: kmymoney/settings/kmymoney.kcfg:477 kmymoney/views/kinstitutionsview.ui:53
+#: kmymoney/settings/kmymoney.kcfg:481 kmymoney/views/kinstitutionsview.ui:53
 #: kmymoney/views/kinstitutionsview.ui:71
 #: kmymoney/views/kinstitutionsview.ui:81
 #: kmymoney/views/ktransactionselectdlg.ui:50
@@ -1942,7 +1942,7 @@ msgstr "Konton och kategorier"
 #. i18n: ectx: property (text), widget (QLabel, textLabel8)
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_4)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:148
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:460
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:493
 #: kmymoney/plugins/views/reports/kreportsview_p.h:951
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1491
 #: kmymoney/views/kpayeesview.ui:117 kmymoney/views/ktagsview.ui:121
@@ -1961,7 +1961,7 @@ msgstr "Delningar"
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
 #. i18n: ectx: property (windowTitle), widget (QWidget, KMyMoneyBriefSchedule)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:188
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:441
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:474
 #: kmymoney/widgets/kmymoneybriefschedule.ui:14
 #, kde-format
 msgid "Schedules"
@@ -3168,7 +3168,7 @@ msgstr "Individuella teckensnittsinställningar för huvudböcker"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (listCellFont), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:71
-#: kmymoney/settings/kmymoney.kcfg:318
+#: kmymoney/settings/kmymoney.kcfg:322
 #, kde-format
 msgid "Cell font"
 msgstr "Cellteckensnitt"
@@ -3176,12 +3176,12 @@ msgstr "Cellteckensnitt"
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #. i18n: ectx: label, entry (listHeaderFont), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:81
-#: kmymoney/settings/kmymoney.kcfg:321
+#: kmymoney/settings/kmymoney.kcfg:325
 #, kde-format
 msgid "Header font"
 msgstr "Rubrikteckensnitt"
 
-#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:90
+#: kmymoney/dialogs/settings/ksettingsgeneral.cpp:96
 #, kde-format
 msgid "Choose file path"
 msgstr "Välj filsökväg"
@@ -3206,31 +3206,45 @@ msgid "Autosave options"
 msgstr "Alternativ för spara automatiskt"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoSaveFile)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:38
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:41
 #, kde-format
 msgid "Autosave periodically"
 msgstr "Spara automatiskt periodiskt"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:58
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:61
 #, kde-format
 msgid "minutes"
 msgstr "minuter"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoSaveOnClose)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:89
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:92
 #, kde-format
 msgid "Autosave when file is modified upon close"
 msgstr "Spara automatiskt när filen är ändrad vid stängning"
 
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_3)
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:102
+#, fuzzy, kde-format
+#| msgid "Backup location:"
+msgid "Backup options"
+msgstr "Plats för säkerhetskopia:"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, kcfg_BackupExtension)
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:112
+#, kde-format
+msgid ""
+"Enter a character or string that will be added to backup files. Default is ~"
+msgstr ""
+
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_AutoBackupCopies)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:98
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:122
 #, kde-format
 msgid "Setup number of backups to keep (local file only)"
 msgstr "Ställ in antal säkerhetskopior att behålla (bara för lokal fil)"
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_AutoBackupCopies)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:103
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:127
 #, kde-format
 msgid ""
 "Whenever the current data is saved into a local file, KMyMoney keeps the "
@@ -3244,178 +3258,184 @@ msgstr ""
 "Ställ in till 0 för att stänga av funktionen."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:122
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:146
+#, kde-format
+msgid "Extension for backup files"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:153
 #, kde-format
 msgid "Number of backups to keep (0=off)"
 msgstr "Antal säkerhetskopior att behålla (0 = av)"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:147
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:180
 #, kde-format
 msgid "Fiscal Year"
 msgstr "Räkenskapsår"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2_2)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:153
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:186
 #, kde-format
 msgid "Your fiscal year starts on"
 msgstr "Ditt räkenskapsår börjar"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_FiscalYearBegin)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:171
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:204
 #, kde-format
 msgid "January"
 msgstr "januari"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_FiscalYearBegin)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:176
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:209
 #, kde-format
 msgid "February"
 msgstr "februari"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_FiscalYearBegin)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:181
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:214
 #, kde-format
 msgid "March"
 msgstr "mars"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_FiscalYearBegin)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:186
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:219
 #, kde-format
 msgid "April"
 msgstr "april"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_FiscalYearBegin)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:191
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:224
 #, kde-format
 msgid "May"
 msgstr "maj"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_FiscalYearBegin)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:196
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:229
 #, kde-format
 msgid "June"
 msgstr "juni"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_FiscalYearBegin)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:201
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:234
 #, kde-format
 msgid "July"
 msgstr "juli"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_FiscalYearBegin)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:206
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:239
 #, kde-format
 msgctxt "@item the month August"
 msgid "August"
 msgstr "augusti"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_FiscalYearBegin)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:211
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:244
 #, kde-format
 msgid "September"
 msgstr "september"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_FiscalYearBegin)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:216
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:249
 #, kde-format
 msgid "October"
 msgstr "oktober"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_FiscalYearBegin)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:221
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:254
 #, kde-format
 msgid "November"
 msgstr "november"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_FiscalYearBegin)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:226
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:259
 #, kde-format
 msgid "December"
 msgstr "december"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_7)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:253
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:286
 #, kde-format
 msgid "External programs"
 msgstr "Externa program"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:259
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:292
 #, kde-format
 msgid "Calculator"
 msgstr "Räknare"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab2)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:289
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:322
 #, kde-format
 msgid "Views"
 msgstr "Vyer"
 
 #. i18n: ectx: property (title), widget (QGroupBox, kcfg_StartLastViewSelected)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:295
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:328
 #, kde-format
 msgid "Startup page options"
 msgstr "Alternativ för startsida"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton1)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:301
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:334
 #, kde-format
 msgid "Start with ho&mepage"
 msgstr "Starta med he&msida"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton2)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:311
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:344
 #, kde-format
 msgid "Start with last selected view"
 msgstr "Starta med senast valda vy"
 
 #. i18n: ectx: property (title), widget (QGroupBox, kcfg_viewType)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:321
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:354
 #, kde-format
 msgid "Type of the KMyMoney view"
 msgstr "Typ av vy i KMyMoney"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton3)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:327
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:360
 #, kde-format
 msgid "List"
 msgstr "Lista"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton4)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:337
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:370
 #, kde-format
 msgid "Tree"
 msgstr "Träd"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton5)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:344
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:377
 #, kde-format
 msgid "Tabbed"
 msgstr "Med flikar"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_syncLedgerInvestment)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:354
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:387
 #, kde-format
 msgid "Synchronize account selection of ledger and investment view"
 msgstr "Synkronisera kontoval i huvudbok och investeringsvy"
 
 #. i18n: ectx: attribute (title), widget (QWidget, TabPage)
 #. i18n: ectx: attribute (title), widget (QWidget, tabFilter)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:378
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:411
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:182
 #, kde-format
 msgid "Filter"
 msgstr "Filter"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_6)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:384
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:417
 #, kde-format
 msgid "Accounts / Categories"
 msgstr "Konton / Kategorier"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_HideUnusedCategory)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:390
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:423
 #, kde-format
 msgid ""
 "This option hides all categories in the categories view that are not used in "
@@ -3427,98 +3447,98 @@ msgstr ""
 "kategorival."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideUnusedCategory)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:393
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:426
 #, kde-format
 msgid "Do not show unused categories"
 msgstr "Visa inte oanvända kategorier"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpertMode)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:400
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:433
 #, kde-format
 msgid "Show equity accounts"
 msgstr "Visa aktiekonton"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_ShowCategoriesInAccountsView)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:407
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:440
 #, kde-format
 msgid "This option will display the categories in the accounts view also."
 msgstr "Alternativet visar också kategorierna i kontovyn."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowCategoriesInAccountsView)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:410
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:443
 #, kde-format
 msgid "Show categories in the accounts list view"
 msgstr "Visa kategorierna i kontovyns lista"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccountsHome)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:417
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:450
 #: kmymoney/dialogs/settings/ksettingshome.ui:238
 #, kde-format
 msgid "Hide accounts with a zero balance from Home"
 msgstr "Dölj konton med nollsaldo från Hem"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:424
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:457
 #, kde-format
 msgid "Hide accounts with a zero balance from Accounts"
 msgstr "Dölj konton med nollsaldo från Konton"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:431
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:464
 #, kde-format
 msgid "Do not show zero balance equities"
 msgstr "Visa inte aktiekonton utan saldo"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_HideFinishedSchedules)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:447
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:480
 #, kde-format
 msgid "This option hides all finished schedules in the schedules view."
 msgstr "Alternativet döljer alla färdiga scheman i schemavyn."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideFinishedSchedules)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:450
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:483
 #, kde-format
 msgid "Do not show finished schedules"
 msgstr "Visa inte färdiga scheman"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_3)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:468
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:501
 #, kde-format
 msgid "Do not show transactions prior to"
 msgstr "Visa inte transaktioner före"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_HideReconciledTransactions)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:499
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:532
 #, kde-format
 msgid "This option hides all reconciled transactions in the ledger view."
 msgstr "Alternativet döljer alla avstämda transaktioner i liggarvyn."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideReconciledTransactions)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:502
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:535
 #, kde-format
 msgid "Do not show reconciled transactions"
 msgstr "Visa inte avstämda transaktioner"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:529
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:562
 #, kde-format
 msgid "Support"
 msgstr "Stöd"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_8)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:535
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:568
 #, kde-format
 msgid "Logging"
 msgstr "Loggning"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:543
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:576
 #, kde-format
 msgid "Log path"
 msgstr "Loggsökväg"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:591
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:624
 #, kde-format
 msgid ""
 "On choosing a log file path please keep in mind that log files may contain "
@@ -3529,16 +3549,16 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_logImportedStatements)
 #. i18n: ectx: label, entry (logImportedStatements), group (List Options)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:601
-#: kmymoney/settings/kmymoney.kcfg:308
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:634
+#: kmymoney/settings/kmymoney.kcfg:312
 #, kde-format
 msgid "Log imported statements"
 msgstr "Logga importerade utdrag"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_logOfxTransactions)
 #. i18n: ectx: label, entry (logOfxTransactions), group (List Options)
-#: kmymoney/dialogs/settings/ksettingsgeneral.ui:608
-#: kmymoney/settings/kmymoney.kcfg:311
+#: kmymoney/dialogs/settings/ksettingsgeneral.ui:641
+#: kmymoney/settings/kmymoney.kcfg:315
 #, kde-format
 msgid "Log OFX transactions"
 msgstr "Logga OFX-transaktioner"
@@ -3677,7 +3697,7 @@ msgstr "Individuella ikoninställningar"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (IconsTheme), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsicons.ui:52
-#: kmymoney/settings/kmymoney.kcfg:324
+#: kmymoney/settings/kmymoney.kcfg:328
 #, kde-format
 msgid "Icon theme"
 msgstr "Ikontema"
@@ -4015,7 +4035,7 @@ msgstr "Visa ett rutnät i huvudboken"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TransactionForm)
 #. i18n: ectx: label, entry (TransactionForm), group (General Options)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:40
-#: kmymoney/settings/kmymoney.kcfg:88
+#: kmymoney/settings/kmymoney.kcfg:92
 #, kde-format
 msgid "Show transaction form"
 msgstr "Visa transaktionsformulär"
@@ -4066,7 +4086,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_LedgerLens)
 #. i18n: ectx: label, entry (LedgerLens), group (General Options)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:76
-#: kmymoney/settings/kmymoney.kcfg:80
+#: kmymoney/settings/kmymoney.kcfg:84
 #, kde-format
 msgid "Use the ledger lens"
 msgstr "Använd huvudbokens lins"
@@ -4179,7 +4199,7 @@ msgstr "Öka automatiskt checknummer"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusChangeIsEnter)
 #. i18n: ectx: label, entry (FocusChangeIsEnter), group (General Options)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:237
-#: kmymoney/settings/kmymoney.kcfg:72
+#: kmymoney/settings/kmymoney.kcfg:76
 #, kde-format
 msgid "Keep changes when selecting a different transaction/split"
 msgstr "Behåll ändringar när en annan transaktion eller delning markeras"
@@ -4227,7 +4247,7 @@ msgstr "Automatisk avstämning"
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_1)
 #. i18n: ectx: label, entry (initialDateFieldCursorPosition), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:279
-#: kmymoney/settings/kmymoney.kcfg:340
+#: kmymoney/settings/kmymoney.kcfg:344
 #, kde-format
 msgid "Initial cursor position within the date field"
 msgstr "Ursprunglig markörposition i datumfältet"
@@ -4473,7 +4493,7 @@ msgstr "Kontrollera scheman vid start"
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #. i18n: ectx: label, entry (CheckSchedulePreview), group (General Options)
 #: kmymoney/dialogs/settings/ksettingsschedules.ui:48
-#: kmymoney/settings/kmymoney.kcfg:53
+#: kmymoney/settings/kmymoney.kcfg:57
 #, kde-format
 msgid "Enter transactions this number of days in advance"
 msgstr "Skriv in transaktionen så här många dagar i förväg"
@@ -4500,7 +4520,7 @@ msgstr "(Ingen)"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (SchedulePreview), group (General Options)
 #: kmymoney/dialogs/settings/ksettingsschedules.ui:120
-#: kmymoney/settings/kmymoney.kcfg:66
+#: kmymoney/settings/kmymoney.kcfg:70
 #, kde-format
 msgid "Number of days to preview schedules in ledger"
 msgstr "Antal dagar att förhandsgranska scheman i huvudbok"
@@ -4874,19 +4894,19 @@ msgid "Show Transaction Detail"
 msgstr "Visa transaktionsinformation"
 
 #. i18n: ectx: label, entry (HideReconciledTransactions), group (List Options)
-#: kmymoney/kmymoney.cpp:1385 kmymoney/settings/kmymoney.kcfg:252
+#: kmymoney/kmymoney.cpp:1385 kmymoney/settings/kmymoney.kcfg:256
 #, kde-format
 msgid "Hide reconciled transactions"
 msgstr "Dölj avstämda transaktioner"
 
 #. i18n: ectx: label, entry (HideUnusedCategory), group (List Options)
-#: kmymoney/kmymoney.cpp:1386 kmymoney/settings/kmymoney.kcfg:224
+#: kmymoney/kmymoney.cpp:1386 kmymoney/settings/kmymoney.kcfg:228
 #, kde-format
 msgid "Hide unused categories"
 msgstr "Dölj oanvända kategorier"
 
 #. i18n: ectx: label, entry (ShowAllAccounts), group (List Options)
-#: kmymoney/kmymoney.cpp:1387 kmymoney/settings/kmymoney.kcfg:228
+#: kmymoney/kmymoney.cpp:1387 kmymoney/settings/kmymoney.kcfg:232
 #, kde-format
 msgid "Show all accounts"
 msgstr "Visa alla konton"
@@ -15051,63 +15071,63 @@ msgstr "Prognos"
 
 #. i18n: ectx: label, entry (forecastMethod), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:11
-#: kmymoney/settings/kmymoney.kcfg:429
+#: kmymoney/settings/kmymoney.kcfg:433
 #, kde-format
 msgid "Method to calculate forecast"
 msgstr "Metod för beräkning av prognos"
 
 #. i18n: ectx: label, entry (forecastDays), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:15
-#: kmymoney/settings/kmymoney.kcfg:433
+#: kmymoney/settings/kmymoney.kcfg:437
 #, kde-format
 msgid "Days to forecast"
 msgstr "Dagar i prognos"
 
 #. i18n: ectx: label, entry (forecastAccountCycle), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:21
-#: kmymoney/settings/kmymoney.kcfg:439
+#: kmymoney/settings/kmymoney.kcfg:443
 #, kde-format
 msgid "Days of normal account cycle"
 msgstr "Dagar i normal kontocykel"
 
 #. i18n: ectx: label, entry (forecastCycles), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:27
-#: kmymoney/settings/kmymoney.kcfg:445
+#: kmymoney/settings/kmymoney.kcfg:449
 #, kde-format
 msgid "Number of historic cycles to use in forecast"
 msgstr "Antal historikcykler att använda i prognos"
 
 #. i18n: ectx: label, entry (beginForecastDay), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:33
-#: kmymoney/settings/kmymoney.kcfg:451
+#: kmymoney/settings/kmymoney.kcfg:455
 #, kde-format
 msgid "Day of month to start forecast"
 msgstr "Dag under månaden att starta prognos"
 
 #. i18n: ectx: label, entry (historyMethod), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:39
-#: kmymoney/settings/kmymoney.kcfg:457
+#: kmymoney/settings/kmymoney.kcfg:461
 #, kde-format
 msgid "Method to calculate history-based forecast"
 msgstr "Metod för beräkning av historikbaserad prognos"
 
 #. i18n: ectx: label, entry (skipOpeningDate), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:43
-#: kmymoney/settings/kmymoney.kcfg:461
+#: kmymoney/settings/kmymoney.kcfg:465
 #, kde-format
 msgid "Skip opening date when fetching transactions"
 msgstr "Hoppa över öppningsdatum när transaktioner hämtas"
 
 #. i18n: ectx: label, entry (includeFutureTransactions), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:47
-#: kmymoney/settings/kmymoney.kcfg:465
+#: kmymoney/settings/kmymoney.kcfg:469
 #, kde-format
 msgid "Include future transaction when using Schedule Forecast"
 msgstr "Inkludera framtida transaktioner vid användning av schemalagd prognos"
 
 #. i18n: ectx: label, entry (includeScheduledTransactions), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:51
-#: kmymoney/settings/kmymoney.kcfg:469
+#: kmymoney/settings/kmymoney.kcfg:473
 #, kde-format
 msgid "Include scheduled transactions when using Schedule Forecast"
 msgstr ""
@@ -17059,7 +17079,7 @@ msgstr "Linjebredd för diagram"
 #. i18n: ectx: label, entry (LineWidth), group (Chart Settings)
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_LineWidth)
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:66
-#: kmymoney/settings/kmymoney.kcfg:410
+#: kmymoney/settings/kmymoney.kcfg:414
 #, kde-format
 msgid "Line width for diagrams, in pixels"
 msgstr "Linjebredd för diagram, i bildpunkter"
@@ -18347,104 +18367,110 @@ msgstr ""
 msgid "Number of backup files to keep"
 msgstr "Antal säkerhetskopior att behålla"
 
-#. i18n: ectx: label, entry (AutoSavePeriod), group (General Options)
+#. i18n: ectx: label, entry (BackupExtension), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:39
+#, kde-format
+msgid "Character or string appended to backup filename"
+msgstr ""
+
+#. i18n: ectx: label, entry (AutoSavePeriod), group (General Options)
+#: kmymoney/settings/kmymoney.kcfg:43
 #, kde-format
 msgid "Autosave interval in minutes"
 msgstr "Intervall för spara automatiskt i minuter"
 
 #. i18n: ectx: label, entry (AutoSaveOnClose), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:45
+#: kmymoney/settings/kmymoney.kcfg:49
 #, kde-format
 msgid "Autosave file upon close"
 msgstr "Spara automatiskt fil vid stängning"
 
 #. i18n: ectx: label, entry (CheckSchedule), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:49
+#: kmymoney/settings/kmymoney.kcfg:53
 #, kde-format
 msgid "Check schedules upon startup"
 msgstr "Kontrollera scheman vid start"
 
 #. i18n: ectx: label, entry (ExternalCalculator), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:59
+#: kmymoney/settings/kmymoney.kcfg:63
 #, kde-format
 msgid "Name of external calculator program"
 msgstr "Namn på ett externt räknarprogram"
 
 #. i18n: ectx: label, entry (HolidayRegion), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:62
+#: kmymoney/settings/kmymoney.kcfg:66
 #, kde-format
 msgid "Name of region used for non-processing days"
 msgstr "Namn på regionen använd för andra dagar än behandlingsdagar"
 
 #. i18n: ectx: label, entry (EnterMovesBetweenFields), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:76
+#: kmymoney/settings/kmymoney.kcfg:80
 #, kde-format
 msgid "Using the Enter key moves between the fields"
 msgstr "Använd returtangent för att gå mellan fält"
 
 #. i18n: ectx: label, entry (StartLastViewSelected), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:92
+#: kmymoney/settings/kmymoney.kcfg:96
 #, kde-format
 msgid "Start with last selected view or homepage"
 msgstr "Starta med den senast valda sidan eller hemsidan"
 
 #. i18n: ectx: label, entry (LastViewSelected), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:96
+#: kmymoney/settings/kmymoney.kcfg:100
 #, kde-format
 msgid "The last selected view"
 msgstr "Den senast valda vyn"
 
 #. i18n: ectx: label, entry (WriteDataEncrypted), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:100
+#: kmymoney/settings/kmymoney.kcfg:104
 #, kde-format
 msgid "Use GPG to encrypt data file"
 msgstr "Använd GPG för att kryptera datafilen"
 
 #. i18n: ectx: label, entry (EncryptRecover), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:104
+#: kmymoney/settings/kmymoney.kcfg:108
 #, kde-format
 msgid "Also encrypt against recover key"
 msgstr "Kryptera också med återställningsnyckel"
 
 #. i18n: ectx: label, entry (GpgRecipient), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:108
+#: kmymoney/settings/kmymoney.kcfg:112
 #, kde-format
 msgid "GPG User ID (deprecated)"
 msgstr "GPG användar-id (föråldrat)"
 
 #. i18n: ectx: label, entry (GpgRecipientList), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:111
+#: kmymoney/settings/kmymoney.kcfg:115
 #, kde-format
 msgid "GPG User ID"
 msgstr "GPG användar-id"
 
 #. i18n: ectx: label, entry (ExpertMode), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:114
+#: kmymoney/settings/kmymoney.kcfg:118
 #, kde-format
 msgid "Run in expert (accountant) mode"
 msgstr "Kör i expertläge (revisorläge)"
 
 #. i18n: ectx: label, entry (syncLedgerInvestment), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:118
+#: kmymoney/settings/kmymoney.kcfg:122
 #, kde-format
 msgid "Synchronize account in ledger and investment view"
 msgstr "Synkronisera kontoval i huvudbok och investeringsvy"
 
 #. i18n: ectx: label, entry (viewType), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:122
+#: kmymoney/settings/kmymoney.kcfg:126
 #, kde-format
 msgid "The type of the KMyMoney view"
 msgstr "Typ av vy i KMyMoney"
 
 #. i18n: ectx: label, entry (firstTimeRun), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:126
+#: kmymoney/settings/kmymoney.kcfg:130
 #, kde-format
 msgid "First time switch to start new user wizard"
 msgstr "Förstagångsinställning för att starta guiden för ny användare"
 
 #. i18n: ectx: label, entry (stringMatchFromStart), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:130
+#: kmymoney/settings/kmymoney.kcfg:134
 #, kde-format
 msgid ""
 "Match strings in auto-completion only from the first letter on. A substring "
@@ -18454,44 +18480,44 @@ msgstr ""
 "vidare. En delsträng efter den första bokstaven hittas inte."
 
 #. i18n: ectx: label, entry (stdTransactionFormTabOrder), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:134
+#: kmymoney/settings/kmymoney.kcfg:138
 #, kde-format
 msgid "Tab order of edit widgets in transaction form"
 msgstr "Flikordning för redigeringskomponenter i transaktionsformulär"
 
 #. i18n: ectx: label, entry (stdTransactionRegisterTabOrder), group (General Options)
-#: kmymoney/settings/kmymoney.kcfg:138
+#: kmymoney/settings/kmymoney.kcfg:142
 #, kde-format
 msgid "Tab order of edit widgets in register"
 msgstr "Flikordning för redigeringskomponenter i registret"
 
 #. i18n: ectx: label, entry (ItemList), group (Homepage Options)
-#: kmymoney/settings/kmymoney.kcfg:144
+#: kmymoney/settings/kmymoney.kcfg:148
 #, kde-format
 msgid "Order of items on homepage"
 msgstr "Objektens ordning på hemsidan"
 
 #. i18n: ectx: label, entry (ZoomFactor), group (Homepage Options)
-#: kmymoney/settings/kmymoney.kcfg:148
+#: kmymoney/settings/kmymoney.kcfg:152
 #, kde-format
 msgid "Zoom factor used for home view HTML page"
 msgstr "Zoomfaktor använd för hemvyns HTML-sida"
 
 #. i18n: ectx: label, entry (RememberZoomFactor), group (Homepage Options)
-#: kmymoney/settings/kmymoney.kcfg:152
+#: kmymoney/settings/kmymoney.kcfg:156
 #, kde-format
 msgid "Remember (manually adjusted) zoom factor in home view on program end."
 msgstr ""
 "Kom ihåg (manuellt ändrad) zoomfaktor i hemvyn när programmet avslutas."
 
 #. i18n: ectx: label, entry (ShowLimitInfo), group (Homepage Options)
-#: kmymoney/settings/kmymoney.kcfg:156
+#: kmymoney/settings/kmymoney.kcfg:160
 #, kde-format
 msgid "Show account limit information on the Homepage"
 msgstr "Visa information om kontogränser på hemsidan"
 
 #. i18n: ectx: label, entry (ShowBalanceStatusOfOnlineAccounts), group (Homepage Options)
-#: kmymoney/settings/kmymoney.kcfg:160
+#: kmymoney/settings/kmymoney.kcfg:164
 #, kde-format
 msgid ""
 "Show balance status on the Homepage for accounts where data imports include "
@@ -18501,19 +18527,19 @@ msgstr ""
 "inkluderar behållning."
 
 #. i18n: ectx: label, entry (ShowCountOfUnmarkedTransactions), group (Homepage Options)
-#: kmymoney/settings/kmymoney.kcfg:164
+#: kmymoney/settings/kmymoney.kcfg:168
 #, kde-format
 msgid "Show number of not marked transactions per account on the Homepage [!M]"
 msgstr "Visa antal omarkerade transaktioner per konto på hemsidan [!M]"
 
 #. i18n: ectx: label, entry (ShowCountOfClearedTransactions), group (Homepage Options)
-#: kmymoney/settings/kmymoney.kcfg:168
+#: kmymoney/settings/kmymoney.kcfg:172
 #, kde-format
 msgid "Show number of cleared transactions per account on the Homepage [C]"
 msgstr "Visa antal kontrollerade transaktioner per konto på hemsidan [C]"
 
 #. i18n: ectx: label, entry (ShowCountOfNotReconciledTransactions), group (Homepage Options)
-#: kmymoney/settings/kmymoney.kcfg:172
+#: kmymoney/settings/kmymoney.kcfg:176
 #, kde-format
 msgid ""
 "Show number of not reconciled (not marked + cleared) transactions per "
@@ -18523,188 +18549,188 @@ msgstr ""
 "konto på hemsidan [!R]"
 
 #. i18n: ectx: label, entry (ShowDateOfLastReconciliation), group (Homepage Options)
-#: kmymoney/settings/kmymoney.kcfg:176
+#: kmymoney/settings/kmymoney.kcfg:180
 #, kde-format
 msgid "Show date of last reconciliation on the Homepage"
 msgstr "Visa datum för senaste avstämning på hemsidan"
 
 #. i18n: ectx: label, entry (useCustomColors), group (Color Options)
-#: kmymoney/settings/kmymoney.kcfg:182
+#: kmymoney/settings/kmymoney.kcfg:186
 #, kde-format
 msgid "Use custom colors"
 msgstr "Använd egna färger"
 
 #. i18n: ectx: label, entry (transactionImportedColor), group (Color Options)
-#: kmymoney/settings/kmymoney.kcfg:186
+#: kmymoney/settings/kmymoney.kcfg:190
 #, kde-format
 msgid "Background color for imported transactions"
 msgstr "Bakgrundsfärg för importerade transaktioner"
 
 #. i18n: ectx: label, entry (transactionImportedText), group (Color Options)
-#: kmymoney/settings/kmymoney.kcfg:190
+#: kmymoney/settings/kmymoney.kcfg:194
 #, kde-format
 msgid "Text color for imported transactions"
 msgstr "Textfärg för importerade transaktioner"
 
 #. i18n: ectx: label, entry (transactionMatchedColor), group (Color Options)
-#: kmymoney/settings/kmymoney.kcfg:194
+#: kmymoney/settings/kmymoney.kcfg:198
 #, kde-format
 msgid "Background color for matched transactions"
 msgstr "Bakgrundsfärg för matchade transaktioner"
 
 #. i18n: ectx: label, entry (transactionMatchedText), group (Color Options)
-#: kmymoney/settings/kmymoney.kcfg:198
+#: kmymoney/settings/kmymoney.kcfg:202
 #, kde-format
 msgid "Text color for matched transactions"
 msgstr "Textfärg för matchade transaktioner"
 
 #. i18n: ectx: label, entry (transactionErroneousColor), group (Color Options)
-#: kmymoney/settings/kmymoney.kcfg:202
+#: kmymoney/settings/kmymoney.kcfg:206
 #, kde-format
 msgid "List color for erroneous transactions"
 msgstr "Listfärg för felaktiga transaktioner"
 
 #. i18n: ectx: label, entry (missingConversionRateColor), group (Color Options)
-#: kmymoney/settings/kmymoney.kcfg:206
+#: kmymoney/settings/kmymoney.kcfg:210
 #, kde-format
 msgid "List color for missing conversion rate"
 msgstr "Listfärg för saknad konverteringskurs"
 
 #. i18n: ectx: label, entry (groupMarkerColor), group (Color Options)
-#: kmymoney/settings/kmymoney.kcfg:210
+#: kmymoney/settings/kmymoney.kcfg:214
 #, kde-format
 msgid "Background color for group marker"
 msgstr "Bakgrundsfärg för gruppmarkering"
 
 #. i18n: ectx: label, entry (groupMarkerText), group (Color Options)
-#: kmymoney/settings/kmymoney.kcfg:214
+#: kmymoney/settings/kmymoney.kcfg:218
 #, kde-format
 msgid "Text color for group marker"
 msgstr "Textfärg för gruppmarkering"
 
 #. i18n: ectx: label, entry (fieldRequiredColor), group (Color Options)
-#: kmymoney/settings/kmymoney.kcfg:218
+#: kmymoney/settings/kmymoney.kcfg:222
 #, kde-format
 msgid "Background color for required fields"
 msgstr "Bakgrundsfärg för nödvändiga fält"
 
 #. i18n: ectx: label, entry (ShowCategoriesInAccountsView), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:232
+#: kmymoney/settings/kmymoney.kcfg:236
 #, kde-format
 msgid "Show categories in the accounts view"
 msgstr "Visa kategorier i kontovyn"
 
 #. i18n: ectx: label, entry (HideZeroBalanceEquities), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:236
+#: kmymoney/settings/kmymoney.kcfg:240
 #, kde-format
 msgid "Hide zero balance equities"
 msgstr "Dölj aktiekonton med nollsaldo"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:240
+#: kmymoney/settings/kmymoney.kcfg:244
 #, kde-format
 msgid "Hide zero balance accounts from Accounts"
 msgstr "Dölj konton med nollsaldo från Konton"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:244
+#: kmymoney/settings/kmymoney.kcfg:248
 #, kde-format
 msgid "Hide zero balance accounts from Home"
 msgstr "Dölj konton med nollsaldo från Hem"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:248
+#: kmymoney/settings/kmymoney.kcfg:252
 #, kde-format
 msgid "Hide finished schedules"
 msgstr "Dölj färdiga scheman"
 
 #. i18n: ectx: label, entry (ShowRegisterDetailed), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:256
+#: kmymoney/settings/kmymoney.kcfg:260
 #, kde-format
 msgid "Show all register entries in full detail"
 msgstr "Visa alla registerposter i fullständig detalj"
 
 #. i18n: ectx: label, entry (ShowAllSplits), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:260
+#: kmymoney/settings/kmymoney.kcfg:264
 #, kde-format
 msgid "Show all split details in register"
 msgstr "Visa all information om delning i registret"
 
 #. i18n: ectx: label, entry (ShowPlannedScheduleDates), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:264
+#: kmymoney/settings/kmymoney.kcfg:268
 #, kde-format
 msgid "Show schedules with planned date"
 msgstr "Visa scheman med planerade datum"
 
 #. i18n: ectx: label, entry (ShowGrid), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:268
+#: kmymoney/settings/kmymoney.kcfg:272
 #, kde-format
 msgid "Show a grid in the register"
 msgstr "Visa ett rutnät i registret"
 
 #. i18n: ectx: label, entry (ShowFancyMarker), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:272
+#: kmymoney/settings/kmymoney.kcfg:276
 #, kde-format
 msgid "Show fancy group markers"
 msgstr "Visa snygga gruppmarkeringar"
 
 #. i18n: ectx: label, entry (ShowFiscalMarker), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:276
+#: kmymoney/settings/kmymoney.kcfg:280
 #, kde-format
 msgid "Show fancy markers for previous and current fiscal year"
 msgstr "Visa snygga markeringar för föregående och innevarande räkenskapsår"
 
 #. i18n: ectx: label, entry (ShowReconciliationMarker), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:280
+#: kmymoney/settings/kmymoney.kcfg:284
 #, kde-format
 msgid "Show reconciliation entries with date and balance"
 msgstr "Visa avstämningsposter med datum och behållning"
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:289
+#: kmymoney/settings/kmymoney.kcfg:293
 #, kde-format
 msgid "Starting month of the fiscal year"
 msgstr "Första månad i räkenskapsåret"
 
 #. i18n: ectx: label, entry (FiscalYearBeginDay), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:295
+#: kmymoney/settings/kmymoney.kcfg:299
 #, kde-format
 msgid "Starting day of the fiscal year"
 msgstr "Första dag i räkenskapsåret"
 
 #. i18n: ectx: label, entry (StartDate), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:301
+#: kmymoney/settings/kmymoney.kcfg:305
 #, kde-format
 msgid "Start date"
 msgstr "Startdatum"
 
 #. i18n: ectx: label, entry (logPath), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:305
+#: kmymoney/settings/kmymoney.kcfg:309
 #, kde-format
 msgid "Log file path"
 msgstr "Loggfilsökväg"
 
 #. i18n: ectx: label, entry (useSystemFont), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:314
+#: kmymoney/settings/kmymoney.kcfg:318
 #, kde-format
 msgid "Use system font"
 msgstr "Använd systemteckensnitt"
 
 #. i18n: ectx: label, entry (sortNormalView), group (List Options)
 #. i18n: ectx: label, entry (sortReconcileView), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:328 kmymoney/settings/kmymoney.kcfg:332
+#: kmymoney/settings/kmymoney.kcfg:332 kmymoney/settings/kmymoney.kcfg:336
 #, kde-format
 msgid "Sort order of register in normal view"
 msgstr "Registrets sorteringsordning i normal vy"
 
 #. i18n: ectx: label, entry (sortSearchView), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:336
+#: kmymoney/settings/kmymoney.kcfg:340
 #, kde-format
 msgid "Sort order of register in search dialog"
 msgstr "Registrets sorteringsordning i sökdialogruta"
 
 #. i18n: ectx: label, entry (defaultReconciliationState), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:349
+#: kmymoney/settings/kmymoney.kcfg:353
 #, kde-format
 msgid ""
 "Default reconciliation state for transactions entered during reconciliation"
@@ -18712,79 +18738,79 @@ msgstr ""
 "Normalt avstämningstillstånd för transaktioner som skrivs in under avstämning"
 
 #. i18n: ectx: label, entry (matchInterval), group (Import options)
-#: kmymoney/settings/kmymoney.kcfg:355
+#: kmymoney/settings/kmymoney.kcfg:359
 #, kde-format
 msgid "Number of days (plus/minus) to search for matching transactions"
 msgstr "Antal dagar (plus/minus) att söka efter matchande transaktioner"
 
 #. i18n: ectx: label, entry (askForPayeeCategory), group (Import options)
-#: kmymoney/settings/kmymoney.kcfg:359
+#: kmymoney/settings/kmymoney.kcfg:363
 #, kde-format
 msgid "During import, ask for a new payee's default category"
 msgstr "Fråga efter en ny betalningsmottagares standardkategori under import"
 
 #. i18n: ectx: label, entry (lastUsedPostDate), group (Internal Options)
-#: kmymoney/settings/kmymoney.kcfg:366
+#: kmymoney/settings/kmymoney.kcfg:370
 #, kde-format
 msgid "Post date last entered by the user"
 msgstr "Registreringsdatum inmatat av användaren"
 
 #. i18n: ectx: label, entry (qifCash), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:372
+#: kmymoney/settings/kmymoney.kcfg:376
 #, kde-format
 msgid "additional names for cash account"
 msgstr "ytterligare namn på kontantkonto"
 
 #. i18n: ectx: label, entry (qifBank), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:376
+#: kmymoney/settings/kmymoney.kcfg:380
 #, kde-format
 msgid "additional names for checking account"
 msgstr "ytterligare namn på lönekonto"
 
 #. i18n: ectx: label, entry (qifCreditCard), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:380
+#: kmymoney/settings/kmymoney.kcfg:384
 #, kde-format
 msgid "additional names for credit card account"
 msgstr "ytterligare namn på kreditkortskonto"
 
 #. i18n: ectx: label, entry (qifAsset), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:384
+#: kmymoney/settings/kmymoney.kcfg:388
 #, kde-format
 msgid "additional names for asset account"
 msgstr "ytterligare namn på tillgångskonto"
 
 #. i18n: ectx: label, entry (qifOpeningBalance), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:388
+#: kmymoney/settings/kmymoney.kcfg:392
 #, kde-format
 msgid "additional names for opening balance payee"
 msgstr "ytterligare namn på betalningsmottagare av ingående behållning"
 
 #. i18n: ectx: label, entry (qifInvoice), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:392
+#: kmymoney/settings/kmymoney.kcfg:396
 #, kde-format
 msgid "additional names for invoice accounts"
 msgstr "ytterligare namn på fakturakonton"
 
 #. i18n: ectx: label, entry (showAccountsExpanded), group (Account View Settings)
-#: kmymoney/settings/kmymoney.kcfg:398
+#: kmymoney/settings/kmymoney.kcfg:402
 #, kde-format
 msgid "Show accounts view expanded when loaded"
 msgstr "Visa kontovyn expanderas vid inläsning"
 
 #. i18n: ectx: label, entry (MaximumLegendItems), group (Chart Settings)
-#: kmymoney/settings/kmymoney.kcfg:404
+#: kmymoney/settings/kmymoney.kcfg:408
 #, kde-format
 msgid "Maximum quantity of legend items to display on charts"
 msgstr "Maximalt antal förklaringsvärden att visa i diagram"
 
 #. i18n: ectx: label, entry (ChartsPalette), group (Chart Settings)
-#: kmymoney/settings/kmymoney.kcfg:416
+#: kmymoney/settings/kmymoney.kcfg:420
 #, kde-format
 msgid "The palette used to render charts"
 msgstr "Paletten som används för att återge diagram"
 
 #. i18n: ectx: label, entry (CssFileDefault), group (Chart Settings)
-#: kmymoney/settings/kmymoney.kcfg:422
+#: kmymoney/settings/kmymoney.kcfg:426
 #, kde-format
 msgid "Name of default CSS file"
 msgstr "Namn på standardfil för stilmall"
