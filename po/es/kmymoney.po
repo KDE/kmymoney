@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-10 01:54+0000\n"
-"PO-Revision-Date: 2025-04-05 10:57+0100\n"
+"PO-Revision-Date: 2025-04-10 18:32+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -3243,10 +3243,9 @@ msgstr "Guardar automáticamente al cerrar si el archivo se ha modificado"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_3)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:102
-#, fuzzy, kde-format
-#| msgid "Backup location:"
+#, kde-format
 msgid "Backup options"
-msgstr "Ubicación de la copia de seguridad:"
+msgstr "Opciones de copia de seguridad"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, kcfg_BackupExtension)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:112
@@ -3254,6 +3253,8 @@ msgstr "Ubicación de la copia de seguridad:"
 msgid ""
 "Enter a character or string that will be added to backup files. Default is ~"
 msgstr ""
+"Introduzca un carácter o una cadena para añadir a los archivos de copia de "
+"seguridad. De forma predeterminada se usa ~"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_AutoBackupCopies)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:122
@@ -3280,7 +3281,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:146
 #, kde-format
 msgid "Extension for backup files"
-msgstr ""
+msgstr "Extensión para los archivos de copia de seguridad"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:153
@@ -18492,6 +18493,7 @@ msgstr "Número de archivos de copia de seguridad que mantener"
 #, kde-format
 msgid "Character or string appended to backup filename"
 msgstr ""
+"Carácter o cadena que se añade al nombre de archivo de copia de seguridad"
 
 #. i18n: ectx: label, entry (AutoSavePeriod), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:43
@@ -21321,13 +21323,13 @@ msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
 "other split?"
 msgstr ""
+"¿Desea sustituir el memorando<p><i>%1</i></p>con el memorando<p><i>%2</i></"
+"p> en la otra partida?"
 
 #: kmymoney/views/newtransactioneditor.cpp:1591
-#, fuzzy, kde-format
-#| msgctxt "@info placeholder for memo of matched transaction if empty"
-#| msgid "Empty memo"
+#, kde-format
 msgid "Copy memo"
-msgstr "Memorando vacío"
+msgstr "Copiar memorando"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, numberEdit)
 #: kmymoney/views/newtransactioneditor.ui:24
