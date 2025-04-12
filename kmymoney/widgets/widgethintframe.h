@@ -53,9 +53,16 @@ public:
      * the @c offset will be set to 0 for all other styles
      * it will be set to 2.
      *
-     * @sa setOffset()
+     * @sa setOffset(), hintFrameStyle()
      */
-    void setStyle(FrameStyle style);
+    void setHintFrameStyle(FrameStyle style);
+
+    /**
+     * Returns the selected hint style of the frame.
+     *
+     * @sa setHintFrameStyle()
+     */
+    FrameStyle hintFrameStyle() const;
 
     /**
      * Set the offset to be kept between the attached

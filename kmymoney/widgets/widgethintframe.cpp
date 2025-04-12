@@ -8,9 +8,15 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QApplication>
 #include <QEvent>
 #include <QMetaMethod>
 #include <QMoveEvent>
+#include <QPainter>
+#include <QPainterPath>
+#include <QPen>
+#include <QProxyStyle>
+#include <QStyleOption>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -23,6 +29,94 @@ typedef enum {
     HintFrameToolTip,
     ToolTipIndexCount,
 } ToolTipIndex;
+
+class WidgetHintFrameStyle : public QProxyStyle
+{
+    Q_OBJECT
+
+public:
+    WidgetHintFrameStyle();
+    ~WidgetHintFrameStyle() = default;
+
+    void drawControl(ControlElement element, const QStyleOption* option, QPainter* painter, const QWidget* widget) const override;
+
+    static WidgetHintFrameStyle* instance();
+};
+
+WidgetHintFrameStyle* WidgetHintFrameStyle::instance()
+{
+    static WidgetHintFrameStyle* style = nullptr;
+    if (style == nullptr) {
+        style = new WidgetHintFrameStyle;
+        style->setParent(qApp);
+    }
+    return style;
+}
+
+WidgetHintFrameStyle::WidgetHintFrameStyle()
+    : QProxyStyle(QApplication::style())
+{
+}
+
+void WidgetHintFrameStyle::drawControl(ControlElement element, const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+{
+    static constexpr int FrameRadius = 5;
+
+    if (element == CE_ShapedFrame) {
+        WidgetHintFrame* frame = const_cast<WidgetHintFrame*>(qobject_cast<const WidgetHintFrame*>(widget));
+        if (frame) {
+            QPen pen;
+            auto frameColor = QColor("red");
+            pen.setStyle(Qt::SolidLine);
+
+            switch (frame->hintFrameStyle()) {
+            case WidgetHintFrame::Error:
+                break;
+            case WidgetHintFrame::Warning:
+                pen.setStyle(Qt::DashLine);
+                break;
+            case WidgetHintFrame::Info:
+                pen.setStyle(Qt::DashLine);
+                frameColor = QColor("blue");
+                break;
+
+            case WidgetHintFrame::Focus:
+                QProxyStyle::drawControl(CE_FocusFrame, option, painter, widget);
+                return;
+            }
+            pen.setColor(frameColor);
+            pen.setWidth(4);
+
+            QPainterPath focusFramePath;
+            focusFramePath.setFillRule(Qt::OddEvenFill);
+            focusFramePath.addRoundedRect(option->rect, FrameRadius, FrameRadius);
+
+            if (pen.style() != Qt::SolidLine) {
+                QVector<qreal> pattern = {3.0, 3.0};
+                QPainterPathStroker str;
+                str.setCapStyle(Qt::FlatCap);
+                str.setJoinStyle(Qt::RoundJoin);
+                str.setMiterLimit(0);
+                str.setDashPattern(pattern);
+                str.setWidth(6.0);
+
+                focusFramePath = str.createStroke(focusFramePath);
+            }
+
+            painter->save();
+            painter->setRenderHint(QPainter::Antialiasing);
+            painter->setPen(pen);
+            painter->fillPath(focusFramePath, frameColor);
+            painter->restore();
+
+        } else {
+            QProxyStyle::drawControl(element, option, painter, widget);
+        }
+
+    } else {
+        QProxyStyle::drawControl(element, option, painter, widget);
+    }
+}
 
 class WidgetHintFrameCollection::Private
 {
@@ -127,61 +221,57 @@ class WidgetHintFrame::Private
 public:
     Private(WidgetHintFrame* qq)
         : q(qq)
-        , editWidget(nullptr)
-        , status(false)
-        , ownToolTipChange(false)
-        , style(Error)
-        , offset(2)
+        , m_editWidget(nullptr)
+        , m_status(false)
+        , m_ownToolTipChange(false)
+        , m_frameStyle(Error)
+        , m_offset(2)
     {
-        toolTip.resize(ToolTipIndexCount);
+        m_toolTip.resize(ToolTipIndexCount);
     }
 
     void updateStyle()
     {
-        QString color("red");
-        QString width("2");
-        QString lineStyle("solid");
-
-        switch (style) {
+        q->setLineWidth(2);
+        switch (m_frameStyle) {
         case Error:
             break;
         case Warning:
         case Info:
-            lineStyle = QLatin1String("dashed");
+            // lineStyle = QLatin1String("dashed");
             break;
         case Focus:
-            color = QStringLiteral("#%1").arg(q->palette().color(QPalette::Active, QPalette::Highlight).rgb() & 0xFFFFFF, 6, 16, QLatin1Char('0'));
-            width = QLatin1String("1");
+            // color = QStringLiteral("#%1").arg(q->palette().color(QPalette::Active, QPalette::Highlight).rgb() & 0xFFFFFF, 6, 16, QLatin1Char('0'));
+            q->setLineWidth(1);
             break;
         }
-        q->setStyleSheet(
-            QStringLiteral("QFrame { background-color: none; padding: 1px; border: %1px %2 %3; border-radius: 4px; }").arg(width, lineStyle, color));
     }
 
     void selectToolTip(ToolTipIndex tipIndex)
     {
-        if (editWidget && (tipIndex >= 0) && (tipIndex < ToolTipIndexCount)) {
+        if (m_editWidget && (tipIndex >= 0) && (tipIndex < ToolTipIndexCount)) {
             // inform eventFilter that we change the tooltip
-            ownToolTipChange = true;
-            editWidget->setToolTip(toolTip.at(tipIndex));
-            ownToolTipChange = false;
+            m_ownToolTipChange = true;
+            m_editWidget->setToolTip(m_toolTip.at(tipIndex));
+            m_ownToolTipChange = false;
         }
     }
 
     WidgetHintFrame* q;
-    QWidget* editWidget;
-    bool status;
-    bool ownToolTipChange;
-    FrameStyle style;
-    int offset;
-    QVector<QString> toolTip;
+    QWidget* m_editWidget;
+    bool m_status;
+    bool m_ownToolTipChange;
+    FrameStyle m_frameStyle;
+    int m_offset;
+    QVector<QString> m_toolTip;
 };
 
 WidgetHintFrame::WidgetHintFrame(QWidget* editWidget, FrameStyle style, Qt::WindowFlags f)
     : QFrame(editWidget->parentWidget(), f)
     , d(new Private(this))
 {
-    setStyle(style);
+    setHintFrameStyle(style);
+    QWidget::setStyle(WidgetHintFrameStyle::instance());
     attachToWidget(editWidget);
 }
 
@@ -192,7 +282,7 @@ WidgetHintFrame::~WidgetHintFrame()
 
 bool WidgetHintFrame::isErroneous() const
 {
-    return (d->style == Error) && (d->status == true);
+    return (d->m_frameStyle == Error) && (d->m_status == true);
 }
 
 WidgetHintFrame* WidgetHintFrame::frameForWidget(QWidget* editWidget)
@@ -219,7 +309,7 @@ void WidgetHintFrame::show(QWidget* editWidget, const QString& tooltip)
             f->QWidget::show();
             f->d->selectToolTip(HintFrameToolTip);
         }
-        f->d->status = true;
+        f->d->m_status = true;
         Q_EMIT f->changed();
     }
 }
@@ -228,7 +318,7 @@ void WidgetHintFrame::hide(QWidget* editWidget, const QString& tooltip)
 {
     WidgetHintFrame* f = frameForWidget(editWidget);
     if (f) {
-        f->d->status = false;
+        f->d->m_status = false;
         f->QWidget::hide();
         f->d->selectToolTip(EditWidgetToolTip);
         Q_EMIT f->changed();
@@ -240,15 +330,15 @@ void WidgetHintFrame::hide(QWidget* editWidget, const QString& tooltip)
 
 QWidget* WidgetHintFrame::editWidget() const
 {
-    return d->editWidget;
+    return d->m_editWidget;
 }
 
 void WidgetHintFrame::detachFromWidget()
 {
-    if (d->editWidget) {
+    if (d->m_editWidget) {
         d->selectToolTip(EditWidgetToolTip);
-        d->editWidget->removeEventFilter(this);
-        d->editWidget = nullptr;
+        d->m_editWidget->removeEventFilter(this);
+        d->m_editWidget = nullptr;
     }
 }
 
@@ -257,13 +347,13 @@ void WidgetHintFrame::attachToWidget(QWidget* w)
     // detach first
     detachFromWidget();
     if (w) {
-        d->editWidget = w;
-        d->toolTip[EditWidgetToolTip] = d->editWidget->toolTip();
+        d->m_editWidget = w;
+        d->m_toolTip[EditWidgetToolTip] = d->m_editWidget->toolTip();
         // make sure we receive changes in position and size
         w->installEventFilter(this);
         // place frame around widget
-        move(w->pos() - QPoint(d->offset, d->offset));
-        const auto increment = d->offset * 2;
+        move(w->pos() - QPoint(d->m_offset, d->m_offset));
+        const auto increment = d->m_offset * 2;
         resize(w->width() + increment, w->height() + increment);
         // make sure widget is on top of frame
         w->raise();
@@ -274,18 +364,18 @@ void WidgetHintFrame::attachToWidget(QWidget* w)
 
 bool WidgetHintFrame::eventFilter(QObject* o, QEvent* e)
 {
-    if (o == d->editWidget) {
+    if (o == d->m_editWidget) {
         QMoveEvent* mev = nullptr;
         QResizeEvent* sev = nullptr;
-        const auto increment = d->offset * 2;
+        const auto increment = d->m_offset * 2;
 
         switch (e->type()) {
         case QEvent::ToolTipChange:
-            if (!d->ownToolTipChange) {
+            if (!d->m_ownToolTipChange) {
                 // if initiated by application, keep a copy of the new text
-                d->toolTip[EditWidgetToolTip] = d->editWidget->toolTip();
+                d->m_toolTip[EditWidgetToolTip] = d->m_editWidget->toolTip();
                 // and overwrite with frame message if frame is visible
-                if (d->editWidget->isEnabled() && d->status) {
+                if (d->m_editWidget->isEnabled() && d->m_status) {
                     QWidget::show();
                     d->selectToolTip(HintFrameToolTip);
                 }
@@ -294,7 +384,7 @@ bool WidgetHintFrame::eventFilter(QObject* o, QEvent* e)
 
         case QEvent::EnabledChange:
             // in case editWidget is enabled, the frame is shown when needed
-            if (d->editWidget->isEnabled() && d->status) {
+            if (d->m_editWidget->isEnabled() && d->m_status) {
                 QWidget::show();
                 d->selectToolTip(HintFrameToolTip);
             } else {
@@ -310,7 +400,7 @@ bool WidgetHintFrame::eventFilter(QObject* o, QEvent* e)
 
         case QEvent::Show:
             // in case editWidget is shown, the frame is also shown when needed
-            if (d->status) {
+            if (d->m_status) {
                 d->selectToolTip(HintFrameToolTip);
                 QWidget::show();
             } else {
@@ -320,7 +410,7 @@ bool WidgetHintFrame::eventFilter(QObject* o, QEvent* e)
 
         case QEvent::Move:
             mev = static_cast<QMoveEvent*>(e);
-            move(mev->pos() - QPoint(d->offset, d->offset));
+            move(mev->pos() - QPoint(d->m_offset, d->m_offset));
             break;
 
         case QEvent::Resize:
@@ -336,19 +426,20 @@ bool WidgetHintFrame::eventFilter(QObject* o, QEvent* e)
 
 void WidgetHintFrame::setOffset(int offset)
 {
-    d->offset = offset;
+    d->m_offset = offset;
     // update frame position around widget
-    if (d->editWidget) {
-        move(d->editWidget->pos() - QPoint(d->offset, d->offset));
-        const auto increment = d->offset * 2;
-        resize(d->editWidget->width() + increment, d->editWidget->height() + increment);
+    if (d->m_editWidget) {
+        move(d->m_editWidget->pos() - QPoint(d->m_offset, d->m_offset));
+        const auto increment = d->m_offset * 2;
+        resize(d->m_editWidget->width() + increment, d->m_editWidget->height() + increment);
     }
 }
 
-void WidgetHintFrame::setStyle(WidgetHintFrame::FrameStyle style)
+void WidgetHintFrame::setHintFrameStyle(WidgetHintFrame::FrameStyle frameStyle)
 {
-    d->style = style;
-    switch (style) {
+    setFrameStyle(QFrame::Box);
+    d->m_frameStyle = frameStyle;
+    switch (frameStyle) {
     default:
         setOffset(2);
         break;
@@ -359,7 +450,14 @@ void WidgetHintFrame::setStyle(WidgetHintFrame::FrameStyle style)
     d->updateStyle();
 }
 
+WidgetHintFrame::FrameStyle WidgetHintFrame::hintFrameStyle() const
+{
+    return d->m_frameStyle;
+}
+
 void WidgetHintFrame::setToolTip(const QString& tooltip)
 {
-    d->toolTip[HintFrameToolTip] = tooltip;
+    d->m_toolTip[HintFrameToolTip] = tooltip;
 }
+
+#include "widgethintframe.moc"
