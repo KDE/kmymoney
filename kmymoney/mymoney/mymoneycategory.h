@@ -11,6 +11,7 @@
 // QT Includes
 
 #include "qcontainerfwd.h"
+#include <QDataStream>
 #include <qglobal.h>
 
 class QString;
