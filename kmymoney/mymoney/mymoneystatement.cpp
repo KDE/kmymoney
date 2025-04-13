@@ -67,6 +67,8 @@ enum class Attribute {
     Category,
     SmallestFraction,
     Tags,
+    Price,
+    Fees,
 };
 qHashSeedType qHash(const Attribute key, qHashSeedType seed)
 {
@@ -153,6 +155,8 @@ QString getAttrName(const Statement::Attribute attr)
         {Statement::Attribute::Category,             QStringLiteral("version")},
         {Statement::Attribute::SmallestFraction,     QStringLiteral("smallestFraction")},
         {Statement::Attribute::Tags,                 QStringLiteral("tags")},
+        {Statement::Attribute::Fees,                 QStringLiteral("fees")},
+        {Statement::Attribute::Price,                 QStringLiteral("price")},
         // clang-format on
     };
     return attrNames[attr];
@@ -192,6 +196,8 @@ void MyMoneyStatement::write(QDomElement& _root, QDomDocument* _doc) const
 
         if (m_eType == eMyMoney::Statement::Type::Investment) {
             p.setAttribute(getAttrName(Statement::Attribute::Shares), transaction.m_shares.toString());
+            p.setAttribute(getAttrName(Statement::Attribute::Price), transaction.m_price.toString());
+            p.setAttribute(getAttrName(Statement::Attribute::Fees), transaction.m_fees.toString());
             p.setAttribute(getAttrName(Statement::Attribute::Security), transaction.m_strSecurity);
             p.setAttribute(getAttrName(Statement::Attribute::SecurityId), transaction.m_strSecurityId);
             p.setAttribute(getAttrName(Statement::Attribute::BrokerageAccount), transaction.m_strBrokerageAccount);
@@ -276,6 +282,8 @@ bool MyMoneyStatement::read(const QDomElement& _e)
 
                 if (m_eType == eMyMoney::Statement::Type::Investment) {
                     t.m_shares = MyMoneyMoney(c.attribute(getAttrName(Statement::Attribute::Shares)));
+                    t.m_fees = MyMoneyMoney(c.attribute(getAttrName(Statement::Attribute::Fees)));
+                    t.m_price = MyMoneyMoney(c.attribute(getAttrName(Statement::Attribute::Price)));
                     t.m_strSecurity = c.attribute(getAttrName(Statement::Attribute::Security));
                     t.m_strSecurityId = c.attribute(getAttrName(Statement::Attribute::SecurityId));
                     t.m_strBrokerageAccount = c.attribute(getAttrName(Statement::Attribute::BrokerageAccount));
