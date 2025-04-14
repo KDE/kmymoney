@@ -36,13 +36,18 @@ KAboutData initializeCreditsData()
 #ifdef ENABLE_HOLIDAYS
     features << i18n("Holiday regions integration");
 #endif
+#ifdef ENABLE_KBANKING
+    features << i18n("Online banking");
+#endif
 
     aboutData.setShortDescription(i18n("\nKMyMoney, the Personal Finance Manager by KDE.\n\nPlease consider contributing to this project with code and/or suggestions."));
     aboutData.setLicense(KAboutLicense::GPL);
     aboutData.setCopyrightStatement(i18n("(c) 2000-2024 The KMyMoney development team"));
     aboutData.setHomepage(QStringLiteral("https://kmymoney.org/"));
-    if (!features.empty())
+    if (!features.empty()) {
+        std::sort(features.begin(), features.end());
         aboutData.setOtherText(i18n("Compiled with the following optional features:\n%1", features.join(QLatin1Char('\n'))));
+    }
 
     aboutData.addAuthor(QLatin1String("Thomas Baumgart"), i18nc("Roles in project", "Core engine, Release Manager, Project admin"), "tbaumgart@kde.org");
     aboutData.addAuthor(QLatin1String("Ralf Habacker"), i18nc("Roles in project", "Developer, Maintainer, Windows support"), "ralf.habacker@freenet.de");
