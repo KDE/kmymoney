@@ -449,18 +449,6 @@
   proceed.
 </para>
 
-<screenshot>
-  <screeninfo>Preference Page</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="newfile-5.png" format="PNG" />
-    </imageobject>
-    <textobject>
-      <phrase>Preference page</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
-
 <para>
   This is the final page of the wizard.  If you select the checkbox <quote>Configure
   preferences after finishing the wizard</quote>, the application settings dialog
@@ -471,7 +459,7 @@
   <screeninfo>Filename selection Page</screeninfo>
   <mediaobject>
     <imageobject>
-      <imagedata fileref="newfile-6.png" format="PNG" />
+      <imagedata fileref="newfile-5.png" format="PNG" />
     </imageobject>
     <textobject>
       <phrase>Filename selection page</phrase>
