@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-10 01:54+0000\n"
+"POT-Creation-Date: 2025-04-15 01:56+0000\n"
 "PO-Revision-Date: 2025-01-11 18:40+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -4581,13 +4581,13 @@ msgid "Create tag"
 msgstr "Sortu etiketa"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
-#: kmymoney/kcreditswindow.cpp:31 kmymoney/kcreditswindow.cpp:93
+#: kmymoney/kcreditswindow.cpp:31 kmymoney/kcreditswindow.cpp:98
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:35
 #, kde-format
 msgid "GPG encryption"
 msgstr "GPG zifratzea"
 
-#: kmymoney/kcreditswindow.cpp:34 kmymoney/kcreditswindow.cpp:74
+#: kmymoney/kcreditswindow.cpp:34 kmymoney/kcreditswindow.cpp:79
 #, kde-format
 msgid "Addressbook integration"
 msgstr "Helbide-liburua integratu "
@@ -4597,7 +4597,12 @@ msgstr "Helbide-liburua integratu "
 msgid "Holiday regions integration"
 msgstr "Opor herrialdeen integrazioa"
 
-#: kmymoney/kcreditswindow.cpp:40
+#: kmymoney/kcreditswindow.cpp:40 kmymoney/kcreditswindow.cpp:91
+#, kde-format
+msgid "Online banking"
+msgstr "Lerroko banka"
+
+#: kmymoney/kcreditswindow.cpp:43
 #, kde-format
 msgid ""
 "\n"
@@ -4611,12 +4616,13 @@ msgstr ""
 "Proiektu honetan parte har dezakezu, iradokizunak eta kodeari buruzko "
 "ekarpenak eginez."
 
-#: kmymoney/kcreditswindow.cpp:42
-#, kde-format
-msgid "(c) 2000-2024 The KMyMoney development team"
+#: kmymoney/kcreditswindow.cpp:45
+#, fuzzy, kde-format
+#| msgid "(c) 2000-2024 The KMyMoney development team"
+msgid "(c) 2000-2025 The KMyMoney development team"
 msgstr "(c) 2000-2024 KMyMoney-ren garatzaile taldea"
 
-#: kmymoney/kcreditswindow.cpp:45
+#: kmymoney/kcreditswindow.cpp:49
 #, kde-format
 msgid ""
 "Compiled with the following optional features:\n"
@@ -4625,182 +4631,177 @@ msgstr ""
 "Aukerako eginbide hauekin konpilatu da:\n"
 "%1"
 
-#: kmymoney/kcreditswindow.cpp:47
+#: kmymoney/kcreditswindow.cpp:52
 #, kde-format
 msgctxt "Roles in project"
 msgid "Core engine, Release Manager, Project admin"
 msgstr "Nukleo-motorra, bertsio-kudeatzailea, proiektu-kudeaketa"
 
-#: kmymoney/kcreditswindow.cpp:48
+#: kmymoney/kcreditswindow.cpp:53
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Maintainer, Windows support"
 msgstr "Garatzaile, mantentzailea, Windows sostengua."
 
-#: kmymoney/kcreditswindow.cpp:49
+#: kmymoney/kcreditswindow.cpp:54
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Windows and MacOS support"
 msgstr "Garatzailea, Windows eta MacOS sostengua"
 
-#: kmymoney/kcreditswindow.cpp:52 kmymoney/kcreditswindow.cpp:54
-#: kmymoney/kcreditswindow.cpp:56 kmymoney/kcreditswindow.cpp:59
-#: kmymoney/kcreditswindow.cpp:62 kmymoney/kcreditswindow.cpp:64
-#: kmymoney/kcreditswindow.cpp:65 kmymoney/kcreditswindow.cpp:66
+#: kmymoney/kcreditswindow.cpp:57 kmymoney/kcreditswindow.cpp:59
+#: kmymoney/kcreditswindow.cpp:61 kmymoney/kcreditswindow.cpp:64
 #: kmymoney/kcreditswindow.cpp:67 kmymoney/kcreditswindow.cpp:69
-#: kmymoney/kcreditswindow.cpp:132 kmymoney/kcreditswindow.cpp:135
-#: kmymoney/kcreditswindow.cpp:138 kmymoney/kcreditswindow.cpp:141
-#: kmymoney/kcreditswindow.cpp:143
+#: kmymoney/kcreditswindow.cpp:70 kmymoney/kcreditswindow.cpp:71
+#: kmymoney/kcreditswindow.cpp:72 kmymoney/kcreditswindow.cpp:74
+#: kmymoney/kcreditswindow.cpp:137 kmymoney/kcreditswindow.cpp:140
+#: kmymoney/kcreditswindow.cpp:143 kmymoney/kcreditswindow.cpp:146
+#: kmymoney/kcreditswindow.cpp:148
 #, kde-format
 msgid "Inactive member. "
 msgstr "Kide ez-aktiboa"
 
-#: kmymoney/kcreditswindow.cpp:52
+#: kmymoney/kcreditswindow.cpp:57
 #, kde-format
 msgctxt "Roles in project"
 msgid "Initial idea, much initial source code, Project admin"
 msgstr ""
 "Hasierako ideia, hasierako iturburu-kode gehiena eta proiektu-kudeaketa"
 
-#: kmymoney/kcreditswindow.cpp:54
+#: kmymoney/kcreditswindow.cpp:59
 #, kde-format
 msgctxt "Roles in project"
 msgid "Forecast, Reports"
 msgstr "Aurreikuspenak, txostenak"
 
-#: kmymoney/kcreditswindow.cpp:56
+#: kmymoney/kcreditswindow.cpp:61
 #, kde-format
 msgctxt "Roles in project"
 msgid "Reporting logic, OFX Import"
 msgstr "Txosten-logika, OFX inportazioa"
 
-#: kmymoney/kcreditswindow.cpp:59
+#: kmymoney/kcreditswindow.cpp:64
 #, kde-format
 msgctxt "Roles in project"
 msgid "Database backend, maintainer stable branch"
 msgstr "Datu-basearen motorra, adar egonkorraren arduraduna"
 
-#: kmymoney/kcreditswindow.cpp:62
+#: kmymoney/kcreditswindow.cpp:67
 #, kde-format
 msgctxt "Roles in project"
 msgid "Project Admin"
 msgstr "Proiektu-kudeatzailea"
 
-#: kmymoney/kcreditswindow.cpp:64 kmymoney/kcreditswindow.cpp:66
-#: kmymoney/kcreditswindow.cpp:67
+#: kmymoney/kcreditswindow.cpp:69 kmymoney/kcreditswindow.cpp:71
+#: kmymoney/kcreditswindow.cpp:72
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer"
 msgstr "Garatzailea"
 
-#: kmymoney/kcreditswindow.cpp:65
+#: kmymoney/kcreditswindow.cpp:70
 #, kde-format
 msgctxt "Roles in project"
 msgid "Database backend"
 msgstr "Datu-basearen motorra"
 
-#: kmymoney/kcreditswindow.cpp:69
+#: kmymoney/kcreditswindow.cpp:74
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Code refactoring"
 msgstr "Garatzailea, Kode birfaktorizazioa"
 
-#: kmymoney/kcreditswindow.cpp:75 kmymoney/kcreditswindow.cpp:81
-#: kmymoney/kcreditswindow.cpp:87 kmymoney/kcreditswindow.cpp:94
-#: kmymoney/kcreditswindow.cpp:101 kmymoney/kcreditswindow.cpp:107
-#: kmymoney/kcreditswindow.cpp:112 kmymoney/kcreditswindow.cpp:119
-#: kmymoney/kcreditswindow.cpp:126
+#: kmymoney/kcreditswindow.cpp:80 kmymoney/kcreditswindow.cpp:86
+#: kmymoney/kcreditswindow.cpp:92 kmymoney/kcreditswindow.cpp:99
+#: kmymoney/kcreditswindow.cpp:106 kmymoney/kcreditswindow.cpp:112
+#: kmymoney/kcreditswindow.cpp:117 kmymoney/kcreditswindow.cpp:124
+#: kmymoney/kcreditswindow.cpp:131
 #, kde-format
 msgid "%1 (build against %2)"
 msgstr "%1 (%2(e)rekin eraikia)"
 
-#: kmymoney/kcreditswindow.cpp:75 kmymoney/kcreditswindow.cpp:87
-#: kmymoney/kcreditswindow.cpp:94 kmymoney/kcreditswindow.cpp:101
-#: kmymoney/kcreditswindow.cpp:107 kmymoney/kcreditswindow.cpp:112
-#: kmymoney/kcreditswindow.cpp:119 kmymoney/kcreditswindow.cpp:126
+#: kmymoney/kcreditswindow.cpp:80 kmymoney/kcreditswindow.cpp:92
+#: kmymoney/kcreditswindow.cpp:99 kmymoney/kcreditswindow.cpp:106
+#: kmymoney/kcreditswindow.cpp:112 kmymoney/kcreditswindow.cpp:117
+#: kmymoney/kcreditswindow.cpp:124 kmymoney/kcreditswindow.cpp:131
 #: kmymoney/mymoney/mymoneysecurity.cpp:265
 #, kde-format
 msgid "Unknown"
 msgstr "Ezezaguna"
 
-#: kmymoney/kcreditswindow.cpp:80
+#: kmymoney/kcreditswindow.cpp:85
 #, kde-format
 msgid "Financial framework"
 msgstr "Finantza-armazoia («framework»)"
 
-#: kmymoney/kcreditswindow.cpp:86
-#, kde-format
-msgid "Online banking"
-msgstr "Lerroko banka"
-
-#: kmymoney/kcreditswindow.cpp:100
+#: kmymoney/kcreditswindow.cpp:105
 #, kde-format
 msgid "Online banking framework"
 msgstr "Lerroko banku-armazoia («framework»)"
 
-#: kmymoney/kcreditswindow.cpp:106
+#: kmymoney/kcreditswindow.cpp:111
 #, kde-format
 msgid "Library for creating diagrams"
 msgstr "Diagramak sortzeko liburutegiak"
 
-#: kmymoney/kcreditswindow.cpp:111
+#: kmymoney/kcreditswindow.cpp:116
 #, kde-format
 msgid "iCalendar integration"
 msgstr "iCalendar bateratzea"
 
-#: kmymoney/kcreditswindow.cpp:118
+#: kmymoney/kcreditswindow.cpp:123
 #, kde-format
 msgid "OFX banking protocol abstraction library"
 msgstr "OFX banka protokoloaren abstrakzio liburutegia"
 
-#: kmymoney/kcreditswindow.cpp:125
+#: kmymoney/kcreditswindow.cpp:130
 #, kde-format
 msgid "SQLite database encryption"
 msgstr "SQLite datu-basea zifratzea"
 
-#: kmymoney/kcreditswindow.cpp:130
+#: kmymoney/kcreditswindow.cpp:135
 #, kde-format
 msgctxt "Roles in project"
 msgid "Documentation and user support"
 msgstr "Dokumentazioa eta erabiltzaileari laguntza"
 
-#: kmymoney/kcreditswindow.cpp:132
+#: kmymoney/kcreditswindow.cpp:137
 #, kde-format
 msgctxt "Roles in project"
 msgid "Initial investment support"
 msgstr "Hasierako inbertsio-euskarria"
 
-#: kmymoney/kcreditswindow.cpp:135
+#: kmymoney/kcreditswindow.cpp:140
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer & Artist"
 msgstr "Garatzailea eta artista"
 
-#: kmymoney/kcreditswindow.cpp:138
+#: kmymoney/kcreditswindow.cpp:143
 #, kde-format
 msgctxt "Roles in project"
 msgid "Icons & splash screen"
 msgstr "Ikonoak eta plasta pantaila"
 
-#: kmymoney/kcreditswindow.cpp:140
+#: kmymoney/kcreditswindow.cpp:145
 #, kde-format
 msgctxt "Roles in project"
 msgid "Patches and port to kde4"
 msgstr "Adabakiak eta KDE4rako transferitzea"
 
-#: kmymoney/kcreditswindow.cpp:141
+#: kmymoney/kcreditswindow.cpp:146
 #, kde-format
 msgctxt "Roles in project"
 msgid "Patches"
 msgstr "Adabakiak"
 
-#: kmymoney/kcreditswindow.cpp:143
+#: kmymoney/kcreditswindow.cpp:148
 #, kde-format
 msgctxt "Roles in project"
 msgid "Patches, packaging and KF5-CI for OS X"
 msgstr "Adabakiak, paketatzea eta KF5-CI OS Xrako"
 
-#: kmymoney/kcreditswindow.cpp:145
+#: kmymoney/kcreditswindow.cpp:150
 #, kde-format
 msgctxt "Roles in project"
 msgid "CSV import/export"
