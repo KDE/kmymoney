@@ -21032,11 +21032,9 @@ msgstr ""
 "다른 분할의 메모<p><i>%1</i></p>을(를)<p><i>%2</i></p>(으)로 바꾸시겠습니까?"
 
 #: kmymoney/views/newtransactioneditor.cpp:1591
-#, fuzzy, kde-format
-#| msgctxt "@info placeholder for memo of matched transaction if empty"
-#| msgid "Empty memo"
+#, kde-format
 msgid "Copy memo"
-msgstr "빈 메모"
+msgstr "메모 복사"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, numberEdit)
 #: kmymoney/views/newtransactioneditor.ui:24

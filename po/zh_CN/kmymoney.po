@@ -4422,10 +4422,9 @@ msgstr ""
 "如果您喜欢它，可以通过提供代码或者建议等方式来帮助它的开发。"
 
 #: kmymoney/kcreditswindow.cpp:45
-#, fuzzy, kde-format
-#| msgid "(c) 2000-2024 The KMyMoney development team"
+#, kde-format
 msgid "(c) 2000-2025 The KMyMoney development team"
-msgstr "(c) 2000-2024 KMyMoney 开发团队"
+msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:49
 #, kde-format
