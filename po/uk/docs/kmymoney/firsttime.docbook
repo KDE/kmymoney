@@ -429,20 +429,6 @@
 >Далі</guibutton
 >, щоб продовжити роботу. </para>
 
-<screenshot>
-  <screeninfo
->Сторінка параметрів</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="newfile-5.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->Сторінка параметрів</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
-
 <para
 >Це остання сторінка майстра. Якщо ви позначите пункт <quote
 >Налаштувати параметри після завершення роботи майстра</quote
@@ -453,7 +439,7 @@
 >Сторінка вибору назви файла</screeninfo>
   <mediaobject>
     <imageobject>
-      <imagedata fileref="newfile-6.png" format="PNG"/>
+      <imagedata fileref="newfile-5.png" format="PNG"/>
     </imageobject>
     <textobject>
       <phrase

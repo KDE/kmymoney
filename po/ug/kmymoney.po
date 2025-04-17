@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-15 01:56+0000\n"
+"POT-Creation-Date: 2025-04-17 01:55+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -187,7 +187,7 @@ msgid ""
 msgstr ""
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1056
-#: kmymoney/kmymoneyutils.cpp:577
+#: kmymoney/kmymoneyutils.cpp:578
 #, kde-format
 msgid "New payee/receiver"
 msgstr ""
@@ -5822,90 +5822,90 @@ msgstr ""
 msgid "Main Toolbar"
 msgstr "ئاساسىي قورال بالداق"
 
-#: kmymoney/kmymoneyutils.cpp:98
+#: kmymoney/kmymoneyutils.cpp:99
 #, kde-format
 msgid "&New Schedule..."
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:100
+#: kmymoney/kmymoneyutils.cpp:101
 #, kde-format
 msgid "Create a new schedule."
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:101
+#: kmymoney/kmymoneyutils.cpp:102
 #, kde-format
 msgid "Use this to create a new schedule."
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:108
+#: kmymoney/kmymoneyutils.cpp:109
 #, kde-format
 msgid "&Filter"
 msgstr "سۈزگۈچ(&F)"
 
-#: kmymoney/kmymoneyutils.cpp:110
+#: kmymoney/kmymoneyutils.cpp:111
 #, kde-format
 msgid "Filter out accounts"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:111
+#: kmymoney/kmymoneyutils.cpp:112
 #, kde-format
 msgid "Use this to filter out accounts"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:117
+#: kmymoney/kmymoneyutils.cpp:118
 #, fuzzy
 #| msgctxt "Scheduled method"
 #| msgid "Scheduled"
 msgid "Scheduled payments"
 msgstr "كۈنتەرتىپكە قويۇلغان"
 
-#: kmymoney/kmymoneyutils.cpp:118
+#: kmymoney/kmymoneyutils.cpp:119
 msgid "Preferred accounts"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:119
+#: kmymoney/kmymoneyutils.cpp:120
 msgid "Payment accounts"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:120
+#: kmymoney/kmymoneyutils.cpp:121
 msgid "Favorite reports"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:121
+#: kmymoney/kmymoneyutils.cpp:122
 msgid "Forecast (schedule)"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:122
+#: kmymoney/kmymoneyutils.cpp:123
 msgid "Net worth forecast"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:123
+#: kmymoney/kmymoneyutils.cpp:124
 msgid "Forecast (history)"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:124
+#: kmymoney/kmymoneyutils.cpp:125
 msgid "Assets and Liabilities"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#: kmymoney/kmymoneyutils.cpp:125 kmymoney/mymoney/storage/budgetsmodel.cpp:68
+#: kmymoney/kmymoneyutils.cpp:126 kmymoney/mymoney/storage/budgetsmodel.cpp:68
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
 #, kde-format
 msgid "Budget"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:126
+#: kmymoney/kmymoneyutils.cpp:127
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1022
 #, kde-format
 msgid "Cash Flow"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:279 kmymoney/views/kenterscheduledlg.cpp:124
+#: kmymoney/kmymoneyutils.cpp:280 kmymoney/views/kenterscheduledlg.cpp:124
 #, kde-format
 msgid "Unable to load schedule details"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:375
+#: kmymoney/kmymoneyutils.cpp:376
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:112
 #: kmymoney/wizards/kmymoneywizard_p.h:78
 #, kde-format
@@ -5913,49 +5913,49 @@ msgctxt "Go to next page of the wizard"
 msgid "&Next"
 msgstr "كېيىنكى(&N)"
 
-#: kmymoney/kmymoneyutils.cpp:464
+#: kmymoney/kmymoneyutils.cpp:465
 #, fuzzy, kde-format
 #| msgid "Imported"
 msgid "Prices Importer"
 msgstr "ئەكىردى"
 
-#: kmymoney/kmymoneyutils.cpp:474
+#: kmymoney/kmymoneyutils.cpp:475
 #, kde-format
 msgid ""
 "<p>Do you really want to remove the currency <b>%1</b> from the file?</p>"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:475
+#: kmymoney/kmymoneyutils.cpp:476
 #, kde-format
 msgid ""
 "<p>All exchange rates for currency <b>%1</b> will be lost.</p><p>Do you "
 "still want to continue?</p>"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:479
+#: kmymoney/kmymoneyutils.cpp:480
 #, kde-format
 msgid "<p>Do you really want to remove the %1 <b>%2</b> from the file?</p>"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:480
+#: kmymoney/kmymoneyutils.cpp:481
 #, kde-format
 msgid ""
 "<p>All price quotes for %1 <b>%2</b> will be lost.</p><p>Do you still want "
 "to continue?</p>"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:484
+#: kmymoney/kmymoneyutils.cpp:485
 #, kde-format
 msgid "Delete security"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:492
+#: kmymoney/kmymoneyutils.cpp:493
 #, fuzzy, kde-format
 #| msgid "Delete"
 msgid "Delete prices"
 msgstr "ئۆچۈر"
 
-#: kmymoney/kmymoneyutils.cpp:553
+#: kmymoney/kmymoneyutils.cpp:554
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:143
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:437
 #: kmymoney/templates/templateloader.cpp:78
@@ -5963,7 +5963,7 @@ msgstr "ئۆچۈر"
 msgid "Error while loading file '%1'."
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:555
+#: kmymoney/kmymoneyutils.cpp:556
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:145
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:437
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1012
@@ -5972,61 +5972,61 @@ msgstr ""
 msgid "File access error"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:573 kmymoney/views/kpayeesview.cpp:565
+#: kmymoney/kmymoneyutils.cpp:574 kmymoney/views/kpayeesview.cpp:565
 #, kde-format
 msgid "New Payee"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:575
+#: kmymoney/kmymoneyutils.cpp:576
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as payee/receiver?</qt>"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:614
+#: kmymoney/kmymoneyutils.cpp:615
 #, kde-format
 msgid "Unable to add payee"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:626 kmymoney/views/ktagsview.cpp:641
+#: kmymoney/kmymoneyutils.cpp:627 kmymoney/views/ktagsview.cpp:641
 #, kde-format
 msgid "New Tag"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:628
+#: kmymoney/kmymoneyutils.cpp:629
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:630
+#: kmymoney/kmymoneyutils.cpp:631
 #, kde-format
 msgid "New tag"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:664
+#: kmymoney/kmymoneyutils.cpp:665
 #, kde-format
 msgid "Unable to add tag"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:681 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:682 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:738
+#: kmymoney/kmymoneyutils.cpp:739
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:50
 #, kde-format
 msgid "One statement has been processed with the following results:"
 msgid_plural "%1 statements have been processed with the following results:"
 msgstr[0] ""
 
-#: kmymoney/kmymoneyutils.cpp:743
+#: kmymoney/kmymoneyutils.cpp:744
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:52
 #, kde-format
 msgid "No new transaction has been imported."
 msgid_plural "No new transactions have been imported."
 msgstr[0] ""
 
-#: kmymoney/kmymoneyutils.cpp:744
+#: kmymoney/kmymoneyutils.cpp:745
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:53
 #, kde-format
 msgid "Statement import statistics"
@@ -18563,77 +18563,77 @@ msgctxt "@label:textbox"
 msgid "Ratio 1/"
 msgstr "نىسبەت"
 
-#: kmymoney/views/investtransactioneditor.cpp:81
+#: kmymoney/views/investtransactioneditor.cpp:99
 #, fuzzy, kde-format
 #| msgid "Price"
 msgctxt "@item:inlistbox transaction type"
 msgid "Buy shares"
 msgstr "باھاسى"
 
-#: kmymoney/views/investtransactioneditor.cpp:82
+#: kmymoney/views/investtransactioneditor.cpp:100
 #, fuzzy, kde-format
 #| msgid "Shares"
 msgctxt "@item:inlistbox transaction type"
 msgid "Sell shares"
 msgstr "ھەمبەھىرلەر"
 
-#: kmymoney/views/investtransactioneditor.cpp:83
+#: kmymoney/views/investtransactioneditor.cpp:101
 #, fuzzy, kde-format
 #| msgid "Dividend"
 msgctxt "@item:inlistbox transaction type"
 msgid "Dividend"
 msgstr "سۈرەت"
 
-#: kmymoney/views/investtransactioneditor.cpp:84
+#: kmymoney/views/investtransactioneditor.cpp:102
 #, fuzzy, kde-format
 #| msgid "Dividend"
 msgctxt "@item:inlistbox transaction type"
 msgid "Reinvest dividend"
 msgstr "سۈرەت"
 
-#: kmymoney/views/investtransactioneditor.cpp:85
+#: kmymoney/views/investtransactioneditor.cpp:103
 #, fuzzy, kde-format
 #| msgid "Yield"
 msgctxt "@item:inlistbox transaction type"
 msgid "Yield"
 msgstr "Yield"
 
-#: kmymoney/views/investtransactioneditor.cpp:86
+#: kmymoney/views/investtransactioneditor.cpp:104
 #, fuzzy, kde-format
 #| msgid "Shares"
 msgctxt "@item:inlistbox transaction type"
 msgid "Add shares"
 msgstr "ھەمبەھىرلەر"
 
-#: kmymoney/views/investtransactioneditor.cpp:87
+#: kmymoney/views/investtransactioneditor.cpp:105
 #, fuzzy, kde-format
 #| msgid "Remove"
 msgctxt "@item:inlistbox transaction type"
 msgid "Remove shares"
 msgstr "چىقىرىۋەت"
 
-#: kmymoney/views/investtransactioneditor.cpp:88
+#: kmymoney/views/investtransactioneditor.cpp:106
 #, fuzzy, kde-format
 #| msgid "Shares"
 msgctxt "@item:inlistbox transaction type"
 msgid "Split shares"
 msgstr "ھەمبەھىرلەر"
 
-#: kmymoney/views/investtransactioneditor.cpp:89
+#: kmymoney/views/investtransactioneditor.cpp:107
 #, fuzzy, kde-format
 #| msgid "Interest"
 msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
 msgstr "ئۆسۈم"
 
-#: kmymoney/views/investtransactioneditor.cpp:285
-#: kmymoney/views/multitransactioneditor.cpp:214
-#: kmymoney/views/newtransactioneditor.cpp:301
+#: kmymoney/views/investtransactioneditor.cpp:304
+#: kmymoney/views/multitransactioneditor.cpp:230
+#: kmymoney/views/newtransactioneditor.cpp:317
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:401
+#: kmymoney/views/investtransactioneditor.cpp:420
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -18641,14 +18641,14 @@ msgid ""
 "price information invalid. Please check them."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:581
+#: kmymoney/views/investtransactioneditor.cpp:600
 #, fuzzy, kde-format
 #| msgid "  Transactions"
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
 msgstr "  سودا"
 
-#: kmymoney/views/investtransactioneditor.cpp:584
+#: kmymoney/views/investtransactioneditor.cpp:603
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -18656,14 +18656,14 @@ msgid ""
 "account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:597
+#: kmymoney/views/investtransactioneditor.cpp:616
 #, fuzzy, kde-format
 #| msgid "Remove"
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "چىقىرىۋەت"
 
-#: kmymoney/views/investtransactioneditor.cpp:599
+#: kmymoney/views/investtransactioneditor.cpp:618
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -18671,79 +18671,79 @@ msgid ""
 "closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:603
+#: kmymoney/views/investtransactioneditor.cpp:622
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:609
+#: kmymoney/views/investtransactioneditor.cpp:628
 #, fuzzy, kde-format
 #| msgid "Application"
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "پروگرامما"
 
-#: kmymoney/views/investtransactioneditor.cpp:611
+#: kmymoney/views/investtransactioneditor.cpp:630
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:615
+#: kmymoney/views/investtransactioneditor.cpp:634
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:627
+#: kmymoney/views/investtransactioneditor.cpp:646
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:643
+#: kmymoney/views/investtransactioneditor.cpp:662
 #, fuzzy, kde-format
 #| msgid "  Transactions"
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "  سودا"
 
-#: kmymoney/views/investtransactioneditor.cpp:650
+#: kmymoney/views/investtransactioneditor.cpp:669
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:653
+#: kmymoney/views/investtransactioneditor.cpp:672
 #, fuzzy, kde-format
 #| msgid "Amount"
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "مىقدارى"
 
-#: kmymoney/views/investtransactioneditor.cpp:659
+#: kmymoney/views/investtransactioneditor.cpp:678
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:662
+#: kmymoney/views/investtransactioneditor.cpp:681
 #, fuzzy, kde-format
 #| msgid "Amount"
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "مىقدارى"
 
-#: kmymoney/views/investtransactioneditor.cpp:667
+#: kmymoney/views/investtransactioneditor.cpp:686
 #, fuzzy, kde-format
 #| msgid "  Transactions"
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
 msgstr "  سودا"
 
-#: kmymoney/views/investtransactioneditor.cpp:672
+#: kmymoney/views/investtransactioneditor.cpp:691
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19104,25 +19104,25 @@ msgstr ""
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "ھۆججەت ‹%1› نى يېزىش ئۈچۈن ئاچقىلى بولمىدى."
 
-#: kmymoney/views/keditscheduledlg.cpp:130
+#: kmymoney/views/keditscheduledlg.cpp:162
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The name is a required field for a schedule"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:133
+#: kmymoney/views/keditscheduledlg.cpp:165
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The account is a required field for a schedule"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:137
+#: kmymoney/views/keditscheduledlg.cpp:169
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:314
+#: kmymoney/views/keditscheduledlg.cpp:312
 #, kde-format
 msgctxt "@info Scheduled frequency changed"
 msgid ""
@@ -19131,30 +19131,30 @@ msgid ""
 "information will only be shown once for this schedule's edit session.</qt>"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:316
+#: kmymoney/views/keditscheduledlg.cpp:314
 #, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:611
+#: kmymoney/views/keditscheduledlg.cpp:607
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:611
+#: kmymoney/views/keditscheduledlg.cpp:607
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:641
-#: kmymoney/views/keditscheduledlg.cpp:684
-#: kmymoney/views/keditscheduledlg.cpp:694
+#: kmymoney/views/keditscheduledlg.cpp:637
+#: kmymoney/views/keditscheduledlg.cpp:680
+#: kmymoney/views/keditscheduledlg.cpp:690
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:670
+#: kmymoney/views/keditscheduledlg.cpp:666
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -19164,7 +19164,7 @@ msgid ""
 "</qt>"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:675
+#: kmymoney/views/keditscheduledlg.cpp:671
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr ""
@@ -20655,21 +20655,21 @@ msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "تەڭپۇڭ: "
 
-#: kmymoney/views/multitransactioneditor.cpp:192
-#: kmymoney/views/newtransactioneditor.cpp:284
+#: kmymoney/views/multitransactioneditor.cpp:208
+#: kmymoney/views/newtransactioneditor.cpp:300
 #, kde-format
 msgid "The posting date is invalid."
 msgstr ""
 
-#: kmymoney/views/multitransactioneditor.cpp:228
-#: kmymoney/views/newtransactioneditor.cpp:328
+#: kmymoney/views/multitransactioneditor.cpp:244
+#: kmymoney/views/newtransactioneditor.cpp:344
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
 "category."
 msgstr ""
 
-#: kmymoney/views/multitransactioneditor.cpp:261
+#: kmymoney/views/multitransactioneditor.cpp:277
 #, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
@@ -20677,13 +20677,13 @@ msgid ""
 "selected account (%2)."
 msgstr ""
 
-#: kmymoney/views/multitransactioneditor.cpp:727
+#: kmymoney/views/multitransactioneditor.cpp:722
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr ""
 
-#: kmymoney/views/multitransactioneditor.cpp:736
+#: kmymoney/views/multitransactioneditor.cpp:731
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -20691,7 +20691,7 @@ msgid ""
 "part of the selection."
 msgstr ""
 
-#: kmymoney/views/multitransactioneditor.cpp:740
+#: kmymoney/views/multitransactioneditor.cpp:735
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -20699,7 +20699,7 @@ msgid ""
 "selection."
 msgstr ""
 
-#: kmymoney/views/multitransactioneditor.cpp:744
+#: kmymoney/views/multitransactioneditor.cpp:739
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -20707,13 +20707,13 @@ msgid ""
 "the selection."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:161
+#: kmymoney/views/newspliteditor.cpp:174
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:174
+#: kmymoney/views/newspliteditor.cpp:187
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid ""
@@ -20721,31 +20721,31 @@ msgid ""
 "category."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:185
+#: kmymoney/views/newspliteditor.cpp:198
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:230
+#: kmymoney/views/newspliteditor.cpp:243
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:239
+#: kmymoney/views/newspliteditor.cpp:252
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:248
-#: kmymoney/views/newtransactioneditor.cpp:453
+#: kmymoney/views/newspliteditor.cpp:261
+#: kmymoney/views/newtransactioneditor.cpp:469
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:785
-#: kmymoney/views/newtransactioneditor.cpp:172
+#: kmymoney/views/newspliteditor.cpp:768
+#: kmymoney/views/newtransactioneditor.cpp:188
 #, kde-format
 msgctxt "@info:tooltip Protected"
 msgid ""
@@ -20772,19 +20772,19 @@ msgstr "تىپ: %1"
 msgid "Costcenter"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:221
+#: kmymoney/views/newtransactioneditor.cpp:237
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:225
+#: kmymoney/views/newtransactioneditor.cpp:241
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:604
+#: kmymoney/views/newtransactioneditor.cpp:620
 #, fuzzy, kde-format
 #| msgid "  Transactions"
 msgctxt "@title:window Autofill selection dialog"
@@ -20792,7 +20792,7 @@ msgid "Select autofill transaction"
 msgstr "  سودا"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1091
+#: kmymoney/views/newtransactioneditor.cpp:1085
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:98
 #: kmymoney/views/newtransactionform.ui:179
@@ -20800,14 +20800,14 @@ msgstr "  سودا"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1590
+#: kmymoney/views/newtransactioneditor.cpp:1573
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
 "other split?"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1591
+#: kmymoney/views/newtransactioneditor.cpp:1574
 #, fuzzy, kde-format
 #| msgid "Copy of %1"
 msgid "Copy memo"
@@ -21159,41 +21159,41 @@ msgctxt "@item:inmenu Delete selected split(s)"
 msgid "Delete"
 msgstr "ئۆچۈر"
 
-#: kmymoney/views/tabordereditor.cpp:424
+#: kmymoney/views/tabordereditor.cpp:428
 #, fuzzy, kde-format
 #| msgid "Application"
 msgctxt "@title:menu"
 msgid "Tab Editor Options"
 msgstr "پروگرامما"
 
-#: kmymoney/views/tabordereditor.cpp:427
+#: kmymoney/views/tabordereditor.cpp:431
 #, kde-format
 msgctxt "@action:inmenu Move tab editor selector to this widget"
 msgid "Start from here"
 msgstr ""
 
-#: kmymoney/views/tabordereditor.cpp:429
+#: kmymoney/views/tabordereditor.cpp:433
 #, fuzzy, kde-format
 #| msgid "Restart"
 msgctxt "@action:inmenu Set tab editor selector to first widget"
 msgid "Restart"
 msgstr "قايتا قوزغات"
 
-#: kmymoney/views/tabordereditor.cpp:432
+#: kmymoney/views/tabordereditor.cpp:436
 #, fuzzy, kde-format
 #| msgid "Save changes"
 msgctxt "@action:inmenu Reset all changes"
 msgid "Undo changes"
 msgstr "ئۆزگەرتكەننى ساقلا"
 
-#: kmymoney/views/tabordereditor.cpp:434
+#: kmymoney/views/tabordereditor.cpp:438
 #, fuzzy, kde-format
 #| msgid "Use default"
 msgctxt "@action:inmenu Reset to application defaults"
 msgid "Reset to default"
 msgstr "كۆڭۈلدىكىنى ئىشلەت"
 
-#: kmymoney/views/tabordereditor.cpp:439
+#: kmymoney/views/tabordereditor.cpp:443
 #, kde-format
 msgctxt "@action:inmenu Open tab order dialog"
 msgid "Tab Order List..."
