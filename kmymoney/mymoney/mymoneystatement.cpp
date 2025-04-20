@@ -1,6 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2004-2006 Ace Jones <acejones@users.sourceforge.net>
-    SPDX-FileCopyrightText: 2005-2018 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2005-2025 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -20,6 +20,9 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include "mymoneyobject.h"
+#include "mymoneyobject_p.h"
 
 namespace eMyMoney {
 namespace Statement {
@@ -160,6 +163,66 @@ QString getAttrName(const Statement::Attribute attr)
         // clang-format on
     };
     return attrNames[attr];
+}
+
+class MyMoneyStatementPrivate : public MyMoneyObjectPrivate
+{
+public:
+    MyMoneyStatementPrivate() = default;
+
+    MyMoneyStatementPrivate(const MyMoneyStatementPrivate& r)
+        : MyMoneyObjectPrivate(r)
+    {
+        *this = r;
+    }
+
+    MyMoneyStatementPrivate& operator=(const MyMoneyStatementPrivate& r)
+    {
+        MyMoneyObjectPrivate::operator=(r);
+        return *this;
+    }
+
+    void collectReferencedObjects() override
+    {
+        m_referencedObjects.clear();
+    }
+
+    int m_transactionCount{0};
+    int m_transactionsAdded{0};
+    int m_transactionsMatched{0};
+    int m_transactionDuplicates{0};
+    int m_payeesCreated{0};
+};
+
+MyMoneyStatement::MyMoneyStatement()
+    : MyMoneyObject(*new MyMoneyStatementPrivate)
+{
+}
+
+MyMoneyStatement::MyMoneyStatement(const MyMoneyStatement& other)
+    : MyMoneyObject(*new MyMoneyStatementPrivate(*other.d_func()))
+{
+    m_strAccountName = other.m_strAccountName;
+    m_strAccountNumber = other.m_strAccountNumber;
+    m_strBankCode = other.m_strBankCode;
+    m_accountId = other.m_accountId;
+
+    m_strCurrency = other.m_strCurrency;
+    m_dateBegin = other.m_dateBegin;
+    m_dateEnd = other.m_dateEnd;
+    m_closingBalance = other.m_closingBalance;
+    m_eType = other.m_eType;
+
+    m_listTransactions = other.m_listTransactions;
+    m_listPrices = other.m_listPrices;
+    m_listSecurities = other.m_listSecurities;
+
+    m_skipCategoryMatching = other.m_skipCategoryMatching;
+}
+
+MyMoneyStatement::MyMoneyStatement(const QString& id, const MyMoneyStatement& other)
+    : MyMoneyObject(*new MyMoneyStatementPrivate(*other.d_func()), id)
+{
 }
 
 void MyMoneyStatement::write(QDomElement& _root, QDomDocument* _doc) const

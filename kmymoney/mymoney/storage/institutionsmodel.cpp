@@ -181,6 +181,9 @@ QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::Roles::IdRole:
         return institution.id();
 
+    case eMyMoney::Model::InstitutionNameRole:
+        return institution.name();
+
     case eMyMoney::Model::InstitutionBankCodeRole:
         return institution.bankcode();
 

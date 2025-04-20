@@ -74,7 +74,7 @@ void QIFImporter::slotQifImport()
         m_qifReader->setCategoryMapping(dlg->m_typeComboBox->currentIndex() == 0);
         if (!m_qifReader->startImport()) {
             delete m_qifReader;
-            statementInterface()->showMessages(0);
+            statementInterface()->showMessages();
             m_action->setEnabled(true);
         }
     }
@@ -83,15 +83,17 @@ void QIFImporter::slotQifImport()
 
 bool QIFImporter::slotGetStatements(const QList<MyMoneyStatement> &statements)
 {
+    statementInterface()->resetMessages();
+
     auto ret = true;
     for (const auto& statement : statements) {
-        const auto singleImportSummary = statementInterface()->import(statement);
-        if (singleImportSummary.isEmpty())
+        if (!statementInterface()->import(statement)) {
             ret = false;
+        }
     }
 
     // inform the user about the result of the operation
-    statementInterface()->showMessages(statements.count());
+    statementInterface()->showMessages();
 
     // allow further QIF imports
     m_action->setEnabled(true);

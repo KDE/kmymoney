@@ -159,15 +159,13 @@ public:
     KMMSet<QAction*> actions;
 };
 
-
-KBanking::KBanking(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
-    OnlinePluginExtended(parent, metaData, args)
+KBanking::KBanking(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
+    : OnlinePluginExtended(parent, metaData, args)
     , d(new Private)
     , m_configAction(nullptr)
     , m_importAction(nullptr)
     , m_kbanking(nullptr)
     , m_accountSettings(nullptr)
-    , m_statementCount(0)
 {
     Q_UNUSED(args)
 
@@ -847,20 +845,17 @@ void KBanking::slotClearPasswordCache()
 
 void KBanking::slotImport()
 {
-    m_statementCount = 0;
     statementInterface()->resetMessages();
 
     if (!m_kbanking->interactiveImport())
         qWarning("Error on import dialog");
     else
-        statementInterface()->showMessages(m_statementCount);
+        statementInterface()->showMessages();
 }
-
 
 bool KBanking::importStatement(const MyMoneyStatement& s)
 {
-    m_statementCount++;
-    return !statementInterface()->import(s).isEmpty();
+    return statementInterface()->import(s);
 }
 
 

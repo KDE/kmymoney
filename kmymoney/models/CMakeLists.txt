@@ -18,6 +18,7 @@ set(libmodels_a_SOURCES
     securitiesfilterproxymodel.cpp
     securityaccountsproxymodel.cpp
     specialledgeritemfilter.cpp
+    statementmodel.cpp
 )
 
 add_library(kmm_models ${libmodels_a_SOURCES})

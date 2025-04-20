@@ -25,6 +25,7 @@ class MyMoneyFileTransaction;
 class TransactionMatcher;
 class MyMoneyAccount;
 class MyMoneyInstitution;
+class StatementModel;
 
 /**
   * This is a pared-down version of a MyMoneyQifReader object
@@ -40,14 +41,13 @@ public:
     ~MyMoneyStatementReader();
 
     /**
-      * This method imports data from the MyMoneyStatement object @a s
-      * into the MyMoney engine. It leaves some statistical information
-      * in the @a messages string list
-      *
-      * @retval true the import was processed successfully
-      * @retval false the import resulted in a failure.
-      */
-    bool import(const MyMoneyStatement& s, QStringList& messages);
+     * This method imports data from the MyMoneyStatement object @a s
+     * into the MyMoney engine.
+     *
+     * @retval true the import was processed successfully
+     * @retval false the import resulted in a failure.
+     */
+    bool import(const MyMoneyStatement& s);
 
     /**
       * This method is used to modify the auto payee creation flag.
@@ -81,10 +81,11 @@ public:
       * UI to handle account matching, payee creation, and someday
       * payee and transaction matching.
       */
-    static QStringList importStatement(const QString& url, bool silent = false);
-    static QStringList importStatement(const MyMoneyStatement& s, bool silent = false);
-    static void clearResultMessages();
-    static QStringList resultMessages();
+    static void importStatement(const QString& url);
+    static bool importStatement(const MyMoneyStatement& s);
+
+    static void clearImportResults();
+    static StatementModel* importResultsModel();
 
 private:
     void processTransactionEntry(const MyMoneyStatement::Transaction& t_in);

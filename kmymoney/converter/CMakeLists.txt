@@ -24,6 +24,7 @@ target_link_libraries(converter
     KF${QT_MAJOR_VERSION}::KIOWidgets
     kmm_csvimportercore
     kmm_base_dialogs
+    kmm_models
   PRIVATE
     KF${QT_MAJOR_VERSION}::I18n
     kmymoney_common

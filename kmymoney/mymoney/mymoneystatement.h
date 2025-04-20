@@ -1,6 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2004-2006 Ace Jones <acejones@users.sourceforge.net>
-    SPDX-FileCopyrightText: 2005-2018 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2005-2025 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -19,8 +19,9 @@
 // Project Includes
 
 #include "kmm_mymoney_export.h"
-#include "mymoneymoney.h"
 #include "mymoneyenums.h"
+#include "mymoneymoney.h"
+#include "mymoneyobject.h"
 
 class QDomElement;
 class QDomDocument;
@@ -30,9 +31,21 @@ Represents the electronic analog of the paper bank statement just like we used t
 
 @author ace jones
 */
-class KMM_MYMONEY_EXPORT MyMoneyStatement
+class MyMoneyStatementPrivate;
+
+class KMM_MYMONEY_EXPORT MyMoneyStatement : public MyMoneyObject
 {
+    Q_DECLARE_PRIVATE_D(MyMoneyObject::d_ptr, MyMoneyStatement)
+
 public:
+    MyMoneyStatement();
+    MyMoneyStatement(const MyMoneyStatement& other);
+    MyMoneyStatement(MyMoneyStatement&& other);
+    MyMoneyStatement(const QString& id, const MyMoneyStatement& other);
+    MyMoneyStatement& operator=(const MyMoneyStatement other);
+
+    friend void swap(MyMoneyStatement& first, MyMoneyStatement& second);
+
     struct Split
     {
         QString      m_strCategoryName;
@@ -125,6 +138,37 @@ public:
     static bool readXMLFile(MyMoneyStatement&, const QString&);
     static void writeXMLFile(const MyMoneyStatement&, const QString&);
 };
+
+inline void swap(MyMoneyStatement& first, MyMoneyStatement& second) // krazy:exclude=inline
+{
+    using std::swap;
+    swap(first.MyMoneyObject::d_ptr, second.MyMoneyObject::d_ptr);
+    swap(first.m_strAccountName, second.m_strAccountName);
+    swap(first.m_strAccountNumber, second.m_strAccountNumber);
+    swap(first.m_strBankCode, second.m_strBankCode);
+    swap(first.m_accountId, second.m_accountId);
+    swap(first.m_strCurrency, second.m_strCurrency);
+    swap(first.m_dateBegin, second.m_dateBegin);
+    swap(first.m_dateEnd, second.m_dateEnd);
+    swap(first.m_closingBalance, second.m_closingBalance);
+    swap(first.m_eType, second.m_eType);
+    swap(first.m_listTransactions, second.m_listTransactions);
+    swap(first.m_listPrices, second.m_listPrices);
+    swap(first.m_listSecurities, second.m_listSecurities);
+    swap(first.m_skipCategoryMatching, second.m_skipCategoryMatching);
+}
+
+inline MyMoneyStatement::MyMoneyStatement(MyMoneyStatement&& other)
+    : MyMoneyStatement() // krazy:exclude=inline
+{
+    swap(*this, other);
+}
+
+inline MyMoneyStatement& MyMoneyStatement::operator=(MyMoneyStatement other) // krazy:exclude=inline
+{
+    swap(*this, other);
+    return *this;
+}
 
 /**
   * Make it possible to hold @ref MyMoneyStatement objects inside @ref QVariant objects.

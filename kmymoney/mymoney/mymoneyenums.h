@@ -562,7 +562,8 @@ enum Roles {
     AccountIsAssetLiabilityRole,
 
     // MyMoneyInstitution
-    InstitutionBankCodeRole,
+    InstitutionNameRole = AccountNameRole,
+    InstitutionBankCodeRole = AccountIsAssetLiabilityRole,
 
     // MyMoneyCostCenter
     CostCenterShortNameRole,
@@ -712,6 +713,15 @@ enum Roles {
     PriceRateRole,
     PricePairRole,
     PriceSourceRole,
+
+    // StatementModel
+    StatementTransactionCountRole,
+    StatementTransactionsAddedRole,
+    StatementTransactionsMatchedRole,
+    StatementTransactionDuplicatesRole,
+    StatementPayeesCreatedRole,
+    StatementBalanceRole,
+    StatementEndDateRole,
 
     // LedgerStack special roles
     ActiveFilterRole,

@@ -6,6 +6,7 @@ set(kmm_base_dialogs_SOURCES
   accountcreator.cpp
   amounteditcurrencyhelper.cpp
   editpersonaldatadlg.cpp
+  importsummarydlg.cpp
   kaccountselectdlg.cpp
   kavailablecurrencydlg.cpp
   kbackupdlg.cpp
@@ -33,6 +34,7 @@ set(kmm_base_dialogs_SOURCES
 
 set(base_dialogs_UI
   editpersonaldatadlg.ui
+  importsummarydlg.ui
   kaccountselectdlg.ui
   kavailablecurrencydlg.ui
   kbackupdlg.ui

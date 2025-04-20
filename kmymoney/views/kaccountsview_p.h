@@ -28,22 +28,23 @@
 #include "mymoneyfile.h"
 #include "accountsmodel.h"
 
-#include "mymoneyexception.h"
-#include "mymoneysplit.h"
-#include "mymoneyschedule.h"
-#include "mymoneytransaction.h"
-#include "knewaccountdlg.h"
-#include "keditloanwizard.h"
-#include "mymoneyaccount.h"
-#include "mymoneymoney.h"
 #include "accountsproxymodel.h"
-#include "kmymoneyplugin.h"
-#include "icons.h"
-#include "mymoneyenums.h"
-#include "menuenums.h"
-#include "mymoneystatementreader.h"
-#include "kmymoneyutils.h"
 #include "columnselector.h"
+#include "icons.h"
+#include "importsummarydlg.h"
+#include "keditloanwizard.h"
+#include "kmymoneyplugin.h"
+#include "kmymoneyutils.h"
+#include "knewaccountdlg.h"
+#include "menuenums.h"
+#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneymoney.h"
+#include "mymoneyschedule.h"
+#include "mymoneysplit.h"
+#include "mymoneystatementreader.h"
+#include "mymoneytransaction.h"
 
 using namespace Icons;
 
@@ -377,12 +378,11 @@ public:
             pActions[a]->setEnabled(false);
 
         // clear global message list
-        MyMoneyStatementReader::clearResultMessages();
+        MyMoneyStatementReader::clearImportResults();
 
         // process all entries that have a mapped account and the 'provider' is available
         // we need to make sure that only the very last entry that matches sets the
         // 'moreAccounts' parameter in the call to updateAccount() to false
-        auto processedAccounts = 0;
 
         Q_EMIT q->beginImportingStatements();
         for (auto it_provider = m_onlinePlugins->cbegin(); it_provider != m_onlinePlugins->cend(); ++it_provider) {
@@ -394,7 +394,6 @@ public:
                         (*it_provider)->updateAccount(*nextAccount, true);
                     }
                     nextAccount = it_a;
-                    ++processedAccounts;
                 }
             }
             // process a possible pending entry
@@ -407,7 +406,9 @@ public:
         // re-enable the disabled actions
         updateActions(m_currentAccount);
 
-        KMyMoneyUtils::showStatementImportResult(MyMoneyStatementReader::resultMessages(), processedAccounts);
+        QScopedPointer<ImportSummaryDialog> dlg(new ImportSummaryDialog(q));
+        dlg->setModel(MyMoneyStatementReader::importResultsModel());
+        dlg->exec();
     }
 
     void updateActions(const MyMoneyAccount& acc)

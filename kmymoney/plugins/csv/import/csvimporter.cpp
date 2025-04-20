@@ -107,7 +107,9 @@ bool CSVImporter::import(const QString& filename)
             statement.m_strAccountName = account.name();
             statement.m_strAccountNumber = account.number();
         }
-        rc = !statementInterface()->import(statement, false).isEmpty();
+        statementInterface()->resetMessages();
+        rc = statementInterface()->import(statement);
+        statementInterface()->showMessages();
     }
     if (wizard) {
         wizard->deleteLater();

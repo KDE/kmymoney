@@ -38,12 +38,12 @@ public:
     }
 
     virtual void resetMessages() const final override;
-    virtual void showMessages(int statementCount) const final override;
+    virtual void showMessages() const final override;
 
     /**
      * This method imports a MyMoneyStatement into the engine
      */
-    QStringList import(const MyMoneyStatement& s, bool silent = false) final override;
+    bool import(const MyMoneyStatement& s) final override;
 
     /**
      * This method returns the account for a given @a key - @a value pair.

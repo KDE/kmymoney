@@ -115,8 +115,7 @@ protected:
     const QStringList& errors() const;
 
     bool storeStatements(const QList<MyMoneyStatement> &statements);
-    QStringList importStatement(const MyMoneyStatement &s);
-
+    bool importStatement(const MyMoneyStatement& s);
 
     static int ofxTransactionCallback(struct OfxTransactionData, void*);
     static int ofxStatementCallback(struct OfxStatementData, void*);

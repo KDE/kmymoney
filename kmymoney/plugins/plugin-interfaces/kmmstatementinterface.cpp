@@ -20,6 +20,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "importsummarydlg.h"
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
@@ -31,26 +32,22 @@ KMyMoneyPlugin::KMMStatementInterface::KMMStatementInterface(QObject* parent, co
 {
 }
 
-QStringList KMyMoneyPlugin::KMMStatementInterface::import(const MyMoneyStatement& s, bool silent)
+bool KMyMoneyPlugin::KMMStatementInterface::import(const MyMoneyStatement& s)
 {
     qDebug("KMyMoneyPlugin::KMMStatementInterface::import start");
-    return MyMoneyStatementReader::importStatement(s, silent);
+    return MyMoneyStatementReader::importStatement(s);
 }
 
 void KMyMoneyPlugin::KMMStatementInterface::resetMessages() const
 {
-    MyMoneyStatementReader::clearResultMessages();
+    MyMoneyStatementReader::clearImportResults();
 }
 
-void KMyMoneyPlugin::KMMStatementInterface::showMessages(int statementCount) const
+void KMyMoneyPlugin::KMMStatementInterface::showMessages() const
 {
-    const auto resultMessages = MyMoneyStatementReader::resultMessages();
-    KMessageBox::informationList(
-        nullptr,
-        i18np("One statement has been processed with the following results:", "%1 statements have been processed with the following results:", statementCount),
-        !resultMessages.isEmpty() ? resultMessages
-                                  : QStringList{i18np("No new transaction has been imported.", "No new transactions have been imported.", statementCount)},
-        i18n("Statement import statistics"));
+    QScopedPointer<ImportSummaryDialog> dlg(new ImportSummaryDialog(nullptr));
+    dlg->setModel(MyMoneyStatementReader::importResultsModel());
+    dlg->exec();
 }
 
 MyMoneyAccount KMyMoneyPlugin::KMMStatementInterface::account(const QString& key, const QString& value) const

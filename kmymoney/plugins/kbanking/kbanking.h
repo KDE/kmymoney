@@ -182,8 +182,7 @@ private:
     KAction*                m_importAction;
     KBankingExt*            m_kbanking;
     QMap<QString, QString>  m_protocolConversionMap;
-    KBAccountSettings*      m_accountSettings;
-    int                     m_statementCount;
+    KBAccountSettings* m_accountSettings;
     /**
      * @brief @ref onlineJob "onlineJobs" which are executed at the moment
      * Key is onlineJob->id(). This container is used during execution of jobs.

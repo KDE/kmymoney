@@ -190,7 +190,7 @@ void OFXImporter::slotImportFile()
         if (isMyFormat(filename)) {
             statementInterface()->resetMessages();
             slotImportFile(filename);
-            statementInterface()->showMessages(d->m_statementlist.count());
+            statementInterface()->showMessages();
 
         } else {
             KMessageBox::error(nullptr,
@@ -878,10 +878,10 @@ int OFXImporter::ofxStatusCallback(struct OfxStatusData data, void * pv)
     return 0;
 }
 
-QStringList OFXImporter::importStatement(const MyMoneyStatement &s)
+bool OFXImporter::importStatement(const MyMoneyStatement& s)
 {
     qDebug("OfxImporterPlugin::importStatement start");
-    return statementInterface()->import(s, false);
+    return statementInterface()->import(s);
 }
 
 MyMoneyAccount OFXImporter::account(const QString& key, const QString& value) const
@@ -1077,7 +1077,7 @@ bool OFXImporter::storeStatements(const QList<MyMoneyStatement> &statements)
     for (const auto& statement : statements) {
         if (abort)
             break;
-        if (importStatement(statement).isEmpty())
+        if (!importStatement(statement))
             ok = false;
     }
 

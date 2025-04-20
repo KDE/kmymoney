@@ -39,7 +39,9 @@
 #include "amountedit.h"
 #include "dialogenums.h"
 #include "existingtransactionmatchfinder.h"
+#include "institutionsmodel.h"
 #include "kaccountselectdlg.h"
+#include "kmmyesno.h"
 #include "kmymoneyaccountcombo.h"
 #include "kmymoneymvccombo.h"
 #include "kmymoneysettings.h"
@@ -57,10 +59,9 @@
 #include "mymoneyutils.h"
 #include "payeesmodel.h"
 #include "scheduledtransactionmatchfinder.h"
+#include "statementmodel.h"
 #include "tagsmodel.h"
 #include "transactionmatcher.h"
-
-#include "kmmyesno.h"
 
 using namespace eMyMoney;
 
@@ -69,7 +70,7 @@ bool matchNotEmpty(const QString &l, const QString &r)
     return !l.isEmpty() && QString::compare(l, r, Qt::CaseInsensitive) == 0;
 }
 
-Q_GLOBAL_STATIC(QStringList, globalResultMessages);
+Q_GLOBAL_STATIC_WITH_ARGS(StatementModel, globalStatementModel, (nullptr, nullptr));
 
 class MyMoneyStatementReader::Private
 {
@@ -105,6 +106,7 @@ public:
     QMap<QString, MyMoneySecurity> securitiesByName;
     bool m_skipCategoryMatching;
     QDate m_oldestPostDate;
+    QModelIndex statementIdx;
 
 private:
     void scanCategories(QString& id, const MyMoneyAccount& invAcc, const MyMoneyAccount& parentAccount, const QString& defaultName);
@@ -361,22 +363,18 @@ void MyMoneyStatementReader::setAskPayeeCategory(bool ask)
     m_askPayeeCategory = ask;
 }
 
-QStringList MyMoneyStatementReader::importStatement(const QString& url, bool silent)
+void MyMoneyStatementReader::importStatement(const QString& url)
 {
     QStringList summary;
     MyMoneyStatement s;
     if (MyMoneyStatement::readXMLFile(s, url))
-        summary = MyMoneyStatementReader::importStatement(s, silent);
+        MyMoneyStatementReader::importStatement(s);
     else
         KMessageBox::error(nullptr, i18n("Error importing %1: This file is not a valid KMM statement file.", url), i18n("Invalid Statement"));
-
-    return summary;
 }
 
-QStringList MyMoneyStatementReader::importStatement(const MyMoneyStatement& s, bool silent)
+bool MyMoneyStatementReader::importStatement(const MyMoneyStatement& s)
 {
-    auto result = false;
-
     // keep a copy of the statement
     if (KMyMoneySettings::logImportedStatements()) {
         auto logFile = QString::fromLatin1("%1/kmm-statement-%2.txt")
@@ -384,51 +382,40 @@ QStringList MyMoneyStatementReader::importStatement(const MyMoneyStatement& s, b
         MyMoneyStatement::writeXMLFile(s, logFile);
     }
 
-    auto reader = new MyMoneyStatementReader;
+    QScopedPointer<MyMoneyStatementReader> reader(new MyMoneyStatementReader);
     reader->setPayeeCreationMode(eMyMoney::Account::PayeeCreation::AutomaticCreaation);
-
-    QStringList messages;
-    result = reader->import(s, messages);
-
-    auto transactionAdded = reader->anyTransactionAdded();
-
-    delete reader;
-
-    if (!silent && transactionAdded) {
-        globalResultMessages()->append(messages);
-    }
-
-    if (!result)
-        messages.clear();
-    return messages;
+    return reader->import(s);
 }
 
-bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& messages)
+bool MyMoneyStatementReader::import(const MyMoneyStatement& _statement)
 {
     //
     // Select the account
     //
 
+    // create a local copy, so that we can write on it
+    auto statement = _statement;
+
     d->m_account = MyMoneyAccount();
     d->m_brokerageAccount = MyMoneyAccount();
 
-    d->m_skipCategoryMatching = s.m_skipCategoryMatching;
+    d->m_skipCategoryMatching = statement.m_skipCategoryMatching;
 
     // if the statement source left some information about
     // the account, we use it to get the current data of it
-    if (!s.m_accountId.isEmpty()) {
+    if (!statement.m_accountId.isEmpty()) {
         try {
-            d->m_account = MyMoneyFile::instance()->account(s.m_accountId);
+            d->m_account = MyMoneyFile::instance()->account(statement.m_accountId);
         } catch (const MyMoneyException &) {
-            qDebug("Received reference '%s' to unknown account in statement", qPrintable(s.m_accountId));
+            qDebug("Received reference '%s' to unknown account in statement", qPrintable(statement.m_accountId));
         }
     }
 
     if (d->m_account.id().isEmpty()) {
-        d->m_account.setName(s.m_strAccountName);
-        d->m_account.setNumber(s.m_strAccountNumber);
+        d->m_account.setName(statement.m_strAccountName);
+        d->m_account.setNumber(statement.m_strAccountNumber);
 
-        switch (s.m_eType) {
+        switch (statement.m_eType) {
         case eMyMoney::Statement::Type::Checkings:
             d->m_account.setAccountType(Account::Type::Checkings);
             break;
@@ -449,9 +436,8 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
             break;
         }
 
-
         // we ask the user only if we have some transactions to process
-        if (!m_userAbort && !s.m_listTransactions.isEmpty())
+        if (!m_userAbort && !statement.m_listTransactions.isEmpty())
             m_userAbort = ! selectOrCreateAccount(Select, d->m_account);
     }
 
@@ -461,8 +447,8 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
     // see if we need to update some values stored with the account
     // take into account, that an older statement might get here again
 
-    const auto statementEndDate = s.statementEndDate();
-    const auto statementBalance = s.m_closingBalance;
+    const auto statementEndDate = statement.statementEndDate();
+    const auto statementBalance = statement.m_closingBalance;
     const auto previousStatementEndDate = QDate::fromString(d->m_account.value("lastImportedTransactionDate"), Qt::ISODate);
     const auto previousStatementBalance = MyMoneyMoney(d->m_account.value("lastStatementBalance"));
 
@@ -485,19 +471,37 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
         }
     }
 
-    if (!d->m_account.name().isEmpty())
-        messages += i18n("Importing statement for account %1", d->m_account.name());
-    else if (s.m_listTransactions.isEmpty())
-        messages += i18n("Importing statement without transactions");
+    qDebug() << "Importing statement for " << d->m_account.name();
 
-    qDebug("Importing statement for '%s'", qPrintable(d->m_account.name()));
+    // invalidate previous used index
+    d->statementIdx = QModelIndex();
+
+    // create StatementModel entries
+    if (!d->m_account.name().isEmpty()) {
+        auto institutionId = d->m_account.institutionId();
+        QString institutionName;
+        if (institutionId.isEmpty()) {
+            institutionId = globalStatementModel()->noInstitutionId();
+            institutionName = i18nc("@info Group name for accounts with no assigned institution", "No institution");
+        } else {
+            const auto institutionIdx = MyMoneyFile::instance()->institutionsModel()->indexById(institutionId);
+            institutionName = institutionIdx.data(eMyMoney::Model::AccountNameRole).toString();
+        }
+        auto groupIdx = globalStatementModel()->indexById(institutionId);
+        if (!groupIdx.isValid()) {
+            groupIdx = globalStatementModel()->addItem(institutionId, institutionName, QModelIndex());
+        }
+
+        // now we have an institution item and we can add the account item
+        d->statementIdx = globalStatementModel()->addItem(d->m_account.id(), d->m_account.name(), groupIdx);
+    }
 
     //
     // Determine oldest transaction date
     // (we will use that as opening date for security accounts)
     //
     d->m_oldestPostDate = QDate::currentDate();
-    for (const auto& transaction : s.m_listTransactions) {
+    for (const auto& transaction : statement.m_listTransactions) {
         if (transaction.m_datePosted < d->m_oldestPostDate) {
             d->m_oldestPostDate = transaction.m_datePosted;
         }
@@ -506,8 +510,8 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
     //
     // Process the securities
     //
-    QList<MyMoneyStatement::Security>::const_iterator it_s = s.m_listSecurities.begin();
-    while (it_s != s.m_listSecurities.end()) {
+    QList<MyMoneyStatement::Security>::iterator it_s = statement.m_listSecurities.begin();
+    while (it_s != statement.m_listSecurities.end()) {
         processSecurityEntry(*it_s);
         ++it_s;
     }
@@ -519,8 +523,8 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
     if (!m_userAbort) {
         try {
             qDebug("Processing transactions (%s)", qPrintable(d->m_account.name()));
-            QList<MyMoneyStatement::Transaction>::const_iterator it_t = s.m_listTransactions.begin();
-            while (it_t != s.m_listTransactions.end() && !m_userAbort) {
+            QList<MyMoneyStatement::Transaction>::iterator it_t = statement.m_listTransactions.begin();
+            while (it_t != statement.m_listTransactions.end() && !m_userAbort) {
                 processTransactionEntry(*it_t);
                 ++it_t;
             }
@@ -539,7 +543,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
     //
     if (!m_userAbort) {
         try {
-            KMyMoneyUtils::processPriceList(s);
+            KMyMoneyUtils::processPriceList(statement);
         } catch (const MyMoneyException& e) {
             if (QString::fromLatin1(e.what()).contains("USERABORT"))
                 m_userAbort = true;
@@ -562,19 +566,14 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
         }
     }
 
-    if (s.m_closingBalance.isAutoCalc()) {
-        messages += i18n("  Statement balance is not contained in statement.");
-    } else {
-        messages += i18n("  Statement balance on %1 is reported to be %2", s.m_dateEnd.toString(Qt::ISODate), s.m_closingBalance.formatMoney("", 2));
-    }
-    messages += i18n("  Transactions");
-    messages += i18np("    %1 processed", "    %1 processed", d->transactionsCount);
-    messages += i18ncp("x transactions have been added", "    %1 added", "    %1 added", d->transactionsAdded);
-    messages += i18np("    %1 matched", "    %1 matched", d->transactionsMatched);
-    messages += i18np("    %1 duplicate", "    %1 duplicates", d->transactionsDuplicate);
-    messages += i18n("  Payees");
-    messages += i18ncp("x transactions have been created", "    %1 created", "    %1 created", payeeCount);
-    messages += QString();
+    const auto model = globalStatementModel();
+    model->setData(d->statementIdx, QVariant::fromValue<MyMoneyMoney>(statement.m_closingBalance), eMyMoney::Model::StatementBalanceRole);
+    model->setData(d->statementIdx, statement.m_dateEnd, eMyMoney::Model::StatementEndDateRole);
+    model->setData(d->statementIdx, d->transactionsCount, eMyMoney::Model::StatementTransactionCountRole);
+    model->setData(d->statementIdx, d->transactionsAdded, eMyMoney::Model::StatementTransactionsAddedRole);
+    model->setData(d->statementIdx, d->transactionsMatched, eMyMoney::Model::StatementTransactionsMatchedRole);
+    model->setData(d->statementIdx, d->transactionsDuplicate, eMyMoney::Model::StatementTransactionDuplicatesRole);
+    model->setData(d->statementIdx, payeeCount, eMyMoney::Model::StatementPayeesCreatedRole);
 
     // remove the Don't ask again entries
     KSharedConfigPtr config = KSharedConfig::openConfig();
@@ -1711,12 +1710,12 @@ void MyMoneyStatementReader::slotNewAccount(const MyMoneyAccount& acc)
     NewAccountWizard::Wizard::newAccount(newAcc);
 }
 
-void MyMoneyStatementReader::clearResultMessages()
+void MyMoneyStatementReader::clearImportResults()
 {
-    globalResultMessages()->clear();
+    globalStatementModel()->clearModelItems();
 }
 
-QStringList MyMoneyStatementReader::resultMessages()
+StatementModel* MyMoneyStatementReader::importResultsModel()
 {
-    return *globalResultMessages();
+    return globalStatementModel();
 }

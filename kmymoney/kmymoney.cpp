@@ -107,6 +107,7 @@
 #include "dialogs/settings/ksettingskmymoney.h"
 #include "dialogs/transactionmatcher.h"
 #include "equitiesmodel.h"
+#include "importsummarydlg.h"
 #include "journalmodel.h"
 #include "keditscheduledlg.h"
 #include "kmm_menuactionexchanger.h"
@@ -3936,10 +3937,8 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
 
     // only start processing if this is the only import so far
     if (d->m_importUrlsQueue.count() == 1) {
-        MyMoneyStatementReader::clearResultMessages();
-        auto statementCount = 0;
+        MyMoneyStatementReader::clearImportResults();
         while (!d->m_importUrlsQueue.isEmpty()) {
-            ++statementCount;
             // get the value of the next item from the queue
             // but leave it on the queue for now
             QString url = d->m_importUrlsQueue.head();
@@ -3980,7 +3979,7 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
                 // to users.
                 if (it_plugin == pPlugins.importer.cend()) {
                     if (MyMoneyStatement::isStatementFile(url)) {
-                        MyMoneyStatementReader::importStatement(url, false);
+                        MyMoneyStatementReader::importStatement(url);
                     }
                 }
             }
@@ -3988,7 +3987,9 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
             d->m_importUrlsQueue.dequeue();
         }
 
-        KMyMoneyUtils::showStatementImportResult(MyMoneyStatementReader::resultMessages(), statementCount);
+        QScopedPointer<ImportSummaryDialog> dlg(new ImportSummaryDialog(nullptr));
+        dlg->setModel(MyMoneyStatementReader::importResultsModel());
+        dlg->exec();
     }
 }
 
