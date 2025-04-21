@@ -108,6 +108,8 @@ private Q_SLOTS:
 
     void slotAddSharedAction(eMenu::Action action, QAction* defaultAction);
 
+    void slotToggleMenuBar(bool showMenuBar);
+
 protected Q_SLOTS:
     /**
       * This slot is intended to be used as part of auto saving. This is used when the

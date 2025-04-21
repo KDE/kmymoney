@@ -41,6 +41,7 @@
 #include <QList>
 #include <QListWidget>
 #include <QMenu>
+#include <QMenuBar>
 #include <QProgressBar>
 #include <QPushButton>
 #include <QQueue>
@@ -1349,6 +1350,8 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
     lutActions.insert(Action::PrintPreview, KStandardAction::printPreview(this, &KMyMoneyApp::slotExecuteAction, aC));
     KStandardAction::preferences(this, &KMyMoneyApp::slotSettings, aC);
 
+    KStandardAction::showMenubar(this, &KMyMoneyApp::slotToggleMenuBar, aC);
+
     // *************
     // Adding all actions
     // *************
@@ -1906,6 +1909,7 @@ void KMyMoneyApp::saveOptions()
     grp.writeEntry("Geometry", size());
 
     grp.writeEntry("Show Statusbar", actionCollection()->action(KStandardAction::name(KStandardAction::ShowStatusbar))->isChecked());
+    grp.writeEntry("Show Menu Bar", actionCollection()->action(KStandardAction::name(KStandardAction::ShowMenubar))->isChecked());
 
     KConfigGroup toolbarGrp = d->m_config->group("mainToolBar");
     toolBar("mainToolBar")->saveSettings(toolbarGrp);
@@ -1916,7 +1920,14 @@ void KMyMoneyApp::saveOptions()
 void KMyMoneyApp::readOptions()
 {
     KConfigGroup grp = d->m_config->group("General Options");
+    actionCollection()->action(KStandardAction::name(KStandardAction::ShowStatusbar))->setChecked(grp.readEntry("Show Statusbar", true));
 
+    const auto showMenu = grp.readEntry("Show Menu Bar", true);
+    const auto action = actionCollection()->action(KStandardAction::name(KStandardAction::ShowMenubar));
+    action->setChecked(showMenu);
+    // setting the action does not emit the triggered signal
+    // so we set the intial state directly
+    showMenu ? menuBar()->show() : menuBar()->hide();
 
     pActions[Action::ViewHideReconciled]->setChecked(KMyMoneySettings::hideReconciledTransactions());
     pActions[Action::ViewHideCategories]->setChecked(KMyMoneySettings::hideUnusedCategory());
@@ -3232,6 +3243,22 @@ void KMyMoneyApp::slotSettings()
     dlg = new KSettingsKMyMoney(this, "KMyMoney-Settings", KMyMoneySettings::self());
     connect(dlg, &KSettingsKMyMoney::settingsChanged, this, &KMyMoneyApp::slotUpdateConfiguration);
     dlg->show();
+}
+
+void KMyMoneyApp::slotToggleMenuBar(bool showMenuBar)
+{
+    if (showMenuBar) {
+        menuBar()->show();
+
+    } else {
+        const auto action = actionCollection()->action(KStandardAction::name(KStandardAction::ShowMenubar));
+        const auto shortcut = action->shortcut().toString();
+        KMessageBox::information(this,
+                                 i18n("This will hide the menu bar completely. You can show it again by typing %1.", shortcut),
+                                 i18n("Hide menu bar"),
+                                 QLatin1String("HideMenuBarHint"));
+        menuBar()->hide();
+    }
 }
 
 void KMyMoneyApp::slotShowCredits()
