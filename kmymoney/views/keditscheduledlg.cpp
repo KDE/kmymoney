@@ -449,8 +449,8 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* par
     if (dateEdit) {
         connect(d->ui->lastDayInMonthOption, &QCheckBox::stateChanged, dateEdit, [&](int state) {
             Q_D(KEditScheduleDlg);
-            const auto dateEdit = d->transactionEditor->findChild<QWidget*>("dateEdit");
-            dateEdit->setDisabled(state == Qt::Checked);
+            const auto dateWidget = d->transactionEditor->findChild<QWidget*>("dateEdit");
+            dateWidget->setDisabled(state == Qt::Checked);
         });
         dateEdit->setDisabled(d->ui->lastDayInMonthOption->isChecked());
     }
