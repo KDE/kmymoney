@@ -5377,11 +5377,12 @@ msgstr "Soubor již existuje"
 msgid ""
 "This will hide the menu bar completely. You can show it again by typing %1."
 msgstr ""
+"Toto úplně skryje panel nabídky. Můžete ji opětovně zobrazit pomocí %1."
 
 #: kmymoney/kmymoney.cpp:3258
 #, kde-format
 msgid "Hide menu bar"
-msgstr ""
+msgstr "Skrýt nabídku"
 
 #: kmymoney/kmymoney.cpp:3360
 #, kde-format
