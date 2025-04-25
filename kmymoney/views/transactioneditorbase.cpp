@@ -69,10 +69,10 @@ TransactionEditorBase::TransactionEditorBase(QWidget* parent, const QString& acc
     : QWidget(parent)
     , d(new TransactionEditorBase::Private)
 {
-#if 0
     Q_UNUSED(accountId)
-    d->focusFrame = new WidgetHintFrame(this, WidgetHintFrame::Focus);
     d->frameCollection = new WidgetHintFrameCollection(this);
+#if 0
+    d->focusFrame = new WidgetHintFrame(this, WidgetHintFrame::Focus);
     WidgetHintFrame::show(this);
     connect(d->focusFrame, &QObject::destroyed, this, [&]() {
         d->focusFrame = nullptr;
