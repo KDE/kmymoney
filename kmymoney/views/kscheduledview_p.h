@@ -68,7 +68,6 @@ public:
         , ui(new Ui::KScheduledView)
         , m_filterModel(nullptr)
         , m_needLoad(true)
-        , m_editingCanceled(false)
         , m_balanceWarning(nullptr)
     {
     }
@@ -218,6 +217,7 @@ public:
                 pActions[eMenu::Action::EnterTransaction]->setEnabled(true);
 
                 KConfirmManualEnterDlg::Action action = KConfirmManualEnterDlg::ModifyOnce;
+                bool editingCanceled(false);
                 if (!autoEnter || !schedule.isFixed()) {
                     while (dlg != nullptr) {
                         rc = eDialogs::ScheduleResultCode::Cancel;
@@ -263,13 +263,17 @@ public:
                                 }
                             }
                         }
-                        cancelEditing();
+                        if (pActions[eMenu::Action::CancelTransaction]->isEnabled()) {
+                            // make sure, we block the enter function
+                            pActions[eMenu::Action::EnterTransaction]->setEnabled(false);
+                            editingCanceled = true;
+                        }
                         break;
                     }
                 }
 
                 // if we still have the editor around here, the user did not cancel
-                if ((dlg != nullptr) && (!m_editingCanceled)) {
+                if ((dlg != nullptr) && (!editingCanceled)) {
                     MyMoneyFileTransaction ft;
                     try {
                         MyMoneyTransaction t(taccepted);
@@ -321,17 +325,6 @@ public:
             delete dlg;
         }
         return rc;
-    }
-
-    void cancelEditing()
-    {
-        // since we jump here via code, we have to make sure to react only
-        // if the action is enabled
-        if (pActions[eMenu::Action::CancelTransaction]->isEnabled()) {
-            // make sure, we block the enter function
-            pActions[eMenu::Action::EnterTransaction]->setEnabled(false);
-            m_editingCanceled = true;
-        }
     }
 
     /**
@@ -418,7 +411,6 @@ public:
       * This member holds the initial load state of the view
       */
     bool m_needLoad;
-    bool m_editingCanceled;
 
     QScopedPointer<KBalanceWarning> m_balanceWarning;
 };
