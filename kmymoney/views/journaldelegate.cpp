@@ -614,8 +614,10 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
             }
         }
     } else {
+#ifndef Q_OS_WIN
         // paint focus frame around edit widget
         style->drawControl(QStyle::CE_FocusFrame, &opt, painter, editWidget);
+#endif
     }
 
     painter->restore();
