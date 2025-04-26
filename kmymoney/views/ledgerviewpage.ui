@@ -112,7 +112,7 @@
  <customwidgets>
   <customwidget>
    <class>LedgerView</class>
-   <extends>QListView</extends>
+   <extends>QTableView</extends>
    <header>ledgerview.h</header>
   </customwidget>
   <customwidget>

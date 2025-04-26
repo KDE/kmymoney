@@ -9,9 +9,9 @@
 // QT Includes
 
 #include <QApplication>
-#include <QScrollBar>
-#include <QPainter>
 #include <QDebug>
+#include <QPainter>
+#include <QScrollBar>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -37,12 +37,14 @@ public:
     Private()
         : m_editor(nullptr)
         , m_editorRow(-1)
+        , m_editorCol(-1)
         , m_showValuesInverted(false)
         , m_readOnly(false)
     {}
 
     NewSplitEditor* m_editor;
     int m_editorRow;
+    int m_editorCol;
     bool m_showValuesInverted;
     bool m_readOnly;
     MyMoneySecurity m_commodity;
@@ -115,6 +117,7 @@ QWidget* SplitDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem
 
         if(d->m_editor) {
             d->m_editorRow = index.row();
+            d->m_editorCol = index.column();
             connect(d->m_editor, &NewSplitEditor::done, this, &SplitDelegate::endEdit);
             Q_EMIT const_cast<SplitDelegate*>(this)->sizeHintChanged(index);
 
@@ -146,92 +149,89 @@ void SplitDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
 
     // show the focus only on the detail column
     opt.state &= ~QStyle::State_HasFocus;
-    if(index.column() == SplitModel::Column::Memo) {
-        QAbstractItemView* view = qobject_cast< QAbstractItemView* >(parent());
-        if(view) {
-            if(view->currentIndex().row() == index.row()) {
-                opt.state |= QStyle::State_HasFocus;
-            }
-        }
+
+    QTableView* view = qobject_cast<QTableView*>(parent());
+    const auto editIndex = index.model()->index(index.row(), d->m_editorCol, index.parent());
+    const auto editWidget = (view) ? view->indexWidget(editIndex) : nullptr;
+
+    // if selected, always show as active, so that the
+    // background does not change when the editor is shown
+    if (opt.state & QStyle::State_Selected && (editWidget == nullptr)) {
+        opt.state |= QStyle::State_Active;
+    } else {
+        opt.state &= ~QStyle::State_Active;
     }
 
     painter->save();
 
     // Background
-    auto bgOpt = opt;
-    // if selected, always show as active, so that the
-    // background does not change when the editor is shown
-    if (opt.state & QStyle::State_Selected) {
-        bgOpt.state |= QStyle::State_Active;
-    }
-    QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
-    style->drawPrimitive(QStyle::PE_PanelItemViewItem, &bgOpt, painter, opt.widget);
+    QStyle* style = opt.widget ? opt.widget->style() : QApplication::style();
+    style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, editWidget ? editWidget : opt.widget);
 
-    // Do not paint text if the edit widget is shown
-    const auto view = qobject_cast<const SplitView *>(opt.widget);
-    if (view && view->indexWidget(index)) {
-        painter->restore();
-        return;
-    }
+    if (editWidget == nullptr) {
+        const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin) + 1;
+        const QRect textArea = QRect(opt.rect.x() + margin, opt.rect.y() + margin, opt.rect.width() - 2 * margin, opt.rect.height() - 2 * margin);
 
-    const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin) + 1;
-    const QRect textArea = QRect(opt.rect.x() + margin, opt.rect.y() + margin, opt.rect.width() - 2 * margin, opt.rect.height() - 2 * margin);
+        QStringList lines;
+        if (index.column() == SplitModel::Column::Memo) {
+            const auto payeeId = index.data(eMyMoney::Model::SplitPayeeIdRole).toString();
+            if (!payeeId.isEmpty()) {
+                if (payeeId != d->m_transactionPayeeId) {
+                    lines << index.data(eMyMoney::Model::SplitPayeeRole).toString();
+                }
+            }
+            lines << index.data(eMyMoney::Model::SplitSingleLineMemoRole).toString();
+            lines.removeAll(QString());
 
-    QStringList lines;
-    if(index.column() == SplitModel::Column::Memo) {
-        const auto payeeId = index.data(eMyMoney::Model::SplitPayeeIdRole).toString();
-        if (!payeeId.isEmpty()) {
-            if (payeeId != d->m_transactionPayeeId) {
-                lines << index.data(eMyMoney::Model::SplitPayeeRole).toString();
+            if (view) {
+                if (view->currentIndex().row() == index.row()) {
+                    opt.state |= QStyle::State_HasFocus;
+                }
             }
         }
-        lines << index.data(eMyMoney::Model::SplitSingleLineMemoRole).toString();
-        lines.removeAll(QString());
-    }
 
-    // draw the text items
-    if(!opt.text.isEmpty() || !lines.isEmpty()) {
+        // draw the text items
+        if (!opt.text.isEmpty() || !lines.isEmpty()) {
+            QPalette::ColorGroup cg = (opt.state & QStyle::State_Enabled) ? QPalette::Normal : QPalette::Disabled;
 
-        QPalette::ColorGroup cg = (opt.state & QStyle::State_Enabled)
-                                  ? QPalette::Normal : QPalette::Disabled;
-
-        if (cg == QPalette::Normal && !(opt.state & QStyle::State_Active)) {
-            cg = QPalette::Inactive;
-        }
-        if (opt.state & QStyle::State_Selected) {
-            painter->setPen(opt.palette.color(cg, QPalette::HighlightedText));
-        } else {
-            painter->setPen(opt.palette.color(cg, QPalette::Text));
-        }
-        if (opt.state & QStyle::State_Editing) {
-            painter->setPen(opt.palette.color(cg, QPalette::Text));
-            painter->drawRect(textArea.adjusted(0, 0, -1, -1));
-        }
-
-        // collect data for the various columns
-        if(index.column() == SplitModel::Column::Memo) {
-            for(int i = 0; i < lines.count(); ++i) {
-                painter->drawText(textArea.adjusted(0, (opt.fontMetrics.lineSpacing() + 5) * i, 0, 0), opt.displayAlignment, lines[i]);
+            if (cg == QPalette::Normal && !(opt.state & QStyle::State_Active)) {
+                cg = QPalette::Inactive;
+            }
+            if (opt.state & QStyle::State_Selected) {
+                painter->setPen(opt.palette.color(cg, QPalette::HighlightedText));
+            } else {
+                painter->setPen(opt.palette.color(cg, QPalette::Text));
+            }
+            if (opt.state & QStyle::State_Editing) {
+                painter->setPen(opt.palette.color(cg, QPalette::Text));
+                painter->drawRect(textArea.adjusted(0, 0, -1, -1));
             }
 
-        } else {
-            painter->drawText(textArea, opt.displayAlignment, opt.text);
+            // collect data for the various columns
+            if (index.column() == SplitModel::Column::Memo) {
+                for (int i = 0; i < lines.count(); ++i) {
+                    painter->drawText(textArea.adjusted(0, (opt.fontMetrics.lineSpacing() + 5) * i, 0, 0), opt.displayAlignment, lines[i]);
+                }
+
+            } else {
+                painter->drawText(textArea, opt.displayAlignment, opt.text);
+            }
         }
-    }
 
-    // draw the focus rect
-    if(opt.state & QStyle::State_HasFocus) {
-        QStyleOptionFocusRect o;
-        o.QStyleOption::operator=(opt);
-        o.rect = style->proxy()->subElementRect(QStyle::SE_ItemViewItemFocusRect, &opt, opt.widget);
-        o.state |= QStyle::State_KeyboardFocusChange;
-        o.state |= QStyle::State_Item;
+        // draw the focus rect
+        if (opt.state & QStyle::State_HasFocus) {
+            QStyleOptionFocusRect o;
+            o.QStyleOption::operator=(opt);
+            o.rect = style->proxy()->subElementRect(QStyle::SE_ItemViewItemFocusRect, &opt, opt.widget);
+            o.state |= QStyle::State_KeyboardFocusChange;
+            o.state |= QStyle::State_Item;
 
-        QPalette::ColorGroup cg = (opt.state & QStyle::State_Enabled)
-                                  ? QPalette::Normal : QPalette::Disabled;
-        o.backgroundColor = opt.palette.color(cg, (opt.state & QStyle::State_Selected)
-                                              ? QPalette::Highlight : QPalette::Window);
-        style->proxy()->drawPrimitive(QStyle::PE_FrameFocusRect, &o, painter, opt.widget);
+            QPalette::ColorGroup cg = (opt.state & QStyle::State_Enabled) ? QPalette::Normal : QPalette::Disabled;
+            o.backgroundColor = opt.palette.color(cg, (opt.state & QStyle::State_Selected) ? QPalette::Highlight : QPalette::Window);
+            style->proxy()->drawPrimitive(QStyle::PE_FrameFocusRect, &o, painter, opt.widget);
+        }
+    } else {
+        style->drawControl(QStyle::CE_FocusFrame, &opt, painter, editWidget);
     }
 
     painter->restore();
@@ -256,7 +256,7 @@ QSize SplitDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIn
         // check if we are showing the edit widget
         const auto* viewWidget = qobject_cast<const QAbstractItemView*>(opt.widget);
         if (viewWidget) {
-            const auto editIndex = viewWidget->model()->index(index.row(), 0);
+            const auto editIndex = viewWidget->model()->index(index.row(), d->m_editorCol);
             if(editIndex.isValid()) {
                 QWidget* editor = viewWidget->indexWidget(editIndex);
                 if(editor) {
@@ -314,6 +314,7 @@ void SplitDelegate::endEdit()
         }
         Q_EMIT closeEditor(d->m_editor, NoHint);
         d->m_editorRow = -1;
+        d->m_editorCol = -1;
     }
 }
 

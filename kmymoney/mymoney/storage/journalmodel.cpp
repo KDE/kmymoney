@@ -53,6 +53,7 @@ struct JournalModel::Private
         : q(qq)
         , newTransactionModel(nullptr)
         , headerData(QHash<Column, QString>({
+              {Invisible, QLatin1String("invisible")},
               {Number, i18nc("@title:column Cheque Number", "No.")},
               {Date, i18nc("@title:column Valuta date", "Date")},
               {Account, i18nc("@title:column", "Account")},

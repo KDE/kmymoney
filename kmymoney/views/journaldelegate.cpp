@@ -457,7 +457,6 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
     opt.state &= ~QStyle::State_HasFocus;
 
     QAbstractItemView* view = qobject_cast<QAbstractItemView*>(parent());
-    const auto editCol = (d->m_view) ? d->m_view->horizontalHeader()->logicalIndexAt(0) : 0;
     const auto editIndex = index.model()->index(index.row(), d->m_editorCol, index.parent());
     const auto editWidget = (d->m_view) ? d->m_view->indexWidget(editIndex) : nullptr;
 
@@ -467,17 +466,6 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
         opt.state |= QStyle::State_Active;
     } else {
         opt.state &= ~QStyle::State_Active;
-    }
-
-    // if the widget has a different size than what we can paint on
-    // then we adjust the size of the widget so that the focus frame
-    // can be painted correctly using a WidgetHintFrame. The editor
-    // only uses the first column across the whole width
-    if (editWidget && (index.column() == editCol)) {
-        auto size = editWidget->size();
-        if (size.width() != opt.rect.size().width()) {
-            editWidget->resize(size);
-        }
     }
 
     painter->save();
@@ -490,10 +478,10 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
 
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, editWidget ? editWidget : opt.widget);
 
-    QPalette::ColorGroup cg;
-
     // Do not paint text if the edit widget is shown
     if (editWidget == nullptr) {
+        QPalette::ColorGroup cg;
+
         if(view && (index.column() == JournalModel::Column::Detail)) {
             if(view->currentIndex().row() == index.row()) {
                 opt.state |= QStyle::State_HasFocus;
@@ -625,6 +613,9 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
                 }
             }
         }
+    } else {
+        // paint focus frame around edit widget
+        style->drawControl(QStyle::CE_FocusFrame, &opt, painter, editWidget);
     }
 
     painter->restore();

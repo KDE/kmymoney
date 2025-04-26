@@ -1,4 +1,4 @@
-Version=6
+Version=5
 Id=1
 File=kmymoney/kmymoneyrc
 Group=List Options
@@ -37,3 +37,12 @@ File=kmymoney/kmymoneyrc
 Group=Homepage Options,List Options
 Key=HideZeroBalanceLiabilities,HideZeroBalanceAccounts
 RemoveKey=HideZeroBalanceLiabilities
+
+# Remove all journal and split view settings due
+# to newly inserted column in the resp. models
+Id=invisible-column-2025
+File=kmymoney/kmymoneyrc
+RemoveGroup=PayeeLedger
+RemoveGroup=SplitEditor
+RemoveGroup=SplitTransactionEditor
+RemoveGroup=StandardLedger

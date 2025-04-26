@@ -66,6 +66,7 @@ KTransactionSelectDlg::KTransactionSelectDlg(QWidget* parent)
 
     QVector<int> columns;
     columns = {
+        JournalModel::Column::Invisible,
         JournalModel::Column::Number,
         JournalModel::Column::Account,
         JournalModel::Column::Security,

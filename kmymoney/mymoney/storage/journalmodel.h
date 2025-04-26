@@ -138,7 +138,12 @@ class KMM_MYMONEY_EXPORT JournalModel : public MyMoneyModel<JournalEntry>
 
 public:
     enum Column {
-        Number = 0,
+        // The invisible column is needed to fool a QTableView span logic a bit
+        // which otherwise painted grid lines when columns where moved around.
+        // It is hidden in all views by default and not accessible to the user
+        // and otherwise totally unused.
+        Invisible = 0,
+        Number,
         EntryDate,
         Date,
         Account,

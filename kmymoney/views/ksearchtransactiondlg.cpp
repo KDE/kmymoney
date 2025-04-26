@@ -82,6 +82,7 @@ public:
 
         QVector<int> columns;
         columns = {
+            JournalModel::Column::Invisible,
             JournalModel::Column::Number,
             JournalModel::Column::Security,
             JournalModel::Column::CostCenter,
