@@ -231,7 +231,10 @@ void SplitDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
             style->proxy()->drawPrimitive(QStyle::PE_FrameFocusRect, &o, painter, opt.widget);
         }
     } else {
+#ifndef Q_OS_WIN
+        // paint focus frame around edit widget
         style->drawControl(QStyle::CE_FocusFrame, &opt, painter, editWidget);
+#endif
     }
 
     painter->restore();
