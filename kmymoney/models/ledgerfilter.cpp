@@ -213,11 +213,16 @@ bool LedgerFilter::filterAcceptsRow(int source_row, const QModelIndex& source_pa
 
             if (!rc) {
                 QString s(d->filterString);
-                s.replace(MyMoneyMoney::thousandSeparator(), QChar());
+                s.remove(MyMoneyMoney::thousandSeparator());
                 if (!s.isEmpty()) {
-                    rc = idx.data(eMyMoney::Model::SplitFormattedValueRole).toString().contains(s, Qt::CaseInsensitive);
-                    if (!rc)
-                        rc = idx.data(eMyMoney::Model::SplitFormattedSharesRole).toString().contains(s, Qt::CaseInsensitive);
+                    auto matchAmount = [&](int role) -> bool {
+                        return idx.data(role).toString().remove(MyMoneyMoney::thousandSeparator()).contains(s, Qt::CaseInsensitive);
+                    };
+
+                    rc = matchAmount(eMyMoney::Model::SplitFormattedValueRole);
+                    if (!rc) {
+                        rc = matchAmount(eMyMoney::Model::SplitFormattedSharesRole);
+                    }
                 }
             }
             if (!rc)
