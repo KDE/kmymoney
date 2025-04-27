@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-23 01:57+0000\n"
+"POT-Creation-Date: 2025-04-27 01:58+0000\n"
 "PO-Revision-Date: 2022-11-07 20:00+0100\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -272,8 +272,8 @@ msgstr ""
 "<b>Abbrechen</b> drücken."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1657
-#: kmymoney/views/kscheduledview_p.h:200 kmymoney/views/kscheduledview_p.h:315
-#: kmymoney/views/kscheduledview_p.h:319
+#: kmymoney/views/kscheduledview_p.h:199 kmymoney/views/kscheduledview_p.h:319
+#: kmymoney/views/kscheduledview_p.h:323
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Kann geplante Buchung „%1“ nicht eintragen"
@@ -6282,7 +6282,7 @@ msgstr "<qt>Möchten Sie <b>%1</b> als Zahlungsempfänger hinzufügen?</qt>"
 msgid "Unable to add payee"
 msgstr "Zahlungsempfänger kann nicht hinzugefügt werden"
 
-#: kmymoney/kmymoneyutils.cpp:627 kmymoney/views/ktagsview.cpp:641
+#: kmymoney/kmymoneyutils.cpp:627 kmymoney/views/ktagsview.cpp:642
 #, kde-format
 msgid "New Tag"
 msgstr "Neues Stichwort"
@@ -8555,50 +8555,50 @@ msgid "Could not load responsible plugin to view this task."
 msgstr ""
 "Das erforderliche Modul zur Anzeige dieser Aufgabe kann nicht geladen werden."
 
-#: kmymoney/mymoney/splitmodel.cpp:37
+#: kmymoney/mymoney/splitmodel.cpp:38
 #, kde-format
 msgctxt "Split header"
 msgid "Category"
 msgstr "Kategorie"
 
-#: kmymoney/mymoney/splitmodel.cpp:38
+#: kmymoney/mymoney/splitmodel.cpp:39
 #, kde-format
 msgctxt "Split header"
 msgid "Memo"
 msgstr "Notiz"
 
-#: kmymoney/mymoney/splitmodel.cpp:39
+#: kmymoney/mymoney/splitmodel.cpp:40
 #, fuzzy, kde-format
 #| msgid "Tags"
 msgctxt "Split header"
 msgid "Tags"
 msgstr "Stichwörter"
 
-#: kmymoney/mymoney/splitmodel.cpp:40
+#: kmymoney/mymoney/splitmodel.cpp:41
 #, kde-format
 msgctxt "Split header"
 msgid "Payment"
 msgstr "Zahlung"
 
-#: kmymoney/mymoney/splitmodel.cpp:41
+#: kmymoney/mymoney/splitmodel.cpp:42
 #, kde-format
 msgctxt "Split header"
 msgid "Deposit"
 msgstr "Einzahlungen"
 
-#: kmymoney/mymoney/splitmodel.cpp:100
+#: kmymoney/mymoney/splitmodel.cpp:101
 #, kde-format
 msgid "Split transaction"
 msgstr "Split-Buchung"
 
-#: kmymoney/mymoney/splitmodel.cpp:118
-#: kmymoney/mymoney/storage/journalmodel.cpp:201
+#: kmymoney/mymoney/splitmodel.cpp:119
+#: kmymoney/mymoney/storage/journalmodel.cpp:202
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1035
 #, kde-format
 msgid "*** UNASSIGNED ***"
 msgstr "*** NICHT ZUGEWIESEN ***"
 
-#: kmymoney/mymoney/splitmodel.cpp:199 kmymoney/mymoney/splitmodel.cpp:204
+#: kmymoney/mymoney/splitmodel.cpp:200 kmymoney/mymoney/splitmodel.cpp:205
 #: kmymoney/widgets/amountedit.cpp:291 kmymoney/widgets/amountedit.cpp:342
 #: kmymoney/widgets/creditdebitedit.cpp:126
 #: kmymoney/widgets/creditdebitedit.cpp:127
@@ -8617,14 +8617,14 @@ msgid "Not reconciled"
 msgstr "Nicht abgeglichen"
 
 #: kmymoney/mymoney/statusmodel.cpp:36
-#: kmymoney/mymoney/storage/journalmodel.cpp:92
+#: kmymoney/mymoney/storage/journalmodel.cpp:93
 #, kde-format
 msgctxt "Reconciliation flag C"
 msgid "C"
 msgstr "V"
 
 #: kmymoney/mymoney/statusmodel.cpp:41
-#: kmymoney/mymoney/storage/journalmodel.cpp:94
+#: kmymoney/mymoney/storage/journalmodel.cpp:95
 #, kde-format
 msgctxt "Reconciliation flag R"
 msgid "R"
@@ -8637,7 +8637,7 @@ msgid "Reconciled"
 msgstr "Abgeglichen"
 
 #: kmymoney/mymoney/statusmodel.cpp:46
-#: kmymoney/mymoney/storage/journalmodel.cpp:96
+#: kmymoney/mymoney/storage/journalmodel.cpp:97
 #, kde-format
 msgctxt "Reconciliation flag F"
 msgid "F"
@@ -8783,113 +8783,113 @@ msgstr "Kostenstelle"
 msgid "Accounts with no institution assigned"
 msgstr "Konten ohne zugewiesene Geldinstitute"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:56
+#: kmymoney/mymoney/storage/journalmodel.cpp:57
 #, kde-format
 msgctxt "@title:column Cheque Number"
 msgid "No."
 msgstr "Nr."
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:57
+#: kmymoney/mymoney/storage/journalmodel.cpp:58
 #, kde-format
 msgctxt "@title:column Valuta date"
 msgid "Date"
 msgstr "Datum"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:58
+#: kmymoney/mymoney/storage/journalmodel.cpp:59
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:47
 #, kde-format
 msgctxt "@title:column"
 msgid "Account"
 msgstr "Konto"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:59
+#: kmymoney/mymoney/storage/journalmodel.cpp:60
 #, kde-format
 msgctxt "@title:column"
 msgid "Payee"
 msgstr "Zahlungsempfänger"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:60
+#: kmymoney/mymoney/storage/journalmodel.cpp:61
 #, kde-format
 msgctxt "@title:column"
 msgid "Security"
 msgstr "Wertpapier"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:61
+#: kmymoney/mymoney/storage/journalmodel.cpp:62
 #, fuzzy, kde-format
 #| msgid "CC"
 msgctxt "@title:column Costcenter"
 msgid "CC"
 msgstr "KS"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:62
+#: kmymoney/mymoney/storage/journalmodel.cpp:63
 #, kde-format
 msgctxt "@title:column"
 msgid "Detail"
 msgstr "Details"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:63
+#: kmymoney/mymoney/storage/journalmodel.cpp:64
 #, kde-format
 msgctxt "@title:column Reconciliation state"
 msgid "C"
 msgstr "V"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:64
+#: kmymoney/mymoney/storage/journalmodel.cpp:65
 #, kde-format
 msgctxt "@title:column Payment made from account"
 msgid "Payment"
 msgstr "Zahlung"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:65
+#: kmymoney/mymoney/storage/journalmodel.cpp:66
 #, kde-format
 msgctxt "@title:column Deposit into account"
 msgid "Deposit"
 msgstr "Einzahlungen"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:66
+#: kmymoney/mymoney/storage/journalmodel.cpp:67
 #, kde-format
 msgctxt "@title:column"
 msgid "Quantity"
 msgstr "Menge"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:67
+#: kmymoney/mymoney/storage/journalmodel.cpp:68
 #, kde-format
 msgctxt "@title:column"
 msgid "Price"
 msgstr "Preis"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:68
+#: kmymoney/mymoney/storage/journalmodel.cpp:69
 #, kde-format
 msgctxt "@title:column"
 msgid "Amount"
 msgstr "Betrag"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:69
+#: kmymoney/mymoney/storage/journalmodel.cpp:70
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:50
 #, kde-format
 msgctxt "@title:column"
 msgid "Value"
 msgstr "Wert"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:70
+#: kmymoney/mymoney/storage/journalmodel.cpp:71
 #, kde-format
 msgctxt "@title:column"
 msgid "Balance"
 msgstr "Saldo"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:71
+#: kmymoney/mymoney/storage/journalmodel.cpp:72
 #, kde-format
 msgctxt "@title:column Entry date"
 msgid "Entry"
 msgstr "Eingabe"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:74
+#: kmymoney/mymoney/storage/journalmodel.cpp:75
 #, fuzzy, kde-format
 #| msgid "Number"
 msgctxt "@title:column Cheque Number (ext)"
 msgid "Number"
 msgstr "Nummer"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:75
+#: kmymoney/mymoney/storage/journalmodel.cpp:76
 #, fuzzy, kde-format
 #| msgctxt "Ledger marker showing a reconciliation entry"
 #| msgid "Reconciliation"
@@ -8897,117 +8897,117 @@ msgctxt "@title:column Reconciliation state (ext)"
 msgid "Reconciliation"
 msgstr "Abgleich"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:76
+#: kmymoney/mymoney/storage/journalmodel.cpp:77
 #, fuzzy, kde-format
 #| msgid "Cost center"
 msgctxt "@title:column CostCenter (ext)"
 msgid "Cost center"
 msgstr "Kostenstelle"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:77
+#: kmymoney/mymoney/storage/journalmodel.cpp:78
 #, fuzzy, kde-format
 #| msgid "Entry order"
 msgctxt "@title:column Entry date (ext)"
 msgid "Entry date"
 msgstr "Eingabe-Reihenfolge"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:80
+#: kmymoney/mymoney/storage/journalmodel.cpp:81
 #, fuzzy, kde-format
 #| msgid "Account Balances by Institution"
 msgctxt "@info:toolbox Balance)"
 msgid "Account balance or security units"
 msgstr "Kontensalden pro Geldinstitut"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:106
+#: kmymoney/mymoney/storage/journalmodel.cpp:107
 #, kde-format
 msgctxt "Reconciliation flag empty"
 msgid "Not reconciled"
 msgstr "Nicht abgeglichen"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:108
+#: kmymoney/mymoney/storage/journalmodel.cpp:109
 #, kde-format
 msgctxt "Reconciliation flag C"
 msgid "Cleared"
 msgstr "Verrechnet"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:110
+#: kmymoney/mymoney/storage/journalmodel.cpp:111
 #, kde-format
 msgctxt "Reconciliation flag R"
 msgid "Reconciled"
 msgstr "Abgeglichen"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:112
+#: kmymoney/mymoney/storage/journalmodel.cpp:113
 #, kde-format
 msgctxt "Reconciliation flag F"
 msgid "Frozen"
 msgstr "Eingefroren"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:121
+#: kmymoney/mymoney/storage/journalmodel.cpp:122
 #, kde-format
 msgctxt "Add securities/shares/bonds"
 msgid "Add shares"
 msgstr "Anteile hinzufügen"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:123
+#: kmymoney/mymoney/storage/journalmodel.cpp:124
 #, kde-format
 msgctxt "Remove securities/shares/bonds"
 msgid "Remove shares"
 msgstr "Anteile entfernen"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:125
+#: kmymoney/mymoney/storage/journalmodel.cpp:126
 #, kde-format
 msgctxt "Buy securities/shares/bonds"
 msgid "Buy shares"
 msgstr "Anteile kaufen"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:127
+#: kmymoney/mymoney/storage/journalmodel.cpp:128
 #, kde-format
 msgctxt "Sell securities/shares/bonds"
 msgid "Sell shares"
 msgstr "Anteile verkaufen"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:129
+#: kmymoney/mymoney/storage/journalmodel.cpp:130
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:45
 #, kde-format
 msgid "Dividend"
 msgstr "Dividende"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:131
+#: kmymoney/mymoney/storage/journalmodel.cpp:132
 #, kde-format
 msgid "Reinvest Dividend"
 msgstr "Wiederanlage der Dividende"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:133
+#: kmymoney/mymoney/storage/journalmodel.cpp:134
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:47
 #, kde-format
 msgid "Yield"
 msgstr "Ertrag"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:135
+#: kmymoney/mymoney/storage/journalmodel.cpp:136
 #, kde-format
 msgctxt "Split securities/shares/bonds"
 msgid "Split shares"
 msgstr "Anteile stückeln"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:137
+#: kmymoney/mymoney/storage/journalmodel.cpp:138
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:51
 #, kde-format
 msgid "Interest Income"
 msgstr "Zinseinkünfte"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:139
+#: kmymoney/mymoney/storage/journalmodel.cpp:140
 #, kde-format
 msgctxt "Unknown investment activity"
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:235
+#: kmymoney/mymoney/storage/journalmodel.cpp:236
 #, fuzzy, kde-format
 #| msgid "Expense categories"
 msgid "Multiple fee categories"
 msgstr "Ausgabekategorien"
 
-#: kmymoney/mymoney/storage/journalmodel.cpp:235
+#: kmymoney/mymoney/storage/journalmodel.cpp:236
 #, fuzzy, kde-format
 #| msgid "Interest category"
 msgid "Multiple interest categories"
@@ -15311,13 +15311,13 @@ msgid "Include subaccounts"
 msgstr "Unterkonten einschließen"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:145
-#: kmymoney/views/kpayeesview_p.h:808
+#: kmymoney/views/kpayeesview_p.h:809
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<qt>Möchten Sie die Änderungen für <b>%1</b> wirklich speichern?</qt>"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:146
-#: kmymoney/views/kpayeesview_p.h:809 kmymoney/views/ktagsview.cpp:290
+#: kmymoney/views/kpayeesview_p.h:810 kmymoney/views/ktagsview.cpp:291
 #, kde-format
 msgid "Save changes"
 msgstr "Änderungen speichern"
@@ -20647,7 +20647,7 @@ msgid "<p>Do you really want to merge the selected payees?"
 msgstr ""
 "<p>Möchten Sie die ausgewählten Zahlungsempfänger wirklich zusammenführen?"
 
-#: kmymoney/views/kpayeesview.cpp:607 kmymoney/views/kpayeesview_p.h:584
+#: kmymoney/views/kpayeesview.cpp:607 kmymoney/views/kpayeesview_p.h:585
 #, kde-format
 msgid "Merge Payees"
 msgstr "Empfänger zusammenführen"
@@ -20941,7 +20941,7 @@ msgctxt "@item Show only unused payees"
 msgid "Unused"
 msgstr "Nicht zugewiesen"
 
-#: kmymoney/views/kpayeesview_p.h:179 kmymoney/views/ktagsview.cpp:183
+#: kmymoney/views/kpayeesview_p.h:179 kmymoney/views/ktagsview.cpp:184
 #, kde-format
 msgctxt "Placeholder text"
 msgid "Search"
@@ -20956,17 +20956,17 @@ msgctxt ""
 msgid "Add"
 msgstr "Hinzufügen"
 
-#: kmymoney/views/kpayeesview_p.h:364 kmymoney/views/ktagsview.cpp:213
+#: kmymoney/views/kpayeesview_p.h:365 kmymoney/views/ktagsview.cpp:214
 #, kde-format
 msgid "Balance: %1"
 msgstr "Saldo: %1"
 
-#: kmymoney/views/kpayeesview_p.h:408 kmymoney/views/ktagsview.cpp:257
+#: kmymoney/views/kpayeesview_p.h:409 kmymoney/views/ktagsview.cpp:258
 #, kde-format
 msgid "Balance: %1%2"
 msgstr "Saldo: %1%2"
 
-#: kmymoney/views/kpayeesview_p.h:493
+#: kmymoney/views/kpayeesview_p.h:494
 #, kde-format
 msgid ""
 "At least one transaction/scheduled transaction or loan account is still "
@@ -20979,17 +20979,17 @@ msgstr ""
 "einer muss erhalten bleiben, sodass diesem die Buchungen oder das "
 "Kreditkonto neu zugewiesen werden können."
 
-#: kmymoney/views/kpayeesview_p.h:580
+#: kmymoney/views/kpayeesview_p.h:581
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
 msgstr "Kann Zahlungsempfänger der (Teil-)Buchung nicht neu zuweisen"
 
-#: kmymoney/views/kpayeesview_p.h:584
+#: kmymoney/views/kpayeesview_p.h:585
 #, kde-format
 msgid "Nothing to merge."
 msgstr "Nichts zum Zusammenführen."
 
-#: kmymoney/views/kpayeesview_p.h:667
+#: kmymoney/views/kpayeesview_p.h:668
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "Zahlungsempfänger kann nicht entfernt werden"
@@ -21035,7 +21035,7 @@ msgid "Unable to duplicate scheduled transaction: '%1'"
 msgstr "Die geplante Buchung „%1“ kann nicht dupliziert werden."
 
 #: kmymoney/views/kscheduledview.cpp:250 kmymoney/views/kscheduledview.cpp:263
-#: kmymoney/views/kscheduledview_p.h:409
+#: kmymoney/views/kscheduledview_p.h:402
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"
 msgstr "Unbekannte geplante Buchung „%1“"
@@ -21053,7 +21053,7 @@ msgctxt "Placeholdertext in schedulesview"
 msgid "Filter"
 msgstr "Filter"
 
-#: kmymoney/views/kscheduledview_p.h:104
+#: kmymoney/views/kscheduledview_p.h:103
 #, fuzzy, kde-format
 #| msgid "Schedule found"
 msgctxt "@info:placeholder"
@@ -21081,7 +21081,7 @@ msgctxt "@title:window"
 msgid "Stop entering schedule"
 msgstr "Buchung planen"
 
-#: kmymoney/views/kscheduledview_p.h:355
+#: kmymoney/views/kscheduledview_p.h:348
 #, kde-format
 msgid ""
 "<qt>Do you really want to skip the <b>%1</b> transaction scheduled for <b>"
@@ -21090,14 +21090,14 @@ msgstr ""
 "<qt>Möchten Sie die Zahlung der geplanten Buchung <b>%1</b> am <b>%2</b> "
 "wirklich überspringen?</qt>"
 
-#: kmymoney/views/kscheduledview_p.h:358
+#: kmymoney/views/kscheduledview_p.h:351
 #, fuzzy, kde-format
 #| msgid "Edit scheduled transaction"
 msgctxt "@title:window"
 msgid "Skip scheduled transaction"
 msgstr "Geplante Buchung bearbeiten"
 
-#: kmymoney/views/kscheduledview_p.h:371
+#: kmymoney/views/kscheduledview_p.h:364
 #, kde-format
 msgid "<qt>Unable to skip scheduled transaction <b>%1</b>.</qt>"
 msgstr ""
@@ -21115,7 +21115,7 @@ msgctxt "@info:tooltip for find transaction apply button"
 msgid "Search transactions"
 msgstr "Buchungen suchen"
 
-#: kmymoney/views/ksearchtransactiondlg.cpp:109
+#: kmymoney/views/ksearchtransactiondlg.cpp:110
 #, fuzzy, kde-format
 #| msgid "Found %1 matching transaction"
 #| msgid_plural "Found %1 matching transactions"
@@ -21172,12 +21172,12 @@ msgctxt "@item Show only closed tags"
 msgid "Closed"
 msgstr "Geschlossen"
 
-#: kmymoney/views/ktagsview.cpp:289
+#: kmymoney/views/ktagsview.cpp:290
 #, kde-format
 msgid "Do you want to save the changes for <b>%1</b>?"
 msgstr "Möchten Sie die Änderungen für <b>%1</b> wirklich speichern?"
 
-#: kmymoney/views/ktagsview.cpp:376
+#: kmymoney/views/ktagsview.cpp:377
 #, kde-format
 msgid ""
 "A tag with the name '%1' already exists. It is not advisable to have "
@@ -21188,24 +21188,24 @@ msgstr ""
 "empfehlenswert, mehrere Stichwörter mit dem gleichen Namen zu haben. Sind "
 "Sie sicher, dass Sie das Stichwort umbenennen möchten?"
 
-#: kmymoney/views/ktagsview.cpp:380
+#: kmymoney/views/ktagsview.cpp:381
 #, fuzzy, kde-format
 #| msgid "Duplicate tag"
 msgctxt "@title:window"
 msgid "Duplicate tag name"
 msgstr "Doppeltes Stichwort"
 
-#: kmymoney/views/ktagsview.cpp:403 kmymoney/views/ktagsview.cpp:527
+#: kmymoney/views/ktagsview.cpp:404 kmymoney/views/ktagsview.cpp:528
 #, kde-format
 msgid "Unable to modify tag"
 msgstr "Stichwort kann nicht geändert werden"
 
-#: kmymoney/views/ktagsview.cpp:812
+#: kmymoney/views/ktagsview.cpp:813
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Stichwort der (Teil-)Buchung kann nicht neu zugewiesen werden"
 
-#: kmymoney/views/ktagsview.cpp:824
+#: kmymoney/views/ktagsview.cpp:825
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Stichwörter können nicht entfernt werden"
@@ -21235,12 +21235,12 @@ msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
 msgstr "Buchungen ohne Empfänger auswählen"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:127
+#: kmymoney/views/ktransactionselectdlg.cpp:128
 #, kde-format
 msgid "Merge Transactions"
 msgstr "Buchungen zusammenführen"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:129
+#: kmymoney/views/ktransactionselectdlg.cpp:130
 #, kde-format
 msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
@@ -21249,7 +21249,7 @@ msgid ""
 "the other one press the exchange button on the right."
 msgstr ""
 
-#: kmymoney/views/ktransactionselectdlg.cpp:135
+#: kmymoney/views/ktransactionselectdlg.cpp:136
 #, fuzzy, kde-format
 #| msgid "Unable to match the selected transactions"
 msgctxt "@info:tooltip Exchange transactions about to merge"
