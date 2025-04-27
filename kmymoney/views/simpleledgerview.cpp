@@ -129,20 +129,42 @@ public:
         accountsModel->setSourceModel(model);
         accountsModel->sort(AccountsModel::Column::AccountName);
 
-        accountCombo = new KMyMoneyAccountCombo(accountsModel, ui->ledgerTab);
-        accountCombo->setEditable(true);
-        accountCombo->setSplitActionVisible(false);
-        accountCombo->hide();
-        q->connect(accountCombo, &KMyMoneyAccountCombo::accountSelected, q, &SimpleLedgerView::openLedger);
+        createAccountsCombo();
 
-        accountCombo->installEventFilter(q);
-        accountCombo->popup()->installEventFilter(q);
         ui->ledgerTab->installEventFilter(q);
 
         updateTitlePage();
 
         q->tabSelected(0);
         openLedgersAfterFileOpen();
+    }
+
+    void createAccountsCombo()
+    {
+        // Don't do anything if the view is not initialized or
+        // the account combo box is already created
+        if (m_needInit || (accountCombo != nullptr))
+            return;
+
+        Q_Q(SimpleLedgerView);
+        accountCombo = new KMyMoneyAccountCombo(ui->ledgerTab);
+        accountCombo->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLengthWithIcon);
+
+        accountCombo->setEditable(true);
+        accountCombo->setSplitActionVisible(false);
+        accountCombo->hide();
+        q->connect(accountCombo, &KMyMoneyAccountCombo::accountSelected, q, &SimpleLedgerView::openLedger);
+
+        accountCombo->installEventFilter(q);
+        accountCombo->setModel(accountsModel);
+        accountCombo->setCurrentIndex(-1);
+        accountCombo->popup()->installEventFilter(q);
+    }
+
+    void destroyAccountsCombo()
+    {
+        delete accountCombo;
+        accountCombo = nullptr;
     }
 
     void openLedgersAfterFileOpen()
@@ -450,6 +472,8 @@ public:
 
     void showAccountSelector(SimpleLedgerView* q)
     {
+        createAccountsCombo();
+
         const auto idx = ui->ledgerTab->count() - 1;
         const auto rect = ui->ledgerTab->tabBar()->tabRect(idx);
         if (!accountCombo->isVisible()) {
@@ -497,6 +521,11 @@ SimpleLedgerView::SimpleLedgerView(QWidget *parent) :
     connect(MyMoneyFile::instance()->accountsModel(), &QAbstractItemModel::dataChanged, this, [&](const QModelIndex& topLeft, const QModelIndex& bottomRight) {
         Q_D(SimpleLedgerView);
         if (!d->m_needInit) {
+            // the account combo is destroyed as it might need a different
+            // size for a longer account name. It will automatically be
+            // recreated when the + tab is clicked.
+            d->destroyAccountsCombo();
+
             Q_ASSERT(topLeft.parent() == bottomRight.parent());
             for (int row = topLeft.row(); row <= bottomRight.row(); ++row) {
                 const auto idx = MyMoneyFile::instance()->accountsModel()->index(row, 0, topLeft.parent());
@@ -559,7 +588,9 @@ void SimpleLedgerView::tabClicked(int idx)
         if (view) {
             view->prepareToShow();
         }
-        d->accountCombo->hide();
+        if (d->accountCombo) {
+            d->accountCombo->hide();
+        }
     }
 }
 
@@ -847,11 +878,13 @@ void SimpleLedgerView::executeAction(eMenu::Action action, const SelectedObjects
         break;
 
     case eMenu::Action::FileNew:
+        d->createAccountsCombo();
         d->openLedgersAfterFileOpen();
         break;
 
     case eMenu::Action::FileClose:
         d->closeLedgers();
+        d->destroyAccountsCombo();
         break;
 
     case eMenu::Action::CloseAccount:
