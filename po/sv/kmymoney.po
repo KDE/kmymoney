@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 01:58+0000\n"
+"POT-Creation-Date: 2025-04-28 01:58+0000\n"
 "PO-Revision-Date: 2025-04-06 14:48+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -21328,7 +21328,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Skillnad: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:328
+#: kmymoney/views/simpleledgerview.cpp:350
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21339,7 +21339,7 @@ msgstr ""
 "stämma av det. Avsluta, avbryt eller senarelägg avstämningen för att få "
 "tillbaka den."
 
-#: kmymoney/views/simpleledgerview.cpp:441
+#: kmymoney/views/simpleledgerview.cpp:463
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21349,7 +21349,7 @@ msgstr ""
 "Sidan visar kontohuvudboken. För närvarande finns inga konton, så den här "
 "texten visas istället."
 
-#: kmymoney/views/simpleledgerview.cpp:444
+#: kmymoney/views/simpleledgerview.cpp:466
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21359,12 +21359,12 @@ msgstr ""
 "Sidan visar kontohuvudboken. För närvarande är inga konton valda, så den här "
 "texten visas istället."
 
-#: kmymoney/views/simpleledgerview.cpp:712
+#: kmymoney/views/simpleledgerview.cpp:743
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Visa webbplats för <b>%1</b> i webbläsaren."
 
-#: kmymoney/views/simpleledgerview.cpp:896
+#: kmymoney/views/simpleledgerview.cpp:929
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -21373,7 +21373,7 @@ msgstr ""
 "Vyn kan inte stängas, eftersom kontot håller på att avstämmas. Slutför, "
 "avbryt eller senarelägg först avstämningen."
 
-#: kmymoney/views/simpleledgerview.cpp:897
+#: kmymoney/views/simpleledgerview.cpp:930
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"

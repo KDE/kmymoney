@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 01:58+0000\n"
-"PO-Revision-Date: 2025-04-10 16:09+0200\n"
+"POT-Creation-Date: 2025-04-28 01:58+0000\n"
+"PO-Revision-Date: 2025-04-23 09:12+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -50,8 +50,7 @@ msgid "Invalid Statement"
 msgstr "Estratto conto non valido"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:485
-#, fuzzy, kde-format
-#| msgid "No Institution"
+#, kde-format
 msgctxt "@info Group name for accounts with no assigned institution"
 msgid "No institution"
 msgstr "Nessun istituto"
@@ -432,11 +431,10 @@ msgstr[1] "%1 estratti conto sono stati elaborati con i seguenti risultati:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ImportSummaryDialog)
 #: kmymoney/dialogs/importsummarydlg.ui:14
-#, fuzzy, kde-format
-#| msgid "Imported History"
+#, kde-format
 msgctxt "@title:window"
 msgid "Import summary"
-msgstr "Storico importato"
+msgstr "Riepilogo dell'importazione"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonSkip)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonCancel)
@@ -4587,10 +4585,9 @@ msgstr ""
 "suggerimenti."
 
 #: kmymoney/kcreditswindow.cpp:45
-#, fuzzy, kde-format
-#| msgid "(c) 2000-2024 The KMyMoney development team"
+#, kde-format
 msgid "(c) 2000-2025 The KMyMoney development team"
-msgstr "(c) 2000-2024 La squadra di sviluppo di KMyMoney"
+msgstr "(c) 2000-2025 La squadra di sviluppo di KMyMoney"
 
 #: kmymoney/kcreditswindow.cpp:49
 #, kde-format
@@ -5603,11 +5600,13 @@ msgstr "File già esistente"
 msgid ""
 "This will hide the menu bar completely. You can show it again by typing %1."
 msgstr ""
+"In questo modo la barra dei menu sarà nascosta completamente. Puoi mostrarla "
+"nuovamente digitando %1."
 
 #: kmymoney/kmymoney.cpp:3258
 #, kde-format
 msgid "Hide menu bar"
-msgstr ""
+msgstr "Nascondi la barra dei menu"
 
 #: kmymoney/kmymoney.cpp:3360
 #, kde-format
@@ -6445,55 +6444,46 @@ msgid "Name"
 msgstr "Nome"
 
 #: kmymoney/models/statementmodel.cpp:95
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "@title:column Shows the date of statement"
 msgid "Date"
 msgstr "Data"
 
 #: kmymoney/models/statementmodel.cpp:97
-#, fuzzy, kde-format
-#| msgid "Balance"
+#, kde-format
 msgctxt "@title:column Shows statement balance"
 msgid "Balance"
 msgstr "Saldo"
 
 #: kmymoney/models/statementmodel.cpp:99
-#, fuzzy, kde-format
-#| msgid "    %1 processed"
-#| msgid_plural "    %1 processed"
+#, kde-format
 msgctxt "@title:column Shows number of transactions read"
 msgid "Processed"
-msgstr "    %1 elaborata"
+msgstr "Elaborate"
 
 #: kmymoney/models/statementmodel.cpp:101
-#, fuzzy, kde-format
-#| msgid "Imported"
+#, kde-format
 msgctxt "@title:column Shows number of imported transactions"
 msgid "Imported"
 msgstr "Importate"
 
 #: kmymoney/models/statementmodel.cpp:103
-#, fuzzy, kde-format
-#| msgid "Matched"
+#, kde-format
 msgctxt "@title:column Shows number of matched transactions"
 msgid "Matched"
 msgstr "Abbinate"
 
 #: kmymoney/models/statementmodel.cpp:105
-#, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
-#| msgid "Duplicate"
+#, kde-format
 msgctxt "@title:column Shows number of duplicate transactions"
 msgid "Duplicates"
-msgstr "Duplica"
+msgstr "Duplicate"
 
 #: kmymoney/models/statementmodel.cpp:107
-#, fuzzy, kde-format
-#| msgid "Payee creation"
+#, kde-format
 msgctxt "@title:column Shows number of create payees"
 msgid "Payees created"
-msgstr "Creazione beneficiario"
+msgstr "Beneficiari creati"
 
 #: kmymoney/models/statementmodel.cpp:117
 #: kmymoney/mymoney/storage/accountsmodel.cpp:503
@@ -21488,7 +21478,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Differenza: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:328
+#: kmymoney/views/simpleledgerview.cpp:350
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21499,7 +21489,7 @@ msgstr ""
 "riconciliando. Termina, annulla o rinvia la riconciliazione per "
 "ripristinarlo."
 
-#: kmymoney/views/simpleledgerview.cpp:441
+#: kmymoney/views/simpleledgerview.cpp:463
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21509,7 +21499,7 @@ msgstr ""
 "Questa pagina mostra il registro dei conti. Al momento, non esistono conti, "
 "quindi viene visualizzato questo testo."
 
-#: kmymoney/views/simpleledgerview.cpp:444
+#: kmymoney/views/simpleledgerview.cpp:466
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21519,12 +21509,12 @@ msgstr ""
 "Questa pagina mostra il registro dei conti. Al momento, nessun conto è "
 "selezionato, quindi viene mostrato questo testo."
 
-#: kmymoney/views/simpleledgerview.cpp:712
+#: kmymoney/views/simpleledgerview.cpp:743
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Apri il sito web di <b>%1</b> nel tuo browser."
 
-#: kmymoney/views/simpleledgerview.cpp:896
+#: kmymoney/views/simpleledgerview.cpp:929
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -21533,7 +21523,7 @@ msgstr ""
 "Non puoi chiudere questa visualizzazione perché stai riconciliando il conto. "
 "Termina, annulla o posticipa prima la riconciliazione."
 
-#: kmymoney/views/simpleledgerview.cpp:897
+#: kmymoney/views/simpleledgerview.cpp:930
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 01:58+0000\n"
+"POT-Creation-Date: 2025-04-28 01:58+0000\n"
 "PO-Revision-Date: 2025-04-22 11:32+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -21462,7 +21462,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Verschil: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:328
+#: kmymoney/views/simpleledgerview.cpp:350
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21473,7 +21473,7 @@ msgstr ""
 "aan het doen bent. Maak af, annuleer of stel de verificatie uit om deze "
 "terug te krijgen."
 
-#: kmymoney/views/simpleledgerview.cpp:441
+#: kmymoney/views/simpleledgerview.cpp:463
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21483,7 +21483,7 @@ msgstr ""
 "Deze pagina toont het grootboek van de rekening. Er bestaan op dit moment "
 "geen rekeningen dus wordt in plaats daarvan deze tekst getoond."
 
-#: kmymoney/views/simpleledgerview.cpp:444
+#: kmymoney/views/simpleledgerview.cpp:466
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21493,12 +21493,12 @@ msgstr ""
 "Deze pagina toont het grootboek van de rekening. Er zijn op dit moment geen "
 "rekeningen geselecteerd dus wordt in plaats daarvan deze tekst getoond."
 
-#: kmymoney/views/simpleledgerview.cpp:712
+#: kmymoney/views/simpleledgerview.cpp:743
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Website van <b>%1</b> in uw browser openen."
 
-#: kmymoney/views/simpleledgerview.cpp:896
+#: kmymoney/views/simpleledgerview.cpp:929
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -21508,7 +21508,7 @@ msgstr ""
 "rekening te controleren. Beëindig, annuleer het controleren eerst of stel "
 "uit."
 
-#: kmymoney/views/simpleledgerview.cpp:897
+#: kmymoney/views/simpleledgerview.cpp:930
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"

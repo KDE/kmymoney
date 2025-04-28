@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 01:58+0000\n"
+"POT-Creation-Date: 2025-04-28 01:58+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -21187,7 +21187,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "차액: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:328
+#: kmymoney/views/simpleledgerview.cpp:350
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21197,7 +21197,7 @@ msgstr ""
 "이 계좌를 정산하고 있으므로 계좌 폐쇄 단추가 삭제되었습니다. 계좌 폐쇄 단추"
 "를 복원하려면 정산 작업을 완료나 취소, 연기하십시오."
 
-#: kmymoney/views/simpleledgerview.cpp:441
+#: kmymoney/views/simpleledgerview.cpp:463
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21205,7 +21205,7 @@ msgid ""
 "text is shown instead."
 msgstr "이 페이지에서는 계좌 원장을 표시합니다. 현재 설정된 계좌가 없습니다."
 
-#: kmymoney/views/simpleledgerview.cpp:444
+#: kmymoney/views/simpleledgerview.cpp:466
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21213,12 +21213,12 @@ msgid ""
 "this text is shown instead."
 msgstr "이 페이지에서는 계좌 원장을 표시합니다. 현재 선택한 계좌가 없습니다."
 
-#: kmymoney/views/simpleledgerview.cpp:712
+#: kmymoney/views/simpleledgerview.cpp:743
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "브라우저에서 <b>%1</b> 웹사이트를 여십시오."
 
-#: kmymoney/views/simpleledgerview.cpp:896
+#: kmymoney/views/simpleledgerview.cpp:929
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -21227,7 +21227,7 @@ msgstr ""
 "이 계좌를 정산하고 있으므로 계좌를 폐쇄할 수 없습니다. 정산 작업을 완료나 취"
 "소, 연기하십시오."
 
-#: kmymoney/views/simpleledgerview.cpp:897
+#: kmymoney/views/simpleledgerview.cpp:930
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
