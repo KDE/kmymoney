@@ -1,5 +1,5 @@
-Date,Num,Payee,Tags,Account,Price,Amount
+Date,Num,Payee,Tags,Account,Amount
 "[Empty Payee]"
-"2024-01-04","","[Empty Payee]","[No Tag]","L"," 1.0000"," -50.00"
-Total [Empty Payee],,,,,," -50.00"
-Grand Total,,,,,," -50.00"
+"2024-01-04","","[Empty Payee]","[No Tag]","L"," -50.00"
+Total [Empty Payee],,,,," -50.00"
+Grand Total,,,,," -50.00"

@@ -842,16 +842,14 @@ void QueryTableTest::testBalanceColumn()
         QString closingDate = MyMoneyUtils::formatDate(QDate(2005, 9, 1));
         QVERIFY(html.indexOf(openingDate + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Opening Balance")) > 0);
         QVERIFY(html.indexOf(closingDate + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Closing Balance")
-                             + "</td><td class=\"left0\"></td><td>&nbsp;1.0000</td><td class=\"value\"></td><td>&nbsp;-702.36</td></tr>")
+                             + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>&nbsp;-702.36</td></tr>")
                 > 0);
         QVERIFY(html.indexOf(closingDate + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Closing Balance")
-                             + "</td><td class=\"left0\"></td><td>&nbsp;1.0000</td><td class=\"value\"></td><td>&nbsp;-705.69</td></tr>")
+                             + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>&nbsp;-705.69</td></tr>")
                 > 0);
-
     } catch (const MyMoneyException &e) {
         QFAIL(e.what());
     }
-
 }
 
 void QueryTableTest::testBalanceColumnWithMultipleCurrencies()

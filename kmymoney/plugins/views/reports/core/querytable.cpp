@@ -23,21 +23,22 @@
 // Project Includes
 
 #include "cashflowlist.h"
-#include "mymoneyfile.h"
-#include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
-#include "mymoneyinstitution.h"
-#include "mymoneyprice.h"
-#include "mymoneypayee.h"
-#include "mymoneytag.h"
-#include "mymoneysplit.h"
-#include "mymoneytransaction.h"
-#include "mymoneyreport.h"
-#include "mymoneyexception.h"
-#include "mymoneyutils.h"
 #include "kmymoneyutils.h"
-#include "reportaccount.h"
+#include "mymoneyaccount.h"
 #include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneyinstitution.h"
+#include "mymoneypayee.h"
+#include "mymoneyprice.h"
+#include "mymoneyreport.h"
+#include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "mymoneytag.h"
+#include "mymoneytransaction.h"
+#include "mymoneyutils.h"
+#include "pricemodel.h"
+#include "reportaccount.h"
 
 constexpr QChar tagSeparator = QChar(QChar::ParagraphSeparator);
 
@@ -190,9 +191,10 @@ void QueryTable::init()
     if (qc & eMyMoney::Report::QueryColumn::Shares)
         m_columns << ctShares;
     // When loading reports from a file, it is ensured that the price column is displayed
-    // when using currency conversion. However, there are cases where this does not apply
-    // (e.g. test cases), so here it is ensured that the corresponding column is displayed.
-    if (qc & eMyMoney::Report::QueryColumn::Price || m_config.isConvertCurrency())
+    // when using currency conversion and there are prices available. However, there are
+    // cases where this does not apply (e.g. test cases), so here it is ensured that the
+    // corresponding column is displayed.
+    if (qc & eMyMoney::Report::QueryColumn::Price || (m_config.isConvertCurrency() && MyMoneyFile::instance()->priceModel()->rowCount() > 0))
         m_priceColumn << ctPrice;
     if (qc & eMyMoney::Report::QueryColumn::Performance) {
         m_subtotal.clear();

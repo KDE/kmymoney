@@ -391,6 +391,11 @@ public:
                     m_file->setFileFixVersion(8);
                     break;
 
+                case 8:
+                    fixFile_8();
+                    m_file->setFileFixVersion(9);
+                    break;
+
                 // add new levels above. Don't forget to increase availableFixVersion() for all
                 // the storage backends this fix applies to
                 default:
@@ -407,6 +412,29 @@ public:
     /* DO NOT ADD code to this function or any of it's called ones.
        Instead, create a new function, fixFile_n, and modify the applyFileFixes()
        logic above to call it */
+
+    void fixFile_8()
+    {
+        const auto file = MyMoneyFile::instance();
+        const auto model = file->reportsModel();
+        const auto hasPrices = file->priceModel()->rowCount() > 0;
+
+        // scan the reports and add price column if currency conversion is activated
+        auto count = 0;
+        const auto rows = model->rowCount();
+        for (int row = 0; row < rows; ++row) {
+            const auto idx = model->index(row, 0);
+            MyMoneyReport report = model->itemByIndex(idx);
+            unsigned qc = report.queryColumns();
+            if (!report.isInvestmentsOnly() && !report.isLoansOnly() && report.isConvertCurrency() && !hasPrices) {
+                qc &= ~eMyMoney::Report::QueryColumn::Price;
+                report.setQueryColumns((eMyMoney::Report::QueryColumn)qc);
+                file->modifyReport(report);
+                ++count;
+            }
+        }
+        qDebug() << count << "reports(s) fixed in" << __FUNCTION__;
+    }
 
     void fixFile_7()
     {

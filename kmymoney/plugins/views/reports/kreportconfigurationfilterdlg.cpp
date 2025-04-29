@@ -27,15 +27,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ktransactionfilter.h"
-#include "kmymoneyaccountselector.h"
-#include "mymoneyfile.h"
-#include "mymoneyexception.h"
-#include "mymoneybudget.h"
-#include "mymoneyreport.h"
 #include "daterangedlg.h"
-#include "reporttabimpl.h"
+#include "kmymoneyaccountselector.h"
+#include "ktransactionfilter.h"
+#include "mymoneybudget.h"
 #include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneyreport.h"
+#include "pricemodel.h"
+#include "reporttabimpl.h"
 
 #include <ui_kreportconfigurationfilterdlg.h>
 #include <ui_reporttabgeneral.h>
@@ -213,8 +214,10 @@ void KReportConfigurationFilterDlg::slotConvertCurrencyChanged(int state)
     // Previous state is saved into the tristate flag
     if (state) {
         box->setTristate(box->checkState());
-        box->setChecked(true);
-        box->setEnabled(false);
+        if (MyMoneyFile::instance()->priceModel()->rowCount() > 0) {
+            box->setChecked(true);
+            box->setEnabled(false);
+        }
     } else {
         box->setChecked(box->isTristate());
         box->setTristate(false);

@@ -215,7 +215,7 @@ public:
      * @note keep in sync with MyMoneyDbDef::m_currentVersion
      */
     constexpr static int availableFixVersion() {
-        return 8;
+        return 9;
     }
 
     /**
