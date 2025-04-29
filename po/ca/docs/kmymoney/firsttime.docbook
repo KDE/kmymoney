@@ -429,20 +429,6 @@
 >Següent</guibutton
 > per a continuar. </para>
 
-<screenshot>
-  <screeninfo
->Pàgina de preferències</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="newfile-5.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->Pàgina de preferències</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
-
 <para
 >Aquesta és la pàgina final de l'assistent. Si seleccioneu la casella de selecció <quote
 >Configura les preferències després de finalitzar l'assistent</quote
@@ -453,7 +439,7 @@
 >Pàgina de selecció del nom de fitxer</screeninfo>
   <mediaobject>
     <imageobject>
-      <imagedata fileref="newfile-6.png" format="PNG"/>
+      <imagedata fileref="newfile-5.png" format="PNG"/>
     </imageobject>
     <textobject>
       <phrase

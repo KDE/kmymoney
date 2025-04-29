@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-28 01:58+0000\n"
-"PO-Revision-Date: 2025-04-23 11:48+0200\n"
+"PO-Revision-Date: 2025-04-23 18:19+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -8073,7 +8073,7 @@ msgstr "Uruguay, Peso"
 #: kmymoney/mymoney/mymoneyfile.cpp:4102
 #, kde-format
 msgid "Uzbekistani Sum"
-msgstr "Ouzbékistan, Sum"
+msgstr "Ouzbékistan Sum"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:4103
 #, kde-format
@@ -19517,7 +19517,7 @@ msgctxt "@info Unable to edit "
 msgid ""
 "KMyMoney does not support to edit transaction that reference closed accounts."
 msgstr ""
-"KMymoney ne prend pas en charge la modification d'opérations faisant "
+"KMyMoney ne prend pas en charge la modification d'opérations faisant "
 "référence à un compte fermé."
 
 #: kmymoney/views/journaldelegate.cpp:350

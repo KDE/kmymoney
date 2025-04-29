@@ -48,11 +48,10 @@ msgid "Invalid Statement"
 msgstr "无效的对账单"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:485
-#, fuzzy, kde-format
-#| msgid "No Institution"
+#, kde-format
 msgctxt "@info Group name for accounts with no assigned institution"
 msgid "No institution"
-msgstr "未指定金融机构"
+msgstr ""
 
 #: kmymoney/converter/mymoneystatementreader.cpp:639
 #, kde-format
@@ -402,11 +401,10 @@ msgstr[0] "已处理 %1 份对账单，结果如下："
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ImportSummaryDialog)
 #: kmymoney/dialogs/importsummarydlg.ui:14
-#, fuzzy, kde-format
-#| msgid "Imported History"
+#, kde-format
 msgctxt "@title:window"
 msgid "Import summary"
-msgstr "导入历史"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonSkip)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonCancel)
@@ -6207,55 +6205,46 @@ msgid "Name"
 msgstr "名称"
 
 #: kmymoney/models/statementmodel.cpp:95
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "@title:column Shows the date of statement"
 msgid "Date"
-msgstr "日期"
+msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:97
-#, fuzzy, kde-format
-#| msgid "Balance"
+#, kde-format
 msgctxt "@title:column Shows statement balance"
 msgid "Balance"
-msgstr "余额"
+msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:99
-#, fuzzy, kde-format
-#| msgid "    %1 processed"
-#| msgid_plural "    %1 processed"
+#, kde-format
 msgctxt "@title:column Shows number of transactions read"
 msgid "Processed"
-msgstr "    处理了 %1"
+msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:101
-#, fuzzy, kde-format
-#| msgid "Imported"
+#, kde-format
 msgctxt "@title:column Shows number of imported transactions"
 msgid "Imported"
-msgstr "导入"
+msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:103
-#, fuzzy, kde-format
-#| msgid "Matched"
+#, kde-format
 msgctxt "@title:column Shows number of matched transactions"
 msgid "Matched"
-msgstr "匹配"
+msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:105
-#, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
-#| msgid "Duplicate"
+#, kde-format
 msgctxt "@title:column Shows number of duplicate transactions"
 msgid "Duplicates"
-msgstr "复制"
+msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:107
-#, fuzzy, kde-format
-#| msgid "Payee creation"
+#, kde-format
 msgctxt "@title:column Shows number of create payees"
 msgid "Payees created"
-msgstr "创建收款人"
+msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:117
 #: kmymoney/mymoney/storage/accountsmodel.cpp:503
@@ -24887,39 +24876,3 @@ msgstr ""
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr ""
-
-#~ msgid "Importing statement for account %1"
-#~ msgstr "导入账户 %1 的对账单"
-
-#~ msgid "Importing statement without transactions"
-#~ msgstr "导入无明细报表"
-
-#~ msgid "  Statement balance is not contained in statement."
-#~ msgstr "在对账单中未包含期末余额。"
-
-#~ msgid "  Statement balance on %1 is reported to be %2"
-#~ msgstr "对账单报告账户 %1 的余额是 %2"
-
-#~ msgid "  Transactions"
-#~ msgstr "交易"
-
-#~ msgctxt "x transactions have been added"
-#~ msgid "    %1 added"
-#~ msgid_plural "    %1 added"
-#~ msgstr[0] "    %1 已添加"
-
-#~ msgid "    %1 matched"
-#~ msgid_plural "    %1 matched"
-#~ msgstr[0] "    %1 项匹配"
-
-#~ msgid "    %1 duplicate"
-#~ msgid_plural "    %1 duplicates"
-#~ msgstr[0] "    %1 项重复"
-
-#~ msgid "  Payees"
-#~ msgstr "收/付款人"
-
-#~ msgctxt "x transactions have been created"
-#~ msgid "    %1 created"
-#~ msgid_plural "    %1 created"
-#~ msgstr[0] "    %1 已创建"

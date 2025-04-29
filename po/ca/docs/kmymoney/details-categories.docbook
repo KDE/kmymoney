@@ -39,7 +39,7 @@
 </screenshot>
 
 <para
->La vista de les categories proporciona un resum de totes les categories existents en el fitxer de dades actual. Similar a la vista dels comptes, les categories s'agrupen en ingressos i despeses. Igual que amb la vista d'institucions i comptes, la llista de categories es pot ampliar o col·lapsar fent clic a la fletxa a l'esquerra del tipus o nom. Igual que amb els comptes d'actiu i passiu, les categories es poden considerar subcategories, amb un pare d'una altra categoria en lloc d'ingrés o despesa de primer nivell. </para>
+>La vista de les categories proporciona un resum de totes les categories existents en el fitxer de dades actual. Similar a la vista dels comptes, les categories s'agrupen en ingressos i despeses. Igual que amb la vista d'institucions i comptes, la llista de categories es pot ampliar o reduir fent clic a la fletxa a l'esquerra del tipus o nom. Igual que amb els comptes d'actiu i passiu, les categories es poden considerar subcategories, amb un pare d'una altra categoria en lloc d'ingrés o despesa de primer nivell. </para>
 
 <para
 >Igual que amb la vista dels comptes, la vista de les categories mostra diverses columnes amb informació descriptiva i resumida sobre cada categoria. Igual que amb la vista comptes, podeu seleccionar quines columnes es mostren fent clic dret a qualsevol capçalera de columna i seleccionant o desseleccionant la casella de selecció al costat del nom de la columna. </para>
