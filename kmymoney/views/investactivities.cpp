@@ -140,7 +140,8 @@ public:
             const auto price = priceWidget->value();
             const auto fees = feesWidget->value();
             const auto interest = interestWidget->value();
-            const auto calculatedPrice = ((-totalAmount + interest - fees) / shares) * q->sharesFactor();
+            const auto calculatedPrice =
+                (((-totalAmount + interest - fees) / shares) * q->sharesFactor()).convert(MyMoneyMoney::precToDenom(priceWidget->precision()));
             if (calculatedPrice != price) {
                 qDebug() << "Correcting price from" << price.toDouble() << "to" << calculatedPrice.toDouble();
                 priceWidget->setValue(calculatedPrice);
