@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-30 01:58+0000\n"
+"POT-Creation-Date: 2025-05-01 01:56+0000\n"
 "PO-Revision-Date: 2024-11-23 12:50+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -18920,31 +18920,31 @@ msgstr "Unable to open template file '%1'"
 msgid "Unable to upload to '%1'.<br />%2"
 msgstr "Unable to upload to '%1'.<br />%2"
 
-#: kmymoney/views/investactivities.cpp:278
+#: kmymoney/views/investactivities.cpp:279
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "Shares"
 
-#: kmymoney/views/investactivities.cpp:289
+#: kmymoney/views/investactivities.cpp:290
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price/share"
 msgstr "Price/share"
 
-#: kmymoney/views/investactivities.cpp:291
+#: kmymoney/views/investactivities.cpp:292
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Transaction amount"
 msgstr "Transaction amount"
 
-#: kmymoney/views/investactivities.cpp:293
+#: kmymoney/views/investactivities.cpp:294
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "Price"
 
-#: kmymoney/views/investactivities.cpp:650
+#: kmymoney/views/investactivities.cpp:651
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Ratio 1/"

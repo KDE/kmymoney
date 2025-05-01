@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-30 01:58+0000\n"
+"POT-Creation-Date: 2025-05-01 01:56+0000\n"
 "PO-Revision-Date: 2025-04-23 18:19+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -19199,31 +19199,31 @@ msgstr "Impossible d'ouvrir le fichier de modèle « %1 »"
 msgid "Unable to upload to '%1'.<br />%2"
 msgstr "Impossible de charger vers « %1 ».<br /> %2"
 
-#: kmymoney/views/investactivities.cpp:278
+#: kmymoney/views/investactivities.cpp:279
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "Parts"
 
-#: kmymoney/views/investactivities.cpp:289
+#: kmymoney/views/investactivities.cpp:290
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price/share"
 msgstr "Cours par titre"
 
-#: kmymoney/views/investactivities.cpp:291
+#: kmymoney/views/investactivities.cpp:292
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Transaction amount"
 msgstr "Montant de l'opération"
 
-#: kmymoney/views/investactivities.cpp:293
+#: kmymoney/views/investactivities.cpp:294
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "Cours"
 
-#: kmymoney/views/investactivities.cpp:650
+#: kmymoney/views/investactivities.cpp:651
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Ratio 1/"

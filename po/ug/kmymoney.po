@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-30 01:58+0000\n"
+"POT-Creation-Date: 2025-05-01 01:56+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -18554,35 +18554,35 @@ msgstr "ھۆججەت ‹%1› نى يېزىش ئۈچۈن ئاچقىلى بولم
 msgid "Unable to upload to '%1'.<br />%2"
 msgstr "ھۆججەت ‹%1› نى يېزىش ئۈچۈن ئاچقىلى بولمىدى."
 
-#: kmymoney/views/investactivities.cpp:278
+#: kmymoney/views/investactivities.cpp:279
 #, fuzzy, kde-format
 #| msgid "Shares"
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "ھەمبەھىرلەر"
 
-#: kmymoney/views/investactivities.cpp:289
+#: kmymoney/views/investactivities.cpp:290
 #, fuzzy, kde-format
 #| msgid "Prices"
 msgctxt "@label:textbox"
 msgid "Price/share"
 msgstr "باھالار"
 
-#: kmymoney/views/investactivities.cpp:291
+#: kmymoney/views/investactivities.cpp:292
 #, fuzzy, kde-format
 #| msgid "Transactions"
 msgctxt "@label:textbox"
 msgid "Transaction amount"
 msgstr "سودا"
 
-#: kmymoney/views/investactivities.cpp:293
+#: kmymoney/views/investactivities.cpp:294
 #, fuzzy, kde-format
 #| msgid "Price"
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "باھاسى"
 
-#: kmymoney/views/investactivities.cpp:650
+#: kmymoney/views/investactivities.cpp:651
 #, fuzzy, kde-format
 #| msgid "Ratio"
 msgctxt "@label:textbox"

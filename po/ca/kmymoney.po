@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-30 01:58+0000\n"
+"POT-Creation-Date: 2025-05-01 01:56+0000\n"
 "PO-Revision-Date: 2025-04-22 09:46+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -19103,31 +19103,31 @@ msgstr "No s'ha pogut obrir el fitxer de plantilla «%1»"
 msgid "Unable to upload to '%1'.<br />%2"
 msgstr "No s'ha pogut pujar a «%1».<br />%2"
 
-#: kmymoney/views/investactivities.cpp:278
+#: kmymoney/views/investactivities.cpp:279
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "Accions"
 
-#: kmymoney/views/investactivities.cpp:289
+#: kmymoney/views/investactivities.cpp:290
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price/share"
 msgstr "Preu per acció"
 
-#: kmymoney/views/investactivities.cpp:291
+#: kmymoney/views/investactivities.cpp:292
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Transaction amount"
 msgstr "Import de l'operació"
 
-#: kmymoney/views/investactivities.cpp:293
+#: kmymoney/views/investactivities.cpp:294
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "Preu"
 
-#: kmymoney/views/investactivities.cpp:650
+#: kmymoney/views/investactivities.cpp:651
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Ratio 1/"
