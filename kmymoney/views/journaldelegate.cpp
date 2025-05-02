@@ -27,6 +27,7 @@
 // Project Includes
 
 #include "accountsmodel.h"
+#include "alkimia/alkenvironment.h"
 #include "icons.h"
 #include "investtransactioneditor.h"
 #include "journalmodel.h"
@@ -614,9 +615,14 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
             }
         }
     } else {
+        // Skip painting the CE_FocusFrame on Windows and with AppImages
+        // because it seems to be the cause that the background of the
+        // editor is painted completely black.
 #ifndef Q_OS_WIN
-        // paint focus frame around edit widget
-        style->drawControl(QStyle::CE_FocusFrame, &opt, painter, editWidget);
+        if (!AlkEnvironment::isRunningAsAppImage()) {
+            // paint focus frame around edit widget
+            style->drawControl(QStyle::CE_FocusFrame, &opt, painter, editWidget);
+        }
 #endif
     }
 
