@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-01 01:56+0000\n"
+"POT-Creation-Date: 2025-05-03 01:55+0000\n"
 "PO-Revision-Date: 2025-02-21 17:01+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -19225,13 +19225,13 @@ msgctxt "@info:tooltip"
 msgid "Amount of fees"
 msgstr "Maksut yhteensä:"
 
-#: kmymoney/views/journaldelegate.cpp:87
+#: kmymoney/views/journaldelegate.cpp:88
 #, kde-format
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Tyhjä muistio"
 
-#: kmymoney/views/journaldelegate.cpp:343
+#: kmymoney/views/journaldelegate.cpp:344
 #, kde-format
 msgctxt "@info %2 contains list of account names separated by <br>"
 msgid "<qt>Closed account:<br><br>%2</qt>"
@@ -19239,7 +19239,7 @@ msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
 msgstr[0] "<qt>Suljettu tili:<br><br>%2</qt>"
 msgstr[1] "<qt>Suljetut tilit:<br><br>%2</qt>"
 
-#: kmymoney/views/journaldelegate.cpp:348
+#: kmymoney/views/journaldelegate.cpp:349
 #, kde-format
 msgctxt "@info Unable to edit "
 msgid ""
@@ -19247,14 +19247,14 @@ msgid ""
 msgstr ""
 "KMyMoney ei tue suljettuihin tileihin viittaavien tapahtumien muokkausta."
 
-#: kmymoney/views/journaldelegate.cpp:350
+#: kmymoney/views/journaldelegate.cpp:351
 #, fuzzy, kde-format
 #| msgid "Deleting transactions"
 msgctxt "@title:window"
 msgid "Prevent editing transactions"
 msgstr "Poistaa tapahtumia"
 
-#: kmymoney/views/journaldelegate.cpp:364
+#: kmymoney/views/journaldelegate.cpp:365
 #, fuzzy, kde-format
 #| msgctxt "@info Editing multiple transactions"
 #| msgid ""

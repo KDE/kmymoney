@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-01 01:56+0000\n"
+"POT-Creation-Date: 2025-05-03 01:55+0000\n"
 "PO-Revision-Date: 2022-01-04 22:18+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -19217,14 +19217,14 @@ msgctxt "@info:tooltip"
 msgid "Amount of fees"
 msgstr "المقدار هو:"
 
-#: kmymoney/views/journaldelegate.cpp:87
+#: kmymoney/views/journaldelegate.cpp:88
 #, fuzzy, kde-format
 #| msgid "[Empty Payee]"
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "[مُتسلِّم فارغ]"
 
-#: kmymoney/views/journaldelegate.cpp:343
+#: kmymoney/views/journaldelegate.cpp:344
 #, kde-format
 msgctxt "@info %2 contains list of account names separated by <br>"
 msgid "<qt>Closed account:<br><br>%2</qt>"
@@ -19236,7 +19236,7 @@ msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
 
-#: kmymoney/views/journaldelegate.cpp:348
+#: kmymoney/views/journaldelegate.cpp:349
 #, fuzzy, kde-format
 #| msgid "Cannot remove transaction that references a closed account."
 msgctxt "@info Unable to edit "
@@ -19244,14 +19244,14 @@ msgid ""
 "KMyMoney does not support to edit transaction that reference closed accounts."
 msgstr "لا يمكن إزالة معاملة تشير إلى حساب مغلق."
 
-#: kmymoney/views/journaldelegate.cpp:350
+#: kmymoney/views/journaldelegate.cpp:351
 #, fuzzy, kde-format
 #| msgid "Deleting transactions"
 msgctxt "@title:window"
 msgid "Prevent editing transactions"
 msgstr "يحذف المعاملات"
 
-#: kmymoney/views/journaldelegate.cpp:364
+#: kmymoney/views/journaldelegate.cpp:365
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""

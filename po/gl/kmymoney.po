@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-01 01:56+0000\n"
+"POT-Creation-Date: 2025-05-03 01:55+0000\n"
 "PO-Revision-Date: 2025-02-14 08:14+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -19312,13 +19312,13 @@ msgctxt "@info:tooltip"
 msgid "Amount of fees"
 msgstr "Importe das comisións"
 
-#: kmymoney/views/journaldelegate.cpp:87
+#: kmymoney/views/journaldelegate.cpp:88
 #, kde-format
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Concepto baleiro"
 
-#: kmymoney/views/journaldelegate.cpp:343
+#: kmymoney/views/journaldelegate.cpp:344
 #, kde-format
 msgctxt "@info %2 contains list of account names separated by <br>"
 msgid "<qt>Closed account:<br><br>%2</qt>"
@@ -19326,7 +19326,7 @@ msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
 msgstr[0] "<qt>Conta pechada:<br><br>%2</qt>"
 msgstr[1] "<qt>Contas pechadas:<br><br>%2</qt>"
 
-#: kmymoney/views/journaldelegate.cpp:348
+#: kmymoney/views/journaldelegate.cpp:349
 #, kde-format
 msgctxt "@info Unable to edit "
 msgid ""
@@ -19334,13 +19334,13 @@ msgid ""
 msgstr ""
 "KMyMoney non permite editar un asento con referencia a unha conta pechada."
 
-#: kmymoney/views/journaldelegate.cpp:350
+#: kmymoney/views/journaldelegate.cpp:351
 #, kde-format
 msgctxt "@title:window"
 msgid "Prevent editing transactions"
 msgstr "Evitar editar asentos"
 
-#: kmymoney/views/journaldelegate.cpp:364
+#: kmymoney/views/journaldelegate.cpp:365
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""

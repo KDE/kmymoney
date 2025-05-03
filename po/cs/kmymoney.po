@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-01 01:56+0000\n"
+"POT-Creation-Date: 2025-05-03 01:55+0000\n"
 "PO-Revision-Date: 2024-09-17 15:29+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -18725,13 +18725,13 @@ msgctxt "@info:tooltip"
 msgid "Amount of fees"
 msgstr ""
 
-#: kmymoney/views/journaldelegate.cpp:87
+#: kmymoney/views/journaldelegate.cpp:88
 #, kde-format
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr ""
 
-#: kmymoney/views/journaldelegate.cpp:343
+#: kmymoney/views/journaldelegate.cpp:344
 #, kde-format
 msgctxt "@info %2 contains list of account names separated by <br>"
 msgid "<qt>Closed account:<br><br>%2</qt>"
@@ -18740,20 +18740,20 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: kmymoney/views/journaldelegate.cpp:348
+#: kmymoney/views/journaldelegate.cpp:349
 #, kde-format
 msgctxt "@info Unable to edit "
 msgid ""
 "KMyMoney does not support to edit transaction that reference closed accounts."
 msgstr ""
 
-#: kmymoney/views/journaldelegate.cpp:350
+#: kmymoney/views/journaldelegate.cpp:351
 #, kde-format
 msgctxt "@title:window"
 msgid "Prevent editing transactions"
 msgstr ""
 
-#: kmymoney/views/journaldelegate.cpp:364
+#: kmymoney/views/journaldelegate.cpp:365
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
