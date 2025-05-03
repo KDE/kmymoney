@@ -167,6 +167,13 @@ public:
         accountCombo = nullptr;
     }
 
+    void hideAccountsCombo()
+    {
+        if (accountCombo) {
+            accountCombo->hide();
+        }
+    }
+
     void openLedgersAfterFileOpen()
     {
         if (m_needInit)
@@ -227,7 +234,7 @@ public:
         if(inModelUpdate || accountId.isEmpty())
             return;
 
-        accountCombo->hide();
+        hideAccountsCombo();
 
         const auto idx = tabIdByAccountId(accountId);
         if (idx != -1) {
@@ -287,7 +294,7 @@ public:
         if (inModelUpdate || accountId.isEmpty())
             return;
 
-        accountCombo->hide();
+        hideAccountsCombo();
 
         // in case a stock account is selected, we switch to the parent which
         // is the investment account
@@ -556,7 +563,7 @@ bool SimpleLedgerView::eventFilter(QObject* o, QEvent* e)
         const auto kev = static_cast<QKeyEvent*>(e);
         if (o == d->accountCombo) {
             if (kev->key() == Qt::Key_Escape) {
-                d->accountCombo->hide();
+                d->hideAccountsCombo();
                 return true;
             }
         } else if (o == d->ui->ledgerTab) {
@@ -588,9 +595,7 @@ void SimpleLedgerView::tabClicked(int idx)
         if (view) {
             view->prepareToShow();
         }
-        if (d->accountCombo) {
-            d->accountCombo->hide();
-        }
+        d->hideAccountsCombo();
     }
 }
 
