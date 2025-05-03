@@ -3908,33 +3908,6 @@ WebConnect* KMyMoneyApp::webConnect() const
     return d->m_webConnect;
 }
 
-QList<QString> KMyMoneyApp::instanceList() const
-{
-    QList<QString> list;
-#ifdef KMM_DBUS
-    QDBusReply<QStringList> reply = QDBusConnection::sessionBus().interface()->registeredServiceNames();
-
-    if (reply.isValid()) {
-        QStringList apps = reply.value();
-        QStringList::const_iterator it;
-
-        // build a list of service names of all running kmymoney applications without this one
-        for (it = apps.cbegin(); it != apps.cend(); ++it) {
-            // please change this method of creating a list of 'all the other kmymoney instances that are running on the system'
-            // since assuming that D-Bus creates service names with org.kde.kmymoney-PID is an observation I don't think that it's documented somewhere
-            if ((*it).indexOf("org.kde.kmymoney-") == 0) {
-                uint thisProcPid = platformTools::processId();
-                if ((*it).indexOf(QString("org.kde.kmymoney-%1").arg(thisProcPid)) != 0)
-                    list += (*it);
-            }
-        }
-    } else {
-        qDebug("D-Bus returned the following error while obtaining instances: %s", qPrintable(reply.error().message()));
-    }
-#endif
-    return list;
-}
-
 void KMyMoneyApp::slotEquityPriceUpdate()
 {
     QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this);

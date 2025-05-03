@@ -320,18 +320,10 @@ public:
       */
     bool isImportableFile(const QUrl &url);
 
-    /**
-      * This method returns a list of all 'other' dcop registered kmymoney processes.
-      * It's a subset of the return of DCOPclient()->registeredApplications().
-      *
-      * @retval QStringList of process ids
-      */
-    QList<QString> instanceList() const;
-
 #ifdef KMM_DEBUG
     /**
-      * Dump a list of the names of all defined KActions to stdout.
-      */
+     * Dump a list of the names of all defined KActions to stdout.
+     */
     void dumpActions() const;
 #endif
 
