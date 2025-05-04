@@ -310,6 +310,8 @@ enum class Date {
     LastFiscalYear,
     Today,
     Next18Months,
+    FiscalYearToDate,
+    FiscalMonthToDate,
     // insert new constants above of this line
     LastDateItem,
 };

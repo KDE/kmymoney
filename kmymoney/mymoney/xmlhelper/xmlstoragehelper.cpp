@@ -489,6 +489,8 @@ QHash<eMyMoney::TransactionFilter::Date, QString> dateLockLUT()
         {eMyMoney::TransactionFilter::Date::LastFiscalYear,     QStringLiteral("lastFiscalYear")},
         {eMyMoney::TransactionFilter::Date::Today,              QStringLiteral("today")},
         {eMyMoney::TransactionFilter::Date::Next18Months,       QStringLiteral("next18months")},
+        {eMyMoney::TransactionFilter::Date::FiscalYearToDate,   QStringLiteral("fiscalYearToDate")},
+        {eMyMoney::TransactionFilter::Date::FiscalMonthToDate,  QStringLiteral("fiscalMonthToDate")},
     };
     // clang-format on
     return lut;

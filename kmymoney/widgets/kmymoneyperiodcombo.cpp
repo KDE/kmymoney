@@ -38,6 +38,8 @@ KMyMoneyPeriodCombo::KMyMoneyPeriodCombo(QWidget* parent) :
     insertItem(i18n("Current fiscal year"), (int)TransactionFilter::Date::CurrentFiscalYear);
     insertItem(i18n("Month to date"), (int)TransactionFilter::Date::MonthToDate);
     insertItem(i18n("Year to date"), (int)TransactionFilter::Date::YearToDate);
+    insertItem(i18n("Fiscal month to date"), (int)TransactionFilter::Date::FiscalMonthToDate);
+    insertItem(i18n("Fiscal year to date"), (int)TransactionFilter::Date::FiscalYearToDate);
     insertItem(i18n("Year to month"), (int)TransactionFilter::Date::YearToMonth);
     insertItem(i18n("Last month"), (int)TransactionFilter::Date::LastMonth);
     insertItem(i18n("Last year"), (int)TransactionFilter::Date::LastYear);

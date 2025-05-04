@@ -1055,6 +1055,20 @@ bool MyMoneyTransactionFilter::translateDateRange(eMyMoney::TransactionFilter::D
         start = QDate::currentDate();
         end =  QDate::currentDate();
         break;
+    case eMyMoney::TransactionFilter::Date::FiscalYearToDate:
+        start = QDate(yr, fiscalYearStartMonth, fiscalYearStartDay);
+        end = QDate::currentDate();
+        if (end < start) {
+            start = start.addYears(-1);
+        }
+        break;
+    case eMyMoney::TransactionFilter::Date::FiscalMonthToDate:
+        start = QDate(yr, mon, fiscalYearStartDay);
+        end = QDate::currentDate();
+        if (end < start) {
+            start = start.addYears(-1);
+        }
+        break;
     default:
         qWarning("Unknown date identifier %d in MyMoneyTransactionFilter::translateDateRange()", (int)id);
         rc = false;
