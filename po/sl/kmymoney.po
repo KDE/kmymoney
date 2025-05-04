@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-03 01:55+0000\n"
+"POT-Creation-Date: 2025-05-04 02:05+0000\n"
 "PO-Revision-Date: 2025-04-22 06:25+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -5742,18 +5742,18 @@ msgstr "Rezultat preverjanja konsistentnosti"
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Preverjanje zapadlih načrtovanih transakcij..."
 
-#: kmymoney/kmymoney.cpp:3979
+#: kmymoney/kmymoney.cpp:3952
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr "Najprej morate izbrati datoteko KMyMoney, preden lahko uvozite izkaz."
 
-#: kmymoney/kmymoney.cpp:3984
+#: kmymoney/kmymoney.cpp:3957
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Uvažanje izkaza prek Web Connecta"
 
-#: kmymoney/kmymoney.cpp:3996
+#: kmymoney/kmymoney.cpp:3969
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5762,57 +5762,57 @@ msgid ""
 msgstr ""
 "Ni mogoče uvoziti %1 z uporabo vtičnika %2. Vtičnik je vrnil napako: %3"
 
-#: kmymoney/kmymoney.cpp:3996 kmymoney/plugins/ofx/import/ofximporter.cpp:1051
+#: kmymoney/kmymoney.cpp:3969 kmymoney/plugins/ofx/import/ofximporter.cpp:1051
 #, kde-format
 msgid "Importing error"
 msgstr "Napaka pri uvažanju"
 
-#: kmymoney/kmymoney.cpp:4026
+#: kmymoney/kmymoney.cpp:3999
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Omogočena so vsa sporočila."
 
-#: kmymoney/kmymoney.cpp:4026
+#: kmymoney/kmymoney.cpp:3999
 #, kde-format
 msgid "All messages"
 msgstr "Vsa sporočila"
 
-#: kmymoney/kmymoney.cpp:4062
+#: kmymoney/kmymoney.cpp:4035
 #, kde-format
 msgid "Auto saving..."
 msgstr "Samodejno shranjujem..."
 
-#: kmymoney/kmymoney.cpp:4182
+#: kmymoney/kmymoney.cpp:4155
 #, kde-format
 msgid "Creating new document..."
 msgstr "Ustvarjam nov dokument..."
 
-#: kmymoney/kmymoney.cpp:4242
+#: kmymoney/kmymoney.cpp:4215
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "Ni bilo mogoče ustvariti nove datoteke."
 
-#: kmymoney/kmymoney.cpp:4253
+#: kmymoney/kmymoney.cpp:4226
 #, kde-format
 msgid "Open a file."
 msgstr "Odpri datoteko."
 
-#: kmymoney/kmymoney.cpp:4267
+#: kmymoney/kmymoney.cpp:4240
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr "Ni bilo mogoče najti nobenega vtičnika za odpiranje pomnilnika."
 
-#: kmymoney/kmymoney.cpp:4271
+#: kmymoney/kmymoney.cpp:4244
 #, kde-format
 msgid "All files (*)"
 msgstr "Vse datoteke (*)"
 
-#: kmymoney/kmymoney.cpp:4284
+#: kmymoney/kmymoney.cpp:4257
 #, kde-format
 msgid "Loading file..."
 msgstr "Nalagam datoteko..."
 
-#: kmymoney/kmymoney.cpp:4292
+#: kmymoney/kmymoney.cpp:4265
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5821,23 +5821,23 @@ msgstr ""
 "<p><b>%1</b> je ali neveljavno ime datoteke ali datoteka ne obstaja. Lahko "
 "odprete drugo datoteko ali ustvarite novo.</p>"
 
-#: kmymoney/kmymoney.cpp:4292
+#: kmymoney/kmymoney.cpp:4265
 #, kde-format
 msgid "File not found"
 msgstr "Datoteke ni mogoče najti"
 
-#: kmymoney/kmymoney.cpp:4324
+#: kmymoney/kmymoney.cpp:4297
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr "Težava pri odpiranju hrambe"
 
-#: kmymoney/kmymoney.cpp:4330
+#: kmymoney/kmymoney.cpp:4303
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "Ni je mogoče odpreti kot je zahtevano."
 
-#: kmymoney/kmymoney.cpp:4337
+#: kmymoney/kmymoney.cpp:4310
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -5846,33 +5846,33 @@ msgstr ""
 "Ni bilo mogoče prebrati podatkovnega vira. Preverite nastavitve KMyMoney, da "
 "je omogočen potrebni vtičnik."
 
-#: kmymoney/kmymoney.cpp:4348
+#: kmymoney/kmymoney.cpp:4321
 #, kde-format
 msgid "Saving file..."
 msgstr "Shranjujem datoteko..."
 
-#: kmymoney/kmymoney.cpp:4360
+#: kmymoney/kmymoney.cpp:4333
 #, kde-format
 msgid "Failed to save your data."
 msgstr "Ni bilo mogoče shraniti vaših podatkov."
 
-#: kmymoney/kmymoney.cpp:4366
+#: kmymoney/kmymoney.cpp:4339
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 "Ni bilo mogoče najti ustreznega vtičnika za shranjevanje vaših podatkov."
 
-#: kmymoney/kmymoney.cpp:4372
+#: kmymoney/kmymoney.cpp:4345
 #, kde-format
 msgid "Saving file as...."
 msgstr "Shranjevanje datoteke kot..."
 
-#: kmymoney/kmymoney.cpp:4388
+#: kmymoney/kmymoney.cpp:4361
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr "Ni bilo mogoče najti nobenega vtičnika za shranjevanje podatkov."
 
-#: kmymoney/kmymoney.cpp:4417
+#: kmymoney/kmymoney.cpp:4390
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "Vaše shrambe ni bilo mogoče shraniti."
@@ -21391,7 +21391,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Razlika: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:350
+#: kmymoney/views/simpleledgerview.cpp:357
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21401,7 +21401,7 @@ msgstr ""
 "Gumb za zapiranje tega računa je bil odstranjen, ker ga usklajujete. "
 "Končajte, prekličite ali odložite usklajevanje, da ga dobite nazaj."
 
-#: kmymoney/views/simpleledgerview.cpp:463
+#: kmymoney/views/simpleledgerview.cpp:470
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21411,7 +21411,7 @@ msgstr ""
 "Ta stran prikazuje glavno knjigo računov. Trenutno ni nobenih računov, zato "
 "je namesto tega prikazano to besedilo."
 
-#: kmymoney/views/simpleledgerview.cpp:466
+#: kmymoney/views/simpleledgerview.cpp:473
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21421,12 +21421,12 @@ msgstr ""
 "Ta stran prikazuje glavno knjigo računov. Trenutno ni izbranega nobenega "
 "računa, zato je namesto tega prikazano to besedilo."
 
-#: kmymoney/views/simpleledgerview.cpp:743
+#: kmymoney/views/simpleledgerview.cpp:748
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Odprite spletno mesto <b>%1</b> v brskalniku."
 
-#: kmymoney/views/simpleledgerview.cpp:929
+#: kmymoney/views/simpleledgerview.cpp:934
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -21435,7 +21435,7 @@ msgstr ""
 "Tega pogleda ne morete zapreti, ker usklajujete račun. Najprej končajte, "
 "prekličite ali odložite usklajevanje."
 
-#: kmymoney/views/simpleledgerview.cpp:930
+#: kmymoney/views/simpleledgerview.cpp:935
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"

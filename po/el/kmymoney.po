@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-03 01:55+0000\n"
+"POT-Creation-Date: 2025-05-04 02:05+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -6018,7 +6018,7 @@ msgstr "Αποτέλεσμα του ελέγχου ακεραιότητας"
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Έλεγχος για εκπρόθεσμες προγραμματισμένες συναλλαγές..."
 
-#: kmymoney/kmymoney.cpp:3979
+#: kmymoney/kmymoney.cpp:3952
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
@@ -6026,12 +6026,12 @@ msgstr ""
 "Πρέπει πρώτα να επιλέξετε ένα αρχείο KMyMoney πριν κάνετε εισαγωγή κίνησης "
 "λογαριασμού."
 
-#: kmymoney/kmymoney.cpp:3984
+#: kmymoney/kmymoney.cpp:3957
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Εισαγωγή κίνησης μέσω σύνδεσης διαδικτύου"
 
-#: kmymoney/kmymoney.cpp:3996
+#: kmymoney/kmymoney.cpp:3969
 #, fuzzy, kde-format
 #| msgid ""
 #| "Unable to import %1 using %2 plugin.  The plugin returned the following "
@@ -6044,60 +6044,60 @@ msgstr ""
 "Αδυναμία εισαγωγής %1 με χρήση του πρόσθετου %2.  Το πρόσθετο επέστρεψε το "
 "ακόλουθο σφάλμα: %3"
 
-#: kmymoney/kmymoney.cpp:3996 kmymoney/plugins/ofx/import/ofximporter.cpp:1051
+#: kmymoney/kmymoney.cpp:3969 kmymoney/plugins/ofx/import/ofximporter.cpp:1051
 #, kde-format
 msgid "Importing error"
 msgstr "Σφάλμα κατά την εισαγωγή"
 
-#: kmymoney/kmymoney.cpp:4026
+#: kmymoney/kmymoney.cpp:3999
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Όλα τα μηνύματα έχουν ενεργοποιηθεί."
 
-#: kmymoney/kmymoney.cpp:4026
+#: kmymoney/kmymoney.cpp:3999
 #, kde-format
 msgid "All messages"
 msgstr "Όλα τα μηνύματα"
 
-#: kmymoney/kmymoney.cpp:4062
+#: kmymoney/kmymoney.cpp:4035
 #, kde-format
 msgid "Auto saving..."
 msgstr "Αυτόματη αποθήκευση..."
 
-#: kmymoney/kmymoney.cpp:4182
+#: kmymoney/kmymoney.cpp:4155
 #, kde-format
 msgid "Creating new document..."
 msgstr "Δημιουργία νέου εγγράφου..."
 
-#: kmymoney/kmymoney.cpp:4242
+#: kmymoney/kmymoney.cpp:4215
 #, fuzzy, kde-format
 #| msgid "Create a new profile"
 msgid "Couldn't create a new file."
 msgstr "Δημιουργία ενός νέου προφίλ"
 
-#: kmymoney/kmymoney.cpp:4253
+#: kmymoney/kmymoney.cpp:4226
 #, kde-format
 msgid "Open a file."
 msgstr "Άνοιγμα ενός αρχείου."
 
-#: kmymoney/kmymoney.cpp:4267
+#: kmymoney/kmymoney.cpp:4240
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4271
+#: kmymoney/kmymoney.cpp:4244
 #, fuzzy, kde-format
 #| msgctxt "All files (Filefilter)"
 #| msgid "All files"
 msgid "All files (*)"
 msgstr "Όλα τα αρχεία"
 
-#: kmymoney/kmymoney.cpp:4284
+#: kmymoney/kmymoney.cpp:4257
 #, kde-format
 msgid "Loading file..."
 msgstr "Φόρτωση αρχείου..."
 
-#: kmymoney/kmymoney.cpp:4292
+#: kmymoney/kmymoney.cpp:4265
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -6106,58 +6106,58 @@ msgstr ""
 "<p>Το αρχείο <b>%1</b> έχει ένα μη έγκυρο όνομα ή δεν υπάρχει. Μπορείτε να "
 "ανοίξετε ένα άλλο αρχείο ή να δημιουργήσετε ένα νέο.</p>"
 
-#: kmymoney/kmymoney.cpp:4292
+#: kmymoney/kmymoney.cpp:4265
 #, kde-format
 msgid "File not found"
 msgstr "Το αρχείο δεν βρέθηκε"
 
-#: kmymoney/kmymoney.cpp:4324
+#: kmymoney/kmymoney.cpp:4297
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4330
+#: kmymoney/kmymoney.cpp:4303
 #, fuzzy, kde-format
 #| msgid "Cannot open file as requested. Error was: %1"
 msgid "Cannot open file as requested."
 msgstr "Αδύνατο το άνοιγμα του ζητούμενου αρχείου. Το σφάλμα ήταν: %1"
 
-#: kmymoney/kmymoney.cpp:4337
+#: kmymoney/kmymoney.cpp:4310
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
 "necessary plugin is enabled."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4348
+#: kmymoney/kmymoney.cpp:4321
 #, kde-format
 msgid "Saving file..."
 msgstr "Αποθήκευση του αρχείου..."
 
-#: kmymoney/kmymoney.cpp:4360
+#: kmymoney/kmymoney.cpp:4333
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your data."
 msgstr "Αποτυχία αποθήκευσης: %1"
 
-#: kmymoney/kmymoney.cpp:4366
+#: kmymoney/kmymoney.cpp:4339
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4372
+#: kmymoney/kmymoney.cpp:4345
 #, fuzzy, kde-format
 #| msgid "Saving file..."
 msgid "Saving file as...."
 msgstr "Αποθήκευση του αρχείου..."
 
-#: kmymoney/kmymoney.cpp:4388
+#: kmymoney/kmymoney.cpp:4361
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4417
+#: kmymoney/kmymoney.cpp:4390
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your storage."
@@ -22541,7 +22541,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Διαφορά: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:350
+#: kmymoney/views/simpleledgerview.cpp:357
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -22549,7 +22549,7 @@ msgid ""
 "reconciling it. Finish, cancel or postpone the reconciliation to get it back."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:463
+#: kmymoney/views/simpleledgerview.cpp:470
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -22557,7 +22557,7 @@ msgid ""
 "text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:466
+#: kmymoney/views/simpleledgerview.cpp:473
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -22565,19 +22565,19 @@ msgid ""
 "this text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:743
+#: kmymoney/views/simpleledgerview.cpp:748
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:929
+#: kmymoney/views/simpleledgerview.cpp:934
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
 "cancel or postpone the reconciliation first."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:930
+#: kmymoney/views/simpleledgerview.cpp:935
 #, fuzzy, kde-format
 #| msgid "Closed tags can't be used."
 msgctxt "@title:info In reconciliation"

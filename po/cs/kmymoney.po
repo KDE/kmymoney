@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-03 01:55+0000\n"
+"POT-Creation-Date: 2025-05-04 02:05+0000\n"
 "PO-Revision-Date: 2024-09-17 15:29+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -5539,18 +5539,18 @@ msgstr "Výsledky kontroly konsistentnosti"
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Kontroluji naplánované transakce po splatnosti..."
 
-#: kmymoney/kmymoney.cpp:3979
+#: kmymoney/kmymoney.cpp:3952
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3984
+#: kmymoney/kmymoney.cpp:3957
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3996
+#: kmymoney/kmymoney.cpp:3969
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5558,57 +5558,57 @@ msgid ""
 "error: %3"
 msgstr "Nelze importovat %1 modulem %2. Modul ohlásil chybu: %3"
 
-#: kmymoney/kmymoney.cpp:3996 kmymoney/plugins/ofx/import/ofximporter.cpp:1051
+#: kmymoney/kmymoney.cpp:3969 kmymoney/plugins/ofx/import/ofximporter.cpp:1051
 #, kde-format
 msgid "Importing error"
 msgstr "Chyba při importu"
 
-#: kmymoney/kmymoney.cpp:4026
+#: kmymoney/kmymoney.cpp:3999
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Všechna hlášení byla povolena."
 
-#: kmymoney/kmymoney.cpp:4026
+#: kmymoney/kmymoney.cpp:3999
 #, kde-format
 msgid "All messages"
 msgstr "Všechna hlášení"
 
-#: kmymoney/kmymoney.cpp:4062
+#: kmymoney/kmymoney.cpp:4035
 #, kde-format
 msgid "Auto saving..."
 msgstr "Automatické ukládání..."
 
-#: kmymoney/kmymoney.cpp:4182
+#: kmymoney/kmymoney.cpp:4155
 #, kde-format
 msgid "Creating new document..."
 msgstr "Vytvářím nový dokument...."
 
-#: kmymoney/kmymoney.cpp:4242
+#: kmymoney/kmymoney.cpp:4215
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4253
+#: kmymoney/kmymoney.cpp:4226
 #, kde-format
 msgid "Open a file."
 msgstr "Otevřít soubor..."
 
-#: kmymoney/kmymoney.cpp:4267
+#: kmymoney/kmymoney.cpp:4240
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4271
+#: kmymoney/kmymoney.cpp:4244
 #, kde-format
 msgid "All files (*)"
 msgstr "Všechny soubory (*)"
 
-#: kmymoney/kmymoney.cpp:4284
+#: kmymoney/kmymoney.cpp:4257
 #, kde-format
 msgid "Loading file..."
 msgstr "Načítám soubor..."
 
-#: kmymoney/kmymoney.cpp:4292
+#: kmymoney/kmymoney.cpp:4265
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5617,55 +5617,55 @@ msgstr ""
 "<p>Název souboru <b>%1</b> je buď  špatné, nebo soubor neexistuje. Otevřete "
 "nebo vytvořte jiný soubor.</p>"
 
-#: kmymoney/kmymoney.cpp:4292
+#: kmymoney/kmymoney.cpp:4265
 #, kde-format
 msgid "File not found"
 msgstr "Soubor nebyl nalezen"
 
-#: kmymoney/kmymoney.cpp:4324
+#: kmymoney/kmymoney.cpp:4297
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4330
+#: kmymoney/kmymoney.cpp:4303
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "Požadovaný soubor nelze otevřít."
 
-#: kmymoney/kmymoney.cpp:4337
+#: kmymoney/kmymoney.cpp:4310
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
 "necessary plugin is enabled."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4348
+#: kmymoney/kmymoney.cpp:4321
 #, kde-format
 msgid "Saving file..."
 msgstr "Ukládám soubor..."
 
-#: kmymoney/kmymoney.cpp:4360
+#: kmymoney/kmymoney.cpp:4333
 #, kde-format
 msgid "Failed to save your data."
 msgstr "Uložení dat selhalo."
 
-#: kmymoney/kmymoney.cpp:4366
+#: kmymoney/kmymoney.cpp:4339
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr "Nelze najít vhodný modul pro uložení vašich dat."
 
-#: kmymoney/kmymoney.cpp:4372
+#: kmymoney/kmymoney.cpp:4345
 #, kde-format
 msgid "Saving file as...."
 msgstr "Ukládám soubor jako...."
 
-#: kmymoney/kmymoney.cpp:4388
+#: kmymoney/kmymoney.cpp:4361
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr "Nelze najít jakýkoliv modul pro uložení dat."
 
-#: kmymoney/kmymoney.cpp:4417
+#: kmymoney/kmymoney.cpp:4390
 #, kde-format
 msgid "Failed to save your storage."
 msgstr ""
@@ -20755,7 +20755,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Rozdíl: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:350
+#: kmymoney/views/simpleledgerview.cpp:357
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -20763,7 +20763,7 @@ msgid ""
 "reconciling it. Finish, cancel or postpone the reconciliation to get it back."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:463
+#: kmymoney/views/simpleledgerview.cpp:470
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -20771,7 +20771,7 @@ msgid ""
 "text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:466
+#: kmymoney/views/simpleledgerview.cpp:473
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -20779,19 +20779,19 @@ msgid ""
 "this text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:743
+#: kmymoney/views/simpleledgerview.cpp:748
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:929
+#: kmymoney/views/simpleledgerview.cpp:934
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
 "cancel or postpone the reconciliation first."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:930
+#: kmymoney/views/simpleledgerview.cpp:935
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"

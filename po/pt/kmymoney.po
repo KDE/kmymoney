@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-03 01:55+0000\n"
+"POT-Creation-Date: 2025-05-04 02:05+0000\n"
 "PO-Revision-Date: 2023-07-13 00:39+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -5906,7 +5906,7 @@ msgstr "Resultado da verificação da consistência"
 msgid "Checking for overdue scheduled transactions..."
 msgstr "A verificar as transacções agendadas atrasadas..."
 
-#: kmymoney/kmymoney.cpp:3979
+#: kmymoney/kmymoney.cpp:3952
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
@@ -5914,12 +5914,12 @@ msgstr ""
 "Deve seleccionar primeiro um ficheiro do KMyMoney antes de poder importar um "
 "extracto."
 
-#: kmymoney/kmymoney.cpp:3984
+#: kmymoney/kmymoney.cpp:3957
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "A importar um extracto através de uma ligação à Web"
 
-#: kmymoney/kmymoney.cpp:3996
+#: kmymoney/kmymoney.cpp:3969
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5929,57 +5929,57 @@ msgstr ""
 "Não foi possível importar o %1 usando o 'plugin' %2.  Este devolveu o "
 "seguinte erro: %3"
 
-#: kmymoney/kmymoney.cpp:3996 kmymoney/plugins/ofx/import/ofximporter.cpp:1051
+#: kmymoney/kmymoney.cpp:3969 kmymoney/plugins/ofx/import/ofximporter.cpp:1051
 #, kde-format
 msgid "Importing error"
 msgstr "Erro de importação"
 
-#: kmymoney/kmymoney.cpp:4026
+#: kmymoney/kmymoney.cpp:3999
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Todas as mensagens foram activadas."
 
-#: kmymoney/kmymoney.cpp:4026
+#: kmymoney/kmymoney.cpp:3999
 #, kde-format
 msgid "All messages"
 msgstr "Todas as mensagens"
 
-#: kmymoney/kmymoney.cpp:4062
+#: kmymoney/kmymoney.cpp:4035
 #, kde-format
 msgid "Auto saving..."
 msgstr "Gravação automática..."
 
-#: kmymoney/kmymoney.cpp:4182
+#: kmymoney/kmymoney.cpp:4155
 #, kde-format
 msgid "Creating new document..."
 msgstr "A criar um novo documento..."
 
-#: kmymoney/kmymoney.cpp:4242
+#: kmymoney/kmymoney.cpp:4215
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "Não foi possível criar um ficheiro novo."
 
-#: kmymoney/kmymoney.cpp:4253
+#: kmymoney/kmymoney.cpp:4226
 #, kde-format
 msgid "Open a file."
 msgstr "Abrir um ficheiro."
 
-#: kmymoney/kmymoney.cpp:4267
+#: kmymoney/kmymoney.cpp:4240
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr "Não foi possível encontrar nenhum 'plugin' para abrir o armazenamento."
 
-#: kmymoney/kmymoney.cpp:4271
+#: kmymoney/kmymoney.cpp:4244
 #, kde-format
 msgid "All files (*)"
 msgstr "Todos os Ficheiros (*)"
 
-#: kmymoney/kmymoney.cpp:4284
+#: kmymoney/kmymoney.cpp:4257
 #, kde-format
 msgid "Loading file..."
 msgstr "A carregar o ficheiro..."
 
-#: kmymoney/kmymoney.cpp:4292
+#: kmymoney/kmymoney.cpp:4265
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5988,23 +5988,23 @@ msgstr ""
 "<p>O <b>%1</b> é um nome de ficheiro inválido ou de um ficheiro que não "
 "existe. Poderá abrir outro ficheiro ou criar um novo.</p>"
 
-#: kmymoney/kmymoney.cpp:4292
+#: kmymoney/kmymoney.cpp:4265
 #, kde-format
 msgid "File not found"
 msgstr "O ficheiro não foi encontrado"
 
-#: kmymoney/kmymoney.cpp:4324
+#: kmymoney/kmymoney.cpp:4297
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4330
+#: kmymoney/kmymoney.cpp:4303
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "Não é possível aceder ao ficheiro pedido."
 
-#: kmymoney/kmymoney.cpp:4337
+#: kmymoney/kmymoney.cpp:4310
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -6013,33 +6013,33 @@ msgstr ""
 "Não foi possível ler a sua base de dados. Verifique por favor a configuração "
 "do KMyMoney se o 'plugin' necessário está activo."
 
-#: kmymoney/kmymoney.cpp:4348
+#: kmymoney/kmymoney.cpp:4321
 #, kde-format
 msgid "Saving file..."
 msgstr "A gravar o ficheiro..."
 
-#: kmymoney/kmymoney.cpp:4360
+#: kmymoney/kmymoney.cpp:4333
 #, kde-format
 msgid "Failed to save your data."
 msgstr "Não foi possível gravar os seus dados."
 
-#: kmymoney/kmymoney.cpp:4366
+#: kmymoney/kmymoney.cpp:4339
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 "Não foi possível encontrar um 'plugin' adequado para gravar os seus dados."
 
-#: kmymoney/kmymoney.cpp:4372
+#: kmymoney/kmymoney.cpp:4345
 #, kde-format
 msgid "Saving file as...."
 msgstr "A gravar o ficheiro como..."
 
-#: kmymoney/kmymoney.cpp:4388
+#: kmymoney/kmymoney.cpp:4361
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr "Não foi possível encontrar nenhum 'plugin' para gravar os dados."
 
-#: kmymoney/kmymoney.cpp:4417
+#: kmymoney/kmymoney.cpp:4390
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "Não foi possível gravar o seu armazenamento."
@@ -21688,7 +21688,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Diferença: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:350
+#: kmymoney/views/simpleledgerview.cpp:357
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -21698,7 +21698,7 @@ msgstr ""
 "O botão de fecho desta conta foi removido porque você está a consolidá-la. "
 "Termine, cancele ou adie a consolidação para o ter de volta."
 
-#: kmymoney/views/simpleledgerview.cpp:463
+#: kmymoney/views/simpleledgerview.cpp:470
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21708,7 +21708,7 @@ msgstr ""
 "Esta página mostra o livro de registos das contas. De momento não existem "
 "contas, pelo que é apresentado este texto em alternativa."
 
-#: kmymoney/views/simpleledgerview.cpp:466
+#: kmymoney/views/simpleledgerview.cpp:473
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -21718,12 +21718,12 @@ msgstr ""
 "Esta página mostra o livro de registos das contas. De momento não estão "
 "seleccionadas contas, pelo que é apresentado este texto em alternativa."
 
-#: kmymoney/views/simpleledgerview.cpp:743
+#: kmymoney/views/simpleledgerview.cpp:748
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Abrir a página Web do <b>%1</b> no seu navegador."
 
-#: kmymoney/views/simpleledgerview.cpp:929
+#: kmymoney/views/simpleledgerview.cpp:934
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -21732,7 +21732,7 @@ msgstr ""
 "Não pode fechar esta janela porque a está a consolidar. Termine, cancele ou "
 "adie a consolidação para poder voltar a fechar."
 
-#: kmymoney/views/simpleledgerview.cpp:930
+#: kmymoney/views/simpleledgerview.cpp:935
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
