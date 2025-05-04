@@ -92,9 +92,3 @@ QDate KMyMoneyPeriodCombo::end(TransactionFilter::Date id)
     MyMoneyTransactionFilter::translateDateRange(id, start, end);
     return end;
 }
-
-#if 0
-void KMyMoneyPeriodCombo::dates(QDate& start, QDate& end, MyMoneyTransactionFilter::dateOptionE id)
-{
-}
-#endif
