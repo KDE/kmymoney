@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-04 02:05+0000\n"
+"POT-Creation-Date: 2025-05-05 01:59+0000\n"
 "PO-Revision-Date: 2025-04-22 09:46+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -9160,7 +9160,7 @@ msgid "Fraction"
 msgstr "Fracció"
 
 #: kmymoney/mymoney/storage/specialdatesmodel.cpp:83
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:42
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:44
 #, kde-format
 msgid "Last month"
 msgstr "Mes anterior"
@@ -9245,13 +9245,13 @@ msgctxt "@title:column Column heading for description"
 msgid "Description"
 msgstr "Descripció"
 
-#: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:655
+#: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:657
 #, kde-format
 msgctxt "Missing attribute %1 in xml file"
 msgid "Missing attribute %1 in line %2"
 msgstr "Manca l'atribut %1 a la línia %2"
 
-#: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:658
+#: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:660
 #, kde-format
 msgctxt "Empty attribute %1 in xml file"
 msgid "Empty attribute %1 in line %2"
@@ -17720,7 +17720,7 @@ msgstr "Automàtica"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_dataLock)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:184
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:60
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:62
 #, kde-format
 msgid "User defined"
 msgstr "Definit per l'usuari"
@@ -22070,91 +22070,103 @@ msgid "Year to date"
 msgstr "Any en curs"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:41
+#, fuzzy, kde-format
+#| msgid "Month to date"
+msgid "Fiscal month to date"
+msgstr "Mes en curs"
+
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:42
+#, fuzzy, kde-format
+#| msgid "Year to date"
+msgid "Fiscal year to date"
+msgstr "Any en curs"
+
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:43
 #, kde-format
 msgid "Year to month"
 msgstr "Any fins al mes"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:43
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:45
 #, kde-format
 msgid "Last year"
 msgstr "Darrer any"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:44
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:46
 #, kde-format
 msgid "Last fiscal year"
 msgstr "Darrer any fiscal"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:45
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:47
 #, kde-format
 msgid "Last 7 days"
 msgstr "Darrers 7 dies"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:46
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:48
 #, kde-format
 msgid "Last 30 days"
 msgstr "Darrers 30 dies"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:47
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:49
 #, kde-format
 msgid "Last 3 months"
 msgstr "Darrers 3 mesos"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:48
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:50
 #, kde-format
 msgid "Last quarter"
 msgstr "Darrer trimestre"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:49
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:51
 #, kde-format
 msgid "Last 6 months"
 msgstr "Darrers 6 mesos"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:50
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:52
 #, kde-format
 msgid "Last 11 months"
 msgstr "Darrers 11 mesos"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:51
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:53
 #, kde-format
 msgid "Last 12 months"
 msgstr "Darrers 12 mesos"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:52
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:54
 #, kde-format
 msgid "Next 7 days"
 msgstr "Pròxims 7 dies"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:53
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:55
 #, kde-format
 msgid "Next 30 days"
 msgstr "Pròxims 30 dies"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:54
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:56
 #, kde-format
 msgid "Next 3 months"
 msgstr "Pròxims 3 mesos"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:55
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:57
 #, kde-format
 msgid "Next quarter"
 msgstr "Pròxim trimestre"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:56
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:58
 #, kde-format
 msgid "Next 6 months"
 msgstr "Pròxims 6 mesos"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:57
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:59
 #, kde-format
 msgid "Next 12 months"
 msgstr "Pròxims 12 mesos"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:58
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:60
 #, kde-format
 msgid "Next 18 months"
 msgstr "Pròxims 18 mesos"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:59
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:61
 #, kde-format
 msgid "Last 3 months to next 3 months"
 msgstr "Darrers 3 mesos als 3 pròxims mesos"

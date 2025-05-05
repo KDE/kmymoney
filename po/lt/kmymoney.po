@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-04 02:05+0000\n"
+"POT-Creation-Date: 2025-05-05 01:59+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -9018,7 +9018,7 @@ msgid "Fraction"
 msgstr "Dalis"
 
 #: kmymoney/mymoney/storage/specialdatesmodel.cpp:83
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:42
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:44
 #, kde-format
 msgid "Last month"
 msgstr "Praėjęs mėnuo"
@@ -9107,13 +9107,13 @@ msgctxt "@title:column Column heading for description"
 msgid "Description"
 msgstr "Aprašymas"
 
-#: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:655
+#: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:657
 #, kde-format
 msgctxt "Missing attribute %1 in xml file"
 msgid "Missing attribute %1 in line %2"
 msgstr ""
 
-#: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:658
+#: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:660
 #, kde-format
 msgctxt "Empty attribute %1 in xml file"
 msgid "Empty attribute %1 in line %2"
@@ -17522,7 +17522,7 @@ msgstr "Automatinis"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_dataLock)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:184
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:60
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:62
 #, kde-format
 msgid "User defined"
 msgstr "Naudotojo nustatyta"
@@ -21747,91 +21747,103 @@ msgstr "Metai iki šiandien"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:41
 #, fuzzy, kde-format
-msgid "Year to month"
+#| msgid "Month to date"
+msgid "Fiscal month to date"
+msgstr "Mėnuo iki šiandien"
+
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:42
+#, fuzzy, kde-format
+#| msgid "Year to date"
+msgid "Fiscal year to date"
 msgstr "Metai iki šiandien"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:43
+#, fuzzy, kde-format
+msgid "Year to month"
+msgstr "Metai iki šiandien"
+
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:45
 #, kde-format
 msgid "Last year"
 msgstr "Praėję metai"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:44
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:46
 #, fuzzy, kde-format
 msgid "Last fiscal year"
 msgstr "Praėję metai"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:45
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:47
 #, kde-format
 msgid "Last 7 days"
 msgstr "Paskutinės 7 dienos"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:46
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:48
 #, kde-format
 msgid "Last 30 days"
 msgstr "Paskutinės 30 d."
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:47
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:49
 #, kde-format
 msgid "Last 3 months"
 msgstr "Paskutiniai 3 mėn."
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:48
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:50
 #, kde-format
 msgid "Last quarter"
 msgstr "Praėjęs ketvirtis"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:49
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:51
 #, kde-format
 msgid "Last 6 months"
 msgstr "Paskutiniai 6 mėn."
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:50
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:52
 #, kde-format
 msgid "Last 11 months"
 msgstr "Paskutiniai 12 mėn."
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:51
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:53
 #, kde-format
 msgid "Last 12 months"
 msgstr "Paskutiniai 12 mėn."
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:52
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:54
 #, kde-format
 msgid "Next 7 days"
 msgstr "Kitos 7 dienos"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:53
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:55
 #, fuzzy, kde-format
 msgid "Next 30 days"
 msgstr "Atei&nančios %1 dienų"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:54
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:56
 #, kde-format
 msgid "Next 3 months"
 msgstr "Kiti 3 mėnesiai"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:55
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:57
 #, fuzzy, kde-format
 msgid "Next quarter"
 msgstr "Kiti metai"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:56
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:58
 #, kde-format
 msgid "Next 6 months"
 msgstr "Kiti 6 mėnesiai"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:57
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:59
 #, fuzzy, kde-format
 msgid "Next 12 months"
 msgstr "Kiti 3 mėnesiai"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:58
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:60
 #, fuzzy, kde-format
 #| msgid "Next month"
 msgid "Next 18 months"
 msgstr "Kiti 3 mėnesiai"
 
-#: kmymoney/widgets/kmymoneyperiodcombo.cpp:59
+#: kmymoney/widgets/kmymoneyperiodcombo.cpp:61
 #, fuzzy, kde-format
 msgid "Last 3 months to next 3 months"
 msgstr "Paskutiniai 3 mėn."
