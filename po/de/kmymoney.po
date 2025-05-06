@@ -21644,8 +21644,7 @@ msgstr ""
 "der anderen Split-Buchung ersetzen."
 
 #: kmymoney/views/newtransactioneditor.cpp:1574
-#, fuzzy, kde-format
-#| msgid "Copy memo"
+#, kde-format
 msgid "Copy memo"
 msgstr "Notiz kopieren"
 

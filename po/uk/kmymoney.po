@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-05 01:59+0000\n"
-"PO-Revision-Date: 2025-04-22 09:22+0300\n"
+"PO-Revision-Date: 2025-05-05 09:56+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -22095,16 +22095,14 @@ msgid "Year to date"
 msgstr "Рік перед поточною датою"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:41
-#, fuzzy, kde-format
-#| msgid "Month to date"
+#, kde-format
 msgid "Fiscal month to date"
-msgstr "Місяць перед поточною датою"
+msgstr "Фіскальнйи місяць перед датою"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:42
-#, fuzzy, kde-format
-#| msgid "Year to date"
+#, kde-format
 msgid "Fiscal year to date"
-msgstr "Рік перед поточною датою"
+msgstr "Фіскальний рік перед датою"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:43
 #, kde-format

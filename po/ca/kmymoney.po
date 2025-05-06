@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-05 01:59+0000\n"
-"PO-Revision-Date: 2025-04-22 09:46+0200\n"
+"PO-Revision-Date: 2025-05-05 12:43+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -22070,16 +22070,14 @@ msgid "Year to date"
 msgstr "Any en curs"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:41
-#, fuzzy, kde-format
-#| msgid "Month to date"
+#, kde-format
 msgid "Fiscal month to date"
-msgstr "Mes en curs"
+msgstr "Mes fiscal fins a la data"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:42
-#, fuzzy, kde-format
-#| msgid "Year to date"
+#, kde-format
 msgid "Fiscal year to date"
-msgstr "Any en curs"
+msgstr "Any fiscal fins a la data"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:43
 #, kde-format

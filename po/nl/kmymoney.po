@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-05 01:59+0000\n"
-"PO-Revision-Date: 2025-04-22 11:32+0200\n"
+"PO-Revision-Date: 2025-05-05 10:08+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -22013,16 +22013,14 @@ msgid "Year to date"
 msgstr "Jaar tot nu"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:41
-#, fuzzy, kde-format
-#| msgid "Month to date"
+#, kde-format
 msgid "Fiscal month to date"
-msgstr "Maand tot nu"
+msgstr "Fiscale maand tot nu"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:42
-#, fuzzy, kde-format
-#| msgid "Year to date"
+#, kde-format
 msgid "Fiscal year to date"
-msgstr "Jaar tot nu"
+msgstr "Fiscaal jaar tot nu"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:43
 #, kde-format
