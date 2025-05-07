@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-05 01:59+0000\n"
-"PO-Revision-Date: 2025-04-22 19:53+0300\n"
+"PO-Revision-Date: 2025-05-06 22:18+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21827,16 +21827,14 @@ msgid "Year to date"
 msgstr "Yıldan güne"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:41
-#, fuzzy, kde-format
-#| msgid "Month to date"
+#, kde-format
 msgid "Fiscal month to date"
-msgstr "Aydan güne"
+msgstr "Bugüne kadar olan malî ay"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:42
-#, fuzzy, kde-format
-#| msgid "Year to date"
+#, kde-format
 msgid "Fiscal year to date"
-msgstr "Yıldan güne"
+msgstr "Bugüne kadar olan malî yıl"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:43
 #, kde-format

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-05 01:59+0000\n"
-"PO-Revision-Date: 2025-04-22 09:46+0200\n"
+"PO-Revision-Date: 2025-05-05 12:43+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -9621,7 +9621,7 @@ msgstr ""
 "Des d'este diàleg podeu exportar operacions a un fitxer separat per comes "
 "(conegut com a fitxer CSV a causa de l'extensió). Tanmateix, podeu "
 "especificar un separador alternatiu davall. Introduïu el camí cap al fitxer "
-"CSV o escolliu-lo clicant en el botó «Explora».\n"
+"CSV o escolliu-lo fent clic en el botó «Explora».\n"
 "\n"
 "Podeu escollir el camí del fitxer i el compte. Seleccioneu Compte per a "
 "exportar totes les operacions entre les dates especificades, o només "
@@ -14001,7 +14001,7 @@ msgid ""
 msgstr ""
 "Des d'este diàleg podeu exportar operacions a un fitxer compatible amb "
 "Quicken (anomenat fitxer QIF a causa de l'extensió). Introduïu el camí cap "
-"al fitxer QIF o escolliu-lo clicant en el botó «Explora».\n"
+"al fitxer QIF o escolliu-lo fent clic en el botó «Explora».\n"
 "\n"
 "Podeu escollir el camí del fitxer, el compte i el format del fitxer QIF "
 "(perfil). En els continguts que s'exportaran, escolliu «Compte» per tal "
@@ -14090,7 +14090,7 @@ msgid ""
 msgstr ""
 "<p>Des d'este diàleg podeu importar operacions des d'un fitxer compatible "
 "amb Quicken<b>&trade;</b> (anomenat fitxer QIF a causa de l'extensió).</p>\n"
-"<p>Introduïu el camí cap al fitxer QIF o escolliu-lo clicant en el botó "
+"<p>Introduïu el camí cap al fitxer QIF o escolliu-lo fent clic en el botó "
 "«Explora». Una vegada es tinga el camí cap al fitxer, cliqueu en el botó "
 "«Importa» i KMyMoney importarà totes les operacions, categories i "
 "beneficiaris que trobe.</p>"
@@ -22069,16 +22069,14 @@ msgid "Year to date"
 msgstr "Any en curs"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:41
-#, fuzzy, kde-format
-#| msgid "Month to date"
+#, kde-format
 msgid "Fiscal month to date"
-msgstr "Mes en curs"
+msgstr "Mes fiscal fins a la data"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:42
-#, fuzzy, kde-format
-#| msgid "Year to date"
+#, kde-format
 msgid "Fiscal year to date"
-msgstr "Any en curs"
+msgstr "Any fiscal fins a la data"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:43
 #, kde-format
