@@ -21,13 +21,25 @@ kmm_add_tests(${tests_sources}
     kmm_testutilities
 )
 
-add_executable(reports-chart-test chart-test.cpp)
-target_link_libraries(reports-chart-test
-  reports
-  Qt::Core
-  Qt::Gui
-  Qt::Test
+set(tests_gui_sources
+  chart-test.cpp
 )
+
+# do not run this test on KDE CI, as it is broken for unknown reason
+if(NOT $ENV{KDECI_BUILD})
+    ecm_add_tests(${tests_gui_sources}
+      NAME_PREFIX
+        "reports-"
+      ENV
+        "QT_QPA_PLATFORM=offscreen"
+      GUI
+      LINK_LIBRARIES
+        reports
+        Qt::Core
+        Qt::Gui
+        Qt::Test
+    )
+endif()
 
 add_subdirectory(data)
 
