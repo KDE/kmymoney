@@ -169,6 +169,11 @@ public:
             fmode = QFile::permissions(localFile);
         }
 
+        // check if we have a filename or were able to create a temporary file
+        if (writeFile.isEmpty()) {
+            throw MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing.").arg(localFile));
+        }
+
         QSignalBlocker blockMyMoneyFile(MyMoneyFile::instance());
 
         MyMoneyFileTransaction ft;
@@ -289,8 +294,11 @@ public:
         auto newLock = new QLockFile(filename + ".lck");
         newLock->setStaleLockTime(0);
         if (!newLock->tryLock()) {
+            // in case we cannot write the lockfile, we assume that the
+            // file cannot be changed as well and open it unlocked
+            const bool rc = (newLock->error() == QLockFile::PermissionError);
             delete newLock;
-            return false;
+            return rc;
         }
         unlock();
         m_lockFile.reset(newLock);
