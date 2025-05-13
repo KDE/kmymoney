@@ -21160,16 +21160,14 @@ msgid "Year to date"
 msgstr "到某天为止的一年内"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:41
-#, fuzzy, kde-format
-#| msgid "Month to date"
+#, kde-format
 msgid "Fiscal month to date"
-msgstr "到某天为止的一个月内"
+msgstr ""
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:42
-#, fuzzy, kde-format
-#| msgid "Year to date"
+#, kde-format
 msgid "Fiscal year to date"
-msgstr "到某天为止的一年内"
+msgstr ""
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:43
 #, kde-format

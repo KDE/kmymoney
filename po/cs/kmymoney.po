@@ -51,11 +51,10 @@ msgid "Invalid Statement"
 msgstr "Neplatný výpis"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:485
-#, fuzzy, kde-format
-#| msgid "No Institution"
+#, kde-format
 msgctxt "@info Group name for accounts with no assigned institution"
 msgid "No institution"
-msgstr "Žádná instituce"
+msgstr ""
 
 #: kmymoney/converter/mymoneystatementreader.cpp:639
 #, kde-format
@@ -415,11 +414,10 @@ msgstr[2] "%1 výpisů bylo zpracováno s následujícími výsledky:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ImportSummaryDialog)
 #: kmymoney/dialogs/importsummarydlg.ui:14
-#, fuzzy, kde-format
-#| msgid "Imported History"
+#, kde-format
 msgctxt "@title:window"
 msgid "Import summary"
-msgstr "Importovaná historie"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonSkip)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonCancel)
@@ -3047,10 +3045,9 @@ msgstr "Automaticky ukládat soubor, pokud je při ukončení aplikace změněn"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_3)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:102
-#, fuzzy, kde-format
-#| msgid "Startup options"
+#, kde-format
 msgid "Backup options"
-msgstr "Chování při startu"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, kcfg_BackupExtension)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:112
@@ -4370,10 +4367,9 @@ msgid ""
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:45
-#, fuzzy, kde-format
-#| msgid "(c) 2000-2024 The KMyMoney development team"
+#, kde-format
 msgid "(c) 2000-2025 The KMyMoney development team"
-msgstr "(c) 2000-2024 Vývojový tým KMyMoney"
+msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:49
 #, kde-format
@@ -6213,55 +6209,46 @@ msgid "Name"
 msgstr "Název"
 
 #: kmymoney/models/statementmodel.cpp:95
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "@title:column Shows the date of statement"
 msgid "Date"
-msgstr "Datum"
+msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:97
-#, fuzzy, kde-format
-#| msgid "Balance"
+#, kde-format
 msgctxt "@title:column Shows statement balance"
 msgid "Balance"
-msgstr "Zůstatek "
+msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:99
-#, fuzzy, kde-format
-#| msgid "    %1 processed"
-#| msgid_plural "    %1 processed"
+#, kde-format
 msgctxt "@title:column Shows number of transactions read"
 msgid "Processed"
-msgstr "    %1 zpracováno"
+msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:101
-#, fuzzy, kde-format
-#| msgid "Imported"
+#, kde-format
 msgctxt "@title:column Shows number of imported transactions"
 msgid "Imported"
-msgstr "Importováno"
+msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:103
-#, fuzzy, kde-format
-#| msgid "Matched"
+#, kde-format
 msgctxt "@title:column Shows number of matched transactions"
 msgid "Matched"
-msgstr "Spárováno"
+msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:105
-#, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
-#| msgid "Duplicate"
+#, kde-format
 msgctxt "@title:column Shows number of duplicate transactions"
 msgid "Duplicates"
-msgstr "Duplikovat"
+msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:107
-#, fuzzy, kde-format
-#| msgid "Payee creation"
+#, kde-format
 msgctxt "@title:column Shows number of create payees"
 msgid "Payees created"
-msgstr "Vytvoření plátce"
+msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:117
 #: kmymoney/mymoney/storage/accountsmodel.cpp:503
@@ -12666,10 +12653,9 @@ msgstr "Z&volte datum"
 #. i18n: ectx: property (text), item, widget (QComboBox, m_preferredPrice)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:398
 #: kmymoney/plugins/ofx/import/importoption.ui:174
-#, fuzzy, kde-format
-#| msgid "File Information"
+#, kde-format
 msgid "Price information"
-msgstr "Informace o souboru"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_preferredPrice)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:403
@@ -17693,19 +17679,16 @@ msgid "Recover key expires soon"
 msgstr ""
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:347
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
+#, kde-format
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is already opened by another process."
-msgstr "<p>Soubor <b>%1</b> je již otevřen v jiné instanci KMyMoney</p>"
+msgstr ""
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:458
-#, fuzzy, kde-format
-#| msgid "<p><b>%1</b> is not a template file.</p>"
+#, kde-format
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is not a KMyMoney data file."
-msgstr "<p><b>%1</b> není soubor se šablonou.</p>"
+msgstr ""
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:616
 #, kde-format
@@ -20634,10 +20617,9 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/newtransactioneditor.cpp:1574
-#, fuzzy, kde-format
-#| msgid "Copy report"
+#, kde-format
 msgid "Copy memo"
-msgstr "Kopírovat hlášení"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, numberEdit)
 #: kmymoney/views/newtransactioneditor.ui:24
@@ -21278,16 +21260,14 @@ msgid "Year to date"
 msgstr "Uplynulý rok až do dneška"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:41
-#, fuzzy, kde-format
-#| msgid "Month to date"
+#, kde-format
 msgid "Fiscal month to date"
-msgstr "Uplynulý měsíc až do dneška"
+msgstr ""
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:42
-#, fuzzy, kde-format
-#| msgid "Year to date"
+#, kde-format
 msgid "Fiscal year to date"
-msgstr "Uplynulý rok až do dneška"
+msgstr ""
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:43
 #, kde-format
@@ -23424,12 +23404,10 @@ msgid "HalfUp"
 msgstr ""
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:199
-#, fuzzy, kde-format
-#| msgctxt "@action move item down"
-#| msgid "Down"
+#, kde-format
 msgctxt "Rounding method"
 msgid "HalfDown"
-msgstr "Dolů"
+msgstr ""
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:200
 #, kde-format
@@ -23456,11 +23434,10 @@ msgid "Truncate"
 msgstr "Zkrátit"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:204
-#, fuzzy, kde-format
-#| msgid "Promote"
+#, kde-format
 msgctxt "Rounding method"
 msgid "Promote"
-msgstr "Proměnit"
+msgstr ""
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:247
 #, kde-format
@@ -25134,64 +25111,3 @@ msgstr ""
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr ""
-
-#~ msgid "Importing statement for account %1"
-#~ msgstr "Importuji výpis pro účet %1"
-
-#~ msgid "Importing statement without transactions"
-#~ msgstr "Importuji výpis bez transakcí"
-
-#~ msgid "  Statement balance is not contained in statement."
-#~ msgstr "  Výpos n"
-
-#~ msgid "  Statement balance on %1 is reported to be %2"
-#~ msgstr " Bilance účtu %1 je %2"
-
-#~ msgid "  Transactions"
-#~ msgstr "  Transakce"
-
-#~ msgctxt "x transactions have been added"
-#~ msgid "    %1 added"
-#~ msgid_plural "    %1 added"
-#~ msgstr[0] "    %1 přidán"
-#~ msgstr[1] "    %1 přidány"
-#~ msgstr[2] "    %1 přidáno"
-
-#~ msgid "    %1 matched"
-#~ msgid_plural "    %1 matched"
-#~ msgstr[0] "    %1 spárován"
-#~ msgstr[1] "    %1 spárovány"
-#~ msgstr[2] "    %1 spárováno"
-
-#~ msgid "    %1 duplicate"
-#~ msgid_plural "    %1 duplicates"
-#~ msgstr[0] "    %1 duplicitní"
-#~ msgstr[1] "    %1 duplicitní"
-#~ msgstr[2] "    %1 duplicitních"
-
-#~ msgid "  Payees"
-#~ msgstr "  Plátci "
-
-#~ msgctxt "x transactions have been created"
-#~ msgid "    %1 created"
-#~ msgid_plural "    %1 created"
-#~ msgstr[0] "    %1 vytvořen"
-#~ msgstr[1] "    %1 vytvořeny"
-#~ msgstr[2] "    %1 vytvořeno"
-
-#~ msgid "Duplicate open"
-#~ msgstr "Duplikovat otevřené"
-
-#~ msgid ""
-#~ "<p>The account \"%1\" was previously created as loan account but some "
-#~ "information is missing.</p><p>The new loan wizard will be started to "
-#~ "collect all relevant information.</p><p>Please use KMyMoney version 0.8.7 "
-#~ "or later and earlier than version 0.9 to correct the problem.</p>"
-#~ msgstr ""
-#~ "<p>Účet \"%1\" byl v minulosti vytvořen jako úvěrový účet, ale scházejí "
-#~ "nějaké informace.</p><p>Bude spuštěn nový průvodce úvěrovým účtem, který "
-#~ "sesbírá všechny potřebné informace.</p> <p>Prosím, použijte KMyMoney od "
-#~ "verze 0.8.7 do 0.9 pro opravu tohoto problému.</p>"
-
-#~ msgid "Account problem"
-#~ msgstr "Problém s účtem"
