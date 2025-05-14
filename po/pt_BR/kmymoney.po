@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-05 01:59+0000\n"
+"POT-Creation-Date: 2025-05-14 02:01+0000\n"
 "PO-Revision-Date: 2023-09-18 10:19-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -5618,7 +5618,7 @@ msgstr "Nenhum arquivo KMyMoney aberto"
 
 #: kmymoney/kmymoney.cpp:3042 kmymoney/kmymoney.cpp:3044
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1363
-#: kmymoney/plugins/xml/xmlstorage.cpp:683
+#: kmymoney/plugins/xml/xmlstorage.cpp:691
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
@@ -9874,7 +9874,7 @@ msgstr "Exportação concluída.\n"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:85
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
-#: kmymoney/plugins/xml/xmlstorage.cpp:205
+#: kmymoney/plugins/xml/xmlstorage.cpp:210
 #, kde-format
 msgid "Unable to open file '%1' for writing"
 msgstr "Não foi possível abrir o arquivo '%1' para gravação"
@@ -14952,7 +14952,7 @@ msgid "Database malfunction"
 msgstr "Mau funcionamento do banco de dados"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:193
-#: kmymoney/plugins/xml/xmlstorage.cpp:507
+#: kmymoney/plugins/xml/xmlstorage.cpp:515
 #, kde-format
 msgid "Tried to access a file when it has not been opened"
 msgstr "Tentou acessar a um arquivo que não se encontrava aberto"
@@ -18448,7 +18448,13 @@ msgstr ""
 msgid "Store GPG encrypted"
 msgstr "Armazenar criptografado pelo GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:270
+#: kmymoney/plugins/xml/xmlstorage.cpp:174
+#, fuzzy, kde-format
+#| msgid "Unable to open file '%1' for writing"
+msgid "Unable to open file '%1' for writing."
+msgstr "Não foi possível abrir o arquivo '%1' para gravação"
+
+#: kmymoney/plugins/xml/xmlstorage.cpp:275
 #, kde-format
 msgid ""
 "You have configured KMyMoney to use GPG to protect your data and to encrypt "
@@ -18471,12 +18477,12 @@ msgstr[1] ""
 "expirar em %1 dias. Atualize a chave de um servidor de chaves usando uma "
 "interface para o GPG (p.ex., KGPG)."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:275
+#: kmymoney/plugins/xml/xmlstorage.cpp:280
 #, kde-format
 msgid "Recover key expires soon"
 msgstr "A chave de recuperação perderá a validade em breve"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:347
+#: kmymoney/plugins/xml/xmlstorage.cpp:355
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
@@ -18485,43 +18491,43 @@ msgid "File <b>%1</b> is already opened by another process."
 msgstr ""
 "<p>O arquivo <b>%1</b> já está aberto em outra instância do KMyMoney</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:458
+#: kmymoney/plugins/xml/xmlstorage.cpp:466
 #, fuzzy, kde-format
 #| msgid "<p><b>%1</b> is not a template file.</p>"
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is not a KMyMoney data file."
 msgstr "<p><b>%1</b> não é um arquivo de modelo.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:616
+#: kmymoney/plugins/xml/xmlstorage.cpp:624
 #, kde-format
 msgid "Save As"
 msgstr "Salvar como"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:618
+#: kmymoney/plugins/xml/xmlstorage.cpp:626
 #, kde-format
 msgctxt "KMyMoney (Filefilter)"
 msgid "KMyMoney files"
 msgstr "Arquivos do KMyMoney"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:619
+#: kmymoney/plugins/xml/xmlstorage.cpp:627
 #, kde-format
 msgctxt "Anonymous (Filefilter)"
 msgid "Anonymous files"
 msgstr "Arquivos anônimos"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:620
+#: kmymoney/plugins/xml/xmlstorage.cpp:628
 #, kde-format
 msgctxt "XML (Filefilter)"
 msgid "XML files"
 msgstr "Arquivos XML"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:621
+#: kmymoney/plugins/xml/xmlstorage.cpp:629
 #, kde-format
 msgctxt "All files (Filefilter)"
 msgid "All files"
 msgstr "Todos os arquivos"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:695
+#: kmymoney/plugins/xml/xmlstorage.cpp:703
 #, kde-format
 msgid "KMyMoney files (*.kmy *.xml)"
 msgstr "Arquivos do KMyMoney (*.kmy *.xml)"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-05 01:59+0000\n"
+"POT-Creation-Date: 2025-05-14 02:01+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -5330,7 +5330,7 @@ msgstr "Rodyti KMyMoney pasisveikinimo puslapį"
 
 #: kmymoney/kmymoney.cpp:3042 kmymoney/kmymoney.cpp:3044
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1363
-#: kmymoney/plugins/xml/xmlstorage.cpp:683
+#: kmymoney/plugins/xml/xmlstorage.cpp:691
 #, fuzzy, kde-format
 #| msgid "Ready."
 msgctxt "Application is ready to use"
@@ -9648,7 +9648,7 @@ msgstr "Importuojami sąskaitų šablonai."
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:85
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
-#: kmymoney/plugins/xml/xmlstorage.cpp:205
+#: kmymoney/plugins/xml/xmlstorage.cpp:210
 #, kde-format
 msgid "Unable to open file '%1' for writing"
 msgstr "Nepavyksta atverti „%1“ failo rašymui"
@@ -14632,7 +14632,7 @@ msgid "Database malfunction"
 msgstr ""
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:193
-#: kmymoney/plugins/xml/xmlstorage.cpp:507
+#: kmymoney/plugins/xml/xmlstorage.cpp:515
 #, kde-format
 msgid "Tried to access a file when it has not been opened"
 msgstr ""
@@ -18077,7 +18077,12 @@ msgstr ""
 msgid "Store GPG encrypted"
 msgstr ""
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:270
+#: kmymoney/plugins/xml/xmlstorage.cpp:174
+#, fuzzy, kde-format
+msgid "Unable to open file '%1' for writing."
+msgstr "Nepavyksta atverti „%1“ failo rašymui"
+
+#: kmymoney/plugins/xml/xmlstorage.cpp:275
 #, kde-format
 msgid ""
 "You have configured KMyMoney to use GPG to protect your data and to encrypt "
@@ -18094,54 +18099,54 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:275
+#: kmymoney/plugins/xml/xmlstorage.cpp:280
 #, kde-format
 msgid "Recover key expires soon"
 msgstr ""
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:347
+#: kmymoney/plugins/xml/xmlstorage.cpp:355
 #, kde-format
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is already opened by another process."
 msgstr ""
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:458
+#: kmymoney/plugins/xml/xmlstorage.cpp:466
 #, fuzzy, kde-format
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is not a KMyMoney data file."
 msgstr "Failas nerastas"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:616
+#: kmymoney/plugins/xml/xmlstorage.cpp:624
 #, fuzzy, kde-format
 #| msgid "Save as..."
 msgid "Save As"
 msgstr "Įrašyti kaip"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:618
+#: kmymoney/plugins/xml/xmlstorage.cpp:626
 #, fuzzy, kde-format
 msgctxt "KMyMoney (Filefilter)"
 msgid "KMyMoney files"
 msgstr "Rodyti KMyMoney pasisveikinimo puslapį"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:619
+#: kmymoney/plugins/xml/xmlstorage.cpp:627
 #, kde-format
 msgctxt "Anonymous (Filefilter)"
 msgid "Anonymous files"
 msgstr ""
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:620
+#: kmymoney/plugins/xml/xmlstorage.cpp:628
 #, fuzzy, kde-format
 msgctxt "XML (Filefilter)"
 msgid "XML files"
 msgstr "Visas laikotarpis"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:621
+#: kmymoney/plugins/xml/xmlstorage.cpp:629
 #, kde-format
 msgctxt "All files (Filefilter)"
 msgid "All files"
 msgstr "Visi failai"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:695
+#: kmymoney/plugins/xml/xmlstorage.cpp:703
 #, fuzzy, kde-format
 #| msgid ""
 #| "*.kmy *.xml|KMyMoney files\n"
@@ -26698,10 +26703,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Internal error - no matching transactions"
 #~ msgstr "Skelti operaciją"
-
-#, fuzzy
-#~ msgid "Unable to open file '%1' for writing."
-#~ msgstr "Nepavyksta atverti „%1“ failo rašymui"
 
 #, fuzzy
 #~ msgid "Cannot add currency with existing id %1"

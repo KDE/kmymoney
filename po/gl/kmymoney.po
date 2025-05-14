@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-05 01:59+0000\n"
+"POT-Creation-Date: 2025-05-14 02:01+0000\n"
 "PO-Revision-Date: 2025-02-14 08:14+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -5512,7 +5512,7 @@ msgstr "Non hai ningún ficheiro de KMyMoney aberto"
 
 #: kmymoney/kmymoney.cpp:3042 kmymoney/kmymoney.cpp:3044
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1363
-#: kmymoney/plugins/xml/xmlstorage.cpp:683
+#: kmymoney/plugins/xml/xmlstorage.cpp:691
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
@@ -9688,7 +9688,7 @@ msgstr "Completouse a exportación.\n"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:85
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
-#: kmymoney/plugins/xml/xmlstorage.cpp:205
+#: kmymoney/plugins/xml/xmlstorage.cpp:210
 #, kde-format
 msgid "Unable to open file '%1' for writing"
 msgstr "Non é posíbel abrir o ficheiro «%1» para escritura"
@@ -14753,7 +14753,7 @@ msgid "Database malfunction"
 msgstr "Mal funcionamento da base de dados"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:193
-#: kmymoney/plugins/xml/xmlstorage.cpp:507
+#: kmymoney/plugins/xml/xmlstorage.cpp:515
 #, kde-format
 msgid "Tried to access a file when it has not been opened"
 msgstr "Intentou acceder a un ficheiro cando este non estaba aberto"
@@ -18216,7 +18216,12 @@ msgstr ""
 msgid "Store GPG encrypted"
 msgstr "Gardar cifrado con GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:270
+#: kmymoney/plugins/xml/xmlstorage.cpp:174
+#, kde-format
+msgid "Unable to open file '%1' for writing."
+msgstr "Non se pode abrir o ficheiro «%1» para escritura."
+
+#: kmymoney/plugins/xml/xmlstorage.cpp:275
 #, kde-format
 msgid ""
 "You have configured KMyMoney to use GPG to protect your data and to encrypt "
@@ -18239,12 +18244,12 @@ msgstr[1] ""
 "piques de caducar, en %1 días. Obteña unha chave actualizada dun servidor de "
 "chaves mediante o seu programa de GPG (por exemplo, KGPG)."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:275
+#: kmymoney/plugins/xml/xmlstorage.cpp:280
 #, kde-format
 msgid "Recover key expires soon"
 msgstr "A chave de recuperación caduca en breves"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:347
+#: kmymoney/plugins/xml/xmlstorage.cpp:355
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
@@ -18253,43 +18258,43 @@ msgid "File <b>%1</b> is already opened by another process."
 msgstr ""
 "<p>O ficheiro <b>%1</b> xa está aberto noutra instancia de KMyMoney</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:458
+#: kmymoney/plugins/xml/xmlstorage.cpp:466
 #, fuzzy, kde-format
 #| msgid "<p><b>%1</b> is not a KMyMoney file.</p>"
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is not a KMyMoney data file."
 msgstr "<p><b>%1</b> non é un ficheiro de KMyMoney.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:616
+#: kmymoney/plugins/xml/xmlstorage.cpp:624
 #, kde-format
 msgid "Save As"
 msgstr "Gardar como"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:618
+#: kmymoney/plugins/xml/xmlstorage.cpp:626
 #, kde-format
 msgctxt "KMyMoney (Filefilter)"
 msgid "KMyMoney files"
 msgstr "Ficheiros de KMyMoney"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:619
+#: kmymoney/plugins/xml/xmlstorage.cpp:627
 #, kde-format
 msgctxt "Anonymous (Filefilter)"
 msgid "Anonymous files"
 msgstr "Ficheiros anónimos"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:620
+#: kmymoney/plugins/xml/xmlstorage.cpp:628
 #, kde-format
 msgctxt "XML (Filefilter)"
 msgid "XML files"
 msgstr "Ficheiros XML"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:621
+#: kmymoney/plugins/xml/xmlstorage.cpp:629
 #, kde-format
 msgctxt "All files (Filefilter)"
 msgid "All files"
 msgstr "Todos os ficheiros"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:695
+#: kmymoney/plugins/xml/xmlstorage.cpp:703
 #, kde-format
 msgid "KMyMoney files (*.kmy *.xml)"
 msgstr "Ficheiros de KMyMoney (*.kmy *.xml)"
@@ -27823,9 +27828,6 @@ msgstr "gardando o informe «%1» en «%2»"
 
 #~ msgid "Malformed URL '%1'"
 #~ msgstr "O URL «%1» está mal escrito"
-
-#~ msgid "Unable to open file '%1' for writing."
-#~ msgstr "Non se pode abrir o ficheiro «%1» para escritura."
 
 #~ msgid "Failure while writing to '%1'"
 #~ msgstr "Fallo durante a escritura en «%1»"

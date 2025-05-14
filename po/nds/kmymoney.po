@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-05 01:59+0000\n"
+"POT-Creation-Date: 2025-05-14 02:01+0000\n"
 "PO-Revision-Date: 2014-07-03 09:44+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -5533,7 +5533,7 @@ msgstr "Keen KMyMoney-Datei apen"
 
 #: kmymoney/kmymoney.cpp:3042 kmymoney/kmymoney.cpp:3044
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1363
-#: kmymoney/plugins/xml/xmlstorage.cpp:683
+#: kmymoney/plugins/xml/xmlstorage.cpp:691
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
@@ -9963,7 +9963,7 @@ msgstr "Importeren afslaten"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:85
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
-#: kmymoney/plugins/xml/xmlstorage.cpp:205
+#: kmymoney/plugins/xml/xmlstorage.cpp:210
 #, kde-format
 msgid "Unable to open file '%1' for writing"
 msgstr "Datei \"%1\" lett sik nich för't Schrieven opmaken."
@@ -15144,7 +15144,7 @@ msgid "Database malfunction"
 msgstr "Datenbankfehler"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:193
-#: kmymoney/plugins/xml/xmlstorage.cpp:507
+#: kmymoney/plugins/xml/xmlstorage.cpp:515
 #, kde-format
 msgid "Tried to access a file when it has not been opened"
 msgstr "Du wullt op en nich opmaakt Datei togriepen."
@@ -18667,7 +18667,12 @@ msgstr ""
 msgid "Store GPG encrypted"
 msgstr "GPG-verslötelt sekern"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:270
+#: kmymoney/plugins/xml/xmlstorage.cpp:174
+#, kde-format
+msgid "Unable to open file '%1' for writing."
+msgstr "Datei \"%1\" lett sik nich för't Schrieven opmaken."
+
+#: kmymoney/plugins/xml/xmlstorage.cpp:275
 #, kde-format
 msgid ""
 "You have configured KMyMoney to use GPG to protect your data and to encrypt "
@@ -18682,12 +18687,12 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:275
+#: kmymoney/plugins/xml/xmlstorage.cpp:280
 #, kde-format
 msgid "Recover key expires soon"
 msgstr ""
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:347
+#: kmymoney/plugins/xml/xmlstorage.cpp:355
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
@@ -18695,43 +18700,43 @@ msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is already opened by another process."
 msgstr "<p>En anner Utgaav vun KMyMoney hett de Datei <b>%1</b>al opmaakt.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:458
+#: kmymoney/plugins/xml/xmlstorage.cpp:466
 #, fuzzy, kde-format
 #| msgid "<p><b>%1</b> is not a KMyMoney file.</p>"
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is not a KMyMoney data file."
 msgstr "<p><b>%1</b> is keen KMyMoney-Datei.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:616
+#: kmymoney/plugins/xml/xmlstorage.cpp:624
 #, kde-format
 msgid "Save As"
 msgstr "Sekern as"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:618
+#: kmymoney/plugins/xml/xmlstorage.cpp:626
 #, kde-format
 msgctxt "KMyMoney (Filefilter)"
 msgid "KMyMoney files"
 msgstr "KMyMoney-Dateien"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:619
+#: kmymoney/plugins/xml/xmlstorage.cpp:627
 #, kde-format
 msgctxt "Anonymous (Filefilter)"
 msgid "Anonymous files"
 msgstr "Anonüm Dateien"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:620
+#: kmymoney/plugins/xml/xmlstorage.cpp:628
 #, kde-format
 msgctxt "XML (Filefilter)"
 msgid "XML files"
 msgstr "XML-Dateien"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:621
+#: kmymoney/plugins/xml/xmlstorage.cpp:629
 #, kde-format
 msgctxt "All files (Filefilter)"
 msgid "All files"
 msgstr "All Dateien"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:695
+#: kmymoney/plugins/xml/xmlstorage.cpp:703
 #, fuzzy, kde-format
 #| msgid ""
 #| "*.kmy|KMyMoney files (*.kmy)\n"
@@ -28011,9 +28016,6 @@ msgstr ""
 
 #~ msgid "Malformed URL '%1'"
 #~ msgstr "URL \"%1\" gellt nich"
-
-#~ msgid "Unable to open file '%1' for writing."
-#~ msgstr "Datei \"%1\" lett sik nich för't Schrieven opmaken."
 
 #~ msgid "Failure while writing to '%1'"
 #~ msgstr "Fehler bi't Schrieven vun \"%1\""

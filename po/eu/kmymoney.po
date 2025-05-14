@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-05 01:59+0000\n"
+"POT-Creation-Date: 2025-05-14 02:01+0000\n"
 "PO-Revision-Date: 2025-01-11 18:40+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -5522,7 +5522,7 @@ msgstr "Ez dago KMyMoney-ren fitxategi irekirik"
 
 #: kmymoney/kmymoney.cpp:3042 kmymoney/kmymoney.cpp:3044
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1363
-#: kmymoney/plugins/xml/xmlstorage.cpp:683
+#: kmymoney/plugins/xml/xmlstorage.cpp:691
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
@@ -9684,7 +9684,7 @@ msgstr "Esportatzea osatu da.\n"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:85
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
-#: kmymoney/plugins/xml/xmlstorage.cpp:205
+#: kmymoney/plugins/xml/xmlstorage.cpp:210
 #, kde-format
 msgid "Unable to open file '%1' for writing"
 msgstr "Ezin du '%1' fitxategia idazteko ireki"
@@ -14725,7 +14725,7 @@ msgid "Database malfunction"
 msgstr "Datu-basea ez dabil ondo"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:193
-#: kmymoney/plugins/xml/xmlstorage.cpp:507
+#: kmymoney/plugins/xml/xmlstorage.cpp:515
 #, kde-format
 msgid "Tried to access a file when it has not been opened"
 msgstr "Fitxategi bat atzitzen saiatu da ireki gabe zegoela"
@@ -18200,7 +18200,12 @@ msgstr ""
 msgid "Store GPG encrypted"
 msgstr "Gorde GPG bidez zifratuta"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:270
+#: kmymoney/plugins/xml/xmlstorage.cpp:174
+#, kde-format
+msgid "Unable to open file '%1' for writing."
+msgstr "Ezin da '%1' fitxategia ireki idazteko."
+
+#: kmymoney/plugins/xml/xmlstorage.cpp:275
 #, kde-format
 msgid ""
 "You have configured KMyMoney to use GPG to protect your data and to encrypt "
@@ -18221,12 +18226,12 @@ msgstr[1] ""
 "aukerazkonfiguratu duzu. Gako hau %1 egunetan iraungiko da. Mesedez "
 "eguneratu gakoa gako-zerbitzaritik GPG frontend erabiliz (adib. KGPG)."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:275
+#: kmymoney/plugins/xml/xmlstorage.cpp:280
 #, kde-format
 msgid "Recover key expires soon"
 msgstr "Berreskuratze giltza iraungitzear"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:347
+#: kmymoney/plugins/xml/xmlstorage.cpp:355
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
@@ -18236,43 +18241,43 @@ msgstr ""
 "<p><b>%1</b> fitxategia dagoeneko irekita dago KMyMoney-ren beste instantzia "
 "batean</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:458
+#: kmymoney/plugins/xml/xmlstorage.cpp:466
 #, fuzzy, kde-format
 #| msgid "<p><b>%1</b> is not a KMyMoney file.</p>"
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is not a KMyMoney data file."
 msgstr "<p><b>%1</b> ez da KMyMoney fitxategi bat.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:616
+#: kmymoney/plugins/xml/xmlstorage.cpp:624
 #, kde-format
 msgid "Save As"
 msgstr "Gorde honela"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:618
+#: kmymoney/plugins/xml/xmlstorage.cpp:626
 #, kde-format
 msgctxt "KMyMoney (Filefilter)"
 msgid "KMyMoney files"
 msgstr "KMyMoney fitxategiak"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:619
+#: kmymoney/plugins/xml/xmlstorage.cpp:627
 #, kde-format
 msgctxt "Anonymous (Filefilter)"
 msgid "Anonymous files"
 msgstr "Fitxategi anonimoak"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:620
+#: kmymoney/plugins/xml/xmlstorage.cpp:628
 #, kde-format
 msgctxt "XML (Filefilter)"
 msgid "XML files"
 msgstr "XML fitxategiak"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:621
+#: kmymoney/plugins/xml/xmlstorage.cpp:629
 #, kde-format
 msgctxt "All files (Filefilter)"
 msgid "All files"
 msgstr "Fitxategi guztiak"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:695
+#: kmymoney/plugins/xml/xmlstorage.cpp:703
 #, kde-format
 msgid "KMyMoney files (*.kmy *.xml)"
 msgstr "KMyMoney fitxategiak (*.kmy *.xml)"
@@ -27810,9 +27815,6 @@ msgstr "'%1' txostena '%2'(e)an gordetzea"
 
 #~ msgid "Malformed URL '%1'"
 #~ msgstr "%1 URLa gaizki osatuta dago"
-
-#~ msgid "Unable to open file '%1' for writing."
-#~ msgstr "Ezin da '%1' fitxategia ireki idazteko."
 
 #~ msgid "Failure while writing to '%1'"
 #~ msgstr "Huts egin du '%1'(e)n idaztean"

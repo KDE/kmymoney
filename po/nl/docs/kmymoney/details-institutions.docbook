@@ -8,100 +8,59 @@
 >&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->2018-02-01</date>
+>2024-12-01</date>
   <releaseinfo
->5.0.0</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Instituten</title>
 
 <para
->De Bankenweergave biedt een samenvatting van alle accounts gegroepeerd under hun respectievelijke banken. De lijst met rekeningen onder een bank kan uit of ingeklapt worden door te drukken op de pijl links van de naam van de bank. De laatste bank in de lijst is "Rekeningen zonder toegekende instituten". </para>
+>Banken dienen in &kmymoney; als een manier om rekeningen te groeperen. Ze zijn meestal gewone financiële instituten zoals banken en makelaarskantoren, maar ze kunnen alles zijn wat u wilt, zoals <quote
+>Zelf</quote
+>, om rekeningen voor het geld in uw zak en elk ander bezit dat niet echt bewaard wordt door een financieel instituut of <quote
+>Winkels</quote
+>, om al uw creditcards en andere rekeningen bij winkels te groeperen. </para>
+
+<sect1 id="details.institutions.view"
+><title
+>Bankenweergave</title>
+<para
+>De Bankenweergave biedt een samenvatting van alle accounts gegroepeerd onder hun respectievelijke banken. De lijst met rekeningen onder een bank kan uit of ingeklapt worden door te drukken op de pijl links van de naam van de bank. De laatste bank in de lijst is "Rekeningen zonder toegekende instituten". </para>
 
 <para
->De institutenweergave toont verschillende kolommen, die informatie tonen over de rekening. Het toont ook de totale waarde van alle rekeningen in elk instituut. U kunt de te tonen kolommen selecteren door rechts te klikken op een kolomkop en het keuzevak te selecteren of selectie ongedaan maken naast de naam van de kolom. </para>
+>De bankenweergave toont verschillende kolommen, die informatie tonen over de rekening. Het toont ook de totale waarde van alle rekeningen in elke bank. U kunt de te tonen kolommen selecteren door rechts te klikken op een kolomkop en het keuzevak te selecteren of selectie ongedaan maken naast de naam van de kolom. </para>
 
-<para>
 <screenshot>
-    	<screeninfo
+  <screeninfo
 >overzicht van banken</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="institution_view.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="institution_view.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
 >overzicht van banken</phrase>
-	</textobject>
-	</mediaobject>
+    </textobject>
+  </mediaobject>
 </screenshot>
-</para>
-
-<para
->De volgende kolommen zijn beschikbaar in de instututenweergave. </para>
 
 <variablelist>
   <varlistentry>
     <term
->Rekening</term>
+>Naam</term>
     <listitem>
       <para
->De naam van het instituut of de rekening. </para>
+>De naam van de bank of rekening. Deze kolom wordty altijd getoond. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
->Type</term>
+>Saldo</term>
     <listitem>
       <para
->Het type van rekening, &eg;, spaarrekening, cheques, credit card,... </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
->Belasting</term>
-    <listitem>
-      <para
->Een indicatie of deze rekening geconfigureerd is als belangrijk voor belastingsdoelen. </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
->BTW</term>
-    <listitem>
-      <para
->Een indicatie of deze rekening geconfigureerd is om BTW op transacties toe te passen. </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
->CC (kostencentrum)</term>
-    <listitem>
-      <para
->Een indicatie dat een kostencentrum toekenning noodzakelijk is onder bepaalde condities wanneer een transactie wordt ingevoerd voor deze rekening. Dit is een nieuwe functie die nog niet is geïmplementeerd, deze kolom wordt nu dus niet gebruikt. </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
->Totaal saldo</term>
-    <listitem>
-      <para
->Een andere nieuwe functie, nog niet geïmplementeerd. </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
->Getoonde waarde</term>
-    <listitem>
-      <para
->Dit is het saldo van de rekening zoals geleverd door het instituut. </para>
+>Dit is het huidige saldo van de rekening. Geen waarde wordt getoond voor instituten. </para>
     </listitem>
   </varlistentry>
 
@@ -110,129 +69,119 @@
 >Netto Waarde</term>
     <listitem>
       <para
->He saldo van de rekening in &kmymoney;. Merk op dat voor instituten dit het totaal is van de saldo's voor alle rekeningen in dat instituut. </para>
+>Voor rekeningen, dit is dezelfde waarde als het saldo. Voor instituten is dit het totaal van de saldo's van alle rekeningen bij dat instituut. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
->Nummer</term>
+>IBAN</term>
     <listitem>
       <para
->Het rekeningnummer, als er een is ingevoerd. </para>
+>Het <acronym
+><ulink url="http://en.wikipedia.org/wiki/International_Bank_Account_Number"
+>IBAN</ulink
+> </acronym
+> (International Bank Account Number) wordt getoond als er een waarde is ingevoerd in het toepasselijke veld in de informatiedialoog van de rekening. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
->Sorteercode</term>
+>Bankcode</term>
     <listitem>
       <para
->Dit toont het IBAN-nummer, als er een waarde is ingevoerd in het van toepassing zijnde veld on the Account information dialog. </para>
+>De <ulink url="https://en.wikipedia.org/wiki/Bank_code"
+>Bankcode</ulink
+>. Deze identifier wordt verschillend geformatteerd en gebruik in verschillende landen. Het staat bekend als het routering of routeringsoverdrachtsnummer in de VS en als de sorteercode in de VK. Het wordt op dit moment niet door &kmymoney; gebruikt. </para>
     </listitem>
   </varlistentry>
 
+  <varlistentry>
+    <term
+>SWIFT/BIC</term>
+    <listitem>
+      <para
+>De <acronym
+><ulink url="https://en.wikipedia.org/wiki/ISO_9362"
+>SWIFT/BIC</ulink
+></acronym
+> (Society for Worldwide Interbank Financial Telecommunication/Business Identifier Code) </para>
+    </listitem>
+  </varlistentry>
 </variablelist>
 
-<para
->Merk op dat veel van deze zelfde kolommen ook beschikbaar zijn in andere weergaven, zoals de rekeningenweergave. Wanneer u een keuzevak selecteert of de selectie ongedaan maakt of een kolom verwijdert, dan zult u een popup zien die u vraagt of u die kolom uit alle andere weergaven wilt tonen of verwijderen, waar deze aanwezig is. Als u "Nee," activeert zal alleen het tonen van die kolom in de huidige weergave wijzigen. </para>
+</sect1>
 
-<sect1 id="details.institutions.institution">
-<title
+<sect1 id="details.institutions.institution"
+><title
 >Opties voor instituut</title>
-
 <para
->Rechtsklikken op een naam van een bank laat een submenu Opties voor een bank verschijnen, die u verschillende keuzes biedt. <guimenuitem
+>Rechtsklikken op een naam van een bank laat een menu Bankenopties verschijnen, die u verschillende keuzes biedt. <guimenuitem
 >Nieuwe bank...</guimenuitem
-> opent het dialoogvenster Nieuwe bank, waar u alle noodzakelijke informatie kunt invoeren om een nieuwe bank aan te maken. <guimenuitem
+> selecteren opent de dialoog Nieuwe bank, waar u alle noodzakelijke informatie kunt invoeren om een nieuwe bank aan te maken. <guimenuitem
 >Bank bewerken...</guimenuitem
-> laat venster voor bewerken verschijnen, met details van de bank zoals naam en adres. <guimenuitem
+> selecteren laat venster voor bewerken verschijnen, waar u details van de bank kunt wijzigen. <guimenuitem
 >Bank verwijderen</guimenuitem
-> kiezen verwijdert de gehele bank en alle bijbehorende rekeningen. Bedenk dat u alleen in staat bent een bank te verwijderen als u al zijn rekeningen kunt verwijderen en u zult alleen instaat zijn om elke bijbehorende rekening te verwijderen als het geen transacties meer heeft en geen planningen er naar verwijzen. <guimenuitem
+> selecteren verwijdert de bank uit het gegevensbestand. Elke rekening geassocieerd met die bank zal behouden blijven, maar zonder associatie met een bank. <guimenuitem
 >Nieuwe rekening...</guimenuitem
-> kiezen leidt u door de stappen van het proces van het aanmaken van een nieuwe rekening, wat beschreven is in meer detail in de volgende sectie. </para>
+> selecteren leidt u door de stappen van het proces van het aanmaken van een nieuwe rekening, wat beschreven is in meer detail in de volgende sectie. </para>
 
-<para>
 <screenshot>
-	<screeninfo
->Submenu voor opties voor een bank</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="institution_options.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Submenu voor opties voor een instituut</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo
+>submenu voor opties voor een instituut</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="institution_options.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>submenu voor opties voor een instituut</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
-</para>
 
-<sect2 id="details.institutions.new">
-<title
+<sect2 id="details.institutions.new"
+><title
 >Nieuw instituut</title>
-
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="newinst.png" format="PNG"/>
-      </imageobject>
-      <textobject>
-        <phrase
->Nieuw instituut</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>nieuw instituut</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="newinst.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>nieuw instituut</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <note
 ><para
->U moet een bestand openen voordat u een nieuwe bank kunt openen. Als u geen bestaand bestand hebt, dan is het nodig om <link linkend="firsttime.3"
+>U moet een bestand open hebben voordat u een nieuw instituut kunt openen. Als u geen bestaand bestand hebt, dan is het nodig om <link linkend="firsttime.newfile"
 >er een aan te maken</link
 >. </para
 ></note>
 
 <para
->In het dialoogvenster Nieuwe Bank is alleen de naam vereist, alle andere velden zijn optioneel. Evenals de dialoog persoonlijke informatie, worden deze gegevens nu niet door &kmymoney; gebruikt, maar zullen worden vereist door een toekomstige uitgave voor bepaalde functies. In het bijzonder zal de <ulink url="https://nl.wikipedia.org/wiki/Rekeningnummer"
+>In het dialoogvenster Nieuw Instituut is alleen de naam vereist, alle andere velden zijn optioneel. Evenals de dialoog persoonlijke informatie, worden deze gegevens nu niet door &kmymoney; gebruikt, maar sommige items kunnen vereist worden door een toekomstige uitgave voor bepaalde functies. In het bijzonder zal de <ulink url="https://nl.wikipedia.org/wiki/Rekeningnummer"
 >Rekeningnummer</ulink
 > en de <acronym
 ><ulink url="https://en.wikipedia.org/wiki/ISO_9362"
 >BIC (Bank Identifier Code)</ulink
 ></acronym
-> vereist zijn bij online bankieren. </para>
+> vereist zijn bij online bankieren, hoewel dit afhankelijk kan zijn van het land waar de bank zich bevindt. </para>
 </sect2>
-</sect1>
 
-<sect1 id="details.institutions.account">
-<title
+<sect2
+><title
 >Rekeningopties</title>
-
 <para
->Rechtsklikken op een rekeningnaam laat een submenu Rekeningopties verschijnen. <guimenuitem
->Nieuwe rekening...</guimenuitem
-> kiezen laat u door het proces nieuwe rekening maken lopen. <guimenuitem
->Kasboek openen</guimenuitem
-> brengt u direct naar de weergave Kasboeken of Investeringen, afhankelijk van het type rekening. Gewoon op een rekeningnaam klikken opent ook de rekening. <guimenuitem
->Rekening bewerken</guimenuitem
-> kiezen laat een venster verschijnen waarmee u de naam van een rekening, begindatum, geassocieerde bank en bovenliggende rekening kunt wijzigen. Een rekening verwijderen is alleen mogelijk als er geen transacties verbonden zijn met die rekening en deze niet gerefereerd wordt in een geplande transactie. <guimenuitem
->Transactiecontrole...</guimenuitem
-> kiezen opent de assistent Transactiecontole, die u door het proces laat stappen van het vergelijken van uw rekeningafschriften met uw elektronische items. Meer details, evenals informatie over de andere opties is zichtbaar in de bijpassende secties van dit handboek. </para>
-
-<para>
-<screenshot>
-	<screeninfo
->Submenu rekeningopties</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="account_options.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Submenu rekeningopties</phrase>
-	</textobject>
-	</mediaobject>
-</screenshot>
-</para>
+>De bovenstaand besproken opties verwijzen naar de instituten in de lijst in de Bankenweergave. De meeste van de rijen in deze weergave zijn rekeningen. Rechts klikken op een rekeningnaam brengt een menu Rekeningopties. De items en details voor dit menu worden besproken aan het eind van het <link linkend="details.accounts.options"
+>Hoofdstuk Rekeningen</link
+>. </para>
+</sect2>
 </sect1>
 </chapter>
