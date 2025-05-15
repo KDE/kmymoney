@@ -1295,7 +1295,7 @@
 <para
 >Aquest connector afegeix suport per a la banca en línia HBCI/FinTs, OFX i PayPal utilitzant <ulink url="https://www.aquamaniac.de/rdm/"
 >AqBanking</ulink
->, que és un projecte de codi obert per si mateix. La majoria dels protocols utilitzats per a comunicar-se amb els bancs només es fan servir a Alemanya. </para>
+>, que és un projecte de codi obert per si mateix. HBCI/FinTs que s'utilitza per a comunicar-se amb els bancs només es fa servir a Alemanya. </para>
 
 <para
 >La configuració d'aquest connector no es fa a través d'aquest diàleg, sinó amb l'element de menú <link linkend="reference.menus.settings.help"

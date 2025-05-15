@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-14 02:01+0000\n"
-"PO-Revision-Date: 2025-05-05 09:56+0300\n"
+"PO-Revision-Date: 2025-05-14 09:28+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -18331,8 +18331,7 @@ msgid "Store GPG encrypted"
 msgstr "Зберегти зашифрованим GPG"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:174
-#, fuzzy, kde-format
-#| msgid "Unable to open file '%1' for writing"
+#, kde-format
 msgid "Unable to open file '%1' for writing."
 msgstr "Не вдалося відкрити файл «%1» для запису."
 

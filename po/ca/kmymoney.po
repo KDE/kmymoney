@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-14 02:01+0000\n"
-"PO-Revision-Date: 2025-05-05 12:43+0200\n"
+"PO-Revision-Date: 2025-05-14 09:13+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -18302,10 +18302,9 @@ msgid "Store GPG encrypted"
 msgstr "Emmagatzema-ho encriptat amb GPG"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:174
-#, fuzzy, kde-format
-#| msgid "Unable to open file '%1' for writing"
+#, kde-format
 msgid "Unable to open file '%1' for writing."
-msgstr "No es pot obrir el fitxer «%1» per a escriptura"
+msgstr "No s'ha pogut obrir el fitxer «%1» per a escriptura."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:275
 #, kde-format
@@ -26001,46 +26000,3 @@ msgstr "Només s'admet un d'entre --csv o --html"
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr "s'està desant l'informe «%1» en «%2»"
-
-#~ msgid "Importing statement for account %1"
-#~ msgstr "S'està important un extracte del compte %1"
-
-#~ msgid "Importing statement without transactions"
-#~ msgstr "S'està important un extracte sense operacions"
-
-#~ msgid "  Statement balance is not contained in statement."
-#~ msgstr " El saldo de l'extracte no està contingut a l'extracte."
-
-#~ msgid "  Statement balance on %1 is reported to be %2"
-#~ msgstr " El saldo de l'extracte de %1 s'informa que és de %2"
-
-#~ msgid "  Transactions"
-#~ msgstr "  Operacions"
-
-#~ msgctxt "x transactions have been added"
-#~ msgid "    %1 added"
-#~ msgid_plural "    %1 added"
-#~ msgstr[0] "    %1 afegit"
-#~ msgstr[1] "    %1 afegits"
-
-#~ msgid "    %1 matched"
-#~ msgid_plural "    %1 matched"
-#~ msgstr[0] "    %1 concordant"
-#~ msgstr[1] "    %1 concordants"
-
-#~ msgid "    %1 duplicate"
-#~ msgid_plural "    %1 duplicates"
-#~ msgstr[0] "    %1 duplicat"
-#~ msgstr[1] "    %1 duplicats"
-
-#~ msgid "  Payees"
-#~ msgstr "  Beneficiaris"
-
-#~ msgctxt "x transactions have been created"
-#~ msgid "    %1 created"
-#~ msgid_plural "    %1 created"
-#~ msgstr[0] "    %1 creat"
-#~ msgstr[1] "    %1 creats"
-
-#~ msgid "Duplicate open"
-#~ msgstr "Obertura duplicada"
