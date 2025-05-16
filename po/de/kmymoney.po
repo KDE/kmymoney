@@ -18449,8 +18449,7 @@ msgid "Store GPG encrypted"
 msgstr "Speichern mit GPG-Verschlüsselung"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:174
-#, fuzzy, kde-format
-#| msgid "Unable to open file '%1' for writing."
+#, kde-format
 msgid "Unable to open file '%1' for writing."
 msgstr "Datei „%1“ kann nicht zum Schreiben geöffnet werden."
 

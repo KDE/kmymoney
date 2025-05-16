@@ -18143,7 +18143,8 @@ msgid "Store GPG encrypted"
 msgstr "Tallenna GPG-salattuna"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:174
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to open file '%1' for writing."
 msgid "Unable to open file '%1' for writing."
 msgstr "%1-tiedostoa ei voitu avata kirjoittamista varten."
 
@@ -21242,11 +21243,9 @@ msgstr ""
 "p>toisessa jaottelussa?"
 
 #: kmymoney/views/newtransactioneditor.cpp:1574
-#, fuzzy, kde-format
-#| msgctxt "@info placeholder for memo of matched transaction if empty"
-#| msgid "Empty memo"
+#, kde-format
 msgid "Copy memo"
-msgstr "Tyhjä muistio"
+msgstr "Kopioi muistiinpano"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, numberEdit)
 #: kmymoney/views/newtransactioneditor.ui:24
