@@ -90,6 +90,7 @@ protected:
     void paintEvent(QPaintEvent* event) final override;
     int sizeHintForRow(int row) const final override;
     int sizeHintForColumn(int row) const final override;
+    void keyPressEvent(QKeyEvent* event) override;
     /**
      * Overridden to prevent moving to the end using End or PageDown to start the editor
      */
