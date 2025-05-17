@@ -18219,7 +18219,7 @@ msgstr "Gardar cifrado con GPG"
 #: kmymoney/plugins/xml/xmlstorage.cpp:174
 #, kde-format
 msgid "Unable to open file '%1' for writing."
-msgstr "Non se pode abrir o ficheiro «%1» para escritura."
+msgstr "Non é posíbel abrir o ficheiro «%1» para escritura."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:275
 #, kde-format
