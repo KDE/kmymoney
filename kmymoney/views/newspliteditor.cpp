@@ -510,7 +510,9 @@ void NewSplitEditor::keyPressEvent(QKeyEvent* event)
 
         case Qt::Key_Escape:
             reject();
-            break;
+            // return immediately so that the dialog
+            // remains to stay open
+            return;
 
         default:
             event->ignore();

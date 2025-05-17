@@ -197,6 +197,8 @@ SplitDialog::SplitDialog(const MyMoneySecurity& commodity,
 
     // finish polishing the widgets
     QMetaObject::invokeMethod(this, "adjustSummary", Qt::QueuedConnection);
+
+    d->ui->splitView->setFocus();
 }
 
 SplitDialog::~SplitDialog()
