@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 02:01+0000\n"
+"POT-Creation-Date: 2025-05-18 02:01+0000\n"
 "PO-Revision-Date: 2025-05-15 03:48+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -21277,7 +21277,7 @@ msgstr "El número de cheque usado para esta transacción."
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "El cheque con número <b>%1</b> ya se ha usado en esta cuenta."
 
-#: kmymoney/views/newspliteditor.cpp:768
+#: kmymoney/views/newspliteditor.cpp:770
 #: kmymoney/views/newtransactioneditor.cpp:188
 #, kde-format
 msgctxt "@info:tooltip Protected"
@@ -21539,19 +21539,19 @@ msgstr ""
 "botón + de la barra de pestañas superior para seleccionar una cuenta.</p></"
 "body></html>"
 
-#: kmymoney/views/splitdialog.cpp:314
+#: kmymoney/views/splitdialog.cpp:316
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Sum of splits"
 msgstr "Suma de las partidas"
 
-#: kmymoney/views/splitdialog.cpp:332
+#: kmymoney/views/splitdialog.cpp:334
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Overassigned"
 msgstr "Sobreasignado"
 
-#: kmymoney/views/splitdialog.cpp:335
+#: kmymoney/views/splitdialog.cpp:337
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Unassigned"
@@ -21665,31 +21665,31 @@ msgstr "&Aceptar"
 msgid "&Cancel"
 msgstr "&Cancelar"
 
-#: kmymoney/views/splitview.cpp:111
+#: kmymoney/views/splitview.cpp:112
 #, kde-format
 msgctxt "@title:menu split context menu"
 msgid "Split Options"
 msgstr "Opciones de las partidas"
 
-#: kmymoney/views/splitview.cpp:113
+#: kmymoney/views/splitview.cpp:114
 #, kde-format
 msgctxt "@item:inmenu Create a split"
 msgid "New..."
 msgstr "Nueva…"
 
-#: kmymoney/views/splitview.cpp:128
+#: kmymoney/views/splitview.cpp:129
 #, kde-format
 msgctxt "@item:inmenu Edit a split"
 msgid "Edit..."
 msgstr "Editar…"
 
-#: kmymoney/views/splitview.cpp:133
+#: kmymoney/views/splitview.cpp:134
 #, kde-format
 msgctxt "@item:inmenu Duplicate selected split(s)"
 msgid "Duplicate"
 msgstr "Duplicar"
 
-#: kmymoney/views/splitview.cpp:175
+#: kmymoney/views/splitview.cpp:176
 #, kde-format
 msgctxt "@item:inmenu Delete selected split(s)"
 msgid "Delete"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 02:01+0000\n"
+"POT-Creation-Date: 2025-05-18 02:01+0000\n"
 "PO-Revision-Date: 2009-05-18 00:20+0900\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -20130,7 +20130,7 @@ msgstr ""
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:768
+#: kmymoney/views/newspliteditor.cpp:770
 #: kmymoney/views/newtransactioneditor.cpp:188
 #, kde-format
 msgctxt "@info:tooltip Protected"
@@ -20368,19 +20368,19 @@ msgid ""
 "on the tabbar above to select an account.</p></body></html>"
 msgstr ""
 
-#: kmymoney/views/splitdialog.cpp:314
+#: kmymoney/views/splitdialog.cpp:316
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Sum of splits"
 msgstr ""
 
-#: kmymoney/views/splitdialog.cpp:332
+#: kmymoney/views/splitdialog.cpp:334
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Overassigned"
 msgstr ""
 
-#: kmymoney/views/splitdialog.cpp:335
+#: kmymoney/views/splitdialog.cpp:337
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Unassigned"
@@ -20488,31 +20488,31 @@ msgstr ""
 msgid "&Cancel"
 msgstr ""
 
-#: kmymoney/views/splitview.cpp:111
+#: kmymoney/views/splitview.cpp:112
 #, kde-format
 msgctxt "@title:menu split context menu"
 msgid "Split Options"
 msgstr ""
 
-#: kmymoney/views/splitview.cpp:113
+#: kmymoney/views/splitview.cpp:114
 #, kde-format
 msgctxt "@item:inmenu Create a split"
 msgid "New..."
 msgstr ""
 
-#: kmymoney/views/splitview.cpp:128
+#: kmymoney/views/splitview.cpp:129
 #, kde-format
 msgctxt "@item:inmenu Edit a split"
 msgid "Edit..."
 msgstr ""
 
-#: kmymoney/views/splitview.cpp:133
+#: kmymoney/views/splitview.cpp:134
 #, kde-format
 msgctxt "@item:inmenu Duplicate selected split(s)"
 msgid "Duplicate"
 msgstr ""
 
-#: kmymoney/views/splitview.cpp:175
+#: kmymoney/views/splitview.cpp:176
 #, kde-format
 msgctxt "@item:inmenu Delete selected split(s)"
 msgid "Delete"

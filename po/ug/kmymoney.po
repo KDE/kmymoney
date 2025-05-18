@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 02:01+0000\n"
+"POT-Creation-Date: 2025-05-18 02:01+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -20776,7 +20776,7 @@ msgstr ""
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr ""
 
-#: kmymoney/views/newspliteditor.cpp:768
+#: kmymoney/views/newspliteditor.cpp:770
 #: kmymoney/views/newtransactioneditor.cpp:188
 #, kde-format
 msgctxt "@info:tooltip Protected"
@@ -21026,21 +21026,21 @@ msgid ""
 "on the tabbar above to select an account.</p></body></html>"
 msgstr ""
 
-#: kmymoney/views/splitdialog.cpp:314
+#: kmymoney/views/splitdialog.cpp:316
 #, fuzzy, kde-format
 #| msgid "Splits"
 msgctxt "Split editor summary"
 msgid "Sum of splits"
 msgstr "پارچىلا"
 
-#: kmymoney/views/splitdialog.cpp:332
+#: kmymoney/views/splitdialog.cpp:334
 #, fuzzy, kde-format
 #| msgid "Unassigned"
 msgctxt "Split editor summary"
 msgid "Overassigned"
 msgstr "تەقسىملەنمىگەن"
 
-#: kmymoney/views/splitdialog.cpp:335
+#: kmymoney/views/splitdialog.cpp:337
 #, fuzzy, kde-format
 #| msgid "Unassigned"
 msgctxt "Split editor summary"
@@ -21154,14 +21154,14 @@ msgstr "جەزملە(&O)"
 msgid "&Cancel"
 msgstr "ۋاز كەچ(&C)"
 
-#: kmymoney/views/splitview.cpp:111
+#: kmymoney/views/splitview.cpp:112
 #, fuzzy, kde-format
 #| msgid "Application"
 msgctxt "@title:menu split context menu"
 msgid "Split Options"
 msgstr "پروگرامما"
 
-#: kmymoney/views/splitview.cpp:113
+#: kmymoney/views/splitview.cpp:114
 #, fuzzy, kde-format
 #| msgctxt "create new institution"
 #| msgid "New..."
@@ -21169,14 +21169,14 @@ msgctxt "@item:inmenu Create a split"
 msgid "New..."
 msgstr "يېڭى…"
 
-#: kmymoney/views/splitview.cpp:128
+#: kmymoney/views/splitview.cpp:129
 #, fuzzy, kde-format
 #| msgid "Edit..."
 msgctxt "@item:inmenu Edit a split"
 msgid "Edit..."
 msgstr "تەھرىر…"
 
-#: kmymoney/views/splitview.cpp:133
+#: kmymoney/views/splitview.cpp:134
 #, fuzzy, kde-format
 #| msgctxt "Duplicate transaction"
 #| msgid "Duplicate"
@@ -21184,7 +21184,7 @@ msgctxt "@item:inmenu Duplicate selected split(s)"
 msgid "Duplicate"
 msgstr "كۆچۈر"
 
-#: kmymoney/views/splitview.cpp:175
+#: kmymoney/views/splitview.cpp:176
 #, fuzzy, kde-format
 #| msgid "Delete"
 msgctxt "@item:inmenu Delete selected split(s)"
