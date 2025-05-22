@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-18 02:01+0000\n"
-"PO-Revision-Date: 2025-05-05 12:43+0200\n"
+"PO-Revision-Date: 2025-05-14 09:13+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -143,13 +143,13 @@ msgid ""
 "payee information for all following transactions referencing \"%1\" will be "
 "removed."
 msgstr ""
-"Si escolliu «Sí» es crearà el beneficiari. «No» ometrà la creació del "
-"registre de beneficiari i eliminarà la informació de beneficiari d'esta "
-"operació. Si escolliu «Cancel·la» s'interromprà l'operació d'importació.\n"
+"Si trieu «Sí» es crearà el beneficiari. «No» ometrà la creació del registre "
+"de beneficiari i eliminarà la informació de beneficiari d'esta operació. Si "
+"trieu «Cancel·la» s'interromprà l'operació d'importació.\n"
 "\n"
-"Si escolliu «No» i marqueu la casella de selecció «No ho tornes a "
-"preguntar», s'eliminarà la informació del beneficiari per a totes les "
-"operacions successives que facen referència de «%1»."
+"Si trieu «No» i marqueu la casella de selecció «No ho tornes a preguntar», "
+"s'eliminarà la informació del beneficiari per a totes les operacions "
+"successives que facen referència de «%1»."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1055
 #: kmymoney/kmymoneyutils.cpp:578
@@ -596,10 +596,10 @@ msgstr ""
 "Utilitzeu este diàleg per a fer una còpia de seguretat de les dades.\n"
 "\n"
 "Assegureu-vos que hi ha un disc inserit i que la unitat està preparada. "
-"Després seleccioneu el punt de muntatge des del botó «Escolliu» o introduint "
-"el camí en el quadro disponible.\n"
+"Després seleccioneu el punt de muntatge des del botó «Trieu» o introduint el "
+"camí en el quadro disponible.\n"
 "\n"
-"Cliqueu «D'acord» per a portar a terme la còpia de seguretat."
+"Cliqueu damunt «D'acord» per a portar a terme la còpia de seguretat."
 
 # skip-rule: punctuation-period-no
 #. i18n: ectx: property (text), widget (QLabel, txtAutoMount)
@@ -711,7 +711,7 @@ msgid ""
 "\n"
 "Once you have chosen an import type please press the OK button."
 msgstr ""
-"Escolliu el tipus d'importació que voleu fer. En la part inferior de la "
+"Trieu el tipus d'importació que voleu fer. En la part inferior de la "
 "pantalla trobareu una explicació senzilla del tipus d'importació, que es va "
 "actualitzant \n"
 "a mesura que seleccioneu un element del quadro de selecció.\n"
@@ -723,7 +723,7 @@ msgstr ""
 #: kmymoney/dialogs/kchooseimportexportdlg.ui:108
 #, kde-format
 msgid "Choose import type:"
-msgstr "Escolliu el tipus d'importació:"
+msgstr "Trieu el tipus d'importació:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KChooseImportExportDlg)
 #: kmymoney/dialogs/kchooseimportexportdlg.cpp:77
@@ -742,7 +742,7 @@ msgid ""
 "\n"
 "Once you have chosen an export type please press the OK button."
 msgstr ""
-"Escolliu el tipus d'exportació que voleu fer. En la part inferior de la "
+"Trieu el tipus d'exportació que voleu fer. En la part inferior de la "
 "pantalla trobareu una explicació senzilla del tipus d'exportació, que es va "
 "actualitzant \n"
 "a mesura que seleccioneu un element del quadro de selecció.\n"
@@ -752,7 +752,7 @@ msgstr ""
 #: kmymoney/dialogs/kchooseimportexportdlg.cpp:83
 #, kde-format
 msgid "Choose export type:"
-msgstr "Escolliu el tipus d'exportació:"
+msgstr "Trieu el tipus d'exportació:"
 
 #: kmymoney/dialogs/kchooseimportexportdlg.cpp:84
 #, kde-format
@@ -781,7 +781,7 @@ msgid ""
 "information relevant to the Quicken format."
 msgstr ""
 "Els fitxers QIF són creats per a Quicken, un popular programa de\n"
-"comptabilitat. Si escolliu este tipus, vos apareixerà un diàleg\n"
+"comptabilitat. Si trieu este tipus, vos apareixerà un diàleg\n"
 "nou demanant-vos més informació relativa al format de Quicken."
 
 #: kmymoney/dialogs/kchooseimportexportdlg.cpp:109
@@ -807,7 +807,7 @@ msgid ""
 "\n"
 "Once you have chosen an import type please press the OK button."
 msgstr ""
-"Escolliu el tipus d'importació que voleu fer. A la\n"
+"Trieu el tipus d'importació que voleu fer. A la\n"
 "part inferior de la pantalla trobareu una explicació senzilla\n"
 "del tipus d'importació, la qual s'anirà actualitzant a mesura\n"
 "que seleccioneu un element del quadro de selecció.\n"
@@ -935,7 +935,7 @@ msgstr "S'han efectuat els canvis següents a les dades de l'operació:"
 #: kmymoney/dialogs/kconfirmmanualenterdlg.ui:61
 #, kde-format
 msgid "Please choose what you wish to do with the above changes"
-msgstr "Escolliu què voleu fer amb els canvis anteriors"
+msgstr "Trieu què voleu fer amb els canvis anteriors"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_discardRadio)
 #: kmymoney/dialogs/kconfirmmanualenterdlg.ui:67
@@ -9621,7 +9621,7 @@ msgstr ""
 "Des d'este diàleg podeu exportar operacions a un fitxer separat per comes "
 "(conegut com a fitxer CSV a causa de l'extensió). Tanmateix, podeu "
 "especificar un separador alternatiu davall. Introduïu el camí cap al fitxer "
-"CSV o escolliu-lo fent clic en el botó «Explora».\n"
+"CSV o trieu-lo clicant damunt del botó «Explora».\n"
 "\n"
 "Podeu escollir el camí del fitxer i el compte. Seleccioneu Compte per a "
 "exportar totes les operacions entre les dates especificades, o només "
@@ -9890,7 +9890,7 @@ msgid ""
 msgstr ""
 "<center>El camp «<b>%1</b>» ja tenia esta columna seleccionada.</"
 "center><center>Si voleu copiar les dades del beneficiari al camp "
-"recordatori, cliqueu «Sí».</center>"
+"recordatori, cliqueu damunt «Sí».</center>"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:257
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:182
@@ -10479,7 +10479,7 @@ msgid ""
 msgstr ""
 "Seleccioneu el símbol decimal utilitzat en el fitxer.\n"
 "El separador de milers canvia automàticament.\n"
-"Si tot és correcte, podreu fer clic en «Importa».\n"
+"Si tot és correcte, podreu clicar damunt «Importa».\n"
 "Si es requerix, es pot obtindre un fitxer QIF."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_fieldDelimiter)
@@ -10578,7 +10578,7 @@ msgid ""
 "by entering its name and selecting 'Add'.\n"
 "Then open the file you wish to import."
 msgstr ""
-"Feu clic en Banca, Inversió o Cotitzacions.\n"
+"Cliqueu damunt «Banca», «Inversió» o «Cotitzacions»a \n"
 "Llavors seleccioneu un perfil existent o creeu-ne\n"
 "un de nou entrant el seu nom i seleccionat «Afig».\n"
 "Després obriu el fitxer que voleu importar."
@@ -10669,8 +10669,8 @@ msgid ""
 "</center>"
 msgstr ""
 "<center>El camp «<b>%1</b>» ja tenia esta columna seleccionada.</"
-"center><center>Si voleu copiar estes dades al camp recordatori, cliqueu «Sí»."
-"</center>"
+"center><center>Si voleu copiar estes dades al camp recordatori, cliqueu "
+"damunt «Sí».</center>"
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:382
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:135
@@ -11281,7 +11281,8 @@ msgid ""
 msgstr ""
 "<center>L'operació de davall té un tipus no reconegut o no vàlid.</center>\n"
 "<center>Seleccioneu una entrada apropiada, si està disponible.</"
-"center><center>En cas contrari, cliqueu Cancel·la per a interrompre.</center>"
+"center><center>En cas contrari, cliqueu damunt «Cancel·la» per a interrompre."
+"</center>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/csv/import/transactiondlg.ui:80
@@ -11509,7 +11510,7 @@ msgstr "Font de les cotitzacions: %1"
 #: kmymoney/plugins/gnc/import/kgncpricesourcedlg.ui:20
 #, kde-format
 msgid "Online Quotes - Select price source"
-msgstr "Cotitzacions en línia - Escolliu la font de les cotitzacions"
+msgstr "Cotitzacions en línia - Trieu la font de les cotitzacions"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #: kmymoney/plugins/gnc/import/kgncpricesourcedlg.ui:46
@@ -11517,8 +11518,7 @@ msgstr "Cotitzacions en línia - Escolliu la font de les cotitzacions"
 msgid ""
 "This price source is not known to KMyMoney. Please select an option below."
 msgstr ""
-"KMyMoney no coneix esta font de cotitzacions. Escolliu una opció de més "
-"avall."
+"KMyMoney no coneix esta font de cotitzacions. Trieu una opció de més avall."
 
 #. i18n: ectx: property (text), widget (QRadioButton, buttonNoSource)
 #: kmymoney/plugins/gnc/import/kgncpricesourcedlg.ui:62
@@ -11541,7 +11541,7 @@ msgid ""
 "(Click Help for further information.)"
 msgstr ""
 "Utilitza el se&güent nom per a la font del preu.\n"
-"(Cliqueu «Ajuda» per a més informació)"
+"(Cliqueu damunt «Ajuda» per a més informació)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkAlwaysUse)
 #: kmymoney/plugins/gnc/import/kgncpricesourcedlg.ui:102
@@ -14001,15 +14001,15 @@ msgid ""
 msgstr ""
 "Des d'este diàleg podeu exportar operacions a un fitxer compatible amb "
 "Quicken (anomenat fitxer QIF a causa de l'extensió). Introduïu el camí cap "
-"al fitxer QIF o escolliu-lo fent clic en el botó «Explora».\n"
+"al fitxer QIF o trieu-lo clicant damunt del botó «Explora».\n"
 "\n"
 "Podeu escollir el camí del fitxer, el compte i el format del fitxer QIF "
-"(perfil). En els continguts que s'exportaran, escolliu «Compte» per tal "
+"(perfil). En els continguts que s'exportaran, trieu «Compte» per tal "
 "d'exportar totes les operacions entre les dates especificades, o tan sols "
 "Categories. També podeu limitar per dates inicial i final les operacions que "
-"s'exportaran. Una vegada hàgeu clicat el botó «Exporta», vos apareixerà un "
-"quadro de missatge quan s'haja completat l'exportació, detallant quantes "
-"operacions, categories i beneficiaris s'han exportat."
+"s'exportaran. Una vegada hàgeu clicat damunt del botó «Exporta», vos "
+"apareixerà un quadro de missatge quan s'haja completat l'exportació, "
+"detallant quantes operacions, categories i beneficiaris s'han exportat."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel3)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel3_2)
@@ -14090,9 +14090,9 @@ msgid ""
 msgstr ""
 "<p>Des d'este diàleg podeu importar operacions des d'un fitxer compatible "
 "amb Quicken<b>&trade;</b> (anomenat fitxer QIF a causa de l'extensió).</p>\n"
-"<p>Introduïu el camí cap al fitxer QIF o escolliu-lo fent clic en el botó "
-"«Explora». Una vegada es tinga el camí cap al fitxer, cliqueu en el botó "
-"«Importa» i KMyMoney importarà totes les operacions, categories i "
+"<p>Introduïu el camí cap al fitxer QIF o trieu-lo clicant damunt del botó "
+"«Explora». Una vegada es tinga el camí cap al fitxer, cliqueu damunt del "
+"botó «Importa» i KMyMoney importarà totes les operacions, categories i "
 "beneficiaris que trobe.</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, lblImportFile)
@@ -14223,8 +14223,7 @@ msgstr "Seleccioneu el format de data"
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:370
 #, kde-format
 msgid "Pick the date format that suits your input file"
-msgstr ""
-"Escolliu el format de dades que s'adigui amb el vostre fitxer d'entrada"
+msgstr "Trieu el format de dades que s'adisca amb el vostre fitxer d'entrada"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:385
 #, kde-format
@@ -14559,7 +14558,7 @@ msgid ""
 "Click Help for more information"
 msgstr ""
 "Per tal d'utilitzar una base de dades, cal instal·lar programari addicional. "
-"Cliqueu Ajuda per a més informació"
+"Cliqueu damunt «Ajuda» per a més informació"
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:165
 #: kmymoney/plugins/sql/kselectdatabasedlg.cpp:94
@@ -14858,8 +14857,8 @@ msgid ""
 "Retry Save As Database and click Help for further info."
 msgstr ""
 "No s'ha pogut obrir o crear la base de dades %1.\n"
-"Reintenteu «Anomena i guarda base de dades» i cliqueu «Ajuda» per a més "
-"informació."
+"Reintenteu «Anomena i guarda la base de dades» i cliqueu damunt «Ajuda» per "
+"a més informació."
 
 #: kmymoney/plugins/views/budget/kbudgetvalues.cpp:240
 #, kde-format
@@ -18301,10 +18300,9 @@ msgid "Store GPG encrypted"
 msgstr "Emmagatzema-ho encriptat amb GPG"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:174
-#, fuzzy, kde-format
-#| msgid "Unable to open file '%1' for writing"
+#, kde-format
 msgid "Unable to open file '%1' for writing."
-msgstr "No es pot obrir el fitxer «%1» per a escriptura"
+msgstr "No s'ha pogut obrir el fitxer «%1» per a escriptura."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:275
 #, kde-format
@@ -21111,7 +21109,7 @@ msgstr "Falta assignar una categoria a l'operació de <b>%1</b>."
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr ""
-"Esta planificació està endarrerida des del %1. Feu clic damunt de la icona "
+"Esta planificació està endarrerida des del %1. Cliqueu damunt de la icona "
 "per a entrar-hi."
 
 #: kmymoney/views/ledgerview.cpp:882
@@ -21119,7 +21117,7 @@ msgstr ""
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr ""
-"Esta operació és importada. Feu clic damunt de la icona per a acceptar-la."
+"Esta operació és importada. Cliqueu damunt de la icona per a acceptar-la."
 
 #: kmymoney/views/ledgerview.cpp:887
 #, kde-format
@@ -21127,7 +21125,7 @@ msgctxt "@info:tooltip icon description"
 msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
 msgstr ""
-"Esta operació és concordant. Feu clic damunt de la icona per a acceptar-la o "
+"Esta operació és concordant. Cliqueu damunt de la icona per a acceptar-la o "
 "marcar-la com desaparellada."
 
 #: kmymoney/views/ledgerview.cpp:963
@@ -21898,7 +21896,7 @@ msgstr "Formulari"
 #, kde-format
 msgctxt "@info:tooltip icon in category to open the split editor"
 msgid "Click this icon to open the split editor"
-msgstr "Feu clic en esta icona per a obrir l'editor de desglossaments"
+msgstr "Cliqueu damunt d'esta icona per a obrir l'editor de desglossaments"
 
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:69
 #, kde-format
@@ -23641,9 +23639,9 @@ msgid ""
 "empty.\n"
 "Enter the account number used by the institution to identify the account."
 msgstr ""
-"Si este compte és gestionat per alguna institució, escolliu-la de la llista. "
-"Si la institució encara no existix, premeu el botó <b>Institució nova</b> "
-"per a crear-la. Altrament, deixeu este camp buit.\n"
+"Si este compte és gestionat per alguna institució, trieu-la de la llista. Si "
+"la institució encara no existix, premeu el botó <b>Institució nova</b> per a "
+"crear-la. Altrament, deixeu este camp buit.\n"
 "Introduïu el número de compte emprat per la institució per a identificar el "
 "compte."
 
@@ -24012,7 +24010,7 @@ msgid ""
 msgstr ""
 "Ara introduïu la informació requerida per als pagaments periòdics del "
 "préstec. Si els pagaments normals contenen qualsevol despesa addicional, "
-"cliqueu en el botó <b>Despeses addicionals</b> per a introduir-les."
+"cliqueu damunt del botó <b>Despeses addicionals</b> per a introduir-les."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/wizards/newaccountwizard/kloanpaymentpage.ui:53
@@ -24299,7 +24297,7 @@ msgid ""
 "Enter the details below and click <b>Next</b> to continue entering the "
 "online update details."
 msgstr ""
-"Introduïu els detalls davall i cliqueu <b>Següent</b> per a continuar "
+"Introduïu els detalls davall i cliqueu damunt <b>Següent</b> per a continuar "
 "introduint els detalls de l'actualització en línia."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_tradingMarket)
@@ -24499,9 +24497,9 @@ msgid ""
 "Select an online source and click <b>Finish</b> to store the investment "
 "data. If you do not want to use online updates, just leave the data as is."
 msgstr ""
-"Seleccioneu una font en línia i cliqueu <b>Finalitza</b> per a emmagatzemar "
-"les dades de la inversió. Si no voleu utilitzar les actualitzacions en "
-"línia, deixeu la dada com està."
+"Seleccioneu una font en línia i cliqueu damunt <b>Finalitza</b> per a "
+"emmagatzemar les dades de la inversió. Si no voleu utilitzar les "
+"actualitzacions en línia, deixeu la dada com està."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_4)
 #: kmymoney/wizards/newinvestmentwizard/konlineupdatewizardpage.ui:54
@@ -24550,7 +24548,7 @@ msgid ""
 msgstr ""
 "\n"
 "Si el vostre pagament periòdic conté qualsevol despesa addicional, cliqueu "
-"en el botó «Despeses addicionals» per a introduir-les."
+"damunt del botó «Despeses addicionals» per a introduir-les."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel21_1_3)
 #: kmymoney/wizards/newloanwizard/additionalfeeswizardpage.ui:63
@@ -24588,7 +24586,7 @@ msgid ""
 "entered all such fees, then click on \"Next\"."
 msgstr ""
 "Si els vostres pagaments periòdics no inclouen despeses addicionals o ja les "
-"heu introduït totes, cliqueu «Següent»."
+"heu introduït totes, cliqueu damunt «Següent»."
 
 #: kmymoney/wizards/newloanwizard/assetaccountwizardpage.cpp:50
 #, kde-format
@@ -24997,7 +24995,7 @@ msgid ""
 "Your previous selection was \"%1\". If you select another option, KMyMoney "
 "will dismiss the changes you have just entered. Do you wish to proceed?"
 msgstr ""
-"La vostra selecció anterior fou «%1». Si escolliu una altra opció, KMyMoney "
+"La vostra selecció anterior fou «%1». Si trieu una altra opció, KMyMoney "
 "descartarà els canvis que acabeu d'introduir. Voleu continuar?"
 
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:284
@@ -25381,7 +25379,7 @@ msgstr ""
 #: kmymoney/wizards/newloanwizard/recordpaymentwizardpage.ui:6
 #, kde-format
 msgid "Recording payments?"
-msgstr "Enregistrar pagaments?"
+msgstr "Voleu enregistrar els pagaments?"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel7_2)
 #: kmymoney/wizards/newloanwizard/recordpaymentwizardpage.ui:19
@@ -25821,7 +25819,7 @@ msgstr "Dades personals"
 #: kmymoney/wizards/newuserwizard/knewuserwizard.cpp:58
 #, kde-format
 msgid "Select Currency"
-msgstr "Escolliu la divisa"
+msgstr "Trieu la divisa"
 
 #: kmymoney/wizards/newuserwizard/knewuserwizard.cpp:59
 #, kde-format
@@ -25852,7 +25850,7 @@ msgid ""
 msgstr ""
 "Si voleu revisar o canviar qualsevol preferència en les opcions de "
 "configuració de KMyMoney després de finalitzar l'assistent, podreu fer-ho "
-"marcant esta casella. Si no, cliqueu <b>Següent</b>."
+"marcant esta casella. Si no, cliqueu damunt <b>Següent</b>."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_openConfigAfterFinished)
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:32
