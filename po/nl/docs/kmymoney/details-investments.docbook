@@ -5,102 +5,281 @@
     <author
 >&Ace.Jones; &Ace.Jones.mail; </author>
     <author
-><personname
-><firstname
->Michael</firstname
-><surname
->Carpino</surname
-></personname
-> <email
->mfcarpino@gmail.com</email
-> </author>
+>&Michael.Carpino; &Michael.Carpino.mail;</author>
     <author
 >&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->2019-12-30</date>
+>2024-12-01</date>
   <releaseinfo
->5.0.7</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Investeringen</title>
 
-<sect1 id="details.investments.overview">
-<title
+<sect1 id="details.investments.overview"
+><title
 >Investeringen in &kmymoney;</title>
-
-<sect2>
-<title
->Investeringen</title>
-
 <para
->In erg algemene termen is een investering elke bestemming van geld met de verwachting van een toekomstig voordeel. Investeringsrekeningen van &kmymoney;  zijn ontworpen voor één specifiek type investering: waardepapier. Een investering in een waardepapier (of gewoon een waardepapier) is een instrument voor geld investeren die op een markt verhandeld kan worden met de bedoeling van een profijtelijk teruggave in de vorm van ofwel waarde, of inkomen zoals rente of dividenden. Aandelen en inversteringsfondsen zijn de meest algemene waardepapieren; en dat zijn diegenen specifiek ondersteund in &kmymoney;. Aandelen hebben een verschillende financiële structuur, maar kunnen gewoonlijk behandeld worden door &kmymoney;. Termijncontracten, producten, opties en complexere investeringsinstrumenten zoals derivaten er andere typen investeringen, maar &kmymoney; heeft er geen speciale functionaliteit voor. Zolang een investering vergelijkbare karakteristieken heeft als een aandeel of investeringsfonds, kan het worden gevolgd. </para>
-</sect2>
+>In erg algemene termen is een <emphasis
+>investering</emphasis
+> elke bestemming van geld met de verwachting van een toekomstig voordeel. Investeringsrekeningen van &kmymoney;  zijn ontworpen voor één specifiek type investering: waardepapier. Een investering in een waardepapier (of gewoon een waardepapier) is een instrument voor geld investeren die op een markt verhandeld kan worden met de bedoeling van een profijtelijk teruggave in de vorm van ofwel waarde of inkomen zoals rente of dividenden of een combinatie van beiden. Aandelen en investeringsfondsen zijn de meest algemene waardepapieren; en dat zijn diegenen specifiek ondersteund in &kmymoney;. Obligaties hebben een verschillende financiële structuur, maar kunnen gewoonlijk behandeld worden door &kmymoney;. Termijncontracten, producten, opties en complexere investeringsinstrumenten zoals derivaten er andere typen investeringen, maar &kmymoney; heeft er geen speciale functionaliteit voor. Zolang een investering vergelijkbare karakteristieken heeft als een aandeel of investeringsfonds, kan het worden gevolgd. </para>
 
-<sect2>
-<title
->Basis valuta</title>
-<para
->Elk waardepapier heeft een basis valuta. Dit is de valuta waarin het wordt verhandeld. Wanneer een koerswaarde wordt ingevoerd voor een investering, is de valuta van de waarde altijd gegeven in zijn basis valuta. Een aandeel aan de NYSE (New York Stock Exchange) zou in US dollars (USD) moeten zijn en een op een Australische markt zou in Australische dollars (AUD) moeten zijn. De basis valuta voor een waardepapier hoeft niet hetzelfde te zijn als de standaard valuta van de investeringsrekening met dat waardepapier. </para>
-</sect2>
-
-<sect2>
-<title
+<sect2
+><title
 >Investeringsrekening</title>
 <para
->Een investeringsrekeningen bevat een verzameling waardepapieren, ook genaamd Equities. Een investeringsrekening bevat transacties, waarmee activiteiten zoals aan- en verkopen, dividend, herinvesteringen, koersen, splitsingen en inkomsten van deze investeringen. Elke transactie in een investeringsrekening moet gerelateerd zijn aan een specifiek waardepapier. </para>
+>Een investeringsrekeningen van &kmymoney; bevat een verzameling waardepapieren, ook genaamd Eigen vermogen. Een investeringsrekening bevat transacties, waarmee activiteiten zoals aan- en verkopen, dividend, herinvesteringen, koersen, splitsingen en inkomsten van deze investeringen. Elke transactie in een investeringsrekening moet gerelateerd zijn aan een specifiek waardepapier. </para>
 
 <para
 >Het is algemeen voor een rekening in een Makelaarsorganisatie om zowel waardepapieren als kasgeld te bevatten. In &kmymoney; bevat een Investeringsrekening <emphasis
 >alleen</emphasis
-> waardepapier. Het kan geen kassaldo bevatten. Dit was een ontwerpbesluit gemaakt toen Investeringsrekeningen voor het eerst werden toegevoegd aan &kmymoney; en het zou in een toekomstige versie gewijzigd kunnen worden. Op dit moment wordt vereist dat kasgeld nodig om een waardepapier te kopen of te ontvangen uit een verkoop- of dividendtransactie, het gebruik van een Depotrekening. </para>
+> waardepapier. Het kan geen kassaldo bevatten. Dit was een ontwerpbesluit gemaakt toen Investeringsrekeningen voor het eerst werden toegevoegd aan &kmymoney;. Het zou in de toekomst gewijzigd kunnen worden, maar dat zal waarschijnlijk gedaan worden als onderdeel van een belangrijke herziening van alle behandeling van investeringen in &kmymoney;. Op dit moment wordt vereist dat kasgeld nodig om een waardepapier te kopen of te ontvangen uit een verkoop- of dividendtransactie, het gebruik van een Depotrekening. </para>
 </sect2>
 
-<sect2 id="details.investments.brokerage">
-<title
+<sect2 id="details.investments.brokerage"
+><title
 >Depotrekeningen</title>
 <para
->Wanneer een investeringstransactie geld gebruikt (om een waardepapier te kopen) of produceert (uit een verkoop of dividend), moet die transactie verwijzen naar een andere rekening die het geld kan bevatten, gewoonlijk een betaalrekening. U kunt elke geschikte rekening voor elke investeringstransactie gebruiken die er een vereist. &kmymoney; heeft echter het concept van een <emphasis
+>Wanneer een investeringstransactie geld gebruikt (om een waardepapier te kopen) of cash produceert (uit een verkoop of dividend), moet die transactie verwijzen naar een andere rekening die het geld kan bevatten, gewoonlijk een betaalrekening. U kunt elke geschikte rekening voor elke investeringstransactie gebruiken die er een vereist. &kmymoney; heeft echter het concept van een <emphasis
 >Depotrekening</emphasis
 >, soms ook genoemd een <quote
 >Kasrekening</quote
 >, wat de standaard rekening is voor zulke transacties. </para>
 
 <para
->Wanneer u een investeringsrekening aanmaakt hebt u de optie om een geassocieerde Depotrekening erbij aan te maken. De standaard naam van een Depotrekening zal de naam van de investeringsrekening zijn met " (Makelaar)" achtergevoegd. </para>
+>Wanneer u een investeringsrekening aanmaakt hebt u de optie om een geassocieerde Depotrekening erbij aan te maken. De standaard naam van een Depotrekening zal de naam van de investeringsrekening zijn met " (Makelaar)" achtergevoegd. &kmymoney; verwacht deze naamconventie in verschillende acties gerelateerd aan investeringen. De conventie volgen is niet absoluut vereist, maar zonder dat zult u vaak extra stappen moeten doen om het invoeren van transacties te voltooien.  </para>
+</sect2>
+
+<sect2
+><title
+>Basis valuta</title>
+<para
+>Uw gegevensbestand van &kmymoney; heeft een basis valuta, gespecificeerd toen het bestand was aangemaakt. Bovendien heeft een Investeringsrekening een basis valuta, gespecificeerd toen het werd aangemaakt. Apart daarvan heeft elk waardepapier een basis valuta. Dit is de valuta waarin het wordt verhandeld. Wanneer een koerswaarde wordt ingevoerd voor een investering, is de valuta van de waarde altijd gegeven in zijn basis valuta. Een aandeel aan de NYSE (New York Stock Exchange) zou in US dollars (USD) moeten zijn en een op een Australische markt zou in Australische dollars (AUD) moeten zijn. De basis valuta voor een waardepapier hoeft niet hetzelfde te zijn als de basis valuta van de investeringsrekening met dat waardepapier. </para>
 </sect2>
 </sect1>
 
-<sect1 id="details.investments.investment">
-<title
->Een investeringsrekening aanmaken</title>
+<sect1 id="details.investments.view"
+><title
+>De Investeringenweergave</title>
+<para
+>De Investeringenweergave biedt een samenvatting van al uw investeringen, zoals verschillende andere hoofdweergaven. Het heeft een enkel weergavegebied, met twee tabbladen. Het eerste tabblad, <guilabel
+>Eigen vermogen</guilabel
+>, levert een hoog niveau weergave van die waardepapieren gehouden in een enkele Investeringsrekening, zoals gespecificeerd in het afrolmenu <guilabel
+>Rekening selecteren:</guilabel
+>. Het tweede tabblad, <guilabel
+>Waardepapieren</guilabel
+>, is soortgelijk, maar levert een iets verschillende informatie over alle aandelen, investeringsfondsen, obligaties, &etc;, die u volgt in &kmymoney;. </para>
+
+<sect2 id="details.investments.view.equities"
+><title
+>Het tabblad Eigen vermogen</title>
+<screenshot>
+  <screeninfo
+>investeringenweergave, tabblad Eigen vermogen weergave</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investments_view_equities.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>investeringenweergave, tabblad Eigen vermogen weergave</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->De eerste stap op het pad naar werken met investeringen is om een rekening aan te maken om uw gedefinieerde waardepapieren te bevatten. Kies het menu-item <menuchoice
+>Het onderscheid tussen Eigen vermogen en waardepapieren op deze twee tabbladen kan ietwat arbitrair lijken en staat bekend om verwarring te veroorzaken. Misschien dat de terminologie in de toekomst kan wijzigen, als iemand een andere set termen ka voorstellen die niet hetzelfde of andere problemen heeft. Echter, zoals boven gesteld, in de huidige terminologie, wordt een eigen vermogen zoals getoond in het tabblad Eigen vermogen verwijst nu naar de details van een investering in een investeringsrekening. Binnen &kmymoney; is het een subrekening van een investeringsrekening, benoemd in een waardering. Een waardepapier zoals getoond in het tabblad Waardepapieren levert toegang tot de waardepapierinformatie zonder relatie tot een rekening. Naar een waardepapier kan verwezen worden in meerdere eigen vermogens, wat ook ook genoemd kan worden als verschillende eigen vermogens kunnen genaamd worden in hetzelfde waardepapier. </para>
+
+<para
+>Bovenaan de lijst van eigen vermogen is de afrollijst <guilabel
+>Selecteer rekening:</guilabel
+>, waar u de investeringsrekening waarvan u de specifieke investeringen wilt zien. Als u <link linkend="details.settings.general.views"
+>Rekeningselectie van Grootboekweergave en Investeringsweergave synchroniseren</link
+> in de configuratiedialoog hebt geactiveerd, dan als u kijkt op een investeringsrekening in de Grootboekweergave en daarna omschakelt naar de Investeringenweergave, dan zal die rekening altijd geselecteerd worden. </para>
+
+<para
+>Net als in de Banken en verschillende andere weergaven zal het tabblad Eigen vermogen verschillende kolommen tonen met beschrijvende en samenvattingsinformatie over elk eigen vermogen. Zoals met de Bankenweergave kunt u selecteren welke kolommen getoond worden door rechts te klikken op een kolomkop en het keuzevak naast de naam van de kolom al dan niet te selecteren of de selectie ongedaan te maken. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Naam</term>
+    <listitem>
+      <para
+>De naam van het eigen vermogen. Deze kolom wordt altijd getoond. Alle andere kolommen worden optioneel getoond, zoals bovenstaande beschreven. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Symbool</term>
+    <listitem>
+      <para
+>Dit is het handelssymbool zoals gebruikt op de markt waar het vermogen wordt verhandeld. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Hoeveelheid</term>
+    <listitem>
+      <para
+>Dit is het aantal aandelen van het eigen vermogen dat u bezit in deze investeringsrekening. De precisie hiervan en de andere waardekolommen kan aangepast worden zoals later beschreven in deze sectie. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Koers</term>
+    <listitem>
+      <para
+>Dit is de meest recente koers voor dit vermogen bekend bij &kmymoney;. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Waarde</term>
+    <listitem>
+      <para
+>Dit is de totale waarde van deze investering in deze investeringsrekening. Het zou hetzelfde moeten zijn als het product van de Hoeveelheid en de Koers. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Bijwerken met laatste koers</term>
+    <listitem>
+      <para
+>Dit is de datum van de meest recente koers. Koersen kunnen bijgewerkt worden op verschillende manieren, allen later beschreven in deze sectie. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>De volgorde van elk van de kolommen behalve Naam kan gewijzigd worden door links te klikken in de kolomkop en deze naar links of rechts te slepen. </para>
+</sect2>
+
+<sect2 id="details.investments.view.securities"
+><title
+>Het tabblad Waardepapieren</title>
+<screenshot>
+  <screeninfo
+>investeringenweergave, tabblad aandelen</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investments_view_securities.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>investeringenweergave tabblad aandelen</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Bovenaan de lijst met waardepapieren is een zoekvak. Omdat dit tabblad een lijst met alle investeringen bevat die u bezit in alle Investeringsrekeningen, kan het lang groeien, en u kunt het zoekvak gebruiken om een specifiek item in de lijst te vinden, door een gedeelte van zijn naam in te typen. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Waardepapier</term>
+    <listitem>
+      <para
+>De naam van het waardepapier. Deze kolom wordt altijd getoond. Alle andere kolommen worden optioneel getoond, zoals bovenstaande beschreven. De namen zouden hetzelfde moeten zijn zoals getoond in de naamkolom in het tabblad Eigen vermogen. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Symbool</term>
+    <listitem>
+      <para
+>Dit is het handelssymbool zoals gebruikt in de markt waar het waardepapier wordt verhandeld. Het is ook hetzelfde als dezelfde kolom in het tabblad Eigen vermogen. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Type</term>
+    <listitem>
+      <para
+>Dit is het specifieke type investering dat wordt gevolgd. Op dit moment zijn alleen Aandelen, Obligaties en Beleggingsfondsen mogelijke waarden. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Markt</term>
+    <listitem>
+      <para
+>Dit is de markt waar deze investering wordt verhandeld. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Valuta</term>
+    <listitem>
+      <para
+>Dit toont het symbool van de valuta waarin deze investering wordt verhandeld.Dit toont het symbool van de valuta waarin deze investering wordt verhandeld. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Fractie</term>
+    <listitem>
+      <para
+>Dit is de kleinste fractie gebruikt bij invoeren van de hoeveelheid van deze investering in een transactie. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>Zoals met het tabblad Waardepapieren kan de volgorde van elk van de kolommen behalve Naam gewijzigd worden door links te klikken in de kolomkop en deze naar links of rechts te slepen. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.investments.investment"
+><title
+>Een investeringsrekening aanmaken</title>
+<para
+>De eerste stap op het pad naar werken met investeringen is om een investeringsrekening aan te maken om uw gedefinieerde waardepapieren te bevatten. Kies het menu-item <menuchoice
 ><guimenu
 >Rekening</guimenu
 > <guimenuitem
 >Nieuwe rekening...</guimenuitem
 ></menuchoice
-> om te beginnen met het proces. Maak een rekening aan zoals eerder gedefinieerd in de sectie <guilabel
+> om te beginnen met het proces. Maak een rekening aan zoals eerder beschreven in de sectie <guilabel
 >Rekening</guilabel
-> toevoegen en er op te letten om <quote
+>, en er op te letten om <quote
 >Investering</quote
 > als het type van de rekening te kiezen. </para>
 
 <para
->Om te werken met de nieuwe investeringsrekening, navigeer naar de weergave <guibutton
->Investeringen</guibutton
-> en kies de rekening die u zojuist hebt aangemaakt met het afrolvak <guilabel
->Rekening selectern</guilabel
+>Om met de nieuwe investeringsrekening te werken, open die rekening in de Grootboekweergave, zoals eerder beschreven. </para>
+
+<sect2
+><title
+>Invoer van koers</title>
+<para
+>Wanneer u ooit een transactie voor aankoop, verkoop of opnieuw investeer invoert of bewerkt, moet u het aantal aandelen, koers per aandeel en de totale hoeveelheid van de transactie specificeren. Zoals <link linkend="details.investments.priceentry"
+>hier</link
+> beschreven specificeert u slechts twee van deze waarden en berekent &kmymoney; de derde. De standaard invoerinstelling van de koers voor nieuwe Investeringsrekeningen is <quote
+>Koers per aandeel</quote
+>, maar dit kan gewijzigd worden naar <quote
+>Totale hoeveelheid</quote
+> wanneer u <link linkend="details.accounts.edit"
+>de rekening bewerkt</link
 >. </para>
+</sect2>
 </sect1>
 
-<sect1 id="details.investments.securities">
-<title
+<sect1 id="details.investments.securities"
+><title
 >Investeringen aan uw rekening toevoegen</title>
-
 <para
 >Om een individueel waardepapier in uw investeringsrekening toe te voegen, navigeer naar de weergave <guibutton
 >Investeringen</guibutton
@@ -108,20 +287,7 @@
 >Aandelen</guibutton
 > en kies de rekening waar de investeringsrekening zich bevindt uit het afrolvak <guilabel
 >Rekening selecteren</guilabel
->. <screenshot>
-  <screeninfo
->Investeringsweergave, tabblad Aandelen</screeninfo>
-  <mediaobject>
-  <imageobject>
-  <imagedata fileref="investments_summarytab.png" format="PNG"/>
-  </imageobject>
-  <textobject>
-  <phrase
->Investeringsweergave, tabblad Aandelen</phrase>
-  </textobject>
-  </mediaobject>
-  </screenshot>
-</para>
+>. </para>
 
 <para
 >Klik rechts in de lege ruimte in de weergave. Dit brengt het contextmenu <guimenu
@@ -132,74 +298,120 @@
 >Assistent voor nieuwe investering</guilabel
 > die u gebruikt om uw nieuwe investering aan te maken. </para>
 
-<sect2 id="details.investments.newinvestmentwizard">
-<title
+<sect2 id="details.investments.newinvestmentwizard"
+><title
 >Nieuwe investeringassistent</title>
 
 <para
->Het eerste dat u gevraagd zal worden is om het type investeringsrekening in te voeren, of het is een aandeel, obligatie, &etc; </para>
+>Het eerste dat u gevraagd zal worden om in te voeren is de naam van de investering. Dit is de naam die gebruikt zal worden in het tabblad Eigen vermogen. U zal ook gevraagd worden het type investering te specificeren. De huidige beschikbare waarden zijn Aandelen, obligaties en beleggingsfondsen. Als uw investering niet strict een van deze typen is, dan is het ok om ze hier een fout label te geven, omdat het type momenteel niet gebruikt wordt om te beperken of te controleren wat u met de investering kunt doen. </para>
+
+<screenshot>
+  <screeninfo
+>nieuw type investeringsassistent</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investments_new_type.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>nieuw type investeringsassistent</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
 >Vervolgens wordt de pagina investeringsrekeningsdetails gepresenteerd. De volgende informatie wordt ingevoerd op deze pagina: </para>
 
-<itemizedlist>
-  <listitem
-><para
->Handelsymbool. Het handels- of tickersymbool is afkorting gebruikt om een publiek verhandeld waardepapier in de investeringsrekening te identificeren op een specifieke aandelenmarkt. &kmymoney; vereist een handelssymbool voor alle waardepapieren; sommige investeringen hebben echter geen symbolen. In dat geval moet u er zelf een symbool voor maken. </para
-></listitem>
-
-  <listitem
-><para
->Volledige naam. De vriendelijke, leesbare naam van de investeringsrekening die u aan het maken bent, &eg;, <quote
->Advanced Micro Devices, Inc.</quote
-> Naar deze naam wordt ook gerefereerd als het waardepapier. </para
-></listitem>
-
-  <listitem
-><para
->Fractie. Dit geeft aan de graad van precisie waarnaar uw bezittingen worden gemeten. In de VS meten de meeste beleggingsfondsen bezittingen tot in drie decimalen, dus zou u 1000 in dit veld moeten invoeren. Aandelen worden vaak gemeten tot alleen gehele eenheden, dus zou u 1 voor een aandeel zoals deze kunnen invoeren. U zou dezelfde decimale plaatsen moeten gebruiken die uw makelaar gebruikt om uw waardepapieren aan te geven zodat de hoeveelheid in de transacties overeenkomen in &kmymoney;. Extra precisie gebruiken zal geen probleem veroorzaken, maar te weinig precisie kan afrondingsfouten geven waardoor &kmymoney; niet in staat is om exact de informatie overeen te laten komen getoond door uw makelaarsorganisatie. </para
-></listitem>
-
-  <listitem
-><para
->Handelsmarkt. Waar het aandeel wordt verhandeld. Dit is een optioneel veld dat voor het gemak geboden wordt. Deze informatie wordt elders in &kmymoney; niet gebruikt. </para
-></listitem>
-
-  <listitem
-><para
->Identificatie. Een optioneel veld om additionele identificatie-informatie die u zou willen kunnen volgen. Opnieuw, deze informatie wordt elders niet gebruikt. </para
-></listitem>
-
-  <listitem
-><para
->Handelsvaluta. De beursvaluta waarin deze investering handelt. Dit is typisch het land waarin het waardepapier handelt. Het is gewoonlijk, maar niet noodzakelijk, hetzelfde als de standaard valuta voor de Investeringsrekening voor dat waardepapier. </para
-></listitem>
-
-  <listitem
-><para
->Prijsinvoer. Kies of de prijs ingevoerd zal worden als de prijs per aandeel of als het totaal voor alle aandelen bij invoeren van de transactie. </para
-></listitem>
-</itemizedlist>
-
-<para
->Als u online noteringen gebruikt, ga na dat het symbool exact overeenkomt met het symbool gebruikt door uw bron met noteringen. Yahoo dekt de meeste van de wereldmarkten en vereist een achtervoegsel aan het eind van symbolen buiten de VS, om het land of de markt te specificeren. Bijvoorbeeld, Rubicon Limited op de Nieuw-Zeelandse markt zou ingevoerd moeten worden als <quote
->RBC.NZ</quote
->. </para>
-
-<para
->Tenslotte krijgt u het online scherm voor bijwerken te zien. Dit is waar u &kmymoney; vertelt hoe u de prijzen van uw investeringsrekening wilt bijwerken. De volgende items worden hier ingesteld: </para>
+<screenshot>
+  <screeninfo
+>details van nieuwe investeringsassistent</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investments_new_details.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>details van nieuwe investeringsassistent</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <itemizedlist>
   <listitem>
     <para
->Finance::Quote gebruiken. Dit is een optie voor &gnucash; gebruikers die gewend zijn aan deze stijl van noteringen. De meeste gebruikers kunnen dit niet geactiveerd laten. </para>
+>Handelsymbool. Het handels- of tickersymbool is afkorting gebruikt om een publiek verhandeld waardepapier in de investeringsrekening te identificeren op een specifieke aandelenmarkt of beurs. &kmymoney; vereist een handelssymbool voor alle waardepapieren; sommige investeringen hebben echter geen symbolen. In dat geval moet u er zelf een symbool voor maken. </para>
+
+    <para
+>De afrollijst omvat alle handelssymbolen die nu bestaan in uw gegevensbestand. Als u een van deze selecteert zal &kmymoney; het verwezen waardepapier voor de nieuwe equity opnieuw gebruiken, tenzij u de "Duplicaten van symbool aanmaken" activeert, in welke geval een nieuw waardepapier aangemaakt zal worden met hetzelfde symbool. </para>
+
+    <para
+>Als van plan bent <link linkend="details.investments.onlinequotes"
+>Online koersen</link
+> te gebruiken om koersen voor deze investering op te halen, ga na dat het symbool exact overeenkomt met het symbool gebruikt door uw bron met noteringen. Yahoo dekt de meeste van de wereldmarkten en vereist een achtervoegsel aan het eind van symbolen buiten de VS, om het land of de markt te specificeren. Bijvoorbeeld, Rubicon Limited op de Nieuw-Zeelandse markt zou ingevoerd moeten worden als <quote
+>RBC.NZ</quote
+>. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Volledige naam van de investering, hoewel het een vriendelijke, leesbare naam kan zijn, &eg;, <quote
+>Advanced Micro Devices, Inc.</quote
+>. Naar deze naam wordt ook gerefereerd als het waardepapier. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Fractie. Dit geeft aan de graad van precisie waarnaar uw bezittingen worden gemeten. In de VS meten de meeste beleggingsfondsen bezittingen tot in drie decimalen, dus zou u 1000 in dit veld moeten invoeren. Aandelen worden vaak gemeten tot alleen gehele eenheden, dus zou u 1 voor een aandeel zoals deze kunnen invoeren, maar u zou 10000 voor een aandeel met tot vier decimalen moeten gebruiken. U zou dezelfde decimale plaatsen moeten gebruiken die uw makelaar gebruikt om uw waardepapieren aan te geven zodat de hoeveelheden in de transacties overeenkomen in &kmymoney;. Extra precisie gebruiken zal geen probleem veroorzaken, maar te weinig precisie kan afrondingsfouten geven waardoor &kmymoney; niet in staat is om exact de informatie overeen te laten komen getoond door uw makelaarsorganisatie. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Handelsmarkt. Waar de investering wordt verhandeld. Dit is een optioneel veld dat voor het gemak geboden wordt. Deze informatie wordt elders in &kmymoney; niet gebruikt. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Identificatiegetal. Een optioneel veld om additionele identificatie-informatie die u zou willen kunnen volgen. Aandelen hebben vaak zo'n getal, dat soms gebruikt kan worden evenals het symbool voor ophalen van informatie erover. Opnieuw, deze informatie wordt elders niet gebruikt. </para>
+  </listitem>
+  
+  <listitem>
+    <para
+>Handelsvaluta. De beursvaluta waarin deze investering wordt verhandeld. Dit is typisch de valuta van het land waarin het waardepapier wordt verhandeld. Het is gewoonlijk, maar niet noodzakelijk, hetzelfde als de standaard valuta voor de Investeringsrekening voor dat waardepapier. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Koersitem. Wanneer u een koop, verkoop of opnieuw investeren transitie voor deze investering invoert of bewerkt, geeft deze afrollijst aan of u de koers per aandeel of het totaal voor alle aandelen wilt invoeren of de standaard voor de rekening wilt volgen, die was gespecificeerd toen de Investeringsrekening was aangemaakt. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Nauwkeurigheid van koers. Dit is een klein geheel getal, die het aantal decimale plaatsen specificeert gebruikt om de koers van deze investering in de gespecificeerde valuta te specificeren. Dit wordt gebruikt voor zowel koop als verkoopkoers, de huidige koers en ook voor de totale waarde van de investering. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Rest. Dit is een afrollijst met waarden Afronden, Bovenkant, onderkant en Afkorten, wat specificeert wat &kmymoney; zou moeten doen in de laatste decimale plaats van waarden. Bijvoorbeeld, dit kan relevant zijnn wanneer u de totale koers van een aankoop specificeert in plaats van een exacte koers per aandeel. </para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Tenslotte krijgt u het online scherm voor bijwerken te zien. Dit is waar u &kmymoney; vertelt hoe u de prijzen van uw investeringsrekening wilt bijwerken, als u een online bron wilt gebruiken. De volgende items worden hier ingesteld: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Finance::Quote gebruiken. Dit is een optie voor &gnucash; gebruikers die gewend zijn aan deze stijl van noteringen. De meeste gebruikers kunnen dit niet geactiveerd laten. Finance::Quote is een Perl module, dus om het te gebruiken moet u zowel Perl als zijn Finance::Quote module geïnstalleerd hebben. </para>
   </listitem>
 
   <listitem>
     <para
 >Online bron. De online bron die u wilt gebruiken voor deze specifieke investering. De meest algemene keuze is <quote
->Yahoo</quote
+>Yahoo Finance</quote
 >. Probeer die eerst, en als de investering niet gevonden kan worden met deze bron, experimenteer dan met de anderen. </para>
+
+    <para
+>Merk op dat hoewel &kmymoney; weet hoe koersen van waardepapieren uit webpagina's op te halen van Yahoo en vele andere bronnen, dat van die bronnen bekend is dat het formaat van deze pagina's kan wijzigen, wat kan voorkomen dat &kmymoney; met succes de gewenste informatie kan ophalen. Dit is helaas een te vaak onderwerp van discussie op de verschillende ondersteuningskanalen. Echter als ophalen van koersen gedurende een lange tijd werkt en daarna begint u fouten te krijgen, bekijk dan deze mogelijkheid. </para>
   </listitem>
 
   <listitem>
@@ -209,113 +421,77 @@
 </itemizedlist>
 </sect2>
 
-<sect2 id="details.investments.reuse">
-  <title
+<sect2
+><title
 >Een waardepapier gebruiken in meer dan een investeringsrekening</title>
-
-<note>
+<note
+><title
+>Voorzichtig</title>
   <para
->Deze sectie is net op tijd toegevoegd voor de uitgave van versie 5.0.8. De auteur vond het belangrijk om minstens de basis informatie nu mee te nemen, omdat dit onderwerp enige tijd een bron van moeilijkheden is geweest. De discussie zal uitgebreid worden en schermafdrukken van de nieuwe beveiligingsassistent zal zo spoedig mogelijk worden toegevoegd. </para>
+>Het is mogelijk om aandelen te hebben van hetzelfde waardepapier in meer dan één investeringsrekening, zoals een reguliere investeringsrekening en ook een pensioenrekening. In vorige versies van &kmymoney; was het eenvoudig om onbedoeld ze door &kmymoney; te laten behandelen alsof elk van de waardepapieren een andere onderliggende investering was. Dat veroorzaakte vaak verwarring, evenals gedupliceerde opslag, zoals het hebben van twee kopieën van de gehele prijsgeschiedenis van het eigen vermogen. Het is nu veel gemakkelijker om deze situatie te voorkomen, maar het is belangrijk om aandacht te besteden bij het aanmaken van nieuw eigen vermogen in een investeringsrekening. </para>
 </note>
 
 <para
->Het is mogelijk om aandelen te hebben van hetzelfde waardepapier in verschillende investeringsrekeningen, zoals een reguliere investeringsrekening en ook een pensioenrekening. Als u bovenstaande instructies volgt, zal dat waardepapier in beide accounts verschijnen, maar &kmymoney; zal in werkelijkheid ze behandelen alsof elk van de waardepapieren tot een verschillend onderliggend eigen vermogen behoort. Dit resulteert in dubbele opslag, zoals het hebben van twee kopieën van de gehele prijsgeschiedenis van het eigen vermogen. U zou daarom de voorkeur kunnen hebben om beide waardepapieren te laten verwijzen naar hetzelfde onderliggende eigen vermogen. </para>
-
-<para
->Wanneer u een waardepapier toevoegt aan een investeringsrekening en dat waardepapier bestaat al in een andere investeringsrekening, dan moet u voorzichtig zijn als u wilt deze opnieuw te gebruiken in plaats van een nieuwe aan te maken, duplicaat waardepapier. Wanneer u de <guilabel
+>Wanneer u een waardepapier toevoegt aan een investeringsrekening en dat waardepapier bestaat al in een andere investeringsrekening, dan moet u voorzichtig zijn als u deze opnieuw wilt te gebruiken in plaats van een nieuwe aan te maken, gedupliceerd item. In de <guilabel
 >Nieuwe investeringsassistent</guilabel
-> ziet, na selectie van het type investering en op <guibutton
+>, na selectie van de naam en het type investering en op <guibutton
 >Volgende</guibutton
-> klikt, dan moet u zeker zijn dat het veld <guilabel
->Volledige naam</guilabel
-> leeg is alvorens het <guilabel
+> klikt, wanneer u een bestaand <guilabel
 >Handelssymbool</guilabel
-> in te voeren. Wanneer u op <keycap
->Tab</keycap
-> drukt, als &kmymoney; al een waardepapier heeft met dat symbool, zal het vragen of u het opnieuw wilt gebruiken. Als u op <guibutton
->Ja</guibutton
-> klikt, zal het de rest van die dialoog invullen en u kunt gewoon op <guibutton
->Volgende</guibutton
-> klikken. </para>
-
+> selecteert zullen enkele van de andere velden op het formulier gevuld zijn met de relevante informatie uit het bestaande waardepapier en het bestaande waardepapier zal gebruikt worden tenzij u het keuzevakjes "Duplicaat van symbool aanmaken" selecteert. </para>
 </sect2>
 </sect1>
 
-<sect1 id="details.investments.edit">
-<title
+<sect1 id="details.investments.edit"
+><title
 >Een investering bewerken</title>
-
 <para
 >Het tabblad <guilabel
->Aandelen</guilabel
-> van de weergavevensters Investeringen geeft een lijst met uw huidige inhoud in deze rekening, samen met hun symbool, waarde, hoeveelheid en prijs. Klik recht met de muis op een van de investeringen om het contextmenu <guimenu
+>Eigen vermogen</guilabel
+> van de Investeringenweergave geeft een lijst met uw huidige inhoud in deze Investeringsrekening. Klik recht op een van de investeringen om het contextmenu <guimenu
 >Investeringsopties</guimenu
-> te tonen, waar u de optie hebt om individuele investeringen toe te voegen, te bewerken of te verwijderen uit deze rekening. U kunt ook de prijs van uw investeringen hier bijwerken ofwel handmatig of via hun online bron. Bovendien is het mogelijk om een lege rekening te sluiten of een gesloten rekening opnieuw te openen. De volgorde voor waarde, hoeveelheid en prijs kan op het scherm gewijzigd worden door elk van hen te selecteren door links teklikken op het item in bovenste balk en het naar links of rechts te slepen. </para>
+> te tonen, waar u een individuele investering uit de rekening toe kunt voegen, bewerken of verwijderen. U kunt ook de koers van een investering hier bijwerken of handmatig of via hun online bron. Bovendien is het mogelijk om een lege rekening te sluiten of een gesloten rekening opnieuw te openen. </para>
+
 <para
 >Als u kiest om een investeringen te bewerken, dan zult u de <guilabel
 >Assistent voor investeringsdetails</guilabel
 >, die er uit ziet en functioneert op dezelfde manier als de <guilabel
 >Nieuwe investeringsassistent</guilabel
 >, zoals beschreven in de vorige sectie. </para>
+
+<para
+>Rechts klikken op een item in het tabblad Waardepapier produceert een context menu <guilabel
+>Waardepapieropties</guilabel
+>, waar u een waardepapier kunt bewerken of verwijderen. Echt aanmaken van een waardepapier wordt gedaan wanneer u een equity in een Investeringsrekening aanmaakt en er niet voor kiest een bestaand waardepapier opnieuw te gebruiken, zoals bovenstaand besproken. </para>
 </sect1>
 
-<sect1 id="details.investments.ledger">
-<title
+<sect1 id="details.investments.ledger"
+><title
 >Investeringtransacties</title>
-
-<para>
-	<screenshot>
-	<screeninfo
->Investeringtransactieformulier</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="investment-transactionform.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Investeringtransactieformulier</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>investeringstransactieformulier</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investment-transactionform.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>investeringstransactieformulier</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
 >Investeringstransacties worden ingevoerd en bewerkt in de weergave <link linkend="details.ledgers"
->grootboek</link
->, zoals met andere soorten rekeningen. De velden, echter, verschijnen verschillend en variëren afhankelijk van het type transactie of activiteit. Investeringstransacties hebben enige additionele elementen: </para>
+>Grootboek</link
+>, zoals met transacties in andere typen rekeningen. De getoonde velden, echter, zullen anders zijn en variëren afhankelijk van het type transactie. Investeringstransacties hebben enige additionele elementen, onderstaand beschreven. </para>
 
-<itemizedlist>
-	<listitem
-><para
->Activiteit</para
-></listitem>
-	<listitem
-><para
->Waardepapier</para
-></listitem>
-	<listitem
-><para
->Account</para
-></listitem>
-	<listitem
-><para
->Aandelen, prijs, &amp; totale hoeveelheid</para
-></listitem>
-	<listitem
-><para
->Kosten</para
-></listitem>
-	<listitem
-><para
->Rente categorie</para
-></listitem>
-</itemizedlist>
-
-<sect2>
-<title
+<sect2
+><title
 >Activiteit</title>
 <para
->De activiteit voor een investeringstransactie beschrijft welke actie er is gebeurd met het waardepapier. De volgende activiteiten worden ondersteund: </para>
+>De activiteit voor een investeringstransactie beschrijft welke type actie er is gebeurd met het waardepapier. De volgende activiteiten worden ondersteund: </para>
 
 <variablelist>
   <varlistentry>
@@ -323,27 +499,27 @@
 >Aankoop/Verkoop</term>
   <listitem>
     <para
->Gebruiken om aankopen of verkopen van individuele waardepapieren te noteren. Deze actie vereist een rekening om de fondsen van/naar te transporteren, wat standaard de Depotrekening is, als er een is aangemaakt. </para>
+>Gebruiken om aankopen of verkopen van een individueel waardepapier te noteren. Deze actie vereist een rekening om de fondsen van/naar te transporteren, wat standaard de Depotrekening is, als er een is gedefinieerd voor deze Investeringsrekening. </para>
   </listitem>
   </varlistentry>
 
   <varlistentry>
   <term
->Dividend/opbrengst</term>
+>Dividend/opbrengst/rente inkomen</term>
   <listitem>
     <para
 >Ook bekend als een <quote
->kasdividend</quote
->, deze actie wordt gebruikt wanneer u rente of dividend uitgekeerd krijgt uit uw waardepapier. Deze actie vereist ook een rekening om de fondsen naar te transporteren. </para>
+>Kasdividend</quote
+>, deze actie wordt gebruikt wanneer u rente of dividenduitkering of cash krijgt uit uw waardepapier. Deze actie vereist ook een rekening om de fondsen naar te transporteren. De drie termen worden door elkaar gebruikt. </para>
   </listitem>
   </varlistentry>
 
   <varlistentry>
   <term
->Dividend Herbeleggen</term>
+>Dividend herbeleggen</term>
   <listitem>
     <para
->Dividend herbeleggen. Dit is een dividend waar de ontvangsten worden gebruikt om extra aandelen te kopen van het waardepapier. </para>
+>Dit is een dividend waar de ontvangsten worden gebruikt om extra aandelen te kopen van het waardepapier. </para>
   </listitem>
   </varlistentry>
 
@@ -352,7 +528,7 @@
 >Aandelen toevoegen/verwijderen</term>
   <listitem>
     <para
->Een eenvoudige toe- of afname van het aantal aandelen dat u bezit. Dit zou zelden gebruikt moeten worden, omdat het ongewoon is voor aandelen om gewoon in uw rekening te verschijnen (of verdwijnen) tenzij het een aankoop of verkoop is. Een soort gebruik van deze activiteit is voor een situatie die &kmymoney; niet zelf kan behandelen, zoals de uitwisseling van een aantal aandelen voor een waardepapier voor een ander aantal aandelen van een andere klasse van hetzelfde waardepapier. </para>
+>Een eenvoudige toe- of afname van het aantal aandelen dat u bezit. Dit zou zelden gebruikt moeten worden, omdat het ongewoon is voor aandelen om gewoon in uw rekening te verschijnen (of verdwijnen) tenzij het een aankoop, verkoop of opnieuw investeren van dividend is. Een soort gebruik van deze activiteit is voor een situatie die &kmymoney; niet zelf kan behandelen, zoals de omwisseling van een aantal aandelen voor een waardepapier voor een ander aantal aandelen van een andere klasse van hetzelfde waardepapier. </para>
   </listitem>
   </varlistentry>
 
@@ -369,22 +545,22 @@
 </variablelist>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Veiligheid</title>
 <para
->Elke investeringstransactie moet geassocieerd worden met een individueel waardepapier. Kies de naam van het waardepapier bij toevoegen of bewerken van een transactie. Het symbool zal getoond worden bij bekijken. </para>
+>Elke investeringstransactie moet geassocieerd worden met een individueel waardepapier. Het afrolmenu toont alle waardepapieren die u bezit in de huidige Investeringsrekening - selecteer degenen voor deze transactie. </para>
 </sect2>
 
-<sect2>
-<title
->Account</title>
+<sect2
+><title
+>Rekening</title>
 <para
 >Voor elke transactie die geld genereert of vereist, moet u de rekening waar het geld van/naar gaat invoeren. Als uw investeringsrekening een geassocieerde Depotrekening heeft, is het gewoonlijk het beste om de fondsen daarheen te sturen. Dit is van toepassing op fondsen voor kopen of verkopen van het waardepapier, evenals voor kosten betaald of verdiende rente of dividend. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2 id="details.investments.priceentry"
+><title
 >Aandelen, prijs, &amp; totale hoeveelheid</title>
 <para
 >Voor aankoop-, verkoop- en herinvesteringstransacties moet de totale hoeveelheid aandelen, de prijs per aandeel en de totale hoeveelheid bepaald worden. U kunt elke twee hiervan invoeren en &kmymoney; zal de derde berekenen. Het is gewoonlijk het beste om alleen de totale hoeveelheid en het aantal aandelen in te voeren, omdat deze bekende feiten van de transactie zijn. &kmymoney; zal de prijs per aandeel hieruit automatisch berekenen. Merk op dat er slechts één invoerveld is voor de prijs en het zal gelabeld worden als <quote
@@ -393,13 +569,13 @@
 >Prijs/aandeel</quote
 > afhankelijk van de instelling van de  optie <guilabel
 >Prijsinvoer</guilabel
-> toen de rekening werd <link linkend="details.investments.newinvestmentwizard"
+> toen de investering werd <link linkend="details.investments.newinvestmentwizard"
 >opgezet</link
 >. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Kosten</title>
 <para
 >Met vele investeringstransacties kunt u de kosten (of commissie) die u aan de makelaar betaalt meenemen. Als u een categorie invoert voor de kosten zal er een veld rechts verschijnen waar u de hoeveelheid kosten kunt invoeren. Als u meer dan één bedrag voor de transactie moet invoeren kunt u de functie <link linkend="details.ledgers.split"
@@ -407,20 +583,19 @@
 > gebruiken. In dat geval, wanneer u alle splitsingen hebt ingevoerd, zal de totale hoeveelheid kosten rechts getoond worden. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Rente</title>
 <para
 >Dit is hoe u een betaling van interest of dividend uit een waardepapier invoert. Zoals met kosten, als u een categorie invoert, zal er een veld rechts getoond worden waar u de hoeveelheid kunt invoeren. U kunt ook functie transacties splitsen, indien vereist, gebruiken. </para>
 </sect2>
 </sect1>
 
-<sect1 id="details.investments.foreign">
-<title
+<sect1 id="details.investments.foreign"
+><title
 >Werken met buitenlandse investeringen</title>
-
 <para
->&kmymoney; ondersteunt meerdere valuta en waardepapieren en u wilt de twee misschien combineren. Dat doen vereist echter extra zorg voor accurate records. Zoals boven opgemerkt, wanneer u een waardepapier toevoegt, moet u ook zijn handelsvaluta specificeren. Dit hoeft niet hetzelfde te zijn als de basis valuta voor uw &kmymoney;-bestand en het hoeft ook niet hetzelfde te zijn als de standaard valuta van de investeringsrekening waarin u het aandeel bijhoudt of de rekening waarnaar u uw fondsen van/naar overbrengt voor aan-/verkopen. </para>
+>&kmymoney; ondersteunt meerdere valuta en er zijn situaties waarin dit erg nuttig kan zijn, indien niet noodzakelijk. Dat doen vereist echter extra zorg voor accurate records. Zoals boven opgemerkt, wanneer u een waardepapier toevoegt, moet u ook zijn handelsvaluta specificeren. Dit hoeft niet hetzelfde te zijn als de basis valuta voor uw &kmymoney;-bestand en het hoeft ook niet hetzelfde te zijn als de basis valuta van de investeringsrekening waarin u het waardepapier bijhoudt of voor de rekening waarnaar u uw fondsen van/naar overbrengt voor aan-/verkopen/ dividenden. </para>
 
 <para
 >Bekijk een hypothetisch geval, waar uw basis valuta is USD. U hebt een investeringsrekening in EUR en een depotrekening ook in EUR. In die rekening houdt u aandelen van TietoEnator, die verhandeld wordt in SEK. </para>
@@ -428,75 +603,69 @@
 <para
 >Wanneer u een aankooptransactie in deze investering invoert, gebruik SEK als de valuta. Dus als u 100 aandelen koopt voor een prijs van SEK 248.00, voor een totaal van SEK 24,800.00, voer deze waarden in in de transactie. </para>
 
-<para>
-	<screenshot>
-	<screeninfo
->Koerswaarschuwing</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="investment-currencywarning.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Koerswaarschuwing</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
-
 <para
 >Wanneer u de makelaarsrekening kiest voor overdracht van fondsen, zult u gewaarschuwd worden dat het in een andere valuta is. </para>
 
-<para>
-	<screenshot>
-	<screeninfo
->Wisselkoersbewerker</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="investment-exchangerateeditor.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Wisselkoersbewerker</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>Investeringstransactie waarschuwing over valuta</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investment-currencywarning.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Investeringstransactie waarschuwing over valuta</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
 >Wanneer u invoer van de de transactie beëindigd zult u gevraagd worden naar het bijwerken van de prijs van de valuta  van de investering, in dit geval, SEK -> EUR. Bekijk de documentatie over <link linkend="details.currencies.prices"
 >Prijzen handmatig invoeren</link
 > voor meer informatie over de prijsdialoog. </para>
 
+<screenshot>
+  <screeninfo
+>wisselkoersbewerker</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investment-exchangerateeditor.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>wisselkoersbewerker</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
 <para
 >Als u daarna omschakelt naar de makelaarsrekening, zult u de transactie zien als EUR 2,254.54, aangenomen dat een wisselkoers 11,0000 SEK/EUR is. </para>
 </sect1>
 
-<sect1 id="details.investments.prices">
-<title
->Koersen bijwerken</title>
-
+<sect1 id="details.investments.prices"
+><title
+>Koersen van waardepapieren bijwerken</title>
 <para
 >Er zijn twee manieren om de koersen van uw investeringen bij te werken. U kunt ofwel de koers handmatig invoeren of &kmymoney; deze van het web laten halen. </para>
 
-<sect2>
-<title
+<sect2
+><title
 >Handmatig koersen bijwerken</title>
-
 <para
 >U kunt koersen van uw investeringen invoeren met dezelfde <link linkend="details.currencies.prices"
 >Koersbewerker</link
 > zoals gebruikt voor valuta. </para>
 </sect2>
 
-<sect2 id="details.investments.onlinequotes">
-<title
+<sect2 id="details.investments.onlinequotes"
+><title
 >Online Koersen</title>
 <para
 >&kmymoney; heeft de mogelijkheid om de laatste koersen van uw waardepapieren en valuta via het web te downloaden. </para>
 
-<sect3>
-<title
+<sect3
+><title
 >Hoe online koersen werken</title>
 <para
 >Op uw verzoek zal &kmymoney; een pagina ophalen van het web die de laatste prijs voor elk waardepapier bevat. Standaard worden prijzen opgehaald van <ulink url="https://finance.yahoo.com"
@@ -511,15 +680,14 @@
 >Symbool opzoeken</quote
 > op <ulink url="https://finance.yahoo.com"
 >finance.yahoo.com</ulink
->. </para>
+>. U zou het handelssymbool ingesteld moeten hebben toen u initieel het waardepapier in &kmymoney; zette. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Een bron met koersen toekennen</title>
-
 <para
->Om online koersen te krijgen moet u het eerst voor elk waardepapier of valuta, die u wilt bijwerken, inschakelen door een <quote
+>Om online koersen te krijgen moet u het eerst de functie voor elk waardepapier of valuta, die u wilt bijwerken, inschakelen door een <quote
 >Online bron voor koersen</quote
 > in te stellen. Dit is de naam van de service waaruit de koers opgehaald moet worden. &kmymoney; krijgt verschillende bronnen mee om uit te kiezen. Yahoo is de aanbevolen standaard bron en zou moeten werken voor de meeste investeringen en alle valuta. </para>
 
@@ -531,15 +699,14 @@
 > voor de sectie Online bijwerken. In het afrolvak Online bron, selecteer de benodigde online bron. </para>
 
 <para
->Versies van &kmymoney; beginnend met 0.9 bevatten ondersteuning voor het pakket Finance::Quote voor het verkrijgen van online koersen. Dit is primair bedoeld als een gemak voor die gebruikers die converteren van het &gnucash; financiële pakket, die het als zijn inheemse methode gebruikt. Als u deze optie selecteert, dan zou u een andere lijst met bronnen moeten zien, die ondersteund worden door Finance::Quote. Als de lijst leeg is, dan suggereert dat dat het pakket niet juist is geïnstalleerd. Zie hun website op <ulink url="http://finance-quote.sourceforge.net"
+>Versies van &kmymoney; beginnend met 0.9 bevatten ondersteuning voor het Perl-pakket Finance::Quote voor het verkrijgen van online koersen. Dit is primair bedoeld als een gemak voor die gebruikers die converteren van het &gnucash; financiële pakket, die het als zijn inheemse methode gebruikt. Als u deze optie selecteert, dan zou u een andere lijst met bronnen moeten zien, die ondersteund worden door Finance::Quote. Als de lijst leeg is, dan suggereert dat dat het pakket niet juist is geïnstalleerd. Zie hun website op <ulink url="http://finance-quote.sourceforge.net"
 > http://finance-quote.sourceforge.net</ulink
 > voor meer informatie. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Een koers aanpassen</title>
-
 <para
 >Sommige online bronnen rapporteren de prijs niet in een basis hoeveelheid (&eg;, EUR) maar in een fractie (&eg;, centen). Met deze informatie als prijs zullen verkeerde waarden voor uw investeringen geproduceerd worden. </para>
 
@@ -556,10 +723,9 @@
 > is geselecteerd. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Koersen ophalen</title>
-
 <para
 >U zult typisch de prijzen voor al uw waardepapieren en valuta in een enkele bewerking bijwerken. Kies het menu-item <menuchoice
 ><guimenu
@@ -571,29 +737,28 @@
 >Alles bijwerken</guibutton
 > om koersen op te halen voor alle waardepapieren en valuta in uw &kmymoney;-bestand. </para>
 
-<para>
-	<screenshot>
-	<screeninfo
->Koersen van Aandelen en Valuta Updaten</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="investment-onlineupdate.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Online aandelen- en valutakoersen bijwerken</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>Online koersen van aandelen en valuta bijwerken</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="investment-onlineupdate.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>online koersen van aandelen en valuta bijwerken</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Bronnen met koersen toevoegen of bewerken</title>
-
 <para
->Bronnen met koersen toevoegen of bewerken wordt niet aanbevolen voor iedereen behalve the meest technische gebruiker. U zou zich thuis moeten voelen bij het lezen van HTML en schrijven van complexe reguliere expressies. Als dit niet bij u past, dan bevelen we aan om te schrijven naar de lijst voor ontwikkelaars als geen van de bronnen met koersen voor u werkt. In het ideale geval verwijst u ons naar een webpagina waar deze koersen verkregen kunnen worden. U kunt bovendien leden van het Forum voor de KDE-gemeenschap consulteren over &kmymoney; omdat zij misschien een oplossing beschikbaar hebben over wat u nodig hebt. </para>
+>Bronnen met koersen toevoegen of bewerken wordt niet aanbevolen voor iedereen behalve the meest technische gebruiker. U zou zich thuis moeten voelen bij het lezen van HTML en schrijven van complexe reguliere expressies. Als dit niet bij u past, gebruik dan een van de <link linkend="firsttime.contact"
+>gesuggereerde ondersteuningdkanalen</link
+> als u problemen hebt met een speciale bron of als geen van de bronnen met koersen voor u werkt. Als het zoeken naar een bron voor koersen van een waardepapier niet gevonden wordt door een van de bestaande bronnen, ideaal, verwijst ons naar een webpagina waar deze koersen verkregen kunnen worden. U kunt bovendien leden van het Forum voor de KDE-gemeenschap consulteren over &kmymoney; omdat zij misschien een oplossing beschikbaar hebben over wat u nodig hebt. </para>
 
 <para
 >Als u de uitdaging aan wilt gaan, hier is hoe het werkt. De bronnen met koersen zitten in de instellingendialoog. Kies het menu-item <menuchoice
@@ -612,7 +777,7 @@
 >Het eerste om te bekijken over een online bron met koersen is de URL. Dit is de pagina die is opgehaald wordt van het web. U zult een %1 zien in alle bronnen en een %2 in bronnen met valuta. Voor investeringen wordt %1 vervangen door het handelssymbool. Voor valuta wordt %1 vervangen door de Van-valuta en %2 door de Naar-valuta. Deze URL wordt dan opgehaald, alle HTML-tags worden (optioneel) verwijderd en dat gestripte bestand wordt dan verzonden naar de verwerker van de pagina. </para>
 
 <para
->Merk op dat de URL ook een bestand kan zijn: URL, die de ophaler van koersen neemt om het pad naar een uitvoerbaar script te laten zijn. Het zal elk argument op de opdrachtregel dat u hebt gespecificeerd doorgeven en de uitvoer voeden aan de verwerker van de pagina. U zou bijvoorbeeld een script getquote.sh hebben aangeroepen die eigen koerslogica bevat, met het symbool als een enkele parameter. Uw URL zou <quote
+>Merk op dat de URL ook een bestand kan zijn: URL, die de ophaler van koersen neemt om het pad naar een uitvoerbaar script te laten zijn. Het zal elk argument op de opdrachtregel dat u hebt gespecificeerd doorgeven en de uitvoer van dat script voeden aan de verwerker van de pagina. U zou bijvoorbeeld een script getquote.sh hebben aangeroepen die eigen koerslogica bevat, met het symbool als een enkele parameter. Uw URL zou <quote
 >file:/path/to/getquote.sh %1</quote
 > kunnen zijn. </para>
 
@@ -630,11 +795,13 @@
 </sect2>
 </sect1>
 
-<sect1 id="details.investments.unimplemented">
-<title
+<sect1 id="details.investments.unimplemented"
+><title
 >Niet geïmplementeerde functies</title>
+<para
+>Er zijn enige functies die normaal geassocieerd zijn met investeringen die nog niet geïmplementeerd zijn in &kmymoney;. Deze omvatten, maar zijn niet beperkt tot derivaten, opties en futures. Bovendien, wanneer u een waardepapier verkoopt, weet &kmymoney; niet welke specifieke aandelen u aan het verkopen bent, &ie;, de oudste of de meest recent gekochte, het kan dus geen return-on-investment berekenen. Tenslotte heeft het geen directe kennis over een specifiek voor het land vereiste belastingrapportage, hoewel deze kunnen gewoonlijk behandeld worden door markering als gerelateerd aan belasting van alle categorieën die u gebruikt voor transacties die consequenties kunnen hebben voor de belasting. </para>
 
 <para
->Er zijn enige functies die normaal geassocieerd zijn met investeringen die nog niet geïmplementeerd zijn in &kmymoney;. Deze omvatten, maar zijn niet beperkt tot derivaten, opties en futures. Bovendien, wanneer u een waardepapier verkoopt, weet &kmymoney; niet welke specifieke aandelen u aan het verkopen bent, &ie;, de oudste of de meest recent gekochte, het kan dus geen return-on-investment berekenen. Tenslotte heeft het geen directe kennis over een specifiek voor het land vereiste belastingrapportage, maar deze kunnen gewoonlijk behandeld worden door markering als gerelateerd aan belasting van alle categorieën die u gebruikt voor transacties die consequenties kunnen hebben voor de belasting. </para>
+>Het ontwikkelteam van &kmymoney; is zich bewust van deze en extra problemen en heeft vereisten en notities verzamelt voor een eventuele belangrijke opnieuw schrijven van hoe het programma investeringen behandeld. Wanneer dat proces begint (er is geen huidige planning) dan zal er een gelegenheid voor gebruikers om invoer te leveren over elke additionele behoefte en wensen op dit gebied. </para>
 </sect1>
 </chapter>

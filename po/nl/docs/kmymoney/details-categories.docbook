@@ -6,80 +6,114 @@
 >&Roger.Lum; &Roger.Lum.mail;</author>
     <author
 >&Michael.Carpino; &Michael.Carpino.mail;</author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->2020-02-06</date>
+>2024-12-01</date>
   <releaseinfo
->5.0.8</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
 
 <title
 >Categorieën</title>
 
 <para
->Het beeld Categorieën biedt een samenvatting van alle bestaande categorieën in uw huidige database. De categorieën zijn gesplitst in inkomsten en uitgaven, alfabetisch gesorteerd en getoond samen met het voor elk respectievelijke saldo. </para>
+>Intern worden Categorieën door &kmymoney; behandeld als een speciaal type rekening, dus veel van de mogelijkheden van Categorieën zijn erg gelijk aan die van andere Rekeningen. </para>
 
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="categories.png" format="PNG"/>
-	</imageobject>
-	</mediaobject>
-	</screenshot>
-</para>
-
-<sect1 id="details.categories.create">
-<title
->Een categorie aanmaken</title>
+<sect1 id="details.categories.view"
+><title
+>Categorieënweergave</title>
+<screenshot>
+  <screeninfo
+>categorieënweergave</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="categories.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>categorieënweergave</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->Er zijn 3 manieren om een nieuwe categorie aan te maken: selecteer ofwel menu-item <menuchoice
+>De Categorieënweergave levert een samenvatting van alle bestande categorieën in uw huidige gegevensbestand. Net als de Rekeningenweergave zijn categorieën gegroepeerd in Inkomsten en Uitgaven. Zoals met de Bankenweergave en Rekeningenweergave is de lijst met categorieën uit te vouwen of in te vouwen door te klikken op de pijl links van het type of naam. Zoals met Rekeningen Bezittingen en Schulden, kunnen Categorieën beschouwd worden als subcategorieën met een ouder van een andere categorie in plaats van het topniveau Inkomen of Uitgave. </para>
+
+<para
+>Net als de Rekeningenweergave, toont de Categorieënweergave verschillende kolommen met beschrijvende en samenvattende informatie over elke categorie. Net als met de Rekeningenweergave kunt u selecteren welke kolommen getoond worden door rechts te klikken op een kolomkop en het keuzevak te selecteren of de selectie ongedaan te maken naast de naam van de kolom. </para>
+
+<para
+>De kolommen beschikbaar voor Categorieën zijn identiek aan die voor Rekeningen voor Naam, Type, Belasting, BTW, Saldo en Totale waarde. Online, Rekeningnummer en IBAN zijn niet van toepassing op Categorieën. Er is één extra kolom beschikbaar. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>CC</term>
+    <listitem>
+      <para
+>Een indicatie dat een kostencentrum toekenning noodzakelijk is onder bepaalde condities wanneer een transactie wordt ingevoerd voor deze categorie. Dit is een recent toegevoegde functie, die nog niet is geïmplementeerd, deze kolom wordt nu dus niet gebruikt. Bovendien kan deze helemaal niet verschijnen afhankelijk van de waarde van een configuratie-instelling bij bouwen. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="details.categories.create"
+><title
+>Een categorie aanmaken</title>
+<para
+>Er zijn 3 manieren om een nieuwe categorie aan te maken: selecteer menu-item <menuchoice
 ><guimenu
 >Categorie</guimenu
 ><guimenuitem
 >Nieuwe categorie</guimenuitem
 ></menuchoice
->; selecteer een hoger item in de boomstructuur in de weergave Categorieën, klik rechts en selecteer de optie <guimenuitem
+>; klik rechts op een ouder in de boomstructuur in de Categorieënweergave, en selecteer de optie <guimenuitem
 >Nieuwe categorie</guimenuitem
 > of typ direct de naam van de nieuwe categorie bij toevoegen of bewerken van een transactie in het Grootboek. Uitvoeren van een van deze stappen zal u naar de dialoog <guilabel
 >Nieuwe categorie aanmaken</guilabel
-> brengen. De dialoog bevat drie tabbladen: <guilabel
+> brengen. Deze dialoog bevat drie tabbladen: <guilabel
 >Algemeen</guilabel
 >, <guilabel
 >Hiërarchie</guilabel
 > en <guilabel
 >Belasting</guilabel
->. Het tabblad Algemeen bevat te bewerken velden voor de naam, het type en de valuta (met de standaard voorgeselecteerd) van de nieuwe categorie, evenals opties voor Laatste controlenummer, Notities en een keuzevakje voor Kostencentrum toekenning vereist. In het tabblad Hiërarchie bent u in staat om de van toepassing zijnde hogere rekening voor de categorie te selecteren. In het tabblad Belasting, tenslotte, zijn er velden om ondersteuning van BTW in te schakelen en te configureren en een keuzevakje om deze categorie in rapporten gerelateerd aan belastingen mee te nemen. </para>
+>. Het tabblad Algemeen bevat te bewerken velden voor de naam, het type en de valuta (met de standaard voorgeselecteerd) van de nieuwe categorie, evenals opties voor Laatste controlenummer, Notities en een keuzevakje voor Kostencentrum toekenning vereist. In het tabblad Hiërarchie bent u in staat om de van toepassing zijnde ouder voor de categorie te selecteren. In het tabblad Belasting, tenslotte, zijn er velden om ondersteuning van BTW in te schakelen en te configureren en een keuzevakje om deze categorie in rapporten gerelateerd aan belastingen mee te nemen. </para>
 
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="categoryedit.png" format="PNG"/>
-	</imageobject>
-	</mediaobject>
-	</screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>nieuwe categorie aanmaken</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="categoryedit.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>nieuwe categorie aanmaken</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 </sect1>
 
-<sect1 id="details.categories.edit">
-<title
+<sect1 id="details.categories.edit"
+><title
 >Een categorie bewerken</title>
+<para
+>Om een categorie te bewerken, klik rechts op een naam van een categorie in de Categorieënweergave en kies <guimenuitem
+>Categorie bewerken..,</guimenuitem
+>. Er verschijnt een venster met dezelfde drie tabbladen als de dialoog <guilabel
+>Nieuwe categorie aanmaken</guilabel
+> Algemeen, Hiërarchie en Belasting. Elk tabblad biedt u het bewerken van bepaalde details van de categorie. </para>
 
 <para
->Om een categorie te bewerken, klik rechts op een naam van een categorie en kies <guimenuitem
->Categorie bewerken</guimenuitem
->. Er verschijnt een venster met dezelfde drie tabbladen als de dialoog voor een nieuwe categorie: Algemeen, Hiërarchie en Belasting. Elk tabblad biedt u het bewerken van bepaalde details van de categorie. </para>
+>Het tabblad Algemeen biedt u het bewerken van de naam van de categorie, elke notitie die u invoerde toen u de categorie aanmaakte en het Laatste controlenummer. Het Type en Valuta kunnen niet gewijzigd worden van hun initiële waarden. </para>
 
 <para
->Het tabblad Algemeen biedt u het bewerken van de naam van de categorie, elke notitie die u invoerde toen u de categorie aanmaakte, het Laatste controlenummer en de status van het keuzevakje Kostencentrum toekenning vereist. Het item Type, Valuta en Koers kunnen niet gewijzigd worden van hun initiële waarden. </para>
+>Het tabblad Hiërarchie stelt u in staat om de ouder van de geselecteerde categorie te wijzigen door op een andere categorie die dab de ouder wordt. Bovendien kunt u een categorie slepen en het loslaten onder zijn nieuwe ouder. </para>
 
 <para
->Het tabblad Hiërarchie stelt u in staat om de oudercategorie te wijzigen door op een andere categorie in deze weergave van de categorie hiërarchie te klikken. In een eerdere versie van &kmymoney; was het mogelijk om de ouder van een categorie wijzigen door slepen en laten vallen. Deze functionaliteit zal terugkeren in een toekomstige versie van de toepassing. </para>
-
-<para
->Het tabblad Belasting stelt u in staat om BTW-details toe te kennen of de automatische toekenning van BTW te wijzigen. Het biedt u ook om om te schakelen of de categorie wordt meegenomen in bepaalde belastinggerelateerde rapporten. </para>
+>Het tabblad Belasting stelt u in staat om BTW-details toe te kennen of de automatische toekenning van BTW te wijzigen. Het biedt u om al dan niet om te schakelen of de categorie wordt meegenomen in bepaalde belastinggerelateerde rapporten. </para>
 </sect1>
 
 <sect1 id="details.categories.vat">
@@ -87,7 +121,6 @@
   <author
 >&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
 </sect1info>
-
 <title
 >Ondersteuning van BTW</title>
 	
@@ -108,13 +141,12 @@
 
 </sect1>
 
-<sect1 id="details.categories.delete">
-<title
+<sect1 id="details.categories.delete"
+><title
 >Een categorie verwijderen</title>
-
 <para
->Om een categorie te verwijderen, selecteert u deze in de boomstructuur, klikt rechts om het contextmenu te laten verschijnen en selecteert u <guimenuitem
->Verwijderen</guimenuitem
+>Een Categorie verwijderen is identiek met het verwijderen van een Rekening. Om een categorie te verwijderen, klikt rechts op zijn naam In de Categorieënweergave en selecteer <guimenuitem
+>Categorie verwijderen</guimenuitem
 >. Als de categorie geen transacties, periodieke betalingen of budgetten ermee heeft en deze is niet ingesteld als de standaard categorie voor nieuwe transacties met een debiteur, zal deze worden verwijderd. </para>
 
 <para
@@ -127,12 +159,11 @@
 >Merk op dat het verwijderen van sommige categorieën zowel zal vragen waar zijn gegevens opnieuw aan moeten worden toegekend en ook of al dan niet sub-categorieën verwijderd moeten worden. </para>
 </sect1>
 
-<sect1 id="details.categories.open_ledger">
-<title
+<sect1 id="details.categories.open_ledger"
+><title
 >Grootboek openen voor een categorie</title>
-
 <para
->Door rechts te klikken op een categorie is er een optie om een grootboek voor die categorie te openen. U kunt ook dubbelklikken op de categorie. Wanneer deze optie is geselecteerd zal &kmymoney; een grootboek tonen met alle transacties voor de geselecteerde categorie. Dit biedt u om snel alle transacties in detail voor de geselecteerde categorie te bekijken. U kunt dan rechts klikken op elke transactie om additionele details over de specifieke transactie te verkrijgen, waarmee u uiteindelijk alles kan bewerken wat noodzakelijk is. Merk op dat u geen transactie in het Categorieëngrootboek kunt bewerken; u moet omschakelen naar de grootboekweergave voor de andere rekening, met gebruik van een van de selecties in het popupmenu wanneer u rechts klikt op de transactie. </para>
+>De menu-opties voor categorieën omvat een keuze om een grootboek voor die categorie te openen. Wanneer deze optie is geselecteerd zal &kmymoney; die categorie tonen in een tabblad in de Grootboekweergave, waarbij alle transacties voor de geselecteerde categorie getoond worden. Dit biedt u om snel alle transacties in detail voor de geselecteerde categorie te bekijken. U kunt dan rechts klikken op elke transactie om additionele details over de specifieke transactie te verkrijgen en deze kan zelfs bewerkt worden. </para>
 </sect1>
 </chapter>
 

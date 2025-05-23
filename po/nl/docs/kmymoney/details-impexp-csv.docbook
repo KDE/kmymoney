@@ -1,199 +1,329 @@
 <sect1 id="details.impexp.csv">
 <sect1info>
-   <author
->&Allan.Anderson; &Allan.Anderson.mail; </author>
+  <author
+>&Allan.Anderson;</author>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
 </sect1info>
 <title
 >CSV plug-in voor importeren</title>
 
-<sect2>
-<title
+<sect2
+><title
 >Redenen om CSV-bestanden te importeren</title>
-
 <para
 >In het algemeen heeft het de voorkeur om OFX te importeren. Niet alle instituten leveren gegevens in dat formaat. CSV (kommagescheiden waarden) bestanden zijn bijna altijd beschikbaar, soms beschreven als Excel of rekenblad bestanden. Ze kunnen ook vaak gemakkelijk gemaakt worden door de gegevens die u wilt importeren te vangen, zoals in een tekstbestand en deze handmatig te bewerken. </para>
 
 <para
->De primaire focus van de plug-in is op het importeren van gegevens uit bankafschriften, maar er is ook een mogelijkheid sommige investeringsafschriften te importeren. Deze plug-in is eerst gemaakt, voordat het een importeur van een CSV werd, om QIF-bestanden uit CSV te maken, die daarna geïmporteerd kunnen worden. Deze functionaliteit is nog steeds aanwezig, maar wordt waarschijnlijk verwijderd, omdat de plug-in nu zich richt op direct CSV-bestanden importeren. &kmymoney; heeft ook de eigen mogelijkheid om <link linkend="details.impexp.qifexp"
+>De initiële focus van de het CSV-importprogramma was op het behandelen van gegevens uit bankafschriften, maar de mogelijkheid om enige investeringsafschriften te importeren was toegevoegd. Bovendien is het verder verbeterd om zowel valuta als aandelenkoersen te importeren. De oorspronkelijke code hiervoor is eerst gemaakt, voordat het een CSV-importprogramma werd, om QIF-bestanden uit CSV te maken, die daarna geïmporteerd kunnen worden. Deze mogelijkheid is nog steeds aanwezig, maar wordt waarschijnlijk verwijderd, omdat de focus zich nu richt op direct CSV-bestanden importeren. &kmymoney; heeft ook de eigen mogelijkheid om <link linkend="details.impexp.qifexp"
 >QIF-bestanden</link
-> te exporteren, zodat er geen echte reden is om een QIF-bestand uit een CSV-bestand te maken. </para>
+> te exporteren, zodat er niet langer een echte reden is om een QIF-bestand uit een CSV-bestand te produceren. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >De plug-in ophalen</title>
-
 <para
->&kmymoney; zal CSV-bestanden importeren. Deze functionaliteit wordt geleverd door een plug-in en is nu ingebouwd in het kernprogramma, zowel in pakketten in distributies als in de broncodebestanden. Nadat een pakket uit een distributie is geïnstalleerd of de broncodebestanden zijn gecompileerd en geïnstalleerd, zal de menukeuze om CSV-bestanden te importeren automatisch verschijnen onder het submenu <menuchoice
-><guimenu
+>Het CSV importprogramma is een van de nieuwere toegevoegde mogelijkheden aan &kmymoney; in de vorm van een plugin. Zoals echter met andere plug-ins, is het CSV importprogramma ingevoegd met de kern van de broncode van &kmymoney;, dus zou het beschikbaar moeten zijn in alle versions van &Linux; distributies, evenals de versies voor andere platforms beschikbaar gemaakt via de website van &kmymoney;. De menukeuze om CSV-bestanden te importeren zou automatisch moeten verschijnen onder het submenu van <menuchoice
+> <guimenu
 >Bestand</guimenu
-><guisubmenu
+> <guisubmenu
 >Importeren</guisubmenu
-></menuchoice
+> </menuchoice
 >. </para>
 
 <para
->De CSV-importprogrammaplug-in is veel nieuwer dan de OFX-plug-in, maar de meeste distributies worden nu gebouwd met het CSV-importprogramma al meegenomen of beschikbaar als een apart pakket. Ga na dat het in &kmymoney; is ingeschakeld. Controleer het menu-item <menuchoice
-><guimenu
+>Om te verzekeren dat het is in &kmymoney; is ingeschakeld, controleer het menu-item <menuchoice
+> <guimenu
 >Instellingen</guimenu
-><guimenuitem
+> <guimenuitem
 >&kmymoney; configureren...</guimenuitem
-><guimenuitem
->Plug-ins</guimenuitem
-></menuchoice
->. Als het CSV-importprogramma niet geïnstalleerd lijkt te zijn in uw versie, dan is de eerste plaats om te controleren dezelfde plaats waar u uw basis &kmymoney;-pakket vandaan hebt. kijk of een latere versie beschikbaar is of of het importprogramma beschikbaar is als een apart pakket. </para>
+> </menuchoice
+>, selecteer <guilabel
+>Plug-ins</guilabel
+> in het linker paneel en zoek naar het <guilabel
+>CSV-importprogramma</guilabel
+> in de getoonde lijst met plug-ins. Als het CSV-importprogramma niet geïnstalleerd lijkt te zijn in uw versie, dan is de eerste plaats om te controleren dezelfde plaats waar u uw basis &kmymoney;-pakket vandaan hebt. Kijk of een latere versie beschikbaar is of of het importprogramma beschikbaar is als een apart pakket. </para>
 
 <para
->Als u vanuit een RPM of Deb hebt geïnstalleerd, dan zou de CSV-importprogrammaplug-in zich in het kmymoney-pakket moeten bevinden. Als u vanuit de broncode hebt gebouwd, dan zouden er geen extra vereisten moeten zijn. Het bouwproces van &kmymoney; zou de plug-in broncode moeten herkennen en de plug-in moeten compileren. </para>
+>Als u hebt gebouwd uit broncode, dan zouden er geen extra vereisten moeten zijn. Het bouwproces van &kmymoney; zou de broncode van de plug-in moeten detecteren en de plug-in compileren. Er zijn configuratie-instellingen die gebruikt kunnen worden om deze of andere plug-ins uit te sluiten van het gebouwd worden, maar die zouden zelden nodig zijn. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Importeren van een CSV-bestand</title>
-
 <para
->Om een CSV-bestand te importeren, kies de importeur uit de menubalk: <menuchoice
+>Om een CSV-bestand te importeren, kies het importprogramma uit het hoofdmenu: <menuchoice
 ><guimenu
 >Bestand</guimenu
-><guisubmenu
+> <guisubmenu
 >Importeren</guisubmenu
 ><guimenuitem
 >CSV...</guimenuitem
 ></menuchoice
->. Als CSV niet onder Importeren verschijnt, dan hebt u geen CSV-importplug-in juist geïnstalleerd. Kijk dan nog eens in de vorige sectie. </para>
+>. Als CSV niet onder Importeren verschijnt, dan hebt u geen CSV-importplug-in juist geïnstalleerd of het is niet ingeschakeld. Kijk dan nog eens in de vorige sectie. </para>
 
 <para
->De CSV importeur is in de vorm van een assistent, met een aparte pagina voor elke individuele stap in het proces. Er kunnen enkele kleine verschillen zijn tussen de tekst in dit handboek, de labels in de schermafdruk en de labels die u echt ziet in de assistent. In zulke gevallen beschrijft het handboek hoe de assistent er uit zal zien in de volgende uitgave. </para>
+>Het CSV importprogramma is aanwezig in de vorm van een assistent, met een aparte pagina voor elke individuele stap van het proces. </para>
 
-<sect3>
-<title
->CSV importassistent: Start</title>
-
+<sect3
+><title
+>CSV-importassistent: start</title>
 <para
->Na de start toont de CSV importeur de <guilabel
+>Bij starten, toont het CSV-importprogramma de pagina <guilabel
 >Start</guilabel
->pagina. Het bovenste gebied, waar gegevens getoond zullen worden, is initieel leeg. Daaronder links, is een lijst met de stappen van het importeerproces, met de huidige geaccentueerd. Rechts daarvan zijn korte instructies en twee keuzerondjes, die de keuz bieden van ofwel <guilabel
->Bankieren</guilabel
 > of <guilabel
->Investeren</guilabel
->. Verder is er een profielkeuzevak, die is ingeschakeld nadat een van de keuzerondjes is geselecteerd. Onderaan het scherm zijn knoppen om naar de volgende stap van de assistent te gaan, ga met <guibutton
->Terug</guibutton
-> naar de vorige stap of <guibutton
->Annuleren</guibutton
-> om het importeren te stoppen. Op de initiële stap is er ook een knop <guilabel
->Bestand selecteren</guilabel
-> om initieel het  te importeren bestand te selecteren. </para>
-<!-- want to use inlinemediaobject to avoid lines above and below. -->
-  <screenshot>
+>Bestand</guilabel
+>. Links is een lijst met de stappen van het importproces, met de huidige geaccentueerd. Het gebied rechtsboven is waar te importeren gegevens getoond zullen worden; Voordat toont het enige beknopte instructies relevant voor het huidige stadium van de assistent. Daaronder is een set keuzerondjes voor het selecteren van het type te importeren gegevens. Die lijst omvat <guilabel
+>Bankieren</guilabel
+>, <guilabel
+>Investeringen</guilabel
+>, <guilabel
+>Valutakoersen</guilabel
+> en <guilabel
+>Aandelenkoersen</guilabel
+>. Verder is er een afrollijst profielkiezer, die is ingeschakeld als eenmaal het keuzerondje is geselecteerd voor een van de typen importbestanden. </para>
+
+<screenshot>
+  <screeninfo
+>csv-importassistent: start</screeninfo>
   <mediaobject>
-  <imageobject>
-  <imagedata fileref="csvImporter_1.png" format="PNG"/>
-  </imageobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_1.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>csv-importassistent: start</phrase>
+    </textobject>
   </mediaobject>
-  </screenshot>
+</screenshot>
+</sect3>
+
+<sect3
+><title
+>Importprofielen van CSV</title>
+<para
+>Elk type te importeren CSV-bestand vereist specificatie van verschillende details met betrekking tot de verwachte formattering van de gegevens, zoals beschreven in de volgende secties. Niet alleen verschillen de details voor de verschillende typen te importeren gegevensbestanden, het is mogelijk nodig verschillende configuraties voor hetzelfde type gegevens uit verschillende bronnen nodig te hebben. Dus u hoeft niet al die details in te voeren elke keer dat u een bestand importeert, het CSV-importprogramma biedt u het eenmaal specificeren van de details en ze op te slaan in een genoemd profiel. </para>
 
 <para
->Merk ook op het keuzevakje <guilabel
+>De naam van een CSV-importprofiel is volledig willekeurig, maar zal gemakkelijk te onthouden zijn als het beide het type te importeren gegevens (bank, creditcard, investering, ...) en de bron van de gegevens weergeeft. Er is geen noodzaak om de rekening waarin de gegevens geïmporteerd worden weer te geven en het is mogelijk om hetzelfde profiel te gebruiken voor het importeren in meer dan één rekening, zoals twee dagelijkse rekeningen bij dezelfde bank. </para>
+
+<para
+>De afrollijst voor profielkeuze omvat de namen van alle CSV-importprofielen die u eerder hebt aangemaakt en het laat u ook de naam van een nieuw profiel typen. Onder de afrollijst voor profielkeuze zijn er drie knoppen. Wanneer u op <guilabel
+>Toevoegen</guilabel
+> klikt, die altijd is ingeschakeld, zal een nieuw profiel aangemaakt worden met de naam ingevoerd in de afrollijst. Er zal niets gebeuren als dat veld leeg is of het toont de naam van een bestaand profiel. Terwijl u verder gaat door de rest van de CSV-importassistent, zullen de verschillende configuratie-instellingen die u invoert of wijzigt opgeslagen worden in het geselecteerde profiel. </para>
+
+<para
+>Als u eerder een of meer profielen hebt aangemaakt, dan zullen de andere twee knoppen ingeschakeld worden. Als u op <guilabel
+>Verwijderen</guilabel
+> klikt, zal het profiel genaamd in de afrollijst worden verwijderd. Als u op <guilabel
+>Hernoemen</guilabel
+> klikt, verander dan de naam getoond in de afrollijst en klik opnieuw op <guilabel
+>Hernoemen</guilabel
+>, het profiel zal overeenkomstig hernoemd worden. </para>
+
+<para
+>Naast de kiezer van het profiel is er een keuzevak <guilabel
 >Instellingen overslaan</guilabel
-> naast de profielselectie. Initieel zou u dit keuzevakje niet moeten selecteren. Nadat u een profiel hebt ingesteld en de assistent heeft beëindigd zijn deze parameters opgeslagen in het hulpbronbestand. De volgende keer gebruikt u datzelfde profiel, de parameters zullen geladen worden in het UI (gebruikersinterface). De assistent zou dan ploegen door de volgende pagina's met parameters die u niet zult wijzigen. Dus, in plaats, nadat u gelukkig bent met een profiel, help het u om dit vakje te activeren. De assistent zal dan direct naar de eindpagina gaan en, aangenomen dat er geen problemen zijn gevonden, hoeft u alleen op <guilabel
+>. Initieel zou u dit keuzevakje niet moeten selecteren. Nadat u een profiel hebt ingesteld en de assistent heeft beëindigd, zijn alle ingevoerde configuratieparameters opgeslagen in het hulpbronbestand. De volgende keer gebruikt u datzelfde profiel, de parameters zullen geladen worden in het UI (gebruikersinterface). De assistent zou dan ploegen door de volgende pagina's met parameters die u niet zult wijzigen. Dus nadat u gelukkig bent met een profiel, help het u om dit vakje te activeren. De assistent zal dan direct naar de eindpagina gaan en, aangenomen dat er geen problemen zijn gevonden, hoeft u alleen op <guilabel
 >Importeren</guilabel
 > te klikken. </para>
 
 <para
->Selecteer eerst ofwel <guilabel
->Bankieren</guilabel
-> of <guilabel
->Investeringen</guilabel
->, klik daarna in het selectievakje, die toont "Nieuw profiel toevoegen". Als u eerder profielen hebt aangemaakt, kunt u een van hen selecteren, voer anders een nieuwe profielnaam in, mogelijk de naam van de rekening waarin u wilt importeren. Als u een nieuwe profielnaam invoert, druk op &Enter; om deze aan te maken. klik daarna op <guilabel
+>Onderaan is er een knop <guilabel
 >Bestand selecteren</guilabel
-> en een standaard vak voor bestandsselectie zal openen, waarin u het CSV-bestand zou moeten selecteren dat u wilt importeren. </para>
+>. Hier op klikken brengt een bestandskiezerdialoog om u het te importeren bestand te laten kiezen. Onderaan de overblijvende pagina's van de assistent zijn knoppen om <guibutton
+>&lt; Terug</guibutton
+> te gaan naar de vorige stap van de assistent, verder gaan naar de <guilabel
+>volgende &gt;</guilabel
+> stap of de import <guibutton
+>Annuleren</guibutton
+>. </para>
+
+<para
+>Om, op de startpagina van de assistent, selecteer eerst het keuzevak voor het type gegevens dat u importeert. In de profielafrolkiezer kunt u de naam ven een eerder aangemaakt CSV-importprofiel selecteren, of voer een nieuwe naam in, mogelijk de naam van de rekening waarin u wilt importeren en klik op <guilabel
+>Toevoegen</guilabel
+>. Klik tenslotte op <guilabel
+>Bestand selecteren</guilabel
+> en een bestandsselectiedialoog zal openen, waarin u het CSV-bestand selecteert dat u wilt importeren. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >CSV importassistent: Scheidingstekens</title>
 <para
->De assistent is nu doorgegaan naar de pagina <guilabel
+>Na het openen van uw geselecteerde bestand zal de assistent doorgegaan naar de pagina <guilabel
 >Scheidingstekens</guilabel
 > en u zou nu uw gegevens moeten zien. </para>
 
-  <screenshot>
+<screenshot>
+  <screeninfo
+>csv-importassistent: scheidingstekens</screeninfo>
   <mediaobject>
-  <imageobject>
-  <imagedata fileref="csvImporter_2.png" format="PNG"/>
-  </imageobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_2.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>CSV-importassistent: scheidingstekens</phrase>
+    </textobject>
   </mediaobject>
-  </screenshot>
+</screenshot>
 
-  <warning>
-    <para
->Het kan er uitzien dat de getoonde items in de bovenste sectie van het plug-invenster bewerkt kunnen worden, en in feite is dat zo, maar elke bewerking wordt niet bewaard. De tabel is puur voor tonen, niet voor bewerken. Het invoerbestand wordt nooit veranderd door de plug-in en de echt geïmporteerden komen uit het invoerbestand, niet van het scherm. De enige uitzondering hiervan is onderstaand gedekt in <link linkend="details.impexp.csv.secsym"
+<warning>
+  <para
+>Het kan er uitzien dat de getoonde gegevens in de bovenste sectie van het plug-invenster bewerkt kunnen worden, en in feite is dat zo, maar elke bewerking wordt niet bewaard. De tabel is puur voor tonen, niet voor bewerken. Het invoerbestand wordt nooit veranderd door het CSV-importprogramma en de echt geïmporteerde gegevens komen uit het invoerbestand, niet van het scherm. De enige uitzondering hiervan is onderstaand gedekt in <link linkend="details.impexp.csv.secsym"
 >Waardepapieren en symbolen</link
 >. </para
 > 
-  </warning>
+</warning>
 
 <para
->De plug-in zou het toepasselijke te gebruiken <guilabel
+>Het CSV-importprogramma zou de juiste <guilabel
+>Codering</guilabel
+>, <guilabel
 >Veldscheidingsteken</guilabel
-> moeten hebben gedetecteerd en het is gewoonlijk niet mogelijk om een andere te selecteren. In feite zal dit proberen, elke veldkeuze, die u al gemaakt zou hebben, resetten. Er is ook een selectieteken voor het <guilabel
+> en <guilabel
 >Tekstscheidingsteken</guilabel
->, maar algemeen is het aanhalingsteken (") het juiste. klik nu op de knop <guibutton
+> gedetecteerd moeten hebben. U kunt de codering wijzigen als het programma dat niet juist gekozen had. Als u het veldscheidingsteken moet wijzigen, zoals als uw gegevens in feite gescheiden worden door en tab en geen komma-geschieden, wees er van bewust dat dat doen elke veldkeuzes die u al gemaakt heeft reset. In het algemeen is de quote (&quot;) het juiste tekstscheidingsteken, maar u kunt het naar behoefte wijzigen. Klik op <guibutton
 >Volgende</guibutton
->. Afhankelijk van de eerder door u gemaakte selectie, zult u nu op ofwel de pagina Bankieren of Investeringen zijn. </para>
+> om verder te gaan. </para>
 </sect3>
 
-<sect3>
-<title
->Assistent voor importeren van CSV: bankieren</title>
+<sect3
+><title
+>CSV-importassistent: rijen</title>
 <para
->Op deze pagina selecteert u de kolomnummers waaruit u de relevante velden wilt importeren. </para>
+>U zou nu op de pagina <guilabel
+>Rijen</guilabel
+> of <guilabel
+>Regels</guilabel
+> moeten zijn. Hier geeft u aan of regels genegeerd zouden moeten worden aan het begin of einde van het bestand. </para>
 
-  <screenshot>
+<screenshot>
+  <screeninfo
+>csv-importassistent: rijen</screeninfo>
   <mediaobject>
-  <imageobject>
-  <imagedata fileref="csvImporter_3.png" format="PNG"/>
-  </imageobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_5.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>csv-importassistent: rijen</phrase>
+    </textobject>
   </mediaobject>
-  </screenshot>
+</screenshot>
 
 <para
->Voor de meeste velden is het gewoon het van toepassing zijnde afrolelement te selecteren van de toepasselijke kolom. Er zijn echter een paar speciale overwegingen. </para>
+>Deze pagina biedt u het aanpassen van de import om kop- en voetrijen aan het begin of eind van het bestand te negeren, die niet echt te importeren gegevens bevatten. </para>
+
+<formalpara
+><title
+>Begin bij regel</title>
+<para
+>Stel dit zo in dat de importeur kopregels in het bestand overslaat. Uw keuze zal opgeslagen worden in dit profiel voor toekomstig gebruik. De start- en eindregels hebben met elkaar te maken en de startregel kan niet hoger zijn dan de eindregel, noch mag het hoger zijn dan het echte aantal regels in het bestand. Als de selectie van <guilabel
+>Startregel</guilabel
+> niet reageert, controleer dan de instelling van de eindregel. </para>
+</formalpara>
+
+<formalpara
+><title
+>Eindregel</title>
+<para
+>De importeur zal dit automatisch op de laatste regel in het bestand zetten of op de laatst opgeslagen instelling. U hoeft het alleen aan te passen als er er regels in de voettekst zijn die de importeur zou moeten negeren. Anders is het waarschijnlijk dat u een waarschuwing gegevensfout krijgt wanneer de plug-in probeert de onjuiste gegevens te interpreteren. Opnieuw, als de selectie <guilabel
+>Eindregel</guilabel
+> niet reageert, controleer dan de instelling <guilabel
+>Startregel</guilabel
+>. </para>
+</formalpara>
+
+<para
+>Boven deze twee velden is een keuzevakje <guilabel
+>Kop bevat rekeningnaam of -nummer</guilabel
+>. Indien geactiveerd zal het importprogramma in de regels boven de beginregel naar de naam of nummer van de te gebruiken rekening voor het importeren. Zo niet, u zult worden gevraagd voor die informatie. </para>
+
+<para
+>Wanneer u gereed bent, klik op <guilabel
+>Volgende</guilabel
+> om verder te gaan met de volgende stap. </para>
+</sect3>
+
+<sect3
+><title
+>CSV-importassistent: kolommen</title>
+<para
+>U zou nu op de pagina <guilabel
+>Kolommen</guilabel
+> moeten zijn. Dit is waar u het importprogramma vertelt welke kolommen in het bestand de gegevens staan die overeenkomen met de gespecificeerde velden nodig om een betekenisvol record of transactie aan te maken, afhankelijk van het type gegevens dat wordt geïmporteerd. Er is een andere versie van deze pagina voor elk type gegevens, omdat elk een andere combinatie van items vereist. </para>
+
+<sect4
+><title
+>Assistent voor importeren van CSV: bankieren</title>
+<screenshot>
+  <screeninfo
+>csv-importassistent: bankieren</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_3.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>csv-importassistent: bankieren</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+  
+<para
+>Voor de meeste velden hoeft u alleen de afrollijst te gebruiken om de bijbehorende kolom te selecteren. Merk op dat veel velden een knop <quote
+>x</quote
+> rechts hebben. Er op klikken zal elke waarde wissen die was ingevoerd of geselecteerd in het veld links. Bovendien zijn er enige speciale overwegingen. </para>
 
 <itemizedlist>
 <listitem>
-<para
->In het centrum zijn twee keuzerondjes. Als uw bestand een enkele kolom heeft voor alle waarden, selecteer kolom <guilabel
+  <para
+>Rechts is een gebied met twee tabbladen. Als uw bestand een enkele kolom heeft voor alle waarden, selecteer het tabblad <guilabel
 >Hoeveelheid</guilabel
->. Als er echter aparte kolomen zijn voor debet en credit, selecteer kolom <guilabel
+>. Als er echter aparte kolommen zijn voor debet en credit, selecteer het tabblad <guilabel
 >Debet/Credit</guilabel
->. Dit zal ofwel de selectie kolom <guilabel
->Hoeveelheid</guilabel
-> of kolom <guilabel
->Debet</guilabel
-> en kolom <guilabel
->Credit</guilabel
-> zijn. </para>
+>. </para>
+
+  <para
+>Op het tabblad Hoeveelheid, begin door de kolom te selecteren die de hoeveelheid van de transactie bevat. Als er een kolom is die <quote
+>Credit</quote
+> of <quote
+>Debet</quote
+> bevat om aan te geven welke hoeveelheid he is, select die kolom als de <guilabel
+>Debet/Credit-indicator</guilabel
+>. Los daarvan, als er een tekenreeks is in het veld hoeveelheid die aangeeft of de hoeveelheid een credit of een debet is, voer die tekenreeks in in het bijbehorende veld <guilabel
+>Indicator</guilabel
+>. Tenslotte, als ondanks juist instellen van alle bovenstaande waarden, de geïmporteerde hoeveelheid omgekeerd is van wat het zou moeten zijn, activeer het keuzevakje <guilabel
+>Tegengesteld teken</guilabel
+>. </para>
+
+  <para
+>Op het tabblad Debet/credit, voer eenvoudig de getallen in van de kolommen met deze waarden in de bijbehorende velden. </para>
 </listitem>
 
 <listitem>
 <para
->Het is mogelijk om meer dan een kolom voor het memo-veld te selecteren, door opvolgende selecties. Reeds geselecteerde memo-kolommen worden in de afrol gemarkeerd met een sterretje (*). Als u meerdere kolommen op deze manier selecteert zal hun inhoud geconcateneerd worden in het memo-veld. </para>
+>Het is mogelijk om meer dan één kolom voor het memo-veld te selecteren, door opvolgende selecties te maken. Reeds geselecteerde memo-kolommen worden in het veld <guilabel
+>Memo-kolommen:</guilabel
+> aangegeven. Als u meerdere kolommen op deze manier selecteert zal hun inhoud geconcateneerd worden in het memo-veld. </para>
 </listitem>
 
 <listitem>
 <para
->Als u probeert om hetzelfde kolomnummer te kiezen voor twee velden, zal de plug-in u attent maken en beide selecties wissen. Het is echter mogelijk, indien gewenst, om dezelfde kolom in beide velden <guilabel
+>Als u probeert om hetzelfde kolomnummer te kiezen voor twee velden, zal het importprogramma u attent maken en beide selecties wissen. Het is echter mogelijk, indien gewenst, om dezelfde kolom in beide velden <guilabel
 >Begunstigde/Beschrijving</guilabel
 > en <guilabel
 >Memo</guilabel
 >. Als u een kolom selecteert voor het veld <guilabel
 >Begunstigde/Beschrijving</guilabel
-> en daarna hetzelfde veld voor het veld <guilabel
+> en daarna dezelfde kolom voor het veld <guilabel
 >Memo</guilabel
 >, dan zult u een waarschuwing krijgen dat dubbele kolommen zijn geselecteerd, maar vragen of u door wilt gaan. Zo ja, klik op <guibutton
 >Ja</guibutton
->. </para>
+> en de kolom zal gebruikt worden door beide velden. </para>
 </listitem>
 
 <listitem>
@@ -203,30 +333,82 @@
 </itemizedlist>
 
 <para
->Als u merkt dat u een onjuiste keuze hebt gemaakt, wijzig gewoon die selectie. Als er meerdere wijzigingen gemaakt moeten worden, klik op de knop <guilabel
->Wissen</guilabel
->. </para>
+>Als u merkt dat u een onjuiste keuze hebt gemaakt, wijzig gewoon die selectie. Als er meerdere wijzigingen gemaakt moeten worden, kunt u klikken op <guilabel
+>Alles wissen</guilabel
+> en opnieuw beginnen. </para>
 
 <para
 >Nadat kolommen zijn gekozen voor alle noodzakelijke velden zal de knop <guilabel
 >Volgende</guilabel
 > ingeschakeld worden en er op klikken zal de assistent laten doorgaan. </para>
-</sect3>
+</sect4>
 
-<sect3>
-<title
+<sect4
+><title
+>CSV-importassistent: formaat</title>
+<para
+>De volgende pagina van de assistent toont nog steeds bovenaan de te importeren gegevens, maar de lagere sectie biedt drie afrolmenu's. De initiële waarden zijn ingesteld door &kmymoney; gebaseerd op het onderzoeken van de actuele gegevens. </para>
+
+<screenshot>
+  <screeninfo
+>csv-importassistent: investering</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_4.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>CSV-importassistent: investering</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Het <guilabel
+>Decimale symbool</guilabel
+> is standaard <quote
+>auto</quote
+>, wat gewoonlijk de juiste resultaten produceert. Zo niet, dan kunt u expliciet de <quote
+>punt</quote
+> of <quote
+>komma</quote
+> specificeren. </para>
+
+<para
+>Het <guilabel
+>Duizendensymbool</guilabel
+> is automatisch gezet en het veld kan uitgeschakeld zijn als het de resultaten niet beïnvloedt. </para>
+
+<para
+>Dit moet ingesteld worden volgens de volgorde van jaar, maand en dag in de datums in het bestand. Als de plug-in gegevens vindt die incompatibel zijn met deze instelling zal het klagen wanneer u het probeert te importeren. Als de instelling echter fout is, maar het geen gedetecteerde ongeldige resultaten produceert (zoals gegevens zonder dagen hoger dan 12, dus maand en dag kunnen verwisseld zijn) dan zult u eenvoudig onjuiste gegevens krijgen, omdat de plug-in niet kan weten dat u een fout maakte. In dit geval zal de fout helder zijn in het grootboek na importeren. </para>
+
+<para
+>Het <guilabel
+>Datumformaat</guilabel
+> specificeert de volgorde van dag, maand en jaar en wordt ook automatisch gezet. In sommige gevallen echter, zoals gegevens met geen dag hoger dan 12, dan zult u het probleem na het importeren merken. In zulke gevallen zult u het importeren moeten herhalen en de actuele volgorde van de datumcomponenten kiezen. </para>
+</sect4>
+
+<sect4
+><title
 >Assistent voor importeren van CSV: investeringen</title>
 <para
 >Deze pagina is vergelijkbaar met de pagina <guilabel
 >Bankieren</guilabel
->, hoewel het wat complexer is. De meeste keuzes zijn tamelijk duidelijk, maar er zijn enige items die verwarrend lijken totdat u het proces een of twee keer hebt doorlopen. <screenshot
-> <mediaobject
-> <imageobject>
-  <imagedata fileref="csvImporter_4.png" format="PNG"/>
-  </imageobject>
+>, hoewel het wat complexer is. De meeste keuzes zijn tamelijk duidelijk, maar er zijn enige items die verwarrend lijken totdat u het proces een of twee keer hebt doorlopen. </para>
+
+<screenshot>
+  <screeninfo
+>csv-importassistent: investering</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvImporter_4.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>CSV-importassistent: investering</phrase>
+    </textobject>
   </mediaobject>
-  </screenshot>
-</para>
+</screenshot>
 
 <para>
 <itemizedlist>
@@ -255,27 +437,41 @@
 
 <listitem>
 <para
->Gebruik de selector <guilabel
+>Er zijn twee manieren om kosten voor transacties te specificeren. Als uw bestand een aparte kolom heeft voor kosten, gebruik de kiezer <guilabel
 >Vrije kolom</guilabel
-> als uw bestand een aparte kolom heeft voor kosten. Let er echter op dat de kosten in rekening gebracht kunnen zijn in de prijs. Als er kosten zijn en het is een percentage in plaats van een waarde, activeer dan het keuzevakje <guilabel
->Kosten zijn een percentage</guilabel
->. Merk op dat op deze pagina, dit het enige veld is om expliciet "kolom" in de label op te nemen, om te accentueren dat het voor de kolom Kosten is, niet voor actuele kosten. </para>
+>. Merk op dat op deze pagina, dit het enige veld is om expliciet "kolom" in de label op te nemen, om te accentueren dat het voor de kolom Kosten is, niet voor actuele kosten. Let op, echter, dat met de kosten al rekening gehouden kan zijn in de prijs. </para>
+
+<para
+>Als er kosten zijn, maar het is een percentage, in plaats van een gespecificeerde waarde, klik op het keuzevakje <guilabel
+>Kosten is percentage</guilabel
+> en voer het percentage in in het veld <guilabel
+>Kostenpercentage</guilabel
+>. Daarnaast, als er een minimum percentage is, specificeer het in het veld <guilabel
+>Minimaal percentage</guilabel
+>, die wordt ingeschakeld wanneer u het Kostenpercentage invoert (met een decimale punt). Op dit punt, klikken op <guibutton
+>Kosten berekenen</guibutton
+> zal een kolom toevoegen rechts van de bovenstaande tabel en zal de berekende kosten voor elke transactie aangeven. </para>
+
+<para
+>Als u een vergissing maakte in invoeren van de kosteninformatie, klikken op <guibutton
+>Kosten wissen</guibutton
+> zal alle aan de kosten gerelateerde velden restten naar hun initiële waarden. </para>
 </listitem>
 
 <listitem>
 <para
 >Onder de selectie van een kolom zijn twee gebieden voor de identiteit van van het waardepapier. Afhankelijk van uw makelaar of financieel instituut, kan uw bestand items bevatten voor slechts één of voor meerdere waardepapieren. <itemizedlist>
-  <listitem>
-  <para
+    <listitem>
+      <para
 >Als het bestand transacties bevat voor een enkel waardepapier, met de naam mogelijk in een koprij, dan zou de naam ingevoerd moeten worden in het vak <guilabel
 >Naam waardepapier</guilabel
->. De naam die u invoert zal toegevoegd worden aan de afrollijst voor later gebruik. U zou zou vervolgens deze naam uit de lijst willen verwijderen. Zo ja, selecteer deze, klik dan op de knop <guilabel
+>. De naam die u invoert zal toegevoegd worden aan de afrollijst voor later gebruik. U zou zou vervolgens deze naam uit de lijst willen verwijderen. Zo ja, selecteer deze, klik dan op <guilabel
 >Waardepapier verbergen</guilabel
 >. Dit verwijdert het alleen uit deze lijst en heeft geen effect op uw hoofdbestand van &kmymoney;. </para>
-  </listitem>
+    </listitem>
 
-  <listitem>
-  <para
+    <listitem>
+      <para
 >Als het bestand transacties bevat voor verschillende waardepapieren, zal elk worden geïdentificeerd door zijn tickersymbool in een kolom met verdere details in een andere kolom. Selecteer deze kolommen in de selecties <guilabel
 >Symbool</guilabel
 > en <guilabel
@@ -287,7 +483,7 @@
 > en voer in <quote
 >type: </quote
 > inclusief de achterliggende spatie. </para>
-  </listitem>
+    </listitem>
   </itemizedlist>
 </para>
 </listitem>
@@ -298,61 +494,14 @@
 >Wanneer alle vereiste velden zijn geselecteerd, zal de knop <guilabel
 >Volgende</guilabel
 > ingeschakeld worden en er op klikken zal de assistent laten doorgaan. </para>
-</sect3>
+</sect4>
 
-<sect3>
-<title
->Assistent voor importeren van CSV: regels</title>
-<para
->Op deze pagina geeft u aan of bepaalde regels aan het begin of einde van het bestand genegeerd moeten worden. U geeft ook het formaat aan van een datumkolom aan. <screenshot
-> <mediaobject
-> <imageobject>
-  <imagedata fileref="csvImporter_5.png" format="PNG"/>
-  </imageobject>
-  </mediaobject>
-  </screenshot>
-</para>
-
-<formalpara
+<sect4 id="details.impexp.csv.secsym"
 ><title
->Begin bij regel</title>
-<para
->Stels dit zo in dat de importeur kopregels in het bestand overslaat. Uw keuze zal opgeslagen worden in dit profiel voor toekomstig gebruik. De start- en eindregels hebben met elkaar te maken en de startregel kan niet hoger zijn dan de eindregel. Als de selectie van <guilabel
->Startregel</guilabel
-> niet reageert, controleer dan de instelling van de eindregel. </para>
-</formalpara>
-
-<formalpara
-><title
->Eindregel</title>
-<para
->De importeur zal dit automatisch op de laatste regel in het bestand zetten of op de laatst opgeslagen instelling. U hoeft het alleen aan te passen als er er regels in de voettekst zijn die de importeur zou moeten negeren. Anders is het waarschijnlijk dat u een waarschuwing gegevensfout krijgt wanneer de plug-in probeert de onjuiste gegevens te interpreteren. Opnieuw, als de selectie <guilabel
->Eindregel</guilabel
-> niet reageert, controleer dan de instelling <guilabel
->Startregel</guilabel
->. </para>
-</formalpara>
-
-<formalpara
-><title
->Datumopmaak</title>
-<para
->Dit moet ingesteld worden volgens de volgorde van jaar, maand en dag in de datums in het bestand. Als de plug-in gegevens vindt die incompatibel zijn met deze instelling zal het klagen wanneer u het probeert te importeren. Als de instelling echter fout is, maar het geen gedetecteerde ongeldige resultaten produceert (zoals gegevens zonder dagen hoger dan 12, dus maand en dag kunnen verwisseld zijn) dan zult u eenvoudig onjuiste gegevens krijgen, omdat de plug-in niet kan weten dat u een fout maakte. In dit geval zal de fout helder zijn in het grootboek na importeren. </para>
-</formalpara>
-
-<para
->Indien gereed, zal de knop <guilabel
->Volgende</guilabel
-> ingeschakeld worden en er op klikken zal de assistent laten doorgaan. </para>
-</sect3>
-
-<sect3 id="details.impexp.csv.secsym">
-<title
 >Assistent voor importeren van CSV: Waardepapieren en symbolen</title>
-
 <para
 >Voor een investeringsbestand, nadat de pagina <guilabel
->Lijnen</guilabel
+>Kolommen</guilabel
 > is geaccepteerd, moet u verzekeren dat elk waardepapier in het bestand overeenkomt met het juiste waardepapier in uw &kmymoney;-bestand, voordat het importeren door kan gaan. Op dat moment zal een ander venster openen, die de waardepapieren en symbolen toont in het importbestand. Merk op dat anders dan de gegevens getoond in het hoofdvenster van de assistent, de door u gemaakte wijzigingen op deze pagina geïmporteerd <emphasis
 >worden</emphasis
 >. </para>
@@ -360,7 +509,7 @@
 <para
 >Deze pagina compleet maken is recht toe rechtaan, als u deze items overweegt: <itemizedlist>
     <listitem>
-    <para
+      <para
 >Elke rij representeert één transactie en het kan lijken dat er dubbele rijen zijn. Dit is OK. </para>
     </listitem>
 
@@ -384,7 +533,7 @@
 </para>
 
 <para
->U kunt een waardepapiersymbool of -naam bewerken door dubbel te klikken op de cel. Voor elk waardepapier, indien noodzakelijk, bewerk de naam in een van zijn rijen, Als de juiste waardepapiernaam verschijnt in het geïmporteerde bestand, dubbel klik erop om het te selecteren, kopieer en plak/bewerk het daarna, er op letten als u als u een variatie of afkorting binnen &kmymoney; hebt gebruikt. Als u een waardepapiernaam bewerkt, zal die bewerking worden toegepast op alle rijen met hetzelfde symbool. </para>
+>U kunt een waardepapiersymbool of -naam bewerken door dubbel te klikken op de cel. Voor elk waardepapier, indien noodzakelijk, bewerk de naam in een van zijn rijen, Als de juiste waardepapiernaam verschijnt in het geïmporteerde bestand, dubbelklik erop om het te selecteren, kopieer en plak/bewerk het daarna, er op letten als u als u een variatie of afkorting binnen &kmymoney; hebt gebruikt. Als u een waardepapiernaam bewerkt, zal die bewerking worden toegepast op alle rijen met hetzelfde symbool. </para>
 
 <para
 >Elke regel zonder een symbool zal behandeld worden als een controle-item van het type makelaar. Als een transactie betrekking heeft op een andere rekening, &eg;, een controle- of makelaarsrekening voor een ontvangen dividend of voor het doen van een betaling, zal er een berichtvenster verschijnen voor de rekeningnaam om de overdracht in te doen. Dit zal in het algemeen de Makelaarsrekening zijn die u koos of maakte toen u de Investeringsrekening aanmaakte. Voer gelijk het kolomnummeer in met de debiteur, indien gevraagd. Als er een vergissing is gemaakt bij invoeren van de rekeningnaam, zal het importeren doorgaan, maar &kmymoney; zal het niet herkennen en zal die transacties aangeven met een ontbrekende toekenning van een categorie. Als de vereiste rekeningnaam tamelijk lang is, voer gewoon een paar tekens in. Het importeren zal door gaan maar de transacties zullen door &kmymoney; aangegeven worden met een ontbrekende toekenning van een categorie en u moet de juiste overdrachtsrekening na het importeren aangeven. Klik op <guibutton
@@ -413,10 +562,25 @@
 
 <para
 >Het importeren is gedaan en u bent in &kmymoney; om de te gebruiken investeringsrekening te selecteren. Daarna de controlerekening, als er transacties van het type makelaar waren. </para>
+</sect4>
+
+<sect4
+><title
+>CSV-importassistent: koersen</title>
+<para
+>iets over importeren van valutakoersen </para>
+</sect4>
+
+<sect4
+><title
+>CSV-importassistent: aandelenkoersen</title>
+<para
+>iets over importeren van aandelenkoersen </para>
+</sect4>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Assistent voor importeren van CSV: Beëindigen</title>
 <para
 >Bij het bereiken van de laatste pagina zal de plug-in automatisch de waarden valideren. Als de kolommen met numerieke waarden in groen zijn geaccentueerd, dan was de validatie succesvol en alles wat nodig is is het klikken op <guibutton
@@ -462,15 +626,15 @@
 </formalpara>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >QIF-bestand maken</title>
 <para
 >Deze knop geeft u de mogelijkheid, nadat het importeren gereed is, om de gegevens uit het CSV-bestand als een QIF-bestand op te slaan, voor het geval u het voor geval dat u dar een reden voor hebt. Dit was eigenlijk de oorspronkelijke functionaliteit die het maken van deze plug-in dreef. Omdat &kmymoney; zelf nu in staat is om een qif-bestand te exporteren, is deze mogelijkheid nu waarschijnlijk van weinig nut en kan op den duur worden verwijderd. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Afronden</title>
 <para
 >Voor het importeren van <guilabel
@@ -480,13 +644,13 @@
 > kan echter iets meer zijn vereist. Als tijdens importeren van een transactie de plug-in geen geldig transactietype vindt, zal het de foute transactie tonen en de gebruiker kan een geldig type invoeren, afhankelijk van de combinatie van hoeveelheid, prijs, en aantal waarden. Voor elke transactie zal de plug-in de inhoud van de kolommen valideren om zeker te stellen dat ze overeenkomen met het actietype. Als er bijvoorbeeld een hoeveelheid verschijnt maar geen prijs of aantal, wordt er aangenomen dat de transactie alleen een Toevoegen of Verwijderen van aandelen is. Of, als er een aantal is maar geen hoeveelheid of prijs, dan wordt een Dividend aangenomen, &etc; </para>
 
 <para
->Als u uw instellingen wilt opslaan, vergeet dan niet om op de knop <guibutton
+>Als u uw instellingen wilt opslaan, vergeet dan niet om op <guibutton
 >Beëindigen</guibutton
-> te drukken en de plug-in zal dan sluiten. </para>
+> te klikken en de plug-in zal dan sluiten. </para>
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Typen investeringsactiviteit toevoegen</title>
 <para
 >Als u vindt dat uw investeringsafschriften typen activiteiten blijven invoegen die niet herkend worden, voeg ze dan eenvoudig toe aan de sectie in het hulpbronbestand. (Zie <link linkend="details.impexp.csv.config"
@@ -520,14 +684,13 @@
 >. De lijsten opnieuw ordenen om dit te verbeteren werkt niet zoals verwacht kan worden, omdat de items in het hulpbronbestand gesorteerd wordt in alfabetische volgorde. Als de parameter met problemen diegene is die u niet nodig hebt, verwijder deze dan gewoon uit het bestand. Als dat niet mogelijk is, dan kan het nodig zijn om uw bestand te bewerken alvorens het als invoer te gebruiken. </para>
 </sect3>
 
-<sect3 id="details.impexp.csv.config">
-<title
+<sect3 id="details.impexp.csv.config"
+><title
 >Instellingen voor plug-in voor CSV importeren</title>
-
 <para
 >Een welbekend nadeel van het QIF-formaat is dat het een tamelijk los formaat is. Met CSV-bestanden bestaat het zelfde probleem, zelfs meer, omdat er helemaal geen overeengekomen standaard is. Speciaal met investeringsbestanden is er veel meer ruimte voor variatie in het specificeren van de verschillende typen activiteiten gerepresenteerd in de gegevens. De plug-in behandelt dit door een lijst met deze typen activiteiten in een hulpbronbestand, genaamd <filename
 >csvimporterrc</filename
->. De locatie van dit bestand hangt af van uw distributie. Op een &Linux; systeem zal dit in <filename class="directory"
+>. De locatie van dit bestand hangt af van uw besturingssysteem of distributie. Op een &Linux; systeem zal dit in <filename class="directory"
 >$KDEHOME/share/config</filename
 > zijn waar <envar
 >$KDEHOME</envar
@@ -537,7 +700,7 @@
 >$KDEHOME</envar
 > <filename class="directory"
 >.kde4</filename
->. Met dit hulpbronbestand kan de gebruiker een type activiteit toevoegen die de ontwikkelaar niet is tegengekomen. Als het bestand niet bestaat wanneer het importprogramma de eerste keer actief is, zal de plug-in een standaard versie aanmaken, met een paar van de meer gebruikelijke beschrijvingen. </para>
+>, ook in uw persoonlijke map. Met dit hulpbronbestand kan de gebruiker een type activiteit toevoegen die de ontwikkelaar niet is tegengekomen. Als het bestand niet bestaat wanneer het importprogramma de eerste keer actief is, zal het een standaard versie aanmaken, met een paar van de meer gebruikelijke beschrijvingen. </para>
 
 <para
 >Een aantal voorbeeld CSV-bestanden worden geleverd (in de map <filename class="directory"
@@ -562,7 +725,91 @@
 
 <para
 >Toen deze plug-in werd gemaakt, waren er slechts een paar investeringsformaten als voorbeeld te zien en het is zeer wel mogelijk dat u er een kunt tegenkomen die niet juist verwerkt kan worden. Als u zo'n bestand vindt, stuur dan aub een geschikt voorbeeld (bewerkt om persoonlijke informatie te bewerken of te verwijderen) naar de gebruikerslijst &userlist; of ontwikkelaarslijst &devlist;, de ontwikkelaar zal zijn best doen om de plug-in te wijzigen om het te behandelen. </para>
+
+<sect4
+><title
+>Configuratiedialoog van CSV-importprogramma</title>
+<para
+>Tenslotte, er zijn een paar andere items die geconfigureerd kunnen worden in een dialoog aangeroepen via de <link linkend="details.settings.plugins.csvimporter"
+>Configuratiedialoog van CSV importprogramma</link
+>, die aangeroepen wordt vanaf de pagina Plug-ins van de hoofd configuratiedialoog van KMyMoney. Dit omvat welke items automatisch gedetecteerd worden door het importprogramma en welk profiel gebruik zal worden als u het importprogramma een QIF-bestand laat exporteren, zoals bovenstaand genoemd. </para>
+</sect4>
 </sect3>
 </sect2>
-</sect1>
 
+<sect2 id="details.impexp.csvexp">
+<sect2info>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+</sect2info>
+<title
+>CSV-exportprogramma</title>
+
+<para
+>Om een CSV-bestand te exporteren, kies het menu-item <menuchoice
+><guimenu
+>Bestand</guimenu
+> <guisubmenu
+>Exporteren</guisubmenu
+> <guimenuitem
+>CSV...</guimenuitem
+></menuchoice
+>. De dialoog die verschijnt geeft u een aantal keuzes die de gegevens bepalen om te worden geëxporteerd. </para>
+
+<screenshot>
+  <screeninfo
+>csv-exportprogramma</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="csvexport.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>csv-exportprogramma</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Merk op dat een geëxporteerd CSV-bestand slechts gegevens kan bevatten uit één rekening. </para>
+
+<para
+>Specificeer de naam van het geëxporteerd CSV-bestand door het complete pad in het veld <guilabel
+>Bestand te exporteren naar</guilabel
+> of door te klikken op <guilabel
+>Bladeren</guilabel
+> en er naar te navigeren in de dialog Bestand opslaan. Kies welke rekening te exporteren met de afrollijst <guilabel
+>Te exporteren rekening</guilabel
+>. </para>
+
+<para
+>De tijdsperiode van geëxporteerde gegevens wordt bestuurd door de datumvelden <guilabel
+>Datumreeks</guilabel
+> <guilabel
+>Begin op</guilabel
+> en <guilabel
+>Einde op</guilabel
+>. De standaard waarden representeren de volledige datumreeks van uw gehele gegevensbestand en ze worden aangepast wanneer u een te exporteren rekening selecteert. </para>
+
+<para
+>Standaard is het <guilabel
+>Veldscheidingsteken</guilabel
+> een komma, maar u kunt ook kiezen om een tab of puntkomma te gebruiken. </para>
+
+<para
+>Als u het keuzerondje <guilabel
+>Te exporteren inhoud</guilabel
+> <guilabel
+>Rekening</guilabel
+> activeert, dan zullen de te geëxporteerde gegevens de transacties zijn uit de gespecificeerde rekening en datumreeks. Als u echter het keuzerondje <guilabel
+>Categorieën</guilabel
+> selecteert, dan zal het geëxporteerd bestand één rij voor elke categorie die is gedefinieerd bevatten. Voor topniveau categorieën wordt de categorienaam getoond en een <quote
+>I</quote
+> of <quote
+>E</quote
+> wordt getoond om aan te geven of de categorie is Inkomen of Uitgave is. Voor niet topniveau categorieën, wordt de oudercategorie ook getoond. </para>
+
+<para
+>Het exportprogramma zal een set kolommen uitvoeren behorend bij het type rekening dat wordt geëxporteerd. </para>
+</sect2>
+</sect1>

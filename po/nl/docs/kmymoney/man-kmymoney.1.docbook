@@ -93,7 +93,7 @@
 ><surname
 >Ostroff</surname
 > <contrib
->Documentatie.</contrib
+>Documentatie en ondersteuning van de gebruiker.</contrib
 > <email
 >ostroffjh@users.sourceforge.net</email
 > </author>
@@ -135,9 +135,9 @@
 >arniing@users.sourceforge.net</email
 ></author>
 
-    These persons were not previously listed as authors here, but are included
-    in credits.docbook.  They should either be dropped from there or included
-    here.
+    These persons were not previously listed as authors here, but are included in
+    credits.docbook and as authors of some chapter(s).  They should either be dropped
+    from there or included here.
 
     <author
 ><firstname
@@ -145,7 +145,7 @@
 ><surname
 >Jones</surname>
     <contrib
->Reports.  OFX Import.  Online Quotes.  Documentatation.  Previous versions.</contrib>
+>Reports.  OFX Import.  Online Quotes.  Documentation.  Previous versions.</contrib>
     <email
 >acejones@users.sourceforge.net</email
 ></author>
@@ -164,9 +164,9 @@
     There are eight additional people in credits.docbook for "Special Thanks."
     Should any of them be included here?  -->
 <date
->2016-06-17</date>
+>2024-12-01</date>
 <releaseinfo
->KMyMoney 5.0</releaseinfo>
+>KMyMoney 5.2</releaseinfo>
 </refentryinfo>
 
 <refmeta>
@@ -224,7 +224,6 @@
 ></option
 ></group
 > </cmdsynopsis>
-
 </refsynopsisdiv>
 
 <refsect1>
@@ -232,8 +231,7 @@
 >Beschrijving</title>
 
 <para
->&kmymoney; is de Persoonlijke financiënbeheerder door &kde;. Het biedt de functies vereist voor bijhouden van uw betalingen, het beheren van uw persoonlijke leningen en stopt uw inkomsten en uitgaven in categorieën met grafisch gebruikersinterface in de stijl van boekje met checks.</para>
-
+>&kmymoney; is de Persoonlijke financiënbeheerder door &kde;. Het biedt de functies vereist voor bijhouden van uw betalingen, het beheren van uw persoonlijke leningen en stopt uw inkomsten en uitgaven in categorieën met grafisch gebruikersinterface in de stijl van boekje met checks. </para>
 </refsect1>
 
 <refsect1>
@@ -249,7 +247,7 @@
 ></term>
 <listitem>
 <para
->Te gebruiken taal </para>
+>Te gebruiken taal</para>
 </listitem>
 </varlistentry>
 
@@ -260,7 +258,7 @@
 ></term>
 <listitem>
 <para
->Laatst gebruikte bestand niet openen </para>
+>Laatst gebruikte bestand niet openen</para>
 </listitem>
 </varlistentry>
 
@@ -271,7 +269,7 @@
 ></term>
 <listitem>
 <para
->Schakel prestatietimers in </para>
+>Schakel prestatietimers in</para>
 </listitem>
 </varlistentry>
 
@@ -282,7 +280,7 @@
 ></term>
 <listitem>
 <para
->Opgevangen uitzonderingen niet globaal opvangen </para>
+>Opgevangen uitzonderingen niet globaal opvangen</para>
 </listitem>
 </varlistentry>
 
@@ -324,12 +322,12 @@
 >khelpcenter</command
 > <parameter
 >help:/kmymoney</parameter
-></userinput
+> </userinput
 > u toegang geven tot de complete handboek. Daarnaast kunt u door het handboek bladeren met &konqueror; door de <acronym
 >URL</acronym
 > <ulink url="help:/kmymoney"
 >help:/kmymoney</ulink
-> in te voeren.</member>
+> in te voeren. </member>
 <member
 >kf5options(7)</member>
 <member

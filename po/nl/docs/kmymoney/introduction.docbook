@@ -2,20 +2,18 @@
 <chapter id="introduction">
 <chapterinfo>
   <date
->2018-01-13</date>
+>2024-12-01</date>
   <releaseinfo
->5.0.0</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Inleiding</title>
 
-<sect1 id="what-is-kmymoney">
-<title
+<sect1 id="what-is-kmymoney"
+><title
 >Wat is &kmymoney;?</title>
-
 <para
->Eenvoudig gezegd, is &kmymoney; een persoonlijke financiële beheerder door &kde;. Het stelt gebruikers van opensource besturingssystemen en toepassingen in staat om zorgvuldig hun persoonlijke financiën bij te houden door een breed spectrum van financiële functies en hulpmiddelen te bieden. </para>
+>&kmymoney; een persoonlijke financiële beheerder door &kde;. Het stelt gebruikers in staat om zorgvuldig hun persoonlijke financiën te volgen door een breed spectrum van financiële functies en hulpmiddelen te leveren. </para>
 
 <para
 >De hoofddoelen van het project zijn: </para>
@@ -44,22 +42,21 @@
 ><title
 >Correctheid</title>
       <para
->Gebaseerd op op het beproefde en geteste dubbele boekhoudprincipe verzekert &kmymoney; dat uw financiën prima in orde worden gehouden. </para>
+>Gebaseerd op op het beproefde en geteste dubbele boekhoudprincipe, verzekert &kmymoney; dat uw financiën prima in orde worden gehouden. </para>
     </formalpara>
   </listitem>
 </itemizedlist>
 
 </sect1>
 
-<sect1 id="what-kmymoney-is-not">
-<title
+<sect1 id="what-kmymoney-is-not"
+><title
 >Wat is &kmymoney; niet</title>
+<para
+>Als een persoonlijke financiën beheerder, is &kmymoney; niet bedoeld om de behoeften van een bedrijf te ondersteunen. Een klein bedrijf zou voldoende bruikbare functionaliteit kunnen vinden in &kmymoney;, maar functies zoals nog te ontvangen rekeningen en te betalen rekeningen worden niet direct ondersteund. Hoe groter het bedrijf, hoe minder waarschijnlijk is het dat &kmymoney; tegemoet komt aan wat zijn financiële beheer nodig heeft. Het meeste, indien niet alles, is aanwezig voor de gegevens nodig voor een klein bedrijf is aanwezig, zoals rapporten voor doelen als audit en belastingen, maar het kan nodig zijn om opgedeeld te worden in verschillende rapporten en daarna verwerkt en samengesteld in de vereiste formaten. Daarnaast zou het mogelijk zijn om klant, leverancier, document of andere functies aan te maken door plug-ins. </para>
 
 <para
->Als een persoonlijke financiën beheerder, is &kmymoney; niet bedoeld om op te schalen tot de behoeften van een gemiddeld bedrijf. Een klein bedrijf zou voldoende bruikbare functionaliteit kunnen vinden in &kmymoney;, maar functies zoals nog te ontvangen rekeningen en te betalen rekeningen worden niet direct ondersteund. Het is echter mogelijk om klant, leverancier, document of andere functies aan te maken door plugins. </para>
-
-<para
->&kmymoney; is niet een eenvoudige kloon van de commercieel beschikbare persoonlijke financiële programma's. Hoewel veel van de functies aanwezig in &kmymoney; gevonden kunnen worden in andere gelijksoortige applicaties, streeft &kmymoney; na om een individueel en uniek beeld van uw financiën te geven. </para>
+>&kmymoney; is niet een eenvoudige kloon van een van de commercieel beschikbare persoonlijke financiële programma's. Hoewel veel van de functies aanwezig in &kmymoney; gevonden kunnen worden in andere gelijksoortige applicaties, streeft &kmymoney; na om een individueel en uniek beeld van uw financiën te geven. </para>
 
 </sect1>
 </chapter>
