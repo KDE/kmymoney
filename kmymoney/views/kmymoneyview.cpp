@@ -255,6 +255,8 @@ KMyMoneyView::~KMyMoneyView()
 
 void KMyMoneyView::updateViewType()
 {
+    Q_D(KMyMoneyView);
+
     // set the face type
     KPageView::FaceType faceType = KPageView::List;
     switch (KMyMoneySettings::viewType()) {
@@ -269,6 +271,19 @@ void KMyMoneyView::updateViewType()
         break;
     }
     if (faceType != KMyMoneyView::faceType()) {
+        // swap line break with non-breakable space and vice versa
+        for (auto view : d->viewFrames) {
+            const auto linebreak = QString::fromUtf8("\xe2\x80\xa8");
+            const auto space = QString::fromUtf8("\xe2\x80\x87");
+            auto name = view->name();
+            if (faceType == Tabbed) {
+                name.replace(linebreak, space);
+            } else {
+                name.replace(space, linebreak);
+            }
+            view->setName(name);
+        }
+
         setFaceType(faceType);
         if (faceType == KPageView::Tree) {
             const QList<QTreeView*> views = findChildren<QTreeView*>();
