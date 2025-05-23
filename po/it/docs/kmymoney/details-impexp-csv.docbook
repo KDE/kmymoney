@@ -1,59 +1,58 @@
 <sect1 id="details.impexp.csv">
 <sect1info>
-  <author
->&Allan.Anderson;</author>
-  <author
->&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+   <author
+>&Allan.Anderson; &Allan.Anderson.mail; </author>
 </sect1info>
 <title
 >Estensione di importazione CSV</title>
 
-<sect2
-><title
+<sect2>
+<title
 >Motivi per importare file CSV</title>
+
 <para
 >In generale, è preferibile importare OFX. Tuttavia, non tutti gli istituti forniscono dati in tale formato. I file CSV (valori separati da virgole) sono quasi sempre disponibili, a volte descritti come file Excel o fogli elettronici. Inoltre, possono essere creati abbastanza facilmente raccogliendo i dati che si desidera importare, ad es. in un file di testo, e modificandoli manualmente. </para>
 
 <para
->L'attenzione iniziale dell'importatore CSV era rivolta alla gestione dei dati dagli estratti conto bancari, ma è stata aggiunta la possibilità di importare anche alcuni estratti conto di investimento. Inoltre, è stato ulteriormente migliorato per importare sia i prezzi delle valute che delle azioni. Il codice originale per questo è stato inizialmente creato, prima di diventare un importatore CSV, per produrre file QIF da file CSV, che potevano poi essere importati. Questa possibilità è ancora presente, ma è probabile che venga rimossa, poiché ora l'attenzione è rivolta direttamente all'importazione di file CSV. Inoltre, &kmymoney; ha la possibilità nativa di <link linkend="details.impexp.qifexp"
->esportare file QIF</link
->, quindi non c'è più una vera ragione per produrre un file QIF da un file CSV. </para>
+>L'obiettivo principale di questa estensione è l'importazione dei dati dagli estratti conto bancari, ma è presente anche la possibilità di importare alcuni documenti di investimento. Questa estensione è stata inizialmente creata, prima di diventare uno strumento di importazione CSV, per produrre file QIF da CSV, che possono essere poi importati. Questa funzionalità è ancora presente, ma sarà probabilmente rimossa, poiché l'estensione ora pone l'attenzione sull'importazione diretta dei file CSV. Inoltre, &kmymoney; ha una funzione nativa di <link linkend="details.impexp.qifexp"
+>esportazione di file QIF</link
+>, perciò non esiste una vera ragione per produrre un file QIF da un file CSV. </para>
 </sect2>
 
-<sect2
-><title
+<sect2>
+<title
 >Ottenere l'estensione</title>
+
 <para
->L'importatore CSV è una delle funzionalità più recenti aggiunte a &kmymoney; sotto forma di estensione. Tuttavia, come per altre estensioni, l'importatore CSV è incluso nel codice sorgente principale di &kmymoney;, quindi dovrebbe essere disponibile in tutte le versioni delle distribuzioni &Linux;, così come nelle versioni per altre piattaforme rese disponibili tramite il sito web di &kmymoney;. La scelta del menu per importare i file CSV dovrebbe comparire automaticamente nel sottomenu <menuchoice
-> <guimenu
+>&kmymoney; importerà i file CSV. Questa funzionalità è fornita come estensione, e ora è integrata nel programma principale, sia nei pacchetti delle distribuzioni che nel codice sorgente. Una volta che il pacchetto della distribuzione è installato, o il codice sorgente compilato e installato, la voce di menu per importare file CSV sarà mostrata automaticamente nel sottomenu <menuchoice
+><guimenu
 >File</guimenu
-> <guisubmenu
+><guisubmenu
 >Importa</guisubmenu
-> </menuchoice
+></menuchoice
 >. </para>
 
 <para
->Per assicurarsi che sia abilitato in &kmymoney;, controllare la voce di menu <menuchoice
-> <guimenu
+>L'estensione di importazione CSV è più recente dell'estensione OFX, ma la maggior parte delle distribuzioni hanno già lo strumento di importazione CSV integrato o disponibile come pacchetto separato. Assicurarsi che sia abilitato in &kmymoney;. Selezionare la voce di menu <menuchoice
+><guimenu
 >Impostazioni</guimenu
-> <guimenuitem
+><guimenuitem
 >Configura &kmymoney;...</guimenuitem
-> </menuchoice
->, selezionare <guilabel
->Estensioni</guilabel
-> nel riquadro di sinistra e cercare <guilabel
->Importatore CSV</guilabel
-> nell'elenco visualizzato delle estensioni. Se l'importatore CSV non sembra essere installato nella propria versione, il primo posto da controllare è lo stesso posto in cui è stato ottenuto il pacchetto base di &kmymoney;. Controllare se è disponibile una versione successiva o se l'importatore è disponibile come pacchetto separato. </para>
+><guimenuitem
+>Estensioni</guimenuitem
+></menuchoice
+>. Se lo strumento di importazione CSV non sembra essere installato nella propria versione, il primo posto da controllare è lo stesso dal quale è stato preso il pacchetto base di &kmymoney;. Vedere se una versione più recente è disponibile o se lo strumento di importazione è disponibile come pacchetto separato. </para>
 
 <para
->Se hai compilato dal codice sorgente, non dovrebbero esserci requisiti aggiuntivi. Il processo di compilazione di &kmymoney; dovrebbe rilevare il codice sorgente dell'estensione e compilare l'estensione. Ci sono impostazioni di configurazione che possono essere usate per escludere questa o altre estensioni dalla compilazione, ma queste dovrebbero essere raramente necessarie. </para>
+>In caso di installazione da RPM o Deb, l'estensione di importazione CSV dovrebbe essere contenuta nel pacchetto di kmymoney. In caso di compilazione da sorgenti, non ci dovrebbero essere requisiti aggiuntivi. Il processo di compilazione di &kmymoney; dovrebbe rilevare i sorgenti dell'estensione e compilarla. </para>
 </sect2>
 
-<sect2
-><title
+<sect2>
+<title
 >Importare un file CSV</title>
+
 <para
->Per importare un file CSV, scegliere lo strumento di importazione dal menu principale: <menuchoice
+>Per importare un file CSV, scegliere lo strumento di importazione dalla barra dei menu: <menuchoice
 ><guimenu
 >File</guimenu
 ><guisubmenu
@@ -61,269 +60,140 @@
 > <guimenuitem
 >CSV...</guimenuitem
 ></menuchoice
->. Se CSV non compare sotto Importa, l'estensione di importazione CSV non è installata correttamente o non è abilitata. Vedere la sezione precedente. </para>
+>. Se CSV non compare sotto Importa, l'estensione di importazione CSV non è installata correttamente. Vedere la sezione precedente. </para>
 
 <para
->L'importatore CSV si presenta sotto forma di procedura guidata, con una pagina separata per ogni singolo passaggio del processo. </para>
+>Lo strumento di importazione CSV si presenta come una procedura guidata, con una pagina separata per ogni singolo passaggio del processo. Potrebbero esserci alcune piccole differenze tra il testo in questo manuale, le etichette nelle schermate, e le etichette effettivamente visualizzate nella procedura guidata. In questi casi, il manuale descrive il modo in cui la procedura si presenterà nella versione successiva. </para>
 
-<sect3
-><title
+<sect3>
+<title
 >Procedura di importazione CSV: Inizio</title>
+
 <para
->Una volta avviato, l'importatore CSV visualizza la pagina <guilabel
->Inizia</guilabel
-> o <guilabel
->File</guilabel
->. Sulla sinistra è presente un elenco dei passaggi del processo di importazione, con quello attuale evidenziato. L'area in alto a destra è quella in cui saranno visualizzati i dati da importare; prima di ciò mostra alcune brevi istruzioni pertinenti alla fase attuale della procedura guidata. Sotto c'è un insieme di pulsanti di scelta per la selezione del tipo di dati da importare. Tale elenco include attualmente <guilabel
+>All'avvio, lo strumento di importazione CSV visualizza la pagina <guilabel
+>Inizio</guilabel
+>. L'area superiore, dove i dati sono visualizzati, è vuota all'inizio. Sotto, a sinistra, c'è un elenco delle fasi del processo di importazione, con quello attuale evidenziato. A destra ci sono delle brevi istruzioni e due pulsanti radio, che consentono di scegliere tra <guilabel
 >Servizi bancari</guilabel
->, <guilabel
->Investimenti</guilabel
->, <guilabel
->Prezzo delle valute</guilabel
 > e <guilabel
->Prezzi delle azioni</guilabel
->. Successivamente, c'è un menu a tendina del selettore del profilo, che è abilitato se il pulsante di scelta è stato selezionato per uno dei tipi di file di importazione. </para>
-
-<screenshot>
-  <screeninfo
->procedura di importazione CSV: inizio</screeninfo>
+>Investimento</guilabel
+>. Accanto si trova un riquadro di selezione del profilo, che è abilitato una volta che i pulsanti radio sono stati selezionati. Nella parte inferiore dello schermo, ci sono pulsanti per passare alla fase successiva della procedura guidata, <guibutton
+>Indietro</guibutton
+> per tornare alla fase precedente o <guibutton
+>Annulla</guibutton
+> per annullare l'importazione. Nella fase iniziale, c'è anche un pulsante <guilabel
+>Seleziona file</guilabel
+> per selezionare subito il file da importare. </para>
+<!-- want to use inlinemediaobject to avoid lines above and below. -->
+  <screenshot>
   <mediaobject>
-    <imageobject>
-      <imagedata fileref="csvImporter_1.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->procedura di importazione CSV: inizio</phrase>
-    </textobject>
+  <imageobject>
+  <imagedata fileref="csvImporter_1.png" format="PNG"/>
+  </imageobject>
   </mediaobject>
-</screenshot>
-</sect3>
-
-<sect3
-><title
->Procedura di importazione CSV</title>
-<para
->Ogni tipo di file CSV da importare richiede la specifica di diversi dettagli riguardanti la formattazione prevista dei dati, come descritto nelle sezioni seguenti. Non solo i dettagli differiscono per i diversi tipi di file di dati importati, ma è possibile che siano necessarie configurazioni diverse per lo stesso tipo di dati da fonti diverse. Quindi non è necessario immettere tutti quei dettagli ogni volta che si importa un file, CSV Importer consente di specificare i dettagli una volta e salvarli in un profilo con nome. </para>
+  </screenshot>
 
 <para
->Il nome di un profilo di importazione CSV è completamente arbitrario, ma sarà più facile da ricordare se riflette sia il tipo di dati importati (banca, carta di credito, investimento, ...) sia la fonte dei dati. Non c'è bisogno di fare riferimento al conto in cui vengono importati i dati ed è possibile utilizzare lo stesso profilo per l'importazione in più di un conto, ad esempio due conti correnti presso la stessa banca. </para>
-
-<para
->Il menu a tendina del selettore del profilo include i nomi di tutti i profili di importazione CSV creati in precedenza e consente inoltre di digitare il nome di un nuovo profilo. Sotto il menu a tendina del selettore del profilo, ci sono tre pulsanti. Quando si fa clic su <guilabel
->Aggiungi</guilabel
->, che è sempre abilitato, sarà creato un nuovo profilo con il nome immesso nel menu a tendina. Non accadrà nulla se quel campo è vuoto o se visualizza il nome di un profilo esistente. Mentre si procede nel resto della procedura guidata di importazione CSV, le varie impostazioni di configurazione immesse o modificate saranno salvate nel profilo selezionato. </para>
-
-<para
->Se hai creato in precedenza uno o più profili, gli altri due pulsanti saranno abilitati. Se fai clic su <guilabel
->Rimuovi</guilabel
->, il profilo indicato nel menu a tendina sarà eliminato. Se fai clic su <guilabel
->Rinomina</guilabel
->, quindi modifichi il nome visualizzato nel menu a tendina e fai clic di nuovo su <guilabel
->Rinomina</guilabel
->, il profilo sarà rinominato di conseguenza. </para>
-
-<para
->Accanto al selettore del profilo, c'è una casella di selezione <guilabel
->Salta configurazione</guilabel
->. Inizialmente, non dovresti selezionare questa casella. Una volta impostato un profilo e terminata la procedura guidata, tutti i parametri di configurazione immessi vengono salvati nel file di risorse sotto il nome del profilo. La volta successiva che utilizzi lo stesso profilo, i parametri saranno caricati nell'interfaccia utente. La procedura guidata scorrerà quindi le pagine successive di parametri che non dovrai modificare. Quindi, una volta che sei soddisfatto di un profilo, potrebbe essere utile selezionare questa casella. La procedura guidata passerà quindi direttamente alla pagina finale e, supponendo che non vengano rilevati problemi, dovrai solo fare clic su <guilabel
+>Inoltre, notare la casella di selezione <guilabel
+>Salta la configurazione</guilabel
+> accanto al selettore del profilo. Inizialmente, non si dovrebbe selezionare questa casella. Dopo aver configurato un profilo e completata la procedura guidata, questi parametri sono salvati nel file delle risorse. La prossima volta che si utilizza lo stesso profilo, i parametri saranno caricati nell'interfaccia. La procedura guidata si soffermerebbe sulle pagine di parametri seguenti che non dovrebbero essere oggetto di modifica. Perciò, una volta soddisfatti di un profilo, potrebbe essere utile marcare questa casella. La procedura guidata salterà direttamente alla pagina finale, e, assumendo che non siano rilevati errori, basterà fare clic su <guilabel
 >Importa</guilabel
 >. </para>
 
 <para
->In basso c'è un pulsante <guilabel
+>Selezionare prima <guilabel
+>Servizi bancari</guilabel
+> o <guilabel
+>Investimento</guilabel
+>, poi fare clic nel riquadro selezionato, che visualizza «Aggiungi nuovo profilo». Avendo creato dei profili in precedenza, è possibile selezionare uno di quelli, altrimenti digitare il nome di un nuovo profilo, possibilmente il nome del conto nel quale si desidera importare. Se si digita il nome di un nuovo profilo, premere &Enter; per crearlo. Poi, fare clic su <guilabel
 >Seleziona file</guilabel
->. Facendo clic su di esso si aprirà una finestra di selezione file che ti permetterà di scegliere il file da importare. In fondo alle pagine rimanenti della procedura guidata ci sono pulsanti per andare <guibutton
->&lt; Indietro</guibutton
-> al passaggio precedente della procedura guidata, andare <guilabel
->Avanti &gt;</guilabel
-> o <guibutton
->Annulla</guibutton
-> per annullare l'importazione. </para>
-
-<para
->Per rivedere, nella pagina iniziale della procedura guidata, selezionare prima la casella per il tipo di dati che si stanno importando. Nel menu a tendina del selettore del profilo, è possibile selezionare il nome di un profilo dell'importatore CSV creato in precedenza o immettere un nuovo nome, possibilmente il nome del conto in cui si desidera importare, e fare clic su <guilabel
->Aggiungi</guilabel
->. Infine, fare clic su <guilabel
->Seleziona file</guilabel
-> e si aprirà una finestra del selettore file, in cui è possibile selezionare il file CSV che si desidera importare. </para>
+>, e si aprirà una finestra del selettore dei file, dalla quale si può selezionare il file CSV che si desidera importare. </para>
 </sect3>
 
-<sect3
-><title
+<sect3>
+<title
 >Procedura di importazione CSV: Separatori</title>
 <para
->Dopo aver aperto il file di dati selezionato, la procedura guidata passerà alla pagina <guilabel
+>La procedura guidata avanzerà alla pagina <guilabel
 >Separatori</guilabel
-> e dovresti ora vedere i tuoi dati. </para>
+>, dove sarà possibile vedere i propri dati. </para>
 
-<screenshot>
-  <screeninfo
->Procedura di importazione CSV: separatori</screeninfo>
+  <screenshot>
   <mediaobject>
-    <imageobject>
-      <imagedata fileref="csvImporter_2.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->Procedura di importazione CSV: separatori</phrase>
-    </textobject>
+  <imageobject>
+  <imagedata fileref="csvImporter_2.png" format="PNG"/>
+  </imageobject>
   </mediaobject>
-</screenshot>
+  </screenshot>
 
-<warning>
-  <para
->Potrebbe sembrare che i dati visualizzati nella sezione superiore della finestra dell'estensione possano essere modificati, e in effetti è così, ma le modifiche non vengono mantenute. La tabella è puramente per la visualizzazione, non per la modifica. Il file in ingresso non viene mai modificato dall'importatore CSV e i dati effettivamente importati provengono dal file in ingresso, non dalla visualizzazione. L'unica eccezione a questo è trattata in <link linkend="details.impexp.csv.secsym"
+  <warning>
+    <para
+>Potrebbe sembrare che le voci visualizzate nella sezione superiore della finestra dell'estensione siano modificabili, e, infatti, potrebbero esserlo, ma qualsiasi modifica non viene salvata. La tabella ha solo funzione di visualizzazione, non di modifica. Il file in ingresso non viene mai alterato dall'estensione, e i dati effettivamente importati sono presi dal file, non dalla visualizzazione. L'unica eccezione a questa regola è descritta successivamente in <link linkend="details.impexp.csv.secsym"
 >Strumenti finanziari e simboli</link
-> di seguito. </para
+>. </para
 > 
-</warning>
+  </warning>
 
 <para
->L'importatore CSV dovrebbe aver rilevato la <guilabel
->Codifica</guilabel
->, il <guilabel
->Delimitatore di campo</guilabel
-> e il <guilabel
+>L'estensione dovrebbe aver rilevato il corretto <guilabel
+>Separatore di campo</guilabel
+> da utilizzare, e, di solito, non è possibile selezionarne un altro. Infatti, se si prova a farlo, si reimposteranno tutte le scelte già fatte per qualsiasi campo. C'è anche un selettore per il <guilabel
 >Delimitatore di testo</guilabel
-> appropriati. È possibile modificare la codifica se il programma non ha scelto correttamente. Se è necessario modificare il delimitatore di campo, ad esempio se i propri dati sono effettivamente delimitati da tabulazioni e non da virgole, tieni presente che così facendo reimposterai tutte le scelte di campo che potresti aver già effettuato. In genere, le virgolette (&quot;) sono il delimitatore di testo corretto, ma puoi modificarlo se necessario. Fai clic su <guibutton
+>, ma, in genere, i doppi apici (") sono corretti. Ora fare clic sul pulsante <guibutton
 >Avanti</guibutton
-> per procedere. </para>
+>. In base alla selezione effettuata in precedenza, ci si troverà nella pagina Servizi bancari o nella pagina Investimento. </para>
 </sect3>
 
-<sect3
-><title
->Procedura di importazione CSV: righe</title>
-<para
->Ora sarai nella pagina <guilabel
->Righe</guilabel
-> o <guilabel
->Linee</guilabel
->. Qui, puoi indicare se alcune righe devono essere ignorate all'inizio o alla fine del file. </para>
-
-<screenshot>
-  <screeninfo
->procedura di importazione CSV: righe</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="csvImporter_5.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->procedura di importazione CSV: righe</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
-
-<para
->Questa pagina consente di modificare l'importazione ignorando le righe di intestazione e piè di pagina all'inizio o alla fine del file, che in realtà non contengono dati da importare. </para>
-
-<formalpara
-><title
->Riga iniziale</title>
-<para
->Impostare questa opzione in modo che lo strumento di importazione salti le righe di intestazione nel file. La scelta sarà salvata in questo profilo per usi futuri. Le righe iniziali e finali interagiscono,  e la riga di inizio non può essere superiore alla riga di fine, né può essere superiore al numero effettivo di righe nel file.. Se il selettore <guilabel
->Riga iniziale</guilabel
-> non risponde, controllare l'impostazione della riga finale. </para>
-</formalpara>
-
-<formalpara
-><title
->Riga finale</title>
-<para
->Lo strumento di importazione lo imposterà automaticamente all'ultima riga del file, o all'ultima impostazione salvata. Sarà necessario solo regolarlo se nel file ci sono righe di piè di pagina che lo strumento di importazione dovrebbe ignorare. Altrimenti, si potrebbe ricevere un avviso di errore di dati quando l'estensione prova ad analizzare dati non corretti. Ancora, se il selettore <guilabel
->Riga finale</guilabel
-> non risponde, controllare l'impostazione <guilabel
->Riga iniziale</guilabel
->. </para>
-</formalpara>
-
-<para
->Sopra questi due campi c'è una casella di controllo <guilabel
->L'intestazione contiene il nome o il numero del conto</guilabel
->. Se selezionata, l'importatore cercherà nelle righe sopra la riga di inizio il nome o il numero del conto da usare per l'importazione. In caso contrario, ti sarà chiesto di fornire tali informazioni. </para>
-
-<para
->Quando sei pronto, fai clic su <guilabel
->Avanti</guilabel
-> per procedere al passaggio successivo. </para>
-</sect3>
-
-<sect3
-><title
->Procedura di importazione CSV: colonne</title>
-<para
->Ora dovresti essere nella pagina <guilabel
->Colonne</guilabel
->. Qui puoi indicare all'importatore quali colonne nel file contengono i dati che corrispondono ai campi specifici necessari per creare una registrazione o una transazione significative, a seconda del tipo di dati importati. Esiste una versione diversa di questa pagina per ogni tipo di dati, poiché ognuno richiede una diversa combinazione di elementi. </para>
-
-<sect4
-><title
+<sect3>
+<title
 >Procedura di importazione CSV: Servizi bancari</title>
-<screenshot>
-  <screeninfo
->procedura di importazione CSV: servizi bancari</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="csvImporter_3.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->procedura di importazione CSV: servizi bancari</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
-  
 <para
->Per la maggior parte dei campi, è sufficiente utilizzare il menu a tendina per selezionare la colonna appropriata. Nota che molti campi hanno un pulsante <quote
->x</quote
-> a destra. Facendo clic su di esso si cancellerà qualsiasi valore inserito o selezionato nel campo a sinistra. Inoltre, ci sono alcune considerazioni speciali. </para>
+>In questa pagina, selezionare i numeri di colonna dai quali importare i campi rilevanti. </para>
+
+  <screenshot>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="csvImporter_3.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+  </screenshot>
+
+<para
+>Per la maggior parte dei campi, è sufficiente utilizzare il menu a tendina appropriato per selezionare la colonna appropriata. Tuttavia, ci sono alcune considerazioni particolari. </para>
 
 <itemizedlist>
 <listitem>
-  <para
->A destra c'è un'area con due schede. Se il tuo file ha una singola colonna per tutti i valori, seleziona la scheda <guilabel
->Importo</guilabel
->. Tuttavia, se ci sono colonne separate per debiti e crediti, seleziona la scheda <guilabel
->Debito/credito</guilabel
+<para
+>Al centro sono presenti due pulsanti radio. Se il proprio file ha una colonna singola per tutti i valori, selezionare la colonna <guilabel
+>Totale</guilabel
+>. Tuttavia, se sono presenti colonne separate per debiti e crediti, selezionare la colonna <guilabel
+>Debito/Credito</guilabel
+>. Ciò abiliterà il selettore di colonna <guilabel
+>Totale</guilabel
+> o i selettori di colonna <guilabel
+>Debito</guilabel
+> e <guilabel
+>Credito</guilabel
 >. </para>
-
-  <para
->Nella scheda Importo, iniziare selezionando la colonna che contiene l'importo della transazione. Se c'è una colonna che contiene <quote
->Credito</quote
-> o <quote
->Debito</quote
-> per indicare di quale importo si tratta, selezionare quella colonna come <guilabel
->Indicatore Debito/Credito</guilabel
->. Separatamente, se c'è una stringa inclusa nel campo importo che indica che l'importo è un credito o un debito, inserire quella stringa nel campo <guilabel
->Indicatore</guilabel
-> appropriato. Infine, se nonostante l'impostazione corretta di tutti i valori di cui sopra, l'importo importato è invertito rispetto a quello che dovrebbe essere, selezionare la casella <guilabel
->Segni opposti</guilabel
->. </para>
-
-  <para
->Nella scheda Debito/credito, basta inserire i numeri delle colonne con quei valori nei campi appropriati. </para>
 </listitem>
 
 <listitem>
 <para
->È possibile selezionare più di una colonna per il campo Promemoria, per selezioni consecutive. Le colonne Promemoria già selezionate sono indicate nel campo <guilabel
->Colonne promemoria:</guilabel
->. Se selezioni più colonne in questo modo, il loro contenuto sarà concatenato nel campo Promemoria. </para>
+>È possibile selezionare più di una colonna per il campo Promemoria, per selezioni consecutive. Le colonne Promemoria già selezionate sono marcate nell'elenco a tendina con un asterisco (*). Se si selezionano più colonne in questo modo, il loro contenuto sarà concatenato nel campo Promemoria. </para>
 </listitem>
 
 <listitem>
 <para
->Se provi a scegliere lo stesso numero di colonna per due campi, l'importatore ti avviserà e cancellerà entrambe le selezioni. Tuttavia, se lo desideri, è possibile utilizzare la stessa colonna in entrambi i campi <guilabel
+>Se si prova a scegliere lo stesso numero di colonna per due campi, l'estensione restituirà un avviso e cancellerà entrambi le selezioni. Tuttavia, è possibile, se lo si desidera, utilizzare la stessa colonna nei campi <guilabel
 >Beneficiario/Descrizione</guilabel
 > e <guilabel
 >Promemoria</guilabel
->. Se selezioni una colonna per il campo <guilabel
+>. Se si seleziona una colonna per il campo <guilabel
 >Beneficiario/Descrizione</guilabel
-> e poi selezioni la stessa colonna per il campo <guilabel
+> e poi si seleziona la stessa colonna per il campo <guilabel
 >Promemoria</guilabel
->, riceverai un avviso che sono state selezionate colonne duplicate, ma ti sarà chiesto se desideri procedere. In tal caso, fai clic su <guibutton
+>, si riceverà un avviso che sono state selezionate colonne duplicate, ma che chiederà se si vuole continuare, fare clic su <guibutton
 >Sì</guibutton
-> e la colonna verrà utilizzata per entrambi i campi. </para>
+>. </para>
 </listitem>
 
 <listitem>
@@ -333,82 +203,30 @@
 </itemizedlist>
 
 <para
->Se si ritiene di aver effettuato una scelta non corretta, basta cambiare tale selezione. Se sono state eseguite diverse modifiche, è possibile fare clic sul pulsante <guilabel
->Cancella tutto</guilabel
-> e ricominciare. </para>
+>Se si ritiene di aver effettuato una scelta non corretta, basta cambiare tale selezione. Se sono state eseguite diverse modifiche, fare clic sul pulsante <guilabel
+>Cancella</guilabel
+>. </para>
 
 <para
 >Una volta scelte le colonne per tutti i campi necessari, il pulsante <guilabel
 >Avanti</guilabel
 > sarà abilitato, e il clic su di esso permetterà di avanzare nella procedura guidata. </para>
-</sect4>
+</sect3>
 
-<sect4
-><title
->Procedura guidata di importazione CSV: formato</title>
-<para
->La pagina successiva della procedura guidata mostra ancora i dati da importare in alto, ma la sezione inferiore fornisce tre menu a tendina. I valori iniziali sono impostati da &kmymoney; in base all'esame dei dati effettivi. </para>
-
-<screenshot>
-  <screeninfo
->procedura di importazione CSV: investimento</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="csvImporter_4.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->procedura di importazione CSV: investimento</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
-
-<para
->Il <guilabel
->simbolo decimale</guilabel
-> è impostato in modo predefinito su <quote
->auto</quote
->, che solitamente produce i risultati corretti. In caso contrario, puoi specificare esplicitamente il <quote
->punto</quote
-> o la <quote
->virgola</quote
-> </para>
-
-<para
->Il <guilabel
->simbolo delle migliaia</guilabel
-> viene impostato automaticamente e il campo può essere disabilitato se non influisce sui risultati. </para>
-
-<para
->Questo deve essere impostato in base all'anno, al mese e al giorno nelle date del file. Se l'estensione trova dati non compatibili con questa impostazione, lo segnalerà quando si prova a importare. Tuttavia, se l'impostazione è errata, ma produce risultati non validi non rilevati (come date senza alcun giorno maggiore di 12, con mese e giorno che potrebbero essere scambiati) si otterranno semplicemente dati non corretti poiché l'estensione non è in grado di sapere che si tratti di un errore. In questo caso, l'errore sarà ovviamente riportato nel registro dopo l'importazione. </para>
-
-<para
->Il <guilabel
->formato data</guilabel
-> specifica l'ordine di giorno, mese e anno, ed è impostato automaticamente. Tuttavia, in alcuni casi, come dati senza giorno superiore a 12, noterai il problema dopo l'importazione. In tali casi, dovrai ripetere l'importazione e scegliere l'ordine effettivo dei componenti della data. </para>
-</sect4>
-
-<sect4
-><title
+<sect3>
+<title
 >Procedura di importazione CSV: Investimento</title>
 <para
 >Questa pagina è simile alla pagina <guilabel
 >Servizi bancari</guilabel
->, anche se leggermente più complessa. La maggior parte delle scelte è abbastanza ovvia, ma ci sono degli elementi che possono generare confusione fino a che non si sia completata la procedura una o due volte. </para>
-
-<screenshot>
-  <screeninfo
->procedura di importazione CSV: investimento</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="csvImporter_4.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->procedura di importazione CSV: investimento</phrase>
-    </textobject>
+>, anche se leggermente più complessa. La maggior parte delle scelte è abbastanza ovvia, ma ci sono degli elementi che possono generare confusione fino a che non si sia completata la procedura una o due volte. <screenshot
+> <mediaobject
+> <imageobject>
+  <imagedata fileref="csvImporter_4.png" format="PNG"/>
+  </imageobject>
   </mediaobject>
-</screenshot>
+  </screenshot>
+</para>
 
 <para>
 <itemizedlist>
@@ -437,41 +255,25 @@
 
 <listitem>
 <para
->Esistono due modi per specificare le commissioni per le transazioni. Se il proprio file ha una colonna distinta per le commissioni, utilizzare il selettore <guilabel
->Colonna commissioni</guilabel
->. Notare che in questa pagina, questo è l'unico campo a includere esplicitamente «colonna» nell'etichetta, per sottolineare che è per la colonna delle commissioni, non per una commissione effettiva. Fare attenzione, però, che la commissione potrebbe essere stata presa in considerazione nel prezzo. </para>
-
-<para
->Se è presente una commissione, ma è una cifra percentuale, anziché un valore specificato, fare clic sulla casella di controllo <guilabel
->La commissione è percentuale</guilabel
-> e inserire la percentuale nel campo <guilabel
->Percentuale di commissione</guilabel
->. Inoltre, se è presente una commissione minima, specificarla nel campo <guilabel
->Commissione minima</guilabel
->, che diventa abilitato quando si inserisce la percentuale di commissione (con un punto decimale). A questo punto, facendo clic su <guibutton
->Calcola commissioni</guibutton
-> sarà aggiunta una colonna a destra della tabella soprastante e sarà indicata la commissione calcolata per ciascuna transazione. </para>
-
-<para
->Se hai commesso un errore nell'inserimento delle informazioni sulla commissione, facendo clic su<guibutton
->Cancella commissione</guibutton
-> tutti i campi relativi alla tariffa saranno reimpostati ai loro valori iniziali. </para>
+>Utilizzare il selettore <guilabel
+>Colonna dei pagamenti</guilabel
+> se il proprio file ha una colonna separata per i pagamenti. Bisogna prestare attenzione, comunque, al fatto che i pagamenti potrebbero essere stati contabilizzati nel prezzo. Se c'è un pagamento, sotto forma di percentuale, invece che di valore. Notare ciò su questa pagina, è il solo campo che include esplicitamente «colonna» nell'etichetta, per evidenziare che è per la colonna dei pagamenti, non un pagamento qualsiasi. </para>
 </listitem>
 
 <listitem>
 <para
 >Sotto i selettori di colonna si trovano due aree per l'identità degli strumenti finanziari. In base all'intermediario o all'istituto finanziario, il proprio file potrebbe contenere voci per uno solo o per diversi strumenti finanziari. <itemizedlist>
-    <listitem>
-      <para
+  <listitem>
+  <para
 >Se il file contiene transazioni per un singolo strumento finanziario, con il nome in una possibile riga di intestazione, il nome dovrebbe essere digitato nel riquadro <guilabel
 >Nome dello strumento finanziario</guilabel
 >. Il nome digitato sarà aggiunto all'elenco a tendina per usi futuri. Si potrebbe voler rimuovere in seguito il nome dall'elenco. Per fare ciò, selezionarlo, fare quindi clic sul pulsante <guilabel
 >Nascondi strumento finanziario</guilabel
 >. Ciò lo rimuoverà solo da questo elenco, e non ha effetto sul file principale di &kmymoney;. </para>
-    </listitem>
+  </listitem>
 
-    <listitem>
-      <para
+  <listitem>
+  <para
 >Se il file include transazioni con diversi strumenti finanziari, ognuno sarà identificato dal suo simbolo del ticker in una colonna e con altri dati in un'altra colonna. Seleziona queste colonne nei selettori <guilabel
 >Simbolo</guilabel
 > e <guilabel
@@ -483,7 +285,7 @@
 > <quote
 >tipo: </quote
 > con lo spazio alla fine. </para>
-    </listitem>
+  </listitem>
   </itemizedlist>
 </para>
 </listitem>
@@ -494,14 +296,61 @@
 >Quando tutti i campi richiesti sono selezionati, il pulsante <guilabel
 >Avanti</guilabel
 > sarà abilitato, e facendo clic su di esso si avanzerà nella procedura guidata. </para>
-</sect4>
+</sect3>
 
-<sect4 id="details.impexp.csv.secsym"
+<sect3>
+<title
+>Procedura di importazione CSV: Righe</title>
+<para
+>In questa pagina, è possibile indicare se le righe all'inizio o alla fine del file devono essere ignorate. Si può indicare inoltre il formato delle date. <screenshot
+> <mediaobject
+> <imageobject>
+  <imagedata fileref="csvImporter_5.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+  </screenshot>
+</para>
+
+<formalpara
 ><title
+>Riga iniziale</title>
+<para
+>Impostare questa opzione in modo che lo strumento di importazione salti le righe di intestazione nel file. La scelta sarà salvata in questo profilo per gli usi futuri. Le righe iniziali e finali interagiscono, e la riga iniziale non dovrebbe essere maggiore della riga finale. Se il selettore <guilabel
+>Riga iniziale</guilabel
+> non risponde, controllare l'impostazione della riga finale. </para>
+</formalpara>
+
+<formalpara
+><title
+>Riga finale</title>
+<para
+>Lo strumento di importazione lo imposterà automaticamente all'ultima riga del file, o all'ultima impostazione salvata. Sarà necessario solo regolarlo se nel file ci sono righe di piè di pagina che lo strumento di importazione dovrebbe ignorare. Altrimenti, si potrebbe ricevere un avviso di errore di dati quando l'estensione prova ad analizzare dati non corretti. Ancora, se il selettore <guilabel
+>Riga finale</guilabel
+> non risponde, controllare l'impostazione <guilabel
+>Riga iniziale</guilabel
+>. </para>
+</formalpara>
+
+<formalpara
+><title
+>Formato della data</title>
+<para
+>Questo deve essere impostato in base all'anno, al mese e al giorno nelle date del file. Se l'estensione trova dati non compatibili con questa impostazione, lo segnalerà quando si prova a importare. Tuttavia, se l'impostazione è errata, ma produce risultati non validi non rilevati (come date senza alcun giorno maggiore di 12, con mese e giorno che potrebbero essere scambiati) si otterranno semplicemente dati non corretti poiché l'estensione non è in grado di sapere che si tratti di un errore. In questo caso, l'errore sarà ovviamente riportato nel registro dopo l'importazione. </para>
+</formalpara>
+
+<para
+>Una volta pronto, il pulsante <guilabel
+>Avanti</guilabel
+> sarà abilitato, e il clic su di esso permetterà di avanzare nella procedura guidata. </para>
+</sect3>
+
+<sect3 id="details.impexp.csv.secsym">
+<title
 >Procedura di importazione CSV: Strumenti finanziari e simboli</title>
+
 <para
 >Per un file di investimento, dopo aver accettato la pagina <guilabel
->Colonne</guilabel
+>Righe</guilabel
 >, è necessario assicurarsi che ogni strumento finanziario nel file corrisponda allo strumento finanziario corretto nel file di &kmymoney;, prima che l'importazione possa continuare. A questo punto, si aprirà un'altra finestra che mostra gli strumenti finanziari e i simboli contenuti nel file di importazione. Notare che diversamente dalla visualizzazione dei dati nelle finestre della procedura guidata principale, le modifiche eseguite su questa pagina <emphasis
 >sono</emphasis
 > importate. </para>
@@ -509,7 +358,7 @@
 <para
 >Il completamento di questa pagina è semplice, se si considerano questi elementi: <itemizedlist>
     <listitem>
-      <para
+    <para
 >Ogni riga rappresenta una transazione, e potrebbe sembrare che ci siano righe duplicate. Ciò non costituisce un problema. </para>
     </listitem>
 
@@ -533,7 +382,7 @@
 </para>
 
 <para
->È possibile modificare un simbolo o il nome di uno strumento finanziario facendo doppio clic sulla cella. Per ogni strumento finanziario, se necessario, modificare il nome in una delle sue righe. Se il nome corretto dello strumento finanziario appare nel file importato, fare doppio clic su di esso per selezionarlo, quindi copiare e incollare/modificare, facendo attenzione nel caso in cui siano state utilizzate varianti o abbreviazioni in &kmymoney;. Se si modifica il nome di uno strumento finanziario, tale modifica sarà applicata a tutte le righe con lo stesso simbolo. </para>
+>È possibile modificare un simbolo o il nome di uno strumento finanziario facendo doppio clic sulla cella. Per ogni strumento finanziario, se necessario, modificare il nome in una delle sue righe. Se il nome corretto dello strumento finanziario appare nel file importato, fare doppio clic su di esso per selezionarlo, poi copiare e incollare/modificare, facendo attenzione nel caso in cui siano state utilizzate varianti o abbreviazioni in &kmymoney;. Se si modifica il nome di uno strumento finanziario, tale modifica sarà applicata a tutte le righe con lo stesso simbolo.  </para>
 
 <para
 >Qualsiasi riga senza un simbolo sarà trattata come elemento di un conto di intermediazione. Se una transazione coinvolge un altro conto, &eg; un conto corrente o di intermediazione per un dividendo ricevuto o per l'esecuzione di un pagamento, comparirà una finestra con la richiesta di digitare il nome del conto per il trasferimento. Questo sarà, in genere, il conto di intermediazione selezionato o generato al momento della creazione del conto di investimento. Allo stesso modo, digitare il numero della colonna che contiene il beneficiario, se richiesto. Se si commette un errore al momento della digitazione del nome del conto, l'importazione continuerà, ma &kmymoney; non lo riconoscerà, e contrassegnerà le transazioni come mancanti dell'assegnazione di una categoria. Se il nome del conto richiesto è troppo lungo, digitare solo alcuni caratteri. L'importazione andrà avanti, ma &kmymoney; marcherà le transazioni come mancanti dell'assegnazione di una categoria, e sarà necessario selezionare il conto di trasferimento corretto dopo l'importazione. Fare clic su <guibutton
@@ -541,9 +390,9 @@
 > al termine. Il processo di importazione lascerà il posto a &kmymoney; </para>
 
 <para
->Se hai più di una transazione che fa riferimento allo stesso titolo, puoi modificarle tutte contemporaneamente, utilizzando la selezione multipla. Ad esempio, per aggiungere un simbolo per più linee, tieni premuto il tasto &Ctrl; e nella colonna dei simboli, seleziona ogni transazione. Mentre tieni ancora premuto il tasto &Ctrl;, tutte quelle celle simbolo dovrebbero essere ancora selezionate, quindi fai clic su una e inserisci il simbolo. Fai clic all'interno della finestra ma all'esterno di quella colonna, oppure premi &Enter; (non <guibutton
+>Se si hanno più transazioni che si riferiscono allo stesso strumento finanziario, è possibile modificarle contemporaneamente, utilizzando la selezione multipla. Ad esempio, per aggiungere un simbolo a diverse righe, premere e mantenere il tasto &Ctrl;, e nella colonna dei simboli, selezionare ogni transazione. Mentre si trattiene il tasto &Ctrl;, tutte le celle dei simboli dovrebbero essere ancora selezionate, quindi fare clic su una di esse e digitare il simbolo. Fare clic all'interno della finestra, ma fuori dalla colonna, o premere &Enter; (non <guibutton
 >OK</guibutton
->). Ora che quelle transazioni hanno tutte lo stesso simbolo, fai doppio clic su una voce di dettaglio e modifica il nome del titolo come desideri. Fai clic in un altro punto della finestra (o &Enter;) per accettare la modifica, che cambierà quindi tutte quelle voci. Le voci rimanenti mostreranno i simboli prelevati dalle transazioni nel file di importazione. </para>
+>). Ora che le tutte le transazioni hanno lo stesso simbolo, fare doppio clic su una voce dei dettagli e modificare il nome dello strumento finanziario come si desidera. Fare clic in un punto qualsiasi della finestra (o &Enter;) per accettare la modifica, che si applicherà a tutte le voci. Le voci rimanenti mostreranno i simboli presenti nelle transazioni nel file di importazione. </para>
 
 <para
 >Ora fare clic su <guibutton
@@ -552,35 +401,20 @@
 >Importa</guibutton
 >. Nel riquadro <guilabel
 >Inserisci conto</guilabel
->, digitare il nome di un conto di intermediazione/corrente per denaro. Se si digita un nome valido, il conto sarà utilizzato. Se non si ha voglia di digitare un nome corretto, ma lungo, digitare pochi caratteri. L'importazione lo accetterà, ma le transazioni nel registro dopo l'importazione richiederanno la selezione di un conto appropriato. Per il riquadro <guilabel
+>, digitare il nome di un conto di intermediazione/corrente per denaro. Se si digita un nome valido, il conto sarà utilizzato. Se non si desidera avere problemi digitando un nome corretto, ma lungo, digitare pochi caratteri. L'importazione lo accetterà, ma le transazioni nel registro dopo l'importazione richiederanno la selezione di un conto appropriato. Per il riquadro <guilabel
 >Intermediazione</guilabel
 >, digitare il numero della colonna che contiene tale informazione. Ora, nel riquadro <guilabel
 >Transazione non valida</guilabel
-> si potrebbero ottenere alcune voci poiché il tipo di attività non corrisponde alla combinazione quantità/prezzo/importo. Su ogni messaggio, fare clic su <guilabel
+> si potrebbero ottenere poche voci poiché il tipo di attività non corrisponde alla combinazione quantità/prezzo/importo. In ogni messaggio, fare clic su <guilabel
 >Seleziona il tipo di transazione</guilabel
 >, e un elenco a tendina apparirà indicando i tipi di attività validi per quella combinazione di valori. </para>
 
 <para
 >Ora l'importazione è avvenuta e si è in &kmymoney; per selezionare il conto di investimento da utilizzare. Poi il conto corrente, se erano presenti transazioni di intermediazione. </para>
-</sect4>
-
-<sect4
-><title
->Procedura guidata di importazione CSV: prezzi delle valute</title>
-<para
->qualcosa sull'importazione dei prezzi delle valute </para>
-</sect4>
-
-<sect4
-><title
->Procedura guidata di importazione CSV: prezzi delle azioni</title>
-<para
->qualcosa sull'importazione dei prezzi delle azioni </para>
-</sect4>
 </sect3>
 
-<sect3
-><title
+<sect3>
+<title
 >Procedura di importazione CSV: Fine</title>
 <para
 >Una volta raggiunta la pagina finale, l'estensione convalida automaticamente i valori. Se le colonne con valore numerico sono evidenziate in verde, la convalida è avvenuta correttamente e tutto ciò che rimane da fare è fare clic su <guibutton
@@ -626,15 +460,15 @@
 </formalpara>
 </sect3>
 
-<sect3
-><title
+<sect3>
+<title
 >Creare file QIF</title>
 <para
 >Questo pulsante offre la possibilità, dopo che l'importazione sia stata completata, di salvare i dati del file CSV come un file QIF, nel caso dovesse servire per qualsiasi motivo. Questa era la funzionalità originale che ha portato alla creazione di questa estensione. Tuttavia, poiché &kmymoney; è ora in grado di esportare un file qif, questa funzionalità è ora scarsamente utile e potrebbe essere rimossa in futuro. </para>
 </sect3>
 
-<sect3
-><title
+<sect3>
+<title
 >Terminare</title>
 <para
 >Per un'importazione in <guilabel
@@ -644,13 +478,13 @@
 >, tuttavia, potrebbe essere richiesto dell'altro. Se, durante l'importazione di una transazione, l'estensione non trova alcun tipo di transazione valido, visualizzerà la transazione problematica, e l'utente potrà selezionare un tipo valido da sostituire, in base alla combinazione dei valori di quantità, prezzo e importo. Per ogni transazione, l'estensione convaliderà il contenuto delle colonne per assicurare che corrisponda al tipo di azione. Ad esempio, se appare una quantità, ma non un prezzo o un importo, si assume che la transazione possa essere solo di tipo Aggiungi o Rimuovi quote. Oppure, se c'è un importo, ma non una quantità o un prezzo, si assume che sia un Dividendo, &etc;. </para>
 
 <para
->Se desideri salvare le tue impostazioni, ricordati di fare clic su <guibutton
+>Se si desidera salvare le impostazioni, ricordarsi di fare clic sul pulsante <guibutton
 >Fine</guibutton
->, e l'estensione si chiuderà. </para>
+>, e l'estensione sarà chiusa. </para>
 </sect3>
 
-<sect3
-><title
+<sect3>
+<title
 >Aggiungere i tipi di attività di investimento</title>
 <para
 >Se i propri documenti di investimento continuano a includere tipi di attività non riconosciute, basta aggiungerli alla sezione nel file delle risorse. (Vedere <link linkend="details.impexp.csv.config"
@@ -684,23 +518,24 @@
 >. Cambiando l'ordine degli elenchi per risolvere il problema potrebbe non funzionare come previsto, poiché le voci nel file delle risorse sono organizzate in ordine alfabetico. Se il parametro problematico è uno non necessario, sarà sufficiente eliminarlo dal file. Se ciò non è possibile, potrebbe essere necessario modificare il proprio file prima dell'inserimento. </para>
 </sect3>
 
-<sect3 id="details.impexp.csv.config"
-><title
+<sect3 id="details.impexp.csv.config">
+<title
 >Configurazione dell'estensione di importazione CSV</title>
+
 <para
->Uno svantaggio ben noto del formato QIF sta nel fatto di essere un formato piuttosto vago. Lo stesso problema interessa i file CSV, anche maggiormente, con una mancanza totale di standard concordati. Con i file di investimento, in particolare c'è un ambito di variabilità maggiore nella specifica dei diversi tipi di attività rappresentati nei dati. L'estensione gestisce questo problema elencando questi tipi di attività in un file di risorse, chiamato <filename
+>Uno svantaggio ben noto del formato QIF sta nel fatto di essere un formato abbastanza vago. Lo stesso problema interessa i file CSV, anche maggiormente, con una mancanza totale di standard concordati. Con i file di investimento, in particolare c'è un ambito di variazione maggiore nella specifica dei diversi tipi di attività rappresentati nei dati. L'estensione gestisce questo problema elencando questi tipi di attività in un file di risorse, chiamato <filename
 >csvimporterrc</filename
->. La posizione di questo file dipende dalla proprio sistema operativo o distribuzione. Su un sistema &Linux;, si trova in <filename class="directory"
+>. La posizione di questo file dipende dalla propria distribuzione. Su un sistema &Linux;, si trova in <filename class="directory"
 >$KDEHOME/share/config/</filename
 >, dove <envar
 >$KDEHOME</envar
 > è normalmente <quote
 >.config</quote
-> nella propria cartella home. Se si sta migrando da una versione di &kmymoney; precedente la 5.0, la vecchia posizione di <envar
+> nella propria cartella home. Se si sta migrando da una versione di &kmymoney; precedente la 5.0 o successiva, la vecchia posizione di <envar
 >$KDEHOME</envar
 > era <filename class="directory"
 >.kde4</filename
->, anch'essa nella propria cartella home. L'utilizzo di questo file di risorse consente all'utente di aggiungere un tipo di attività che lo sviluppatore non ha considerato. Se il file non esiste alla prima esecuzione dello strumento di importazione, l'estensione creerà una versione predefinita, che contiene alcune delle descrizioni più comuni. </para>
+>. L'utilizzo di questo file di risorse consente all'utente di aggiungere un tipo di attività che lo sviluppatore non ha considerato. Se il file non esiste alla prima esecuzione dello strumento di importazione, l'estensione creerà una versione predefinita, che contiene alcune delle descrizioni più comuni. </para>
 
 <para
 >Diversi esempi di file CSV sono forniti (nella cartella <filename class="directory"
@@ -725,91 +560,7 @@
 
 <para
 >Quando questa estensione è stata creata, sono stati presi ad esempio solo alcuni formati di investimento, e potrebbe accadere di incontrarne uno che non può essere gestito correttamente. Se si trova un file del genere, inviare un esempio appropriato (modificato per rimuovere o sostituire le informazioni personali) alla lista degli utenti &userlist; di &kmymoney; o alla lista degli sviluppatori &devlist;, lo sviluppatore farà il suo meglio per modificare l'estensione affinché possa gestirlo. </para>
-
-<sect4
-><title
->Finestra di configurazione dell'importatore CSV</title>
-<para
->Infine, ci sono alcuni altri elementi che possono essere configurati in una finestra richiamata tramite la <link linkend="details.settings.plugins.csvimporter"
->finestra di configurazione dell'importatore CSV</link
->, che può essere richiamata dalla pagina Estensioni della finestra di configurazione principale di KMyMoney. Ciò include quali elementi saranno rilevati automaticamente dall'importatore e quale profilo sarà utilizzato se si desidera che l'importatore esporti un file QIF, come menzionato sopra. </para>
-</sect4>
 </sect3>
 </sect2>
-
-<sect2 id="details.impexp.csvexp">
-<sect2info>
-  <author
->&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
-</sect2info>
-<title
->Esportatore CSV</title>
-
-<para
->Per esportare un file CSV, scegliere la voce di menu <menuchoice
-><guimenu
->File</guimenu
-><guisubmenu
->Esporta</guisubmenu
-> <guimenuitem
->CSV...</guimenuitem
-></menuchoice
->. Se CSV non compare sotto Esporta, l'estensione di esportazione CSV non è installata correttamente. Vedere la sezione precedente. </para>
-
-<screenshot>
-  <screeninfo
->esportatore CSV</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="csvexport.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->esportatore CSV</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
-
-<para
->Notare che un file CSV esportato può includere dati di un solo conto. </para>
-
-<para
->Specificare il nome del file CSV esportato immettendo il percorso completo nel campo <guilabel
->File in cui esportare</guilabel
-> oppure facendo clic su <guilabel
->Sfoglia</guilabel
-> e navigando fino ad esso nella finestra Salva file. Scegliere quale conto esportare con il menu a tendina <guilabel
->Conto da esportare</guilabel
->. </para>
-
-<para
->Il periodo di tempo dei dati esportati è controllato dai campi della data <guilabel
->Intervallo date</guilabel
-> <guilabel
->Inizia il</guilabel
-> e <guilabel
->Finisce il</guilabel
->. I valori predefiniti rappresentano l'intervallo di date completo dell'intero file di dati e vengono modificati quando si seleziona un conto da esportare. </para>
-
-<para
->In modo predefinito, il <guilabel
->separatore di campo</guilabel
-> è una virgola, ma è possibile utilizzare anche una tabulazione o un punto e virgola. </para>
-
-<para
->Se si seleziona il pulsante di scelta <guilabel
->Contenuto da esportare</guilabel
-> <guilabel
->Conto</guilabel
->, i dati esportati saranno le transazioni dal conto specificato e dall'intervallo di date. Tuttavia, se si seleziona il pulsante di scelta <guilabel
->Categorie</guilabel
->, il file esportato conterrà una riga per ogni categoria definita. Per le categorie di livello superiore, viene mostrato il nome della categoria e una <quote
->I</quote
-> o una <quote
->E</quote
-> per indicare se la categoria è Entrate o Spese. Per le categorie non di livello superiore, viene mostrata anche la categoria padre. </para>
-
-<para
->L'esportatore produrrà un insieme di colonne appropriato per il tipo di conto esportato. </para>
-</sect2>
 </sect1>
+

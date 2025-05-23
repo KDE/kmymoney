@@ -617,15 +617,15 @@
 >. </para>
 
 <para
->Sidtolken letar efter en symbol, ett datum och en kurs. Reguljära uttryck talar om för den hur dessa objekt ska plockas ut från sidan. Granska gärna dokumentation för klassen <ulink url="https://doc.qt.io/qt-5/qregularexpression.html"
->QRegularExpression</ulink
->, för att se dem exakta syntaxen för reguljära uttryck använda av &kmymoney;. Det ska finnas precis ett urvalsuttryck, omgivet av parenteser, i varje reguljärt uttrycksfält. Datumformatet talar dessutom om ordningen av år, månad och dag för datumtolken. Datumformatet ska alltid ha formen "%x %x %x", där x är y, m eller d. Datumtolken är mycket smart. <quote
+>The page parser looks for a symbol, a date, and a price. Regular expressions tell it how to extract those items from the page. Please review the documentation for the <ulink url="https://doc.qt.io/qt-5/qregularexpression.html"
+>QRegularExpression class</ulink
+> for the exact syntax regular expressions used by &kmymoney;. There should be exactly one capture expression, surrounded by parentheses, in each regexp field. The date format further tells the date parser the order of year, month, and day. This date format should always be in the form "%x %x %x". where x is y, m, or d. The date parser is very smart. <quote
 >%m %d %y</quote
-> tolkar <quote
+> will parse <quote
 >December 31st, 2005</quote
-> lika lätt som <quote
+> as easily as <quote
 >12/31/05</quote
->. År med två siffror tolkas som om de är i intervallet 1950-2049. </para>
+>. Two digit years are interpreted as being in the range of 1950-2049. </para>
 </sect3>
 </sect2>
 </sect1>

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-18 02:01+0000\n"
+"POT-Creation-Date: 2025-05-23 03:30+0000\n"
 "PO-Revision-Date: 2009-12-24 06:59-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -271,10 +271,10 @@ msgstr ""
 
 #: kmymoney/dialogs/accountcreator.cpp:76
 #, fuzzy, kde-format
-#| msgid "Create Tables"
+#| msgid "Create"
 msgctxt "Create undo action"
 msgid "Create account"
-msgstr "Cruthaigh Táblaí"
+msgstr "Cruthaigh"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
 #, fuzzy, kde-format
@@ -1578,11 +1578,10 @@ msgid "[No identifier]"
 msgstr "Aistriú bainc"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:500
-#, fuzzy, kde-format
-#| msgid "Account Details"
+#, kde-format
 msgctxt "@info online update price info"
 msgid "No security selected."
-msgstr "Mionsonraí an Chuntais"
+msgstr ""
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:510
 #, fuzzy, kde-format
@@ -1936,11 +1935,10 @@ msgstr "Codán"
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, m_searchWidget)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:26
-#, fuzzy, kde-format
-#| msgid "March"
+#, kde-format
 msgctxt "Placeholder text for search bar"
 msgid "Search..."
-msgstr "Márta"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_showAllPrices)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:52
@@ -2549,11 +2547,9 @@ msgstr "Feidhmchlár"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:889
-#, fuzzy, kde-format
-#| msgctxt "Reconciliation state 'Reconciled'"
-#| msgid "Reconciled"
+#, kde-format
 msgid "Never create"
-msgstr "Réitithe"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_preferredStatementDate)
@@ -2565,10 +2561,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:899
-#, fuzzy, kde-format
-#| msgid "category"
+#, kde-format
 msgid "Create automatically"
-msgstr "catagóir"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_budgetGroupBox)
 #. i18n: ectx: Menu (budget_context_menu)
@@ -3342,10 +3337,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:457
-#, fuzzy, kde-format
-#| msgid "Go to account"
+#, kde-format
 msgid "Hide accounts with a zero balance from Accounts"
-msgstr "Féach ar chuntas"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:464
@@ -5181,9 +5175,9 @@ msgstr "Sábháil Tuairisc"
 
 #: kmymoney/kmymoney.cpp:1502
 #, fuzzy, kde-format
-#| msgid "Save Report"
+#| msgid "Copy"
 msgid "Copy report"
-msgstr "Sábháil Tuairisc"
+msgstr "Cóipeáil"
 
 #: kmymoney/kmymoney.cpp:1503
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:215
@@ -5194,9 +5188,10 @@ msgstr "Cumraigh"
 
 #: kmymoney/kmymoney.cpp:1504
 #, fuzzy, kde-format
-#| msgid "Save Report"
+#| msgctxt "CSV Importer dialog title"
+#| msgid "CSV Importer"
 msgid "Export report"
-msgstr "Sábháil Tuairisc"
+msgstr "Iompórtálaí CSV"
 
 #: kmymoney/kmymoney.cpp:1505
 #, fuzzy, kde-format
@@ -5206,9 +5201,9 @@ msgstr "Scrios"
 
 #: kmymoney/kmymoney.cpp:1506
 #, fuzzy, kde-format
-#| msgid "Save Report"
+#| msgid "Closed tag"
 msgid "Close report"
-msgstr "Sábháil Tuairisc"
+msgstr "Clib dhúnta"
 
 #: kmymoney/kmymoney.cpp:1507
 #, kde-format
@@ -5216,11 +5211,9 @@ msgid "Toggle chart"
 msgstr ""
 
 #: kmymoney/kmymoney.cpp:1508
-#, fuzzy, kde-format
-#| msgctxt "Scheduled Transaction payment type"
-#| msgid "Bank transfer"
+#, kde-format
 msgid "Edit tab order"
-msgstr "Aistriú bainc"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1511
 #, kde-format
@@ -5257,28 +5250,22 @@ msgid "Start reconciling the currently selected account"
 msgstr ""
 
 #: kmymoney/kmymoney.cpp:1661
-#, fuzzy, kde-format
-#| msgctxt "Reconciliation state 'Reconciled'"
-#| msgid "Reconciled"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Postpone the current reconciliation"
-msgstr "Réitithe"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1662
-#, fuzzy, kde-format
-#| msgctxt "Reconciliation state 'Reconciled'"
-#| msgid "Reconciled"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Finish the current reconciliation"
-msgstr "Réitithe"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1663
-#, fuzzy, kde-format
-#| msgctxt "Reconciliation state 'Reconciled'"
-#| msgid "Reconciled"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Cancel the current reconciliation"
-msgstr "Réitithe"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1771
 #, kde-format
@@ -5316,9 +5303,9 @@ msgstr ""
 
 #: kmymoney/kmymoney.cpp:2254
 #, fuzzy, kde-format
-#| msgid "Select a year"
+#| msgid "Fraction"
 msgid "Unable to duplicate transaction(s)"
-msgstr "Roghnaigh bliain"
+msgstr "Codán"
 
 #: kmymoney/kmymoney.cpp:2366
 #, fuzzy, kde-format
@@ -6360,18 +6347,19 @@ msgid "Matched"
 msgstr "Comhoiriúnaithe"
 
 #: kmymoney/models/statementmodel.cpp:105
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Templates"
 msgctxt "@title:column Shows number of duplicate transactions"
 msgid "Duplicates"
-msgstr ""
+msgstr "Teimpléid"
 
 #: kmymoney/models/statementmodel.cpp:107
 #, fuzzy, kde-format
-#| msgctxt "Reconciliation state 'Reconciled'"
-#| msgid "Reconciled"
+#| msgctxt "Scheduled Transaction payment type"
+#| msgid "Bank transfer"
 msgctxt "@title:column Shows number of create payees"
 msgid "Payees created"
-msgstr "Réitithe"
+msgstr "Aistriú bainc"
 
 #: kmymoney/models/statementmodel.cpp:117
 #: kmymoney/mymoney/storage/accountsmodel.cpp:503
@@ -9957,9 +9945,10 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_numberColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:119
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Account Details"
 msgid "Clear number field selection."
-msgstr ""
+msgstr "Mionsonraí an Chuntais"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_dateCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:157
@@ -9971,9 +9960,10 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_dateColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:167
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Account Details"
 msgid "Clear date field selection."
-msgstr ""
+msgstr "Mionsonraí an Chuntais"
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_payee)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:180
@@ -9990,9 +9980,10 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_payeeColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:209
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Account Details"
 msgid "Clear payee field selection."
-msgstr ""
+msgstr "Mionsonraí an Chuntais"
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_category)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:228
@@ -10010,9 +10001,10 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_categoryColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:257
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Account Details"
 msgid "Clear category field selection."
-msgstr ""
+msgstr "Mionsonraí an Chuntais"
 
 #. i18n: ectx: property (text), widget (QLabel, memoLabel)
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -10052,9 +10044,10 @@ msgstr "Roghnaigh Comhad"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_memoColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:315
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Account Details"
 msgid "Clear memo field selection."
-msgstr ""
+msgstr "Mionsonraí an Chuntais"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkBalance)
 #. i18n: ectx: property (text), widget (QTreeWidget, accountsList)
@@ -10077,9 +10070,10 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_balanceColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:351
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Account Details"
 msgid "Clear balance field selection."
-msgstr ""
+msgstr "Mionsonraí an Chuntais"
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_amount)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:409
@@ -10116,9 +10110,10 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_creditDebitIndicatorColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:468
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Account Details"
 msgid "Clear indicator field selection."
-msgstr ""
+msgstr "Mionsonraí an Chuntais"
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_debit)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:478
@@ -10180,9 +10175,9 @@ msgstr ""
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_debitColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:609
 #, fuzzy, kde-format
-#| msgid "Execution"
+#| msgid "Account Details"
 msgid "Clear debit field selection."
-msgstr "Rith"
+msgstr "Mionsonraí an Chuntais"
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_credits)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:625
@@ -10202,9 +10197,9 @@ msgstr ""
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_creditColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:654
 #, fuzzy, kde-format
-#| msgid "Execution"
+#| msgid "Account Details"
 msgid "Clear credit field selection."
-msgstr "Rith"
+msgstr "Mionsonraí an Chuntais"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_clear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:719
@@ -13079,10 +13074,9 @@ msgstr "MS-Money Plus"
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:475
 #: kmymoney/plugins/ofx/import/importoption.ui:56
-#, fuzzy, kde-format
-#| msgid "Fraction"
+#, kde-format
 msgid "Invert sign of transaction amount"
-msgstr "Codán"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_invertAmount)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:482
@@ -13131,9 +13125,9 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:542
 #: kmymoney/plugins/ofx/import/importoption.ui:90
 #, fuzzy, kde-format
-#| msgid "Select a year"
+#| msgid "Fraction"
 msgid "Method to detect duplicate transactions during import"
-msgstr "Roghnaigh bliain"
+msgstr "Codán"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:71
 #, kde-format
@@ -14881,11 +14875,10 @@ msgid "Budget based on forecast"
 msgstr ""
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:460
-#, fuzzy, kde-format
-#| msgid "Fraction"
+#, kde-format
 msgctxt "@item:inmenu To make it income"
 msgid "Change to income"
-msgstr "Codán"
+msgstr ""
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:465
 #, kde-format
@@ -16247,9 +16240,10 @@ msgstr[4] ""
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
 #, fuzzy, kde-format
-#| msgid "Saving file..."
+#| msgctxt "@item KDChart color palette"
+#| msgid "Default"
 msgid "CSS files"
-msgstr "Comhad á shábháil..."
+msgstr "Réamhshocrú"
 
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
@@ -16615,10 +16609,9 @@ msgid "&Export to PDF files"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:816
-#, fuzzy, kde-format
-#| msgid "Save Report"
+#, kde-format
 msgid "Export into directory"
-msgstr "Sábháil Tuairisc"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KReportsView)
 #: kmymoney/plugins/views/reports/kreportsview.ui:14
@@ -18572,17 +18565,15 @@ msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:244
-#, fuzzy, kde-format
-#| msgid "Go to account"
+#, kde-format
 msgid "Hide zero balance accounts from Accounts"
-msgstr "Féach ar chuntas"
+msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:248
-#, fuzzy, kde-format
-#| msgid "Go to account"
+#, kde-format
 msgid "Hide zero balance accounts from Home"
-msgstr "Féach ar chuntas"
+msgstr ""
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:252
@@ -18629,9 +18620,11 @@ msgstr ""
 
 #. i18n: ectx: label, entry (ShowReconciliationMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:284
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Reconciliation state 'Reconciled'"
+#| msgid "Reconciled"
 msgid "Show reconciliation entries with date and balance"
-msgstr ""
+msgstr "Réitithe"
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:293
@@ -19049,11 +19042,10 @@ msgid "Enter category for fees"
 msgstr "Ráta úis"
 
 #: kmymoney/views/investtransactioneditor.cpp:672
-#, fuzzy, kde-format
-#| msgid "Amount"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
-msgstr "Méid"
+msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:678
 #, kde-format
@@ -19062,11 +19054,10 @@ msgid "Enter category for interest"
 msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:681
-#, fuzzy, kde-format
-#| msgid "Amount"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
-msgstr "Méid"
+msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:686
 #, fuzzy, kde-format
@@ -19098,11 +19089,10 @@ msgstr ""
 #. i18n: ectx: property (toolTip), widget (KMyMoneyDateEdit, dateEdit)
 #: kmymoney/views/investtransactioneditor.ui:73
 #: kmymoney/views/newtransactioneditor.ui:256
-#, fuzzy, kde-format
-#| msgid "Schedule"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The posting date of the transaction."
-msgstr "Sceideal"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (KMyMoneyAccountCombo, feesCombo)
 #: kmymoney/views/investtransactioneditor.ui:126
@@ -19217,11 +19207,10 @@ msgstr ""
 
 #: kmymoney/views/kaccountsview.cpp:170
 #: kmymoney/views/kinstitutionsview.cpp:208
-#, fuzzy, kde-format
-#| msgid "Number: %1"
+#, kde-format
 msgctxt "Approximate net worth"
 msgid "Net Worth: ~%1"
-msgstr "Uimhir: %1"
+msgstr ""
 
 #: kmymoney/views/kaccountsview.cpp:171
 #: kmymoney/views/kinstitutionsview.cpp:209
@@ -19344,11 +19333,10 @@ msgid "This account is still mapped to an online account"
 msgstr ""
 
 #: kmymoney/views/kcategoriesview.cpp:153
-#, fuzzy, kde-format
-#| msgid "Memo"
+#, kde-format
 msgctxt "Approximate loss"
 msgid "Loss: ~%1"
-msgstr "Meamram"
+msgstr ""
 
 #: kmymoney/views/kcategoriesview.cpp:154
 #, fuzzy, kde-format
@@ -19357,11 +19345,10 @@ msgid "Loss: %1"
 msgstr "Meamram"
 
 #: kmymoney/views/kcategoriesview.cpp:157
-#, fuzzy, kde-format
-#| msgid "Amount: %1"
+#, kde-format
 msgctxt "Approximate profit"
 msgid "Profit: ~%1"
-msgstr "Méid: %1"
+msgstr ""
 
 #: kmymoney/views/kcategoriesview.cpp:158
 #, fuzzy, kde-format
@@ -19760,10 +19747,11 @@ msgstr "Sceideal"
 
 #: kmymoney/views/khomeview_p.h:685
 #, fuzzy, kde-format
-#| msgid "Schedule"
+#| msgctxt "Scheduled transaction type"
+#| msgid "Loan payment"
 msgctxt "@title Home page sub-section"
 msgid "Overdue payments"
-msgstr "Sceideal"
+msgstr "Íocaíocht ar iasacht"
 
 #: kmymoney/views/khomeview_p.h:721
 #, fuzzy, kde-format
@@ -19881,11 +19869,10 @@ msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1421
 #, fuzzy, kde-format
-#| msgctxt "Reconciliation flag C"
 #| msgid "C"
 msgctxt "@title:column table on home page: cleared"
 msgid "C"
-msgstr "G"
+msgstr "C"
 
 #: kmymoney/views/khomeview_p.h:1425
 #, fuzzy, kde-format
@@ -20086,10 +20073,9 @@ msgstr ""
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_searchSecurities)
 #: kmymoney/views/kinvestmentview.ui:122
-#, fuzzy, kde-format
-#| msgid "March"
+#, kde-format
 msgid "Search..."
-msgstr "Márta"
+msgstr ""
 
 #: kmymoney/views/kmymoneyview.cpp:193
 #, kde-format
@@ -20410,9 +20396,10 @@ msgstr "Aistriú bainc"
 
 #. i18n: ectx: property (text), widget (QLabel, urlTemplateLabel)
 #: kmymoney/views/kpayeesview.ui:533
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Templates"
 msgid "Url template"
-msgstr ""
+msgstr "Teimpléid"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_3)
 #: kmymoney/views/kpayeesview.ui:548
@@ -20672,10 +20659,11 @@ msgid "Criteria"
 msgstr "Critéir"
 
 #: kmymoney/views/ksearchtransactiondlg.cpp:64
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Fraction"
 msgctxt "@info:tooltip for find transaction apply button"
 msgid "Search transactions"
-msgstr ""
+msgstr "Codán"
 
 #: kmymoney/views/ksearchtransactiondlg.cpp:110
 #, kde-format
@@ -20926,24 +20914,23 @@ msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:963
 #, fuzzy, kde-format
-#| msgid "Schedule"
+#| msgid "Select a year"
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
-msgstr "Sceideal"
+msgstr "Roghnaigh bliain"
 
 #: kmymoney/views/ledgerview.cpp:964
 #, fuzzy, kde-format
-#| msgid "Schedule"
+#| msgid "Select a year"
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
-msgstr "Sceideal"
+msgstr "Roghnaigh bliain"
 
 #: kmymoney/views/ledgerview.cpp:967
-#, fuzzy, kde-format
-#| msgid "Fraction"
+#, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
-msgstr "Codán"
+msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:968
 #, fuzzy, kde-format
@@ -20969,11 +20956,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:994
-#, fuzzy, kde-format
-#| msgid "Fraction"
+#, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
-msgstr "Codán"
+msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:995
 #, fuzzy, kde-format
@@ -21197,19 +21183,18 @@ msgstr "Cóipeáil"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, numberEdit)
 #: kmymoney/views/newtransactioneditor.ui:24
-#, fuzzy, kde-format
-#| msgid "Fraction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The check number used for this transaction."
-msgstr "Codán"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (CreditDebitEdit, creditDebitEdit)
 #: kmymoney/views/newtransactioneditor.ui:72
 #, fuzzy, kde-format
-#| msgid "Schedule"
+#| msgid "Fraction"
 msgctxt "@info:tooltip"
 msgid "Enter the amount of the transaction."
-msgstr "Sceideal"
+msgstr "Codán"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, costCenterCombo)
 #: kmymoney/views/newtransactioneditor.ui:194
@@ -21221,10 +21206,10 @@ msgstr ""
 #. i18n: ectx: property (toolTip), widget (KMyMoneyAccountCombo, categoryCombo)
 #: kmymoney/views/newtransactioneditor.ui:281
 #, fuzzy, kde-format
-#| msgid "Schedule"
+#| msgid "Fraction"
 msgctxt "@info:tooltip"
 msgid "Enter the category or counter account of the transaction."
-msgstr "Sceideal"
+msgstr "Codán"
 
 #: kmymoney/views/newtransactionform.cpp:129
 #, kde-format
@@ -22871,9 +22856,9 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:265
 #, fuzzy, kde-format
-#| msgid "Create Tables"
+#| msgid "Online Accounts"
 msgid "Favorite account"
-msgstr "Cruthaigh Táblaí"
+msgstr "Cuntais Ar Líne"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel14)
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:27
@@ -23909,9 +23894,9 @@ msgstr ""
 #. i18n: ectx: property (title), widget (KInvestmentDetailsWizardPage, KInvestmentDetailsWizardPage)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:14
 #, fuzzy, kde-format
-#| msgid "Sort options"
+#| msgid "Securities"
 msgid "Security details"
-msgstr "Roghanna sórtála"
+msgstr "Fuillimh"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:23
@@ -24078,10 +24063,10 @@ msgstr ""
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:217
 #, fuzzy, kde-format
-#| msgid "Sort options"
+#| msgid "Securities"
 msgctxt "@info:tab Security edit wizard detail page"
 msgid "Security details"
-msgstr "Roghanna sórtála"
+msgstr "Fuillimh"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:250
 #, kde-format
@@ -25385,10 +25370,9 @@ msgid ""
 msgstr ""
 
 #: tools/kmmreport-export.cpp:116
-#, fuzzy, kde-format
-#| msgid "Save Report"
+#, kde-format
 msgid "Export KMyMoney reports"
-msgstr "Sábháil Tuairisc"
+msgstr ""
 
 #: tools/kmmreport-export.cpp:120
 #, kde-format
@@ -25401,10 +25385,9 @@ msgid "Export in HTML format"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:126
-#, fuzzy, kde-format
-#| msgid "Save Report"
+#, kde-format
 msgid "Export in xml format"
-msgstr "Sábháil Tuairisc"
+msgstr ""
 
 #: tools/kmmreport-export.cpp:129
 #, kde-format
@@ -25453,47 +25436,29 @@ msgid "saving report '%1' into '%2'"
 msgstr ""
 
 #, fuzzy
-#~| msgid "Select Account"
-#~ msgid "Select category or account."
-#~ msgstr "Roghnaigh Cuntas"
-
-#, fuzzy
-#~| msgid "Stock"
-#~ msgid "Stock Name"
-#~ msgstr "Stoc"
-
-#~ msgctxt "Price source"
-#~ msgid "Source"
-#~ msgstr "Foinse"
-
-#, fuzzy
-#~| msgctxt "@action move item up"
-#~| msgid "Up"
-#~ msgid "Upd"
-#~ msgstr "Suas"
-
-#, fuzzy
-#~| msgid "Reset"
-#~ msgid "Res"
-#~ msgstr "Athshocraigh"
-
-#~ msgid "Close this window"
-#~ msgstr "Dún an fhuinneog seo"
-
-#, fuzzy
-#~| msgid "Preferred"
-#~ msgid "Preferred account"
-#~ msgstr "De rogha"
-
-#, fuzzy
-#~| msgid "Select Account"
-#~ msgid "Select Account:"
-#~ msgstr "Roghnaigh Cuntas"
-
-#, fuzzy
 #~| msgid "File already exists"
 #~ msgid "Price Already Exists"
 #~ msgstr "Tá an comhad ann cheana"
+
+#, fuzzy
+#~| msgid "Fraction"
+#~ msgctxt "@info:tooltip for find transaction Open button"
+#~ msgid "Search transactions"
+#~ msgstr "Codán"
+
+#~ msgid "MyDialog"
+#~ msgstr "MoDhialóg"
+
+#~ msgid "Delete..."
+#~ msgstr "Scrios..."
+
+#, fuzzy
+#~| msgid "Account Number"
+#~ msgid "Routing Number:"
+#~ msgstr "Uimhir an Chuntais"
+
+#~ msgid "Clear &All"
+#~ msgstr "Glan g&ach rud"
 
 #, fuzzy
 #~| msgid "Symbol"
@@ -25516,195 +25481,8 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Delete price..."
-#~ msgctxt "@title:window"
 #~ msgid "Delete quote source"
 #~ msgstr "Scrios praghas..."
-
-#, fuzzy
-#~| msgid "Unable to open file '%1' for writing"
-#~ msgid "Unable to update price for %1"
-#~ msgstr "Ní féidir comhad '%1' a oscailt chun scríobh ann"
-
-#, fuzzy
-#~| msgid "Unable to open file '%1' for writing"
-#~ msgid "Unable to update price for %1 (error encountered: '%2')"
-#~ msgstr "Ní féidir comhad '%1' a oscailt chun scríobh ann"
-
-#, fuzzy
-#~| msgid "Tag"
-#~ msgctxt "Split header"
-#~ msgid "Tag"
-#~ msgstr "Clib"
-
-#, fuzzy
-#~| msgid "Online Accounts"
-#~ msgid "Invalid account"
-#~ msgstr "Cuntais Ar Líne"
-
-#, fuzzy
-#~| msgid ""
-#~| "*.csv *.PRN *.txt|CSV Files\n"
-#~| "*|All files"
-#~ msgid ""
-#~ "*.css|CSS files\n"
-#~ "*|All files (*)"
-#~ msgstr ""
-#~ "*.csv *.PRN *.txt|Comhaid CSV\n"
-#~ "*|Gach comhad"
-
-#, fuzzy
-#~| msgid "Sort options"
-#~ msgctxt "@title:menu budget context menu"
-#~ msgid "Budget options"
-#~ msgstr "Roghanna sórtála"
-
-#, fuzzy
-#~| msgid "MS-Money Plus"
-#~ msgid "KMyMoney print check"
-#~ msgstr "MS-Money Plus"
-
-#, fuzzy
-#~| msgid "From"
-#~ msgctxt "Payer"
-#~ msgid "From"
-#~ msgstr "Ó"
-
-#, fuzzy
-#~| msgid "C"
-#~ msgctxt "@title:column"
-#~ msgid "CC"
-#~ msgstr "C"
-
-#, fuzzy
-#~| msgid "Loading %1..."
-#~ msgid "Loading cost center..."
-#~ msgstr "%1 á luchtú..."
-
-#, fuzzy
-#~| msgid "Fraction"
-#~ msgctxt "Question about the accept action"
-#~ msgid "Do you want to accept the imported transaction now?"
-#~ msgstr "Codán"
-
-#, fuzzy
-#~| msgid "Fraction"
-#~ msgctxt "@title:window"
-#~ msgid "Accept transaction"
-#~ msgstr "Codán"
-
-#~ msgid "Copy"
-#~ msgstr "Cóipeáil"
-
-#, fuzzy
-#~| msgctxt "Reconciliation state 'Reconciled'"
-#~| msgid "Reconciled"
-#~ msgid "Last Reconciled"
-#~ msgstr "Réitithe"
-
-#, fuzzy
-#~| msgid "General Settings"
-#~ msgid "* General changes"
-#~ msgstr "Socruithe Ginearálta"
-
-#, fuzzy
-#~| msgid "Import"
-#~ msgid "* Im-/Exporter"
-#~ msgstr "Iompórtáil"
-
-#, fuzzy
-#~| msgctxt "CSV Importer dialog title"
-#~| msgid "CSV Importer"
-#~ msgid "- Improved CSV importer"
-#~ msgstr "Iompórtálaí CSV"
-
-#, fuzzy
-#~| msgctxt "CSV Importer dialog title"
-#~| msgid "CSV Importer"
-#~ msgid "- Added CSV exporter"
-#~ msgstr "Iompórtálaí CSV"
-
-#, fuzzy
-#~| msgid "Import options"
-#~ msgid "- Improved payee matching when importing transactions"
-#~ msgstr "Roghanna iompórtála"
-
-#, fuzzy
-#~| msgid "Online Accounts"
-#~ msgid "* Online services"
-#~ msgstr "Cuntais Ar Líne"
-
-#, fuzzy
-#~| msgid "Closed"
-#~ msgctxt ""
-#~ msgid "Closed"
-#~ msgstr "Dúnta"
-
-#, fuzzy
-#~| msgctxt "@title header of the currency name column"
-#~| msgid "Name"
-#~ msgctxt "OnlineJob"
-#~ msgid "Name"
-#~ msgstr "Ainm"
-
-#~ msgid "Delete..."
-#~ msgstr "Scrios..."
-
-#~ msgid "Ratio"
-#~ msgstr "Cóimheas"
-
-#~ msgid "Clear &All"
-#~ msgstr "Glan g&ach rud"
-
-#~ msgid "Unassigned"
-#~ msgstr "Gan sannadh"
-
-#~ msgid "Sell"
-#~ msgstr "Díol"
-
-#~ msgid "Buy"
-#~ msgstr "Ceannaigh"
-
-#~ msgctxt "Unknown reconciliation state"
-#~ msgid "Unknown"
-#~ msgstr "Anaithnid"
-
-#~ msgid "&Transfer"
-#~ msgstr "&Aistrigh"
-
-#~ msgid "&Decrease"
-#~ msgstr "Clómhéid Níos &Lú"
-
-#~ msgid "&Increase"
-#~ msgstr "Clómhéid Níos &Mó"
-
-#, fuzzy
-#~| msgid "Date:"
-#~ msgid "Date: %1"
-#~ msgstr "Dáta:"
-
-#, fuzzy
-#~| msgid "Unknown"
-#~ msgctxt "Name for unknown payee"
-#~ msgid "Unknown"
-#~ msgstr "Anaithnid"
-
-#, fuzzy
-#~| msgid "Type: %1"
-#~ msgid "Payee: %1"
-#~ msgstr "Cineál: %1"
-
-#, fuzzy
-#~| msgid "Memo"
-#~ msgid "Memo: %1"
-#~ msgstr "Meamram"
-
-#~ msgid "Go to '%1'"
-#~ msgstr "Téigh go '%1'"
-
-#, fuzzy
-#~| msgid "Select a year"
-#~ msgid "Unable to delete transaction(s)"
-#~ msgstr "Roghnaigh bliain"
 
 #~ msgid "Thomas Baumgart"
 #~ msgstr "Thomas Baumgart"
@@ -25755,6 +25533,14 @@ msgstr ""
 #~ msgid "Wolfgang Rohdewald"
 #~ msgstr "Wolfgang Rohdewald"
 
+#~ msgctxt "Unknown reconciliation state"
+#~ msgid "Unknown"
+#~ msgstr "Anaithnid"
+
+#~ msgctxt "Flag for unknown reconciliation state"
+#~ msgid "?"
+#~ msgstr "?"
+
 #, fuzzy
 #~| msgid "C"
 #~ msgctxt "Column heading for Cost Center"
@@ -25762,68 +25548,33 @@ msgstr ""
 #~ msgstr "C"
 
 #, fuzzy
-#~| msgid "Bank Code"
-#~ msgctxt ""
-#~ "Column heading for Bank Code. Use a generic form, do not translate using "
-#~ "a culture-specific term, e.g. 'Routing Number' (en_US) or 'Sort "
-#~ "Code' (en_GB)"
-#~ msgid "Bank Code"
-#~ msgstr "Cód Bainc"
+#~| msgid "Standing order"
+#~ msgctxt "IBAN, SWIFT, etc."
+#~ msgid "Sort Code"
+#~ msgstr "Buanordú"
 
 #, fuzzy
-#~| msgid "Full name"
-#~ msgctxt ""
-#~ "Tooltip for 'Name' column. Used in Account, Category and Institution "
-#~ "context, so avoid being too specific"
-#~ msgid "Full name"
-#~ msgstr "Ainm iomlán"
-
-#, fuzzy
-#~| msgid "Type"
-#~ msgctxt ""
-#~ "Toolip for a 'Type' column, used in both Account and Category context"
-#~ msgid "Type"
-#~ msgstr "Cineál"
-
-#, fuzzy
-#~| msgid "Go to account"
-#~ msgid "Do not show closed accounts"
-#~ msgstr "Féach ar chuntas"
-
-#, fuzzy
-#~| msgctxt "@action update quotes from online quote source"
-#~| msgid "Update"
-#~ msgctxt "@action:button Update button in tags vew"
-#~ msgid "Update"
-#~ msgstr "Nuashonraigh"
-
-#, fuzzy
-#~| msgid "Sort options"
-#~ msgctxt "@title:menu Bugdet context menu"
-#~ msgid "Budget options"
-#~ msgstr "Roghanna sórtála"
-
-#, fuzzy
-#~| msgid "Reports"
-#~ msgid "Budgets view"
-#~ msgstr "Tuairiscí"
-
-#, fuzzy
-#~| msgid "Forecast"
-#~ msgid "Forecast view"
-#~ msgstr "Réamhaisnéis"
-
-#, fuzzy
-#~| msgid "Reports"
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Budgets view"
-#~ msgstr "Tuairiscí"
+#~| msgid "Amount"
+#~ msgid "Cost Center"
+#~ msgstr "Méid"
 
 #, fuzzy
 #~| msgid "Checking"
 #~ msgctxt "It's about printing bank checks"
 #~ msgid "Check printing"
 #~ msgstr "Á Sheiceáil"
+
+#, fuzzy
+#~| msgctxt "@item no payments were entered for a loan"
+#~| msgid "No"
+#~ msgctxt "@label The word to be printed for no fractional part as in No/00"
+#~ msgid "No"
+#~ msgstr "Ní raibh"
+
+#, fuzzy
+#~| msgid "Online Accounts"
+#~ msgid "Invalid account"
+#~ msgstr "Cuntais Ar Líne"
 
 #, fuzzy
 #~| msgctxt "CSV Importer dialog title"
@@ -25849,6 +25600,21 @@ msgstr ""
 #~ msgstr "Socruithe na Tuairisce"
 
 #, fuzzy
+#~| msgid "MS-Money Plus"
+#~ msgid "KMyMoney print check"
+#~ msgstr "MS-Money Plus"
+
+#~ msgid "Execute"
+#~ msgstr "Rith"
+
+#~ msgctxt "Message title"
+#~ msgid "No Jobs"
+#~ msgstr "Níl aon jabanna ann"
+
+#~ msgid "Jobs"
+#~ msgstr "Jabanna"
+
+#, fuzzy
 #~| msgid "Import"
 #~ msgid "OFX Importer"
 #~ msgstr "Iompórtáil"
@@ -25859,16 +25625,197 @@ msgstr ""
 #~ msgstr "Iompórtáil"
 
 #, fuzzy
-#~| msgctxt "location of debit column"
-#~| msgid "Debits"
-#~ msgid "Debit"
-#~ msgstr "Fiachais"
+#~| msgid "Sort options"
+#~ msgid "Budgets view"
+#~ msgstr "Roghanna sórtála"
+
+#, fuzzy
+#~| msgctxt "@action add new price"
+#~| msgid "New"
+#~ msgctxt "New budget"
+#~ msgid "New"
+#~ msgstr "Nua"
+
+#~ msgctxt "@title header of the budget name column"
+#~ msgid "Name"
+#~ msgstr "Ainm"
+
+#, fuzzy
+#~| msgctxt "@action move item up"
+#~| msgid "Up"
+#~ msgid "Upd"
+#~ msgstr "Suas"
+
+#, fuzzy
+#~| msgid "Reset"
+#~ msgid "Res"
+#~ msgstr "Athshocraigh"
+
+#, fuzzy
+#~| msgid "Forecast"
+#~ msgid "Forecast view"
+#~ msgstr "Réamhaisnéis"
+
+#~ msgid "Copy"
+#~ msgstr "Cóipeáil"
+
+#~ msgid "Close this window"
+#~ msgstr "Dún an fhuinneog seo"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.csv *.PRN *.txt|CSV Files\n"
+#~| "*|All files"
+#~ msgid ""
+#~ "*.css|CSS files\n"
+#~ "*|All files (*)"
+#~ msgstr ""
+#~ "*.csv *.PRN *.txt|Comhaid CSV\n"
+#~ "*|Gach comhad"
+
+#, fuzzy
+#~| msgid "Loading %1..."
+#~ msgid "Loading cost center..."
+#~ msgstr "%1 á luchtú..."
+
+#, fuzzy
+#~| msgid "Saving file..."
+#~ msgid "Saving costcenters..."
+#~ msgstr "Comhad á shábháil..."
+
+#, fuzzy
+#~| msgid "Date:"
+#~ msgid "Date: %1"
+#~ msgstr "Dáta:"
+
+#, fuzzy
+#~| msgid "Unknown"
+#~ msgctxt "Name for unknown payee"
+#~ msgid "Unknown"
+#~ msgstr "Anaithnid"
+
+#, fuzzy
+#~| msgid "Type: %1"
+#~ msgid "Payee: %1"
+#~ msgstr "Cineál: %1"
+
+#, fuzzy
+#~| msgctxt "Reconciliation state 'Reconciled'"
+#~| msgid "Reconciled"
+#~ msgid "Last Reconciled"
+#~ msgstr "Réitithe"
+
+#, fuzzy
+#~| msgid "Select Account"
+#~ msgid "Select Account:"
+#~ msgstr "Roghnaigh Cuntas"
+
+#~ msgctxt "New payee"
+#~ msgid "New"
+#~ msgstr "Nua"
+
+#, fuzzy
+#~| msgid "Type"
+#~ msgid "Type/Name"
+#~ msgstr "Cineál"
+
+#~ msgid "Frequency"
+#~ msgstr "Minicíocht"
+
+#, fuzzy
+#~| msgid "General Settings"
+#~ msgid "* General changes"
+#~ msgstr "Socruithe Ginearálta"
+
+#, fuzzy
+#~| msgid "Import"
+#~ msgid "* Im-/Exporter"
+#~ msgstr "Iompórtáil"
+
+#, fuzzy
+#~| msgctxt "CSV Importer dialog title"
+#~| msgid "CSV Importer"
+#~ msgid "- Improved CSV importer"
+#~ msgstr "Iompórtálaí CSV"
+
+#, fuzzy
+#~| msgctxt "CSV Importer dialog title"
+#~| msgid "CSV Importer"
+#~ msgid "- Added CSV exporter"
+#~ msgstr "Iompórtálaí CSV"
+
+#, fuzzy
+#~| msgid "Import options"
+#~ msgid "- Improved payee matching when importing transactions"
+#~ msgstr "Roghanna iompórtála"
+
+#, fuzzy
+#~| msgid "Online Accounts"
+#~ msgid "* Online services"
+#~ msgstr "Cuntais Ar Líne"
 
 #, fuzzy
 #~| msgctxt "location of credit column"
 #~| msgid "Credits"
 #~ msgid "Credit"
 #~ msgstr "Creidmheasanna"
+
+#, fuzzy
+#~| msgctxt "location of debit column"
+#~| msgid "Debits"
+#~ msgid "Debit"
+#~ msgstr "Fiachais"
+
+#, fuzzy
+#~| msgid "Accounts"
+#~ msgid "Account Types"
+#~ msgstr "Cuntais"
+
+#~ msgctxt "The balance of the selected budget"
+#~ msgid "Balance: "
+#~ msgstr "Iarmhéid: "
+
+#, fuzzy
+#~| msgid "From"
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "Ó"
+
+#, fuzzy
+#~| msgctxt "Reconciliation state 'Reconciled'"
+#~| msgid "Reconciled"
+#~ msgid "Reconciled Balance: %1"
+#~ msgstr "Réitithe"
+
+#~ msgid "Sell"
+#~ msgstr "Díol"
+
+#~ msgid "Buy"
+#~ msgstr "Ceannaigh"
+
+#~ msgid "&Transfer"
+#~ msgstr "&Aistrigh"
+
+#~ msgid "&Decrease"
+#~ msgstr "Clómhéid Níos &Lú"
+
+#~ msgid "&Increase"
+#~ msgstr "Clómhéid Níos &Mó"
+
+#, fuzzy
+#~| msgid "Preferred"
+#~ msgid "Preferred account"
+#~ msgstr "De rogha"
+
+#, fuzzy
+#~| msgid "Account Number"
+#~ msgid "Routing number"
+#~ msgstr "Uimhir an Chuntais"
+
+#, fuzzy
+#~| msgid "Go to account"
+#~ msgid "Do not show closed accounts"
+#~ msgstr "Féach ar chuntas"
 
 #, fuzzy
 #~| msgctxt "@item reconciliation status"
@@ -25884,94 +25831,10 @@ msgstr ""
 #~ msgstr "Méid"
 
 #, fuzzy
-#~| msgctxt "@action add new price"
-#~| msgid "New"
-#~ msgctxt "New budget"
-#~ msgid "New"
-#~ msgstr "Nua"
-
-#~ msgctxt "New payee"
-#~ msgid "New"
-#~ msgstr "Nua"
-
-#~ msgid "Execute"
-#~ msgstr "Rith"
-
-#~ msgctxt "Message title"
-#~ msgid "No Jobs"
-#~ msgstr "Níl aon jabanna ann"
-
-#~ msgid "Jobs"
-#~ msgstr "Jabanna"
-
-#, fuzzy
-#~| msgid "Type"
-#~ msgid "Type/Name"
-#~ msgstr "Cineál"
-
-#~ msgid "Frequency"
-#~ msgstr "Minicíocht"
-
-#, fuzzy
-#~| msgid "Account Number"
-#~ msgid "Routing Number:"
-#~ msgstr "Uimhir an Chuntais"
-
-#, fuzzy
-#~| msgid "Standing order"
-#~ msgid "SortCode"
-#~ msgstr "Buanordú"
-
-#, fuzzy
-#~| msgid "Account Number"
-#~ msgid "Routing number"
-#~ msgstr "Uimhir an Chuntais"
-
-#, fuzzy
 #~| msgctxt "@label schedule name"
 #~| msgid "Name:"
 #~ msgid "Name:"
 #~ msgstr "Ainm:"
-
-#~ msgid "MyDialog"
-#~ msgstr "MoDhialóg"
-
-#, fuzzy
-#~| msgctxt "@item no payments were entered for a loan"
-#~| msgid "No"
-#~ msgctxt "@label The word to be printed for no fractional part as in No/00"
-#~ msgid "No"
-#~ msgstr "Ní raibh"
-
-#, fuzzy
-#~| msgid "Accounts"
-#~ msgid "Account Types"
-#~ msgstr "Cuntais"
-
-#~ msgctxt "Flag for unknown reconciliation state"
-#~ msgid "?"
-#~ msgstr "?"
-
-#, fuzzy
-#~| msgid "Amount"
-#~ msgid "Cost Center"
-#~ msgstr "Méid"
-
-#~ msgctxt "@title header of the budget name column"
-#~ msgid "Name"
-#~ msgstr "Ainm"
-
-#, fuzzy
-#~| msgid "Saving file..."
-#~ msgid "Saving costcenters..."
-#~ msgstr "Comhad á shábháil..."
-
-#~ msgctxt "The balance of the selected budget"
-#~ msgid "Balance: "
-#~ msgstr "Iarmhéid: "
-
-#~ msgid "Closed tag"
-#~ msgstr "Clib dhúnta"
 
 #~ msgctxt "@item the number 0"
 #~ msgid "zero"
@@ -26002,41 +25865,27 @@ msgstr ""
 #~ msgid "Default Account"
 #~ msgstr "Roghnaigh Cuntas"
 
-#~ msgid "Exceptions"
-#~ msgstr "Eisceachtaí"
-
-#~ msgid "Encryption"
-#~ msgstr "Criptiú"
-
-#, fuzzy
-#~| msgid "Save as..."
-#~ msgid "Save as XML..."
-#~ msgstr "Sábháil mar..."
-
-#, fuzzy
-#~| msgid ""
-#~| "*.csv *.PRN *.txt|CSV Files\n"
-#~| "*|All files"
-#~ msgid "*.kmy *.xml|KMyMoney files (*.kmy *.xml);;*|All files (*)"
-#~ msgstr ""
-#~ "*.csv *.PRN *.txt|Comhaid CSV\n"
-#~ "*|Gach comhad"
-
-#~ msgid "Set preferences"
-#~ msgstr "Socraigh sainroghanna"
-
-#~ msgid "Saving file with a new filename..."
-#~ msgstr "Comhad á shábháil le hainm comhaid nua..."
-
 #~ msgid "Do nothing"
 #~ msgstr "Ná déan faic"
-
-#~ msgid "Do Nothing"
-#~ msgstr "Ná Déan Faic"
 
 #~ msgctxt "Report settings"
 #~ msgid "Reports"
 #~ msgstr "Tuairiscí"
+
+#~ msgid "Encryption"
+#~ msgstr "Criptiú"
+
+#~ msgid "Saving file with a new filename..."
+#~ msgstr "Comhad á shábháil le hainm comhaid nua..."
+
+#~ msgid "Do Nothing"
+#~ msgstr "Ná Déan Faic"
+
+#~ msgid "Exceptions"
+#~ msgstr "Eisceachtaí"
+
+#~ msgid "Set preferences"
+#~ msgstr "Socraigh sainroghanna"
 
 #, fuzzy
 #~| msgid "Import options"

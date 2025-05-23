@@ -93,7 +93,7 @@
 ><surname
 >Ostroff</surname
 > <contrib
->Documentazione e supporto utenti.</contrib
+>Documentazione.</contrib
 > <email
 >ostroffjh@users.sourceforge.net</email
 > </author>
@@ -135,9 +135,9 @@
 >arniing@users.sourceforge.net</email
 ></author>
 
-    These persons were not previously listed as authors here, but are included in
-    credits.docbook and as authors of some chapter(s).  They should either be dropped
-    from there or included here.
+    These persons were not previously listed as authors here, but are included
+    in credits.docbook.  They should either be dropped from there or included
+    here.
 
     <author
 ><firstname
@@ -145,7 +145,7 @@
 ><surname
 >Jones</surname>
     <contrib
->Reports.  OFX Import.  Online Quotes.  Documentation.  Previous versions.</contrib>
+>Reports.  OFX Import.  Online Quotes.  Documentatation.  Previous versions.</contrib>
     <email
 >acejones@users.sourceforge.net</email
 ></author>
@@ -164,9 +164,9 @@
     There are eight additional people in credits.docbook for "Special Thanks."
     Should any of them be included here?  -->
 <date
->1/12/2024</date>
+>5/6/2022</date>
 <releaseinfo
->KMyMoney 5.2</releaseinfo>
+>KMyMoney 5.1</releaseinfo>
 </refentryinfo>
 
 <refmeta>
@@ -188,7 +188,7 @@
 >kmymoney</command
 ></refname>
 <refpurpose
->il gestore delle finanze personali per &kde;</refpurpose>
+>il gestore delle finanze personali di &kde;</refpurpose>
 </refnamediv>
 
 <refsynopsisdiv>
@@ -206,7 +206,7 @@
 > <group choice="opt"
 ><option
 >--timers</option
-> <replaceable
+><replaceable
 > colonna</replaceable
 ></group
 > <group choice="opt"
@@ -216,6 +216,10 @@
 > <group choice="opt"
 ><option
 >--trace</option
+></group
+> <group choice="opt"
+><option
+>--dump-actions</option
 ></group
 > <group choice="opt"
 ><option
@@ -231,7 +235,7 @@
 >Descrizione</title>
 
 <para
->&kmymoney; è il gestore delle finanze personali per l'ambiente &kde;. Fornisce le funzioni richieste per gestire i tuoi libretti degli assegni, i prestiti personali e categorizzare entrate e uscite usando un'interfaccia grafica con lo stile di un registro. </para>
+>&kmymoney; è il gestore delle finanze personali per l'ambiente &kde;. Fornisce le funzioni richieste per gestire i tuoi libretti degli assegni, i prestiti personali e categorizzare entrate e uscite, e altro, usando un'interfaccia grafica con lo stile di un registro. </para>
 </refsect1>
 
 <refsect1>
@@ -247,7 +251,7 @@
 ></term>
 <listitem>
 <para
->Lingua da utilizzare</para>
+>Lingua da utilizzare </para>
 </listitem>
 </varlistentry>
 
@@ -258,7 +262,7 @@
 ></term>
 <listitem>
 <para
->Non aprire l'ultimo file utilizzato</para>
+>Non aprire l'ultimo file utilizzato </para>
 </listitem>
 </varlistentry>
 
@@ -269,7 +273,7 @@
 ></term>
 <listitem>
 <para
->Abilita i timer delle prestazioni</para>
+>Abilita i timer delle prestazioni </para>
 </listitem>
 </varlistentry>
 
@@ -280,7 +284,7 @@
 ></term>
 <listitem>
 <para
->Non intercettare globalmente le eccezioni non gestite</para>
+>Non intercettare globalmente le eccezioni non gestite </para>
 </listitem>
 </varlistentry>
 
@@ -307,9 +311,7 @@
 </varlistentry>
 
 </variablelist>
-
 </refsect1>
-
 
 <refsect1>
 <title
@@ -323,12 +325,17 @@
 > <parameter
 >help:/kmymoney</parameter
 ></userinput
-> dovrebbe aprire il manuale completo. In alternativa, il manuale può essere navigato con &konqueror;, usando l'indirizzo <ulink url="help:/kmymoney"
+> dovrebbe fornirti l'accesso al manuale completo. Il manuale può anche essere sfogliato in &konqueror; fornendo l'<acronym
+>URL</acronym
+> <ulink url="help:/kmymoney"
 >help:/kmymoney</ulink
->. </member>
-<member
+>. Ci sono anche versioni in linea sia per la versione stabile che per quella di sviluppo di &kmymoney; su <ulink url="https://docs.kde.org/index.php?application=kmymoney"
+>https://docs.kde.org/index.php?application=kmymoney"</ulink
+> </member>
+
+  <member
 >kf5options(7)</member>
-<member
+  <member
 >qt5options(7)</member>
 </simplelist>
 

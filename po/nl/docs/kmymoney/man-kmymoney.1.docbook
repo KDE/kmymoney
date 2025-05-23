@@ -164,9 +164,9 @@
     There are eight additional people in credits.docbook for "Special Thanks."
     Should any of them be included here?  -->
 <date
->2016-06-17</date>
+>2022-06-05</date>
 <releaseinfo
->KMyMoney 5.0</releaseinfo>
+>KMyMoney 5.1</releaseinfo>
 </refentryinfo>
 
 <refmeta>
@@ -188,7 +188,7 @@
 >kmymoney</command
 ></refname>
 <refpurpose
->de persoonlijke financiënbeheerder door &kde;</refpurpose>
+>de persoonlijke beheerder van financiën door &kde;</refpurpose>
 </refnamediv>
 
 <refsynopsisdiv>
@@ -219,12 +219,15 @@
 ></group
 > <group choice="opt"
 ><option
+>--dump-actions</option
+></group
+> <group choice="opt"
+><option
 ><replaceable
 >bestand</replaceable
 ></option
 ></group
 > </cmdsynopsis>
-
 </refsynopsisdiv>
 
 <refsect1>
@@ -232,8 +235,7 @@
 >Beschrijving</title>
 
 <para
->&kmymoney; is de Persoonlijke financiënbeheerder door &kde;. Het biedt de functies vereist voor bijhouden van uw betalingen, het beheren van uw persoonlijke leningen en stopt uw inkomsten en uitgaven in categorieën met grafisch gebruikersinterface in de stijl van boekje met checks.</para>
-
+>&kmymoney; is de Persoonlijke financiënbeheerder door &kde;. Het biedt de functies vereist voor bijhouden van uw betalingen, het beheren van uw persoonlijke leningen en stopt uw inkomsten en uitgaven in categorieën, en meer, met een grafische gebruikersinterface in de stijl van boekje met cheques. </para>
 </refsect1>
 
 <refsect1>
@@ -309,9 +311,7 @@
 </varlistentry>
 
 </variablelist>
-
 </refsect1>
-
 
 <refsect1>
 <title
@@ -325,14 +325,17 @@
 > <parameter
 >help:/kmymoney</parameter
 ></userinput
-> u toegang geven tot de complete handboek. Daarnaast kunt u door het handboek bladeren met &konqueror; door de <acronym
+> u toegang geven tot de complete handboek. In het handboek kan ook gebladerd worden in &konqueror; met de <acronym
 >URL</acronym
 > <ulink url="help:/kmymoney"
 >help:/kmymoney</ulink
-> in te voeren.</member>
-<member
+>. Er zijn ook online versies voor zowel de stabiele als de ontwikkelversies van &kmymoney; op <ulink url="https://docs.kde.org/index.php?application=kmymoney"
+>https://docs.kde.org/index.php?application=kmymoney"</ulink
+> </member>
+
+  <member
 >kf5options(7)</member>
-<member
+  <member
 >qt5options(7)</member>
 </simplelist>
 

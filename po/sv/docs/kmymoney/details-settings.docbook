@@ -834,7 +834,7 @@
 
 <sect2>
 <title
->Startalternativ</title>
+>Startup options</title>
 <variablelist>
   <varlistentry>
     <term
@@ -1020,19 +1020,19 @@
 >Insticksprogram för checkutskrift</title>
 
 <para
->Som ett exempel finns ett insticksprogram för att skriva ut checkar, som ingår i &kmymoney;s källkod och alltid ska vara aktiverat. Det möjliggör utskrift av en check baserat på information från en markerad transaktion, med en layout som bestäms av en &HTML;-mall. Du måste använda en mall som motsvarar den förtryckta checken. För att göra det, klicka på knappen <guibutton
->Anpassa</guibutton
-> (&configicon;) för att visa inställningsdialogrutan <guilabel
->Skriv ut check</guilabel
->. Längst upp kan du markera rutan för att använda en egen mall. Till höger om den finns en knapp som visar en filvalsdialogruta för att kunna välja en alternativ mallfil. </para>
+>As one example, there is a plugin for printing checks, which is included with the source of &kmymoney;, and should always be enabled. It allows printing of a check based on the data from a selected transaction, with the layout controlled by an &HTML; template. You need to use a template which is matched to your pre-printed checks. A default, built-in template is provided. You may also choose a custom template. To do so, click on the <guibutton
+>configure</guibutton
+> (&configicon;) button to get the <guilabel
+>Check printing</guilabel
+> configuration dialog displayed. At the top you can check the box to use a custom template. To the right of that is a button which brings up a file chooser, to select an alternate template file. </para>
 
 <para
->En mallfil är en &HTML;-fil där särskilda strängar används för att referera till fält i transaktionen, aktuellt konto och institut för att visa var de ska skrivas ut på checken. &kmymoney; levereras med en förvald, inbyggd, mall. På <ulink url="https://invent.kde.org/office/kmymoney/-/blob/master/kmymoney/plugins/checkprinting/templates/"
->denna</ulink
-> adress hittar du HTML-källkodsfilen för den förvalda mallen, samt några ytterligare mallar. Du bör antingen kunna använda en av dem, eller ändra en för att passa dina behov. Observera att bara en <emphasis
->delmängd</emphasis
-> av HTML-standarden stöds: detaljerad dokumentation om det hittar du <ulink url="https://doc.qt.io/qt-5/richtext-html-subset.html"
->här</ulink
+>A template file is an &HTML; file, in which specific strings are used to reference the fields from the transaction and from the current account and institution to show where they will be printed on the check. &kmymoney; ships with a default, built-in template. At <ulink url="https://invent.kde.org/office/kmymoney/-/blob/master/kmymoney/plugins/checkprinting/templates/"
+>this</ulink
+> address you can find the HTML source file of default template, as well as some additional templates. You should either be able to use one of them, or modify one to suit your needs. Note that only a <emphasis
+>subset</emphasis
+> of the HTML standard is supported — the detailed documentation on that can be found <ulink url="https://doc.qt.io/qt-5/richtext-html-subset.html"
+>here</ulink
 >. </para>
 
 

@@ -12,39 +12,28 @@
 > <email
 >joe1011010_km@users.sourceforge.net</email
 > </author>
-    <author
->&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->1 de desembre de 2024</date>
+>5 d'abril de 2010</date>
   <releaseinfo
->5.2.0</releaseinfo>
+>5.0.4</releaseinfo>
 </chapterinfo>
+
 <title
 >Aprofitant el &kmymoney; al màxim</title>
 
-<note
-><title
->Ajudeu a millorar aquest manual</title>
-  <para
->Aquesta i les seccions següents no han tingut actualitzacions significatives des de les primeres versions del &kmymoney;. Encara que els fonaments de la comptabilitat no han canviat amb el pas dels anys, i no hi ha res inexacte o enganyós aquí, hi ha hagut peticions d'actualitzar aquesta àrea. Si teniu algun suggeriment o idea específica per a això, l'autor vol escoltar-vos, a través d'una de les rutes llistades a la pàgina de suport <ulink url="https://kmymoney.org/support.html"
-></ulink
-> al lloc web <ulink url="https://kmymoney.org/"
->kmymoney;</ulink
-> </para>
-</note>
+<para
+>Si bé podeu seguir endavant, fer clic en alguns botons i completar algunes dades, després d'un temps, podríeu decidir que ho heu fet malament i començar de nou, encara que ja havíeu llegit la documentació a cada part del &kmymoney;. </para>
 
 <para
->Mentre que gran part del &kmymoney; podria ser obvi per a un usuari novell, i podríeu seguir endavant, fent clic en alguns botons i omplint algunes dades, després d'un temps, podríeu decidir que ho heu fet malament i voleu començar de nou, fins i tot si heu llegit la documentació de cada part del &kmymoney;. </para>
+>Obtindreu un sistema més efectiu si dediqueu una mica de temps a planificar com utilitzareu el &kmymoney;, de manera que seguiu els passos que es detallen aquí. </para>
 
-<para
->Obtindreu un sistema més eficient i eficaç i un ús molt millor del vostre temps si primer passeu una mica de temps planejant com utilitzareu el &kmymoney;, de manera que seguiu els passos indicats aquí. Això pot semblar molt senzill, i de fet, és senzill, però prendre el temps per a assegurar que la vostra comprensió de com funcionen les coses és la mateixa que la del &kmymoney; gairebé segur que us estalviarà temps més tard. </para>
-
-<sect1 id="makingmostof.basicaccounting"
-><title
+<sect1 id="makingmostof.basicaccounting">
+<title
 >Comptabilitat bàsica</title>
+
 <para
->Imagineu els vostres diners com boles o fesols, i per a evitar que rodin i es perdin, els deseu en una caixa o pot. La comptabilitat o tenidoria de llibres, és el procés de comptar i fer un seguiment dels fesols al pot, o més important, a diversos pots. </para>
+>Imagineu els vostres diners com boles o fesols, i per a evitar que rodin, els deseu en una caixa o pot. Comptabilitat o mantenir els llibres, és el procés de comptar i fer un seguiment dels fesols al pot, o a diversos pots. </para>
 
 <para
 >Teniu alguns diners al pot marcat com <quote
@@ -81,21 +70,24 @@
 >. </para>
 
 <para
->Això es tractarà més endavant amb més detall en aquest manual a la secció sobre <link linkend="details.ledgers.split"
->operacions desglossades</link
->. </para>
+>Això es tractarà més endavant amb més detall en aquest manual. </para>
+<!-- **** don't forget to make sure this is actually covered, and linked to from
+     here.  Also, I have removed "in setting up accounts for Businesses." and
+     modified the section below, since we explicitly say that KMM is not for
+     business use. -->
 
 <sect2 id="makingmostof.basicaccounting.personalaccounts">
-  <title
+<title
 >Definir els comptes (registres personals)</title>
+
 <para
->La majoria dels comptes, o pots, com s'ha descrit anteriorment, representen una mesura del nostre <quote
+>La majoria dels comptes o pots anteriors representen una mesura del nostre <quote
 >Patrimoni</quote
 >. L'efectiu i els béns representen els nostres <quote
 >Actius</quote
->, que també inclouen qualsevol quantitat que algú ens deu per béns que els vam proporcionar o diners que els hem prestat. Els diners que devem als altres, p. ex. si no havíem pagat als nostres proveïdors, són els nostres <quote
+>, i també allò que ens deuen si els nostres clients encara no ens han donat els diners. Els diners que devem, per a si no hem pagat als nostres proveïdors, són els nostres <quote
 >Passius</quote
->. Aquests comptes són transferibles a efectiu i tenen un valor. </para>
+>. Aquests comptes són transferibles a Efectiu i tenen un valor. </para>
 
 <para
 >Qualsevol pot que no es pugui valorar serà <quote
@@ -115,12 +107,13 @@
 >Penseu com voleu seguir i analitzar els vostres ingressos i despeses. Això us ajudarà a decidir com configurar-los al &kmymoney;. </para>
 
 <para
->Finalment, considereu si ho voleu tot en un conjunt de comptes, o dos o més. Això pot dependre del marc legal d'on visqueu o de com voleu analitzar les coses. Cada conjunt de comptes es manejaria per separat. </para>
+>Finalment, considereu si ho voleu tot en un conjunt de comptes, o dos o més. Això pot dependre del marc legal o de com voleu analitzar les coses. Cada conjunt de comptes es manejaria per separat. </para>
 </sect2>
 
-<sect2 id="makingmostof.basicaccounting.businessaccounts"
-><title
+<sect2 id="makingmostof.basicaccounting.businessaccounts">
+<title
 >Definir els comptes (registres comercials)</title>
+
 <para
 >Existeixen similituds amb la configuració dels comptes per a ús personal, però hi ha consideracions addicionals, que inclouen pautes i requisits legals. El &kmymoney; no aborda explícitament cap d'aquests problemes, ja que ha estat dissenyat com un gestor de finances <quote
 >personals</quote
@@ -128,30 +121,26 @@
 </sect2>
 </sect1>
 
-<sect1 id="makingmostof.mapping"
-><title
+<sect1 id="makingmostof.mapping">
+<title
 >Assignació de les vostres finances al &kmymoney;</title>
-<para
->Per tant, recopileu els vostres documents financers recents i exploreu les seccions següents per a obtenir més informació sobre com podeu assignar les finances pròpies a cadascuna de les àrees diferents del &kmymoney;. Tingueu en compte que cadascuna d'aquestes seccions es presenta amb més detall en els capítols posteriors d'aquest manual. </para>
 
-<sect2 id="makingmostof.mapping.accounts"
-><title
+<para
+>Per tant, recolliu els vostres documents i vegeu les seccions següents per a cada element al &kmymoney;. </para>
+
+<sect2 id="makingmostof.mapping.accounts">
+<title
 >Comptes</title>
-<para
->Un «compte» en el &kmymoney; representa un dels «pots» de la secció anterior: pot ser qualsevol lloc que tingui els vostres diners i possessions que voleu controlar. Generalment, creeu un compte al &kmymoney; per a representar cada compte diferent que tingueu a la «vida real», sigui amb un banc o una altra institució financera, o una botiga, o fins i tot només amb els diners en efectiu de la cartera. Hi ha diversos tipus de comptes disponibles, que representen diferents tipus de llocs que poden estar els diners. </para>
 
 <para
->Les operacions (que es descriuran amb més detall més endavant) es creen per a indicar els diners que es mouen dins o fora d'un o més comptes. </para>
+>Aquests tenen un valor. Les operacions es creen a un o més comptes. </para>
 
-<para
->Com es descriu a continuació, els comptes poden tenir diners que són en realitat vostres (actius) o diners que deveu (passius). Els passius es poden pensar com a pots màgics, que es poden prendre mongetes fins i tot si no hi ha realment cap mongeta allà, però que finalment cal reemplaçar. </para>
-
-
-<sect3 id="makingmostof.mapping.accounts.asset"
-><title
+<sect3 id="makingmostof.mapping.accounts.asset">
+<title
 >Comptes: Actiu</title>
+
 <para
->Hi ha múltiples tipus de comptes d'Actiu. Tots són essencialment el mateix, guarden els vostres diners, però hi ha algunes diferències en els detalls de com els diners entren i surten dels diferents tipus de comptes. </para>
+>Aquests són els comptes que mantenen els vostres diners i possessions dels que voleu fer-ne seguiment. Hi ha disponibles els tipus següents: </para>
 
 <variablelist>
   <varlistentry>
@@ -177,7 +166,7 @@
 >Efectiu</term>
     <listitem>
       <para
->Diners a la butxaca o a la cartera o en un pot o caixa a la prestatgeria o sota el llit. </para>
+>Diners a la mà o la cartera. </para>
     </listitem>
   </varlistentry>
 
@@ -210,11 +199,12 @@
 </variablelist>
 </sect3>
 
-<sect3 id="makingmostof.mapping.accounts.liability"
-><title
+<sect3 id="makingmostof.mapping.accounts.liability">
+<title
 >Comptes: Passiu</title>
+
 <para
->Aquests comptes representen els vostres deutes i diners que deveu a altres. </para>
+>Aquests són els comptes que mantenen els vostres deutes i diners dels quals voleu fer un seguiment. Hi ha disponibles els tipus següents: </para>
 
 <variablelist>
   <varlistentry>
@@ -240,65 +230,65 @@
 >Passiu</term>
     <listitem>
       <para
->Qualsevol altra cosa que deveu que no s'ajusti als altres tipus de comptes de passiu. </para>
+>Qualsevol altra cosa que deveu que no sigui un préstec. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect3>
 </sect2>
 
-<sect2 id="makingmostof.mapping.institutions"
-><title
+<sect2 id="makingmostof.mapping.institutions">
+<title
 >Institucions</title>
+
 <para
->Aquestes representen institucions financeres, com bancs o botigues o corredors d'inversió. Es poden utilitzar per a agrupar comptes, i poden mostrar el valor total de tots els comptes dins d'aquesta institució. Aquestes no han de reflectir les organitzacions reals, sinó que són per a la vostra comoditat en l'agrupació dels vostres comptes. El seu ús és totalment opcional. </para>
+>Aquestes són completament opcionals i es poden utilitzar per a agrupar comptes, i mostren un valor total per a tots els comptes en cada grup. </para>
 </sect2>
 
-<sect2 id="makingmostof.mapping.categories"
-><title
+<sect2 id="makingmostof.mapping.categories">
+<title
 >Categories</title>
-<para
->Una categoria és un tipus especial de compte utilitzat internament pel &kmymoney; per a fer un seguiment dels ingressos i les despeses. Aquests comptes no són gestionats, perquè com s'ha esmentat anteriorment, no tenen valors reals, i mostren només el que heu obtingut d'ells o hi heu contribuït. Cada categoria mostra el valor total de les operacions que l'esmenten. El principi de comptabilitat de doble entrada requereix que cada operació inclogui una categoria o un compte de transferència. Això també s'explicarà amb més detall més endavant en el manual. </para>
 
 <para
->Les categories d'ingressos s'utilitzen com a llocs dels quals rebeu diners, i les categories de despeses representen destins per als quals gasteu diners. En rares ocasions, els diners poden fluir de la manera «equivocada», com obtenir un reemborsament per un sobrepagament d'una factura de subministraments. </para>
+>Aquestes representen comptes d'ingressos i despeses sense gestionar que no tenen un valor. El valor total de les operacions es mostra per a cada categoria. Es requereix un compte de categoria o transferència per a cada operació. </para>
+</sect2>
 
-<sect3 id="makingmostof.mapping.subcategories"
-><title
+<sect2 id="makingmostof.mapping.subcategories">
+<title
 >Subcategories</title>
-<para
->Les categories es poden dividir en subcategories, però aquesta relació és principalment per a la vostra comoditat, i s'utilitza amb finalitat de visualització. La majoria de les vegades, els totals de les subcategories no s'inclouen en el total de la categoria de nivell superior, encara que hi ha informes específics i pantalles on es pot fer això. </para>
-</sect3>
 
+<para
+>Les categories es poden desglossar en subcategories, però aquesta relació només és amb finalitat de visualització, ja que els totals de les subcategories no s'inclouran al total de la categoria de nivell superior. </para>
 </sect2>
 
-<sect2 id="makingmostof.mapping.tags"
-><title
+<sect2 id="makingmostof.mapping.tags">
+<title
 >Etiquetes</title>
+
 <para
->Les etiquetes són molt similars a les Categories, ja que també són comptes sense gestionar que no tenen un valor. No obstant això, a diferència de les Categories, l'ús de les Etiquetes és completament opcional. Es poden fer servir per a agrupar operacions amb la finalitat de llistats. </para>
+>Les etiquetes són molt similars a les Categories, ja que també són comptes sense gestionar que no tenen un valor. No obstant això, a diferència de les Categories, l'ús de les Etiquetes és completament opcional. </para>
 </sect2>
 
-<sect2 id="makingmostof.mapping.payees"
-><title
+<sect2 id="makingmostof.mapping.payees">
+<title
 >Beneficiaris</title>
+
 <para
->Un beneficiari (o pagador) representa algú o un grup al qual pagueu diners o el qual us paga diners. Igual que amb les etiquetes, no són gestionats, i no tenen un valor. Són principalment una comoditat per a poder informar de la quantitat de diners que heu enviat a algú o gastat en una botiga en particular. Aquests són opcionals per a la majoria de les operacions, però són necessaris per a les operacions planificades, que es descriuen a continuació. Es pot mostrar un historial d'operacions, amb categories, per a cada beneficiari. </para>
+>Aquests són opcionals per a les operacions. Són necessaris per a les Operacions planificades. Es mostra un historial de les operacions, amb categoria, per a cada beneficiari. </para>
 </sect2>
 
-<sect2 id="makingmostof.mapping.schedules"
-><title
+<sect2 id="makingmostof.mapping.schedules">
+<title
 >Operacions planificades</title>
+
 <para
->Quan les operacions es produeixen de manera regular, com ara els salaris o les factures de subministraments, aquestes es poden configurar segons un calendari. Les operacions es creen a partir de les planificacions. La següent operació programada, així com les que han vençut es poden mostrar a la pàgina d'inici. </para>
+>Quan les operacions es realitzen de forma regular, es podran establir en una planificació. Les operacions es creen a partir d'una planificació, les que estiguin endarrerides es veuran a la pàgina principal. </para>
 </sect2>
 </sect1>
 
-<sect1 id="makingmostof.usefultips"
-><title
+<sect1 id="makingmostof.usefultips">
+<title
 >Consells útils</title>
-<para
->Quan inicieu el &kmymoney;, la vista principal, o pàgina d'inici, mostra una visió general d'alt nivell de les vostres finances. Es divideix en diverses seccions, i es pot personalitzar el que mostren, i en quin ordre. A l'esquerra, hi ha icones per a cadascuna de les vistes principals. Cada vista és utilitzada pel &kmymoney; per a presentar un tipus diferent de dades per a l'entrada o la revisió. </para>
 
 <para
 >Llevat que guardeu els vostres diners a sota del matalàs o a sota de l'entarimat, probablement fareu ús d'una o més institucions on teniu comptes, les quals poden ser de crèdit o dèbit. Per a familiaritzar-vos amb la forma en què funciona el &kmymoney;, escolliu un compte que vulgueu seguir amb el &kmymoney; i seleccioneu l'element de menú <menuchoice
@@ -307,56 +297,33 @@
 > <guimenuitem
 >Nou</guimenuitem
 ></menuchoice
-> per a configurar un fitxer de dades. </para>
+> per a configurar un fitxer de compte. </para>
 
 <para
 >Si heu utilitzat un altre gestor de finances personals, és possible que pugueu importar les seves dades al &kmymoney;. </para>
 
 <para
->Si teniu alguns rebuts o despeses regulars en aquest compte, podeu anar a la vista de beneficiaris i introduir els noms dels pagadors i els beneficiaris involucrats; després aneu a la vista d'Operacions planificades i ompliu una Planificació nova per a cada operació recurrent. Si no heu introduït el beneficiari o pagador, el &kmymoney; us oferirà l'oportunitat de fer-ho a la meitat en introduir la planificació. </para>
+>Si teniu alguns rebuts o despeses regulars en aquest compte, aneu al Beneficiari i introduïu els noms dels pagadors i els beneficiaris involucrats, després aneu a Planificació i completeu una Planificació nova per a cada operació recurrent. Si no heu introduït el beneficiari o pagador, el &kmymoney; us oferirà l'oportunitat de fer-ho a la meitat en introduir la planificació. </para>
 
 <para
->Per a afegir altres operacions aneu a la vista de llibres majors; podreu afegir beneficiaris nous i categories en la mentre introduïu una operació o anant a Beneficiaris o Categories abans d'introduir l'operació. </para>
+>Per a afegir altres operacions noves, aneu a Llibres majors, podreu afegir beneficiaris nous i categories en la meitat d'una operació o anant a Beneficiaris o Categories abans d'introduir l'operació. </para>
 
 <para
->Depenent de l'opció que trieu en configurar el fitxer de dades, probablement trobareu que les Categories predeterminades no coincideixen exactament amb les vostres necessitats; podreu suprimir amb facilitat les que sabeu que mai necessitareu i afegir les altres que necessiteu. Però quan introduïu una operació, només haureu d'escriure algunes lletres d'una categoria i el &kmymoney; us oferirà una llista desplegable de les categories coincidents per a escollir-ne una. </para>
+>Probablement, trobareu que les Categories predeterminades no coincideixen exactament amb les vostres necessitats, podreu suprimir amb facilitat les que sabeu que mai necessitareu i afegir les altres que necessiteu. Però quan introduïu una operació, només haureu d'escriure algunes lletres d'una categoria i el &kmymoney; us oferirà una llista desplegable de les categories coincidents per a escollir-ne una. </para>
 
 <para
->Podreu afegir comptes diferents gestionats per institucions diferents; el preferit es mostrarà quan obriu el &kmymoney;, però podreu canviar ràpidament a qualsevol dels altres. </para>
+>Podreu afegir diferents comptes gestionats per a diferents institucions; el preferit es mostrarà quan obriu el &kmymoney;, però podreu canviar ràpidament a qualsevol dels altres. </para>
 
 <para
 >Quan realitzeu un pagament, el &kmymoney; determinarà quin hauria de ser el número de xec següent, suprimiu-lo si no realitzeu un pagament amb xec o editeu-lo si el primer xec que introduïu no és el número 1 del xec. De manera alternativa, podreu desactivar l'increment automàtic dels números de xec. </para>
 
 <para
->De tant en tant podríeu obtenir extractes del vostre compte des de les institucions que utilitzeu. Podreu conciliar els comptes del &kmymoney; amb aquests extractes de manera que sabeu que teniu una representació precisa de l'estat actual de les vostres finances. </para>
+>De tant en tant podríeu obtenir extractes del vostre compte des de les institucions que utilitzeu. Podreu conciliar els comptes del &kmymoney; amb aquests extractes de manera que tingueu una declaració precisa de l'estat actual de les vostres finances. </para>
 
 <para
->Si aneu a la vista d'Informes, hi ha diversos informes predeterminats. Per a personalitzar-los, obriu el més similar que preferiu i després seleccioneu «Nou» (no «Copia»). El podreu personalitzar segons les vostres necessitats i si voleu marcar-lo com un informe preferit si voleu. </para>
+>Si aneu a Informes, hi ha diversos informes predeterminats. Per a personalitzar-los, obriu-ne un de similar que preferiu i després seleccioneu «Nou» (no «Copia»), després el podreu personalitzar segons les vostres necessitats i si voleu marcar-lo com un informe preferit. </para>
 
 <para
->Encara que el &kmymoney; no està dissenyat per al seu ús en un context comercial, si esteu gestionant un negoci pel vostre compte i no necessiteu funcions de nòmina, podríeu trobar que el &kmymoney; és prou personalitzable per a satisfer les vostres necessitats, especialment pel que fa a l'elaboració amb les característiques de pressupostos i previsions, i podreu exportar els vostres informes personalitzats mitjançant CSV a altres aplicacions. </para>
-</sect1>
-
-<sect1 id="makingmostof.plugins"
-><title
->Connectors</title>
-<para
->Tot i que no és necessari un coneixement detallat dels connectors per a utilitzar el &kmymoney;, és útil una comprensió bàsica, ja que el concepte s'esmenta en molts llocs al llarg d'aquest manual. Quan es va dissenyar originalment el &kmymoney;, totes les característiques i funcionalitats es van implementar dins del codi font del programa. A mesura que es van afegir més característiques i funcionalitats al programa, es va dissenyar un sistema de connectors, de manera que es podrien afegir funcionalitats addicionals d'una manera que no requeria la modificació de cap dels fitxers de codi font del nucli. Quan s'inicia el &kmymoney;, es veurà en un directori específic per a qualsevol connector, i crearà el menú i les entrades de configuració adequades per a aquells que trobi. </para>
-
-<para
->Quan es van escriure els primers connectors, tot i que el seu codi font es va incloure amb el codi font complet del &kmymoney;, no totes les distribucions del &Linux; els van incloure en les versions que van compilar. Durant algun temps, el manual va incloure instruccions per a comprovar això i per a compilar-les vós mateix, si fos necessari. En aquest punt, moltes de les característiques bàsiques del &kmymoney; s'han implementat com a connectors, i s'inclouen en totes les distribucions, així com a les versions del &Windows;, &macOS;, Appimage, i altres distribuïdes en el lloc web del <ulink url="https://www.kmymoney.org"
->&kmymoney;</ulink
->. </para>
-
-<para
->Vegeu la secció <link linkend="details.settings.plugins"
->Connectors</link
-> al capítol <link linkend="details.settings"
->Configuració</link
-> per a més informació sobre la determinació de quins connectors estan instal·lats i actius, i com configurar-los. </para>
-
-<para
->Si voleu escriure el vostre propi connector per tal d'implementar una funció nova, com importar o exportar dades en un format personalitzat, haureu d'utilitzar un dels connectors importadors o exportadors existents com a exemple. Si ho feu, escriviu a la llista de correu dels desenvolupadors &devlist;, en cas que algú ja hagi iniciat una tasca similar, i perquè el vostre treball pot ser d'interès per a altres usuaris. </para>
-
+>Encara que el &kmymoney; no està dissenyat per al seu ús en un context comercial, si esteu gestionant un negoci pel vostre compte i no necessiteu funcions de nòmina, probablement trobareu que el &kmymoney; és prou personalitzable per a satisfer les vostres necessitats, especialment pel que fa a l'elaboració amb les característiques de pressupostos i previsions, i podreu exportar els vostres informes personalitzats mitjançant CSV a altres aplicacions. </para>
 </sect1>
 </chapter>

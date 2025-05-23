@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-18 02:01+0000\n"
+"POT-Creation-Date: 2025-05-23 03:30+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -283,10 +283,10 @@ msgstr "Ütemezés található"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
 #, fuzzy, kde-format
-#| msgid "Create a new asset account"
+#| msgid "Created on"
 msgctxt "Create undo action"
 msgid "Create account"
-msgstr "Új vagyontárgy számla létrehozása"
+msgstr "Létrehozva"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
 #, fuzzy, kde-format
@@ -1684,12 +1684,11 @@ msgid "Cannot update security <b>%1</b>: %2"
 msgstr ""
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:633
-#, fuzzy, kde-format
-#| msgid "Price found: %1 (%2)"
+#, kde-format
 msgctxt ""
 "@info Online price update %1 online id, %2 internal id, %3 price, %4 date"
 msgid "Price for %1 updated to %3 for %4 (id %2)"
-msgstr "Talált árfolyam: %1 (%2)"
+msgstr ""
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:639
 #, kde-format
@@ -2199,10 +2198,10 @@ msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:912
 #, fuzzy, kde-format
-#| msgid "Payment accounts"
+#| msgid "Hide closed accounts"
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
-msgstr "Fizetés számlák"
+msgstr "Lezárt számlák elrejtése"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:920
 #, kde-format
@@ -2965,8 +2964,7 @@ msgstr "Rendezési beállítások"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_useDefault)
 #: kmymoney/dialogs/ktransactionsortoptionsdlg.ui:23
-#, fuzzy, kde-format
-#| msgid "Use default"
+#, kde-format
 msgid "Use default"
 msgstr "Alapértelmezett használata"
 
@@ -3404,10 +3402,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:457
-#, fuzzy, kde-format
-#| msgid "Hide closed accounts"
+#, kde-format
 msgid "Hide accounts with a zero balance from Accounts"
-msgstr "Lezárt számlák elrejtése"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:464
@@ -4009,9 +4006,9 @@ msgstr "Csak a kiválasztott tranzakció részletes megjelenítése"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowAllSplits)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:86
 #, fuzzy, kde-format
-#| msgid "Show a grid in the register"
+#| msgid "Show all register entries in full detail"
 msgid "Show all split details in ledger"
-msgstr "Vonalak megjelenítése a nyilvántartásban"
+msgstr "Nyilvántartás tranzakcióinak részletes megjelenítése"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:96
@@ -5291,9 +5288,9 @@ msgstr "&Új jelentés"
 
 #: kmymoney/kmymoney.cpp:1502
 #, fuzzy, kde-format
-#| msgid "&New report"
+#| msgid "Copy of %1"
 msgid "Copy report"
-msgstr "&Új jelentés"
+msgstr "%1 másolata"
 
 #: kmymoney/kmymoney.cpp:1503
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:215
@@ -5327,9 +5324,9 @@ msgstr ""
 
 #: kmymoney/kmymoney.cpp:1508
 #, fuzzy, kde-format
-#| msgid "Include transfers"
+#| msgid "Entry order"
 msgid "Edit tab order"
-msgstr "Átutalásokat hozzávéve"
+msgstr "Bejegyzési sorrend"
 
 #: kmymoney/kmymoney.cpp:1511
 #, kde-format
@@ -6520,7 +6517,7 @@ msgstr "Megegyező"
 
 #: kmymoney/models/statementmodel.cpp:105
 #, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
+#| msgctxt "To duplicate a split"
 #| msgid "Duplicate"
 msgctxt "@title:column Shows number of duplicate transactions"
 msgid "Duplicates"
@@ -10351,9 +10348,9 @@ msgstr "Válassza ki az összeg mezőt tartalmazó oszlopot."
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_amountColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:438
 #, fuzzy, kde-format
-#| msgid "Clear selections"
+#| msgid "Category selection"
 msgid "Clear amount field selection."
-msgstr "Kijelölések törlése"
+msgstr "Kategória választó"
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_indicator)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:448
@@ -10373,9 +10370,9 @@ msgstr "Válassza ki a kategória mezőt tartalmazó oszlopot."
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_creditDebitIndicatorColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:468
 #, fuzzy, kde-format
-#| msgid "Clear selections"
+#| msgid "Category selection"
 msgid "Clear indicator field selection."
-msgstr "Kijelölések törlése"
+msgstr "Kategória választó"
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_debit)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:478
@@ -11142,12 +11139,11 @@ msgid "No profile setup"
 msgstr ""
 
 #: kmymoney/plugins/csv/import/kcm_csvimporter.cpp:65
-#, fuzzy, kde-format
-#| msgid "Please select a parent account."
+#, kde-format
 msgctxt "@info:tooltip No QIF profile defined"
 msgid ""
 "Please use the QIF profile editor in the QIF plugin settings to create one."
-msgstr "Válasszon szülőszámlát."
+msgstr ""
 
 #. i18n: ectx: label, entry (AutoFieldDelimiter), group (Misc)
 #: kmymoney/plugins/csv/import/pluginsettings.kcfg:10
@@ -15214,10 +15210,11 @@ msgstr "Előrejelzésen alapuló költségvetés"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:460
 #, fuzzy, kde-format
-#| msgid "Any transaction"
+#| msgctxt "Category name"
+#| msgid "Miscellaneous income"
 msgctxt "@item:inmenu To make it income"
 msgid "Change to income"
-msgstr "Minden tranzakció"
+msgstr "Egyéb jövedelem"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:465
 #, fuzzy, kde-format
@@ -16961,10 +16958,9 @@ msgid "&Export to PDF files"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:816
-#, fuzzy, kde-format
-#| msgid "Favorite reports"
+#, kde-format
 msgid "Export into directory"
-msgstr "Kedvenc jelentések"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KReportsView)
 #: kmymoney/plugins/views/reports/kreportsview.ui:14
@@ -18969,17 +18965,16 @@ msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:244
-#, fuzzy, kde-format
-#| msgid "Hide closed accounts"
+#, kde-format
 msgid "Hide zero balance accounts from Accounts"
-msgstr "Lezárt számlák elrejtése"
+msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:248
 #, fuzzy, kde-format
-#| msgid "Hide closed accounts"
+#| msgid "Show Account Limit Information"
 msgid "Hide zero balance accounts from Home"
-msgstr "Lezárt számlák elrejtése"
+msgstr "Számlakorlát információ megjelenítése"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:252
@@ -19028,9 +19023,10 @@ msgstr "Az előző és a jelenlegi költségvetési év fejlécének megjelenít
 
 #. i18n: ectx: label, entry (ShowReconciliationMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:284
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Do not show reconciled transactions"
 msgid "Show reconciliation entries with date and balance"
-msgstr ""
+msgstr "Egyeztetett tranzakciók elrejtése"
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:293
@@ -19884,12 +19880,10 @@ msgid "The account is a required field for a schedule"
 msgstr ""
 
 #: kmymoney/views/keditscheduledlg.cpp:169
-#, fuzzy, kde-format
-#| msgid "Cannot create transactions in the context of a category."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr ""
-"Nem lehet ebben a kontextusban létrehozni tranzakciókat a kategóriának."
 
 #: kmymoney/views/keditscheduledlg.cpp:312
 #, kde-format
@@ -20320,7 +20314,6 @@ msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1421
 #, fuzzy, kde-format
-#| msgctxt "Reconciliation flag C"
 #| msgid "C"
 msgctxt "@title:column table on home page: cleared"
 msgid "C"
@@ -21266,11 +21259,10 @@ msgstr ""
 
 #: kmymoney/views/ktransactionselectdlg.cpp:136
 #, fuzzy, kde-format
-#| msgid "Do you really want to delete the selected transaction?"
-#| msgid_plural "Do you really want to delete all %1 selected transactions?"
+#| msgid "Create a new transaction"
 msgctxt "@info:tooltip Exchange transactions about to merge"
 msgid "Press to exchange the two transactions."
-msgstr "Valóban törölni akarja a kiválasztott tranzakciót?"
+msgstr "Új tranzakció létrehozása"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTransactionSelectDlg)
 #: kmymoney/views/ktransactionselectdlg.ui:14
@@ -21363,11 +21355,10 @@ msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "A tranzakciónál hiányzik a kategória hozzárendelése."
 
 #: kmymoney/views/ledgerview.cpp:876
-#, fuzzy, kde-format
-#| msgid "This schedule will end at some time"
+#, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
-msgstr "Az ütemezés véget ér valamikor"
+msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:882
 #, kde-format
@@ -21384,11 +21375,10 @@ msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:963
 #, fuzzy, kde-format
-#| msgid "Do you really want to delete the selected price entry?"
-#| msgid_plural "Do you really want to delete the selected price entries?"
+#| msgid "Checking for overdue scheduled transactions..."
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
-msgstr "Valóban törölni akarja a kiválasztott árfolyam bejegyzést?"
+msgstr "Lejárt ütemezett tranzakciók ellenőrzése"
 
 #: kmymoney/views/ledgerview.cpp:964
 #, fuzzy, kde-format
@@ -22007,7 +21997,7 @@ msgstr "Szerkesztés…"
 
 #: kmymoney/views/splitview.cpp:134
 #, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
+#| msgctxt "To duplicate a split"
 #| msgid "Duplicate"
 msgctxt "@item:inmenu Duplicate selected split(s)"
 msgid "Duplicate"
@@ -23383,9 +23373,9 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:265
 #, fuzzy, kde-format
-#| msgid "Create a new asset account"
+#| msgid "Filter Accounts"
 msgid "Favorite account"
-msgstr "Új vagyontárgy számla létrehozása"
+msgstr "Számlák szűrése"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel14)
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:27
@@ -26023,10 +26013,9 @@ msgid "Export in HTML format"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:126
-#, fuzzy, kde-format
-#| msgid "Favorite reports"
+#, kde-format
 msgid "Export in xml format"
-msgstr "Kedvenc jelentések"
+msgstr ""
 
 #: tools/kmmreport-export.cpp:129
 #, kde-format
@@ -26112,112 +26101,6 @@ msgstr ""
 #~ msgstr[0] "    %1 létrehozva"
 #~ msgstr[1] "    %1 létrehozva"
 
-#~ msgid "Duplicate open"
-#~ msgstr "Duplikált megnyitás"
-
-#~ msgid "Account problem"
-#~ msgstr "Számla probléma"
-
-#, fuzzy
-#~| msgid "Select account"
-#~ msgid "Select category or account."
-#~ msgstr "Számla kiválasztása"
-
-#~ msgid "Today's due payments"
-#~ msgstr "Ma aktuális fizetések"
-
-#~ msgid ""
-#~ "KMyMoney has detected some overdue scheduled transactions for this "
-#~ "account. Do you want to enter those scheduled transactions now?"
-#~ msgstr ""
-#~ "KMyMoney néhány lejárt ütemezett tranzakciót észlelt ennél a számlánál. "
-#~ "Szeretné most elfogadni ezeket az ütemezett tranzakciókat?"
-
-#~ msgid "Stock Name"
-#~ msgstr "Részvény neve"
-
-#~ msgctxt "Price source"
-#~ msgid "Source"
-#~ msgstr "Forrás"
-
-#~ msgid "Upd"
-#~ msgstr "Frissítés"
-
-#~ msgid "Close this window"
-#~ msgstr "Ablak bezárása"
-
-#~ msgid "Preferred account"
-#~ msgstr "Elsődleges számla"
-
-#~ msgid "CashFlow"
-#~ msgstr "Pénzforgalom"
-
-#~ msgid "Select Account:"
-#~ msgstr "Válasszon számlát:"
-
-#, fuzzy
-#~| msgid "Investment details"
-#~ msgid "Investment details"
-#~ msgstr "Befektetés részletek"
-
-#~ msgid "Enter the CUSIP/ISIN/WKN identification number here"
-#~ msgstr "Ide írhatja a CUSIP/ISIN/WKN azonosító számot"
-
-#~ msgid "This wizard allows you to modify the selected security."
-#~ msgstr "Ez a varázsló lehetőséget ad a kiválasztott kötvény módosításához."
-
-#~ msgid "Security found"
-#~ msgstr "Kötvény található"
-
-#~ msgctxt "Equity name"
-#~ msgid "Name"
-#~ msgstr "Név"
-
-#~ msgctxt "Online quote source"
-#~ msgid "Source"
-#~ msgstr "Forrás"
-
-#, fuzzy
-#~| msgid "File already exists"
-#~ msgid "Price Already Exists"
-#~ msgstr "A fájl már létezik"
-
-#~ msgid "List of known Equities, and the date they were last updated on."
-#~ msgstr "Ismert részvények listája, és az utolsó frissítés dátuma"
-
-#, fuzzy
-#~| msgid "Symbol"
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Symbol"
-#~ msgstr "Szimbólum"
-
-#, fuzzy
-#~| msgid "Identification"
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Identification number"
-#~ msgstr "Azonosító"
-
-#, fuzzy
-#~| msgctxt "@title header of the currency name column"
-#~| msgid "Name"
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Name"
-#~ msgstr "Név"
-
-#, fuzzy
-#~| msgid ""
-#~| "The file <b>%1</b> already exists. Do you really want to overwrite it?"
-#~ msgid ""
-#~ "Security <b>%1</b> uses this quote source.<br>Do you really want to "
-#~ "remove it?"
-#~ msgstr "A(z) <b>%1</b> fájl már létezik. Biztosan felül kívánja írni?"
-
-#, fuzzy
-#~| msgid "Delete the selected source entry"
-#~ msgctxt "@title:window"
-#~ msgid "Delete quote source"
-#~ msgstr "Kiválasztott forrás bejegyzés törlése"
-
 #~ msgid "Source <placeholder>%1</placeholder> does not exist."
 #~ msgstr "<placeholder>%1</placeholder> forrás nem létezik."
 
@@ -26268,6 +26151,11 @@ msgstr ""
 #~ msgstr "Talált dátum: %1"
 
 #, fuzzy
+#~| msgid "Price found: %1 (%2)"
+#~ msgid "Price found: '%1' (%2)"
+#~ msgstr "Talált árfolyam: %1 (%2)"
+
+#, fuzzy
 #~| msgid "Date found: %1"
 #~ msgid "Date found: '%1'"
 #~ msgstr "Talált dátum: %1"
@@ -26278,30 +26166,488 @@ msgstr ""
 #~ msgid "Unable to update price for %1 (empty quote data)"
 #~ msgstr "Nem lehet frissíteni az %1 árfolyamát (üres árajánlat adat)"
 
-#, fuzzy
-#~| msgid "Unable to update price for %1 (no price or no date)"
-#~ msgid "Unable to update price for %1 (error encountered: '%2')"
-#~ msgstr "Nem lehet frissíteni a %1 árfolyamot (nincs ár, vagy dátum)"
+#~ msgctxt "Total value"
+#~ msgid "Total"
+#~ msgstr "Összes"
+
+#~ msgid "Price/Share"
+#~ msgstr "Ár/részvény"
+
+#~ msgid "Asset account"
+#~ msgstr "Vagyontárgy számla"
+
+#~ msgctxt "Equity name"
+#~ msgid "Name"
+#~ msgstr "Név"
 
 #, fuzzy
-#~| msgid "Tag"
-#~ msgctxt "Split header"
-#~ msgid "Tag"
-#~ msgstr "Címke"
+#~| msgid "File already exists"
+#~ msgid "Price Already Exists"
+#~ msgstr "A fájl már létezik"
 
-#~ msgid "Reorganizing accounts..."
-#~ msgstr "Számlák újrarendezése…"
+#~ msgid "List of known Equities, and the date they were last updated on."
+#~ msgstr "Ismert részvények listája, és az utolsó frissítés dátuma"
 
 #, fuzzy
-#~| msgid "Show Account Limit Information"
-#~ msgid "Hide zero balance liabilities on the Homepage"
-#~ msgstr "Számlakorlát információ megjelenítése"
+#~| msgid "Search transactions"
+#~ msgctxt "@info:tooltip for find transaction Open button"
+#~ msgid "Search transactions"
+#~ msgstr "Tranzakciók keresése"
+
+#~ msgid "Found %1 matching transaction (D %2 / P %3 = %4)"
+#~ msgid_plural "Found %1 matching transactions (D %2 / P %3 = %4)"
+#~ msgstr[0] ""
+#~ "%1 kritériumoknak megfelelő tranzakció található (D %2 / P %3 = %4)"
+#~ msgstr[1] ""
+#~ "%1 kritériumoknak megfelelő tranzakció található (D %2 / P %3 = %4)"
+
+#~ msgctxt "Price source"
+#~ msgid "Source"
+#~ msgstr "Forrás"
+
+#~ msgid "Delete..."
+#~ msgstr "Törlés…"
+
+#~ msgid "will be calculated"
+#~ msgstr "kiszámításra fog kerülni"
+
+#~ msgid ""
+#~ "You need to assign a category to this split before it can be entered."
+#~ msgstr ""
+#~ "A rekordhoz hozzá kell rendelni egy kategóriát, mielőtt megadná azt."
+
+#~ msgid "Enter split"
+#~ msgstr "Rekord megadása"
+
+#~ msgid "Is a sub account"
+#~ msgstr "Alszámlája"
+
+#~ msgid "Routing Number:"
+#~ msgstr ""
+#~ "Routing Number \n"
+#~ "(főleg amerikai bankok használják):"
+
+#~ msgid ""
+#~ "Select a transaction and press the OK button or use Cancel to select none."
+#~ msgstr ""
+#~ "Válasszon egy tranzakciót és nyomja meg az OK gombot, vagy használja a "
+#~ "Mégsem gombot a kilépéshez."
+
+#~ msgid "Clear &All"
+#~ msgstr "&Összes törlése"
+
+#~ msgid "Use this to clear all splits of this transaction"
+#~ msgstr "Használja ezt, hogy törölhesse a tranzakció összes rekordját"
+
+#~ msgid "Clear &Zero"
+#~ msgstr "0 összegűek törlése"
+
+#~ msgid ""
+#~ "You are about to delete all splits of this transaction. Do you really "
+#~ "want to continue?"
+#~ msgstr ""
+#~ "Arra készül, hogy törölje a tranzakció összes rekordját. Biztosan "
+#~ "folytatni szeretné?"
+
+#~ msgid "<b>11,00<b>"
+#~ msgstr "<b>11,00<b>"
+
+#~ msgid "<b>111,00<b>"
+#~ msgstr "<b>111,00<b>"
+
+#~ msgid "100,00"
+#~ msgstr "100,00"
+
+#~ msgid ""
+#~ "This dialog does not allow new tags to be created. Please pick a tag from "
+#~ "the list."
+#~ msgstr ""
+#~ "Itt nem lehet létrehozni új címkét. Kérjük válasszon címkét a listából."
+
+#~ msgid "Tag creation"
+#~ msgstr "Címke létrehozása"
+
+#, fuzzy
+#~| msgid ""
+#~| "The transactions, schedules and budgets associated with the selected "
+#~| "category need to be re-assigned to a different category before the "
+#~| "selected category can be deleted. Please select a category from the list "
+#~| "below."
+#~ msgid ""
+#~ "The transactions associated with the selected tags need to be re-assigned "
+#~ "to a different tag before the selected tags can be deleted. Please select "
+#~ "a tag from the list below."
+#~ msgstr ""
+#~ "Mivel tranzakciók, ütemezések és költségvetések lehetnek hozzárendelve "
+#~ "ehhez a kategóriához, a törlése előtt egy új kategóriát kell kiválasztani "
+#~ "a számukra. Kérjük válasszon egy kategóriát az alábbi listából."
+
+#, fuzzy
+#~| msgid "Icons & splash screen"
+#~ msgid "Show splash screen"
+#~ msgstr "Ikonok és betöltőlépernyő"
+
+#~ msgid "Show title bar on each page"
+#~ msgstr "Címsáv megjelenítése minden oldalon"
+
+#, fuzzy
+#~| msgid "Symbol"
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Symbol"
+#~ msgstr "Szimbólum"
+
+#, fuzzy
+#~| msgid "Identification"
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Identification number"
+#~ msgstr "Azonosító"
+
+#, fuzzy
+#~| msgctxt "@title header of the currency name column"
+#~| msgid "Name"
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Name"
+#~ msgstr "Név"
+
+#, fuzzy
+#~| msgid ""
+#~| "The file <b>%1</b> already exists. Do you really want to overwrite it?"
+#~ msgid ""
+#~ "Security <b>%1</b> uses this quote source.<br>Do you really want to "
+#~ "remove it?"
+#~ msgstr "A(z) <b>%1</b> fájl már létezik. Biztosan felül kívánja írni?"
+
+#, fuzzy
+#~| msgid "Delete the selected source entry"
+#~ msgid "Delete quote source"
+#~ msgstr "Kiválasztott forrás bejegyzés törlése"
+
+#~ msgid "Always show a No. field"
+#~ msgstr "Mindig jelenítsen meg egy szám mezőt"
+
+#~ msgid "Category/Account"
+#~ msgstr "Kategória/Számla"
+
+#~ msgid "Transfer from"
+#~ msgstr "Átutalás (honnan)"
+
+#~ msgid "Transfer to"
+#~ msgstr "Átutalás (hova)"
+
+#, fuzzy
+#~| msgid ""
+#~| "The number <b>%1</b> has already been used in account <b>%2</b>."
+#~| "<center>Do you want to replace it with the next available number?</"
+#~| "center>"
+#~ msgid ""
+#~ "Check number <b>%1</b> has already been used in account <b>%2</b>."
+#~ "<center>Do you want to replace it with the next available number?</center>"
+#~ msgstr ""
+#~ "A számot, <b>%1</b> már <b>%2</b> számla használja. <center>Szeretné "
+#~ "kicserélni a következő elérhető számmal?</center>"
+
+#~ msgid "Storing transactions"
+#~ msgstr "Tranzakciók tárolása"
+
+#~ msgid "&Enter"
+#~ msgstr "&Beír"
+
+#~ msgid "Use this to enter the transaction into the ledger."
+#~ msgstr "Használja ezt, hogy megadja a tranzakciókat a Főkönyvbe."
+
+#~ msgid "&Schedule"
+#~ msgstr "&Ütemezés"
+
+#~ msgid "Accepts the entered data and stores it as schedule"
+#~ msgstr "Megadott adatok elfogadása és tárolása mint ütemezés"
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the warning balance of %2."
+#~ msgstr ""
+#~ "A <b>%1</b> számla egyenlege a figyelmeztetési %2 összeg alá csökken."
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the minimum balance of %2."
+#~ msgstr "A <b>%1</b> számla egyenlege a minimum %2 összeg alá csökken."
+
+#~ msgid "Thomas Baumgart"
+#~ msgstr "Thomas Baumgart"
+
+#~ msgid "Cristian Oneț"
+#~ msgstr "Cristian Oneț"
+
+#, fuzzy
+#~| msgid "Cristian Oneț"
+#~ msgid "Christian Dávid"
+#~ msgstr "Cristian Oneț"
+
+#, fuzzy
+#~| msgid "Michael Edwardes."
+#~ msgid "Michael Edwardes"
+#~ msgstr "Michael Edwardes."
+
+#~ msgid "Alvaro Soliverez"
+#~ msgstr "Alvaro Soliverez"
+
+#~ msgid "Ace Jones"
+#~ msgstr "Ace Jones"
+
+#~ msgid "Tony Bloomfield"
+#~ msgstr "Tony Bloomfield"
+
+#~ msgid "Felix Rodriguez"
+#~ msgstr "Felix Rodriguez"
+
+#~ msgid "John C"
+#~ msgstr "John C"
+
+#~ msgid "Fernando Vilas"
+#~ msgstr "Fernando Vilas"
+
+#~ msgid "Kevin Tambascio"
+#~ msgstr "Kevin Tambascio"
+
+#~ msgid "Javier Campos Morales"
+#~ msgstr "Javier Campos Morales"
+
+#~ msgid "Robert Wadley"
+#~ msgstr "Robert Wadley"
+
+#~ msgid "Laurent Montel"
+#~ msgstr "Laurent Montel"
+
+#~ msgid "Wolfgang Rohdewald"
+#~ msgstr "Wolfgang Rohdewald"
+
+#~ msgid "Marko Käning"
+#~ msgstr "Marko Käning"
+
+#~ msgid "Account problem"
+#~ msgstr "Számla probléma"
+
+#~ msgid "&Show tip of the day"
+#~ msgstr "&A nap tippje"
+
+#~ msgctxt "New transaction button"
+#~ msgid "New"
+#~ msgstr "Új"
+
+#~ msgid "New scheduled transaction"
+#~ msgstr "Új ütemezett tranzakció"
+
+#~ msgid ""
+#~ "<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>"
+#~ msgstr "<p><b>%1</b> nem mozgatható a <b>%2</b> intézményhez. Ok: %3</p>"
+
+#~ msgid "<p><b>%1</b> cannot be moved to <b>%2</b>. Reason: %3</p>"
+#~ msgstr "<p><b>%1</b> nem mozgatható ide: <b>%2</b>. Ok: %3</p>"
+
+#~ msgid "CashFlow"
+#~ msgstr "Pénzforgalom"
+
+#~ msgctxt "Unknown reconciliation state"
+#~ msgid "Unknown"
+#~ msgstr "Ismeretlen"
+
+#~ msgctxt "Flag for unknown reconciliation state"
+#~ msgid "?"
+#~ msgstr "?"
+
+#~ msgctxt "Column heading for category in tax report"
+#~ msgid "Tax"
+#~ msgstr "Adó"
+
+#, fuzzy
+#~| msgid "C"
+#~ msgctxt "Column heading for Cost Center"
+#~ msgid "CC"
+#~ msgstr "C"
+
+#~ msgid "Total Balance"
+#~ msgstr "Egyenleg"
+
+#, fuzzy
+#~| msgid "Sort order"
+#~ msgctxt "IBAN, SWIFT, etc."
+#~ msgid "Sort Code"
+#~ msgstr "Rendezési sorrend"
+
+#~ msgctxt "Payment made from account"
+#~ msgid "Payment"
+#~ msgstr "Fizetés"
+
+#~ msgctxt "Deposit into account"
+#~ msgid "Deposit"
+#~ msgstr "Betét"
+
+#, fuzzy
+#~| msgid "Amount entered"
+#~ msgid "Cost Center"
+#~ msgstr "Mennyiség megadása"
+
+#, fuzzy
+#~| msgid "Checking"
+#~ msgctxt "It's about printing bank checks"
+#~ msgid "Check printing"
+#~ msgstr "Folyószámla"
+
+#~ msgctxt ""
+#~ "@item This comes after the hunder text if the tens unit is different from "
+#~ "0"
+#~ msgid " and "
+#~ msgstr " és "
+
+#, fuzzy
+#~| msgctxt "@item no payments were entered for a loan"
+#~| msgid "No"
+#~ msgctxt "@label The word to be printed for no fractional part as in No/00"
+#~ msgid "No"
+#~ msgstr "Nem"
+
+#~ msgid "Check template file"
+#~ msgstr "Sablon fájl ellenőrzése"
 
 #~ msgid "There are no entries in this account.\n"
 #~ msgstr "Nincsenek bejegyzések ebben a számlában.\n"
 
 #~ msgid "Invalid account"
 #~ msgstr "Érvénytelen számla"
+
+#, fuzzy
+#~| msgctxt "CSV Exporter dialog title"
+#~| msgid "CSV Exporter"
+#~ msgid "CSV exporter"
+#~ msgstr "CSV exportáló"
+
+#, fuzzy
+#~| msgctxt "CSV Importer dialog title"
+#~| msgid "CSV Importer"
+#~ msgid "CSV importer"
+#~ msgstr "CSV importáló"
+
+#, fuzzy
+#~| msgctxt "CSV Importer dialog title"
+#~| msgid "CSV Importer"
+#~ msgid "GnuCash importer"
+#~ msgstr "CSV importáló"
+
+#~ msgid "Reorganizing accounts..."
+#~ msgstr "Számlák újrarendezése…"
+
+#, fuzzy
+#~| msgid "Icalendar export settings"
+#~ msgid "iCalendar exporter"
+#~ msgstr "Icalendar export beállítások"
+
+#, fuzzy
+#~| msgctxt "KMyMoney (Filefilter)"
+#~| msgid "KMyMoney files"
+#~ msgid "KMyMoney print check"
+#~ msgstr "KMyMoney-fájlok"
+
+#~ msgid "Dequeue"
+#~ msgstr "Törlés a sorból"
+
+#~ msgid "Dequeue selected job"
+#~ msgstr "Kiválasztott feladat törlése a sorból"
+
+#~ msgid "Remove the selected job from the list"
+#~ msgstr "Kiválasztott feladat törlése a listáról"
+
+#~ msgid "Execute"
+#~ msgstr "Végrehajtás"
+
+#~ msgid "Execute all jobs in the queue"
+#~ msgstr "Sorban lévő összes feladat végrehajtása"
+
+#~ msgctxt "Warning message"
+#~ msgid "There are no jobs in the queue."
+#~ msgstr "Nincsenek feladatok a sorban."
+
+#~ msgctxt "Message title"
+#~ msgid "No Jobs"
+#~ msgstr "Nincsenek feladatok"
+
+#~ msgid "Jobs"
+#~ msgstr "Feladatok"
+
+#, fuzzy
+#~| msgid "QIF Import"
+#~ msgid "OFX Importer"
+#~ msgstr "QIF importálás"
+
+#, fuzzy
+#~| msgid "QIF Import"
+#~ msgid "QIF importer"
+#~ msgstr "QIF importálás"
+
+#, fuzzy
+#~| msgid "Budgets"
+#~ msgid "Budgets view"
+#~ msgstr "Költségvetések"
+
+#~ msgid "Select year"
+#~ msgstr "Év választó"
+
+#~ msgid "Budget year"
+#~ msgstr "Költségvetési év"
+
+#~ msgid "Change budget year"
+#~ msgstr "Költségvetési év változtatása"
+
+#~ msgid ""
+#~ "A budget with the name '%1' already exists. It is not advisable to have "
+#~ "multiple budgets with the same identification name. Are you sure you "
+#~ "would like to rename the budget?"
+#~ msgstr ""
+#~ "Egy költségvetés már létezik '%1' néven. Nem tanácsos, hogy több "
+#~ "költségvetésnek ugyanaz az azonosító neve legyen. Biztos benne, hogy "
+#~ "átakarja nevezni a költségvetést?"
+
+#~ msgid "Creates a new budget"
+#~ msgstr "Új költségvetés létrehozása"
+
+#~ msgid "Use this to create a new empty budget."
+#~ msgstr "Használja ezt, hogy egy új üres költségvetést hozzon létre."
+
+#~ msgctxt "New budget"
+#~ msgid "New"
+#~ msgstr "Új"
+
+#, fuzzy
+#~| msgid "Rename the current selected budget"
+#~ msgid "Rename the current selected budget."
+#~ msgstr "Kiválasztott költségvetés átnevezése"
+
+#~ msgid "Use this to start renaming the selected budget."
+#~ msgstr "Használja ezt, hogy átnevezze a kiválasztott költségvetést."
+
+#~ msgid "Delete the current selected budget"
+#~ msgstr "Kiválasztott költségvetés törlése"
+
+#~ msgid "Use this to delete the selected budget."
+#~ msgstr "Használja ezt, hogy törölje a kiválasztott költségvetést."
+
+#~ msgctxt "@title header of the budget name column"
+#~ msgid "Name"
+#~ msgstr "Név"
+
+#~ msgid "Upd"
+#~ msgstr "Frissítés"
+
+#, fuzzy
+#~| msgid "Forecast"
+#~ msgid "Forecast view"
+#~ msgstr "Előrejelzés"
+
+#~ msgid "Copy this report to the clipboard"
+#~ msgstr "Másolja ezt a jelentést a vágólapra"
+
+#~ msgid "Copy"
+#~ msgstr "Másolás"
+
+#~ msgid "Close this window"
+#~ msgstr "Ablak bezárása"
 
 #, fuzzy
 #~| msgid ""
@@ -26313,50 +26659,6 @@ msgstr ""
 #~ msgstr ""
 #~ "*.css|CSS fájlok\n"
 #~ "*|Minden fájl"
-
-#, fuzzy
-#~| msgid "Budget options"
-#~ msgctxt "@title:menu budget context menu"
-#~ msgid "Budget options"
-#~ msgstr "Költségvetési beállítások"
-
-#, fuzzy
-#~| msgctxt "KMyMoney (Filefilter)"
-#~| msgid "KMyMoney files"
-#~ msgid "KMyMoney print check"
-#~ msgstr "KMyMoney-fájlok"
-
-#~ msgctxt "Activity for income categories"
-#~ msgid "Received"
-#~ msgstr "Fogadott"
-
-#~ msgctxt "Activity for expense categories"
-#~ msgid "Paid"
-#~ msgstr "Fizetett"
-
-#, fuzzy
-#~| msgid "Pay to"
-#~ msgctxt "Payee"
-#~ msgid "Pay to"
-#~ msgstr "Neki"
-
-#, fuzzy
-#~| msgid "From"
-#~ msgctxt "Payer"
-#~ msgid "From"
-#~ msgstr "Tőle"
-
-#, fuzzy
-#~| msgid "C"
-#~ msgctxt "@title:column"
-#~ msgid "CC"
-#~ msgstr "C"
-
-#~ msgid "Always show a No. field"
-#~ msgstr "Mindig jelenítsen meg egy szám mezőt"
-
-#~ msgid "Always show a No. field in transaction form"
-#~ msgstr "Mindig mutassa a szám mezőt a tranzakció űrlapon"
 
 #~ msgid "Loading securities..."
 #~ msgstr "Kötvények betöltése"
@@ -26381,34 +26683,160 @@ msgstr ""
 #~ msgid "Loading user information..."
 #~ msgstr "Felhasználóinformációk betöltése…ül"
 
-#~ msgctxt "Enter todays date into date input widget"
-#~ msgid "T"
-#~ msgstr "T"
+#~ msgid "Saving accounts..."
+#~ msgstr "Számlák mentése..."
+
+#~ msgid "Saving transactions..."
+#~ msgstr "Tranzakciók mentése…"
+
+#~ msgid "Saving reports..."
+#~ msgstr "Jelentések mentése…"
+
+#~ msgid "Saving budgets..."
+#~ msgstr "Költségvetések mentése..."
 
 #, fuzzy
-#~| msgid "Accepts the entered data and stores it as schedule"
-#~ msgctxt "@info:tooltip Accept button"
-#~ msgid "Accept the transaction and mark it cleared."
-#~ msgstr "Megadott adatok elfogadása és tárolása mint ütemezés"
+#~| msgid "Saving accounts..."
+#~ msgid "Saving costcenters..."
+#~ msgstr "Számlák mentése..."
+
+#~ msgid "Always show a No. field in transaction form"
+#~ msgstr "Mindig mutassa a szám mezőt a tranzakció űrlapon"
+
+#~ msgid "Show splash screen during startup"
+#~ msgstr "Indítás alatt jelenítse meg a betöltő képernyőt"
+
+#~ msgid "Show title bar on each view"
+#~ msgstr "Címsáv megjelenítése minden nézeten"
+
+#~ msgid "Reconcile"
+#~ msgstr "Egyeztetés"
 
 #, fuzzy
-#~| msgid "Do you really want to delete the selected transaction?"
-#~| msgid_plural "Do you really want to delete all %1 selected transactions?"
-#~ msgctxt "Question about the accept action"
-#~ msgid "Do you want to accept the imported transaction now?"
-#~ msgstr "Valóban törölni akarja a kiválasztott tranzakciót?"
+#~| msgid "Cannot create transactions when no account is selected."
+#~ msgid "Add reversing transactions to the currently selected"
+#~ msgstr ""
+#~ "Nem lehet létrehozni tranzakciókat, amikor nincs kiválasztva számla."
+
+#~ msgid ""
+#~ "At least one split of the selected transactions has been reconciled. Do "
+#~ "you wish to continue to edit the transactions anyway?"
+#~ msgstr ""
+#~ "Legalább egy rekordja a kiválasztott tranzakciónak már egyeztetve van. "
+#~ "Mindenképpen folytatja a tranzakció szerkesztését?"
+
+#~ msgid "Cannot create transactions when no account is selected."
+#~ msgstr ""
+#~ "Nem lehet létrehozni tranzakciókat, amikor nincs kiválasztva számla."
+
+#~ msgid "Cannot create transactions in the context of a category."
+#~ msgstr ""
+#~ "Nem lehet ebben a kontextusban létrehozni tranzakciókat a kategóriának."
+
+#~ msgid "Cannot edit transactions in the context of a category."
+#~ msgstr ""
+#~ "A kategória tranzakcióit nem lehet ebben a kontextusban szerkeszteni."
 
 #, fuzzy
-#~| msgid "Split transaction"
-#~ msgctxt "@title:window"
-#~ msgid "Accept transaction"
-#~ msgstr "Osztott tranzakció"
+#~| msgid ""
+#~| "Cannot edit investment transactions and non-investment transactions "
+#~| "together."
+#~ msgid "Cannot edit mixed investment action/type transactions together."
+#~ msgstr ""
+#~ "Nem lehet együtt szerkeszteni befektetés tranzakciókat és nem befektetés "
+#~ "tranzakciókat."
 
-#~ msgid "Copy this report to the clipboard"
-#~ msgstr "Másolja ezt a jelentést a vágólapra"
+#~ msgid ""
+#~ "Cannot edit investment transactions and non-investment transactions "
+#~ "together."
+#~ msgstr ""
+#~ "Nem lehet együtt szerkeszteni befektetés tranzakciókat és nem befektetés "
+#~ "tranzakciókat."
 
-#~ msgid "Copy"
-#~ msgstr "Másolás"
+#~ msgid "Cannot edit investment transactions in the context of this account."
+#~ msgstr ""
+#~ "Ennek a számlának a befektetés tranzakcióit nem lehet ilyen kontextusban "
+#~ "szerkeszteni."
+
+#~ msgid ""
+#~ "<p>Please select what you want to do: discard the changes, save the "
+#~ "changes or continue to edit the transaction.</p><p>You can also set an "
+#~ "option to save the transaction automatically when e.g. selecting another "
+#~ "transaction.</p>"
+#~ msgstr ""
+#~ "<p>Válasszon mit szeretne tenni: változtatások elvetése, változtatások "
+#~ "mentése, vagy a tranzakció szerkesztésének folytatása.</p><p>Beállítható "
+#~ "az is , hogy automatikusan mentse a tranzakciót, ha például egy másik "
+#~ "tranzakciót választ ki.</p>"
+
+#~ msgid "End transaction edit"
+#~ msgstr "Tranzakció szerkesztésének befejezése"
+
+#, fuzzy
+#~| msgid ""
+#~| "<p>Please select what you want to do: discard the changes, save the "
+#~| "changes or continue to edit the transaction.</p><p>You can also set an "
+#~| "option to save the transaction automatically when e.g. selecting another "
+#~| "transaction.</p>"
+#~ msgid ""
+#~ "<p>Please select what you want to do: discard or save the changes.</"
+#~ "p><p>You can also set an option to save the transaction automatically "
+#~ "when e.g. selecting another transaction.</p>"
+#~ msgstr ""
+#~ "<p>Válasszon mit szeretne tenni: változtatások elvetése, változtatások "
+#~ "mentése, vagy a tranzakció szerkesztésének folytatása.</p><p>Beállítható "
+#~ "az is , hogy automatikusan mentse a tranzakciót, ha például egy másik "
+#~ "tranzakciót választ ki.</p>"
+
+#, fuzzy
+#~| msgid "Date:"
+#~ msgid "Date: %1"
+#~ msgstr "Dátum:"
+
+#, fuzzy
+#~| msgid "Unknown"
+#~ msgctxt "Name for unknown payee"
+#~ msgid "Unknown"
+#~ msgstr "Ismeretlen"
+
+#, fuzzy
+#~| msgid "Payee%1"
+#~ msgid "Payee: %1"
+#~ msgstr "Kedvezményezett%1"
+
+#, fuzzy
+#~| msgid "Memo"
+#~ msgid "Memo: %1"
+#~ msgstr "Megjegyzés"
+
+#~ msgid "Statement Details"
+#~ msgstr "Számlakivonat részletek"
+
+#~ msgid "Statement Payment Details"
+#~ msgstr "Számlakivonat fizetés részletek"
+
+#, fuzzy
+#~| msgctxt "Holiday region (region language)"
+#~| msgid "%1 (%2)"
+#~ msgid "%1 charge (%2)"
+#~ msgid_plural "%1 charges (%2)"
+#~ msgstr[0] "%1 (%2)"
+#~ msgstr[1] "%1 (%2)"
+
+#~ msgctxt "%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments"
+#~ msgid "%1, %2"
+#~ msgstr "%1, %2"
+
+#~ msgid "Last reconciled: %1"
+#~ msgstr "Utolsó egyeztetés: %1"
+
+#, fuzzy
+#~| msgid "Unable to add transactions"
+#~ msgid "Unable to delete transaction(s)"
+#~ msgstr "Nem lehet hozzáadni a tranzakciókat"
+
+#~ msgid "Running automatic reconciliation"
+#~ msgstr "Automatikus egyeztetés futtatása"
 
 #~ msgid "Your Financial Summary"
 #~ msgstr "Pénzügyi áttekintés"
@@ -26416,10 +26844,112 @@ msgstr ""
 #~ msgid "Show KMyMoney welcome page"
 #~ msgstr "Ugrás a KMyMoney üdvözlő képernyőjére"
 
+#~ msgid "Today's due payments"
+#~ msgstr "Ma aktuális fizetések"
+
 #, fuzzy
 #~| msgid "Last reconciled: %1"
 #~ msgid "Last Reconciled"
 #~ msgstr "Utolsó egyeztetés: %1"
+
+#~ msgid "Select Account:"
+#~ msgstr "Válasszon számlát:"
+
+#~ msgid "Remove this security item from the file"
+#~ msgstr "Távolítsa el ezt a kötvény elemt a fájlból"
+
+#, fuzzy
+#~| msgid "Open ledger"
+#~ msgid "New ledger"
+#~ msgstr "Főkönyv megnyitása"
+
+#, fuzzy
+#~| msgid "Do you want to add <b>%1</b> as payer/receiver?"
+#~ msgid "Do you want to show <b>%1</b> column on every loaded view?"
+#~ msgstr "Hozzá akarja adni <b>%1</b>-t, mint fizető/fogadó?"
+
+#, fuzzy
+#~| msgid "Do you want to add <b>%1</b> as payer/receiver?"
+#~ msgid "Do you want to hide <b>%1</b> column on every loaded view?"
+#~ msgstr "Hozzá akarja adni <b>%1</b>-t, mint fizető/fogadó?"
+
+#~ msgid "Unable to add schedule: %1"
+#~ msgstr "Nem lehet hozzáadni az ütemezést: %1"
+
+#~ msgid "Use this to create a new payee."
+#~ msgstr "Használja ezt új kedvezményezett létrehozásához"
+
+#~ msgctxt "New payee"
+#~ msgid "New"
+#~ msgstr "Új"
+
+#~ msgid "Rename the current selected payee"
+#~ msgstr "Kiválasztott kedvezményezett átnevezése"
+
+#~ msgid "Use this to start renaming the selected payee."
+#~ msgstr "Használja ezt, hogy átnevezze a kiválasztott kedvezményezettet."
+
+#~ msgid "Delete selected payee(s)"
+#~ msgstr "Kijelölt kedvezményezettek törlése"
+
+#~ msgid ""
+#~ "Use this to delete the selected payee. You can also select multiple "
+#~ "payees to be deleted."
+#~ msgstr ""
+#~ "Használja ezt a kijelölt kedvezményezett törléséhez. Egyszerre több "
+#~ "kedvezményezettet is kijelölhet."
+
+#, fuzzy
+#~| msgid "Rename the current selected payee"
+#~ msgid "Merge multiple selected payees"
+#~ msgstr "Kiválasztott kedvezményezett átnevezése"
+
+#, fuzzy
+#~| msgid "Use this to delete the selected payee."
+#~ msgid "Use this to merge multiple selected payees."
+#~ msgstr "Használja ezt, hogy törölje a kiválasztott kedvezményezettet."
+
+#~ msgid "Bills"
+#~ msgstr "Számlák (mint kifizetnivalók)"
+
+#~ msgid "Loans"
+#~ msgstr "Hitelek"
+
+#~ msgid "Type/Name"
+#~ msgstr "Típus/Név"
+
+#~ msgid "Frequency"
+#~ msgstr "Gyakoriság"
+
+#~ msgid "Unable to load accounts: "
+#~ msgstr "Nem lehet a számlát betölteni: "
+
+#~ msgid "<p>Do you really want to remove the tag <b>%1</b>?</p>"
+#~ msgstr "<p>Valóban el akarja távolítani a címkét: <b>%1</b>?</p>"
+
+#~ msgid "Do you really want to remove all selected tags?"
+#~ msgstr "Valóban el akarja távolítani az összes kiválasztott címkét?"
+
+#~ msgid "Remove Tag"
+#~ msgstr "Címke eltávolítása"
+
+#~ msgid "Creates a new tag"
+#~ msgstr "Új címkét hoz létre"
+
+#~ msgid "Use this to create a new tag."
+#~ msgstr "Használja ezt új címke létrehozásához."
+
+#~ msgid "Rename the current selected tag"
+#~ msgstr "A jelenleg kiválasztott címke átnevezése"
+
+#~ msgid "Use this to start renaming the selected tag."
+#~ msgstr "Használja ezt, hogy átnevezze a kiválasztott címkét."
+
+#~ msgid "Delete the current selected tag"
+#~ msgstr "A jelenleg kiválasztott címke törlése"
+
+#~ msgid "Use this to delete the selected tag."
+#~ msgstr "Használja ezt, hogy törölje a kiválasztott címkét."
 
 #~ msgid "Go to My Financial Summary"
 #~ msgstr "Ugrás a pénzügyi áttekintőre"
@@ -26514,61 +27044,181 @@ msgstr ""
 #~ msgstr "Online beállítások"
 
 #, fuzzy
-#~| msgid "Any status"
-#~ msgctxt ""
-#~ msgid "Any status"
-#~ msgstr "Összes állapot"
+#~| msgid "Online Statement Balance: %1"
+#~ msgid "Online statement balance: %1"
+#~ msgstr "Online számlakivonat egyenleg: %1"
 
 #, fuzzy
-#~| msgid "Closed"
-#~ msgctxt ""
-#~ msgid "Closed"
-#~ msgstr "Lezárva"
-
-#~ msgctxt "Payment made from account"
-#~ msgid "Payment"
-#~ msgstr "Fizetés"
-
-#~ msgctxt "Deposit into account"
-#~ msgid "Deposit"
-#~ msgstr "Betét"
+#~| msgctxt "location of credit column"
+#~| msgid "Credits"
+#~ msgid "Credit"
+#~ msgstr "Hitelek"
 
 #, fuzzy
-#~| msgctxt "@title header of the currency name column"
-#~| msgid "Name"
-#~ msgctxt "OnlineJob"
-#~ msgid "Name"
-#~ msgstr "Név"
-
-#, fuzzy
-#~| msgid ""
-#~| "The transactions, schedules and budgets associated with the selected "
-#~| "category need to be re-assigned to a different category before the "
-#~| "selected category can be deleted. Please select a category from the list "
-#~| "below."
-#~ msgid ""
-#~ "The transactions associated with the selected tags need to be re-assigned "
-#~ "to a different tag before the selected tags can be deleted. Please select "
-#~ "a tag from the list below."
-#~ msgstr ""
-#~ "Mivel tranzakciók, ütemezések és költségvetések lehetnek hozzárendelve "
-#~ "ehhez a kategóriához, a törlése előtt egy új kategóriát kell kiválasztani "
-#~ "a számukra. Kérjük válasszon egy kategóriát az alábbi listából."
-
-#~ msgid "<p>Do you really want to remove the tag <b>%1</b>?</p>"
-#~ msgstr "<p>Valóban el akarja távolítani a címkét: <b>%1</b>?</p>"
-
-#~ msgid "Do you really want to remove all selected tags?"
-#~ msgstr "Valóban el akarja távolítani az összes kiválasztott címkét?"
-
-#~ msgid "Remove Tag"
-#~ msgstr "Címke eltávolítása"
+#~| msgctxt "location of debit column"
+#~| msgid "Debits"
+#~ msgid "Debit"
+#~ msgstr "Tartozások"
 
 #~ msgid "Pay to"
 #~ msgstr "Neki"
 
-#~ msgid "&Show tip of the day"
-#~ msgstr "&A nap tippje"
+#~ msgctxt "Deposits onto account"
+#~ msgid "Deposits"
+#~ msgstr "Betétek"
+
+#~ msgctxt "Payments towards credit card"
+#~ msgid "Payments"
+#~ msgstr "Fizetések"
+
+#~ msgctxt "Payments made from account"
+#~ msgid "Payments"
+#~ msgstr "Fizetések"
+
+#~ msgctxt "Payments made with credit card"
+#~ msgid "Charges"
+#~ msgstr "Díjak"
+
+#~ msgctxt "Reconcile state 'Not reconciled'"
+#~ msgid "Not reconciled"
+#~ msgstr "Nem egyeztetett"
+
+#~ msgctxt "Reconcile state 'Cleared'"
+#~ msgid "Cleared"
+#~ msgstr "Tisztázott"
+
+#~ msgctxt "Reconcile state 'Reconciled'"
+#~ msgid "Reconciled"
+#~ msgstr "Egyeztetett"
+
+#~ msgctxt "Reconcile state 'Frozen'"
+#~ msgid "Frozen"
+#~ msgstr "Rögzített"
+
+#~ msgctxt "Unknown reconcile state"
+#~ msgid "Unknown"
+#~ msgstr "Ismeretlen"
+
+#~ msgid "Ratio"
+#~ msgstr "Ráta"
+
+#~ msgid "Fee Amount"
+#~ msgstr "Díj összege"
+
+#~ msgid "Account Types"
+#~ msgstr "Számla típusok"
+
+#~ msgctxt "The balance of the selected budget"
+#~ msgid "Balance: "
+#~ msgstr "Egyenleg: "
+
+#~ msgctxt "Activity for income categories"
+#~ msgid "Received"
+#~ msgstr "Fogadott"
+
+#~ msgctxt "Activity for expense categories"
+#~ msgid "Paid"
+#~ msgstr "Fizetett"
+
+#, fuzzy
+#~| msgid "Pay to"
+#~ msgctxt "Payee"
+#~ msgid "Pay to"
+#~ msgstr "Neki"
+
+#, fuzzy
+#~| msgid "From"
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "Tőle"
+
+#~ msgctxt "Enter todays date into date input widget"
+#~ msgid "T"
+#~ msgstr "T"
+
+#~ msgid "Closed tag"
+#~ msgstr "Lezárt címke"
+
+#~ msgid "The tag is already present."
+#~ msgstr "A címke már létezik."
+
+#, fuzzy
+#~| msgid "Opening balance: %1"
+#~ msgid "Reconciled Balance: %1"
+#~ msgstr "Nyitóegyenleg: %1"
+
+#~ msgid "Online Statement Balance: %1"
+#~ msgstr "Online számlakivonat egyenleg: %1"
+
+#~ msgctxt "Unknown payee"
+#~ msgid "Unknown"
+#~ msgstr "Ismeretlen"
+
+#~ msgctxt "Unknown category"
+#~ msgid "Unknown"
+#~ msgstr "Ismeretlenism"
+
+#~ msgctxt "Unknown security"
+#~ msgid "Unknown"
+#~ msgstr "Ismeretlen"
+
+#~ msgctxt "label for status combo"
+#~ msgid "Stat&us"
+#~ msgstr "Állap&ot"
+
+#~ msgid "Sell"
+#~ msgstr "Elad"
+
+#~ msgid "Buy"
+#~ msgstr "Vásárol"
+
+#~ msgid "Investment transaction"
+#~ msgstr "Befektetés tranzakció"
+
+#~ msgid "Bank entry:"
+#~ msgstr "Bank bejegyzése:"
+
+#~ msgid "Your entry:"
+#~ msgstr "Ön bejegyzése:"
+
+#~ msgid "&Deposit"
+#~ msgstr "&Betét"
+
+#~ msgid "&Transfer"
+#~ msgstr "&Átutalás"
+
+#~ msgid "&Withdrawal"
+#~ msgstr "&Kivét"
+
+#~ msgid "&Payment"
+#~ msgstr "&Fizetések"
+
+#~ msgid "&Charge"
+#~ msgstr "&Költség"
+
+#~ msgid "&Decrease"
+#~ msgstr "&Csökken"
+
+#~ msgid "&Increase"
+#~ msgstr "&Nő"
+
+#~ msgid "No Title specified"
+#~ msgstr "Nincs cím meghatározva"
+
+#~ msgid "Preferred account"
+#~ msgstr "Elsődleges számla"
+
+#~ msgid "Enter the CUSIP/ISIN/WKN identification number here"
+#~ msgstr "Ide írhatja a CUSIP/ISIN/WKN azonosító számot"
+
+#~ msgid "This wizard allows you to modify the selected security."
+#~ msgstr "Ez a varázsló lehetőséget ad a kiválasztott kötvény módosításához."
+
+#~ msgid "Security found"
+#~ msgstr "Kötvény található"
+
+#~ msgid "Routing number"
+#~ msgstr "Routing Number (főleg amerikai bankok használják)"
 
 #~ msgid ""
 #~ "<p>...that you can change the sort order of ledger entries by\n"
@@ -26748,250 +27398,6 @@ msgstr ""
 #~ "keresztül.</p>\n"
 #~ "<p>Készítette: Jose Jorge</p>\n"
 
-#~ msgid "Remove this security item from the file"
-#~ msgstr "Távolítsa el ezt a kötvény elemt a fájlból"
-
-#~ msgid "Delete..."
-#~ msgstr "Törlés…"
-
-#~ msgctxt "Deposits onto account"
-#~ msgid "Deposits"
-#~ msgstr "Betétek"
-
-#~ msgctxt "Payments towards credit card"
-#~ msgid "Payments"
-#~ msgstr "Fizetések"
-
-#~ msgctxt "Payments made from account"
-#~ msgid "Payments"
-#~ msgstr "Fizetések"
-
-#~ msgctxt "Payments made with credit card"
-#~ msgid "Charges"
-#~ msgstr "Díjak"
-
-#~ msgctxt "Reconcile state 'Not reconciled'"
-#~ msgid "Not reconciled"
-#~ msgstr "Nem egyeztetett"
-
-#~ msgctxt "Reconcile state 'Cleared'"
-#~ msgid "Cleared"
-#~ msgstr "Tisztázott"
-
-#~ msgctxt "Reconcile state 'Reconciled'"
-#~ msgid "Reconciled"
-#~ msgstr "Egyeztetett"
-
-#~ msgctxt "Reconcile state 'Frozen'"
-#~ msgid "Frozen"
-#~ msgstr "Rögzített"
-
-#~ msgctxt "Unknown reconcile state"
-#~ msgid "Unknown"
-#~ msgstr "Ismeretlen"
-
-#~ msgctxt "Total value"
-#~ msgid "Total"
-#~ msgstr "Összes"
-
-#~ msgid "Ratio 1/"
-#~ msgstr "Arány 1/"
-
-#~ msgid "Ratio"
-#~ msgstr "Ráta"
-
-#~ msgid "Fee Amount"
-#~ msgstr "Díj összege"
-
-#~ msgid "Price/Share"
-#~ msgstr "Ár/részvény"
-
-#~ msgid "Asset account"
-#~ msgstr "Vagyontárgy számla"
-
-#~ msgid "Found %1 matching transaction (D %2 / P %3 = %4)"
-#~ msgid_plural "Found %1 matching transactions (D %2 / P %3 = %4)"
-#~ msgstr[0] ""
-#~ "%1 kritériumoknak megfelelő tranzakció található (D %2 / P %3 = %4)"
-#~ msgstr[1] ""
-#~ "%1 kritériumoknak megfelelő tranzakció található (D %2 / P %3 = %4)"
-
-#~ msgctxt "To duplicate a split"
-#~ msgid "Duplicate"
-#~ msgstr "Duplikálás"
-
-#~ msgid "will be calculated"
-#~ msgstr "kiszámításra fog kerülni"
-
-#~ msgid ""
-#~ "You need to assign a category to this split before it can be entered."
-#~ msgstr ""
-#~ "A rekordhoz hozzá kell rendelni egy kategóriát, mielőtt megadná azt."
-
-#~ msgid "Enter split"
-#~ msgstr "Rekord megadása"
-
-#~ msgid ""
-#~ "Select a transaction and press the OK button or use Cancel to select none."
-#~ msgstr ""
-#~ "Válasszon egy tranzakciót és nyomja meg az OK gombot, vagy használja a "
-#~ "Mégsem gombot a kilépéshez."
-
-#~ msgid "Clear &All"
-#~ msgstr "&Összes törlése"
-
-#~ msgid "Use this to clear all splits of this transaction"
-#~ msgstr "Használja ezt, hogy törölhesse a tranzakció összes rekordját"
-
-#~ msgid "Clear &Zero"
-#~ msgstr "0 összegűek törlése"
-
-#~ msgid ""
-#~ "You are about to delete all splits of this transaction. Do you really "
-#~ "want to continue?"
-#~ msgstr ""
-#~ "Arra készül, hogy törölje a tranzakció összes rekordját. Biztosan "
-#~ "folytatni szeretné?"
-
-#~ msgid "<b>11,00<b>"
-#~ msgstr "<b>11,00<b>"
-
-#~ msgid "<b>111,00<b>"
-#~ msgstr "<b>111,00<b>"
-
-#~ msgid "Unassigned"
-#~ msgstr "Hiányzó összeg"
-
-#~ msgid "100,00"
-#~ msgstr "100,00"
-
-#~ msgid "Online Statement Balance: %1"
-#~ msgstr "Online számlakivonat egyenleg: %1"
-
-#~ msgctxt "Unknown payee"
-#~ msgid "Unknown"
-#~ msgstr "Ismeretlen"
-
-#~ msgctxt "Unknown category"
-#~ msgid "Unknown"
-#~ msgstr "Ismeretlenism"
-
-#~ msgctxt "Unknown security"
-#~ msgid "Unknown"
-#~ msgstr "Ismeretlen"
-
-#~ msgctxt "label for status combo"
-#~ msgid "Stat&us"
-#~ msgstr "Állap&ot"
-
-#~ msgid "Sell"
-#~ msgstr "Elad"
-
-#~ msgid "Buy"
-#~ msgstr "Vásárol"
-
-#~ msgid "Investment transaction"
-#~ msgstr "Befektetés tranzakció"
-
-#~ msgid "Transfer to"
-#~ msgstr "Átutalás (hova)"
-
-#~ msgid "Transfer from"
-#~ msgstr "Átutalás (honnan)"
-
-#~ msgid "Category/Account"
-#~ msgstr "Kategória/Számla"
-
-#~ msgid "Bank entry:"
-#~ msgstr "Bank bejegyzése:"
-
-#~ msgid "Your entry:"
-#~ msgstr "Ön bejegyzése:"
-
-#~ msgctxt "Unknown reconciliation state"
-#~ msgid "Unknown"
-#~ msgstr "Ismeretlen"
-
-#, fuzzy
-#~| msgid ""
-#~| "The number <b>%1</b> has already been used in account <b>%2</b>."
-#~| "<center>Do you want to replace it with the next available number?</"
-#~| "center>"
-#~ msgid ""
-#~ "Check number <b>%1</b> has already been used in account <b>%2</b>."
-#~ "<center>Do you want to replace it with the next available number?</center>"
-#~ msgstr ""
-#~ "A számot, <b>%1</b> már <b>%2</b> számla használja. <center>Szeretné "
-#~ "kicserélni a következő elérhető számmal?</center>"
-
-#~ msgid "Storing transactions"
-#~ msgstr "Tranzakciók tárolása"
-
-#~ msgid "&Enter"
-#~ msgstr "&Beír"
-
-#~ msgid "Use this to enter the transaction into the ledger."
-#~ msgstr "Használja ezt, hogy megadja a tranzakciókat a Főkönyvbe."
-
-#~ msgid "&Schedule"
-#~ msgstr "&Ütemezés"
-
-#~ msgid "Accepts the entered data and stores it as schedule"
-#~ msgstr "Megadott adatok elfogadása és tárolása mint ütemezés"
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the warning balance of %2."
-#~ msgstr ""
-#~ "A <b>%1</b> számla egyenlege a figyelmeztetési %2 összeg alá csökken."
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the minimum balance of %2."
-#~ msgstr "A <b>%1</b> számla egyenlege a minimum %2 összeg alá csökken."
-
-#~ msgid "&Deposit"
-#~ msgstr "&Betét"
-
-#~ msgid "&Transfer"
-#~ msgstr "&Átutalás"
-
-#~ msgid "&Withdrawal"
-#~ msgstr "&Kivét"
-
-#~ msgid "&Payment"
-#~ msgstr "&Fizetések"
-
-#~ msgid "&Charge"
-#~ msgstr "&Költség"
-
-#~ msgid "&Decrease"
-#~ msgstr "&Csökken"
-
-#~ msgid "&Increase"
-#~ msgstr "&Nő"
-
-#~ msgid "Reconcile"
-#~ msgstr "Egyeztetés"
-
-#~ msgctxt "Button text for match transaction"
-#~ msgid "Match"
-#~ msgstr "Egyezés"
-
-#, fuzzy
-#~| msgid "Cannot create transactions when no account is selected."
-#~ msgid "Add reversing transactions to the currently selected"
-#~ msgstr ""
-#~ "Nem lehet létrehozni tranzakciókat, amikor nincs kiválasztva számla."
-
-#~ msgid "Difference: %1"
-#~ msgstr "Különbség: %1"
-
-#~ msgid ""
-#~ "At least one split of the selected transactions has been reconciled. Do "
-#~ "you wish to continue to edit the transactions anyway?"
-#~ msgstr ""
-#~ "Legalább egy rekordja a kiválasztott tranzakciónak már egyeztetve van. "
-#~ "Mindenképpen folytatja a tranzakció szerkesztését?"
-
 #~ msgid ""
 #~ "At least one split of the selected transactions has been frozen. Editing "
 #~ "the transactions is therefore prohibited."
@@ -27005,21 +27411,9 @@ msgstr ""
 #~ msgid "Account closed"
 #~ msgstr "Számla lezárva"
 
-#~ msgid "Cannot create transactions when no account is selected."
-#~ msgstr ""
-#~ "Nem lehet létrehozni tranzakciókat, amikor nincs kiválasztva számla."
-
-#~ msgid "Cannot create transactions in the context of a category."
-#~ msgstr ""
-#~ "Nem lehet ebben a kontextusban létrehozni tranzakciókat a kategóriának."
-
 #~ msgid "Cannot edit transactions with frozen splits."
 #~ msgstr ""
 #~ "Nem lehet rögzített rekordokat tartalmazó tranzakciókat szerkeszteni."
-
-#~ msgid "Cannot edit transactions in the context of a category."
-#~ msgstr ""
-#~ "A kategória tranzakcióit nem lehet ebben a kontextusban szerkeszteni."
 
 #, fuzzy
 #~| msgid "Cannot create transactions when no account is selected."
@@ -27028,350 +27422,26 @@ msgstr ""
 #~ "Nem lehet létrehozni tranzakciókat, amikor nincs kiválasztva számla."
 
 #, fuzzy
-#~| msgid ""
-#~| "Cannot edit investment transactions and non-investment transactions "
-#~| "together."
-#~ msgid "Cannot edit mixed investment action/type transactions together."
-#~ msgstr ""
-#~ "Nem lehet együtt szerkeszteni befektetés tranzakciókat és nem befektetés "
-#~ "tranzakciókat."
-
-#~ msgid ""
-#~ "Cannot edit investment transactions and non-investment transactions "
-#~ "together."
-#~ msgstr ""
-#~ "Nem lehet együtt szerkeszteni befektetés tranzakciókat és nem befektetés "
-#~ "tranzakciókat."
-
-#~ msgid "Cannot edit investment transactions in the context of this account."
-#~ msgstr ""
-#~ "Ennek a számlának a befektetés tranzakcióit nem lehet ilyen kontextusban "
-#~ "szerkeszteni."
-
-#~ msgid ""
-#~ "<p>Please select what you want to do: discard the changes, save the "
-#~ "changes or continue to edit the transaction.</p><p>You can also set an "
-#~ "option to save the transaction automatically when e.g. selecting another "
-#~ "transaction.</p>"
-#~ msgstr ""
-#~ "<p>Válasszon mit szeretne tenni: változtatások elvetése, változtatások "
-#~ "mentése, vagy a tranzakció szerkesztésének folytatása.</p><p>Beállítható "
-#~ "az is , hogy automatikusan mentse a tranzakciót, ha például egy másik "
-#~ "tranzakciót választ ki.</p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "Tranzakció szerkesztésének befejezése"
-
-#, fuzzy
-#~| msgid ""
-#~| "<p>Please select what you want to do: discard the changes, save the "
-#~| "changes or continue to edit the transaction.</p><p>You can also set an "
-#~| "option to save the transaction automatically when e.g. selecting another "
-#~| "transaction.</p>"
-#~ msgid ""
-#~ "<p>Please select what you want to do: discard or save the changes.</"
-#~ "p><p>You can also set an option to save the transaction automatically "
-#~ "when e.g. selecting another transaction.</p>"
-#~ msgstr ""
-#~ "<p>Válasszon mit szeretne tenni: változtatások elvetése, változtatások "
-#~ "mentése, vagy a tranzakció szerkesztésének folytatása.</p><p>Beállítható "
-#~ "az is , hogy automatikusan mentse a tranzakciót, ha például egy másik "
-#~ "tranzakciót választ ki.</p>"
-
-#, fuzzy
-#~| msgid "Date:"
-#~ msgid "Date: %1"
-#~ msgstr "Dátum:"
-
-#, fuzzy
-#~| msgid "Unknown"
-#~ msgctxt "Name for unknown payee"
-#~ msgid "Unknown"
-#~ msgstr "Ismeretlen"
-
-#, fuzzy
-#~| msgid "Payee%1"
-#~ msgid "Payee: %1"
-#~ msgstr "Kedvezményezett%1"
-
-#, fuzzy
-#~| msgid "Memo"
-#~ msgid "Memo: %1"
-#~ msgstr "Megjegyzés"
-
-#~ msgid "Statement Details"
-#~ msgstr "Számlakivonat részletek"
-
-#~ msgid "Statement Payment Details"
-#~ msgstr "Számlakivonat fizetés részletek"
-
-#, fuzzy
-#~| msgctxt "Holiday region (region language)"
-#~| msgid "%1 (%2)"
-#~ msgid "%1 charge (%2)"
-#~ msgid_plural "%1 charges (%2)"
-#~ msgstr[0] "%1 (%2)"
-#~ msgstr[1] "%1 (%2)"
-
-#~ msgctxt "%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments"
-#~ msgid "%1, %2"
-#~ msgstr "%1, %2"
-
-#~ msgid "Go to '%1'"
-#~ msgstr "Ugrás erre: „%1”"
-
-#~ msgid "Statement: %1"
-#~ msgstr "Számlakivonat: %1"
-
-#~ msgctxt "Cleared balance"
-#~ msgid "Cleared: %1"
-#~ msgstr "Tisztázott: %1"
-
-#~ msgid "Last reconciled: %1"
-#~ msgstr "Utolsó egyeztetés: %1"
-
-#, fuzzy
 #~| msgid "Cannot create transactions when no account is selected."
 #~ msgid "Cannot process transactions in account %1, which is closed."
 #~ msgstr ""
 #~ "Nem lehet létrehozni tranzakciókat, amikor nincs kiválasztva számla."
 
-#, fuzzy
-#~| msgid "Unable to add transactions"
-#~ msgid "Unable to delete transaction(s)"
-#~ msgstr "Nem lehet hozzáadni a tranzakciókat"
-
-#~ msgid "Running automatic reconciliation"
-#~ msgstr "Automatikus egyeztetés futtatása"
-
-#, fuzzy
-#~| msgid "Open ledger"
-#~ msgid "Old ledgers"
-#~ msgstr "Főkönyv megnyitása"
-
-#~ msgid "Thomas Baumgart"
-#~ msgstr "Thomas Baumgart"
-
-#~ msgid "Cristian Oneț"
-#~ msgstr "Cristian Oneț"
-
-#, fuzzy
-#~| msgid "Cristian Oneț"
-#~ msgid "Christian Dávid"
-#~ msgstr "Cristian Oneț"
-
-#, fuzzy
-#~| msgid "Michael Edwardes."
-#~ msgid "Michael Edwardes"
-#~ msgstr "Michael Edwardes."
-
-#~ msgid "Alvaro Soliverez"
-#~ msgstr "Alvaro Soliverez"
-
-#~ msgid "Ace Jones"
-#~ msgstr "Ace Jones"
-
-#~ msgid "Tony Bloomfield"
-#~ msgstr "Tony Bloomfield"
-
-#~ msgid "Felix Rodriguez"
-#~ msgstr "Felix Rodriguez"
-
-#~ msgid "John C"
-#~ msgstr "John C"
-
-#~ msgid "Fernando Vilas"
-#~ msgstr "Fernando Vilas"
-
-#~ msgid "Kevin Tambascio"
-#~ msgstr "Kevin Tambascio"
-
-#~ msgid "Javier Campos Morales"
-#~ msgstr "Javier Campos Morales"
-
-#~ msgid "Robert Wadley"
-#~ msgstr "Robert Wadley"
-
-#~ msgid "Laurent Montel"
-#~ msgstr "Laurent Montel"
-
-#~ msgid "Wolfgang Rohdewald"
-#~ msgstr "Wolfgang Rohdewald"
-
-#~ msgid "Marko Käning"
-#~ msgstr "Marko Käning"
+#~ msgid "Do not show closed accounts"
+#~ msgstr "Ne mutassa a lezárt számlákat"
 
 #~ msgctxt "HTML (Filefilter)"
 #~ msgid "HTML files"
 #~ msgstr "HTML fájlok"
 
-#~ msgctxt "Column heading for category in tax report"
-#~ msgid "Tax"
-#~ msgstr "Adó"
-
-#, fuzzy
-#~| msgid "C"
-#~ msgctxt "Column heading for Cost Center"
-#~ msgid "CC"
-#~ msgstr "C"
-
-#, fuzzy
-#~| msgid "Bank Code"
-#~ msgctxt ""
-#~ "Column heading for Bank Code. Use a generic form, do not translate using "
-#~ "a culture-specific term, e.g. 'Routing Number' (en_US) or 'Sort "
-#~ "Code' (en_GB)"
-#~ msgid "Bank Code"
-#~ msgstr "Bank kód"
-
-#, fuzzy
-#~| msgid "Full name"
-#~ msgctxt ""
-#~ "Tooltip for 'Name' column. Used in Account, Category and Institution "
-#~ "context, so avoid being too specific"
-#~ msgid "Full name"
-#~ msgstr "Teljes név"
-
-#, fuzzy
-#~| msgid "Type"
-#~ msgctxt ""
-#~ "Toolip for a 'Type' column, used in both Account and Category context"
-#~ msgid "Type"
-#~ msgstr "Típus"
-
-#~ msgid "Show title bar on each page"
-#~ msgstr "Címsáv megjelenítése minden oldalon"
-
-#~ msgid "Show title bar on each view"
-#~ msgstr "Címsáv megjelenítése minden nézeten"
-
-#~ msgid "No Title specified"
-#~ msgstr "Nincs cím meghatározva"
-
-#~ msgid "Do not show closed accounts"
-#~ msgstr "Ne mutassa a lezárt számlákat"
-
-#~ msgid "Unable to add schedule: %1"
-#~ msgstr "Nem lehet hozzáadni az ütemezést: %1"
-
-#, fuzzy
-#~| msgctxt "@action update quotes from online quote source"
-#~| msgid "Update"
-#~ msgctxt "@action:button Update button in tags vew"
-#~ msgid "Update"
-#~ msgstr "Frissítés"
-
-#, fuzzy
-#~| msgid "Budget options"
-#~ msgctxt "@title:menu Bugdet context menu"
-#~ msgid "Budget options"
-#~ msgstr "Költségvetési beállítások"
-
-#, fuzzy
-#~| msgid "Do you want to add <b>%1</b> as payer/receiver?"
-#~ msgid "Do you want to show <b>%1</b> column on every loaded view?"
-#~ msgstr "Hozzá akarja adni <b>%1</b>-t, mint fizető/fogadó?"
-
-#, fuzzy
-#~| msgid "Do you want to add <b>%1</b> as payer/receiver?"
-#~ msgid "Do you want to hide <b>%1</b> column on every loaded view?"
-#~ msgstr "Hozzá akarja adni <b>%1</b>-t, mint fizető/fogadó?"
-
-#~ msgid "Is a sub account"
-#~ msgstr "Alszámlája"
-
-#~ msgctxt "New transaction button"
-#~ msgid "New"
-#~ msgstr "Új"
-
-#~ msgid "New scheduled transaction"
-#~ msgstr "Új ütemezett tranzakció"
-
-#~ msgid "Check template file"
-#~ msgstr "Sablon fájl ellenőrzése"
-
 #~ msgid "Are you sure you wish to merge these transactions?"
 #~ msgstr "Biztos benne, hogy egybe szeretné vonni ezeket a tranzakciókat?"
-
-#~ msgid ""
-#~ "<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>"
-#~ msgstr "<p><b>%1</b> nem mozgatható a <b>%2</b> intézményhez. Ok: %3</p>"
-
-#~ msgid "<p><b>%1</b> cannot be moved to <b>%2</b>. Reason: %3</p>"
-#~ msgstr "<p><b>%1</b> nem mozgatható ide: <b>%2</b>. Ok: %3</p>"
-
-#, fuzzy
-#~| msgid "Budgets"
-#~ msgid "Budgets view"
-#~ msgstr "Költségvetések"
-
-#, fuzzy
-#~| msgid "Forecast"
-#~ msgid "Forecast view"
-#~ msgstr "Előrejelzés"
-
-#, fuzzy
-#~| msgid "Budgets"
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Budgets view"
-#~ msgstr "Költségvetések"
-
-#, fuzzy
-#~| msgid "Checking"
-#~ msgctxt "It's about printing bank checks"
-#~ msgid "Check printing"
-#~ msgstr "Folyószámla"
-
-#, fuzzy
-#~| msgctxt "CSV Exporter dialog title"
-#~| msgid "CSV Exporter"
-#~ msgid "CSV exporter"
-#~ msgstr "CSV exportáló"
-
-#, fuzzy
-#~| msgctxt "CSV Importer dialog title"
-#~| msgid "CSV Importer"
-#~ msgid "CSV importer"
-#~ msgstr "CSV importáló"
-
-#, fuzzy
-#~| msgctxt "CSV Importer dialog title"
-#~| msgid "CSV Importer"
-#~ msgid "GnuCash importer"
-#~ msgstr "CSV importáló"
-
-#, fuzzy
-#~| msgid "Icalendar export settings"
-#~ msgid "iCalendar exporter"
-#~ msgstr "Icalendar export beállítások"
-
-#, fuzzy
-#~| msgid "QIF Import"
-#~ msgid "OFX Importer"
-#~ msgstr "QIF importálás"
-
-#, fuzzy
-#~| msgid "QIF Import"
-#~ msgid "QIF importer"
-#~ msgstr "QIF importálás"
 
 #, fuzzy
 #~| msgctxt "CSV (Filefilter)"
 #~| msgid "CSV files"
 #~ msgid "CSV Files (*.csv)"
 #~ msgstr "CSV fájlok"
-
-#, fuzzy
-#~| msgctxt "location of debit column"
-#~| msgid "Debits"
-#~ msgid "Debit"
-#~ msgstr "Tartozások"
-
-#, fuzzy
-#~| msgctxt "location of credit column"
-#~| msgid "Credits"
-#~ msgid "Credit"
-#~ msgstr "Hitelek"
 
 #, fuzzy
 #~| msgid "Clear selected column entries"
@@ -27390,132 +27460,6 @@ msgstr ""
 #~ msgid "A&mount"
 #~ msgstr "Összeg"
 
-#~ msgid "Creates a new budget"
-#~ msgstr "Új költségvetés létrehozása"
-
-#~ msgid "Use this to create a new empty budget."
-#~ msgstr "Használja ezt, hogy egy új üres költségvetést hozzon létre."
-
-#~ msgctxt "New budget"
-#~ msgid "New"
-#~ msgstr "Új"
-
-#, fuzzy
-#~| msgid "Rename the current selected budget"
-#~ msgid "Rename the current selected budget."
-#~ msgstr "Kiválasztott költségvetés átnevezése"
-
-#~ msgid "Use this to start renaming the selected budget."
-#~ msgstr "Használja ezt, hogy átnevezze a kiválasztott költségvetést."
-
-#~ msgid "Delete the current selected budget"
-#~ msgstr "Kiválasztott költségvetés törlése"
-
-#~ msgid "Use this to delete the selected budget."
-#~ msgstr "Használja ezt, hogy törölje a kiválasztott költségvetést."
-
-#~ msgid "Use this to create a new payee."
-#~ msgstr "Használja ezt új kedvezményezett létrehozásához"
-
-#~ msgctxt "New payee"
-#~ msgid "New"
-#~ msgstr "Új"
-
-#~ msgid "Rename the current selected payee"
-#~ msgstr "Kiválasztott kedvezményezett átnevezése"
-
-#~ msgid "Use this to start renaming the selected payee."
-#~ msgstr "Használja ezt, hogy átnevezze a kiválasztott kedvezményezettet."
-
-#~ msgid "Delete selected payee(s)"
-#~ msgstr "Kijelölt kedvezményezettek törlése"
-
-#~ msgid ""
-#~ "Use this to delete the selected payee. You can also select multiple "
-#~ "payees to be deleted."
-#~ msgstr ""
-#~ "Használja ezt a kijelölt kedvezményezett törléséhez. Egyszerre több "
-#~ "kedvezményezettet is kijelölhet."
-
-#, fuzzy
-#~| msgid "Rename the current selected payee"
-#~ msgid "Merge multiple selected payees"
-#~ msgstr "Kiválasztott kedvezményezett átnevezése"
-
-#, fuzzy
-#~| msgid "Use this to delete the selected payee."
-#~ msgid "Use this to merge multiple selected payees."
-#~ msgstr "Használja ezt, hogy törölje a kiválasztott kedvezményezettet."
-
-#~ msgid "Creates a new tag"
-#~ msgstr "Új címkét hoz létre"
-
-#~ msgid "Use this to create a new tag."
-#~ msgstr "Használja ezt új címke létrehozásához."
-
-#~ msgid "Rename the current selected tag"
-#~ msgstr "A jelenleg kiválasztott címke átnevezése"
-
-#~ msgid "Use this to start renaming the selected tag."
-#~ msgstr "Használja ezt, hogy átnevezze a kiválasztott címkét."
-
-#~ msgid "Delete the current selected tag"
-#~ msgstr "A jelenleg kiválasztott címke törlése"
-
-#~ msgid "Use this to delete the selected tag."
-#~ msgstr "Használja ezt, hogy törölje a kiválasztott címkét."
-
-#~ msgid "Dequeue"
-#~ msgstr "Törlés a sorból"
-
-#~ msgid "Dequeue selected job"
-#~ msgstr "Kiválasztott feladat törlése a sorból"
-
-#~ msgid "Remove the selected job from the list"
-#~ msgstr "Kiválasztott feladat törlése a listáról"
-
-#~ msgid "Execute"
-#~ msgstr "Végrehajtás"
-
-#~ msgid "Execute all jobs in the queue"
-#~ msgstr "Sorban lévő összes feladat végrehajtása"
-
-#~ msgctxt "Warning message"
-#~ msgid "There are no jobs in the queue."
-#~ msgstr "Nincsenek feladatok a sorban."
-
-#~ msgctxt "Message title"
-#~ msgid "No Jobs"
-#~ msgstr "Nincsenek feladatok"
-
-#~ msgid "Jobs"
-#~ msgstr "Feladatok"
-
-#~ msgid "Filter Accounts"
-#~ msgstr "Számlák szűrése"
-
-#~ msgid "Type/Name"
-#~ msgstr "Típus/Név"
-
-#~ msgid "Frequency"
-#~ msgstr "Gyakoriság"
-
-#~ msgid "Unable to load accounts: "
-#~ msgstr "Nem lehet a számlát betölteni: "
-
-#~ msgid "Routing Number:"
-#~ msgstr ""
-#~ "Routing Number \n"
-#~ "(főleg amerikai bankok használják):"
-
-#, fuzzy
-#~| msgid "Sort order"
-#~ msgid "SortCode"
-#~ msgstr "Rendezési sorrend"
-
-#~ msgid "Routing number"
-#~ msgstr "Routing Number (főleg amerikai bankok használják)"
-
 #~ msgid "Insert transaction type into No. field for new transactions"
 #~ msgstr "Tranzakciótípus beszúrása a Szám mezőbe az új tranzakcióknál"
 
@@ -27527,110 +27471,6 @@ msgstr ""
 #~| msgid "Name:"
 #~ msgid "Name:"
 #~ msgstr "Név:"
-
-#, fuzzy
-#~| msgid "Icons & splash screen"
-#~ msgid "Show splash screen"
-#~ msgstr "Ikonok és betöltőlépernyő"
-
-#~ msgid "Show splash screen during startup"
-#~ msgstr "Indítás alatt jelenítse meg a betöltő képernyőt"
-
-#~ msgctxt ""
-#~ "@item This comes after the hunder text if the tens unit is different from "
-#~ "0"
-#~ msgid " and "
-#~ msgstr " és "
-
-#, fuzzy
-#~| msgctxt "@item no payments were entered for a loan"
-#~| msgid "No"
-#~ msgctxt "@label The word to be printed for no fractional part as in No/00"
-#~ msgid "No"
-#~ msgstr "Nem"
-
-#~ msgid "Account Types"
-#~ msgstr "Számla típusok"
-
-#, fuzzy
-#~| msgid "Open ledger"
-#~ msgid "New ledger"
-#~ msgstr "Főkönyv megnyitása"
-
-#~ msgid ""
-#~ "This dialog does not allow new tags to be created. Please pick a tag from "
-#~ "the list."
-#~ msgstr ""
-#~ "Itt nem lehet létrehozni új címkét. Kérjük válasszon címkét a listából."
-
-#~ msgid "Tag creation"
-#~ msgstr "Címke létrehozása"
-
-#~ msgctxt "Flag for unknown reconciliation state"
-#~ msgid "?"
-#~ msgstr "?"
-
-#~ msgid "Total Balance"
-#~ msgstr "Egyenleg"
-
-#, fuzzy
-#~| msgid "Amount entered"
-#~ msgid "Cost Center"
-#~ msgstr "Mennyiség megadása"
-
-#~ msgid "Select year"
-#~ msgstr "Év választó"
-
-#~ msgid "Budget year"
-#~ msgstr "Költségvetési év"
-
-#~ msgid "Change budget year"
-#~ msgstr "Költségvetési év változtatása"
-
-#~ msgid ""
-#~ "A budget with the name '%1' already exists. It is not advisable to have "
-#~ "multiple budgets with the same identification name. Are you sure you "
-#~ "would like to rename the budget?"
-#~ msgstr ""
-#~ "Egy költségvetés már létezik '%1' néven. Nem tanácsos, hogy több "
-#~ "költségvetésnek ugyanaz az azonosító neve legyen. Biztos benne, hogy "
-#~ "átakarja nevezni a költségvetést?"
-
-#~ msgctxt "@title header of the budget name column"
-#~ msgid "Name"
-#~ msgstr "Név"
-
-#~ msgid "Saving accounts..."
-#~ msgstr "Számlák mentése..."
-
-#~ msgid "Saving transactions..."
-#~ msgstr "Tranzakciók mentése…"
-
-#~ msgid "Saving reports..."
-#~ msgstr "Jelentések mentése…"
-
-#~ msgid "Saving budgets..."
-#~ msgstr "Költségvetések mentése..."
-
-#, fuzzy
-#~| msgid "Saving accounts..."
-#~ msgid "Saving costcenters..."
-#~ msgstr "Számlák mentése..."
-
-#, fuzzy
-#~| msgid "Online Statement Balance: %1"
-#~ msgid "Online statement balance: %1"
-#~ msgstr "Online számlakivonat egyenleg: %1"
-
-#~ msgctxt "The balance of the selected budget"
-#~ msgid "Balance: "
-#~ msgstr "Egyenleg: "
-
-#~ msgid "Closed tag"
-#~ msgstr "Lezárt címke"
-
-#~ msgid "The tag is already present."
-#~ msgstr "A címke már létezik."
 
 #~ msgid "Unable to create all objects for the investment"
 #~ msgstr "Nem lehet minden objektumot létrehozni a befektetéshez"
@@ -27716,28 +27556,126 @@ msgstr ""
 #~ msgid "Creating transactions can only be performed in the ledger view"
 #~ msgstr "Csak a Főkönyv nézetben lehet tranzakciókat létrehozni"
 
-#~ msgid "Exceptions"
-#~ msgstr "Kivételek"
+#~ msgid "%1 thrown in %2:%3"
+#~ msgstr "%1 átkerül ide: %2:%3"
+
+#~ msgid "Unable to upload to '%1'"
+#~ msgstr "Nem lehet feltölteni '%1'-ba/be"
+
+#~ msgid "Internal error - no matching transactions"
+#~ msgstr "Belső hiba - nincsenek illeszkedő tranzakciók"
+
+#~ msgid "Do nothing"
+#~ msgstr "Ne tegyen semmit"
+
+#, fuzzy
+#~| msgid "Scheduled transactions"
+#~ msgctxt "use   as line break"
+#~ msgid "Scheduled transactions"
+#~ msgstr "Ütemezett tranzakciók"
+
+#~ msgctxt "Report settings"
+#~ msgid "Reports"
+#~ msgstr "Jelentések"
+
+#~ msgctxt "Forecast settings"
+#~ msgid "Forecast"
+#~ msgstr "Előrejelzések"
 
 #~ msgid "Encryption"
 #~ msgstr "Titkosítás"
 
+#~ msgid "Save as database..."
+#~ msgstr "Mentés adatbázisként…"
+
+#~ msgid "Saving file with a new filename..."
+#~ msgstr "Fájl mentése egy új fájl névvel..."
+
+#~ msgid "Saving file to database..."
+#~ msgstr "Fájl mentése adatbázisba..."
+
 #~ msgid "Closing window..."
 #~ msgstr "Ablak bezárása..."
 
-#~ msgid "Create a new transaction"
-#~ msgstr "Új tranzakció létrehozása"
+#~ msgid "%1 in file %2 line %3"
+#~ msgstr "%1, %2 fájlban, %3. sorban"
 
-#~ msgid "Save as database..."
-#~ msgstr "Mentés adatbázisként…"
+#~ msgid "Do Nothing"
+#~ msgstr "Ne tegyen semmit"
+
+#, fuzzy
+#~| msgid "Cannot update currency. %1"
+#~ msgid "Cannot add currency with existing id %1"
+#~ msgstr "Nem lehet frissíteni a pénznemet. %1"
+
+#~ msgid "Cannot remove currency with unknown id %1"
+#~ msgstr "Nem lehet eltávolítani az ismeretlen azonosítójú (%1) pénznemet"
+
+#, fuzzy
+#~| msgid "Cannot create new currency. %1"
+#~ msgid "Cannot retrieve currency with unknown id '%1'"
+#~ msgstr "Nem lehet létrehozni az új pénznemet. %1"
+
+#~ msgid "GnuCash..."
+#~ msgstr "GnuCash…"
+
+#, fuzzy
+#~| msgid ""
+#~| "You cannot import GnuCash data into an existing file. Do you wish to "
+#~| "save this file?"
+#~ msgid ""
+#~ "You cannot import GnuCash data into an existing file. Please close it."
+#~ msgstr ""
+#~ "Nem lehet megnyitott fájlba GnuCash adatokat importálni. Szeretné menteni "
+#~ "a megnyitott fájlt?"
+
+#~ msgid ": Sorry. This importer cannot handle version %1 of element %2"
+#~ msgstr ": Az importáló nem tudja kezelni a(z) %2 elem %1 verzióját"
+
+#~ msgid "This version of the importer cannot handle multi-book files."
+#~ msgstr ""
+#~ "Az importáló ezen verziója nem tudja kezelni a többkönyves fájlokat."
+
+#~ msgid ""
+#~ "Input file cannot be parsed; may be corrupt\n"
+#~ "%1"
+#~ msgstr ""
+#~ "A bemeneti fájl nem dolgozható fel; talán hibás\n"
+#~ "%1"
+
+#~ msgid "Invalid header for file. Should be 'gnc-v2'"
+#~ msgstr "Érvénytelen fejléc a fájlban, helyesen „gnc-v2”"
+
+#~ msgid "Current importer does not recognize GnuCash account type %1"
+#~ msgstr "A jelenlegi importáló nem ismeri fel ezt a GnuCash számlatípust: %1"
+
+#~ msgid "Cannot find template transaction for schedule %1"
+#~ msgstr "Nem található sablontranzakció a(z) %1 ütemezéshez"
+
+#~ msgid "Internal error - invalid interval char in incrDate"
+#~ msgstr "Belső hiba - érvénytelen intervallumkarakter az incrDate-ben"
+
+#~ msgid "Exceptions"
+#~ msgstr "Kivételek"
 
 #~ msgid "File <b>%1</b> contains an unknown file format."
 #~ msgstr "A <b>%1</b> fájl ismeretlen fájl formátumot tartalmaz."
 
-#, fuzzy
-#~| msgid "Save as..."
-#~ msgid "Save as XML..."
-#~ msgstr "Mentés másként…"
+#~ msgid "Cannot load file <b>%1</b>. Reason: %2"
+#~ msgstr "<b>%1</b> fájlt nem lehet betölteni. Ok: %2"
+
+#~ msgid ""
+#~ "The following error was encountered while decrypting file <b>%1</b>: %2"
+#~ msgstr "A következő hiba lépett fel a fájl dekódolása közben <b>%1 </b>: %2"
+
+#~ msgid "File <b>%1</b> not found."
+#~ msgstr "<b>%1</b> fájl nem található."
+
+#~ msgid "Failure while writing to '%1'"
+#~ msgstr "Hiba a '%1' írása közben"
+
+#~ msgid "Malformed URL '%1'"
+#~ msgstr "Hibás URL: '%1'"
 
 #, fuzzy
 #~| msgid ""
@@ -27793,123 +27731,13 @@ msgstr ""
 #~ msgid "Set preferences"
 #~ msgstr "Beállítások"
 
-#~ msgid "Saving file with a new filename..."
-#~ msgstr "Fájl mentése egy új fájl névvel..."
-
-#, fuzzy
-#~| msgid "Unable to add transactions"
-#~ msgid "nable to modify transaction"
-#~ msgstr "Nem lehet hozzáadni a tranzakciókat"
-
-#~ msgid "%1 thrown in %2:%3"
-#~ msgstr "%1 átkerül ide: %2:%3"
-
-#~ msgid "Unable to upload to '%1'"
-#~ msgstr "Nem lehet feltölteni '%1'-ba/be"
-
-#~ msgid "Internal error - no matching transactions"
-#~ msgstr "Belső hiba - nincsenek illeszkedő tranzakciók"
-
-#~ msgid "Malformed URL '%1'"
-#~ msgstr "Hibás URL: '%1'"
-
-#~ msgid "Failure while writing to '%1'"
-#~ msgstr "Hiba a '%1' írása közben"
-
-#~ msgid "%1 in file %2 line %3"
-#~ msgstr "%1, %2 fájlban, %3. sorban"
-
-#, fuzzy
-#~| msgid "Cannot update currency. %1"
-#~ msgid "Cannot add currency with existing id %1"
-#~ msgstr "Nem lehet frissíteni a pénznemet. %1"
-
-#~ msgid "Cannot remove currency with unknown id %1"
-#~ msgstr "Nem lehet eltávolítani az ismeretlen azonosítójú (%1) pénznemet"
-
-#, fuzzy
-#~| msgid "Cannot create new currency. %1"
-#~ msgid "Cannot retrieve currency with unknown id '%1'"
-#~ msgstr "Nem lehet létrehozni az új pénznemet. %1"
-
-#~ msgid ": Sorry. This importer cannot handle version %1 of element %2"
-#~ msgstr ": Az importáló nem tudja kezelni a(z) %2 elem %1 verzióját"
-
-#~ msgid "This version of the importer cannot handle multi-book files."
-#~ msgstr ""
-#~ "Az importáló ezen verziója nem tudja kezelni a többkönyves fájlokat."
-
-#~ msgid ""
-#~ "Input file cannot be parsed; may be corrupt\n"
-#~ "%1"
-#~ msgstr ""
-#~ "A bemeneti fájl nem dolgozható fel; talán hibás\n"
-#~ "%1"
-
-#~ msgid "Invalid header for file. Should be 'gnc-v2'"
-#~ msgstr "Érvénytelen fejléc a fájlban, helyesen „gnc-v2”"
-
-#~ msgid "Current importer does not recognize GnuCash account type %1"
-#~ msgstr "A jelenlegi importáló nem ismeri fel ezt a GnuCash számlatípust: %1"
-
-#~ msgid "Cannot find template transaction for schedule %1"
-#~ msgstr "Nem található sablontranzakció a(z) %1 ütemezéshez"
-
-#~ msgid "Internal error - invalid interval char in incrDate"
-#~ msgstr "Belső hiba - érvénytelen intervallumkarakter az incrDate-ben"
-
-#~ msgid "Do nothing"
-#~ msgstr "Ne tegyen semmit"
-
-#~ msgid "Do Nothing"
-#~ msgstr "Ne tegyen semmit"
-
-#, fuzzy
-#~| msgid "Scheduled transactions"
-#~ msgid "Scheduled transactions"
-#~ msgstr "Ütemezett tranzakciók"
-
-#~ msgctxt "Report settings"
-#~ msgid "Reports"
-#~ msgstr "Jelentések"
-
 #~ msgid ""
 #~ "Another instance of KMyMoney is already running. Do you want to quit?"
 #~ msgstr "Egy másik KMyMoney példány már fut. Szeretne kilépni?"
 
-#~ msgid "GnuCash..."
-#~ msgstr "GnuCash…"
-
-#, fuzzy
-#~| msgid ""
-#~| "You cannot import GnuCash data into an existing file. Do you wish to "
-#~| "save this file?"
-#~ msgid ""
-#~ "You cannot import GnuCash data into an existing file. Please close it."
-#~ msgstr ""
-#~ "Nem lehet megnyitott fájlba GnuCash adatokat importálni. Szeretné menteni "
-#~ "a megnyitott fájlt?"
-
-#~ msgid "Cannot load file <b>%1</b>. Reason: %2"
-#~ msgstr "<b>%1</b> fájlt nem lehet betölteni. Ok: %2"
-
-#~ msgid ""
-#~ "The following error was encountered while decrypting file <b>%1</b>: %2"
-#~ msgstr "A következő hiba lépett fel a fájl dekódolása közben <b>%1 </b>: %2"
-
-#~ msgid "File <b>%1</b> not found."
-#~ msgstr "<b>%1</b> fájl nem található."
-
 #~ msgctxt "Same transaction if amount differs less than percent."
 #~ msgid "percent."
 #~ msgstr "százalék."
-
-#~ msgid "Scheduled transactions"
-#~ msgstr "Ütemezett tranzakciók"
-
-#~ msgctxt "Forecast settings"
-#~ msgid "Forecast"
-#~ msgstr "Előrejelzések"
 
 #~ msgid "Additional encryption keys to be used: %1"
 #~ msgstr "További használt titkosítási kulcsok: %1"
@@ -27919,9 +27747,6 @@ msgstr ""
 
 #~ msgid "Manage additional keys"
 #~ msgstr "További kulcsok kezelése"
-
-#~ msgid "Saving file to database..."
-#~ msgstr "Fájl mentése adatbázisba..."
 
 #~ msgid "Transaction tags were added"
 #~ msgstr "A tranzakciókhoz címkék rendelhetők"

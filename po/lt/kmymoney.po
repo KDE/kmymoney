@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-18 02:01+0000\n"
+"POT-Creation-Date: 2025-05-23 03:30+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -275,10 +275,9 @@ msgstr "Tvarkaraštis"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
 #, fuzzy, kde-format
-#| msgid "Create a new asset account"
 msgctxt "Create undo action"
 msgid "Create account"
-msgstr "Sukurti naują turto sąskaitą"
+msgstr "Sukurtas:"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
 #, fuzzy, kde-format
@@ -2127,10 +2126,9 @@ msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:912
 #, fuzzy, kde-format
-#| msgid "Payment accounts"
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
-msgstr "Mokėjimų sąskaitos"
+msgstr "Turto sąskaitos"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:920
 #, kde-format
@@ -2539,10 +2537,9 @@ msgstr "Turtas"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:899
-#, fuzzy, kde-format
-#| msgid "Create a new category"
+#, kde-format
 msgid "Create automatically"
-msgstr "Sukurti naują kategoriją"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_budgetGroupBox)
 #. i18n: ectx: Menu (budget_context_menu)
@@ -2864,8 +2861,7 @@ msgstr "Rikiavimo parinktys"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_useDefault)
 #: kmymoney/dialogs/ktransactionsortoptionsdlg.ui:23
-#, fuzzy, kde-format
-#| msgid "Use default"
+#, kde-format
 msgid "Use default"
 msgstr "Naudoti numatytąjį"
 
@@ -3015,7 +3011,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:14
 #, kde-format
 msgid "General Settings"
-msgstr "Bendrosios nuostatos"
+msgstr "Bendrieji nustatymai"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:24
@@ -3299,9 +3295,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:457
-#, fuzzy, kde-format
+#, kde-format
 msgid "Hide accounts with a zero balance from Accounts"
-msgstr "Turto sąskaitos"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:464
@@ -3388,7 +3384,7 @@ msgstr "  Operacijos"
 #: kmymoney/dialogs/settings/ksettingshome.ui:14
 #, fuzzy, kde-format
 msgid "Homepage Settings"
-msgstr "Bendrosios nuostatos"
+msgstr "Bendrieji nustatymai"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_upButton)
 #: kmymoney/dialogs/settings/ksettingshome.ui:40
@@ -3879,8 +3875,9 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowAllSplits)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:86
 #, fuzzy, kde-format
+#| msgid "Not all details supplied"
 msgid "Show all split details in ledger"
-msgstr "Redaguoti sąskaitą"
+msgstr "Nurodytos ne visos detalės"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:96
@@ -5114,9 +5111,9 @@ msgstr "&Nauja ataskaita"
 
 #: kmymoney/kmymoney.cpp:1502
 #, fuzzy, kde-format
-#| msgid "&New report"
+#| msgid "Copy of %1"
 msgid "Copy report"
-msgstr "&Nauja ataskaita"
+msgstr "%1 kopija"
 
 #: kmymoney/kmymoney.cpp:1503
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:215
@@ -5153,7 +5150,7 @@ msgstr "Perjungti"
 #: kmymoney/kmymoney.cpp:1508
 #, fuzzy, kde-format
 msgid "Edit tab order"
-msgstr "Perkėlimai"
+msgstr "Įvesti"
 
 #: kmymoney/kmymoney.cpp:1511
 #, kde-format
@@ -10068,8 +10065,9 @@ msgstr "Trinti ..."
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_amountColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:438
 #, fuzzy, kde-format
+#| msgid "Cannot add institution"
 msgid "Clear amount field selection."
-msgstr "Išvedimio filtro vieta"
+msgstr "Negalima pridėti įstaigos"
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_indicator)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:448
@@ -10086,8 +10084,9 @@ msgstr "Trinti ..."
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_creditDebitIndicatorColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:468
 #, fuzzy, kde-format
+#| msgid "Cannot add institution"
 msgid "Clear indicator field selection."
-msgstr "Išvedimio filtro vieta"
+msgstr "Negalima pridėti įstaigos"
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_debit)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:478
@@ -14858,11 +14857,10 @@ msgid "Budget based on forecast"
 msgstr "Kiti metai"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:460
-#, fuzzy, kde-format
-#| msgid "Any transaction"
+#, kde-format
 msgctxt "@item:inmenu To make it income"
 msgid "Change to income"
-msgstr "Bet kokia operacija"
+msgstr ""
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:465
 #, kde-format
@@ -15106,7 +15104,7 @@ msgstr "Įvesti operaciją pagal tvarkaraštį"
 #: kmymoney/plugins/views/forecast/kforecastview.ui:29
 #, fuzzy, kde-format
 msgid "Forecast Settings"
-msgstr "Bendrosios nuostatos"
+msgstr "Bendrieji nustatymai"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:44
@@ -16586,10 +16584,9 @@ msgid "&Export to PDF files"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:816
-#, fuzzy, kde-format
-#| msgid "Favorite reports"
+#, kde-format
 msgid "Export into directory"
-msgstr "Mėgstamiausios ataskaitos"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KReportsView)
 #: kmymoney/plugins/views/reports/kreportsview.ui:14
@@ -17063,7 +17060,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:14
 #, fuzzy, kde-format
 msgid "Report Settings"
-msgstr "Bendrosios nuostatos"
+msgstr "Bendrieji nustatymai"
 
 #. i18n: ectx: property (text), widget (QLabel, label_1)
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:26
@@ -18548,15 +18545,15 @@ msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:244
-#, fuzzy, kde-format
+#, kde-format
 msgid "Hide zero balance accounts from Accounts"
-msgstr "Turto sąskaitos"
+msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:248
 #, fuzzy, kde-format
 msgid "Hide zero balance accounts from Home"
-msgstr "Turto sąskaitos"
+msgstr "Mokėjimo informacija"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:252
@@ -18604,9 +18601,9 @@ msgstr ""
 
 #. i18n: ectx: label, entry (ShowReconciliationMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:284
-#, kde-format
+#, fuzzy, kde-format
 msgid "Show reconciliation entries with date and balance"
-msgstr ""
+msgstr "Nepavyksta pašalinti operacijos"
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:293
@@ -19312,11 +19309,10 @@ msgid "Loss: %1"
 msgstr "%1 pralaimėjimas"
 
 #: kmymoney/views/kcategoriesview.cpp:157
-#, fuzzy, kde-format
-#| msgid "Amount"
+#, kde-format
 msgctxt "Approximate profit"
 msgid "Profit: ~%1"
-msgstr "Suma"
+msgstr ""
 
 #: kmymoney/views/kcategoriesview.cpp:158
 #, fuzzy, kde-format
@@ -19719,6 +19715,7 @@ msgstr "Vėluojantys mokėjimai"
 
 #: kmymoney/views/khomeview_p.h:721
 #, fuzzy, kde-format
+#| msgid "Payment method"
 msgctxt "@title Home page sub-section"
 msgid "Payments due today"
 msgstr "Mokėjimo metodas"
@@ -19834,7 +19831,6 @@ msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1421
 #, fuzzy, kde-format
-#| msgctxt "Reconciliation flag C"
 #| msgid "C"
 msgctxt "@title:column table on home page: cleared"
 msgid "C"
@@ -20852,7 +20848,7 @@ msgstr ""
 #, fuzzy, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
-msgstr "Naudokite tai norėdami ištrinti pažymėtą profilį"
+msgstr "Įvesti operaciją pagal tvarkaraštį"
 
 #: kmymoney/views/ledgerview.cpp:964
 #, fuzzy, kde-format
@@ -22792,9 +22788,9 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:265
 #, fuzzy, kde-format
-#| msgid "Create a new asset account"
+#| msgid "Select Accounts"
 msgid "Favorite account"
-msgstr "Sukurti naują turto sąskaitą"
+msgstr "Pasirinkite sąskaitas"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel14)
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:27
@@ -25229,7 +25225,7 @@ msgstr ""
 #: kmymoney/wizards/newuserwizard/knewuserwizard.cpp:54
 #, kde-format
 msgid "KMyMoney New File Setup"
-msgstr "KMyMoney naujo failo nuostatos"
+msgstr "KMyMoney naujo failo nustatymai"
 
 #: kmymoney/wizards/newuserwizard/knewuserwizard.cpp:56
 #, kde-format
@@ -25365,10 +25361,9 @@ msgid "Export in HTML format"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:126
-#, fuzzy, kde-format
-#| msgid "Favorite reports"
+#, kde-format
 msgid "Export in xml format"
-msgstr "Mėgstamiausios ataskaitos"
+msgstr ""
 
 #: tools/kmmreport-export.cpp:129
 #, kde-format
@@ -25467,92 +25462,6 @@ msgstr ""
 #~ msgstr[3] "Sukurta"
 
 #, fuzzy
-#~| msgid "Select account"
-#~ msgid "Select category or account."
-#~ msgstr "Pasirinkite sąskaitą"
-
-#, fuzzy
-#~ msgid "Today's due payments"
-#~ msgstr "Mokėjimai šiandien"
-
-#, fuzzy
-#~ msgid "Stock Name"
-#~ msgstr "Ataskaitos pavadinimas"
-
-#~ msgctxt "Price source"
-#~ msgid "Source"
-#~ msgstr "Šaltinis"
-
-#, fuzzy
-#~ msgid "Upd"
-#~ msgstr "&Aukštyn"
-
-#, fuzzy
-#~ msgid "Res"
-#~ msgstr "Raiš.: %1"
-
-#~ msgid "Close this window"
-#~ msgstr "Užverti šį langą"
-
-#~ msgid "Preferred account"
-#~ msgstr "Išskirtinė sąskaita"
-
-#, fuzzy
-#~ msgid "CashFlow"
-#~ msgstr "Grynieji"
-
-#~ msgid "Select Account:"
-#~ msgstr "Pasirinkite sąskaitą:"
-
-#, fuzzy
-#~| msgid "Investment detail wizard"
-#~ msgid "Investment details"
-#~ msgstr "Investicijų detalių vediklis"
-
-#, fuzzy
-#~ msgid "Security found"
-#~ msgstr "Saugumas"
-
-#, fuzzy
-#~| msgid "Name"
-#~ msgctxt "Equity name"
-#~ msgid "Name"
-#~ msgstr "Pavadinimas"
-
-#~ msgctxt "Online quote source"
-#~ msgid "Source"
-#~ msgstr "Šaltinis"
-
-#, fuzzy
-#~ msgid "Price Already Exists"
-#~ msgstr "Failas jau yra"
-
-#, fuzzy
-#~| msgid "Symbol"
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Symbol"
-#~ msgstr "Simbolis"
-
-#, fuzzy
-#~| msgid "Identification"
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Identification number"
-#~ msgstr "Identifikacija"
-
-#, fuzzy
-#~| msgctxt "@title header of the currency name column"
-#~| msgid "Name"
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Name"
-#~ msgstr "Pavadinimas"
-
-#, fuzzy
-#~| msgid "Delete ..."
-#~ msgctxt "@title:window"
-#~ msgid "Delete quote source"
-#~ msgstr "Trinti ..."
-
-#, fuzzy
 #~ msgid "Cannot resolve input date."
 #~ msgstr "Sukurti naują kainos įrašą."
 
@@ -25587,20 +25496,222 @@ msgstr ""
 #~ msgid "Date found: '%1'"
 #~ msgstr "Keisti sąskaitą '%1'"
 
-#, fuzzy
-#~| msgid "Unable to upload to '%1'"
-#~ msgid "Unable to update price for %1 (error encountered: '%2')"
-#~ msgstr "Nepavyksta įkelti į „%1“"
+#~ msgctxt "Total value"
+#~ msgid "Total"
+#~ msgstr "Viso"
 
 #, fuzzy
-#~| msgid "Tag"
-#~ msgctxt "Split header"
-#~ msgid "Tag"
-#~ msgstr "Žymė"
+#~ msgid "Price/Share"
+#~ msgstr "Kaina"
+
+#~ msgid "Asset account"
+#~ msgstr "Turto sąskaita"
 
 #, fuzzy
-#~ msgid "Hide zero balance liabilities on the Homepage"
-#~ msgstr "Mokėjimo informacija"
+#~ msgid ""
+#~ "Cannot enter transaction with postdate prior to account's opening date."
+#~ msgstr "Išrinkti operacijas be korespondento"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "Equity name"
+#~ msgid "Name"
+#~ msgstr "Pavadinimas"
+
+#, fuzzy
+#~ msgid "Price Already Exists"
+#~ msgstr "Failas jau yra"
+
+#, fuzzy
+#~| msgid "Search transactions"
+#~ msgctxt "@info:tooltip for find transaction Open button"
+#~ msgid "Search transactions"
+#~ msgstr "Ieškoti operacijų"
+
+#, fuzzy
+#~ msgid "Found %1 matching transaction (D %2 / P %3 = %4)"
+#~ msgid_plural "Found %1 matching transactions (D %2 / P %3 = %4)"
+#~ msgstr[0] "Skelti operaciją"
+#~ msgstr[1] "Skelti operaciją"
+#~ msgstr[2] "Skelti operaciją"
+#~ msgstr[3] "Skelti operaciją"
+
+#~ msgctxt "Price source"
+#~ msgid "Source"
+#~ msgstr "Šaltinis"
+
+#~ msgid "Delete..."
+#~ msgstr "Trinti..."
+
+#, fuzzy
+#~ msgid "Enter split"
+#~ msgstr "Pridėti naują instituciją..."
+
+#~ msgid "Is a sub account"
+#~ msgstr "Yra šalutinė sąskaita"
+
+#~ msgid "Routing Number:"
+#~ msgstr "Nukreipimo numeris:"
+
+#~ msgid "Clear &All"
+#~ msgstr "Valyti viską"
+
+#, fuzzy
+#~ msgid "Clear &Zero"
+#~ msgstr "Patvirtintos"
+
+#~ msgid ""
+#~ "You are about to delete all splits of this transaction. Do you really "
+#~ "want to continue?"
+#~ msgstr ""
+#~ "Jūs ruošiatės ištrinti visas šios operacijos dalis. Ar tikrai norite "
+#~ "tęsti?"
+
+#, fuzzy
+#~ msgid "Tag creation"
+#~ msgstr "Korespondento informacija"
+
+#, fuzzy
+#~| msgid "Symbol"
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Symbol"
+#~ msgstr "Simbolis"
+
+#, fuzzy
+#~| msgid "Identification"
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Identification number"
+#~ msgstr "Identifikacija"
+
+#, fuzzy
+#~| msgctxt "@title header of the currency name column"
+#~| msgid "Name"
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Name"
+#~ msgstr "Pavadinimas"
+
+#, fuzzy
+#~| msgid "Delete ..."
+#~ msgid "Delete quote source"
+#~ msgstr "Trinti ..."
+
+#, fuzzy
+#~ msgid "Category/Account"
+#~ msgstr "Kategorija"
+
+#~ msgid "Transfer from"
+#~ msgstr "Perkelti iš"
+
+#~ msgid "Transfer to"
+#~ msgstr "Perkelti į"
+
+#, fuzzy
+#~ msgid "Storing transactions"
+#~ msgstr "Ieškoti operacijų"
+
+#~ msgid "&Enter"
+#~ msgstr "Į&vesti"
+
+#, fuzzy
+#~ msgid "Use this to enter the transaction into the ledger."
+#~ msgstr "<p>Pasirinkite kaip sugrupuoti pervedimus šiame pranešime</p>"
+
+#, fuzzy
+#~ msgid "&Schedule"
+#~ msgstr "Tvarkaraštis"
+
+#, fuzzy
+#~ msgid "Accepts the entered data and stores it as schedule"
+#~ msgstr "Priima vertes ir jas išsaugo"
+
+#~ msgid "Robert Wadley"
+#~ msgstr "Robert Wadley"
+
+#~ msgid "Laurent Montel"
+#~ msgstr "Laurent Montel"
+
+#~ msgid "Wolfgang Rohdewald"
+#~ msgstr "Wolfgang Rohdewald"
+
+#, fuzzy
+#~| msgid "New"
+#~ msgctxt "New transaction button"
+#~ msgid "New"
+#~ msgstr "Naujas"
+
+#, fuzzy
+#~ msgid "New scheduled transaction"
+#~ msgstr "Įvesti operaciją pagal tvarkaraštį"
+
+#~ msgid ""
+#~ "<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>"
+#~ msgstr ""
+#~ "<p><b>%1</b> negali būti perkelta į įstaigą <b>%2</b>. Priežastis: %3</p>"
+
+#, fuzzy
+#~ msgid "CashFlow"
+#~ msgstr "Grynieji"
+
+#, fuzzy
+#~| msgid "Unknown"
+#~ msgctxt "Unknown reconciliation state"
+#~ msgid "Unknown"
+#~ msgstr "Nežinoma"
+
+#~ msgctxt "Column heading for category in tax report"
+#~ msgid "Tax"
+#~ msgstr "Mokestis"
+
+#, fuzzy
+#~| msgid "C"
+#~ msgctxt "Column heading for Cost Center"
+#~ msgid "CC"
+#~ msgstr "C"
+
+#, fuzzy
+#~ msgid "Total Balance"
+#~ msgstr "Balansas"
+
+#, fuzzy
+#~ msgctxt "IBAN, SWIFT, etc."
+#~ msgid "Sort Code"
+#~ msgstr "Išdėstymo tvarka:"
+
+#~ msgctxt "Payment made from account"
+#~ msgid "Payment"
+#~ msgstr "Mokėjimas"
+
+#~ msgctxt "Deposit into account"
+#~ msgid "Deposit"
+#~ msgstr "Indėlis"
+
+#, fuzzy
+#~| msgid "Amount entered"
+#~ msgid "Cost Center"
+#~ msgstr "Įvesta suma"
+
+#, fuzzy
+#~| msgid "Checking"
+#~ msgctxt "It's about printing bank checks"
+#~ msgid "Check printing"
+#~ msgstr "Einamoji"
+
+#~ msgctxt ""
+#~ "@item This comes after the hunder text if the tens unit is different from "
+#~ "0"
+#~ msgid " and "
+#~ msgstr " ir "
+
+#, fuzzy
+#~| msgctxt "@item no payments were entered for a loan"
+#~| msgid "No"
+#~ msgctxt "@label The word to be printed for no fractional part as in No/00"
+#~ msgid "No"
+#~ msgstr "Ne"
+
+#, fuzzy
+#~ msgid "Check template file"
+#~ msgstr "&Sukurti"
 
 #, fuzzy
 #~| msgid "The name of the institution that issued the account."
@@ -25611,6 +25722,115 @@ msgstr ""
 #~| msgid "Invalid transaction"
 #~ msgid "Invalid account"
 #~ msgstr "Negaliojanti operacija"
+
+#, fuzzy
+#~ msgid "CSV exporter"
+#~ msgstr "&Importuoti"
+
+#, fuzzy
+#~ msgid "CSV importer"
+#~ msgstr "&Importuoti"
+
+#, fuzzy
+#~ msgid "GnuCash importer"
+#~ msgstr "&Importuoti"
+
+#, fuzzy
+#~| msgid "General Settings"
+#~ msgid "iCalendar exporter"
+#~ msgstr "Bendrieji nustatymai"
+
+#, fuzzy
+#~ msgid "KMyMoney print check"
+#~ msgstr "Rodyti KMyMoney pasisveikinimo puslapį"
+
+#, fuzzy
+#~ msgid "Dequeue"
+#~ msgstr "Trinti..."
+
+#~ msgid "Execute"
+#~ msgstr "Vykdyti"
+
+#~ msgid "Jobs"
+#~ msgstr "Užduotys"
+
+#, fuzzy
+#~| msgid "&Import"
+#~ msgid "OFX Importer"
+#~ msgstr "&Importuoti"
+
+#, fuzzy
+#~| msgid "&Import"
+#~ msgid "QIF importer"
+#~ msgstr "&Importuoti"
+
+#, fuzzy
+#~| msgid "Budgets"
+#~ msgid "Budgets view"
+#~ msgstr "Biudžetai"
+
+#, fuzzy
+#~ msgid "Select year"
+#~ msgstr "Pasirinkite metus"
+
+#, fuzzy
+#~ msgid "Budget year"
+#~ msgstr "Kiti metai"
+
+#, fuzzy
+#~ msgid "Creates a new budget"
+#~ msgstr "Sukurti naują tvarkaraštį."
+
+#, fuzzy
+#~ msgid "Use this to create a new empty budget."
+#~ msgstr "Naudokite tai norėdami sukurti naują tvarkaraštį."
+
+#, fuzzy
+#~| msgid "New"
+#~ msgctxt "New budget"
+#~ msgid "New"
+#~ msgstr "Naujas"
+
+#, fuzzy
+#~ msgid "Rename the current selected budget."
+#~ msgstr "Trinti pasirinktą profilį"
+
+#, fuzzy
+#~ msgid "Use this to start renaming the selected budget."
+#~ msgstr "Naudokite tai norėdami ištrinti pažymėtą profilį"
+
+#, fuzzy
+#~ msgid "Delete the current selected budget"
+#~ msgstr "Trinti pasirinktą profilį"
+
+#, fuzzy
+#~ msgid "Use this to delete the selected budget."
+#~ msgstr "Naudokite tai norėdami ištrinti pažymėtą profilį"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "@title header of the budget name column"
+#~ msgid "Name"
+#~ msgstr "Pavadinimas"
+
+#, fuzzy
+#~ msgid "Upd"
+#~ msgstr "&Aukštyn"
+
+#, fuzzy
+#~ msgid "Res"
+#~ msgstr "Raiš.: %1"
+
+#, fuzzy
+#~| msgid "Forecast"
+#~ msgid "Forecast view"
+#~ msgstr "Prognozė"
+
+#~ msgid "Copy"
+#~ msgstr "Kopijuoti"
+
+#~ msgid "Close this window"
+#~ msgstr "Užverti šį langą"
 
 #, fuzzy
 #~| msgid ""
@@ -25624,42 +25844,6 @@ msgstr ""
 #~ "*.csv|CSV failai\n"
 #~ "*.html|HTML failai\n"
 #~ "*.*|Visi failai"
-
-#, fuzzy
-#~ msgctxt "@title:menu budget context menu"
-#~ msgid "Budget options"
-#~ msgstr "Indėlio parinktys"
-
-#, fuzzy
-#~ msgid "KMyMoney print check"
-#~ msgstr "Rodyti KMyMoney pasisveikinimo puslapį"
-
-#~ msgctxt "Activity for income categories"
-#~ msgid "Received"
-#~ msgstr "Gauta"
-
-#, fuzzy
-#~ msgctxt "Activity for expense categories"
-#~ msgid "Paid"
-#~ msgstr "Galioja nuo:"
-
-#, fuzzy
-#~| msgid "Pay to"
-#~ msgctxt "Payee"
-#~ msgid "Pay to"
-#~ msgstr "Kam mokėti"
-
-#, fuzzy
-#~| msgid "From"
-#~ msgctxt "Payer"
-#~ msgid "From"
-#~ msgstr "Nuo"
-
-#, fuzzy
-#~| msgid "C"
-#~ msgctxt "@title:column"
-#~ msgid "CC"
-#~ msgstr "C"
 
 #, fuzzy
 #~ msgid "Loading securities..."
@@ -25683,381 +25867,32 @@ msgstr ""
 #~ msgstr "Bendra Informacija"
 
 #, fuzzy
-#~| msgid "T"
-#~ msgctxt "Enter todays date into date input widget"
-#~ msgid "T"
-#~ msgstr "T"
+#~ msgid "Saving accounts..."
+#~ msgstr "Sąskaita perkeliama"
 
 #, fuzzy
-#~ msgctxt "@info:tooltip Accept button"
-#~ msgid "Accept the transaction and mark it cleared."
-#~ msgstr "Priima vertes ir jas išsaugo"
+#~ msgid "Saving transactions..."
+#~ msgstr "Rasti operaciją..."
+
+#~ msgid "Saving budgets..."
+#~ msgstr "Išsaugojami biudžetai..."
 
 #, fuzzy
-#~ msgctxt "Question about the accept action"
-#~ msgid "Do you want to accept the imported transaction now?"
-#~ msgstr "Naudokite tai norėdami ištrinti pažymėtą profilį"
+#~ msgid "Saving costcenters..."
+#~ msgstr "Sąskaita perkeliama"
 
 #, fuzzy
-#~ msgctxt "@title:window"
-#~ msgid "Accept transaction"
-#~ msgstr "Skelti operaciją"
-
-#~ msgid "Copy"
-#~ msgstr "Kopijuoti"
-
-#~ msgid "Your Financial Summary"
-#~ msgstr "Jūsų finansų apžvalga"
-
-#~ msgid "Show KMyMoney welcome page"
-#~ msgstr "Rodyti KMyMoney pasisveikinimo puslapį"
-
-#, fuzzy
-#~ msgid "Last Reconciled"
-#~ msgstr "Sutaikinta: %1"
-
-#, fuzzy
-#~| msgid "Your Financial Summary"
-#~ msgid "Go to My Financial Summary"
-#~ msgstr "Jūsų finansų apžvalga"
-
-#~ msgid "Return to the Welcome page"
-#~ msgstr "Grįžti į pasisveikinimo puslapį"
-
-#, fuzzy
-#~| msgid ""
-#~| "The KMyMoney development team is pleased to announce a major step "
-#~| "forward for what has been described as \"the BEST personal finance "
-#~| "manager for FREE users\"."
-#~ msgid ""
-#~ "We are pleased to announce a major step forward for what has been "
-#~ "described as \"the BEST personal finance manager for FREE users\"."
-#~ msgstr ""
-#~ "KMyMoney kūrimo komanda džiugiai praneša apie didelį žingsnį pirmyn "
-#~ "programos, kuri apibūdinama kaip „GERIAUSIA laisva asmeninių finansų "
-#~ "valdymo programa“."
-
-#, fuzzy
-#~| msgid "Show KMyMoney welcome page"
-#~ msgid "The KMyMoney Development Team"
-#~ msgstr "Rodyti KMyMoney pasisveikinimo puslapį"
-
-#, fuzzy
-#~| msgid "General Settings"
-#~ msgid "* General changes"
-#~ msgstr "Bendrosios nuostatos"
-
-#, fuzzy
-#~ msgid "* User Interface changes"
-#~ msgstr "Palūkanos"
-
-#, fuzzy
-#~| msgid "&Import"
-#~ msgid "* Im-/Exporter"
-#~ msgstr "&Importuoti"
-
-#, fuzzy
-#~ msgid "- Added support for Woob"
-#~ msgstr "Bet kokia operacija"
-
-#, fuzzy
-#~ msgid "- Improved CSV importer"
-#~ msgstr "&Importuoti"
-
-#, fuzzy
-#~ msgid "- Added CSV exporter"
-#~ msgstr "&Importuoti"
-
-#, fuzzy
-#~ msgid "- Improved payee matching when importing transactions"
-#~ msgstr "Priderinimo operacija"
-
-#, fuzzy
-#~ msgid "* Online services"
-#~ msgstr "GPG šifravimo nuostatos"
-
-#, fuzzy
-#~ msgctxt ""
-#~ msgid "Any status"
-#~ msgstr "Visos būklės"
-
-#, fuzzy
-#~| msgid "Closed"
-#~ msgctxt ""
-#~ msgid "Closed"
-#~ msgstr "Uždarytus"
-
-#~ msgctxt "Payment made from account"
-#~ msgid "Payment"
-#~ msgstr "Mokėjimas"
-
-#~ msgctxt "Deposit into account"
-#~ msgid "Deposit"
-#~ msgstr "Indėlis"
-
-#, fuzzy
-#~| msgctxt "@title header of the currency name column"
-#~| msgid "Name"
-#~ msgctxt "OnlineJob"
-#~ msgid "Name"
-#~ msgstr "Pavadinimas"
-
-#, fuzzy
-#~ msgid "<p>Do you really want to remove the tag <b>%1</b>?</p>"
-#~ msgstr "Naudokite tai norėdami ištrinti pažymėtą profilį"
-
-#, fuzzy
-#~ msgid "Do you really want to remove all selected tags?"
-#~ msgstr "Naudokite tai norėdami ištrinti pažymėtą profilį"
-
-#~ msgid "Remove Tag"
-#~ msgstr "Pašalinti žymą"
-
-#~ msgid "Pay to"
-#~ msgstr "Kam mokėti"
-
-#~ msgid "Delete..."
-#~ msgstr "Trinti..."
-
-#~ msgctxt "Deposits onto account"
-#~ msgid "Deposits"
-#~ msgstr "Indėliai"
-
-#~ msgctxt "Payments towards credit card"
-#~ msgid "Payments"
-#~ msgstr "Mokėjimai"
-
-#~ msgctxt "Payments made from account"
-#~ msgid "Payments"
-#~ msgstr "Mokėjimai"
-
-#, fuzzy
-#~ msgctxt "Payments made with credit card"
-#~ msgid "Charges"
-#~ msgstr "Če&kis"
-
-#~ msgctxt "Reconcile state 'Not reconciled'"
-#~ msgid "Not reconciled"
-#~ msgstr "Nesutaikintos"
-
-#~ msgctxt "Reconcile state 'Cleared'"
-#~ msgid "Cleared"
-#~ msgstr "Išvalytas"
-
-#~ msgctxt "Reconcile state 'Reconciled'"
-#~ msgid "Reconciled"
-#~ msgstr "Sutaikintos"
-
-#, fuzzy
-#~| msgid "From"
-#~ msgctxt "Reconcile state 'Frozen'"
-#~ msgid "Frozen"
-#~ msgstr "Užšaldytas"
-
-#, fuzzy
-#~| msgid "Unknown"
-#~ msgctxt "Unknown reconcile state"
-#~ msgid "Unknown"
-#~ msgstr "Nežinoma"
-
-#~ msgctxt "Total value"
-#~ msgid "Total"
-#~ msgstr "Viso"
-
-#~ msgid "Ratio 1/"
-#~ msgstr "Santykis 1/"
-
-#~ msgid "Ratio"
-#~ msgstr "Santykis"
-
-#, fuzzy
-#~| msgid "Amount"
-#~ msgid "Fee Amount"
-#~ msgstr "Suma"
-
-#, fuzzy
-#~ msgid "Price/Share"
-#~ msgstr "Kaina"
-
-#~ msgid "Asset account"
-#~ msgstr "Turto sąskaita"
-
-#, fuzzy
-#~ msgid ""
-#~ "Cannot enter transaction with postdate prior to account's opening date."
-#~ msgstr "Išrinkti operacijas be korespondento"
-
-#, fuzzy
-#~ msgid "Found %1 matching transaction (D %2 / P %3 = %4)"
-#~ msgid_plural "Found %1 matching transactions (D %2 / P %3 = %4)"
-#~ msgstr[0] "Skelti operaciją"
-#~ msgstr[1] "Skelti operaciją"
-#~ msgstr[2] "Skelti operaciją"
-#~ msgstr[3] "Skelti operaciją"
-
-#, fuzzy
-#~| msgid "Duplicate"
-#~ msgctxt "To duplicate a split"
-#~ msgid "Duplicate"
-#~ msgstr "Dublikuoti"
-
-#, fuzzy
-#~ msgid "Enter split"
-#~ msgstr "Pridėti naują instituciją..."
-
-#~ msgid "Clear &All"
-#~ msgstr "Valyti viską"
-
-#, fuzzy
-#~ msgid "Clear &Zero"
-#~ msgstr "Patvirtintos"
-
-#~ msgid ""
-#~ "You are about to delete all splits of this transaction. Do you really "
-#~ "want to continue?"
-#~ msgstr ""
-#~ "Jūs ruošiatės ištrinti visas šios operacijos dalis. Ar tikrai norite "
-#~ "tęsti?"
-
-#~ msgid "Unassigned"
-#~ msgstr "Nepriskirta"
-
-#, fuzzy
-#~ msgid "Prior transactions possibly filtered"
-#~ msgstr "Ieškoti operacijų"
-
-#, fuzzy
-#~ msgid "Online Statement Balance: %1"
-#~ msgstr "Pranešimo data:"
-
-#, fuzzy
-#~| msgid "Unknown"
-#~ msgctxt "Unknown payee"
-#~ msgid "Unknown"
-#~ msgstr "Nežinoma"
-
-#, fuzzy
-#~| msgid "Unknown"
-#~ msgctxt "Unknown category"
-#~ msgid "Unknown"
-#~ msgstr "Nežinoma"
-
-#, fuzzy
-#~| msgid "Unknown"
-#~ msgctxt "Unknown security"
-#~ msgid "Unknown"
-#~ msgstr "Nežinoma"
-
-#, fuzzy
-#~ msgctxt "label for status combo"
-#~ msgid "Stat&us"
-#~ msgstr "Būsena:"
-
-#, fuzzy
-#~ msgid "Buy"
-#~ msgstr "pirkti"
-
-#, fuzzy
-#~ msgid "Investment transaction"
-#~ msgstr "Priderinimo operacija"
-
-#~ msgid "Transfer to"
-#~ msgstr "Perkelti į"
-
-#~ msgid "Transfer from"
-#~ msgstr "Perkelti iš"
-
-#, fuzzy
-#~ msgid "Category/Account"
-#~ msgstr "Kategorija"
-
-#, fuzzy
-#~ msgid "KMyMoney has matched the two selected transactions (result above)"
-#~ msgstr "Nepavyksta pašalinti operacijos"
-
-#, fuzzy
-#~ msgid "Bank entry:"
-#~ msgstr "Pridėti naują įrašą"
-
-#, fuzzy
-#~ msgid "Your entry:"
-#~ msgstr "Naujas kainos įrašas"
-
-#, fuzzy
-#~| msgid "Unknown"
-#~ msgctxt "Unknown reconciliation state"
-#~ msgid "Unknown"
-#~ msgstr "Nežinoma"
-
-#, fuzzy
-#~ msgid "Storing transactions"
-#~ msgstr "Ieškoti operacijų"
-
-#~ msgid "&Enter"
-#~ msgstr "Į&vesti"
-
-#, fuzzy
-#~ msgid "Use this to enter the transaction into the ledger."
-#~ msgstr "<p>Pasirinkite kaip sugrupuoti pervedimus šiame pranešime</p>"
-
-#, fuzzy
-#~ msgid "&Schedule"
-#~ msgstr "Tvarkaraštis"
-
-#, fuzzy
-#~ msgid "Accepts the entered data and stores it as schedule"
-#~ msgstr "Priima vertes ir jas išsaugo"
-
-#, fuzzy
-#~ msgctxt "Dialog caption for 'Enter or schedule' dialog"
-#~ msgid "Enter or schedule?"
-#~ msgstr "Naujas tvarkaraštis"
-
-#~ msgid "&Deposit"
-#~ msgstr "In&dėlis"
-
-#~ msgid "&Transfer"
-#~ msgstr "&Perkėlimas"
-
-#~ msgid "&Withdrawal"
-#~ msgstr "&Išėmimas"
-
-#, fuzzy
-#~ msgid "&Payment"
-#~ msgstr "Mokėjimas"
-
-#, fuzzy
-#~ msgid "&Charge"
-#~ msgstr "krūvis"
-
-#, fuzzy
-#~ msgid "&Decrease"
-#~ msgstr "sumažinti"
-
-#, fuzzy
-#~ msgid "&Increase"
-#~ msgstr "padidinti"
+#~ msgid "Show title bar on each view"
+#~ msgstr "Redaguoti sąskaitą"
 
 #, fuzzy
 #~| msgid "Reconciled"
 #~ msgid "Reconcile"
 #~ msgstr "Sutaikyti"
 
-#~ msgctxt "Button text for match transaction"
-#~ msgid "Match"
-#~ msgstr "Atitikmuo"
-
 #, fuzzy
 #~ msgid "Add reversing transactions to the currently selected"
 #~ msgstr "Išrinkti operacijas be korespondento"
-
-#, fuzzy
-#~ msgid "Difference: %1"
-#~ msgstr "Skirtumas"
-
-#, fuzzy
-#~ msgid "Account closed"
-#~ msgstr "Sąskaitos"
 
 #, fuzzy
 #~ msgid "Cannot create transactions when no account is selected."
@@ -26065,14 +25900,6 @@ msgstr ""
 
 #, fuzzy
 #~ msgid "Cannot create transactions in a closed account."
-#~ msgstr "Išrinkti operacijas be korespondento"
-
-#, fuzzy
-#~ msgid "Cannot edit transactions with frozen splits."
-#~ msgstr "Išrinkti operacijas be korespondento"
-
-#, fuzzy
-#~ msgid "Cannot create or edit any transactions in Account %1 as it is closed"
 #~ msgstr "Išrinkti operacijas be korespondento"
 
 #, fuzzy
@@ -26146,26 +25973,9 @@ msgstr ""
 #~ msgid "%1, %2"
 #~ msgstr "%1 iš %2"
 
-#~ msgid "Go to '%1'"
-#~ msgstr "Eiti į „%1“"
-
-#, fuzzy
-#~ msgid "Statement: %1"
-#~ msgstr "Statement"
-
-#, fuzzy
-#~| msgid "Cleared"
-#~ msgctxt "Cleared balance"
-#~ msgid "Cleared: %1"
-#~ msgstr "Išvalytas"
-
 #, fuzzy
 #~ msgid "Last reconciled: %1"
 #~ msgstr "Sutaikinta: %1"
-
-#, fuzzy
-#~ msgid "Cannot process transactions in account %1, which is closed."
-#~ msgstr "Išrinkti operacijas be korespondento"
 
 #, fuzzy
 #~ msgid "Cannot process transaction with focus if it is not selected."
@@ -26179,81 +25989,27 @@ msgstr ""
 #~ msgid "Running automatic reconciliation"
 #~ msgstr "Sutaikinimo vediklis"
 
+#~ msgid "Your Financial Summary"
+#~ msgstr "Jūsų finansų apžvalga"
+
+#~ msgid "Show KMyMoney welcome page"
+#~ msgstr "Rodyti KMyMoney pasisveikinimo puslapį"
+
+#, fuzzy
+#~ msgid "Today's due payments"
+#~ msgstr "Mokėjimai šiandien"
+
+#, fuzzy
+#~ msgid "Last Reconciled"
+#~ msgstr "Sutaikinta: %1"
+
+#~ msgid "Select Account:"
+#~ msgstr "Pasirinkite sąskaitą:"
+
 #, fuzzy
 #~| msgid "Open ledger"
-#~ msgid "Old ledgers"
+#~ msgid "New ledger"
 #~ msgstr "Atverti knygą"
-
-#~ msgid "Robert Wadley"
-#~ msgstr "Robert Wadley"
-
-#~ msgid "Laurent Montel"
-#~ msgstr "Laurent Montel"
-
-#~ msgid "Wolfgang Rohdewald"
-#~ msgstr "Wolfgang Rohdewald"
-
-#, fuzzy
-#~ msgctxt "HTML (Filefilter)"
-#~ msgid "HTML files"
-#~ msgstr "HTML failai"
-
-#~ msgctxt "Column heading for category in tax report"
-#~ msgid "Tax"
-#~ msgstr "Mokestis"
-
-#, fuzzy
-#~| msgid "C"
-#~ msgctxt "Column heading for Cost Center"
-#~ msgid "CC"
-#~ msgstr "C"
-
-#, fuzzy
-#~ msgctxt ""
-#~ "Column heading for Bank Code. Use a generic form, do not translate using "
-#~ "a culture-specific term, e.g. 'Routing Number' (en_US) or 'Sort "
-#~ "Code' (en_GB)"
-#~ msgid "Bank Code"
-#~ msgstr "Pridėti naują įrašą"
-
-#, fuzzy
-#~| msgid "Full name"
-#~ msgctxt ""
-#~ "Tooltip for 'Name' column. Used in Account, Category and Institution "
-#~ "context, so avoid being too specific"
-#~ msgid "Full name"
-#~ msgstr "Pilnas vardas"
-
-#, fuzzy
-#~| msgid "Type"
-#~ msgctxt ""
-#~ "Toolip for a 'Type' column, used in both Account and Category context"
-#~ msgid "Type"
-#~ msgstr "Tipas"
-
-#, fuzzy
-#~ msgid "Show title bar on each view"
-#~ msgstr "Redaguoti sąskaitą"
-
-#, fuzzy
-#~ msgid "Do not show closed accounts"
-#~ msgstr "Turto sąskaitos"
-
-#, fuzzy
-#~ msgid "Unable to add schedule: %1"
-#~ msgstr "Nepavyksta pakeisti tvarkaraščio: "
-
-#, fuzzy
-#~| msgctxt "@action update quotes from online quote source"
-#~| msgid "Update"
-#~ msgctxt "@action:button Update button in tags vew"
-#~ msgid "Update"
-#~ msgstr "Atnaujinti"
-
-#, fuzzy
-#~ msgctxt "@title:menu Bugdet context menu"
-#~ msgid "Budget options"
-#~ msgstr "Indėlio parinktys"
 
 #, fuzzy
 #~ msgid "Do you want to show <b>%1</b> column on every loaded view?"
@@ -26263,131 +26019,9 @@ msgstr ""
 #~ msgid "Do you want to hide <b>%1</b> column on every loaded view?"
 #~ msgstr "Naudokite tai norėdami ištrinti pažymėtą profilį"
 
-#~ msgid "Is a sub account"
-#~ msgstr "Yra šalutinė sąskaita"
-
 #, fuzzy
-#~| msgid "New"
-#~ msgctxt "New transaction button"
-#~ msgid "New"
-#~ msgstr "Naujas"
-
-#, fuzzy
-#~ msgid "New scheduled transaction"
-#~ msgstr "Įvesti operaciją pagal tvarkaraštį"
-
-#, fuzzy
-#~ msgid "Check template file"
-#~ msgstr "&Sukurti"
-
-#~ msgid ""
-#~ "<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>"
-#~ msgstr ""
-#~ "<p><b>%1</b> negali būti perkelta į įstaigą <b>%2</b>. Priežastis: %3</p>"
-
-#, fuzzy
-#~| msgid "Budgets"
-#~ msgid "Budgets view"
-#~ msgstr "Biudžetai"
-
-#, fuzzy
-#~| msgid "Forecast"
-#~ msgid "Forecast view"
-#~ msgstr "Prognozė"
-
-#, fuzzy
-#~| msgid "Budgets"
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Budgets view"
-#~ msgstr "Biudžetai"
-
-#, fuzzy
-#~| msgid "Checking"
-#~ msgctxt "It's about printing bank checks"
-#~ msgid "Check printing"
-#~ msgstr "Einamoji"
-
-#, fuzzy
-#~ msgid "CSV exporter"
-#~ msgstr "&Importuoti"
-
-#, fuzzy
-#~ msgid "CSV importer"
-#~ msgstr "&Importuoti"
-
-#, fuzzy
-#~ msgid "GnuCash importer"
-#~ msgstr "&Importuoti"
-
-#, fuzzy
-#~| msgid "General Settings"
-#~ msgid "iCalendar exporter"
-#~ msgstr "Bendrosios nuostatos"
-
-#, fuzzy
-#~| msgid "&Import"
-#~ msgid "OFX Importer"
-#~ msgstr "&Importuoti"
-
-#, fuzzy
-#~| msgid "&Import"
-#~ msgid "QIF importer"
-#~ msgstr "&Importuoti"
-
-#, fuzzy
-#~ msgid "CSV Files (*.csv)"
-#~ msgstr "CSV Failai"
-
-#, fuzzy
-#~| msgid "Credit Card"
-#~ msgid "Credit"
-#~ msgstr "Kreditinė kortelė"
-
-#, fuzzy
-#~ msgid "Clear selected memo column entries"
-#~ msgstr "Korespondento informacija"
-
-#, fuzzy
-#~| msgid "Cleared"
-#~ msgctxt "Clear memo column assignment"
-#~ msgid "Clear"
-#~ msgstr "Išvalyti"
-
-#, fuzzy
-#~| msgid "Amount"
-#~ msgctxt "presence of amount column"
-#~ msgid "A&mount"
-#~ msgstr "Suma"
-
-#, fuzzy
-#~ msgid "Creates a new budget"
-#~ msgstr "Sukurti naują tvarkaraštį."
-
-#, fuzzy
-#~ msgid "Use this to create a new empty budget."
-#~ msgstr "Naudokite tai norėdami sukurti naują tvarkaraštį."
-
-#, fuzzy
-#~| msgid "New"
-#~ msgctxt "New budget"
-#~ msgid "New"
-#~ msgstr "Naujas"
-
-#, fuzzy
-#~ msgid "Rename the current selected budget."
-#~ msgstr "Trinti pasirinktą profilį"
-
-#, fuzzy
-#~ msgid "Use this to start renaming the selected budget."
-#~ msgstr "Naudokite tai norėdami ištrinti pažymėtą profilį"
-
-#, fuzzy
-#~ msgid "Delete the current selected budget"
-#~ msgstr "Trinti pasirinktą profilį"
-
-#, fuzzy
-#~ msgid "Use this to delete the selected budget."
-#~ msgstr "Naudokite tai norėdami ištrinti pažymėtą profilį"
+#~ msgid "Unable to add schedule: %1"
+#~ msgstr "Nepavyksta pakeisti tvarkaraščio: "
 
 #, fuzzy
 #~| msgid "Use this to create a new schedule."
@@ -26420,6 +26054,28 @@ msgstr ""
 #~ msgid "Use this to merge multiple selected payees."
 #~ msgstr "Naudokite tai norėdami ištrinti pažymėtą profilį"
 
+#~ msgid "Bills"
+#~ msgstr "Mokėjimo sąskaitos"
+
+#, fuzzy
+#~| msgid "Type"
+#~ msgid "Type/Name"
+#~ msgstr "Tipo pavadinimas:"
+
+#~ msgid "Frequency"
+#~ msgstr "Dažnis"
+
+#, fuzzy
+#~ msgid "<p>Do you really want to remove the tag <b>%1</b>?</p>"
+#~ msgstr "Naudokite tai norėdami ištrinti pažymėtą profilį"
+
+#, fuzzy
+#~ msgid "Do you really want to remove all selected tags?"
+#~ msgstr "Naudokite tai norėdami ištrinti pažymėtą profilį"
+
+#~ msgid "Remove Tag"
+#~ msgstr "Pašalinti žymą"
+
 #, fuzzy
 #~ msgid "Creates a new tag"
 #~ msgstr "Sukurti naują tvarkaraštį."
@@ -26446,37 +26102,299 @@ msgstr ""
 #~ msgstr "Naudokite tai norėdami ištrinti pažymėtą profilį"
 
 #, fuzzy
-#~ msgid "Dequeue"
-#~ msgstr "Trinti..."
+#~| msgid "Your Financial Summary"
+#~ msgid "Go to My Financial Summary"
+#~ msgstr "Jūsų finansų apžvalga"
 
-#~ msgid "Execute"
-#~ msgstr "Vykdyti"
-
-#~ msgid "Jobs"
-#~ msgstr "Užduotys"
+#~ msgid "Return to the Welcome page"
+#~ msgstr "Grįžti į pasisveikinimo puslapį"
 
 #, fuzzy
-#~| msgid "Select Accounts"
-#~ msgid "Filter Accounts"
-#~ msgstr "Pasirinkite sąskaitas"
+#~| msgid ""
+#~| "The KMyMoney development team is pleased to announce a major step "
+#~| "forward for what has been described as \"the BEST personal finance "
+#~| "manager for FREE users\"."
+#~ msgid ""
+#~ "We are pleased to announce a major step forward for what has been "
+#~ "described as \"the BEST personal finance manager for FREE users\"."
+#~ msgstr ""
+#~ "KMyMoney kūrimo komanda džiugiai praneša apie didelį žingsnį pirmyn "
+#~ "programos, kuri apibūdinama kaip „GERIAUSIA laisva asmeninių finansų "
+#~ "valdymo programa“."
 
 #, fuzzy
-#~| msgid "Type"
-#~ msgid "Type/Name"
-#~ msgstr "Tipo pavadinimas:"
-
-#~ msgid "Frequency"
-#~ msgstr "Dažnis"
-
-#~ msgid "Routing Number:"
-#~ msgstr "Nukreipimo numeris:"
+#~| msgid "Show KMyMoney welcome page"
+#~ msgid "The KMyMoney Development Team"
+#~ msgstr "Rodyti KMyMoney pasisveikinimo puslapį"
 
 #, fuzzy
-#~ msgid "SortCode"
-#~ msgstr "Išdėstymo tvarka:"
+#~| msgid "General Settings"
+#~ msgid "* General changes"
+#~ msgstr "Bendrieji nustatymai"
+
+#, fuzzy
+#~ msgid "* User Interface changes"
+#~ msgstr "Palūkanos"
+
+#, fuzzy
+#~| msgid "&Import"
+#~ msgid "* Im-/Exporter"
+#~ msgstr "&Importuoti"
+
+#, fuzzy
+#~ msgid "- Added support for Woob"
+#~ msgstr "Bet kokia operacija"
+
+#, fuzzy
+#~ msgid "- Improved CSV importer"
+#~ msgstr "&Importuoti"
+
+#, fuzzy
+#~ msgid "- Added CSV exporter"
+#~ msgstr "&Importuoti"
+
+#, fuzzy
+#~ msgid "- Improved payee matching when importing transactions"
+#~ msgstr "Priderinimo operacija"
+
+#, fuzzy
+#~ msgid "* Online services"
+#~ msgstr "GPG šifravimo nuostatos"
+
+#, fuzzy
+#~ msgid "Online statement balance: %1"
+#~ msgstr "Pranešimo data:"
+
+#, fuzzy
+#~| msgid "Credit Card"
+#~ msgid "Credit"
+#~ msgstr "Kreditinė kortelė"
+
+#~ msgid "Pay to"
+#~ msgstr "Kam mokėti"
+
+#~ msgctxt "Deposits onto account"
+#~ msgid "Deposits"
+#~ msgstr "Indėliai"
+
+#~ msgctxt "Payments towards credit card"
+#~ msgid "Payments"
+#~ msgstr "Mokėjimai"
+
+#~ msgctxt "Payments made from account"
+#~ msgid "Payments"
+#~ msgstr "Mokėjimai"
+
+#, fuzzy
+#~ msgctxt "Payments made with credit card"
+#~ msgid "Charges"
+#~ msgstr "Če&kis"
+
+#~ msgctxt "Reconcile state 'Not reconciled'"
+#~ msgid "Not reconciled"
+#~ msgstr "Nesutaikintos"
+
+#~ msgctxt "Reconcile state 'Cleared'"
+#~ msgid "Cleared"
+#~ msgstr "Išvalytas"
+
+#~ msgctxt "Reconcile state 'Reconciled'"
+#~ msgid "Reconciled"
+#~ msgstr "Sutaikintos"
+
+#, fuzzy
+#~| msgid "From"
+#~ msgctxt "Reconcile state 'Frozen'"
+#~ msgid "Frozen"
+#~ msgstr "Užšaldytas"
+
+#, fuzzy
+#~| msgid "Unknown"
+#~ msgctxt "Unknown reconcile state"
+#~ msgid "Unknown"
+#~ msgstr "Nežinoma"
+
+#~ msgid "Ratio"
+#~ msgstr "Santykis"
+
+#, fuzzy
+#~| msgid "Amount"
+#~ msgid "Fee Amount"
+#~ msgstr "Suma"
+
+#~ msgid "Account Types"
+#~ msgstr "Sąskaitų tipai"
+
+#~ msgctxt "The balance of the selected budget"
+#~ msgid "Balance: "
+#~ msgstr "Balansas: "
+
+#~ msgctxt "Activity for income categories"
+#~ msgid "Received"
+#~ msgstr "Gauta"
+
+#, fuzzy
+#~ msgctxt "Activity for expense categories"
+#~ msgid "Paid"
+#~ msgstr "Galioja nuo:"
+
+#, fuzzy
+#~| msgid "Pay to"
+#~ msgctxt "Payee"
+#~ msgid "Pay to"
+#~ msgstr "Kam mokėti"
+
+#, fuzzy
+#~| msgid "From"
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "Nuo"
+
+#, fuzzy
+#~| msgid "T"
+#~ msgctxt "Enter todays date into date input widget"
+#~ msgid "T"
+#~ msgstr "T"
+
+#, fuzzy
+#~ msgid "Closed tag"
+#~ msgstr "Užverti dialogą"
+
+#, fuzzy
+#~ msgid "Prior transactions possibly filtered"
+#~ msgstr "Ieškoti operacijų"
+
+#, fuzzy
+#~| msgid "Opening balance"
+#~ msgid "Reconciled Balance: %1"
+#~ msgstr "Atidarymo balansas"
+
+#, fuzzy
+#~ msgid "Online Statement Balance: %1"
+#~ msgstr "Pranešimo data:"
+
+#, fuzzy
+#~| msgid "Unknown"
+#~ msgctxt "Unknown payee"
+#~ msgid "Unknown"
+#~ msgstr "Nežinoma"
+
+#, fuzzy
+#~| msgid "Unknown"
+#~ msgctxt "Unknown category"
+#~ msgid "Unknown"
+#~ msgstr "Nežinoma"
+
+#, fuzzy
+#~| msgid "Unknown"
+#~ msgctxt "Unknown security"
+#~ msgid "Unknown"
+#~ msgstr "Nežinoma"
+
+#, fuzzy
+#~ msgctxt "label for status combo"
+#~ msgid "Stat&us"
+#~ msgstr "Būsena:"
+
+#, fuzzy
+#~ msgid "Buy"
+#~ msgstr "pirkti"
+
+#, fuzzy
+#~ msgid "Investment transaction"
+#~ msgstr "Priderinimo operacija"
+
+#, fuzzy
+#~ msgid "KMyMoney has matched the two selected transactions (result above)"
+#~ msgstr "Nepavyksta pašalinti operacijos"
+
+#, fuzzy
+#~ msgid "Bank entry:"
+#~ msgstr "Pridėti naują įrašą"
+
+#, fuzzy
+#~ msgid "Your entry:"
+#~ msgstr "Naujas kainos įrašas"
+
+#~ msgid "&Deposit"
+#~ msgstr "In&dėlis"
+
+#~ msgid "&Transfer"
+#~ msgstr "&Perkėlimas"
+
+#~ msgid "&Withdrawal"
+#~ msgstr "&Išėmimas"
+
+#, fuzzy
+#~ msgid "&Payment"
+#~ msgstr "Mokėjimas"
+
+#, fuzzy
+#~ msgid "&Charge"
+#~ msgstr "krūvis"
+
+#, fuzzy
+#~ msgid "&Decrease"
+#~ msgstr "sumažinti"
+
+#, fuzzy
+#~ msgid "&Increase"
+#~ msgstr "padidinti"
+
+#~ msgid "Preferred account"
+#~ msgstr "Išskirtinė sąskaita"
+
+#, fuzzy
+#~ msgid "Security found"
+#~ msgstr "Saugumas"
 
 #~ msgid "Routing number"
 #~ msgstr "Nukreipimo numeris"
+
+#, fuzzy
+#~ msgid "Account closed"
+#~ msgstr "Sąskaitos"
+
+#, fuzzy
+#~ msgid "Cannot edit transactions with frozen splits."
+#~ msgstr "Išrinkti operacijas be korespondento"
+
+#, fuzzy
+#~ msgid "Cannot create or edit any transactions in Account %1 as it is closed"
+#~ msgstr "Išrinkti operacijas be korespondento"
+
+#, fuzzy
+#~ msgid "Cannot process transactions in account %1, which is closed."
+#~ msgstr "Išrinkti operacijas be korespondento"
+
+#, fuzzy
+#~ msgid "Do not show closed accounts"
+#~ msgstr "Turto sąskaitos"
+
+#, fuzzy
+#~ msgctxt "HTML (Filefilter)"
+#~ msgid "HTML files"
+#~ msgstr "HTML failai"
+
+#, fuzzy
+#~ msgid "CSV Files (*.csv)"
+#~ msgstr "CSV Failai"
+
+#, fuzzy
+#~ msgid "Clear selected memo column entries"
+#~ msgstr "Korespondento informacija"
+
+#, fuzzy
+#~| msgid "Cleared"
+#~ msgctxt "Clear memo column assignment"
+#~ msgid "Clear"
+#~ msgstr "Išvalyti"
+
+#, fuzzy
+#~| msgid "Amount"
+#~ msgctxt "presence of amount column"
+#~ msgid "A&mount"
+#~ msgstr "Suma"
 
 #, fuzzy
 #~ msgid "Insert transaction type into No. field for new transactions"
@@ -26486,81 +26404,6 @@ msgstr ""
 #~| msgid "Name:"
 #~ msgid "Name:"
 #~ msgstr "Pavadinimas:"
-
-#~ msgctxt ""
-#~ "@item This comes after the hunder text if the tens unit is different from "
-#~ "0"
-#~ msgid " and "
-#~ msgstr " ir "
-
-#, fuzzy
-#~| msgctxt "@item no payments were entered for a loan"
-#~| msgid "No"
-#~ msgctxt "@label The word to be printed for no fractional part as in No/00"
-#~ msgid "No"
-#~ msgstr "Ne"
-
-#~ msgid "Account Types"
-#~ msgstr "Sąskaitų tipai"
-
-#, fuzzy
-#~| msgid "Open ledger"
-#~ msgid "New ledger"
-#~ msgstr "Atverti knygą"
-
-#, fuzzy
-#~ msgid "Tag creation"
-#~ msgstr "Korespondento informacija"
-
-#, fuzzy
-#~ msgid "Total Balance"
-#~ msgstr "Balansas"
-
-#, fuzzy
-#~| msgid "Amount entered"
-#~ msgid "Cost Center"
-#~ msgstr "Įvesta suma"
-
-#, fuzzy
-#~ msgid "Select year"
-#~ msgstr "Pasirinkite metus"
-
-#, fuzzy
-#~ msgid "Budget year"
-#~ msgstr "Kiti metai"
-
-#, fuzzy
-#~| msgid "Name"
-#~ msgctxt "@title header of the budget name column"
-#~ msgid "Name"
-#~ msgstr "Pavadinimas"
-
-#, fuzzy
-#~ msgid "Saving accounts..."
-#~ msgstr "Sąskaita perkeliama"
-
-#, fuzzy
-#~ msgid "Saving transactions..."
-#~ msgstr "Rasti operaciją..."
-
-#~ msgid "Saving budgets..."
-#~ msgstr "Išsaugojami biudžetai..."
-
-#, fuzzy
-#~ msgid "Saving costcenters..."
-#~ msgstr "Sąskaita perkeliama"
-
-#, fuzzy
-#~ msgid "Online statement balance: %1"
-#~ msgstr "Pranešimo data:"
-
-#~ msgctxt "The balance of the selected budget"
-#~ msgid "Balance: "
-#~ msgstr "Balansas: "
-
-#, fuzzy
-#~ msgid "Closed tag"
-#~ msgstr "Užverti dialogą"
 
 #~ msgctxt "@item the number 0"
 #~ msgid "zero"
@@ -26634,23 +26477,83 @@ msgstr ""
 #~ msgid "Statement stats"
 #~ msgstr "Pranešimo data:"
 
-#~ msgid "Exceptions"
-#~ msgstr "Išimtys"
+#, fuzzy
+#~| msgid "thrown in"
+#~ msgid "%1 thrown in %2:%3"
+#~ msgstr "įmesti"
+
+#, fuzzy
+#~ msgid "Internal error - no matching transactions"
+#~ msgstr "Skelti operaciją"
+
+#~ msgid "Do nothing"
+#~ msgstr "Nieko nedaryti"
+
+#~ msgctxt "Report settings"
+#~ msgid "Reports"
+#~ msgstr "Ataskaitos"
+
+#~ msgctxt "Forecast settings"
+#~ msgid "Forecast"
+#~ msgstr "Prognozė"
 
 #~ msgid "Encryption"
 #~ msgstr "Šifravimas"
+
+#~ msgid "Save as database..."
+#~ msgstr "Įrašyti kaip duombazę..."
+
+#~ msgid "Saving file with a new filename..."
+#~ msgstr "Failas įrašomas nauju vardu..."
+
+#~ msgid "Saving file to database..."
+#~ msgstr "Failas įrašomas į duomenų bazę..."
 
 #, fuzzy
 #~ msgid "Create a new transaction"
 #~ msgstr "Trinti operaciją"
 
-#~ msgid "Save as database..."
-#~ msgstr "Įrašyti kaip duombazę..."
+#~ msgid "Do Nothing"
+#~ msgstr "Nieko nedaryti"
 
 #, fuzzy
-#~| msgid "Save as..."
-#~ msgid "Save as XML..."
-#~ msgstr "Įrašyti kaip..."
+#~ msgid "Cannot add currency with existing id %1"
+#~ msgstr "Sukurti naują kainos įrašą."
+
+#, fuzzy
+#~ msgid "Cannot remove currency with unknown id %1"
+#~ msgstr "Sukurti naują kainos įrašą."
+
+#, fuzzy
+#~ msgid "Cannot retrieve currency with unknown id '%1'"
+#~ msgstr "Sukurti naują kainos įrašą."
+
+#, fuzzy
+#~ msgid "Cannot find template transaction for schedule %1"
+#~ msgstr "Išrinkti operacijas be korespondento"
+
+#~ msgid "Exceptions"
+#~ msgstr "Išimtys"
+
+#, fuzzy
+#~ msgid "Unable to remove budget: %1, thrown in %2:%3"
+#~ msgstr "Nepavyksta pašalinti operacijos"
+
+#, fuzzy
+#~ msgid "Unable to duplicate transaction(s): %1, thrown in %2:%3"
+#~ msgstr "Nepavyksta pridėti operacijos: "
+
+#, fuzzy
+#~ msgid "Unable to accept transaction: %1, thrown in %2:%3"
+#~ msgstr "Nepavyksta pridėti operacijos: "
+
+#, fuzzy
+#~ msgid "Unable to modify transaction: %1, thrown in %2:%3"
+#~ msgstr "Nepavyksta pridėti operacijos: "
+
+#, fuzzy
+#~ msgid "Unable to delete transaction(s): %1, thrown in %2:%3"
+#~ msgstr "Nepavyksta pridėti operacijos: "
 
 #, fuzzy
 #~| msgid ""
@@ -26688,73 +26591,6 @@ msgstr ""
 #~ msgid "Set preferences"
 #~ msgstr "Parinkite nustatymus"
 
-#~ msgid "Saving file with a new filename..."
-#~ msgstr "Failas įrašomas nauju vardu..."
-
-#, fuzzy
-#~ msgid "nable to modify transaction"
-#~ msgstr "Nepavyksta pridėti operacijos: "
-
-#, fuzzy
-#~| msgid "thrown in"
-#~ msgid "%1 thrown in %2:%3"
-#~ msgstr "įmesti"
-
-#, fuzzy
-#~ msgid "Internal error - no matching transactions"
-#~ msgstr "Skelti operaciją"
-
-#, fuzzy
-#~ msgid "Cannot add currency with existing id %1"
-#~ msgstr "Sukurti naują kainos įrašą."
-
-#, fuzzy
-#~ msgid "Cannot remove currency with unknown id %1"
-#~ msgstr "Sukurti naują kainos įrašą."
-
-#, fuzzy
-#~ msgid "Cannot retrieve currency with unknown id '%1'"
-#~ msgstr "Sukurti naują kainos įrašą."
-
-#, fuzzy
-#~ msgid "Cannot find template transaction for schedule %1"
-#~ msgstr "Išrinkti operacijas be korespondento"
-
-#, fuzzy
-#~ msgid "Unable to remove budget: %1, thrown in %2:%3"
-#~ msgstr "Nepavyksta pašalinti operacijos"
-
-#, fuzzy
-#~ msgid "Unable to duplicate transaction(s): %1, thrown in %2:%3"
-#~ msgstr "Nepavyksta pridėti operacijos: "
-
-#, fuzzy
-#~ msgid "Unable to accept transaction: %1, thrown in %2:%3"
-#~ msgstr "Nepavyksta pridėti operacijos: "
-
-#, fuzzy
-#~ msgid "Unable to modify transaction: %1, thrown in %2:%3"
-#~ msgstr "Nepavyksta pridėti operacijos: "
-
-#, fuzzy
-#~ msgid "Unable to delete transaction(s): %1, thrown in %2:%3"
-#~ msgstr "Nepavyksta pridėti operacijos: "
-
-#~ msgid "Do nothing"
-#~ msgstr "Nieko nedaryti"
-
-#~ msgid "Do Nothing"
-#~ msgstr "Nieko nedaryti"
-
-#, fuzzy
-#~| msgid "Scheduled transactions"
-#~ msgid "Scheduled transactions"
-#~ msgstr "Periodinės operacijos"
-
-#~ msgctxt "Report settings"
-#~ msgid "Reports"
-#~ msgstr "Ataskaitos"
-
 #, fuzzy
 #~| msgid "VAT percentage"
 #~ msgctxt "Same transaction if amount differs less than percent."
@@ -26763,13 +26599,6 @@ msgstr ""
 
 #~ msgid "User identification"
 #~ msgstr "Naudotojo identifikacija"
-
-#~ msgctxt "Forecast settings"
-#~ msgid "Forecast"
-#~ msgstr "Prognozė"
-
-#~ msgid "Saving file to database..."
-#~ msgstr "Failas įrašomas į duomenų bazę..."
 
 #, fuzzy
 #~ msgid "Improved the transaction form"

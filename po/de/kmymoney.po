@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-18 02:01+0000\n"
+"POT-Creation-Date: 2025-05-23 03:30+0000\n"
 "PO-Revision-Date: 2022-11-07 20:00+0100\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -323,10 +323,10 @@ msgstr "Geplante Buchung gefunden"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
 #, fuzzy, kde-format
-#| msgid "Create a new asset account"
+#| msgid "Created on"
 msgctxt "Create undo action"
 msgid "Create account"
-msgstr "Neues Anlagekonto anlegen"
+msgstr "Erstellt am"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
 #, fuzzy, kde-format
@@ -1189,7 +1189,9 @@ msgid "Select as base currency"
 msgstr "Als Basiswährung auswählen"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:504
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Menu header"
+#| msgid "Currency options"
 msgctxt "@title:menu"
 msgid "Currency options"
 msgstr "Währungsoptionen"
@@ -1997,7 +1999,9 @@ msgid "Delete price..."
 msgstr "Kurs löschen ..."
 
 #: kmymoney/dialogs/kmymoneypricedlg.cpp:357
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Menu header"
+#| msgid "Price options"
 msgctxt "@title:menu"
 msgid "Price options"
 msgstr "Preisoptionen"
@@ -2011,10 +2015,10 @@ msgstr "Preiseditor"
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, m_searchWidget)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:26
 #, fuzzy, kde-format
-#| msgid "Search..."
+#| msgid "S&earch:"
 msgctxt "Placeholder text for search bar"
 msgid "Search..."
-msgstr "Suchen ..."
+msgstr "&Suchen:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_showAllPrices)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:52
@@ -2163,11 +2167,10 @@ msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:628
 #, fuzzy, kde-format
-#| msgctxt "@label:choser %1 account name, %2 parent account name"
-#| msgid "<b>%1</b> is a sub account of <b>%2</b>"
+#| msgid "Is a sub account of %1"
 msgctxt "@label:chooser %1 account name, %2 parent account name"
 msgid "<b>%1</b> is a sub account of <b>%2</b>"
-msgstr "<b>%1</b> ist ein Unterkonto von <b>%2</b>"
+msgstr "Ist ein Unterkonto von %1"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:692
 #: kmymoney/dialogs/knewinstitutiondlg.cpp:189
@@ -2232,10 +2235,10 @@ msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:912
 #, fuzzy, kde-format
-#| msgid "Payment accounts"
+#| msgid "Hide closed accounts"
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
-msgstr "Zahlungskonten"
+msgstr "Geschlossene Konten ausblenden"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:920
 #, fuzzy, kde-format
@@ -2680,7 +2683,9 @@ msgstr "Kategorie erstellen"
 #. i18n: ectx: Menu (budget_context_menu)
 #: kmymoney/dialogs/knewaccountdlg.ui:925
 #: kmymoney/plugins/views/budget/budgetview.rc:4
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Menu header"
+#| msgid "Budget options"
 msgid "Budget options"
 msgstr "Budget-Optionen"
 
@@ -2777,7 +2782,7 @@ msgstr "Name:"
 #: kmymoney/dialogs/knewinstitutiondlg.ui:101
 #, kde-format
 msgid "SWIFT/BIC"
-msgstr "SWIFT/BIC"
+msgstr ""
 
 #. i18n: Tooltip for 'Bank Code' field. Include an example of the culture-specific term for 'Bank Code' here, if one is common (https://en.wikipedia.org/wiki/Bank_code).
 #. i18n: ectx: property (toolTip), widget (KLineEdit, bankCodeEdit)
@@ -2798,9 +2803,10 @@ msgstr "Ort:"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel6)
 #: kmymoney/dialogs/knewinstitutiondlg.ui:171
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Bank Code"
 msgid "Bank Code:"
-msgstr "Bankleitzahl:"
+msgstr "Bankleitzahl"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel6)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
@@ -3480,10 +3486,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:457
-#, fuzzy, kde-format
-#| msgid "Hide closed accounts"
+#, kde-format
 msgid "Hide accounts with a zero balance from Accounts"
-msgstr "Geschlossene Konten ausblenden"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:464
@@ -4115,9 +4120,9 @@ msgstr "Buchungsdetails der ausgewählten Buchung anzeigen"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowAllSplits)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:86
 #, fuzzy, kde-format
-#| msgid "Show a grid in the register"
+#| msgid "Show all register entries in full detail"
 msgid "Show all split details in ledger"
-msgstr "Gitterlinien im Kontenbuch anzeigen"
+msgstr "Alle Kontenbucheinträge mit vollen Details anzeigen"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:96
@@ -4152,7 +4157,7 @@ msgstr "Titelzeile für vergangenes und aktuelles Geschäftsjahr anzeigen"
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:123
 #, fuzzy, kde-format
-#| msgid "Don't show reconciled transactions"
+#| msgid "Do not show reconciled transactions"
 msgid "Don't show reconciliation entries"
 msgstr "Abgeglichene Buchungen ausblenden"
 
@@ -4498,7 +4503,9 @@ msgid "Holidays for %1 (%2)"
 msgstr "Feiertage für %1 (%2)"
 
 #: kmymoney/dialogs/settings/ksettingsschedules.cpp:371
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Security type"
+#| msgid "None"
 msgctxt "@item:inlistbox No holiday region selected"
 msgid "None"
 msgstr "Keine"
@@ -4650,7 +4657,8 @@ msgstr ""
 "%1"
 
 #: kmymoney/kcreditswindow.cpp:52
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Core engine, Release Manager, Project admin"
 msgctxt "Roles in project"
 msgid "Core engine, Release Manager, Project admin"
 msgstr "Core Engine, Release-Manager, Projekt-Administrator"
@@ -4659,13 +4667,13 @@ msgstr "Core Engine, Release-Manager, Projekt-Administrator"
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Maintainer, Windows support"
-msgstr "Entwickler, Betreuer, Windows-Unterstützung"
+msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:54
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Windows and MacOS support"
-msgstr "Entwickler, Windows- und macOS-Unterstützung"
+msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:57 kmymoney/kcreditswindow.cpp:59
 #: kmymoney/kcreditswindow.cpp:61 kmymoney/kcreditswindow.cpp:64
@@ -4680,53 +4688,61 @@ msgid "Inactive member. "
 msgstr "Inaktive Mitglieder"
 
 #: kmymoney/kcreditswindow.cpp:57
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Initial idea, much initial source code, Project admin"
 msgctxt "Roles in project"
 msgid "Initial idea, much initial source code, Project admin"
 msgstr "Initiale Idee, viel initialer Quellcode, Projekt-Administrator"
 
 #: kmymoney/kcreditswindow.cpp:59
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Forecast, Reports"
 msgctxt "Roles in project"
 msgid "Forecast, Reports"
 msgstr "Vorhersage, Berichte"
 
 #: kmymoney/kcreditswindow.cpp:61
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Reporting logic, OFX Import"
 msgctxt "Roles in project"
 msgid "Reporting logic, OFX Import"
 msgstr "Bericht-Logik, OFX-Import"
 
 #: kmymoney/kcreditswindow.cpp:64
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Database backend, maintainer stable branch"
 msgctxt "Roles in project"
 msgid "Database backend, maintainer stable branch"
 msgstr "Datenbank-Backend, stabiler Entwicklungszweig"
 
 #: kmymoney/kcreditswindow.cpp:67
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Project Admin"
 msgctxt "Roles in project"
 msgid "Project Admin"
 msgstr "Projekt-Administrator"
 
 #: kmymoney/kcreditswindow.cpp:69 kmymoney/kcreditswindow.cpp:71
 #: kmymoney/kcreditswindow.cpp:72
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Developer"
 msgctxt "Roles in project"
 msgid "Developer"
 msgstr "Entwickler"
 
 #: kmymoney/kcreditswindow.cpp:70
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Database backend"
 msgctxt "Roles in project"
 msgid "Database backend"
 msgstr "Datenbank Backend"
 
 #: kmymoney/kcreditswindow.cpp:74
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Developer & Artist"
 msgctxt "Roles in project"
 msgid "Developer, Code refactoring"
-msgstr "Entwickler, Erneuern des Quelltextes"
+msgstr "Entwickler & Künstler"
 
 #: kmymoney/kcreditswindow.cpp:80 kmymoney/kcreditswindow.cpp:86
 #: kmymoney/kcreditswindow.cpp:92 kmymoney/kcreditswindow.cpp:99
@@ -4780,49 +4796,57 @@ msgid "SQLite database encryption"
 msgstr "Fehlfunktion der Datenbank"
 
 #: kmymoney/kcreditswindow.cpp:135
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Documentation and user support"
 msgctxt "Roles in project"
 msgid "Documentation and user support"
 msgstr "Dokumentation und Betreuung von Nutzern"
 
 #: kmymoney/kcreditswindow.cpp:137
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Initial investment support"
 msgctxt "Roles in project"
 msgid "Initial investment support"
 msgstr "Ursprüngliche Unterstützung für Investitionen"
 
 #: kmymoney/kcreditswindow.cpp:140
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Developer & Artist"
 msgctxt "Roles in project"
 msgid "Developer & Artist"
 msgstr "Entwickler & Künstler"
 
 #: kmymoney/kcreditswindow.cpp:143
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Icons & splash screen"
 msgctxt "Roles in project"
 msgid "Icons & splash screen"
 msgstr "Symbole & Startbildschirm"
 
 #: kmymoney/kcreditswindow.cpp:145
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Patches and port to kde4"
 msgctxt "Roles in project"
 msgid "Patches and port to kde4"
 msgstr "Fehlerbehebung und Portierung nach KDE 4"
 
 #: kmymoney/kcreditswindow.cpp:146
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Patches"
 msgctxt "Roles in project"
 msgid "Patches"
 msgstr "Patches"
 
 #: kmymoney/kcreditswindow.cpp:148
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Patches, packaging and KF5-CI for OS X"
 msgctxt "Roles in project"
 msgid "Patches, packaging and KF5-CI for OS X"
 msgstr "Fehlerbehebung, Pakete und KF5-CI für OS X"
 
 #: kmymoney/kcreditswindow.cpp:150
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "CSV import/export"
 msgctxt "Roles in project"
 msgid "CSV import/export"
 msgstr "CSV-Import/Export"
@@ -4869,10 +4893,11 @@ msgstr ""
 "Die Zuordnung der markierten Buchungen kann nicht rückgängig gemacht werden"
 
 #: kmymoney/kmymoney.cpp:1063
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "New account..."
 msgctxt "@action New file/database"
 msgid "New book..."
-msgstr "Neues Buch ..."
+msgstr "Neues Konto ..."
 
 #: kmymoney/kmymoney.cpp:1230
 #, kde-format
@@ -4987,13 +5012,15 @@ msgid "Finish"
 msgstr "Fertigstellen"
 
 #: kmymoney/kmymoney.cpp:1405
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Postal Code:"
 msgctxt "Postpone reconciliation"
 msgid "Postpone"
-msgstr "Zurückstellen"
+msgstr "PLZ:"
 
 #: kmymoney/kmymoney.cpp:1406
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Cancel"
 msgctxt "Cancel reconciliation"
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -5120,10 +5147,12 @@ msgid "Visit our website"
 msgstr "KMyMoney-Webseite besuchen"
 
 #: kmymoney/kmymoney.cpp:1446
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1 transaction\n"
+#| msgid_plural "%1 transactions\n"
 msgctxt "New transaction button"
 msgid "New transaction"
-msgstr "Neue Buchung"
+msgstr "%1 Buchung\n"
 
 #: kmymoney/kmymoney.cpp:1447
 #, kde-format
@@ -5199,16 +5228,18 @@ msgid "Not reconciled"
 msgstr "Nicht abgeglichen"
 
 #: kmymoney/kmymoney.cpp:1459
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Move transaction to..."
 msgctxt "Move transaction"
 msgid "Move transaction"
-msgstr "Buchung verschieben"
+msgstr "Buchungen verschieben nach ..."
 
 #: kmymoney/kmymoney.cpp:1460
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Show transaction form"
 msgctxt "Show transaction"
 msgid "Show transaction"
-msgstr "Buchung anzeigen"
+msgstr "Buchungsformular anzeigen"
 
 #: kmymoney/kmymoney.cpp:1461
 #, fuzzy, kde-format
@@ -5257,9 +5288,10 @@ msgid "Combine"
 msgstr "Zusammenführen"
 
 #: kmymoney/kmymoney.cpp:1470
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "As of today"
 msgid "Move to today"
-msgstr "Zum heutigen Tag verschieben"
+msgstr "Zum heutigen Tage"
 
 #: kmymoney/kmymoney.cpp:1471
 #, kde-format
@@ -5267,9 +5299,10 @@ msgid "Copy splits"
 msgstr "Split-Buchungen kopieren"
 
 #: kmymoney/kmymoney.cpp:1472
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Show ledgers page"
 msgid "Show filter widget"
-msgstr "Filter-Bedienelement anzeigen"
+msgstr "Kontenbuchseite anzeigen"
 
 #: kmymoney/kmymoney.cpp:1474
 #, kde-format
@@ -5297,9 +5330,10 @@ msgid "Manual price update..."
 msgstr "Manuelle Preisaktualisierung ..."
 
 #: kmymoney/kmymoney.cpp:1479
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Existing security"
 msgid "Edit security..."
-msgstr "Wertpapier bearbeiten ..."
+msgstr "Vorhandenes Wertpapier"
 
 #: kmymoney/kmymoney.cpp:1480
 #, fuzzy, kde-format
@@ -5308,9 +5342,10 @@ msgid "Delete security..."
 msgstr "Wertpapier entfernen"
 
 #: kmymoney/kmymoney.cpp:1483
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&New Schedule..."
 msgid "New schedule..."
-msgstr "Neue Buchung ..."
+msgstr "&Neue Buchung planen ..."
 
 #: kmymoney/kmymoney.cpp:1484 kmymoney/kmymoney.cpp:1485
 #, kde-format
@@ -5338,9 +5373,10 @@ msgid "Skip next transaction..."
 msgstr "Diese Zahlung überspringen ..."
 
 #: kmymoney/kmymoney.cpp:1491
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "New payee"
 msgid "New payee..."
-msgstr "Neuer Zahlungsempfänger ..."
+msgstr "Neuer Zahlungsempfänger"
 
 #: kmymoney/kmymoney.cpp:1492
 #, kde-format
@@ -5358,9 +5394,10 @@ msgid "Merge payees"
 msgstr "Empfänger zusammenführen"
 
 #: kmymoney/kmymoney.cpp:1496
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "New tag"
 msgid "New tag..."
-msgstr "Neues Stichwort ..."
+msgstr "Neues Stichwort"
 
 #: kmymoney/kmymoney.cpp:1497
 #, kde-format
@@ -5373,40 +5410,47 @@ msgid "Delete tag"
 msgstr "Stichwort löschen"
 
 #: kmymoney/kmymoney.cpp:1500
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&New report"
 msgid "Open report"
-msgstr "Bericht öffnen"
+msgstr "&Neuer Bericht"
 
 #: kmymoney/kmymoney.cpp:1501
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&New report"
 msgid "New report"
-msgstr "Neuer Bericht"
+msgstr "&Neuer Bericht"
 
 #: kmymoney/kmymoney.cpp:1502
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Copy memo"
 msgid "Copy report"
-msgstr "Bericht kopieren"
+msgstr "Notiz kopieren"
 
 #: kmymoney/kmymoney.cpp:1503
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:215
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Configure your report"
 msgid "Configure report"
-msgstr "Bericht konfigurieren"
+msgstr "Diesen Bericht konfigurieren"
 
 #: kmymoney/kmymoney.cpp:1504
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Favorite reports"
 msgid "Export report"
-msgstr "Bericht exportieren"
+msgstr "Bevorzugte Berichte"
 
 #: kmymoney/kmymoney.cpp:1505
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Delete Report?"
 msgid "Delete report"
-msgstr "Bericht löschen"
+msgstr "Bericht löschen?"
 
 #: kmymoney/kmymoney.cpp:1506
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&New report"
 msgid "Close report"
-msgstr "Bericht schließen"
+msgstr "&Neuer Bericht"
 
 #: kmymoney/kmymoney.cpp:1507
 #, fuzzy, kde-format
@@ -5417,9 +5461,9 @@ msgstr "Umschalten"
 
 #: kmymoney/kmymoney.cpp:1508
 #, fuzzy, kde-format
-#| msgid "Edit transfer"
+#| msgid "Entry order"
 msgid "Edit tab order"
-msgstr "Überweisung bearbeiten"
+msgstr "Eingabe-Reihenfolge"
 
 #: kmymoney/kmymoney.cpp:1511
 #, kde-format
@@ -5437,13 +5481,17 @@ msgid "Debug Timers"
 msgstr "Debug Timers"
 
 #: kmymoney/kmymoney.cpp:1533
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Button text for match transaction"
+#| msgid "Match"
 msgctxt "Match transactions"
 msgid "Match"
 msgstr "Zuordnen"
 
 #: kmymoney/kmymoney.cpp:1534
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Button text for unmatch transaction"
+#| msgid "Unmatch"
 msgctxt "Unmatch transactions"
 msgid "Unmatch"
 msgstr "Zuordnung rückgängig machen"
@@ -5464,17 +5512,19 @@ msgstr "Abgleich zurückstellen"
 
 #: kmymoney/kmymoney.cpp:1662
 #, fuzzy, kde-format
-#| msgid "Last reconciliation"
+#| msgid ""
+#| "_: Finish reconciliation\n"
+#| "Finish"
 msgctxt "@info:tooltip"
 msgid "Finish the current reconciliation"
-msgstr "Letzter Abgleich"
+msgstr "Fertigstellen"
 
 #: kmymoney/kmymoney.cpp:1663
 #, fuzzy, kde-format
-#| msgid "Cancel reconciliation"
+#| msgid "Last reconciliation"
 msgctxt "@info:tooltip"
 msgid "Cancel the current reconciliation"
-msgstr "Abgleich abbrechen"
+msgstr "Letzter Abgleich"
 
 #: kmymoney/kmymoney.cpp:1771
 #, kde-format
@@ -5530,32 +5580,39 @@ msgid "Unable to modify transaction"
 msgstr "Buchungen können nicht bearbeitet werden"
 
 #: kmymoney/kmymoney.cpp:2689
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "At least one split of the selected transactions has been reconciled. Do "
+#| "you wish to delete the transactions anyway?"
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
 "wish to change the transactions anyway?"
 msgstr ""
 "Mindestens ein Teil der markierten Buchungen ist bereits abgeglichen. "
-"Möchten Sie die Buchungen trotzdem ändern?"
+"Möchten Sie die Buchungen trotzdem löschen?"
 
 #: kmymoney/kmymoney.cpp:2691
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Transaction already reconciled"
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "Buchung bereits abgeglichen"
 
 #: kmymoney/kmymoney.cpp:2696
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Do you really want to delete the selected transaction?"
+#| msgid_plural "Do you really want to delete all %1 selected transactions?"
 msgid "Do you really want to change the selected transaction?"
 msgid_plural "Do you really want to change all %1 selected transactions?"
-msgstr[0] "Sind Sie sicher, dass Sie die ausgewählte Buchung ändern möchten?"
-msgstr[1] "Sind Sie sicher, dass Sie %1 ausgewählte Buchungen ändern möchten?"
+msgstr[0] "Sind Sie sicher, dass Sie die ausgewählte Buchung löschen möchten?"
+msgstr[1] "Sind Sie sicher, dass Sie %1 ausgewählte Buchungen löschen möchten?"
 
 #: kmymoney/kmymoney.cpp:2700
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Any transaction"
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
-msgstr "Buchung ändern"
+msgstr "Alle Buchungen"
 
 #: kmymoney/kmymoney.cpp:2785
 #, kde-format
@@ -5563,13 +5620,16 @@ msgid "Unable to accept transaction"
 msgstr "Buchungen können nicht angenommen werden"
 
 #: kmymoney/kmymoney.cpp:2825
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "KMyMoney has detected some overdue scheduled transactions for this "
+#| "account. Do you want to enter those scheduled transactions now?"
 msgid ""
 "KMyMoney has detected some overdue scheduled transactions for the account <b>"
 "%1</b>. Do you want to enter those scheduled transactions now?"
 msgstr ""
-"KMyMoney hat einige überfällige geplante Buchungen in diesem Konto <b>%1</b> "
-"gefunden. Möchten Sie diese jetzt in das Kontenbuch eintragen?"
+"KMyMoney hat einige überfällige geplante Buchungen in diesem Konto gefunden. "
+"Möchten Sie diese jetzt in das Kontenbuch eintragen?"
 
 #: kmymoney/kmymoney.cpp:2828
 #, kde-format
@@ -5655,10 +5715,11 @@ msgid "KMyMoney template files (*.kmt);;All files (*)"
 msgstr "KMyMoney-Vorlagendateien (*.kmt);;Alle Dateien (*)"
 
 #: kmymoney/kmymoney.cpp:3199
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Template Error"
 msgctxt "@title:window Error display"
 msgid "Template export"
-msgstr "Vorlagenexport"
+msgstr "Vorlagenfehler"
 
 #: kmymoney/kmymoney.cpp:3217
 #, kde-format
@@ -5858,14 +5919,17 @@ msgid "Importing a statement via Web Connect"
 msgstr "Abrechnung via Web Connect importieren"
 
 #: kmymoney/kmymoney.cpp:3969
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Unable to import %1 using %2 plugin.  The plugin returned the following "
+#| "error: %3"
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
 "Unable to import %1 using %2 plugin. The plugin returned the following "
 "error: %3"
 msgstr ""
-"%1 kann nicht mit dem Modul %2 importiert werden. Das Modul berichtet den "
-"folgenden Fehler: %3"
+"Kann %1 nicht mit der Erweiterung %2 importieren. Die Erweiterung liefert "
+"den folgenden Fehler: %3"
 
 #: kmymoney/kmymoney.cpp:3969 kmymoney/plugins/ofx/import/ofximporter.cpp:1051
 #, kde-format
@@ -6086,9 +6150,10 @@ msgstr "Investitions-Einstellungen"
 
 #. i18n: ectx: Menu (security_context_menu)
 #: kmymoney/kmymoneyui.rc:193
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Sort options"
 msgid "Security options"
-msgstr "Wertpapier-Einstellungen"
+msgstr "Sortier-Optionen"
 
 #. i18n: ectx: Menu (schedule_context_menu)
 #: kmymoney/kmymoneyui.rc:202
@@ -6151,8 +6216,10 @@ msgid "Use this to filter out accounts"
 msgstr "Verwenden Sie dies, um Konten herauszufiltern"
 
 #: kmymoney/kmymoneyutils.cpp:118
+#, fuzzy
+#| msgid "Scheduled Expenses"
 msgid "Scheduled payments"
-msgstr "Geplante Zahlungen"
+msgstr "Geplante Ausgaben"
 
 #: kmymoney/kmymoneyutils.cpp:119
 msgid "Preferred accounts"
@@ -6399,19 +6466,23 @@ msgid "No"
 msgstr "Nein"
 
 #: kmymoney/models/accountsproxymodel.cpp:618
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Any status"
 msgctxt "Account filter"
 msgid "Any status"
-msgstr "Beliebiger Status"
+msgstr "Jeder Status"
 
 #: kmymoney/models/accountsproxymodel.cpp:619
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Unused column"
+#| msgid "Unused"
 msgctxt "Account filter"
 msgid "Unused"
 msgstr "Nicht zugewiesen"
 
 #: kmymoney/models/accountsproxymodel.cpp:620
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Closed"
 msgctxt "Account filter"
 msgid "Closed"
 msgstr "Geschlossen"
@@ -6528,7 +6599,8 @@ msgstr "Das Modul zur Anzeige dieser Information wurde nicht gefunden."
 
 #: kmymoney/models/statementmodel.cpp:93
 #: kmymoney/mymoney/storage/accountsmodel.cpp:467
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Name"
 msgctxt "@title:column Shows the Name of account"
 msgid "Name"
 msgstr "Name"
@@ -6571,7 +6643,7 @@ msgstr "Zugeordnet"
 
 #: kmymoney/models/statementmodel.cpp:105
 #, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
+#| msgctxt "To duplicate a split"
 #| msgid "Duplicate"
 msgctxt "@title:column Shows number of duplicate transactions"
 msgid "Duplicates"
@@ -6586,7 +6658,8 @@ msgstr "Zahlungsempfänger-Erstellung"
 
 #: kmymoney/models/statementmodel.cpp:117
 #: kmymoney/mymoney/storage/accountsmodel.cpp:503
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Full name"
 msgctxt ""
 "@info:tooltip for 'Name' column. Used in Account, Category and Institution "
 "context, so avoid being too specific"
@@ -6595,7 +6668,8 @@ msgstr "Name"
 
 #: kmymoney/models/statementmodel.cpp:119
 #: kmymoney/mymoney/storage/accountsmodel.cpp:505
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Type"
 msgctxt ""
 "@info:tooltip for 'Type' column, used in both Account and Category context, "
 "so avoid being too specific"
@@ -6604,10 +6678,13 @@ msgstr "Typ"
 
 #: kmymoney/models/statementmodel.cpp:121
 #: kmymoney/mymoney/storage/accountsmodel.cpp:507
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Homepage can show accounts online banking status"
 msgctxt "@info:tooltip for 'Online' column (YES/NO value)"
 msgid "Whether account has online mapping set up"
-msgstr "Gibt an, ob das Konto eine Zuordnung zu einem Onlinekonto hat"
+msgstr ""
+"Auf der Übersichtsseite kann der Status von Online-Banking-Konten angezeigt "
+"werden"
 
 #: kmymoney/models/statementmodel.cpp:123
 #: kmymoney/mymoney/storage/accountsmodel.cpp:509
@@ -6649,10 +6726,11 @@ msgstr "Gebuchter Wert"
 
 #: kmymoney/models/statementmodel.cpp:133
 #: kmymoney/mymoney/storage/accountsmodel.cpp:519
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Include subaccounts"
 msgctxt "@info:tooltip for 'Total Value' column"
 msgid "Total Value (including subaccounts)"
-msgstr "Gesamtwert (Unterkonten eingeschlossen)"
+msgstr "Unterkonten einschließen"
 
 #: kmymoney/models/statementmodel.cpp:135
 #: kmymoney/mymoney/storage/accountsmodel.cpp:521
@@ -6663,12 +6741,11 @@ msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:137
 #: kmymoney/mymoney/storage/accountsmodel.cpp:523
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Enter the International Bank Account Number into this field"
 msgctxt "@info:tooltip for 'IBAN' column"
 msgid "Account number in IBAN (International Bank Account Number) format"
-msgstr ""
-"Internationale Bankkontonummer im Format IBAN (International Bank Account "
-"Number)"
+msgstr "Geben Sie die IBAN in dieses Feld ein"
 
 #: kmymoney/models/statementmodel.cpp:142
 #: kmymoney/mymoney/storage/accountsmodel.cpp:528
@@ -6924,9 +7001,10 @@ msgid "  * Payee %1 recreated with fixed id"
 msgstr "  * Zahlungsempfänger %1 wiederhergestellt mit fester Id"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3252
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "* Problem with account '%1'"
 msgid "* Problems with transactions"
-msgstr "* Probleme mit Buchungen"
+msgstr "* Problem mit dem Konto „%1“"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3263
 #, fuzzy, kde-format
@@ -7129,11 +7207,11 @@ msgstr ""
 #: kmymoney/mymoney/mymoneyfile.cpp:3616
 #, fuzzy, kde-format
 #| msgid ""
-#| "    Please enter a price for the security on or before the opening date."
+#| "    Please enter a price for the currency on or before the opening date."
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the currency on or before '%1'."
 msgstr ""
-"    Bitte geben Sie einen Preis für die Wertpapier am Eröffnungsdatum ein."
+"    Bitte geben Sie einen Preis für die Währung am Eröffnungsdatum ein."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3621
 #, fuzzy, kde-format
@@ -8502,9 +8580,10 @@ msgid "<p>Missing tag <b>%1</b> in template file <b>%2</b></p>"
 msgstr "<p>Ungültige Kennzeichnung <b>%1</b> in Vorlagendatei <b>%2</b></p>"
 
 #: kmymoney/mymoney/mymoneytemplate.cpp:116
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>"
 msgid "<p>Invalid root element in template file <b>%1</b></p>"
-msgstr "<p>Ungültiges Basiselement in der Vorlagendatei <b>%1</b></p>"
+msgstr "<p>Ungültige Kennzeichnung <b>%1</b> in Vorlagendatei <b>%2</b></p>"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:99
 #, fuzzy, kde-format
@@ -8544,6 +8623,7 @@ msgstr "Interne Kennung"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:104
 #, fuzzy, kde-format
+#| msgctxt "Online quote source"
 #| msgid "Source"
 msgctxt "@title:column Online quote source"
 msgid "Source"
@@ -8656,6 +8736,8 @@ msgid "Status"
 msgstr "Status"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:398
+#, fuzzy
+#| msgid "Favorites"
 msgid "Favorite"
 msgstr "Favoriten"
 
@@ -8692,27 +8774,32 @@ msgid "Equity accounts"
 msgstr "Kapitalkonten"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:469
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Type"
 msgctxt ""
 "@title:column Shows the Type of account (e.g. Asset, Checking, Credit Card)"
 msgid "Type"
 msgstr "Typ"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:471
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "End line"
 msgctxt ""
 "@title:column Indicates whether account has an online mapping configured"
 msgid "Online"
-msgstr "Online"
+msgstr "Letzte Zeile"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:473
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tax"
 msgctxt "@title:column Indicates whether account is included in tax reports"
 msgid "Tax"
 msgstr "Steuer"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:475
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Column heading for VAT category"
+#| msgid "VAT"
 msgctxt "@title:column Shows VAT percentage rate, if configured"
 msgid "VAT"
 msgstr "MwSt."
@@ -8727,13 +8814,15 @@ msgid "CC"
 msgstr "KS"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:479
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Balance"
 msgctxt "@title:column Shows account's balance (in account's currency)"
 msgid "Balance"
 msgstr "Saldo"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:483
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Total Value"
 msgctxt ""
 "@title:column Shows Total Value, which includes a sum of all subaccounts (in "
 "base currency)"
@@ -8741,19 +8830,22 @@ msgid "Total Value"
 msgstr "Gesamtwert"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:485
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Number"
 msgctxt "@title:column Shows Account Number"
 msgid "Number"
 msgstr "Nummer"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:487
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "IBAN"
 msgctxt "@title:column Shows IBAN"
 msgid "IBAN"
 msgstr "IBAN"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:492
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Bank Code"
 msgctxt ""
 "@title:column Shows Bank Code. Use a generic form, do not translate using a "
 "culture-specific term, such as 'Routing Number' (en_US) or 'Sort "
@@ -8765,7 +8857,7 @@ msgstr "Bankleitzahl"
 #, kde-format
 msgctxt "@title:column Shows SWIFT/BIC"
 msgid "SWIFT/BIC"
-msgstr "SWIFT/BIC"
+msgstr ""
 
 #: kmymoney/mymoney/storage/budgetsmodel.cpp:71
 #, kde-format
@@ -8784,32 +8876,38 @@ msgid "Accounts with no institution assigned"
 msgstr "Konten ohne zugewiesene Geldinstitute"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:57
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Cheque Number"
+#| msgid "No."
 msgctxt "@title:column Cheque Number"
 msgid "No."
 msgstr "Nr."
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:58
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Date"
 msgctxt "@title:column Valuta date"
 msgid "Date"
 msgstr "Datum"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:59
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:47
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Account"
 msgctxt "@title:column"
 msgid "Account"
 msgstr "Konto"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:60
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Payee"
 msgctxt "@title:column"
 msgid "Payee"
 msgstr "Zahlungsempfänger"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:61
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Security"
 msgctxt "@title:column"
 msgid "Security"
 msgstr "Wertpapier"
@@ -8822,65 +8920,75 @@ msgid "CC"
 msgstr "KS"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:63
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Detail"
 msgctxt "@title:column"
 msgid "Detail"
 msgstr "Details"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:64
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "C"
 msgctxt "@title:column Reconciliation state"
 msgid "C"
 msgstr "V"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:65
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Payment"
 msgctxt "@title:column Payment made from account"
 msgid "Payment"
 msgstr "Zahlung"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:66
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Deposit"
 msgctxt "@title:column Deposit into account"
 msgid "Deposit"
 msgstr "Einzahlungen"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:67
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Quantity"
 msgctxt "@title:column"
 msgid "Quantity"
 msgstr "Menge"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:68
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Price"
 msgctxt "@title:column"
 msgid "Price"
 msgstr "Preis"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:69
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Amount"
 msgctxt "@title:column"
 msgid "Amount"
 msgstr "Betrag"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:70
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:50
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Value"
 msgctxt "@title:column"
 msgid "Value"
 msgstr "Wert"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:71
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Balance"
 msgctxt "@title:column"
 msgid "Balance"
 msgstr "Saldo"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:72
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Entry order"
 msgctxt "@title:column Entry date"
 msgid "Entry"
-msgstr "Eingabe"
+msgstr "Eingabe-Reihenfolge"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:75
 #, fuzzy, kde-format
@@ -8891,11 +8999,10 @@ msgstr "Nummer"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:76
 #, fuzzy, kde-format
-#| msgctxt "Ledger marker showing a reconciliation entry"
-#| msgid "Reconciliation"
+#| msgid "Reconciliation view"
 msgctxt "@title:column Reconciliation state (ext)"
 msgid "Reconciliation"
-msgstr "Abgleich"
+msgstr "Abgleich-Ansicht"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:77
 #, fuzzy, kde-format
@@ -9044,87 +9151,105 @@ msgid "unknown"
 msgstr "unbekannt"
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:46
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Date"
 msgctxt "@title:column"
 msgid "Date"
 msgstr "Datum"
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:48
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Action"
 msgctxt "@title:column"
 msgid "Action"
 msgstr "Aktion"
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:49
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Destination"
 msgctxt "@title:column"
 msgid "Destination"
 msgstr "Ziel"
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:51
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Purpose"
 msgctxt "@title:column"
 msgid "Purpose"
 msgstr "Verwendungszweck"
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:52
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "National Account"
 msgctxt "@title:column"
 msgid "Destination Account"
-msgstr "Zielkonto"
+msgstr "Nationales Konto"
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:53
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Destination"
 msgctxt "@title:column"
 msgid "Destination BIC"
-msgstr "Ziel-BIC"
+msgstr "Ziel"
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:155
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:176
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:188
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unknown"
 msgctxt "Unknown payee in online task"
 msgid "Unknown"
-msgstr "Unknown"
+msgstr "Unbekannt"
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:230
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Job is being processed at the moment."
 msgctxt "@info:tooltip online job list status"
 msgid "Job is being processed at the moment."
 msgstr "Der Vorgang wird zurzeit ausgeführt."
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:235
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Arg 1 is a date/time"
+#| msgid "This job was accepted by the bank on %1."
 msgctxt "@info:tooltip online job list status Arg 1 is a date/time"
 msgid "This job was accepted by the bank on %1."
 msgstr "Dieser Vorgang wurde am %1 von der Bank angenommen."
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:239
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Arg 1 is a date/time"
+#| msgid "Sending this job failed (tried on %1)."
 msgctxt "@info:tooltip online job list status Arg 1 is a date/time"
 msgid "Sending this job failed (tried on %1)."
 msgstr "Das Senden dieses Vorgangs ist am %1 fehlgeschlagen."
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:242
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Sending this job was manually aborted."
 msgctxt "@info:tooltip online job list status"
 msgid "Sending this job was manually aborted."
 msgstr "Das Versenden des Vorgangs wurde manuell abgebrochen."
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:245
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Arg 1 is a date/time"
+#| msgid "The bank rejected this job on %1."
 msgctxt "@info:tooltip online job list status Arg 1 is a date/time"
 msgid "The bank rejected this job on %1."
 msgstr "Die Bank hat diesen Vorgang am %1 abgelehnt."
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:250
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Arg 1 is a date/time"
+#| msgid "The bank accepted this job on %1."
 msgctxt "@info:tooltip online job list status Arg 1 is a date/time"
 msgid "The bank accepted this job on %1."
 msgstr "Die Bank hat diesen Vorgang am %1 angenommen."
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:253
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "This job needs further editing and cannot be sent therefore."
 msgctxt "@info:tooltip online job list status"
 msgid "This job needs further editing and cannot be sent therefore."
 msgstr ""
@@ -9132,7 +9257,8 @@ msgstr ""
 "werden."
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:255
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "This job is ready for sending."
 msgctxt "@info:tooltip online job list status"
 msgid "This job is ready for sending."
 msgstr "Dieser Vorgang ist bereit zum Senden."
@@ -9141,10 +9267,11 @@ msgstr "Dieser Vorgang ist bereit zum Senden."
 #, kde-format
 msgctxt "ParameterModel key"
 msgid "Key"
-msgstr "Schlüssel"
+msgstr ""
 
 #: kmymoney/mymoney/storage/parametersmodel.cpp:64
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Value"
 msgctxt "ParameterModel value"
 msgid "Value"
 msgstr "Wert"
@@ -9176,17 +9303,21 @@ msgid "Commodity"
 msgstr "Währung/Aktie"
 
 #: kmymoney/mymoney/storage/pricemodel.cpp:39
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Stock Name"
 msgid "Stock name"
 msgstr "Wertpapiername"
 
 #: kmymoney/mymoney/storage/pricemodel.cpp:43
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Online quote source"
+#| msgid "Source"
 msgid "Source"
 msgstr "Quelle"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:50
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Name"
 msgctxt "Reportname"
 msgid "Name"
 msgstr "Name"
@@ -9337,19 +9468,22 @@ msgid "Next fiscal year"
 msgstr "Nächstes Geschäftsjahr"
 
 #: kmymoney/mymoney/storage/tagsmodel.cpp:51
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Name"
 msgctxt "Tagname"
 msgid "Name"
 msgstr "Name"
 
 #: kmymoney/mymoney/storage/templatesmodel.cpp:76
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Type"
 msgctxt "@title:column Country/Hierarchy type"
 msgid "Type"
 msgstr "Typ"
 
 #: kmymoney/mymoney/storage/templatesmodel.cpp:78
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Description"
 msgctxt "@title:column Column heading for description"
 msgid "Description"
 msgstr "Beschreibung"
@@ -9375,9 +9509,10 @@ msgstr "Scheck ausdrucken"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_useCustomCheckTemplate)
 #: kmymoney/plugins/checkprinting/checkprintingsettings.kcfg:10
 #: kmymoney/plugins/checkprinting/checkprintingsettingsdecl.ui:36
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Use custom colors"
 msgid "Use custom check template"
-msgstr "Benutzerdefinierte Scheckvorlage verwenden"
+msgstr "Benutzerdefinierte Farben verwenden"
 
 #. i18n: ectx: label, entry (checkTemplateFile), group (General)
 #: kmymoney/plugins/checkprinting/checkprintingsettings.kcfg:14
@@ -9598,13 +9733,17 @@ msgstr " hundert"
 #, kde-format
 msgctxt "@item %1 = tens text, %2 = ones text"
 msgid "%1 %2"
-msgstr "%1 %2"
+msgstr ""
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:56
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "@label The first argument is the amount in words, the second is the "
+#| "fractional part and the third is the denominator of the fractional part"
+#| msgid "%1 and %2/%3"
 msgctxt "@item %1 = hundreds text, %2 = tens and ones text"
 msgid "%1 and %2"
-msgstr "%1 und %2"
+msgstr "%1 und %2/%3"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:79
 #, kde-format
@@ -9612,7 +9751,7 @@ msgctxt ""
 "Translate this string into \"custom\" if the construction of numerals are "
 "different from English."
 msgid "english"
-msgstr "Englisch"
+msgstr ""
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:81
 #, kde-format
@@ -9620,13 +9759,13 @@ msgctxt ""
 "@item Can be used to script translation of numerals. Leave untranslated when "
 "not needed. %1 = integer, %2 = fraction, %3 = denominator"
 msgid "%1 %2 %3"
-msgstr "%1 %2 %3"
+msgstr ""
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:108
 #, kde-format
 msgctxt "@item %1 = numeral <1000, %2 = scale"
 msgid "%1 %2"
-msgstr "%1 %2"
+msgstr ""
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:110
 #, kde-format
@@ -9649,12 +9788,16 @@ msgid "%1 and %2/%3"
 msgstr "%1 und %2/%3"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:125
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "@label The first argument is the amount in words, the second is the "
+#| "fractional part and the third is the denominator of the fractional part"
+#| msgid "%1 and %2/%3"
 msgctxt ""
 "@label The first argument is the amount in words, the second is the "
 "denominator of the fractional part"
 msgid "%1 and No/%2"
-msgstr "%1 und 0/%2"
+msgstr "%1 und %2/%3"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:66
 #, fuzzy, kde-format
@@ -10293,9 +10436,11 @@ msgstr "Wählen Sie die Spalte mit dem Kategoriefeld."
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_creditDebitIndicatorColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:468
 #, fuzzy, kde-format
-#| msgid "OFX import file selection"
+#| msgctxt ""
+#| "The user selected credit transfers to send. But they cannot be sent."
+#| msgid "Cannot send selection"
 msgid "Clear indicator field selection."
-msgstr "OFX-Import-Dateiauswahl"
+msgstr "Auswahl kann nicht gesendet werden"
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_debit)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:478
@@ -11076,14 +11221,11 @@ msgid "No profile setup"
 msgstr ""
 
 #: kmymoney/plugins/csv/import/kcm_csvimporter.cpp:65
-#, fuzzy, kde-format
-#| msgid "Please select a profile type and enter a profile name."
+#, kde-format
 msgctxt "@info:tooltip No QIF profile defined"
 msgid ""
 "Please use the QIF profile editor in the QIF plugin settings to create one."
 msgstr ""
-"Bitte wählen Sie die Art des Profils und geben Sie einen Namen für das "
-"Profil ein."
 
 #. i18n: ectx: label, entry (AutoFieldDelimiter), group (Misc)
 #: kmymoney/plugins/csv/import/pluginsettings.kcfg:10
@@ -15056,16 +15198,18 @@ msgid "Individual"
 msgstr "Individuell"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:89
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Budget %1"
 msgctxt "@item:intable Your budgets, %1 budget year"
 msgid "Budget %1"
 msgstr "Budget %1"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:98
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Budget %1 %2"
 msgctxt "@item:intable Your bugets, %1 budget year, %2 unique index"
 msgid "Budget %1 (%2)"
-msgstr "Budget %1 (%2)"
+msgstr "Budget %1 %2"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:114
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:174
@@ -15132,16 +15276,18 @@ msgid "Unable to modify budget"
 msgstr "Das Budget kann nicht geändert werden"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:369
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Loss: "
 msgctxt "Profit/Loss"
 msgid "Loss: %1"
-msgstr "Verlust: %1"
+msgstr "Verlust: "
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:370
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Profit: "
 msgctxt "Profit/Loss"
 msgid "Profit: %1"
-msgstr "Gewinn: %1"
+msgstr "Gewinn: "
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:446
 #, kde-format
@@ -15170,11 +15316,11 @@ msgstr "Budget basierend auf Vorhersage"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:460
 #, fuzzy, kde-format
-#| msgctxt "@title:window Confirmation dialog"
-#| msgid "Change transaction"
+#| msgctxt "Category name"
+#| msgid "Miscellaneous income"
 msgctxt "@item:inmenu To make it income"
 msgid "Change to income"
-msgstr "Buchung ändern"
+msgstr "Sonstige Einnahmen"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:465
 #, fuzzy, kde-format
@@ -15186,6 +15332,7 @@ msgstr "Sonstige Ausgaben"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:494
 #, fuzzy, kde-format
+#| msgctxt "Menu header"
 #| msgid "Budget options"
 msgctxt "@title:menu Budget context menu"
 msgid "Budget options"
@@ -15219,21 +15366,24 @@ msgstr "Ihre Budgets"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_newButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:47
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "New"
 msgctxt "New budget button"
 msgid "New"
 msgstr "Neu"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_renameButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:54
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Ren"
 msgctxt "Rename budget button"
 msgid "Ren"
 msgstr "Umbenennen"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_deleteButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:61
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Del"
 msgctxt "Delete budget button"
 msgid "Del"
 msgstr "Löschen"
@@ -15769,12 +15919,14 @@ msgid "New credit transfer"
 msgstr "Neue Überweisung"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:202
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Remove credit transfer"
 msgid "Remove transfer"
 msgstr "Überweisung entfernen"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:203
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Edit credit transfer"
 msgid "Edit transfer"
 msgstr "Überweisung bearbeiten"
 
@@ -15784,7 +15936,8 @@ msgid "Show log"
 msgstr "Protokoll anzeigen"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:224
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Credit transfer options"
 msgctxt "@title:menu Online job context menu"
 msgid "Credit transfer options"
 msgstr "Überweisungs-Einstellungen"
@@ -15818,7 +15971,10 @@ msgid "Send transfers"
 msgstr "Umbuchungen einschließen"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:392
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Not all selected credit transfers can be sent because some of them are "
+#| "invalid or were already sent."
 msgctxt "The user selected credit transfers to send. But they cannot be sent"
 msgid ""
 "Not all selected credit transfers can be sent because some of them are "
@@ -15934,7 +16090,8 @@ msgid "Origin"
 msgstr "Quelle"
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejoboutboxview.cpp:51
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Outbox"
 msgctxt "@item name of view"
 msgid "Outbox"
 msgstr "Ausgang"
@@ -16888,10 +17045,9 @@ msgid "&Export to PDF files"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:816
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export into directory"
-msgstr "Bericht exportieren"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KReportsView)
 #: kmymoney/plugins/views/reports/kreportsview.ui:14
@@ -16902,7 +17058,8 @@ msgstr "Berichts-Ansicht"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_listTab)
 #: kmymoney/plugins/views/reports/kreportsview.ui:27
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Reports"
 msgctxt " "
 msgid "Reports"
 msgstr "Berichte"
@@ -18994,17 +19151,16 @@ msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:244
-#, fuzzy, kde-format
-#| msgid "Hide closed accounts"
+#, kde-format
 msgid "Hide zero balance accounts from Accounts"
-msgstr "Geschlossene Konten ausblenden"
+msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:248
 #, fuzzy, kde-format
-#| msgid "Hide closed accounts"
+#| msgid "Show account limit information on the Homepage"
 msgid "Hide zero balance accounts from Home"
-msgstr "Geschlossene Konten ausblenden"
+msgstr "Saldengrenzwerte auf der Seite „Übersicht“ anzeigen"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:252
@@ -19051,9 +19207,10 @@ msgstr "Dekorative Marker für das letzte und aktuelle Geschäftsjahr zeigen"
 
 #. i18n: ectx: label, entry (ShowReconciliationMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:284
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Show reconciled balances"
 msgid "Show reconciliation entries with date and balance"
-msgstr ""
+msgstr "Abgeglichene Buchungen anzeigen"
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:293
@@ -19276,9 +19433,10 @@ msgstr "Änderungen können nicht in „%1“ geschrieben werden"
 
 #: kmymoney/templates/templatewriter.cpp:192
 #: kmymoney/templates/templatewriter.cpp:206
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to open file '%1' for writing"
 msgid "Unable to open template file '%1'"
-msgstr "Vorlage „%1“ kann nicht geöffnet werden"
+msgstr "Datei „%1“ kann nicht zum Schreiben geöffnet werden"
 
 #: kmymoney/templates/templatewriter.cpp:215
 #, kde-format
@@ -19286,31 +19444,36 @@ msgid "Unable to upload to '%1'.<br />%2"
 msgstr "Hochladen nach „%1“ nicht möglich.<br />%2"
 
 #: kmymoney/views/investactivities.cpp:279
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Shares"
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "Anteile"
 
 #: kmymoney/views/investactivities.cpp:290
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Price/share"
 msgctxt "@label:textbox"
 msgid "Price/share"
 msgstr "Preis/Anteil"
 
 #: kmymoney/views/investactivities.cpp:292
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Transaction amount"
 msgctxt "@label:textbox"
 msgid "Transaction amount"
 msgstr "Buchungsbetrag"
 
 #: kmymoney/views/investactivities.cpp:294
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Price"
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "Preis"
 
 #: kmymoney/views/investactivities.cpp:651
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Ratio 1/"
 msgctxt "@label:textbox"
 msgid "Ratio 1/"
 msgstr "Quotient 1/"
@@ -19631,16 +19794,18 @@ msgstr ""
 
 #: kmymoney/views/kaccountsview.cpp:170
 #: kmymoney/views/kinstitutionsview.cpp:208
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Net Worth: "
 msgctxt "Approximate net worth"
 msgid "Net Worth: ~%1"
-msgstr "Eigenkapital: ~%1"
+msgstr "Eigenkapital: "
 
 #: kmymoney/views/kaccountsview.cpp:171
 #: kmymoney/views/kinstitutionsview.cpp:209
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Net Worth: "
 msgid "Net Worth: %1"
-msgstr "Eigenkapital: %1"
+msgstr "Eigenkapital: "
 
 #: kmymoney/views/kaccountsview.cpp:244
 #, kde-format
@@ -19769,26 +19934,30 @@ msgid "This account is still mapped to an online account"
 msgstr "Dieses Konto ist immer noch in einem Onlinekonto zugeordnet"
 
 #: kmymoney/views/kcategoriesview.cpp:153
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Loss: "
 msgctxt "Approximate loss"
 msgid "Loss: ~%1"
-msgstr "Verlust: ~%1"
+msgstr "Verlust: "
 
 #: kmymoney/views/kcategoriesview.cpp:154
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Loss: "
 msgid "Loss: %1"
-msgstr "Verlust: %1"
+msgstr "Verlust: "
 
 #: kmymoney/views/kcategoriesview.cpp:157
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Profit: "
 msgctxt "Approximate profit"
 msgid "Profit: ~%1"
-msgstr "Gewinn: ~%1"
+msgstr "Gewinn: "
 
 #: kmymoney/views/kcategoriesview.cpp:158
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Profit: "
 msgid "Profit: %1"
-msgstr "Gewinn: %1"
+msgstr "Gewinn: "
 
 #: kmymoney/views/kcategoriesview.cpp:197
 #, kde-format
@@ -19892,11 +20061,10 @@ msgid "The account is a required field for a schedule"
 msgstr "Dieses Konto ist immer noch in einer geplanten Buchung enthalten"
 
 #: kmymoney/views/keditscheduledlg.cpp:169
-#, fuzzy, kde-format
-#| msgid "Cannot create transactions in the context of a category."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
-msgstr "Im Kontext einer Kategorie können keine Buchungen erstellt werden."
+msgstr ""
 
 #: kmymoney/views/keditscheduledlg.cpp:312
 #, kde-format
@@ -20325,7 +20493,6 @@ msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1421
 #, fuzzy, kde-format
-#| msgctxt "Reconciliation flag C"
 #| msgid "C"
 msgctxt "@title:column table on home page: cleared"
 msgid "C"
@@ -20531,9 +20698,10 @@ msgstr ""
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_searchSecurities)
 #: kmymoney/views/kinvestmentview.ui:122
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "S&earch:"
 msgid "Search..."
-msgstr "Suchen ..."
+msgstr "&Suchen:"
 
 #: kmymoney/views/kmymoneyview.cpp:193
 #, kde-format
@@ -20947,10 +21115,11 @@ msgid "Unused"
 msgstr "Nicht zugewiesen"
 
 #: kmymoney/views/kpayeesview_p.h:179 kmymoney/views/ktagsview.cpp:184
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "S&earch:"
 msgctxt "Placeholder text"
 msgid "Search"
-msgstr "Suchen"
+msgstr "&Suchen:"
 
 #: kmymoney/views/kpayeesview_p.h:187
 #, fuzzy, kde-format
@@ -21053,7 +21222,8 @@ msgstr "Geplante Buchung anlegen ..."
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_searchWidget)
 #: kmymoney/views/kscheduledview.ui:38
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Filter"
 msgctxt "Placeholdertext in schedulesview"
 msgid "Filter"
 msgstr "Filter"
@@ -21142,7 +21312,8 @@ msgid "F"
 msgstr "F"
 
 #: kmymoney/views/ktagsview.cpp:93
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Update"
 msgctxt "@action:button Update button in tags view"
 msgid "Update"
 msgstr "Aktualisieren"
@@ -21299,25 +21470,29 @@ msgid "Open the Handbook and learn how to use KMyMoney"
 msgstr "Lernen, KMyMoney zu benutzen"
 
 #: kmymoney/views/ledgerview.cpp:210
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Go to account"
 msgctxt "@action:inmenu open account"
 msgid "Go to account"
 msgstr "Gehe zu Konto"
 
 #: kmymoney/views/ledgerview.cpp:212
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Go to payee"
 msgctxt "@action:inmenu open payee"
 msgid "Go to payee"
 msgstr "Gehe zu Zahlungsempfänger"
 
 #: kmymoney/views/ledgerview.cpp:257
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Go to '%1'"
 msgctxt "@action:inmenu open account"
 msgid "Go to '%1'"
 msgstr "Gehe zu „%1“"
 
 #: kmymoney/views/ledgerview.cpp:267
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Go to '%1'"
 msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Gehe zu „%1“"
@@ -21331,46 +21506,44 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:860
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Dieser Buchung wurde keine Kategorie zugewiesenen."
 
 #: kmymoney/views/ledgerview.cpp:867
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "The transaction has a missing assignment of <b>%1</b>."
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Die Buchung hat eine fehlende Zuordnung von <b>%1</b>."
 
 #: kmymoney/views/ledgerview.cpp:876
-#, fuzzy, kde-format
-#| msgid "This schedule will end at some time"
+#, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
-msgstr "Zahlungen enden zu einem bestimmten Termin"
+msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:882
-#, fuzzy, kde-format
-#| msgid "First transaction does not match requirement for matching"
+#, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
-msgstr "Erste Buchung erfüllt die Anforderungen für eine Zuordnung nicht"
+msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:887
-#, fuzzy, kde-format
-#| msgid "First transaction does not match requirement for matching"
+#, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
-msgstr "Erste Buchung erfüllt die Anforderungen für eine Zuordnung nicht"
+msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:963
 #, fuzzy, kde-format
-#| msgid "Do you really want to delete the selected price entry?"
-#| msgid_plural "Do you really want to delete the selected price entries?"
+#| msgid "Checking for overdue scheduled transactions..."
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
-msgstr "Möchten Sie den gewählten Kurseintrag wirklich löschen?"
+msgstr "Fällige geplante Zahlungen werden gesucht ..."
 
 #: kmymoney/views/ledgerview.cpp:964
 #, fuzzy, kde-format
@@ -21461,7 +21634,8 @@ msgstr ""
 
 #: kmymoney/views/ledgerviewpage_p.h:149
 #: kmymoney/views/reconciliationledgerviewpage.cpp:443
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Cleared: %1"
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
 msgstr "Verrechnet: %1"
@@ -21691,19 +21865,19 @@ msgctxt ""
 "@item:intext Amount, %1 transaction amount, %2 payment direction enclosed in "
 "parenthesis"
 msgid "%1 %2"
-msgstr "%1 %2"
+msgstr ""
 
 #: kmymoney/views/onlinebalancedelegate.cpp:143
 #, kde-format
 msgctxt "text for online balance value if not available"
 msgid "n/a"
-msgstr "n/v"
+msgstr ""
 
 #: kmymoney/views/onlinebalancedelegate.cpp:144
 #, kde-format
 msgctxt "text for online balance date if not available"
 msgid "n/a"
-msgstr "n/v"
+msgstr ""
 
 #: kmymoney/views/onlinebalancedelegate.cpp:176
 #, fuzzy, kde-format
@@ -21728,10 +21902,11 @@ msgid "National Account Number"
 msgstr "Nationale Kontonummer"
 
 #: kmymoney/views/reconciliationdelegate.cpp:107
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Reconciliation view"
 msgctxt "Ledger marker showing a reconciliation entry"
 msgid "Reconciliation"
-msgstr "Abgleich"
+msgstr "Abgleich-Ansicht"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:124
 #, kde-format
@@ -21767,13 +21942,15 @@ msgid "Reconciling transactions..."
 msgstr "Buchungen werden abgerufen ..."
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:442
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Statement: %1"
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Kontoauszug: %1"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:444
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Difference: %1"
 msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Differenz: %1"
@@ -21852,7 +22029,6 @@ msgstr "Summe der Split-Buchungen"
 
 #: kmymoney/views/splitdialog.cpp:334
 #, fuzzy, kde-format
-#| msgctxt "Split editor summary"
 #| msgid "Unassigned"
 msgctxt "Split editor summary"
 msgid "Overassigned"
@@ -21982,25 +22158,31 @@ msgid "Split Options"
 msgstr "Optionen für Split-Buchungen"
 
 #: kmymoney/views/splitview.cpp:114
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "create new institution"
+#| msgid "New..."
 msgctxt "@item:inmenu Create a split"
 msgid "New..."
 msgstr "Neu ..."
 
 #: kmymoney/views/splitview.cpp:129
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Edit..."
 msgctxt "@item:inmenu Edit a split"
 msgid "Edit..."
 msgstr "Bearbeiten ..."
 
 #: kmymoney/views/splitview.cpp:134
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "To duplicate a split"
+#| msgid "Duplicate"
 msgctxt "@item:inmenu Duplicate selected split(s)"
 msgid "Duplicate"
 msgstr "Duplizieren"
 
 #: kmymoney/views/splitview.cpp:176
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Delete"
 msgctxt "@item:inmenu Delete selected split(s)"
 msgid "Delete"
 msgstr "Löschen"
@@ -22020,22 +22202,26 @@ msgid "Start from here"
 msgstr "Operation starten"
 
 #: kmymoney/views/tabordereditor.cpp:433
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Click 'Restart' to begin again."
+#| msgid "Restart"
 msgctxt "@action:inmenu Set tab editor selector to first widget"
 msgid "Restart"
 msgstr "Neu starten"
 
 #: kmymoney/views/tabordereditor.cpp:436
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Save changes"
 msgctxt "@action:inmenu Reset all changes"
 msgid "Undo changes"
-msgstr "Änderungen zurücknehmen"
+msgstr "Änderungen speichern"
 
 #: kmymoney/views/tabordereditor.cpp:438
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Use default"
 msgctxt "@action:inmenu Reset to application defaults"
 msgid "Reset to default"
-msgstr "Auf Voreinstellungen zurücksetzen"
+msgstr "Standard verwenden"
 
 #: kmymoney/views/tabordereditor.cpp:443
 #, kde-format
@@ -22099,7 +22285,24 @@ msgstr "Genaue Beschreibung"
 
 #. i18n: ectx: property (html), widget (KTextEdit, m_description)
 #: kmymoney/widgets/kaccounttemplateselector.ui:77
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "verb, If necessary, select fraction/multiplier for compatibility between "
+#| "imported and stored prices, for instance, if one is in dollars and the "
+#| "other in cents."
+#| msgid ""
+#| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#| "REC-html40/strict.dtd\">\n"
+#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#| "css\">\n"
+#| "p, li { white-space: pre-wrap; }\n"
+#| "</style></head><body style=\" font-family:'Sans Serif'; font-size:8pt; "
+#| "font-weight:400; font-style:normal;\">\n"
+#| "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#| "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">If "
+#| "necessary, select fraction/multiplier for compatibility between imported "
+#| "and stored prices.  <br />For instance, if the import price is in cents "
+#| "but the file is priced in dollars, select 0.01.</p></body></html>"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
 "REC-html40/strict.dtd\">\n"
@@ -22117,11 +22320,14 @@ msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; font-"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:8pt; font-"
 "weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-"\"><br /></p></body></html>"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Wenn "
+"erforderlich, wählen Sie einen Faktor für die Umrechnung des importierten "
+"und gespeicherten Preises.<br />Wenn zum Beispiel der Importpreis in Cent "
+"angegeben, ist, in der Datei aber die Preise in Euro benutzt werden, geben "
+"Sie 0,01 ein.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_accountList)
 #: kmymoney/widgets/kaccounttemplateselector.ui:109
@@ -22747,10 +22953,9 @@ msgstr "Abgleich-Status"
 
 #: kmymoney/widgets/transactionsortoption.cpp:46
 #, fuzzy
-#| msgctxt "Ledger marker showing a reconciliation entry"
-#| msgid "Reconciliation"
+#| msgid "Reconciliation view"
 msgid "Reconciliation date"
-msgstr "Abgleich"
+msgstr "Abgleich-Ansicht"
 
 #. i18n: ectx: property (text), widget (QListWidget, m_selectedList)
 #: kmymoney/widgets/transactionsortoption.ui:92
@@ -23418,9 +23623,9 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:265
 #, fuzzy, kde-format
-#| msgid "Create a new asset account"
+#| msgid "Filter Accounts"
 msgid "Favorite account"
-msgstr "Neues Anlagekonto anlegen"
+msgstr "Konten filtern"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel14)
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:27
@@ -26223,9 +26428,9 @@ msgstr ""
 
 #: tools/kmmreport-export.cpp:116
 #, fuzzy, kde-format
-#| msgid "Export report"
+#| msgid "Favorite reports"
 msgid "Export KMyMoney reports"
-msgstr "Bericht exportieren"
+msgstr "Bevorzugte Berichte"
 
 #: tools/kmmreport-export.cpp:120
 #, kde-format
@@ -26238,10 +26443,9 @@ msgid "Export in HTML format"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:126
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export in xml format"
-msgstr "Bericht exportieren"
+msgstr ""
 
 #: tools/kmmreport-export.cpp:129
 #, kde-format
@@ -26330,145 +26534,6 @@ msgstr ""
 #~ msgstr[0] "    %1 angelegt"
 #~ msgstr[1] "    %1 angelegt"
 
-#~ msgid "Duplicate open"
-#~ msgstr "Duplikat geöffnet"
-
-#~ msgid ""
-#~ "<p>The account \"%1\" was previously created as loan account but some "
-#~ "information is missing.</p><p>The new loan wizard will be started to "
-#~ "collect all relevant information.</p><p>Please use KMyMoney version 0.8.7 "
-#~ "or later and earlier than version 0.9 to correct the problem.</p>"
-#~ msgstr ""
-#~ "<p>Das Konto „%1“ wurde bereits als Kreditkonto erstellt, aber einige "
-#~ "Informationen fehlen.</p><p>Der Kredit-Assistent wird nun gestartet, um "
-#~ "alle relevanten Informationen zu sammeln.</p><p>Bitte nutzen Sie KMyMoney "
-#~ "ab Version 0.8.7 und vor Version 0.9, um das Problem zu beheben.</p>"
-
-#~ msgid "Account problem"
-#~ msgstr "Kontoproblem"
-
-#, fuzzy
-#~| msgid "Select account"
-#~ msgid "Select category or account."
-#~ msgstr "Konto wählen"
-
-#~ msgid "Today's due payments"
-#~ msgstr "Heute fällige Zahlungen"
-
-#, fuzzy
-#~| msgid "Price for %1 updated (id %2)"
-#~ msgctxt "@info Online price update %1 online id, %2 internal id"
-#~ msgid "Price for %1 updated (id %2)"
-#~ msgstr "Preis für %1 aktualisiert (id %2)"
-
-#~ msgid ""
-#~ "KMyMoney has detected some overdue scheduled transactions for this "
-#~ "account. Do you want to enter those scheduled transactions now?"
-#~ msgstr ""
-#~ "KMyMoney hat einige überfällige geplante Buchungen in diesem Konto "
-#~ "gefunden. Möchten Sie diese jetzt in das Kontenbuch eintragen?"
-
-#~ msgid "Remove this price item from the file"
-#~ msgstr "Diesen Kurseintrag aus der Datei löschen"
-
-#~ msgid "Stock Name"
-#~ msgstr "Wertpapiername"
-
-#~ msgctxt "Price source"
-#~ msgid "Source"
-#~ msgstr "Quelle"
-
-#~ msgid "Upd"
-#~ msgstr "Aktualisieren"
-
-#~ msgid "Res"
-#~ msgstr "Zurücksetzen"
-
-#~ msgid "Close this window"
-#~ msgstr "Dieses Fenster schließen"
-
-#~ msgid "Preferred account"
-#~ msgstr "Bevorzugtes Konto"
-
-#~ msgid "CashFlow"
-#~ msgstr "Geldfluss"
-
-#~ msgid "Select Account:"
-#~ msgstr "Konto wählen:"
-
-#~ msgid "Investment details"
-#~ msgstr "Investitionsdetails"
-
-#~ msgid "Enter the ticker symbol (e.g. RHAT)."
-#~ msgstr "Ticker-Symbol (z. B. RHAT) eingeben."
-
-#~ msgid "Enter the CUSIP/ISIN/WKN identification number here"
-#~ msgstr "Geben Sie die CUSIP/ISIN/WK-Nummer hier ein"
-
-#~ msgid "This wizard allows you to modify the selected security."
-#~ msgstr "Dieser Assistent unterstützt das Ändern der angewählten Wertanlage."
-
-#~ msgid ""
-#~ "The selected symbol is already on file. Do you want to reuse the existing "
-#~ "security?"
-#~ msgstr ""
-#~ "Das ausgewählte Wertpapier existiert bereits. Möchten Sie das bestehende "
-#~ "Wertpapier wiederverwenden?"
-
-#~ msgid "Security found"
-#~ msgstr "Wertpapier gefunden"
-
-#~ msgctxt "Equity name"
-#~ msgid "Name"
-#~ msgstr "Name"
-
-#~ msgctxt "Online quote source"
-#~ msgid "Source"
-#~ msgstr "Quelle"
-
-#~ msgid "Price Already Exists"
-#~ msgstr "Der Preis existiert bereits"
-
-#~ msgid ""
-#~ "Received a price for %1 (id %2), but this symbol is not on the list. "
-#~ "Aborting entire update."
-#~ msgstr ""
-#~ "Ein Preis für %1 (id %2) wurde empfangen, dieses Symbol ist aber nicht in "
-#~ "der Liste. Abbruch der kompletten Aktualisierung."
-
-#~ msgid "List of known Equities, and the date they were last updated on."
-#~ msgstr ""
-#~ "Liste der bekannten Wertpapiere und den Zeitpunkten der letzten "
-#~ "Aktualisierungen."
-
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Symbol"
-#~ msgstr "Symbol"
-
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Identification number"
-#~ msgstr "Bankleitzahl"
-
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Name"
-#~ msgstr "Name"
-
-#~ msgid "New Quote Source"
-#~ msgstr "Neue Kursnotiz-Quelle"
-
-#~ msgid ""
-#~ "Security <b>%1</b> uses this quote source.<br>Do you really want to "
-#~ "remove it?"
-#~ msgstr ""
-#~ "Das Wertpapier <b>%1</b> verwendet diese Kursnotiz-Quelle. Möchten Sie "
-#~ "diese tatsächlich entfernen?"
-
-#, fuzzy
-#~| msgid "Delete quote source"
-#~ msgctxt "@title:window"
-#~ msgid "Delete quote source"
-#~ msgstr "Kursnotiz-Quelle löschen"
-
 #~ msgid "Source <placeholder>%1</placeholder> does not exist."
 #~ msgstr "Die Datenquelle <placeholder>%1</placeholder> existiert nicht."
 
@@ -26529,35 +26594,426 @@ msgstr ""
 #~ msgid "Unable to update price for %1 (empty quote data)"
 #~ msgstr "Preis für %1 kann nicht aktualisiert werden (leere Kursnotizdaten)"
 
-#, fuzzy
-#~| msgid "Unable to update price for %1 (no price or no date)"
-#~ msgid "Unable to update price for %1 (error encountered: '%2')"
-#~ msgstr ""
-#~ "Preis für %1 kann nicht aktualisiert werden (kein Preis oder kein Datum)"
+#~ msgctxt "Total value"
+#~ msgid "Total"
+#~ msgstr "Summe"
 
-#, fuzzy
-#~| msgid "Tag"
-#~ msgctxt "Split header"
-#~ msgid "Tag"
-#~ msgstr "Stichwort"
+#~ msgid "Price/Share"
+#~ msgstr "Preis pro Anteil"
 
-#~ msgid "Reorganizing accounts..."
-#~ msgstr "Konten werden neu organisiert ..."
+#~ msgid "Asset account"
+#~ msgstr "Anlagekonten"
 
-#, fuzzy
-#~| msgid "Show account limit information on the Homepage"
-#~ msgid "Hide zero balance liabilities on the Homepage"
-#~ msgstr "Saldengrenzwerte auf der Seite „Übersicht“ anzeigen"
-
-#, fuzzy
-#~| msgid ""
-#~| "    Please enter a price for the currency on or before the opening date."
-#~ msgctxt "@info consistency check"
 #~ msgid ""
-#~ "    Please enter a price for the currency on or before the date of first "
-#~ "usage."
+#~ "At least one split of the selected transaction references an account that "
+#~ "has been closed. Editing the transactions is therefore prohibited."
 #~ msgstr ""
-#~ "    Bitte geben Sie einen Preis für die Währung am Eröffnungsdatum ein."
+#~ "Mindestens ein Teil der gewählten Buchung verweist auf ein Konto, das "
+#~ "geschlossen wurde. Das Bearbeiten der Buchungen ist daher unzulässig."
+
+#~ msgid ""
+#~ "Cannot enter transaction with postdate prior to account's opening date."
+#~ msgstr ""
+#~ "Kann keine Buchung eintragen, die vor der Kontoeröffnung datiert ist."
+
+#~ msgctxt "Equity name"
+#~ msgid "Name"
+#~ msgstr "Name"
+
+#~ msgid "Price Already Exists"
+#~ msgstr "Der Preis existiert bereits"
+
+#~ msgid ""
+#~ "Received a price for %1 (id %2), but this symbol is not on the list. "
+#~ "Aborting entire update."
+#~ msgstr ""
+#~ "Ein Preis für %1 (id %2) wurde empfangen, dieses Symbol ist aber nicht in "
+#~ "der Liste. Abbruch der kompletten Aktualisierung."
+
+#~ msgid "List of known Equities, and the date they were last updated on."
+#~ msgstr ""
+#~ "Liste der bekannten Wertpapiere und den Zeitpunkten der letzten "
+#~ "Aktualisierungen."
+
+#~ msgctxt "@info:tooltip for find transaction Open button"
+#~ msgid "Search transactions"
+#~ msgstr "Buchungen suchen"
+
+#~ msgid "Found %1 matching transaction (D %2 / P %3 = %4)"
+#~ msgid_plural "Found %1 matching transactions (D %2 / P %3 = %4)"
+#~ msgstr[0] "%1 passende Buchung gefunden (D %2 / P %3 = %4)"
+#~ msgstr[1] "%1 passende Buchungen gefunden (D %2 / P %3 = %4)"
+
+#~ msgid "MyDialog"
+#~ msgstr "Dialog"
+
+#~ msgid "Remove this price item from the file"
+#~ msgstr "Diesen Kurseintrag aus der Datei löschen"
+
+#~ msgctxt "Price source"
+#~ msgid "Source"
+#~ msgstr "Quelle"
+
+#~ msgid "Delete..."
+#~ msgstr "Löschen ..."
+
+#~ msgid "will be calculated"
+#~ msgstr "wird berechnet"
+
+#~ msgid ""
+#~ "You are about to delete the selected split. Do you really want to "
+#~ "continue?"
+#~ msgstr ""
+#~ "Sie sind gerade dabei, die aktuelle Split-Buchung zu löschen. Möchten Sie "
+#~ "wirklich fortfahren?"
+
+#~ msgid ""
+#~ "You need to assign a category to this split before it can be entered."
+#~ msgstr ""
+#~ "Sie müssen dieser Split-Buchung eine Kategorie zuweisen, bevor sie "
+#~ "eingetragen werden kann."
+
+#~ msgid "Enter split"
+#~ msgstr "Split-Buchung eintragen"
+
+#~ msgid "Is a sub account"
+#~ msgstr "Dies ist ein Unterkonto"
+
+#~ msgid "Routing Number:"
+#~ msgstr "Bankleitzahl:"
+
+#~ msgid ""
+#~ "Select a transaction and press the OK button or use Cancel to select none."
+#~ msgstr ""
+#~ "Eine Buchung auswählen und „OK“ drücken oder „Abbruch“ um nichts "
+#~ "auszuwählen."
+
+#~ msgid "Clear &All"
+#~ msgstr "&Alle löschen"
+
+#~ msgid "Use this to clear all splits of this transaction"
+#~ msgstr ""
+#~ "Verwenden Sie dies, um alle Split-Buchungen dieser Buchung zu löschen"
+
+#~ msgid "Clear &Zero"
+#~ msgstr "&Nullbeträge löschen"
+
+#~ msgid ""
+#~ "In case you have multiple split entries to the same category and you like "
+#~ "to keep them as a single split"
+#~ msgstr ""
+#~ "Klicken Sie auf diesen Knopf, um mehrere Split-Buchungen derselben "
+#~ "Kategorie in einer einzigen Split-Buchung zusammenzufassen."
+
+#~ msgid ""
+#~ "You are about to delete all splits of this transaction. Do you really "
+#~ "want to continue?"
+#~ msgstr ""
+#~ "Sie sind gerade dabei, alle Split-Buchungen dieser Buchung zu löschen. "
+#~ "Möchten Sie wirklich fortfahren?"
+
+#~ msgid "<b>11,00<b>"
+#~ msgstr "<b>11,00</b>"
+
+#~ msgid "<b>111,00<b>"
+#~ msgstr "<b>111,00</b>"
+
+#~ msgid "100,00"
+#~ msgstr "100,00"
+
+#~ msgid ""
+#~ "This dialog does not allow new tags to be created. Please pick a tag from "
+#~ "the list."
+#~ msgstr ""
+#~ "In diesem Dialog können keine neuen Stichwörter angelegt werden. Bitte "
+#~ "ein Stichwort aus der Liste auswählen."
+
+#~ msgid "Tag creation"
+#~ msgstr "Stichwörter-Erstellung"
+
+#~ msgid ""
+#~ "The transactions associated with the selected tags need to be re-assigned "
+#~ "to a different tag before the selected tags can be deleted. Please select "
+#~ "a tag from the list below."
+#~ msgstr ""
+#~ "Bevor die gewählten Stichwörter gelöscht werden können, müssen die ihnen "
+#~ "zugewiesenen Buchungen einem neuen Stichwort zugewiesen werden. Bitte ein "
+#~ "Stichwort aus der unteren Liste auswählen."
+
+#~ msgid "Show splash screen"
+#~ msgstr "Startbildschirm anzeigen"
+
+#~ msgid "Show title bar on each page"
+#~ msgstr "Kopfzeile in jeder Ansicht anzeigen"
+
+#~ msgid "New Quote Source"
+#~ msgstr "Neue Kursnotiz-Quelle"
+
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Symbol"
+#~ msgstr "Symbol"
+
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Identification number"
+#~ msgstr "Bankleitzahl"
+
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Name"
+#~ msgstr "Name"
+
+#~ msgid ""
+#~ "Security <b>%1</b> uses this quote source.<br>Do you really want to "
+#~ "remove it?"
+#~ msgstr ""
+#~ "Das Wertpapier <b>%1</b> verwendet diese Kursnotiz-Quelle. Möchten Sie "
+#~ "diese tatsächlich entfernen?"
+
+#~ msgid "Delete quote source"
+#~ msgstr "Kursnotiz-Quelle löschen"
+
+#~ msgid "Always show a No. field"
+#~ msgstr "Immer ein Nummernfeld anzeigen"
+
+#~ msgid "Category/Account"
+#~ msgstr "Kategorie/Konto"
+
+#~ msgid "Transfer from"
+#~ msgstr "Umbuchung von"
+
+#~ msgid "Transfer to"
+#~ msgstr "Umbuchung auf"
+
+#~ msgid ""
+#~ "This transaction has more than two splits and is originally based on a "
+#~ "different currency (%1). Using this account to modify the transaction may "
+#~ "result in rounding errors. Do you want to continue?"
+#~ msgstr ""
+#~ "Diese Buchung hat mehr als zwei Split-Buchungen und basiert auf einer "
+#~ "anderen Währung (%1). Die Benutzung dieses Kontos für die Änderung der "
+#~ "Buchung kann zu Rundungsfehlern führen. Möchten Sie fortfahren?"
+
+#~ msgid ""
+#~ "At least one of the selected transactions has more than two splits and is "
+#~ "originally based on a different currency (%1). Using this account to "
+#~ "modify the transactions may result in rounding errors. Do you want to "
+#~ "continue?"
+#~ msgstr ""
+#~ "Mindestens eine der ausgewählten Buchungen hat mehr als zwei Split-"
+#~ "Buchungen und basiert auf einer anderen Währung (%1). Die Benutzung "
+#~ "dieses Kontos für die Änderung der Buchung kann zu Rundungsfehlern "
+#~ "führen. Möchten Sie fortfahren?"
+
+#~ msgid "<center>Processing schedule for %1.</center>"
+#~ msgstr "<center>Geplante Buchungen %1 werden bearbeitet.</center>"
+
+#~ msgid ""
+#~ "Check number <b>%1</b> has already been used in account <b>%2</b>."
+#~ "<center>Do you want to replace it with the next available number?</center>"
+#~ msgstr ""
+#~ "Die Schecknummer <b>%1</b> wird bereits in Konto <b>%2</b> genutzt."
+#~ "<center>Möchten Sie sie mit der nächsten verfügbaren Nummer ersetzen?</"
+#~ "center>"
+
+#~ msgid "Duplicate number"
+#~ msgstr "Nummer duplizieren"
+
+#~ msgid "Storing transactions"
+#~ msgstr "Buchungen werden hinzufügt"
+
+#~ msgid "&Enter"
+#~ msgstr "&Eintragen"
+
+#~ msgid "Use this to enter the transaction into the ledger."
+#~ msgstr "Nehmen Sie hiermit die Buchung in das Kontenbuch auf."
+
+#~ msgid "&Schedule"
+#~ msgstr "&Planung"
+
+#~ msgid "Accepts the entered data and stores it as schedule"
+#~ msgstr ""
+#~ "Akzeptiert die eingegebenen Daten und speichert sie als geplante Buchung"
+
+#~ msgid ""
+#~ "The transaction you are about to enter has a post date in the future.<br/"
+#~ "><br/>Do you want to enter it in the ledger or add it to the schedules?"
+#~ msgstr ""
+#~ "Die eingetragene Buchung hat ein Datum in der Zukunft.<br/><br/>Soll sie "
+#~ "im Kontenbuch eingetragen werden, oder zu geplanten Buchungen hinzugefügt "
+#~ "werden?"
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the warning balance of %2."
+#~ msgstr ""
+#~ "Der Saldo des Kontos <b>%1</b> ist unter die Saldo-Warnung von %2 "
+#~ "gefallen."
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the minimum balance of %2."
+#~ msgstr ""
+#~ "Der Saldo des Kontos <b>%1</b> ist unter die minimale Saldo-Warnung von "
+#~ "%2 gefallen."
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the maximum credit warning "
+#~ "limit of %2."
+#~ msgstr ""
+#~ "Der Saldo des Kontos <b>%1</b> ist unter das maximale Kredit-Limit von %2 "
+#~ "gefallen."
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the maximum credit limit "
+#~ "of %2."
+#~ msgstr ""
+#~ "Der Saldo des Kontos <b>%1</b> ist unter das maximale Kredit-Limit von %2 "
+#~ "gefallen."
+
+#~ msgid "Thomas Baumgart"
+#~ msgstr "Thomas Baumgart"
+
+#~ msgid "Łukasz Wojniłowicz"
+#~ msgstr "Łukasz Wojniłowicz"
+
+#~ msgid "Ralf Habacker"
+#~ msgstr "Ralf Habacker"
+
+#~ msgid "Cristian Oneț"
+#~ msgstr "Cristian Oneț"
+
+#~ msgid "Christian Dávid"
+#~ msgstr "Christian Dávid"
+
+#~ msgid "Michael Edwardes"
+#~ msgstr "Michael Edwardes"
+
+#~ msgid "Alvaro Soliverez"
+#~ msgstr "Alvaro Soliverez"
+
+#~ msgid "Ace Jones"
+#~ msgstr "Ace Jones"
+
+#~ msgid "Tony Bloomfield"
+#~ msgstr "Tony Bloomfield"
+
+#~ msgid "Felix Rodriguez"
+#~ msgstr "Felix Rodriguez"
+
+#~ msgid "John C"
+#~ msgstr "John C"
+
+#~ msgid "Fernando Vilas"
+#~ msgstr "Fernando Vilas"
+
+#~ msgid "Jack Ostroff"
+#~ msgstr "Jack Ostroff"
+
+#~ msgid "Kevin Tambascio"
+#~ msgstr "Kevin Tambascio"
+
+#~ msgid "Javier Campos Morales"
+#~ msgstr "Javier Campos Morales"
+
+#~ msgid "Robert Wadley"
+#~ msgstr "Robert Wadley"
+
+#~ msgid "Laurent Montel"
+#~ msgstr "Laurent Montel"
+
+#~ msgid "Wolfgang Rohdewald"
+#~ msgstr "Wolfgang Rohdewald"
+
+#~ msgid "Marko Käning"
+#~ msgstr "Marko Käning"
+
+#~ msgid "Allan Anderson ✝"
+#~ msgstr "Allan Anderson ✝"
+
+#~ msgid ""
+#~ "<p>The account \"%1\" was previously created as loan account but some "
+#~ "information is missing.</p><p>The new loan wizard will be started to "
+#~ "collect all relevant information.</p><p>Please use KMyMoney version 0.8.7 "
+#~ "or later and earlier than version 0.9 to correct the problem.</p>"
+#~ msgstr ""
+#~ "<p>Das Konto „%1“ wurde bereits als Kreditkonto erstellt, aber einige "
+#~ "Informationen fehlen.</p><p>Der Kredit-Assistent wird nun gestartet, um "
+#~ "alle relevanten Informationen zu sammeln.</p><p>Bitte nutzen Sie KMyMoney "
+#~ "ab Version 0.8.7 und vor Version 0.9, um das Problem zu beheben.</p>"
+
+#~ msgid "Account problem"
+#~ msgstr "Kontoproblem"
+
+#~ msgid "&Show tip of the day"
+#~ msgstr "&Tipp des Tages anzeigen"
+
+#~ msgctxt "New transaction button"
+#~ msgid "New"
+#~ msgstr "Neu"
+
+#~ msgid "New scheduled transaction"
+#~ msgstr "Geplante Buchung anlegen"
+
+#~ msgid ""
+#~ "<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>"
+#~ msgstr ""
+#~ "<p><b>%1</b> kann nicht zum Geldinstitut <b>%2</b> verschoben werden. "
+#~ "Ursache: %3</p>"
+
+#~ msgid "<p><b>%1</b> cannot be moved to <b>%2</b>. Reason: %3</p>"
+#~ msgstr ""
+#~ "<p><b>%1</b> kann nicht zu <b>%2</b> verschoben werden. Ursache: %3</p>"
+
+#~ msgid "CashFlow"
+#~ msgstr "Geldfluss"
+
+#~ msgctxt "Unknown reconciliation state"
+#~ msgid "Unknown"
+#~ msgstr "Unbekannt"
+
+#~ msgctxt "Flag for unknown reconciliation state"
+#~ msgid "?"
+#~ msgstr "?"
+
+#~ msgctxt "Column heading for category in tax report"
+#~ msgid "Tax"
+#~ msgstr "Steuer"
+
+#~ msgctxt "Column heading for Cost Center"
+#~ msgid "CC"
+#~ msgstr "KS"
+
+#~ msgid "Total Balance"
+#~ msgstr "Gesamtsaldo"
+
+#~ msgctxt "IBAN, SWIFT, etc."
+#~ msgid "Sort Code"
+#~ msgstr "Bankleitzahl"
+
+#~ msgctxt "Payment made from account"
+#~ msgid "Payment"
+#~ msgstr "Belastung"
+
+#~ msgctxt "Deposit into account"
+#~ msgid "Deposit"
+#~ msgstr "Gutschrift"
+
+#~ msgid "Cost Center"
+#~ msgstr "Kostenstelle"
+
+#~ msgctxt "It's about printing bank checks"
+#~ msgid "Check printing"
+#~ msgstr "Scheckdruck"
+
+#~ msgctxt ""
+#~ "@item This comes after the hunder text if the tens unit is different from "
+#~ "0"
+#~ msgid " and "
+#~ msgstr " und "
+
+#~ msgctxt "@label The word to be printed for no fractional part as in No/00"
+#~ msgid "No"
+#~ msgstr "Nein"
+
+#~ msgid "Check template file"
+#~ msgstr "Vorlage auswählen"
 
 #~ msgid "There are no entries in this account.\n"
 #~ msgstr "Es befinden sich keine Einträge in diesem Konto.\n"
@@ -26565,18 +27021,23 @@ msgstr ""
 #~ msgid "Invalid account"
 #~ msgstr "Ungültiges Konto"
 
-#~ msgid ""
-#~ "*.css|CSS files\n"
-#~ "*|All files (*)"
-#~ msgstr ""
-#~ "*.css|CSS-Dateien\n"
-#~ "*|Alle Dateien (*)"
+#~ msgid "CSV exporter"
+#~ msgstr "CSV-Export"
 
-#, fuzzy
-#~| msgid "Budget options"
-#~ msgctxt "@title:menu budget context menu"
-#~ msgid "Budget options"
-#~ msgstr "Budget-Optionen"
+#~ msgid "CSV importer"
+#~ msgstr "CSV-Import-Modul"
+
+#~ msgid "GnuCash importer"
+#~ msgstr "GnuCash-Import"
+
+#~ msgid "Reorganizing accounts..."
+#~ msgstr "Konten werden neu organisiert ..."
+
+#~ msgid "IBAN/BIC Data"
+#~ msgstr "IBAN/BIC-Daten"
+
+#~ msgid "iCalendar exporter"
+#~ msgstr "iCalendar-Export"
 
 #~ msgid "KMyMoney print check"
 #~ msgstr "KMyMoney-Scheckdruck"
@@ -26584,31 +27045,122 @@ msgstr ""
 #~ msgid "Copyright 2009"
 #~ msgstr "Copyright 2009"
 
-#~ msgctxt "Activity for income categories"
-#~ msgid "Received"
-#~ msgstr "Empfangen"
+#~ msgid "Dequeue"
+#~ msgstr "Aus Warteschlange entfernen"
 
-#~ msgctxt "Activity for expense categories"
-#~ msgid "Paid"
-#~ msgstr "Bezahlt"
+#~ msgid "Dequeue selected job"
+#~ msgstr "Markierten Auftrag aus der Warteschlange entfernen"
 
-#~ msgctxt "Payee"
-#~ msgid "Pay to"
-#~ msgstr "Zahlen an"
+#~ msgid "Remove the selected job from the list"
+#~ msgstr "Den gewählten Auftrag von der Liste entfernen"
 
-#~ msgctxt "Payer"
-#~ msgid "From"
-#~ msgstr "Von"
+#~ msgid "Execute"
+#~ msgstr "Ausführen"
 
-#~ msgctxt "@title:column"
-#~ msgid "CC"
-#~ msgstr "KS"
+#~ msgid "Execute all jobs in the queue"
+#~ msgstr "Alle Aufträge in der Warteschlange ausführen"
 
-#~ msgid "Always show a No. field"
-#~ msgstr "Immer ein Nummernfeld anzeigen"
+#~ msgctxt "Warning message"
+#~ msgid "There are no jobs in the queue."
+#~ msgstr "Es befinden sich keine Aufträge in der Warteschlange."
 
-#~ msgid "Always show a No. field in transaction form"
-#~ msgstr "Im Buchungsformular immer ein Nummernfeld anzeigen"
+#~ msgctxt "Message title"
+#~ msgid "No Jobs"
+#~ msgstr "Keine Aufträge"
+
+#~ msgid "Jobs"
+#~ msgstr "Aufträge"
+
+#~ msgid "OFX Importer"
+#~ msgstr "OFX-Import"
+
+#~ msgid "QIF importer"
+#~ msgstr "QIF-Importer"
+
+#~ msgid "SQL storage"
+#~ msgstr "SQL-Speicher"
+
+#~ msgid "Budgets view"
+#~ msgstr "Budgetansicht"
+
+#~ msgid "Select year"
+#~ msgstr "Jahr auswählen"
+
+#~ msgid "Budget year"
+#~ msgstr "Budget-Jahr"
+
+#~ msgid "Change budget year"
+#~ msgstr "Jahr des Budgets ändern"
+
+#~ msgid ""
+#~ "A budget with the name '%1' already exists. It is not advisable to have "
+#~ "multiple budgets with the same identification name. Are you sure you "
+#~ "would like to rename the budget?"
+#~ msgstr ""
+#~ "Es existiert bereits ein Budget mit dem Namen „%1“. Es ist nicht zu "
+#~ "empfehlen, mehrere Budgets mit dem gleichen Namen zu haben. Sind Sie "
+#~ "sicher, dass Sie das Budget umbenennen möchten?"
+
+#~ msgid "Creates a new budget"
+#~ msgstr "Neues Budget anlegen"
+
+#~ msgid "Use this to create a new empty budget."
+#~ msgstr "Hiermit ein neues, leeres Budget anlegen."
+
+#~ msgctxt "New budget"
+#~ msgid "New"
+#~ msgstr "Neu"
+
+#~ msgid "Rename the current selected budget."
+#~ msgstr "Das aktuell gewählte Budget umbenennen."
+
+#~ msgid "Use this to start renaming the selected budget."
+#~ msgstr "Hiermit das gewählte Budget umbenennen."
+
+#~ msgid "Delete the current selected budget"
+#~ msgstr "Das aktuell gewählte Budget löschen"
+
+#~ msgid "Use this to delete the selected budget."
+#~ msgstr "Hiermit das gewählte Budget löschen."
+
+#~ msgctxt "@title header of the budget name column"
+#~ msgid "Name"
+#~ msgstr "Name"
+
+#~ msgid "Upd"
+#~ msgstr "Aktualisieren"
+
+#~ msgid "Res"
+#~ msgstr "Zurücksetzen"
+
+#~ msgid "Forecast view"
+#~ msgstr "Vorhersageansicht"
+
+#~ msgid "Not able to display this job."
+#~ msgstr "Diese Aufgabe kann nicht angezeigt werden."
+
+#~ msgid ""
+#~ "Could not find a plugin to display this job or it does not contain any "
+#~ "data."
+#~ msgstr ""
+#~ "Es wurde kein Modul zur Anzeige dieses Vorgangs gefunden oder der Vorgang "
+#~ "enthält keine Daten."
+
+#~ msgid "Copy this report to the clipboard"
+#~ msgstr "Diesen Bericht in die Zwischenablage kopieren"
+
+#~ msgid "Copy"
+#~ msgstr "Kopieren"
+
+#~ msgid "Close this window"
+#~ msgstr "Dieses Fenster schließen"
+
+#~ msgid ""
+#~ "*.css|CSS files\n"
+#~ "*|All files (*)"
+#~ msgstr ""
+#~ "*.css|CSS-Dateien\n"
+#~ "*|Alle Dateien (*)"
 
 #~ msgid "Loading securities..."
 #~ msgstr "Wertpapiere/Währungen werden geladen ..."
@@ -26625,9 +27177,7 @@ msgstr ""
 #~ msgid "Unknown XML tag %1 found in line %2"
 #~ msgstr "Unbekanntes XML-Tag %1 in Zeile %2 gefunden"
 
-#, fuzzy
-#~| msgid "Exception while creating a %1 element: %2"
-#~ msgid "Exception while reading %1 element: %2"
+#~ msgid "Exception while creating a %1 element: %2"
 #~ msgstr "Fehler beim Erstellen eines %1-Elementes: %2"
 
 #~ msgid "Loading file information..."
@@ -26636,35 +27186,171 @@ msgstr ""
 #~ msgid "Loading user information..."
 #~ msgstr "Benutzer-Informationen werden geladen ..."
 
-#~ msgctxt "Enter todays date into date input widget"
-#~ msgid "T"
-#~ msgstr "T"
+#~ msgid "Saving accounts..."
+#~ msgstr "Konten werden gespeichert ..."
 
-#, fuzzy
-#~| msgid "Accepts the entered data and stores it as schedule"
-#~ msgctxt "@info:tooltip Accept button"
-#~ msgid "Accept the transaction and mark it cleared."
+#~ msgid "Saving transactions..."
+#~ msgstr "Buchungen werden gespeichert ..."
+
+#~ msgid "Saving reports..."
+#~ msgstr "Berichte werden gespeichert ..."
+
+#~ msgid "Saving budgets..."
+#~ msgstr "Budgets werden gespeichert ..."
+
+#~ msgid "Saving online banking orders..."
+#~ msgstr "Online-Bankaufträge werden gespeichert ..."
+
+#~ msgid "Saving costcenters..."
+#~ msgstr "Kostenstellen werden gespeichert ..."
+
+#~ msgid "XML storage"
+#~ msgstr "XML-Speicher"
+
+#~ msgid "Always show a No. field in transaction form"
+#~ msgstr "Im Buchungsformular immer ein Nummernfeld anzeigen"
+
+#~ msgid "Show splash screen during startup"
+#~ msgstr "Startbildschirm während des Starts anzeigen"
+
+#~ msgid "Show title bar on each view"
+#~ msgstr "Titelleiste in jeder Ansicht anzeigen"
+
+#~ msgid "Select online banking plugin"
+#~ msgstr "Online-Banking-Erweiterung auswählen"
+
+#~ msgid "Reconcile"
+#~ msgstr "Abgleichen "
+
+#~ msgid "Reconcile - disabled because you are currently reconciling <b>%1</b>"
 #~ msgstr ""
-#~ "Akzeptiert die eingegebenen Daten und speichert sie als geplante Buchung"
+#~ "Abgleichen - Zurzeit deaktiviert, da bereits der Abgleich <b>%1</b> "
+#~ "ausgeführt wird"
 
 #, fuzzy
-#~| msgid "Do you really want to delete the selected transaction?"
-#~| msgid_plural "Do you really want to delete all %1 selected transactions?"
-#~ msgctxt "Question about the accept action"
-#~ msgid "Do you want to accept the imported transaction now?"
-#~ msgstr "Sind Sie sicher, dass Sie die ausgewählte Buchung löschen möchten?"
+#~| msgid "Cannot create transactions when no account is selected."
+#~ msgid "Add reversing transactions to the currently selected"
+#~ msgstr ""
+#~ "Buchungen können nicht erstellt werden, solange kein Konto ausgewählt ist."
 
-#, fuzzy
-#~| msgid "Split transaction"
-#~ msgctxt "@title:window"
-#~ msgid "Accept transaction"
-#~ msgstr "Split-Buchung"
+#~ msgid ""
+#~ "At least one split of the selected transactions has been reconciled. Do "
+#~ "you wish to continue to edit the transactions anyway?"
+#~ msgstr ""
+#~ "Mindestens eine Split-Buchung der markierten Buchungen wurde bereits "
+#~ "abgeglichen. Möchten Sie die Buchungen dennoch weiter bearbeiten?"
 
-#~ msgid "Copy this report to the clipboard"
-#~ msgstr "Diesen Bericht in die Zwischenablage kopieren"
+#~ msgid "Cannot create transactions when no account is selected."
+#~ msgstr ""
+#~ "Buchungen können nicht erstellt werden, solange kein Konto ausgewählt ist."
 
-#~ msgid "Copy"
-#~ msgstr "Kopieren"
+#~ msgid "Cannot create transactions in the context of a category."
+#~ msgstr "Im Kontext einer Kategorie können keine Buchungen erstellt werden."
+
+#~ msgid "Cannot create transactions in a closed account."
+#~ msgstr ""
+#~ "In einem geschlossenen Konto können keine Buchungen erstellt werden."
+
+#~ msgid "Cannot edit transactions in the context of a category."
+#~ msgstr "Im Kontext einer Kategorie können keine Buchungen geändert werden."
+
+#~ msgid "Cannot edit mixed investment action/type transactions together."
+#~ msgstr ""
+#~ "Gemischte Investitionsaktionen und Buchungstypen können nicht gemeinsam "
+#~ "bearbeitet werden."
+
+#~ msgid ""
+#~ "Cannot edit investment transactions and non-investment transactions "
+#~ "together."
+#~ msgstr ""
+#~ "Investitions- und Nichtinvestions-Buchungen können nicht gemeinsam "
+#~ "bearbeitet werden."
+
+#~ msgid "Cannot edit investment transactions in the context of this account."
+#~ msgstr ""
+#~ "Im Kontext dieses Kontos können keine Investitionen bearbeitet werden."
+
+#~ msgid ""
+#~ "<p>Please select what you want to do: discard the changes, save the "
+#~ "changes or continue to edit the transaction.</p><p>You can also set an "
+#~ "option to save the transaction automatically when e.g. selecting another "
+#~ "transaction.</p>"
+#~ msgstr ""
+#~ "<p>Möchten Sie die Änderungen verwerfen, speichern oder das Bearbeiten "
+#~ "dieser Buchung fortsetzen?</p><p>Es gibt auch eine Option, Buchungen "
+#~ "automatisch zu speichern, wenn beispielsweise eine andere Buchung "
+#~ "angewählt wird.</p>"
+
+#~ msgid "End transaction edit"
+#~ msgstr "Buchungsbearbeitung beenden"
+
+#~ msgid ""
+#~ "<p>Please select what you want to do: discard or save the changes.</"
+#~ "p><p>You can also set an option to save the transaction automatically "
+#~ "when e.g. selecting another transaction.</p>"
+#~ msgstr ""
+#~ "<p>Möchten Sie die Änderungen verwerfen oder speichern?</p><p>Es gibt "
+#~ "auch eine Option, Buchungen automatisch zu speichern, wenn beispielsweise "
+#~ "eine andere Buchung angewählt wird.</p>"
+
+#~ msgid "Date: %1"
+#~ msgstr "Datum: %1"
+
+#~ msgctxt "Name for unknown payee"
+#~ msgid "Unknown"
+#~ msgstr "Unbekannt"
+
+#~ msgid "Payee: %1"
+#~ msgstr "Zahlungsempfänger: %1"
+
+#~ msgid "Memo: %1"
+#~ msgstr "Notiz: %1"
+
+#~ msgid "Statement Details"
+#~ msgstr "Kontoauszug-Details"
+
+#~ msgid "Statement Deposit Details"
+#~ msgstr "Kontoauszug-Einzahlungsdetails"
+
+#~ msgid "Statement Payment Details"
+#~ msgstr "Kontoauszug-Zahlungsdetails"
+
+#~ msgid "%1 deposit (%2)"
+#~ msgid_plural "%1 deposits (%2)"
+#~ msgstr[0] "%1 Einzahlung (%2)"
+#~ msgstr[1] "%1 Einzahlungen (%2)"
+
+#~ msgid "%1 charge (%2)"
+#~ msgid_plural "%1 charges (%2)"
+#~ msgstr[0] "%1 Belastung (%2)"
+#~ msgstr[1] "%1 Belastungen (%2)"
+
+#~ msgid "%1 payment (%2)"
+#~ msgid_plural "%1 payments (%2)"
+#~ msgstr[0] "%1 Zahlung (%2)"
+#~ msgstr[1] "%1 Zahlungen (%2)"
+
+#~ msgctxt "%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments"
+#~ msgid "%1, %2"
+#~ msgstr "%1, %2"
+
+#~ msgctxt "Cleared balance"
+#~ msgid "Cleared: %1"
+#~ msgstr "Verrechnet: %1"
+
+#~ msgid "Last reconciled: %1"
+#~ msgstr "Zuletzt abgeglichen: %1"
+
+#~ msgid "Cannot process transaction with focus if it is not selected."
+#~ msgstr ""
+#~ "Buchung mit Fokus kann nicht verarbeitet werden, wenn sie nicht "
+#~ "ausgewählt ist."
+
+#~ msgid "Unable to delete transaction(s)"
+#~ msgstr "Buchungen können nicht gelöscht werden"
+
+#~ msgid "Running automatic reconciliation"
+#~ msgstr "Automatischer Abgleich läuft"
 
 #~ msgid "Your Financial Summary"
 #~ msgstr "Ihre Finanzen in der Übersicht"
@@ -26672,8 +27358,123 @@ msgstr ""
 #~ msgid "Show KMyMoney welcome page"
 #~ msgstr "KMyMoney-Startseite anzeigen"
 
+#~ msgid "Today's due payments"
+#~ msgstr "Heute fällige Zahlungen"
+
 #~ msgid "Last Reconciled"
 #~ msgstr "Zuletzt abgeglichen"
+
+#~ msgid "Select Account:"
+#~ msgstr "Konto wählen:"
+
+#~ msgid "Change the security information of the selected entry."
+#~ msgstr "Wertpapierinformationen des ausgewählten Eintrags ändern."
+
+#~ msgid "Remove this security item from the file"
+#~ msgstr "Dieses Wertpapier aus der Datei entfernen"
+
+#~ msgid "New ledger"
+#~ msgstr "Neues Kontenbuch"
+
+#~ msgid "Do you want to show <b>%1</b> column on every loaded view?"
+#~ msgstr ""
+#~ "Möchten Sie die Spalte <b>%1</b> auf jeder geladen Ansicht anzeigen?"
+
+#~ msgid "Do you want to hide <b>%1</b> column on every loaded view?"
+#~ msgstr ""
+#~ "Möchten Sie die Spalte <b>%1</b> auf jeder geladen Ansicht ausblenden?"
+
+#~ msgid "Unable to add schedule: %1"
+#~ msgstr "Geplante Buchung kann nicht erstellt werden: %1"
+
+#~ msgid "Use this to create a new payee."
+#~ msgstr "Hiermit lässt sich ein neuer Empfänger erstellen."
+
+#~ msgctxt "New payee"
+#~ msgid "New"
+#~ msgstr "Neu"
+
+#~ msgid "Rename the current selected payee"
+#~ msgstr "Den ausgewählten Empfänger umbenennen"
+
+#~ msgid "Use this to start renaming the selected payee."
+#~ msgstr "Hiermit lässt sich der gewählte Empfänger umbenennen."
+
+#~ msgid "Delete selected payee(s)"
+#~ msgstr "Ausgewählte Empfänger löschen"
+
+#~ msgid ""
+#~ "Use this to delete the selected payee. You can also select multiple "
+#~ "payees to be deleted."
+#~ msgstr ""
+#~ "Verwenden Sie dies, um die ausgewählten Zahlungsempfänger zu löschen. Sie "
+#~ "können auch mehrere Empfänger zum Löschen auswählen."
+
+#~ msgid "Merge multiple selected payees"
+#~ msgstr "Mehrere ausgewählten Empfänger zusammenführen"
+
+#~ msgid "Use this to merge multiple selected payees."
+#~ msgstr ""
+#~ "Verwenden Sie dies, um mehrere ausgewählte Zahlungsempfänger "
+#~ "zusammenzuführen."
+
+#~ msgid "Error executing item"
+#~ msgstr "Eintrag kann nicht ausführt werden"
+
+#~ msgid "Unable to filter account"
+#~ msgstr "Konto kann nicht gefiltert werden"
+
+#~ msgid "Bills"
+#~ msgstr "Rechnungen"
+
+#~ msgid "Loans"
+#~ msgstr "Kredite"
+
+#~ msgid "Type/Name"
+#~ msgstr "Typ/Name"
+
+#~ msgid "Frequency"
+#~ msgstr "Häufigkeit"
+
+#~ msgid "Unable to load accounts: "
+#~ msgstr "Konten können nicht geladen werden: "
+
+#~ msgid "<p>Do you really want to remove the tag <b>%1</b>?</p>"
+#~ msgstr "<p>Möchten Sie das Stichwort <b>%1</b> wirklich entfernen?</p>"
+
+#~ msgid "Do you really want to remove all selected tags?"
+#~ msgstr "Möchten alle ausgewählten Stichwörter wirklich entfernen?"
+
+#~ msgid "Remove Tag"
+#~ msgstr "Stichwort entfernen"
+
+#~ msgid ""
+#~ "At least one transaction/scheduled transaction is still referenced by a "
+#~ "tag. Currently you have all tags selected. However, at least one tag must "
+#~ "remain so that the transaction/scheduled transaction can be reassigned."
+#~ msgstr ""
+#~ "Mindestens ein Stichwort verweist noch auf eine (geplante) Buchung. "
+#~ "Zurzeit haben Sie alle Stichwörter markiert. Mindestens eins muss "
+#~ "erhalten bleiben, sodass diesem die (geplanten) Buchungen neu zugewiesen "
+#~ "werden können."
+
+#~ msgid "Creates a new tag"
+#~ msgstr "Erstellt einen neues Stichwort"
+
+#~ msgid "Use this to create a new tag."
+#~ msgstr "Hiermit lässt sich ein neue Stichwort erstellen."
+
+#~ msgid "Rename the current selected tag"
+#~ msgstr "Das ausgewählte Stichwort umbenennen"
+
+#~ msgid "Use this to start renaming the selected tag."
+#~ msgstr "Hiermit lässt sich das gewählte Stichwort umbenennen."
+
+#~ msgid "Delete the current selected tag"
+#~ msgstr "Das aktuelle Stichwort löschen"
+
+#~ msgid "Use this to delete the selected tag."
+#~ msgstr "Hiermit wird das ausgewählte Stichwort gelöscht."
 
 #~ msgid "Go to My Financial Summary"
 #~ msgstr "Ihre Finanzen in der Übersicht"
@@ -26778,73 +27579,186 @@ msgstr ""
 #~ msgid "- Support price download by ISIN"
 #~ msgstr "- Unterstützung der Preisaktualisierung durch ISIN"
 
-#, fuzzy
-#~| msgid "Any status"
-#~ msgctxt ""
-#~ msgid "Any status"
-#~ msgstr "Jeder Status"
+#~ msgid "Online statement balance: %1"
+#~ msgstr "Saldo des Onlinekontoauszugs: %1"
 
-#, fuzzy
-#~| msgid "Closed"
-#~ msgctxt ""
-#~ msgid "Closed"
-#~ msgstr "Geschlossen"
+#~ msgid "Credit"
+#~ msgstr "Haben"
 
-#~ msgctxt "Payment made from account"
-#~ msgid "Payment"
-#~ msgstr "Belastung"
-
-#~ msgctxt "Deposit into account"
-#~ msgid "Deposit"
-#~ msgstr "Gutschrift"
-
-#~ msgctxt "OnlineJob"
-#~ msgid "Name"
-#~ msgstr "Name"
-
-#~ msgid "Not able to display this job."
-#~ msgstr "Diese Aufgabe kann nicht angezeigt werden."
-
-#~ msgid ""
-#~ "Could not find a plugin to display this job or it does not contain any "
-#~ "data."
-#~ msgstr ""
-#~ "Es wurde kein Modul zur Anzeige dieses Vorgangs gefunden oder der Vorgang "
-#~ "enthält keine Daten."
-
-#~ msgid ""
-#~ "The transactions associated with the selected tags need to be re-assigned "
-#~ "to a different tag before the selected tags can be deleted. Please select "
-#~ "a tag from the list below."
-#~ msgstr ""
-#~ "Bevor die gewählten Stichwörter gelöscht werden können, müssen die ihnen "
-#~ "zugewiesenen Buchungen einem neuen Stichwort zugewiesen werden. Bitte ein "
-#~ "Stichwort aus der unteren Liste auswählen."
-
-#~ msgid "<p>Do you really want to remove the tag <b>%1</b>?</p>"
-#~ msgstr "<p>Möchten Sie das Stichwort <b>%1</b> wirklich entfernen?</p>"
-
-#~ msgid "Do you really want to remove all selected tags?"
-#~ msgstr "Möchten alle ausgewählten Stichwörter wirklich entfernen?"
-
-#~ msgid "Remove Tag"
-#~ msgstr "Stichwort entfernen"
-
-#~ msgid ""
-#~ "At least one transaction/scheduled transaction is still referenced by a "
-#~ "tag. Currently you have all tags selected. However, at least one tag must "
-#~ "remain so that the transaction/scheduled transaction can be reassigned."
-#~ msgstr ""
-#~ "Mindestens ein Stichwort verweist noch auf eine (geplante) Buchung. "
-#~ "Zurzeit haben Sie alle Stichwörter markiert. Mindestens eins muss "
-#~ "erhalten bleiben, sodass diesem die (geplanten) Buchungen neu zugewiesen "
-#~ "werden können."
+#~ msgid "Debit"
+#~ msgstr "Soll"
 
 #~ msgid "Pay to"
 #~ msgstr "Zahlen an"
 
-#~ msgid "&Show tip of the day"
-#~ msgstr "&Tipp des Tages anzeigen"
+#~ msgctxt "Deposits onto account"
+#~ msgid "Deposits"
+#~ msgstr "Einzahlungen"
+
+#~ msgctxt "Payments towards credit card"
+#~ msgid "Payments"
+#~ msgstr "Zahlungen"
+
+#~ msgctxt "Payments made from account"
+#~ msgid "Payments"
+#~ msgstr "Zahlungen"
+
+#~ msgctxt "Payments made with credit card"
+#~ msgid "Charges"
+#~ msgstr "Belastungen"
+
+#~ msgctxt "Reconcile state 'Not reconciled'"
+#~ msgid "Not reconciled"
+#~ msgstr "Nicht abgeglichen"
+
+#~ msgctxt "Reconcile state 'Cleared'"
+#~ msgid "Cleared"
+#~ msgstr "Verrechnet"
+
+#~ msgctxt "Reconcile state 'Reconciled'"
+#~ msgid "Reconciled"
+#~ msgstr "Abgeglichen"
+
+#~ msgctxt "Reconcile state 'Frozen'"
+#~ msgid "Frozen"
+#~ msgstr "Eingefroren"
+
+#~ msgctxt "Unknown reconcile state"
+#~ msgid "Unknown"
+#~ msgstr "Unbekannt"
+
+#~ msgid "Ratio"
+#~ msgstr "Stückelung"
+
+#~ msgid "Fee Amount"
+#~ msgstr "Gebührenbetrag"
+
+#~ msgid "Account Types"
+#~ msgstr "Kontentypen"
+
+#~ msgctxt "The balance of the selected budget"
+#~ msgid "Balance: "
+#~ msgstr "Saldo: "
+
+#~ msgctxt "Activity for income categories"
+#~ msgid "Received"
+#~ msgstr "Empfangen"
+
+#~ msgctxt "Activity for expense categories"
+#~ msgid "Paid"
+#~ msgstr "Bezahlt"
+
+#~ msgctxt "Payee"
+#~ msgid "Pay to"
+#~ msgstr "Zahlen an"
+
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "Von"
+
+#~ msgctxt "Enter todays date into date input widget"
+#~ msgid "T"
+#~ msgstr "T"
+
+#~ msgid "Closed tag"
+#~ msgstr "Geschlossenes Stichwort"
+
+#~ msgid "The tag is already present."
+#~ msgstr "Das Stichwort ist bereits vorhanden."
+
+#~ msgid "Prior transactions possibly filtered"
+#~ msgstr "Vorherige Buchungen möglicherweise gefiltert"
+
+#~ msgid "Reconciled Balance: %1"
+#~ msgstr "Abgeglichener Saldo: %1"
+
+#~ msgid "Online Statement Balance: %1"
+#~ msgstr "Saldo des Onlinekontoauszugs: %1"
+
+#~ msgctxt "Unknown payee"
+#~ msgid "Unknown"
+#~ msgstr "Unbekannt"
+
+#~ msgctxt "Unknown category"
+#~ msgid "Unknown"
+#~ msgstr "Unbekannt"
+
+#~ msgctxt "Unknown security"
+#~ msgid "Unknown"
+#~ msgstr "Unbekannt"
+
+#~ msgctxt "label for status combo"
+#~ msgid "Stat&us"
+#~ msgstr "Stat&us"
+
+#~ msgid "Sell"
+#~ msgstr "Verkauf"
+
+#~ msgid "Buy"
+#~ msgstr "Kauf"
+
+#~ msgid "Investment transaction"
+#~ msgstr "Investitions-Buchung"
+
+#~ msgid "KMyMoney has matched the two selected transactions (result above)"
+#~ msgstr ""
+#~ "MyMoney hat die beiden ausgewählten Buchung zu einer Buchung "
+#~ "zusammengeführt (Ergebnis oben)"
+
+#~ msgid "Bank entry:"
+#~ msgstr "Bank-Eintrag:"
+
+#~ msgid "Your entry:"
+#~ msgstr "Ihr Eintrag:"
+
+#~ msgid "&Deposit"
+#~ msgstr "&Gutschrift"
+
+#~ msgid "&Transfer"
+#~ msgstr "&Umbuchung"
+
+#~ msgid "&Withdrawal"
+#~ msgstr "&Belastung"
+
+#~ msgid "&Payment"
+#~ msgstr "&Gutschrift"
+
+#~ msgid "&Charge"
+#~ msgstr "&Belastung"
+
+#~ msgid "&Decrease"
+#~ msgstr "Ab&nahme"
+
+#~ msgid "&Increase"
+#~ msgstr "Zuna&hme"
+
+#~ msgid "No Title specified"
+#~ msgstr "Kein Titel spezifiziert"
+
+#~ msgid "Preferred account"
+#~ msgstr "Bevorzugtes Konto"
+
+#~ msgid "Enter the ticker symbol (e.g. RHAT)."
+#~ msgstr "Ticker-Symbol (z. B. RHAT) eingeben."
+
+#~ msgid "Enter the CUSIP/ISIN/WKN identification number here"
+#~ msgstr "Geben Sie die CUSIP/ISIN/WK-Nummer hier ein"
+
+#~ msgid "This wizard allows you to modify the selected security."
+#~ msgstr "Dieser Assistent unterstützt das Ändern der angewählten Wertanlage."
+
+#~ msgid ""
+#~ "The selected symbol is already on file. Do you want to reuse the existing "
+#~ "security?"
+#~ msgstr ""
+#~ "Das ausgewählte Wertpapier existiert bereits. Möchten Sie das bestehende "
+#~ "Wertpapier wiederverwenden?"
+
+#~ msgid "Security found"
+#~ msgstr "Wertpapier gefunden"
+
+#~ msgid "Routing number"
+#~ msgstr "Bankleitzahl"
 
 #~ msgid ""
 #~ "<p>...that you can change the sort order of ledger entries by\n"
@@ -27020,350 +27934,6 @@ msgstr ""
 #~ "Menü Datei->Importieren.</p>\n"
 #~ "<p>von Jose Jorge</p>\n"
 
-#~ msgid "Change the security information of the selected entry."
-#~ msgstr "Wertpapierinformationen des ausgewählten Eintrags ändern."
-
-#~ msgid "Remove this security item from the file"
-#~ msgstr "Dieses Wertpapier aus der Datei entfernen"
-
-#~ msgid "Delete..."
-#~ msgstr "Löschen ..."
-
-#~ msgctxt "Deposits onto account"
-#~ msgid "Deposits"
-#~ msgstr "Einzahlungen"
-
-#~ msgctxt "Payments towards credit card"
-#~ msgid "Payments"
-#~ msgstr "Zahlungen"
-
-#~ msgctxt "Payments made from account"
-#~ msgid "Payments"
-#~ msgstr "Zahlungen"
-
-#~ msgctxt "Payments made with credit card"
-#~ msgid "Charges"
-#~ msgstr "Belastungen"
-
-#~ msgctxt "Reconcile state 'Not reconciled'"
-#~ msgid "Not reconciled"
-#~ msgstr "Nicht abgeglichen"
-
-#~ msgctxt "Reconcile state 'Cleared'"
-#~ msgid "Cleared"
-#~ msgstr "Verrechnet"
-
-#~ msgctxt "Reconcile state 'Reconciled'"
-#~ msgid "Reconciled"
-#~ msgstr "Abgeglichen"
-
-#~ msgctxt "Reconcile state 'Frozen'"
-#~ msgid "Frozen"
-#~ msgstr "Eingefroren"
-
-#~ msgctxt "Unknown reconcile state"
-#~ msgid "Unknown"
-#~ msgstr "Unbekannt"
-
-#~ msgctxt "Total value"
-#~ msgid "Total"
-#~ msgstr "Summe"
-
-#~ msgid "Ratio 1/"
-#~ msgstr "Quotient 1/"
-
-#~ msgid "Ratio"
-#~ msgstr "Stückelung"
-
-#~ msgid "Fee Amount"
-#~ msgstr "Gebührenbetrag"
-
-#~ msgid "Price/Share"
-#~ msgstr "Preis pro Anteil"
-
-#~ msgid "Asset account"
-#~ msgstr "Anlagekonten"
-
-#~ msgid ""
-#~ "Cannot enter transaction with postdate prior to account's opening date."
-#~ msgstr ""
-#~ "Kann keine Buchung eintragen, die vor der Kontoeröffnung datiert ist."
-
-#~ msgid "Found %1 matching transaction (D %2 / P %3 = %4)"
-#~ msgid_plural "Found %1 matching transactions (D %2 / P %3 = %4)"
-#~ msgstr[0] "%1 passende Buchung gefunden (D %2 / P %3 = %4)"
-#~ msgstr[1] "%1 passende Buchungen gefunden (D %2 / P %3 = %4)"
-
-#~ msgctxt "To duplicate a split"
-#~ msgid "Duplicate"
-#~ msgstr "Duplizieren"
-
-#~ msgid "will be calculated"
-#~ msgstr "wird berechnet"
-
-#~ msgid ""
-#~ "You are about to delete the selected split. Do you really want to "
-#~ "continue?"
-#~ msgstr ""
-#~ "Sie sind gerade dabei, die aktuelle Split-Buchung zu löschen. Möchten Sie "
-#~ "wirklich fortfahren?"
-
-#~ msgid ""
-#~ "You need to assign a category to this split before it can be entered."
-#~ msgstr ""
-#~ "Sie müssen dieser Split-Buchung eine Kategorie zuweisen, bevor sie "
-#~ "eingetragen werden kann."
-
-#~ msgid "Enter split"
-#~ msgstr "Split-Buchung eintragen"
-
-#~ msgid ""
-#~ "Select a transaction and press the OK button or use Cancel to select none."
-#~ msgstr ""
-#~ "Eine Buchung auswählen und „OK“ drücken oder „Abbruch“ um nichts "
-#~ "auszuwählen."
-
-#~ msgid "Clear &All"
-#~ msgstr "&Alle löschen"
-
-#~ msgid "Use this to clear all splits of this transaction"
-#~ msgstr ""
-#~ "Verwenden Sie dies, um alle Split-Buchungen dieser Buchung zu löschen"
-
-#~ msgid "Clear &Zero"
-#~ msgstr "&Nullbeträge löschen"
-
-#~ msgid ""
-#~ "In case you have multiple split entries to the same category and you like "
-#~ "to keep them as a single split"
-#~ msgstr ""
-#~ "Klicken Sie auf diesen Knopf, um mehrere Split-Buchungen derselben "
-#~ "Kategorie in einer einzigen Split-Buchung zusammenzufassen."
-
-#~ msgid ""
-#~ "You are about to delete all splits of this transaction. Do you really "
-#~ "want to continue?"
-#~ msgstr ""
-#~ "Sie sind gerade dabei, alle Split-Buchungen dieser Buchung zu löschen. "
-#~ "Möchten Sie wirklich fortfahren?"
-
-#~ msgid "<b>11,00<b>"
-#~ msgstr "<b>11,00</b>"
-
-#~ msgid "<b>111,00<b>"
-#~ msgstr "<b>111,00</b>"
-
-#~ msgid "Unassigned"
-#~ msgstr "Nicht zugewiesen"
-
-#~ msgid "100,00"
-#~ msgstr "100,00"
-
-#~ msgid "Prior transactions possibly filtered"
-#~ msgstr "Vorherige Buchungen möglicherweise gefiltert"
-
-#~ msgid "Online Statement Balance: %1"
-#~ msgstr "Saldo des Onlinekontoauszugs: %1"
-
-#~ msgctxt "Unknown payee"
-#~ msgid "Unknown"
-#~ msgstr "Unbekannt"
-
-#~ msgctxt "Unknown category"
-#~ msgid "Unknown"
-#~ msgstr "Unbekannt"
-
-#~ msgctxt "Unknown security"
-#~ msgid "Unknown"
-#~ msgstr "Unbekannt"
-
-#~ msgctxt "label for status combo"
-#~ msgid "Stat&us"
-#~ msgstr "Stat&us"
-
-#~ msgid "Sell"
-#~ msgstr "Verkauf"
-
-#~ msgid "Buy"
-#~ msgstr "Kauf"
-
-#~ msgid "Investment transaction"
-#~ msgstr "Investitions-Buchung"
-
-#~ msgid "Transfer to"
-#~ msgstr "Umbuchung auf"
-
-#~ msgid "Transfer from"
-#~ msgstr "Umbuchung von"
-
-#~ msgid "Category/Account"
-#~ msgstr "Kategorie/Konto"
-
-#~ msgid "KMyMoney has matched the two selected transactions (result above)"
-#~ msgstr ""
-#~ "MyMoney hat die beiden ausgewählten Buchung zu einer Buchung "
-#~ "zusammengeführt (Ergebnis oben)"
-
-#~ msgid "Bank entry:"
-#~ msgstr "Bank-Eintrag:"
-
-#~ msgid "Your entry:"
-#~ msgstr "Ihr Eintrag:"
-
-#~ msgid "The transaction has a missing assignment of <b>%1</b>."
-#~ msgstr "Die Buchung hat eine fehlende Zuordnung von <b>%1</b>."
-
-#~ msgctxt "Unknown reconciliation state"
-#~ msgid "Unknown"
-#~ msgstr "Unbekannt"
-
-#~ msgid ""
-#~ "This transaction has more than two splits and is originally based on a "
-#~ "different currency (%1). Using this account to modify the transaction may "
-#~ "result in rounding errors. Do you want to continue?"
-#~ msgstr ""
-#~ "Diese Buchung hat mehr als zwei Split-Buchungen und basiert auf einer "
-#~ "anderen Währung (%1). Die Benutzung dieses Kontos für die Änderung der "
-#~ "Buchung kann zu Rundungsfehlern führen. Möchten Sie fortfahren?"
-
-#~ msgid ""
-#~ "At least one of the selected transactions has more than two splits and is "
-#~ "originally based on a different currency (%1). Using this account to "
-#~ "modify the transactions may result in rounding errors. Do you want to "
-#~ "continue?"
-#~ msgstr ""
-#~ "Mindestens eine der ausgewählten Buchungen hat mehr als zwei Split-"
-#~ "Buchungen und basiert auf einer anderen Währung (%1). Die Benutzung "
-#~ "dieses Kontos für die Änderung der Buchung kann zu Rundungsfehlern "
-#~ "führen. Möchten Sie fortfahren?"
-
-#~ msgid "<center>Processing schedule for %1.</center>"
-#~ msgstr "<center>Geplante Buchungen %1 werden bearbeitet.</center>"
-
-#~ msgid ""
-#~ "Check number <b>%1</b> has already been used in account <b>%2</b>."
-#~ "<center>Do you want to replace it with the next available number?</center>"
-#~ msgstr ""
-#~ "Die Schecknummer <b>%1</b> wird bereits in Konto <b>%2</b> genutzt."
-#~ "<center>Möchten Sie sie mit der nächsten verfügbaren Nummer ersetzen?</"
-#~ "center>"
-
-#~ msgid "Duplicate number"
-#~ msgstr "Nummer duplizieren"
-
-#~ msgid "Storing transactions"
-#~ msgstr "Buchungen werden hinzufügt"
-
-#~ msgid "&Enter"
-#~ msgstr "&Eintragen"
-
-#~ msgid "Use this to enter the transaction into the ledger."
-#~ msgstr "Nehmen Sie hiermit die Buchung in das Kontenbuch auf."
-
-#~ msgid "&Schedule"
-#~ msgstr "&Planung"
-
-#~ msgid "Accepts the entered data and stores it as schedule"
-#~ msgstr ""
-#~ "Akzeptiert die eingegebenen Daten und speichert sie als geplante Buchung"
-
-#~ msgid ""
-#~ "Use this to schedule the transaction for later entry into the ledger."
-#~ msgstr ""
-#~ "Verwenden Sie dies, um die Buchung für einen späteren Eintrag in das "
-#~ "Kontenbuch vorzusehen."
-
-#~ msgid ""
-#~ "The transaction you are about to enter has a post date in the future.<br/"
-#~ "><br/>Do you want to enter it in the ledger or add it to the schedules?"
-#~ msgstr ""
-#~ "Die eingetragene Buchung hat ein Datum in der Zukunft.<br/><br/>Soll sie "
-#~ "im Kontenbuch eingetragen werden, oder zu geplanten Buchungen hinzugefügt "
-#~ "werden?"
-
-#~ msgctxt "Dialog caption for 'Enter or schedule' dialog"
-#~ msgid "Enter or schedule?"
-#~ msgstr "Eintragen oder planen?"
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the warning balance of %2."
-#~ msgstr ""
-#~ "Der Saldo des Kontos <b>%1</b> ist unter die Saldo-Warnung von %2 "
-#~ "gefallen."
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the minimum balance of %2."
-#~ msgstr ""
-#~ "Der Saldo des Kontos <b>%1</b> ist unter die minimale Saldo-Warnung von "
-#~ "%2 gefallen."
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the maximum credit warning "
-#~ "limit of %2."
-#~ msgstr ""
-#~ "Der Saldo des Kontos <b>%1</b> ist unter das maximale Kredit-Limit von %2 "
-#~ "gefallen."
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the maximum credit limit "
-#~ "of %2."
-#~ msgstr ""
-#~ "Der Saldo des Kontos <b>%1</b> ist unter das maximale Kredit-Limit von %2 "
-#~ "gefallen."
-
-#~ msgid "&Deposit"
-#~ msgstr "&Gutschrift"
-
-#~ msgid "&Transfer"
-#~ msgstr "&Umbuchung"
-
-#~ msgid "&Withdrawal"
-#~ msgstr "&Belastung"
-
-#~ msgid "&Payment"
-#~ msgstr "&Gutschrift"
-
-#~ msgid "&Charge"
-#~ msgstr "&Belastung"
-
-#~ msgid "&Decrease"
-#~ msgstr "Ab&nahme"
-
-#~ msgid "&Increase"
-#~ msgstr "Zuna&hme"
-
-#~ msgid "Reconcile"
-#~ msgstr "Abgleichen "
-
-#~ msgid "Reconcile - disabled because you are currently reconciling <b>%1</b>"
-#~ msgstr ""
-#~ "Abgleichen - Zurzeit deaktiviert, da bereits der Abgleich <b>%1</b> "
-#~ "ausgeführt wird"
-
-#~ msgctxt "Button text for match transaction"
-#~ msgid "Match"
-#~ msgstr "Zuordnen"
-
-#, fuzzy
-#~| msgid "Cannot create transactions when no account is selected."
-#~ msgid "Add reversing transactions to the currently selected"
-#~ msgstr ""
-#~ "Buchungen können nicht erstellt werden, solange kein Konto ausgewählt ist."
-
-#~ msgctxt "Button text for unmatch transaction"
-#~ msgid "Unmatch"
-#~ msgstr "Zuordnung rückgängig machen"
-
-#~ msgid "Difference: %1"
-#~ msgstr "Differenz: %1"
-
-#~ msgid ""
-#~ "At least one split of the selected transactions has been reconciled. Do "
-#~ "you wish to continue to edit the transactions anyway?"
-#~ msgstr ""
-#~ "Mindestens eine Split-Buchung der markierten Buchungen wurde bereits "
-#~ "abgeglichen. Möchten Sie die Buchungen dennoch weiter bearbeiten?"
-
 #~ msgid ""
 #~ "At least one split of the selected transactions has been frozen. Editing "
 #~ "the transactions is therefore prohibited."
@@ -27374,250 +27944,21 @@ msgstr ""
 #~ msgid "Transaction already frozen"
 #~ msgstr "Buchung bereits eingefroren"
 
-#~ msgid ""
-#~ "At least one split of the selected transaction references an account that "
-#~ "has been closed. Editing the transactions is therefore prohibited."
-#~ msgstr ""
-#~ "Mindestens ein Teil der gewählten Buchung verweist auf ein Konto, das "
-#~ "geschlossen wurde. Das Bearbeiten der Buchungen ist daher unzulässig."
-
 #~ msgid "Account closed"
 #~ msgstr "Konto geschlossen"
 
-#~ msgid "Cannot create transactions when no account is selected."
-#~ msgstr ""
-#~ "Buchungen können nicht erstellt werden, solange kein Konto ausgewählt ist."
-
-#~ msgid "Cannot create transactions in the context of a category."
-#~ msgstr "Im Kontext einer Kategorie können keine Buchungen erstellt werden."
-
-#~ msgid "Cannot create transactions in a closed account."
-#~ msgstr ""
-#~ "In einem geschlossenen Konto können keine Buchungen erstellt werden."
-
 #~ msgid "Cannot edit transactions with frozen splits."
 #~ msgstr "Eingefrorene Split-Buchungen können nicht verändert werden."
-
-#~ msgid "Cannot edit transactions in the context of a category."
-#~ msgstr "Im Kontext einer Kategorie können keine Buchungen geändert werden."
 
 #~ msgid "Cannot create or edit any transactions in Account %1 as it is closed"
 #~ msgstr ""
 #~ "Buchungen im Konto %1 können nicht erstellt oder geändert werden, da das "
 #~ "Konto geschlossen ist."
 
-#~ msgid "Cannot edit mixed investment action/type transactions together."
-#~ msgstr ""
-#~ "Gemischte Investitionsaktionen und Buchungstypen können nicht gemeinsam "
-#~ "bearbeitet werden."
-
-#~ msgid ""
-#~ "Cannot edit investment transactions and non-investment transactions "
-#~ "together."
-#~ msgstr ""
-#~ "Investitions- und Nichtinvestions-Buchungen können nicht gemeinsam "
-#~ "bearbeitet werden."
-
-#~ msgid "Cannot edit investment transactions in the context of this account."
-#~ msgstr ""
-#~ "Im Kontext dieses Kontos können keine Investitionen bearbeitet werden."
-
-#~ msgid ""
-#~ "<p>Please select what you want to do: discard the changes, save the "
-#~ "changes or continue to edit the transaction.</p><p>You can also set an "
-#~ "option to save the transaction automatically when e.g. selecting another "
-#~ "transaction.</p>"
-#~ msgstr ""
-#~ "<p>Möchten Sie die Änderungen verwerfen, speichern oder das Bearbeiten "
-#~ "dieser Buchung fortsetzen?</p><p>Es gibt auch eine Option, Buchungen "
-#~ "automatisch zu speichern, wenn beispielsweise eine andere Buchung "
-#~ "angewählt wird.</p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "Buchungsbearbeitung beenden"
-
-#~ msgid ""
-#~ "<p>Please select what you want to do: discard or save the changes.</"
-#~ "p><p>You can also set an option to save the transaction automatically "
-#~ "when e.g. selecting another transaction.</p>"
-#~ msgstr ""
-#~ "<p>Möchten Sie die Änderungen verwerfen oder speichern?</p><p>Es gibt "
-#~ "auch eine Option, Buchungen automatisch zu speichern, wenn beispielsweise "
-#~ "eine andere Buchung angewählt wird.</p>"
-
-#~ msgid "Date: %1"
-#~ msgstr "Datum: %1"
-
-#~ msgctxt "Name for unknown payee"
-#~ msgid "Unknown"
-#~ msgstr "Unbekannt"
-
-#~ msgid "Payee: %1"
-#~ msgstr "Zahlungsempfänger: %1"
-
-#~ msgid "Memo: %1"
-#~ msgstr "Notiz: %1"
-
-#~ msgid "Statement Details"
-#~ msgstr "Kontoauszug-Details"
-
-#~ msgid "Statement Deposit Details"
-#~ msgstr "Kontoauszug-Einzahlungsdetails"
-
-#~ msgid "Statement Payment Details"
-#~ msgstr "Kontoauszug-Zahlungsdetails"
-
-#~ msgid "%1 deposit (%2)"
-#~ msgid_plural "%1 deposits (%2)"
-#~ msgstr[0] "%1 Einzahlung (%2)"
-#~ msgstr[1] "%1 Einzahlungen (%2)"
-
-#~ msgid "%1 charge (%2)"
-#~ msgid_plural "%1 charges (%2)"
-#~ msgstr[0] "%1 Belastung (%2)"
-#~ msgstr[1] "%1 Belastungen (%2)"
-
-#~ msgid "%1 payment (%2)"
-#~ msgid_plural "%1 payments (%2)"
-#~ msgstr[0] "%1 Zahlung (%2)"
-#~ msgstr[1] "%1 Zahlungen (%2)"
-
-#~ msgctxt "%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments"
-#~ msgid "%1, %2"
-#~ msgstr "%1, %2"
-
-#~ msgid "Go to '%1'"
-#~ msgstr "Gehe zu „%1“"
-
-#~ msgid "Statement: %1"
-#~ msgstr "Kontoauszug: %1"
-
-#~ msgctxt "Cleared balance"
-#~ msgid "Cleared: %1"
-#~ msgstr "Verrechnet: %1"
-
-#~ msgid "Last reconciled: %1"
-#~ msgstr "Zuletzt abgeglichen: %1"
-
 #~ msgid "Cannot process transactions in account %1, which is closed."
 #~ msgstr ""
 #~ "Buchungen im Konto %1 können nicht verarbeitet werden, da das Konto "
 #~ "geschlossen ist."
-
-#~ msgid "Cannot process transaction with focus if it is not selected."
-#~ msgstr ""
-#~ "Buchung mit Fokus kann nicht verarbeitet werden, wenn sie nicht "
-#~ "ausgewählt ist."
-
-#~ msgid "Unable to delete transaction(s)"
-#~ msgstr "Buchungen können nicht gelöscht werden"
-
-#~ msgid "Running automatic reconciliation"
-#~ msgstr "Automatischer Abgleich läuft"
-
-#, fuzzy
-#~| msgid "Open ledger"
-#~ msgid "Old ledgers"
-#~ msgstr "Kontenbuch öffnen"
-
-#~ msgid "Thomas Baumgart"
-#~ msgstr "Thomas Baumgart"
-
-#~ msgid "Łukasz Wojniłowicz"
-#~ msgstr "Łukasz Wojniłowicz"
-
-#~ msgid "Ralf Habacker"
-#~ msgstr "Ralf Habacker"
-
-#~ msgid "Cristian Oneț"
-#~ msgstr "Cristian Oneț"
-
-#~ msgid "Christian Dávid"
-#~ msgstr "Christian Dávid"
-
-#~ msgid "Michael Edwardes"
-#~ msgstr "Michael Edwardes"
-
-#~ msgid "Alvaro Soliverez"
-#~ msgstr "Alvaro Soliverez"
-
-#~ msgid "Ace Jones"
-#~ msgstr "Ace Jones"
-
-#~ msgid "Tony Bloomfield"
-#~ msgstr "Tony Bloomfield"
-
-#~ msgid "Felix Rodriguez"
-#~ msgstr "Felix Rodriguez"
-
-#~ msgid "John C"
-#~ msgstr "John C"
-
-#~ msgid "Fernando Vilas"
-#~ msgstr "Fernando Vilas"
-
-#~ msgid "Jack Ostroff"
-#~ msgstr "Jack Ostroff"
-
-#~ msgid "Kevin Tambascio"
-#~ msgstr "Kevin Tambascio"
-
-#~ msgid "Javier Campos Morales"
-#~ msgstr "Javier Campos Morales"
-
-#~ msgid "Robert Wadley"
-#~ msgstr "Robert Wadley"
-
-#~ msgid "Laurent Montel"
-#~ msgstr "Laurent Montel"
-
-#~ msgid "Wolfgang Rohdewald"
-#~ msgstr "Wolfgang Rohdewald"
-
-#~ msgid "Marko Käning"
-#~ msgstr "Marko Käning"
-
-#~ msgid "Allan Anderson ✝"
-#~ msgstr "Allan Anderson ✝"
-
-#~ msgctxt "HTML (Filefilter)"
-#~ msgid "HTML files"
-#~ msgstr "HTML-Dateien"
-
-#~ msgctxt "Column heading for category in tax report"
-#~ msgid "Tax"
-#~ msgstr "Steuer"
-
-#~ msgctxt "Column heading for Cost Center"
-#~ msgid "CC"
-#~ msgstr "KS"
-
-#~ msgctxt ""
-#~ "Column heading for Bank Code. Use a generic form, do not translate using "
-#~ "a culture-specific term, e.g. 'Routing Number' (en_US) or 'Sort "
-#~ "Code' (en_GB)"
-#~ msgid "Bank Code"
-#~ msgstr "Bankleitzahl"
-
-#~ msgctxt ""
-#~ "Tooltip for 'Name' column. Used in Account, Category and Institution "
-#~ "context, so avoid being too specific"
-#~ msgid "Full name"
-#~ msgstr "Vollständiger Name"
-
-#~ msgctxt ""
-#~ "Toolip for a 'Type' column, used in both Account and Category context"
-#~ msgid "Type"
-#~ msgstr "Typ"
-
-#~ msgid "Show title bar on each page"
-#~ msgstr "Kopfzeile in jeder Ansicht anzeigen"
-
-#~ msgid "Show title bar on each view"
-#~ msgstr "Titelleiste in jeder Ansicht anzeigen"
-
-#~ msgid "No Title specified"
-#~ msgstr "Kein Titel spezifiziert"
 
 #~ msgid ""
 #~ "This option hides all accounts that have been closed by the user in views "
@@ -27635,12 +27976,12 @@ msgstr ""
 #~ msgid "Do not show closed accounts"
 #~ msgstr "Geschlossene Konten nicht anzeigen"
 
-#~ msgid "Unable to add schedule: %1"
-#~ msgstr "Geplante Buchung kann nicht erstellt werden: %1"
+#~ msgid "Weboob"
+#~ msgstr "Weboob"
 
-#~ msgctxt "@action:button Update button in tags vew"
-#~ msgid "Update"
-#~ msgstr "Aktualisieren"
+#~ msgctxt "HTML (Filefilter)"
+#~ msgid "HTML files"
+#~ msgstr "HTML-Dateien"
 
 #, fuzzy
 #~| msgid ""
@@ -27654,99 +27995,11 @@ msgstr ""
 #~ "Informationen für Gebühren und/oder Zinsen an. KMyMoney wird "
 #~ "entsprechende Buchungen erstellen und für Sie verrechnen."
 
-#~ msgctxt "@title:menu Bugdet context menu"
-#~ msgid "Budget options"
-#~ msgstr "Budget-Optionen"
-
-#~ msgid "Select online banking plugin"
-#~ msgstr "Online-Banking-Erweiterung auswählen"
-
-#~ msgid "Do you want to show <b>%1</b> column on every loaded view?"
-#~ msgstr ""
-#~ "Möchten Sie die Spalte <b>%1</b> auf jeder geladen Ansicht anzeigen?"
-
-#~ msgid "Do you want to hide <b>%1</b> column on every loaded view?"
-#~ msgstr ""
-#~ "Möchten Sie die Spalte <b>%1</b> auf jeder geladen Ansicht ausblenden?"
-
-#~ msgid "Is a sub account"
-#~ msgstr "Dies ist ein Unterkonto"
-
-#~ msgctxt "New transaction button"
-#~ msgid "New"
-#~ msgstr "Neu"
-
-#~ msgid "New scheduled transaction"
-#~ msgstr "Geplante Buchung anlegen"
-
-#~ msgid "Check template file"
-#~ msgstr "Vorlage auswählen"
-
 #~ msgid "Are you sure you wish to merge these transactions?"
 #~ msgstr "Sind Sie sicher, dass Sie diese Buchungen zusammenführen möchten?"
 
-#~ msgid ""
-#~ "<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>"
-#~ msgstr ""
-#~ "<p><b>%1</b> kann nicht zum Geldinstitut <b>%2</b> verschoben werden. "
-#~ "Ursache: %3</p>"
-
-#~ msgid "<p><b>%1</b> cannot be moved to <b>%2</b>. Reason: %3</p>"
-#~ msgstr ""
-#~ "<p><b>%1</b> kann nicht zu <b>%2</b> verschoben werden. Ursache: %3</p>"
-
-#~ msgid "IBAN/BIC Data"
-#~ msgstr "IBAN/BIC-Daten"
-
-#~ msgid "Budgets view"
-#~ msgstr "Budgetansicht"
-
-#~ msgid "Forecast view"
-#~ msgstr "Vorhersageansicht"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Budgets view"
-#~ msgstr "Budgetansicht"
-
-#~ msgctxt "It's about printing bank checks"
-#~ msgid "Check printing"
-#~ msgstr "Scheckdruck"
-
-#~ msgid "CSV exporter"
-#~ msgstr "CSV-Export"
-
-#~ msgid "CSV importer"
-#~ msgstr "CSV-Import-Modul"
-
-#~ msgid "GnuCash importer"
-#~ msgstr "GnuCash-Import"
-
-#~ msgid "iCalendar exporter"
-#~ msgstr "iCalendar-Export"
-
-#~ msgid "OFX Importer"
-#~ msgstr "OFX-Import"
-
-#~ msgid "QIF importer"
-#~ msgstr "QIF-Importer"
-
-#~ msgid "SQL storage"
-#~ msgstr "SQL-Speicher"
-
-#~ msgid "Weboob"
-#~ msgstr "Weboob"
-
-#~ msgid "XML storage"
-#~ msgstr "XML-Speicher"
-
 #~ msgid "CSV Files (*.csv)"
 #~ msgstr "CSV-Dateien (*.csv)"
-
-#~ msgid "Debit"
-#~ msgstr "Soll"
-
-#~ msgid "Credit"
-#~ msgstr "Haben"
 
 #~ msgid ""
 #~ "Select 'Debit/credit' if both columns exist, otherwise select 'Amount'."
@@ -27770,133 +28023,6 @@ msgstr ""
 #~ msgid "A&mount"
 #~ msgstr "&Betrag"
 
-#~ msgid "Creates a new budget"
-#~ msgstr "Neues Budget anlegen"
-
-#~ msgid "Use this to create a new empty budget."
-#~ msgstr "Hiermit ein neues, leeres Budget anlegen."
-
-#~ msgctxt "New budget"
-#~ msgid "New"
-#~ msgstr "Neu"
-
-#~ msgid "Rename the current selected budget."
-#~ msgstr "Das aktuell gewählte Budget umbenennen."
-
-#~ msgid "Use this to start renaming the selected budget."
-#~ msgstr "Hiermit das gewählte Budget umbenennen."
-
-#~ msgid "Delete the current selected budget"
-#~ msgstr "Das aktuell gewählte Budget löschen"
-
-#~ msgid "Use this to delete the selected budget."
-#~ msgstr "Hiermit das gewählte Budget löschen."
-
-#~ msgid "Use this to create a new payee."
-#~ msgstr "Hiermit lässt sich ein neuer Empfänger erstellen."
-
-#~ msgctxt "New payee"
-#~ msgid "New"
-#~ msgstr "Neu"
-
-#~ msgid "Rename the current selected payee"
-#~ msgstr "Den ausgewählten Empfänger umbenennen"
-
-#~ msgid "Use this to start renaming the selected payee."
-#~ msgstr "Hiermit lässt sich der gewählte Empfänger umbenennen."
-
-#~ msgid "Delete selected payee(s)"
-#~ msgstr "Ausgewählte Empfänger löschen"
-
-#~ msgid ""
-#~ "Use this to delete the selected payee. You can also select multiple "
-#~ "payees to be deleted."
-#~ msgstr ""
-#~ "Verwenden Sie dies, um die ausgewählten Zahlungsempfänger zu löschen. Sie "
-#~ "können auch mehrere Empfänger zum Löschen auswählen."
-
-#~ msgid "Merge multiple selected payees"
-#~ msgstr "Mehrere ausgewählten Empfänger zusammenführen"
-
-#~ msgid "Use this to merge multiple selected payees."
-#~ msgstr ""
-#~ "Verwenden Sie dies, um mehrere ausgewählte Zahlungsempfänger "
-#~ "zusammenzuführen."
-
-#~ msgid "Creates a new tag"
-#~ msgstr "Erstellt einen neues Stichwort"
-
-#~ msgid "Use this to create a new tag."
-#~ msgstr "Hiermit lässt sich ein neue Stichwort erstellen."
-
-#~ msgid "Rename the current selected tag"
-#~ msgstr "Das ausgewählte Stichwort umbenennen"
-
-#~ msgid "Use this to start renaming the selected tag."
-#~ msgstr "Hiermit lässt sich das gewählte Stichwort umbenennen."
-
-#~ msgid "Delete the current selected tag"
-#~ msgstr "Das aktuelle Stichwort löschen"
-
-#~ msgid "Use this to delete the selected tag."
-#~ msgstr "Hiermit wird das ausgewählte Stichwort gelöscht."
-
-#~ msgid "Dequeue"
-#~ msgstr "Aus Warteschlange entfernen"
-
-#~ msgid "Dequeue selected job"
-#~ msgstr "Markierten Auftrag aus der Warteschlange entfernen"
-
-#~ msgid "Remove the selected job from the list"
-#~ msgstr "Den gewählten Auftrag von der Liste entfernen"
-
-#~ msgid "Execute"
-#~ msgstr "Ausführen"
-
-#~ msgid "Execute all jobs in the queue"
-#~ msgstr "Alle Aufträge in der Warteschlange ausführen"
-
-#~ msgctxt "Warning message"
-#~ msgid "There are no jobs in the queue."
-#~ msgstr "Es befinden sich keine Aufträge in der Warteschlange."
-
-#~ msgctxt "Message title"
-#~ msgid "No Jobs"
-#~ msgstr "Keine Aufträge"
-
-#~ msgid "Jobs"
-#~ msgstr "Aufträge"
-
-#~ msgid "Error executing item"
-#~ msgstr "Eintrag kann nicht ausführt werden"
-
-#~ msgid "Unable to filter account"
-#~ msgstr "Konto kann nicht gefiltert werden"
-
-#~ msgid "Filter Accounts"
-#~ msgstr "Konten filtern"
-
-#~ msgid "Type/Name"
-#~ msgstr "Typ/Name"
-
-#~ msgid "Frequency"
-#~ msgstr "Häufigkeit"
-
-#~ msgid "Unable to load accounts: "
-#~ msgstr "Konten können nicht geladen werden: "
-
-#~ msgid "Routing Number:"
-#~ msgstr "Bankleitzahl:"
-
-#, fuzzy
-#~| msgctxt "IBAN, SWIFT, etc."
-#~| msgid "Sort Code"
-#~ msgid "SortCode"
-#~ msgstr "Bankleitzahl"
-
-#~ msgid "Routing number"
-#~ msgstr "Bankleitzahl"
-
 #~ msgid "Insert transaction type into No. field for new transactions"
 #~ msgstr "Nummernfeld für neue Buchungen mit Buchungstyp vorbelegen"
 
@@ -27908,104 +28034,6 @@ msgstr ""
 
 #~ msgid "Remainder:"
 #~ msgstr "Erinnerung:"
-
-#~ msgid "Show splash screen"
-#~ msgstr "Startbildschirm anzeigen"
-
-#~ msgid "Show splash screen during startup"
-#~ msgstr "Startbildschirm während des Starts anzeigen"
-
-#~ msgid "MyDialog"
-#~ msgstr "Dialog"
-
-#~ msgctxt ""
-#~ "@item This comes after the hunder text if the tens unit is different from "
-#~ "0"
-#~ msgid " and "
-#~ msgstr " und "
-
-#~ msgctxt "@label The word to be printed for no fractional part as in No/00"
-#~ msgid "No"
-#~ msgstr "Nein"
-
-#~ msgid "Account Types"
-#~ msgstr "Kontentypen"
-
-#~ msgid "New ledger"
-#~ msgstr "Neues Kontenbuch"
-
-#~ msgid ""
-#~ "This dialog does not allow new tags to be created. Please pick a tag from "
-#~ "the list."
-#~ msgstr ""
-#~ "In diesem Dialog können keine neuen Stichwörter angelegt werden. Bitte "
-#~ "ein Stichwort aus der Liste auswählen."
-
-#~ msgid "Tag creation"
-#~ msgstr "Stichwörter-Erstellung"
-
-#~ msgctxt "Flag for unknown reconciliation state"
-#~ msgid "?"
-#~ msgstr "?"
-
-#~ msgid "Total Balance"
-#~ msgstr "Gesamtsaldo"
-
-#~ msgid "Cost Center"
-#~ msgstr "Kostenstelle"
-
-#~ msgid "Select year"
-#~ msgstr "Jahr auswählen"
-
-#~ msgid "Budget year"
-#~ msgstr "Budget-Jahr"
-
-#~ msgid "Change budget year"
-#~ msgstr "Jahr des Budgets ändern"
-
-#~ msgid ""
-#~ "A budget with the name '%1' already exists. It is not advisable to have "
-#~ "multiple budgets with the same identification name. Are you sure you "
-#~ "would like to rename the budget?"
-#~ msgstr ""
-#~ "Es existiert bereits ein Budget mit dem Namen „%1“. Es ist nicht zu "
-#~ "empfehlen, mehrere Budgets mit dem gleichen Namen zu haben. Sind Sie "
-#~ "sicher, dass Sie das Budget umbenennen möchten?"
-
-#~ msgctxt "@title header of the budget name column"
-#~ msgid "Name"
-#~ msgstr "Name"
-
-#~ msgid "Saving accounts..."
-#~ msgstr "Konten werden gespeichert ..."
-
-#~ msgid "Saving transactions..."
-#~ msgstr "Buchungen werden gespeichert ..."
-
-#~ msgid "Saving reports..."
-#~ msgstr "Berichte werden gespeichert ..."
-
-#~ msgid "Saving budgets..."
-#~ msgstr "Budgets werden gespeichert ..."
-
-#~ msgid "Saving online banking orders..."
-#~ msgstr "Online-Bankaufträge werden gespeichert ..."
-
-#~ msgid "Saving costcenters..."
-#~ msgstr "Kostenstellen werden gespeichert ..."
-
-#~ msgid "Online statement balance: %1"
-#~ msgstr "Saldo des Onlinekontoauszugs: %1"
-
-#~ msgctxt "The balance of the selected budget"
-#~ msgid "Balance: "
-#~ msgstr "Saldo: "
-
-#~ msgid "Closed tag"
-#~ msgstr "Geschlossenes Stichwort"
-
-#~ msgid "The tag is already present."
-#~ msgstr "Das Stichwort ist bereits vorhanden."
 
 #~ msgid ""
 #~ "<center>This investment account does not contain the \"%1\" security.</"
@@ -28114,11 +28142,56 @@ msgstr ""
 #~ msgid "Statement stats"
 #~ msgstr "Kontoauszug-Details"
 
-#~ msgid "Exceptions"
-#~ msgstr "Ausnahmen"
+#~ msgid "%1 thrown in %2:%3"
+#~ msgstr "%1 geworfen in %2:%3"
+
+#~ msgid "Unable to upload to '%1'"
+#~ msgstr "Hochladen nach „%1“ nicht möglich"
+
+#~ msgid "Internal error - no matching splits"
+#~ msgstr "Interner Fehler – keine passenden Split-Buchungen gefunden"
+
+#~ msgid "Internal error - no matching transactions"
+#~ msgstr "Interner Fehler – keine passenden Buchungen gefunden"
+
+#~ msgid "Internal error - no matching schedules"
+#~ msgstr "Interner Fehler – keine passenden Planungen"
+
+#~ msgid "Do nothing"
+#~ msgstr "Datum unverändert übernehmen"
+
+#~ msgctxt "use   as line break"
+#~ msgid "Scheduled transactions"
+#~ msgstr "Geplante Buchungen"
+
+#~ msgctxt "Report settings"
+#~ msgid "Reports"
+#~ msgstr "Berichte"
+
+#~ msgctxt "Forecast settings"
+#~ msgid "Forecast"
+#~ msgstr "Vorhersage"
 
 #~ msgid "Encryption"
 #~ msgstr "Verschlüsselung"
+
+#~ msgid "First transaction does not match requirement for matching"
+#~ msgstr "Erste Buchung erfüllt die Anforderungen für eine Zuordnung nicht"
+
+#~ msgid "Splits for %1 have conflicting values (%2,%3)"
+#~ msgstr "Werte der Split-Buchungen für %1 sind im Konflikt (%2,%3)"
+
+#~ msgid "Unable to match all splits (%1)"
+#~ msgstr "Nicht alle Split-Buchungen (%1) können zugeordnet werden"
+
+#~ msgid "Save as database..."
+#~ msgstr "Speichern in Datenbank ..."
+
+#~ msgid "Saving file with a new filename..."
+#~ msgstr "Datei wird unter neuem Namen gespeichert ..."
+
+#~ msgid "Saving file to database..."
+#~ msgstr "Datei wird in Datenbank gespeichert ..."
 
 #~ msgid "Closing window..."
 #~ msgstr "Fenster wird geschlossen ..."
@@ -28126,16 +28199,164 @@ msgstr ""
 #~ msgid "Create a new transaction"
 #~ msgstr "Neue Buchung anlegen"
 
-#~ msgid "Save as database..."
-#~ msgstr "Speichern in Datenbank ..."
+#~ msgid "The statements have been processed with the following results:"
+#~ msgstr "Der Kontoauszug wurde mit folgendem Ergebnis verarbeitet:"
+
+#~ msgid "%1 in file %2 line %3"
+#~ msgstr "%1 in Datei %2, Zeile %3"
+
+#~ msgid ""
+#~ "Account %1 contains an opening balance. Please use KMyMoney version 0.8 "
+#~ "or later and earlier than version 0.9 to correct the problem."
+#~ msgstr ""
+#~ "Konto %1 enthält ein Eröffnungssaldo. Bitte nutzen Sie KMyMoney in der "
+#~ "Version ab 0.8 und vor 0.9, um das Problem zu beheben."
+
+#~ msgid "Do Nothing"
+#~ msgstr "Datum unverändert übernehmen"
+
+#~ msgid "Cannot add currency with existing id %1"
+#~ msgstr ""
+#~ "Die Währung mit der vorhandenen Kennung %1 kann nicht hinzugefügt werden"
+
+#~ msgid "Cannot modify currency with unknown id %1"
+#~ msgstr ""
+#~ "Die Währung mit der unbekannten Kennung %1 kann nicht geändert werden"
+
+#~ msgid "Cannot remove currency with unknown id %1"
+#~ msgstr ""
+#~ "Die Währung mit der unbekannten Kennung %1 kann nicht entfernt werden"
+
+#~ msgid "Cannot retrieve currency with unknown id '%1'"
+#~ msgstr "Währung mit unbekannter Kennung %1 kann nicht geholt werden"
+
+#~ msgid "Could not save one onlineJob."
+#~ msgid_plural "Could not save %1 onlineJobs."
+#~ msgstr[0] "Ein Online-Auftrag konnte nicht gespeichert werden."
+#~ msgstr[1] "%1 Online-Aufträge konnten nicht gespeichert werden."
+
+#~ msgid ""
+#~ "Unexpected exception '%1' thrown in %2, line %3 caught in "
+#~ "MyMoneyCsvWriter::write()"
+#~ msgstr ""
+#~ "Unerwartete Ausnahme „%1“ in %2, Zeile %3 geworfen, abgefangen in "
+#~ "MyMoneyCsvWriter::write()"
+
+#~ msgid "GnuCash..."
+#~ msgstr "GnuCash ..."
+
+#~ msgid ""
+#~ "You cannot import GnuCash data into an existing file. Please close it."
+#~ msgstr ""
+#~ "Sie können keine GnuCash-Daten in eine bestehende Datei importieren. "
+#~ "Bitte schließen Sie diese Datei."
+
+#~ msgid ": Sorry. This importer cannot handle version %1 of element %2"
+#~ msgstr ""
+#~ ": Diese Importfunktion kann die Version %1 des Elementes %2 nicht "
+#~ "verarbeiten"
+
+#~ msgid "This version of the importer cannot handle multi-book files."
+#~ msgstr ""
+#~ "Diese Version der Importfunktion kann keine Dateien mit mehreren "
+#~ "Kontobüchern verarbeiten."
+
+#~ msgid ""
+#~ "Input file cannot be parsed; may be corrupt\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Eingabedatei kann nicht richtig gelesen werden und könnte defekt sein\n"
+#~ "%1"
+
+#~ msgid "Invalid header for file. Should be 'gnc-v2'"
+#~ msgstr "Ungültige Kopfdaten für Datei. Sollte „gnc-v2“ sein"
+
+#~ msgid "Current importer does not recognize GnuCash account type %1"
+#~ msgstr "Die benutzte Importfunktion erkennt den GnuCash-Kontentyp %1 nicht"
+
+#~ msgid "Cannot find template transaction for schedule %1"
+#~ msgstr "Vorlage-Buchung für Planung %1 wurde nicht gefunden"
+
+#~ msgid "Internal error - invalid interval char in incrDate"
+#~ msgstr "Interner Fehler – ungültiges Intervallzeichen in incrDate"
+
+#~ msgid "Exceptions"
+#~ msgstr "Ausnahmen"
+
+#~ msgid ""
+#~ "Unexpected exception '%1' thrown in %2, line %3 caught in "
+#~ "MyMoneyQifWriter::write()"
+#~ msgstr ""
+#~ "Unerwartete Ausnahme „%1“ in %2, Zeile %3 geworfen, abgefangen in "
+#~ "MyMoneyQifWriter::write()"
+
+#~ msgid "Unable to add budget: %1, thrown in %2:%3"
+#~ msgstr "Das Budget kann nicht hinzufügt werden: %1, aufgetreten in %2:%3"
+
+#~ msgid "Unable to remove budget: %1, thrown in %2:%3"
+#~ msgstr "Das Budget kann nicht gelöscht werden: %1, aufgetreten in %2:%3"
+
+#~ msgid "Unable to modify budget: %1, thrown in %2:%3"
+#~ msgstr "Das Budget kann nicht bearbeitet werden: %1, aufgetreten in %2:%3"
+
+#~ msgid "Unable to duplicate transaction(s): %1, thrown in %2:%3"
+#~ msgstr ""
+#~ "Die Buchung(en) kann/können nicht dupliziert werden: %1, aufgetreten in "
+#~ "%2:%3"
+
+#~ msgid "Unable to accept transaction: %1, thrown in %2:%3"
+#~ msgstr "Die Buchung kann nicht akzeptiert werden: %1, aufgetreten in %2:%3"
+
+#~ msgid "Unable to modify transaction: %1, thrown in %2:%3"
+#~ msgstr "Die Buchung kann nicht bearbeitet werden: %1, aufgetreten in %2:%3"
+
+#~ msgid "Unable to delete transaction(s): %1, thrown in %2:%3"
+#~ msgstr ""
+#~ "Die Buchung(en) kann/können nicht gelöscht werden: %1, aufgetreten in %2:"
+#~ "%3"
+
+#~ msgid "No manually entered transaction selected for matching"
+#~ msgstr "Keine manuell eingetragene Buchung für die Zuordnung ausgewählt"
+
+#~ msgid "No imported transaction selected for matching"
+#~ msgstr "Keine importierte Buchung für die Zuordnung ausgewählt"
+
+#~ msgid "GPG is not available for decryption of file <b>%1</b>"
+#~ msgstr "GPG ist nicht verfügbar, um die Datei <b>%1</b> zu entschlüsseln"
+
+#~ msgid ""
+#~ "File <b>%1</b> contains the old binary format used by KMyMoney. Please "
+#~ "use an older version of KMyMoney (0.8.x) that still supports this format "
+#~ "to convert it to the new XML based format."
+#~ msgstr ""
+#~ "Die Datei <b>%1</b> enthält Daten im alten Binär-Format von KMyMoney. "
+#~ "Bitte benutzen Sie eine ältere KMyMoney-Version (0.8.x), die dieses "
+#~ "Format noch unterstützt, um es in das neue XML-basierte Format zu "
+#~ "konvertieren."
 
 #~ msgid "File <b>%1</b> contains an unknown file format."
 #~ msgstr "Datei <b>%1</b> enthält ein unbekanntes Dateiformat."
 
-#, fuzzy
-#~| msgid "Save as..."
-#~ msgid "Save as XML..."
-#~ msgstr "Speichern unter ..."
+#~ msgid "Cannot load file <b>%1</b>. Reason: %2"
+#~ msgstr "Datei <b>%1</b> kann nicht geöffnet werden. Ursache: %2"
+
+#~ msgid ""
+#~ "The following error was encountered while decrypting file <b>%1</b>: %2"
+#~ msgstr ""
+#~ "Folgender Fehler ist beim Entschlüsseln der Datei <b>%1</b> aufgetreten: "
+#~ "%2"
+
+#~ msgid "File <b>%1</b> not found."
+#~ msgstr "Datei <b>%1</b> nicht gefunden."
+
+#~ msgid "Unknown fix level in input file"
+#~ msgstr "Unbekanntes „Fix-Level“ in Eingabe-Datei"
+
+#~ msgid "Failure while writing to '%1'"
+#~ msgstr "In Datei „%1“ kann nicht geschrieben werden"
+
+#~ msgid "Malformed URL '%1'"
+#~ msgstr "Ungültige URL „%1“"
 
 #~ msgid "*.kmy *.xml|KMyMoney files (*.kmy *.xml);;*|All files (*)"
 #~ msgstr "*.kmy|KMyMoney-Dateien (*.kmy *.xml);;*|Alle Dateien (*)"
@@ -28189,221 +28410,18 @@ msgstr ""
 #~ msgid "Set preferences"
 #~ msgstr "Präferenzen setzen"
 
-#~ msgid "Saving file with a new filename..."
-#~ msgstr "Datei wird unter neuem Namen gespeichert ..."
-
-#, fuzzy
-#~| msgid "Unable to add transactions"
-#~ msgid "nable to modify transaction"
-#~ msgstr "Buchungen können nicht hinzugefügt werden"
-
-#~ msgid "%1 thrown in %2:%3"
-#~ msgstr "%1 geworfen in %2:%3"
-
-#~ msgid "Unable to upload to '%1'"
-#~ msgstr "Hochladen nach „%1“ nicht möglich"
-
-#~ msgid "Internal error - no matching splits"
-#~ msgstr "Interner Fehler – keine passenden Split-Buchungen gefunden"
-
-#~ msgid "Internal error - no matching transactions"
-#~ msgstr "Interner Fehler – keine passenden Buchungen gefunden"
-
-#~ msgid "Internal error - no matching schedules"
-#~ msgstr "Interner Fehler – keine passenden Planungen"
-
-#~ msgid "Splits for %1 have conflicting values (%2,%3)"
-#~ msgstr "Werte der Split-Buchungen für %1 sind im Konflikt (%2,%3)"
-
-#~ msgid "Unable to match all splits (%1)"
-#~ msgstr "Nicht alle Split-Buchungen (%1) können zugeordnet werden"
-
-#~ msgid "Unknown fix level in input file"
-#~ msgstr "Unbekanntes „Fix-Level“ in Eingabe-Datei"
-
-#~ msgid "GPG is not available for decryption of file <b>%1</b>"
-#~ msgstr "GPG ist nicht verfügbar, um die Datei <b>%1</b> zu entschlüsseln"
-
-#~ msgid ""
-#~ "File <b>%1</b> contains the old binary format used by KMyMoney. Please "
-#~ "use an older version of KMyMoney (0.8.x) that still supports this format "
-#~ "to convert it to the new XML based format."
-#~ msgstr ""
-#~ "Die Datei <b>%1</b> enthält Daten im alten Binär-Format von KMyMoney. "
-#~ "Bitte benutzen Sie eine ältere KMyMoney-Version (0.8.x), die dieses "
-#~ "Format noch unterstützt, um es in das neue XML-basierte Format zu "
-#~ "konvertieren."
-
-#~ msgid "Malformed URL '%1'"
-#~ msgstr "Ungültige URL „%1“"
-
-#~ msgid "Failure while writing to '%1'"
-#~ msgstr "In Datei „%1“ kann nicht geschrieben werden"
-
-#~ msgid "%1 in file %2 line %3"
-#~ msgstr "%1 in Datei %2, Zeile %3"
-
-#~ msgid ""
-#~ "Account %1 contains an opening balance. Please use KMyMoney version 0.8 "
-#~ "or later and earlier than version 0.9 to correct the problem."
-#~ msgstr ""
-#~ "Konto %1 enthält ein Eröffnungssaldo. Bitte nutzen Sie KMyMoney in der "
-#~ "Version ab 0.8 und vor 0.9, um das Problem zu beheben."
-
-#~ msgid "Cannot add currency with existing id %1"
-#~ msgstr ""
-#~ "Die Währung mit der vorhandenen Kennung %1 kann nicht hinzugefügt werden"
-
-#~ msgid "Cannot modify currency with unknown id %1"
-#~ msgstr ""
-#~ "Die Währung mit der unbekannten Kennung %1 kann nicht geändert werden"
-
-#~ msgid "Cannot remove currency with unknown id %1"
-#~ msgstr ""
-#~ "Die Währung mit der unbekannten Kennung %1 kann nicht entfernt werden"
-
-#~ msgid "Cannot retrieve currency with unknown id '%1'"
-#~ msgstr "Währung mit unbekannter Kennung %1 kann nicht geholt werden"
-
-#~ msgid ""
-#~ "Unexpected exception '%1' thrown in %2, line %3 caught in "
-#~ "MyMoneyCsvWriter::write()"
-#~ msgstr ""
-#~ "Unerwartete Ausnahme „%1“ in %2, Zeile %3 geworfen, abgefangen in "
-#~ "MyMoneyCsvWriter::write()"
-
-#~ msgid ": Sorry. This importer cannot handle version %1 of element %2"
-#~ msgstr ""
-#~ ": Diese Importfunktion kann die Version %1 des Elementes %2 nicht "
-#~ "verarbeiten"
-
-#~ msgid "This version of the importer cannot handle multi-book files."
-#~ msgstr ""
-#~ "Diese Version der Importfunktion kann keine Dateien mit mehreren "
-#~ "Kontobüchern verarbeiten."
-
-#~ msgid ""
-#~ "Input file cannot be parsed; may be corrupt\n"
-#~ "%1"
-#~ msgstr ""
-#~ "Eingabedatei kann nicht richtig gelesen werden und könnte defekt sein\n"
-#~ "%1"
-
-#~ msgid "Invalid header for file. Should be 'gnc-v2'"
-#~ msgstr "Ungültige Kopfdaten für Datei. Sollte „gnc-v2“ sein"
-
-#~ msgid "Current importer does not recognize GnuCash account type %1"
-#~ msgstr "Die benutzte Importfunktion erkennt den GnuCash-Kontentyp %1 nicht"
-
-#~ msgid "Cannot find template transaction for schedule %1"
-#~ msgstr "Vorlage-Buchung für Planung %1 wurde nicht gefunden"
-
-#~ msgid "Internal error - invalid interval char in incrDate"
-#~ msgstr "Interner Fehler – ungültiges Intervallzeichen in incrDate"
-
-#~ msgid ""
-#~ "Unexpected exception '%1' thrown in %2, line %3 caught in "
-#~ "MyMoneyQifWriter::write()"
-#~ msgstr ""
-#~ "Unerwartete Ausnahme „%1“ in %2, Zeile %3 geworfen, abgefangen in "
-#~ "MyMoneyQifWriter::write()"
-
-#~ msgid "Could not save one onlineJob."
-#~ msgid_plural "Could not save %1 onlineJobs."
-#~ msgstr[0] "Ein Online-Auftrag konnte nicht gespeichert werden."
-#~ msgstr[1] "%1 Online-Aufträge konnten nicht gespeichert werden."
-
-#~ msgid "Unable to add budget: %1, thrown in %2:%3"
-#~ msgstr "Das Budget kann nicht hinzufügt werden: %1, aufgetreten in %2:%3"
-
-#~ msgid "Unable to remove budget: %1, thrown in %2:%3"
-#~ msgstr "Das Budget kann nicht gelöscht werden: %1, aufgetreten in %2:%3"
-
-#~ msgid "Unable to modify budget: %1, thrown in %2:%3"
-#~ msgstr "Das Budget kann nicht bearbeitet werden: %1, aufgetreten in %2:%3"
-
-#~ msgid "Unable to duplicate transaction(s): %1, thrown in %2:%3"
-#~ msgstr ""
-#~ "Die Buchung(en) kann/können nicht dupliziert werden: %1, aufgetreten in "
-#~ "%2:%3"
-
-#~ msgid "Unable to accept transaction: %1, thrown in %2:%3"
-#~ msgstr "Die Buchung kann nicht akzeptiert werden: %1, aufgetreten in %2:%3"
-
-#~ msgid "Unable to modify transaction: %1, thrown in %2:%3"
-#~ msgstr "Die Buchung kann nicht bearbeitet werden: %1, aufgetreten in %2:%3"
-
-#~ msgid "Unable to delete transaction(s): %1, thrown in %2:%3"
-#~ msgstr ""
-#~ "Die Buchung(en) kann/können nicht gelöscht werden: %1, aufgetreten in %2:"
-#~ "%3"
-
-#~ msgid "No manually entered transaction selected for matching"
-#~ msgstr "Keine manuell eingetragene Buchung für die Zuordnung ausgewählt"
-
-#~ msgid "No imported transaction selected for matching"
-#~ msgstr "Keine importierte Buchung für die Zuordnung ausgewählt"
-
-#~ msgid "Do nothing"
-#~ msgstr "Datum unverändert übernehmen"
-
-#~ msgid "Do Nothing"
-#~ msgstr "Datum unverändert übernehmen"
-
-#~ msgid "Scheduled transactions"
-#~ msgstr "Geplante Buchungen"
-
-#~ msgctxt "Report settings"
-#~ msgid "Reports"
-#~ msgstr "Berichte"
-
-#~ msgid "The statements have been processed with the following results:"
-#~ msgstr "Der Kontoauszug wurde mit folgendem Ergebnis verarbeitet:"
-
 #~ msgid ""
 #~ "Another instance of KMyMoney is already running. Do you want to quit?"
 #~ msgstr ""
 #~ "Eine andere Instanz von KMyMoney läuft bereits. Möchten Sie hier "
 #~ "abbrechen?"
 
-#~ msgid "GnuCash..."
-#~ msgstr "GnuCash ..."
-
-#, fuzzy
-#~| msgid ""
-#~| "You cannot import GnuCash data into an existing file. Do you wish to "
-#~| "save this file?"
-#~ msgid ""
-#~ "You cannot import GnuCash data into an existing file. Please close it."
-#~ msgstr ""
-#~ "Sie können keine GnuCash-Daten in eine bestehende Datei importieren. "
-#~ "Möchten Sie diese Datei speichern?"
-
-#~ msgid "Cannot load file <b>%1</b>. Reason: %2"
-#~ msgstr "Datei <b>%1</b> kann nicht geöffnet werden. Ursache: %2"
-
-#~ msgid ""
-#~ "The following error was encountered while decrypting file <b>%1</b>: %2"
-#~ msgstr ""
-#~ "Folgender Fehler ist beim Entschlüsseln der Datei <b>%1</b> aufgetreten: "
-#~ "%2"
-
-#~ msgid "File <b>%1</b> not found."
-#~ msgstr "Datei <b>%1</b> nicht gefunden."
-
 #~ msgctxt "Same transaction if amount differs less than percent."
 #~ msgid "percent."
 #~ msgstr "Prozent."
 
-#~ msgid "Scheduled transactions"
-#~ msgstr "Geplante Buchungen"
-
 #~ msgid "User identification"
 #~ msgstr "Benutzererkennung"
-
-#~ msgctxt "Forecast settings"
-#~ msgid "Forecast"
-#~ msgstr "Vorhersage"
 
 #~ msgid "Additional encryption keys to be used: %1"
 #~ msgstr "Zusätzlich zu benutzende Schlüssel für die Verschlüsselung: %1"
@@ -28413,9 +28431,6 @@ msgstr ""
 
 #~ msgid "Manage additional keys"
 #~ msgstr "Zusätzliche Schlüssel einrichten"
-
-#~ msgid "Saving file to database..."
-#~ msgstr "Datei wird in Datenbank gespeichert ..."
 
 #~ msgid "Added support for online SEPA transactions"
 #~ msgstr "Unterstützung für Online-SEPA-Buchungen hinzugefügt"
@@ -32059,11 +32074,6 @@ msgstr ""
 
 #~ msgid "Finish! Data is consistent."
 #~ msgstr "Beendet! Daten sind konsistent."
-
-#~ msgid ""
-#~ "_: Finish reconciliation\n"
-#~ "Finish"
-#~ msgstr "Fertigstellen"
 
 #~ msgid ""
 #~ "_: New transaction button\n"

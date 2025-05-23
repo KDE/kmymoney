@@ -35,7 +35,7 @@
 <para
 >Resultaten visas under fliken <quote
 >Resultat</quote
-> efter sökningen är färdig. Under resultatlistan visar &kmymoney; antal transaktioner som uppfyllde sökkriterierna. Ett dubbelklick på en enskild transaktion i resultatlistan tar fram lämplig huvudbok och visar transaktionen. </para>
+> efter sökningen är färdig. Under resultatlistan visar &kmymoney; antal transaktioner som uppfyllde sökkriterierna. Ett dubbelklick på en enskild transaktion i resultatlistan tar fram lämplig liggare och visar transaktionen. </para>
 
 <para
 >När knappen <guibutton
@@ -125,10 +125,10 @@
 > om alternativet är markerat. </para>
 
 <para
->Om du markerar rutan <guilabel
->Behandla text som reguljärt uttryck</guilabel
->, behandlas texten som ett reguljärt uttryck. För detaljinformation om hur man skapar ett reguljärt uttryck, titta i &Qt;:s dokumentation om klassen <ulink url="https://doc.qt.io/qt-5/qregularexpression.html"
->QRegularExpression</ulink
+>If you check the <guilabel
+>Treat Text as regular expression</guilabel
+> box, the text will be treated as a regular expression. For details on how to craft a regular expression, visit the &Qt; documentation about the <ulink url="https://doc.qt.io/qt-5/qregularexpression.html"
+>QRegularExpression class</ulink
 >. </para>
 </sect2>
 
@@ -371,7 +371,7 @@
 > visar datum, konton, detaljinformation, avstämningsstatus, utbetalningar och insättningar för varje transaktion som uppfyller sökkriterierna du har skrivit in. Att högerklicka på rubrikraden i resultatlistan låter dig ändra resultatens sorteringsordning. </para>
 
 <para
->Att dubbelklicka på en transaktion visar motsvarande kontohuvudbok och fokuserar på den valda transaktionen. </para>
+>Att dubbelklicka på en transaktion visar motsvarande kontoliggare och fokuserar på den valda transaktionen. </para>
 
 </sect1>
 

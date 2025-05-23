@@ -7,182 +7,120 @@
     <author
 >&Michael.Carpino; &Michael.Carpino.mail;</author>
     <author
->&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
   </authorgroup>
   <date
->1/12/2024</date>
+>8/8/2022</date>
   <releaseinfo
->5.2.0</releaseinfo>
+>5.1.3</releaseinfo>
 </chapterinfo>
+
 <title
 >Valute</title>
 
 <para
->&kmymoney; supporta l'uso di più valute in conti diversi. Ad esempio, puoi impostare un conto di risparmio in euro, un conto corrente in sterline britanniche e avere comunque il tuo conto di carta di credito in dollari USA. </para>
+>&kmymoney; supporta l'uso di valute diverse in conti diversi. Ad esempio, è possibile impostare un conto bancario in euro, uno in sterline inglesi e continuare ad avere il conto della carta di credito in dollari statunitensi. </para>
 
-<sect1 id="details.currencies.basecurrency"
-><title
+<sect1 id="details.currencies.basecurrency">
+<title
 >Valuta di base</title>
+
 <para
->Durante la <link linkend="firsttime.newfile"
+>Durante la <link linkend="firsttime.3"
 >configurazione iniziale di un nuovo file</link
-> di &kmymoney;, si riceverà la richiesta di selezionare la valuta di base. Di solito, la valuta di base è la valuta utilizzata nel proprio paese. La valuta di base è quella che sarà utilizzata come predefinita per tutte le categorie di entrata e uscita e su cui si baseranno i report. Quando si configura un nuovo conto, &kmymoney; imposterà automaticamente come predefinita la valuta di base. Se il proprio conto richiede l'utilizzo di una valuta diversa, è possibile cambiarla durante la <link linkend="details.accounts.create"
+> di &kmymoney;, si riceverà la richiesta di selezionare la valuta di base. Di solito, la valuta di base è la valuta utilizzata nel proprio paese. La valuta di base è quella che sarà utilizzata come predefinita per tutti i nuovi conti e categorie e su cui si baseranno i report. Quando si configura un nuovo conto o una nuova categoria, &kmymoney; imposterà automaticamente come predefinita la valuta di base. Se il proprio conto richiede l'utilizzo di una valuta diversa, è possibile cambiarla durante la <link linkend="details.accounts.create"
 >configurazione del nuovo conto</link
 >. </para>
 
+<para>
+	<screenshot>
+	<screeninfo
+>La finestra di selezione della valuta</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="select_currency.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Selezione della valuta</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect2 id="details.currencies.newcurrency">
+<title
+>Aggiungere una nuova valuta</title>
+
 <para
->&kmymoney; viene rilasciato con un elenco di tutte le valute note al momento, ed è l'elenco da cui hai scelto la valuta predefinita quando hai creato il tuo file di dati. La finestra <guilabel
->Valute</guilabel
-> è dove gestisci l'elenco delle valute utilizzate nel tuo file di dati. Per visualizzare questa finestra, seleziona la voce di menu <menuchoice
+>Nonostante non accada spesso, a volte si introduce una nuova valuta. Può essere una nuova moneta virtuale, come il Bitcoin o un cambio introdotto da uno Stato per ragioni di politica finanziaria. Anche se queste monete saranno aggiunte alla nuova versione di &kmymoney;, è possibile aggiungerle manualmente, nel caso in cui fosse necessario utilizzarle subito. </para>
+
+<para
+>Per aggiungere manualmente una valuta, selezionare la voce di menu <menuchoice
 ><guimenu
 >Strumenti</guimenu
 ><guimenuitem
 >Valute...</guimenuitem
 ></menuchoice
->. </para>
-
-<sect2 id="details.currencies.addcurrency"
-><title
->Aggiungere una valuta al tuo file di dati</title>
-<screenshot>
-  <screeninfo
->finestra delle valute</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="currency_dialog1.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->finestra delle valute</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
-
-<para
->Per un file di dati appena creato, la finestra Valute mostrerà solo la valuta che hai scelto come valuta predefinita. Se vuoi usare una valuta diversa per un nuovo conto, devi prima aggiungere quella valuta. Facendo clic su <guibutton
->Aggiungi</guibutton
->, ti sarà presentato lo stesso elenco di valute da cui hai scelto la valuta predefinita. Puoi scorrere l'elenco o usare la casella di ricerca in alto per trovare la valuta che desideri usare. Fai clic su quella valuta e poi su <guibutton
->OK</guibutton
->. La finestra Valute includerà quindi quella valuta nell'elenco visualizzato e ora puoi selezionarla quando crei un nuovo conto. </para>
-</sect2>
-
-<sect2 id="details.currencies.newcurrency"
-><title
->Aggiungere una nuova valuta</title>
-<screenshot>
-  <screeninfo
->aggiungere una nuova valuta</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="select_currency.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->aggiungere una nuova valuta</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
-
-<para
->Nonostante non accada spesso, a volte si introduce una nuova valuta. Può essere una nuova moneta virtuale, come il Bitcoin o un cambio introdotto da uno Stato per ragioni di politica finanziaria. Anche se queste valute saranno aggiunte alla nuova versione di &kmymoney;, è possibile aggiungerle manualmente al proprio file di dati, nel caso in cui fosse necessario utilizzarle subito. </para>
-
-<para
->Per aggiungere manualmente una valuta, apri la finestra Valute, come mostrato sopra. Fai clic con il pulsante destro del mouse su una valuta esistente e seleziona <guimenuitem
+> per visualizzare la finestra <guilabel
+>Valute</guilabel
+>, come mostrato sopra. Fare clic sul pulsante <guibutton
+>+ Aggiungi</guibutton
+> o con il tasto destro su una delle valute esistenti e selezionare <menuchoice
+><guimenuitem
 >Nuova valuta</guimenuitem
-> dal menu contestuale <guimenu
+></menuchoice
+> dal menu contestuale <menuchoice
+><guimenu
 >Opzioni valuta</guimenu
->, oppure fai clic su <guibutton
->Nuovo</guibutton
->. Questo aprirà l'<guilabel
->Editor delle valute</guilabel
->. </para>
-
-<screenshot>
-  <screeninfo
->editor delle valute</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="currency_editor.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->editor delle valute</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
-
-<para
->L'editor di valuta presenta alcune somiglianze con la finestra per la modifica dei dettagli degli strumenti finanziari </para>
-
-<itemizedlist>
-  <listitem>
-    <para
->Codice ISO: il <ulink url="https://www.iso.org/iso-4217-currency-codes.html"
->codice alfa ufficiale</ulink
-> per la valuta. ISO ha anche specificato un codice numerico, ma questo non è utilizzato in &kmymoney;. </para>
-  </listitem>
-
-  <listitem>
-    <para
->Nome: il nome completo della valuta. </para>
-  </listitem>
-
-  <listitem>
-    <para
->Simbolo: il simbolo grafico che rappresenta la valuta, come $ per il dollaro statunitense (USD) o € per l'euro (EUR). In alcuni casi, il simbolo può essere specificato solo in un insieme di caratteri particolare che include il glifo appropriato. </para>
-  </listitem>
-
-  <listitem>
-    <para
->Unità di conto più piccola: la più piccola unità ufficialmente supportata della valuta. </para>
-  </listitem>
-
-  <listitem>
-    <para
->Unità di contante più piccola: la più piccola unità per la quale esiste effettivamente una banconota o una moneta. </para>
-  </listitem>
-
-  <listitem>
-    <para
->Metodo di arrotondamento: questo menu a tendina fornisce un elenco di possibili regole per arrotondare gli importi calcolati con maggiore precisione rispetto a quella consentita dalla più piccola unità di conto. </para>
-  </listitem>
-  
-  <listitem>
-    <para
->Precisione del prezzo: il numero di cifre o cifre decimali da utilizzare per la registrazione dei valori nella valuta. </para>
-  </listitem>
-</itemizedlist>
-
-<para
->Inserisci le informazioni e fai clic su <guilabel
+></menuchoice
+>. Ciò farà apparire una finestra in cui è possibile inserire il codice ISO, il nome e altri dettagli sulla valuta. Quando si è pronti, fare clic su <guilabel
 >OK</guilabel
->; la valuta sarà creata. </para>
+>. La valuta sarà creata con il nome specificato. Per modificare il nome o altri dettagli successivamente, fare clic sul pulsante <guibutton
+>Modifica</guibutton
+>. È possibile anche modificare il nome premendo <keycap
+>F2</keycap
+> o fare clic con il tasto destro del mouse e selezionare <guimenuitem
+>Rinomina valuta</guimenuitem
+>. </para>
 </sect2>
 </sect1>
 
-<sect1 id="details.currencies.transactions"
-><title
->Inserimento di transazioni in altre valute</title>
+<sect1 id="details.currencies.accountsetup">
+<title
+>Configurazione del conto</title>
+
 <para
->Ogni volta che viene inserita una transazione che si riferisce a più di una valuta, l'editor del tasso di cambio si apre e consente di immettere un tasso di cambio. Inizialmente, il prezzo più recente disponibile dalla banca dati dei prezzi sarà utilizzato come tasso di cambio. Vedere <link linkend="details.currencies.prices"
->Immissione dei tassi di cambio per le valute</link
-> per maggiori informazioni su come fornire manualmente i tassi di cambio e ottenere informazioni sui prezzi in linea. </para>
+>Quando si crea un nuovo conto, si specifica la valuta in cui sarà gestito. La procedura guidata Nuovo conto imposta automaticamente questa impostazione su <link linkend="details.currencies.basecurrency"
+>valuta di base</link
+>. Se è richiesta una valuta diversa, è necessario selezionarla durante questa configurazione iniziale. Il registro per il conto mostrerà quindi tutti i valori nella valuta selezionata. Non è possibile modificare la valuta di un conto una volta creato. </para>
+</sect1>
+
+<sect1 id="details.currencies.transactions">
+<title
+>Inserimento di transazioni in altre valute</title>
+
+<para
+>Ogni volta che viene inserita una transazione che si riferisce a più di una valuta, che include l'utilizzo di una valuta diversa dalla valuta predefinita del conto, l'editor del tasso di cambio viene visualizzato e consente di utilizzare un tasso di cambio da utilizzare per tale transazione. Inizialmente, il prezzo attuale disponibile dalla banca dati dei prezzi sarà utilizzato come tasso di cambio. Vedere <link linkend="details.currencies.prices"
+>Inserimento di tassi di cambio per le valute</link
+> per avere ulteriori informazioni su come fornire i tassi di cambio manualmente e ottenere informazioni sui prezzi da Internet. </para>
 
 <para
 >È possibile salvare il tasso di cambio nella banca dati dei prezzi una volta che è stato inserito. </para>
 </sect1>
 
-<sect1 id="details.currencies.prices"
-><title
+<sect1 id="details.currencies.prices">
+<title
 >Tassi di cambio per le valute</title>
 
-<sect2
-><title
+<sect2>
+<title
 >Inserimento manuale dei prezzi</title>
+
 <para
 >L'<guilabel
 >editor dei prezzi</guilabel
->, chiamato anche editor della banca dati dei prezzi, consente di inserire o modificare i tassi di cambio tra le valute o i prezzi per gli investimenti. Lo si può richiamare dalla voce di menu in <menuchoice
+> consente di inserire i tassi di cambio tra le valute o i prezzi per gli investimenti. Lo si può richiamare dalla voce di menu in <menuchoice
 ><guimenu
 >Strumenti</guimenu
 ><guimenuitem
@@ -190,86 +128,60 @@
 ></menuchoice
 >. </para>
 
-<screenshot>
-  <screeninfo
->editor di prezzi degli strumenti finanziari e delle valute</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="currency_priceeditor.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->editor dei prezzi degli strumenti finanziari e delle valute</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="currency_priceeditor.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Editor dei prezzi delle valute</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
 
 <para
->La prima colonna nella finestra è etichettata come <guilabel
->Merce</guilabel
->, che mostra sia i simboli di negoziazione dei titoli che i simboli delle valute. In &kmymoney;, un <quote
+>In &kmymoney; un <quote
 >prezzo</quote
-> è il prezzo di un titolo in termini di una valuta, o di una valuta in termini di una seconda valuta. Ad esempio, mentre scrivo, il prezzo di 1 USD in termini di 1 EUR è 0,94; ovvero, 1 USD costa 0,94 EUR. La prima valuta è quella che viene acquistata o venduta, e la seconda è la valuta utilizzata per acquistarla o venderla. </para>
+> è il costo di una valuta in termini di una seconda valuta. Ad esempio, al momento della scrittura di questa documentazione, il prezzo di 1 USD in termini di 1 EUR è 0.83; cioè un dollaro costa 0.83 euro. La prima valuta è quella comprata o venduta, la seconda è quella usata per comprarla o venderla. </para>
 
 <para
->Per immettere manualmente un nuovo tasso di cambio, premere il pulsante <guibutton
+>Quando si preme il pulsante <guibutton
 >Nuovo</guibutton
-> e si aprirà la finestra Inserimento nuovo prezzo. </para>
+>, si apre la finestra <guilabel
+>Nuovo prezzo</guilabel
+>. Inserire la prima valuta (USD nell'esempio sopra) nel campo Strumento finanziario. Inserire la seconda valuta (EUR nell'esempio sopra) nel campo Valuta. Inserire la data effettiva del prezzo nel campo Data. </para>
 
-<screenshot>
-  <screeninfo
->nuova voce di prezzo</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="currency_newpriceentry.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->nuova voce di prezzo</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
-
-<para
->Inserire la prima valuta (USD nell'esempio sopra) nel campo Strumento finanziario. Inserire la seconda valuta nel campo Valuta (EUR nell'esempio sopra). Inserire la data effettiva del prezzo nel campo Data. </para>
-
-<para
->Premi il pulsante <guilabel
->OK</guilabel
-> e vedrai la finestra <guilabel
->Editor del tasso di cambio/prezzo</guilabel
->. </para>
-
-<screenshot>
-  <screeninfo
->editor del tasso di cambio/prezzo</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="exchange_rate_editor.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->editor del tasso di cambio/prezzo</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
-
-<para
->Puoi specificare un prezzo in due modi. Puoi inserire l'<guilabel
->All'importo</guilabel
-> o il prezzo totale della prima valuta in termini della seconda, oppure puoi inserire il tasso di cambio effettivo. In questo caso, poiché stai inserendo il numero di EUR per 1 USD, quei due valori sono gli stessi. Tuttavia, questa è la stessa finestra utilizzata per inserire un tasso di cambio quando inserisci una transazione che coinvolge due valute. In quel caso, generalmente inserirai l'importo e lascerai che &kmymoney; calcoli il tasso di cambio, occupandosi di qualsiasi arrotondamento. </para>
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="currency_newpriceentry.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Nuovo prezzo</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
 </sect2>
 
-<sect2
-><title
+<sect2>
+<title
 >Aggiornamenti in linea sui prezzi</title>
+
 <para
->&kmymoney; può recuperare i tassi di cambio delle valute dal web. Una volta che hai inserito un unico prezzo per una coppia di valute, la funzione di quotazione in linea elencherà sempre quella coppia tra le sue opzioni. </para>
+>&kmymoney; può recuperare le conversioni di valuta dal web. Una volta che hai inserito un unico prezzo per una coppia di valute, la funzione di quotazione in linea elencherà sempre quella coppia tra le sue opzioni. </para>
 
 <para
 >Vedere la sezione sulle <link linkend="details.investments.onlinequotes"
 >Quotazioni in linea dei prezzi</link
-> nel capitolo Investimenti per maggiori informazioni. </para>
+> nel capitolo <guilabel
+>Investimenti</guilabel
+> per maggiori informazioni. </para>
 </sect2>
 </sect1>
 </chapter>

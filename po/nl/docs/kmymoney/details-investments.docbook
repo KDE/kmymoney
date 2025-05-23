@@ -45,7 +45,7 @@
 >Elk waardepapier heeft een basis valuta. Dit is de valuta waarin het wordt verhandeld. Wanneer een koerswaarde wordt ingevoerd voor een investering, is de valuta van de waarde altijd gegeven in zijn basis valuta. Een aandeel aan de NYSE (New York Stock Exchange) zou in US dollars (USD) moeten zijn en een op een Australische markt zou in Australische dollars (AUD) moeten zijn. De basis valuta voor een waardepapier hoeft niet hetzelfde te zijn als de standaard valuta van de investeringsrekening met dat waardepapier. </para>
 </sect2>
 
-<sect2>
+<sect2 id="details.investments.accounts">
 <title
 >Investeringsrekening</title>
 <para
@@ -159,7 +159,7 @@
 ><para
 >Fractie. Dit geeft aan de graad van precisie waarnaar uw bezittingen worden gemeten. In de VS meten de meeste beleggingsfondsen bezittingen tot in drie decimalen, dus zou u 1000 in dit veld moeten invoeren. Aandelen worden vaak gemeten tot alleen gehele eenheden, dus zou u 1 voor een aandeel zoals deze kunnen invoeren. U zou dezelfde decimale plaatsen moeten gebruiken die uw makelaar gebruikt om uw waardepapieren aan te geven zodat de hoeveelheid in de transacties overeenkomen in &kmymoney;. Extra precisie gebruiken zal geen probleem veroorzaken, maar te weinig precisie kan afrondingsfouten geven waardoor &kmymoney; niet in staat is om exact de informatie overeen te laten komen getoond door uw makelaarsorganisatie. </para
 ></listitem>
-
+  
   <listitem
 ><para
 >Handelsmarkt. Waar het aandeel wordt verhandeld. Dit is een optioneel veld dat voor het gemak geboden wordt. Deze informatie wordt elders in &kmymoney; niet gebruikt. </para
@@ -217,7 +217,7 @@
   <para
 >Deze sectie is net op tijd toegevoegd voor de uitgave van versie 5.0.8. De auteur vond het belangrijk om minstens de basis informatie nu mee te nemen, omdat dit onderwerp enige tijd een bron van moeilijkheden is geweest. De discussie zal uitgebreid worden en schermafdrukken van de nieuwe beveiligingsassistent zal zo spoedig mogelijk worden toegevoegd. </para>
 </note>
-
+      
 <para
 >Het is mogelijk om aandelen te hebben van hetzelfde waardepapier in verschillende investeringsrekeningen, zoals een reguliere investeringsrekening en ook een pensioenrekening. Als u bovenstaande instructies volgt, zal dat waardepapier in beide accounts verschijnen, maar &kmymoney; zal in werkelijkheid ze behandelen alsof elk van de waardepapieren tot een verschillend onderliggend eigen vermogen behoort. Dit resulteert in dubbele opslag, zoals het hebben van twee kopieën van de gehele prijsgeschiedenis van het eigen vermogen. U zou daarom de voorkeur kunnen hebben om beide waardepapieren te laten verwijzen naar hetzelfde onderliggende eigen vermogen. </para>
 
@@ -617,8 +617,8 @@
 > kunnen zijn. </para>
 
 <para
->De ontleder van de pagina zoekt naar een symbool, een datum en een prijs. Reguliere expressies vertellen hoe deze items uit de pagina te halen. Bekijk de documentatie voor de <ulink url="https://www.qt.io/doc/qt-5/qregularexpression.html"
->QRegularExpression klasse</ulink
+>De ontleder van de pagina zoekt naar een symbool, een datum en een prijs. Reguliere expressies vertellen hoe deze items uit de pagina te halen. Bekijk de documentatie voor de <ulink url="https://www.qt.io/doc/qt-5/qregexp.html"
+>QRegExp klasse</ulink
 > voor de exacte syntaxis, gebruikt door &kmymoney;, van de reguliere expressies. Er zou exact één vangstexpressie moeten zijn, omgeven door haakjes, in elke regexp. Het datumformaat vertelt aan de datumontleder de volgorde van jaar, maand en dag. Dit datumformaat zou altijd in de vorm van "%x %x %x" moeten zijn, waar x is j, m of d. De datumontleder is erg slim. <quote
 >%m %d %y</quote
 > zal ontleed worden in <quote

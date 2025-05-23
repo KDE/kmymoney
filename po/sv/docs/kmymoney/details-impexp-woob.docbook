@@ -12,25 +12,25 @@
         <para
 ><ulink url="https://woob.tech/"
 >Woob</ulink
-> är <quote
->en samling program som kan interagera med webbplatser utan att kräva att användaren öppnar dem i en webbläsare</quote
->. Ett av <ulink url="https://woob.tech/applications/"
->dessa program</ulink
-> möjliggör specifikt att interagera med <ulink url="https://woob.tech/applications/bank"
->finansinstitut</ulink
->. &kmymoney; tillhandahåller ett insticksprogram som direkt utnyttjar det, och därför gör det möjligt att importera transaktioner från de konton som annars inte erbjuder stöd för något annat finansprotokoll som &kmymoney; hanterar. </para>
+> is <quote
+>a collection of applications able to interact with websites, without requiring the user to open them in a browser</quote
+>. One of <ulink url="https://woob.tech/applications/"
+>such applications</ulink
+> allows specifically to interact with <ulink url="https://woob.tech/applications/bank"
+>financial institutions</ulink
+>. &kmymoney; provides a plugin that employs it directly, therefore allowing to import transactions from those accounts which otherwise do not offer support for any other financial protocol that &kmymoney; handles. </para>
 
         <note>
             <para
->&kmymoney; kräver för närvarande att du installerar Woob oberoende. Se följande avsnitt för detaljerad information. </para>
+>&kmymoney; currently requires that you install Woob independently. Refer to the further sections for details. </para>
         </note>
     </sect2>
     <sect2>
         <title
 >Installera Woob</title>
         <para
->Du måste först installera Python 3 innan du fortsätter. Du kan ladda ner ett paket för ditt system från den <ulink url="https://www.python.org/downloads/"
->officiella webbplatsen</ulink
+>You need to install Python 3 first before continuing. You can download a package for your system from the <ulink url="https://www.python.org/downloads/"
+>official website</ulink
 >. </para>
 
         <para

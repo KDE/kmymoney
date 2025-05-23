@@ -8,144 +8,119 @@
 >&Michael.Carpino; &Michael.Carpino.mail;</author>
   </authorgroup>
   <date
->1/12/2024</date>
+>6/2/2020</date>
   <releaseinfo
->5.2.0</releaseinfo>
+>5.0.8</releaseinfo>
 </chapterinfo>
+
 <title
 >Etichette</title>
 
 <para
->Le etichette forniscono un modo aggiuntivo per raggruppare e categorizzare le transazioni. Sono spesso utili per <link linkend="details.search"
->cercare le transazioni</link
-> e per <link linkend="details.reports.avail"
->creare report</link
->. </para>
-
-<sect1 id="details.tags.view"
-><title
->Vista delle etichette</title>
-<screenshot>
-  <screeninfo
->vista delle etichette scheda delle transazioni</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="tags.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->vista delle etichette scheda delle transazioni</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
-
-<para
->La vista delle etichette fornisce informazioni dettagliate su tutte le etichette aggiunte ai file di dati. Tale schermata è divisa in due aree. </para>
-
-<sect2 id="details.tags.list"
-><title
->Elenco delle etichette</title>
-<para
->Sulla sinistra c'è un elenco di etichette, con pulsanti per aggiungere, rinominare o eliminare un'etichetta. </para>
-
-<para
->Sulla destra puoi vedere informazioni più dettagliate sull'etichetta selezionata nell'elenco sulla sinistra, in una delle due schede: Transazioni e Dettagli. La scheda <guilabel
+>La vista delle etichette fornisce informazioni su tutte le etichette che sono state aggiunte dall'utente. La schermata Etichetta è suddivisa in due aree principali: un elenco di etichette e un'area di dettaglio, che ha due schede: Transazioni e Dettagli. La scheda <guilabel
 >Transazioni</guilabel
-> mostra tutte le transazioni associate all'etichetta. La scheda <guilabel
+> visualizza tutte le transazioni associate all'etichetta. La scheda <guilabel
 >Dettagli</guilabel
-> include un colore selezionabile dall'utente, così come Note, che non sono utilizzate altrove. Nota che se cambi il colore, che è utilizzato nel simbolo visualizzato prima del nome dell'etichetta in qualsiasi transazione associata, devi fare clic su <guibutton
->Aggiorna</guibutton
-> in basso a destra dell'area Dettagli per salvarlo. </para>
-</sect2>
-  
-<sect2
-><title
+> include un colore definito dall'utente, nonché le note, che non vengono utilizzate altrove. Notare che se si cambia il colore, che viene utilizzato nel simbolo visualizzato prima del nome dell'etichetta in qualsiasi transazione associata, è necessario fare clic sul pulsante di controllo in basso a destra nell'area Dettagli per salvarlo. </para>
+
+<sect1 id="details.tags.list">
+<title
+>Elenco delle etichette</title>
+
+<para
+>Un elenco di tutte le etichette, ordinate alfabeticamente, viene visualizzato sul lato sinistro di questa schermata. <screenshot
+> <mediaobject
+> <imageobject>
+  <imagedata fileref="tags.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+  </screenshot>
+</para>
+
+<sect2>
+<title
 >Aggiungere un'etichetta</title>
 <para
->Come per la maggior parte delle azioni in &kmymoney;, ci sono diversi modi per creare una nuova etichetta. Innanzitutto, puoi fare clic sull'icona <guiicon
+>La creazione di un etichetta può avvenire in tre modi diversi. Primo, è possibile fare clic sull'icona di nuova etichetta <guiicon
 ><inlinemediaobject
 ><imageobject
-><imagedata fileref="tag-new.svg" format="SVG"/></imageobject
+><imagedata fileref="list-add.png"/></imageobject
 ></inlinemediaobject
 ></guiicon
-> Nuova etichetta. In secondo luogo, puoi fare clic con il pulsante destro del mouse su un'etichetta e scegliere <guimenuitem
->Nuova etichetta..</guimenuitem
->. In questo modo viene creata una nuova etichetta denominata <quote
->Nuova etichetta.</quote
-> Consulta la sezione successiva per sapere come rinominare l'etichetta. Infine, puoi aggiungere una nuova etichetta direttamente nel registro o in una transazione divisa digitando il nome dell'etichetta nel campo relativo. &kmymoney; ti chiederà se vuoi aggiungere questa etichetta e, dopo aver selezionato <quote
+>. Secondo, è possibile fare clic con il tasto destro del mouse su una qualsiasi etichetta e scegliere <guimenuitem
+>Nuova etichetta</guimenuitem
+>. Ciò creerà una nuova etichetta chiamata <quote
+>Nuova etichetta</quote
+>. Fare clic con il tasto destro su questa etichetta e selezionare <guimenuitem
+>Rinomina etichetta</guimenuitem
+> per digitare il nome della nuova etichetta. Infine, è possibile aggiungere una nuova etichetta direttamente nella pagina del registro o all'interno di una transazione divisa digitando il nome dell'etichetta nel campo relativo. &kmymoney; chiederà se si desidera aggiungere questa etichetta e dopo aver selezionato <quote
 >sì</quote
 >, sarà aggiunta. </para>
 </sect2>
 
-<sect2
-><title
+<sect2>
+<title
 >Rinominare un'etichetta</title>
 <para
->Per rinominare un'etichetta, fai clic sul nome dell'etichetta per selezionarla e poi fai clic su <guiicon
-> <inlinemediaobject
-> <imageobject
-> <imagedata fileref="tag-edit.svg" format="SVG"/></imageobject
-> </inlinemediaobject
-> </guiicon
-> Rinomina etichetta, oppure fai clic con il pulsante destro del mouse sul nome e poi seleziona <guimenuitem
+>Per rinominare un'etichetta, fare clic sul nome dell'etichetta per selezionarla e fare clic su <guiicon
+>Rinomina etichetta</guiicon
+> (tra le icone Aggiungi e Rimuovi) o fare clic con il tasto destro del mouse sul nome e selezionare <guimenuitem
 >Rinomina etichetta</guimenuitem
->. Il nome diventa quindi modificabile. La modifica del nome avrà effetto sul nome in tutte le transazioni in cui appare. </para>
+>. Il nome sarà quindi modificabile. La modifica cambierà il nome in tutte le transazioni nelle quali appare. </para>
 </sect2>
 
-<sect2
-><title
+<sect2>
+<title
 >Eliminare un'etichetta</title>
 <para
->Per eliminare un'etichetta, selezionala e fai clic su <guiicon
-> <inlinemediaobject
-> <imageobject
-> <imagedata fileref="tag-delete.svg" format="SVG"/></imageobject
-> </inlinemediaobject
-> </guiicon
-> Elimina etichetta oppure fai clic con il pulsante destro del mouse sul nome dell'etichetta e seleziona <guimenuitem
+>Per rimuovere un'etichetta, fare clic sull'icona di eliminazione delle etichette <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="list-remove.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> o fare clic con il tasto destro del mouse sul nome e selezionare <guimenuitem
 >Elimina etichetta</guimenuitem
->. Se l'etichetta ha delle transazioni, ti sarà presentata una finestra che ti consentirà di riassegnarle a un'etichetta diversa. </para>
+>. Se l'etichetta ha delle transazioni, comparirà una finestra che consente di riassegnarle a un'etichetta diversa. </para>
 
 <note>
 <para
->Le etichette sono state introdotte nella versione 4.7 di &kmymoney;, ma non tutti i metodi di importazione dei dati possono importare le etichette. Comprendiamo che questa è una funzionalità importante, ed è probabile che venga aggiunta ai metodi di importazione nelle prossime versioni. </para>
+>Poiché le etichette sono state introdotte in &kmymoney; nella versione 4.7, nessuno dei metodi di importazione dei dati può importare le etichette. Comprendiamo che questa è una funzionalità importante, ed è probabile che ogni metodo di importazione la introdurrà nelle prossime versioni. </para>
 </note>
 </sect2>
 </sect1>
 
-<sect1 id="details.tags.info"
-><title
+<sect1 id="details.tags.info">
+<title
 >Transazioni etichettate e dettagli dell'etichetta</title>
 <para
->Per visualizzare le transazioni o visualizzare e modificare le informazioni associate con un'etichetta particolare, selezionare l'etichetta dall'elenco e selezionare la scheda appropriata sul lato destro della finestra. </para>
-
-<screenshot>
+>Per visualizzare le transazioni o visualizzare e modificare le informazioni associate con un'etichetta particolare, selezionare l'etichetta dall'elenco e selezionare la scheda appropriata sul lato destro della finestra. <screenshot>
   <screeninfo
->vista delle etichette scheda dei dettagli</screeninfo>
+>La scheda dei dettagli dell'etichetta</screeninfo>
   <mediaobject>
-    <imageobject>
-      <imagedata fileref="tag_details.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->vista delle etichette scheda dei dettagli</phrase>
-    </textobject>
+  <imageobject>
+  <imagedata fileref="tag_details.png" format="PNG"/>
+  </imageobject>
+  <textobject>
+  <phrase
+>Dettagli dell'etichetta</phrase>
+  </textobject>
   </mediaobject>
 </screenshot>
+</para>
 
-<sect2 id="details.tags.info.transactions"
-><title
+<sect2 id="details.tags.info.transactions">
+<title
 >Transazioni etichettate</title>
 <para
->Per vedere un elenco delle transazioni associate all'etichetta selezionata, seleziona la scheda <guilabel
+>Per vedere un elenco delle transazioni associate all'etichetta selezionata, selezionare la scheda <guilabel
 >Transazioni</guilabel
->. Questo elenco è simile all'elenco delle transazioni per un beneficiario. Puoi fare doppio clic su una transazione per modificarla, oppure puoi fare clic con il pulsante destro del mouse sulla transazione e selezionare <guimenuitem
->Vai a 'Nome conto'</guimenuitem
-> per andare alla vista dei registri di quella transazione nel conto in cui la transazione è stata etichettata. </para>
+>. Questo elenco è simile all'elenco di transazioni per un beneficiario. Si può fare clic su una transazione, per essere condotti alla vista di registro per quella transazione per il conto in cui la transazione è stata etichettata. </para>
 </sect2>
 
-<sect2 id="details.tags.info.details"
-><title
+
+<sect2 id="details.tags.info.details">
+<title
 >Dettagli dell'etichetta</title>
 <para
 >Per visualizzare e modificare le informazioni associate a un'etichetta particolare, selezionare la scheda <guilabel
@@ -154,7 +129,7 @@
   <itemizedlist>
     <listitem>
       <para
->Puoi selezionare il colore utilizzato per evidenziare le transazioni con le quali questa etichetta è stata associata. Facendo clic sulla barra del colore, si aprirà la finestra del selettore del colore. </para>
+>Puoi selezionare il colore utilizzato per evidenziare le transazioni con le quali questa etichetta è stata assegnata. Facendo clic sulla barra del colore, si aprirà la finestra del selettore del colore. </para>
     </listitem>
     <listitem>
       <para
@@ -168,9 +143,9 @@
     </listitem>
   </itemizedlist>
 <para
->Una volta completata, non dimenticare di fare clic su <guiicon
+>Una volta completata, non dimenticare di fare clic sul pulsante <guiicon
 >Aggiorna</guiicon
->, in basso a destra della finestra, anche se riceverai una richiesta se provi a chiudere la finestra senza averlo fatto. </para>
+>, nell'angolo in basso a destra della finestra, anche se si riceverà una richiesta di chiudere la finestra senza averlo fatto. </para>
 </sect2>
 </sect1>
 </chapter>

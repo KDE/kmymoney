@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-18 02:01+0000\n"
+"POT-Creation-Date: 2025-05-23 03:30+0000\n"
 "PO-Revision-Date: 2009-09-18 17:20+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <kedidiemas@yahoogroups.com>\n"
@@ -274,10 +274,9 @@ msgstr "Cipta"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
 #, fuzzy, kde-format
-#| msgid "Category"
 msgctxt "Create undo action"
 msgid "Create category"
-msgstr "Kategori"
+msgstr "Kadar faedah"
 
 #: kmymoney/dialogs/editpersonaldatadlg.cpp:174
 #: kmymoney/wizards/newuserwizard/kgeneralpage.cpp:78
@@ -1521,10 +1520,10 @@ msgid "[No identifier]"
 msgstr "Maklumat"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:500
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info online update price info"
 msgid "No security selected."
-msgstr "Seting warna"
+msgstr ""
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:510
 #, fuzzy, kde-format
@@ -2456,9 +2455,9 @@ msgstr "Tindakan"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:889
-#, fuzzy, kde-format
+#, kde-format
 msgid "Never create"
-msgstr "Fail Baru-baru Ini"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_preferredStatementDate)
@@ -2470,10 +2469,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:899
-#, fuzzy, kde-format
-#| msgid "Category"
+#, kde-format
 msgid "Create automatically"
-msgstr "Kategori"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_budgetGroupBox)
 #. i18n: ectx: Menu (budget_context_menu)
@@ -2679,7 +2677,7 @@ msgstr ""
 #: kmymoney/dialogs/ksaveasquestion.ui:20
 #, fuzzy, kde-format
 msgid "Save storage as..."
-msgstr "Simpan Sebagai"
+msgstr "Purata"
 
 #. i18n: ectx: property (toolTip), widget (QDialog, KSaveAsQuestion)
 #: kmymoney/dialogs/ksaveasquestion.ui:23
@@ -3219,9 +3217,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:457
-#, fuzzy, kde-format
+#, kde-format
 msgid "Hide accounts with a zero balance from Accounts"
-msgstr "akaun"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:464
@@ -4978,19 +4976,19 @@ msgid "Delete tag"
 msgstr "Padam"
 
 #: kmymoney/kmymoney.cpp:1500
-#, fuzzy, kde-format
+#, kde-format
 msgid "Open report"
-msgstr "Templat"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1501
 #, fuzzy, kde-format
 msgid "New report"
-msgstr "Templat"
+msgstr "Laporan"
 
 #: kmymoney/kmymoney.cpp:1502
 #, fuzzy, kde-format
 msgid "Copy report"
-msgstr "Templat"
+msgstr "Salin"
 
 #: kmymoney/kmymoney.cpp:1503
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:215
@@ -5001,7 +4999,7 @@ msgstr "Tetapkan"
 #: kmymoney/kmymoney.cpp:1504
 #, fuzzy, kde-format
 msgid "Export report"
-msgstr "Templat"
+msgstr "Import"
 
 #: kmymoney/kmymoney.cpp:1505
 #, fuzzy, kde-format
@@ -5011,7 +5009,7 @@ msgstr "Padam"
 #: kmymoney/kmymoney.cpp:1506
 #, fuzzy, kde-format
 msgid "Close report"
-msgstr "Templat"
+msgstr "Tutup"
 
 #: kmymoney/kmymoney.cpp:1507
 #, kde-format
@@ -5019,9 +5017,9 @@ msgid "Toggle chart"
 msgstr ""
 
 #: kmymoney/kmymoney.cpp:1508
-#, fuzzy, kde-format
+#, kde-format
 msgid "Edit tab order"
-msgstr "Cipta"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1511
 #, kde-format
@@ -5057,22 +5055,22 @@ msgid "Start reconciling the currently selected account"
 msgstr ""
 
 #: kmymoney/kmymoney.cpp:1661
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Postpone the current reconciliation"
-msgstr "Fail Baru-baru Ini"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1662
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Finish the current reconciliation"
-msgstr "Fail Baru-baru Ini"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1663
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Cancel the current reconciliation"
-msgstr "Fail Baru-baru Ini"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1771
 #, kde-format
@@ -6112,7 +6110,7 @@ msgstr "Buat duplikasi"
 #, fuzzy, kde-format
 msgctxt "@title:column Shows number of create payees"
 msgid "Payees created"
-msgstr "Fail Baru-baru Ini"
+msgstr "Maklumat"
 
 #: kmymoney/models/statementmodel.cpp:117
 #: kmymoney/mymoney/storage/accountsmodel.cpp:503
@@ -14292,10 +14290,10 @@ msgid "Budget based on forecast"
 msgstr ""
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:460
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@item:inmenu To make it income"
 msgid "Change to income"
-msgstr "Pilih tahun"
+msgstr ""
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:465
 #, kde-format
@@ -15962,9 +15960,9 @@ msgid "&Export to PDF files"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:816
-#, fuzzy, kde-format
+#, kde-format
 msgid "Export into directory"
-msgstr "Templat"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KReportsView)
 #: kmymoney/plugins/views/reports/kreportsview.ui:14
@@ -17861,15 +17859,15 @@ msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:244
-#, fuzzy, kde-format
+#, kde-format
 msgid "Hide zero balance accounts from Accounts"
-msgstr "akaun"
+msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:248
-#, fuzzy, kde-format
+#, kde-format
 msgid "Hide zero balance accounts from Home"
-msgstr "akaun"
+msgstr ""
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:252
@@ -17915,9 +17913,9 @@ msgstr ""
 
 #. i18n: ectx: label, entry (ShowReconciliationMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:284
-#, kde-format
+#, fuzzy, kde-format
 msgid "Show reconciliation entries with date and balance"
-msgstr ""
+msgstr "Fail Baru-baru Ini"
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:293
@@ -18310,10 +18308,10 @@ msgid "Enter category for fees"
 msgstr "Kadar faedah"
 
 #: kmymoney/views/investtransactioneditor.cpp:672
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
-msgstr "Kadar faedah"
+msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:678
 #, fuzzy, kde-format
@@ -18359,7 +18357,7 @@ msgstr ""
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "The posting date of the transaction."
-msgstr "Jadual"
+msgstr "Pilih tahun"
 
 #. i18n: ectx: property (toolTip), widget (KMyMoneyAccountCombo, feesCombo)
 #: kmymoney/views/investtransactioneditor.ui:126
@@ -18585,11 +18583,10 @@ msgid "This account is still mapped to an online account"
 msgstr ""
 
 #: kmymoney/views/kcategoriesview.cpp:153
-#, fuzzy, kde-format
-#| msgid "Account"
+#, kde-format
 msgctxt "Approximate loss"
 msgid "Loss: ~%1"
-msgstr "Akaun"
+msgstr ""
 
 #: kmymoney/views/kcategoriesview.cpp:154
 #, fuzzy, kde-format
@@ -18598,11 +18595,10 @@ msgid "Loss: %1"
 msgstr "Akaun"
 
 #: kmymoney/views/kcategoriesview.cpp:157
-#, fuzzy, kde-format
-#| msgid "Account"
+#, kde-format
 msgctxt "Approximate profit"
 msgid "Profit: ~%1"
-msgstr "Akaun"
+msgstr ""
 
 #: kmymoney/views/kcategoriesview.cpp:158
 #, fuzzy, kde-format
@@ -18989,7 +18985,7 @@ msgstr "Jadual"
 #, fuzzy, kde-format
 msgctxt "@title Home page sub-section"
 msgid "Overdue payments"
-msgstr "Jadual"
+msgstr "Bayaran"
 
 #: kmymoney/views/khomeview_p.h:721
 #, fuzzy, kde-format
@@ -19064,7 +19060,7 @@ msgstr ""
 #, fuzzy, kde-format
 msgctxt "@title Home page section"
 msgid "Favorite Reports"
-msgstr "Seting Fon"
+msgstr "Laporan"
 
 #: kmymoney/views/khomeview_p.h:1159
 #, fuzzy, kde-format
@@ -19583,9 +19579,9 @@ msgstr "Maklumat"
 
 #. i18n: ectx: property (text), widget (QLabel, urlTemplateLabel)
 #: kmymoney/views/kpayeesview.ui:533
-#, kde-format
+#, fuzzy, kde-format
 msgid "Url template"
-msgstr ""
+msgstr "Templat"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_3)
 #: kmymoney/views/kpayeesview.ui:548
@@ -19832,10 +19828,10 @@ msgid "Criteria"
 msgstr "Kriteria"
 
 #: kmymoney/views/ksearchtransactiondlg.cpp:64
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info:tooltip for find transaction apply button"
 msgid "Search transactions"
-msgstr ""
+msgstr "Pilih tahun"
 
 #: kmymoney/views/ksearchtransactiondlg.cpp:110
 #, kde-format
@@ -20075,19 +20071,19 @@ msgstr ""
 #, fuzzy, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
-msgstr "Jadual"
+msgstr "Pilih tahun"
 
 #: kmymoney/views/ledgerview.cpp:964
 #, fuzzy, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
-msgstr "Jadual"
+msgstr "Pilih tahun"
 
 #: kmymoney/views/ledgerview.cpp:967
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
-msgstr "Pilih tahun"
+msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:968
 #, fuzzy, kde-format
@@ -20112,10 +20108,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:994
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
-msgstr "Pilih tahun"
+msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:995
 #, fuzzy, kde-format
@@ -20335,7 +20331,7 @@ msgstr "Pilih tahun"
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the amount of the transaction."
-msgstr "Jadual"
+msgstr "Kadar faedah"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, costCenterCombo)
 #: kmymoney/views/newtransactioneditor.ui:194
@@ -20349,7 +20345,7 @@ msgstr ""
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the category or counter account of the transaction."
-msgstr "Jadual"
+msgstr "Pilih tahun"
 
 #: kmymoney/views/newtransactionform.cpp:129
 #, kde-format
@@ -21941,7 +21937,7 @@ msgstr ""
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:265
 #, fuzzy, kde-format
 msgid "Favorite account"
-msgstr "Cipta"
+msgstr "Akaun"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel14)
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:27
@@ -22944,7 +22940,7 @@ msgstr ""
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:14
 #, fuzzy, kde-format
 msgid "Security details"
-msgstr "Pilihan"
+msgstr "Keselamatan"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:23
@@ -23107,7 +23103,7 @@ msgstr ""
 #, fuzzy, kde-format
 msgctxt "@info:tab Security edit wizard detail page"
 msgid "Security details"
-msgstr "Pilihan"
+msgstr "Keselamatan"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:250
 #, kde-format
@@ -24374,9 +24370,9 @@ msgid ""
 msgstr ""
 
 #: tools/kmmreport-export.cpp:116
-#, fuzzy, kde-format
+#, kde-format
 msgid "Export KMyMoney reports"
-msgstr "Templat"
+msgstr ""
 
 #: tools/kmmreport-export.cpp:120
 #, kde-format
@@ -24389,9 +24385,9 @@ msgid "Export in HTML format"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:126
-#, fuzzy, kde-format
+#, kde-format
 msgid "Export in xml format"
-msgstr "Templat"
+msgstr ""
 
 #: tools/kmmreport-export.cpp:129
 #, kde-format
@@ -24445,33 +24441,13 @@ msgstr ""
 #~ msgstr[1] "Buat duplikasi"
 
 #, fuzzy
-#~ msgid "Select category or account."
-#~ msgstr "Pilih bulan"
+#~ msgctxt "The process x is executing"
+#~ msgid "Executing %1..."
+#~ msgstr "Lekapkan %1"
 
-#, fuzzy
-#~ msgid "Stock Name"
-#~ msgstr "Nama Hos"
-
-#, fuzzy
-#~ msgctxt "Price source"
-#~ msgid "Source"
-#~ msgstr "Sumber"
-
-#, fuzzy
-#~ msgid "Upd"
-#~ msgstr "Naik"
-
-#, fuzzy
-#~ msgid "Res"
-#~ msgstr "Set semula"
-
-#, fuzzy
-#~ msgid "Close this window"
-#~ msgstr "Tutup tetingkap ini"
-
-#, fuzzy
-#~ msgid "Select Account:"
-#~ msgstr "Akaun:"
+#~ msgctxt "Total value"
+#~ msgid "Total"
+#~ msgstr "Jumlah"
 
 #, fuzzy
 #~ msgctxt "Equity name"
@@ -24479,13 +24455,39 @@ msgstr ""
 #~ msgstr "Nama"
 
 #, fuzzy
-#~ msgctxt "Online quote source"
+#~ msgid "Price Already Exists"
+#~ msgstr "Fail telah wujud"
+
+#, fuzzy
+#~ msgctxt "@info:tooltip for find transaction Open button"
+#~ msgid "Search transactions"
+#~ msgstr "Pilih tahun"
+
+#, fuzzy
+#~ msgctxt "Price source"
 #~ msgid "Source"
 #~ msgstr "Sumber"
 
 #, fuzzy
-#~ msgid "Price Already Exists"
-#~ msgstr "Fail telah wujud"
+#~ msgid "Delete..."
+#~ msgstr "Hapuskan..."
+
+#, fuzzy
+#~ msgid "Enter split"
+#~ msgstr "Masuk"
+
+#, fuzzy
+#~| msgid "Account"
+#~ msgid "Routing Number:"
+#~ msgstr "Akaun"
+
+#, fuzzy
+#~ msgid "Clear &All"
+#~ msgstr "Kosongkan &Semua"
+
+#, fuzzy
+#~ msgid "Tag creation"
+#~ msgstr "Tempoh"
 
 #, fuzzy
 #~ msgctxt "@item:inlistbox Stock"
@@ -24503,86 +24505,167 @@ msgstr ""
 #~ msgstr "Nama"
 
 #, fuzzy
-#~ msgctxt "@title:window"
 #~ msgid "Delete quote source"
 #~ msgstr "Hapuskan..."
 
 #, fuzzy
-#~ msgctxt "The process x is executing"
-#~ msgid "Executing %1..."
+#~ msgctxt "New transaction button"
+#~ msgid "New"
+#~ msgstr "Baru"
+
+#, fuzzy
+#~ msgctxt "Unknown reconciliation state"
+#~ msgid "Unknown"
+#~ msgstr "Tidak diketahui"
+
+#, fuzzy
+#~ msgctxt "Flag for unknown reconciliation state"
+#~ msgid "?"
+#~ msgstr "?"
+
+#, fuzzy
+#~ msgctxt "Column heading for category in tax report"
+#~ msgid "Tax"
+#~ msgstr "Cukai"
+
+#, fuzzy
+#~ msgctxt "Column heading for Cost Center"
+#~ msgid "CC"
+#~ msgstr "C"
+
+#, fuzzy
+#~ msgctxt "Payment made from account"
+#~ msgid "Payment"
+#~ msgstr "Bayaran"
+
+#, fuzzy
+#~ msgid "Cost Center"
 #~ msgstr "Lekapkan %1"
 
 #, fuzzy
-#~ msgid "Unable to update price for %1"
-#~ msgstr "Gagal buka fail '%1' untuk tulis"
+#~ msgctxt "@label The word to be printed for no fractional part as in No/00"
+#~ msgid "No"
+#~ msgstr "Tidak"
 
 #, fuzzy
-#~ msgid "Unable to update price for %1 (error encountered: '%2')"
-#~ msgstr "Gagal buka fail '%1' untuk tulis"
-
-#, fuzzy
-#~ msgctxt "Split header"
-#~ msgid "Tag"
-#~ msgstr "Cukai"
+#~ msgid "Check template file"
+#~ msgstr "Tutup tetingkap ini"
 
 #, fuzzy
 #~ msgid "Invalid account"
 #~ msgstr "Akaun"
 
 #, fuzzy
-#~ msgctxt "@title:menu budget context menu"
-#~ msgid "Budget options"
-#~ msgstr "Pilihan"
+#~ msgid "CSV exporter"
+#~ msgstr "Import"
+
+#, fuzzy
+#~ msgid "CSV importer"
+#~ msgstr "Import"
+
+#, fuzzy
+#~ msgid "GnuCash importer"
+#~ msgstr "Import"
 
 #, fuzzy
 #~ msgid "KMyMoney print check"
 #~ msgstr "KMyMoney"
 
 #, fuzzy
-#~ msgctxt "Payer"
-#~ msgid "From"
-#~ msgstr "Daripada"
+#~ msgid "Dequeue"
+#~ msgstr "Padam"
 
 #, fuzzy
-#~ msgctxt "@title:column"
-#~ msgid "CC"
-#~ msgstr "C"
+#~ msgid "OFX Importer"
+#~ msgstr "Import"
 
 #, fuzzy
-#~ msgid "Loading cost center..."
-#~ msgstr "Menyimpan fail..."
+#~ msgid "QIF importer"
+#~ msgstr "Import"
 
 #, fuzzy
-#~ msgctxt "Enter todays date into date input widget"
-#~ msgid "T"
-#~ msgstr "T"
+#~ msgid "Budgets view"
+#~ msgstr "Pilihan"
 
 #, fuzzy
-#~ msgctxt "@info:tooltip Accept button"
-#~ msgid "Accept the transaction and mark it cleared."
-#~ msgstr "Pilih tahun"
+#~ msgctxt "New budget"
+#~ msgid "New"
+#~ msgstr "Baru"
 
 #, fuzzy
-#~ msgctxt "Question about the accept action"
-#~ msgid "Do you want to accept the imported transaction now?"
-#~ msgstr "Pilih tahun"
+#~ msgctxt "@title header of the budget name column"
+#~ msgid "Name"
+#~ msgstr "Nama"
 
 #, fuzzy
-#~ msgctxt "@title:window"
-#~ msgid "Accept transaction"
-#~ msgstr "Pilih tahun"
+#~ msgid "Upd"
+#~ msgstr "Naik"
+
+#, fuzzy
+#~ msgid "Res"
+#~ msgstr "Set semula"
+
+#, fuzzy
+#~ msgid "Forecast view"
+#~ msgstr "Seting Fon"
 
 #, fuzzy
 #~ msgid "Copy"
 #~ msgstr "Salin"
 
 #, fuzzy
+#~ msgid "Close this window"
+#~ msgstr "Tutup tetingkap ini"
+
+#, fuzzy
+#~ msgid "Loading cost center..."
+#~ msgstr "Menyimpan fail..."
+
+#, fuzzy
+#~ msgid "Saving costcenters..."
+#~ msgstr "Menyimpan fail..."
+
+#, fuzzy
+#~ msgid "Reconcile"
+#~ msgstr "Fail Baru-baru Ini"
+
+#, fuzzy
+#~ msgid "End transaction edit"
+#~ msgstr "Pilih tahun"
+
+#, fuzzy
+#~ msgctxt "Name for unknown payee"
+#~ msgid "Unknown"
+#~ msgstr "Tidak diketahui"
+
+#, fuzzy
+#~ msgid "Payee: %1"
+#~ msgstr "Jenis:"
+
+#, fuzzy
 #~ msgid "Last Reconciled"
 #~ msgstr "Fail Baru-baru Ini"
 
 #, fuzzy
-#~ msgid "* General changes"
-#~ msgstr "Seting Umum"
+#~ msgid "Select Account:"
+#~ msgstr "Akaun:"
+
+#, fuzzy
+#~ msgid "New ledger"
+#~ msgstr "Petunjuk"
+
+#, fuzzy
+#~ msgctxt "New payee"
+#~ msgid "New"
+#~ msgstr "Baru"
+
+#, fuzzy
+#~ msgid "Type/Name"
+#~ msgstr "Jenis"
+
+#, fuzzy
+#~ msgid "Frequency"
+#~ msgstr "Frekuensi"
 
 #, fuzzy
 #~ msgid "* Im-/Exporter"
@@ -24605,23 +24688,16 @@ msgstr ""
 #~ msgstr "Akaun"
 
 #, fuzzy
-#~ msgctxt ""
-#~ msgid "Closed"
-#~ msgstr "Tutup"
+#~ msgid "Online statement balance: %1"
+#~ msgstr "Imbangan:"
 
 #, fuzzy
-#~ msgctxt "Payment made from account"
-#~ msgid "Payment"
-#~ msgstr "Bayaran"
+#~ msgid "Credit"
+#~ msgstr "Lekapkan %1"
 
 #, fuzzy
-#~ msgctxt "OnlineJob"
-#~ msgid "Name"
-#~ msgstr "Nama"
-
-#, fuzzy
-#~ msgid "Delete..."
-#~ msgstr "Hapuskan..."
+#~ msgid "Debit"
+#~ msgstr "Perincian"
 
 #, fuzzy
 #~ msgctxt "Reconcile state 'Cleared'"
@@ -24633,27 +24709,33 @@ msgstr ""
 #~ msgid "Unknown"
 #~ msgstr "Tidak diketahui"
 
-#~ msgctxt "Total value"
-#~ msgid "Total"
-#~ msgstr "Jumlah"
-
 #, fuzzy
 #~| msgid "Account"
 #~ msgid "Fee Amount"
 #~ msgstr "Akaun"
 
 #, fuzzy
-#~ msgctxt "To duplicate a split"
-#~ msgid "Duplicate"
-#~ msgstr "Buat duplikasi"
+#~ msgid "Account Types"
+#~ msgstr "Akaun"
 
 #, fuzzy
-#~ msgid "Enter split"
-#~ msgstr "Masuk"
+#~ msgctxt "The balance of the selected budget"
+#~ msgid "Balance: "
+#~ msgstr "Imbangan:"
 
 #, fuzzy
-#~ msgid "Clear &All"
-#~ msgstr "Kosongkan &Semua"
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "Daripada"
+
+#, fuzzy
+#~ msgctxt "Enter todays date into date input widget"
+#~ msgid "T"
+#~ msgstr "T"
+
+#, fuzzy
+#~ msgid "Reconciled Balance: %1"
+#~ msgstr "Imbangan:"
 
 #, fuzzy
 #~ msgctxt "Unknown payee"
@@ -24671,144 +24753,13 @@ msgstr ""
 #~ msgstr "Tidak diketahui"
 
 #, fuzzy
-#~ msgctxt "Unknown reconciliation state"
-#~ msgid "Unknown"
-#~ msgstr "Tidak diketahui"
-
-#, fuzzy
-#~ msgid "Reconcile"
-#~ msgstr "Fail Baru-baru Ini"
-
-#, fuzzy
-#~ msgctxt "Button text for match transaction"
-#~ msgid "Match"
-#~ msgstr "Padan"
-
-#, fuzzy
-#~ msgid "End transaction edit"
-#~ msgstr "Pilih tahun"
-
-#, fuzzy
-#~ msgid "Date: %1"
-#~ msgstr "Tarikh:"
-
-#, fuzzy
-#~ msgctxt "Name for unknown payee"
-#~ msgid "Unknown"
-#~ msgstr "Tidak diketahui"
-
-#, fuzzy
-#~ msgid "Payee: %1"
-#~ msgstr "Jenis:"
-
-#, fuzzy
 #~| msgid "Account"
-#~ msgid "Memo: %1"
+#~ msgid "Routing number"
 #~ msgstr "Akaun"
-
-#, fuzzy
-#~ msgctxt "Cleared balance"
-#~ msgid "Cleared: %1"
-#~ msgstr "Dikosongkan"
-
-#, fuzzy
-#~ msgid "Unable to delete transaction(s)"
-#~ msgstr "Pilih tahun"
-
-#, fuzzy
-#~ msgid "Old ledgers"
-#~ msgstr "Petunjuk"
-
-#, fuzzy
-#~ msgctxt "Column heading for category in tax report"
-#~ msgid "Tax"
-#~ msgstr "Cukai"
-
-#, fuzzy
-#~ msgctxt "Column heading for Cost Center"
-#~ msgid "CC"
-#~ msgstr "C"
-
-#, fuzzy
-#~ msgctxt ""
-#~ "Column heading for Bank Code. Use a generic form, do not translate using "
-#~ "a culture-specific term, e.g. 'Routing Number' (en_US) or 'Sort "
-#~ "Code' (en_GB)"
-#~ msgid "Bank Code"
-#~ msgstr "Dokumen Kosong"
-
-#, fuzzy
-#~ msgctxt ""
-#~ "Tooltip for 'Name' column. Used in Account, Category and Institution "
-#~ "context, so avoid being too specific"
-#~ msgid "Full name"
-#~ msgstr "MIMOS"
-
-#, fuzzy
-#~ msgctxt ""
-#~ "Toolip for a 'Type' column, used in both Account and Category context"
-#~ msgid "Type"
-#~ msgstr "Jenis"
 
 #, fuzzy
 #~ msgid "Do not show closed accounts"
 #~ msgstr "akaun"
-
-#, fuzzy
-#~ msgctxt "@action:button Update button in tags vew"
-#~ msgid "Update"
-#~ msgstr "Kemaskini"
-
-#, fuzzy
-#~ msgctxt "@title:menu Bugdet context menu"
-#~ msgid "Budget options"
-#~ msgstr "Pilihan"
-
-#, fuzzy
-#~ msgctxt "New transaction button"
-#~ msgid "New"
-#~ msgstr "Baru"
-
-#, fuzzy
-#~ msgid "Check template file"
-#~ msgstr "Tutup tetingkap ini"
-
-#, fuzzy
-#~ msgid "Budgets view"
-#~ msgstr "Laporan"
-
-#, fuzzy
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Budgets view"
-#~ msgstr "Laporan"
-
-#, fuzzy
-#~ msgid "CSV exporter"
-#~ msgstr "Import"
-
-#, fuzzy
-#~ msgid "CSV importer"
-#~ msgstr "Import"
-
-#, fuzzy
-#~ msgid "GnuCash importer"
-#~ msgstr "Import"
-
-#, fuzzy
-#~ msgid "OFX Importer"
-#~ msgstr "Import"
-
-#, fuzzy
-#~ msgid "QIF importer"
-#~ msgstr "Import"
-
-#, fuzzy
-#~ msgid "Debit"
-#~ msgstr "Perincian"
-
-#, fuzzy
-#~ msgid "Credit"
-#~ msgstr "Lekapkan %1"
 
 #, fuzzy
 #~ msgid "Clear selected memo column entries"
@@ -24826,84 +24777,8 @@ msgstr ""
 #~ msgstr "Akaun"
 
 #, fuzzy
-#~ msgctxt "New budget"
-#~ msgid "New"
-#~ msgstr "Baru"
-
-#, fuzzy
-#~ msgctxt "New payee"
-#~ msgid "New"
-#~ msgstr "Baru"
-
-#, fuzzy
-#~ msgid "Dequeue"
-#~ msgstr "Padam"
-
-#, fuzzy
-#~ msgid "Type/Name"
-#~ msgstr "Jenis"
-
-#, fuzzy
-#~ msgid "Frequency"
-#~ msgstr "Frekuensi"
-
-#, fuzzy
-#~| msgid "Account"
-#~ msgid "Routing Number:"
-#~ msgstr "Akaun"
-
-#, fuzzy
-#~| msgid "Account"
-#~ msgid "Routing number"
-#~ msgstr "Akaun"
-
-#, fuzzy
 #~ msgid "Name:"
 #~ msgstr "Nama:"
-
-#, fuzzy
-#~ msgctxt "@label The word to be printed for no fractional part as in No/00"
-#~ msgid "No"
-#~ msgstr "Tidak"
-
-#, fuzzy
-#~ msgid "Account Types"
-#~ msgstr "Akaun"
-
-#, fuzzy
-#~ msgid "Tag creation"
-#~ msgstr "Tempoh"
-
-#, fuzzy
-#~ msgctxt "Flag for unknown reconciliation state"
-#~ msgid "?"
-#~ msgstr "?"
-
-#, fuzzy
-#~ msgid "Cost Center"
-#~ msgstr "Lekapkan %1"
-
-#, fuzzy
-#~ msgctxt "@title header of the budget name column"
-#~ msgid "Name"
-#~ msgstr "Nama"
-
-#, fuzzy
-#~ msgid "Saving costcenters..."
-#~ msgstr "Menyimpan fail..."
-
-#, fuzzy
-#~ msgid "Online statement balance: %1"
-#~ msgstr "Imbangan:"
-
-#, fuzzy
-#~ msgctxt "The balance of the selected budget"
-#~ msgid "Balance: "
-#~ msgstr "Imbangan:"
-
-#, fuzzy
-#~ msgid "Closed tag"
-#~ msgstr "Tutup"
 
 #, fuzzy
 #~ msgctxt "@item the number 0"
@@ -24970,8 +24845,13 @@ msgstr ""
 #~ msgstr "Akaun"
 
 #, fuzzy
-#~ msgid "Exceptions"
-#~ msgstr "Pilihan"
+#~ msgid "Do nothing"
+#~ msgstr "Tidak buat apa-apa"
+
+#, fuzzy
+#~ msgctxt "Report settings"
+#~ msgid "Reports"
+#~ msgstr "Laporan"
 
 #, fuzzy
 #~ msgid "Encryption"
@@ -24982,21 +24862,12 @@ msgstr ""
 #~ msgstr "Menyimpan fail dengan namafail baru..."
 
 #, fuzzy
-#~ msgid "nable to modify transaction"
-#~ msgstr "Pilih tahun"
-
-#, fuzzy
-#~ msgid "Do nothing"
-#~ msgstr "Tidak buat apa-apa"
-
-#, fuzzy
 #~ msgid "Do Nothing"
 #~ msgstr "Jangan Buat Apa-apa"
 
 #, fuzzy
-#~ msgctxt "Report settings"
-#~ msgid "Reports"
-#~ msgstr "Laporan"
+#~ msgid "Exceptions"
+#~ msgstr "Pilihan"
 
 #, fuzzy
 #~ msgid "Improved the transaction form"
@@ -25515,6 +25386,11 @@ msgstr ""
 #~ msgctxt "abbreviation for 'year', 'month', 'day'"
 #~ msgid "Date format"
 #~ msgstr "Format Tarikh"
+
+#, fuzzy
+#~ msgctxt "verb to save QIF file"
+#~ msgid "Save as QIF"
+#~ msgstr "Simpan Sebagai"
 
 #, fuzzy
 #~ msgctxt "Verb, to exit or to close"

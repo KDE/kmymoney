@@ -426,6 +426,29 @@
 ><shortcut
 > <keycombo
 >&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Beeld</guimenu
+><guimenuitem
+>Gecontroleerde saldo's tonen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Gecontroleerde saldo's tonen en de laatst gecontroleerde mijlpaal in het register.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
 >U</keycap
 ></keycombo
 > </shortcut

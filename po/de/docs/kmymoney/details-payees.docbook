@@ -112,7 +112,7 @@
 >Übersicht</title>
 
 <para
->&kmymoney; hat die Fähigkeit, eine automatische Zuordnung der passenden Zahlungsempfänger zu importierten Buchungen vorzunehmen. Das kann sehr hilfreich sein, wenn Sie Buchungen von Ihrer Bank (z.B. per HBCI) importieren und der angegebene Zahlungsempfänger weitere unnötige Zeichen enthält, oder noch schlimmer der Name des Zahlungsempfängers ändert sich. </para>
+>&kappname; hat die Fähigkeit, eine automatische Zuordnung der passenden Zahlungsempfänger zu importierten Buchungen vorzunehmen. Das kann sehr hilfreich sein, wenn Sie Buchungen von Ihrer Bank (z.B. per HBCI) importieren und der angegebene Zahlungsempfänger weitere unnötige Zeichen enthält, oder noch schlimmer der Name des Zahlungsempfängers ändert sich. </para>
 
 <para
 >Nehmen wir an, Ihr monatliches Gehalt kommt bei Ihnen von Ihrer Bank folgendermaßen an: <quote
@@ -187,7 +187,7 @@
 >MORGENSUNTRUST&amp;LOAN</quote
 >. Wählen Sie die Zuordnungskriterien also sorgfältig aus. <note
 ><para
->Wenn eine Buchung auf die Zuordnungskriterien mehrerer Zahlungsempfänger zutrifft, ist das Ergebnis nicht vorhersehbar: &kmymoney; wird sich einen der zutreffenden Empfänger herauspicken und diesen zuordnen. </para
+>Wenn eine Buchung auf die Zuordnungskriterien mehrerer Zahlungsempfänger zutrifft, ist das Ergebnis nicht vorhersehbar: &kappname; wird sich einen der zutreffenden Empfänger herauspicken und diesen zuordnen. </para
 ></note>
 </para>
 </sect3>

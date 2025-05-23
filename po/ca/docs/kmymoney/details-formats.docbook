@@ -4,68 +4,72 @@
   <authorgroup>
     <author
 >&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
-    <author
->&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->1 de desembre de 2024</date>
+>30 d'agost de 2014</date>
   <releaseinfo
->5.2.0</releaseinfo>
+>4.7.01</releaseinfo>
 </chapterinfo>
+
 <title
 >Formats de fitxer</title>
 
 <para
 >Llevat que trieu utilitzar una <link linkend="details.database"
 >base de dades relacional</link
->, el &kmymoney; emmagatzemarà tota la informació financera en un fitxer. Habitualment, el nom del fitxer acabarà en <filename class="extension"
+>, el &kmymoney; emmagatzemarà tota la informació financera en un fitxer que acaba en <filename class="extension"
 >.kmy</filename
->. També, quan inicieu el &kmymoney;, a menys que empreu una <link linkend="firsttime.launch"
+>. També, a menys que empreu una <link linkend="firsttime.launch"
 >opció de línia d'ordres</link
-> que li indiqui que no ho faci, obrirà l'últim fitxer que havia obert. No obstant això, és important saber que hi ha més d'un tipus de fitxer que pot emprar el &kmymoney; per a desar les dades financeres. </para>
+> que li indiqui que no ho faci, quan s'iniciï el &kmymoney;, s'obrirà l'últim fitxer que tenia obert. No obstant això, és important saber que hi ha més d'un tipus de fitxer que pot emprar el &kmymoney; per a desar les dades financeres. </para>
 
 <para
->Aquest capítol descriu els formats de fitxer en què el &kmymoney; pot emmagatzemar les seves dades de forma permanent. També parla de fer còpies de seguretat de les vostres dades. </para>
+>Aquest capítol descriu els formats en què desa el &kmymoney; les dades de forma permanent al dispositiu d'emmagatzematge de l'usuari. En general, el &kmymoney; emmagatzema la seva informació en forma de document &XML;. Depenent del format real, aquest document &XML; s'escriurà: <itemizedlist>
+  <listitem
+><para
+>com un <link linkend="details.formats.plain"
+>fitxer de text net</link
+> codificat en UTF-8,</para
+></listitem>
 
-<sect1
-><title
->Formats de fitxers de dades</title>
-<para
->En general, el &kmymoney; emmagatzema la seva informació en forma de document &XML;. Depenent del format real, que s'estableix en la configuració del &kmymoney;, aquest document &XML; s'escriurà: <itemizedlist
-> <listitem
+  <listitem
 ><para
->com a fitxer de text pla, codificat en UTF-8,</para
-> </listitem
-> <listitem
-><para
->com a fitxer comprimit, utilitzant la compressió GZIP,</para
-></listitem
-> <listitem
-><para
->com a fitxer encriptat, utilitzant encriptatge GPG, o</para
-></listitem
-> <listitem
-> <para
->com a fitxer de text pla anònim, codificat en UTF-8 però amb totes les vostres dades personals remenades. </para
-> </listitem
-> </itemizedlist
-> Cadascun d'aquests es descriu amb més detall en les seccions següents. </para>
+>com un <link linkend="details.formats.compressed"
+>fitxer comprimit</link
+> amb compressió GZIP,</para
+></listitem>
 
-<sect2 id="details.formats.plain"
-><title
+  <listitem
+><para
+>com un <link linkend="details.formats.encrypted"
+>fitxer encriptat</link
+> utilitzant l'encriptatge GPG, o</para
+></listitem>
+
+  <listitem
+><para
+>com un <link linkend="details.formats.anonymous"
+>fitxer de text net anònim</link
+> codificat en UTF-8 però amb totes les dades personals barrejades.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<sect1 id="details.formats.plain">
+<title
 >Fitxer de text net</title>
 <para
 >Aquest és el format admès que consumeix més espai, ja que no es realitza cap compressió. No està dissenyat per a un ús normal i es proporciona per a admetre finalitats de depuració i la capacitat de modificar manualment el fitxer. Si finalitzeu un nom de fitxer en <literal role="extension"
 >.xml</literal
->, el fitxer s'emmagatzemarà en aquest format. <note
+>, el fitxer s'emmagatzemarà en aquest format. <caution
 > <para
->No es recomana la modificació manual del fitxer per a l'usuari normal, i només s'haurà de fer si enteneu completament el funcionament intern del &kmymoney; o si les instruccions dels desenvolupadors us indiquen què fer. No culpeu als desenvolupadors del &kmymoney; si feu malbé o destruïu les dades: esteu avisats! </para>
-</note>
+>No es recomana la modificació manual del fitxer per a l'usuari normal, i només s'haurà de fer si enteneu completament el funcionament intern del &kmymoney; o si les instruccions dels desenvolupadors us indiquen què fer. No culpeu als desenvolupadors del &kmymoney; si perdeu les dades: Esteu avisats! </para>
+</caution>
 </para>
-</sect2>
+</sect1>
 
-<sect2 id="details.formats.compressed"
-><title
+<sect1 id="details.formats.compressed">
+<title
 >Fitxer comprimit amb GZIP</title>
 <para
 >Aquest és el format normal utilitzat pel &kmymoney; quan emmagatzema un fitxer amb l'extensió <filename class="extension"
@@ -76,7 +80,7 @@
   <para
 >Si s'ha seleccionat l'<link linkend="details.formats.encrypted"
 >encriptatge</link
-> a la configuració, el fitxer s'emmagatzemarà encriptat, com es descriu a la secció següent. </para>
+>, el fitxer s'emmagatzemarà encriptat. </para>
 </note>
 
 <para
@@ -93,22 +97,22 @@
 >.xml</filename
 ></link
 > per a escriure'l en un format sense comprimir. </para>
-</sect2>
+</sect1>
 
-<sect2 id="details.formats.encrypted"
-><title
+<sect1 id="details.formats.encrypted">
+<title
 >Fitxer encriptat amb GPG</title>
 <para
 >L'ús del format de fitxer encriptat amb GPG és un mètode molt segur per a emmagatzemar les dades financeres personals en un dispositiu d'emmagatzematge. Quan el &kmymoney; rebi instruccions a través del diàleg de configuració per a emmagatzemar encriptades les dades, el xifratge es farà emprant GPG i la clau que vàreu proporcionar abans d'emmagatzemar-les realment. En obrir un fitxer encriptat, haureu de proporcionar la frase de pas necessària per a obrir l'anell de claus. El fitxer encriptat s'emmagatzemarà en el format <emphasis
 >armadura &ASCII;</emphasis
 > de GPG. <note
 > <para
->Quan s'utilitza l'encriptatge GPG, el GPG també comprimirà el fitxer utilitzant «gzip», de manera que no serà necessària cap compressió addicional. </para>
+>Quan s'utilitza l'encriptatge GPG, el GPG també comprimirà el fitxer, de manera que no serà necessària cap compressió addicional. </para>
   </note>
 </para>
 
-<sect3 id="details.formats.encrypted.gpgkeys"
-><title
+<sect2 id="details.formats.encrypted.gpgkeys">
+<title
 >Claus GPG</title>
 <para
 >Si encara no ho heu fet per a l'encriptatge del correu, haureu de generar un parell de claus per a utilitzar la característica d'encriptatge GPG del &kmymoney;. A més, el <application
@@ -118,46 +122,38 @@
 <para
 >Els detalls sobre com generar un parell de claus i com mantenir-les queda fora de l'àmbit d'aquest document. Trobareu un mini com es fa (HOWTO) sobre aquest tema a <ulink url="https://www.gnupg.org/documentation/howtos.html"
 >https://www.gnupg.org/documentation/howtos.html</ulink
->. Els llocs web de la majoria de les distribucions &Linux; també contenen instruccions sobre l'ús del GPG en aquesta distribució. </para>
-</sect3>
+>. </para>
+</sect2>
 
-<sect3 id="details.formats.encrypted.keysettings"
-><title
+<sect2 id="details.formats.encrypted.keysettings">
+<title
 >Establir les claus al &kmymoney;</title>
 <para
->A la pàgina encriptatge del diàleg de configuració, hi ha una llista desplegable des d'on podreu seleccionar la clau que s'haurà d'emprar per a l'encriptatge i desencriptatge. A més, hi ha un camp en el qual podreu introduir l'ID de la clau d'una clau que no es trobi al quadre de llista. Feu servir l'ID de la clau, l'adreça de correu electrònic associada amb aquesta clau o qualsevol altra identificació vàlida de clau GPG com a valor per a aquest camp. Quan introduïu l'ID de la clau, el &kmymoney; comprovarà la seva validesa i si troba una clau mostrarà una icona LED verda al diàleg. <caution
+>A la pàgina encriptatge del diàleg de configuració, hi ha una llista desplegable des d'on podreu seleccionar la clau que s'haurà d'emprar per a l'encriptatge i desencriptatge. A més, trobareu un camp en el qual podreu introduir l'ID de la clau d'una clau que no es trobi al quadre de llista. Feu servir l'ID de la clau, l'adreça de correu electrònic associada amb aquesta clau o qualsevol altra identificació vàlida de clau GPG com a valor per a aquest camp. Quan introduïu l'ID de la clau, el &kmymoney; comprovarà la seva validesa i si troba una clau mostrarà una icona LED verda al diàleg. <caution
 > <para
 >Assegureu-vos de tenir tant la clau pública com la privada per a aquest ID. Si no posseïu la clau privada per a l'ID introduït, no podreu tornar a obrir el fitxer. </para>
   </caution>
 </para>
-</sect3>
+</sect2>
 
-<sect3 id="details.formats.encrypted.recoverkey"
-><title
+<sect2 id="details.formats.encrypted.recoverkey">
+<title
 >La clau de recuperació del &kmymoney;</title>
 <para
 >També en aquesta pàgina del diàleg de configuració teniu l'opció de seleccionar l'encriptatge suplementari amb la clau de recuperació del &kmymoney;. Aquesta opció estarà disponible si aquesta clau està emmagatzemada a l'anell de claus <application
 >GPG</application
->. En seleccionar aquesta opció, podreu recuperar les dades fins i tot en cas que perdeu la clau privada pròpia. Això és possible perquè les dades no només s'encripten amb la clau pròpia, sinó també amb la clau de recuperació del &kmymoney;. Aquesta clau només està disponible per a desenvolupadors seleccionats del &kmymoney; (en el moment d'escriure només per a l'autor). A partir del maig de 2024, la clau de recuperació està definida que caduqui el 7 de gener de 2025. </para>
+>. En seleccionar aquesta opció, podreu recuperar les dades fins i tot en cas que perdeu la clau privada pròpia. Això és possible perquè les dades no només s'encripten amb la clau pròpia, sinó també amb la clau de recuperació del &kmymoney;. Aquesta clau només està disponible per a desenvolupadors seleccionats del &kmymoney; (en el moment d'escriure només per a l'autor). A partir del llançament del &kmymoney; versió 4.7, la clau de recuperació caduca el 3 de gener del 2015. </para>
 
 <para
 >En circumstàncies normals, obrireu/desareu/tancareu el fitxer com de costum. En el cas anormal de la pèrdua de la vostra clau, tindreu l'oportunitat de contactar amb un dels desenvolupadors que té accés a la clau de recuperació del &kmymoney; i sol·licitar ajuda per a recuperar les dades. Podreu comunicar amb els desenvolupadors per correu electrònic a la llista de correu de desenvolupadors del &kmymoney; a &devlist;. </para>
-
-<para
->Per a obtenir la clau de recuperació, aneu a <ulink url="https://kmymoney.org/recovery.html"
->La clau de recuperació del KMyMoney</ulink
-> de la pàgina del lloc web del &kmymoney;. Copieu i deseu el «PGP PUBLIC KEY BLOCK» (incloses les línies «BEGIN» i «END») a un fitxer de text i després importeu-lo amb el «gpg». </para>
-
-<para
->Recordeu que el desenvolupador només pot ajudar a recuperar el fitxer de dades si realment l'encripteu amb la clau de recuperació, a més de la vostra clau pròpia. </para>
-</sect3>
 </sect2>
+</sect1>
 
-<sect2 id="details.formats.anonymous"
-><title
+<sect1 id="details.formats.anonymous">
+<title
 >Fitxer anònim</title>
 <para
->Aquest format no està destinat a ser utilitzat per a l'emmagatzematge normal de les dades. Està admès perquè, en cas que sorgeixi un problema, pugueu donar a l'equip de desenvolupament del &kmymoney; el fitxer sense revelar cap dels detalls confidencials a les dades financeres. Per exemple, canvia els noms de la institució, compte, beneficiari i categoria a cadenes com «I000001» i «A000001»; realitza canvis similars en totes les dades, com números de compte, i també canvia aleatòriament els imports de les operacions. </para>
+>Aquest format no està destinat a ser utilitzat per a l'emmagatzematge normal de les dades. Està admès perquè, en cas que sorgeixi un problema, pugueu donar a l'equip de desenvolupament del &kmymoney; el fitxer sense revelar cap dels detalls confidencials a les dades financeres. Per exemple, canvia els noms de la institució, compte, beneficiari i categoria a cadenes com «I000001» i «A000001», realitza canvis similars en totes les dades, com números de compte, i també canvia aleatòriament els imports de les operacions. </para>
 
 <para
 >Si els desenvolupadors us ho indiquen, utilitzeu l'element de menú <menuchoice
@@ -174,103 +170,6 @@
 
 <para
 >Per a verificar que el problema encara existeix, torneu a carregar aquest fitxer anònim i intenteu duplicar el problema. Si persisteix, envieu el fitxer a la llista de correu del desenvolupador a &devlist; per a una investigació major. Si el problema no es mostra... bé, ara mateix no vull pensar en aquest escenari. </para>
-</sect2>
-
-<sect2
-><title
->Ubicacions del fitxer de dades</title>
-<para
->Tots els tipus de fitxers anteriors es poden emmagatzemar en un disc dur local, un dispositiu extraïble com una unitat USB o una ubicació de xarxa. Depenent del vostre sistema operatiu, és possible que calgui assignar o muntar una ubicació remota abans d'utilitzar-la. </para>
-
-<note
-><title
->Limitació al Windows</title>
-  <para
->Al &Windows;, per tal d'utilitzar una ubicació de xarxa o de fitxer remot, aquesta ubicació assignada s'ha d'assignar a una lletra de la unitat. </para>
-</note>
-
-</sect2>
-</sect1>
-
-<sect1 id="details.formats.backup"
-><title
->Còpia de seguretat</title>
-<para
->No intentarem aquí convèncer-vos que fer còpies de seguretat de les vostres dades és una molt bona idea; esperem que ja n'estigueu convençuts. Aquesta secció descriu tres maneres de fer-ho, i podeu utilitzar una qualsevol, dues o, fins i tot, les tres. Tingueu en compte que es tracta de fer una còpia de seguretat d'un fitxer de dades; si utilitzeu un dorsal SQL per a emmagatzemar les dades, consulteu la documentació d'aquest sistema de bases de dades per a obtenir instruccions sobre com fer còpies de seguretat. </para>
-
-<sect2
-><title
->Ubicació del fitxer de còpia de seguretat</title>
-<para
->Si necessiteu una còpia de seguretat de les vostres dades per a confirmar algun aspecte de les vostres finances en un moment anterior, o per a tornar a un estat anterior, com per a desfer la importació d'una gran quantitat de dades al compte equivocat, no importa si la còpia de seguretat és local o s'emmagatzema en un altre lloc, com en una unitat de xarxa adjunta. No obstant això, si necessiteu una còpia de seguretat per a recuperar-se de la pèrdua de dades si la unitat de disc ha fallat, per exemple, és essencial que la còpia de seguretat <emphasis
->no</emphasis
-> estigui al mateix disc que el fitxer de dades primari. En cas d'un desastre més gran, com ara un incendi de la casa, necessitareu una còpia de seguretat emmagatzemada en una caixa forta ignífuga o en un lloc físicament diferent. Tingueu això en compte a mesura que establiu l'estratègia de còpia de seguretat. </para>
-</sect2>
-
-<sect2
-><title
->Desament automàtic</title>
-<para
->El &kmymoney; té la capacitat de desar automàticament una còpia del fitxer de dades a intervals regulars. També pot fer-ho en tancar el programa, si les dades han canviat. Aquest comportament es pot configurar en el <link linkend="details.settings.general.global"
->diàleg de configuració del &kmymoney;, secció General, pestanya Global</link
->. </para>
-</sect2>
-
-<sect2
-><title
->Copia el fitxer</title>
-<para
->Llevat que utilitzeu emmagatzematge SQL, les vostres dades es poden comprimir i es poden encriptar, però es mantenen en un fitxer normal. Sempre que deseu les vostres dades amb l'element de menú <menuchoice
-><guimenu
->Fitxer</guimenu
-><guimenuitem
->Desa</guimenuitem
-> </menuchoice
->, escriu totes les dades a un fitxer, reemplaçant la versió anterior. La forma més senzilla de fer una còpia de seguretat de les vostres dades és fent una còpia d'aquest fitxer. Una sola còpia pot fins i tot tenir el mateix nom de fitxer si està en una carpeta diferent de la del fitxer original, però si voleu mantenir múltiples còpies, té sentit incloure alguna versió de la data i hora actual en cada nom de fitxer. Podeu desar-los a una unitat de xarxa, o a un dispositiu d'emmagatzematge USB, o fins i tot a un dispositiu òptic. El principal inconvenient d'aquest mètode és que cal fer un seguiment de totes les còpies de seguretat, però proporciona la flexibilitat més gran. </para>
-</sect2>
-
-<sect2
-><title
->Ordre de còpia de seguretat</title>
-<para
->Per a fer les coses una mica més fàcils, podeu seleccionar l'element de menú <menuchoice
-> <guimenu
->Fitxer</guimenu
-> <guimenuitem
->Còpia de seguretat</guimenuitem
-> </menuchoice
->. </para>
-
-<screenshot>
-  <screeninfo
->Fitxer de còpia de seguretat</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="file-backup.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->Fitxer de còpia de seguretat</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
-
-<para
->Quan feu clic a <guibutton
->D'acord</guibutton
-> el &kmymoney; crearà una còpia del fitxer de dades, amb la data (amb format AAAA-MM-DD) afegida al nom. Tingueu en compte que això significa que només es pot crear una còpia de seguretat al dia amb aquest mètode. Si ja heu creat una còpia de seguretat el mateix dia, el &kmymoney; us preguntarà si voleu reemplaçar la còpia de seguretat anterior o cancel·lar. </para>
-
-<para
->El &kmymoney; desarà aquest fitxer al directori especificat en el camp <guilabel
->Punt de muntatge</guilabel
->. Podeu escriure manualment el camí complet al directori o fer clic a <guibutton
->Trieu...</guibutton
-> i navegar-hi utilitzant el navegador de fitxers. El directori pot estar en un dispositiu d'emmagatzematge local o pot ser una carpeta de xarxa. </para>
-
-<para
->Si el directori especificat és en realitat un punt de muntatge per a un dispositiu d'emmagatzematge que no sempre està muntat, podeu marcar la casella de selecció <guilabel
->Munta aquest directori abans de fer la còpia de seguretat</guilabel
->. No ho utilitzeu per a una compartició de fitxers de xarxa normal que sempre està muntada. </para>
-</sect2>
 </sect1>
 </chapter>
+

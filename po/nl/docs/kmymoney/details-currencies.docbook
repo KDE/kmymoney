@@ -6,11 +6,13 @@
 >&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
     <author
 >&Michael.Carpino; &Michael.Carpino.mail;</author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
   </authorgroup>
   <date
->2020-02-20</date>
+>2022-08-08</date>
   <releaseinfo
->5.0.8</releaseinfo>
+>5.1.3</releaseinfo>
 </chapterinfo>
 
 <title
@@ -24,7 +26,11 @@
 >Basis valuta</title>
 
 <para
->Bij het initiële "Instellen van nieuw bestand" van &kmymoney;, zal u worden gevraagd om de basis valuta te selecteren. Gewoonlijk is de basis valuta diegene die u in uwe land gebruikt. De basis valuta wordt gebruikt voor alle inkomsten- en uitgavecategorieën gebruikt wordt en waar rapporten op gebaseerd zullen zijn. Wanneer u een nieuwe rekening instelt zal &kmymoney; automatisch de basis valuta als standaard instellen. Als uw rekening vereist dat u een andere valuta gebruikt, kunt u het bij het Instellen van de nieuwe rekening instellen. </para>
+>Bij het initiële <link linkend="firsttime.3"
+>Instellen van nieuw bestand</link
+> van &kmymoney;, zal u worden gevraagd om de basis valuta te selecteren. Gewoonlijk is de basis valuta diegene die u in uw land gebruikt. De basis valuta zal gebruikt worden als standaard voor alle nieuwe rekeningen en categorieën en waar rapporten op gebaseerd zullen zijn. Wanneer u een nieuwe rekening of categorie instelt zal &kmymoney; automatisch de basis valuta als standaard instellen. Als uw rekening vereist dat u een andere valuta gebruikt, kunt u het bij het <link linkend="details.accounts.create"
+>Instellen van nieuwe rekening</link
+> wijzigen. </para>
 
 <para>
 	<screenshot>
@@ -58,19 +64,21 @@
 ></menuchoice
 > om de dialoog <guilabel
 >Valuta's</guilabel
-> te tonen, zoals bovenstaand getoond. Klik rechts op een bestaande valuta en selecteer <guimenuitem
+> te tonen, zoals bovenstaand getoond. Ofwel klik op de knop<guibutton
+>+ Toevoegen</guibutton
+> of klik rechts op een bestaande valuta en selecteer <guimenuitem
 >Nieuwe valuta</guimenuitem
-> uit het  contextmenu <guimenu
+> uit het contextmenu <guimenu
 >Valutaopties</guimenu
->. Voer de officiële code voor de valuta in en klik op <guilabel
+>. Dat levert een dialoog waar u de ISO-code, naam en andere details over de valuta kunt invoeren. Wanneer u klaar bent, klik op <guilabel
 >OK</guilabel
->. De valuta zal aangemaakt worden met de naam <quote
->Nieuwe valuta</quote
->. Om de naam te wijzigen, druk ofwel op <keycap
+>. De valuta zal aangemaakt worden met de gespecificeerde naam. Om de naam of andere details te wijzigen, klik op de knop <guibutton
+>Bewerken</guibutton
+>. U kunt de naam ook bewerken door op <keycap
 >F2</keycap
-> of klik rechts en selecteer <guimenuitem
+> te drukken of rechts te klikken en <guimenuitem
 >Valuta hernoemen</guimenuitem
->. </para>
+> te selecteren. </para>
 </sect2>
 </sect1>
 
@@ -81,7 +89,7 @@
 <para
 >Wanneer u een nieuwe rekening aanmaakt, specificeert u de valuta waarin het beheerd zal worden. De assistent Nieuwe rekening zet deze instelling op de <link linkend="details.currencies.basecurrency"
 >basis valuta</link
->. Als u een andere valuta wilt, moet u het bij deze initiële opzet selecteren. Het grootboek voor de rekening zal dan alle waarden in de geselecteerde valuta tonen. </para>
+>. Als u een andere valuta wilt, moet u het bij deze initiële opzet selecteren. Het grootboek voor de rekening zal dan alle waarden in de geselecteerde valuta tonen. U kunt de valuta van een rekening niet wijzigen nadat de rekening is aangemaakt. </para>
 </sect1>
 
 <sect1 id="details.currencies.transactions">
@@ -89,7 +97,7 @@
 >Transacties invoeren met verschillende valuta</title>
 
 <para
->Wanneer een transactie wordt ingevoerd die refereert aan meer dan één valuta, zal de wisselkoersbewerker verschijnen en stelt u in staat om een wisselkoers in te voeren. Initieel zal de huidige koers beschikbaar uit de koersdatabase worden gebruikt als wisselkoers. Zie <link linkend="details.currencies.prices"
+>Wanneer een transactie wordt ingevoerd die refereert aan meer dan één valuta, wat omvat het invoegen van een valuta anders dan de standaard valuta van de rekening, zal de wisselkoersbewerker verschijnen en stelt u in staat om een wisselkoers in te voeren. Initieel zal de huidige koers beschikbaar uit de koersdatabase worden gebruikt als wisselkoers. Zie <link linkend="details.currencies.prices"
 >Wisselkoersen voor valuta's invoeren</link
 > voor meer informatie over hoe handmatig wisselkoersen te leveren en online koersinformatie te verkrijgen. </para>
 
@@ -106,7 +114,9 @@
 >Handmatig ingevoerde prijzen</title>
 
 <para
->De prijsdatabasebewerker stelt u in staat om wisselkoersen in te voeren tussen valuta's of prijzen voor investeringen. U kunt deze te voorschijn halen met de menu-item <menuchoice
+>De <guilabel
+>Prijsbewerker</guilabel
+> stelt u in staat om wisselkoersen in te voeren tussen valuta's of prijzen voor investeringen. U kunt deze te voorschijn halen met de menu-item <menuchoice
 ><guimenu
 >Hulpmiddelen</guimenu
 ><guimenuitem
@@ -136,7 +146,9 @@
 <para
 >Wanneer u op de knop <guibutton
 >Nieuw</guibutton
-> drukt, krijgt u de dialoog Nieuwe koersinvoer. Voer de eerste valuta in (USD in het bovenstaande voorbeeld) in het veld Waardepapier. Voer de tweede valuta (EUR in het bovenstaande voorbeeld) in het veld Valuta. Voer de effectieve datum van de koers in in het veld Datum. </para>
+> drukt, krijgt u de dialoog <guilabel
+>Nieuwe koersinvoer</guilabel
+>. Voer de eerste valuta in (USD in het bovenstaande voorbeeld) in het veld Waardepapier. Voer de tweede valuta (EUR in het bovenstaande voorbeeld) in het veld Valuta. Voer de effectieve datum van de koers in in het veld Datum. </para>
 
 <para>
 	<screenshot>
@@ -158,12 +170,14 @@
 >Online bijwerken van valuta</title>
 
 <para
->&kmymoney; zal valutaconversies vanaf het web ophalen. Nadat u een enkele prijs hebt ingevoerd voor valutapaar, zal de online functie voor koersen altijd dat paar onder zijn opties tonen. </para>
+>&kmymoney; kan valutaconversies vanaf het web ophalen. Nadat u een enkele prijs hebt ingevoerd voor valutapaar, zal de online functie voor koersen altijd dat paar onder zijn opties tonen. </para>
 
 <para
 >Zie de sectie over <link linkend="details.investments.onlinequotes"
 >Online prijzen</link
-> in het hoofdstuk Investering voor meer details. </para>
+> in het hoofdstuk <guilabel
+>Investering</guilabel
+> voor meer details. </para>
 </sect2>
 </sect1>
 </chapter>

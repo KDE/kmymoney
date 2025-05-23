@@ -93,7 +93,7 @@
 ><surname
 >Ostroff</surname
 > <contrib
->Документація і підтримка користувачів.</contrib
+>Документація.</contrib
 > <email
 >ostroffjh@users.sourceforge.net</email
 > </author>
@@ -135,9 +135,9 @@
 >arniing@users.sourceforge.net</email
 ></author>
 
-    These persons were not previously listed as authors here, but are included in
-    credits.docbook and as authors of some chapter(s).  They should either be dropped
-    from there or included here.
+    These persons were not previously listed as authors here, but are included
+    in credits.docbook.  They should either be dropped from there or included
+    here.
 
     <author
 ><firstname
@@ -145,7 +145,7 @@
 ><surname
 >Jones</surname>
     <contrib
->Reports.  OFX Import.  Online Quotes.  Documentation.  Previous versions.</contrib>
+>Reports.  OFX Import.  Online Quotes.  Documentatation.  Previous versions.</contrib>
     <email
 >acejones@users.sourceforge.net</email
 ></author>
@@ -164,9 +164,9 @@
     There are eight additional people in credits.docbook for "Special Thanks."
     Should any of them be included here?  -->
 <date
->1 грудня 2024 року</date>
+>5 червня 2022 року</date>
 <releaseinfo
->KMyMoney 5.2</releaseinfo>
+>KMyMoney 5.1</releaseinfo>
 </refentryinfo>
 
 <refmeta>
@@ -219,6 +219,10 @@
 ></group
 > <group choice="opt"
 ><option
+>--dump-actions</option
+></group
+> <group choice="opt"
+><option
 ><replaceable
 >файл</replaceable
 ></option
@@ -247,7 +251,7 @@
 ></term>
 <listitem>
 <para
->мова, яку слід використовувати</para>
+>мова, яку слід використовувати </para>
 </listitem>
 </varlistentry>
 
@@ -258,7 +262,7 @@
 ></term>
 <listitem>
 <para
->не відкривати попередній використаний файл</para>
+>не відкривати попередній використаний файл </para>
 </listitem>
 </varlistentry>
 
@@ -269,7 +273,7 @@
 ></term>
 <listitem>
 <para
->Увімкнути таймери швидкодії</para>
+>Увімкнути таймери швидкодії </para>
 </listitem>
 </varlistentry>
 
@@ -280,7 +284,7 @@
 ></term>
 <listitem>
 <para
->Не перехоплювати на загальному рівні неперехоплені виключення</para>
+>Не перехоплювати на загальному рівні неперехоплені виключення </para>
 </listitem>
 </varlistentry>
 
@@ -307,9 +311,7 @@
 </varlistentry>
 
 </variablelist>
-
 </refsect1>
-
 
 <refsect1>
 <title
@@ -327,10 +329,13 @@
 >URL</acronym
 > <ulink url="help:/kmymoney"
 >help:/kmymoney</ulink
-> до рядка адреси &konqueror;. </member>
-<member
+> до рядка адреси &konqueror;. Також можете скористатися інтернет-версією документації до стабільної версії &kmymoney; та версії у розробці за адресою <ulink url="https://docs.kde.org/index.php?application=kmymoney"
+>https://docs.kde.org/index.php?application=kmymoney"</ulink
+> </member>
+
+  <member
 >kf5options(7)</member>
-<member
+  <member
 >qt5options(7)</member>
 </simplelist>
 

@@ -4,47 +4,37 @@
   <authorgroup>
     <author
 >&Darin.Strait; &Darin.Strait.mail; </author>
-    <author
->&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->2024-12-01</date>
+>2010-07-25</date>
   <releaseinfo
->5.2.0</releaseinfo>
+>4.5</releaseinfo>
 </chapterinfo>
+
 <title
 >Leningen</title>
 
-<sect1 id="details.loans.general"
-><title
+<sect1 id="details.loans.general">
+<title
 >Leningen begrijpen</title>
-<note
-><title
->Terugkoppeling gevraagd</title>
-  <para
->De auteur stelt terugkoppeling zeer op prijs over het uitbreiden van deze sectie om de variatie van hoofdsom en rente te bespreken om een vaste zich herhalende betaling te bereiken. Het wordt genoemd in de section over in werkelijkheid een lening in &kmymoney; aan te maken maar het lijkt erop dat het eerder genoemd zou moeten worden. </para>
-</note>
 
 <para
->Dit hoofdstuk beschrijft hoe &kmymoney; leningen behandelt. Regels en gebruiken voor leningen en variëren van plaats tot plaats. Voor gedetailleerde uitleg over leningen, evenals informatie over locale regels en gebruiken, raadpleeg andere bronnen. </para>
+>Deze sectie biedt een overzicht van hoe &kmymoney; leningen behandelt. Regels en gebruiken voor leningen en variëren van plaats tot plaats. Voor gedetailleerde uitleg over leningen, evenals informatie over locale regels en gebruiken, raadpleeg andere bronnen. </para>
 
 <para
->Een lening is een overeenkomst waaronder een lener geld ontvangt van een uitlener en er mee akkoord gaat om het geld terug te geven als een of meer betalingen in de toekomst. &kmymoney; stelt u in staat om leningen te volgen waarbij u, als lener, geld leent van, als lener, of geld geeft aan iemand anders. De meeste mensen lenen meer dan ze uitlenen, dus u zult in het algemeen de lener zijn en een financieringsmaatschappij zal in het algemeen de uitlener zijn. Als u geld uitleent aan een familielid of een vriend, dan kunt u &kmymoney; gebruiken om deze lening eveneens te volgen. </para>
+>Een lening is een overeenkomst waaronder een lener geld ontvangt van een uitlener en er mee akkoord gaat om het geld op een toekomstige datum terug te betalen. &kmymoney; stelt u in staat om leningen te volgen waarbij u, als lener, geld leent van, als lener, of geld uitleent aan iemand anders. De meeste mensen lenen meer dan ze uitlenen, dus u zult in het algemeen de lener zijn en een financieringsmaatschappij zal in het algemeen de uitlener zijn. Als u geld uitleent aan een familielid of een vriend, dan kunt u &kmymoney; gebruiken om deze lening eveneens te volgen. </para>
 
 <para
 >Deze handleiding zal aannemen dat u leent van een soort van financieringsmaatschappij, maar de hier besproken zaken zijn evengoed van toepassing op leningen die u zou kunnen hebben met een persoon. Het belangrijkste verschil tussen geld lenen en uitlenen is dat een categorie uitgaven wordt gebruikt om rente te volgen bij lenen van geld en een categorie inkomen wordt gebruikt om rente te volgen bij uit lenen van geld. </para>
 
-<sect2
-><title
->Enkele relevante termen</title>
 <formalpara
 ><title
->Hoofdsom</title>
+>Leningbedrag</title>
 <para
->De hoeveelheid die wordt geleend wordt de <quote
->hoofdsom</quote
-> of <quote
+>De hoeveelheid die is uitgeleend wordt het <quote
 >leningbedrag</quote
+> of <quote
+>hoofdsom</quote
 > genoemd. </para>
 </formalpara>
 
@@ -52,7 +42,7 @@
 ><title
 >Looptijd</title>
 <para
->De periode of duur van een lening wordt zijn de <quote
+>De periode van een lening wordt zijn de <quote
 >termijn</quote
 > van de lening genoemd. Aan het eind van de termijn, zal het geheel van de hoofdsom teruggegeven moeten zijn aan de uitlener. Termijnen worden in het algemeen uitgedrukt in weken, maanden of jaren. Een termijn kan ook uitgedrukt worden door het aantal betalingen. Een eenjarige lening met wekelijkse betalingen zou beschreven kunnen worden als een eenjarige lening of een lening met 52 terugbetalingen. </para>
 </formalpara>
@@ -74,7 +64,7 @@
 <para
 >Naar de frequentie van afbetalingen wordt gerefereerd als <quote
 >Betalingsfrequentie</quote
->. Voorbeelden hiervan kunnen zijn wekelijks, tweewekelijks, maandelijks, per kwartaal of jaarlijks. Hier wordt ook soms naar gerefereerd als de betalingsperiode. In de VS, worden periodieke betalingen het meest gebruikelijk elke maand gedaan, de periodiek van de leningen is dan één maand. </para>
+> in &kmymoney;. Voorbeelden van perioden kunnen zijn wekelijks, tweewekelijks, maandelijks, per kwartaal of jaarlijks. In de VS, worden periodieke betalingen het meest gebruikelijk elke maand gedaan, de leningen periodiek is dan één maand. </para>
 </formalpara>
 
 <formalpara
@@ -86,14 +76,11 @@
 >, normaal uitgedrukt als een percentage van de hoofdsom over een gedefinieerde periode. Rentekoersen kunnen vast zijn, waar de rente niet wijzigt over de leeftijd van de lening of variabel, waar de rente in de tijd kan wijzigen. Rentebetalingen worden typisch meegenomen met elke periodieke afbetaling. </para>
 </formalpara>
 
-<para
->Merk op dat een lening in &kmymoney; een rente moet hebben groter dan 0. Geleend of uitgeleend geld zonder rente moet ingevoerd worden als een aansprakelijkheid of activa-rekening. </para>
-
 <formalpara
 ><title
 >Periodieke afbetalingen</title>
 <para
->Omdat afbetalingen in het algemeen gedaan worden op een soort van geplande basis, zoals wekelijks, maandelijks, per kwartaal of jaarlijks, wordt er naar gerefereerd als <quote
+>Omdat deze afbetalingen in het algemeen gedaan worden op een soort van geplande basis, zoals wekelijks, maandelijks, per kwartaal of jaarlijks, wordt er naar gerefereerd als <quote
 >periodieke afbetalingen</quote
 >. De som van alle periodieke afbetalingen plus de eindbetaling telt op tot de hoofdsom van de lening plus de rente. </para>
 </formalpara>
@@ -102,50 +89,49 @@
 ><title
 >Kosten</title>
 <para
->Er kunnen andere kosten zijn naast rente die vereist zijn om te betalen mogelijk bij elke afbetalingstermijn. Deze worden <quote
+>Er kunnen andere kosten zijn naast rente die vereist zijn om te betalen bij elke afbetalingstermijn. Deze worden <quote
 >terugkerende kosten</quote
 > genoemd. Voorbeelden van terugkerende kosten omvatten (maar zijn niet noodzakelijk beperkt tot): <itemizedlist>
-    <listitem>
-      <para
+  <listitem>
+    <para
 ><quote
 >In beslag neming</quote
 > of <quote
 >escrow</quote
-> betalingen in de rekening. Betalingen van deze soort worden gewoonlijk gebruikt om fondsen vast te houden voor betaling van jaarlijkse of tweejaarlijkse eigenaarsbelastingen. </para>
-    </listitem>
+> betalingen in de rekening. (Betalingen van deze soort worden gewoonlijk gebruikt om fondsen vast te houden voor betaling van jaarlijkse of tweejaarlijkse eigenaarsbelastingen.) </para>
+  </listitem>
 
-    <listitem
+  <listitem
 ><para
 >Hypotheekverzekering</para
 ></listitem>
 
-    <listitem
+  <listitem
 ><para
 >Verzekering tegen onvermogen</para
 ></listitem>
 
-    <listitem
+  <listitem
 ><para
 >Onderhoudskosten voor een leningrekening</para
 ></listitem>
-  </itemizedlist>
+</itemizedlist>
 </para>
 </formalpara>
-</sect2>
 
-<sect2
+<formalpara
 ><title
 >Samenvatting</title>
 <para
->Samengevat ontvangt de lener een som geld van de uitlener aan het begin van de lening. De lener doet periodieke betalingen aan de uitlener. De hoeveelheid periodieke betaling is de som van de te betalen hoofdsom (die wordt gebruikt om het saldo van de lening of de resterende hoofdsom te verminderen) plus de rentebetaling (die de uitlener beloont voor het gebruik van het geld door de lener) plus eventuele terugkerende kosten (die bijkomende bedragen dekken). Aan het einde van de lening heeft de lener de gehele hoofdsom terugbetaald. </para>
-</sect2>
+>Samengevat ontvangt de lener een som geld van de uitlener aan het begin van de lening. De lener doet periodieke betalingen aan de uitlener. De periodieke betaling is de som van de te betalen hoofdsom (die wordt gebruikt het saldo van de lening te verminderen) plus de rentebetaling (die rewards de uitlener beloont voor het gebruik van het geld door de lener) plus eventuele terugkerende kosten (die bijkomende bedragen dekken). Aan het einde van de lening heeft de lener de gehele hoofdsom terugbetaald. </para>
+</formalpara>
 </sect1>
 
-<sect1 id="details.loans.example"
-><title
+<sect1 id="details.loans.example">
+<title
 >Voorbeeld</title>
 <para
->U hebt bijvoorbeeld $25,000.00 geleend voor een nieuwe auto en met de bank afgesproken elke maand gedurende 60 maanden een betaling te doen. De rente op de lening kan 5,5% per jaar zijn. </para>
+>U hebt bijvoorbeeld $25,000.00 geleend voor een nieuwe auto en met de bank afgesproken elke maand gedurende 60 maanden een betaling te doen. De rente op de lening kan 5.5% zijn. </para>
 
 <para
 >In dit scenario is grootte van de lening $25,000.00. De termijn van de lening is 60 maanden of 5 jaar. De termijn van de lening kan ook beschreven worden als 60 betalingen omdat er één betaling per maand is gedurende 5 jaar. De afbetalingsfrequentie is één maand omdat periodieke afbetaling gedaan wordt eens per maand. De periodieke afbetaling, die berekend wordt door &kmymoney;, zou $477.53 zijn. </para>
@@ -156,12 +142,10 @@
 > is een grafiek of tabel die de datum toont waarop een afbetaling dedaan zou moeten worden en de grootte van elke periodieke afbetaling. Deze planning breekt de periodieke afbetaling op in zijn bestanddelen: de afbetaling van de hoofdsom, de rentebetaling en de betaling van terugkerende kosten. </para>
 </sect1>
 
-<!-- FIXME: this section needs expanding, screenshots of the new loan wizard, and more dtails on the various entry
-     fields.  In particular, it needs an explanation of how fixed payments are calculated by adjusting the amount of
-     principal and interest of each payment, sometimes resulting in a final payment different from the others.  -->
-<sect1 id="details.loans.creation"
-><title
+<sect1 id="details.loans.creation">
+<title
 >Een nieuwe lening aanmaken</title>
+
 <para
 >In &kmymoney; is een lening een type rekening. Om dus een nieuwe lening aan te maken begint u met selecteren van menu-item <menuchoice
 ><guimenu
@@ -171,44 +155,14 @@
 ></menuchoice
 >. Ga door door de vragen te beantwoorden die de assistent u stelt. </para>
 
-<note>
 <para
->De assistent voor de <guilabel
->Nieuwe opzet van de Rekening</guilabel
-> zet niet alleen een Leningrekening op, maar maakt ook <guilabel
->Geplande transacties</guilabel
-> voor de periodieke betalingen. Als u ofwel de Leningrekening of de bijbehorende Geplande transacties te bewerken, u zult de <guilabel
->Assistent voor het bewerken van een Leningplanning</guilabel
-> gepresenteerd krijgen. Dit biedt u het aanpassen van vele details van de leningen, maar niet allemaal. Helaas kunnen sommige aspecten van de Leningrekening op dit moment niet gewijzigd worden, zoals de ouderrekening van de rekening. </para>
-
-<para
->Als u de <link linkend="details.schedules"
->Planningweergave</link
-> toont, klik rechts op een van de planningen in de lijst en selecteer <guimenuitem
->Geplande transactie bewerken</guimenuitem
-> uit het menu dat verschijnt, &kmymoney; zal de dialoog <guilabel
->Geplande transactie bewerken</guilabel
-> tonen. In tegenstelling, als u dit doet met een leningenplan, dan zult u <guilabel
->Assistent voor bewerken van Leningrekening</guilabel
->getoond krijgen, bovenstaand genoemd. Echter, als u de toets <keycap
->&Shift;</keycap
-> ingedrukt houd wanneer u klikt op <guimenuitem
->Geplande transactie bewerken</guimenuitem
->, zal de dialoog <guilabel
->Geplande transactie bewerken</guilabel
-> voor de lening getoond worden, waar u sommige van de details van de terugkerende transactie kunt wijzigen. </para>
-
-<para
->Merk ook op dat als u de planning geassocieerd met een lening verwijderd, u deze actie niet ongedaan kan maken en vanaf niets moet beginnen met het aanmaken van een nieuwe leningrekening en planning. </para>
-</note>
-
-<para
->Optioneel, zoals met elke andere rekening, kan een lening geassocieerd worden met een specifiek instituut. Als u leent van een hypotheekbedrijf of een bedrijf voor autoleningen, dan kunt u een instituut aanmaken die dit bedrijf beschrijft en het bedrijf associeert met uw lening. Als u leent van uw oom Ted, is er geen noodzaak om een instituut op te zetten. </para>
+>Optioneel kan een lening geassocieerd worden met een specifiek instituut. Als u leent van een hypotheekbedrijf of een bedrijf voor autoleningen, dan kunt u een instituutitem aanmaken die dit bedrijf beschrijft en het instituut associeert met uw lening. Als u leent van uw oom Ted, is er geen noodzaak om een instituut in te stellen. </para>
 </sect1>
 
-<sect1 id="details.loans.extra-payments"
-><title
+<sect1 id="details.loans.extra-payments">
+<title
 >Extra aflossingen op de hoofdsom bij leningen</title>
+
 <para
 >Als u een extra afbetaling van de hoofdsom wilt doen dan kunt u dat doen. <link linkend="details.ledger.transactions"
 >Voer een transactie in</link
@@ -234,10 +188,10 @@
   </listitem>
 </itemizedlist>
 
-<note>
-  <para
->Als u de afbetaling van de hoofdsom verdubbelt met elke periodieke betaling, dan zult u de leningplanning voor elk deel opnieuw moeten berekenen. Dit biedt een accurate waarde voor de vereiste afbetaling van de hoofdsom voor elk deel. </para>
-</note>
+<note
+><para
+>Als u de afbetaling van de hoofdsom verdubbelt met elke periodieke betaling, dan zult u de leningplanning voor elk deel opnieuw moeten berekenen. Dit biedt een accurate waarde voor de vereiste afbetaling van de hoofdsom voor elk deel. </para
+></note>
 </sect1>
 </chapter>
 

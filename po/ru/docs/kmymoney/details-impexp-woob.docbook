@@ -1,0 +1,55 @@
+<sect1 id="details.impexp.woob">
+  <sect1info>
+    <author
+>&Dawid.Wrobel; &Dawid.Wrobel.mail;</author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+  </sect1info>
+
+  <title
+>Импорт Woob</title>
+  <sect2>
+    <title
+>Что такое Woob?</title>
+    <para
+><ulink url="https://woob.tech/"
+>Woob</ulink
+> (сокращение от <quote
+>Web outside of browsers</quote
+>) предоставляет собой <quote
+>набор приложений для взаимодействия с веб-сайтами без необходимости открывать их в браузере</quote
+>. В частности, одно из <ulink url="https://woob.tech/applications/"
+>таких приложений</ulink
+> позволяет взаимодействовать с <ulink url="https://woob.tech/applications/bank"
+>финансовыми учреждениями</ulink
+>. &kmymoney; предоставляет подключаемый модуль, который напрямую задействует его, и, следовательно, позволяет импортировать операции по счёту в таких учреждениях (что в ином случае было бы невозможно, так как они не поддерживают другие используемые &kmymoney; финансовые протоколы). </para>
+
+    <note>
+      <para
+>Для работы текущей версии &kmymoney; требуется выполнить независимую установку Woob. Подробные сведения приводятся в последующих разделах. </para>
+    </note>
+  </sect2>
+  <sect2>
+    <title
+>Установка Woob</title>
+    <para
+>Всё больше дистрибутивов Linux предоставляют пакет, который содержит Woob; этот вариант установки является предпочтительным. </para>
+    <para
+>Перед продолжением необходимо установить Python 3. Пакеты с Python входят во все дистрибутивы  Linux, но всегда возможно загрузить пакет для своей системы с <ulink url="https://www.python.org/downloads/"
+>официального веб-сайта</ulink
+>. </para>
+
+    <para
+>После установки Python 3 загрузка и установка необходимых модулей Woob не должны вызвать затруднений. Следуйте инструкциям, которые приводятся на <ulink url="https://woob.tech/install/"
+>веб-сайте Woob</ulink
+>. </para>
+  </sect2>
+  <sect2>
+    <title
+>Использование Woob</title>
+    <para
+>&kmymoney; использует модуль <quote
+>woob bank</quote
+>. </para>
+  </sect2>
+</sect1>

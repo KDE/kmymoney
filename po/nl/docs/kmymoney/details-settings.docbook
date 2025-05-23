@@ -56,6 +56,19 @@
   <varlistentry>
     <term
 ><guilabel
+>Opstartopties</guilabel
+></term>
+    <listitem>
+      <para
+>Als u het vakje <guilabel
+>Opstartscherm tonen</guilabel
+> activeert, zal &kmymoney; het opstartscherm tonen wanneer &kmymoney; start. Het opstartscherm toont welke versie van het programma u gebruikt in de hoek linksonder. Deactiveren van het vakje laat het opstartscherm niet verschijnen bij opstarten.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
 >Opties voor automatisch opslaan</guilabel
 ></term>
 <!-- I would prefer to use a more consistent hierarchy and use of levels on this
@@ -1020,21 +1033,14 @@
 >Plug-in voor afdrukken van cheques</title>
 
 <para
->Als voorbeeld is er een plugin voor het afdrukken van cheques, bij de broncode van &kmymoney;, die altijd ingeschakeld zou moeten zijn. Hiermee kunt u een cheque uitprinten gebaseerd op de data van de geselecteerde transactie, waarbij de opmaak en indeling geregeld wordt door een &HTML;-sjabloon. U moet een sjabloon gebruiken dat overeenkomt met uw voorgedrukte cheques. Een standaard, ingebouwd sjabloon is geleverd. U kunt ook een aangepast sjabloon kiezen. Klik daarvoor op de knop <guibutton
->Configureren</guibutton
-> (&configicon;) om de configuratiedialoog <guilabel
+>Als voorbeeld is er een plugin voor het afdrukken van cheques, bij de broncode van &kmymoney;, die altijd ingeschakeld zou moeten zijn. Hiermee kunt u een cheque uitprinten gebaseerd op de data van de geselecteerde transactie, waarbij de opmaak en indeling geregeld wordt door een &HTML;-sjabloon. U moet een sjabloon gebruiken die overeenkomt met uw voorgedrukte cheques. Als u klikt op de knop <guibutton
+>Instellen</guibutton
+> (&configicon;) ,dan zal het configuratiedialoog <guilabel
 >Cheque afdrukken</guilabel
-> te openen. Aan de bovenkant kunt u een vakje activeren om een aangepast sjabloon te gebruiken. Rechts daarvan is een knop waarmee u een bestand kunt selecteren, om een ander sjabloonbestand te selecteren. </para>
+> worden geopend. Aan de bovenkant is een tekstveld voor het pad naar het geselecteerde sjabloon. Rechts daarvan is een knop waarmee u een bestand kunt selecteren, om een ander sjabloonbestand te selecteren. </para>
 
 <para
->Een sjabloonbestand is een &HTML;-bestand, met daarin speciale woorden die als referentie werken naar de velden van de transactie, van de geselecteerde rekening en instituut om aan te geven waar ze op de cheque zullen worden afgedrukt. &kmymoney; wordt geleverd met een standaard, ingebouwd sjabloon. Op <ulink url="https://invent.kde.org/office/kmymoney/-/blob/master/kmymoney/plugins/checkprinting/templates/"
->dit</ulink
-> adres kunt u het HTML bronbestand van het standaard sjabloon vinden, evenals enige additionele sjablonen. U zou ofwel in staat moeten zijn om een van hen te gebruiken of er een wijzigen om in uw behoefte te voorzien. Merk op dat slechts een <emphasis
->subset</emphasis
-> van de HTML standaard wordt ondersteund — de gedetailleerde documentatie hierover is <ulink url="https://doc.qt.io/qt-5/richtext-html-subset.html"
->hier</ulink
-> te vinden.  </para>
-
+>Een sjabloonbestand is een &HTML;-bestand, met daarin speciale woorden die als referentie werken naar de velden van de transactie, van de geselecteerde rekening en instituut om aan te geven waar ze op de cheque zullen worden afgedrukt. Bij &kmymoney; zijn enige voorbeeld sjabloonbestanden meegeleverd. U zou een daarvan moeten kunnen gebruiken , of een daarvan naar wens moeten kunnen aanpassen. Als de standaard sjabloon is geselecteerd, dan zal het configuratie-dialoog de map moeten tonen waarin de voorbeeldbestanden moeten zijn. </para>
 
 <!-- info from source code on substitution variables
     // data about the user

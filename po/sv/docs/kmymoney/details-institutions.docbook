@@ -194,13 +194,13 @@
 ></note>
 
 <para
->Bara namnet krävs i dialogrutan för ny institution, alla övriga fält är valfria. Liksom med dialogrutan för personlig information, används inte data för närvarande av &kmymoney;, men den kommer att krävas i framtida utgåvor för vissa funktioner. I synnerhet <ulink url="https://en.wikipedia.org/wiki/Bank_code"
->clearingnummer</ulink
-> och <ulink url="https://sv.wikipedia.org/wiki/ISO_9362"
-><acronym
->BIC</acronym
-> (bankidentifieringskod)</ulink
-> kommer att krävas vid användning av Internetbank. </para>
+>Only the name is required in the New Institution Dialog, all other fields are optional. As with the personal information dialog, this data is not currently used by &kmymoney;, but will be required by future releases for certain features. In particular, the <ulink url="https://en.wikipedia.org/wiki/Bank_code"
+>Bank Code</ulink
+> and the <acronym
+> <ulink url="https://en.wikipedia.org/wiki/ISO_9362"
+>BIC (Bank Identifier Code)</ulink
+></acronym
+> will be required for online banking. </para>
 </sect2>
 </sect1>
 

@@ -188,7 +188,7 @@
 >kmymoney</command
 ></refname>
 <refpurpose
->hemekonomihanteringsprogrammet av &kde;</refpurpose>
+>the personal finances manager by &kde;</refpurpose>
 </refnamediv>
 
 <refsynopsisdiv>
@@ -207,7 +207,7 @@
 ><option
 >--timers</option
 > <replaceable
-> kolumn</replaceable
+> column</replaceable
 ></group
 > <group choice="opt"
 ><option
@@ -220,7 +220,7 @@
 > <group choice="opt"
 ><option
 ><replaceable
->fil</replaceable
+>file</replaceable
 ></option
 ></group
 > </cmdsynopsis>
@@ -232,7 +232,7 @@
 >Beskrivning</title>
 
 <para
->&kmymoney; är hemekonomihanteringsprogrammet av &kde;. Det tillhandahåller alla funktioner som behövs för att balansera checkar, hantera personliga lån och kategorisera inkomster och utgifter med ett grafiskt användargränssnitt som påminner om ett checkhäfte.</para>
+>&kmymoney; is the Personal Finance Manager by &kde;. It provides the functions required to balance your checkbooks, manage your personal loans and categories your incomes and expenses using a checkbook style graphical user interface.</para>
 
 </refsect1>
 
@@ -319,15 +319,17 @@
 
 <simplelist>
 <member
->Den fullständiga dokumentationen av &kmymoney; underhålls som en handbok i Docbook. Om programmet &khelpcenter; är riktigt installerat på datorn, ska kommandot <userinput
+>The full documentation for &kmymoney; is maintained as a docbook manual. If the &khelpcenter; program is properly installed at your site, the command <userinput
 ><command
 >khelpcenter</command
 > <parameter
 >help:/kmymoney</parameter
 ></userinput
-> ge tillgång till den fullständiga handboken. Som alternativ kan man bläddra i handboken med &konqueror;, genom att ange webbadressen <ulink url="help:/kmymoney"
+> should give you access to the complete manual. Alternatively the manual can be browsed in &konqueror; giving it the <acronym
+>URL</acronym
+> <ulink url="help:/kmymoney"
 >help:/kmymoney</ulink
->.</member>
+></member>
 <member
 >kf5options(7)</member>
 <member

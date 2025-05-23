@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-18 02:01+0000\n"
+"POT-Creation-Date: 2025-05-23 03:30+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -267,10 +267,10 @@ msgstr ""
 
 #: kmymoney/dialogs/accountcreator.cpp:76
 #, fuzzy, kde-format
-#| msgid "Create a new profile"
+#| msgid "Delete account..."
 msgctxt "Create undo action"
 msgid "Create account"
-msgstr "يېڭى سەپلەك قۇر"
+msgstr "ھېسابات ئۆچۈرۈش…"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
 #, fuzzy, kde-format
@@ -2511,10 +2511,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:899
-#, fuzzy, kde-format
-#| msgid "Category"
+#, kde-format
 msgid "Create automatically"
-msgstr "كاتېگورىيە"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_budgetGroupBox)
 #. i18n: ectx: Menu (budget_context_menu)
@@ -2837,8 +2836,7 @@ msgstr "تەرتىپلەش تاللانما"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_useDefault)
 #: kmymoney/dialogs/ktransactionsortoptionsdlg.ui:23
-#, fuzzy, kde-format
-#| msgid "Use default"
+#, kde-format
 msgid "Use default"
 msgstr "كۆڭۈلدىكىنى ئىشلەت"
 
@@ -3271,10 +3269,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:457
-#, fuzzy, kde-format
-#| msgid "Online Accounts"
+#, kde-format
 msgid "Hide accounts with a zero balance from Accounts"
-msgstr "توردىكى ھېساباتلار"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:464
@@ -3868,10 +3865,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:105
-#, fuzzy, kde-format
-#| msgid "  Transactions"
+#, kde-format
 msgid "Show group headers between transactions"
-msgstr "  سودا"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFiscalMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:115
@@ -3881,10 +3877,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:123
-#, fuzzy, kde-format
-#| msgid "Import options"
+#, kde-format
 msgid "Don't show reconciliation entries"
-msgstr "ئىمپورت قىلىش تاللانمىلىرى"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:128
@@ -4309,10 +4304,9 @@ msgid "Holiday regions integration"
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:40 kmymoney/kcreditswindow.cpp:91
-#, fuzzy, kde-format
-#| msgid "Balance"
+#, kde-format
 msgid "Online banking"
-msgstr "تەڭپۇڭ"
+msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:43
 #, kde-format
@@ -4691,9 +4685,9 @@ msgstr "ئەمەلدىن قالدۇر"
 
 #: kmymoney/kmymoney.cpp:1407
 #, fuzzy, kde-format
-#| msgid "Import options"
+#| msgid "General Information"
 msgid "Report reconciliation"
-msgstr "ئىمپورت قىلىش تاللانمىلىرى"
+msgstr "ئادەتتىكى ئۇچۇر"
 
 #: kmymoney/kmymoney.cpp:1408
 #, kde-format
@@ -4893,24 +4887,24 @@ msgstr ""
 
 #: kmymoney/kmymoney.cpp:1459
 #, fuzzy, kde-format
-#| msgid "Transactions"
+#| msgid "  Transactions"
 msgctxt "Move transaction"
 msgid "Move transaction"
-msgstr "سودا"
+msgstr "  سودا"
 
 #: kmymoney/kmymoney.cpp:1460
 #, fuzzy, kde-format
-#| msgid "Transactions"
+#| msgid "  Transactions"
 msgctxt "Show transaction"
 msgid "Show transaction"
-msgstr "سودا"
+msgstr "  سودا"
 
 #: kmymoney/kmymoney.cpp:1461
 #, fuzzy, kde-format
-#| msgid "Transactions"
+#| msgid "  Transactions"
 msgctxt "Display transaction details"
 msgid "Show transaction details"
-msgstr "سودا"
+msgstr "  سودا"
 
 #: kmymoney/kmymoney.cpp:1463
 #, fuzzy, kde-format
@@ -5085,9 +5079,9 @@ msgstr "دوكلات ساقلا"
 
 #: kmymoney/kmymoney.cpp:1502
 #, fuzzy, kde-format
-#| msgid "Save Report"
+#| msgid "Copy of %1"
 msgid "Copy report"
-msgstr "دوكلات ساقلا"
+msgstr "%1 نىڭ كۆپەيتىلمىسى"
 
 #: kmymoney/kmymoney.cpp:1503
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:215
@@ -5098,9 +5092,9 @@ msgstr "سەپلە"
 
 #: kmymoney/kmymoney.cpp:1504
 #, fuzzy, kde-format
-#| msgid "Save Report"
+#| msgid "Export"
 msgid "Export report"
-msgstr "دوكلات ساقلا"
+msgstr "ئېكسپورت قىل"
 
 #: kmymoney/kmymoney.cpp:1505
 #, fuzzy, kde-format
@@ -5122,10 +5116,9 @@ msgid "Toggle chart"
 msgstr "ئالماشتۇر"
 
 #: kmymoney/kmymoney.cpp:1508
-#, fuzzy, kde-format
-#| msgid "Transfer"
+#, kde-format
 msgid "Edit tab order"
-msgstr "يوللا"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1511
 #, kde-format
@@ -5165,25 +5158,22 @@ msgid "Start reconciling the currently selected account"
 msgstr ""
 
 #: kmymoney/kmymoney.cpp:1661
-#, fuzzy, kde-format
-#| msgid "Import options"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Postpone the current reconciliation"
-msgstr "ئىمپورت قىلىش تاللانمىلىرى"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1662
-#, fuzzy, kde-format
-#| msgid "Import options"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Finish the current reconciliation"
-msgstr "ئىمپورت قىلىش تاللانمىلىرى"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1663
-#, fuzzy, kde-format
-#| msgid "Import options"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Cancel the current reconciliation"
-msgstr "ئىمپورت قىلىش تاللانمىلىرى"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1771
 #, kde-format
@@ -5220,9 +5210,9 @@ msgstr ""
 
 #: kmymoney/kmymoney.cpp:2254
 #, fuzzy, kde-format
-#| msgid "  Transactions"
+#| msgid "Unable to open file '%1' for writing"
 msgid "Unable to duplicate transaction(s)"
-msgstr "  سودا"
+msgstr "ھۆججەت ‹%1› نى يېزىش ئۈچۈن ئاچقىلى بولمىدى."
 
 #: kmymoney/kmymoney.cpp:2366
 #, fuzzy, kde-format
@@ -5251,18 +5241,17 @@ msgid "Transaction already reconciled"
 msgstr "سودا"
 
 #: kmymoney/kmymoney.cpp:2696
-#, fuzzy, kde-format
-#| msgid "  Transactions"
+#, kde-format
 msgid "Do you really want to change the selected transaction?"
 msgid_plural "Do you really want to change all %1 selected transactions?"
-msgstr[0] "  سودا"
+msgstr[0] ""
 
 #: kmymoney/kmymoney.cpp:2700
 #, fuzzy, kde-format
-#| msgid "Transactions"
+#| msgid "  Transactions"
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
-msgstr "سودا"
+msgstr "  سودا"
 
 #: kmymoney/kmymoney.cpp:2785
 #, kde-format
@@ -6253,7 +6242,7 @@ msgstr "مۇۋاپىق"
 
 #: kmymoney/models/statementmodel.cpp:105
 #, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
+#| msgctxt "To duplicate a split"
 #| msgid "Duplicate"
 msgctxt "@title:column Shows number of duplicate transactions"
 msgid "Duplicates"
@@ -6610,9 +6599,9 @@ msgstr ""
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3252
 #, fuzzy, kde-format
-#| msgid "Transactions"
+#| msgid "  Transactions"
 msgid "* Problems with transactions"
-msgstr "سودا"
+msgstr "  سودا"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3263
 #, kde-format
@@ -8560,10 +8549,10 @@ msgstr "نومۇرى"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:76
 #, fuzzy, kde-format
-#| msgid "Import options"
+#| msgid "General Information"
 msgctxt "@title:column Reconciliation state (ext)"
 msgid "Reconciliation"
-msgstr "ئىمپورت قىلىش تاللانمىلىرى"
+msgstr "ئادەتتىكى ئۇچۇر"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:77
 #, fuzzy, kde-format
@@ -8906,10 +8895,11 @@ msgstr "قەرز"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:181
 #, fuzzy
-#| msgid "Type"
+#| msgctxt "@title header of the currency name column"
+#| msgid "Name"
 msgctxt "Schedule header"
 msgid "Type/Name"
-msgstr "تىپى"
+msgstr "ئاتى"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:182
 #, fuzzy
@@ -9446,11 +9436,10 @@ msgid "Use this to select a filename to export to"
 msgstr ""
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:201
-#, fuzzy, kde-format
-#| msgid "  Transactions"
+#, kde-format
 msgctxt "@info Hint in CSV export dialog"
 msgid "Current selected account does not contain any transactions."
-msgstr "  سودا"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, CsvExportDlg)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:14
@@ -12940,9 +12929,9 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:542
 #: kmymoney/plugins/ofx/import/importoption.ui:90
 #, fuzzy, kde-format
-#| msgid "  Transactions"
+#| msgid "Unable to open file '%1' for writing"
 msgid "Method to detect duplicate transactions during import"
-msgstr "  سودا"
+msgstr "ھۆججەت ‹%1› نى يېزىش ئۈچۈن ئاچقىلى بولمىدى."
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:71
 #, kde-format
@@ -14511,10 +14500,10 @@ msgstr "ئۆزگىچە"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:89
 #, fuzzy, kde-format
-#| msgid "Reports"
+#| msgid "Sort options"
 msgctxt "@item:intable Your budgets, %1 budget year"
 msgid "Budget %1"
-msgstr "دوكلات"
+msgstr "تەرتىپلەش تاللانما"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:98
 #, kde-format
@@ -14623,11 +14612,10 @@ msgid "Budget based on forecast"
 msgstr ""
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:460
-#, fuzzy, kde-format
-#| msgid "Transactions"
+#, kde-format
 msgctxt "@item:inmenu To make it income"
 msgid "Change to income"
-msgstr "سودا"
+msgstr ""
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:465
 #, kde-format
@@ -15792,10 +15780,10 @@ msgstr ""
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:2207
 #, fuzzy, kde-format
-#| msgid "Reports"
+#| msgid "Sort options"
 msgctxt "@title:column report header"
 msgid "Budget"
-msgstr "دوكلات"
+msgstr "تەرتىپلەش تاللانما"
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:2212
 #, fuzzy, kde-format
@@ -16338,10 +16326,9 @@ msgid "&Export to PDF files"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:816
-#, fuzzy, kde-format
-#| msgid "Save Report"
+#, kde-format
 msgid "Export into directory"
-msgstr "دوكلات ساقلا"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KReportsView)
 #: kmymoney/plugins/views/reports/kreportsview.ui:14
@@ -16763,10 +16750,10 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/views/khomeview_p.h:1567
 #, fuzzy, kde-format
-#| msgid "Reports"
+#| msgid "Sort options"
 msgctxt "@title Home page section"
 msgid "Budget"
-msgstr "دوكلات"
+msgstr "تەرتىپلەش تاللانما"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:159
 #, kde-format
@@ -18212,10 +18199,9 @@ msgstr ""
 
 #. i18n: ectx: label, entry (transactionImportedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:194
-#, fuzzy, kde-format
-#| msgid "  Transactions"
+#, kde-format
 msgid "Text color for imported transactions"
-msgstr "  سودا"
+msgstr ""
 
 #. i18n: ectx: label, entry (transactionMatchedColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:198
@@ -18274,17 +18260,15 @@ msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:244
-#, fuzzy, kde-format
-#| msgid "Online Accounts"
+#, kde-format
 msgid "Hide zero balance accounts from Accounts"
-msgstr "توردىكى ھېساباتلار"
+msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:248
-#, fuzzy, kde-format
-#| msgid "Online Accounts"
+#, kde-format
 msgid "Hide zero balance accounts from Home"
-msgstr "توردىكى ھېساباتلار"
+msgstr ""
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:252
@@ -18674,11 +18658,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:600
-#, fuzzy, kde-format
-#| msgid "  Transactions"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
-msgstr "  سودا"
+msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:603
 #, kde-format
@@ -18736,11 +18719,10 @@ msgid "Enter price information for this transaction"
 msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:662
-#, fuzzy, kde-format
-#| msgid "  Transactions"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
-msgstr "  سودا"
+msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:669
 #, kde-format
@@ -18749,11 +18731,10 @@ msgid "Enter category for fees"
 msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:672
-#, fuzzy, kde-format
-#| msgid "Amount"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
-msgstr "مىقدارى"
+msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:678
 #, kde-format
@@ -18762,18 +18743,16 @@ msgid "Enter category for interest"
 msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:681
-#, fuzzy, kde-format
-#| msgid "Amount"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
-msgstr "مىقدارى"
+msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:686
-#, fuzzy, kde-format
-#| msgid "  Transactions"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
-msgstr "  سودا"
+msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:691
 #, kde-format
@@ -18798,11 +18777,10 @@ msgstr ""
 #. i18n: ectx: property (toolTip), widget (KMyMoneyDateEdit, dateEdit)
 #: kmymoney/views/investtransactioneditor.ui:73
 #: kmymoney/views/newtransactioneditor.ui:256
-#, fuzzy, kde-format
-#| msgid "  Transactions"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The posting date of the transaction."
-msgstr "  سودا"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (KMyMoneyAccountCombo, feesCombo)
 #: kmymoney/views/investtransactioneditor.ui:126
@@ -19035,11 +19013,10 @@ msgid "This account is still mapped to an online account"
 msgstr ""
 
 #: kmymoney/views/kcategoriesview.cpp:153
-#, fuzzy, kde-format
-#| msgid "Memo"
+#, kde-format
 msgctxt "Approximate loss"
 msgid "Loss: ~%1"
-msgstr "ئەسلەتمە"
+msgstr ""
 
 #: kmymoney/views/kcategoriesview.cpp:154
 #, fuzzy, kde-format
@@ -19444,11 +19421,10 @@ msgstr "كۈنتەرتىپكە قويۇلغان"
 
 #: kmymoney/views/khomeview_p.h:685
 #, fuzzy, kde-format
-#| msgctxt "Scheduled method"
-#| msgid "Scheduled"
+#| msgid "Periodic Payment"
 msgctxt "@title Home page sub-section"
 msgid "Overdue payments"
-msgstr "كۈنتەرتىپكە قويۇلغان"
+msgstr "قەرەللىك قايتۇرۇش"
 
 #: kmymoney/views/khomeview_p.h:721
 #, fuzzy, kde-format
@@ -19459,11 +19435,10 @@ msgstr "پۇل تۆلەش ئۇسۇلى"
 
 #: kmymoney/views/khomeview_p.h:736
 #, fuzzy, kde-format
-#| msgctxt "Scheduled method"
-#| msgid "Scheduled"
+#| msgid "Payment"
 msgctxt "@title Home page sub-section"
 msgid "Future payments"
-msgstr "كۈنتەرتىپكە قويۇلغان"
+msgstr "تۆلەش"
 
 #: kmymoney/views/khomeview_p.h:799
 #, kde-format
@@ -19560,7 +19535,6 @@ msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1421
 #, fuzzy, kde-format
-#| msgctxt "Reconciliation flag C"
 #| msgid "C"
 msgctxt "@title:column table on home page: cleared"
 msgid "C"
@@ -19575,11 +19549,10 @@ msgid "!R"
 msgstr "R"
 
 #: kmymoney/views/khomeview_p.h:1429
-#, fuzzy, kde-format
-#| msgid "Import options"
+#, kde-format
 msgctxt "@title:column table on home page: last reconciliation date"
 msgid "Reconciled"
-msgstr "ئىمپورت قىلىش تاللانمىلىرى"
+msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1432
 #, fuzzy, kde-format
@@ -19854,7 +19827,7 @@ msgstr ""
 
 #: kmymoney/views/kpayeesview.cpp:159
 #, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
+#| msgctxt "To duplicate a split"
 #| msgid "Duplicate"
 msgctxt "@title:window"
 msgid "Duplicate payee name"
@@ -20244,10 +20217,10 @@ msgstr ""
 
 #: kmymoney/views/kscheduledview.cpp:189
 #, fuzzy, kde-format
-#| msgid "Schedule"
+#| msgid "Delete"
 msgctxt "@title:window"
 msgid "Delete schedule"
-msgstr "كۈنتەرتىپ"
+msgstr "ئۆچۈر"
 
 #: kmymoney/views/kscheduledview.cpp:197
 #, kde-format
@@ -20286,11 +20259,10 @@ msgid "Filter"
 msgstr "سۈزگۈچ"
 
 #: kmymoney/views/kscheduledview_p.h:103
-#, fuzzy, kde-format
-#| msgid "Schedule"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "No schedules found"
-msgstr "كۈنتەرتىپ"
+msgstr ""
 
 #: kmymoney/views/kscheduledview_p.h:254
 #, kde-format
@@ -20335,10 +20307,11 @@ msgid "Criteria"
 msgstr "شەرت"
 
 #: kmymoney/views/ksearchtransactiondlg.cpp:64
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "  Transactions"
 msgctxt "@info:tooltip for find transaction apply button"
 msgid "Search transactions"
-msgstr ""
+msgstr "  سودا"
 
 #: kmymoney/views/ksearchtransactiondlg.cpp:110
 #, kde-format
@@ -20411,7 +20384,7 @@ msgstr ""
 
 #: kmymoney/views/ktagsview.cpp:381
 #, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
+#| msgctxt "To duplicate a split"
 #| msgid "Duplicate"
 msgctxt "@title:window"
 msgid "Duplicate tag name"
@@ -20451,11 +20424,10 @@ msgid "Tag color:"
 msgstr ""
 
 #: kmymoney/views/ktransactionselectdlg.cpp:56
-#, fuzzy, kde-format
-#| msgid "  Transactions"
+#, kde-format
 msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
-msgstr "  سودا"
+msgstr ""
 
 #: kmymoney/views/ktransactionselectdlg.cpp:128
 #, kde-format
@@ -20473,10 +20445,10 @@ msgstr ""
 
 #: kmymoney/views/ktransactionselectdlg.cpp:136
 #, fuzzy, kde-format
-#| msgid "  Transactions"
+#| msgid "Unable to open file '%1' for writing"
 msgctxt "@info:tooltip Exchange transactions about to merge"
 msgid "Press to exchange the two transactions."
-msgstr "  سودا"
+msgstr "ھۆججەت ‹%1› نى يېزىش ئۈچۈن ئاچقىلى بولمىدى."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTransactionSelectDlg)
 #: kmymoney/views/ktransactionselectdlg.ui:14
@@ -20594,11 +20566,10 @@ msgid "Enter the overdue scheduled transaction."
 msgstr "  سودا"
 
 #: kmymoney/views/ledgerview.cpp:967
-#, fuzzy, kde-format
-#| msgid "  Transactions"
+#, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
-msgstr "  سودا"
+msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:968
 #, kde-format
@@ -20623,11 +20594,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:994
-#, fuzzy, kde-format
-#| msgid "  Transactions"
+#, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
-msgstr "  سودا"
+msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:995
 #, fuzzy, kde-format
@@ -20637,11 +20607,10 @@ msgid "Accept or unmatch transaction"
 msgstr "  سودا"
 
 #: kmymoney/views/ledgerviewpage_p.h:98
-#, fuzzy, kde-format
-#| msgid "Import options"
+#, kde-format
 msgctxt "@label:textbox Reconciliation date"
 msgid "Last reconciliation: %1"
-msgstr "ئىمپورت قىلىش تاللانمىلىرى"
+msgstr ""
 
 #: kmymoney/views/ledgerviewpage_p.h:100
 #, kde-format
@@ -20847,19 +20816,17 @@ msgstr "%1 نىڭ كۆپەيتىلمىسى"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, numberEdit)
 #: kmymoney/views/newtransactioneditor.ui:24
-#, fuzzy, kde-format
-#| msgid "  Transactions"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The check number used for this transaction."
-msgstr "  سودا"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (CreditDebitEdit, creditDebitEdit)
 #: kmymoney/views/newtransactioneditor.ui:72
-#, fuzzy, kde-format
-#| msgid "  Transactions"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the amount of the transaction."
-msgstr "  سودا"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, costCenterCombo)
 #: kmymoney/views/newtransactioneditor.ui:194
@@ -20870,11 +20837,10 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (KMyMoneyAccountCombo, categoryCombo)
 #: kmymoney/views/newtransactioneditor.ui:281
-#, fuzzy, kde-format
-#| msgid "  Transactions"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the category or counter account of the transaction."
-msgstr "  سودا"
+msgstr ""
 
 #: kmymoney/views/newtransactionform.cpp:129
 #, kde-format
@@ -20921,10 +20887,10 @@ msgstr "ھېسابات نومۇرى"
 
 #: kmymoney/views/reconciliationdelegate.cpp:107
 #, fuzzy, kde-format
-#| msgid "Import options"
+#| msgid "General Information"
 msgctxt "Ledger marker showing a reconciliation entry"
 msgid "Reconciliation"
-msgstr "ئىمپورت قىلىش تاللانمىلىرى"
+msgstr "ئادەتتىكى ئۇچۇر"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:124
 #, kde-format
@@ -21178,7 +21144,7 @@ msgstr "تەھرىر…"
 
 #: kmymoney/views/splitview.cpp:134
 #, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
+#| msgctxt "To duplicate a split"
 #| msgid "Duplicate"
 msgctxt "@item:inmenu Duplicate selected split(s)"
 msgid "Duplicate"
@@ -21193,10 +21159,10 @@ msgstr "ئۆچۈر"
 
 #: kmymoney/views/tabordereditor.cpp:428
 #, fuzzy, kde-format
-#| msgid "Application"
+#| msgid "Sort options"
 msgctxt "@title:menu"
 msgid "Tab Editor Options"
-msgstr "پروگرامما"
+msgstr "تەرتىپلەش تاللانما"
 
 #: kmymoney/views/tabordereditor.cpp:431
 #, kde-format
@@ -21918,10 +21884,8 @@ msgid "Reconcile state"
 msgstr ""
 
 #: kmymoney/widgets/transactionsortoption.cpp:46
-#, fuzzy
-#| msgid "Import options"
 msgid "Reconciliation date"
-msgstr "ئىمپورت قىلىش تاللانمىلىرى"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QListWidget, m_selectedList)
 #: kmymoney/widgets/transactionsortoption.ui:92
@@ -22487,9 +22451,9 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:265
 #, fuzzy, kde-format
-#| msgid "Create a new profile"
+#| msgid "Favorites"
 msgid "Favorite account"
-msgstr "يېڭى سەپلەك قۇر"
+msgstr "يىغقۇچ"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel14)
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:27
@@ -23493,9 +23457,9 @@ msgstr ""
 #. i18n: ectx: property (title), widget (KInvestmentDetailsWizardPage, KInvestmentDetailsWizardPage)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:14
 #, fuzzy, kde-format
-#| msgid "Sort options"
+#| msgid "Security"
 msgid "Security details"
-msgstr "تەرتىپلەش تاللانما"
+msgstr "بىخەتەرلىك"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:23
@@ -23658,10 +23622,10 @@ msgstr ""
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:217
 #, fuzzy, kde-format
-#| msgid "Sort options"
+#| msgid "Security"
 msgctxt "@info:tab Security edit wizard detail page"
 msgid "Security details"
-msgstr "تەرتىپلەش تاللانما"
+msgstr "بىخەتەرلىك"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:250
 #, kde-format
@@ -24928,10 +24892,9 @@ msgid ""
 msgstr ""
 
 #: tools/kmmreport-export.cpp:116
-#, fuzzy, kde-format
-#| msgid "Save Report"
+#, kde-format
 msgid "Export KMyMoney reports"
-msgstr "دوكلات ساقلا"
+msgstr ""
 
 #: tools/kmmreport-export.cpp:120
 #, kde-format
@@ -24944,10 +24907,9 @@ msgid "Export in HTML format"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:126
-#, fuzzy, kde-format
-#| msgid "Save Report"
+#, kde-format
 msgid "Export in xml format"
-msgstr "دوكلات ساقلا"
+msgstr ""
 
 #: tools/kmmreport-export.cpp:129
 #, kde-format
@@ -24998,30 +24960,28 @@ msgstr ""
 #~ msgid "  Transactions"
 #~ msgstr "  سودا"
 
-#, fuzzy
-#~| msgid "Delete account..."
-#~ msgid "Select category or account."
-#~ msgstr "ھېسابات ئۆچۈرۈش…"
-
-#~ msgctxt "Price source"
-#~ msgid "Source"
-#~ msgstr "مەنبە"
-
-#~ msgid "Close this window"
-#~ msgstr "بۇ كۆزنەكنى ياپىدۇ"
+#~ msgctxt "Total value"
+#~ msgid "Total"
+#~ msgstr "جەمئىي"
 
 #~ msgctxt "Equity name"
 #~ msgid "Name"
 #~ msgstr "ئاتى"
 
-#~ msgctxt "Online quote source"
-#~ msgid "Source"
-#~ msgstr "مەنبە"
-
 #, fuzzy
 #~| msgid "File already exists"
 #~ msgid "Price Already Exists"
 #~ msgstr "ھۆججەت مەۋجۇت"
+
+#~ msgctxt "Price source"
+#~ msgid "Source"
+#~ msgstr "مەنبە"
+
+#~ msgid "Delete..."
+#~ msgstr "ئۆچۈر…"
+
+#~ msgid "Clear &All"
+#~ msgstr "ھەممىنى تازىلا(&A)"
 
 #, fuzzy
 #~| msgid "Symbol"
@@ -25044,25 +25004,120 @@ msgstr ""
 
 #, fuzzy
 #~| msgid "Delete"
-#~ msgctxt "@title:window"
 #~ msgid "Delete quote source"
 #~ msgstr "ئۆچۈر"
 
-#, fuzzy
-#~| msgid "Unable to open file '%1' for writing"
-#~ msgid "Unable to update price for %1"
-#~ msgstr "ھۆججەت ‹%1› نى يېزىش ئۈچۈن ئاچقىلى بولمىدى."
+#~ msgid "Robert Wadley"
+#~ msgstr "Robert Wadley"
+
+#~ msgid "Laurent Montel"
+#~ msgstr "Laurent Montel"
+
+#~ msgid "Wolfgang Rohdewald"
+#~ msgstr "Wolfgang Rohdewald"
+
+#~ msgctxt "New transaction button"
+#~ msgid "New"
+#~ msgstr "يېڭى"
+
+#~ msgctxt "Unknown reconciliation state"
+#~ msgid "Unknown"
+#~ msgstr "نامەلۇم"
+
+#~ msgctxt "Flag for unknown reconciliation state"
+#~ msgid "?"
+#~ msgstr "؟"
+
+#~ msgctxt "Column heading for category in tax report"
+#~ msgid "Tax"
+#~ msgstr "باج"
 
 #, fuzzy
-#~| msgid "Unable to open file '%1' for writing"
-#~ msgid "Unable to update price for %1 (error encountered: '%2')"
-#~ msgstr "ھۆججەت ‹%1› نى يېزىش ئۈچۈن ئاچقىلى بولمىدى."
+#~| msgid "C"
+#~ msgctxt "Column heading for Cost Center"
+#~ msgid "CC"
+#~ msgstr "C"
 
 #, fuzzy
-#~| msgid "Tag"
-#~ msgctxt "Split header"
-#~ msgid "Tag"
-#~ msgstr "خەتكۈش"
+#~| msgid "Sort order"
+#~ msgctxt "IBAN, SWIFT, etc."
+#~ msgid "Sort Code"
+#~ msgstr "تەرتىپلەش تەرتىپى"
+
+#~ msgctxt "Payment made from account"
+#~ msgid "Payment"
+#~ msgstr "تۆلەش"
+
+#~ msgctxt "Deposit into account"
+#~ msgid "Deposit"
+#~ msgstr "ئامانەت پۇل"
+
+#, fuzzy
+#~| msgctxt "@item no payments were entered for a loan"
+#~| msgid "No"
+#~ msgctxt "@label The word to be printed for no fractional part as in No/00"
+#~ msgid "No"
+#~ msgstr "ياق"
+
+#, fuzzy
+#~| msgid "Save Report"
+#~ msgid "CSV exporter"
+#~ msgstr "دوكلات ساقلا"
+
+#, fuzzy
+#~| msgid "Imported"
+#~ msgid "CSV importer"
+#~ msgstr "ئەكىردى"
+
+#, fuzzy
+#~| msgid "Imported"
+#~ msgid "GnuCash importer"
+#~ msgstr "ئەكىردى"
+
+#, fuzzy
+#~| msgid "iCalendar file"
+#~ msgid "iCalendar exporter"
+#~ msgstr "iCalendar ھۆججىتى"
+
+#, fuzzy
+#~| msgid "KMyMoney"
+#~ msgid "KMyMoney print check"
+#~ msgstr "KMyMoney"
+
+#~ msgid "Execute"
+#~ msgstr "ئىجرا قىل"
+
+#~ msgid "Jobs"
+#~ msgstr "ۋەزىپىلەر"
+
+#, fuzzy
+#~| msgid "Imported"
+#~ msgid "OFX Importer"
+#~ msgstr "ئەكىردى"
+
+#, fuzzy
+#~| msgid "Imported"
+#~ msgid "QIF importer"
+#~ msgstr "ئەكىردى"
+
+#, fuzzy
+#~| msgid "Sort options"
+#~ msgid "Budgets view"
+#~ msgstr "تەرتىپلەش تاللانما"
+
+#~ msgctxt "New budget"
+#~ msgid "New"
+#~ msgstr "يېڭى"
+
+#~ msgctxt "@title header of the budget name column"
+#~ msgid "Name"
+#~ msgstr "ئاتى"
+
+#~ msgid "Copy"
+#~ msgstr "كۆچۈر"
+
+#~ msgid "Close this window"
+#~ msgstr "بۇ كۆزنەكنى ياپىدۇ"
 
 #, fuzzy
 #~| msgid ""
@@ -25076,54 +25131,47 @@ msgstr ""
 #~ "*|بارلىق ھۆججەتلەر"
 
 #, fuzzy
-#~| msgid "Sort options"
-#~ msgctxt "@title:menu budget context menu"
-#~ msgid "Budget options"
-#~ msgstr "تەرتىپلەش تاللانما"
+#~| msgid "Loading accounts..."
+#~ msgid "Saving costcenters..."
+#~ msgstr "ھېساباتلارنى يۈكلەۋاتىدۇ…"
 
 #, fuzzy
-#~| msgid "KMyMoney"
-#~ msgid "KMyMoney print check"
-#~ msgstr "KMyMoney"
-
-#~ msgctxt "Activity for income categories"
-#~ msgid "Received"
-#~ msgstr "تاپشۇرۇۋالغىنى"
-
-#~ msgctxt "Activity for expense categories"
-#~ msgid "Paid"
-#~ msgstr "سېتىۋالغان"
+#~| msgid "Unknown"
+#~ msgctxt "Name for unknown payee"
+#~ msgid "Unknown"
+#~ msgstr "نامەلۇم"
 
 #, fuzzy
-#~| msgid "From"
-#~ msgctxt "Payer"
-#~ msgid "From"
-#~ msgstr "يوللىغۇچى"
+#~| msgid "Type: %1"
+#~ msgid "Payee: %1"
+#~ msgstr "تىپ: %1"
 
 #, fuzzy
-#~| msgid "C"
-#~ msgctxt "@title:column"
-#~ msgid "CC"
-#~ msgstr "C"
+#~| msgctxt "Holiday region (region language)"
+#~| msgid "%1 (%2)"
+#~ msgid "%1 charge (%2)"
+#~ msgid_plural "%1 charges (%2)"
+#~ msgstr[0] "%1 (%2)"
 
-#~ msgctxt "Enter todays date into date input widget"
-#~ msgid "T"
-#~ msgstr "پ"
-
-#, fuzzy
-#~| msgid "  Transactions"
-#~ msgctxt "Question about the accept action"
-#~ msgid "Do you want to accept the imported transaction now?"
-#~ msgstr "  سودا"
+#~ msgctxt "%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments"
+#~ msgid "%1, %2"
+#~ msgstr "%1، %2"
 
 #, fuzzy
-#~| msgid "Transactions"
-#~ msgctxt "@title:window"
-#~ msgid "Accept transaction"
-#~ msgstr "سودا"
+#~| msgctxt "Ledger view settings"
+#~| msgid "Ledger"
+#~ msgid "New ledger"
+#~ msgstr "ئانا ھېساب دەپتىرى"
 
-#~ msgid "Copy"
-#~ msgstr "كۆچۈر"
+#~ msgctxt "New payee"
+#~ msgid "New"
+#~ msgstr "يېڭى"
+
+#~ msgid "Loans"
+#~ msgstr "قەرز"
+
+#~ msgid "Frequency"
+#~ msgstr "چاستوتا"
 
 #, fuzzy
 #~| msgid "General Settings"
@@ -25146,28 +25194,10 @@ msgstr ""
 #~ msgstr "دوكلات ساقلا"
 
 #, fuzzy
-#~| msgid "Closed"
-#~ msgctxt ""
-#~ msgid "Closed"
-#~ msgstr "يېپىلغان"
-
-#~ msgctxt "Payment made from account"
-#~ msgid "Payment"
-#~ msgstr "تۆلەش"
-
-#~ msgctxt "Deposit into account"
-#~ msgid "Deposit"
-#~ msgstr "ئامانەت پۇل"
-
-#, fuzzy
-#~| msgctxt "@title header of the currency name column"
-#~| msgid "Name"
-#~ msgctxt "OnlineJob"
-#~ msgid "Name"
-#~ msgstr "ئاتى"
-
-#~ msgid "Delete..."
-#~ msgstr "ئۆچۈر…"
+#~| msgctxt "location of credit column"
+#~| msgid "Credits"
+#~ msgid "Credit"
+#~ msgstr "تەشەككۈر"
 
 #~ msgctxt "Deposits onto account"
 #~ msgid "Deposits"
@@ -25197,22 +25227,27 @@ msgstr ""
 #~ msgid "Unknown"
 #~ msgstr "نامەلۇم"
 
-#~ msgctxt "Total value"
-#~ msgid "Total"
-#~ msgstr "جەمئىي"
+#~ msgctxt "The balance of the selected budget"
+#~ msgid "Balance: "
+#~ msgstr "تەڭپۇڭ: "
 
-#~ msgid "Ratio"
-#~ msgstr "نىسبەت"
+#~ msgctxt "Activity for income categories"
+#~ msgid "Received"
+#~ msgstr "تاپشۇرۇۋالغىنى"
 
-#~ msgctxt "To duplicate a split"
-#~ msgid "Duplicate"
-#~ msgstr "كۆچۈر"
+#~ msgctxt "Activity for expense categories"
+#~ msgid "Paid"
+#~ msgstr "سېتىۋالغان"
 
-#~ msgid "Clear &All"
-#~ msgstr "ھەممىنى تازىلا(&A)"
+#, fuzzy
+#~| msgid "From"
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "يوللىغۇچى"
 
-#~ msgid "Unassigned"
-#~ msgstr "تەقسىملەنمىگەن"
+#~ msgctxt "Enter todays date into date input widget"
+#~ msgid "T"
+#~ msgstr "پ"
 
 #~ msgctxt "Unknown payee"
 #~ msgid "Unknown"
@@ -25233,153 +25268,6 @@ msgstr ""
 #~ msgid "Buy"
 #~ msgstr "سېتىۋېلىش"
 
-#~ msgctxt "Unknown reconciliation state"
-#~ msgid "Unknown"
-#~ msgstr "نامەلۇم"
-
-#~ msgctxt "Button text for match transaction"
-#~ msgid "Match"
-#~ msgstr "مۇۋاپىق"
-
-#, fuzzy
-#~| msgid "Date:"
-#~ msgid "Date: %1"
-#~ msgstr "چېسلا:"
-
-#, fuzzy
-#~| msgid "Unknown"
-#~ msgctxt "Name for unknown payee"
-#~ msgid "Unknown"
-#~ msgstr "نامەلۇم"
-
-#, fuzzy
-#~| msgid "Type: %1"
-#~ msgid "Payee: %1"
-#~ msgstr "تىپ: %1"
-
-#, fuzzy
-#~| msgid "Memo"
-#~ msgid "Memo: %1"
-#~ msgstr "ئەسلەتمە"
-
-#, fuzzy
-#~| msgctxt "Holiday region (region language)"
-#~| msgid "%1 (%2)"
-#~ msgid "%1 charge (%2)"
-#~ msgid_plural "%1 charges (%2)"
-#~ msgstr[0] "%1 (%2)"
-
-#~ msgctxt "%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments"
-#~ msgid "%1, %2"
-#~ msgstr "%1، %2"
-
-#~ msgid "Go to '%1'"
-#~ msgstr "‹%1› غا يۆتكەل"
-
-#, fuzzy
-#~| msgctxt "Ledger view settings"
-#~| msgid "Ledger"
-#~ msgid "Old ledgers"
-#~ msgstr "ئانا ھېساب دەپتىرى"
-
-#~ msgid "Robert Wadley"
-#~ msgstr "Robert Wadley"
-
-#~ msgid "Laurent Montel"
-#~ msgstr "Laurent Montel"
-
-#~ msgid "Wolfgang Rohdewald"
-#~ msgstr "Wolfgang Rohdewald"
-
-#~ msgctxt "Column heading for category in tax report"
-#~ msgid "Tax"
-#~ msgstr "باج"
-
-#, fuzzy
-#~| msgid "C"
-#~ msgctxt "Column heading for Cost Center"
-#~ msgid "CC"
-#~ msgstr "C"
-
-#, fuzzy
-#~| msgid "Full name"
-#~ msgctxt ""
-#~ "Tooltip for 'Name' column. Used in Account, Category and Institution "
-#~ "context, so avoid being too specific"
-#~ msgid "Full name"
-#~ msgstr "تولۇق ئاتى"
-
-#, fuzzy
-#~| msgid "Type"
-#~ msgctxt ""
-#~ "Toolip for a 'Type' column, used in both Account and Category context"
-#~ msgid "Type"
-#~ msgstr "تىپى"
-
-#, fuzzy
-#~| msgctxt "@action update quotes from online quote source"
-#~| msgid "Update"
-#~ msgctxt "@action:button Update button in tags vew"
-#~ msgid "Update"
-#~ msgstr "يېڭىلا"
-
-#, fuzzy
-#~| msgid "Sort options"
-#~ msgctxt "@title:menu Bugdet context menu"
-#~ msgid "Budget options"
-#~ msgstr "تەرتىپلەش تاللانما"
-
-#~ msgctxt "New transaction button"
-#~ msgid "New"
-#~ msgstr "يېڭى"
-
-#, fuzzy
-#~| msgid "Reports"
-#~ msgid "Budgets view"
-#~ msgstr "دوكلات"
-
-#, fuzzy
-#~| msgid "Reports"
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Budgets view"
-#~ msgstr "دوكلات"
-
-#, fuzzy
-#~| msgid "Save Report"
-#~ msgid "CSV exporter"
-#~ msgstr "دوكلات ساقلا"
-
-#, fuzzy
-#~| msgid "Imported"
-#~ msgid "CSV importer"
-#~ msgstr "ئەكىردى"
-
-#, fuzzy
-#~| msgid "Imported"
-#~ msgid "GnuCash importer"
-#~ msgstr "ئەكىردى"
-
-#, fuzzy
-#~| msgid "iCalendar file"
-#~ msgid "iCalendar exporter"
-#~ msgstr "iCalendar ھۆججىتى"
-
-#, fuzzy
-#~| msgid "Imported"
-#~ msgid "OFX Importer"
-#~ msgstr "ئەكىردى"
-
-#, fuzzy
-#~| msgid "Imported"
-#~ msgid "QIF importer"
-#~ msgstr "ئەكىردى"
-
-#, fuzzy
-#~| msgctxt "location of credit column"
-#~| msgid "Credits"
-#~ msgid "Credit"
-#~ msgstr "تەشەككۈر"
-
 #, fuzzy
 #~| msgctxt "@item reconciliation status"
 #~| msgid "Cleared"
@@ -25393,57 +25281,11 @@ msgstr ""
 #~ msgid "A&mount"
 #~ msgstr "مىقدارى"
 
-#~ msgctxt "New budget"
-#~ msgid "New"
-#~ msgstr "يېڭى"
-
-#~ msgctxt "New payee"
-#~ msgid "New"
-#~ msgstr "يېڭى"
-
-#~ msgid "Execute"
-#~ msgstr "ئىجرا قىل"
-
-#~ msgid "Jobs"
-#~ msgstr "ۋەزىپىلەر"
-
-#~ msgid "Frequency"
-#~ msgstr "چاستوتا"
-
-#, fuzzy
-#~| msgid "Sort order"
-#~ msgid "SortCode"
-#~ msgstr "تەرتىپلەش تەرتىپى"
-
 #, fuzzy
 #~| msgctxt "@label schedule name"
 #~| msgid "Name:"
 #~ msgid "Name:"
 #~ msgstr "ئاتى:"
-
-#, fuzzy
-#~| msgctxt "@item no payments were entered for a loan"
-#~| msgid "No"
-#~ msgctxt "@label The word to be printed for no fractional part as in No/00"
-#~ msgid "No"
-#~ msgstr "ياق"
-
-#~ msgctxt "Flag for unknown reconciliation state"
-#~ msgid "?"
-#~ msgstr "؟"
-
-#~ msgctxt "@title header of the budget name column"
-#~ msgid "Name"
-#~ msgstr "ئاتى"
-
-#, fuzzy
-#~| msgid "Loading accounts..."
-#~ msgid "Saving costcenters..."
-#~ msgstr "ھېساباتلارنى يۈكلەۋاتىدۇ…"
-
-#~ msgctxt "The balance of the selected budget"
-#~ msgid "Balance: "
-#~ msgstr "تەڭپۇڭ: "
 
 #~ msgctxt "@item the number 1"
 #~ msgid "one"
@@ -25481,33 +25323,7 @@ msgstr ""
 #~ msgid "(unknown)"
 #~ msgstr "(نامەلۇم)"
 
-#~ msgid "Exceptions"
-#~ msgstr "مۇستەسنا"
-
-#~ msgid "Encryption"
-#~ msgstr "شىفىرلاش"
-
-#, fuzzy
-#~| msgid "Save as..."
-#~ msgid "Save as XML..."
-#~ msgstr "باشقا ئاتتا ساقلا…"
-
-#, fuzzy
-#~| msgid ""
-#~| "*.xml|XML files\n"
-#~| "*|All files"
-#~ msgid "*.kmy *.xml|KMyMoney files (*.kmy *.xml);;*|All files (*)"
-#~ msgstr ""
-#~ "*.xml|XML ھۆججەتلىرى\n"
-#~ "*|بارلىق ھۆججەتلەر"
-
-#~ msgid "Saving file with a new filename..."
-#~ msgstr "يېڭى ھۆججەت ئاتىنى ئىشلىتىپ ساقلاۋاتىدۇ…"
-
 #~ msgid "Do nothing"
-#~ msgstr "ھېچقانداق قىلما"
-
-#~ msgid "Do Nothing"
 #~ msgstr "ھېچقانداق قىلما"
 
 #~ msgctxt "Report settings"
@@ -25517,6 +25333,18 @@ msgstr ""
 #~ msgctxt "Forecast settings"
 #~ msgid "Forecast"
 #~ msgstr "ئالدىن مەلۇمات"
+
+#~ msgid "Encryption"
+#~ msgstr "شىفىرلاش"
+
+#~ msgid "Saving file with a new filename..."
+#~ msgstr "يېڭى ھۆججەت ئاتىنى ئىشلىتىپ ساقلاۋاتىدۇ…"
+
+#~ msgid "Do Nothing"
+#~ msgstr "ھېچقانداق قىلما"
+
+#~ msgid "Exceptions"
+#~ msgstr "مۇستەسنا"
 
 #, fuzzy
 #~| msgid "Imported"
@@ -25667,9 +25495,6 @@ msgstr ""
 #~ msgid "Browse..."
 #~ msgstr "كۆز يۈگۈرت…"
 
-#~ msgid "Export"
-#~ msgstr "ئېكسپورت قىل"
-
 #~ msgid "O&K"
 #~ msgstr "جەزملە(&K)"
 
@@ -25701,12 +25526,6 @@ msgstr ""
 #~ msgctxt "%1"
 #~ msgid "check"
 #~ msgstr "تاللاڭ"
-
-#, fuzzy
-#~| msgid "Payment"
-#~ msgctxt "%1"
-#~ msgid "payment"
-#~ msgstr "تۆلەش"
 
 #, fuzzy
 #~| msgid "Loan payment"

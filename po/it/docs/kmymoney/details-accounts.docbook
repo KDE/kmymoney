@@ -10,172 +10,58 @@
 >&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->01/12/2024</date>
+>01/02/2018</date>
   <releaseinfo
->5.2.0</releaseinfo>
+>5.0.0</releaseinfo>
 </chapterinfo>
 
 <title
 >Conti</title>
 
-<para
->Il tuo file &kmymoney; contiene uno o più conti. Tutto il tuo denaro è in uno di questi conti. Esistono diversi tipi di conti. I conti <quote
->Attività</quote
-> tipici includono conti bancari, contanti e investimenti. I conti <quote
->Passività</quote
-> tipici includono carte di credito e prestiti. </para>
-
-<para
->Sono disponibili due tipi di conti: <quote
->Entrate</quote
-> e <quote
->Uscite.</quote
-> Questi conti sono <quote
->Categorie</quote
-> e sono un modo per organizzare le tue transazioni. Sono trattati internamente da &kmymoney; come conti e sono descritti più dettagliatamente nella sezione sulle <link linkend="details.categories"
->Categorie</link
->. I conti Entrate e Uscite sono sempre visualizzati nella vista delle categorie, ma è possibile <link linkend="details.settings"
->configurare &kmymoney;</link
-> per visualizzarli anche nella vista dei conti. </para>
-
-<para
->Potresti anche vedere <quote
->Capitale</quote
-> come tipo di conto. Qualsiasi conto di questo tipo è un conto speciale in &kmymoney;, utilizzato per contenere le transazioni del saldo di apertura di altri conti. </para>
-
-<para
->L'ultimo tipo, sebbene sia visualizzato per primo nell'elenco, è <quote
->Preferito</quote
->. Si tratta di conti di qualsiasi altro tipo indicati come conti <quote
->preferiti</quote
-> nei dettagli durante la creazione o la modifica di quel conto. </para>
-
-<sect1 id="details.accounts.view"
-><title
+<sect1 id="details.accounts.view">
+<title
 >La vista dei Conti</title>
+
+<para
+>La vista dei Conti fornisce un riepilogo di tutti i conti. È simile alla vista Istituti, tranne che per il fatto che i conti sono raggruppati sotto le categorie Attività e Passività. I conti tipici della categoria Attività sono conti bancari, contante e investimenti. I conti tipici della categoria Passività sono carte di credito e prestiti. </para>
+
+<para
+>Attualmente sono disponibili due tipi di categorie di conti: Entrate e Uscite. Le categorie sono un modo di organizzare le proprie transazioni; sono raggruppate sotto la categoria di conto Entrate o Uscite e sono trattate internamente come conti da &kmymoney;. Sono descritte in dettaglio nel capitolo riguardante le <link linkend="details.categories"
+>Categorie</link
+>. Le categorie di conto Entrate e Uscite sono sempre visualizzate nella vista Categorie, ma è possibile <link linkend="details.settings"
+>configurare &kmymoney;</link
+> per visualizzarle anche nella vista Conti. </para>
+
+<para>
 <screenshot>
-  <screeninfo
+    	<screeninfo
 >vista dei conti</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="account_view.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->vista dei conti</phrase>
-    </textobject>
-  </mediaobject>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="account_view.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>vista del conto</phrase>
+	</textobject>
+	</mediaobject>
 </screenshot>
+</para>
 
 <para
->La vista dei conti fornisce un riepilogo di tutti i conti. È simile alla vista degli istituti, tranne per il fatto che i conti sono raggruppati in base al tipo di conto. L'elenco dei conti sotto qualsiasi tipo di conto (o sotto il conto padre per qualsiasi sottoconto) può essere espanso o compresso facendo clic sulla freccia a sinistra del tipo o del nome. </para>
-
-<para
->Analogamente alla vista degli istituti, la vista dei conti mostra diverse colonne con informazioni descrittive e riassuntive su ogni conto. Come per la vista Istituti, è possibile selezionare quali colonne mostrare facendo clic con il tasto destro del mouse su qualsiasi intestazione di colonna e selezionando o deselezionando la casella accanto al nome della colonna. </para>
-
-<para
->Il resto di questo capitolo si concentrerà sulla funzionalità dei conti Attività e Passività. I ​​conti Entrate e Spese, &ie;, Categorie, sono descritti nel capitolo sulle <link linkend="details.categories"
+>Analogamente alla vista Istituti, la vista Conti visualizza diverse colonne con informazioni descrittive e di riepilogo per ogni conto. Il resto di questo capitolo si concentrerà sulla funzionalità del conto Attività e passività. I conti di entrate e uscite, &ie; Categorie, sono descritti nel capitolo riguardante le <link linkend="details.categories"
 >Categorie</link
 >. </para>
 
-<variablelist>
-  <varlistentry>
-    <term
->Nome</term>
-    <listitem>
-      <para
->Il nome del conto. Questa colonna è sempre visualizzata. </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
->Tipo</term>
-    <listitem>
-      <para
->Il tipo di conto, ad esempio, risparmio, corrente, carta di credito, azioni, ecc. </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
->In linea</term>
-    <listitem>
-      <para
->Un'indicazione se questo conto è stato configurato per l'accesso in linea. Il processo di configurazione dei conti per l'accesso in linea è descritto nel <link linkend="details.impexp"
->capitolo Importazione ed esportazione.</link
->, ma i dettagli sulle impostazioni disponibili sono riportati di seguito nella sezione su <link linkend= "details.accounts.edit"
->Modifica delle informazioni sul conto</link
->. </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
->Tassa</term>
-    <listitem>
-      <para
->Un'indicazione che questo conto è stato configurato come importante per scopi fiscali. </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
->IVA</term>
-    <listitem>
-      <para
->Indica se questo conto è stato configurato per applicare l'IVA sulle transazioni. </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
->Saldo</term>
-    <listitem>
-      <para
->Il saldo attuale del conto, visualizzato nella valuta scelta al momento della creazione del conto. </para>
-    </listitem>
-  </varlistentry>
-  
-  <varlistentry>
-    <term
->Valore totale</term>
-    <listitem>
-      <para
->Questo è lo stesso valore del saldo, ma sempre nella valuta base scelta al momento della creazione del file dati. Questi valori vengono sommati per la riga per il tipo di conto complessivo. </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
->Numero</term>
-    <listitem>
-      <para
->Il numero di conto, se ne è stato digitato uno. </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
->IBAN</term>
-    <listitem>
-      <para
->L'<ulink url="https://it.wikipedia.org/wiki/International_Bank_Account_Number"
-><acronym
->IBAN</acronym
-> (International Bank Account Number)</ulink
-> viene mostrato se è stato immesso un valore nel campo appropriato nella finestra delle informazioni del conto. </para>
-    </listitem>
-  </varlistentry>
-</variablelist>
 </sect1>
 
-<sect1 id="details.accounts.create"
-><title
+<sect1 id="details.accounts.create">
+<title
 >Creazione di un conto</title>
+
 <note
 ><para
->Bisogna avere un file aperto prima di poter creare un nuovo conto. In mancanza di un file, sarà necessario <link linkend="firsttime.newfile"
+>Bisogna avere un file aperto prima di poter creare un nuovo conto. In mancanza di un file, sarà necessario <link linkend="firsttime.3"
 >crearne uno</link
 >. </para
 ></note>
@@ -187,7 +73,7 @@
 ><guimenuitem
 >Nuovo conto...</guimenuitem
 ></menuchoice
-> o scegliere l'icona Nuovo conto <guiicon
+> dal menu o scegliere l'icona Nuovo conto <guiicon
 ><inlinemediaobject
 ><imageobject
 ><imagedata fileref="newacct.png" format="PNG"/></imageobject
@@ -197,61 +83,59 @@
 >Nuovo conto...</guimenuitem
 > dal menu a comparsa. </para>
 
-<sect2 id="details.accounts.create.institution"
-><title
+<sect2 id="details.accounts.create.institution">
+<title
 >Il nome dell'istituto (banca)</title>
-<screenshot>
-  <screeninfo
->procedura guidata nuovo conto - istituto</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="accwiz1.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->procedura guidata nuovo conto - istituto</phrase>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="accwiz1.png" format="PNG"/>
+      </imageobject>
+      <textobject>
+        <phrase
+>Procedura guidata di creazione di un conto</phrase>
       </textobject>
-  </mediaobject>
-</screenshot>
+    </mediaobject>
+  </screenshot>
+</para>
 
 <para
->Il primo passo consiste nella selezione di un istituto per il conto. Se questo conto è relativo a un istituto già creato, lo si può selezionare dal menu a tendina. Se si vuole creare un nuovo istituto, fare clic sul pulsante <guibutton
+>Il primo passo consiste nella selezione di un istituto per il conto. Se questo conto è relativo ad un istituto già creato, lo si può selezionare dal menu a discesa. Se si vuole creare un nuovo istituto, fare clic sul pulsante <guibutton
 >Nuovo istituto</guibutton
->. Si aprirà la finestra Nuovo istituto, descritta nella sezione precedente. Se il conto non è un conto bancario, o se non si vogliono usare i servizi bancari in linea, non è necessario specificare un istituto. </para>
+>; si aprirà la finestra Nuovo istituto, descritta nella sezione precedente. Se il conto non è un conto corrente, o se non si vuole usare l'online banking, non è necessario specificare un istituto. </para>
 
 <para
 >Il numero del conto e l'<ulink url="https://it.wikipedia.org/wiki/International_Bank_Account_Number"
 ><acronym
 >IBAN</acronym
 > (International Bank Account Number)</ulink
-> non sono richiesti da &kmymoney;. Questi campi possono essere lasciati vuoti e compilati in un secondo momento. Il numero di conto può essere utilizzato per i <link linkend="details.impexp.ofxdirectconnect"
->servizi bancari in linea</link
-> e per assicurare che le importazioni di dati utilizzino il conto corretto. L'<acronym
->IBAN</acronym
-> può essere utilizzato dall'estensione KBanking. </para>
+> non vengono usati da &kmymoney;, per il momento. Questi campi possono essere lasciati vuoti e compilati in un secondo momento; sono richiesti solo per i servizi bancari in linea. </para>
 
 <para
->Per procedere al passo successivo fare clic su <guibutton
+>Per andare al passo successivo premere <guibutton
 >Avanti</guibutton
 >. </para>
 </sect2>
 
-<sect2 id="details.accounts.create.account"
-><title
+<sect2 id="details.accounts.create.account">
+<title
 >Conto</title>
-<screenshot>
-  <screeninfo
->procedura guidata nuovo conto - dettagli del conto</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="accwiz2.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->procedura guidata nuovo conto - dettagli del conto</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
+
+<para>
+  <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="accwiz2.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase
+>Procedura guidata di creazione di un conto</phrase>
+            </textobject>
+          </mediaobject>
+  </screenshot>
+</para>
 
 <para
 >Per prima cosa, inserire il nome del conto. Questo nome verrà usato per identificarlo. </para>
@@ -265,7 +149,7 @@
 >Pagamenti</term>
     <listitem>
       <para
->Un normale conto corrente, come quelli che si aprono presso qualsiasi banca o cassa di risparmio. </para>
+>Un conto normale per i pagamenti, come quelli che si ottengono dalle banche o dalle cooperative di credito. </para>
     </listitem>
   </varlistentry>
 
@@ -274,7 +158,7 @@
 >Risparmi</term>
     <listitem>
       <para
->Un normale conto di risparmio, come quelli che si aprono presso qualsiasi banca o cassa di risparmio. </para>
+>Un conto normale per i risparmi, come quelli che si ottengono dalle banche o dalle cooperative di credito. </para>
     </listitem>
   </varlistentry>
 
@@ -301,9 +185,7 @@
 >Prestito</term>
     <listitem>
       <para
->Un conto per gestire un prestito di denaro preso a prestito o prestato. Con un conto di questo tipo, &kmymoney; calcola automaticamente gli interessi da pagare, per tenere traccia del capitale prestato rimanente. I prestiti senza interessi possono usare i tipi Attività o Passività, rispettivamente per il denaro prestato a qualcuno e quello preso in prestito. È possibile creare una <link linkend="details.schedules"
->pianificazione</link
-> per gestire i pagamenti in corso. </para>
+>Un conto per gestire un prestito di denaro, sia a qualcuno sia da qualcuno. Con un conto di questo tipo, &kmymoney; calcola automaticamente gli interessi da pagare, per tenere il conto del capitale prestato rimanente. I prestiti senza interessi possono usare i tipi Attività o Passività, rispettivamente per il denaro prestato a qualcuno e quello preso in prestito. </para>
     </listitem>
   </varlistentry>
 
@@ -321,7 +203,7 @@
 >Attività</term>
     <listitem>
       <para
->Un conto per gestire un asset che non rientra in uno dei tipi sopracitati. Ad esempio, può essere utilizzato per tracciare il valore di un veicolo. </para>
+>Un conto di attività che non rientra nelle categorie sopra. </para>
     </listitem>
   </varlistentry>
 
@@ -330,22 +212,13 @@
 >Passività</term>
     <listitem>
       <para
->Un conto per gestire del denaro preso in prestito o una spesa futura che non rientra in alcuno dei tipi descritti in precedenza. Questo è più comunemente usato per prestiti senza interessi. Se è necessario calcolare gli interessi, dovresti usare il tipo di prestito sopra. </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
->Capitale</term>
-    <listitem>
-      <para
->I conti di questo tipo vengono utilizzati per le transazioni del saldo di apertura in altri conti. &kmymoney; crea automaticamente un conto di questo tipo e raramente è necessario crearne un altro. </para>
+>Un conto per gestire del denaro preso in prestito o una spesa futura che non rientra in alcuno dei tipi elencati in precedenza. Ciò è utilizzano normalmente per i prestiti senza interessi. Se ci sono da calcolare gli interessi, è meglio usare il tipo Prestito, descritto sopra. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 
 <para
->Selezionare la valuta da utilizzare per il conto dall'elenco a discesa. La valuta predefinita è quella scelta quando è stato creato il file di dati. </para>
+>Selezionare la valuta da usare dal menu a discesa. </para>
 
 <para
 >Digitare la data di apertura del conto o selezionarla dal calendario utilizzando l'icona a destra. Non si potrà digitare alcuna transazione con una data antecedente la data di apertura del conto, ma è possibile cambiare questa data successivamente, se necessario. </para>
@@ -356,52 +229,52 @@
 <para
 >Se si marca la casella <emphasis
 >Conto preferito</emphasis
->,  sarà possibile accedere più facilmente ad alcune finestre e viste di &kmymoney;. In alcuni punti, questo è stato anche definito conto <emphasis
->Preferito</emphasis
->. </para>
+>, questo conto verrà usato in modo preferenziale in alcune finestre di dialogo e viste di &kmymoney;. </para>
 
 <para
->Per procedere al passo successivo fare clic su <guibutton
+>Per andare al passo successivo premere <guibutton
 >Avanti</guibutton
 >. </para>
 </sect2>
 
-<sect2
-><title
+<sect2>
+<title
 >Conti di tipo Carta di credito</title>
+
 <para
 >Quando si crea un conto di tipo Carta di credito, dopo aver inserito le informazioni di base e aver fatto clic su <guibutton
 >Avanti</guibutton
->, si può facoltativamente impostare &kmymoney; per creare una <link linkend="details.schedules"
+>, si può facoltativamente impostare &kmymoney; per creare automaticamente una <link linkend="details.schedules"
 >transazione pianificata</link
 >. </para>
 
-<screenshot>
-  <screeninfo
->procedura guidata nuovo conto - carta di credito con pianificazione</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="accwiz6.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->procedura guidata nuovo conto - carta di credito con pianificazione</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz6.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase
+>Procedura guidata di creazione di un conto</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
 
 <para
->Se si vuole he venga generata una transazione di questo tipo, assicurarsi che la casella sia selezionata e inserire le informazioni richieste. </para>
+>Se si vuole generare questa transazione, assicurarsi che la casella sia marcata e digitare le informazioni richieste. </para>
 
 <para
->Premi <guibutton
->Successivo</guibutton
+>Fare clic su <guibutton
+>Avanti</guibutton
 > per continuare. </para>
 </sect2>
 
-<sect2
-><title
+<sect2>
+<title
 >Conti di tipo Investimento</title>
+
 <para
 >In &kmymoney;, i conti di investimento contengono solo titoli (azioni, obbligazioni, &etc;), ma non contengono contante. (Questo perché non puoi specificare un bilancio d'apertura per un conto di investimento.) Se una transazione in un conto di investimento richiede o genera contante (come la compravendita di azioni) un conto di intermediazione è utilizzato per il contante. I conti di intermediazione sono descritti in dettaglio nel capitolo riguardante gli <link linkend="details.investments"
 >Investimenti</link
@@ -409,52 +282,50 @@
 >Avanti</guibutton
 >, si ha la possibilità di creare un conto di intermediazione associato. </para>
 
-<para
->Ci sono state molte richieste per consentire ai conti di investimento di contenere anche contanti, e questo sarà probabilmente possibile in una futura versione di &kmymoney;, insieme ad altre cose attualmente non possibili. Tuttavia, ciò comporterà uno sforzo significativo e non è previsto nel prossimo futuro. </para>
-
-<screenshot>
-  <screeninfo
->procedura guidata nuovo conto - investimento</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="accwiz7.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->procedura guidata nuovo conto - investimento</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz7.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase
+>Procedura guidata di creazione di un conto</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
 
 <para
 >Generalmente, è meglio creare qui un conto di intermediazione, che avrà lo stesso nome del conto di investimento, con l'aggiunta di «(Intermediazione)». Attualmente non è possibile specificare la data di apertura o il saldo del conto di intermediazione in questa fase; sarà possibile farlo modificando i dettagli del conto dopo la sua creazione. </para>
 </sect2>
 
-<sect2
-><title
+<sect2>
+<title
 >Conti di tipo Prestito</title>
-<para
->I conti di tipo Prestito sono conti speciali usati per aiutare a gestire i prestiti con interessi e rimborsi pianificati. Fornendo a &kmymoney; le informazioni sul prestito, è possibile tenere traccia del pagamento degli interessi e del capitale rimanente del prestito. </para>
 
-<screenshot>
-  <screeninfo
->procedura guidata nuovo conto - dettagli del prestito</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="accwiz8_1.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->procedura guidata nuovo conto - dettagli del prestito</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
+<para
+>I conti di tipo Prestito sono conti speciali usati per aiutare a gestire i prestiti con interessi e rimborsi pianificati. Dando a &kmymoney; le informazioni sul prestito, è possibile tenere il conto del pagamento degli interessi e del capitale rimanente del prestito. </para>
+
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_1.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase
+>Procedura guidata di creazione di un conto</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
 
 <para
 >Nella pagina Dettagli si inseriscono le informazioni generali sul prestito. </para>
 
 <para
->Per prima cosa, selezionare se si sta prendendo in prestito o prestando denaro. Se si sta prendendo in prestito denaro, il prestito sarà un conto Passivo. Se si sta prestando denaro, il prestito sarà un conto Attività. </para>
+>Per prima cosa, selezionare se si sta prestando soldi a qualcuno o si stanno ricevendo dei soldi in prestito. Se si sta ricevendo soldi in prestito, il prestito verrà visualizzato nei conti nella categoria Passività. Se si stanno prestando soldi, il prestito verrà visualizzato sotto Attività. </para>
 
 <para
 >Poi, selezionare chi paga o chi è il beneficiario del prestito. Come sempre, se non è già nella lista dei Beneficiari, basta inserirlo qui e verrà aggiunto automaticamente da &kmymoney;. </para>
@@ -464,7 +335,7 @@
 >Sì</guibutton
 > alla domanda <guilabel
 >Hai già effettuato/ricevuto qualche pagamento?</guilabel
-> si può selezionare se si vuole registrare tutti i pagamenti o solo quelli avvenuti dall'inizio dell'anno corrente. Se si desidera registrare solo quelli dall'inizio dell'anno corrente, sarà richiesto di digitare il saldo all'inizio dell'anno. </para>
+> si può decidere se registrare tutti i pagamenti o solo quelli avvenuti dall'inizio dell'anno. Se si desidera registrare solo quelli dall'inizio dell'anno, sarà richiesto di digitare il saldo all'inizio dell'anno. </para>
 
 <para
 >Poi, selezionare la frequenza con la quale avvengono i pagamenti e come viene capitalizzato l'interesse. La capitalizzazione è il modo in cui l'interesse viene aggiunto al capitale, in modo da pagare gli interessi anche sugli interessi precedenti. È comune che la frequenza dei pagamenti sia la stessa di quella di capitalizzazione. </para>
@@ -479,19 +350,19 @@
 >Avanti</guibutton
 > per continuare. </para>
 
-<screenshot>
-  <screeninfo
->procedura guidata nuovo conto - pagamenti dei prestiti</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="accwiz8_2.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->procedura guidata nuovo conto - pagamenti dei prestiti</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_2.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase
+>Procedura guidata di creazione di un conto</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
 
 <para
 >La pagina Pagamenti permette di inserire l'importo del prestito e il tasso di interesse. </para>
@@ -517,7 +388,7 @@
 >Tasso d'interesse</term>
     <listitem>
       <para
->Il tasso di interesse percentuale annuo del prestito. Deve essere un numero positivo. Se non ci sono interessi, il prestito dovrebbe essere creato come conto attività o passività. </para>
+>Il tasso di interesse del prestito su base annuale.</para>
     </listitem>
   </varlistentry>
 
@@ -562,19 +433,19 @@
 >Avanti</guibutton
 > sarà abilitato e si potrà passare alla pagina successiva. </para>
 
-<screenshot>
-  <screeninfo
->procedura guidata nuovo conto - commissioni dei prestiti</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="accwiz8_3.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->procedura guidata nuovo conto - commissioni dei prestiti</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_3.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase
+>Procedura guidata di creazione di un conto</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
 
 <para
 >La pagina Commissioni permette di inserire le commissioni aggiuntive che si applicano ai pagamenti del prestito. </para>
@@ -584,44 +455,44 @@
 >Commissioni aggiuntive</guibutton
 >. Si aprirà la finestra Dividi transazione, che permette di inserire le commissioni. Le righe aggiunte in questa finestra saranno incluse nella pianificazione dei pagamenti del prestito. Quando si conferma la divisione, la pagina Commissioni mostrerà i pagamenti del capitale e dell'interesse, il totale delle commissioni aggiuntive e il totale delle rate. </para>
 
-<screenshot>
-  <screeninfo
->procedura guidata nuovo conto - pianificazione dei prestiti</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="accwiz8_4.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->procedura guidata nuovo conto - pianificazione dei prestiti</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_4.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase
+>Procedura guidata di creazione di un conto</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
 
 <para
 >&kmymoney; creerà una <link linkend="details.schedules"
 >transazione pianificata</link
-> per il prestito. La pagina Pianificazione permette di inserire i dettagli necessari per creare la pianificazione. </para>
+> per il prestito. La pagina Pianificazione permette di inserire i dettagli rimanenti per la pianificazione. </para>
 
 <para
->Per prima cosa, inserire la categoria a cui saranno assegnati gli interessi del prestito. Quindi inserire il conto da cui o in cui sarà effettuato il pagamento del prestito. </para>
+>Per prima cosa, inserire la categoria a cui verranno assegnati gli interessi del prestito. Poi inserire il conto da cui verranno fatti i pagamenti del prestito. </para>
 
 <para
 >In questa pagina viene visualizzata anche la data del primo pagamento tra quelli pianificati. </para>
 
-<screenshot>
-  <screeninfo
->procedura guidata nuovo conto - pagamento dei prestiti</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="accwiz8_5.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->procedura guidata nuovo conto - pagamento dei prestiti</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_5.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase
+>Procedura guidata di creazione di un conto</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
 
 <para
 >Se lo si desidera, &kmymoney; può creare una transazione che rappresenta il valore ricevuto o pagato alla creazione del prestito. </para>
@@ -635,33 +506,36 @@
 <para
 >Se si è rifinanziato un prestito esistente, marcare la casella <guilabel
 >Rifinanzia un prestito esistente</guilabel
->, selezionare il conto del prestito e &kmymoney; creerà una transazione di trasferimento che salderà il prestito precedente. </para>
+>, selezionare il conto del prestito e &kmymoney; creerà una transazione di trasferimento che pagherà il prestito precedente. </para>
 
 <para
->Se non si vuole creare la transazione di pagamento, marcare la casella <guilabel
->Non creare la transazione di pagamento</guilabel
+>Se non si vuole creare la transazione di trasferimento, marcare la casella <guilabel
+>Non creare la transazione del pagamento</guilabel
 >. </para>
 </sect2>
 
-<sect2 id="details.accounts.create.parent"
-><title
+<sect2 id="details.accounts.create.parent">
+<title
 >Conto genitore</title>
-<screenshot>
-  <screeninfo
->procedura guidata nuovo conto - conto genitore</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="accwiz10.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->procedura guidata nuovo conto - conto genitore</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
+
+<para>
+  <screenshot>
+	<screeninfo
+>Conto genitore</screeninfo>
+	<mediaobject>
+	  <imageobject>
+            <imagedata fileref="accwiz10.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Procedura guidata di creazione di un conto</phrase>
+	  </textobject>
+	</mediaobject>
+  </screenshot>
+</para>
 
 <para
->Questo è il penultimo passaggio nella creazione di qualsiasi nuovo conto tranne per un prestito. A seconda del tipo di conto che si sta creando, sarà visualizzato un albero dei propri conti Attività o Passività. La maggior parte dei conti sono figli diretti del tipo di conto Attività o Passività. Tuttavia, la maggior parte dei conti possono essere creati come conti secondari, utilizzando un altro conto come principale. Non vi è alcun impatto finanziario nel rendere un conto secondario; viene utilizzato solo per organizzare la visualizzazione gerarchica dei conti nella vista degli istituti della vista dei conti. </para>
+>Questo è il penultimo passo nella creazione di un nuovo conto tranne che per un prestito. Sarà visualizzato un albero di conti, che conterrà i conti di Attività o Passività, in base al tipo di conto che si sta creando. </para>
 
 <para
 >La pagina Conto genitore non viene visualizzata per i Prestiti, perché non possono essere creati come sotto-conti. Inoltre, i conti di Investimenti non possono contenere altri conti, quindi non vengono visualizzati nell'albero. </para>
@@ -671,22 +545,25 @@
 
 </sect2>
 
-<sect2
-><title
+<sect2>
+<title
 >Controllo e salvataggio dei dettagli del conto</title>
-<screenshot>
-  <screeninfo
->procedura guidata nuovo conto - revisione e completamento</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="accwiz9.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->procedura guidata nuovo conto - revisione e completamento</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
+
+<para>
+  <screenshot>
+          <screeninfo
+>Controllo</screeninfo>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="accwiz9.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase
+>Procedura guidata di creazione di un conto</phrase>
+            </textobject>
+          </mediaobject>
+  </screenshot>
+</para>
 
 <para
 >Questo è l'ultimo passo nella creazione di un nuovo conto. Viene visualizzato un riepilogo delle informazioni inserite. Controllare che tutto sia a posto e premere il pulsante <guibutton
@@ -697,208 +574,145 @@
 >Annulla</guibutton
 > per annullare la creazione del nuovo conto. </para>
 
-<note>
-  <para
->La valuta non può essere modificata dopo la creazione del conto. Il tipo di conto può essere modificato, ma solo entro un insieme limitato di tipi sufficientemente simili. </para>
-</note>
+<note
+><para
+>Il tipo e la valuta attualmente non possono essere modificati dopo la creazione del conto. </para
+></note>
 </sect2>
 </sect1>
 
-<sect1 id="details.accounts.viewing"
-><title
+<sect1 id="details.accounts.viewing">
+<title
 >Apertura/visualizzazione di conti</title>
+
 <para
->Per aprire un conto nella <link linkend="details.ledgers.view"
->vista Registro</link
-> si può fare clic sul collegamento al conto dalla vista iniziale o fare clic sull'icona dei registri <guiicon
-> <inlinemediaobject
+>Per aprire un conto nella vista Registro si può fare clic sul collegamento al conto dalla vista Inizio o fare clic sull'icona dei registri <guiicon
+><inlinemediaobject
 > <imageobject
-> <imagedata fileref="ledgers_view.png" format="PNG"/> </imageobject
+><imagedata fileref="ledgers_view.png" format="PNG"/></imageobject
 > </inlinemediaobject
-> </guiicon
-> nel selettore delle viste. Se il conto non è già visualizzato lì, fare clic su <quote
->+</quote
-> nella scheda più a destra e selezionare il conto nella casella a tendina che appare. In alternativa, nella vista dei conti o nella vista degli istituti, fare doppio clic sul nome del conto o fare clic con il pulsante destro del mouse e selezionare <guimenuitem
+></guiicon
+> e selezionare il conto desiderato nella casella a discesa in alto. In alternativa, nella vista <guiicon
+>Conto</guiicon
+>, si può fare doppio clic sul conto o fare clic con il tasto destro del mouse e selezionare <guimenuitem
 >Apri registro</guimenuitem
 >. </para>
 </sect1>
 
-<sect1 id="details.accounts.edit"
-><title
+<sect1 id="details.accounts.edit">
+<title
 >Modifica delle informazioni di un conto</title>
+
 <para
->Per modificare un particolare conto, fare clic su di esso con il pulsante destro del mouse nella vista dei conti o degli istituti e selezionare <guimenuitem
+>Per modificare un particolare conto, fare clic su di esso con il pulsante destro del mouse e selezionare <guimenuitem
 >Modifica conto...</guimenuitem
->, oppure, mentre quel conto è aperto nel registro, selezionare <guimenu
->Conto</guimenu
-><guimenuitem
->Modifica conto...</guimenuitem
->. Sarà visualizzata una finestra composta da diverse schede, ciascuna delle quali consentirà di visualizzare e modificare determinate informazioni relative al conto. Per maggiori informazioni su questi aspetti, consultare la sezione su come <link linkend="details.accounts.create"
->creare un nuovo conto</link
->. Notare che alcuni di questi campi potrebbero essere disabilitati, probabilmente a seconda del tipo di conto. Ad esempio, <guilabel
->Valuta</guilabel
-> sarà sempre disabilitato, poiché può essere impostato quando il conto è stato creato, ma non modificato dopo. <guilabel
->Inserimento prezzo</guilabel
-> è abilitato solo per i conti di investimento. </para>
-
-<screenshot>
-  <screeninfo
->modifica delle informazioni di un conto</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="account_edit.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->modifica delle informazioni di un conto</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
-
-<para
->Questa finestra contiene diverse schede per configurare diversi aspetti di un conto. </para>
-
-<variablelist>
-  <varlistentry>
-    <term
->Generale</term>
-    <listitem>
-      <para
->Visualizza le informazioni generali sul conto, e modifica il nome, la data di apertura o di inizio, come anche alcune altre impostazioni di base che lo riguardano. </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
->Istituto</term>
-    <listitem>
-      <para
->Visualizza e modifica l'istituto bancario associato ed i numeri del conto. Da qui puoi anche creare un nuovo istituto bancario. </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
->Gerarchia</term>
-    <listitem>
-      <para
->Ciò mostra la posizione del conto nella gerarchia generale dei conti. È possibile modificare il conto principale trascinando il conto e rilasciandolo su un altro conto principale in questa vista della gerarchia dei conti, oppure nella vista dei conti o nella vista degli istituti. È possibile anche cambiare il conto genitore qui facendo clic sul nuovo conto genitore e poi su <guibutton
->OK</guibutton
->. </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
->Limiti</term>
-    <listitem>
-      <para
->Questa scheda è presente solo per i conti attività e passività. Se si inseriscono degli importi nei campi disponibili, &kmymoney; avviserà quando il saldo del conto raggiunge questi valori. </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
->Tassa</term>
-    <listitem>
-      <para
->Qui è possibile verificare se si tratta di un conto IVA e specificare la aliquota IVA. Inoltre, è possibile marcare se includere questo conto nei report fiscali. </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
->Impostazioni in linea</term>
-    <listitem>
-      <para
->Questa scheda è presente solo se il conto è stato associato ad un <link linkend="details.impexp.ofxdirectconnect"
->conto in linea</link
->. Essa è composta di tre sotto-schede. </para>
-
-      <variablelist>
-        <varlistentry>
-          <term
->Dettagli del conto</term>
-          <listitem>
-            <para
->Qui vengono visualizzati lo stato della connessione in linea, la banca/intermediario e il numero di conto. Consente inoltre di memorizzare o modificare la password per il conto in linea. Dove e come la password viene effettivamente memorizzata dipende dalla propria istanza specifica, ma più comunemente viene memorizzata dal <ulink url="https://apps.kde.org/kwalletmanager5/"
->KDE Wallet Manager</ulink
->. </para>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term
->Dettagli OFX</term>
-          <listitem>
-            <para
->Qui è possibile modificare alcuni dettagli che &kmymoney; usa quando stabilisce una connessione OFX con l'istituto. Questo dovrebbe essere necessario solo se si ricevono determinati errori quando si configura per la prima volta il conto in linea, o forse se il proprio istituto cambia il software del server OFX. </para>
-          </listitem>
-        </varlistentry>
-        
-        <varlistentry>
-          <term
->Importa dettagli</term>
-          <listitem>
-            <para
->Nella casella superiore, è possibile dire a &kmymoney; cosa usare come data di inizio per l'importazione. La casella inferiore contiene diversi elementi che &kmymoney; usa quando crea transazioni dai dati scaricati. </para>
-
-            <itemizedlist>
-              <listitem>
-                <para
->Puoi scegliere se il nome del beneficiario si basa sul campo PAYEEID, NAME o MEMO della transazione importata. Istituti diversi utilizzano standard diversi, quindi potrebbe essere necessario provare un valore diverso qui se le transazioni importate sembrano avere sempre il beneficiario sbagliato. Sfortunatamente, questo vale solo per Direct Connect, ma si spera che prima o poi si applichi anche all'importazione di file OFX. </para>
-              </listitem>
-
-              <listitem>
-                <para
->Alcune banche non seguono lo standard OFX di fornire un FITID (Financial Institution Transaction Identification) ripetibile e univoco che può causare transazioni duplicate in caso di scaricamenti ripetuti. Se ciò accade, è possibile modificare il metodo che &kmymoney; usa per rilevare i duplicati dal <guilabel
->FITID OFX</guilabel
-> all'<guilabel
->ID KMyMoney</guilabel
-> calcolato internamente. Ciò non è spesso necessario. </para>
-              </listitem>
-
-              <listitem>
-                <para
->L'importazione di transazioni da un istituto con un fuso orario diverso può talvolta portare a una data errata su una transazione importata. Se ciò accade, è possibile impostare un <guilabel
->differenza del fuso orario</guilabel
-> per regolare la differenza. </para>
-              </listitem>
-
-              <listitem>
-                <para
->Molto raramente, un istituto creerà scaricamenti OFX con il segno dell'importo della transazione invertito. È possibile fare clic su questa casella di selezione per correggere questo problema. </para>
-              </listitem>
-
-              <listitem>
-                <para
->Talvolta si verifica un problema simile, ma solo per i valori nelle transazioni di investimento, come l'acquisto e la vendita di azioni. Facendo clic su questa casella di selezione si corregge il problema. </para>
-              </listitem>
-            </itemizedlist>
-          </listitem>
-        </varlistentry>
-      </variablelist>
-    </listitem>
-  </varlistentry>
-</variablelist>
-</sect1>
-
-<sect1 id="details.accounts.delete"
-><title
->Eliminare e chiudere i conti</title>
-<para
->Un conto può essere eliminato solo se non contiene transazioni e non è utilizzato da nessun altro elemento del file di dati. In generale, ciò significa che bisogna prima rimuovere tutte le transazioni da quel conto nel registro. Quindi è possibile selezionare <menuchoice
+>, oppure, mentre quel conto è aperto nel registro, selezionare <menuchoice
 ><guimenu
 >Conto</guimenu
 ><guimenuitem
->Elimina conto...</guimenuitem
+>Modifica conto...</guimenuitem
 ></menuchoice
-> o fare clic con il pulsante destro del mouse sul nome nella vista Conti e selezionare <guimenuitem
->Elimina conto...</guimenuitem
-> dal menu a comparsa. </para>
+>. Sarà visualizzata una finestra composta di diverse schede, ciascuna delle quali consentirà di visualizzare e modificare determinate informazioni relative al conto. Per maggiori informazioni su questi aspetti, consultare la sezione su come <link linkend="details.accounts.create"
+>creare un nuovo conto</link
+>. </para>
+
+<para>
+  <screenshot>
+        <screeninfo
+>Modifica di un conto</screeninfo>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="account_edit.png" format="PNG"/>
+          </imageobject>
+
+          <textobject>
+            <phrase
+>Modifica delle informazioni di un conto</phrase>
+          </textobject>
+        </mediaobject>
+  </screenshot>
+</para>
+
+<formalpara
+><title
+>Generale</title>
+<para
+>Visualizza le informazioni generali sul conto, e modifica il nome, la data di apertura o di inizio, come anche alcune altre impostazioni di base che lo riguardano. </para>
+</formalpara>
+
+<formalpara
+><title
+>Istituto</title>
+<para
+>Visualizza e modifica l'istituto bancario associato ed i numeri del conto. Da qui puoi anche creare un nuovo istituto bancario. </para>
+</formalpara>
+
+<formalpara
+><title
+>Gerarchia</title>
+<para
+>Puoi modificare il conto genitore facendo clic su un altro conto genitore all'interno di questa vista della gerarchia dei conti. </para>
+</formalpara>
+
+<formalpara
+><title
+>Limiti</title>
+<para
+>Questa scheda è presente solo per i conti attività e passività. Se si inserisce degli importi nei campi disponibili, &kmymoney; avviserà quando il saldo del conto raggiunge questi valori. </para>
+</formalpara>
+
+<formalpara
+><title
+>Tassa</title>
+<para
+>Qui puoi indicare se si tratta di un conto IVA e se desideri inserirlo nei report sulle tasse. </para>
+</formalpara>
+
+<formalpara
+><title
+>Impostazioni in linea</title>
+<para
+>Questa scheda è presente solo se il conto è stato associato ad un <link linkend="details.impexp.ofxdirectconnect"
+>conto in linea</link
+>. Essa è composta di tre sotto-schede. </para>
+</formalpara>
+
+<itemizedlist>
+<listitem>
+<para
+><emphasis
+>Dettagli conto</emphasis
+>: mostra lo stato della connessione di rete, la banca o l'intermediario e il numero di conto, e consente di memorizzare o modificare la password per il conto in linea. </para>
+</listitem>
+
+<listitem>
+<para
+><emphasis
+>Dettagli OFX</emphasis
+>: qui è possibile impostare alcuni dettagli che &kmymoney; utilizza al momento di stabilire una connessione OFX con la banca. Questa operazione dovrebbe essere necessaria solo se si ricevono determinati errori quando si configura per la prima volta il conto in linea, oppure potrebbe rendersi necessaria se la propria banca dovesse modificare il software del suo server OFX. </para>
+</listitem>
+
+<listitem>
+<para
+><emphasis
+>Dettagli importazione</emphasis
+>: qui è possibile indicare a &kmymoney; quale data di inizio utilizzare per l'importazione. Inoltre, a partire dalla versione 4.6, è possibile scegliere se il nome del beneficiario è basato sul campo PAYEEID, NAME o MEMO della transazione importata. </para>
+</listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="details.accounts.delete">
+<title
+>Eliminazione di un conto</title>
 
 <para
->Se non si riesce ad eliminare un conto che sembra non contenere transazioni , potrebbero esserci transazioni che non vengono visualizzate nel registro a causa dell'impostazione di un filtro. Vedere <menuchoice
+>Per eliminare un conto, per prima cosa bisogna rimuovere tutte le transazioni di quel conto nel Registro. Poi si fa clic con il &RMB; sul conto nella vista Conti e si sceglie l'opzione <guimenuitem
+>Elimina conto...</guimenuitem
+> dal menu contestuale. </para>
+
+<para
+>Se non si riesce ad eliminare un conto che non sembra avere transazioni associate, controllare i filtri attivi. Vedere <menuchoice
 > <guimenu
 >Impostazioni</guimenu
 > <guimenuitem
@@ -911,143 +725,6 @@
 >. Rimuovere tutti i filtri e impostare la data di inizio a 1/1/1900 o qualcosa del genere. </para>
 
 <para
->Potrebbero esserci delle transazioni nel registro che non sono mostrate, ad esempio, se inavvertitamente è stato inserito l'anno sbagliato al momento della registrazione, facendo sì che la registrazione resti al di fuori della data di apertura di &kmymoney;. Ciò appare sotto la pagina del registro come fondi rimanenti. </para>
-
-<para
->In alcuni casi, sarà possibile selezionare <guimenuitem
->Elimina conto...</guimenuitem
->, ma apparirà una finestra a comparsa che spiega perché &kmymoney; non è in grado di eliminare il conto. </para>
-
-<para
->L'eliminazione di un conto rimuove completamente tutti i dati relativi a quel conto dal tuo file di dati. Tuttavia, potrebbero esserci casi in cui si è chiuso un conto in banca e, anche se non si desidera vederlo nell'uso quotidiano di &kmymoney; potreste voler conservare i dati per utilizzarli nei report storici, è possibile selezionare <guimenu
->Conto</guimenu
-><guimenuitem
->Chiudi conto</guimenuitem
-> o fare clic con il pulsante destro del mouse sul nome nella vista dei conti e selezionare <guimenuitem
->Chiudi conto...</guimenuitem
-> dal menu a comparsa. Ciò contrassegnerà il conto come chiuso e la sua visibilità dipenderà dall'impostazione di <link linkend="reference.menus.view"
->Mostra tutti i conti</link
->. Tenere presente che per chiudere un conto, deve avere un saldo pari a zero, ma può comunque contenere transazioni. </para>
-
-<para
->È anche possibile riaprire un conto chiuso. Ciò è solitamente necessario se hai chiuso un conto, ma scopri di averlo fatto prima di inserire effettivamente tutte le transazioni per il conto, come il pagamento di interessi finali o dividendi per un conto di investimento. In questo caso, puoi selezionare <guimenu
->Conto</guimenu
-> <guimenuitem
->Riapri conto</guimenuitem
-> o fare clic con il pulsante destro del mouse sul nome nella vista Conti e selezionare <guimenuitem
->Riapri conto</guimenuitem
-> dal menu a comparsa. </para>
-</sect1>
-
-<sect1 id="details.accounts.options"
-><title
->Opzioni del conto</title>
-<para
->Facendo clic con il pulsante destro del mouse su un conto nella vista Istituti o nella vista Conti saranno visualizzate le opzioni dei conti. È possibile anche selezionare solo il menu <guimenu
->Conto</guimenu
->. </para>
-
-<screenshot>
-  <screeninfo
->Sotto-menu Opzioni del conto</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="account_options.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->Sotto-menu Opzioni del conto</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
-
-<para
->Notare che ciascuna delle opzioni di menu elencate può essere abilitata o disabilitata a seconda del conto specifico selezionato. </para>
-
-<para
->La selezione di <guimenuitem
->Nuovo conto...</guimenuitem
-> ti guiderà attraverso il <link linkend="details.accounts.create"
->processo di creazione del conto</link
->. </para>
-
-<para
->La selezione di <guimenuitem
->Nuova categoria...</guimenuitem
-> ti guiderà attraverso il <link linkend="details.categories.create"
->processo di creazione della categoria</link
->. </para>
-
-<para
->La selezione di <guimenuitem
->Apri registro</guimenuitem
-> ti porterà direttamente alla <link linkend="details.ledgers.view"
->vista Registro</link
-> o al <link linkend="details.investments.view"
->vista Investimenti</link
->, in base al tipo di conto. </para>
-
-<para
->La selezione di <guimenuitem
->Modifica conto...</guimenuitem
-> aprirà una finestra che ti permette di <link linkend="details.accounts.edit"
->modificare vari aspetti del conto</link
->. </para>
-
-<para
->La selezione di <guimenuitem
->Elimina conto...</guimenuitem
-> elimina il conto selezionato, ma solo se vengono soddisfatti determinati criteri, come descritto <link linkend="details.accounts.delete"
->qui</link
->. Altrimenti, questo elemento è disabilitato. </para>
-
-<para
->La selezione di <guimenuitem
->Riconcilia...</guimenuitem
-> apre la <link linkend="details.reconcile.wizard"
->Procedura guidata di riconciliazione</link
->. Anche <guimenuitem
->Rinvia</guimenuitem
-> e <guimenuitem
->Fine</guimenuitem
-> sono descritti nella stessa sezione. </para>
-
-<para
->La selezione di <guimenuitem
->Report delle transazioni</guimenuitem
-> è abilitata solo per una selezione limitata di conti, nel qual caso si apre un <link linkend="details.reports.transaction"
->Report sulle transazioni</link
-> per il conto selezionato , che mostra le transazioni da inizio anno. </para>
-
-<para
->La selezione di <guimenuitem
->Chiudi conto</guimenuitem
-> chiude il conto selezionato, purché vengano soddisfatti determinati criteri, come descritto <link linkend="details.accounts.delete"
->qui</link
->. <guimenuitem
->Riapri conto</guimenuitem
-> è descritto nella stessa sezione. </para>
-
-<para
->La selezione di <guimenuitem
->Associa conto...</guimenuitem
-> e <guimenuitem
->Rimuovi associazione conto...</guimenuitem
-> permette di associare un conto a un conto in linea e di rimuovere l'associazione. Selezionando <guimenuitem
->Aggiorna conto...</guimenuitem
-> si recuperano i dati delle transazioni dalla fonte in linea per un conto che è già stato associato. Inoltre, selezionando <guimenuitem
->Aggiorna tutti i conti...</guimenuitem
->, che appare solo nel menu principale <guimenu
->Conto</guimenu
->, si aggiornano tutti i conti associati. Questi sono tutti descritti nel <link linkend="details.impexp"
->capitolo Importazione ed esportazione.</link
-> </para>
-
-<para
->La selezione di <guimenuitem
->Nuovo investimento...</guimenuitem
->, che appare nel menu contestuale solo quando si fa clic con il pulsante destro del mouse su un conto nella vista Investimenti o nella vista Conti, viene visualizzata la <link linkend="details.investments.newinvestmentwizard"
->Procedura guidata nuovo investimento</link
->. </para>
+>Potrebbero esserci delle transazioni nel registro che non sono visualizzate, ad esempio se si è sbagliato ad inserire la data e si è immesso un anno precedente alla data di apertura in &kmymoney;. Questa situazione può essere verificata controllando nel registro se ci sono dei fondi rimasti. </para>
 </sect1>
 </chapter>

@@ -1,65 +1,55 @@
 <sect1 id="details.impexp.woob">
-<sect1info>
-  <author
+  <sect1info>
+    <author
 >&Dawid.Wrobel; &Dawid.Wrobel.mail;</author>
-</sect1info>
-<title
->Importador de Woob</title>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+  </sect1info>
 
-<sect2
-><title
+  <title
+>Importador de Woob</title>
+  <sect2>
+    <title
 >Què és Woob?</title>
-<para
->El <acronym
-><ulink url="https://woob.tech/"
+    <para
+>El <ulink url="https://woob.tech/"
 >Woob</ulink
-></acronym
->, o «Web outside of browsers» (Web sense navegadors)» és «una col·lecció d'aplicacions capaces d'interactuar amb els llocs web, sense requerir que l'usuari les obri en un navegador». Una d'<ulink url="https://woob.tech/applications/"
+> (abreviatura de <quote
+>Web outside of browsers (Web fora dels navegadors)</quote
+>) és <quote
+>una col·lecció d'aplicacions capaces d'interactuar amb els llocs web, sense requerir que l'usuari les obri en un navegador</quote
+>. Una d'<ulink url="https://woob.tech/applications/"
 >aquestes aplicacions</ulink
 > permet interactuar específicament amb les <ulink url="https://woob.tech/applications/bank"
 >institucions financeres</ulink
->. El &kmymoney; proporciona un connector que l'empra directament, el qual permet importar operacions des d'aquests bancs i institucions que d'altra manera no és admès per cap altre protocol financer que gestioni el &kmymoney;. </para>
-</sect2>
-  
-<sect2
-><title
->Instal·lar el Woob</title>
-<note>
-  <para
->Actualment, el &kmymoney; requereix que instal·leu el Woob de forma independent. Vegeu a sota els detalls. </para>
-</note>
+>. El &kmymoney; proporciona un connector que l'empra directament, el qual permet importar operacions des d'aquests comptes en aquestes institucions, que d'altra manera no és admès per cap altre protocol financer que gestioni el &kmymoney;. </para>
 
-<para
->Algunes distribucions del &Linux; empaqueten el Woob, i aquest és el mètode preferit d'instal·lació, si està disponible. Si no és així, primer heu d'instal·lar una versió recent del Python 3 abans de continuar. Totes les distribucions principals del &Linux; empaqueten el Python, i hauríeu d'utilitzar aquesta versió, si és possible. En cas contrari, podeu descarregar un paquet per al vostre sistema des del <ulink url="https://www.python.org/downloads/"
->lloc web oficial del Python</ulink
->. La versió mínima exacta de Python requerida pel Woob es pot trobar al lloc web <ulink url="https://woob.tech/install/"
->Woob</ulink
+    <note>
+      <para
+>Actualment, el &kmymoney; requereix que instal·leu el Woob de forma independent. Per a més detalls, vegeu les seccions següents. </para>
+    </note>
+  </sect2>
+  <sect2>
+    <title
+>Instal·lar el Woob</title>
+    <para
+>Un nombre creixent de distribucions del Linux proporcionen paquets per al Woob, i això és preferible, si n'hi ha un de disponible. </para>
+    <para
+>Abans de continuar, primer cal instal·lar el Python 3. Totes les distribucions del Linux proporcionen paquets del Python, però sempre podreu descarregar un paquet per al vostre sistema des del <ulink url="https://www.python.org/downloads/"
+>lloc web oficial</ulink
 >. </para>
 
-<para
->Amb el Python 3 instal·lat, ara hauríeu de poder descarregar i instal·lar fàcilment els mòduls Woob necessaris. Consulteu les instruccions del lloc web de Woob. Quan s'executa el &kmymoney;, comprova la presència del Woob i carrega el connector si es troba el Woob. Vegeu la secció <link linkend="details.settings.plugins"
->Connectors</link
-> al capítol <link linkend="details.settings"
->Configuració</link
-> per a més informació sobre la confirmació que el connector «woob» està carregat. </para>
-</sect2>
-
-<sect2
-><title
+    <para
+>Amb el Python 3 instal·lat, ara hauríeu de poder descarregar i instal·lar amb facilitat els mòduls de Woob requerits. Vegeu les instruccions en el <ulink url="https://woob.tech/install/"
+>lloc web de Woob</ulink
+>. </para>
+  </sect2>
+  <sect2>
+    <title
 >Ús del Woob</title>
-<para
->Si el Woob està instal·lat i es carrega el connector «woob» del &kmymoney;, hauríeu de poder configurar-lo per al seu ús amb un compte invocant l'element de menú <menuchoice
-> <guimenu
->Compte</guimenu
-> <guimenuitem
->Vincula a un compte en línia...</guimenuitem
-> </menuchoice
->. Un cop fet això, l'element de menú <menuchoice
-> <guimenu
->Compte</guimenu
-> <guimenuitem
->Actualitza el compte...</guimenuitem
-> </menuchoice
-> baixarà les operacions d'aquest compte fent servir el Woob. </para>
-</sect2>
+    <para
+>El &kmymoney; usa el mòdul <quote
+>woob bank</quote
+>. </para>
+  </sect2>
 </sect1>

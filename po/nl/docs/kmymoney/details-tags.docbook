@@ -41,15 +41,15 @@
 <title
 >Een tag toevoegen</title>
 <para
->Er zijn drie manieren om een nieuw tag aan te maken. Ten eerste kunt u klikken op het nieuwe tag-pictogram <guiicon
+>Er zijn drie verschillende manieren om een nieuwe tag aan te maken. U kunt te eerste klikken op het nieuwe tag-pictogram <guiicon
 ><inlinemediaobject
 ><imageobject
 ><imagedata fileref="list-add.png"/></imageobject
 ></inlinemediaobject
 ></guiicon
->. Ten tweede kunt u rechts op een tag klikken en <guimenuitem
+>. Ten tweede klikt u rechts op een tag en kiest <guimenuitem
 >Nieuwe tag</guimenuitem
-> kiezen. Dit maakt een nieuwe tag aan genaamd <quote
+>. Dit maakt een nieuwe tag aan genaamd <quote
 >Nieuwe tag</quote
 >. Rechts klikken op deze tag en <guimenuitem
 >Tag hernoemen</guimenuitem

@@ -14,7 +14,7 @@
 >In het algemeen heeft het de voorkeur om OFX te importeren. Niet alle instituten leveren gegevens in dat formaat. CSV (kommagescheiden waarden) bestanden zijn bijna altijd beschikbaar, soms beschreven als Excel of rekenblad bestanden. Ze kunnen ook vaak gemakkelijk gemaakt worden door de gegevens die u wilt importeren te vangen, zoals in een tekstbestand en deze handmatig te bewerken. </para>
 
 <para
->De primaire focus van de plug-in is op het importeren van gegevens uit bankafschriften, maar er is ook een mogelijkheid sommige investeringsafschriften te importeren. Deze plug-in is eerst gemaakt, voordat het een importeur van een CSV werd, om QIF-bestanden uit CSV te maken, die daarna geïmporteerd kunnen worden. Deze functionaliteit is nog steeds aanwezig, maar wordt waarschijnlijk verwijderd, omdat de plug-in nu zich richt op direct CSV-bestanden importeren. &kmymoney; heeft ook de eigen mogelijkheid om <link linkend="details.impexp.qifexp"
+>De primaire focus van de plug-in is op het importeren van gegevens uit bankafschriften, maar er is ook een mogelijkheid sommige investeringsafschriften te importeren. Deze plug-in is eerst gemaakt, voordat het een importprogramma van een CSV werd, om QIF-bestanden uit CSV te maken, die daarna geïmporteerd kunnen worden. Deze functionaliteit is nog steeds aanwezig, maar wordt waarschijnlijk verwijderd, omdat de plug-in nu zich richt op direct CSV-bestanden importeren. &kmymoney; heeft ook de eigen mogelijkheid om <link linkend="details.impexp.qifexp"
 >QIF-bestanden</link
 > te exporteren, zodat er geen echte reden is om een QIF-bestand uit een CSV-bestand te maken. </para>
 </sect2>
@@ -63,16 +63,16 @@
 >. Als CSV niet onder Importeren verschijnt, dan hebt u geen CSV-importplug-in juist geïnstalleerd. Kijk dan nog eens in de vorige sectie. </para>
 
 <para
->De CSV importeur is in de vorm van een assistent, met een aparte pagina voor elke individuele stap in het proces. Er kunnen enkele kleine verschillen zijn tussen de tekst in dit handboek, de labels in de schermafdruk en de labels die u echt ziet in de assistent. In zulke gevallen beschrijft het handboek hoe de assistent er uit zal zien in de volgende uitgave. </para>
+>Het CSV importprogramma is in de vorm van een assistent, met een aparte pagina voor elke individuele stap in het proces. Er kunnen enkele kleine verschillen zijn tussen de tekst in dit handboek, de labels in de schermafdruk en de labels die u echt ziet in de assistent. In zulke gevallen beschrijft het handboek hoe de assistent er uit zal zien in de volgende uitgave. </para>
 
 <sect3>
 <title
 >CSV importassistent: Start</title>
 
 <para
->Na de start toont de CSV importeur de <guilabel
+>Na de start toont het CSV importprogramma de <guilabel
 >Start</guilabel
->pagina. Het bovenste gebied, waar gegevens getoond zullen worden, is initieel leeg. Daaronder links, is een lijst met de stappen van het importeerproces, met de huidige geaccentueerd. Rechts daarvan zijn korte instructies en twee keuzerondjes, die de keuz bieden van ofwel <guilabel
+>pagina. Het bovenste gebied, waar gegevens getoond zullen worden, is initieel leeg. Daaronder links, is een lijst met de stappen van het importeerproces, met de huidige geaccentueerd. Rechts daarvan zijn korte instructies en twee keuzerondjes, die de keuze bieden van ofwel <guilabel
 >Bankieren</guilabel
 > of <guilabel
 >Investeren</guilabel
@@ -136,7 +136,7 @@
 <para
 >De plug-in zou het toepasselijke te gebruiken <guilabel
 >Veldscheidingsteken</guilabel
-> moeten hebben gedetecteerd en het is gewoonlijk niet mogelijk om een andere te selecteren. In feite zal dit proberen, elke veldkeuze, die u al gemaakt zou hebben, resetten. Er is ook een selectieteken voor het <guilabel
+> moeten hebben gedetecteerd en het is gewoonlijk niet mogelijk om een andere te selecteren. In feite zal dit proberen elke veldkeuze, die u al gemaakt zou hebben, resetten. Er is ook een selectieteken voor het <guilabel
 >Tekstscheidingsteken</guilabel
 >, maar algemeen is het aanhalingsteken (") het juiste. klik nu op de knop <guibutton
 >Volgende</guibutton
@@ -317,7 +317,7 @@
 ><title
 >Begin bij regel</title>
 <para
->Stels dit zo in dat de importeur kopregels in het bestand overslaat. Uw keuze zal opgeslagen worden in dit profiel voor toekomstig gebruik. De start- en eindregels hebben met elkaar te maken en de startregel kan niet hoger zijn dan de eindregel. Als de selectie van <guilabel
+>Stel dit zo in dat het importprogramma kopregels in het bestand overslaat. Uw keuze zal opgeslagen worden in dit profiel voor toekomstig gebruik. De start- en eindregels hebben met elkaar te maken en de startregel kan niet hoger zijn dan de eindregel. Als de selectie van <guilabel
 >Startregel</guilabel
 > niet reageert, controleer dan de instelling van de eindregel. </para>
 </formalpara>
@@ -326,7 +326,7 @@
 ><title
 >Eindregel</title>
 <para
->De importeur zal dit automatisch op de laatste regel in het bestand zetten of op de laatst opgeslagen instelling. U hoeft het alleen aan te passen als er er regels in de voettekst zijn die de importeur zou moeten negeren. Anders is het waarschijnlijk dat u een waarschuwing gegevensfout krijgt wanneer de plug-in probeert de onjuiste gegevens te interpreteren. Opnieuw, als de selectie <guilabel
+>Het importprogramma zal dit automatisch op de laatste regel in het bestand zetten of op de laatst opgeslagen instelling. U hoeft het alleen aan te passen als er er regels in de voettekst zijn die het importprogramma zou moeten negeren. Anders is het waarschijnlijk dat u een waarschuwing gegevensfout krijgt wanneer de plug-in probeert de onjuiste gegevens te interpreteren. Opnieuw, als de selectie <guilabel
 >Eindregel</guilabel
 > niet reageert, controleer dan de instelling <guilabel
 >Startregel</guilabel

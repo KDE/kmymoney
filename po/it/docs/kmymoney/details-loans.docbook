@@ -4,45 +4,35 @@
   <authorgroup>
     <author
 >&Darin.Strait; &Darin.Strait.mail; </author>
-    <author
->&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->1/12/2024</date>
+>25/07/2010</date>
   <releaseinfo
->5.2.0</releaseinfo>
+>4.5</releaseinfo>
 </chapterinfo>
+
 <title
 >Prestiti</title>
 
-<sect1 id="details.loans.general"
-><title
+<sect1 id="details.loans.general">
+<title
 >Spiegazione dei Prestiti</title>
-<note
-><title
->Riscontro richiesto</title>
-  <para
->L'autore gradirebbe un riscontro sull'opportunità di espandere questa sezione per discutere la variazione di capitale e interessi per ottenere un pagamento ricorrente fisso. È menzionato nella sezione sulla creazione effettiva di un prestito in &kmymoney;, ma sembra che dovrebbe essere menzionato prima. </para>
-</note>
 
 <para
->Questo capitolo fornisce un riepilogo della gestione dei prestiti di &kmymoney;. Le norme relative ai prestiti e le tasse variano da località a località. Per una descrizione dettagliata dei prestiti, o maggiori informazioni sulle norme locali e sulle tasse, consultare altre risorse. </para>
+>Questa sezione fornisce un riepilogo della gestione dei prestiti di &kmymoney;. Le norme relative ai prestiti e le tasse variano da Paese a Paese. Per una descrizione dettagliata dei prestiti, o maggiori informazioni sulle norme locali e sulle tasse, consultare altre risorse. </para>
 
 <para
->Un prestito è un accordo in base al quale un mutuatario riceve denaro da un mutuante e si impegna a restituire il denaro con uno o più rimborsi in futuro.&kmymoney; ti consente di monitorare i prestiti in cui, come mutuatario, ricevi denaro o, come mutuante, presti denaro a qualcun altro. La maggior parte delle persone tende a prendere in prestito più spesso di quanto presti, quindi generalmente sarai il mutuatario e una società finanziaria sarà il mutuante. Se presti denaro a un familiare o a un amico, puoi utilizzare &kmymoney; per tenere traccia anche di questo prestito. </para>
+>Un prestito è un contratto con cui un beneficiario riceve soldi da un prestatore e si impegna a restituirli in una data futura. &kmymoney; permette di tenere traccia dei prestiti sia come beneficiario sia come prestatore. La maggior parte delle persone sono dei beneficiari, e spesso il prestatore è un istituto finanziario. Se si prestano soldi a un membro della famiglia o ad un amico, è possibile usare &kmymoney; per tenere traccia anche di questi prestiti. </para>
 
 <para
 >Questa guida assume che si stiano ricevendo soldi in prestito da un istituto finanziario, ma gli argomenti discussi si applicano anche ai prestiti fatti a qualcuno. La differenza principale tra prestare e ricevere in prestito è che verrà usata per gli interessi una categoria di Uscita se si prestano soldi mentre verrà usata una categoria di Entrata se si riceve un prestito. </para>
 
-<sect2
-><title
->Alcuni termini rilevanti</title>
 <formalpara
 ><title
->Principale</title>
+>Capitale del prestito</title>
 <para
->L'importo che viene prestato è chiamato <quote
->principale</quote
+>Il valore che viene prestato viene detto <quote
+>capitale</quote
 > o <quote
 >ammontare del prestito</quote
 >. </para>
@@ -52,9 +42,9 @@
 ><title
 >Durata</title>
 <para
->Il periodo o la durata di un prestito è chiamato <quote
->termine</quote
-> del prestito. Alla fine del termine, l'intero capitale sarà stato restituito al mutuante. I termini sono generalmente espressi in settimane, mesi o anni. Un termine può anche essere indicato in base al numero di pagamenti. Ad esempio, un prestito di un anno con rimborsi settimanali può essere descritto come un prestito di un anno o come un prestito con 52 rimborsi. </para>
+>Il periodo di un prestito è detto <quote
+>durata</quote
+>. Al termine del periodo, l'intero capitale verrà restituito al prestatore. I periodi vengono spesso espressi in settimane, mesi o anni. Un periodo può anche essere specificato da un numero di pagamenti. Ad esempio, un prestito di un anno con pagamenti settimanali può essere descritto come un prestito con 52 pagamenti. </para>
 </formalpara>
 
 <formalpara
@@ -74,7 +64,7 @@
 <para
 >La frequenza delle rate viene chiamata <quote
 >Frequenza di pagamento</quote
->. Alcuni esempi di frequenza possono essere settimanale, ogni due settimane, mensile, quadrimestrale o annuale. Talvolta questo periodo viene anche definito periodo di pagamento. In Italia i pagamenti delle rate vengono effettuati comunemente ogni mese, quindi la frequenza predefinita delle rate è mensile. </para>
+> in &kmymoney;. Alcuni esempi di frequenza possono essere settimanale, ogni due settimane, mensile, quadrimestrale o annuale. In Italia i pagamenti delle rate vengono effettuati comunemente ogni mese, quindi la frequenza predefinita delle rate è mensile. </para>
 </formalpara>
 
 <formalpara
@@ -86,66 +76,62 @@
 >, espressa normalmente in percentuale sul capitale, su un certo periodo. I tassi di interesse possono essere fissi, cioè non cambiare per tutta la durata del prestito, o variabili, che possono cambiare. Tipicamente, il pagamento degli interessi è compreso nelle rate. </para>
 </formalpara>
 
-<para
->Nota che un prestito in &kmymoney; deve avere un tasso di interesse maggiore di 0. Il denaro preso in prestito o prestato senza interessi deve essere inserito come conto passivo o attivo. </para>
-
 <formalpara
 ><title
 >Pagamenti periodici</title>
 <para
->Poiché le rate sono pagate generalmente con una frequenza precisa, come settimanale, mensile, quadrimestrale o annuale, sono definite <quote
+>Le rate sono pagate generalmente con una frequenza be precisa, come settimanale, mensile, quadrimestrale o annuale, quindi sono definite <quote
 >Pagamenti periodici</quote
->. La somma di tutti i pagamenti periodici e del pagamento finale è uguale alla somma del capitale del prestito più gli interessi. </para>
+>. La somma di tutti i pagamenti periodici e del pagamento finale è uguale alla somma del capitale con l'interesse. </para>
 </formalpara>
 
 <formalpara
 ><title
 >Commissioni</title>
 <para
->Potrebbero esserci altre commissioni oltre agli interessi che devono essere pagate, possibilmente con ogni rata. Queste sono chiamate <quote
+>Potrebbero esserci da pagare altre commissioni oltre all'interesse, insieme ad ogni rata. Queste sono chiamate <quote
 >commissioni ricorrenti</quote
->. Esempi di commissioni ricorrenti includono (ma non sono necessariamente limitati a): <itemizedlist>
-    <listitem>
-      <para
+>. Alcuni esempi sono: <itemizedlist>
+  <listitem>
+    <para
 >Conti di pagamento <quote
 >impound</quote
 > o <quote
 >escrow</quote
->. Pagamenti di questo tipo vengono comunemente utilizzati per trattenere i fondi necessari al pagamento delle imposte sulla proprietà annuali o semestrali. </para>
-    </listitem>
+>. (Pagamenti di questo tipo vengono comunemente utilizzati per trattenere i fondi necessari al pagamento delle imposte sulla proprietà annuali o semestrali.) </para>
+  </listitem>
 
-    <listitem
+  <listitem
 ><para
 >Assicurazione sul mutuo</para
 ></listitem>
 
-    <listitem
+  <listitem
 ><para
 >Assicurazione di invalidità</para
 ></listitem>
 
-    <listitem
+  <listitem
 ><para
 >Commissioni di gestione del prestito</para
 ></listitem>
-  </itemizedlist>
+</itemizedlist>
 </para>
 </formalpara>
-</sect2>
 
-<sect2
+<formalpara
 ><title
 >Riepilogo</title>
 <para
->In sintesi, il mutuatario riceve una somma forfettaria dal prestatore all'inizio del prestito. Il mutuatario effettua un pagamento periodico al mutuante. L'importo del pagamento periodico è la somma del pagamento del capitale (che viene utilizzato per pagare il saldo o il capitale rimanente del prestito), il pagamento degli interessi (che premia il mutuante per aver consentito l'uso del denaro da parte del mutuatario), più eventuali commissioni ricorrenti (che coprono eventuali spese accessorie). Alla fine del prestito, il mutuatario ha rimborsato l'intero capitale. </para>
-</sect2>
+>In breve, il beneficiario riceve il capitale dal prestatore all'inizio del prestito. Il beneficiario effettuerà dei pagamenti periodici a chi presta i soldi. Il pagamento periodico è la somma del pagamento del capitale (che restituisce mano a mano il capitale prestato), degli interessi (che sono la ricompensa per il prestito) e delle commissioni periodiche (che coprono eventuali imprevisti). Alla fine del prestito, il beneficiario ha ripagato l'intero capitale. </para>
+</formalpara>
 </sect1>
 
-<sect1 id="details.loans.example"
-><title
+<sect1 id="details.loans.example">
+<title
 >Esempio</title>
 <para
->Ad esempio, potresti prendere in prestito € 25.000,00 per una nuova automobile e accettare di pagare alla banca una rata ogni mese per 60 mesi. Il tasso di interesse sul prestito potrebbe essere del 5,5% all'anno. </para>
+>Ad esempio, tu potresti ricevere 25.000€ per una nuova auto e accettare di pagare una rata mensile alla banca per 60 mesi. Il tasso di interesse sul prestito potrebbe essere ad esempio 5.5%. </para>
 
 <para
 >In questo scenario, il capitale del prestito è 25.000,00 euro. Il periodo del prestito è 60 mesi (5 anni). Il periodo del prestito può essere anche indicato come 60 pagamenti, perché ci sarà un pagamento ogni mese, per 5 anni. La frequenza del rimborso è un mese perché si pagano le rate ogni mese. Il pagamento periodico, che può essere calcolato da &kmymoney;, sarebbe 447,53 euro. </para>
@@ -156,12 +142,10 @@
 > è una tabella o un grafico che visualizza la data delle rate e i loro importi. Spesso, queste pianificazioni dividono il pagamento periodico nelle due parti che lo costituiscono: il capitale, l'interesse e le commissioni periodiche. </para>
 </sect1>
 
-<!-- FIXME: this section needs expanding, screenshots of the new loan wizard, and more dtails on the various entry
-     fields.  In particular, it needs an explanation of how fixed payments are calculated by adjusting the amount of
-     principal and interest of each payment, sometimes resulting in a final payment different from the others.  -->
-<sect1 id="details.loans.creation"
-><title
+<sect1 id="details.loans.creation">
+<title
 >Creazione di un nuovo prestito</title>
+
 <para
 >In &kmymoney; un prestito è un tipo di conto. Quindi, per creare un nuovo prestito, si inizia selezionando la voce di menu <menuchoice
 ><guimenu
@@ -171,44 +155,14 @@
 ></menuchoice
 >. Poi si continua, rispondendo alle domande della procedura guidata. </para>
 
-<note>
 <para
->La procedura guidata <guilabel
->Configurazione nuovo conto</guilabel
-> non solo imposta un conto prestito, ma crea anche una <guilabel
->Transazione pianificata</guilabel
-> per i pagamenti periodici. Se provi a modificare il conto prestito o la transazione pianificata associata, ti sarà presentata la <guilabel
->Modifica guidata conto prestito</guilabel
->. Ciò ti consente di modificare molti dettagli dei prestiti, ma non tutti. Sfortunatamente, alcuni aspetti del conto prestito non possono essere modificati al momento, come il conto padre del conto. </para>
-
-<para
->Se visualizzi la <link linkend="details.schedules"
->Vista delle pianificazioni</link
->, fai clic con il pulsante destro del mouse su una qualsiasi delle pianificazioni elencate e seleziona <guimenuitem
->Modifica transazione pianificata</guimenuitem
-> dal menu che si apre, &kmymoney; visualizzerà la finestra <guilabel
->Modifica transazione pianificata</guilabel
->. Al contrario, se lo fai con una pianificazione di prestito, ti sarà mostrata la <guilabel
->Procedura guidata di modifica conto prestito</guilabel
->, come menzionato sopra. Tuttavia, se tieni premuto il tasto <keycap
->&Shift;</keycap
-> quando fai clic su <guimenuitem
->Modifica transazione pianificata</guimenuitem
->, sarà visualizzata la finestra <guilabel
->Modifica transazione pianificata</guilabel
-> per il prestito, dove puoi modificare alcuni dettagli della transazione ricorrente. </para>
-
-<para
->Tieni presente inoltre che se elimini la pianificazione associata a un prestito, non potrai annullare questa azione e dovrai ricominciare da capo, creando un nuovo conto prestito e una nuova pianificazione. </para>
-</note>
-
-<para
->Facoltativamente, come per qualsiasi altro conto, un prestito può essere associato a un istituto specifico. Se stai prendendo in prestito da una società di mutui o da una società di prestiti per auto, potresti creare un istituto che descriva questa società e associare il tuo prestito all'istituto. Se stai prendendo in prestito da tuo zio Ugo, non c'è bisogno di creare un istituto. </para>
+>Un prestito può anche essere associato ad un particolare istituto. Se si stanno ricevendo dei soldi da una agenzia di prestiti o mutui, è possibile creare un istituto che descrive questa azienda associato al prestito. Se si sta ricevendo un prestito da un cugino, non è necessario impostare un istituto. </para>
 </sect1>
 
-<sect1 id="details.loans.extra-payments"
-><title
+<sect1 id="details.loans.extra-payments">
+<title
 >Rimborsi aggiuntivi del capitale del prestito</title>
+
 <para
 >Si può pagare una parte del capitale, se si vuole. Basta <link linkend="details.ledger.transactions"
 >inserire una transazione</link
@@ -234,10 +188,10 @@
   </listitem>
 </itemizedlist>
 
-<note>
-  <para
->Se si raddoppia il capitale rimborsato con ogni pagamento periodico, è necessario ricalcolare la pianificazione del prestito per ciascuna rata. Questo consentirà di avere un valore preciso del capitale rimborsato con ogni rata. </para>
-</note>
+<note
+><para
+>Se si raddoppia il capitale rimborsato con ogni pagamento periodico, è necessario ricalcolare la pianificazione del prestito per ciascuna rata. Questo consentirà di avere un valore preciso del capitale rimborsato con ogni rata. </para
+></note>
 </sect1>
 </chapter>
 

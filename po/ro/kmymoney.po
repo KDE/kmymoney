@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-18 02:01+0000\n"
+"POT-Creation-Date: 2025-05-23 03:30+0000\n"
 "PO-Revision-Date: 2024-02-24 16:23+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -316,10 +316,10 @@ msgstr "A fost găsit un program"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
 #, fuzzy, kde-format
-#| msgid "Create a new asset account"
+#| msgid "Created on"
 msgctxt "Create undo action"
 msgid "Create account"
-msgstr "Creează un nou cont de active"
+msgstr "Creat la"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
 #, fuzzy, kde-format
@@ -2293,10 +2293,10 @@ msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:912
 #, fuzzy, kde-format
-#| msgid "Payment accounts"
+#| msgid "Hide closed accounts"
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
-msgstr "Conturi de plată"
+msgstr "Ascunde conturile închise"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:920
 #, fuzzy, kde-format
@@ -2742,7 +2742,8 @@ msgstr "Creează o categorie"
 #. i18n: ectx: Menu (budget_context_menu)
 #: kmymoney/dialogs/knewaccountdlg.ui:925
 #: kmymoney/plugins/views/budget/budgetview.rc:4
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Budget options"
 msgid "Budget options"
 msgstr "Opțiuni buget"
 
@@ -3516,10 +3517,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:457
-#, fuzzy, kde-format
-#| msgid "Hide closed accounts"
+#, kde-format
 msgid "Hide accounts with a zero balance from Accounts"
-msgstr "Ascunde conturile închise"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:464
@@ -4164,9 +4164,9 @@ msgstr "Folosește lupa pentru registru"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowAllSplits)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:86
 #, fuzzy, kde-format
-#| msgid "Show a grid in the register"
+#| msgid "Show all register entries in full detail"
 msgid "Show all split details in ledger"
-msgstr "Afișează o grilă în registru"
+msgstr "Afișează toate intrările în registru cu toate detaliile"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:96
@@ -5396,7 +5396,7 @@ msgid "Delete security..."
 msgstr "Șterge titlul de valoare"
 
 #: kmymoney/kmymoney.cpp:1483
-#, fuzzy, kde-format
+#, kde-format
 msgid "New schedule..."
 msgstr "Programare nouă..."
 
@@ -5476,9 +5476,9 @@ msgstr "Raport &nou"
 
 #: kmymoney/kmymoney.cpp:1502
 #, fuzzy, kde-format
-#| msgid "&New report"
+#| msgid "Copy of %1"
 msgid "Copy report"
-msgstr "Raport &nou"
+msgstr "Copie a %1"
 
 #: kmymoney/kmymoney.cpp:1503
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:215
@@ -5514,9 +5514,9 @@ msgstr "Comută"
 
 #: kmymoney/kmymoney.cpp:1508
 #, fuzzy, kde-format
-#| msgid "Include transfers"
+#| msgid "Entry order"
 msgid "Edit tab order"
-msgstr "Include transferuri"
+msgstr "Ordinea intrării"
 
 #: kmymoney/kmymoney.cpp:1511
 #, kde-format
@@ -5664,10 +5664,10 @@ msgstr[2] "Doriți într-adevăr să ștergeți toate cele %1 de tranzacții mar
 
 #: kmymoney/kmymoney.cpp:2700
 #, fuzzy, kde-format
-#| msgid "Storing transactions"
+#| msgid "Any transaction"
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
-msgstr "Memorează tranzacții"
+msgstr "Oricare tranzacție"
 
 #: kmymoney/kmymoney.cpp:2785
 #, fuzzy, kde-format
@@ -6716,7 +6716,7 @@ msgstr "Asociate"
 
 #: kmymoney/models/statementmodel.cpp:105
 #, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
+#| msgctxt "To duplicate a split"
 #| msgid "Duplicate"
 msgctxt "@title:column Shows number of duplicate transactions"
 msgid "Duplicates"
@@ -9315,7 +9315,7 @@ msgstr "Categorii de cheltuieli"
 #, fuzzy, kde-format
 #| msgid "Interest category"
 msgid "Multiple interest categories"
-msgstr "Categoria dobânzii"
+msgstr "Categoria dobînzii"
 
 #: kmymoney/mymoney/storage/mymoneystoragedump.cpp:458
 #, kde-format
@@ -9927,22 +9927,28 @@ msgid "Billion"
 msgstr "Miliard"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:37
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item This comes after the hundred value digit"
+#| msgid " Hundred"
 msgctxt "@item %1 = hundred value digit"
 msgid "%1 Hundred"
-msgstr "%1 sute"
+msgstr " sute"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:47
 #, kde-format
 msgctxt "@item %1 = tens text, %2 = ones text"
 msgid "%1 %2"
-msgstr "%1 %2"
+msgstr ""
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:56
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "@label The first argument is the amount in words, the second is the "
+#| "fractional part and the third is the denominator of the fractional part"
+#| msgid "%1 and %2/%3"
 msgctxt "@item %1 = hundreds text, %2 = tens and ones text"
 msgid "%1 and %2"
-msgstr "%1 %2"
+msgstr "%1 și %2/%3"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:79
 #, kde-format
@@ -10657,10 +10663,9 @@ msgstr "Selectați coloana care conține cîmpul sumă."
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_amountColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:438
 #, fuzzy, kde-format
-#| msgctxt "verb, to clear selected columns"
-#| msgid "Clear selections"
+#| msgid "Category selection"
 msgid "Clear amount field selection."
-msgstr "Șterge selecțiile"
+msgstr "Alegere categorie"
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_indicator)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:448
@@ -10680,9 +10685,9 @@ msgstr "Alegeți coloana care conține câmpul dată."
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_creditDebitIndicatorColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:468
 #, fuzzy, kde-format
-#| msgid "OFX import file selection"
+#| msgid "Category selection"
 msgid "Clear indicator field selection."
-msgstr "Selecție pentru importul de fișier OFX"
+msgstr "Alegere categorie"
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_debit)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:478
@@ -11497,12 +11502,11 @@ msgid "No profile setup"
 msgstr ""
 
 #: kmymoney/plugins/csv/import/kcm_csvimporter.cpp:65
-#, fuzzy, kde-format
-#| msgid "Please select a parent account."
+#, kde-format
 msgctxt "@info:tooltip No QIF profile defined"
 msgid ""
 "Please use the QIF profile editor in the QIF plugin settings to create one."
-msgstr "Vă rog să alegeți un cont părinte."
+msgstr ""
 
 #. i18n: ectx: label, entry (AutoFieldDelimiter), group (Misc)
 #: kmymoney/plugins/csv/import/pluginsettings.kcfg:10
@@ -15713,10 +15717,11 @@ msgstr "Buget bazat pe prognoză"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:460
 #, fuzzy, kde-format
-#| msgid "Storing transactions"
+#| msgctxt "Category name"
+#| msgid "Miscellaneous income"
 msgctxt "@item:inmenu To make it income"
 msgid "Change to income"
-msgstr "Memorează tranzacții"
+msgstr "Alte venituri"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:465
 #, fuzzy, kde-format
@@ -17473,10 +17478,9 @@ msgid "&Export to PDF files"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:816
-#, fuzzy, kde-format
-#| msgid "Favorite reports"
+#, kde-format
 msgid "Export into directory"
-msgstr "Rapoarte favorite"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KReportsView)
 #: kmymoney/plugins/views/reports/kreportsview.ui:14
@@ -19636,17 +19640,16 @@ msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:244
-#, fuzzy, kde-format
-#| msgid "Hide closed accounts"
+#, kde-format
 msgid "Hide zero balance accounts from Accounts"
-msgstr "Ascunde conturile închise"
+msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:248
 #, fuzzy, kde-format
-#| msgid "Hide closed accounts"
+#| msgid "Show account limit information on the Homepage"
 msgid "Hide zero balance accounts from Home"
-msgstr "Ascunde conturile închise"
+msgstr "Arată informații despre limitele contului în pagina de start"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:252
@@ -19694,9 +19697,10 @@ msgstr "Afișează delimitatori între anul fiscal precedent și cel curent"
 
 #. i18n: ectx: label, entry (ShowReconciliationMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:284
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Do not show reconciled transactions"
 msgid "Show reconciliation entries with date and balance"
-msgstr ""
+msgstr "Ascunde tranzacțiile reconciliate"
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:293
@@ -20034,7 +20038,7 @@ msgstr "Împarte acțiunile"
 #| msgid "Interest Income"
 msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
-msgstr "Venit din dobândă"
+msgstr "Venit din dobîndă"
 
 #: kmymoney/views/investtransactioneditor.cpp:304
 #: kmymoney/views/multitransactioneditor.cpp:230
@@ -20155,7 +20159,7 @@ msgstr "Categorii de cheltuieli"
 #| msgid "Type of interest"
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
-msgstr "Tipul de dobândă"
+msgstr "Tipul de dobîndă"
 
 #: kmymoney/views/investtransactioneditor.cpp:686
 #, fuzzy, kde-format
@@ -20582,11 +20586,10 @@ msgid "The account is a required field for a schedule"
 msgstr ""
 
 #: kmymoney/views/keditscheduledlg.cpp:169
-#, fuzzy, kde-format
-#| msgid "Cannot create transactions in the context of a category."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
-msgstr "Nu pot fi create tranzacții în contextul unei categorii."
+msgstr ""
 
 #: kmymoney/views/keditscheduledlg.cpp:312
 #, kde-format
@@ -21026,7 +21029,6 @@ msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1421
 #, fuzzy, kde-format
-#| msgctxt "Reconciliation flag C"
 #| msgid "C"
 msgctxt "@title:column table on home page: cleared"
 msgid "C"
@@ -21928,11 +21930,10 @@ msgstr ""
 
 #: kmymoney/views/ktagsview.cpp:381
 #, fuzzy, kde-format
-#| msgctxt "To duplicate a split"
-#| msgid "Duplicate"
+#| msgid "Duplicate tag"
 msgctxt "@title:window"
 msgid "Duplicate tag name"
-msgstr "Duplică"
+msgstr "Duplică marcaj"
 
 #: kmymoney/views/ktagsview.cpp:404 kmymoney/views/ktagsview.cpp:528
 #, kde-format
@@ -22087,34 +22088,30 @@ msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Tranzacția are lipsă o asignare de <b>%1</b>."
 
 #: kmymoney/views/ledgerview.cpp:876
-#, fuzzy, kde-format
-#| msgid "This schedule will end at some time"
+#, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
-msgstr "Această plată programată se va termina cîndva în viitor"
+msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:882
-#, fuzzy, kde-format
-#| msgid "First transaction does not match requirement for matching"
+#, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
-msgstr "Prima tranzacție nu îndeplinește cerințele pentru asociere"
+msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:887
-#, fuzzy, kde-format
-#| msgid "First transaction does not match requirement for matching"
+#, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
-msgstr "Prima tranzacție nu îndeplinește cerințele pentru asociere"
+msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:963
 #, fuzzy, kde-format
-#| msgid "Do you really want to delete the selected price entry?"
-#| msgid_plural "Do you really want to delete the selected price entries?"
+#| msgid "Checking for overdue scheduled transactions..."
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
-msgstr "Doriți într-adevăr să ștergeți întrarea de preț marcată?"
+msgstr "Se verifică existența unor tranzacții programate restante..."
 
 #: kmymoney/views/ledgerview.cpp:964
 #, fuzzy, kde-format
@@ -22435,14 +22432,12 @@ msgstr ""
 "Folosește acest buton pentru a înregistra această tranzacție în registru"
 
 #: kmymoney/views/newtransactionform.cpp:129
-#, fuzzy, kde-format
-#| msgctxt "@item %1 = tens text, %2 = ones text"
-#| msgid "%1 %2"
+#, kde-format
 msgctxt ""
 "@item:intext Amount, %1 transaction amount, %2 payment direction enclosed in "
 "parenthesis"
 msgid "%1 %2"
-msgstr "%1 %2"
+msgstr ""
 
 #: kmymoney/views/onlinebalancedelegate.cpp:143
 #, kde-format
@@ -22754,7 +22749,7 @@ msgstr "Modificare..."
 
 #: kmymoney/views/splitview.cpp:134
 #, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
+#| msgctxt "To duplicate a split"
 #| msgid "Duplicate"
 msgctxt "@item:inmenu Duplicate selected split(s)"
 msgid "Duplicate"
@@ -22792,7 +22787,7 @@ msgstr ""
 #| msgid "Save changes"
 msgctxt "@action:inmenu Reset all changes"
 msgid "Undo changes"
-msgstr "Salvați modificările"
+msgstr "Salvează modificările"
 
 #: kmymoney/views/tabordereditor.cpp:438
 #, fuzzy, kde-format
@@ -24187,9 +24182,9 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:265
 #, fuzzy, kde-format
-#| msgid "Create a new asset account"
+#| msgid "Filter Accounts"
 msgid "Favorite account"
-msgstr "Creează un nou cont de active"
+msgstr "Filtrează conturi"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel14)
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:27
@@ -27037,10 +27032,9 @@ msgid "Export in HTML format"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:126
-#, fuzzy, kde-format
-#| msgid "Favorite reports"
+#, kde-format
 msgid "Export in xml format"
-msgstr "Rapoarte favorite"
+msgstr ""
 
 #: tools/kmmreport-export.cpp:129
 #, kde-format
@@ -27133,160 +27127,6 @@ msgstr ""
 #~ msgstr[1] "    %1 create"
 #~ msgstr[2] "    %1 create"
 
-#~ msgid "Duplicate open"
-#~ msgstr "Deschidere multiplă"
-
-#~ msgid ""
-#~ "<p>The account \"%1\" was previously created as loan account but some "
-#~ "information is missing.</p><p>The new loan wizard will be started to "
-#~ "collect all relevant information.</p><p>Please use KMyMoney version 0.8.7 "
-#~ "or later and earlier than version 0.9 to correct the problem.</p>"
-#~ msgstr ""
-#~ "<p>Contul \"%1\" a fost creat anterior drept cont debitor, dar anumite "
-#~ "informații lipsesc.</p><p>Vrăjitorul pentru debit nou va începe să "
-#~ "colecteze toate informațiile necesare.</p><p>Vă rog să folosiți o "
-#~ "versiune de KMyMoney mai mare sau egală cu 0.8.7 și mai mică de 0.9 "
-#~ "pentru a corecta această problemă.</p>"
-
-#~ msgid "Account problem"
-#~ msgstr "Problemă de cont"
-
-#, fuzzy
-#~| msgid "Select account"
-#~ msgid "Select category or account."
-#~ msgstr "Alegeți un cont"
-
-#~ msgid "Today's due payments"
-#~ msgstr "Plățile de efectuat astăzi"
-
-#, fuzzy
-#~| msgid "Price for %1 updated (id %2)"
-#~ msgctxt "@info Online price update %1 online id, %2 internal id"
-#~ msgid "Price for %1 updated (id %2)"
-#~ msgstr "Preț pentru %1 actualizat (id %2)"
-
-#~ msgid ""
-#~ "KMyMoney has detected some overdue scheduled transactions for this "
-#~ "account. Do you want to enter those scheduled transactions now?"
-#~ msgstr ""
-#~ "KMyMoney a detectat existența unor tranzacții programate întîrziate "
-#~ "pentru acest cont. Doriți să introduceți acele tranzacții acum?"
-
-#~ msgid "Remove this price item from the file"
-#~ msgstr "Șterge această intrare de preț din fișier"
-
-#~ msgid "Stock Name"
-#~ msgstr "Nume acțiuni"
-
-#~ msgctxt "Price source"
-#~ msgid "Source"
-#~ msgstr "Sursa"
-
-# |, no-check-spell
-#~ msgid "Upd"
-#~ msgstr "Actualiz."
-
-# |, no-check-spell
-#~ msgid "Res"
-#~ msgstr "Reînc."
-
-#~ msgid "Close this window"
-#~ msgstr "Închide această fereastră"
-
-#~ msgid "Preferred account"
-#~ msgstr "Cont preferat"
-
-#~ msgid "CashFlow"
-#~ msgstr "Fluxul de numerar"
-
-#~ msgid "Select Account:"
-#~ msgstr "Alegeți un cont:"
-
-#~ msgid "Investment details"
-#~ msgstr "Detalii ale investiției"
-
-# well-spelled: RHAT
-#~ msgid "Enter the ticker symbol (e.g. RHAT)."
-#~ msgstr "Introduceți simbolul de pe piața de capital (de exemplu RHAT)"
-
-# well-spelled: CUSIP, ISIN, WKN
-#~ msgid "Enter the CUSIP/ISIN/WKN identification number here"
-#~ msgstr "Introduceți numărul de identificare CUSIP/ISIN/WKN aici"
-
-#~ msgid "This wizard allows you to modify the selected security."
-#~ msgstr "Acest expert vă permite modificarea titlului de valoare ales."
-
-#~ msgid ""
-#~ "The selected symbol is already on file. Do you want to reuse the existing "
-#~ "security?"
-#~ msgstr ""
-#~ "Simbolul dat este deja utilizat. Doriți să reutilizați titlul de valoare "
-#~ "existent?"
-
-#~ msgid "Security found"
-#~ msgstr "S-a găsit titlul de valoare"
-
-#~ msgctxt "Equity name"
-#~ msgid "Name"
-#~ msgstr "Nume"
-
-#~ msgctxt "Online quote source"
-#~ msgid "Source"
-#~ msgstr "Sursă"
-
-#, fuzzy
-#~| msgid "File already exists"
-#~ msgid "Price Already Exists"
-#~ msgstr "Fișierul deja există"
-
-#~ msgid ""
-#~ "Received a price for %1 (id %2), but this symbol is not on the list. "
-#~ "Aborting entire update."
-#~ msgstr ""
-#~ "S-a primit un preț pentru %1 (id %2), dar acest simbol nu este pe listă. "
-#~ "Anulează întreaga actualizare."
-
-#~ msgid "List of known Equities, and the date they were last updated on."
-#~ msgstr ""
-#~ "Lista capitalurilor cunoscute și data ultimei actualizări ale acestora."
-
-#, fuzzy
-#~| msgid "Symbol"
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Symbol"
-#~ msgstr "Simbol"
-
-#, fuzzy
-#~| msgid "Identification"
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Identification number"
-#~ msgstr "Identificare"
-
-#, fuzzy
-#~| msgctxt "@title header of the currency name column"
-#~| msgid "Name"
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Name"
-#~ msgstr "Nume"
-
-#~ msgid "New Quote Source"
-#~ msgstr "Sursă de cotații nouă"
-
-#, fuzzy
-#~| msgid ""
-#~| "The file <b>%1</b> already exists. Do you really want to overwrite it?"
-#~ msgid ""
-#~ "Security <b>%1</b> uses this quote source.<br>Do you really want to "
-#~ "remove it?"
-#~ msgstr ""
-#~ "Fișierul <b>%1</b> deja există. Doriți într-adevăr să-l suprascrieți?"
-
-#, fuzzy
-#~| msgid "New Quote Source"
-#~ msgctxt "@title:window"
-#~ msgid "Delete quote source"
-#~ msgstr "Sursă de cotații nouă"
-
 #~ msgid "Source <placeholder>%1</placeholder> does not exist."
 #~ msgstr "Sursa <placeholder>%1</placeholder> nu există."
 
@@ -27359,41 +27199,614 @@ msgstr ""
 #~ "Nu s-a putut deschide prețul pentru %1 (nu s-au primit date de pe cotația "
 #~ "online)"
 
-#, fuzzy
-#~| msgid "Unable to update price for %1 (no price or no date)"
-#~ msgid "Unable to update price for %1 (error encountered: '%2')"
-#~ msgstr "Nu s-a putut deschide prețul pentru %1 (preț sau dată lipsă)"
+#~ msgctxt "Total value"
+#~ msgid "Total"
+#~ msgstr "Total"
+
+#~ msgid "Price/Share"
+#~ msgstr "Preț/acțiune"
+
+#~ msgid "Asset account"
+#~ msgstr "Cont de activ"
+
+#~ msgid ""
+#~ "At least one split of the selected transaction references an account that "
+#~ "has been closed. Editing the transactions is therefore prohibited."
+#~ msgstr ""
+#~ "Cel puțin o parte din tranzacția selectată se referă la un cont care a "
+#~ "fost închis. Modificarea tranzacției este de aceea interzisă."
+
+#~ msgid ""
+#~ "Cannot enter transaction with postdate prior to account's opening date."
+#~ msgstr ""
+#~ "Nu poate fi creată o tranzacție avînd data înaintea datei de deschidere a "
+#~ "contului."
+
+#~ msgctxt "Equity name"
+#~ msgid "Name"
+#~ msgstr "Nume"
 
 #, fuzzy
-#~| msgid "Tag"
-#~ msgctxt "Split header"
-#~ msgid "Tag"
-#~ msgstr "Marcaj"
+#~| msgid "File already exists"
+#~ msgid "Price Already Exists"
+#~ msgstr "Fișierul deja există"
 
-#~ msgid "Reorganizing accounts..."
-#~ msgstr "Se reorganizează conturile..."
+#~ msgid ""
+#~ "Received a price for %1 (id %2), but this symbol is not on the list. "
+#~ "Aborting entire update."
+#~ msgstr ""
+#~ "S-a primit un preț pentru %1 (id %2), dar acest simbol nu este pe listă. "
+#~ "Anulează întreaga actualizare."
+
+#~ msgid "List of known Equities, and the date they were last updated on."
+#~ msgstr ""
+#~ "Lista capitalurilor cunoscute și data ultimei actualizări ale acestora."
 
 #, fuzzy
-#~| msgid "Show account limit information on the Homepage"
-#~ msgid "Hide zero balance liabilities on the Homepage"
-#~ msgstr "Arată informații despre limitele contului în pagina de start"
+#~| msgid "Search transactions"
+#~ msgctxt "@info:tooltip for find transaction Open button"
+#~ msgid "Search transactions"
+#~ msgstr "Caută tranzacții"
+
+#~ msgid "Found %1 matching transaction (D %2 / P %3 = %4)"
+#~ msgid_plural "Found %1 matching transactions (D %2 / P %3 = %4)"
+#~ msgstr[0] "S-a găsit %1 tranzacție potrivită (D %2 / P %3 = %4)"
+#~ msgstr[1] "S-au găsit %1 tranzacții potrivite (D %2 / P %3 = %4)"
+#~ msgstr[2] "S-au găsit %1 de tranzacții potrivite (D %2 / P %3 = %4)"
+
+#~ msgid "MyDialog"
+#~ msgstr "Dialogul meu"
+
+#~ msgid "Remove this price item from the file"
+#~ msgstr "Șterge această intrare de preț din fișier"
+
+#~ msgctxt "Price source"
+#~ msgid "Source"
+#~ msgstr "Sursa"
+
+#~ msgid "Delete..."
+#~ msgstr "Șterge..."
+
+#~ msgid "will be calculated"
+#~ msgstr "va fi calculat"
+
+#~ msgid ""
+#~ "You are about to delete the selected split. Do you really want to "
+#~ "continue?"
+#~ msgstr ""
+#~ "Urmează să ștergeți partea de tranzacție marcată. Doriți într-adevăr să "
+#~ "continuați?"
+
+#~ msgid ""
+#~ "You need to assign a category to this split before it can be entered."
+#~ msgstr ""
+#~ "Trebuie să asociați o categorie părții de tranzacție înainte ca aceasta "
+#~ "să poată fi introdusă."
+
+#~ msgid "Enter split"
+#~ msgstr "Introdu o parte de tranzacție"
+
+#~ msgid "Is a sub account"
+#~ msgstr "Este un subcont"
+
+#~ msgid "Routing Number:"
+#~ msgstr "Cod de identificare bancă:"
+
+#~ msgid ""
+#~ "Select a transaction and press the OK button or use Cancel to select none."
+#~ msgstr ""
+#~ "Alegeți o tranzacție și apăsați butonul OK sau folosiți butonul Renunță "
+#~ "pentru a nu alege nicio tranzacție."
+
+#~ msgid "Clear &All"
+#~ msgstr "Șterge &tot"
+
+#~ msgid "Use this to clear all splits of this transaction"
+#~ msgstr "Folosește aceasta pentru a șterge toate părțile acestei tranzacții"
+
+#~ msgid "Clear &Zero"
+#~ msgstr "Curăță valorile nule"
 
 #, fuzzy
 #~| msgid ""
-#~| "    Please enter a price for the currency on or before the opening date."
-#~ msgctxt "@info consistency check"
+#~| "In case you have multiple split entries to the same category and you "
+#~| "like to keep them as a single split, press this button. The amount for "
+#~| "identical categories will be added and stored in a single split for that "
+#~| "category."
 #~ msgid ""
-#~ "    Please enter a price for the currency on or before the date of first "
-#~ "usage."
+#~ "In case you have multiple split entries to the same category and you like "
+#~ "to keep them as a single split"
 #~ msgstr ""
-#~ "    Vă rugăm introduceți un preț pentru moneda contului în sau înainte de "
-#~ "data deschiderii acestuia."
+#~ "În cazul în care aveți mai multe părți de tranzacție din aceeași "
+#~ "categorie și ați dori să le păstrați ca o singură parte, folosiți acest "
+#~ "buton. Sumele pentru categoriile identice vor fi însumate și stocate într-"
+#~ "o singură parte de tranzacție pentru acea categorie."
+
+#~ msgid ""
+#~ "You are about to delete all splits of this transaction. Do you really "
+#~ "want to continue?"
+#~ msgstr ""
+#~ "Sînteți pe cale de a șterge toate părțile acestei tranzacții. Doriți într-"
+#~ "adevăr să continuați?"
+
+#~ msgid "<b>11,00<b>"
+#~ msgstr "<b>11,00<b>"
+
+#~ msgid "<b>111,00<b>"
+#~ msgstr "<b>111,00<b>"
+
+#~ msgid "100,00"
+#~ msgstr "100,00"
+
+#~ msgid ""
+#~ "This dialog does not allow new tags to be created. Please pick a tag from "
+#~ "the list."
+#~ msgstr ""
+#~ "Acest dialog nu permite crearea unui marcaj nou. Alegeți un marcaj din "
+#~ "listă."
+
+#~ msgid "Tag creation"
+#~ msgstr "Creare marcaj"
+
+#~ msgid ""
+#~ "The transactions associated with the selected tags need to be re-assigned "
+#~ "to a different tag before the selected tags can be deleted. Please select "
+#~ "a tag from the list below."
+#~ msgstr ""
+#~ "Tranzacțiile asociate cu marcajele selectate trebuie să fie reasociate la "
+#~ "alt marcaj înainte ca marcajele selectate să poată fi șterșe. Vă rog "
+#~ "alegeți un marcaj din lista de mai jos."
+
+#, fuzzy
+#~| msgid "Icons & splash screen"
+#~ msgid "Show splash screen"
+#~ msgstr "Iconițe & ecran de pornire"
+
+#~ msgid "Show title bar on each page"
+#~ msgstr "Arată bara de titlu în fiecare ecran"
+
+#~ msgid "New Quote Source"
+#~ msgstr "Sursă de cotații nouă"
+
+#, fuzzy
+#~| msgid "Symbol"
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Symbol"
+#~ msgstr "Simbol"
+
+#, fuzzy
+#~| msgid "Identification"
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Identification number"
+#~ msgstr "Identificare"
+
+#, fuzzy
+#~| msgctxt "@title header of the currency name column"
+#~| msgid "Name"
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Name"
+#~ msgstr "Nume"
+
+#, fuzzy
+#~| msgid ""
+#~| "The file <b>%1</b> already exists. Do you really want to overwrite it?"
+#~ msgid ""
+#~ "Security <b>%1</b> uses this quote source.<br>Do you really want to "
+#~ "remove it?"
+#~ msgstr ""
+#~ "Fișierul <b>%1</b> deja există. Doriți într-adevăr să-l suprascrieți?"
+
+#, fuzzy
+#~| msgid "New Quote Source"
+#~ msgid "Delete quote source"
+#~ msgstr "Sursă de cotații nouă"
+
+#~ msgid "Always show a No. field"
+#~ msgstr "Întotdeauna afișează un cîmp pentru nr."
+
+#~ msgid "Category/Account"
+#~ msgstr "Categorie/Cont"
+
+#~ msgid "Transfer from"
+#~ msgstr "Transferă din"
+
+#~ msgid "Transfer to"
+#~ msgstr "Transferă în"
+
+#~ msgid ""
+#~ "This transaction has more than two splits and is originally based on a "
+#~ "different currency (%1). Using this account to modify the transaction may "
+#~ "result in rounding errors. Do you want to continue?"
+#~ msgstr ""
+#~ "Această tranzacție are mai mult de două părți și se bazează pe o monedă "
+#~ "diferită (%1). Folosirea acestui cont pentru modificarea tranzacției "
+#~ "poate genera o serie de erori. Vreți să continuați?"
+
+#~ msgid ""
+#~ "At least one of the selected transactions has more than two splits and is "
+#~ "originally based on a different currency (%1). Using this account to "
+#~ "modify the transactions may result in rounding errors. Do you want to "
+#~ "continue?"
+#~ msgstr ""
+#~ "Cel puțin una dintre tranzacțiile selectate are mai multe decît două "
+#~ "părți și se bazează pe o monedă diferită (%1). Folosirea acestui cont "
+#~ "pentru modificarea tranzacțiilor poate avea ca rezultat diferite erori. "
+#~ "Vreți să continuați?"
+
+#, fuzzy
+#~| msgid "Cancel processing of schedule entry."
+#~ msgid "<center>Processing schedule for %1.</center>"
+#~ msgstr "Renunță la procesarea programării."
+
+#, fuzzy
+#~| msgid ""
+#~| "The number <b>%1</b> has already been used in account <b>%2</b>."
+#~| "<center>Do you want to replace it with the next available number?</"
+#~| "center>"
+#~ msgid ""
+#~ "Check number <b>%1</b> has already been used in account <b>%2</b>."
+#~ "<center>Do you want to replace it with the next available number?</center>"
+#~ msgstr ""
+#~ "Numărul <b>%1</b> a fost deja folosit în contul <b>%2</b>.<center>Doriți "
+#~ "să-l înlocuiți cu următorul număr disponibil?</center>"
+
+#~ msgid "Duplicate number"
+#~ msgstr "Creează un duplicat pentru număr"
+
+#~ msgid "Storing transactions"
+#~ msgstr "Memorează tranzacții"
+
+#~ msgid "&Enter"
+#~ msgstr "&Introdu"
+
+#~ msgid "Use this to enter the transaction into the ledger."
+#~ msgstr "Folosiți aceasta pentru a introduce tranzacția în registru."
+
+#~ msgid "&Schedule"
+#~ msgstr "&Plată programată"
+
+#~ msgid "Accepts the entered data and stores it as schedule"
+#~ msgstr "Acceptă datele introduse și le memorează ca programare"
+
+#~ msgid ""
+#~ "The transaction you are about to enter has a post date in the future.<br/"
+#~ "><br/>Do you want to enter it in the ledger or add it to the schedules?"
+#~ msgstr ""
+#~ "Tranzacția pe care sînteți pe cale să o introduceți are o amînare în "
+#~ "viitor.<br/><br/>Doriți s-o introduceți în registru sau să o adăugați "
+#~ "printre programări?"
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the warning balance of %2."
+#~ msgstr "Soldul contului <b>%1</b> a căzut sub soldul de avertisment al %2."
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the minimum balance of %2."
+#~ msgstr "Soldul contului <b>%1</b> a căzut sub soldul minim al %2."
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the maximum credit warning "
+#~ "limit of %2."
+#~ msgstr ""
+#~ "Soldul contului <b>%1</b> a căzut sub limita de avertisment a creditului "
+#~ "maxim %2."
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the maximum credit limit "
+#~ "of %2."
+#~ msgstr ""
+#~ "Soldul contului <b>%1</b> a căzut sub limita maximă a creditului %2."
+
+# |, no-check-spell
+#~ msgid "Thomas Baumgart"
+#~ msgstr "Thomas Baumgart"
+
+#~ msgid "Cristian Oneț"
+#~ msgstr "Cristian Oneț"
+
+#, fuzzy
+#~| msgid "Cristian Oneț"
+#~ msgid "Christian Dávid"
+#~ msgstr "Cristian Oneț"
+
+# |, no-check-spell
+#, fuzzy
+#~| msgid "Michael Edwardes."
+#~ msgid "Michael Edwardes"
+#~ msgstr "Michael Edwardes."
+
+# |, no-check-spell
+#~ msgid "Alvaro Soliverez"
+#~ msgstr "Alvaro Soliverez"
+
+#~ msgid "Ace Jones"
+#~ msgstr "Ace Jones"
+
+# |, no-check-spell
+#~ msgid "Tony Bloomfield"
+#~ msgstr "Tony Bloomfield"
+
+#~ msgid "Felix Rodriguez"
+#~ msgstr "Felix Rodriguez"
+
+#~ msgid "John C"
+#~ msgstr "John C"
+
+# |, no-check-spell
+#~ msgid "Fernando Vilas"
+#~ msgstr "Fernando Vilas"
+
+# |, no-check-spell
+#~ msgid "Kevin Tambascio"
+#~ msgstr "Kevin Tambascio"
+
+# |, no-check-spell
+#~ msgid "Javier Campos Morales"
+#~ msgstr "Javier Campos Morales"
+
+# |, no-check-spell
+#~ msgid "Robert Wadley"
+#~ msgstr "Robert Wadley"
+
+# |, no-check-spell
+#~ msgid "Laurent Montel"
+#~ msgstr "Laurent Montel"
+
+# |, no-check-spell
+#~ msgid "Wolfgang Rohdewald"
+#~ msgstr "Wolfgang Rohdewald"
+
+#~ msgid "Marko Käning"
+#~ msgstr "Marko Käning"
+
+#, fuzzy
+#~| msgid "All dates"
+#~ msgid "Allan Anderson ✝"
+#~ msgstr "Toate datele"
+
+#~ msgid ""
+#~ "<p>The account \"%1\" was previously created as loan account but some "
+#~ "information is missing.</p><p>The new loan wizard will be started to "
+#~ "collect all relevant information.</p><p>Please use KMyMoney version 0.8.7 "
+#~ "or later and earlier than version 0.9 to correct the problem.</p>"
+#~ msgstr ""
+#~ "<p>Contul \"%1\" a fost creat anterior drept cont debitor, dar anumite "
+#~ "informații lipsesc.</p><p>Vrăjitorul pentru debit nou va începe să "
+#~ "colecteze toate informațiile necesare.</p><p>Vă rog să folosiți o "
+#~ "versiune de KMyMoney mai mare sau egală cu 0.8.7 și mai mică de 0.9 "
+#~ "pentru a corecta această problemă.</p>"
+
+#~ msgid "Account problem"
+#~ msgstr "Problemă de cont"
+
+#~ msgid "&Show tip of the day"
+#~ msgstr "&Arată sfatul zilei"
+
+#~ msgctxt "New transaction button"
+#~ msgid "New"
+#~ msgstr "Nouă"
+
+#~ msgid "New scheduled transaction"
+#~ msgstr "Tranzacție programată nouă"
+
+#~ msgid ""
+#~ "<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>"
+#~ msgstr ""
+#~ "<p><b>%1</b> nu poate fi mutat la instituția <b>%2</b>. Motivul: %3</p>"
+
+#~ msgid "<p><b>%1</b> cannot be moved to <b>%2</b>. Reason: %3</p>"
+#~ msgstr "<p><b>%1</b> nu poate fi mutat în <b>%2</b>. Motivul: %3</p>"
+
+#~ msgid "CashFlow"
+#~ msgstr "Fluxul de numerar"
+
+#~ msgctxt "Unknown reconciliation state"
+#~ msgid "Unknown"
+#~ msgstr "Necunoscut(ă)"
+
+#~ msgctxt "Flag for unknown reconciliation state"
+#~ msgid "?"
+#~ msgstr "?"
+
+#~ msgctxt "Column heading for category in tax report"
+#~ msgid "Tax"
+#~ msgstr "Impozit"
+
+#, fuzzy
+#~| msgid "C"
+#~ msgctxt "Column heading for Cost Center"
+#~ msgid "CC"
+#~ msgstr "V"
+
+#~ msgid "Total Balance"
+#~ msgstr "Soldul total"
+
+#, fuzzy
+#~| msgid "Sort order"
+#~ msgctxt "IBAN, SWIFT, etc."
+#~ msgid "Sort Code"
+#~ msgstr "Ordinea de sortare"
+
+#~ msgctxt "Payment made from account"
+#~ msgid "Payment"
+#~ msgstr "Plată"
+
+#~ msgctxt "Deposit into account"
+#~ msgid "Deposit"
+#~ msgstr "Depune"
+
+#, fuzzy
+#~| msgid "Amount entered"
+#~ msgid "Cost Center"
+#~ msgstr "Suma introdusă"
+
+#, fuzzy
+#~| msgid "Checking"
+#~ msgctxt "It's about printing bank checks"
+#~ msgid "Check printing"
+#~ msgstr "Cont curent"
+
+#~ msgctxt ""
+#~ "@item This comes after the hunder text if the tens unit is different from "
+#~ "0"
+#~ msgid " and "
+#~ msgstr " și "
+
+#, fuzzy
+#~| msgctxt "@item no payments were entered for a loan"
+#~| msgid "No"
+#~ msgctxt "@label The word to be printed for no fractional part as in No/00"
+#~ msgid "No"
+#~ msgstr "Nu"
+
+#~ msgid "Check template file"
+#~ msgstr "Fișierul care conține șablonul cecului"
 
 #~ msgid "There are no entries in this account.\n"
 #~ msgstr "Nu există intrări în acest cont.\n"
 
 #~ msgid "Invalid account"
 #~ msgstr "Cont nevalid"
+
+#, fuzzy
+#~| msgctxt "CSV Importer dialog title"
+#~| msgid "CSV Importer"
+#~ msgid "CSV exporter"
+#~ msgstr "Importă fișier CSV"
+
+#, fuzzy
+#~| msgctxt "CSV Importer dialog title"
+#~| msgid "CSV Importer"
+#~ msgid "CSV importer"
+#~ msgstr "Importă fișier CSV"
+
+#, fuzzy
+#~| msgctxt "CSV Importer dialog title"
+#~| msgid "CSV Importer"
+#~ msgid "GnuCash importer"
+#~ msgstr "Importă fișier CSV"
+
+#~ msgid "Reorganizing accounts..."
+#~ msgstr "Se reorganizează conturile..."
+
+#, fuzzy
+#~| msgid "Icalendar export settings"
+#~ msgid "iCalendar exporter"
+#~ msgstr "Configurări pentru exportarea plăților programate "
+
+#, fuzzy
+#~| msgid "KMyMoney Unittest"
+#~ msgid "KMyMoney print check"
+#~ msgstr "Testare unitate KMyMoney"
+
+#~ msgid "Dequeue"
+#~ msgstr "Scoate din coada de execuție"
+
+#~ msgid "Dequeue selected job"
+#~ msgstr "Scoate sarcina din coada de execuție"
+
+#~ msgid "Remove the selected job from the list"
+#~ msgstr "Șterge sarcina din listă"
+
+#~ msgid "Execute"
+#~ msgstr "Execută"
+
+#~ msgid "Execute all jobs in the queue"
+#~ msgstr "Execută toate acțiunile din coadă"
+
+#~ msgctxt "Warning message"
+#~ msgid "There are no jobs in the queue."
+#~ msgstr "Nu există acțiuni în coadă."
+
+#~ msgctxt "Message title"
+#~ msgid "No Jobs"
+#~ msgstr "Nu există acțiuni"
+
+#~ msgid "Jobs"
+#~ msgstr "Sarcini"
+
+#, fuzzy
+#~| msgid "QIF Import"
+#~ msgid "OFX Importer"
+#~ msgstr "Importă QIF"
+
+#, fuzzy
+#~| msgid "QIF Import"
+#~ msgid "QIF importer"
+#~ msgstr "Importă QIF"
+
+#, fuzzy
+#~| msgid "Budgets"
+#~ msgid "Budgets view"
+#~ msgstr "Bugete"
+
+#~ msgid "Select year"
+#~ msgstr "Alege anul"
+
+#~ msgid "Budget year"
+#~ msgstr "Anul bugetului"
+
+#~ msgid "Change budget year"
+#~ msgstr "Schimbă anul bugetului"
+
+#~ msgid ""
+#~ "A budget with the name '%1' already exists. It is not advisable to have "
+#~ "multiple budgets with the same identification name. Are you sure you "
+#~ "would like to rename the budget?"
+#~ msgstr ""
+#~ "Un buget cu numele '%1' deja există. Nu este recomandat să aveți mai "
+#~ "multe bugete cu același nume de identificare. Sînteți sigur că doriți să "
+#~ "redenumiți bugetul?"
+
+#~ msgid "Creates a new budget"
+#~ msgstr "Creează un buget nou"
+
+#~ msgid "Use this to create a new empty budget."
+#~ msgstr "Folosește asta pentru a crea un buget nou și gol."
+
+#~ msgctxt "New budget"
+#~ msgid "New"
+#~ msgstr "Nou"
+
+#, fuzzy
+#~| msgid "Rename the current selected budget"
+#~ msgid "Rename the current selected budget."
+#~ msgstr "Redenumește bugetul selectat curent."
+
+#~ msgid "Use this to start renaming the selected budget."
+#~ msgstr "Folosește asta pentru a începe redenumirea bugetului selectat."
+
+#~ msgid "Delete the current selected budget"
+#~ msgstr "Șterge bugetul selectat curent"
+
+#~ msgid "Use this to delete the selected budget."
+#~ msgstr "Folosește asta pentru a șterge bugetul selectat curent."
+
+#~ msgctxt "@title header of the budget name column"
+#~ msgid "Name"
+#~ msgstr "Nume"
+
+# |, no-check-spell
+#~ msgid "Upd"
+#~ msgstr "Actualiz."
+
+# |, no-check-spell
+#~ msgid "Res"
+#~ msgstr "Reînc."
+
+#, fuzzy
+#~| msgid "Forecast"
+#~ msgid "Forecast view"
+#~ msgstr "Prognoză"
+
+#~ msgid "Copy this report to the clipboard"
+#~ msgstr "Copiază acest raport în memorie"
+
+#~ msgid "Copy"
+#~ msgstr "Copiază"
+
+#~ msgid "Close this window"
+#~ msgstr "Închide această fereastră"
 
 #, fuzzy
 #~| msgid ""
@@ -27405,49 +27818,6 @@ msgstr ""
 #~ msgstr ""
 #~ "*.css|Fișiere CSS\n"
 #~ "*|Toate fișierele"
-
-#, fuzzy
-#~| msgid "Budget options"
-#~ msgctxt "@title:menu budget context menu"
-#~ msgid "Budget options"
-#~ msgstr "Opțiuni buget"
-
-#, fuzzy
-#~| msgid "KMyMoney Unittest"
-#~ msgid "KMyMoney print check"
-#~ msgstr "Testare unitate KMyMoney"
-
-#~ msgctxt "Activity for income categories"
-#~ msgid "Received"
-#~ msgstr "Primit"
-
-#~ msgctxt "Activity for expense categories"
-#~ msgid "Paid"
-#~ msgstr "Plătit"
-
-#, fuzzy
-#~| msgid "Pay to"
-#~ msgctxt "Payee"
-#~ msgid "Pay to"
-#~ msgstr "Plătit către"
-
-#, fuzzy
-#~| msgid "From"
-#~ msgctxt "Payer"
-#~ msgid "From"
-#~ msgstr "De la"
-
-#, fuzzy
-#~| msgid "C"
-#~ msgctxt "@title:column"
-#~ msgid "CC"
-#~ msgstr "V"
-
-#~ msgid "Always show a No. field"
-#~ msgstr "Întotdeauna afișează un cîmp pentru nr."
-
-#~ msgid "Always show a No. field in transaction form"
-#~ msgstr "Afișează întotdeauna un cîmp Nr. în formularul tranzacției"
 
 #~ msgid "Loading securities..."
 #~ msgstr "Se încarcă titlurile de valoare..."
@@ -27466,9 +27836,7 @@ msgstr ""
 #~ msgid "Unknown XML tag %1 found in line %2"
 #~ msgstr "S-a găsit elementul XML necunoscut %1 la linia %2"
 
-#, fuzzy
-#~| msgid "Exception while creating a %1 element: %2"
-#~ msgid "Exception while reading %1 element: %2"
+#~ msgid "Exception while creating a %1 element: %2"
 #~ msgstr "A avut loc următoarea excepție la crearea unui element %1: %2"
 
 #~ msgid "Loading file information..."
@@ -27477,34 +27845,180 @@ msgstr ""
 #~ msgid "Loading user information..."
 #~ msgstr "Se încarcă informațiile despre utilizator..."
 
-#~ msgctxt "Enter todays date into date input widget"
-#~ msgid "T"
-#~ msgstr "A"
+#~ msgid "Saving accounts..."
+#~ msgstr "Se salvează conturile..."
+
+#~ msgid "Saving transactions..."
+#~ msgstr "Se salvează tranzacțiile..."
+
+#~ msgid "Saving reports..."
+#~ msgstr "Se salvează rapoartele..."
+
+#~ msgid "Saving budgets..."
+#~ msgstr "Se salvează bugetele..."
 
 #, fuzzy
-#~| msgid "Accepts the entered data and stores it as schedule"
-#~ msgctxt "@info:tooltip Accept button"
-#~ msgid "Accept the transaction and mark it cleared."
-#~ msgstr "Acceptă datele introduse și le memorează ca programare"
+#~| msgid "Saving accounts..."
+#~ msgid "Saving costcenters..."
+#~ msgstr "Se salvează conturile..."
+
+#~ msgid "Always show a No. field in transaction form"
+#~ msgstr "Afișează întotdeauna un cîmp Nr. în formularul tranzacției"
+
+#~ msgid "Show splash screen during startup"
+#~ msgstr "Afișează ecranul de pornire în timpul pornirii"
+
+#~ msgid "Show title bar on each view"
+#~ msgstr "Arată bara de titlu în fiecare ecran"
+
+#~ msgid "Select online banking plugin"
+#~ msgstr "Alegeți modulul de online banking"
+
+#~ msgid "Reconcile"
+#~ msgstr "Reconciliază"
+
+#~ msgid "Reconcile - disabled because you are currently reconciling <b>%1</b>"
+#~ msgstr ""
+#~ "Reconcilierea - dezactivată deoarece în acest moment sînteți în procesul "
+#~ "de reconciliere al <b>%1</b>"
 
 #, fuzzy
-#~| msgid "Do you really want to delete the selected transaction?"
-#~| msgid_plural "Do you really want to delete all %1 selected transactions?"
-#~ msgctxt "Question about the accept action"
-#~ msgid "Do you want to accept the imported transaction now?"
-#~ msgstr "Doriți într-adevăr să ștergeți tranzacția marcată?"
+#~| msgid "Cannot create transactions when no account is selected."
+#~ msgid "Add reversing transactions to the currently selected"
+#~ msgstr "Nu pot fi create tranzacții când nu e selectat niciun cont."
+
+#~ msgid ""
+#~ "At least one split of the selected transactions has been reconciled. Do "
+#~ "you wish to continue to edit the transactions anyway?"
+#~ msgstr ""
+#~ "Cel puțin o parte a tranzacțiilor selectate a fost reconciliată. Vrei "
+#~ "oricum să continui modificare tranzacțiilor?"
+
+#~ msgid "Cannot create transactions when no account is selected."
+#~ msgstr "Nu pot fi create tranzacții cînd nu e selectat niciun cont."
+
+#~ msgid "Cannot create transactions in the context of a category."
+#~ msgstr "Nu pot fi create tranzacții în contextul unei categorii."
+
+#~ msgid "Cannot create transactions in a closed account."
+#~ msgstr "Nu pot fi create tranzacții într-un cont închis."
+
+#~ msgid "Cannot edit transactions in the context of a category."
+#~ msgstr "Nu pot fi modificate tranzacții în contextul unei categorii."
+
+#~ msgid "Cannot edit mixed investment action/type transactions together."
+#~ msgstr ""
+#~ "Nu pot fi modificate împreună tranzacții de investiții de tipuri diferite."
+
+#~ msgid ""
+#~ "Cannot edit investment transactions and non-investment transactions "
+#~ "together."
+#~ msgstr ""
+#~ "Nu pot fi modificate împreună tranzacții de investiții și fără investiții."
+
+#~ msgid "Cannot edit investment transactions in the context of this account."
+#~ msgstr "Nu pot fi modificate tranzacții în contextul acestui cont."
+
+#~ msgid ""
+#~ "<p>Please select what you want to do: discard the changes, save the "
+#~ "changes or continue to edit the transaction.</p><p>You can also set an "
+#~ "option to save the transaction automatically when e.g. selecting another "
+#~ "transaction.</p>"
+#~ msgstr ""
+#~ "<p>Alegeți o opțiune: renunțați la schimbări, salvați schimbările sau "
+#~ "continuați editarea tranzacției.</p><p> Puteți alege opțiunea de a salva "
+#~ "automat o tranzacție în curs de modificare cînd, de exemplu, se alege o "
+#~ "altă tranzacție.</p>"
+
+#~ msgid "End transaction edit"
+#~ msgstr "Renunță la modificarea tranzacției"
 
 #, fuzzy
-#~| msgid "Split transaction"
-#~ msgctxt "@title:window"
-#~ msgid "Accept transaction"
-#~ msgstr "Împarte tranzacția"
+#~| msgid ""
+#~| "<p>Please select what you want to do: discard the changes, save the "
+#~| "changes or continue to edit the transaction.</p><p>You can also set an "
+#~| "option to save the transaction automatically when e.g. selecting another "
+#~| "transaction.</p>"
+#~ msgid ""
+#~ "<p>Please select what you want to do: discard or save the changes.</"
+#~ "p><p>You can also set an option to save the transaction automatically "
+#~ "when e.g. selecting another transaction.</p>"
+#~ msgstr ""
+#~ "<p>Alegeți o opțiune: renunțați la schimbări, salvați schimbările sau "
+#~ "continuați editarea tranzacției.</p><p> Puteți alege opțiunea de a salva "
+#~ "automat o tranzacție în curs de modificare când, de exemplu, se alege o "
+#~ "altă tranzacție.</p>"
 
-#~ msgid "Copy this report to the clipboard"
-#~ msgstr "Copiază acest raport în memorie"
+#, fuzzy
+#~| msgid "Date:"
+#~ msgid "Date: %1"
+#~ msgstr "Dată:"
 
-#~ msgid "Copy"
-#~ msgstr "Copiază"
+#, fuzzy
+#~| msgid "Unknown"
+#~ msgctxt "Name for unknown payee"
+#~ msgid "Unknown"
+#~ msgstr "Necunoscut(ă)"
+
+#, fuzzy
+#~| msgid "Payee%1"
+#~ msgid "Payee: %1"
+#~ msgstr "Beneficiarul%1"
+
+#, fuzzy
+#~| msgid "Memo"
+#~ msgid "Memo: %1"
+#~ msgstr "Detalii"
+
+#~ msgid "Statement Details"
+#~ msgstr "Detaliile bilanțului"
+
+#~ msgid "Statement Deposit Details"
+#~ msgstr "Detaliile depozitelor din bilanț"
+
+#~ msgid "Statement Payment Details"
+#~ msgstr "Detaliile comenzii de plată"
+
+#~ msgid "%1 deposit (%2)"
+#~ msgid_plural "%1 deposits (%2)"
+#~ msgstr[0] "%1 depozit (%2)"
+#~ msgstr[1] "%1 depozite (%2)"
+#~ msgstr[2] "%1 de depozite (%2)"
+
+#, fuzzy
+#~| msgid "%1 payment (%2)"
+#~| msgid_plural "%1 payments (%2)"
+#~ msgid "%1 charge (%2)"
+#~ msgid_plural "%1 charges (%2)"
+#~ msgstr[0] "%1 plată (%2)"
+#~ msgstr[1] "%1 plăți (%2)"
+#~ msgstr[2] "%1 de plăți (%2)"
+
+#~ msgid "%1 payment (%2)"
+#~ msgid_plural "%1 payments (%2)"
+#~ msgstr[0] "%1 plată (%2)"
+#~ msgstr[1] "%1 plăți (%2)"
+#~ msgstr[2] "%1 de plăți (%2)"
+
+#~ msgctxt "%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments"
+#~ msgid "%1, %2"
+#~ msgstr "%1, %2"
+
+#~ msgid "Last reconciled: %1"
+#~ msgstr "Ultima reconciliere: %1"
+
+#~ msgid "Cannot process transaction with focus if it is not selected."
+#~ msgstr ""
+#~ "Nu poate fi procesată tranzacția care deține focus-ul, dacă nu e "
+#~ "selectată."
+
+#, fuzzy
+#~| msgid "Unable to add transactions"
+#~ msgid "Unable to delete transaction(s)"
+#~ msgstr "Nu s-au putut adăuga tranzacții"
+
+#~ msgid "Running automatic reconciliation"
+#~ msgstr "Se execută reconcilierea automată"
 
 #~ msgid "Your Financial Summary"
 #~ msgstr "Sumarul dumneavoastră financiar"
@@ -27512,10 +28026,130 @@ msgstr ""
 #~ msgid "Show KMyMoney welcome page"
 #~ msgstr "Afișează pagina de bun venit a aplicației KMyMoney"
 
+#~ msgid "Today's due payments"
+#~ msgstr "Plățile de efectuat astăzi"
+
 #, fuzzy
 #~| msgid "Last reconciled: %1"
 #~ msgid "Last Reconciled"
 #~ msgstr "Ultima reconciliere: %1"
+
+#~ msgid "Select Account:"
+#~ msgstr "Alegeți un cont:"
+
+#~ msgid "Change the security information of the selected entry."
+#~ msgstr ""
+#~ "Schimbă informațiile titlului de valoare pentru înregistrarea selectată."
+
+#~ msgid "Remove this security item from the file"
+#~ msgstr "Șterge acest titlu de valoare din fișier"
+
+#, fuzzy
+#~| msgid "Open ledger"
+#~ msgid "New ledger"
+#~ msgstr "Deschide registrul"
+
+#, fuzzy
+#~| msgid "Do you want to add <b>%1</b> as payer/receiver?"
+#~ msgid "Do you want to show <b>%1</b> column on every loaded view?"
+#~ msgstr "Doriți să adăugați pe <b>%1</b> ca plătitor/beneficiar?"
+
+#, fuzzy
+#~| msgid "Do you want to add <b>%1</b> as payer/receiver?"
+#~ msgid "Do you want to hide <b>%1</b> column on every loaded view?"
+#~ msgstr "Doriți să adăugați pe <b>%1</b> ca plătitor/beneficiar?"
+
+#~ msgid "Unable to add schedule: %1"
+#~ msgstr "Nu s-a putut adăuga transferul programat: %1"
+
+#~ msgid "Use this to create a new payee."
+#~ msgstr "Folosiți pentru a crea un beneficiar/plătitor nou"
+
+#~ msgctxt "New payee"
+#~ msgid "New"
+#~ msgstr "Nou"
+
+#~ msgid "Rename the current selected payee"
+#~ msgstr "Redenumește beneficiarul/plătitorul selectat curent."
+
+#~ msgid "Use this to start renaming the selected payee."
+#~ msgstr ""
+#~ "Folosește asta pentru a începe redenumirea beneficiarului/plătitorului "
+#~ "selectat."
+
+#~ msgid "Delete selected payee(s)"
+#~ msgstr "Șterge beneficiarul/plătitorul selectat"
+
+#~ msgid ""
+#~ "Use this to delete the selected payee. You can also select multiple "
+#~ "payees to be deleted."
+#~ msgstr ""
+#~ "Folosește această funcție pentru a șterge beneficiarul. Puteți să alegeți "
+#~ "mai mulți beneficiari pentru a fi șterși."
+
+#~ msgid "Merge multiple selected payees"
+#~ msgstr "Combină beneficiarii/plătitorii selectați."
+
+#~ msgid "Use this to merge multiple selected payees."
+#~ msgstr "Folosește asta pentru a combina beneficiarii/plătitorii selectați."
+
+#~ msgid "Error executing item"
+#~ msgstr "Eroare la executarea elementului"
+
+#~ msgid "Unable to filter account"
+#~ msgstr "Nu s-a putut filtra contul"
+
+#~ msgid "Bills"
+#~ msgstr "Facturi"
+
+#~ msgid "Loans"
+#~ msgstr "Debite"
+
+#~ msgid "Type/Name"
+#~ msgstr "Tip/Nume"
+
+#~ msgid "Frequency"
+#~ msgstr "Frecvență"
+
+#~ msgid "Unable to load accounts: "
+#~ msgstr "Conturile nu au putut fi încărcate: "
+
+#~ msgid "<p>Do you really want to remove the tag <b>%1</b>?</p>"
+#~ msgstr "<p>Sigur doriți să eliminați marcajul <b>%1</b>?</p>"
+
+#~ msgid "Do you really want to remove all selected tags?"
+#~ msgstr "Sigur doriți să eliminați toate marcajele alese?"
+
+#~ msgid "Remove Tag"
+#~ msgstr "Elimină marcajul"
+
+#~ msgid ""
+#~ "At least one transaction/scheduled transaction is still referenced by a "
+#~ "tag. Currently you have all tags selected. However, at least one tag must "
+#~ "remain so that the transaction/scheduled transaction can be reassigned."
+#~ msgstr ""
+#~ "Cel puțin o tranzacție programată sau cont de credit este referit de "
+#~ "către un marcaj. În acest moment toate marcajele sînt marcate. Dar cel "
+#~ "puțin un marcaj trebuie să rămînă astfel încît tranzacțiile programate să "
+#~ "poate fi reasignate."
+
+#~ msgid "Creates a new tag"
+#~ msgstr "Creează un marcaj nou"
+
+#~ msgid "Use this to create a new tag."
+#~ msgstr "Folosiți pentru a crea un marcaj nou"
+
+#~ msgid "Rename the current selected tag"
+#~ msgstr "Redenumește marcajul selectat curent."
+
+#~ msgid "Use this to start renaming the selected tag."
+#~ msgstr "Folosește asta pentru a începe redenumirea marcajul selectat."
+
+#~ msgid "Delete the current selected tag"
+#~ msgstr "Șterge marcajul selectat curent"
+
+#~ msgid "Use this to delete the selected tag."
+#~ msgstr "Folosește asta pentru a șterge marcajul selectat curent."
 
 #~ msgid "Go to My Financial Summary"
 #~ msgstr "Du-te la sumarul meu financiar"
@@ -27605,65 +28239,208 @@ msgstr ""
 #~ msgstr "Configurări online"
 
 #, fuzzy
-#~| msgid "Any status"
-#~ msgctxt ""
-#~ msgid "Any status"
-#~ msgstr "Orice stare"
+#~| msgid "Online Statement Balance: %1"
+#~ msgid "Online statement balance: %1"
+#~ msgstr "Soldul extrasului online: %1"
 
 #, fuzzy
-#~| msgid "Closed"
-#~ msgctxt ""
-#~ msgid "Closed"
-#~ msgstr "Închis"
-
-#~ msgctxt "Payment made from account"
-#~ msgid "Payment"
-#~ msgstr "Plată"
-
-#~ msgctxt "Deposit into account"
-#~ msgid "Deposit"
-#~ msgstr "Depune"
+#~| msgctxt "location of credit column"
+#~| msgid "Credits"
+#~ msgid "Credit"
+#~ msgstr "Credite"
 
 #, fuzzy
-#~| msgctxt "@title header of the currency name column"
-#~| msgid "Name"
-#~ msgctxt "OnlineJob"
-#~ msgid "Name"
-#~ msgstr "Nume"
-
-#~ msgid ""
-#~ "The transactions associated with the selected tags need to be re-assigned "
-#~ "to a different tag before the selected tags can be deleted. Please select "
-#~ "a tag from the list below."
-#~ msgstr ""
-#~ "Tranzacțiile asociate cu marcajele selectate trebuie să fie reasociate la "
-#~ "alt marcaj înainte ca marcajele selectate să poată fi șterșe. Vă rog "
-#~ "alegeți un marcaj din lista de mai jos."
-
-#~ msgid "<p>Do you really want to remove the tag <b>%1</b>?</p>"
-#~ msgstr "<p>Sigur doriți să eliminați marcajul <b>%1</b>?</p>"
-
-#~ msgid "Do you really want to remove all selected tags?"
-#~ msgstr "Sigur doriți să eliminați toate marcajele alese?"
-
-#~ msgid "Remove Tag"
-#~ msgstr "Elimină marcajul"
-
-#~ msgid ""
-#~ "At least one transaction/scheduled transaction is still referenced by a "
-#~ "tag. Currently you have all tags selected. However, at least one tag must "
-#~ "remain so that the transaction/scheduled transaction can be reassigned."
-#~ msgstr ""
-#~ "Cel puțin o tranzacție programată sau cont de credit este referit de "
-#~ "către un marcaj. În acest moment toate marcajele sînt marcate. Dar cel "
-#~ "puțin un marcaj trebuie să rămînă astfel încît tranzacțiile programate să "
-#~ "poate fi reasignate."
+#~| msgctxt "location of debit column"
+#~| msgid "Debits"
+#~ msgid "Debit"
+#~ msgstr "Debite"
 
 #~ msgid "Pay to"
 #~ msgstr "Plătit către"
 
-#~ msgid "&Show tip of the day"
-#~ msgstr "&Arată sfatul zilei"
+#~ msgctxt "Deposits onto account"
+#~ msgid "Deposits"
+#~ msgstr "Depozite"
+
+#~ msgctxt "Payments towards credit card"
+#~ msgid "Payments"
+#~ msgstr "Plăți"
+
+#~ msgctxt "Payments made from account"
+#~ msgid "Payments"
+#~ msgstr "Plăți"
+
+#~ msgctxt "Payments made with credit card"
+#~ msgid "Charges"
+#~ msgstr "Retrageri"
+
+#~ msgctxt "Reconcile state 'Not reconciled'"
+#~ msgid "Not reconciled"
+#~ msgstr "Nereconciliate"
+
+#~ msgctxt "Reconcile state 'Cleared'"
+#~ msgid "Cleared"
+#~ msgstr "Verificate"
+
+#~ msgctxt "Reconcile state 'Reconciled'"
+#~ msgid "Reconciled"
+#~ msgstr "Reconciliate"
+
+#~ msgctxt "Reconcile state 'Frozen'"
+#~ msgid "Frozen"
+#~ msgstr "Înghețate"
+
+#~ msgctxt "Unknown reconcile state"
+#~ msgid "Unknown"
+#~ msgstr "Necunoscută"
+
+#~ msgid "Ratio"
+#~ msgstr "Rata"
+
+#~ msgid "Fee Amount"
+#~ msgstr "Sumă taxe"
+
+#~ msgid "Account Types"
+#~ msgstr "Tipuri de cont"
+
+#~ msgctxt "The balance of the selected budget"
+#~ msgid "Balance: "
+#~ msgstr "Soldul: "
+
+#~ msgctxt "Activity for income categories"
+#~ msgid "Received"
+#~ msgstr "Primit"
+
+#~ msgctxt "Activity for expense categories"
+#~ msgid "Paid"
+#~ msgstr "Plătit"
+
+#, fuzzy
+#~| msgid "Pay to"
+#~ msgctxt "Payee"
+#~ msgid "Pay to"
+#~ msgstr "Plătit către"
+
+#, fuzzy
+#~| msgid "From"
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "De la"
+
+#~ msgctxt "Enter todays date into date input widget"
+#~ msgid "T"
+#~ msgstr "A"
+
+#~ msgid "Closed tag"
+#~ msgstr "Marcaj închis"
+
+#~ msgid "The tag is already present."
+#~ msgstr "Eticheta există deja."
+
+#~ msgid "Prior transactions possibly filtered"
+#~ msgstr "Tranzacții anterioare au posibil filtrate"
+
+#, fuzzy
+#~| msgid ""
+#~| "_: Reconcile flag C\n"
+#~| "C"
+#~ msgid "Reconciled Balance: %1"
+#~ msgstr "V"
+
+#~ msgid "Online Statement Balance: %1"
+#~ msgstr "Soldul extrasului online: %1"
+
+#~ msgctxt "Unknown payee"
+#~ msgid "Unknown"
+#~ msgstr "Necunoscut"
+
+#~ msgctxt "Unknown category"
+#~ msgid "Unknown"
+#~ msgstr "Necunoscută"
+
+#~ msgctxt "Unknown security"
+#~ msgid "Unknown"
+#~ msgstr "Necunoscut"
+
+#~ msgctxt "label for status combo"
+#~ msgid "Stat&us"
+#~ msgstr "S&tare"
+
+#~ msgid "Sell"
+#~ msgstr "Vinde"
+
+#~ msgid "Buy"
+#~ msgstr "Cumpără"
+
+#~ msgid "Investment transaction"
+#~ msgstr "Tranzacție de investiție"
+
+#, fuzzy
+#~| msgid ""
+#~| "KMyMoney has matched a downloaded transaction with a manually entered "
+#~| "one (result above)"
+#~ msgid "KMyMoney has matched the two selected transactions (result above)"
+#~ msgstr ""
+#~ "KMyMoney a asociat o tranzacție descărcată cu una introdusă manual "
+#~ "(rezultatul este mai sus)"
+
+#~ msgid "Bank entry:"
+#~ msgstr "Intrarea băncii:"
+
+#~ msgid "Your entry:"
+#~ msgstr "Intrarea dumneavoastră:"
+
+#~ msgid "&Deposit"
+#~ msgstr "&Depozit"
+
+#~ msgid "&Transfer"
+#~ msgstr "&Transfer"
+
+#~ msgid "&Withdrawal"
+#~ msgstr "&Retragere"
+
+#~ msgid "&Payment"
+#~ msgstr "&Plată"
+
+#, fuzzy
+#~ msgid "&Charge"
+#~ msgstr "&Modifică"
+
+#~ msgid "&Decrease"
+#~ msgstr "&Descrește"
+
+#~ msgid "&Increase"
+#~ msgstr "&Crește"
+
+#~ msgid "No Title specified"
+#~ msgstr "Niciun titlu specificat"
+
+#~ msgid "Preferred account"
+#~ msgstr "Cont preferat"
+
+# well-spelled: RHAT
+#~ msgid "Enter the ticker symbol (e.g. RHAT)."
+#~ msgstr "Introduceți simbolul de pe piața de capital (de exemplu RHAT)"
+
+# well-spelled: CUSIP, ISIN, WKN
+#~ msgid "Enter the CUSIP/ISIN/WKN identification number here"
+#~ msgstr "Introduceți numărul de identificare CUSIP/ISIN/WKN aici"
+
+#~ msgid "This wizard allows you to modify the selected security."
+#~ msgstr "Acest expert vă permite modificarea titlului de valoare ales."
+
+#~ msgid ""
+#~ "The selected symbol is already on file. Do you want to reuse the existing "
+#~ "security?"
+#~ msgstr ""
+#~ "Simbolul dat este deja utilizat. Doriți să reutilizați titlul de valoare "
+#~ "existent?"
+
+#~ msgid "Security found"
+#~ msgstr "S-a găsit titlul de valoare"
+
+#~ msgid "Routing number"
+#~ msgstr "Număr de identificare"
 
 #~ msgid ""
 #~ "<p>...that you can change the sort order of ledger entries by\n"
@@ -27833,364 +28610,6 @@ msgstr ""
 #~ ">Importă.</p>\n"
 #~ "<p>Oferit de Jose Jorge</p>\n"
 
-#~ msgid "Change the security information of the selected entry."
-#~ msgstr ""
-#~ "Schimbă informațiile titlului de valoare pentru înregistrarea selectată."
-
-#~ msgid "Remove this security item from the file"
-#~ msgstr "Șterge acest titlu de valoare din fișier"
-
-#~ msgid "Delete..."
-#~ msgstr "Șterge..."
-
-#~ msgctxt "Deposits onto account"
-#~ msgid "Deposits"
-#~ msgstr "Depozite"
-
-#~ msgctxt "Payments towards credit card"
-#~ msgid "Payments"
-#~ msgstr "Plăți"
-
-#~ msgctxt "Payments made from account"
-#~ msgid "Payments"
-#~ msgstr "Plăți"
-
-#~ msgctxt "Payments made with credit card"
-#~ msgid "Charges"
-#~ msgstr "Retrageri"
-
-#~ msgctxt "Reconcile state 'Not reconciled'"
-#~ msgid "Not reconciled"
-#~ msgstr "Nereconciliate"
-
-#~ msgctxt "Reconcile state 'Cleared'"
-#~ msgid "Cleared"
-#~ msgstr "Verificate"
-
-#~ msgctxt "Reconcile state 'Reconciled'"
-#~ msgid "Reconciled"
-#~ msgstr "Reconciliate"
-
-#~ msgctxt "Reconcile state 'Frozen'"
-#~ msgid "Frozen"
-#~ msgstr "Înghețate"
-
-#~ msgctxt "Unknown reconcile state"
-#~ msgid "Unknown"
-#~ msgstr "Necunoscută"
-
-#~ msgctxt "Total value"
-#~ msgid "Total"
-#~ msgstr "Total"
-
-#~ msgid "Ratio 1/"
-#~ msgstr "Fracția 1/"
-
-#~ msgid "Ratio"
-#~ msgstr "Rata"
-
-#~ msgid "Fee Amount"
-#~ msgstr "Sumă taxe"
-
-#~ msgid "Price/Share"
-#~ msgstr "Preț/acțiune"
-
-#~ msgid "Asset account"
-#~ msgstr "Cont de activ"
-
-#~ msgid ""
-#~ "Cannot enter transaction with postdate prior to account's opening date."
-#~ msgstr ""
-#~ "Nu poate fi creată o tranzacție avînd data înaintea datei de deschidere a "
-#~ "contului."
-
-#~ msgid "Found %1 matching transaction (D %2 / P %3 = %4)"
-#~ msgid_plural "Found %1 matching transactions (D %2 / P %3 = %4)"
-#~ msgstr[0] "S-a găsit %1 tranzacție potrivită (D %2 / P %3 = %4)"
-#~ msgstr[1] "S-au găsit %1 tranzacții potrivite (D %2 / P %3 = %4)"
-#~ msgstr[2] "S-au găsit %1 de tranzacții potrivite (D %2 / P %3 = %4)"
-
-#~ msgctxt "To duplicate a split"
-#~ msgid "Duplicate"
-#~ msgstr "Duplică"
-
-#~ msgid "will be calculated"
-#~ msgstr "va fi calculat"
-
-#~ msgid ""
-#~ "You are about to delete the selected split. Do you really want to "
-#~ "continue?"
-#~ msgstr ""
-#~ "Urmează să ștergeți partea de tranzacție marcată. Doriți într-adevăr să "
-#~ "continuați?"
-
-#~ msgid ""
-#~ "You need to assign a category to this split before it can be entered."
-#~ msgstr ""
-#~ "Trebuie să asociați o categorie părții de tranzacție înainte ca aceasta "
-#~ "să poată fi introdusă."
-
-#~ msgid "Enter split"
-#~ msgstr "Introdu o parte de tranzacție"
-
-#~ msgid ""
-#~ "Select a transaction and press the OK button or use Cancel to select none."
-#~ msgstr ""
-#~ "Alegeți o tranzacție și apăsați butonul OK sau folosiți butonul Renunță "
-#~ "pentru a nu alege nicio tranzacție."
-
-#~ msgid "Clear &All"
-#~ msgstr "Șterge &tot"
-
-#~ msgid "Use this to clear all splits of this transaction"
-#~ msgstr "Folosește aceasta pentru a șterge toate părțile acestei tranzacții"
-
-#~ msgid "Clear &Zero"
-#~ msgstr "Curăță valorile nule"
-
-#, fuzzy
-#~| msgid ""
-#~| "In case you have multiple split entries to the same category and you "
-#~| "like to keep them as a single split, press this button. The amount for "
-#~| "identical categories will be added and stored in a single split for that "
-#~| "category."
-#~ msgid ""
-#~ "In case you have multiple split entries to the same category and you like "
-#~ "to keep them as a single split"
-#~ msgstr ""
-#~ "În cazul în care aveți mai multe părți de tranzacție din aceeași "
-#~ "categorie și ați dori să le păstrați ca o singură parte, folosiți acest "
-#~ "buton. Sumele pentru categoriile identice vor fi însumate și stocate într-"
-#~ "o singură parte de tranzacție pentru acea categorie."
-
-#~ msgid ""
-#~ "You are about to delete all splits of this transaction. Do you really "
-#~ "want to continue?"
-#~ msgstr ""
-#~ "Sînteți pe cale de a șterge toate părțile acestei tranzacții. Doriți într-"
-#~ "adevăr să continuați?"
-
-#~ msgid "<b>11,00<b>"
-#~ msgstr "<b>11,00<b>"
-
-#~ msgid "<b>111,00<b>"
-#~ msgstr "<b>111,00<b>"
-
-#~ msgid "Unassigned"
-#~ msgstr "Neasignat"
-
-#~ msgid "100,00"
-#~ msgstr "100,00"
-
-#~ msgid "Prior transactions possibly filtered"
-#~ msgstr "Tranzacții anterioare au posibil filtrate"
-
-#~ msgid "Online Statement Balance: %1"
-#~ msgstr "Soldul extrasului online: %1"
-
-#~ msgctxt "Unknown payee"
-#~ msgid "Unknown"
-#~ msgstr "Necunoscut"
-
-#~ msgctxt "Unknown category"
-#~ msgid "Unknown"
-#~ msgstr "Necunoscută"
-
-#~ msgctxt "Unknown security"
-#~ msgid "Unknown"
-#~ msgstr "Necunoscut"
-
-#~ msgctxt "label for status combo"
-#~ msgid "Stat&us"
-#~ msgstr "S&tare"
-
-#~ msgid "Sell"
-#~ msgstr "Vinde"
-
-#~ msgid "Buy"
-#~ msgstr "Cumpără"
-
-#~ msgid "Investment transaction"
-#~ msgstr "Tranzacție de investiție"
-
-#~ msgid "Transfer to"
-#~ msgstr "Transferă în"
-
-#~ msgid "Transfer from"
-#~ msgstr "Transferă din"
-
-#~ msgid "Category/Account"
-#~ msgstr "Categorie/Cont"
-
-#, fuzzy
-#~| msgid ""
-#~| "KMyMoney has matched a downloaded transaction with a manually entered "
-#~| "one (result above)"
-#~ msgid "KMyMoney has matched the two selected transactions (result above)"
-#~ msgstr ""
-#~ "KMyMoney a asociat o tranzacție descărcată cu una introdusă manual "
-#~ "(rezultatul este mai sus)"
-
-#~ msgid "Bank entry:"
-#~ msgstr "Intrarea băncii:"
-
-#~ msgid "Your entry:"
-#~ msgstr "Intrarea dumneavoastră:"
-
-#~ msgid "The transaction has a missing assignment of <b>%1</b>."
-#~ msgstr "Tranzacția are lipsă o asignare de <b>%1</b>."
-
-#~ msgctxt "Unknown reconciliation state"
-#~ msgid "Unknown"
-#~ msgstr "Necunoscut(ă)"
-
-#~ msgid ""
-#~ "This transaction has more than two splits and is originally based on a "
-#~ "different currency (%1). Using this account to modify the transaction may "
-#~ "result in rounding errors. Do you want to continue?"
-#~ msgstr ""
-#~ "Această tranzacție are mai mult de două părți și se bazează pe o monedă "
-#~ "diferită (%1). Folosirea acestui cont pentru modificarea tranzacției "
-#~ "poate genera o serie de erori. Vreți să continuați?"
-
-#~ msgid ""
-#~ "At least one of the selected transactions has more than two splits and is "
-#~ "originally based on a different currency (%1). Using this account to "
-#~ "modify the transactions may result in rounding errors. Do you want to "
-#~ "continue?"
-#~ msgstr ""
-#~ "Cel puțin una dintre tranzacțiile selectate are mai multe decît două "
-#~ "părți și se bazează pe o monedă diferită (%1). Folosirea acestui cont "
-#~ "pentru modificarea tranzacțiilor poate avea ca rezultat diferite erori. "
-#~ "Vreți să continuați?"
-
-#, fuzzy
-#~| msgid "Cancel processing of schedule entry."
-#~ msgid "<center>Processing schedule for %1.</center>"
-#~ msgstr "Renunță la procesarea programării."
-
-#, fuzzy
-#~| msgid ""
-#~| "The number <b>%1</b> has already been used in account <b>%2</b>."
-#~| "<center>Do you want to replace it with the next available number?</"
-#~| "center>"
-#~ msgid ""
-#~ "Check number <b>%1</b> has already been used in account <b>%2</b>."
-#~ "<center>Do you want to replace it with the next available number?</center>"
-#~ msgstr ""
-#~ "Numărul <b>%1</b> a fost deja folosit în contul <b>%2</b>.<center>Doriți "
-#~ "să-l înlocuiți cu următorul număr disponibil?</center>"
-
-#~ msgid "Duplicate number"
-#~ msgstr "Creează un duplicat pentru număr"
-
-#~ msgid "Storing transactions"
-#~ msgstr "Memorează tranzacții"
-
-#~ msgid "&Enter"
-#~ msgstr "&Introdu"
-
-#~ msgid "Use this to enter the transaction into the ledger."
-#~ msgstr "Folosiți aceasta pentru a introduce tranzacția în registru."
-
-#~ msgid "&Schedule"
-#~ msgstr "&Plată programată"
-
-#~ msgid "Accepts the entered data and stores it as schedule"
-#~ msgstr "Acceptă datele introduse și le memorează ca programare"
-
-#~ msgid ""
-#~ "Use this to schedule the transaction for later entry into the ledger."
-#~ msgstr ""
-#~ "Folosiți aceasta pentru a programa tranzacția pentru o înregistrare "
-#~ "ulterioară în registru."
-
-#~ msgid ""
-#~ "The transaction you are about to enter has a post date in the future.<br/"
-#~ "><br/>Do you want to enter it in the ledger or add it to the schedules?"
-#~ msgstr ""
-#~ "Tranzacția pe care sînteți pe cale să o introduceți are o amînare în "
-#~ "viitor.<br/><br/>Doriți s-o introduceți în registru sau să o adăugați "
-#~ "printre programări?"
-
-#~ msgctxt "Dialog caption for 'Enter or schedule' dialog"
-#~ msgid "Enter or schedule?"
-#~ msgstr "Introduceți sau programați?"
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the warning balance of %2."
-#~ msgstr "Soldul contului <b>%1</b> a căzut sub soldul de avertisment al %2."
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the minimum balance of %2."
-#~ msgstr "Soldul contului <b>%1</b> a căzut sub soldul minim al %2."
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the maximum credit warning "
-#~ "limit of %2."
-#~ msgstr ""
-#~ "Soldul contului <b>%1</b> a căzut sub limita de avertisment a creditului "
-#~ "maxim %2."
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the maximum credit limit "
-#~ "of %2."
-#~ msgstr ""
-#~ "Soldul contului <b>%1</b> a căzut sub limita maximă a creditului %2."
-
-#~ msgid "&Deposit"
-#~ msgstr "&Depozit"
-
-#~ msgid "&Transfer"
-#~ msgstr "&Transfer"
-
-#~ msgid "&Withdrawal"
-#~ msgstr "&Retragere"
-
-#~ msgid "&Payment"
-#~ msgstr "&Plată"
-
-#, fuzzy
-#~ msgid "&Charge"
-#~ msgstr "&Modifică"
-
-#~ msgid "&Decrease"
-#~ msgstr "&Descrește"
-
-#~ msgid "&Increase"
-#~ msgstr "&Crește"
-
-#~ msgid "Reconcile"
-#~ msgstr "Reconciliază"
-
-#~ msgid "Reconcile - disabled because you are currently reconciling <b>%1</b>"
-#~ msgstr ""
-#~ "Reconcilierea - dezactivată deoarece în acest moment sînteți în procesul "
-#~ "de reconciliere al <b>%1</b>"
-
-#~ msgctxt "Button text for match transaction"
-#~ msgid "Match"
-#~ msgstr "Potrivește"
-
-#, fuzzy
-#~| msgid "Cannot create transactions when no account is selected."
-#~ msgid "Add reversing transactions to the currently selected"
-#~ msgstr "Nu pot fi create tranzacții când nu e selectat niciun cont."
-
-#~ msgctxt "Button text for unmatch transaction"
-#~ msgid "Unmatch"
-#~ msgstr "Disociază"
-
-#~ msgid "Difference: %1"
-#~ msgstr "Diferență: %1"
-
-#~ msgid ""
-#~ "At least one split of the selected transactions has been reconciled. Do "
-#~ "you wish to continue to edit the transactions anyway?"
-#~ msgstr ""
-#~ "Cel puțin o parte a tranzacțiilor selectate a fost reconciliată. Vrei "
-#~ "oricum să continui modificare tranzacțiilor?"
-
 #~ msgid ""
 #~ "At least one split of the selected transactions has been frozen. Editing "
 #~ "the transactions is therefore prohibited."
@@ -28201,282 +28620,20 @@ msgstr ""
 #~ msgid "Transaction already frozen"
 #~ msgstr "Tranzacție deja înghețată"
 
-#~ msgid ""
-#~ "At least one split of the selected transaction references an account that "
-#~ "has been closed. Editing the transactions is therefore prohibited."
-#~ msgstr ""
-#~ "Cel puțin o parte din tranzacția selectată se referă la un cont care a "
-#~ "fost închis. Modificarea tranzacției este de aceea interzisă."
-
 #~ msgid "Account closed"
 #~ msgstr "Cont închis"
 
-#~ msgid "Cannot create transactions when no account is selected."
-#~ msgstr "Nu pot fi create tranzacții cînd nu e selectat niciun cont."
-
-#~ msgid "Cannot create transactions in the context of a category."
-#~ msgstr "Nu pot fi create tranzacții în contextul unei categorii."
-
-#~ msgid "Cannot create transactions in a closed account."
-#~ msgstr "Nu pot fi create tranzacții într-un cont închis."
-
 #~ msgid "Cannot edit transactions with frozen splits."
 #~ msgstr "Nu pot fi modificate tranzacții care au părți înghețate."
-
-#~ msgid "Cannot edit transactions in the context of a category."
-#~ msgstr "Nu pot fi modificate tranzacții în contextul unei categorii."
 
 #~ msgid "Cannot create or edit any transactions in Account %1 as it is closed"
 #~ msgstr ""
 #~ "Nu poate fi creată sau modificată o tranzacția în contul %1, deoarece "
 #~ "este închis"
 
-#~ msgid "Cannot edit mixed investment action/type transactions together."
-#~ msgstr ""
-#~ "Nu pot fi modificate împreună tranzacții de investiții de tipuri diferite."
-
-#~ msgid ""
-#~ "Cannot edit investment transactions and non-investment transactions "
-#~ "together."
-#~ msgstr ""
-#~ "Nu pot fi modificate împreună tranzacții de investiții și fără investiții."
-
-#~ msgid "Cannot edit investment transactions in the context of this account."
-#~ msgstr "Nu pot fi modificate tranzacții în contextul acestui cont."
-
-#~ msgid ""
-#~ "<p>Please select what you want to do: discard the changes, save the "
-#~ "changes or continue to edit the transaction.</p><p>You can also set an "
-#~ "option to save the transaction automatically when e.g. selecting another "
-#~ "transaction.</p>"
-#~ msgstr ""
-#~ "<p>Alegeți o opțiune: renunțați la schimbări, salvați schimbările sau "
-#~ "continuați editarea tranzacției.</p><p> Puteți alege opțiunea de a salva "
-#~ "automat o tranzacție în curs de modificare cînd, de exemplu, se alege o "
-#~ "altă tranzacție.</p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "Renunță la modificarea tranzacției"
-
-#, fuzzy
-#~| msgid ""
-#~| "<p>Please select what you want to do: discard the changes, save the "
-#~| "changes or continue to edit the transaction.</p><p>You can also set an "
-#~| "option to save the transaction automatically when e.g. selecting another "
-#~| "transaction.</p>"
-#~ msgid ""
-#~ "<p>Please select what you want to do: discard or save the changes.</"
-#~ "p><p>You can also set an option to save the transaction automatically "
-#~ "when e.g. selecting another transaction.</p>"
-#~ msgstr ""
-#~ "<p>Alegeți o opțiune: renunțați la schimbări, salvați schimbările sau "
-#~ "continuați editarea tranzacției.</p><p> Puteți alege opțiunea de a salva "
-#~ "automat o tranzacție în curs de modificare când, de exemplu, se alege o "
-#~ "altă tranzacție.</p>"
-
-#, fuzzy
-#~| msgid "Date:"
-#~ msgid "Date: %1"
-#~ msgstr "Dată:"
-
-#, fuzzy
-#~| msgid "Unknown"
-#~ msgctxt "Name for unknown payee"
-#~ msgid "Unknown"
-#~ msgstr "Necunoscut(ă)"
-
-#, fuzzy
-#~| msgid "Payee%1"
-#~ msgid "Payee: %1"
-#~ msgstr "Beneficiarul%1"
-
-#, fuzzy
-#~| msgid "Memo"
-#~ msgid "Memo: %1"
-#~ msgstr "Detalii"
-
-#~ msgid "Statement Details"
-#~ msgstr "Detaliile bilanțului"
-
-#~ msgid "Statement Deposit Details"
-#~ msgstr "Detaliile depozitelor din bilanț"
-
-#~ msgid "Statement Payment Details"
-#~ msgstr "Detaliile comenzii de plată"
-
-#~ msgid "%1 deposit (%2)"
-#~ msgid_plural "%1 deposits (%2)"
-#~ msgstr[0] "%1 depozit (%2)"
-#~ msgstr[1] "%1 depozite (%2)"
-#~ msgstr[2] "%1 de depozite (%2)"
-
-#, fuzzy
-#~| msgid "%1 payment (%2)"
-#~| msgid_plural "%1 payments (%2)"
-#~ msgid "%1 charge (%2)"
-#~ msgid_plural "%1 charges (%2)"
-#~ msgstr[0] "%1 plată (%2)"
-#~ msgstr[1] "%1 plăți (%2)"
-#~ msgstr[2] "%1 de plăți (%2)"
-
-#~ msgid "%1 payment (%2)"
-#~ msgid_plural "%1 payments (%2)"
-#~ msgstr[0] "%1 plată (%2)"
-#~ msgstr[1] "%1 plăți (%2)"
-#~ msgstr[2] "%1 de plăți (%2)"
-
-#~ msgctxt "%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments"
-#~ msgid "%1, %2"
-#~ msgstr "%1, %2"
-
-#~ msgid "Go to '%1'"
-#~ msgstr "Du-te la '%1'"
-
-#~ msgid "Statement: %1"
-#~ msgstr "Extras: %1"
-
-#~ msgctxt "Cleared balance"
-#~ msgid "Cleared: %1"
-#~ msgstr "Verificate: %1"
-
-#~ msgid "Last reconciled: %1"
-#~ msgstr "Ultima reconciliere: %1"
-
 #~ msgid "Cannot process transactions in account %1, which is closed."
 #~ msgstr ""
 #~ "Nu poate fi procesată tranzacția în contul %1, deoarece este închis."
-
-#~ msgid "Cannot process transaction with focus if it is not selected."
-#~ msgstr ""
-#~ "Nu poate fi procesată tranzacția care deține focus-ul, dacă nu e "
-#~ "selectată."
-
-#, fuzzy
-#~| msgid "Unable to add transactions"
-#~ msgid "Unable to delete transaction(s)"
-#~ msgstr "Nu s-au putut adăuga tranzacții"
-
-#~ msgid "Running automatic reconciliation"
-#~ msgstr "Se execută reconcilierea automată"
-
-#, fuzzy
-#~| msgid "Open ledger"
-#~ msgid "Old ledgers"
-#~ msgstr "Deschide registrul"
-
-# |, no-check-spell
-#~ msgid "Thomas Baumgart"
-#~ msgstr "Thomas Baumgart"
-
-#~ msgid "Cristian Oneț"
-#~ msgstr "Cristian Oneț"
-
-#, fuzzy
-#~| msgid "Cristian Oneț"
-#~ msgid "Christian Dávid"
-#~ msgstr "Cristian Oneț"
-
-# |, no-check-spell
-#, fuzzy
-#~| msgid "Michael Edwardes."
-#~ msgid "Michael Edwardes"
-#~ msgstr "Michael Edwardes."
-
-# |, no-check-spell
-#~ msgid "Alvaro Soliverez"
-#~ msgstr "Alvaro Soliverez"
-
-#~ msgid "Ace Jones"
-#~ msgstr "Ace Jones"
-
-# |, no-check-spell
-#~ msgid "Tony Bloomfield"
-#~ msgstr "Tony Bloomfield"
-
-#~ msgid "Felix Rodriguez"
-#~ msgstr "Felix Rodriguez"
-
-#~ msgid "John C"
-#~ msgstr "John C"
-
-# |, no-check-spell
-#~ msgid "Fernando Vilas"
-#~ msgstr "Fernando Vilas"
-
-# |, no-check-spell
-#~ msgid "Kevin Tambascio"
-#~ msgstr "Kevin Tambascio"
-
-# |, no-check-spell
-#~ msgid "Javier Campos Morales"
-#~ msgstr "Javier Campos Morales"
-
-# |, no-check-spell
-#~ msgid "Robert Wadley"
-#~ msgstr "Robert Wadley"
-
-# |, no-check-spell
-#~ msgid "Laurent Montel"
-#~ msgstr "Laurent Montel"
-
-# |, no-check-spell
-#~ msgid "Wolfgang Rohdewald"
-#~ msgstr "Wolfgang Rohdewald"
-
-#~ msgid "Marko Käning"
-#~ msgstr "Marko Käning"
-
-#, fuzzy
-#~| msgid "All dates"
-#~ msgid "Allan Anderson ✝"
-#~ msgstr "Toate datele"
-
-#~ msgctxt "HTML (Filefilter)"
-#~ msgid "HTML files"
-#~ msgstr "Fișiere HTML"
-
-#~ msgctxt "Column heading for category in tax report"
-#~ msgid "Tax"
-#~ msgstr "Impozit"
-
-#, fuzzy
-#~| msgid "C"
-#~ msgctxt "Column heading for Cost Center"
-#~ msgid "CC"
-#~ msgstr "V"
-
-#, fuzzy
-#~| msgid "Bank Code"
-#~ msgctxt ""
-#~ "Column heading for Bank Code. Use a generic form, do not translate using "
-#~ "a culture-specific term, e.g. 'Routing Number' (en_US) or 'Sort "
-#~ "Code' (en_GB)"
-#~ msgid "Bank Code"
-#~ msgstr "Cod bancă"
-
-#, fuzzy
-#~| msgid "Full name"
-#~ msgctxt ""
-#~ "Tooltip for 'Name' column. Used in Account, Category and Institution "
-#~ "context, so avoid being too specific"
-#~ msgid "Full name"
-#~ msgstr "Nume complet"
-
-#, fuzzy
-#~| msgid "Type"
-#~ msgctxt ""
-#~ "Toolip for a 'Type' column, used in both Account and Category context"
-#~ msgid "Type"
-#~ msgstr "Tip"
-
-#~ msgid "Show title bar on each page"
-#~ msgstr "Arată bara de titlu în fiecare ecran"
-
-#~ msgid "Show title bar on each view"
-#~ msgstr "Arată bara de titlu în fiecare ecran"
-
-#~ msgid "No Title specified"
-#~ msgstr "Niciun titlu specificat"
 
 #~ msgid ""
 #~ "This option hides all accounts that have been closed by the user in views "
@@ -28495,138 +28652,17 @@ msgstr ""
 #~ msgid "Do not show closed accounts"
 #~ msgstr "Ascunde conturile închise"
 
-#~ msgid "Unable to add schedule: %1"
-#~ msgstr "Nu s-a putut adăuga transferul programat: %1"
-
-#, fuzzy
-#~| msgctxt "@action update quotes from online quote source"
-#~| msgid "Update"
-#~ msgctxt "@action:button Update button in tags vew"
-#~ msgid "Update"
-#~ msgstr "Actualizează"
-
-#, fuzzy
-#~| msgid "Budget options"
-#~ msgctxt "@title:menu Bugdet context menu"
-#~ msgid "Budget options"
-#~ msgstr "Opțiuni buget"
-
-#~ msgid "Select online banking plugin"
-#~ msgstr "Alegeți modulul de online banking"
-
-#, fuzzy
-#~| msgid "Do you want to add <b>%1</b> as payer/receiver?"
-#~ msgid "Do you want to show <b>%1</b> column on every loaded view?"
-#~ msgstr "Doriți să adăugați pe <b>%1</b> ca plătitor/beneficiar?"
-
-#, fuzzy
-#~| msgid "Do you want to add <b>%1</b> as payer/receiver?"
-#~ msgid "Do you want to hide <b>%1</b> column on every loaded view?"
-#~ msgstr "Doriți să adăugați pe <b>%1</b> ca plătitor/beneficiar?"
-
-#~ msgid "Is a sub account"
-#~ msgstr "Este un subcont"
-
-#~ msgctxt "New transaction button"
-#~ msgid "New"
-#~ msgstr "Nouă"
-
-#~ msgid "New scheduled transaction"
-#~ msgstr "Tranzacție programată nouă"
-
-#~ msgid "Check template file"
-#~ msgstr "Fișierul care conține șablonul cecului"
+#~ msgctxt "HTML (Filefilter)"
+#~ msgid "HTML files"
+#~ msgstr "Fișiere HTML"
 
 #~ msgid "Are you sure you wish to merge these transactions?"
 #~ msgstr "În mod sigur doriți să uniți aceste tranzacții?"
-
-#~ msgid ""
-#~ "<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>"
-#~ msgstr ""
-#~ "<p><b>%1</b> nu poate fi mutat la instituția <b>%2</b>. Motivul: %3</p>"
-
-#~ msgid "<p><b>%1</b> cannot be moved to <b>%2</b>. Reason: %3</p>"
-#~ msgstr "<p><b>%1</b> nu poate fi mutat în <b>%2</b>. Motivul: %3</p>"
-
-#, fuzzy
-#~| msgid "Budgets"
-#~ msgid "Budgets view"
-#~ msgstr "Bugete"
-
-#, fuzzy
-#~| msgid "Forecast"
-#~ msgid "Forecast view"
-#~ msgstr "Prognoză"
-
-#, fuzzy
-#~| msgid "Budgets"
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Budgets view"
-#~ msgstr "Bugete"
-
-#, fuzzy
-#~| msgid "Checking"
-#~ msgctxt "It's about printing bank checks"
-#~ msgid "Check printing"
-#~ msgstr "Cont curent"
-
-#, fuzzy
-#~| msgctxt "CSV Importer dialog title"
-#~| msgid "CSV Importer"
-#~ msgid "CSV exporter"
-#~ msgstr "Importă fișier CSV"
-
-#, fuzzy
-#~| msgctxt "CSV Importer dialog title"
-#~| msgid "CSV Importer"
-#~ msgid "CSV importer"
-#~ msgstr "Importă fișier CSV"
-
-#, fuzzy
-#~| msgctxt "CSV Importer dialog title"
-#~| msgid "CSV Importer"
-#~ msgid "GnuCash importer"
-#~ msgstr "Importă fișier CSV"
-
-#, fuzzy
-#~| msgid "Icalendar export settings"
-#~ msgid "iCalendar exporter"
-#~ msgstr "Configurări pentru exportarea plăților programate "
-
-#, fuzzy
-#~| msgid "QIF Import"
-#~ msgid "OFX Importer"
-#~ msgstr "Importă QIF"
-
-#, fuzzy
-#~| msgid "QIF Import"
-#~ msgid "QIF importer"
-#~ msgstr "Importă QIF"
 
 #, fuzzy
 #~| msgid "All files (*.*)"
 #~ msgid "CSV Files (*.csv)"
 #~ msgstr "Toate fișierele (*.*)"
-
-#, fuzzy
-#~| msgctxt "@item %1 = tens text, %2 = ones text"
-#~| msgid "%1 %2"
-#~ msgctxt ""
-#~ "@item:intext Amount, %1 transaction amount, %2 payment direction in parens"
-#~ msgid "%1 %2"
-#~ msgstr "%1 %2"
-
-#, fuzzy
-#~| msgctxt "location of debit column"
-#~| msgid "Debits"
-#~ msgid "Debit"
-#~ msgstr "Debite"
-
-#, fuzzy
-#~| msgctxt "location of credit column"
-#~| msgid "Credits"
-#~ msgid "Credit"
-#~ msgstr "Credite"
 
 #, fuzzy
 #~| msgctxt ""
@@ -28672,134 +28708,6 @@ msgstr ""
 #~ msgid "A&mount"
 #~ msgstr "Sumă"
 
-#~ msgid "Creates a new budget"
-#~ msgstr "Creează un buget nou"
-
-#~ msgid "Use this to create a new empty budget."
-#~ msgstr "Folosește asta pentru a crea un buget nou și gol."
-
-#~ msgctxt "New budget"
-#~ msgid "New"
-#~ msgstr "Nou"
-
-#, fuzzy
-#~| msgid "Rename the current selected budget"
-#~ msgid "Rename the current selected budget."
-#~ msgstr "Redenumește bugetul selectat curent."
-
-#~ msgid "Use this to start renaming the selected budget."
-#~ msgstr "Folosește asta pentru a începe redenumirea bugetului selectat."
-
-#~ msgid "Delete the current selected budget"
-#~ msgstr "Șterge bugetul selectat curent"
-
-#~ msgid "Use this to delete the selected budget."
-#~ msgstr "Folosește asta pentru a șterge bugetul selectat curent."
-
-#~ msgid "Use this to create a new payee."
-#~ msgstr "Folosiți pentru a crea un beneficiar/plătitor nou"
-
-#~ msgctxt "New payee"
-#~ msgid "New"
-#~ msgstr "Nou"
-
-#~ msgid "Rename the current selected payee"
-#~ msgstr "Redenumește beneficiarul/plătitorul selectat curent."
-
-#~ msgid "Use this to start renaming the selected payee."
-#~ msgstr ""
-#~ "Folosește asta pentru a începe redenumirea beneficiarului/plătitorului "
-#~ "selectat."
-
-#~ msgid "Delete selected payee(s)"
-#~ msgstr "Șterge beneficiarul/plătitorul selectat"
-
-#~ msgid ""
-#~ "Use this to delete the selected payee. You can also select multiple "
-#~ "payees to be deleted."
-#~ msgstr ""
-#~ "Folosește această funcție pentru a șterge beneficiarul. Puteți să alegeți "
-#~ "mai mulți beneficiari pentru a fi șterși."
-
-#~ msgid "Merge multiple selected payees"
-#~ msgstr "Combină beneficiarii/plătitorii selectați."
-
-#~ msgid "Use this to merge multiple selected payees."
-#~ msgstr "Folosește asta pentru a combina beneficiarii/plătitorii selectați."
-
-#~ msgid "Creates a new tag"
-#~ msgstr "Creează un marcaj nou"
-
-#~ msgid "Use this to create a new tag."
-#~ msgstr "Folosiți pentru a crea un marcaj nou"
-
-#~ msgid "Rename the current selected tag"
-#~ msgstr "Redenumește marcajul selectat curent."
-
-#~ msgid "Use this to start renaming the selected tag."
-#~ msgstr "Folosește asta pentru a începe redenumirea marcajul selectat."
-
-#~ msgid "Delete the current selected tag"
-#~ msgstr "Șterge marcajul selectat curent"
-
-#~ msgid "Use this to delete the selected tag."
-#~ msgstr "Folosește asta pentru a șterge marcajul selectat curent."
-
-#~ msgid "Dequeue"
-#~ msgstr "Scoate din coada de execuție"
-
-#~ msgid "Dequeue selected job"
-#~ msgstr "Scoate sarcina din coada de execuție"
-
-#~ msgid "Remove the selected job from the list"
-#~ msgstr "Șterge sarcina din listă"
-
-#~ msgid "Execute"
-#~ msgstr "Execută"
-
-#~ msgid "Execute all jobs in the queue"
-#~ msgstr "Execută toate acțiunile din coadă"
-
-#~ msgctxt "Warning message"
-#~ msgid "There are no jobs in the queue."
-#~ msgstr "Nu există acțiuni în coadă."
-
-#~ msgctxt "Message title"
-#~ msgid "No Jobs"
-#~ msgstr "Nu există acțiuni"
-
-#~ msgid "Jobs"
-#~ msgstr "Sarcini"
-
-#~ msgid "Error executing item"
-#~ msgstr "Eroare la executarea elementului"
-
-#~ msgid "Unable to filter account"
-#~ msgstr "Nu s-a putut filtra contul"
-
-#~ msgid "Filter Accounts"
-#~ msgstr "Filtrează conturi"
-
-#~ msgid "Type/Name"
-#~ msgstr "Tip/Nume"
-
-#~ msgid "Frequency"
-#~ msgstr "Frecvență"
-
-#~ msgid "Unable to load accounts: "
-#~ msgstr "Conturile nu au putut fi încărcate: "
-
-#~ msgid "Routing Number:"
-#~ msgstr "Cod de identificare bancă:"
-
-#, fuzzy
-#~| msgid "Sort order"
-#~ msgid "SortCode"
-#~ msgstr "Ordinea de sortare"
-
-#~ msgid "Routing number"
-#~ msgstr "Număr de identificare"
-
 #~ msgid "Insert transaction type into No. field for new transactions"
 #~ msgstr "Inserează tipul tranzacției în cîmpul Nr. pentru tranzacții noi."
 
@@ -28816,120 +28724,6 @@ msgstr ""
 #~| msgid "Bills & Reminders"
 #~ msgid "Remainder:"
 #~ msgstr "Facturi și memoratori"
-
-#, fuzzy
-#~| msgid "Icons & splash screen"
-#~ msgid "Show splash screen"
-#~ msgstr "Iconițe & ecran de pornire"
-
-#~ msgid "Show splash screen during startup"
-#~ msgstr "Afișează ecranul de pornire în timpul pornirii"
-
-#~ msgid "MyDialog"
-#~ msgstr "Dialogul meu"
-
-#~ msgctxt ""
-#~ "@item This comes after the hunder text if the tens unit is different from "
-#~ "0"
-#~ msgid " and "
-#~ msgstr " și "
-
-#, fuzzy
-#~| msgctxt "@item no payments were entered for a loan"
-#~| msgid "No"
-#~ msgctxt "@label The word to be printed for no fractional part as in No/00"
-#~ msgid "No"
-#~ msgstr "Nu"
-
-#~ msgid "Account Types"
-#~ msgstr "Tipuri de cont"
-
-#, fuzzy
-#~| msgid "Open ledger"
-#~ msgid "New ledger"
-#~ msgstr "Deschide registrul"
-
-#, fuzzy
-#~| msgid ""
-#~| "This dialog does not allow new payees to be created. Please pick a payee "
-#~| "from the list."
-#~ msgid ""
-#~ "This dialog does not allow new tags to be created. Please pick a tag from "
-#~ "the list."
-#~ msgstr ""
-#~ "Acest dialog nu permite crearea unui plătitor/beneficiar nou. Alegeți un "
-#~ "beneficiar/plătitor din listă."
-
-#~ msgid "Tag creation"
-#~ msgstr "Creare marcaj"
-
-#~ msgctxt "Flag for unknown reconciliation state"
-#~ msgid "?"
-#~ msgstr "?"
-
-#~ msgid "Total Balance"
-#~ msgstr "Soldul total"
-
-#, fuzzy
-#~| msgid "Amount entered"
-#~ msgid "Cost Center"
-#~ msgstr "Suma introdusă"
-
-#~ msgid "Select year"
-#~ msgstr "Alege anul"
-
-#~ msgid "Budget year"
-#~ msgstr "Anul bugetului"
-
-#~ msgid "Change budget year"
-#~ msgstr "Schimbă anul bugetului"
-
-#~ msgid ""
-#~ "A budget with the name '%1' already exists. It is not advisable to have "
-#~ "multiple budgets with the same identification name. Are you sure you "
-#~ "would like to rename the budget?"
-#~ msgstr ""
-#~ "Un buget cu numele '%1' deja există. Nu este recomandat să aveți mai "
-#~ "multe bugete cu același nume de identificare. Sunteți sigur că doriți să "
-#~ "redenumiți bugetul?"
-
-#~ msgctxt "@title header of the budget name column"
-#~ msgid "Name"
-#~ msgstr "Nume"
-
-#~ msgid "Saving accounts..."
-#~ msgstr "Se salvează conturile..."
-
-#~ msgid "Saving transactions..."
-#~ msgstr "Se salvează tranzacțiile..."
-
-#~ msgid "Saving reports..."
-#~ msgstr "Se salvează rapoartele..."
-
-#~ msgid "Saving budgets..."
-#~ msgstr "Se salvează bugetele..."
-
-#, fuzzy
-#~| msgid "Saving accounts..."
-#~ msgid "Saving costcenters..."
-#~ msgstr "Se salvează conturile..."
-
-#, fuzzy
-#~| msgid "Online Statement Balance: %1"
-#~ msgid "Online statement balance: %1"
-#~ msgstr "Soldul extrasului online: %1"
-
-#~ msgctxt "The balance of the selected budget"
-#~ msgid "Balance: "
-#~ msgstr "Soldul: "
-
-#, fuzzy
-#~| msgid "Closed"
-#~ msgid "Closed tag"
-#~ msgstr "Închis"
-
-#~ msgid "The tag is already present."
-#~ msgstr "Eticheta există deja."
 
 #~ msgid ""
 #~ "<center>This investment account does not contain the \"%1\" security.</"
@@ -29046,11 +28840,60 @@ msgstr ""
 #~ msgid "Statement stats"
 #~ msgstr "Statistici ale bilanțului"
 
-#~ msgid "Exceptions"
-#~ msgstr "Excepții"
+#~ msgid "%1 thrown in %2:%3"
+#~ msgstr "excepție %1 în %2:%3"
+
+#~ msgid "Unable to upload to '%1'"
+#~ msgstr "Nu s-a putut încărca la „%1”"
+
+#, fuzzy
+#~| msgid "Internal error - invalid interval char in incrDate"
+#~ msgid "Internal error - no matching splits"
+#~ msgstr "Eroare internă - caracter interval nevalid în incrDate"
+
+#~ msgid "Internal error - no matching transactions"
+#~ msgstr "Eroare internă - nu sunt tranzacții potrivite"
+
+#~ msgid "Internal error - no matching schedules"
+#~ msgstr "Eroare internă - nu sunt programări potrivite"
+
+#~ msgid "Do nothing"
+#~ msgstr "Nu face nimic"
+
+#, fuzzy
+#~| msgid "Scheduled transactions"
+#~ msgctxt "use   as line break"
+#~ msgid "Scheduled transactions"
+#~ msgstr "Tranzacții programate"
+
+#~ msgctxt "Report settings"
+#~ msgid "Reports"
+#~ msgstr "Rapoarte"
+
+#~ msgctxt "Forecast settings"
+#~ msgid "Forecast"
+#~ msgstr "Prognoză"
 
 #~ msgid "Encryption"
 #~ msgstr "Criptare"
+
+#~ msgid "First transaction does not match requirement for matching"
+#~ msgstr "Prima tranzacție nu îndeplinește cerințele pentru asociere"
+
+#~ msgid "Splits for %1 have conflicting values (%2,%3)"
+#~ msgstr "Părțile pentru %1 are valori conflictuale (%2, %3)"
+
+#~ msgid "Unable to match all splits (%1)"
+#~ msgstr "Nu s-au putut asocia niciuna dintre părți (%1)"
+
+#~ msgid "Save as database..."
+#~ msgstr "Salvează ca bază de date..."
+
+#~ msgid "Saving file with a new filename..."
+#~ msgstr "Se salvează fișierul cu un nume nou..."
+
+#~ msgid "Saving file to database..."
+#~ msgstr "Se salvează fișierul în baza de date..."
 
 #~ msgid "Closing window..."
 #~ msgstr "Se închide fereastra..."
@@ -29058,16 +28901,165 @@ msgstr ""
 #~ msgid "Create a new transaction"
 #~ msgstr "Creează o tranzacție nouă"
 
-#~ msgid "Save as database..."
-#~ msgstr "Salvează ca bază de date..."
+#~ msgid "The statements have been processed with the following results:"
+#~ msgstr "Bilanțul a fost procesat și s-au obținut următoarele rezultate:"
+
+#~ msgid "%1 in file %2 line %3"
+#~ msgstr "%1 în fișierul %2 linia %3"
+
+#~ msgid ""
+#~ "Account %1 contains an opening balance. Please use KMyMoney version 0.8 "
+#~ "or later and earlier than version 0.9 to correct the problem."
+#~ msgstr ""
+#~ "Contul %1 are un sold de deschidere. Vă rog să folosiți o versiune "
+#~ "KMyMoney între 0.8 și 0.9 pentru a corecta problema."
+
+#~ msgid "Do Nothing"
+#~ msgstr "Nu face nimic"
+
+#, fuzzy
+#~| msgid "Cannot update currency. %1"
+#~ msgid "Cannot add currency with existing id %1"
+#~ msgstr "Nu s-a putut actualiza moneda. %1"
+
+#, fuzzy
+#~| msgid "Cannot create new currency. %1"
+#~ msgid "Cannot remove currency with unknown id %1"
+#~ msgstr "Nu s-a putut crea moneda nouă. %1"
+
+#, fuzzy
+#~| msgid "Cannot create new currency. %1"
+#~ msgid "Cannot retrieve currency with unknown id '%1'"
+#~ msgstr "Nu s-a putut crea moneda nouă. %1"
+
+# well-spelled: MyMoneyQifWriter, write
+#, fuzzy
+#~| msgid ""
+#~| "Unexpected exception '%1' thrown in %2, line %3 caught in "
+#~| "MyMoneyQifWriter::write()"
+#~ msgid ""
+#~ "Unexpected exception '%1' thrown in %2, line %3 caught in "
+#~ "MyMoneyCsvWriter::write()"
+#~ msgstr ""
+#~ "Excepție neașteptată „%1” aruncată în %2, linia %3, prinsă în "
+#~ "MyMoneyQifWriter::write()"
+
+#~ msgid "GnuCash..."
+#~ msgstr "GnuCash..."
+
+#, fuzzy
+#~| msgid ""
+#~| "You cannot import GnuCash data into an existing file. Do you wish to "
+#~| "save this file?"
+#~ msgid ""
+#~ "You cannot import GnuCash data into an existing file. Please close it."
+#~ msgstr ""
+#~ "Nu puteți importa fișiere GnuCash în fișiere existente. Doriți să salvați "
+#~ "acest fișier?"
+
+#~ msgid ": Sorry. This importer cannot handle version %1 of element %2"
+#~ msgstr ""
+#~ ": Scuze. Acest importator nu poate opera cu versiunea %1 a elementului %2"
+
+#~ msgid "This version of the importer cannot handle multi-book files."
+#~ msgstr ""
+#~ "Această versiune a importatorului nu poate lucra cu fișiere de registru "
+#~ "multiplu."
+
+#~ msgid ""
+#~ "Input file cannot be parsed; may be corrupt\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Fișierul de intrare nu poate fi analizat: poate fi corupt\n"
+#~ "%1"
+
+# well-spelled: gnc
+#~ msgid "Invalid header for file. Should be 'gnc-v2'"
+#~ msgstr "Antet de fișier nevalid. Ar trebui să fie „gnc-v2”"
+
+#~ msgid "Current importer does not recognize GnuCash account type %1"
+#~ msgstr "Importatorul curent nu recunoaște tipul de contu GnuCash %1"
+
+#~ msgid "Cannot find template transaction for schedule %1"
+#~ msgstr "Șablonul de tranzacție pentru programarea %1 nu poate fi găsit"
+
+#~ msgid "Internal error - invalid interval char in incrDate"
+#~ msgstr "Eroare internă - caracter interval nevalid în incrDate"
+
+#~ msgid "Exceptions"
+#~ msgstr "Excepții"
+
+# well-spelled: MyMoneyQifWriter, write
+#~ msgid ""
+#~ "Unexpected exception '%1' thrown in %2, line %3 caught in "
+#~ "MyMoneyQifWriter::write()"
+#~ msgstr ""
+#~ "Excepție neașteptată „%1” aruncată în %2, linia %3, prinsă în "
+#~ "MyMoneyQifWriter::write()"
+
+#~ msgid "Unable to add budget: %1, thrown in %2:%3"
+#~ msgstr "Nu s-a putut adăuga bugetul: %1, excepție în %2:%3"
+
+#~ msgid "Unable to remove budget: %1, thrown in %2:%3"
+#~ msgstr "Nu s-a putut șterge bugetul: %1, excepție în %2:%3"
+
+#~ msgid "Unable to modify budget: %1, thrown in %2:%3"
+#~ msgstr "Nu s-a putut modifica bugetul:%1, excepție în %2:%3"
+
+#~ msgid "Unable to duplicate transaction(s): %1, thrown in %2:%3"
+#~ msgstr "Nu s-a(u) putut duplica tranzacția(iile): %1, excepție în %2:%3"
+
+#~ msgid "Unable to accept transaction: %1, thrown in %2:%3"
+#~ msgstr "Nu s-a putut accepta tranzacția: %1, excepție în %2:%3"
+
+#~ msgid "Unable to modify transaction: %1, thrown in %2:%3"
+#~ msgstr "Nu s-a putut modifica tranzacția: %1, excepție în %2:%3"
+
+#~ msgid "Unable to delete transaction(s): %1, thrown in %2:%3"
+#~ msgstr "Nu s-a putut șterge tranzacția(iile): %1, excepție în %2:%3"
+
+#~ msgid "No manually entered transaction selected for matching"
+#~ msgstr "Nu sunt selectate tranzacții introduse manual pentru asociere"
+
+#~ msgid "No imported transaction selected for matching"
+#~ msgstr "Nu sunt selectate tranzacții importate pentru asociere"
+
+#~ msgid "GPG is not available for decryption of file <b>%1</b>"
+#~ msgstr "GPG nu este disponibil pentru decriptarea fișierului <b>%1</b>"
+
+#~ msgid ""
+#~ "File <b>%1</b> contains the old binary format used by KMyMoney. Please "
+#~ "use an older version of KMyMoney (0.8.x) that still supports this format "
+#~ "to convert it to the new XML based format."
+#~ msgstr ""
+#~ "Fișierul <b>%1</b> conține vechiul format binar folosit de către "
+#~ "KMyMoney. Vă rog să folosiți o versiune mai veche de KMyMoney (0.8.x) "
+#~ "care mai folosește acest format pentru a-l converti la noul format bazat "
+#~ "pe XML."
 
 #~ msgid "File <b>%1</b> contains an unknown file format."
 #~ msgstr "Fișierul <b>%1</b> conține datele într-un format necunoscut."
 
-#, fuzzy
-#~| msgid "Save as..."
-#~ msgid "Save as XML..."
-#~ msgstr "Salvează ca..."
+#~ msgid "Cannot load file <b>%1</b>. Reason: %2"
+#~ msgstr "Nu se poate încărca fișierul <b>%1</b>. Motivul: %2"
+
+#~ msgid ""
+#~ "The following error was encountered while decrypting file <b>%1</b>: %2"
+#~ msgstr ""
+#~ "S-a întâmpinat următoarea eroare în procesul de decriptare a fișierului "
+#~ "<b>%1</b>: %2"
+
+#~ msgid "File <b>%1</b> not found."
+#~ msgstr "Fișierul <b>%1</b> nu a fost găsit."
+
+#~ msgid "Unknown fix level in input file"
+#~ msgstr "Nivel de reparare necunoscut pentru fișierul de intrare"
+
+#~ msgid "Failure while writing to '%1'"
+#~ msgstr "Eroare în timpul scrierii în '%1'"
+
+#~ msgid "Malformed URL '%1'"
+#~ msgstr "URL defect '%1'"
 
 #, fuzzy
 #~| msgid ""
@@ -29123,221 +29115,17 @@ msgstr ""
 #~ msgid "Set preferences"
 #~ msgstr "Stabilește preferințele"
 
-#~ msgid "Saving file with a new filename..."
-#~ msgstr "Se salvează fișierul cu un nume nou..."
-
-#, fuzzy
-#~| msgid "Unable to add transactions"
-#~ msgid "nable to modify transaction"
-#~ msgstr "Nu s-au putut adăuga tranzacții"
-
-#~ msgid "%1 thrown in %2:%3"
-#~ msgstr "excepție %1 în %2:%3"
-
-#~ msgid "Unable to upload to '%1'"
-#~ msgstr "Nu s-a putut încărca la „%1”"
-
-#, fuzzy
-#~| msgid "Internal error - invalid interval char in incrDate"
-#~ msgid "Internal error - no matching splits"
-#~ msgstr "Eroare internă - caracter interval nevalid în incrDate"
-
-#~ msgid "Internal error - no matching transactions"
-#~ msgstr "Eroare internă - nu sunt tranzacții potrivite"
-
-#~ msgid "Internal error - no matching schedules"
-#~ msgstr "Eroare internă - nu sunt programări potrivite"
-
-#~ msgid "Splits for %1 have conflicting values (%2,%3)"
-#~ msgstr "Părțile pentru %1 are valori conflictuale (%2, %3)"
-
-#~ msgid "Unable to match all splits (%1)"
-#~ msgstr "Nu s-au putut asocia niciuna dintre părți (%1)"
-
-#~ msgid "Unknown fix level in input file"
-#~ msgstr "Nivel de reparare necunoscut pentru fișierul de intrare"
-
-#~ msgid "GPG is not available for decryption of file <b>%1</b>"
-#~ msgstr "GPG nu este disponibil pentru decriptarea fișierului <b>%1</b>"
-
-#~ msgid ""
-#~ "File <b>%1</b> contains the old binary format used by KMyMoney. Please "
-#~ "use an older version of KMyMoney (0.8.x) that still supports this format "
-#~ "to convert it to the new XML based format."
-#~ msgstr ""
-#~ "Fișierul <b>%1</b> conține vechiul format binar folosit de către "
-#~ "KMyMoney. Vă rog să folosiți o versiune mai veche de KMyMoney (0.8.x) "
-#~ "care mai folosește acest format pentru a-l converti la noul format bazat "
-#~ "pe XML."
-
-#~ msgid "Malformed URL '%1'"
-#~ msgstr "URL defect '%1'"
-
-#~ msgid "Failure while writing to '%1'"
-#~ msgstr "Eroare în timpul scrierii în '%1'"
-
-#~ msgid "%1 in file %2 line %3"
-#~ msgstr "%1 în fișierul %2 linia %3"
-
-#~ msgid ""
-#~ "Account %1 contains an opening balance. Please use KMyMoney version 0.8 "
-#~ "or later and earlier than version 0.9 to correct the problem."
-#~ msgstr ""
-#~ "Contul %1 are un sold de deschidere. Vă rog să folosiți o versiune "
-#~ "KMyMoney între 0.8 și 0.9 pentru a corecta problema."
-
-#, fuzzy
-#~| msgid "Cannot update currency. %1"
-#~ msgid "Cannot add currency with existing id %1"
-#~ msgstr "Nu s-a putut actualiza moneda. %1"
-
-#, fuzzy
-#~| msgid "Cannot create new currency. %1"
-#~ msgid "Cannot remove currency with unknown id %1"
-#~ msgstr "Nu s-a putut crea moneda nouă. %1"
-
-#, fuzzy
-#~| msgid "Cannot create new currency. %1"
-#~ msgid "Cannot retrieve currency with unknown id '%1'"
-#~ msgstr "Nu s-a putut crea moneda nouă. %1"
-
-# well-spelled: MyMoneyQifWriter, write
-#, fuzzy
-#~| msgid ""
-#~| "Unexpected exception '%1' thrown in %2, line %3 caught in "
-#~| "MyMoneyQifWriter::write()"
-#~ msgid ""
-#~ "Unexpected exception '%1' thrown in %2, line %3 caught in "
-#~ "MyMoneyCsvWriter::write()"
-#~ msgstr ""
-#~ "Excepție neașteptată „%1” aruncată în %2, linia %3, prinsă în "
-#~ "MyMoneyQifWriter::write()"
-
-#~ msgid ": Sorry. This importer cannot handle version %1 of element %2"
-#~ msgstr ""
-#~ ": Scuze. Acest importator nu poate opera cu versiunea %1 a elementului %2"
-
-#~ msgid "This version of the importer cannot handle multi-book files."
-#~ msgstr ""
-#~ "Această versiune a importatorului nu poate lucra cu fișiere de registru "
-#~ "multiplu."
-
-#~ msgid ""
-#~ "Input file cannot be parsed; may be corrupt\n"
-#~ "%1"
-#~ msgstr ""
-#~ "Fișierul de intrare nu poate fi analizat: poate fi corupt\n"
-#~ "%1"
-
-# well-spelled: gnc
-#~ msgid "Invalid header for file. Should be 'gnc-v2'"
-#~ msgstr "Antet de fișier nevalid. Ar trebui să fie „gnc-v2”"
-
-#~ msgid "Current importer does not recognize GnuCash account type %1"
-#~ msgstr "Importatorul curent nu recunoaște tipul de contu GnuCash %1"
-
-#~ msgid "Cannot find template transaction for schedule %1"
-#~ msgstr "Șablonul de tranzacție pentru programarea %1 nu poate fi găsit"
-
-#~ msgid "Internal error - invalid interval char in incrDate"
-#~ msgstr "Eroare internă - caracter interval nevalid în incrDate"
-
-# well-spelled: MyMoneyQifWriter, write
-#~ msgid ""
-#~ "Unexpected exception '%1' thrown in %2, line %3 caught in "
-#~ "MyMoneyQifWriter::write()"
-#~ msgstr ""
-#~ "Excepție neașteptată „%1” aruncată în %2, linia %3, prinsă în "
-#~ "MyMoneyQifWriter::write()"
-
-#~ msgid "Unable to add budget: %1, thrown in %2:%3"
-#~ msgstr "Nu s-a putut adăuga bugetul: %1, excepție în %2:%3"
-
-#~ msgid "Unable to remove budget: %1, thrown in %2:%3"
-#~ msgstr "Nu s-a putut șterge bugetul: %1, excepție în %2:%3"
-
-#~ msgid "Unable to modify budget: %1, thrown in %2:%3"
-#~ msgstr "Nu s-a putut modifica bugetul:%1, excepție în %2:%3"
-
-#~ msgid "Unable to duplicate transaction(s): %1, thrown in %2:%3"
-#~ msgstr "Nu s-a(u) putut duplica tranzacția(iile): %1, excepție în %2:%3"
-
-#~ msgid "Unable to accept transaction: %1, thrown in %2:%3"
-#~ msgstr "Nu s-a putut accepta tranzacția: %1, excepție în %2:%3"
-
-#~ msgid "Unable to modify transaction: %1, thrown in %2:%3"
-#~ msgstr "Nu s-a putut modifica tranzacția: %1, excepție în %2:%3"
-
-#~ msgid "Unable to delete transaction(s): %1, thrown in %2:%3"
-#~ msgstr "Nu s-a putut șterge tranzacția(iile): %1, excepție în %2:%3"
-
-#~ msgid "No manually entered transaction selected for matching"
-#~ msgstr "Nu sunt selectate tranzacții introduse manual pentru asociere"
-
-#~ msgid "No imported transaction selected for matching"
-#~ msgstr "Nu sunt selectate tranzacții importate pentru asociere"
-
-#~ msgid "Do nothing"
-#~ msgstr "Nu face nimic"
-
-#~ msgid "Do Nothing"
-#~ msgstr "Nu face nimic"
-
-#, fuzzy
-#~| msgid "Scheduled transactions"
-#~ msgid "Scheduled transactions"
-#~ msgstr "Tranzacții programate"
-
-#~ msgctxt "Report settings"
-#~ msgid "Reports"
-#~ msgstr "Rapoarte"
-
-#~ msgid "The statements have been processed with the following results:"
-#~ msgstr "Bilanțul a fost procesat și s-au obținut următoarele rezultate:"
-
 #~ msgid ""
 #~ "Another instance of KMyMoney is already running. Do you want to quit?"
 #~ msgstr ""
 #~ "O altă instanță a aplicației KMyMoney rulează deja. Doriți să ieșiți?"
 
-#~ msgid "GnuCash..."
-#~ msgstr "GnuCash..."
-
-#, fuzzy
-#~| msgid ""
-#~| "You cannot import GnuCash data into an existing file. Do you wish to "
-#~| "save this file?"
-#~ msgid ""
-#~ "You cannot import GnuCash data into an existing file. Please close it."
-#~ msgstr ""
-#~ "Nu puteți importa fișiere GnuCash în fișiere existente. Doriți să salvați "
-#~ "acest fișier?"
-
-#~ msgid "Cannot load file <b>%1</b>. Reason: %2"
-#~ msgstr "Nu se poate încărca fișierul <b>%1</b>. Motivul: %2"
-
-#~ msgid ""
-#~ "The following error was encountered while decrypting file <b>%1</b>: %2"
-#~ msgstr ""
-#~ "S-a întâmpinat următoarea eroare în procesul de decriptare a fișierului "
-#~ "<b>%1</b>: %2"
-
-#~ msgid "File <b>%1</b> not found."
-#~ msgstr "Fișierul <b>%1</b> nu a fost găsit."
-
 #~ msgctxt "Same transaction if amount differs less than percent."
 #~ msgid "percent."
 #~ msgstr "procente."
 
-#~ msgid "Scheduled transactions"
-#~ msgstr "Tranzacții programate"
-
 #~ msgid "User identification"
 #~ msgstr "Identificarea utilizatorului"
-
-#~ msgctxt "Forecast settings"
-#~ msgid "Forecast"
-#~ msgstr "Prognoză"
 
 #~ msgid "Additional encryption keys to be used: %1"
 #~ msgstr "Chei adiționale de criptare folosite: %1"
@@ -29347,9 +29135,6 @@ msgstr ""
 
 #~ msgid "Manage additional keys"
 #~ msgstr "Gestionează cheile de criptare"
-
-#~ msgid "Saving file to database..."
-#~ msgstr "Se salvează fișierul în baza de date..."
 
 #, fuzzy
 #~| msgid "Transaction already frozen"
@@ -32112,13 +31897,6 @@ msgstr ""
 
 #, fuzzy
 #~| msgid ""
-#~| "_: Reconcile flag C\n"
-#~| "C"
-#~ msgid "Reconcile flag C"
-#~ msgstr "V"
-
-#, fuzzy
-#~| msgid ""
 #~| "_: Reconcile flag R\n"
 #~| "R"
 #~ msgid "Reconcile flag R"
@@ -32372,6 +32150,11 @@ msgstr ""
 #~| msgid "Select autofill transaction"
 #~ msgid "Select all transactions"
 #~ msgstr "Selectare tranzacție pentru autocompletare"
+
+#, fuzzy
+#~| msgid "Storing transactions"
+#~ msgid "Combine transactions"
+#~ msgstr "Memorează tranzacții"
 
 #, fuzzy
 #~| msgid ""

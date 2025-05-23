@@ -2,10 +2,11 @@
 <chapter id="reference">
 <chapterinfo>
   <date
->1 de desembre de 2024</date>
+>5 de desembre de 2016</date>
   <releaseinfo
->5.2.0</releaseinfo>
+>5.0</releaseinfo>
 </chapterinfo>
+
 <title
 >Referència</title>
 
@@ -13,24 +14,23 @@
 <sect1info>
   <author
 >&Roger.Lum; &Roger.Lum.mail; </author>
-  <author
->&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
 </sect1info>
 <title
 >Menús</title>
 
 <para
->A continuació es mostra una llista completa de les seleccions de menú al &kmymoney;, amb una breu descripció del que fa cadascuna. Cal tenir en compte que moltes d'aquestes opcions de menú no estaran disponibles o estaran en gris, segons la pantalla actual o l'estat de l'aplicació. A més, algunes poden no estar presents si es refereix a una característica no inclosa en una versió en particular. Per exemple, no podreu editar un compte a menys que es tingui un compte seleccionat o mostrat a la vista actual. </para>
+>A continuació es mostra una llista completa de les seleccions de menú al &kmymoney;, amb una breu descripció del que fa cadascuna. Cal tenir en compte que moltes d'aquestes opcions de menú no estaran disponibles o estaran en gris, segons la pantalla actual o l'estat de l'aplicació. Per exemple, no podreu editar un compte a menys que es tingui un compte seleccionat o mostrat a la vista actual. </para>
 
-<sect2 id="reference.menus.file"
-><title
+<sect2 id="reference.menus.file">
+<title
 >El menú Fitxer</title>
+
 <variablelist>
   <varlistentry>
     <term
 ><menuchoice
 ><shortcut
-> <keycombo
+> <keycombo action="simul"
 >&Ctrl;<keycap
 >N</keycap
 ></keycombo
@@ -38,12 +38,14 @@
 > <guimenu
 >Fitxer</guimenu
 > <guimenuitem
->Llibre nou</guimenuitem
+>Nou</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Crea un fitxer de dades nou buit del &kmymoney;. Només es pot obrir un fitxer del &kmymoney; alhora, de manera que això tancarà primer el fitxer actual, si està obert. </para>
+><action
+>Crea un fitxer de dades nou buit del &kmymoney;. Només es pot obrir un fitxer del &kmymoney; alhora, de manera que això tancarà primer el fitxer actual, si està obert. </action
+></para>
     </listitem>
   </varlistentry>
 
@@ -51,7 +53,7 @@
     <term
 ><menuchoice
 ><shortcut
-> <keycombo
+> <keycombo action="simul"
 >&Ctrl;<keycap
 >O</keycap
 ></keycombo
@@ -64,7 +66,9 @@
 ></term>
     <listitem>
       <para
->Obre un fitxer de base de dades existent del &kmymoney;.</para>
+><action
+>Obre un fitxer de base de dades existent del &kmymoney;.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -75,13 +79,15 @@
 >Fitxer</guimenu
 > <guimenuitem
 >Obre'n un de recent</guimenuitem
-><guimenuitem
+> <guimenuitem
 >...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Proporciona un accés ràpid als fitxers oberts recentment.</para>
+><action
+>Permet accés ràpid als fitxers oberts recentment.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -96,7 +102,9 @@
 ></term>
     <listitem>
       <para
->Obre una base de dades existent.</para>
+><action
+>Obre una base de dades existent.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -104,7 +112,7 @@
     <term
 ><menuchoice
 ><shortcut
-> <keycombo
+> <keycombo action="simul"
 >&Ctrl;<keycap
 >S</keycap
 ></keycombo
@@ -117,10 +125,11 @@
 ></term>
     <listitem>
       <para
->Desa el fitxer actualment obert amb un nom de fitxer diferent. Només està habilitat si hi ha canvis a desar. </para>
+><action
+>Desa el fitxer actualment obert.</action
+></para>
     </listitem>
   </varlistentry>
-
 
   <varlistentry>
     <term
@@ -139,7 +148,28 @@
 ></term>
     <listitem>
       <para
->Desa el fitxer actualment obert amb un nom de fitxer diferent.</para>
+><action
+>Desa el fitxer actualment obert amb un nom de fitxer diferent.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Desa com a base de dades...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Desa el fitxer actualment obert en una <link linkend="details.database"
+>base de dades</link
+>.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -156,7 +186,9 @@
 ></term>
     <listitem>
       <para
->Importa dades financeres des d'altres tipus de fitxer, com QIF i &gnucash;, o un fitxer de plantilla de comptes i categories que es poden emprar en configurar comptes nous. </para>
+><action
+>Importa dades financeres des d'altres tipus de fitxer, com QIF i &gnucash;, o un fitxer de plantilla de comptes i categories que es poden emprar en configurar comptes nous.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -173,7 +205,9 @@
 ></term>
     <listitem>
       <para
->Exporta el fitxer actual com un tipus de fitxer diferent, com a QIF, o exporta una llista dels comptes i categories com a plantilla. </para>
+><action
+>Exporta el fitxer actual com un tipus de fitxer diferent, com a QIF, o exporta una llista dels comptes i categories com a una plantilla. </action
+></para>
     </listitem>
   </varlistentry>
 
@@ -181,7 +215,7 @@
     <term
 ><menuchoice
 ><shortcut
-> <keycombo
+> <keycombo action="simul"
 >&Ctrl;<keycap
 >P</keycap
 ></keycombo
@@ -189,12 +223,14 @@
 > <guimenu
 >Fitxer</guimenu
 > <guimenuitem
->Imprimeix...</guimenuitem
+>Imprimeix</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Imprimeix el fitxer actual.</para>
+><action
+>Imprimeix el fitxer actual.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -204,12 +240,14 @@
 ><guimenu
 >Fitxer</guimenu
 ><guimenuitem
->Còpia de seguretat...</guimenuitem
+>Còpia de seguretat</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Desa una còpia de seguretat del fitxer actual.</para>
+><action
+>Desa una còpia de seguretat del fitxer actual.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -219,12 +257,14 @@
 ><guimenu
 >Fitxer</guimenu
 ><guimenuitem
->Dades personals...</guimenuitem
+>Dades personals</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Permet editar les dades personals.</para>
+><action
+>Permet editar les dades personals.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -234,20 +274,22 @@
 ><guimenu
 >Fitxer</guimenu
 ><guimenuitem
->Informació del fitxer...</guimenuitem
+>Informació del fitxer</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Mostra informació sobre el fitxer actualment obert del &kmymoney;.</para>
+><action
+>Mostra informació sobre el fitxer actualment obert del &kmymoney;.</action
+></para>
     </listitem>
   </varlistentry>
-
+  <!--Dump Memory what i sthis?-->
   <varlistentry>
     <term
 ><menuchoice
 ><shortcut
-> <keycombo
+> <keycombo action="simul"
 >&Ctrl;<keycap
 >W</keycap
 ></keycombo
@@ -260,7 +302,9 @@
 ></term>
     <listitem>
       <para
->Tanca el fitxer de dades actualment obert.</para>
+><action
+>Tanca el fitxer actual.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -268,7 +312,7 @@
     <term
 ><menuchoice
 ><shortcut
-> <keycombo
+> <keycombo action="simul"
 >&Ctrl;<keycap
 >Q</keycap
 ></keycombo
@@ -281,68 +325,25 @@
 ></term>
     <listitem>
       <para
->Surt del &kmymoney;. Ofereix desar el fitxer actualment obert, si hi ha qualsevol canvi. </para>
+><action
+>Surt del &kmymoney;.</action
+></para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.edit"
-><title
+<sect2 id="reference.menus.edit">
+<title
 >El menú Edita</title>
+
 <variablelist>
   <varlistentry>
     <term
 ><menuchoice
 ><shortcut
-> <keycombo
+> <keycombo action="simul"
 >&Ctrl;<keycap
->Z</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Edita</guimenu
-><guimenuitem
->Desfés</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
->Inverteix l'acció més recent.</para>
-    </listitem>
-  </varlistentry>
-</variablelist>
-
-<variablelist>
-  <varlistentry>
-    <term
-><menuchoice
-><shortcut
-> <keycombo
->&Ctrl;&Maj;<keycap
->Z</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Edita</guimenu
-><guimenuitem
->Refés</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
->Torna a aplicar l'acció de desfer més recent.</para>
-    </listitem>
-  </varlistentry>
-</variablelist>
-
-<variablelist>
-  <varlistentry>
-    <term
-><menuchoice
-><shortcut
-> <keycombo
->&Ctrl;&Maj;<keycap
 >F</keycap
 ></keycombo
 > </shortcut
@@ -354,21 +355,24 @@
 ></term>
     <listitem>
       <para
->Cerca operacions.</para>
+><action
+>Cerca les operacions.</action
+></para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.view"
-><title
+<sect2 id="reference.menus.view">
+<title
 >El menú Visualitza</title>
+
 <variablelist>
   <varlistentry id="reference.menus.settings.transactiondetail">
     <term
 ><menuchoice
 ><shortcut
-> <keycombo
+> <keycombo action="simul"
 >&Ctrl;<keycap
 >T</keycap
 ></keycombo
@@ -381,9 +385,11 @@
 ></term>
     <listitem>
       <para
+><action
 >Mostra els detalls de l'operació en la vista <link linkend="details.ledgers"
->Llibres majors</link
->. Amb aquesta opció activada, es mostraran totes les línies de l'operació. Quan està desactivada, només es mostrarà una línia. </para>
+>Llibre major</link
+>. Amb aquesta opció activada, totes les línies de l'operació es mostraran al llibre major. Quan està desactivada, només es mostrarà una línia. </action
+></para>
       <para
 >Si només voleu veure els detalls de l'operació actualment seleccionada, però només una línia per a les altres, podreu activar la <link linkend="details.settings.register.lens"
 >Lupa del llibre major</link
@@ -395,7 +401,7 @@
     <term
 ><menuchoice
 ><shortcut
-> <keycombo
+> <keycombo action="simul"
 >&Ctrl;<keycap
 >R</keycap
 ></keycombo
@@ -408,7 +414,9 @@
 ></term>
     <listitem>
       <para
->Oculta les operacions conciliades al llibre major.</para>
+><action
+>Oculta les operacions conciliades al registre.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -416,7 +424,30 @@
     <term
 ><menuchoice
 ><shortcut
-> <keycombo
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Mostra els saldos conciliats</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Mostra els saldos conciliats i l'última fita de conciliació en el registre.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
 >&Ctrl;<keycap
 >U</keycap
 ></keycombo
@@ -429,7 +460,9 @@
 ></term>
     <listitem>
       <para
->Oculta a les vistes les categories sense emprar.</para>
+><action
+>Oculta a les vistes les categories sense emprar.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -437,7 +470,7 @@
     <term
 ><menuchoice
 ><shortcut
-> <keycombo
+> <keycombo action="simul"
 > &Ctrl;&Maj;<keycap
 >A</keycap
 > </keycombo
@@ -450,15 +483,18 @@
 ></term>
     <listitem>
       <para
->Mostra tots els comptes a les vistes, inclosos els comptes tancats i els comptes amb saldo zero. </para>
+><action
+>Mostra a les vistes tots els comptes.</action
+></para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.institution"
-><title
+<sect2 id="reference.menus.institution">
+<title
 >El menú Institució</title>
+
 <variablelist>
   <varlistentry>
     <term
@@ -471,7 +507,9 @@
 ></term>
     <listitem>
       <para
->Afegeix una institució nova.</para>
+><action
+>Afegeix una institució nova.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -486,7 +524,9 @@
 ></term>
     <listitem>
       <para
->Edita una institució.</para>
+><action
+>Edita una institució.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -501,15 +541,18 @@
 ></term>
     <listitem>
       <para
->Suprimeix una institució.</para>
+><action
+>Suprimeix una institució.</action
+></para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.account"
-><title
+<sect2 id="reference.menus.account">
+<title
 >El menú Compte</title>
+
 <variablelist>
   <varlistentry>
     <term
@@ -522,7 +565,9 @@
 ></term>
     <listitem>
       <para
->Afegeix un compte nou.</para>
+><action
+>Afegeix un compte nou.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -537,7 +582,9 @@
 ></term>
     <listitem>
       <para
->Edita un compte.</para>
+><action
+>Edita un compte.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -552,7 +599,9 @@
 ></term>
     <listitem>
       <para
->Suprimeix un compte.</para>
+><action
+>Suprimeix un compte.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -567,7 +616,9 @@
 ></term>
     <listitem>
       <para
->Mostra la vista dels llibres majors del compte seleccionat.</para>
+><action
+>Mostra la vista del llibre major d'un compte.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -575,7 +626,7 @@
     <term
 ><menuchoice
 ><shortcut
-> <keycombo
+> <keycombo action="simul"
 > &Ctrl;&Maj;<keycap
 >R</keycap
 > </keycombo
@@ -588,7 +639,9 @@
 ></term>
     <listitem>
       <para
->Concilia un compte mitjançant l'assistent de conciliació.</para>
+><action
+>Concilia un compte mitjançant l'assistent de conciliació.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -598,12 +651,14 @@
 ><guimenu
 >Compte</guimenu
 ><guimenuitem
->Posposa</guimenuitem
+>Posposa la conciliació</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Posposa la conciliació d'un compte.</para>
+><action
+>Posposa la conciliació d'un compte.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -618,22 +673,9 @@
 ></term>
     <listitem>
       <para
->Finalitza la conciliació d'un compte.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Compte</guimenu
-><guimenuitem
->Cancel·la</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
->Cancel·la la conciliació d'un compte.</para>
+><action
+>Finalitza la conciliació d'un compte.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -648,22 +690,9 @@
 ></term>
     <listitem>
       <para
->Obre un informe d'operació del compte seleccionat.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Compte</guimenu
-> <guimenuitem
->Mostra el gràfic del saldo...</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
->Obre un gràfic d'aquest any (YTD) del saldo del compte seleccionat.</para>
+><action
+>Obre un informe d'operació d'un compte.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -678,7 +707,9 @@
 ></term>
     <listitem>
       <para
->Tanca un compte.</para>
+><action
+>Tanca un compte.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -693,7 +724,9 @@
 ></term>
     <listitem>
       <para
->Si el compte està tancat, el torna a obrir.</para>
+><action
+>Si el compte està tancat, el torna a obrir.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -703,12 +736,14 @@
 ><guimenu
 >Compte</guimenu
 ><guimenuitem
->Desvincula el compte...</guimenuitem
+>Desvincula el compte</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Desvincula un compte en línia.</para>
+><action
+>Desvincula un compte en línia.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -718,12 +753,14 @@
 ><guimenu
 >Compte</guimenu
 ><guimenuitem
->Vincula amb un compte...</guimenuitem
+>Vincula amb un compte en línia</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Fa que un compte segueixi a un compte en línia.</para>
+><action
+>Fa que un compte segueixi a un compte en línia.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -738,7 +775,9 @@
 ></term>
     <listitem>
       <para
->Importa operacions des de la banca en línia al compte seleccionat.</para>
+><action
+>Importa operacions per a un compte des de la banca en línia.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -753,15 +792,19 @@
 ></term>
     <listitem>
       <para
->Importa operacions per a tots els comptes vinculats des de la banca en línia.</para>
+><action
+>Importa operacions per a tots els comptes des de la banca en línia.</action
+></para>
     </listitem>
   </varlistentry>
+  <!--New credit transfer-->
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.category"
-><title
+<sect2 id="reference.menus.category">
+<title
 >El menú Categoria</title>
+
 <variablelist>
   <varlistentry>
     <term
@@ -774,7 +817,9 @@
 ></term>
     <listitem>
       <para
->Afegeix una categoria nova.</para>
+><action
+>Afegeix una categoria nova.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -789,7 +834,9 @@
 ></term>
     <listitem>
       <para
->Edita una categoria.</para>
+><action
+>Edita una categoria.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -804,7 +851,9 @@
 ></term>
     <listitem>
       <para
->Suprimeix una categoria.</para>
+><action
+>Suprimeix una categoria.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -819,45 +868,44 @@
 ></term>
     <listitem>
       <para
->Mostra la vista dels llibres majors d'una categoria.</para>
+><action
+>Mostra la vista del llibre major d'una categoria.</action
+></para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.transaction"
-><title
+<sect2 id="reference.menus.transaction">
+<title
 >El menú Operació</title>
+
 <variablelist>
   <varlistentry>
     <term
 ><menuchoice
 ><shortcut
-> <keycombo
+> <keycombo action="simul"
 >&Ctrl;&Ins;</keycombo
 > </shortcut
 > <guimenu
 >Operació</guimenu
 ><guimenuitem
->Operació nova</guimenuitem
+>Nova</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Afegeix una operació nova.</para>
+><action
+>Afegeix una operació nova.</action
+></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><shortcut
-> <keycombo
->&Ctrl;<keycap
->E</keycap
-></keycombo
-> </shortcut
-> <guimenu
+><guimenu
 >Operació</guimenu
 ><guimenuitem
 >Edita</guimenuitem
@@ -865,20 +913,16 @@
 ></term>
     <listitem>
       <para
->Edita una operació.</para>
+><action
+>Edita una operació.</action
+></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><shortcut
-> <keycombo
->&Ctrl;&Maj;<keycap
->E</keycap
-></keycombo
-> </shortcut
-> <guimenu
+><guimenu
 >Operació</guimenu
 ><guimenuitem
 >Edita els desglossaments</guimenuitem
@@ -886,18 +930,16 @@
 ></term>
     <listitem>
       <para
->Edita els desglossaments d'una operació.</para>
+><action
+>Edita els desglossaments d'una operació.</action
+></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><shortcut
-> <keycombo
->&Ctrl;&Del;</keycombo
-> </shortcut
-> <guimenu
+><guimenu
 >Operació</guimenu
 ><guimenuitem
 >Suprimeix</guimenuitem
@@ -905,20 +947,16 @@
 ></term>
     <listitem>
       <para
->Suprimeix una operació.</para>
+><action
+>Suprimeix una operació.</action
+></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><shortcut
-> <keycombo
->&Ctrl;<keycap
->D</keycap
-></keycombo
-> </shortcut
-> <guimenu
+><guimenu
 >Operació</guimenu
 ><guimenuitem
 >Duplica</guimenuitem
@@ -926,18 +964,16 @@
 ></term>
     <listitem>
       <para
->Duplica una operació.</para>
+><action
+>Duplica una operació.</action
+></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><shortcut
-> <keycombo
-> &Ctrl;&Alt;&Maj;&Space; </keycombo
-> </shortcut
-> <guimenu
+><guimenu
 >Operació</guimenu
 > <guimenuitem
 >Marca l'operació com a...</guimenuitem
@@ -947,7 +983,9 @@
 ></term>
     <listitem>
       <para
->Canvia l'estat de les operacions seleccionades a l'estat de No conciliada. </para>
+><action
+>Canvia una operació a l'estat de No conciliada.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -955,7 +993,7 @@
     <term
 ><menuchoice
 ><shortcut
-> <keycombo
+> <keycombo action="simul"
 > &Ctrl;&Alt;&Space; </keycombo
 > </shortcut
 > <guimenu
@@ -968,7 +1006,9 @@
 ></term>
     <listitem>
       <para
->Canvia l'estat de les operacions seleccionades a l'estat de Liquidada.</para>
+><action
+>Canvia una operació a l'estat de Liquidada.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -976,7 +1016,7 @@
     <term
 ><menuchoice
 ><shortcut
-> <keycombo
+> <keycombo action="simul"
 > &Ctrl;&Maj;&Space; </keycombo
 > </shortcut
 > <guimenu
@@ -989,7 +1029,9 @@
 ></term>
     <listitem>
       <para
->Canvia l'estat de les operacions seleccionades a l'estat de Conciliada.</para>
+><action
+>Canvia una operació a l'estat de Conciliada.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -999,25 +1041,21 @@
 ><guimenu
 >Operació</guimenu
 ><guimenuitem
->Ves al «compte»</guimenuitem
+>Ves al compte</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Mostra l'altre compte d'una operació en el llibre major.</para>
+><action
+>Mostra l'altre compte d'una operació.</action
+></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><shortcut
-> <keycombo
->&Ctrl;&Maj;<keycap
->P</keycap
-></keycombo
-> </shortcut
-> <guimenu
+><guimenu
 >Operació</guimenu
 ><guimenuitem
 >Ves al beneficiari</guimenuitem
@@ -1025,7 +1063,9 @@
 ></term>
     <listitem>
       <para
->Mostra la vista de Beneficiaris i se centra en el beneficiari de l'operació seleccionada. </para>
+><action
+>Mostra la vista del Beneficiari i se centra en el beneficiari de l'operació seleccionada.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -1040,7 +1080,9 @@
 ></term>
     <listitem>
       <para
->Mostra una operació planificada nova fent servir els detalls de l'operació seleccionada. </para>
+><action
+>Crea una operació planificada nova.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -1055,7 +1097,9 @@
 ></term>
     <listitem>
       <para
->Concorda dues operacions. Això s'utilitza més habitualment per a fer concordar una operació importada i una introduïda manualment, però també funcionen altres combinacions. </para>
+><action
+>Coincideix amb les operacions importades.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -1070,7 +1114,9 @@
 ></term>
     <listitem>
       <para
->Desaparella una operació que el &kmymoney; ha proposat com una coincidència de les operacions importades. Tingueu en compte que aquesta opció de menú només està present si hi ha una operació coincident i està seleccionada. </para>
+><action
+>Desaparella una operació que el &kmymoney; ha proposat com una coincidència de les operacions importades.</action
+> Recordeu que aquesta opció de menú només està present si hi ha una operació coincident. </para>
     </listitem>
   </varlistentry>
 
@@ -1085,7 +1131,9 @@
 ></term>
     <listitem>
       <para
->Accepta una fusió proposada de dues operacions.</para>
+><action
+>Accepta una fusió proposada de les operacions importades.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -1093,7 +1141,7 @@
     <term
 ><menuchoice
 ><shortcut
-> <keycombo
+> <keycombo action="simul"
 >&Ctrl;<keycap
 >A</keycap
 ></keycombo
@@ -1106,7 +1154,9 @@
 ></term>
     <listitem>
       <para
->Selecciona totes les operacions del llibre major.</para>
+><action
+>Selecciona totes les operacions al registre.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -1121,18 +1171,38 @@
 ></term>
     <listitem>
       <para
->Imprimeix el contingut de l'operació seleccionada al llibre major mostrat, amb un format d'acord amb la plantilla seleccionada. Vegeu la secció sobre configurar el connector <link linkend="details.settings.plugins"
+><action
+>Imprimeix el contingut de l'operació seleccionada al registre mostrat, amb un format d'acord amb la plantilla seleccionada.</action
+> Recordeu que aquesta opció de menú només estarà present si se selecciona una operació al registre. Per a obtenir més informació consulteu la secció sobre configurar el connector <link linkend="details.settings.plugins"
 >Imprimir un xec</link
-> per a més informació. </para>
+>. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.tools"
-><title
+<sect2 id="reference.menus.tools">
+<title
 >El menú Eines</title>
+
 <variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Eines</guimenu
+><guimenuitem
+>Editor del perfil QIF...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Modifica el perfil QIF emprat per a importar o exportar els fitxers QIF.</action
+></para>
+    </listitem>
+  </varlistentry>
+
   <varlistentry>
     <term
 ><menuchoice
@@ -1144,7 +1214,9 @@
 ></term>
     <listitem>
       <para
->Llista les divises conegudes pel &kmymoney;.</para>
+><action
+>Llista les divises conegudes pel &kmymoney;.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -1159,7 +1231,9 @@
 ></term>
     <listitem>
       <para
->Llista la cotització dels valors i divises.</para>
+><action
+>Llista la cotització dels valors i divises.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -1174,9 +1248,11 @@
 ></term>
     <listitem>
       <para
+><action
 >Actualitza la cotització dels valors i divises des de fonts en línia utilitzant la característica <link linkend="details.investments.onlinequotes"
 >Cotització en línia dels preus</link
->. </para>
+>.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -1191,7 +1267,9 @@
 ></term>
     <listitem>
       <para
->Executa una comprovació al fitxer, solucionar qualsevol problema que pugui, i mostra un informe del resultat. </para>
+><action
+>Executa una comprovació al fitxer i intenta solucionar qualsevol problema que trobi, si és possible.</action
+></para>
       <para
 >Realitzeu una còpia de seguretat del fitxer abans d'executar aquesta opció.</para>
     </listitem>
@@ -1208,49 +1286,29 @@
 ></term>
     <listitem>
       <para
->Executa una prova de rendiment al fitxer i mostra el resultat.</para>
+><action
+>Executa una prova de rendiment al fitxer i mostra el resultat.</action
+></para>
     </listitem>
   </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Eines</guimenu
-><guimenuitem
->Genera la base de dades SQL</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
->Genera el SQL necessari per a crear una base de dades.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Eines</guimenu
-><guimenuitem
->Temporitzadors de depuració</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
->Aquesta és una eina per als desenvolupadors.</para>
-    </listitem>
-  </varlistentry>
+  <!--Generate Database SQL
+  Debug Traces
+  Debug Timers-->
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.settings.help"
-><title
+<sect2 id="reference.menus.settings.help">
+<title
 >Els menús Arranjament i Ajuda</title>
+
 <para
->Els menús Arranjament i Ajuda del &kmymoney;, es basen en allò que es descriu en els <ulink url="help:/fundamentals/menus.html"
+>El &kmymoney; disposa dels menús <guimenu
+>Arranjament</guimenu
+> i <guimenu
+>Ajuda</guimenu
+> predeterminats del &kde;, com es descriu en els <ulink url="help:/fundamentals/menus.html"
 >Fonaments del &kde;</ulink
->, amb alguns elements addicionals. </para>
+>, amb una entrada addicional:</para>
 
 <variablelist>
   <varlistentry>
@@ -1264,51 +1322,14 @@
 ></term>
     <listitem>
       <para
+><action
 >Torna a habilitar qualsevol missatge que hàgiu desactivat marcant <guimenuitem
 >No m'ho tornis a dir</guimenuitem
-> en algun diàleg.</para>
+> en algun diàleg.</action
+></para>
     </listitem>
   </varlistentry>
-
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Arranjament</guimenu
-><guimenuitem
->Configura l'idioma...</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
->De manera predeterminada, l'idioma utilitzat pel &kmymoney; depèn de la configuració general del sistema per a la ubicació o la configuració regional. Això permet canviar aquest idioma i establir un idioma alternatiu, que s'utilitza per al text que no s'ha traduït a l'idioma principal. </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><shortcut
-> <keycombo
->&Ctrl;&Alt;<keycap
->,</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Arranjament</guimenu
-><guimenuitem
->Configura les dreceres de teclat...</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
->Permet afegir o modificar dreceres de teclat per a diverses accions. </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-  <!-- FIXME: There is some overlap between here and the KBanking Plugin section.
-              Better coordination would be good. -->
     <term
 ><menuchoice
 ><guimenu
@@ -1319,57 +1340,20 @@
 ></term>
     <listitem>
       <para
->Configura els paràmetres de la banca en línia, però només si el mòdul KBanking està activat. Es pot trobar més informació a la secció sobre la configuració del <link linkend="details.settings.plugins.kbanking"
->connector del KBanking</link
-> així com a la <ulink url="https://www.gnucash.org/docs/v5/C/gnucash-manual/tools-on-line-banking.html#tool- aqb-modules"
->documentació del &gnucash;</ulink
->. </para>
-
-      <para
->El procés de configurar l'accés en línia a l'AqBanking es descriu a <ulink url="https://wiki.gnucash.org/wiki/De/Onlinebanking-Einrichtungsassistent"
->la wiki del &gnucash; (només alemany)</ulink
->. Aquesta entrada de menú us porta al diàleg que es mostra al 3r pas. El procés fins al 18è pas és el mateix per al KMyMoney. Un cop fet, podeu vincular el compte en el &kmymoney; utilitzant <guimenu
->Compte</guimenu
-> <guisubmenu
->Vincula amb un compte</guisubmenu
-> i seleccioneu el compte de la llista proporcionada. A partir d'aquí, senzillament utilitzeu <guimenu
->Compte</guimenu
-> <guisubmenu
->Actualitza un compte</guisubmenu
->, o en cas que tingueu més d'un compte en línia vinculat <guimenu
->Compte</guimenu
-> <guisubmenu
->Actualitza tots els comptes</guisubmenu
->. </para>
-
-      <para
->Vegeu <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
+><action
+>Configuració dels paràmetres de la banca en línia</action
+>, vegeu <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
 >How do I configure online banking</ulink
 > per a més detalls. </para>
+      <para
+>Tingueu en compte que aquesta selecció de menú només és disponible si està activat el mòdul KBanking. Vegeu la secció de la configuració del <link linkend="details.settings.plugins.kbanking"
+>connector del KBanking</link
+> per a més informació. </para>
     </listitem>
   </varlistentry>
 
-  <varlistentry>
-    <term
-><menuchoice
-><shortcut
-> <keycombo
->&Ctrl;&Alt;<keycap
->I</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Ajuda</guimenu
-><guimenuitem
->Cerca una acció...</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
->Mostra els noms i les dreceres de totes les accions del &kmymoney;. En fer clic sobre una s'invocarà aquesta acció, si està activada actualment. </para>
-    </listitem>
-  </varlistentry>
 </variablelist>
 </sect2>
+
 </sect1
 >&details-widgets; </chapter>

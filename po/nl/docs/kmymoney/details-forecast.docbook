@@ -111,7 +111,7 @@
 >De prognoseperiode is in rekeningcycli gesplitst. De standaard lengte van de rekeningcyclus is 30 dagen, maar kan door de gebruiker worden ingesteld.</para>
 
       <para
->De eerste datum in de rekeningcyclus is de eerste prognosedatumstandaard. Dit is standaard de huidige datum plus één rekeningcyclus, maar kan afhankelijk van de instelling "Dag van de maand voor start prognose".</para>
+>De eerste datum in de rekeningcyclus is de eerste prognosedatum. Dit is standaard de huidige datum plus één rekeningcyclus, maar kan afhankelijk van de instelling "Dag van de maand voor start prognose".</para>
 
       <para
 >Overblijvende datums van rekeningcycli worden bepaald door de lengte van de rekeningcyclus op te tellen bij de vorige datum van de rekeningcyclus. Dit gaat verder totdat de berekende datum van de rekeningcyclus verder is dan de prognoseperiode.</para>
@@ -297,7 +297,7 @@
 
 <sect2>
 <title
->Grafiek Tabblad</title>
+>Tabblad Grafiek</title>
 
 <para
 >Het toont een grafiek met de prognose. Het detailniveau varieert afhankelijk van het detailniveau geselecteerd in de bovenstaande optie. </para>

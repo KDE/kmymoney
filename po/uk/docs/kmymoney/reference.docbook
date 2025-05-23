@@ -2,10 +2,11 @@
 <chapter id="reference">
 <chapterinfo>
   <date
->1 грудня 2024 року</date>
+>5 грудня 2016 року</date>
   <releaseinfo
->5.2.0</releaseinfo>
+>5.0</releaseinfo>
 </chapterinfo>
+
 <title
 >Довідник</title>
 
@@ -13,18 +14,17 @@
 <sect1info>
   <author
 >&Roger.Lum; &Roger.Lum.mail; </author>
-  <author
->&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
 </sect1info>
 <title
 >Меню</title>
 
 <para
->Нижче наведено повний список пунктів меню &kmymoney; з короткими описами призначення кожного з цих пунктів. Зауважте, що багато з цих пунктів меню можуть бути недоступними (позначеними сірим кольором). Перелік активних пунктів залежатиме від поточного показу або стану програми. Крім того, деяких пунктів може не бути, якщо їх пов'язано із можливостями, які не включено до певної версії. Наприклад, ви не зможете змінити параметри рахунку, якщо у поточному перегляді не позначено або не показано жодного рахунку. </para>
+>Нижче наведено повний список пунктів меню &kmymoney; з короткими описами призначення кожного з цих пунктів. Зауважте, що багато з цих пунктів меню можуть бути недоступними (позначеними сірим кольором). Перелік активних пунктів залежатиме від поточного показу або стану програми. Наприклад, ви не зможете змінити параметри рахунку, якщо у поточному перегляді не позначено або не показано жодного рахунку. </para>
 
-<sect2 id="reference.menus.file"
-><title
+<sect2 id="reference.menus.file">
+<title
 >Меню «Файл»</title>
+
 <variablelist>
   <varlistentry>
     <term
@@ -38,12 +38,14 @@
 > <guimenu
 >Файл</guimenu
 > <guimenuitem
->Створити книгу</guimenuitem
+>Створити</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Створює порожній файл даних &kmymoney;. Програма здатна одночасно працювати лише з одним файлом &kmymoney;, отже, їй доведеться спочатку закрити ваш поточний файл, якщо якийсь файл було відкрито. </para>
+><action
+>Створює порожній файл даних &kmymoney;. Програма здатна одночасно працювати лише з одним файлом &kmymoney;, отже, їй доведеться спочатку закрити ваш поточний файл, якщо якийсь файл було відкрито. </action
+></para>
     </listitem>
   </varlistentry>
 
@@ -64,7 +66,9 @@
 ></term>
     <listitem>
       <para
->Відкрити наявний файл даних &kmymoney;.</para>
+><action
+>Відкрити наявний файл даних &kmymoney;.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -81,7 +85,9 @@
 ></term>
     <listitem>
       <para
->Пришвидшує доступ до нещодавно відкритих файлів.</para>
+><action
+>Пришвидшує доступ до нещодавно відкритих файлів.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -96,7 +102,9 @@
 ></term>
     <listitem>
       <para
->Відкриває наявну базу даних.</para>
+><action
+>Відкриває наявну базу даних.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -117,10 +125,11 @@
 ></term>
     <listitem>
       <para
->Надає змогу зберегти поточний відкритий файл. Доступний, лише якщо внесено якісь зміни, які можна було б зберегти. </para>
+><action
+>Зберігає поточний відкритий файл.</action
+></para>
     </listitem>
   </varlistentry>
-
 
   <varlistentry>
     <term
@@ -139,7 +148,28 @@
 ></term>
     <listitem>
       <para
->Надає змогу зберегти поточний відкритий файл з іншою назвою.</para>
+><action
+>Надає змогу зберегти поточний відкритий файл з іншою назвою.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Зберегти як базу даних...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Надає змогу зберегти поточний відкритий файл у <link linkend="details.database"
+>базі даних</link
+>.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -156,7 +186,9 @@
 ></term>
     <listitem>
       <para
->Надає змогу імпортувати фінансові дані з файлів стороннього типу, зокрема файлів QIF та &gnucash;, або файла шаблону рахунків і категорій, яким можна скористатися для налаштування нових рахунків. </para>
+><action
+>Надає змогу імпортувати фінансові дані з файлів стороннього типу, зокрема файлів QIF та &gnucash;, або файла шаблону рахунків і категорій, яким можна скористатися для налаштування нових рахунків.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -173,7 +205,9 @@
 ></term>
     <listitem>
       <para
->Надає змогу експортувати файл до іншого формату, наприклад QIF, або експортувати список ваших рахунків і категорій як шаблон. </para>
+><action
+>Надає змогу експортувати файл до іншого формату, наприклад QIF, або експортувати список ваших рахунків і категорій як шаблон. </action
+></para>
     </listitem>
   </varlistentry>
 
@@ -194,7 +228,9 @@
 ></term>
     <listitem>
       <para
->Друкує поточний файл.</para>
+><action
+>Друкує поточний файл.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -204,12 +240,14 @@
 ><guimenu
 >Файл</guimenu
 > <guimenuitem
->Резервна копія…</guimenuitem
+>Резервна копія</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Зберігає резервну копію поточного файла.</para>
+><action
+>Зберігає резервну копію поточного файла.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -219,12 +257,14 @@
 ><guimenu
 >Файл</guimenu
 > <guimenuitem
->Особисті дані…</guimenuitem
+>Особисті дані</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Надає змогу змінити особисті дані.</para>
+><action
+>Надає змогу змінити особисті дані.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -234,15 +274,17 @@
 ><guimenu
 >Файл</guimenu
 > <guimenuitem
->Інформація про файл…</guimenuitem
+>Інформація про файл</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Показує інформацію щодо поточного відкритого у &kmymoney; файла.</para>
+><action
+>Показує інформацію щодо поточного відкритого у &kmymoney; файла.</action
+></para>
     </listitem>
   </varlistentry>
-
+  <!--Dump Memory what i sthis?-->
   <varlistentry>
     <term
 ><menuchoice
@@ -260,7 +302,9 @@
 ></term>
     <listitem>
       <para
->Закриває поточний відкритий файл.</para>
+><action
+>Закриває поточний файл.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -281,60 +325,17 @@
 ></term>
     <listitem>
       <para
->Завершити роботу &kmymoney;. Програма запропонує зберегти поточний відкритий файл, якщо до нього було внесено якісь зміни. </para>
+><action
+>Завершує роботу &kmymoney;.</action
+></para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.edit"
-><title
+<sect2 id="reference.menus.edit">
+<title
 >Меню «Зміни»</title>
-<variablelist>
-  <varlistentry>
-    <term
-><menuchoice
-><shortcut
-> <keycombo action="simul"
->&Ctrl;<keycap
->Z</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Зміни</guimenu
-> <guimenuitem
->Вернути</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
->Скасовує останню виконану дію.</para>
-    </listitem>
-  </varlistentry>
-</variablelist>
-
-<variablelist>
-  <varlistentry>
-    <term
-><menuchoice
-><shortcut
-> <keycombo action="simul"
->&Ctrl;&Shift;<keycap
->Z</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Зміни</guimenu
-> <guimenuitem
->Повторити</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
->Повторно застосувати останню скасовану дію.</para>
-    </listitem>
-  </varlistentry>
-</variablelist>
 
 <variablelist>
   <varlistentry>
@@ -342,7 +343,7 @@
 ><menuchoice
 ><shortcut
 > <keycombo
->&Ctrl;&Shift;<keycap
+>&Ctrl;<keycap
 >F</keycap
 ></keycombo
 > </shortcut
@@ -354,15 +355,18 @@
 ></term>
     <listitem>
       <para
->Пошук операцій.</para>
+><action
+>Пошук операцій</action
+></para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.view"
-><title
+<sect2 id="reference.menus.view">
+<title
 >Меню «Перегляд»</title>
+
 <variablelist>
   <varlistentry id="reference.menus.settings.transactiondetail">
     <term
@@ -381,9 +385,11 @@
 ></term>
     <listitem>
       <para
+><action
 >Показати параметри операції у перегляді <link linkend="details.ledgers"
->Облікових книг</link
->. Якщо буде цей пункт позначено, програма покаже всі рядки операції. Якщо пункт не буде позначено, буде показано лише один рядок. </para>
+>Облікової книги</link
+>. Якщо буде цей пункт позначено, програма покаже всі рядки операції у обліковій книзі. Якщо пункт не буде позначено, буде показано лише один рядок. </action
+></para>
       <para
 >Якщо ви бажаєте бачити параметри лише поточної вибраної операції, для інших операцій слід показувати лише один рядок, ви можете скористатися <link linkend="details.settings.register.lens"
 >Лінзою облікової книги</link
@@ -408,7 +414,32 @@
 ></term>
     <listitem>
       <para
->Сховати узгоджені операції в обліковій книзі.</para>
+><action
+>Сховати узгоджені операції зі списку.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Перегляд</guimenu
+> <guimenuitem
+>Показувати узгоджені баланси</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Показувати узгоджені баланси і останній етап узгодження у бухгалтерській книзі.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -429,7 +460,9 @@
 ></term>
     <listitem>
       <para
->Сховати незадіяні категорії у переглядах.</para>
+><action
+>Сховати незадіяні категорії у переглядах.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -450,15 +483,18 @@
 ></term>
     <listitem>
       <para
->Показати усі рахунки на панелях, зокрема закриті рахунки та рахунки із нульовим балансом. </para>
+><action
+>Показати всі рахунки у переглядах.</action
+></para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.institution"
-><title
+<sect2 id="reference.menus.institution">
+<title
 >Меню «Установа»</title>
+
 <variablelist>
   <varlistentry>
     <term
@@ -471,7 +507,9 @@
 ></term>
     <listitem>
       <para
->Додати нову установу.</para>
+><action
+>Додати нову установу.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -486,7 +524,9 @@
 ></term>
     <listitem>
       <para
->Надає змогу змінити параметри установи.</para>
+><action
+>Надає змогу змінити параметри установи.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -501,15 +541,18 @@
 ></term>
     <listitem>
       <para
->Вилучити запис установи.</para>
+><action
+>Вилучити запис установи.</action
+></para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.account"
-><title
+<sect2 id="reference.menus.account">
+<title
 >Меню «Рахунок»</title>
+
 <variablelist>
   <varlistentry>
     <term
@@ -522,7 +565,9 @@
 ></term>
     <listitem>
       <para
->Додати новий рахунок</para>
+><action
+>Додати новий рахунок</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -537,7 +582,9 @@
 ></term>
     <listitem>
       <para
->Надає змогу змінити рахунок.</para>
+><action
+>Надає змогу змінити рахунок.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -552,7 +599,9 @@
 ></term>
     <listitem>
       <para
->Вилучити рахунок.</para>
+><action
+>Вилучити рахунок.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -567,7 +616,9 @@
 ></term>
     <listitem>
       <para
->Перейти до перегляду облікової книги вибраного рахунку.</para>
+><action
+>Перейти до перегляду облікової книги рахунку.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -588,7 +639,9 @@
 ></term>
     <listitem>
       <para
->Узгодити рахунок за допомогою майстра узгодження.</para>
+><action
+>Узгодити рахунок за допомогою майстра узгодження.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -598,12 +651,14 @@
 ><guimenu
 >Рахунок</guimenu
 > <guimenuitem
->Відкласти</guimenuitem
+>Відкласти узгодження</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Відкласти узгодження рахунку.</para>
+><action
+>Відкласти узгодження рахунку.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -618,22 +673,9 @@
 ></term>
     <listitem>
       <para
->Завершити узгодження рахунку.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Рахунок</guimenu
-> <guimenuitem
->Скасувати</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
->Скасувати узгодження рахунку.</para>
+><action
+>Завершити узгодження рахунку.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -648,22 +690,9 @@
 ></term>
     <listitem>
       <para
->Відкрити звіт щодо операцій на вибраному рахунку.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Рахунок</guimenu
-> <guimenuitem
->Показати діаграму балансу...</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
->Відкрити діаграму балансу на вибраному рахунку протягом року від дати.</para>
+><action
+>Відкрити звіт щодо операцій на рахунку.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -678,7 +707,9 @@
 ></term>
     <listitem>
       <para
->Закрити рахунок.</para>
+><action
+>Закрити рахунок.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -693,7 +724,9 @@
 ></term>
     <listitem>
       <para
->Повторно відкрити раніше закритий рахунок.</para>
+><action
+>Повторно відкрити раніше закритий рахунок.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -703,12 +736,14 @@
 ><guimenu
 >Рахунок</guimenu
 > <guimenuitem
->Вилучити прив’язку рахунку…</guimenuitem
+>Вилучити прив’язку рахунку</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Вилучити прив’язку до рахунку мережевої роботи з банком.</para>
+><action
+>Вилучити прив’язку до рахунку мережевої роботи з банком.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -718,12 +753,14 @@
 ><guimenu
 >Рахунок</guimenu
 > <guimenuitem
->Пов'язати рахунок...</guimenuitem
+>Пов’язати з мережевим рахунком</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Пов’язати рахунок з мережевим рахунком.</para>
+><action
+>Пов’язати рахунок з мережевим рахунком.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -738,7 +775,9 @@
 ></term>
     <listitem>
       <para
->Імпортувати список операцій з мережі банку для вибраного рахунку.</para>
+><action
+>Імпортувати список операцій з мережі банку для певного рахунку.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -753,15 +792,19 @@
 ></term>
     <listitem>
       <para
->Імпортувати операції з мережі банку для всіх пов'язаних рахунків.</para>
+><action
+>Імпортувати операції з мережі банку для всіх рахунків.</action
+></para>
     </listitem>
   </varlistentry>
+  <!--New credit transfer-->
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.category"
-><title
+<sect2 id="reference.menus.category">
+<title
 >Меню «Категорія»</title>
+
 <variablelist>
   <varlistentry>
     <term
@@ -774,7 +817,9 @@
 ></term>
     <listitem>
       <para
->Додати нову категорію.</para>
+><action
+>Додати нову категорію.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -789,7 +834,9 @@
 ></term>
     <listitem>
       <para
->Змінити категорію.</para>
+><action
+>Змінити категорію.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -804,7 +851,9 @@
 ></term>
     <listitem>
       <para
->Вилучити категорію.</para>
+><action
+>Вилучити категорію.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -819,15 +868,18 @@
 ></term>
     <listitem>
       <para
->Перейти до перегляду облікової книги певної категорії.</para>
+><action
+>Перейти до перегляду облікової книги певної категорії.</action
+></para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.transaction"
-><title
+<sect2 id="reference.menus.transaction">
+<title
 >Меню «Операція»</title>
+
 <variablelist>
   <varlistentry>
     <term
@@ -841,117 +893,101 @@
 > <guimenu
 >Операція</guimenu
 ><guimenuitem
->Створити операцію</guimenuitem
+>Створити</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Додати нову операцію.</para>
+><action
+>Додати нову операцію.</action
+></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><shortcut
-> <keycombo
->&Ctrl;<keycap
->E</keycap
-></keycombo
-> </shortcut
-> <guimenu
+><guimenu
 >Операція</guimenu
-><guimenuitem
+> <guimenuitem
 >Змінити</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Змінити операцію.</para>
+><action
+>Змінити операцію.</action
+></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><shortcut
-> <keycombo
->&Ctrl;&Shift;<keycap
->E</keycap
-></keycombo
-> </shortcut
-> <guimenu
+><guimenu
 >Операція</guimenu
-><guimenuitem
+> <guimenuitem
 >Змінити дроблення</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Змінити дроблення операції.</para>
+><action
+>Змінити дроблення операції.</action
+></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><shortcut
-> <keycombo
->&Ctrl;&Del;</keycombo
-> </shortcut
-> <guimenu
+><guimenu
 >Операція</guimenu
-><guimenuitem
+> <guimenuitem
 >Вилучити</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Вилучити операцію.</para>
+><action
+>Вилучити операцію.</action
+></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><shortcut
-> <keycombo
->&Ctrl;<keycap
->D</keycap
-></keycombo
-> </shortcut
-> <guimenu
+><guimenu
 >Операція</guimenu
-><guimenuitem
+> <guimenuitem
 >Здублювати</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Дублювати операцію.</para>
+><action
+>Дублювати операцію.</action
+></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><shortcut
-> <keycombo
->&Ctrl;&Alt;&Shift;<keycap
->Пробіл</keycap
-></keycombo
-> </shortcut
-> <guimenu
+><guimenu
 >Операція</guimenu
 > <guimenuitem
->Позначити операцію як...</guimenuitem
+>Позначити операцію як…</guimenuitem
 ><guimenuitem
 >Не узгоджено</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Змінити стан позначених операцій на «Не узгоджено». </para>
+><action
+>Змінити стан операції на «Неузгоджена».</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -974,7 +1010,9 @@
 ></term>
     <listitem>
       <para
->Змінити стан позначених операцій на «Звірено».</para>
+><action
+>Змінити стан операції на «Звірено».</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -997,7 +1035,9 @@
 ></term>
     <listitem>
       <para
->Змінити стан позначеної операції на «Узгоджена».</para>
+><action
+>Змінити стан операції на «Узгоджена».</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -1007,33 +1047,31 @@
 ><guimenu
 >Операція</guimenu
 > <guimenuitem
->Перейти до «рахунку»</guimenuitem
+>Перейти до рахунку</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Показати інший рахунок операції в обліковій книзі.</para>
+><action
+>Показати інший рахунок операції.</action
+></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><shortcut
-> <keycombo
->&Ctrl;&Shift;<keycap
->P</keycap
-></keycombo
-> </shortcut
-> <guimenu
+><guimenu
 >Операція</guimenu
-><guimenuitem
+> <guimenuitem
 >Перейти до отримувача</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
->Перейти до перегляду отримувачів з фокусуванням пункту отримувача у позначеній операції. </para>
+><action
+>Перейти до перегляду отримувачів з фокусуванням пункту отримувача у позначеній операції.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -1048,7 +1086,9 @@
 ></term>
     <listitem>
       <para
->Створити нову заплановану операцію з використанням параметрів позначеної операції. </para>
+><action
+>Створити нову заплановану операцію.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -1063,7 +1103,9 @@
 ></term>
     <listitem>
       <para
->Встановити відповідність двох операцій. Найпоширенішим випадком використання цього пункту є встановлення відповідності між імпортованими та введеними вручну даними, але можна скористатися ним і в інших випадках. </para>
+><action
+>Встановлює відповідність імпортованих операцій.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -1078,7 +1120,9 @@
 ></term>
     <listitem>
       <para
->Скасовує відповідність операцій, запропоновану &kmymoney; під час встановлення відповідності імпортованих операцій. Зауважте, що цей пункт буде у меню, лише якщо існують записи операцій, для яких встановлено відповідність і які позначено. </para>
+><action
+>Скасовує відповідність операцій, запропоновану &kmymoney; під час встановлення відповідності імпортованих операцій.</action
+> Зауважте, що цей пункт буде у меню, лише якщо існують записи операцій, для яких встановлено відповідність. </para>
     </listitem>
   </varlistentry>
 
@@ -1093,7 +1137,9 @@
 ></term>
     <listitem>
       <para
->Підтвердити запропоноване об’єднання двох записів операцій.</para>
+><action
+>Підтвердити запропоноване об’єднання імпортованих записів операцій.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -1114,7 +1160,9 @@
 ></term>
     <listitem>
       <para
->Вибрати всі операції в обліковій книзі.</para>
+><action
+>Вибрати всі операції у списку.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -1129,7 +1177,9 @@
 ></term>
     <listitem>
       <para
->Надрукувати вміст позначеної операції у показаній обліковій книзі з форматуванням відповідно до вибраного шаблона. Щоб дізнатися більше, зверніться до розділу щодо <link linkend="details.settings.plugins"
+><action
+>Надрукувати вміст позначеної операції у показаній обліковій книзі з форматуванням відповідно до вибраного шаблона.</action
+> Зауважте, що доступ до цього пункту меню буде відкрито, лише якщо у книзі позначено якийсь із записів операцій. Щоб дізнатися більше, зверніться до розділу щодо <link linkend="details.settings.plugins"
 >додатка друку</link
 >. </para>
     </listitem>
@@ -1137,10 +1187,28 @@
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.tools"
-><title
+<sect2 id="reference.menus.tools">
+<title
 >Меню «Інструменти»</title>
+
 <variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Інструменти</guimenu
+> <guimenuitem
+>Редактор профілів QIF...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Змінює профіль QIF, який буде використано для імпортування або експортування файлів QIF.</action
+></para>
+    </listitem>
+  </varlistentry>
+
   <varlistentry>
     <term
 ><menuchoice
@@ -1152,7 +1220,9 @@
 ></term>
     <listitem>
       <para
->Показує список валют, відомих &kmymoney;.</para>
+><action
+>Показує список валют, відомих &kmymoney;.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -1167,7 +1237,9 @@
 ></term>
     <listitem>
       <para
->Показує ціни фондового ринку та курси валют.</para>
+><action
+>Показує ціни фондового ринку та курси валют.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -1182,9 +1254,11 @@
 ></term>
     <listitem>
       <para
+><action
 >Оновлює ціни фондових та валютних ринків на основі даних джерел у мережі за допомогою можливості <link linkend="details.investments.onlinequotes"
 >Інтерактивні курси</link
->. </para>
+>.</action
+></para>
     </listitem>
   </varlistentry>
 
@@ -1199,7 +1273,9 @@
 ></term>
     <listitem>
       <para
->Виконати перевірку вашого файла, спробувати виправити знайдені проблеми, якщо це можливо, і показати звіт щодо результатів. </para>
+><action
+>Виконує перевірку вашого файла і намагається виправити знайдені проблеми, якщо це можливо.</action
+></para>
       <para
 >Перед використанням цього пункту варто створити резервну копію вашого файла.</para>
     </listitem>
@@ -1216,49 +1292,29 @@
 ></term>
     <listitem>
       <para
->Виконує перевірку швидкодії за допомогою вашого файла і показує результати.</para>
+><action
+>Виконує перевірку швидкодії за допомогою вашого файла і показує результати.</action
+></para>
     </listitem>
   </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Інструменти</guimenu
-><guimenuitem
->Створити SQL бази даних</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
->Створити SQL, який потрібна для створення бази даних.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Інструменти</guimenu
-> <guimenuitem
->Таймери налагоджування</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
->Інструмент для розробників.</para>
-    </listitem>
-  </varlistentry>
+  <!--Generate Database SQL
+  Debug Traces
+  Debug Timers-->
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.settings.help"
-><title
+<sect2 id="reference.menus.settings.help">
+<title
 >Меню «Параметри» і «Довідка»</title>
+
 <para
->Меню «Параметри» і «Довідка» у &kmymoney; засновано на тих меню, які описано в <ulink url="help:/fundamentals/menus.html"
->Основах роботи у &kde;</ulink
-> із декількома додатковими пунктами. </para>
+>У &kmymoney; передбачено типові меню <guimenu
+>Параметри</guimenu
+> і <guimenu
+>Довідка</guimenu
+> &kde;, які описано у <ulink url="help:/fundamentals/menus.html"
+>підручнику з основ &kde;</ulink
+>, з одним додатковим пунктом:</para>
 
 <variablelist>
   <varlistentry>
@@ -1272,51 +1328,14 @@
 ></term>
     <listitem>
       <para
+><action
 >Вмикає показ всіх повідомлень, які ви, можливо, вимкнули позначенням пункту <guimenuitem
 >Більше не повідомляти мене про це</guimenuitem
-> у діалоговому вікні.</para>
+> у діалоговому вікні.</action
+></para>
     </listitem>
   </varlistentry>
-
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Параметри</guimenu
-><guimenuitem
->Налаштувати мову...</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
->Типово, мова, яку використовує &kmymoney; залежить від загальносистемних налаштувань розташування або мови. Цей пункт надає змогу змінити цю мову та встановити резервну мову, яка використовується для тексту, який не було перекладено основною мовою. </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><shortcut
-> <keycombo
->&Ctrl;&Alt;<keycap
->,</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Параметри</guimenu
-><guimenuitem
->Налаштувати клавіатурні скорочення...</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
->Надає змогу додавати клавіатурні скорочення для різних дій або вносити до них зміни. </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-  <!-- FIXME: There is some overlap between here and the KBanking Plugin section.
-              Better coordination would be good. -->
     <term
 ><menuchoice
 ><guimenu
@@ -1327,57 +1346,20 @@
 ></term>
     <listitem>
       <para
->Налаштувати параметри інтернет-банкінґу, але лише якщо увімкнено модуль KBanking. Докладніші відомості можна знайти у розділі щодо налаштовування <link linkend="details.settings.plugins.kbanking"
->додаток KBanking</link
->, а також у <ulink url="https://www.gnucash.org/docs/v5/C/gnucash-manual/tools-on-line-banking.html#tool- aqb-modules"
->документації до &gnucash;</ulink
->. </para>
-
-      <para
->Процес налаштовування інтернет-доступу в AqBanking описано у <ulink url="https://wiki.gnucash.org/wiki/De/Onlinebanking-Einrichtungsassistent"
->вікі &gnucash; (лише німецькою)</ulink
->. Цей пункт меню відкриє для вас діалогове вікно, показаного на кроці №3. Процес до кроку №18 є тотожним до процесу у KMyMoney. Після цього ви можете пов'язати рахунок у &kmymoney; за допомогою пункту <guimenu
->Рахунок</guimenu
-> <guisubmenu
->Пов'язати рахунок</guisubmenu
-> — виберіть рахунок із запропонованого списку. Далі просто скористайтеся пунктом <guimenu
->Рахунок</guimenu
-> <guisubmenu
->Оновити рахунок</guisubmenu
-> або, якщо у вас є декілька пов'язаних інтернет-рахунків, <guimenu
->Рахунок</guimenu
-> <guisubmenu
->Оновити всі рахунки</guisubmenu
->. </para>
-
-      <para
->Див. <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
+><action
+>Налаштувати параметри інтернет-банкінгу</action
+>, див. <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
 >як налаштувати інтернет-банкінг</ulink
+>, щоб дізнатися більше. </para>
+      <para
+>Зауважте, що цим пунктом меню можна скористатися, лише якщо увімкнено модуль KBanking. Див. розділ щодо налаштовування <link linkend="details.settings.plugins.kbanking"
+>додатка KBanking</link
 >, щоб дізнатися більше. </para>
     </listitem>
   </varlistentry>
 
-  <varlistentry>
-    <term
-><menuchoice
-><shortcut
-> <keycombo
->&Ctrl;&Alt;<keycap
->I</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Довідка</guimenu
-><guimenuitem
->Знайти операцію...</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
->Показати назви і скорочення усіх дій у &kmymoney;. Натискання пункту призводить до виконання відповідної дії, якщо її увімкнено. </para>
-    </listitem>
-  </varlistentry>
 </variablelist>
 </sect2>
+
 </sect1
 >&details-widgets; </chapter>

@@ -426,6 +426,29 @@
 ><shortcut
 > <keycombo
 >&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Вид</guimenu
+> <guimenuitem
+>Показывать сверенные балансы</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Отображает сверенный баланс и дату последней сверки в реестре.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
 >U</keycap
 ></keycombo
 > </shortcut

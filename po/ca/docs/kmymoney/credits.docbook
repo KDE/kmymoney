@@ -2,22 +2,22 @@
 <chapter id="credits">
 <chapterinfo>
   <date
->1 de desembre de 2024</date>
+>5 d'abril de 2019</date>
   <releaseinfo
->5.2.0</releaseinfo>
+>5.0.4</releaseinfo>
 </chapterinfo>
 
 <title
 >Crèdits</title>
 
 <para
->Copyright del programa &copy; 2000-2024, L'equip de desenvolupament del &kmymoney; </para>
+>Copyright del programa &copy; 2000-2019, L'equip de desenvolupament del &kmymoney; </para>
 
 <para
 >&underGPL; </para>
 
 <para
->Copyright de la documentació &copy; 2000-2024, L'equip de desenvolupament del &kmymoney; </para>
+>Copyright de la documentació &copy; 2000-2019, L'equip de desenvolupament del &kmymoney; </para>
 
 <para
 >Traductor de la documentació: &credits.Antoni.Bella;</para
@@ -27,221 +27,279 @@
 <para
 >&underFDL; </para>
 
-<sect1 id="credits.active"
-><title
+<sect1 id="credits.active">
+<title
 >Desenvolupadors actius</title>
+
 <itemizedlist>
   <listitem>
-    <para
-><emphasis
->&Thomas.Baumgart; &Thomas.Baumgart.mail;</emphasis
->: Gestiona les versions i és mantenidor de facto. Motor intern. Administració del projecte. </para>
+    <formalpara>
+      <title
+>Thomas Baumgart &Thomas.Baumgart.mail;</title>
+      <para
+>Gestiona les versions i és mantenidor de facto. Motor intern. Administració del projecte. </para>
+    </formalpara>
   </listitem>
 
   <listitem>
-    <para
-><emphasis
->&Ralf.Habacker; &Ralf.Habacker.mail;</emphasis
->: Desenvolupador. </para>
+    <formalpara>
+      <title
+>Ralf Habacker &Ralf.Habacker.mail;</title>
+      <para
+>Desenvolupador.</para>
+    </formalpara>
   </listitem>
 </itemizedlist>
 </sect1>
 
-<sect1 id="credits.special"
-><title
+<sect1 id="credits.special">
+<title
 >Un agraïment especial</title>
+
 <itemizedlist>
   <listitem>
-    <para
-><emphasis role="bold"
->&Allan.Anderson;</emphasis
->: Pedaços. Importació/exportació CSV. </para>
+    <formalpara>
+      <title
+>Jack Ostroff &Jack.H.Ostroff.mail;</title>
+      <para
+>Documentació i ajuda als usuaris.</para>
+    </formalpara>
   </listitem>
 
   <listitem>
-    <para
-><emphasis role="bold"
->Marko Käning <email
->mk-lists@email.de</email
-></emphasis
->: Pedaços, empaquetament i KF5-CI per OS-X. </para>
+    <formalpara>
+      <title
+>Kevin Tambascio <email
+>ktambascio@users.sourceforge.net</email
+></title>
+      <para
+>Implementació inicial de les inversions.</para>
+    </formalpara>
   </listitem>
 
   <listitem>
-    <para
-><emphasis role="bold"
->Laurent Montel <email
->montel@kde.org</email
-></emphasis
->: Pedaços. </para>
-  </listitem>
-
-  <listitem>
-    <para
-><emphasis role="bold"
+    <formalpara>
+      <title
 >Javier Campos Morales <email
 >javi_c@users.sourceforge.net</email
-></emphasis
->: Desenvolupador i artista. </para>
+></title>
+      <para
+>Desenvolupador i artista.</para>
+    </formalpara>
   </listitem>
 
   <listitem>
-    <para
-><emphasis role="bold"
->&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</emphasis
->: Documentació i suport d'usuaris. </para>
+    <formalpara>
+      <title
+>Robert Wadley &Robert.Wadley.mail;</title>
+      <para
+>Artista, icones, pantalla de presentació i vista de casa.</para>
+    </formalpara>
   </listitem>
 
   <listitem>
-    <para
-><emphasis role="bold"
+    <formalpara>
+      <title
+>Laurent Montel <email
+>montel@kde.org</email
+></title>
+      <para
+>Pedaços i adaptació al &kde; 4.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
 >Wolfgang Rohdewald <email
 >woro@users.sourceforge.net</email
-></emphasis
->: Pedaços. </para>
+></title>
+      <para
+>Pedaços.</para>
+    </formalpara>
   </listitem>
 
   <listitem>
-    <para
-><emphasis role="bold"
->Kevin Tambascio <email
->tambascio@users.sourceforge.net</email
-></emphasis
->: Suport de la inversió inicial. </para>
+    <formalpara>
+      <title
+>Marko Käning <email
+>mk-lists@email.de</email
+></title>
+      <para
+>Pedaços i empaquetat i KF5-CI per a l'OS X.</para>
+    </formalpara>
   </listitem>
 
   <listitem>
-    <para
-><emphasis role="bold"
->&Robert.Wadley; &Robert.Wadley.mail;</emphasis
->: Artista. Icones, pantalla de presentació, vista principal. </para>
+    <formalpara>
+      <title
+>Allan Anderson ✝&Allan.Anderson.mail;</title>
+      <para
+>Pedaços. Importació/exportació de CSV.</para>
+    </formalpara>
   </listitem>
+
 </itemizedlist>
 </sect1>
 
-<sect1 id="credits.past"
-><title
+<sect1 id="credits.past">
+<title
 >Desenvolupadors inactius que han col·laborat en versions anteriors</title>
+
 <itemizedlist>
   <listitem>
-    <para
-><emphasis
->&Tony.Bloomfield; &Tony.Bloomfield.mail;</emphasis
->: &gnucash; Importador. Suport de base de dades. </para>
+    <formalpara>
+      <title
+>Cristian Oneţ &Cristian.Onet.mail;</title>
+      <para
+>Pedaços i connectors.</para>
+    </formalpara>
   </listitem>
 
   <listitem>
-    <para
-><emphasis
+    <formalpara>
+      <title
+>Cristian Dávid &Christian.David.mail;</title>
+      <para
+>Desenvolupador.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Łukasz Wojniłowicz &Lukasz.Wojnilowicz.mail;</title>
+      <para
+>Desenvolupador.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Michael Edwardes &Michael.T.Edwardes.mail;</title>
+      <para
+>Autor inicial, gran part del codi font inicial. Administrador del projecte. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Alvaro Soliverez &Alvaro.Soliverez.mail;</title>
+      <para
+>Previsió. Informes.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Ace Jones &Ace.Jones.mail;</title>
+      <para
+>Lògica dels informes. Importació OFX. Cotitzacions en línia. Editor de la documentació.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Tony Bloomfield &Tony.Bloomfield.mail;</title>
+      <para
+>Importador del &gnucash;. Implementació de les bases de dades.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Felix Rodriguez <email
+>frodriguez@users.sourceforge.net</email
+></title>
+      <para
+>Administrador del projecte.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
 >John C <email
 >tacoturtle@users.sourceforge.net</email
-></emphasis
->: Desenvolupador. </para>
+></title>
+      <para
+>Desenvolupador.</para>
+    </formalpara>
   </listitem>
  
   <listitem>
-    <para
-><emphasis
->&Christian.David; &Christian.David.mail;</emphasis
->: Desenvolupador. </para>
+    <formalpara>
+      <title
+>Fernando Vilas &Fernando.Vilas.mail;</title>
+      <para
+>Implementació de les bases de dades.</para>
+    </formalpara>
+  </listitem>
+
+
+  <listitem>
+    <formalpara>
+      <title
+>Roger Lum &Roger.Lum.mail;</title>
+      <para
+>Documentació.</para>
+    </formalpara>
   </listitem>
 
   <listitem>
-    <para
-><emphasis
->&Michael.T.Edwardes; &Michael.T.Edwardes.mail;</emphasis
->: Autor inicial, gran part del codi font inicial. Administrador del projecte. </para>
+    <formalpara>
+      <title
+>Darin Strait &Darin.Strait.mail;</title>
+      <para
+>Documentació.</para>
+    </formalpara>
   </listitem>
 
   <listitem>
-    <para
-><emphasis
+    <formalpara>
+      <title
+>Colin Wright &Colin.Wright.mail;</title>
+      <para
+>Pedaços i documentació.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
 >Bernd Gonsior <email
 >bernd.gonsior@googlemail.com</email
-></emphasis
->: Informes. </para>
+></title>
+      <para
+>Informes. Migració al &kde; 4 i les &Qt;4.</para>
+    </formalpara>
   </listitem>
 
   <listitem>
-    <para
-><emphasis
->&Ace.Jones; &Ace.Jones.mail;</emphasis
->: Lògica dels informes. Importació OFX. Cotitzacions en línia. Editor de la documentació. </para>
-  </listitem>
-
-  <listitem>
-    <para
-><emphasis
->&Roger.Lum; &Roger.Lum.mail;</emphasis
->: Documentació. </para>
-  </listitem>
-
-  <listitem>
-    <para
-><emphasis
+    <formalpara>
+      <title
 >Ian Neal <email
 >iann_bugzilla@blueyonder.co.uk</email
-></emphasis
->: Operacions planificades i calendaris. </para>
+></title>
+      <para
+>Operacions planificades i calendaris.</para>
+    </formalpara>
   </listitem>
 
   <listitem>
-    <para
-><emphasis
->&Cristian.Onet; &Cristian.Onet.mail;</emphasis
->: Pedaços i connectors. </para>
+    <formalpara>
+      <title
+>Migració al &kde; 4 i les &Qt;4</title>
+      <para
+>Aquest va ser un esforç massiu, i hi van contribuir molts desenvolupadors. Disculpes a qualsevol que oblidem anomenar explícitament.</para>
+    </formalpara>
   </listitem>
 
-  <listitem>
-    <para
-><emphasis
->Felix Rodriguez <email
->frodriguez@users.sourceforge.net</email
-></emphasis
->: Administrador del projecte. </para>
-  </listitem>
-
-  <listitem>
-    <para
-><emphasis
->&Alvaro.Soliverez; &Alvaro.Soliverez.mail;</emphasis
->: Previsió. Informes. </para>
-  </listitem>
-
-  <listitem>
-    <para
-><emphasis
->&Darin.Strait; &Darin.Strait.mail;</emphasis
->: Documentació. </para>
-  </listitem>
-
-  <listitem>
-    <para
-><emphasis
->&Fernando.Vilas; &Fernando.Vilas.mail;</emphasis
->: Suport de base de dades. </para>
-  </listitem>
-
-  <listitem>
-    <para
-><emphasis
->&Lukasz.Wojnilowicz; &Lukasz.Wojnilowicz.mail;</emphasis
->: Desenvolupador. </para>
-  </listitem>
-
-  <listitem>
-    <para
-><emphasis
->&Colin.Wright; &Colin.Wright.mail;</emphasis
->: Pedaços i documentació. </para>
-  </listitem>
-
-  <listitem>
-    <para
-><emphasis
->&Dawid.Wrobel; &Dawid.Wrobel.mail;</emphasis
->: Pedaços i integració de Woob. </para>
-  </listitem>
 </itemizedlist>
 
 </sect1>

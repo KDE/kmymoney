@@ -1,30 +1,30 @@
 # translation of kmymoney.po to Slovak
-# Roman Paholik <wizzardsk@gmail.com>, 2014, 2015, 2016.
+# SPDX-FileCopyrightText: 2014, 2015, 2016, 2019, 2022, 2023, 2024 Roman Paholik <wizzardsk@gmail.com>
 # Matej Mrenica <matejm98mthw@gmail.com>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-18 02:01+0000\n"
-"PO-Revision-Date: 2020-01-02 16:30+0100\n"
-"Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
-"Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
+"POT-Creation-Date: 2025-05-23 03:30+0000\n"
+"PO-Revision-Date: 2024-11-10 18:13+0100\n"
+"Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
+"Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 19.12.0\n"
+"X-Generator: Lokalize 24.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Roman Paholík,Matej Mrenica"
+msgstr "Roman Paholík"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "wizzardsk@gmail.com,matejm98mthw@gmail.com"
+msgstr "wizzardsk@gmail.com"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:132
 #, kde-format
@@ -310,10 +310,10 @@ msgstr "Harmonogram nájdený"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
 #, fuzzy, kde-format
-#| msgid "Create a new asset account"
+#| msgid "Created on"
 msgctxt "Create undo action"
 msgid "Create account"
-msgstr "Vytvoriť nový účet aktív"
+msgstr "Vytvorené "
 
 #: kmymoney/dialogs/accountcreator.cpp:76
 #, fuzzy, kde-format
@@ -566,8 +566,7 @@ msgstr "ID"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_currencyList)
 #: kmymoney/dialogs/kavailablecurrencydlg.ui:52
-#, fuzzy, kde-format
-#| msgid "Symbol"
+#, kde-format
 msgctxt "@title currency symbol column"
 msgid "Symbol"
 msgstr "Symbol"
@@ -1182,6 +1181,7 @@ msgstr "Vybrať ako základnú menu"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:504
 #, fuzzy, kde-format
+#| msgctxt "Menu header"
 #| msgid "Currency options"
 msgctxt "@title:menu"
 msgid "Currency options"
@@ -1194,8 +1194,7 @@ msgstr "Nie je možné vymazať menu %1. %2"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KCurrencyEditDlg)
 #: kmymoney/dialogs/kcurrencyeditdlg.ui:14
-#, fuzzy, kde-format
-#| msgid "Currencies"
+#, kde-format
 msgctxt "@title:window"
 msgid "Currencies"
 msgstr "Meny"
@@ -1217,24 +1216,21 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_currencyList)
 #: kmymoney/dialogs/kcurrencyeditdlg.ui:52
-#, fuzzy, kde-format
-#| msgid "Symbol"
+#, kde-format
 msgctxt "@title:column currency symbol"
 msgid "Symbol"
 msgstr "Symbol"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_removeCurrencyButton)
 #: kmymoney/dialogs/kcurrencyeditdlg.ui:62
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgctxt "@action:button Remove currency"
 msgid "Remove"
 msgstr "Odstrániť"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_addCurrencyButton)
 #: kmymoney/dialogs/kcurrencyeditdlg.ui:73
-#, fuzzy, kde-format
-#| msgid "Add"
+#, kde-format
 msgctxt "@action:button Add currency from existing list"
 msgid "Add"
 msgstr "Pridať"
@@ -1265,8 +1261,7 @@ msgstr "Zavrieť"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_selectBaseCurrencyButton)
 #: kmymoney/dialogs/kcurrencyeditdlg.ui:109
-#, fuzzy, kde-format
-#| msgid "Select as base currency"
+#, kde-format
 msgctxt "@action:button"
 msgid "Select as base currency"
 msgstr "Vybrať ako základnú menu"
@@ -1287,9 +1282,7 @@ msgstr "Editor mien"
 
 #. i18n: ectx: property (text), widget (QLabel, lblIsoCode)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:25
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "ISO Code"
+#, kde-format
 msgid "ISO Code"
 msgstr "ISO kód"
 
@@ -1441,9 +1434,9 @@ msgstr "Nikdy"
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:140
 #: kmymoney/mymoney/mymoneysecurity.cpp:251
-#, kde-format
+#, fuzzy, kde-format
 msgid "Floor"
-msgstr ""
+msgstr "Poschodie %1"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:145
@@ -1464,7 +1457,7 @@ msgstr ""
 #: kmymoney/mymoney/mymoneysecurity.cpp:257
 #, kde-format
 msgid "Promote"
-msgstr ""
+msgstr "Postúpiť"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:160
@@ -1483,14 +1476,9 @@ msgstr ""
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:170
 #: kmymoney/mymoney/mymoneysecurity.cpp:263
-#, fuzzy, kde-format
-#| msgid ""
-#| "Found:\n"
-#| "\n"
+#, kde-format
 msgid "Round"
-msgstr ""
-"Nájdené:\n"
-"\n"
+msgstr "Okrúhle"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KEditEquityEntry)
 #: kmymoney/dialogs/keditequityentry.ui:17
@@ -1666,7 +1654,7 @@ msgstr "%1 jednotiek v %2"
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:384
 #, kde-format
 msgid "[No identifier]"
-msgstr "[Žiadny identifikátor]"
+msgstr "[žiadny identifikátor]"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:500
 #, fuzzy, kde-format
@@ -1760,8 +1748,7 @@ msgstr "Aktualizovať akciové a menové ceny"
 
 #. i18n: ectx: property (text), widget (QLabel, m_fromLabel)
 #: kmymoney/dialogs/kequitypriceupdatedlg.ui:76
-#, fuzzy, kde-format
-#| msgid "From"
+#, kde-format
 msgctxt "@label:chooser Date"
 msgid "From"
 msgstr "Od"
@@ -2011,6 +1998,7 @@ msgstr "Vymazať cenu..."
 
 #: kmymoney/dialogs/kmymoneypricedlg.cpp:357
 #, fuzzy, kde-format
+#| msgctxt "Menu header"
 #| msgid "Price options"
 msgctxt "@title:menu"
 msgid "Price options"
@@ -2164,7 +2152,7 @@ msgstr "Výdaj"
 msgid ""
 "Option has been disabled because there are transactions assigned to this "
 "account"
-msgstr ""
+msgstr "Voľba bola zakázaná, pretože sú transakcie pridelené k tomuto účtu"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:608
 #, kde-format
@@ -2172,6 +2160,8 @@ msgid ""
 "Option has been disabled because there is another account flagged to be an "
 "opening balance account for this currency"
 msgstr ""
+"Voľba bola zakázaná, pretože je iný účet označený ako počiatočný stav pre "
+"túto menu"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:628
 #, fuzzy, kde-format
@@ -2243,10 +2233,10 @@ msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:912
 #, fuzzy, kde-format
-#| msgid "Payment accounts"
+#| msgid "Hide closed accounts"
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
-msgstr "Platby účtov"
+msgstr "Skryť uzatvorené účty"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:920
 #, fuzzy, kde-format
@@ -2455,19 +2445,19 @@ msgstr "Cenová položka"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_qcheckboxOpeningBalance)
 #: kmymoney/dialogs/knewaccountdlg.ui:278
-#, fuzzy, kde-format
-#| msgid "Use this to clear all splits of this transaction"
+#, kde-format
 msgid ""
 "<html><head/><body><p>Flag this account to be an opening balance account</"
 "p></body></html>"
-msgstr "Použiť na vyčistenie všetkých rozdelení tejto transakcie"
+msgstr ""
+"<html><head/><body><p>Označiť tento účet ako počiatočný stav účtu</p></"
+"body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxOpeningBalance)
 #: kmymoney/dialogs/knewaccountdlg.ui:281
-#, fuzzy, kde-format
-#| msgid "Opening Balance text"
+#, kde-format
 msgid "Opening Balance Account"
-msgstr "Text počiatočného stavu"
+msgstr "Počiatočný stav účtu"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1_3)
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
@@ -2503,7 +2493,7 @@ msgstr "Číslo:"
 #: kmymoney/dialogs/knewinstitutiondlg.ui:78
 #, kde-format
 msgid "Website"
-msgstr "Webstránka"
+msgstr "Webová stránka"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_4)
 #. i18n: ectx: property (placeholderText), widget (KBicEdit, bicEdit)
@@ -2629,8 +2619,7 @@ msgstr "Hrubá suma"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_netAmount)
 #: kmymoney/dialogs/knewaccountdlg.ui:818
-#, fuzzy, kde-format
-#| msgid "Net amount"
+#, kde-format
 msgid "Net a&mount"
 msgstr "Čistá suma"
 
@@ -2692,6 +2681,7 @@ msgstr "Vytvoriť kategóriu"
 #: kmymoney/dialogs/knewaccountdlg.ui:925
 #: kmymoney/plugins/views/budget/budgetview.rc:4
 #, fuzzy, kde-format
+#| msgctxt "Menu header"
 #| msgid "Budget options"
 msgid "Budget options"
 msgstr "Voľby rozpočtu"
@@ -2907,7 +2897,7 @@ msgstr "Uložiť úložisko ako..."
 #: kmymoney/dialogs/ksaveasquestion.ui:23
 #, kde-format
 msgid "Choose XML if unsure."
-msgstr ""
+msgstr "Vyberte XML ak si nie ste istý."
 
 #. i18n: ectx: property (html), widget (QTextBrowser, textBrowser)
 #: kmymoney/dialogs/ksaveasquestion.ui:52
@@ -2969,10 +2959,9 @@ msgstr "&Distribuovať rozdiel %1 medzi všetky rozdelenia."
 
 #. i18n: ectx: property (text), widget (QRadioButton, leaveBtn)
 #: kmymoney/dialogs/ksplitcorrectiondlg.ui:91
-#, fuzzy, no-c-format, kde-format
-#| msgid "&Leave %1 unassigned."
+#, no-c-format, kde-format
 msgid "Leave %1 unassigned."
-msgstr "&Ponechať %1 nepriradené."
+msgstr "Ponechať %1 nepriradené."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTagReassignDlg)
 #: kmymoney/dialogs/ktagreassigndlg.ui:14
@@ -3015,8 +3004,7 @@ msgstr "Možnosti triedenia"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_useDefault)
 #: kmymoney/dialogs/ktransactionsortoptionsdlg.ui:23
-#, fuzzy, kde-format
-#| msgid "Use default"
+#, kde-format
 msgid "Use default"
 msgstr "Použiť predvolené"
 
@@ -3159,10 +3147,9 @@ msgid "Header font"
 msgstr "Písmo hlavičky"
 
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:96
-#, fuzzy, kde-format
-#| msgid "Choose Style"
+#, kde-format
 msgid "Choose file path"
-msgstr "Vyberte štýl"
+msgstr "Vyberte cestu súboru"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsGeneral)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:14
@@ -3517,7 +3504,7 @@ msgstr "Záznam"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:576
 #, kde-format
 msgid "Log path"
-msgstr ""
+msgstr "Cesta záznamu"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:624
@@ -3526,24 +3513,24 @@ msgid ""
 "On choosing a log file path please keep in mind that log files may contain "
 "sensitive data (e.g. passwords in clear-text etc)."
 msgstr ""
+"Pri výbere cesty súboru záznamu majte na pamäti, že súbory záznamu môžu "
+"obsahovať citlivé údaje (heslá v čistom formáte a pod.)."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_logImportedStatements)
 #. i18n: ectx: label, entry (logImportedStatements), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:634
 #: kmymoney/settings/kmymoney.kcfg:312
-#, fuzzy, kde-format
-#| msgid "Failed to import all statements."
+#, kde-format
 msgid "Log imported statements"
-msgstr "Zlyhal import všetkých výpisov."
+msgstr "Záznam importovaných údajov"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_logOfxTransactions)
 #. i18n: ectx: label, entry (logOfxTransactions), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:641
 #: kmymoney/settings/kmymoney.kcfg:315
-#, fuzzy, kde-format
-#| msgid "Fix transactions"
+#, kde-format
 msgid "Log OFX transactions"
-msgstr "Opraviť transakcie"
+msgstr "Zaznamenať OFX transakcie"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsHome)
 #: kmymoney/dialogs/settings/ksettingshome.ui:14
@@ -3788,10 +3775,9 @@ msgstr "Formát dátumu"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:55
-#, fuzzy, kde-format
-#| msgid "Bank entry:"
+#, kde-format
 msgid "Identifier"
-msgstr "Žiadny identifikátor"
+msgstr "Identifikátor"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_editIdentifier)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:68
@@ -4033,12 +4019,14 @@ msgid ""
 "If a planned transaction is overdue, today's date is used by default as the "
 "posting date. With this option, the originally planned date is used instead."
 msgstr ""
+"Ak je plánovaná transakcia po termíne, dnešný dátum sa použije ako dátum "
+"odoslania. S touto voľbou sa namiesto toho použije plánovaný dátum."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowPlannedScheduleDates)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:50
 #, kde-format
 msgid "Display overdue schedules with planned date"
-msgstr ""
+msgstr "Zobraziť plány po termíne s plánovaným dátumom"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:57
@@ -4079,9 +4067,9 @@ msgstr "Použiť šošovku účtovnej knihy"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowAllSplits)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:86
 #, fuzzy, kde-format
-#| msgid "Show a grid in the register"
+#| msgid "Show all register entries in full detail"
 msgid "Show all split details in ledger"
-msgstr "Ukazovať mriežku v registry"
+msgstr "Ukazovať všetky položky registra v úplnom detaile"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:96
@@ -4600,7 +4588,7 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgid "(c) 2000-2019 The KMyMoney development team"
 msgid "(c) 2000-2025 The KMyMoney development team"
-msgstr "(c) 2000-2019 Vývojový tím KMyMoney"
+msgstr "(c) 2000-2017 Vývojový tím KMyMoney"
 
 #: kmymoney/kcreditswindow.cpp:49
 #, kde-format
@@ -4889,7 +4877,7 @@ msgstr "Šablóna účtu..."
 #: kmymoney/kmymoney.cpp:1376
 #, kde-format
 msgid "Personal Data..."
-msgstr "Osobné Dáta."
+msgstr "Osobné údaje..."
 
 #: kmymoney/kmymoney.cpp:1378
 #, kde-format
@@ -5378,9 +5366,9 @@ msgstr "&Nový výkaz"
 
 #: kmymoney/kmymoney.cpp:1502
 #, fuzzy, kde-format
-#| msgid "&New report"
+#| msgid "Copy memo"
 msgid "Copy report"
-msgstr "&Nový výkaz"
+msgstr "Kopírovať poznámku"
 
 #: kmymoney/kmymoney.cpp:1503
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:215
@@ -5416,9 +5404,9 @@ msgstr "Prepnúť"
 
 #: kmymoney/kmymoney.cpp:1508
 #, fuzzy, kde-format
-#| msgid "Edit credit transfer"
+#| msgid "Entry order"
 msgid "Edit tab order"
-msgstr "Upraviť kreditný prevod"
+msgstr "Poradie položiek"
 
 #: kmymoney/kmymoney.cpp:1511
 #, kde-format
@@ -5924,15 +5912,12 @@ msgid "Open a file."
 msgstr "Otvoriť súbor."
 
 #: kmymoney/kmymoney.cpp:4240
-#, fuzzy, kde-format
-#| msgid "Could not load responsible plugin to view this task."
+#, kde-format
 msgid "Couldn't find any plugin for opening storage."
-msgstr "Nemôžem načítať zodpovedný plugin na zobrazenie tejto úlohy."
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:4244
-#, fuzzy, kde-format
-#| msgctxt "All files (Filefilter)"
-#| msgid "All files"
+#, kde-format
 msgid "All files (*)"
 msgstr "Všetky súbory (*)"
 
@@ -6439,7 +6424,7 @@ msgstr "Akýkoľvek stav"
 
 #: kmymoney/models/accountsproxymodel.cpp:619
 #, fuzzy, kde-format
-#| msgctxt "@item Show only unused payees"
+#| msgctxt "Unused column"
 #| msgid "Unused"
 msgctxt "Account filter"
 msgid "Unused"
@@ -6457,8 +6442,7 @@ msgstr "Uzavreté"
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:82
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:60
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:77
-#, fuzzy, kde-format
-#| msgid "Symbol"
+#, kde-format
 msgctxt "@title stock symbol column"
 msgid "Symbol"
 msgstr "Symbol"
@@ -6515,9 +6499,7 @@ msgid "Erroneous"
 msgstr "Chybný"
 
 #: kmymoney/models/ledgerfilter.cpp:76
-#, fuzzy, kde-format
-#| msgctxt "Scheduled method"
-#| msgid "Scheduled"
+#, kde-format
 msgid "Scheduled"
 msgstr "Naplánované"
 
@@ -6612,7 +6594,7 @@ msgstr "Zhodné"
 
 #: kmymoney/models/statementmodel.cpp:105
 #, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
+#| msgctxt "To duplicate a split"
 #| msgid "Duplicate"
 msgctxt "@title:column Shows number of duplicate transactions"
 msgid "Duplicates"
@@ -6742,8 +6724,7 @@ msgid "Brokerage"
 msgstr "Maklérstvo"
 
 #: kmymoney/mymoney/mymoneyaccount.cpp:540
-#, fuzzy, kde-format
-#| msgid "Checking"
+#, kde-format
 msgctxt "Account type"
 msgid "Checking"
 msgstr "Kontrola"
@@ -6755,10 +6736,11 @@ msgid "Savings"
 msgstr "Úspory"
 
 #: kmymoney/mymoney/mymoneyaccount.cpp:544
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Credit Card"
 msgctxt "Account type"
 msgid "Credit Card"
-msgstr "kreditná karta"
+msgstr "Platobná karta"
 
 #: kmymoney/mymoney/mymoneyaccount.cpp:546
 #, kde-format
@@ -6773,18 +6755,16 @@ msgid "Loan"
 msgstr "Pôžička"
 
 #: kmymoney/mymoney/mymoneyaccount.cpp:550
-#, fuzzy, kde-format
-#| msgid "Certificate of Deposit"
+#, kde-format
 msgctxt "Account type"
 msgid "Certificate of Deposit"
 msgstr "Depozitný certifikát"
 
 #: kmymoney/mymoney/mymoneyaccount.cpp:552
-#, fuzzy, kde-format
-#| msgid "Investment"
+#, kde-format
 msgctxt "Account type"
 msgid "Investment"
-msgstr "Investovanie"
+msgstr "Investícia"
 
 #: kmymoney/mymoney/mymoneyaccount.cpp:554
 #, kde-format
@@ -6793,15 +6773,13 @@ msgid "Money Market"
 msgstr "Peňažný trh"
 
 #: kmymoney/mymoney/mymoneyaccount.cpp:556
-#, fuzzy, kde-format
-#| msgid "Asset"
+#, kde-format
 msgctxt "Account type"
 msgid "Asset"
 msgstr "Aktíva"
 
 #: kmymoney/mymoney/mymoneyaccount.cpp:558
-#, fuzzy, kde-format
-#| msgid "Liability"
+#, kde-format
 msgctxt "Account type"
 msgid "Liability"
 msgstr "Pasíva"
@@ -6825,8 +6803,7 @@ msgid "Expense"
 msgstr "Výdaj"
 
 #: kmymoney/mymoney/mymoneyaccount.cpp:566
-#, fuzzy, kde-format
-#| msgid "Investment Loan"
+#, kde-format
 msgctxt "Account type"
 msgid "Investment Loan"
 msgstr "Investičná pôžička"
@@ -6844,7 +6821,8 @@ msgid "Equity"
 msgstr "Majetok"
 
 #: kmymoney/mymoney/mymoneyaccount.cpp:572
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unknown"
 msgctxt "Account type"
 msgid "Unknown"
 msgstr "Neznáme"
@@ -7359,10 +7337,9 @@ msgid "Lithuanian Litas"
 msgstr "Litovský litas"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3958
-#, fuzzy, kde-format
-#| msgid "Belarusian Ruble"
+#, kde-format
 msgid "Belarusian Ruble (old)"
-msgstr "Bieloruský rubeľ"
+msgstr "Bieloruský rubeľ (starý)"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3962
 #, fuzzy, kde-format
@@ -7406,8 +7383,7 @@ msgid "Andorran Peseta"
 msgstr "Andorská peseta"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3983
-#, fuzzy, kde-format
-#| msgid "Angolan New Kwanza"
+#, kde-format
 msgid "Angolan Kwanza"
 msgstr "Angolská kwanza"
 
@@ -7577,10 +7553,9 @@ msgid "Cuban Peso"
 msgstr "Kubánske peso"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:4018
-#, fuzzy, kde-format
-#| msgid "Bosnian Convertible Mark"
+#, kde-format
 msgid "Cuban Convertible Peso"
-msgstr "Bosnianska konvertibilná marka"
+msgstr "Kubánske konvertibilné peso"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:4019
 #, kde-format
@@ -8474,10 +8449,9 @@ msgstr "Zmeniť dátum v nasledujúcom dni spracovania"
 #. i18n: ectx: property (text), item, widget (KComboBox, weekendOptionCombo)
 #: kmymoney/mymoney/mymoneyschedule.cpp:1074
 #: kmymoney/views/keditscheduledlg.ui:159
-#, fuzzy, kde-format
-#| msgid "Do not show unused categories"
+#, kde-format
 msgid "Do not change the date"
-msgstr "Neukazovať nepoužité kategórie"
+msgstr "Nemeniť tento dátum"
 
 #: kmymoney/mymoney/mymoneysecurity.cpp:231
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:31
@@ -8488,16 +8462,14 @@ msgstr "Akcia"
 
 #: kmymoney/mymoney/mymoneysecurity.cpp:233
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:32
-#, fuzzy, kde-format
-#| msgid "Mutual Fund"
+#, kde-format
 msgctxt "Security type"
 msgid "Mutual Fund"
 msgstr "Podielový fond"
 
 #: kmymoney/mymoney/mymoneysecurity.cpp:235
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:33
-#, fuzzy, kde-format
-#| msgid "Bond"
+#, kde-format
 msgctxt "Security type"
 msgid "Bond"
 msgstr "Bond"
@@ -8601,15 +8573,13 @@ msgid "Could not load responsible plugin to view this task."
 msgstr "Nemôžem načítať zodpovedný plugin na zobrazenie tejto úlohy."
 
 #: kmymoney/mymoney/splitmodel.cpp:38
-#, fuzzy, kde-format
-#| msgid "Category"
+#, kde-format
 msgctxt "Split header"
 msgid "Category"
 msgstr "Kategória"
 
 #: kmymoney/mymoney/splitmodel.cpp:39
-#, fuzzy, kde-format
-#| msgid "Memo"
+#, kde-format
 msgctxt "Split header"
 msgid "Memo"
 msgstr "Poznámka"
@@ -8622,15 +8592,13 @@ msgid "Tags"
 msgstr "Značky"
 
 #: kmymoney/mymoney/splitmodel.cpp:41
-#, fuzzy, kde-format
-#| msgid "Payment"
+#, kde-format
 msgctxt "Split header"
 msgid "Payment"
 msgstr "Platba"
 
 #: kmymoney/mymoney/splitmodel.cpp:42
-#, fuzzy, kde-format
-#| msgid "Deposit"
+#, kde-format
 msgctxt "Split header"
 msgid "Deposit"
 msgstr "Vklad"
@@ -8699,8 +8667,7 @@ msgid "Frozen"
 msgstr "Zmrazené"
 
 #: kmymoney/mymoney/statusmodel.cpp:68
-#, fuzzy, kde-format
-#| msgid "Status"
+#, kde-format
 msgctxt "Reconciliation state"
 msgid "Status"
 msgstr "Stav"
@@ -8830,8 +8797,7 @@ msgid "SWIFT/BIC"
 msgstr ""
 
 #: kmymoney/mymoney/storage/budgetsmodel.cpp:71
-#, fuzzy, kde-format
-#| msgid "Year"
+#, kde-format
 msgctxt "Budget year"
 msgid "Year"
 msgstr "Rok"
@@ -8845,7 +8811,7 @@ msgstr "Suma zadaná"
 #: kmymoney/mymoney/storage/institutionsmodel.cpp:233
 #, kde-format
 msgid "Accounts with no institution assigned"
-msgstr "Účty so žiadnou priradenou inštitúciou"
+msgstr "Účty bez priradenej inštitúcie"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:57
 #, fuzzy, kde-format
@@ -9293,50 +9259,40 @@ msgid "Name"
 msgstr "Názov"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:153
-#, fuzzy, kde-format
-#| msgid "Bills"
+#, kde-format
 msgctxt "Schedule group"
 msgid "Bills"
 msgstr "Účtenky"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:154
-#, fuzzy, kde-format
-#| msgid "Deposits"
+#, kde-format
 msgctxt "Schedule group"
 msgid "Deposits"
 msgstr "Vklady"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:155
-#, fuzzy, kde-format
-#| msgid "Transfers"
+#, kde-format
 msgctxt "Schedule group"
 msgid "Transfers"
 msgstr "Prevody"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:156
-#, fuzzy, kde-format
-#| msgid "Loans"
+#, kde-format
 msgctxt "Schedule group"
 msgid "Loans"
 msgstr "Pôžičky"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:181
-#, fuzzy
-#| msgid "Type/Name"
 msgctxt "Schedule header"
 msgid "Type/Name"
 msgstr "Typ/Meno"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:182
-#, fuzzy
-#| msgid "Account"
 msgctxt "Schedule header"
 msgid "Account"
 msgstr "Účet"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:183
-#, fuzzy
-#| msgid "Payee"
 msgctxt "Schedule header"
 msgid "Payee"
 msgstr "Príjemca"
@@ -9346,25 +9302,19 @@ msgstr "Príjemca"
 #| msgid "Amount"
 msgctxt "Schedule header"
 msgid "Amount"
-msgstr "Množstvo"
+msgstr "Suma"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:185
-#, fuzzy
-#| msgid "Next Due Date"
 msgctxt "Schedule header"
 msgid "Next Due Date"
 msgstr "Ďalší dátum splatnosti"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:186
-#, fuzzy
-#| msgid "Frequency"
 msgctxt "Schedule header"
 msgid "Frequency"
 msgstr "Frekvencia"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:187
-#, fuzzy
-#| msgid "Payment Method"
 msgctxt "Schedule header"
 msgid "Payment Method"
 msgstr "Spôsob platby"
@@ -9498,9 +9448,9 @@ msgstr "Tlačiť šek"
 #: kmymoney/plugins/checkprinting/checkprintingsettings.kcfg:10
 #: kmymoney/plugins/checkprinting/checkprintingsettingsdecl.ui:36
 #, fuzzy, kde-format
-#| msgid "Use system colors"
+#| msgid "Use custom colors"
 msgid "Use custom check template"
-msgstr "Použiť systémové farby"
+msgstr "Použiť vlastné farby"
 
 #. i18n: ectx: label, entry (checkTemplateFile), group (General)
 #: kmymoney/plugins/checkprinting/checkprintingsettings.kcfg:14
@@ -9523,10 +9473,10 @@ msgid "Checking settings"
 msgstr "Nastavenie presnosti"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@item the number 0"
 msgid "Zero"
-msgstr ""
+msgstr "Nula"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, fuzzy, kde-format
@@ -9534,42 +9484,38 @@ msgstr ""
 #| msgid "Once"
 msgctxt "@item the number 1"
 msgid "One"
-msgstr "Raz"
+msgstr "Jedna"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, fuzzy, kde-format
 #| msgid "To"
 msgctxt "@item the number 2"
 msgid "Two"
-msgstr "Do"
+msgstr "Dva"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
-#, fuzzy, kde-format
-#| msgctxt "@item the number 3"
-#| msgid "three"
+#, kde-format
 msgctxt "@item the number 3"
 msgid "Three"
-msgstr "tri"
+msgstr "Tri"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 4"
 msgid "Four"
-msgstr ""
+msgstr "Štyri"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 5"
 msgid "Five"
-msgstr ""
+msgstr "Päť"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
-#, fuzzy, kde-format
-#| msgctxt "@item the number 6"
-#| msgid "six"
+#, kde-format
 msgctxt "@item the number 6"
 msgid "Six"
-msgstr "šesť"
+msgstr "Šesť"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, fuzzy, kde-format
@@ -9577,7 +9523,7 @@ msgstr "šesť"
 #| msgid "seven"
 msgctxt "@item the number 7"
 msgid "Seven"
-msgstr "sedem"
+msgstr "Sedem"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, fuzzy, kde-format
@@ -9585,13 +9531,13 @@ msgstr "sedem"
 #| msgid "eight"
 msgctxt "@item the number 8"
 msgid "Eight"
-msgstr "osem"
+msgstr "Osem"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@item the number 9"
 msgid "Nine"
-msgstr ""
+msgstr "Deviatka"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, fuzzy, kde-format
@@ -9599,55 +9545,43 @@ msgstr ""
 #| msgid "ten"
 msgctxt "@item the number 10"
 msgid "Ten"
-msgstr "desať"
+msgstr "Desať"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
-#, fuzzy, kde-format
-#| msgctxt "@item the number 11"
-#| msgid "eleven"
+#, kde-format
 msgctxt "@item the number 11"
 msgid "Eleven"
-msgstr "jedenásť"
+msgstr "Jedenásť"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
-#, fuzzy, kde-format
-#| msgctxt "@item the number 12"
-#| msgid "twelve"
+#, kde-format
 msgctxt "@item the number 12"
 msgid "Twelve"
-msgstr "dvanásť"
+msgstr "Dvanásť"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
-#, fuzzy, kde-format
-#| msgctxt "@item the number 13"
-#| msgid "thirteen"
+#, kde-format
 msgctxt "@item the number 13"
 msgid "Thirteen"
-msgstr "trinásť"
+msgstr "Trinásť"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
-#, fuzzy, kde-format
-#| msgctxt "@item the number 14"
-#| msgid "fourteen"
+#, kde-format
 msgctxt "@item the number 14"
 msgid "Fourteen"
-msgstr "štrnásť"
+msgstr "Štrnásť"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
-#, fuzzy, kde-format
-#| msgctxt "@item the number 15"
-#| msgid "fifteen"
+#, kde-format
 msgctxt "@item the number 15"
 msgid "Fifteen"
-msgstr "pätnásť"
+msgstr "Pätnásť"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
-#, fuzzy, kde-format
-#| msgctxt "@item the number 16"
-#| msgid "sixteen"
+#, kde-format
 msgctxt "@item the number 16"
 msgid "Sixteen"
-msgstr "šestnásť"
+msgstr "Šestnásť"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, fuzzy, kde-format
@@ -9703,7 +9637,7 @@ msgstr "štyridsať"
 #| msgid "fifty"
 msgctxt "@item the number 50"
 msgid "Fifty"
-msgstr "päťdesiae"
+msgstr "päťdesiat"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:17
 #, fuzzy, kde-format
@@ -10036,11 +9970,9 @@ msgid "Account Type:"
 msgstr "Typ účtu:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "Header for AqBanking account list"
-#| msgid "Account Name"
+#, kde-format
 msgid "Account Name:"
-msgstr "Meno účtu"
+msgstr "Názov účt&u:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:107
 #: kmymoney/plugins/csv/export/csvwriter.cpp:116
@@ -10059,6 +9991,7 @@ msgstr "Bezpečnosť"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:108
 #, fuzzy, kde-format
+#| msgctxt "@title currency symbol column"
 #| msgid "Symbol"
 msgctxt "@title:column header in CSV export"
 msgid "Symbol"
@@ -10404,10 +10337,9 @@ msgstr "Vybrať stĺpec obsahujúci pole pre poznámku."
 
 #. i18n: ectx: property (text), widget (QLabel, m_currentMemoColumns)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:305
-#, fuzzy, kde-format
-#| msgid "Select none"
+#, kde-format
 msgid "Selection"
-msgstr "Nevybrať nič"
+msgstr "Výber"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_memoColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:315
@@ -10460,9 +10392,11 @@ msgstr "Vybrať stĺpec obsahujúci pole pre sumu."
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_amountColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:438
 #, fuzzy, kde-format
-#| msgid "Clear selections"
+#| msgctxt ""
+#| "The user selected credit transfers to send. But they cannot be sent."
+#| msgid "Cannot send selection"
 msgid "Clear amount field selection."
-msgstr "Vyčistiť výbery"
+msgstr "Nemôžem poslať výber"
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_indicator)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:448
@@ -10482,9 +10416,11 @@ msgstr "Vybrať stĺpec obsahujúci pole pre kategóriu."
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_creditDebitIndicatorColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:468
 #, fuzzy, kde-format
-#| msgid "OFX import file selection"
+#| msgctxt ""
+#| "The user selected credit transfers to send. But they cannot be sent."
+#| msgid "Cannot send selection"
 msgid "Clear indicator field selection."
-msgstr "Výber súboru importu OFX"
+msgstr "Nemôžem poslať výber"
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_debit)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:478
@@ -10524,9 +10460,7 @@ msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, debitCreditTab)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:563
-#, fuzzy, kde-format
-#| msgctxt "presence of debit/credit columns"
-#| msgid "De&bit/credit"
+#, kde-format
 msgid "Debit/credit"
 msgstr "Debet/kredit"
 
@@ -10579,8 +10513,7 @@ msgstr "Vyčistiť vybrané položky stĺpcov"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_clear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:722
-#, fuzzy, kde-format
-#| msgid "Clear all"
+#, kde-format
 msgctxt "Clear all column assignments"
 msgid "Clear all"
 msgstr "Vyčistiť všetko"
@@ -10601,12 +10534,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1581
-#, fuzzy, kde-format
-#| msgctxt "%1"
-#| msgid "buy"
+#, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "buy"
-msgstr "Kúpna cena"
+msgstr "kúpiť"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1583
 #, fuzzy, kde-format
@@ -10623,9 +10554,7 @@ msgid "reinvest,reinv,re-inv"
 msgstr ""
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1587
-#, fuzzy, kde-format
-#| msgctxt "%1"
-#| msgid "dividend"
+#, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "dividend"
 msgstr "dividenda"
@@ -10645,12 +10574,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1593
-#, fuzzy, kde-format
-#| msgctxt "%1"
-#| msgid "remove"
+#, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "remove"
-msgstr "Odstrániť"
+msgstr "odstrániť"
 
 #: kmymoney/plugins/csv/import/csvimporter.cpp:52
 #, kde-format
@@ -11043,9 +10970,7 @@ msgstr ""
 "a tiež vaše výbery."
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:423
-#, fuzzy, kde-format
-#| msgctxt "@item Show only unused payees"
-#| msgid "Unused"
+#, kde-format
 msgctxt "Unused column"
 msgid "Unused"
 msgstr "Nepoužité"
@@ -11181,8 +11106,7 @@ msgstr "Podiel ceny"
 
 #. i18n: ectx: property (text), widget (QLabel, labelInv_symbolCol)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:308
-#, fuzzy, kde-format
-#| msgid "Symbol"
+#, kde-format
 msgctxt "@label:listbox stock symbol"
 msgid "Symbol"
 msgstr "Symbol"
@@ -11296,12 +11220,11 @@ msgid "No profile setup"
 msgstr ""
 
 #: kmymoney/plugins/csv/import/kcm_csvimporter.cpp:65
-#, fuzzy, kde-format
-#| msgid "Please select a profile type and enter a profile name."
+#, kde-format
 msgctxt "@info:tooltip No QIF profile defined"
 msgid ""
 "Please use the QIF profile editor in the QIF plugin settings to create one."
-msgstr "Prosím, vyberte typ profilu a zadajte názov profilu."
+msgstr ""
 
 #. i18n: ectx: label, entry (AutoFieldDelimiter), group (Misc)
 #: kmymoney/plugins/csv/import/pluginsettings.kcfg:10
@@ -11358,9 +11281,7 @@ msgstr "Desatinné znamienko"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoDateFormat)
 #: kmymoney/plugins/csv/import/pluginsettingsdecl.ui:58
-#, fuzzy, kde-format
-#| msgctxt "date format to use"
-#| msgid "Date format"
+#, kde-format
 msgid "Date format"
 msgstr "Formát dátumu"
 
@@ -11478,11 +11399,10 @@ msgstr "Bez názvu"
 
 #: kmymoney/plugins/csv/import/securitiesdlg.cpp:46
 #: kmymoney/plugins/csv/import/securitiesdlg.cpp:76
-#, fuzzy, kde-format
-#| msgid "Symbol"
+#, kde-format
 msgctxt "Security has no symbol"
 msgid "No symbol"
-msgstr "Symbol"
+msgstr "Žiaden symbol"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_securitiesTab)
 #. i18n: ectx: property (windowTitle), widget (QDialog, SecuritiesDlg)
@@ -11549,11 +11469,9 @@ msgstr "Nový symbol"
 
 #. i18n: ectx: property (text), widget (QLabel, lblNewName)
 #: kmymoney/plugins/csv/import/securitydlg.ui:96
-#, fuzzy, kde-format
-#| msgctxt "Security has no name"
-#| msgid "No name"
+#, kde-format
 msgid "New name"
-msgstr "Bez názvu"
+msgstr "Nové meno"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SeparatorPage)
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:20
@@ -12626,11 +12544,15 @@ msgstr "Odstrániť túto cenu aj zo súboru"
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_includePayeeDetails)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:211
 #, fuzzy, kde-format
-#| msgid "Use this to clear all splits of this transaction"
+#| msgid ""
+#| "<html><head/><body><p>Flag this account to be an opening balance account</"
+#| "p></body></html>"
 msgid ""
 "<html><head/><body><p>Add additional payee details found in the transaction "
 "to the memo.</p></body></html>"
-msgstr "Použiť na vyčistenie všetkých rozdelení tejto transakcie"
+msgstr ""
+"<html><head/><body><p>Označiť tento účet ako počiatočný stav účtu</p></"
+"body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_includePayeeDetails)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:214
@@ -12981,7 +12903,7 @@ msgstr "akceptované"
 #, kde-format
 msgctxt "Status of the job"
 msgid "rejected"
-msgstr ""
+msgstr "odmietnutý"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:110
 #, kde-format
@@ -12996,23 +12918,19 @@ msgid "sending"
 msgstr "odosiela sa"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:116
-#, fuzzy, kde-format
-#| msgctxt "Reconciliation status 'Reconciled'"
-#| msgid "reconciled"
+#, kde-format
 msgctxt "Status of the job"
 msgid "reconciled (auto)"
-msgstr "vysporiadané"
+msgstr "zosúladené (auto)"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:119
-#, fuzzy, kde-format
-#| msgctxt "Reconciliation status 'Reconciled'"
-#| msgid "reconciled"
+#, kde-format
 msgctxt "Status of the job"
 msgid "reconciled (manual)"
-msgstr "vysporiadané"
+msgstr "zosúladené (ručne)"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:122
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Status of the job"
 msgid "revoked"
 msgstr "zrušený"
@@ -13084,8 +13002,7 @@ msgstr "Účet"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/kbanking/widgets/phototandialog.ui:48
-#, fuzzy, kde-format
-#| msgid "To confirm this order enter the tan displayed by your generator"
+#, kde-format
 msgid "To confirm this order enter the tan displayed by your &generator"
 msgstr ""
 "Na potvrdenie tohto prevodu zadajte odtieň zobrazený na vašom generátore"
@@ -13459,10 +13376,9 @@ msgstr "Podrobnosti OFX"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:242
-#, fuzzy, kde-format
-#| msgid "User defined"
+#, kde-format
 msgid "User Agent"
-msgstr "Používateľom definované"
+msgstr "User Agent"
 
 #. i18n: ectx: property (whatsThis), widget (QLineEdit, m_clientUidEdit)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:252
@@ -13612,7 +13528,7 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/importoption.ui:49
 #, kde-format
 msgid "Timezone offset"
-msgstr ""
+msgstr "Posun časového pásma"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:542
@@ -13680,14 +13596,12 @@ msgid "Quicken Windows 2014"
 msgstr "Quicken Windows 2014"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:85
-#, fuzzy, kde-format
-#| msgid "Quicken Windows 2010"
+#, kde-format
 msgid "Quicken Windows 2015"
 msgstr "Quicken Windows 2015"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:86
-#, fuzzy, kde-format
-#| msgid "Quicken Windows 2010"
+#, kde-format
 msgid "Quicken Windows 2016"
 msgstr "Quicken Windows 2016"
 
@@ -14504,9 +14418,7 @@ msgid "Other application"
 msgstr "Iná aplikácia"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:172
-#, fuzzy, kde-format
-#| msgctxt "Category name"
-#| msgid "Reinvested dividend"
+#, kde-format
 msgctxt "Category name"
 msgid "Reinvested interest"
 msgstr "Reinvestované dividendy"
@@ -14894,8 +14806,7 @@ msgstr[1] "Celkovo %1 mimoriadne platby vo výške"
 msgstr[2] "Celkovo %1 mimoriadnych platieb vo výške"
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:296
-#, fuzzy, kde-format
-#| msgid "Outstanding payments"
+#, kde-format
 msgid "Outstanding charges"
 msgstr "Mimoriadne platby"
 
@@ -15080,11 +14991,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:188
-#, fuzzy, kde-format
-#| msgctxt "Filter widget label"
-#| msgid "Fi&lter:"
+#, kde-format
 msgid "Fi&le"
-msgstr "Fi&lter:"
+msgstr "Súbor"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:217
@@ -15335,10 +15244,9 @@ msgid "<p>Do you really want to remove the budget <b>%1</b>?</p>"
 msgstr "<p>Naozaj chcete odstrániť rozpočet <b>%1</b>?</p>"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:133
-#, fuzzy, kde-format
-#| msgid "Do you really want to remove all selected tags?"
+#, kde-format
 msgid "Do you really want to remove all selected budgets?"
-msgstr "Naozaj chcete odstrániť všetky vybrané značky?"
+msgstr "Naozaj chcete odstrániť všetky vybrané rozpočty?"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:135
 #, fuzzy, kde-format
@@ -15429,10 +15337,11 @@ msgstr "Rozpočet založený na prognóze"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:460
 #, fuzzy, kde-format
-#| msgid "Any transaction"
+#| msgctxt "Category name"
+#| msgid "Miscellaneous income"
 msgctxt "@item:inmenu To make it income"
 msgid "Change to income"
-msgstr "Ľubovoľné prevody"
+msgstr "Rozličné príjmy"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:465
 #, fuzzy, kde-format
@@ -15444,6 +15353,7 @@ msgstr "Rozličné výdavky"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:494
 #, fuzzy, kde-format
+#| msgctxt "Menu header"
 #| msgid "Budget options"
 msgctxt "@title:menu Budget context menu"
 msgid "Budget options"
@@ -16592,65 +16502,56 @@ msgid "Transfers"
 msgstr "Prevody"
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:554
-#, fuzzy, kde-format
-#| msgid "Opening Date"
+#, kde-format
 msgctxt "@title:column Report heading"
 msgid "Opening"
-msgstr "Dátum otvorenia"
+msgstr "Otvára sa"
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1413
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1681
-#, fuzzy, kde-format
-#| msgid "Account"
+#, kde-format
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Účet"
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:2202
-#, fuzzy, kde-format
-#| msgid "Actual"
+#, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "Aktuálne"
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:2207
-#, fuzzy, kde-format
-#| msgid "Budget"
+#, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Rozpočet"
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:2212
-#, fuzzy, kde-format
-#| msgid "Difference"
+#, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Rozdiel"
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:2217
-#, fuzzy, kde-format
-#| msgid "Forecast"
+#, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Predpoveď"
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:2222
-#, fuzzy, kde-format
-#| msgid "Moving Average"
+#, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "Kĺzavé priemery"
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:2227
-#, fuzzy, kde-format
-#| msgid "Moving Average Price"
+#, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "Kĺzavý priemer ceny"
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:2232
-#, fuzzy, kde-format
-#| msgid "Price"
+#, kde-format
 msgctxt "@title:column report header"
 msgid "Price"
 msgstr "Cena"
@@ -16821,11 +16722,10 @@ msgid "Apply the configuration changes to the report"
 msgstr "Použiť zmeny usporiadania do výkazu"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:129
-#, fuzzy, kde-format
-#| msgid "Filter"
+#, kde-format
 msgctxt "Filters tab"
 msgid "Filters"
-msgstr "Filter"
+msgstr "Filtre"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:132
 #, kde-format
@@ -17134,7 +17034,7 @@ msgstr "&Otvoriť"
 #, kde-format
 msgctxt "To print a report"
 msgid "&Print"
-msgstr "Tlačiť"
+msgstr "&Tlačiť"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:743
 #, fuzzy, kde-format
@@ -17166,17 +17066,16 @@ msgid "&Export to PDF files"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:816
-#, fuzzy, kde-format
-#| msgid "Favorite reports"
+#, kde-format
 msgid "Export into directory"
-msgstr "Obľúbené výkazy"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KReportsView)
 #: kmymoney/plugins/views/reports/kreportsview.ui:14
 #, fuzzy, kde-format
-#| msgid "Reports"
+#| msgid "Reports view"
 msgid "KReportsView"
-msgstr "Správy"
+msgstr "Pohľad výpisov"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_listTab)
 #: kmymoney/plugins/views/reports/kreportsview.ui:27
@@ -17818,8 +17717,7 @@ msgstr "Typ grafu"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:79
-#, fuzzy, kde-format
-#| msgid "Charts palette"
+#, kde-format
 msgid "Chart Palette"
 msgstr "Paleta grafov"
 
@@ -18055,11 +17953,10 @@ msgid "Ring"
 msgstr "Prstenec"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:96
-#, fuzzy, kde-format
-#| msgid "Other application"
+#, kde-format
 msgctxt "type of graphic palette"
 msgid "Use application setting"
-msgstr "Iná aplikácia"
+msgstr "Použiť nastavenie aplikácie"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:97
 #, kde-format
@@ -18068,17 +17965,13 @@ msgid "Default"
 msgstr "Predvolené"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:98
-#, fuzzy, kde-format
-#| msgctxt "@item KDChart color palette"
-#| msgid "Rainbow"
+#, kde-format
 msgctxt "type of graphic palette"
 msgid "Rainbow"
 msgstr "Dúha"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:99
-#, fuzzy, kde-format
-#| msgctxt "@item KDChart color palette"
-#| msgid "Subdued"
+#, kde-format
 msgctxt "type of graphic palette"
 msgid "Subdued"
 msgstr "Tlmený"
@@ -18118,7 +18011,7 @@ msgstr "Rozsah dátumov"
 #: kmymoney/plugins/views/reports/reporttabrange.ui:52
 #, kde-format
 msgid "Ticks"
-msgstr ""
+msgstr "Tikot"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_comboColumns)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:65
@@ -18131,7 +18024,7 @@ msgstr "<p>Zvoliť, aké veľké časové obdobie by mal každý stĺpec zahŕň
 #, fuzzy, kde-format
 #| msgid "Date Range"
 msgid "Data range"
-msgstr "Rozsah dátumov"
+msgstr "Dátová oblasť"
 
 #. i18n: ectx: property (text), widget (QLabel, lblDataRangeStart)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:138
@@ -18148,9 +18041,11 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_dataLock)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:179
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@title type of online banking connection"
+#| msgid "Automatic"
 msgid "Automatic"
-msgstr "Automatické"
+msgstr "Automaticky"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_dataLock)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:184
@@ -18490,10 +18385,9 @@ msgid ""
 msgstr ""
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:195
-#, fuzzy, kde-format
-#| msgid "Store password"
+#, kde-format
 msgid "Incorrect password."
-msgstr "Uložiť heslo"
+msgstr "Nesprávne heslo."
 
 #. i18n: ectx: property (title), widget (QWizardPage, pageBackends)
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:18
@@ -18949,7 +18843,7 @@ msgstr ""
 "\n"
 "Tento mechanizmus je k dispozícii pre prípad, že ste stratili váš kľúč a "
 "nemôže pristúpiť k vašim údajom. Ak je aktivovaná táto voľba, môžu vývojári "
-"KMyMoney dešifrovať dáta a dodať vám ich v čitateľnej podobe.Buďte, prosím, "
+"KMyMoney dešifrovať dáta a dodať vám ich v čitateľnej podobe. Buďte, prosím, "
 "pripravený, že budete musieť odpovedať na niekoľko podrobných otázok "
 "týkajúcich sa obsahu vašich dát, než ich odošleme."
 
@@ -19187,10 +19081,9 @@ msgstr "Zobraziť dátum posledného vyrovnania na domovskej stránke"
 
 #. i18n: ectx: label, entry (useCustomColors), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:186
-#, fuzzy, kde-format
-#| msgid "Use system colors"
+#, kde-format
 msgid "Use custom colors"
-msgstr "Použiť systémové farby"
+msgstr "Použiť vlastné farby"
 
 #. i18n: ectx: label, entry (transactionImportedColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:190
@@ -19263,17 +19156,16 @@ msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:244
-#, fuzzy, kde-format
-#| msgid "Hide closed accounts"
+#, kde-format
 msgid "Hide zero balance accounts from Accounts"
-msgstr "Skryť uzatvorené účty"
+msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:248
 #, fuzzy, kde-format
-#| msgid "Hide closed accounts"
+#| msgid "Hide zero balance liabilities on the Homepage"
 msgid "Hide zero balance accounts from Home"
-msgstr "Skryť uzatvorené účty"
+msgstr "Skryť záväzky s nulovým zostatkom na domovskej stránke"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:252
@@ -19296,10 +19188,9 @@ msgstr "Ukazovať mriežku v registry"
 
 #. i18n: ectx: label, entry (ShowPlannedScheduleDates), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:268
-#, fuzzy, kde-format
-#| msgid "Scheduled transactions"
+#, kde-format
 msgid "Show schedules with planned date"
-msgstr "Plánované prevody"
+msgstr "Zobraziť rozvrhy s plánovaným dátumom"
 
 #. i18n: ectx: label, entry (ShowGrid), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:272
@@ -19321,9 +19212,10 @@ msgstr "Ukazovať ozdobné značky predchádzajúceho a súčasného fiškálneh
 
 #. i18n: ectx: label, entry (ShowReconciliationMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:284
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Do not show reconciled transactions"
 msgid "Show reconciliation entries with date and balance"
-msgstr ""
+msgstr "Neukazovať zosúladené transakcie"
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:293
@@ -19347,7 +19239,7 @@ msgstr "Počiatočný dátum"
 #: kmymoney/settings/kmymoney.kcfg:309
 #, kde-format
 msgid "Log file path"
-msgstr ""
+msgstr "Cest súboru záznamu"
 
 #. i18n: ectx: label, entry (useSystemFont), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:318
@@ -19462,24 +19354,21 @@ msgstr "Sprievodca účtom Nová pôžička"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTemplateExportDlg)
 #: kmymoney/templates/ktemplateexportdlg.ui:14
-#, fuzzy, kde-format
-#| msgid "Template Error"
+#, kde-format
 msgid "Template Export Attributes"
-msgstr "Cbyba šablóny "
+msgstr "Atribúty exportu šablóny"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/templates/ktemplateexportdlg.ui:26
-#, fuzzy, kde-format
-#| msgid "Some description"
+#, kde-format
 msgid "Short description"
-msgstr "Nejaký popis"
+msgstr "Stručný popis"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: kmymoney/templates/ktemplateexportdlg.ui:33
-#, fuzzy, kde-format
-#| msgid "Description"
+#, kde-format
 msgid "Long Description"
-msgstr "Popis"
+msgstr "Dlhý popis"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/templates/ktemplateexportdlg.ui:43
@@ -19594,29 +19483,25 @@ msgid "Ratio 1/"
 msgstr "Pomer 1/"
 
 #: kmymoney/views/investtransactioneditor.cpp:99
-#, fuzzy, kde-format
-#| msgid "Buy shares"
+#, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Buy shares"
 msgstr "Kúpiť akcie"
 
 #: kmymoney/views/investtransactioneditor.cpp:100
-#, fuzzy, kde-format
-#| msgid "Sell shares"
+#, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Sell shares"
 msgstr "Predať akcie"
 
 #: kmymoney/views/investtransactioneditor.cpp:101
-#, fuzzy, kde-format
-#| msgid "Dividend"
+#, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Dividend"
 msgstr "Dividenda"
 
 #: kmymoney/views/investtransactioneditor.cpp:102
-#, fuzzy, kde-format
-#| msgid "Reinvest dividend"
+#, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Reinvest dividend"
 msgstr "Reinvestícia dividend"
@@ -19629,29 +19514,25 @@ msgid "Yield"
 msgstr "Porcia"
 
 #: kmymoney/views/investtransactioneditor.cpp:104
-#, fuzzy, kde-format
-#| msgid "Add shares"
+#, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Add shares"
 msgstr "Pridať akcie"
 
 #: kmymoney/views/investtransactioneditor.cpp:105
-#, fuzzy, kde-format
-#| msgid "Remove shares"
+#, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Remove shares"
 msgstr "Odstrániť akcie"
 
 #: kmymoney/views/investtransactioneditor.cpp:106
-#, fuzzy, kde-format
-#| msgid "Split shares"
+#, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Split shares"
 msgstr "Rozdeliť akcie"
 
 #: kmymoney/views/investtransactioneditor.cpp:107
-#, fuzzy, kde-format
-#| msgid "Interest Income"
+#, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
 msgstr "Úrokový príjem"
@@ -19885,10 +19766,10 @@ msgstr "Suma je:"
 
 #: kmymoney/views/journaldelegate.cpp:88
 #, fuzzy, kde-format
-#| msgid "Copy of %1"
+#| msgid "Copy memo"
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
-msgstr "Kópia %1"
+msgstr "Kopírovať poznámku"
 
 #: kmymoney/views/journaldelegate.cpp:344
 #, kde-format
@@ -20189,11 +20070,10 @@ msgid "The account is a required field for a schedule"
 msgstr "Tento účet je stále zahrnutý v aktívnom rozvrhu"
 
 #: kmymoney/views/keditscheduledlg.cpp:169
-#, fuzzy, kde-format
-#| msgid "Cannot create transactions in the context of a category."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
-msgstr "Nie je možné vytvoriť transakcie v kontexte kategórie."
+msgstr ""
 
 #: kmymoney/views/keditscheduledlg.cpp:312
 #, kde-format
@@ -20559,14 +20439,13 @@ msgstr[1] "%1 platby"
 msgstr[2] "%1 platieb"
 
 #: kmymoney/views/khomeview_p.h:1041
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Header not marked"
 msgid "!M"
-msgstr ""
+msgstr "M"
 
 #: kmymoney/views/khomeview_p.h:1044
-#, fuzzy, kde-format
-#| msgid "C"
+#, kde-format
 msgctxt "Header cleared"
 msgid "C"
 msgstr "C"
@@ -20594,7 +20473,9 @@ msgstr "Obľúbené výkazy"
 
 #: kmymoney/views/khomeview_p.h:1159
 #, fuzzy, kde-format
+#| msgctxt "Forecast days"
 #| msgid "%1 Day Forecast"
+#| msgid_plural "%1 Day Forecast"
 msgctxt "@title Home page section Forecast days"
 msgid "%1 Day Forecast"
 msgid_plural "%1 Day Forecast"
@@ -20619,14 +20500,13 @@ msgid "Assets and Liabilities Summary"
 msgstr "Prehľad aktív a pasív"
 
 #: kmymoney/views/khomeview_p.h:1417
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title:column table on home page: not marked"
 msgid "!M"
-msgstr ""
+msgstr "M"
 
 #: kmymoney/views/khomeview_p.h:1421
 #, fuzzy, kde-format
-#| msgctxt "Reconciliation flag C"
 #| msgid "C"
 msgctxt "@title:column table on home page: cleared"
 msgid "C"
@@ -21014,11 +20894,9 @@ msgstr "E-mail:"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5_2)
 #: kmymoney/views/kpayeesview.ui:217
-#, fuzzy, kde-format
-#| msgctxt "@label reconciliation status"
-#| msgid "State"
+#, kde-format
 msgid "State:"
-msgstr "Stav"
+msgstr "Stav:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4_2)
@@ -21087,10 +20965,9 @@ msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, defaultAccountTab)
 #: kmymoney/views/kpayeesview.ui:439
-#, fuzzy, kde-format
-#| msgid "Default category:"
+#, kde-format
 msgid "Default Category"
-msgstr "Predvolená kategória:"
+msgstr "Predvolená kategória"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkEnableDefaultCategory)
 #: kmymoney/views/kpayeesview.ui:445
@@ -21144,9 +21021,9 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, idPatternLabel)
 #: kmymoney/views/kpayeesview.ui:526
 #, fuzzy, kde-format
-#| msgid "Bank entry:"
+#| msgid "Identifier"
 msgid "Identifier pattern"
-msgstr "Žiadny identifikátor"
+msgstr "Identifikátor"
 
 #. i18n: ectx: property (text), widget (QLabel, urlTemplateLabel)
 #: kmymoney/views/kpayeesview.ui:533
@@ -21166,7 +21043,7 @@ msgstr "Priraďovanie"
 #, fuzzy, kde-format
 #| msgid "[No identifier]"
 msgid "Enter identifier"
-msgstr "[Žiadny identifikátor]"
+msgstr "[žiadny identifikátor]"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/views/kpayeesview.ui:570
@@ -21211,8 +21088,7 @@ msgid "Sync"
 msgstr "Synchronizovať"
 
 #: kmymoney/views/kpayeesview_p.h:135
-#, fuzzy, kde-format
-#| msgid "No matching"
+#, kde-format
 msgctxt "@item No matching"
 msgid "No matching"
 msgstr "Žiadne priraďovanie"
@@ -21232,8 +21108,7 @@ msgid "Match Payees name (exact)"
 msgstr "Priradiť na meno príjemcu"
 
 #: kmymoney/views/kpayeesview_p.h:138
-#, fuzzy, kde-format
-#| msgid "Match on a name listed below"
+#, kde-format
 msgctxt "@item Search match in list"
 msgid "Match on a name listed below"
 msgstr "Priradiť na nižšie uvedený názov"
@@ -21664,34 +21539,30 @@ msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Transakcia má chýbajúce priradenie <b>%1</b>."
 
 #: kmymoney/views/ledgerview.cpp:876
-#, fuzzy, kde-format
-#| msgid "This schedule will end at some time"
+#, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
-msgstr "Tento harmonogram bude končiť v nejakom čase"
+msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:882
-#, fuzzy, kde-format
-#| msgid "First transaction does not match requirement for matching"
+#, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
-msgstr "Prvá transakcia nezodpovedá požiadavke pre priraďovanie"
+msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:887
-#, fuzzy, kde-format
-#| msgid "First transaction does not match requirement for matching"
+#, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
-msgstr "Prvá transakcia nezodpovedá požiadavke pre priraďovanie"
+msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:963
 #, fuzzy, kde-format
-#| msgid "Do you really want to delete the selected price entry?"
-#| msgid_plural "Do you really want to delete the selected price entries?"
+#| msgid "Checking for overdue scheduled transactions..."
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
-msgstr "Naozaj chcete vymazať vybranú cenovú položku?"
+msgstr "Kontrola na plánované transakcie po termíne..."
 
 #: kmymoney/views/ledgerview.cpp:964
 #, fuzzy, kde-format
@@ -21968,12 +21839,13 @@ msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
 "other split?"
 msgstr ""
+"Chcete nahradiť poznámku<p><i>%1</i></p>poznámkou<p><i>%2</i></p>v inom "
+"rozdelení?"
 
 #: kmymoney/views/newtransactioneditor.cpp:1574
-#, fuzzy, kde-format
-#| msgid "Copy of %1"
+#, kde-format
 msgid "Copy memo"
-msgstr "Kópia %1"
+msgstr "Kopírovať poznámku"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, numberEdit)
 #: kmymoney/views/newtransactioneditor.ui:24
@@ -22149,11 +22021,15 @@ msgstr "Uzavreté značky nemožno použiť."
 #. i18n: ectx: property (text), widget (QLabel, l2)
 #: kmymoney/views/simpleledgerview.ui:72
 #, fuzzy, kde-format
-#| msgid "Use this to clear all splits of this transaction"
+#| msgid ""
+#| "<html><head/><body><p>Flag this account to be an opening balance account</"
+#| "p></body></html>"
 msgid ""
 "<html><head/><body><p>Once an account or category is selected its "
 "transactions will be presented here.</p></body></html>"
-msgstr "Použiť na vyčistenie všetkých rozdelení tejto transakcie"
+msgstr ""
+"<html><head/><body><p>Označiť tento účet ako počiatočný stav účtu</p></"
+"body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, l3)
 #: kmymoney/views/simpleledgerview.ui:85
@@ -22173,7 +22049,6 @@ msgstr "Suma rozdelení"
 
 #: kmymoney/views/splitdialog.cpp:334
 #, fuzzy, kde-format
-#| msgctxt "Split editor summary"
 #| msgid "Unassigned"
 msgctxt "Split editor summary"
 msgid "Overassigned"
@@ -22219,12 +22094,7 @@ msgstr "Zlúči rozdelenia s rovnakou kategóriou do jedného rozdelenia"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, mergeButton)
 #: kmymoney/views/splitdialog.ui:662
-#, fuzzy, kde-format
-#| msgid ""
-#| "In case you have multiple split entries to the same category and you like "
-#| "to keep them as a single split, press this button. The amount for "
-#| "identical categories will be added and stored in a single split for that "
-#| "category."
+#, kde-format
 msgid ""
 "In case you have multiple split entries to the same category and you like to "
 "keep them as a single split, press this button. The amount for identical "
@@ -22324,7 +22194,7 @@ msgstr "Upraviť..."
 
 #: kmymoney/views/splitview.cpp:134
 #, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
+#| msgctxt "To duplicate a split"
 #| msgid "Duplicate"
 msgctxt "@item:inmenu Duplicate selected split(s)"
 msgid "Duplicate"
@@ -23739,9 +23609,9 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:265
 #, fuzzy, kde-format
-#| msgid "Create a new asset account"
+#| msgid "Filter Accounts"
 msgid "Favorite account"
-msgstr "Vytvoriť nový účet aktív"
+msgstr "Filter účtov"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel14)
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:27
@@ -24839,15 +24709,10 @@ msgid "HalfDown"
 msgstr "Dolu"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:200
-#, fuzzy, kde-format
-#| msgid ""
-#| "Found:\n"
-#| "\n"
+#, kde-format
 msgctxt "Rounding method"
 msgid "Round"
-msgstr ""
-"Nájdené:\n"
-"\n"
+msgstr "Okrúhle"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:201
 #, kde-format
@@ -24856,10 +24721,10 @@ msgid "Ceil"
 msgstr ""
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:202
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Rounding method"
 msgid "Floor"
-msgstr ""
+msgstr "Poschodie %1"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:203
 #, kde-format
@@ -24868,10 +24733,11 @@ msgid "Truncate"
 msgstr ""
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:204
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Promote"
 msgctxt "Rounding method"
 msgid "Promote"
-msgstr ""
+msgstr "Postúpiť"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:247
 #, kde-format
@@ -26538,10 +26404,9 @@ msgid "Export in HTML format"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:126
-#, fuzzy, kde-format
-#| msgid "Favorite reports"
+#, kde-format
 msgid "Export in xml format"
-msgstr "Obľúbené výkazy"
+msgstr ""
 
 #: tools/kmmreport-export.cpp:129
 #, kde-format
@@ -26634,153 +26499,6 @@ msgstr ""
 #~ msgstr[1] "    %1 vytvorené"
 #~ msgstr[2] "    %1 vytvorené"
 
-#~ msgid "Duplicate open"
-#~ msgstr "Duplikovať otvorené"
-
-#~ msgid ""
-#~ "<p>The account \"%1\" was previously created as loan account but some "
-#~ "information is missing.</p><p>The new loan wizard will be started to "
-#~ "collect all relevant information.</p><p>Please use KMyMoney version 0.8.7 "
-#~ "or later and earlier than version 0.9 to correct the problem.</p>"
-#~ msgstr ""
-#~ "<p>Účet \"%1\" bol predtým vytvorený ako úverový účet, ale niektoré "
-#~ "informácie chýbajú.</p><p>Bude spustený nový sprievodca novou pôžičkou na "
-#~ "zozbieranie všetkých relevantných informácií.</p><p>Použite, prosím, "
-#~ "KMyMoney verzie 0.8.7 alebo novšej a staršej ako verzia 0.9 na opravu "
-#~ "problému.</p>"
-
-#~ msgid "Account problem"
-#~ msgstr "Chyba účtu"
-
-#, fuzzy
-#~| msgid "Select account"
-#~ msgid "Select category or account."
-#~ msgstr "Vybrať účet"
-
-#~ msgid "Today's due payments"
-#~ msgstr "Platby s dnešným termínom"
-
-#, fuzzy
-#~| msgid "Price for %1 updated (id %2)"
-#~ msgctxt "@info Online price update %1 online id, %2 internal id"
-#~ msgid "Price for %1 updated (id %2)"
-#~ msgstr "Cena pre %1 aktualizovaná (id %2)"
-
-#~ msgid ""
-#~ "KMyMoney has detected some overdue scheduled transactions for this "
-#~ "account. Do you want to enter those scheduled transactions now?"
-#~ msgstr ""
-#~ "Aplikácia KMyMoney zistila, že niektoré plánované transakcie pre tento "
-#~ "účet sú po termíne. Chcete teraz zadať tieto plánované transakcie?"
-
-#~ msgid "Remove this price item from the file"
-#~ msgstr "Odstrániť túto cenu aj zo súboru"
-
-#~ msgid "Stock Name"
-#~ msgstr "Názov akcie"
-
-#~ msgctxt "Price source"
-#~ msgid "Source"
-#~ msgstr "Zdroj"
-
-#~ msgid "Upd"
-#~ msgstr "Upd"
-
-#~ msgid "Res"
-#~ msgstr "Res"
-
-#~ msgid "Close this window"
-#~ msgstr "Zavrieť toto okno"
-
-#~ msgid "Preferred account"
-#~ msgstr "Preferovaný účet"
-
-#~ msgid "CashFlow"
-#~ msgstr "CashFlow"
-
-#~ msgid "Select Account:"
-#~ msgstr "Zvoliť účet:"
-
-#, fuzzy
-#~| msgid "Investment details"
-#~ msgid "Investment details"
-#~ msgstr "Detaily investície"
-
-#~ msgid "Enter the ticker symbol (e.g. RHAT)."
-#~ msgstr "Zadať burzový symbol (napr. RHAT)."
-
-#~ msgid "Enter the CUSIP/ISIN/WKN identification number here"
-#~ msgstr "Zadať sem identifikačné číslo CUSIP/ISIN/WKN"
-
-#~ msgid "This wizard allows you to modify the selected security."
-#~ msgstr "Tento sprievodca vám umožňuje upraviť vybraný cenný papier."
-
-#~ msgid ""
-#~ "The selected symbol is already on file. Do you want to reuse the existing "
-#~ "security?"
-#~ msgstr ""
-#~ "Vybraný symbol je už v súbore. Chcete znovu použiť existujúci cenný "
-#~ "papier?"
-
-#~ msgid "Security found"
-#~ msgstr "Cenný papier nájdený"
-
-#~ msgctxt "Equity name"
-#~ msgid "Name"
-#~ msgstr "Názov"
-
-#~ msgctxt "Online quote source"
-#~ msgid "Source"
-#~ msgstr "Zdroj"
-
-#~ msgid "Price Already Exists"
-#~ msgstr "Cena už existuje"
-
-#~ msgid ""
-#~ "Received a price for %1 (id %2), but this symbol is not on the list. "
-#~ "Aborting entire update."
-#~ msgstr ""
-#~ "Prijatá cena pre %1 (id %2), ale tento symbol nie je na zozname. "
-#~ "Prerušenie celej aktualizácie."
-
-#~ msgid "List of known Equities, and the date they were last updated on."
-#~ msgstr "Zoznam známeho majetku a dátum, kedy bol naposledy aktualizovaný."
-
-#, fuzzy
-#~| msgid "Symbol"
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Symbol"
-#~ msgstr "Symbol"
-
-#, fuzzy
-#~| msgid "Identification number"
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Identification number"
-#~ msgstr "Identifikačné číslo"
-
-#, fuzzy
-#~| msgid "Name"
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Name"
-#~ msgstr "Názov"
-
-#~ msgid "New Quote Source"
-#~ msgstr "Pridať zdroj cenovej ponuky"
-
-#, fuzzy
-#~| msgid ""
-#~| "The file <b>%1</b> already exists. Do you really want to overwrite it?"
-#~ msgid ""
-#~ "Security <b>%1</b> uses this quote source.<br>Do you really want to "
-#~ "remove it?"
-#~ msgstr "Súbor <b>%1</b> už existuje. Naozaj ho chcete prepísať?"
-
-#, fuzzy
-#~| msgid "New Quote Source"
-#~ msgctxt "@title:window"
-#~ msgid "Delete quote source"
-#~ msgstr "Pridať zdroj cenovej ponuky"
-
 #~ msgid "Source <placeholder>%1</placeholder> does not exist."
 #~ msgstr "Zdroj <placeholder>%1</placeholder> neexistuje."
 
@@ -26826,15 +26544,11 @@ msgstr ""
 #~ msgid "Identifier found: '%1'"
 #~ msgstr "Nájdený identifikátor: '%1'"
 
-#, fuzzy
-#~| msgid "Price found: %1 (%2)"
 #~ msgid "Price found: '%1' (%2)"
-#~ msgstr "Cena nájdená: %1 (%2)"
+#~ msgstr "Cena nájdená: '%1' (%2)"
 
-#, fuzzy
-#~| msgid "Date found: %1"
 #~ msgid "Date found: '%1'"
-#~ msgstr "Nájdený dátum: %1"
+#~ msgstr "Nájdený dátum: '%1'"
 
 #~ msgid "Unable to update price for %1 (no price or no date)"
 #~ msgstr "Nemožno aktualizovať cenu pre %1 (žiadna cena alebo žiadny dátum)"
@@ -26842,19 +26556,397 @@ msgstr ""
 #~ msgid "Unable to update price for %1 (empty quote data)"
 #~ msgstr "Nemožno aktualizovať cenu pre %1 (prázdne dáta cenovej ponuky)"
 
-#, fuzzy
-#~| msgid "Unable to update price for %1 (no price or no date)"
-#~ msgid "Unable to update price for %1 (error encountered: '%2')"
-#~ msgstr "Nemožno aktualizovať cenu pre %1 (žiadna cena alebo žiadny dátum)"
+#~ msgctxt "Total value"
+#~ msgid "Total"
+#~ msgstr "Celkom"
+
+#~ msgid "Price/Share"
+#~ msgstr "Cena/Akcia"
+
+#~ msgid "Asset account"
+#~ msgstr "Účet aktív"
+
+#~ msgid ""
+#~ "At least one split of the selected transaction references an account that "
+#~ "has been closed. Editing the transactions is therefore prohibited."
+#~ msgstr ""
+#~ "Aspoň jedno rozdelenie vybranej transakcie odkazuje na účet, ktorý bol "
+#~ "uzavretý. Úprava transakcia je preto zakázaná."
+
+#~ msgid ""
+#~ "Cannot enter transaction with postdate prior to account's opening date."
+#~ msgstr ""
+#~ "Nie je možné zadať transakciu s dátumom odoslania pred počiatočným "
+#~ "dátumom účtu."
+
+#~ msgctxt "Equity name"
+#~ msgid "Name"
+#~ msgstr "Názov"
+
+#~ msgid "Price Already Exists"
+#~ msgstr "Cena už existuje"
+
+#~ msgid ""
+#~ "Received a price for %1 (id %2), but this symbol is not on the list. "
+#~ "Aborting entire update."
+#~ msgstr ""
+#~ "Prijatá cena pre %1 (id %2), ale tento symbol nie je na zozname. "
+#~ "Prerušenie celej aktualizácie."
+
+#~ msgid "List of known Equities, and the date they were last updated on."
+#~ msgstr "Zoznam známeho majetku a dátum, kedy bol naposledy aktualizovaný."
+
+#~ msgctxt "@info:tooltip for find transaction Open button"
+#~ msgid "Search transactions"
+#~ msgstr "Hľadať prevody"
+
+#~ msgid "Found %1 matching transaction (D %2 / P %3 = %4)"
+#~ msgid_plural "Found %1 matching transactions (D %2 / P %3 = %4)"
+#~ msgstr[0] "Nájdená %1 zodpovedajúca transakcia (D %2 / P %3 = %4)"
+#~ msgstr[1] "Nájdené %1 zodpovedajúce transakcie (D %2 / P %3 = %4)"
+#~ msgstr[2] "Nájdených %1 zodpovedajúcich transakcií (D %2 / P %3 = %4)"
+
+#~ msgid "MyDialog"
+#~ msgstr "MyDialog"
+
+#~ msgid "Remove this price item from the file"
+#~ msgstr "Odstrániť túto cenu aj zo súboru"
+
+#~ msgctxt "Price source"
+#~ msgid "Source"
+#~ msgstr "Zdroj"
+
+#~ msgid "Delete..."
+#~ msgstr "Vymazať..."
+
+#~ msgid "will be calculated"
+#~ msgstr "bude vypočítané"
+
+#~ msgid ""
+#~ "You are about to delete the selected split. Do you really want to "
+#~ "continue?"
+#~ msgstr "Chystáte sa zmazať vybrané rozdelenie. Naozaj chcete pokračovať?"
+
+#~ msgid ""
+#~ "You need to assign a category to this split before it can be entered."
+#~ msgstr ""
+#~ "Musíte priradiť kategóriu tohto rozdelenia pred tým, než môže byť zadané."
+
+#~ msgid "Enter split"
+#~ msgstr "Zadať rozdelenie"
+
+#~ msgid "Is a sub account"
+#~ msgstr "Je podúčet"
+
+#~ msgid "Routing Number:"
+#~ msgstr "Smerovacie číslo:"
+
+#~ msgid ""
+#~ "Select a transaction and press the OK button or use Cancel to select none."
+#~ msgstr ""
+#~ "Vybrať transakciu a stlačiť tlačidlo OK alebo použiť Zrušiť pre výber  "
+#~ "žiadnej."
+
+#~ msgid "Clear &All"
+#~ msgstr "Vyčistiť &všetko"
+
+#~ msgid "Use this to clear all splits of this transaction"
+#~ msgstr "Použiť na vyčistenie všetkých rozdelení tejto transakcie"
+
+#~ msgid "Clear &Zero"
+#~ msgstr "&Vyčistiť nulu"
+
+#~ msgid ""
+#~ "In case you have multiple split entries to the same category and you like "
+#~ "to keep them as a single split"
+#~ msgstr ""
+#~ "V prípade, že máte viac položiek rozdelenia pre rovnakú kategóriu a "
+#~ "chcete ich ponechať ako jedno rozdelenie"
+
+#~ msgid ""
+#~ "You are about to delete all splits of this transaction. Do you really "
+#~ "want to continue?"
+#~ msgstr ""
+#~ "Chystáte sa zmazať všetky rozdelenia tejto transakcie. Naozaj chcete "
+#~ "pokračovať?"
+
+#~ msgid "<b>11,00<b>"
+#~ msgstr "<b>11,00<b>"
+
+#~ msgid "<b>111,00<b>"
+#~ msgstr "<b>111,00<b>"
+
+#~ msgid "100,00"
+#~ msgstr "100,00"
+
+#~ msgid ""
+#~ "This dialog does not allow new tags to be created. Please pick a tag from "
+#~ "the list."
+#~ msgstr ""
+#~ "Tento dialóg neumožňuje vytvoriť nové značky. Prosím, vyberte značku zo "
+#~ "zoznamu."
+
+#~ msgid "Tag creation"
+#~ msgstr "Vytvorenie značky"
+
+#~ msgid ""
+#~ "The transactions associated with the selected tags need to be re-assigned "
+#~ "to a different tag before the selected tags can be deleted. Please select "
+#~ "a tag from the list below."
+#~ msgstr ""
+#~ "Transakcie spojené s vybranými značkami musia byť znovu priradené k inej "
+#~ "značke skôr, ako môžu byť vybrané značky zmazané. Prosím, nižšie vyberte "
+#~ "značku zo zoznamu."
+
+#~ msgid "Show splash screen"
+#~ msgstr "Zobraziť úvodnú obrazovku"
+
+#~ msgid "Show title bar on each page"
+#~ msgstr "Ukazovať panel titulku na každej stránke"
+
+#~ msgid "New Quote Source"
+#~ msgstr "Pridať zdroj cenovej ponuky"
+
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Symbol"
+#~ msgstr "Symbol"
 
 #, fuzzy
-#~| msgid "Tag"
-#~ msgctxt "Split header"
-#~ msgid "Tag"
-#~ msgstr "Značka"
+#~| msgid "Identification number"
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Identification number"
+#~ msgstr "Identifikačné číslo"
 
-#~ msgid "Reorganizing accounts..."
-#~ msgstr "Reorganizovať účty..."
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Name"
+#~ msgstr "Názov"
+
+#, fuzzy
+#~| msgid ""
+#~| "The file <b>%1</b> already exists. Do you really want to overwrite it?"
+#~ msgid ""
+#~ "Security <b>%1</b> uses this quote source.<br>Do you really want to "
+#~ "remove it?"
+#~ msgstr "Súbor <b>%1</b> už existuje. Naozaj ho chcete prepísať?"
+
+#, fuzzy
+#~| msgid "New Quote Source"
+#~ msgid "Delete quote source"
+#~ msgstr "Pridať zdroj cenovej ponuky"
+
+#~ msgid "Always show a No. field"
+#~ msgstr "Vždy ukazovať pole poradového čísla"
+
+#~ msgid "Category/Account"
+#~ msgstr "Kategória/účet"
+
+#~ msgid "Transfer from"
+#~ msgstr "Prevod z"
+
+#~ msgid "Transfer to"
+#~ msgstr "Prevod do"
+
+#~ msgid ""
+#~ "This transaction has more than two splits and is originally based on a "
+#~ "different currency (%1). Using this account to modify the transaction may "
+#~ "result in rounding errors. Do you want to continue?"
+#~ msgstr ""
+#~ "Táto transakcia má viac ako dve rozdelenia a je pôvodne založený na inej "
+#~ "mene (%1). Použitie tohto účtu na úpravu transakcie môže mať za následok "
+#~ "chyby zaokrúhlenia. Chcete pokračovať?"
+
+#~ msgid ""
+#~ "At least one of the selected transactions has more than two splits and is "
+#~ "originally based on a different currency (%1). Using this account to "
+#~ "modify the transactions may result in rounding errors. Do you want to "
+#~ "continue?"
+#~ msgstr ""
+#~ "Aspoň jedna z vybraných transakcií má viac ako dve rozdelenia a je "
+#~ "pôvodne založený na inej mene (%1). Použitie tohto účtu na úpravu "
+#~ "transakcií môže mať za následok chyby zaokrúhlenia. Chcete pokračovať?"
+
+#~ msgid "<center>Processing schedule for %1.</center>"
+#~ msgstr "<center>Spracúvam plán pre %1.</center>"
+
+#~ msgid ""
+#~ "Check number <b>%1</b> has already been used in account <b>%2</b>."
+#~ "<center>Do you want to replace it with the next available number?</center>"
+#~ msgstr ""
+#~ "Číslo <b>%1</b> už bolo použité v účte <b>%2</b>.<center>Chcete ho "
+#~ "nahradiť nasledujúcim dostupným číslom?</center>"
+
+#~ msgid "Duplicate number"
+#~ msgstr "Zdvojené číslo"
+
+#~ msgid "Storing transactions"
+#~ msgstr "Ukladanie transakcií"
+
+#~ msgid "&Enter"
+#~ msgstr "Zadať"
+
+#~ msgid "Use this to enter the transaction into the ledger."
+#~ msgstr "Použiť na zadanie transakcie do účtovnej knihy."
+
+#~ msgid "&Schedule"
+#~ msgstr "Rozvrh"
+
+#~ msgid "Accepts the entered data and stores it as schedule"
+#~ msgstr "Prijíma zadané údaje a uloží ich ako harmonogram"
+
+#~ msgid ""
+#~ "The transaction you are about to enter has a post date in the future.<br/"
+#~ "><br/>Do you want to enter it in the ledger or add it to the schedules?"
+#~ msgstr ""
+#~ "Transakcia, ktorú sa chystáte zadať, má dátum odoslania v budúcnosti.<br/"
+#~ "><br/>Chcete ju zadať do účtovnej knihy alebo pridať do harmonogramov?"
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the warning balance of %2."
+#~ msgstr "Zostatok na účte <b>%1</b> klesol pod výstražnú bilanciu %2."
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the minimum balance of %2."
+#~ msgstr "Zostatok na účte <b>%1</b> klesol pod minimálny zostatok %2."
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the maximum credit warning "
+#~ "limit of %2."
+#~ msgstr ""
+#~ "Zostatok na účte <b>%1</b> klesol pod maximálny kreditný výstražný limit "
+#~ "%2."
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the maximum credit limit "
+#~ "of %2."
+#~ msgstr "Zostatok na účte <b>%1</b> klesol pod maximálny kreditný limit %2."
+
+#~ msgid "Thomas Baumgart"
+#~ msgstr "Thomas Baumgart"
+
+#~ msgid "Ralf Habacker"
+#~ msgstr "Ralf Habacker"
+
+#~ msgid "Cristian Oneț"
+#~ msgstr "Cristian Oneț"
+
+#~ msgid "Christian Dávid"
+#~ msgstr "Christian Dávid"
+
+#~ msgid "Michael Edwardes"
+#~ msgstr "Michael Edwardes"
+
+#~ msgid "Alvaro Soliverez"
+#~ msgstr "Alvaro Soliverez"
+
+#~ msgid "Ace Jones"
+#~ msgstr "Ace Jones"
+
+#~ msgid "Tony Bloomfield"
+#~ msgstr "Tony Bloomfield"
+
+#~ msgid "Felix Rodriguez"
+#~ msgstr "Felix Rodriguez"
+
+#~ msgid "John C"
+#~ msgstr "John C"
+
+#~ msgid "Fernando Vilas"
+#~ msgstr "Fernando Vilas"
+
+#~ msgid "Jack Ostroff"
+#~ msgstr "Jack Ostroff"
+
+#~ msgid "Kevin Tambascio"
+#~ msgstr "Kevin Tambascio"
+
+#~ msgid "Javier Campos Morales"
+#~ msgstr "Javier Campos Morales"
+
+#~ msgid "Robert Wadley"
+#~ msgstr "Robert Wadley"
+
+#~ msgid "Laurent Montel"
+#~ msgstr "Laurent Montel"
+
+#~ msgid "Wolfgang Rohdewald"
+#~ msgstr "Wolfgang Rohdewald"
+
+#~ msgid "Marko Käning"
+#~ msgstr "Marko Käning"
+
+#~ msgid "Allan Anderson ✝"
+#~ msgstr "Allan Anderson ✝"
+
+#~ msgid ""
+#~ "<p>The account \"%1\" was previously created as loan account but some "
+#~ "information is missing.</p><p>The new loan wizard will be started to "
+#~ "collect all relevant information.</p><p>Please use KMyMoney version 0.8.7 "
+#~ "or later and earlier than version 0.9 to correct the problem.</p>"
+#~ msgstr ""
+#~ "<p>Účet \"%1\" bol predtým vytvorený ako úverový účet, ale niektoré "
+#~ "informácie chýbajú.</p><p>Bude spustený nový sprievodca novou pôžičkou na "
+#~ "zozbieranie všetkých relevantných informácií.</p><p>Použite, prosím, "
+#~ "KMyMoney verzie 0.8.7 alebo novšej a staršej ako verzia 0.9 na opravu "
+#~ "problému.</p>"
+
+#~ msgid "Account problem"
+#~ msgstr "Chyba účtu"
+
+#~ msgid "&Show tip of the day"
+#~ msgstr "Zobraziť tip dňa"
+
+#~ msgctxt "New transaction button"
+#~ msgid "New"
+#~ msgstr "Nové"
+
+#~ msgid "New scheduled transaction"
+#~ msgstr "Nová plánovaná transakcia"
+
+#~ msgid ""
+#~ "<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>"
+#~ msgstr ""
+#~ "<p><b>%1</b> nie je možné presunúť do inštitúcie <b>%2</b>. Dôvod: %3</p>"
+
+#~ msgid "<p><b>%1</b> cannot be moved to <b>%2</b>. Reason: %3</p>"
+#~ msgstr "<p><b>%1</b> nie je možné presunúť do <b>%2</b> Dôvod: %3</p>"
+
+#~ msgid "CashFlow"
+#~ msgstr "CashFlow"
+
+#~ msgctxt "Unknown reconciliation state"
+#~ msgid "Unknown"
+#~ msgstr "Neznáme"
+
+#~ msgctxt "Flag for unknown reconciliation state"
+#~ msgid "?"
+#~ msgstr "?"
+
+#~ msgctxt "Column heading for category in tax report"
+#~ msgid "Tax"
+#~ msgstr "Daň"
+
+#~ msgctxt "Column heading for Cost Center"
+#~ msgid "CC"
+#~ msgstr "Kópia"
+
+#~ msgid "Total Balance"
+#~ msgstr "Celkový zostatok"
+
+#, fuzzy
+#~| msgid "Sort order"
+#~ msgctxt "IBAN, SWIFT, etc."
+#~ msgid "Sort Code"
+#~ msgstr "Poradie triedenia"
+
+#~ msgctxt "Payment made from account"
+#~ msgid "Payment"
+#~ msgstr "Platba"
+
+#~ msgctxt "Deposit into account"
+#~ msgid "Deposit"
+#~ msgstr "Vklad"
 
 #~ msgctxt "Credit suffix"
 #~ msgid "Cr."
@@ -26864,18 +26956,27 @@ msgstr ""
 #~ msgid "Dr."
 #~ msgstr "Dr."
 
-#~ msgid "Hide zero balance liabilities on the Homepage"
-#~ msgstr "Skryť záväzky s nulovým zostatkom na domovskej stránke"
-
 #, fuzzy
-#~| msgid ""
-#~| "    Please enter a price for the currency on or before the opening date."
-#~ msgctxt "@info consistency check"
-#~ msgid ""
-#~ "    Please enter a price for the currency on or before the date of first "
-#~ "usage."
-#~ msgstr ""
-#~ "    Zadajte, prosím, cenu za menu na alebo pred počiatočným dátumom."
+#~| msgid "Amount entered"
+#~ msgid "Cost Center"
+#~ msgstr "Suma zadaná"
+
+#~ msgctxt "It's about printing bank checks"
+#~ msgid "Check printing"
+#~ msgstr "Skontrolovať tlač"
+
+#~ msgctxt ""
+#~ "@item This comes after the hunder text if the tens unit is different from "
+#~ "0"
+#~ msgid " and "
+#~ msgstr " a "
+
+#~ msgctxt "@label The word to be printed for no fractional part as in No/00"
+#~ msgid "No"
+#~ msgstr "Nie"
+
+#~ msgid "Check template file"
+#~ msgstr "Overiť súbor šablóny"
 
 #~ msgid "There are no entries in this account.\n"
 #~ msgstr "V tomto účte sa nenachádzajú žiadne položky.\n"
@@ -26883,18 +26984,27 @@ msgstr ""
 #~ msgid "Invalid account"
 #~ msgstr "Neplatný účet"
 
-#~ msgid ""
-#~ "*.css|CSS files\n"
-#~ "*|All files (*)"
-#~ msgstr ""
-#~ "*.css|CSS súbory\n"
-#~ "*|Všetky súbory(*)"
+#~ msgid "CSV exporter"
+#~ msgstr "CSV exportér"
+
+#~ msgid "CSV importer"
+#~ msgstr "Importér CSV"
 
 #, fuzzy
-#~| msgid "Budget options"
-#~ msgctxt "@title:menu budget context menu"
-#~ msgid "Budget options"
-#~ msgstr "Voľby rozpočtu"
+#~| msgid "CSV importer"
+#~ msgid "GnuCash importer"
+#~ msgstr "Importér CSV"
+
+#~ msgid "Reorganizing accounts..."
+#~ msgstr "Reorganizovať účty..."
+
+#~ msgid "IBAN/BIC Data"
+#~ msgstr "IBAN/BIC údaje"
+
+#, fuzzy
+#~| msgid "Icalendar export settings"
+#~ msgid "iCalendar exporter"
+#~ msgstr "Nastavenie exportu pre iCalendar"
 
 #, fuzzy
 #~| msgctxt "KMyMoney (Filefilter)"
@@ -26905,37 +27015,124 @@ msgstr ""
 #~ msgid "Copyright 2009"
 #~ msgstr "Copyright 2009"
 
-#~ msgctxt "Activity for income categories"
-#~ msgid "Received"
-#~ msgstr "Prijaté"
+#~ msgid "Dequeue"
+#~ msgstr "Vyradiť z poradia"
 
-#~ msgctxt "Activity for expense categories"
-#~ msgid "Paid"
-#~ msgstr "Vyplatené"
+#~ msgid "Dequeue selected job"
+#~ msgstr "Vybranú úlohu vyradiť z fronty"
+
+#~ msgid "Remove the selected job from the list"
+#~ msgstr "Odstrániť vybrané úlohy zo zoznamu"
+
+#~ msgid "Execute"
+#~ msgstr "Spustiť"
+
+#~ msgid "Execute all jobs in the queue"
+#~ msgstr "Vykonať všetky úlohy vo fronte"
+
+#~ msgctxt "Warning message"
+#~ msgid "There are no jobs in the queue."
+#~ msgstr "Vo fronte nie sú žiadne úlohy."
+
+#~ msgctxt "Message title"
+#~ msgid "No Jobs"
+#~ msgstr "Žiadna úlohy"
+
+#~ msgid "Jobs"
+#~ msgstr "Úlohy"
+
+#~ msgid "OFX Importer"
+#~ msgstr "OFX Importer"
+
+#~ msgid "QIF importer"
+#~ msgstr "QIF importer"
 
 #, fuzzy
-#~| msgid "Pay to"
-#~ msgctxt "Payee"
-#~ msgid "Pay to"
-#~ msgstr "Zaplatiť do"
+#~ msgid "SQL storage"
+#~ msgstr "SQL Úložisko"
+
+#~ msgid "Budgets view"
+#~ msgstr "Zobrazenie rozpočtov"
+
+#~ msgid "Select year"
+#~ msgstr "Vybrať rok"
+
+#~ msgid "Budget year"
+#~ msgstr "Rok rozpočtu"
+
+#~ msgid "Change budget year"
+#~ msgstr "Zmeniť rok rozpočtu"
+
+#~ msgid ""
+#~ "A budget with the name '%1' already exists. It is not advisable to have "
+#~ "multiple budgets with the same identification name. Are you sure you "
+#~ "would like to rename the budget?"
+#~ msgstr ""
+#~ "Rozpočet s názvom '%1' už existuje. Nie je vhodné mať viac rozpočtov s "
+#~ "rovnakým identifikačným menom. Ste si istí, že chcete premenovať rozpočet?"
+
+#~ msgid "Creates a new budget"
+#~ msgstr "Vytvorí nový rozpočet"
+
+#~ msgid "Use this to create a new empty budget."
+#~ msgstr "Použiť na vytvorenie nového rozpočtu."
+
+#~ msgctxt "New budget"
+#~ msgid "New"
+#~ msgstr "Nové"
 
 #, fuzzy
-#~| msgid "From"
-#~ msgctxt "Payer"
-#~ msgid "From"
-#~ msgstr "Od"
+#~| msgid "Rename the current selected budget"
+#~ msgid "Rename the current selected budget."
+#~ msgstr "Premenovať aktuálne vybraný rozpočet"
 
-#, fuzzy
-#~| msgid "CC"
-#~ msgctxt "@title:column"
-#~ msgid "CC"
-#~ msgstr "Kópia"
+#~ msgid "Use this to start renaming the selected budget."
+#~ msgstr "Použiť na spustenie premenovania vybraného rozpočtu."
 
-#~ msgid "Always show a No. field"
-#~ msgstr "Vždy ukazovať pole poradového čísla"
+#~ msgid "Delete the current selected budget"
+#~ msgstr "Vymazať aktuálne vybraný rozpočet"
 
-#~ msgid "Always show a No. field in transaction form"
-#~ msgstr "Vždy ukazovať pole poradového čísla vo formulári transakcie"
+#~ msgid "Use this to delete the selected budget."
+#~ msgstr "Použiť na vymazanie vybraného rozpočtu."
+
+#~ msgctxt "@title header of the budget name column"
+#~ msgid "Name"
+#~ msgstr "Názov"
+
+#~ msgid "Upd"
+#~ msgstr "Upd"
+
+#~ msgid "Res"
+#~ msgstr "Res"
+
+#~ msgid "Forecast view"
+#~ msgstr "Zobrazenie predpovede"
+
+#~ msgid "Not able to display this job."
+#~ msgstr "Nie je možné zobraziť túto úlohu."
+
+#~ msgid ""
+#~ "Could not find a plugin to display this job or it does not contain any "
+#~ "data."
+#~ msgstr ""
+#~ "Nemôžem nájsť plugin na zobrazenie tejto úlohy, alebo neobsahuje žiadne "
+#~ "údaje."
+
+#~ msgid "Copy this report to the clipboard"
+#~ msgstr "Kopírovať tento výkaz do schránky"
+
+#~ msgid "Copy"
+#~ msgstr "Kopírovať"
+
+#~ msgid "Close this window"
+#~ msgstr "Zavrieť toto okno"
+
+#~ msgid ""
+#~ "*.css|CSS files\n"
+#~ "*|All files (*)"
+#~ msgstr ""
+#~ "*.css|CSS súbory\n"
+#~ "*|Všetky súbory(*)"
 
 #~ msgid "Loading securities..."
 #~ msgstr "Načítanie cenných papierov..."
@@ -26954,9 +27151,7 @@ msgstr ""
 #~ msgid "Unknown XML tag %1 found in line %2"
 #~ msgstr "Neznáma značka XML %1 nájdená v riadku %2"
 
-#, fuzzy
-#~| msgid "Exception while creating a %1 element: %2"
-#~ msgid "Exception while reading %1 element: %2"
+#~ msgid "Exception while creating a %1 element: %2"
 #~ msgstr "Výnimka pri vytváraní prvku %1: %2"
 
 #~ msgid "Loading file information..."
@@ -26965,34 +27160,175 @@ msgstr ""
 #~ msgid "Loading user information..."
 #~ msgstr "Načítavam používateľské informácie..."
 
-#~ msgctxt "Enter todays date into date input widget"
-#~ msgid "T"
-#~ msgstr "T"
+#~ msgid "Saving accounts..."
+#~ msgstr "Ukladanie účtov..."
+
+#~ msgid "Saving transactions..."
+#~ msgstr "Ukladanie transakcií..."
+
+#~ msgid "Saving reports..."
+#~ msgstr "Ukladanie výkazov..."
+
+#~ msgid "Saving budgets..."
+#~ msgstr "Ukladanie rozpočtov..."
+
+#~ msgid "Saving online banking orders..."
+#~ msgstr "Ukladám online bankové prevody..."
 
 #, fuzzy
-#~| msgid "Accepts the entered data and stores it as schedule"
-#~ msgctxt "@info:tooltip Accept button"
-#~ msgid "Accept the transaction and mark it cleared."
-#~ msgstr "Prijíma zadané údaje a uloží ich ako harmonogram"
+#~| msgid "Saving accounts..."
+#~ msgid "Saving costcenters..."
+#~ msgstr "Ukladanie účtov..."
 
 #, fuzzy
-#~| msgid "Do you really want to delete the selected transaction?"
-#~| msgid_plural "Do you really want to delete all %1 selected transactions?"
-#~ msgctxt "Question about the accept action"
-#~ msgid "Do you want to accept the imported transaction now?"
-#~ msgstr "Naozaj chcete vymazať vybranú transakciu?"
+#~ msgid "XML storage"
+#~ msgstr "XML Úložisko"
+
+#~ msgid "Always show a No. field in transaction form"
+#~ msgstr "Vždy ukazovať pole poradového čísla vo formulári transakcie"
+
+#~ msgid "Show splash screen during startup"
+#~ msgstr "Ukazovať úvodnú obrazovku pri spustení"
+
+#~ msgid "Show title bar on each view"
+#~ msgstr "Ukazovať panel titulku na každom pohľade"
+
+#~ msgid "Select online banking plugin"
+#~ msgstr "Vybrať zásuvný modul online bankovníctva"
+
+#~ msgid "Reconcile"
+#~ msgstr "Zosúladiť"
+
+#~ msgid "Reconcile - disabled because you are currently reconciling <b>%1</b>"
+#~ msgstr ""
+#~ "Zosúladiť - zakázané, pretože v súčasnej dobe uvádzate do súladu <b>%1</b>"
 
 #, fuzzy
-#~| msgid "Split transaction"
-#~ msgctxt "@title:window"
-#~ msgid "Accept transaction"
-#~ msgstr "Rozdeliť transakciu"
+#~| msgid "Cannot create transactions when no account is selected."
+#~ msgid "Add reversing transactions to the currently selected"
+#~ msgstr "Nie je možné vytvoriť transakcie, keď nie je vybraný žiadny účet."
 
-#~ msgid "Copy this report to the clipboard"
-#~ msgstr "Kopírovať tento výkaz do schránky"
+#~ msgid ""
+#~ "At least one split of the selected transactions has been reconciled. Do "
+#~ "you wish to continue to edit the transactions anyway?"
+#~ msgstr ""
+#~ "Najmenej jedno rozdelenie vybraných transakcií bolo zosúladené. Prajete "
+#~ "si aj tak pokračovať v úpravách transakcie?"
 
-#~ msgid "Copy"
-#~ msgstr "Kopírovať"
+#~ msgid "Cannot create transactions when no account is selected."
+#~ msgstr "Nie je možné vytvoriť transakcie, keď nie je vybraný žiadny účet."
+
+#~ msgid "Cannot create transactions in the context of a category."
+#~ msgstr "Nie je možné vytvoriť transakcie v kontexte kategórie."
+
+#~ msgid "Cannot create transactions in a closed account."
+#~ msgstr "Nie je možné vytvoriť transakcie v uzavretom účte."
+
+#~ msgid "Cannot edit transactions in the context of a category."
+#~ msgstr "Nie je možné upraviť transakcie v kontexte kategórie."
+
+#~ msgid "Cannot edit mixed investment action/type transactions together."
+#~ msgstr ""
+#~ "Nie je možné spolu upravovať zmiešané investičné transakcie akcie/typu."
+
+#~ msgid ""
+#~ "Cannot edit investment transactions and non-investment transactions "
+#~ "together."
+#~ msgstr ""
+#~ "Nie je možné upravovať investičné transakcie a neinvestičné transakcie "
+#~ "dohromady."
+
+#~ msgid "Cannot edit investment transactions in the context of this account."
+#~ msgstr "Nie je možné upraviť transakcie v kontexte tohto účtu."
+
+#~ msgid ""
+#~ "<p>Please select what you want to do: discard the changes, save the "
+#~ "changes or continue to edit the transaction.</p><p>You can also set an "
+#~ "option to save the transaction automatically when e.g. selecting another "
+#~ "transaction.</p>"
+#~ msgstr ""
+#~ "<p>Prosím, vyberte si, čo chcete urobiť: zrušiť zmeny, zmeny uložiť alebo "
+#~ "pokračovať v úpravách transakcie.</p><p>Môžete tiež nastaviť možnosť "
+#~ "automatického uloženia transakcie, keď napr. vyberiete inú transakciu.</p>"
+
+#~ msgid "End transaction edit"
+#~ msgstr "Úprava koncovej transakcie"
+
+#, fuzzy
+#~| msgid ""
+#~| "<p>Please select what you want to do: discard the changes, save the "
+#~| "changes or continue to edit the transaction.</p><p>You can also set an "
+#~| "option to save the transaction automatically when e.g. selecting another "
+#~| "transaction.</p>"
+#~ msgid ""
+#~ "<p>Please select what you want to do: discard or save the changes.</"
+#~ "p><p>You can also set an option to save the transaction automatically "
+#~ "when e.g. selecting another transaction.</p>"
+#~ msgstr ""
+#~ "<p>Prosím, vyberte si, čo chcete urobiť: zrušiť zmeny, zmeny uložiť alebo "
+#~ "pokračovať v úpravách transakcie.</p><p>Môžete tiež nastaviť možnosť "
+#~ "automatického uloženia transakcie, keď napr. vyberiete inú transakciu.</p>"
+
+#~ msgid "Date: %1"
+#~ msgstr "Dátum: %1"
+
+#~ msgctxt "Name for unknown payee"
+#~ msgid "Unknown"
+#~ msgstr "Neznáme"
+
+#, fuzzy
+#~| msgid "Payee%1"
+#~ msgid "Payee: %1"
+#~ msgstr "Príjemca"
+
+#~ msgid "Memo: %1"
+#~ msgstr "Poznámka: %1"
+
+#~ msgid "Statement Details"
+#~ msgstr "Podrobnosti výpisu"
+
+#~ msgid "Statement Deposit Details"
+#~ msgstr "Podrobnosti výpisu vkladov"
+
+#~ msgid "Statement Payment Details"
+#~ msgstr "Podrobnosti výpisu platieb"
+
+#~ msgid "%1 deposit (%2)"
+#~ msgid_plural "%1 deposits (%2)"
+#~ msgstr[0] "%1 vklad (%2)"
+#~ msgstr[1] "%1 vklady (%2)"
+#~ msgstr[2] "%1 vkladov (%2)"
+
+#~ msgid "%1 charge (%2)"
+#~ msgid_plural "%1 charges (%2)"
+#~ msgstr[0] "%1 poplatok (%2)"
+#~ msgstr[1] "%1 platby (%2)"
+#~ msgstr[2] "%1 platieb (%2)"
+
+#~ msgid "%1 payment (%2)"
+#~ msgid_plural "%1 payments (%2)"
+#~ msgstr[0] "%1 platba (%2)"
+#~ msgstr[1] "%1 platby (%2)"
+#~ msgstr[2] "%1 platieb (%2)"
+
+#~ msgctxt "%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments"
+#~ msgid "%1, %2"
+#~ msgstr "%1, %2"
+
+#~ msgid "Last reconciled: %1"
+#~ msgstr "Naposledy zosúladené: %1"
+
+#~ msgid "Cannot process transaction with focus if it is not selected."
+#~ msgstr ""
+#~ "Nie je možné spracovať transakcie so zameraním, pokiaľ nie sú vybrané."
+
+#, fuzzy
+#~| msgid "Unable to add transactions"
+#~ msgid "Unable to delete transaction(s)"
+#~ msgstr "Nemožno pridať transakcie"
+
+#~ msgid "Running automatic reconciliation"
+#~ msgstr "Automatické spustenie zosúladenia"
 
 #~ msgid "Your Financial Summary"
 #~ msgstr "Váš finančný súhrn"
@@ -27000,10 +27336,126 @@ msgstr ""
 #~ msgid "Show KMyMoney welcome page"
 #~ msgstr "Zobraziť uvítaciu stranu KMyMoney"
 
+#~ msgid "Today's due payments"
+#~ msgstr "Platby s dnešným termínom"
+
 #, fuzzy
 #~| msgid "Last reconciled: %1"
 #~ msgid "Last Reconciled"
 #~ msgstr "Naposledy zosúladené: %1"
+
+#~ msgid "Select Account:"
+#~ msgstr "Zvoliť účet:"
+
+#~ msgid "Change the security information of the selected entry."
+#~ msgstr "Zmeniť informácie cenného papiera vybranej položky."
+
+#~ msgid "Remove this security item from the file"
+#~ msgstr "Odstrániť túto položku cenného papiera zo súboru"
+
+#, fuzzy
+#~| msgid "Open ledger"
+#~ msgid "New ledger"
+#~ msgstr "Otvoriť účtovnú knihu"
+
+#, fuzzy
+#~| msgid "Do you want to add <b>%1</b> as payer/receiver?"
+#~ msgid "Do you want to show <b>%1</b> column on every loaded view?"
+#~ msgstr "Chcete sa pridať <b>%1</b> ako doručiteľa/príjemcu?"
+
+#, fuzzy
+#~| msgid "Do you want to add <b>%1</b> as payer/receiver?"
+#~ msgid "Do you want to hide <b>%1</b> column on every loaded view?"
+#~ msgstr "Chcete sa pridať <b>%1</b> ako doručiteľa/príjemcu?"
+
+#~ msgid "Unable to add schedule: %1"
+#~ msgstr "Nemožno pridať harmonogram: %1"
+
+#~ msgid "Use this to create a new payee."
+#~ msgstr "Použiť na vytvorenie nového príjemcu."
+
+#~ msgctxt "New payee"
+#~ msgid "New"
+#~ msgstr "Nové"
+
+#~ msgid "Rename the current selected payee"
+#~ msgstr "Premenovať aktuálne vybraného príjemcu"
+
+#~ msgid "Use this to start renaming the selected payee."
+#~ msgstr "Použiť na spustenie premenovania vybraných príjemcov."
+
+#~ msgid "Delete selected payee(s)"
+#~ msgstr "Vymazať vybraného príjemcu(ov)"
+
+#~ msgid ""
+#~ "Use this to delete the selected payee. You can also select multiple "
+#~ "payees to be deleted."
+#~ msgstr ""
+#~ "Použiť na vymazanie vybraného príjemcu. Môžete si tiež vybrať viacero "
+#~ "príjemcom, ktorí sa odstránia."
+
+#~ msgid "Merge multiple selected payees"
+#~ msgstr "Zlúčiť viacerých vybraných príjemcov"
+
+#~ msgid "Use this to merge multiple selected payees."
+#~ msgstr "Použiť na zlúčenie viacerých vybraných príjemcov."
+
+#~ msgid "Error executing item"
+#~ msgstr "Chyba pri vykonávaní položky"
+
+#~ msgid "Unable to filter account"
+#~ msgstr "Nemožno filtrovať účet"
+
+#~ msgid "Bills"
+#~ msgstr "Účtenky"
+
+#~ msgid "Loans"
+#~ msgstr "Pôžičky"
+
+#~ msgid "Type/Name"
+#~ msgstr "Typ/Meno"
+
+#~ msgid "Frequency"
+#~ msgstr "Frekvencia"
+
+#~ msgid "Unable to load accounts: "
+#~ msgstr "Nemožno načítať účty: "
+
+#~ msgid "<p>Do you really want to remove the tag <b>%1</b>?</p>"
+#~ msgstr "<p>Naozaj chcete odstrániť značku <b>%1</b>?</p>"
+
+#~ msgid "Do you really want to remove all selected tags?"
+#~ msgstr "Naozaj chcete odstrániť všetky vybrané značky?"
+
+#~ msgid "Remove Tag"
+#~ msgstr "Odstrániť značku"
+
+#~ msgid ""
+#~ "At least one transaction/scheduled transaction is still referenced by a "
+#~ "tag. Currently you have all tags selected. However, at least one tag must "
+#~ "remain so that the transaction/scheduled transaction can be reassigned."
+#~ msgstr ""
+#~ "Aspoň jedna transakcia/plánovaná transakcia sa stále odvoláva na značku. "
+#~ "V súčasnosti máte všetky značky vybrané. Avšak, aspoň jedna značka musí "
+#~ "zostať tak, aby transakcia/plánovaná transakcia mohla byť znova priradené."
+
+#~ msgid "Creates a new tag"
+#~ msgstr "Vytvorí novú značku"
+
+#~ msgid "Use this to create a new tag."
+#~ msgstr "Použite toto na vytvorenie novej značky."
+
+#~ msgid "Rename the current selected tag"
+#~ msgstr "Premenovať aktuálne vybranú značku"
+
+#~ msgid "Use this to start renaming the selected tag."
+#~ msgstr "Použiť na spustenie premenovania vybranej značky."
+
+#~ msgid "Delete the current selected tag"
+#~ msgstr "Vymazať aktuálne vybranú značku"
+
+#~ msgid "Use this to delete the selected tag."
+#~ msgstr "Použiť na vymazanie vybranej značky."
 
 #~ msgid "Go to My Financial Summary"
 #~ msgstr "Prejsť do môjho finančného prehľadu"
@@ -27077,79 +27529,192 @@ msgstr ""
 #~ msgid "- Improved payee matching when importing transactions"
 #~ msgstr "Zlepšené párovanie príjemcov pri importe transakcií"
 
-#, fuzzy
-#~| msgid "Online settings"
 #~ msgid "* Online services"
-#~ msgstr "Online nastavenie"
+#~ msgstr "* Online služby"
 
 #, fuzzy
-#~| msgid "Any status"
-#~ msgctxt ""
-#~ msgid "Any status"
-#~ msgstr "Akýkoľvek stav"
+#~| msgid "Online Statement Balance: %1"
+#~ msgid "Online statement balance: %1"
+#~ msgstr "Online Zostatok výpisu: %1"
 
-#, fuzzy
-#~| msgid "Closed"
-#~ msgctxt ""
-#~ msgid "Closed"
-#~ msgstr "Uzavreté"
+#~ msgid "Credit"
+#~ msgstr "Kredit"
 
-#~ msgctxt "Payment made from account"
-#~ msgid "Payment"
-#~ msgstr "Platba"
-
-#~ msgctxt "Deposit into account"
-#~ msgid "Deposit"
-#~ msgstr "Vklad"
-
-#, fuzzy
-#~| msgid "Name"
-#~ msgctxt "OnlineJob"
-#~ msgid "Name"
-#~ msgstr "Názov"
-
-#~ msgid "Not able to display this job."
-#~ msgstr "Nie je možné zobraziť túto úlohu."
-
-#~ msgid ""
-#~ "Could not find a plugin to display this job or it does not contain any "
-#~ "data."
-#~ msgstr ""
-#~ "Nemôžem nájsť plugin na zobrazenie tejto úlohy, alebo neobsahuje žiadne "
-#~ "údaje."
-
-#~ msgid ""
-#~ "The transactions associated with the selected tags need to be re-assigned "
-#~ "to a different tag before the selected tags can be deleted. Please select "
-#~ "a tag from the list below."
-#~ msgstr ""
-#~ "Transakcie spojené s vybranými značkami musia byť znovu priradené k inej "
-#~ "značke skôr, ako môžu byť vybrané značky zmazané. Prosím, nižšie vyberte "
-#~ "značku zo zoznamu."
-
-#~ msgid "<p>Do you really want to remove the tag <b>%1</b>?</p>"
-#~ msgstr "<p>Naozaj chcete odstrániť značku <b>%1</b>?</p>"
-
-#~ msgid "Do you really want to remove all selected tags?"
-#~ msgstr "Naozaj chcete odstrániť všetky vybrané značky?"
-
-#~ msgid "Remove Tag"
-#~ msgstr "Odstrániť značku"
-
-#~ msgid ""
-#~ "At least one transaction/scheduled transaction is still referenced by a "
-#~ "tag. Currently you have all tags selected. However, at least one tag must "
-#~ "remain so that the transaction/scheduled transaction can be reassigned."
-#~ msgstr ""
-#~ "Aspoň jedna transakcia/plánovaná transakcia sa stále odvoláva na značku. "
-#~ "V súčasnosti máte všetky značky vybrané. Avšak, aspoň jedna značka musí "
-#~ "zostať tak, aby transakcia/plánovaná transakcia mohla byť znova priradené."
+#~ msgid "Debit"
+#~ msgstr "Dlh"
 
 #~ msgid "Pay to"
 #~ msgstr "Zaplatiť do"
 
-#~ msgid "&Show tip of the day"
-#~ msgstr "Zobraziť tip dňa"
+#~ msgctxt "Deposits onto account"
+#~ msgid "Deposits"
+#~ msgstr "Vklady"
+
+#~ msgctxt "Payments towards credit card"
+#~ msgid "Payments"
+#~ msgstr "Platby"
+
+#~ msgctxt "Payments made from account"
+#~ msgid "Payments"
+#~ msgstr "Platby"
+
+#~ msgctxt "Payments made with credit card"
+#~ msgid "Charges"
+#~ msgstr "Výdavky"
+
+#~ msgctxt "Reconcile state 'Not reconciled'"
+#~ msgid "Not reconciled"
+#~ msgstr "Nezosúladené"
+
+#~ msgctxt "Reconcile state 'Cleared'"
+#~ msgid "Cleared"
+#~ msgstr "Zmazané"
+
+#~ msgctxt "Reconcile state 'Reconciled'"
+#~ msgid "Reconciled"
+#~ msgstr "Vysporiadané"
+
+#~ msgctxt "Reconcile state 'Frozen'"
+#~ msgid "Frozen"
+#~ msgstr "Zmrazené"
+
+#~ msgctxt "Unknown reconcile state"
+#~ msgid "Unknown"
+#~ msgstr "Neznáme"
+
+#~ msgid "Ratio"
+#~ msgstr "Pomer"
+
+#~ msgid "Fee Amount"
+#~ msgstr "Suma poplatku"
+
+#~ msgid "Account Types"
+#~ msgstr "Typy účtu"
+
+#~ msgctxt "The balance of the selected budget"
+#~ msgid "Balance: "
+#~ msgstr "Bilancia:"
+
+#~ msgctxt "Activity for income categories"
+#~ msgid "Received"
+#~ msgstr "Prijaté"
+
+#~ msgctxt "Activity for expense categories"
+#~ msgid "Paid"
+#~ msgstr "Vyplatené"
+
+#~ msgctxt "Payee"
+#~ msgid "Pay to"
+#~ msgstr "Zaplatiť do"
+
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "Od"
+
+#~ msgctxt "Enter todays date into date input widget"
+#~ msgid "T"
+#~ msgstr "T"
+
+#~ msgid "Closed tag"
+#~ msgstr "Uzavretá značka"
+
+#~ msgid "The tag is already present."
+#~ msgstr "Značka je už prítomná."
+
+#~ msgid "Prior transactions possibly filtered"
+#~ msgstr "Predchádzajúce transakcie asi filtrované"
+
+#, fuzzy
+#~| msgid "Opening balance: %1"
+#~ msgid "Reconciled Balance: %1"
+#~ msgstr "Počiatočný stav: %1"
+
+#~ msgid "Online Statement Balance: %1"
+#~ msgstr "Online Zostatok výpisu: %1"
+
+#~ msgctxt "Unknown payee"
+#~ msgid "Unknown"
+#~ msgstr "Neznáme"
+
+#~ msgctxt "Unknown category"
+#~ msgid "Unknown"
+#~ msgstr "Neznáme"
+
+#~ msgctxt "Unknown security"
+#~ msgid "Unknown"
+#~ msgstr "Neznáme"
+
+#~ msgctxt "label for status combo"
+#~ msgid "Stat&us"
+#~ msgstr "Stav"
+
+#~ msgid "Sell"
+#~ msgstr "Predaj"
+
+#~ msgid "Buy"
+#~ msgstr "Nákup"
+
+#~ msgid "Investment transaction"
+#~ msgstr "Investičná transakcia"
+
+#~ msgid "KMyMoney has matched the two selected transactions (result above)"
+#~ msgstr ""
+#~ "KMyMoney spárovala dve vybrané transakcie (výsledok je uvedený vyššie)"
+
+#~ msgid "Bank entry:"
+#~ msgstr "Banková položka:"
+
+#~ msgid "Your entry:"
+#~ msgstr "Vaša položka:"
+
+#~ msgid "&Deposit"
+#~ msgstr "Vkla&d"
+
+#~ msgid "&Transfer"
+#~ msgstr "&Prenos"
+
+#~ msgid "&Withdrawal"
+#~ msgstr "Výber"
+
+#~ msgid "&Payment"
+#~ msgstr "&Platba"
+
+#~ msgid "&Charge"
+#~ msgstr "Strhnutie"
+
+#~ msgid "&Decrease"
+#~ msgstr "Znížiť"
+
+#~ msgid "&Increase"
+#~ msgstr "Zvýšiť"
+
+#~ msgid "No Title specified"
+#~ msgstr "Nezadaný žiadny názov"
+
+#~ msgid "Preferred account"
+#~ msgstr "Preferovaný účet"
+
+#~ msgid "Enter the ticker symbol (e.g. RHAT)."
+#~ msgstr "Zadať burzový symbol (napr. RHAT)."
+
+#~ msgid "Enter the CUSIP/ISIN/WKN identification number here"
+#~ msgstr "Zadať sem identifikačné číslo CUSIP/ISIN/WKN"
+
+#~ msgid "This wizard allows you to modify the selected security."
+#~ msgstr "Tento sprievodca vám umožňuje upraviť vybraný cenný papier."
+
+#~ msgid ""
+#~ "The selected symbol is already on file. Do you want to reuse the existing "
+#~ "security?"
+#~ msgstr ""
+#~ "Vybraný symbol je už v súbore. Chcete znovu použiť existujúci cenný "
+#~ "papier?"
+
+#~ msgid "Security found"
+#~ msgstr "Cenný papier nájdený"
+
+#~ msgid "Routing number"
+#~ msgstr "Smerovacie číslo"
 
 #~ msgid ""
 #~ "<p>...that you can change the sort order of ledger entries by\n"
@@ -27316,334 +27881,6 @@ msgstr ""
 #~ "</p>\n"
 #~ "<p>Poskytnuté od  Jose Jorge</p>\n"
 
-#~ msgid "Change the security information of the selected entry."
-#~ msgstr "Zmeniť informácie cenného papiera vybranej položky."
-
-#~ msgid "Remove this security item from the file"
-#~ msgstr "Odstrániť túto položku cenného papiera zo súboru"
-
-#~ msgid "Delete..."
-#~ msgstr "Vymazať..."
-
-#~ msgctxt "Deposits onto account"
-#~ msgid "Deposits"
-#~ msgstr "Vklady"
-
-#~ msgctxt "Payments towards credit card"
-#~ msgid "Payments"
-#~ msgstr "Platby"
-
-#~ msgctxt "Payments made from account"
-#~ msgid "Payments"
-#~ msgstr "Platby"
-
-#~ msgctxt "Payments made with credit card"
-#~ msgid "Charges"
-#~ msgstr "Výdavky"
-
-#~ msgctxt "Reconcile state 'Not reconciled'"
-#~ msgid "Not reconciled"
-#~ msgstr "Nezosúladené"
-
-#~ msgctxt "Reconcile state 'Cleared'"
-#~ msgid "Cleared"
-#~ msgstr "Zmazané"
-
-#~ msgctxt "Reconcile state 'Reconciled'"
-#~ msgid "Reconciled"
-#~ msgstr "Vysporiadané"
-
-#~ msgctxt "Reconcile state 'Frozen'"
-#~ msgid "Frozen"
-#~ msgstr "Zmrazené"
-
-#~ msgctxt "Unknown reconcile state"
-#~ msgid "Unknown"
-#~ msgstr "Neznáme"
-
-#~ msgctxt "Total value"
-#~ msgid "Total"
-#~ msgstr "Celkom"
-
-#~ msgid "Ratio 1/"
-#~ msgstr "Pomer 1/"
-
-#~ msgid "Ratio"
-#~ msgstr "Pomer"
-
-#~ msgid "Fee Amount"
-#~ msgstr "Suma poplatku"
-
-#~ msgid "Price/Share"
-#~ msgstr "Cena/Akcia"
-
-#~ msgid "Asset account"
-#~ msgstr "Účet aktív"
-
-#~ msgid ""
-#~ "Cannot enter transaction with postdate prior to account's opening date."
-#~ msgstr ""
-#~ "Nie je možné zadať transakciu s dátumom odoslania pred počiatočným "
-#~ "dátumom účtu."
-
-#~ msgid "Found %1 matching transaction (D %2 / P %3 = %4)"
-#~ msgid_plural "Found %1 matching transactions (D %2 / P %3 = %4)"
-#~ msgstr[0] "Nájdená %1 zodpovedajúca transakcia (D %2 / P %3 = %4)"
-#~ msgstr[1] "Nájdené %1 zodpovedajúce transakcie (D %2 / P %3 = %4)"
-#~ msgstr[2] "Nájdených %1 zodpovedajúcich transakcií (D %2 / P %3 = %4)"
-
-#~ msgctxt "To duplicate a split"
-#~ msgid "Duplicate"
-#~ msgstr "Duplikovať"
-
-#~ msgid "will be calculated"
-#~ msgstr "bude vypočítané"
-
-#~ msgid ""
-#~ "You are about to delete the selected split. Do you really want to "
-#~ "continue?"
-#~ msgstr "Chystáte sa zmazať vybrané rozdelenie. Naozaj chcete pokračovať?"
-
-#~ msgid ""
-#~ "You need to assign a category to this split before it can be entered."
-#~ msgstr ""
-#~ "Musíte priradiť kategóriu tohto rozdelenia pred tým, než môže byť zadané."
-
-#~ msgid "Enter split"
-#~ msgstr "Zadať rozdelenie"
-
-#~ msgid ""
-#~ "Select a transaction and press the OK button or use Cancel to select none."
-#~ msgstr ""
-#~ "Vybrať transakciu a stlačiť tlačidlo OK alebo použiť Zrušiť pre výber  "
-#~ "žiadnej."
-
-#~ msgid "Clear &All"
-#~ msgstr "Vyčistiť &všetko"
-
-#~ msgid "Use this to clear all splits of this transaction"
-#~ msgstr "Použiť na vyčistenie všetkých rozdelení tejto transakcie"
-
-#~ msgid "Clear &Zero"
-#~ msgstr "&Vyčistiť nulu"
-
-#~ msgid ""
-#~ "In case you have multiple split entries to the same category and you like "
-#~ "to keep them as a single split"
-#~ msgstr ""
-#~ "V prípade, že máte viac položiek rozdelenia pre rovnakú kategóriu a "
-#~ "chcete ich ponechať ako jedno rozdelenie"
-
-#~ msgid ""
-#~ "You are about to delete all splits of this transaction. Do you really "
-#~ "want to continue?"
-#~ msgstr ""
-#~ "Chystáte sa zmazať všetky rozdelenia tejto transakcie. Naozaj chcete "
-#~ "pokračovať?"
-
-#~ msgid "<b>11,00<b>"
-#~ msgstr "<b>11,00<b>"
-
-#~ msgid "<b>111,00<b>"
-#~ msgstr "<b>111,00<b>"
-
-#~ msgid "Unassigned"
-#~ msgstr "Nepriradené"
-
-#~ msgid "100,00"
-#~ msgstr "100,00"
-
-#~ msgid "Prior transactions possibly filtered"
-#~ msgstr "Predchádzajúce transakcie asi filtrované"
-
-#~ msgid "Online Statement Balance: %1"
-#~ msgstr "Online Zostatok výpisu: %1"
-
-#~ msgctxt "Unknown payee"
-#~ msgid "Unknown"
-#~ msgstr "Neznáme"
-
-#~ msgctxt "Unknown category"
-#~ msgid "Unknown"
-#~ msgstr "Neznáme"
-
-#~ msgctxt "Unknown security"
-#~ msgid "Unknown"
-#~ msgstr "Neznáme"
-
-#~ msgctxt "label for status combo"
-#~ msgid "Stat&us"
-#~ msgstr "Stav"
-
-#~ msgid "Sell"
-#~ msgstr "Predaj"
-
-#~ msgid "Buy"
-#~ msgstr "Nákup"
-
-#~ msgid "Investment transaction"
-#~ msgstr "Investičná transakcia"
-
-#~ msgid "Transfer to"
-#~ msgstr "Prevod do"
-
-#~ msgid "Transfer from"
-#~ msgstr "Prevod z"
-
-#~ msgid "Category/Account"
-#~ msgstr "Kategória/účet"
-
-#~ msgid "KMyMoney has matched the two selected transactions (result above)"
-#~ msgstr ""
-#~ "KMyMoney spárovala dve vybrané transakcie (výsledok je uvedený vyššie)"
-
-#~ msgid "Bank entry:"
-#~ msgstr "Banková položka:"
-
-#~ msgid "Your entry:"
-#~ msgstr "Vaša položka:"
-
-#~ msgid "The transaction has a missing assignment of <b>%1</b>."
-#~ msgstr "Transakcia má chýbajúce priradenie <b>%1</b>."
-
-#~ msgctxt "Unknown reconciliation state"
-#~ msgid "Unknown"
-#~ msgstr "Neznáme"
-
-#~ msgid ""
-#~ "This transaction has more than two splits and is originally based on a "
-#~ "different currency (%1). Using this account to modify the transaction may "
-#~ "result in rounding errors. Do you want to continue?"
-#~ msgstr ""
-#~ "Táto transakcia má viac ako dve rozdelenia a je pôvodne založený na inej "
-#~ "mene (%1). Použitie tohto účtu na úpravu transakcie môže mať za následok "
-#~ "chyby zaokrúhlenia. Chcete pokračovať?"
-
-#~ msgid ""
-#~ "At least one of the selected transactions has more than two splits and is "
-#~ "originally based on a different currency (%1). Using this account to "
-#~ "modify the transactions may result in rounding errors. Do you want to "
-#~ "continue?"
-#~ msgstr ""
-#~ "Aspoň jedna z vybraných transakcií má viac ako dve rozdelenia a je "
-#~ "pôvodne založený na inej mene (%1). Použitie tohto účtu na úpravu "
-#~ "transakcií môže mať za následok chyby zaokrúhlenia. Chcete pokračovať?"
-
-#~ msgid "<center>Processing schedule for %1.</center>"
-#~ msgstr "<center>Spracúvam plán pre %1.</center>"
-
-#~ msgid ""
-#~ "Check number <b>%1</b> has already been used in account <b>%2</b>."
-#~ "<center>Do you want to replace it with the next available number?</center>"
-#~ msgstr ""
-#~ "Číslo <b>%1</b> už bolo použité v účte <b>%2</b>.<center>Chcete ho "
-#~ "nahradiť nasledujúcim dostupným číslom?</center>"
-
-#~ msgid "Duplicate number"
-#~ msgstr "Zdvojené číslo"
-
-#~ msgid "Storing transactions"
-#~ msgstr "Ukladanie transakcií"
-
-#~ msgid "&Enter"
-#~ msgstr "Zadať"
-
-#~ msgid "Use this to enter the transaction into the ledger."
-#~ msgstr "Použiť na zadanie transakcie do účtovnej knihy."
-
-#~ msgid "&Schedule"
-#~ msgstr "Rozvrh"
-
-#~ msgid "Accepts the entered data and stores it as schedule"
-#~ msgstr "Prijíma zadané údaje a uloží ich ako harmonogram"
-
-#~ msgid ""
-#~ "Use this to schedule the transaction for later entry into the ledger."
-#~ msgstr ""
-#~ "Použiť na naplánovanie transakcie pre neskoršiu položku do účtovnej knihy."
-
-#~ msgid ""
-#~ "The transaction you are about to enter has a post date in the future.<br/"
-#~ "><br/>Do you want to enter it in the ledger or add it to the schedules?"
-#~ msgstr ""
-#~ "Transakcia, ktorú sa chystáte zadať, má dátum odoslania v budúcnosti.<br/"
-#~ "><br/>Chcete ju zadať do účtovnej knihy alebo pridať do harmonogramov?"
-
-#~ msgctxt "Dialog caption for 'Enter or schedule' dialog"
-#~ msgid "Enter or schedule?"
-#~ msgstr "Zadať alebo plánovať?"
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the warning balance of %2."
-#~ msgstr "Zostatok na účte <b>%1</b> klesol pod výstražnú bilanciu %2."
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the minimum balance of %2."
-#~ msgstr "Zostatok na účte <b>%1</b> klesol pod minimálny zostatok %2."
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the maximum credit warning "
-#~ "limit of %2."
-#~ msgstr ""
-#~ "Zostatok na účte <b>%1</b> klesol pod maximálny kreditný výstražný limit "
-#~ "%2."
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the maximum credit limit "
-#~ "of %2."
-#~ msgstr "Zostatok na účte <b>%1</b> klesol pod maximálny kreditný limit %2."
-
-#~ msgid "&Deposit"
-#~ msgstr "Vkla&d"
-
-#~ msgid "&Transfer"
-#~ msgstr "&Prenos"
-
-#~ msgid "&Withdrawal"
-#~ msgstr "Výber"
-
-#~ msgid "&Payment"
-#~ msgstr "&Platba"
-
-#~ msgid "&Charge"
-#~ msgstr "Strhnutie"
-
-#~ msgid "&Decrease"
-#~ msgstr "Znížiť"
-
-#~ msgid "&Increase"
-#~ msgstr "Zvýšiť"
-
-#~ msgid "Reconcile"
-#~ msgstr "Zosúladiť"
-
-#~ msgid "Reconcile - disabled because you are currently reconciling <b>%1</b>"
-#~ msgstr ""
-#~ "Zosúladiť - zakázané, pretože v súčasnej dobe uvádzate do súladu <b>%1</b>"
-
-#~ msgctxt "Button text for match transaction"
-#~ msgid "Match"
-#~ msgstr "Zhoda"
-
-#, fuzzy
-#~| msgid "Cannot create transactions when no account is selected."
-#~ msgid "Add reversing transactions to the currently selected"
-#~ msgstr "Nie je možné vytvoriť transakcie, keď nie je vybraný žiadny účet."
-
-#~ msgctxt "Button text for unmatch transaction"
-#~ msgid "Unmatch"
-#~ msgstr "Zrušiť zhodu"
-
-#~ msgid "Difference: %1"
-#~ msgstr "Rozdiel: %1"
-
-#~ msgid ""
-#~ "At least one split of the selected transactions has been reconciled. Do "
-#~ "you wish to continue to edit the transactions anyway?"
-#~ msgstr ""
-#~ "Najmenej jedno rozdelenie vybraných transakcií bolo zosúladené. Prajete "
-#~ "si aj tak pokračovať v úpravách transakcie?"
-
 #~ msgid ""
 #~ "At least one split of the selected transactions has been frozen. Editing "
 #~ "the transactions is therefore prohibited."
@@ -27654,258 +27891,19 @@ msgstr ""
 #~ msgid "Transaction already frozen"
 #~ msgstr "Transakcia je už zmrazená."
 
-#~ msgid ""
-#~ "At least one split of the selected transaction references an account that "
-#~ "has been closed. Editing the transactions is therefore prohibited."
-#~ msgstr ""
-#~ "Aspoň jedno rozdelenie vybranej transakcie odkazuje na účet, ktorý bol "
-#~ "uzavretý. Úprava transakcia je preto zakázaná."
-
 #~ msgid "Account closed"
 #~ msgstr "Účet uzatvorený"
 
-#~ msgid "Cannot create transactions when no account is selected."
-#~ msgstr "Nie je možné vytvoriť transakcie, keď nie je vybraný žiadny účet."
-
-#~ msgid "Cannot create transactions in the context of a category."
-#~ msgstr "Nie je možné vytvoriť transakcie v kontexte kategórie."
-
-#~ msgid "Cannot create transactions in a closed account."
-#~ msgstr "Nie je možné vytvoriť transakcie v uzavretom účte."
-
 #~ msgid "Cannot edit transactions with frozen splits."
 #~ msgstr "Nie je možné upraviť transakcie so zmrazenými rozdeleniami."
-
-#~ msgid "Cannot edit transactions in the context of a category."
-#~ msgstr "Nie je možné upraviť transakcie v kontexte kategórie."
 
 #~ msgid "Cannot create or edit any transactions in Account %1 as it is closed"
 #~ msgstr ""
 #~ "Nie je možné vytvoriť alebo upraviť akékoľvek transakcie na účte %1, "
 #~ "pretože je uzavretý"
 
-#~ msgid "Cannot edit mixed investment action/type transactions together."
-#~ msgstr ""
-#~ "Nie je možné spolu upravovať zmiešané investičné transakcie akcie/typu."
-
-#~ msgid ""
-#~ "Cannot edit investment transactions and non-investment transactions "
-#~ "together."
-#~ msgstr ""
-#~ "Nie je možné upravovať investičné transakcie a neinvestičné transakcie "
-#~ "dohromady."
-
-#~ msgid "Cannot edit investment transactions in the context of this account."
-#~ msgstr "Nie je možné upraviť transakcie v kontexte tohto účtu."
-
-#~ msgid ""
-#~ "<p>Please select what you want to do: discard the changes, save the "
-#~ "changes or continue to edit the transaction.</p><p>You can also set an "
-#~ "option to save the transaction automatically when e.g. selecting another "
-#~ "transaction.</p>"
-#~ msgstr ""
-#~ "<p>Prosím, vyberte si, čo chcete urobiť: zrušiť zmeny, zmeny uložiť alebo "
-#~ "pokračovať v úpravách transakcie.</p><p>Môžete tiež nastaviť možnosť "
-#~ "automatického uloženia transakcie, keď napr. vyberiete inú transakciu.</p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "Úprava koncovej transakcie"
-
-#, fuzzy
-#~| msgid ""
-#~| "<p>Please select what you want to do: discard the changes, save the "
-#~| "changes or continue to edit the transaction.</p><p>You can also set an "
-#~| "option to save the transaction automatically when e.g. selecting another "
-#~| "transaction.</p>"
-#~ msgid ""
-#~ "<p>Please select what you want to do: discard or save the changes.</"
-#~ "p><p>You can also set an option to save the transaction automatically "
-#~ "when e.g. selecting another transaction.</p>"
-#~ msgstr ""
-#~ "<p>Prosím, vyberte si, čo chcete urobiť: zrušiť zmeny, zmeny uložiť alebo "
-#~ "pokračovať v úpravách transakcie.</p><p>Môžete tiež nastaviť možnosť "
-#~ "automatického uloženia transakcie, keď napr. vyberiete inú transakciu.</p>"
-
-#~ msgid "Date: %1"
-#~ msgstr "Dátum: %1"
-
-#~ msgctxt "Name for unknown payee"
-#~ msgid "Unknown"
-#~ msgstr "Neznáme"
-
-#, fuzzy
-#~| msgid "Payee%1"
-#~ msgid "Payee: %1"
-#~ msgstr "Príjemca%1"
-
-#~ msgid "Memo: %1"
-#~ msgstr "Poznámka: %1"
-
-#~ msgid "Statement Details"
-#~ msgstr "Podrobnosti výpisu"
-
-#~ msgid "Statement Deposit Details"
-#~ msgstr "Podrobnosti výpisu vkladov"
-
-#~ msgid "Statement Payment Details"
-#~ msgstr "Podrobnosti výpisu platieb"
-
-#~ msgid "%1 deposit (%2)"
-#~ msgid_plural "%1 deposits (%2)"
-#~ msgstr[0] "%1 vklad (%2)"
-#~ msgstr[1] "%1 vklady (%2)"
-#~ msgstr[2] "%1 vkladov (%2)"
-
-#, fuzzy
-#~| msgid "%1 payment (%2)"
-#~| msgid_plural "%1 payments (%2)"
-#~ msgid "%1 charge (%2)"
-#~ msgid_plural "%1 charges (%2)"
-#~ msgstr[0] "%1 platba (%2)"
-#~ msgstr[1] "%1 platby (%2)"
-#~ msgstr[2] "%1 platieb (%2)"
-
-#~ msgid "%1 payment (%2)"
-#~ msgid_plural "%1 payments (%2)"
-#~ msgstr[0] "%1 platba (%2)"
-#~ msgstr[1] "%1 platby (%2)"
-#~ msgstr[2] "%1 platieb (%2)"
-
-#~ msgctxt "%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments"
-#~ msgid "%1, %2"
-#~ msgstr "%1, %2"
-
-#~ msgid "Go to '%1'"
-#~ msgstr "Prejsť na '%1'"
-
-#~ msgid "Statement: %1"
-#~ msgstr "Informácie: %1"
-
-#~ msgctxt "Cleared balance"
-#~ msgid "Cleared: %1"
-#~ msgstr "Vyčistené: %1"
-
-#~ msgid "Last reconciled: %1"
-#~ msgstr "Naposledy zosúladené: %1"
-
 #~ msgid "Cannot process transactions in account %1, which is closed."
 #~ msgstr "Nie je možné spracovávať transakcie na účte %1, ktorý je uzavretý."
-
-#~ msgid "Cannot process transaction with focus if it is not selected."
-#~ msgstr ""
-#~ "Nie je možné spracovať transakcie so zameraním, pokiaľ nie sú vybrané."
-
-#, fuzzy
-#~| msgid "Unable to add transactions"
-#~ msgid "Unable to delete transaction(s)"
-#~ msgstr "Nemožno pridať transakcie"
-
-#~ msgid "Running automatic reconciliation"
-#~ msgstr "Automatické spustenie zosúladenia"
-
-#, fuzzy
-#~| msgid "Open ledger"
-#~ msgid "Old ledgers"
-#~ msgstr "Otvoriť účtovnú knihu"
-
-#~ msgid "Thomas Baumgart"
-#~ msgstr "Thomas Baumgart"
-
-#~ msgid "Cristian Oneț"
-#~ msgstr "Cristian Oneț"
-
-#~ msgid "Christian Dávid"
-#~ msgstr "Christian Dávid"
-
-#~ msgid "Michael Edwardes"
-#~ msgstr "Michael Edwardes"
-
-#~ msgid "Alvaro Soliverez"
-#~ msgstr "Alvaro Soliverez"
-
-#~ msgid "Ace Jones"
-#~ msgstr "Ace Jones"
-
-#~ msgid "Tony Bloomfield"
-#~ msgstr "Tony Bloomfield"
-
-#~ msgid "Felix Rodriguez"
-#~ msgstr "Felix Rodriguez"
-
-#~ msgid "John C"
-#~ msgstr "John C"
-
-#~ msgid "Fernando Vilas"
-#~ msgstr "Fernando Vilas"
-
-#~ msgid "Jack Ostroff"
-#~ msgstr "Jack Ostroff"
-
-#~ msgid "Kevin Tambascio"
-#~ msgstr "Kevin Tambascio"
-
-#~ msgid "Javier Campos Morales"
-#~ msgstr "Javier Campos Morales"
-
-#~ msgid "Robert Wadley"
-#~ msgstr "Robert Wadley"
-
-#~ msgid "Laurent Montel"
-#~ msgstr "Laurent Montel"
-
-#~ msgid "Wolfgang Rohdewald"
-#~ msgstr "Wolfgang Rohdewald"
-
-#~ msgid "Marko Käning"
-#~ msgstr "Marko Käning"
-
-#~ msgid "Allan Anderson ✝"
-#~ msgstr "Allan Anderson ✝"
-
-#~ msgctxt "HTML (Filefilter)"
-#~ msgid "HTML files"
-#~ msgstr "HTML súbory"
-
-#~ msgctxt "Column heading for category in tax report"
-#~ msgid "Tax"
-#~ msgstr "Daň"
-
-#~ msgctxt "Column heading for Cost Center"
-#~ msgid "CC"
-#~ msgstr "Kópia"
-
-#, fuzzy
-#~| msgid "Bank Code"
-#~ msgctxt ""
-#~ "Column heading for Bank Code. Use a generic form, do not translate using "
-#~ "a culture-specific term, e.g. 'Routing Number' (en_US) or 'Sort "
-#~ "Code' (en_GB)"
-#~ msgid "Bank Code"
-#~ msgstr "Bankový kód"
-
-#, fuzzy
-#~| msgid "Full name"
-#~ msgctxt ""
-#~ "Tooltip for 'Name' column. Used in Account, Category and Institution "
-#~ "context, so avoid being too specific"
-#~ msgid "Full name"
-#~ msgstr "Celé meno"
-
-#, fuzzy
-#~| msgid "Type"
-#~ msgctxt ""
-#~ "Toolip for a 'Type' column, used in both Account and Category context"
-#~ msgid "Type"
-#~ msgstr "Typ"
-
-#~ msgid "Show title bar on each page"
-#~ msgstr "Ukazovať panel titulku na každej stránke"
-
-#~ msgid "Show title bar on each view"
-#~ msgstr "Ukazovať panel titulku na každom pohľade"
-
-#~ msgid "No Title specified"
-#~ msgstr "Nezadaný žiadny názov"
 
 #~ msgid ""
 #~ "This option hides all accounts that have been closed by the user in views "
@@ -27923,115 +27921,18 @@ msgstr ""
 #~ msgid "Do not show closed accounts"
 #~ msgstr "Neukazovať uzatvorené účty"
 
-#~ msgid "Unable to add schedule: %1"
-#~ msgstr "Nemožno pridať harmonogram: %1"
+#~ msgid "Weboob"
+#~ msgstr "Weboob"
 
-#, fuzzy
-#~| msgid "Update"
-#~ msgctxt "@action:button Update button in tags vew"
-#~ msgid "Update"
-#~ msgstr "Aktualizovať"
-
-#, fuzzy
-#~| msgid "Budget options"
-#~ msgctxt "@title:menu Bugdet context menu"
-#~ msgid "Budget options"
-#~ msgstr "Voľby rozpočtu"
-
-#~ msgid "Select online banking plugin"
-#~ msgstr "Vybrať zásuvný modul online bankovníctva"
-
-#, fuzzy
-#~| msgid "Do you want to add <b>%1</b> as payer/receiver?"
-#~ msgid "Do you want to show <b>%1</b> column on every loaded view?"
-#~ msgstr "Chcete sa pridať <b>%1</b> ako doručiteľa/príjemcu?"
-
-#, fuzzy
-#~| msgid "Do you want to add <b>%1</b> as payer/receiver?"
-#~ msgid "Do you want to hide <b>%1</b> column on every loaded view?"
-#~ msgstr "Chcete sa pridať <b>%1</b> ako doručiteľa/príjemcu?"
-
-#~ msgid "Is a sub account"
-#~ msgstr "Je podúčet"
-
-#~ msgctxt "New transaction button"
-#~ msgid "New"
-#~ msgstr "Nové"
-
-#~ msgid "New scheduled transaction"
-#~ msgstr "Nová plánovaná transakcia"
-
-#~ msgid "Check template file"
-#~ msgstr "Overiť súbor šablóny"
+#~ msgctxt "HTML (Filefilter)"
+#~ msgid "HTML files"
+#~ msgstr "HTML súbory"
 
 #~ msgid "Are you sure you wish to merge these transactions?"
 #~ msgstr "Ste si istí, že chcete zlúčiť tieto transakcie?"
 
-#~ msgid ""
-#~ "<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>"
-#~ msgstr ""
-#~ "<p><b>%1</b> nie je možné presunúť do inštitúcie <b>%2</b>. Dôvod: %3</p>"
-
-#~ msgid "<p><b>%1</b> cannot be moved to <b>%2</b>. Reason: %3</p>"
-#~ msgstr "<p><b>%1</b> nie je možné presunúť do <b>%2</b> Dôvod: %3</p>"
-
-#~ msgid "IBAN/BIC Data"
-#~ msgstr "IBAN/BIC údaje"
-
-#~ msgid "Budgets view"
-#~ msgstr "Zobrazenie rozpočtov"
-
-#~ msgid "Forecast view"
-#~ msgstr "Zobrazenie predpovede"
-
-#, fuzzy
-#~| msgid "Budgets view"
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Budgets view"
-#~ msgstr "Zobrazenie rozpočtov"
-
-#, fuzzy
-#~| msgid "Checking"
-#~ msgctxt "It's about printing bank checks"
-#~ msgid "Check printing"
-#~ msgstr "Kontrola"
-
-#~ msgid "CSV exporter"
-#~ msgstr "CSV exportér"
-
-#~ msgid "CSV importer"
-#~ msgstr "Importér CSV"
-
-#, fuzzy
-#~| msgid "CSV importer"
-#~ msgid "GnuCash importer"
-#~ msgstr "Importér CSV"
-
-#, fuzzy
-#~| msgid "Icalendar export settings"
-#~ msgid "iCalendar exporter"
-#~ msgstr "Nastavenie exportu pre iCalendar"
-
-#~ msgid "OFX Importer"
-#~ msgstr "OFX Importer"
-
-#~ msgid "QIF importer"
-#~ msgstr "QIF importer"
-
-#~ msgid "SQL storage"
-#~ msgstr "SQL úložisko"
-
-#~ msgid "Weboob"
-#~ msgstr "Weboob"
-
 #~ msgid "CSV Files (*.csv)"
 #~ msgstr "CSV súbory (*.csv)"
-
-#~ msgid "Debit"
-#~ msgstr "Dlh"
-
-#~ msgid "Credit"
-#~ msgstr "Kredit"
 
 #~ msgid ""
 #~ "Select 'Debit/credit' if both columns exist, otherwise select 'Amount'."
@@ -28057,132 +27958,6 @@ msgstr ""
 #~ msgid "A&mount"
 #~ msgstr "Suma"
 
-#~ msgid "Creates a new budget"
-#~ msgstr "Vytvorí nový rozpočet"
-
-#~ msgid "Use this to create a new empty budget."
-#~ msgstr "Použiť na vytvorenie nového rozpočtu."
-
-#~ msgctxt "New budget"
-#~ msgid "New"
-#~ msgstr "Nové"
-
-#, fuzzy
-#~| msgid "Rename the current selected budget"
-#~ msgid "Rename the current selected budget."
-#~ msgstr "Premenovať aktuálne vybraný rozpočet"
-
-#~ msgid "Use this to start renaming the selected budget."
-#~ msgstr "Použiť na spustenie premenovania vybraného rozpočtu."
-
-#~ msgid "Delete the current selected budget"
-#~ msgstr "Vymazať aktuálne vybraný rozpočet"
-
-#~ msgid "Use this to delete the selected budget."
-#~ msgstr "Použiť na vymazanie vybraného rozpočtu."
-
-#~ msgid "Use this to create a new payee."
-#~ msgstr "Použiť na vytvorenie nového príjemcu."
-
-#~ msgctxt "New payee"
-#~ msgid "New"
-#~ msgstr "Nové"
-
-#~ msgid "Rename the current selected payee"
-#~ msgstr "Premenovať aktuálne vybraného príjemcu"
-
-#~ msgid "Use this to start renaming the selected payee."
-#~ msgstr "Použiť na spustenie premenovania vybraných príjemcov."
-
-#~ msgid "Delete selected payee(s)"
-#~ msgstr "Vymazať vybraného príjemcu(ov)"
-
-#~ msgid ""
-#~ "Use this to delete the selected payee. You can also select multiple "
-#~ "payees to be deleted."
-#~ msgstr ""
-#~ "Použiť na vymazanie vybraného príjemcu. Môžete si tiež vybrať viacero "
-#~ "príjemcom, ktorí sa odstránia."
-
-#~ msgid "Merge multiple selected payees"
-#~ msgstr "Zlúčiť viacerých vybraných príjemcov"
-
-#~ msgid "Use this to merge multiple selected payees."
-#~ msgstr "Použiť na zlúčenie viacerých vybraných príjemcov."
-
-#~ msgid "Creates a new tag"
-#~ msgstr "Vytvorí novú značku"
-
-#~ msgid "Use this to create a new tag."
-#~ msgstr "Použite toto na vytvorenie novej značky."
-
-#~ msgid "Rename the current selected tag"
-#~ msgstr "Premenovať aktuálne vybranú značku"
-
-#~ msgid "Use this to start renaming the selected tag."
-#~ msgstr "Použiť na spustenie premenovania vybranej značky."
-
-#~ msgid "Delete the current selected tag"
-#~ msgstr "Vymazať aktuálne vybranú značku"
-
-#~ msgid "Use this to delete the selected tag."
-#~ msgstr "Použiť na vymazanie vybranej značky."
-
-#~ msgid "Dequeue"
-#~ msgstr "Vyradiť z poradia"
-
-#~ msgid "Dequeue selected job"
-#~ msgstr "Vybranú úlohu vyradiť z fronty"
-
-#~ msgid "Remove the selected job from the list"
-#~ msgstr "Odstrániť vybrané úlohy zo zoznamu"
-
-#~ msgid "Execute"
-#~ msgstr "Spustiť"
-
-#~ msgid "Execute all jobs in the queue"
-#~ msgstr "Vykonať všetky úlohy vo fronte"
-
-#~ msgctxt "Warning message"
-#~ msgid "There are no jobs in the queue."
-#~ msgstr "Vo fronte nie sú žiadne úlohy."
-
-#~ msgctxt "Message title"
-#~ msgid "No Jobs"
-#~ msgstr "Žiadna úlohy"
-
-#~ msgid "Jobs"
-#~ msgstr "Úlohy"
-
-#~ msgid "Error executing item"
-#~ msgstr "Chyba pri vykonávaní položky"
-
-#~ msgid "Unable to filter account"
-#~ msgstr "Nemožno filtrovať účet"
-
-#~ msgid "Filter Accounts"
-#~ msgstr "Filter účtov"
-
-#~ msgid "Type/Name"
-#~ msgstr "Typ/Meno"
-
-#~ msgid "Frequency"
-#~ msgstr "Frekvencia"
-
-#~ msgid "Unable to load accounts: "
-#~ msgstr "Nemožno načítať účty: "
-
-#~ msgid "Routing Number:"
-#~ msgstr "Smerovacie číslo:"
-
-#, fuzzy
-#~| msgid "Sort order"
-#~ msgid "SortCode"
-#~ msgstr "Poradie triedenia"
-
-#~ msgid "Routing number"
-#~ msgstr "Smerovacie číslo"
-
 #~ msgid "Insert transaction type into No. field for new transactions"
 #~ msgstr "Vložiť typ transakcie do poľa poradového čísla pre nové transakcie"
 
@@ -28194,115 +27969,6 @@ msgstr ""
 
 #~ msgid "Remainder:"
 #~ msgstr "Zvyšok:"
-
-#, fuzzy
-#~| msgid "Icons & splash screen"
-#~ msgid "Show splash screen"
-#~ msgstr "Ikony a úvodná obrazovka"
-
-#~ msgid "Show splash screen during startup"
-#~ msgstr "Ukazovať úvodnú obrazovku pri spustení"
-
-#~ msgid "MyDialog"
-#~ msgstr "MyDialog"
-
-#~ msgctxt ""
-#~ "@item This comes after the hunder text if the tens unit is different from "
-#~ "0"
-#~ msgid " and "
-#~ msgstr " a "
-
-#, fuzzy
-#~| msgid "No"
-#~ msgctxt "@label The word to be printed for no fractional part as in No/00"
-#~ msgid "No"
-#~ msgstr "Nie"
-
-#~ msgid "Account Types"
-#~ msgstr "Typy účtu"
-
-#, fuzzy
-#~| msgid "Open ledger"
-#~ msgid "New ledger"
-#~ msgstr "Otvoriť účtovnú knihu"
-
-#~ msgid ""
-#~ "This dialog does not allow new tags to be created. Please pick a tag from "
-#~ "the list."
-#~ msgstr ""
-#~ "Tento dialóg neumožňuje vytvoriť nové značky. Prosím, vyberte značku zo "
-#~ "zoznamu."
-
-#~ msgid "Tag creation"
-#~ msgstr "Vytvorenie značky"
-
-#~ msgctxt "Flag for unknown reconciliation state"
-#~ msgid "?"
-#~ msgstr "?"
-
-#~ msgid "Total Balance"
-#~ msgstr "Celkový zostatok"
-
-#, fuzzy
-#~| msgid "Amount entered"
-#~ msgid "Cost Center"
-#~ msgstr "Suma zadaná"
-
-#~ msgid "Select year"
-#~ msgstr "Vybrať rok"
-
-#~ msgid "Budget year"
-#~ msgstr "Rok rozpočtu"
-
-#~ msgid "Change budget year"
-#~ msgstr "Zmeniť rok rozpočtu"
-
-#~ msgid ""
-#~ "A budget with the name '%1' already exists. It is not advisable to have "
-#~ "multiple budgets with the same identification name. Are you sure you "
-#~ "would like to rename the budget?"
-#~ msgstr ""
-#~ "Rozpočet s názvom '%1' už existuje. Nie je vhodné mať viac rozpočtov s "
-#~ "rovnakým identifikačným menom. Ste si istí, že chcete premenovať rozpočet?"
-
-#~ msgctxt "@title header of the budget name column"
-#~ msgid "Name"
-#~ msgstr "Názov"
-
-#~ msgid "Saving accounts..."
-#~ msgstr "Ukladanie účtov..."
-
-#~ msgid "Saving transactions..."
-#~ msgstr "Ukladanie transakcií..."
-
-#~ msgid "Saving reports..."
-#~ msgstr "Ukladanie výkazov..."
-
-#~ msgid "Saving budgets..."
-#~ msgstr "Ukladanie rozpočtov..."
-
-#~ msgid "Saving online banking orders..."
-#~ msgstr "Ukladám online bankové prevody..."
-
-#, fuzzy
-#~| msgid "Saving accounts..."
-#~ msgid "Saving costcenters..."
-#~ msgstr "Ukladanie účtov..."
-
-#, fuzzy
-#~| msgid "Online Statement Balance: %1"
-#~ msgid "Online statement balance: %1"
-#~ msgstr "Online Zostatok výpisu: %1"
-
-#~ msgctxt "The balance of the selected budget"
-#~ msgid "Balance: "
-#~ msgstr "Bilancia:"
-
-#~ msgid "Closed tag"
-#~ msgstr "Uzavretá značka"
-
-#~ msgid "The tag is already present."
-#~ msgstr "Značka je už prítomná."
 
 #~ msgid ""
 #~ "<center>This investment account does not contain the \"%1\" security.</"
@@ -28409,11 +28075,52 @@ msgstr ""
 #~ msgid "Statement stats"
 #~ msgstr "Štatistiky výpisu"
 
-#~ msgid "Exceptions"
-#~ msgstr "Výnimky"
+#~ msgid "%1 thrown in %2:%3"
+#~ msgstr "%1 vložený do %2:%3"
+
+#~ msgid "Unable to upload to '%1'"
+#~ msgstr "Nemôžem poslať súbor '%1'"
+
+#~ msgid "Internal error - no matching splits"
+#~ msgstr "Interná chyba - žiadne zodpovedajúce rozdelenia"
+
+#~ msgid "Internal error - no matching transactions"
+#~ msgstr "Interná chyba - žiadne zodpovedajúce transakcie"
+
+#~ msgid "Internal error - no matching schedules"
+#~ msgstr "Interná chyba - žiadne zodpovedajúce harmonogramy"
+
+#~ msgid "Do nothing"
+#~ msgstr "Nerobiť nič"
+
+#~ msgctxt "Report settings"
+#~ msgid "Reports"
+#~ msgstr "Výkazy"
+
+#~ msgctxt "Forecast settings"
+#~ msgid "Forecast"
+#~ msgstr "Predpoveď"
 
 #~ msgid "Encryption"
 #~ msgstr "Šifrovanie"
+
+#~ msgid "First transaction does not match requirement for matching"
+#~ msgstr "Prvá transakcia nezodpovedá požiadavke pre priraďovanie"
+
+#~ msgid "Splits for %1 have conflicting values (%2,%3)"
+#~ msgstr "Rozdelenia pre %1 majú konfliktné hodnoty (%2,%3)"
+
+#~ msgid "Unable to match all splits (%1)"
+#~ msgstr "Nemožno priradiť všetky rozdelenia (%1)"
+
+#~ msgid "Save as database..."
+#~ msgstr "Uložiť ako databázu..."
+
+#~ msgid "Saving file with a new filename..."
+#~ msgstr "Ukladá sa súbor pod novým menom..."
+
+#~ msgid "Saving file to database..."
+#~ msgstr "Ukladanie súboru do databázy..."
 
 #~ msgid "Closing window..."
 #~ msgstr "Zatváram okno..."
@@ -28421,16 +28128,155 @@ msgstr ""
 #~ msgid "Create a new transaction"
 #~ msgstr "Vytvoriť novú transakciu"
 
-#~ msgid "Save as database..."
-#~ msgstr "Uložiť ako databázu..."
+#~ msgid "The statements have been processed with the following results:"
+#~ msgstr "Príkazy boli spracované s nasledovnými výsledkami:"
+
+#~ msgid "%1 in file %2 line %3"
+#~ msgstr "%1 v súbore %2 riadok %3"
+
+#~ msgid ""
+#~ "Account %1 contains an opening balance. Please use KMyMoney version 0.8 "
+#~ "or later and earlier than version 0.9 to correct the problem."
+#~ msgstr ""
+#~ "Účet %1 obsahuje počiatočný stav. Použite, prosím, KMyMoney verzie 0.8 "
+#~ "alebo vyššej a nižšej ako 0.9 na odstránenie problému."
+
+#~ msgid "Do Nothing"
+#~ msgstr "Nerobiť nič"
+
+#~ msgid "Cannot add currency with existing id %1"
+#~ msgstr "Nie je možné pridať menu s existujúcim id %1"
+
+#~ msgid "Cannot modify currency with unknown id %1"
+#~ msgstr "Nie je možné zmeniť menu s neznámym id %1"
+
+#~ msgid "Cannot remove currency with unknown id %1"
+#~ msgstr "Nie je možné odstrániť menu s neznámym id %1"
+
+#~ msgid "Cannot retrieve currency with unknown id '%1'"
+#~ msgstr "Nie je možné získať menu s neznámym id '%1'"
+
+#~ msgid "Could not save one onlineJob."
+#~ msgid_plural "Could not save %1 onlineJobs."
+#~ msgstr[0] "Nemôžem uložiť online úlohu."
+#~ msgstr[1] "Nemôžem uložiť %1 online úlohy."
+#~ msgstr[2] "Nemôžem uložiť %1 online úloh."
+
+#~ msgid ""
+#~ "Unexpected exception '%1' thrown in %2, line %3 caught in "
+#~ "MyMoneyCsvWriter::write()"
+#~ msgstr ""
+#~ "Neočakávaná výnimka '%1' vložená do %2, riadok %3 zachytený v "
+#~ "MyMoneyCsvWriter::write()"
+
+#~ msgid "GnuCash..."
+#~ msgstr "GnuCash..."
+
+#, fuzzy
+#~| msgid ""
+#~| "You cannot import GnuCash data into an existing file. Do you wish to "
+#~| "save this file?"
+#~ msgid ""
+#~ "You cannot import GnuCash data into an existing file. Please close it."
+#~ msgstr ""
+#~ "Nemôžete importovať dáta GnuCash do existujúceho súboru. Prajete si "
+#~ "uložiť tento súbor?"
+
+#~ msgid ": Sorry. This importer cannot handle version %1 of element %2"
+#~ msgstr ": Prepáčte. Tento importér nemôže zvládnuť verziu %1 prvku %2."
+
+#~ msgid "This version of the importer cannot handle multi-book files."
+#~ msgstr "Táto verzia importéra nemôže zvládnuť viacknižné súbory."
+
+#~ msgid ""
+#~ "Input file cannot be parsed; may be corrupt\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Vstupný súbor nemožno spracovať; môže byť poškodený\n"
+#~ "%1"
+
+#~ msgid "Invalid header for file. Should be 'gnc-v2'"
+#~ msgstr "Neplatná hlavička pre súbor. Mala by byť 'gnc-v2'"
+
+#~ msgid "Current importer does not recognize GnuCash account type %1"
+#~ msgstr "Aktuálny importér nerozpozná GnuCash typ účtu %1"
+
+#~ msgid "Cannot find template transaction for schedule %1"
+#~ msgstr "Nie je možné nájsť šablónovú transakciu pre harmonogram %1"
+
+#~ msgid "Internal error - invalid interval char in incrDate"
+#~ msgstr "Interná chyba - neplatný char intervalu v incrDate"
+
+#~ msgid "Exceptions"
+#~ msgstr "Výnimky"
+
+#~ msgid ""
+#~ "Unexpected exception '%1' thrown in %2, line %3 caught in "
+#~ "MyMoneyQifWriter::write()"
+#~ msgstr ""
+#~ "Neočakávaná výnimka '%1' vložená do %2, riadok %3 zachytený v "
+#~ "MyMoneyQifWriter::write()"
+
+#~ msgid "Unable to add budget: %1, thrown in %2:%3"
+#~ msgstr "Nemožno pridať rozpočet: %1, vložený do %2:%3"
+
+#~ msgid "Unable to remove budget: %1, thrown in %2:%3"
+#~ msgstr "Nemožno odstrániť rozpočet: %1, vložený do %2:%3"
+
+#~ msgid "Unable to modify budget: %1, thrown in %2:%3"
+#~ msgstr "Nemožno zmeniť rozpočet: %1, vložený do %2:%3"
+
+#~ msgid "Unable to duplicate transaction(s): %1, thrown in %2:%3"
+#~ msgstr "Nemožno duplikovať transakciu(e): %1, vložené do %2:%3"
+
+#~ msgid "Unable to accept transaction: %1, thrown in %2:%3"
+#~ msgstr "Nemožno prijať transakciu: %1, vložené do %2:%3"
+
+#~ msgid "Unable to modify transaction: %1, thrown in %2:%3"
+#~ msgstr "Nemožno zmeniť transakciu(e): %1, vložené do %2:%3"
+
+#~ msgid "Unable to delete transaction(s): %1, thrown in %2:%3"
+#~ msgstr "Nemožno vymazať transakciu(e): %1, vložené do %2:%3"
+
+#~ msgid "No manually entered transaction selected for matching"
+#~ msgstr "Žiadna ručne zadaná transakcia nebola vybraná pre priraďovanie"
+
+#~ msgid "No imported transaction selected for matching"
+#~ msgstr "Žiadna vybraná importovaná transakcia pre priraďovanie"
+
+#~ msgid "GPG is not available for decryption of file <b>%1</b>"
+#~ msgstr "GPG nie je k dispozícii pre dešifrovanie súboru <b>%1</b>"
+
+#~ msgid ""
+#~ "File <b>%1</b> contains the old binary format used by KMyMoney. Please "
+#~ "use an older version of KMyMoney (0.8.x) that still supports this format "
+#~ "to convert it to the new XML based format."
+#~ msgstr ""
+#~ "Súbor <b>%1</b> obsahuje starý binárny formát používaný KMyMoney. Prosím, "
+#~ "použite staršiu verziu KMyMoney (0.8.x), ktorá ešte podporuje tento "
+#~ "formát, aby ste ho previedli do nového formátu založenom na XML."
 
 #~ msgid "File <b>%1</b> contains an unknown file format."
 #~ msgstr "Súbor <b>%1</b> obsahuje neznámy formát súboru."
 
-#, fuzzy
-#~| msgid "Save as..."
-#~ msgid "Save as XML..."
-#~ msgstr "Uložiť ako..."
+#~ msgid "Cannot load file <b>%1</b>. Reason: %2"
+#~ msgstr "Nie je možné načítať súbor <b>%1</b>. Dôvod: %2"
+
+#~ msgid ""
+#~ "The following error was encountered while decrypting file <b>%1</b>: %2"
+#~ msgstr "Nasledujúca chyba nastala pri dešifrovaní súboru <b>%1</b>: %2"
+
+#~ msgid "File <b>%1</b> not found."
+#~ msgstr "Súbor <b>%1</b> nenájdený."
+
+#~ msgid "Unknown fix level in input file"
+#~ msgstr "Neznáma úroveň opravy vo vstupnom súbore"
+
+#~ msgid "Failure while writing to '%1'"
+#~ msgstr "Chyba pri zapisovaní do '%1'"
+
+#~ msgid "Malformed URL '%1'"
+#~ msgstr "Zle zadané URL '%1' "
 
 #, fuzzy
 #~| msgid ""
@@ -28485,194 +28331,9 @@ msgstr ""
 #~ msgid "Set preferences"
 #~ msgstr "Nastaviť predvoľby"
 
-#~ msgid "Saving file with a new filename..."
-#~ msgstr "Ukladá sa súbor pod novým menom..."
-
-#, fuzzy
-#~| msgid "Unable to add transactions"
-#~ msgid "nable to modify transaction"
-#~ msgstr "Nemožno pridať transakcie"
-
-#~ msgid "%1 thrown in %2:%3"
-#~ msgstr "%1 vložený do %2:%3"
-
-#~ msgid "Unable to upload to '%1'"
-#~ msgstr "Nemôžem poslať súbor '%1'"
-
-#~ msgid "Internal error - no matching splits"
-#~ msgstr "Interná chyba - žiadne zodpovedajúce rozdelenia"
-
-#~ msgid "Internal error - no matching transactions"
-#~ msgstr "Interná chyba - žiadne zodpovedajúce transakcie"
-
-#~ msgid "Internal error - no matching schedules"
-#~ msgstr "Interná chyba - žiadne zodpovedajúce harmonogramy"
-
-#~ msgid "Splits for %1 have conflicting values (%2,%3)"
-#~ msgstr "Rozdelenia pre %1 majú konfliktné hodnoty (%2,%3)"
-
-#~ msgid "Unable to match all splits (%1)"
-#~ msgstr "Nemožno priradiť všetky rozdelenia (%1)"
-
-#~ msgid "Unknown fix level in input file"
-#~ msgstr "Neznáma úroveň opravy vo vstupnom súbore"
-
-#~ msgid "GPG is not available for decryption of file <b>%1</b>"
-#~ msgstr "GPG nie je k dispozícii pre dešifrovanie súboru <b>%1</b>"
-
-#~ msgid ""
-#~ "File <b>%1</b> contains the old binary format used by KMyMoney. Please "
-#~ "use an older version of KMyMoney (0.8.x) that still supports this format "
-#~ "to convert it to the new XML based format."
-#~ msgstr ""
-#~ "Súbor <b>%1</b> obsahuje starý binárny formát používaný KMyMoney. Prosím, "
-#~ "použite staršiu verziu KMyMoney (0.8.x), ktorá ešte podporuje tento "
-#~ "formát, aby ste ho previedli do nového formátu založenom na XML."
-
-#~ msgid "Malformed URL '%1'"
-#~ msgstr "Zle zadané URL '%1' "
-
-#~ msgid "Failure while writing to '%1'"
-#~ msgstr "Chyba pri zapisovaní do '%1'"
-
-#~ msgid "%1 in file %2 line %3"
-#~ msgstr "%1 v súbore %2 riadok %3"
-
-#~ msgid ""
-#~ "Account %1 contains an opening balance. Please use KMyMoney version 0.8 "
-#~ "or later and earlier than version 0.9 to correct the problem."
-#~ msgstr ""
-#~ "Účet %1 obsahuje počiatočný stav. Použite, prosím, KMyMoney verzie 0.8 "
-#~ "alebo vyššej a nižšej ako 0.9 na odstránenie problému."
-
-#~ msgid "Cannot add currency with existing id %1"
-#~ msgstr "Nie je možné pridať menu s existujúcim id %1"
-
-#~ msgid "Cannot modify currency with unknown id %1"
-#~ msgstr "Nie je možné zmeniť menu s neznámym id %1"
-
-#~ msgid "Cannot remove currency with unknown id %1"
-#~ msgstr "Nie je možné odstrániť menu s neznámym id %1"
-
-#~ msgid "Cannot retrieve currency with unknown id '%1'"
-#~ msgstr "Nie je možné získať menu s neznámym id '%1'"
-
-#~ msgid ""
-#~ "Unexpected exception '%1' thrown in %2, line %3 caught in "
-#~ "MyMoneyCsvWriter::write()"
-#~ msgstr ""
-#~ "Neočakávaná výnimka '%1' vložená do %2, riadok %3 zachytený v "
-#~ "MyMoneyCsvWriter::write()"
-
-#~ msgid ": Sorry. This importer cannot handle version %1 of element %2"
-#~ msgstr ": Prepáčte. Tento importér nemôže zvládnuť verziu %1 prvku %2."
-
-#~ msgid "This version of the importer cannot handle multi-book files."
-#~ msgstr "Táto verzia importéra nemôže zvládnuť viacknižné súbory."
-
-#~ msgid ""
-#~ "Input file cannot be parsed; may be corrupt\n"
-#~ "%1"
-#~ msgstr ""
-#~ "Vstupný súbor nemožno spracovať; môže byť poškodený\n"
-#~ "%1"
-
-#~ msgid "Invalid header for file. Should be 'gnc-v2'"
-#~ msgstr "Neplatná hlavička pre súbor. Mala by byť 'gnc-v2'"
-
-#~ msgid "Current importer does not recognize GnuCash account type %1"
-#~ msgstr "Aktuálny importér nerozpozná GnuCash typ účtu %1"
-
-#~ msgid "Cannot find template transaction for schedule %1"
-#~ msgstr "Nie je možné nájsť šablónovú transakciu pre harmonogram %1"
-
-#~ msgid "Internal error - invalid interval char in incrDate"
-#~ msgstr "Interná chyba - neplatný char intervalu v incrDate"
-
-#~ msgid ""
-#~ "Unexpected exception '%1' thrown in %2, line %3 caught in "
-#~ "MyMoneyQifWriter::write()"
-#~ msgstr ""
-#~ "Neočakávaná výnimka '%1' vložená do %2, riadok %3 zachytený v "
-#~ "MyMoneyQifWriter::write()"
-
-#~ msgid "Could not save one onlineJob."
-#~ msgid_plural "Could not save %1 onlineJobs."
-#~ msgstr[0] "Nemôžem uložiť online úlohu."
-#~ msgstr[1] "Nemôžem uložiť %1 online úlohy."
-#~ msgstr[2] "Nemôžem uložiť %1 online úloh."
-
-#~ msgid "Unable to add budget: %1, thrown in %2:%3"
-#~ msgstr "Nemožno pridať rozpočet: %1, vložený do %2:%3"
-
-#~ msgid "Unable to remove budget: %1, thrown in %2:%3"
-#~ msgstr "Nemožno odstrániť rozpočet: %1, vložený do %2:%3"
-
-#~ msgid "Unable to modify budget: %1, thrown in %2:%3"
-#~ msgstr "Nemožno zmeniť rozpočet: %1, vložený do %2:%3"
-
-#~ msgid "Unable to duplicate transaction(s): %1, thrown in %2:%3"
-#~ msgstr "Nemožno duplikovať transakciu(e): %1, vložené do %2:%3"
-
-#~ msgid "Unable to accept transaction: %1, thrown in %2:%3"
-#~ msgstr "Nemožno prijať transakciu: %1, vložené do %2:%3"
-
-#~ msgid "Unable to modify transaction: %1, thrown in %2:%3"
-#~ msgstr "Nemožno zmeniť transakciu(e): %1, vložené do %2:%3"
-
-#~ msgid "Unable to delete transaction(s): %1, thrown in %2:%3"
-#~ msgstr "Nemožno vymazať transakciu(e): %1, vložené do %2:%3"
-
-#~ msgid "No manually entered transaction selected for matching"
-#~ msgstr "Žiadna ručne zadaná transakcia nebola vybraná pre priraďovanie"
-
-#~ msgid "No imported transaction selected for matching"
-#~ msgstr "Žiadna vybraná importovaná transakcia pre priraďovanie"
-
-#~ msgid "Do nothing"
-#~ msgstr "Nerobiť nič"
-
-#~ msgid "Do Nothing"
-#~ msgstr "Nerobiť nič"
-
-#, fuzzy
-#~| msgid "Scheduled transactions"
-#~ msgid "Scheduled transactions"
-#~ msgstr "Plánované prevody"
-
-#~ msgctxt "Report settings"
-#~ msgid "Reports"
-#~ msgstr "Výkazy"
-
-#~ msgid "The statements have been processed with the following results:"
-#~ msgstr "Príkazy boli spracované s nasledovnými výsledkami:"
-
 #~ msgid ""
 #~ "Another instance of KMyMoney is already running. Do you want to quit?"
 #~ msgstr "Ďalšia inštancia KMyMoney je už spustená. Chcete skončiť?"
-
-#~ msgid "GnuCash..."
-#~ msgstr "GnuCash..."
-
-#, fuzzy
-#~| msgid ""
-#~| "You cannot import GnuCash data into an existing file. Do you wish to "
-#~| "save this file?"
-#~ msgid ""
-#~ "You cannot import GnuCash data into an existing file. Please close it."
-#~ msgstr ""
-#~ "Nemôžete importovať dáta GnuCash do existujúceho súboru. Prajete si "
-#~ "uložiť tento súbor?"
-
-#~ msgid "Cannot load file <b>%1</b>. Reason: %2"
-#~ msgstr "Nie je možné načítať súbor <b>%1</b>. Dôvod: %2"
-
-#~ msgid ""
-#~ "The following error was encountered while decrypting file <b>%1</b>: %2"
-#~ msgstr "Nasledujúca chyba nastala pri dešifrovaní súboru <b>%1</b>: %2"
-
-#~ msgid "File <b>%1</b> not found."
-#~ msgstr "Súbor <b>%1</b> nenájdený."
 
 #~ msgctxt "Same transaction if amount differs less than percent."
 #~ msgid "percent."
@@ -28680,10 +28341,6 @@ msgstr ""
 
 #~ msgid "User identification"
 #~ msgstr "Identifikácia užívateľa"
-
-#~ msgctxt "Forecast settings"
-#~ msgid "Forecast"
-#~ msgstr "Predpoveď"
 
 #~ msgid "Additional encryption keys to be used: %1"
 #~ msgstr "Ďalšie šifrovacie kľúče, ktoré majú byť použité: %1"
@@ -28693,9 +28350,6 @@ msgstr ""
 
 #~ msgid "Manage additional keys"
 #~ msgstr "Spravovať ďalšie kľúče"
-
-#~ msgid "Saving file to database..."
-#~ msgstr "Ukladanie súboru do databázy..."
 
 #~ msgid "A plugin to import data using Weboob was added"
 #~ msgstr "Plugin na import údajov z Weboob bol pridaný"

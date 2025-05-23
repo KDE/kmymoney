@@ -407,23 +407,23 @@
 <para>
 	<screenshot>
 	<screeninfo
->Dela med otilldelat belopp</screeninfo>
+>Split with unassigned amount</screeninfo>
 	<mediaobject>
 	<imageobject>
 	<imagedata fileref="split_unasigned.png" format="PNG"/>
 	</imageobject>
 	<textobject>
 	<phrase
->Dela med ej tilldelat belopp</phrase>
+>Split with unassigned amount</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
 <para
->För att omfördela ett 'Ej tilldelat' eller 'Övertilldelat' belopp, markera ett delning som måste justera. Klicka därefter på knappen <guibutton
->Applicera skillnad</guibutton
->, om 'Ej tilldelat' tidigare visades och inte var noll, läggs det beloppet till i den markerade radens värde. Om 'Övertilldelat' tidigare visades och inte var noll, subtraheras beloppet från den markerade radens värde. Som resultat, blir beloppet 'Ej tilldelat' ändat till noll och transaktionen kan sparas med lyckat resultat. </para>
+>To redistribute an 'Unassigned' or 'Overassigned' amount, select a split item that has to be adjusted. After that click on a button <guibutton
+>Apply Difference</guibutton
+>. If 'Unassigned' was previously shown and non-zero, that amount will be added to the selected line item value. If 'Overassigned' was previously shown and non-zero, that amount will be subtracted from the selected line item value. As the result, the 'Unassigned' amount will be set to zero and a transaction could be saved successfully. </para>
 
 <para
 >Observera att kategorifältet i transaktionsformuläret eller transaktionslistan nu visar <emphasis

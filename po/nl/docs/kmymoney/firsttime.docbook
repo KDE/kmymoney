@@ -20,6 +20,55 @@
 <title
 >&kmymoney; voor de eerste keer uitvoeren</title>
 
+<para
+>Nadat &kmymoney; volledig is geladen zullen er twee vensters worden geopend. Het bovenste venster, 'Tip van de dag' biedt een van een serie van belangrijke of bruikbare stukjes informatie over de toepassing. <screenshot>
+	<screeninfo
+>Tip van de dag</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="tipofday.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Tip van de dag</phrase>
+	</textobject>
+	</mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Wij bevelen aan om snel door deze tips te lopen door op de knoppen <guibutton
+>Vorige</guibutton
+> en <guibutton
+>volgende</guibutton
+> onderaan het venster te drukken. </para>
+
+<para
+>Nadat u de tips hebt gelezen kan het venster worden gesloten; het zal opnieuw worden geopend elke keer dat &kmymoney; wordt gestart. Om dit standaard gedrag te stoppen, vinkt u de betreffende optie in het venster 'Tip ban de dag' uit. </para>
+
+<note>
+  <para
+>Tips kunnen op elk moment weer worden gelezen door menu-item <menuchoice
+><guimenu
+>Help</guimenu
+> <guimenuitem
+>Tip van de dag tonen</guimenuitem
+></menuchoice
+> te kiezen in in &kmymoney;. </para>
+</note>
+
+<para
+>Alle tips zijn overgenomen van de lijst Frequently Asked Questions (&FAQ;) die meer gedetailleerde hulp biedt en gevonden kan worden op de <ulink url="https://www.kmymoney.org/faq.php"
+>website</ulink
+> van het project en in <link linkend="faq"
+>dit handboek</link
+>. </para>
+
+<para
+>Gaarne op <guibutton
+>Sluiten</guibutton
+> klikken om de dialoog Tip of de dag te sluiten. </para>
+
 <note>
   <para
 >Wanneer u &kmymoney; uitvoert kan het niet exact gelijk zijn aan de schermafdrukken in deze handleiding. Veel details, zoals lettertypen, kleuren en pictogrammen, kunnen aangepast worden, ofwel met het menu-item <menuchoice
@@ -388,7 +437,7 @@
 </para>
 
 <para
->Voer de naam van de rekening en wellicht ook het rekeningnummer die door het instituut dat de rekening beheert is toegewezen. Voer de startdatum en de startsaldo van de rekening in. Bijvoorbeeld, u wilt &kmymoney; gebruiken om al uw financiën te gaan beheren vanaf 2008-01-01, Voer dan het saldo van de rekening op die datum in als beginsaldo. Dit getal kunt wellicht op een papieren bankafschrift vinden. U kunt ook de naam en het rekeningnummer van de bank invoeren. De laatste, bekent als het als het routeringsnummer in de VS of de soortcode in het VK, is optioneel en alleen vereist voor online bankieren, maar kan ook behulpzaam zijn bij het importeren van bankafschriften in sommige ondersteunde formaten (OFX, QFX). </para>
+>Voer de naam van de rekening en wellicht ook het rekeningnummer die door het instituut dat de rekening beheert is toegewezen. Voer de startdatum en de startsaldo van de rekening in. Bijvoorbeeld, u wilt &kmymoney; gebruiken om al uw financiën te gaan beheren vanaf 2008-01-01, Voer dan het saldo van de rekening op die datum in als beginsaldo. Dit getal kunt wellicht op een papieren bankafschrift vinden. Voer ook de naam en IBAN nummer van de bank in, maar deze informatie is optioneel en alleen nodig voor online bankieren. </para>
 
 <para
 >In het geval dat u geen bankrekening wilt instellen, haalt u in het keuzevakje het vinkje weg. </para>
@@ -826,7 +875,7 @@
 
 <note>
 <para
->Deze instructie zijn uitsluitend voor het verplaatsen van uw &kmymoney;-data en instellingen. Maar er kunnen belangrijke items zijn die door &kde; worden opgeslagen en niet door &kmymoney;, zoals wachtwoorden die in Keychain zijn opgeslagen. Het verplaatsen van andere onderdelen van uw &kde; instellingen valt buiten het doel van deze handleiding, ofschoon veel van de relevante bestanden ook in <envar
+>Deze instructie zijn uitsluitend voor het verplaatsen van uw &kmymoney;-data en instellingen. Maar er kunnen belangrijke items zijn die door &kde; worden opgeslagen en niet door &kmymoney;, zoals wachtwoorden die in kwallet zijn opgeslagen. Het verplaatsen van andere onderdelen van uw &kde; instellingen valt buiten het doel van deze handleiding, ofschoon veel van de relevante bestanden ook in <envar
 >$KDEHOME</envar
 > zijn opgeslagen. </para>
 </note>

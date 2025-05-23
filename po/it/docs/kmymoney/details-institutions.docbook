@@ -8,59 +8,100 @@
 >&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->01/12/2024</date>
+>01/02/2018</date>
   <releaseinfo
->5.2.0</releaseinfo>
+>5.0.0</releaseinfo>
 </chapterinfo>
+
 <title
 >Istituti</title>
 
 <para
->Gli istituti in &kmymoney; servono per raggruppare i conti. Sono più comunemente istituti finanziari come banche e società di intermediazione finanziaria, ma possono essere qualsiasi cosa tu voglia, come <quote
->Self</quote
->, per tenere conti per il denaro in tasca e qualsiasi altro asset non effettivamente gestito da un istituto finanziario, o <quote
->Stores</quote
->, per raggruppare tutti i tuoi conti di carte di credito e altri conti con negozi al dettaglio. </para>
-
-<sect1 id="details.institutions.view"
-><title
->Vista degli istituti</title>
-<para
->La vista degli istituti visualizza un riepilogo di tutti i conti aperti raggruppati nei rispettivi istituti. L'elenco dei conti sotto ogni istituto può essere espanso o contratto facendo clic sulla freccia a sinistra del nome dell'istituto. L'ultimo istituto elencato è «Conti senza l'assegnazione di un istituto». </para>
+>La vista degli istituti visualizza un riepilogo di tutti i conti aperti raggruppati nei rispettivi istituti. L'elenco dei conti sotto ogni istituto può essere espanso o contratto facendo clic sulla freccia a sinistra del nome dell'istituto. L'ultimo istituto elencato è "Conti senza l'assegnazione di un istituto". </para>
 
 <para
->La vista Istituti visualizza diverse colonne, che mostrano informazioni sul conto. Mostra anche il valore totale di tutti i conti in ogni istituto. È possibile selezionare quali colonne mostrare facendo clic con il tasto destro del mouse su una qualsiasi intestazione di colonna e selezionando o deselezionando la casella accanto al nome della colonna. </para>
+>La vista Istituti visualizza diverse colonne, che mostrano informazioni sul conto. Mostra anche il valore totale di tutti i conti in ogni istituto. È possibile selezionare quali colonne mostrare facendo clic con il tasto destro del mouse su una qualsiasi intestazione di colonna e selezionando o deselezionando la casella di selezione accanto al nome della colonna. </para>
 
+<para>
 <screenshot>
-  <screeninfo
+    	<screeninfo
 >Vista degli istituti</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="institution_view.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="institution_view.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
 >Vista degli istituti</phrase>
-    </textobject>
-  </mediaobject>
+	</textobject>
+	</mediaobject>
 </screenshot>
+</para>
+
+<para
+>Le seguenti colonne sono disponibili nella vista Istituti. </para>
 
 <variablelist>
   <varlistentry>
     <term
->Nome</term>
+>Conto</term>
     <listitem>
       <para
->Il nome dell'istituto o del conto. Questa colonna è sempre visualizzata. </para>
+>Il nome dell'istituto o del conto. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
->Saldo</term>
+>Tipo</term>
     <listitem>
       <para
->Il saldo attuale del conto. Per gli istituti non viene visualizzato alcun valore. </para>
+>Il tipo di conto, &eg;, risparmio, corrente, carta di credito, ... </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Tasse</term>
+    <listitem>
+      <para
+>Un'indicazione che questo conto è stato configurato come importante per scopi fiscali. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>IVA</term>
+    <listitem>
+      <para
+>Un'indicazione che questo conto è stato configurato per applicare l'IVA su una transazione. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>CC (Centro di costo)</term>
+    <listitem>
+      <para
+>Un'indicazione che un'assegnazione a un centro di costo è necessaria date certe condizioni quando si inserisce una transazione per questo conto. Questa è una nuova funzionalità, che non è ancora implementata, per cui questa colonna non è attualmente utilizzata. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Saldo totale</term>
+    <listitem>
+      <para
+>Un'altra funzionalità, non ancora implementata. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Valore pubblicato</term>
+    <listitem>
+      <para
+>Questo è il saldo del conto fornito dall'istituto bancario. </para>
     </listitem>
   </varlistentry>
 
@@ -69,53 +110,37 @@
 >Valore totale</term>
     <listitem>
       <para
->Per i conti, questo è lo stesso valore del saldo. Per gli istituti, questo è il totale dei saldi di tutti i conti in quell'istituto. </para>
+>Il saldo del conto in &kmymoney;. Nota che per Istituti, questo è il totale dei saldi di tutti i conti di quegli istituti. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
->IBAN</term>
+>Numero</term>
     <listitem>
       <para
->L'<acronym
-><ulink url="https://it.wikipedia.org/wiki/International_Bank_Account_Number"
->IBAN</ulink
-> </acronym
-> (International Bank Account Number) viene visualizzato se è stato immesso un valore nel campo appropriato nella finestra delle informazioni sul conto. </para>
+>Il numero di conto, se ne è stato digitato uno. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
->Coordinate bancarie</term>
+>Ordina codice</term>
     <listitem>
       <para
-><ulink url="https://en.wikipedia.org/wiki/Bank_code"
->Codice bancario</ulink
->. Questo identificatore è formattato e utilizzato in modo diverso in diversi paesisi. È noto come routing o routing transit number negli Stati Uniti e come sort code nel Regno Unito. Attualmente non è utilizzato da &kmymoney;. </para>
+>Questo mostra il codice IBAN, se c'è un valore digitato nel campo appropriato nella finestra delle informazioni del conto. </para>
     </listitem>
   </varlistentry>
 
-  <varlistentry>
-    <term
->SWIFT/BIC</term>
-    <listitem>
-      <para
-><acronym
-><ulink url="https://it.wikipedia.org/wiki/ISO_9362"
->SWIFT/BIC</ulink
-></acronym
-> (codice identificativo della Society for Worldwide Interbank Financial Telecommunication/Business) </para>
-    </listitem>
-  </varlistentry>
 </variablelist>
 
-</sect1>
+<para
+>Notare che molte di queste stesse colonne sono disponibili anche in altre viste, come la vista Conti. Quando si seleziona o deseleziona una casella di selezione per visualizzare o rimuovere una colonna, si vedrà un finestra a comparsa che chiede se si desidera mostrare o rimuovere tale colonna da tutte le viste nelle quali è presente. Se si marca «No», si cambierà la visualizzazione della colonna nella vista attuale. </para>
 
-<sect1 id="details.institutions.institution"
-><title
+<sect1 id="details.institutions.institution">
+<title
 >Opzioni degli istituti</title>
+
 <para
 >Facendo clic con il pulsante destro sul nome di un istituto si apre una finestra Opzioni dell'istituto, con diverse opzioni. Selezionando <guimenuitem
 >Nuovo istituto</guimenuitem
@@ -127,61 +152,85 @@
 >Nuovo conto...</guimenuitem
 > si avvia la procedura di creazione di un nuovo conto, che è descritta in dettaglio nella prossima sezione. </para>
 
+<para>
 <screenshot>
-  <screeninfo
->Sotto-menu opzioni degli istituti</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="institution_options.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->Sotto-menu opzioni degli istituti</phrase>
-    </textobject>
-  </mediaobject>
+	<screeninfo
+>Sotto-menu Opzioni dell'istituto</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="institution_options.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Sotto-menu Opzioni dell'istituto</phrase>
+	</textobject>
+	</mediaobject>
 </screenshot>
+</para>
 
-<sect2 id="details.institutions.new"
-><title
+<sect2 id="details.institutions.new">
+<title
 >Nuovo istituto</title>
-<screenshot>
-  <screeninfo
->nuovo istituto</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="newinst.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->nuovo istituto</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="newinst.png" format="PNG"/>
+      </imageobject>
+      <textobject>
+        <phrase
+>Nuovo istituto</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
 
 <note
 ><para
->Devi avere un file aperto prima di poter creare un nuovo istituto. Se non hai un file esistente, dovrai <link linkend="firsttime.newfile"
+>Bisogna avere un file aperto prima di poter creare un nuovo istituto. In mancanza di un file, sarà necessario <link linkend="firsttime.3"
 >crearne uno</link
 >. </para
 ></note>
 
 <para
->Nella finestra Nuovo istituto è richiesto solo il nome, mentre tutti gli altri campi sono facoltativi. Come nella finestra delle informazioni personali, questi dati non sono attualmente utilizzati da &kmymoney;, ma alcuni elementi potrebbero essere necessari nelle versioni future per determinate funzionalità. In particolare, il <ulink url="https://en.wikipedia.org/wiki/Bank_code"
->Bank Code</ulink
-> e il <acronym
-><ulink url="https://en.wikipedia.org/wiki/ISO_9362"
+>Nella finestra di dialogo Nuovo istituto, l'unico campo obbligatorio è il nome, tutti gli altri sono facoltativi. Come per la finestra delle informazioni personali, questi dati non sono ancora utilizzati da &kmymoney;, ma saranno richiesti nelle prossime versioni per l'utilizzo di certe funzionalità. In particolare, le coordinate bancarie e il codice <acronym
+><ulink url="http://it.wikipedia.org/wiki/ISO_9362"
 >BIC (Bank Identifier Code)</ulink
 ></acronym
-> saranno richiesti per l'online banking, anche se questo potrebbe dipendere dal paese in cui si trova la tua banca. </para>
+> saranno richiesti per l'online banking. </para>
 </sect2>
+</sect1>
 
-<sect2
-><title
+<sect1 id="details.institutions.account">
+<title
 >Opzioni del conto</title>
+
 <para
->Le opzioni discusse sopra si riferiscono agli istituti elencati nella vista degli istituti. La maggior parte delle righe in questa vista sono conti. Facendo clic con il pulsante destro del mouse su un nome di conto si apre un menu Opzioni conto. Le voci e i dettagli per questo menu sono discussi alla fine del <link linkend="details.accounts.options"
->capitolo Conti</link
->. </para>
-</sect2>
+>Facendo clic con il tasto destro del mouse su un conto, si apre il sottomenu Opzioni del conto. Selezionando <guimenuitem
+>Nuovo conto...</guimenuitem
+> si inizia la procedura di creazione di un nuovo conto. Selezionando <guimenuitem
+>Apri libro mastro</guimenuitem
+> si va alla vista Registri o Investimenti, in base al tipo del conto. Si può aprire un conto anche facendo doppio clic sul suo nome. Selezionando <guimenuitem
+>Modifica conto</guimenuitem
+> si apre una finestra che permette di cambiare il nome del conto, la data di apertura, l'istituto bancario associato e il conto padre. L'eliminazione di un conto è permessa solo se non ci sono transazioni associate ad esso. Selezionando <guimenuitem
+>Riconcilia...</guimenuitem
+> si apre la procedura guidata di riconciliazione, che permette di confrontare le transazioni del conto bancario con quelle elettroniche. Si possono trovare maggiori informazioni, ad esempio informazioni sulle altre opzioni, nelle sezioni apposite del manuale. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Sotto-menu Opzioni del conto</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="account_options.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Sotto-menu Opzioni del conto</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
 </sect1>
 </chapter>

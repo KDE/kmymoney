@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-18 02:01+0000\n"
+"POT-Creation-Date: 2025-05-23 03:30+0000\n"
 "PO-Revision-Date: 2015-02-09 11:02+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -320,10 +320,10 @@ msgstr "Raspored pronađen"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
 #, fuzzy, kde-format
-#| msgid "Create a new asset account"
+#| msgid "Created on"
 msgctxt "Create undo action"
 msgid "Create account"
-msgstr "Kreiraj novi račun imovine"
+msgstr "Kreirano"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
 #, fuzzy, kde-format
@@ -2269,10 +2269,10 @@ msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:912
 #, fuzzy, kde-format
-#| msgid "Payment accounts"
+#| msgid "Hide closed accounts"
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
-msgstr "Računi za plaćanje"
+msgstr "Sakrij zatvorene rečuna"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:920
 #, fuzzy, kde-format
@@ -3044,8 +3044,7 @@ msgstr "Sortiraj opcije"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_useDefault)
 #: kmymoney/dialogs/ktransactionsortoptionsdlg.ui:23
-#, fuzzy, kde-format
-#| msgid "Use default"
+#, kde-format
 msgid "Use default"
 msgstr "Koristi podrazumjevano"
 
@@ -3488,10 +3487,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:457
-#, fuzzy, kde-format
-#| msgid "Hide closed accounts"
+#, kde-format
 msgid "Hide accounts with a zero balance from Accounts"
-msgstr "Sakrij zatvorene rečuna"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:464
@@ -4127,9 +4125,9 @@ msgstr "Koristi uvećanje knjige"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowAllSplits)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:86
 #, fuzzy, kde-format
-#| msgid "Show a grid in the register"
+#| msgid "Show all register entries in full detail"
 msgid "Show all split details in ledger"
-msgstr "Prikaži rešetku u registru"
+msgstr "Prikaži detaljno sve pristupe registru"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:96
@@ -5425,9 +5423,9 @@ msgstr "&Novi izvještaj"
 
 #: kmymoney/kmymoney.cpp:1502
 #, fuzzy, kde-format
-#| msgid "&New report"
+#| msgid "Copy of %1"
 msgid "Copy report"
-msgstr "&Novi izvještaj"
+msgstr "Kopija %1"
 
 #: kmymoney/kmymoney.cpp:1503
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:215
@@ -5463,8 +5461,9 @@ msgstr "Uključiti/Isključiti"
 
 #: kmymoney/kmymoney.cpp:1508
 #, fuzzy, kde-format
+#| msgid "Entry order"
 msgid "Edit tab order"
-msgstr "Uključi transfere"
+msgstr "Redoslijed unosa"
 
 #: kmymoney/kmymoney.cpp:1511
 #, kde-format
@@ -6658,11 +6657,11 @@ msgstr "Spojeno"
 
 #: kmymoney/models/statementmodel.cpp:105
 #, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
+#| msgctxt "To duplicate a split"
 #| msgid "Duplicate"
 msgctxt "@title:column Shows number of duplicate transactions"
 msgid "Duplicates"
-msgstr "Umnoži"
+msgstr "Dupliciraj"
 
 #: kmymoney/models/statementmodel.cpp:107
 #, fuzzy, kde-format
@@ -6701,11 +6700,10 @@ msgstr "Početna stranica može pokazati status računa online bankarstva"
 
 #: kmymoney/models/statementmodel.cpp:123
 #: kmymoney/mymoney/storage/accountsmodel.cpp:509
-#, fuzzy, kde-format
-#| msgid "Homepage can show accounts online banking status"
+#, kde-format
 msgctxt "@info:tooltip for 'Tax' column (YES/NO value)"
 msgid "Whether account is included in tax reports"
-msgstr "Početna stranica može pokazati status računa online bankarstva"
+msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:125
 #: kmymoney/mymoney/storage/accountsmodel.cpp:511
@@ -10534,9 +10532,9 @@ msgstr "Označite kolonu koja sadrži područje vrijednosti."
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_amountColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:438
 #, fuzzy, kde-format
-#| msgid "OFX import file selection"
+#| msgid "Category selection"
 msgid "Clear amount field selection."
-msgstr "Odabir OFX uvoznih datoteka"
+msgstr "Izbor kategorije"
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_indicator)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:448
@@ -10556,9 +10554,9 @@ msgstr "Odaberite kolonu koja sadrži polje kategorije."
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_creditDebitIndicatorColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:468
 #, fuzzy, kde-format
-#| msgid "OFX import file selection"
+#| msgid "Category selection"
 msgid "Clear indicator field selection."
-msgstr "Odabir OFX uvoznih datoteka"
+msgstr "Izbor kategorije"
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_debit)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:478
@@ -11402,12 +11400,11 @@ msgid "No profile setup"
 msgstr ""
 
 #: kmymoney/plugins/csv/import/kcm_csvimporter.cpp:65
-#, fuzzy, kde-format
-#| msgid "Please select a profile type and enter a profile name."
+#, kde-format
 msgctxt "@info:tooltip No QIF profile defined"
 msgid ""
 "Please use the QIF profile editor in the QIF plugin settings to create one."
-msgstr "Molimo odaberite tip profila i unesite ime profila."
+msgstr ""
 
 #. i18n: ectx: label, entry (AutoFieldDelimiter), group (Misc)
 #: kmymoney/plugins/csv/import/pluginsettings.kcfg:10
@@ -15555,10 +15552,11 @@ msgstr "Budžet baziran na proračunu"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:460
 #, fuzzy, kde-format
-#| msgid "Any transaction"
+#| msgctxt "Category name"
+#| msgid "Miscellaneous income"
 msgctxt "@item:inmenu To make it income"
 msgid "Change to income"
-msgstr "Sve transakcije"
+msgstr "Razni prihodi"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:465
 #, fuzzy, kde-format
@@ -17289,10 +17287,9 @@ msgid "&Export to PDF files"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:816
-#, fuzzy, kde-format
-#| msgid "Favorite reports"
+#, kde-format
 msgid "Export into directory"
-msgstr "Omiljeni izvještaji"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KReportsView)
 #: kmymoney/plugins/views/reports/kreportsview.ui:14
@@ -19414,17 +19411,16 @@ msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:244
-#, fuzzy, kde-format
-#| msgid "Hide closed accounts"
+#, kde-format
 msgid "Hide zero balance accounts from Accounts"
-msgstr "Sakrij zatvorene rečuna"
+msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:248
 #, fuzzy, kde-format
-#| msgid "Hide closed accounts"
+#| msgid "Show account limit information on the Homepage"
 msgid "Hide zero balance accounts from Home"
-msgstr "Sakrij zatvorene rečuna"
+msgstr "Prikaži limit računa na početnoj stranici"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:252
@@ -19472,9 +19468,10 @@ msgstr "Prikaži grupe ukrasnih oznaka za prethodnu fiskalnu godinu"
 
 #. i18n: ectx: label, entry (ShowReconciliationMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:284
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Do not show reconciled transactions"
 msgid "Show reconciliation entries with date and balance"
-msgstr ""
+msgstr "Ne prikazuj izmirene transakcije"
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:293
@@ -20349,11 +20346,10 @@ msgid "The account is a required field for a schedule"
 msgstr ""
 
 #: kmymoney/views/keditscheduledlg.cpp:169
-#, fuzzy, kde-format
-#| msgid "Cannot create transactions in the context of a category."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
-msgstr "Nije moguće kreirati transakciju u okviru kategorije."
+msgstr ""
 
 #: kmymoney/views/keditscheduledlg.cpp:312
 #, kde-format
@@ -20790,7 +20786,6 @@ msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1421
 #, fuzzy, kde-format
-#| msgctxt "Reconciliation flag C"
 #| msgid "C"
 msgctxt "@title:column table on home page: cleared"
 msgid "C"
@@ -21844,34 +21839,30 @@ msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Transakciji nedostaje dodjela <b>%1</b>."
 
 #: kmymoney/views/ledgerview.cpp:876
-#, fuzzy, kde-format
-#| msgid "This schedule will end at some time"
+#, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
-msgstr "Ovaj rapored će završiti u nekom vremenu"
+msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:882
-#, fuzzy, kde-format
-#| msgid "First transaction does not match requirement for matching"
+#, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
-msgstr "Prva transakcija ne odgovara zahtjevu za podudaranje"
+msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:887
-#, fuzzy, kde-format
-#| msgid "First transaction does not match requirement for matching"
+#, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
-msgstr "Prva transakcija ne odgovara zahtjevu za podudaranje"
+msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:963
 #, fuzzy, kde-format
-#| msgid "Do you really want to delete the selected price entry?"
-#| msgid_plural "Do you really want to delete the selected price entries?"
+#| msgid "Checking for overdue scheduled transactions..."
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
-msgstr "Da li stvarno želite izbrisati odabrani unos cijene?"
+msgstr "Provjeravanje dospjelih raspoređenih transakcija.."
 
 #: kmymoney/views/ledgerview.cpp:964
 #, fuzzy, kde-format
@@ -22501,11 +22492,11 @@ msgstr "Izmjena..."
 
 #: kmymoney/views/splitview.cpp:134
 #, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
+#| msgctxt "To duplicate a split"
 #| msgid "Duplicate"
 msgctxt "@item:inmenu Duplicate selected split(s)"
 msgid "Duplicate"
-msgstr "Umnoži"
+msgstr "Dupliciraj"
 
 #: kmymoney/views/splitview.cpp:176
 #, fuzzy, kde-format
@@ -23912,9 +23903,9 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:265
 #, fuzzy, kde-format
-#| msgid "Create a new asset account"
+#| msgid "Filter Accounts"
 msgid "Favorite account"
-msgstr "Kreiraj novi račun imovine"
+msgstr "Filtriraj Račune"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel14)
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:27
@@ -26704,10 +26695,9 @@ msgid "Export in HTML format"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:126
-#, fuzzy, kde-format
-#| msgid "Favorite reports"
+#, kde-format
 msgid "Export in xml format"
-msgstr "Omiljeni izvještaji"
+msgstr ""
 
 #: tools/kmmreport-export.cpp:129
 #, kde-format
@@ -26800,156 +26790,6 @@ msgstr ""
 #~ msgstr[1] "    %1 kreirana"
 #~ msgstr[2] "    %1 kreirana"
 
-#~ msgid "Duplicate open"
-#~ msgstr "Duplo otvaranje"
-
-#~ msgid ""
-#~ "<p>The account \"%1\" was previously created as loan account but some "
-#~ "information is missing.</p><p>The new loan wizard will be started to "
-#~ "collect all relevant information.</p><p>Please use KMyMoney version 0.8.7 "
-#~ "or later and earlier than version 0.9 to correct the problem.</p>"
-#~ msgstr ""
-#~ "<p>Račun \"%1\" je prethodno kreiran kao kreditni račun ali neke "
-#~ "informacije fale.</p><p>Novi kredit čarobnjak će biti pokrenut prikupiti "
-#~ "sve relevantne informacije.</p><p>Molimo Vas da koristite KMyMoney "
-#~ "verziju 0.8.7 ili kasnije i ranije od verzije 0,9 ispraviti problem.</p>"
-
-#~ msgid "Account problem"
-#~ msgstr "Problem sa računom"
-
-#, fuzzy
-#~| msgid "Select account"
-#~ msgid "Select category or account."
-#~ msgstr "Označi račun"
-
-#~ msgid "Today's due payments"
-#~ msgstr "Plaćanja s današnjim dospijećem"
-
-#, fuzzy
-#~| msgid "Price for %1 updated (id %2)"
-#~ msgctxt "@info Online price update %1 online id, %2 internal id"
-#~ msgid "Price for %1 updated (id %2)"
-#~ msgstr "Cijena za %1 je ažurirana (id %2)"
-
-#~ msgid ""
-#~ "KMyMoney has detected some overdue scheduled transactions for this "
-#~ "account. Do you want to enter those scheduled transactions now?"
-#~ msgstr ""
-#~ "KMyMoney je otkrio neke dospjele planirane transakcije za ovaj račun. "
-#~ "Želite li unijeti te planirane transakcije sada?"
-
-#~ msgid "Remove this price item from the file"
-#~ msgstr "Ukloniti cijenu stavke iz datoteke"
-
-#~ msgid "Stock Name"
-#~ msgstr "Naziv dionice"
-
-#~ msgctxt "Price source"
-#~ msgid "Source"
-#~ msgstr "Izvor"
-
-#~ msgid "Upd"
-#~ msgstr "Upd"
-
-#~ msgid "Res"
-#~ msgstr "Res"
-
-#~ msgid "Close this window"
-#~ msgstr "Zatvori ovaj prozor"
-
-#~ msgid "Preferred account"
-#~ msgstr "Preferirani korisnički račun"
-
-#~ msgid "CashFlow"
-#~ msgstr "Protok novca"
-
-#~ msgid "Select Account:"
-#~ msgstr "Izaberite Račun:"
-
-#, fuzzy
-#~| msgid "Investment details"
-#~ msgid "Investment details"
-#~ msgstr "Detalji o investiciji"
-
-#~ msgid "Enter the ticker symbol (e.g. RHAT)."
-#~ msgstr "Unesite tiker simbol (npr. RHAT)."
-
-#~ msgid "Enter the CUSIP/ISIN/WKN identification number here"
-#~ msgstr "Unesite CUSIP/ISIN/WKN identifikacijski broj"
-
-#~ msgid "This wizard allows you to modify the selected security."
-#~ msgstr "Ovaj čarobanjk omogućava da izmjenite odabranu sigurnost."
-
-#~ msgid ""
-#~ "The selected symbol is already on file. Do you want to reuse the existing "
-#~ "security?"
-#~ msgstr ""
-#~ "Odabrani simbol je već u datoteci. Želite li koristiti postojeće "
-#~ "osiguranje?"
-
-#~ msgid "Security found"
-#~ msgstr "Sigurnost pronađena"
-
-#~ msgctxt "Equity name"
-#~ msgid "Name"
-#~ msgstr "Ime"
-
-#~ msgctxt "Online quote source"
-#~ msgid "Source"
-#~ msgstr "Izvor"
-
-#, fuzzy
-#~| msgid "File already exists"
-#~ msgid "Price Already Exists"
-#~ msgstr "Datoteka već postoji"
-
-#~ msgid ""
-#~ "Received a price for %1 (id %2), but this symbol is not on the list. "
-#~ "Aborting entire update."
-#~ msgstr ""
-#~ "Cijena za %1 primljena(id %2), ali ovaj simbol nije na listi. Obustavljam "
-#~ "cijelo ažuriranje."
-
-#~ msgid "List of known Equities, and the date they were last updated on."
-#~ msgstr "Lista poznatih dionica i datum zadnjeg ažuriranja."
-
-#, fuzzy
-#~| msgid "Symbol"
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Symbol"
-#~ msgstr "Simbol"
-
-#, fuzzy
-#~| msgid "Identification"
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Identification number"
-#~ msgstr "Identifikacija"
-
-#, fuzzy
-#~| msgctxt "@title header of the currency name column"
-#~| msgid "Name"
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Name"
-#~ msgstr "Ime"
-
-#~ msgid "New Quote Source"
-#~ msgstr "Novi izvor navoda"
-
-#, fuzzy
-#~| msgid ""
-#~| "The file <b>%1</b> already exists. Do you really want to overwrite it?"
-#~ msgid ""
-#~ "Security <b>%1</b> uses this quote source.<br>Do you really want to "
-#~ "remove it?"
-#~ msgstr ""
-#~ "Datoteka <b>%1</b> već postoji. Želite li je prepisati preko postojeće?"
-
-#, fuzzy
-#~| msgid "New Quote Source"
-#~ msgctxt "@title:window"
-#~ msgid "Delete quote source"
-#~ msgstr "Novi izvor navoda"
-
 #~ msgid "Source <placeholder>%1</placeholder> does not exist."
 #~ msgstr "Izvor <placeholder>%1</placeholder> ne postoji."
 
@@ -27018,39 +26858,585 @@ msgstr ""
 #~ msgid "Unable to update price for %1 (empty quote data)"
 #~ msgstr "Nemoguće ažuriranje cjene za %1(Datum nije naveden)"
 
-#, fuzzy
-#~| msgid "Unable to update price for %1 (no price or no date)"
-#~ msgid "Unable to update price for %1 (error encountered: '%2')"
-#~ msgstr "Nemoguće ažuriranje cjene za %1(cjena ili datum nisu navedeni)"
+#~ msgctxt "Total value"
+#~ msgid "Total"
+#~ msgstr "Ukupno"
+
+#~ msgid "Price/Share"
+#~ msgstr "Cijena/Udio"
+
+#~ msgid "Asset account"
+#~ msgstr "Imovinski račun"
+
+#~ msgid ""
+#~ "At least one split of the selected transaction references an account that "
+#~ "has been closed. Editing the transactions is therefore prohibited."
+#~ msgstr ""
+#~ "Bar jedna podjela označene transakcije ukazuje na nalog koji je zatvoren. "
+#~ "Uređivanje transakcije stoga nije dozvoljeno."
+
+#~ msgid ""
+#~ "Cannot enter transaction with postdate prior to account's opening date."
+#~ msgstr ""
+#~ "Nije moguće unijeti transakciju sa datumom prije datuma otvaranja računa."
+
+#~ msgctxt "Equity name"
+#~ msgid "Name"
+#~ msgstr "Ime"
 
 #, fuzzy
-#~| msgid "Tag"
-#~ msgctxt "Split header"
-#~ msgid "Tag"
-#~ msgstr "Oznaka"
+#~| msgid "File already exists"
+#~ msgid "Price Already Exists"
+#~ msgstr "Datoteka već postoji"
 
-#~ msgid "Reorganizing accounts..."
-#~ msgstr "Reorganizacija računa..."
+#~ msgid ""
+#~ "Received a price for %1 (id %2), but this symbol is not on the list. "
+#~ "Aborting entire update."
+#~ msgstr ""
+#~ "Cijena za %1 primljena(id %2), ali ovaj simbol nije na listi. Obustavljam "
+#~ "cijelo ažuriranje."
+
+#~ msgid "List of known Equities, and the date they were last updated on."
+#~ msgstr "Lista poznatih dionica i datum zadnjeg ažuriranja."
 
 #, fuzzy
-#~| msgid "Show account limit information on the Homepage"
-#~ msgid "Hide zero balance liabilities on the Homepage"
-#~ msgstr "Prikaži limit računa na početnoj stranici"
+#~| msgid "Search transactions"
+#~ msgctxt "@info:tooltip for find transaction Open button"
+#~ msgid "Search transactions"
+#~ msgstr "Pretraži transakcije"
+
+#~ msgid "Found %1 matching transaction (D %2 / P %3 = %4)"
+#~ msgid_plural "Found %1 matching transactions (D %2 / P %3 = %4)"
+#~ msgstr[0] "Pronađena %1 odgovarajuća transakcija (D %2 / P %3 = %4)"
+#~ msgstr[1] "Pronađene %1 odgovarajuće transakcije (D %2 / P %3 = %4)"
+#~ msgstr[2] "Pronađene %1 odgovarajuće transakcije (D %2 / P %3 = %4)"
+
+#~ msgid "MyDialog"
+#~ msgstr "MojDijalog"
+
+#~ msgid "Remove this price item from the file"
+#~ msgstr "Ukloniti cijenu stavke iz datoteke"
+
+#~ msgctxt "Price source"
+#~ msgid "Source"
+#~ msgstr "Izvor"
+
+#~ msgid "Delete..."
+#~ msgstr "Brisanje..."
+
+#~ msgid "will be calculated"
+#~ msgstr "će se izračunati"
+
+#~ msgid ""
+#~ "You are about to delete the selected split. Do you really want to "
+#~ "continue?"
+#~ msgstr ""
+#~ "Sigurni ste da želite izbrisati odabrane prekide. Da li zaista želite "
+#~ "nastaviti?"
+
+#~ msgid ""
+#~ "You need to assign a category to this split before it can be entered."
+#~ msgstr ""
+#~ "Morate dodijeliti kategoriju ovom dijelu prije nego što se može unijeti."
+
+#~ msgid "Enter split"
+#~ msgstr "Unesite podjelu"
+
+#~ msgid "Is a sub account"
+#~ msgstr "Je li podračun"
+
+#~ msgid "Routing Number:"
+#~ msgstr "Broj rutiranja ili SWIFT kod:"
+
+#~ msgid ""
+#~ "Select a transaction and press the OK button or use Cancel to select none."
+#~ msgstr ""
+#~ "Odaberite transakciju i pritisnite Uredu ili koristite Otkaži da "
+#~ "izbrišete odabir."
+
+#~ msgid "Clear &All"
+#~ msgstr "Poravnaj &sve"
+
+#~ msgid "Use this to clear all splits of this transaction"
+#~ msgstr "Koristite ovo za poravnanje svih razdvajanja ove transakcije"
+
+#~ msgid "Clear &Zero"
+#~ msgstr "Očisti &Nula"
 
 #, fuzzy
 #~| msgid ""
-#~| "    Please enter a price for the currency on or before the opening date."
-#~ msgctxt "@info consistency check"
+#~| "In case you have multiple split entries to the same category and you "
+#~| "like to keep them as a single split, press this button. The amount for "
+#~| "identical categories will be added and stored in a single split for that "
+#~| "category."
 #~ msgid ""
-#~ "    Please enter a price for the currency on or before the date of first "
-#~ "usage."
-#~ msgstr "    Unesite cijenu za valutu na ili prije datuma otvaranja."
+#~ "In case you have multiple split entries to the same category and you like "
+#~ "to keep them as a single split"
+#~ msgstr ""
+#~ "U slučaju da imate više razdvojenih unosa u istoj kategoriji, a želite ih "
+#~ "zadržati kao jedno razdvajanje, pritisnite ovu tipku. Iznos za identične "
+#~ "kategorije će biti dodan i pohranjen u jednom dijelu za tu kategoriju."
+
+#~ msgid ""
+#~ "You are about to delete all splits of this transaction. Do you really "
+#~ "want to continue?"
+#~ msgstr ""
+#~ "Planirate izbrisati sva razdvajanja ove transakcije. Da li zaista želite "
+#~ "nastaviti?"
+
+#~ msgid "<b>11,00<b>"
+#~ msgstr "<b>11,00</b>"
+
+#~ msgid "<b>111,00<b>"
+#~ msgstr "<b>111,00</b>"
+
+#~ msgid "100,00"
+#~ msgstr "100,00"
+
+#~ msgid ""
+#~ "This dialog does not allow new tags to be created. Please pick a tag from "
+#~ "the list."
+#~ msgstr ""
+#~ "Ovaj dijalog ne dozvoljava kreiranje novih oznaka. Izaberite oznaku sa "
+#~ "liste."
+
+#~ msgid "Tag creation"
+#~ msgstr "Kreirati oznaku"
+
+#~ msgid ""
+#~ "The transactions associated with the selected tags need to be re-assigned "
+#~ "to a different tag before the selected tags can be deleted. Please select "
+#~ "a tag from the list below."
+#~ msgstr ""
+#~ "Transakcija povezana sa odabranom oznakom mora biti predodijeljena drugoj "
+#~ "oznaci prije nego što se odabrana oznaka obriše. Odaberite oznaku sa "
+#~ "liste ispod."
+
+#, fuzzy
+#~| msgid "Icons & splash screen"
+#~ msgid "Show splash screen"
+#~ msgstr "Ikone i pozdravni ekran"
+
+#~ msgid "Show title bar on each page"
+#~ msgstr "Prikaži traku naslova na svakoj stranici"
+
+#~ msgid "New Quote Source"
+#~ msgstr "Novi izvor navoda"
+
+#, fuzzy
+#~| msgid "Symbol"
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Symbol"
+#~ msgstr "Simbol"
+
+#, fuzzy
+#~| msgid "Identification"
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Identification number"
+#~ msgstr "Identifikacija"
+
+#, fuzzy
+#~| msgctxt "@title header of the currency name column"
+#~| msgid "Name"
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Name"
+#~ msgstr "Ime"
+
+#, fuzzy
+#~| msgid ""
+#~| "The file <b>%1</b> already exists. Do you really want to overwrite it?"
+#~ msgid ""
+#~ "Security <b>%1</b> uses this quote source.<br>Do you really want to "
+#~ "remove it?"
+#~ msgstr ""
+#~ "Datoteka <b>%1</b> već postoji. Želite li je prepisati preko postojeće?"
+
+#, fuzzy
+#~| msgid "New Quote Source"
+#~ msgid "Delete quote source"
+#~ msgstr "Novi izvor navoda"
+
+#~ msgid "Always show a No. field"
+#~ msgstr "Uvijek prikaži No. polje"
+
+#~ msgid "Category/Account"
+#~ msgstr "Kategorija/Račun"
+
+#~ msgid "Transfer from"
+#~ msgstr "Transfer od"
+
+#~ msgid "Transfer to"
+#~ msgstr "Transfer za"
+
+#~ msgid ""
+#~ "This transaction has more than two splits and is originally based on a "
+#~ "different currency (%1). Using this account to modify the transaction may "
+#~ "result in rounding errors. Do you want to continue?"
+#~ msgstr ""
+#~ "Ova transakcija ima više od dvije podjele i  izvorno se temelji na drugim "
+#~ "valutama(%1). Korištenje ovog računa za promjenu transakcije može "
+#~ "rezultirati greškama pri zaokruživanju.Da li želite nastaviti?"
+
+#~ msgid ""
+#~ "At least one of the selected transactions has more than two splits and is "
+#~ "originally based on a different currency (%1). Using this account to "
+#~ "modify the transactions may result in rounding errors. Do you want to "
+#~ "continue?"
+#~ msgstr ""
+#~ "Barem jedna od odabranih transakcija ima više od dvije podjele, a izvorno "
+#~ "temelji se na drugoj valuti (%1). Korištenje ovog račun za izmjenu "
+#~ "transakcija može rezultirati pogrešakama pri zaokruživanju. Želite li "
+#~ "nastaviti?"
+
+#, fuzzy
+#~| msgid "Cancel processing of schedule entry."
+#~ msgid "<center>Processing schedule for %1.</center>"
+#~ msgstr "Otkaži obradu rasporeda ulaska."
+
+#, fuzzy
+#~| msgid ""
+#~| "The number <b>%1</b> has already been used in account <b>%2</b>."
+#~| "<center>Do you want to replace it with the next available number?</"
+#~| "center>"
+#~ msgid ""
+#~ "Check number <b>%1</b> has already been used in account <b>%2</b>."
+#~ "<center>Do you want to replace it with the next available number?</center>"
+#~ msgstr ""
+#~ "Broj <b>%1 </b> već je korišten u računu<b>%2 </b>. <center> Želite li ga "
+#~ "zamijeniti sljedećim raspoloživim brojem? </center>"
+
+#~ msgid "Duplicate number"
+#~ msgstr "Dupli broj"
+
+#~ msgid "Storing transactions"
+#~ msgstr "Pohranjivanje transakcija"
+
+#~ msgid "&Enter"
+#~ msgstr "&Ulaz"
+
+#~ msgid "Use this to enter the transaction into the ledger."
+#~ msgstr "Koristite ovo za unos transakcije u knjigu."
+
+#~ msgid "&Schedule"
+#~ msgstr "&Raspored"
+
+#~ msgid "Accepts the entered data and stores it as schedule"
+#~ msgstr "Prihvaća unesene podatke i pohranjuje ih kao raspored"
+
+#~ msgid ""
+#~ "The transaction you are about to enter has a post date in the future.<br/"
+#~ "><br/>Do you want to enter it in the ledger or add it to the schedules?"
+#~ msgstr ""
+#~ "Transakcija koju želite da unesete ima datum knjiženja u budućnosti.<br/"
+#~ "><br/>Želite li je unijeti u knjigu ili  dodati na rasporedu?"
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the warning balance of %2."
+#~ msgstr "Bilans računa <b>%1</b> pao ispod bilansa upozorenja od %2."
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the minimum balance of %2."
+#~ msgstr "Stanje računa <b>%1</b> palo ispod minimalnog stanja od %2."
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the maximum credit warning "
+#~ "limit of %2."
+#~ msgstr ""
+#~ "Stanje računa <b>%1</b> palo ispod maksimalne granice kreditne opomene od "
+#~ "%2."
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the maximum credit limit "
+#~ "of %2."
+#~ msgstr ""
+#~ "Stanje računa <b>%1</b> palo ispod maksimalne kreditne granice od %2."
+
+#~ msgid "Thomas Baumgart"
+#~ msgstr "Thomas Baumgart"
+
+#~ msgid "Cristian Oneț"
+#~ msgstr "Cristian Onet"
+
+#, fuzzy
+#~| msgid "Cristian Oneț"
+#~ msgid "Christian Dávid"
+#~ msgstr "Cristian Onet"
+
+#, fuzzy
+#~| msgid "Michael Edwardes."
+#~ msgid "Michael Edwardes"
+#~ msgstr "Michael Edwardes."
+
+#~ msgid "Alvaro Soliverez"
+#~ msgstr "Alvaro Soliverez"
+
+#~ msgid "Ace Jones"
+#~ msgstr "Ace Jones"
+
+#~ msgid "Tony Bloomfield"
+#~ msgstr "Tony Bloomfield"
+
+#~ msgid "Felix Rodriguez"
+#~ msgstr "Felix Rodriguez"
+
+#~ msgid "John C"
+#~ msgstr "John C"
+
+#~ msgid "Fernando Vilas"
+#~ msgstr "Fernando Vilas"
+
+#~ msgid "Kevin Tambascio"
+#~ msgstr "Kevin Tambascio"
+
+#~ msgid "Javier Campos Morales"
+#~ msgstr "Javier Campos Morales"
+
+#~ msgid "Robert Wadley"
+#~ msgstr "Robert Wadely"
+
+#~ msgid "Laurent Montel"
+#~ msgstr "Laurent Montel"
+
+#~ msgid "Wolfgang Rohdewald"
+#~ msgstr "Wolfgang Rohdewald"
+
+#~ msgid "Marko Käning"
+#~ msgstr "Marko Käning"
+
+#~ msgid ""
+#~ "<p>The account \"%1\" was previously created as loan account but some "
+#~ "information is missing.</p><p>The new loan wizard will be started to "
+#~ "collect all relevant information.</p><p>Please use KMyMoney version 0.8.7 "
+#~ "or later and earlier than version 0.9 to correct the problem.</p>"
+#~ msgstr ""
+#~ "<p>Račun \"%1\" je prethodno kreiran kao kreditni račun ali neke "
+#~ "informacije fale.</p><p>Novi kredit čarobnjak će biti pokrenut prikupiti "
+#~ "sve relevantne informacije.</p><p>Molimo Vas da koristite KMyMoney "
+#~ "verziju 0.8.7 ili kasnije i ranije od verzije 0,9 ispraviti problem.</p>"
+
+#~ msgid "Account problem"
+#~ msgstr "Problem sa računom"
+
+#~ msgid "&Show tip of the day"
+#~ msgstr "&Prikaži savjet dana"
+
+#~ msgctxt "New transaction button"
+#~ msgid "New"
+#~ msgstr "Novo"
+
+#~ msgid "New scheduled transaction"
+#~ msgstr "Nova raspoređena transakcija"
+
+#~ msgid ""
+#~ "<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>"
+#~ msgstr ""
+#~ "<p> <b>%1</b> ne može biti premještena u ustanovu <b>%2</b>. Razlog:%3</p>"
+
+#~ msgid "<p><b>%1</b> cannot be moved to <b>%2</b>. Reason: %3</p>"
+#~ msgstr "<p><b>%1</b> ne može se premjestiti <b>%2</b>. Razlog: %3</p>"
+
+#~ msgid "CashFlow"
+#~ msgstr "Protok novca"
+
+#~ msgctxt "Unknown reconciliation state"
+#~ msgid "Unknown"
+#~ msgstr "Nepoznato"
+
+#~ msgctxt "Flag for unknown reconciliation state"
+#~ msgid "?"
+#~ msgstr "?"
+
+#~ msgctxt "Column heading for category in tax report"
+#~ msgid "Tax"
+#~ msgstr "Porez"
+
+#, fuzzy
+#~| msgid "C"
+#~ msgctxt "Column heading for Cost Center"
+#~ msgid "CC"
+#~ msgstr "C"
+
+#~ msgid "Total Balance"
+#~ msgstr "Ukupni bilans"
+
+#, fuzzy
+#~| msgid "Sort order"
+#~ msgctxt "IBAN, SWIFT, etc."
+#~ msgid "Sort Code"
+#~ msgstr "Redoslijed sortiranja"
+
+#~ msgctxt "Payment made from account"
+#~ msgid "Payment"
+#~ msgstr "Plaćanje"
+
+#~ msgctxt "Deposit into account"
+#~ msgid "Deposit"
+#~ msgstr "Depozit"
+
+#, fuzzy
+#~| msgid "Amount entered"
+#~ msgid "Cost Center"
+#~ msgstr "Unesena svota"
+
+#, fuzzy
+#~| msgid "Checking"
+#~ msgctxt "It's about printing bank checks"
+#~ msgid "Check printing"
+#~ msgstr "Provjeravam"
+
+#~ msgctxt ""
+#~ "@item This comes after the hunder text if the tens unit is different from "
+#~ "0"
+#~ msgid " and "
+#~ msgstr " i "
+
+#, fuzzy
+#~| msgctxt "@item no payments were entered for a loan"
+#~| msgid "No"
+#~ msgctxt "@label The word to be printed for no fractional part as in No/00"
+#~ msgid "No"
+#~ msgstr "Ne"
+
+#~ msgid "Check template file"
+#~ msgstr "Datoteka predloška čeka"
 
 #~ msgid "There are no entries in this account.\n"
 #~ msgstr "Nema novih unosa u ovaj račun.\n"
 
 #~ msgid "Invalid account"
 #~ msgstr "Neispravan račun"
+
+#, fuzzy
+#~ msgid "CSV exporter"
+#~ msgstr "CSV izvoznik"
+
+#, fuzzy
+#~ msgid "CSV importer"
+#~ msgstr "CSV uvoznik"
+
+#, fuzzy
+#~ msgid "GnuCash importer"
+#~ msgstr "CSV uvoznik"
+
+#~ msgid "Reorganizing accounts..."
+#~ msgstr "Reorganizacija računa..."
+
+#, fuzzy
+#~ msgid "iCalendar exporter"
+#~ msgstr "ICalendar postavke izvoza"
+
+#, fuzzy
+#~| msgctxt "KMyMoney (Filefilter)"
+#~| msgid "KMyMoney files"
+#~ msgid "KMyMoney print check"
+#~ msgstr "KMyMoney datoteke"
+
+#~ msgid "Dequeue"
+#~ msgstr "Ukloni red čekanja"
+
+#~ msgid "Dequeue selected job"
+#~ msgstr "Izvadi posao iz reda čekanja"
+
+#~ msgid "Remove the selected job from the list"
+#~ msgstr "Ukloni izabrani posao sa liste"
+
+#~ msgid "Execute"
+#~ msgstr "Izvrši"
+
+#~ msgid "Execute all jobs in the queue"
+#~ msgstr "Izvrši sve poslove iz reda čekanja"
+
+#~ msgctxt "Warning message"
+#~ msgid "There are no jobs in the queue."
+#~ msgstr "Nema poslova u redu čekanja."
+
+#~ msgctxt "Message title"
+#~ msgid "No Jobs"
+#~ msgstr "Nema poslova"
+
+#~ msgid "Jobs"
+#~ msgstr "Poslovi"
+
+#, fuzzy
+#~| msgid "QIF Import"
+#~ msgid "OFX Importer"
+#~ msgstr "QIF import"
+
+#, fuzzy
+#~| msgid "QIF Import"
+#~ msgid "QIF importer"
+#~ msgstr "QIF import"
+
+#, fuzzy
+#~| msgid "Budgets"
+#~ msgid "Budgets view"
+#~ msgstr "Budžeti"
+
+#~ msgid "Select year"
+#~ msgstr "Odaberi godinu"
+
+#~ msgid "Budget year"
+#~ msgstr "Proračun godine"
+
+#~ msgid "Change budget year"
+#~ msgstr "Promijeni godinu budžeta"
+
+#~ msgid ""
+#~ "A budget with the name '%1' already exists. It is not advisable to have "
+#~ "multiple budgets with the same identification name. Are you sure you "
+#~ "would like to rename the budget?"
+#~ msgstr ""
+#~ "Proračun s imenom '%1' već postoji. Nije poželjno imati više proračuna s "
+#~ "istim identifikacijskim imenom. Jeste li sigurni da želite preimenovati "
+#~ "proračun?"
+
+#~ msgid "Creates a new budget"
+#~ msgstr "Kreira novi proračun"
+
+#~ msgid "Use this to create a new empty budget."
+#~ msgstr "Koristite ovo za kreiranje novog praznog proračuna."
+
+#~ msgctxt "New budget"
+#~ msgid "New"
+#~ msgstr "Novi"
+
+#, fuzzy
+#~| msgid "Rename the current selected budget"
+#~ msgid "Rename the current selected budget."
+#~ msgstr "Preimenujte trenutno označeni proračun."
+
+#~ msgid "Use this to start renaming the selected budget."
+#~ msgstr "Koristite ovo za početak preimenovanja označenog proračuna."
+
+#~ msgid "Delete the current selected budget"
+#~ msgstr "Izbriši trenutno označeni proračun."
+
+#~ msgid "Use this to delete the selected budget."
+#~ msgstr "Koristite ovo za brisanje označenog proračuna."
+
+#~ msgctxt "@title header of the budget name column"
+#~ msgid "Name"
+#~ msgstr "Naziv"
+
+#~ msgid "Upd"
+#~ msgstr "Upd"
+
+#~ msgid "Res"
+#~ msgstr "Res"
+
+#, fuzzy
+#~| msgid "Forecast"
+#~ msgid "Forecast view"
+#~ msgstr "Prognoza"
+
+#~ msgid "Copy this report to the clipboard"
+#~ msgstr "Kopiraj ovaj Izvještaj u odlagalište"
+
+#~ msgid "Copy"
+#~ msgstr "Kopiraj"
+
+#~ msgid "Close this window"
+#~ msgstr "Zatvori ovaj prozor"
 
 #, fuzzy
 #~| msgid ""
@@ -27062,50 +27448,6 @@ msgstr ""
 #~ msgstr ""
 #~ "*.css|CSS fajlvoi\n"
 #~ "*|Svi fajlovi"
-
-#, fuzzy
-#~| msgid "Budget options"
-#~ msgctxt "@title:menu budget context menu"
-#~ msgid "Budget options"
-#~ msgstr "Opcije budžeta"
-
-#, fuzzy
-#~| msgctxt "KMyMoney (Filefilter)"
-#~| msgid "KMyMoney files"
-#~ msgid "KMyMoney print check"
-#~ msgstr "KMyMoney datoteke"
-
-#~ msgctxt "Activity for income categories"
-#~ msgid "Received"
-#~ msgstr "Primljeno"
-
-#~ msgctxt "Activity for expense categories"
-#~ msgid "Paid"
-#~ msgstr "Plaćeno"
-
-#, fuzzy
-#~| msgid "Pay to"
-#~ msgctxt "Payee"
-#~ msgid "Pay to"
-#~ msgstr "Plati"
-
-#, fuzzy
-#~| msgid "From"
-#~ msgctxt "Payer"
-#~ msgid "From"
-#~ msgstr "Od"
-
-#, fuzzy
-#~| msgid "C"
-#~ msgctxt "@title:column"
-#~ msgid "CC"
-#~ msgstr "C"
-
-#~ msgid "Always show a No. field"
-#~ msgstr "Uvijek prikaži No. polje"
-
-#~ msgid "Always show a No. field in transaction form"
-#~ msgstr "Uvijek prikaži polje 'broj' u obrascu transakcije"
 
 #~ msgid "Loading securities..."
 #~ msgstr "Učitavanje vrijednosnih papira..."
@@ -27124,9 +27466,7 @@ msgstr ""
 #~ msgid "Unknown XML tag %1 found in line %2"
 #~ msgstr "Nepoznata XML oznaka %1 pronađena u liniji %2"
 
-#, fuzzy
-#~| msgid "Exception while creating a %1 element: %2"
-#~ msgid "Exception while reading %1 element: %2"
+#~ msgid "Exception while creating a %1 element: %2"
 #~ msgstr "Izuzetak prilikom stvaranja %1 element: %2"
 
 #~ msgid "Loading file information..."
@@ -27135,34 +27475,177 @@ msgstr ""
 #~ msgid "Loading user information..."
 #~ msgstr "Učitavanje korisničkih informacija..."
 
-#~ msgctxt "Enter todays date into date input widget"
-#~ msgid "T"
-#~ msgstr "T"
+#~ msgid "Saving accounts..."
+#~ msgstr "Spremanje računa..."
+
+#~ msgid "Saving transactions..."
+#~ msgstr "Spremanje transakcije..."
+
+#~ msgid "Saving reports..."
+#~ msgstr "Spremanje izvještaja..."
+
+#~ msgid "Saving budgets..."
+#~ msgstr "Spremanje budžeta..."
 
 #, fuzzy
-#~| msgid "Accepts the entered data and stores it as schedule"
-#~ msgctxt "@info:tooltip Accept button"
-#~ msgid "Accept the transaction and mark it cleared."
-#~ msgstr "Prihvaća unesene podatke i pohranjuje ih kao raspored"
+#~| msgid "Saving accounts..."
+#~ msgid "Saving costcenters..."
+#~ msgstr "Spremanje računa..."
+
+#~ msgid "Always show a No. field in transaction form"
+#~ msgstr "Uvijek prikaži polje 'broj' u obrascu transakcije"
+
+#~ msgid "Show splash screen during startup"
+#~ msgstr "Oozdravni ekran pri pokretanju"
+
+#~ msgid "Show title bar on each view"
+#~ msgstr "Prikaži naslov u svakom pogledu"
+
+#~ msgid "Select online banking plugin"
+#~ msgstr "Odaberite online bankarski dodatak"
+
+#~ msgid "Reconcile"
+#~ msgstr "Izravnaj"
+
+#~ msgid "Reconcile - disabled because you are currently reconciling <b>%1</b>"
+#~ msgstr "Izravnaj - onemogućeno jer trenutno izravnjavate <b>%1</b>"
 
 #, fuzzy
-#~| msgid "Do you really want to delete the selected transaction?"
-#~| msgid_plural "Do you really want to delete all %1 selected transactions?"
-#~ msgctxt "Question about the accept action"
-#~ msgid "Do you want to accept the imported transaction now?"
-#~ msgstr "Da li zasita želite izbrisati odabranu %1 transakciju?"
+#~| msgid "Cannot create transactions when no account is selected."
+#~ msgid "Add reversing transactions to the currently selected"
+#~ msgstr "Nije moguće kreirati transakcije kad nije označen nijedan nalog."
+
+#~ msgid ""
+#~ "At least one split of the selected transactions has been reconciled. Do "
+#~ "you wish to continue to edit the transactions anyway?"
+#~ msgstr ""
+#~ "Bar jedna podjela označene transakcije je usklađena. Želite li ipak "
+#~ "nastaviti uređivati transakcije?"
+
+#~ msgid "Cannot create transactions when no account is selected."
+#~ msgstr "Nije moguće kreirati transakcije kad nije označen nijedan nalog."
+
+#~ msgid "Cannot create transactions in the context of a category."
+#~ msgstr "Nije moguće kreirati transakciju u okviru kategorije."
+
+#~ msgid "Cannot create transactions in a closed account."
+#~ msgstr "Nije moguće kreirati transakcije u zatvorenom nalogu."
+
+#~ msgid "Cannot edit transactions in the context of a category."
+#~ msgstr "Nije moguće uređivanje transakcije u okviru kategorije."
+
+#~ msgid "Cannot edit mixed investment action/type transactions together."
+#~ msgstr "Ne mogu se urediti mješane akcije ulaganja/tipovi ulagana  zajedno."
+
+#~ msgid ""
+#~ "Cannot edit investment transactions and non-investment transactions "
+#~ "together."
+#~ msgstr ""
+#~ "Nije moguće uređivanje investicijskih i neinvesticijskih transakcija "
+#~ "zajedno."
+
+#~ msgid "Cannot edit investment transactions in the context of this account."
+#~ msgstr ""
+#~ "Nije moguće uređivanje investicijskih transakcija u okviru ovog naloga."
+
+#~ msgid ""
+#~ "<p>Please select what you want to do: discard the changes, save the "
+#~ "changes or continue to edit the transaction.</p><p>You can also set an "
+#~ "option to save the transaction automatically when e.g. selecting another "
+#~ "transaction.</p>"
+#~ msgstr ""
+#~ "<p> Molimo odaberite ono što želite učiniti: odbacite promjene, spremite "
+#~ "promjene ili nastaviti uređivati ​​transakciju </p> <p> Također možete "
+#~ "postaviti opciju za automatsko spremanje transakcije kada npr..odabirom "
+#~ "druge transakcije. </p>"
+
+#~ msgid "End transaction edit"
+#~ msgstr "Zavši uređivanje transakcije"
 
 #, fuzzy
-#~| msgid "Split transaction"
-#~ msgctxt "@title:window"
-#~ msgid "Accept transaction"
-#~ msgstr "Razdvajajuća transakcija"
+#~| msgid ""
+#~| "<p>Please select what you want to do: discard the changes, save the "
+#~| "changes or continue to edit the transaction.</p><p>You can also set an "
+#~| "option to save the transaction automatically when e.g. selecting another "
+#~| "transaction.</p>"
+#~ msgid ""
+#~ "<p>Please select what you want to do: discard or save the changes.</"
+#~ "p><p>You can also set an option to save the transaction automatically "
+#~ "when e.g. selecting another transaction.</p>"
+#~ msgstr ""
+#~ "<p> Molimo odaberite ono što želite učiniti: odbacite promjene, spremite "
+#~ "promjene ili nastaviti uređivati ​​transakciju </p> <p> Također možete "
+#~ "postaviti opciju za automatsko spremanje transakcije kada npr..odabirom "
+#~ "druge transakcije. </p>"
 
-#~ msgid "Copy this report to the clipboard"
-#~ msgstr "Kopiraj ovaj Izvještaj u odlagalište"
+#, fuzzy
+#~| msgid "Date:"
+#~ msgid "Date: %1"
+#~ msgstr "Datum:"
 
-#~ msgid "Copy"
-#~ msgstr "Kopiraj"
+#, fuzzy
+#~| msgid "Unknown"
+#~ msgctxt "Name for unknown payee"
+#~ msgid "Unknown"
+#~ msgstr "Nepoznato"
+
+#, fuzzy
+#~| msgid "Payee%1"
+#~ msgid "Payee: %1"
+#~ msgstr "Primatelj plaćanja%1"
+
+#, fuzzy
+#~| msgid "Memo"
+#~ msgid "Memo: %1"
+#~ msgstr "Memo"
+
+#~ msgid "Statement Details"
+#~ msgstr "Detalji izvješća"
+
+#~ msgid "Statement Deposit Details"
+#~ msgstr "Detalji izvješća depozita"
+
+#~ msgid "Statement Payment Details"
+#~ msgstr "Detalji izvješća plaćanja"
+
+#~ msgid "%1 deposit (%2)"
+#~ msgid_plural "%1 deposits (%2)"
+#~ msgstr[0] "%1 depozit  (%2)"
+#~ msgstr[1] "%1 depozita  (%2)"
+#~ msgstr[2] "%1 depozita  (%2)"
+
+#, fuzzy
+#~| msgid "%1 payment (%2)"
+#~| msgid_plural "%1 payments (%2)"
+#~ msgid "%1 charge (%2)"
+#~ msgid_plural "%1 charges (%2)"
+#~ msgstr[0] "%1 uplata (%2)"
+#~ msgstr[1] "%1 uplate (%2)"
+#~ msgstr[2] "%1 uplata (%2)"
+
+#~ msgid "%1 payment (%2)"
+#~ msgid_plural "%1 payments (%2)"
+#~ msgstr[0] "%1 uplata (%2)"
+#~ msgstr[1] "%1 uplate (%2)"
+#~ msgstr[2] "%1 uplata (%2)"
+
+#~ msgctxt "%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments"
+#~ msgid "%1, %2"
+#~ msgstr "%1, %2"
+
+#~ msgid "Last reconciled: %1"
+#~ msgstr "Posljedni put usklađeno: %1"
+
+#~ msgid "Cannot process transaction with focus if it is not selected."
+#~ msgstr "Nije moguće obraditi transakciju s fokusom ako nije označena."
+
+#, fuzzy
+#~| msgid "Unable to add transactions"
+#~ msgid "Unable to delete transaction(s)"
+#~ msgstr "Nemoguće dodavanje transakcija"
+
+#~ msgid "Running automatic reconciliation"
+#~ msgstr "Pokrećanje automatskog izjednačavanja"
 
 #~ msgid "Your Financial Summary"
 #~ msgstr "Vaš finansijski sazetak"
@@ -27170,10 +27653,127 @@ msgstr ""
 #~ msgid "Show KMyMoney welcome page"
 #~ msgstr "Pokaži KMyMoney naslovnu stranicu"
 
+#~ msgid "Today's due payments"
+#~ msgstr "Plaćanja s današnjim dospijećem"
+
 #, fuzzy
 #~| msgid "Last reconciled: %1"
 #~ msgid "Last Reconciled"
 #~ msgstr "Posljedni put usklađeno: %1"
+
+#~ msgid "Select Account:"
+#~ msgstr "Izaberite Račun:"
+
+#~ msgid "Change the security information of the selected entry."
+#~ msgstr "Promjeni podatak o sigurnosti odabrane stavke."
+
+#~ msgid "Remove this security item from the file"
+#~ msgstr "Ukloni ovu sigurnosnu stavku iz datoteke"
+
+#, fuzzy
+#~| msgid "Open ledger"
+#~ msgid "New ledger"
+#~ msgstr "Otvori glavnu knjigu"
+
+#, fuzzy
+#~| msgid "Do you want to add <b>%1</b> as payer/receiver?"
+#~ msgid "Do you want to show <b>%1</b> column on every loaded view?"
+#~ msgstr "Želite li dodati <b>%1</b> kao pošiljaoca/primaoca?"
+
+#, fuzzy
+#~| msgid "Do you want to add <b>%1</b> as payer/receiver?"
+#~ msgid "Do you want to hide <b>%1</b> column on every loaded view?"
+#~ msgstr "Želite li dodati <b>%1</b> kao pošiljaoca/primaoca?"
+
+#~ msgid "Unable to add schedule: %1"
+#~ msgstr "Nemoguće dodati raspored: %1"
+
+#~ msgid "Use this to create a new payee."
+#~ msgstr "Koristite ovo za kreiranje novog primatelja."
+
+#~ msgctxt "New payee"
+#~ msgid "New"
+#~ msgstr "Novi"
+
+#~ msgid "Rename the current selected payee"
+#~ msgstr "Preimenuj trenutno odabranog primatelja."
+
+#~ msgid "Use this to start renaming the selected payee."
+#~ msgstr "Koristite ovo da počnete preimenovanje odabranog primatelja."
+
+#~ msgid "Delete selected payee(s)"
+#~ msgstr "Izbriši odabranog(e) primaoca(e)"
+
+#~ msgid ""
+#~ "Use this to delete the selected payee. You can also select multiple "
+#~ "payees to be deleted."
+#~ msgstr ""
+#~ "Koristite ovo da izbrišete odabranog primaoca. Takođe možete odabrati "
+#~ "višestruke primaoce da budu izbrisani."
+
+#~ msgid "Merge multiple selected payees"
+#~ msgstr "Spoji višestruke odabrane primaoce"
+
+#~ msgid "Use this to merge multiple selected payees."
+#~ msgstr "Koristi ovo da spojiš višestruke odabrane primaoce."
+
+#~ msgid "Error executing item"
+#~ msgstr "Greška nastala kod izvršenja stavke"
+
+#~ msgid "Unable to filter account"
+#~ msgstr "Nije moguće prečistiti korisnički račun"
+
+#~ msgid "Bills"
+#~ msgstr "Računi(Fakture)"
+
+#~ msgid "Loans"
+#~ msgstr "Pozajmice (krediti)"
+
+#~ msgid "Type/Name"
+#~ msgstr "Tip/Ime"
+
+#~ msgid "Frequency"
+#~ msgstr "Ucestalost"
+
+#~ msgid "Unable to load accounts: "
+#~ msgstr "Nije moguće učitati korisničke račune: "
+
+#~ msgid "<p>Do you really want to remove the tag <b>%1</b>?</p>"
+#~ msgstr "<p>Da li ste sigurni da želite ukloniti oznaku<b>%1</b>?</p>"
+
+#~ msgid "Do you really want to remove all selected tags?"
+#~ msgstr "Da li ste sigurni da želite ukloniti sve odabrane oznake?"
+
+#~ msgid "Remove Tag"
+#~ msgstr "Ukloni oznaku"
+
+#~ msgid ""
+#~ "At least one transaction/scheduled transaction is still referenced by a "
+#~ "tag. Currently you have all tags selected. However, at least one tag must "
+#~ "remain so that the transaction/scheduled transaction can be reassigned."
+#~ msgstr ""
+#~ "Najmanje jedna transakcija/zakazana transakcija je još uvijek "
+#~ "referenciran oznakom. Trenutno ste sve oznake odabrali.  Kakogod, "
+#~ "najmanje jedna oznaka mora ostati tako da  transakcija/zakazana "
+#~ "transakcija može biti ponovo dodijeljena."
+
+#~ msgid "Creates a new tag"
+#~ msgstr "Kreiraj novu oznaku"
+
+#~ msgid "Use this to create a new tag."
+#~ msgstr "Iskoristi ovo za kreiranje nove oznake."
+
+#~ msgid "Rename the current selected tag"
+#~ msgstr "Preimenuj trenutnu odabranu oznaku"
+
+#~ msgid "Use this to start renaming the selected tag."
+#~ msgstr "Iskoristi ovo za preimenovanje odabrane oznake."
+
+#~ msgid "Delete the current selected tag"
+#~ msgstr "Obriši trenutnu odabranu oznaku"
+
+#~ msgid "Use this to delete the selected tag."
+#~ msgstr "Iskoristi ovo za brisanje odabrane oznake."
 
 #~ msgid "Go to My Financial Summary"
 #~ msgstr "Idi na pregled mojih finansija"
@@ -27257,65 +27857,201 @@ msgstr ""
 #~ msgstr "Online postavke"
 
 #, fuzzy
-#~| msgid "Any status"
-#~ msgctxt ""
-#~ msgid "Any status"
-#~ msgstr "Bilo koji status"
+#~| msgid "Online Statement Balance: %1"
+#~ msgid "Online statement balance: %1"
+#~ msgstr "Mjrežni bilans izvoda: %1"
 
 #, fuzzy
-#~| msgid "Closed"
-#~ msgctxt ""
-#~ msgid "Closed"
-#~ msgstr "Zatvoreno"
-
-#~ msgctxt "Payment made from account"
-#~ msgid "Payment"
-#~ msgstr "Plaćanje"
-
-#~ msgctxt "Deposit into account"
-#~ msgid "Deposit"
-#~ msgstr "Depozit"
+#~| msgid "Credit Card"
+#~ msgid "Credit"
+#~ msgstr "Kreditna kartica"
 
 #, fuzzy
-#~| msgctxt "@title header of the currency name column"
-#~| msgid "Name"
-#~ msgctxt "OnlineJob"
-#~ msgid "Name"
-#~ msgstr "Ime"
-
-#~ msgid ""
-#~ "The transactions associated with the selected tags need to be re-assigned "
-#~ "to a different tag before the selected tags can be deleted. Please select "
-#~ "a tag from the list below."
-#~ msgstr ""
-#~ "Transakcija povezana sa odabranom oznakom mora biti predodijeljena drugoj "
-#~ "oznaci prije nego što se odabrana oznaka obriše. Odaberite oznaku sa "
-#~ "liste ispod."
-
-#~ msgid "<p>Do you really want to remove the tag <b>%1</b>?</p>"
-#~ msgstr "<p>Da li ste sigurni da želite ukloniti oznaku<b>%1</b>?</p>"
-
-#~ msgid "Do you really want to remove all selected tags?"
-#~ msgstr "Da li ste sigurni da želite ukloniti sve odabrane oznake?"
-
-#~ msgid "Remove Tag"
-#~ msgstr "Ukloni oznaku"
-
-#~ msgid ""
-#~ "At least one transaction/scheduled transaction is still referenced by a "
-#~ "tag. Currently you have all tags selected. However, at least one tag must "
-#~ "remain so that the transaction/scheduled transaction can be reassigned."
-#~ msgstr ""
-#~ "Najmanje jedna transakcija/zakazana transakcija je još uvijek "
-#~ "referenciran oznakom. Trenutno ste sve oznake odabrali.  Kakogod, "
-#~ "najmanje jedna oznaka mora ostati tako da  transakcija/zakazana "
-#~ "transakcija može biti ponovo dodijeljena."
+#~| msgid "Debit Note"
+#~ msgid "Debit"
+#~ msgstr "Dugovna napomena"
 
 #~ msgid "Pay to"
 #~ msgstr "Plati"
 
-#~ msgid "&Show tip of the day"
-#~ msgstr "&Prikaži savjet dana"
+#~ msgctxt "Deposits onto account"
+#~ msgid "Deposits"
+#~ msgstr "Depoziti"
+
+#~ msgctxt "Payments towards credit card"
+#~ msgid "Payments"
+#~ msgstr "Plaćanja"
+
+#~ msgctxt "Payments made from account"
+#~ msgid "Payments"
+#~ msgstr "Plaćanja"
+
+#~ msgctxt "Payments made with credit card"
+#~ msgid "Charges"
+#~ msgstr "Troškovi"
+
+#~ msgctxt "Reconcile state 'Not reconciled'"
+#~ msgid "Not reconciled"
+#~ msgstr "Nije usklađeno"
+
+#~ msgctxt "Reconcile state 'Cleared'"
+#~ msgid "Cleared"
+#~ msgstr "Očišćeno"
+
+#~ msgctxt "Reconcile state 'Reconciled'"
+#~ msgid "Reconciled"
+#~ msgstr "Usklađeno"
+
+#~ msgctxt "Reconcile state 'Frozen'"
+#~ msgid "Frozen"
+#~ msgstr "Zamrznuto"
+
+#~ msgctxt "Unknown reconcile state"
+#~ msgid "Unknown"
+#~ msgstr "Nepoznat"
+
+#~ msgid "Ratio"
+#~ msgstr "Omjer"
+
+#~ msgid "Fee Amount"
+#~ msgstr "Iznos provizije"
+
+#~ msgid "Account Types"
+#~ msgstr "Tipovi računa"
+
+#~ msgctxt "The balance of the selected budget"
+#~ msgid "Balance: "
+#~ msgstr "Stanje: "
+
+#~ msgctxt "Activity for income categories"
+#~ msgid "Received"
+#~ msgstr "Primljeno"
+
+#~ msgctxt "Activity for expense categories"
+#~ msgid "Paid"
+#~ msgstr "Plaćeno"
+
+#, fuzzy
+#~| msgid "Pay to"
+#~ msgctxt "Payee"
+#~ msgid "Pay to"
+#~ msgstr "Plati"
+
+#, fuzzy
+#~| msgid "From"
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "Od"
+
+#~ msgctxt "Enter todays date into date input widget"
+#~ msgid "T"
+#~ msgstr "T"
+
+#~ msgid "Closed tag"
+#~ msgstr "Zatvorena oznaka"
+
+#~ msgid "The tag is already present."
+#~ msgstr "Ova oznaka je već prikazana."
+
+#~ msgid "Prior transactions possibly filtered"
+#~ msgstr "Prethodne transakcije možda filtrirane"
+
+#, fuzzy
+#~| msgid "Opening balance: %1"
+#~ msgid "Reconciled Balance: %1"
+#~ msgstr "Početno stanje: %1"
+
+#~ msgid "Online Statement Balance: %1"
+#~ msgstr "Mjrežni bilans izvoda: %1"
+
+#~ msgctxt "Unknown payee"
+#~ msgid "Unknown"
+#~ msgstr "Nepoznat"
+
+#~ msgctxt "Unknown category"
+#~ msgid "Unknown"
+#~ msgstr "Nepoznata"
+
+#~ msgctxt "Unknown security"
+#~ msgid "Unknown"
+#~ msgstr "Nepoznato"
+
+#~ msgctxt "label for status combo"
+#~ msgid "Stat&us"
+#~ msgstr "&Status"
+
+#~ msgid "Sell"
+#~ msgstr "Prodaj"
+
+#~ msgid "Buy"
+#~ msgstr "Kupi"
+
+#~ msgid "Investment transaction"
+#~ msgstr "Transakcija investicije"
+
+#, fuzzy
+#~| msgid ""
+#~| "KMyMoney has matched a downloaded transaction with a manually entered "
+#~| "one (result above)"
+#~ msgid "KMyMoney has matched the two selected transactions (result above)"
+#~ msgstr ""
+#~ "KMyMoney je uskladio skinutu transakciju s ručno unijetom jedan (rezultat "
+#~ "iznad)"
+
+#~ msgid "Bank entry:"
+#~ msgstr "Bankovna stavka:"
+
+#~ msgid "Your entry:"
+#~ msgstr "Vaš unos:"
+
+#~ msgid "&Deposit"
+#~ msgstr "&Depozit"
+
+#~ msgid "&Transfer"
+#~ msgstr "&Transfer"
+
+#~ msgid "&Withdrawal"
+#~ msgstr "&Povlačenje"
+
+#~ msgid "&Payment"
+#~ msgstr "&Otplata"
+
+#~ msgid "&Charge"
+#~ msgstr "&Trošak"
+
+#~ msgid "&Decrease"
+#~ msgstr "&Smanjenje"
+
+#~ msgid "&Increase"
+#~ msgstr "&Porast"
+
+#~ msgid "No Title specified"
+#~ msgstr "Nije naznačen naziv"
+
+#~ msgid "Preferred account"
+#~ msgstr "Preferirani korisnički račun"
+
+#~ msgid "Enter the ticker symbol (e.g. RHAT)."
+#~ msgstr "Unesite tiker simbol (npr. RHAT)."
+
+#~ msgid "Enter the CUSIP/ISIN/WKN identification number here"
+#~ msgstr "Unesite CUSIP/ISIN/WKN identifikacijski broj"
+
+#~ msgid "This wizard allows you to modify the selected security."
+#~ msgstr "Ovaj čarobanjk omogućava da izmjenite odabranu sigurnost."
+
+#~ msgid ""
+#~ "The selected symbol is already on file. Do you want to reuse the existing "
+#~ "security?"
+#~ msgstr ""
+#~ "Odabrani simbol je već u datoteci. Želite li koristiti postojeće "
+#~ "osiguranje?"
+
+#~ msgid "Security found"
+#~ msgstr "Sigurnost pronađena"
+
+#~ msgid "Routing number"
+#~ msgstr "Usmjerivački broj"
 
 #~ msgid ""
 #~ "<p>...that you can change the sort order of ledger entries by\n"
@@ -27482,355 +28218,6 @@ msgstr ""
 #~ ">Uvezi.</p>\n"
 #~ "<p>Osigurava Jose Jorge</p>\n"
 
-#~ msgid "Change the security information of the selected entry."
-#~ msgstr "Promjeni podatak o sigurnosti odabrane stavke."
-
-#~ msgid "Remove this security item from the file"
-#~ msgstr "Ukloni ovu sigurnosnu stavku iz datoteke"
-
-#~ msgid "Delete..."
-#~ msgstr "Brisanje..."
-
-#~ msgctxt "Deposits onto account"
-#~ msgid "Deposits"
-#~ msgstr "Depoziti"
-
-#~ msgctxt "Payments towards credit card"
-#~ msgid "Payments"
-#~ msgstr "Plaćanja"
-
-#~ msgctxt "Payments made from account"
-#~ msgid "Payments"
-#~ msgstr "Plaćanja"
-
-#~ msgctxt "Payments made with credit card"
-#~ msgid "Charges"
-#~ msgstr "Troškovi"
-
-#~ msgctxt "Reconcile state 'Not reconciled'"
-#~ msgid "Not reconciled"
-#~ msgstr "Nije usklađeno"
-
-#~ msgctxt "Reconcile state 'Cleared'"
-#~ msgid "Cleared"
-#~ msgstr "Očišćeno"
-
-#~ msgctxt "Reconcile state 'Reconciled'"
-#~ msgid "Reconciled"
-#~ msgstr "Usklađeno"
-
-#~ msgctxt "Reconcile state 'Frozen'"
-#~ msgid "Frozen"
-#~ msgstr "Zamrznuto"
-
-#~ msgctxt "Unknown reconcile state"
-#~ msgid "Unknown"
-#~ msgstr "Nepoznat"
-
-#~ msgctxt "Total value"
-#~ msgid "Total"
-#~ msgstr "Ukupno"
-
-#~ msgid "Ratio 1/"
-#~ msgstr "Omjer 1 /"
-
-#~ msgid "Ratio"
-#~ msgstr "Omjer"
-
-#~ msgid "Fee Amount"
-#~ msgstr "Iznos provizije"
-
-#~ msgid "Price/Share"
-#~ msgstr "Cijena/Udio"
-
-#~ msgid "Asset account"
-#~ msgstr "Imovinski račun"
-
-#~ msgid ""
-#~ "Cannot enter transaction with postdate prior to account's opening date."
-#~ msgstr ""
-#~ "Nije moguće unijeti transakciju sa datumom prije datuma otvaranja računa."
-
-#~ msgid "Found %1 matching transaction (D %2 / P %3 = %4)"
-#~ msgid_plural "Found %1 matching transactions (D %2 / P %3 = %4)"
-#~ msgstr[0] "Pronađena %1 odgovarajuća transakcija (D %2 / P %3 = %4)"
-#~ msgstr[1] "Pronađene %1 odgovarajuće transakcije (D %2 / P %3 = %4)"
-#~ msgstr[2] "Pronađene %1 odgovarajuće transakcije (D %2 / P %3 = %4)"
-
-#~ msgctxt "To duplicate a split"
-#~ msgid "Duplicate"
-#~ msgstr "Dupliciraj"
-
-#~ msgid "will be calculated"
-#~ msgstr "će se izračunati"
-
-#~ msgid ""
-#~ "You are about to delete the selected split. Do you really want to "
-#~ "continue?"
-#~ msgstr ""
-#~ "Sigurni ste da želite izbrisati odabrane prekide. Da li zaista želite "
-#~ "nastaviti?"
-
-#~ msgid ""
-#~ "You need to assign a category to this split before it can be entered."
-#~ msgstr ""
-#~ "Morate dodijeliti kategoriju ovom dijelu prije nego što se može unijeti."
-
-#~ msgid "Enter split"
-#~ msgstr "Unesite podjelu"
-
-#~ msgid ""
-#~ "Select a transaction and press the OK button or use Cancel to select none."
-#~ msgstr ""
-#~ "Odaberite transakciju i pritisnite Uredu ili koristite Otkaži da "
-#~ "izbrišete odabir."
-
-#~ msgid "Clear &All"
-#~ msgstr "Poravnaj &sve"
-
-#~ msgid "Use this to clear all splits of this transaction"
-#~ msgstr "Koristite ovo za poravnanje svih razdvajanja ove transakcije"
-
-#~ msgid "Clear &Zero"
-#~ msgstr "Očisti &Nula"
-
-#, fuzzy
-#~| msgid ""
-#~| "In case you have multiple split entries to the same category and you "
-#~| "like to keep them as a single split, press this button. The amount for "
-#~| "identical categories will be added and stored in a single split for that "
-#~| "category."
-#~ msgid ""
-#~ "In case you have multiple split entries to the same category and you like "
-#~ "to keep them as a single split"
-#~ msgstr ""
-#~ "U slučaju da imate više razdvojenih unosa u istoj kategoriji, a želite ih "
-#~ "zadržati kao jedno razdvajanje, pritisnite ovu tipku. Iznos za identične "
-#~ "kategorije će biti dodan i pohranjen u jednom dijelu za tu kategoriju."
-
-#~ msgid ""
-#~ "You are about to delete all splits of this transaction. Do you really "
-#~ "want to continue?"
-#~ msgstr ""
-#~ "Planirate izbrisati sva razdvajanja ove transakcije. Da li zaista želite "
-#~ "nastaviti?"
-
-#~ msgid "<b>11,00<b>"
-#~ msgstr "<b>11,00</b>"
-
-#~ msgid "<b>111,00<b>"
-#~ msgstr "<b>111,00</b>"
-
-#~ msgid "Unassigned"
-#~ msgstr "Nedodijeljena"
-
-#~ msgid "100,00"
-#~ msgstr "100,00"
-
-#~ msgid "Prior transactions possibly filtered"
-#~ msgstr "Prethodne transakcije možda filtrirane"
-
-#~ msgid "Online Statement Balance: %1"
-#~ msgstr "Mjrežni bilans izvoda: %1"
-
-#~ msgctxt "Unknown payee"
-#~ msgid "Unknown"
-#~ msgstr "Nepoznat"
-
-#~ msgctxt "Unknown category"
-#~ msgid "Unknown"
-#~ msgstr "Nepoznata"
-
-#~ msgctxt "Unknown security"
-#~ msgid "Unknown"
-#~ msgstr "Nepoznato"
-
-#~ msgctxt "label for status combo"
-#~ msgid "Stat&us"
-#~ msgstr "&Status"
-
-#~ msgid "Sell"
-#~ msgstr "Prodaj"
-
-#~ msgid "Buy"
-#~ msgstr "Kupi"
-
-#~ msgid "Investment transaction"
-#~ msgstr "Transakcija investicije"
-
-#~ msgid "Transfer to"
-#~ msgstr "Transfer za"
-
-#~ msgid "Transfer from"
-#~ msgstr "Transfer od"
-
-#~ msgid "Category/Account"
-#~ msgstr "Kategorija/Račun"
-
-#, fuzzy
-#~| msgid ""
-#~| "KMyMoney has matched a downloaded transaction with a manually entered "
-#~| "one (result above)"
-#~ msgid "KMyMoney has matched the two selected transactions (result above)"
-#~ msgstr ""
-#~ "KMyMoney je uskladio skinutu transakciju s ručno unijetom jedan (rezultat "
-#~ "iznad)"
-
-#~ msgid "Bank entry:"
-#~ msgstr "Bankovna stavka:"
-
-#~ msgid "Your entry:"
-#~ msgstr "Vaš unos:"
-
-#~ msgid "The transaction has a missing assignment of <b>%1</b>."
-#~ msgstr "Transakciji nedostaje dodjela <b>%1</b>."
-
-#~ msgctxt "Unknown reconciliation state"
-#~ msgid "Unknown"
-#~ msgstr "Nepoznato"
-
-#~ msgid ""
-#~ "This transaction has more than two splits and is originally based on a "
-#~ "different currency (%1). Using this account to modify the transaction may "
-#~ "result in rounding errors. Do you want to continue?"
-#~ msgstr ""
-#~ "Ova transakcija ima više od dvije podjele i  izvorno se temelji na drugim "
-#~ "valutama(%1). Korištenje ovog računa za promjenu transakcije može "
-#~ "rezultirati greškama pri zaokruživanju.Da li želite nastaviti?"
-
-#~ msgid ""
-#~ "At least one of the selected transactions has more than two splits and is "
-#~ "originally based on a different currency (%1). Using this account to "
-#~ "modify the transactions may result in rounding errors. Do you want to "
-#~ "continue?"
-#~ msgstr ""
-#~ "Barem jedna od odabranih transakcija ima više od dvije podjele, a izvorno "
-#~ "temelji se na drugoj valuti (%1). Korištenje ovog račun za izmjenu "
-#~ "transakcija može rezultirati pogrešakama pri zaokruživanju. Želite li "
-#~ "nastaviti?"
-
-#, fuzzy
-#~| msgid "Cancel processing of schedule entry."
-#~ msgid "<center>Processing schedule for %1.</center>"
-#~ msgstr "Otkaži obradu rasporeda ulaska."
-
-#, fuzzy
-#~| msgid ""
-#~| "The number <b>%1</b> has already been used in account <b>%2</b>."
-#~| "<center>Do you want to replace it with the next available number?</"
-#~| "center>"
-#~ msgid ""
-#~ "Check number <b>%1</b> has already been used in account <b>%2</b>."
-#~ "<center>Do you want to replace it with the next available number?</center>"
-#~ msgstr ""
-#~ "Broj <b>%1 </b> već je korišten u računu<b>%2 </b>. <center> Želite li ga "
-#~ "zamijeniti sljedećim raspoloživim brojem? </center>"
-
-#~ msgid "Duplicate number"
-#~ msgstr "Dupli broj"
-
-#~ msgid "Storing transactions"
-#~ msgstr "Pohranjivanje transakcija"
-
-#~ msgid "&Enter"
-#~ msgstr "&Ulaz"
-
-#~ msgid "Use this to enter the transaction into the ledger."
-#~ msgstr "Koristite ovo za unos transakcije u knjigu."
-
-#~ msgid "&Schedule"
-#~ msgstr "&Raspored"
-
-#~ msgid "Accepts the entered data and stores it as schedule"
-#~ msgstr "Prihvaća unesene podatke i pohranjuje ih kao raspored"
-
-#~ msgid ""
-#~ "Use this to schedule the transaction for later entry into the ledger."
-#~ msgstr ""
-#~ "Koristi ovo za raspoređivanje transakcija za kasniji pristup knjizi."
-
-#~ msgid ""
-#~ "The transaction you are about to enter has a post date in the future.<br/"
-#~ "><br/>Do you want to enter it in the ledger or add it to the schedules?"
-#~ msgstr ""
-#~ "Transakcija koju želite da unesete ima datum knjiženja u budućnosti.<br/"
-#~ "><br/>Želite li je unijeti u knjigu ili  dodati na rasporedu?"
-
-#~ msgctxt "Dialog caption for 'Enter or schedule' dialog"
-#~ msgid "Enter or schedule?"
-#~ msgstr "Unos ili Raspoređivanje?"
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the warning balance of %2."
-#~ msgstr "Bilans računa <b>%1</b> pao ispod bilansa upozorenja od %2."
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the minimum balance of %2."
-#~ msgstr "Stanje računa <b>%1</b> palo ispod minimalnog stanja od %2."
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the maximum credit warning "
-#~ "limit of %2."
-#~ msgstr ""
-#~ "Stanje računa <b>%1</b> palo ispod maksimalne granice kreditne opomene od "
-#~ "%2."
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the maximum credit limit "
-#~ "of %2."
-#~ msgstr ""
-#~ "Stanje računa <b>%1</b> palo ispod maksimalne kreditne granice od %2."
-
-#~ msgid "&Deposit"
-#~ msgstr "&Depozit"
-
-#~ msgid "&Transfer"
-#~ msgstr "&Transfer"
-
-#~ msgid "&Withdrawal"
-#~ msgstr "&Povlačenje"
-
-#~ msgid "&Payment"
-#~ msgstr "&Otplata"
-
-#~ msgid "&Charge"
-#~ msgstr "&Trošak"
-
-#~ msgid "&Decrease"
-#~ msgstr "&Smanjenje"
-
-#~ msgid "&Increase"
-#~ msgstr "&Porast"
-
-#~ msgid "Reconcile"
-#~ msgstr "Izravnaj"
-
-#~ msgid "Reconcile - disabled because you are currently reconciling <b>%1</b>"
-#~ msgstr "Izravnaj - onemogućeno jer trenutno izravnjavate <b>%1</b>"
-
-#~ msgctxt "Button text for match transaction"
-#~ msgid "Match"
-#~ msgstr "Poveži"
-
-#, fuzzy
-#~| msgid "Cannot create transactions when no account is selected."
-#~ msgid "Add reversing transactions to the currently selected"
-#~ msgstr "Nije moguće kreirati transakcije kad nije označen nijedan nalog."
-
-#~ msgctxt "Button text for unmatch transaction"
-#~ msgid "Unmatch"
-#~ msgstr "Neodgovarajuće"
-
-#~ msgid "Difference: %1"
-#~ msgstr "Razlika: %1"
-
-#~ msgid ""
-#~ "At least one split of the selected transactions has been reconciled. Do "
-#~ "you wish to continue to edit the transactions anyway?"
-#~ msgstr ""
-#~ "Bar jedna podjela označene transakcije je usklađena. Želite li ipak "
-#~ "nastaviti uređivati transakcije?"
-
 #~ msgid ""
 #~ "At least one split of the selected transactions has been frozen. Editing "
 #~ "the transactions is therefore prohibited."
@@ -27841,265 +28228,19 @@ msgstr ""
 #~ msgid "Transaction already frozen"
 #~ msgstr "Transakcija je već zamrznuta"
 
-#~ msgid ""
-#~ "At least one split of the selected transaction references an account that "
-#~ "has been closed. Editing the transactions is therefore prohibited."
-#~ msgstr ""
-#~ "Bar jedna podjela označene transakcije ukazuje na nalog koji je zatvoren. "
-#~ "Uređivanje transakcije stoga nije dozvoljeno."
-
 #~ msgid "Account closed"
 #~ msgstr "Nalog zatvoren"
 
-#~ msgid "Cannot create transactions when no account is selected."
-#~ msgstr "Nije moguće kreirati transakcije kad nije označen nijedan nalog."
-
-#~ msgid "Cannot create transactions in the context of a category."
-#~ msgstr "Nije moguće kreirati transakciju u okviru kategorije."
-
-#~ msgid "Cannot create transactions in a closed account."
-#~ msgstr "Nije moguće kreirati transakcije u zatvorenom nalogu."
-
 #~ msgid "Cannot edit transactions with frozen splits."
 #~ msgstr "Nije moguće uređivati transakcije sa zamrznutim podjelama."
-
-#~ msgid "Cannot edit transactions in the context of a category."
-#~ msgstr "Nije moguće uređivanje transakcije u okviru kategorije."
 
 #~ msgid "Cannot create or edit any transactions in Account %1 as it is closed"
 #~ msgstr ""
 #~ "Ne može biti kreirana ili uređena nijedna transakcija u Nalogu %1 koji je "
 #~ "zatvoren"
 
-#~ msgid "Cannot edit mixed investment action/type transactions together."
-#~ msgstr "Ne mogu se urediti mješane akcije ulaganja/tipovi ulagana  zajedno."
-
-#~ msgid ""
-#~ "Cannot edit investment transactions and non-investment transactions "
-#~ "together."
-#~ msgstr ""
-#~ "Nije moguće uređivanje investicijskih i neinvesticijskih transakcija "
-#~ "zajedno."
-
-#~ msgid "Cannot edit investment transactions in the context of this account."
-#~ msgstr ""
-#~ "Nije moguće uređivanje investicijskih transakcija u okviru ovog naloga."
-
-#~ msgid ""
-#~ "<p>Please select what you want to do: discard the changes, save the "
-#~ "changes or continue to edit the transaction.</p><p>You can also set an "
-#~ "option to save the transaction automatically when e.g. selecting another "
-#~ "transaction.</p>"
-#~ msgstr ""
-#~ "<p> Molimo odaberite ono što želite učiniti: odbacite promjene, spremite "
-#~ "promjene ili nastaviti uređivati ​​transakciju </p> <p> Također možete "
-#~ "postaviti opciju za automatsko spremanje transakcije kada npr..odabirom "
-#~ "druge transakcije. </p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "Zavši uređivanje transakcije"
-
-#, fuzzy
-#~| msgid ""
-#~| "<p>Please select what you want to do: discard the changes, save the "
-#~| "changes or continue to edit the transaction.</p><p>You can also set an "
-#~| "option to save the transaction automatically when e.g. selecting another "
-#~| "transaction.</p>"
-#~ msgid ""
-#~ "<p>Please select what you want to do: discard or save the changes.</"
-#~ "p><p>You can also set an option to save the transaction automatically "
-#~ "when e.g. selecting another transaction.</p>"
-#~ msgstr ""
-#~ "<p> Molimo odaberite ono što želite učiniti: odbacite promjene, spremite "
-#~ "promjene ili nastaviti uređivati ​​transakciju </p> <p> Također možete "
-#~ "postaviti opciju za automatsko spremanje transakcije kada npr..odabirom "
-#~ "druge transakcije. </p>"
-
-#, fuzzy
-#~| msgid "Date:"
-#~ msgid "Date: %1"
-#~ msgstr "Datum:"
-
-#, fuzzy
-#~| msgid "Unknown"
-#~ msgctxt "Name for unknown payee"
-#~ msgid "Unknown"
-#~ msgstr "Nepoznato"
-
-#, fuzzy
-#~| msgid "Payee%1"
-#~ msgid "Payee: %1"
-#~ msgstr "Primatelj plaćanja%1"
-
-#, fuzzy
-#~| msgid "Memo"
-#~ msgid "Memo: %1"
-#~ msgstr "Memo"
-
-#~ msgid "Statement Details"
-#~ msgstr "Detalji izvješća"
-
-#~ msgid "Statement Deposit Details"
-#~ msgstr "Detalji izvješća depozita"
-
-#~ msgid "Statement Payment Details"
-#~ msgstr "Detalji izvješća plaćanja"
-
-#~ msgid "%1 deposit (%2)"
-#~ msgid_plural "%1 deposits (%2)"
-#~ msgstr[0] "%1 depozit  (%2)"
-#~ msgstr[1] "%1 depozita  (%2)"
-#~ msgstr[2] "%1 depozita  (%2)"
-
-#, fuzzy
-#~| msgid "%1 payment (%2)"
-#~| msgid_plural "%1 payments (%2)"
-#~ msgid "%1 charge (%2)"
-#~ msgid_plural "%1 charges (%2)"
-#~ msgstr[0] "%1 uplata (%2)"
-#~ msgstr[1] "%1 uplate (%2)"
-#~ msgstr[2] "%1 uplata (%2)"
-
-#~ msgid "%1 payment (%2)"
-#~ msgid_plural "%1 payments (%2)"
-#~ msgstr[0] "%1 uplata (%2)"
-#~ msgstr[1] "%1 uplate (%2)"
-#~ msgstr[2] "%1 uplata (%2)"
-
-#~ msgctxt "%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments"
-#~ msgid "%1, %2"
-#~ msgstr "%1, %2"
-
-#~ msgid "Go to '%1'"
-#~ msgstr "Idi na '%1'"
-
-#~ msgid "Statement: %1"
-#~ msgstr "Izvod: %1"
-
-#~ msgctxt "Cleared balance"
-#~ msgid "Cleared: %1"
-#~ msgstr "Očišćeno: %1"
-
-#~ msgid "Last reconciled: %1"
-#~ msgstr "Posljedni put usklađeno: %1"
-
 #~ msgid "Cannot process transactions in account %1, which is closed."
 #~ msgstr "Ne može biti obrađena transakcija u nalogu %1, koji je zatvoren."
-
-#~ msgid "Cannot process transaction with focus if it is not selected."
-#~ msgstr "Nije moguće obraditi transakciju s fokusom ako nije označena."
-
-#, fuzzy
-#~| msgid "Unable to add transactions"
-#~ msgid "Unable to delete transaction(s)"
-#~ msgstr "Nemoguće dodavanje transakcija"
-
-#~ msgid "Running automatic reconciliation"
-#~ msgstr "Pokrećanje automatskog izjednačavanja"
-
-#, fuzzy
-#~| msgid "Open ledger"
-#~ msgid "Old ledgers"
-#~ msgstr "Otvori glavnu knjigu"
-
-#~ msgid "Thomas Baumgart"
-#~ msgstr "Thomas Baumgart"
-
-#~ msgid "Cristian Oneț"
-#~ msgstr "Cristian Onet"
-
-#, fuzzy
-#~| msgid "Cristian Oneț"
-#~ msgid "Christian Dávid"
-#~ msgstr "Cristian Onet"
-
-#, fuzzy
-#~| msgid "Michael Edwardes."
-#~ msgid "Michael Edwardes"
-#~ msgstr "Michael Edwardes."
-
-#~ msgid "Alvaro Soliverez"
-#~ msgstr "Alvaro Soliverez"
-
-#~ msgid "Ace Jones"
-#~ msgstr "Ace Jones"
-
-#~ msgid "Tony Bloomfield"
-#~ msgstr "Tony Bloomfield"
-
-#~ msgid "Felix Rodriguez"
-#~ msgstr "Felix Rodriguez"
-
-#~ msgid "John C"
-#~ msgstr "John C"
-
-#~ msgid "Fernando Vilas"
-#~ msgstr "Fernando Vilas"
-
-#~ msgid "Kevin Tambascio"
-#~ msgstr "Kevin Tambascio"
-
-#~ msgid "Javier Campos Morales"
-#~ msgstr "Javier Campos Morales"
-
-#~ msgid "Robert Wadley"
-#~ msgstr "Robert Wadely"
-
-#~ msgid "Laurent Montel"
-#~ msgstr "Laurent Montel"
-
-#~ msgid "Wolfgang Rohdewald"
-#~ msgstr "Wolfgang Rohdewald"
-
-#~ msgid "Marko Käning"
-#~ msgstr "Marko Käning"
-
-#~ msgctxt "HTML (Filefilter)"
-#~ msgid "HTML files"
-#~ msgstr "HTML datoteke"
-
-#~ msgctxt "Column heading for category in tax report"
-#~ msgid "Tax"
-#~ msgstr "Porez"
-
-#, fuzzy
-#~| msgid "C"
-#~ msgctxt "Column heading for Cost Center"
-#~ msgid "CC"
-#~ msgstr "C"
-
-#, fuzzy
-#~| msgid "Bank Code"
-#~ msgctxt ""
-#~ "Column heading for Bank Code. Use a generic form, do not translate using "
-#~ "a culture-specific term, e.g. 'Routing Number' (en_US) or 'Sort "
-#~ "Code' (en_GB)"
-#~ msgid "Bank Code"
-#~ msgstr "Bankovni kod"
-
-#, fuzzy
-#~| msgid "Full name"
-#~ msgctxt ""
-#~ "Tooltip for 'Name' column. Used in Account, Category and Institution "
-#~ "context, so avoid being too specific"
-#~ msgid "Full name"
-#~ msgstr "Puno ime"
-
-#, fuzzy
-#~| msgid "Type"
-#~ msgctxt ""
-#~ "Toolip for a 'Type' column, used in both Account and Category context"
-#~ msgid "Type"
-#~ msgstr "Tip"
-
-#~ msgid "Show title bar on each page"
-#~ msgstr "Prikaži traku naslova na svakoj stranici"
-
-#~ msgid "Show title bar on each view"
-#~ msgstr "Prikaži naslov u svakom pogledu"
-
-#~ msgid "No Title specified"
-#~ msgstr "Nije naznačen naziv"
 
 #~ msgid ""
 #~ "This option hides all accounts that have been closed by the user in views "
@@ -28116,122 +28257,18 @@ msgstr ""
 #~ msgid "Do not show closed accounts"
 #~ msgstr "Ne prikazuj zatvorene račune"
 
-#~ msgid "Unable to add schedule: %1"
-#~ msgstr "Nemoguće dodati raspored: %1"
-
-#, fuzzy
-#~| msgctxt "@action update quotes from online quote source"
-#~| msgid "Update"
-#~ msgctxt "@action:button Update button in tags vew"
-#~ msgid "Update"
-#~ msgstr "Nadogradi"
-
-#, fuzzy
-#~| msgid "Budget options"
-#~ msgctxt "@title:menu Bugdet context menu"
-#~ msgid "Budget options"
-#~ msgstr "Opcije budžeta"
-
-#~ msgid "Select online banking plugin"
-#~ msgstr "Odaberite online bankarski dodatak"
-
-#, fuzzy
-#~| msgid "Do you want to add <b>%1</b> as payer/receiver?"
-#~ msgid "Do you want to show <b>%1</b> column on every loaded view?"
-#~ msgstr "Želite li dodati <b>%1</b> kao pošiljaoca/primaoca?"
-
-#, fuzzy
-#~| msgid "Do you want to add <b>%1</b> as payer/receiver?"
-#~ msgid "Do you want to hide <b>%1</b> column on every loaded view?"
-#~ msgstr "Želite li dodati <b>%1</b> kao pošiljaoca/primaoca?"
-
-#~ msgid "Is a sub account"
-#~ msgstr "Je li podračun"
-
-#~ msgctxt "New transaction button"
-#~ msgid "New"
-#~ msgstr "Novo"
-
-#~ msgid "New scheduled transaction"
-#~ msgstr "Nova raspoređena transakcija"
-
-#~ msgid "Check template file"
-#~ msgstr "Datoteka predloška čeka"
+#~ msgctxt "HTML (Filefilter)"
+#~ msgid "HTML files"
+#~ msgstr "HTML datoteke"
 
 #~ msgid "Are you sure you wish to merge these transactions?"
 #~ msgstr "Da li ste sigurni da želite spojiti ove transakcije?"
-
-#~ msgid ""
-#~ "<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>"
-#~ msgstr ""
-#~ "<p> <b>%1</b> ne može biti premještena u ustanovu <b>%2</b>. Razlog:%3</p>"
-
-#~ msgid "<p><b>%1</b> cannot be moved to <b>%2</b>. Reason: %3</p>"
-#~ msgstr "<p><b>%1</b> ne može se premjestiti <b>%2</b>. Razlog: %3</p>"
-
-#, fuzzy
-#~| msgid "Budgets"
-#~ msgid "Budgets view"
-#~ msgstr "Budžeti"
-
-#, fuzzy
-#~| msgid "Forecast"
-#~ msgid "Forecast view"
-#~ msgstr "Prognoza"
-
-#, fuzzy
-#~| msgid "Budgets"
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Budgets view"
-#~ msgstr "Budžeti"
-
-#, fuzzy
-#~| msgid "Checking"
-#~ msgctxt "It's about printing bank checks"
-#~ msgid "Check printing"
-#~ msgstr "Provjeravam"
-
-#, fuzzy
-#~ msgid "CSV exporter"
-#~ msgstr "CSV izvoznik"
-
-#, fuzzy
-#~ msgid "CSV importer"
-#~ msgstr "CSV uvoznik"
-
-#, fuzzy
-#~ msgid "GnuCash importer"
-#~ msgstr "CSV uvoznik"
-
-#, fuzzy
-#~ msgid "iCalendar exporter"
-#~ msgstr "ICalendar postavke izvoza"
-
-#, fuzzy
-#~| msgid "QIF Import"
-#~ msgid "OFX Importer"
-#~ msgstr "QIF import"
-
-#, fuzzy
-#~| msgid "QIF Import"
-#~ msgid "QIF importer"
-#~ msgstr "QIF import"
 
 #, fuzzy
 #~| msgctxt "CSV (Filefilter)"
 #~| msgid "CSV files"
 #~ msgid "CSV Files (*.csv)"
 #~ msgstr "CSV datoteke"
-
-#, fuzzy
-#~| msgid "Debit Note"
-#~ msgid "Debit"
-#~ msgstr "Dugovna napomena"
-
-#, fuzzy
-#~| msgid "Credit Card"
-#~ msgid "Credit"
-#~ msgstr "Kreditna kartica"
 
 #~ msgid ""
 #~ "Select 'Debit/credit' if both columns exist, otherwise select 'Amount'."
@@ -28262,132 +28299,6 @@ msgstr ""
 #~ msgid "A&mount"
 #~ msgstr "Količina"
 
-#~ msgid "Creates a new budget"
-#~ msgstr "Kreira novi proračun"
-
-#~ msgid "Use this to create a new empty budget."
-#~ msgstr "Koristite ovo za kreiranje novog praznog proračuna."
-
-#~ msgctxt "New budget"
-#~ msgid "New"
-#~ msgstr "Novi"
-
-#, fuzzy
-#~| msgid "Rename the current selected budget"
-#~ msgid "Rename the current selected budget."
-#~ msgstr "Preimenujte trenutno označeni proračun."
-
-#~ msgid "Use this to start renaming the selected budget."
-#~ msgstr "Koristite ovo za početak preimenovanja označenog proračuna."
-
-#~ msgid "Delete the current selected budget"
-#~ msgstr "Izbriši trenutno označeni proračun."
-
-#~ msgid "Use this to delete the selected budget."
-#~ msgstr "Koristite ovo za brisanje označenog proračuna."
-
-#~ msgid "Use this to create a new payee."
-#~ msgstr "Koristite ovo za kreiranje novog primatelja."
-
-#~ msgctxt "New payee"
-#~ msgid "New"
-#~ msgstr "Novi"
-
-#~ msgid "Rename the current selected payee"
-#~ msgstr "Preimenuj trenutno odabranog primatelja."
-
-#~ msgid "Use this to start renaming the selected payee."
-#~ msgstr "Koristite ovo da počnete preimenovanje odabranog primatelja."
-
-#~ msgid "Delete selected payee(s)"
-#~ msgstr "Izbriši odabranog(e) primaoca(e)"
-
-#~ msgid ""
-#~ "Use this to delete the selected payee. You can also select multiple "
-#~ "payees to be deleted."
-#~ msgstr ""
-#~ "Koristite ovo da izbrišete odabranog primaoca. Takođe možete odabrati "
-#~ "višestruke primaoce da budu izbrisani."
-
-#~ msgid "Merge multiple selected payees"
-#~ msgstr "Spoji višestruke odabrane primaoce"
-
-#~ msgid "Use this to merge multiple selected payees."
-#~ msgstr "Koristi ovo da spojiš višestruke odabrane primaoce."
-
-#~ msgid "Creates a new tag"
-#~ msgstr "Kreiraj novu oznaku"
-
-#~ msgid "Use this to create a new tag."
-#~ msgstr "Iskoristi ovo za kreiranje nove oznake."
-
-#~ msgid "Rename the current selected tag"
-#~ msgstr "Preimenuj trenutnu odabranu oznaku"
-
-#~ msgid "Use this to start renaming the selected tag."
-#~ msgstr "Iskoristi ovo za preimenovanje odabrane oznake."
-
-#~ msgid "Delete the current selected tag"
-#~ msgstr "Obriši trenutnu odabranu oznaku"
-
-#~ msgid "Use this to delete the selected tag."
-#~ msgstr "Iskoristi ovo za brisanje odabrane oznake."
-
-#~ msgid "Dequeue"
-#~ msgstr "Ukloni red čekanja"
-
-#~ msgid "Dequeue selected job"
-#~ msgstr "Izvadi posao iz reda čekanja"
-
-#~ msgid "Remove the selected job from the list"
-#~ msgstr "Ukloni izabrani posao sa liste"
-
-#~ msgid "Execute"
-#~ msgstr "Izvrši"
-
-#~ msgid "Execute all jobs in the queue"
-#~ msgstr "Izvrši sve poslove iz reda čekanja"
-
-#~ msgctxt "Warning message"
-#~ msgid "There are no jobs in the queue."
-#~ msgstr "Nema poslova u redu čekanja."
-
-#~ msgctxt "Message title"
-#~ msgid "No Jobs"
-#~ msgstr "Nema poslova"
-
-#~ msgid "Jobs"
-#~ msgstr "Poslovi"
-
-#~ msgid "Error executing item"
-#~ msgstr "Greška nastala kod izvršenja stavke"
-
-#~ msgid "Unable to filter account"
-#~ msgstr "Nije moguće prečistiti korisnički račun"
-
-#~ msgid "Filter Accounts"
-#~ msgstr "Filtriraj Račune"
-
-#~ msgid "Type/Name"
-#~ msgstr "Tip/Ime"
-
-#~ msgid "Frequency"
-#~ msgstr "Ucestalost"
-
-#~ msgid "Unable to load accounts: "
-#~ msgstr "Nije moguće učitati korisničke račune: "
-
-#~ msgid "Routing Number:"
-#~ msgstr "Broj rutiranja ili SWIFT kod:"
-
-#, fuzzy
-#~| msgid "Sort order"
-#~ msgid "SortCode"
-#~ msgstr "Redoslijed sortiranja"
-
-#~ msgid "Routing number"
-#~ msgstr "Usmjerivački broj"
-
 #~ msgid "Insert transaction type into No. field for new transactions"
 #~ msgstr "Umetni tip transakcije u polje 'broj' za nove transakcije"
 
@@ -28399,114 +28310,6 @@ msgstr ""
 #~| msgid "Name:"
 #~ msgid "Name:"
 #~ msgstr "Ime:"
-
-#, fuzzy
-#~| msgid "Icons & splash screen"
-#~ msgid "Show splash screen"
-#~ msgstr "Ikone i pozdravni ekran"
-
-#~ msgid "Show splash screen during startup"
-#~ msgstr "Oozdravni ekran pri pokretanju"
-
-#~ msgid "MyDialog"
-#~ msgstr "MojDijalog"
-
-#~ msgctxt ""
-#~ "@item This comes after the hunder text if the tens unit is different from "
-#~ "0"
-#~ msgid " and "
-#~ msgstr " i "
-
-#, fuzzy
-#~| msgctxt "@item no payments were entered for a loan"
-#~| msgid "No"
-#~ msgctxt "@label The word to be printed for no fractional part as in No/00"
-#~ msgid "No"
-#~ msgstr "Ne"
-
-#~ msgid "Account Types"
-#~ msgstr "Tipovi računa"
-
-#, fuzzy
-#~| msgid "Open ledger"
-#~ msgid "New ledger"
-#~ msgstr "Otvori glavnu knjigu"
-
-#~ msgid ""
-#~ "This dialog does not allow new tags to be created. Please pick a tag from "
-#~ "the list."
-#~ msgstr ""
-#~ "Ovaj dijalog ne dozvoljava kreiranje novih oznaka. Izaberite oznaku sa "
-#~ "liste."
-
-#~ msgid "Tag creation"
-#~ msgstr "Kreirati oznaku"
-
-#~ msgctxt "Flag for unknown reconciliation state"
-#~ msgid "?"
-#~ msgstr "?"
-
-#~ msgid "Total Balance"
-#~ msgstr "Ukupni bilans"
-
-#, fuzzy
-#~| msgid "Amount entered"
-#~ msgid "Cost Center"
-#~ msgstr "Unesena svota"
-
-#~ msgid "Select year"
-#~ msgstr "Odaberi godinu"
-
-#~ msgid "Budget year"
-#~ msgstr "Proračun godine"
-
-#~ msgid "Change budget year"
-#~ msgstr "Promijeni godinu budžeta"
-
-#~ msgid ""
-#~ "A budget with the name '%1' already exists. It is not advisable to have "
-#~ "multiple budgets with the same identification name. Are you sure you "
-#~ "would like to rename the budget?"
-#~ msgstr ""
-#~ "Proračun s imenom '%1' već postoji. Nije poželjno imati više proračuna s "
-#~ "istim identifikacijskim imenom. Jeste li sigurni da želite preimenovati "
-#~ "proračun?"
-
-#~ msgctxt "@title header of the budget name column"
-#~ msgid "Name"
-#~ msgstr "Naziv"
-
-#~ msgid "Saving accounts..."
-#~ msgstr "Spremanje računa..."
-
-#~ msgid "Saving transactions..."
-#~ msgstr "Spremanje transakcije..."
-
-#~ msgid "Saving reports..."
-#~ msgstr "Spremanje izvještaja..."
-
-#~ msgid "Saving budgets..."
-#~ msgstr "Spremanje budžeta..."
-
-#, fuzzy
-#~| msgid "Saving accounts..."
-#~ msgid "Saving costcenters..."
-#~ msgstr "Spremanje računa..."
-
-#, fuzzy
-#~| msgid "Online Statement Balance: %1"
-#~ msgid "Online statement balance: %1"
-#~ msgstr "Mjrežni bilans izvoda: %1"
-
-#~ msgctxt "The balance of the selected budget"
-#~ msgid "Balance: "
-#~ msgstr "Stanje: "
-
-#~ msgid "Closed tag"
-#~ msgstr "Zatvorena oznaka"
-
-#~ msgid "The tag is already present."
-#~ msgstr "Ova oznaka je već prikazana."
 
 #~ msgid ""
 #~ "<center>This investment account does not contain the \"%1\" security.</"
@@ -28618,11 +28421,52 @@ msgstr ""
 #~ msgid "Statement stats"
 #~ msgstr "Statističko stanje"
 
-#~ msgid "Exceptions"
-#~ msgstr "Izuzeci"
+#~ msgid "%1 thrown in %2:%3"
+#~ msgstr "%1 bačen u %2:%3"
+
+#~ msgid "Unable to upload to '%1'"
+#~ msgstr "Nije moguće učitati u '%1'"
+
+#~ msgid "Internal error - no matching splits"
+#~ msgstr "Interna pogreška - nema odgovarajućih dijeljenja"
+
+#~ msgid "Internal error - no matching transactions"
+#~ msgstr "Interna greška - nema podudaranja transakcija"
+
+#~ msgid "Internal error - no matching schedules"
+#~ msgstr "Interna greška - nema podudaranja rasporeda"
+
+#~ msgid "Do nothing"
+#~ msgstr "Ne radi ništa"
+
+#~ msgctxt "Report settings"
+#~ msgid "Reports"
+#~ msgstr "Izvještaji"
+
+#~ msgctxt "Forecast settings"
+#~ msgid "Forecast"
+#~ msgstr "Prognoza"
 
 #~ msgid "Encryption"
 #~ msgstr "Kodovanje"
+
+#~ msgid "First transaction does not match requirement for matching"
+#~ msgstr "Prva transakcija ne odgovara zahtjevu za podudaranje"
+
+#~ msgid "Splits for %1 have conflicting values (%2,%3)"
+#~ msgstr "Podjele za %1 imaju proturječne vrijednosti (%2,%3)"
+
+#~ msgid "Unable to match all splits (%1)"
+#~ msgstr "Nije moguće uskladiti sve podjele (%1)"
+
+#~ msgid "Save as database..."
+#~ msgstr "Spremi kao bazu podataka..."
+
+#~ msgid "Saving file with a new filename..."
+#~ msgstr "Spašavanje datoteke sa novim imenom..."
+
+#~ msgid "Saving file to database..."
+#~ msgstr "Spašavanje datoteke u bazu podataka..."
 
 #~ msgid "Closing window..."
 #~ msgstr "Zatvaranje prozora..."
@@ -28630,16 +28474,154 @@ msgstr ""
 #~ msgid "Create a new transaction"
 #~ msgstr "Kreiraj novu transakciju"
 
-#~ msgid "Save as database..."
-#~ msgstr "Spremi kao bazu podataka..."
+#~ msgid "The statements have been processed with the following results:"
+#~ msgstr "Statistike su obrađene sa sljedećim rezultatima:"
+
+#~ msgid "%1 in file %2 line %3"
+#~ msgstr "%1 u datoteci %2 red %3"
+
+#~ msgid ""
+#~ "Account %1 contains an opening balance. Please use KMyMoney version 0.8 "
+#~ "or later and earlier than version 0.9 to correct the problem."
+#~ msgstr ""
+#~ "Račun %1 sadrži početno stanje. Molimo Vas da koristite KMyMoney verziju "
+#~ "0,8 ili kasnije i ranije od verzije 0,9 ispraviti problem."
+
+#~ msgid "Do Nothing"
+#~ msgstr "Ne raditi ništa"
+
+#~ msgid "Cannot add currency with existing id %1"
+#~ msgstr ""
+#~ "Nije moguće dodati valutu sa već postojećim identifikacionim brojem %1"
+
+#~ msgid "Cannot modify currency with unknown id %1"
+#~ msgstr ""
+#~ "Nije moguće modifikovati valutu sa nepoznatim identifikacionim brojem %1"
+
+#~ msgid "Cannot remove currency with unknown id %1"
+#~ msgstr ""
+#~ "Nije moguće ukloniti valutu sa nepoznatim identifikacionim brojem %1"
+
+#~ msgid "Cannot retrieve currency with unknown id '%1'"
+#~ msgstr ""
+#~ "Nije moguće povratititi valutu sa nepoznatim identifikacionim brojem %1"
+
+#~ msgid ""
+#~ "Unexpected exception '%1' thrown in %2, line %3 caught in "
+#~ "MyMoneyCsvWriter::write()"
+#~ msgstr ""
+#~ "Neočekivan izuzetak '%1' bačen iz %2, linija %3 uhvatila u "
+#~ "MyMoneyCsvWriter::write()"
+
+#~ msgid "GnuCash..."
+#~ msgstr "GnuKeš..."
+
+#, fuzzy
+#~| msgid ""
+#~| "You cannot import GnuCash data into an existing file. Do you wish to "
+#~| "save this file?"
+#~ msgid ""
+#~ "You cannot import GnuCash data into an existing file. Please close it."
+#~ msgstr ""
+#~ "Ne možete uvesti GnuCash podatke u postojeću datoteku. Da li želite "
+#~ "spasiti ovu datoteku?"
+
+#~ msgid ": Sorry. This importer cannot handle version %1 of element %2"
+#~ msgstr "Oprostite. Ovaj uvoznik ne podržava verziju %1 elementa %2"
+
+#~ msgid "This version of the importer cannot handle multi-book files."
+#~ msgstr "Ova verzija uvoznika ne može rukovati datotekama sa više knjiga."
+
+#~ msgid ""
+#~ "Input file cannot be parsed; may be corrupt\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Ulazna datoteka se ne može rastaviti; može biti oštećena\n"
+#~ "%1"
+
+#~ msgid "Invalid header for file. Should be 'gnc-v2'"
+#~ msgstr "Neispravno zaglavlje datoteke. Trebalo bi biti 'gnc-v2'"
+
+#~ msgid "Current importer does not recognize GnuCash account type %1"
+#~ msgstr "Trenutni uvoznik ne prepoznaje GnuCash tip računa %1"
+
+#~ msgid "Cannot find template transaction for schedule %1"
+#~ msgstr "Nemoguće je pronaći šablon obavljanja za raspored %1"
+
+#~ msgid "Internal error - invalid interval char in incrDate"
+#~ msgstr "Interna greška - neispravan intervalski znak u incrDatum"
+
+#~ msgid "Exceptions"
+#~ msgstr "Izuzeci"
+
+#~ msgid ""
+#~ "Unexpected exception '%1' thrown in %2, line %3 caught in "
+#~ "MyMoneyQifWriter::write()"
+#~ msgstr ""
+#~ "Neočekivana iznimka '%1' bačena u %2, linija %3 uhvačena u "
+#~ "MyMoneyQifWriter::write()"
+
+#~ msgid "Unable to add budget: %1, thrown in %2:%3"
+#~ msgstr "Nije moguće dodati budžet:%1, bačen u%2:%3"
+
+#~ msgid "Unable to remove budget: %1, thrown in %2:%3"
+#~ msgstr "Nije moguće izmjeniti budžet.%1, prebačeno u %2:%3"
+
+#~ msgid "Unable to modify budget: %1, thrown in %2:%3"
+#~ msgstr "Nije moguće izmjeniti budžet.%1, prebačeno u %2:%3"
+
+#~ msgid "Unable to duplicate transaction(s): %1, thrown in %2:%3"
+#~ msgstr "Nije moguće duplicirati transakciju(e): %1, prebačeno u %2:%3"
+
+#~ msgid "Unable to accept transaction: %1, thrown in %2:%3"
+#~ msgstr "Nemoguće prihvatiti transakcije: %1, bačeno u  %2:%3"
+
+#~ msgid "Unable to modify transaction: %1, thrown in %2:%3"
+#~ msgstr "Nije moguće izmjeniti transakciju: %1, prebačeno u %2:%3"
+
+#~ msgid "Unable to delete transaction(s): %1, thrown in %2:%3"
+#~ msgstr "Nije moguće duplicirati transakciju(e): %1, prebačeno u %2:%3"
+
+#~ msgid "No manually entered transaction selected for matching"
+#~ msgstr "Nema ručno unesene transakcije označene za podudaranje"
+
+#~ msgid "No imported transaction selected for matching"
+#~ msgstr "Nije odabrana uvezena transakcija za upoređivanje"
+
+#~ msgid "GPG is not available for decryption of file <b>%1</b>"
+#~ msgstr "GPG nije dostupan za dešifrovanje datoteke <b>%1</b>"
+
+#~ msgid ""
+#~ "File <b>%1</b> contains the old binary format used by KMyMoney. Please "
+#~ "use an older version of KMyMoney (0.8.x) that still supports this format "
+#~ "to convert it to the new XML based format."
+#~ msgstr ""
+#~ "Datoteka <b>%1</b> sadrži stari binarni format koga je koristio KMyMoney. "
+#~ "Koristite stariju verziju KMyMoney (0.8.x) koja još podržava taj format i "
+#~ "prevedite ga u novi XML bazirani format."
 
 #~ msgid "File <b>%1</b> contains an unknown file format."
 #~ msgstr "Datoteka <b>%1 </b> sadrži nepoznat format datoteke."
 
-#, fuzzy
-#~| msgid "Save as..."
-#~ msgid "Save as XML..."
-#~ msgstr "Snimi kao..."
+#~ msgid "Cannot load file <b>%1</b>. Reason: %2"
+#~ msgstr "Ne može se učitati datoteka <b>%1</b>. Razlog: %2"
+
+#~ msgid ""
+#~ "The following error was encountered while decrypting file <b>%1</b>: %2"
+#~ msgstr ""
+#~ "Došlo je do sljedeće greške prilikom dešifriranja datoteke <b>%1</b>: %2"
+
+#~ msgid "File <b>%1</b> not found."
+#~ msgstr "Datoteka <b>%1</b> nije pronađena."
+
+#~ msgid "Unknown fix level in input file"
+#~ msgstr "Npoznat fiksni nivo u ulaznoj datoteci"
+
+#~ msgid "Failure while writing to '%1'"
+#~ msgstr "Neuspjeh pri pokušaju pisanja u '%1'"
+
+#~ msgid "Malformed URL '%1'"
+#~ msgstr "Neispravan URL '%1'"
 
 #, fuzzy
 #~ msgid "*.kmy *.xml|KMyMoney files (*.kmy *.xml);;*|All files (*)"
@@ -28693,193 +28675,9 @@ msgstr ""
 #~ msgid "Set preferences"
 #~ msgstr "Podesite preference"
 
-#~ msgid "Saving file with a new filename..."
-#~ msgstr "Spašavanje datoteke sa novim imenom..."
-
-#, fuzzy
-#~| msgid "Unable to add transactions"
-#~ msgid "nable to modify transaction"
-#~ msgstr "Nemoguće dodavanje transakcija"
-
-#~ msgid "%1 thrown in %2:%3"
-#~ msgstr "%1 bačen u %2:%3"
-
-#~ msgid "Unable to upload to '%1'"
-#~ msgstr "Nije moguće učitati u '%1'"
-
-#~ msgid "Internal error - no matching splits"
-#~ msgstr "Interna pogreška - nema odgovarajućih dijeljenja"
-
-#~ msgid "Internal error - no matching transactions"
-#~ msgstr "Interna greška - nema podudaranja transakcija"
-
-#~ msgid "Internal error - no matching schedules"
-#~ msgstr "Interna greška - nema podudaranja rasporeda"
-
-#~ msgid "Splits for %1 have conflicting values (%2,%3)"
-#~ msgstr "Podjele za %1 imaju proturječne vrijednosti (%2,%3)"
-
-#~ msgid "Unable to match all splits (%1)"
-#~ msgstr "Nije moguće uskladiti sve podjele (%1)"
-
-#~ msgid "Unknown fix level in input file"
-#~ msgstr "Npoznat fiksni nivo u ulaznoj datoteci"
-
-#~ msgid "GPG is not available for decryption of file <b>%1</b>"
-#~ msgstr "GPG nije dostupan za dešifrovanje datoteke <b>%1</b>"
-
-#~ msgid ""
-#~ "File <b>%1</b> contains the old binary format used by KMyMoney. Please "
-#~ "use an older version of KMyMoney (0.8.x) that still supports this format "
-#~ "to convert it to the new XML based format."
-#~ msgstr ""
-#~ "Datoteka <b>%1</b> sadrži stari binarni format koga je koristio KMyMoney. "
-#~ "Koristite stariju verziju KMyMoney (0.8.x) koja još podržava taj format i "
-#~ "prevedite ga u novi XML bazirani format."
-
-#~ msgid "Malformed URL '%1'"
-#~ msgstr "Neispravan URL '%1'"
-
-#~ msgid "Failure while writing to '%1'"
-#~ msgstr "Neuspjeh pri pokušaju pisanja u '%1'"
-
-#~ msgid "%1 in file %2 line %3"
-#~ msgstr "%1 u datoteci %2 red %3"
-
-#~ msgid ""
-#~ "Account %1 contains an opening balance. Please use KMyMoney version 0.8 "
-#~ "or later and earlier than version 0.9 to correct the problem."
-#~ msgstr ""
-#~ "Račun %1 sadrži početno stanje. Molimo Vas da koristite KMyMoney verziju "
-#~ "0,8 ili kasnije i ranije od verzije 0,9 ispraviti problem."
-
-#~ msgid "Cannot add currency with existing id %1"
-#~ msgstr ""
-#~ "Nije moguće dodati valutu sa već postojećim identifikacionim brojem %1"
-
-#~ msgid "Cannot modify currency with unknown id %1"
-#~ msgstr ""
-#~ "Nije moguće modifikovati valutu sa nepoznatim identifikacionim brojem %1"
-
-#~ msgid "Cannot remove currency with unknown id %1"
-#~ msgstr ""
-#~ "Nije moguće ukloniti valutu sa nepoznatim identifikacionim brojem %1"
-
-#~ msgid "Cannot retrieve currency with unknown id '%1'"
-#~ msgstr ""
-#~ "Nije moguće povratititi valutu sa nepoznatim identifikacionim brojem %1"
-
-#~ msgid ""
-#~ "Unexpected exception '%1' thrown in %2, line %3 caught in "
-#~ "MyMoneyCsvWriter::write()"
-#~ msgstr ""
-#~ "Neočekivan izuzetak '%1' bačen iz %2, linija %3 uhvatila u "
-#~ "MyMoneyCsvWriter::write()"
-
-#~ msgid ": Sorry. This importer cannot handle version %1 of element %2"
-#~ msgstr "Oprostite. Ovaj uvoznik ne podržava verziju %1 elementa %2"
-
-#~ msgid "This version of the importer cannot handle multi-book files."
-#~ msgstr "Ova verzija uvoznika ne može rukovati datotekama sa više knjiga."
-
-#~ msgid ""
-#~ "Input file cannot be parsed; may be corrupt\n"
-#~ "%1"
-#~ msgstr ""
-#~ "Ulazna datoteka se ne može rastaviti; može biti oštećena\n"
-#~ "%1"
-
-#~ msgid "Invalid header for file. Should be 'gnc-v2'"
-#~ msgstr "Neispravno zaglavlje datoteke. Trebalo bi biti 'gnc-v2'"
-
-#~ msgid "Current importer does not recognize GnuCash account type %1"
-#~ msgstr "Trenutni uvoznik ne prepoznaje GnuCash tip računa %1"
-
-#~ msgid "Cannot find template transaction for schedule %1"
-#~ msgstr "Nemoguće je pronaći šablon obavljanja za raspored %1"
-
-#~ msgid "Internal error - invalid interval char in incrDate"
-#~ msgstr "Interna greška - neispravan intervalski znak u incrDatum"
-
-#~ msgid ""
-#~ "Unexpected exception '%1' thrown in %2, line %3 caught in "
-#~ "MyMoneyQifWriter::write()"
-#~ msgstr ""
-#~ "Neočekivana iznimka '%1' bačena u %2, linija %3 uhvačena u "
-#~ "MyMoneyQifWriter::write()"
-
-#~ msgid "Unable to add budget: %1, thrown in %2:%3"
-#~ msgstr "Nije moguće dodati budžet:%1, bačen u%2:%3"
-
-#~ msgid "Unable to remove budget: %1, thrown in %2:%3"
-#~ msgstr "Nije moguće izmjeniti budžet.%1, prebačeno u %2:%3"
-
-#~ msgid "Unable to modify budget: %1, thrown in %2:%3"
-#~ msgstr "Nije moguće izmjeniti budžet.%1, prebačeno u %2:%3"
-
-#~ msgid "Unable to duplicate transaction(s): %1, thrown in %2:%3"
-#~ msgstr "Nije moguće duplicirati transakciju(e): %1, prebačeno u %2:%3"
-
-#~ msgid "Unable to accept transaction: %1, thrown in %2:%3"
-#~ msgstr "Nemoguće prihvatiti transakcije: %1, bačeno u  %2:%3"
-
-#~ msgid "Unable to modify transaction: %1, thrown in %2:%3"
-#~ msgstr "Nije moguće izmjeniti transakciju: %1, prebačeno u %2:%3"
-
-#~ msgid "Unable to delete transaction(s): %1, thrown in %2:%3"
-#~ msgstr "Nije moguće duplicirati transakciju(e): %1, prebačeno u %2:%3"
-
-#~ msgid "No manually entered transaction selected for matching"
-#~ msgstr "Nema ručno unesene transakcije označene za podudaranje"
-
-#~ msgid "No imported transaction selected for matching"
-#~ msgstr "Nije odabrana uvezena transakcija za upoređivanje"
-
-#~ msgid "Do nothing"
-#~ msgstr "Ne radi ništa"
-
-#~ msgid "Do Nothing"
-#~ msgstr "Ne raditi ništa"
-
-#, fuzzy
-#~| msgid "Scheduled transactions"
-#~ msgid "Scheduled transactions"
-#~ msgstr "Isplanirane transakcije"
-
-#~ msgctxt "Report settings"
-#~ msgid "Reports"
-#~ msgstr "Izvještaji"
-
-#~ msgid "The statements have been processed with the following results:"
-#~ msgstr "Statistike su obrađene sa sljedećim rezultatima:"
-
 #~ msgid ""
 #~ "Another instance of KMyMoney is already running. Do you want to quit?"
 #~ msgstr "Druga instanca KMyMoney već je pokrenuta. Da li želite odustati?"
-
-#~ msgid "GnuCash..."
-#~ msgstr "GnuKeš..."
-
-#, fuzzy
-#~| msgid ""
-#~| "You cannot import GnuCash data into an existing file. Do you wish to "
-#~| "save this file?"
-#~ msgid ""
-#~ "You cannot import GnuCash data into an existing file. Please close it."
-#~ msgstr ""
-#~ "Ne možete uvesti GnuCash podatke u postojeću datoteku. Da li želite "
-#~ "spasiti ovu datoteku?"
-
-#~ msgid "Cannot load file <b>%1</b>. Reason: %2"
-#~ msgstr "Ne može se učitati datoteka <b>%1</b>. Razlog: %2"
-
-#~ msgid ""
-#~ "The following error was encountered while decrypting file <b>%1</b>: %2"
-#~ msgstr ""
-#~ "Došlo je do sljedeće greške prilikom dešifriranja datoteke <b>%1</b>: %2"
-
-#~ msgid "File <b>%1</b> not found."
-#~ msgstr "Datoteka <b>%1</b> nije pronađena."
 
 #~ msgctxt "Same transaction if amount differs less than percent."
 #~ msgid "percent."
@@ -28887,10 +28685,6 @@ msgstr ""
 
 #~ msgid "User identification"
 #~ msgstr "Korisnička identifikacija"
-
-#~ msgctxt "Forecast settings"
-#~ msgid "Forecast"
-#~ msgstr "Prognoza"
 
 #~ msgid "Additional encryption keys to be used: %1"
 #~ msgstr "Dodatne tipke za kodiranje koje će se koristiti: %1"
@@ -28900,9 +28694,6 @@ msgstr ""
 
 #~ msgid "Manage additional keys"
 #~ msgstr "Upravljaj dodatnim ključevima"
-
-#~ msgid "Saving file to database..."
-#~ msgstr "Spašavanje datoteke u bazu podataka..."
 
 #~ msgid "Transaction tags were added"
 #~ msgstr "Transakcijske oznake su dodane"

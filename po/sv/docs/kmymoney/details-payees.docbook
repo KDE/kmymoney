@@ -32,7 +32,7 @@
 <para
 >Betalarvyn är uppdelad i två huvudområden: en lista över betalningsmottagare och betalare till vänster, och ett informationsområde till höger. Sektionen <guilabel
 >Dina betalningsmottagare</guilabel
-> gör det möjligt att lägga till, ta bort, byta namn på, och sammanfoga betalningsmottagare. Informationsområdet har flera flikar, som visar transaktionerna, adress, matchande information, standardkategori, och kontonummer för betalningsmottagaren markerad i listan. Dessutom, kan länkar mellan specifikt innehåll för betalningsmottagaren i en transaktions promemoriafält och lokala filsökvägar eller webbadresser till andra datorer skapas och hanteras. </para>
+> gör det möjligt att lägga till, ta bort, byta namn på, och sammanfoga betalningsmottagare. Informationsområdet har flera flikar, som visar transaktionerna, adress, matchningsinformation, standardkategori, och kontonummer för betalningsmottagaren markerad i listan. </para>
 
 <para>
 	<screenshot>
@@ -53,7 +53,7 @@
 
 <sect2>
 <title
->Lägga till en betalningsmottagare eller betalare</title>
+>Lägga till en betalningsmottagare eller inbetalare</title>
 
 <para
 >För att lägga till en betalningsmottagare eller betalare välj <guibutton
@@ -67,7 +67,7 @@
 
 <sect2>
 <title
->Byta namn på en betalningsmottagare eller betalare</title>
+>Byta namn på en betalningsmottagare eller inbetalare</title>
 
 <para
 >För att byta namn på en betalningsmottagare eller betalare, dubbelklicka antingen på namnet eller högerklicka och välj <guimenuitem
@@ -77,12 +77,12 @@
 
 <sect2>
 <title
->Ta bort en betalningsmottagare eller betalare</title>
+>Ta bort en betalningsmottagare eller inbetalare</title>
 
 <para
 >Högerklicka på namnet och välj <guimenuitem
 >Ta bort betalare</guimenuitem
-> för att ta bort en betalningsmottagare eller betalare. Om betalaren har några transaktioner, visas en dialogruta som låter dig tilldela dem till en annan betalningsmottagare, och dessutom en kryssruta för att låta ett borttaget namn läggas till i den nya betalarens matchningslista. Ett annat sätt att byta namn på en befintlig betalningsmottagare är att markera betalningsmottagaren eller betalaren genom att vänsterklicka på den och därefter vänsterklicka på <guibutton
+> för att ta bort en betalningsmottagare eller betalare. Om betalaren har några transaktioner, visas en dialogruta som låter dig tilldela dem till en annan betalningsmottagare, och dessutom en kryssruta för att låta ett borttaget namn läggas till i den nya betalarens matchningslista. Ett annat sätt att ta bort en befintlig betalningsmottagare är att markera betalningsmottagaren eller betalaren genom att vänsterklicka på den och därefter vänsterklicka på <guibutton
 >Bort</guibutton
 >. </para>
 </sect2>
@@ -235,89 +235,5 @@
 </screenshot>
 </para>
 </sect1>
-
-<sect1 id="details.payees.linkmatching">
-<title
->Hantera länkmatchning</title>
-
-<para
->Fliken kan användas för att länka delar av innehållet i en transaktions promemoriafält till en webbadress, lokal eller på en annan dator, till exempel för att göra fakturor eller andra dokument tillgängliga. </para>
-
-<para
->Fliken innehåller inmatningsfält för ett mönster och en webbadressmall. Det angivna mönstret extraheras via reguljära uttryck i promemoriafältet från transaktioner associerade med betalningsmottagaren och infogas i webbadressmallen på angivna platser. <screenshot>
-  <screeninfo
->Länkens matchningsflik</screeninfo>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="payee_link-matching.png" format="PNG"/>
-      </imageobject>
-    </mediaobject>
-</screenshot>
-</para>
-
-<para
->Den resulterande webbadressen visas som en länk i huvudboken vid motsvarande transaktioner (se kolumnen "Information"). <screenshot
-> <screeninfo
->Visa länk i huvudboken</screeninfo
-> <mediaobject
-> <imageobject
-> <imagedata fileref="payee_link-matching-ledger.png" format="PNG"/> </imageobject
-> </mediaobject
-> </screenshot
-> Länken kan nås via snabbmenyn för en transaktion eller via en snabbtangent. <screenshot>
-  <screeninfo
->....</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="payee_link-matching-open-url.png" format="PNG"/>
-    </imageobject>
-  </mediaobject>
-</screenshot>
-</para>
-
-<sect2 id="details.payees.linkmatching.pattern">
-<title
->Tips</title>
-<para
->Funna mönster, som måste motsvara Perl-kompatibla reguljära uttryck, infogas i webbadressmallen i stället för de platsmarkörer som stöds. Enkla exempel är: <itemizedlist>
-    <listitem
-><para
->\d+\b - ett eller flera tal följda av en ordgräns.</para
-></listitem>
-    <listitem
-><para
->\d{2,4}\b - 2 till 4 siffror följda av en ordgräns</para
-></listitem>
-    <listitem
-><para
->\d{3}-d{6}\b - 3 siffror följda av ett bindestreck och 6 siffror följda av en ordgräns</para
-></listitem>
-  </itemizedlist>
-</para>
-
-<para
->Platsmarkörer som stöds är: <itemizedlist
-> <listitem
-><para
->%1 - första funna uttrycket</para
-></listitem
-> <listitem 
-><para
->%2 - andra funna uttrycket (valfritt)</para
-></listitem
-> </itemizedlist
-> När man använder två oberoende mönster separeras de enskilda uttrycken i mönstret med vanliga parenteser, t.ex. <code
->(..)...(..)</code
->. </para>
-
-<para
->Dessutom kan fördefinierade variabler användas i webbadressmallen. Variabler som för närvarande stöds är: <itemizedlist
-> <listitem
-><para
->%year - året från motsvarande transaktions datum</para
-></listitem>
-  </itemizedlist>
-</para>
-</sect2>
-</sect1>
 </chapter>
+

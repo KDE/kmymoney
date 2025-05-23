@@ -6,20 +6,20 @@
 >&Roger.Lum; &Roger.Lum.mail; </author>
   </authorgroup>
   <date
->2014-08-30</date>
+>2010-07-25</date>
   <releaseinfo
->4.7.01</releaseinfo>
+>4.5</releaseinfo>
 </chapterinfo>
 
 <title id="details.settings.title"
->&kmymoney; Einstellungen</title>
+>&kappname; Einstellungen</title>
 
 <para
->Die im folgenden beschriebenen Einstellungen verändern das Verhalten von &kmymoney; und werden über den Menüpunkt <menuchoice
+>Die im folgenden beschriebenen Einstellungen verändern das Verhalten von &kappname; und werden über den Menüpunkt <menuchoice
 ><guimenu
 >Einstellungen</guimenu
 ><guimenuitem
->&kmymoney; einrichten ...</guimenuitem
+>&kappname; einrichten ...</guimenuitem
 ></menuchoice
 > vorgenommen. </para>
 
@@ -50,7 +50,7 @@
 ></term>
     <listitem>
       <para
->Wählen Sie diese Option, wenn &kmymoney; Ihre Datei automatisch im gewählten Zeitintervall speichern soll. Der Vorgabewert beträgt alle 10 Minuten.</para>
+>Wählen Sie diese Option, wenn &kappname; Ihre Datei automatisch im gewählten Zeitintervall speichern soll. Der Vorgabewert beträgt alle 10 Minuten.</para>
     </listitem>
   </varlistentry>
 
@@ -609,13 +609,13 @@
           <para
 >Gleiche Transaktion wenn der Betrag nicht mehr als X Prozent abweicht</para>
           <para
->Beim Eingeben einer neuen Buchung mit dieser aktivierten Option wird &kmymoney; eine Liste mit existierenden Buchungen dieses Zahlungsempfängers im aktuellen Konto anzeigen. Wenn der Buchungsbetrag weniger als X Prozent vom aktuellen Buchungsbetrag abweicht, so wird die Buchung als identisch betrachtet. Sind die Beträge identisch (0 Prozent Abweichung), so werden alle vergangenen Buchungen dieses Zahlungsempfängers im aktuellen Konto angezeigt. Wenn Sie nun eine Buchung aus der Liste auswählen, so übernimmt &kmymoney; alle Details der Buchung, außer dem Datum.</para>
+>Beim Eingeben einer neuen Buchung mit dieser aktivierten Option wird &kappname; eine Liste mit existierenden Buchungen dieses Zahlungsempfängers im aktuellen Konto anzeigen. Wenn der Buchungsbetrag weniger als X Prozent vom aktuellen Buchungsbetrag abweicht, so wird die Buchung als identisch betrachtet. Sind die Beträge identisch (0 Prozent Abweichung), so werden alle vergangenen Buchungen dieses Zahlungsempfängers im aktuellen Konto angezeigt. Wenn Sie nun eine Buchung aus der Liste auswählen, so übernimmt &kappname; alle Details der Buchung, außer dem Datum.</para>
         </listitem>
         <listitem>
           <para
 >Mit den Daten der zuvor am meisten verwendeten Buchungen des Zahlungsempfängers</para>
           <para
->Ist diese Option aktiviert, so wird &kmymoney; beim Eingeben einer neuen Buchung alle Detail-Felder der neuen Buchung mit denen der am häufigsten verwendeten Buchungen automatisch ausfüllen.</para>
+>Ist diese Option aktiviert, so wird &kappname; beim Eingeben einer neuen Buchung alle Detail-Felder der neuen Buchung mit denen der am häufigsten verwendeten Buchungen automatisch ausfüllen.</para>
         </listitem>
       </itemizedlist>
     </listitem>
@@ -674,7 +674,7 @@
 ></term>
     <listitem>
       <para
->Wenn aktiviert, prüft &kmymoney; beim Programmstart auf fällige geplante Buchungen</para>
+>Wenn aktiviert, prüft &kappname; beim Programmstart auf fällige geplante Buchungen</para>
     </listitem>
   </varlistentry>
 
@@ -713,7 +713,7 @@
 >Diese Einstellung gibt an, wie Online-Kursnotizen von den verschiedenen Online-Quellen empfangen werden. </para>
 
 <para
->Hier können Sie die Quellen für die Online-Kursnotizen in &kmymoney; ändern. Es handelt sich hier um erweiterte Einstellungen, die nur von technisch versierten Anwendern, die die Bedeutung der Einstellungen kennen, geändert werden sollten. </para>
+>Hier können Sie die Quellen für die Online-Kursnotizen in &kappname; ändern. Es handelt sich hier um erweiterte Einstellungen, die nur von technisch versierten Anwendern, die die Bedeutung der Einstellungen kennen, geändert werden sollten. </para>
 
 <para
 >Weitere Details finden Sie im Kapitel <link linkend="details.investments.onlinequotes"
@@ -786,7 +786,7 @@
 ></term>
     <listitem>
       <para
->Wenn Sie die vergangenheitsbasierte Vorhersage-Methode verwenden, geben Sie hier an, wie viele vorhergehende Kontozyklen &kmymoney; verwenden soll, um die Vorhersage zu berechnen.</para>
+>Wenn Sie die vergangenheitsbasierte Vorhersage-Methode verwenden, geben Sie hier an, wie viele vorhergehende Kontozyklen &kappname; verwenden soll, um die Vorhersage zu berechnen.</para>
     </listitem>
   </varlistentry>
 
@@ -865,7 +865,7 @@
 ></term>
     <listitem>
       <para
->Verschlüsselt die Daten mit dem &kmymoney; Wiederherstellungsschlüssel. Die Auswahl dieser Option erlaubt es den Kernentwicklern von &kmymoney;, Ihre Daten wiederherzustellen, wenn Sie Ihren Schlüssel verloren haben.</para>
+>Verschlüsselt die Daten mit dem &kappname; Wiederherstellungsschlüssel. Die Auswahl dieser Option erlaubt es den Kernentwicklern von &kappname;, Ihre Daten wiederherzustellen, wenn Sie Ihren Schlüssel verloren haben.</para>
     </listitem>
   </varlistentry>
 </variablelist>
@@ -877,14 +877,14 @@
 >Farben</title>
 
 <para
->Hier können Sie die in &kmymoney; verwendeten Farben ändern. </para>
+>Hier können Sie die in &kappname; verwendeten Farben ändern. </para>
 
 <sect2 id="details.settings.colors.foreground">
 <title
 >Karteikarte "Vordergrund"</title>
 
 <para
->Ändern Sie beliebige Vordergrundfarben durch Anklicken der Farben-Knöpfe und Auswahl einer Farbe aus der erscheinenden Farbpalette. </para>
+>Ändern Sie die Vordergrundfarben durch Anklicken der Farben-Knöpfe und Auswahl einer Farbe aus der erscheinenden Farbpalette. </para>
 </sect2>
 
 <sect2 id="details.settings.colors.background">
@@ -892,12 +892,7 @@
 >Karteikarte "Hintergrund"</title>
 
 <para
->Ändern Sie jede beliebige Hintergrundfarbe durch Anklicken der Farben-Knöpfe und Auswahl einer Farbe aus der erscheinenden Farbpalette. </para>
-
-<para
->Haben Sie das Ankreuzfeld <guilabel
->Systemfarben verwenden</guilabel
-> aktiviert, werden die vom System bereit gestellten Farben benutzt, die zum ausgewählten Design gehören. Details hängen von Betriebssystem, dem Fenstersystem und dem Display-Manager ab. Bei Problemen mit Farben oder Kombinationen von Farben sollten Sie diese Einstellung umschalten. </para>
+>Ändern Sie die Hintergrundfarben durch Anklicken der Farben-Knöpfe und Auswahl einer Farbe aus der erscheinenden Farbpalette. </para>
 </sect2>
 </sect1>
 
@@ -945,75 +940,10 @@
 </sect1>
 
 <sect1 id="details.settings.plugins">
-<title
+<title id="details.settings.plugins.title"
 >Module</title>
 
 <para
->Mit diesen Einstellungen können Sie das Verhalten aller installierten Module ändern. Beachten Sie, dass die Liste der angezeigten Module davon abhängt, welche Module beim Start von &kmymoney; gefunden wurden. Dabei spielt es keine Rolle, ob das Modul als als Teil der Anwendung kompiliert oder als separates Paket hinzugefügt wurde. <screenshot
-> <screeninfo
->Module einrichten</screeninfo
-><mediaobject
-><imageobject
-> <imagedata fileref="configure_plugins.png" format="PNG"/> </imageobject
-> <textobject
-> <phrase
->Module einrichten</phrase
-> </textobject
-></mediaobject
-> </screenshot
-> Die meisten Module können Sie mit dem Ankreuzfeld neben dem Namen des Modus nur aktivieren oder deaktivieren. Zusätzlich gibt es noch einen Knopf <guibutton
->Information</guibutton
-> (&infoicon;), mit dem die die Modul-Version und der Autor anzeigt werden kann. Weitere Informationen zur Einrichtung und Verwendung dieser Module finden Sie in den Kapiteln <link linkend="details.impexp.csv"
->CSV -mport</link
-> und <link linkend="details.impexp.ofx"
->OFX-Import</link
->. Es gilt auch für den <link linkend="details.reconcile"
->Abgleich-Bericht</link
->
-> zu, obwohl dieser Report nur ein kleiner Teil des Abgleichprozesses ist. Das einzige Modul mit erforderlichen Einstellungen ist das Modul  „Scheck drucken“. </para>
-
-<sect2 id="details.settings.plugins.printchecks">
-<title
->Modul zum Drucken von Schecks</title>
-
-<para
->Dieses Modul ist Bestandteil von &kmymoney; und sollte immer aktiviert sein. Damit können Sie Schecks mit Daten einer ausgewählten Buchung drucken, das Layout wird durch eine &HTML;-Vorlage gesteuert. Sie müssen die passende Vorlage für Ihre Scheckvordrucke benutzen. Wenn Sie auf den Knopf <guibutton
->Einrichten</guibutton
-> mit dem Symbol &configicon; klicken, wird der Einrichtungsdialog <guilabel
->Scheck ausdrucken</guilabel
-> angezeigt. Darin finden Sie oben ein Textfeld mit dem Pfad zur ausgewählten Vorlage. Mit dem Symbol rechts neben diesem Feld öffnen Sie den Dateidialog zur Auswahl einer anderen Vorlage. </para>
-
-<para
->Eine Vorlagendatei ist eine HTML-Datei, in der bestimmte Zeichenketten als Referenz auf auf Felder aus der Buchung und aus dem aktuellen Konto und Bankinstitut verwendet werden, um anzugeben, wo sie auf den Scheck gedruckt werden sollen. In &kmymoney; sind mehrere Beispielvorlagendateien enthalten.  Sie sollten entweder eine dieser mitgelieferten Vorlagen benutzen oder eine der Vorlagen anpassen. Wenn die Standardvorlage ausgewählt ist, wird im Einrichtungsdialog der Ordner mit den Beispieldateien angezeigt. </para>
- 
-<!-- info from source code on substitution variables
-    // data about the user
-    checkHTML.replace("$OWNER_NAME", file->user().name());
-    checkHTML.replace("$OWNER_ADDRESS", file->user().address());
-    checkHTML.replace("$OWNER_CITY", file->user().city());
-    checkHTML.replace("$OWNER_STATE", file->user().state());
-    // data about the account institution
-    checkHTML.replace("$INSTITUTION_NAME", institution.name());
-    checkHTML.replace("$INSTITUTION_STREET", institution.street());
-    checkHTML.replace("$INSTITUTION_TELEPHONE", institution.telephone());
-    checkHTML.replace("$INSTITUTION_TOWN", institution.town());
-    checkHTML.replace("$INSTITUTION_CITY", institution.city());
-    checkHTML.replace("$INSTITUTION_POSTCODE", institution.postcode());
-    checkHTML.replace("$INSTITUTION_MANAGER", institution.manager());
-    // data about the transaction
-    checkHTML.replace("$DATE", KGlobal::locale()->formatDate(QDate::currentDate(), KLocale::LongDate));
-    checkHTML.replace("$CHECK_NUMBER", (*it).split().number());
-    checkHTML.replace("$PAYEE_NAME", file->payee((*it).split().payeeId()).name());
-    checkHTML.replace("$PAYEE_ADDRESS", file->payee((*it).split().payeeId()).address());
-    checkHTML.replace("$PAYEE_CITY", file->payee((*it).split().payeeId()).city());
-    checkHTML.replace("$PAYEE_POSTCODE", file->payee((*it).split().payeeId()).postcode());
-    checkHTML.replace("$PAYEE_STATE", file->payee((*it).split().payeeId()).state());
-    checkHTML.replace("$AMOUNT_STRING", converter.convert((*it).split().shares().abs()));
-    checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().shares().abs(), currency));
-    checkHTML.replace("$MEMO", (*it).split().memo());
--->
-
-
-</sect2>
+>Hier können Sie Einstellungen für alle installierten Erweiterungen (Module) vornehmen. Derzeit beschränkt sich die Einstellmöglichkeiten auf das Aktivieren oder Deaktivieren der installierten Erweiterungen für &kappname;. </para>
 </sect1>
 </chapter>

@@ -8,17 +8,18 @@
 >&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->2024-12-01</date>
+>2011-06-29</date>
   <releaseinfo
->5.2.0</releaseinfo>
+>4.6</releaseinfo>
 </chapterinfo>
 
 <title
 >Budgetten</title>
 
-<sect1 id="details.budgets.define"
-><title
+<sect1 id="details.budgets.define">
+<title
 >Wat is een budget?</title>
+
 <para
 >Een budget is een in categorieën ingedeelde lijst met verwacht inkomen en uitgaven voor een periode. </para>
 
@@ -47,12 +48,12 @@
   <varlistentry>
     <term
 >Individueel</term>
-    <listitem>
-      <para
+    <listitem
+><para
 >Specificeer aparte waarden voor elke maand.</para>
       <para
->Dit wordt gebruikt voor inkomen en uitgaven onregelmatig gespreid over het jaar.</para>
-    </listitem>
+>Dit wordt gebruikt voor inkomen en uitgaven onregelmatig gespreid over het jaar.</para
+></listitem>
   </varlistentry>
 </variablelist>
 
@@ -62,22 +63,22 @@
 >. </para>
 </sect1>
 
-<sect1 id="details.budgets.create"
-><title
+<sect1 id="details.budgets.create">
+<title
 >Uw budgetten</title>
-<para
->U krijgt toegang tot uw budgetten in de <guilabel
->Budgettenweergave</guilabel
->, die u kunt tonen door te klikken op het toepasselijke pictogram in de Weergavekiezer links van uw &kmymoney;-venster. </para>
 
 <para
->Er zijn twee hoofdsecties in de Budgetweergave. Links is er een lijst met budgetten die u hebt aangemaakt. Erboven zijn knoppen voor aanmaken, hernoemen en verwijderen van budgetten. Rechts zijn er drie secties. Bovenaan is de lijst met Categorieën. Onderaan worden de hoeveelheden getoond toegekend aan het links geselecteerde budget voor de categorie geselecteerd in de lijst Categorieën erboven. Tussen deze twee gebieden is enige extra besturing voor beheer van het budget. </para>
+>U krijgt toegang tot uw budgetten door op het toepasselijke pictogram in het navigatiepaneel aan de linkerkant van uw &kmymoney; venster te klikken. </para>
 
-<sect2
-><title
+<para
+>Er zijn twee hoofdsecties naar het budgetvenster. Deze worden onderstaand in meer detail beschreven. Links toont de hoofdsectie de lijst met budgetten die u hebt aangemaakt. Erboven zijn knoppen voor aanmaken, hernoemen en verwijderen van budgetten. Rechts zijn drie secties. Bovenaan is de lijst met rekeningen. onderaan is worden de hoeveelheden getoond toegekend aan het budget voor de categorie geselecteerd in de lijst rekeningen erboven. Tussen deze twee gebieden is enige extra besturing voor beheer van het budget. </para>
+
+<sect2>
+<title
 >Bekijken, aanmaken, hernoemen en verwijderen van budgetten</title>
+
 <para
->De linker sectie van de Budgettenweergave toont de lijst budgetten aanwezig in het huidige &kmymoney;-bestand. Als er nog geen Budget is aangemaakt zal de lijst leeg zijn. De lijst Budgetten heeft twee kolommen: </para>
+>Deze sectie van het budgettenvenster toont de lijst budgetten die zit in het huidige &kmymoney;-bestand. Als er nog geen budgetten zijn aangemaakt zal de lijst leeg zijn. De lijst met budgetten heeft twee kolommen: </para>
 
 <variablelist>
   <varlistentry>
@@ -96,13 +97,13 @@
       <para
 >Fiscaal jaar van het budget. Merk op dat de beginmaand en dag van het fiscale jaar gespecificeerd kan worden in de <link linkend="details.settings.general.global"
 >&kmymoney; configuratiedialoog.</link
-> Om het fiscale jaar van een Budget te wijzigen, dubbelklik op het jaar. </para>
+></para>
     </listitem>
   </varlistentry>
 </variablelist>
 
 <para
->Waarden uit het geselecteerde budget worden rechts getoond. Om een ander budget te selecteren kunt u op naam van het budget in de lijst links drukken. Anders, wanneer de lijst focus heeft, kunt u een ander budget selecteren met de toetsen &Up; of &Down;. Als u wijzigingen hebt aangebracht aan een budget en daarna een ander budget selecteert zal &kmymoney; vragen of u de wijzigingen wilt opslaan of verwerpen. </para>
+>Waarden uit het geselecteerde budget worden rechts getoond. Om een ander budget te selecteren kunt u op het budget in de lijst drukken. Anders, wanneer de lijst focus heeft, kunt u een ander budget selecteren met de toetsen &Up; of &Down;. Als u wijzigingen hebt aangebracht aan een budget en dan een ander budget selecteert zal &kmymoney; vragen of u de wijzigingen wilt opslaan of verwerpen. </para>
 
 <para
 >Er zijn drie knoppen boven de lijst met budgetten. </para>
@@ -122,7 +123,10 @@
 >Hernoemen</term>
     <listitem>
       <para
->De naam ven het geselecteerde Budget bewerken. U kunt ook de naam van een Budget bewerken door dubbelklikken op de naam van een Budget in de lijst. </para>
+>Bewerk de naam van het geselecteerde budget.</para>
+
+      <para
+>U kunt ook de naam van een budget bewerken door dubbelklikken op de naam van een budget in de lijst.</para>
     </listitem>
   </varlistentry>
 
@@ -134,17 +138,37 @@
 >Verwijder het geselecteerde budget.</para>
     </listitem>
   </varlistentry>
+
+<!--  buttons moved in the UI - they are now described below.  Will remove
+      from here after this chapter has been reviewed.
+  <varlistentry>
+    <term
+>Revert</term>
+    <listitem>
+      <para
+>Reverts the selected Budget to its last stored state.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Save</term>
+    <listitem>
+      <para
+>Accepts any unsaved changes to the selected Budget and
+        stores them.</para>
+    </listitem>
+  </varlistentry>
+ -->
 </variablelist>
 
 <para
->Aanvullende opties zijn beschikbaar in het contextmenu van <guilabel
->Budgetopties</guilabel
-> door rechts te klikken op een Budget. </para>
+>Aanvullende opties zijn beschikbaar in een menu toegankelijk door rechts te klikken op een budget. </para>
 
 <variablelist>
   <varlistentry>
     <term
->Nieuwe Budget</term>
+>Nieuw budget</term>
     <listitem>
       <para
 >Een nieuw, leeg budget aanmaken.</para>
@@ -162,6 +186,15 @@
 
   <varlistentry>
     <term
+>Wijzig budget jaar</term>
+    <listitem>
+      <para
+>Toont een venster met een lijst met jaren om een ander fiscaal jaar voor het budget te selecteren.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
 >Verwijder budget</term>
     <listitem>
       <para
@@ -174,7 +207,7 @@
 >Kopiëer budget</term>
     <listitem>
       <para
->Maakt een kopie van het geselecteerde budget aan. Het nieuwe budget heeft de naam "Kopie van &lt;budget&gt;", waar &lt;budget&gt; de naam is van het gekopieerde budget. </para>
+>Maakt een kopie van het geselecteerde budget aan. Het nieuwe budget heeft de naam "Kopie van &lt;budget&gt;", waar &lt;budget&gt; de naam is van het gekopieerde budget.</para>
     </listitem>
   </varlistentry>
 
@@ -191,21 +224,17 @@
 </variablelist>
 </sect2>
 
-<sect2
-><title
->Lijst met Categorieën</title>
-<para
->De lijst met Categorieën toont de lijst met Inkomen- en Uitgavenrekeningen. (Bedenk, binnen &kmymoney; worden categorieën behandeld als een speciaal type rekening). Zoals in andere plaatsen in &kmymoney;, is de lijst georganiseerd in een boomstructuur. De lijst kan uit- of ingevouwen worden om subcategorieën binnen een categorie te tonen of te verbergen. De lijst met Categorieën heeft een aantal kolommen: </para>
+<sect2>
+<title
+>Rekeninglijst</title>
 
 <para
->Naast de kolom Naam kunnen alle andere kolommen getoond of verborgen worden door rechts te klikken op een kolomkop en het keuzevak naast de kolomnaam te activeren of te deactiveren. Voor meer details over de betekenis van elke kolom, zie de sectie <link linkend="details.categories.view"
->Categorieënweergave</link
->. Alleen de kolommen specifiek relevant voor Budgets worden onderstaand getoond, maar alle Categoriekolommen kunnen getoond worden. </para>
+>De Rekeningenlijst toont de lijst met categorieën Inkomen en Uitgaven. (Bedenk, binnen &kmymoney; worden categorieën behandeld als een speciaal type rekening.) Zoals in andere plaatsen in &kmymoney;, is de lijst georganiseerd in een boomstructuur. De lijst kan uit- of ingevouwen worden om subcategorieën binnen een categorie te tonen of te verbergen. De Rekeningenlijst heeft een aantal kolommen: </para>
 
 <variablelist>
   <varlistentry>
     <term
->Naam</term>
+>Rekening</term>
     <listitem>
       <para
 >Rekening (categorie)naam</para>
@@ -221,12 +250,33 @@
     </listitem>
   </varlistentry>
 
+<!-- these seem to have been removed from the display.  Remove from here
+     once this is confirmed by the programmers.
   <varlistentry>
     <term
->Saldo</term>
+>Tax</term>
     <listitem>
       <para
->Huidig saldo van Rekening. Dit zal leeg zijn voor categorieën, tenzij de categorie gedefinieerd is in een vreemde valuta. In dat geval toont Saldo de waarde voor de categorie in zijn gedefinieerde valuta. </para>
+>Checked if a Category included in Tax Reports</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>VAT</term>
+    <listitem>
+      <para
+>Checked if a Category marked as a VAT Category</para>
+    </listitem>
+  </varlistentry>
+-->
+
+  <varlistentry>
+    <term
+>Totaal saldo</term>
+    <listitem>
+      <para
+>Huidig saldo van rekening. Dit zal leeg zijn voor categorieën, tenzij de categorie gedefinieerd is in een vreemde valuta. In dat geval toont Totaalsaldo de waarde voor de categorie in zijn gedefinieerde valuta.</para>
     </listitem>
   </varlistentry>
 
@@ -235,58 +285,38 @@
 >Netto Waarde</term>
     <listitem>
       <para
->Totale jaarlijkse waarde in het budget. Als een categorie subcategorieën heeft en de lijst met subcategorieën van de categorie is ingevouwen is de getoonde waarde de som van de waarden voor de categorie en alle subcategorieën. Als een categorie is gedefinieerd in een vreemde valuta zal de totale waarde de waarde tonen in de basis valuta. </para>
+>Totale jaarlijkse waarde in het budget. Als een categorie subcategorieën heeft en de lijst met subcategorieën van de categorie is ingevouwen is de getoonde waarde de som van de waarden voor de categorie en alle subcategorieën. Als een categorie is gedefinieerd in een vreemde valuta zal de totale waarde de waarde tonen in de basis valuta.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 
+<!-- It would be nice to include the actual button icons here to confirm
+     which buttons are referred to.  -->
 <para
->Onder de lijst Categorieën zijn verschillende besturingen. De knoppen <guiicon
-> <inlinemediaobject
-> <imageobject
-> <imagedata fileref="icon-gtk-floppy.svg" format="SVG"/> </imageobject
-> </inlinemediaobject
-> </guiicon
-> <guibutton
->Upd</guibutton
-> (Update) and <guiicon
-> <inlinemediaobject
-> <imageobject
-> <imagedata fileref="icon-edit-undo.svg" format="SVG"/> </imageobject
-> </inlinemediaobject
-> </guiicon
-> <guibutton
->Res</guibutton
-> (Reset) worden beschreven verder onderstaand. De knoppen <guiicon
-> <inlinemediaobject
-> <imageobject
-> <imagedata fileref="icon-zoom-out.svg" format="SVG"/> </imageobject
-> </inlinemediaobject
-></guiicon
-> invouwen en <guiicon
-> <inlinemediaobject
-> <imageobject
-> <imagedata fileref="icon-zoom-in.svg" format="SVG"/> </imageobject
-> </inlinemediaobject
-></guiicon
-> uitvouwen vouwen de gehele lijst Categorieën in of uit. </para>
+>Onder de lijst met rekeningen zijn verschillende knoppen. De knoppen <guibutton
+>Bijwerken</guibutton
+> en <guibutton
+>Terugdraaien</guibutton
+> worden onderstaand verder beschreven. De knoppen invouwen en uitvouwen vouwen de gehele lijst met rekeningen in of uit. </para>
 
 <para
->De lijst met Categorieën kan op twee manieren gefilterd worden. Activeren van het keuzevakje <guilabel
+>De lijst met rekeningen kan op twee manieren gefilterd worden. Activeren van het keuzevakje <guilabel
 >Ongebruikte categorieën verbergen</guilabel
-> verbergt elke categorie waaraan geen waarde is toegekend aan de categorie of een van zijn subcategorieën in het geselecteerde budget. Rechts hiervan is een tekstvak zonder label. Alleen categorieën waarbij wat in dat vak is ingevoerd komen in de lijst, maar hun oudercategorieën komen ook in de lijst. </para>
+> verbergt elke categorie waaraan geen waarde is toegekend aan de categorie of een van zijn subcategorieën. Rechts hiervan is een tekstvak zonder label. Alleen categorieën waarbij wat in dat vak is ingevoerd komen in de lijst, maar hun oudercategorieën komen ook in de lijst. </para>
 
 <para
 >Merk op dat wijzigen van <guilabel
 >Ongebruikte budgetcategorieën verbergen</guilabel
 > of de filterwaarde zeer waarschijnlijk de lijst met categorieën zal wijzigen. Het zou nodig kunnen zijn om de lijst uit te vouwen om alle categorieën te zien die getoond zouden moeten worden met de huidige instellingen. </para>
+
 </sect2>
 
-<sect2
-><title
+<sect2>
+<title
 >Toewijzingen</title>
+
 <para
->Het toewijzingengebied toont de waarden voor de geselecteerde categorie in de lijst met Categorieën. </para>
+>Het toewijzingengebied toont de waarden voor de geselecteerde categorie in de lijst met rekeningen. </para>
 
 <variablelist>
   <varlistentry>
@@ -294,7 +324,7 @@
 >Rekening</term>
     <listitem>
       <para
->De naam van de geselecteerde categorie. Als de categorie een subcategorie is wordt zijn volledige naam getoond in de opmaak Categorie:Subcategorie. </para>
+>Toont de naam van de geselecteerde categorie. Als de categorie een subcategorie is wordt zijn volledige naam getoond in de opmaak categorie:subcategorie.</para>
     </listitem>
   </varlistentry>
 
@@ -303,7 +333,7 @@
 >Totaal</term>
     <listitem>
       <para
->De totale jaarlijkse waarde toegewezen aan de categorie.</para>
+>Toont de totale jaarlijkse waarde toegewezen aan de categorie.</para>
     </listitem>
   </varlistentry>
 
@@ -312,16 +342,16 @@
 >Inclusief sub-rekeningen</term>
     <listitem>
       <para
->Als dit is geactiveerd tonen de rapporten actuele inkomsten of uitgaven in subcategorieën behorende bij de categorie tegen de categorie in plaats van de subcategorie. </para>
+>Als dit is geactiveerd tonen de rapporten actuele inkomsten of uitgaven in subcategorieën behorende bij de categorie tegen de categorie in plaats van de subcategorie.</para>
 
       <para
->Als een subcategorie een waarde heeft gedefinieerd in het budget, dan worden de inkomsten en uitgaven getoond tegen de subcategorie. </para>
+>Als een subcategorie een waarde heeft gedefinieerd in het budget, dan worden de inkomsten en uitgaven getoond tegen de subcategorie.</para>
 
       <para
->Als de Categorie geselecteerd in de lijst Categorieën zijn subcategorieën heeft ingevouwd, zal echter zijn totale waarde de som van de totale waarden voor al zijn subcategorieën tonen, dan kunnen de hoeveelheden in het toekenningengebied nog steeds 0 tonen, tenzij dit vakje geactiveerd is of een hoeveelheid expliciet toegekend is aan de categorie. </para>
+>Als de categorie geselecteerd in de Rekeningenlijst ingevouwde subcategorieën heeft, hoewel zijn totale waarde de som de totale waarden voor al zijn subcategorieën zal tonen, kunnen de hoeveelheden in het toekenningengebied nog steeds 0 tonen, tenzij dit vakje geactiveerd is of een hoeveelheid expliciet toegekend is aan de categorie.</para>
 
       <para
->In het algemeen zult u dit vakje activeren en waarden toekennen aan de categorie en niet aan enige van zijn subcategorieën of het vakje niet activeren en waarden toekennen aan de subcategorieën maar niet aan de categorie. Als een subcategorie hoeveelheden heeft toegekend wanneer dit vakje is geactiveerd, kies dan dat die hoeveelheden naar de categorie worden gestuurd. </para>
+>In het algemeen zult u dit vakje activeren en waarden toekennen aan de categorie en niet aan enige van zijn subcategorieën of het vakje niet activeren en waarden toekennen aan de subcategorieën maar niet aan de categorie. Als een subcategorie hoeveelheden heeft toegekend wanneer dit vakje is geactiveerd, kies dan dat die hoeveelheden naar de categorie worden gerold.</para>
     </listitem>
   </varlistentry>
 
@@ -330,7 +360,9 @@
 >Wissen</term>
     <listitem>
       <para
->Op deze knop klikken reset de gebudgetteerde categoriewaarde of waarden naar nul. </para>
+>De knop <guibutton
+>Wissen</guibutton
+> reset de gebudgetteerde waarde of waarden in de categorie naar nul.</para>
     </listitem>
   </varlistentry>
 
@@ -339,7 +371,9 @@
 >Periode</term>
     <listitem>
       <para
->Deze keuzerondjes bieden u het selecteren van de periode waarin de waarde van toepassing is </para>
+>De keuzerondjes <guilabel
+>Periode</guilabel
+> bieden u het selecteren van de periode waarin de waarde van toepassing is</para>
 
       <variablelist>
 	<varlistentry>
@@ -347,7 +381,7 @@
 >Maandelijks</term>
 	  <listitem>
 	    <para
->Er is een enkele waarde ingevoerd, die de hoeveelheid per maand specificeert. Dit is de standaard instelling. </para>
+>Er is een enkele waarde ingevoerd, die de hoeveelheid per maand specificeert. Dit is de standaard instelling.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -365,21 +399,29 @@
 >Individueel</term>
 	  <listitem>
 	    <para
->Waarden zijn gespecificeerd voor elke kalendermaand. Dit wordt gebruikt waar uitgaven of inkomsten onregelmatig gespreid zijn over het jaar. </para>
+>Waarden zijn gespecificeerd voor elke kalendermaand. Dit wordt gebruikt waar uitgaven of inkomsten onregelmatig gespreid zijn over het jaar.</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
 
       <para
->Als een waarde is of waarden al zijn gespecificeerd en de periode wordt gewijzigd, zal &kmymoney; vragen of de huidige totale jaarwaarde gebruikt moet worden om de nieuwe waarden toe te kennen. </para>
+>Als een waarde is of waarden al zijn gespecificeerd en de periode wordt gewijzigd zal &kmymoney; vragen of de huidige totale jaarwaarde gebruikt moet worden om de nieuwe waarden toe te kennen. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2
-><title
+<sect2>
+<title
 >Bijwerken en terugdraaien</title>
+
+<para
+>Om redenen van prestatie worden wijzigingen gemaakt in een budget niet onmiddellijk opgeslagen. In plaats daarvan moeten ze eerst opgeslagen worden met de knop <guibutton
+>Bijwerken</guibutton
+> en daarna permanent worden opgeslagen met <guibutton
+>Opslaan</guibutton
+> van &kmymoney;. </para>
+
 <para
 >Wanneer waarden in een budget voor de eerste keer zijn gewijzigd zullen de knoppen <guibutton
 >Bijwerken</guibutton
@@ -408,12 +450,20 @@
 > en <guibutton
 >Terugdraaien</guibutton
 > uit. </para>
+
+<para
+>Wijzigingen opgeslagen met <guibutton
+>Bijwerken</guibutton
+> maar nog niet opgeslagen met <guibutton
+>Opslaan</guibutton
+> kunnen alleen teruggedraaid worden door het &kmymoney;-bestand te herladen. </para>
 </sect2>
 </sect1>
 
-<sect1 id="budget.details.reports"
-><title
+<sect1 id="budget.details.reports">
+<title
 >Budgetrapporten</title>
+
 <para
 >&kmymoney; levert een aantal rapporten om actueel inkomen en uitgaven te vergelijken met een budget. Deze staan in een lijst in Rapporten onder "Budgettering". Er zijn twee typen Budgetrapporten: </para>
 
@@ -429,8 +479,8 @@
           <term
 >Maandelijks budget</term
 > 
-          <listitem>
-            <para
+          <listitem
+><para
 >Toont de maandelijkse waarden uit een budget.</para>
           </listitem
 ></varlistentry>
@@ -438,11 +488,11 @@
           <term
 >Jaarlijks budget</term
 > 
-          <listitem>
-            <para
->Toont de maandelijkse waarden uit een budget, met het jaarlijkse totaal. </para>
-          </listitem>
-        </varlistentry>
+          <listitem
+><para
+>Toont de maandelijkse waarden uit een budget, met het jaarlijkse totaal.</para>
+          </listitem
+></varlistentry>
       </variablelist>
     </listitem>
   </varlistentry>
@@ -450,55 +500,55 @@
   <varlistentry>
     <term
 >Budget vs. Gerealiseerd</term>
-    <listitem>
-      <para
->Deze rapporten vergelijken waarden uit een budget met actuele inkomsten en uitgaven. In elk budgetrapport vindt u de kolommen Budget, Actueel en Verschil. Elk rapport verschilt in de periode dat het wordt getoond. </para>
+    <listitem
+><para
+>Deze rapporten vergelijken waarden uit een budget met actuele inkomsten en uitgaven. In elk budgetrapport vindt u de kolommen Budget, Actueel en Verschil. Elk rapport verschilt in de periode dat het wordt getoond.</para>
       <variablelist>
-        <varlistentry>
-          <term
+      <varlistentry>
+      <term
 >Budget vs. Dit jaar gerealiseerd</term
 > 
-          <listitem>
-            <para
+      <listitem
+><para
 >Vanaf het begin van het jaar tot vandaag</para>
-          </listitem>
-        </varlistentry>
-        <varlistentry>
-          <term
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
 >Budget vs. Dit jaar gerealiseerd (YTM)</term
 > 
-          <listitem>
-            <para
->Vanaf het begin van het jaar tot de laatste dag van de vorige maand </para>
-          </listitem>
-        </varlistentry>
-        <varlistentry>
-          <term
+      <listitem
+><para
+>Vanaf het begin van het jaar tot de laatste dag van de vorige maand</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
 >Maandelijks gebudgetteerd vs. gerealiseerd</term
 > 
-          <listitem>
-            <para
->Vanaf het begin van het jaar tot de laatste dag van de huidige maand </para>
-          </listitem>
-        </varlistentry>
-        <varlistentry>
-          <term
+      <listitem
+><para
+>Vanaf het begin van het jaar tot de laatste dag van de huidige maand</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
 >Jaarlijks gebudgetteerd vs. gerealiseerd</term
 > 
-          <listitem>
-            <para
+      <listitem
+><para
 >Van 1 januari tot 31 december</para>
-          </listitem>
-        </varlistentry>
-        <varlistentry>
-          <term
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
 >Jaarlijks gebudgetteerd vs. gerealiseerd (grafiek)</term
 > 
-          <listitem>
-            <para
->Hetzelfde als het vorige rapport maar het toont standaard de grafiek </para>
-          </listitem>
-        </varlistentry>
+      <listitem
+><para
+>Hetzelfde als het vorige rapport maar het toont standaard de grafiek</para>
+      </listitem
+></varlistentry>
       </variablelist>
 
       <para

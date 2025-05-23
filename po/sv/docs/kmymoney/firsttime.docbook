@@ -388,7 +388,7 @@
 </para>
 
 <para
->Skriv in kontots namn och eventuellt konto eller referensnummer tilldelat av institutionen som handhar kontot. Skriv in kontots uppläggningsdatum och kontots ursprungliga behållning. Om du till exempel vill att &kmymoney; ska hantera hela din ekonomi från och med 2008-01-01, skriv då in kontots behållning i början av detta datum. Värdet kan möjligen erhållas från ett pappersutdrag. Du kan också skriva in institutionens namn och bankkod. Den senare, känd som clearingnummer i Sverige, är valfri och krävs bara i fallet med Internetbank, men kan också vara till hjälp vid import av bankutdrag med något av formaten som stöds (OFX, QFX). </para>
+>Enter the name of the account and a possible account or reference number assigned by the institution managing the account. Enter the opening date of the account and the opening balance of the account. For example, you want to use &kmymoney; to manage all your finances as of 2008-01-01, then enter the balance of the account at the beginning of this date. The number can possibly be obtained from a paper statement. You may also enter the name and the bank code of the institution. The latter, known as the routing number in the US or the sort code in the UK, is optional and only required for online banking purposes, but it may also be helpful when importing bank statements in some of the formats supported (OFX, QFX). </para>
 
 <para
 >Om du inte vill ställa in ett startkonto, avmarkera kryssrutan. </para>
@@ -828,7 +828,7 @@
 
 <note>
 <para
->Dessa instruktioner gäller bara för att flytta data och inställningar för &kmymoney;. Det kan dock finnas viktiga saker som lagras av &kde; och inte av &kmymoney;, såsom lösenord lagrade nyckelkedjan. Att flytta andra delar av &kde;:s inställningar är utanför ramen för den här handboken, även om många av de relevanta filerna också lagras i <envar
+>These instructions are solely for moving your &kmymoney; data and settings. However, there may be important items which are stored by &kde; and not by &kmymoney;, such as passwords stored in Keychain. Moving other parts of your &kde; setup is beyond the scope of this manual, although many of the relevant files are also stored under <envar
 >$KDEHOME</envar
 >. </para>
 </note>

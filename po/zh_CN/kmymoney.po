@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-18 02:01+0000\n"
-"PO-Revision-Date: 2024-04-22 16:04\n"
+"POT-Creation-Date: 2025-05-23 03:30+0000\n"
+"PO-Revision-Date: 2024-03-30 19:46\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -14,18 +14,18 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-trunk/messages/kmymoney/kmymoney.pot\n"
-"X-Crowdin-File-ID: 5000\n"
+"X-Crowdin-File: /kf5-stable/messages/kmymoney/kmymoney.pot\n"
+"X-Crowdin-File-ID: 6853\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "KDE 中国, 9z"
+msgstr "KDE 中国"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "kde-china@kde.org, ihchiz@outlook.com"
+msgstr "kde-china@kde.org"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:132
 #, kde-format
@@ -40,7 +40,7 @@ msgstr "红利"
 #: kmymoney/converter/mymoneystatementreader.cpp:373
 #, kde-format
 msgid "Error importing %1: This file is not a valid KMM statement file."
-msgstr "文件 %1 导入失败：此文件不是一个有效的 KMM 对账单文件"
+msgstr "对账单 %1 导入失败：此文件不是一个有效的 KMM 对账单文件。"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:373
 #, kde-format
@@ -48,10 +48,11 @@ msgid "Invalid Statement"
 msgstr "无效的对账单"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:485
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "No Institution"
 msgctxt "@info Group name for accounts with no assigned institution"
 msgid "No institution"
-msgstr ""
+msgstr "未指定金融机构"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:639
 #, kde-format
@@ -104,14 +105,13 @@ msgid "(Fees) %1"
 msgstr "(费用) %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1031
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Additional Fees: %1"
 msgctxt "Prepend name of payee (%1) to original memo (%2)"
 msgid ""
 "Original payee: %1\n"
 "%2"
-msgstr ""
-"原始收款人： %1\n"
-"%2"
+msgstr "附加费用: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1039
 #, kde-format
@@ -282,13 +282,15 @@ msgid "Schedule found"
 msgstr "已找到交易计划"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Created on"
 msgctxt "Create undo action"
 msgid "Create account"
-msgstr "创建账户"
+msgstr "创建于"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Create category"
 msgctxt "Create undo action"
 msgid "Create category"
 msgstr "创建交易类别"
@@ -401,10 +403,11 @@ msgstr[0] "已处理 %1 份对账单，结果如下："
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ImportSummaryDialog)
 #: kmymoney/dialogs/importsummarydlg.ui:14
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Imported History"
 msgctxt "@title:window"
 msgid "Import summary"
-msgstr ""
+msgstr "导入历史"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonSkip)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonCancel)
@@ -892,10 +895,11 @@ msgstr "将本次计划中将来所有的交易都设为此值"
 
 #: kmymoney/dialogs/kcurrencycalculator.cpp:438
 #: kmymoney/mymoney/mymoneyfile.cpp:3630
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "User"
 msgctxt "@info price source"
 msgid "User"
-msgstr ""
+msgstr "用户"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KCurrencyCalculator)
 #: kmymoney/dialogs/kcurrencycalculator.ui:17
@@ -1106,7 +1110,9 @@ msgid "Select as base currency"
 msgstr "选择为基准货币"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:504
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Menu header"
+#| msgid "Currency options"
 msgctxt "@title:menu"
 msgid "Currency options"
 msgstr "货币选项"
@@ -1571,15 +1577,17 @@ msgid "Ask"
 msgstr "询问"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:232
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Configure"
 msgctxt "@action:button Configuration of price update"
 msgid "Configure"
-msgstr "设置"
+msgstr "配置"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:346
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1 units in %2"
 msgid "%1 units for one %2"
-msgstr ""
+msgstr "%2中的%1单位"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:384
 #, kde-format
@@ -1587,16 +1595,18 @@ msgid "[No identifier]"
 msgstr "[无标识符]"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:500
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "No account selected"
 msgctxt "@info online update price info"
 msgid "No security selected."
-msgstr ""
+msgstr "未选择账户"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:510
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Security found"
 msgctxt "@info online update price info"
 msgid "No Security to be updated."
-msgstr ""
+msgstr "找到证券"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:534
 #, kde-format
@@ -1651,7 +1661,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The date is invalid."
-msgstr "此日期无效。"
+msgstr ""
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:737
 #, kde-format
@@ -1916,7 +1926,9 @@ msgid "Delete price..."
 msgstr "删除价格..."
 
 #: kmymoney/dialogs/kmymoneypricedlg.cpp:357
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Menu header"
+#| msgid "Price options"
 msgctxt "@title:menu"
 msgid "Price options"
 msgstr "价格选项"
@@ -1929,10 +1941,11 @@ msgstr "价格编辑器"
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, m_searchWidget)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:26
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Search view"
 msgctxt "Placeholder text for search bar"
 msgid "Search..."
-msgstr ""
+msgstr "搜索视图"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_showAllPrices)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:52
@@ -2077,10 +2090,11 @@ msgid ""
 msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:628
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Is a sub account of %1"
 msgctxt "@label:chooser %1 account name, %2 parent account name"
 msgid "<b>%1</b> is a sub account of <b>%2</b>"
-msgstr ""
+msgstr "是%1的子账户"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:692
 #: kmymoney/dialogs/knewinstitutiondlg.cpp:189
@@ -2133,10 +2147,11 @@ msgid ""
 msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:912
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Payment accounts"
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
-msgstr "隐藏帐户"
+msgstr "支付账户"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:920
 #, kde-format
@@ -2149,10 +2164,11 @@ msgid ""
 msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:922
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Hide unused categories"
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
-msgstr ""
+msgstr "隐藏未使用的交易类别"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1029
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
@@ -2179,10 +2195,11 @@ msgid "Please provide a percentage greater than zero and less than 100."
 msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1082
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Please select a default category for payee '%1'"
 msgctxt "@info:tooltip Hint to provide category to assign VAT"
 msgid "Please select a category for the VAT."
-msgstr "请为增值税选择一个类别。"
+msgstr "请为收款人 ‘%1’ 选择一个默认分类"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1147
 #, kde-format
@@ -2201,24 +2218,32 @@ msgid "Create category"
 msgstr "创建交易类别"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1172
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "<p>The category <b>%1</b> currently does not exist. Do you want to create "
+#| "it?</p><p><i>The parent account will default to <b>%2</b> but can be "
+#| "changed in the following dialog</i>.</p>"
 msgid ""
 "<p>The account <b>%1</b> currently does not exist. Do you want to create it?"
 "</p><p><i>The parent account will default to <b>%2</b> but can be changed in "
 "the following dialog</i>.</p>"
 msgstr ""
+"<p>交易类别<b>%1</b>目前不存在，要创建它吗？ </p><p><i>默认将父账户将设置 为"
+"<b>%2</b>，但在之后的对话框中可以更改</i>。</p>"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1194
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Create a new Category"
 msgctxt "@title:window"
 msgid "Create a new Category"
 msgstr "创建一个新的交易类型"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1199
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Create a new asset account"
 msgctxt "@title:window"
 msgid "Create a new Account"
-msgstr "创建一个新账户"
+msgstr "创建一个新资产账户"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KNewAccountDlg)
 #: kmymoney/dialogs/knewaccountdlg.ui:14
@@ -2334,7 +2359,7 @@ msgstr ""
 #: kmymoney/dialogs/knewaccountdlg.ui:281
 #, kde-format
 msgid "Opening Balance Account"
-msgstr "开户余额账户"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1_3)
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
@@ -2416,11 +2441,16 @@ msgstr "限额"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/dialogs/knewaccountdlg.ui:519
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "This page allows to setup certain limits. KMyMoney will warn you when the "
+#| "account balance reaches a limit."
 msgid ""
 "This section allows to setup certain limits. KMyMoney will warn you when the "
 "account balance reaches a limit."
 msgstr ""
+"在本页中您可以设置一些限额。当账户余额到达某一限额时，KMyMoney将向您发出警"
+"告。"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/dialogs/knewaccountdlg.ui:548
@@ -2448,9 +2478,10 @@ msgstr "早期报警"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_taxGroupBox)
 #: kmymoney/dialogs/knewaccountdlg.ui:624
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tag options"
 msgid "Tax options"
-msgstr ""
+msgstr "标记选项"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox3)
 #: kmymoney/dialogs/knewaccountdlg.ui:630
@@ -2513,21 +2544,24 @@ msgstr "导入选项"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/knewaccountdlg.ui:876
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Payee creation"
 msgid "Automatic Payee creation"
-msgstr ""
+msgstr "创建收款人"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:884
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Application Account"
 msgid "Application Default"
-msgstr ""
+msgstr "应用程序账户"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:889
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Never reconciled"
 msgid "Never create"
-msgstr ""
+msgstr "从未对账"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_preferredStatementDate)
@@ -2539,15 +2573,18 @@ msgstr "询问用户"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_payeeCreation)
 #: kmymoney/dialogs/knewaccountdlg.ui:899
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Create category"
 msgid "Create automatically"
-msgstr ""
+msgstr "创建交易类别"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_budgetGroupBox)
 #. i18n: ectx: Menu (budget_context_menu)
 #: kmymoney/dialogs/knewaccountdlg.ui:925
 #: kmymoney/plugins/views/budget/budgetview.rc:4
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Menu header"
+#| msgid "Budget options"
 msgid "Budget options"
 msgstr "预算选项"
 
@@ -2556,7 +2593,7 @@ msgstr "预算选项"
 #, kde-format
 msgctxt "@item:inlistbox Don't include this account in budgets"
 msgid "Don't include in budgets"
-msgstr "不包括在预算内"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
 #: kmymoney/dialogs/knewaccountdlg.ui:937
@@ -2621,7 +2658,7 @@ msgstr "机构详细信息"
 #: kmymoney/dialogs/knewinstitutiondlg.ui:32
 #, kde-format
 msgid "A Business Identifier Code, also known as SWIFT."
-msgstr "银行识别代码，也称 SWIFT。"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #. i18n: ectx: property (text), widget (QLabel, label_4)
@@ -2642,7 +2679,7 @@ msgstr "名称："
 #: kmymoney/dialogs/knewinstitutiondlg.ui:101
 #, kde-format
 msgid "SWIFT/BIC"
-msgstr "SWIFT/BIC"
+msgstr ""
 
 #. i18n: Tooltip for 'Bank Code' field. Include an example of the culture-specific term for 'Bank Code' here, if one is common (https://en.wikipedia.org/wiki/Bank_code).
 #. i18n: ectx: property (toolTip), widget (KLineEdit, bankCodeEdit)
@@ -2653,8 +2690,6 @@ msgid ""
 "body or a Bankers Association. Known as 'Routing Number' (US accounts) or a "
 "'Sort Code' (UK accounts)."
 msgstr ""
-"由中央银行、银行监督机构或银行协会分配给金融机构的银行代码。即“路由号码”(美国"
-"账户) 或“清算号”(英国账户)。"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5_1)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2)
@@ -2665,9 +2700,10 @@ msgstr "城市："
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel6)
 #: kmymoney/dialogs/knewinstitutiondlg.ui:171
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Bank Code"
 msgid "Bank Code:"
-msgstr "银行代码："
+msgstr "银行代码"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel6)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
@@ -2680,17 +2716,24 @@ msgstr "电话/传真号码："
 #: kmymoney/dialogs/knewinstitutiondlg.ui:197
 #, kde-format
 msgid "Favicon URL"
-msgstr "Favicon URL"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, iconUrlEdit)
 #: kmymoney/dialogs/knewinstitutiondlg.ui:204
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid ""
+#| "<html><head/><body><p>Enter the rounding method used for this currency.  "
+#| "See <span style=\" font-weight:600;\">What's this</span> for more details."
+#| "</p></body></html>"
 msgid ""
 "<html><head/><body><p>If left empty, the icon for the institution will be "
 "located at the root of the Website URL entered above with the name <span "
 "style=\" font-weight:600;\">favicon.ico</span>. You can override the "
 "location here.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>输入此货币的舍入方法。详情请点击<span style=\" font-"
+"weight:600;\">这是什么</span>。</p></body></html>"
 
 #: kmymoney/dialogs/kpayeereassigndlg.cpp:35
 msgid ""
@@ -2761,7 +2804,24 @@ msgstr "若您不确定该如何选择，请选择 XML。"
 
 #. i18n: ectx: property (html), widget (QTextBrowser, textBrowser)
 #: kmymoney/dialogs/ksaveasquestion.ui:52
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#| "REC-html40/strict.dtd\">\n"
+#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#| "css\">\n"
+#| "p, li { white-space: pre-wrap; }\n"
+#| "</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; "
+#| "font-weight:400; font-style:normal;\">\n"
+#| "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#| "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#| "\">KMyMoney supports multiple storage types. The availability of storage "
+#| "types depends on the presence of plugins and their activation in the "
+#| "application settings.</p>\n"
+#| "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#| "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /"
+#| ">If you are uncertain what to choose here, then <span style=\" font-"
+#| "weight:600;\">XML</span> is probably your best choice.</p></body></html>"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
 "REC-html40/strict.dtd\">\n"
@@ -2778,6 +2838,20 @@ msgid ""
 "\"><br />If you are uncertain what to choose here, then <span style=\" font-"
 "weight:600;\">XML</span> is probably your best choice.</p></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">KMyMoney "
+"支持多种存储方式，支持情况取决于插件的安装及启用情况。</p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br />如果"
+"您不确定该如何选择，那请选择 <span style=\" font-weight:600;\">XML</span>。</"
+"p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/ksaveasquestion.ui:68
@@ -2825,9 +2899,10 @@ msgstr "保持%1未指派状态。"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTagReassignDlg)
 #: kmymoney/dialogs/ktagreassigndlg.ui:14
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Reassign tags"
 msgid "Delete or reassign tags"
-msgstr "删除或重新分配标签"
+msgstr "重新指定标签"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/dialogs/ktagreassigndlg.ui:53
@@ -2900,10 +2975,11 @@ msgid "Security"
 msgstr "证券"
 
 #: kmymoney/dialogs/payeecreator.cpp:62
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Creates a new payee"
 msgctxt "Undo action description"
 msgid "Create payee"
-msgstr "创建收款人"
+msgstr "创建新收款人"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsColors)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:14
@@ -2939,7 +3015,7 @@ msgstr "导入的交易"
 #: kmymoney/dialogs/settings/ksettingscolors.ui:147
 #, kde-format
 msgid "Missing conversion rate"
-msgstr "缺少转换率"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_5)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:157
@@ -2955,9 +3031,10 @@ msgstr "匹配的交易"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:177
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Backend"
 msgid "Background"
-msgstr ""
+msgstr "后端"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:184
@@ -2981,9 +3058,10 @@ msgstr "使用操作系统设置"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_individualFontsFrame)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:27
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Individual font settings"
 msgid "Individual font settings for ledgers"
-msgstr ""
+msgstr "个人字体设置"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (listCellFont), group (List Options)
@@ -3045,9 +3123,10 @@ msgstr "文件关闭时自动保存"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_3)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:102
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Backup location:"
 msgid "Backup options"
-msgstr ""
+msgstr "备份位置："
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, kcfg_BackupExtension)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:112
@@ -3290,15 +3369,17 @@ msgstr "在账户列表视图中显示分类"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccountsHome)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:450
 #: kmymoney/dialogs/settings/ksettingshome.ui:238
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Hide liability accounts with zero balance"
 msgid "Hide accounts with a zero balance from Home"
-msgstr ""
+msgstr "隐藏零余额的负债账户"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:457
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Hide liability accounts with zero balance"
 msgid "Hide accounts with a zero balance from Accounts"
-msgstr ""
+msgstr "隐藏零余额的负债账户"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:464
@@ -3830,9 +3911,10 @@ msgstr "显示"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowGrid)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:30
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Show a grid in the register"
 msgid "Show a grid in the ledger"
-msgstr ""
+msgstr "在账簿中显示栅格"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TransactionForm)
 #. i18n: ectx: label, entry (TransactionForm), group (General Options)
@@ -3866,9 +3948,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowRegisterDetailed)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:63
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Show all register entries in full detail"
 msgid "Show all ledger entries in full detail"
-msgstr ""
+msgstr "详细显示全部账簿条目"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_LedgerLens)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:73
@@ -3893,15 +3976,17 @@ msgstr "在账簿中显示选中交易详细信息"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowAllSplits)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:86
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Show all register entries in full detail"
 msgid "Show all split details in ledger"
-msgstr ""
+msgstr "详细显示全部账簿条目"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:96
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Information"
 msgid "Information headers"
-msgstr ""
+msgstr "信息"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:102
@@ -3913,9 +3998,10 @@ msgstr "在每组交易上方显示一个较大的标题。具体的分组取决
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:105
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Show group header between transactions"
 msgid "Show group headers between transactions"
-msgstr ""
+msgstr "在交易间显示组标题"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFiscalMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:115
@@ -3925,9 +4011,10 @@ msgstr "显示上一财年及当前财年的标题"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:123
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Do not show reconciled transactions"
 msgid "Don't show reconciliation entries"
-msgstr ""
+msgstr "不显示已对账的交易"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:128
@@ -4246,10 +4333,12 @@ msgid "Holidays for %1 (%2)"
 msgstr "%1 的节假日 (%2)"
 
 #: kmymoney/dialogs/settings/ksettingsschedules.cpp:371
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Security type"
+#| msgid "None"
 msgctxt "@item:inlistbox No holiday region selected"
 msgid "None"
-msgstr ""
+msgstr "未分组"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsSchedules)
 #: kmymoney/dialogs/settings/ksettingsschedules.ui:17
@@ -4338,10 +4427,11 @@ msgid "Dialog"
 msgstr "对话框"
 
 #: kmymoney/dialogs/tagcreator.cpp:64
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Create"
 msgctxt "Undo action description"
 msgid "Create tag"
-msgstr ""
+msgstr "新建"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
 #: kmymoney/kcreditswindow.cpp:31 kmymoney/kcreditswindow.cpp:98
@@ -4361,9 +4451,10 @@ msgid "Holiday regions integration"
 msgstr "当地节假日集成插件"
 
 #: kmymoney/kcreditswindow.cpp:40 kmymoney/kcreditswindow.cpp:91
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Online settings"
 msgid "Online banking"
-msgstr ""
+msgstr "在线设置"
 
 #: kmymoney/kcreditswindow.cpp:43
 #, kde-format
@@ -4379,9 +4470,10 @@ msgstr ""
 "如果您喜欢它，可以通过提供代码或者建议等方式来帮助它的开发。"
 
 #: kmymoney/kcreditswindow.cpp:45
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "(c) 2000-2022 The KMyMoney development team"
 msgid "(c) 2000-2025 The KMyMoney development team"
-msgstr ""
+msgstr "(c) 2000-2022 KMyMoney开发团队"
 
 #: kmymoney/kcreditswindow.cpp:49
 #, kde-format
@@ -4393,7 +4485,8 @@ msgstr ""
 "%1"
 
 #: kmymoney/kcreditswindow.cpp:52
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Core engine, Release Manager, Project admin"
 msgctxt "Roles in project"
 msgid "Core engine, Release Manager, Project admin"
 msgstr "核心引擎，版本管理员，项目管理员"
@@ -4402,13 +4495,13 @@ msgstr "核心引擎，版本管理员，项目管理员"
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Maintainer, Windows support"
-msgstr "开发者、维护者及 Windows 支持"
+msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:54
 #, kde-format
 msgctxt "Roles in project"
 msgid "Developer, Windows and MacOS support"
-msgstr "开发者、Windows 和 MacOS 支持"
+msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:57 kmymoney/kcreditswindow.cpp:59
 #: kmymoney/kcreditswindow.cpp:61 kmymoney/kcreditswindow.cpp:64
@@ -4423,53 +4516,61 @@ msgid "Inactive member. "
 msgstr "不活跃的成员。"
 
 #: kmymoney/kcreditswindow.cpp:57
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Initial idea, much initial source code, Project admin"
 msgctxt "Roles in project"
 msgid "Initial idea, much initial source code, Project admin"
 msgstr "初始想法，大部分初始代码，项目管理员"
 
 #: kmymoney/kcreditswindow.cpp:59
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Forecast, Reports"
 msgctxt "Roles in project"
 msgid "Forecast, Reports"
 msgstr "预测，报表"
 
 #: kmymoney/kcreditswindow.cpp:61
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Reporting logic, OFX Import"
 msgctxt "Roles in project"
 msgid "Reporting logic, OFX Import"
 msgstr "报表逻辑，OFX导入"
 
 #: kmymoney/kcreditswindow.cpp:64
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Database backend, maintainer stable branch"
 msgctxt "Roles in project"
 msgid "Database backend, maintainer stable branch"
 msgstr "数据库后台，维护者稳定分支版本"
 
 #: kmymoney/kcreditswindow.cpp:67
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Project Admin"
 msgctxt "Roles in project"
 msgid "Project Admin"
 msgstr "项目管理员"
 
 #: kmymoney/kcreditswindow.cpp:69 kmymoney/kcreditswindow.cpp:71
 #: kmymoney/kcreditswindow.cpp:72
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Developer"
 msgctxt "Roles in project"
 msgid "Developer"
 msgstr "开发者"
 
 #: kmymoney/kcreditswindow.cpp:70
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Database backend"
 msgctxt "Roles in project"
 msgid "Database backend"
 msgstr "数据库后台"
 
 #: kmymoney/kcreditswindow.cpp:74
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Developer & Artist"
 msgctxt "Roles in project"
 msgid "Developer, Code refactoring"
-msgstr "开发者及代码重构"
+msgstr "开发者 & 美工"
 
 #: kmymoney/kcreditswindow.cpp:80 kmymoney/kcreditswindow.cpp:86
 #: kmymoney/kcreditswindow.cpp:92 kmymoney/kcreditswindow.cpp:99
@@ -4495,9 +4596,10 @@ msgid "Financial framework"
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:105
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Online Banking Operations"
 msgid "Online banking framework"
-msgstr ""
+msgstr "网上银行业务"
 
 #: kmymoney/kcreditswindow.cpp:111
 #, kde-format
@@ -4505,9 +4607,10 @@ msgid "Library for creating diagrams"
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:116
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "iCalendar file"
 msgid "iCalendar integration"
-msgstr ""
+msgstr "iCalendar 文件"
 
 #: kmymoney/kcreditswindow.cpp:123
 #, kde-format
@@ -4515,54 +4618,63 @@ msgid "OFX banking protocol abstraction library"
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:130
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Database malfunction"
 msgid "SQLite database encryption"
-msgstr ""
+msgstr "数据库工作异常"
 
 #: kmymoney/kcreditswindow.cpp:135
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Documentation and user support"
 msgctxt "Roles in project"
 msgid "Documentation and user support"
 msgstr "文档和用户支持"
 
 #: kmymoney/kcreditswindow.cpp:137
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Initial investment support"
 msgctxt "Roles in project"
 msgid "Initial investment support"
 msgstr "初始投资支持"
 
 #: kmymoney/kcreditswindow.cpp:140
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Developer & Artist"
 msgctxt "Roles in project"
 msgid "Developer & Artist"
 msgstr "开发者 & 美工"
 
 #: kmymoney/kcreditswindow.cpp:143
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Icons & splash screen"
 msgctxt "Roles in project"
 msgid "Icons & splash screen"
 msgstr "图标和飞溅屏幕"
 
 #: kmymoney/kcreditswindow.cpp:145
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Patches and port to kde4"
 msgctxt "Roles in project"
 msgid "Patches and port to kde4"
 msgstr "补丁和 KDE4 移植"
 
 #: kmymoney/kcreditswindow.cpp:146
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Patches"
 msgctxt "Roles in project"
 msgid "Patches"
 msgstr "补丁"
 
 #: kmymoney/kcreditswindow.cpp:148
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Patches, packaging and KF5-CI for OS X"
 msgctxt "Roles in project"
 msgid "Patches, packaging and KF5-CI for OS X"
 msgstr "OS X 相关的补丁、打包和 KF5-CI"
 
 #: kmymoney/kcreditswindow.cpp:150
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "CSV import/export"
 msgctxt "Roles in project"
 msgid "CSV import/export"
 msgstr "CSV 导入/导出"
@@ -4581,10 +4693,11 @@ msgid "The file has been changed, save it?"
 msgstr "您已修改此文件，要保存该文件吗？"
 
 #: kmymoney/kmymoney.cpp:492
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Save to file"
 msgctxt "@title:window"
 msgid "Save file"
-msgstr "保存文件"
+msgstr "保存到文件"
 
 #: kmymoney/kmymoney.cpp:679
 #, kde-format
@@ -4607,10 +4720,11 @@ msgid "Unable to unmatch the selected transactions"
 msgstr "无法取消选中交易的匹配"
 
 #: kmymoney/kmymoney.cpp:1063
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "New account..."
 msgctxt "@action New file/database"
 msgid "New book..."
-msgstr "新建账簿..."
+msgstr "新建账户..."
 
 #: kmymoney/kmymoney.cpp:1230
 #, kde-format
@@ -4723,21 +4837,24 @@ msgid "Finish"
 msgstr "完成"
 
 #: kmymoney/kmymoney.cpp:1405
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Postal Code:"
 msgctxt "Postpone reconciliation"
 msgid "Postpone"
-msgstr ""
+msgstr "邮政编码："
 
 #: kmymoney/kmymoney.cpp:1406
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Cancel"
 msgctxt "Cancel reconciliation"
 msgid "Cancel"
 msgstr "取消"
 
 #: kmymoney/kmymoney.cpp:1407
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Last reconciliation"
 msgid "Report reconciliation"
-msgstr "报告对账情况"
+msgstr "上次对账"
 
 #: kmymoney/kmymoney.cpp:1408
 #, kde-format
@@ -4842,7 +4959,7 @@ msgstr "打开所有信息显示"
 #: kmymoney/kmymoney.cpp:1440 kmymoney/views/kwelcomepage.cpp:82
 #, kde-format
 msgid "Get help from our community"
-msgstr "从我们的社区获得帮助"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1441 kmymoney/views/kwelcomepage.cpp:84
 #, kde-format
@@ -4852,13 +4969,15 @@ msgstr ""
 #: kmymoney/kmymoney.cpp:1442 kmymoney/views/kwelcomepage.cpp:80
 #, kde-format
 msgid "Visit our website"
-msgstr "访问我们的网站"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1446
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1 transaction\n"
+#| msgid_plural "%1 transactions\n"
 msgctxt "New transaction button"
 msgid "New transaction"
-msgstr "新建交易"
+msgstr "%1 笔交易\n"
 
 #: kmymoney/kmymoney.cpp:1447
 #, kde-format
@@ -4933,28 +5052,33 @@ msgid "Not reconciled"
 msgstr "尚未对账"
 
 #: kmymoney/kmymoney.cpp:1459
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Move transaction to..."
 msgctxt "Move transaction"
 msgid "Move transaction"
-msgstr "转移交易"
+msgstr "将交易移动到..."
 
 #: kmymoney/kmymoney.cpp:1460
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Show transaction form"
 msgctxt "Show transaction"
 msgid "Show transaction"
-msgstr ""
+msgstr "显示交易记录输入界面"
 
 #: kmymoney/kmymoney.cpp:1461
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Show Transaction Detail"
 msgctxt "Display transaction details"
 msgid "Show transaction details"
-msgstr ""
+msgstr "显示交易详细信息"
 
 #: kmymoney/kmymoney.cpp:1463
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "To open a new report"
+#| msgid "&Open"
 msgctxt "Open URL"
 msgid "Open URL"
-msgstr ""
+msgstr "打开(&O)"
 
 #: kmymoney/kmymoney.cpp:1464
 #, kde-format
@@ -4989,9 +5113,10 @@ msgid "Combine"
 msgstr "组合"
 
 #: kmymoney/kmymoney.cpp:1470
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "As of today"
 msgid "Move to today"
-msgstr ""
+msgstr "就今天而言"
 
 #: kmymoney/kmymoney.cpp:1471
 #, kde-format
@@ -4999,9 +5124,10 @@ msgid "Copy splits"
 msgstr "复制拆分"
 
 #: kmymoney/kmymoney.cpp:1472
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Show ledgers page"
 msgid "Show filter widget"
-msgstr "显示过滤器部件"
+msgstr "显示账簿页面"
 
 #: kmymoney/kmymoney.cpp:1474
 #, kde-format
@@ -5029,19 +5155,22 @@ msgid "Manual price update..."
 msgstr "手动更新价格..."
 
 #: kmymoney/kmymoney.cpp:1479
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Existing security"
 msgid "Edit security..."
-msgstr "编辑证券..."
+msgstr "现有证券"
 
 #: kmymoney/kmymoney.cpp:1480
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Delete security"
 msgid "Delete security..."
-msgstr "删除证券..."
+msgstr "删除证券"
 
 #: kmymoney/kmymoney.cpp:1483
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&New Schedule..."
 msgid "New schedule..."
-msgstr "新建计划..."
+msgstr "新计划(&N)..."
 
 #: kmymoney/kmymoney.cpp:1484 kmymoney/kmymoney.cpp:1485
 #, kde-format
@@ -5069,9 +5198,10 @@ msgid "Skip next transaction..."
 msgstr "跳过下一笔交易..."
 
 #: kmymoney/kmymoney.cpp:1491
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "New payee"
 msgid "New payee..."
-msgstr "新建收款人..."
+msgstr "新建收款人"
 
 #: kmymoney/kmymoney.cpp:1492
 #, kde-format
@@ -5089,9 +5219,10 @@ msgid "Merge payees"
 msgstr "合并收款人"
 
 #: kmymoney/kmymoney.cpp:1496
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "New tag"
 msgid "New tag..."
-msgstr "新建标签..."
+msgstr "新建标签"
 
 #: kmymoney/kmymoney.cpp:1497
 #, kde-format
@@ -5104,50 +5235,60 @@ msgid "Delete tag"
 msgstr "删除标签"
 
 #: kmymoney/kmymoney.cpp:1500
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&New report"
 msgid "Open report"
-msgstr "打开报表"
+msgstr "新建报表(&N)"
 
 #: kmymoney/kmymoney.cpp:1501
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&New report"
 msgid "New report"
-msgstr "新建报表"
+msgstr "新建报表(&N)"
 
 #: kmymoney/kmymoney.cpp:1502
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Copy memo"
 msgid "Copy report"
-msgstr "复制报表"
+msgstr "复制备忘"
 
 #: kmymoney/kmymoney.cpp:1503
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:215
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Configure this report"
 msgid "Configure report"
-msgstr "配置报表"
+msgstr "配置此报表"
 
 #: kmymoney/kmymoney.cpp:1504
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Favorite reports"
 msgid "Export report"
-msgstr "导出报表"
+msgstr "常用报表"
 
 #: kmymoney/kmymoney.cpp:1505
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Delete Report?"
 msgid "Delete report"
-msgstr "删除报表"
+msgstr "删除报表？"
 
 #: kmymoney/kmymoney.cpp:1506
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&New report"
 msgid "Close report"
-msgstr "关闭报表"
+msgstr "新建报表(&N)"
 
 #: kmymoney/kmymoney.cpp:1507
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Toggle reconciliation flag"
+#| msgid "Toggle"
 msgid "Toggle chart"
-msgstr "切换图表"
+msgstr "切换"
 
 #: kmymoney/kmymoney.cpp:1508
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Entry order"
 msgid "Edit tab order"
-msgstr ""
+msgstr "条目顺序"
 
 #: kmymoney/kmymoney.cpp:1511
 #, kde-format
@@ -5165,40 +5306,48 @@ msgid "Debug Timers"
 msgstr "调试计时器"
 
 #: kmymoney/kmymoney.cpp:1533
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Button text for match transaction"
+#| msgid "Match"
 msgctxt "Match transactions"
 msgid "Match"
 msgstr "匹配"
 
 #: kmymoney/kmymoney.cpp:1534
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Button text for unmatch transaction"
+#| msgid "Unmatch"
 msgctxt "Unmatch transactions"
 msgid "Unmatch"
 msgstr "取消匹配"
 
 #: kmymoney/kmymoney.cpp:1660
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Duplicate the current selected transactions"
 msgctxt "@info:tooltip"
 msgid "Start reconciling the currently selected account"
-msgstr ""
+msgstr "复制当前选中的交易"
 
 #: kmymoney/kmymoney.cpp:1661
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Postpone reconciliation"
 msgctxt "@info:tooltip"
 msgid "Postpone the current reconciliation"
-msgstr ""
+msgstr "推迟对账"
 
 #: kmymoney/kmymoney.cpp:1662
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Last reconciliation"
 msgctxt "@info:tooltip"
 msgid "Finish the current reconciliation"
-msgstr ""
+msgstr "上次对账"
 
 #: kmymoney/kmymoney.cpp:1663
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Last reconciliation"
 msgctxt "@info:tooltip"
 msgid "Cancel the current reconciliation"
-msgstr ""
+msgstr "上次对账"
 
 #: kmymoney/kmymoney.cpp:1771
 #, kde-format
@@ -5239,10 +5388,11 @@ msgid "Unable to duplicate transaction(s)"
 msgstr "无法复制交易"
 
 #: kmymoney/kmymoney.cpp:2366
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Close"
 msgctxt "@action:button"
 msgid "Close"
-msgstr ""
+msgstr "关闭"
 
 #: kmymoney/kmymoney.cpp:2545
 #, kde-format
@@ -5250,29 +5400,36 @@ msgid "Unable to modify transaction"
 msgstr "无法修改交易"
 
 #: kmymoney/kmymoney.cpp:2689
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "At least one split of the selected transactions has been reconciled. Do "
+#| "you wish to delete the transactions anyway?"
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
 "wish to change the transactions anyway?"
-msgstr ""
+msgstr "选中交易里的至少一项拆分已经完成了对账。您确定要删除这些交易吗？"
 
 #: kmymoney/kmymoney.cpp:2691
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Transaction already reconciled"
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
-msgstr ""
+msgstr "已对账交易"
 
 #: kmymoney/kmymoney.cpp:2696
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Do you really want to delete the selected transaction?"
+#| msgid_plural "Do you really want to delete all %1 selected transactions?"
 msgid "Do you really want to change the selected transaction?"
 msgid_plural "Do you really want to change all %1 selected transactions?"
-msgstr[0] ""
+msgstr[0] "您确定要删除所选的 %1 笔交易吗？"
 
 #: kmymoney/kmymoney.cpp:2700
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Any transaction"
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
-msgstr ""
+msgstr "任意交易"
 
 #: kmymoney/kmymoney.cpp:2785
 #, kde-format
@@ -5285,8 +5442,6 @@ msgid ""
 "KMyMoney has detected some overdue scheduled transactions for the account <b>"
 "%1</b>. Do you want to enter those scheduled transactions now?"
 msgstr ""
-"KMyMoney 检测到账户 <b>%1</b> 有几笔逾期计划交易。您要立即输入这些计划交易信"
-"息吗？"
 
 #: kmymoney/kmymoney.cpp:2828
 #, kde-format
@@ -5294,13 +5449,22 @@ msgid "Scheduled transactions found"
 msgstr "发现计划交易"
 
 #: kmymoney/kmymoney.cpp:2903
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "<qt>You have closed this account. It remains in the system because you "
+#| "have transactions which still refer to it, but it is not shown in the "
+#| "views. You can make it visible again by going to the View menu and "
+#| "selecting <b>Show all accounts</b> or by deselecting the <b>Do not show "
+#| "closed accounts</b> setting.</qt>"
 msgid ""
 "<qt>You have closed this account. It remains in the system because you have "
 "transactions which still refer to it, but it is not shown in the views. You "
 "can make it visible again by going to the View menu and selecting <b>Show "
 "all accounts</b>.</qt>"
 msgstr ""
+"<qt>您已关闭此账户，但视图外仍有该账户相关的交易，故此账户仍留存在系统中。您"
+"可以在视图菜单中选择<b>显示所有账户</b>或取消选择<b>不显示已关闭账户</b>来查"
+"看相关交易。</qt>"
 
 #: kmymoney/kmymoney.cpp:2905
 #, kde-format
@@ -5363,10 +5527,11 @@ msgstr ""
 "*.*|所有文件"
 
 #: kmymoney/kmymoney.cpp:3199
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Template Error"
 msgctxt "@title:window Error display"
 msgid "Template export"
-msgstr "模板导出"
+msgstr "模板出错"
 
 #: kmymoney/kmymoney.cpp:3217
 #, kde-format
@@ -5400,7 +5565,7 @@ msgstr "此文件在备份前必须先进行保存。您要继续吗？"
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
-msgstr "备份确认"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:3379
 #, kde-format
@@ -5464,7 +5629,7 @@ msgstr "文件已经被成功备份"
 #: kmymoney/kmymoney.cpp:3547
 #, kde-format
 msgid "Error copying file to device"
-msgstr "复制文件到设备时出错"
+msgstr "拷贝文件到设备时出错"
 
 #: kmymoney/kmymoney.cpp:3563
 #, kde-format
@@ -5489,10 +5654,11 @@ msgstr ""
 "如果想终止创建当前账户，请按“取消”键"
 
 #: kmymoney/kmymoney.cpp:3620
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Opening balance"
 msgctxt "@title:window"
 msgid "Opening balance for liability"
-msgstr "负债期初余额"
+msgstr "开户余额"
 
 #: kmymoney/kmymoney.cpp:3631
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
@@ -5547,12 +5713,15 @@ msgid "Importing a statement via Web Connect"
 msgstr "通过互联网导入对账单"
 
 #: kmymoney/kmymoney.cpp:3969
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Unable to import %1 using %2 plugin.  The plugin returned the following "
+#| "error: %3"
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
 "Unable to import %1 using %2 plugin. The plugin returned the following "
 "error: %3"
-msgstr "无法使用插件 %2 将其导入至 %1。插件返回了如下错误：%3"
+msgstr "使用%2插件导入%1出错：%3。导入失败。"
 
 #: kmymoney/kmymoney.cpp:3969 kmymoney/plugins/ofx/import/ofximporter.cpp:1051
 #, kde-format
@@ -5644,12 +5813,12 @@ msgstr "保存文件..."
 #: kmymoney/kmymoney.cpp:4333
 #, kde-format
 msgid "Failed to save your data."
-msgstr "您的数据保存失败。"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:4339
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
-msgstr "找不到合适的插件保存您的数据。"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:4345
 #, kde-format
@@ -5767,9 +5936,10 @@ msgstr "投资选项"
 
 #. i18n: ectx: Menu (security_context_menu)
 #: kmymoney/kmymoneyui.rc:193
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Sort options"
 msgid "Security options"
-msgstr "证券选项"
+msgstr "排序选项"
 
 #. i18n: ectx: Menu (schedule_context_menu)
 #: kmymoney/kmymoneyui.rc:202
@@ -5832,8 +6002,10 @@ msgid "Use this to filter out accounts"
 msgstr "用它来滤出账户"
 
 #: kmymoney/kmymoneyutils.cpp:118
+#, fuzzy
+#| msgid "Scheduled Expenses"
 msgid "Scheduled payments"
-msgstr "定期交易"
+msgstr "计划支出"
 
 #: kmymoney/kmymoneyutils.cpp:119
 msgid "Preferred accounts"
@@ -5952,9 +6124,10 @@ msgid "New Payee"
 msgstr "新建收款人"
 
 #: kmymoney/kmymoneyutils.cpp:576
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "<qt>Do you want to add <b>%1</b> as payer/receiver?</qt>"
 msgid "<qt>Do you want to add <b>%1</b> as payee/receiver?</qt>"
-msgstr ""
+msgstr "<qt>您确定要将 <b>%1</b> 添加为付款人或收款人吗？</qt>"
 
 #: kmymoney/kmymoneyutils.cpp:615
 #, kde-format
@@ -6059,31 +6232,38 @@ msgid "Online quote source with name '%1' unknown."
 msgstr ""
 
 #: kmymoney/misc/kmmyesno.cpp:21
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Is this a tax account?"
+#| msgid "Yes"
 msgctxt "@action:button"
 msgid "Yes"
 msgstr "是"
 
 #: kmymoney/misc/kmmyesno.cpp:26
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "No"
 msgctxt "@action:button"
 msgid "No"
 msgstr "否"
 
 #: kmymoney/models/accountsproxymodel.cpp:618
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Any status"
 msgctxt "Account filter"
 msgid "Any status"
 msgstr "任意状态"
 
 #: kmymoney/models/accountsproxymodel.cpp:619
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Unused column"
+#| msgid "Unused"
 msgctxt "Account filter"
 msgid "Unused"
-msgstr ""
+msgstr "未使用的"
 
 #: kmymoney/models/accountsproxymodel.cpp:620
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Closed"
 msgctxt "Account filter"
 msgid "Closed"
 msgstr "已关闭"
@@ -6117,9 +6297,10 @@ msgid "Value"
 msgstr "价值"
 
 #: kmymoney/models/equitiesmodel.cpp:197 kmymoney/models/equitiesmodel.cpp:434
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&Last Update"
 msgid "Last Price Update"
-msgstr ""
+msgstr "&上次更新"
 
 #: kmymoney/models/equitiesmodel.cpp:540
 #: kmymoney/widgets/columnselector.cpp:219
@@ -6199,56 +6380,67 @@ msgstr "找不到用于显示此信息的插件。"
 
 #: kmymoney/models/statementmodel.cpp:93
 #: kmymoney/mymoney/storage/accountsmodel.cpp:467
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Name"
 msgctxt "@title:column Shows the Name of account"
 msgid "Name"
 msgstr "名称"
 
 #: kmymoney/models/statementmodel.cpp:95
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Date"
 msgctxt "@title:column Shows the date of statement"
 msgid "Date"
-msgstr ""
+msgstr "日期"
 
 #: kmymoney/models/statementmodel.cpp:97
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Balance"
 msgctxt "@title:column Shows statement balance"
 msgid "Balance"
-msgstr ""
+msgstr "余额"
 
 #: kmymoney/models/statementmodel.cpp:99
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "    %1 processed"
+#| msgid_plural "    %1 processed"
 msgctxt "@title:column Shows number of transactions read"
 msgid "Processed"
-msgstr ""
+msgstr "    处理了 %1"
 
 #: kmymoney/models/statementmodel.cpp:101
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Imported"
 msgctxt "@title:column Shows number of imported transactions"
 msgid "Imported"
-msgstr ""
+msgstr "导入"
 
 #: kmymoney/models/statementmodel.cpp:103
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Matched"
 msgctxt "@title:column Shows number of matched transactions"
 msgid "Matched"
-msgstr ""
+msgstr "匹配"
 
 #: kmymoney/models/statementmodel.cpp:105
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "To duplicate a split"
+#| msgid "Duplicate"
 msgctxt "@title:column Shows number of duplicate transactions"
 msgid "Duplicates"
-msgstr ""
+msgstr "复制"
 
 #: kmymoney/models/statementmodel.cpp:107
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Payee creation"
 msgctxt "@title:column Shows number of create payees"
 msgid "Payees created"
-msgstr ""
+msgstr "创建收款人"
 
 #: kmymoney/models/statementmodel.cpp:117
 #: kmymoney/mymoney/storage/accountsmodel.cpp:503
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Full name"
 msgctxt ""
 "@info:tooltip for 'Name' column. Used in Account, Category and Institution "
 "context, so avoid being too specific"
@@ -6257,7 +6449,8 @@ msgstr "全称"
 
 #: kmymoney/models/statementmodel.cpp:119
 #: kmymoney/mymoney/storage/accountsmodel.cpp:505
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Type"
 msgctxt ""
 "@info:tooltip for 'Type' column, used in both Account and Category context, "
 "so avoid being too specific"
@@ -6269,21 +6462,21 @@ msgstr "类型"
 #, kde-format
 msgctxt "@info:tooltip for 'Online' column (YES/NO value)"
 msgid "Whether account has online mapping set up"
-msgstr "账户在线映射的设定情况"
+msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:123
 #: kmymoney/mymoney/storage/accountsmodel.cpp:509
 #, kde-format
 msgctxt "@info:tooltip for 'Tax' column (YES/NO value)"
 msgid "Whether account is included in tax reports"
-msgstr "账户税务报告的存在与否"
+msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:125
 #: kmymoney/mymoney/storage/accountsmodel.cpp:511
 #, kde-format
 msgctxt "@info:tooltip for 'VAT' column (% rate)"
 msgid "VAT percentage rate, if configured."
-msgstr "VAT 百分比率。"
+msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:127
 #: kmymoney/mymoney/storage/accountsmodel.cpp:513
@@ -6298,7 +6491,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip for 'Balance' column"
 msgid "Account balance (in account's currency)"
-msgstr "账户余额 (以账户货币表示)"
+msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:131
 #: kmymoney/mymoney/storage/accountsmodel.cpp:481
@@ -6309,24 +6502,26 @@ msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:133
 #: kmymoney/mymoney/storage/accountsmodel.cpp:519
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Include subaccounts"
 msgctxt "@info:tooltip for 'Total Value' column"
 msgid "Total Value (including subaccounts)"
-msgstr "总额 (包括子账户)"
+msgstr "包括子账户"
 
 #: kmymoney/models/statementmodel.cpp:135
 #: kmymoney/mymoney/storage/accountsmodel.cpp:521
 #, kde-format
 msgctxt "@info:tooltip for 'Account Number' column"
 msgid "Account or credit card number, as assigned by the institution."
-msgstr "由金融机构分配的账户号码或信用卡号。"
+msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:137
 #: kmymoney/mymoney/storage/accountsmodel.cpp:523
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Enter the International Bank Account Number into this field"
 msgctxt "@info:tooltip for 'IBAN' column"
 msgid "Account number in IBAN (International Bank Account Number) format"
-msgstr "IBAN (国际银行账户号码) 格式的账户号码"
+msgstr "在本项填入国际银行账号 (IBAN)"
 
 #: kmymoney/models/statementmodel.cpp:142
 #: kmymoney/mymoney/storage/accountsmodel.cpp:528
@@ -6340,15 +6535,13 @@ msgid ""
 "body or a Bankers Association. Known as 'Routing Number' (US accounts) or a "
 "'Sort Code' (UK accounts)."
 msgstr ""
-"由中央银行、银行监督机构或银行协会分配给金融机构的银行代码。即“路由号码”(美国"
-"账户) 或“清算号”(英国账户)。"
 
 #: kmymoney/models/statementmodel.cpp:145
 #: kmymoney/mymoney/storage/accountsmodel.cpp:531
 #, kde-format
 msgctxt "@info:tooltip for 'SWIFT/BIC' column"
 msgid "A Business Identifier Code, also known as SWIFT."
-msgstr "银行识别代码，也称 SWIFT。"
+msgstr ""
 
 #: kmymoney/mymoney/mymoneyaccount.cpp:443
 #, kde-format
@@ -6531,14 +6724,14 @@ msgstr "    将删除该收款人。"
 msgid ""
 "  * Older versions of KMyMoney stored an OFX password for this account in "
 "cleartext."
-msgstr "  * 旧版 KMyMoney 明文存储了此账户的 OFX 密码。"
+msgstr "  * 旧版 KMyMoney 明文存储了此账号的 OFX 密码。"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3138
 #, kde-format
 msgid ""
 "    Please open it in the account editor (Account/Edit account) once and "
 "press OK."
-msgstr "    请在账户编辑器 (账户/编辑账户) 中打开一次，然后点击确定。"
+msgstr "    请在账号编辑器 (账号、编辑账号) 中打开一次，然后点击确定。"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3139
 #, kde-format
@@ -6575,24 +6768,30 @@ msgid "  * Payee %1 recreated with fixed id"
 msgstr "  * 用固定id重新创建了收/付款人“%1”"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3252
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "* Problem with account '%1'"
 msgid "* Problems with transactions"
-msgstr ""
+msgstr "* 账户“%1”有问题"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3263
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "  * Removed bankid from split in scheduled transaction '%1'."
 msgid "  * Removed unused match information from transaction '%1'."
-msgstr "  * 从交易“%1”中删除没有使用的匹配信息。"
+msgstr "  * 从计划交易“%1”的划分里删除了银行id。"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3270
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "  * Split in scheduled transaction '%1' contained value != 0 and shares "
+#| "== 0."
 msgid "  * Sum of splits in transaction '%1' posted on %2 is not zero."
-msgstr ""
+msgstr "  * 交易计划“%1”的划分中包含不等于0的值和等于0的股份。"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3276
-#, kde-format
+#, fuzzy, kde-format
+#| msgid " - Account Name: %1"
 msgid "    Account: %1, Amount: %2"
-msgstr ""
+msgstr " - 账户名称：%1"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3287
 #, kde-format
@@ -6629,11 +6828,15 @@ msgid "  * value set to shares in split of transaction '%1'."
 msgstr "  * 在交易“%1”的划分里用股份设定了数额。"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3349
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "  * Split %2 in transaction '%1' contains a reference to invalid account "
+#| "%3. Please fix manually."
 msgid ""
 "  * Split %2 in transaction '%1' contains different signs for shares and "
 "value. Please fix manually."
 msgstr ""
+"  * 交易“%1”的划分%2里包含一个指向非法账户“%3”的引用。请手工修正此问题。"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3361
 #, kde-format
@@ -6718,7 +6921,7 @@ msgstr ""
 #: kmymoney/mymoney/mymoneyfile.cpp:3495
 #, kde-format
 msgid "  * Imported flag removed from schedule '%1'"
-msgstr "  * 已删除计划交易“%1”内的导入标记"
+msgstr ""
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3515
 #, kde-format
@@ -7882,34 +8085,44 @@ msgid "%1 times"
 msgstr ""
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:932
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Frequency of schedule"
+#| msgid "Every thirty days"
 msgctxt "Frequency of schedule"
 msgid "Every %1 days"
-msgstr "每 %1 天"
+msgstr "每30天"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:950
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Frequency of schedule"
+#| msgid "Every four weeks"
 msgctxt "Frequency of schedule"
 msgid "Every %1 weeks"
-msgstr "每 %1 周"
+msgstr "每四周"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:954
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Frequency of schedule"
+#| msgid "Every half month"
 msgctxt "Frequency of schedule"
 msgid "Every %1 half months"
-msgstr "每 %1 个半月"
+msgstr "每半个月"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:971
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Frequency of schedule"
+#| msgid "Every two months"
 msgctxt "Frequency of schedule"
 msgid "Every %1 months"
-msgstr "每 %1 个月"
+msgstr "每两个月"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:980
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Frequency of schedule"
+#| msgid "Every other year"
 msgctxt "Frequency of schedule"
 msgid "Every %1 years"
-msgstr "每 %1 年"
+msgstr "每隔一年"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:990
 msgctxt "Schedule occurrence period"
@@ -8088,50 +8301,59 @@ msgstr "<p>模板文件<b>%2</b>中包含错误的标签<b>%1</b></p>"
 #: kmymoney/mymoney/mymoneytemplate.cpp:108
 #: kmymoney/mymoney/mymoneytemplate.cpp:110
 #: kmymoney/mymoney/mymoneytemplate.cpp:112
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>"
 msgid "<p>Missing tag <b>%1</b> in template file <b>%2</b></p>"
-msgstr "<p>模板文件 <b>%2</b> 中缺少标签 <b>%1</b></p>"
+msgstr "<p>模板文件<b>%2</b>中包含错误的标签<b>%1</b></p>"
 
 #: kmymoney/mymoney/mymoneytemplate.cpp:116
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>"
 msgid "<p>Invalid root element in template file <b>%1</b></p>"
-msgstr "<p>模板文件 <b>%1</b> 中包含错误的根元素</p>"
+msgstr "<p>模板文件<b>%2</b>中包含错误的标签<b>%1</b></p>"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:99
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "ID"
 msgctxt "@title:column External identifier (symbol)"
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:100
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Name"
 msgctxt "@title:column Name of security"
 msgid "Name"
-msgstr ""
+msgstr "名称"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:101
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Price"
 msgctxt "@title:column Price"
 msgid "Price"
-msgstr ""
+msgstr "价格"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:102
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Date"
 msgctxt "@title:column Date for price"
 msgid "Date"
 msgstr "日期"
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:103
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Interval:"
 msgctxt "@title:column KMyMoney internal identifier"
 msgid "Internal ID"
-msgstr ""
+msgstr "间隔："
 
 #: kmymoney/mymoney/onlinepricemodel.cpp:104
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Online quote source"
+#| msgid "Source"
 msgctxt "@title:column Online quote source"
 msgid "Source"
-msgstr ""
+msgstr "来源"
 
 #: kmymoney/mymoney/onlinetasks/unavailabletask/tasks/unavailabletask.cpp:22
 #, kde-format
@@ -8151,7 +8373,8 @@ msgid "Memo"
 msgstr "备忘"
 
 #: kmymoney/mymoney/splitmodel.cpp:40
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tags"
 msgctxt "Split header"
 msgid "Tags"
 msgstr "标签"
@@ -8186,10 +8409,11 @@ msgstr "*** 未指派 ***"
 #: kmymoney/widgets/creditdebitedit.cpp:127
 #: kmymoney/widgets/creditdebitedit.cpp:156
 #: kmymoney/widgets/creditdebitedit.cpp:157
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "calculate"
 msgctxt "@info:placeholder amount widget"
 msgid "calculated"
-msgstr ""
+msgstr "计算"
 
 #: kmymoney/mymoney/statusmodel.cpp:32
 #, kde-format
@@ -8237,6 +8461,8 @@ msgid "Status"
 msgstr "状态"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:398
+#, fuzzy
+#| msgid "Favorites"
 msgid "Favorite"
 msgstr "收藏"
 
@@ -8273,47 +8499,55 @@ msgid "Equity accounts"
 msgstr "产权账户"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:469
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Type"
 msgctxt ""
 "@title:column Shows the Type of account (e.g. Asset, Checking, Credit Card)"
 msgid "Type"
 msgstr "类型"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:471
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "End line"
 msgctxt ""
 "@title:column Indicates whether account has an online mapping configured"
 msgid "Online"
-msgstr "在线"
+msgstr "末行"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:473
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tax"
 msgctxt "@title:column Indicates whether account is included in tax reports"
 msgid "Tax"
-msgstr "税费"
+msgstr "税"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:475
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Column heading for VAT category"
+#| msgid "VAT"
 msgctxt "@title:column Shows VAT percentage rate, if configured"
 msgid "VAT"
 msgstr "增值税"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:477
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "CC"
 msgctxt ""
 "@title:column Indicates whether a Cost Center assignment is necessary when "
 "entering a transaction"
 msgid "CC"
-msgstr "开销中心"
+msgstr "抄送"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:479
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Balance"
 msgctxt "@title:column Shows account's balance (in account's currency)"
 msgid "Balance"
 msgstr "余额"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:483
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Total Value"
 msgctxt ""
 "@title:column Shows Total Value, which includes a sum of all subaccounts (in "
 "base currency)"
@@ -8321,19 +8555,22 @@ msgid "Total Value"
 msgstr "总值"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:485
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Number"
 msgctxt "@title:column Shows Account Number"
 msgid "Number"
-msgstr "号码"
+msgstr "编号"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:487
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "IBAN"
 msgctxt "@title:column Shows IBAN"
 msgid "IBAN"
 msgstr "IBAN"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:492
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Bank Code"
 msgctxt ""
 "@title:column Shows Bank Code. Use a generic form, do not translate using a "
 "culture-specific term, such as 'Routing Number' (en_US) or 'Sort "
@@ -8345,7 +8582,7 @@ msgstr "银行代码"
 #, kde-format
 msgctxt "@title:column Shows SWIFT/BIC"
 msgid "SWIFT/BIC"
-msgstr "SWIFT/BIC"
+msgstr ""
 
 #: kmymoney/mymoney/storage/budgetsmodel.cpp:71
 #, kde-format
@@ -8364,132 +8601,154 @@ msgid "Accounts with no institution assigned"
 msgstr "未指定金融机构的账户："
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:57
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Cheque Number"
+#| msgid "No."
 msgctxt "@title:column Cheque Number"
 msgid "No."
 msgstr "编号"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:58
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Date"
 msgctxt "@title:column Valuta date"
 msgid "Date"
 msgstr "日期"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:59
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:47
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Account"
 msgctxt "@title:column"
 msgid "Account"
-msgstr ""
+msgstr "账户"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:60
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Payee"
 msgctxt "@title:column"
 msgid "Payee"
-msgstr ""
+msgstr "收款人"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:61
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Security"
 msgctxt "@title:column"
 msgid "Security"
-msgstr ""
+msgstr "证券"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:62
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "CC"
 msgctxt "@title:column Costcenter"
 msgid "CC"
 msgstr "抄送"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:63
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Detail"
 msgctxt "@title:column"
 msgid "Detail"
-msgstr ""
+msgstr "详细信息"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:64
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "C"
 msgctxt "@title:column Reconciliation state"
 msgid "C"
-msgstr ""
+msgstr "C"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:65
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Payment"
 msgctxt "@title:column Payment made from account"
 msgid "Payment"
-msgstr ""
+msgstr "支付"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:66
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Deposit"
 msgctxt "@title:column Deposit into account"
 msgid "Deposit"
-msgstr ""
+msgstr "存款"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:67
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Quantity"
 msgctxt "@title:column"
 msgid "Quantity"
-msgstr ""
+msgstr "数量"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:68
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Price"
 msgctxt "@title:column"
 msgid "Price"
-msgstr ""
+msgstr "价格"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:69
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Amount"
 msgctxt "@title:column"
 msgid "Amount"
-msgstr ""
+msgstr "金额"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:70
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:50
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Value"
 msgctxt "@title:column"
 msgid "Value"
-msgstr ""
+msgstr "价值"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:71
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Balance"
 msgctxt "@title:column"
 msgid "Balance"
-msgstr ""
+msgstr "余额"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:72
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Entry order"
 msgctxt "@title:column Entry date"
 msgid "Entry"
-msgstr ""
+msgstr "条目顺序"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:75
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Number"
 msgctxt "@title:column Cheque Number (ext)"
 msgid "Number"
-msgstr ""
+msgstr "编号"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:76
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Reconciliation view"
 msgctxt "@title:column Reconciliation state (ext)"
 msgid "Reconciliation"
-msgstr ""
+msgstr "对账视图"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:77
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Cost center"
 msgctxt "@title:column CostCenter (ext)"
 msgid "Cost center"
-msgstr ""
+msgstr "开销中心"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:78
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Entry order"
 msgctxt "@title:column Entry date (ext)"
 msgid "Entry date"
-msgstr ""
+msgstr "条目顺序"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:81
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Account Balances by Institution"
 msgctxt "@info:toolbox Balance)"
 msgid "Account balance or security units"
-msgstr ""
+msgstr "账户余额（按金融机构分类）"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:107
 #, kde-format
@@ -8615,19 +8874,22 @@ msgid "unknown"
 msgstr "未知"
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:46
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Date"
 msgctxt "@title:column"
 msgid "Date"
 msgstr "日期"
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:48
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Action"
 msgctxt "@title:column"
 msgid "Action"
-msgstr ""
+msgstr "操作"
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:49
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Destination"
 msgctxt "@title:column"
 msgid "Destination"
 msgstr "目标"
@@ -8639,24 +8901,27 @@ msgid "Purpose"
 msgstr ""
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:52
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Application Account"
 msgctxt "@title:column"
 msgid "Destination Account"
-msgstr ""
+msgstr "应用程序账户"
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:53
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Destination"
 msgctxt "@title:column"
 msgid "Destination BIC"
-msgstr ""
+msgstr "目标"
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:155
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:176
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:188
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unknown"
 msgctxt "Unknown payee in online task"
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:230
 #, kde-format
@@ -8701,22 +8966,24 @@ msgid "This job needs further editing and cannot be sent therefore."
 msgstr ""
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:255
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "The tag is already present."
 msgctxt "@info:tooltip online job list status"
 msgid "This job is ready for sending."
-msgstr ""
+msgstr "此标签已存在。"
 
 #: kmymoney/mymoney/storage/parametersmodel.cpp:62
 #, kde-format
 msgctxt "ParameterModel key"
 msgid "Key"
-msgstr "键"
+msgstr ""
 
 #: kmymoney/mymoney/storage/parametersmodel.cpp:64
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Value"
 msgctxt "ParameterModel value"
 msgid "Value"
-msgstr "值"
+msgstr "价值"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
@@ -8745,17 +9012,21 @@ msgid "Commodity"
 msgstr "商品"
 
 #: kmymoney/mymoney/storage/pricemodel.cpp:39
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Stock Name"
 msgid "Stock name"
 msgstr "股票名称"
 
 #: kmymoney/mymoney/storage/pricemodel.cpp:43
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Online quote source"
+#| msgid "Source"
 msgid "Source"
-msgstr "数据源"
+msgstr "来源"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:50
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Name"
 msgctxt "Reportname"
 msgid "Name"
 msgstr "名称"
@@ -8906,19 +9177,22 @@ msgid "Next fiscal year"
 msgstr "下一财年"
 
 #: kmymoney/mymoney/storage/tagsmodel.cpp:51
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Name"
 msgctxt "Tagname"
 msgid "Name"
 msgstr "名称"
 
 #: kmymoney/mymoney/storage/templatesmodel.cpp:76
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Type"
 msgctxt "@title:column Country/Hierarchy type"
 msgid "Type"
 msgstr "类型"
 
 #: kmymoney/mymoney/storage/templatesmodel.cpp:78
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Description"
 msgctxt "@title:column Column heading for description"
 msgid "Description"
 msgstr "描述"
@@ -8944,9 +9218,10 @@ msgstr "打印支票"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_useCustomCheckTemplate)
 #: kmymoney/plugins/checkprinting/checkprintingsettings.kcfg:10
 #: kmymoney/plugins/checkprinting/checkprintingsettingsdecl.ui:36
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Use custom colors"
 msgid "Use custom check template"
-msgstr "使用自定义支票模板"
+msgstr "使用自定义颜色"
 
 #. i18n: ectx: label, entry (checkTemplateFile), group (General)
 #: kmymoney/plugins/checkprinting/checkprintingsettings.kcfg:14
@@ -8963,9 +9238,11 @@ msgstr "含有已打印支票 ID 的列表"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, CheckPrintingSettingsDecl)
 #: kmymoney/plugins/checkprinting/checkprintingsettingsdecl.ui:20
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "It's about printing bank checks"
+#| msgid "Check printing"
 msgid "Checking settings"
-msgstr "支票设置"
+msgstr "打印本票"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
@@ -9154,22 +9431,28 @@ msgid "Billion"
 msgstr "拾亿"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:37
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item This comes after the hundred value digit"
+#| msgid " Hundred"
 msgctxt "@item %1 = hundred value digit"
 msgid "%1 Hundred"
-msgstr "%1仟"
+msgstr " 百"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:47
 #, kde-format
 msgctxt "@item %1 = tens text, %2 = ones text"
 msgid "%1 %2"
-msgstr "%1%2"
+msgstr ""
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:56
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "@label The first argument is the amount in words, the second is the "
+#| "fractional part and the third is the denominator of the fractional part"
+#| msgid "%1 and %2/%3"
 msgctxt "@item %1 = hundreds text, %2 = tens and ones text"
 msgid "%1 and %2"
-msgstr "%1零%2"
+msgstr "%1又%3分之%2"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:79
 #, kde-format
@@ -9177,7 +9460,7 @@ msgctxt ""
 "Translate this string into \"custom\" if the construction of numerals are "
 "different from English."
 msgid "english"
-msgstr "custom"
+msgstr ""
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:81
 #, kde-format
@@ -9185,7 +9468,7 @@ msgctxt ""
 "@item Can be used to script translation of numerals. Leave untranslated when "
 "not needed. %1 = integer, %2 = fraction, %3 = denominator"
 msgid "%1 %2 %3"
-msgstr "%1又%3分之%2"
+msgstr ""
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:108
 #, kde-format
@@ -9214,30 +9497,37 @@ msgid "%1 and %2/%3"
 msgstr "%1又%3分之%2"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:125
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "@label The first argument is the amount in words, the second is the "
+#| "fractional part and the third is the denominator of the fractional part"
+#| msgid "%1 and %2/%3"
 msgctxt ""
 "@label The first argument is the amount in words, the second is the "
 "denominator of the fractional part"
 msgid "%1 and No/%2"
-msgstr "%1又%2分之没有"
+msgstr "%1又%3分之%2"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:66
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "comma (,)"
 msgctxt "@item:inlistbox CSV separator"
 msgid "Comma (,)"
-msgstr ""
+msgstr "逗号 (,)"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:67
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "semiColon (;)"
 msgctxt "@item:inlistbox CSV separator"
 msgid "Semicolon (;)"
-msgstr ""
+msgstr "分号 (;)"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:68
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "tab (\\t)"
 msgctxt "@item:inlistbox CSV separator"
 msgid "Tab (\\t)"
-msgstr ""
+msgstr "制表符 (Tab, \\t)"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:94
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:62
@@ -9278,10 +9568,11 @@ msgid "Use this to select a filename to export to"
 msgstr "选择要导出的文件"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:201
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "  * Parent account '%1' does not contain '%2' as sub-account."
 msgctxt "@info Hint in CSV export dialog"
 msgid "Current selected account does not contain any transactions."
-msgstr ""
+msgstr "  * 父账户“%1”里并未包含子账户“%2”。"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, CsvExportDlg)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:14
@@ -9418,97 +9709,113 @@ msgstr ""
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:107
 #: kmymoney/plugins/csv/export/csvwriter.cpp:116
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Date"
 msgctxt "@title:column header in CSV export"
 msgid "Date"
-msgstr ""
+msgstr "日期"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:107
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Security"
 msgctxt "@title:column header in CSV export"
 msgid "Security"
-msgstr ""
+msgstr "证券"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:108
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@title currency symbol column"
+#| msgid "Symbol"
 msgctxt "@title:column header in CSV export"
 msgid "Symbol"
-msgstr ""
+msgstr "符号"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:108
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Action"
 msgctxt "@title:column header in CSV export"
 msgid "Action/Type"
-msgstr ""
+msgstr "操作"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:109
 #: kmymoney/plugins/csv/export/csvwriter.cpp:117
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Amount"
 msgctxt "@title:column header in CSV export"
 msgid "Amount"
-msgstr ""
+msgstr "金额"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:109
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Quantity"
 msgctxt "@title:column header in CSV export"
 msgid "Quantity"
-msgstr ""
+msgstr "数量"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:110
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Price"
 msgctxt "@title:column header in CSV export"
 msgid "Price"
-msgstr ""
+msgstr "价格"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:110
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Interest"
 msgctxt "@title:column header in CSV export"
 msgid "Interest"
-msgstr ""
+msgstr "利息"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:111
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Fees"
 msgctxt "@title:column header in CSV export"
 msgid "Fees"
-msgstr ""
+msgstr "费用"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:111
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Account"
 msgctxt "@title:column header in CSV export"
 msgid "Account"
-msgstr ""
+msgstr "账户"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:112
 #: kmymoney/plugins/csv/export/csvwriter.cpp:118
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Memo"
 msgctxt "@title:column header in CSV export"
 msgid "Memo"
-msgstr ""
+msgstr "备忘"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:112
 #: kmymoney/plugins/csv/export/csvwriter.cpp:118
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Status"
 msgctxt "@title:column header in CSV export"
 msgid "Status"
-msgstr ""
+msgstr "状态"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:116
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Payee"
 msgctxt "@title:column header in CSV export"
 msgid "Payee"
-msgstr ""
+msgstr "收款人"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:117
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Account"
 msgctxt "@title:column header in CSV export"
 msgid "Account/Cat"
-msgstr ""
+msgstr "账户"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:119
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Number"
 msgctxt "@title:column header in CSV export"
 msgid "Number"
-msgstr ""
+msgstr "编号"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:189
 #, kde-format
@@ -9531,22 +9838,25 @@ msgid "Invalid transaction"
 msgstr "无效交易"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:255
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Category"
 msgctxt "@title:column header in CSV export"
 msgid "splitCategory"
-msgstr ""
+msgstr "交易类别"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:255
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Memo"
 msgctxt "@title:column header in CSV export"
 msgid "splitMemo"
-msgstr ""
+msgstr "备忘"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:256
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Amount"
 msgctxt "@title:column header in CSV export"
 msgid "splitAmount"
-msgstr ""
+msgstr "金额"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:374
 #, kde-format
@@ -10651,9 +10961,10 @@ msgstr "银行对账单内的账户"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/plugins/csv/import/pluginsettingsdecl.ui:100
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "QIF exporter"
 msgid "QIF export profile"
-msgstr ""
+msgstr "QIF 导出工具"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, PricesPage)
 #: kmymoney/plugins/csv/import/priceswizardpage.ui:20
@@ -10987,9 +11298,10 @@ msgstr ""
 
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:64
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:75
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Cannot add institution: %1"
 msgid "Cannot read the file: %1"
-msgstr ""
+msgstr "无法添加金融机构：%1"
 
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:80
 #, kde-format
@@ -12068,13 +12380,13 @@ msgstr "ID"
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Institution Code"
-msgstr "机构代码"
+msgstr ""
 
 #: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:116
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Institution Name"
-msgstr "机构名称"
+msgstr ""
 
 #: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:117
 #, kde-format
@@ -12168,7 +12480,7 @@ msgstr "推迟"
 #, kde-format
 msgctxt "Status of the job"
 msgid "sending"
-msgstr "发送中"
+msgstr ""
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:116
 #, kde-format
@@ -12668,9 +12980,10 @@ msgstr ""
 #. i18n: ectx: property (text), item, widget (QComboBox, m_preferredPrice)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:398
 #: kmymoney/plugins/ofx/import/importoption.ui:174
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "File Information"
 msgid "Price information"
-msgstr ""
+msgstr "文件信息"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_preferredPrice)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:403
@@ -12713,10 +13026,11 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:467
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "KMyMoney"
 msgctxt "@item:inlistbox Method to identify duplicate transactions"
 msgid "KMyMoney ID"
-msgstr ""
+msgstr "KMyMoney"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:475
@@ -13125,10 +13439,11 @@ msgid "Do you really want to delete profile '%1'?"
 msgstr "您真的想删除配置“%1”吗？"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:416
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "The default QIF profile"
 msgctxt "@title:window"
 msgid "Delete QIF profile"
-msgstr ""
+msgstr "默认 QIF 配置"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tabGeneral)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:53
@@ -14370,16 +14685,18 @@ msgid "Individual"
 msgstr "个人"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:89
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Budget %1"
 msgctxt "@item:intable Your budgets, %1 budget year"
 msgid "Budget %1"
 msgstr "预算%1"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:98
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Budget %1 %2"
 msgctxt "@item:intable Your bugets, %1 budget year, %2 unique index"
 msgid "Budget %1 (%2)"
-msgstr ""
+msgstr "预算 %1 %2"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:114
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:174
@@ -14398,7 +14715,8 @@ msgid "Do you really want to remove all selected budgets?"
 msgstr "您真的要删除所有选中的预算吗？"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:135
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Remove Budget"
 msgctxt "@title:window "
 msgid "Remove Budget"
 msgstr "删除预算"
@@ -14443,16 +14761,18 @@ msgid "Unable to modify budget"
 msgstr "无法修改预算"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:369
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Loss: "
 msgctxt "Profit/Loss"
 msgid "Loss: %1"
-msgstr ""
+msgstr "损失："
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:370
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Profit: "
 msgctxt "Profit/Loss"
 msgid "Profit: %1"
-msgstr ""
+msgstr "利润："
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:446
 #, kde-format
@@ -14472,7 +14792,7 @@ msgstr "删除预算"
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:449
 #, kde-format
 msgid "Copy budget"
-msgstr "复制预算"
+msgstr "拷贝预算"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:452
 #, kde-format
@@ -14486,28 +14806,33 @@ msgid "Change to income"
 msgstr ""
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:465
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "language to be used"
 msgctxt "@item:inmenu To make it expense"
 msgid "Change to expense"
-msgstr ""
+msgstr "要使用的语言"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:494
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Menu header"
+#| msgid "Budget options"
 msgctxt "@title:menu Budget context menu"
 msgid "Budget options"
 msgstr "预算选项"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:505
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Account options"
 msgctxt "@title:menu Budget account context menu"
 msgid "Account options"
-msgstr ""
+msgstr "账户选项"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:548
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Select the currency in which this account is denominated."
 msgctxt "@info:tooltip Budget assignment"
 msgid "Select how the budget of this account shall be treated."
-msgstr ""
+msgstr "选择此账户使用的货币类型"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:552
 #, kde-format
@@ -14523,24 +14848,27 @@ msgstr "您的预算"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_newButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:47
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "New"
 msgctxt "New budget button"
 msgid "New"
-msgstr ""
+msgstr "新建"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_renameButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:54
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Ren"
 msgctxt "Rename budget button"
 msgid "Ren"
-msgstr ""
+msgstr "重命名"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_deleteButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:61
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Del"
 msgctxt "Delete budget button"
 msgid "Del"
-msgstr ""
+msgstr "删除"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_updateButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:114
@@ -14576,15 +14904,17 @@ msgstr "用它来丢弃对数据的改动。"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_collapseButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:149
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Use this to open the new account editor"
 msgid "Collapse the items of the account tree"
-msgstr ""
+msgstr "打开新的账户编辑器"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_expandButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:156
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Enter the investment account name "
 msgid "Expand the items of the account tree"
-msgstr ""
+msgstr "输入投资账户名称"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_hideUnusedButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:163
@@ -15050,9 +15380,10 @@ msgstr "未知"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:200
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:288
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Bank transfer"
 msgid "Send transfer"
-msgstr ""
+msgstr "银行转账"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_buttonNewCreditTransfer)
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:201
@@ -15062,14 +15393,16 @@ msgid "New credit transfer"
 msgstr ""
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:202
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Remove credit transfer"
 msgid "Remove transfer"
-msgstr ""
+msgstr "删除信用转账"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:203
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Edit credit transfer"
 msgid "Edit transfer"
-msgstr ""
+msgstr "编辑信用转账"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:204
 #, kde-format
@@ -15077,10 +15410,11 @@ msgid "Show log"
 msgstr "显示日志"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:224
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Edit credit transfer"
 msgctxt "@title:menu Online job context menu"
 msgid "Credit transfer options"
-msgstr ""
+msgstr "编辑信用转账"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:278
 #, kde-format
@@ -15103,12 +15437,16 @@ msgid "You need to select a single job for editing."
 msgstr ""
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:292
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Bank transfer"
 msgid "Send transfers"
-msgstr ""
+msgstr "银行转账"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:392
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Not all selected credit transfers can be sent because some of them are "
+#| "invalid or were already sent."
 msgctxt "The user selected credit transfers to send. But they cannot be sent"
 msgid ""
 "Not all selected credit transfers can be sent because some of them are "
@@ -15116,10 +15454,13 @@ msgid ""
 msgstr "由于部分信用转账无效或已发出，故未发送全部所选记录"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:393
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "The user selected credit transfers to send. But they cannot be sent."
+#| msgid "Cannot send selection"
 msgctxt "@title:window Online transfers"
 msgid "Cannot send transfers"
-msgstr ""
+msgstr "无法发送所选内容"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_sendMail)
 #. i18n: ectx: property (text), widget (QPushButton, buttonSend)
@@ -15210,7 +15551,8 @@ msgid "Origin"
 msgstr "原始"
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejoboutboxview.cpp:51
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Outbox"
 msgctxt "@item name of view"
 msgid "Outbox"
 msgstr "发件箱"
@@ -15393,7 +15735,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/core/listtable.cpp:744
 #, kde-format
 msgid "Annualized Return"
-msgstr ""
+msgstr "年度分红"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:746
 #, kde-format
@@ -15544,9 +15886,10 @@ msgid "Long-term Gain"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:810
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Ending Market Value"
 msgid "Starting Market Value"
-msgstr ""
+msgstr "期末市值"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
 #: kmymoney/plugins/views/reports/core/querytable.cpp:974
@@ -15734,21 +16077,24 @@ msgstr ""
 "错误。"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:150
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1 Balance History"
 msgctxt "@title:window Value chart for investments"
 msgid "%1 Value History"
-msgstr ""
+msgstr "%1 余额历史"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:156
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Balance of %1"
 msgid "Value of %1"
-msgstr ""
+msgstr "%1的余额"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:159
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1 Balance History"
 msgctxt "@title:window Balance chart for account"
 msgid "%1 Balance History"
-msgstr ""
+msgstr "%1 余额历史"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:167
 #, kde-format
@@ -15783,15 +16129,19 @@ msgstr[0] ""
 
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "XML (Filefilter)"
+#| msgid "XML files"
 msgid "CSS files"
-msgstr ""
+msgstr "XML 文件"
 
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "All files (Filefilter)"
+#| msgid "All files"
 msgid "All files"
-msgstr ""
+msgstr "所有文件"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:103
 #, kde-format
@@ -16098,10 +16448,11 @@ msgid "Delete Report?"
 msgstr "删除报表？"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:735
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import options"
 msgctxt "@title:menu Report context menu"
 msgid "Report options"
-msgstr ""
+msgstr "导入选项"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:736
 #, kde-format
@@ -16150,16 +16501,18 @@ msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KReportsView)
 #: kmymoney/plugins/views/reports/kreportsview.ui:14
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Reports view"
 msgid "KReportsView"
-msgstr ""
+msgstr "报表视图"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_listTab)
 #: kmymoney/plugins/views/reports/kreportsview.ui:27
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Reports"
 msgctxt " "
 msgid "Reports"
-msgstr ""
+msgstr "报表"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
 #: kmymoney/plugins/views/reports/kreportsview.ui:49
@@ -16565,10 +16918,11 @@ msgstr ""
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/views/khomeview_p.h:1567
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Budget"
 msgctxt "@title Home page section"
 msgid "Budget"
-msgstr ""
+msgstr "预算"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:159
 #, kde-format
@@ -17289,9 +17643,10 @@ msgstr "仅包含贷款账户"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:353
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Include only Investment accounts"
 msgid "<p>Include only data from Investment accounts in this report</p>"
-msgstr ""
+msgstr "仅包含投资账户"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:356
@@ -17377,7 +17732,7 @@ msgid ""
 "No backends available.\n"
 "Add one using woob config-qt."
 msgstr ""
-"没有可用的后端。\n"
+"无可用后端。\n"
 "请使用 woob config-qt 添加一个。"
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:186
@@ -17386,7 +17741,7 @@ msgid ""
 "No accounts available.\n"
 "Check your backend configuration in woob config-qt."
 msgstr ""
-"没有可用的账户。\n"
+"无可用账户。\n"
 "请检查 woob config-qt 的后端配置。"
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:195
@@ -17540,10 +17895,11 @@ msgid "%1 (Brokerage)"
 msgstr "%1（托管）"
 
 #: kmymoney/plugins/xml/mymoneyxmlreader.cpp:445
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unknown QIF type %1"
 msgctxt "Error message when reading XML file"
 msgid "Unknown payee identifier type %1"
-msgstr ""
+msgstr "未知 QIF 类型 %1"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:113
 #, kde-format
@@ -17606,9 +17962,10 @@ msgid "Store GPG encrypted"
 msgstr "保存GPG加密数据"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:174
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to open file '%1' for writing"
 msgid "Unable to open file '%1' for writing."
-msgstr ""
+msgstr "无法打开文件“%1”进行写入。"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:275
 #, kde-format
@@ -17630,16 +17987,19 @@ msgid "Recover key expires soon"
 msgstr ""
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:355
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is already opened by another process."
-msgstr ""
+msgstr "<p>已有另一个 KMyMoney 进程打开了此文件 <b>%1</b></p>"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:466
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "<p><b>%1</b> is not a template file.</p>"
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is not a KMyMoney data file."
-msgstr ""
+msgstr "“<p><b>%1</b> 不是模板文件.</p>"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:624
 #, kde-format
@@ -18026,9 +18386,10 @@ msgstr "导入交易的背景色"
 
 #. i18n: ectx: label, entry (transactionImportedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:194
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Background color for imported transactions"
 msgid "Text color for imported transactions"
-msgstr ""
+msgstr "导入交易的背景色"
 
 #. i18n: ectx: label, entry (transactionMatchedColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:198
@@ -18038,9 +18399,10 @@ msgstr "匹配交易的背景色"
 
 #. i18n: ectx: label, entry (transactionMatchedText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:202
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Background color for matched transactions"
 msgid "Text color for matched transactions"
-msgstr ""
+msgstr "匹配交易的背景色"
 
 #. i18n: ectx: label, entry (transactionErroneousColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:206
@@ -18062,9 +18424,10 @@ msgstr "组标记的背景色"
 
 #. i18n: ectx: label, entry (groupMarkerText), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:218
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Background color for group marker"
 msgid "Text color for group marker"
-msgstr ""
+msgstr "组标记的背景色"
 
 #. i18n: ectx: label, entry (fieldRequiredColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:222
@@ -18092,9 +18455,10 @@ msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:248
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Hide zero balance liabilities on the Homepage"
 msgid "Hide zero balance accounts from Home"
-msgstr ""
+msgstr "隐藏首页上零余额负债的账户"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:252
@@ -18110,9 +18474,10 @@ msgstr "详细显示全部账簿条目"
 
 #. i18n: ectx: label, entry (ShowAllSplits), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:264
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Show a grid in the register"
 msgid "Show all split details in register"
-msgstr ""
+msgstr "在账簿中显示栅格"
 
 #. i18n: ectx: label, entry (ShowPlannedScheduleDates), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:268
@@ -18140,9 +18505,10 @@ msgstr "为上一财年和本财年显示精美标记"
 
 #. i18n: ectx: label, entry (ShowReconciliationMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:284
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Show reconciled balances"
 msgid "Show reconciliation entries with date and balance"
-msgstr ""
+msgstr "显示已核对的余额"
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:293
@@ -18274,9 +18640,10 @@ msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KLoadTemplateDlg)
 #: kmymoney/templates/kloadtemplatedlg.ui:14
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "New Loan Account Wizard"
 msgid "Load Account Hierarchy"
-msgstr ""
+msgstr "新建贷款账户向导 "
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTemplateExportDlg)
 #: kmymoney/templates/ktemplateexportdlg.ui:14
@@ -18319,10 +18686,11 @@ msgid ""
 msgstr ""
 
 #: kmymoney/templates/templateloader.cpp:105
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Template Error"
 msgctxt "@title:window"
 msgid "Template Loading Error"
-msgstr ""
+msgstr "模板出错"
 
 #: kmymoney/templates/templateloader.cpp:110
 #, kde-format
@@ -18343,53 +18711,62 @@ msgid ""
 msgstr ""
 
 #: kmymoney/templates/templatewriter.cpp:178
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Loading template %1"
 msgid "Invalid template URL '%1'"
-msgstr ""
+msgstr "正在加载模板 %1"
 
 #: kmymoney/templates/templatewriter.cpp:188
 #: kmymoney/templates/templatewriter.cpp:202
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to enter scheduled transaction '%1'"
 msgid "Unable to write changes to '%1'"
-msgstr ""
+msgstr "无法输入计划交易“%1”的信息"
 
 #: kmymoney/templates/templatewriter.cpp:192
 #: kmymoney/templates/templatewriter.cpp:206
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to open file '%1' for writing"
 msgid "Unable to open template file '%1'"
-msgstr ""
+msgstr "无法打开文件“%1”进行写入。"
 
 #: kmymoney/templates/templatewriter.cpp:215
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to modify account '%1'. Cause: %2"
 msgid "Unable to upload to '%1'.<br />%2"
-msgstr ""
+msgstr "无法修改账户“%1”。原因：%2"
 
 #: kmymoney/views/investactivities.cpp:279
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Shares"
 msgctxt "@label:textbox"
 msgid "Shares"
-msgstr ""
+msgstr "股"
 
 #: kmymoney/views/investactivities.cpp:290
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Price/share"
 msgctxt "@label:textbox"
 msgid "Price/share"
-msgstr ""
+msgstr "价格/每股"
 
 #: kmymoney/views/investactivities.cpp:292
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Transaction amount"
 msgctxt "@label:textbox"
 msgid "Transaction amount"
-msgstr ""
+msgstr "交易金额"
 
 #: kmymoney/views/investactivities.cpp:294
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Price"
 msgctxt "@label:textbox"
 msgid "Price"
-msgstr ""
+msgstr "价格"
 
 #: kmymoney/views/investactivities.cpp:651
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Ratio 1/"
 msgctxt "@label:textbox"
 msgid "Ratio 1/"
 msgstr "比率 1/"
@@ -18464,10 +18841,11 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:600
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Select autofill transaction"
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
-msgstr ""
+msgstr "选择自动填充交易"
 
 #: kmymoney/views/investtransactioneditor.cpp:603
 #, kde-format
@@ -18553,10 +18931,11 @@ msgid "Enter amount of interest"
 msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:686
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Select autofill transaction"
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
-msgstr ""
+msgstr "选择自动填充交易"
 
 #: kmymoney/views/investtransactioneditor.cpp:691
 #, kde-format
@@ -18581,10 +18960,11 @@ msgstr "价格/每股"
 #. i18n: ectx: property (toolTip), widget (KMyMoneyDateEdit, dateEdit)
 #: kmymoney/views/investtransactioneditor.ui:73
 #: kmymoney/views/newtransactioneditor.ui:256
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Importing statement without transactions"
 msgctxt "@info:tooltip"
 msgid "The posting date of the transaction."
-msgstr ""
+msgstr "导入无明细报表"
 
 #. i18n: ectx: property (toolTip), widget (KMyMoneyAccountCombo, feesCombo)
 #: kmymoney/views/investtransactioneditor.ui:126
@@ -18616,10 +18996,11 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, securityAccountCombo)
 #: kmymoney/views/investtransactioneditor.ui:267
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Skip this transaction"
 msgctxt "@info:tooltip"
 msgid "Security for this transaction"
-msgstr ""
+msgstr "跳过此交易"
 
 #. i18n: ectx: property (toolTip), widget (KMyMoneyAccountCombo, interestCombo)
 #: kmymoney/views/investtransactioneditor.ui:286
@@ -18651,10 +19032,11 @@ msgid "Amount of fees"
 msgstr ""
 
 #: kmymoney/views/journaldelegate.cpp:88
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Copy memo"
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
-msgstr ""
+msgstr "复制备忘"
 
 #: kmymoney/views/journaldelegate.cpp:344
 #, kde-format
@@ -18664,17 +19046,19 @@ msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
 msgstr[0] ""
 
 #: kmymoney/views/journaldelegate.cpp:349
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Cannot create transactions in a closed account."
 msgctxt "@info Unable to edit "
 msgid ""
 "KMyMoney does not support to edit transaction that reference closed accounts."
-msgstr ""
+msgstr "在关闭的账户里无法创建交易。"
 
 #: kmymoney/views/journaldelegate.cpp:351
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Storing transactions"
 msgctxt "@title:window"
 msgid "Prevent editing transactions"
-msgstr ""
+msgstr "对交易排序"
 
 #: kmymoney/views/journaldelegate.cpp:365
 #, kde-format
@@ -18685,16 +19069,18 @@ msgstr ""
 
 #: kmymoney/views/kaccountsview.cpp:170
 #: kmymoney/views/kinstitutionsview.cpp:208
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Net Worth: "
 msgctxt "Approximate net worth"
 msgid "Net Worth: ~%1"
-msgstr ""
+msgstr "净值："
 
 #: kmymoney/views/kaccountsview.cpp:171
 #: kmymoney/views/kinstitutionsview.cpp:209
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Net Worth: "
 msgid "Net Worth: %1"
-msgstr ""
+msgstr "净值："
 
 #: kmymoney/views/kaccountsview.cpp:244
 #, kde-format
@@ -18736,10 +19122,11 @@ msgid "Mapping brokerage account"
 msgstr ""
 
 #: kmymoney/views/kaccountsview.cpp:331
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Online Update"
 msgctxt "@title:menu Online provider selection"
 msgid "Online provider"
-msgstr ""
+msgstr "在线更新"
 
 #: kmymoney/views/kaccountsview.cpp:373
 #, kde-format
@@ -18777,10 +19164,11 @@ msgid "Edit account '%1'"
 msgstr "编辑账户“%1”"
 
 #: kmymoney/views/kaccountsview_p.h:248
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Edit account..."
 msgctxt "Undo action description"
 msgid "Edit account"
-msgstr ""
+msgstr "编辑账户..."
 
 #: kmymoney/views/kaccountsview_p.h:282
 #, kde-format
@@ -18809,26 +19197,30 @@ msgid "This account is still mapped to an online account"
 msgstr ""
 
 #: kmymoney/views/kcategoriesview.cpp:153
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Loss: "
 msgctxt "Approximate loss"
 msgid "Loss: ~%1"
-msgstr ""
+msgstr "损失："
 
 #: kmymoney/views/kcategoriesview.cpp:154
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Loss: "
 msgid "Loss: %1"
-msgstr ""
+msgstr "损失："
 
 #: kmymoney/views/kcategoriesview.cpp:157
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Profit: "
 msgctxt "Approximate profit"
 msgid "Profit: ~%1"
-msgstr ""
+msgstr "利润："
 
 #: kmymoney/views/kcategoriesview.cpp:158
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Profit: "
 msgid "Profit: %1"
-msgstr ""
+msgstr "利润："
 
 #: kmymoney/views/kcategoriesview.cpp:197
 #, kde-format
@@ -18836,10 +19228,11 @@ msgid "Edit category '%1'"
 msgstr "编辑交易类别“%1”"
 
 #: kmymoney/views/kcategoriesview.cpp:205
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Edit category..."
 msgctxt "Undo action description"
 msgid "Edit category"
-msgstr ""
+msgstr "编辑交易类别..."
 
 #: kmymoney/views/kcategoriesview.cpp:219
 #, kde-format
@@ -18859,10 +19252,11 @@ msgstr ""
 
 #: kmymoney/views/kcategoriesview.cpp:338
 #: kmymoney/views/kcategoriesview.cpp:399
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Delete category..."
 msgctxt "@title:window"
 msgid "Delete category"
-msgstr ""
+msgstr "删除交易类型..."
 
 #: kmymoney/views/kcategoriesview.cpp:347
 #, kde-format
@@ -18908,10 +19302,11 @@ msgid "Unable to delete category '%1'. Cause: %2"
 msgstr ""
 
 #: kmymoney/views/keditscheduledlg.cpp:162
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "No name assigned for schedule"
 msgctxt "@info:tooltip"
 msgid "The name is a required field for a schedule"
-msgstr ""
+msgstr "未提供交易计划名"
 
 #: kmymoney/views/keditscheduledlg.cpp:165
 #, kde-format
@@ -18935,10 +19330,11 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/keditscheduledlg.cpp:314
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Schedule found"
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
-msgstr ""
+msgstr "已找到交易计划"
 
 #: kmymoney/views/keditscheduledlg.cpp:609
 #, kde-format
@@ -19154,16 +19550,18 @@ msgstr ""
 "替， KMyMoney将会显示欢迎页。"
 
 #: kmymoney/views/khomeview_p.h:157
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Loading %1..."
 msgctxt "@info:placeholder Shown when the application starts up"
 msgid "Loading..."
-msgstr ""
+msgstr "正在加载 %1..."
 
 #: kmymoney/views/khomeview_p.h:496
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Preferred Accounts"
 msgctxt "@title Home page section"
 msgid "Preferred Accounts"
-msgstr ""
+msgstr "偏好账户"
 
 #: kmymoney/views/khomeview_p.h:502
 #, kde-format
@@ -19171,26 +19569,31 @@ msgid "Payment Accounts"
 msgstr "支出账户"
 
 #: kmymoney/views/khomeview_p.h:504
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Payment Accounts"
 msgctxt "@title Home page section"
 msgid "Payment Accounts"
-msgstr ""
+msgstr "支出账户"
 
 #: kmymoney/views/khomeview_p.h:557
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Net worth forecast"
 msgctxt "@title Home page section"
 msgid "Net Worth Forecast"
-msgstr ""
+msgstr "净值预测"
 
 #: kmymoney/views/khomeview_p.h:608
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Go to next page of the wizard"
+#| msgid "&Next"
 msgid "Next"
-msgstr ""
+msgstr "下一个(&N)"
 
 #: kmymoney/views/khomeview_p.h:611
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&Skip"
 msgid "Skip"
-msgstr ""
+msgstr "跳过（&S)"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, ScheduleWizardPage)
 #: kmymoney/views/khomeview_p.h:614
@@ -19206,28 +19609,32 @@ msgid "Balance after"
 msgstr "期末余额"
 
 #: kmymoney/views/khomeview_p.h:677
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Schedule name:"
 msgctxt "@title Home page section"
 msgid "Scheduled Payments"
-msgstr ""
+msgstr "计划名称："
 
 #: kmymoney/views/khomeview_p.h:685
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Overdue payments"
 msgctxt "@title Home page sub-section"
 msgid "Overdue payments"
-msgstr ""
+msgstr "已过期支出"
 
 #: kmymoney/views/khomeview_p.h:721
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Payments to"
 msgctxt "@title Home page sub-section"
 msgid "Payments due today"
-msgstr ""
+msgstr "支付给"
 
 #: kmymoney/views/khomeview_p.h:736
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Future payments"
 msgctxt "@title Home page sub-section"
 msgid "Future payments"
-msgstr ""
+msgstr "未来的支付"
 
 #: kmymoney/views/khomeview_p.h:799
 #, kde-format
@@ -19281,22 +19688,27 @@ msgid "!R"
 msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1059
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "To Minimum Balance / Maximum Credit"
 msgid "To Minimum Balance<br>/ Maximum Credit"
-msgstr ""
+msgstr "到最小余额/最大信用额"
 
 #: kmymoney/views/khomeview_p.h:1103
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Favorite Reports"
 msgctxt "@title Home page section"
 msgid "Favorite Reports"
-msgstr ""
+msgstr "常用报表"
 
 #: kmymoney/views/khomeview_p.h:1159
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Forecast days"
+#| msgid "%1 Day Forecast"
+#| msgid_plural "%1 Day Forecast"
 msgctxt "@title Home page section Forecast days"
 msgid "%1 Day Forecast"
 msgid_plural "%1 Day Forecast"
-msgstr[0] ""
+msgstr[0] "%1 天预测"
 
 #: kmymoney/views/khomeview_p.h:1170
 #, kde-format
@@ -19306,10 +19718,11 @@ msgid_plural "%1 days"
 msgstr[0] "%1 天"
 
 #: kmymoney/views/khomeview_p.h:1393
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Assets and Liabilities"
 msgctxt "@title Home page section"
 msgid "Assets and Liabilities Summary"
-msgstr ""
+msgstr "资产与负债"
 
 #: kmymoney/views/khomeview_p.h:1417
 #, kde-format
@@ -19318,40 +19731,47 @@ msgid "!M"
 msgstr ""
 
 #: kmymoney/views/khomeview_p.h:1421
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "C"
 msgctxt "@title:column table on home page: cleared"
 msgid "C"
-msgstr ""
+msgstr "C"
 
 #: kmymoney/views/khomeview_p.h:1425
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Reconciliation flag R"
+#| msgid "R"
 msgctxt "@title:column table on home page: not reconciled"
 msgid "!R"
-msgstr ""
+msgstr "R"
 
 #: kmymoney/views/khomeview_p.h:1429
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Reconciled"
 msgctxt "@title:column table on home page: last reconciliation date"
 msgid "Reconciled"
-msgstr ""
+msgstr "已调整"
 
 #: kmymoney/views/khomeview_p.h:1432
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Balance"
 msgctxt "@title:column table on home page"
 msgid "Balance"
-msgstr ""
+msgstr "余额"
 
 #: kmymoney/views/khomeview_p.h:1436
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Asset Accounts"
 msgctxt "@title:column table on home page"
 msgid "Asset Accounts"
-msgstr ""
+msgstr "资产账户"
 
 #: kmymoney/views/khomeview_p.h:1441
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Liability Accounts"
 msgctxt "@title:column table on home page"
 msgid "Liability Accounts"
-msgstr ""
+msgstr "负债账户"
 
 #: kmymoney/views/khomeview_p.h:1526
 #, kde-format
@@ -19364,10 +19784,11 @@ msgid "Total Liabilities"
 msgstr "总负债"
 
 #: kmymoney/views/khomeview_p.h:1822
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Cash Flow Status"
 msgctxt "@title Home page section"
 msgid "Cash Flow Summary"
-msgstr ""
+msgstr "现金流状况"
 
 #: kmymoney/views/khomeview_p.h:1827
 #, kde-format
@@ -19435,10 +19856,11 @@ msgid "Expected Profit/Loss"
 msgstr ""
 
 #: kmymoney/views/kinstitutionsview.cpp:251
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Edit institution..."
 msgctxt "@info:title Dialog title"
 msgid "Edit Institution"
-msgstr ""
+msgstr "编辑金融机构..."
 
 #: kmymoney/views/kinstitutionsview.cpp:258
 #, kde-format
@@ -19456,10 +19878,11 @@ msgid "<p>Do you really want to delete the institution <b>%1</b>?</p>"
 msgstr "<p>您真的要删除金融机构<b>%1</b>吗？</p>"
 
 #: kmymoney/views/kinstitutionsview.cpp:276
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Delete institution..."
 msgctxt "@title:window"
 msgid "Delete institution"
-msgstr ""
+msgstr "删除金融机构..."
 
 #: kmymoney/views/kinstitutionsview.cpp:287
 #: kmymoney/views/kinstitutionsview.cpp:290
@@ -19496,9 +19919,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/views/kinvestmentview.ui:44
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Select new investment type"
 msgid "Select investment account:"
-msgstr ""
+msgstr "选择新的投资类型"
 
 #. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
 #: kmymoney/views/kinvestmentview.ui:80
@@ -19510,9 +19934,10 @@ msgstr "此账户所包含的产权概述。显示您的持有状况和它们最
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_searchSecurities)
 #: kmymoney/views/kinvestmentview.ui:122
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Search view"
 msgid "Search..."
-msgstr ""
+msgstr "搜索视图"
 
 #: kmymoney/views/kmymoneyview.cpp:193
 #, kde-format
@@ -19594,10 +20019,11 @@ msgstr ""
 "名为“%1”的交款人已存在。不建议多个交款人使用同一个名称。是否重命名该交款人？"
 
 #: kmymoney/views/kpayeesview.cpp:159
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Duplicate open"
 msgctxt "@title:window"
 msgid "Duplicate payee name"
-msgstr ""
+msgstr "重复打开文件"
 
 #: kmymoney/views/kpayeesview.cpp:183 kmymoney/views/kpayeesview.cpp:410
 #: kmymoney/views/kpayeesview.cpp:433
@@ -19782,15 +20208,17 @@ msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, tabLinks)
 #: kmymoney/views/kpayeesview.ui:503
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Matching"
 msgid "Link Matching"
-msgstr ""
+msgstr "正在匹配"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: kmymoney/views/kpayeesview.ui:511
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Matching"
 msgid "Matching setup"
-msgstr ""
+msgstr "正在匹配"
 
 #. i18n: ectx: property (text), widget (KLineEdit, idPatternEdit)
 #: kmymoney/views/kpayeesview.ui:519
@@ -19800,9 +20228,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, idPatternLabel)
 #: kmymoney/views/kpayeesview.ui:526
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Identifier"
 msgid "Identifier pattern"
-msgstr ""
+msgstr "标识符"
 
 #. i18n: ectx: property (text), widget (QLabel, urlTemplateLabel)
 #: kmymoney/views/kpayeesview.ui:533
@@ -19812,15 +20241,17 @@ msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_3)
 #: kmymoney/views/kpayeesview.ui:548
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Matching"
 msgid "Matching check"
-msgstr ""
+msgstr "正在匹配"
 
 #. i18n: ectx: property (text), widget (QLabel, label_1)
 #: kmymoney/views/kpayeesview.ui:563
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "[No identifier]"
 msgid "Enter identifier"
-msgstr ""
+msgstr "[无标识符]"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/views/kpayeesview.ui:570
@@ -19830,9 +20261,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: kmymoney/views/kpayeesview.ui:580
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Result"
 msgid "Resulting URL"
-msgstr ""
+msgstr "结果"
 
 #. i18n: ectx: property (text), widget (QLabel, m_leftLabel)
 #. i18n: ectx: property (text), widget (QLabel, m_centerLabel)
@@ -19840,9 +20272,10 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, matchingCheckURL)
 #: kmymoney/views/kpayeesview.ui:587 kmymoney/views/ledgerviewpage.ui:63
 #: kmymoney/views/ledgerviewpage.ui:76 kmymoney/views/ledgerviewpage.ui:92
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Text"
 msgid "TextLabel"
-msgstr ""
+msgstr "文本"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_syncAddressbook)
 #: kmymoney/views/kpayeesview.ui:650
@@ -19905,18 +20338,20 @@ msgid "Unused"
 msgstr "未使用的"
 
 #: kmymoney/views/kpayeesview_p.h:179 kmymoney/views/ktagsview.cpp:184
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "March"
 msgctxt "Placeholder text"
 msgid "Search"
-msgstr ""
+msgstr "三月"
 
 #: kmymoney/views/kpayeesview_p.h:187
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Add"
 msgctxt ""
 "@action:button Replacement for Add button on match tab to avoid duplicate "
 "assignment of Alt+A"
 msgid "Add"
-msgstr ""
+msgstr "添加"
 
 #: kmymoney/views/kpayeesview_p.h:365 kmymoney/views/ktagsview.cpp:214
 #, kde-format
@@ -19966,10 +20401,11 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/kscheduledview.cpp:189
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Enter schedule"
 msgctxt "@title:window"
 msgid "Delete schedule"
-msgstr ""
+msgstr "输入交易计划"
 
 #: kmymoney/views/kscheduledview.cpp:197
 #, kde-format
@@ -20001,16 +20437,18 @@ msgstr ""
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_searchWidget)
 #: kmymoney/views/kscheduledview.ui:38
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Filter"
 msgctxt "Placeholdertext in schedulesview"
 msgid "Filter"
-msgstr ""
+msgstr "过滤器"
 
 #: kmymoney/views/kscheduledview_p.h:103
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Schedule found"
 msgctxt "@info:placeholder"
 msgid "No schedules found"
-msgstr ""
+msgstr "已找到交易计划"
 
 #: kmymoney/views/kscheduledview_p.h:254
 #, kde-format
@@ -20023,10 +20461,11 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/kscheduledview_p.h:256
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Enter schedule"
 msgctxt "@title:window"
 msgid "Stop entering schedule"
-msgstr ""
+msgstr "输入交易计划"
 
 #: kmymoney/views/kscheduledview_p.h:348
 #, kde-format
@@ -20036,10 +20475,11 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/kscheduledview_p.h:351
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Edit scheduled transaction"
 msgctxt "@title:window"
 msgid "Skip scheduled transaction"
-msgstr ""
+msgstr "编辑计划交易"
 
 #: kmymoney/views/kscheduledview_p.h:364
 #, kde-format
@@ -20053,16 +20493,19 @@ msgid "Criteria"
 msgstr "搜索标准"
 
 #: kmymoney/views/ksearchtransactiondlg.cpp:64
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Search transactions"
 msgctxt "@info:tooltip for find transaction apply button"
 msgid "Search transactions"
 msgstr "搜索交易"
 
 #: kmymoney/views/ksearchtransactiondlg.cpp:110
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Found %1 matching transaction"
+#| msgid_plural "Found %1 matching transactions"
 msgid "Found %1 matching splits"
 msgid_plural "Found %1 matching splits"
-msgstr[0] ""
+msgstr[0] "找到 %1 笔相符的交易"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_resultPage)
 #: kmymoney/views/ksearchtransactiondlg.ui:24
@@ -20077,10 +20520,11 @@ msgid "F"
 msgstr "F"
 
 #: kmymoney/views/ktagsview.cpp:93
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Update"
 msgctxt "@action:button Update button in tags view"
 msgid "Update"
-msgstr ""
+msgstr "更新"
 
 #: kmymoney/views/ktagsview.cpp:100
 #, kde-format
@@ -20127,10 +20571,11 @@ msgstr ""
 "名为“%1”的交款人已存在。不建议多个交款人使用同一个名称。是否重命名该交款人？"
 
 #: kmymoney/views/ktagsview.cpp:381
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Duplicate tag"
 msgctxt "@title:window"
 msgid "Duplicate tag name"
-msgstr ""
+msgstr "标签已重复"
 
 #: kmymoney/views/ktagsview.cpp:404 kmymoney/views/ktagsview.cpp:528
 #, kde-format
@@ -20166,10 +20611,11 @@ msgid "Tag color:"
 msgstr ""
 
 #: kmymoney/views/ktransactionselectdlg.cpp:56
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Select transactions without payees"
 msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
-msgstr ""
+msgstr "选择无收款人的交易"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:128
 #, kde-format
@@ -20177,19 +20623,27 @@ msgid "Merge Transactions"
 msgstr "合并交易"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:130
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Are you sure you wish to merge these transactions?  The one you selected "
+#| "first is the top one, and its values will be used in the merged "
+#| "transaction.  Cancel and select the other transaction first, if you want "
+#| "its values to be used."
 msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
 "The two selected transactions to merge are shown. The one at the top and its "
 "values will be used in the resulting merged transaction.  If you want to use "
 "the other one press the exchange button on the right."
 msgstr ""
+"您确定要合并这几笔交易吗？合并交易的金额将为所选首笔交易金额。若要使用其他交"
+"易金额，请先取消并选择其他交易。"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:136
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to match the selected transactions"
 msgctxt "@info:tooltip Exchange transactions about to merge"
 msgid "Press to exchange the two transactions."
-msgstr ""
+msgstr "无法匹配选中的交易"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTransactionSelectDlg)
 #: kmymoney/views/ktransactionselectdlg.ui:14
@@ -20228,25 +20682,29 @@ msgid "Open the Handbook and learn how to use KMyMoney"
 msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:210
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Go to account"
 msgctxt "@action:inmenu open account"
 msgid "Go to account"
-msgstr ""
+msgstr "转到账户页面"
 
 #: kmymoney/views/ledgerview.cpp:212
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Go to payee"
 msgctxt "@action:inmenu open payee"
 msgid "Go to payee"
-msgstr ""
+msgstr "转到收款人页面"
 
 #: kmymoney/views/ledgerview.cpp:257
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Go to '%1'"
 msgctxt "@action:inmenu open account"
 msgid "Go to '%1'"
 msgstr "跳转到“%1”"
 
 #: kmymoney/views/ledgerview.cpp:267
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Go to '%1'"
 msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "跳转到“%1”"
@@ -20260,13 +20718,15 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:860
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "交易中缺少交易类别。"
 
 #: kmymoney/views/ledgerview.cpp:867
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "The transaction has a missing assignment of <b>%1</b>."
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "该交易被指派到了不存在的<b>%1</b>。"
@@ -20291,36 +20751,44 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:963
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Checking for overdue scheduled transactions..."
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
-msgstr ""
+msgstr "正在检查逾期的计划交易..."
 
 #: kmymoney/views/ledgerview.cpp:964
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Enter scheduled transaction"
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
-msgstr ""
+msgstr "输入预定交易"
 
 #: kmymoney/views/ledgerview.cpp:967
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Do you really want to delete the selected price entry?"
+#| msgid_plural "Do you really want to delete the selected price entries?"
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
-msgstr ""
+msgstr "您真的要删除所选的价格条目吗？"
 
 #: kmymoney/views/ledgerview.cpp:968
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Dialog caption for 'Enter or schedule' dialog"
+#| msgid "Enter or schedule?"
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
-msgstr ""
+msgstr "输入交易信息或计划交易？"
 
 #: kmymoney/views/ledgerview.cpp:988
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Use this to schedule the transaction for later entry into the ledger."
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
 "Detach the hidden (matched) transaction from the one shown and enter it into "
 "the ledger again."
-msgstr ""
+msgstr "用这个来将交易作为未来的计划交易项输入到账簿中。"
 
 #: kmymoney/views/ledgerview.cpp:990
 #, kde-format
@@ -20331,31 +20799,37 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/ledgerview.cpp:994
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Do you really want to delete the selected transaction?"
+#| msgid_plural "Do you really want to delete all %1 selected transactions?"
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
-msgstr ""
+msgstr "您确定要删除所选的 %1 笔交易吗？"
 
 #: kmymoney/views/ledgerview.cpp:995
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Attempt to match similar transactions"
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
-msgstr ""
+msgstr "尝试匹配类似的交易"
 
 #: kmymoney/views/ledgerviewpage_p.h:98
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Last reconciliation"
 msgctxt "@label:textbox Reconciliation date"
 msgid "Last reconciliation: %1"
-msgstr ""
+msgstr "上次对账"
 
 #: kmymoney/views/ledgerviewpage_p.h:100
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Never reconciled"
 msgctxt "@label:textbox Reconciliation date"
 msgid "Never reconciled"
 msgstr "从未对账"
 
 #: kmymoney/views/ledgerviewpage_p.h:142
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Investment value: %1%2"
 msgctxt "@label:textbox Total value of investment"
 msgid "Investment value: %1%2"
 msgstr "投资值：%1%2"
@@ -20370,22 +20844,26 @@ msgstr ""
 
 #: kmymoney/views/ledgerviewpage_p.h:149
 #: kmymoney/views/reconciliationledgerviewpage.cpp:443
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Cleared balance"
+#| msgid "Cleared: %1"
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
 msgstr "已结清：%1"
 
 #: kmymoney/views/ledgerviewpage_p.h:152
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1 of %2"
 msgctxt "@label:textbox %1 sum symbol, %2 number of selected tx, %3 sum of tx"
 msgid "%1 of %2: %3"
-msgstr ""
+msgstr "%1 of %2"
 
 #: kmymoney/views/ledgerviewpage_p.h:157
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Balance: %1"
 msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
-msgstr ""
+msgstr "余额：%1"
 
 #: kmymoney/views/multitransactioneditor.cpp:208
 #: kmymoney/views/newtransactioneditor.cpp:300
@@ -20402,18 +20880,22 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/multitransactioneditor.cpp:277
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "  * Transaction '%1' has a post date '%2' before one of the referenced "
+#| "account's opening date."
 msgctxt "@info Error when selecting account"
 msgid ""
 "A selected transaction has a post date (%1) before the opening date of the "
 "selected account (%2)."
-msgstr ""
+msgstr "  * 交易“%1”的创建日期“%2”早于某个相关账户的开户日期。"
 
 #: kmymoney/views/multitransactioneditor.cpp:722
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Cannot edit multiple split transactions at once."
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
-msgstr ""
+msgstr "无法同时编辑多项切分交易。"
 
 #: kmymoney/views/multitransactioneditor.cpp:731
 #, kde-format
@@ -20440,18 +20922,20 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/newspliteditor.cpp:174
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Use this to enter the transaction into the ledger."
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
-msgstr ""
+msgstr "用这个来将交易记录到账簿中"
 
 #: kmymoney/views/newspliteditor.cpp:187
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
 "category."
-msgstr ""
+msgstr "无法在交易类别上下文里创建交易。"
 
 #: kmymoney/views/newspliteditor.cpp:198
 #, kde-format
@@ -20490,9 +20974,10 @@ msgstr ""
 #: kmymoney/views/newspliteditor.ui:137
 #: kmymoney/views/newtransactioneditor.ui:101
 #: kmymoney/views/newtransactionform.ui:40
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Payer/Receiver"
 msgid "Payer/Payee"
-msgstr ""
+msgstr "付/收款人"
 
 #. i18n: ectx: property (text), widget (QLabel, costCenterLabel)
 #. i18n: ectx: property (text), widget (QLabel, label_8)
@@ -20504,10 +20989,11 @@ msgid "Costcenter"
 msgstr ""
 
 #: kmymoney/views/newtransactioneditor.cpp:237
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
-msgstr ""
+msgstr "交易中缺少交易类别。"
 
 #: kmymoney/views/newtransactioneditor.cpp:241
 #, kde-format
@@ -20516,7 +21002,8 @@ msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 
 #: kmymoney/views/newtransactioneditor.cpp:620
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Select autofill transaction"
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
 msgstr "选择自动填充交易"
@@ -20536,39 +21023,45 @@ msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
 "other split?"
 msgstr ""
+"您要在其他交易拆分中，将备忘 <p><i>%1</i></p> 替换为备忘 <p><i>%2</i></p> "
+"吗？"
 
 #: kmymoney/views/newtransactioneditor.cpp:1574
 #, kde-format
 msgid "Copy memo"
-msgstr ""
+msgstr "复制备忘"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, numberEdit)
 #: kmymoney/views/newtransactioneditor.ui:24
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "The check number used for this transaction."
-msgstr ""
+msgstr "用此按钮来记录交易"
 
 #. i18n: ectx: property (toolTip), widget (CreditDebitEdit, creditDebitEdit)
 #: kmymoney/views/newtransactioneditor.ui:72
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Enter scheduled transaction"
 msgctxt "@info:tooltip"
 msgid "Enter the amount of the transaction."
-msgstr ""
+msgstr "输入预定交易"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, costCenterCombo)
 #: kmymoney/views/newtransactioneditor.ui:194
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Use this to enter the transaction into the ledger."
 msgctxt "@info:tooltip"
 msgid "The cost center this transaction should be assigned to."
-msgstr ""
+msgstr "用这个来将交易记录到账簿中"
 
 #. i18n: ectx: property (toolTip), widget (KMyMoneyAccountCombo, categoryCombo)
 #: kmymoney/views/newtransactioneditor.ui:281
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Use this to clear all splits of this transaction"
 msgctxt "@info:tooltip"
 msgid "Enter the category or counter account of the transaction."
-msgstr ""
+msgstr "清除对此交易的全部拆分"
 
 #: kmymoney/views/newtransactionform.cpp:129
 #, kde-format
@@ -20591,10 +21084,11 @@ msgid "n/a"
 msgstr ""
 
 #: kmymoney/views/onlinebalancedelegate.cpp:176
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Opening Balance"
 msgctxt "Label in ledger for online balance row"
 msgid "Online Balance"
-msgstr ""
+msgstr "开盘余额"
 
 #: kmymoney/views/payeeidentifierselectiondelegate.cpp:42
 #, kde-format
@@ -20612,10 +21106,11 @@ msgid "National Account Number"
 msgstr ""
 
 #: kmymoney/views/reconciliationdelegate.cpp:107
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Reconciliation view"
 msgctxt "Ledger marker showing a reconciliation entry"
 msgid "Reconciliation"
-msgstr ""
+msgstr "对账视图"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:124
 #, kde-format
@@ -20640,19 +21135,22 @@ msgid "Confirm end of reconciliation"
 msgstr "确认对账结束"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:294
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Loading transactions..."
 msgctxt "@label Reconciliation progress dialog"
 msgid "Reconciling transactions..."
-msgstr ""
+msgstr "正在加载交易..."
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:442
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Statement: %1"
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
-msgstr "对帐单金额：%1"
+msgstr "对账单金额：%1"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:444
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Difference: %1"
 msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "差额：%1"
@@ -20694,10 +21192,11 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/simpleledgerview.cpp:935
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Closed tags cannot be used."
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
-msgstr ""
+msgstr "无法使用已关闭的标签。"
 
 #. i18n: ectx: property (text), widget (QLabel, l2)
 #: kmymoney/views/simpleledgerview.ui:72
@@ -20717,16 +21216,18 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/splitdialog.cpp:316
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Sum of splits"
 msgctxt "Split editor summary"
 msgid "Sum of splits"
-msgstr ""
+msgstr "已拆分总额"
 
 #: kmymoney/views/splitdialog.cpp:334
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unassigned"
 msgctxt "Split editor summary"
 msgid "Overassigned"
-msgstr ""
+msgstr "未指派"
 
 #: kmymoney/views/splitdialog.cpp:337
 #, kde-format
@@ -20736,9 +21237,10 @@ msgstr "未指派"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, SplitDialog)
 #: kmymoney/views/splitdialog.ui:14
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Split Options"
 msgid "Split editor"
-msgstr ""
+msgstr "分割选项"
 
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
 #: kmymoney/views/splitdialog.ui:553
@@ -20790,9 +21292,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, adjustUnassigned)
 #: kmymoney/views/splitdialog.ui:677
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Difference"
 msgid "Apply Difference"
-msgstr ""
+msgstr "差额"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteZeroButton)
 #: kmymoney/views/splitdialog.ui:684
@@ -20837,46 +21340,55 @@ msgid "&Cancel"
 msgstr "取消(&C)"
 
 #: kmymoney/views/splitview.cpp:112
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Split Options"
 msgctxt "@title:menu split context menu"
 msgid "Split Options"
 msgstr "分割选项"
 
 #: kmymoney/views/splitview.cpp:114
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "create new institution"
+#| msgid "New..."
 msgctxt "@item:inmenu Create a split"
 msgid "New..."
-msgstr ""
+msgstr "新建..."
 
 #: kmymoney/views/splitview.cpp:129
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Edit..."
 msgctxt "@item:inmenu Edit a split"
 msgid "Edit..."
 msgstr "编辑..."
 
 #: kmymoney/views/splitview.cpp:134
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "To duplicate a split"
+#| msgid "Duplicate"
 msgctxt "@item:inmenu Duplicate selected split(s)"
 msgid "Duplicate"
-msgstr ""
+msgstr "复制"
 
 #: kmymoney/views/splitview.cpp:176
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Delete"
 msgctxt "@item:inmenu Delete selected split(s)"
 msgid "Delete"
-msgstr ""
+msgstr "删除"
 
 #: kmymoney/views/tabordereditor.cpp:428
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tag options"
 msgctxt "@title:menu"
 msgid "Tab Editor Options"
-msgstr ""
+msgstr "标记选项"
 
 #: kmymoney/views/tabordereditor.cpp:431
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Start operation"
 msgctxt "@action:inmenu Move tab editor selector to this widget"
 msgid "Start from here"
-msgstr ""
+msgstr "开始操作"
 
 #: kmymoney/views/tabordereditor.cpp:433
 #, kde-format
@@ -20885,16 +21397,18 @@ msgid "Restart"
 msgstr ""
 
 #: kmymoney/views/tabordereditor.cpp:436
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Save changes"
 msgctxt "@action:inmenu Reset all changes"
 msgid "Undo changes"
-msgstr ""
+msgstr "保存修改"
 
 #: kmymoney/views/tabordereditor.cpp:438
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Use default"
 msgctxt "@action:inmenu Reset to application defaults"
 msgid "Reset to default"
-msgstr ""
+msgstr "使用默认设定"
 
 #: kmymoney/views/tabordereditor.cpp:443
 #, kde-format
@@ -20904,9 +21418,10 @@ msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, TabOrderEditor)
 #: kmymoney/views/tabordereditor.ui:14
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Price Editor"
 msgid "Tab Order Editor"
-msgstr ""
+msgstr "价格编辑器"
 
 #: kmymoney/widgets/amountedit.cpp:272
 #, kde-format
@@ -20957,7 +21472,24 @@ msgstr "详细描述"
 
 #. i18n: ectx: property (html), widget (KTextEdit, m_description)
 #: kmymoney/widgets/kaccounttemplateselector.ui:77
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#| "REC-html40/strict.dtd\">\n"
+#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#| "css\">\n"
+#| "p, li { white-space: pre-wrap; }\n"
+#| "</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; "
+#| "font-weight:400; font-style:normal;\">\n"
+#| "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#| "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#| "\">KMyMoney supports multiple storage types. The availability of storage "
+#| "types depends on the presence of plugins and their activation in the "
+#| "application settings.</p>\n"
+#| "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#| "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /"
+#| ">If you are uncertain what to choose here, then <span style=\" font-"
+#| "weight:600;\">XML</span> is probably your best choice.</p></body></html>"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
 "REC-html40/strict.dtd\">\n"
@@ -20970,6 +21502,20 @@ msgid ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
 "\"><br /></p></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">KMyMoney "
+"支持多种存储方式，支持情况取决于插件的安装及启用情况。</p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br />如果"
+"您不确定该如何选择，那请选择 <span style=\" font-weight:600;\">XML</span>。</"
+"p></body></html>"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_accountList)
 #: kmymoney/widgets/kaccounttemplateselector.ui:109
@@ -20979,10 +21525,11 @@ msgid "Name"
 msgstr "名称"
 
 #: kmymoney/widgets/kmmemptyview.h:49
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "No accounts found."
 msgctxt "Placeholder for when there is no data in a view"
 msgid "No data found"
-msgstr ""
+msgstr "未找到账户."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KMMSearchWidget)
 #: kmymoney/widgets/kmmsearchwidget.ui:14
@@ -20991,10 +21538,11 @@ msgid "Form"
 msgstr ""
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:136
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Use this to open the profile editor"
 msgctxt "@info:tooltip icon in category to open the split editor"
 msgid "Click this icon to open the split editor"
-msgstr ""
+msgstr "打开配置文件对话框"
 
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:69
 #, kde-format
@@ -21165,14 +21713,16 @@ msgid "Year to date"
 msgstr "到某天为止的一年内"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:41
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Month to date"
 msgid "Fiscal month to date"
-msgstr ""
+msgstr "到某天为止的一个月内"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:42
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Year to date"
 msgid "Fiscal year to date"
-msgstr ""
+msgstr "到某天为止的一年内"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:43
 #, kde-format
@@ -21277,10 +21827,11 @@ msgid "Feedback content"
 msgstr ""
 
 #: kmymoney/widgets/ktagcontainer.cpp:89
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tag"
 msgctxt "@info:placeholder tag combo box"
 msgid "Tag"
-msgstr ""
+msgstr "标签"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_textTab)
 #: kmymoney/widgets/ktransactionfilter.cpp:90
@@ -21340,7 +21891,7 @@ msgstr "使用正则表达式"
 #: kmymoney/widgets/ktransactionfilter.ui:105
 #, kde-format
 msgid "Case sensitive"
-msgstr "区分大小写"
+msgstr "不区分大小写"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_amountButton)
 #: kmymoney/widgets/ktransactionfilter.ui:210
@@ -21583,8 +22134,10 @@ msgid "Reconcile state"
 msgstr "对账状态"
 
 #: kmymoney/widgets/transactionsortoption.cpp:46
+#, fuzzy
+#| msgid "Reconciliation view"
 msgid "Reconciliation date"
-msgstr ""
+msgstr "对账视图"
 
 #. i18n: ectx: property (text), widget (QListWidget, m_selectedList)
 #: kmymoney/widgets/transactionsortoption.ui:92
@@ -22185,24 +22738,33 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:259
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Mark this checkbox if the account should be maintained as preferred "
+#| "account"
 msgid ""
 "Mark this checkbox to include the account in the group of favorite accounts"
-msgstr ""
+msgstr "如果想将此账户设为偏好账户，请选中此复选框"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:262
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Selecting the <b>Preferred Account</b> checkbox will allow preferred "
+#| "access in some dialogs and views of KMyMoney."
 msgid ""
 "Selecting the <b>Favorite Account</b> checkbox will allow preferred access "
 "to this account in some dialogs and views of KMyMoney."
 msgstr ""
+"选中<b>“设为偏好账户”</b>复选框，将允许在某些对话框和视图中对该账户进行偏好访"
+"问。"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:265
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Filter Accounts"
 msgid "Favorite account"
-msgstr ""
+msgstr "过滤账户"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel14)
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:27
@@ -22294,9 +22856,10 @@ msgid "Next due date is prior to opening date"
 msgstr "下次到期日早于开户日"
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:117
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Next due date"
 msgid "Next due date is invalid"
-msgstr ""
+msgstr "下次到期日期"
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:121
 #, kde-format
@@ -22638,10 +23201,11 @@ msgid "Next interest change is due"
 msgstr "下次利率变化到期"
 
 #: kmymoney/wizards/newaccountwizard/khierarchypage.cpp:156
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "No account selected"
 msgctxt "@info Missing parent account selection in new account wizard"
 msgid "No parent account selected"
-msgstr ""
+msgstr "未选择账户"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newaccountwizard/khierarchypage.ui:26
@@ -23219,16 +23783,18 @@ msgid "Unable to create account: %1"
 msgstr "无法创建账户：%1"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:198
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Half Up"
 msgctxt "Rounding method"
 msgid "HalfUp"
-msgstr ""
+msgstr "正向四舍五入"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:199
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Half Down"
 msgctxt "Rounding method"
 msgid "HalfDown"
-msgstr ""
+msgstr "负向四舍五入"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:200
 #, kde-format
@@ -23255,10 +23821,11 @@ msgid "Truncate"
 msgstr ""
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:204
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Promote"
 msgctxt "Rounding method"
 msgid "Promote"
-msgstr ""
+msgstr "升变"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:247
 #, kde-format
@@ -23270,9 +23837,10 @@ msgstr ""
 
 #. i18n: ectx: property (title), widget (KInvestmentDetailsWizardPage, KInvestmentDetailsWizardPage)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:14
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Securities"
 msgid "Security details"
-msgstr ""
+msgstr "证券"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:23
@@ -23420,22 +23988,25 @@ msgid "Unexpected error occurred while adding new investment"
 msgstr "添加新投资交易时发生了未知错误"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:198
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "New Investment wizard"
 msgctxt "@info:window"
 msgid "Investment detail wizard"
-msgstr ""
+msgstr "新投资向导"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:214
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Security not found"
 msgctxt "@info:window"
 msgid "Security detail wizard"
-msgstr ""
+msgstr "未找到证券。"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:217
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Securities"
 msgctxt "@info:tab Security edit wizard detail page"
 msgid "Security details"
-msgstr ""
+msgstr "证券"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:250
 #, kde-format
@@ -23948,10 +24519,11 @@ msgstr ""
 "动。 您确定要继续吗？"
 
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:284
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Information"
 msgctxt "@title:window"
 msgid "Confirmation"
-msgstr ""
+msgstr "信息"
 
 #: kmymoney/wizards/newloanwizard/knewloanwizard.cpp:72
 #, kde-format
@@ -24578,12 +25150,17 @@ msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, m_institutionNumberEdit)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:65
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Each institution has a routing number. Enter it here. If uncertain, leave "
+#| "the field blank. You can modify it later."
 msgid ""
 "Each institution has a bank code, known as routing number in the US or a "
 "sort code in the UK. Enter it here. If uncertain, leave the field blank. You "
 "can modify it later."
 msgstr ""
+"每个机构都有一个routing号码。请在这里输入。如果不清楚，请将它留空。您以后可以"
+"随时修改。"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:72
@@ -24747,8 +25324,8 @@ msgid ""
 "your account numbers and other important financial information will be very "
 "secure.</p>"
 msgstr ""
-"<p>KMyMoney 可以使用 GPG 加密来加密您的数据文件。GPG 加密是世界上最安全的数据"
-"保护方法之一。您的账号和其他所有的重要财务信息都会非常安全。</p>"
+"<p>KMyMoney可以使用GPG加密来加密您的数据文件。GPG加密是世界上最安全的数据保护"
+"方法之一。您的账号和其他所有的重要财务信息都会非常安全。</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:20
@@ -24828,9 +25405,10 @@ msgstr ""
 "<p>所有的信息都可以不填，它们仅用来个性化您自己的KMyMoney文件。</p>"
 
 #: tools/kmmreport-export.cpp:116
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Favorite reports"
 msgid "Export KMyMoney reports"
-msgstr ""
+msgstr "常用报表"
 
 #: tools/kmmreport-export.cpp:120
 #, kde-format
@@ -24868,14 +25446,16 @@ msgid "Use query table for exporting (default)"
 msgstr ""
 
 #: tools/kmmreport-export.cpp:141
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Old Customized Reports"
 msgid "List all custom reports"
-msgstr ""
+msgstr "旧的自定义报表"
 
 #: tools/kmmreport-export.cpp:144
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to generate report"
 msgid "Filename for generated output"
-msgstr ""
+msgstr "无法生成报表"
 
 #: tools/kmmreport-export.cpp:147
 #, kde-format
@@ -24891,3 +25471,1168 @@ msgstr ""
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr ""
+
+#~ msgid "Importing statement for account %1"
+#~ msgstr "导入账户 %1 的对账单"
+
+#~ msgid "  Statement balance is not contained in statement."
+#~ msgstr "在对账单中未包含期末余额。"
+
+#~ msgid "  Statement balance on %1 is reported to be %2"
+#~ msgstr "对账单报告账户 %1 的余额是 %2"
+
+#~ msgid "  Transactions"
+#~ msgstr "交易"
+
+#~ msgctxt "x transactions have been added"
+#~ msgid "    %1 added"
+#~ msgid_plural "    %1 added"
+#~ msgstr[0] "    %1 已添加"
+
+#~ msgid "    %1 matched"
+#~ msgid_plural "    %1 matched"
+#~ msgstr[0] "    %1 项匹配"
+
+#~ msgid "    %1 duplicate"
+#~ msgid_plural "    %1 duplicates"
+#~ msgstr[0] "    %1 项重复"
+
+#~ msgid "  Payees"
+#~ msgstr "收/付款人"
+
+#~ msgctxt "x transactions have been created"
+#~ msgid "    %1 created"
+#~ msgid_plural "    %1 created"
+#~ msgstr[0] "    %1 已创建"
+
+#~ msgid "Source <placeholder>%1</placeholder> does not exist."
+#~ msgstr "源 <placeholder>%1</placeholder> 不存在。"
+
+#~ msgid "Cannot resolve input date."
+#~ msgstr "无法解析输入日期。"
+
+#~ msgid "CSV source <placeholder>%1</placeholder> does not exist."
+#~ msgstr "CSV 源 <placeholder>%1</placeholder>不存在。"
+
+#~ msgid "Cannot find from and to currency."
+#~ msgstr "无法找到源货币和目标货币。"
+
+#~ msgid "Local quote sources aren't supported."
+#~ msgstr "不支持本地报价源。"
+
+#~ msgid "Fetching URL %1..."
+#~ msgstr "正在获取 URL %1..."
+
+#~ msgid ""
+#~ "<placeholder>%1</placeholder> skipped because it doesn't have "
+#~ "identification number."
+#~ msgstr "<placeholder>%1</placeholder> 没有标识号码，跳过显示此源。"
+
+#~ msgctxt "The process x is executing"
+#~ msgid "Executing %1..."
+#~ msgstr "正在执行 %1..."
+
+#~ msgid "Unable to launch: %1"
+#~ msgstr "无法启动：%1"
+
+#~ msgid "Failed to open downloaded file"
+#~ msgstr "无法打开已下载的文件"
+
+#~ msgctxt "Executing 'script' 'online source' 'investment symbol' "
+#~ msgid "Executing %1 %2 %3..."
+#~ msgstr "正在执行 %1 %2 %3..."
+
+#~ msgid "Unable to update price for %1"
+#~ msgstr "无法更新 %1 的价格信息"
+
+#~ msgid "Identifier found: '%1'"
+#~ msgstr "已找到标识符：“%1”"
+
+#~ msgid "Price found: '%1' (%2)"
+#~ msgstr "已找到价格信息：“%1”(%2)"
+
+#~ msgid "Date found: '%1'"
+#~ msgstr "已找到数据：“%1”"
+
+#~ msgid "Unable to update price for %1 (no price or no date)"
+#~ msgstr "无法更新 %1 的价格(无价格或无日期)"
+
+#~ msgid "Unable to update price for %1 (empty quote data)"
+#~ msgstr "无法更新 %1 的价格信息 (报表数据为空)"
+
+#~ msgctxt "Total value"
+#~ msgid "Total"
+#~ msgstr "总计"
+
+#~ msgid "Price/Share"
+#~ msgstr "每股价格"
+
+#~ msgid "Asset account"
+#~ msgstr "固定资产账户"
+
+#~ msgid ""
+#~ "At least one split of the selected transaction references an account that "
+#~ "has been closed. Editing the transactions is therefore prohibited."
+#~ msgstr ""
+#~ "选中交易里的至少一项拆分引用了已被关闭的账户。因此无法对它们进行修改。"
+
+#~ msgid ""
+#~ "Cannot enter transaction with postdate prior to account's opening date."
+#~ msgstr "无法输入交易信息，交易的创建日期早于账户的开户日期。"
+
+#~ msgctxt "Equity name"
+#~ msgid "Name"
+#~ msgstr "名称"
+
+#~ msgid "Price Already Exists"
+#~ msgstr "价格已存在"
+
+#~ msgid ""
+#~ "Received a price for %1 (id %2), but this symbol is not on the list. "
+#~ "Aborting entire update."
+#~ msgstr "已收到%1的价格(id %2)，但是列表中没有此代号。终止整个更新。"
+
+#~ msgid "List of known Equities, and the date they were last updated on."
+#~ msgstr "已经资产列表，和它们最近一次更新日期。"
+
+#~ msgctxt "@info:tooltip for find transaction Open button"
+#~ msgid "Search transactions"
+#~ msgstr "搜索交易"
+
+#~ msgid "Found %1 matching transaction (D %2 / P %3 = %4)"
+#~ msgid_plural "Found %1 matching transactions (D %2 / P %3 = %4)"
+#~ msgstr[0] "找到 %1 笔相符的交易 (D %2 / P %3 = %4)"
+
+#~ msgid "MyDialog"
+#~ msgstr "我的对话框"
+
+#~ msgid "Remove this price item from the file"
+#~ msgstr "从文件中删除此价格项"
+
+#~ msgctxt "Price source"
+#~ msgid "Source"
+#~ msgstr "来源"
+
+#~ msgid "Delete..."
+#~ msgstr "删除..."
+
+#~ msgid "will be calculated"
+#~ msgstr "将被计算"
+
+#~ msgid ""
+#~ "You are about to delete the selected split. Do you really want to "
+#~ "continue?"
+#~ msgstr "此操作将删除选择的交易分割。您确定要继续此操作吗？"
+
+#~ msgid ""
+#~ "You need to assign a category to this split before it can be entered."
+#~ msgstr "您必须在输入交易拆分信息前选择其类别。"
+
+#~ msgid "Enter split"
+#~ msgstr "输入交易拆分信息"
+
+#~ msgid "Is a sub account"
+#~ msgstr "是子账户"
+
+#~ msgid "Routing Number:"
+#~ msgstr "区号："
+
+#~ msgid ""
+#~ "Select a transaction and press the OK button or use Cancel to select none."
+#~ msgstr "选择一项交易并按“确定”，或者按“取消”不选择任何交易。"
+
+#~ msgid "Clear &All"
+#~ msgstr "全部清除(&A)"
+
+#~ msgid "Clear &Zero"
+#~ msgstr "归零(&Z)"
+
+#~ msgid ""
+#~ "In case you have multiple split entries to the same category and you like "
+#~ "to keep them as a single split"
+#~ msgstr "当您需要将多条同类交易拆分保留为单条拆分时"
+
+#~ msgid ""
+#~ "You are about to delete all splits of this transaction. Do you really "
+#~ "want to continue?"
+#~ msgstr "您将要删除此交易的全部拆分。是否确定要继续？"
+
+#~ msgid "<b>11,00<b>"
+#~ msgstr "<b>11,00</b>"
+
+#~ msgid "<b>111,00<b>"
+#~ msgstr "<b>111,00</b>"
+
+#~ msgid "100,00"
+#~ msgstr "100,00"
+
+#~ msgid ""
+#~ "This dialog does not allow new tags to be created. Please pick a tag from "
+#~ "the list."
+#~ msgstr "在本对话框中不允许创建新的收款人。请从列表中选择一个收款人。"
+
+#~ msgid "Tag creation"
+#~ msgstr "创建标签"
+
+#~ msgid ""
+#~ "The transactions associated with the selected tags need to be re-assigned "
+#~ "to a different tag before the selected tags can be deleted. Please select "
+#~ "a tag from the list below."
+#~ msgstr ""
+#~ "在删除选中的收款人前，需要先将与相关的交易指定给其他收款人。请在下面的列表"
+#~ "中 选择一个收款人。"
+
+#~ msgid "Show splash screen"
+#~ msgstr "显示飞溅屏幕"
+
+#~ msgid "Show title bar on each page"
+#~ msgstr "在每个页面上显示标题栏"
+
+#~ msgid "New Quote Source"
+#~ msgstr "新报价来源"
+
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Symbol"
+#~ msgstr "符号"
+
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Identification number"
+#~ msgstr "身份证号"
+
+#~ msgctxt "@item:inlistbox Stock"
+#~ msgid "Name"
+#~ msgstr "名称"
+
+#~ msgid "Delete quote source"
+#~ msgstr "删除报价源"
+
+#~ msgid "Always show a No. field"
+#~ msgstr "始终显示序号栏"
+
+#~ msgid "Category/Account"
+#~ msgstr "交易类别/账户"
+
+#~ msgid "Transfer from"
+#~ msgstr "转账来自"
+
+#~ msgid "Transfer to"
+#~ msgstr "转账到"
+
+#~ msgid ""
+#~ "This transaction has more than two splits and is originally based on a "
+#~ "different currency (%1). Using this account to modify the transaction may "
+#~ "result in rounding errors. Do you want to continue?"
+#~ msgstr ""
+#~ "此交易中包含包含两项（或更多）的拆分，并且使用不同的货币单位（%1)。使用此"
+#~ "账户来修改该交易可能会导致舍入误差。 您想继续吗？"
+
+#~ msgid ""
+#~ "At least one of the selected transactions has more than two splits and is "
+#~ "originally based on a different currency (%1). Using this account to "
+#~ "modify the transactions may result in rounding errors. Do you want to "
+#~ "continue?"
+#~ msgstr ""
+#~ "在选中的交易里，至少有一个交易中包含包含两项（或更多）的拆分，并且使用不同"
+#~ "的货币单位（%1)。使用此账户来修改这些交易可能会导致舍入误差。 您想继续吗？"
+
+#~ msgid "<center>Processing schedule for %1.</center>"
+#~ msgstr "<center>正在处理计划 %1。</center>"
+
+#~ msgid ""
+#~ "Check number <b>%1</b> has already been used in account <b>%2</b>."
+#~ "<center>Do you want to replace it with the next available number?</center>"
+#~ msgstr ""
+#~ "账号<b>%1</b>已经在账户<b>%2</b>中被使用。<center>您想使用下一个可用的账号"
+#~ "来替换它吗？</center>"
+
+#~ msgid "Duplicate number"
+#~ msgstr "号码重复"
+
+#~ msgid "&Enter"
+#~ msgstr "输入(&E)"
+
+#~ msgid "&Schedule"
+#~ msgstr "交易计划(&S)"
+
+#~ msgid "Accepts the entered data and stores it as schedule"
+#~ msgstr "接受输入的数据，并将其作为交易计划保存。"
+
+#~ msgid ""
+#~ "The transaction you are about to enter has a post date in the future.<br/"
+#~ "><br/>Do you want to enter it in the ledger or add it to the schedules?"
+#~ msgstr ""
+#~ "您为交易输入了一个发生在未来的日期。<br/><br/>您希望将它输入账簿，还是列入"
+#~ "交易计划？"
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the warning balance of %2."
+#~ msgstr "账户的余额<b>%1</b>已低于报警限额 %2."
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the minimum balance of %2."
+#~ msgstr "账户的余额<b>%1</b>已低于最小限额 %2."
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the maximum credit warning "
+#~ "limit of %2."
+#~ msgstr "账户的余额<b>%1</b>已低于最大信用报警限额 %2."
+
+#~ msgid ""
+#~ "The balance of account <b>%1</b> dropped below the maximum credit limit "
+#~ "of %2."
+#~ msgstr "账户的余额<b>%1</b>已低于最大信用限额 %2."
+
+#~ msgid "Thomas Baumgart"
+#~ msgstr "Thomas Baumgart"
+
+#~ msgid "Łukasz Wojniłowicz"
+#~ msgstr "Łukasz Wojniłowicz"
+
+#~ msgid "Ralf Habacker"
+#~ msgstr "Ralf Habacker"
+
+#~ msgid "Cristian Oneț"
+#~ msgstr "Cristian Oneț"
+
+#~ msgid "Christian Dávid"
+#~ msgstr "Christian Dávid"
+
+#~ msgid "Michael Edwardes"
+#~ msgstr "Michael Edwardes"
+
+#~ msgid "Alvaro Soliverez"
+#~ msgstr "Alvaro Soliverez"
+
+#~ msgid "Ace Jones"
+#~ msgstr "Ace Jones"
+
+#~ msgid "Tony Bloomfield"
+#~ msgstr "Tony Bloomfield"
+
+#~ msgid "Felix Rodriguez"
+#~ msgstr "Felix Rodriguez"
+
+#~ msgid "John C"
+#~ msgstr "John C"
+
+#~ msgid "Fernando Vilas"
+#~ msgstr "Fernando Vilas"
+
+#~ msgid "Jack Ostroff"
+#~ msgstr "Jack Ostroff"
+
+#~ msgid "Kevin Tambascio"
+#~ msgstr "Kevin Tambascio"
+
+#~ msgid "Javier Campos Morales"
+#~ msgstr "Javier Campos Morales"
+
+#~ msgid "Robert Wadley"
+#~ msgstr "Robert Wadley"
+
+#~ msgid "Laurent Montel"
+#~ msgstr "Laurent Montel"
+
+#~ msgid "Wolfgang Rohdewald"
+#~ msgstr "Wolfgang Rohdewald"
+
+#~ msgid "Marko Käning"
+#~ msgstr "Marko Käning"
+
+#~ msgid "Allan Anderson ✝"
+#~ msgstr "Allan Anderson ✝"
+
+#~ msgid ""
+#~ "<p>The account \"%1\" was previously created as loan account but some "
+#~ "information is missing.</p><p>The new loan wizard will be started to "
+#~ "collect all relevant information.</p><p>Please use KMyMoney version 0.8.7 "
+#~ "or later and earlier than version 0.9 to correct the problem.</p>"
+#~ msgstr ""
+#~ "账户“%1”之前作为贷款账户被创建，但是缺少必要的信息。将会启动新贷款向导以收"
+#~ "集所有相关的信息。 请使用版本号>=0.8.7并且<0.9的KMyMoney来解决该问题。"
+
+#~ msgid "Account problem"
+#~ msgstr "账户问题"
+
+#~ msgid "&Show tip of the day"
+#~ msgstr "显示每日一帖(&S)"
+
+#~ msgctxt "New transaction button"
+#~ msgid "New"
+#~ msgstr "新建"
+
+#~ msgid "New scheduled transaction"
+#~ msgstr "新建计划交易"
+
+#~ msgid ""
+#~ "<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>"
+#~ msgstr "<p>无法将 <b>%1</b> 移动到金融机构 <b>%2</b> 中。原因：%3</p>"
+
+#~ msgid "<p><b>%1</b> cannot be moved to <b>%2</b>. Reason: %3</p>"
+#~ msgstr "<p>无法将 <b>%1</b> 移动到 <b>%2</b> 中。原因：%3</p>"
+
+#~ msgid "CashFlow"
+#~ msgstr "CashFlow"
+
+#~ msgctxt "Unknown reconciliation state"
+#~ msgid "Unknown"
+#~ msgstr "未知"
+
+#~ msgctxt "Flag for unknown reconciliation state"
+#~ msgid "?"
+#~ msgstr "？"
+
+#~ msgctxt "Column heading for category in tax report"
+#~ msgid "Tax"
+#~ msgstr "税"
+
+#~ msgctxt "Column heading for Cost Center"
+#~ msgid "CC"
+#~ msgstr "抄送"
+
+#~ msgid "Total Balance"
+#~ msgstr "总余额"
+
+#~ msgctxt "IBAN, SWIFT, etc."
+#~ msgid "Sort Code"
+#~ msgstr "类型代码"
+
+#~ msgctxt "Payment made from account"
+#~ msgid "Payment"
+#~ msgstr "支付"
+
+#~ msgctxt "Deposit into account"
+#~ msgid "Deposit"
+#~ msgstr "存款"
+
+#~ msgctxt "Credit suffix"
+#~ msgid "Cr."
+#~ msgstr "Cr."
+
+#~ msgctxt "Debit suffix"
+#~ msgid "Dr."
+#~ msgstr "Dr."
+
+#~ msgid "Cost Center"
+#~ msgstr "开销中心"
+
+#~ msgctxt ""
+#~ "@item This comes after the hunder text if the tens unit is different from "
+#~ "0"
+#~ msgid " and "
+#~ msgstr "零"
+
+#~ msgctxt "@label The word to be printed for no fractional part as in No/00"
+#~ msgid "No"
+#~ msgstr "否"
+
+#~ msgid "Check template file"
+#~ msgstr "支票模板文件"
+
+#~ msgid "There are no entries in this account.\n"
+#~ msgstr "此账户不含任何条目。\n"
+
+#~ msgid "Invalid account"
+#~ msgstr "非法账号"
+
+#~ msgid "CSV exporter"
+#~ msgstr "CSV 导出工具"
+
+#~ msgid "CSV importer"
+#~ msgstr "CSV 导入工具"
+
+#~ msgid "GnuCash importer"
+#~ msgstr "GnuCash 导入工具"
+
+#~ msgid "Reorganizing accounts..."
+#~ msgstr "正在识别账户..."
+
+#~ msgid "IBAN/BIC Data"
+#~ msgstr "IBAN 或 BIC 数据"
+
+#~ msgid "iCalendar exporter"
+#~ msgstr "iCalendar 导出工具"
+
+#~ msgid "KMyMoney print check"
+#~ msgstr "KMyMoney 支票打印"
+
+#~ msgid "Copyright 2009"
+#~ msgstr "Copyright 2009"
+
+#~ msgid "Dequeue"
+#~ msgstr "移出队列"
+
+#~ msgid "Dequeue selected job"
+#~ msgstr "将所选任务从队列中移除"
+
+#~ msgid "Remove the selected job from the list"
+#~ msgstr "将所选任务从列表中移除"
+
+#~ msgid "Execute"
+#~ msgstr "执行"
+
+#~ msgid "Execute all jobs in the queue"
+#~ msgstr "执行队列中的所有任务"
+
+#~ msgctxt "Warning message"
+#~ msgid "There are no jobs in the queue."
+#~ msgstr "队列中没有任务。"
+
+#~ msgctxt "Message title"
+#~ msgid "No Jobs"
+#~ msgstr "没有任务"
+
+#~ msgid "Jobs"
+#~ msgstr "任务"
+
+#~ msgid "OFX Importer"
+#~ msgstr "OFX 导入工具"
+
+#~ msgid "QIF importer"
+#~ msgstr "QIF 导入工具"
+
+#~ msgid "SQL storage"
+#~ msgstr "SQL 存储"
+
+#~ msgid "Budgets view"
+#~ msgstr "预算视图"
+
+#~ msgid "Select year"
+#~ msgstr "选择年份"
+
+#~ msgid "Budget year"
+#~ msgstr "预算年份"
+
+#~ msgid "Change budget year"
+#~ msgstr "更改预算年份"
+
+#~ msgid ""
+#~ "A budget with the name '%1' already exists. It is not advisable to have "
+#~ "multiple budgets with the same identification name. Are you sure you "
+#~ "would like to rename the budget?"
+#~ msgstr ""
+#~ "已经存在名为\"%1\"的预算。不建议多个预算使用同样的名字。是否重命名该预算？"
+
+#~ msgid "Creates a new budget"
+#~ msgstr "创建新预算"
+
+#~ msgid "Use this to create a new empty budget."
+#~ msgstr "用它来创建新的空预算。"
+
+#~ msgctxt "New budget"
+#~ msgid "New"
+#~ msgstr "新建"
+
+#~ msgid "Rename the current selected budget."
+#~ msgstr "重命名当前选中的预算."
+
+#~ msgid "Use this to start renaming the selected budget."
+#~ msgstr "用它来重命名选中的预算"
+
+#~ msgid "Delete the current selected budget"
+#~ msgstr "删除当前选中的预算"
+
+#~ msgid "Use this to delete the selected budget."
+#~ msgstr "用它来删除选中的预算"
+
+#~ msgctxt "@title header of the budget name column"
+#~ msgid "Name"
+#~ msgstr "名称"
+
+#~ msgid "Upd"
+#~ msgstr "更新"
+
+#~ msgid "Res"
+#~ msgstr "重置"
+
+#~ msgid "Forecast view"
+#~ msgstr "预测视图"
+
+#~ msgid "Copy this report to the clipboard"
+#~ msgstr "将此报价拷贝到剪贴板中"
+
+#~ msgid "Copy"
+#~ msgstr "复制"
+
+#~ msgid "Close this window"
+#~ msgstr "关闭此窗口"
+
+#~ msgid ""
+#~ "*.css|CSS files\n"
+#~ "*|All files (*)"
+#~ msgstr ""
+#~ "*.css|CSS 文件\n"
+#~ "*|所有文件 (*)"
+
+#~ msgid "Woob"
+#~ msgstr "Woob"
+
+#~ msgid "Loading securities..."
+#~ msgstr "正在加载证券..."
+
+#~ msgid "Loading reports..."
+#~ msgstr "正在加载报表..."
+
+#~ msgid "Exception while creating a %1 element: %2"
+#~ msgstr "在创建%1元素时出错：%2"
+
+#~ msgid "Loading file information..."
+#~ msgstr "正在加载文件信息..."
+
+#~ msgid "Loading user information..."
+#~ msgstr "正在加载用户信息..."
+
+#~ msgid "Saving accounts..."
+#~ msgstr "正在保存账户..."
+
+#~ msgid "Saving transactions..."
+#~ msgstr "正在保存交易..."
+
+#~ msgid "Saving reports..."
+#~ msgstr "正在保存报表..."
+
+#~ msgid "Saving budgets..."
+#~ msgstr "正在保存预算..."
+
+#~ msgid "Saving online banking orders..."
+#~ msgstr "正在保存网上银行订单..."
+
+#~ msgid "Saving costcenters..."
+#~ msgstr "正在保存 costcenters..."
+
+#~ msgid "XML storage"
+#~ msgstr "XML 存储"
+
+#~ msgid "Always show a No. field in transaction form"
+#~ msgstr "始终在交易记录输入界面中显示序号栏目"
+
+#~ msgid "Show splash screen during startup"
+#~ msgstr "启动时显示飞溅屏幕"
+
+#~ msgid "Show title bar on each view"
+#~ msgstr "在每个视图上显示标题栏"
+
+#~ msgid "Select online banking plugin"
+#~ msgstr "选择网银插件"
+
+#~ msgid "Reconcile"
+#~ msgstr "对账"
+
+#~ msgid "Reconcile - disabled because you are currently reconciling <b>%1</b>"
+#~ msgstr "核对 - 您正在核对 <b>%1</b>，故已禁用此操作"
+
+#~ msgid "Add reversing transactions to the currently selected"
+#~ msgstr "向所选交易添加反向交易"
+
+#~ msgid ""
+#~ "At least one split of the selected transactions has been reconciled. Do "
+#~ "you wish to continue to edit the transactions anyway?"
+#~ msgstr "选中交易里的至少一项拆分已经完成了对账。您想要继续编辑这些交易吗？"
+
+#~ msgid "Cannot create transactions when no account is selected."
+#~ msgstr "没有选择账户，因此无法创建交易。"
+
+#~ msgid "Cannot edit transactions in the context of a category."
+#~ msgstr "无法在交易类别上下文里修改交易。"
+
+#~ msgid "Cannot edit mixed investment action/type transactions together."
+#~ msgstr "无法同时编辑投资交易和非投资交易。"
+
+#~ msgid ""
+#~ "Cannot edit investment transactions and non-investment transactions "
+#~ "together."
+#~ msgstr "无法同时编辑投资交易和非投资交易。"
+
+#~ msgid "Cannot edit investment transactions in the context of this account."
+#~ msgstr "无法在此账户上下文里编辑投资交易。"
+
+#~ msgid ""
+#~ "<p>Please select what you want to do: discard the changes, save the "
+#~ "changes or continue to edit the transaction.</p><p>You can also set an "
+#~ "option to save the transaction automatically when e.g. selecting another "
+#~ "transaction.</p>"
+#~ msgstr ""
+#~ "您对本交易的修改尚未保存，是否取消？<p>- <b>是</b>取消对交易的修改并退出"
+#~ "<br>- <b>否</b>在保存对交易的修改并退出。<p>您可以通过选项的设置来在诸如选"
+#~ "择其他交易等情况时，自动保存交易修改。"
+
+#~ msgid "End transaction edit"
+#~ msgstr "结束交易编辑"
+
+#~ msgid ""
+#~ "<p>Please select what you want to do: discard or save the changes.</"
+#~ "p><p>You can also set an option to save the transaction automatically "
+#~ "when e.g. selecting another transaction.</p>"
+#~ msgstr ""
+#~ "<p>您尚未保存交易修改，要保存吗？</p><p>您还可以设置相关选项，在如选择其他"
+#~ "交易时自动保存。</p>"
+
+#~ msgid "Date: %1"
+#~ msgstr "日期：%1"
+
+#~ msgctxt "Name for unknown payee"
+#~ msgid "Unknown"
+#~ msgstr "未知"
+
+#~ msgid "Payee: %1"
+#~ msgstr "收款人：%1"
+
+#~ msgid "Memo: %1"
+#~ msgstr "备忘：%1"
+
+#~ msgid "Statement Details"
+#~ msgstr "对账单详细信息"
+
+#~ msgid "Statement Deposit Details"
+#~ msgstr "对账单存款详细信息"
+
+#~ msgid "Statement Payment Details"
+#~ msgstr "对账单支付详细信息"
+
+#~ msgid "%1 deposit (%2)"
+#~ msgid_plural "%1 deposits (%2)"
+#~ msgstr[0] "%1 笔存款 (%2)"
+
+#~ msgid "%1 charge (%2)"
+#~ msgid_plural "%1 charges (%2)"
+#~ msgstr[0] "%1 笔赊购账 (%2)"
+
+#~ msgid "%1 payment (%2)"
+#~ msgid_plural "%1 payments (%2)"
+#~ msgstr[0] "%1 笔付款 (%2)"
+
+#~ msgctxt "%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments"
+#~ msgid "%1, %2"
+#~ msgstr "%1, %2"
+
+#~ msgid "Last reconciled: %1"
+#~ msgstr "上次对账：%1"
+
+#~ msgid "Cannot process transaction with focus if it is not selected."
+#~ msgstr "无法处理未被选中的交易。"
+
+#~ msgid "Unable to delete transaction(s)"
+#~ msgstr "无法删除交易"
+
+#~ msgid "Running automatic reconciliation"
+#~ msgstr "运行自动对账"
+
+#~ msgid "Your Financial Summary"
+#~ msgstr "您的财政状况一览"
+
+#~ msgid "Show KMyMoney welcome page"
+#~ msgstr "显示KMyMoney欢迎屏幕"
+
+#~ msgid "Today's due payments"
+#~ msgstr "本日到期支付"
+
+#~ msgid "Select Account:"
+#~ msgstr "选择账户："
+
+#~ msgid "Change the security information of the selected entry."
+#~ msgstr "修改关于此选择项的证券信息。"
+
+#~ msgid "Remove this security item from the file"
+#~ msgstr "从文件中删除此证券项。"
+
+#~ msgid "New ledger"
+#~ msgstr "新建账簿"
+
+#~ msgid "Do you want to show <b>%1</b> column on every loaded view?"
+#~ msgstr "你想在每个已加载的视图上显示 <b>%1</b> 列吗？"
+
+#~ msgid "Do you want to hide <b>%1</b> column on every loaded view?"
+#~ msgstr "你想在每个已加载的视图上隐藏 <b>%1</b> 列吗？"
+
+#~ msgid "Unable to add schedule: %1"
+#~ msgstr "无法添加计划：%1"
+
+#~ msgid "Use this to create a new payee."
+#~ msgstr "用它来创建新的收款人。"
+
+#~ msgctxt "New payee"
+#~ msgid "New"
+#~ msgstr "新建"
+
+#~ msgid "Rename the current selected payee"
+#~ msgstr "重命名当前选中的收款人"
+
+#~ msgid "Use this to start renaming the selected payee."
+#~ msgstr "用它来开始重命名选中的收款人。"
+
+#~ msgid "Delete selected payee(s)"
+#~ msgstr "删除所选收款人"
+
+#~ msgid ""
+#~ "Use this to delete the selected payee. You can also select multiple "
+#~ "payees to be deleted."
+#~ msgstr "使用此选项删除所选的收款人 (可多选)。"
+
+#~ msgid "Merge multiple selected payees"
+#~ msgstr "合并选中的多个收款人"
+
+#~ msgid "Use this to merge multiple selected payees."
+#~ msgstr "使用此选项合并选中的多个收款人。"
+
+#~ msgid "Error executing item"
+#~ msgstr "执行项目时出错"
+
+#~ msgid "Unable to filter account"
+#~ msgstr "无法过滤账户"
+
+#~ msgid "Bills"
+#~ msgstr "账单"
+
+#~ msgid "Loans"
+#~ msgstr "贷款"
+
+#~ msgid "Type/Name"
+#~ msgstr "类型/名称"
+
+#~ msgid "Frequency"
+#~ msgstr "频率"
+
+#~ msgid "Unable to load accounts: "
+#~ msgstr "无法加载账户："
+
+#~ msgid "Remove Tag"
+#~ msgstr "删除标签"
+
+#~ msgid "Creates a new tag"
+#~ msgstr "创建新标签"
+
+#~ msgid "Use this to create a new tag."
+#~ msgstr "使用此选项创建新标签。"
+
+#~ msgid "Rename the current selected tag"
+#~ msgstr "重命名当前所选的标签"
+
+#~ msgid "Use this to start renaming the selected tag."
+#~ msgstr "使用此选项重命名所选标签。"
+
+#~ msgid "Delete the current selected tag"
+#~ msgstr "删除当前所选的标签"
+
+#~ msgid "Use this to delete the selected tag."
+#~ msgstr "使用此选项删除所选标签。"
+
+#~ msgid "What's new in KMyMoney %1"
+#~ msgstr "KMyMoney %1 的新功能"
+
+#~ msgid "* General changes"
+#~ msgstr "* 常规更改"
+
+#~ msgid "- Port to KDE frameworks and Qt5"
+#~ msgstr "- 移植到 KDE 框架和 Qt5"
+
+#~ msgid "* User Interface changes"
+#~ msgstr "* 用户界面更改"
+
+#~ msgid "- Show more tooltips why features are not available"
+#~ msgstr "- 显示更多工具提示，解释功能无法使用的原因"
+
+#~ msgid "- Improved compatibility with dark color schemes"
+#~ msgstr "- 提高了与深色主题的兼容性"
+
+#~ msgid "- Fast switching of main views via Ctrl + number key"
+#~ msgstr "- 使用 Ctrl + 数字键快速切换主视图"
+
+#~ msgid "- Improved keyboard navigation"
+#~ msgstr "- 提升了键盘导航的体验"
+
+#~ msgid "- View columns are user selectable"
+#~ msgstr "- 用户现在可以选择视图列"
+
+#~ msgid "- Use QWebEngine in favor of KHTML when available"
+#~ msgstr "- 尽量使用 QWebEngine 加载 KHTML"
+
+#~ msgid "* Im-/Exporter"
+#~ msgstr "* 导入工具或导出工具"
+
+#~ msgid "- Added support for Woob"
+#~ msgstr "- 添加了对 Woob 的支持"
+
+#~ msgid "- Improved CSV importer"
+#~ msgstr "- 改进CSV导入器"
+
+#~ msgid "- Added CSV exporter"
+#~ msgstr "- 添加了 CSV 导出工具"
+
+#~ msgid "- Improved payee matching when importing transactions"
+#~ msgstr "- 导入交易：改进了收款人的匹配规则"
+
+#~ msgid "* Online services"
+#~ msgstr "* 在线服务"
+
+#~ msgid "- Updated list of application versions for OFX direct import"
+#~ msgstr "- OFX 直接导入：更新了应用程序版本列表"
+
+#~ msgid "- Get rid of Yahoo as price source"
+#~ msgstr "- 摆脱了对雅虎汇率源的依赖"
+
+#~ msgid "- Supporting OFX client uid required by some banks"
+#~ msgstr "- 支持 OFX 客户端 uid，部分银行需要依赖此参数"
+
+#~ msgid "- Support price download by ISIN"
+#~ msgstr "- 支持下载 ISIN 汇率"
+
+#~ msgid "Online statement balance: %1"
+#~ msgstr "网上对账单余额：%1"
+
+#~ msgid "Credit"
+#~ msgstr "权益"
+
+#~ msgid "Debit"
+#~ msgstr "借方"
+
+#~ msgid "Pay to"
+#~ msgstr "付给"
+
+#~ msgctxt "Deposits onto account"
+#~ msgid "Deposits"
+#~ msgstr "存款"
+
+#~ msgctxt "Payments towards credit card"
+#~ msgid "Payments"
+#~ msgstr "支付"
+
+#~ msgctxt "Payments made from account"
+#~ msgid "Payments"
+#~ msgstr "支付"
+
+#~ msgctxt "Payments made with credit card"
+#~ msgid "Charges"
+#~ msgstr "费用"
+
+#~ msgctxt "Reconcile state 'Not reconciled'"
+#~ msgid "Not reconciled"
+#~ msgstr "尚未对账"
+
+#~ msgctxt "Reconcile state 'Cleared'"
+#~ msgid "Cleared"
+#~ msgstr "已结算"
+
+#~ msgctxt "Reconcile state 'Reconciled'"
+#~ msgid "Reconciled"
+#~ msgstr "已对账"
+
+#~ msgctxt "Reconcile state 'Frozen'"
+#~ msgid "Frozen"
+#~ msgstr "冻结"
+
+#~ msgctxt "Unknown reconcile state"
+#~ msgid "Unknown"
+#~ msgstr "未知"
+
+#~ msgid "Ratio"
+#~ msgstr "份额"
+
+#~ msgid "Fee Amount"
+#~ msgstr "手续费金额"
+
+#~ msgid "Account Types"
+#~ msgstr "账户类型"
+
+#~ msgctxt "The balance of the selected budget"
+#~ msgid "Balance: "
+#~ msgstr "余额："
+
+#~ msgctxt "Activity for income categories"
+#~ msgid "Received"
+#~ msgstr "接收"
+
+#~ msgctxt "Activity for expense categories"
+#~ msgid "Paid"
+#~ msgstr "已付款"
+
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "从"
+
+#~ msgctxt "Enter todays date into date input widget"
+#~ msgid "T"
+#~ msgstr "T"
+
+#~ msgid "Closed tag"
+#~ msgstr "已关闭标签"
+
+#~ msgid "Prior transactions possibly filtered"
+#~ msgstr "之前的交易可能已被过滤"
+
+#~ msgid "Reconciled Balance: %1"
+#~ msgstr "已核对余额：%1"
+
+#~ msgid "Online Statement Balance: %1"
+#~ msgstr "网上对账单余额：%1"
+
+#~ msgctxt "Unknown payee"
+#~ msgid "Unknown"
+#~ msgstr "未知"
+
+#~ msgctxt "Unknown category"
+#~ msgid "Unknown"
+#~ msgstr "未知"
+
+#~ msgctxt "Unknown security"
+#~ msgid "Unknown"
+#~ msgstr "未知"
+
+#~ msgctxt "label for status combo"
+#~ msgid "Stat&us"
+#~ msgstr "状态(&U)"
+
+#~ msgid "Sell"
+#~ msgstr "卖"
+
+#~ msgid "Buy"
+#~ msgstr "买"
+
+#~ msgid "Investment transaction"
+#~ msgstr "投资交易"
+
+#~ msgid "KMyMoney has matched the two selected transactions (result above)"
+#~ msgstr "KMyMoney已经用手工输入的交易匹配了一个下载的交易（结果在上方）"
+
+#~ msgid "Bank entry:"
+#~ msgstr "银行条目："
+
+#~ msgid "Your entry:"
+#~ msgstr "您的条目："
+
+#~ msgid "&Deposit"
+#~ msgstr "存款(&D)"
+
+#~ msgid "&Transfer"
+#~ msgstr "转账(&r)"
+
+#~ msgid "&Withdrawal"
+#~ msgstr "取款(&W)"
+
+#~ msgid "&Payment"
+#~ msgstr "偿还(&P)"
+
+#~ msgid "&Charge"
+#~ msgstr "借款(&C)"
+
+#~ msgid "&Decrease"
+#~ msgstr "减少(&D)"
+
+#~ msgid "&Increase"
+#~ msgstr "增加(&I)"
+
+#~ msgid "No Title specified"
+#~ msgstr "未指定标题"
+
+#~ msgid "Preferred account"
+#~ msgstr "设为偏好账户"
+
+#~ msgid "Enter the ticker symbol (e.g. RHAT)."
+#~ msgstr "请输入股票代码（如RHT等）。"
+
+#~ msgid "Enter the CUSIP/ISIN/WKN identification number here"
+#~ msgstr "在这里填入CUSIP/ISIN/WKN身份认证码"
+
+#~ msgid "Routing number"
+#~ msgstr "区号"
+
+#~ msgid ""
+#~ "<p>...that you can change the sort order of ledger entries by\n"
+#~ "right-clicking the header of the ledger view?\n"
+#~ msgstr ""
+#~ "<p>...通过右击账簿视图的表头，您可以对账簿视图的排序顺序进行修改？\n"
+
+#~ msgid ""
+#~ "<p>...that you can start editing a transaction by double-clicking on the\n"
+#~ "transaction in the register?\n"
+#~ msgstr "<p>...通过双击账簿中的交易，您可以对它进行编辑？</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can show more details of the selected transaction in the\n"
+#~ "register by selecting the 'ledger lens' feature in the settings dialog?\n"
+#~ msgstr ""
+#~ "<p>...通过在设置对话框中选中“在账簿中显示选中交易详细信息”复选框，您可以在"
+#~ "账簿中显示关于选中交易的详细信息？\n"
+
+#~ msgid ""
+#~ "<p>...that transactions with no category assigned or split\n"
+#~ "transactions with unassigned values are marked with an exclamation mark \n"
+#~ "on a yellow triangle in the register?\n"
+#~ msgstr ""
+#~ "<p>...未指定类别的交易，或者被拆分但还存在未指派金额的交易，在账簿中用黄色"
+#~ "三角标记标出？</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can show all details of the transactions in the register\n"
+#~ "by typing &lt;Ctrl-T&gt; or selecting the 'View -> Show Transaction "
+#~ "Detail'\n"
+#~ "menu entry? You can turn this feature off the same way.\n"
+#~ msgstr ""
+#~ "<p>...通过按下&lt;Ctrl-T&gt;或者选中“设置/显示交易详细信息”菜单项，您可以"
+#~ "让账簿显示全部交易的详细信息？通过同样的方法您也可以关闭此功能。</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can switch between a listing of all accounts or\n"
+#~ "an icon view of all asset and liability accounts with the tabs\n"
+#~ "in the accounts view?\n"
+#~ msgstr "<p>...您可以通过账户视图中的标签页来切换账户列表和账户图标视图？\n"
+
+#~ msgid "<p>...that the KMyMoney development team wishes you a nice day?\n"
+#~ msgstr "<p>...KMyMoney开发小组祝您身体健康，万事如意！</p>\n"
+
+#~ msgid ""
+#~ "<p>...you can use your own external filter program to convert any\n"
+#~ "import format to QIF on the fly? See the QIF profile editor for\n"
+#~ "more details.\n"
+#~ msgstr ""
+#~ "<p>...您可以使用您自己的外部过滤程序来将任何格式的数据动态转换成QIF格式？"
+#~ "打开QIF配置编辑器以获得更多信息。</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can create a scheduled transaction from an existing\n"
+#~ "one by selecting the context menu on a transaction in the ledger\n"
+#~ "or the \"More...\"-menu in the transaction form?\n"
+#~ msgstr ""
+#~ "<p>...通过在账簿中右键点击交易项，或者在交易输入界面中点击“更多...”打开右"
+#~ "键菜单，您可以通过现有交易创建计划交易？\n"
+
+#~ msgid ""
+#~ "<p>...that you can modify the colors and fonts used for the ledgers\n"
+#~ "via <i>Configure/Colors and Fonts</i>?\n"
+#~ msgstr ""
+#~ "<p>...通过配置对话框中的“字体”和“颜色”您可以修改账簿显示使用的颜色和字体？"
+#~ "</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can hide transactions prior to a specific date?\n"
+#~ "The date can be modified via <i>Configure/General/Filter</i>.\n"
+#~ msgstr ""
+#~ "<p>...您可以隐藏发生在特定日期前的交易？\n"
+#~ "通过配置对话框中的“账簿/过滤器”可以设置该日期。\n"
+
+#~ msgid ""
+#~ "<p>...that you can customize the \"Home-Page\"\n"
+#~ "via <i>Configure/Home</i>?\n"
+#~ msgstr "<p>...您可以通过配置对话框中的“主界面”来自定义主界面？</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can add more data columns to accounts tables\n"
+#~ "on your \"Home-Page\" via <i>Configure/Home/Account information display</"
+#~ "i>?\n"
+#~ msgstr "<p>...您可以通过配置对话框中的“主界面”来自定义主界面？</p>\n"
+
+#~ msgid ""
+#~ "<p>...that you can enter new transactions even while reconciling\n"
+#~ "an account? You can also make the transaction form visible.\n"
+#~ msgstr ""
+#~ "<p>...即使在对账时您也可以输入新的交易？您也可以让 KMyMoney 显示交易输入窗"
+#~ "口。\n"
+
+#~ msgid ""
+#~ "<p>... that you can import your bank statements even without a network \n"
+#~ "connection? Just select the file (OFX or QIF) from the File->Import menu."
+#~ "</p>\n"
+#~ "<p>Provided by Jose Jorge</p>\n"
+#~ msgstr ""
+#~ "<p>... 即使没有连接到网络，您也可以导入银行对账信息？\n"
+#~ "只需要从菜单访问 文件 -> 导入文件 (OFX或QIF格式)。</p>\n"
+#~ "<p>由 Jose Jorge 提供</p>\n"
