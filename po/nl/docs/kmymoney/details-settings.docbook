@@ -5,34 +5,25 @@
     <author
 >&Roger.Lum; &Roger.Lum.mail; </author>
     <author
-><personname
-><firstname
->Michael</firstname
-><surname
->Carpino</surname
-></personname
-> <email
->mfcarpino@gmail.com</email
-> </author>
+>&Michael.Carpino; &Michael.Carpino.mail;</author>
     <author
 >&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->2019-03-31</date>
+>2024-12-01</date>
   <releaseinfo
->5.0.3</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >&kmymoney;-instellingen</title>
 
 <para
->De onderstaand beschreven instellingen wijzigen het gedrag van &kmymoney;, biedt u het aanpassen om in uw behoeften voor uw unieke financiële zaken te en om uiterlijk en gedrag overeen te laten komen met uw persoonlijkheid. Deze instellingen kunnen gewijzigd worden via menu-item <menuchoice
+>De instellingen beschreven in dit hoofdstuk wijzigen het gedrag van &kmymoney;, biedt u het aanpassen om in uw behoeften voor uw unieke financiële zaken te en om uiterlijk en gedrag overeen te laten komen met uw persoonlijkheid. Deze instellingen kunnen gewijzigd worden via het menu-item <menuchoice
 ><guimenu
 >Instellingen</guimenu
 ><guimenuitem
 >&kmymoney; configureren...</guimenuitem
-></menuchoice
+> </menuchoice
 > of door de sneltoets <keycombo action="simul"
 >&Ctrl; &Shift;<keycap
 >,</keycap
@@ -42,47 +33,59 @@
 > worden gebruikt. </para>
 
 <para
->Links van de instellingendialoog is een lijst met pictogrammen en labels, elk voor een specifiek gebied van het programma. Wanneer u op een van die pictogrammen klikt, zal het rechter deel van de dialoog besturing tonen voor de configuratie van dat gebied van het programma, vaak opgedeeld in verschillende tabbladen. </para>
+>Links van de de <guilabel
+>Configureren</guilabel
+> of instellingendialoog is een lijst met pictogrammen en labels, elk voor een specifiek gebied van het programma. Wanneer u op een van die pictogrammen klikt, zal het rechter deel van de dialoog besturing tonen voor de configuratie van dat gebied van het programma, vaak opgedeeld in verschillende tabbladen. </para>
 
-<sect1 id="details.settings.general">
-<title
+<sect1 id="details.settings.general"
+><title
 >Algemeen</title>
 
-<sect2 id="details.settings.general.global">
-<title
+<sect2 id="details.settings.general.global"
+><title
 >Tabblad Globaal</title>
+<screenshot>
+  <screeninfo
+>tabbladen configuratie van KMyMoney, algemeen, globaal</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_general_global.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>tabbladen configuratie van KMyMoney, algemeen, globaal</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
+<!-- FIXME: I would prefer a more consistent hierarchy and use of levels here, such
+     as with using sectX and variablelist.  For now, I minimize layout changes. -->
 <variablelist>
-  <varlistentry>
-    <term
-><guilabel
->Opstartopties</guilabel
-></term>
-    <listitem>
-      <para
->Als u het vakje <guilabel
->Opstartscherm tonen</guilabel
-> activeert, zal &kmymoney; het opstartscherm tonen wanneer &kmymoney; start. Het opstartscherm toont welke versie van het programma u gebruikt in de hoek linksonder. Deactiveren van het vakje laat het opstartscherm niet verschijnen bij opstarten.</para>
-    </listitem>
-  </varlistentry>
-
   <varlistentry>
     <term
 ><guilabel
 >Opties voor automatisch opslaan</guilabel
 ></term>
-<!-- I would prefer to use a more consistent hierarchy and use of levels on this
-     page, but for now, I'm minimizing changes. -->
     <listitem>
+      <para
+>Een automatisch opgeslagen bestand is gewoon een kopie van uw gegevensbestand. Het hoofdpunt hiervan is dat ze automatisch aangemaakt worden, volgens de instellingen in de configuratie, dus u hoeft geen aandacht te geven aan het nemen van actie. Elke automatisch aangemaakte bestand zal dezelfde map zijn als het nu geopende gegevensbestand. </para>
+
       <para
 >Het vakje <guilabel
 >Periodiek automatisch opslaan</guilabel
-> instrueert &kmymoney; om uw bestanden na een gedefineerd interval automatisch op te slaan. De standaard waarde is 10 minuten. U kunt deze instelling wijzigen van 0 (reservekopie maken onmiddellijk na invoeren van een transactie) tot 60 minuten.</para>
+> instrueert &kmymoney; om uw bestand na het interval gedefinieerd door het veld <guilabel
+>minuten</guilabel
+> automatisch op te slaan. De standaard waarde is 10 minuten. U kunt deze instelling wijzigen van 0 (reservekopie maken onmiddellijk na invoeren van een transactie) tot 60 minuten. </para>
 
       <para
 >Het vakje <guilabel
 >Automatisch opslaan wanneer bestand is gewijzigd bij afsluiten</guilabel
-> instrueert &kmymoney; om uw bestand automatisch op te slaan wanneer het programma wordt afgesloten. U hebt ook de optie, bij afsluiten van het programma, om een reservekopie te maken van uw &kmymoney;-bestand. Het aantal te bewaren reservekopieën kan ingesteld worden op 0 (uit) tot 20 reservekopieën. Elk reservekopiebestand zal opgeslagen worden in dezelfde map als het hoofdbestand. Ze zullen sequentieel gelabeld worden met 1 als de meest recente.</para>
+> instrueert &kmymoney; om uw bestand automatisch op te slaan wanneer het programma wordt afgesloten, maar alleen als er wijzigingen zijn gemaakt. U hebt ook de optie, bij afsluiten van het programma, om een reservekopie te maken van uw &kmymoney;-bestand. </para>
+
+      <para
+>Het <guilabel
+>Aantal te bewaren reservekopieën</guilabel
+> kan ingesteld worden op 0 (uit) tot 20 reservekopieën. De automatisch opgeslagen bestanden zullen opgeslagen worden in dezelfde map als het hoofdbestand. Als uw gegevensbestand MijnFinancien.kmy is, dan zal wanneer een automatisch opgeslagen bestand wordt gemaakt, het MijnFinancien.kmy.1~ worden genoemd. Elke bestaande automatisch opgeslagen bestand zal zijn nummer opgehoogd hebben met 1, tot het gespecificeerde getal. </para>
     </listitem>
   </varlistentry>
 
@@ -93,7 +96,7 @@
 ></term>
     <listitem>
       <para
->Voer de dag en maand in van uw fiscale jaar. Deze waarde wordt gebruikt voor budgetten en sommige rapporten.</para>
+>&kmymoney; biedt u het specificeren van een fiscaal jaar verschillend van het kalenderjaar. Om dat te doen, voer de dag en maand in waarop uw fiscale jaar begint. Deze waarde wordt gebruikt voor budgetten en sommige rapporten. </para>
     </listitem>
   </varlistentry>
 
@@ -106,42 +109,51 @@
       <para
 >Deze instelling heeft geen direct effect op de werking van &kmymoney;, maar biedt een gemakkelijke manier om elk extern hulpmiddel, zoals een geavanceerde rekenmachine, te starten. De eerste stap is om het volledige pad naar uw gekozen programma in het tekstvak <guilabel
 >Rekenmachine</guilabel
-> te zetten. Er zijn dan twee manieren om het programma te starten.</para>
+> te zetten. </para>
+
       <para
->Als eerste kunt u menu-item <menuchoice
-><guimenu
+>Er is nu geen direct menu-item om de rekenmachine te starten of welk extern programma dat u hebt ingesteld. Er zijn dan twee manieren om het programma te starten. </para>
+
+      <para
+>Als eerste kunt u menu-item <guimenu
 >Instellingen</guimenu
 ><guimenuitem
 >Werkbalken configuren...</guimenuitem
-></menuchoice
-> gebruiken om het pictogram <guilabel
->Rekenmachine</guilabel
-> op de werkbalk te plaatsen. Daarna, wanneer op dat pictogram op de werkbalk klikt zal &kmymoney; de geselecteerde toepassing starten.</para>
-      <!-- FIXME since the Settings menu is deferred to the Frameworks docs and
-           not explicitly described in this manual, it would at least be nice to
-           refer to the actual Calculator icon here, but I cannot find the
-           source png.  It might also be nice to have a link to Settings Menu
-           doc page. -->
+> gebruiken om het Rekenmachinepictogram <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="icon-accessories-calculator.svg" format="SVG"/> </imageobject
+> </inlinemediaobject
+> </guiicon
+> op de werkbalk te plaatsen. Daarna, wanneer op dat pictogram op de werkbalk klikt zal &kmymoney; de geselecteerde toepassing starten. </para>
+
       <para
->Ten tweede kunt u menu-item <menuchoice
-><guimenu
+>Ten tweede kunt u menu-item <guimenu
 >Instellingen</guimenu
-><guimenuitem
->Sneltoetsen configuren...</guimenuitem
-></menuchoice
-> gebruiken om een eigen sneltoets in te stellen. (De invoer is onder &kmymoney;/Rekenmachine in die lijst.) U kunt dan die sneltoets gebruiken om de toepassing te starten.</para>
-      <!-- FIXME is not currently possible to launch the calculator from some menu
-           item.  I have filed a wishlist, and when implemented, it should be
-           described here, probably as the first choice. -->
-       
+> <guimenuitem
+>Sneltoetsen configureren...</guimenuitem
+> gebruiken om een eigen sneltoets in te stellen. (De invoer is onder &kmymoney;/Rekenmachine in die lijst.) U kunt dan die sneltoets gebruiken om de toepassing te starten. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="details.settings.general.views">
-<title
+<sect2 id="details.settings.general.views"
+><title
 >Tabblad Weergaven</title>
+<screenshot>
+  <screeninfo
+>KMyMoney-configuratie, algemeen, tabblad weergaven</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_general_views.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>KMyMoney-configuratie, algemeen, tabblad weergaven</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <variablelist>
   <varlistentry>
@@ -151,7 +163,11 @@
 ></term>
     <listitem>
       <para
->Wanneer &kmymoney; opstart geeft deze optie aan of te beginnen met de Hoofdweergave of met de weergave getoond toen het programma als laatste werd gesloten.</para>
+>Wanneer &kmymoney; opstart geeft deze optie aan of te beginnen met de Hoofdweergave (<guilabel
+>Met beginpagina beginnen</guilabel
+>) of met de weergave getoond toen het programma als laatste werd gesloten (<guilabel
+> Met laatst geselecteerde weergave beginnen</guilabel
+>). </para>
     </listitem>
   </varlistentry>
 
@@ -162,148 +178,186 @@
 ></term>
     <listitem>
       <para
->U kunt een van drie algemene indelingen voor &kmymoney; selecteren om te gebruiken. Als u de Lijst- of Boomstructuurweergave selecteert, zullen de pictogrammen en hun labels gelokaliseerd worden aan de linkerkant van het venster. De Lijstweergave toont grotere pictogrammen terwijl de Boomstructuurweergave kleinere pictogrammen heeft. De Tabbladweergave lokaliseert de pictogrammen en labels verspreidt bovenaan het venster.</para>
+>Dit laat u een van drie indelingen voor de weergaveselectie selecteren, waar u kiest Lijst- of Boomstructuurweergave selecteert, de pictogrammen en hun labels gelokaliseerd zijn gelokaliseerd aan de linkerkant van het venster. De Lijstweergave toont grotere pictogrammen boven de naam van elke weergave, terwijl de Boomstructuurweergave kleinere pictogrammen heeft links van de namen. De <guilabel
+>Tabblad</guilabel
+>weergave lokaliseert de pictogrammen en labels in tabbladen verspreidt bovenaan het venster. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><guilabel
->Titelbalk op elke pagina weergeven</guilabel
-></term>
+    <term>
+      <guilabel
+>Synchroniseer rekening selectie van het Grootboekweergave met Investeringenweergave </guilabel>
+    </term>
     <listitem>
       <para
->Dit vakje activeren zal de blauwe titelbalk van &kmymoney; tonen aan de bovenkant van elke pagina. Deactiveren zal de titelbalk verwijderen en een groter gebied bieden voor het bekijken van de inhoud van elke pagina.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><guilabel
->Synchroniseer rekening selectie van het kasboek met het Investeringen overzicht</guilabel
-></term>
-    <listitem>
-      <para
->Als deze optie is geselecteerd tonen zullen de rekeningen getoond in de Grootboekweergave en Investeringenweergave worden gesynchroniseerd, wat betekent dat als u de getoonde rekening in een van de weergaven en daarna omschakelt naar de andere weergave, de informatie voor dezelfde rekening getoond zal worden. Dit vergroot de efficiency van navigeren tussen deze twee tabbladweergaven. Als het niet is geselecteerd zal het selecteren van een van deze weergaven dezelfde rekening tonen zoals eerder geselecteerd in die weergave, onafhankelijk van de rekening geselecteerd in de andere weergave.</para>
+>Als deze optie is geselecteerd zullen de rekeningen getoond in de Grootboekweergave en Investeringenweergave worden gesynchroniseerd, wat betekent dat als u de getoonde rekening in een van de weergaven en daarna omschakelt naar de andere weergave, de informatie voor dezelfde rekening getoond zal worden. Dit vergroot de efficiency van navigeren tussen deze twee weergaven. Als het niet is geselecteerd zal het selecteren van een van deze weergaven dezelfde rekening tonen zoals eerder geselecteerd in die weergave, onafhankelijk van de rekening geselecteerd in de andere weergave. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="details.settings.general.filter">
-<title
+<sect2 id="details.settings.general.filter"
+><title
 >Tabblad Filter</title>
+<screenshot>
+  <screeninfo
+>KMyMoney-configuratie, algemeen, tabblad filter</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_general_filter.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>KMyMoney-configuratie, algemeen, tabblad filter</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
-<sect3>
-<title
->Rekeningen / Categorieën</title>
 <variablelist>
   <varlistentry>
     <term
-><guilabel
+>Rekeningen / Categorieën</term>
+    <listitem>
+      <para
+>Het vak <guilabel
 >Ongebruikte categorieën niet tonen</guilabel
-></term>
-    <listitem>
-      <para
->Dit vakje activeren verbergt ongebruikte categorieën in de Categorieënweergave. Een verborgen categorie is nog steeds beschikbaar als een transactie dat vereist. Door een verborgen categorie in het kasboek te typen zal het voor gebruik beschikbaar worden.</para>
-    </listitem>
-  </varlistentry>
+> activeren verbergt ongebruikte categorieën in de Categorieënweergave. Een verborgen categorie is nog steeds beschikbaar als een transactie dat vereist. Door een verborgen categorie in het grootboek te typen zal het voor gebruik beschikbaar worden. </para>
 
-  <varlistentry>
-    <term
-><guilabel
->Waardepapierrekeningen tonen</guilabel
-></term>
-    <listitem>
       <para
->Standaard zijn Waardepapierrekeningen verborgen in de Rekeningenweergave. Deze optie selecteren zal de waardepapierrekeningen tonen in de Rekeningenweergave. Waardepapierrekeningen worden gebruikt om individuele waardepapieren of investeringen in een Investeringenrekening te volgen. Dit zou niet verward moeten worden met de groep rekeningen <emphasis
+>Waardepapierrekeningen worden gebruikt om individuele waardepapieren of investeringen in een Investeringenrekening te volgen. Dit zou niet verward moeten worden met de groep rekeningen <emphasis
 >Waardepapieren</emphasis
-> op het hoogste niveau, die de rekening(en) omvatten die de openingssaldo's voor andere rekeningen bevatten.</para>
-    </listitem>
-  </varlistentry>
+> op het hoogste niveau, die de rekening(en) omvatten die de openingssaldo's voor andere rekeningen bevatten.Standaard worden waardepapierrekeningen verborgen in de Rekeningenweergave. Het vak <guilabel
+>Waardepapierrekeningen tonen</guilabel
+> activeren zal de waardepapierrekeningen in de Rekeningenweergave tonen. </para>
 
-  <varlistentry>
-  <term
-><guilabel
->Toon categorieën in de weergave van de lijst rekeningen</guilabel
-></term>
-    <listitem>
       <para
->Standaard worden Categorieën verborgen in de Rekeningenweergave. Deze optie selecteren zal de Categorieën in de Rekeningenweergave tonen.</para>
-    </listitem>
-  </varlistentry>
+>Standaard worden Categorieën verborgen in de Rekeningenweergave. Het vak <guilabel
+>Categorieën in de rekeningenlijstweergave tonen</guilabel
+> zal de Categorieën in de Rekeningenweergave tonen. </para>
 
-  <varlistentry>
-  <term
-><guilabel
->Aandelen met saldo nul niet tonen</guilabel
-></term>
-    <listitem>
       <para
->Deze optie activeren zal Waardepapierrekeningen met een nul-saldo niet laten verschijnen in de Rekeningenweergave.</para>
+>Activeren van het vak <guilabel
+>Nul-saldo-waardepapieren niet tonen</guilabel
+> zal elke waardepapierrekening met saldo nul verwijderen uit de Rekeningenweergave. </para>
     </listitem>
   </varlistentry>
-</variablelist>
-</sect3>
 
-<sect3>
-<title
->Periodieke transacties</title>
-<variablelist>
-    <varlistentry>
+  <varlistentry
+> 
     <term
-><guilabel
->Afgesloten periodieke transacties niet tonen</guilabel
-></term>
+>Periodieke transacties</term>
     <listitem>
       <para
->Dit vakje activeren zal alle beëindigde periodieke transacties verbergen in de Periodieke transactieweergave.</para>
-    </listitem>
-  </varlistentry>
-</variablelist>
-</sect3>
-
-<sect3>
-<title
->Transacties</title>
-<variablelist>
-  <varlistentry>
-    <term
-><guilabel
->Geen transacties tonen van voor</guilabel
-></term>
-    <listitem>
-      <para
->Transacties eerder dan de datum hier ingevoerd zullen niet getoond worden in de Grootboekweergave. Dit kan nuttig zijn als uw gegevens vele jaren van transacties omvatten; dit instellen op een of twee jaar geleden verbergt oudere transacties.</para>
-      <para
->Deze waarde instellen op January 1, 1900 ( de standaard waarde) is een goed idee om fouten te vinden bij datum-gerelateerde problemen bij importeren van gegevens, in geval dat enige datums, erg ver in het verleden, fout waren.</para>
+>Het vakje <guilabel
+>Voltooide periodieke betalingen niet tonen</guilabel
+> activeren zal alle voltooide periodieke betalingen verbergen in de Periodieke transactieweergave. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
-><guilabel
+>Transacties</term>
+    <listitem>
+      <para
+>Transacties ingevoerd eerder dan de datum in het veld <guilabel
+>Transactie eerder dan</guilabel
+> zullen niet getoond worden in de Grootboekweergave. Dit kan nuttig zijn als uw gegevens vele jaren van transacties omvatten; dit instellen op een of twee jaar geleden verbergt oudere transacties. </para>
+      
+      <para
+>Deze waarde instellen op January 1, 1900 ( de standaard waarde) is een goed idee om fouten te vinden bij datum-gerelateerde problemen bij importeren van gegevens, in geval dat enige datums, erg ver in het verleden, fout waren. </para>
+
+      <para
+>Het vakje <guilabel
 >Gecontroleerde transacties niet tonen</guilabel
-></term>
-    <listitem>
-      <para
->Dit vakje activeren zal transacties filteren op de controle-status. Transacties die zijn gemarkeerd als <emphasis
+> activeren zal transacties filteren op de controle-status. Transacties die zijn gemarkeerd als <emphasis
 >Gecontroleerd</emphasis
-> worden niet getoond in de weergave Grootboek.</para>
+> worden niet getoond in de Grootboekweergave. </para>
     </listitem>
   </varlistentry>
 </variablelist>
-</sect3>
+</sect2>
+
+<sect2 id="details.settings.general.support"
+><title
+>Tabblad Ondersteunen</title>
+<screenshot>
+  <screeninfo
+>KMyMoney-configuratie, algemeen, tabblad ondersteuning</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_general_support.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>KMyMoney-configuratie, algemeen, tabblad ondersteuning</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Loggen</term>
+    <listitem>
+      <para
+>&kmymoney; kan een logbestand aanmaken wanneer het gegevens importeert. Dit kan nuttig zijn voor probleemoplossing, maar het is belangrijk om voorzichtig te zijn, omdat deze logbestanden sensitieve gegevens kunnen bevatten, zoals gebruikersnamen en platte-tekst wachtwoorden, zoals opgemerkt in de dialoog. </para>
+
+      <para
+>Voor elk loggen dat plaatsvindt, specificeer het pad naar de map waar logs aangemaakt zullen worden in het veld <guilabel
+>Logpad</guilabel
+>. U kunt ook op <guibutton
+>...</guibutton
+> klikken rechts van het veld en de dialoog bestandskiezer gebruiken om naar de gekozen map te navigeren. </para>
+
+      <para
+>Als u het vak <guilabel
+>Geïmporteerde statements loggen</guilabel
+> activeert, dan zal &kmymoney; gegevens importeren, wanneer een bestand genaamd <quote
+> <literal
+>kmm-statement-</literal
+>yyyy-mm-dd<literal
+>T</literal
+>hh-mm-ss.sss<literal
+>.txt</literal
+> </quote
+> in de gespecificeerde map wordt opgeslagen. Dit bestand is een &XML;-bestand met alle zojuist geïmporteerde gegevens. </para>
+
+      <para
+>Als u het vak <guilabel
+>Log OFX transacties</guilabel
+> activeert, wanneer &kmymoney; ooit <link linkend="details.impexp.ofxdirectconnect"
+>OFX direct verbinden</link
+> gebruikt om transactiegegevens te verkrijgen, zal het alle interacties loggen die het heeft met de OFX-server op afstand. Het zal deze achtervoegen aan een bestand genaamd <literal
+>ofxlog.txt</literal
+> in de gespecificeerde map. Zoals bovenstaand genoemd, zal dit bestand waarschijnlijk rekening- en gebruikersnamen en wachtwoorden in zichtbare tekst bevatten. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
 </sect2>
 </sect1>
 
-<sect1 id="details.settings.home">
-<title
+<sect1 id="details.settings.home"
+><title
 >Hoofdpagina</title>
 
-<sect2>
-<title
+<sect2
+><title
 >Sectie met weergave van de hoofdpagina</title>
+<screenshot>
+  <screeninfo
+>KMyMoney-configuratie, hoofdweergave</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_home.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>KMyMoney-configuratie, hoofdweergave</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
 <para
 >Deze opties stellen u in staat om het uiterlijk van de <link linkend="firsttime.mainwindow"
 >Hoofdpaginaweergave</link
@@ -311,10 +365,7 @@
 >Omhoog</guibutton
 > of <guibutton
 >Omlaag</guibutton
->. </para>
-<!-- FIXME Many of these sections need a <link
-> to the doc section actually
-     describing the content. -->
+>. Een sectie kan niet verschijnen, zelfs als het bijbehorende item is geactiveerd, als het leeg zou zijn. </para>
 
 <variablelist>
   <varlistentry>
@@ -324,40 +375,42 @@
 ></term>
     <listitem>
       <para
->Dit zal de rekeningen met bezittingen en schulden tonen die open zijn samen met hun huidige saldo's. Deze en andere lijsten met rekeningen op de Hoofdpagina zijn in alfabetische volgorde geordend, tenzij anders aangegeven.</para>
+>Dit zal een lijst met activa-rekeningen links en passiva-rekeningen rechts tonen. Deze en andere lijsten met rekeningen op de Hoofdpagina zijn in alfabetische volgorde geordend, tenzij anders aangegeven. Normaal zullen alleen open rekeningen in de lijst staan, tenzij <link linkend="reference.menus.view"
+>Alle rekeningen tonen</link
+> is geselecteerd. </para>
+
+      <para
+>Voor deze en de andere rekeningenlijsten op de Hoofdweergave zal de weergave de rekeningnaam, laatste datum gecontroleerd en huidig saldo omvatten. Daarnaast kunnen er andere kolommen getoond worden, zoals geconfigureerd in de <guilabel
+>Rekeninginformatieweergave</guilabel
+> lager op dit venster. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><guilabel
->Betalingen</guilabel
+>Periodieke betalingen</guilabel
 ></term>
     <listitem>
       <para
->Dit zal aankomende Periodieke transacties tonen, waarbij onderscheid is voor te late betalingen en toekomstige betalingen. Het toont de datum, naam van de periodieke betaling, rekening en bedrag van de betaling en het slado van de rekening na de betaling. Standaard zal het tot zes transacties tonen. Als er zes getoond worden is er een koppeling die u kunt selecteren om meer te tonen, tot 30 dagen in de toekomst.</para>
+>Dit zal aankomende Periodieke transacties tonen van <link linkend="details.schedules"
+>Periodieke transacties</link
+>, waarbij onderscheid is voor die te laat zijn, vandaag en in de toekomst. Het toont de datum, naam van de periodieke betaling, rekening en bedrag van de betaling en het saldo van de rekening na de betaling. Standaard zal het tot zes transacties tonen. Als er zes getoond worden is er een koppeling die u kunt selecteren om meer te tonen, tot 30 dagen in de toekomst. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><guilabel
->Voorkeursrekeningen</guilabel
+>Favoriete rekeningen</guilabel
 ></term>
     <listitem>
       <para
->Dit zal de rekeningen tonen die geïdentificeerd worden als Voorkeursrekeningen binnen de configuratiedialoog <menuchoice
-><guimenu
+>Dit zal de rekeningen tonen die geïdentificeerd zijn als Favoriete rekeningen in de configuratiedialoog <guimenu
 >Rekening</guimenu
-><guimenuitem
+> <guimenuitem
 >Rekening bewerken... </guimenuitem
-></menuchoice
->.</para>
-      <para
->Voor deze en alle andere rekeningen maak een lijst met secties geadresseerd door deze set aan opties, het tonen zal de rekeningnaam en huidige saldo omvatten, en andere kolommen specifiek aan dat type rapport en in sommige gevallen, zoals elders geconfigureerd.</para>
-      <!-- FIXME - the menu item (or maybe link to actual doc page) should point
-           to the actual other config location and perhaps which items for
-           which account type. -->
+>. </para>
     </listitem>
   </varlistentry>
 
@@ -368,7 +421,7 @@
 ></term>
     <listitem>
       <para
->Dit zal alle betalingenrekeningen tonen; deze omvatten elke rekening waarin inkomen kan worden gestopt, en/of waaruit rekeningen betaald kunnen worden.</para>
+>Dit zal alle betalingenrekeningen tonen; deze omvatten elke rekening waarin inkomen kan worden gestopt, en/of waaruit rekeningen betaald kunnen worden. </para>
     </listitem>
   </varlistentry>
 
@@ -379,7 +432,9 @@
 ></term>
     <listitem>
       <para
->Dit zal een lijst tonen van alle rapporten die geïdentificeerd zijn als favoriet in de Configuratiedialoog van het Rapport. De lijst ordent chronologisch op wanneer elk rapport een favoriet werd.</para>
+>Dit zal een lijst tonen van alle rapporten die geïdentificeerd zijn als favoriet in de <link linkend="details.reports.config"
+>Configuratiedialoog</link
+> van het Rapport. De lijst is geordend op de datum toen elk elk rapport een favoriet werd. </para>
     </listitem>
   </varlistentry>
 
@@ -390,8 +445,11 @@
 ></term>
     <listitem>
       <para
->Dit zal een 30, 60 en 90 dagen prognose tonen voor bezittingen- en schuldenrekeningen met niet-nul saldo's en met niet-gecontroleerde transacties.</para>
-      <!-- FIXME What are the real criteria for inclusion in this (and these other) list(s). -->
+>Dit zal een prognose voor bezittingen- en schuldenrekeningen tonen, gelijkend op het <link linkend="details.forecast.summary"
+>Tabblad samenvatting</link
+> van de Prognoseweergave. Details van het getoonde kunnen bestuurd worden met de dialoog <link linkend="details.forecast.configure"
+>Configuratie van prognose</link
+>. </para>
     </listitem>
   </varlistentry>
 
@@ -402,11 +460,9 @@
 ></term>
     <listitem>
       <para
->Dit zal een grafiek tonen van uw prognose van de netto waarde voor de komende 90 dagen</para>
+>Dit zal een grafiek tonen van uw prognose van de netto waarde voor de komende 90 dagen </para>
     </listitem>
   </varlistentry>
-
-  <!-- FIXME "Forecast (history) removed as apparently not actually used. -->
 
   <varlistentry>
     <term
@@ -415,7 +471,9 @@
 ></term>
     <listitem>
       <para
->Dit zal een samenvatting van de huidige maand tonen en overschrijding voor elk gedefinieerd budget. Als geen budget is gedefinieerd zal het geen budget of overschrijding tonen, met de actuele huidige maanduitgaven.</para>
+>Dit zal een samenvatting van de huidige maand tonen en overschrijding voor elk <link linkend="details.budgets"
+>gedefinieerd budget(ten)</link
+>. Als geen budget is gedefinieerd zal het geen budget of overschrijding tonen, met de actuele huidige maanduitgaven. </para>
     </listitem>
   </varlistentry>
 
@@ -432,11 +490,10 @@
 </variablelist>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Paginaschaling van Start-/Samenvatting</title>
 <variablelist>
-
   <varlistentry>
     <term
 ><guilabel
@@ -444,7 +501,7 @@
 ></term>
     <listitem>
       <para
->Deze optie biedt de selectie van de lettergrootte als een percentage om te passen in de Hoofdweergave gebaseerd op de gebruikersvoorkeur.</para>
+>Deze optie biedt de selectie van de lettergrootte als een percentage om te passen in de Hoofdweergave gebaseerd op de gebruikersvoorkeur. </para>
     </listitem>
   </varlistentry>
 
@@ -455,17 +512,18 @@
 ></term>
     <listitem>
       <para
->Als u dit inschakelt dan wordt uw voorkeur voor de lettergrootte opgeslagen als u het met de muiswiel op de startpagina heeft gewijzigd.</para>
+>Als u dit inschakelt dan wordt uw voorkeur voor de lettergrootte opgeslagen als u het met de muiswiel op de startpagina heeft gewijzigd. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2>
-<title
+<sect2 id="details.settings.home.acctinfo"
+><title
 >Weergave van rekeninginformatie</title>
 <para
->Deze opties bieden u het aanpassen van welke informatie is gevat in een lijst met rekeningen.</para>
+>Deze opties bieden u het aanpassen van welke informatie is gevat in een lijst met rekeningen op de Hoofdpaginaweergave. </para>
+
 <variablelist>
   <varlistentry>
     <term
@@ -474,7 +532,9 @@
 ></term>
     <listitem>
       <para
->Toont de limiet van de rekening zoals ingesteld in de Rekeningbewerkingsdialoog. Het heeft invloed op elke lijst die Betalingsrekeningen bevatten.</para>
+>Toont de limiet van de rekening zoals gezet in de dialoog <link linkend="details.accounts.edit"
+>Rekeningbewerking</link
+>. </para>
     </listitem>
   </varlistentry>
 
@@ -485,9 +545,25 @@
 ></term>
     <listitem>
       <para
->Toont de saldo-status van bijbehorende rekeningen, gesymboliseerd door een pictogram in de kolommen voorafgaand aan de rekeningnaam. Een groen vinkje geeft aan dat het online saldo en het lokale saldo hetzelfde zijn. Een brievenbus met een groene pijl geeft aan dat het lokale bestand transacties heeft nieuwer dan de meest recent online bijgewerkte. Dit laat de gebruiker weten om een online bijwerken uit te voeren. Een rood waarschuwingsteken geeft aan een verschil tussen het lokale bestand en het online-saldo.</para>
-      <!-- Note: the colors might be different depending on the selected theme
-           -->
+>Toont de status van saldo's van weergegeven rekeningen en rekeningen die transacties hebben geïmporteerd. De status wordt gesymboliseerd door een pictogram in de kolom voor de rekeningnaam. merk op dat de kleuren hier beschreven misschien anders zijn dan voor u getoond, afhankelijk van het geselecteerde bureaubladthema. Een groen vinkje <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="icon-dialog-ok.svg" format="SVG"/> </imageobject
+> </inlinemediaobject
+> </guiicon
+> geeft aan dat het online saldo en het lokale saldo hetzelfde zijn. Een rood waarschuwingsteken <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="icon-dialog-cancel.svg" format="SVG"/> </imageobject
+> </inlinemediaobject
+> </guiicon
+> geeft een niet gelijk tussen het lokale bestand en het online-saldo. Een postbus met een groene pijl <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="icon-mail-receive.svg" format="SVG"/> </imageobject
+> </inlinemediaobject
+> </guiicon
+> geeft aan dat het lokale bestand transacties heeft nieuwer dan de meest recente online bijgewerkte. Dit waarschuwt de gebruiker om een online bijwerken uit te voeren. </para>
     </listitem>
   </varlistentry>
 
@@ -498,7 +574,7 @@
 ></term>
     <listitem>
       <para
->Voegt een extra kolom toe naast de rekeningnaam, die het aantal niet gemarkeerde transacties in de rekening toont.</para>
+>Voegt een kolom toe na de rekeningnaam, die het aantal niet gemarkeerde transacties in de rekening toont. </para>
     </listitem>
   </varlistentry>
 
@@ -509,7 +585,7 @@
 ></term>
     <listitem>
       <para
->Voegt een extra kolom toe die het aantal vrijgegeven transacties voor de rekening tonen.</para>
+>Voegt een kolom toe die het aantal vrijgegeven transacties voor de rekening tonen. </para>
     </listitem>
   </varlistentry>
 
@@ -520,7 +596,7 @@
 ></term>
     <listitem>
       <para
->Voegt een extra kolom toe die het aantal niet gecontroleerde transacties toont voor de rekening, &ie; de som van alle niet gemarkeerde en vrijgegeven transacties.</para>
+>Voegt een kolom toe die het aantal niet gecontroleerde transacties toont voor de rekening, &ie; de som van alle niet gemarkeerde en vrijgegeven transacties. </para>
     </listitem>
   </varlistentry>
 
@@ -531,61 +607,31 @@
 ></term>
     <listitem>
       <para
->Voegt een extra kolom toe die de laatste datum van controle voor de rekening toont.</para>
+>Voegt een extra kolom toe die de laatste datum van controle voor de rekening toont. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 </sect1>
 
-<sect1 id="details.settings.register">
-<title
+<sect1 id="details.settings.register"
+><title
 >Ledger</title>
-
 <para
->De volgende opties uitgelegd in deze sectie biedt de wijziging van het transactieregister gevat in het tabblad Grootboekweergavetab. </para>
+>De instellingen en opties in deze sectie biedt de wijziging van het transactiegrootboek getoond in de Grootboekweergave. </para>
 
-<sect2 id="details.settings.register.display">
-<title
+<sect2 id="details.settings.register.display"
+><title
 >Weergavetabblad</title>
-
 <variablelist>
   <varlistentry>
     <term
 ><guilabel
->Toon een raster in het kasboek</guilabel
+>Toon een raster in het grootboek</guilabel
 ></term>
     <listitem>
       <para
->Deze optie toont rasterlijnen in het transactieregister of de Grootboekweergave. Het biedt een extra optie voor weergave die het misschien gemakkelijker maakt om separate transacties en hun componenten te bekijken.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><guilabel
->Laat alle kasboek transacties volledig zien</guilabel
-></term>
-    <listitem>
-      <para
->Deze optie selecteren maakt dat het register alle informatie toont voor alle getoonde transacties, met separate lijnen in de Detailkolom voor Categorie en Tags en voor Memo. Als het niet is geselecteerd, zullen Categorie, Tags en Memo niet getoond worden.</para>
-      <para
->Dit heeft hetzelfde effect als selecteren van de menu-optie <link linkend="reference.menus.settings.transactiondetail"
->Transactie-details tonen</link
->.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry id="details.settings.register.lens">
-    <term
-><guilabel
->De kasboeklens gebruiken</guilabel
-></term>
-    <listitem>
-      <para
->Deze optie selecteren toont alle detailregels voor de geselecteerde transactie, zelfs als <guilabel
->Alle registeritems in volledig detail tonen</guilabel
-> niet is geselecteerd.</para>
+>Deze optie selecteren toont rasterlijnen in de Grootboekweergave. Dit is een extra optie voor weergave die het misschien gemakkelijker maakt om separate transacties en hun componenten te bekijken. </para>
     </listitem>
   </varlistentry>
 
@@ -598,42 +644,7 @@
       <para
 >Deze optie selecteren toont het <link linkend="details.ledger.transactionform"
 >transactieformulier</link
-> onderaan het register en daar kunt u een transactie bewerken. Als het transactieformulier niet wordt getoond, kunt u een transactie in het kasboek zelf bewerken. Met deze optie ingeschakeld zijn er minder transacties zichtbaar in het kasboek, vergeleken met wanneer het is uitgeschakeld.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><guilabel
->Toon altijd een Nr. veld</guilabel
-></term>
-    <listitem>
-      <para
->Het nummerveld (<quote
->No.</quote
->) altijd tonen invoeren of bewerken van een transactie. Met dit ingeschakeld bent u in staat om getallen, ingevoerd in dit veld, te controleren voor controle van rekeningen.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><guilabel
->Toon groepering regel tussen de transacties</guilabel
-></term>
-    <listitem>
-      <para
->Deze optie selecteren zal groepsheaders in het register tonen. Deze verwijzen naar tijdperioden of mijlpalen zoals laatste maand, laatste week, deze maand, laatste controle, volgende week en volgende maand.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><guilabel
->Toon kop voor het vorige en het huidige fiscale jaar </guilabel
-></term>
-    <listitem>
-      <para
->Deze optie selecteren toont groepsheaders in het register voor het huidige en het vorige fiscale jaar.</para>
+> onderaan het grootboek en daar kunt u een transactie invoeren of bewerken. Als het transactieformulier niet wordt getoond, kunt u een transactie in het grootboek zelf bewerken. Met deze optie ingeschakeld zijn er minder transacties zichtbaar in het grootboek, vergeleken met wanneer het is uitgeschakeld. </para>
     </listitem>
   </varlistentry>
 
@@ -644,39 +655,118 @@
 ></term>
     <listitem>
       <para
->Periodieke transacties met datums in de toekomst worden getoond in de Grootboekweergave voor de betrokken rekening. Wanneer de datum bereikt is, en een periodieke transactie te laat is, wordt het niet langer in het kasboek getoond, tenzij deze optie is geselecteerd.</para>
+>Periodieke transacties met datums in de toekomst worden getoond in de Grootboekweergave voor de betrokken rekening. Wanneer de datum bereikt is, en een periodieke transactie te laat is, wordt het niet langer in het kasboek getoond, tenzij deze optie is geselecteerd. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Details van kasboekitems</guilabel
+></term>
+    <listitem>
+      <formalpara>
+        <title
+><guilabel
+>Laat alle grootboekitems volledig zien</guilabel
+></title>
+        <para
+>Deze optie selecteren maakt dat het grootboek alle informatie toont voor alle getoonde transacties, met separate regels in de Detailkolom voor Categorie, Tags en Memo. Indien niet geselecteerd, zullen Categorie, Tags en Memo niet getoond worden. Dit heeft hetzelfde effect als selecteren van het menu-item <link linkend="reference.menus.settings.transactiondetail"
+>Transactiedetail tonen</link
+>. </para>
+      </formalpara>
+
+      <formalpara id="details.settings.register.lens">
+        <title
+><guilabel
+>De kasboeklens gebruiken</guilabel
+></title>
+        <para
+>Deze optie selecteren toont alle detailregels voor de geselecteerde transactie, zelfs als <guilabel
+>Alle grootboekitems in volledig detail tonen</guilabel
+> niet is geselecteerd. </para>
+      </formalpara>
+
+      <formalpara
+><title
+>Alle gesplitste details in het grootboek tonen</title>
+      <para
+>Deze optie selecteren toont meer details over de gesplitste transacties. </para>
+      </formalpara>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Informatiekoppen</guilabel
+></term>
+    <listitem>
+      <formalpara>
+        <title
+><guilabel
+>Toon groepskoppen tussen transacties</guilabel
+></title>
+        <para
+>Deze optie selecteren zal groepskoppen in het grootboek tonen. Deze verwijzen naar tijdperioden of mijlpalen zoals laatste maand, laatste week, deze maand, laatste controle, volgende week en volgende maand. </para>
+      </formalpara>
+
+      <formalpara>
+        <title>
+          <guilabel
+>Toon kop voor het vorige en het huidige fiscale jaar</guilabel>
+        </title>
+        <para
+>Deze optie selecteren toont groepskoppen in het grootboek voor het huidige en het vorige fiscale jaar. </para>
+      </formalpara>
+
+      <formalpara>
+        <title
+><guilabel
+>Groepskoppen van transactiecontrole</guilabel
+></title>
+        <para
+>Deze afrollijst bestuurt het tonen van groepskoppen voor transactiecontrole. Als <guilabel
+>Geen items voor transactiecontrole tonen</guilabel
+> is geselecteerd, dan zullen geen groepskoppen voor transactiecontrole getoond worden. Als <guilabel
+>Laatste item voor transactiecontrole met datum en saldo in het grootboek</guilabel
+> is geselecteerd, zal alleen de meest recente transactiecontrole aangegeven worden door een groepskop. Als <guilabel
+>All items voor transactiecontrole met datum en saldo in grootboek tonen</guilabel
+> is geselecteerd, dan zal een groepskop getoond worden voor alle eerdere transactiecontroles. </para>
+      </formalpara>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="details.settings.register.sorting">
-<title
+<sect2 id="details.settings.register.sorting"
+><title
 >Sorteren tabblad</title>
 <para
->Deze drie secties bieden u het instellen van de standaard sorteervolgorde van transacties in de Grootboekweergave. In alle gevallen toont de lijst links alle velden beschikbaar voor sorteren. Om een item te sorteren, selecteer het (enkele muisklik) en klik op de rechter pijl tussen de twee lijsten. De lijst rechts toont alle velden die zijn geselecteerd als onderdeel van de sorteervolgorde voor die weergave. U kunt de relatieve volgorde van de velden aanpassen door er een te selecteren en zijn positie in de lijst wijzigen met de omhoog- en omlaagpijl rechts van de lijst. U kunt omschakelen tussen oplopende en aflopende sortering voor elk item door er dubbel op te klikken. </para>
-<para
->De velden beschikbaar voor sorteren zijn hetzelfde voor alle drie secties: Hoeveelheid, Categorie, Volgorde invoer (datum dat de transactie is aangemaakt,) Nummer, Debiteur, Postdatum, Status controle, Waardepapier en Type. </para>
+>Deze drie secties bieden u het instellen van de standaard sorteervolgorde van transacties in de Grootboekweergave. In alle gevallen toont de lijst rechts de velden die zijn geselecteerd als onderdeel van de sorteervolgorde voor die weergave en de lijst links alle toont alle velden beschikbaar voor sorteren, die nog niet gekozen zijn. Om op een item te sorteren, selecteer het (enkele muisklik) en klik op de rechter pijl tussen de twee lijsten. U kunt de relatieve volgorde van de velden aanpassen door er een te selecteren en zijn positie in de lijst wijzigen met de pijl omhoog en omlaag rechts van de lijst. U kunt omschakelen tussen oplopende en aflopende sortering voor elk item door te dubbelklikken. </para>
 
-<sect3 id="details.settings.register.sorting.normal">
-<title
->Normaal overzicht</title>
 <para
->Dit tabblad bestuurt de standaard sorteervolgorde van de reguliere weergave Grootboek. </para>
+>De velden beschikbaar voor sorteren zijn hetzelfde voor alle drie secties: Hoeveelheid, Categorie, Volgorde invoer (de datum dat de transactie is aangemaakt, niet de interne transactie-id) Nummer, Relatie, Postdatum, Status controle, Waardepapier en Type. </para>
+
+<sect3 id="details.settings.register.sorting.normal"
+><title
+>Subtabblad Normale weergave</title>
+<para
+>Dit tabblad bestuurt de standaard sorteervolgorde van de reguliere Grootboekweergave. </para>
 </sect3>
 
-<sect3 id="details.settings.register.sorting.reconciliation">
-<title
->Overzicht transactie controle</title>
+<sect3 id="details.settings.register.sorting.reconciliation"
+><title
+>Subtabblad Transactiecontroleweergave</title>
 <para
->Dit tabblad bestuurt de standaard sorteervolgorde van het kasboek in de Transactiecontroleweergave. Dit is het tonen van transacties getoond gedurende het proces van <link linkend="details.reconcile"
+>Dit tabblad bestuurt de standaard sorteervolgorde van het grootboek in de Transactiecontroleweergave. Dit is het tonen van transacties gedurende het proces van <link linkend="details.reconcile"
 >Transactiecontrole</link
 >. </para>
 </sect3>
 
-<sect3 id="details.settings.register.sorting.search">
-<title
->Overzicht zoekresultaat</title>
+<sect3 id="details.settings.register.sorting.search"
+><title
+>Subtabblad Zoekweergave</title>
 <para
 >Dit tabblad bestuurt de standaard sorteervolgorde in het kasboek tijdens het <link linkend="details.search"
 >Zoekweergave</link
@@ -684,8 +774,8 @@
 </sect3>
 </sect2>
 
-<sect2 id="details.settings.register.dataentry">
-<title
+<sect2 id="details.settings.register.dataentry"
+><title
 >Tabblad gegevens invoer</title>
 <para
 >Deze optioe beïnvloeden het proces van aanmaken van nieuwe transacties.</para>
@@ -698,18 +788,18 @@
 ></term>
     <listitem>
       <para
->Dit inschakelen zal automatisch het chequenummer verhogen bij het invoeren van een nieuwe chequetransactie. Ze hebben hetzelfde effect wanneer u de Kasboeklens of het Transactieformulier gebruikt.</para>
+>Dit inschakelen zal automatisch het chequenummer verhogen bij het invoeren van een nieuwe chequetransactie. Het heeft hetzelfde effect wanneer u de Grootboeklens of het Transactieformulier gebruikt. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><guilabel
->Bewaar wijzigingen als u een andere transactie of splitsing selecteert</guilabel
-></term>
+    <term>
+      <guilabel
+>Bewaar wijzigingen als u een andere transactie of splitsing selecteert</guilabel>
+    </term>
     <listitem>
       <para
->Als u dit inschakelt, dan worden de wijzigingen van de huidige transactie opgeslagen als u een andere transactie selecteert of splitst. Indien uitgeschakeld, zal het selecteren van van splitsing van een andere transactie u vragen of u wijzigingen wilt opslaan of niet.</para>
+>Indien ingeschakeld, selecteren van andere transactie of splitsing zal elke bewerking gemaakt in de huidige transactie worden opgeslagen. Indien uitgeschakeld, zal het selecteren van een andere transactie of splitsing u vragen of u al dan niet elke wijzigingen wilt opslaan. </para>
     </listitem>
   </varlistentry>
 
@@ -731,14 +821,14 @@
 ></term>
     <listitem>
       <para
->Deze optie bestuurt <link linkend="details.payees.personalinformation.matching"
->koppelen van debiteuren.</link
-> Indien ingeschakeld zullen debiteurennamen altijd overeenkomen vanaf het begin van de naam. Indien uitgeschakeld, zal elke subtekenreeks voor overeenkomst worden gebruikt. Indien ingeschakeld kunnen extra opties voor overeenkomen worden ingesteld in het tabblad Overkomst van de Debiteurenweergave.</para>
+>Deze optie bestuurt <link linkend="details.payees.details.matching"
+>koppelen van relaties</link
+>. Indien ingeschakeld zullen relatienamen altijd overeenkomen vanaf het begin van de naam. Indien uitgeschakeld, zal elke subtekenreeks voor overeenkomst worden gebruikt. Indien ingeschakeld kunnen extra opties voor overeenkomen worden ingesteld in het tabblad Overkomst van de Debiteurenweergave. </para>
     </listitem>
   </varlistentry>
 
-  <!--FIXME missing Automatic reconciliation-->
   <varlistentry>
+    <!-- FIXME:   missing description of Automatic reconciliation -->
     <term
 ><guilabel
 >Automatische transactiecontrole</guilabel
@@ -752,11 +842,22 @@
   <varlistentry>
     <term
 ><guilabel
->Standaard transactie controle status</guilabel
+>Initiële cursorpositie binnen het datumveld</guilabel
 ></term>
     <listitem>
       <para
->Selecteer de standaard transactie controle status voor nieuwe transacties: Niet gecontroleerd, geklaard en gecontroleerd.</para>
+>Wanneer u doorgaat in een datumveld van een transactie (ofwel door aanmaken of bewerken van een transactie of &Tab; of &Enter; te gebruiken), dan bepaalt deze afrollijst of de cursor zal starten in het dag-, maand- of jaargedeelte van de datum. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Standaard transactiecontrolestatus</guilabel
+></term>
+    <listitem>
+      <para
+>Selecteer de standaard transactiecontrolestatus voor nieuwe transacties: Niet gecontroleerd, geklaard en gecontroleerd. </para>
     </listitem>
   </varlistentry>
 
@@ -767,27 +868,32 @@
 ></term>
     <listitem>
       <para
->Deze optie biedt u het selecteren van gewenst gedrag voor automatisch invullen. Dit bestuurt welke, indien enige, eerdere transacties voor dezelfde debiteur getoond worden, en welke, indien enige, van deze transacties gebruikt worden om automatisch details van de nieuwe transactie in te vullen.</para>
+>Deze optie biedt u het selecteren van gewenst gedrag voor automatisch invullen. Dit bestuurt welke, indien enige, eerdere transacties voor dezelfde debiteur getoond worden, en welke, indien enige, van deze transacties gebruikt worden om automatisch details van de nieuwe transactie in te vullen. </para>
+
       <itemizedlist>
         <listitem>
           <para
 >Niet automatisch invullen</para>
           <para
->Dit zal automatisch invullen deactiveren en moet u handmatig alle details voor de nieuwe transactie invoeren.</para>
+>Dit zal automatisch invullen deactiveren en moet u handmatig alle details voor de nieuwe transactie invoeren. </para>
         </listitem>
+        
         <listitem>
           <para
 >Identieke transactie als hoeveelheid minder verschilt dan onderstaand ingestelde percentage</para>
           <para
->Met deze optie geactiveerd, wanneer u een nieuwe transactie invoert zal &kmymoney; een lijst met eerdere transacties tonen voor dezelfde debiteur en rekening. Als de hoeveelheid van eerdere transacties minder verschilt dan X procent van de ingevoerde hoeveelheid, zullen ze als identiek worden beschouwd en details van de eerdere transactie zullen gebruikt worden om automatisch details van de nieuwe transactie in te vullen. De bovenstaande "X" is gespecificeerd in het vak naast <guilabel
->Zelfde transactie als hoeveelheid minder verschilt dan</guilabel
-> en kan variëren van 0 tot 100%. Als het percentage 0 is zullen alle vorige transacties voor de debiteur en rekening getoond worden en u kunt een van deze transacties selecteren om te gebruiken voor automatisch invullen door er op te klikken.</para>
+>Met deze optie geactiveerd, wanneer u een nieuwe transactie invoert zal &kmymoney; een lijst met eerdere transacties tonen voor dezelfde debiteur en rekening. Als de hoeveelheid van eerdere transacties dicht genoeg is bij de door u ingevoerde hoeveelheid, zal het als een overeenkomst worden beschouwd en details van die eerdere transactie zullen gebruikt worden om automatisch details van de nieuwe transactie in te vullen. <quote
+>Dicht genoeg</quote
+> betekent binnen het percentage gespecificeerd in het vak naast <guilabel
+>Zelfde transactie als de hoeveelheid minder verschilt dan</guilabel
+> en kan variëren van 0 tot 100%. Als het percentage 0 is zullen alle vorige transacties voor de relatie en rekening getoond worden en u kunt een van deze transacties selecteren om te gebruiken voor automatisch invullen door te klikken. </para>
         </listitem>
+
         <listitem>
           <para
 >Inclusief de meest gebruikte transactie voor deze begunstigde</para>
           <para
->Bij het invoeren van een nieuwe transactie terwijl deze optie is ingeschakeld, zal &kmymoney; de transactiedetails invullen gebaseerd op de eerder meest gebruikte transactie voor de geselecteerde debiteur.</para>
+>Bij het invoeren van een nieuwe transactie terwijl deze optie is ingeschakeld, zal &kmymoney; de transactiedetails invullen gebaseerd op de eerder meest gebruikte transactie voor de geselecteerde debiteur. </para>
         </listitem>
       </itemizedlist>
     </listitem>
@@ -806,10 +912,9 @@
 </variablelist>
 </sect2>
 
-<sect2 id="details.settings.register.import">
-<title
+<sect2 id="details.settings.register.import"
+><title
 >Tabblad Importeren</title>
-
 <variablelist>
   <varlistentry>
     <term
@@ -818,7 +923,7 @@
 ></term>
     <listitem>
       <para
->Zoeken naar overeenkomende transacties binnen de reeks van de geïmporteerde transactie +/- het gegeven aantal dagen, die ingesteld kunnen zijn op 0 t/m 99.</para>
+>Zoeken naar overeenkomende transacties binnen de reeks van de geïmporteerde transactie +/- het gegeven aantal dagen, die ingesteld kunnen zijn op 0 t/m 99. </para>
     </listitem>
   </varlistentry>
 
@@ -829,24 +934,23 @@
 ></term>
     <listitem>
       <para
->Als deze optie is geactiveerd, wanneer een nieuwe begunstigde is gevonden bij het importeren van een afschrift, zal de gebruiker worden gevraagd om een standaard categorie van deze gebruiker toe te kennen wanneer deze optie is geselecteerd.</para>
+>Als deze optie is geactiveerd, wanneer een nieuwe begunstigde is gevonden bij het importeren van een afschrift, zal de gebruiker worden gevraagd om een standaard categorie van deze gebruiker toe te kennen wanneer deze optie is geselecteerd. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 </sect1>
 
-<sect1 id="details.settings.schedules">
-<title
+<sect1 id="details.settings.schedules"
+><title
 >Periodieke Transacties</title>
-
 <para
 >Met deze opties kunt u het gedrag van <link linkend="details.schedules"
 >Periodieke transacties</link
 > wijzigen. </para>
 
-<sect2>
-<title
+<sect2
+><title
 >Opstartopties</title>
 <variablelist>
   <varlistentry>
@@ -861,20 +965,20 @@
   </varlistentry>
 
   <varlistentry>
-    <term
-><guilabel
->Transacties dit aantal dagen van te voren invoeren</guilabel
-></term>
-    <listitem
-><para
->Specificeer in hoeveel dagen van te voren u een periodieke transactie ingevoerd moet worden.</para>
+    <term>
+      <guilabel
+>Transacties dit aantal dagen van te voren invoeren</guilabel>
+    </term>
+    <listitem>
+      <para
+>Specificeer in hoeveel dagen van te voren u een periodieke transactie ingevoerd moet worden. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="details.settings.schedules.calendar">
-<title
+<sect2 id="details.settings.schedules.calendar"
+><title
 >Verwerkingsdagen</title>
 <variablelist>
   <varlistentry>
@@ -882,8 +986,8 @@
 ><guilabel
 >De kalender met vakantiedagen van de regio gebruiken</guilabel
 ></term>
-    <listitem
-><para
+    <listitem>
+      <para
 >De regio van de wereld selecteren die het beste past bij wat u nodig hebt.</para>
     </listitem>
   </varlistentry>
@@ -892,7 +996,14 @@
 
 <sect2
 ><title
-></title>
+>Niet-gegroepeerd item</title>
+<!-- FIXME: This is a good example of problems with the current mix of sectX and variablelist.  Without a title, this
+     sect has inadequate spacing above.  so it looks part of the previous group, but the actual title doesn't match the
+     lack of title in the actual config dialog.  I'm open to suggestions on how to deal with this.  Not using sect2 for
+     boxes might help, but would be a lot of effort.  Perhaps just adding a box and title to the config dialog?-->
+<literallayout
+>
+</literallayout>
 <variablelist>
   <varlistentry>
     <term
@@ -901,54 +1012,54 @@
 ></term>
     <listitem>
       <para
->Specificeer in hoeveel dagen de periodieke transactie in het kasboek zichtbaar zijn.</para>
-      <para
->In het kasboek is een lijst met periodieke transacties te zien. U kunt periodieke transacties invoeren of overslaan door met de &RMB; er op te klikken.</para>
+>Specificeer hoeveel dagen van tevoren periodieke transacties moeten verschijnen in het grootboek. Voor toekomstige periodieke transacties getoond in het grootboek kunt u er in gaan of overslaan door rechts erop te klikken. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 </sect1>
 
-<sect1 id="details.settings.onlinequote">
-<title
+<sect1 id="details.settings.onlinequote"
+><title
 >Online koersen</title>
+<para
+>Deze instellingen bepalen hoe koersen opgehaald worden uit verschillende online bronnen. Dit omvat aandelen, obligaties en andere koersen van waardepapieren, evenals koersen voor edele metalen en valutaconversie. </para>
 
 <para
->Deze instellingen wijzigen hoe financiële koersen opgehaald worden uit verschillende online bronnen. Dit omvat zowel aandelen, obligaties en andere prijzen van waardepapieren, evenals prijzen voor edele metalen en valutaconversie. </para>
-
-<para
->Hier kunt u de online bronnen voor de koersen in &kmymoney; aanpassen. In het algemeen kunnen we zeggen dat dit een onderdeel voor gevorderden is, en zou alleen moeten worden gebruikt door de technisch meest gevorderde gebruikers. </para>
+>Deze sectie biedt u het wijzigen van online bronnen voor koersen in &kmymoney;. In het algemeen kunnen we zeggen dat dit een onderdeel voor gevorderden is, en zou alleen moeten worden gebruikt door de technisch meest gevorderde gebruikers. </para>
 
 <para
 >Lees de sectie <link linkend="details.investments.onlinequotes"
 >Online koersen</link
 > voor meer details. </para>
+
+<note>
+  <para
+>De initiële lijst en configuratie van online bronnen voor koersen is opgezet toen &kmymoney; voor het eerst uw gegevensbestand aanmaakte. Als een online bron een wijziging ondergaat die een wijziging in deze instellingen vereist om voor &kmymoney; door te gaan met het te gebruiken als een geldige bron, dan moet de gebruiker de noodzakelijke wijzigingen doen, met deze dialoog, gebaseerd op instructies gepost op een van de gesuggereerde <link linkend="firsttime.contact"
+>ondersteuningsopties</link
+>. Hopelijk, in de niet zo verre toekomst, zal de manier waarop configuratie  van online bronnen wordt behandeld worden gewijzigd zodat &kmymoney; automatisch elke noodzakelijke updates in deze instellingen zal ophalen zonder te vereisen dat de gebruiker een handmatige bewerking doet. </para>
+</note>
 </sect1>
 
-
-<sect1 id="details.settings.colors">
-<title
+<sect1 id="details.settings.colors"
+><title
 >Kleuren</title>
-
 <para
 >Deze sectie biedt u het aanpassen van de kleuren gebruikt in &kmymoney;. Als <guilabel
 >Aangepaste kleuren</guilabel
 > niet is geactiveerd, zullen de standaard kleuren worden gebruikt. </para>
 
 <para
->Om kleuren aan te passen activeer het vakje Aangepaste kleuren. </para>
-
-<para
->Wijzigen van de kleuren kan door te klikken op de kleurknop, die het kleurselectiepalet opent. Dit biedt ongelimiteerde opties in kleurselectie. U kunt een gedefinieerde basiskleur selecteren, kies een kleur door ergens op het scherm te klikken, voer een &HTML; gedefinieerde kleur in, specificeer waarden voor tint, verzadiging, waarde, rood, groen en blauw. </para>
+>Om kleuren aan te passen activeer het keuzevak <guilabel
+>Aangepaste kleuren</guilabel
+>. U kunt dan elke van de kleuren wijzigen door te klikken op de kleurknop, die het kleurselectiepalet opent. Dit biedt ongelimiteerde opties in kleurselectie. U kunt een gedefinieerde basiskleur selecteren, kies een kleur door ergens op het getoonde kleurpalet te klikken, voer een &HTML; gedefinieerde kleur in of specificeer waarden voor tint, verzadiging, waarde, rood, groen en blauw. </para>
 </sect1>
 
-<sect1 id="details.settings.fonts">
-<title
+<sect1 id="details.settings.fonts"
+><title
 >Lettertypen</title>
-
 <para
->Met deze opties kunt u de gebruikte lettertypen wijzigen in de velden voor cellen en koppen. </para>
+>Deze sectie biedt u de gebruikte lettertypen wijzigen in de velden voor cel en kop. </para>
 
 <variablelist>
   <varlistentry>
@@ -958,7 +1069,7 @@
 ></term>
     <listitem>
       <para
->Selecteer dit in om de systeemlettertypen te gebruiken. Als u dit uitschakelt dan kunt u de gewenste lettertypen selecteren.</para>
+>Selecteer dit in om de systeemlettertypen te gebruiken. Dit uitschakelen biedt u het selecteren van lettertypen van uw keuze. </para>
     </listitem>
   </varlistentry>
 
@@ -969,7 +1080,7 @@
 ></term>
     <listitem>
       <para
->Geef hier een lettertype naar wens op voor alle cellen van de registers.</para>
+>Specificeer hier een aangepast lettertype voor alle cellen van het grootboek.</para>
     </listitem>
   </varlistentry>
 
@@ -980,16 +1091,15 @@
 ></term>
     <listitem>
       <para
->Geef hier een lettertype naar wens op voor de koppen van de vensters binnen het register.</para>
+>Specificeer het aangepaste lettertype voor de koppen van elke weergave binnen het grootboek. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect1>
 
-<sect1 id="details.settings.icons">
-<title
+<sect1 id="details.settings.icons"
+><title
 >Pictogrammen</title>
-
 <para
 >Deze optie biedt selectie van pictogrammen die getoond zullen worden. </para>
 
@@ -1001,54 +1111,71 @@
 ></term>
     <listitem>
       <para
->Met het afrolmenu is er een selectie van voor gebruik beschikbare pictogrammen. Extra pictogrammen kunnen beschikbaar zijn voor downloaden en gebruik afhankelijk van het geïnstalleerde besturingssysteem.</para>
+>De afrollijst presenteert een selectie van voor gebruik beschikbare pictogrammen. Extra pictogrammen kunnen beschikbaar zijn voor downloaden en gebruik afhankelijk van het geïnstalleerde besturingssysteem of &Linux; distributie. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect1>
 
-<sect1 id="details.settings.plugins">
-<title
+<sect1 id="details.settings.plugins"
+><title
 >Plug-ins</title>
+<para
+>deze sectie levert informatie over de beschikbare plug-ins en bieden u het wijzigen van het gedrag van sommigen van hen. Merk op dat de lijst met getoonde plug-ins zal afhangen van welke plug-ins &kmymoney; heeft gevonden bij het starten. Het doet er niet toe of de plug-in was gecompileerd als onderdeel van de toepassing of toegevoegd als een apart pakket. </para>
+  
+<screenshot>
+  <screeninfo
+>KMyMoney-configuratie, plug-ins</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="configure_plugins.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>KMyMoney-configuratie, plug-ins</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->Deze sectie biedt informatie over de beschikbare plug-ins en biedt u het gedrag van geïnstalleerde plug-ins wijzigen. Merk op dat de lijst van getoonde plugins afhankelijk is van welke plugins door&kmymoney; zijn gevonden tijdens de start. Het doet er niet toe of de plugin als onderdeel van het programma was mee gecompileerd of als separaat pakket was toegevoegd. <screenshot
-> <screeninfo
->Plugins configureren</screeninfo
-> <mediaobject
-> <imageobject
-> <imagedata fileref="configure_plugins.png" format="PNG"/> </imageobject
-> <textobject
-> <phrase
->Plugins configureren</phrase
-> </textobject
-> </mediaobject
-> </screenshot
-> Elke plug-in kan in- of uitgeschakeld worden volgens de status van het het keuzevakje naast de naam van het plug-in. Daarnaast, rechts, is er voor elke plug-in een <guibutton
+>Elke plug-in kan in of uitgeschakeld worden, volgens de status van het keuzevak links van de naam van de plug-in en pictogram. Bovendien rechts, is er een knop <guibutton
 >informatie</guibutton
-> (&infoicon;)-knop, wat de versie van de plug-in en zijn auteur laat zien. Voor sommige plug-ins is meer informatie over de configuratie en gebruik te vinden door te klikken op het configureer- of hulpmiddelpictogram direct links van de informatieknop. Er is slechts één plug-in die configureren vereist en dat is de plug-in Cheque afdrukken. </para>
+> &infoicon; voor elke plug-in, die de versie en auteur(s) van de plug-in zal tonen. Voor sommige plug-ins is verdere informatie over configuratie en gebruik mogelijk te vinden door te klikken op de knop &configicon; <guibutton
+>configureren</guibutton
+> net links van de informatieknop. </para>
 
-<sect2 id="details.settings.plugins.printchecks">
-<title
+<para
+>Tot recent was er alleen één plug-in die configuratie vereiste, de plug-in Afdrukken controleren. Nu zijn er verschillende plug-ins die configuratiepagina's hebben die aangeroepen worden vanuit deze pagina. Deze staan de lijst in de volgende secties. Merk echter op dat velen ervan al eerder beschreven zijn in dit document. </para>
+
+<sect2 id="details.settings.plugins.printchecks"
+><title
 >Plug-in voor afdrukken van cheques</title>
-
 <para
->Als voorbeeld is er een plugin voor het afdrukken van cheques, bij de broncode van &kmymoney;, die altijd ingeschakeld zou moeten zijn. Hiermee kunt u een cheque uitprinten gebaseerd op de data van de geselecteerde transactie, waarbij de opmaak en indeling geregeld wordt door een &HTML;-sjabloon. U moet een sjabloon gebruiken die overeenkomt met uw voorgedrukte cheques. Als u klikt op de knop <guibutton
->Instellen</guibutton
-> (&configicon;) ,dan zal het configuratiedialoog <guilabel
+>Er is een plugin voor het afdrukken van cheques, die met de broncode van &kmymoney; meekomt en die altijd ingeschakeld zou moeten zijn. Hiermee kunt u een cheque uitprinten gebaseerd op de data van de geselecteerde transactie, waarbij de opmaak en indeling geregeld wordt door een &HTML;-sjabloon. U moet een sjabloon gebruiken dat overeenkomt met uw voorgedrukte cheques. Een standaard, ingebouwd sjabloon is geleverd. U kunt ook een aangepast sjabloon kiezen. Klik daarvoor op &configicon; <guibutton
+>Configureren</guibutton
+> om de configuratiedialoog <guilabel
 >Cheque afdrukken</guilabel
-> worden geopend. Aan de bovenkant is een tekstveld voor het pad naar het geselecteerde sjabloon. Rechts daarvan is een knop waarmee u een bestand kunt selecteren, om een ander sjabloonbestand te selecteren. </para>
+> te openen. Aan de bovenkant kunt u een vakje activeren om een aangepast sjabloon te gebruiken. Rechts daarvan is een knop waarmee u een bestand kunt selecteren, om een ander sjabloonbestand te selecteren. </para>
 
 <para
->Een sjabloonbestand is een &HTML;-bestand, met daarin speciale woorden die als referentie werken naar de velden van de transactie, van de geselecteerde rekening en instituut om aan te geven waar ze op de cheque zullen worden afgedrukt. Bij &kmymoney; zijn enige voorbeeld sjabloonbestanden meegeleverd. U zou een daarvan moeten kunnen gebruiken , of een daarvan naar wens moeten kunnen aanpassen. Als de standaard sjabloon is geselecteerd, dan zal het configuratie-dialoog de map moeten tonen waarin de voorbeeldbestanden moeten zijn. </para>
+>Een sjabloonbestand is een &HTML;-bestand, met daarin speciale woorden die als referentie werken naar de velden van de transactie, van de geselecteerde rekening en bank om aan te geven waar ze op de cheque zullen worden afgedrukt. &kmymoney; wordt geleverd met een standaard, ingebouwd sjabloon. Op <ulink url="https://invent.kde.org/office/kmymoney/-/blob/master/kmymoney/plugins/checkprinting/templates/"
+>dit adres</ulink
+> kunt u het HTML bronbestand van het standaard sjabloon vinden, evenals enige additionele sjablonen. U zou ofwel in staat moeten zijn om een van hen te gebruiken of er een wijzigen om in uw behoefte te voorzien. Merk op dat slechts een <emphasis
+>subset</emphasis
+> van de HTML standaard wordt ondersteund — de gedetailleerde documentatie hierover is <ulink url="https://doc.qt.io/qt-5/richtext-html-subset.html"
+>hier</ulink
+> te vinden. </para>
 
-<!-- info from source code on substitution variables
+<!-- FIXME: do we want to actually include these checkwriting variables here, and if
+           so, with how much detail? -->
+<!-- info from source code on substitution variables.  Future exercise to list/describe them here.
     // data about the user
     checkHTML.replace("$OWNER_NAME", file->user().name());
     checkHTML.replace("$OWNER_ADDRESS", file->user().address());
     checkHTML.replace("$OWNER_CITY", file->user().city());
     checkHTML.replace("$OWNER_STATE", file->user().state());
-    // data about the account institution
+
+    // data about the account's institution
     checkHTML.replace("$INSTITUTION_NAME", institution.name());
     checkHTML.replace("$INSTITUTION_STREET", institution.street());
     checkHTML.replace("$INSTITUTION_TELEPHONE", institution.telephone());
@@ -1056,6 +1183,7 @@
     checkHTML.replace("$INSTITUTION_CITY", institution.city());
     checkHTML.replace("$INSTITUTION_POSTCODE", institution.postcode());
     checkHTML.replace("$INSTITUTION_MANAGER", institution.manager());
+
     // data about the transaction
     checkHTML.replace("$DATE", KGlobal::locale()->formatDate(QDate::currentDate(), KLocale::LongDate));
     checkHTML.replace("$CHECK_NUMBER", (*it).split().number());
@@ -1068,18 +1196,144 @@
     checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().shares().abs(), currency));
     checkHTML.replace("$MEMO", (*it).split().memo());
 -->
-
-
 </sect2>
-<sect2 id="details.settings.plugins.kbanking">
-<title
+
+<sect2 id="details.settings.plugins.csvimporter"
+><title
+>CSV-importprogramma</title>
+<para
+>Sommige aspecten van het configureren van de CSV-importplug-in zijn al <link linkend="details.settings.plugins.csvimporter"
+>hier</link
+> besproken. Er is echter ook een dialoog die hier aangeroepen kan worden. </para>
+
+<screenshot>
+  <screeninfo
+>csv plug-in voor importeren configureren</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_plugins_csvimporter.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>csv plug-in voor importeren configureren</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<sect3
+><title
+>Automatische detectie</title>
+<para
+>Het is in het algemeen het beste om de plug-in het veldscheidingsteken, decimale symbool en datumformaat automatisch te detecteren. Het is echter mogelijk om dit gedrag voor elk van die items uit te schakelen door het toepasselijke vak te deactiveren. </para>
+
+<para
+>In sommige gevallen bevat een te importeren csv-bestand de naam van de rekening ergens in de eerste regels van het bestand. U kunt aan de plug-in vragen om automatisch hiernaar te zoeken door het bijbehorende vakje te activeren, apart voor importeren voor banken en investeringen. </para>
+</sect3>
+
+<sect3
+><title
+>QIF-profiel voor exporteren</title>
+<para
+>Hoewel het nu gewoon beter is om de QIF-exportprogrammaplug-in direct te gebruiken is het nog steeds mogelijk om het CSV-importprogramma een QIF-bestand te laten exporteren. In dat geval kunt u deze afrollijst gebruiken om het te gebruiken standaard QIF-exportprofiel te selecteren. </para>
+</sect3>
+</sect2>
+
+<sect2 id="details.settings.plugins.forecast"
+><title
+>Prognoseweergave</title>
+<para
+>Die is beschreven in de sectie <link linkend="details.forecast.configure"
+>De budgettering configureren</link
+> van het <link linkend="details.forecast"
+>Budgetteringshoofdstuk.</link
+> </para>
+</sect2>
+
+<sect2
+><title
+>iCalendar</title>
+<para
+>&kmymoney; is in staat een bestand te exporteren in het formaat <quote
+>iCalendar</quote
+>, u kunt dus uw periodieke transacties in &korganizer; importeren of een ander agendaprogramma, u kunt dus herinnert worden aan periodieke transacties. Het exporteren van het bestand wordt in werkelijkheid gedaan met het menu-item <menuchoice
+> <guimenu
+>Bestand</guimenu
+> <guisubmenu
+>Exporteren</guisubmenu
+> <guimenuitem
+>Periodieke transacties naar iCalendar</guimenuitem
+> </menuchoice
+>. </para>
+
+<screenshot>
+  <screeninfo
+>icalendar export configureren</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_plugins_ical.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>icalendar export configureren</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Het geëxporteerd bestand zal één gebeurtenis bevatten voor elke periodieke transactie. Er zijn besturingen om te configureren of de agenda herinneringen toont voor de gebeurtenissen, evenals hoeveel herinneringen en hoever vooruit de van de gebeurtenissen de herinneringen gedaan worden, hoewel deze op dit moment geen enkel effect op het gemaakte bestand hebben. </para>
+
+<para
+>Het laatste veld in de dialoog biedt u het specificeren van de standaard naam en pad het geëxporteerde bestand. Zoals gewoonlijk kunt u ofwel het volledige pad specificeren of klikken op het pictogram bestandskiezer rechts en een bestandsselectiedialoog te krijgen. Op dit moment is de standaard van de bestandsopslagdialoog naar de hier gespecificeerde map, maar u moet nog steeds de actuele bestandsnaam op het moment van exporteren invoeren. </para>
+</sect2>
+
+<!-- FIXME: There is some overlap between here and the Reference/Settings section.
+            There should be better coordination between the two areas.  -->
+<sect2 id="details.settings.plugins.kbanking"
+><title
 >KBanking</title>
 
 <para
->Deze plug-ins voegen ondersteuning voor HBCI/FinTs, OFX en PayPal online bankieren toe aan KMyMoney. Nadat deze plug-in is ingeschakeld, kan online bankieren geconfigureerd worden in het menu <link linkend="reference.menus.settings.help"
->Instellingen</link
->. </para>
+>Deze plug-in voegt ondersteuning voor HBCI/FinTs, OFX en PayPal online bankieren toe door <ulink url="https://www.aquamaniac.de/rdm/"
+>AqBanking</ulink
+> te gebruiken, wat een open-source project in zichzelf is. HBCI/FinTs communiceerde gebruikelijk met banken die alleen in Duitsland zijn. </para>
 
+<para
+>Deze plug-in configureren wordt niet gedaan via deze dialoog, maar met het menu-item <link linkend="reference.menus.settings.help"
+> <guimenu
+>Instellingen</guimenu
+> <guisubmenu
+>Aqbanking configureren...</guisubmenu
+> </link
+> en er is daar verdere informatie. </para>
+</sect2>
+
+<sect2
+><title
+>QIF-exportprogramma, QIF importprogramma</title>
+<para
+>Deze zijn beschreven in de sectie over <link linkend="details.impexp.qif.profile"
+>QIF-profielen</link
+>. Zoals uitgelegd in die sectie, QIF-importeren en QIF-exporteren zijn geïmplementeerd als aparte plug-ins, ze gebruiken beiden dezelfde set profielen. </para>
+</sect2>
+
+<sect2 id="details.settings.plugins.reports"
+><title
+>Rapportenweergave</title>
+<para
+>Dit levert een dialoog waar u enige standaard waarden kun definiëren om gebruikt te worden bij het tonen van <link linkend="details.reports"
+>Rapporten</link
+>. De details worden beschreven met de andere instellingen <link linkend="details.reports.config.plugin"
+>Rapportconfiguratie</link
+>. </para>
+</sect2>
+
+<sect2
+><title
+>XML-opslag</title>
+<para
+>De standaard opslag van uw gegevens is in &XML; formaat, beschreven in het hoofdstuk over <link linkend="details.formats"
+>Bestandsformaten</link
+>. Omdat de code die uw gegevens leest en schrijft geïmplementeerd is als een plug-in, is de toegang tot de configuratiedialoog, die enige aspecten van deze opslag bestuurt, via de Plug-in-sectie van de algemene KMyMoney configuratie, hoewel het beschreven is in de bovenstaande gekoppelde sectie. </para>
 </sect2>
 </sect1>
 </chapter>

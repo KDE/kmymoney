@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-23 03:30+0000\n"
+"POT-Creation-Date: 2025-05-24 03:28+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -20040,74 +20040,74 @@ msgstr "&Ieškoti:"
 msgid "Ledgers"
 msgstr "Didžioji knyga"
 
-#: kmymoney/views/kmymoneyview.cpp:539
+#: kmymoney/views/kmymoneyview.cpp:554
 #, fuzzy, kde-format
 #| msgid "Show KMyMoney welcome page"
 msgid "Show home page"
 msgstr "Rodyti KMyMoney pasisveikinimo puslapį"
 
-#: kmymoney/views/kmymoneyview.cpp:540
+#: kmymoney/views/kmymoneyview.cpp:555
 #, fuzzy, kde-format
 #| msgid "Institution"
 msgid "Show institutions page"
 msgstr "Įstaiga"
 
-#: kmymoney/views/kmymoneyview.cpp:541
+#: kmymoney/views/kmymoneyview.cpp:556
 #, fuzzy, kde-format
 #| msgid "Show all accounts"
 msgid "Show accounts page"
 msgstr "Rodyti visas sąskaitas"
 
-#: kmymoney/views/kmymoneyview.cpp:542
+#: kmymoney/views/kmymoneyview.cpp:557
 #, fuzzy, kde-format
 #| msgid "Scheduled transactions"
 msgid "Show scheduled transactions page"
 msgstr "Periodinės operacijos"
 
-#: kmymoney/views/kmymoneyview.cpp:543
+#: kmymoney/views/kmymoneyview.cpp:558
 #, fuzzy, kde-format
 #| msgid "Top Categories"
 msgid "Show categories page"
 msgstr "Pagrindines kategorijas"
 
-#: kmymoney/views/kmymoneyview.cpp:544
+#: kmymoney/views/kmymoneyview.cpp:559
 #, fuzzy, kde-format
 msgid "Show tags page"
 msgstr "Įsipareigojimų sąskaitos"
 
-#: kmymoney/views/kmymoneyview.cpp:545
+#: kmymoney/views/kmymoneyview.cpp:560
 #, fuzzy, kde-format
 #| msgid "Show KMyMoney welcome page"
 msgid "Show payees page"
 msgstr "Rodyti KMyMoney pasisveikinimo puslapį"
 
-#: kmymoney/views/kmymoneyview.cpp:546
+#: kmymoney/views/kmymoneyview.cpp:561
 #, kde-format
 msgid "Show ledgers page"
 msgstr ""
 
-#: kmymoney/views/kmymoneyview.cpp:547
+#: kmymoney/views/kmymoneyview.cpp:562
 #, fuzzy, kde-format
 #| msgid "Investments"
 msgid "Show investments page"
 msgstr "Investicijos"
 
-#: kmymoney/views/kmymoneyview.cpp:548
+#: kmymoney/views/kmymoneyview.cpp:563
 #, fuzzy, kde-format
 msgid "Show reports page"
 msgstr "Mėgstamiausios ataskaitos"
 
-#: kmymoney/views/kmymoneyview.cpp:549
+#: kmymoney/views/kmymoneyview.cpp:564
 #, kde-format
 msgid "Show budget page"
 msgstr ""
 
-#: kmymoney/views/kmymoneyview.cpp:550
+#: kmymoney/views/kmymoneyview.cpp:565
 #, kde-format
 msgid "Show forecast page"
 msgstr ""
 
-#: kmymoney/views/kmymoneyview.cpp:551
+#: kmymoney/views/kmymoneyview.cpp:566
 #, kde-format
 msgid "Show outbox page"
 msgstr ""

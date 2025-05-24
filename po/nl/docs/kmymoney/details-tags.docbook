@@ -8,119 +8,144 @@
 >&Michael.Carpino; &Michael.Carpino.mail;</author>
   </authorgroup>
   <date
->2020-02-06</date>
+>2024-12-01</date>
   <releaseinfo
->5.0.8</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Tags</title>
 
 <para
->De weergave Tags biedt informatie over alle tags die door de gebruiker zijn toegevoegd. Het scherm Tags is gesplitst in twee hoofdgebieden: een lijst met tags en een detailgebied, dat twee tabbladen heeft: Transacties en Details. Het tabblad <guilabel
+>Tags geleverd op een extra manier voor u om transacties te groeperen en te categoriseren. Ze zijn vaak nuttig in <link linkend="details.search"
+>zoeken naar transacties</link
+> en voor <link linkend="details.reports.avail"
+>rapporten maken</link
+>. </para>
+
+<sect1 id="details.tags.view"
+><title
+>Lijst met tags</title>
+<screenshot>
+  <screeninfo
+>Weergave van tags in tabblad transacties</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="tags.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Weergave van tags in tabblad transacties</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>De Tagsweergave biedt informatie over alle tags die zijn toegevoegd in het gegevensbestand. Het scherm is gesplitst in twee gebieden. </para>
+
+<sect2 id="details.tags.list"
+><title
+>Lijst met tags</title>
+<para
+>Links is een lijst met tags, met knoppen voor toevoegen, hernoemen of verwijderen van een tag. </para>
+
+<para
+>Rechts kunt u meer gedetailleerde informatie over de tags geselecteerd in de lijst links, in een van de twee tabbladen: Transacties en Details. Het tabblad <guilabel
 >Transacties</guilabel
 > toont alle transacties verbonden met de tag. Het tabblad <guilabel
 >Details</guilabel
-> bevat een door de gebruiker gedefineerde kleur, evenals Notities, die niet elders worden gebruikt. Merk op dat als u de kleur wijzigt, die gebruikt wordt in het symbool getoond voor de naam van de tag in alle verbonden transacties, u op het keuzevakje moet klikken rechtsonder in het gebied Details om het op te slaan. </para>
-
-<sect1 id="details.tags.list">
-<title
->Lijst met tags</title>
-
-<para
->Een lijst met tags, alfabetisch gesorteerd, wordt getoond aan de linkerkant van dit venster. <screenshot
-> <mediaobject
-> <imageobject>
-  <imagedata fileref="tags.png" format="PNG"/>
-  </imageobject>
-  </mediaobject>
-  </screenshot>
-</para>
-
-<sect2>
-<title
+> bevat een door de gebruiker geselecteerde kleur, evenals Notities, die niet elders worden gebruikt. Merk op dat als u de kleur wijzigt, die gebruikt wordt in het symbool getoond voor de naam van de tag in alle verbonden transacties, u op<guibutton
+>Bijwerken</guibutton
+> moet klikken rechtsonder in het gebied Details om het op te slaan. </para>
+</sect2>
+  
+<sect2
+><title
 >Een tag toevoegen</title>
 <para
->Er zijn drie verschillende manieren om een nieuwe tag aan te maken. U kunt te eerste klikken op het nieuwe tag-pictogram <guiicon
+>Zoals met de meeste acties in &kmymoney; zijn er meerdere manieren om een nieuw tag aan te maken. Ten eerste kunt u klikken op het nieuwe tag-pictogram <guiicon
 ><inlinemediaobject
 ><imageobject
-><imagedata fileref="list-add.png"/></imageobject
+><imagedata fileref="tag-new.svg" format="SVG"/></imageobject
 ></inlinemediaobject
 ></guiicon
->. Ten tweede klikt u rechts op een tag en kiest <guimenuitem
->Nieuwe tag</guimenuitem
->. Dit maakt een nieuwe tag aan genaamd <quote
+>. Ten tweede kunt u rechts op een tag klikken en <guimenuitem
+>Nieuwe tag...</guimenuitem
+> kiezen. Dit maakt een nieuwe tag aan genaamd <quote
 >Nieuwe tag</quote
->. Rechts klikken op deze tag en <guimenuitem
->Tag hernoemen</guimenuitem
-> kiezen om de naam van de nieuwe tag in te voeren. Tenslotte kunt u een nieuwe tag direct in de grootboekpagina toevoegen of binnen een gesplitste transactie door de naam van de tag in het tagveld in te typen. &kmymoney; zal vragen of u deze tag wilt toevoegen en na het kiezen van <quote
+>. Zie de volgende sectie voor hoe de tag te hernoemen. Tenslotte kunt u een nieuwe tag direct in het grootboek toevoegen of binnen een gesplitste transactie door de naam van de tag in het tagveld te typen. &kmymoney; zal vragen of u deze tag wilt toevoegen en na het kiezen van <quote
 >ja</quote
 > zal het worden toegevoegd. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Een tag hernoemen</title>
 <para
->Om een tag te hernoemen, klikt u naar keuze op de tagnaam om het te selecteren en daarna op <guiicon
->Tag hernoemen</guiicon
-> (tussen de pictogrammen voor toevoegen en verwijderen) of u klikt met de &RMB; op de naam en selecteert  <guimenuitem
+>Om een tag te hernoemen, klikt u naar keuze op de tagnaam om het te selecteren en klik daarna op <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="tag-edit.svg" format="SVG"/></imageobject
+> </inlinemediaobject
+> </guiicon
+> Tag hernoemen of u klikt rechts op de naam en selecteert <guimenuitem
 >Tag hernoemen</guimenuitem
-> in het contextmenu. De naam wordt dan bewerkbaar. Een wijziging van de naam geldt dan voor alle transacties waar het in voor komt . </para>
+>. De naam wordt dan bewerkbaar. Een wijziging van de naam geldt dan voor alle transacties waarin het verschijnt. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Een tag verwijderen</title>
 <para
->Om een tag te verwijderen, klikt u naar keuze op het tag verwijderen pictogram <guiicon
-><inlinemediaobject
-><imageobject
-><imagedata fileref="list-remove.png" format="PNG"/></imageobject
-></inlinemediaobject
-></guiicon
-> of u klikt met de &RMB; op de naam en selecteert <guimenuitem
+>Om een tag te verwijderen, selecteer het en klikt op <guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="list-remove.png" format="PNG"/></imageobject
+> </inlinemediaobject
+> </guiicon
+> tag verwijderen of klikt rechts op de tagnaam en selecteer <guimenuitem
 >Tag verwijderen</guimenuitem
 >. Als de tag in transacties is gebruikt, dan krijgt u een dialoog te zien met de vraag of u ze een andere tag wilt geven. </para>
 
 <note>
 <para
->Omdat tags pas geïntroduceerd zijn in &kmymoney; versie 4.7, zijn geen van de methoden voor importeren van gegevens in staat om tags te importeren. Het is begrepen dat dit een belangrijke functie is en elke importmethode zal dit zeer waarschijnlijk in een volgende uitgave introduceren. </para>
+>Tags zijn in &kmymoney; in versie 4.7 geïntroduceerd, maar niet alle methoden voor importeren van gegevens in staat om tags te importeren. Het is begrepen dat dit een belangrijke functie is en het zal zeer waarschijnlijk aan alle importmethoden worden toegevoegd </para>
 </note>
 </sect2>
 </sect1>
 
-<sect1 id="details.tags.info">
-<title
+<sect1 id="details.tags.info"
+><title
 >Transacties voorzien van tags en details van tags</title>
 <para
->Om transacties of de informatie die bij een bepaalde tag hoort te bekijken, selecteert u eerst de tag in de lijst en daarna de toepasselijke tab aan de rechterkant van het dialoogvenster. <screenshot>
+>Om transacties of de informatie die bij een bepaalde tag hoort te bekijken, selecteert u eerst de tag in de lijst en daarna de toepasselijke tab aan de rechterkant van het dialoogvenster. </para>
+
+<screenshot>
   <screeninfo
->Details-tabblad van tags</screeninfo>
+>tagsweergave in tabblad details</screeninfo>
   <mediaobject>
-  <imageobject>
-  <imagedata fileref="tag_details.png" format="PNG"/>
-  </imageobject>
-  <textobject>
-  <phrase
->Details van tags</phrase>
-  </textobject>
+    <imageobject>
+      <imagedata fileref="tag_details.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>tagsweergave in tabblad details</phrase>
+    </textobject>
   </mediaobject>
 </screenshot>
-</para>
 
-<sect2 id="details.tags.info.transactions">
-<title
+<sect2 id="details.tags.info.transactions"
+><title
 >Transacties voorzien van tags</title>
 <para
 >Om een lijst van transacties met een bepaalde tag te bekijken, selecteert u eerst het tabblad <guilabel
 >Transacties</guilabel
->. Deze lijst is vergelijkbaar met de lijst van transacties voor een begunstigde. U kunt op een transactie dubbelklikken, waarna u naar het kasboek-overzicht gaat waarin die transactie is opgenomen. </para>
+>. Deze lijst is vergelijkbaar met de lijst van transacties voor een begunstigde. U kunt dubbelklikken op een transactie en <guimenuitem
+>Ga naar 'Rekeningnaam'</guimenuitem
+> selecteren om naar de Grootboekweergave van die transactie te gaan in de rekening waarin de transactie de tag heeft gekregen. </para>
 </sect2>
 
-
-<sect2 id="details.tags.info.details">
-<title
+<sect2 id="details.tags.info.details"
+><title
 >Details van tags</title>
 <para
 >Om de informatie verbonden met een bepaalde tag te bekijken en te bewerken, selecteert u het tabblad <guilabel
@@ -143,9 +168,9 @@
     </listitem>
   </itemizedlist>
 <para
->Als u klaar bent, vergeet dan niet om op rechtsonder in het venster op de knop <guiicon
+>Als u klaar bent, vergeet dan niet om rechtsonder in het venster op de knop <guiicon
 >Bijwerken</guiicon
-> te klikken, maar u zal er ook op worden gewezen als u het dialoogvenster wilt sluiten terwijl u dat nog niet hebt gedaan. </para>
+> te klikken, maar u zal er ook op worden gewezen als u het dialoogvenster probeert te sluiten terwijl u dat nog niet hebt gedaan. </para>
 </sect2>
 </sect1>
 </chapter>

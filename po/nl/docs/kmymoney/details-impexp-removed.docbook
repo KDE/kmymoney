@@ -1,0 +1,49 @@
+<!-- This is stuff that was commented out in details.impexp.docbook, from the QIF
+     import section.  I am moving it here to clean up that file, but it is still not
+     sure if this material is still needed anywhere.  I've modified the nesting to
+     make it look more legal.  -->
+
+<sect1 id="details.impexp.removed">
+<sect1info>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+</sect1info>
+<title
+>Verwijderde zaken</title>
+
+<sect2
+><title
+>De geïmporteerde transacties accepteren</title>
+
+<para>
+<screenshot>
+  <screeninfo
+>Geïmporteerde transacties</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qifimportverify.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Geïmporteerde transacties</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<para
+>Sommige van uw transacties kunnen rood gemarkeerd zijn in het grootboek. Dit is vanwege de noodzaak om er een categorie aan toe te kennen. Het importprogramma was niet in staat om een categorie toe te kennen gebaseerd op eerdere transactiegeschiedenis. </para>
+
+<para
+>Transactiegegevens kunnen bewerkt worden of zelfs verwijderd indien nodig. Om een transactie te bewerken dubbelklik eenvoudig op het item of druk op Enter wanneer het item geaccentueerd is. Na beëindiging klik op OK om de geïmporteerde transacties te accepteren of op Annuleren om remove de geïmporteerde transacties te verwijderen. </para>
+</sect2>
+
+
+<sect2
+><title
+>Investeringen importeren</title>
+<para
+>Merk op dat als u een bestand met investeringstransacties importeert, die investeringen eerst moeten bestaan in uw &kmymoney;-bestand. Het handelssymbool wordt gebruikt om overeen te laten komen, ga dus na dat het symbool in &kmymoney; exact hetzelfde is als die in het bestand dat u importeert. </para>
+</sect2>
+</sect1>
+

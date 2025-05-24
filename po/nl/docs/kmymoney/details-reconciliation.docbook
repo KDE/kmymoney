@@ -5,202 +5,233 @@
     <author
 >&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
     <author
->&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->2022-08-08</date>
+>2024-12-01</date>
   <releaseinfo
->4.5</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
->Transactie controle</title>
+>Transactie-controle</title>
 
-<sect1 id="details.reconcile.whatis">
-<title
+<sect1 id="details.reconcile.whatis"
+><title
 >Wat is transactiecontrole?</title>
+<para
+>Transactiecontrole is het proces van het verzekeren dat uw records voor een rekening overeenkomen met de records van de bank voor die rekening. Dit wordt gedaan door het aan elkaar koppelen van transacties die u hebt ingevoerd in &kmymoney; met de transacties in de lijst voor die rekening door de bank. Dit wordt gewoonlijk gedaan met de lijst met transacties in een afschrift, een bankafschrift, creditcardafschrift, loonstrookje of elk ander afschrift. Het kan ook gedaan worden tegen een online lijst van de rekening, hoewel dat minder gebruikelijk is. Als er verschillen worden gevonden, dan hebt u of de persoon van het afschrift een fout gemaakt. </para>
 
 <para
->Transactiecontrole is het proces van het aan elkaar koppelen van transacties die u hebt ingevoerd in &kmymoney; met de transacties in de lijst voor die rekening door het instituut. Dit wordt gewoonlijk gedaan met de lijst met transacties in een afschrift, een bankafschrift, creditcardafschrift, loonstrookje of elk ander afschrift. Het kan ook gedaan worden tegen een online lijst van de rekening, hoewel dat minder gebruikelijk is. Als er verschillen worden gevonden, dan hebt u of de persoon van het afschrift een fout gemaakt. </para>
+>Het proces van transactiecontrole voor een account zegt dat u er zeker van bent dat de records voor die rekening bijgewerkt en juist zijn tot de datum van de transactiecontrole. Dit word het meest algemeen gedaan voor rekeningen bij instituten zoals banken of winkels, maar sommige gebruikers kiezen ervoor om dat ook te doen voor andere rekeningen, zoals cash. In dat geval betekent het dat u er zeker bent van de records tot de datum van transactiecontrole en er zeker van bent dat u geen verdere cash ontvangsten zult vinden en dat het saldo van de rekening in &kmymoney; hetzelfde is als de actuele hoeveelheid cash in uw portemonnee. </para>
 
 <para
->Om transacties op een rekening te valideren, toon die rekening in het grootboek en klik op het menu-item <guiicon
+>Transactiecontrole is niet vereist voor elke rekening, maar door transactiecontrole op een rekening op een routinebasis, zoals maandelijks, zult u minder records te onderzoeken hebben als u een discrepantie vindt. </para>
+</sect1>
+
+<sect1 id="details.reconcile.wizard"
+><title
+>De saldo-controle-assistent</title>
+<para
+>Merk op dat als u door het proces van transactiecontrole gaat, dat er meerdere mogelijke paden zijn voor het Invoeren van alle noodzakelijke gegevens, speciaal als u sommige discrepanties moet vinden en corrigeren tussen &kmymoney; en het afschrift. Alles is geldig en een het is niet beter dan het ander. Op den duur zoals met veel activiteiten in &kmymoney; zult u de manier vinden die het best past bij wat u nodig hebt om uw financiën te beheren. </para>
+
+<para
+>Om transacties op een rekening te controleren, selecteer de rekening in de Rekeningen- of Bankenweergave in het register klik daarna op het Transactiecontrolepictogram <guiicon
 ><inlinemediaobject
-><imageobject
+> <imageobject
 ><imagedata fileref="reconcile.png" format="PNG"/></imageobject
-></inlinemediaobject
+> </inlinemediaobject
 ></guiicon
->Pictogram transactie-controle, selecteer de <menuchoice
+>, selecteer menu-item <menuchoice
 ><guimenu
 >Rekening</guimenu
 > <guimenuitem
->Valideren...</guimenuitem
-> </menuchoice
+>Transacties controleren...</guimenuitem
+></menuchoice
 > of gebruik de sneltoets <keycombo
 >&Ctrl;&Shift;<keycap
 >R</keycap
 ></keycombo
->. U kunt ook rechts klikken op de rekening in de weergave <guilabel
->Rekeningen</guilabel
-> en selecteer <guimenuitem
->Valideren...</guimenuitem
-> uit het contextmenu. </para>
-</sect1>
-
-<sect1 id="details.reconcile.wizard">
-<title
->De saldo-controle-assistent</title>
-<para
->Elk van de gespecificeerde acties zal de validatie-assistent openen. De eerste pagina van de assistent beschrijven beknopt het te volgen proces. Klik op <guibutton
->Volgende</guibutton
-> om echt met de assistent te beginnen. </para>
-
-<para>
-<screenshot>
-	<screeninfo
->Transactiecontrole-assistent</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="reconcile1.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Transactiecontrole-assistent</phrase>
-	</textobject>
-	</mediaobject>
-</screenshot>
-</para>
-
-<sect2 id="details.reconcile.wizard.statement">
-<title
->Bankafschrift-details</title>
-<para
->De datum, startsaldo en eindsaldo van het bankafschrift is te vinden in uw bankafschrift. De door de assistent getoonde standaard waarden worden bepaald door uw gegevens. </para>
-
-<para>
-<screenshot>
-	<screeninfo
->Transactiecontrole-assistent</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="reconcile2.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Transactiecontrole-assistent</phrase>
-	</textobject>
-	</mediaobject>
-</screenshot>
-</para>
-
-<para
->De standaard waarde voor de datum van het bankafschrift is 30 dagen na de vorige verificatie, u zult dus vaak deze moeten aanpassen met één of twee dagen. U zou het met twee maanden moet aanpassen als u slechts kwartaalafschriften van de bank voor deze rekening ontvangt. </para>
-
-<para
->Het getoonde beginsaldo is het saldo op de datum van de vorige verificatie. Het eindsaldo is het geverifieerde saldo aan het eind van de datum van het afschrift. Dit is het beginsaldo met de waarden van alle geverifieerde transacties tussen de vorige verificatie en de datum van het afschrift opgeteld of afgetrokken wat van toepassing is. </para>
-
-<para
->Als de waarden allemaal kloppen, klik op de knop <guibutton
->Volgende</guibutton
 >. </para>
 
 <para
->Als de getallen niet kloppen zijn er twee paden om te volgend. De eerste is het annuleren van de verificatie, los elk verschil tussen uw gegevens en de informatie getoond in het afschrift op en start daarna de verificatie opnieuw. De tweede is het aanpassen van het eindsaldo om te laten kloppen met de waarde in het afschrift en daarna te klikken op de knop <guibutton
->volgende</guibutton
->. U zult een gelegenheid hebben om elk verschil op te lossen tijdens de volgende stap van het verificatieproces. </para>
+>Dit opent de transactiecontrole-assistent. De eerste pagina van de assistent beschrijven beknopt het te volgen proces. Klik op <guibutton
+>Volgende</guibutton
+> om echt met de assistent te beginnen. </para>
+
+<screenshot>
+  <screeninfo
+>introductie tot transactiecontrole-assistent</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="reconcile1.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Introductie van transactiecontrole-assistent</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<sect2 id="details.reconcile.wizard.statement"
+><title
+>Bankafschrift-details</title>
+<para
+>De initiële datum van het afschrift gepresenteerd door &kmymoney; is typisch 30 dagen na de meest recente transactiecontrole van die rekening. Het beginsaldo gepresenteerd is het eindsaldo van de vorige transactiecontrole. Deze is in werkelijkheid berekend als de som van de hoeveelheid van alle transacties in de rekening die zijn geklaard of gecontroleerd, tot op de datum van de vorige transactiecontrole. Het gepresenteerde eindsaldo is het beginsaldo plus de hoeveelheden (toegevoegd voor inleg en afgetrokken voor opname) voor alle geklaarde transacties voor de rekening sinds de vorige transactiecontrole. (Dit omvat ook geklaarde transacties voor de datum van de vorige transactiecontrole.) Als het beginsaldo niet overeenkomt met het afschrift, dan moet u bevestigen dat de vorige transactiecontrole juist is gedaan. </para>
 
 <para
->Merk op dat u het beginsaldo niet kan wijzigen. Als de getoonde hoeveelheid niet overeen komt met de hoeveelheid in uw afschrift, het duidt een probleem aan met de vorige transactie-controle of misschien zelfs een nog eerdere. In dit geval moet u de transactie-controle annuleren en opnieuw beginnen met repareren van alle problems met uw gegevens. De meest algemene rede voor deze situation is dat u enige tijd na de verificatie, u per ongeluk een transactie vóór die datum hebt gewijzigd. Er zijn plannen om &kmymoney; resistenter te maken tegen dit probleem, maar voor nu, moet u terugwerken om de vroegste verificatie te vinden die overeenkomt met het probleem omdat het het meest waarschijnlijk is dat het met één of meer transacties tussen die datum en de eerdere transactie-controle. </para>
+>Theoretisch zou het eindsaldo ten tijde van de vorige transactiecontrole niet moeten verschillen van het beginsaldo op dit moment. &kmymoney; voorkomt echter niet dat u wijzigingen maakt in transacties voor de meest recente transactiecontrole. Bewerkingen van dit zijn gewoonlijk de oorzaak van zulke discrepanties. Op een bepaald moment zal &kmymoney; waarschijnlijk verbeterd worden om het aan de gebruiker duidelijker te maken dat zo'n bewerking is gemaakt. </para>
+
+<para
+>De datum van het afschrift, het startsaldo en eindsaldo is te vinden in uw afschrift. Ga na dat de cijfers kloppen en klik op <guibutton
+>Volgende</guibutton
+>. Als het beginsaldo niet klopt, bekijk de vorige paragrafen. Als datum van het afschrift of eindsaldo niet klopt voer dan de cijfers in zoals ze staan op uw afschrift en klik op <guibutton
+>Volgende</guibutton
+>. </para>
+
+<screenshot>
+  <screeninfo
+>transactiecontrole-assistent begininformatie</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="reconcile2.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>transactiecontrole-assistent begininformatie</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 </sect2>
 
-<sect2 id="details.reconcile.wizard.interest">
-<title
+<sect2 id="details.reconcile.wizard.interest"
+><title
 >Rente</title>
 <para
->het te controleren afschrift van een bankrekening komt of elke rekening met rente en/of kosten, voer deze waarden dan in in de van toepassing zijnde velden. Er kan een categorie toegekend worden voor elk van deze hoeveelheden. </para>
+>Als transactiecontrole doet in een bankrekening of elke rekening met rente en/of kosten, voet dan deze waarden in in de bijbehorende velden. Beide velden zijn optioneel, maar als ze gebruikt worden, dan moet er een categorie aan toegekend worden voor elke ingevoerde hoeveelheid. Merk op dat deze hoeveelheden misschien al zijn ingevoerd als u transacties importeert ofwel direct of via een gedownload bestand, in welke geval u ze hier niet opnieuw zou moeten invoeren of u zult een gedupliceerde transactie hebben. </para>
 
-<note>
+<note
+><title
+>Rente of kosten</title>
 <para
->Het renteveld is voor ontvangen rente. Als u rente moet betalen, &eg;, voor een creditcardrekening, dan moet dat ingevoerd worden als een kostenpost. </para>
+>Het renteveld is voor ontvangen rente. Als u rente moet betalen, &eg;, voor een creditcardrekening, dan zou dat ingevoerd moeten worden als een kostenpost. In beide gevallen moet u de juiste categorie kiezen voor de hoeveelheid. </para>
 </note>
 
-<para>
 <screenshot>
-	<screeninfo
->Transactiecontrole-assistent</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="reconcile3.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Transactiecontrole-assistent</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo
+>transactiecontrole-assistent rente en kosten</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="reconcile3.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>transactiecontrole-assistent</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
-</para>
 
 <para
 >Klik op <guibutton
 >Doorgaan</guibutton
-> om te beginnen met in overeenstemming brengen van uw afschrift met wat u hebt ingevoerd. Merk op dat dit het laatste scherm van de transactiecontrole-assistent is, maar het is niet het eind van het proces van transactiecontrole. Het wijzigt ook de grootboekbeeld door alleen transacties te tonen die nog niet al gemarkeerd zijn als gecontroleerd. Zoals onderstaand beschreven, moet u nog steeds transacties klaren en dan &kmymoney; vertellen dat de rekening is gecontroleerd. </para>
+> om te beginnen met in overeenstemming brengen van uw afschrift met wat u hebt ingevoerd. Merk op dat dit de transactiecontrole-assistent voltooid, maar niet het proces van transactiecontrole. Op dit punt toont &kmymoney; de Grootboekweergave voor deze rekening, maar het wijzigt ook het grootboekbeeld op twee manieren. Eerst door alleen transacties te tonen die nog niet al gemarkeerd zijn als gecontroleerd. Ten tweede, de regel onder het hoofdgrootboekbeeld toont het eindsaldo van de rekening in het midden en het verschil tussen hen rechts. Zoals onderstaand beschreven, moet u nog steeds transacties klaren en dan &kmymoney; vertellen dat de rekening is gecontroleerd. </para>
 </sect2>
 
-<sect2 id="details.reconcile.wizard.clearing">
-<title
+<sect2 id="details.reconcile.wizard.clearing"
+><title
 >Transacties klaren</title>
 <para
->Tijdens de transactiecontroleproces kan elke transactie bewerkt worden om het te laten kloppen met het afschrift en nieuwe transacties kunnen zoals gebruikelijk aangemaakt worden. Om een transactie als geklaard te markeren, klik op de kolom <guilabel
+>Tijdens de transactiecontrole kan elke transactie bewerkt worden om het overeen te laten komen met het afschrift en nieuwe transacties kunnen zoals gewoonlijk toegevoegd worden. Om een transactie als geklaard te markeren, klik op de <guilabel
 >C</guilabel
-> in het grootboek. Een transactie is geklaard wanneer het klopt met de transactie op uw afschrift. </para>
+>-kolom van de transactie in het grootboek. U kunt ook het menu <menuchoice
+><guimenu
+>Transacties</guimenu
+></menuchoice
+> selecteren of rechts klikken op de transactie om het contextmenu "Transactie-opties" te laten verschijnen en daarna <menuchoice
+> <shortcut
+> <keycombo
+> <keysym
+>&Ctrl;</keysym
+> <keysym
+>&Alt;</keysym
+> <keysym
+>&Space;</keysym
+> </keycombo
+></shortcut
+> <guisubmenu
+>Markeer transactie als...</guisubmenu
+> <guimenuitem
+>Geklaard</guimenuitem
+> </menuchoice
+>; een transactie wordt beschouwd als geklaard wanneer het overeenkomt met de transactie op uw afschrift. </para>
 
 <para
->Het opdrachtenframe (net onder het gebied met de transactielijst) toont de hoeveelheid links, de geklaarde hoeveelheid in het midden en het verschil rechts. Als u transacties als geklaard markeert, worden deze waarden bijgewerkt om de wijziging te tonen. </para>
+>Als u transacties markeert als geklaard, zullen de hoeveelheden Geklaard en Verschil getoond onder het grootboek worden bijgewerkt. </para>
 
 <para
->Merk echter op dat transactiecontrole het proces is van de gegevens in uw rekening overeen te laten komen met wat in een afschrift staat, wijzigingen aan elke transactie met datums na de datum van het afschrift dat u invoert in de assistent zal opgeslagen worden, maar zal geen enkel effect hebben op de geklaarde hoeveelheid getoond in het opdrachtenframe. </para>
+>Merk echter op dat transactiecontrole het proces is van de gegevens in uw rekening overeen te laten komen met wat in een afschrift staat, de geklaarde hoeveelheid onder het grootboek is de geklaarde hoeveelheid vanaf de datum van het afschrift, wijzigingen aan elke transactie met een datum na de datum van het afschrift dat u invoert in de assistent zal opgeslagen worden, maar zal geen enkel effect hebben op de geklaarde hoeveelheid onderstaand getoond in het grootboekbeeld. </para>
 
 <screenshot>
-	<screeninfo
->Transactiecontrole-assistent</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="reconcile4.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Transactiecontrole-assistent</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo
+>grootboek tijdens transactiecontrole</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="reconcile4.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>grootboek tijdens transactiecontrole</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 </sect2>
 
-<sect2 id="details.reconcile.complete">
-<title
->Transactie controle afronden</title>
+<sect2 id="details.reconcile.complete"
+><title
+>Transactie-controle afronden</title>
 
-<sect3 id="details.reconcile.finish">
-<title
->Transactie controle beëindigen</title>
+<sect3 id="details.reconcile.finish"
+><title
+>Transactie-controle beëindigen</title>
 <para
 >Wanneer het verschil tussen het afschrift en het geklaarde saldo nul is dan is de rekening transactie gecontroleerd en kunt u klikken op de knop <guibutton
 >Beëindigen</guibutton
->. Wanneer u dit doet, neemt &kmymoney; alle transacties die gemarkeerd zijn als geklaard en markeert ze als transactie gecontroleerd en de waarde in de <guilabel
+>. Wanneer u dit doet, neemt &kmymoney; alle transacties die gemarkeerd zijn als geklaard en markeert ze als transactie gecontroleerd (alleen die met een datum voor de datum van het afschrift) en de waarde in de <guilabel
 >C</guilabel
 > kolom wijzigt van <quote
 >C</quote
 > naar <quote
 >R</quote
-> om de wijziging weer te geven. Bovendien worden de wijzigingen opgeslagen en wordt opgenomen dat de rekening is transactie gecontroleerd. (U moet nog steeds het bestand opslaan om alle wijzigingen permanent op te slaan.) </para>
+>. Bovendien worden de wijzigingen opgeslagen en wordt opgenomen dat de rekening is transactie gecontroleerd. (U moet nog steeds het bestand opslaan om alle wijzigingen permanent op te slaan.) </para>
 </sect3>
 
-<sect3 id="details.reconcile.postpone">
-<title
->Transactie controle uitstellen</title>
+<sect3 id="details.reconcile.report"
+><title
+>Het rapport over transactiecontrole</title>
 <para
->Als u problemen hebt om de transactiecontrole af te ronden of u moet enige extra informatie verzamelen alvorens het proces af te ronden, dan kunt u het proces uitstellen naar een later moment door te klikken oo de knop <guibutton
+>Het laatste dat de transactiecontrole-assistent doet om een rapport te presenteren, is in de vorm van een pop-up met twee tabbladen. </para>
+
+<sect4
+><title
+>Tabblad Samenvatting</title>
+<para
+>Dit tabblad toont een samenvatting van de transactiecontrole, inclusief het begin- en eindsaldo en het aantal en hoeveelheid van betalingen en ontvangsten: geklaard, uitstaand en die na de datum van transactiecontrole. </para>
+</sect4>
+
+<sect4
+><title
+>Tabblad Details</title>
+<para
+>Dit tabblad toont een lijst met uitstaande betalingen en inkomsten. Dit zijn niet gemarkeerde transacties vóór de datum van het afschrift van de transactiecontrole. </para>
+</sect4>
+</sect3>
+
+<sect3 id="details.reconcile.postpone"
+><title
+>Transactie-controle uitstellen</title>
+<para
+>Als u problemen hebt om de transactiecontrole af te ronden of u moet extra informatie verzamelen alvorens het proces af te ronden, dan kunt u het proces uitstellen naar een later moment door te klikken oo de knop <guibutton
 >Uitstellen</guibutton
->. Wann u dat doet zal &kmymoney; de waarden onthouden die u hebt ingevoerd toen u de assistent startte, het markeert geen geklaarde transacties als transactie gecontroleerd en het geeft het grootboek terug in zijn normale weergave. Als u &kmymoney; verlaat alvorens te klikken ofwel op <guibutton
+>. Wanneer u dat doet zal &kmymoney; de waarden onthouden die u hebt ingevoerd toen u de assistent startte, het markeert geen geklaarde transacties als transactie gecontroleerd en het geeft het grootboek terug in zijn normale weergave. Als u &kmymoney; verlaat alvorens te klikken ofwel op <guibutton
 >Beëindigen</guibutton
 > of <guibutton
 >Uitstellen</guibutton
@@ -209,41 +240,24 @@
 >. Elke bewerking die u hebt gedaan, zoals transacties markeren als geklaard of nieuwe transacties invoeren, worden niet aangeraakt en u kunt ze nog steeds opslaan alvorens u &kmymoney; verlaat. U zult echter de assistent voor transactiecontrole opnieuw moeten uitvoeren om de transactie te controleren. </para>
 
 <para
->Wanneer u de assistent voor transactiecontrole op deze rekening de volgende keer uitvoert zal &kmymoney; de waarden die u hebt ingevoerd herinneren toen u de vorige keer de assistent uitvoerde end u zult in staat zijn deze, indien nodig, te wijzigen. In dat geval zal het initiële scherm van de assistent anders zijn om hieraan te herinneren. </para>
+>Als u op <guilabel
+>Uitstellen</guilabel
+> klikt zal de volgende keer dat u de assistent voor transactiecontrole op deze rekening uitvoert zal &kmymoney; de waarden die u hebt ingevoerd herinneren toen u de vorige keer de assistent uitvoerde end u zult in staat zijn deze, indien nodig, te wijzigen. In dat geval zal het initiële scherm van de assistent anders zijn om hieraan te herinneren. </para>
 
 <screenshot>
-	<screeninfo
->Transactiecontrole-assistent</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="reconcile-redo.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Transactiecontrole-assistent</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo
+>transactiecontrole-assistent einde</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="reconcile-redo.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>transactiecontrole; assistent einde</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
-
 </sect3>
 </sect2>
-
-<sect2 id="reconcile.investments">
-<title
->Transactiecontrole van investeringsrekeningen</title>
-<para
->Hoewel het in de toekomst kan wijzigen, bevatten <link linkend="details.investments.accounts"
->Investeringsrekeningen</link
-> op dit moment waardepapieren, maar geen cash. Daarom, vanuit het perspectief van &kmymoney;, is het niet zinvol om ze te verifiëren. Sommige gebruikers gebruiken het verificatieproces om aan te geven dat het aantal aandelen van elk waardepapier in bezit klopt met de administratie van de bank, ofwel vanaf een afgedrukt afschrift of on-line. Naast het aantal aandelen, zou ook de totale waarde van de investering van elk waardepapier, die af zou moeten hangen van de laatste <link linkend="details.investments.prices"
->koers</link
-> van dat waardepapier op of voor de datum van de verificatie. </para>
-
-<para
->Als u er voor kiest dit te doen, dan is het proces enigszins anders van dat wat boven is beschreven. Ten eerste, het begin- en eindsaldo zal altijd 0 zijn, omdat er geen cash in een investeringsrekening is. Verder, wanneer u de assistent voltooit, onder het grootboek, zal het saldo van het afschrift getoond worden als 0 en het verschil zal de geïnvesteerde waarde zijn van de rekening. Tenslotte, nadat u op de knop <guibutton
->Beëindigen</guibutton
-> klikt, zult u handmatig alle transacties gemarkeerd als geklaard moeten wijzigen in geverifieerd. </para>
-</sect2>
 </sect1>
-
 </chapter>
-

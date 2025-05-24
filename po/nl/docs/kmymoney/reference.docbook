@@ -2,11 +2,10 @@
 <chapter id="reference">
 <chapterinfo>
   <date
->2016-12-05</date>
+>2024-12-01</date>
   <releaseinfo
->5.0</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Referentie</title>
 
@@ -14,17 +13,18 @@
 <sect1info>
   <author
 >&Roger.Lum; &Roger.Lum.mail; </author>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
 </sect1info>
 <title
 >Menu's</title>
 
 <para
->Hieronder is een complete lijst van menu-items in &kmymoney;, met een zeer korte omschrijving van wat elk daarvan doet. Merk op dat veel deze menukeuzes niet beschikbaar kunnen zijn, of grijs gemaakt, afhankelijk van de geselecteerde weergave of status van het programma. Bijvoorbeeld, u kunt geen rekening bewerken tenzij u een rekening heeft geselecteerd of dat deze in het huidige venster zichtbaar is. </para>
+>Hieronder is een complete lijst van menu-items in &kmymoney;, met een zeer korte omschrijving van wat elk daarvan doet. Merk op dat veel deze menukeuzes niet beschikbaar kunnen zijn, of grijs gemaakt, afhankelijk van de geselecteerde weergave of status van het programma. Bovendien zijn sommigen misschien niet aanwezig als het gerelateerd is aan een functie die niet in uw specifieke versie is meegenomen. Bijvoorbeeld, u kunt geen rekening bewerken tenzij u een rekening heeft geselecteerd of dat deze in het huidige venster zichtbaar is. </para>
 
-<sect2 id="reference.menus.file">
-<title
+<sect2 id="reference.menus.file"
+><title
 >Menu Bestand</title>
-
 <variablelist>
   <varlistentry>
     <term
@@ -38,14 +38,12 @@
 > <guimenu
 >Bestand</guimenu
 > <guimenuitem
->Nieuw</guimenuitem
+>Nieuw boek</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->maakt een nieuw leeg gegevensbestand voor &kmymoney;. Er kan maar één bestand van &kmymoney; tegelijk open zijn, dus zal uw huidige bestand eerst gesloten worden, als er een open is. </action
-></para>
+>Maakt een nieuw leeg gegevensbestand voor &kmymoney;. Er kan maar één bestand van &kmymoney; tegelijk open zijn, dus zal uw huidige bestand eerst gesloten worden, als er een open is. </para>
     </listitem>
   </varlistentry>
 
@@ -66,9 +64,7 @@
 ></term>
     <listitem>
       <para
-><action
->Opent een bestaand gegevens bestand van &kmymoney;.</action
-></para>
+>Opent een bestaand gegevens bestand van &kmymoney;.</para>
     </listitem>
   </varlistentry>
 
@@ -79,15 +75,13 @@
 >Bestand</guimenu
 > <guisubmenu
 >Recent geopend</guisubmenu
-> <guimenuitem
+><guimenuitem
 >...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Biedt snelle toegang tot recent geopende bestanden.</action
-></para>
+>Levert snelle toegang tot recent geopende bestanden.</para>
     </listitem>
   </varlistentry>
 
@@ -102,9 +96,7 @@
 ></term>
     <listitem>
       <para
-><action
->Opent een bestaande database.</action
-></para>
+>Opent een bestaande database.</para>
     </listitem>
   </varlistentry>
 
@@ -125,11 +117,10 @@
 ></term>
     <listitem>
       <para
-><action
->Slaat het huidige geopende bestand op.</action
-></para>
+>Slaat het huidige geopende bestand op. Alleen ingeschakeld als er een wijziging opgeslagen moeten worden. </para>
     </listitem>
   </varlistentry>
+
 
   <varlistentry>
     <term
@@ -148,28 +139,7 @@
 ></term>
     <listitem>
       <para
-><action
->Slaat het huidige geopende bestand op met een andere bestandsnaam.</action
-></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Bestand</guimenu
-><guimenuitem
->Als database opslaan...</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
-><action
->Slaat het huidige geopende bestand op in een <link linkend="details.database"
->Database</link
->.</action
-></para>
+>Slaat het huidige geopende bestand op met een andere bestandsnaam.</para>
     </listitem>
   </varlistentry>
 
@@ -186,9 +156,7 @@
 ></term>
     <listitem>
       <para
-><action
->Importeert financiële gegevens uit andere typen bestanden, zoals QIF en &gnucash; of een sjabloonbestand van accounts en categorieën die gebruikt kunnen worden bij opzetten van nieuwe accounts.</action
-></para>
+>Importeert financiële gegevens uit andere typen bestanden, zoals QIF en &gnucash; of een sjabloonbestand van accounts en categorieën die gebruikt kunnen worden bij opzetten van nieuwe accounts. </para>
     </listitem>
   </varlistentry>
 
@@ -205,9 +173,7 @@
 ></term>
     <listitem>
       <para
-><action
->Exporteert het huidige bestand als een ander type bestand, zoals QIF of exporteert een lijst van uw accounts en categorieën als een sjabloon. </action
-></para>
+>Exporteert het huidige bestand als een ander type bestand, zoals QIF of exporteert een lijst van uw accounts en categorieën als een sjabloon. </para>
     </listitem>
   </varlistentry>
 
@@ -215,22 +181,20 @@
     <term
 ><menuchoice
 ><shortcut
-> <keycombo action="simul"
+> <keycombo
 >&Ctrl;<keycap
 >P</keycap
 ></keycombo
 > </shortcut
 > <guimenu
 >Bestand</guimenu
-> <guimenuitem
->Afdrukken</guimenuitem
+><guimenuitem
+>Afdrukken...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Drukt het huidige bestand af.</action
-></para>
+>Drukt het huidige bestand af.</para>
     </listitem>
   </varlistentry>
 
@@ -240,14 +204,12 @@
 ><guimenu
 >Bestand</guimenu
 ><guimenuitem
->Reservekopie maken</guimenuitem
+>Reservekopie maken...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Slaat een reservekopie van het huidige bestand op.</action
-></para>
+>Slaat een reservekopie van het huidige bestand op.</para>
     </listitem>
   </varlistentry>
 
@@ -257,14 +219,12 @@
 ><guimenu
 >Bestand</guimenu
 ><guimenuitem
->Persoonlijke gegevens</guimenuitem
+>Persoonlijke gegevens...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Laat persoonlijke gegevens bewerken.</action
-></para>
+>Laat persoonlijke gegevens bewerken.</para>
     </listitem>
   </varlistentry>
 
@@ -274,17 +234,15 @@
 ><guimenu
 >Bestand</guimenu
 ><guimenuitem
->Bestandsinformatie</guimenuitem
+>Bestandsinformatie..</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Toont informatie over het nu geopende bestand van &kmymoney;.</action
-></para>
+>Toont informatie over het nu geopende bestand van &kmymoney;.</para>
     </listitem>
   </varlistentry>
-  <!--Dump Memory what i sthis?-->
+
   <varlistentry>
     <term
 ><menuchoice
@@ -302,9 +260,7 @@
 ></term>
     <listitem>
       <para
-><action
->Het huidige bestand sluiten.</action
-></para>
+>Sluit het huidige geopende gegevensbestand op.</para>
     </listitem>
   </varlistentry>
 
@@ -325,18 +281,15 @@
 ></term>
     <listitem>
       <para
-><action
->&kmymoney; afsluiten.</action
-></para>
+>Sluit &kmymoney;. Bied het opslaan van het huidige geopende gegevensbestand, als er wijzigingen zijn. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.edit">
-<title
+<sect2 id="reference.menus.edit"
+><title
 >Menu Bewerken</title>
-
 <variablelist>
   <varlistentry>
     <term
@@ -344,6 +297,52 @@
 ><shortcut
 > <keycombo
 >&Ctrl;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bestand</guimenu
+><guimenuitem
+>Ongedaan maken</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Draait de meest recente actie terug.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Opnieuw doen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Past de laatste ongedaan gemaakte actie opnieuw toe.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
 >F</keycap
 ></keycombo
 > </shortcut
@@ -355,18 +354,15 @@
 ></term>
     <listitem>
       <para
-><action
->Transacties doorzoeken</action
-></para>
+>Doorzoekt transacties.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.view">
-<title
+<sect2 id="reference.menus.view"
+><title
 >Menu Beeld</title>
-
 <variablelist>
   <varlistentry id="reference.menus.settings.transactiondetail">
     <term
@@ -385,11 +381,9 @@
 ></term>
     <listitem>
       <para
-><action
 >Toont details van transacties in de <link linkend="details.ledgers"
 >Grootboeken</link
->-weergave. Als u deze optie inschakelt, dan zijn in een grootboek alle regels van een transactie zichtbaar. Als u dit uitschakelt, dan is er maar een regel zichtbaar. </action
-></para>
+>-weergave. Als u deze optie inschakelt, dan zijn in een grootboek alle regels van een transactie zichtbaar. Als u dit uitschakelt, dan is er maar één regel zichtbaar. </para>
       <para
 >Als u alleen de details van het huidige geselecteerde transactie wilt zien, en alleen maar een regel voor de andere, dan kunt u de <link linkend="details.settings.register.lens"
 >Kasboek Lens</link
@@ -414,32 +408,7 @@
 ></term>
     <listitem>
       <para
-><action
->Verbergt gecontroleerde transacties in het register.</action
-></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term
-><menuchoice
-><shortcut
-> <keycombo
->&Ctrl;<keycap
->B</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Beeld</guimenu
-><guimenuitem
->Gecontroleerde saldo's tonen</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
-><action
->Gecontroleerde saldo's tonen en de laatst gecontroleerde mijlpaal in het register.</action
-></para>
+>Verbergt gecontroleerde transacties in het grootboek.</para>
     </listitem>
   </varlistentry>
 
@@ -460,9 +429,7 @@
 ></term>
     <listitem>
       <para
-><action
->Verbergt niet gebruikte categorieën in de weergave.</action
-></para>
+>Verbergt niet gebruikte categorieën in de weergave.</para>
     </listitem>
   </varlistentry>
 
@@ -471,9 +438,9 @@
 ><menuchoice
 ><shortcut
 > <keycombo
-> &Ctrl;&Shift;<keycap
+>&Ctrl;&Shift;<keycap
 >A</keycap
-> </keycombo
+></keycombo
 > </shortcut
 > <guimenu
 >Beeld</guimenu
@@ -483,18 +450,15 @@
 ></term>
     <listitem>
       <para
-><action
->Alle rekeningen in de weergaven tonen.</action
-></para>
+>Alle rekeningen in de weergaven tonen, inclusief gesloten rekeningen en rekeningen met saldo nul. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.institution">
-<title
+<sect2 id="reference.menus.institution"
+><title
 >Menu Instituten</title>
-
 <variablelist>
   <varlistentry>
     <term
@@ -507,9 +471,7 @@
 ></term>
     <listitem>
       <para
-><action
->Nieuw instituut toevoegen.</action
-></para>
+>Nieuw instituut toevoegen.</para>
     </listitem>
   </varlistentry>
 
@@ -524,9 +486,7 @@
 ></term>
     <listitem>
       <para
-><action
->Een instituut bewerken.</action
-></para>
+>Een instituut bewerken.</para>
     </listitem>
   </varlistentry>
 
@@ -541,18 +501,15 @@
 ></term>
     <listitem>
       <para
-><action
->Een instituut verwijderen.</action
-></para>
+>Een instituut verwijderen.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.account">
-<title
+<sect2 id="reference.menus.account"
+><title
 >Menu Rekening</title>
-
 <variablelist>
   <varlistentry>
     <term
@@ -565,9 +522,7 @@
 ></term>
     <listitem>
       <para
-><action
->Voegt een nieuwe tekening toe.</action
-></para>
+>Voegt een nieuwe tekening toe.</para>
     </listitem>
   </varlistentry>
 
@@ -582,9 +537,7 @@
 ></term>
     <listitem>
       <para
-><action
->Bewerkt een rekening</action
-></para>
+>Bewerkt een rekening</para>
     </listitem>
   </varlistentry>
 
@@ -599,9 +552,7 @@
 ></term>
     <listitem>
       <para
-><action
->Verwijdert een rekening</action
-></para>
+>Verwijdert een rekening</para>
     </listitem>
   </varlistentry>
 
@@ -616,9 +567,7 @@
 ></term>
     <listitem>
       <para
-><action
->Toont het kasboek van een rekening.</action
-></para>
+>Toont de grootboekweergave van de geselecteerde rekening.</para>
     </listitem>
   </varlistentry>
 
@@ -627,9 +576,9 @@
 ><menuchoice
 ><shortcut
 > <keycombo
-> &Ctrl;&Shift;<keycap
+>&Ctrl;&Shift;<keycap
 >R</keycap
-> </keycombo
+></keycombo
 > </shortcut
 > <guimenu
 >Rekening</guimenu
@@ -639,9 +588,7 @@
 ></term>
     <listitem>
       <para
-><action
->Controleert een rekening via de transactie controle wizard.</action
-></para>
+>Controleert een rekening via de transactie controle wizard.</para>
     </listitem>
   </varlistentry>
 
@@ -649,16 +596,14 @@
     <term
 ><menuchoice
 ><guimenu
->Account</guimenu
-> <guimenuitem
->Controle uitstellen...</guimenuitem
+>Rekening</guimenu
+><guimenuitem
+>Uitstellen</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Stelt de controle van een rekening uit.</action
-></para>
+>Stelt de controle van een rekening uit.</para>
     </listitem>
   </varlistentry>
 
@@ -673,9 +618,22 @@
 ></term>
     <listitem>
       <para
-><action
->Voltooit de controle van een rekening.</action
-></para>
+>Voltooit de controle van een rekening.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Rekening</guimenu
+><guimenuitem
+>Annuleren</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Annuleert de controle van een rekening.</para>
     </listitem>
   </varlistentry>
 
@@ -690,9 +648,22 @@
 ></term>
     <listitem>
       <para
-><action
->Opent een transactie rapport van een rekening.</action
-></para>
+>Opent een transactierapport van de geselecteerde rekening.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Rekening</guimenu
+> <guimenuitem
+>Toon saldografiek...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Opent een JTD (Jaar tot datum) grafiek van het saldo van de geselecteerde rekening.</para>
     </listitem>
   </varlistentry>
 
@@ -707,9 +678,7 @@
 ></term>
     <listitem>
       <para
-><action
->Sluit een rekening</action
-></para>
+>Sluit een rekening</para>
     </listitem>
   </varlistentry>
 
@@ -724,9 +693,7 @@
 ></term>
     <listitem>
       <para
-><action
->Heropent een rekening als deze gesloten is.</action
-></para>
+>Heropent een rekening als deze gesloten is.</para>
     </listitem>
   </varlistentry>
 
@@ -741,9 +708,7 @@
 ></term>
     <listitem>
       <para
-><action
->Ontkoppelt een online rekening.</action
-></para>
+>Ontkoppelt een online rekening.</para>
     </listitem>
   </varlistentry>
 
@@ -753,14 +718,12 @@
 ><guimenu
 >Rekening</guimenu
 ><guimenuitem
->Aan online rekening koppelen...</guimenuitem
+>Rekening aankoppelen...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Maakt verbinding met een online rekening</action
-></para>
+>Maakt verbinding met een online rekening</para>
     </listitem>
   </varlistentry>
 
@@ -775,9 +738,7 @@
 ></term>
     <listitem>
       <para
-><action
->Importeert transacties voor een rekening van een online bank.</action
-></para>
+>Importeert transacties voor de geselecteerde rekening van een online bank.</para>
     </listitem>
   </varlistentry>
 
@@ -792,19 +753,15 @@
 ></term>
     <listitem>
       <para
-><action
->Importeert de transacties voor alle rekeningen van een online bank </action
-></para>
+>Importeert de transacties voor alle aangekoppelde rekeningen uit online bankieren.</para>
     </listitem>
   </varlistentry>
-  <!--New credit transfer-->
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.category">
-<title
+<sect2 id="reference.menus.category"
+><title
 >Menu Categorie</title>
-
 <variablelist>
   <varlistentry>
     <term
@@ -817,9 +774,7 @@
 ></term>
     <listitem>
       <para
-><action
->Voegt een nieuwe categorie toe.</action
-></para>
+>Voegt een nieuwe categorie toe.</para>
     </listitem>
   </varlistentry>
 
@@ -834,9 +789,7 @@
 ></term>
     <listitem>
       <para
-><action
->Bewerkt een categorie.</action
-></para>
+>Bewerkt een categorie.</para>
     </listitem>
   </varlistentry>
 
@@ -851,9 +804,7 @@
 ></term>
     <listitem>
       <para
-><action
->Verwijdert een categorie.</action
-></para>
+>Verwijdert een categorie.</para>
     </listitem>
   </varlistentry>
 
@@ -868,18 +819,15 @@
 ></term>
     <listitem>
       <para
-><action
->Toont het kasboek van een categorie.</action
-></para>
+>Toont de Grootboekweergave van een categorie.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.transaction">
-<title
+<sect2 id="reference.menus.transaction"
+><title
 >Menu Transactie</title>
-
 <variablelist>
   <varlistentry>
     <term
@@ -891,21 +839,25 @@
 > <guimenu
 >Transactie</guimenu
 ><guimenuitem
->Nieuw</guimenuitem
+>Nieuwe transacties</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Voegt een nieuwe transactie toe.</action
-></para>
+>Voegt een nieuwe transactie toe.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
 >Transactie</guimenu
 ><guimenuitem
 >Bewerken</guimenuitem
@@ -913,33 +865,39 @@
 ></term>
     <listitem>
       <para
-><action
->Bewerkt een transactie.</action
-></para>
+>Bewerkt een transactie.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
+><shortcut
+> <keycombo
+>&Shift;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
 >Transactie</guimenu
 ><guimenuitem
->Splitsingen bewerken</guimenuitem
+>Splitsing bewerken</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Bewerkt de splitsingen van een transactie.</action
-></para>
+>Bewerkt de splitsingen van een transactie.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
+><shortcut
+> <keycombo
+>&Ctrl;&Del;</keycombo
+> </shortcut
+> <guimenu
 >Transactie</guimenu
 ><guimenuitem
 >Verwijderen</guimenuitem
@@ -947,16 +905,20 @@
 ></term>
     <listitem>
       <para
-><action
->Verwijdert een transactie.</action
-></para>
+>Verwijdert een transactie.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+> </shortcut
+> <guimenu
 >Transactie</guimenu
 ><guimenuitem
 >Dupliceren</guimenuitem
@@ -964,28 +926,28 @@
 ></term>
     <listitem>
       <para
-><action
->Dupliceert een transactie.</action
-></para>
+>Dupliceert een transactie.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
+><shortcut
+> <keycombo
+> &Ctrl;&Alt;&Shift;&Space; </keycombo
+> </shortcut
+> <guimenu
 >Transactie</guimenu
 > <guimenuitem
->Markeer transactie als...</guimenuitem
+>Transactie markeren als ...</guimenuitem
 > <guimenuitem
 >Niet gecontroleerd</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Wijzigt de status van een transactie naar niet gecontroleerd.</action
-></para>
+>Wijzigt de status van de geselecteerde transactie(s) naar de status Niet gecontroleerd. </para>
     </listitem>
   </varlistentry>
 
@@ -1001,14 +963,12 @@
 > <guimenuitem
 >Transactie markeren als ...</guimenuitem
 > <guimenuitem
->Gewist</guimenuitem
+>Betaald</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Wijzigt de status van een transactie naar gewist.</action
-></para>
+>Wijzigt de status van de geselecteerde transactie(s) naar Betaald.</para>
     </listitem>
   </varlistentry>
 
@@ -1029,9 +989,7 @@
 ></term>
     <listitem>
       <para
-><action
->Wijzigt de status van een transactie naar gecontroleerd.</action
-></para>
+>Wijzigt de status van de geselecteerde transactie(s) naar Gecontroleerd.</para>
     </listitem>
   </varlistentry>
 
@@ -1041,31 +999,33 @@
 ><guimenu
 >Transactie</guimenu
 ><guimenuitem
->Ga naar rekening</guimenuitem
+>Ga naar "rekening"</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Toont de andere rekening van een transactie.</action
-></para>
+>Toont de tegenrekening van een transactie in het grootboek.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 ><menuchoice
-><guimenu
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
 >Transactie</guimenu
 ><guimenuitem
->Ga naar begunstigde</guimenuitem
+>Ga naar relatie</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
-><action
->Geeft een weergave van de begunstigde en focust op de begunstigde van de geselecteerde transactie.</action
-></para>
+>Toont de Relatiesweergave en focust op de relatie van de geselecteerde transactie. </para>
     </listitem>
   </varlistentry>
 
@@ -1080,9 +1040,7 @@
 ></term>
     <listitem>
       <para
-><action
->Creëert een nieuwe periodieke transactie</action
-></para>
+>Maakt een nieuwe periodieke transactie met de details van de geselecteerde transactie. </para>
     </listitem>
   </varlistentry>
 
@@ -1097,9 +1055,7 @@
 ></term>
     <listitem>
       <para
-><action
->Zoekt overeenkomstige geïmporteerde transacties,</action
-></para>
+>Twee transacties komen overeen. Dit wordt het meest algemeen gebruikt om een geïmporteerde en een handmatig ingevoerde transactie overeen te laten komen, maar andere combinaties werken ook. </para>
     </listitem>
   </varlistentry>
 
@@ -1114,9 +1070,7 @@
 ></term>
     <listitem>
       <para
-><action
->Unmatchet een transactie die &kmymoney; heeft voorgesteld als een overeenkomst met geïmporteerde transacties.</action
-> Merk op dat dit menu-item alleen aanwezig is als een overeenkomstige transactie aanwezig is. </para>
+>Maakt de overeenkomst ongedaan van een transactie die &kmymoney; heeft voorgesteld als een overeenkomst met geïmporteerde transacties. Merk op dat dit menu-item alleen aanwezig is als een overeenkomstige transactie bestaat en is geselecteerd. </para>
     </listitem>
   </varlistentry>
 
@@ -1131,9 +1085,7 @@
 ></term>
     <listitem>
       <para
-><action
->Accepteert een voorgestelde samenvoeging van geïmporteerde transacties.</action
-></para>
+>Accepteert een voorgestelde samenvoeging van twee transacties.</para>
     </listitem>
   </varlistentry>
 
@@ -1154,9 +1106,7 @@
 ></term>
     <listitem>
       <para
-><action
->Selecteert alle transacties in het register.</action
-></para>
+>Selecteert alle transacties in het grootboek.</para>
     </listitem>
   </varlistentry>
 
@@ -1171,38 +1121,18 @@
 ></term>
     <listitem>
       <para
-><action
->Drukt de inhoud van de geselecteerde transactie in het geselecteerde register af, opgemaakt overeenkomstig het geselecteerde sjabloon.</action
-> Merk op dit menu-item alleen aanwezig is als in het register een transactie is geselecteerd. Lees de sectie over de configuratie van de <link linkend="details.settings.plugins"
+>Drukt de inhoud van de geselecteerde transactie in het geselecteerde grootboek af, opgemaakt overeenkomstig het geselecteerde sjabloon. Zie de sectie over de configuratie van de plugin <link linkend="details.settings.plugins"
 >Controle afdrukken</link
-> plugin voor meer informatie. </para>
+> voor meer informatie. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.tools">
-<title
+<sect2 id="reference.menus.tools"
+><title
 >Menu Hulpmiddelen</title>
-
 <variablelist>
-  <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Hulpmiddelen</guimenu
-><guimenuitem
->QIF profiel editor...</guimenuitem
-> </menuchoice
-></term>
-    <listitem>
-      <para
-><action
->Hier wijzigt u het QIF-profiel dat u gebruikt voor het importeren of exporteren van QIF-bestanden.</action
-></para>
-    </listitem>
-  </varlistentry>
-
   <varlistentry>
     <term
 ><menuchoice
@@ -1214,9 +1144,7 @@
 ></term>
     <listitem>
       <para
-><action
->Toont een lijst met bij &kmymoney; bekende valuta's.</action
-></para>
+>Toont een lijst met bij &kmymoney; bekende valuta's.</para>
     </listitem>
   </varlistentry>
 
@@ -1231,9 +1159,7 @@
 ></term>
     <listitem>
       <para
-><action
->Toont lijsten met aandelenkoersen en valutakoersen.</action
-></para>
+>Toont lijsten met aandelenkoersen en valutakoersen.</para>
     </listitem>
   </varlistentry>
 
@@ -1248,11 +1174,9 @@
 ></term>
     <listitem>
       <para
-><action
 >Update de aandelenkoersen en de valutakoersen bij vanaf online-bronnen met gebruik van het onderdeel <link linkend="details.investments.onlinequotes"
 >Online Koersen</link
->.</action
-></para>
+>. </para>
     </listitem>
   </varlistentry>
 
@@ -1267,9 +1191,7 @@
 ></term>
     <listitem>
       <para
-><action
->Voert een controle uit op uw bestand en probeert indien mogelijk de gevonden problemen op te lossen.</action
-></para>
+>Voert een controle uit op uw bestand, repareert elk probleem het kan repareren en toont een rapport van de resultaten. </para>
       <para
 >Maak een reservekopie van uw bestand voordat u dit uitvoert.</para>
     </listitem>
@@ -1286,25 +1208,49 @@
 ></term>
     <listitem>
       <para
-><action
->Voert een prestatietest uit op uw bestand en toont het resultaat.</action
-></para>
+>Voert een prestatietest uit op uw bestand en toont het resultaat.</para>
     </listitem>
   </varlistentry>
-  <!--Generate Database SQL
-  Debug Traces
-  Debug Timers-->
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Hulpmiddelen</guimenu
+><guimenuitem
+>Genereer SQL voor database</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Genereert de SQL noodzakelijk om een database aan te maken.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Hulpmiddelen</guimenu
+><guimenuitem
+>Timers debuggen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Dit is een hulpmiddel voor ontwikkelaars.</para>
+    </listitem>
+  </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.settings.help">
-<title
+<sect2 id="reference.menus.settings.help"
+><title
 >Menu's Instellingen en Help</title>
-
 <para
->&kmymoney; heeft het standaard Instellingen en Help menu van &kde; zoals beschreven in  <ulink url="help:/fundamentals/menus.html"
+>De menu's Instellingen en Help van &kmymoney; zijn gebaseerd op die beschreven <ulink url="help:/fundamentals/menus.html"
 >&kde; Fundamentals</ulink
-> met een extra onderdeel:</para>
+> met enige extra items. </para>
 
 <variablelist>
   <varlistentry>
@@ -1318,14 +1264,51 @@
 ></term>
     <listitem>
       <para
-><action
 >Schakelt alle meldingen weer in die u heeft uitgeschakeld door <guimenuitem
 >Niet opnieuw vragen</guimenuitem
-> in een dialoogvenster te selecteren.</action
-></para>
+> in een dialoogvenster te selecteren.</para>
     </listitem>
   </varlistentry>
+
   <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Taal configureren...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Standaard hangt de door &kmymoney; gebruikte taal af van de systeembrede instellingen voor de locatie of taalcode. Dit biedt u het wijzigen van die taal en om een terugval taal in te stellen, die wordt gebruikt voor tekst die niet vertaald is in de primaire taal. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Alt;<keycap
+>,</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Sneltoetsen configureren...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Biedt u het toevoegen of wijzigen van sneltoetsen voor verschillende acties. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <!-- FIXME: There is some overlap between here and the KBanking Plugin section.
+              Better coordination would be good. -->
     <term
 ><menuchoice
 ><guimenu
@@ -1336,20 +1319,57 @@
 ></term>
     <listitem>
       <para
-><action
->Instellingen voor online bankieren configureren</action
->, zie <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
+>Configureer instellingen voor online bankieren, maar alleen als de module KBanking is ingeschakeld. Meer informatie is te vinden in de sectie over het configureren van de <link linkend="details.settings.plugins.kbanking"
+>KBanking-plug-in</link
+> evenals in de <ulink url="https://www.gnucash.org/docs/v5/C/gnucash-manual/tools-on-line-banking.html#tool- aqb-modules"
+>&gnucash; documentatie</ulink
+>. </para>
+
+      <para
+>Het proces van opzetten van online toegang in AqBanking is beschreven in <ulink url="https://wiki.gnucash.org/wiki/De/Onlinebanking-Einrichtungsassistent"
+>de &gnucash; wiki (alleen In het Duits)</ulink
+>. Dit menu-item brengt u naar ed dialoog getoond in stap #3. Het proces tot stap #18 is hetzelfde voor KMyMoney. Eenmaal gedaan, dan kunt de rekening in &kmymoney; overeen laten komen met <guimenu
+>Rekening</guimenu
+> <guisubmenu
+>Rekening overeen laten komen</guisubmenu
+> en selecteer de rekening uit de geleverde lijst. Vanaf daar, gebruik eenvoudig <guimenu
+>Rekening</guimenu
+> <guisubmenu
+>Rekening bijwerken</guisubmenu
+> of in geval u meer dan één online rekening hebt gekoppeld <guimenu
+>Rekening</guimenu
+> <guisubmenu
+>Werk alle rekeningen bij</guisubmenu
+>. </para>
+
+      <para
+>Zie <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
 >Hoe configureer ik online bankieren</ulink
 > voor verdere details. </para>
-      <para
->Merk op dat deze menuselectie alleen beschikbaar is als de module KBanking is ingeschakeld. Zie de sectie over het configureren van de <link linkend="details.settings.plugins.kbanking"
->KBanking-plug-in</link
-> voor meer informatie. </para>
     </listitem>
   </varlistentry>
 
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Alt;<keycap
+>I</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Help</guimenu
+><guimenuitem
+>Zoek actie...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+>Toont de namen en sneltoetsen van alle acties in &kmymoney;. Klikken op een zal die actie aanroepen, als het nu is ingeschakeld. </para>
+    </listitem>
+  </varlistentry>
 </variablelist>
 </sect2>
-
 </sect1
 >&details-widgets; </chapter>

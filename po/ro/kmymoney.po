@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-23 03:30+0000\n"
+"POT-Creation-Date: 2025-05-24 03:28+0000\n"
 "PO-Revision-Date: 2024-02-24 16:23+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -21243,78 +21243,78 @@ msgstr "Caută"
 msgid "Ledgers"
 msgstr "Registre"
 
-#: kmymoney/views/kmymoneyview.cpp:539
+#: kmymoney/views/kmymoneyview.cpp:554
 #, fuzzy, kde-format
 #| msgid "Show KMyMoney welcome page"
 msgid "Show home page"
 msgstr "Afișează pagina de bun venit a aplicației KMyMoney"
 
-#: kmymoney/views/kmymoneyview.cpp:540
+#: kmymoney/views/kmymoneyview.cpp:555
 #, fuzzy, kde-format
 #| msgctxt "Header for AqBanking account list"
 #| msgid "Institution Code"
 msgid "Show institutions page"
 msgstr "Cod instituție"
 
-#: kmymoney/views/kmymoneyview.cpp:541
+#: kmymoney/views/kmymoneyview.cpp:556
 #, fuzzy, kde-format
 #| msgid "Show all accounts"
 msgid "Show accounts page"
 msgstr "Arată toate conturile"
 
-#: kmymoney/views/kmymoneyview.cpp:542
+#: kmymoney/views/kmymoneyview.cpp:557
 #, fuzzy, kde-format
 #| msgid "Scheduled transactions"
 msgid "Show scheduled transactions page"
 msgstr "Tranzacții programate"
 
-#: kmymoney/views/kmymoneyview.cpp:543
+#: kmymoney/views/kmymoneyview.cpp:558
 #, fuzzy, kde-format
 #| msgid "Income categories"
 msgid "Show categories page"
 msgstr "Categorii de venituri"
 
-#: kmymoney/views/kmymoneyview.cpp:544
+#: kmymoney/views/kmymoneyview.cpp:559
 #, fuzzy, kde-format
 #| msgid "Show totals column"
 msgid "Show tags page"
 msgstr "Afișează coloana totaluri"
 
-#: kmymoney/views/kmymoneyview.cpp:545
+#: kmymoney/views/kmymoneyview.cpp:560
 #, fuzzy, kde-format
 #| msgid "Show KMyMoney welcome page"
 msgid "Show payees page"
 msgstr "Afișează pagina de bun venit a aplicației KMyMoney"
 
-#: kmymoney/views/kmymoneyview.cpp:546
+#: kmymoney/views/kmymoneyview.cpp:561
 #, kde-format
 msgid "Show ledgers page"
 msgstr ""
 
-#: kmymoney/views/kmymoneyview.cpp:547
+#: kmymoney/views/kmymoneyview.cpp:562
 #, fuzzy, kde-format
 #| msgid "Investments"
 msgid "Show investments page"
 msgstr "Investiții"
 
-#: kmymoney/views/kmymoneyview.cpp:548
+#: kmymoney/views/kmymoneyview.cpp:563
 #, fuzzy, kde-format
 #| msgid "Save report as"
 msgid "Show reports page"
 msgstr "Salvează raportul ca"
 
-#: kmymoney/views/kmymoneyview.cpp:549
+#: kmymoney/views/kmymoneyview.cpp:564
 #, fuzzy, kde-format
 #| msgid "New budget"
 msgid "Show budget page"
 msgstr "Buget nou"
 
-#: kmymoney/views/kmymoneyview.cpp:550
+#: kmymoney/views/kmymoneyview.cpp:565
 #, kde-format
 msgid "Show forecast page"
 msgstr ""
 
-#: kmymoney/views/kmymoneyview.cpp:551
+#: kmymoney/views/kmymoneyview.cpp:566
 #, fuzzy, kde-format
 #| msgid "Show title bar on each page"
 msgid "Show outbox page"

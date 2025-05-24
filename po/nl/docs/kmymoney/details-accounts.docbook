@@ -10,58 +10,172 @@
 >&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->2018-02-01</date>
+>2024-12-01</date>
   <releaseinfo
->5.0.0</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
 
 <title
 >Rekeningen</title>
 
-<sect1 id="details.accounts.view">
-<title
->De weergave van rekeningen</title>
+<para
+>Uw bestand &kmymoney; bevat een of meer rekeningen. Al uw geld is in een van deze rekeningen. Er zijn een aantal verschillende typen rekeningen. Typisch <quote
+>Bezit</quote
+>rekeningen omvatten bankrekeningen, geld en investeringen. Typisch <quote
+>Schulden</quote
+> rekeningen omvatten creditcards en leningen. </para>
 
 <para
->De rekeningweergave biedt een samenvatting van alle rekeningen. Het komt overeen met de Bankenwergave, behalve rekeningen die gegroepeerd zijn onder de categorieën Bezittingen en Schulden. Typische Bezittingenrekeningen omvatten bankrekeningen, kasgeld en investeringen, terwijl typische Schuldenrekeningen creditcards en leningen omvatten. </para>
-
-<para
->Er zijn in werkelijkheid twee andere rekeningencategorieën: Inkomen en Uitgaven. Categorieën zijn een manier om uw transactie te organiseren; ze worden gegroepeerd onder de categorie Inkomen- of Uitgavenrekening en worden intern behandeld door &kmymoney; als rekeningen. Ze worden in meer detail beschreven in het hoofdstuk over <link linkend="details.categories"
+>Er zijn twee andere typen rekeningen: <quote
+>Inkomen</quote
+> en <quote
+>Uitgaven</quote
+>. Deze rekeningen zijn <quote
+>Categorieën</quote
+> en zijn een manier om uw transactie te organiseren. Ze worden intern door &kmymoney; de rekeningen beschouwd en worden in meer detail beschreven in de sectie over <link linkend="details.categories"
 >Categorieën</link
->. De categorieën Inkomen- en Uitgavenrekeningen worden altijd getoond in de Categorieënweergave, maar het is mogelijk om <link linkend="details.settings"
+>. De rekeningen Inkomen en Uitgaven worden altijd getoond in de Categorieënweergave, maar het is mogelijk om <link linkend="details.settings"
 >&kmymoney; te configureren</link
 > om ze ook te tonen op de Rekeningenweergave. </para>
 
-<para>
-<screenshot>
-    	<screeninfo
->rekeningweergave</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="account_view.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->rekeningweergave</phrase>
-	</textobject>
-	</mediaobject>
-</screenshot>
-</para>
+<para
+>U kunt <quote
+>Eigen vermogen</quote
+> ook zien als een type rekening. Elke rekening van dit type is een speciale rekening in &kmymoney;, gebruikt om het openingssaldo van transacties van andere rekeningen te bevatten. </para>
 
 <para
->Zoals in de Institutenweergave, zal de Rekeningweergave verschillende kolommen tonen met beschrijvende en samenvattingsinformatie over elke rekening. De rest van dit hoofdstuk zal focussen op functionaliteit van Bezittingen- en Verplichtingenrekeningen. Inkomen- en Uitgavenrekeningen, &ie;, Categorieën, worden beschreven in het hoofdstuk over <link linkend="details.categories"
+>Het uiteindelijke type, hoewel het als eerste op de lijst wordt getoond, is <quote
+>Favoriet</quote
+>. Dit zijn rekeningen van elk ander type die u hebt aangegeven als <quote
+>favoriet</quote
+> rekeningen in de details bij het aanmaken of bewerken van die rekening. </para>
+
+<sect1 id="details.accounts.view"
+><title
+>De weergave van rekeningen</title>
+<screenshot>
+  <screeninfo
+>rekeningenweergave</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="account_view.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>rekeningenweergave</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>De rekeningenweergave biedt een samenvatting van alle rekeningen. Het komt overeen met de Bankenwergave, behalve dat de rekeningen zijn gegroepeerd op type van de rekening. De lijst met rekeningen onder elk type rekening (of onder de ouderrekening voor elke subrekening) kan uitgevouwen of ingevouwen worden door op de pijl links van het type of naam te klikken. </para>
+
+<para
+>Zoals in de Bankenweergave zal de Rekeningweergave verschillende kolommen tonen met beschrijvende en samenvattingsinformatie over elke rekening. Zoals met de Bankenweergave kunt u selecteren welke kolommen getoond worden door rechts te klikken op een kolomkop en het keuzevak naast de naam van de kolom al dan niet te selecteren of de selectie ongedaan te maken. </para>
+
+<para
+>De rest van dit hoofdstuk zal focussen op functionaliteit van Bezit- en Schuldenrekeningen. Inkomen- en Uitgavenrekeningen, &ie;, Categorieën, worden beschreven in het hoofdstuk over <link linkend="details.categories"
 >Categorieën</link
 >. </para>
 
+<variablelist>
+  <varlistentry>
+    <term
+>Naam</term>
+    <listitem>
+      <para
+>De naam van het account. Deze kolom wordt altijd getoond. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Type</term>
+    <listitem>
+      <para
+>Het type van de rekening, &eg;, Sparen, Cheques, Creditcard, Aandelen, &etc; </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Online</term>
+    <listitem>
+      <para
+>Een indicatie of deze rekening geconfigureerd is voor online toegang. Het proces van configureren van rekeningen voor online toegang is beschreven in het <link linkend="details.impexp"
+>hoofdstuk Importeren en Exporteren.</link
+>, maar details over de beschikbare instellingen zijn onderstaand in de sectie over <link linkend="details.accounts.edit"
+>Rekeninginformatie bewerken</link
+>. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Belasting</term>
+    <listitem>
+      <para
+>Een indicatie of deze rekening geconfigureerd is als belangrijk voor de belasting. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>BTW</term>
+    <listitem>
+      <para
+>Een indicatie of deze rekening geconfigureerd is om BTW op transacties toe te passen. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Saldo</term>
+    <listitem>
+      <para
+>Het huidige saldo van de rekening, getoond in de valuta gekozen toen de rekening werd aangemaakt. </para>
+    </listitem>
+  </varlistentry>
+  
+  <varlistentry>
+    <term
+>Netto waarde</term>
+    <listitem>
+      <para
+>Dit is dezelfde waarde las het saldo, maar altijd in de basis valuta gekozen toen het gegevensbestand was aangemaakt. Deze waarden worden opgeteld voor de rij voor het type tekening alles. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Nummer</term>
+    <listitem>
+      <para
+>Het rekeningnummer, als er een is ingevoerd. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>IBAN</term>
+    <listitem>
+      <para
+>Het <acronym
+><ulink url="http://en.wikipedia.org/wiki/International_Bank_Account_Number"
+>IBAN</ulink
+></acronym
+> (International Bank Account Number) wordt getoond als er een waarde is ingevoerd in het toepasselijke veld in de informatiedialoog van de rekening. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
 </sect1>
 
-<sect1 id="details.accounts.create">
-<title
+<sect1 id="details.accounts.create"
+><title
 >Een rekening aanmaken</title>
-
 <note
 ><para
->U moet een bestand openen voordat u een nieuwe rekening kunt openen. Als u geen bestaand bestand hebt, dan is het nodig om <link linkend="firsttime.3"
+>U moet een bestand openen voordat u een nieuwe rekening kunt openen. Als u geen bestaand bestand hebt, dan is het nodig om <link linkend="firsttime.newfile"
 >er een aan te maken</link
 >. </para
 ></note>
@@ -79,63 +193,65 @@
 ><imagedata fileref="newacct.png" format="PNG"/></imageobject
 ></inlinemediaobject
 > </guiicon
-> pictogram nieuwe rekening uit de werkbalk. U kunt ook een rekening aanmaken uit de Rekeningenweergave; druk op het pictogram Rekening in de weergaveselector en klik dan rechts op het boomstructuurpictogram Bezittingen of Schulden en selecteer <guimenuitem
+> pictogram nieuwe rekening uit de werkbalk. U kunt ook een rekening aanmaken uit de Rekeningenweergave; druk op het pictogram Rekening in de weergaveselector en klik dan rechts op het boomstructuurpictogram Bezit of Schulden en selecteer <guimenuitem
 >Nieuwe rekening...</guimenuitem
 > uit het popup-menu. </para>
 
-<sect2 id="details.accounts.create.institution">
-<title
+<sect2 id="details.accounts.create.institution"
+><title
 >De naam van het instituut (bank)</title>
-
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-        <imagedata fileref="accwiz1.png" format="PNG"/>
-      </imageobject>
-      <textobject>
-        <phrase
->Accountassistent</phrase>
+<screenshot>
+  <screeninfo
+>assistent voor nieuwe rekening - bank</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz1.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistent voor nieuwe rekening - bank</phrase>
       </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
+  </mediaobject>
+</screenshot>
 
 <para
->De eerste stap omvat het selecteren van een instituut/bank voor de rekening. Als dit een rekening is voor een instituut dat u al hebt aangemaakt, dan kunt u het instituut selecteren uit de afrollijst. Als u een nieuw instituut wilt aanmaken, klik op de knop <guibutton
->Nieuw instituut</guibutton
->. Dit brengt de dialoog Nieuw instituut, zoals beschreven in de vorige sectie. Als dit geen bankrekening is of als u geen online bankieren wilt gebruiken, dan hoeft u geen instituut te specificeren. </para>
+>De eerste stap omvat het selecteren van een bank voor de rekening. Als dit een rekening is voor een bank die u al hebt aangemaakt, dan kunt u de bank selecteren uit de afrollijst. Als u een nieuwe bank wilt aanmaken, klik op de knop <guibutton
+>Nieuwe bank</guibutton
+>. Dit brengt de dialoog Nieuwe bank, zoals beschreven in de vorige sectie. Als dit geen bankrekening is of als u geen online bankieren wilt gebruiken, dan hoeft u geen bank te specificeren. </para>
 
 <para
 >Het rekeningnummer en het <ulink url="http://en.wikipedia.org/wiki/International_Bank_Account_Number"
 ><acronym
 >IBAN</acronym
 > (International Bank Account Number)</ulink
-> worden nu niet door &kmymoney; gebruikt. Deze velden mogen leeg blijven en op een later moment ingevuld; ze zijn alleen vereist voor online bankieren. </para>
+> worden niet door &kmymoney; vereist. Deze velden mogen leeg blijven en op een later moment ingevuld. Het rekeningnummer kan gebruikt worden voor <link linkend="details.impexp.ofxdirectconnect"
+>online bankieren</link
+> en om te verzekeren dat gegevensimport de juiste rekening gebruikt. Het <acronym
+>IBAN</acronym
+> kan gebruikt worden door de plug-in KBanking. </para>
 
 <para
->Om door te gaan naar de volgende stap klikt u op <guibutton
+>Om door te gaan naar de volgende stap klikt op <guibutton
 >Volgende</guibutton
 >. </para>
 </sect2>
 
-<sect2 id="details.accounts.create.account">
-<title
+<sect2 id="details.accounts.create.account"
+><title
 >Rekening</title>
-
-<para>
-  <screenshot>
-          <mediaobject>
-            <imageobject>
-              <imagedata fileref="accwiz2.png" format="PNG"/>
-            </imageobject>
-            <textobject>
-              <phrase
->Accountassistent</phrase>
-            </textobject>
-          </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>assistent voor nieuwe rekening - rekeningdetails</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz2.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistent voor nieuwe rekening - rekeningdetails</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
 >Voer eerst een naam voor de rekening in. Deze naam zal gebruikt worden om het te identificeren. </para>
@@ -149,7 +265,7 @@
 >Betaalrekening</term>
     <listitem>
       <para
->Een normale betaalrekening, het type dat u bij elke bank kan krijgen. </para>
+>Een normale betaalrekening, zoals u bij elke bank of kredietmaatschappij kan krijgen. </para>
     </listitem>
   </varlistentry>
 
@@ -158,7 +274,7 @@
 >Spaarrekening</term>
     <listitem>
       <para
->Een normale spaarrekening, het type dat u bij elke bank kan krijgen. </para>
+>Een normale spaarrekening, zoals u bij elke bank of kredietmaatschappij kunt krijgen. </para>
     </listitem>
   </varlistentry>
 
@@ -185,7 +301,9 @@
 >Lening</term>
     <listitem>
       <para
->Een rekening om een lening van geld te beheren ofwel geleend of uitgeleend. Met een Leningrekening berekent &kmymoney; automatisch rentebetalingen om u te helpen de hoofdlening te volgen. Leningen zonder rente kunnen onderstaand het gewone type Bezittingen of Verplichtingen gebruiken, afhankelijk van of het geld is uitgeleend of geleend. </para>
+>Een rekening om een lening van geld te beheren ofwel geleend of uitgeleend. Met een Leningrekening berekent &kmymoney; automatisch rentebetalingen om u te helpen de hoofdlening te volgen. Leningen zonder rente zouden het onderstaande gewone type Bezittingen of Verplichtingen moeten gebruiken, afhankelijk van of het geld is uitgeleend of geleend. Een <link linkend="details.schedules"
+>planning</link
+> kan aangemaakt worden om gaande betalingen te beheren. </para>
     </listitem>
   </varlistentry>
 
@@ -203,7 +321,7 @@
 >Vermogen</term>
     <listitem>
       <para
->Een rekening om een bezitting te beheren die niet past in een van de bovenstaande typen. </para>
+>Een rekening om een bezitting te beheren die niet past in een van de bovenstaande typen. Bijvoorbeeld, dit kan gebruikt worden om de waarde van een voertuig te volgen. </para>
     </listitem>
   </varlistentry>
 
@@ -212,13 +330,22 @@
 >Verplichtingen</term>
     <listitem>
       <para
->Een rekening om geleend geld of een toekomstige uitgave te beheren die niet past in een van de bovenstaande typen. Als rente berekend moet worden, kunt u misschien beter het bovenstaande type Lening gebruiken. </para>
+>Een rekening om geleend geld of om een toekomstige uitgave te beheren die niet past in een van de bovenstaande typen. Als rente berekend moet worden, zou u het bovenstaande type Lening moeten gebruiken. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Eigen vermogen</term>
+    <listitem>
+      <para
+>Rekeningen van dit type worden gebruikt voor Openingssaldotransacties in andere rekeningen. &kmymoney; maakt automatisch één rekening van dit type en het is zelden nodig er nog een aan te maken. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 
 <para
->Selecteer de te gebruiken valuta voor de rekening uit de afrollijst. </para>
+>Selecteer de te gebruiken valuta voor de rekening uit de afrollijst. De standaard is de valuta gekozen toen het gegevensbestand werd aangemaakt. </para>
 
 <para
 >Voer de datum in waarop de rekening is geopend of selecteer het uit de kalender met het pictogram rechts. U zult niet in staat zijn om een transactie in te voeren met een datum vroeger dan de begindatum van de rekening, maar u kunt deze datum later, indien nodig. wijzigen. </para>
@@ -227,54 +354,54 @@
 >Voer het beginsaldo in voor de rekening. Als dit een bestaande bankrekening is, kan deze informatie gevonden worden in uw bankafschrift. Als het een nieuwe rekening is, kan het beginsaldo op nul gelaten worden. </para>
 
 <para
->Het selecteren van het <emphasis
+>Het selecteren van het keuzevakje <emphasis
 >Voorkeursrekening</emphasis
-> keuzehokje zal de toegang hiertoe in sommige dialogen van &kmymoney; als voorkeur hebben. </para>
+> zal gemakkelijker toegang bieden in sommige dialogen en weergaven van &kmymoney;. Op sommige plaatsen wordt hiernaar verwezen als een rekening met <emphasis
+>Voorkeur</emphasis
+>. </para>
 
 <para
->Om door te gaan naar de volgende stap klikt u op <guibutton
+>Om door te gaan naar de volgende stap klikt op <guibutton
 >Volgende</guibutton
 >. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Creditcardrekening</title>
-
 <para
 >Bij aanmaken van een Creditcardrekening kunt u, na invoeren van de basis informatie en drukken op <guibutton
 >Volgende</guibutton
 >, &kmymoney; als optie voor u een <link linkend="details.schedules"
->geplande transactie</link
+>Geplande transactie</link
 > laten aanmaken. </para>
 
-<para>
-  <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz6.png" format="PNG"/>
-              </imageobject>
-              <textobject>
-                <phrase
->Accountassistent</phrase>
-              </textobject>
-            </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>assistent voor nieuwe rekening - creditcard met planning</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz6.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistent voor nieuwe rekening - creditcard met planning</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->Als u zo'n transactie gegenereerd wilt hebben, ga dan na dat het keuzevakje is geselecteerd en voer de vereiste informatie in. </para>
+>Als u zo'n transactie gegenereerd wilt hebben, ga na dat het keuzevakje is geselecteerd en voer de vereiste informatie in. </para>
 
 <para
->Druk op <guibutton
+>Klik op <guibutton
 >Volgende</guibutton
 > om door te gaan. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Investeringsrekening</title>
-
 <para
 >In &kmymoney;, bevatten investeringsrekeningen alleen waardepapieren (obligaties, aandelen, &etc;) maar bevatten geen kasgeld. (Dit is waarom u geen beginsaldo voor een investeringsrekening kunt specificeren.) Als een transactie in een investeringsrekening kasgeld vereist of genereert (zoals bij aandeel te kopen of te verkopen,) wordt een makelaarsrekening gebruikt voor het kasgeld. Makelaarsrekeningen worden verder beschreven in het hoofdstuk over <link linkend="details.investments"
 >Investeringen</link
@@ -282,56 +409,58 @@
 >Volgende</guibutton
 >, hebt u de optie om een bijbehorende makelaarsrekening aan te maken. </para>
 
-<para>
-  <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz7.png" format="PNG"/>
-              </imageobject>
-              <textobject>
-                <phrase
->Accountassistent</phrase>
-              </textobject>
-            </mediaobject>
-  </screenshot>
-</para>
+<para
+>Er zijn veel verzoeken gedaan om Investeringsrekeningen ook cash te laten bevatten en dit zal waarschijnlijk mogelijk zijn in een toekomstige versie van &kmymoney;, samen met andere zaken die nu niet mogelijk zijn. Dit zal echter een aanzienlijke inspanning inhouden en wordt niet verwacht in de nabije toekomst. </para>
+
+<screenshot>
+  <screeninfo
+>assistent voor nieuwe rekening - investering</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz7.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistent voor nieuwe rekening - investering</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
 >Het is in het algemeen het beste om de makelaarsrekening hier aan te maken, die dezelfde naam zal krijgen als de investeringsrekening, met "(makelaar)" achtergevoegd. Het is nu niet mogelijk om de begindatum of saldo van de makelaarsrekening op dit moment te specificeren; u zou dat kunnen doen door de details van de rekening te bewerken nadat de rekening is aangemaakt. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >Leningrekeningen</title>
-
 <para
->Leningrekeningen zijn speciale rekeningen om u te helpen bij het beheren van Leningen met rente en geplande terugbetalingen. Door &kmymoney; te voorzien van informatie over de lening, kan &kmymoney; u helpen bij het volgen van rentebetalingen en de resterende hoofdlening. </para>
+>Leningrekeningen hebben speciale mogelijkheden om u te helpen bij het beheren van Leningen met rente en geplande terugbetalingen. Door &kmymoney; te voorzien van informatie over de lening, kan &kmymoney; u helpen bij het volgen van rentebetalingen en de resterende hoofdlening. </para>
 
-<para>
-  <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz8_1.png" format="PNG"/>
-              </imageobject>
-              <textobject>
-                <phrase
->Accountassistent</phrase>
-              </textobject>
-            </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>assistent voor nieuwe rekening - leningdetails</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz8_1.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistent voor nieuwe rekening - leningdetails</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
 >Op de pagina Details voert u de algemene informatie in over de lening. </para>
 
 <para
->Als eerste selecteert u of u geld leent of uitleent. Als u geld leent zal de lening in de lijst Rekeningen verschijnen onder Verplichtingen. Als u geld uitleent zal de lening in de lijst onder Bezittingen verschijnen. </para>
+>Als eerste selecteert u of u geld leent of uitleent. Als u geld leent zal de lening een Verplichtingenrekening zijn. Als u geld uitleent zal de lening een Bezittingenrekening zijn. </para>
 
 <para
 >Vervolgens selecteert u de begunstigde of de betaler van de lening. Zoals altijd, als de naam nog niet bestaat in de lijst Begunstigers, voer het hier in en &kmymoney; zal het voor u aanmaken. </para>
 
 <para
->De volgende drie items zijn voor behandelen van Leningen waarop u al betalingen hebt gedaan. Als u <guibutton
+>De volgende drie items zijn voor het behandelen van Leningen waarop u al betalingen hebt gedaan. Als u <guibutton
 >Ja</guibutton
 > selecteert in het afrolvak <guilabel
 >Hebt u al betalingen gedaan/ontvangen?</guilabel
@@ -350,19 +479,19 @@
 >Volgende</guibutton
 > op door te gaan. </para>
 
-<para>
-  <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz8_2.png" format="PNG"/>
-              </imageobject>
-              <textobject>
-                <phrase
->Accountassistent</phrase>
-              </textobject>
-            </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>assistent voor nieuwe rekening - leningbetalingen</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz8_2.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistent voor nieuwe rekening - leningbetalingen</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
 >De pagina Betalingen is waar u de betalingen en rentepercentages voor de lening invoert. </para>
@@ -388,7 +517,7 @@
 >Rentepercentage</term>
     <listitem>
       <para
->Het jaarlijkse rentepercentage van de lening.</para>
+>Het jaarlijkse rentepercentage van de lening. Dit moet een positief getal zijn. Als er geen rente is, dan zou de lening aangemaakt moeten worden als een Bezittingen- of Verplichtingenrekening. </para>
     </listitem>
   </varlistentry>
 
@@ -433,19 +562,19 @@
 >Verder</guibutton
 > ingeschakeld en kunt u doorgaan naar de volgende pagina. </para>
 
-<para>
-  <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz8_3.png" format="PNG"/>
-              </imageobject>
-              <textobject>
-                <phrase
->Accountassistent</phrase>
-              </textobject>
-            </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>assistent voor nieuwe rekening - leningkosten</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz8_3.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistent voor nieuwe rekening - leningkosten</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
 >De pagina Kosten is waar u kosten aan de betalingen van de lening kunt toevoegen. </para>
@@ -455,44 +584,44 @@
 >Extra kosten</guibutton
 >. De bewerker voor Transactie splitsen zal getoond worden voor invoer van de kosten. Elke hier toegevoegde regel zal meegenomen worden in de planning van betalingen voor de lening. Wanneer u de splitsingen opslaat zal de pagina Kosten, de hoofdsom en rentebetalingen, de totale extra kosten en de totale periodieke betalingen getoond worden. </para>
 
-<para>
-  <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz8_4.png" format="PNG"/>
-              </imageobject>
-              <textobject>
-                <phrase
->Accountassistent</phrase>
-              </textobject>
-            </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>assistent voor nieuwe rekening - leningplanning</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz8_4.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistent voor nieuwe rekening - leningplanning</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
 >&kmymoney; zal een <link linkend="details.schedules"
->geplande transactie</link
-> voor uw lening aanmaken. De pagina Planning is waar u de overige details nodig om de planning te maken invoert. </para>
+>Geplande transactie</link
+> voor uw lening aanmaken. De pagina Planning is waar u de overige details nodig om de Planning te maken invoert. </para>
 
 <para
->Voer eerst de categorie in waaraan rente op leningen zullen worden toegekend. Voer daarna de rekening in waaruit de afbetaling van de lening zal worden gedaan. </para>
+>Voer eerst de categorie in waaraan rente op leningen zullen worden toegekend. Voer daarna de rekening in waarin de betaling van de lening zal worden gedaan. </para>
 
 <para
 >De pagina toont ook de eerste betalingsdatum waarvoor de planning zal worden aangemaakt. </para>
 
-<para>
-  <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz8_5.png" format="PNG"/>
-              </imageobject>
-              <textobject>
-                <phrase
->Accountassistent</phrase>
-              </textobject>
-            </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>assistent voor nieuwe rekening - lening uitbetaling</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz8_5.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistent voor nieuwe rekening - lening uitbetaling</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
 >&kmymoney; heeft als optie om een transactie aan te maken die weergeeft wat is ontvangen of betaald toen de lening was aangemaakt. </para>
@@ -514,28 +643,25 @@
 >. </para>
 </sect2>
 
-<sect2 id="details.accounts.create.parent">
-<title
->Moeder rekening</title>
-
-<para>
-  <screenshot>
-	<screeninfo
->Moeder rekening</screeninfo>
-	<mediaobject>
-	  <imageobject>
-            <imagedata fileref="accwiz10.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase
->Accountassistent</phrase>
-	  </textobject>
-	</mediaobject>
-  </screenshot>
-</para>
+<sect2 id="details.accounts.create.parent"
+><title
+>Moederrekening</title>
+<screenshot>
+  <screeninfo
+>assistent voor nieuwe rekening - moederrekening</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz10.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistent voor nieuwe rekening - moederrekening</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->Dit is de voorlaatste stap in het aanmaken van een nieuwe rekening behalve een lening. Afhankelijk van het type rekening dat wordt aangemaakt wordt ereen boomstructuur van uw activa- of passiva-rekeningen getoond. </para>
+>Dits is de voorlaatste stap in het aanmaken van elke nieuwe rekening behalve een lening. Afhankelijk van het type rekening dat wordt aangemaakt, zal een boomstructuur van uw Bezittingen- of Verplichtingenrekeningen worden getoond. De meeste rekeningen zijn directe kinderen van het type rekening Bezittingen of Verplichtingen. De meeste rekeningen kunnen aangemaakt worden als subrekeningen, met gebruik van een andere rekening als de moeder. Er is geen financieel gevolg voor het maken van een rekening als een subrekening; het wordt alleen gebruikt voor het organiseren van het hiërarchisch tonen van rekeningen in de Bankenweergave van de Rekeningenweergave. </para>
 
 <para
 >De pagina Ouder-rekening wordt nu voor leningen niet getoond omdat ze niet als subrekening aangemaakt kunnen worden. Ook investeringsrekeningen kunnen geen andere rekeningen bevatten zodat ze niet in de boomstructuur getoond worden. </para>
@@ -545,25 +671,22 @@
 
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >De details van de rekening herzien en opslaan</title>
-
-<para>
-  <screenshot>
-          <screeninfo
->Nakijken</screeninfo>
-          <mediaobject>
-            <imageobject>
-              <imagedata fileref="accwiz9.png" format="PNG"/>
-            </imageobject>
-            <textobject>
-              <phrase
->Accountassistent</phrase>
-            </textobject>
-          </mediaobject>
-  </screenshot>
-</para>
+<screenshot>
+  <screeninfo
+>assistent voor nieuwe rekening - herziening en beëindigen</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="accwiz9.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>assistent voor nieuwe rekening - herziening en beëindigen</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
 >Dit is de laatste stap in het aanmaken van een nieuwe rekening Er wordt een samenvatting van de ingevoerde informatie getoond. Kijk het na en als alles OK is druk op de knop <guibutton
@@ -574,145 +697,206 @@
 >Annuleren</guibutton
 > om het aanmaken van een nieuwe rekening af te breken. </para>
 
-<note
-><para
->Het type en valuta kan op dit moment niet gewijzigd worden nadat de rekening is aangemaakt. </para
-></note>
+<note>
+  <para
+>De Valuta kan niet gewijzigd worden nadat de rekening is aangemaakt. Het type rekening kan gewijzigd worden, maar alleen binnen een beperkte set van voldoende gelijk type. </para>
+</note>
 </sect2>
 </sect1>
 
-<sect1 id="details.accounts.viewing">
-<title
+<sect1 id="details.accounts.viewing"
+><title
 >Rekeningen openen / bekijken</title>
-
 <para
->Om een rekening in de Grootboekweergave te openen kunt u klikken op de koppeling naar de rekening uit de Hoofdweergave of klikken op het pictogram <guiicon
-><inlinemediaobject
+>Om een rekening in de <link linkend="details.ledgers.view"
+>Grootboekweergave</link
+> te tonen kunt u klikken op de koppeling naar de rekening uit de Hoofdweergave of klikken op het pictogram <guiicon
+> <inlinemediaobject
 > <imageobject
 ><imagedata fileref="ledgers_view.png" format="PNG"/> </imageobject
 > </inlinemediaobject
-></guiicon
-> grootboekpictogram in de weergavekiezer en de rekening kiezen in het afrolvak bovenaan de weergave. Anders in de weergave <guiicon
->Rekening</guiicon
-> ofwel dubbelklikken op het rekeningitem of rechts klikken en <guimenuitem
+> </guiicon
+> grootboekpictogram in de Weergavekiezer. Als de rekening daar niet al wordt getoond, klik dan op <quote
+>+</quote
+> in het meest tabblad en selecteer de rekening kiezen in het afrolvak dat verschijnt. Anders in de Rekeningenweergave of de Bankenweergave, ofwel dubbelklikken op de rekeningnaam of rechts klikken en <guimenuitem
 >Grootboek openen</guimenuitem
-> kiezen. </para>
+> selecteren. </para>
 </sect1>
 
-<sect1 id="details.accounts.edit">
-<title
+<sect1 id="details.accounts.edit"
+><title
 >Rekeninginformatie bewerken</title>
-
 <para
->Om een specifieke rekening te bewerken, druk rechts op die rekening en kies <guimenuitem
+>Om een specifieke rekening te bewerken, klik rechts op de rekeningnaam in de Rekeningenweergave of de Bankenweergave en kies <guimenuitem
 >Rekening bewerken...</guimenuitem
-> of met die rekening openen in het grootboek, selecteer <menuchoice
-><guimenu
+> of met die rekening openen in het grootboek, selecteer <guimenu
 >Rekening</guimenu
-><guimenuitem
+> <guimenuitem
 >Rekening bewerken...</guimenuitem
-></menuchoice
->. Er verschijnt een venster met verschillende tabbladen, elk u in staat stellend om bepaalde informatie over de rekening te bekijken en te wijzigen. voor meer informatie over elk van deze details, zie de sectie op <link linkend="details.accounts.create"
->een nieuwe rekening aanmaken</link
->. </para>
+>. Merk op dat sommige van deze velden uitgeschakeld kunnen zijn, mogelijk afhankelijk van het type rekening. Bijvoorbeeld, <guilabel
+>Valuta</guilabel
+> zal altijd uitgeschakeld zijn, omdat het ingesteld kan worden toen de rekening werd aangemaakt, maar daarna niet meer gewijzigd. <guilabel
+>Item Koers</guilabel
+> is alleen ingeschakeld voor Investeringsrekeningen. </para>
 
-<para>
-  <screenshot>
-        <screeninfo
->Een rekening bewerken</screeninfo>
+<screenshot>
+  <screeninfo
+>rekeninginformatie bewerken</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="account_edit.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>rekeninginformatie bewerken</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="account_edit.png" format="PNG"/>
-          </imageobject>
-
-          <textobject>
-            <phrase
->Rekeninginformatie bewerken</phrase>
-          </textobject>
-        </mediaobject>
-  </screenshot>
-</para>
-
-<formalpara
-><title
->Algemeen</title>
 <para
+>Deze dialoog heeft verschillende tabbladen voor het configureren van verschillende aspecten van een rekening. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Algemeen</term>
+    <listitem>
+      <para
 >Bekijk de algemene informatie over de rekening en wijzig de naam, begindatum, evenals enige van de andere basisinstellingen van de rekening. </para>
-</formalpara>
+    </listitem>
+  </varlistentry>
 
-<formalpara
-><title
->Instituut</title>
-<para
+  <varlistentry>
+    <term
+>Instituut</term>
+    <listitem>
+      <para
 >Bekijk en wijzig het bijbehorend bankinstituut en rekeningnummers. U kunt hier ook een nieuw instituut aanmaken. </para>
-</formalpara>
+    </listitem>
+  </varlistentry>
 
-<formalpara
-><title
->Hiërarchie</title>
-<para
->U kunt de ouderrekening wijzigen door op een andere ouderrekening in deze weergave van de hiërarchie van rekeningen te drukken. </para>
-</formalpara>
+  <varlistentry>
+    <term
+>Hiërarchie</term>
+    <listitem>
+      <para
+>Dit toont waar de rekening is in het geheel van de hiërarchie van rekeningen. U kunt de moederrekening wijzigen door de rekening te verslepen en het los te laten op een andere moederrekening in deze weergave van de hiërarchie van rekeningen of in de Rekeningenweergave of de Bankenweergave. U kunt ook de moederrekening hier wijzigen door te klikken op de nieuwe moederrekening en daarna te klikken op <guibutton
+>OK</guibutton
+>. </para>
+    </listitem>
+  </varlistentry>
 
-<formalpara
-><title
->Grenzen</title>
-<para
->Dit tabblad is alleen aanwezig voor activa- en passiva-rekeningen. Als u hoeveelheden invoert in de beschikbare velden zal &kmymoney; u waarschuwen wanneer het saldo op de rekening deze waarden bereikt. </para>
-</formalpara>
+  <varlistentry>
+    <term
+>Grenzen</term>
+    <listitem>
+      <para
+>Dit tabblad is alleen aanwezig voor activa- en passiva-rekeningen. Als u hoeveelheden invoert in de beschikbare velden zal &kmymoney; u waarschuwen wanneer het saldo op de rekening deze waarden bereikt of er overheen gaat. </para>
+    </listitem>
+  </varlistentry>
 
-<formalpara
-><title
->Belasting</title>
-<para
->Hier kunt u controleren of dit een BTW rekening is en of deze rekening meegenomen moet worden in belastingrapporten. </para>
-</formalpara>
+  <varlistentry>
+    <term
+>Belasting</term>
+    <listitem>
+      <para
+>Hier kunt u controleren of dit een BTW rekening is en u kunt het percentage van de BTW specificeren. Bovendien kunt u aanvinken of deze rekening meegenomen moet worden in belastingrapporten. </para>
+    </listitem>
+  </varlistentry>
 
-<formalpara
-><title
->Online instellingen</title>
-<para
+  <varlistentry>
+    <term
+>Online instellingen</term>
+    <listitem>
+      <para
 >Dit tabblad is alleen aanwezig als de rekening behoort bij een <link linkend="details.impexp.ofxdirectconnect"
 >online rekening</link
 >. Het heeft drie subtabbladen. </para>
-</formalpara>
 
-<itemizedlist>
-<listitem>
-<para
-><emphasis
->Rekeningdetails</emphasis
->: dit toont de status van de online verbinding, de bank/makelaar en rekeningnummer en stelt u in staat om het wachtwoord van de online rekening op te slaan of te wijzigen. </para>
-</listitem>
+      <variablelist>
+        <varlistentry>
+          <term
+>Rekeningdetails</term>
+          <listitem>
+            <para
+>Dit toont de status van de online verbinding, de bank/makelaar en het rekeningnummer. Het biedt u ook het opslaan of wijzigen van het wachtwoord voor het online account. Waar en hoe het wachtwoord werkelijk wordt opgeslagen hangt af van uw specifieke exemplaar, maar meest algemeen wordt het opgeslagen door de <ulink url="https://apps.kde.org/kwalletmanager5/"
+>KDE Portefeuillebeheerder</ulink
+>. </para>
+          </listitem>
+        </varlistentry>
 
-<listitem>
-<para
-><emphasis
->OFX-details</emphasis
->: hier kunt u bepaalde details aanpassen die &kmymoney; gebruikt wanneer het een OFX verbinding met het instituut opzet. Dit zou alleen nodig zijn als u bepaalde fouten krijgt wanneer u de eerste keer de online rekening instelt of misschien als uw instituut de software van de OFX-server wijzigt. </para>
-</listitem>
+        <varlistentry>
+          <term
+>OFX-details</term>
+          <listitem>
+            <para
+>Hier kunt u bepaalde details aanpassen die &kmymoney; gebruikt wanneer het een OFX verbinding met de bank opzet. Dit zou alleen nodig zijn als u bepaalde fouten krijgt wanneer u de eerste keer de online rekening instelt of misschien als uw bank de software van de OFX-server wijzigt. </para>
+          </listitem>
+        </varlistentry>
+        
+        <varlistentry>
+          <term
+>Importdetails</term>
+          <listitem>
+            <para
+>In het bovenste vak kunt u &kmymoney; vertellen wat te gebruiken als de startdatum voor de import. Het lagere vak heeft verschillende items die &kmymoney; gebruikt bij het aanmaken van transacties uit de gedownloade gegevens. </para>
 
-<listitem>
-<para
-><emphasis
->Details importeren</emphasis
->: hier kunt u &kmymoney; vertellen wat als de begindatum voor de import te gebruiken. Bovendien, beginnend met versie 4.6, kunt u kiezen of de naam van de begunstigde gebaseerd is op het PAYEEID, NAME of MEMO-veld van de geïmporteerde transactie. </para>
-</listitem>
-</itemizedlist>
+            <itemizedlist>
+              <listitem>
+                <para
+>U kunt kiezen of de naam van de debiteur gebaseerd is op de DEBITEUR-ID, NAAM of het veld MEMO van de geïmporteerde transactie. Verschillende banken gebruiken verschillende standaarden, dus moet u hier misschien verschillende waarden proberen als uw geïmporteerde transacties consistent de verkeerde debiteur hebben. Helaas, dit is alleen van toepassing op Directe verbinding, maar zal hopelijk ook van toepassing zijn op een zeker punt bij OFX-bestandsimport. </para>
+              </listitem>
+
+              <listitem>
+                <para
+>Sommige banken volgen de OFX-standaard voor het leveren van herhaalbare, unieke FITID (Financial Institution Transaction Identification) wat gedupliceerde transacties veroorzaakt bij herhaalde downloads. Als dit gebeurt kunt u de methode die &kmymoney; gebruikt om duplicaten te detecteren uit de <guilabel
+>OFX FITID</guilabel
+> wijzigen naar de intern berekende <guilabel
+>KMyMoney-ID</guilabel
+>. Dit is niet vaak nodig. </para>
+              </listitem>
+
+              <listitem>
+                <para
+>Transacties importeren uit een bank in een verschillende tijdzone kan soms leiden tot de verkeerde datum op een geïmporteerde transactie. Als dit gebeurt kunt u een <guilabel
+>Tijdzone-offset</guilabel
+> instellen om voor het verschil te corrigeren. </para>
+              </listitem>
+
+              <listitem>
+                <para
+>Niet erg vaak zal een bank OFX-downloads maken met het teken van de transactiehoeveelheid omgedraaid. U kunt op dit keuzevak klikken om dit probleem te corrigeren. </para>
+              </listitem>
+
+              <listitem>
+                <para
+>Een soortgelijk probleem gebeurt soms, maar alleen voor de waarden in investeringstransacties, zoals het kopen en verkopen van aandelen. Op dit keuzevak klikken corrigeert dat. </para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+</variablelist>
 </sect1>
 
-<sect1 id="details.accounts.delete">
-<title
->Rekeningen verwijderen</title>
-
+<sect1 id="details.accounts.delete"
+><title
+>Rekeningen verwijderen en sluiten</title>
 <para
->Om een rekening te verwijderen, verwijder eerst alle transacties uit die rekening in het grootboek. Zoek vervolgens de rekening in de rekeningweergave en na rechts klikken op het item om het pop-up-menu te laten verschijnen selecteer <guimenuitem
+>Een rekening kan alleen verwijderd worden als het geen transacties erin heeft en er niet naar verwezen wordt door enig ander item in het gegevensbestand. In het algemeen betekent dit dat u eerst alle transacties uit die rekening in het grootboek moet verwijderen. Daarna kunt u <menuchoice
+><guimenu
+>Rekening</guimenu
+><guimenuitem
 >Rekening verwijderen...</guimenuitem
-> uit het pop-up-menu. </para>
+></menuchoice
+> selecteren of rechts klikken op de naam in de Rekeningenweergave en <guimenuitem
+>Rekening verwijderen...</guimenuitem
+> selecteren uit het pop-up-menu. </para>
 
 <para
->Als u niet in staat bent om een rekening te verwijderen die geen transacties lijkt te bevatten, controleer uw filter. Zie <menuchoice
+>Als u niet in staat bent om een rekening te verwijderen die geen transacties lijkt te bevatten, dan kunnen er transacties zijn die niet worden getoond in het grootboek vanwege een filter. Zie <menuchoice
 > <guimenu
 >Instellingen</guimenu
 > <guimenuitem
@@ -722,9 +906,146 @@
 > <guimenuitem
 >Filter</guimenuitem
 > </menuchoice
->. Wis alle filters. Stel de begindatum op 1.1.1900 of zo. </para>
+>. Wis alle filters en zet de begindatum op 1.1.1900 of zo. </para>
 
 <para
->Er kunnen transacties in uw grootboek zijn die niet getoond worden, bijvoorbeeld, als u per ongeluk het verkeerde jaar hebt ingevoerd bij het maken van een item zodat er een item overblijft buiten de begindatum van &kmymoney;. Dit verschijnt onder de grootboekpagina als overblijvend fonds. </para>
+>Er kunnen ook transacties in uw grootboek zijn die niet getoond worden, bijvoorbeeld, als u per ongeluk het verkeerde jaar hebt ingevoerd bij het maken van een item zodat er een item overblijft buiten de begindatum van &kmymoney;. Dit verschijnt onder de grootboekpagina als overblijvend fonds. </para>
+
+<para
+>In sommige gevallen zult u in staat zijn om <guimenuitem
+>Rekening verwijderen...</guimenuitem
+> te selecteren, maar een pop-up krijgen waarin staat waarom &kmymoney; de rekening niet kan verwijderen. </para>
+
+<para
+>Een rekening volledig verwijderen verwijdert alle gegevens gerelateerd aan die rekening uit uw gegevensbestand. Ere kunnen echter gevallen zijn waar u een rekening bij de bank hebt gesloten en, hoewel u het niet wilt zien in uw dagelijkse gebruik van &kmymoney;, u wilt de gegevens behouden om te gebruiken in historische rapporten, u kunt <guimenu
+>Rekening</guimenu
+><guimenuitem
+>Rekening sluiten</guimenuitem
+> selecteren of rechts klikken op de naam in de Rekeningenweergave en <guimenuitem
+>Rekening sluiten...</guimenuitem
+> selecteren uit het pop-up-menu. Dit zal de rekening markeren als gesloten en zijn zichtbaarheid zal afhangen van de instelling van <link linkend="reference.menus.view"
+>Alle rekeningen tonen</link
+>. Merk op dat om een rekening te sluiten, het een nul saldo moet hebben, maar het kan nog steeds transacties bevatten. </para>
+
+<para
+>Het is ook mogelijk een gesloten rekening opnieuw te openen. Dit is meestal nodig als u een rekening hebt gesloten, maar gevonden hebt dat u dat deed voor echt alle transacties voor de rekening in te voeren, zoals een laatste rentebetaling of dividend voor een investeringsrekening. In dat geval kunt u <guimenu
+>Rekening</guimenu
+> <guimenuitem
+>Rekening opnieuw openen</guimenuitem
+> selecteren of rechts klikken op de naam in de Rekeningenweergave en <guimenuitem
+>Rekening opnieuw openen</guimenuitem
+> selecteren uit het pop-up-menu. </para>
+</sect1>
+
+<sect1 id="details.accounts.options"
+><title
+>Rekeningopties</title>
+<para
+>Rechts klikken op een Rekening in ofwel de Bankenweergave of de Rekeningenweergave zal de Rekeningopties tonen. U kunt ook gewoon het menu <guimenu
+>Rekening</guimenu
+> selecteren. </para>
+
+<screenshot>
+  <screeninfo
+>rekeningopties sub-menu</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="account_options.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>rekeningopties sub-menu</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Merk op dat elk van de menu-opties in de lijst in- of uitgeschakeld kan zijn afhankelijk van de specifieke geselecteerde rekening. </para>
+
+<para
+><guimenuitem
+>Nieuwe rekening...</guimenuitem
+> laat u stappen door het <link linkend="details.accounts.create"
+>Proces van Rekening aanmaken</link
+>. </para>
+
+<para
+><guimenuitem
+>Nieuwe categorie</guimenuitem
+> laat u stappen door het <link linkend="details.categories.create"
+>Proces van Categorie aanmaken</link
+>. </para>
+
+<para
+><guimenuitem
+>Open grootboek</guimenuitem
+> selecteren brengt u direct naar de <link linkend="details.ledgers.view"
+>Grootboekweergave</link
+> of de <link linkend="details.investments.view"
+>Investeringenweergave</link
+>, afhankelijk van het type rekening. </para>
+
+<para
+><guimenuitem
+>Rekening bewerken...</guimenuitem
+> selecteren laat een venster zien waarmee u <link linkend="details.accounts.edit"
+>verschillende aspecten van de rekening bewerkt</link
+>. </para>
+
+<para
+><guimenuitem
+>Rekening verwijderen...</guimenuitem
+> selecteren verwijdert de geselecteerd rekening, maar alleen als aan bepaalde criteria is voldaan, zoals <link linkend="details.accounts.delete"
+>hier</link
+> beschreven. Anders is dit item uitgeschakeld. </para>
+
+<para
+><guimenuitem
+>Valideren...</guimenuitem
+> selecteren opent de <link linkend="details.reconcile.wizard"
+>Assistent voor valideren</link
+>. <guimenuitem
+>Uitstellen</guimenuitem
+> en <guimenuitem
+>Beëindigen</guimenuitem
+> worden ook beschreven in dezelfde sectie. </para>
+
+<para
+><guimenuitem
+>Transactierapport</guimenuitem
+> selecteren is alleen ingeschakeld voor een beperkte selectie van Rekeningen, waarin het een <link linkend="details.reports.transaction"
+>Transactierapport</link
+> opent voor de geselecteerde rekening, waarin transactie-YTD's worden getoond. </para>
+
+<para
+><guimenuitem
+>Rekening sluiten</guimenuitem
+> selecteren sluit de geselecteerde rekening, zolang er aan bepaalde criteria is voldaan, zoals <link linkend="details.accounts.delete"
+>hier</link
+> beschreven. <guimenuitem
+>Rekening opnieuw openen</guimenuitem
+> is beschreven in dezelfde sectie. </para>
+
+<para
+><guimenuitem
+>Rekening koppelen aan...</guimenuitem
+> en <guimenuitem
+>Rekening loskoppelen van...</guimenuitem
+> selecteren biedt u het associëren van een rekening met een online rekening en om de associatie los maken. <guimenuitem
+>Rekening bijwerken...</guimenuitem
+> selecteren haalt transactiegegevens op uit de online bron voor een rekening die al zijn gekoppeld. Bovendien, <guimenuitem
+>Alle rekeningen bijwerken...</guimenuitem
+> selecteren, wat alleen verschijnt op het hoofdmenu van <guimenu
+>Rekening</guimenu
+>, werkt alle gekoppelde rekeningen bij. Deze zijn allemaal beschreven in het <link linkend="details.impexp"
+>Hoofdstuk Importeren en Exporteren.</link
+> </para>
+
+<para
+><guimenuitem
+>Nieuwe investering...</guimenuitem
+>selecteren, wat alleen verschijnt in het contextmenu wanneer u rechts klikt op een rekening in de Investeringenweergave of Rekeningenweergave, laat de <link linkend="details.investments.newinvestmentwizard"
+>Assistent voor Nieuwe investeringen</link
+> verschijnen. </para>
 </sect1>
 </chapter>

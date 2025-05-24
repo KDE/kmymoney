@@ -4,48 +4,48 @@
   <authorgroup>
     <author
 >&Darin.Strait; &Darin.Strait.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->25/07/2010</date>
+>2024-12-01</date>
   <releaseinfo
->4.5</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Recherche d'opérations</title>
 
-<sect1 id="details.search.general">
-<title
->Généralités</title>
-
 <para
->La boîte de dialogue <guilabel
->Rechercher des opérations</guilabel
-> scrute votre base de données à partir de critères que vous spécifiez. Vous pouvez afficher cette boîte de dialogue en cliquant sur <guimenu
->Éditer</guimenu
-> dans la barre de menu et en choisissant <guimenuitem
->Trouver l'opération...</guimenuitem
+>You can use the <guilabel
+>Search transactions</guilabel
+> dialog to search your data for transactions based on criteria that you specify. You can access the dialog by selecting the <menuchoice
+> <guimenu
+>Edit</guimenu
+> <guimenuitem
+>Find transaction...</guimenuitem
+></menuchoice
+> menu item, or typing <keycombo action="simul"
+>&Ctrl; &Shift;<keycap
+>F</keycap
+></keycombo
 >. </para>
 
 <para
->Il y a deux onglets principaux dans cette boîte de dialogue : l'onglet<quote
->Critère</quote
-> affiche des sous-onglets pour spécifier les critères de recherche. </para>
+>There are two main tabs in this dialog. The <guilabel
+>Criteria</guilabel
+> tab displays a number of subtabs for specifying the search criteria. When the <guibutton
+>Find</guibutton
+> button is pressed, the search is initiated and all criteria that have been entered on any of the Criteria subtabs will be taken into account. </para>
 
 <para
->Les résultats sont affichés dans l'onglet <quote
->Résultat</quote
-> en fin de recherche. Sous la liste des résultats, &kmymoney; précise le nombre d'opérations qui satisfont les critères de recherche. Le fait de double-cliquer sur une opération de la liste provoque l'ouverture du registre approprié et affiche l'opération. </para>
+>After the search has completed, the results will be displayed under the <guilabel
+>Result</guilabel
+> tab. Below the list of results, &kmymoney; shows the number of transactions that met the search criteria. Double-clicking an individual transaction in the result list will bring up the appropriate ledger with that transaction selected. </para>
 
 <para
->Quand le bouton <guibutton
->Chercher</guibutton
-> est cliqué, la recherche est déclenchée et tous les critères saisis dans les divers onglets sont pris en compte. </para>
-
-<para
->Le bouton <guibutton
->Réinitialiser</guibutton
-> rétablit tous les champs de tous les sous-onglets de critères à leur valeur par défaut. Ceci vous permet de spécifier une nouvelle recherche. </para>
+>The <guibutton
+>Reset</guibutton
+> button resets all of the fields on all of the criteria subtabs back to the defaults. This allows you to specify new search criteria. </para>
 
 <para
 >Le bouton <guibutton
@@ -54,42 +54,34 @@
 >Rechercher des opérations</guilabel
 >. </para>
 
-</sect1>
-
-<sect1 id="details.search.criteria">
-<title
+<sect1 id="details.search.criteria"
+><title
 >Critères de recherche</title>
-
 <para
->Il y a plusieurs sous-onglets sous l'onglet principal <quote
->Critère</quote
-> qui vous permettent de préciser les critères de recherche. En dessous de la zone de spécification des critères, &kmymoney; affiche la liste des différents types de critères qui sont actuellement spécifiés pour la recherche. </para>
+>There are several subtabs under the main Criteria tab, each of which allows you to specify a different type of search criteria. Below the area for specifying the criteria, &kmymoney; lists each of the different types of criteria that are currently specified for the search. </para>
 
-<sect2 id="details.search.text">
-<title
+<sect2 id="details.search.text"
+><title
 >Texte</title>
-
 <screenshot>
-<mediaobject>
-<imageobject>
-<imagedata fileref="find-text.png" format="PNG"/>
-</imageobject>
-<textobject>
-<phrase
->Dialogue <quote
->Rechercher des opérations</quote
->, onglet <quote
->Texte</quote
-></phrase>
-</textobject>
-</mediaobject>
+  <screeninfo
+>search transactions, criteria tab, text subtab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-text.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>search transactions, criteria tab, text subtab</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 
 <para
->Ce sous-onglet vous permet de spécifier un texte à rechercher. Il y aussi deux cases à cocher qui précisent comment le texte est utilisé pour la recherche. </para>
+>This tab allows you to specify text to search for. There are also a dropdown field and two check boxes that control how the text is used in the search. </para>
 
 <para
->Par défaut, la recherche aboutit sur tout texte contenant la chaîne de caractères spécifiée. </para>
+>By default, the search will match on simple substrings. For example: </para>
 
 <para>
 <itemizedlist>
@@ -129,282 +121,292 @@
 > ne sera pas trouvé si cette option est cochée. </para>
 
 <para
->Si vous cochez la case <guilabel
->Traiter le texte comme une expression rationnelle</guilabel
->, le texte sera traité comme une expression rationnelle. Pour des informations sur la manière d'établir une expression rationnelle, visitez la documentation &Qt; à propos de <ulink url="https://doc.qt.io/qt-5/qregexp.html"
->classe « QRegExp » </ulink
+>If you check the <guilabel
+>Treat Text as regular expression</guilabel
+> box, the text will be treated as a regular expression. For details on how to craft a regular expression, visit the &Qt; documentation about the <ulink url="https://doc.qt.io/qt-5/qregularexpression.html"
+>QRegularExpression class</ulink
 >. </para>
 </sect2>
 
-<sect2 id="details.search.account">
-<title
+<sect2 id="details.search.account"
+><title
 >Compte</title>
-
 <screenshot>
-<mediaobject>
-<imageobject>
-<imagedata fileref="find-account.png" format="PNG"/>
-</imageobject>
-<textobject>
-<phrase
->Dialogue <quote
->Rechercher des opérations</quote
->, onglet <quote
->Compte</quote
-></phrase>
-</textobject>
-</mediaobject>
+  <screeninfo
+>search transactions, criteria tab, account subtab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-account.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>search transactions, criteria tab, account subtab</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 
 <para
 >Cet onglet vous permet de spécifier les comptes dans lesquels la recherche aura lieu. </para>
 
 <para
->Les comptes sont affichés en arbre. Les comptes dans lesquels la recherche aura lieu sont marqués d'une coche. Si vous cliquez sur le bouton <guibutton
->Tous</guibutton
->, à droite, tous les comptes seront cochés. Si vous cliquez sur le bouton <guibutton
->Aucun</guibutton
->, ils seront tous décochés. Pour cocher, ou décocher un compte, il suffit de cliquer sur la boîte à cocher qui précède son nom et l'état coché /décoché sera inversé. Le même type de sélection peut s'appliquer à une hiérarchie de comptes. </para>
+>Accounts are displayed in a tree format. Accounts that are marked for search are indicated with a checkbox. If you click <guibutton
+>All</guibutton
+>, all accounts are marked for searching. If you click <guibutton
+>None</guibutton
+>. no accounts will be marked for searching. Individual accounts can be marked or unmarked by clicking the box next to the account name using the &LMB;. A complete hierarchy of accounts can be marked or unmarked by clicking the box using the &RMB;. </para>
 </sect2>
 
-<sect2 id="details.search.date">
-<title
+<sect2 id="details.search.date"
+><title
 >Date</title>
-
 <screenshot>
-<mediaobject>
-<imageobject>
-<imagedata fileref="find-date.png" format="PNG"/>
-</imageobject>
-<textobject>
-<phrase
->Dialogue <quote
->Rechercher des opérations</quote
->, onglet <quote
->Date</quote
-></phrase>
-</textobject>
-</mediaobject>
+  <screeninfo
+>search transactions, criteria tab, date subtab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-date.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>search transactions, criteria tab, date subtab</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 
 <para
->Cet onglet vous permet de spécifier quelles dates seront retenues pour la recherche. </para>
+>This tab allows you to specify which dates should be searched. The date refers to the post date of the transaction. </para>
 
 <para
->La liste déroulante <quote
->Intervalle</quote
-> fournit un moyen agréable et efficace de spécifier les dates de début et de fin de l'intervalle de temps sur laquelle la recherche aura lieu. Les champs <quote
->De</quote
-> et <quote
->A</quote
-> peuvent cependant être utilisés individuellement pour saisir les dates. La liste déroulante et les icônes de calendriers de saisie vous évitent de saisir des dates qui n'existent pas. Les dates peuvent également être modifiées en utilisant les touches de direction du clavier (à droite, à gauche, vers le haut et vers le bas). Les calendriers de saisie sont affichés en cliquant sur leur icône à droite des champs de date. </para>
+>The <quote
+>Range</quote
+> dropdown provides a convenient way to set the From and To date controls. The From and To controls can be manipulated individually. Dates can be entered manually, and clicking the down arrow at the right of the field will bring up a typical calendar widget to select the date. The controls will prevent you from entering non-existing dates. Date values can also be changed by clicking the up and down arrows while the cursor in within a particular part of a date. </para>
 </sect2>
 
 
-<sect2 id="details.search.amount">
-<title
+<sect2 id="details.search.amount"
+><title
 >Montant</title>
-
 <screenshot>
-<mediaobject>
-<imageobject>
-<imagedata fileref="find-amount.png" format="PNG"/>
-</imageobject>
-<textobject>
-<phrase
->Dialogue <quote
->Rechercher des opérations</quote
->, onglet <quote
->Montant</quote
-></phrase>
-</textobject>
-</mediaobject>
+  <screeninfo
+>search transactions, criteria tab, amount subtab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-amount.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>search transactions, criteria tab, amount subtab</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 
 <para
 >Cet onglet vous permet de spécifier quels montants seront utilisés pour la recherche. </para>
 
 <para
->Vous pouvez rechercher un montant exact, ou les montants appartenant à une plage. Si vous cliquez sur l'icône de la calculatrice, une petite calculatrice apparaîtra pour vous aider à saisir les montants. </para>
+>You can search for an exact amount or for a range of amounts. If you click the calculator icon, a small on-screen calculator will pop up to assist you in entering a value. </para>
 </sect2>
 
-<sect2 id="details.search.category">
-<title
+<sect2 id="details.search.category"
+><title
 >Catégorie</title>
-
 <screenshot>
-<mediaobject>
-<imageobject>
-<imagedata fileref="find-category.png" format="PNG"/>
-</imageobject>
-<textobject>
-<phrase
->Dialogue <quote
->Rechercher des opérations</quote
->, onglet <quote
->Catégorie</quote
-></phrase>
-</textobject>
-</mediaobject>
+  <screeninfo
+>search transactions, criteria tab, category subtab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-category.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>search transactions, criteria tab, category subtab</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 
 <para
 >Cet onglet vous permet de spécifier les catégories dans lesquelles la recherche aura lieu. </para>
 
 <para
->Les catégories sont affichées en arbre. Les catégories qui seront recherchées sont marquées d'une coche. Si vous cliquez sur le bouton <guibutton
->Tous</guibutton
->, à droite, toutes les catégories seront cochées. Si vous cliquez sur le bouton <guibutton
->Aucune</guibutton
->, elles seront toutes décochées. Si vous cliquez sur le bouton <guibutton
->Revenu</guibutton
-> toutes les catégories de revenus seront cochées et toutes les catégories de dépenses seront décochées. Vous obtiendrez l'inverse en cliquant sur le bouton <guibutton
->Dépense</guibutton
->. </para>
+>Categories are displayed in a tree format, similar to Accounts. Categories that are marked for search are indicated with a checkbox. If you click <guibutton
+>All</guibutton
+>, all categories are marked for searching. If you click <guibutton
+>Income</guibutton
+>, all income categories will be marked and all expense categories will be unmarked. If you click <guibutton
+>Expense</guibutton
+>, all income categories will be unmarked and all expense categories will be marked. If you click <guibutton
+>None</guibutton
+>, no categories will be marked for searching. </para>
 
 <para
->Pour cocher, ou décocher une catégorie, il suffit de cliquer sur la boîte à cocher qui précède sont nom et l'état coché /décoché sera inversé. Le fonctionnement est identique pour une hiérarchie complète de catégories. </para>
+>Individual categories can be marked or unmarked by clicking the checkbox next to the category name using the &LMB;. A complete hierarchy of categories can be marked or unmarked by clicking the box using the &RMB;. </para>
 </sect2>
 
-<sect2 id="details.search.payee">
-<title
->Bénéficiaires</title>
-
+<sect2 id="details.search.tag"
+><title
+>Tag</title>
 <screenshot>
-<mediaobject>
-<imageobject>
-<imagedata fileref="find-payee.png" format="PNG"/>
-</imageobject>
-<textobject>
-<phrase
->Dialogue <quote
->Rechercher des opérations</quote
->, onglet <quote
->Bénéficiaire</quote
-></phrase>
-</textobject>
-</mediaobject>
+  <screeninfo
+>search transactions, criteria tab, tag subtab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-tag.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>search transactions, criteria tab, tag subtab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>This tab allows you to specify which tags should be searched. </para>
+
+<para
+>Tags that are marked for search are indicated with a checked box. If you click <guibutton
+>Select all</guibutton
+>, all tags are marked for searching. If you click <guibutton
+>Select none</guibutton
+>, no tags will be marked for searching. Individual tags can be marked or unmarked by clicking the checkbox next to the payee name. </para>
+
+<para
+>If you check the <guilabel
+>Select transactions without tags</guilabel
+> box, only transactions with no tag will be selected. </para>
+</sect2>
+
+<sect2 id="details.search.payee"
+><title
+>Bénéficiaires</title>
+<screenshot>
+  <screeninfo
+>search transactions, criteria tab, payee subtab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-payee.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>search transactions, criteria tab, payee subtab</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 
 <para
 >Cet onglet vous permet de spécifier quels bénéficiaires seront recherchés. </para>
 
 <para
->Tous les bénéficiaires recherchés sont marqués d'une coche. Si vous cliquez sur le bouton <guibutton
->Tous</guibutton
->, tous les bénéficiaires seront cochés. Si vous cliquez sur le bouton <guibutton
->Aucun</guibutton
->, tous les bénéficiaires seront décochés. Un bénéficiaire peut être coché /décoché en cliquant sur la case qui précède son nom. l'état coché /décoché est alors inversé. </para>
+>Payees that are marked for search are indicated with a box. If you click <guibutton
+>Select all</guibutton
+>, all payees are marked for searching. If you click <guibutton
+>Select none</guibutton
+>, no payees will be marked for searching. Individual payees can be marked or unmarked by clicking the box next to the payee name. </para>
 
 <para
 >Si vous cochez la case <guilabel
 >Sélectionner les opérations sans bénéficiaire</guilabel
 >, seules les opérations sans bénéficiaire seront recherchées. </para>
-
 </sect2>
 
-<sect2 id="details.search.details">
-<title
+<sect2 id="details.search.details"
+><title
 >Détails</title>
-
-<para
->Cet onglet vous permet de spécifier des détails additionnels comme critères de recherche. </para>
-
 <screenshot>
-<mediaobject>
-<imageobject>
-<imagedata fileref="find-details.png" format="PNG"/>
-</imageobject>
-<textobject>
-<phrase
+  <screeninfo
+>search transactions, criteria tab, details subtab</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="find-details.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
 >Dialogue <quote
 >Rechercher des opérations</quote
 >, onglet <quote
 >Détails</quote
 ></phrase>
-</textobject>
-</mediaobject>
+    </textobject>
+  </mediaobject>
 </screenshot>
 
+<para
+>Cet onglet vous permet de spécifier des détails additionnels comme critères de recherche. </para>
+
 <para>
-<itemizedlist>
-  <title
+  <itemizedlist>
+    <title
 >Le type peut être un des suivants : </title>
-  <listitem
+    <listitem
 ><para
 >Tous les types</para
 ></listitem>
-  <listitem
+    <listitem
 ><para
 >Remboursements</para
 ></listitem>
-  <listitem
+    <listitem
 ><para
 >Dépôts</para
 ></listitem>
-  <listitem
+    <listitem
 ><para
 >Virements</para
 ></listitem>
-</itemizedlist>
+  </itemizedlist>
 
-<itemizedlist>
-  <title
+  <itemizedlist>
+    <title
 >L'état peut être l'un des suivants : </title>
-  <listitem
+    <listitem
 ><para
 >Tous les états</para
 ></listitem>
-  <listitem
+    <listitem
 ><para
 >Non réconcilié</para
 ></listitem>
-  <listitem
+    <listitem
 ><para
 >Compensé</para
 ></listitem>
-  <listitem
+    <listitem
 ><para
 >Réconcilié</para
 ></listitem>
-</itemizedlist>
+  </itemizedlist>
 
-<itemizedlist>
-  <title
+  <itemizedlist>
+    <title
 >La validité peut être l'une des suivantes : </title>
-  <listitem
+    <listitem
 ><para
 >Tout type d'opération</para
 ></listitem>
-  <listitem
+    <listitem
 ><para
 >Opération valable</para
 ></listitem>
-  <listitem
+    <listitem
 ><para
 >Opération non valable</para
 ></listitem>
-</itemizedlist>
+  </itemizedlist>
 </para>
 
 <para
 >Vous pouvez chercher un numéro d'opération précis ou une fourchette de numéros d'opération. </para>
-
 </sect2>
 </sect1>
 
-<sect1 id="details.search.results">
-<title
+<sect1 id="details.search.results"
+><title
 >Résultat de la recherche</title>
+<para
+>The <guilabel
+>Result</guilabel
+> tab displays the Entry (entry date, optional,) Date (posting date,) Account, Payee, Details (memo,) C (reconciliation status,) Decrease, and Increase for each transaction that matches the search criteria you have entered. Clicking the &RMB; on the header row of the results list allows you to toggle the display of the optional columns. </para>
 
 <para
->L'onglet <quote
->Résultat</quote
-> affiche la date, le compte, les détails, l'état de réconciliation, le paiement ou le dépôt pour chacune des opérations qui satisfait les critères de recherche que vous avez saisis. En cliquant avec le bouton de gauche sur la ligne de titres des résultats vous pouvez modifier la manière dont les résultats sont triés. </para>
-
-<para
->Double-cliquer sur une opération affichera le registre correspondant en focalisant sur cette opération. </para>
-
+>Double-clicking a transaction will display the corresponding account ledger with that transaction selected. </para>
 </sect1>
-
 </chapter>

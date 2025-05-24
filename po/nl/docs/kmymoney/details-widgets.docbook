@@ -6,9 +6,9 @@
 >&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
   </authorgroup>
   <date
->2010-07-25</date>
+>2024-12-01</date>
   <releaseinfo
->4.5</releaseinfo>
+>5.2</releaseinfo>
 </sect1info>
 
 <title
@@ -19,34 +19,34 @@
 
 <sect2 id="reference.widgets.datepicker">
 <title
->Widget voor invoer van een datum</title>
+>Datuminvoer en datumkiezer</title>
 
 <para
 >Wanneer &kmymoney; informatie over een specifieke datum nodig heeft, &eg;, de opdrachtdatum van een transactie of de openingsdatum van een rekening, dan biedt het de gebruiker het <emphasis
 >datuminvoerwidget</emphasis
->. Dit widget bestaat uit drie velden en een knop. De velden presenteren de <emphasis
+>. Dit widget bestaat uit drie velden die de <emphasis
 >dag</emphasis
 >, de <emphasis
 >maand</emphasis
 > en het <emphasis
 >jaar</emphasis
->, gescheiden door het datumscheidingsteken gespecificeerd door de instelling van uw taalregio. Als u op de knop drukt zal het widget <emphasis
+> presenteert, gescheiden door het datumscheidingsteken gespecificeerd door de instelling van uw taalregio. Als u op de pijl naar beneden drukt zal het programma het widget <emphasis
 >datumkiezer</emphasis
-> worden geopend. </para>
+> openen. </para>
 
 <para>
 <screenshot>
-	<screeninfo
->Tip van de dag</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="date_widget.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
+  <screeninfo
+>Datumwidget</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="date_widget.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
 >Datumwidget</phrase>
-	</textobject>
-	</mediaobject>
+    </textobject>
+  </mediaobject>
 </screenshot>
 </para>
 
@@ -72,10 +72,10 @@
 >maand</emphasis
 > of <emphasis
 >jaar</emphasis
-> selecteert het veld. De waarde kan dan verhoogd/verlaagd worden met de pijltjesknoppen rechts van het widget. Ze werken exact hetzelfde als de toetsen &Up;/&Down;. </para>
+> selecteert het veld. De waarde kan dan verhoogd/verlaagd worden met de cursortoetsen &Right;/&Left; wanneer u naar een ander veld gaat, het gehele veld is geselecteerd en u kunt de nieuwe waarde invullen voor dat veld. </para>
 
 <para
->De datumkiezer opent wanneer de knop rechts van de pijltjesknoppen wordt ingedrukt. Het toont bovenaan vier pijltjesknoppen, twee aan elke kant van de nu geselecteerde maandnaam en jaar. De meest linker knoppen worden gebruikt om het jaar en de maand te verlagen; de knoppen rechts van het jaar worden gebruikt om de maand en het jaar te verhogen. De knop helemaal rechts sluit de datumkiezer. </para>
+>De datumkiezerwidget toont de nu geselecteerde maan, naam en jaar. Erboven zijn vier pijltjesknoppen twee aan elke kant van de getoonde maand en jaar. De meest linker knoppen worden gebruikt om het jaar en de maand te verlagen; de knoppen rechts van het jaar worden gebruikt om de maand en het jaar te verhogen. De knop helemaal rechts sluit de datumkiezer. </para>
 
 <para
 >Onder de knoppen presenteert het widget een kalenderpagina voor de geselecteerde maand. Klikken op een dag op de kalender selecteert die datum, sluit de datumkiezer en brengt de geselecteerde datum in de velden <emphasis
@@ -88,11 +88,15 @@
 
 <para
 >Onderaan het datumkiezerwidget is een knop, een te bewerken tekstveld en een keuzelijst. Op de knop drukken selecteert de datum van vandaag in de datumkiezer. Het tekstveld kan gebruikt worden om een specifieke datum in te voeren. Op de toets &Enter; drukken toont die datum in het datumkiezerwidget. De keuzelijst laat de gebruiker een specifieke week selecteren en doorgaan om een datum vanaf daar te kiezen. </para>
+
+<para
+>In geval een ongeldige datum is ingevoerd zal de datumkiezer een rood frame tonen en een tekstballon zal details over de fout tonen. </para>
 </sect2>
 
 <sect2 id="reference.widgets.value">
 <title
 >Invoer van een waarde</title>
+
 <para
 >Het invoerwidget voor een waarde bestaat uit een tekstveld (dat cijfers accepteert, scheidingstekens voor duizendtallen en decimale symbolen) evenals een knop rechts. Gebruik de cijfers om de waarde in te voeren. Scheid de fractie van de waarde door het decimale scheidingsteken voor uw taalregio in te voeren. Als u oo de knop rechts klikt of op een toets die een numerieke bewerking representeert (&eg;, <keycap
 >+</keycap
@@ -111,17 +115,17 @@
 
 <para>
 <screenshot>
-	<screeninfo
->Tip van de dag</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="value_widget.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
+  <screeninfo
+>Waardewidget</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="value_widget.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
 >Waardewidget</phrase>
-	</textobject>
-	</mediaobject>
+    </textobject>
+  </mediaobject>
 </screenshot>
 </para>
 
@@ -138,60 +142,58 @@
 >Debiteur/crediteur invoeren</title>
 
 <para
->Wanneer u gevraagd wordt om een debiteur/crediteur voor een transactie in te voeren, kunt u beginnen met de naam in te voeren met de toetsen op uw toetsenbord. Zolang er overeenkomende items bestaan in de lijst met debiteuren/crediteuren onderhouden door &kmymoney; zullen ze getoond worden in een vak onder of boven het invoergebied voor tekst. Met de muis of de toetsen &Up;/&Down; kunt u een naam uit die lijst kiezen. Met gebruik van het toetsenbord moet u het item selecteren door op de toets &Enter; te drukken. </para>
+>Het widget voor invoeren van een debiteur/crediteur is erg gelijk aan een typische keuzelijst, maar heeft enige extra mogelijkheden. </para>
 
 <para>
 <screenshot>
-	<screeninfo
->Tip van de dag</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="payee_widget.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Debiteurwidget</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo
+>Relatiewidget</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_widget.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Relatiewidget</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 </para>
 
 <para
->Als er een naam wordt ingevoerd die nog niet aan &kmymoney; bekend is wordt u gevraagd of u een nieuwe record voor debiteur/crediteur wilt aanmaken. Als u dat niet wilt doen, zal het veld blanco worden. Anders zal het record aangemaakt worden en toegevoegd aan de lijst. </para>
+>Wanneer u gevraagd wordt om een debiteur/crediteur voor een transactie in te voeren, kunt u beginnen met de naam in te voeren met de toetsen op uw toetsenbord. Zolang er items in de lijst met debiteuren/crediteuren onderhouden door &kmymoney;, die overeenkomen met de ingevoerde tekens zullen ze getoond worden in een vak onder of boven het invoergebied voor tekst. Met de muis of de toetsen &Up;/&Down; kunt u een naam uit die lijst kiezen. Met gebruik van het toetsenbord moet u het item selecteren door op de toets &Enter; te drukken. Klikken op de pijl omlaag rechts van de X toont de complete lijst met mogelijke crediteuren/debiteuren. </para>
 
 <para
->Nadat het veld voor bewerking tekens bevat zal de lijst alleen die debiteuren tonen die overeenkomen met de ingevoerde tekenreeks. Dubbelklik op de pijl van de keuzelijst om alle debiteuren in de lijst te tonen. </para>
-
+>Als er een naam wordt ingevoerd die nog niet aan &kmymoney; bekend is wordt u gevraagd of u een nieuwe record voor debiteur/crediteur wilt aanmaken. Als u dat niet wilt doen, zal het veld blanco worden. Anders zal het record aangemaakt worden en toegevoegd aan de lijst. </para>
 </sect2>
 
 <sect2 id="reference.widgets.category">
 <title
->Invoer van categorie/rekening</title>
+>Item met categorie/rekening</title>
 
 <para
->Wanneer u gevraagd wordt om de naam van een categorie of rekening in te voeren, kunt u beginnen met de naam in te voeren met de toetsen op uw toetsenbord. Zolang er overeenkomende items bestaan in de lijst met categorieën/rekeningen bekend bij &kmymoney; zullen ze getoond worden in een vak onder of boven het invoergebied voor tekst. Met de muis of de toetsen &Up;/&Down; kunt u een naam uit die lijst kiezen. Met gebruik van het toetsenbord moet u het item selecteren door op de toets &Enter; te drukken. </para>
+>Het veld voor invoeren van een Categorie of Rekening is erg gelijk aan die bovenstaand beschreven voor Debiteuren/Crediteuren. </para>
 
 <para>
 <screenshot>
-	<screeninfo
->Tip van de dag</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="category_widget.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
+  <screeninfo
+>Categoriewidget</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="category_widget.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
 >Categoriewidget</phrase>
-	</textobject>
-	</mediaobject>
+    </textobject>
+  </mediaobject>
 </screenshot>
 </para>
 
 <para
->Als er een naam wordt ingevoerd die nog niet aan &kmymoney; bekend is wordt u gevraagd of u een nieuwe record voor een categorie wilt aanmaken. Als u dat niet wilt doen, zal het veld blanco worden. Anders zal het record aangemaakt worden en toegevoegd aan de lijst. </para>
-
-<para
->Nadat het veld voor bewerking met tekens is gevuld zal de lijst alleen die categorieën/rekeningen tonen die overeenkomen met de ingevoerde tekenreeks. Dubbelklik op de pijl van de keuzelijst om de complete lijst te tonen. </para>
+>Rechts van de invoerveld, tussen de X voor het betaald hebben en de pijl omlaag voor het tonen van de complete lijst, is er een splitsen-pictogram, die de <link linkend="details.ledgers.split"
+> Splitsingsbewerker</link
+> opent </para>
 
 </sect2>
 </sect1>

@@ -2,20 +2,18 @@
 <chapter id="introduction">
 <chapterinfo>
   <date
->13/01/2018</date>
+>2024-12-01</date>
   <releaseinfo
->5.0.0</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Introduction</title>
 
-<sect1 id="what-is-kmymoney">
-<title
+<sect1 id="what-is-kmymoney"
+><title
 >Qu'est-ce que &kmymoney; ?</title>
-
 <para
->Pour faire simple, &kmymoney; est le gestionnaire de finances personnelles de &kde;. Il permet aux utilisateurs des systèmes d'exploitation ouverts de suivre de près leurs finances personnelles en leur proposant un grand nombre de fonctionnalités et d'outils financiers. </para>
+>&kmymoney; is a personal finance manager by &kde;. It enables users to keep careful track of their personal finances by providing a broad array of financial features and tools. </para>
 
 <para
 >Les principaux projets de ce projet sont : </para>
@@ -44,22 +42,21 @@
 ><title
 >Exactitude</title>
       <para
->Basé sur les principes éprouvés de la comptabilité en partie double, &kmymoney; s'assure que vos finances sont tenues en bon ordre. </para>
+>Based on tried and tested double entry accounting principles, &kmymoney; ensures that your finances are kept in correct order. </para>
     </formalpara>
   </listitem>
 </itemizedlist>
 
 </sect1>
 
-<sect1 id="what-kmymoney-is-not">
-<title
+<sect1 id="what-kmymoney-is-not"
+><title
 >Qu'est-ce que &kmymoney; n'est pas </title>
+<para
+>As a personal finance manager, &kmymoney; is not intended to support the needs of a business. A small business might find sufficient functionality to use &kmymoney;, but features such as accounts-receivable and accounts-payable are not directly supported. The larger the business, the less likely it is to find &kmymoney; will meet its financial management needs. Most if not all the data needed for a small business, such as for reports for audit and taxation purposes is present, but may need to be extracted using various reports and then processed and assembled into the required formats. In addition, it would be possible to create client, supplier, document, or other features through plugins. </para>
 
 <para
->En tant que gestionnaire de finances personnelles, &kmymoney; n'est pas conçu pour s'adapter aux besoins d'une entreprise. Une petite entreprise peut trouver que &kmymoney; dispose d'assez de fonctionnalités, mais les fonctionnalités de comptes à recouvrer et comptes à payer ne sont pas directement gérées. Néanmoins, il serait possible de créer des fonctionnalités de clients, fournisseurs et documents à travers les modules. </para>
-
-<para
->&kmymoney; n'est pas simplement un clone des programmes de finances personnelles commerciaux disponibles. Même si beaucoup de fonctionnalités présentes dans &kmymoney; peuvent être trouvées dans d'autres applications similaires, &kmymoney; essaie de présenter une vue individuelle et unique de vos finances. </para>
+>&kmymoney; is not simply a clone of any of the commercially available personal finance programs. Although many of the features present in &kmymoney; can be found in other similar applications, &kmymoney; strives to present an individual and unique view of your finances. </para>
 
 </sect1>
 </chapter>

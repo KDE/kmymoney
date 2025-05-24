@@ -3,26 +3,27 @@
 <chapterinfo>
   <authorgroup>
     <author
->&Colin.Wright; &Colin.Wright.mail; </author>
+>&Colin.Wright; &Colin.Wright.mail; </author
+> 
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->25 de juliol de 2010</date>
+>1 de desembre de 2024</date>
   <releaseinfo
->4.5</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Previsió</title>
 
-<sect1 id="details.forecast.define">
-<title
->Què és una Previsió?</title>
+<sect1 id="details.forecast.define"
+><title
+>Què és una previsió?</title>
+<para
+>Al &kmymoney;, una previsió és una previsió dels saldos dels comptes durant un període de temps futur específic. </para>
 
 <para
->Al &kmymoney;, una Previsió és una previsió dels saldos dels Comptes durant un període de temps futur específic.</para>
-
-<para
->Les Previsions es poden predir utilitzant un de dos mètodes. </para>
+>Les previsions es poden predir utilitzant un de dos mètodes. </para>
 
 <variablelist>
   <varlistentry>
@@ -30,7 +31,7 @@
 >Operacions planificades i futures</term>
     <listitem>
       <para
->El &kmymoney; utilitzarà una combinació de les operacions futures ja introduïdes als llibres majors i les entrades a la Planificació.</para>
+>El &kmymoney; utilitzarà una combinació de les operacions futures ja introduïdes als llibres majors i les entrades a la planificació. </para>
     </listitem>
   </varlistentry>
 
@@ -39,54 +40,240 @@
 >Basat en l'historial</term>
     <listitem>
       <para
->El &kmymoney; utilitzarà els valors des de les operacions passades que hi ha als llibres majors per a predir les operacions futures.</para>
+>El &kmymoney; utilitzarà els valors a partir de les operacions passades. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 
 <para
->El mètode de previsió i el període de previsió es poden establir a la subfinestra <guilabel
->Previsió</guilabel
-> a la configuració del &kmymoney;. </para>
+>La <guilabel
+>Vista de previsió</guilabel
+> mostra els saldos previstos en les dates del cicle comptable i la diferència esperada entre els saldos inicials i finals. El resum també mostrarà missatges sobre els canvis previstos significatius als comptes durant el període de previsió. A més del resum, també es poden visualitzar els saldos del dia a dia i els saldos mínims i màxims per a cada cicle comptable previst. </para>
 
 <para
->La Previsió del &kmymoney; proporciona un resum que mostra els saldos previstos en les dates del cicle comptable i la diferència esperada entre els saldos inicials i finals. L'usuari podrà establir la durada del cicle del compte. El resum també mostrarà missatges sobre els canvis previstos significatius als comptes durant el període de previsió. </para>
-
-<para
->A més del resum, la Previsió del &kmymoney; també permet veure els saldos diaris i els saldos mínims i màxims per a cada previsió del cicle comptable. </para>
-
-<para
->De manera predeterminada, la Previsió es crearà per a 90 dies, amb cicles comptables de 30 dies utilitzant les Operacions planificades i futures. </para>
+>La secció següent descriu com podeu configurar el mètode de previsió i altres paràmetres utilitzats per a calcular una previsió. A continuació hi ha una secció amb més detalls a la vista de previsions. </para>
 </sect1>
 
-<sect1 id="details.forecast.view">
-<title
+<sect1 id="details.forecast.configure"
+><title
+>Configuració de les previsions</title>
+
+<para
+>Els paràmetres utilitzats per a calcular una previsió, inclòs el mètode de previsió, es poden establir en el diàleg de configuració <link linkend="details.settings.plugins.forecast"
+> <guilabel
+>Vista de previsions</guilabel
+></link
+>. Atès que la funcionalitat de previsió està implementada com un <link linkend="makingmostof.plugins"
+>connector del &kmymoney;</link
+>, podeu arribar a aquest diàleg invocant l'element de menú <menuchoice
+> <guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Configura el &kmymoney;...</guimenuitem
+> </menuchoice
+>, seleccionant <guilabel
+>Connectors</guilabel
+> a la subfinestra esquerra, i fent clic a la icona <guilabel
+>configura</guilabel
+> al costat de <guilabel
+>Vista de previsions</guilabel
+>. </para>
+
+<screenshot>
+  <screeninfo
+>Configuració de les previsions</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="plugin_config_forecast.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Configuració de les previsions</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Nombre de dies a preveure</term>
+    <listitem>
+      <para
+>La previsió es calcularà fins aquest moment en el futur. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Nombre de dies del cicle comptable</term>
+    <listitem>
+      <para
+>Una previsió no es basa en mesos reals, sinó en períodes de repetició del nombre de dies establerts en aquest camp. Els valors més comuns utilitzats són 30 o 31. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Dia del mes per a iniciar la previsió</term>
+    <listitem>
+      <para
+>Això estableix el dia del mes actual que s'utilitzarà com a punt de partida per a comptar tant els cicles com el nombre de dies a preveure. Un valor de 0 significa utilitzar el dia actual. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Mètode de previsió</term>
+    <listitem>
+      <para
+>Com s'ha esmentat a la secció anterior, podeu triar si el &kmymoney; usa operacions planificades i futures o operacions històriques per a calcular una previsió. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Configuració de la previsió basada en l'historial</term>
+    <listitem>
+      <para
+>Els paràmetres d'aquesta secció del diàleg només són aplicables si el mètode de previsió s'estableix a «basat en l'historial» </para>
+
+      <variablelist>
+        <varlistentry>
+          <term
+>Nombre de cicles a usar en la previsió</term>
+          <listitem>
+            <para
+>Això estableix el nombre de cicles de dades històriques a utilitzar per a predir valors futurs. </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+>Mètode de previsió basada en l'historial</term>
+          <listitem>
+            <para
+>Seleccionant un dels tres botons d'opció, <guilabel
+>Mitjana mòbil simple</guilabel
+>, <guilabel
+>Mitjana mòbil ponderada</guilabel
+> (aquesta és la predeterminada) i <guilabel
+>Regressió lineal</guilabel
+>, s'estableix la fórmula matemàtica que utilitzarà el &kmymoney; per a una previsió basada en l'historial. </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>El mètode de previsió establert aquí s'aplica a totes les previsions. Els altres paràmetres es converteixen en valors predeterminats, que es poden canviar quan es calcula i es visualitza una previsió a la vista de previsions. </para>
+
+<para
+>A la part inferior del diàleg, el botó <guibutton
+>Valors predeterminats</guibutton
+> reinicia tots els valors als seus valors predeterminats. Els <guibutton
+>D'acord</guibutton
+> i <guibutton
+>Cancel·la</guibutton
+> tenen els seus significats habituals. </para>
+</sect1>
+
+<sect1 id="details.forecast.view"
+><title
 >Veure les previsions</title>
+<para
+>Podreu mostrar la vista de les previsions fent clic sobre la icona apropiada a la subfinestra de navegació que hi ha al costat esquerre de la finestra del &kmymoney;. </para>
+
+<screenshot>
+  <screeninfo
+>Vista de la previsió</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="forecast_view.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Vista de la previsió</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <para
->Podreu veure una Previsió fent clic sobre la icona apropiada a la subfinestra de navegació que hi ha al costat esquerre de la finestra del &kmymoney;. </para>
+>L'àrea superior de la vista de previsions és la <guilabel
+>Configuració de la previsió</guilabel
+>. A l'esquerra hi ha diversos camps per a controlar els càlculs de la previsió. Els valors predeterminats d'aquests valors s'estableixen en el diàleg de configuració de la vista de previsions, tal com es descriu a la secció anterior. Els valors (amb el nom utilitzat en el diàleg de configuració mostrat entre parèntesis si difereix) són: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Dies a preveure (nombre de dies a preveure)</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Dies del cicle de comptes (nombre de dies del cicle de comptes)</para>
+  </listitem>
+
+  <listitem>
+        <para
+>Dia del mes per a iniciar la previsió</para>
+  </listitem>
+    
+  <listitem>
+        <para
+>Cicles històrics (nombre de cicles a usar en la previsió)</para>
+  </listitem>
+    
+  <listitem>
+    <para
+>Detall del gràfic: aquest element no està establert en el diàleg de configuració. Trieu un dels valors següents per a controlar els resultats que es mostren a la pestanya <guilabel
+>Gràfic</guilabel
+>. <itemizedlist>
+        <listitem>
+          <para
+>Tot</para>
+        </listitem>
+        <listitem>
+          <para
+>Nivell superior</para>
+        </listitem>
+        <listitem>
+          <para
+>Grups</para>
+        </listitem>
+        <listitem>
+          <para
+>Total</para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </listitem>
+</itemizedlist>
+    
+<para
+>A la dreta d'aquests elements, el &kmymoney; mostra el <guilabel
+>Mètode de previsió actual</guilabel
+>. A la dreta d'això hi ha un botó <guibutton
+>Previsió</guibutton
+>. Quan feu clic en aquest botó, el &kmymoney; calcularà la previsió en funció de la configuració a l'esquerra, i mostrarà els resultats a la part inferior de la finestra. Just a sota d'aquests hi ha el <guilabel
+>Mètode de previsió basada en l'historial</guilabel
+>, que només està habilitat si el mètode de previsió actual està establert a «Historial». </para>
 
 <para
->La finestra de Previsió es divideix en cinc pestanyes: </para>
+>L'àrea inferior de la vista de previsió té cinc pestanyes. </para>
 
-<sect2>
-<title
+<sect2 id="details.forecast.summary"
+><title
 >La pestanya Resum</title>
-
 <para
->La pestanya <guilabel
->Resum</guilabel
-> es divideix verticalment en dues meitats. </para>
+>La pestanya Resum té dues seccions. </para>
 
-<sect3>
-<title
+<sect3
+><title
 >Resum del compte</title>
-
 <para
->El Resum del compte conté una quadrícula que mostra una fila d'informació per a cada Actiu i Passiu. </para>
-
-<para
->Es mostren les columnes següents: </para>
+>A l'esquerra hi ha el resum del compte, que mostra una fila d'informació per a cada actiu i actiu, amb les columnes que es mostren a continuació. Tingueu en compte que si la previsió es basa en operacions planificades i futures, només hi haurà files per als comptes referenciats en aquestes operacions. </para>
 
 <variablelist>
   <varlistentry>
@@ -100,10 +287,10 @@
 
   <varlistentry>
     <term
->Saldo actual (actual)</term>
+>Actual</term>
     <listitem>
       <para
->Es mostra el saldo actual del compte.</para>
+>El saldo actual del compte</para>
     </listitem>
   </varlistentry>
 
@@ -112,15 +299,13 @@
 >Saldo del cicle comptable</term>
     <listitem>
       <para
->El període de Previsió es desglossa en cicles comptables. La durada predeterminada del cicle comptable és de 30 dies, però l'usuari podrà establir-la.</para>
+>El període de previsió es desglossa en cicles comptables. La durada predeterminada del cicle comptable és de 30 dies, però l'usuari podrà establir-la. </para>
 
       <para
->La primera data del cicle comptable és la primera data de la Previsió. De manera predeterminada, aquesta serà la data actual més un cicle comptable, però podreu canviar-la segons l'opció <guilabel
->Dia del mes per a iniciar la previsió</guilabel
->.</para>
+>La primera data del cicle comptable és la primera data de la previsió. De manera predeterminada, aquesta serà la data actual més un cicle comptable, però la podreu canviar segons l'opció «Dia del mes per a iniciar la previsió». </para>
 
       <para
->Les dates restants del cicle comptable es determinaran afegint la durada del cicle comptable a la data del cicle comptable anterior. Això continuarà fins que la data calculada del cicle comptable vagi més enllà del període de Previsió.</para>
+>Les dates restants del cicle comptable es determinaran afegint la durada del cicle comptable a la data del cicle comptable anterior. Això continuarà fins que la data calculada del cicle comptable vagi més enllà del període de previsió, o dels dies a preveure.</para>
 
       <para
 >Per a cada data del cicle comptable es mostrarà el saldo previst.</para>
@@ -132,21 +317,17 @@
 >Variació total</term>
     <listitem>
       <para
->La columna de la dreta mostra la diferència de valor prevista entre els saldos a l'inici i al final de la previsió. Si el valor final previst del compte (en termes de valor net) és més petit que el valor inicial, es ressaltarà en vermell tota la fila.</para>
+>La columna de la dreta mostra la diferència de valor prevista entre els saldos a l'inici i al final de la previsió. Si el valor final previst del compte (en termes de valor net) és més petit que el valor inicial, es ressaltarà en vermell tota la fila. </para>
     </listitem>
   </varlistentry>
 </variablelist>
-
 </sect3>
 
-<sect3>
-<title
+<sect3
+><title
 >Informació clau del resum</title>
-
 <para
->La meitat inferior de la pestanya <guilabel
->Resum</guilabel
-> mostra la informació important sobre els comptes. Això inclou: </para>
+>La porció dreta de la pestanya Resum mostra la informació important sobre els comptes. Això inclou: </para>
 
 <variablelist>
   <varlistentry>
@@ -154,7 +335,7 @@
 >Actius sota zero</term>
     <listitem>
       <para
->Es mostrarà un missatge per a qualsevol actiu per al qual el valor comença o cau per sota de zero durant el període de la previsió.</para>
+>Es mostrarà un missatge (en vermell) per a qualsevol compte d'actiu per al qual el valor comença o cau per sota de zero durant el període de la previsió. </para>
     </listitem>
   </varlistentry>
 
@@ -163,21 +344,18 @@
 >Passius per sobre de zero</term>
     <listitem>
       <para
->Es mostrarà un missatge per a qualsevol passiu per al qual el valor comença o augmenta per sobre de zero durant el període de la previsió. Recordeu que el valor d'un passiu és el negatiu del seu saldo comptable, ja que un saldo positiu indicarà que es deuen diners.</para>
+>Es mostrarà un missatge per a qualsevol compte de passiu per al qual el valor comença o augmenta per sobre de zero durant el període de la previsió. Recordeu que el valor d'un passiu és el negatiu del seu saldo comptable, ja que un saldo positiu indicarà que es deuen diners. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect3>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >La pestanya Detalls</title>
-
 <para
->La pestanya <guilabel
->Detalls</guilabel
-> conté una quadrícula que mostra una fila d'informació per a cada Actiu i Passiu. </para>
+>La pestanya Detalls també mostra una fila per a cada compte d'actiu i passiu, però les columnes que es mostren difereixen de la pestanya resum. </para>
 
 <variablelist>
   <varlistentry>
@@ -194,7 +372,7 @@
 >Dates</term>
     <listitem>
       <para
->Per a cada data al període de Previsió, una columna mostra el saldo previst del compte en aquesta data. Les columnes de la data estan en ordre ascendent d'esquerra a dreta.</para>
+>Per a cada data al període de previsió, una columna mostra el saldo previst del compte en aquesta data. Les columnes de la data estan en ordre ascendent d'esquerra a dreta. </para>
     </listitem>
   </varlistentry>
 
@@ -203,20 +381,17 @@
 >Variació total</term>
     <listitem>
       <para
->La columna de la dreta mostra la diferència de valor prevista entre els saldos a l'inici i al final de la previsió. Si el valor final previst del compte (en termes de valor net) és més petit que el valor inicial, es ressaltarà en vermell tota la fila.</para>
+>La columna de la dreta mostra la diferència de valor prevista entre els saldos a l'inici i al final de la previsió. Si el valor final previst del compte (en termes de valor net) és més petit que el valor inicial, es ressaltarà en vermell tota la fila. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >La pestanya Avançat</title>
-
 <para
->La pestanya <guilabel
->Avançat</guilabel
-> conté una quadrícula que mostra una fila d'informació per a cada Actiu i Passiu. La informació es divideix en columnes de la manera següent: </para>
+>La pestanya Avançat també mostra una fila d'informació per a cada compte d'actiu i passiu. La informació es divideix en columnes de la manera següent: </para>
 
 <variablelist>
   <varlistentry>
@@ -230,97 +405,76 @@
 
   <varlistentry>
     <term
->Saldo mínim del cicle comptable</term>
+>Informació del saldo mínim del cicle comptable</term>
     <listitem>
       <para
->Per a cada número del cicle comptable &lt;n&gt; al període de la Previsió, es mostraran les columnes següents:</para>
+>Per a cada número del cicle comptable &lt;n&gt; al període de la previsió, es mostraran les columnes següents: </para>
 
       <variablelist>
 	<varlistentry>
 	  <term
->Saldo mínim (sal. mín. &lt;n&gt;)</term>
+>Sal. mín. &lt;n&gt;</term>
 	  <listitem>
 	    <para
 >El saldo mínim previst durant el cicle comptable.</para>
 	  </listitem>
 	</varlistentry>
+
 	<varlistentry>
 	  <term
->Data del saldo mínim (data mín. &lt;n&gt;)</term>
+>Data mín. &lt;n&gt;</term>
 	  <listitem>
 	    <para
 >La data en què el saldo arribarà al seu mínim previst.</para>
 	  </listitem>
 	</varlistentry>
-      </variablelist>
-    </listitem>
-  </varlistentry>
 
-  <varlistentry>
-    <term
->Saldo màxim del cicle comptable</term>
-
-    <listitem>
-      <para
->Per a cada número del cicle comptable &lt;n&gt; al període de la Previsió, es mostraran les columnes següents:</para>
-
-      <variablelist>
 	<varlistentry>
 	  <term
->Saldo màxim (sal. màx. &lt;n&gt;)</term>
+>Sal. màx. &lt;n&gt;</term>
 	  <listitem>
 	    <para
 >El saldo màxim previst durant el cicle comptable.</para>
 	  </listitem>
 	</varlistentry>
+
 	<varlistentry>
 	  <term
->Data del saldo màxim (data màx. &lt;n&gt;)</term>
+>Data màx. &lt;n&gt;</term>
 	  <listitem>
 	    <para
 >La data en què el saldo arribarà al seu màxim previst.</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
+      <para
+>Cal tenir en compte que tots els saldos i dates mínimes es mostren abans de tots els saldos i dates màximes. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term
 >Mitjana</term>
-
     <listitem>
       <para
 >La mitjana del saldo del compte durant el període de previsió.</para>
     </listitem>
   </varlistentry>
 </variablelist>
-
 </sect2>
 
-<sect2>
-<title
->La pestanya Previsió del pressupost</title>
-
+<sect2
+><title
+>La pestanya previsió del pressupost</title>
 <para
->La pestanya <guilabel
->Pressupost</guilabel
-> mostrarà un càlcul de la previsió per a les categories Ingressos i Despeses. Les columnes són similars a les pestanyes <guilabel
->Resum</guilabel
-> i <guilabel
->Detalls</guilabel
->. </para>
-
+>La pestanya Pressupost mostra un càlcul de la previsió per a totes les categories d'ingressos i despeses. A diferència de la pestanya resum, hi ha una columna al mes, que comença amb el gener de l'any en curs, i acaba amb el mes que inclou el final del període de previsió. La columna final és un total, en lloc d'un valor predit o un valor calculat en funció de qualsevol valor predit. </para>
 </sect2>
 
-<sect2>
-<title
+<sect2
+><title
 >La pestanya Gràfic</title>
-
 <para
->Ensenya un gràfic que mostrarà la previsió. El nivell de detall variarà segons el nivell de detall seleccionat a l'opció anterior. </para>
-
+>Això mostra la previsió en un gràfic o en forma de diagrama. El nivell de detall variarà segons el nivell de detall seleccionat a l'opció anterior. </para>
 </sect2>
-
 </sect1>
 </chapter>
