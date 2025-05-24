@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-18 02:01+0000\n"
+"POT-Creation-Date: 2025-05-24 01:59+0000\n"
 "PO-Revision-Date: 2025-02-21 17:01+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -20157,67 +20157,67 @@ msgstr "Etsi…"
 msgid "Ledgers"
 msgstr "Tapahtumat"
 
-#: kmymoney/views/kmymoneyview.cpp:539
+#: kmymoney/views/kmymoneyview.cpp:554
 #, kde-format
 msgid "Show home page"
 msgstr "Näytä etusivu"
 
-#: kmymoney/views/kmymoneyview.cpp:540
+#: kmymoney/views/kmymoneyview.cpp:555
 #, kde-format
 msgid "Show institutions page"
 msgstr "Näytä rahalaitokset -sivu"
 
-#: kmymoney/views/kmymoneyview.cpp:541
+#: kmymoney/views/kmymoneyview.cpp:556
 #, kde-format
 msgid "Show accounts page"
 msgstr "Näytä tilit -sivu"
 
-#: kmymoney/views/kmymoneyview.cpp:542
+#: kmymoney/views/kmymoneyview.cpp:557
 #, kde-format
 msgid "Show scheduled transactions page"
 msgstr "Näytä ajoitetut tapahtumat -sivu"
 
-#: kmymoney/views/kmymoneyview.cpp:543
+#: kmymoney/views/kmymoneyview.cpp:558
 #, kde-format
 msgid "Show categories page"
 msgstr "Näytä luokkasivu"
 
-#: kmymoney/views/kmymoneyview.cpp:544
+#: kmymoney/views/kmymoneyview.cpp:559
 #, kde-format
 msgid "Show tags page"
 msgstr "Näytä luokitukset -sivu"
 
-#: kmymoney/views/kmymoneyview.cpp:545
+#: kmymoney/views/kmymoneyview.cpp:560
 #, kde-format
 msgid "Show payees page"
 msgstr "Näytä maksunsaajat -sivu"
 
-#: kmymoney/views/kmymoneyview.cpp:546
+#: kmymoney/views/kmymoneyview.cpp:561
 #, kde-format
 msgid "Show ledgers page"
 msgstr "Näytä kirjanpito -sivu"
 
-#: kmymoney/views/kmymoneyview.cpp:547
+#: kmymoney/views/kmymoneyview.cpp:562
 #, kde-format
 msgid "Show investments page"
 msgstr "Näytä sijoitukset -sivu"
 
-#: kmymoney/views/kmymoneyview.cpp:548
+#: kmymoney/views/kmymoneyview.cpp:563
 #, kde-format
 msgid "Show reports page"
 msgstr "Näytä raportit -sivu"
 
-#: kmymoney/views/kmymoneyview.cpp:549
+#: kmymoney/views/kmymoneyview.cpp:564
 #, kde-format
 msgid "Show budget page"
 msgstr "Näytä budjetit -sivu"
 
-#: kmymoney/views/kmymoneyview.cpp:550
+#: kmymoney/views/kmymoneyview.cpp:565
 #, kde-format
 msgid "Show forecast page"
 msgstr "Näytä ennusteet -sivu"
 
-#: kmymoney/views/kmymoneyview.cpp:551
+#: kmymoney/views/kmymoneyview.cpp:566
 #, kde-format
 msgid "Show outbox page"
 msgstr "Näytä lähtevät -sivu"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-18 02:01+0000\n"
+"POT-Creation-Date: 2025-05-24 01:59+0000\n"
 "PO-Revision-Date: 2025-05-14 09:13+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -1678,7 +1678,7 @@ msgstr "No s'ha seleccionat cap títol."
 #, kde-format
 msgctxt "@info online update price info"
 msgid "No Security to be updated."
-msgstr "No hi ha cap títol a actualitzar."
+msgstr "No hi ha cap títol que s'haja d'actualitzar."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:534
 #, kde-format
@@ -2230,7 +2230,7 @@ msgid ""
 msgstr ""
 "Heu seleccionat suprimir la visualització dels comptes amb saldo 0 en el "
 "diàleg de configuració de KMyMoney. Per tant, la categoria que acabeu de "
-"crear només es mostrarà si s'utilitza. Altrament, estarà oculta a totes les "
+"crear només es mostrarà si s'utilitza. Altrament, estarà oculta en totes les "
 "vistes de comptes."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:912
@@ -2771,7 +2771,7 @@ msgid ""
 msgstr ""
 "Un codi de banc assignat a la institució per un banc central, un organisme "
 "supervisor bancari o una associació bancària. Conegut com a «Número "
-"d'encaminament» (Routing Number) als comptes dels EUA, o un «Codi "
+"d'encaminament» (Routing Number) en els comptes dels EUA, o un «Codi "
 "d'ordenació» (Sort Code) pels comptes en RU."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5_1)
@@ -2984,7 +2984,7 @@ msgstr ""
 "Per a completar l'operació de supressió, seleccioneu una etiqueta de les "
 "etiquetes disponibles que substituirà les etiquetes seleccionades abans de "
 "suprimir-les, o marqueu la casella de selecció de davall depenent de la "
-"vostra tria. El botó D'acord serà accessible una vegada hàgeu seleccionat "
+"vostra tria. El botó «D'acord» serà accessible una vegada hàgeu seleccionat "
 "una etiqueta o marcat la casella de selecció."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
@@ -3456,7 +3456,7 @@ msgstr "Oculta els comptes amb saldo zero en la pàgina principal"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:457
 #, kde-format
 msgid "Hide accounts with a zero balance from Accounts"
-msgstr "Oculta els comptes amb saldo zero als comptes"
+msgstr "Oculta els comptes amb saldo zero en els comptes"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:464
@@ -4728,7 +4728,7 @@ msgstr "Biblioteca per a crear diagrames"
 #: kmymoney/kcreditswindow.cpp:116
 #, kde-format
 msgid "iCalendar integration"
-msgstr "Integració de l'iCalendar"
+msgstr "Integració d'iCalendar"
 
 #: kmymoney/kcreditswindow.cpp:123
 #, kde-format
@@ -4917,7 +4917,7 @@ msgstr "Institució nova…"
 #: kmymoney/kmymoney.cpp:1396
 #, kde-format
 msgid "Edit institution..."
-msgstr "Edita una institució…"
+msgstr "Edita la institució…"
 
 #: kmymoney/kmymoney.cpp:1397
 #, kde-format
@@ -6605,7 +6605,7 @@ msgid ""
 msgstr ""
 "Un codi de banc assignat a la institució per un banc central, un organisme "
 "supervisor bancari o una associació bancària. Conegut com a «Número "
-"d'encaminament» (Routing Number) als comptes dels EUA, o un «Codi "
+"d'encaminament» (Routing Number) en els comptes dels EUA, o un «Codi "
 "d'ordenació» (Sort Code) per als comptes en RU."
 
 #: kmymoney/models/statementmodel.cpp:145
@@ -11927,12 +11927,12 @@ msgstr "%1 no és cap compte d'inversions. Voleu fer-ne un?"
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:72
 #, kde-format
 msgid "Schedules to iCalendar"
-msgstr "Planificacions a l'iCalendar"
+msgstr "Planificacions a iCalendar"
 
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:92
 #, kde-format
 msgid "Schedules to iCalendar [%1]"
-msgstr "Planificacions a l'iCalendar [%1]"
+msgstr "Planificacions a iCalendar [%1]"
 
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:110
 #, kde-format
@@ -13240,7 +13240,7 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/importoption.ui:166
 #, kde-format
 msgid "Price is derived from"
-msgstr "La cotització és derivada de"
+msgstr "La cotització deriva des de"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:535
@@ -15075,7 +15075,7 @@ msgstr "Seleccioneu com s'ha de tractar el pressupost d'este compte."
 msgctxt "@info:tooltip Budget assignment"
 msgid "This option is only available when a budget value is assigned."
 msgstr ""
-"Esta opció només estarà disponible quan s'ha assignat un valor del "
+"Esta opció només estarà disponible quan s'haja assignat un valor del "
 "pressupost."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
@@ -16741,7 +16741,7 @@ msgstr "&Exporta cap a fitxers PDF"
 #: kmymoney/plugins/views/reports/kreportsview.cpp:816
 #, kde-format
 msgid "Export into directory"
-msgstr "Exporta en un directori"
+msgstr "Exporta dins d'un directori"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KReportsView)
 #: kmymoney/plugins/views/reports/kreportsview.ui:14
@@ -18818,7 +18818,7 @@ msgstr "Oculta les accions amb saldo zero"
 #: kmymoney/settings/kmymoney.kcfg:244
 #, kde-format
 msgid "Hide zero balance accounts from Accounts"
-msgstr "Oculta els comptes amb saldo zero als comptes"
+msgstr "Oculta els comptes amb saldo zero en els comptes"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccountsHome), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:248
@@ -19059,7 +19059,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Template Loading Error"
-msgstr "S'ha produït un error en carregar la plantilla"
+msgstr "S'ha produït un error mentre es carregava la plantilla"
 
 #: kmymoney/templates/templateloader.cpp:110
 #, kde-format
@@ -19434,7 +19434,7 @@ msgctxt "@info Editing multiple transactions"
 msgid ""
 "The current implementation cannot modify multiple transactions in this view."
 msgstr ""
-"La implementació actual no pot modificar diverses operacions en esta vista."
+"La implementació actual no pot modificar múltiples operacions en esta vista."
 
 # skip-rule: ff-net
 #: kmymoney/views/kaccountsview.cpp:170
@@ -19542,7 +19542,7 @@ msgstr "Edita el compte «%1»"
 #, kde-format
 msgctxt "Undo action description"
 msgid "Edit account"
-msgstr "Edita el compte"
+msgstr "Editeu un compte"
 
 #: kmymoney/views/kaccountsview_p.h:282
 #, kde-format
@@ -20236,7 +20236,7 @@ msgstr "Benefici/pèrdua esperat"
 #, kde-format
 msgctxt "@info:title Dialog title"
 msgid "Edit Institution"
-msgstr "Editeu institució"
+msgstr "Editeu la institució"
 
 #: kmymoney/views/kinstitutionsview.cpp:258
 #, kde-format
@@ -20319,67 +20319,67 @@ msgstr "Busca…"
 msgid "Ledgers"
 msgstr "Llibres majors"
 
-#: kmymoney/views/kmymoneyview.cpp:539
+#: kmymoney/views/kmymoneyview.cpp:554
 #, kde-format
 msgid "Show home page"
 msgstr "Mostra la pàgina principal"
 
-#: kmymoney/views/kmymoneyview.cpp:540
+#: kmymoney/views/kmymoneyview.cpp:555
 #, kde-format
 msgid "Show institutions page"
 msgstr "Mostra la pàgina d'institucions"
 
-#: kmymoney/views/kmymoneyview.cpp:541
+#: kmymoney/views/kmymoneyview.cpp:556
 #, kde-format
 msgid "Show accounts page"
 msgstr "Mostra la pàgina dels comptes"
 
-#: kmymoney/views/kmymoneyview.cpp:542
+#: kmymoney/views/kmymoneyview.cpp:557
 #, kde-format
 msgid "Show scheduled transactions page"
 msgstr "Mostra la pàgina d'operacions planificades"
 
-#: kmymoney/views/kmymoneyview.cpp:543
+#: kmymoney/views/kmymoneyview.cpp:558
 #, kde-format
 msgid "Show categories page"
 msgstr "Mostra la pàgina de categories"
 
-#: kmymoney/views/kmymoneyview.cpp:544
+#: kmymoney/views/kmymoneyview.cpp:559
 #, kde-format
 msgid "Show tags page"
 msgstr "Mostra la pàgina d'etiquetes"
 
-#: kmymoney/views/kmymoneyview.cpp:545
+#: kmymoney/views/kmymoneyview.cpp:560
 #, kde-format
 msgid "Show payees page"
 msgstr "Mostra la pàgina de beneficiaris"
 
-#: kmymoney/views/kmymoneyview.cpp:546
+#: kmymoney/views/kmymoneyview.cpp:561
 #, kde-format
 msgid "Show ledgers page"
 msgstr "Mostra la pàgina llibres majors"
 
-#: kmymoney/views/kmymoneyview.cpp:547
+#: kmymoney/views/kmymoneyview.cpp:562
 #, kde-format
 msgid "Show investments page"
 msgstr "Mostra la pàgina d'inversions"
 
-#: kmymoney/views/kmymoneyview.cpp:548
+#: kmymoney/views/kmymoneyview.cpp:563
 #, kde-format
 msgid "Show reports page"
 msgstr "Mostra la pàgina d'informes"
 
-#: kmymoney/views/kmymoneyview.cpp:549
+#: kmymoney/views/kmymoneyview.cpp:564
 #, kde-format
 msgid "Show budget page"
 msgstr "Mostra la pàgina de pressupostos"
 
-#: kmymoney/views/kmymoneyview.cpp:550
+#: kmymoney/views/kmymoneyview.cpp:565
 #, kde-format
 msgid "Show forecast page"
 msgstr "Mostra la pàgina de previsió"
 
-#: kmymoney/views/kmymoneyview.cpp:551
+#: kmymoney/views/kmymoneyview.cpp:566
 #, kde-format
 msgid "Show outbox page"
 msgstr "Mostra la pàgina safata d'eixida"
@@ -20993,7 +20993,7 @@ msgstr "Color de l'etiqueta:"
 #, kde-format
 msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
-msgstr "Selecciona l'operació que es farà servir com a plantilla."
+msgstr "Selecciona l'operació que s'utilitzarà com a plantilla."
 
 #: kmymoney/views/ktransactionselectdlg.cpp:128
 #, kde-format
@@ -24281,7 +24281,7 @@ msgid ""
 "This security is used in multiple accounts. Changing the values below will "
 "be effective for all of them."
 msgstr ""
-"Este títol s'utilitza en diversos comptes. Canviant els valors de davall "
+"Este títol s'utilitza en múltiples comptes. Canviant els valors de davall "
 "seran efectius per a tots ells."
 
 #. i18n: ectx: property (title), widget (KInvestmentDetailsWizardPage, KInvestmentDetailsWizardPage)
