@@ -177,7 +177,7 @@ void NewTransactionEditor::Private::updateWidgetAccess()
     ui->numberEdit->setEnabled(enable);
     ui->categoryCombo->setEnabled(enable);
     ui->costCenterCombo->setEnabled(enable);
-    ui->tagContainer->setEnabled(enable);
+    ui->tagContainer->setEnabled(enable & (splitModel.rowCount() == 1));
     ui->statusCombo->setEnabled(enable);
     ui->memoEdit->setEnabled(enable);
     ui->enterButton->setEnabled(!q->isReadOnly());
