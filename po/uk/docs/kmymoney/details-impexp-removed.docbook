@@ -1,0 +1,53 @@
+<!-- This is stuff that was commented out in details.impexp.docbook, from the QIF
+     import section.  I am moving it here to clean up that file, but it is still not
+     sure if this material is still needed anywhere.  I've modified the nesting to
+     make it look more legal.  -->
+
+<sect1 id="details.impexp.removed">
+<sect1info>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+</sect1info>
+<title
+>Вилучені дані</title>
+
+<sect2
+><title
+>Прийняття імпортованих записів операцій</title>
+
+<para>
+<screenshot>
+  <screeninfo
+>Імпортовані записи операцій</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qifimportverify.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Імпортовані записи операцій</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<para
+>Деякі з записів операцій у вашій обліковій книзі може бути показано червоним кольором із блиманням. Причиною підсвічування є невизначеність категорії відповідних записів. Інструмент імпортування не може автоматично призначити цю категорію на основі вашого журналу операцій. </para>
+
+<para
+>Дані операцій можна редагувати або навіть вилучати, якщо це необхідно. Щоб редагувати запис операції, просто двічі клацніть на запис або натисніть Enter, коли запис буде позначено. Після завершення натисніть <guibutton
+>Гаразд</guibutton
+>, щоб прийняти імпортовані операції, або <guibutton
+>Скасувати</guibutton
+>, щоб вилучити імпортовані операції. </para>
+</sect2>
+
+
+<sect2
+><title
+>Імпортування даних щодо інвестування</title>
+<para
+>Будь ласка, зауважте, що якщо ви імпортуєте файл з записами щодо операцій з інвестування, ці записи від початку мають міститися у вашому файлі &kmymoney;. Для встановлення відповідності використовується стандартний символ акції, отже переконайтеся, що цей символ у &kmymoney; точно збігається з символом у файлі, який ви імпортуєте. </para>
+</sect2>
+</sect1>
+
