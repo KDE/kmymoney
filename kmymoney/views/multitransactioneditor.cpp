@@ -544,64 +544,77 @@ QStringList MultiTransactionEditor::saveTransaction(const QStringList& selectedJ
             for (const auto& journalEntryId : selectedJournalEntryIds) {
                 const auto journalIdx = journalModel->indexById(journalEntryId);
                 const auto journalEntry = journalModel->itemByIndex(journalIdx);
-                auto t = journalEntry.transaction();
-                auto sp = journalEntry.split();
-                MyMoneySplit csp;
+                auto transaction = journalEntry.transaction();
+                auto selectedSplit = journalEntry.split();
+                MyMoneySplit counterSplit;
 
-                if (t.splitCount() == 2) {
-                    for (auto split : t.splits()) {
-                        if (split.id() != sp.id()) {
-                            csp = split;
+                if (transaction.splitCount() == 2) {
+                    for (auto split : transaction.splits()) {
+                        if (split.id() != selectedSplit.id()) {
+                            counterSplit = split;
                             break;
                         }
                     }
                 }
 
                 if (!d->ui->dateEdit->isNull()) {
-                    t.setPostDate(d->ui->dateEdit->date());
+                    transaction.setPostDate(d->ui->dateEdit->date());
                 }
                 if (!d->ui->statusCombo->currentText().isEmpty()) {
                     const auto idx = d->statusModel.index(d->ui->statusCombo->currentIndex(), 0);
-                    sp.setReconcileFlag(idx.data(eMyMoney::Model::SplitReconcileStateRole).value<eMyMoney::Split::State>());
-                    t.modifySplit(sp);
+                    selectedSplit.setReconcileFlag(idx.data(eMyMoney::Model::SplitReconcileStateRole).value<eMyMoney::Split::State>());
+                    transaction.modifySplit(selectedSplit);
                 }
                 if (!d->ui->payeeEdit->lineEdit()->text().isEmpty()) {
                     const auto payeeRow = d->ui->payeeEdit->currentIndex();
                     const auto payeeIdx = d->payeesModel->index(payeeRow, 0);
                     const auto payeeId = payeeIdx.data(eMyMoney::Model::IdRole).toString();
-                    sp.setPayeeId(payeeId);
-                    t.modifySplit(sp);
-                    if (!csp.id().isEmpty()) {
-                        csp.setPayeeId(payeeId);
-                        t.modifySplit(csp);
+                    selectedSplit.setPayeeId(payeeId);
+                    transaction.modifySplit(selectedSplit);
+                    if (!counterSplit.id().isEmpty()) {
+                        counterSplit.setPayeeId(payeeId);
+                        transaction.modifySplit(counterSplit);
+                    }
+                }
+                if (!d->ui->tagContainer->selectedTags().isEmpty()) {
+                    auto currentTagList = counterSplit.tagIdList();
+                    const auto newTagList = d->ui->tagContainer->selectedTags();
+                    for (const auto& newTag : newTagList) {
+                        if (!currentTagList.contains(newTag)) {
+                            currentTagList.append(newTag);
+                        }
+                    }
+                    if (!counterSplit.id().isEmpty()) {
+                        counterSplit.setTagIdList(currentTagList);
+                        transaction.modifySplit(counterSplit);
                     }
                 }
                 if (!d->ui->categoryCombo->getSelected().isEmpty()) {
-                    if (!csp.id().isEmpty()) {
-                        csp.setAccountId(d->ui->categoryCombo->getSelected());
-                        t.modifySplit(csp);
+                    if (!counterSplit.id().isEmpty()) {
+                        counterSplit.setAccountId(d->ui->categoryCombo->getSelected());
+                        transaction.modifySplit(counterSplit);
                     } else {
-                        csp = sp;
-                        csp.clearId();
-                        csp.setValue(-csp.value());
+                        counterSplit = selectedSplit;
+                        counterSplit.clearId();
+                        counterSplit.setValue(-counterSplit.value());
                         /// @todo make assignment multi currency safe. For now, we
                         /// just dump out a debug message in case both securities are
                         /// not the same
-                        csp.setShares(-csp.shares());
-                        csp.setAccountId(d->ui->categoryCombo->getSelected());
-                        if (!splitsUseSameCurrency(sp, csp)) {
+                        counterSplit.setShares(-counterSplit.shares());
+                        counterSplit.setAccountId(d->ui->categoryCombo->getSelected());
+                        if (!splitsUseSameCurrency(selectedSplit, counterSplit)) {
                             qDebug() << "MultiTransactionEditor does not support multiple currencies yet";
                         }
-                        csp.setReconcileDate(QDate());
-                        csp.setReconcileFlag(eMyMoney::Split::State::Unknown);
-                        csp.setBankID(QString());
-                        csp.setAction(QString());
-                        csp.setNumber(QString());
-                        t.addSplit(csp);
+                        counterSplit.setReconcileDate(QDate());
+                        counterSplit.setReconcileFlag(eMyMoney::Split::State::Unknown);
+                        counterSplit.setBankID(QString());
+                        counterSplit.setAction(QString());
+                        counterSplit.setNumber(QString());
+                        transaction.addSplit(counterSplit);
                     }
                 }
 
-                file->modifyTransaction(t);
+                file->modifyTransaction(transaction);
             }
             ft.commit();
         } catch (const MyMoneyException& e) {
