@@ -121,6 +121,7 @@ public:
     }
 
     void updateWidgetState();
+    void enableTagContainer(bool enable) const;
     bool checkForValidTransaction(bool doUserInteraction = true);
     bool isDatePostOpeningDate(const QDate& date, const QString& accountId);
     bool postdateChanged(const QDate& date);
@@ -168,6 +169,24 @@ public:
     TabOrder m_tabOrder;
 };
 
+void NewTransactionEditor::Private::enableTagContainer(bool enable) const
+{
+    QString toolTip;
+    switch (splitModel.rowCount()) {
+    case 0:
+        toolTip = i18nc("@info:tooltip Tag entry widget", "This widget is disabled because you need to select a category first.");
+        break;
+    case 1:
+        toolTip = i18nc("@info:tooltip Tag entry widget", "Use this widget to add tags for this transaction.");
+        break;
+    default:
+        toolTip = i18nc("@info:tooltip Tag entry widget", "Please use the split editor to assign tags.");
+        break;
+    }
+    ui->tagContainer->setToolTip(toolTip);
+    ui->tagContainer->setEnabled(enable);
+}
+
 void NewTransactionEditor::Private::updateWidgetAccess()
 {
     const auto enable = !m_account.id().isEmpty();
@@ -177,7 +196,7 @@ void NewTransactionEditor::Private::updateWidgetAccess()
     ui->numberEdit->setEnabled(enable);
     ui->categoryCombo->setEnabled(enable);
     ui->costCenterCombo->setEnabled(enable);
-    ui->tagContainer->setEnabled(enable & (splitModel.rowCount() == 1));
+    enableTagContainer(enable & (splitModel.rowCount() == 1));
     ui->statusCombo->setEnabled(enable);
     ui->memoEdit->setEnabled(enable);
     ui->enterButton->setEnabled(!q->isReadOnly());
@@ -200,10 +219,10 @@ void NewTransactionEditor::Private::updateWidgetState()
 
     // update the tag combo box
     if (splitModel.rowCount() == 1) {
-        ui->tagContainer->setEnabled(true);
+        enableTagContainer(true);
         ui->tagContainer->loadTags(index.data(eMyMoney::Model::SplitTagIdRole).toStringList());
     } else {
-        ui->tagContainer->setEnabled(false);
+        enableTagContainer(false);
         ui->tagContainer->loadTags({});
     }
 
@@ -449,7 +468,7 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
         }
     }
     checkForValidAmount();
-    ui->tagContainer->setEnabled(splitModel.rowCount() == 1);
+    enableTagContainer(splitModel.rowCount() == 1);
     return rc;
 }
 
@@ -682,6 +701,9 @@ void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
                     splitModel.setData(idx, payeeId, eMyMoney::Model::SplitPayeeIdRole);
                 }
             }
+            updateWidgetState();
+            updateWidgetAccess();
+            checkForValidAmount();
         }
     }
 
@@ -1062,10 +1084,6 @@ void NewTransactionEditor::Private::loadTransaction(QModelIndex idx)
     // of all other widgets
     ui->creditDebitEdit->setValue(amountValue);
     ui->creditDebitEdit->setShares(amountShares);
-
-    updateWidgetState();
-    updateWidgetAccess();
-    checkForValidAmount();
 
     m_splitHelper->updateWidget();
 }
@@ -1448,6 +1466,10 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
     } else {
         d->loadTransaction(idx);
     }
+
+    d->updateWidgetState();
+    d->updateWidgetAccess();
+    d->checkForValidAmount();
 
     setInitialFocus();
 }
