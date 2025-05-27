@@ -14,6 +14,7 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
+#include "klocalizedstring.h"
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -468,7 +469,76 @@ QString MyMoneySplit::actionName(Split::Action action)
     return actionNamesLUT().value(action);
 }
 
-Split::Action MyMoneySplit::actionStringToAction(const QString &text) const
+Split::Action MyMoneySplit::actionStringToAction(const QString& text)
 {
     return actionNamesLUT().key(text, Split::Action::Unknown);
+}
+
+QString MyMoneySplit::actionI18nName(eMyMoney::Split::Action action)
+{
+    static const QHash<Split::Action, QString> actionNames{
+        {
+            Split::Action::ATM,
+            i18nc("Investment action", "ATM"),
+        },
+        {
+            Split::Action::AddShares,
+            i18nc("Investment action", "Add shares"),
+        },
+        {
+            Split::Action::Amortization,
+            i18nc("Investment action", "Amortization"),
+        },
+        {
+            Split::Action::BuyShares,
+            i18nc("Investment action", "Buy shares"),
+        },
+        {
+            Split::Action::Check,
+            i18nc("Investment action", "Check"),
+        },
+        {
+            Split::Action::Deposit,
+            i18nc("Investment action", "Deposit"),
+        },
+        {
+            Split::Action::Dividend,
+            i18nc("Investment action", "Dividend"),
+        },
+        {
+            Split::Action::Interest,
+            i18nc("Investment action", "Interest"),
+        },
+        {
+            Split::Action::InterestIncome,
+            i18nc("Investment action", "Interest income"),
+        },
+        {
+            Split::Action::ReinvestDividend,
+            i18nc("Investment action", "Reinvest dividends"),
+        },
+        // SellShares is not present as action
+        {
+            Split::Action::SplitShares,
+            i18nc("Investment action", "Split shares"),
+        },
+        {
+            Split::Action::Transfer,
+            i18nc("Investment action", "Transfer"),
+        },
+        {
+            Split::Action::Withdrawal,
+            i18nc("Investment action", "Withdrawal"),
+        },
+        {
+            Split::Action::Yield,
+            i18nc("Investment action", "Yield"),
+        },
+    };
+    return actionNames.value(action);
+}
+
+QString MyMoneySplit::actionI18nName(const QString& text)
+{
+    return actionI18nName(actionStringToAction(text));
 }

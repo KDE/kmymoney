@@ -600,13 +600,13 @@ void QueryTableTest::testInvestment()
         QCOMPARE(MyMoneyMoney(rows[19][ListTable::ctShares]), MyMoneyMoney(500.00));
         QCOMPARE(MyMoneyMoney(rows[22][ListTable::ctShares]), MyMoneyMoney(500.00));
 
-        QVERIFY(rows[1][ListTable::ctAction] == "Buy");
-        QVERIFY(rows[3][ListTable::ctAction] == "Sell");
-        QVERIFY(rows[5][ListTable::ctAction] == "Reinvest");
+        QVERIFY(rows[1][ListTable::ctAction] == "Buy shares");
+        QVERIFY(rows[3][ListTable::ctAction] == "Sell shares");
+        QVERIFY(rows[5][ListTable::ctAction] == "Reinvest dividends");
         QVERIFY(rows[7][ListTable::ctAction] == "Dividend");
         QVERIFY(rows[13][ListTable::ctAction] == "Yield");
-        QVERIFY(rows[19][ListTable::ctAction] == "Buy");
-        QVERIFY(rows[22][ListTable::ctAction] == "Buy");
+        QVERIFY(rows[19][ListTable::ctAction] == "Buy shares");
+        QVERIFY(rows[22][ListTable::ctAction] == "Buy shares");
 #else
         QVERIFY(rows.count() == 9);
         QVERIFY(MyMoneyMoney(rows[0][ListTable::ctValue]) == MyMoneyMoney(100000.00));
