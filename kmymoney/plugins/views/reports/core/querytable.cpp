@@ -791,13 +791,13 @@ void QueryTable::constructTransactionTable()
                     MyMoneyMoney shares = (*it_split).shares();
 
                     int pricePrecision = file->security(splitAcc.currencyId()).pricePrecision();
-                    qA[ctAction] = (*it_split).action();
+                    if (((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) && shares.isNegative())
+                        qA[ctAction] = i18nc("Investment action", "Sell shares");
+                    else
+                        qA[ctAction] = MyMoneySplit::actionI18nName((*it_split).action());
                     qA[ctShares] = shares.isZero() ? QString() : shares.toString();
                     qA[ctPrice] = shares.isZero() ? QString() : xr.convertPrecision(pricePrecision).toString();
                     qA.addSourceLine(ctPrice, __LINE__);
-
-                    if (((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) && shares.isNegative())
-                        qA[ctAction] = "Sell";
 
                     qA[ctInvestAccount] = splitAcc.parent().name();
                 } else {
@@ -1995,13 +1995,13 @@ void QueryTable::constructSplitsTable()
                 institution = splitAcc.parent().institutionId();
                 MyMoneyMoney shares = (*it_split).shares();
                 int pricePrecision = file->security(splitAcc.currencyId()).pricePrecision();
-                qA[ctAction] = (*it_split).action();
+                if (((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) && (*it_split).shares().isNegative())
+                    qA[ctAction] = i18nc("Investment action", "Sell shares");
+                else
+                    qA[ctAction] = MyMoneySplit::actionI18nName((*it_split).action());
                 qA[ctShares] = shares.isZero() ? QString() : (*it_split).shares().toString();
                 qA[ctPrice] = shares.isZero() ? QString() : xr.convertPrecision(pricePrecision).toString();
                 qA.addSourceLine(ctPrice, __LINE__);
-
-                if (((*it_split).action() == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) && (*it_split).shares().isNegative())
-                    qA[ctAction] = "Sell";
 
                 qA[ctInvestAccount] = splitAcc.parent().name();
             }

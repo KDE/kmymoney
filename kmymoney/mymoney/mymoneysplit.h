@@ -152,7 +152,7 @@ public:
     void setAction(const QString& action);
     void setAction(eMyMoney::Split::InvestmentTransactionType type);
     eMyMoney::Split::InvestmentTransactionType investmentTransactionType() const;
-    eMyMoney::Split::Action actionStringToAction(const QString &text) const;
+    static eMyMoney::Split::Action actionStringToAction(const QString& text);
 
     bool isAmortizationSplit() const;
     bool isInterestSplit() const;
@@ -203,6 +203,8 @@ public:
     bool replaceId(const QString& newId, const QString& oldId);
 
     static QString actionName(eMyMoney::Split::Action action);
+    static QString actionI18nName(eMyMoney::Split::Action action);
+    static QString actionI18nName(const QString& text);
 };
 
 
