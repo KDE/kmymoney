@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-24 03:28+0000\n"
+"POT-Creation-Date: 2025-05-27 03:26+0000\n"
 "PO-Revision-Date: 2025-05-05 10:08+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -21201,13 +21201,13 @@ msgstr ""
 "Een geselecteerde transactie heeft een plaatsingsdatum (%1) voor een "
 "openingsdatum van de geselecteerde rekening (%2)."
 
-#: kmymoney/views/multitransactioneditor.cpp:722
+#: kmymoney/views/multitransactioneditor.cpp:735
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "Kan niet meerdere planningen tegelijk bewerken."
 
-#: kmymoney/views/multitransactioneditor.cpp:731
+#: kmymoney/views/multitransactioneditor.cpp:744
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21217,7 +21217,7 @@ msgstr ""
 "Selectie van categorie of rekening is niet mogelijk wanneer gesplitste "
 "transacties onderdeel zijn van de selectie."
 
-#: kmymoney/views/multitransactioneditor.cpp:735
+#: kmymoney/views/multitransactioneditor.cpp:748
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21227,7 +21227,7 @@ msgstr ""
 "Selectie van tags is niet mogelijk wanneer gesplitste transacties onderdeel "
 "zijn van de selectie."
 
-#: kmymoney/views/multitransactioneditor.cpp:739
+#: kmymoney/views/multitransactioneditor.cpp:752
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""

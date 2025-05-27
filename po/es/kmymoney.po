@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-24 03:28+0000\n"
+"POT-Creation-Date: 2025-05-27 03:26+0000\n"
 "PO-Revision-Date: 2025-05-24 01:03+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -21203,13 +21203,13 @@ msgstr ""
 "Una transacción seleccionada tiene una fecha de valor (%1) anterior a la "
 "fecha de apertura de la cuenta seleccionada (%2)."
 
-#: kmymoney/views/multitransactioneditor.cpp:722
+#: kmymoney/views/multitransactioneditor.cpp:735
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "No se pueden editar múltiples planificaciones al mismo tiempo."
 
-#: kmymoney/views/multitransactioneditor.cpp:731
+#: kmymoney/views/multitransactioneditor.cpp:744
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21219,7 +21219,7 @@ msgstr ""
 "La selección de una categoría o cuenta no es posible cuando las "
 "transacciones con partidas son parte de la selección."
 
-#: kmymoney/views/multitransactioneditor.cpp:735
+#: kmymoney/views/multitransactioneditor.cpp:748
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21229,7 +21229,7 @@ msgstr ""
 "La selección de etiquetas no es posible cuando las transacciones con "
 "partidas son parte de la selección."
 
-#: kmymoney/views/multitransactioneditor.cpp:739
+#: kmymoney/views/multitransactioneditor.cpp:752
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
