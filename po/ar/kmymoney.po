@@ -1947,8 +1947,7 @@ msgid "Delete price..."
 msgstr "احذف الثمن..."
 
 #: kmymoney/dialogs/kmymoneypricedlg.cpp:357
-#, fuzzy, kde-format
-#| msgid "Price options"
+#, kde-format
 msgctxt "@title:menu"
 msgid "Price options"
 msgstr "خيارات الثمن"
@@ -3033,7 +3032,8 @@ msgstr "الخلفية"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:184
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Foreground"
 msgid "Foreground"
 msgstr "الأمامية"
 
@@ -4471,8 +4471,7 @@ msgid ""
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:52
-#, fuzzy, kde-format
-#| msgid "Core engine, Release Manager, Project admin"
+#, kde-format
 msgctxt "Roles in project"
 msgid "Core engine, Release Manager, Project admin"
 msgstr "المحرّك اللُبّ، مدير الإطلاق، مدير المشروع"
@@ -4502,18 +4501,16 @@ msgid "Inactive member. "
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:57
-#, fuzzy, kde-format
-#| msgid "Initial idea, much initial source code, Project admin"
+#, kde-format
 msgctxt "Roles in project"
 msgid "Initial idea, much initial source code, Project admin"
-msgstr "الفكرة الأولية، الكثير من أوليات الشِفرة المصدرية، مدير المشروع"
+msgstr "الفكرة الأوّليّة، كثير من النّصوص المصدريّة، مدير المشروع"
 
 #: kmymoney/kcreditswindow.cpp:59
-#, fuzzy, kde-format
-#| msgid "Forecast, Reports"
+#, kde-format
 msgctxt "Roles in project"
 msgid "Forecast, Reports"
-msgstr "التنبؤ، التقارير"
+msgstr "التّنبّؤ، التّقارير"
 
 #: kmymoney/kcreditswindow.cpp:61
 #, kde-format
@@ -4522,33 +4519,29 @@ msgid "Reporting logic, OFX Import"
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:64
-#, fuzzy, kde-format
-#| msgid "Database backend, maintainer stable branch"
+#, kde-format
 msgctxt "Roles in project"
 msgid "Database backend, maintainer stable branch"
-msgstr "تتبّع قاعدة البيانات الخلفي، مشرف الفرع المستقر"
+msgstr "سند قاعدة البيانات، منسّق الفرع المستقرّ"
 
 #: kmymoney/kcreditswindow.cpp:67
-#, fuzzy, kde-format
-#| msgid "Project Admin"
+#, kde-format
 msgctxt "Roles in project"
 msgid "Project Admin"
 msgstr "مدير المشروع"
 
 #: kmymoney/kcreditswindow.cpp:69 kmymoney/kcreditswindow.cpp:71
 #: kmymoney/kcreditswindow.cpp:72
-#, fuzzy, kde-format
-#| msgid "Developer"
+#, kde-format
 msgctxt "Roles in project"
 msgid "Developer"
 msgstr "مطوّر"
 
 #: kmymoney/kcreditswindow.cpp:70
-#, fuzzy, kde-format
-#| msgid "Database backend"
+#, kde-format
 msgctxt "Roles in project"
 msgid "Database backend"
-msgstr "تتبّع قاعدة البيانات الخلفي"
+msgstr "سند قاعدة البيانات"
 
 #: kmymoney/kcreditswindow.cpp:74
 #, fuzzy, kde-format
@@ -4612,39 +4605,34 @@ msgstr "قصور في قاعدة البيانات"
 #, kde-format
 msgctxt "Roles in project"
 msgid "Documentation and user support"
-msgstr ""
+msgstr "التّوثيق ودعم المستخدمين"
 
 #: kmymoney/kcreditswindow.cpp:137
-#, fuzzy, kde-format
-#| msgid "Initial investment support"
+#, kde-format
 msgctxt "Roles in project"
 msgid "Initial investment support"
-msgstr "دعم الاستثمار الأولي"
+msgstr "دعم الاستثمار الأوّليّ"
 
 #: kmymoney/kcreditswindow.cpp:140
-#, fuzzy, kde-format
-#| msgid "Developer & Artist"
+#, kde-format
 msgctxt "Roles in project"
 msgid "Developer & Artist"
 msgstr "مطوّر وفنّان"
 
 #: kmymoney/kcreditswindow.cpp:143
-#, fuzzy, kde-format
-#| msgid "Icons & splash screen"
+#, kde-format
 msgctxt "Roles in project"
 msgid "Icons & splash screen"
 msgstr "الأيقونات وشاشة البداية"
 
 #: kmymoney/kcreditswindow.cpp:145
-#, fuzzy, kde-format
-#| msgid "Patches and port to kde4"
+#, kde-format
 msgctxt "Roles in project"
 msgid "Patches and port to kde4"
-msgstr "ترقيعات والانتقال إلى كِيدِي4"
+msgstr "ترقيعات متفرّقة والانتقال إلى كِيدِي4"
 
 #: kmymoney/kcreditswindow.cpp:146
-#, fuzzy, kde-format
-#| msgid "Patches"
+#, kde-format
 msgctxt "Roles in project"
 msgid "Patches"
 msgstr "ترقيعات"
@@ -4656,11 +4644,10 @@ msgid "Patches, packaging and KF5-CI for OS X"
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:150
-#, fuzzy, kde-format
-#| msgid "CSV import"
+#, kde-format
 msgctxt "Roles in project"
 msgid "CSV import/export"
-msgstr "استيراد CSV"
+msgstr "استيراد وتصدير CSV"
 
 #: kmymoney/kmymoney.cpp:445 kmymoney/models/equitiesmodel.cpp:424
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:192
@@ -5151,10 +5138,9 @@ msgid "Delete security..."
 msgstr "احذف الحساب..."
 
 #: kmymoney/kmymoney.cpp:1483
-#, fuzzy, kde-format
-#| msgid "&New Schedule..."
+#, kde-format
 msgid "New schedule..."
-msgstr "جدول &جديد..."
+msgstr "جدول جديد..."
 
 #: kmymoney/kmymoney.cpp:1484 kmymoney/kmymoney.cpp:1485
 #, kde-format
@@ -5182,8 +5168,7 @@ msgid "Skip next transaction..."
 msgstr "تخطّ المعاملة التالية..."
 
 #: kmymoney/kmymoney.cpp:1491
-#, fuzzy, kde-format
-#| msgid "New payee"
+#, kde-format
 msgid "New payee..."
 msgstr "مُتسلِّم جديد"
 
@@ -5203,10 +5188,9 @@ msgid "Merge payees"
 msgstr "مُتسلِّمينك"
 
 #: kmymoney/kmymoney.cpp:1496
-#, fuzzy, kde-format
-#| msgid "New tag"
+#, kde-format
 msgid "New tag..."
-msgstr "وسم جديد"
+msgstr "وسم جديد..."
 
 #: kmymoney/kmymoney.cpp:1497
 #, kde-format
@@ -5225,10 +5209,9 @@ msgid "Open report"
 msgstr "تقرير &جديد"
 
 #: kmymoney/kmymoney.cpp:1501
-#, fuzzy, kde-format
-#| msgid "&New report"
+#, kde-format
 msgid "New report"
-msgstr "تقرير &جديد"
+msgstr "تقرير جديد"
 
 #: kmymoney/kmymoney.cpp:1502
 #, fuzzy, kde-format
@@ -5250,10 +5233,9 @@ msgid "Export report"
 msgstr "التقارير المفضّلة"
 
 #: kmymoney/kmymoney.cpp:1505
-#, fuzzy, kde-format
-#| msgid "Delete Report?"
+#, kde-format
 msgid "Delete report"
-msgstr "احذف التقرير؟"
+msgstr "احذف التّقرير"
 
 #: kmymoney/kmymoney.cpp:1506
 #, fuzzy, kde-format
@@ -5290,9 +5272,7 @@ msgid "Debug Timers"
 msgstr ""
 
 #: kmymoney/kmymoney.cpp:1533
-#, fuzzy, kde-format
-#| msgctxt "Button text for match transaction"
-#| msgid "Match"
+#, kde-format
 msgctxt "Match transactions"
 msgid "Match"
 msgstr "طابق"
@@ -6378,8 +6358,7 @@ msgstr ""
 
 #: kmymoney/models/statementmodel.cpp:93
 #: kmymoney/mymoney/storage/accountsmodel.cpp:467
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "@title:column Shows the Name of account"
 msgid "Name"
 msgstr "الاسم"
@@ -6437,8 +6416,7 @@ msgstr "إنشاء مُتسلِّم"
 
 #: kmymoney/models/statementmodel.cpp:117
 #: kmymoney/mymoney/storage/accountsmodel.cpp:503
-#, fuzzy, kde-format
-#| msgid "Full name"
+#, kde-format
 msgctxt ""
 "@info:tooltip for 'Name' column. Used in Account, Category and Institution "
 "context, so avoid being too specific"
@@ -6447,13 +6425,12 @@ msgstr "الاسم الكامل"
 
 #: kmymoney/models/statementmodel.cpp:119
 #: kmymoney/mymoney/storage/accountsmodel.cpp:505
-#, fuzzy, kde-format
-#| msgid "Type"
+#, kde-format
 msgctxt ""
 "@info:tooltip for 'Type' column, used in both Account and Category context, "
 "so avoid being too specific"
 msgid "Type"
-msgstr "النّوع"
+msgstr "النوع"
 
 #: kmymoney/models/statementmodel.cpp:121
 #: kmymoney/mymoney/storage/accountsmodel.cpp:507
@@ -8484,8 +8461,6 @@ msgid "Status"
 msgstr "الحالة"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:398
-#, fuzzy
-#| msgid "Favorites"
 msgid "Favorite"
 msgstr "المفضّلة"
 
@@ -8522,24 +8497,21 @@ msgid "Equity accounts"
 msgstr "حسابات حقوق الملكية"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:469
-#, fuzzy, kde-format
-#| msgid "Type"
+#, kde-format
 msgctxt ""
 "@title:column Shows the Type of account (e.g. Asset, Checking, Credit Card)"
 msgid "Type"
-msgstr "النّوع"
+msgstr "النوع"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:471
-#, fuzzy, kde-format
-#| msgid "End line"
+#, kde-format
 msgctxt ""
 "@title:column Indicates whether account has an online mapping configured"
 msgid "Online"
-msgstr "سطر النهاية"
+msgstr "متصل"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:473
-#, fuzzy, kde-format
-#| msgid "Tax"
+#, kde-format
 msgctxt "@title:column Indicates whether account is included in tax reports"
 msgid "Tax"
 msgstr "الضريبة"
@@ -8548,7 +8520,7 @@ msgstr "الضريبة"
 #, kde-format
 msgctxt "@title:column Shows VAT percentage rate, if configured"
 msgid "VAT"
-msgstr ""
+msgstr "ض.ق.م"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:477
 #, kde-format
@@ -8556,41 +8528,36 @@ msgctxt ""
 "@title:column Indicates whether a Cost Center assignment is necessary when "
 "entering a transaction"
 msgid "CC"
-msgstr ""
+msgstr "م.م"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:479
-#, fuzzy, kde-format
-#| msgid "Balance"
+#, kde-format
 msgctxt "@title:column Shows account's balance (in account's currency)"
 msgid "Balance"
 msgstr "الرصيد"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:483
-#, fuzzy, kde-format
-#| msgid "Total Value"
+#, kde-format
 msgctxt ""
 "@title:column Shows Total Value, which includes a sum of all subaccounts (in "
 "base currency)"
 msgid "Total Value"
-msgstr "القيمة الكلية"
+msgstr "القيمة الكلّيّة"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:485
-#, fuzzy, kde-format
-#| msgid "Number"
+#, kde-format
 msgctxt "@title:column Shows Account Number"
 msgid "Number"
-msgstr "الرّقم"
+msgstr "الرقم"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:487
-#, fuzzy, kde-format
-#| msgid "IBAN"
+#, kde-format
 msgctxt "@title:column Shows IBAN"
 msgid "IBAN"
 msgstr "IBAN"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:492
-#, fuzzy, kde-format
-#| msgid "Bank Code"
+#, kde-format
 msgctxt ""
 "@title:column Shows Bank Code. Use a generic form, do not translate using a "
 "culture-specific term, such as 'Routing Number' (en_US) or 'Sort "
@@ -8637,8 +8604,7 @@ msgstr "التّاريخ"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:59
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:47
-#, fuzzy, kde-format
-#| msgid "Account"
+#, kde-format
 msgctxt "@title:column"
 msgid "Account"
 msgstr "الحساب"
@@ -8715,8 +8681,7 @@ msgstr "الكمّيّة"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:70
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:50
-#, fuzzy, kde-format
-#| msgid "Value"
+#, kde-format
 msgctxt "@title:column"
 msgid "Value"
 msgstr "القيمة"
@@ -8896,25 +8861,22 @@ msgid "unknown"
 msgstr "مجهول"
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:46
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "@title:column"
 msgid "Date"
-msgstr "التّاريخ"
+msgstr "التاريخ"
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:48
-#, fuzzy, kde-format
-#| msgid "Action"
+#, kde-format
 msgctxt "@title:column"
 msgid "Action"
 msgstr "الإجراء"
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:49
-#, fuzzy, kde-format
-#| msgid "Description"
+#, kde-format
 msgctxt "@title:column"
 msgid "Destination"
-msgstr "الوصف"
+msgstr "المقصد"
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:51
 #, kde-format
@@ -8997,11 +8959,10 @@ msgstr ""
 #, kde-format
 msgctxt "ParameterModel key"
 msgid "Key"
-msgstr ""
+msgstr "المفتاح"
 
 #: kmymoney/mymoney/storage/parametersmodel.cpp:64
-#, fuzzy, kde-format
-#| msgid "Value"
+#, kde-format
 msgctxt "ParameterModel value"
 msgid "Value"
 msgstr "القيمة"
@@ -9033,21 +8994,17 @@ msgid "Commodity"
 msgstr "السّلعة"
 
 #: kmymoney/mymoney/storage/pricemodel.cpp:39
-#, fuzzy, kde-format
-#| msgid "Stock Name"
+#, kde-format
 msgid "Stock name"
 msgstr "اسم المخزون"
 
 #: kmymoney/mymoney/storage/pricemodel.cpp:43
-#, fuzzy, kde-format
-#| msgctxt "Online quote source"
-#| msgid "Source"
+#, kde-format
 msgid "Source"
 msgstr "المصدر"
 
 #: kmymoney/mymoney/storage/reportsmodel.cpp:50
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "Reportname"
 msgid "Name"
 msgstr "الاسم"
@@ -9198,22 +9155,19 @@ msgid "Next fiscal year"
 msgstr "السنة المالية التالية"
 
 #: kmymoney/mymoney/storage/tagsmodel.cpp:51
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "Tagname"
 msgid "Name"
 msgstr "الاسم"
 
 #: kmymoney/mymoney/storage/templatesmodel.cpp:76
-#, fuzzy, kde-format
-#| msgid "Type"
+#, kde-format
 msgctxt "@title:column Country/Hierarchy type"
 msgid "Type"
-msgstr "النّوع"
+msgstr "النوع"
 
 #: kmymoney/mymoney/storage/templatesmodel.cpp:78
-#, fuzzy, kde-format
-#| msgid "Description"
+#, kde-format
 msgctxt "@title:column Column heading for description"
 msgid "Description"
 msgstr "الوصف"
@@ -9454,23 +9408,19 @@ msgstr "مليار"
 #, kde-format
 msgctxt "@item %1 = hundred value digit"
 msgid "%1 Hundred"
-msgstr ""
+msgstr "%1 مئة"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:47
 #, kde-format
 msgctxt "@item %1 = tens text, %2 = ones text"
 msgid "%1 %2"
-msgstr ""
+msgstr "%2 %1"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:56
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@label The first argument is the amount in words, the second is the "
-#| "fractional part and the third is the denominator of the fractional part"
-#| msgid "%1 and %2/%3"
+#, kde-format
 msgctxt "@item %1 = hundreds text, %2 = tens and ones text"
 msgid "%1 and %2"
-msgstr "%1 و %2/%3"
+msgstr "%1 و%2"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:79
 #, kde-format
@@ -14772,18 +14722,16 @@ msgid "Individual"
 msgstr ""
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:89
-#, fuzzy, kde-format
-#| msgid "Budget"
+#, kde-format
 msgctxt "@item:intable Your budgets, %1 budget year"
 msgid "Budget %1"
-msgstr "الموازنة"
+msgstr "الموازنة %1"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:98
-#, fuzzy, kde-format
-#| msgid "Budget"
+#, kde-format
 msgctxt "@item:intable Your bugets, %1 budget year, %2 unique index"
 msgid "Budget %1 (%2)"
-msgstr "الموازنة"
+msgstr "الموازنة %1 (%2)"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:114
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:174
@@ -14850,11 +14798,10 @@ msgid "Unable to modify budget"
 msgstr "تعذّر تعديل الموازنة"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:369
-#, fuzzy, kde-format
-#| msgid "Loss: "
+#, kde-format
 msgctxt "Profit/Loss"
 msgid "Loss: %1"
-msgstr "الخسارة: "
+msgstr "الخسارة: %1"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:370
 #, fuzzy, kde-format
@@ -14934,8 +14881,7 @@ msgstr "موازناتك"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_newButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:47
-#, fuzzy, kde-format
-#| msgid "New"
+#, kde-format
 msgctxt "New budget button"
 msgid "New"
 msgstr "جديد"
@@ -14950,11 +14896,10 @@ msgstr "أعد التسمية"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_deleteButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:61
-#, fuzzy, kde-format
-#| msgid "Del"
+#, kde-format
 msgctxt "Delete budget button"
 msgid "Del"
-msgstr "Del"
+msgstr "احذف"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_updateButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:114
@@ -15660,11 +15605,10 @@ msgid "Origin"
 msgstr "الأصل"
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejoboutboxview.cpp:51
-#, fuzzy, kde-format
-#| msgid "Outbox"
+#, kde-format
 msgctxt "@item name of view"
 msgid "Outbox"
-msgstr "علبة الصادر"
+msgstr "الصادر"
 
 #. i18n: ectx: Menu (onlinejob_context_menu)
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejoboutboxview.rc:4
@@ -16629,11 +16573,10 @@ msgstr "التقارير"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_listTab)
 #: kmymoney/plugins/views/reports/kreportsview.ui:27
-#, fuzzy, kde-format
-#| msgid "Reports"
+#, kde-format
 msgctxt " "
 msgid "Reports"
-msgstr "التقارير"
+msgstr "التّقارير"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
 #: kmymoney/plugins/views/reports/kreportsview.ui:49
@@ -18105,7 +18048,8 @@ msgid "Store GPG encrypted"
 msgstr ""
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:174
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to open file '%1' for writing."
 msgid "Unable to open file '%1' for writing."
 msgstr "تعذّر فتح الملف '%1' للقراءة."
 
@@ -18856,9 +18800,9 @@ msgstr "يحمّل القالب %1"
 
 #: kmymoney/templates/templatewriter.cpp:188
 #: kmymoney/templates/templatewriter.cpp:202
-#, fuzzy, kde-format
+#, kde-format
 msgid "Unable to write changes to '%1'"
-msgstr "تعذّرت كتابة التّغييرات إلى ’%1‘"
+msgstr "تعذّرت كتابة التّغييرات في ’%1‘"
 
 #: kmymoney/templates/templatewriter.cpp:192
 #: kmymoney/templates/templatewriter.cpp:206
@@ -18868,14 +18812,12 @@ msgid "Unable to open template file '%1'"
 msgstr "تعذّر فتح الملفّ ’%1‘ للقراءة"
 
 #: kmymoney/templates/templatewriter.cpp:215
-#, fuzzy, kde-format
-#| msgid "Unable to upload to '%1'"
+#, kde-format
 msgid "Unable to upload to '%1'.<br />%2"
-msgstr "تعذّر الرّفع إلى ’%1‘"
+msgstr "تعذّر الرّفع إلى ’%1‘<br />%2"
 
 #: kmymoney/views/investactivities.cpp:279
-#, fuzzy, kde-format
-#| msgid "Shares"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "الأسهم"
@@ -18888,8 +18830,7 @@ msgid "Price/share"
 msgstr "الأثمان"
 
 #: kmymoney/views/investactivities.cpp:292
-#, fuzzy, kde-format
-#| msgid "Transaction amount"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Transaction amount"
 msgstr "مبلغ المعاملة"
@@ -18897,8 +18838,7 @@ msgstr "مبلغ المعاملة"
 # غالبا سنواجه خطأ ما بسبب كثرة استخدامه في كل مكان
 # قد نحتاج سياقا
 #: kmymoney/views/investactivities.cpp:294
-#, fuzzy, kde-format
-#| msgid "Price"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "الثّمن"
@@ -19365,10 +19305,9 @@ msgid "Loss: ~%1"
 msgstr "الخسارة: "
 
 #: kmymoney/views/kcategoriesview.cpp:154
-#, fuzzy, kde-format
-#| msgid "Loss: "
+#, kde-format
 msgid "Loss: %1"
-msgstr "الخسارة: "
+msgstr "الخسارة: %1"
 
 #: kmymoney/views/kcategoriesview.cpp:157
 #, fuzzy, kde-format
@@ -20113,10 +20052,9 @@ msgstr ""
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_searchSecurities)
 #: kmymoney/views/kinvestmentview.ui:122
-#, fuzzy, kde-format
-#| msgid "Search view"
+#, kde-format
 msgid "Search..."
-msgstr "عرض بحث"
+msgstr "ابحث..."
 
 #: kmymoney/views/kmymoneyview.cpp:193
 #, kde-format
@@ -20455,10 +20393,9 @@ msgstr "النّتيجة"
 #. i18n: ectx: property (text), widget (QLabel, matchingCheckURL)
 #: kmymoney/views/kpayeesview.ui:587 kmymoney/views/ledgerviewpage.ui:63
 #: kmymoney/views/ledgerviewpage.ui:76 kmymoney/views/ledgerviewpage.ui:92
-#, fuzzy, kde-format
-#| msgid "Text"
+#, kde-format
 msgid "TextLabel"
-msgstr "النّصّ"
+msgstr "لصيقة نصّيّة"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_syncAddressbook)
 #: kmymoney/views/kpayeesview.ui:650
@@ -20522,11 +20459,10 @@ msgid "Unused"
 msgstr "غير المستخدم"
 
 #: kmymoney/views/kpayeesview_p.h:179 kmymoney/views/ktagsview.cpp:184
-#, fuzzy, kde-format
-#| msgid "March"
+#, kde-format
 msgctxt "Placeholder text"
 msgid "Search"
-msgstr "مارس"
+msgstr "ابحث"
 
 #: kmymoney/views/kpayeesview_p.h:187
 #, fuzzy, kde-format
@@ -20621,8 +20557,7 @@ msgstr "معاملة مجدولة جديدة..."
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_searchWidget)
 #: kmymoney/views/kscheduledview.ui:38
-#, fuzzy, kde-format
-#| msgid "Filter"
+#, kde-format
 msgctxt "Placeholdertext in schedulesview"
 msgid "Filter"
 msgstr "المرشّح"
@@ -20712,8 +20647,7 @@ msgid "F"
 msgstr "F"
 
 #: kmymoney/views/ktagsview.cpp:93
-#, fuzzy, kde-format
-#| msgid "Update"
+#, kde-format
 msgctxt "@action:button Update button in tags view"
 msgid "Update"
 msgstr "حدّث"
@@ -20869,32 +20803,28 @@ msgid "Open the Handbook and learn how to use KMyMoney"
 msgstr "تعلّم كيفية استخدام أموالي.ك"
 
 #: kmymoney/views/ledgerview.cpp:210
-#, fuzzy, kde-format
-#| msgid "Go to account"
+#, kde-format
 msgctxt "@action:inmenu open account"
 msgid "Go to account"
-msgstr "اذهب إلى الحساب"
+msgstr "انتقل إلى الحساب"
 
 #: kmymoney/views/ledgerview.cpp:212
-#, fuzzy, kde-format
-#| msgid "Go to payee"
+#, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to payee"
-msgstr "اذهب إلى المُتسلِّم"
+msgstr "انتقل إلى المُتسلِّم"
 
 #: kmymoney/views/ledgerview.cpp:257
-#, fuzzy, kde-format
-#| msgid "Go to '%1'"
+#, kde-format
 msgctxt "@action:inmenu open account"
 msgid "Go to '%1'"
-msgstr "اذهب إلى '%1'"
+msgstr "انتقل إلى ’%1‘"
 
 #: kmymoney/views/ledgerview.cpp:267
-#, fuzzy, kde-format
-#| msgid "Go to '%1'"
+#, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
-msgstr "اذهب إلى '%1'"
+msgstr "انتقل إلى ’%1‘"
 
 #: kmymoney/views/ledgerview.cpp:743
 #, kde-format
@@ -21321,18 +21251,16 @@ msgid "Reconciling transactions..."
 msgstr "يجلب المعاملات..."
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:442
-#, fuzzy, kde-format
-#| msgid "Statement date:"
+#, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
-msgstr "تاريخ البيان:"
+msgstr "الإفادة: %1"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:444
-#, fuzzy, kde-format
-#| msgid "Difference: %1"
+#, kde-format
 msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
-msgstr "الفارق: %1"
+msgstr "الفرق: %1"
 
 #: kmymoney/views/simpleledgerview.cpp:357
 #, kde-format
@@ -21518,38 +21446,31 @@ msgid "&Cancel"
 msgstr "أ&لغِ"
 
 #: kmymoney/views/splitview.cpp:112
-#, fuzzy, kde-format
-#| msgid "Split Options"
+#, kde-format
 msgctxt "@title:menu split context menu"
 msgid "Split Options"
 msgstr "خيارات التّجزئة"
 
 #: kmymoney/views/splitview.cpp:114
-#, fuzzy, kde-format
-#| msgctxt "create new institution"
-#| msgid "New..."
+#, kde-format
 msgctxt "@item:inmenu Create a split"
 msgid "New..."
 msgstr "جديد..."
 
 #: kmymoney/views/splitview.cpp:129
-#, fuzzy, kde-format
-#| msgid "Edit..."
+#, kde-format
 msgctxt "@item:inmenu Edit a split"
 msgid "Edit..."
 msgstr "حرّر..."
 
 #: kmymoney/views/splitview.cpp:134
-#, fuzzy, kde-format
-#| msgctxt "To duplicate a split"
-#| msgid "Duplicate"
+#, kde-format
 msgctxt "@item:inmenu Duplicate selected split(s)"
 msgid "Duplicate"
 msgstr "كرّر"
 
 #: kmymoney/views/splitview.cpp:176
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgctxt "@item:inmenu Delete selected split(s)"
 msgid "Delete"
 msgstr "احذف"
@@ -21562,31 +21483,28 @@ msgid "Tab Editor Options"
 msgstr "خيارات الوسم"
 
 #: kmymoney/views/tabordereditor.cpp:431
-#, fuzzy, kde-format
-#| msgid "Start operation"
+#, kde-format
 msgctxt "@action:inmenu Move tab editor selector to this widget"
 msgid "Start from here"
-msgstr "ابدأ العمليّة"
+msgstr "ابدأ من هنا"
 
 #: kmymoney/views/tabordereditor.cpp:433
 #, kde-format
 msgctxt "@action:inmenu Set tab editor selector to first widget"
 msgid "Restart"
-msgstr ""
+msgstr "أعد التّشغيل"
 
 #: kmymoney/views/tabordereditor.cpp:436
-#, fuzzy, kde-format
-#| msgid "Save changes"
+#, kde-format
 msgctxt "@action:inmenu Reset all changes"
 msgid "Undo changes"
-msgstr "احفظ التغييرات"
+msgstr "أرجع التغييرات"
 
 #: kmymoney/views/tabordereditor.cpp:438
-#, fuzzy, kde-format
-#| msgid "Use default"
+#, kde-format
 msgctxt "@action:inmenu Reset to application defaults"
 msgid "Reset to default"
-msgstr "استخدم الافتراضي"
+msgstr "التصفير إلى المبدئيات"
 
 #: kmymoney/views/tabordereditor.cpp:443
 #, kde-format
@@ -21663,6 +21581,16 @@ msgid ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
 "\"><br /></p></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+"\"><br /></p></body></html>"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_accountList)
 #: kmymoney/widgets/kaccounttemplateselector.ui:109
