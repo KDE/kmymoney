@@ -4615,7 +4615,8 @@ msgstr ""
 #, kde-format
 msgctxt "Roles in project"
 msgid "Core engine, Release Manager, Project admin"
-msgstr "Motor del nucli, Gestor de llançaments, administrador del projecte"
+msgstr ""
+"Motor del nucli, encarregat dels llançaments i administrador del projecte"
 
 #: kmymoney/kcreditswindow.cpp:53
 #, kde-format
