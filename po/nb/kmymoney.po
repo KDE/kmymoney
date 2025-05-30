@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-23 03:30+0000\n"
+"POT-Creation-Date: 2025-05-27 03:26+0000\n"
 "PO-Revision-Date: 2024-03-29 14:27+0100\n"
 "Last-Translator: Kjetil Sørlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -5459,8 +5459,8 @@ msgid ""
 "KMyMoney has detected some overdue scheduled transactions for the account "
 "<b>%1</b>. Do you want to enter those scheduled transactions now?"
 msgstr ""
-"KMyMoney har oppdaget noen overløpte planlagte transaksjoner for kontoen <b>"
-"%1</b>. Vil du legge inn de planlagte transaksjonene nå?"
+"KMyMoney har oppdaget noen overløpte planlagte transaksjoner for kontoen "
+"<b>%1</b>. Vil du legge inn de planlagte transaksjonene nå?"
 
 #: kmymoney/kmymoney.cpp:2828
 #, kde-format
@@ -20097,67 +20097,67 @@ msgstr "Søk…"
 msgid "Ledgers"
 msgstr "Hovedbok"
 
-#: kmymoney/views/kmymoneyview.cpp:539
+#: kmymoney/views/kmymoneyview.cpp:554
 #, kde-format
 msgid "Show home page"
 msgstr "Vis startside"
 
-#: kmymoney/views/kmymoneyview.cpp:540
+#: kmymoney/views/kmymoneyview.cpp:555
 #, kde-format
 msgid "Show institutions page"
 msgstr "Vis side for institusjoner"
 
-#: kmymoney/views/kmymoneyview.cpp:541
+#: kmymoney/views/kmymoneyview.cpp:556
 #, kde-format
 msgid "Show accounts page"
 msgstr "Vis side for konti"
 
-#: kmymoney/views/kmymoneyview.cpp:542
+#: kmymoney/views/kmymoneyview.cpp:557
 #, kde-format
 msgid "Show scheduled transactions page"
 msgstr "Vis siden for planlagte transaksjoner"
 
-#: kmymoney/views/kmymoneyview.cpp:543
+#: kmymoney/views/kmymoneyview.cpp:558
 #, kde-format
 msgid "Show categories page"
 msgstr "Vis side for kategorier"
 
-#: kmymoney/views/kmymoneyview.cpp:544
+#: kmymoney/views/kmymoneyview.cpp:559
 #, kde-format
 msgid "Show tags page"
 msgstr "Vis side for merker"
 
-#: kmymoney/views/kmymoneyview.cpp:545
+#: kmymoney/views/kmymoneyview.cpp:560
 #, kde-format
 msgid "Show payees page"
 msgstr "Vis side for mottakere"
 
-#: kmymoney/views/kmymoneyview.cpp:546
+#: kmymoney/views/kmymoneyview.cpp:561
 #, kde-format
 msgid "Show ledgers page"
 msgstr "Vis side for hovedbok"
 
-#: kmymoney/views/kmymoneyview.cpp:547
+#: kmymoney/views/kmymoneyview.cpp:562
 #, kde-format
 msgid "Show investments page"
 msgstr "Vis side for investeringer"
 
-#: kmymoney/views/kmymoneyview.cpp:548
+#: kmymoney/views/kmymoneyview.cpp:563
 #, kde-format
 msgid "Show reports page"
 msgstr "Vis side for rapporter"
 
-#: kmymoney/views/kmymoneyview.cpp:549
+#: kmymoney/views/kmymoneyview.cpp:564
 #, kde-format
 msgid "Show budget page"
 msgstr "Vis side for budsjett"
 
-#: kmymoney/views/kmymoneyview.cpp:550
+#: kmymoney/views/kmymoneyview.cpp:565
 #, kde-format
 msgid "Show forecast page"
 msgstr "Vis side for prognoser"
 
-#: kmymoney/views/kmymoneyview.cpp:551
+#: kmymoney/views/kmymoneyview.cpp:566
 #, kde-format
 msgid "Show outbox page"
 msgstr "Vis side for utboks"
@@ -21025,13 +21025,13 @@ msgstr ""
 "En valgt transaksjon har posteringsdato (%1) før åpningsdatoen for den "
 "valgte kontoen (%2)."
 
-#: kmymoney/views/multitransactioneditor.cpp:722
+#: kmymoney/views/multitransactioneditor.cpp:735
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "Kan ikke endre flere tidsplaner på en gang."
 
-#: kmymoney/views/multitransactioneditor.cpp:731
+#: kmymoney/views/multitransactioneditor.cpp:744
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21041,7 +21041,7 @@ msgstr ""
 "Valg av kategori eller konto er ikke mulig når fordelte transaksjoner er en "
 "del av valget."
 
-#: kmymoney/views/multitransactioneditor.cpp:735
+#: kmymoney/views/multitransactioneditor.cpp:748
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21051,7 +21051,7 @@ msgstr ""
 "Valg av emneknagger er ikke mulig når fordelte transaksjoner er en del av "
 "valget."
 
-#: kmymoney/views/multitransactioneditor.cpp:739
+#: kmymoney/views/multitransactioneditor.cpp:752
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
