@@ -1505,7 +1505,8 @@ MyMoneyTransaction NewTransactionEditor::transaction() const
     }
 
     // first remove the splits that are gone
-    for (const auto& split : t.splits()) {
+    const auto splits = t.splits();
+    for (const auto& split : splits) {
         if (split.id() == d->m_split.id()) {
             continue;
         }
