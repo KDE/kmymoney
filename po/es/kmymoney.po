@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-24 01:59+0000\n"
+"POT-Creation-Date: 2025-06-01 02:06+0000\n"
 "PO-Revision-Date: 2025-05-15 03:48+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -19147,7 +19147,7 @@ msgstr "Ingresos por intereses"
 
 #: kmymoney/views/investtransactioneditor.cpp:304
 #: kmymoney/views/multitransactioneditor.cpp:230
-#: kmymoney/views/newtransactioneditor.cpp:317
+#: kmymoney/views/newtransactioneditor.cpp:336
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr ""
@@ -21177,13 +21177,13 @@ msgid "Balance: %1"
 msgstr "Saldo: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:208
-#: kmymoney/views/newtransactioneditor.cpp:300
+#: kmymoney/views/newtransactioneditor.cpp:319
 #, kde-format
 msgid "The posting date is invalid."
 msgstr "La fecha de valor no es válida."
 
 #: kmymoney/views/multitransactioneditor.cpp:244
-#: kmymoney/views/newtransactioneditor.cpp:344
+#: kmymoney/views/newtransactioneditor.cpp:363
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
@@ -21202,13 +21202,13 @@ msgstr ""
 "Una transacción seleccionada tiene una fecha de valor (%1) anterior a la "
 "fecha de apertura de la cuenta seleccionada (%2)."
 
-#: kmymoney/views/multitransactioneditor.cpp:722
+#: kmymoney/views/multitransactioneditor.cpp:735
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "No se pueden editar múltiples planificaciones al mismo tiempo."
 
-#: kmymoney/views/multitransactioneditor.cpp:731
+#: kmymoney/views/multitransactioneditor.cpp:744
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21218,7 +21218,7 @@ msgstr ""
 "La selección de una categoría o cuenta no es posible cuando las "
 "transacciones con partidas son parte de la selección."
 
-#: kmymoney/views/multitransactioneditor.cpp:735
+#: kmymoney/views/multitransactioneditor.cpp:748
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21228,7 +21228,7 @@ msgstr ""
 "La selección de etiquetas no es posible cuando las transacciones con "
 "partidas son parte de la selección."
 
-#: kmymoney/views/multitransactioneditor.cpp:739
+#: kmymoney/views/multitransactioneditor.cpp:752
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21272,13 +21272,13 @@ msgid "The check number used for this transaction."
 msgstr "El número de cheque usado para esta transacción."
 
 #: kmymoney/views/newspliteditor.cpp:261
-#: kmymoney/views/newtransactioneditor.cpp:469
+#: kmymoney/views/newtransactioneditor.cpp:488
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "El cheque con número <b>%1</b> ya se ha usado en esta cuenta."
 
 #: kmymoney/views/newspliteditor.cpp:770
-#: kmymoney/views/newtransactioneditor.cpp:188
+#: kmymoney/views/newtransactioneditor.cpp:207
 #, kde-format
 msgctxt "@info:tooltip Protected"
 msgid ""
@@ -21306,27 +21306,46 @@ msgstr "Pagador/beneficiario"
 msgid "Costcenter"
 msgstr "Centro de costes"
 
-#: kmymoney/views/newtransactioneditor.cpp:237
+#: kmymoney/views/newtransactioneditor.cpp:177
+#, kde-format
+msgctxt "@info:tooltip Tag entry widget"
+msgid "This widget is disabled because you need to select a category first."
+msgstr ""
+
+#: kmymoney/views/newtransactioneditor.cpp:180
+#, fuzzy, kde-format
+#| msgid "Use this to delete all splits of this transaction."
+msgctxt "@info:tooltip Tag entry widget"
+msgid "Use this widget to add tags for this transaction."
+msgstr "Use esto para borrar todas las partidas de esta transacción."
+
+#: kmymoney/views/newtransactioneditor.cpp:183
+#, kde-format
+msgctxt "@info:tooltip Tag entry widget"
+msgid "Please use the split editor to assign tags."
+msgstr ""
+
+#: kmymoney/views/newtransactioneditor.cpp:256
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
 msgstr "Falta asignar una categoría al asiento."
 
-#: kmymoney/views/newtransactioneditor.cpp:241
+#: kmymoney/views/newtransactioneditor.cpp:260
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 "El importe introducido es distinto a la suma de todas las partidas por %1."
 
-#: kmymoney/views/newtransactioneditor.cpp:620
+#: kmymoney/views/newtransactioneditor.cpp:639
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
 msgstr "Seleccionar transacción para rellenar automáticamente"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1085
+#: kmymoney/views/newtransactioneditor.cpp:1103
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:98
 #: kmymoney/views/newtransactionform.ui:179
@@ -21334,7 +21353,7 @@ msgstr "Seleccionar transacción para rellenar automáticamente"
 msgid "Link"
 msgstr "Enlace"
 
-#: kmymoney/views/newtransactioneditor.cpp:1573
+#: kmymoney/views/newtransactioneditor.cpp:1596
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21343,7 +21362,7 @@ msgstr ""
 "¿Desea sustituir el memorando<p><i>%1</i></p>con el memorando<p><i>%2</i></"
 "p> en la otra partida?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1574
+#: kmymoney/views/newtransactioneditor.cpp:1597
 #, kde-format
 msgid "Copy memo"
 msgstr "Copiar memorando"
