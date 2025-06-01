@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-27 03:26+0000\n"
+"POT-Creation-Date: 2025-06-01 03:34+0000\n"
 "PO-Revision-Date: 2025-02-21 17:01+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -21221,7 +21221,7 @@ msgstr "Valitse täytä automaattisesti -tapahtuma"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1573
+#: kmymoney/views/newtransactioneditor.cpp:1574
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21230,7 +21230,7 @@ msgstr ""
 "Korvataanko muistiinpano<p><i>%1</i></p>muistiinpanolla<p><i>%2</i></"
 "p>toisessa jaottelussa?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1574
+#: kmymoney/views/newtransactioneditor.cpp:1575
 #, kde-format
 msgid "Copy memo"
 msgstr "Kopioi muistiinpano"

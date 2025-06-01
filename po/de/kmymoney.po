@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-27 03:26+0000\n"
+"POT-Creation-Date: 2025-06-01 03:34+0000\n"
 "PO-Revision-Date: 2022-11-07 20:00+0100\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -21632,7 +21632,7 @@ msgstr "Automatisch ausgefüllte Buchung wählen"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1573
+#: kmymoney/views/newtransactioneditor.cpp:1574
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21641,7 +21641,7 @@ msgstr ""
 "Möchten Sie die Notiz <p><i>%1</i></p> durch die Notiz <p><i>%2</i></p> aus "
 "der anderen Split-Buchung ersetzen."
 
-#: kmymoney/views/newtransactioneditor.cpp:1574
+#: kmymoney/views/newtransactioneditor.cpp:1575
 #, kde-format
 msgid "Copy memo"
 msgstr "Notiz kopieren"

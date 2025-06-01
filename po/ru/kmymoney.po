@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-27 03:26+0000\n"
+"POT-Creation-Date: 2025-06-01 03:34+0000\n"
 "PO-Revision-Date: 2023-07-14 18:45+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -21772,7 +21772,7 @@ msgstr "Выбор автозаполнения операции"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1573
+#: kmymoney/views/newtransactioneditor.cpp:1574
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21781,7 +21781,7 @@ msgstr ""
 "Заменить примечание <p><i>%1</i></p>примечанием<p><i>%2</i></p>в следующей "
 "разбивке?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1574
+#: kmymoney/views/newtransactioneditor.cpp:1575
 #, kde-format
 msgid "Copy memo"
 msgstr "Копирование примечания"

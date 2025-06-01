@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-27 03:26+0000\n"
+"POT-Creation-Date: 2025-06-01 03:34+0000\n"
 "PO-Revision-Date: 2024-11-10 18:13+0100\n"
 "Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -21833,7 +21833,7 @@ msgstr "Vybrať automatické vypĺňanie transakcie"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1573
+#: kmymoney/views/newtransactioneditor.cpp:1574
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21842,7 +21842,7 @@ msgstr ""
 "Chcete nahradiť poznámku<p><i>%1</i></p>poznámkou<p><i>%2</i></p>v inom "
 "rozdelení?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1574
+#: kmymoney/views/newtransactioneditor.cpp:1575
 #, kde-format
 msgid "Copy memo"
 msgstr "Kopírovať poznámku"
