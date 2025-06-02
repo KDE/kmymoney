@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-01 02:06+0000\n"
-"PO-Revision-Date: 2025-05-14 09:13+0200\n"
+"PO-Revision-Date: 2025-06-01 11:42+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -21367,19 +21367,19 @@ msgstr "Centre de despesa"
 msgctxt "@info:tooltip Tag entry widget"
 msgid "This widget is disabled because you need to select a category first."
 msgstr ""
+"Aquest giny està desactivat perquè primer cal seleccionar una categoria."
 
 #: kmymoney/views/newtransactioneditor.cpp:180
-#, fuzzy, kde-format
-#| msgid "Use this to delete all splits of this transaction."
+#, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Use this widget to add tags for this transaction."
-msgstr "Useu-ho per a suprimir tots els desglossaments d'aquesta operació."
+msgstr "Useu aquest giny per a afegir etiquetes a aquesta operació."
 
 #: kmymoney/views/newtransactioneditor.cpp:183
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Please use the split editor to assign tags."
-msgstr ""
+msgstr "Feu servir l'editor de desglossaments per a assignar etiquetes."
 
 #: kmymoney/views/newtransactioneditor.cpp:256
 #, kde-format

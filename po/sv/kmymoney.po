@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-01 02:06+0000\n"
-"PO-Revision-Date: 2025-04-06 14:48+0200\n"
+"PO-Revision-Date: 2025-06-01 11:11+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.04.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -53,8 +53,7 @@ msgid "Invalid Statement"
 msgstr "Ogiltigt utdrag"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:485
-#, fuzzy, kde-format
-#| msgid "No Institution"
+#, kde-format
 msgctxt "@info Group name for accounts with no assigned institution"
 msgid "No institution"
 msgstr "Ingen institution"
@@ -431,11 +430,10 @@ msgstr[1] "%1 utdrag har behandlats med följande resultat:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ImportSummaryDialog)
 #: kmymoney/dialogs/importsummarydlg.ui:14
-#, fuzzy, kde-format
-#| msgid "Imported History"
+#, kde-format
 msgctxt "@title:window"
 msgid "Import summary"
-msgstr "Importhistorik"
+msgstr "Importsammanfattning"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonSkip)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonCancel)
@@ -3180,10 +3178,9 @@ msgstr "Spara automatiskt när filen är ändrad vid stängning"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_3)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:102
-#, fuzzy, kde-format
-#| msgid "Backup location:"
+#, kde-format
 msgid "Backup options"
-msgstr "Plats för säkerhetskopia:"
+msgstr "Säkerhetskopieringsalternativ"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, kcfg_BackupExtension)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:112
@@ -3191,6 +3188,8 @@ msgstr "Plats för säkerhetskopia:"
 msgid ""
 "Enter a character or string that will be added to backup files. Default is ~"
 msgstr ""
+"Ange ett tecken eller sträng som läggs till för säkerhetskopieringsfiler. "
+"Normalt är det ~"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_AutoBackupCopies)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:122
@@ -3216,7 +3215,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:146
 #, kde-format
 msgid "Extension for backup files"
-msgstr ""
+msgstr "Filändelse för säkerhetskopieringsfiler"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:153
@@ -4557,10 +4556,9 @@ msgstr ""
 "Fundera på att bidra till projektet med kod och/eller förslag."
 
 #: kmymoney/kcreditswindow.cpp:45
-#, fuzzy, kde-format
-#| msgid "(c) 2000-2024 The KMyMoney development team"
+#, kde-format
 msgid "(c) 2000-2025 The KMyMoney development team"
-msgstr "© 2000-2024 KMyMoney-utvecklingsgruppen"
+msgstr "© 2000-2025 KMyMoney-utvecklingsgruppen"
 
 #: kmymoney/kcreditswindow.cpp:49
 #, kde-format
@@ -5572,11 +5570,13 @@ msgstr "Filen finns redan"
 msgid ""
 "This will hide the menu bar completely. You can show it again by typing %1."
 msgstr ""
+"Det här döljer menyraden fullständigt. Du kan visa den igen genom att skriva "
+"%1."
 
 #: kmymoney/kmymoney.cpp:3258
 #, kde-format
 msgid "Hide menu bar"
-msgstr ""
+msgstr "Dölj menyrad"
 
 #: kmymoney/kmymoney.cpp:3360
 #, kde-format
@@ -6414,55 +6414,46 @@ msgid "Name"
 msgstr "Namn"
 
 #: kmymoney/models/statementmodel.cpp:95
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "@title:column Shows the date of statement"
 msgid "Date"
 msgstr "Datum"
 
 #: kmymoney/models/statementmodel.cpp:97
-#, fuzzy, kde-format
-#| msgid "Balance"
+#, kde-format
 msgctxt "@title:column Shows statement balance"
 msgid "Balance"
 msgstr "Behållning"
 
 #: kmymoney/models/statementmodel.cpp:99
-#, fuzzy, kde-format
-#| msgid "    %1 processed"
-#| msgid_plural "    %1 processed"
+#, kde-format
 msgctxt "@title:column Shows number of transactions read"
 msgid "Processed"
-msgstr "    %1 behandlad"
+msgstr "Behandlad"
 
 #: kmymoney/models/statementmodel.cpp:101
-#, fuzzy, kde-format
-#| msgid "Imported"
+#, kde-format
 msgctxt "@title:column Shows number of imported transactions"
 msgid "Imported"
 msgstr "Importerad"
 
 #: kmymoney/models/statementmodel.cpp:103
-#, fuzzy, kde-format
-#| msgid "Matched"
+#, kde-format
 msgctxt "@title:column Shows number of matched transactions"
 msgid "Matched"
 msgstr "Matchad"
 
 #: kmymoney/models/statementmodel.cpp:105
-#, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
-#| msgid "Duplicate"
+#, kde-format
 msgctxt "@title:column Shows number of duplicate transactions"
 msgid "Duplicates"
-msgstr "Duplicera"
+msgstr "Dubbletter"
 
 #: kmymoney/models/statementmodel.cpp:107
-#, fuzzy, kde-format
-#| msgid "Payee creation"
+#, kde-format
 msgctxt "@title:column Shows number of create payees"
 msgid "Payees created"
-msgstr "Skapa betalningsmottagare"
+msgstr "Betalningsmottagare skapade"
 
 #: kmymoney/models/statementmodel.cpp:117
 #: kmymoney/mymoney/storage/accountsmodel.cpp:503
@@ -18398,7 +18389,7 @@ msgstr "Antal säkerhetskopior att behålla"
 #: kmymoney/settings/kmymoney.kcfg:39
 #, kde-format
 msgid "Character or string appended to backup filename"
-msgstr ""
+msgstr "Tecken eller sträng som läggs till sist i säkerhetskopieringsfilnamn"
 
 #. i18n: ectx: label, entry (AutoSavePeriod), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:43
@@ -21176,19 +21167,22 @@ msgstr "Kostnadsställe"
 msgctxt "@info:tooltip Tag entry widget"
 msgid "This widget is disabled because you need to select a category first."
 msgstr ""
+"Den här grafiska komponenten är inaktiverad eftersom en kategori måste "
+"väljas först."
 
 #: kmymoney/views/newtransactioneditor.cpp:180
-#, fuzzy, kde-format
-#| msgid "Use this to delete all splits of this transaction."
+#, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Use this widget to add tags for this transaction."
-msgstr "Använd det här för att rensa transaktionens alla delningar."
+msgstr ""
+"Använd den här grafiska komponenten för att lägga till etiketter för "
+"transaktionen."
 
 #: kmymoney/views/newtransactioneditor.cpp:183
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Please use the split editor to assign tags."
-msgstr ""
+msgstr "Använd delningseditorn för att tilldela etiketter."
 
 #: kmymoney/views/newtransactioneditor.cpp:256
 #, kde-format
@@ -21227,11 +21221,9 @@ msgstr ""
 "i den andra delningen?"
 
 #: kmymoney/views/newtransactioneditor.cpp:1597
-#, fuzzy, kde-format
-#| msgctxt "@info placeholder for memo of matched transaction if empty"
-#| msgid "Empty memo"
+#, kde-format
 msgid "Copy memo"
-msgstr "Tom anteckning"
+msgstr "Kopiera anteckning"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, numberEdit)
 #: kmymoney/views/newtransactioneditor.ui:24
@@ -21898,16 +21890,14 @@ msgid "Year to date"
 msgstr "År till datum"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:41
-#, fuzzy, kde-format
-#| msgid "Month to date"
+#, kde-format
 msgid "Fiscal month to date"
-msgstr "Månad till datum"
+msgstr "Räkenskapsmånad till datum"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:42
-#, fuzzy, kde-format
-#| msgid "Year to date"
+#, kde-format
 msgid "Fiscal year to date"
-msgstr "År till datum"
+msgstr "Räkenskapsår till datum"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:43
 #, kde-format

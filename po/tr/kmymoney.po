@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-01 02:06+0000\n"
-"PO-Revision-Date: 2025-05-15 12:08+0300\n"
+"PO-Revision-Date: 2025-06-01 21:02+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -2940,7 +2940,7 @@ msgstr "%1 ögesini atanmamış olarak bırak"
 #: kmymoney/dialogs/ktagreassigndlg.ui:14
 #, kde-format
 msgid "Delete or reassign tags"
-msgstr "Etiketleri yeniden ata veya sil"
+msgstr "Künyeleri yeniden ata veya sil"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/dialogs/ktagreassigndlg.ui:53
@@ -2952,15 +2952,15 @@ msgid ""
 "once you have selected a tag or marked the checkbox."
 msgstr ""
 "Silme işlemini tamamlamak için ya kullanılabilir etiketlerden silinmeden "
-"önce seçili etiketlerin yerini alacak bir etiket seçin ya da seçiminize göre "
-"aşağıdaki onay kutusunu işaretleyin. Bir etiket seçtiğinizde veya onay "
+"önce seçili künyelerin yerini alacak bir künye seçin ya da seçiminize göre "
+"aşağıdaki onay kutusunu işaretleyin. Bir künye seçtiğinizde veya onay "
 "kutusunu işaretlediğinizde Tamam düğmesine erişilebilir olur."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/dialogs/ktagreassigndlg.ui:79
 #, kde-format
 msgid "Available tags:"
-msgstr "Kullanılabilir etiketler:"
+msgstr "Kullanılabilir künyeler:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, removeCheckBox)
 #: kmymoney/dialogs/ktagreassigndlg.ui:111
@@ -2969,7 +2969,7 @@ msgid ""
 "Remove selected tags from all transactions, schedules and reports before "
 "deleting them."
 msgstr ""
-"Onları silmeden önce seçili etiketleri tüm işlemlerden, planlardan ve "
+"Onları silmeden önce seçili künyeleri tüm işlemlerden, planlardan ve "
 "raporlardan kaldır"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTransactionSortOptionsDlg)
@@ -3849,7 +3849,7 @@ msgstr ""
 "<p>Aşağıdaki ögeler genelde soyularak çıkarılır:\n"
 "\n"
 "<ul>\n"
-"<li><b>&lt;tag&gt;</b> gibi HTML etiketleri</li>\n"
+"<li><b>&lt;tag&gt;</b> gibi HTML künyeleri</li>\n"
 "<li><b>&amp;nbsp;</b> gibi kodlanmış karakterler</li>\n"
 "<li>yinelenmiş boşluklar</li>\n"
 "</ul>\n"
@@ -4497,7 +4497,7 @@ msgstr "İletişim Kutusu"
 #, kde-format
 msgctxt "Undo action description"
 msgid "Create tag"
-msgstr "Etiket Oluştur"
+msgstr "Künye Oluştur"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
 #: kmymoney/kcreditswindow.cpp:31 kmymoney/kcreditswindow.cpp:98
@@ -5249,17 +5249,17 @@ msgstr "Alacaklıları Birleştir"
 #: kmymoney/kmymoney.cpp:1496
 #, kde-format
 msgid "New tag..."
-msgstr "Yeni Etiket…"
+msgstr "Yeni Künye…"
 
 #: kmymoney/kmymoney.cpp:1497
 #, kde-format
 msgid "Rename tag"
-msgstr "Etiketi Yeniden Adlandır"
+msgstr "Künyeyi Yeniden Adlandır"
 
 #: kmymoney/kmymoney.cpp:1498
 #, kde-format
 msgid "Delete tag"
-msgstr "Etiketi Sil"
+msgstr "Künyeyi Sil"
 
 #: kmymoney/kmymoney.cpp:1500
 #, kde-format
@@ -5939,7 +5939,7 @@ msgstr "Alacaklı seçenekleri"
 #: kmymoney/kmymoneyui.rc:174
 #, kde-format
 msgid "Tag options"
-msgstr "Etiket seçenekleri"
+msgstr "Künye Seçenekleri"
 
 #. i18n: ectx: Menu (investment_context_menu)
 #: kmymoney/kmymoneyui.rc:180
@@ -6153,22 +6153,22 @@ msgstr "Alacaklı eklenemiyor"
 #: kmymoney/kmymoneyutils.cpp:627 kmymoney/views/ktagsview.cpp:642
 #, kde-format
 msgid "New Tag"
-msgstr "Yeni Etiket"
+msgstr "Yeni Künye"
 
 #: kmymoney/kmymoneyutils.cpp:629
 #, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as tag?</qt>"
-msgstr "<qt><b>%1</b> ögesini etiket olarak eklemek istiyor musunuz?</qt>"
+msgstr "<qt><b>%1</b> ögesini künye olarak eklemek istiyor musunuz?</qt>"
 
 #: kmymoney/kmymoneyutils.cpp:631
 #, kde-format
 msgid "New tag"
-msgstr "Yeni etiket"
+msgstr "Yeni künye"
 
 #: kmymoney/kmymoneyutils.cpp:665
 #, kde-format
 msgid "Unable to add tag"
-msgstr "Etiket eklenemiyor"
+msgstr "Künye eklenemiyor"
 
 #: kmymoney/kmymoneyutils.cpp:682 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
@@ -8301,7 +8301,7 @@ msgstr "YarımYukarı"
 #: kmymoney/mymoney/mymoneytemplate.cpp:99
 #, kde-format
 msgid "<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>"
-msgstr "<p><b>%2</b> şablon dosyasında geçersiz etiket <b>%1</b></p>"
+msgstr "<p><b>%2</b> şablon dosyasında geçersiz künye <b>%1</b></p>"
 
 #: kmymoney/mymoney/mymoneytemplate.cpp:106
 #: kmymoney/mymoney/mymoneytemplate.cpp:108
@@ -8309,7 +8309,7 @@ msgstr "<p><b>%2</b> şablon dosyasında geçersiz etiket <b>%1</b></p>"
 #: kmymoney/mymoney/mymoneytemplate.cpp:112
 #, kde-format
 msgid "<p>Missing tag <b>%1</b> in template file <b>%2</b></p>"
-msgstr "<p><b>%2</b> şablon dosyasında eksik etiket <b>%1</b></p>"
+msgstr "<p><b>%2</b> şablon dosyasında eksik künye <b>%1</b></p>"
 
 #: kmymoney/mymoney/mymoneytemplate.cpp:116
 #, kde-format
@@ -8373,7 +8373,7 @@ msgstr "Not"
 #, kde-format
 msgctxt "Split header"
 msgid "Tags"
-msgstr "Etiketler"
+msgstr "Künyeler"
 
 #: kmymoney/mymoney/splitmodel.cpp:41
 #, kde-format
@@ -13018,7 +13018,7 @@ msgstr "Hisselerin sayısı ve değeri"
 #: kmymoney/plugins/ofx/import/importoption.ui:103
 #, kde-format
 msgid "Payee's name is based on contents of the OFX tag"
-msgstr "Alacaklının adı, OFX etiketinin içeriğine bağlıdır"
+msgstr "Alacaklının adı, OFX künyesinin içeriğine bağlıdır"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel21_1_2)
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
@@ -15714,7 +15714,7 @@ msgstr "Numara"
 #: kmymoney/widgets/ktransactionfilter.cpp:132
 #, kde-format
 msgid "Tags"
-msgstr "Etiketler"
+msgstr "Künyeler"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:700
 #, kde-format
@@ -16081,7 +16081,7 @@ msgstr "Fiyat"
 #: kmymoney/plugins/views/reports/core/querytable.cpp:609
 #, kde-format
 msgid "[No Tag]"
-msgstr "[Etiket Yok]"
+msgstr "[Künye Yok]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:622
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1892
@@ -16736,7 +16736,7 @@ msgstr "Alacaklısına Göre İşlemler"
 #: kmymoney/plugins/views/reports/kreportsview_p.h:983
 #, kde-format
 msgid "Transactions by Tag"
-msgstr "Etiketine Göre İşlemler"
+msgstr "Künyelere Göre İşlemler"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:991
 #, kde-format
@@ -17726,7 +17726,7 @@ msgstr "<p>Numara sütununu göstermek için bu seçeneği seçin.</p>"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:246
 #, kde-format
 msgid "<p>Select this option to show the Tag column</p>"
-msgstr "<p>Etiket sütununu göstermek için bu seçeneği seçin.</p>"
+msgstr "<p>Künye sütununu göstermek için bu seçeneği seçin.</p>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_tagTab)
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tagsView)
@@ -17736,7 +17736,7 @@ msgstr "<p>Etiket sütununu göstermek için bu seçeneği seçin.</p>"
 #: kmymoney/widgets/ktransactionfilter.ui:388
 #, kde-format
 msgid "Tag"
-msgstr "Etiket"
+msgstr "Künye"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkPayee)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:265
@@ -20129,7 +20129,7 @@ msgstr "Kategoriler sayfasını göster"
 #: kmymoney/views/kmymoneyview.cpp:559
 #, kde-format
 msgid "Show tags page"
-msgstr "Etiketler sayfasını göster"
+msgstr "Künyeler sayfasını göster"
 
 #: kmymoney/views/kmymoneyview.cpp:560
 #, kde-format
@@ -20722,48 +20722,48 @@ msgid ""
 "multiple tags with the same identification name. Are you sure you would like "
 "to rename the tag?"
 msgstr ""
-"“%1” adlı bir etiket halihazırda var. Aynı tanımlama adına sahip birden "
-"fazla etiketin olması tavsiye edilmez. Etiketi yeniden adlandırmak "
-"istediğinizden emin misiniz?"
+"“%1” adlı bir künye halihazırda var. Aynı tanımlama adına sahip birden fazla "
+"künyenin olması tavsiye edilmez. Künyeyi yeniden adlandırmak istediğinizden "
+"emin misiniz?"
 
 #: kmymoney/views/ktagsview.cpp:381
 #, kde-format
 msgctxt "@title:window"
 msgid "Duplicate tag name"
-msgstr "Yinelenmiş Etiket Adı"
+msgstr "Yinelenmiş Künye Adı"
 
 #: kmymoney/views/ktagsview.cpp:404 kmymoney/views/ktagsview.cpp:528
 #, kde-format
 msgid "Unable to modify tag"
-msgstr "Etiket değiştirilemiyor"
+msgstr "Künyede değişiklik yapılamıyor"
 
 #: kmymoney/views/ktagsview.cpp:813
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
-msgstr "İşlemin/bölmenin etiketi yeniden atanamıyor"
+msgstr "İşlemin/bölmenin künyesi yeniden atanamıyor"
 
 #: kmymoney/views/ktagsview.cpp:825
 #, kde-format
 msgid "Unable to remove tag(s)"
-msgstr "Etiketler kaldırılamıyor"
+msgstr "Künyeler kaldırılamıyor"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
 #: kmymoney/views/ktagsview.ui:44
 #, kde-format
 msgid "Your tags"
-msgstr "Etiketleriniz"
+msgstr "Künyeleriniz"
 
 #. i18n: ectx: property (title), widget (QGroupBox, detailsGroup)
 #: kmymoney/views/ktagsview.ui:193
 #, kde-format
 msgid "Tag configuration"
-msgstr "Etiket yapılandırması"
+msgstr "Künye yapılandırması"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4)
 #: kmymoney/views/ktagsview.ui:246
 #, kde-format
 msgid "Tag color:"
-msgstr "Etiket rengi:"
+msgstr "Künye rengi:"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:56
 #, kde-format
@@ -21050,7 +21050,7 @@ msgid ""
 "Selection of tags is not possible when split transactions are part of the "
 "selection."
 msgstr ""
-"Bölünmüş işlemler seçimin bir parçası olduğunda etiket seçimi olanaklı "
+"Bölünmüş işlemler seçimin bir parçası olduğunda künye seçimi olanaklı "
 "değildir."
 
 #: kmymoney/views/multitransactioneditor.cpp:752
@@ -21134,19 +21134,19 @@ msgstr "Maliyet Merkezi"
 msgctxt "@info:tooltip Tag entry widget"
 msgid "This widget is disabled because you need to select a category first."
 msgstr ""
+"Bu araç takımı devre dışıdır; çünkü önce bir kategori seçmeniz gerekir."
 
 #: kmymoney/views/newtransactioneditor.cpp:180
-#, fuzzy, kde-format
-#| msgid "Use this to delete all splits of this transaction."
+#, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Use this widget to add tags for this transaction."
-msgstr "Bu işlemin tüm bölümlerini silmek için bunu kullanın."
+msgstr "Bu işlem için künyeler eklemek üzere bu araç takımını kullanın."
 
 #: kmymoney/views/newtransactioneditor.cpp:183
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Please use the split editor to assign tags."
-msgstr ""
+msgstr "Künyeler atamak için lütfen bölme düzenleyicisini kullanın."
 
 #: kmymoney/views/newtransactioneditor.cpp:256
 #, kde-format
@@ -21539,7 +21539,7 @@ msgstr "Sil"
 #, kde-format
 msgctxt "@title:menu"
 msgid "Tab Editor Options"
-msgstr "Etiket Düzenleyicisi Seçenekleri"
+msgstr "Künye Düzenleyicisi Seçenekleri"
 
 #: kmymoney/views/tabordereditor.cpp:431
 #, kde-format
@@ -21966,7 +21966,7 @@ msgstr "Geri bildirim içeriği"
 #, kde-format
 msgctxt "@info:placeholder tag combo box"
 msgid "Tag"
-msgstr "Etiket"
+msgstr "Künye"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_textTab)
 #: kmymoney/widgets/ktransactionfilter.cpp:90
@@ -22058,7 +22058,7 @@ msgstr "şu tutardan"
 #: kmymoney/widgets/ktransactionfilter.ui:396
 #, kde-format
 msgid "Select transactions without tags"
-msgstr "Etiketsiz işlemleri seç"
+msgstr "Künyesiz işlemleri seç"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_allTagsButton)
 #. i18n: ectx: property (text), widget (QPushButton, m_allPayeesButton)

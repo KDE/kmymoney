@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-01 02:06+0000\n"
-"PO-Revision-Date: 2025-05-15 03:48+0100\n"
+"PO-Revision-Date: 2025-06-01 12:49+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -21311,19 +21311,19 @@ msgstr "Centro de costes"
 msgctxt "@info:tooltip Tag entry widget"
 msgid "This widget is disabled because you need to select a category first."
 msgstr ""
+"Este widget está desactivado porque debe seleccionar una categoría antes."
 
 #: kmymoney/views/newtransactioneditor.cpp:180
-#, fuzzy, kde-format
-#| msgid "Use this to delete all splits of this transaction."
+#, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Use this widget to add tags for this transaction."
-msgstr "Use esto para borrar todas las partidas de esta transacción."
+msgstr "Use este widget para añadir etiquetas a esta transacción."
 
 #: kmymoney/views/newtransactioneditor.cpp:183
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Please use the split editor to assign tags."
-msgstr ""
+msgstr "Use el editor de partidas para asignar etiquetas."
 
 #: kmymoney/views/newtransactioneditor.cpp:256
 #, kde-format

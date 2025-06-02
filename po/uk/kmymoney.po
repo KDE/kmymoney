@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-01 02:06+0000\n"
-"PO-Revision-Date: 2025-05-14 09:28+0300\n"
+"PO-Revision-Date: 2025-06-01 12:48+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -21395,20 +21395,19 @@ msgstr "Обліковий центр"
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "This widget is disabled because you need to select a category first."
-msgstr ""
+msgstr "Цей віджет вимкнено, оскільки вам спочатку слід вибрати категорію."
 
 #: kmymoney/views/newtransactioneditor.cpp:180
-#, fuzzy, kde-format
-#| msgid "Use this to delete all splits of this transaction."
+#, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Use this widget to add tags for this transaction."
-msgstr "Скористайтеся цим, щоб вилучити усі дроблення цієї операції."
+msgstr "Скористайтеся цим віджетом для додавання міток до цієї операції."
 
 #: kmymoney/views/newtransactioneditor.cpp:183
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Please use the split editor to assign tags."
-msgstr ""
+msgstr "Будь ласка, скористайтеся редактором поділу для призначення міток."
 
 #: kmymoney/views/newtransactioneditor.cpp:256
 #, kde-format
