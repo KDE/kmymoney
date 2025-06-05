@@ -352,6 +352,9 @@ void KReportTab::saveAs(const QString& filename, const QString& selectedMimeType
             QTextStream(&file) << m_table->renderReport(QLatin1String("csv"), m_encoding, QString());
         } else if (selectedMimeType == QStringLiteral("text/html")) {
             QString table = m_table->renderReport(QLatin1String("html"), m_encoding, m_report.name());
+            // remove the background information only needed by Qt
+            QRegularExpression removeBackgroundExp(R"(\n\s+background: .+bg-texture.png.+fixed;)");
+            table.replace(removeBackgroundExp, QString());
             QTextStream stream(&file);
             stream << table;
         } else if (selectedMimeType == QStringLiteral("application/xml")) {

@@ -327,7 +327,7 @@
     }
 
     td {
-        vertical-align: baseline
+        vertical-align: bottom
     }
 
     table.report { /*center the report*/

@@ -2045,8 +2045,7 @@ QString PivotTable::coloredAmount(const MyMoneyMoney& amount, const QString& cur
 {
     const auto value = amount.formatMoney(currencySymbol, prec);
     if (amount.isNegative())
-        return QString::fromLatin1("<font color=%1>%2</font>")
-               .arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name(), value);
+        return QString::fromLatin1("<font color=\"%1\">%2</font>").arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name(), value);
     else
         return value;
 }

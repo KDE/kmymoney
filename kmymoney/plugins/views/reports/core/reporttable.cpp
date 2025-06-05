@@ -54,12 +54,12 @@ QString reports::ReportTable::cssFileNameGet()
 
 QString reports::ReportTable::renderHeader(const QString& title, const QByteArray& encoding)
 {
-    QString header = QString(
+    QString header = QLatin1String(
                          "<!DOCTYPE HTML PUBLIC"
-                         " \"-//W3C//DTD HTML 4.01 //EN\""
+                         " \"-//W3C//DTD HTML 4.01//EN\""
                          " \"http://www.w3.org/TR/html4/strict.dtd\">"
                          "\n<html>\n<head>"
-                         "\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=%1\" />"
+                         "\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=%1\">"
                          "\n<title>%2</title>")
                          .arg(encoding, title);
 

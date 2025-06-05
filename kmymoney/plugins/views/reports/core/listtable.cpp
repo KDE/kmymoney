@@ -386,7 +386,7 @@ void ListTable::render(QString& result, QString& csv) const
                     QString colorBegin;
                     QString colorEnd;
                     if ((rowRank == Rank::BaseCurrencyTotals || rowRank == Rank::ForeignCurrencyTotals) && value.isNegative()) {
-                        colorBegin = QString::fromLatin1("<font color=%1>").arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name());
+                        colorBegin = QString::fromLatin1("<font color=\"%1\">").arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name());
                         colorEnd = QLatin1String("</font>");
                     }
 
@@ -410,13 +410,13 @@ void ListTable::render(QString& result, QString& csv) const
                     QString colorBegin;
                     QString colorEnd;
                     if ((rowRank == Rank::BaseCurrencyTotals || rowRank == Rank::ForeignCurrencyTotals) && value.isNegative()) {
-                        colorBegin = QString::fromLatin1("<font color=%1>").arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name());
+                        colorBegin = QString::fromLatin1("<font color=\"%1\">").arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name());
                         colorEnd = QLatin1String("</font>");
                     }
 
                     if ((rowRank == Rank::BaseCurrencyTotals || rowRank == Rank::ForeignCurrencyTotals) && value.isNegative())
-                        valueStr = QString::fromLatin1("<font color=%1>%2</font>")
-                                   .arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name(), valueStr);
+                        valueStr =
+                            QString::fromLatin1("<font color=\"%1\">%2</font>").arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name(), valueStr);
                     result.append(QString::fromLatin1("<td>%2%4%1 %%5%3</td>").arg(valueStr, tlinkBegin, tlinkEnd, colorBegin, colorEnd));
                 }
                 break;
