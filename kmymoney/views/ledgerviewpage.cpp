@@ -363,9 +363,14 @@ void LedgerViewPage::slotRequestSelectionChanged(const SelectedObjects& selectio
             MyMoneyMoney balance;
             const auto journalEntryIds = selections.selection(SelectedObjects::JournalEntry);
             for (const auto& journalEntryId : qAsConst(journalEntryIds)) {
-                const auto idx = MyMoneyFile::instance()->journalModel()->indexById(journalEntryId);
-                if (idx.isValid()) {
-                    balance += idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+                const auto ledgerIdx = MyMoneyFile::instance()->journalModel()->indexById(journalEntryId);
+                if (ledgerIdx.isValid()) {
+                    balance += ledgerIdx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+                } else {
+                    const auto scheduleIdx = MyMoneyFile::instance()->schedulesJournalModel()->indexById(journalEntryId);
+                    if (scheduleIdx.isValid()) {
+                        balance += scheduleIdx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+                    }
                 }
             }
             d->selectedTotal = balance;
