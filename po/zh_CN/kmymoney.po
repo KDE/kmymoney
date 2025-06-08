@@ -20510,11 +20510,10 @@ msgid "This widget is disabled because you need to select a category first."
 msgstr ""
 
 #: kmymoney/views/newtransactioneditor.cpp:180
-#, fuzzy, kde-format
-#| msgid "Use this button to record this transaction"
+#, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Use this widget to add tags for this transaction."
-msgstr "用此按钮来记录交易"
+msgstr ""
 
 #: kmymoney/views/newtransactioneditor.cpp:183
 #, kde-format
