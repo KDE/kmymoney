@@ -219,11 +219,14 @@ public:
                                          ? QString()
                                          : MyMoneyUtils::formatMoney(-value, currency));
                     }
-                } else {
-                    rc.lines << opt.text;
                 }
             }
             rc.lines.removeAll(QString());
+            // in case there is no data, we simply return a blank one-liner
+            // which forces to paint the background in the correct color
+            if (rc.lines.isEmpty()) {
+                rc.lines << QStringLiteral(" ");
+            }
 
         } else if (index.column() == JournalModel::Column::Deposit) {
             const auto havePayeeColumn = !m_view->isColumnHidden(JournalModel::Payee);
