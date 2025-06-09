@@ -799,6 +799,21 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                     file->addPrice(newprice);
                 }
             }
+
+            // Meryll Lynch exports some strange transactions, where they create a sell transaction
+            // with an amount not equal to zero and a price being zero and also shares being zero.
+            // Such transaction causes a division by zero later on at some point, when the value
+            // is divided by the number of shares to calculate the price. We have no idea why
+            // Merrill Lynch calls this a sell, as it appears to just be some sort of dividend
+            // or other payout of the amount. We simply convert this into an interest transaction.
+            if (!statementTransactionUnderImport.m_amount.isZero() && statementTransactionUnderImport.m_shares.isZero()
+                && (statementTransactionUnderImport.m_eAction == eMyMoney::Transaction::Action::Buy
+                    || statementTransactionUnderImport.m_eAction == eMyMoney::Transaction::Action::Sell)) {
+                // needed a bit of a detour through a pointer to change a const object
+                eMyMoney::Transaction::Action* p = const_cast<eMyMoney::Transaction::Action*>(&statementTransactionUnderImport.m_eAction);
+                *p = (statementTransactionUnderImport.m_eAction == eMyMoney::Transaction::Action::Sell) ? eMyMoney::Transaction::Action::Interest
+                                                                                                        : eMyMoney::Transaction::Action::Fees;
+            }
         }
         s1.setAccountId(thisaccount.id());
         d->assignUniqueBankID(s1, statementTransactionUnderImport);
