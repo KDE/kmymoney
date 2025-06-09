@@ -75,6 +75,16 @@ QModelIndex OnlineBalanceProxyModel::index(int row, int column, const QModelInde
     case JournalModel::Column::Balance:
         column = AccountsModel::Column::Balance;
         break;
+
+    case JournalModel::Column::Price:
+    case JournalModel::Column::Value:
+        // For journal columns that are outside of the column range provided
+        // by the base model (AccountsModel), the column is simply replaced
+        // with the column number which information is not displayed by
+        // data(). This will paint the background of those cells correctly
+        // which otherwise does not happen due to an invalid index.
+        column = AccountsModel::Column::AccountName;
+        break;
     default:
         break;
     }
