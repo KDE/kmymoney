@@ -74,7 +74,7 @@
       <guiicon>
 	<inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="home_view.png" format="PNG"/>
+	    <imagedata fileref="home_view.svg" format="SVG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Home View</phrase>
@@ -91,7 +91,7 @@
       <guiicon>
         <inlinemediaobject>
           <imageobject>
-	    <imagedata fileref="institutions_view.png" format="PNG"/>
+	    <imagedata fileref="institutions_view.svg" format="SVG"/>
           </imageobject>
 	  <textobject>
 	    <phrase>Institutions View</phrase>
@@ -123,7 +123,7 @@
       <guiicon>
 	<inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="schedule_view.png" format="PNG"/>
+	    <imagedata fileref="schedule_view.svg" format="SVG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Schedules View</phrase>
@@ -139,7 +139,7 @@
       <guiicon>
         <inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="categories_view.png" format="PNG"/>
+	    <imagedata fileref="categories_view.svg" format="SVG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Categories View</phrase>
@@ -156,7 +156,7 @@
       <guiicon>
         <inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="mail-tagged.png" format="PNG"/>
+	    <imagedata fileref="mail_tagged.svg" format="SVG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Tags View</phrase>
@@ -173,7 +173,7 @@
       <guiicon>
         <inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="payees_view.png" format="PNG"/>
+	    <imagedata fileref="payees_view.svg" format="SVG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Payees View</phrase>
@@ -190,7 +190,7 @@
       <guiicon>
 	<inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="ledgers_view.png" format="PNG"/>
+	    <imagedata fileref="ledgers_view.svg" format="SVG"/>
           </imageobject>
 	  <textobject>
 	    <phrase>Ledgers View</phrase>
@@ -206,7 +206,7 @@
       <guiicon>
 	<inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="investments_view.png" format="PNG"/>
+	    <imagedata fileref="investments_view.svg" format="SVG"/>
 	  </imageobject>
 	  <textobject>
         <phrase>Investments View</phrase>
@@ -222,7 +222,7 @@
       <guiicon>
 	<inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="reports_view.png" format="PNG"/>
+	    <imagedata fileref="reports_view.svg" format="SVG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Reports View</phrase>
@@ -238,7 +238,7 @@
       <guiicon>
 	<inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="budgets_view.png" format="PNG"/>
+	    <imagedata fileref="budgets_view.svg" format="SVG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Budgets View</phrase>
@@ -254,7 +254,7 @@
       <guiicon>
 	<inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="forecast_view_icon.png" format="PNG"/>
+	    <imagedata fileref="forecast_view_icon.svg" format="SVG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Forecast View</phrase>
@@ -270,7 +270,7 @@
       <guiicon>
 	<inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="outbox_view.png" format="PNG"/>
+	    <imagedata fileref="outbox_view.svg" format="SVG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Outbox View</phrase>
@@ -589,7 +589,7 @@
 <sect1 id="firsttime.tags"><title>Tags</title>
 <para>
   To maintain your <link linkend="details.tags">tags</link>, click the <guiicon>
-  <inlinemediaobject><imageobject><imagedata fileref="mail-tagged.png" format="PNG"/>
+  <inlinemediaobject><imageobject><imagedata fileref="mail_tagged.svg" format="SVG"/>
   </imageobject></inlinemediaobject></guiicon> Tags icon in the View Selector.
 </para>
 
