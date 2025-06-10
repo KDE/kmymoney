@@ -930,6 +930,7 @@ void LedgerView::mousePressEvent(QMouseEvent* event)
         } else {
             const auto pos = event->pos();
             const auto column = columnAt(pos.x());
+            const auto row = rowAt(pos.y());
             // call base class (which modifies the selection) in case the reconciliation
             // column was not clicked or the current index is not selected. This will
             // make sure that if multiple transactions are selected and the reconciliation
@@ -941,14 +942,15 @@ void LedgerView::mousePressEvent(QMouseEvent* event)
             switch (column) {
             case JournalModel::Column::Reconciliation:
                 // a click on the reconciliation column triggers the Mark transaction action
-                pActions[eMenu::Action::ToggleReconciliationFlag]->trigger();
+                // but only if it is received in a selected row
+                if (selectionModel()->isSelected(indexAt(pos))) {
+                    pActions[eMenu::Action::ToggleReconciliationFlag]->trigger();
+                }
                 break;
 
             case JournalModel::Column::Detail: {
                 // check if an icon was clicked in the detail column
-                const auto col = columnAt(event->pos().x());
-                const auto row = rowAt(event->pos().y());
-                const auto idx = model()->index(row, col);
+                const auto idx = model()->index(row, column);
                 const auto iconIndex = d->iconClickIndex(idx, pos);
                 const auto statusRoles = this->statusRoles(idx);
 
