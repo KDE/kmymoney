@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-06 01:55+0000\n"
+"POT-Creation-Date: 2025-06-10 02:00+0000\n"
 "PO-Revision-Date: 2020-05-02 10:27+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -90,7 +90,7 @@ msgstr "Väärtpaberit ei leitud"
 msgid "Statement Importer"
 msgstr "Pangaväljavõtte importija"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:816
+#: kmymoney/converter/mymoneystatementreader.cpp:831
 #, kde-format
 msgid ""
 "This imported statement contains investment transactions with no share "
@@ -99,17 +99,17 @@ msgstr ""
 "Imporditud pangaväljavõte sisaldab investeerimistehinguid ilma "
 "aktsiakoguseta. Selliseid tehinguid eiratakse."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:817
+#: kmymoney/converter/mymoneystatementreader.cpp:832
 #, kde-format
 msgid "No share amount provided"
 msgstr "Aktsiakogust pole antud"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:938
+#: kmymoney/converter/mymoneystatementreader.cpp:953
 #, kde-format
 msgid "(Fees) %1"
 msgstr "(Teenustasud) %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1031
+#: kmymoney/converter/mymoneystatementreader.cpp:1046
 #, fuzzy, kde-format
 #| msgid "Additional Fees: %1"
 msgctxt "Prepend name of payee (%1) to original memo (%2)"
@@ -118,7 +118,7 @@ msgid ""
 "%2"
 msgstr "Lisatasud: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1039
+#: kmymoney/converter/mymoneystatementreader.cpp:1054
 #, kde-format
 msgid ""
 "Do you want to add \"%1\" as payee/receiver?\n"
@@ -127,7 +127,7 @@ msgstr ""
 "Kas lisada \"%1\" maksesaajana?\n"
 "\n"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1041
+#: kmymoney/converter/mymoneystatementreader.cpp:1056
 #, kde-format
 msgid ""
 "Selecting \"Yes\" will create the payee, \"No\" will skip creation of a "
@@ -145,78 +145,78 @@ msgstr ""
 "Kui valida \"Ei\" ja märkida ruuduke \"Rohkem ei küsita\", eemaldatakse "
 "kõigis edasistes tehingutes maksesaaja \"%1\" kohta käiv teave."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1055
+#: kmymoney/converter/mymoneystatementreader.cpp:1070
 #: kmymoney/kmymoneyutils.cpp:578
 #, kde-format
 msgid "New payee/receiver"
 msgstr "Uus maksesaaja"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1086
+#: kmymoney/converter/mymoneystatementreader.cpp:1101
 #, kde-format
 msgid "Default Category for Payee"
 msgstr "Maksesaaja vaikimisi kategooria"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1093
+#: kmymoney/converter/mymoneystatementreader.cpp:1108
 #, kde-format
 msgid "Please select a default category for payee '%1'"
 msgstr "Palun vali maksesaaja \"%1\" vaikimisi kategooria"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1116
+#: kmymoney/converter/mymoneystatementreader.cpp:1131
 #, kde-format
 msgid "Save Category"
 msgstr "Salvesta kategooria"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1117
+#: kmymoney/converter/mymoneystatementreader.cpp:1132
 #, kde-format
 msgid "No Category"
 msgstr "Kategooria puudub"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonAbort)
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: kmymoney/converter/mymoneystatementreader.cpp:1118
+#: kmymoney/converter/mymoneystatementreader.cpp:1133
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:132
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:257
 #, kde-format
 msgid "Abort"
 msgstr "Katkesta"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1144
+#: kmymoney/converter/mymoneystatementreader.cpp:1159
 #, kde-format
 msgid "Unable to add payee/receiver"
 msgstr "Maksesaaja lisamine nurjus"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1404
+#: kmymoney/converter/mymoneystatementreader.cpp:1419
 #, kde-format
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr "Probleem imporditud tehingu ID-ga \"%1\" lisamisel või sobitamisel: %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1462
+#: kmymoney/converter/mymoneystatementreader.cpp:1477
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr "<b>Laadisid alla järgmise konto pangaväljavõtte:</b><br/><br/>"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1463
+#: kmymoney/converter/mymoneystatementreader.cpp:1478
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " - Konto nimi: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1464
+#: kmymoney/converter/mymoneystatementreader.cpp:1479
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " - Konto tüüp: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1465
+#: kmymoney/converter/mymoneystatementreader.cpp:1480
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " - Konto number: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1470
+#: kmymoney/converter/mymoneystatementreader.cpp:1485
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "Kas importida tehingud sellesse kontosse?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1473
+#: kmymoney/converter/mymoneystatementreader.cpp:1488
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -227,7 +227,7 @@ msgstr ""
 "klõpsates nupule <b>Loo</b>, või valida mõne konto käsitsi allolevast "
 "kastist."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1477
+#: kmymoney/converter/mymoneystatementreader.cpp:1492
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -237,26 +237,26 @@ msgstr ""
 "Valitud pangaväljavõtte failis ei leitud teavet konto kohta. Palun vali "
 "konto valikukastist või loo uus konto, klõpsates nupule <b>Loo</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1506
+#: kmymoney/converter/mymoneystatementreader.cpp:1521
 #, kde-format
 msgid "Import transactions"
 msgstr "Tehingute import"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1549
+#: kmymoney/converter/mymoneystatementreader.cpp:1564
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
 "button."
 msgstr "Sul tuleb valida konto, luua uus või klõpsata nupule <b>Katkesta</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1657
+#: kmymoney/converter/mymoneystatementreader.cpp:1672
 #: kmymoney/views/kscheduledview_p.h:199 kmymoney/views/kscheduledview_p.h:319
 #: kmymoney/views/kscheduledview_p.h:323
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Planeeritud tehingu \"%1\" sisestamine nurjus"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1677
+#: kmymoney/converter/mymoneystatementreader.cpp:1692
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -268,7 +268,7 @@ msgstr ""
 ">Ajaplaani nimi: <b>%1</b><br/>Tehing: <i>%2 %3</i><br/>Kas KMyMoney peaks "
 "sisestama nüüd selle ajaplaani, et tehing oleks võimalik sobitada?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1686
+#: kmymoney/converter/mymoneystatementreader.cpp:1701
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -291,7 +291,7 @@ msgstr[1] ""
 "erinevad %1 päeva võrra.<br/>Kas KMyMoney peaks sisestama nüüd selle "
 "ajaplaani, et tehing oleks võimalik sobitada? "
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1700
+#: kmymoney/converter/mymoneystatementreader.cpp:1715
 #, kde-format
 msgid "Schedule found"
 msgstr "Leiti ajaplaan"
@@ -19590,7 +19590,7 @@ msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Memo kopeerimine"
 
-#: kmymoney/views/journaldelegate.cpp:344
+#: kmymoney/views/journaldelegate.cpp:347
 #, kde-format
 msgctxt "@info %2 contains list of account names separated by <br>"
 msgid "<qt>Closed account:<br><br>%2</qt>"
@@ -19598,7 +19598,7 @@ msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: kmymoney/views/journaldelegate.cpp:349
+#: kmymoney/views/journaldelegate.cpp:352
 #, fuzzy, kde-format
 #| msgid "Cannot remove transaction that references a closed account."
 msgctxt "@info Unable to edit "
@@ -19606,14 +19606,14 @@ msgid ""
 "KMyMoney does not support to edit transaction that reference closed accounts."
 msgstr "Suletud kontole viitavat tehingut ei saa eemaldada."
 
-#: kmymoney/views/journaldelegate.cpp:351
+#: kmymoney/views/journaldelegate.cpp:354
 #, fuzzy, kde-format
 #| msgid "Deleting transactions"
 msgctxt "@title:window"
 msgid "Prevent editing transactions"
 msgstr "Tehingute kustutamine"
 
-#: kmymoney/views/journaldelegate.cpp:365
+#: kmymoney/views/journaldelegate.cpp:368
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
