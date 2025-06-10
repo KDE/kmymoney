@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-06 03:20+0000\n"
+"POT-Creation-Date: 2025-06-10 03:28+0000\n"
 "PO-Revision-Date: 2023-07-14 18:45+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -105,7 +105,7 @@ msgstr "Ценная бумага не найдена"
 msgid "Statement Importer"
 msgstr "Импорт выписки"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:816
+#: kmymoney/converter/mymoneystatementreader.cpp:831
 #, kde-format
 msgid ""
 "This imported statement contains investment transactions with no share "
@@ -114,17 +114,17 @@ msgstr ""
 "В импортированной выписке содержатся инвестиционные операции без указания "
 "количества акций. Такие операции будут проигнорированы."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:817
+#: kmymoney/converter/mymoneystatementreader.cpp:832
 #, kde-format
 msgid "No share amount provided"
 msgstr "Не указано количество акций"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:938
+#: kmymoney/converter/mymoneystatementreader.cpp:953
 #, kde-format
 msgid "(Fees) %1"
 msgstr "(Комиссия) %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1031
+#: kmymoney/converter/mymoneystatementreader.cpp:1046
 #, fuzzy, kde-format
 #| msgid "Additional Fees: %1"
 msgctxt "Prepend name of payee (%1) to original memo (%2)"
@@ -133,7 +133,7 @@ msgid ""
 "%2"
 msgstr "Дополнительные сборы: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1039
+#: kmymoney/converter/mymoneystatementreader.cpp:1054
 #, kde-format
 msgid ""
 "Do you want to add \"%1\" as payee/receiver?\n"
@@ -142,7 +142,7 @@ msgstr ""
 "Добавить «%1» в список контрагентов?\n"
 "\n"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1041
+#: kmymoney/converter/mymoneystatementreader.cpp:1056
 #, kde-format
 msgid ""
 "Selecting \"Yes\" will create the payee, \"No\" will skip creation of a "
@@ -160,80 +160,80 @@ msgstr ""
 "Если нажать кнопку «Нет» и установить флажок «Больше не спрашивать», "
 "информация о контрагенте будет удалена из всех следующих операций с «%1»."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1055
+#: kmymoney/converter/mymoneystatementreader.cpp:1070
 #: kmymoney/kmymoneyutils.cpp:578
 #, kde-format
 msgid "New payee/receiver"
 msgstr "Новый контрагент"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1086
+#: kmymoney/converter/mymoneystatementreader.cpp:1101
 #, kde-format
 msgid "Default Category for Payee"
 msgstr "Статья бюджета контрагента по умолчанию"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1093
+#: kmymoney/converter/mymoneystatementreader.cpp:1108
 #, kde-format
 msgid "Please select a default category for payee '%1'"
 msgstr "Выберите статью бюджета по умолчанию для контрагента «%1»"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1116
+#: kmymoney/converter/mymoneystatementreader.cpp:1131
 #, kde-format
 msgid "Save Category"
 msgstr "Сохранить статью"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1117
+#: kmymoney/converter/mymoneystatementreader.cpp:1132
 #, kde-format
 msgid "No Category"
 msgstr "Статья не указана"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonAbort)
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: kmymoney/converter/mymoneystatementreader.cpp:1118
+#: kmymoney/converter/mymoneystatementreader.cpp:1133
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:132
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:257
 #, kde-format
 msgid "Abort"
 msgstr "Прервать"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1144
+#: kmymoney/converter/mymoneystatementreader.cpp:1159
 #, kde-format
 msgid "Unable to add payee/receiver"
 msgstr "Невозможно добавить контрагента"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1404
+#: kmymoney/converter/mymoneystatementreader.cpp:1419
 #, kde-format
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr ""
 "Ошибка добавления или совмещения импортируемой операции с идентификатором "
 "«%1»: %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1462
+#: kmymoney/converter/mymoneystatementreader.cpp:1477
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr "<b>Выполнена загрузка выписки по следующему счёту:</b><br /><br />"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1463
+#: kmymoney/converter/mymoneystatementreader.cpp:1478
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " - Название счёта: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1464
+#: kmymoney/converter/mymoneystatementreader.cpp:1479
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " - Тип счёта: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1465
+#: kmymoney/converter/mymoneystatementreader.cpp:1480
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " - Номер счёта: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1470
+#: kmymoney/converter/mymoneystatementreader.cpp:1485
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "Импортировать операции в этот счёт?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1473
+#: kmymoney/converter/mymoneystatementreader.cpp:1488
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -243,7 +243,7 @@ msgstr ""
 "Невозможно определить, какой счёт использовать. Можно создать новый счёт, "
 "нажав кнопку <b>«Создать»</b>, или выбрать счёт вручную из списка ниже."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1477
+#: kmymoney/converter/mymoneystatementreader.cpp:1492
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -253,12 +253,12 @@ msgstr ""
 "В выбранном файле выписки информации о счёте не найдено. Выберите счёт из "
 "списка или создайте его, нажав кнопку <b>«Создать»</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1506
+#: kmymoney/converter/mymoneystatementreader.cpp:1521
 #, kde-format
 msgid "Import transactions"
 msgstr "Импорт операций"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1549
+#: kmymoney/converter/mymoneystatementreader.cpp:1564
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
@@ -267,14 +267,14 @@ msgstr ""
 "Требуется выбрать счёт из списка, создать новый счёт или нажать кнопку "
 "<b>«Прервать»</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1657
+#: kmymoney/converter/mymoneystatementreader.cpp:1672
 #: kmymoney/views/kscheduledview_p.h:199 kmymoney/views/kscheduledview_p.h:319
 #: kmymoney/views/kscheduledview_p.h:323
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Невозможно ввести запланированную операцию «%1»"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1677
+#: kmymoney/converter/mymoneystatementreader.cpp:1692
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -286,7 +286,7 @@ msgstr ""
 "<br/>График платежей: <b>%1</b><br/>Операция: <i>%2 %3</i><br/>Ввести этот "
 "график сейчас для совмещения операции?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1686
+#: kmymoney/converter/mymoneystatementreader.cpp:1701
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -315,7 +315,7 @@ msgstr[3] ""
 "<br/>График платежей: <b>%2</b><br/>Операция: <i>%3 %4</i><br/>Даты операций "
 "отличаются на %1 день.<br/>Ввести этот график сейчас для совмещения операции?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1700
+#: kmymoney/converter/mymoneystatementreader.cpp:1715
 #, kde-format
 msgid "Schedule found"
 msgstr "График платежей найден"
@@ -19718,7 +19718,7 @@ msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Копирование примечания"
 
-#: kmymoney/views/journaldelegate.cpp:344
+#: kmymoney/views/journaldelegate.cpp:347
 #, kde-format
 msgctxt "@info %2 contains list of account names separated by <br>"
 msgid "<qt>Closed account:<br><br>%2</qt>"
@@ -19728,7 +19728,7 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: kmymoney/views/journaldelegate.cpp:349
+#: kmymoney/views/journaldelegate.cpp:352
 #, fuzzy, kde-format
 #| msgid "Cannot remove transaction that references a closed account."
 msgctxt "@info Unable to edit "
@@ -19736,14 +19736,14 @@ msgid ""
 "KMyMoney does not support to edit transaction that reference closed accounts."
 msgstr "Невозможно удалить операцию, которая использует закрытый счёт."
 
-#: kmymoney/views/journaldelegate.cpp:351
+#: kmymoney/views/journaldelegate.cpp:354
 #, fuzzy, kde-format
 #| msgid "Deleting transactions"
 msgctxt "@title:window"
 msgid "Prevent editing transactions"
 msgstr "Удаление операций"
 
-#: kmymoney/views/journaldelegate.cpp:365
+#: kmymoney/views/journaldelegate.cpp:368
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""

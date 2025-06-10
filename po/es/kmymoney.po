@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-06 03:20+0000\n"
+"POT-Creation-Date: 2025-06-10 03:28+0000\n"
 "PO-Revision-Date: 2025-05-24 01:03+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -96,7 +96,7 @@ msgstr "Valor bursátil no encontrado"
 msgid "Statement Importer"
 msgstr "Importador de extractos bancarios"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:816
+#: kmymoney/converter/mymoneystatementreader.cpp:831
 #, kde-format
 msgid ""
 "This imported statement contains investment transactions with no share "
@@ -105,17 +105,17 @@ msgstr ""
 "El extracto importado contiene asientos de inversión sin importe de "
 "participación. Estos asientos serán ignorados."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:817
+#: kmymoney/converter/mymoneystatementreader.cpp:832
 #, kde-format
 msgid "No share amount provided"
 msgstr "No se ha proporcionado ningún importe de participación"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:938
+#: kmymoney/converter/mymoneystatementreader.cpp:953
 #, kde-format
 msgid "(Fees) %1"
 msgstr "(Comisiones) %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1031
+#: kmymoney/converter/mymoneystatementreader.cpp:1046
 #, kde-format
 msgctxt "Prepend name of payee (%1) to original memo (%2)"
 msgid ""
@@ -125,7 +125,7 @@ msgstr ""
 "Beneficiario original: %1\n"
 "%2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1039
+#: kmymoney/converter/mymoneystatementreader.cpp:1054
 #, kde-format
 msgid ""
 "Do you want to add \"%1\" as payee/receiver?\n"
@@ -134,7 +134,7 @@ msgstr ""
 "Desea añadir a «%1» a la lista de beneficiarios/receptores?\n"
 "\n"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1041
+#: kmymoney/converter/mymoneystatementreader.cpp:1056
 #, kde-format
 msgid ""
 "Selecting \"Yes\" will create the payee, \"No\" will skip creation of a "
@@ -153,78 +153,78 @@ msgstr ""
 "eliminará la información del beneficiario de todos los asientos siguientes "
 "con referencia «%1»."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1055
+#: kmymoney/converter/mymoneystatementreader.cpp:1070
 #: kmymoney/kmymoneyutils.cpp:578
 #, kde-format
 msgid "New payee/receiver"
 msgstr "Nuevo beneficiario/receptor"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1086
+#: kmymoney/converter/mymoneystatementreader.cpp:1101
 #, kde-format
 msgid "Default Category for Payee"
 msgstr "Categoría predeterminada para el beneficiario"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1093
+#: kmymoney/converter/mymoneystatementreader.cpp:1108
 #, kde-format
 msgid "Please select a default category for payee '%1'"
 msgstr "Seleccione una categoría predeterminada para el beneficiario «%1»"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1116
+#: kmymoney/converter/mymoneystatementreader.cpp:1131
 #, kde-format
 msgid "Save Category"
 msgstr "Guardar categoría"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1117
+#: kmymoney/converter/mymoneystatementreader.cpp:1132
 #, kde-format
 msgid "No Category"
 msgstr "Sin categoría"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonAbort)
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: kmymoney/converter/mymoneystatementreader.cpp:1118
+#: kmymoney/converter/mymoneystatementreader.cpp:1133
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:132
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:257
 #, kde-format
 msgid "Abort"
 msgstr "Interrumpir"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1144
+#: kmymoney/converter/mymoneystatementreader.cpp:1159
 #, kde-format
 msgid "Unable to add payee/receiver"
 msgstr "No ha sido posible añadir el beneficiario/receptor"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1404
+#: kmymoney/converter/mymoneystatementreader.cpp:1419
 #, kde-format
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr "Problemas al añadir o conciliar el asiento importado con id «%1»: %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1462
+#: kmymoney/converter/mymoneystatementreader.cpp:1477
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr "<b>Ha descargado un extracto de la siguiente cuenta:</b><br/><br/>"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1463
+#: kmymoney/converter/mymoneystatementreader.cpp:1478
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " - Nombre de la cuenta: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1464
+#: kmymoney/converter/mymoneystatementreader.cpp:1479
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " - Tipo de cuenta: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1465
+#: kmymoney/converter/mymoneystatementreader.cpp:1480
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " - Número de cuenta: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1470
+#: kmymoney/converter/mymoneystatementreader.cpp:1485
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "¿Desea importar asientos a esta cuenta?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1473
+#: kmymoney/converter/mymoneystatementreader.cpp:1488
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -235,7 +235,7 @@ msgstr ""
 "pulsando del botón <b>Crear</b> o escoger otra en la caja se selección de "
 "abajo."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1477
+#: kmymoney/converter/mymoneystatementreader.cpp:1492
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -246,12 +246,12 @@ msgstr ""
 "escogido. Escoja una cuenta usando la caja de selección del diálogo o cree "
 "una nueva mediante el botón <b>Crear</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1506
+#: kmymoney/converter/mymoneystatementreader.cpp:1521
 #, kde-format
 msgid "Import transactions"
 msgstr "Importar asientos"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1549
+#: kmymoney/converter/mymoneystatementreader.cpp:1564
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
@@ -260,14 +260,14 @@ msgstr ""
 "Debe escoger una cuenta, crear una nueva o pulsar el botón <b>Interrumpir</"
 "b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1657
+#: kmymoney/converter/mymoneystatementreader.cpp:1672
 #: kmymoney/views/kscheduledview_p.h:199 kmymoney/views/kscheduledview_p.h:319
 #: kmymoney/views/kscheduledview_p.h:323
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "No ha sido posible introducir el asiento planificado «%1»"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1677
+#: kmymoney/converter/mymoneystatementreader.cpp:1692
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -280,7 +280,7 @@ msgstr ""
 ">Transacción: <i>%2 %3</i><br/>¿Desea que KMyMoney introduzca esta "
 "planificación ahora para que se pueda emparejar la transacción?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1686
+#: kmymoney/converter/mymoneystatementreader.cpp:1701
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -305,7 +305,7 @@ msgstr[1] ""
 "días<br/>¿Desea que KMyMoney introduzca esta planificación ahora para que se "
 "pueda emparejar la transacción?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1700
+#: kmymoney/converter/mymoneystatementreader.cpp:1715
 #, kde-format
 msgid "Schedule found"
 msgstr "Planificación encontrada"
@@ -19364,7 +19364,7 @@ msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Memorando vacío"
 
-#: kmymoney/views/journaldelegate.cpp:344
+#: kmymoney/views/journaldelegate.cpp:347
 #, kde-format
 msgctxt "@info %2 contains list of account names separated by <br>"
 msgid "<qt>Closed account:<br><br>%2</qt>"
@@ -19372,7 +19372,7 @@ msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
 msgstr[0] "<qt>Cuenta cerrada:<br><br>%2</qt>"
 msgstr[1] "<qt>Cuentas cerradas:<br><br>%2</qt>"
 
-#: kmymoney/views/journaldelegate.cpp:349
+#: kmymoney/views/journaldelegate.cpp:352
 #, kde-format
 msgctxt "@info Unable to edit "
 msgid ""
@@ -19381,13 +19381,13 @@ msgstr ""
 "KMyMoney no permite editar transacciones que hacen referencia a cuentas "
 "cerradas."
 
-#: kmymoney/views/journaldelegate.cpp:351
+#: kmymoney/views/journaldelegate.cpp:354
 #, kde-format
 msgctxt "@title:window"
 msgid "Prevent editing transactions"
 msgstr "Impedir edición de transacciones"
 
-#: kmymoney/views/journaldelegate.cpp:365
+#: kmymoney/views/journaldelegate.cpp:368
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
