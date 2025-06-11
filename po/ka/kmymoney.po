@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-10 03:28+0000\n"
+"POT-Creation-Date: 2025-06-11 03:42+0000\n"
 "PO-Revision-Date: 2023-08-15 06:25+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -20307,31 +20307,31 @@ msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:963
+#: kmymoney/views/ledgerview.cpp:965
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:964
+#: kmymoney/views/ledgerview.cpp:966
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:967
+#: kmymoney/views/ledgerview.cpp:969
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:968
+#: kmymoney/views/ledgerview.cpp:970
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:988
+#: kmymoney/views/ledgerview.cpp:990
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -20339,7 +20339,7 @@ msgid ""
 "the ledger again."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:990
+#: kmymoney/views/ledgerview.cpp:992
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -20347,13 +20347,13 @@ msgid ""
 "transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:994
+#: kmymoney/views/ledgerview.cpp:996
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:995
+#: kmymoney/views/ledgerview.cpp:997
 #, fuzzy, kde-format
 #| msgid "Import transactions"
 msgctxt "@title:window"
