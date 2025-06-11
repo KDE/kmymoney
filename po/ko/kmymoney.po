@@ -18018,10 +18018,9 @@ msgid "Store GPG encrypted"
 msgstr "암호화된 GPG 저장"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:174
-#, fuzzy, kde-format
-#| msgid "Unable to open file '%1' for writing"
+#, kde-format
 msgid "Unable to open file '%1' for writing."
-msgstr "파일 '%1'에 쓰려고 열 수 없음"
+msgstr "파일 '%1'에 쓰려고 열 수 없습니다."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:275
 #, kde-format
