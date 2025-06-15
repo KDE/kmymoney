@@ -1,15 +1,15 @@
 Date,Num,Payee,Tags,Category,Amount,Balance
 "Account (GBP)"
-"2020-01-01","","Opening Balance","","","","GBP 0.00"
-"2020-04-05","","[Empty Payee]","[No Tag]","Transfer from Opening Balances (GBP)","GBP 100.00","GBP 100.00"
-"2020-06-27","","Amazon","[No Tag]","Clothes","GBP -50.00","GBP 50.00"
-"2020-12-31","","Closing Balance","","","","GBP 50.00"
-Total Account (GBP),,,,,"GBP 50.00",
+"2020-01-01","","Opening Balance","","","","£ 0.00"
+"2020-04-05","","[Empty Payee]","[No Tag]","Transfer from Opening Balances (GBP)","£ 100.00","£ 100.00"
+"2020-06-27","","Amazon","[No Tag]","Clothes","£ -50.00","£ 50.00"
+"2020-12-31","","Closing Balance","","","","£ 50.00"
+Total Account (GBP),,,,,"£ 50.00",
 "Account (USD)"
-"2020-01-01","","Opening Balance","","","","USD 0.00"
-"2020-01-01","","[Empty Payee]","[No Tag]","Transfer from Opening Balances","USD 100.00","USD 100.00"
-"2020-06-27","","Amazon","[No Tag]","Books","USD -50.00","USD 50.00"
-"2020-12-31","","Closing Balance","","","","USD 50.00"
-Total Account (USD),,,,,"USD 50.00",
-Grand Total,,,,,"GBP 50.00",
-,,,,"USD 50.00",
+"2020-01-01","","Opening Balance","","","","$ 0.00"
+"2020-01-01","","[Empty Payee]","[No Tag]","Transfer from Opening Balances","$ 100.00","$ 100.00"
+"2020-06-27","","Amazon","[No Tag]","Books","$ -50.00","$ 50.00"
+"2020-12-31","","Closing Balance","","","","$ 50.00"
+Total Account (USD),,,,,"$ 50.00",
+Grand Total,,,,,"£ 50.00",
+,,,,"$ 50.00",

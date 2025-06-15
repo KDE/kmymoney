@@ -1,4 +1,4 @@
 Type,Name,Num,Description,Opening Date,Currency,Payee,Loan Amount,Interest Rate,Next Interest Change,Periodic Payment,Final Payment,Preferred
 "Liability"
 "Accounts with no institution assigned"
-"Loan","loan","","","2024-01-01","Euro","","EUR 1,000.00","2.00 %","","EUR 84.24","EUR 84.09",""
+"Loan","loan","","","2024-01-01","Euro",""," 1,000.00","2.00 %",""," 84.24"," 84.09",""
