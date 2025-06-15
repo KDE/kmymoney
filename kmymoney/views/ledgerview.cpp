@@ -847,71 +847,103 @@ bool LedgerView::viewportEvent(QEvent* event)
         const auto col = columnAt(helpEvent->x());
         const auto row = rowAt(helpEvent->y());
         const auto idx = model()->index(row, col);
+        const auto entryType = idx.data(eMyMoney::Model::BaseModelRole).value<eMyMoney::Model::Roles>();
 
-        if (col == JournalModel::Column::Detail) {
-            bool preventLineBreak(false);
-            int iconIndex = d->iconClickIndex(idx, helpEvent->pos());
+        switch (entryType) {
+        case eMyMoney::Model::JournalEntryRole:
+        case eMyMoney::Model::SchedulesJournalEntryRole:
+            if (col == JournalModel::Column::Detail) {
+                bool preventLineBreak(false);
+                int iconIndex = d->iconClickIndex(idx, helpEvent->pos());
 
-            QVector<QString> tooltips(JournalDelegate::maxIcons());
-            if (iconIndex != -1) {
-                int iconCount(0);
-                if (idx.data(eMyMoney::Model::TransactionErroneousRole).toBool()) {
-                    if (idx.data(eMyMoney::Model::Roles::TransactionSplitCountRole).toInt() < 2) {
-                        tooltips[iconCount] = i18nc("@info:tooltip icon description", "Transaction is missing a category assignment.");
-                    } else {
-                        const auto acc = MyMoneyFile::instance()->account(d->accountId);
-                        const auto sec = MyMoneyFile::instance()->security(acc.currencyId());
-                        // don't allow line break between amount and currency symbol
+                QVector<QString> tooltips(JournalDelegate::maxIcons());
+                if (iconIndex != -1) {
+                    int iconCount(0);
+                    if (idx.data(eMyMoney::Model::TransactionErroneousRole).toBool()) {
+                        if (idx.data(eMyMoney::Model::Roles::TransactionSplitCountRole).toInt() < 2) {
+                            tooltips[iconCount] = i18nc("@info:tooltip icon description", "Transaction is missing a category assignment.");
+                        } else {
+                            const auto acc = MyMoneyFile::instance()->account(d->accountId);
+                            const auto sec = MyMoneyFile::instance()->security(acc.currencyId());
+                            // don't allow line break between amount and currency symbol
+                            tooltips[iconCount] =
+                                i18nc("@info:tooltip icon description",
+                                      "The transaction has a missing assignment of <b>%1</b>.",
+                                      MyMoneyUtils::formatMoney(idx.data(eMyMoney::Model::TransactionSplitSumRole).value<MyMoneyMoney>().abs(), acc, sec));
+                        }
+                        preventLineBreak = true;
+                        ++iconCount;
+
+                    } else if (idx.data(eMyMoney::Model::ScheduleIsOverdueRole).toBool()) {
+                        const auto overdueSince = MyMoneyUtils::formatDate(idx.data(eMyMoney::Model::ScheduleIsOverdueSinceRole).toDate());
                         tooltips[iconCount] =
-                            i18nc("@info:tooltip icon description",
-                                  "The transaction has a missing assignment of <b>%1</b>.",
-                                  MyMoneyUtils::formatMoney(idx.data(eMyMoney::Model::TransactionSplitSumRole).value<MyMoneyMoney>().abs(), acc, sec));
+                            i18nc("@info:tooltip icon description, param is date", "This schedule is overdue since %1. Click on the icon to enter it.")
+                                .arg(overdueSince);
+                        ++iconCount;
                     }
-                    preventLineBreak = true;
-                    ++iconCount;
 
-                } else if (idx.data(eMyMoney::Model::ScheduleIsOverdueRole).toBool()) {
-                    const auto overdueSince = MyMoneyUtils::formatDate(idx.data(eMyMoney::Model::ScheduleIsOverdueSinceRole).toDate());
-                    tooltips[iconCount] =
-                        i18nc("@info:tooltip icon description, param is date", "This schedule is overdue since %1. Click on the icon to enter it.")
-                            .arg(overdueSince);
-                    ++iconCount;
+                    if (idx.data(eMyMoney::Model::TransactionIsImportedRole).toBool()) {
+                        tooltips[iconCount] = i18nc("@info:tooltip icon description", "This transaction is imported. Click on the icon to accept it.");
+                        ++iconCount;
+                    }
+
+                    if (idx.data(eMyMoney::Model::JournalSplitIsMatchedRole).toBool()) {
+                        tooltips[iconCount] =
+                            i18nc("@info:tooltip icon description", "This transaction is matched. Click on the icon to accept or un-match it.");
+                        ++iconCount;
+                    }
+
+                } else if (!LedgerViewSettings::instance()->showAllSplits()) {
+                    tooltips[0] = d->createSplitTooltip(idx);
+                    iconIndex = 0;
                 }
 
-                if (idx.data(eMyMoney::Model::TransactionIsImportedRole).toBool()) {
-                    tooltips[iconCount] = i18nc("@info:tooltip icon description", "This transaction is imported. Click on the icon to accept it.");
-                    ++iconCount;
+                if ((iconIndex != -1) && !tooltips[iconIndex].isEmpty()) {
+                    auto text = tooltips[iconIndex];
+                    if (preventLineBreak) {
+                        text = QString("<p style='white-space:pre'>%1</p>").arg(text);
+                    }
+                    QToolTip::showText(helpEvent->globalPos(), tooltips[iconIndex]);
+                    return true;
                 }
 
-                if (idx.data(eMyMoney::Model::JournalSplitIsMatchedRole).toBool()) {
-                    tooltips[iconCount] = i18nc("@info:tooltip icon description", "This transaction is matched. Click on the icon to accept or un-match it.");
-                    ++iconCount;
+            } else if ((col == JournalModel::Column::Payment) || (col == JournalModel::Column::Deposit)) {
+                if (!LedgerViewSettings::instance()->showAllSplits()) {
+                    if (!idx.data(Qt::DisplayRole).toString().isEmpty()) {
+                        auto tip = d->createSplitTooltip(idx);
+                        if (!tip.isEmpty()) {
+                            QToolTip::showText(helpEvent->globalPos(), tip);
+                            return true;
+                        }
+                    }
                 }
-
-            } else if (!LedgerViewSettings::instance()->showAllSplits()) {
-                tooltips[0] = d->createSplitTooltip(idx);
-                iconIndex = 0;
             }
+            break;
 
-            if ((iconIndex != -1) && !tooltips[iconIndex].isEmpty()) {
-                auto text = tooltips[iconIndex];
-                if (preventLineBreak) {
-                    text = QString("<p style='white-space:pre'>%1</p>").arg(text);
-                }
-                QToolTip::showText(helpEvent->globalPos(), tooltips[iconIndex]);
-                return true;
-            }
+        case eMyMoney::Model::OnlineBalanceEntryRole: {
+            const auto onlineBalanceDate = idx.data(eMyMoney::Model::AccountOnlineBalanceDateRole).toDate();
+            if (onlineBalanceDate.isValid()) {
+                const auto onlineBalanceValue = idx.data(eMyMoney::Model::AccountOnlineBalanceValueRole).value<MyMoneyMoney>();
+                const auto accountId(idx.data(eMyMoney::Model::IdRole).toString());
+                if (!accountId.isEmpty()) {
+                    const auto accountBalance(MyMoneyFile::instance()->balance(accountId, onlineBalanceDate));
+                    const auto difference = (accountBalance - onlineBalanceValue).abs();
+                    if (!difference.isZero()) {
+                        const auto account = MyMoneyFile::instance()->account(accountId);
+                        const auto security = MyMoneyFile::instance()->security(account.currencyId());
+                        const auto prec = MyMoneyMoney::denomToPrec(account.fraction());
 
-        } else if ((col == JournalModel::Column::Payment) || (col == JournalModel::Column::Deposit)) {
-            if (!LedgerViewSettings::instance()->showAllSplits()) {
-                if (!idx.data(Qt::DisplayRole).toString().isEmpty()) {
-                    auto tip = d->createSplitTooltip(idx);
-                    if (!tip.isEmpty()) {
-                        QToolTip::showText(helpEvent->globalPos(), tip);
+                        QToolTip::showText(helpEvent->globalPos(),
+                                           i18nc("@info:tooltip", "The difference between the account balance and the online balance is %1.")
+                                               .arg(difference.formatMoney(security.tradingSymbol(), prec)));
                         return true;
                     }
                 }
             }
+        } break;
+
+        default:
+            break;
         }
 
         QToolTip::hideText();
