@@ -55,11 +55,11 @@ target_link_libraries(kbanking
                       Alkimia::alkimia
                       gwenhywfar::core
                       gwenhywfar::gui-cpp
-                      gwenhywfar::gui-qt5
+                      gwenhywfar::gui-qt${QT_MAJOR_VERSION}
                       aqbanking::aqbanking
 )
 
 ########### install files ###############
 
 install(FILES kbanking.kcfg
-        DESTINATION ${KCFG_INSTALL_DIR})
+        DESTINATION ${KDE_INSTALL_KCFGDIR})

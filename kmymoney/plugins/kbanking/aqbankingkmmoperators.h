@@ -14,7 +14,6 @@
 
 #include <QSharedPointer>
 
-#include "onlinetasks/interfaces/tasks/ionlinetasksettings.h"
 #include "onlinetasks/sepa/sepaonlinetransfer.h"
 
 struct AB_ACCOUNT_SPEC;
