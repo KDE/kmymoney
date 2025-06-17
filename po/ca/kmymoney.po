@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-16 01:58+0000\n"
-"PO-Revision-Date: 2025-06-01 11:42+0200\n"
+"PO-Revision-Date: 2025-06-16 13:10+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -21134,7 +21134,7 @@ msgstr ""
 msgctxt "@info:tooltip"
 msgid ""
 "The difference between the account balance and the online balance is %1."
-msgstr ""
+msgstr "La diferència entre el saldo del compte i el saldo en línia és %1."
 
 #: kmymoney/views/ledgerview.cpp:997
 #, kde-format
