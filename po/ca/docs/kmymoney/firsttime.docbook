@@ -87,7 +87,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="home_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="home_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Vista principal</phrase
@@ -102,7 +102,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="institutions_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="institutions_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Vista d'institucions</phrase
@@ -117,7 +117,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="accounts_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="accounts_view.png" format="PNG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Vista dels comptes</phrase
@@ -132,7 +132,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="schedule_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="schedule_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Vista de les planificacions</phrase
@@ -147,7 +147,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="categories_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="categories_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Vista de les categories</phrase
@@ -162,7 +162,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="mail-tagged.png" format="PNG"/> </imageobject
+> <imagedata fileref="mail_tagged.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Vista de les etiquetes</phrase
@@ -177,7 +177,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="payees_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="payees_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Vista dels beneficiaris</phrase
@@ -192,7 +192,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="ledgers_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="ledgers_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Vista dels llibres majors</phrase
@@ -207,7 +207,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="investments_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="investments_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Vista d'inversions</phrase
@@ -222,7 +222,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="reports_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="reports_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Vista dels informes</phrase
@@ -237,7 +237,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="budgets_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="budgets_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Vista dels pressupostos</phrase
@@ -252,7 +252,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="forecast_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="forecast_view_icon.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Vista de la previsió</phrase
@@ -267,7 +267,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="outbox_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="outbox_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Vista de la safata de sortida</phrase
@@ -586,7 +586,7 @@
 >, feu clic a la icona Etiquetes <guiicon
 ><inlinemediaobject
 ><imageobject
-><imagedata fileref="mail-tagged.png" format="PNG"/> </imageobject
+><imagedata fileref="mail_tagged.svg" format="SVG" depth="2em"/> </imageobject
 ></inlinemediaobject
 ></guiicon
 > al selector de vistes. </para>
