@@ -87,7 +87,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="home_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="home_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Thuisweergave</phrase
@@ -102,7 +102,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="institutions_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="institutions_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Bankenoverzicht</phrase
@@ -117,7 +117,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="accounts_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="accounts_view.png" format="PNG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Rekeningoverzicht</phrase
@@ -132,7 +132,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="schedule_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="schedule_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Periodieke transacties</phrase
@@ -147,7 +147,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="categories_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="categories_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Beeld van categorieën</phrase
@@ -162,7 +162,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="mail-tagged.png" format="PNG"/> </imageobject
+> <imagedata fileref="mail_tagged.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Tagsweergave</phrase
@@ -177,7 +177,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="payees_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="payees_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Relatiesweergave</phrase
@@ -192,7 +192,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="ledgers_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="ledgers_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Beeld van Grootboek</phrase
@@ -207,7 +207,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="investments_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="investments_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Investeringenoverzicht</phrase
@@ -222,7 +222,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="reports_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="reports_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Rapporten overzicht</phrase
@@ -237,7 +237,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="budgets_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="budgets_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Budget overzicht</phrase
@@ -252,7 +252,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="forecast_view_icon.png" format="PNG"/> </imageobject
+> <imagedata fileref="forecast_view_icon.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Prognoseweergave</phrase
@@ -267,7 +267,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="outbox_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="outbox_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Postvak uit weergave</phrase
@@ -590,7 +590,7 @@
 > klikt u op het pictogram voor tags <guiicon
 ><inlinemediaobject
 ><imageobject
-><imagedata fileref="mail-tagged.png" format="PNG"/></imageobject
+><imagedata fileref="mail-tagged.svg" format="SVG" depth="2em"/></imageobject
 ></inlinemediaobject
 ></guiicon
 > in de weergaveselectie. </para>
