@@ -760,6 +760,7 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     connect(d->ui->accountNameEdit, &QLineEdit::textChanged, this, [&]() {
         Q_D(KNewAccountDlg);
         d->changeHierarchyLabel();
+        slotCheckFinished();
     });
 
     connect(d->ui->m_urlEdit, &QLineEdit::textChanged, this, [&]() {
@@ -1061,15 +1062,14 @@ void KNewAccountDlg::slotCheckFinished()
     WidgetHintFrame::hide(d->ui->m_vatRate);
     WidgetHintFrame::hide(d->ui->m_vatAccount);
 
-    const QString emptyAccountName(MyMoneyAccount::accountSeparator() + MyMoneyAccount::accountSeparator());
     if (d->ui->accountNameEdit->text().isEmpty()) {
         WidgetHintFrame::show(d->ui->accountNameEdit, i18nc("@info:tooltip Hint to provide name", "Please provide a name for the new category or account."));
 
-    } else if (d->ui->accountNameEdit->text().contains(emptyAccountName)) {
+    } else if (d->ui->accountNameEdit->text().contains(MyMoneyAccount::accountSeparator())) {
         WidgetHintFrame::show(
             d->ui->accountNameEdit,
             i18nc("@info:tooltip %1 contains invalid character combination", "You cannot create an account or category that contains %1 in the name.")
-                .arg(emptyAccountName));
+                .arg(MyMoneyAccount::accountSeparator()));
     }
 
     if (d->ui->m_vatCategory->isChecked() && ((d->ui->m_vatRate->value() <= MyMoneyMoney()) || (d->ui->m_vatRate->value() >= MyMoneyMoney(100)))) {

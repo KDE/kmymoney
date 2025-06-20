@@ -45,6 +45,7 @@
 #include "mymoneymoney.h"
 #include "mymoneyprice.h"
 #include "mymoneysecurity.h"
+#include "widgethintframe.h"
 #include "wizardpage.h"
 
 using namespace eMyMoney;
@@ -95,6 +96,18 @@ AccountTypePage::AccountTypePage(Wizard* wizard) :
     connect(d->ui->m_conversionRate, &AmountEdit::textChanged, this, &AccountTypePage::slotUpdateConversionRate);
     connect(d->ui->m_conversionRate, &AmountEdit::amountChanged, this, &AccountTypePage::slotPriceWarning);
     connect(d->ui->m_onlineQuote, &QAbstractButton::clicked, this, &AccountTypePage::slotGetOnlineQuote);
+
+    connect(d->ui->m_accountName, &KLineEdit::textChanged, this, [&](const QString& txt) {
+        Q_D(AccountTypePage);
+        const bool invalidAccountName = txt.contains(MyMoneyAccount::accountSeparator());
+        d->m_mandatoryGroup->setExternalMandatoryState(!invalidAccountName);
+        if (invalidAccountName) {
+            WidgetHintFrame::show(
+                d->ui->m_accountName,
+                i18nc("@info:tooltip %1 contains invalid character combination", "You cannot create an account or category that contains %1 in the name.")
+                    .arg(MyMoneyAccount::accountSeparator()));
+        }
+    });
 }
 
 AccountTypePage::~AccountTypePage()
