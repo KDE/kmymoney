@@ -40,7 +40,6 @@
 #include "kmymoneymvccombo.h"
 #include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
-#include "knewaccountdlg.h"
 #include "knewinvestmentwizard.h"
 #include "menuenums.h"
 #include "mymoneyaccount.h"

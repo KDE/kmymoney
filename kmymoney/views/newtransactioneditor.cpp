@@ -37,7 +37,6 @@
 #include "kmmyesno.h"
 #include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
-#include "knewaccountdlg.h"
 #include "ktransactionselectdlg.h"
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"

@@ -34,7 +34,6 @@
 #include "idfilter.h"
 #include "journalmodel.h"
 #include "kmymoneysettings.h"
-#include "knewaccountdlg.h"
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
