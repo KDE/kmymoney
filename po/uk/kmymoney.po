@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-11 03:42+0000\n"
+"POT-Creation-Date: 2025-06-21 03:30+0000\n"
 "PO-Revision-Date: 2025-05-25 21:25+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -2139,7 +2139,7 @@ msgstr "Рахунок ПДВ"
 #: kmymoney/dialogs/knewaccountdlg.cpp:550 kmymoney/kmymoney.cpp:441
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:188
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:370
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:73
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:74
 #, kde-format
 msgid "Asset"
 msgstr "Активи"
@@ -2147,7 +2147,7 @@ msgstr "Активи"
 #: kmymoney/dialogs/knewaccountdlg.cpp:552 kmymoney/kmymoney.cpp:442
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:189
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:378
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:75
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:76
 #, kde-format
 msgid "Liability"
 msgstr "Пасиви"
@@ -2204,8 +2204,8 @@ msgstr ""
 "виправлено на https з міркувань безпеки."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:702
-#: kmymoney/dialogs/knewaccountdlg.cpp:989
-#: kmymoney/dialogs/knewaccountdlg.cpp:1004
+#: kmymoney/dialogs/knewaccountdlg.cpp:990
+#: kmymoney/dialogs/knewaccountdlg.cpp:1005
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:515
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:45
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:80
@@ -2213,7 +2213,7 @@ msgstr ""
 msgid "(No Institution)"
 msgstr "(Без установи)"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:823
+#: kmymoney/dialogs/knewaccountdlg.cpp:824
 #, kde-format
 msgid ""
 "You have not specified a name.\n"
@@ -2222,12 +2222,12 @@ msgstr ""
 "Ви не вказали назви.\n"
 "Будь ласка, заповніть це поле."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:830
+#: kmymoney/dialogs/knewaccountdlg.cpp:831
 #, kde-format
 msgid "Please select a parent account."
 msgstr "Будь ласка, виберіть батьківський рахунок."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:879
+#: kmymoney/dialogs/knewaccountdlg.cpp:880
 #, kde-format
 msgid ""
 "A category named <b>%1</b> already exists. You cannot create a second "
@@ -2236,7 +2236,7 @@ msgstr ""
 "Категорія з назвою <b>%1</b> вже існує. Створювати категорії з існуючими "
 "назвами заборонено."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:910
+#: kmymoney/dialogs/knewaccountdlg.cpp:911
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2250,13 +2250,13 @@ msgstr ""
 "показано, лише якщо у ній будуть записи. У іншому випадку ви не побачите "
 "цього запису на усіх панелях перегляду рахунків."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:912
+#: kmymoney/dialogs/knewaccountdlg.cpp:913
 #, kde-format
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
 msgstr "Приховані рахунки"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:920
+#: kmymoney/dialogs/knewaccountdlg.cpp:921
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2270,13 +2270,13 @@ msgstr ""
 "будуть записи. У іншому випадку ви не побачите цієї категорії у перегляді "
 "рахунків/категорій."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:922
+#: kmymoney/dialogs/knewaccountdlg.cpp:923
 #, kde-format
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "Приховані категорії"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1029
+#: kmymoney/dialogs/knewaccountdlg.cpp:1030
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
 #, kde-format
 msgid "Cannot add institution"
@@ -2289,6 +2289,7 @@ msgid "Please provide a name for the new category or account."
 msgstr "Будь ласка, вкажіть назву нової категорії або рахунку."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1071
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:107
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
@@ -4790,7 +4791,7 @@ msgstr "Імпортування/Експортування CSV"
 #: kmymoney/kmymoney.cpp:445 kmymoney/models/equitiesmodel.cpp:424
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:192
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:408
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:78
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:79
 #, kde-format
 msgid "Equity"
 msgstr "Маржа"
@@ -22714,7 +22715,7 @@ msgid "Subaccount of %1"
 msgstr "Підлеглий рахунок %1"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:108
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:69
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:70
 #, kde-format
 msgid "Loan"
 msgstr "Кредит"
@@ -22903,32 +22904,32 @@ msgstr ""
 "<b>Завершити</b>, щоб програма створила рахунок, розклади тощо, або "
 "натисніть кнопку <b>Назад</b>, щоб змінити введені вами дані."
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:61
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:62
 #, kde-format
 msgid "Checking"
 msgstr "Чековий"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:63
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:64
 #, kde-format
 msgid "Savings"
 msgstr "Ощадний"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:65
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:66
 #, kde-format
 msgid "Credit Card"
 msgstr "Кредитна картка"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:67
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:68
 #, kde-format
 msgid "Cash"
 msgstr "Готівка"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:71
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:72
 #, kde-format
 msgid "Investment"
 msgstr "Інвестиція"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:194
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:207
 #, kde-format
 msgid ""
 "Please make sure to enter the correct conversion for the selected opening "
@@ -22939,22 +22940,22 @@ msgstr ""
 "відкриття. Якщо ви надішлете запит на інтерактивний курс, його може бути "
 "надано для зовсім іншої дати."
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:194
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:207
 #, kde-format
 msgid "Check date"
 msgstr "Дата чека"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:202
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:215
 #, kde-format
 msgid "1 %1 equals %2"
 msgstr "1 %1 дорівнює %2"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:211
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:224
 #, kde-format
 msgid "Conversion rate is not positive"
 msgstr "Коефіцієнт перетворення не є додатним"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:217
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:230
 #, kde-format
 msgid "No account name supplied"
 msgstr "Не вказано назви рахунку"

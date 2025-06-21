@@ -4,72 +4,68 @@
   <authorgroup>
     <author
 >&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->30/08/2014</date>
+>1/12/2024</date>
   <releaseinfo
->4.7.01</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Formati dei file</title>
 
 <para
 >A meno che non si scelga una <link linkend="details.database"
 >base dati relazionale</link
->, &kmymoney; salverà tutte le proprie informazioni finanziarie in un file con estensione <filename class="extension"
+>, &kmymoney; salverà tutte le proprie informazioni finanziarie in un file. Più comunemente, il nome del file terminerà con <filename class="extension"
 >.kmy</filename
->. Inoltre, a meno che non si usi un' <link linkend="firsttime.launch"
->opzione da riga di comando</link
-> che specifica diversamente, quando si lancia &kmymoney; sarà riaperto l'ultimo file aperto. È importante sapere che esiste più di un tipo di file in cui &kmymoney; può memorizzare i dati finanziari. </para>
+>. Inoltre, quando si avvia &kmymoney;, a meno che si non utilizzi un'<link linkend="firsttime.launch">
+opzione della riga di comando</link
+> che gli dica di non farlo, aprirà l'ultimo file che aveva aperto. Tuttavia, è importante sapere che in realtà c'è più di un tipo di file che &kmymoney; può usare per contenere i propri dati finanziari. </para>
 
 <para
->Questo capitolo descrive i formati in cui &kmymoney; memorizza i dati in modo permanente sul dispositivo di archiviazione dell'utente. In generale, &kmymoney; salva le informazioni come documento &XML;. In base al formato effettivo, questo documento &XML; può essere salvato come: <itemizedlist>
-  <listitem
-><para
-><link linkend="details.formats.plain"
->file di testo semplice</link
->, con codifica UTF-8, o</para
-></listitem>
+>Questo capitolo descrive i formati di file in cui &kmymoney; può memorizzare i suoi dati in forma permanente. Discute anche del backup dei tuoi dati. </para>
 
-  <listitem
+<sect1
+><title
+>Formati dei file di dati</title>
+<para
+>In generale, &kmymoney; memorizza le sue informazioni sotto forma di documento &XML;. A seconda del formato effettivo, impostato nella configurazione di &kmymoney;, questo documento &XML; sarà scritto: <itemizedlist
+> <listitem
 ><para
-><link linkend="details.formats.compressed"
->file compresso</link
-> con GZIP, o</para
-></listitem>
-
-  <listitem
+>come file di testo normale, codificato in UTF-8,</para
+></listitem
+> <listitem
 ><para
-><link linkend="details.formats.encrypted"
->file cifrato</link
-> con la cifratura GPG, o</para
-></listitem>
-
-  <listitem
+>come file compresso, usando la compressione GZIP,</para
+></listitem
+> <listitem
 ><para
-><link linkend="details.formats.anonymous"
->file di testo semplice anonimo</link
-> codificato in UTF-8 senza dati personali.</para
-></listitem>
-</itemizedlist>
-</para>
+>come file cifrato, usando la crittografia GPG, oppure</para
+></listitem
+> <listitem
+> <para
+>come file di testo normale anonimo, codificato in UTF-8, ma con tutti i tuoi dati personali cifrati. </para
+> </listitem
+> </itemizedlist
+> Ognuno di questi è descritto più dettagliatamente nelle sezioni seguenti. </para>
 
-<sect1 id="details.formats.plain">
-<title
+<sect2 id="details.formats.plain"
+><title
 >File di testo semplice</title>
 <para
 >Questo è il formato supportato che occupa più spazio su disco, perché non viene applicata alcuna compressione. Non è pensato per essere usato normalmente, ma per scopi di debug e per la possibilità di modificare manualmente il file. Se il nome del file ha estensione <filename class="extension"
 >.xml</filename
-> sarà salvato in questo formato. <caution
+> sarà salvato in questo formato. <note
 > <para
->La modifica manuale del file non è raccomandata agli utenti normali, e dovrebbe essere fatta solo se si conosce il funzionamento interno di &kmymoney; o se gli sviluppatori danno istruzioni precise. Non dare la colpa agli sviluppatori di &kmymoney; se perdi dati: sei stato avvisato! </para>
-</caution>
+>La modifica manuale del file non è consigliata all'utente normale e dovrebbe essere eseguita solo se il funzionamento interno di &kmymoney; è pienamente compreso o se le istruzioni degli sviluppatori ti dicono cosa fare. Non dare la colpa agli sviluppatori di &kmymoney; se danneggi o distruggi i tuoi dati: sei stato avvisato! </para>
+</note>
 </para>
-</sect1>
+</sect2>
 
-<sect1 id="details.formats.compressed">
-<title
+<sect2 id="details.formats.compressed"
+><title
 >File compresso con GZIP</title>
 <para
 >Questo è il formato usato solitamente da &kmymoney; quando si salva un file con l'estensione <filename class="extension"
@@ -80,7 +76,7 @@
   <para
 >Se è stata selezionata la <link linkend="details.formats.encrypted"
 >cifratura</link
->, il file sarà memorizzato con cifratura. </para>
+>nella configurazione, il file sarà archiviato con cifratura, come descritto nella sezione successiva. </para>
 </note>
 
 <para
@@ -97,22 +93,22 @@
 >.xml</filename
 ></link
 > per scriverlo in formato non compresso. </para>
-</sect1>
+</sect2>
 
-<sect1 id="details.formats.encrypted">
-<title
+<sect2 id="details.formats.encrypted"
+><title
 >File cifrato con GPG</title>
 <para
 >L'uso del formato cifrato con GPG è un modo molto sicuro di archiviare i propri dati finanziari sui dispositivi di memorizzazione. Una volta impostato &kmymoney; per la memorizzazione cifrata dei dati nella finestra di configurazione, cifrerà i dati prima di memorizzarli, utilizzando GPG e la chiave fornita. Quando si apre un file cifrato, si deve inserire la password necessaria per aprire il portachiavi. Il file cifrato sarà memorizzato nel formato <emphasis
 >&ASCII; con cifratura corazzata</emphasis
 > di GPG. <note
 > <para
->Quando si usa la cifratura GPG il file viene anche compresso da GPG, quindi non è necessaria una compressione aggiuntiva. </para>
+>Quando si utilizza la cifratura GPG, GPG comprime anche il file tramite gzip, quindi non è necessaria alcuna compressione aggiuntiva. </para>
   </note>
 </para>
 
-<sect2 id="details.formats.encrypted.gpgkeys">
-<title
+<sect3 id="details.formats.encrypted.gpgkeys"
+><title
 >Chiavi GPG</title>
 <para
 >Se non l'hai già fatto per la cifratura dei messaggi email, devi generare una coppia di chiavi prima di usare la funzione di cifratura GPG presente in &kmymoney;. È necessario anche avere installato il programma <application
@@ -120,40 +116,54 @@
 > </para>
 
 <para
->Questo documento non ha come obiettivo la spiegazione dei dettagli su come generare e generare una coppia di chiavi. Si può trovare una piccola guida passo passo per questo argomento all'indirizzo <ulink url="https://www.gnupg.org/documentation/howtos.it.html"
->https://www.gnupg.org/documentation/howtos.it.html</ulink
->. </para>
-</sect2>
+>I dettagli su come generare una coppia di chiavi e come prendersene cura vanno oltre lo scopo di questo documento. Un Mini Howto su questo argomento può essere trovato su <ulink url="https://www.gnupg.org/documentation/howtos.en.html">
+https://www.gnupg.org/documentation/howtos.en.html</ulink
+>. I siti web della maggior parte delle distribuzioni &Linux; contengono anche istruzioni sull'uso di GPG in quella distribuzione. </para>
+</sect3>
 
-<sect2 id="details.formats.encrypted.keysettings">
-<title
+<sect3 id="details.formats.encrypted.keysettings"
+><title
 >Impostazione delle chiavi in &kmymoney;</title>
 <para
->Nella pagina Cifratura della finestra delle impostazioni, c'è un menu a discesa in cui si può selezionare la chiave da usare per la cifratura e la decifratura. Inoltre, c'è un campo in cui si può inserire l'id di una chiave non presente nel menu a discesa. Si può inserire in questo campo l'id della chiave, l'indirizzo email associato alla chiave o qualsiasi altra identificazione valida di una chiave GPG. Quando si inserisce l'id, &kmymoney; controllerà la sua validità e visualizzerà un semaforo verde nella finestra se viene trovata una chiave. <caution
+>Nella pagina Cifratura della finestra delle impostazioni, c'è un menu a tendina in cui si può selezionare la chiave da usare per la cifratura e la decifratura. Inoltre, c'è un campo in cui si può inserire l'id di una chiave non presente nel menu a tendina. È possibile utilizzare il campo l'id della chiave, l'indirizzo di posta associato alla chiave o qualsiasi altra identificazione valida di una chiave GPG. Quando si inserisce l'id, &kmymoney; controllerà la sua validità e visualizzerà un LED verde nella finestra se viene trovata una chiave. <caution
 > <para
 >Assicurarsi di avere sia la chiave pubblica sia quella privata per questo id. Se non si possiede la chiave privata, non si sarà più in grado di aprire il file, una volta salvato. </para>
   </caution>
 </para>
-</sect2>
+</sect3>
 
-<sect2 id="details.formats.encrypted.recoverkey">
-<title
+<sect3 id="details.formats.encrypted.recoverkey"
+><title
 >La chiave di ripristino di &kmymoney;</title>
 <para
 >In questa pagina di impostazioni è possibile anche selezionare una cifratura supplementare con la chiave di ripristino di &kmymoney;. Questa opzione è disponibile se la chiave è memorizzata nel portachiavi di <application
 >GPG</application
->. Selezionando questa opzione, sarà possibile ripristinare i dati anche se si perde la chiave privata. Questo è possibile perché i dati non vengono cifrati solo con la propria chiave, ma anche con quella di ripristino di &kmymoney;. Questa chiave è disponibile solo ad alcuni sviluppatori di &kmymoney; (al momento della scrittura di questo manuale, solo l'autore). Dal rilascio della versione 4.7 di &kmymoney;, la chiave è stata impostata per scadere il 3 gennaio 2015. </para>
+>. Selezionando questa opzione, sarà possibile ripristinare i dati anche se si perde la chiave privata. Questo è possibile perché i dati non vengono cifrati solo con la propria chiave, ma anche con quella di ripristino di &kmymoney;. Questa chiave è disponibile solo ad alcuni sviluppatori di &kmymoney; (al momento della scrittura di questo manuale, solo l'autore). A partire da maggio 2024, la chiave di ripristino scadrà il 7 gennaio 2025. </para>
 
 <para
 >Nelle normali circostanze, si può aprire, salvare e chiudere il file come al solito. In caso di perdita della chiave, si può contattare uno degli sviluppatori che possiede la chiave di ripristino di &kmymoney; e chiedere aiuto per il ripristino dei dati. È possibile contattare gli sviluppatori tramite email scrivendo alla lista di distribuzione degli sviluppatori di &kmymoney;: &devlist;. </para>
-</sect2>
-</sect1>
 
-<sect1 id="details.formats.anonymous">
-<title
+<para
+>Per ottenere la chiave di ripristino, andare alla pagina <ulink url="https://kmymoney.org/recovery.html"
+> La chiave di ripristino di KMyMoney</ulink
+> del sito web &kmymoney;. Copiare e salvare il <quote
+>PGP PUBLIC KEY BLOCK</quote
+> (incluse le righe <quote
+>BEGIN</quote
+> e <quote
+>END</quote
+>) in un file di testo e quindi importalo con gpg. </para>
+
+<para
+>Ricorda che lo sviluppatore può aiutarti a recuperare il tuo file di dati solo se lo cifri effettivamente con la chiave di recupero, oltre alla tua chiave. </para>
+</sect3>
+</sect2>
+
+<sect2 id="details.formats.anonymous"
+><title
 >File anonimo</title>
 <para
->Questo formato non è pensato per la normale archiviazione dei dati. È supportato solo perché, in caso di problemi, puoi fornire alla squadra di sviluppo di &kmymoney; il tuo file, senza svelare i dettagli confidenziali presenti nei tuoi dati finanziari. Ad esempio, i nomi degli istituti, dei beneficiari e dei conti sono sostituiti da stringhe come «I000001» e «A000001». Vengono apportate modifiche simili a tutti i dati, come i numeri dei conti, e modificati in modo casuale gli importi delle transazioni. </para>
+>Questo formato non è pensato per la normale archiviazione dei dati. È supportato solo perché, in caso di problemi, puoi fornire alla squadra di sviluppo di &kmymoney; il tuo file, senza svelare i dettagli confidenziali presenti nei tuoi dati finanziari. Ad esempio, i nomi degli istituti, dei beneficiari, dei conti e delle categorie sono sostituiti da stringhe come «I000001» e «A000001». Vengono apportate modifiche simili a tutti i dati, come i numeri dei conti, e modificati in modo casuale gli importi delle transazioni. </para>
 
 <para
 >Se gli sviluppatori indicano di farlo, usare la voce di menu <guimenuitem
@@ -166,6 +176,103 @@
 
 <para
 >Per verificare che il problema persiste, ricarica questo file reso anonimo e prova a replicare il problema. Se il problema rimane, invia il file alla mailing list degli sviluppatori: &devlist;, in modo che venga analizzato. Se il problema non si ripresenta... beh, adesso non ho voglia di pensare a questo caso . </para>
+</sect2>
+
+<sect2
+><title
+>Posizioni dei file di dati</title>
+<para
+>Tutti i tipi di file sopra indicati possono essere archiviati su un disco rigido locale, un dispositivo rimovibile come una chiavetta USB o una posizione di rete. A seconda del sistema operativo, potrebbe essere necessario mappare o montare una posizione remota prima dell'uso. </para>
+
+<note
+><title
+>Limitazione su Windows</title>
+  <para
+>In &Windows;, per utilizzare una posizione di rete o di file remoto, la posizione mappata deve essere associata a una lettera di unità. </para>
+</note>
+
+</sect2>
+</sect1>
+
+<sect1 id="details.formats.backup"
+><title
+>Copia di sicurezza</title>
+<para
+>Non cercheremo qui di convincerti che fare copie di sicurezza dei tuoi dati sia un'idea estremamente buona; speriamo che tu ne sia già convinto. Questa sezione descrive tre modi per farlo, e puoi usarne uno qualsiasi, due o anche tutti e tre. Nota che questo riguarda il backup di un file di dati; se usi un motore SQL per archiviare i tuoi dati, consulta la documentazione di quel sistema di banca dati per istruzioni su come effettuare le copie di sicurezza. </para>
+
+<sect2
+><title
+>Posizione della copia di sicurezza</title>
+<para
+>Se hai bisogno di una copia di sicurezza dei tuoi dati per confermare un aspetto delle tue finanze in un momento precedente, o per tornare a uno stato precedente, come ad esempio per annullare l'importazione di molti dati nel conto sbagliato, non importa se la copia di sicurezza è locale o archiviata altrove, ad esempio su un'unità di rete collegata. Tuttavia, se hai bisogno di un copia di sicurezza per recuperare dati persi in caso di guasto dell'unità disco, ad esempio, è essenziale che la copia di sicurezza <emphasis
+>non</emphasis
+> sia sulla stessa unità del tuo file di dati primario. In caso di un disastro più grande, come un incendio domestico, avresti bisogno di una copia di sicurezza archiviata in una cassaforte ignifuga o in una posizione fisica diversa. Tieni presente questo quando stabilisci la tua strategia di backup. </para>
+</sect2>
+
+<sect2
+><title
+>Salvataggio automatico</title>
+<para
+>&kmymoney; ha la capacità di salvare automaticamente una copia del proprio file di dati a intervalli regolari. Può farlo anche quando si chiude il programma, se i dati sono cambiati. Questo comportamento può essere configurato nella finestra di configurazione di &kmymoney; <link linkend="details.settings.general.global"
+>, sezione Generale, scheda Globale</link
+>. </para>
+</sect2>
+
+<sect2
+><title
+>Copia file</title>
+<para
+>A meno che tu non stia utilizzando l'archiviazione SQL, i tuoi dati potrebbero essere compressi e cifrati, ma vengono conservati in un file normale. Ogni volta che salvi i tuoi dati con la voce di menu <menuchoice
+><guimenu
+>File</guimenu
+><guimenuitem
+>Salva</guimenuitem
+></menuchoice
+>, tutti i tuoi dati vengono scritti in un file, sostituendo la versione precedente. Il modo più semplice per eseguire la copia di sicurezza dei tuoi dati è creare una copia di quel file. Una singola copia può anche avere lo stesso nome file se si trova in una cartella diversa dal file originale, ma se hai intenzione di conservare più copie, ha senso includere una versione della data e dell'ora attuali in ogni nome file. Puoi salvarli su un'unità di rete, su un dispositivo di archiviazione USB o persino su un dispositivo ottico. Lo svantaggio principale di questo metodo è che devi tenere traccia di tutte le copie di sicurezza, ma fornisce la massima flessibilità. </para>
+</sect2>
+
+<sect2
+><title
+>Comando di backup</title>
+<para
+>Per semplificare un po' le cose, è possibile selezionare la voce di menu <menuchoice
+> <guimenu
+>File</guimenu
+> <guimenuitem
+>Backup</guimenuitem
+> </menuchoice
+>. </para>
+
+<screenshot>
+  <screeninfo
+>file di backup</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="file-backup.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>File di backup</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Quando si fa clic su <guibutton
+>OK</guibutton
+> &kmymoney; creerà una copia del proprio file di dati, con la data (formattata come AAAA-MM-GG) aggiunta al nome. Notare che questo significa che con questo metodo può essere creato solo un copia di sicurezza al giorno. Se è già stata creata una copia di sicurezza lo stesso giorno, &kmymoney; chiederà se si desidera sostituire la copia precedente o annullare. </para>
+
+<para
+>&kmymoney; salverà questo file nella cartella specificata nel campo <guilabel
+>Punto di montaggio</guilabel
+>. Puoi digitare manualmente il percorso completo della cartella o fare clic su <guibutton
+>Scegli...</guibutton
+> e accedervi tramite il browser dei file. La cartella può trovarsi su un dispositivo di archiviazione locale o su una cartella di rete. </para>
+
+<para
+>Se la cartella specificata è in realtà un punto di montaggio per un dispositivo di archiviazione che non è sempre montato, puoi selezionare la casella <guilabel
+>Monta questa cartella prima di effettuare il backup</guilabel
+>. Non utilizzare questa opzione per una condivisione di rete regolare che è sempre montata. </para>
+</sect2>
 </sect1>
 </chapter>
-

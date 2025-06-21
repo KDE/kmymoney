@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-11 03:42+0000\n"
+"POT-Creation-Date: 2025-06-21 03:30+0000\n"
 "PO-Revision-Date: 2024-05-09 17:32+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -2077,7 +2077,7 @@ msgstr "增值稅帳戶"
 #: kmymoney/dialogs/knewaccountdlg.cpp:550 kmymoney/kmymoney.cpp:441
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:188
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:370
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:73
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:74
 #, kde-format
 msgid "Asset"
 msgstr "資產"
@@ -2085,7 +2085,7 @@ msgstr "資產"
 #: kmymoney/dialogs/knewaccountdlg.cpp:552 kmymoney/kmymoney.cpp:442
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:189
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:378
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:75
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:76
 #, kde-format
 msgid "Liability"
 msgstr "負債"
@@ -2139,8 +2139,8 @@ msgid ""
 msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:702
-#: kmymoney/dialogs/knewaccountdlg.cpp:989
-#: kmymoney/dialogs/knewaccountdlg.cpp:1004
+#: kmymoney/dialogs/knewaccountdlg.cpp:990
+#: kmymoney/dialogs/knewaccountdlg.cpp:1005
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:515
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:45
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:80
@@ -2148,7 +2148,7 @@ msgstr ""
 msgid "(No Institution)"
 msgstr "（沒有機構）"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:823
+#: kmymoney/dialogs/knewaccountdlg.cpp:824
 #, kde-format
 msgid ""
 "You have not specified a name.\n"
@@ -2157,19 +2157,19 @@ msgstr ""
 "您並未指定名稱。\n"
 "請填入此欄位。"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:830
+#: kmymoney/dialogs/knewaccountdlg.cpp:831
 #, kde-format
 msgid "Please select a parent account."
 msgstr "請選擇上層帳戶。"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:879
+#: kmymoney/dialogs/knewaccountdlg.cpp:880
 #, kde-format
 msgid ""
 "A category named <b>%1</b> already exists. You cannot create a second "
 "category with the same name."
 msgstr "名為 <b>%1</b> 的類別已存在。您無法建立相同名稱的類別。"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:910
+#: kmymoney/dialogs/knewaccountdlg.cpp:911
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have selected to suppress the display of unused categories in the "
@@ -2186,14 +2186,14 @@ msgstr ""
 "您已選擇不要在 KMyMoney 設定對話框裡顯示未使用的類別。因此您剛才建立的類別不"
 "會馬上顯示出來。它會被藏在帳戶/類別檢視裡。"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:912
+#: kmymoney/dialogs/knewaccountdlg.cpp:913
 #, fuzzy, kde-format
 #| msgid "Hide closed accounts"
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
 msgstr "隱藏已關閉的帳戶"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:920
+#: kmymoney/dialogs/knewaccountdlg.cpp:921
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have selected to suppress the display of unused categories in the "
@@ -2210,14 +2210,14 @@ msgstr ""
 "您已選擇不要在 KMyMoney 設定對話框裡顯示未使用的類別。因此您剛才建立的類別不"
 "會馬上顯示出來。它會被藏在帳戶/類別檢視裡。"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:922
+#: kmymoney/dialogs/knewaccountdlg.cpp:923
 #, fuzzy, kde-format
 #| msgid "Hidden categories"
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "隱藏類別"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1029
+#: kmymoney/dialogs/knewaccountdlg.cpp:1030
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
 #, kde-format
 msgid "Cannot add institution"
@@ -2230,6 +2230,7 @@ msgid "Please provide a name for the new category or account."
 msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1071
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:107
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
@@ -4711,7 +4712,7 @@ msgstr "CSV 匯入器"
 #: kmymoney/kmymoney.cpp:445 kmymoney/models/equitiesmodel.cpp:424
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:192
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:408
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:78
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:79
 #, kde-format
 msgid "Equity"
 msgstr "股票"
@@ -22773,7 +22774,7 @@ msgid "Subaccount of %1"
 msgstr "%1 的子帳戶"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:108
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:69
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:70
 #, kde-format
 msgid "Loan"
 msgstr "借貸"
@@ -22961,32 +22962,32 @@ msgid ""
 "entries."
 msgstr ""
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:61
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:62
 #, kde-format
 msgid "Checking"
 msgstr "支票"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:63
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:64
 #, kde-format
 msgid "Savings"
 msgstr "存款"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:65
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:66
 #, kde-format
 msgid "Credit Card"
 msgstr "信用卡"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:67
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:68
 #, kde-format
 msgid "Cash"
 msgstr "現金"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:71
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:72
 #, kde-format
 msgid "Investment"
 msgstr "投資"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:194
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:207
 #, kde-format
 msgid ""
 "Please make sure to enter the correct conversion for the selected opening "
@@ -22995,22 +22996,22 @@ msgid ""
 msgstr ""
 "請確定您輸入了對開戶日期的正確轉換。若您要求線上報價，它可能會有不同的日期。"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:194
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:207
 #, kde-format
 msgid "Check date"
 msgstr "支票日期"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:202
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:215
 #, kde-format
 msgid "1 %1 equals %2"
 msgstr "1 %1 等於 %2"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:211
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:224
 #, kde-format
 msgid "Conversion rate is not positive"
 msgstr "轉換匯率不是正的"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:217
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:230
 #, kde-format
 msgid "No account name supplied"
 msgstr "沒有提供帳戶名稱"

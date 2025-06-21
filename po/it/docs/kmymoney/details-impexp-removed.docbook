@@ -1,0 +1,53 @@
+<!-- This is stuff that was commented out in details.impexp.docbook, from the QIF
+     import section.  I am moving it here to clean up that file, but it is still not
+     sure if this material is still needed anywhere.  I've modified the nesting to
+     make it look more legal.  -->
+
+<sect1 id="details.impexp.removed">
+<sect1info>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+</sect1info>
+<title
+>Cose rimosse</title>
+
+<sect2
+><title
+>Accettare le transazioni importate</title>
+
+<para>
+<screenshot>
+  <screeninfo
+>Transazioni importate</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qifimportverify.png" format="PNG"/>
+    </imageobject>
+    <textobject>
+      <phrase
+>Transazioni importate</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<para
+>Alcune delle tue transazioni potrebbero lampeggiare in rosso nel registro. Questo perché è necessario assegnargli una categoria. L'importatore non è stato in grado di assegnare automaticamente una categoria in base alla cronologia delle tue transazioni passate. </para>
+
+<para
+>I dati delle transazioni possono essere modificati o addirittura eliminati se necessario. Per modificare una transazione, fai semplicemente doppio clic sulla voce o premi invio quando la voce è evidenziata. Una volta terminato, fai clic su <guibutton
+>OK</guibutton
+> per accettare le transazioni importate o su <guibutton
+>Annulla</guibutton
+> per rimuovere le transazioni importate. </para>
+</sect2>
+
+
+<sect2
+><title
+>Importazione degli investimenti</title>
+<para
+>Notare che se si importa un file che contiene transazioni di investimento, questi investimenti devono già esistere nel tuo file di &kmymoney;. Per abbinare gli investimenti viene usato il simbolo di scambio, quindi assicurarsi che il simbolo di scambio usato in &kmymoney; sia esattamente uguale a quello usato nel file che si sta importando. </para>
+</sect2>
+</sect1>
+

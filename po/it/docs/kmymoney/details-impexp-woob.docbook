@@ -1,55 +1,69 @@
 <sect1 id="details.impexp.woob">
-  <sect1info>
-    <author
+<sect1info>
+  <author
 >&Dawid.Wrobel; &Dawid.Wrobel.mail;</author>
-    <author
->&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
-  </sect1info>
-
-  <title
+</sect1info>
+<title
 >Importatore Woob</title>
-  <sect2>
-    <title
+
+<sect2
+><title
 >Che cos'è Woob?</title>
-    <para
+<para
+><acronym
 ><ulink url="https://woob.tech/"
 >Woob</ulink
-> (abbreviazione per <quote
+></acronym
+>, o <quote
 >Web outside of browsers</quote
->) è <quote
->una raccolta di applicazioni in grado di interagire con i siti web, senza richiedere all'utente di aprirli in un browser</quote
->. Una di <ulink url="https://woob.tech/applications/"
+> è <quote
+>una raccolta di applicazioni in grado di interagire con i siti web, senza richiedere all'utente di aprirli in un browser.</quote
+> Una di <ulink url="https://woob.tech/applications/"
 >tali applicazioni</ulink
 > consente specificamente di interagire con <ulink url="https://woob.tech/applications/bank"
 >istituti finanziari</ulink
->. &kmymoney; fornisce un'estensione che lo utilizza direttamente, permettendo quindi di importare transazioni da quei conti che altrimenti non offrono supporto per nessun altro protocollo finanziario gestito da &kmymoney;. </para>
-
-    <note>
-      <para
->&kmymoney; attualmente richiede l'installazione indipendente di Woob. Fai riferimento alle sezioni seguenti per i dettagli. </para>
-    </note>
-  </sect2>
-  <sect2>
-    <title
+>. &kmymoney; fornisce un'estensione che lo impiega direttamente, consentendo quindi di importare transazioni da quelle banche e istituti che altrimenti non offrono supporto per nessun altro protocollo finanziario gestito da &kmymoney;. </para>
+</sect2>
+  
+<sect2
+><title
 >Installare Woob</title>
-    <para
->Un numero crescente di distribuzioni Linux fornisce un pacchetto per Woob, e questo è preferibile, se disponibile per te. </para>
-    <para
->È necessario installare Python 3 prima di continuare. Tutte le distribuzioni Linux forniscono pacchetti per Python, ma puoi sempre scaricare un pacchetto per il tuo sistema dal <ulink url="https://www.python.org/downloads/"
->sito web ufficiale</ulink
+<note>
+  <para
+>&kmymoney; attualmente richiede l'installazione indipendente di Woob. Vedi di seguito per i dettagli. </para>
+</note>
+
+<para
+>Alcune distribuzioni &Linux; includono Woob, e questo è il metodo di installazione preferito, se disponibile. In caso contrario, devi installare prima una versione recente di Python 3 prima di continuare. Tutte le principali distribuzioni &Linux; includono Python, e dovresti usare quella versione, se possibile. Altrimenti, puoi scaricare un pacchetto per il tuo sistema dal <ulink url="https://www.python.org/downloads/"
+>sito web ufficiale di Python</ulink
+>. La versione minima esatta di Python richiesta da Woob può essere trovata sul <ulink url="https://woob.tech/install/"
+>sito web di Woob</ulink
 >. </para>
 
-    <para
->Con Python 3 installato, ora dovrebbe essere possibile scaricare e installare facilmente i moduli Woob richiesti. Fare riferimento alle istruzioni sul <ulink url="https://woob.tech/install/"
->sito Web Woob</ulink
->. </para>
-  </sect2>
-  <sect2>
-    <title
+<para
+>Con Python 3 installato, dovresti essere in grado di scaricare e installare facilmente i moduli di Woob richiesti. Fai riferimento alle istruzioni sul sito web di Woob. Quando &kmymoney; viene eseguito, verifica la presenza di Woob e carica l'estensione se Woob viene trovato. Consulta la sezione <link linkend="details.settings.plugins"
+>Estensioni</link
+> nel capitolo <link linkend="details.settings"
+>Impostazioni</link
+> per maggiori informazioni sulla conferma che l'estensione Woob è caricata. </para>
+</sect2>
+
+<sect2
+><title
 >Utilizzo di Woob</title>
-    <para
->&kmymoney; utilizza il modulo <quote
->woob bank</quote
->. </para>
-  </sect2>
+<para
+>Se Woob è installato e l'estensione woob di &kmymoney; è caricata, dovresti essere in grado di configurarlo per l'uso con un conto richiamando la voce di menu <menuchoice
+> <guimenu
+>Conto</guimenu
+> <guimenuitem
+>Associa al conto in linea...</guimenuitem
+> </menuchoice
+>. Una volta fatto ciò, la voce di menu <menuchoice
+> <guimenu
+>Conto</guimenu
+> <guimenuitem
+>Aggiorna conto...</guimenuitem
+> </menuchoice
+> scaricherà le transazioni per quel conto utilizzando Woob. </para>
+</sect2>
 </sect1>

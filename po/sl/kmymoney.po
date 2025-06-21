@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-11 03:42+0000\n"
+"POT-Creation-Date: 2025-06-21 03:30+0000\n"
 "PO-Revision-Date: 2025-05-26 06:32+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -2116,7 +2116,7 @@ msgstr "Račun za DDV"
 #: kmymoney/dialogs/knewaccountdlg.cpp:550 kmymoney/kmymoney.cpp:441
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:188
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:370
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:73
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:74
 #, kde-format
 msgid "Asset"
 msgstr "Imetje"
@@ -2124,7 +2124,7 @@ msgstr "Imetje"
 #: kmymoney/dialogs/knewaccountdlg.cpp:552 kmymoney/kmymoney.cpp:442
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:189
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:378
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:75
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:76
 #, kde-format
 msgid "Liability"
 msgstr "Obveznost"
@@ -2181,8 +2181,8 @@ msgstr ""
 "https."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:702
-#: kmymoney/dialogs/knewaccountdlg.cpp:989
-#: kmymoney/dialogs/knewaccountdlg.cpp:1004
+#: kmymoney/dialogs/knewaccountdlg.cpp:990
+#: kmymoney/dialogs/knewaccountdlg.cpp:1005
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:515
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:45
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:80
@@ -2190,7 +2190,7 @@ msgstr ""
 msgid "(No Institution)"
 msgstr "(Brez institucije)"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:823
+#: kmymoney/dialogs/knewaccountdlg.cpp:824
 #, kde-format
 msgid ""
 "You have not specified a name.\n"
@@ -2199,12 +2199,12 @@ msgstr ""
 "Niste določili imena.\n"
 "Prosim vnesite to polje."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:830
+#: kmymoney/dialogs/knewaccountdlg.cpp:831
 #, kde-format
 msgid "Please select a parent account."
 msgstr "Izberite narejeni račun."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:879
+#: kmymoney/dialogs/knewaccountdlg.cpp:880
 #, kde-format
 msgid ""
 "A category named <b>%1</b> already exists. You cannot create a second "
@@ -2213,7 +2213,7 @@ msgstr ""
 "Kategorija z imenom <b>%1</b> že obstaja. Ne morete ustvariti še ene "
 "kategorije z istim imenom."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:910
+#: kmymoney/dialogs/knewaccountdlg.cpp:911
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2227,13 +2227,13 @@ msgstr ""
 "prikazan le, če bo uporabljen. V nasprotnem primeru bo skrit v vseh pogledih "
 "računov."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:912
+#: kmymoney/dialogs/knewaccountdlg.cpp:913
 #, kde-format
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
 msgstr "Skriti računi"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:920
+#: kmymoney/dialogs/knewaccountdlg.cpp:921
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2247,13 +2247,13 @@ msgstr ""
 "prikazana se samo, če bo tudi uporabljena. Sicer bo skrita v pogledu računov/"
 "kategorij."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:922
+#: kmymoney/dialogs/knewaccountdlg.cpp:923
 #, kde-format
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "Skrite kategorije"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1029
+#: kmymoney/dialogs/knewaccountdlg.cpp:1030
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
 #, kde-format
 msgid "Cannot add institution"
@@ -2266,6 +2266,7 @@ msgid "Please provide a name for the new category or account."
 msgstr "Vnesite ime nove kategorije ali računa."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1071
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:107
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
@@ -4752,7 +4753,7 @@ msgstr "Uvoz/izvoz CSV"
 #: kmymoney/kmymoney.cpp:445 kmymoney/models/equitiesmodel.cpp:424
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:192
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:408
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:78
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:79
 #, kde-format
 msgid "Equity"
 msgstr "Lastniški kapital"
@@ -22564,7 +22565,7 @@ msgid "Subaccount of %1"
 msgstr "Podračun od %1"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:108
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:69
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:70
 #, kde-format
 msgid "Loan"
 msgstr "Posojilo"
@@ -22753,32 +22754,32 @@ msgstr ""
 "b> da ustvarite račun, časovne načrte itd. ali uporabite <b>Nazaj</b>, da "
 "spremenite svoje vnose."
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:61
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:62
 #, kde-format
 msgid "Checking"
 msgstr "Transakcijski"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:63
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:64
 #, kde-format
 msgid "Savings"
 msgstr "Varčevalni"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:65
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:66
 #, kde-format
 msgid "Credit Card"
 msgstr "Kreditna kartica"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:67
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:68
 #, kde-format
 msgid "Cash"
 msgstr "Gotovina"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:71
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:72
 #, kde-format
 msgid "Investment"
 msgstr "Naložba"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:194
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:207
 #, kde-format
 msgid ""
 "Please make sure to enter the correct conversion for the selected opening "
@@ -22788,22 +22789,22 @@ msgstr ""
 "Vnesite pravilno pretvorbo za izbrani datum otvoritve. Če ste zahtevali "
 "spletno ponudbo, je morda na voljo za drug datum."
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:194
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:207
 #, kde-format
 msgid "Check date"
 msgstr "Preberi datum"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:202
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:215
 #, kde-format
 msgid "1 %1 equals %2"
 msgstr "1 %1 je enako %2"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:211
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:224
 #, kde-format
 msgid "Conversion rate is not positive"
 msgstr "Menjalno razmerje ni pozitivno"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:217
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:230
 #, kde-format
 msgid "No account name supplied"
 msgstr "Ime računa ni priloženo"
