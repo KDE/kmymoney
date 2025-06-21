@@ -2,20 +2,18 @@
 <chapter id="introduction">
 <chapterinfo>
   <date
->13/01/2018</date>
+>1/12/2024</date>
   <releaseinfo
->5.0.0</releaseinfo>
+>5.2.0</releaseinfo>
 </chapterinfo>
-
 <title
 >Introduzione</title>
 
-<sect1 id="what-is-kmymoney">
-<title
+<sect1 id="what-is-kmymoney"
+><title
 >Cos'è &kmymoney;?</title>
-
 <para
->In breve, &kmymoney; è un programma per la gestione delle finanze personali di &kde;. Permette agli utenti di sistemi operativi open source di tener traccia delle loro finanze personali, fornendo un'ampia gamma di funzionalità e strumenti finanziari. </para>
+>&kmymoney; è un programma per la gestione delle finanze personali di &kde;. Consente agli utenti di tener traccia delle loro finanze personali, fornendo un'ampia gamma di funzionalità e strumenti finanziari. </para>
 
 <para
 >Gli obiettivi principali del progetto sono: </para>
@@ -44,22 +42,21 @@
 ><title
 >Correttezza</title>
       <para
->Basato sui provati principi della partita doppia, &kmymoney; si assicura che le tue finanze siano in ordine. </para>
+>Basato sui comprovati principi della partita doppia, &kmymoney; si assicura che le tue finanze siano in ordine. </para>
     </formalpara>
   </listitem>
 </itemizedlist>
 
 </sect1>
 
-<sect1 id="what-kmymoney-is-not">
-<title
+<sect1 id="what-kmymoney-is-not"
+><title
 >Cosa &kmymoney; non è</title>
+<para
+>Come gestore delle finanze personali, &kmymoney; non è pensato per adattarsi ai bisogni di un'azienda. Una piccola azienda potrebbe trovare funzionalità sufficienti per usare &kmymoney;, ma caratteristiche come i conti clienti e i conti fornitori non sono supportate direttamente. Più grande è l'azienda, meno è probabile che &kmymoney; soddisfi le sue esigenze di gestione finanziaria. La maggior parte, se non tutti i dati necessari per una piccola azienda, come i report per scopi di revisione contabile e fiscali, sono presenti, ma potrebbero dover essere estratti usando vari report e quindi elaborati e assemblati nei formati richiesti. Inoltre, sarebbe possibile creare clienti, fornitori, documenti o altre caratteristiche tramite estensioni. </para>
 
 <para
->Come gestore delle finanze personali, &kmymoney; non è inteso per adattarsi ai bisogni di una media azienda. &kmymoney; potrebbe avere funzioni sufficienti per una piccola azienda, ma alcune funzioni, come il conto clienti e il conto fornitori, non sono supportate direttamente. Comunque, è possibile aggiungere funzionalità per clienti, fornitori, documenti o altro, attraverso le estensioni. </para>
-
-<para
->&kmymoney; non è semplicemente un clone dei programmi commerciali di gestione delle finanze. Nonostante molte delle funzionalità presenti in &kmymoney; si possano trovare in altre applicazioni simili, &kmymoney; cerca di presentare una visione individuale e unica delle finanze. </para>
+>&kmymoney; non è semplicemente un clone dei programmi commerciali di gestione delle finanze personali. Nonostante molte delle funzionalità presenti in &kmymoney; si possano trovare in altre applicazioni simili, &kmymoney; cerca di presentare una visione individuale e unica delle tue finanze. </para>
 
 </sect1>
 </chapter>
