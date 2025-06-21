@@ -1297,7 +1297,7 @@
 <para
 >Questa estensione aggiunge il supporto per i servizi bancari in linea HBCI/FinTs, OFX e PayPal utilizzando <ulink url="https://www.aquamaniac.de/rdm/"
 >AqBanking</ulink
->, che è un progetto open source indipendente. La maggior parte dei protocolli utilizzati per comunicare con le banche sono utilizzati solo in Germania. </para>
+>, che è un progetto open source indipendente. Gli HBCI/FinT usati per comunicare con le banche sono utilizzati solo in Germania. </para>
 
 <para
 >La configurazione di questo plugin non viene effettuata tramite questa finestra di dialogo, ma con <link linkend="reference.menus.settings.help"

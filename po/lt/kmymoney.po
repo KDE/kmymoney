@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-16 01:58+0000\n"
+"POT-Creation-Date: 2025-06-21 02:03+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -2026,7 +2026,7 @@ msgstr "Sąskaita"
 #: kmymoney/dialogs/knewaccountdlg.cpp:550 kmymoney/kmymoney.cpp:441
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:188
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:370
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:73
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:74
 #, kde-format
 msgid "Asset"
 msgstr "Turtas"
@@ -2034,7 +2034,7 @@ msgstr "Turtas"
 #: kmymoney/dialogs/knewaccountdlg.cpp:552 kmymoney/kmymoney.cpp:442
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:189
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:378
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:75
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:76
 #, kde-format
 msgid "Liability"
 msgstr "Įsipareigojimas"
@@ -2087,8 +2087,8 @@ msgid ""
 msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:702
-#: kmymoney/dialogs/knewaccountdlg.cpp:989
-#: kmymoney/dialogs/knewaccountdlg.cpp:1004
+#: kmymoney/dialogs/knewaccountdlg.cpp:990
+#: kmymoney/dialogs/knewaccountdlg.cpp:1005
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:515
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:45
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:80
@@ -2096,26 +2096,26 @@ msgstr ""
 msgid "(No Institution)"
 msgstr "(be įstaigos)"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:823
+#: kmymoney/dialogs/knewaccountdlg.cpp:824
 #, kde-format
 msgid ""
 "You have not specified a name.\n"
 "Please fill in this field."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:830
+#: kmymoney/dialogs/knewaccountdlg.cpp:831
 #, kde-format
 msgid "Please select a parent account."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:879
+#: kmymoney/dialogs/knewaccountdlg.cpp:880
 #, kde-format
 msgid ""
 "A category named <b>%1</b> already exists. You cannot create a second "
 "category with the same name."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:910
+#: kmymoney/dialogs/knewaccountdlg.cpp:911
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2125,14 +2125,14 @@ msgid ""
 "accounts views."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:912
+#: kmymoney/dialogs/knewaccountdlg.cpp:913
 #, fuzzy, kde-format
 #| msgid "Payment accounts"
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
 msgstr "Mokėjimų sąskaitos"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:920
+#: kmymoney/dialogs/knewaccountdlg.cpp:921
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2142,14 +2142,14 @@ msgid ""
 "categories view."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:922
+#: kmymoney/dialogs/knewaccountdlg.cpp:923
 #, fuzzy, kde-format
 #| msgid "Hide unused categories"
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "Slėpti nenaudojamas kategorijas"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1029
+#: kmymoney/dialogs/knewaccountdlg.cpp:1030
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
 #, kde-format
 msgid "Cannot add institution"
@@ -2162,6 +2162,7 @@ msgid "Please provide a name for the new category or account."
 msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1071
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:107
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
@@ -4550,7 +4551,7 @@ msgstr "&Importuoti"
 #: kmymoney/kmymoney.cpp:445 kmymoney/models/equitiesmodel.cpp:424
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:192
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:408
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:78
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:79
 #, kde-format
 msgid "Equity"
 msgstr "Akcijos (be pastovių palūkanų)"
@@ -18930,8 +18931,8 @@ msgid "Interest Income"
 msgstr "Palūkanos"
 
 #: kmymoney/views/investtransactioneditor.cpp:304
-#: kmymoney/views/multitransactioneditor.cpp:230
-#: kmymoney/views/newtransactioneditor.cpp:336
+#: kmymoney/views/multitransactioneditor.cpp:229
+#: kmymoney/views/newtransactioneditor.cpp:335
 #, fuzzy, kde-format
 #| msgid "Next due date is prior to opening date"
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
@@ -19399,26 +19400,26 @@ msgstr ""
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "Nepavyksta pakeisti tvarkaraščio: "
 
-#: kmymoney/views/keditscheduledlg.cpp:162
+#: kmymoney/views/keditscheduledlg.cpp:161
 #, fuzzy, kde-format
 #| msgid "No name assigned for schedule"
 msgctxt "@info:tooltip"
 msgid "The name is a required field for a schedule"
 msgstr "Tvarkaraščiui nepriskirtas vardas"
 
-#: kmymoney/views/keditscheduledlg.cpp:165
+#: kmymoney/views/keditscheduledlg.cpp:164
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The account is a required field for a schedule"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:169
+#: kmymoney/views/keditscheduledlg.cpp:168
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:312
+#: kmymoney/views/keditscheduledlg.cpp:311
 #, kde-format
 msgctxt "@info Scheduled frequency changed"
 msgid ""
@@ -19427,30 +19428,30 @@ msgid ""
 "information will only be shown once for this schedule's edit session.</qt>"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:314
+#: kmymoney/views/keditscheduledlg.cpp:313
 #, fuzzy, kde-format
 msgctxt "@info:title"
 msgid "Schedule frequency changed"
 msgstr "Tvarkaraštis"
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:608
 #, fuzzy, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Nepavyksta pakeisti tvarkaraščio: "
 
-#: kmymoney/views/keditscheduledlg.cpp:609
+#: kmymoney/views/keditscheduledlg.cpp:608
 #, fuzzy, kde-format
 msgid "Add scheduled transaction"
 msgstr "Įvesti operaciją pagal tvarkaraštį"
 
-#: kmymoney/views/keditscheduledlg.cpp:639
-#: kmymoney/views/keditscheduledlg.cpp:682
-#: kmymoney/views/keditscheduledlg.cpp:692
+#: kmymoney/views/keditscheduledlg.cpp:638
+#: kmymoney/views/keditscheduledlg.cpp:681
+#: kmymoney/views/keditscheduledlg.cpp:691
 #, fuzzy, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Nepavyksta pakeisti tvarkaraščio: "
 
-#: kmymoney/views/keditscheduledlg.cpp:668
+#: kmymoney/views/keditscheduledlg.cpp:667
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -19460,7 +19461,7 @@ msgid ""
 "</qt>"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:673
+#: kmymoney/views/keditscheduledlg.cpp:672
 #, fuzzy, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Pranešimo data:"
@@ -20954,21 +20955,21 @@ msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "Balansas"
 
-#: kmymoney/views/multitransactioneditor.cpp:208
-#: kmymoney/views/newtransactioneditor.cpp:319
+#: kmymoney/views/multitransactioneditor.cpp:207
+#: kmymoney/views/newtransactioneditor.cpp:318
 #, fuzzy, kde-format
 msgid "The posting date is invalid."
 msgstr "Priderinimo operacija"
 
-#: kmymoney/views/multitransactioneditor.cpp:244
-#: kmymoney/views/newtransactioneditor.cpp:363
+#: kmymoney/views/multitransactioneditor.cpp:243
+#: kmymoney/views/newtransactioneditor.cpp:362
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
 "category."
 msgstr ""
 
-#: kmymoney/views/multitransactioneditor.cpp:277
+#: kmymoney/views/multitransactioneditor.cpp:276
 #, fuzzy, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
@@ -20976,14 +20977,14 @@ msgid ""
 "selected account (%2)."
 msgstr "Išrinkti operacijas be korespondento"
 
-#: kmymoney/views/multitransactioneditor.cpp:735
+#: kmymoney/views/multitransactioneditor.cpp:734
 #, fuzzy, kde-format
 #| msgid "Cannot open file %1 for writing"
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "Nepavyksta atverti „%1“ failo rašymui"
 
-#: kmymoney/views/multitransactioneditor.cpp:744
+#: kmymoney/views/multitransactioneditor.cpp:743
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -20991,7 +20992,7 @@ msgid ""
 "part of the selection."
 msgstr ""
 
-#: kmymoney/views/multitransactioneditor.cpp:748
+#: kmymoney/views/multitransactioneditor.cpp:747
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -20999,7 +21000,7 @@ msgid ""
 "selection."
 msgstr ""
 
-#: kmymoney/views/multitransactioneditor.cpp:752
+#: kmymoney/views/multitransactioneditor.cpp:751
 #, kde-format
 msgctxt "@info:tooltip selecting multiple transactions for edit"
 msgid ""
@@ -21039,13 +21040,13 @@ msgid "The check number used for this transaction."
 msgstr "Išrinkti operacijas be korespondento"
 
 #: kmymoney/views/newspliteditor.cpp:261
-#: kmymoney/views/newtransactioneditor.cpp:488
+#: kmymoney/views/newtransactioneditor.cpp:487
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr ""
 
 #: kmymoney/views/newspliteditor.cpp:770
-#: kmymoney/views/newtransactioneditor.cpp:207
+#: kmymoney/views/newtransactioneditor.cpp:206
 #, fuzzy, kde-format
 msgctxt "@info:tooltip Protected"
 msgid ""
@@ -21071,44 +21072,44 @@ msgstr "Gavėjas"
 msgid "Costcenter"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:177
+#: kmymoney/views/newtransactioneditor.cpp:176
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "This widget is disabled because you need to select a category first."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:180
+#: kmymoney/views/newtransactioneditor.cpp:179
 #, fuzzy, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Use this widget to add tags for this transaction."
 msgstr "Išrinkti operacijas be korespondento"
 
-#: kmymoney/views/newtransactioneditor.cpp:183
+#: kmymoney/views/newtransactioneditor.cpp:182
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "Please use the split editor to assign tags."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:256
+#: kmymoney/views/newtransactioneditor.cpp:255
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "The transaction is missing a category assignment."
 msgstr "Operacijos pagal kategorijas"
 
-#: kmymoney/views/newtransactioneditor.cpp:260
+#: kmymoney/views/newtransactioneditor.cpp:259
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:639
+#: kmymoney/views/newtransactioneditor.cpp:638
 #, fuzzy, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
 msgstr "Trinti operaciją"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1103
+#: kmymoney/views/newtransactioneditor.cpp:1102
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:98
 #: kmymoney/views/newtransactionform.ui:179
@@ -21116,14 +21117,14 @@ msgstr "Trinti operaciją"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1596
+#: kmymoney/views/newtransactioneditor.cpp:1595
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
 "other split?"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1597
+#: kmymoney/views/newtransactioneditor.cpp:1596
 #, fuzzy, kde-format
 #| msgid "Copy of %1"
 msgid "Copy memo"
@@ -22396,7 +22397,7 @@ msgid "Subaccount of %1"
 msgstr "Šalutinė %1 sąskaita"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:108
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:69
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:70
 #, kde-format
 msgid "Loan"
 msgstr "Paskola"
@@ -22603,32 +22604,32 @@ msgid ""
 "entries."
 msgstr ""
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:61
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:62
 #, kde-format
 msgid "Checking"
 msgstr "Einamoji"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:63
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:64
 #, kde-format
 msgid "Savings"
 msgstr "Santaupos"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:65
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:66
 #, kde-format
 msgid "Credit Card"
 msgstr "Kreditinė kortelė"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:67
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:68
 #, kde-format
 msgid "Cash"
 msgstr "Grynieji"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:71
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:72
 #, kde-format
 msgid "Investment"
 msgstr "Investicija"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:194
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:207
 #, kde-format
 msgid ""
 "Please make sure to enter the correct conversion for the selected opening "
@@ -22638,22 +22639,22 @@ msgstr ""
 "Prašau įveskite teisingą keitimo kursą pasirinktai atvirai dienai. Jei "
 "užsakėte internetinį pasiūlymą, jis gali būti pateiktas kitai dienai."
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:194
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:207
 #, kde-format
 msgid "Check date"
 msgstr "Tikrinimo data"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:202
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:215
 #, kde-format
 msgid "1 %1 equals %2"
 msgstr "1 %1 atitinka %2"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:211
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:224
 #, kde-format
 msgid "Conversion rate is not positive"
 msgstr "Keitimo kursas neigiamas"
 
-#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:217
+#: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:230
 #, kde-format
 msgid "No account name supplied"
 msgstr "Nenurodytas sąskaitos pavadinimas"

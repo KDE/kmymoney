@@ -431,20 +431,6 @@
 >Avanti</guibutton
 > per continuare. </para>
 
-<screenshot>
-  <screeninfo
->Pagina delle preferenze</screeninfo>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="newfile-5.png" format="PNG"/>
-    </imageobject>
-    <textobject>
-      <phrase
->Pagina delle preferenze</phrase>
-    </textobject>
-  </mediaobject>
-</screenshot>
-
 <para
 >Questa è la pagina finale della procedura guidata. Se si marca la casella <quote
 >Configura le preferenze dopo aver terminato la procedura guidata</quote
@@ -455,7 +441,7 @@
 >Pagina della selezione del nome del file</screeninfo>
   <mediaobject>
     <imageobject>
-      <imagedata fileref="newfile-6.png" format="PNG"/>
+      <imagedata fileref="newfile-5.png" format="PNG"/>
     </imageobject>
     <textobject>
       <phrase
