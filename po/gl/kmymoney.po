@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-21 03:30+0000\n"
-"PO-Revision-Date: 2025-06-21 12:22+0200\n"
+"PO-Revision-Date: 2025-06-22 06:19+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -56,8 +56,7 @@ msgid "Invalid Statement"
 msgstr "Extracto incorrecto"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:485
-#, fuzzy, kde-format
-#| msgid "No Institution"
+#, kde-format
 msgctxt "@info Group name for accounts with no assigned institution"
 msgid "No institution"
 msgstr "Sen entidade"
@@ -435,11 +434,10 @@ msgstr[1] "Procesáronse %1 extractos co seguinte resultado:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ImportSummaryDialog)
 #: kmymoney/dialogs/importsummarydlg.ui:14
-#, fuzzy, kde-format
-#| msgid "Imported History"
+#, kde-format
 msgctxt "@title:window"
 msgid "Import summary"
-msgstr "Historial importado"
+msgstr "Resumo da importación"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonSkip)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonCancel)
@@ -3182,10 +3180,9 @@ msgstr "Gardar automaticamente cando se teña modificado o ficheiro ao pechar"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_3)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:102
-#, fuzzy, kde-format
-#| msgid "Backup location:"
+#, kde-format
 msgid "Backup options"
-msgstr "Localización da salvagarda:"
+msgstr "Opcións de salvagarda"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, kcfg_BackupExtension)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:112
@@ -3193,6 +3190,8 @@ msgstr "Localización da salvagarda:"
 msgid ""
 "Enter a character or string that will be added to backup files. Default is ~"
 msgstr ""
+"Escriba un carácter ou texto para engadir aos ficheiros de salvagarda. O "
+"predeterminado é «~»."
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_AutoBackupCopies)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:122
@@ -3218,7 +3217,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:146
 #, kde-format
 msgid "Extension for backup files"
-msgstr ""
+msgstr "Extensión de ficheiros de salvagarda"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:153
@@ -4563,10 +4562,9 @@ msgstr ""
 "Pode contribuír a este proxecto mediante código e/ou suxestións."
 
 #: kmymoney/kcreditswindow.cpp:45
-#, fuzzy, kde-format
-#| msgid "(c) 2000-2022 The KMyMoney development team"
+#, kde-format
 msgid "(c) 2000-2025 The KMyMoney development team"
-msgstr "© 2000-2022 Equipo desenvolvedor de KMyMoney"
+msgstr "© 2000-2025 Equipo desenvolvedor de KMyMoney"
 
 #: kmymoney/kcreditswindow.cpp:49
 #, kde-format
@@ -4782,7 +4780,7 @@ msgstr "Sen título"
 #: kmymoney/kmymoney.cpp:758
 #, kde-format
 msgid "Plugin responded with error during close."
-msgstr ""
+msgstr "O complemento respondeu cun erro ao pechar."
 
 #: kmymoney/kmymoney.cpp:866
 #, kde-format
@@ -5580,11 +5578,13 @@ msgstr "O ficheiro xa existe"
 msgid ""
 "This will hide the menu bar completely. You can show it again by typing %1."
 msgstr ""
+"Isto agocha completamente a barra de menú. Pódese amosar de novo escribindo "
+"%1."
 
 #: kmymoney/kmymoney.cpp:3258
 #, kde-format
 msgid "Hide menu bar"
-msgstr ""
+msgstr "Agochar a barra de menú"
 
 #: kmymoney/kmymoney.cpp:3360
 #, kde-format
@@ -5832,7 +5832,7 @@ msgstr "Ficheiro non atopado"
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
-msgstr ""
+msgstr "Houbo un problema ao abrir o almacenamento"
 
 #: kmymoney/kmymoney.cpp:4303
 #, kde-format
@@ -6439,39 +6439,34 @@ msgid "Balance"
 msgstr "Saldo"
 
 #: kmymoney/models/statementmodel.cpp:99
-#, fuzzy, kde-format
-#| msgid "    %1 processed"
-#| msgid_plural "    %1 processed"
+#, kde-format
 msgctxt "@title:column Shows number of transactions read"
 msgid "Processed"
-msgstr "    %1 procesados"
+msgstr "Procesados"
 
 #: kmymoney/models/statementmodel.cpp:101
 #, kde-format
 msgctxt "@title:column Shows number of imported transactions"
 msgid "Imported"
-msgstr "Importado"
+msgstr "Importados"
 
 #: kmymoney/models/statementmodel.cpp:103
 #, kde-format
 msgctxt "@title:column Shows number of matched transactions"
 msgid "Matched"
-msgstr "Emparellado"
+msgstr "Emparellados"
 
 #: kmymoney/models/statementmodel.cpp:105
-#, fuzzy, kde-format
-#| msgctxt "To duplicate a split"
-#| msgid "Duplicate"
+#, kde-format
 msgctxt "@title:column Shows number of duplicate transactions"
 msgid "Duplicates"
-msgstr "Duplicar"
+msgstr "Duplicados"
 
 #: kmymoney/models/statementmodel.cpp:107
-#, fuzzy, kde-format
-#| msgid "Payee creation"
+#, kde-format
 msgctxt "@title:column Shows number of create payees"
 msgid "Payees created"
-msgstr "Creación de beneficiario"
+msgstr "Beneficiarias creadas"
 
 #: kmymoney/models/statementmodel.cpp:117
 #: kmymoney/mymoney/storage/accountsmodel.cpp:503
@@ -13090,19 +13085,16 @@ msgstr "&Escoller unha data"
 #. i18n: ectx: property (text), item, widget (QComboBox, m_preferredPrice)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:398
 #: kmymoney/plugins/ofx/import/importoption.ui:174
-#, fuzzy, kde-format
-#| msgid "File Information"
+#, kde-format
 msgid "Price information"
-msgstr "Información do ficheiro"
+msgstr "Información de prezo"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_preferredPrice)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:403
 #: kmymoney/plugins/ofx/import/importoption.ui:179
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Number of shares"
+#, kde-format
 msgid "Value and number of shares"
-msgstr "Número de participacións"
+msgstr "Valor e número de participacións"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:417
@@ -13192,7 +13184,7 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/importoption.ui:166
 #, kde-format
 msgid "Price is derived from"
-msgstr ""
+msgstr "O prezo calculouse a partir de"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:535
@@ -15928,7 +15920,7 @@ msgstr "Taxa de retorno interna estendida"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:748
 #, kde-format
 msgid "Return"
-msgstr ""
+msgstr "Devolver"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:750
 #, kde-format
@@ -18247,20 +18239,16 @@ msgid "Recover key expires soon"
 msgstr "A chave de recuperación caduca en breves"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:355
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
+#, kde-format
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is already opened by another process."
-msgstr ""
-"<p>O ficheiro <b>%1</b> xa está aberto noutra instancia de KMyMoney</p>"
+msgstr "Outro proceso xa ten aberto o ficheiro <b>%1</b>."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:466
-#, fuzzy, kde-format
-#| msgid "<p><b>%1</b> is not a KMyMoney file.</p>"
+#, kde-format
 msgctxt "@info Problem opening data file"
 msgid "File <b>%1</b> is not a KMyMoney data file."
-msgstr "<p><b>%1</b> non é un ficheiro de KMyMoney.</p>"
+msgstr "<b>%1</b> non é un ficheiro de datos de KMyMoney."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:624
 #, kde-format
@@ -18468,7 +18456,7 @@ msgstr "Número de ficheiros de salvagarda que manter"
 #: kmymoney/settings/kmymoney.kcfg:39
 #, kde-format
 msgid "Character or string appended to backup filename"
-msgstr ""
+msgstr "Carácter ou texto para engadir ao nome de ficheiro de salvagarda"
 
 #. i18n: ectx: label, entry (AutoSavePeriod), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:43
@@ -21263,7 +21251,7 @@ msgstr "Ao asento fáltalle unha asignación de categoría."
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
-msgstr ""
+msgstr "A cantidade inserida non coincide coa suma das divisións de %1."
 
 #: kmymoney/views/newtransactioneditor.cpp:620
 #, kde-format
@@ -21507,7 +21495,7 @@ msgstr "Sen asignar"
 #: kmymoney/views/splitdialog.ui:14
 #, kde-format
 msgid "Split editor"
-msgstr "Dividir o editor"
+msgstr "Editor de partidas"
 
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
 #: kmymoney/views/splitdialog.ui:553
@@ -21955,16 +21943,14 @@ msgid "Year to date"
 msgstr "O que vai de ano"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:41
-#, fuzzy, kde-format
-#| msgid "Month to date"
+#, kde-format
 msgid "Fiscal month to date"
-msgstr "O que vai de mes"
+msgstr "O que vai do mes fiscal"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:42
-#, fuzzy, kde-format
-#| msgid "Year to date"
+#, kde-format
 msgid "Fiscal year to date"
-msgstr "O que vai de ano"
+msgstr "O que vai do ano fiscal"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:43
 #, kde-format
