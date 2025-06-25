@@ -1,38 +1,39 @@
 # translation of kmymoney2.po to
 #
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
 # Serdar Soytetir <tulliana@gmail.com>, 2007, 2008, 2009, 2012, 2013.
 # Volkan Gezer <volkangezer@gmail.com>, 2013, 2014, 2015, 2017, 2021.
 # Kaan Ozdincer <kaanozdincer@gmail.com>, 2014.
-# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
+# Emir SARI <emir_sari@icloud.com>, 2023.
 msgid ""
 msgstr ""
-"Project-Id-Version: kmymoney2\n"
+"Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-24 03:24+0000\n"
-"PO-Revision-Date: 2025-01-05 16:27+0300\n"
-"Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
+"PO-Revision-Date: 2025-06-16 12:13+0300\n"
+"Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.03.70\n"
+"X-Generator: Lokalize 25.04.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Serdar Soytetir, Volkan Gezer"
+msgstr "Serdar Soytetir, Volkan Gezer, Emir SARI"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "tulliana@gmail.com, volkangezer@gmail.com"
+msgstr "tulliana@gmail.com, volkangezer@gmail.com, emir_sari@icloud.com"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:132
 #, kde-format
 msgid "_Fees"
-msgstr "Ücretler"
+msgstr "Ü_cretler"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:138
 #, kde-format
@@ -43,24 +44,24 @@ msgstr "_Temettü"
 #, kde-format
 msgid "Error importing %1: This file is not a valid KMM statement file."
 msgstr ""
-"%1 İçeri aktarım hatası: Bu dosya geçerli bir KMM tablo dosyası değildir."
+"%1 içe aktarılırken hata: BU dosya, geçerli bir KMM hesap özeti dosyası "
+"değil."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:373
 #, kde-format
 msgid "Invalid Statement"
-msgstr "Geçersiz Dosya"
+msgstr "Geçersiz Hesap Özeti"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:485
-#, fuzzy, kde-format
-#| msgid "No Institution"
+#, kde-format
 msgctxt "@info Group name for accounts with no assigned institution"
 msgid "No institution"
-msgstr "Şirket Yok"
+msgstr "Kurum yok"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:639
 #, kde-format
 msgid "Error creating security record: %1"
-msgstr "Senet kaydı oluşturulurken bir hata oluştu: %1"
+msgstr "Menkul kıymet kaydı oluşturulurken hata: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:639
 #: kmymoney/plugins/kbanking/kbanking.cpp:605
@@ -76,21 +77,21 @@ msgid ""
 "This imported statement contains investment transactions with no security.  "
 "These transactions will be ignored."
 msgstr ""
-"Bu içeriye aktarılmış hesapta güvenliği olmayan yatırım işlemleri içeriyor.  "
-"Bu işlemler yok sayılacaktır."
+"İçe aktarılan bu hesap özeti, menkul kıymetsiz yatırım işlemleri içeriyor. "
+"Bu işlemler dikkate alınmayacak."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:748
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1457
 #, kde-format
 msgid "Security not found"
-msgstr "Senet bulunamadı"
+msgstr "Menkul kıymet bulunamadı"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:794
 #: kmymoney/converter/mymoneystatementreader.cpp:797
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1441
 #, kde-format
 msgid "Statement Importer"
-msgstr "Tablo İçeri Aktarıcısı"
+msgstr "Hesap Özeti İçe Aktarıcısı"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:831
 #, kde-format
@@ -98,27 +99,28 @@ msgid ""
 "This imported statement contains investment transactions with no share "
 "amount.  These transactions will be ignored."
 msgstr ""
-"Bu içeriye aktarılmış hesap, hiç bir hisse tutarı bulunmayan yatırım işlemi "
-"içeriyor.  Bu işlemler yok sayılacaktır."
+"İçe aktarılan bu hesap özeti, hisse senedi tutarı olmayan yatırım işlemleri "
+"içeriyor. Bu işlemler dikkate alınmayacak."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:832
 #, kde-format
 msgid "No share amount provided"
-msgstr "Hiç bir hisse miktar sağlanıyor"
+msgstr "Bir hisse senedi tutarı sağlanmadı"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:953
 #, kde-format
 msgid "(Fees) %1"
-msgstr "(Ödemeler) %1"
+msgstr "(Ücretler) %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1046
-#, fuzzy, kde-format
-#| msgid "Additional Fees: %1"
+#, kde-format
 msgctxt "Prepend name of payee (%1) to original memo (%2)"
 msgid ""
 "Original payee: %1\n"
 "%2"
-msgstr "Ek ücretler: %1"
+msgstr ""
+"Özgün alacaklı: %1\n"
+"%2"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1054
 #, kde-format
@@ -126,7 +128,7 @@ msgid ""
 "Do you want to add \"%1\" as payee/receiver?\n"
 "\n"
 msgstr ""
-"\"%1\" kişisini alacaklı/alıcı olarak eklemek ister misiniz?\n"
+"“%1” kişisini alacaklı/alıcı olarak eklemek istiyor musunuz?\n"
 "\n"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1056
@@ -140,13 +142,12 @@ msgid ""
 "payee information for all following transactions referencing \"%1\" will be "
 "removed."
 msgstr ""
-"\"Evet\" seçimi alacaklı oluşturacak, \"Hayır\" alacaklı kaydı oluşturma "
-"adımını atlayacak ve bu işlemden alacaklı bilgilerini kaldıracaktır. \"İptal "
-"et\" seçimi içeri aktarma işlemini durdurur.\n"
+"“Evet”i seçmek alacaklıyı oluşturur, “Hayır” bir alacaklı kaydı "
+"oluşturulmayı atlar ve alacaklı bilgilerini bu işlemden kaldırır. “İptal” "
+"seçildiğinde, içe aktarma işlemi iptal edilir.\n"
 "\n"
-"Eğer burada \"Hayır\" seçer ve \"Tekrar sorma\" onay kutusunu "
-"işaretlerseniz, \"%1\" referanslı bütün işlemlerinizden alacaklı bilgisi "
-"kaldırılacaktır."
+"Burada “Hayır”ı seçer ve “Bir daha sorma” onay kutusunu işaretlerseniz takip "
+"eden tüm işlemler için “%1” referanslı alacaklı bilgileri kaldırılır."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1070
 #: kmymoney/kmymoneyutils.cpp:578
@@ -157,12 +158,12 @@ msgstr "Yeni alacaklı/alıcı"
 #: kmymoney/converter/mymoneystatementreader.cpp:1101
 #, kde-format
 msgid "Default Category for Payee"
-msgstr "Alacaklı için öntanımlı kategori"
+msgstr "Öntanımlı Alacaklı Kategorisi"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1108
 #, kde-format
 msgid "Please select a default category for payee '%1'"
-msgstr "Lütfen alacaklı '%1' için öntanımlı bir kategori seçiniz"
+msgstr "Lütfen “%1” alacaklısı için öntanımlı bir kategori seçin"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1131
 #, kde-format
@@ -181,7 +182,7 @@ msgstr "Kategori Yok"
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:257
 #, kde-format
 msgid "Abort"
-msgstr "İptal"
+msgstr "İptal Et"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1159
 #, kde-format
@@ -191,13 +192,13 @@ msgstr "Alacaklı/alıcı eklenemedi"
 #: kmymoney/converter/mymoneystatementreader.cpp:1419
 #, kde-format
 msgid "Problem adding or matching imported transaction with id '%1': %2"
-msgstr "İçeri aktarılmış '%1' numaralı işlemi ekleme ya da eşleme sorunu: %2"
+msgstr "İçe aktarılan “%1” numaralı işlemi ekleme veya eşleme sorunu: %2"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1477
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
-msgstr "<b>Aşağıdaki hesap için bir tablo indirdiniz:</b><br/><br/>"
+msgstr "<b>Aşağıdaki hesap için bir hesap özeti indirdiniz:</b><br/><br/>"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1478
 #, kde-format
@@ -217,7 +218,7 @@ msgstr " — Hesap numarası: %1"
 #: kmymoney/converter/mymoneystatementreader.cpp:1485
 #, kde-format
 msgid "Do you want to import transactions to this account?"
-msgstr "İşlemleri bu hesaba aktarmak ister misiniz?"
+msgstr "İşlemleri bu hesaba aktarmak istiyor musunuz?"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1488
 #, kde-format
@@ -226,9 +227,9 @@ msgid ""
 "new account by pressing the <b>Create</b> button or select another one "
 "manually from the selection box below."
 msgstr ""
-"KMyMoney kullanmak istenen hesabı belirleyemedi. <b>Oluştur</b> butonuna "
-"basarak yeni bir hesap oluşturabilirsiniz ya da aşağıdaki seçim kutusundan "
-"başka bir hesap seçebilirsiniz."
+"K Param, hangi hesaplarınızın kullanılacağını bilemedi. <b>Oluştur</b> "
+"düğmesine basarak yeni bir hesap oluşturabilir veya aşağıdaki seçim "
+"kutusundan elle başka bir hesap seçebilirsiniz."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1492
 #, kde-format
@@ -237,9 +238,9 @@ msgid ""
 "select an account using the selection box in the dialog or create a new "
 "account by pressing the <b>Create</b> button."
 msgstr ""
-"Seçilen tablo dosyasında hiçbir hesap bulunamadı. Lütfen iletişim "
-"penceresindeki seçim kutusundan bir hesap seçiniz ya da <b>Oluştur</b> "
-"butonuna basarak yeni bir hesap oluşturunuz."
+"Seçili hesap özeti dosyasında hesap bilgisi bulunamadı. Lütfen iletişim "
+"kutusundaki seçim kutusunu kullanarak bir hesap seçin veya <b>Oluştur</b> "
+"düğmesine basarak yeni bir hesap oluşturun."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1521
 #, kde-format
@@ -252,7 +253,7 @@ msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
 "button."
 msgstr ""
-"Bir hesap seçmeli, yeni bir tane oluşturmalı ya da <b>İptal Et</b> butonuna "
+"Bir hesap seçmeli, yeni bir tane oluşturmalı veya <b>İptal Et</b> düğmesine "
 "basmalısınız."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1672
@@ -260,7 +261,7 @@ msgstr ""
 #: kmymoney/views/kscheduledview_p.h:323
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
-msgstr "Planlanan '%1' işlemi girilemedi"
+msgstr "Planlı “%1” işlemi girilemedi"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1692
 #, kde-format
@@ -270,9 +271,9 @@ msgid ""
 ">Do you want KMyMoney to enter this schedule now so that the transaction can "
 "be matched?"
 msgstr ""
-"KMyMoney içeri aktarılan işlem ile eşleşen programlanmış bir işlem buldu. "
-"<br/>Program adı:<b>%1</b><br/>İşlem:<i>%2%3</i><br/>KMyMoney'in aktarım "
-"eşleşebilsin diye bu programa girmesini ister misiniz?"
+"K Param, içe aktarılan bir işlemle eşleşen planlı bir işlem buldu.<br/>Plan "
+"adı: <b>%1</b><br/>İşlem: <i>%2 %3</i><br/>İşlemin eşleştirilebilmesi için K "
+"Param’ın bu planı şimdi girmesini istiyor musunuz?"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1701
 #, kde-format
@@ -287,34 +288,32 @@ msgid_plural ""
 ">The transaction dates are %1 days apart.<br/>Do you want KMyMoney to enter "
 "this schedule now so that the transaction can be matched?"
 msgstr[0] ""
-"KMyMoney içeri aktarılan işlem ile eşleşen planlanmış bir işlem buldu. <br/"
-">Program adı:<b>%2</b><br/>İşlem:<i>%3 %4</i><br/>Aktarım tarihleri bir gün "
-"arayla.<br/>KMyMoney'in aktarımlar eşleşebilsin diye bu programa girmesini "
-"ister msiiniz?"
+"K Param, içe aktarılan bir işlemle eşleşen planlı bir işlem buldu.<br/>Plan "
+"adı: <b>%2</b><br/>İşlem: <i>%3 %4</i><br/>İşlem günü 1 gün arayla.<br/"
+">İşlemin eşleştirilebilmesi için K Param’ın bu planı şimdi girmesini istiyor "
+"musunuz?"
 msgstr[1] ""
-"KMyMoney içeri aktarılan işlem ile eşleşen planlanmış bir işlem buldu. <br/"
-">Program adı:<b>%2</b><br/>İşlem:<i>%3 %4</i><br/>Aktarım tarihleri %1 gün "
-"arayla.<br/>KMyMoney'in aktarımlar eşleşebilsin diye bu programa girmesini "
-"ister msiiniz?"
+"K Param, içe aktarılan bir işlemle eşleşen planlanmış bir işlem buldu.<br/"
+">Plan adı: <b>%2</b><br/>İşlem: <i>%3 %4</i><br/>İşlem günleri %1 gün arayla."
+"<br/>İşlemin eşleştirilebilmesi için K Param’ın bu planı şimdi girmesini "
+"istiyor musunuz?"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1715
 #, kde-format
 msgid "Schedule found"
-msgstr "Zamanlama bulundu"
+msgstr "Plan bulundu"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
-#, fuzzy, kde-format
-#| msgid "Created on"
+#, kde-format
 msgctxt "Create undo action"
 msgid "Create account"
-msgstr "Oluşturulma zamanı"
+msgstr "Hesap Oluştur"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
-#, fuzzy, kde-format
-#| msgid "Create category"
+#, kde-format
 msgctxt "Create undo action"
 msgid "Create category"
-msgstr "Kategori oluştur"
+msgstr "Kategori Oluştur"
 
 #: kmymoney/dialogs/editpersonaldatadlg.cpp:174
 #: kmymoney/wizards/newuserwizard/kgeneralpage.cpp:78
@@ -323,19 +322,20 @@ msgid ""
 "Unable to load data, because no contact has been associated with the owner "
 "of the standard address book."
 msgstr ""
-"Standart adres defteri sahibi ile ilişki bulunamadığından veri yüklenemedi."
+"Standart adres defterinin sahibiyle hiçbir kişi ilişkilendirilmediği için "
+"veri yüklenemiyor."
 
 #: kmymoney/dialogs/editpersonaldatadlg.cpp:174
 #: kmymoney/wizards/newuserwizard/kgeneralpage.cpp:78
 #, kde-format
 msgid "Address book import"
-msgstr "Adres defterini içeri aktar"
+msgstr "Adres defteri içe aktar"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, EditPersonalDataDlg)
 #: kmymoney/dialogs/editpersonaldatadlg.ui:14
 #, kde-format
 msgid "New File Dialog"
-msgstr "Yeni Dosya Penceresi"
+msgstr "Yeni Dosya İletişim Kutusu"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1_2)
 #: kmymoney/dialogs/editpersonaldatadlg.ui:58
@@ -346,10 +346,11 @@ msgid ""
 "All information is optional and is provided to personalize\n"
 "your KMyMoney file."
 msgstr ""
-"Kişisel bilgilerinizi girmek için bu pencereyi kullanın.\n"
+"Kendinizle ilgili kişisel bilgileri girmek için bu iletişim kutusunu "
+"kullanın.\n"
 "\n"
-"Tüm bilgiler isteğe bağlıdır ve KMyMoney dosyanızı\n"
-"kişiselleştimeye yarar."
+"Tüm bilgiler isteğe bağlıdır ve K Param dosyanızı kişiselleştirmek için\n"
+"kullanılır."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4)
 #: kmymoney/dialogs/editpersonaldatadlg.ui:91
@@ -357,7 +358,7 @@ msgstr ""
 #: kmymoney/wizards/wizardpages/userinfo.ui:60
 #, kde-format
 msgid "County/State:"
-msgstr "Ülke/Bölge:"
+msgstr "İlçe/Eyalet:"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel3)
@@ -382,7 +383,7 @@ msgstr "E-posta:"
 #: kmymoney/wizards/wizardpages/userinfo.ui:130
 #, kde-format
 msgid "Your name:"
-msgstr "Adınız Soyadınız:"
+msgstr "Adınız:"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel6)
 #: kmymoney/dialogs/editpersonaldatadlg.ui:161
@@ -419,20 +420,18 @@ msgid "Load from Addressbook"
 msgstr "Adres Defterinden Yükle"
 
 #: kmymoney/dialogs/importsummarydlg.cpp:88 kmymoney/kmymoneyutils.cpp:739
-#, fuzzy, kde-format
-#| msgid "The statement has been processed with the following results:"
+#, kde-format
 msgid "One statement has been processed with the following results:"
 msgid_plural "%1 statements have been processed with the following results:"
-msgstr[0] "Tablo aşağıdaki sonuçlar ile işletilmişti:"
-msgstr[1] "Tablo aşağıdaki sonuçlar ile işletilmişti:"
+msgstr[0] "1 hesap özeti aşağıdaki sonuçlarla işlendi:"
+msgstr[1] "%1 hesap özeti aşağıdaki sonuçlarla işlendi:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ImportSummaryDialog)
 #: kmymoney/dialogs/importsummarydlg.ui:14
-#, fuzzy, kde-format
-#| msgid "Imported History"
+#, kde-format
 msgctxt "@title:window"
 msgid "Import summary"
-msgstr "İçeri Aktarılan Geçmiş"
+msgstr "Özet İçe Aktar"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonSkip)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonCancel)
@@ -450,15 +449,14 @@ msgstr "&Atla"
 #: kmymoney/widgets/kmymoneybriefschedule.ui:316
 #, kde-format
 msgid "Skip this transaction"
-msgstr "Bu aktarımı atla"
+msgstr "Bu işlemi atla"
 
 #: kmymoney/dialogs/kaccountselectdlg.cpp:83
 #, kde-format
 msgid ""
 "Use this to skip importing this transaction and proceed with the next one."
 msgstr ""
-"İçeri aktarılan işlemi atlamak ve bir sonraki ile devam etmek için bunu "
-"kullanın."
+"Bu işlemi içe aktarmayı atlamak ve bir sonrakine geçmek için bunu kullanın."
 
 #: kmymoney/dialogs/kaccountselectdlg.cpp:86
 #: kmymoney/wizards/newaccountwizard/kloanpayoutpage.cpp:63
@@ -466,7 +464,7 @@ msgstr ""
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:47
 #, kde-format
 msgid "&Create..."
-msgstr "&Oluştur..."
+msgstr "&Oluştur…"
 
 #: kmymoney/dialogs/kaccountselectdlg.cpp:88
 #, kde-format
@@ -476,19 +474,19 @@ msgstr "Yeni bir hesap/kategori oluştur"
 #: kmymoney/dialogs/kaccountselectdlg.cpp:89
 #, kde-format
 msgid "Use this to add a new account/category to the file"
-msgstr "Dosyaya yeni hesap/kategori eklemek için kullanın"
+msgstr "Dosyaya yeni bir hesap/kategori eklemek için kullanın"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_kButtonAbort)
 #: kmymoney/dialogs/kaccountselectdlg.cpp:93
 #: kmymoney/dialogs/kaccountselectdlg.ui:155
 #, kde-format
 msgid "&Abort"
-msgstr "&Durdur"
+msgstr "&İptal Et"
 
 #: kmymoney/dialogs/kaccountselectdlg.cpp:95
 #, kde-format
 msgid "Abort the import operation and dismiss all changes"
-msgstr "Bütün değişikliklerden vazgeç ve içeri aktarma işlemini durdur."
+msgstr "İçe aktarma işlemini iptal edin ve tüm değişiklikleri atın"
 
 #: kmymoney/dialogs/kaccountselectdlg.cpp:96
 #, kde-format
@@ -496,20 +494,20 @@ msgid ""
 "Use this to abort the import. Your financial data will be in the state "
 "before you started the QIF import."
 msgstr ""
-"İçeri aktarımı durdurmak için bunu kullanın. Finansal veriniz QIF içeri "
-"aktarımı başlamadan önceki durumunda kalacaktır."
+"İçe aktarmayı iptal etmek için bunu kullanın. Finansal veriniz, QIF içe "
+"aktarma işlemine başlamadan önceki durumda olacaktır."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KAccountSelectDlg)
 #: kmymoney/dialogs/kaccountselectdlg.ui:17
 #, kde-format
 msgid "Account selection"
-msgstr "Hesap seçimi"
+msgstr "Hesap Seçimi"
 
 #. i18n: ectx: property (text), widget (QLabel, m_headerLabel)
 #: kmymoney/dialogs/kaccountselectdlg.ui:79
 #, kde-format
 msgid "Account to import to"
-msgstr "İçerisine aktarılacak hesap"
+msgstr "İçine aktarılacak hesap"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_createAssetButton)
 #. i18n: ectx: property (text), widget (QPushButton, m_createButton)
@@ -536,7 +534,7 @@ msgstr "Tamam"
 #: kmymoney/dialogs/kavailablecurrencydlg.ui:14
 #, kde-format
 msgid "Select currencies to add"
-msgstr "Eklenecek para birimlerini seçin"
+msgstr "Eklenecek Para Birimleri Seç"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_currencyList)
 #: kmymoney/dialogs/kavailablecurrencydlg.ui:42
@@ -544,7 +542,7 @@ msgstr "Eklenecek para birimlerini seçin"
 #, kde-format
 msgctxt "@title header of the currency name column"
 msgid "Name"
-msgstr "İsim"
+msgstr "Ad"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_currencyList)
 #. i18n: ectx: property (text), widget (QLabel, label)
@@ -558,18 +556,15 @@ msgstr "Kimlik"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_currencyList)
 #: kmymoney/dialogs/kavailablecurrencydlg.ui:52
-#, fuzzy, kde-format
-#| msgid "Symbol"
+#, kde-format
 msgctxt "@title currency symbol column"
 msgid "Symbol"
 msgstr "Sembol"
 
 #: kmymoney/dialogs/kbackupdlg.cpp:50
-#, fuzzy, kde-format
-#| msgctxt "Done"
-#| msgid "Backup done"
+#, kde-format
 msgid "Backup location:"
-msgstr "Yedekleme tamamlandı"
+msgstr "Yedekleme konumu:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
 #: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3457
@@ -582,17 +577,7 @@ msgstr "Yedekle"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/dialogs/kbackupdlg.ui:26
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use this dialog to backup your data. \n"
-#| "\n"
-#| "Please make sure you have a disk inserted and that the drive is ready. "
-#| "Then choose the mount point from either the Choose button or by entering "
-#| "the path in the available box.\n"
-#| "\n"
-#| "Click OK to perform the backup. If your system does not use an "
-#| "automounter, make sure you mark the checkbox below to \"mount this "
-#| "directory before backing up.\""
+#, kde-format
 msgid ""
 "Use this dialog to backup your data.\n"
 "\n"
@@ -602,14 +587,13 @@ msgid ""
 "\n"
 "Click OK to perform the backup."
 msgstr ""
-"Verilerinizi yedeklemek için bu iletişim penceresini kullanın.\n"
+"Verinizi yedeklemek için bu iletişim kutusunu kullanın.\n"
 "\n"
-"Lütfen diskin takılı ve sürücünün hazır olduğundan emin olun. Sonrasında ya "
-"Seç butonundan ya da mevcut kutuda yolunu girerek bağlanma noktasını seçin.\n"
+"Lütfen bir diskin takılı olduğundan ve sürücünün hazır olduğundan emin olun. "
+"Ardından Seç düğmesinden veya var olan kutuya yolu girerek bağlama noktasını "
+"seçin.\n"
 "\n"
-"Yedeklemeyi gerçekleştirmek için Tamam tuşunu tıklayın. Eğer sisteminiz "
-"otomatik bağlayıcı kullanmıyorsa, \"yedeklemeden önce bu dizini bağla\" onay "
-"kutusunu işaretlediğinizden emin olun."
+"Yedeklemeyi gerçekleştirmek için Tamam’a tıklayın."
 
 #. i18n: ectx: property (text), widget (QLabel, txtAutoMount)
 #: kmymoney/dialogs/kbackupdlg.ui:39
@@ -618,28 +602,27 @@ msgid ""
 "If your system does not use an automounter, make sure you mark the checkbox "
 "below to \"mount this directory before backing up.\""
 msgstr ""
-"Sisteminiz bir otomatik bağlayıcı kullanmıyorsa, \"yedeklemeden önce bu "
-"dizini monte etmek\" için aşağıdaki onay kutusunu işaretlediğinizden emin "
-"olun."
+"Sisteminiz bir kendiliğinden bağlayıcı kullanmıyorsa “Yedeklemeden önce bu "
+"dizini bağla” onay kutusunu işaretlediğinizden emin olun."
 
 #. i18n: ectx: property (title), widget (QGroupBox, GroupBox1)
 #: kmymoney/dialogs/kbackupdlg.ui:61
 #, kde-format
 msgid "Device options"
-msgstr "Aygıt seçenekleri"
+msgstr "Aygıt Seçenekleri"
 
 #. i18n: ectx: property (text), widget (QLabel, lblMountPoint)
 #: kmymoney/dialogs/kbackupdlg.ui:99
 #, kde-format
 msgctxt "This is the mount point"
 msgid "Mount Point:"
-msgstr "Bağlama Noktası:"
+msgstr "Bağlama noktası:"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, chooseButton)
 #: kmymoney/dialogs/kbackupdlg.ui:112
 #, kde-format
 msgid "Select mount point"
-msgstr "Bağlanma noktasını seç"
+msgstr "Bağlama noktası seç"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, chooseButton)
 #: kmymoney/dialogs/kbackupdlg.ui:115
@@ -651,13 +634,13 @@ msgstr "Bağlama noktasına göz atmak için bunu kullanın."
 #: kmymoney/dialogs/kbackupdlg.ui:118
 #, kde-format
 msgid "C&hoose..."
-msgstr "Se&ç..."
+msgstr "&Seç…"
 
 #. i18n: ectx: property (text), widget (QCheckBox, mountCheckBox)
 #: kmymoney/dialogs/kbackupdlg.ui:127
 #, kde-format
 msgid "Mount this directory before backing up."
-msgstr "Yedeklemeden önce bu dizini bağlayın."
+msgstr "Yedeklemeden önce bu dizini bağla"
 
 #: kmymoney/dialogs/kcategoryreassigndlg.cpp:75
 #, kde-format
@@ -666,9 +649,9 @@ msgid ""
 "However, at least one category with the same currency must exist so that the "
 "transactions/schedules can be reassigned."
 msgstr ""
-"En az bir işlem/program hala <b>%1</b> kategorisini kaynak olarak "
-"kullanıyor.  Ancak aynı para birimi içeren en az bir kategori olmak "
-"zorundadır ki işlemler/programlar yeniden atanabilsin."
+"En az bir işlem/plan hâlâ <b>%1</b> kategorisine başvuruyor. Ancak, "
+"işlemlerin/planların yeniden atanabilmesi için aynı para birimine sahip en "
+"az bir kategori var olmalıdır."
 
 #: kmymoney/dialogs/kcategoryreassigndlg.cpp:94
 #, kde-format
@@ -676,7 +659,7 @@ msgid ""
 "This dialog does not allow new categories to be created. Please pick a "
 "category from the list."
 msgstr ""
-"Bu iletişim penceresi yeni kategori yaratılmasına izin vermiyor. Lütfen "
+"Bu iletişim kutusu yeni kategori oluşturulmasına izin vermiyor. Lütfen "
 "listeden bir kategori seçin."
 
 #: kmymoney/dialogs/kcategoryreassigndlg.cpp:94
@@ -688,7 +671,7 @@ msgstr "Kategori oluşturma"
 #: kmymoney/dialogs/kcategoryreassigndlg.ui:14
 #, kde-format
 msgid "Reassign categories"
-msgstr "Kategorileri yeniden ata"
+msgstr "Kategorileri Yeniden Ata"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/dialogs/kcategoryreassigndlg.ui:32
@@ -698,9 +681,9 @@ msgid ""
 "category need to be re-assigned to a different category before the selected "
 "category can be deleted. Please select a category from the list below."
 msgstr ""
-"Seçili kategori silinmeden önce bu kategori ile ilişkilendirilmiş işlemler, "
-"programlar ve bütçelerin farklı bir kategoriye yeniden atanması "
-"gerekmektedir. Lütfen aşağıdaki listeden bir kategori seçin."
+"Seçili kategoriyle ilişkili işlemlerin, planların ve bütçelerin; seçili "
+"kategorinin silinebilmesi için farklı bir kategoriye yeniden atanması "
+"gerekir. Lütfen aşağıdaki listeden bir kategori seçin."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/dialogs/kcategoryreassigndlg.ui:61
@@ -718,27 +701,25 @@ msgid ""
 "\n"
 "Once you have chosen an import type please press the OK button."
 msgstr ""
-"Lütfen gerçekleştirmek istediğiniz içe aktarım türünü seçiniz.  Seçim "
-"kutusundan bir öge\n"
-" seçtiğinizde güncellenen içe aktarım türünün basit açıklaması, ekranın alt "
-"kısmında\n"
-" mevcuttur.\n"
+"Lütfen gerçekleştirmek istediğiniz içe aktarma türünü seçin. İçe aktarma\n"
+"türüne ilişkin basit bir açıklama ekranın alt kısmında bulunur ve seçim\n"
+"kutusundan bir öge seçtiğinizde güncellenir.\n"
 "\n"
-"Bir içe aktarım türü seçtiğinizde lütfen Tamam düğmesine basınız."
+"Bir içe aktarma türü seçtikten sonra lütfen Tamam düğmesine basın."
 
 #. i18n: ectx: property (text), widget (QLabel, promptLabel)
 #: kmymoney/dialogs/kchooseimportexportdlg.cpp:76
 #: kmymoney/dialogs/kchooseimportexportdlg.ui:108
 #, kde-format
 msgid "Choose import type:"
-msgstr "İçeri aktarım türü seçin:"
+msgstr "İçe aktarım türü seçin:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KChooseImportExportDlg)
 #: kmymoney/dialogs/kchooseimportexportdlg.cpp:77
 #: kmymoney/dialogs/kchooseimportexportdlg.ui:14
 #, kde-format
 msgid "Choose Import Type Dialog"
-msgstr "İçeri Aktarım Türü Seçme Penceresi"
+msgstr "İçe Aktarım Türü Seçme İletişim Kutusu"
 
 #: kmymoney/dialogs/kchooseimportexportdlg.cpp:79
 #, kde-format
@@ -750,22 +731,21 @@ msgid ""
 "\n"
 "Once you have chosen an export type please press the OK button."
 msgstr ""
-"Lütfen gerçekleştirmek istediğiniz dışa aktarım türünü seçin. Seçim "
-"kutusundan bir\n"
-"öge seçtiğinizde güncellenen dışa aktarım türünün basit açıklaması,\n"
-" ekranın alt kısmında vardır.\n"
+"Lütfen gerçekleştirmek istediğiniz dışa aktarma türünü seçin. Dışa aktarma\n"
+"türüne ilişkin basit bir açıklama ekranın alt kısmında bulunur ve seçim\n"
+"kutusundan bir öge seçtiğinizde güncellenir.\n"
 "\n"
-"Bir dışa aktarım türü seçtiğinizde lütfen Tamam düğmesine basın."
+"Bir dışa aktarma türü seçtikten sonra lütfen Tamam düğmesine basın."
 
 #: kmymoney/dialogs/kchooseimportexportdlg.cpp:83
 #, kde-format
 msgid "Choose export type:"
-msgstr "Dışarı aktarım türü seçin:"
+msgstr "Dışa aktarım türü seçin:"
 
 #: kmymoney/dialogs/kchooseimportexportdlg.cpp:84
 #, kde-format
 msgid "Choose Export Type Dialog"
-msgstr "Dışarı Aktarım Türü Seçme Penceresi"
+msgstr "Dışarı Aktarım Türü Seçme İletişim Kutusu"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, typeCombo)
 #: kmymoney/dialogs/kchooseimportexportdlg.cpp:89
@@ -788,9 +768,9 @@ msgid ""
 "Another dialog will appear, if you choose this type, asking for further\n"
 "information relevant to the Quicken format."
 msgstr ""
-"QIF dosyaları muhasebe programı Quicken tarafından oluşturuldu.\n"
-"Eğer bu türü seçerseniz, Quicken biçimi ile ilgili\n"
-"daha fazla bilgi isteyen bir pencere açılacaktır."
+"QIF dosyaları, popüler muhasebe programı Quicken tarafından oluşturulur.\n"
+"Bu türü seçerseniz Quicken biçimiyle ilgili daha fazla bilgi isteyen başka\n"
+"bir iletişim kutusu açılır."
 
 #: kmymoney/dialogs/kchooseimportexportdlg.cpp:109
 #, kde-format
@@ -799,9 +779,9 @@ msgid ""
 "most popular spreadsheet programs available for Linux and other operating\n"
 "systems."
 msgstr ""
-"CSV türü Linux ve diğer işletim sistemleri ile uyumlu popüler\n"
-"hesap tablosu programlarında kullanılan virgülle ayrılmış\n"
-"metin dosyasını kullanır."
+"CSV türü, Linux ve diğer işletim sistemlerindeki en popüler hesap\n"
+"tablosu programları tarafından kullanılabilen virgülle ayrılmış bir metin\n"
+"dosyası kullanır."
 
 #. i18n: ectx: property (text), widget (QLabel, topLabel)
 #: kmymoney/dialogs/kchooseimportexportdlg.ui:56
@@ -815,12 +795,11 @@ msgid ""
 "\n"
 "Once you have chosen an import type please press the OK button."
 msgstr ""
-"Lütfen istediğiniz içeri aktarma türünü seçin.   İçeri aktarımın basit bir "
-"açıklaması\n"
-"ekranın alt kısmındadır ve seçim kutusundan\n"
-"bir öge seçtiğinizde güncellenir.\n"
+"Lütfen gerçekleştirmek istediğiniz içe aktarma türünü seçin. İçe aktarma\n"
+"türüne ilişkin basit bir açıklama ekranın alt kısmında bulunur ve seçim\n"
+"kutusundan bir öge seçtiğinizde güncellenir.\n"
 "\n"
-"İçeri aktarım türünü seçtiğinizde lütfen Tamam düğmesine basın."
+"Bir içe aktarma türü seçtikten sonra lütfen Tamam düğmesine basın."
 
 #. i18n: ectx: property (text), widget (QLabel, descriptionLabel)
 #: kmymoney/dialogs/kchooseimportexportdlg.ui:152
@@ -832,23 +811,22 @@ msgstr "Bazı açıklamalar"
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:73
 #, kde-format
 msgid "Transaction %1 has no splits"
-msgstr "%1 aktarımı hisse içermiyor"
+msgstr "%1 işleminde bölme yok"
 
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:82
 #, kde-format
 msgid ""
 "<p>Payee changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>"
 msgstr ""
-"<p>Alacaklı değiştirildi.<br/>&nbsp;&nbsp;&nbsp;Eski: <b>%1</b>, Yeni: <b>"
-"%2</b></p>"
+"<p>Alacaklı değişti.<br/>&nbsp;&nbsp;&nbsp;Eski: <b>%1</b>, Yeni: <b>%2</b></"
+"p>"
 
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:86
 #, kde-format
 msgid ""
 "<p>Account changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>"
 msgstr ""
-"<p>Hesap değiştirildi.<br/>&nbsp;&nbsp;&nbsp;Eski: <b>%1</b>, Yeni: <b>%2</"
-"b></p>"
+"<p>Hesap değişti.<br/>&nbsp;&nbsp;&nbsp;Eski: <b>%1</b>, Yeni: <b>%2</b></p>"
 
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:93
 #, kde-format
@@ -856,8 +834,8 @@ msgid ""
 "<p>Transfer account changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>"
 "%2</b></p>"
 msgstr ""
-"<p>Aktarım hesabı değiştirildi.<br/>&nbsp;&nbsp;&nbsp;Eski: <b>%1</b>, Yeni: "
-"<b>%2</b></p>"
+"<p>Havale hesabı değişti.<br/>&nbsp;&nbsp;&nbsp;Eski: <b>%1</b>, Yeni: <b>"
+"%2</b></p>"
 
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:101
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:111
@@ -865,15 +843,15 @@ msgstr ""
 #, kde-format
 msgctxt "Split transaction (category replacement)"
 msgid "Split transaction"
-msgstr "Aktarımı böl"
+msgstr "İşlemi böl"
 
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:119
 #, kde-format
 msgid ""
 "<p>Category changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>"
 msgstr ""
-"<p>Kategori değiştirildi.<br/>&nbsp;&nbsp;&nbsp;Eski: <b>%1</b>, Yeni: <b>"
-"%2</b></p>"
+"<p>Kategori değişti.<br/>&nbsp;&nbsp;&nbsp;Eski: <b>%1</b>, Yeni: <b>%2</b></"
+"p>"
 
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:127
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:129
@@ -887,8 +865,7 @@ msgstr "boş"
 msgid ""
 "<p>Memo changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>"
 msgstr ""
-"<p>Hatırlatma değiştirildi.<br/>&nbsp;&nbsp;&nbsp;Eski: <b>%1</b>, Yeni: <b>"
-"%2</b></p>"
+"<p>Notlar değişti.<br/>&nbsp;&nbsp;&nbsp;Eski: <b>%1</b>, Yeni: <b>%2</b></p>"
 
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:138
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:140
@@ -902,16 +879,14 @@ msgstr "boş"
 msgid ""
 "<p>Number changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>"
 msgstr ""
-"<p>NUmara değiştirildi.<br/>&nbsp;&nbsp;&nbsp;Eski: <b>%1</b>, Yeni: <b>%2</"
-"b></p>"
+"<p>Numara değişti.<br/>&nbsp;&nbsp;&nbsp;Eski: <b>%1</b>, Yeni: <b>%2</b></p>"
 
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:150
 #, kde-format
 msgid ""
 "<p>Amount changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>"
 msgstr ""
-"<p>Tutar değiştirildi.<br/>&nbsp;&nbsp;&nbsp;Eski: <b>%1</b>, Yeni: <b>%2</"
-"b></p>"
+"<p>Tutar değişti.<br/>&nbsp;&nbsp;&nbsp;Eski: <b>%1</b>, Yeni: <b>%2</b></p>"
 
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:157
 #, kde-format
@@ -919,13 +894,13 @@ msgid ""
 "<p>Reconciliation flag changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: "
 "<b>%2</b></p>"
 msgstr ""
-"<p>Uzlaşma bayrağı değiştirildi.<br/>&nbsp;&nbsp;&nbsp;Eski: <b>%1</b>, "
-"Yeni: <b>%2</b></p>"
+"<p>Mutabakat bayrağı değişti.<br/>&nbsp;&nbsp;&nbsp;Eski: <b>%1</b>, Yeni: "
+"<b>%2</b></p>"
 
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:160
 #, kde-format
 msgid "Fatal error in determining data: %1"
-msgstr "Veriler belirlenirken sonlandırıcı hata oluştu: %1"
+msgstr "Veriyi belirlerken onulmaz hata: %1"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KConfirmManualEnterDlg)
 #: kmymoney/dialogs/kconfirmmanualenterdlg.ui:14
@@ -937,37 +912,36 @@ msgstr "Elle Girişi Onayla"
 #: kmymoney/dialogs/kconfirmmanualenterdlg.ui:38
 #, kde-format
 msgid "The following changes have been made to the transaction data:"
-msgstr "Aşağıdaki değişiklikler işlem verilerine yansıtılmıştır:"
+msgstr "İşlem verisinde aşağıdaki değişiklikler yapıldı:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox1)
 #: kmymoney/dialogs/kconfirmmanualenterdlg.ui:61
 #, kde-format
 msgid "Please choose what you wish to do with the above changes"
-msgstr "Lütfen yukarıdaki değişiklikler ile ne yapmak istediğinizi seçin."
+msgstr "Değişikliklerle Ne Yapmalı"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_discardRadio)
 #: kmymoney/dialogs/kconfirmmanualenterdlg.ui:67
 #, kde-format
 msgid ""
 "&Discard the changes and enter the original transaction into the register."
-msgstr "&Değişiklikleri iptal et ve asıl aktarımı kayda ekle."
+msgstr "&Değişiklikleri at ve özgün işlemi kayda gir"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_onceRadio)
 #: kmymoney/dialogs/kconfirmmanualenterdlg.ui:77
 #, kde-format
 msgid "Enter &these new values this one time, for this occurrence only."
-msgstr "Sadece bu olay için &bir kez bu yeni değerleri girin."
+msgstr "&Bu yeni değerleri yalnızca bu oluş için bir kez gir"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_setRadio)
 #: kmymoney/dialogs/kconfirmmanualenterdlg.ui:90
 #, kde-format
 msgid "Set all further occurrences &in this schedule to be these values."
-msgstr "Bu programdaki diğer tüm olayları bu &değerlere ayarla."
+msgstr "Bu plandaki diğer tüm oluşları bu değerler olarak ayarla"
 
 #: kmymoney/dialogs/kcurrencycalculator.cpp:438
 #: kmymoney/mymoney/mymoneyfile.cpp:3630
-#, fuzzy, kde-format
-#| msgid "User"
+#, kde-format
 msgctxt "@info price source"
 msgid "User"
 msgstr "Kullanıcı"
@@ -976,7 +950,7 @@ msgstr "Kullanıcı"
 #: kmymoney/dialogs/kcurrencycalculator.ui:17
 #, kde-format
 msgid "Exchange Rate/Price Editor"
-msgstr "Dönüşüm Oranı /Fiyat Düzenleyici"
+msgstr "Döviz Kuru/Fiyatı Düzenleyicisi"
 
 #. i18n: ectx: property (text), widget (QLabel, amountLabel)
 #. i18n: ectx: property (text), widget (QLabel, label_7)
@@ -1087,21 +1061,19 @@ msgstr "Çevir"
 #, kde-format
 msgctxt "@label convert from stock to currency"
 msgid "to"
-msgstr "için"
+msgstr "şuna"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_amountButton)
 #: kmymoney/dialogs/kcurrencycalculator.ui:227
-#, fuzzy, kde-format
-#| msgid "To amount"
+#, kde-format
 msgid "To a&mount"
-msgstr "Net toplam"
+msgstr "Şu tutara"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_rateButton)
 #: kmymoney/dialogs/kcurrencycalculator.ui:237
-#, fuzzy, kde-format
-#| msgid "Exchange rate / Price"
+#, kde-format
 msgid "Exchange &rate / Price"
-msgstr "Dönüşüm oranı /Fiyat"
+msgstr "Döviz kuru/Fiyat"
 
 #. i18n: ectx: property (text), widget (QLabel, m_conversionExample)
 #: kmymoney/dialogs/kcurrencycalculator.ui:298
@@ -1125,7 +1097,7 @@ msgstr "Fiyat geçmişini güncelle"
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
-msgstr "%1 temel para birimi olarak ayarlanamadı: %2"
+msgstr "%1, temel para birimi olarak ayarlanamadı: %2"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:138
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:651
@@ -1157,16 +1129,14 @@ msgid "New currency"
 msgstr "Yeni para birimi"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:198
-#, fuzzy, kde-format
-#| msgid "Cannot update currency. %1"
+#, kde-format
 msgid "Cannot modify currency. %1"
-msgstr "Para birimi güncellenemedi. %1"
+msgstr "Para birimi değiştirilemedi. %1"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:198
-#, fuzzy, kde-format
-#| msgid "Update currency"
+#, kde-format
 msgid "Edit currency"
-msgstr "Para birimini güncelle"
+msgstr "Para birimini düzenle"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:492
 #, kde-format
@@ -1185,11 +1155,10 @@ msgid "Select as base currency"
 msgstr "Temel para birimi olarak seç"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:504
-#, fuzzy, kde-format
-#| msgid "Currency options"
+#, kde-format
 msgctxt "@title:menu"
 msgid "Currency options"
-msgstr "Para birimi seçenekleri"
+msgstr "Para Birimi Seçenekleri"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:636
 #, kde-format
@@ -26567,4933 +26536,3 @@ msgstr ""
 #, kde-format
 msgid "saving report '%1' into '%2'"
 msgstr ""
-
-#~ msgid "Importing statement for account %1"
-#~ msgstr "%1 hesabı için tablo içeri aktarılıyor"
-
-#~ msgid "Importing statement without transactions"
-#~ msgstr "İşlemsiz tablo içeri aktarılıyor"
-
-#~ msgid "  Statement balance is not contained in statement."
-#~ msgstr "  Bakiye beyanı beyanlarda bulunmuyor."
-
-#~ msgid "  Statement balance on %1 is reported to be %2"
-#~ msgstr "  %1 üzerindeki hesap dengesi %2 de rapor edilmektedir"
-
-#~ msgid "  Transactions"
-#~ msgstr "  Aktarımlar"
-
-#~ msgctxt "x transactions have been added"
-#~ msgid "    %1 added"
-#~ msgid_plural "    %1 added"
-#~ msgstr[0] "    %1 eklendi"
-#~ msgstr[1] "    %1 eklendi"
-
-#~ msgid "    %1 matched"
-#~ msgid_plural "    %1 matched"
-#~ msgstr[0] "    %1 eşleşti"
-#~ msgstr[1] "    %1 eşleşti"
-
-#~ msgid "    %1 duplicate"
-#~ msgid_plural "    %1 duplicates"
-#~ msgstr[0] "    %1 tekrarlı"
-#~ msgstr[1] "    %1 tekrarlı"
-
-#~ msgid "  Payees"
-#~ msgstr "Alacaklılar"
-
-#~ msgctxt "x transactions have been created"
-#~ msgid "    %1 created"
-#~ msgid_plural "    %1 created"
-#~ msgstr[0] "    %1 oluşturuldu"
-#~ msgstr[1] "    %1 oluşturuldu"
-
-#~ msgid "Source <placeholder>%1</placeholder> does not exist."
-#~ msgstr "<placeholder>%1</placeholder> kaynak yok."
-
-#~ msgid "Cannot resolve input date."
-#~ msgstr "Girdi tarihi çözümlenemedi."
-
-#~ msgid "CSV source <placeholder>%1</placeholder> does not exist."
-#~ msgstr "<placeholder>%1</placeholder> CSV kaynağı yok."
-
-#~ msgid "Cannot find from and to currency."
-#~ msgstr "Gönderen ve alan para birimleri bulunamadı."
-
-#~ msgid "Local quote sources aren't supported."
-#~ msgstr "Yerel teklif kaynakları desteklenmiyor."
-
-#~ msgid "Fetching URL %1..."
-#~ msgstr "%1 URL'si getiriliyor..."
-
-#~ msgid ""
-#~ "<placeholder>%1</placeholder> skipped because it doesn't have "
-#~ "identification number."
-#~ msgstr "<placeholder>%1</placeholder> atlandı çünkü kimlik numarası yok."
-
-#~ msgctxt "The process x is executing"
-#~ msgid "Executing %1..."
-#~ msgstr "%1 çalıştırılıyor..."
-
-#~ msgid "Unable to launch: %1"
-#~ msgstr "Başlatılamadı: %1 "
-
-#~ msgid "Failed to open downloaded file"
-#~ msgstr "İndirilen dosya açılamadı"
-
-#~ msgctxt "Executing 'script' 'online source' 'investment symbol' "
-#~ msgid "Executing %1 %2 %3..."
-#~ msgstr "%1 %2 %3 çalıştırılıyor..."
-
-#~ msgid "Unable to update price for %1"
-#~ msgstr "%1 için fiyat güncellenemedi"
-
-#~ msgid "Identifier found: '%1'"
-#~ msgstr "Tanımlayıcı bulundu: %1"
-
-#~ msgid "Price found: '%1' (%2)"
-#~ msgstr "Fiyat bulundu: '%1' (%2)"
-
-#~ msgid "Date found: '%1'"
-#~ msgstr "Tarih bulundu: '%1'"
-
-#~ msgid "Unable to update price for %1 (no price or no date)"
-#~ msgstr "%1 için fiyat güncellenemedi (fiyat veya tarih yok)"
-
-#~ msgid "Unable to update price for %1 (empty quote data)"
-#~ msgstr "%1 için fiyat güncellenemedi (boş kota verisi)"
-
-#~ msgctxt "Total value"
-#~ msgid "Total"
-#~ msgstr "Toplam"
-
-#~ msgid "Price/Share"
-#~ msgstr "Fiyat/Paylaşım"
-
-#~ msgid "Asset account"
-#~ msgstr "Varlık hesabı"
-
-#~ msgid ""
-#~ "At least one split of the selected transaction references an account that "
-#~ "has been closed. Editing the transactions is therefore prohibited."
-#~ msgstr ""
-#~ "Seçilen işlemlerin bölümlerinden en az biri kapatılmış bir hesabı kaynak "
-#~ "olarak kullanıyor.Bu nedenle işlemin düzenlenmesi yasaktır."
-
-#~ msgid ""
-#~ "Cannot enter transaction with postdate prior to account's opening date."
-#~ msgstr ""
-#~ "Hesabın açılış tarihinden küçük gönderim tarihli işlem giremezsiniz."
-
-#~ msgctxt "Equity name"
-#~ msgid "Name"
-#~ msgstr "İsim"
-
-#~ msgid ""
-#~ "For <b>%1</b> on <b>%2</b> price <b>%3</b> already exists.<br>Do you want "
-#~ "to replace it with <b>%4</b>?"
-#~ msgstr ""
-#~ "<b>%1</b> için <b>%2</b> üzerindeki <b>%3</b> fiyatı zaten mevcut.<br>Onu "
-#~ "<b>%4</b> olarak güncellemek ister misiniz?"
-
-#~ msgid "Price Already Exists"
-#~ msgstr "Fiyat Zaten Mevcut"
-
-#~ msgid ""
-#~ "Received a price for %1 (id %2), but this symbol is not on the list. "
-#~ "Aborting entire update."
-#~ msgstr ""
-#~ "%1 (numara %2) için fiyat alındı, fakat bu sembol listede yok. Girilen "
-#~ "güncelleme iptal ediliyor."
-
-#~ msgid "List of known Equities, and the date they were last updated on."
-#~ msgstr "Son güncelleme tarihleri bilinen hisse senetleri listesi."
-
-#, fuzzy
-#~| msgid "Search transactions"
-#~ msgctxt "@info:tooltip for find transaction Open button"
-#~ msgid "Search transactions"
-#~ msgstr "Aktarımları ara"
-
-#~ msgid "Found %1 matching transaction (D %2 / P %3 = %4)"
-#~ msgid_plural "Found %1 matching transactions (D %2 / P %3 = %4)"
-#~ msgstr[0] "%1 eşleşen işlem bulundu (D %2 / P %3 = %4)"
-#~ msgstr[1] "%1 eşleşen işlemler bulundu (D %2 / P %3 = %4)"
-
-#~ msgid "MyDialog"
-#~ msgstr "BenimDiyaloğum"
-
-#~ msgid "Remove this price item from the file"
-#~ msgstr "Bu fiyat ögesini dosyadan kaldır"
-
-#~ msgctxt "Price source"
-#~ msgid "Source"
-#~ msgstr "Kaynak"
-
-#~ msgid "Delete..."
-#~ msgstr "Sil..."
-
-#~ msgid "will be calculated"
-#~ msgstr "hesaplanacak"
-
-#~ msgid ""
-#~ "You are about to delete the selected split. Do you really want to "
-#~ "continue?"
-#~ msgstr ""
-#~ "Seçili bölümü silmek üzeresiniz. Devam etmek istediğinizden emin misiniz?"
-
-#~ msgid ""
-#~ "You need to assign a category to this split before it can be entered."
-#~ msgstr ""
-#~ "Giriş yapabilmek için önce bu bölüme bir kategori atamanız gerekmektedir."
-
-#~ msgid "Enter split"
-#~ msgstr "Bölüm gir"
-
-#~ msgid "Is a sub account"
-#~ msgstr "Bir alt hesaptır"
-
-#~ msgid "Routing Number:"
-#~ msgstr "Yönlendirme Numarası:"
-
-#~ msgid ""
-#~ "Select a transaction and press the OK button or use Cancel to select none."
-#~ msgstr ""
-#~ "Bir işlem seçmek için Tamam düğmesine basın ya da hiçbir şey seçmemek "
-#~ "için İptal Et seçeneğini kullanın."
-
-#~ msgid "Clear &All"
-#~ msgstr "Tümünü &Temizle"
-
-#~ msgid "Use this to clear all splits of this transaction"
-#~ msgstr "İşlemin bölümlerini silmek için bunu kullan"
-
-#~ msgid "Clear &Zero"
-#~ msgstr "&Sıfır Olanları temizle"
-
-#~ msgid ""
-#~ "In case you have multiple split entries to the same category and you like "
-#~ "to keep them as a single split"
-#~ msgstr ""
-#~ "Aynı kategori için birden fazla bölüm girişiniz olduğu ve bunları tek bir "
-#~ "bölüm olarak saklamak istediğinizde"
-
-#~ msgid ""
-#~ "You are about to delete all splits of this transaction. Do you really "
-#~ "want to continue?"
-#~ msgstr ""
-#~ "İşlemin bütün bölümlerini silmek üzeresiniz. Gerçekten devam etmek "
-#~ "istiyor musunuz?"
-
-#~ msgid "<b>11,00<b>"
-#~ msgstr "<b>11,00<b>"
-
-#~ msgid "<b>111,00<b>"
-#~ msgstr "<b>111,00<b>"
-
-#~ msgid "100,00"
-#~ msgstr "100,00"
-
-#~ msgid ""
-#~ "This dialog does not allow new tags to be created. Please pick a tag from "
-#~ "the list."
-#~ msgstr ""
-#~ "Bu pencere yeni etiketler oluşturulmasına izin vermiyor. Lütfen listeden "
-#~ "bir etiket seçin."
-
-#~ msgid "Tag creation"
-#~ msgstr "Etiket oluşturma"
-
-#~ msgid ""
-#~ "The transactions associated with the selected tags need to be re-assigned "
-#~ "to a different tag before the selected tags can be deleted. Please select "
-#~ "a tag from the list below."
-#~ msgstr ""
-#~ "Seçilen etiketleri silmeden önce bu etiketlerle ilişkilendirilmiş "
-#~ "işlemleri farklı bir etikete yeniden atamak gerekir. Lütfen aşağıdaki "
-#~ "listeden bir etiket seçin. "
-
-#~ msgid "Show splash screen"
-#~ msgstr "Açılış ekranını göster"
-
-#~ msgid "Show title bar on each page"
-#~ msgstr "Her sayfada başlık çubuğunu göster"
-
-#~ msgid "New Quote Source"
-#~ msgstr "Yeni Aktarım Kaynağı"
-
-#, fuzzy
-#~| msgid "Symbol"
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Symbol"
-#~ msgstr "Sembol"
-
-#, fuzzy
-#~| msgid "Identification number"
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Identification number"
-#~ msgstr "Tanımlama numarası"
-
-#, fuzzy
-#~| msgid "Name"
-#~ msgctxt "@item:inlistbox Stock"
-#~ msgid "Name"
-#~ msgstr "İsim"
-
-#~ msgid ""
-#~ "Security <b>%1</b> uses this quote source.<br>Do you really want to "
-#~ "remove it?"
-#~ msgstr ""
-#~ "Güvenlik <b>%1</b> bu alıntı kaynağını kullanıyor.<br>Gerçekten kaldırmak "
-#~ "istiyor musunuz?"
-
-#~ msgid "Delete quote source"
-#~ msgstr "Alıntı kaynağını sil"
-
-#~ msgid "Always show a No. field"
-#~ msgstr "No. alanını her zaman göster"
-
-#~ msgid "Category/Account"
-#~ msgstr "Kategori/Hesap"
-
-#~ msgid "Transfer from"
-#~ msgstr "Gelen aktarım"
-
-#~ msgid "Transfer to"
-#~ msgstr "Giden aktarım"
-
-#~ msgid ""
-#~ "This transaction has more than two splits and is originally based on a "
-#~ "different currency (%1). Using this account to modify the transaction may "
-#~ "result in rounding errors. Do you want to continue?"
-#~ msgstr ""
-#~ "Bu işlem ikiden fazla bölüm içeriyor ve farklı para birimi tabanlı(%1). "
-#~ "İşlemleri değiştirmek için bu hesabı kullanma yuvarlama hatalarıyla "
-#~ "sonuçlanabilir. Devam etmek istiyor musunuz?"
-
-#~ msgid ""
-#~ "At least one of the selected transactions has more than two splits and is "
-#~ "originally based on a different currency (%1). Using this account to "
-#~ "modify the transactions may result in rounding errors. Do you want to "
-#~ "continue?"
-#~ msgstr ""
-#~ "Seçilen işlemlerden en az bir tanesi ikiden fazla bölüm içeriyor ve "
-#~ "farklı para birimi tabanlı(%1). İşlemleri değiştirmek için bu hesabı "
-#~ "kullanma yuvarlama hatalarıyla sonuçlanabilir. Devam etmek istiyor "
-#~ "musunuz?"
-
-#~ msgid "<center>Processing schedule for %1.</center>"
-#~ msgstr "<center>%1 için plan işleniyor.</center>"
-
-#~ msgid ""
-#~ "Check number <b>%1</b> has already been used in account <b>%2</b>."
-#~ "<center>Do you want to replace it with the next available number?</center>"
-#~ msgstr ""
-#~ "<b>%2</b> hesabında <b>%1</b> numarası zaten kullanılmıştı.<center>Bu "
-#~ "numarayı sonraki kullanılabilir numara ile değiştirmek ister misiniz?</"
-#~ "center>"
-
-#~ msgid "Duplicate number"
-#~ msgstr "Numarayı çoğalt"
-
-#~ msgid "Storing transactions"
-#~ msgstr "İşlemler kaydediliyor"
-
-#~ msgid "&Enter"
-#~ msgstr "&Gir"
-
-#~ msgid "Use this to enter the transaction into the ledger."
-#~ msgstr "Aktarımları ana hesap defterine eklemek için bunu kullan."
-
-#~ msgid "&Schedule"
-#~ msgstr "&Zamanla"
-
-#~ msgid "Accepts the entered data and stores it as schedule"
-#~ msgstr "Girilmiş verileri kabul eder ve program olarak depolar"
-
-#~ msgid ""
-#~ "The transaction you are about to enter has a post date in the future.<br/"
-#~ "><br/>Do you want to enter it in the ledger or add it to the schedules?"
-#~ msgstr ""
-#~ "Girmek üzere olduğunuz işlem ileri bir gönderim tarihine sahip.<br/><br/"
-#~ ">Bu işlemi deftere girmek istersiniz misiniz ya da programlara eklemek "
-#~ "ister misiniz?"
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the warning balance of %2."
-#~ msgstr "<b>%1</b> hesap bakiyesi %2 bakiyenin altına düştü."
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the minimum balance of %2."
-#~ msgstr "<b>%1</b> hesap bakiyesi %2 en düşük bakiyenin altına düştü."
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the maximum credit warning "
-#~ "limit of %2."
-#~ msgstr ""
-#~ "<b>%1</b> hesap bakiyesi %2 en yüksek kredi uyarı sınırının altına düştü."
-
-#~ msgid ""
-#~ "The balance of account <b>%1</b> dropped below the maximum credit limit "
-#~ "of %2."
-#~ msgstr "<b>%1</b> hesap bakiyesi %2 en yüksek kredi sınırının altına düştü."
-
-#~ msgid "Thomas Baumgart"
-#~ msgstr "Thomas Baumgart"
-
-#~ msgid "Cristian Oneț"
-#~ msgstr "Cristian Oneț"
-
-#~ msgid "Christian Dávid"
-#~ msgstr "Christian Dávid"
-
-#~ msgid "Michael Edwardes"
-#~ msgstr "Michael Edwardes"
-
-#~ msgid "Alvaro Soliverez"
-#~ msgstr "Alvaro Soliverez"
-
-#~ msgid "Ace Jones"
-#~ msgstr "Ace Jones"
-
-#~ msgid "Tony Bloomfield"
-#~ msgstr "Tony Bloomfield"
-
-#~ msgid "Felix Rodriguez"
-#~ msgstr "Felix Rodriguez"
-
-#~ msgid "John C"
-#~ msgstr "John C"
-
-#~ msgid "Fernando Vilas"
-#~ msgstr "Fernando Vilas"
-
-#~ msgid "Jack Ostroff"
-#~ msgstr "Jack Ostroff"
-
-#~ msgid "Kevin Tambascio"
-#~ msgstr "Kevin Tambascio"
-
-#~ msgid "Javier Campos Morales"
-#~ msgstr "Javier Campos Morales"
-
-#~ msgid "Robert Wadley"
-#~ msgstr "Robert Wadley"
-
-#~ msgid "Laurent Montel"
-#~ msgstr "Laurent Montel"
-
-#~ msgid "Wolfgang Rohdewald"
-#~ msgstr "Wolfgang Rohdewald"
-
-#~ msgid "Marko Käning"
-#~ msgstr "Marko Käning"
-
-#~ msgid "Allan Anderson ✝"
-#~ msgstr "Allan Anderson ✝"
-
-#~ msgid ""
-#~ "<p>The account \"%1\" was previously created as loan account but some "
-#~ "information is missing.</p><p>The new loan wizard will be started to "
-#~ "collect all relevant information.</p><p>Please use KMyMoney version 0.8.7 "
-#~ "or later and earlier than version 0.9 to correct the problem.</p>"
-#~ msgstr ""
-#~ "<p>Daha önceden kredi hesabı olarak oluşturulan \"%1\" hesabı bazı eksik "
-#~ "bilgiler içeriyor.</p><p>Yeni kredi sihirbazı, ilgili bütün bilgileri "
-#~ "toplamak için başlatılacaktır.</p><p>Sorunu düzeltmek için lütfen 0.8.7 "
-#~ "(dahil) ile 0.9 arasındaki bir KMyMoney sürümünü kullanın.</p>"
-
-#~ msgid "Account problem"
-#~ msgstr "Hesap sorunu"
-
-#~ msgid "&Show tip of the day"
-#~ msgstr "&Günün ipucunu göster"
-
-#~ msgctxt "New transaction button"
-#~ msgid "New"
-#~ msgstr "Yeni"
-
-#~ msgid "New scheduled transaction"
-#~ msgstr "Yeni zamanlanmış aktarım"
-
-#~ msgid ""
-#~ "<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>"
-#~ msgstr "<p><b>%1</b> <b>%2</b> şirketine taşınmış olamaz. Neden: %3</p>"
-
-#~ msgid "<p><b>%1</b> cannot be moved to <b>%2</b>. Reason: %3</p>"
-#~ msgstr "<p><b>%1</b> <b>%2</b> konumuna taşınmış olamaz. Neden: %3</p>"
-
-#~ msgid "CashFlow"
-#~ msgstr "Nakit Akışı"
-
-#~ msgctxt "Unknown reconciliation state"
-#~ msgid "Unknown"
-#~ msgstr "Bilinmeyen"
-
-#~ msgctxt "Flag for unknown reconciliation state"
-#~ msgid "?"
-#~ msgstr "?"
-
-#~ msgctxt "Column heading for category in tax report"
-#~ msgid "Tax"
-#~ msgstr "Vergi"
-
-#~ msgctxt "Column heading for Cost Center"
-#~ msgid "CC"
-#~ msgstr "CC"
-
-#~ msgid "Total Balance"
-#~ msgstr "Toplam Bakiye"
-
-#~ msgctxt "IBAN, SWIFT, etc."
-#~ msgid "Sort Code"
-#~ msgstr "Sıralama Kodu"
-
-#~ msgctxt "Payment made from account"
-#~ msgid "Payment"
-#~ msgstr "Ödeme"
-
-#~ msgctxt "Deposit into account"
-#~ msgid "Deposit"
-#~ msgstr "Depozit"
-
-#~ msgctxt "Credit suffix"
-#~ msgid "Cr."
-#~ msgstr "Cr."
-
-#~ msgctxt "Debit suffix"
-#~ msgid "Dr."
-#~ msgstr "Dr."
-
-#~ msgid "Cost Center"
-#~ msgstr "Maliyet Merkezi"
-
-#, fuzzy
-#~| msgid "Checking"
-#~ msgctxt "It's about printing bank checks"
-#~ msgid "Check printing"
-#~ msgstr "Kontrol ediliyor"
-
-#~ msgctxt ""
-#~ "@item This comes after the hunder text if the tens unit is different from "
-#~ "0"
-#~ msgid " and "
-#~ msgstr " ve "
-
-#, fuzzy
-#~| msgid "No"
-#~ msgctxt "@label The word to be printed for no fractional part as in No/00"
-#~ msgid "No"
-#~ msgstr "Hayır"
-
-#~ msgid "Check template file"
-#~ msgstr "Çek şablon dosyası"
-
-#~ msgid "There are no entries in this account.\n"
-#~ msgstr "Bu hesap için hiç giriş yok.\n"
-
-#~ msgid "Invalid account"
-#~ msgstr "Geçersiz hesap"
-
-#~ msgid "CSV exporter"
-#~ msgstr "CSV dışa aktarıcısı"
-
-#~ msgid "CSV importer"
-#~ msgstr "CSV içe aktarıcısı"
-
-#, fuzzy
-#~| msgid "CSV importer"
-#~ msgid "GnuCash importer"
-#~ msgstr "CSV içe aktarıcısı"
-
-#~ msgid "Reorganizing accounts..."
-#~ msgstr "Hesaplar yeniden düzenleniyor..."
-
-#, fuzzy
-#~| msgid "IBAN & BIC"
-#~ msgid "IBAN/BIC Data"
-#~ msgstr "IBAN & BIC"
-
-#~ msgid "iCalendar exporter"
-#~ msgstr "iCalendar dışa aktarıcısı"
-
-#~ msgid "KMyMoney print check"
-#~ msgstr "KMyMoney yazdırma denetimi"
-
-#~ msgid "Copyright 2009"
-#~ msgstr "Telif Hakkı 2009"
-
-#~ msgid "Dequeue"
-#~ msgstr "Kuyruktan çıkar"
-
-#~ msgid "Dequeue selected job"
-#~ msgstr "Seçilen işi kuyruktan çıkar"
-
-#~ msgid "Remove the selected job from the list"
-#~ msgstr "Seçilen işi listeden kaldır"
-
-#~ msgid "Execute"
-#~ msgstr "Çalıştır"
-
-#~ msgid "Execute all jobs in the queue"
-#~ msgstr "Kuyruktaki bütün işleri çalıştır"
-
-#~ msgctxt "Warning message"
-#~ msgid "There are no jobs in the queue."
-#~ msgstr "Kuyrukta iş yok."
-
-#~ msgctxt "Message title"
-#~ msgid "No Jobs"
-#~ msgstr "İş yok"
-
-#~ msgid "Jobs"
-#~ msgstr "İşler"
-
-#, fuzzy
-#~| msgid "QIF importer"
-#~ msgid "OFX Importer"
-#~ msgstr "QIF içe aktarıcı"
-
-#~ msgid "QIF importer"
-#~ msgstr "QIF içe aktarıcı"
-
-#, fuzzy
-#~| msgid "Budgets"
-#~ msgid "Budgets view"
-#~ msgstr "Bütçeler"
-
-#~ msgid "Select year"
-#~ msgstr "Yılı seçin"
-
-#~ msgid "Budget year"
-#~ msgstr "Bütçe yılı"
-
-#~ msgid "Change budget year"
-#~ msgstr "Bütçe yılını değiştir"
-
-#~ msgid ""
-#~ "A budget with the name '%1' already exists. It is not advisable to have "
-#~ "multiple budgets with the same identification name. Are you sure you "
-#~ "would like to rename the budget?"
-#~ msgstr ""
-#~ "'%1' isimli bir bütçe zaten var. Aynı isimli birden çok bütçe oluşturmak "
-#~ "tavsiye edilmez. Bütçeyi yeniden adlandırmak istediğinizden emin misiniz?"
-
-#~ msgid "Creates a new budget"
-#~ msgstr "Yeni bir bütçe oluşturur"
-
-#~ msgid "Use this to create a new empty budget."
-#~ msgstr "Yeni boş bir bütçe oluşturmak için bunu kullanın."
-
-#~ msgctxt "New budget"
-#~ msgid "New"
-#~ msgstr "Yeni"
-
-#, fuzzy
-#~| msgid "Rename the current selected budget"
-#~ msgid "Rename the current selected budget."
-#~ msgstr "Mevcut seçilen bütçeyi yeniden adlandır"
-
-#~ msgid "Use this to start renaming the selected budget."
-#~ msgstr "Seçilen bütçeyi yeniden adlandırmaya başlamak için bunu kullan."
-
-#~ msgid "Delete the current selected budget"
-#~ msgstr "Mevcut seçilen bütçeyi sil"
-
-#~ msgid "Use this to delete the selected budget."
-#~ msgstr "Seçilen bütçeyi silmek için bunu kullanın."
-
-#~ msgctxt "@title header of the budget name column"
-#~ msgid "Name"
-#~ msgstr "İsim"
-
-#~ msgid "Upd"
-#~ msgstr "Upd"
-
-#~ msgid "Res"
-#~ msgstr "Res"
-
-#~ msgid "Forecast view"
-#~ msgstr "Tahmin görünümü"
-
-#~ msgid "Not able to display this job."
-#~ msgstr "Bu görev gösterilemiyor."
-
-#~ msgid ""
-#~ "Could not find a plugin to display this job or it does not contain any "
-#~ "data."
-#~ msgstr ""
-#~ "Bu görevi gösterecek eklenti bulunamadı veya herhangi bir veri içermiyor."
-
-#~ msgid "Copy this report to the clipboard"
-#~ msgstr "Bu raporu panoya kopyala"
-
-#~ msgid "Copy"
-#~ msgstr "Kopyala"
-
-#~ msgid "Close this window"
-#~ msgstr "Pencereyi kapat"
-
-#, fuzzy
-#~| msgid ""
-#~| "*.css|CSS files\n"
-#~| "*|All files"
-#~ msgid ""
-#~ "*.css|CSS files\n"
-#~ "*|All files (*)"
-#~ msgstr ""
-#~ " * .css|CSS dosyalar\n"
-#~ " * |Tüm dosyalar"
-
-#~ msgid "Loading securities..."
-#~ msgstr "Senetler yükleniyor..."
-
-#~ msgid "Loading currencies..."
-#~ msgstr "Para birimleri yükleniyor..."
-
-#~ msgid "Loading reports..."
-#~ msgstr "Raporlar yükleniyor..."
-
-#~ msgid "Loading cost center..."
-#~ msgstr "Maliyet merkezi yükleniyor..."
-
-#~ msgid "Unknown XML tag %1 found in line %2"
-#~ msgstr "%2 satırında bilinmeyen XML etiketi %1 bulundu"
-
-#~ msgid "Exception while creating a %1 element: %2"
-#~ msgstr "%1 ögesi oluşturulurken olağandışı durum: %2"
-
-#~ msgid "Loading file information..."
-#~ msgstr "Dosya bilgileri yükleniyor..."
-
-#~ msgid "Loading user information..."
-#~ msgstr "Kullanıcı bilgileri yükleniyor..."
-
-#~ msgid "Saving accounts..."
-#~ msgstr "Hesaplar kaydediliyor..."
-
-#~ msgid "Saving transactions..."
-#~ msgstr "İşlemler kaydediliyor..."
-
-#~ msgid "Saving reports..."
-#~ msgstr "Raporlar kaydediliyor..."
-
-#~ msgid "Saving budgets..."
-#~ msgstr "Bütçeler kaydediliyor..."
-
-#~ msgid "Saving online banking orders..."
-#~ msgstr "Çevrimiçi bankacılık emri kaydediliyor..."
-
-#~ msgid "Saving costcenters..."
-#~ msgstr "Maliyet merkezleri kaydediliyor..."
-
-#~ msgid "Always show a No. field in transaction form"
-#~ msgstr "İşlem formunda No. alanını her zaman göster"
-
-#~ msgid "Show splash screen during startup"
-#~ msgstr "Başlangıçta açılış ekranını göster"
-
-#~ msgid "Show title bar on each view"
-#~ msgstr "Her görünümde başlık çubuğunu göster"
-
-#~ msgid "Select online banking plugin"
-#~ msgstr "Çevrimiçi bankacılık eklentisini seç"
-
-#~ msgid "Reconcile"
-#~ msgstr "Uzlaştırmak"
-
-#~ msgid "Reconcile - disabled because you are currently reconciling <b>%1</b>"
-#~ msgstr "Uzlaştırma kapatıldı çünkü şu anda <b>%1</b> uzlaştırılıyor"
-
-#, fuzzy
-#~| msgid "Cannot create transactions when no account is selected."
-#~ msgid "Add reversing transactions to the currently selected"
-#~ msgstr "Hesap seçilmediğinde işlem oluşturulamaz."
-
-#~ msgid ""
-#~ "At least one split of the selected transactions has been reconciled. Do "
-#~ "you wish to continue to edit the transactions anyway?"
-#~ msgstr ""
-#~ "Seçilen işlemlerin en az bir bölümü uzlaştırılmıştır. İşlemleri "
-#~ "düzenlemeye devam etmek istiyor musunuz?"
-
-#~ msgid "Cannot create transactions when no account is selected."
-#~ msgstr "Hesap seçilmediğinde işlem oluşturulamaz."
-
-#~ msgid "Cannot create transactions in the context of a category."
-#~ msgstr "Bir kategorinin içeriğinde işlem oluşturulamaz."
-
-#~ msgid "Cannot create transactions in a closed account."
-#~ msgstr "Kapanmış bir hesapta işlem oluşturulamaz."
-
-#~ msgid "Cannot edit transactions in the context of a category."
-#~ msgstr "Bir kategorinin içeriğindeki işlem düzenlenemez."
-
-#~ msgid "Cannot edit mixed investment action/type transactions together."
-#~ msgstr "Karışık yatırım işlemi/türü beraber düzenlenemez."
-
-#~ msgid ""
-#~ "Cannot edit investment transactions and non-investment transactions "
-#~ "together."
-#~ msgstr "Yatırım ve yatırım işlemi olmayan işlemler birlikte düzenlenemez."
-
-#~ msgid "Cannot edit investment transactions in the context of this account."
-#~ msgstr "Bu hesabın içeriğindeki yatırım işlemleri düzenlenemez."
-
-#~ msgid ""
-#~ "<p>Please select what you want to do: discard the changes, save the "
-#~ "changes or continue to edit the transaction.</p><p>You can also set an "
-#~ "option to save the transaction automatically when e.g. selecting another "
-#~ "transaction.</p>"
-#~ msgstr ""
-#~ "<p>Lütfen yapmak istediğiniz işlemi seçin: değişiklikleri çıkar, "
-#~ "değişiklikleri kaydet ya da işlemi düzenlemek için devam et.</p><p>Başka "
-#~ "bir işlem seçtiğinizde önceki işlemi otomatik kaydetmek için de bir "
-#~ "seçenek ayarlayabilirsiniz.</p>"
-
-#~ msgid "End transaction edit"
-#~ msgstr "İşlem düzenlemeyi bitir"
-
-#, fuzzy
-#~| msgid ""
-#~| "<p>Please select what you want to do: discard the changes, save the "
-#~| "changes or continue to edit the transaction.</p><p>You can also set an "
-#~| "option to save the transaction automatically when e.g. selecting another "
-#~| "transaction.</p>"
-#~ msgid ""
-#~ "<p>Please select what you want to do: discard or save the changes.</"
-#~ "p><p>You can also set an option to save the transaction automatically "
-#~ "when e.g. selecting another transaction.</p>"
-#~ msgstr ""
-#~ "<p>Lütfen yapmak istediğiniz işlemi seçin: değişiklikleri çıkar, "
-#~ "değişiklikleri kaydet ya da işlemi düzenlemek için devam et.</p><p>Başka "
-#~ "bir işlem seçtiğinizde önceki işlemi otomatik kaydetmek için de bir "
-#~ "seçenek ayarlayabilirsiniz.</p>"
-
-#, fuzzy
-#~| msgid "Date:"
-#~ msgid "Date: %1"
-#~ msgstr "Tarih:"
-
-#, fuzzy
-#~| msgid "Unknown"
-#~ msgctxt "Name for unknown payee"
-#~ msgid "Unknown"
-#~ msgstr "Bilinmeyen"
-
-#, fuzzy
-#~| msgid "Payee%1"
-#~ msgid "Payee: %1"
-#~ msgstr "Alacaklı%1"
-
-#, fuzzy
-#~| msgid "Memo:"
-#~ msgid "Memo: %1"
-#~ msgstr "Not:"
-
-#~ msgid "Statement Details"
-#~ msgstr "Yatırım Ayrıntıları"
-
-#~ msgid "Statement Deposit Details"
-#~ msgstr "Mevduat Bilançosu Detayları"
-
-#~ msgid "Statement Payment Details"
-#~ msgstr "Bilanço Ödeme Ayrıntıları"
-
-#~ msgid "%1 deposit (%2)"
-#~ msgid_plural "%1 deposits (%2)"
-#~ msgstr[0] "%1 mevduat (%2)"
-#~ msgstr[1] "%1 mevduat (%2)"
-
-#, fuzzy
-#~| msgid "%1 payment (%2)"
-#~| msgid_plural "%1 payments (%2)"
-#~ msgid "%1 charge (%2)"
-#~ msgid_plural "%1 charges (%2)"
-#~ msgstr[0] "%1 ödeme (%2)"
-#~ msgstr[1] "%1 ödemeler (%2)"
-
-#~ msgid "%1 payment (%2)"
-#~ msgid_plural "%1 payments (%2)"
-#~ msgstr[0] "%1 ödeme (%2)"
-#~ msgstr[1] "%1 ödemeler (%2)"
-
-#~ msgctxt "%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments"
-#~ msgid "%1, %2"
-#~ msgstr "%1, %2"
-
-#~ msgid "Last reconciled: %1"
-#~ msgstr "Son uzlaştırma: %1"
-
-#~ msgid "Cannot process transaction with focus if it is not selected."
-#~ msgstr "Odaklanma ile işlem seçili değilse gerçekleştirilemez."
-
-#, fuzzy
-#~| msgid "Unable to add transactions"
-#~ msgid "Unable to delete transaction(s)"
-#~ msgstr "Aktarımlar eklenemedi"
-
-#~ msgid "Running automatic reconciliation"
-#~ msgstr "Otomatik uzlaştırma çalıştırılıyor"
-
-#~ msgid "Your Financial Summary"
-#~ msgstr "Finansal Özetiniz"
-
-#~ msgid "Show KMyMoney welcome page"
-#~ msgstr "KMyMoney hoş geldin sayfasını göster"
-
-#~ msgid "Today's due payments"
-#~ msgstr "Bugünün ödemeleri"
-
-#, fuzzy
-#~| msgid "Last reconciled: %1"
-#~ msgid "Last Reconciled"
-#~ msgstr "Son uzlaştırma: %1"
-
-#~ msgid "Select Account:"
-#~ msgstr "Hesap Seç:"
-
-#~ msgid "Change the security information of the selected entry."
-#~ msgstr "Seçilen girdinin teminat bilgilerini değiştir."
-
-#~ msgid "Remove this security item from the file"
-#~ msgstr "Bu teminat maddesini dosyadan kaldır"
-
-#~ msgid "New ledger"
-#~ msgstr "Yeni hesap defteri"
-
-#~ msgid "Do you want to show <b>%1</b> column on every loaded view?"
-#~ msgstr ""
-#~ "Her yüklenmiş görünümde <b>%1</b> sütununu göstermek istiyor musunuz?"
-
-#~ msgid "Do you want to hide <b>%1</b> column on every loaded view?"
-#~ msgstr ""
-#~ "Her yüklenmiş görünümde <b>%1</b> sütununu gizlemek istiyor musunuz?"
-
-#~ msgid "Unable to add schedule: %1"
-#~ msgstr "Program eklenemedi: %1"
-
-#~ msgid "Use this to create a new payee."
-#~ msgstr "Yeni bir alacaklı oluşturmak için bunu kullan."
-
-#~ msgctxt "New payee"
-#~ msgid "New"
-#~ msgstr "Yeni"
-
-#~ msgid "Rename the current selected payee"
-#~ msgstr "Şu anda seçili olan alacaklının adını değiştir"
-
-#~ msgid "Use this to start renaming the selected payee."
-#~ msgstr "Seçilen alacaklının adını değiştirmek için bunu kullan."
-
-#~ msgid "Delete selected payee(s)"
-#~ msgstr "Seçili alacaklı(ları)yı sil"
-
-#~ msgid ""
-#~ "Use this to delete the selected payee. You can also select multiple "
-#~ "payees to be deleted."
-#~ msgstr ""
-#~ "Seçilen alacaklıyı silmek için bunu kullanın. Ayrıca silinecek birden "
-#~ "fazla alacaklı seçebilirsiniz."
-
-#~ msgid "Merge multiple selected payees"
-#~ msgstr "Seçilen birden fazla alacaklıyı birleştir"
-
-#~ msgid "Use this to merge multiple selected payees."
-#~ msgstr "Seçilen birden fazla alacaklıyı birleştirmek için bunu kullan."
-
-#~ msgid "Error executing item"
-#~ msgstr "Öge çalıştırılırken bir hata oluştu"
-
-#~ msgid "Unable to filter account"
-#~ msgstr "Hesap filtrelenemedi"
-
-#~ msgid "Bills"
-#~ msgstr "Faturalar"
-
-#~ msgid "Loans"
-#~ msgstr "Kiralamalar"
-
-#~ msgid "Type/Name"
-#~ msgstr "Tür/İsim"
-
-#~ msgid "Frequency"
-#~ msgstr "Sıklık"
-
-#~ msgid "Unable to load accounts: "
-#~ msgstr "Hesaplar yüklenemedi:"
-
-#~ msgid "<p>Do you really want to remove the tag <b>%1</b>?</p>"
-#~ msgstr "<p><b>%1</b> etiketini gerçekten silmek istiyor musunuz?</p>"
-
-#~ msgid "Do you really want to remove all selected tags?"
-#~ msgstr "Seçilen tüm etiketleri gerçekten silmek istiyor musunuz?"
-
-#~ msgid "Remove Tag"
-#~ msgstr "Etiketi Kaldır"
-
-#~ msgid ""
-#~ "At least one transaction/scheduled transaction is still referenced by a "
-#~ "tag. Currently you have all tags selected. However, at least one tag must "
-#~ "remain so that the transaction/scheduled transaction can be reassigned."
-#~ msgstr ""
-#~ "En az bir işlem/programlanmış işlem hala bir etiket ile eşleştirilmiş "
-#~ "durumda. Şu anda bütün etiketler seçilmiş. Ancak, işlem/programlanmış "
-#~ "işleme yeniden atanmak üzere en az bir etiket kalmalıdır."
-
-#~ msgid "Creates a new tag"
-#~ msgstr "Yeni bir etiket oluşturur"
-
-#~ msgid "Use this to create a new tag."
-#~ msgstr "Yeni bir etiket oluşturmak için bunu kullan."
-
-#~ msgid "Rename the current selected tag"
-#~ msgstr "Seçilen etiketi yeniden adlandır"
-
-#~ msgid "Use this to start renaming the selected tag."
-#~ msgstr "Seçilen etiketi yeniden adlandırmaya başlamak için bunu kullan."
-
-#~ msgid "Delete the current selected tag"
-#~ msgstr "Seçilen etiketi sil"
-
-#~ msgid "Use this to delete the selected tag."
-#~ msgstr "Seçilen etiketi silmek için bunu kullan."
-
-#~ msgid "Go to My Financial Summary"
-#~ msgstr "Finansal Özetime Git"
-
-#~ msgid "Start with one of the following activities..."
-#~ msgstr "Aşağıdaki eylemlerden biriyle başla..."
-
-#~ msgid "What's new in this version"
-#~ msgstr "Bu sürümdeki yenilikler"
-
-#~ msgid "What's new in KMyMoney %1"
-#~ msgstr "KMyMoney %1 sürümündeki yenilikler"
-
-#~ msgid "Return to the Welcome page"
-#~ msgstr "KMyMoney hoş geldin sayfasına dön"
-
-#~ msgid ""
-#~ "We are pleased to announce a major step forward for what has been "
-#~ "described as \"the BEST personal finance manager for FREE users\"."
-#~ msgstr ""
-#~ "\"ÜCRETSİZ kullanıcılar için EN İYİ kişisel finans yöneticisi\" için "
-#~ "önemli bir adımı duyurmaktan mutluluk duyuyoruz."
-
-#~ msgid "What's new in this version:"
-#~ msgstr "Bu sürümdeki yenilikler:"
-
-#~ msgid ""
-#~ "Let us know what you think. We hope that you enjoy using the application."
-#~ msgstr "Düşüncelerinizi bize bildirin. Uygulamayı beğeneceğinizi umuyoruz."
-
-#~ msgid ""
-#~ "Please let us know about any abnormal behavior in the program by "
-#~ "selecting <a href=\"/action?id=help_report_bug\">\"Report bug...\"</a> "
-#~ "from the help menu or by sending an e-mail to the developers mailing list."
-#~ msgstr ""
-#~ "Programın anormal herhangi bir davranışını, yardım menüsünden <a href=\"/"
-#~ "action?id=help_report_bug\">\"Hatayı Raporla...\"</a> seçerek ya da "
-#~ "geliştirici e-posta adresine e-posta göndererek lütfen bize bildirin."
-
-#~ msgid "The KMyMoney Development Team"
-#~ msgstr "KMyMoney Geliştirme Ekibi"
-
-#, fuzzy
-#~| msgid "General Settings"
-#~ msgid "* General changes"
-#~ msgstr "Genel Ayarlar"
-
-#, fuzzy
-#~| msgid "Next Interest Change"
-#~ msgid "* User Interface changes"
-#~ msgstr "Sonraki Faiz Oranı Değişim Zamanı"
-
-#, fuzzy
-#~| msgid "QIF importer"
-#~ msgid "* Im-/Exporter"
-#~ msgstr "QIF içe aktarıcı"
-
-#, fuzzy
-#~| msgid "Added support for online SEPA transactions"
-#~ msgid "- Added support for Woob"
-#~ msgstr "Çevrimiçi SEPA aktarımları için destek eklendi"
-
-#, fuzzy
-#~| msgid "CSV importer"
-#~ msgid "- Improved CSV importer"
-#~ msgstr "CSV içe aktarıcısı"
-
-#, fuzzy
-#~| msgid "CSV exporter"
-#~ msgid "- Added CSV exporter"
-#~ msgstr "CSV dışa aktarıcısı"
-
-#, fuzzy
-#~| msgid "Improved payee matching when importing transactions"
-#~ msgid "- Improved payee matching when importing transactions"
-#~ msgstr "Aktarımlar içe aktarılırken alacaklı eşleştirmesi geliştirildi"
-
-#, fuzzy
-#~| msgid "Online settings"
-#~ msgid "* Online services"
-#~ msgstr "Çevrimiçi ayarlar"
-
-#, fuzzy
-#~| msgid "Online Statement Balance: %1"
-#~ msgid "Online statement balance: %1"
-#~ msgstr "Çevrimiçi Ekstre Bakiyesi: %1"
-
-#~ msgid "Credit"
-#~ msgstr "Kredi"
-
-#~ msgid "Debit"
-#~ msgstr "Borç"
-
-#~ msgid "Pay to"
-#~ msgstr "Alacaklı"
-
-#~ msgctxt "Split editor summary"
-#~ msgid "Assigned too much"
-#~ msgstr "Çok fazla atama yapıldı"
-
-#~ msgctxt "Deposits onto account"
-#~ msgid "Deposits"
-#~ msgstr "Depozitler"
-
-#~ msgctxt "Payments towards credit card"
-#~ msgid "Payments"
-#~ msgstr "Ödemeler"
-
-#~ msgctxt "Payments made from account"
-#~ msgid "Payments"
-#~ msgstr "Ödemeler"
-
-#~ msgctxt "Payments made with credit card"
-#~ msgid "Charges"
-#~ msgstr "Masraflar"
-
-#~ msgctxt "Reconcile state 'Not reconciled'"
-#~ msgid "Not reconciled"
-#~ msgstr "Uzlaştırılmamış"
-
-#~ msgctxt "Reconcile state 'Cleared'"
-#~ msgid "Cleared"
-#~ msgstr "Temizlenmiş"
-
-#~ msgctxt "Reconcile state 'Reconciled'"
-#~ msgid "Reconciled"
-#~ msgstr "Uzlaştırılmış"
-
-#~ msgctxt "Reconcile state 'Frozen'"
-#~ msgid "Frozen"
-#~ msgstr "Donmuş"
-
-#~ msgctxt "Unknown reconcile state"
-#~ msgid "Unknown"
-#~ msgstr "Bilinmeyen"
-
-#~ msgid "Ratio"
-#~ msgstr "Oran"
-
-#~ msgid "Fee Amount"
-#~ msgstr "Aidat Tutarı"
-
-#~ msgid "Account Types"
-#~ msgstr "Hesap Tipleri"
-
-#~ msgctxt "The balance of the selected budget"
-#~ msgid "Balance: "
-#~ msgstr "Bakiye: "
-
-#~ msgctxt "Activity for income categories"
-#~ msgid "Received"
-#~ msgstr "Alınan"
-
-#~ msgctxt "Activity for expense categories"
-#~ msgid "Paid"
-#~ msgstr "Ödenmiş"
-
-#, fuzzy
-#~| msgid "Pay to"
-#~ msgctxt "Payee"
-#~ msgid "Pay to"
-#~ msgstr "Alacaklı"
-
-#, fuzzy
-#~| msgid "From"
-#~ msgctxt "Payer"
-#~ msgid "From"
-#~ msgstr "Kimden:"
-
-#~ msgctxt "Enter todays date into date input widget"
-#~ msgid "T"
-#~ msgstr "T"
-
-#~ msgid "Closed tag"
-#~ msgstr "Kapalı etiket"
-
-#~ msgid "The tag is already present."
-#~ msgstr "Etiket zaten var."
-
-#~ msgid "Prior transactions possibly filtered"
-#~ msgstr "Muhtemelen önceki işlemler süzüldü"
-
-#, fuzzy
-#~| msgid "C"
-#~ msgid "Reconciled Balance: %1"
-#~ msgstr "C"
-
-#~ msgid "Online Statement Balance: %1"
-#~ msgstr "Çevrimiçi Ekstre Bakiyesi: %1"
-
-#~ msgctxt "Unknown payee"
-#~ msgid "Unknown"
-#~ msgstr "Bilinmeyen"
-
-#~ msgctxt "Unknown category"
-#~ msgid "Unknown"
-#~ msgstr "Bilinmeyen"
-
-#~ msgctxt "Unknown security"
-#~ msgid "Unknown"
-#~ msgstr "Bilinmeyen"
-
-#~ msgctxt "label for status combo"
-#~ msgid "Stat&us"
-#~ msgstr "&Durum"
-
-#~ msgid "Sell"
-#~ msgstr "Sat"
-
-#~ msgid "Buy"
-#~ msgstr "Satın Al"
-
-#~ msgid "Investment transaction"
-#~ msgstr "Yatırım aktarımı"
-
-#~ msgid "KMyMoney has matched the two selected transactions (result above)"
-#~ msgstr "KMyMoney elle girilmiş iki işlemi eşleştirdi (sonucu yukarıda)"
-
-#~ msgid "Bank entry:"
-#~ msgstr "Banka girdisi:"
-
-#~ msgid "Your entry:"
-#~ msgstr "Girdiniz:"
-
-#~ msgid "&Deposit"
-#~ msgstr "&Depozit"
-
-#~ msgid "&Transfer"
-#~ msgstr "&Aktarım"
-
-#~ msgid "&Withdrawal"
-#~ msgstr "&Para Çekme"
-
-#~ msgid "&Payment"
-#~ msgstr "&Ödeme"
-
-#~ msgid "&Charge"
-#~ msgstr "&Masraf"
-
-#~ msgid "&Decrease"
-#~ msgstr "&Azalt"
-
-#~ msgid "&Increase"
-#~ msgstr "Ar&tır"
-
-#~ msgid "No Title specified"
-#~ msgstr "Başlık belirtilmedi"
-
-#~ msgid "Preferred account"
-#~ msgstr "Tercih edilen hesap"
-
-#~ msgid "Enter the ticker symbol (e.g. RHAT)."
-#~ msgstr "Ticker sembolünü girin (RHAT gibi.)"
-
-#~ msgid "Enter the CUSIP/ISIN/WKN identification number here"
-#~ msgstr "CUSIP/ISIN/WKN kimlik numarasını buraya girin"
-
-#~ msgid "This wizard allows you to modify the selected security."
-#~ msgstr "Sihirbaz seçilen teminatları değiştirmenize izin verir."
-
-#~ msgid ""
-#~ "The selected symbol is already on file. Do you want to reuse the existing "
-#~ "security?"
-#~ msgstr ""
-#~ "Seçilen sembol zaten dosyada var. Mevcut teminatı yeniden kullanmak "
-#~ "istiyor musunuz?"
-
-#~ msgid "Security found"
-#~ msgstr "Teminat bulundu"
-
-#~ msgid "Routing number"
-#~ msgstr "Yönlendirme numarası"
-
-#~ msgid ""
-#~ "<p>...that you can change the sort order of ledger entries by\n"
-#~ "right-clicking the header of the ledger view?\n"
-#~ msgstr ""
-#~ "<p>...defter görünümündeki başlığa sağ tıklayarak\n"
-#~ "defter girdilerinin sıralanma sırasını değiştirebileceğinizi?\n"
-
-#~ msgid ""
-#~ "<p>...that you can easily move to the other side of a transfer "
-#~ "transaction\n"
-#~ "by opening the context menu with the right mouse button and selecting one "
-#~ "of the\n"
-#~ "'Goto' functions?\n"
-#~ msgstr ""
-#~ "<p>...'Git' fonksiyonlarından birini seçerek\n"
-#~ "ve farenin sağ tuşu ile içerik menüsünü açarak\n"
-#~ "bir aktarım işleminin diğer tarafına kolaylıkla geçebileceğinizi?\n"
-
-#~ msgid ""
-#~ "<p>...that you can start editing a transaction by double-clicking on the\n"
-#~ "transaction in the register?\n"
-#~ msgstr ""
-#~ "<p>...kayıt yerindeki işlemlerde\n"
-#~ "bir işlemi çift tıklayarak düzenlemeye başlayabileceğinizi?\n"
-
-#~ msgid ""
-#~ "<p>...that you can show more details of the selected transaction in the\n"
-#~ "register by selecting the 'ledger lens' feature in the settings dialog?\n"
-#~ msgstr ""
-#~ "<p>...ayarlar penceresinde 'muhasebe defter büyüteci' seçerek\n"
-#~ "kayıt yerinde seçilen işlemi daha ayrıntılı gösterebileceğinizi?\n"
-
-#~ msgid ""
-#~ "<p>...that transactions with no category assigned or split\n"
-#~ "transactions with unassigned values are marked with an exclamation mark \n"
-#~ "on a yellow triangle in the register?\n"
-#~ msgstr ""
-#~ "<p>...kayıt yerinde hiçbir kategori atanmamış işlemler ya da\n"
-#~ "sarı üçgen üzerinde ünlem işareti ile işaretlenmiş\n"
-#~ "atanmamış değerli işlem bölümler?\n"
-
-#~ msgid ""
-#~ "<p>...that you can show all details of the transactions in the register\n"
-#~ "by typing &lt;Ctrl-T&gt; or selecting the 'View -> Show Transaction "
-#~ "Detail'\n"
-#~ "menu entry? You can turn this feature off the same way.\n"
-#~ msgstr ""
-#~ "<p>...kayıtlı tüm işlemlerin ayrıntılarını &lt;Ctrl-T&gt; tuşlarına "
-#~ "basarak veya\n"
-#~ "'Görünüm -> İşlem Ayrıntılarını Göster' menü girdisinden "
-#~ "görüntüleyebileceğinizi?\n"
-#~ "Bu özelliği aynı yolla kapatabilirsiniz.\n"
-
-#~ msgid ""
-#~ "<p>...that you can switch between a listing of all accounts or\n"
-#~ "an icon view of all asset and liability accounts with the tabs\n"
-#~ "in the accounts view?\n"
-#~ msgstr ""
-#~ "<p>...hesaplar görünümünde tüm hesapların bir listesi ile\n"
-#~ "tüm varlık ve borç hesapların simge görünümleri arasında\n"
-#~ "geçiş yapabileceğinizi biliyor musunuz?\n"
-
-#~ msgid "<p>...that the KMyMoney development team wishes you a nice day?\n"
-#~ msgstr "<p>...KMyMoney geliştirme ekibi size iyi günler diler?\n"
-
-#~ msgid ""
-#~ "<p>...you can use your own external filter program to convert any\n"
-#~ "import format to QIF on the fly? See the QIF profile editor for\n"
-#~ "more details.\n"
-#~ msgstr ""
-#~ "<p>...kendi harici programınızı kullanarak herhangi bir içe aktarım\n"
-#~ "biçimini QIF biçimine dönüştürebileceğinizi biliyor musunuz?\n"
-#~ "Ayrıntılar için QIF profil düzenleyicisine bakın.\n"
-
-#~ msgid ""
-#~ "<p>...that you can create a scheduled transaction from an existing\n"
-#~ "one by selecting the context menu on a transaction in the ledger\n"
-#~ "or the \"More...\"-menu in the transaction form?\n"
-#~ msgstr ""
-#~ "<p>...mevcut bir işlemden programlanmış bir işlem oluşturmak için\n"
-#~ "defterdeki işlem üzerinde içerik menüsünden seçebileceğinizi\n"
-#~ "veya işlem formundaki menüden \"Daha Fazla...\" seçeneğini "
-#~ "kullanabileceğinizi?\n"
-
-#~ msgid ""
-#~ "<p>...that you can switch to the payee of a transaction\n"
-#~ "by selecting the context menu on a transaction in the ledger\n"
-#~ "or in the transaction menu?\n"
-#~ msgstr ""
-#~ "<p>...işlem menüsünden\n"
-#~ "ya da muhasebe defterindeki işlem menüsünü seçerek\n"
-#~ "bir işlemin alacaklısını değiştirebileceğinizi?\n"
-
-#~ msgid ""
-#~ "<p>...that you can modify the colors and fonts used for the ledgers\n"
-#~ "via <i>Configure/Colors and Fonts</i>?\n"
-#~ msgstr ""
-#~ "<p>defterler için kullanılan renkleri ve yazı tiplerini\n"
-#~ "<i>Yapılandır/Renkler ve Yazı Tipleri</i> aracılığıyla "
-#~ "değiştirebileceğinizi?\n"
-
-#~ msgid ""
-#~ "<p>...that you can hide transactions prior to a specific date?\n"
-#~ "The date can be modified via <i>Configure/General/Filter</i>.\n"
-#~ msgstr ""
-#~ "<p>...belirtilen bir tarihten önceki işlemleri gizleyebileceğinizi?\n"
-#~ "Bu tarih <i>Yapılandır/Genel/Filtre</i> aracılığı ile "
-#~ "değiştirebilirsiniz.\n"
-
-#~ msgid ""
-#~ "<p>...that you can customize the \"Home-Page\"\n"
-#~ "via <i>Configure/Home</i>?\n"
-#~ msgstr ""
-#~ "<p>...\"Ana Sayfa\"nın <i>Yapılandır/Ev</i>\n"
-#~ "aracılığı ile değiştirilebildiğini?\n"
-
-#~ msgid ""
-#~ "<p>...that you can add more data columns to accounts tables\n"
-#~ "on your \"Home-Page\" via <i>Configure/Home/Account information display</"
-#~ "i>?\n"
-#~ msgstr ""
-#~ "<p>...\"Ana Sayfa\"nıza daha fazla sütunun <i>Yapılandır/Ev/Hesap "
-#~ "bilgisini göster</i>\n"
-#~ "aracılığıyla eklenebildiğini?\n"
-
-#~ msgid ""
-#~ "<p>...that you can enter new transactions even while reconciling\n"
-#~ "an account? You can also make the transaction form visible.\n"
-#~ msgstr ""
-#~ "<p>...bir hesabı uzlaştırırken bile yeni bir işlem girebileceğinizi?\n"
-#~ "Ayrıca işlem formunu görünür yapabilirsiniz.\n"
-
-#~ msgid ""
-#~ "<p>...that you can actively support the KMyMoney development team in\n"
-#~ "cases that heavily depend on your data? You can save your data in an\n"
-#~ "anonymized way for this support.<p>\n"
-#~ "Just open your data file and immediately\n"
-#~ "select <b>File/Save as...</b>. In the <b>Save As...</b> dialog\n"
-#~ "select the filter <b>Anonymous Files</b> and make sure your file gets\n"
-#~ "the extensions <b>.anon.xml</b>. <p>\n"
-#~ "To verify, how the data looks like you are about to send away, you can "
-#~ "open\n"
-#~ "this file in KMyMoney and see how the developers see your data.\n"
-#~ msgstr ""
-#~ "<p>...verilerinize çokça bağlı KMyMoney geliştirme ekibini etkin bir "
-#~ "şekilde\n"
-#~ "destekleyebileceğinizi? Bu destek için verilerinizi anonimleştirilmiş\n"
-#~ "bir şekilde kaydedebilirsiniz.<p>\n"
-#~ "Veri dosyanızı açın ve <b>Farklı Kaydet...</b>i seçin.\n"
-#~ "<b>Farklı Kaydet...</b> penceresinde <b>Anonim Dosyalar</b>\n"
-#~ "filtresini çalıştırın ve dosyalarınızın <b>.anon.xml</b>\n"
-#~ "uzantısına sahip olduğundan emin olun. <p>\n"
-#~ "Göndereceğiniz verinin nasıl göründüğünü doğrulamak için\n"
-#~ "göndereceğiniz dosyayı KMyMoney ile açın\n"
-#~ "ve geliştiricilerin verilerinizi nasıl göreceğini görün.\n"
-
-#~ msgid ""
-#~ "<p>... that you can import your bank statements even without a network \n"
-#~ "connection? Just select the file (OFX or QIF) from the File->Import menu."
-#~ "</p>\n"
-#~ "<p>Provided by Jose Jorge</p>\n"
-#~ msgstr ""
-#~ "<p>...banka dekontlarınızı ağ bağlantısı olmasa bile içe "
-#~ "aktarabileceğinizi?\n"
-#~ "Dosya->İçe Aktar menüsünden (OFX veya QIF) dosyanızı seçmeniz yeterlidir."
-#~ "</p>\n"
-#~ "<p>Jose Jorge tarafından sağlanmıştır</p>\n"
-
-#~ msgid ""
-#~ "Determines whether investment account will be autodetected from statement "
-#~ "header."
-#~ msgstr ""
-#~ "Yatırım hesabının hesap rapor başlığından otomatik algılanıp "
-#~ "algılanmayacağını belirler."
-
-#~ msgid ""
-#~ "Determines whether bank account will be autodetected from statement "
-#~ "header."
-#~ msgstr ""
-#~ "Banka hesabının rapor başlığından otomatik algılanıp algılanmayacağını "
-#~ "belirler."
-
-#~ msgid ""
-#~ "At least one split of the selected transactions has been frozen. Editing "
-#~ "the transactions is therefore prohibited."
-#~ msgstr ""
-#~ "Seçilen işlemlerin bölümlerinden en az biri dondurulmuştur. Bu nedenle "
-#~ "işlemlerin düzenlemesi yasaktır."
-
-#~ msgid "Transaction already frozen"
-#~ msgstr "İşlem çoktan dondurulmuş"
-
-#~ msgid "Account closed"
-#~ msgstr "Hesap kapatıldı"
-
-#~ msgid "Cannot edit transactions with frozen splits."
-#~ msgstr "Dondurulmuş bölümlü işlemler düzenlenemez."
-
-#~ msgid "Cannot create or edit any transactions in Account %1 as it is closed"
-#~ msgstr ""
-#~ "Kapatılmış %1 Hesabına ait herhangi bir işlem düzenlenemez ya da "
-#~ "oluşturulamaz"
-
-#~ msgid "Cannot process transactions in account %1, which is closed."
-#~ msgstr "%1 hesabı kapatıldığında, bu hesaptaki işlemler gerçekleştirilemez."
-
-#~ msgid ""
-#~ "This option hides all accounts that have been closed by the user in views "
-#~ "and selection lists.\n"
-#~ "\n"
-#~ "You can use <b>View/Show all accounts</b> to temporarily show hidden "
-#~ "accounts in the views."
-#~ msgstr ""
-#~ "Bu seçenek görünüm ve seçim listesinde kullanıcı tarafından kapatılmış "
-#~ "bütün hesapları gizler.\n"
-#~ "\n"
-#~ "Görünümlerde gizli hesapları geçici olarak göstermek için <b>Görünüm/"
-#~ "Bütün hesapları göster</b> kullanabilirsin."
-
-#~ msgid "Do not show closed accounts"
-#~ msgstr "Kapatılmış hesapları gösterme"
-
-#~ msgid "Weboob"
-#~ msgstr "Weboob"
-
-#~ msgctxt "HTML (Filefilter)"
-#~ msgid "HTML files"
-#~ msgstr "HTML dosyaları"
-
-#~ msgid "Are you sure you wish to merge these transactions?"
-#~ msgstr "Bu işlemleri birleştirmek istediğinizden emin misiniz?"
-
-#~ msgid "CSV Files (*.csv)"
-#~ msgstr "CSV Dosyaları (*.csv)"
-
-#~ msgid ""
-#~ "Select 'Debit/credit' if both columns exist, otherwise select 'Amount'."
-#~ msgstr ""
-#~ "Eğer sütunların her ikiside mevcutsa 'Borç/Kredi', diğer türlü 'Tutar' "
-#~ "seç."
-
-#, fuzzy
-#~| msgid "Clear selected column entries"
-#~ msgid "Clear selected memo column entries"
-#~ msgstr "Seçilen sütun girişlerini temizle"
-
-#, fuzzy
-#~| msgid "Clear"
-#~ msgctxt "Clear memo column assignment"
-#~ msgid "Clear"
-#~ msgstr "Temizle"
-
-#~ msgid ""
-#~ "Select 'Amount' if only one value column, otherwise select 'Debit/credit'."
-#~ msgstr ""
-#~ "Eğer sadece bir değer sütunu varsa 'Miktar' seçin, aksi halde 'Borç/"
-#~ "Kredi' seçin."
-
-#~ msgctxt "presence of amount column"
-#~ msgid "A&mount"
-#~ msgstr "&Miktar"
-
-#~ msgid "Insert transaction type into No. field for new transactions"
-#~ msgstr "Yeni işlemler için No. alanına işlem türünü girin"
-
-#~ msgid "Enter ISO 4217 code for the new currency"
-#~ msgstr "Yeni para birimi için ISO 4217 kodunu girin"
-
-#~ msgid "Name:"
-#~ msgstr "İsim:"
-
-#~ msgid "Remainder:"
-#~ msgstr "Hatırlatma:"
-
-#~ msgid ""
-#~ "<center>This investment account does not contain the \"%1\" security.</"
-#~ "center><center>Transactions involving this security will be ignored.</"
-#~ "center>"
-#~ msgstr ""
-#~ "<center>Bu yatırım hesabı \"%1\" güvencesi içermiyor.</"
-#~ "center><center>Bunu içeren işlemler göz ardı edilecektir.</center>"
-
-#~ msgid "Unable to create all objects for the investment"
-#~ msgstr "Yatırım için bütün nesneler oluşturulamadı"
-
-#~ msgctxt "@item the number 0"
-#~ msgid "zero"
-#~ msgstr "sıfır"
-
-#~ msgctxt "@item the number 1"
-#~ msgid "one"
-#~ msgstr "bir"
-
-#~ msgctxt "@item the number 2"
-#~ msgid "two"
-#~ msgstr "iki"
-
-#~ msgctxt "@item the number 4"
-#~ msgid "four"
-#~ msgstr "dört"
-
-#~ msgctxt "@item the number 5"
-#~ msgid "five"
-#~ msgstr "beş"
-
-#~ msgctxt "@item the number 9"
-#~ msgid "nine"
-#~ msgstr "dokuz"
-
-#, fuzzy
-#~| msgid "Continue to edit splits"
-#~ msgid "Co&ntinue to edit splits"
-#~ msgstr "Bölümleri düzenlemek için devam et"
-
-#~ msgid ""
-#~ "<qt>The update job is not supported by the bank/account/backend.\n"
-#~ "</qt>"
-#~ msgstr ""
-#~ "<qt>Güncelleştirme işi banka/hesap/art alan uygulaması tarafından "
-#~ "desteklenmiyor.\n"
-#~ "</qt>"
-
-#~ msgid "Job not Available"
-#~ msgstr "Görev kullanılamaz durumda"
-
-#~ msgctxt "Status of the job"
-#~ msgid "updated"
-#~ msgstr "güncellendi"
-
-#~ msgctxt "Status of the job"
-#~ msgid "sent"
-#~ msgstr "gönderildi"
-
-#~ msgctxt "Status of the job"
-#~ msgid "finished"
-#~ msgstr "bitti"
-
-#~ msgctxt "Unknown account provider"
-#~ msgid "(unknown)"
-#~ msgstr "(bilinmeyen)"
-
-#~ msgctxt "Unknown creator of the job"
-#~ msgid "(unknown)"
-#~ msgstr "(bilinmeyen)"
-
-#~ msgid "Application"
-#~ msgstr "Uygulama"
-
-#~ msgctxt "Holiday region (region language)"
-#~ msgid "%1 (%2)"
-#~ msgstr "%1 (%2)"
-
-#~ msgid "Show balance-status of mapped online accounts on the Homepage"
-#~ msgstr "Ana sayfadaki eşleşmiş aktif hesaplar bakiye-durum bilgisi göster"
-
-#~ msgid "Default Account"
-#~ msgstr "Öntanımlı Hesap"
-
-#~ msgid ""
-#~ "    Please enter a price for the investment on or before the opening date."
-#~ msgstr "    Lütfen açılış tarihinden önce yatırım için bir fiyat girin."
-
-#~ msgid ""
-#~ "<center>Check number <b>%1</b> has already been used in account <b>%2</b>."
-#~ "</center><center>Do you want to replace it with the next available number?"
-#~ "</center>"
-#~ msgstr ""
-#~ "<center><b>%2</b> hesabında <b>%1</b> numarası zaten kullanılmıştı.</"
-#~ "center><center>Bu numarayı sonraki kullanılabilir numara ile değiştirmek "
-#~ "ister misiniz?</center>"
-
-#~ msgid "Creating transactions can only be performed in the ledger view"
-#~ msgstr "İşlem oluşturma sadece defter görünümünde gerçekleştirilebilir"
-
-#~ msgid "The statement has been processed with the following results:"
-#~ msgstr "Tablo aşağıdaki sonuçlar ile işletilmişti:"
-
-#~ msgid "Statement stats"
-#~ msgstr "Bilanço istatistikleri"
-
-#~ msgid "%1 thrown in %2:%3"
-#~ msgstr "%2 konumundan %1 fırlatıldı:%3"
-
-#~ msgid "Unable to upload to '%1'"
-#~ msgstr "'%1' konumuna yüklenemedi"
-
-#~ msgid "Internal error - no matching splits"
-#~ msgstr "İç hata - eşleşen hisse yok"
-
-#~ msgid "Internal error - no matching transactions"
-#~ msgstr "İç hata - eşleşen aktarım yok"
-
-#~ msgid "Internal error - no matching schedules"
-#~ msgstr "İç hata - eşleşen program yok"
-
-#~ msgid "Do nothing"
-#~ msgstr "Hiçbir şey yapma"
-
-#, fuzzy
-#~| msgid "Scheduled transactions"
-#~ msgctxt "use   as line break"
-#~ msgid "Scheduled transactions"
-#~ msgstr "Programlanmış işlemler"
-
-#~ msgctxt "Report settings"
-#~ msgid "Reports"
-#~ msgstr "Raporlar"
-
-#~ msgctxt "Forecast settings"
-#~ msgid "Forecast"
-#~ msgstr "Tahmin"
-
-#~ msgid "Encryption"
-#~ msgstr "Şifreleme"
-
-#~ msgid "First transaction does not match requirement for matching"
-#~ msgstr "Birinci işlem eşleştirme için gereksinimleri sağlamıyor"
-
-#~ msgid "Splits for %1 have conflicting values (%2,%3)"
-#~ msgstr "%1 için bölümler çatışan değerler içeriyor (%2,%3)"
-
-#~ msgid "Unable to match all splits (%1)"
-#~ msgstr "Bütün bölümler eşleştirilemedi (%1)"
-
-#~ msgid "Save as database..."
-#~ msgstr "Veritabanı olarak kaydet..."
-
-#~ msgid "Saving file with a new filename..."
-#~ msgstr "Dosya yeni bir dosya ismi ile kaydediliyor..."
-
-#~ msgid "Saving file to database..."
-#~ msgstr "Dosya veritabanına kaydediliyor..."
-
-#~ msgid "Closing window..."
-#~ msgstr "Pencere kapatılıyor..."
-
-#~ msgid "Create a new transaction"
-#~ msgstr "Yeni bir işlem oluştur"
-
-#~ msgid "The statements have been processed with the following results:"
-#~ msgstr "Bilançolar aşağıdaki sonuçlarla işlendi:"
-
-#~ msgid "%1 in file %2 line %3"
-#~ msgstr "%3 satırı %2 dosyası içinde %1"
-
-#~ msgid ""
-#~ "Account %1 contains an opening balance. Please use KMyMoney version 0.8 "
-#~ "or later and earlier than version 0.9 to correct the problem."
-#~ msgstr ""
-#~ "%1 hesabı bir açılış bakiyesi içerir. Sorunu düzeltmek için KMyMoney "
-#~ "uygulamasının 0.8 ve 0.9 arasındaki (0.9 sürümü hariç) sürümlerini kullan."
-
-#~ msgid "Do Nothing"
-#~ msgstr "Hiçbir şey Yapma"
-
-#~ msgid "Cannot add currency with existing id %1"
-#~ msgstr "Var olan %1 numaralı para birimi eklenemez"
-
-#~ msgid "Cannot modify currency with unknown id %1"
-#~ msgstr "bilinmeyen id %1 ile para birimi değiştirilemiyor."
-
-#~ msgid "Cannot remove currency with unknown id %1"
-#~ msgstr "%1 bilinmeyen numaralı para birimi silinemedi"
-
-#~ msgid "Cannot retrieve currency with unknown id '%1'"
-#~ msgstr "'%1' bilinmeyen numaralı para birimi getirelemedi"
-
-#~ msgid "Could not save one onlineJob."
-#~ msgid_plural "Could not save %1 onlineJobs."
-#~ msgstr[0] "Bir çevrim içi iş kaydedilemedi."
-#~ msgstr[1] "%1 çevrim içi iş kaydedilemedi."
-
-#~ msgid ""
-#~ "Unexpected exception '%1' thrown in %2, line %3 caught in "
-#~ "MyMoneyCsvWriter::write()"
-#~ msgstr ""
-#~ "Beklenmeyen istisna '%1', %2 içinden fırlatıldı, %3 satırı "
-#~ "MyMoneyCsvWriter::write() ile yakaladı"
-
-#~ msgid "GnuCash..."
-#~ msgstr "Gnucash..."
-
-#, fuzzy
-#~| msgid ""
-#~| "You cannot import GnuCash data into an existing file. Do you wish to "
-#~| "save this file?"
-#~ msgid ""
-#~ "You cannot import GnuCash data into an existing file. Please close it."
-#~ msgstr ""
-#~ "Varolan bir dosyaya GnuCash verilerini aktaramazsın. Bu dosyayı kaydetmek "
-#~ "ister misiniz?"
-
-#~ msgid ": Sorry. This importer cannot handle version %1 of element %2"
-#~ msgstr ": Üzgünüm. İçeri aktarma aracı %1 sürümünün %2 elemanını işleyemedi"
-
-#~ msgid "This version of the importer cannot handle multi-book files."
-#~ msgstr "İçeri aktarma aracının bu sürümü çoklu-kitap dosyasını işleyemez."
-
-#~ msgid ""
-#~ "Input file cannot be parsed; may be corrupt\n"
-#~ "%1"
-#~ msgstr ""
-#~ "Girdi dosyası ayrıştırılamadı; %1 bozulmuş\n"
-#~ "olabilir"
-
-#~ msgid "Invalid header for file. Should be 'gnc-v2'"
-#~ msgstr "Dosya için geçersiz başlık. 'gnc-v2' olmalıydı"
-
-#~ msgid "Current importer does not recognize GnuCash account type %1"
-#~ msgstr "Mevcut içeri aktarım aracı, %1 GnuCash hesap türünü tanıyamadı"
-
-#~ msgid "Cannot find template transaction for schedule %1"
-#~ msgstr "'%1' programı için işlem şablonu bulunamadı"
-
-#~ msgid "Internal error - invalid interval char in incrDate"
-#~ msgstr "İç hata - incrDate içinde geçersiz aralık karakteri"
-
-#~ msgid "Exceptions"
-#~ msgstr "İstisnalar"
-
-#~ msgid ""
-#~ "Unexpected exception '%1' thrown in %2, line %3 caught in "
-#~ "MyMoneyQifWriter::write()"
-#~ msgstr ""
-#~ "%2 de beklenmeyen '%1' durumu fırlatıldı, %3 satırındaki "
-#~ "MyMoneyQifWriter::write() yakaladı"
-
-#~ msgid "Unable to add budget: %1, thrown in %2:%3"
-#~ msgstr "Bütçe eklenemedi: %1, %2 fırlatıldı:%3"
-
-#~ msgid "Unable to remove budget: %1, thrown in %2:%3"
-#~ msgstr "Bütçe silinemedi: %1, %2 fırlatıldı:%3"
-
-#~ msgid "Unable to modify budget: %1, thrown in %2:%3"
-#~ msgstr "Bütçe değiştirilemedi: %1, %2 fırlatıldı:%3"
-
-#~ msgid "Unable to duplicate transaction(s): %1, thrown in %2:%3"
-#~ msgstr "İşlem(ler) çoğaltılamadı: %1, %2 fırlatıldı:%3"
-
-#~ msgid "Unable to accept transaction: %1, thrown in %2:%3"
-#~ msgstr "İşlem kabul edilemedi: %1, %2 fırlatıldı:%3"
-
-#~ msgid "Unable to modify transaction: %1, thrown in %2:%3"
-#~ msgstr "İşlem değiştirilemedi:%1, %2 fırlatıldı:%3"
-
-#~ msgid "Unable to delete transaction(s): %1, thrown in %2:%3"
-#~ msgstr "İşlem(ler) silinemedi: %1, %2 fırlatıldı:%3"
-
-#~ msgid "No manually entered transaction selected for matching"
-#~ msgstr "Eşleme için seçilen elle girilmiş işlem yok"
-
-#~ msgid "No imported transaction selected for matching"
-#~ msgstr "Eşleme için seçilen içeri aktarılan işlem yok"
-
-#~ msgid "GPG is not available for decryption of file <b>%1</b>"
-#~ msgstr ""
-#~ "<b>%1</b> dosyasının şifrelemesini çözmek için GPG kullanılabilir durumda "
-#~ "değil"
-
-#~ msgid ""
-#~ "File <b>%1</b> contains the old binary format used by KMyMoney. Please "
-#~ "use an older version of KMyMoney (0.8.x) that still supports this format "
-#~ "to convert it to the new XML based format."
-#~ msgstr ""
-#~ "Dosya <b>%1</b> KMyMoney tarafından kullanılan eski ikili biçimi "
-#~ "içeriyor. Lütfen yeni XML tabanlı biçime çevirmek için hala bu biçime "
-#~ "desteği olan KMyMoney uygulamasının (0.8.x) daha eski bir versiyonunu "
-#~ "kullanın."
-
-#~ msgid "File <b>%1</b> contains an unknown file format."
-#~ msgstr "<b>%1</b> dosyası bilinmeyen bir dosya biçimi içeriyor."
-
-#~ msgid "Cannot load file <b>%1</b>. Reason: %2"
-#~ msgstr "<b>%1</b> dosyası yüklenemedi. Sebep: %2"
-
-#~ msgid ""
-#~ "The following error was encountered while decrypting file <b>%1</b>: %2"
-#~ msgstr ""
-#~ "Aşağıdaki hata <b>%1</b> dosyası deşifreleme işlemi sırasında oluştur: %2"
-
-#~ msgid "File <b>%1</b> not found."
-#~ msgstr "<b>%1</b> dosyası bulunamadı."
-
-#~ msgid "Unknown fix level in input file"
-#~ msgstr "Girdi dosyasında bilinmeyen onarma seviyesi"
-
-#~ msgid "Failure while writing to '%1'"
-#~ msgstr "'%1' e yazarken başarısız oldu"
-
-#~ msgid "Malformed URL '%1'"
-#~ msgstr "Bozuk Adres '%1'"
-
-#, fuzzy
-#~| msgid "KMyMoney files (*.kmy *.xml);;All files"
-#~ msgid "*.kmy *.xml|KMyMoney files (*.kmy *.xml);;*|All files (*)"
-#~ msgstr "KMyMoney dosyaları (*.kmy *.xml);;Tüm dosyalar"
-
-#~ msgid "The path has to be valid and cannot be on a remote location."
-#~ msgstr "Yol geçerli olmalı, uzak konumda olmamalı."
-
-#~ msgid "The file exists already. Please create a new file."
-#~ msgstr "Dosya zaten mevcut. Lütfen yeni bir dosya oluşturun."
-
-#~ msgid "The destination directory does not exist or cannot be written to."
-#~ msgstr "Hedef dizin mevcut değil ya da yazılamıyor."
-
-#~ msgid ""
-#~ "KMyMoney will store your financial data in a file on the disk. A standard "
-#~ "filename within your user environment will be the default. This is just "
-#~ "provided for convenience and you can choose any other location here."
-#~ msgstr ""
-#~ "KMyMoney mali verilerinizi diskteki bir dosyada saklar. Kullanıcı "
-#~ "ortamınızdaki standart bir dosya adı varsayılan olacaktır. Bu sadece "
-#~ "kolaylık sağlamak için verilmiştir ve herhangi bir yeri seçebilir."
-
-#~ msgid ""
-#~ "Either the currently selected file exists or the selected directory does "
-#~ "not exist. Please make sure, that\n"
-#~ "\n"
-#~ "<ul>\n"
-#~ "<li>the selected directory exists and</li>\n"
-#~ "<li>the filename is not currently used in this directory.</li>\n"
-#~ "</ul>"
-#~ msgstr ""
-#~ "Ya seçilen dosya mevcut ya da seçilen dizin mevcut değil. Lütfen "
-#~ "aşağıdakilerden emin olun\n"
-#~ "\n"
-#~ "<ul>\n"
-#~ "<li>seçilen dizin mevcut ve</li>\n"
-#~ "<li>seçilen dosya adına sahip bir dosya bu dizinde yok.</li>\n"
-#~ "</ul>"
-
-#~ msgid ""
-#~ "This finishes the setup of your KMyMoney environment. You can now press "
-#~ "the Finish button and start using KMyMoney to record your financial "
-#~ "transactions."
-#~ msgstr ""
-#~ "Bu KMyMoney uygulamasının yapılandırılması işlemini bitirir. Şimdi Bitir "
-#~ "düğmesine basın ve KMyMoney uygulamasını kullanarak aktarımlarınızı "
-#~ "kaydetmeye başlayın."
-
-#~ msgid "Set preferences"
-#~ msgstr "Tercihleri Ayarla"
-
-#~ msgid ""
-#~ "Another instance of KMyMoney is already running. Do you want to quit?"
-#~ msgstr "Başka bir KMyMoney süreci halen çalışıyor. Çıkmak ister misiniz?"
-
-#~ msgctxt "Same transaction if amount differs less than percent."
-#~ msgid "percent."
-#~ msgstr "yüzde."
-
-#~ msgid "User identification"
-#~ msgstr "Kullanıcı Kimliği"
-
-#~ msgid "Additional encryption keys to be used: %1"
-#~ msgstr "Kullanılacak ek şifreleme anahtarları: %1"
-
-#~ msgid "Encryption key to be used"
-#~ msgstr "Kullanılacak şifreleme anahtarı"
-
-#~ msgid "Manage additional keys"
-#~ msgstr "Ek anahtarları yönet"
-
-#~ msgid "A plugin to import data using Weboob was added"
-#~ msgstr "Weboob kullanarak veri aktaracak bir eklenti eklendi"
-
-#~ msgid "When an account cannot be closed, a tooltip explains the reason"
-#~ msgstr "Bir hesap kapatılamadığında, bir ipucu sebebini açıklar"
-
-#~ msgid "Transaction tags were added"
-#~ msgstr "İşlem etiketleri eklendi"
-
-#~ msgid "Proper input methods support was added"
-#~ msgstr "Uygun giriş yöntemleri desteği eklendi"
-
-#~ msgid "Improved the transaction form"
-#~ msgstr "İçeriye aktarılmış işlem formu"
-
-#~ msgid "Added a frozen column to improve visualizing forecast details"
-#~ msgstr ""
-#~ "Tahmin ayrıntılarının görselleştirmelerini arttırmak için dondurulmuş bir "
-#~ "sütun eklendi"
-
-#~ msgid "Improved multiple records management actions (payees, transactions)"
-#~ msgstr ""
-#~ "Geliştirilmiş çoklu kayıt yönetimi eylemleri (alacaklılar, işlemler)"
-
-#~ msgid "Better performance of the user interface"
-#~ msgstr "Kullanıcı arayüzü daha iyi performans"
-
-#~ msgid "Improved the icon theme"
-#~ msgstr "Geliştirilmiş simge temaları"
-
-#~ msgid "CSV importer was improved"
-#~ msgstr "CSV içe aktarıcısı geliştirildi"
-
-#~ msgid "CSV exporter added"
-#~ msgstr "CSV dışa aktarıcısı eklendi"
-
-#~ msgid "OFX plugin now allows custom application version"
-#~ msgstr "OFX eklentici artık özel uygulama sürümüne izin veriyor"
-
-#~ msgid ""
-#~ "*.kmy *.xml|KMyMoney files\n"
-#~ "*|All files"
-#~ msgstr ""
-#~ "*.kmy *.xml|KMyMoney dosyaları\n"
-#~ " *|Tüm dosyalar"
-
-#~ msgid "KMyMoney CSV importer"
-#~ msgstr "KMyMonet CSV içe aktarıcı"
-
-#~ msgid "Copyright 2010-2017"
-#~ msgstr "Telif Hakkı 2010-2017"
-
-#~ msgid "KMyMoney OFX"
-#~ msgstr "KMyMoney OFX"
-
-#~ msgid "KMyMoney QIF importer"
-#~ msgstr "KMyMonet QIF içe aktarıcı"
-
-#~ msgid "Copyright 2002-2017"
-#~ msgstr "Telif Hakkı 2002-2017"
-
-#~ msgid "Importing an XML Statement."
-#~ msgstr "XML dosyası içeri aktarılıyor."
-
-#~ msgid "Unable to setup online parameters for account '%1'"
-#~ msgstr "'%1' hesabı için çevirim içi değişkenler ayarlanamadı"
-
-#~ msgid "Duplicating transactions"
-#~ msgstr "İşlemler ikileniyor"
-
-#~ msgid "Modifying transactions can only be performed in the ledger view"
-#~ msgstr "İşlemleri değiştirme sadece defter görünümünde gerçekleştirilebilir"
-
-#~ msgid "Duplicating transactions can only be performed in the ledger view"
-#~ msgstr ""
-#~ "İşlemlerin çoklanması sadece muhasebe görünümünde gerçekleştirilebilir"
-
-#~ msgid "Edit the current selected transactions"
-#~ msgstr "Seçili aktarımları düzenle"
-
-#~ msgid "Error activating context menu"
-#~ msgstr "Sağ tıklama menüsü etkinleştirilirken hata oluştu"
-
-#, fuzzy
-#~| msgid "Do you really want to remove all selected budgets?"
-#~ msgid "Do you really want to remove all selected d->m_budgetList?"
-#~ msgstr "Seçilen tüm bütçeleri gerçekten silmek istiyor musunuz?"
-
-#~ msgctxt "Update online accounts menu"
-#~ msgid "Update"
-#~ msgstr "Güncelle"
-
-#~ msgid "Adjusting transactions..."
-#~ msgstr "İşlemler ayarlanıyor..."
-
-#~ msgid "Adjusting scheduled transactions..."
-#~ msgstr "Programlanmış işlemler ayarlanıyor..."
-
-#~ msgid "Adjusting budgets..."
-#~ msgstr "Bütçeler ayarlanıyor..."
-
-#~ msgid "<p>Do you really want to delete account <b>%1</b>?</p>"
-#~ msgstr "<p><b>%1</b> hesabını gerçekten silmek istiyor musunuz?</p>"
-
-#~ msgctxt "Update payee"
-#~ msgid "Update"
-#~ msgstr "Güncelle"
-
-#~ msgctxt "Send mail"
-#~ msgid "Send"
-#~ msgstr "Gönder"
-
-#~ msgid "Payee Information"
-#~ msgstr "Alıcı Bilgisi"
-
-#~ msgid "Transaction Matching"
-#~ msgstr "İşlem Eşleştirme"
-
-#~ msgid "Importing a GnuCash file."
-#~ msgstr "Bir Gnucash dosyası içeri aktarılıyor."
-
-#, fuzzy
-#~| msgid "Leave %1 unassigned."
-#~ msgid "Leave %&1 unassigned."
-#~ msgstr "%1 ögesini atanmamış olarak bırak."
-
-#~ msgctxt "New price entry"
-#~ msgid "&New"
-#~ msgstr "&Yeni"
-
-#~ msgid "&Edit"
-#~ msgstr "&Düzenle"
-
-#~ msgid "Continue"
-#~ msgstr "Devam et"
-
-#~ msgctxt "Move item up"
-#~ msgid "&Up"
-#~ msgstr "&Yukarı"
-
-#~ msgid "&Down"
-#~ msgstr "&Aşağı"
-
-#~ msgctxt "Accepts the entered data and stores it"
-#~ msgid "&Update"
-#~ msgstr "&Güncelle"
-
-#~ msgctxt "Create a new source entry for online quotes"
-#~ msgid "&New..."
-#~ msgstr "&Yeni..."
-
-#~ msgctxt "Update tag"
-#~ msgid "Update"
-#~ msgstr "Güncelle"
-
-#~ msgctxt "Unknown account type"
-#~ msgid "Unknown"
-#~ msgstr "Bilinmeyen"
-
-#~ msgid "ReportControl"
-#~ msgstr "Rapor Kontrolü"
-
-#~ msgid "Text colors"
-#~ msgstr "Metin renkleri"
-
-#~ msgid "Grid color"
-#~ msgstr "Izgara rengi"
-
-#~ msgid "Negative value"
-#~ msgstr "Negatif değer"
-
-#~ msgid "List background colors"
-#~ msgstr "Liste arkaplanı rengi"
-
-#~ msgctxt "@label normal color"
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgctxt "@label alternate color"
-#~ msgid "Alternate"
-#~ msgstr "Alternatif"
-
-#~ msgid "Special background colors"
-#~ msgstr "Özel arkaplan renkleri"
-
-#~ msgid "KDE language settings..."
-#~ msgstr "KDE dil ayarları.."
-
-#~ msgid ""
-#~ "Please be aware that changes made in the following dialog affect all KDE "
-#~ "applications not only KMyMoney."
-#~ msgstr ""
-#~ "Aşağıdaki pencerede yaptığınız değişiklikler sadece KMyMoney değil tüm "
-#~ "KDE uygulamalarını etkileyecek lütfen farkında olun."
-
-#~ msgid "List background color"
-#~ msgstr "Liste arkaplanı rengi"
-
-#~ msgid "List grid color"
-#~ msgstr "Liste ızgara rengi"
-
-#~ msgid "List color for negative values"
-#~ msgstr "Negatif sayılar için renk listesi"
-
-#~ msgid "Fi&le (SQLite only)"
-#~ msgstr "Dos&ya (Sadece SQLite)"
-
-#~ msgid "Failed to edit security: %1"
-#~ msgstr "Teminat düzenlemede hata oluştu: %1"
-
-#~ msgctxt "Investment name"
-#~ msgid "Name"
-#~ msgstr "İsim"
-
-#~ msgctxt "Symbol name"
-#~ msgid "Symbol"
-#~ msgstr "Sembol"
-
-#~ msgctxt "Investment value"
-#~ msgid "Value"
-#~ msgstr "Değer"
-
-#~ msgctxt "Shares quantity"
-#~ msgid "Quantity"
-#~ msgstr "Miktar"
-
-#~ msgctxt "Investment price"
-#~ msgid "Price"
-#~ msgstr "Fiyat"
-
-#~ msgctxt "name of the security"
-#~ msgid "Name"
-#~ msgstr "İsim"
-
-#~ msgid "account"
-#~ msgstr "hesap"
-
-#~ msgid "al"
-#~ msgstr "al"
-
-#~ msgid "category"
-#~ msgstr "kategori"
-
-#~ msgid "ei"
-#~ msgstr "ei"
-
-#~ msgid "Account \"%1\" disappeared: %2"
-#~ msgstr "\"%1\" Hesabı kayboldu: %2"
-
-#~ msgctxt "The 'type of object' 'x' does not exist"
-#~ msgid "The %1 '%2' does not exist. Do you want to create it?"
-#~ msgstr "%1 '%2' yok. Oluşturmak ister misiniz?"
-
-#~ msgctxt "To select account"
-#~ msgid "Select %1"
-#~ msgstr "%1 hesabını seç"
-
-#~ msgid ""
-#~ "The %1 <b>%2</b> currently exists. Do you want to import transactions to "
-#~ "this account?"
-#~ msgstr ""
-#~ "%1 <b>%2</b> şu anda var. İşlemleri bu hesaba aktarmak ister misiniz?"
-
-#~ msgid ""
-#~ "The %1 <b>%2</b> currently does not exist. You can create a new %3 by "
-#~ "pressing the <b>Create</b> button or select another %4 manually from the "
-#~ "selection box."
-#~ msgstr ""
-#~ "The %1 <b>%2</b> şu anda mevcut değil. <b>Oluştur</b> butonuna basarak "
-#~ "yeni bir %3 oluşturabilirsiniz ya da seçim kutusundan başka bir %4 "
-#~ "seçebilirsiniz."
-
-#~ msgid "You must select or create an account."
-#~ msgstr "Bir hesap seçmelisiniz ya da oluşturmalısınız."
-
-#~ msgid "You must select or create a category."
-#~ msgstr "Bir kategori seçmelisiniz ya da oluşturmalısınız."
-
-#~ msgctxt "@action create new export profile"
-#~ msgid "New..."
-#~ msgstr "Yeni..."
-
-#~ msgctxt "@action create new import profile"
-#~ msgid "New..."
-#~ msgstr "Yeni..."
-
-#~ msgid "QIF Profile Editor..."
-#~ msgstr "QIF Profil Düzenleyici..."
-
-#~ msgid "Importing file..."
-#~ msgstr "Dosya içeri aktarılıyor..."
-
-#~ msgid "Percentage of default font size:"
-#~ msgstr "Öntanımlı yazı tipi boyutu yüzdesi:"
-
-#~ msgid "Map to online account..."
-#~ msgstr "Çevirim içi Hesaba eşle..."
-
-#~ msgid "Symbol found: %1"
-#~ msgstr "Sembol bulundu: %1"
-
-#~ msgctxt "Internal identifier"
-#~ msgid "ID"
-#~ msgstr "Kimlik"
-
-#~ msgid "Regular Expression to extract the symbol from the downloaded data"
-#~ msgstr "İndirilen verilerden sembol ayıklamak için düzenli ifade"
-
-#~ msgid "All currencies converted to %1\n"
-#~ msgstr "Tüm para birimleri %1 e dönüştürüldü\n"
-
-#~ msgid "All values shown in %1 unless otherwise noted\n"
-#~ msgstr "Aksi belirtilmediği sürece tüm değerler %1 içinde gösteriliyor\n"
-
-#~ msgctxt "Report date range"
-#~ msgid "%1 through %2\n"
-#~ msgstr "%2 ile %1 arasından\n"
-
-#~ msgctxt "@title header of the quote source name column"
-#~ msgid "Name"
-#~ msgstr "İsim"
-
-#~ msgid ""
-#~ "<center>Row number %1 does not have the expected number of columns.</"
-#~ "center><center>This might not be a problem, but it may be a header line.</"
-#~ "center><center>You may accept all similar items, or just this one, or "
-#~ "cancel.</center>"
-#~ msgstr ""
-#~ "<center>%1 satır numarası beklenen sütun numarası değil.</"
-#~ "center><center>Bu bir sorun olmayabilir fakat o bir üst bilgi satırı "
-#~ "olabilir.</center><center>Benzer bütün ögeleri ya da sadece bir tanesini "
-#~ "kabul edebilirsin, ya da iptal edebilirsin.</center>"
-
-#~ msgid "Accept All"
-#~ msgstr "Tümünü Kabul Et"
-
-#~ msgid "Accept This"
-#~ msgstr "Bunu Kabul Et"
-
-#~ msgid ""
-#~ "<center>An invalid date has been detected during import.</"
-#~ "center><center><b>'%1'</b></center>Please check that you have set the "
-#~ "correct date format,\n"
-#~ "<center>and start and end lines.</center>"
-#~ msgstr ""
-#~ "<center>İçeri aktarım sırasında geçersiz tarih belirlendi.</"
-#~ "center><center><b>'%1'</b></center>Lütfen ayarladığınız tarih biçiminin "
-#~ "doğruluğunu,\n"
-#~ "<center>başlangıç ve bitiş satırlarını kontrol edin.</center>"
-
-#~ msgid ""
-#~ "<center>The columns selected are invalid.</center>There must an amount or "
-#~ "debit and credit fields, plus date and payee fields."
-#~ msgstr ""
-#~ "<center>Seçilen sütunlar geçersiz.</center>Tutar ya da borç ve kredi "
-#~ "alanları, ek olarak tarih ve alacaklı alanları gerekir. "
-
-#~ msgid ""
-#~ "<center>You possibly need to check the start and end line settings, or "
-#~ "reset 'Skip setup'.</center>"
-#~ msgstr ""
-#~ "<center>Muhtemelen başlangıç ve bitiş satırı ayarlarını kontrol etmek ya "
-#~ "da 'Kurulumu Atla' ile sıfırlamak gerekir.</center>"
-
-#~ msgid "&Investment"
-#~ msgstr "&Yatırım"
-
-#~ msgid ""
-#~ "<center>The columns selected are invalid.</center>There must an amount or "
-#~ "quantity fields, symbol or security name, plus date and type field."
-#~ msgstr ""
-#~ "<center>Seçilen sütunlar geçersiz.</center>Tutar ya da miktar, sembol ya "
-#~ "da teminat ismi, ek olarak tarih ve tip alanları gerekir. "
-
-#~ msgid "0.01"
-#~ msgstr "0.01"
-
-#~ msgid "0.10"
-#~ msgstr "0.10"
-
-#~ msgid "10"
-#~ msgstr "10"
-
-#~ msgid "100"
-#~ msgstr "100"
-
-#~ msgid "Buys"
-#~ msgstr "Alır"
-
-#~ msgid "Sells"
-#~ msgstr "Satar"
-
-#~ msgid "Budget <numid>%1</numid>"
-#~ msgstr "Bütçe <numid>%1</numid>"
-
-#~ msgid "Budget <numid>%1</numid> (<numid>%2</numid>)"
-#~ msgstr "Bütçe <numid>%1</numid> (<numid>%2</numid>)"
-
-#~ msgctxt "@title user name of the database"
-#~ msgid "Username"
-#~ msgstr "Kullanıcı adı"
-
-#~ msgctxt "Chart lines legend"
-#~ msgid "Legend"
-#~ msgstr "Gösterge"
-
-#~ msgid "digits"
-#~ msgstr "rakam"
-
-#~ msgid "Price Precision"
-#~ msgstr "Fiyat Hassasiyeti"
-
-#~ msgid "Cash Fraction"
-#~ msgstr "Nakit Para Bölümü"
-
-#~ msgid "Show national currencies"
-#~ msgstr "Ulusal para birimlerini göster"
-
-#~ msgid ""
-#~ "<p>Do you really want to remove the currency <b>%1</b> from the file?</"
-#~ "p><p><i>Note: adding currencies is not currently supported.</i></p>"
-#~ msgstr ""
-#~ "<p>Dosyadan <b>%1</b> para birimini gerçekten kaldırmak istiyor musunuz?</"
-#~ "p><p><i>Not: Para birimi ekleme şu anda desteklenmiyor.</i></p>"
-
-#, fuzzy
-#~| msgid ""
-#~| "<p>On this tab, you configure how you'd like the rows and columns to be "
-#~| "selected and organized.</p>"
-#~ msgid ""
-#~ "<p>On this tab, you configure how you'd like the rows and columns to be "
-#~ "selected and organized.</p>"
-#~ msgstr ""
-#~ "<p>Bu sekmede satır ve sütunların nasıl seçileceğini ve düzenleneceğini "
-#~ "yapılandırabilirsiniz.</p>"
-
-#~ msgid "Columns"
-#~ msgstr "Sütunlar"
-
-#~ msgid ""
-#~ "Click either Banking or Investment.\n"
-#~ "Then select 'Add New Profile' and enter a new name.\n"
-#~ "Then open the file you wish to import,\n"
-#~ "and set up your new parameters.\n"
-#~ "Or, select an existing profile, to use saved settings."
-#~ msgstr ""
-#~ "Bankacılık veya Yatırım'dan birine tıklayın.\n"
-#~ "Ardından 'Yeni Profil Ekle'yi seçin ve yeni bir isim girin.\n"
-#~ "Sonra içe aktarmak istediğiniz dosyayı seçin\n"
-#~ "ve yeni parametrelerinizi ayarlayın.\n"
-#~ "Veya mevcut bir profili seçin ve kaydedilmiş ayarları kullanın."
-
-#, fuzzy
-#~| msgid "C"
-#~ msgid "Cr"
-#~ msgstr "C"
-
-#, fuzzy
-#~| msgid "Transaction amount"
-#~ msgid "Transaction&nbsp;amount"
-#~ msgstr "Aktarım tutarı"
-
-#~ msgid "Include Stylesheet"
-#~ msgstr "Biçim Dosyalarını İçer"
-
-#~ msgid "Choose..."
-#~ msgstr "Seç..."
-
-#~ msgid "Browse..."
-#~ msgstr "Gözat..."
-
-#~ msgid "Export"
-#~ msgstr "Dışarıya Aktar"
-
-#~ msgid "Pri&nt"
-#~ msgstr "&Yazdır"
-
-#~ msgid "O&K"
-#~ msgstr "&Tamam"
-
-#, fuzzy
-#~| msgid ""
-#~| "The transaction below has an unrecognised type/action.\n"
-#~| "Please select an appropriate entry."
-#~ msgid ""
-#~ "<center>The transaction below has an unrecognised type or action.</center>"
-#~ msgstr ""
-#~ "Aşağıdaki işlem tanınmayan tür/eyleme sahip.\n"
-#~ "Lütfen uygun bir girdi seçin."
-
-#, fuzzy
-#~| msgid ""
-#~| "The transaction below has an unrecognised type/action.\n"
-#~| "Please select an appropriate entry."
-#~ msgid ""
-#~ "<center>The transaction below has an invalid type or action.</center>"
-#~ msgstr ""
-#~ "Aşağıdaki işlem tanınmayan tür/eyleme sahip.\n"
-#~ "Lütfen uygun bir girdi seçin."
-
-#~ msgid "Results table"
-#~ msgstr "Sonuç Tablosu"
-
-#~ msgid "Column "
-#~ msgstr "Sütun "
-
-#~ msgid "Redefine Transaction Type"
-#~ msgstr "İşlem türünü yeniden tanımla"
-
-#~ msgid ""
-#~ "The transaction below has an unrecognised type/action.\n"
-#~ "Please select an appropriate entry."
-#~ msgstr ""
-#~ "Aşağıdaki işlem tanınmayan tür/eyleme sahip.\n"
-#~ "Lütfen uygun bir girdi seçin."
-
-#~ msgctxt "the number of the column containing error"
-#~ msgid "Type/action column"
-#~ msgstr "Tür/eylem sütunu"
-
-#~ msgid ""
-#~ "Remove security name from selection list.\n"
-#~ "It does not affect the underlying security itself."
-#~ msgstr ""
-#~ "Teminat adını seçim listesinden kaldır.\n"
-#~ "Bu işlem teminatı etkilemez."
-
-#~ msgid "Security Name"
-#~ msgstr "Senet Adı"
-
-#~ msgid "Filter text"
-#~ msgstr "Metin süz"
-
-#, fuzzy
-#~| msgid ""
-#~| "If the Detail column has an activity type prefixed by a standard text,\n"
-#~| "enter the text here. For instance, if a field contains, say, 'type: "
-#~| "dividend',\n"
-#~| "enter 'type: '."
-#~ msgid ""
-#~ "If the Name column has an activity type prefixed by a standard text,\n"
-#~ "enter the text here. For instance, if a field contains, say, 'type: "
-#~ "dividend',\n"
-#~ "enter 'type: '."
-#~ msgstr ""
-#~ "Eğer Detay sütunu standart bir metin ile başlayan eylem türü içeriyorsa,\n"
-#~ "burada metni girin. Örneğin, eğer alan şunu içeriyorsa,\n"
-#~ "'tür: temettü', 'tür:' gir demektir."
-
-#~ msgid ""
-#~ "Alternatively, if the file contains just a single security, enter its "
-#~ "name here.\n"
-#~ "The names are retained and may be selected from the list here."
-#~ msgstr ""
-#~ "Alternatif olarak, eğer dosya tek bir teminat içeriyorsa, adını buraya "
-#~ "girin.\n"
-#~ "Adlar muhafaza edilir ve burada listeden seçilebilir."
-
-#, fuzzy
-#~| msgctxt "verb"
-#~| msgid "sell"
-#~ msgctxt "%1"
-#~ msgid "sell"
-#~ msgstr "sat"
-
-#, fuzzy
-#~| msgctxt "noun, interest income"
-#~| msgid "interest"
-#~ msgctxt "%1"
-#~ msgid "interest"
-#~ msgstr "faiz"
-
-#, fuzzy
-#~| msgid "Income"
-#~ msgctxt "%1"
-#~ msgid "income"
-#~ msgstr "Gelir"
-
-#, fuzzy
-#~| msgctxt "verb, to reinvest"
-#~| msgid "reinvest"
-#~ msgctxt "%1"
-#~ msgid "reinvest"
-#~ msgstr "yeniden yatır"
-
-#, fuzzy
-#~| msgctxt "verb, to reinvest"
-#~| msgid "reinvest"
-#~ msgctxt "%1"
-#~ msgid "reinv"
-#~ msgstr "yeniden yatır"
-
-#, fuzzy
-#~| msgctxt "verb"
-#~| msgid "add"
-#~ msgctxt "%1"
-#~ msgid "add"
-#~ msgstr "ekle"
-
-#, fuzzy
-#~| msgctxt "noun, cash dividend"
-#~| msgid "dividend"
-#~ msgctxt "%1"
-#~ msgid "stock dividend"
-#~ msgstr "kar payı"
-
-#, fuzzy
-#~| msgid "Transfer"
-#~ msgctxt "%1"
-#~ msgid "transfer in"
-#~ msgstr "Aktarım"
-
-#, fuzzy
-#~| msgid "Your entry:"
-#~ msgctxt "%1"
-#~ msgid "journal entry"
-#~ msgstr "Girdiniz:"
-
-#, fuzzy
-#~| msgctxt "noun, cheque, check"
-#~| msgid "check"
-#~ msgctxt "%1"
-#~ msgid "check"
-#~ msgstr "Çek"
-
-#, fuzzy
-#~| msgctxt "noun"
-#~| msgid "payment"
-#~ msgctxt "%1"
-#~ msgid "payment"
-#~ msgstr "Ödeme"
-
-#, fuzzy
-#~| msgid "All payments"
-#~ msgctxt "%1"
-#~ msgid "bill payment"
-#~ msgstr "Tüm ödemeler"
-
-#~ msgid ""
-#~ "<center>Do you want to add a new security</center>\n"
-#~ "<center>%1 </center>\n"
-#~ "<center>to the selection list?</center>\n"
-#~ "<center>Click 'Continue' to add the name.</center>\n"
-#~ "<center>Otherwise, click 'Cancel'.</center>"
-#~ msgstr ""
-#~ "<center>Seçim listesine yeni bir senet </center>\n"
-#~ "<center>%1 </center>\n"
-#~ "<center>eklemek istiyor musunuz?</center>\n"
-#~ "<center>Ad  eklemek için 'Devam Et' tuşunu tıklayın.</center>\n"
-#~ "<center>Aksi halde, 'İptal Et' tuşunu tıklayın.</center>"
-
-#~ msgid "Add Security Name"
-#~ msgstr "Senet Adı Ekle"
-
-#~ msgid ""
-#~ "<center>You have selected to remove from the selection list</center>\n"
-#~ "<center>%1. </center>\n"
-#~ "<center>Click 'Continue' to remove the name, or</center>\n"
-#~ "<center>Click 'Cancel'' to leave 'as is'.</center>"
-#~ msgstr ""
-#~ "<center>Seçim listesinden kaldırmak için</center>\n"
-#~ "<center>%1 seçtiniz.</center>\n"
-#~ "<center>Adı kaldırmak için 'Devam Et' tuşunu tıklayın, ya da</center>\n"
-#~ "<center>olduğu gibi bırakmak için 'İptal Et' tuşunu tıklayın.</center>"
-
-#~ msgid "Hide Security Name"
-#~ msgstr "Senet Adını Gizle"
-
-#~ msgid "Symbols and Security Names present"
-#~ msgstr "Semboller ve Güvenlik İsimleri gösteriliyor"
-
-#, fuzzy
-#~| msgid "Exists"
-#~ msgctxt "Security exists"
-#~ msgid "Exists"
-#~ msgstr "Varolanlar"
-
-#~ msgid "Security and Symbols"
-#~ msgstr "Teminat ve Semboller"
-
-#~ msgid "Edit Securities and Symbols"
-#~ msgstr "Teminat ve Sembolleri düzenle"
-
-#, fuzzy
-#~| msgid ""
-#~| "The following symbols and securities are present in the import file.\n"
-#~| "Existing securities will be flagged in the 'Exists' column.\n"
-#~| "If necessary, edit security names to match your existing File,\n"
-#~| "and add missing symbols, which are necessary for import.\n"
-#~| "For new securities, edit the name in one of its rows, and that name will "
-#~| "apply to its other rows, if any."
-#~ msgid ""
-#~ "The following symbols and securities are present in the import file.\n"
-#~ "Existing securities will be flagged in the 'Status' column.\n"
-#~ "If necessary, add security names, and missing symbols, which are "
-#~ "necessary for import.\n"
-#~ "For new securities, edit the name in one of its rows, and that name will "
-#~ "apply to its other rows, if any."
-#~ msgstr ""
-#~ "Aşağıdaki simgeler ve senetler içe aktarma dosyasında bulunuyor.\n"
-#~ "Mevcut senetler 'Varolanlar' sütununda bayrakla işaretleneceklerdir.\n"
-#~ "Gerekirse, içe aktarma için gerekli olan senet adlarını\n"
-#~ "mevcut dosyanızda düzenleyin ve eksik simgeleri ekleyin.\n"
-#~ "Yeni senetler için satırlarından birindeki ismi düzenleyin ve bu isim "
-#~ "eğer varsa diğer satırlarına da uygulansın."
-
-#~ msgid ""
-#~ "*.csv *.PRN *.txt | CSV Files\n"
-#~ " *|All files"
-#~ msgstr ""
-#~ "*.csv *.PRN *.txt | CSV Dosyaları\n"
-#~ " *|Tüm dosyalar"
-
-#~ msgid "Incorrect number or type of fields.  Check the field delimiter."
-#~ msgstr ""
-#~ "Hatalı sayı ya da alan türleri.  Alan sınırlayıcısını kontrol ediniz."
-
-#~ msgid "Completion Wizard Page"
-#~ msgstr "tamamlama sayfa sihirbazı"
-
-#~ msgid ""
-#~ "<center>The start line is greater than the end line.\n"
-#~ "</center><center>Please correct your settings.</center>"
-#~ msgstr ""
-#~ "<center>Başlangıç satırı bitiş satırından daha geniş.\n"
-#~ "</center><center>Lütfen ayarlarınızı kontrol ediniz.</center>"
-
-#~ msgid ""
-#~ "Row number %1 may be a header line, as it has an incomplete set of "
-#~ "entries.<center>It may be that the start line is incorrectly set.</center>"
-#~ msgstr ""
-#~ "Girdi dizilerinde eksiklik olmasının nedeni, %1 numaralı satır üst bilgi "
-#~ "satırı olabilir.<center>Başlangı satırı yanlış ayarlanmış olabilir.</"
-#~ "center>"
-
-#~ msgid ""
-#~ "<center>The cell in column '%1' on row %2 is empty.</"
-#~ "center><center>Please check your selections.</center><center>Continue or "
-#~ "Cancel?</center>"
-#~ msgstr ""
-#~ "<center>%2 satır ve %1 sütunundaki hücre boş.</center><center>Lütfen "
-#~ "seçimlerinizi kontrol ediniz.</center><center>Devam et ya da İptal et?</"
-#~ "center>"
-
-#~ msgid "Selections Warning"
-#~ msgstr "Uyarı Seçimleri"
-
-#~ msgid ""
-#~ "<center>The selected decimal symbol was not present in column %1,</"
-#~ "center><center>- but may now have been added.</center><center>If the "
-#~ "<b>decimal</b> symbol displayed does not match your system setting</"
-#~ "center><center>your data is unlikely to import correctly.</"
-#~ "center><center>Please check your selection.</center>"
-#~ msgstr ""
-#~ "<center>Sütun %1 de seçilen ondalık sembolü yoktur,</center><center>- "
-#~ "fakat şimdi eklenildi.</center><center> Eğer <b>ondalık</b> sembol sistem "
-#~ "ayarlarınızla eşleşmediği gösterilirse</center><center>datanızın içe "
-#~ "aktarımı doğru bir şekilde olmayacaktır.</center><center>Lütfen "
-#~ "seçiminizi kontrol edin.</center>"
-
-#~ msgid ""
-#~ "<center>The selected decimal symbol ('%1') was not present</"
-#~ "center><center>or has produced invalid results in row %2, and possibly "
-#~ "more.</center><center>Please try again.</center>"
-#~ msgstr ""
-#~ "<center>Seçilen ondalık sembol ('%1') mevcut değildi</center><center>ya "
-#~ "da %2 satırında muhtemelen daha fazlasında geçersiz sonuçlar üretildi.</"
-#~ "center><center>Lütfen tekrar deneyin.</center>"
-
-#~ msgid "Invalid Conversion"
-#~ msgstr "Geçersiz Dönüşüm"
-
-#~ msgid ""
-#~ "<center>An invalid value has been detected in column %1 on row %2.</"
-#~ "center>Please check that you have selected the correct columns."
-#~ "<center>You may accept all similar items, or just this one, or cancel.</"
-#~ "center>"
-#~ msgstr ""
-#~ "<center>%2 satırı %1 sütununda geçersiz bir değer tespit edildi.</"
-#~ "center>Lütfen doğru sütunu seçtiğinize emin olun.<center>Benzer bütün "
-#~ "ögeleri ya da sadece bir tanesini kabul edebilir ya da iptal "
-#~ "edebilirsiniz.</center>"
-
-#~ msgid "CSVWizard"
-#~ msgstr "CSVSihirbazı"
-
-#~ msgctxt "Noun, the introduction."
-#~ msgid "1. Start"
-#~ msgstr "1. Başlangıç"
-
-#~ msgid "3. Banking"
-#~ msgstr "3. Bankacılık"
-
-#~ msgid "4. Investing"
-#~ msgstr "4. Yatırım"
-
-#~ msgid "5. Lines"
-#~ msgstr "5. Satırlar"
-
-#~ msgctxt "Noun, the end."
-#~ msgid "6. Finish"
-#~ msgstr "6. Bitiş"
-
-#~ msgid ""
-#~ "<center>Please select the decimal symbol used in your file.\n"
-#~ "</center>"
-#~ msgstr ""
-#~ "<center>Lütfen dosyanızda kullanılan ondalık sembolü seçin.\n"
-#~ "</center>"
-
-#~ msgid "Investment import"
-#~ msgstr "Yatırım ithalat"
-
-#~ msgid ""
-#~ "<center>Please enter a name or symbol for the security.\n"
-#~ "</center>"
-#~ msgstr ""
-#~ "<center>Lütfen senet için bir ad ya da sembol girin.\n"
-#~ "</center>"
-
-#~ msgid "Lines-Date Wizard Page"
-#~ msgstr "Satırlar-Tarih Sayfası Sihirbazı"
-
-#~ msgid ""
-#~ "Please select the start and end lines.\n"
-#~ "Ensure you drop any trailer lines.\n"
-#~ "Also, select the correct date format."
-#~ msgstr ""
-#~ "Lütfen başlangıç ve bitiş satırlarını seçin.\n"
-#~ "Alt bilgi satırlarını bıraktığınıza emin olun.\n"
-#~ "Ayrıca, doğru tarih biçimini de seçin."
-
-#, fuzzy
-#~| msgid "Transaction History"
-#~ msgid "NewTransactionEditor"
-#~ msgstr "Aktarım Geçmişi"
-
-#, fuzzy
-#~| msgid "Transactions"
-#~ msgid "NewTransactionForm"
-#~ msgstr "Aktarımlar"
-
-#~ msgid "Add New Profile"
-#~ msgstr "Yeni Profil Ekle"
-
-#~ msgid ""
-#~ "<center>You have cleared the profile name '%1'.</center>\n"
-#~ "<center>If you wish to delete the entry, click 'Delete'.</center>\n"
-#~ "<center>Otherwise, click 'Keep'.</center>"
-#~ msgstr ""
-#~ "<center>'%1' profil adını sildin.</center>\n"
-#~ "<center>Girdiyi silmek isterseniz, 'Sil' tıklayın.</center>\n"
-#~ "<center>Aksi halde, 'Sakla' tıklayın.</center>"
-
-#~ msgid "Delete or Edit Profile Name"
-#~ msgstr "Profil Adını Sil ya da Düzenle"
-
-#~ msgid "Keep"
-#~ msgstr "Sakla"
-
-#~ msgid ""
-#~ "<center>The name you have entered does not exist,</center><center>but you "
-#~ "have not elected to add a new profile</center><center>If you wish to add "
-#~ "'%1' as a new profile,</center><center> click 'Yes'.  Otherwise, click "
-#~ "'No'</center>"
-#~ msgstr ""
-#~ "<center>Girdiğiniz isim mevcut değil,</center><center>fakat yeni bir "
-#~ "profil eklemek için seçmediniz</center><center>Eğer '%1' yeni profil "
-#~ "olarak eklemek istiyorsanız,</center><center>'Evet' tıklayın.  Aksi "
-#~ "halde, 'Hayır' tıklayın</center>"
-
-#~ msgid "Adding profile name."
-#~ msgstr "Yeni profil adı ekleme."
-
-#~ msgid ""
-#~ "<center>You have edited the name of a profile</center><center>from '%1' "
-#~ "to '%2'.</center><center>If you wish to accept the new name, click 'Yes'."
-#~ "</center><center>Otherwise, click 'No'</center>"
-#~ msgstr ""
-#~ "<center>Bir profilin adını düzenlediniz</center><center>'%1' olan adı "
-#~ "'%2' olarak değiştirdiniz.</center><center>Eğer bu yeni adı kabul etmek "
-#~ "istiyorsanız, 'Evet' tuşunu tıklayın.</center><center>İstemiyorsanız, "
-#~ "'Hayır' tuşunu tıklayın</center>"
-
-#~ msgid "Edit a profile name or create new one."
-#~ msgstr "Profil adı düzenle ya da yeni bir tane oluştur."
-
-#~ msgid ""
-#~ "<center>If you continue, you will lose any recent profile edits.</"
-#~ "center><center>Continue or Cancel?</center>"
-#~ msgstr ""
-#~ "<center>Eğer devam ederseniz, yeni profil düzenlemelerini kaybedeceksiniz."
-#~ "</center><center>Devat Et ya da İptal Et?</center>"
-
-#~ msgid "Radio button Banking clicked"
-#~ msgstr "Bankacılık işlemleri radyo düğmesi tıklandı"
-
-#~ msgid "Radio button Investment clicked"
-#~ msgstr "Yatırım radyo düğmesi tıklandı"
-
-#~ msgid ""
-#~ "<center>The name you have entered does not exist,</center><center>but you "
-#~ "have not elected to add a new profile.</center>"
-#~ msgstr ""
-#~ "<center>Girdiğiniz isim mevcut değil,</center><center>fakat yeni bir "
-#~ "profil eklemek için seçmediniz.</center>"
-
-#~ msgid ""
-#~ "<center>If you wish to add '%1'as a new profile,</center><center> click "
-#~ "'Yes'.  Otherwise, click 'No'</center>"
-#~ msgstr ""
-#~ "<center>Eğer '%1' yeni profil olarak eklemek istiyorsanız,</"
-#~ "center><center>'Evet' tuşunu tıklayın.  İstemiyorsanız, 'Hayır' tuşunu "
-#~ "tıklayın</center>"
-
-#~ msgid ""
-#~ "To add a new profile, enter its name then click Return.\n"
-#~ "Or, select an existing profile.\n"
-#~ "An existing name may be edited, which will produce a new profile."
-#~ msgstr ""
-#~ "Yeni bir profil eklemek için, adını girin sonrasında Return tuşuna "
-#~ "tıklayın.\n"
-#~ "Ya da varolan bir profil seçin.\n"
-#~ "Varolan ad düzenlendiğinde yeni bir profil üretilecek."
-
-#~ msgid "Cannot open file %1 for writing"
-#~ msgstr "%1 dosyası yazmak için açılamadı"
-
-#~ msgid "OFX setup error"
-#~ msgstr "OFX yapılandırma hatası"
-
-#~ msgid ""
-#~ "The quantity, price and amount parameters in the\n"
-#~ "current transaction do not match with the action type.\n"
-#~ "Please select another action type\n"
-#~ msgstr ""
-#~ "Mevcut işlemdeki miktar, fiyat ve tutar parametreleri\n"
-#~ "eylem türü ile eşleşmiyor.\n"
-#~ "Lütfen başka bir eylem türü seçin\n"
-
-#~ msgid ""
-#~ "<center>The columns selected are invalid.\n"
-#~ "</center>There must an amount or quantity fields, symbol or security "
-#~ "name, plus date and type field.<center>You possibly need to check the "
-#~ "start and end line settings, or reset 'Skip setup'.</center>"
-#~ msgstr ""
-#~ "<center>Seçilen sütunlar geçersiz.\n"
-#~ "</center>Tutar ya da miktar alanları, sembol ya da teminat adı, ek olarak "
-#~ "tarih ve tür alanı seçilmiş olmalıdır.<center>Muhtemelen başlangıç ve "
-#~ "bitiş satır ayarlarını kontrol etmeniz ya da 'Kurulumu Atla' işlemini "
-#~ "yapmamanız gerekmektedir.</center>"
-
-#~ msgid ""
-#~ "<center>buyList of transaction types was not found.</center><center>Check "
-#~ "existence of correct resource file - 'csvimporterrc'.</center>"
-#~ msgstr ""
-#~ "<center>SatınalmaListesi işlemleri bulunamadı.</center><center>Doğru "
-#~ "'csvimporterrc' dosyasının varlığını kontrol ediniz.</center>"
-
-#, fuzzy
-#~| msgid ""
-#~| "<center>For a brokerage item, enter the column</"
-#~| "center><center>containing the Payee or Detail:</center>"
-#~ msgid ""
-#~ "<center>For a brokerage item, enter the column</center><center>containing "
-#~ "the Payee or Name:</center>"
-#~ msgstr ""
-#~ "<center>Bir komisyonculuk ögesi için, Alacaklı ya da Detay içeren</"
-#~ "center><center>sütun girin:</center>"
-
-#~ msgid ""
-#~ "An invalid column was entered.\n"
-#~ "Must be between 1 and %1."
-#~ msgstr ""
-#~ "Geçersiz sütun girildi.\n"
-#~ "1 ve %1 arasında olmalıdır."
-
-#, fuzzy
-#~| msgid ""
-#~| "<center>No Detail field specified</center><center>and no security name "
-#~| "supplied.</center><center>(Please check the parameters given)</center>"
-#~ msgid ""
-#~ "<center>No Name field specified</center><center>and no security name "
-#~ "supplied.</center><center>(Please check the parameters given)</center>"
-#~ msgstr ""
-#~ "<center>Hiç Ayrıntı alanı tanımlanmamış</center><center>ve güvenlik ismi "
-#~ "girilmemiş.</center><center>(Lütfen verilen parametreleri kontrol edin)</"
-#~ "center>"
-
-#~ msgid ""
-#~ "The date entry \"%1\" read from the file cannot be interpreted through "
-#~ "the current date format setting of \"%2.\"\n"
-#~ "\n"
-#~ "Pressing 'Continue' will assign today's date to the transaction. Pressing "
-#~ "'Cancel'' will abort the import operation. You can then restart the "
-#~ "import and select a different date format."
-#~ msgstr ""
-#~ "Dosyadan okunan \"%1\" tarih girişi, mevcut \"%2\" tarih biçimi ayarları "
-#~ "ile yorumlanamadı.\n"
-#~ "\n"
-#~ "'Devam Et' bastığınızda bugünün tarihi işleme atanacak. 'İptal Et' "
-#~ "bastığınızda içeri aktarma işlemi durdurulacak. O zaman içeri aktarma "
-#~ "işlemini yeniden başlatabilirsiniz ve farklı bir tarih biçimi "
-#~ "seçebilirsiniz."
-
-#~ msgid ""
-#~ "The Security Name, and Date and Type columns are needed.<center>Also, the "
-#~ "Price, Quantity and Amount columns.</center><center>Please try again.</"
-#~ "center>"
-#~ msgstr ""
-#~ "Senet adı, ve Tarih ve Tipi sütunlarına ihtiyaç vardır.<center>Ayrıca, "
-#~ "Fiyat, Miktar ve Tutar sütunlarınada ihtiyaç vardır.</"
-#~ "center><center>Lütfen tekrar deneyin.</center>"
-
-#~ msgid "Brokerage Item"
-#~ msgstr "Komisyon"
-
-#~ msgid "Parameters"
-#~ msgstr "Parametreler"
-
-#~ msgid ""
-#~ "There is a problem with the columns selected\n"
-#~ "for 'Price', 'Quantity and 'Amount'.\n"
-#~ "You will need to reselect those columns."
-#~ msgstr ""
-#~ "'Fiyat', 'Miktar' ve 'Tutar' için\n"
-#~ "seçilen sütunlarla ilgili bir sorun var.\n"
-#~ "Bu sütunları yeniden seçmeniz gerekecek."
-
-#~ msgid "Enter Account Name"
-#~ msgstr "Hesap Adı Gir"
-
-#~ msgid "Enter debit flag column number"
-#~ msgstr "Borç bayrağı sütun numarası girin"
-
-#~ msgid ""
-#~ "<center>On row '%5', the '%1' field contains '%2', and the '%3' field "
-#~ "contains '%4'.</center><center>This combination is not valid.</"
-#~ "center><center>If you wish for just this zero field to be cleared, click "
-#~ "'Clear this'.</center><center>Or, if you wish for all such zero fields to "
-#~ "be cleared, click 'Clear all'.</center><center>Otherwise, click 'Cancel'."
-#~ "</center>"
-#~ msgstr ""
-#~ "<center>'%5' satırında %1 alanı '%2' içerir ve %3 alanı '%4' içerir.</"
-#~ "center><center>Bu birleşim geçerli değildir.</center><center>Eğer sadece "
-#~ "bu değeri sıfır olan alanı temizlemek isterseniz, 'Bunu temizle' "
-#~ "düğmesine tıklayın.</center><center>Aksi halde, 'İptal' düğmesine "
-#~ "tıklayın.</center> "
-
-#~ msgid "Clear this"
-#~ msgstr "Bunu temizle"
-
-#~ msgid ""
-#~ "<center>There must an amount or debit and credit fields, plus date and "
-#~ "payee fields.</center>"
-#~ msgstr ""
-#~ "<center>Tutar ya da borç ve kredi alanları, ek olarak da tarih ve "
-#~ "alacaklı alanları olmalıdır.</center>"
-
-#~ msgid ""
-#~ "<center>As you had skipped Setup, the wizard will now return you to the "
-#~ "setups.</center>"
-#~ msgstr ""
-#~ "<center>Kurulumu atlamana rağmen, sihirbaz kurulumlara geri dönecek.</"
-#~ "center>"
-
-#~ msgid "Enter column number of debit/credit code"
-#~ msgstr "Borç/Kredi kodunun sütun numarasını gir"
-
-#~ msgid ""
-#~ "<center>The '<b>%1</b>' field already has this column selected.</"
-#~ "center><center>If you wish to copy the Memo data to the Payee field, "
-#~ "click 'Yes'.</center>"
-#~ msgstr ""
-#~ "<center>'<b>%1</b>' alanında seçilen sütun zaten var.</"
-#~ "center><center>Eğer Hatırlatma verilerini Alacaklı alanına kopyalamak "
-#~ "isterseniz, 'Evet' tıklayın.</center>"
-
-#~ msgid ""
-#~ "<center>The '<b>%1</b>' field already has this column selected.</"
-#~ "center><center>Please reselect both entries as necessary.</center>"
-#~ msgstr ""
-#~ "<center>'<b>%1</b>' alanında seçilen sütun zaten var.</"
-#~ "center><center>Lütfen gerektiğinde her iki girişi yeniden seçin.</center>"
-
-#~ msgid "CSV Import Wizard"
-#~ msgstr "CSV İçeri Aktarma Sihirbazı"
-
-#~ msgid ""
-#~ "To raise the wizard window,\n"
-#~ "right click in this window."
-#~ msgstr ""
-#~ "Sihirbaz penceresini açmak için\n"
-#~ "bu pencereye sağ tıklayın."
-
-#~ msgid ""
-#~ "<center>An amount, price, and/or quantity column is missing.</"
-#~ "center>Please check your selections."
-#~ msgstr ""
-#~ "<center>Tutar, fiyat, ve/ya da miktarı sütunu kayıp.</center>Lütfen "
-#~ "seçimlerinizi kontrol ediniz."
-
-#~ msgctxt "presence of amount column"
-#~ msgid "Amount"
-#~ msgstr "Miktar"
-
-#~ msgid "Import  CSV"
-#~ msgstr "CSV  İçeri Aktar"
-
-#~ msgid "Exit"
-#~ msgstr "Çıkış"
-
-#~ msgctxt "Grand total balance"
-#~ msgid "Grand Total"
-#~ msgstr "Genel Toplam"
-
-#~ msgctxt "Total balance for checking account"
-#~ msgid "Total"
-#~ msgstr "Toplam"
-
-#~ msgctxt "Total balance for credit card"
-#~ msgid "Total"
-#~ msgstr "Toplam"
-
-#~ msgid "Test Report"
-#~ msgstr "Deneme Raporu"
-
-#~ msgid "Total Stock 1"
-#~ msgstr "Toplam Stok 1"
-
-#~ msgid "or Security Name"
-#~ msgstr "ya da Senet Adı"
-
-#~ msgctxt "Confirm"
-#~ msgid "Yes"
-#~ msgstr "Evet"
-
-#~ msgid ""
-#~ "*.csv *.PRN *.txt|CSV Files\n"
-#~ "*|All files"
-#~ msgstr ""
-#~ "*.csv *.PRN *.txt|CSV dosyaları\n"
-#~ " *|Tüm dosyalar"
-
-#~ msgid ""
-#~ "Enter the name of the Brokerage or Checking Account used for the transfer "
-#~ "of funds:"
-#~ msgstr "Fon aktarımı için kullanılan Komisyon ya da Çek Hesabı adını girin:"
-
-#~ msgid ""
-#~ "The monetary decimal symbol is not correctly set in the KDE System "
-#~ "Settings module Country/Region & Language. Please set it to a reasonable "
-#~ "value and start KMyMoney again."
-#~ msgstr ""
-#~ "KDE sistem ayarları Ülke/Bölge & Dil biriminde parasal ondalık simgesi "
-#~ "doğru ayarlanmamış. Lütfen geçerli bir değere ayarlayın ve KMyMoney "
-#~ "uygulamasını tekrar başlatın."
-
-#~ msgid "Invalid settings"
-#~ msgstr "Geçersiz ayarlar"
-
-#~ msgid "Assets"
-#~ msgstr "Varlıklar"
-
-#~ msgid "Liabilities"
-#~ msgstr "Borçlar"
-
-#~ msgid "List View"
-#~ msgstr "Liste Görünümü"
-
-#~ msgid "Calendar View"
-#~ msgstr "Takvim Görünümü"
-
-#~ msgid "Select Style"
-#~ msgstr "Biçem Seç"
-
-#~ msgid "Next year"
-#~ msgstr "Sonraki sene"
-
-#~ msgid "Previous year"
-#~ msgstr "Önceki sene"
-
-#~ msgid "Previous month"
-#~ msgstr "Önceki ay"
-
-#~ msgid "Select a week"
-#~ msgstr "Bir hafta seçin"
-
-#~ msgid "Select a month"
-#~ msgstr "Bir ay seçin"
-
-#~ msgid "Select a year"
-#~ msgstr "Bir yıl seçin"
-
-#~ msgid "Week XX"
-#~ msgstr "Hafta XX"
-
-#~ msgid "Week %1"
-#~ msgstr "Hafta %1"
-
-#~ msgctxt "Sunday"
-#~ msgid "Sun"
-#~ msgstr "Paz"
-
-#~ msgctxt "Saturday"
-#~ msgid "Sat"
-#~ msgstr "Cts"
-
-#~ msgid "Week %1 for year %2."
-#~ msgstr "%2 yılının %1. haftası."
-
-#~ msgid "Select Schedules"
-#~ msgstr "Zamanlama Seç"
-
-#~ msgid "%1 Bill."
-#~ msgid_plural "%1 Bills."
-#~ msgstr[0] "%1 Fatura."
-#~ msgstr[1] "%1 Fatura."
-
-#~ msgid "%1 Deposit."
-#~ msgid_plural "%1 Deposits."
-#~ msgstr[0] "%1 Depozit."
-#~ msgstr[1] "%1 Depozit."
-
-#~ msgid "%1 Transfer."
-#~ msgid_plural "%1 Transfers."
-#~ msgstr[0] "%1 Aktarım."
-#~ msgstr[1] "%1 Aktarımlar."
-
-#~ msgctxt ""
-#~ "These are the suffix strings of the days in the calendar view; please "
-#~ "make sure that you keep all the 30 separators (the '-' character) when "
-#~ "translating"
-#~ msgid ""
-#~ "st-nd-rd-th-th-th-th-th-th-th-th-th-th-th-th-th-th-th-th-th-st-nd-rd-th-"
-#~ "th-th-th-th-th-th-st"
-#~ msgstr ""
-#~ "inci-nci-üncü-üncü-inci-ncı-nci-inci-uncu-uncu-inci-nci-üncü-üncü-inci-"
-#~ "ncı-nci-inci-uncu-uncu-inci-nci-üncü-üncü-inci-ncı-nci-inci-uncu-uncu-inci"
-
-#~ msgid ""
-#~ "Due to the convert the purpose contains characters which are not "
-#~ "available in SEPA credit-transfers."
-#~ msgstr ""
-#~ "Dönüştürmeden dolayı amaç SEPA kredi-aktarımlarında kullanılabilir "
-#~ "olmayan karakterler içeriyor."
-
-#~ msgid ""
-#~ "The SEPA credit-transfer had an end-to-end reference which is not "
-#~ "supported in national transfers. It was added to the purpose instead."
-#~ msgstr ""
-#~ "Dönüştürmeye bağlı olarak, amaç SEPA kredi-aktarımında kullanılabilir "
-#~ "olmayan karakterler içerir."
-
-#~ msgid "An account number is needed."
-#~ msgstr "Bir hesap numarası gerekli."
-
-#~ msgid "This bank identifier must be eight digits long."
-#~ msgstr "Bu banka tanımlayıcısı sekiz basamak uzunluğunda olmalı."
-
-#~ msgid "This bank identifier is unknown. Please re-check it."
-#~ msgstr "Bu banka tanımlayıcısı bilinmiyor. Lütfen tekrar kontrol edin."
-
-#~ msgid ""
-#~ "The purpose can only contain the letters A-Z, ä,ö,ü, spaces and .,-+*%/$ "
-#~ "or &."
-#~ msgstr ""
-#~ "Amaç yalnızca A-Z, ä,ö,ü harfleri, boşluklar ve .,-+*%/$ veya & "
-#~ "içerebilir."
-
-#~ msgid "German Credit Transfer"
-#~ msgstr "Almak Kredi Aktarımı"
-
-#~ msgid "Bank Name"
-#~ msgstr "Banka İsmi"
-
-#~ msgid "Will be filled in automatically"
-#~ msgstr "Otomatik doldurulacak"
-
-#~ msgid ""
-#~ "The transaction dates are one day apart. Do you want to match them anyway?"
-#~ msgid_plural ""
-#~ "The transaction dates are %1 days apart. Do you want to match them anyway?"
-#~ msgstr[0] ""
-#~ "İşlem tarihleri bir gün aralıklı. Yine de eşleştirmek istiyor musunuz?"
-#~ msgstr[1] ""
-#~ "İşlem tarihleri %1 gün aralıklı. Yine de eşleştirmek istiyor musunuz?"
-
-#, fuzzy
-#~| msgid ""
-#~| "*|GnuCash files\n"
-#~| "*|All files"
-#~ msgid "GnuCash file (*)"
-#~ msgstr ""
-#~ " * |Gnucash dosyaları\n"
-#~ " * |Tüm dosyalar"
-
-#~ msgid ""
-#~ "*.xml|XML files\n"
-#~ "*|All files"
-#~ msgstr ""
-#~ "*.xml|XML dosyaları\n"
-#~ " *|Tüm dosyalar"
-
-#~ msgid ""
-#~ "<center>The transaction post-dates are not within the 'matchInterval' "
-#~ "setting.</center><center>If you wish to continue with this matching, "
-#~ "click 'Yes'.</center>"
-#~ msgstr ""
-#~ "<center>İşlemin ötelenme tarihi 'matchInterval' ayarları içinde değil.</"
-#~ "center><center>Bu eşleşme ile devam etmek istiyorsanız 'Evet' düğmesine "
-#~ "tıklayın.</center>"
-
-#~ msgid ""
-#~ "The expected next check number <b>%1</b> has already been used in account "
-#~ "<b>%2</b>.<center>Do you want to replace it with the next available "
-#~ "number?</center>"
-#~ msgstr ""
-#~ "Beklenen çek numarası <b>%1</b> <b>%2</b> hesabında zaten kullanılmıştı. "
-#~ "<center>Bu numarayı sonraki kullanılabilir numara ile değiştirmek ister "
-#~ "misiniz?</center>"
-
-#~ msgid "Second transaction does not match requirement for matching"
-#~ msgstr "İkinci işlem eşleştirme için gereksinimleri sağlamıyor"
-
-#~ msgid ""
-#~ "Both of these transactions have been imported into %1.  Therefore they "
-#~ "cannot be matched.  Matching works with one imported transaction and one "
-#~ "non-imported transaction."
-#~ msgstr ""
-#~ "Bu işlemlerin her ikiside %1 içine aktarılmıştı. Bundan dolayı "
-#~ "eşleştirilemediler. Eşleme içeri aktarılan ve aktarılmamış işlemler ile "
-#~ "çalışır."
-
-#~ msgctxt "column containing number field"
-#~ msgid "Number column"
-#~ msgstr "Sütun numarası"
-
-#~ msgctxt "presence of amount column"
-#~ msgid "Amount col"
-#~ msgstr "Hesap sütunu"
-
-#~ msgctxt "location of amount column"
-#~ msgid "Amount column"
-#~ msgstr "Tutar sütunu"
-
-#~ msgctxt "location of debit column"
-#~ msgid "Debit column"
-#~ msgstr "Borç sütunu"
-
-#~ msgctxt "location of credit column"
-#~ msgid "Credit column"
-#~ msgstr "Kredi sütunu"
-
-#~ msgctxt "column containing number field"
-#~ msgid "Category Column"
-#~ msgstr "Kategori Sütunu"
-
-#~ msgid "Memo Column"
-#~ msgstr "Hatırlatma Sütunu"
-
-#~ msgid ""
-#~ "<center>The current field delimiter ('%1') appears to give\n"
-#~ "</center><center>incorrect results.  If you wish to retain it,</"
-#~ "center><center> click 'Keep'. Otherwise, click 'Change'.</center>"
-#~ msgstr ""
-#~ "<center>Mevcut alan sınırlandırıcı ('%1') hatalı sonuçlar\n"
-#~ "</center><center>veriyor gibi görünüyor.  Eğer bu değişiklikleri korumak "
-#~ "istiyorsanız,</center><center>'Koru' tıklayın. Aksi halde, 'Değiştir' "
-#~ "tıklayın.</center>"
-
-#~ msgid "Change"
-#~ msgstr "Değiştir"
-
-#~ msgctxt "verb, to clear selected columns"
-#~ msgid "Clear selections"
-#~ msgstr "Seçimleri temizle"
-
-#~ msgctxt "Arg 1 is a date/time"
-#~ msgid "This task was sent on %1 without receiving a confirmation."
-#~ msgstr "Bu görev %1 tarihinde bir onay almadan gönderildi."
-
-#~ msgid "Data Selector"
-#~ msgstr "Veri Seçici"
-
-#~ msgid "Only display a subset of the model in the chart:"
-#~ msgstr "Grafikte modelin sadece bir alt kümesini görüntüle:"
-
-#~ msgid "in reverse order."
-#~ msgstr "ters sırada."
-
-#~ msgid "columns starting at column"
-#~ msgstr "şu sütunda başlayan sütunlar"
-
-#~ msgid "Display"
-#~ msgstr "Göster"
-
-#~ msgid "rows starting at row"
-#~ msgstr "şu satırda başlayan satırlar"
-
-#~ msgid "Adding transactions"
-#~ msgstr "Aktarımlar eklleniyor"
-
-#~ msgid "Now adding the transactions to your ledger..."
-#~ msgstr "Aktarımlar şimdi ana hesap defterinize ekleniyor..."
-
-#~ msgid "Default method for jobs for this institution"
-#~ msgstr "Bu kurumun işleri için varsayılan metot"
-
-#~ msgid "Queue"
-#~ msgstr "Kuyruğa Ekle"
-
-#~ msgid "&Execute"
-#~ msgstr "&Çalıştır"
-
-#~ msgid "Use this button to close the window"
-#~ msgstr "Pencereyi kapatmak için bu düğmeyi kullanın"
-
-#~ msgid "&Queue"
-#~ msgstr "&Kuyruğa Ekle"
-
-#~ msgid "Do you want to execute or queue this job in the outbox?"
-#~ msgstr ""
-#~ "Gidenlerdeki bu işi çalıştırmak ya da kuyruğa eklemek ister misiniz?"
-
-#~ msgid "Execution"
-#~ msgstr "Çalıştırma"
-
-#~ msgid "Yugoslav Dinar"
-#~ msgstr "Yugoslav Dinarı"
-
-#~ msgctxt "Search widget label"
-#~ msgid "S&earch:"
-#~ msgstr "&Ara:"
-
-#, fuzzy
-#~| msgid "Cancel"
-#~ msgctxt "Cancel button was clicked."
-#~ msgid "Cancel clicked"
-#~ msgstr "İptal"
-
-#, fuzzy
-#~| msgctxt "New file wizard introduction"
-#~| msgid "Introduction"
-#~ msgctxt "Noun, the introduction."
-#~ msgid "1. Introduction"
-#~ msgstr "Giriş"
-
-#~ msgid "http://kmymoney.org/"
-#~ msgstr "http://kmymoney.org/"
-
-#~ msgid "E&xport"
-#~ msgstr "D&ışarı Aktar"
-
-#, fuzzy
-#~| msgid "Cleared"
-#~ msgctxt "@item reconciliation cleared status"
-#~ msgid "Cleared"
-#~ msgstr "Temizlenmiş"
-
-#~ msgctxt "Reconcile flag C"
-#~ msgid "C"
-#~ msgstr "C"
-
-#~ msgctxt "Reconcile flag F"
-#~ msgid "F"
-#~ msgstr "F"
-
-#, fuzzy
-#~| msgid "Net amount"
-#~ msgid "Fee amount"
-#~ msgstr "Net toplam"
-
-#~ msgid "Additional fees"
-#~ msgstr "Ek ödemeler"
-
-#, fuzzy
-#~| msgid " (Brokerage)"
-#~ msgid "(Brokerage)"
-#~ msgstr " (Komisyon)"
-
-#~ msgctxt "Schedule name"
-#~ msgid "Name"
-#~ msgstr "İsim"
-
-#, fuzzy
-#~| msgid "Monthly"
-#~ msgctxt "Once per month schedule occurrence"
-#~ msgid "Monthly"
-#~ msgstr "Aylık"
-
-#~ msgid "Additional fees:"
-#~ msgstr "Ek ödemeler:"
-
-#, fuzzy
-#~| msgid "Details"
-#~ msgctxt "Street address"
-#~ msgid "Details"
-#~ msgstr "Ayrıntılar"
-
-#~ msgid "Delete ..."
-#~ msgstr "Sil..."
-
-#~ msgid "Unable to add scheduled transaction: "
-#~ msgstr "Zamanlanmış aktarım eklenemedi: "
-
-#, fuzzy
-#~| msgid ""
-#~| "*.kmy *.xml|KMyMoney files\n"
-#~| " *.*|All files (*.*)"
-#~ msgid ""
-#~ "*.kmy *.xml|KMyMoney files\n"
-#~ " *|All files"
-#~ msgstr ""
-#~ "*.kmy *.xml|KMyMoney dosyaları\n"
-#~ " *.*|Tüm dosyalar (*.*)"
-
-#~ msgid "Ok"
-#~ msgstr "Tamam"
-
-#, fuzzy
-#~| msgid "Chart Tab"
-#~ msgid "Changing Tab"
-#~ msgstr "Grafik Sekmesi"
-
-#, fuzzy
-#~| msgid "Forecast Settings"
-#~ msgid "Settings"
-#~ msgstr "Tahmin Ayarları"
-
-#, fuzzy
-#~| msgid "Fixed interest rate"
-#~ msgid "If present. select text field delimiter character."
-#~ msgstr "Belirli faiz oranı"
-
-#, fuzzy
-#~| msgid "Select templates"
-#~ msgctxt "verb, Select date format"
-#~ msgid "Select date format"
-#~ msgstr "Şablonları seç"
-
-#, fuzzy
-#~| msgid "Date Format"
-#~ msgctxt "abbreviation for 'year', 'month', 'day'"
-#~ msgid "Date format"
-#~ msgstr "Tarih Biçemi"
-
-#, fuzzy
-#~| msgid "Select templates"
-#~ msgctxt "verb, Click to select file"
-#~ msgid "Click to select file"
-#~ msgstr "Şablonları seç"
-
-#, fuzzy
-#~| msgid "Open File..."
-#~ msgctxt "to open a file"
-#~ msgid "Open File"
-#~ msgstr "Dosya Aç..."
-
-#, fuzzy
-#~| msgid "Save As"
-#~ msgctxt "verb to save QIF file"
-#~ msgid "Save as QIF"
-#~ msgstr "Farklı Kaydet"
-
-#, fuzzy
-#~| msgid "Close this window"
-#~ msgctxt "Verb, to exit or to close"
-#~ msgid "Click to close the plugin."
-#~ msgstr "Pencereyi kapat"
-
-#, fuzzy
-#~| msgid "Quantity"
-#~ msgctxt "verb, to exit or to close"
-#~ msgid "Quit"
-#~ msgstr "Miktar"
-
-#~ msgid "Do you want to save the changes for <b>%1</b>"
-#~ msgstr "<b>%1</b> için değişiklikleri kaydetmek istiyor musunuz"
-
-#~ msgid "&NAME"
-#~ msgstr "&İSİM"
-
-#, fuzzy
-#~| msgid "buttonGroup1"
-#~ msgid "buttonGroup5"
-#~ msgstr "düğme grubu1"
-
-#, fuzzy
-#~| msgid "buttonGroup1"
-#~ msgid "buttonGroup2"
-#~ msgstr "düğme grubu1"
-
-#, fuzzy
-#~| msgid "buttonGroup1"
-#~ msgid "buttonGroup4"
-#~ msgstr "düğme grubu1"
-
-#, fuzzy
-#~| msgid "buttonGroup1"
-#~ msgid "buttonGroup18"
-#~ msgstr "düğme grubu1"
-
-#, fuzzy
-#~| msgid "buttonGroup1"
-#~ msgid "buttonGroup3"
-#~ msgstr "düğme grubu1"
-
-#, fuzzy
-#~| msgid "Monthly"
-#~ msgctxt "column will show monthly data"
-#~ msgid "Monthly"
-#~ msgstr "Aylık"
-
-#, fuzzy
-#~| msgid "Daily"
-#~ msgctxt "column will show daily data"
-#~ msgid "Daily"
-#~ msgstr "Günlük"
-
-#, fuzzy
-#~| msgid "Weekly"
-#~ msgctxt "column will show weekly data"
-#~ msgid "Weekly"
-#~ msgstr "Haftalık"
-
-#, fuzzy
-#~| msgid "Bi-Monthly"
-#~ msgctxt "column will show bi-monthly data"
-#~ msgid "Bi-Monthly"
-#~ msgstr "İki-Aylık"
-
-#, fuzzy
-#~| msgid "Quarterly"
-#~ msgctxt "column will show quarterly data"
-#~ msgid "Quarterly"
-#~ msgstr "Her dört ayda bir"
-
-#, fuzzy
-#~| msgid "Yearly"
-#~ msgctxt "column will show yearly data"
-#~ msgid "Yearly"
-#~ msgstr "Yıllık"
-
-#, fuzzy
-#~| msgid "Information"
-#~ msgid "Information..."
-#~ msgstr "Bilgiler"
-
-#, fuzzy
-#~| msgid "Import options"
-#~ msgid "CSV Importer Dialog Form"
-#~ msgstr "İçeri aktarma ayarları"
-
-#, fuzzy
-#~| msgid "Decimal Symbol"
-#~ msgid "    Decimal Symbol"
-#~ msgstr "Ondalık Simgesi"
-
-#, fuzzy
-#~| msgid "Brokerage"
-#~ msgid "   Brokerage or Chk. Account name:"
-#~ msgstr "Komisyon"
-
-#, fuzzy
-#~| msgid "Account number"
-#~ msgid "Enter column number"
-#~ msgstr "Hesap numarası"
-
-#, fuzzy
-#~| msgid "Select templates"
-#~ msgid "Select date format"
-#~ msgstr "Şablonları seç"
-
-#, fuzzy
-#~| msgid "1 day"
-#~| msgid_plural "%1 days"
-#~ msgctxt "abbreviation for 'month', 'day', 'year'"
-#~ msgid "m d y"
-#~ msgstr "%1 gün"
-
-#, fuzzy
-#~| msgid "Please select the account."
-#~ msgctxt "verb, Clear selected column entries"
-#~ msgid "Clear selected column entries"
-#~ msgstr "Lütfen hesabı seçin."
-
-#, fuzzy
-#~| msgid "Category selection"
-#~ msgctxt "verb, to clear selected columns"
-#~ msgid "Clear Selections"
-#~ msgstr "Kategori seçimi"
-
-#, fuzzy
-#~| msgid "Account Details ..."
-#~ msgctxt "location of amount column"
-#~ msgid "Amount in Col..."
-#~ msgstr "Hesap Detayları ..."
-
-#, fuzzy
-#~| msgctxt "Accept 'imported' and 'matched' transaction"
-#~| msgid "Accept"
-#~ msgctxt "verb to accept"
-#~ msgid "Accept"
-#~ msgstr "Kabul Et"
-
-#, fuzzy
-#~| msgid "Brokerage"
-#~ msgid " inv  Brokerage or Chk. Account name:"
-#~ msgstr "Komisyon"
-
-#, fuzzy
-#~| msgid "Fixed interest rate"
-#~ msgctxt "punctuation mark used as field delimiter"
-#~ msgid "Field Delimiter character"
-#~ msgstr "Belirli faiz oranı"
-
-#~ msgid "Online Quote Configuration"
-#~ msgstr "Çevrimiçi aktarım Yapılandırması"
-
-#~ msgid "F1"
-#~ msgstr "F1"
-
-#~ msgid "Perl Location:"
-#~ msgstr "Perl Konumu:"
-
-#~ msgid "Script:"
-#~ msgstr "Betik:"
-
-#~ msgid "KMyMoney file needs saving.  Save ?"
-#~ msgstr "KMyMoney dosyasının kaydedilmesi gerekiyor, Kaydedilsin mi?"
-
-#~ msgid "Save"
-#~ msgstr "Kaydet"
-
-#, fuzzy
-#~| msgid "December"
-#~ msgid "25-December-2000"
-#~ msgstr "Aralık"
-
-#, fuzzy
-#~| msgid "Line"
-#~ msgctxt "@item type of chart"
-#~ msgid "Line"
-#~ msgstr "Çizgi"
-
-#, fuzzy
-#~| msgid "Bar"
-#~ msgctxt "@item type of chart"
-#~ msgid "Bar"
-#~ msgstr "Çubuk"
-
-#, fuzzy
-#~| msgid "Stacked Bar"
-#~ msgctxt "@item type of chart"
-#~ msgid "Stacked Bar"
-#~ msgstr "Küme Çubukları"
-
-#, fuzzy
-#~| msgid "Pie"
-#~ msgctxt "@item type of chart"
-#~ msgid "Pie"
-#~ msgstr "Pasta"
-
-#~ msgid "Ring"
-#~ msgstr "Yuvarlak"
-
-#~ msgctxt "Occurs once"
-#~ msgid "Once"
-#~ msgstr "Bir kez"
-
-#~ msgctxt "Occurs daily"
-#~ msgid "Daily"
-#~ msgstr "Günlük"
-
-#~ msgctxt "Occurs weekly"
-#~ msgid "Weekly"
-#~ msgstr "Haftalık"
-
-#~ msgid "Fortnightly"
-#~ msgstr "İki haftada bir"
-
-#~ msgid "Every half month"
-#~ msgstr "Her 15 günde"
-
-#~ msgid "Every four weeks"
-#~ msgstr "Her dört haftada"
-
-#~ msgctxt "Occurs monthly"
-#~ msgid "Monthly"
-#~ msgstr "Aylık"
-
-#~ msgid "Every eight weeks"
-#~ msgstr "Her sekiz haftada"
-
-#~ msgid "Every two months"
-#~ msgstr "Her iki ayda bir"
-
-#~ msgid "Every three months"
-#~ msgstr "Her üç ayda bir"
-
-#~ msgid "Quarterly"
-#~ msgstr "Her dört ayda bir"
-
-#~ msgid "Every four months"
-#~ msgstr "Dört aylık"
-
-#~ msgid "Twice yearly"
-#~ msgstr "İki Yıllık"
-
-#~ msgctxt "Occurs yearly"
-#~ msgid "Yearly"
-#~ msgstr "Yıllık"
-
-#~ msgid "Every three weeks"
-#~ msgstr "Her üç haftada"
-
-#~ msgid "Every thirty days"
-#~ msgstr "Her otuz günde"
-
-#~ msgid "Memory leakage detection"
-#~ msgstr "Bellek kaçakları kontrolü"
-
-#~ msgid "&Find"
-#~ msgstr "&Bul"
-
-#~ msgid "Verify payments"
-#~ msgstr "Ödemeleri doğrula"
-
-#~ msgid "Interest-Category"
-#~ msgstr "Faiz-Kategori"
-
-#~ msgid "Reconciliation Dialog"
-#~ msgstr "Uzlaştırma Penceresi"
-
-#~ msgid "Difference:"
-#~ msgstr "Fark:"
-
-#~ msgid "Edit Transactions..."
-#~ msgstr "Aktarımları Düzenle..."
-
-#, fuzzy
-#~| msgid "Finish"
-#~ msgctxt "@action finish the reconciliation dialog"
-#~ msgid "Finish"
-#~ msgstr "Bitir"
-
-#~ msgid "Convert from"
-#~ msgstr "Şu para biriminden"
-
-#~ msgid "PriceInfo"
-#~ msgstr "FiyatBilgisi"
-
-#~ msgctxt "0 days from now"
-#~ msgid "0 days"
-#~ msgstr "0 gün"
-
-#~ msgctxt "30 days from now"
-#~ msgid "30 days"
-#~ msgstr "30 gün"
-
-#~ msgctxt "60 days from now"
-#~ msgid "60 days"
-#~ msgstr "60 gün"
-
-#~ msgctxt "90 days from now"
-#~ msgid "90 days"
-#~ msgstr "90 gün"
-
-#~ msgid "&Reset"
-#~ msgstr "Sıfı&rla"
-
-#~ msgid "C&lose"
-#~ msgstr "&Kapat"
-
-#~ msgctxt "To update online sources"
-#~ msgid "&Update"
-#~ msgstr "&Güncelle"
-
-#~ msgctxt "New online source"
-#~ msgid "&New..."
-#~ msgstr "&Yeni..."
-
-#~ msgid "CSV Dialog"
-#~ msgstr "CSV Penceresi"
-
-#~ msgid "Choose the csv file:"
-#~ msgstr "CSV dosyasını seç:"
-
-#~ msgid "Browse"
-#~ msgstr "Gözat"
-
-#~ msgid "Between These Dates"
-#~ msgstr "Bu Tarihler Arasında"
-
-#~ msgid "Run"
-#~ msgstr "Çalıştır"
-
-#~ msgid "Progress Info"
-#~ msgstr "İşlem Bilgisi"
-
-#~ msgid "Processing Account:"
-#~ msgstr "İşlem Yapılan Hesap:"
-
-#, fuzzy
-#~| msgid "Unknown"
-#~ msgctxt "unknown account"
-#~ msgid "Unknown"
-#~ msgstr "Bilinmeyen"
-
-#~ msgid "Processing Transaction:"
-#~ msgstr "Yapılan Aktarım:"
-
-#, fuzzy
-#~| msgid "New"
-#~ msgctxt "@action new quote source"
-#~ msgid "New"
-#~ msgstr "Yeni"
-
-#, fuzzy
-#~| msgid "Update"
-#~ msgctxt "@action update quotes from online source"
-#~ msgid "Update"
-#~ msgstr "Güncelle"
-
-#~ msgid "list of hidden views"
-#~ msgstr "gizli görünümlerin listesi"
-
-#~ msgid "PluginDlg"
-#~ msgstr "EklentilerPenceresi"
-
-#~ msgid "PlugIn"
-#~ msgstr "Eklenti"
-
-#, fuzzy
-#~| msgid "Feature"
-#~ msgctxt "plugin features"
-#~ msgid "Feature"
-#~ msgstr "Özellik"
-
-#~ msgctxt "Investment symbol"
-#~ msgid "Symbol"
-#~ msgstr "Sembol"
-
-#~ msgid "KMyMoney Unittest"
-#~ msgstr "KMyMoney Birim Testi"
-
-#~ msgctxt "Register view settings"
-#~ msgid "Register"
-#~ msgstr "Kaydet"
-
-#~ msgid "Security List Editor"
-#~ msgstr "Senet Listesi Düzenleyici"
-
-#~ msgid "&Add"
-#~ msgstr "&Ekle"
-
-#~ msgid "Create a new security entry."
-#~ msgstr "Yeni bir senet girdisi oluştur."
-
-#~ msgid "Close the dialog"
-#~ msgstr "Pencereyi kapat"
-
-#, fuzzy
-#~| msgid "Total"
-#~ msgctxt "total quantity of accounts"
-#~ msgid "Total"
-#~ msgstr "Toplam"
-
-#~ msgid "Add..."
-#~ msgstr "Ekle..."
-
-#, fuzzy
-#~| msgid "Username"
-#~ msgctxt "@label user name of the database"
-#~ msgid "Username"
-#~ msgstr "Kullanıcı adı"
-
-#~ msgid "Financial Institution"
-#~ msgstr "Finansal Kurum"
-
-#, fuzzy
-#~| msgid "Finish"
-#~ msgctxt "@title final page of online banking wizard"
-#~ msgid "Finish"
-#~ msgstr "Bitir"
-
-#, fuzzy
-#~| msgctxt "Cheque Number"
-#~| msgid "No."
-#~ msgctxt "@title header of the cheque number column"
-#~ msgid "No."
-#~ msgstr "No."
-
-#~ msgctxt "New price"
-#~ msgid "New..."
-#~ msgstr "Yeni..."
-
-#~ msgid "Delete Range..."
-#~ msgstr "Oranı Sil..."
-
-#~ msgid "Institution/Account"
-#~ msgstr "Şirket/Hesap"
-
-#~ msgid "<No Institution>"
-#~ msgstr "<Şirket yok>"
-
-#~ msgid ""
-#~ "Amount changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b><p>"
-#~ msgstr ""
-#~ "Miktar değiştirildi.<br/>&nbsp;&nbsp;&nbsp;Eski: <b>%1</b>, Yeni: <b>%2</"
-#~ "b><p>"
-
-#~ msgid "Dismiss"
-#~ msgstr "İptal Et"
-
-#~ msgid "x"
-#~ msgstr "x"
-
-#, fuzzy
-#~| msgid "Name"
-#~ msgctxt "@title header of the qoute source name column"
-#~ msgid "Name"
-#~ msgstr "İsim"
-
-#, fuzzy
-#~| msgctxt "Unknown"
-#~| msgid "Unknown account type"
-#~ msgid "Unknown account provider"
-#~ msgstr "Bilinmeyen hesap tipi"
-
-#, fuzzy
-#~| msgctxt "Unknown"
-#~| msgid "Unknown forecast method"
-#~ msgid "Unknown creator of the job"
-#~ msgstr "Bilinmeyen tahmin yöntemi"
-
-#~ msgid "real ID"
-#~ msgstr "Gerçek Kimlik"
-
-#~ msgid "X"
-#~ msgstr "X"
-
-#~ msgid "First payment due"
-#~ msgstr "İlk ödeme zamanı"
-
-#~ msgid "Item"
-#~ msgstr "Öge"
-
-#~ msgid "Start Dialog"
-#~ msgstr "Başlangıç Penceresi"
-
-#~ msgid "New KMyMoney document"
-#~ msgstr "Yeni KMyMoney belgesi"
-
-#~ msgid "Open a KMyMoney document"
-#~ msgstr "Bir KMyMoney belgesi aç"
-
-#~ msgid "Recent Files"
-#~ msgstr "Son Dosyalar"
-
-#~ msgid "Blank Document"
-#~ msgstr "Boş Belge"
-
-#~ msgctxt "Payee name"
-#~ msgid "Name"
-#~ msgstr "İsim"
-
-#~ msgid "ATM"
-#~ msgstr "ATM"
-
-#~ msgid "Cheque"
-#~ msgstr "Çek"
-
-#~ msgid "Icon size of navigation bar"
-#~ msgstr "Gezinme araç çubuğunun simge boyutu"
-
-#~ msgid "Micro (16px)"
-#~ msgstr "Çok küçük (16px)"
-
-#~ msgid "Small (32px)"
-#~ msgstr "Küçük (32px)"
-
-#~ msgid "Normal (48px)"
-#~ msgstr "Normal (48px)"
-
-#~ msgid "Large (64px)"
-#~ msgstr "Büyük (64px)"
-
-#~ msgid "*.sql *.*|SQLite files (*.sql)| All files (*.*)"
-#~ msgstr "*.sql *.*|SQLite dosyaları (*.sql)| Tüm dosyalar (*.*)"
-
-#~ msgid "Select SQLite file"
-#~ msgstr "SQLite dosyasını seç"
-
-#~ msgctxt "Budget name"
-#~ msgid "Name"
-#~ msgstr "İsim"
-
-#~ msgctxt "Cheque number"
-#~ msgid "No."
-#~ msgstr "No."
-
-#~ msgid "KCalc..."
-#~ msgstr "KCalc..."
-
-#~ msgid "TextLabel7"
-#~ msgstr "MetinEtiketi7"
-
-#~ msgid "Do you really want to delete all %1 selected transactions?"
-#~ msgstr "Seçilen %1 aktarımı gerçekten silmek istiyor musunuz?"
-
-#~ msgid "User Name"
-#~ msgstr "Kullanıcı Adı"
-
-#, fuzzy
-#~| msgid "Alt+O"
-#~ msgid "Alt+K"
-#~ msgstr "Alt+O"
-
-#, fuzzy
-#~| msgid "Alt+O"
-#~ msgid "Alt+N"
-#~ msgstr "Alt+O"
-
-#~ msgctxt "Duplicate split"
-#~ msgid "Qt::CTRL+c"
-#~ msgstr "Qt::CTRL+c"
-
-#~ msgid "User ID"
-#~ msgstr "Kullanıcı Kimliği"
-
-#~ msgid "Price Update  Failed"
-#~ msgstr "Fiyat Güncelleme İşlemi Başarısız Oldu"
-
-#~ msgid "Ca&ncel"
-#~ msgstr "İ&ptal"
-
-#, fuzzy
-#~| msgctxt "Yearly"
-#~| msgid "Occurs yearly"
-#~ msgid "Occurs weekly"
-#~ msgstr "Yıllık"
-
-#~ msgctxt "%1 days"
-#~ msgid "Forecast days"
-#~ msgstr "Tahmin günleri"
-
-#~ msgctxt "History"
-#~ msgid "History-based method"
-#~ msgstr "Geçmiş-temelli yöntem"
-
-#~ msgctxt "Name"
-#~ msgid "Investment name"
-#~ msgstr "Yatırım adı"
-
-#~ msgctxt "Symbol"
-#~ msgid "Investment symbol"
-#~ msgstr "Yatırım sembolü"
-
-#~ msgctxt "Update"
-#~ msgid "Update payee"
-#~ msgstr "Alacaklıyı güncelle"
-
-#~ msgctxt "Finished"
-#~ msgid "Finished schedule"
-#~ msgstr "Tamamlanmış zamanlama"
-
-#~ msgctxt "General"
-#~ msgid "General settings"
-#~ msgstr "Genel ayarlar"
-
-#~ msgctxt "Register"
-#~ msgid "Register view settings"
-#~ msgstr "Görünüm ayarlarını kaydet"
-
-#~ msgctxt "Forecast"
-#~ msgid "Forecast settings"
-#~ msgstr "Tahmin ayarları"
-
-#~ msgid "Less..."
-#~ msgstr "Daha az..."
-
-#~ msgid "More..."
-#~ msgstr "Daha fazla..."
-
-#~ msgid "Account changed.  Old: \"%1\", New: \"%2\""
-#~ msgstr "Hesap değiştirildi.  Eski: \"%1\", Yeni: \"%2\""
-
-#~ msgid "CAUTION!"
-#~ msgstr "UYARI!"
-
-#~ msgid "Saturday"
-#~ msgstr "Cumartesi"
-
-#~| msgid "CSV files"
-#~ msgid "CSV (Filefilter)"
-#~ msgstr "CSV (Dosya filtresi)"
-
-#~| msgid "HTML files"
-#~ msgid "HTML (Filefilter)"
-#~ msgstr "HTML (Dosya filtresi)"
-
-#, fuzzy
-#~| msgid "Enter or schedule?"
-#~ msgid "Dialog caption for 'Enter or schedule' dialog"
-#~ msgstr "Gir ya da zamanla?"
-
-#, fuzzy
-#~| msgid "<default>"
-#~ msgid "default price mode"
-#~ msgstr "<öntanımlı>"
-
-#, fuzzy
-#~| msgid "not reconciled"
-#~ msgid "Reconcile state 'Not reconciled'"
-#~ msgstr "uzlaştırılmamış"
-
-#, fuzzy
-#~| msgid "Reconciliation Wizard"
-#~ msgid "Reconcile state 'Cleared'"
-#~ msgstr "Uzlaştırma Sihirbazı"
-
-#, fuzzy
-#~| msgid "R"
-#~ msgid "Reconcile flag R"
-#~ msgstr "R"
-
-#, fuzzy
-#~| msgid "F"
-#~ msgid "Reconcile flag F"
-#~ msgstr "F"
-
-#, fuzzy
-#~| msgid "Category Type"
-#~ msgid "Category name"
-#~ msgstr "Kategori Tipi"
-
-#, fuzzy
-#~| msgid "Liability accounts"
-#~ msgid "QIF tag for liability account"
-#~ msgstr "Borç hesapları"
-
-#, fuzzy
-#~| msgid "Interest category"
-#~ msgid "QIF tag for category"
-#~ msgstr "Faiz kategorisi"
-
-#, fuzzy
-#~| msgid "Stock security"
-#~ msgid "QIF tag for security"
-#~ msgstr "Stok güvenliği"
-
-#, fuzzy
-#~| msgid "Show all stored prices"
-#~ msgid "QIF tag for prices"
-#~ msgstr "Kaydedilen tüm fiyatları göster"
-
-#, fuzzy
-#~| msgid "T"
-#~ msgid "Enter todays date into date input widget"
-#~ msgstr "T"
-
-#, fuzzy
-#~| msgid "Deposits"
-#~ msgid "Deposits onto account"
-#~ msgstr "Depozitler"
-
-#, fuzzy
-#~| msgid "Payments"
-#~ msgid "Payments towards credit card"
-#~ msgstr "Ödemeler"
-
-#, fuzzy
-#~| msgid "Payments"
-#~ msgid "Payments made with credit card"
-#~ msgstr "Ödemeler"
-
-#, fuzzy
-#~| msgid "Payment"
-#~ msgid "Payment made from account"
-#~ msgstr "Ödeme"
-
-#, fuzzy
-#~| msgid "Payment"
-#~ msgid "Payment made with credit card"
-#~ msgstr "Ödeme"
-
-#, fuzzy
-#~| msgid "Payment"
-#~ msgid "Payment towards credit card"
-#~ msgstr "Ödeme"
-
-#, fuzzy
-#~| msgid "Decrease"
-#~ msgid "Decrease of asset/liability value"
-#~ msgstr "Azalt"
-
-#, fuzzy
-#~| msgid "Increase"
-#~ msgid "Increase of asset/liability value"
-#~ msgstr "Arttır"
-
-#, fuzzy
-#~| msgid "Unknown"
-#~ msgid "Unknown category"
-#~ msgstr "Bilinmeyen"
-
-#, fuzzy
-#~| msgid "Duplicate open"
-#~ msgid "Duplicate split"
-#~ msgstr "Üstüste açma"
-
-#, fuzzy
-#~| msgid "Expense categories"
-#~ msgid "Activity for expense categories"
-#~ msgstr "Gider kategorileri"
-
-#, fuzzy
-#~| msgid "Income categories"
-#~ msgid "Activity for income categories"
-#~ msgstr "Gelir kategorileri"
-
-#, fuzzy
-#~| msgid "Tax"
-#~ msgid "Column heading for category in tax report"
-#~ msgstr "Vergi"
-
-#, fuzzy
-#~| msgid "VAT"
-#~ msgid "Column heading for VAT category"
-#~ msgstr "VAT"
-
-#, fuzzy
-#~| msgid "Stat&us"
-#~ msgid "label for status combo"
-#~ msgstr "&Durum"
-
-#~ msgid "Search Columns"
-#~ msgstr "Arama Sütunları"
-
-#~ msgid "All Visible Columns"
-#~ msgstr "Tüm Görünebilir Sütunlar"
-
-#~ msgid "Import Gnucash file..."
-#~ msgstr "Gnucash dosyası içeri aktar ..."
-
-#~ msgid "Import XML Statement..."
-#~ msgstr "İçeri XML Dosyası aktar..."
-
-#~ msgid "Edit scheduled transaction..."
-#~ msgstr "Zamanlanmış aktarımı düzenle..."
-
-#, fuzzy
-#~| msgid "New"
-#~ msgid "New transaction button"
-#~ msgstr "Yeni"
-
-#, fuzzy
-#~| msgid "Edit"
-#~ msgid "Edit transaction button"
-#~ msgstr "Düzenle"
-
-#, fuzzy
-#~| msgid "Toggle"
-#~ msgid "Toggle reconciliation flag"
-#~ msgstr "Değiştir"
-
-#, fuzzy
-#~| msgid "Cleared"
-#~ msgid "Mark transaction cleared"
-#~ msgstr "Temizlenmiş"
-
-#, fuzzy
-#~| msgid "Mark transaction"
-#~ msgid "Mark transaction reconciled"
-#~ msgstr "Aktarımı işaretle"
-
-#, fuzzy
-#~| msgid "Mark transaction"
-#~ msgid "Mark transaction not reconciled"
-#~ msgstr "Aktarımı işaretle"
-
-#, fuzzy
-#~| msgid "Select autofill transaction"
-#~ msgid "Select all transactions"
-#~ msgstr "Otomatik doldurulan aktarımı seç"
-
-#, fuzzy
-#~| msgid "Storing transactions"
-#~ msgid "Combine transactions"
-#~ msgstr "Aktarımlar kaydediliyor"
-
-#, fuzzy
-#~| msgid "XML files"
-#~ msgid "XML (Filefilter)"
-#~ msgstr "XML dosyaları"
-
-#, fuzzy
-#~| msgid "Copy of %1"
-#~ msgid "Copy of scheduled transaction name"
-#~ msgstr "%1 ögesinin kopyası"
-
-#~ msgid ""
-#~ "_n: one month\n"
-#~ "%n months"
-#~ msgstr "%n ay"
-
-#~ msgid ""
-#~ "_n: one year\n"
-#~ "%n years"
-#~ msgstr "%n yıl"
-
-#~ msgid ""
-#~ "_n: one payment\n"
-#~ "%n payments"
-#~ msgstr "%n ödeme"
-
-#~ msgid ""
-#~ "_: Postpone reconciliation\n"
-#~ "Postpone"
-#~ msgstr "Ertele"
-
-#~ msgid ""
-#~ "_: Enter transaction\n"
-#~ "Enter"
-#~ msgstr "Gir"
-
-#~ msgid ""
-#~ "_: Cancel transaction edit\n"
-#~ "Cancel"
-#~ msgstr "İptal"
-
-#~ msgid ""
-#~ "_: Delete transaction\n"
-#~ "Delete"
-#~ msgstr "Sil"
-
-#~ msgid ""
-#~ "_: Duplicate transaction\n"
-#~ "Duplicate"
-#~ msgstr "İkile"
-
-#~ msgid ""
-#~ "_: Select all transactions\n"
-#~ "Select all"
-#~ msgstr "Tümünü seç"
-
-#~ msgid ""
-#~ "_: Combine transactions\n"
-#~ "Combine"
-#~ msgstr "Birleştir"
-
-#~ msgid ""
-#~ "_: NAME OF TRANSLATORS\n"
-#~ "Your names"
-#~ msgstr "Serdar Soytetir"
-
-#~ msgid ""
-#~ "_: EMAIL OF TRANSLATORS\n"
-#~ "Your emails"
-#~ msgstr "tulliana@gmail.com"
-
-#~ msgid ""
-#~ "_: Duplicate split\n"
-#~ "CTRL+c"
-#~ msgstr "CTRL+c"
-
-#~ msgid ""
-#~ "_: This is the mount point\n"
-#~ "Mount Point:"
-#~ msgstr "Bağlanma Noktası:"
-
-#~ msgid ""
-#~ "_: To (Date)\n"
-#~ "To"
-#~ msgstr "Tarihine"
-
-#~ msgid ""
-#~ "_: From (Date)\n"
-#~ "From"
-#~ msgstr "Tarihinden"
-
-#~ msgid ""
-#~ "_: to (amount)\n"
-#~ "to"
-#~ msgstr "bu toplama"
-
-#~ msgid ""
-#~ "_: from (amount)\n"
-#~ "from"
-#~ msgstr "bu toplamdan"
-
-#~ msgid ""
-#~ "_: Unknown payee\n"
-#~ "Unknown"
-#~ msgstr "Bilinmeyen"
-
-#~ msgid ""
-#~ "_: Column number %1\n"
-#~ "Column No. %1"
-#~ msgstr "Sütun No. %1"
-
-#~ msgid "No plugins loaded"
-#~ msgstr "Hiç eklenti yüklenmedi"
-
-#~ msgid "Create schedule..."
-#~ msgstr "Zamanlama oluştur..."
-
-#~ msgid "Edit schedule..."
-#~ msgstr "Zamanlamayı düzenle..."
-
-#~ msgid "Duplicate schedule"
-#~ msgstr "Zamanlamayı ikile"
-
-#~ msgid "Enter schedule..."
-#~ msgstr "Zamanlama gir..."
-
-#~ msgid "Skip schedule..."
-#~ msgstr "Zamanlamayı atla..."
-
-#, fuzzy
-#~ msgid "Adjusting schedules..."
-#~ msgstr "Zamanlamalar ayarlanıyor ..."
-
-#~ msgid "Add schedule"
-#~ msgstr "Zamanlama ekle"
-
-#~ msgid "Loaded"
-#~ msgstr "Yüklendi"
-
-#~ msgid "not loaded: %1"
-#~ msgstr "yüklenmemiş: %1"
-
-#~ msgid "Schedule options"
-#~ msgstr "Zamanlama seçenekleri"
-
-#~ msgid "New Schedule"
-#~ msgstr "Yeni Zamanlama"
-
-#~ msgid "Edit Schedule"
-#~ msgstr "Zamanlamayı Düzenle"
-
-#~ msgid "Search transactions containing the following text"
-#~ msgstr "Aşağıdaki metni içeren aktarımları ara"
-
-#~ msgid "&Search"
-#~ msgstr "&Ara"
-
-#~ msgid "Start the search"
-#~ msgstr "Aramaya başla"
-
-#~ msgid "Reset all settings"
-#~ msgstr "Tüm ayarları öntanımlı hale getir"
-
-#~ msgid ""
-#~ "Reading the bank list failed with the following error: '%1'. The console "
-#~ "output may have more information."
-#~ msgstr ""
-#~ "Banka listesini okuma işlemi şu hatayı vererek başarısız oldu: '%1'. "
-#~ "Uçbirim çıktısı daha fazla bilgi verebilir."
-
-#~ msgid "XMLPP error"
-#~ msgstr "XMLPP hatası"
-
-#, fuzzy
-#~ msgid "Disabled. No online banking services are available"
-#~ msgstr "DURUM: Pasif. Kullanılabilir çevrimiçi bankacılık servisi yok"
-
-#~ msgid "SAVINGS"
-#~ msgstr "TASARRUFLAR"
-
-#~ msgid "MONEY MARKET"
-#~ msgstr "PARA PİYASASI"
-
-#~ msgid "CREDIT CARD"
-#~ msgstr "KREDİ KARTI"
-
-#~ msgid "INVESTMENT"
-#~ msgstr "YATIRIM"
-
-#~ msgid "UNKNOWN"
-#~ msgstr "BİLİNMEYEN"
-
-#~ msgid "Selecting a SQL database"
-#~ msgstr "SQL veritabanı seçiliyor"
-
-#~ msgid "Invalid account for investments"
-#~ msgstr "Yatırımlar için geçersiz hesap"
-
-#~ msgid "Unable to import"
-#~ msgstr "İçeri aktarlamadı"
-
-#, fuzzy
-#~ msgid "Budget "
-#~ msgstr "Bütçe"
-
-#, fuzzy
-#~ msgid "Budget Total"
-#~ msgstr "Bütçe yılı"
-
-#, fuzzy
-#~ msgid "Forecast Total"
-#~ msgstr "Tahmin"
-
-#, fuzzy
-#~ msgid "Incomes and Expenses This Month"
-#~ msgstr "Bu ayın gelir - giderleri"
-
-#, fuzzy
-#~ msgid "Incomes"
-#~ msgstr "Gelir"
-
-#, fuzzy
-#~ msgid "Schedules This Month"
-#~ msgstr "Zamanlama Bilgileri"
-
-#~ msgid "Abort operation"
-#~ msgstr "İşlemi sonlandır"
-
-#~ msgid "Start the backup operation"
-#~ msgstr "Yedekleme işlemine başla"
-
-#~ msgid "Pressing this button starts the backup operation."
-#~ msgstr "Bu düğmeye basmak yedekleme işlemini başlatır."
-
-#~ msgid "Cancel the backup operation"
-#~ msgstr "Yedekleme işlemini iptal et"
-
-#~ msgid "Use this to abort the backup and to return to KMyMoney."
-#~ msgstr ""
-#~ "Yedeklemeyi iptal etmek ve KMyMoney uygulamasna dönmek için bunu kullanın."
-
-#~ msgid "Close dialog"
-#~ msgstr "Pencereyi kapat"
-
-#~ msgid "Reject all changes to the data and closes the dialog"
-#~ msgstr ""
-#~ "Verilerde yapılan tüm değişiklikleri yoksayar ve bu pencereyi kapatır"
-
-#~ msgid "Use this to reject all changes."
-#~ msgstr "Tüm değişiklikleri yoksaymak için bunu kullanın."
-
-#, fuzzy
-#~ msgid "Scan"
-#~ msgstr "T&ara"
-
-#~ msgid "Automatically create missing payees"
-#~ msgstr "Olmayan alacaklıları otomatik oluştur"
-
-#~ msgid "Create a new price information entry."
-#~ msgstr "Yeni fiyat bilgisi girdisi oluştur."
-
-#~ msgid "Reject any changes"
-#~ msgstr "Tüm değişiklikleri iptal et"
-
-#~ msgid "Accept modifications"
-#~ msgstr "Düzenlemeleri kabul et"
-
-#~ msgid "S&ummary"
-#~ msgstr "&Özet"
-
-#~ msgid "Det&ail"
-#~ msgstr "&Ayrıntı"
-
-#, fuzzy
-#~ msgid "Total Incomes This Month"
-#~ msgstr "Bu ayın gelir - giderleri"
-
-#, fuzzy
-#~ msgid "Total Expenses This Month"
-#~ msgstr "Bu ayın gelir - giderleri"
-
-#~ msgid "&Create"
-#~ msgstr "&Oluştur"
-
-#~ msgid "Te&xt"
-#~ msgstr "&Metin"
-
-#~ msgid "Online &Quotes"
-#~ msgstr "Çevrimiçi A&ktarımlar"
-
-#~ msgid "&Yearly"
-#~ msgstr "&Yıllık"
-
-#~ msgid "Advanced Institution Settings"
-#~ msgstr "Gelişmiş Şirket Ayarları"
-
-#~ msgid "OFX Direct Connect Settings"
-#~ msgstr "OFX Direkt Bağlantı Ayarları"
-
-#~ msgid "Enable OFX Direct Connect"
-#~ msgstr "OFX Direkt Bağlantısını Etkinleştir"
-
-#~ msgid "FIORG"
-#~ msgstr "FIORG"
-
-#~ msgid "Commodity Editor"
-#~ msgstr "Mal Düzenleyici"
-
-#~ msgid "1/"
-#~ msgstr "1/"
-
-#~ msgid "Code"
-#~ msgstr "Kod"
-
-#~ msgid "Account Fraction"
-#~ msgstr "Hesap Bölümü"
-
-#~ msgid "Alt+C"
-#~ msgstr "Alt+C"
-
-#~ msgid "Setup..."
-#~ msgstr "Ayarla..."
-
-#~ msgid "BANK/BROKER: &lt;Not configured&gt;"
-#~ msgstr "BANKA/KOMİSYONCU:&lt;Yapılandırılmamış&gt;"
-
-#~ msgid "STATUS: Account not configured"
-#~ msgstr "DURUM: Hesap yapılandırılmamış"
-
-#~ msgid "Personal Information"
-#~ msgstr "Kişisel Bilgiler"
-
-#~ msgid "TextLabel2"
-#~ msgstr "MetinEtiketi2"
-
-#~ msgid "YTD:"
-#~ msgstr "YTD:"
-
-#~ msgid "TextLabel4"
-#~ msgstr "MetinEtiketi4"
-
-#~ msgid "Online update using OFX..."
-#~ msgstr "OFX kullanarak çevrimiçi güncelleme..."
-
-#~ msgid "Match Transaction..."
-#~ msgstr "Aktarım Eşle..."
-
-#~ msgid "Match With This Transaction"
-#~ msgstr "Bu Aktarım ile Eşle"
-
-#~ msgid "Imported Data Warnings"
-#~ msgstr "İçeriye Aktarılmış Veri Uyarısı"
-
-#~ msgid "Unable to import <b>%1</b> file.  There is no such plugin loaded."
-#~ msgstr ""
-#~ "<b>%1</b> dosyası içeri aktarılamadı.  Bu dosyaya göre bir eklenti yok."
-
-#~ msgid "%1 (Plugin)..."
-#~ msgstr "%1 (Eklenti)..."
-
-#~ msgid "AppTest"
-#~ msgstr "UygulamaTesti"
-
-#~ msgid "Open Configuration Dialog"
-#~ msgstr "Yapılandırma Penceresini Aç"
-
-#~ msgid "Use this to accept the data and possibly update the exchange rate"
-#~ msgstr ""
-#~ "Veriyi kabul etmek ve dönüşüm oranını güncellemek için bunu kullanın."
-
-#~ msgid "Please enter the payment amount."
-#~ msgstr "Lütfen ödeme miktarını girin."
-
-#~ msgid "Please enter the schedule name."
-#~ msgstr "Lütfen çizelge adını girin."
-
-#~ msgid "Please enter the payee name."
-#~ msgstr "Lütfen alıcı adını girin."
-
-#~ msgid "Write Check"
-#~ msgstr "Çek yaz"
-
-#~ msgid "Payee changed.  Old: \"%1\", New: \"%2\""
-#~ msgstr "Alacaklı değiştirildi.  Eskisi: \"%1\", Yenisi: \"%2\""
-
-#~ msgid "Category changed.  Old: \"%1\", New: \"%2\""
-#~ msgstr "Kategori değiştirildi.  Eskisi: \"%1\", Yenisi: \"%2\""
-
-#~ msgid "Memo changed.  Old: \"%1\", New: \"%2\""
-#~ msgstr "Not değiştirildi.  Eskisi: \"%1\", Yenisi: \"%2\""
-
-#~ msgid "Amount changed.  Old: \"%1\", New: \"%2\""
-#~ msgstr "Tutar değiştirildi.  Eskisi: \"%1\", Yenisi: \"%2\""
-
-#~ msgid "Open online help"
-#~ msgstr "Çevrimiçi yardımı aç"
-
-#~ msgid "Cancel the import operation"
-#~ msgstr "İçeri aktarma işlemini iptal et"
-
-#~ msgid "Verify cancel"
-#~ msgstr "İptal İşlemini Onayla"
-
-#~ msgid "textLabel2"
-#~ msgstr "metinEtiketi2"
-
-#~ msgid "Edit Scheduled Transfer"
-#~ msgstr "Planlanmış Aktarımı Düzenle"
-
-#~ msgid "From:"
-#~ msgstr "Kimden:"
-
-#~ msgid "Category:"
-#~ msgstr "Kategori:"
-
-#~ msgid "<b>Name:</b>"
-#~ msgstr "<b>İsim:</b>"
-
-#~ msgid "<b>Type:</b>"
-#~ msgstr "<b>Tip:</b>"
-
-#~ msgid "<b>Payee:</b>"
-#~ msgstr "<b>Alacaklı:</b>"
-
-#~ msgid "<b>Category:</b>"
-#~ msgstr "<b>Kategori:</b>"
-
-#~ msgid "<b>Memo:</b>"
-#~ msgstr "<b>Not:</b>"
-
-#~ msgid "<b>Date:</b>"
-#~ msgstr "<b>Tarih:</b>"
-
-#~ msgid "<b>Amount:</b>"
-#~ msgstr "<b>Tutar:</b>"
-
-#~ msgid "Equity-Symbol:"
-#~ msgstr "Eşitlik-Simgesi:"
-
-#~ msgid "Institution Selection"
-#~ msgstr "Şirket Seçimi"
-
-#~ msgid "<u>I</u>nstitution"
-#~ msgstr "<u>Ş</u>irket"
-
-#~ msgid "Account Type Selection"
-#~ msgstr "Hesap Tipi Seçimi"
-
-#~ msgid "Account Payment"
-#~ msgstr "Hesap Ödemesi"
-
-#~ msgid "Account with that name already exists."
-#~ msgstr "Bu ismi kullanan bir hesap zaten var."
-
-#~ msgid "Category with that name already exists."
-#~ msgstr "Bu ismi kullanan bir kategori zaten var."
-
-#~ msgid "Verify category type"
-#~ msgstr "Kategori tipini doğrula"
-
-#~ msgid "Bill or Transfer"
-#~ msgstr "Fatura ya da Aktarım"
-
-#~ msgid "Equity/Currency/Value options"
-#~ msgstr "Eşitlik/Para Birimi/Değer Seçenekleri"
-
-#~ msgid "Use the normal institution view"
-#~ msgstr "Normal şirket görünümünü kullan"
-
-#~ msgid "Restrict by date"
-#~ msgstr "Tarihe göre sınırla"
-
-#~ msgid "Restrict by transaction state"
-#~ msgstr "Aktarım durumuna göre sınırla"
-
-#~ msgid "Data Encryption Settings"
-#~ msgstr "Veri Şifreleme Ayarları"
-
-#~ msgid "List view colour :"
-#~ msgstr "Liste görünümü renleri :"
-
-#~ msgid ""
-#~ "Do you really want to select %1 as your base currency? This selection can "
-#~ "currently not be modified! If unsure, press 'No' now."
-#~ msgstr ""
-#~ "Temel para birimi olarak %1 seçmek istediğinizden emin misiniz? Bu seçim "
-#~ "şimdilik değiştirilemez! Emin değilseniz 'Hayır' düğmesine tıklayın."
-
-#~ msgid "There is no user manual yet"
-#~ msgstr "Henüz bir kullanıcı yardım dosyası yok"
-
-#~ msgid "New Bill..."
-#~ msgstr "Yeni Fatura..."
-
-#~ msgid "New Deposit..."
-#~ msgstr "Yeni Depozit..."
-
-#~ msgid "AT&M"
-#~ msgstr "A&TM"
-
-#~ msgid "Account Options"
-#~ msgstr "Hesap Seçeekleri"
-
-#~ msgid "Mark as ..."
-#~ msgstr "Farklı işaretle ..."
-
-#~ msgid "Type, number"
-#~ msgstr "Tip, numara"
-
-#~ msgid "New Account..."
-#~ msgstr "Yeni Hesap..."
-
-#~ msgid "Really delete this institution: "
-#~ msgstr "Şirket gerçekten silinsin mi: "
-
-#~ msgid "Cannot delete institution: "
-#~ msgstr "Şirket silinemedi: "
-
-#~ msgid "Cannot delete account: "
-#~ msgstr "Hesap silinemedi: "
-
-#~ msgid "Cannot edit personal data"
-#~ msgstr "Kişisel bilgiler düzenlenemedi"
-
-#~ msgid "*.dat|Account templates"
-#~ msgstr "*.dat|Hesap Şablonları"
-
-#~ msgid "Loading default accounts"
-#~ msgstr "Öntanımlı hesaplar yükleniyor"
-
-#~ msgid "Ready"
-#~ msgstr "Hazır"
-
-#~ msgid "1 Week %"
-#~ msgstr "1 Hafta %"
-
-#~ msgid "4 Weeks %"
-#~ msgstr "4 Hafta %"
-
-#~ msgid "3 Months %"
-#~ msgstr "3 Ay %"
-
-#~ msgid "YTD %"
-#~ msgstr "YTD %"
-
-#~ msgid "On-line Price Update ..."
-#~ msgstr "Çevrimiçi Fiyat Güncelleme ..."
-
-#~ msgid "Symbol Name"
-#~ msgstr "Sembol Adı"
-
-#~ msgid "&Account Details"
-#~ msgstr "&Hesap Detayları"
-
-#~ msgid "&Reconcile ..."
-#~ msgstr "&Uyumlaştır ..."
-
-#~ msgid "Add price info"
-#~ msgstr "Fiyat bilgisi ekle"
-
-#~ msgid "Open the account dialog"
-#~ msgstr "Hesap penceresini aç"
-
-#~ msgid "Cannot edit category: "
-#~ msgstr "Kategori düzenlenemedi: "
-
-#~ msgid "Add new account..."
-#~ msgstr "Yeni hesap ekle..."
-
-#~ msgid ""
-#~ "The next dialog allows you to add predefined account/category templates "
-#~ "to the new file. Different languages are available to select from. You "
-#~ "can skip loading any template  now by selecting <b>Cancel</b> from the "
-#~ "next dialog. If you wish to add more templates later, you can restart "
-#~ "this operation by selecting <b>File/Import/Account Templates</b>."
-#~ msgstr ""
-#~ "Sonraki pencere oluşturacağınız dosyaya önceden belirlenen hesap /"
-#~ "kategori şablonlarını eklemenizi sağlayacak. Seçmek için farklı dillerde "
-#~ "şablonlar var. Bu aşamayı <b>Atla</b> düğmesine tıklayarak sonraki "
-#~ "aşamaya geçebilirsiniz. Daha sonra şablon eklemek isterseniz <b>Dosya/"
-#~ "İçeri Aktar/Hesap Şablonları</b> yolunu takip edebilirsiniz."
-
-#~ msgid ""
-#~ "*.kmy|KMyMoney files\n"
-#~ "*.xml|XML Files\n"
-#~ "*.ANON.xml|Anonymous Files\n"
-#~ "*.*|All files"
-#~ msgstr ""
-#~ "*.kmy|KMyMoney dosyası\n"
-#~ "*.xml|XML Dosyası\n"
-#~ "*.ANON.xml|Anonim Dosyalar\n"
-#~ "*.*|Tüm Dosyalar"
-
-#~ msgid "*.kmt|Account templates"
-#~ msgstr "*.kmt|Hesap şablonları"
-
-#~ msgid "Select account template(s)"
-#~ msgstr "Hesap şablonu seç"
-
-#~ msgid "&Bills/Deposits"
-#~ msgstr "&Faturalar/Depozitler"
-
-#~ msgid "&Reports"
-#~ msgstr "&Raporlar"
-
-#~ msgid "Cannot move account"
-#~ msgstr "Hesap taşınamaz"
-
-#~ msgid "Unable to add category"
-#~ msgstr "Kategori eklenemedi"
