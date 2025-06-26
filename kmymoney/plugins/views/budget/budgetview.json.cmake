@@ -59,7 +59,7 @@
         "Description[sk]": "Pridá pohľad rozpočtu do KMyMoney",
         "Description[sl]": "Doda proračunski pogled v KMyMoney",
         "Description[sv]": "Lägger till budgetvy i KMyMoney",
-        "Description[tr]": "K Param'a bütçe görünümü ekler",
+        "Description[tr]": "K Param’a bütçe görünümü ekleyin",
         "Description[uk]": "Панель бюджетів у KMyMoney",
         "Description[x-test]": "xxAdds budget view to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加预算视图",

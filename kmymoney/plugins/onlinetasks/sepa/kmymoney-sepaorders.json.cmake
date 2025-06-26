@@ -109,7 +109,7 @@
         "Name[sk]": "SEPA príkazy",
         "Name[sl]": "Naročila SEPA",
         "Name[sv]": "SEPA-order",
-        "Name[tr]": "SEPA talimatları",
+        "Name[tr]": "SEPA Talimatları",
         "Name[uk]": "Векселі SEPA",
         "Name[x-test]": "xxSEPA ordersxx",
         "Name[zh_CN]": "单一欧元支付区订单",

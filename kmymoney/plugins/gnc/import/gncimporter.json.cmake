@@ -60,7 +60,7 @@
         "Description[sk]": "Pridať GnuCash import do KMyMoney",
         "Description[sl]": "Doda uvoz GnuCash v KMyMoney",
         "Description[sv]": "Lägg till GnuCash-import till KMyMoney",
-        "Description[tr]": "K Param'a GnuCash içe aktarma ekle",
+        "Description[tr]": "K Param’a GnuCash içe aktarma ekleyin",
         "Description[uk]": "Імпортування даних GnuCash у KMyMoney",
         "Description[x-test]": "xxAdd GnuCash importing to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加 GnuCash 导入服务",
