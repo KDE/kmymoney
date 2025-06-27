@@ -443,21 +443,22 @@ bool MyMoneySplit::replaceId(const QString& newId, const QString& oldId)
 
 QHash<Split::Action, QString> actionNamesLUT()
 {
-    static const QHash<Split::Action, QString> actionNames {
-        {Split::Action::Check,            QStringLiteral("Check")},
-        {Split::Action::Deposit,          QStringLiteral("Deposit")},
-        {Split::Action::Transfer,         QStringLiteral("Transfer")},
-        {Split::Action::Withdrawal,       QStringLiteral("Withdrawal")},
-        {Split::Action::ATM,              QStringLiteral("ATM")},
-        {Split::Action::Amortization,     QStringLiteral("Amortization")},
-        {Split::Action::Interest,         QStringLiteral("Interest")},
-        {Split::Action::BuyShares,        QStringLiteral("Buy")},
-        {Split::Action::Dividend,         QStringLiteral("Dividend")},
+    static const QHash<Split::Action, QString> actionNames{
+        {Split::Action::ATM, QStringLiteral("ATM")},
+        {Split::Action::AddShares, QStringLiteral("Add")},
+        {Split::Action::Amortization, QStringLiteral("Amortization")},
+        {Split::Action::BuyShares, QStringLiteral("Buy")},
+        {Split::Action::Check, QStringLiteral("Check")},
+        {Split::Action::Deposit, QStringLiteral("Deposit")},
+        {Split::Action::Dividend, QStringLiteral("Dividend")},
+        {Split::Action::Interest, QStringLiteral("Interest")},
+        {Split::Action::InterestIncome, QStringLiteral("IntIncome")},
         {Split::Action::ReinvestDividend, QStringLiteral("Reinvest")},
-        {Split::Action::Yield,            QStringLiteral("Yield")},
-        {Split::Action::AddShares,        QStringLiteral("Add")},
-        {Split::Action::SplitShares,      QStringLiteral("Split")},
-        {Split::Action::InterestIncome,   QStringLiteral("IntIncome")},
+        // SellShares is not present as action
+        {Split::Action::SplitShares, QStringLiteral("Split")},
+        {Split::Action::Transfer, QStringLiteral("Transfer")},
+        {Split::Action::Withdrawal, QStringLiteral("Withdrawal")},
+        {Split::Action::Yield, QStringLiteral("Yield")},
     };
     return actionNames;
 }
