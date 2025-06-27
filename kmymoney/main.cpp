@@ -25,6 +25,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KCrash/KCrash>
+
 #define HAVE_ICON_THEME __has_include(<KIconTheme>)
 #if HAVE_ICON_THEME
 #include <KIconTheme>
@@ -73,6 +75,12 @@ KMyMoneyApp* kmymoney;
 static int runKMyMoney(QApplication &a, const QUrl &file, bool noFile);
 static void migrateConfigFiles();
 
+static void emergencySaveFunction(int)
+{
+    if (kmymoney)
+        kmymoney->slotFileClose();
+}
+
 int main(int argc, char *argv[])
 {
 #ifdef Q_OS_WIN
@@ -115,6 +123,8 @@ int main(int argc, char *argv[])
     KLocalizedString::setApplicationDomain("kmymoney");
 
     AlkEnvironment::checkForAppImageEnvironment(argv[0]);
+
+    KCrash::setEmergencySaveFunction(emergencySaveFunction);
 
     migrateConfigFiles();
 

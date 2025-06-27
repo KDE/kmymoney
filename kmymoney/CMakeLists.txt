@@ -171,6 +171,7 @@ target_link_libraries(kmymoney
   KF${QT_MAJOR_VERSION}::ConfigGui
   KF${QT_MAJOR_VERSION}::WidgetsAddons
   KF${QT_MAJOR_VERSION}::CoreAddons
+  KF${QT_MAJOR_VERSION}::Crash
   kmm_templates
   $<$<BOOL:${USE_MODELTEST}>:Qt::Test>
   $<$<BOOL:${ENABLE_HOLIDAYS}>:KF${QT_MAJOR_VERSION}::Holidays>
