@@ -196,6 +196,9 @@ int main(int argc, char** argv)
                 qDebug() << i18n("saving report '%1' into '%2'").arg(report.name(), of.fileName());
                 qStdOut() << of.fileName() << "\n";
                 QTextStream o(&of);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+                o.setCodec("UTF-8");
+#endif
                 exportTable(o, options, report);
                 of.close();
             } else {
