@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-24 01:59+0000\n"
+"POT-Creation-Date: 2025-06-29 02:05+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -8174,6 +8174,100 @@ msgstr "Žemyn"
 msgid "HalfUp"
 msgstr ""
 
+#: kmymoney/mymoney/mymoneysplit.cpp:482
+#, kde-format
+msgctxt "Investment action"
+msgid "ATM"
+msgstr ""
+
+#: kmymoney/mymoney/mymoneysplit.cpp:486
+#, fuzzy, kde-format
+msgctxt "Investment action"
+msgid "Add shares"
+msgstr "Adresas:"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:490
+#, fuzzy, kde-format
+#| msgid "Amortization"
+msgctxt "Investment action"
+msgid "Amortization"
+msgstr "Amortizacija"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:494
+#, fuzzy, kde-format
+msgctxt "Investment action"
+msgid "Buy shares"
+msgstr "Adresas:"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:498
+#, fuzzy, kde-format
+#| msgid "Write check"
+msgctxt "Investment action"
+msgid "Check"
+msgstr "&Tikrinti"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:502
+#, fuzzy, kde-format
+#| msgid "Deposit"
+msgctxt "Investment action"
+msgid "Deposit"
+msgstr "Indėlis"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:506
+#, kde-format
+msgctxt "Investment action"
+msgid "Dividend"
+msgstr ""
+
+#: kmymoney/mymoney/mymoneysplit.cpp:510
+#, fuzzy, kde-format
+#| msgid "Interest"
+msgctxt "Investment action"
+msgid "Interest"
+msgstr "Palūkanos"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:514
+#, fuzzy, kde-format
+#| msgid "Interest rate"
+msgctxt "Investment action"
+msgid "Interest income"
+msgstr "Palūkanos"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:518
+#, fuzzy, kde-format
+#| msgid "Investments"
+msgctxt "Investment action"
+msgid "Reinvest dividends"
+msgstr "Investicijos"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:523
+#, fuzzy, kde-format
+msgctxt "Investment action"
+msgid "Split shares"
+msgstr "Perskirta-vertė"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:527
+#, fuzzy, kde-format
+#| msgid "Transfer"
+msgctxt "Investment action"
+msgid "Transfer"
+msgstr "Perkėlimas"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:531
+#, fuzzy, kde-format
+#| msgid "&Withdrawal"
+msgctxt "Investment action"
+msgid "Withdrawal"
+msgstr "&Išėmimas"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:535
+#, fuzzy, kde-format
+#| msgctxt "@title header of the QIF field name column"
+#| msgid "Field"
+msgctxt "Investment action"
+msgid "Yield"
+msgstr "Laukas"
+
 #: kmymoney/mymoney/mymoneytemplate.cpp:99
 #, kde-format
 msgid "<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>"
@@ -16092,6 +16186,13 @@ msgstr ""
 #, kde-format
 msgid "Week of %1"
 msgstr "Savaitė iš %1"
+
+#: kmymoney/plugins/views/reports/core/querytable.cpp:795
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1999
+#, fuzzy, kde-format
+msgctxt "Investment action"
+msgid "Sell shares"
+msgstr "Visos būklės"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:814
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1040
@@ -26045,9 +26146,6 @@ msgstr ""
 #~ msgid "&Transfer"
 #~ msgstr "&Perkėlimas"
 
-#~ msgid "&Withdrawal"
-#~ msgstr "&Išėmimas"
-
 #, fuzzy
 #~ msgid "&Payment"
 #~ msgstr "Mokėjimas"
@@ -27212,12 +27310,6 @@ msgstr ""
 #~ msgctxt "%1"
 #~ msgid "journal entry"
 #~ msgstr "Naujas kainos įrašas"
-
-#, fuzzy
-#~| msgid "Write check"
-#~ msgctxt "%1"
-#~ msgid "check"
-#~ msgstr "&Tikrinti"
 
 #, fuzzy
 #~| msgid "Payments"

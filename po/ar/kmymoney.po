@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-24 01:59+0000\n"
+"POT-Creation-Date: 2025-06-29 02:05+0000\n"
 "PO-Revision-Date: 2025-01-18 13:15+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -8345,6 +8345,105 @@ msgstr "لأسفل"
 msgid "HalfUp"
 msgstr ""
 
+#: kmymoney/mymoney/mymoneysplit.cpp:482
+#, fuzzy, kde-format
+#| msgctxt "@title:column Shows VAT percentage rate, if configured"
+#| msgid "VAT"
+msgctxt "Investment action"
+msgid "ATM"
+msgstr "ض.ق.م"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:486
+#, fuzzy, kde-format
+#| msgid "Buy Price"
+msgctxt "Investment action"
+msgid "Add shares"
+msgstr "ثمن البيع"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:490
+#, fuzzy, kde-format
+#| msgid "Import options"
+msgctxt "Investment action"
+msgid "Amortization"
+msgstr "خيارات الاستيراد"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:494
+#, fuzzy, kde-format
+#| msgid "Buy Price"
+msgctxt "Investment action"
+msgid "Buy shares"
+msgstr "ثمن البيع"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:498
+#, fuzzy, kde-format
+#| msgid "Checking"
+msgctxt "Investment action"
+msgid "Check"
+msgstr "جاري"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:502
+#, fuzzy, kde-format
+#| msgid "Deposit"
+msgctxt "Investment action"
+msgid "Deposit"
+msgstr "وديعة"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:506
+#, fuzzy, kde-format
+#| msgid "Dividend"
+msgctxt "Investment action"
+msgid "Dividend"
+msgstr "معاد استثماره"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:510
+#, fuzzy, kde-format
+#| msgid "Interest"
+msgctxt "Investment action"
+msgid "Interest"
+msgstr "الفائدة"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:514
+#, fuzzy, kde-format
+#| msgid "Interest Rate"
+msgctxt "Investment action"
+msgid "Interest income"
+msgstr "نسبة الفائدة"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:518
+#, fuzzy, kde-format
+#| msgid "Reinvest dividend"
+msgctxt "Investment action"
+msgid "Reinvest dividends"
+msgstr "أعد استثمار المعاد استثماره"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:523
+#, fuzzy, kde-format
+#| msgid "Splits"
+msgctxt "Investment action"
+msgid "Split shares"
+msgstr "التّجزئات"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:527
+#, fuzzy, kde-format
+#| msgid "Transfer"
+msgctxt "Investment action"
+msgid "Transfer"
+msgstr "حوّالة"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:531
+#, fuzzy, kde-format
+#| msgid "&Withdrawal"
+msgctxt "Investment action"
+msgid "Withdrawal"
+msgstr "&سحب"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:535
+#, fuzzy, kde-format
+#| msgid "Yield"
+msgctxt "Investment action"
+msgid "Yield"
+msgstr "الحصيلة"
+
 #: kmymoney/mymoney/mymoneytemplate.cpp:99
 #, kde-format
 msgid "<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>"
@@ -16165,6 +16264,14 @@ msgstr ""
 #, kde-format
 msgid "Week of %1"
 msgstr ""
+
+#: kmymoney/plugins/views/reports/core/querytable.cpp:795
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1999
+#, fuzzy, kde-format
+#| msgid "Total Value"
+msgctxt "Investment action"
+msgid "Sell shares"
+msgstr "القيمة الكلية"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:814
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1040
@@ -26179,9 +26286,6 @@ msgstr ""
 
 #~ msgid "&Transfer"
 #~ msgstr "&حوّالة"
-
-#~ msgid "&Withdrawal"
-#~ msgstr "&سحب"
 
 #~ msgid "&Payment"
 #~ msgstr "&سداد"

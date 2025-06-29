@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-24 01:59+0000\n"
+"POT-Creation-Date: 2025-06-29 02:05+0000\n"
 "PO-Revision-Date: 2025-04-26 10:10+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -7957,6 +7957,103 @@ msgstr "ნახევრით დაბლა"
 msgid "HalfUp"
 msgstr "ნახევრით მაღლა"
 
+#: kmymoney/mymoney/mymoneysplit.cpp:482
+#, fuzzy, kde-format
+#| msgctxt "@title:column Shows VAT percentage rate, if configured"
+#| msgid "VAT"
+msgctxt "Investment action"
+msgid "ATM"
+msgstr "დღგ"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:486
+#, fuzzy, kde-format
+#| msgid "Shares"
+msgctxt "Investment action"
+msgid "Add shares"
+msgstr "გაზიარებები"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:490
+#, fuzzy, kde-format
+#| msgid "Import options"
+msgctxt "Investment action"
+msgid "Amortization"
+msgstr "შემოტანის მორგება"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:494
+#, fuzzy, kde-format
+#| msgid "Shares"
+msgctxt "Investment action"
+msgid "Buy shares"
+msgstr "გაზიარებები"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:498
+#, fuzzy, kde-format
+#| msgid "Checking"
+msgctxt "Investment action"
+msgid "Check"
+msgstr "შემოწმება"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:502
+#, fuzzy, kde-format
+#| msgid "Deposit"
+msgctxt "Investment action"
+msgid "Deposit"
+msgstr "დეპოზიტი"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:506
+#, fuzzy, kde-format
+#| msgid "Dividend"
+msgctxt "Investment action"
+msgid "Dividend"
+msgstr "დივიდენდი"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:510
+#, fuzzy, kde-format
+#| msgid "Interest"
+msgctxt "Investment action"
+msgid "Interest"
+msgstr "ინტერესი"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:514
+#, fuzzy, kde-format
+#| msgid "Interest rate"
+msgctxt "Investment action"
+msgid "Interest income"
+msgstr "საპროცენტო განაკვეთი"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:518
+#, kde-format
+msgctxt "Investment action"
+msgid "Reinvest dividends"
+msgstr ""
+
+#: kmymoney/mymoney/mymoneysplit.cpp:523
+#, fuzzy, kde-format
+#| msgid "Splits"
+msgctxt "Investment action"
+msgid "Split shares"
+msgstr "გაყოფა"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:527
+#, fuzzy, kde-format
+#| msgid "Transfer"
+msgctxt "Investment action"
+msgid "Transfer"
+msgstr "Გადაცემა"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:531
+#, kde-format
+msgctxt "Investment action"
+msgid "Withdrawal"
+msgstr ""
+
+#: kmymoney/mymoney/mymoneysplit.cpp:535
+#, fuzzy, kde-format
+#| msgid "Yield"
+msgctxt "Investment action"
+msgid "Yield"
+msgstr "გამოსავალი"
+
 #: kmymoney/mymoney/mymoneytemplate.cpp:99
 #, kde-format
 msgid "<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>"
@@ -15443,6 +15540,14 @@ msgstr ""
 #, kde-format
 msgid "Week of %1"
 msgstr ""
+
+#: kmymoney/plugins/views/reports/core/querytable.cpp:795
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1999
+#, fuzzy, kde-format
+#| msgid "Shares"
+msgctxt "Investment action"
+msgid "Sell shares"
+msgstr "გაზიარებები"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:814
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1040

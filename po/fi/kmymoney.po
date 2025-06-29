@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-24 01:59+0000\n"
+"POT-Creation-Date: 2025-06-29 02:05+0000\n"
 "PO-Revision-Date: 2025-02-21 17:01+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -8334,6 +8334,105 @@ msgstr "PuoliAlas"
 msgid "HalfUp"
 msgstr "PuoliYlös"
 
+#: kmymoney/mymoney/mymoneysplit.cpp:482
+#, fuzzy, kde-format
+#| msgid "ATM"
+msgctxt "Investment action"
+msgid "ATM"
+msgstr "Pankkiautomaatti"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:486
+#, fuzzy, kde-format
+#| msgid "Add shares"
+msgctxt "Investment action"
+msgid "Add shares"
+msgstr "Lisää osakkeita"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:490
+#, fuzzy, kde-format
+#| msgid "Amortization"
+msgctxt "Investment action"
+msgid "Amortization"
+msgstr "Lyhennyserä"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:494
+#, fuzzy, kde-format
+#| msgid "Buy shares"
+msgctxt "Investment action"
+msgid "Buy shares"
+msgstr "Osta osakkeita"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:498
+#, fuzzy, kde-format
+#| msgctxt "noun, cheque, check"
+#| msgid "check"
+msgctxt "Investment action"
+msgid "Check"
+msgstr "sekki"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:502
+#, fuzzy, kde-format
+#| msgid "Deposit"
+msgctxt "Investment action"
+msgid "Deposit"
+msgstr "Pano"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:506
+#, fuzzy, kde-format
+#| msgid "Dividend"
+msgctxt "Investment action"
+msgid "Dividend"
+msgstr "Osinko"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:510
+#, fuzzy, kde-format
+#| msgid "Interest"
+msgctxt "Investment action"
+msgid "Interest"
+msgstr "Korko"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:514
+#, fuzzy, kde-format
+#| msgid "Interest Income"
+msgctxt "Investment action"
+msgid "Interest income"
+msgstr "Korkotulot"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:518
+#, fuzzy, kde-format
+#| msgid "Reinvest dividend"
+msgctxt "Investment action"
+msgid "Reinvest dividends"
+msgstr "Uudelleensijoituksen osinko"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:523
+#, fuzzy, kde-format
+#| msgid "Split shares"
+msgctxt "Investment action"
+msgid "Split shares"
+msgstr "Osakkeiden tuplaus"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:527
+#, fuzzy, kde-format
+#| msgid "Transfer"
+msgctxt "Investment action"
+msgid "Transfer"
+msgstr "Tilisiirto"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:531
+#, fuzzy, kde-format
+#| msgid "Withdrawal"
+msgctxt "Investment action"
+msgid "Withdrawal"
+msgstr "Nosto"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:535
+#, fuzzy, kde-format
+#| msgid "Yield"
+msgctxt "Investment action"
+msgid "Yield"
+msgstr "Tuotto"
+
 #: kmymoney/mymoney/mymoneytemplate.cpp:99
 #, kde-format
 msgid "<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>"
@@ -16124,6 +16223,14 @@ msgstr "Kuukausi: %1"
 #, kde-format
 msgid "Week of %1"
 msgstr "Viikko: %1"
+
+#: kmymoney/plugins/views/reports/core/querytable.cpp:795
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1999
+#, fuzzy, kde-format
+#| msgid "Sell shares"
+msgctxt "Investment action"
+msgid "Sell shares"
+msgstr "Myy osakkeita"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:814
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1040
@@ -28541,13 +28648,6 @@ msgstr "tallennetaan raporttia ”%1” tiedostoon ”%2”"
 #~ msgstr "Oma kirjaus:"
 
 #, fuzzy
-#~| msgctxt "noun, cheque, check"
-#~| msgid "check"
-#~ msgctxt "%1"
-#~ msgid "check"
-#~ msgstr "sekki"
-
-#, fuzzy
 #~| msgctxt "noun"
 #~| msgid "payment"
 #~ msgctxt "%1"
@@ -31115,12 +31215,6 @@ msgstr "tallennetaan raporttia ”%1” tiedostoon ”%2”"
 #~ msgctxt "Payee name"
 #~ msgid "Name"
 #~ msgstr "Nimi"
-
-#~ msgid "ATM"
-#~ msgstr "Pankkiautomaatti"
-
-#~ msgid "Withdrawal"
-#~ msgstr "Nosto"
 
 #~ msgid "Cheque"
 #~ msgstr "Sekki"

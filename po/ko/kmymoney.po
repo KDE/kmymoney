@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-24 01:59+0000\n"
+"POT-Creation-Date: 2025-06-29 02:05+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -8294,6 +8294,105 @@ msgstr "절반을 버림"
 msgid "HalfUp"
 msgstr "절반을 올림"
 
+#: kmymoney/mymoney/mymoneysplit.cpp:482
+#, fuzzy, kde-format
+#| msgctxt "@title:column Shows VAT percentage rate, if configured"
+#| msgid "VAT"
+msgctxt "Investment action"
+msgid "ATM"
+msgstr "부가가치세"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:486
+#, fuzzy, kde-format
+#| msgid "Add shares"
+msgctxt "Investment action"
+msgid "Add shares"
+msgstr "주식 추가"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:490
+#, fuzzy, kde-format
+#| msgid "Amortization"
+msgctxt "Investment action"
+msgid "Amortization"
+msgstr "할부 상환"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:494
+#, fuzzy, kde-format
+#| msgid "Buy shares"
+msgctxt "Investment action"
+msgid "Buy shares"
+msgstr "주식 매수"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:498
+#, fuzzy, kde-format
+#| msgid "Checking"
+msgctxt "Investment action"
+msgid "Check"
+msgstr "당좌예금"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:502
+#, fuzzy, kde-format
+#| msgid "Deposit"
+msgctxt "Investment action"
+msgid "Deposit"
+msgstr "예금"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:506
+#, fuzzy, kde-format
+#| msgid "Dividend"
+msgctxt "Investment action"
+msgid "Dividend"
+msgstr "배당금"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:510
+#, fuzzy, kde-format
+#| msgid "Interest"
+msgctxt "Investment action"
+msgid "Interest"
+msgstr "이자"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:514
+#, fuzzy, kde-format
+#| msgid "Interest Income"
+msgctxt "Investment action"
+msgid "Interest income"
+msgstr "이자 수입"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:518
+#, fuzzy, kde-format
+#| msgid "Reinvest dividend"
+msgctxt "Investment action"
+msgid "Reinvest dividends"
+msgstr "배당금 재투자"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:523
+#, fuzzy, kde-format
+#| msgid "Split shares"
+msgctxt "Investment action"
+msgid "Split shares"
+msgstr "분할 주식"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:527
+#, fuzzy, kde-format
+#| msgid "Transfer"
+msgctxt "Investment action"
+msgid "Transfer"
+msgstr "이체"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:531
+#, fuzzy, kde-format
+#| msgid "&Withdrawal"
+msgctxt "Investment action"
+msgid "Withdrawal"
+msgstr "인출(&W)"
+
+#: kmymoney/mymoney/mymoneysplit.cpp:535
+#, fuzzy, kde-format
+#| msgid "Yield"
+msgctxt "Investment action"
+msgid "Yield"
+msgstr "총수익"
+
 #: kmymoney/mymoney/mymoneytemplate.cpp:99
 #, kde-format
 msgid "<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>"
@@ -16025,6 +16124,14 @@ msgstr "%1의 달"
 #, kde-format
 msgid "Week of %1"
 msgstr "%1의 주"
+
+#: kmymoney/plugins/views/reports/core/querytable.cpp:795
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1999
+#, fuzzy, kde-format
+#| msgid "Sell shares"
+msgctxt "Investment action"
+msgid "Sell shares"
+msgstr "주식 매도"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:814
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1040
@@ -26555,9 +26662,6 @@ msgstr ""
 
 #~ msgid "&Transfer"
 #~ msgstr "이체(&T)"
-
-#~ msgid "&Withdrawal"
-#~ msgstr "인출(&W)"
 
 #~ msgid "&Payment"
 #~ msgstr "지급(&P)"
