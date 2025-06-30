@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-29 02:05+0000\n"
-"PO-Revision-Date: 2025-06-16 12:44+0100\n"
+"PO-Revision-Date: 2025-06-29 13:10+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -8381,86 +8381,73 @@ msgid "HalfUp"
 msgstr "Mitad superior"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:482
-#, fuzzy, kde-format
-#| msgctxt "@title:column Shows VAT percentage rate, if configured"
-#| msgid "VAT"
+#, kde-format
 msgctxt "Investment action"
 msgid "ATM"
-msgstr "IVA"
+msgstr "Cajero automático"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:486
-#, fuzzy, kde-format
-#| msgid "Add shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Add shares"
 msgstr "Añadir participaciones"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:490
-#, fuzzy, kde-format
-#| msgid "Amortization"
+#, kde-format
 msgctxt "Investment action"
 msgid "Amortization"
 msgstr "Amortización"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:494
-#, fuzzy, kde-format
-#| msgid "Buy shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Buy shares"
 msgstr "Comprar participaciones"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:498
-#, fuzzy, kde-format
-#| msgid "Checking"
+#, kde-format
 msgctxt "Investment action"
 msgid "Check"
 msgstr "Corriente"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:502
-#, fuzzy, kde-format
-#| msgid "Deposit"
+#, kde-format
 msgctxt "Investment action"
 msgid "Deposit"
 msgstr "Depósito"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:506
-#, fuzzy, kde-format
-#| msgid "Dividend"
+#, kde-format
 msgctxt "Investment action"
 msgid "Dividend"
 msgstr "Dividendo"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:510
-#, fuzzy, kde-format
-#| msgid "Interest"
+#, kde-format
 msgctxt "Investment action"
 msgid "Interest"
 msgstr "Interés"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:514
-#, fuzzy, kde-format
-#| msgid "Interest Income"
+#, kde-format
 msgctxt "Investment action"
 msgid "Interest income"
-msgstr "Tasa de interés"
+msgstr "Interés a favor"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:518
-#, fuzzy, kde-format
-#| msgid "Reinvest dividend"
+#, kde-format
 msgctxt "Investment action"
 msgid "Reinvest dividends"
-msgstr "Reinvertir dividendo"
+msgstr "Reinvertir dividendos"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:523
-#, fuzzy, kde-format
-#| msgid "Split shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Split shares"
 msgstr "Dividir participaciones"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:527
-#, fuzzy, kde-format
-#| msgid "Transfer"
+#, kde-format
 msgctxt "Investment action"
 msgid "Transfer"
 msgstr "Transferencia"
@@ -8469,11 +8456,10 @@ msgstr "Transferencia"
 #, kde-format
 msgctxt "Investment action"
 msgid "Withdrawal"
-msgstr ""
+msgstr "Retirada de fondos"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:535
-#, fuzzy, kde-format
-#| msgid "Yield"
+#, kde-format
 msgctxt "Investment action"
 msgid "Yield"
 msgstr "Rendimiento"
@@ -16333,8 +16319,7 @@ msgstr "Semana de %1"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:795
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1999
-#, fuzzy, kde-format
-#| msgid "Sell shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Sell shares"
 msgstr "Vender participaciones"

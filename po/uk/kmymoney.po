@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-29 02:05+0000\n"
-"PO-Revision-Date: 2025-06-16 08:37+0300\n"
+"PO-Revision-Date: 2025-06-29 11:29+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -8388,100 +8388,85 @@ msgid "HalfUp"
 msgstr "Напівзбільшення"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:482
-#, fuzzy, kde-format
-#| msgctxt "@title:column Shows VAT percentage rate, if configured"
-#| msgid "VAT"
+#, kde-format
 msgctxt "Investment action"
 msgid "ATM"
-msgstr "ПДВ"
+msgstr "Банкомат"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:486
-#, fuzzy, kde-format
-#| msgid "Add shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Add shares"
 msgstr "Додати акції"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:490
-#, fuzzy, kde-format
-#| msgid "Amortization"
+#, kde-format
 msgctxt "Investment action"
 msgid "Amortization"
 msgstr "Амортизація"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:494
-#, fuzzy, kde-format
-#| msgid "Buy shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Buy shares"
 msgstr "Купити акції"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:498
-#, fuzzy, kde-format
-#| msgid "Checking"
+#, kde-format
 msgctxt "Investment action"
 msgid "Check"
-msgstr "Чековий"
+msgstr "Чек"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:502
-#, fuzzy, kde-format
-#| msgid "Deposit"
+#, kde-format
 msgctxt "Investment action"
 msgid "Deposit"
 msgstr "Депозит"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:506
-#, fuzzy, kde-format
-#| msgid "Dividend"
+#, kde-format
 msgctxt "Investment action"
 msgid "Dividend"
 msgstr "Дивіденд"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:510
-#, fuzzy, kde-format
-#| msgid "Interest"
+#, kde-format
 msgctxt "Investment action"
 msgid "Interest"
 msgstr "Відсоток"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:514
-#, fuzzy, kde-format
-#| msgid "Interest Income"
+#, kde-format
 msgctxt "Investment action"
 msgid "Interest income"
 msgstr "Дохід за відсотками"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:518
-#, fuzzy, kde-format
-#| msgid "Reinvest dividend"
+#, kde-format
 msgctxt "Investment action"
 msgid "Reinvest dividends"
 msgstr "Повторно інвестувати дивіденди"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:523
-#, fuzzy, kde-format
-#| msgid "Split shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Split shares"
 msgstr "Розділити акції"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:527
-#, fuzzy, kde-format
-#| msgid "Transfer"
+#, kde-format
 msgctxt "Investment action"
 msgid "Transfer"
-msgstr "Трансферт"
+msgstr "Переказ"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:531
-#, fuzzy, kde-format
-#| msgid "&Withdrawal"
+#, kde-format
 msgctxt "Investment action"
 msgid "Withdrawal"
-msgstr "&Зняття"
+msgstr "Зняття"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:535
-#, fuzzy, kde-format
-#| msgid "Yield"
+#, kde-format
 msgctxt "Investment action"
 msgid "Yield"
 msgstr "Прибуток"
@@ -16391,11 +16376,10 @@ msgstr "Тиждень %1"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:795
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1999
-#, fuzzy, kde-format
-#| msgid "Sell shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Sell shares"
-msgstr "Продати акції"
+msgstr "Продаж акцій"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:814
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1040

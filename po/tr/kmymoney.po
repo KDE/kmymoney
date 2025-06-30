@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-29 02:05+0000\n"
-"PO-Revision-Date: 2025-06-16 12:13+0300\n"
+"PO-Revision-Date: 2025-06-29 09:14+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -8174,7 +8174,7 @@ msgstr "Fatura"
 #: kmymoney/mymoney/mymoneyschedule.cpp:1016
 msgctxt "Scheduled transaction type"
 msgid "Deposit"
-msgstr "Yatırma"
+msgstr "Mevduat"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:1019
 msgctxt "Scheduled transaction type"
@@ -8199,12 +8199,12 @@ msgstr "Doğrudan tahsilat"
 #: kmymoney/mymoney/mymoneyschedule.cpp:1038
 msgctxt "Scheduled Transaction payment type"
 msgid "Direct deposit"
-msgstr "Doğrudan yatırma"
+msgstr "Doğrudan mevduat"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:1041
 msgctxt "Scheduled Transaction payment type"
 msgid "Manual deposit"
-msgstr "Elle yatırma"
+msgstr "Elle mevduat"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:1044
 msgctxt "Scheduled Transaction payment type"
@@ -8300,86 +8300,73 @@ msgid "HalfUp"
 msgstr "YarımYukarı"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:482
-#, fuzzy, kde-format
-#| msgctxt "@title:column Shows VAT percentage rate, if configured"
-#| msgid "VAT"
+#, kde-format
 msgctxt "Investment action"
 msgid "ATM"
-msgstr "KDV"
+msgstr "Bankamatik"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:486
-#, fuzzy, kde-format
-#| msgid "Add shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Add shares"
 msgstr "Hisseler ekle"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:490
-#, fuzzy, kde-format
-#| msgid "Amortization"
+#, kde-format
 msgctxt "Investment action"
 msgid "Amortization"
 msgstr "Amortisman"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:494
-#, fuzzy, kde-format
-#| msgid "Buy shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Buy shares"
 msgstr "Hisseler al"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:498
-#, fuzzy, kde-format
-#| msgid "Checking"
+#, kde-format
 msgctxt "Investment action"
 msgid "Check"
-msgstr "Cari"
+msgstr "Çek"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:502
-#, fuzzy, kde-format
-#| msgid "Deposit"
+#, kde-format
 msgctxt "Investment action"
 msgid "Deposit"
 msgstr "Mevduat"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:506
-#, fuzzy, kde-format
-#| msgid "Dividend"
+#, kde-format
 msgctxt "Investment action"
 msgid "Dividend"
 msgstr "Temettü"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:510
-#, fuzzy, kde-format
-#| msgid "Interest"
+#, kde-format
 msgctxt "Investment action"
 msgid "Interest"
 msgstr "Faiz"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:514
-#, fuzzy, kde-format
-#| msgid "Interest Income"
+#, kde-format
 msgctxt "Investment action"
 msgid "Interest income"
-msgstr "Faiz Geliri"
+msgstr "Faiz geliri"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:518
-#, fuzzy, kde-format
-#| msgid "Reinvest dividend"
+#, kde-format
 msgctxt "Investment action"
 msgid "Reinvest dividends"
 msgstr "Temettüyü yeniden yatır"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:523
-#, fuzzy, kde-format
-#| msgid "Split shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Split shares"
 msgstr "Hisseleri böl"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:527
-#, fuzzy, kde-format
-#| msgid "Transfer"
+#, kde-format
 msgctxt "Investment action"
 msgid "Transfer"
 msgstr "Havale"
@@ -8388,11 +8375,10 @@ msgstr "Havale"
 #, kde-format
 msgctxt "Investment action"
 msgid "Withdrawal"
-msgstr ""
+msgstr "Para çek"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:535
-#, fuzzy, kde-format
-#| msgid "Yield"
+#, kde-format
 msgctxt "Investment action"
 msgid "Yield"
 msgstr "Getiri"
@@ -8484,7 +8470,7 @@ msgstr "Ödeme"
 #, kde-format
 msgctxt "Split header"
 msgid "Deposit"
-msgstr "Yatırma"
+msgstr "Mevduat"
 
 #: kmymoney/mymoney/splitmodel.cpp:101
 #, kde-format
@@ -8740,7 +8726,7 @@ msgstr "Ödeme"
 #, kde-format
 msgctxt "@title:column Deposit into account"
 msgid "Deposit"
-msgstr "Yatır"
+msgstr "Mevduat"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:67
 #, kde-format
@@ -9088,7 +9074,7 @@ msgstr "Faturalar"
 #, kde-format
 msgctxt "Schedule group"
 msgid "Deposits"
-msgstr "Yatırmalar"
+msgstr "Mevduatlar"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:155
 #, kde-format
@@ -16197,8 +16183,7 @@ msgstr "%1 haftası"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:795
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1999
-#, fuzzy, kde-format
-#| msgid "Sell shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Sell shares"
 msgstr "Hisseler sat"
@@ -22245,7 +22230,7 @@ msgstr "Ödemeler"
 #: kmymoney/widgets/ktransactionfilter.ui:629
 #, kde-format
 msgid "Deposits"
-msgstr "Yatırmalar"
+msgstr "Mevduatlar"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_validityBox)
 #: kmymoney/widgets/ktransactionfilter.ui:643
@@ -23102,12 +23087,12 @@ msgstr "Bekleyen emir"
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:79
 #, kde-format
 msgid "Manual deposit"
-msgstr "Elle yatırma"
+msgstr "Elle mevduat"
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:80
 #, kde-format
 msgid "Direct deposit"
-msgstr "Doğrudan yatırma"
+msgstr "Doğrudan mevduat"
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:81
 #, kde-format
