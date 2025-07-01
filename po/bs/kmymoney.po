@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-29 02:05+0000\n"
+"POT-Creation-Date: 2025-07-01 02:02+0000\n"
 "PO-Revision-Date: 2015-02-09 11:02+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -6399,47 +6399,47 @@ msgstr[2] "Ne prikazuj transakcije prije"
 msgid "Statement import statistics"
 msgstr "Statističko stanje"
 
-#: kmymoney/main.cpp:124
+#: kmymoney/main.cpp:134
 #, kde-format
 msgid "KMyMoney"
 msgstr "KMyMoney"
 
-#: kmymoney/main.cpp:146
+#: kmymoney/main.cpp:156
 #, kde-format
 msgid "language to be used"
 msgstr "jezik koji se koristi"
 
-#: kmymoney/main.cpp:150
+#: kmymoney/main.cpp:160
 #, kde-format
 msgid "do not open last used file"
 msgstr "ne otvaraj zadnju korištenu datoteku"
 
-#: kmymoney/main.cpp:154
+#: kmymoney/main.cpp:164
 #, kde-format
 msgid "enable performance timers"
 msgstr "omogući izvedbu brojača"
 
-#: kmymoney/main.cpp:158
+#: kmymoney/main.cpp:168
 #, kde-format
 msgid "do not globally catch uncaught exceptions"
 msgstr "ne hvataj globalno neuhvaćene izuzetke"
 
-#: kmymoney/main.cpp:164
+#: kmymoney/main.cpp:174
 #, kde-format
 msgid "turn on program traces"
 msgstr "uključiti programske tragove"
 
-#: kmymoney/main.cpp:168
+#: kmymoney/main.cpp:178
 #, fuzzy, kde-format
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr "izvadi imena svih definiranih KAction objekata na izlaz i zatvori"
 
-#: kmymoney/main.cpp:174 tools/kmmreport-export.cpp:150
+#: kmymoney/main.cpp:184 tools/kmmreport-export.cpp:150
 #, kde-format
 msgid "file to open"
 msgstr "datoteka za otvaranje"
 
-#: kmymoney/main.cpp:275
+#: kmymoney/main.cpp:285
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr "Neuhvaćena greška. Molimo prijavite detalje programerima"

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-29 02:05+0000\n"
-"PO-Revision-Date: 2025-06-01 11:11+0200\n"
+"POT-Creation-Date: 2025-07-01 02:02+0000\n"
+"PO-Revision-Date: 2025-06-30 21:37+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -6205,49 +6205,49 @@ msgstr[1] "Inga nya transaktioner har importerats."
 msgid "Statement import statistics"
 msgstr "Importstatistik för utdrag"
 
-#: kmymoney/main.cpp:124
+#: kmymoney/main.cpp:134
 #, kde-format
 msgid "KMyMoney"
 msgstr "KMyMoney"
 
-#: kmymoney/main.cpp:146
+#: kmymoney/main.cpp:156
 #, kde-format
 msgid "language to be used"
 msgstr "språk att använda"
 
-#: kmymoney/main.cpp:150
+#: kmymoney/main.cpp:160
 #, kde-format
 msgid "do not open last used file"
 msgstr "öppna inte senast använda fil"
 
-#: kmymoney/main.cpp:154
+#: kmymoney/main.cpp:164
 #, kde-format
 msgid "enable performance timers"
 msgstr "aktivera prestandatidmätning"
 
-#: kmymoney/main.cpp:158
+#: kmymoney/main.cpp:168
 #, kde-format
 msgid "do not globally catch uncaught exceptions"
 msgstr "fånga inte globalt ofångade undantag"
 
-#: kmymoney/main.cpp:164
+#: kmymoney/main.cpp:174
 #, kde-format
 msgid "turn on program traces"
 msgstr "sätt på programspårning"
 
-#: kmymoney/main.cpp:168
+#: kmymoney/main.cpp:178
 #, kde-format
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr ""
 "skriv ut namnen på alla definierade QAction-objekt på standardutmatningen "
 "och avsluta"
 
-#: kmymoney/main.cpp:174 tools/kmmreport-export.cpp:150
+#: kmymoney/main.cpp:184 tools/kmmreport-export.cpp:150
 #, kde-format
 msgid "file to open"
 msgstr "fil att öppna"
 
-#: kmymoney/main.cpp:275
+#: kmymoney/main.cpp:285
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr "Ofångat fel. Rapportera gärna detaljinformationen till utvecklarna."
@@ -8320,100 +8320,85 @@ msgid "HalfUp"
 msgstr "Halva uppåt"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:482
-#, fuzzy, kde-format
-#| msgid "ATM"
+#, kde-format
 msgctxt "Investment action"
 msgid "ATM"
 msgstr "Bankautomat"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:486
-#, fuzzy, kde-format
-#| msgid "Add shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Add shares"
 msgstr "Lägg till aktier"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:490
-#, fuzzy, kde-format
-#| msgid "Amortization"
+#, kde-format
 msgctxt "Investment action"
 msgid "Amortization"
 msgstr "Amortering"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:494
-#, fuzzy, kde-format
-#| msgid "Buy shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Buy shares"
 msgstr "Köp aktier"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:498
-#, fuzzy, kde-format
-#| msgctxt "%1"
-#| msgid "check"
+#, kde-format
 msgctxt "Investment action"
 msgid "Check"
-msgstr "check"
+msgstr "Kontrollera"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:502
-#, fuzzy, kde-format
-#| msgid "Deposit"
+#, kde-format
 msgctxt "Investment action"
 msgid "Deposit"
 msgstr "Insättning"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:506
-#, fuzzy, kde-format
-#| msgid "Dividend"
+#, kde-format
 msgctxt "Investment action"
 msgid "Dividend"
 msgstr "Utdelning"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:510
-#, fuzzy, kde-format
-#| msgid "Interest"
+#, kde-format
 msgctxt "Investment action"
 msgid "Interest"
 msgstr "Ränta"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:514
-#, fuzzy, kde-format
-#| msgid "Interest Income"
+#, kde-format
 msgctxt "Investment action"
 msgid "Interest income"
 msgstr "Ränteinkomst"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:518
-#, fuzzy, kde-format
-#| msgid "Reinvest dividend"
+#, kde-format
 msgctxt "Investment action"
 msgid "Reinvest dividends"
 msgstr "Återinvestera utdelning"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:523
-#, fuzzy, kde-format
-#| msgid "Split shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Split shares"
 msgstr "Aktiesplit"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:527
-#, fuzzy, kde-format
-#| msgid "Transfer"
+#, kde-format
 msgctxt "Investment action"
 msgid "Transfer"
 msgstr "Överföring"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:531
-#, fuzzy, kde-format
-#| msgid "Withdrawal"
+#, kde-format
 msgctxt "Investment action"
 msgid "Withdrawal"
 msgstr "Uttag"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:535
-#, fuzzy, kde-format
-#| msgid "Yield"
+#, kde-format
 msgctxt "Investment action"
 msgid "Yield"
 msgstr "Avkastning"
@@ -16220,8 +16205,7 @@ msgstr "Vecka under %1"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:795
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1999
-#, fuzzy, kde-format
-#| msgid "Sell shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Sell shares"
 msgstr "Sälj aktier"
@@ -21043,7 +21027,7 @@ msgstr ""
 msgctxt "@info:tooltip"
 msgid ""
 "The difference between the account balance and the online balance is %1."
-msgstr ""
+msgstr "Skillnaden mellan kontots behållning och nätbehållningen är %1."
 
 #: kmymoney/views/ledgerview.cpp:997
 #, kde-format

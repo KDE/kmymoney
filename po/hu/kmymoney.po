@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-29 02:05+0000\n"
+"POT-Creation-Date: 2025-07-01 02:02+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -6258,37 +6258,37 @@ msgstr[1] "Továbbfejlesztett dokumentációk és fordítások"
 msgid "Statement import statistics"
 msgstr "Számlakivonat importáló"
 
-#: kmymoney/main.cpp:124
+#: kmymoney/main.cpp:134
 #, kde-format
 msgid "KMyMoney"
 msgstr "KMyMoney"
 
-#: kmymoney/main.cpp:146
+#: kmymoney/main.cpp:156
 #, kde-format
 msgid "language to be used"
 msgstr "használandó nyelv"
 
-#: kmymoney/main.cpp:150
+#: kmymoney/main.cpp:160
 #, kde-format
 msgid "do not open last used file"
 msgstr "ne nyissa meg az utoljára használt fájlt"
 
-#: kmymoney/main.cpp:154
+#: kmymoney/main.cpp:164
 #, kde-format
 msgid "enable performance timers"
 msgstr "teljesítmény időzítő engedélyezése"
 
-#: kmymoney/main.cpp:158
+#: kmymoney/main.cpp:168
 #, kde-format
 msgid "do not globally catch uncaught exceptions"
 msgstr ""
 
-#: kmymoney/main.cpp:164
+#: kmymoney/main.cpp:174
 #, kde-format
 msgid "turn on program traces"
 msgstr "Program nyomainak bekapcsolása"
 
-#: kmymoney/main.cpp:168
+#: kmymoney/main.cpp:178
 #, fuzzy, kde-format
 #| msgid "dump the names of all defined KAction objects to stdout and quit"
 msgid "dump the names of all defined QAction objects to stdout and quit"
@@ -6296,12 +6296,12 @@ msgstr ""
 "Meghatározott KAction objektumok neveinek kiíratása szabványos kimeneti "
 "stream-be és kilépés"
 
-#: kmymoney/main.cpp:174 tools/kmmreport-export.cpp:150
+#: kmymoney/main.cpp:184 tools/kmmreport-export.cpp:150
 #, kde-format
 msgid "file to open"
 msgstr "megnyitandó fájl"
 
-#: kmymoney/main.cpp:275
+#: kmymoney/main.cpp:285
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr "Lekezeletlen hiba. Kérjük jelentse a részleteket a fejlesztőknek"

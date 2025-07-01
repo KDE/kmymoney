@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-29 02:05+0000\n"
+"POT-Creation-Date: 2025-07-01 02:02+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -6387,48 +6387,48 @@ msgstr[0] "Құжаттама мен басқа тілдерге аударма�
 msgid "Statement import statistics"
 msgstr "Үзінді көшірме статистикасы"
 
-#: kmymoney/main.cpp:124
+#: kmymoney/main.cpp:134
 #, kde-format
 msgid "KMyMoney"
 msgstr "KMyMoney"
 
-#: kmymoney/main.cpp:146
+#: kmymoney/main.cpp:156
 #, kde-format
 msgid "language to be used"
 msgstr "Қолданатын тілі"
 
-#: kmymoney/main.cpp:150
+#: kmymoney/main.cpp:160
 #, kde-format
 msgid "do not open last used file"
 msgstr "соңғы қолданған файлды ашпау"
 
-#: kmymoney/main.cpp:154
+#: kmymoney/main.cpp:164
 #, kde-format
 msgid "enable performance timers"
 msgstr "жылдамдығын өлшеу таймерлері болсын"
 
-#: kmymoney/main.cpp:158
+#: kmymoney/main.cpp:168
 #, kde-format
 msgid "do not globally catch uncaught exceptions"
 msgstr "қармауға түспеген ерекшеліктерді глобалды деңгейде қармауы болмасын"
 
-#: kmymoney/main.cpp:164
+#: kmymoney/main.cpp:174
 #, kde-format
 msgid "turn on program traces"
 msgstr "бағдарлама орындау хатамасы жазылсын"
 
-#: kmymoney/main.cpp:168
+#: kmymoney/main.cpp:178
 #, fuzzy, kde-format
 #| msgid "dump the names of all defined KAction objects to stdout and quit"
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr "барлық анықталған KAction нысандардың атауларын дамп етіп шығу"
 
-#: kmymoney/main.cpp:174 tools/kmmreport-export.cpp:150
+#: kmymoney/main.cpp:184 tools/kmmreport-export.cpp:150
 #, kde-format
 msgid "file to open"
 msgstr "ашатын файлы"
 
-#: kmymoney/main.cpp:275
+#: kmymoney/main.cpp:285
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr "Беймәлім ерекше жағдай - құрастырушысыларына егжей-тегжейін хабарлаңыз"
