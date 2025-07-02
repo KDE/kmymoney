@@ -378,16 +378,25 @@ public:
      */
     MyMoneySchedule selectedSchedule(QAction* action = nullptr) const
     {
-        const auto scheduleId = (action) ? action->data().toString() : QString();
+        auto scheduleId = (action) ? action->data().toString() : QString();
+        if (scheduleId.isEmpty()) {
+            // in case this is triggered by a shortcut in another view
+            // the selectionObject may help
+            if (!isActiveView()) {
+                scheduleId = m_selectedSchedule.id();
+            }
+        }
         if (!scheduleId.isEmpty()) {
             return MyMoneyFile::instance()->schedulesModel()->itemById(scheduleId);
         }
 
-        const auto selection = ui->m_scheduleTree->selectionModel()->selectedRows();
-        selection.first();
-        if (!selection.isEmpty()) {
-            const auto baseIndex = MyMoneyModelBase::mapToBaseSource(selection.first());
-            return MyMoneyFile::instance()->schedulesModel()->itemByIndex(baseIndex);
+        if (ui->m_scheduleTree->selectionModel()) {
+            const auto selection = ui->m_scheduleTree->selectionModel()->selectedRows();
+            selection.first();
+            if (!selection.isEmpty()) {
+                const auto baseIndex = MyMoneyModelBase::mapToBaseSource(selection.first());
+                return MyMoneyFile::instance()->schedulesModel()->itemByIndex(baseIndex);
+            }
         }
         return {};
     }
@@ -413,6 +422,7 @@ public:
     bool m_needLoad;
 
     QScopedPointer<KBalanceWarning> m_balanceWarning;
+    MyMoneySchedule m_selectedSchedule;
 };
 
 #endif

@@ -89,6 +89,8 @@ void KScheduledView::showEvent(QShowEvent* event)
 
 void KScheduledView::updateActions(const SelectedObjects& selections)
 {
+    Q_D(KScheduledView);
+
     const QVector<eMenu::Action> actionsToBeDisabled {
         eMenu::Action::EditSchedule, eMenu::Action::DuplicateSchedule, eMenu::Action::DeleteSchedule,
         eMenu::Action::EnterSchedule, eMenu::Action::SkipSchedule,
@@ -97,17 +99,16 @@ void KScheduledView::updateActions(const SelectedObjects& selections)
     for (const auto& a : actionsToBeDisabled)
         pActions[a]->setEnabled(false);
 
-    MyMoneySchedule sch;
     if (!selections.selection(SelectedObjects::Schedule).isEmpty()) {
-        sch = MyMoneyFile::instance()->schedulesModel()->itemById(selections.selection(SelectedObjects::Schedule).at(0));
-        if (!sch.id().isEmpty()) {
+        d->m_selectedSchedule = MyMoneyFile::instance()->schedulesModel()->itemById(selections.selection(SelectedObjects::Schedule).at(0));
+        if (!d->m_selectedSchedule.id().isEmpty()) {
             pActions[eMenu::Action::EditSchedule]->setEnabled(true);
             pActions[eMenu::Action::DuplicateSchedule]->setEnabled(true);
-            pActions[eMenu::Action::DeleteSchedule]->setEnabled(!MyMoneyFile::instance()->isReferenced(sch));
-            if (!sch.isFinished()) {
+            pActions[eMenu::Action::DeleteSchedule]->setEnabled(!MyMoneyFile::instance()->isReferenced(d->m_selectedSchedule));
+            if (!d->m_selectedSchedule.isFinished()) {
                 pActions[eMenu::Action::EnterSchedule]->setEnabled(true);
                 // a schedule with a single occurrence cannot be skipped
-                if (sch.occurrence() != eMyMoney::Schedule::Occurrence::Once) {
+                if (d->m_selectedSchedule.occurrence() != eMyMoney::Schedule::Occurrence::Once) {
                     pActions[eMenu::Action::SkipSchedule]->setEnabled(true);
                 }
             }
