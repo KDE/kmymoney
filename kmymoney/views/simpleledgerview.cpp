@@ -36,6 +36,7 @@
 #include "kmymoneyaccountcombo.h"
 #include "kmymoneysettings.h"
 #include "kmymoneyviewbase_p.h"
+#include "ledgerview.h"
 #include "ledgerviewpage.h"
 #include "menuenums.h"
 #include "mymoneyaccount.h"
@@ -272,6 +273,10 @@ public:
                 // makes sure that all signals about the new selection are emitted
                 ui->ledgerTab->setCurrentIndex(ui->ledgerTab->count()-1);
                 ui->ledgerTab->setCurrentIndex(newIdx);
+                // let the newly opened ledger receive the keyboard focus
+                const auto ledgerView = view->findChild<LedgerView*>();
+                if (ledgerView)
+                    ledgerView->setFocus();
             }
 
             q->connect(view, &LedgerViewPage::requestSelectionChanged, q, &SimpleLedgerView::requestSelectionChange);
