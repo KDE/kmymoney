@@ -571,9 +571,8 @@ bool SimpleLedgerView::eventFilter(QObject* o, QEvent* e)
                 d->hideAccountsCombo();
                 return true;
             }
-        } else if (o == d->ui->ledgerTab) {
-            // Pressing the + key on the active tab opens the account selector
-            if ((kev->key() == Qt::Key_Plus) && (kev->modifiers() == Qt::NoModifier)) {
+        } else {
+            if (QKeySequence(kev->modifiers() | kev->key()).matches(pActions[eMenu::Action::LedgerQuickOpen]->shortcut())) {
                 d->showAccountSelector(this);
                 return true;
             }
