@@ -70,6 +70,9 @@ protected:
      */
     QDate date(const QDate& _date) const;
 
+    /** overridden for internal reasons */
+    bool focusNextPrevChild(bool next) override;
+
 public Q_SLOTS:
     int exec() override;
 

@@ -37,6 +37,7 @@
 #include "mymoneyexception.h"
 #include "mymoneymoney.h"
 #include "mymoneyschedule.h"
+#include "taborder.h"
 
 using namespace Icons;
 
@@ -50,6 +51,25 @@ public:
         , m_editor(nullptr)
         , m_showWarningOnce(true)
         , m_extendedReturnCode(eDialogs::ScheduleResultCode::Cancel)
+        , m_tabOrder(QLatin1String("enterScheduleTransactionEditor"),
+                     QStringList{
+                         // the std transaction editor (see also newtransactioneditor.cpp
+                         QLatin1String("dateEdit"),
+                         QLatin1String("creditDebitEdit"),
+                         QLatin1String("payeeEdit"),
+                         QLatin1String("numberEdit"),
+                         QLatin1String("categoryCombo"),
+                         QLatin1String("costCenterCombo"),
+                         QLatin1String("tagContainer"),
+                         QLatin1String("statusCombo"),
+                         QLatin1String("memoEdit"),
+                         // the schedule options
+                         QLatin1String("buttonHelp"),
+                         QLatin1String("buttonOk"),
+                         QLatin1String("buttonSkip"),
+                         QLatin1String("buttonIgnore"),
+                         QLatin1String("buttonCancel"),
+                     })
     {
     }
 
@@ -63,6 +83,7 @@ public:
     MyMoneySchedule m_schedule;
     bool m_showWarningOnce;
     eDialogs::ScheduleResultCode m_extendedReturnCode;
+    TabOrder m_tabOrder;
 };
 
 KEnterScheduleDlg::KEnterScheduleDlg(QWidget* parent, const MyMoneySchedule& schedule)
@@ -90,6 +111,10 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget* parent, const MyMoneySchedule& sch
     d->m_editor = d->ui->m_editor;
     d->m_editor->setShowButtons(false);
     d->m_editor->layout()->setContentsMargins(0, 0, 0, 0);
+
+    // in case transaction editor is asked for the tab order
+    // it should point back to ours
+    d->m_editor->setExternalTabOrder(&d->m_tabOrder);
 
     d->m_schedule = schedule;
     const auto account = schedule.account();
@@ -142,6 +167,22 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget* parent, const MyMoneySchedule& sch
         d->m_extendedReturnCode = eDialogs::ScheduleResultCode::Skip;
         accept();
     });
+
+    // we delay setting up the tab order until we drop back to the event loop.
+    // this will make sure that all widgets are visible and the tab order logic
+    // works properly
+    QMetaObject::invokeMethod(
+        this,
+        [&]() {
+            Q_D(KEnterScheduleDlg);
+            d->m_tabOrder.setWidget(this);
+
+            const auto widget = d->m_tabOrder.initialFocusWidget(nullptr);
+            if (widget) {
+                QMetaObject::invokeMethod(widget, "setFocus", Qt::QueuedConnection);
+            }
+        },
+        Qt::QueuedConnection);
 }
 
 KEnterScheduleDlg::~KEnterScheduleDlg()
@@ -203,4 +244,47 @@ int KEnterScheduleDlg::exec()
     }
 
     return QDialog::exec();
+}
+
+bool KEnterScheduleDlg::focusNextPrevChild(bool next)
+{
+    Q_D(KEnterScheduleDlg);
+    const auto widget = d->m_tabOrder.tabFocusHelper(next);
+
+    if (widget != nullptr) {
+        widget->setFocus(next ? Qt::TabFocusReason : Qt::BacktabFocusReason);
+        return true;
+    }
+    // In case we're going backward from the buttonbox at the bottom,
+    // the default focusNextPrevChild() implementation sets the focus
+    // to the account combo box instead of the last option. We catch
+    // this here and set the focus accordingly.
+    const auto pushButton = focusWidget();
+    const auto dialogButtonBox = focusWidget()->parentWidget();
+    if (pushButton->qt_metacast("QPushButton") && dialogButtonBox->qt_metacast("QDialogButtonBox") && (!next)) {
+        if (dialogButtonBox->nextInFocusChain() == pushButton) {
+            const auto widgetName = focusWidget()->parentWidget()->objectName();
+            const QStringList tabOrder(property("kmm_currenttaborder").toStringList());
+            auto idx = tabOrder.indexOf(widgetName);
+            if (idx >= 0) {
+                QWidget* w = nullptr;
+                auto previousTabWidget = [&]() {
+                    --idx;
+                    if (idx < 0) {
+                        idx = tabOrder.count() - 1;
+                    }
+                    w = findChild<QWidget*>(tabOrder.at(idx));
+                };
+                previousTabWidget();
+                while (w && !w->isEnabled()) {
+                    previousTabWidget();
+                }
+                if (w) {
+                    w->setFocus();
+                    return true;
+                }
+            }
+        }
+    }
+    return QWidget::focusNextPrevChild(next);
 }
