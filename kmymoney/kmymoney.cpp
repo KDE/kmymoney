@@ -1510,6 +1510,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::ReportToggleChart,             QStringLiteral("report_toggle"),                  i18n("Toggle chart"),                               Icon::Close},
             {Action::EditTabOrder,                  QStringLiteral("edit_taborder"),                  i18n("Edit tab order"),                             Icon::Empty},
             //debug actions
+            {Action::LedgerQuickOpen,               QStringLiteral("ledger_quick_open"),              i18n("Ledger Quick Open"),                          Icon::Empty},
 #ifdef KMM_DEBUG
             {Action::NewFeature,                    QStringLiteral("new feature"),                    i18n("Test new feature"),                           Icon::Empty},
             {Action::DebugTraces,                   QStringLiteral("debug_traces"),                   i18n("Debug Traces"),                               Icon::Empty},
@@ -1744,6 +1745,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
 #endif
             {qMakePair(Action::AssignTransactionsNumber,    Qt::CTRL | Qt::SHIFT | Qt::Key_N)},
             {qMakePair(Action::ShowFilterWidget,            Qt::CTRL | Qt::Key_F)},
+            {qMakePair(Action::LedgerQuickOpen,             Qt::CTRL | Qt::ALT | Qt::Key_O)},
             };
         // clang-format on
 

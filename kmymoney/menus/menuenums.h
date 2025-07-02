@@ -141,6 +141,7 @@ enum class Action {
     // Actions only used by code
     // *************
     ShowTransaction,
+    LedgerQuickOpen,
     // *************
     // The currency menu
     // *************
