@@ -419,21 +419,23 @@ public:
         const auto model = file->reportsModel();
         const auto hasPrices = file->priceModel()->rowCount() > 0;
 
-        // scan the reports and add price column if currency conversion is activated
-        auto count = 0;
-        const auto rows = model->rowCount();
-        for (int row = 0; row < rows; ++row) {
-            const auto idx = model->index(row, 0);
-            MyMoneyReport report = model->itemByIndex(idx);
-            unsigned qc = report.queryColumns();
-            if (!report.isInvestmentsOnly() && !report.isLoansOnly() && report.isConvertCurrency() && !hasPrices) {
-                qc &= ~eMyMoney::Report::QueryColumn::Price;
-                report.setQueryColumns((eMyMoney::Report::QueryColumn)qc);
-                file->modifyReport(report);
-                ++count;
+        // we only need to remove the price column if there are no prices
+        if (!hasPrices) {
+            auto count = 0;
+            const auto rows = model->rowCount();
+            for (int row = 0; row < rows; ++row) {
+                const auto idx = model->index(row, 0);
+                MyMoneyReport report = model->itemByIndex(idx);
+                unsigned qc = report.queryColumns();
+                if (!report.isInvestmentsOnly() && !report.isLoansOnly() && report.isConvertCurrency()) {
+                    qc &= ~eMyMoney::Report::QueryColumn::Price;
+                    report.setQueryColumns((eMyMoney::Report::QueryColumn)qc);
+                    file->modifyReport(report);
+                    ++count;
+                }
             }
+            qDebug() << count << "reports(s) fixed in" << __FUNCTION__;
         }
-        qDebug() << count << "reports(s) fixed in" << __FUNCTION__;
     }
 
     void fixFile_7()
