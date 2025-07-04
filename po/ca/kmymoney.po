@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-03 08:11+0000\n"
-"PO-Revision-Date: 2025-06-29 09:10+0200\n"
+"PO-Revision-Date: 2025-07-03 15:51+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -5379,7 +5379,7 @@ msgstr "Edita l'ordre de tabulació"
 #: kmymoney/kmymoney.cpp:1513
 #, kde-format
 msgid "Ledger Quick Open"
-msgstr ""
+msgstr "Obertura ràpida del llibre major"
 
 #: kmymoney/kmymoney.cpp:1515
 #, kde-format
