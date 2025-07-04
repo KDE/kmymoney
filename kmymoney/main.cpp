@@ -25,7 +25,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KCrash/KCrash>
+#include <KCrash>
 
 #define HAVE_ICON_THEME __has_include(<KIconTheme>)
 #if HAVE_ICON_THEME
