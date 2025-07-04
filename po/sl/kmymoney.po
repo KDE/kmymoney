@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-03 09:35+0000\n"
-"PO-Revision-Date: 2025-06-30 07:14+0200\n"
+"PO-Revision-Date: 2025-07-03 15:41+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -5337,7 +5337,7 @@ msgstr "Uredi vrstni red zavihkov"
 #: kmymoney/kmymoney.cpp:1513
 #, kde-format
 msgid "Ledger Quick Open"
-msgstr ""
+msgstr "Hitro odprta glavna knjiga"
 
 #: kmymoney/kmymoney.cpp:1515
 #, kde-format
