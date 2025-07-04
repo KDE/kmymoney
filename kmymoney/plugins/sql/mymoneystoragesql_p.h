@@ -2238,6 +2238,11 @@ public:
                     return 1;
                 ++m_dbVersion;
                 break;
+            case 13:
+                if ((rc = upgradeToV14()) != 0)
+                    return 1;
+                ++m_dbVersion;
+                break;
             default:
                 qWarning("Unknown version number in database - %d", m_dbVersion);
             }
@@ -2610,6 +2615,37 @@ public:
             if (!alterTable(m_db.m_tables["kmmPayees"], m_dbVersion))
                 return 1;
         }
+        return 0;
+    }
+
+    int upgradeToV14()
+    {
+        Q_Q(MyMoneyStorageSql);
+        q->startCommitUnit(Q_FUNC_INFO);
+        QSqlQuery query(*q);
+
+        query.prepare("SELECT count(*) FROM kmmPrices;");
+        if (!query.exec() || !query.next()) {
+            throw MYMONEYEXCEPTIONSQL("checking fileinfo"); // krazy:exclude=crashy
+        }
+
+        // we only need to remove the price column if there are no prices
+        if (query.value(0).toInt() == 0) {
+            QMap<QString, MyMoneyReport> reportList = q->fetchReports();
+            QMap<QString, MyMoneyReport>::const_iterator it_r;
+
+            query.prepare(m_db.m_tables["kmmReportConfig"].updateString());
+            for (it_r = reportList.cbegin(); it_r != reportList.cend(); ++it_r) {
+                MyMoneyReport report = *it_r;
+                unsigned qc = report.queryColumns();
+                if (!report.isInvestmentsOnly() && !report.isLoansOnly() && report.isConvertCurrency()) {
+                    qc &= ~eMyMoney::Report::QueryColumn::Price;
+                    report.setQueryColumns((eMyMoney::Report::QueryColumn)qc);
+                    writeReport(report, query);
+                }
+            }
+        }
+        q->endCommitUnit(Q_FUNC_INFO);
         return 0;
     }
 
