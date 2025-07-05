@@ -1602,6 +1602,7 @@ QStringList NewTransactionEditor::saveTransaction(const QStringList& selectedJou
     try {
         if (t.id().isEmpty()) {
             MyMoneyFile::instance()->addTransaction(t);
+            selection = journalEntrySelection(t.id(), d->m_account.id());
         } else {
             t.setImported(false);
             MyMoneyFile::instance()->modifyTransaction(t);

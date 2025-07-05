@@ -1364,6 +1364,7 @@ QStringList InvestTransactionEditor::saveTransaction(const QStringList& selected
         const auto file = MyMoneyFile::instance();
         if (t.id().isEmpty()) {
             file->addTransaction(t);
+            selection = journalEntrySelection(t.id(), d->stockSplit.accountId());
         } else {
             t.setImported(false);
             file->modifyTransaction(t);

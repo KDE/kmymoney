@@ -29,6 +29,7 @@
 #include "accountcreator.h"
 #include "accountsmodel.h"
 #include "creditdebitedit.h"
+#include "journalmodel.h"
 #include "kcurrencyconverter.h"
 #include "kmymoneyaccountcombo.h"
 #include "kmymoneysettings.h"
@@ -404,4 +405,19 @@ void TransactionEditorBase::setInitialFocus()
     if (widget) {
         QMetaObject::invokeMethod(widget, "setFocus", Qt::QueuedConnection);
     }
+}
+
+QStringList TransactionEditorBase::journalEntrySelection(const QString& transactionId, const QString& accountId) const
+{
+    QStringList selection;
+    // search the journal entry for the split referencing the current account
+    // and make it the current selected journalEntry
+    const auto indexes = MyMoneyFile::instance()->journalModel()->indexesByTransactionId(transactionId);
+    for (const auto& idx : indexes) {
+        if (idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == accountId) {
+            selection.append(idx.data(eMyMoney::Model::IdRole).toString());
+            break;
+        }
+    }
+    return selection;
 }

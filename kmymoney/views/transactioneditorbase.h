@@ -161,6 +161,13 @@ protected:
 
     virtual TabOrder* tabOrder() const = 0;
 
+    /**
+     * Return the journalEntryId for the transaction with @a transactionId
+     * in account @a accountId as single element of a QStringList. This is
+     * usually used for newly added transactions.
+     */
+    QStringList journalEntrySelection(const QString& transactionId, const QString& accountId) const;
+
 protected Q_SLOTS:
     virtual void reject();
     virtual void acceptEdit();
