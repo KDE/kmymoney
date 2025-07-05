@@ -533,11 +533,10 @@ void NewTransactionEditor::Private::payeeChanged(int payeeIndex)
     const AutoFillMethod autoFillMethod = static_cast<AutoFillMethod>(KMyMoneySettings::autoFillTransaction());
 
     // we have a new payee assigned to this transaction.
-    // in case there is no category assigned, no value entered and no
-    // memo available, we search for the last transaction of this payee
+    // in case there is no category assigned for a new transaction,
+    // we search for the last transaction of this payee
     // in the selected account.
-    if (m_transaction.id().isEmpty() && (splitModel.rowCount() == 0) && !ui->creditDebitEdit->haveValue() && ui->memoEdit->toPlainText().isEmpty()
-        && !m_account.id().isEmpty() && (autoFillMethod != AutoFillMethod::NoAutoFill)) {
+    if (m_transaction.id().isEmpty() && (splitModel.rowCount() == 0) && (autoFillMethod != AutoFillMethod::NoAutoFill)) {
         // if we got here, we have to autofill. Because we will open a dialog,
         // we simply postpone the call until we reach the main event loop. We
         // do this because running the dialog directly has some unknown influence
@@ -565,7 +564,7 @@ void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
     /**
      * Sum up all splits for the given account in the transaction
      */
-    auto shares = [&](const MyMoneyTransaction& t, const QString& accountId) {
+    auto sumOfShares = [&](const MyMoneyTransaction& t, const QString& accountId) {
         MyMoneyMoney result;
         for (const auto& split : t.splits()) {
             if (split.accountId() == accountId) {
@@ -604,8 +603,8 @@ void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
                     // we already have a transaction with this signature. we must
                     // now check, if we should really treat it as a duplicate according
                     // to the value comparison delta.
-                    MyMoneyMoney s1 = shares(((*it_u).transaction), m_account.id());
-                    MyMoneyMoney s2 = shares(journalEntry.transaction(), m_account.id());
+                    MyMoneyMoney s1 = sumOfShares(((*it_u).transaction), m_account.id());
+                    MyMoneyMoney s2 = sumOfShares(journalEntry.transaction(), m_account.id());
                     if (s2.abs() > s1.abs()) {
                         MyMoneyMoney t(s1);
                         s1 = s2;
@@ -666,18 +665,13 @@ void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
             // keep data we don't want to change by loading
             const auto postDate = ui->dateEdit->date();
             const auto number = ui->numberEdit->text();
+            const auto amountFilled = ui->creditDebitEdit->haveValue();
+            const auto amount = ui->creditDebitEdit->value();
+            const auto memo = ui->memoEdit->toPlainText();
+
             // now load the existing transaction into the editor
             auto index = MyMoneyFile::instance()->journalModel()->indexById(journalEntryId);
             loadTransaction(index);
-
-            // restore data we don't want to change by loading
-            ui->dateEdit->setDate(postDate);
-
-            if (ui->numberEdit->isVisible() && !number.isEmpty()) {
-                ui->numberEdit->setText(number);
-            } else if (!m_split.number().isEmpty()) {
-                ui->numberEdit->setText(KMyMoneyUtils::nextFreeCheckNumber(m_account));
-            }
 
             // make sure to really create a new transaction
             m_transaction.clearId();
@@ -696,10 +690,43 @@ void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
                     splitModel.setData(idx, QString(), eMyMoney::Model::SplitActionRole);
                 }
                 // copy payee information to second split if there are only two splits
+                // overwrite amount in split if value was already available
                 if (splitModel.rowCount() == 1) {
                     splitModel.setData(idx, payeeId, eMyMoney::Model::SplitPayeeIdRole);
+                    if (!memo.isEmpty()) {
+                        splitModel.setData(idx, memo, eMyMoney::Model::SplitMemoRole);
+                    }
+                    if (amountFilled) {
+                        const auto value = idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
+                        const auto shares = idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+                        auto price = MyMoneyMoney::ONE;
+                        if (!shares.isZero()) {
+                            price = value / shares;
+                        }
+                        splitModel.setData(idx, QVariant::fromValue<MyMoneyMoney>(-amount), eMyMoney::Model::SplitValueRole);
+                        splitModel.setData(idx, QVariant::fromValue<MyMoneyMoney>((-amount / price).convert()), eMyMoney::Model::SplitSharesRole);
+                    }
                 }
             }
+            // restore data we don't want to change by loading
+            ui->dateEdit->setDate(postDate);
+
+            if (ui->numberEdit->isVisible() && !number.isEmpty()) {
+                ui->numberEdit->setText(number);
+            } else if (!m_split.number().isEmpty()) {
+                ui->numberEdit->setText(KMyMoneyUtils::nextFreeCheckNumber(m_account));
+            }
+
+            // if the user already entered an amount we use it to proceed
+            if (amountFilled) {
+                ui->creditDebitEdit->setValue(amount);
+            }
+
+            // if the user already entered a memo we use it
+            if (!memo.isEmpty()) {
+                ui->memoEdit->setPlainText(memo);
+            }
+
             updateWidgetState();
             updateWidgetAccess();
             checkForValidAmount();
