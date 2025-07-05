@@ -110,6 +110,7 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget* parent, const MyMoneySchedule& sch
 
     d->m_editor = d->ui->m_editor;
     d->m_editor->setShowButtons(false);
+    d->m_editor->setShowAccountCombo(true);
     d->m_editor->layout()->setContentsMargins(0, 0, 0, 0);
 
     // in case transaction editor is asked for the tab order
