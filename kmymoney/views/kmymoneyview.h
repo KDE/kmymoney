@@ -247,6 +247,8 @@ Q_SIGNALS:
     void selectSharedActionButton(eMenu::Action action, QAction* defaultAction);
 
     void onlinePluginsChanged(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* plugins);
+
+    void editTransaction(void* id, bool isEditing);
 };
 
 #endif

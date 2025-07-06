@@ -790,6 +790,14 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
 
                 d->blockSectionResize();
                 d->columnSelector->setColumnSelectionDisabled();
+
+                // announce that we are editing a transaction
+                Q_EMIT editTransaction(this, true);
+
+                // and announce when we are done too
+                connect(d->editor, &QObject::destroyed, this, [&]() {
+                    Q_EMIT editTransaction(this, false);
+                });
             }
         }
         return rc;

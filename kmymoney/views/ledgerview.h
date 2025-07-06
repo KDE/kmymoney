@@ -197,6 +197,8 @@ Q_SIGNALS:
 
     void modifySortOrder();
 
+    void editTransaction(void* id, bool isEditing);
+
 protected:
     class Private;
     Private * const d;

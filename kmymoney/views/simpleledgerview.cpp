@@ -290,6 +290,9 @@ public:
             q->connect(q, &SimpleLedgerView::moveSection, view, &LedgerViewPage::moveSection);
 
             q->connect(view, &LedgerViewPage::requestView, q, &SimpleLedgerView::requestView);
+
+            // forward edit transaction signal
+            q->connect(view, &LedgerViewPage::editTransaction, q, &SimpleLedgerView::editTransaction);
         }
     }
 

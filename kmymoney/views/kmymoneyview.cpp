@@ -343,6 +343,7 @@ void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idV
     connect(view, &KMyMoneyViewBase::viewStateChanged, d->viewFrames[idView], &KPageWidgetItem::setEnabled);
     connect(view, SIGNAL(requestSelectionChange(SelectedObjects)), this, SLOT(_q_selectionChangeRequested(SelectedObjects)));
     connect(view, &KMyMoneyViewBase::requestView, this, &KMyMoneyView::switchView);
+    connect(view, &KMyMoneyViewBase::editTransaction, this, &KMyMoneyView::editTransaction);
 
     d->addSharedActions(view);
 }
@@ -362,6 +363,7 @@ void KMyMoneyView::removeView(View idView)
     if (!view)
         return;
 
+    disconnect(view, &KMyMoneyViewBase::editTransaction, this, &KMyMoneyView::editTransaction);
     disconnect(view, &KMyMoneyViewBase::viewStateChanged, d->viewFrames[idView], &KPageWidgetItem::setEnabled);
     disconnect(view, SIGNAL(requestSelectionChange(SelectedObjects)), this, SLOT(_q_selectionChangeRequested(SelectedObjects)));
 
