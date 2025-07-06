@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 01:58+0000\n"
+"POT-Creation-Date: 2025-07-06 01:55+0000\n"
 "PO-Revision-Date: 2024-02-24 16:23+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -6327,7 +6327,7 @@ msgstr "Buget"
 msgid "Cash Flow"
 msgstr "Fluxul de numerar"
 
-#: kmymoney/kmymoneyutils.cpp:280 kmymoney/views/kenterscheduledlg.cpp:149
+#: kmymoney/kmymoneyutils.cpp:280 kmymoney/views/kenterscheduledlg.cpp:150
 #, kde-format
 msgid "Unable to load schedule details"
 msgstr "Nu s-au putut încărca detaliile plății programate"
@@ -20857,7 +20857,7 @@ msgstr "Numărul de tranzacții rămase:"
 msgid "Date of final transaction:"
 msgstr "Data tranzacției finale:"
 
-#: kmymoney/views/kenterscheduledlg.cpp:239
+#: kmymoney/views/kenterscheduledlg.cpp:240
 #, kde-format
 msgid ""
 "<p>Please check that all the details in the following dialog are correct and "
@@ -20872,7 +20872,7 @@ msgstr ""
 "programări. (După ce veți apăsa OK, veți fi întrebat, în următoarea casetă "
 "de dialog, care e alegerea dumneavoastră.)</p>"
 
-#: kmymoney/views/kenterscheduledlg.cpp:242
+#: kmymoney/views/kenterscheduledlg.cpp:243
 #, kde-format
 msgid "Enter scheduled transaction"
 msgstr "Introduceți tranzacția programată"
@@ -22509,7 +22509,7 @@ msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:638
+#: kmymoney/views/newtransactioneditor.cpp:637
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@title:window Autofill selection dialog"
@@ -22517,7 +22517,7 @@ msgid "Select autofill transaction"
 msgstr "Selectare tranzacție pentru autocompletare"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1102
+#: kmymoney/views/newtransactioneditor.cpp:1129
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:98
 #: kmymoney/views/newtransactionform.ui:179
@@ -22525,14 +22525,14 @@ msgstr "Selectare tranzacție pentru autocompletare"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1595
+#: kmymoney/views/newtransactioneditor.cpp:1622
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
 "other split?"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1596
+#: kmymoney/views/newtransactioneditor.cpp:1623
 #, fuzzy, kde-format
 #| msgid "Copy of %1"
 msgid "Copy memo"

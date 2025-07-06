@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 01:58+0000\n"
+"POT-Creation-Date: 2025-07-06 01:55+0000\n"
 "PO-Revision-Date: 2025-07-04 09:28+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -6131,7 +6131,7 @@ msgstr "Бюджет"
 msgid "Cash Flow"
 msgstr "Грошова активність"
 
-#: kmymoney/kmymoneyutils.cpp:280 kmymoney/views/kenterscheduledlg.cpp:149
+#: kmymoney/kmymoneyutils.cpp:280 kmymoney/views/kenterscheduledlg.cpp:150
 #, kde-format
 msgid "Unable to load schedule details"
 msgstr "Не вдалося завантажити дані розкладу"
@@ -19985,7 +19985,7 @@ msgstr "Кількість операцій, які ще не виконано:"
 msgid "Date of final transaction:"
 msgstr "Дата останньої операції:"
 
-#: kmymoney/views/kenterscheduledlg.cpp:239
+#: kmymoney/views/kenterscheduledlg.cpp:240
 #, kde-format
 msgid ""
 "<p>Please check that all the details in the following dialog are correct and "
@@ -20000,7 +20000,7 @@ msgstr ""
 "варіантів цього розкладу. (Програма запитає у вас про це у наступному "
 "діалоговому вікні, яке буде відкрито після натискання кнопки «Гаразд»)</p>"
 
-#: kmymoney/views/kenterscheduledlg.cpp:242
+#: kmymoney/views/kenterscheduledlg.cpp:243
 #, kde-format
 msgid "Enter scheduled transaction"
 msgstr "Введення спланованої операції"
@@ -21525,14 +21525,14 @@ msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr "Введена сума є відмінною від суми усіх дроблень від %1."
 
-#: kmymoney/views/newtransactioneditor.cpp:638
+#: kmymoney/views/newtransactioneditor.cpp:637
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
 msgstr "Виберіть операцію для автозаповнення"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1102
+#: kmymoney/views/newtransactioneditor.cpp:1129
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:98
 #: kmymoney/views/newtransactionform.ui:179
@@ -21540,7 +21540,7 @@ msgstr "Виберіть операцію для автозаповнення"
 msgid "Link"
 msgstr "Посилання"
 
-#: kmymoney/views/newtransactioneditor.cpp:1595
+#: kmymoney/views/newtransactioneditor.cpp:1622
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21549,7 +21549,7 @@ msgstr ""
 "Хочете замінити нотатку<p><i>%1</i></p>нотаткою<p><i>%2</i></p>у іншому "
 "дробленні?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1596
+#: kmymoney/views/newtransactioneditor.cpp:1623
 #, kde-format
 msgid "Copy memo"
 msgstr "Копіювати нотатку"

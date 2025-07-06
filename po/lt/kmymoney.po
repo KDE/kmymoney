@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 01:58+0000\n"
+"POT-Creation-Date: 2025-07-06 01:55+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -5904,7 +5904,7 @@ msgstr "Biudžetas"
 msgid "Cash Flow"
 msgstr "Grynieji"
 
-#: kmymoney/kmymoneyutils.cpp:280 kmymoney/views/kenterscheduledlg.cpp:149
+#: kmymoney/kmymoneyutils.cpp:280 kmymoney/views/kenterscheduledlg.cpp:150
 #, kde-format
 msgid "Unable to load schedule details"
 msgstr "Nepavyksta įkelti tvarkaraščio detalių"
@@ -19670,7 +19670,7 @@ msgstr ""
 msgid "Date of final transaction:"
 msgstr "Trinti operaciją"
 
-#: kmymoney/views/kenterscheduledlg.cpp:239
+#: kmymoney/views/kenterscheduledlg.cpp:240
 #, kde-format
 msgid ""
 "<p>Please check that all the details in the following dialog are correct and "
@@ -19680,7 +19680,7 @@ msgid ""
 "dialog)</p>"
 msgstr ""
 
-#: kmymoney/views/kenterscheduledlg.cpp:242
+#: kmymoney/views/kenterscheduledlg.cpp:243
 #, fuzzy, kde-format
 msgid "Enter scheduled transaction"
 msgstr "Įvesti operaciją pagal tvarkaraštį"
@@ -21208,14 +21208,14 @@ msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:638
+#: kmymoney/views/newtransactioneditor.cpp:637
 #, fuzzy, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
 msgstr "Trinti operaciją"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1102
+#: kmymoney/views/newtransactioneditor.cpp:1129
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:98
 #: kmymoney/views/newtransactionform.ui:179
@@ -21223,14 +21223,14 @@ msgstr "Trinti operaciją"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1595
+#: kmymoney/views/newtransactioneditor.cpp:1622
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
 "other split?"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1596
+#: kmymoney/views/newtransactioneditor.cpp:1623
 #, fuzzy, kde-format
 #| msgid "Copy of %1"
 msgid "Copy memo"

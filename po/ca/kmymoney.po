@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 01:58+0000\n"
+"POT-Creation-Date: 2025-07-06 01:55+0000\n"
 "PO-Revision-Date: 2025-07-03 15:51+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -6137,7 +6137,7 @@ msgstr "Pressupost"
 msgid "Cash Flow"
 msgstr "Flux de caixa"
 
-#: kmymoney/kmymoneyutils.cpp:280 kmymoney/views/kenterscheduledlg.cpp:149
+#: kmymoney/kmymoneyutils.cpp:280 kmymoney/views/kenterscheduledlg.cpp:150
 #, kde-format
 msgid "Unable to load schedule details"
 msgstr "No s'han pogut carregar els detalls de la planificació"
@@ -19955,7 +19955,7 @@ msgstr "Nombre d'operacions restants:"
 msgid "Date of final transaction:"
 msgstr "Data de la darrera operació:"
 
-#: kmymoney/views/kenterscheduledlg.cpp:239
+#: kmymoney/views/kenterscheduledlg.cpp:240
 #, kde-format
 msgid ""
 "<p>Please check that all the details in the following dialog are correct and "
@@ -19970,7 +19970,7 @@ msgstr ""
 "d'aquesta planificació (se us preguntarà què voleu fer després de prémer "
 "«D'acord» en el diàleg següent)</p>"
 
-#: kmymoney/views/kenterscheduledlg.cpp:242
+#: kmymoney/views/kenterscheduledlg.cpp:243
 #, kde-format
 msgid "Enter scheduled transaction"
 msgstr "Introdueix l'operació planificada"
@@ -21498,14 +21498,14 @@ msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 "L'import introduït és diferent de la suma de tots els desglossaments en %1."
 
-#: kmymoney/views/newtransactioneditor.cpp:638
+#: kmymoney/views/newtransactioneditor.cpp:637
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
 msgstr "Seleccioneu autocompleció d'operació"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1102
+#: kmymoney/views/newtransactioneditor.cpp:1129
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:98
 #: kmymoney/views/newtransactionform.ui:179
@@ -21513,7 +21513,7 @@ msgstr "Seleccioneu autocompleció d'operació"
 msgid "Link"
 msgstr "Enllaç"
 
-#: kmymoney/views/newtransactioneditor.cpp:1595
+#: kmymoney/views/newtransactioneditor.cpp:1622
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21522,7 +21522,7 @@ msgstr ""
 "Voleu substituir el recordatori<p><i>%1</i></p>per al recordatori<p><i>%2</"
 "i></p>a l'altre desglossament?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1596
+#: kmymoney/views/newtransactioneditor.cpp:1623
 #, kde-format
 msgid "Copy memo"
 msgstr "Copia el recordatori"
