@@ -228,6 +228,12 @@ int main(int argc, char *argv[])
     qDebug() << "Long date format" << QLocale().dateFormat(QLocale::LongFormat);
     qDebug() << "Short date format" << QLocale().dateFormat(QLocale::ShortFormat);
     qDebug() << "Narrow date format" << QLocale().dateFormat(QLocale::NarrowFormat);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    qDebug() << "Decimal symbol" << QLocale().decimalPoint() << QLocale().decimalPoint().unicode();
+#else
+    qDebug() << "Decimal symbol" << QLocale().decimalPoint() << QLocale().decimalPoint().at(0).unicode();
+#endif
+    qDebug() << "Thousand separator" << QLocale().groupSeparator();
 
     kmymoney = new KMyMoneyApp();
 
