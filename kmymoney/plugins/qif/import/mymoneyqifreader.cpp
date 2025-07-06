@@ -1107,7 +1107,7 @@ void MyMoneyQifReader::processTransactionEntry()
 
     tmp = extractLine('L');
     pos = tmp.lastIndexOf("--");
-    if (tmp.at(0) == m_qifProfile.accountDelimiter().at(0)) {
+    if (!tmp.isEmpty() && (tmp.at(0) == m_qifProfile.accountDelimiter().at(0))) {
         // it's a transfer, so we wipe the memo
 //   tmp = "";         why??
 //    st.m_strAccountName = tmp;
