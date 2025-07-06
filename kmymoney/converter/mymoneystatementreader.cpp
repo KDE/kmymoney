@@ -847,7 +847,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             qDebug() << s1.shares().toDouble() << s2.shares().toDouble();
 
             // Some institutions apparently provide a negative amount for a reinvested dividend while
-            // the number of shares is positive. In this case, we
+            // the number of shares is positive. In this case, we revert the sign.
             if (s2.shares().isPositive() == s1.shares().isPositive()) {
                 s2.setShares(-s2.shares());
             }
