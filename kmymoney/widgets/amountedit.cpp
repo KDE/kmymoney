@@ -561,7 +561,7 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
                 key = QLocale().decimalPoint().unicode();
 #else
-                key = QLocale().decimalPoint().unicode()->toLatin1(); // TODO Test this
+                key = QLocale().decimalPoint().at(0).unicode();
 #endif
                 keyText = QLocale().decimalPoint();
             }
