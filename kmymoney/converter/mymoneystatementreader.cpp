@@ -844,6 +844,13 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                 s2.setAccountId(d->interestId(statementTransactionUnderImport.m_strInterestCategory));
 
             s2.setShares(-statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees);
+            qDebug() << s1.shares().toDouble() << s2.shares().toDouble();
+
+            // Some institutions apparently provide a negative amount for a reinvested dividend while
+            // the number of shares is positive. In this case, we revert the sign.
+            if (s2.shares().isPositive() == s1.shares().isPositive()) {
+                s2.setShares(-s2.shares());
+            }
             s2.setValue(s2.shares());
         } else if (statementTransactionUnderImport.m_eAction == eMyMoney::Transaction::Action::CashDividend) {
             // Cash dividends require setting 2 splits to get all of the information
