@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 05:54+0000\n"
+"POT-Creation-Date: 2025-07-06 03:41+0000\n"
 "PO-Revision-Date: 2024-06-02 12:16+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -6229,7 +6229,7 @@ msgstr "Budget"
 msgid "Cash Flow"
 msgstr "Cash Flow"
 
-#: kmymoney/kmymoneyutils.cpp:280 kmymoney/views/kenterscheduledlg.cpp:149
+#: kmymoney/kmymoneyutils.cpp:280 kmymoney/views/kenterscheduledlg.cpp:150
 #, kde-format
 msgid "Unable to load schedule details"
 msgstr "Unable to load schedule details"
@@ -20144,7 +20144,7 @@ msgstr "Number of transactions remaining:"
 msgid "Date of final transaction:"
 msgstr "Date of final transaction:"
 
-#: kmymoney/views/kenterscheduledlg.cpp:239
+#: kmymoney/views/kenterscheduledlg.cpp:240
 #, kde-format
 msgid ""
 "<p>Please check that all the details in the following dialog are correct and "
@@ -20159,7 +20159,7 @@ msgstr ""
 "schedule.  (You will be asked what you intend after pressing OK in the "
 "following dialogue)</p>"
 
-#: kmymoney/views/kenterscheduledlg.cpp:242
+#: kmymoney/views/kenterscheduledlg.cpp:243
 #, kde-format
 msgid "Enter scheduled transaction"
 msgstr "Enter scheduled transaction"
@@ -21729,7 +21729,7 @@ msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:620
+#: kmymoney/views/newtransactioneditor.cpp:619
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@title:window Autofill selection dialog"
@@ -21737,7 +21737,7 @@ msgid "Select autofill transaction"
 msgstr "Select autofill transaction"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1085
+#: kmymoney/views/newtransactioneditor.cpp:1115
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:98
 #: kmymoney/views/newtransactionform.ui:179
@@ -21745,7 +21745,7 @@ msgstr "Select autofill transaction"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1574
+#: kmymoney/views/newtransactioneditor.cpp:1604
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21754,7 +21754,7 @@ msgstr ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
 "other split?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1575
+#: kmymoney/views/newtransactioneditor.cpp:1605
 #, kde-format
 msgid "Copy memo"
 msgstr "Copy memo"
