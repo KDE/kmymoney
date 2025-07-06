@@ -105,6 +105,8 @@ Q_SIGNALS:
 
     void requestView(QWidget* viewWidget, const QString& accountId, const QString& journalEntryId);
 
+    void editTransaction(void* id, bool isEditing);
+
 public Q_SLOTS:
     virtual void updateActions(const SelectedObjects& selections) {
         Q_UNUSED(selections)

@@ -47,6 +47,9 @@ LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
     connect(d->ui->m_ledgerView, &LedgerView::modifySortOrder, this, [&]() {
         d->selectSortOrder();
     });
+
+    // forward edit transaction signal
+    connect(d->ui->m_ledgerView, &LedgerView::editTransaction, this, &LedgerViewPage::editTransaction);
 }
 
 LedgerViewPage::LedgerViewPage(LedgerViewPage::Private& dd, QWidget* parent, const QString& configGroupName)

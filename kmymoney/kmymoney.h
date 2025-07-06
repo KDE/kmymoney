@@ -110,6 +110,8 @@ private Q_SLOTS:
 
     void slotToggleMenuBar(bool showMenuBar);
 
+    void pauseAutoSave(void* id, bool pause);
+
 protected Q_SLOTS:
     /**
       * This slot is intended to be used as part of auto saving. This is used when the

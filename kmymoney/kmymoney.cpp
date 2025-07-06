@@ -387,6 +387,10 @@ public:
 
     KMenuActionExchanger* m_actionExchanger;
 
+    QSet<void*> m_autoSaveDisabler;
+    int m_remainingTimeUntilSave;
+    QElapsedTimer m_pauseTime;
+
     // methods
     void consistencyCheck(bool alwaysDisplayResults);
     static void setThemedCSS();
@@ -1109,6 +1113,8 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent)
             }
         }
     });
+
+    connect(d->m_myMoneyView, &KMyMoneyView::editTransaction, this, &KMyMoneyApp::pauseAutoSave);
 
     // Initialize kactivities resource instance
 #ifdef ENABLE_ACTIVITIES
@@ -3345,11 +3351,19 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
     // stop timer if turned off but running
     if (d->m_autoSaveTimer->isActive() && !d->m_autoSaveEnabled) {
         d->m_autoSaveTimer->stop();
+        if (!d->m_autoSaveDisabler.isEmpty()) {
+            d->m_remainingTimeUntilSave = -1;
+        }
     }
     // start timer if turned on and needed but not running
     if (!d->m_autoSaveTimer->isActive() && d->m_autoSaveEnabled && d->dirty()) {
         d->m_autoSaveTimer->setSingleShot(true);
-        d->m_autoSaveTimer->start(d->m_autoSavePeriod * 60 * 1000);
+        if (d->m_autoSaveDisabler.isEmpty()) {
+            d->m_autoSaveTimer->start(d->m_autoSavePeriod * 60 * 1000);
+        } else {
+            d->m_remainingTimeUntilSave = d->m_autoSavePeriod * 60 * 1000;
+            d->m_pauseTime.restart();
+        }
     }
 
     d->setThemedCSS();
@@ -4463,6 +4477,39 @@ void KMyMoneyApp::slotFileQuit()
 QObject* KMyMoneyApp::createFactoryObject(QObject* parent, const QString& objectName)
 {
     return createObject(parent, objectName);
+}
+
+void KMyMoneyApp::pauseAutoSave(void* id, bool pause)
+{
+    // check if we have something to do and bail out if not
+    bool idFound = d->m_autoSaveDisabler.contains(id);
+    if ((idFound && pause) || (!idFound && !pause)) {
+        return;
+    }
+
+    if (pause) {
+        // start the pause with the first id requesting it
+        if (d->m_autoSaveDisabler.isEmpty()) {
+            d->m_remainingTimeUntilSave = d->m_autoSaveTimer->remainingTime();
+            d->m_pauseTime.start();
+            d->m_autoSaveTimer->stop();
+        }
+        d->m_autoSaveDisabler.insert(id);
+    } else {
+        d->m_autoSaveDisabler.remove(id);
+
+        // end the pause with the last id removed
+        if (d->m_autoSaveDisabler.isEmpty()) {
+            // only do something when the autosave timer was running
+            if (d->m_remainingTimeUntilSave != -1) {
+                d->m_remainingTimeUntilSave -= d->m_pauseTime.elapsed();
+                if (d->m_remainingTimeUntilSave < 100) {
+                    d->m_remainingTimeUntilSave = 100;
+                }
+                d->m_autoSaveTimer->start(d->m_remainingTimeUntilSave);
+            }
+        }
+    }
 }
 
 KMStatus::KMStatus(const QString &text)

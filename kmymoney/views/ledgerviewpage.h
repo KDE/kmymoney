@@ -109,6 +109,8 @@ Q_SIGNALS:
     void sectionMoved(QWidget* view, int section, int oldIndex, int newIndex);
 
     void requestView(QWidget* viewWidget, const QString& accountId, const QString& journalEntryId);
+
+    void editTransaction(void* id, bool isEditing);
 };
 
 #endif // LEDGERVIEWPAGE_H

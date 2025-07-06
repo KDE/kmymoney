@@ -83,6 +83,9 @@ KPayeesView::KPayeesView(QWidget *parent) :
     connect(pActions[eMenu::Action::RenamePayee], &QAction::triggered, this, &KPayeesView::slotRenamePayee);
     connect(pActions[eMenu::Action::MergePayee], &QAction::triggered, this, &KPayeesView::slotMergePayee);
 
+    // forward edit transaction signal
+    connect(d->ui->m_register, &LedgerView::editTransaction, this, &KMyMoneyViewBase::editTransaction);
+
     d->m_sharedToolbarActions.insert(eMenu::Action::FileNew, pActions[eMenu::Action::NewPayee]);
 }
 

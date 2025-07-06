@@ -560,6 +560,9 @@ void KTagsView::showEvent(QShowEvent* event)
             d->m_transactionFilter->setHideReconciledTransactions(LedgerViewSettings::instance()->hideReconciledTransactions());
             d->m_transactionFilter->setHideTransactionsBefore(LedgerViewSettings::instance()->hideTransactionsBefore());
         });
+
+        // forward edit transaction signal
+        connect(d->ui->m_register, &LedgerView::editTransaction, this, &KMyMoneyViewBase::editTransaction);
     }
     // don't forget base class implementation
     QWidget::showEvent(event);
