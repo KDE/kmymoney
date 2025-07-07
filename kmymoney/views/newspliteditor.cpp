@@ -344,6 +344,8 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
     d->ui->setupUi(this);
     d->ui->enterButton->setIcon(Icons::get(Icon::DialogOK));
     d->ui->cancelButton->setIcon(Icons::get(Icon::DialogCancel));
+    setAutoFillBackground(true);
+    setBackgroundRole(QPalette::Highlight);
 
     auto concatModel = new QConcatenateTablesProxyModel(parent);
     concatModel->addSourceModel(file->payeesModel()->emptyPayee());
