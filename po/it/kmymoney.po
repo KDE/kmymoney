@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-07 01:57+0000\n"
-"PO-Revision-Date: 2025-06-30 07:44+0200\n"
+"POT-Creation-Date: 2025-07-08 02:00+0000\n"
+"PO-Revision-Date: 2025-07-04 08:27+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -5363,7 +5363,7 @@ msgstr "Modifica l'ordine delle schede"
 #: kmymoney/kmymoney.cpp:1519
 #, kde-format
 msgid "Ledger Quick Open"
-msgstr ""
+msgstr "Apertura rapida del registro"
 
 #: kmymoney/kmymoney.cpp:1521
 #, kde-format
@@ -21397,7 +21397,7 @@ msgstr "Il numero dell'assegno utilizzato per la transazione."
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Il numero di assegno <b>%1</b> è già stato utilizzato in questo conto."
 
-#: kmymoney/views/newspliteditor.cpp:770
+#: kmymoney/views/newspliteditor.cpp:772
 #: kmymoney/views/newtransactioneditor.cpp:206
 #, kde-format
 msgctxt "@info:tooltip Protected"
