@@ -143,10 +143,12 @@ parts:
       - libsqlcipher-dev
       - libaqbanking-dev
       - python3-dev
+      - libharfbuzz-subset0
     stage-packages:
       - libofx7t64
       - libsqlcipher1
       - libaqbanking44
+      - libharfbuzz-subset0
     cmake-parameters:
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DCMAKE_BUILD_TYPE=Release
