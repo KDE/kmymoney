@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-06 03:41+0000\n"
+"POT-Creation-Date: 2025-07-08 03:35+0000\n"
 "PO-Revision-Date: 2025-06-16 12:13+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -107,12 +107,12 @@ msgstr ""
 msgid "No share amount provided"
 msgstr "Bir hisse senedi tutarı sağlanmadı"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:953
+#: kmymoney/converter/mymoneystatementreader.cpp:960
 #, kde-format
 msgid "(Fees) %1"
 msgstr "(Ücretler) %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1046
+#: kmymoney/converter/mymoneystatementreader.cpp:1053
 #, kde-format
 msgctxt "Prepend name of payee (%1) to original memo (%2)"
 msgid ""
@@ -122,7 +122,7 @@ msgstr ""
 "Özgün alacaklı: %1\n"
 "%2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1054
+#: kmymoney/converter/mymoneystatementreader.cpp:1061
 #, kde-format
 msgid ""
 "Do you want to add \"%1\" as payee/receiver?\n"
@@ -131,7 +131,7 @@ msgstr ""
 "“%1” kişisini alacaklı/alıcı olarak eklemek istiyor musunuz?\n"
 "\n"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1056
+#: kmymoney/converter/mymoneystatementreader.cpp:1063
 #, kde-format
 msgid ""
 "Selecting \"Yes\" will create the payee, \"No\" will skip creation of a "
@@ -149,78 +149,78 @@ msgstr ""
 "Burada “Hayır”ı seçer ve “Bir daha sorma” onay kutusunu işaretlerseniz takip "
 "eden tüm işlemler için “%1” referanslı alacaklı bilgileri kaldırılır."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1070
+#: kmymoney/converter/mymoneystatementreader.cpp:1077
 #: kmymoney/kmymoneyutils.cpp:578
 #, kde-format
 msgid "New payee/receiver"
 msgstr "Yeni alacaklı/alıcı"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1101
+#: kmymoney/converter/mymoneystatementreader.cpp:1108
 #, kde-format
 msgid "Default Category for Payee"
 msgstr "Öntanımlı Alacaklı Kategorisi"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1108
+#: kmymoney/converter/mymoneystatementreader.cpp:1115
 #, kde-format
 msgid "Please select a default category for payee '%1'"
 msgstr "Lütfen “%1” alacaklısı için öntanımlı bir kategori seçin"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1131
+#: kmymoney/converter/mymoneystatementreader.cpp:1138
 #, kde-format
 msgid "Save Category"
 msgstr "Kategoriyi Kaydet"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1132
+#: kmymoney/converter/mymoneystatementreader.cpp:1139
 #, kde-format
 msgid "No Category"
 msgstr "Kategori Yok"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonAbort)
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: kmymoney/converter/mymoneystatementreader.cpp:1133
+#: kmymoney/converter/mymoneystatementreader.cpp:1140
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:132
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:257
 #, kde-format
 msgid "Abort"
 msgstr "İptal Et"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1159
+#: kmymoney/converter/mymoneystatementreader.cpp:1166
 #, kde-format
 msgid "Unable to add payee/receiver"
 msgstr "Alacaklı/alıcı eklenemedi"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1419
+#: kmymoney/converter/mymoneystatementreader.cpp:1426
 #, kde-format
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr "İçe aktarılan “%1” numaralı işlemi ekleme veya eşleme sorunu: %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1477
+#: kmymoney/converter/mymoneystatementreader.cpp:1484
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr "<b>Aşağıdaki hesap için bir hesap özeti indirdiniz:</b><br/><br/>"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1478
+#: kmymoney/converter/mymoneystatementreader.cpp:1485
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " — Hesap adı: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1479
+#: kmymoney/converter/mymoneystatementreader.cpp:1486
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " — Hesap türü: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1480
+#: kmymoney/converter/mymoneystatementreader.cpp:1487
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " — Hesap numarası: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1485
+#: kmymoney/converter/mymoneystatementreader.cpp:1492
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "İşlemleri bu hesaba aktarmak istiyor musunuz?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1488
+#: kmymoney/converter/mymoneystatementreader.cpp:1495
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -231,7 +231,7 @@ msgstr ""
 "düğmesine basarak yeni bir hesap oluşturabilir veya aşağıdaki seçim "
 "kutusundan elle başka bir hesap seçebilirsiniz."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1492
+#: kmymoney/converter/mymoneystatementreader.cpp:1499
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -242,12 +242,12 @@ msgstr ""
 "kutusundaki seçim kutusunu kullanarak bir hesap seçin veya <b>Oluştur</b> "
 "düğmesine basarak yeni bir hesap oluşturun."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1521
+#: kmymoney/converter/mymoneystatementreader.cpp:1528
 #, kde-format
 msgid "Import transactions"
 msgstr "İşlemleri içeri aktar"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1564
+#: kmymoney/converter/mymoneystatementreader.cpp:1571
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
@@ -256,14 +256,14 @@ msgstr ""
 "Bir hesap seçmeli, yeni bir tane oluşturmalı veya <b>İptal Et</b> düğmesine "
 "basmalısınız."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1672
+#: kmymoney/converter/mymoneystatementreader.cpp:1679
 #: kmymoney/views/kscheduledview_p.h:199 kmymoney/views/kscheduledview_p.h:319
 #: kmymoney/views/kscheduledview_p.h:323
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Planlı “%1” işlemi girilemedi"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1692
+#: kmymoney/converter/mymoneystatementreader.cpp:1699
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -275,7 +275,7 @@ msgstr ""
 "adı: <b>%1</b><br/>İşlem: <i>%2 %3</i><br/>İşlemin eşleştirilebilmesi için K "
 "Param’ın bu planı şimdi girmesini istiyor musunuz?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1701
+#: kmymoney/converter/mymoneystatementreader.cpp:1708
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -298,7 +298,7 @@ msgstr[1] ""
 "<br/>İşlemin eşleştirilebilmesi için K Param’ın bu planı şimdi girmesini "
 "istiyor musunuz?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1715
+#: kmymoney/converter/mymoneystatementreader.cpp:1722
 #, kde-format
 msgid "Schedule found"
 msgstr "Plan bulundu"
@@ -567,10 +567,10 @@ msgid "Backup location:"
 msgstr "Yedekleme konumu:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3459
-#: kmymoney/kmymoney.cpp:3530 kmymoney/kmymoney.cpp:3546
-#: kmymoney/kmymoney.cpp:3552 kmymoney/kmymoney.cpp:3566
-#: kmymoney/kmymoney.cpp:3568
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3473
+#: kmymoney/kmymoney.cpp:3544 kmymoney/kmymoney.cpp:3560
+#: kmymoney/kmymoney.cpp:3566 kmymoney/kmymoney.cpp:3580
+#: kmymoney/kmymoney.cpp:3582
 #, kde-format
 msgid "Backup"
 msgstr "Yedekle"
@@ -2122,7 +2122,7 @@ msgstr "Tüm hisselerin toplamı"
 msgid "VAT account"
 msgstr "KDV’li hesap"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:550 kmymoney/kmymoney.cpp:441
+#: kmymoney/dialogs/knewaccountdlg.cpp:550 kmymoney/kmymoney.cpp:445
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:188
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:370
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:74
@@ -2130,7 +2130,7 @@ msgstr "KDV’li hesap"
 msgid "Asset"
 msgstr "Varlık"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:552 kmymoney/kmymoney.cpp:442
+#: kmymoney/dialogs/knewaccountdlg.cpp:552 kmymoney/kmymoney.cpp:446
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:189
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:378
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:76
@@ -2138,7 +2138,7 @@ msgstr "Varlık"
 msgid "Liability"
 msgstr "Borç"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:554 kmymoney/kmymoney.cpp:443
+#: kmymoney/dialogs/knewaccountdlg.cpp:554 kmymoney/kmymoney.cpp:447
 #: kmymoney/models/ledgerfilterbase.cpp:76 kmymoney/views/khomeview_p.h:1832
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
@@ -2147,7 +2147,7 @@ msgstr "Borç"
 msgid "Income"
 msgstr "Gelir"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:556 kmymoney/kmymoney.cpp:444
+#: kmymoney/dialogs/knewaccountdlg.cpp:556 kmymoney/kmymoney.cpp:448
 #: kmymoney/models/ledgerfilterbase.cpp:98
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:79
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:191
@@ -4845,7 +4845,7 @@ msgctxt "Roles in project"
 msgid "CSV import/export"
 msgstr "CSV içe/dışa aktar"
 
-#: kmymoney/kmymoney.cpp:445 kmymoney/models/equitiesmodel.cpp:424
+#: kmymoney/kmymoney.cpp:449 kmymoney/models/equitiesmodel.cpp:424
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:192
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:408
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:79
@@ -4853,46 +4853,46 @@ msgstr "CSV içe/dışa aktar"
 msgid "Equity"
 msgstr "Özkaynak"
 
-#: kmymoney/kmymoney.cpp:491
+#: kmymoney/kmymoney.cpp:495
 #, kde-format
 msgid "The file has been changed, save it?"
 msgstr "Dosya değiştirildi, kaydedilsin mi?"
 
-#: kmymoney/kmymoney.cpp:492
+#: kmymoney/kmymoney.cpp:496
 #, fuzzy, kde-format
 #| msgid "Save to file"
 msgctxt "@title:window"
 msgid "Save file"
 msgstr "Dosyaya kaydet"
 
-#: kmymoney/kmymoney.cpp:679
+#: kmymoney/kmymoney.cpp:683
 #, kde-format
 msgid "Untitled"
 msgstr "Başlıksız"
 
-#: kmymoney/kmymoney.cpp:758
+#: kmymoney/kmymoney.cpp:762
 #, kde-format
 msgid "Plugin responded with error during close."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:866
+#: kmymoney/kmymoney.cpp:870
 #, kde-format
 msgid "Unable to match the selected transactions"
 msgstr "Seçili aktarımlar eşlenemedi"
 
-#: kmymoney/kmymoney.cpp:893
+#: kmymoney/kmymoney.cpp:897
 #, kde-format
 msgid "Unable to unmatch the selected transactions"
 msgstr "Seçilen işlemler eşleştirilemedi"
 
-#: kmymoney/kmymoney.cpp:1063
+#: kmymoney/kmymoney.cpp:1067
 #, fuzzy, kde-format
 #| msgid "New ..."
 msgctxt "@action New file/database"
 msgid "New book..."
 msgstr "Yeni..."
 
-#: kmymoney/kmymoney.cpp:1233
+#: kmymoney/kmymoney.cpp:1239
 #, kde-format
 msgid ""
 "This is the consistency check log, use the context menu to copy or save it."
@@ -4900,347 +4900,347 @@ msgstr ""
 "Bu tutarlılık kontrol günlüğüdür, kopyalamak veya kaydetmek için içerik "
 "menüsünü kullanın."
 
-#: kmymoney/kmymoney.cpp:1246
+#: kmymoney/kmymoney.cpp:1252
 #, kde-format
 msgid "Copy to clipboard"
 msgstr "Panoya kopyala"
 
-#: kmymoney/kmymoney.cpp:1247
+#: kmymoney/kmymoney.cpp:1253
 #, kde-format
 msgid "Save to file"
 msgstr "Dosyaya kaydet"
 
-#: kmymoney/kmymoney.cpp:1375
+#: kmymoney/kmymoney.cpp:1381
 #, kde-format
 msgid "Backup..."
 msgstr "Yedekle..."
 
-#: kmymoney/kmymoney.cpp:1376
+#: kmymoney/kmymoney.cpp:1382
 #, kde-format
 msgid "Statement file..."
 msgstr "Bilanço dosyası..."
 
-#: kmymoney/kmymoney.cpp:1377 kmymoney/kmymoney.cpp:1378
+#: kmymoney/kmymoney.cpp:1383 kmymoney/kmymoney.cpp:1384
 #, kde-format
 msgid "Account Template..."
 msgstr "Hesap Şablonu..."
 
-#: kmymoney/kmymoney.cpp:1379
+#: kmymoney/kmymoney.cpp:1385
 #, kde-format
 msgid "Personal Data..."
 msgstr "Kişisel Veriler..."
 
-#: kmymoney/kmymoney.cpp:1381
+#: kmymoney/kmymoney.cpp:1387
 #, kde-format
 msgid "Dump Memory"
 msgstr "Belleği Dök"
 
-#: kmymoney/kmymoney.cpp:1383
+#: kmymoney/kmymoney.cpp:1389
 #, kde-format
 msgid "File-Information..."
 msgstr "Dosya-Bilgileri..."
 
-#: kmymoney/kmymoney.cpp:1387
+#: kmymoney/kmymoney.cpp:1393
 #, kde-format
 msgid "Find transaction..."
 msgstr "Aktarım bul..."
 
-#: kmymoney/kmymoney.cpp:1391
+#: kmymoney/kmymoney.cpp:1397
 #, kde-format
 msgid "Show Transaction Detail"
 msgstr "Aktarım Detayını Göster"
 
 #. i18n: ectx: label, entry (HideReconciledTransactions), group (List Options)
-#: kmymoney/kmymoney.cpp:1392 kmymoney/settings/kmymoney.kcfg:256
+#: kmymoney/kmymoney.cpp:1398 kmymoney/settings/kmymoney.kcfg:256
 #, kde-format
 msgid "Hide reconciled transactions"
 msgstr "Uzlaştırılmış aktarımları gizle"
 
 #. i18n: ectx: label, entry (HideUnusedCategory), group (List Options)
-#: kmymoney/kmymoney.cpp:1393 kmymoney/settings/kmymoney.kcfg:228
+#: kmymoney/kmymoney.cpp:1399 kmymoney/settings/kmymoney.kcfg:228
 #, kde-format
 msgid "Hide unused categories"
 msgstr "Kullanılmayan Kategorileri Gizle"
 
 #. i18n: ectx: label, entry (ShowAllAccounts), group (List Options)
-#: kmymoney/kmymoney.cpp:1394 kmymoney/settings/kmymoney.kcfg:232
+#: kmymoney/kmymoney.cpp:1400 kmymoney/settings/kmymoney.kcfg:232
 #, kde-format
 msgid "Show all accounts"
 msgstr "Tüm Hesapları Göster"
 
-#: kmymoney/kmymoney.cpp:1398
+#: kmymoney/kmymoney.cpp:1404
 #, kde-format
 msgid "New institution..."
 msgstr "Yeni şirket..."
 
-#: kmymoney/kmymoney.cpp:1399
+#: kmymoney/kmymoney.cpp:1405
 #, kde-format
 msgid "Edit institution..."
 msgstr "Şirketi düzenle..."
 
-#: kmymoney/kmymoney.cpp:1400
+#: kmymoney/kmymoney.cpp:1406
 #, kde-format
 msgid "Delete institution..."
 msgstr "Şirketi sil..."
 
-#: kmymoney/kmymoney.cpp:1404
+#: kmymoney/kmymoney.cpp:1410
 #, kde-format
 msgid "New account..."
 msgstr "Yeni Hesap..."
 
-#: kmymoney/kmymoney.cpp:1405
+#: kmymoney/kmymoney.cpp:1411
 #, kde-format
 msgid "Open ledger"
 msgstr "Ana hesap defterini aç"
 
-#: kmymoney/kmymoney.cpp:1406
+#: kmymoney/kmymoney.cpp:1412
 #, kde-format
 msgid "Reconcile..."
 msgstr "Uzlaştır..."
 
-#: kmymoney/kmymoney.cpp:1407
+#: kmymoney/kmymoney.cpp:1413
 #, kde-format
 msgctxt "Finish reconciliation"
 msgid "Finish"
 msgstr "Bitir"
 
-#: kmymoney/kmymoney.cpp:1408
+#: kmymoney/kmymoney.cpp:1414
 #, fuzzy, kde-format
 #| msgid "&Postpone"
 msgctxt "Postpone reconciliation"
 msgid "Postpone"
 msgstr "&Erteleme"
 
-#: kmymoney/kmymoney.cpp:1409
+#: kmymoney/kmymoney.cpp:1415
 #, fuzzy, kde-format
 #| msgid "Cancel"
 msgctxt "Cancel reconciliation"
 msgid "Cancel"
 msgstr "İptal"
 
-#: kmymoney/kmymoney.cpp:1410
+#: kmymoney/kmymoney.cpp:1416
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgid "Report reconciliation"
 msgstr "Son uzlaştırma"
 
-#: kmymoney/kmymoney.cpp:1411
+#: kmymoney/kmymoney.cpp:1417
 #, kde-format
 msgid "Edit account..."
 msgstr "Hesabı Düzenle..."
 
-#: kmymoney/kmymoney.cpp:1412
+#: kmymoney/kmymoney.cpp:1418
 #, kde-format
 msgid "Delete account..."
 msgstr "Hesabı Sil..."
 
-#: kmymoney/kmymoney.cpp:1413
+#: kmymoney/kmymoney.cpp:1419
 #, kde-format
 msgid "Close account"
 msgstr "Hesabı Kapat"
 
-#: kmymoney/kmymoney.cpp:1414
+#: kmymoney/kmymoney.cpp:1420
 #, kde-format
 msgid "Reopen account"
 msgstr "Hesabı Yeniden Aç"
 
-#: kmymoney/kmymoney.cpp:1415
+#: kmymoney/kmymoney.cpp:1421
 #, kde-format
 msgid "Transaction report"
 msgstr "Aktarım raporu"
 
-#: kmymoney/kmymoney.cpp:1416
+#: kmymoney/kmymoney.cpp:1422
 #, kde-format
 msgid "Show balance chart..."
 msgstr "Bakiye grafiği göster..."
 
-#: kmymoney/kmymoney.cpp:1417
+#: kmymoney/kmymoney.cpp:1423
 #, kde-format
 msgid "Map account..."
 msgstr "Hesabı Eşleştir..."
 
-#: kmymoney/kmymoney.cpp:1418
+#: kmymoney/kmymoney.cpp:1424
 #, kde-format
 msgid "Unmap account..."
 msgstr "Hesabı eşlemeyi kaldır..."
 
-#: kmymoney/kmymoney.cpp:1419
+#: kmymoney/kmymoney.cpp:1425
 #, kde-format
 msgid "Update account..."
 msgstr "Hesabı Güncelle..."
 
-#: kmymoney/kmymoney.cpp:1420
+#: kmymoney/kmymoney.cpp:1426
 #, kde-format
 msgid "Update all accounts..."
 msgstr "Tüm Hesapları Güncelle..."
 
-#: kmymoney/kmymoney.cpp:1424
+#: kmymoney/kmymoney.cpp:1430
 #, kde-format
 msgid "New category..."
 msgstr "Yeni Kategori..."
 
-#: kmymoney/kmymoney.cpp:1425
+#: kmymoney/kmymoney.cpp:1431
 #, kde-format
 msgid "Edit category..."
 msgstr "Kategoriyi Düzenle..."
 
-#: kmymoney/kmymoney.cpp:1426
+#: kmymoney/kmymoney.cpp:1432
 #, kde-format
 msgid "Delete category..."
 msgstr "Kategoriyi Sil..."
 
-#: kmymoney/kmymoney.cpp:1430
+#: kmymoney/kmymoney.cpp:1436
 #, kde-format
 msgid "Currencies..."
 msgstr "Para birimleri..."
 
-#: kmymoney/kmymoney.cpp:1431
+#: kmymoney/kmymoney.cpp:1437
 #, kde-format
 msgid "Prices..."
 msgstr "Fiyatlar..."
 
-#: kmymoney/kmymoney.cpp:1432
+#: kmymoney/kmymoney.cpp:1438
 #, kde-format
 msgid "Update Stock and Currency Prices..."
 msgstr "Stok ve Para Birimi Değerlerini Güncelle..."
 
-#: kmymoney/kmymoney.cpp:1433
+#: kmymoney/kmymoney.cpp:1439
 #, kde-format
 msgid "Consistency Check"
 msgstr "Tutarlılık Kontrolü"
 
-#: kmymoney/kmymoney.cpp:1434
+#: kmymoney/kmymoney.cpp:1440
 #, kde-format
 msgid "Performance-Test"
 msgstr "Başarım-Testi"
 
-#: kmymoney/kmymoney.cpp:1435
+#: kmymoney/kmymoney.cpp:1441
 #, kde-format
 msgid "Calculator..."
 msgstr "Hesap makinesi..."
 
-#: kmymoney/kmymoney.cpp:1439
+#: kmymoney/kmymoney.cpp:1445
 #, kde-format
 msgid "Enable all messages"
 msgstr "Tüm Uyarıları Etkinleştir"
 
-#: kmymoney/kmymoney.cpp:1443 kmymoney/views/kwelcomepage.cpp:82
+#: kmymoney/kmymoney.cpp:1449 kmymoney/views/kwelcomepage.cpp:82
 #, kde-format
 msgid "Get help from our community"
 msgstr "Topluluğumuzdan yardım al"
 
-#: kmymoney/kmymoney.cpp:1444 kmymoney/views/kwelcomepage.cpp:84
+#: kmymoney/kmymoney.cpp:1450 kmymoney/views/kwelcomepage.cpp:84
 #, kde-format
 msgid "See what's new in this version"
 msgstr "Bu sürümdeki yenilikleri gör"
 
-#: kmymoney/kmymoney.cpp:1445 kmymoney/views/kwelcomepage.cpp:80
+#: kmymoney/kmymoney.cpp:1451 kmymoney/views/kwelcomepage.cpp:80
 #, kde-format
 msgid "Visit our website"
 msgstr "KMyMoney websitesini ziyaret et"
 
-#: kmymoney/kmymoney.cpp:1449
+#: kmymoney/kmymoney.cpp:1455
 #, fuzzy, kde-format
 #| msgid "Any transaction"
 msgctxt "New transaction button"
 msgid "New transaction"
 msgstr "Tüm aktarımlar"
 
-#: kmymoney/kmymoney.cpp:1450
+#: kmymoney/kmymoney.cpp:1456
 #, kde-format
 msgctxt "Edit transaction button"
 msgid "Edit"
 msgstr "Düzenle"
 
-#: kmymoney/kmymoney.cpp:1451
+#: kmymoney/kmymoney.cpp:1457
 #, kde-format
 msgctxt "Enter transaction"
 msgid "Enter"
 msgstr "Gir"
 
-#: kmymoney/kmymoney.cpp:1452
+#: kmymoney/kmymoney.cpp:1458
 #, kde-format
 msgctxt "Edit split button"
 msgid "Edit splits"
 msgstr "Bölümler düzenle"
 
-#: kmymoney/kmymoney.cpp:1453
+#: kmymoney/kmymoney.cpp:1459
 #, kde-format
 msgctxt "Cancel transaction edit"
 msgid "Cancel"
 msgstr "İptal"
 
-#: kmymoney/kmymoney.cpp:1454
+#: kmymoney/kmymoney.cpp:1460
 #, kde-format
 msgctxt "Delete transaction"
 msgid "Delete"
 msgstr "Sil"
 
-#: kmymoney/kmymoney.cpp:1455
+#: kmymoney/kmymoney.cpp:1461
 #, kde-format
 msgctxt "Duplicate transaction"
 msgid "Duplicate"
 msgstr "Çoğalt"
 
-#: kmymoney/kmymoney.cpp:1456
+#: kmymoney/kmymoney.cpp:1462
 #, fuzzy, kde-format
 #| msgid "Add shares"
 msgctxt "Add reversing transaction"
 msgid "Add reversing"
 msgstr "Hisse Ekle"
 
-#: kmymoney/kmymoney.cpp:1457
+#: kmymoney/kmymoney.cpp:1463
 #, kde-format
 msgctxt "Accept 'imported' and 'matched' transaction"
 msgid "Accept"
 msgstr "Kabul Et"
 
-#: kmymoney/kmymoney.cpp:1458
+#: kmymoney/kmymoney.cpp:1464
 #, kde-format
 msgctxt "Toggle reconciliation flag"
 msgid "Toggle"
 msgstr "Değiştir"
 
-#: kmymoney/kmymoney.cpp:1459
+#: kmymoney/kmymoney.cpp:1465
 #, kde-format
 msgctxt "Mark transaction cleared"
 msgid "Cleared"
 msgstr "Temizlenmiş"
 
-#: kmymoney/kmymoney.cpp:1460
+#: kmymoney/kmymoney.cpp:1466
 #, kde-format
 msgctxt "Mark transaction reconciled"
 msgid "Reconciled"
 msgstr "Uzlaştırılmış"
 
-#: kmymoney/kmymoney.cpp:1461
+#: kmymoney/kmymoney.cpp:1467
 #, kde-format
 msgctxt "Mark transaction not reconciled"
 msgid "Not reconciled"
 msgstr "Uzlaştırılmamış"
 
-#: kmymoney/kmymoney.cpp:1462
+#: kmymoney/kmymoney.cpp:1468
 #, fuzzy, kde-format
 #| msgid "Move transaction to..."
 msgctxt "Move transaction"
 msgid "Move transaction"
 msgstr "İşlemi buraya taşı..."
 
-#: kmymoney/kmymoney.cpp:1463
+#: kmymoney/kmymoney.cpp:1469
 #, fuzzy, kde-format
 #| msgid "Show transaction form"
 msgctxt "Show transaction"
 msgid "Show transaction"
 msgstr "İşlem biçimini göster"
 
-#: kmymoney/kmymoney.cpp:1464
+#: kmymoney/kmymoney.cpp:1470
 #, fuzzy, kde-format
 #| msgid "Show Transaction Detail"
 msgctxt "Display transaction details"
 msgid "Show transaction details"
 msgstr "Aktarım Detayını Göster"
 
-#: kmymoney/kmymoney.cpp:1466
+#: kmymoney/kmymoney.cpp:1472
 #, fuzzy, kde-format
 #| msgctxt "To open a new report"
 #| msgid "&Open"
@@ -5248,236 +5248,236 @@ msgctxt "Open URL"
 msgid "Open URL"
 msgstr "&Aç"
 
-#: kmymoney/kmymoney.cpp:1467
+#: kmymoney/kmymoney.cpp:1473
 #, kde-format
 msgctxt "Select all transactions"
 msgid "Select all"
 msgstr "Tümünü Seç"
 
-#: kmymoney/kmymoney.cpp:1468
+#: kmymoney/kmymoney.cpp:1474
 #, kde-format
 msgid "Go to account"
 msgstr "Hesaba Git"
 
-#: kmymoney/kmymoney.cpp:1469
+#: kmymoney/kmymoney.cpp:1475
 #, kde-format
 msgid "Go to payee"
 msgstr "Alacaklıya git"
 
-#: kmymoney/kmymoney.cpp:1470
+#: kmymoney/kmymoney.cpp:1476
 #, kde-format
 msgid "Create scheduled transaction..."
 msgstr "Zamanlanmış aktarım oluştur..."
 
-#: kmymoney/kmymoney.cpp:1471
+#: kmymoney/kmymoney.cpp:1477
 #, kde-format
 msgid "Assign next number"
 msgstr "Sonraki numaraya ata"
 
-#: kmymoney/kmymoney.cpp:1472
+#: kmymoney/kmymoney.cpp:1478
 #, kde-format
 msgctxt "Combine transactions"
 msgid "Combine"
 msgstr "Birleştir"
 
-#: kmymoney/kmymoney.cpp:1473
+#: kmymoney/kmymoney.cpp:1479
 #, fuzzy, kde-format
 #| msgid "As of today"
 msgid "Move to today"
 msgstr "Bugün itibariyle"
 
-#: kmymoney/kmymoney.cpp:1474
+#: kmymoney/kmymoney.cpp:1480
 #, kde-format
 msgid "Copy splits"
 msgstr "Bölümleri kopyala"
 
-#: kmymoney/kmymoney.cpp:1475
+#: kmymoney/kmymoney.cpp:1481
 #, fuzzy, kde-format
 #| msgid "Show ledgers page"
 msgid "Show filter widget"
 msgstr "Defterler sayfasını göster"
 
-#: kmymoney/kmymoney.cpp:1477
+#: kmymoney/kmymoney.cpp:1483
 #, kde-format
 msgid "New investment..."
 msgstr "Yeni yatırım..."
 
-#: kmymoney/kmymoney.cpp:1478
+#: kmymoney/kmymoney.cpp:1484
 #, kde-format
 msgid "Edit investment..."
 msgstr "Yatırımı düzenle..."
 
-#: kmymoney/kmymoney.cpp:1479
+#: kmymoney/kmymoney.cpp:1485
 #, kde-format
 msgid "Delete investment..."
 msgstr "Yatırımı sil..."
 
-#: kmymoney/kmymoney.cpp:1480
+#: kmymoney/kmymoney.cpp:1486
 #, kde-format
 msgid "Online price update..."
 msgstr "Çevrimiçi fiyat güncelleme..."
 
-#: kmymoney/kmymoney.cpp:1481
+#: kmymoney/kmymoney.cpp:1487
 #, kde-format
 msgid "Manual price update..."
 msgstr "El ile fiyat güncelleme..."
 
-#: kmymoney/kmymoney.cpp:1482
+#: kmymoney/kmymoney.cpp:1488
 #, fuzzy, kde-format
 #| msgid "Existing security"
 msgid "Edit security..."
 msgstr "Mevcut kefil"
 
-#: kmymoney/kmymoney.cpp:1483
+#: kmymoney/kmymoney.cpp:1489
 #, fuzzy, kde-format
 #| msgid "Delete security"
 msgid "Delete security..."
 msgstr "Senedi sil"
 
-#: kmymoney/kmymoney.cpp:1486
+#: kmymoney/kmymoney.cpp:1492
 #, kde-format
 msgid "New schedule..."
 msgstr "Yeni zamanlama..."
 
-#: kmymoney/kmymoney.cpp:1487 kmymoney/kmymoney.cpp:1488
+#: kmymoney/kmymoney.cpp:1493 kmymoney/kmymoney.cpp:1494
 #, kde-format
 msgid "Edit scheduled transaction"
 msgstr "Zamanlanmış aktarımı düzenle"
 
-#: kmymoney/kmymoney.cpp:1489
+#: kmymoney/kmymoney.cpp:1495
 #, kde-format
 msgid "Delete scheduled transaction"
 msgstr "Zamanlanmış aktarımı sil"
 
-#: kmymoney/kmymoney.cpp:1490
+#: kmymoney/kmymoney.cpp:1496
 #, kde-format
 msgid "Duplicate scheduled transaction"
 msgstr "Zamanlanmış aktarımı çoğalt"
 
-#: kmymoney/kmymoney.cpp:1491
+#: kmymoney/kmymoney.cpp:1497
 #, kde-format
 msgid "Enter next transaction..."
 msgstr "Sonraki işlemi gir..."
 
-#: kmymoney/kmymoney.cpp:1492
+#: kmymoney/kmymoney.cpp:1498
 #, kde-format
 msgid "Skip next transaction..."
 msgstr "Sonraki işleme atla..."
 
-#: kmymoney/kmymoney.cpp:1494
+#: kmymoney/kmymoney.cpp:1500
 #, fuzzy, kde-format
 #| msgid "New payee"
 msgid "New payee..."
 msgstr "Yeni alacaklı"
 
-#: kmymoney/kmymoney.cpp:1495
+#: kmymoney/kmymoney.cpp:1501
 #, kde-format
 msgid "Rename payee"
 msgstr "Alacaklıyı yeniden adlandır"
 
-#: kmymoney/kmymoney.cpp:1496
+#: kmymoney/kmymoney.cpp:1502
 #, kde-format
 msgid "Delete payee"
 msgstr "Alacaklıyı sil"
 
-#: kmymoney/kmymoney.cpp:1497
+#: kmymoney/kmymoney.cpp:1503
 #, kde-format
 msgid "Merge payees"
 msgstr "Alacaklıları birleştir"
 
-#: kmymoney/kmymoney.cpp:1499
+#: kmymoney/kmymoney.cpp:1505
 #, fuzzy, kde-format
 #| msgid "New tag"
 msgid "New tag..."
 msgstr "Yeni etiket"
 
-#: kmymoney/kmymoney.cpp:1500
+#: kmymoney/kmymoney.cpp:1506
 #, kde-format
 msgid "Rename tag"
 msgstr "Etiketi yeniden adlandır"
 
-#: kmymoney/kmymoney.cpp:1501
+#: kmymoney/kmymoney.cpp:1507
 #, kde-format
 msgid "Delete tag"
 msgstr "Etiket sil"
 
-#: kmymoney/kmymoney.cpp:1503
+#: kmymoney/kmymoney.cpp:1509
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Open report"
 msgstr "&Yeni rapor"
 
-#: kmymoney/kmymoney.cpp:1504
+#: kmymoney/kmymoney.cpp:1510
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "New report"
 msgstr "&Yeni rapor"
 
-#: kmymoney/kmymoney.cpp:1505
+#: kmymoney/kmymoney.cpp:1511
 #, fuzzy, kde-format
 #| msgid "Copy memo"
 msgid "Copy report"
 msgstr "Notu kopyala"
 
-#: kmymoney/kmymoney.cpp:1506
+#: kmymoney/kmymoney.cpp:1512
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:215
 #, fuzzy, kde-format
 #| msgid "Configure this report"
 msgid "Configure report"
 msgstr "Bu raporu yapılandır"
 
-#: kmymoney/kmymoney.cpp:1507
+#: kmymoney/kmymoney.cpp:1513
 #, fuzzy, kde-format
 #| msgid "Favorite reports"
 msgid "Export report"
 msgstr "Beğenilen raporlar"
 
-#: kmymoney/kmymoney.cpp:1508
+#: kmymoney/kmymoney.cpp:1514
 #, fuzzy, kde-format
 #| msgid "Delete Report?"
 msgid "Delete report"
 msgstr "Rapor Silinsin mi?"
 
-#: kmymoney/kmymoney.cpp:1509
+#: kmymoney/kmymoney.cpp:1515
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Close report"
 msgstr "&Yeni rapor"
 
-#: kmymoney/kmymoney.cpp:1510
+#: kmymoney/kmymoney.cpp:1516
 #, fuzzy, kde-format
 #| msgctxt "Toggle reconciliation flag"
 #| msgid "Toggle"
 msgid "Toggle chart"
 msgstr "Değiştir"
 
-#: kmymoney/kmymoney.cpp:1511
+#: kmymoney/kmymoney.cpp:1517
 #, fuzzy, kde-format
 #| msgid "Entry order"
 msgid "Edit tab order"
 msgstr "Girdi sıralaması"
 
-#: kmymoney/kmymoney.cpp:1513
+#: kmymoney/kmymoney.cpp:1519
 #, kde-format
 msgid "Ledger Quick Open"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1515
+#: kmymoney/kmymoney.cpp:1521
 #, kde-format
 msgid "Test new feature"
 msgstr "Yeni özellik test et"
 
-#: kmymoney/kmymoney.cpp:1516
+#: kmymoney/kmymoney.cpp:1522
 #, kde-format
 msgid "Debug Traces"
 msgstr "Hata Ayıklama İzleri"
 
-#: kmymoney/kmymoney.cpp:1518
+#: kmymoney/kmymoney.cpp:1524
 #, kde-format
 msgid "Debug Timers"
 msgstr "Hata Ayıklama Zamanlayıcıları"
 
-#: kmymoney/kmymoney.cpp:1537
+#: kmymoney/kmymoney.cpp:1543
 #, fuzzy, kde-format
 #| msgctxt "Button text for match transaction"
 #| msgid "Match"
@@ -5485,7 +5485,7 @@ msgctxt "Match transactions"
 msgid "Match"
 msgstr "Eşle"
 
-#: kmymoney/kmymoney.cpp:1538
+#: kmymoney/kmymoney.cpp:1544
 #, fuzzy, kde-format
 #| msgctxt "Button text for unmatch transaction"
 #| msgid "Unmatch"
@@ -5493,45 +5493,45 @@ msgctxt "Unmatch transactions"
 msgid "Unmatch"
 msgstr "Eşleştirilmemiş"
 
-#: kmymoney/kmymoney.cpp:1664
+#: kmymoney/kmymoney.cpp:1670
 #, fuzzy, kde-format
 #| msgid "Duplicate the current selected transactions"
 msgctxt "@info:tooltip"
 msgid "Start reconciling the currently selected account"
 msgstr "Şimdi seçili olan işlemleri çoğalt"
 
-#: kmymoney/kmymoney.cpp:1665
+#: kmymoney/kmymoney.cpp:1671
 #, fuzzy, kde-format
 #| msgid "Postpone reconciliation"
 msgctxt "@info:tooltip"
 msgid "Postpone the current reconciliation"
 msgstr "Mutabakat erteleme"
 
-#: kmymoney/kmymoney.cpp:1666
+#: kmymoney/kmymoney.cpp:1672
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgctxt "@info:tooltip"
 msgid "Finish the current reconciliation"
 msgstr "Son uzlaştırma"
 
-#: kmymoney/kmymoney.cpp:1667
+#: kmymoney/kmymoney.cpp:1673
 #, fuzzy, kde-format
 #| msgid "Cancel the operation"
 msgctxt "@info:tooltip"
 msgid "Cancel the current reconciliation"
 msgstr "İşlemi iptal et"
 
-#: kmymoney/kmymoney.cpp:1776
+#: kmymoney/kmymoney.cpp:1782
 #, kde-format
 msgid "View back"
 msgstr "Önceki"
 
-#: kmymoney/kmymoney.cpp:1777
+#: kmymoney/kmymoney.cpp:1783
 #, kde-format
 msgid "View forward"
 msgstr "Sonraki"
 
-#: kmymoney/kmymoney.cpp:2171
+#: kmymoney/kmymoney.cpp:2177
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
@@ -5540,43 +5540,43 @@ msgstr ""
 "Seçilen işlemlerin en az bir bölümü uzlaştırılmıştır. İşlemleri ne olursa "
 "olsun silmek istiyor musunuz?"
 
-#: kmymoney/kmymoney.cpp:2173
+#: kmymoney/kmymoney.cpp:2179
 #, kde-format
 msgid "Transaction already reconciled"
 msgstr "İşlem çoktan uzlaştırıldı"
 
-#: kmymoney/kmymoney.cpp:2178
+#: kmymoney/kmymoney.cpp:2184
 #, kde-format
 msgid "Do you really want to delete the selected transaction?"
 msgid_plural "Do you really want to delete all %1 selected transactions?"
 msgstr[0] "Seçilen işlemi gerçekten silmek istiyor musunuz?"
 msgstr[1] "Bütün %1 seçilmiş işlemleri gerçekten silmek istiyor musunuz?"
 
-#: kmymoney/kmymoney.cpp:2182
+#: kmymoney/kmymoney.cpp:2188
 #, kde-format
 msgid "Delete transaction"
 msgstr "İşlemi sil"
 
-#: kmymoney/kmymoney.cpp:2259
+#: kmymoney/kmymoney.cpp:2265
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to duplicate transaction(s)"
 msgstr "Aktarımlar eklenemedi"
 
-#: kmymoney/kmymoney.cpp:2371
+#: kmymoney/kmymoney.cpp:2377
 #, fuzzy, kde-format
 #| msgid "Close"
 msgctxt "@action:button"
 msgid "Close"
 msgstr "Kapat"
 
-#: kmymoney/kmymoney.cpp:2550
+#: kmymoney/kmymoney.cpp:2556
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to modify transaction"
 msgstr "Aktarımlar eklenemedi"
 
-#: kmymoney/kmymoney.cpp:2694
+#: kmymoney/kmymoney.cpp:2700
 #, fuzzy, kde-format
 #| msgid ""
 #| "At least one split of the selected transactions has been reconciled. Do "
@@ -5588,14 +5588,14 @@ msgstr ""
 "Seçilen işlemlerin en az bir bölümü uzlaştırılmıştır. İşlemleri ne olursa "
 "olsun silmek istiyor musunuz?"
 
-#: kmymoney/kmymoney.cpp:2696
+#: kmymoney/kmymoney.cpp:2702
 #, fuzzy, kde-format
 #| msgid "Transaction already reconciled"
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "İşlem çoktan uzlaştırıldı"
 
-#: kmymoney/kmymoney.cpp:2701
+#: kmymoney/kmymoney.cpp:2707
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -5604,20 +5604,20 @@ msgid_plural "Do you really want to change all %1 selected transactions?"
 msgstr[0] "Seçilen işlemi gerçekten silmek istiyor musunuz?"
 msgstr[1] "Bütün %1 seçilmiş işlemleri gerçekten silmek istiyor musunuz?"
 
-#: kmymoney/kmymoney.cpp:2705
+#: kmymoney/kmymoney.cpp:2711
 #, fuzzy, kde-format
 #| msgid "Any transaction"
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "Tüm aktarımlar"
 
-#: kmymoney/kmymoney.cpp:2790
+#: kmymoney/kmymoney.cpp:2796
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to accept transaction"
 msgstr "Aktarımlar eklenemedi"
 
-#: kmymoney/kmymoney.cpp:2830
+#: kmymoney/kmymoney.cpp:2836
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has detected some overdue scheduled transactions for this "
@@ -5629,12 +5629,12 @@ msgstr ""
 "KMyMoney bu hesap için bazı vadesi geçmiş programlanmış işlemler belirledi. "
 "Bu programlanmış işlemleri şimdi girmek istiyor musunuz?"
 
-#: kmymoney/kmymoney.cpp:2833
+#: kmymoney/kmymoney.cpp:2839
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "Programlanmış işlemler bulundu"
 
-#: kmymoney/kmymoney.cpp:2908
+#: kmymoney/kmymoney.cpp:2914
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have closed this account. It remains in the system because you have "
@@ -5653,17 +5653,17 @@ msgstr ""
 "menüsünde <b>Bütün hesapları göster</b> seçimi ile ya da <b>Kapatılmış "
 "hesapları gösterme</b> seçimini kaldırarak görüntüleyebilirsiniz."
 
-#: kmymoney/kmymoney.cpp:2910
+#: kmymoney/kmymoney.cpp:2916
 #, kde-format
 msgid "Information"
 msgstr "Bilgiler"
 
-#: kmymoney/kmymoney.cpp:3014 kmymoney/kmymoney.cpp:3110
+#: kmymoney/kmymoney.cpp:3020 kmymoney/kmymoney.cpp:3116
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "Açılacak KMyMoney dosyası yok"
 
-#: kmymoney/kmymoney.cpp:3047 kmymoney/kmymoney.cpp:3049
+#: kmymoney/kmymoney.cpp:3053 kmymoney/kmymoney.cpp:3055
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1363
 #: kmymoney/plugins/xml/xmlstorage.cpp:691
 #, kde-format
@@ -5671,76 +5671,76 @@ msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "Hazır."
 
-#: kmymoney/kmymoney.cpp:3114
+#: kmymoney/kmymoney.cpp:3120
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "Kişisel veriler gösteriliyor..."
 
-#: kmymoney/kmymoney.cpp:3121
+#: kmymoney/kmymoney.cpp:3127
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "Kişisel Bilgileri Düzenle"
 
-#: kmymoney/kmymoney.cpp:3136
+#: kmymoney/kmymoney.cpp:3142
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr "Kullanıcı bilgileri kaydedilemedi: %1"
 
-#: kmymoney/kmymoney.cpp:3144
+#: kmymoney/kmymoney.cpp:3150
 #, kde-format
 msgid "Importing account templates."
 msgstr "Hesap şablonları içeri aktarılıyor."
 
-#: kmymoney/kmymoney.cpp:3158
+#: kmymoney/kmymoney.cpp:3164
 #, fuzzy, kde-format
 #| msgid "Unable to import template(s): %1, thrown in %2:%3"
 msgid "Unable to import template(s)"
 msgstr "Şablon(lar) içeri aktarılamıyor: %1, %2 fırlatıldı:%3"
 
-#: kmymoney/kmymoney.cpp:3166
+#: kmymoney/kmymoney.cpp:3172
 #, kde-format
 msgid "Exporting account templates."
 msgstr "Hesap şablonları dışa aktarılıyor."
 
-#: kmymoney/kmymoney.cpp:3172
+#: kmymoney/kmymoney.cpp:3178
 #, kde-format
 msgid "Save as..."
 msgstr "Farklı Kaydet..."
 
-#: kmymoney/kmymoney.cpp:3173
+#: kmymoney/kmymoney.cpp:3179
 #, kde-format
 msgid "KMyMoney template files (*.kmt);;All files (*)"
 msgstr "KMyMoney şablon dosyaları (*.kmt);;Tüm dosyalar (*)"
 
-#: kmymoney/kmymoney.cpp:3204
+#: kmymoney/kmymoney.cpp:3210
 #, fuzzy, kde-format
 #| msgid "Template Error"
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "Şablon Hatası"
 
-#: kmymoney/kmymoney.cpp:3222
+#: kmymoney/kmymoney.cpp:3228
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr "<b>%1</b> dosyası zaten var. Üzerine yazmak ister misiniz?"
 
-#: kmymoney/kmymoney.cpp:3224 kmymoney/plugins/csv/export/csvexporter.cpp:106
+#: kmymoney/kmymoney.cpp:3230 kmymoney/plugins/csv/export/csvexporter.cpp:106
 #, kde-format
 msgid "File already exists"
 msgstr "Bu dosya zaten var"
 
-#: kmymoney/kmymoney.cpp:3262
+#: kmymoney/kmymoney.cpp:3268
 #, kde-format
 msgid ""
 "This will hide the menu bar completely. You can show it again by typing %1."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3263
+#: kmymoney/kmymoney.cpp:3269
 #, kde-format
 msgid "Hide menu bar"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3365
+#: kmymoney/kmymoney.cpp:3379
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
@@ -5748,13 +5748,13 @@ msgid ""
 msgstr ""
 "Dosya yedeği alınmadan önce kaydedilmelidir. Devam etmek istiyor musunuz?"
 
-#: kmymoney/kmymoney.cpp:3367
+#: kmymoney/kmymoney.cpp:3381
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3384
+#: kmymoney/kmymoney.cpp:3398
 #, kde-format
 msgid ""
 "The current implementation of the backup functionality only supports local "
@@ -5763,69 +5763,69 @@ msgstr ""
 "Yedekleme işlevinin mevcut uygulaması kaynak dosya olarak sadece yerel "
 "dosyaları destekler. Sizin mevcut kaynak dosyanız '%1'."
 
-#: kmymoney/kmymoney.cpp:3386
+#: kmymoney/kmymoney.cpp:3400
 #, kde-format
 msgid "Local files only"
 msgstr "Sadece yerel dosyalar"
 
-#: kmymoney/kmymoney.cpp:3425
+#: kmymoney/kmymoney.cpp:3439
 #, kde-format
 msgid "Mounting %1"
 msgstr "Bağlanıyor %1"
 
-#: kmymoney/kmymoney.cpp:3459
+#: kmymoney/kmymoney.cpp:3473
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr "Bugünün yedekleme dosyaları bu aygıtta. Değiştirmek ister misiniz?"
 
-#: kmymoney/kmymoney.cpp:3459
+#: kmymoney/kmymoney.cpp:3473
 #, kde-format
 msgid "&Replace"
 msgstr "&Değiştir"
 
-#: kmymoney/kmymoney.cpp:3467
+#: kmymoney/kmymoney.cpp:3481
 #, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
 msgstr "‘%1’ yedek dizini oluşturulamadı."
 
-#: kmymoney/kmymoney.cpp:3472
+#: kmymoney/kmymoney.cpp:3486
 #, kde-format
 msgid "Writing %1"
 msgstr "Yazılıyor %1"
 
-#: kmymoney/kmymoney.cpp:3493
+#: kmymoney/kmymoney.cpp:3507
 #, kde-format
 msgid "Unmounting %1"
 msgstr "Ayrılıyor %1"
 
-#: kmymoney/kmymoney.cpp:3530
+#: kmymoney/kmymoney.cpp:3544
 #, kde-format
 msgid "Error mounting device"
 msgstr "Aygıt bağlanırken hata"
 
-#: kmymoney/kmymoney.cpp:3545 kmymoney/kmymoney.cpp:3564
+#: kmymoney/kmymoney.cpp:3559 kmymoney/kmymoney.cpp:3578
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "Tamam"
 
-#: kmymoney/kmymoney.cpp:3546 kmymoney/kmymoney.cpp:3566
+#: kmymoney/kmymoney.cpp:3560 kmymoney/kmymoney.cpp:3580
 #, kde-format
 msgid "File successfully backed up"
 msgstr "Dosya başarılı şekilde yedeklendi"
 
-#: kmymoney/kmymoney.cpp:3552
+#: kmymoney/kmymoney.cpp:3566
 #, kde-format
 msgid "Error copying file to device"
 msgstr "Dosya aygıta kopyalanırken hata"
 
-#: kmymoney/kmymoney.cpp:3568
+#: kmymoney/kmymoney.cpp:3582
 #, kde-format
 msgid "Error unmounting device"
 msgstr "Aygıt ayrılırken hata"
 
-#: kmymoney/kmymoney.cpp:3615
+#: kmymoney/kmymoney.cpp:3629
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5845,30 +5845,30 @@ msgstr ""
 "Hesap oluşturma işlemini durdurmak istiyorsanız lütfen İptal Et tuşunu "
 "tıklayın."
 
-#: kmymoney/kmymoney.cpp:3625
+#: kmymoney/kmymoney.cpp:3639
 #, fuzzy, kde-format
 #| msgid "Opening balance problem"
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "Açılış bakiyesi sorunu"
 
-#: kmymoney/kmymoney.cpp:3636
+#: kmymoney/kmymoney.cpp:3650
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "Hesap eklenemedi: %1 "
 
-#: kmymoney/kmymoney.cpp:3706
+#: kmymoney/kmymoney.cpp:3720
 #, kde-format
 msgid "Running consistency check..."
 msgstr "Tutarlılık kontolü çalıştırılıyor..."
 
-#: kmymoney/kmymoney.cpp:3713
+#: kmymoney/kmymoney.cpp:3727
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "Tutarlılık kontrolü başarısız oldu: %1"
 
-#: kmymoney/kmymoney.cpp:3723
+#: kmymoney/kmymoney.cpp:3737
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -5877,7 +5877,7 @@ msgstr ""
 "Tutarlılık kontrolü verilerinde hiçbir sorun bulamadı. Detaylar aşağıda "
 "gösterilmektedir."
 
-#: kmymoney/kmymoney.cpp:3725
+#: kmymoney/kmymoney.cpp:3739
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5888,17 +5888,17 @@ msgstr ""
 "gösterilmektedir. Bu sorunlar otomatik düzeltilemediğinden kullanıcı "
 "tarafından çözülmesi gerekmektedir."
 
-#: kmymoney/kmymoney.cpp:3728
+#: kmymoney/kmymoney.cpp:3742
 #, kde-format
 msgid "Consistency check result"
 msgstr "Tutarlılık kontolü sonucu"
 
-#: kmymoney/kmymoney.cpp:3794
+#: kmymoney/kmymoney.cpp:3808
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Vadesi geçmiş planlanmış işlemler kontrol ediliyor..."
 
-#: kmymoney/kmymoney.cpp:3957
+#: kmymoney/kmymoney.cpp:3971
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
@@ -5906,12 +5906,12 @@ msgstr ""
 "Bir beyanı içeri aktarmadan önce ilk olarak bir KMyMoney dosyası "
 "seçmelisiniz."
 
-#: kmymoney/kmymoney.cpp:3962
+#: kmymoney/kmymoney.cpp:3976
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Web Bağlantısı yoluyla bir beyan içeri aktarılıyor"
 
-#: kmymoney/kmymoney.cpp:3974
+#: kmymoney/kmymoney.cpp:3988
 #, fuzzy, kde-format
 #| msgid ""
 #| "Unable to import %1 using %2 plugin.  The plugin returned the following "
@@ -5924,60 +5924,60 @@ msgstr ""
 "%2 eklentisini kullanan %1 içeri aktarılamadı. Eklenti aşağıdaki hatayı "
 "döndü: %3"
 
-#: kmymoney/kmymoney.cpp:3974 kmymoney/plugins/ofx/import/ofximporter.cpp:1051
+#: kmymoney/kmymoney.cpp:3988 kmymoney/plugins/ofx/import/ofximporter.cpp:1051
 #, kde-format
 msgid "Importing error"
 msgstr "İçeri aktarma hatası"
 
-#: kmymoney/kmymoney.cpp:4004
+#: kmymoney/kmymoney.cpp:4018
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Tüm uyarılar etkinleştirildi."
 
-#: kmymoney/kmymoney.cpp:4004
+#: kmymoney/kmymoney.cpp:4018
 #, kde-format
 msgid "All messages"
 msgstr "Tüm İletiler"
 
-#: kmymoney/kmymoney.cpp:4040
+#: kmymoney/kmymoney.cpp:4054
 #, kde-format
 msgid "Auto saving..."
 msgstr "Otomatik kayıt..."
 
-#: kmymoney/kmymoney.cpp:4160
+#: kmymoney/kmymoney.cpp:4174
 #, kde-format
 msgid "Creating new document..."
 msgstr "Yeni belge oluşturuluyor..."
 
-#: kmymoney/kmymoney.cpp:4220
+#: kmymoney/kmymoney.cpp:4234
 #, fuzzy, kde-format
 #| msgid "Create a new profile"
 msgid "Couldn't create a new file."
 msgstr "Yeni bir profil oluştur"
 
-#: kmymoney/kmymoney.cpp:4231
+#: kmymoney/kmymoney.cpp:4245
 #, kde-format
 msgid "Open a file."
 msgstr "Bir dosya aç."
 
-#: kmymoney/kmymoney.cpp:4245
+#: kmymoney/kmymoney.cpp:4259
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4249
+#: kmymoney/kmymoney.cpp:4263
 #, fuzzy, kde-format
 #| msgctxt "All files (Filefilter)"
 #| msgid "All files"
 msgid "All files (*)"
 msgstr "Tüm dosyalar"
 
-#: kmymoney/kmymoney.cpp:4262
+#: kmymoney/kmymoney.cpp:4276
 #, kde-format
 msgid "Loading file..."
 msgstr "Dosya yükleniyor..."
 
-#: kmymoney/kmymoney.cpp:4270
+#: kmymoney/kmymoney.cpp:4284
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5986,24 +5986,24 @@ msgstr ""
 "<p><b>%1</b> ya geçersiz bir dosya ismi ya da dosya yok. Başka bir dosya "
 "açabilir ya da yeni bir tane oluşturabilirsin.</p>"
 
-#: kmymoney/kmymoney.cpp:4270
+#: kmymoney/kmymoney.cpp:4284
 #, kde-format
 msgid "File not found"
 msgstr "Dosya bulunamadı"
 
-#: kmymoney/kmymoney.cpp:4302
+#: kmymoney/kmymoney.cpp:4316
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4308
+#: kmymoney/kmymoney.cpp:4322
 #, fuzzy, kde-format
 #| msgid "Cannot open file as requested. Error was: %1"
 msgid "Cannot open file as requested."
 msgstr "İstenen dosya açılamadı. Hata : %1"
 
-#: kmymoney/kmymoney.cpp:4315
+#: kmymoney/kmymoney.cpp:4329
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -6012,36 +6012,36 @@ msgstr ""
 "Veri kaynağınız okunamadı. Lütfen gerekli eklentinin etkinleştirildiğini "
 "KMyMoney ayarlarını kontrol edin."
 
-#: kmymoney/kmymoney.cpp:4326
+#: kmymoney/kmymoney.cpp:4340
 #, kde-format
 msgid "Saving file..."
 msgstr "Dosya kaydediliyor..."
 
-#: kmymoney/kmymoney.cpp:4338
+#: kmymoney/kmymoney.cpp:4352
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your data."
 msgstr "Kaydedilemedi: %1 "
 
-#: kmymoney/kmymoney.cpp:4344
+#: kmymoney/kmymoney.cpp:4358
 #, fuzzy, kde-format
 #| msgid "Could not load responsible plugin to view this task."
 msgid "Couldn't find suitable plugin to save your data."
 msgstr "Bu görevi görüntülemekle sorumlu eklenti yüklenemedi."
 
-#: kmymoney/kmymoney.cpp:4350
+#: kmymoney/kmymoney.cpp:4364
 #, fuzzy, kde-format
 #| msgid "Saving file..."
 msgid "Saving file as...."
 msgstr "Dosya kaydediliyor..."
 
-#: kmymoney/kmymoney.cpp:4366
+#: kmymoney/kmymoney.cpp:4380
 #, fuzzy, kde-format
 #| msgid "Could not load responsible plugin to view this task."
 msgid "Couldn't find any plugin for saving data."
 msgstr "Bu görevi görüntülemekle sorumlu eklenti yüklenemedi."
 
-#: kmymoney/kmymoney.cpp:4395
+#: kmymoney/kmymoney.cpp:4409
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your storage."
@@ -6335,7 +6335,7 @@ msgstr "Dosya yüklenirken hata '%1'."
 msgid "File access error"
 msgstr "Dosya erişim hatası"
 
-#: kmymoney/kmymoneyutils.cpp:574 kmymoney/views/kpayeesview.cpp:565
+#: kmymoney/kmymoneyutils.cpp:574 kmymoney/views/kpayeesview.cpp:568
 #, kde-format
 msgid "New Payee"
 msgstr "Yeni Alacaklı"
@@ -6351,7 +6351,7 @@ msgstr "<b>%1</b> ögesini alacaklı/alıcı olarak eklemek istiyor musunuz?"
 msgid "Unable to add payee"
 msgstr "Alacaklı eklenemedi"
 
-#: kmymoney/kmymoneyutils.cpp:627 kmymoney/views/ktagsview.cpp:642
+#: kmymoney/kmymoneyutils.cpp:627 kmymoney/views/ktagsview.cpp:645
 #, kde-format
 msgid "New Tag"
 msgstr "Yeni Etiket"
@@ -20906,72 +20906,72 @@ msgstr "Ara"
 msgid "Ledgers"
 msgstr "Ana Hesap Defterleri"
 
-#: kmymoney/views/kmymoneyview.cpp:554
+#: kmymoney/views/kmymoneyview.cpp:556
 #, kde-format
 msgid "Show home page"
 msgstr "Ana sayfayı göster"
 
-#: kmymoney/views/kmymoneyview.cpp:555
+#: kmymoney/views/kmymoneyview.cpp:557
 #, kde-format
 msgid "Show institutions page"
 msgstr "Kurumlar sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:556
+#: kmymoney/views/kmymoneyview.cpp:558
 #, kde-format
 msgid "Show accounts page"
 msgstr "Hesaplar sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:557
+#: kmymoney/views/kmymoneyview.cpp:559
 #, kde-format
 msgid "Show scheduled transactions page"
 msgstr "Zamanlanmış aktarımlar sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:558
+#: kmymoney/views/kmymoneyview.cpp:560
 #, kde-format
 msgid "Show categories page"
 msgstr "Kategoriler sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:559
+#: kmymoney/views/kmymoneyview.cpp:561
 #, kde-format
 msgid "Show tags page"
 msgstr "Etiketler sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:560
+#: kmymoney/views/kmymoneyview.cpp:562
 #, kde-format
 msgid "Show payees page"
 msgstr "Ödeme yapanların sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:561
+#: kmymoney/views/kmymoneyview.cpp:563
 #, kde-format
 msgid "Show ledgers page"
 msgstr "Defterler sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:562
+#: kmymoney/views/kmymoneyview.cpp:564
 #, kde-format
 msgid "Show investments page"
 msgstr "Yatırımlar sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:563
+#: kmymoney/views/kmymoneyview.cpp:565
 #, kde-format
 msgid "Show reports page"
 msgstr "Raporlar sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:564
+#: kmymoney/views/kmymoneyview.cpp:566
 #, kde-format
 msgid "Show budget page"
 msgstr "Bütçe sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:565
+#: kmymoney/views/kmymoneyview.cpp:567
 #, kde-format
 msgid "Show forecast page"
 msgstr "Tahmin sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:566
+#: kmymoney/views/kmymoneyview.cpp:568
 #, kde-format
 msgid "Show outbox page"
 msgstr "Giden sayfasını göster"
 
-#: kmymoney/views/kpayeesview.cpp:155
+#: kmymoney/views/kpayeesview.cpp:158
 #, kde-format
 msgid ""
 "A payee with the name '%1' already exists. It is not advisable to have "
@@ -20982,40 +20982,40 @@ msgstr ""
 "sahip olması tavsiye edilen bir durum değildir. Alacaklının adını "
 "değiştirmek istediğinizden emin misiniz?"
 
-#: kmymoney/views/kpayeesview.cpp:159
+#: kmymoney/views/kpayeesview.cpp:162
 #, fuzzy, kde-format
 #| msgid "Duplicate open"
 msgctxt "@title:window"
 msgid "Duplicate payee name"
 msgstr "Üstüste açma"
 
-#: kmymoney/views/kpayeesview.cpp:183 kmymoney/views/kpayeesview.cpp:410
-#: kmymoney/views/kpayeesview.cpp:433
+#: kmymoney/views/kpayeesview.cpp:186 kmymoney/views/kpayeesview.cpp:413
+#: kmymoney/views/kpayeesview.cpp:436
 #, kde-format
 msgid "Unable to modify payee"
 msgstr "Alacaklı düzenlenemedi"
 
-#: kmymoney/views/kpayeesview.cpp:588
+#: kmymoney/views/kpayeesview.cpp:591
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "<p><b>%1</b> alacaklısını gerçekten silmek istiyor musunuz?</p>"
 
-#: kmymoney/views/kpayeesview.cpp:590
+#: kmymoney/views/kpayeesview.cpp:593
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr "Seçilen tüm alacaklıları gerçekten silmek istiyor musunuz?"
 
-#: kmymoney/views/kpayeesview.cpp:592
+#: kmymoney/views/kpayeesview.cpp:595
 #, kde-format
 msgid "Remove Payee"
 msgstr "Alacaklı sil"
 
-#: kmymoney/views/kpayeesview.cpp:606
+#: kmymoney/views/kpayeesview.cpp:609
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>Seçilen tüm alacaklıları gerçekten birleştirmek istiyor musunuz?"
 
-#: kmymoney/views/kpayeesview.cpp:607 kmymoney/views/kpayeesview_p.h:585
+#: kmymoney/views/kpayeesview.cpp:610 kmymoney/views/kpayeesview_p.h:585
 #, kde-format
 msgid "Merge Payees"
 msgstr "Alacaklıları Birleştir"
@@ -21577,12 +21577,12 @@ msgstr "Sekmeyi ikile"
 msgid "Unable to modify tag"
 msgstr "Etiket değiştirilemedi"
 
-#: kmymoney/views/ktagsview.cpp:813
+#: kmymoney/views/ktagsview.cpp:816
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "İşlem/bölüm etiketi yeniden atanamadı"
 
-#: kmymoney/views/ktagsview.cpp:825
+#: kmymoney/views/ktagsview.cpp:828
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Etiket(ler) silinemedi"
@@ -21706,54 +21706,54 @@ msgid ""
 "to current editor</a>"
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:860
+#: kmymoney/views/ledgerview.cpp:868
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "İşlemde bir kategori ataması eksik."
 
-#: kmymoney/views/ledgerview.cpp:867
+#: kmymoney/views/ledgerview.cpp:875
 #, fuzzy, kde-format
 #| msgid "The transaction has a missing assignment of <b>%1</b>."
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "İşlemde <b>%1</b> ataması eksik."
 
-#: kmymoney/views/ledgerview.cpp:876
+#: kmymoney/views/ledgerview.cpp:884
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:882
+#: kmymoney/views/ledgerview.cpp:890
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:887
+#: kmymoney/views/ledgerview.cpp:895
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:965
+#: kmymoney/views/ledgerview.cpp:973
 #, fuzzy, kde-format
 #| msgid "Checking for overdue scheduled transactions..."
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Vadesi geçmiş planlanmış işlemler kontrol ediliyor..."
 
-#: kmymoney/views/ledgerview.cpp:966
+#: kmymoney/views/ledgerview.cpp:974
 #, fuzzy, kde-format
 #| msgid "Enter scheduled transaction"
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Programlanmış işlem gir"
 
-#: kmymoney/views/ledgerview.cpp:969
+#: kmymoney/views/ledgerview.cpp:977
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -21761,7 +21761,7 @@ msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Seçilen fiyat girdisini gerçekten silmek istiyor musunuz?"
 
-#: kmymoney/views/ledgerview.cpp:970
+#: kmymoney/views/ledgerview.cpp:978
 #, fuzzy, kde-format
 #| msgctxt "Dialog caption for 'Enter or schedule' dialog"
 #| msgid "Enter or schedule?"
@@ -21769,7 +21769,7 @@ msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Gir ya da programla?"
 
-#: kmymoney/views/ledgerview.cpp:990
+#: kmymoney/views/ledgerview.cpp:998
 #, fuzzy, kde-format
 #| msgid ""
 #| "Use this to schedule the transaction for later entry into the ledger."
@@ -21779,7 +21779,7 @@ msgid ""
 "the ledger again."
 msgstr "Deftere sonradan girişi yapılacak işlemi planlamak için bunu kullan."
 
-#: kmymoney/views/ledgerview.cpp:992
+#: kmymoney/views/ledgerview.cpp:1000
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21787,7 +21787,7 @@ msgid ""
 "transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:996
+#: kmymoney/views/ledgerview.cpp:1004
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -21795,7 +21795,7 @@ msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Seçilen işlemi gerçekten silmek istiyor musunuz?"
 
-#: kmymoney/views/ledgerview.cpp:997
+#: kmymoney/views/ledgerview.cpp:1005
 #, fuzzy, kde-format
 #| msgid "Accept"
 msgctxt "@title:window"
@@ -21958,7 +21958,7 @@ msgstr "Bu aktarım için kullanılan check numarası."
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Check numarası <b>%1</b> bu hesapta zaten kullanıldı."
 
-#: kmymoney/views/newspliteditor.cpp:770
+#: kmymoney/views/newspliteditor.cpp:772
 #: kmymoney/views/newtransactioneditor.cpp:188
 #, fuzzy, kde-format
 #| msgid "Cannot remove transaction that references a closed account."
@@ -22156,7 +22156,7 @@ msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Fark: %1"
 
-#: kmymoney/views/simpleledgerview.cpp:362
+#: kmymoney/views/simpleledgerview.cpp:365
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -22164,7 +22164,7 @@ msgid ""
 "reconciling it. Finish, cancel or postpone the reconciliation to get it back."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:475
+#: kmymoney/views/simpleledgerview.cpp:478
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -22172,7 +22172,7 @@ msgid ""
 "text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:478
+#: kmymoney/views/simpleledgerview.cpp:481
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -22180,19 +22180,19 @@ msgid ""
 "this text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:752
+#: kmymoney/views/simpleledgerview.cpp:755
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:938
+#: kmymoney/views/simpleledgerview.cpp:941
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
 "cancel or postpone the reconciliation first."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:939
+#: kmymoney/views/simpleledgerview.cpp:942
 #, fuzzy, kde-format
 #| msgid "Closed tags cannot be used."
 msgctxt "@title:info In reconciliation"
