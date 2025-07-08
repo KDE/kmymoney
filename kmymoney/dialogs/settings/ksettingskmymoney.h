@@ -17,6 +17,13 @@ class KSettingsKMyMoney : public KConfigDialog
 public:
     explicit KSettingsKMyMoney(QWidget *parent, const QString &name, KCoreConfigSkeleton *config);
 
+protected:
+    /**
+     * @internal
+     */
+    void showEvent(QShowEvent* e) override;
+    void hideEvent(QHideEvent* e) override;
+
 Q_SIGNALS:
     void pluginsChanged();
 

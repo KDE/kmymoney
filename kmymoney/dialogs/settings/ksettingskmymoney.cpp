@@ -6,9 +6,21 @@
 
 #include "ksettingskmymoney.h"
 
-#include <QPushButton>
+// ----------------------------------------------------------------------------
+// QT Includes
 
+#include <QPushButton>
+#include <QShowEvent>
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+
+#include <KConfigGroup>
 #include <KLocalizedString>
+#include <KSharedConfig>
+
+// ----------------------------------------------------------------------------
+// Project Includes
 
 #include "ksettingsgeneral.h"
 #include "ksettingsregister.h"
@@ -76,6 +88,20 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
     // make sure both HideZeroBalanceAccountsHome checkboxes sync each other
     connect(generalPage, &KSettingsGeneral::hideZeroBalanceAccountsHomeChanged, homePage, &KSettingsHome::setHideZeroBalanceAccountsHome);
     connect(homePage, &KSettingsHome::hideZeroBalanceAccountsHomeChanged, generalPage, &KSettingsGeneral::setHideZeroBalanceAccountsHome);
+}
+
+void KSettingsKMyMoney::showEvent(QShowEvent* ev)
+{
+    auto grp = KSharedConfig::openConfig()->group("Last Use Settings");
+    restoreGeometry(grp.readEntry("KSettingsDialogGeometry", QByteArray()));
+    KConfigDialog::showEvent(ev);
+}
+
+void KSettingsKMyMoney::hideEvent(QHideEvent* ev)
+{
+    auto grp = KSharedConfig::openConfig()->group("Last Use Settings");
+    grp.writeEntry("KSettingsDialogGeometry", saveGeometry());
+    KConfigDialog::hideEvent(ev);
 }
 
 void KSettingsKMyMoney::slotEnableFinishButton(bool enable)
