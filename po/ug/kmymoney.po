@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-08 02:00+0000\n"
+"POT-Creation-Date: 2025-07-09 02:03+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -1949,7 +1949,7 @@ msgstr "ئۆزگەرت"
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsOnlineQuotes)
 #. i18n: ectx: property (text), widget (QPushButton, m_onlineQuoteButton)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:89
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:45
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:57
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:20
 #, kde-format
 msgid "Online Quotes"
@@ -3495,25 +3495,25 @@ msgid ""
 "icon theme to get wider selection.</p></body></html>"
 msgstr ""
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:41
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:53
 #, kde-format
 msgctxt "General settings"
 msgid "General"
 msgstr "ئادەتتىكى"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:42
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:54
 #: kmymoney/views/kmymoneyview.cpp:186
 #, kde-format
 msgid "Home"
 msgstr "ماكان"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:43
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:55
 #, kde-format
 msgctxt "Ledger view settings"
 msgid "Ledger"
 msgstr "ئانا ھېساب دەپتىرى"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:44
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:56
 #: kmymoney/views/kmymoneyview.cpp:189
 #, fuzzy, kde-format
 #| msgid "  Transactions"
@@ -3522,22 +3522,22 @@ msgid ""
 "transactions"
 msgstr "  سودا"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:46
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:58
 #, kde-format
 msgid "Colors"
 msgstr "رەڭلەر"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:47
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:59
 #, kde-format
 msgid "Fonts"
 msgstr "خەت نۇسخىلىرى"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:49
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:61
 #, kde-format
 msgid "Icons"
 msgstr "سىنبەلگىلەر"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:51
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:63
 #, kde-format
 msgid "Plugins"
 msgstr "قىستۇرما"

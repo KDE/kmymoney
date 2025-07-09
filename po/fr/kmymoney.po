@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-08 02:00+0000\n"
-"PO-Revision-Date: 2025-06-17 13:54+0200\n"
+"POT-Creation-Date: 2025-07-09 02:03+0000\n"
+"PO-Revision-Date: 2025-07-04 08:12+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 25.04.2\n"
+"X-Generator: Lokalize 25.04.3\n"
 "X-Text-Markup: kde4\n"
 
 #, kde-format
@@ -2103,7 +2103,7 @@ msgstr "Modifier"
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsOnlineQuotes)
 #. i18n: ectx: property (text), widget (QPushButton, m_onlineQuoteButton)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:89
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:45
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:57
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:20
 #, kde-format
 msgid "Online Quotes"
@@ -3737,25 +3737,25 @@ msgstr ""
 "<html><head/><body><p align=\"center\">Astuce : installez le thème d'icônes "
 "Oxygen, Tango ou Breeze pour découvrir un choix élargi.</p></body></html>"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:41
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:53
 #, kde-format
 msgctxt "General settings"
 msgid "General"
 msgstr "Général"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:42
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:54
 #: kmymoney/views/kmymoneyview.cpp:186
 #, kde-format
 msgid "Home"
 msgstr "Accueil"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:43
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:55
 #, kde-format
 msgctxt "Ledger view settings"
 msgid "Ledger"
 msgstr "Grand livre"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:44
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:56
 #: kmymoney/views/kmymoneyview.cpp:189
 #, kde-format
 msgid ""
@@ -3765,22 +3765,22 @@ msgstr ""
 "Opérations\n"
 "récurrentes"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:46
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:58
 #, kde-format
 msgid "Colors"
 msgstr "Couleurs"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:47
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:59
 #, kde-format
 msgid "Fonts"
 msgstr "Polices"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:49
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:61
 #, kde-format
 msgid "Icons"
 msgstr "Icônes"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:51
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:63
 #, kde-format
 msgid "Plugins"
 msgstr "Modules externes"
@@ -5427,7 +5427,7 @@ msgstr "Modifier l'ordre des onglets"
 #: kmymoney/kmymoney.cpp:1519
 #, kde-format
 msgid "Ledger Quick Open"
-msgstr ""
+msgstr "Ouverture rapide du grand livre"
 
 #: kmymoney/kmymoney.cpp:1521
 #, kde-format
@@ -8460,100 +8460,85 @@ msgid "HalfUp"
 msgstr "Arrondi supérieur"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:482
-#, fuzzy, kde-format
-#| msgid "ATM"
+#, kde-format
 msgctxt "Investment action"
 msgid "ATM"
 msgstr "DAB"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:486
-#, fuzzy, kde-format
-#| msgid "Add shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Add shares"
 msgstr "Ajouter des titres"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:490
-#, fuzzy, kde-format
-#| msgid "Amortization"
+#, kde-format
 msgctxt "Investment action"
 msgid "Amortization"
 msgstr "Amortissement"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:494
-#, fuzzy, kde-format
-#| msgid "Buy shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Buy shares"
 msgstr "Acheter des titres"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:498
-#, fuzzy, kde-format
-#| msgctxt "noun, cheque, check"
-#| msgid "check"
+#, kde-format
 msgctxt "Investment action"
 msgid "Check"
-msgstr "chèque"
+msgstr "Chèque"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:502
-#, fuzzy, kde-format
-#| msgid "Deposit"
+#, kde-format
 msgctxt "Investment action"
 msgid "Deposit"
 msgstr "Dépôt"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:506
-#, fuzzy, kde-format
-#| msgid "Dividend"
+#, kde-format
 msgctxt "Investment action"
 msgid "Dividend"
 msgstr "Dividendes"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:510
-#, fuzzy, kde-format
-#| msgid "Interest"
+#, kde-format
 msgctxt "Investment action"
 msgid "Interest"
 msgstr "Intérêts"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:514
-#, fuzzy, kde-format
-#| msgid "Interest Income"
+#, kde-format
 msgctxt "Investment action"
 msgid "Interest income"
 msgstr "Revenu d'intérêt"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:518
-#, fuzzy, kde-format
-#| msgid "Reinvest dividend"
+#, kde-format
 msgctxt "Investment action"
 msgid "Reinvest dividends"
-msgstr "Réinvestir le dividende"
+msgstr "Réinvestir les dividendes"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:523
-#, fuzzy, kde-format
-#| msgid "Split shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Split shares"
 msgstr "Fractionner les titres"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:527
-#, fuzzy, kde-format
-#| msgid "Transfer"
+#, kde-format
 msgctxt "Investment action"
 msgid "Transfer"
 msgstr "Virement"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:531
-#, fuzzy, kde-format
-#| msgid "Withdrawal"
+#, kde-format
 msgctxt "Investment action"
 msgid "Withdrawal"
 msgstr "Retrait"
 
 #: kmymoney/mymoney/mymoneysplit.cpp:535
-#, fuzzy, kde-format
-#| msgid "Yield"
+#, kde-format
 msgctxt "Investment action"
 msgid "Yield"
 msgstr "Rendement"
@@ -16456,8 +16441,7 @@ msgstr "Semaine de %1"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:795
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1999
-#, fuzzy, kde-format
-#| msgid "Sell shares"
+#, kde-format
 msgctxt "Investment action"
 msgid "Sell shares"
 msgstr "Vendre des titres"
