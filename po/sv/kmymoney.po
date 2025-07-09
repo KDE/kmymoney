@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-08 03:35+0000\n"
+"POT-Creation-Date: 2025-07-09 03:34+0000\n"
 "PO-Revision-Date: 2025-06-30 19:10+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -2057,7 +2057,7 @@ msgstr "Ändra"
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsOnlineQuotes)
 #. i18n: ectx: property (text), widget (QPushButton, m_onlineQuoteButton)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:89
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:45
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:57
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:20
 #, kde-format
 msgid "Online Quotes"
@@ -3667,25 +3667,25 @@ msgstr ""
 "<html><head/><body><p align=\"center\">Tips: Installera ikontemat Oxygen "
 "Tango eller Breeze för att få ett större urval.</p></body></html>"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:41
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:53
 #, kde-format
 msgctxt "General settings"
 msgid "General"
 msgstr "Allmänt"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:42
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:54
 #: kmymoney/views/kmymoneyview.cpp:186
 #, kde-format
 msgid "Home"
 msgstr "Hem"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:43
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:55
 #, kde-format
 msgctxt "Ledger view settings"
 msgid "Ledger"
 msgstr "Huvudbok"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:44
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:56
 #: kmymoney/views/kmymoneyview.cpp:189
 #, kde-format
 msgid ""
@@ -3695,22 +3695,22 @@ msgstr ""
 "Schemalagda\n"
 "transaktioner"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:46
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:58
 #, kde-format
 msgid "Colors"
 msgstr "Färger"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:47
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:59
 #, kde-format
 msgid "Fonts"
 msgstr "Teckensnitt"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:49
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:61
 #, kde-format
 msgid "Icons"
 msgstr "Ikoner"
 
-#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:51
+#: kmymoney/dialogs/settings/ksettingskmymoney.cpp:63
 #, kde-format
 msgid "Plugins"
 msgstr "Insticksprogram"
