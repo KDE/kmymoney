@@ -29,6 +29,7 @@ parts:
     build-packages:
       - libassuan-dev
       - libgpg-error-dev
+      - qtchooser
       - rsync
     stage-packages:
       - libassuan0
