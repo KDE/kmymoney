@@ -30,6 +30,7 @@ class KTagReassignDlg;
  *  to re-assign transactions (for instance, if tags are deleted).
  */
 class QSortFilterProxyModel;
+class KTagReassignDlgPrivate;
 class KMM_BASE_DIALOGS_EXPORT KTagReassignDlg : public QDialog
 {
     Q_OBJECT
@@ -60,8 +61,7 @@ public:
     QString reassignTo() const;
 
 private:
-    Ui::KTagReassignDlg *ui;
-    QSortFilterProxyModel* model;
+    KTagReassignDlgPrivate* d;
 };
 
 #endif // KTAGREASSIGNDLG_H
