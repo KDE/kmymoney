@@ -505,3 +505,57 @@ void MyMoneyTransactionTest::testReplaceId()
         unexpectedException(e);
     }
 }
+
+void MyMoneyTransactionTest::testInvalidSigns()
+{
+    MyMoneySplit s;
+
+    // test adding
+    s.setAccountId("A0001");
+    s.setShares(MyMoneyMoney(1, 2));
+    s.setValue(-s.shares());
+    try {
+        m->addSplit(s);
+        QFAIL("Missing expected exception");
+    } catch (const MyMoneyException&) {
+    }
+
+    s.setShares(MyMoneyMoney(-1, 2));
+    s.setValue(-s.shares());
+    try {
+        m->addSplit(s);
+        QFAIL("Missing expected exception");
+    } catch (const MyMoneyException&) {
+    }
+
+    s.setValue(s.shares());
+    try {
+        m->addSplit(s);
+    } catch (const MyMoneyException& e) {
+        unexpectedException(e);
+    }
+
+    // test modifying
+    s.setShares(MyMoneyMoney(1, 2));
+    s.setValue(-s.shares());
+    try {
+        m->modifySplit(s);
+        QFAIL("Missing expected exception");
+    } catch (const MyMoneyException&) {
+    }
+
+    s.setShares(MyMoneyMoney(-1, 2));
+    s.setValue(-s.shares());
+    try {
+        m->modifySplit(s);
+        QFAIL("Missing expected exception");
+    } catch (const MyMoneyException&) {
+    }
+
+    s.setValue(s.shares());
+    try {
+        m->modifySplit(s);
+    } catch (const MyMoneyException& e) {
+        unexpectedException(e);
+    }
+}

@@ -205,6 +205,10 @@ void MyMoneyTransaction::addSplit(MyMoneySplit &split)
     if (split.accountId().isEmpty())
         throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot add split that does not contain an account reference to transaction %1").arg(id()));
 
+    if (!split.signsValid()) {
+        throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot add split where sign of shares differs from sign of value to transaction %1").arg(id()));
+    }
+
     Q_D(MyMoneyTransaction);
     MyMoneySplit newSplit(d->nextSplitID(), split);
     split = newSplit;
@@ -219,6 +223,10 @@ void MyMoneyTransaction::modifySplit(const MyMoneySplit& split)
 // the same account.
     if (split.accountId().isEmpty())
         throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot modify split that does not contain an account reference in transaction %1").arg(id()));
+
+    if (!split.signsValid()) {
+        throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot modify split where sign of shares differs from sign of value in transaction %1").arg(id()));
+    }
 
     Q_D(MyMoneyTransaction);
     for (auto& it_split : d->m_splits) {

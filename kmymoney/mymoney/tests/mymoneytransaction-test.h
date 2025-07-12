@@ -46,5 +46,6 @@ private Q_SLOTS:
     void testAddMissingAccountId();
     void testModifyMissingAccountId();
     void testReplaceId();
+    void testInvalidSigns();
 };
 #endif

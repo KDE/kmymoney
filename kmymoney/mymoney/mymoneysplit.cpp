@@ -542,3 +542,13 @@ QString MyMoneySplit::actionI18nName(const QString& text)
 {
     return actionI18nName(actionStringToAction(text));
 }
+
+bool MyMoneySplit::signsValid() const
+{
+    if (!(shares().isZero() || value().isZero())) {
+        if ((shares().isNegative() ^ value().isNegative()) || (shares().isPositive() ^ value().isPositive())) {
+            return false;
+        }
+    }
+    return true;
+}

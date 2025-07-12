@@ -202,6 +202,14 @@ public:
      */
     bool replaceId(const QString& newId, const QString& oldId);
 
+    /**
+     * This method checks that the sign of the shares matches the sign of the value
+     *
+     * @return true if shares and values are both positive or negative
+     * @return false if that is not the case
+     */
+    bool signsValid() const;
+
     static QString actionName(eMyMoney::Split::Action action);
     static QString actionI18nName(eMyMoney::Split::Action action);
     static QString actionI18nName(const QString& text);
