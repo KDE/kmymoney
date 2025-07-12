@@ -3348,8 +3348,30 @@ QStringList MyMoneyFile::consistencyCheck()
                 // make sure that shares and value have the same sign
                 if (!(s.shares().isZero() || s.value().isZero())) {
                     if ((s.shares().isNegative() ^ s.value().isNegative()) || (s.shares().isPositive() ^ s.value().isPositive())) {
-                        rc << i18n("  * Split %2 in transaction '%1' contains different signs for shares and value. Please fix manually.", t.id(), split.id());
-                        ++unfixedCount;
+                        rc << i18n("  * Split %2 in transaction '%1' contains different signs for shares and value.", t.id(), split.id());
+                        // in case it is an imported (bankId not empty) reinvestmend dividend with positive shares
+                        // and negative value we simply invert the value sign and make sure the counter split is
+                        // also adjusted
+                        if ((s.investmentTransactionType() == eMyMoney::Split::InvestmentTransactionType::ReinvestDividend) && !s.bankID().isEmpty()
+                            && s.value().isNegative() && s.shares().isPositive() && (t.splitCount() == 2)) {
+                            s.setValue(-s.value());
+                            sChanged = true;
+                            const auto splitSet = t.splits();
+                            for (auto counterSplit : splitSet) {
+                                if (counterSplit.id() != s.id()) {
+                                    counterSplit.setShares(-counterSplit.shares());
+                                    counterSplit.setValue(-counterSplit.value());
+                                    t.modifySplit(counterSplit);
+                                    break;
+                                }
+                            }
+                            rc << i18n("    Reinvestment transaction '%1' fixed.", t.id(), split.id());
+                            ++problemCount;
+
+                        } else {
+                            rc << i18n("    Please fix manually.");
+                            ++unfixedCount;
+                        }
                     }
                 }
 
