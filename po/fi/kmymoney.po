@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-09 02:03+0000\n"
-"PO-Revision-Date: 2025-02-21 17:01+0200\n"
+"PO-Revision-Date: 2025-07-11 11:56+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -56,8 +56,7 @@ msgid "Invalid Statement"
 msgstr "Virheellinen tiliote"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:485
-#, fuzzy, kde-format
-#| msgid "No Institution"
+#, kde-format
 msgctxt "@info Group name for accounts with no assigned institution"
 msgid "No institution"
 msgstr "Ei rahalaitosta"
@@ -432,11 +431,10 @@ msgstr[1] "%1 tiliotetta on käsitelty seuraavin tuloksin:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ImportSummaryDialog)
 #: kmymoney/dialogs/importsummarydlg.ui:14
-#, fuzzy, kde-format
-#| msgid "Imported History"
+#, kde-format
 msgctxt "@title:window"
 msgid "Import summary"
-msgstr "Tuotu historia"
+msgstr "Tuonnin yhteenveto"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonSkip)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonCancel)
@@ -1726,6 +1724,9 @@ msgid ""
 "loaded if you have used it for a successful price update. Otherwise, the old "
 "setting will be shown."
 msgstr ""
+"Seuraavan kerran tätä ikkunaa avattaessa muokattu hintalähde ladataan vain, "
+"jos sitä on käytetty onnistuneeseen hintapäivitykseen. Muulloin näytetään "
+"vanha asetus."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KEquityPriceUpdateDlg)
 #: kmymoney/dialogs/kequitypriceupdatedlg.ui:15
@@ -3160,10 +3161,9 @@ msgstr "Automaattitallennus sulkemisen yhteydessä kun tiedostoa on muutettu"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_3)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:102
-#, fuzzy, kde-format
-#| msgid "Backup location:"
+#, kde-format
 msgid "Backup options"
-msgstr "Varmuuskopioiden sijainti:"
+msgstr "Varmuuskopiovalinnat"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, kcfg_BackupExtension)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:112
@@ -3171,6 +3171,7 @@ msgstr "Varmuuskopioiden sijainti:"
 msgid ""
 "Enter a character or string that will be added to backup files. Default is ~"
 msgstr ""
+"Anna merkki(jono), joka lisätään varmuuskopiotiedostojen nimiin. Oletus on ~"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_AutoBackupCopies)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:122
@@ -3196,7 +3197,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:146
 #, kde-format
 msgid "Extension for backup files"
-msgstr ""
+msgstr "Varmuuskopiotiedostojen pääte"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:153
@@ -3407,17 +3408,15 @@ msgstr "Näytä tilinäkymässä luokat"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccountsHome)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:450
 #: kmymoney/dialogs/settings/ksettingshome.ui:238
-#, fuzzy, kde-format
-#| msgid "Hide liability accounts with zero balance"
+#, kde-format
 msgid "Hide accounts with a zero balance from Home"
-msgstr "Piilota nollataseiset velkatilit"
+msgstr "Piilota kotoa nollataseiset tilit"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:457
-#, fuzzy, kde-format
-#| msgid "Hide liability accounts with zero balance"
+#, kde-format
 msgid "Hide accounts with a zero balance from Accounts"
-msgstr "Piilota nollataseiset velkatilit"
+msgstr "Piilota tileistä nollataseiset tilit"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:464
@@ -4542,10 +4541,9 @@ msgstr ""
 "parannusehdotuksia."
 
 #: kmymoney/kcreditswindow.cpp:45
-#, fuzzy, kde-format
-#| msgid "(c) 2000-2024 The KMyMoney development team"
+#, kde-format
 msgid "(c) 2000-2025 The KMyMoney development team"
-msgstr "© 2000–2024 KMyMoney-kehitysryhmä"
+msgstr "© 2000–2025 KMyMoney-kehitysryhmä"
 
 #: kmymoney/kcreditswindow.cpp:49
 #, kde-format
@@ -4758,7 +4756,7 @@ msgstr "Nimetön"
 #: kmymoney/kmymoney.cpp:762
 #, kde-format
 msgid "Plugin responded with error during close."
-msgstr ""
+msgstr "Suljettaessa liitännäinen vastasi virheellä."
 
 #: kmymoney/kmymoney.cpp:870
 #, kde-format
@@ -5355,22 +5353,19 @@ msgid "Start reconciling the currently selected account"
 msgstr "Monista nykyiset valitut tapahtumat"
 
 #: kmymoney/kmymoney.cpp:1671
-#, fuzzy, kde-format
-#| msgid "Postpone reconciliation"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Postpone the current reconciliation"
 msgstr "Lykkää yhteensovittamista"
 
 #: kmymoney/kmymoney.cpp:1672
-#, fuzzy, kde-format
-#| msgid "Report reconciliation"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Finish the current reconciliation"
-msgstr "Raportoi yhteensovitus"
+msgstr "Viimeistele yhteensovitus"
 
 #: kmymoney/kmymoney.cpp:1673
-#, fuzzy, kde-format
-#| msgid "Cancel reconciliation"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Cancel the current reconciliation"
 msgstr "Peru yhteensovitus"
@@ -5569,11 +5564,12 @@ msgstr "Tiedostonimi käytössä jo"
 msgid ""
 "This will hide the menu bar completely. You can show it again by typing %1."
 msgstr ""
+"Tämä piilottaa valikkorivin täysin. Uudelleen sen saa näkyviin painamalla %1."
 
 #: kmymoney/kmymoney.cpp:3269
 #, kde-format
 msgid "Hide menu bar"
-msgstr ""
+msgstr "Piilota valikkorivi"
 
 #: kmymoney/kmymoney.cpp:3379
 #, kde-format
@@ -5821,7 +5817,7 @@ msgstr "Tiedostoa ei löydy"
 #, kde-format
 msgctxt "@title:window"
 msgid "Problem opening storage"
-msgstr ""
+msgstr "Virhe avattaessa talletustilaa"
 
 #: kmymoney/kmymoney.cpp:4322
 #, kde-format
@@ -6415,30 +6411,25 @@ msgid "Name"
 msgstr "Nimi"
 
 #: kmymoney/models/statementmodel.cpp:95
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "@title:column Shows the date of statement"
 msgid "Date"
-msgstr "Päivämäärä"
+msgstr "Päiväys"
 
 #: kmymoney/models/statementmodel.cpp:97
-#, fuzzy, kde-format
-#| msgid "Balance"
+#, kde-format
 msgctxt "@title:column Shows statement balance"
 msgid "Balance"
-msgstr "Yhteensä"
+msgstr "Saldo"
 
 #: kmymoney/models/statementmodel.cpp:99
-#, fuzzy, kde-format
-#| msgid "    %1 processed"
-#| msgid_plural "    %1 processed"
+#, kde-format
 msgctxt "@title:column Shows number of transactions read"
 msgid "Processed"
-msgstr "    %1 käsitelty"
+msgstr "Käsitelty"
 
 #: kmymoney/models/statementmodel.cpp:101
-#, fuzzy, kde-format
-#| msgid "Imported"
+#, kde-format
 msgctxt "@title:column Shows number of imported transactions"
 msgid "Imported"
 msgstr "Tuotu"
@@ -6451,19 +6442,16 @@ msgid "Matched"
 msgstr "Sovitettu"
 
 #: kmymoney/models/statementmodel.cpp:105
-#, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
-#| msgid "Duplicate"
+#, kde-format
 msgctxt "@title:column Shows number of duplicate transactions"
 msgid "Duplicates"
-msgstr "Monista"
+msgstr "Kaksoiskappaleet"
 
 #: kmymoney/models/statementmodel.cpp:107
-#, fuzzy, kde-format
-#| msgid "Payee creation"
+#, kde-format
 msgctxt "@title:column Shows number of create payees"
 msgid "Payees created"
-msgstr "Maksunsaajan luonti"
+msgstr "Maksunsaajia luotu"
 
 #: kmymoney/models/statementmodel.cpp:117
 #: kmymoney/mymoney/storage/accountsmodel.cpp:503
@@ -6796,6 +6784,8 @@ msgid ""
 "  * Payee %1 has BIC with invalid length '%2'.\n"
 "    Must be 11 chars and is %3"
 msgstr ""
+"  * Maksunsaajan %1 BIC (”%2”) on väärän pituinen.\n"
+"    Pituuden tulisi olla 11 merkkiä, on %3"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3227
 #, kde-format
@@ -6823,10 +6813,9 @@ msgstr ""
 "== 0."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3278
-#, fuzzy, kde-format
-#| msgid " - Account Name: %1"
+#, kde-format
 msgid "    Account: %1, Amount: %2"
-msgstr " – Tilin nimi: %1"
+msgstr "    Tili: %1, määrä: %2"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3289
 #, kde-format
@@ -16721,10 +16710,9 @@ msgid "&Export to PDF files"
 msgstr "Vie PD&F-tiedostoiksi"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:822
-#, fuzzy, kde-format
-#| msgid "Export report"
+#, kde-format
 msgid "Export into directory"
-msgstr "Vie raportti"
+msgstr "Vie kansioon"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KReportsView)
 #: kmymoney/plugins/views/reports/kreportsview.ui:14
@@ -21328,7 +21316,7 @@ msgstr "Kustannuspaikka"
 #, kde-format
 msgctxt "@info:tooltip Tag entry widget"
 msgid "This widget is disabled because you need to select a category first."
-msgstr ""
+msgstr "Tämä alkio ei ole käytössä, koska ensin pitää valita luokka."
 
 #: kmymoney/views/newtransactioneditor.cpp:179
 #, fuzzy, kde-format
