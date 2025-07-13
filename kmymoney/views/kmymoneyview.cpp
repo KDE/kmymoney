@@ -439,6 +439,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
         pActions[eMenu::Action::SelectAllTransactions]->setEnabled(true);
         if (selections.selection(SelectedObjects::JournalEntry).isEmpty()) {
             pActions[eMenu::Action::EditTransaction]->setDisabled(true);
+            pActions[eMenu::Action::ToggleReconciliationFlag]->setDisabled(true);
             pActions[eMenu::Action::EditSplits]->setDisabled(true);
             pActions[eMenu::Action::DeleteTransaction]->setDisabled(true);
             pActions[eMenu::Action::DuplicateTransaction]->setDisabled(true);
@@ -449,13 +450,14 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
         } else {
             const auto warnLevel = MyMoneyUtils::transactionWarnLevel(selections.selection(SelectedObjects::JournalEntry));
             pActions[eMenu::Action::EditTransaction]->setEnabled(true);
+            pActions[eMenu::Action::ToggleReconciliationFlag]->setEnabled(true);
             pActions[eMenu::Action::EditSplits]->setEnabled(selections.selection(SelectedObjects::JournalEntry).count() == 1);
             pActions[eMenu::Action::DeleteTransaction]->setEnabled(warnLevel <= OneSplitReconciled);
             pActions[eMenu::Action::DuplicateTransaction]->setEnabled(warnLevel <= OneSplitReconciled);
             pActions[eMenu::Action::AddReversingTransaction]->setEnabled(warnLevel <= OneSplitReconciled);
             pActions[eMenu::Action::DisplayTransactionDetails]->setEnabled(true);
             pActions[eMenu::Action::CopySplits]->setDisabled(true);
-            pActions[eMenu::Action::MoveToToday]->setEnabled(true);
+            pActions[eMenu::Action::MoveToToday]->setEnabled(warnLevel <= OneSplitFrozen);
             // TODO: limit to transactions with a related payee
             pActions[eMenu::Action::TransactionOpenURL]->setEnabled(true);
 
