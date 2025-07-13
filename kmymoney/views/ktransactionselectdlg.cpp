@@ -64,6 +64,8 @@ KTransactionSelectDlg::KTransactionSelectDlg(QWidget* parent)
     // we don't allow editing in this dialog
     d->filterModel->setLedgerIsEditable(false);
 
+    ledgerView()->viewport()->installEventFilter(this);
+
     QVector<int> columns;
     columns = {
         JournalModel::Column::Invisible,
@@ -124,6 +126,18 @@ LedgerView* KTransactionSelectDlg::ledgerView() const
 {
     Q_D(const KTransactionSelectDlg);
     return d->ui->m_ledgerView;
+}
+
+bool KTransactionSelectDlg::eventFilter(QObject* o, QEvent* e)
+{
+    Q_D(KTransactionSelectDlg);
+    if (o == d->ui->m_ledgerView->viewport()) {
+        if (e->type() == QEvent::MouseButtonDblClick) {
+            accept();
+            return true;
+        }
+    }
+    return QDialog::eventFilter(o, e);
 }
 
 KTransactionMergeDlg::KTransactionMergeDlg(QWidget* parent)
