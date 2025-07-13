@@ -34,6 +34,8 @@ public:
 
     void addTransaction(const QString& journalEntryId);
 
+    void addTransactions(const QStringList& journalEntryIds);
+
     QString journalEntryId() const;
 
     LedgerView* ledgerView() const;

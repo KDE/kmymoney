@@ -557,7 +557,7 @@ void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
 {
     struct uniqTransaction {
         QString journalEntryId;
-        MyMoneyTransaction transaction;
+        MyMoneyMoney amount;
         int matches;
     };
 
@@ -589,22 +589,24 @@ void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
         // collect the journal entries and see if we have any duplicates
         for (const auto& journalEntryId : journalEntryIds) {
             const auto journalEntry = journalModel->itemById(journalEntryId);
+            const auto accountSignature = journalEntry.transaction().accountSignature();
+            const auto sharesSum = sumOfShares(journalEntry.transaction(), m_account.id());
             int cnt = 0;
             QMap<QString, struct uniqTransaction>::iterator it_u;
             do {
-                QString ukey = QString("%1-%2").arg(journalEntry.transaction().accountSignature()).arg(cnt);
+                const QString ukey = QString("%1-%2").arg(accountSignature, cnt);
                 it_u = uniqList.find(ukey);
                 if (it_u == uniqList.end()) {
                     uniqList[ukey].journalEntryId = journalEntryId;
-                    uniqList[ukey].transaction = journalEntry.transaction();
+                    uniqList[ukey].amount = sumOfShares(journalEntry.transaction(), m_account.id());
                     uniqList[ukey].matches = 1;
 
                 } else if (autoFillMethod == AutoFillMethod::AutoFillWithClosestInValue) {
                     // we already have a transaction with this signature. we must
                     // now check, if we should really treat it as a duplicate according
                     // to the value comparison delta.
-                    MyMoneyMoney s1 = sumOfShares(((*it_u).transaction), m_account.id());
-                    MyMoneyMoney s2 = sumOfShares(journalEntry.transaction(), m_account.id());
+                    MyMoneyMoney s1 = (*it_u).amount;
+                    MyMoneyMoney s2 = sharesSum;
                     if (s2.abs() > s1.abs()) {
                         MyMoneyMoney t(s1);
                         s1 = s2;
@@ -618,12 +620,12 @@ void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
                     }
                     if (diff.isPositive() && diff <= MyMoneyMoney(KMyMoneySettings::autoFillDifference(), 100)) {
                         uniqList[ukey].journalEntryId = journalEntryId;
-                        uniqList[ukey].transaction = journalEntry.transaction();
+                        uniqList[ukey].amount = sumOfShares(journalEntry.transaction(), m_account.id());
                         break; // end while loop
                     }
                 } else if (autoFillMethod == AutoFillMethod::AutoFillWithMostOftenUsed) {
                     uniqList[ukey].journalEntryId = journalEntryId;
-                    uniqList[ukey].transaction = journalEntry.transaction();
+                    uniqList[ukey].amount = sumOfShares(journalEntry.transaction(), m_account.id());
                     (*it_u).matches++;
                     break; // end while loop
                 }
@@ -637,9 +639,11 @@ void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
             dlg->setWindowTitle(i18nc("@title:window Autofill selection dialog", "Select autofill transaction"));
 
             QMap<QString, struct uniqTransaction>::const_iterator it_u;
+            QStringList journalEntryIdCollection;
             for (it_u = uniqList.cbegin(); it_u != uniqList.cend(); ++it_u) {
-                dlg->addTransaction((*it_u).journalEntryId);
+                journalEntryIdCollection << (*it_u).journalEntryId;
             }
+            dlg->addTransactions(journalEntryIdCollection);
 
             // Sort by
             // - ascending post date

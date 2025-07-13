@@ -104,6 +104,12 @@ void KTransactionSelectDlg::addTransaction(const QString& journalEntryId)
     d->filterModel->appendFilterFixedString(journalEntryId);
 }
 
+void KTransactionSelectDlg::addTransactions(const QStringList& journalEntryIds)
+{
+    Q_D(KTransactionSelectDlg);
+    d->filterModel->setFilterFixedStrings(journalEntryIds);
+}
+
 QString KTransactionSelectDlg::journalEntryId() const
 {
     Q_D(const KTransactionSelectDlg);
