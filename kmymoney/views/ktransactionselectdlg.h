@@ -41,6 +41,8 @@ public:
     LedgerView* ledgerView() const;
 
 protected:
+    bool eventFilter(QObject* o, QEvent* e) override;
+
     KTransactionSelectDlgPrivate* const d_ptr;
     Q_DECLARE_PRIVATE(KTransactionSelectDlg)
 };
