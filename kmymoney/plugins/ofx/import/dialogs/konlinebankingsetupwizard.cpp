@@ -65,6 +65,15 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget* parent)
     m_appId = new OfxAppVersion(m_applicationCombo, m_applicationEdit, "");
     m_headerVersion = new OfxHeaderVersion(m_headerVersionCombo, "");
 
+    // set password field according to KDE preferences
+    m_editPassword->setEchoMode(QLineEdit::EchoMode::PasswordEchoOnEdit);
+    new PasswordToggle(m_editPassword);
+
+    // make sure to not exceed data fields
+    m_editUsername->setMaxLength(OFX_USERID_LENGTH - 1);
+    m_editPassword->setMaxLength(OFX_USERPASS_LENGTH - 1);
+
+#if 0
     // fill the list view with banks
     QProgressDialog* dlg = new QProgressDialog(this);
     dlg->setWindowTitle(i18n("Loading banklist"));
@@ -76,22 +85,15 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget* parent)
     dlg->setMinimumDuration(0);
     QCoreApplication::processEvents();
 
-    //set password field according to KDE preferences
-    m_editPassword->setEchoMode(QLineEdit::EchoMode::PasswordEchoOnEdit);
-    new PasswordToggle(m_editPassword);
-
-    // make sure to not exceed data fields
-    m_editUsername->setMaxLength(OFX_USERID_LENGTH-1);
-    m_editPassword->setMaxLength(OFX_USERPASS_LENGTH-1);
-
     KListWidgetSearchLine* searchLine = new KListWidgetSearchLine(autoTab, m_listFi);
     vboxLayout1->insertWidget(0, searchLine);
     QTimer::singleShot(20, searchLine, SLOT(setFocus()));
 
     OfxPartner::setDirectory(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QLatin1Char('/') + "");
     m_listFi->addItems(OfxPartner::BankNames());
-    m_fInit = true;
     delete dlg;
+#endif
+    m_fInit = true;
 
     checkNextButton();
     connect(this, &KOnlineBankingSetupWizard::currentIdChanged, this, &KOnlineBankingSetupWizard::checkNextButton);
@@ -118,6 +120,12 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget* parent)
     button(QWizard::NextButton)->setIcon(KStandardGuiItem::forward(KStandardGuiItem::UseRTL).icon());
     button(QWizard::BackButton)->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
 
+    // don't show ofxhome.com stuff anymore (but keep it around)
+    m_selectionTab->setCurrentIndex(1);
+    m_selectionTab->tabBar()->hide();
+    m_instructionLabel->setText(
+        i18nc("@title:group Manual enter OFX details", "Please provide the details for your financial institution in the fields below."));
+
     m_problemMessages->setHidden(true);
     m_problemMessages->setWordWrap(true);
 }
@@ -142,8 +150,7 @@ void KOnlineBankingSetupWizard::checkNextButton()
         if (m_selectionTab->currentIndex() == 0) {
             enableButton = (m_listFi->currentItem() != nullptr) && m_listFi->currentItem()->isSelected();
         } else {
-            enableButton = !(m_url->url().isEmpty()
-                             || m_bankName->text().isEmpty());
+            enableButton = !(m_url->url().isEmpty() || m_fid->text().isEmpty() || m_bankName->text().isEmpty());
         }
         break;
 
