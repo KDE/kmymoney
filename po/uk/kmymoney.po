@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-13 01:58+0000\n"
-"PO-Revision-Date: 2025-07-04 09:28+0300\n"
+"POT-Creation-Date: 2025-07-14 02:15+0000\n"
+"PO-Revision-Date: 2025-07-13 16:07+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -6919,27 +6919,21 @@ msgid "  * value set to shares in split of transaction '%1'."
 msgstr "  * У дробленні операції «%1» значення встановлено у акціях."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3351
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Split %2 in transaction '%1' contains different signs for shares and "
-#| "value. Please fix manually."
+#, kde-format
 msgid ""
 "  * Split %2 in transaction '%1' contains different signs for shares and "
 "value."
-msgstr ""
-"  * Дроблення %2 у операції «%1» містить різні знаки для акцій і ціни. Будь "
-"ласка, виправте помилку вручну."
+msgstr "  * Дроблення %2 у операції «%1» містить різні знаки для акцій і ціни."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3368
-#, fuzzy, kde-format
-#| msgid "Investment transaction"
+#, kde-format
 msgid "    Reinvestment transaction '%1' fixed."
-msgstr "Операція з інвестування"
+msgstr "    Операцію з повторного інвестування «%1» виправлено."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3372
 #, kde-format
 msgid "    Please fix manually."
-msgstr ""
+msgstr "    Будь ласка, виправте вручну."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3385
 #, kde-format
@@ -20468,67 +20462,67 @@ msgstr "Шукати…"
 msgid "Ledgers"
 msgstr "Облікові книги"
 
-#: kmymoney/views/kmymoneyview.cpp:556
+#: kmymoney/views/kmymoneyview.cpp:558
 #, kde-format
 msgid "Show home page"
 msgstr "Показати домашню сторінку"
 
-#: kmymoney/views/kmymoneyview.cpp:557
+#: kmymoney/views/kmymoneyview.cpp:559
 #, kde-format
 msgid "Show institutions page"
 msgstr "Показати сторінку установ"
 
-#: kmymoney/views/kmymoneyview.cpp:558
+#: kmymoney/views/kmymoneyview.cpp:560
 #, kde-format
 msgid "Show accounts page"
 msgstr "Показати сторінку рахунків"
 
-#: kmymoney/views/kmymoneyview.cpp:559
+#: kmymoney/views/kmymoneyview.cpp:561
 #, kde-format
 msgid "Show scheduled transactions page"
 msgstr "Показати сторінку запланованих операцій"
 
-#: kmymoney/views/kmymoneyview.cpp:560
+#: kmymoney/views/kmymoneyview.cpp:562
 #, kde-format
 msgid "Show categories page"
 msgstr "Показати сторінку категорій"
 
-#: kmymoney/views/kmymoneyview.cpp:561
+#: kmymoney/views/kmymoneyview.cpp:563
 #, kde-format
 msgid "Show tags page"
 msgstr "Показати сторінку міток"
 
-#: kmymoney/views/kmymoneyview.cpp:562
+#: kmymoney/views/kmymoneyview.cpp:564
 #, kde-format
 msgid "Show payees page"
 msgstr "Показати сторінку отримувачів"
 
-#: kmymoney/views/kmymoneyview.cpp:563
+#: kmymoney/views/kmymoneyview.cpp:565
 #, kde-format
 msgid "Show ledgers page"
 msgstr "Показати сторінку облікових книг"
 
-#: kmymoney/views/kmymoneyview.cpp:564
+#: kmymoney/views/kmymoneyview.cpp:566
 #, kde-format
 msgid "Show investments page"
 msgstr "Показати сторінку інвестицій"
 
-#: kmymoney/views/kmymoneyview.cpp:565
+#: kmymoney/views/kmymoneyview.cpp:567
 #, kde-format
 msgid "Show reports page"
 msgstr "Показати сторінку звітів"
 
-#: kmymoney/views/kmymoneyview.cpp:566
+#: kmymoney/views/kmymoneyview.cpp:568
 #, kde-format
 msgid "Show budget page"
 msgstr "Показати сторінку бюджету"
 
-#: kmymoney/views/kmymoneyview.cpp:567
+#: kmymoney/views/kmymoneyview.cpp:569
 #, kde-format
 msgid "Show forecast page"
 msgstr "Показати сторінку прогнозів"
 
-#: kmymoney/views/kmymoneyview.cpp:568
+#: kmymoney/views/kmymoneyview.cpp:570
 #, kde-format
 msgid "Show outbox page"
 msgstr "Показати сторінку вихідних"
@@ -21142,12 +21136,12 @@ msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
 msgstr "Виберіть операцію, яку слід використати як шаблон."
 
-#: kmymoney/views/ktransactionselectdlg.cpp:128
+#: kmymoney/views/ktransactionselectdlg.cpp:148
 #, kde-format
 msgid "Merge Transactions"
 msgstr "Об'єднати операції"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:130
+#: kmymoney/views/ktransactionselectdlg.cpp:150
 #, kde-format
 msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
@@ -21159,7 +21153,7 @@ msgstr ""
 "використано верхню операцію та її значення. Якщо ви хочете скористатися "
 "іншим значенням, натисніть кнопку обміну значень праворуч."
 
-#: kmymoney/views/ktransactionselectdlg.cpp:136
+#: kmymoney/views/ktransactionselectdlg.cpp:156
 #, kde-format
 msgctxt "@info:tooltip Exchange transactions about to merge"
 msgid "Press to exchange the two transactions."
@@ -21539,14 +21533,14 @@ msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr "Введена сума є відмінною від суми усіх дроблень від %1."
 
-#: kmymoney/views/newtransactioneditor.cpp:637
+#: kmymoney/views/newtransactioneditor.cpp:639
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
 msgstr "Виберіть операцію для автозаповнення"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1129
+#: kmymoney/views/newtransactioneditor.cpp:1133
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:98
 #: kmymoney/views/newtransactionform.ui:179
@@ -21554,7 +21548,7 @@ msgstr "Виберіть операцію для автозаповнення"
 msgid "Link"
 msgstr "Посилання"
 
-#: kmymoney/views/newtransactioneditor.cpp:1622
+#: kmymoney/views/newtransactioneditor.cpp:1626
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21563,7 +21557,7 @@ msgstr ""
 "Хочете замінити нотатку<p><i>%1</i></p>нотаткою<p><i>%2</i></p>у іншому "
 "дробленні?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1623
+#: kmymoney/views/newtransactioneditor.cpp:1627
 #, kde-format
 msgid "Copy memo"
 msgstr "Копіювати нотатку"

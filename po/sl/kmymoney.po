@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-13 01:58+0000\n"
-"PO-Revision-Date: 2025-07-04 06:23+0200\n"
+"POT-Creation-Date: 2025-07-14 02:15+0000\n"
+"PO-Revision-Date: 2025-07-13 06:01+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Lokalize 25.04.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -6871,27 +6871,23 @@ msgid "  * value set to shares in split of transaction '%1'."
 msgstr "  * vrednost postavljena za delnice v razdeljeni transakciji '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3351
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Split %2 in transaction '%1' contains different signs for shares and "
-#| "value. Please fix manually."
+#, kde-format
 msgid ""
 "  * Split %2 in transaction '%1' contains different signs for shares and "
 "value."
 msgstr ""
 "  * Delitev %2 v transakciji '%1' vsebuje različne predznake za deleže in "
-"vrednosti. Prosimo, ročno popravite."
+"vrednosti."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3368
-#, fuzzy, kde-format
-#| msgid "Investment Transactions"
+#, kde-format
 msgid "    Reinvestment transaction '%1' fixed."
-msgstr "Naložbene transakcije"
+msgstr "    Transakcija reinvestiranja '%1' popravljena."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3372
 #, kde-format
 msgid "    Please fix manually."
-msgstr ""
+msgstr "    Prosimo, ročno popravite."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3385
 #, kde-format
@@ -20317,67 +20313,67 @@ msgstr "Išči..."
 msgid "Ledgers"
 msgstr "Glavne knjige"
 
-#: kmymoney/views/kmymoneyview.cpp:556
+#: kmymoney/views/kmymoneyview.cpp:558
 #, kde-format
 msgid "Show home page"
 msgstr "Prikaži domačo stran"
 
-#: kmymoney/views/kmymoneyview.cpp:557
+#: kmymoney/views/kmymoneyview.cpp:559
 #, kde-format
 msgid "Show institutions page"
 msgstr "Prikaži stran institucij"
 
-#: kmymoney/views/kmymoneyview.cpp:558
+#: kmymoney/views/kmymoneyview.cpp:560
 #, kde-format
 msgid "Show accounts page"
 msgstr "Prikaži stran računov"
 
-#: kmymoney/views/kmymoneyview.cpp:559
+#: kmymoney/views/kmymoneyview.cpp:561
 #, kde-format
 msgid "Show scheduled transactions page"
 msgstr "Prikaži stran časovnih načrtov transakcij"
 
-#: kmymoney/views/kmymoneyview.cpp:560
+#: kmymoney/views/kmymoneyview.cpp:562
 #, kde-format
 msgid "Show categories page"
 msgstr "Prikaži stran kategorij"
 
-#: kmymoney/views/kmymoneyview.cpp:561
+#: kmymoney/views/kmymoneyview.cpp:563
 #, kde-format
 msgid "Show tags page"
 msgstr "Prikaži stran oznak"
 
-#: kmymoney/views/kmymoneyview.cpp:562
+#: kmymoney/views/kmymoneyview.cpp:564
 #, kde-format
 msgid "Show payees page"
 msgstr "Prikaži stran prejemnikov plačil"
 
-#: kmymoney/views/kmymoneyview.cpp:563
+#: kmymoney/views/kmymoneyview.cpp:565
 #, kde-format
 msgid "Show ledgers page"
 msgstr "Prikaži stran glavne knjige"
 
-#: kmymoney/views/kmymoneyview.cpp:564
+#: kmymoney/views/kmymoneyview.cpp:566
 #, kde-format
 msgid "Show investments page"
 msgstr "Prikaži stran naložb"
 
-#: kmymoney/views/kmymoneyview.cpp:565
+#: kmymoney/views/kmymoneyview.cpp:567
 #, kde-format
 msgid "Show reports page"
 msgstr "Prikaži stran poročil"
 
-#: kmymoney/views/kmymoneyview.cpp:566
+#: kmymoney/views/kmymoneyview.cpp:568
 #, kde-format
 msgid "Show budget page"
 msgstr "Prikaži stran proračuna"
 
-#: kmymoney/views/kmymoneyview.cpp:567
+#: kmymoney/views/kmymoneyview.cpp:569
 #, kde-format
 msgid "Show forecast page"
 msgstr "Prikaži stran napovedi"
 
-#: kmymoney/views/kmymoneyview.cpp:568
+#: kmymoney/views/kmymoneyview.cpp:570
 #, kde-format
 msgid "Show outbox page"
 msgstr "Prikaži stran izhodne pošte"
@@ -20994,12 +20990,12 @@ msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
 msgstr "Izberite transakcijo za uporabo kot predlogo."
 
-#: kmymoney/views/ktransactionselectdlg.cpp:128
+#: kmymoney/views/ktransactionselectdlg.cpp:148
 #, kde-format
 msgid "Merge Transactions"
 msgstr "Zlij transakcije"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:130
+#: kmymoney/views/ktransactionselectdlg.cpp:150
 #, kde-format
 msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
@@ -21011,7 +21007,7 @@ msgstr ""
 "bodo uporabljene v združeni transakciji. Če želite uporabiti drugo "
 "transakcijo, pritisnite gumb zamenjave na desni."
 
-#: kmymoney/views/ktransactionselectdlg.cpp:136
+#: kmymoney/views/ktransactionselectdlg.cpp:156
 #, kde-format
 msgctxt "@info:tooltip Exchange transactions about to merge"
 msgid "Press to exchange the two transactions."
@@ -21385,14 +21381,14 @@ msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr "Vneseni znesek se razlikuje od vsote vseh razdelitev za %1."
 
-#: kmymoney/views/newtransactioneditor.cpp:637
+#: kmymoney/views/newtransactioneditor.cpp:639
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
 msgstr "Izberite samodejno izpolnjeno transakcijo"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1129
+#: kmymoney/views/newtransactioneditor.cpp:1133
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:98
 #: kmymoney/views/newtransactionform.ui:179
@@ -21400,7 +21396,7 @@ msgstr "Izberite samodejno izpolnjeno transakcijo"
 msgid "Link"
 msgstr "Povezava"
 
-#: kmymoney/views/newtransactioneditor.cpp:1622
+#: kmymoney/views/newtransactioneditor.cpp:1626
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21409,7 +21405,7 @@ msgstr ""
 "Ali želite zamenjati beležko<p><i>%1</i></p>z beležko<p><i>%2</i></p>v "
 "drugem razdelku?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1623
+#: kmymoney/views/newtransactioneditor.cpp:1627
 #, kde-format
 msgid "Copy memo"
 msgstr "Kopiraj zabeležko"

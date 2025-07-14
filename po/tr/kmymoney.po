@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-13 01:58+0000\n"
+"POT-Creation-Date: 2025-07-14 02:15+0000\n"
 "PO-Revision-Date: 2025-07-04 15:47+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -20213,67 +20213,67 @@ msgstr "Ara…"
 msgid "Ledgers"
 msgstr "Defterler"
 
-#: kmymoney/views/kmymoneyview.cpp:556
+#: kmymoney/views/kmymoneyview.cpp:558
 #, kde-format
 msgid "Show home page"
 msgstr "Ana sayfayı göster"
 
-#: kmymoney/views/kmymoneyview.cpp:557
+#: kmymoney/views/kmymoneyview.cpp:559
 #, kde-format
 msgid "Show institutions page"
 msgstr "Kurumlar sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:558
+#: kmymoney/views/kmymoneyview.cpp:560
 #, kde-format
 msgid "Show accounts page"
 msgstr "Hesaplar sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:559
+#: kmymoney/views/kmymoneyview.cpp:561
 #, kde-format
 msgid "Show scheduled transactions page"
 msgstr "Planlı işlemler sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:560
+#: kmymoney/views/kmymoneyview.cpp:562
 #, kde-format
 msgid "Show categories page"
 msgstr "Kategoriler sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:561
+#: kmymoney/views/kmymoneyview.cpp:563
 #, kde-format
 msgid "Show tags page"
 msgstr "Künyeler sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:562
+#: kmymoney/views/kmymoneyview.cpp:564
 #, kde-format
 msgid "Show payees page"
 msgstr "Alacaklılar sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:563
+#: kmymoney/views/kmymoneyview.cpp:565
 #, kde-format
 msgid "Show ledgers page"
 msgstr "Defterler sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:564
+#: kmymoney/views/kmymoneyview.cpp:566
 #, kde-format
 msgid "Show investments page"
 msgstr "Yatırımlar sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:565
+#: kmymoney/views/kmymoneyview.cpp:567
 #, kde-format
 msgid "Show reports page"
 msgstr "Raporlar sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:566
+#: kmymoney/views/kmymoneyview.cpp:568
 #, kde-format
 msgid "Show budget page"
 msgstr "Bütçe sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:567
+#: kmymoney/views/kmymoneyview.cpp:569
 #, kde-format
 msgid "Show forecast page"
 msgstr "Öngörü sayfasını göster"
 
-#: kmymoney/views/kmymoneyview.cpp:568
+#: kmymoney/views/kmymoneyview.cpp:570
 #, kde-format
 msgid "Show outbox page"
 msgstr "Giden kutusu sayfasını göster"
@@ -20883,12 +20883,12 @@ msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
 msgstr "Bir şablon olarak kullanmak üzere işlemi seçin."
 
-#: kmymoney/views/ktransactionselectdlg.cpp:128
+#: kmymoney/views/ktransactionselectdlg.cpp:148
 #, kde-format
 msgid "Merge Transactions"
 msgstr "İşlemleri Birleştir"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:130
+#: kmymoney/views/ktransactionselectdlg.cpp:150
 #, kde-format
 msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
@@ -20900,7 +20900,7 @@ msgstr ""
 "işlemde en üstteki ve değerleri kullanılacaktır. Diğerini kullanmak "
 "istiyorsanız sağdaki değiş tokuş düğmesine basın."
 
-#: kmymoney/views/ktransactionselectdlg.cpp:136
+#: kmymoney/views/ktransactionselectdlg.cpp:156
 #, kde-format
 msgctxt "@info:tooltip Exchange transactions about to merge"
 msgid "Press to exchange the two transactions."
@@ -21279,14 +21279,14 @@ msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr "Girilen tutar, tüm bölmelerin toplamından %1 kadar farklı."
 
-#: kmymoney/views/newtransactioneditor.cpp:637
+#: kmymoney/views/newtransactioneditor.cpp:639
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
 msgstr "Kendiliğinden Doldurulacak İşlem Seç"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1129
+#: kmymoney/views/newtransactioneditor.cpp:1133
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:98
 #: kmymoney/views/newtransactionform.ui:179
@@ -21294,7 +21294,7 @@ msgstr "Kendiliğinden Doldurulacak İşlem Seç"
 msgid "Link"
 msgstr "Bağlantı"
 
-#: kmymoney/views/newtransactioneditor.cpp:1622
+#: kmymoney/views/newtransactioneditor.cpp:1626
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21303,7 +21303,7 @@ msgstr ""
 "Diğer bölmedeki<p><i>%1</i></p>notunu<p><i>%2</i></p>notuyla değiştirmek "
 "istiyor musunuz?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1623
+#: kmymoney/views/newtransactioneditor.cpp:1627
 #, kde-format
 msgid "Copy memo"
 msgstr "Notu Kopyala"

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-13 01:58+0000\n"
-"PO-Revision-Date: 2025-07-03 15:51+0200\n"
+"POT-Creation-Date: 2025-07-14 02:15+0000\n"
+"PO-Revision-Date: 2025-07-13 10:51+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -6930,27 +6930,23 @@ msgstr ""
 "  * Valors establerts a accions en el desglossament de l'operació «%1»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3351
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Split %2 in transaction '%1' contains different signs for shares and "
-#| "value. Please fix manually."
+#, kde-format
 msgid ""
 "  * Split %2 in transaction '%1' contains different signs for shares and "
 "value."
 msgstr ""
 "  * El desglossament %2 de l'operació «%1» conté signes diferents per les "
-"accions i el valor. Si us plau, arregleu-ho manualment."
+"accions i el valor."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3368
-#, fuzzy, kde-format
-#| msgid "Investment Transactions"
+#, kde-format
 msgid "    Reinvestment transaction '%1' fixed."
-msgstr "Operacions d'inversió"
+msgstr "    S'ha corregit l'operació de reinversió «%1»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3372
 #, kde-format
 msgid "    Please fix manually."
-msgstr ""
+msgstr "    Corregiu-ho manualment."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3385
 #, kde-format
@@ -20433,67 +20429,67 @@ msgstr "Cerca..."
 msgid "Ledgers"
 msgstr "Llibres majors"
 
-#: kmymoney/views/kmymoneyview.cpp:556
+#: kmymoney/views/kmymoneyview.cpp:558
 #, kde-format
 msgid "Show home page"
 msgstr "Mostra la pàgina principal"
 
-#: kmymoney/views/kmymoneyview.cpp:557
+#: kmymoney/views/kmymoneyview.cpp:559
 #, kde-format
 msgid "Show institutions page"
 msgstr "Mostra la pàgina d'institucions"
 
-#: kmymoney/views/kmymoneyview.cpp:558
+#: kmymoney/views/kmymoneyview.cpp:560
 #, kde-format
 msgid "Show accounts page"
 msgstr "Mostra la pàgina dels comptes"
 
-#: kmymoney/views/kmymoneyview.cpp:559
+#: kmymoney/views/kmymoneyview.cpp:561
 #, kde-format
 msgid "Show scheduled transactions page"
 msgstr "Mostra la pàgina d'operacions planificades"
 
-#: kmymoney/views/kmymoneyview.cpp:560
+#: kmymoney/views/kmymoneyview.cpp:562
 #, kde-format
 msgid "Show categories page"
 msgstr "Mostra la pàgina de categories"
 
-#: kmymoney/views/kmymoneyview.cpp:561
+#: kmymoney/views/kmymoneyview.cpp:563
 #, kde-format
 msgid "Show tags page"
 msgstr "Mostra la pàgina d'etiquetes"
 
-#: kmymoney/views/kmymoneyview.cpp:562
+#: kmymoney/views/kmymoneyview.cpp:564
 #, kde-format
 msgid "Show payees page"
 msgstr "Mostra la pàgina de beneficiaris"
 
-#: kmymoney/views/kmymoneyview.cpp:563
+#: kmymoney/views/kmymoneyview.cpp:565
 #, kde-format
 msgid "Show ledgers page"
 msgstr "Mostra la pàgina llibres majors"
 
-#: kmymoney/views/kmymoneyview.cpp:564
+#: kmymoney/views/kmymoneyview.cpp:566
 #, kde-format
 msgid "Show investments page"
 msgstr "Mostra la pàgina d'inversions"
 
-#: kmymoney/views/kmymoneyview.cpp:565
+#: kmymoney/views/kmymoneyview.cpp:567
 #, kde-format
 msgid "Show reports page"
 msgstr "Mostra la pàgina d'informes"
 
-#: kmymoney/views/kmymoneyview.cpp:566
+#: kmymoney/views/kmymoneyview.cpp:568
 #, kde-format
 msgid "Show budget page"
 msgstr "Mostra la pàgina de pressupostos"
 
-#: kmymoney/views/kmymoneyview.cpp:567
+#: kmymoney/views/kmymoneyview.cpp:569
 #, kde-format
 msgid "Show forecast page"
 msgstr "Mostra la pàgina de previsió"
 
-#: kmymoney/views/kmymoneyview.cpp:568
+#: kmymoney/views/kmymoneyview.cpp:570
 #, kde-format
 msgid "Show outbox page"
 msgstr "Mostra la pàgina safata de sortida"
@@ -21107,12 +21103,12 @@ msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
 msgstr "Selecciona l'operació que es farà servir com a plantilla."
 
-#: kmymoney/views/ktransactionselectdlg.cpp:128
+#: kmymoney/views/ktransactionselectdlg.cpp:148
 #, kde-format
 msgid "Merge Transactions"
 msgstr "Fusiona operacions"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:130
+#: kmymoney/views/ktransactionselectdlg.cpp:150
 #, kde-format
 msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
@@ -21124,7 +21120,7 @@ msgstr ""
 "seus valors s'usaran en l'operació fusionada resultant. Si voleu usar "
 "l'altra, premeu el botó d'intercanvi de la dreta."
 
-#: kmymoney/views/ktransactionselectdlg.cpp:136
+#: kmymoney/views/ktransactionselectdlg.cpp:156
 #, kde-format
 msgctxt "@info:tooltip Exchange transactions about to merge"
 msgid "Press to exchange the two transactions."
@@ -21512,14 +21508,14 @@ msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 "L'import introduït és diferent de la suma de tots els desglossaments en %1."
 
-#: kmymoney/views/newtransactioneditor.cpp:637
+#: kmymoney/views/newtransactioneditor.cpp:639
 #, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
 msgstr "Seleccioneu autocompleció d'operació"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1129
+#: kmymoney/views/newtransactioneditor.cpp:1133
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:98
 #: kmymoney/views/newtransactionform.ui:179
@@ -21527,7 +21523,7 @@ msgstr "Seleccioneu autocompleció d'operació"
 msgid "Link"
 msgstr "Enllaç"
 
-#: kmymoney/views/newtransactioneditor.cpp:1622
+#: kmymoney/views/newtransactioneditor.cpp:1626
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
@@ -21536,7 +21532,7 @@ msgstr ""
 "Voleu substituir el recordatori<p><i>%1</i></p>per al recordatori<p><i>%2</"
 "i></p>a l'altre desglossament?"
 
-#: kmymoney/views/newtransactioneditor.cpp:1623
+#: kmymoney/views/newtransactioneditor.cpp:1627
 #, kde-format
 msgid "Copy memo"
 msgstr "Copia el recordatori"

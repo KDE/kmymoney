@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-13 01:58+0000\n"
+"POT-Creation-Date: 2025-07-14 02:15+0000\n"
 "PO-Revision-Date: 2014-07-03 09:44+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -20841,78 +20841,78 @@ msgstr "&Söken:"
 msgid "Ledgers"
 msgstr "Bankböker"
 
-#: kmymoney/views/kmymoneyview.cpp:556
+#: kmymoney/views/kmymoneyview.cpp:558
 #, fuzzy, kde-format
 #| msgid "Show KMyMoney welcome page"
 msgid "Show home page"
 msgstr "KMyMoney sien Willkamen-Schirm wiesen"
 
-#: kmymoney/views/kmymoneyview.cpp:557
+#: kmymoney/views/kmymoneyview.cpp:559
 #, fuzzy, kde-format
 #| msgctxt "Header for AqBanking account list"
 #| msgid "Institution Code"
 msgid "Show institutions page"
 msgstr "Bank-Kode"
 
-#: kmymoney/views/kmymoneyview.cpp:558
+#: kmymoney/views/kmymoneyview.cpp:560
 #, fuzzy, kde-format
 #| msgid "Show all accounts"
 msgid "Show accounts page"
 msgstr "All Kontos wiesen"
 
-#: kmymoney/views/kmymoneyview.cpp:559
+#: kmymoney/views/kmymoneyview.cpp:561
 #, fuzzy, kde-format
 #| msgid "Scheduled transactions"
 msgid "Show scheduled transactions page"
 msgstr "Plaant Boken"
 
-#: kmymoney/views/kmymoneyview.cpp:560
+#: kmymoney/views/kmymoneyview.cpp:562
 #, fuzzy, kde-format
 #| msgid "Income categories"
 msgid "Show categories page"
 msgstr "Inkamen-Kategorien"
 
-#: kmymoney/views/kmymoneyview.cpp:561
+#: kmymoney/views/kmymoneyview.cpp:563
 #, fuzzy, kde-format
 #| msgid "Show totals column"
 msgid "Show tags page"
 msgstr "Summen-Striep wiesen"
 
-#: kmymoney/views/kmymoneyview.cpp:562
+#: kmymoney/views/kmymoneyview.cpp:564
 #, fuzzy, kde-format
 #| msgid "Show KMyMoney welcome page"
 msgid "Show payees page"
 msgstr "KMyMoney sien Willkamen-Schirm wiesen"
 
-#: kmymoney/views/kmymoneyview.cpp:563
+#: kmymoney/views/kmymoneyview.cpp:565
 #, kde-format
 msgid "Show ledgers page"
 msgstr ""
 
-#: kmymoney/views/kmymoneyview.cpp:564
+#: kmymoney/views/kmymoneyview.cpp:566
 #, fuzzy, kde-format
 #| msgid "Investments"
 msgid "Show investments page"
 msgstr "Anlagen"
 
-#: kmymoney/views/kmymoneyview.cpp:565
+#: kmymoney/views/kmymoneyview.cpp:567
 #, fuzzy, kde-format
 #| msgid "Save report as"
 msgid "Show reports page"
 msgstr "Bericht sekern as"
 
-#: kmymoney/views/kmymoneyview.cpp:566
+#: kmymoney/views/kmymoneyview.cpp:568
 #, fuzzy, kde-format
 #| msgid "New budget"
 msgid "Show budget page"
 msgstr "Nieg Finanzplaan"
 
-#: kmymoney/views/kmymoneyview.cpp:567
+#: kmymoney/views/kmymoneyview.cpp:569
 #, kde-format
 msgid "Show forecast page"
 msgstr ""
 
-#: kmymoney/views/kmymoneyview.cpp:568
+#: kmymoney/views/kmymoneyview.cpp:570
 #, fuzzy, kde-format
 #| msgid "Show title bar on each page"
 msgid "Show outbox page"
@@ -21575,12 +21575,12 @@ msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
 msgstr "Boken ahn Adressaten utsöken"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:128
+#: kmymoney/views/ktransactionselectdlg.cpp:148
 #, kde-format
 msgid "Merge Transactions"
 msgstr "Boken tosamenleggen"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:130
+#: kmymoney/views/ktransactionselectdlg.cpp:150
 #, kde-format
 msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
@@ -21589,7 +21589,7 @@ msgid ""
 "the other one press the exchange button on the right."
 msgstr ""
 
-#: kmymoney/views/ktransactionselectdlg.cpp:136
+#: kmymoney/views/ktransactionselectdlg.cpp:156
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -21988,7 +21988,7 @@ msgctxt "@info:tooltip"
 msgid "The amount entered is different from the sum of all splits by %1."
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:637
+#: kmymoney/views/newtransactioneditor.cpp:639
 #, fuzzy, kde-format
 #| msgid "Select Transaction"
 msgctxt "@title:window Autofill selection dialog"
@@ -21996,7 +21996,7 @@ msgid "Select autofill transaction"
 msgstr "Boken utsöken"
 
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
-#: kmymoney/views/newtransactioneditor.cpp:1129
+#: kmymoney/views/newtransactioneditor.cpp:1133
 #: kmymoney/views/newtransactioneditor.ui:320
 #: kmymoney/views/newtransactionform.cpp:98
 #: kmymoney/views/newtransactionform.ui:179
@@ -22004,14 +22004,14 @@ msgstr "Boken utsöken"
 msgid "Link"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1622
+#: kmymoney/views/newtransactioneditor.cpp:1626
 #, kde-format
 msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
 "other split?"
 msgstr ""
 
-#: kmymoney/views/newtransactioneditor.cpp:1623
+#: kmymoney/views/newtransactioneditor.cpp:1627
 #, fuzzy, kde-format
 #| msgid "Copy of %1"
 msgid "Copy memo"
