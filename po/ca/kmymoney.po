@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-14 03:53+0000\n"
-"PO-Revision-Date: 2025-07-06 11:04+0200\n"
+"PO-Revision-Date: 2025-07-14 09:18+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -6925,27 +6925,23 @@ msgstr ""
 "  * Valors establerts a accions en el desglossament de l'operació «%1»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3351
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Split %2 in transaction '%1' contains different signs for shares and "
-#| "value. Please fix manually."
+#, kde-format
 msgid ""
 "  * Split %2 in transaction '%1' contains different signs for shares and "
 "value."
 msgstr ""
 "  * El desglossament %2 de l'operació «%1» conté signes diferents per les "
-"accions i el valor. Si us plau, arregleu-ho manualment."
+"accions i el valor."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3368
-#, fuzzy, kde-format
-#| msgid "Investment Transactions"
+#, kde-format
 msgid "    Reinvestment transaction '%1' fixed."
-msgstr "Operacions d'inversió"
+msgstr "    S'ha corregit l'operació de reinversió «%1»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3372
 #, kde-format
 msgid "    Please fix manually."
-msgstr ""
+msgstr "    Corregiu-ho manualment."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3385
 #, kde-format

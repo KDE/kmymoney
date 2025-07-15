@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-14 03:53+0000\n"
-"PO-Revision-Date: 2025-07-03 15:41+0200\n"
+"PO-Revision-Date: 2025-07-14 06:59+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -6872,27 +6872,23 @@ msgid "  * value set to shares in split of transaction '%1'."
 msgstr "  * vrednost postavljena za delnice v razcepljeni transakciji '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3351
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Split %2 in transaction '%1' contains different signs for shares and "
-#| "value. Please fix manually."
+#, kde-format
 msgid ""
 "  * Split %2 in transaction '%1' contains different signs for shares and "
 "value."
 msgstr ""
 "  * Razcepitev %2 v transakciji '%1' vsebuje različne predznake za deleže in "
-"vrednosti. Prosimo, ročno popravite."
+"vrednosti."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3368
-#, fuzzy, kde-format
-#| msgid "Investment transaction"
+#, kde-format
 msgid "    Reinvestment transaction '%1' fixed."
-msgstr "Naložbena transakcija"
+msgstr "    Transakcija reinvestiranja '%1' popravljena."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3372
 #, kde-format
 msgid "    Please fix manually."
-msgstr ""
+msgstr "    Prosimo, ročno popravite."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3385
 #, kde-format
