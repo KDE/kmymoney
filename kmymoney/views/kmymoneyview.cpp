@@ -294,6 +294,12 @@ void KMyMoneyView::updateViewType()
                 }
             }
         }
+
+        // KF6 has a search widget which we don't need so we hide it
+        auto pageSearchWidget = findChild<QWidget*>("KPageView::Search");
+        if (pageSearchWidget) {
+            pageSearchWidget->hide();
+        }
     }
 }
 
