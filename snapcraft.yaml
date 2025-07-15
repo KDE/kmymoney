@@ -25,32 +25,32 @@ slots:
     name: org.kde.kmymoney
     bus: session
 parts:
-  libgpgmepp-qt5:
-    build-packages:
-      - libassuan-dev
-      - libgpg-error-dev
-      - qtchooser
-      - rsync
-    stage-packages:
-      - libassuan0
-      - libgpg-error0
-    source: https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-1.23.2.tar.bz2
-    source-checksum: sha256/9499e8b1f33cccb6815527a1bc16049d35a6198a6c5fae0185f2bd561bce5224
-    plugin: autotools
-    autotools-configure-parameters:
-      - --disable-gpgsm-test
-      - --enable-languages=cpp,qt5
-      - --prefix=/usr
-      - --enable-fixed-path=/snap/kde-qt5-core24-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR
-    build-environment: &buildenvironment
-      - LD_LIBRARY_PATH: $LD_LIBRARY_PATH:/snap/kde-qt5-core24-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:/snap/kde-qt5-core24-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libproxy:/snap/kf5-core24-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:$CRAFT_STAGE/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:/usr
-      - PKG_CONFIG_PATH: /snap/kde-qt5-core24-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/pkgconfig
-    override-build: |
-      craftctl default
-      rsync -a --ignore-existing $CRAFT_PART_INSTALL/ /
+  # libgpgmepp-qt5:
+  #   build-packages:
+  #     - libassuan-dev
+  #     - libgpg-error-dev
+  #     - qtchooser
+  #     - rsync
+  #   stage-packages:
+  #     - libassuan0
+  #     - libgpg-error0
+  #   source: https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-1.23.2.tar.bz2
+  #   source-checksum: sha256/9499e8b1f33cccb6815527a1bc16049d35a6198a6c5fae0185f2bd561bce5224
+  #   plugin: autotools
+  #   autotools-configure-parameters:
+  #     - --disable-gpgsm-test
+  #     - --enable-languages=cpp,qt5
+  #     - --prefix=/usr
+  #     - --enable-fixed-path=/snap/kde-qt5-core24-sdk/current/
+  #     - --program-prefix=/snap/kde-qt5-core24-sdk/current/
+  #   build-environment: &buildenvironment
+  #     - LD_LIBRARY_PATH: $LD_LIBRARY_PATH:/snap/kde-qt5-core24-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:/snap/kde-qt5-core24-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libproxy:/snap/kf5-core24-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:$CRAFT_STAGE/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:/usr
+  #     - PKG_CONFIG_PATH: /snap/kde-qt5-core24-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/pkgconfig
+  #     - PATH: /snap/kde-qt5-core24-sdk/current/usr/bin:/snap/kde-qt5-core24-sdk/current/usr/lib/qt5/bin:/snap/kf5-core24-sdk/current/usr/bin:$PATH
+  #   override-build: |
+  #     craftctl default
+  #     rsync -a --ignore-existing $CRAFT_PART_INSTALL/ /
   gwenhywfar:
-    after:
-      - libgpgmepp-qt5
     source: https://github.com/aqbanking/gwenhywfar.git
     source-tag: 5.12.0
     plugin: autotools
@@ -58,12 +58,20 @@ parts:
       - gettext
       - libgcrypt20-dev
       - libgnutls28-dev
+      - rsync
     stage-packages:
       - libgcrypt20
       - libgnutls30t64
     autotools-configure-parameters:
       - --prefix=/usr
       - --with-guis=none
+    build-environment: &buildenvironment
+       - LD_LIBRARY_PATH: $LD_LIBRARY_PATH:/snap/kde-qt5-core24-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:/snap/kde-qt5-core24-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libproxy:/snap/kf5-core24-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:$CRAFT_STAGE/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:/usr
+       - PKG_CONFIG_PATH: /snap/kde-qt5-core24-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/pkgconfig
+       - PATH: /snap/kde-qt5-core24-sdk/current/usr/bin:/snap/kde-qt5-core24-sdk/current/usr/lib/qt5/bin:/snap/kf5-core24-sdk/current/usr/bin:$PATH
+    override-build: |
+       craftctl default
+       rsync -a --ignore-existing $CRAFT_PART_INSTALL/ /
   mpir:
     source: https://github.com/wbhart/mpir.git
     plugin: autotools
@@ -74,6 +82,7 @@ parts:
       - yasm
       - texinfo
       - rsync
+    build-environment: *buildenvironment
     override-build: |
       craftctl default
       rsync -a --ignore-existing $CRAFT_PART_INSTALL/ /
@@ -87,7 +96,7 @@ parts:
       - -DBUILD_DESKTOPTHEMES=OFF
       - -DBUILD_TESTING=OFF
     build-environment:
-      - CMAKE_PREFIX_PATH: $CRAFT_STAGE/usr:/snap/kde-qt5--sdk/current/usr:/snap/kf5-core24-sdk/current/usr${CMAKE_PREFIX_PATH:+:$CMAKE_PREFIX_PATH}
+      - CMAKE_PREFIX_PATH: $CRAFT_STAGE/usr:/snap/kde-qt5-sdk/current/usr:/snap/kf5-core24-sdk/current/usr${CMAKE_PREFIX_PATH:+:$CMAKE_PREFIX_PATH}
       - LD_LIBRARY_PATH: >
          "/snap/mesa-2404/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:$CRAFT_STAGE/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:/snap/kde-qt5-core24-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libproxy:$LD_LIBRARY_PATH"
     build-packages:
@@ -132,7 +141,6 @@ parts:
     build-environment: *buildenvironment
   kmymoney:
     after:
-      - libgpgmepp-qt5
       - gwenhywfar
       - alkimia
     parse-info:
@@ -145,11 +153,15 @@ parts:
       - libaqbanking-dev
       - python3-dev
       - libharfbuzz-subset0
+      - libgpgmepp-dev
+      - libgpgme11-dev
     stage-packages:
       - libofx7t64
       - libsqlcipher1
       - libaqbanking44
       - libharfbuzz-subset0
+      - libgpgme11t64
+      - libgpgmepp6t64
     cmake-parameters:
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DCMAKE_BUILD_TYPE=Release
