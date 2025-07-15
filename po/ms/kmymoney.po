@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-14 02:15+0000\n"
+"POT-Creation-Date: 2025-07-15 02:05+0000\n"
 "PO-Revision-Date: 2009-09-18 17:20+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <kedidiemas@yahoogroups.com>\n"
@@ -5754,7 +5754,7 @@ msgid "Unable to load schedule details"
 msgstr ""
 
 #: kmymoney/kmymoneyutils.cpp:376
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:112
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:114
 #: kmymoney/wizards/kmymoneywizard_p.h:78
 #, fuzzy, kde-format
 msgctxt "Go to next page of the wizard"
@@ -12220,100 +12220,108 @@ msgstr ""
 msgid "Contacting bank..."
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:70
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:79
 #, kde-format
 msgid "Loading banklist"
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:71
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:80
 #, kde-format
 msgid ""
 "Getting list of banks from https://www.ofxhome.com/\n"
 "This may take some time depending on the available bandwidth."
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:238
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:292
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:127
+#, kde-format
+msgctxt "@title:group Manual enter OFX details"
+msgid ""
+"Please provide the details for your financial institution in the fields "
+"below."
+msgstr ""
+
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:245
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:299
 #, kde-format
 msgid "Supports online statements<br/>"
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:240
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:294
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:247
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:301
 #, kde-format
 msgid "Supports investments<br/>"
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:242
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:296
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:249
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:303
 #, kde-format
 msgid "Supports bill payment (but not supported by KMyMoney yet)<br/>"
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:246
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:253
 #, kde-format
 msgid "OFX host failed. Last successful access was on '%1'. "
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:248
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:255
 #, kde-format
 msgid ""
 "Certificate verification of OFX host failed. Last successful verification "
 "was on '%1'."
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:256
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:263
 #, kde-format
 msgid "Does not support online banking"
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:266
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:273
 #, kde-format
 msgid "Please choose a bank."
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:272
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:279
 #, kde-format
 msgid "Please fill all fields with values."
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:276
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:283
 #, kde-format
 msgid "<p>Details for %1:</p>"
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:387
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:394
 #, kde-format
 msgid "No suitable accounts were found at this bank."
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:403
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:410
 #, kde-format
 msgid "Please choose an account"
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:506
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:513
 #, kde-format
 msgid "Server message: %1\n"
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:514
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:521
 #, kde-format
 msgid "Your bank returned warnings when signing on"
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:514
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:521
 #, kde-format
 msgctxt "Warning 'message'"
 msgid "WARNING %1"
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:517
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:524
 #, kde-format
 msgid "Error signing onto your bank"
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:517
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:524
 #, kde-format
 msgid "ERROR %1"
 msgstr ""
@@ -12330,7 +12338,7 @@ msgstr "Akaun"
 msgid "Select Financial Institution"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#. i18n: ectx: property (text), widget (QLabel, m_instructionLabel)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:38
 #, kde-format
 msgid "Please select your financial institution from the list below..."

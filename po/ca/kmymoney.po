@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-14 02:15+0000\n"
+"POT-Creation-Date: 2025-07-15 02:05+0000\n"
 "PO-Revision-Date: 2025-07-13 10:51+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -6143,7 +6143,7 @@ msgid "Unable to load schedule details"
 msgstr "No s'han pogut carregar els detalls de la planificació"
 
 #: kmymoney/kmymoneyutils.cpp:376
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:112
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:114
 #: kmymoney/wizards/kmymoneywizard_p.h:78
 #, kde-format
 msgctxt "Go to next page of the wizard"
@@ -12849,12 +12849,12 @@ msgstr "Connexió directa OFX"
 msgid "Contacting bank..."
 msgstr "S'està connectant amb el banc..."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:70
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:79
 #, kde-format
 msgid "Loading banklist"
 msgstr "S'estan carregant la llista de bancs"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:71
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:80
 #, kde-format
 msgid ""
 "Getting list of banks from https://www.ofxhome.com/\n"
@@ -12863,32 +12863,41 @@ msgstr ""
 "S'està obtenint la llista de bancs des de https://www.ofxhome.com/\n"
 "Això pot trigar una estona depenent de l'amplada de banda disponible."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:238
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:292
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:127
+#, fuzzy, kde-format
+#| msgid "Please select your financial institution from the list below..."
+msgctxt "@title:group Manual enter OFX details"
+msgid ""
+"Please provide the details for your financial institution in the fields "
+"below."
+msgstr "Seleccioneu la institució financera des de la llista a sota..."
+
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:245
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:299
 #, kde-format
 msgid "Supports online statements<br/>"
 msgstr "Permet extractes en línia<br/>"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:240
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:294
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:247
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:301
 #, kde-format
 msgid "Supports investments<br/>"
 msgstr "Permet inversions<br/>"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:242
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:296
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:249
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:303
 #, kde-format
 msgid "Supports bill payment (but not supported by KMyMoney yet)<br/>"
 msgstr ""
 "Permet el pagament de factures (però encara no està implementat en el "
 "KMyMoney)<br/>"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:246
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:253
 #, kde-format
 msgid "OFX host failed. Last successful access was on '%1'. "
 msgstr "El servidor OFX ha fallat. El darrer accés correcte fou el «%1». "
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:248
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:255
 #, kde-format
 msgid ""
 "Certificate verification of OFX host failed. Last successful verification "
@@ -12897,58 +12906,58 @@ msgstr ""
 "Ha fallat la verificació del certificat del servidor OFX. La darrera "
 "verificació correcta fou el «%1»."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:256
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:263
 #, kde-format
 msgid "Does not support online banking"
 msgstr "No permet banca en línia"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:266
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:273
 #, kde-format
 msgid "Please choose a bank."
 msgstr "Si us plau, seleccioneu un banc."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:272
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:279
 #, kde-format
 msgid "Please fill all fields with values."
 msgstr "Si us plau, ompliu tots els camps amb valors."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:276
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:283
 #, kde-format
 msgid "<p>Details for %1:</p>"
 msgstr "<p>Detalls per a %1:</p>"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:387
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:394
 #, kde-format
 msgid "No suitable accounts were found at this bank."
 msgstr "No s'ha trobat cap compte apropiat en aquest banc."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:403
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:410
 #, kde-format
 msgid "Please choose an account"
 msgstr "Si us plau, seleccioneu un compte"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:506
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:513
 #, kde-format
 msgid "Server message: %1\n"
 msgstr "Missatge del servidor: %1\n"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:514
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:521
 #, kde-format
 msgid "Your bank returned warnings when signing on"
 msgstr "El vostre banc ha retornat avisos en connectar-se"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:514
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:521
 #, kde-format
 msgctxt "Warning 'message'"
 msgid "WARNING %1"
 msgstr "AVÍS %1"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:517
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:524
 #, kde-format
 msgid "Error signing onto your bank"
 msgstr "Error en connectar-se al vostre banc"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:517
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:524
 #, kde-format
 msgid "ERROR %1"
 msgstr "ERROR %1"
@@ -12965,7 +12974,7 @@ msgstr "Arranjament del compte de banca en línia"
 msgid "Select Financial Institution"
 msgstr "Selecció de la institució financera"
 
-#. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#. i18n: ectx: property (text), widget (QLabel, m_instructionLabel)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:38
 #, kde-format
 msgid "Please select your financial institution from the list below..."
