@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-15 02:05+0000\n"
+"POT-Creation-Date: 2025-07-16 02:32+0000\n"
 "PO-Revision-Date: 2025-07-04 08:27+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -20404,67 +20404,67 @@ msgstr "Cerca..."
 msgid "Ledgers"
 msgstr "Registri"
 
-#: kmymoney/views/kmymoneyview.cpp:558
+#: kmymoney/views/kmymoneyview.cpp:564
 #, kde-format
 msgid "Show home page"
 msgstr "Mostra la pagina principale"
 
-#: kmymoney/views/kmymoneyview.cpp:559
+#: kmymoney/views/kmymoneyview.cpp:565
 #, kde-format
 msgid "Show institutions page"
 msgstr "Mostra la pagina degli istituti"
 
-#: kmymoney/views/kmymoneyview.cpp:560
+#: kmymoney/views/kmymoneyview.cpp:566
 #, kde-format
 msgid "Show accounts page"
 msgstr "Mostra la pagina dei conti"
 
-#: kmymoney/views/kmymoneyview.cpp:561
+#: kmymoney/views/kmymoneyview.cpp:567
 #, kde-format
 msgid "Show scheduled transactions page"
 msgstr "Mostra la pagina delle transazioni pianificate"
 
-#: kmymoney/views/kmymoneyview.cpp:562
+#: kmymoney/views/kmymoneyview.cpp:568
 #, kde-format
 msgid "Show categories page"
 msgstr "Mostra la pagina delle categorie"
 
-#: kmymoney/views/kmymoneyview.cpp:563
+#: kmymoney/views/kmymoneyview.cpp:569
 #, kde-format
 msgid "Show tags page"
 msgstr "Mostra la pagina delle etichette"
 
-#: kmymoney/views/kmymoneyview.cpp:564
+#: kmymoney/views/kmymoneyview.cpp:570
 #, kde-format
 msgid "Show payees page"
 msgstr "Mostra la pagina dei beneficiari"
 
-#: kmymoney/views/kmymoneyview.cpp:565
+#: kmymoney/views/kmymoneyview.cpp:571
 #, kde-format
 msgid "Show ledgers page"
 msgstr "Mostra la pagina dei registri"
 
-#: kmymoney/views/kmymoneyview.cpp:566
+#: kmymoney/views/kmymoneyview.cpp:572
 #, kde-format
 msgid "Show investments page"
 msgstr "Mostra la pagina degli investimenti"
 
-#: kmymoney/views/kmymoneyview.cpp:567
+#: kmymoney/views/kmymoneyview.cpp:573
 #, kde-format
 msgid "Show reports page"
 msgstr "Mostra la pagina dei report"
 
-#: kmymoney/views/kmymoneyview.cpp:568
+#: kmymoney/views/kmymoneyview.cpp:574
 #, kde-format
 msgid "Show budget page"
 msgstr "Mostra la pagina del budget"
 
-#: kmymoney/views/kmymoneyview.cpp:569
+#: kmymoney/views/kmymoneyview.cpp:575
 #, kde-format
 msgid "Show forecast page"
 msgstr "Mostra la pagina della previsione"
 
-#: kmymoney/views/kmymoneyview.cpp:570
+#: kmymoney/views/kmymoneyview.cpp:576
 #, kde-format
 msgid "Show outbox page"
 msgstr "Mostra la pagina In uscita"

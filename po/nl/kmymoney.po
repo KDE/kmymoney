@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-15 02:05+0000\n"
-"PO-Revision-Date: 2025-07-13 14:47+0200\n"
+"POT-Creation-Date: 2025-07-16 02:32+0000\n"
+"PO-Revision-Date: 2025-07-15 10:06+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -12830,13 +12830,13 @@ msgstr ""
 "Dit kan enige tijd duren, afhankelijk van de beschikbare bandbreedte."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:127
-#, fuzzy, kde-format
-#| msgid "Please select your financial institution from the list below..."
+#, kde-format
 msgctxt "@title:group Manual enter OFX details"
 msgid ""
 "Please provide the details for your financial institution in the fields "
 "below."
-msgstr "Financieel instituut uit onderstaande lijst selecteren..."
+msgstr ""
+"Geef de details van uw financiële instituut uit in de onderstaande velden."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:245
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:299
@@ -20383,67 +20383,67 @@ msgstr "Zoeken..."
 msgid "Ledgers"
 msgstr "Kasboeken"
 
-#: kmymoney/views/kmymoneyview.cpp:558
+#: kmymoney/views/kmymoneyview.cpp:564
 #, kde-format
 msgid "Show home page"
 msgstr "Toon welkomstpagina"
 
-#: kmymoney/views/kmymoneyview.cpp:559
+#: kmymoney/views/kmymoneyview.cpp:565
 #, kde-format
 msgid "Show institutions page"
 msgstr "Pagina met instructies tonen"
 
-#: kmymoney/views/kmymoneyview.cpp:560
+#: kmymoney/views/kmymoneyview.cpp:566
 #, kde-format
 msgid "Show accounts page"
 msgstr "Pagina met rekeningen tonen"
 
-#: kmymoney/views/kmymoneyview.cpp:561
+#: kmymoney/views/kmymoneyview.cpp:567
 #, kde-format
 msgid "Show scheduled transactions page"
 msgstr "Pagina met periodieke transacties tonen"
 
-#: kmymoney/views/kmymoneyview.cpp:562
+#: kmymoney/views/kmymoneyview.cpp:568
 #, kde-format
 msgid "Show categories page"
 msgstr "Pagina met categorieën tonen"
 
-#: kmymoney/views/kmymoneyview.cpp:563
+#: kmymoney/views/kmymoneyview.cpp:569
 #, kde-format
 msgid "Show tags page"
 msgstr "Pagina met tags tonen"
 
-#: kmymoney/views/kmymoneyview.cpp:564
+#: kmymoney/views/kmymoneyview.cpp:570
 #, kde-format
 msgid "Show payees page"
 msgstr "Pagina met begunstigden tonen"
 
-#: kmymoney/views/kmymoneyview.cpp:565
+#: kmymoney/views/kmymoneyview.cpp:571
 #, kde-format
 msgid "Show ledgers page"
 msgstr "Pagina met kasboeken tonen"
 
-#: kmymoney/views/kmymoneyview.cpp:566
+#: kmymoney/views/kmymoneyview.cpp:572
 #, kde-format
 msgid "Show investments page"
 msgstr "Pagina met investeringen tonen"
 
-#: kmymoney/views/kmymoneyview.cpp:567
+#: kmymoney/views/kmymoneyview.cpp:573
 #, kde-format
 msgid "Show reports page"
 msgstr "Pagina met rapporten tonen"
 
-#: kmymoney/views/kmymoneyview.cpp:568
+#: kmymoney/views/kmymoneyview.cpp:574
 #, kde-format
 msgid "Show budget page"
 msgstr "Pagina met budget tonen"
 
-#: kmymoney/views/kmymoneyview.cpp:569
+#: kmymoney/views/kmymoneyview.cpp:575
 #, kde-format
 msgid "Show forecast page"
 msgstr "Pagina met prognoses tonen"
 
-#: kmymoney/views/kmymoneyview.cpp:570
+#: kmymoney/views/kmymoneyview.cpp:576
 #, kde-format
 msgid "Show outbox page"
 msgstr "Pagina met postvak uit tonen"

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-15 02:05+0000\n"
-"PO-Revision-Date: 2025-07-13 16:07+0300\n"
+"POT-Creation-Date: 2025-07-16 02:32+0000\n"
+"PO-Revision-Date: 2025-07-15 13:59+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -12849,14 +12849,12 @@ msgstr ""
 "зв'язку."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:127
-#, fuzzy, kde-format
-#| msgid "Please select your financial institution from the list below..."
+#, kde-format
 msgctxt "@title:group Manual enter OFX details"
 msgid ""
 "Please provide the details for your financial institution in the fields "
 "below."
-msgstr ""
-"Будь ласка, виберіть вашу фінансову установу з наведеного нижче списку…"
+msgstr "Будь ласка, надайте дані щодо вашої фінансової установи у полях нижче."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:245
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:299
@@ -20472,67 +20470,67 @@ msgstr "Шукати…"
 msgid "Ledgers"
 msgstr "Облікові книги"
 
-#: kmymoney/views/kmymoneyview.cpp:558
+#: kmymoney/views/kmymoneyview.cpp:564
 #, kde-format
 msgid "Show home page"
 msgstr "Показати домашню сторінку"
 
-#: kmymoney/views/kmymoneyview.cpp:559
+#: kmymoney/views/kmymoneyview.cpp:565
 #, kde-format
 msgid "Show institutions page"
 msgstr "Показати сторінку установ"
 
-#: kmymoney/views/kmymoneyview.cpp:560
+#: kmymoney/views/kmymoneyview.cpp:566
 #, kde-format
 msgid "Show accounts page"
 msgstr "Показати сторінку рахунків"
 
-#: kmymoney/views/kmymoneyview.cpp:561
+#: kmymoney/views/kmymoneyview.cpp:567
 #, kde-format
 msgid "Show scheduled transactions page"
 msgstr "Показати сторінку запланованих операцій"
 
-#: kmymoney/views/kmymoneyview.cpp:562
+#: kmymoney/views/kmymoneyview.cpp:568
 #, kde-format
 msgid "Show categories page"
 msgstr "Показати сторінку категорій"
 
-#: kmymoney/views/kmymoneyview.cpp:563
+#: kmymoney/views/kmymoneyview.cpp:569
 #, kde-format
 msgid "Show tags page"
 msgstr "Показати сторінку міток"
 
-#: kmymoney/views/kmymoneyview.cpp:564
+#: kmymoney/views/kmymoneyview.cpp:570
 #, kde-format
 msgid "Show payees page"
 msgstr "Показати сторінку отримувачів"
 
-#: kmymoney/views/kmymoneyview.cpp:565
+#: kmymoney/views/kmymoneyview.cpp:571
 #, kde-format
 msgid "Show ledgers page"
 msgstr "Показати сторінку облікових книг"
 
-#: kmymoney/views/kmymoneyview.cpp:566
+#: kmymoney/views/kmymoneyview.cpp:572
 #, kde-format
 msgid "Show investments page"
 msgstr "Показати сторінку інвестицій"
 
-#: kmymoney/views/kmymoneyview.cpp:567
+#: kmymoney/views/kmymoneyview.cpp:573
 #, kde-format
 msgid "Show reports page"
 msgstr "Показати сторінку звітів"
 
-#: kmymoney/views/kmymoneyview.cpp:568
+#: kmymoney/views/kmymoneyview.cpp:574
 #, kde-format
 msgid "Show budget page"
 msgstr "Показати сторінку бюджету"
 
-#: kmymoney/views/kmymoneyview.cpp:569
+#: kmymoney/views/kmymoneyview.cpp:575
 #, kde-format
 msgid "Show forecast page"
 msgstr "Показати сторінку прогнозів"
 
-#: kmymoney/views/kmymoneyview.cpp:570
+#: kmymoney/views/kmymoneyview.cpp:576
 #, kde-format
 msgid "Show outbox page"
 msgstr "Показати сторінку вихідних"

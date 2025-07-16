@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-15 02:05+0000\n"
-"PO-Revision-Date: 2025-07-13 10:51+0200\n"
+"POT-Creation-Date: 2025-07-16 02:32+0000\n"
+"PO-Revision-Date: 2025-07-15 10:38+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -12864,13 +12864,14 @@ msgstr ""
 "Això pot trigar una estona depenent de l'amplada de banda disponible."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:127
-#, fuzzy, kde-format
-#| msgid "Please select your financial institution from the list below..."
+#, kde-format
 msgctxt "@title:group Manual enter OFX details"
 msgid ""
 "Please provide the details for your financial institution in the fields "
 "below."
-msgstr "Seleccioneu la institució financera des de la llista a sota..."
+msgstr ""
+"Proporcioneu els detalls de la vostra institució financera en els camps de "
+"sota."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:245
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:299
@@ -20438,67 +20439,67 @@ msgstr "Cerca..."
 msgid "Ledgers"
 msgstr "Llibres majors"
 
-#: kmymoney/views/kmymoneyview.cpp:558
+#: kmymoney/views/kmymoneyview.cpp:564
 #, kde-format
 msgid "Show home page"
 msgstr "Mostra la pàgina principal"
 
-#: kmymoney/views/kmymoneyview.cpp:559
+#: kmymoney/views/kmymoneyview.cpp:565
 #, kde-format
 msgid "Show institutions page"
 msgstr "Mostra la pàgina d'institucions"
 
-#: kmymoney/views/kmymoneyview.cpp:560
+#: kmymoney/views/kmymoneyview.cpp:566
 #, kde-format
 msgid "Show accounts page"
 msgstr "Mostra la pàgina dels comptes"
 
-#: kmymoney/views/kmymoneyview.cpp:561
+#: kmymoney/views/kmymoneyview.cpp:567
 #, kde-format
 msgid "Show scheduled transactions page"
 msgstr "Mostra la pàgina d'operacions planificades"
 
-#: kmymoney/views/kmymoneyview.cpp:562
+#: kmymoney/views/kmymoneyview.cpp:568
 #, kde-format
 msgid "Show categories page"
 msgstr "Mostra la pàgina de categories"
 
-#: kmymoney/views/kmymoneyview.cpp:563
+#: kmymoney/views/kmymoneyview.cpp:569
 #, kde-format
 msgid "Show tags page"
 msgstr "Mostra la pàgina d'etiquetes"
 
-#: kmymoney/views/kmymoneyview.cpp:564
+#: kmymoney/views/kmymoneyview.cpp:570
 #, kde-format
 msgid "Show payees page"
 msgstr "Mostra la pàgina de beneficiaris"
 
-#: kmymoney/views/kmymoneyview.cpp:565
+#: kmymoney/views/kmymoneyview.cpp:571
 #, kde-format
 msgid "Show ledgers page"
 msgstr "Mostra la pàgina llibres majors"
 
-#: kmymoney/views/kmymoneyview.cpp:566
+#: kmymoney/views/kmymoneyview.cpp:572
 #, kde-format
 msgid "Show investments page"
 msgstr "Mostra la pàgina d'inversions"
 
-#: kmymoney/views/kmymoneyview.cpp:567
+#: kmymoney/views/kmymoneyview.cpp:573
 #, kde-format
 msgid "Show reports page"
 msgstr "Mostra la pàgina d'informes"
 
-#: kmymoney/views/kmymoneyview.cpp:568
+#: kmymoney/views/kmymoneyview.cpp:574
 #, kde-format
 msgid "Show budget page"
 msgstr "Mostra la pàgina de pressupostos"
 
-#: kmymoney/views/kmymoneyview.cpp:569
+#: kmymoney/views/kmymoneyview.cpp:575
 #, kde-format
 msgid "Show forecast page"
 msgstr "Mostra la pàgina de previsió"
 
-#: kmymoney/views/kmymoneyview.cpp:570
+#: kmymoney/views/kmymoneyview.cpp:576
 #, kde-format
 msgid "Show outbox page"
 msgstr "Mostra la pàgina safata de sortida"
