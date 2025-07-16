@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-14 03:53+0000\n"
+"POT-Creation-Date: 2025-07-16 04:29+0000\n"
 "PO-Revision-Date: 2014-07-03 09:44+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -6148,7 +6148,7 @@ msgid "Unable to load schedule details"
 msgstr "Planen-Enkelheiten laat sik nich laden."
 
 #: kmymoney/kmymoneyutils.cpp:376
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:112
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:114
 #: kmymoney/wizards/kmymoneywizard_p.h:78
 #, kde-format
 msgctxt "Go to next page of the wizard"
@@ -13224,12 +13224,12 @@ msgstr "OFX-Direktverbinnen"
 msgid "Contacting bank..."
 msgstr "Bank warrt ansnackt..."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:70
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:79
 #, kde-format
 msgid "Loading banklist"
 msgstr "Banklist warrt laadt"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:71
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:80
 #, fuzzy, kde-format
 #| msgid ""
 #| "Getting list of banks from http://moneycentral.msn.com/\n"
@@ -13241,88 +13241,97 @@ msgstr ""
 "Banklist warrt vun http://moneycentral.msn.com/ haalt.\n"
 "De Duer hangt vun de verföögbor Bandbreed af."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:238
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:292
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:127
+#, fuzzy, kde-format
+#| msgid "Please select your financial institution from the list below..."
+msgctxt "@title:group Manual enter OFX details"
+msgid ""
+"Please provide the details for your financial institution in the fields "
+"below."
+msgstr "Söök bitte Dien Bank ut de List nerrn ut…"
+
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:245
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:299
 #, kde-format
 msgid "Supports online statements<br/>"
 msgstr "Ünnerstütt Internett-Kontouttöög<br/>"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:240
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:294
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:247
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:301
 #, kde-format
 msgid "Supports investments<br/>"
 msgstr "Ünnerstütt Anlagen<br/>"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:242
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:296
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:249
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:303
 #, kde-format
 msgid "Supports bill payment (but not supported by KMyMoney yet)<br/>"
 msgstr "Ünnerstütt Rekenbetahlen (man noch nich vun KMyMoney ünnerstütt)<br/>"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:246
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:253
 #, kde-format
 msgid "OFX host failed. Last successful access was on '%1'. "
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:248
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:255
 #, kde-format
 msgid ""
 "Certificate verification of OFX host failed. Last successful verification "
 "was on '%1'."
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:256
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:263
 #, kde-format
 msgid "Does not support online banking"
 msgstr "Ünnerstütt keen Internett-Bankeree"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:266
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:273
 #, kde-format
 msgid "Please choose a bank."
 msgstr "Bitte en Bank utsöken."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:272
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:279
 #, kde-format
 msgid "Please fill all fields with values."
 msgstr "Bitte giff in all Feller de bruukt Weerten in."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:276
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:283
 #, kde-format
 msgid "<p>Details for %1:</p>"
 msgstr "<p> Enkelheiten för %1:</p>"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:387
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:394
 #, kde-format
 msgid "No suitable accounts were found at this bank."
 msgstr "Bi disse Bank wöörn keen passen Kontos funnen"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:403
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:410
 #, kde-format
 msgid "Please choose an account"
 msgstr "Bitte en Konto utsöken"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:506
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:513
 #, kde-format
 msgid "Server message: %1\n"
 msgstr "Servermellen: %1\n"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:514
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:521
 #, kde-format
 msgid "Your bank returned warnings when signing on"
 msgstr "Dien Bank hett Wohrschoen bi't Anmellen utgeven"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:514
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:521
 #, kde-format
 msgctxt "Warning 'message'"
 msgid "WARNING %1"
 msgstr "Wohrschoen %1"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:517
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:524
 #, kde-format
 msgid "Error signing onto your bank"
 msgstr "Fehler bi't Anmellen bi de Bank"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:517
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:524
 #, kde-format
 msgid "ERROR %1"
 msgstr "Fehler %1"
@@ -13339,7 +13348,7 @@ msgstr "Konto-Instellen för Internett-Bankeree"
 msgid "Select Financial Institution"
 msgstr "Bank utsöken"
 
-#. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#. i18n: ectx: property (text), widget (QLabel, m_instructionLabel)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:38
 #, kde-format
 msgid "Please select your financial institution from the list below..."
@@ -20860,78 +20869,78 @@ msgstr "&Söken:"
 msgid "Ledgers"
 msgstr "Bankböker"
 
-#: kmymoney/views/kmymoneyview.cpp:558
+#: kmymoney/views/kmymoneyview.cpp:564
 #, fuzzy, kde-format
 #| msgid "Show KMyMoney welcome page"
 msgid "Show home page"
 msgstr "KMyMoney sien Willkamen-Schirm wiesen"
 
-#: kmymoney/views/kmymoneyview.cpp:559
+#: kmymoney/views/kmymoneyview.cpp:565
 #, fuzzy, kde-format
 #| msgctxt "Header for AqBanking account list"
 #| msgid "Institution Code"
 msgid "Show institutions page"
 msgstr "Bank-Kode"
 
-#: kmymoney/views/kmymoneyview.cpp:560
+#: kmymoney/views/kmymoneyview.cpp:566
 #, fuzzy, kde-format
 #| msgid "Show all accounts"
 msgid "Show accounts page"
 msgstr "All Kontos wiesen"
 
-#: kmymoney/views/kmymoneyview.cpp:561
+#: kmymoney/views/kmymoneyview.cpp:567
 #, fuzzy, kde-format
 #| msgid "Scheduled transactions"
 msgid "Show scheduled transactions page"
 msgstr "Plaant Boken"
 
-#: kmymoney/views/kmymoneyview.cpp:562
+#: kmymoney/views/kmymoneyview.cpp:568
 #, fuzzy, kde-format
 #| msgid "Income categories"
 msgid "Show categories page"
 msgstr "Inkamen-Kategorien"
 
-#: kmymoney/views/kmymoneyview.cpp:563
+#: kmymoney/views/kmymoneyview.cpp:569
 #, fuzzy, kde-format
 #| msgid "Show totals column"
 msgid "Show tags page"
 msgstr "Summen-Striep wiesen"
 
-#: kmymoney/views/kmymoneyview.cpp:564
+#: kmymoney/views/kmymoneyview.cpp:570
 #, fuzzy, kde-format
 #| msgid "Show KMyMoney welcome page"
 msgid "Show payees page"
 msgstr "KMyMoney sien Willkamen-Schirm wiesen"
 
-#: kmymoney/views/kmymoneyview.cpp:565
+#: kmymoney/views/kmymoneyview.cpp:571
 #, kde-format
 msgid "Show ledgers page"
 msgstr ""
 
-#: kmymoney/views/kmymoneyview.cpp:566
+#: kmymoney/views/kmymoneyview.cpp:572
 #, fuzzy, kde-format
 #| msgid "Investments"
 msgid "Show investments page"
 msgstr "Anlagen"
 
-#: kmymoney/views/kmymoneyview.cpp:567
+#: kmymoney/views/kmymoneyview.cpp:573
 #, fuzzy, kde-format
 #| msgid "Save report as"
 msgid "Show reports page"
 msgstr "Bericht sekern as"
 
-#: kmymoney/views/kmymoneyview.cpp:568
+#: kmymoney/views/kmymoneyview.cpp:574
 #, fuzzy, kde-format
 #| msgid "New budget"
 msgid "Show budget page"
 msgstr "Nieg Finanzplaan"
 
-#: kmymoney/views/kmymoneyview.cpp:569
+#: kmymoney/views/kmymoneyview.cpp:575
 #, kde-format
 msgid "Show forecast page"
 msgstr ""
 
-#: kmymoney/views/kmymoneyview.cpp:570
+#: kmymoney/views/kmymoneyview.cpp:576
 #, fuzzy, kde-format
 #| msgid "Show title bar on each page"
 msgid "Show outbox page"
