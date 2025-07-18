@@ -74,6 +74,7 @@ public:
 
         ui->m_accountTree->setProxyModel(new InstitutionsProxyModel);
         m_proxyModel = ui->m_accountTree->proxyModel();
+        m_proxyModel->setClosedSelectable(true);
         q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
 
         auto columnSelector = new ColumnSelector(ui->m_accountTree, q->metaObject()->className());
