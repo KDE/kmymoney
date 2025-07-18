@@ -289,8 +289,6 @@ public:
 KInvestmentView::KInvestmentView(QWidget *parent) :
     KMyMoneyViewBase(*new KInvestmentViewPrivate(this), parent)
 {
-    Q_D(KInvestmentView);
-
     connect(pActions[eMenu::Action::NewInvestment], &QAction::triggered, this, &KInvestmentView::slotNewInvestment);
     connect(pActions[eMenu::Action::EditInvestment], &QAction::triggered, this, &KInvestmentView::slotEditInvestment);
     connect(pActions[eMenu::Action::DeleteInvestment], &QAction::triggered, this, &KInvestmentView::slotDeleteInvestment);
