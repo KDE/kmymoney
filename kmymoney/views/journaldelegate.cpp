@@ -39,10 +39,12 @@
 #include "mymoneyutils.h"
 #include "newtransactioneditor.h"
 #include "schedulesjournalmodel.h"
+#include "tagsmodel.h"
 
 struct displayProperties {
     int italicStartLine;
     QStringList lines;
+    QStringList tagIds;
 };
 
 class JournalDelegate::Private
@@ -97,6 +99,21 @@ public:
         displayProperties rc;
         rc.italicStartLine = -1;
 
+        auto addTags = [&]() -> void {
+            if (index.data(eMyMoney::Model::TransactionSplitCountRole).toInt() == 2) {
+                const auto rowIndeces =
+                    MyMoneyFile::instance()->journalModel()->indexesByTransactionId(index.data(eMyMoney::Model::JournalTransactionIdRole).toString());
+                const auto rowCount = rowIndeces.count();
+                const auto splitId = index.data(eMyMoney::Model::IdRole).toString();
+                for (int row = 0; row < rowCount; ++row) {
+                    const auto rowIndex = rowIndeces[row];
+                    if (rowIndex.data(eMyMoney::Model::IdRole) != splitId) {
+                        rc.tagIds = rowIndex.data(eMyMoney::Model::SplitTagIdRole).toStringList();
+                        break;
+                    }
+                }
+            }
+        };
         const auto showAllSplits = LedgerViewSettings::instance()->showAllSplits();
 
         if(index.column() == JournalModel::Column::Detail) {
@@ -176,6 +193,7 @@ public:
                     }
                     rc.lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
                     rc.lines << index.data(eMyMoney::Model::Roles::SplitStyledSingleLineMemoRole).toString();
+                    addTags();
 
                 } else {
                     if (rc.lines.at(0).isEmpty()) {
@@ -557,6 +575,21 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
                 }
                 painter->drawText(textArea.adjusted(0, lineHeight * i, 0, 0), opt.displayAlignment, displayProperties.lines[i]);
             }
+            // get original painter back
+            painter->restore();
+            painter->save();
+
+            if ((index.column() == JournalModel::Column::Detail) && !displayProperties.tagIds.isEmpty()) {
+                QString txt = i18ncp("Label for tags in ledger", "Tag: ", "Tags: ", displayProperties.tagIds.count());
+                QStringList tags;
+
+                for (const auto& tagId : displayProperties.tagIds) {
+                    const auto tag = MyMoneyFile::instance()->tagsModel()->itemById(tagId);
+                    tags << tag.name();
+                }
+                txt.append(tags.join(", "));
+                painter->drawText(textArea.adjusted(0, lineHeight * lineCount, 0, 0), opt.displayAlignment, txt);
+            }
             painter->restore();
 
             if (matchedLineCount > 0) {
@@ -672,7 +705,9 @@ QSize JournalDelegate::sizeHint(const QStyleOptionViewItem& option, const QModel
             const QList<int> columns = {JournalModel::Column::Detail, JournalModel::Column::Deposit, JournalModel::Column::Payment};
             for (const auto& column : qAsConst(columns)) {
                 const auto idx = index.model()->index(index.row(), column);
-                const auto rowCount = d->displayString(idx, option).lines.count() + d->displayMatchedString(idx, option).lines.count();
+                const auto displayString = d->displayString(idx, option);
+                const auto displayMatchedString = d->displayMatchedString(idx, option);
+                const auto rowCount = displayString.lines.count() + (displayString.tagIds.isEmpty() ? 0 : 1) + displayMatchedString.lines.count();
                 if (rowCount > rows) {
                     rows = rowCount;
                 }
