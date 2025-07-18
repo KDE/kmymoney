@@ -186,7 +186,7 @@ Qt::ItemFlags BudgetViewProxyModel::flags(const QModelIndex& index) const
     // flag set. If so, we don't allow selecting this account
     QModelIndex idx = index.parent();
     while (idx.isValid()) {
-        const auto accountIdx = MyMoneyFile::baseModel()->mapToBaseSource(index);
+        const auto accountIdx = MyMoneyFile::baseModel()->mapToBaseSource(idx);
         const auto accountId = accountIdx.data(eMyMoney::Model::IdRole).toString();
         if (!accountId.isEmpty()) {
             // find out if the account is budgeted
