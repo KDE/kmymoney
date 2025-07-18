@@ -37,7 +37,7 @@
         <number>0</number>
        </property>
        <item>
-        <layout class="QHBoxLayout" stretch="70,250,300">
+        <layout class="QHBoxLayout" stretch="70,250,0,300">
          <item>
           <widget class="QLabel" name="textLabel1">
            <property name="text">
@@ -50,6 +50,13 @@
          </item>
          <item>
           <widget class="KMyMoneyAccountCombo" name="m_accountComboBox"/>
+         </item>
+         <item>
+          <widget class="QToolButton" name="m_ledgerButton">
+           <property name="text">
+            <string>Goto ledger</string>
+           </property>
+          </widget>
          </item>
          <item>
           <spacer name="spacer1">

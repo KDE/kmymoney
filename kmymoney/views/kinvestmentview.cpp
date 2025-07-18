@@ -89,6 +89,9 @@ public:
         m_needLoad = false;
         ui->setupUi(q);
 
+        // initially disabled
+        ui->m_ledgerButton->setEnabled(false);
+
         // Equities tab
         m_accountsProxyModel = new AccountNamesFilterProxyModel(q);
         m_accountsProxyModel->setObjectName("m_accountsProxyModel");
@@ -469,6 +472,7 @@ void KInvestmentView::showEvent(QShowEvent* event)
         connect(d->ui->m_accountComboBox, &KMyMoneyAccountCombo::accountSelected, this, [&](const QString& accId) {
             Q_D(KInvestmentView);
             d->loadAccount(accId);
+            d->ui->m_ledgerButton->setDisabled(accId.isEmpty());
         });
 
         connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::rowsInserted, this, [&]() {
@@ -480,6 +484,16 @@ void KInvestmentView::showEvent(QShowEvent* event)
             // kick the necessary update of the view
             if (d->m_equitiesProxyModel->rowCount() == 0) {
                 QMetaObject::invokeMethod(this, &KInvestmentView::refreshEquities, Qt::QueuedConnection);
+            }
+        });
+
+        connect(d->ui->m_ledgerButton, &QToolButton::clicked, this, [&]() {
+            Q_D(KInvestmentView);
+            const auto id = d->m_equitySelections.firstSelection(SelectedObjects::Account);
+            if (!id.isEmpty()) {
+                const auto gotoAccount = pActions[eMenu::Action::GoToAccount];
+                gotoAccount->setData(id);
+                gotoAccount->trigger();
             }
         });
 
