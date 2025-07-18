@@ -87,14 +87,14 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="home_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="home_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Перегляд домівки</phrase
 > </textobject
 > </inlinemediaobject
 > </guiicon
-> Домівка: придатний до налаштування огляд вашого поточного фінансового становища (або вступної сторінки, якщо не буде відкрито файла даних). </para>
+> Домівка: придатний до налаштування огляд вашого поточного фінансового становища (або вступної сторінки, якщо не буде відкрито файла даних).) </para>
   </listitem>
 
   <listitem>
@@ -102,7 +102,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="institutions_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="institutions_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Перегляд установ</phrase
@@ -117,7 +117,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="accounts_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="accounts_view.png" format="PNG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Перегляд рахунків</phrase
@@ -132,7 +132,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="schedule_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="schedule_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Перегляд розкладу</phrase
@@ -147,7 +147,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="categories_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="categories_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Перегляд категорій</phrase
@@ -162,7 +162,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="mail-tagged.png" format="PNG"/> </imageobject
+> <imagedata fileref="mail_tagged.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Перегляд міток</phrase
@@ -177,7 +177,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="payees_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="payees_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Перегляд отримувачів</phrase
@@ -192,7 +192,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="ledgers_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="ledgers_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Панель облікових книг</phrase
@@ -207,14 +207,14 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="investments_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="investments_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Перегляд інвестицій</phrase
 > </textobject
 > </inlinemediaobject
 > </guiicon
-> Інвестиції: тут буде показано список інвестованих вами коштів. </para>
+> Інвестиції: тут буде показано список інвестованих вами коштів </para>
   </listitem>
 
   <listitem>
@@ -222,7 +222,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="reports_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="reports_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Перегляд звітів</phrase
@@ -237,14 +237,14 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="budgets_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="budgets_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Перегляд бюджетів</phrase
 > </textobject
 > </inlinemediaobject
 > </guiicon
-> Бюджети: ваші бюджети. </para>
+> Бюджети: ваші бюджети.. </para>
   </listitem>
 
   <listitem>
@@ -267,7 +267,7 @@
 ><guiicon
 > <inlinemediaobject
 > <imageobject
-> <imagedata fileref="outbox_view.png" format="PNG"/> </imageobject
+> <imagedata fileref="outbox_view.svg" format="SVG" depth="2em"/> </imageobject
 > <textobject
 > <phrase
 >Перегляд «Вихідні»</phrase
@@ -588,7 +588,7 @@
 >, натисніть кнопку з піктограмою «Мітки» <guiicon
 ><inlinemediaobject
 ><imageobject
-><imagedata fileref="mail-tagged.png"/></imageobject
+><imagedata fileref="mail_tagged.svg" format="SVG" depth="2em"/></imageobject
 ></inlinemediaobject
 ></guiicon
 > на панелі вибору переглядів. </para>
