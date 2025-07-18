@@ -189,24 +189,30 @@ bool LedgerFilter::filterAcceptsRow(int source_row, const QModelIndex& source_pa
                 }
             }
             if (!rc) {
-                const auto accId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
-                if (!accId.isEmpty()) {
-                    const auto acc = file->account(accId);
-                    if (d->filterString.contains(MyMoneyFile::AccountSeparator)) {
-                        QStringList names;
-                        MyMoneyAccount current = acc;
-                        QString accountId;
-                        do {
-                            names.prepend(current.name());
-                            accountId = current.parentAccountId();
-                            current = file->account(accountId);
-                        } while (current.accountType() != eMyMoney::Account::Type::Unknown && !MyMoneyFile::instance()->isStandardAccount(accountId));
-                        if (names.size() > 1 && names.join(MyMoneyFile::AccountSeparator).contains(d->filterString, Qt::CaseInsensitive))
-                            rc = true;
-                    }
+                // scan the account names of all splits
+                const auto transactionIndices = file->journalModel()->indexesByTransactionId(idx.data(eMyMoney::Model::JournalTransactionIdRole).toString());
+                const auto rows = transactionIndices.count();
+                for (int row = 0; !rc && (row < rows); ++row) {
+                    const auto rowIndex = transactionIndices.at(row);
+                    const auto accId = rowIndex.data(eMyMoney::Model::SplitAccountIdRole).toString();
+                    if (!accId.isEmpty()) {
+                        const auto acc = file->account(accId);
+                        if (d->filterString.contains(MyMoneyFile::AccountSeparator)) {
+                            QStringList names;
+                            MyMoneyAccount current = acc;
+                            QString accountId;
+                            do {
+                                names.prepend(current.name());
+                                accountId = current.parentAccountId();
+                                current = file->account(accountId);
+                            } while (current.accountType() != eMyMoney::Account::Type::Unknown && !MyMoneyFile::instance()->isStandardAccount(accountId));
+                            if (names.size() > 1 && names.join(MyMoneyFile::AccountSeparator).contains(d->filterString, Qt::CaseInsensitive))
+                                rc = true;
+                        }
 
-                    if (!rc) {
-                        rc = acc.name().contains(d->filterString, Qt::CaseInsensitive);
+                        if (!rc) {
+                            rc = acc.name().contains(d->filterString, Qt::CaseInsensitive);
+                        }
                     }
                 }
             }
