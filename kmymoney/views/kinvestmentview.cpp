@@ -650,12 +650,15 @@ void KInvestmentView::slotUpdatePriceManually()
         try {
             auto security = MyMoneyFile::instance()->security(d->currentEquity().currencyId());
             auto currency = MyMoneyFile::instance()->security(security.tradingCurrency());
-            const auto& price = MyMoneyFile::instance()->price(security.id(), currency.id());
+            const auto price = MyMoneyFile::instance()->price(security.id(), currency.id());
 
-            QPointer<KCurrencyCalculator> calc =
-                new KCurrencyCalculator(security, currency, MyMoneyMoney::ONE,
-                                        price.rate(currency.id()), price.date(),
-                                        MyMoneyMoney::precToDenom(security.pricePrecision()));
+            QPointer<KCurrencyCalculator> calc = new KCurrencyCalculator(security,
+                                                                         currency,
+                                                                         MyMoneyMoney::ONE,
+                                                                         price.rate(currency.id()),
+                                                                         price.date(),
+                                                                         MyMoneyMoney::precToDenom(security.pricePrecision()),
+                                                                         this);
             calc->setupPriceEditor();
 
             // The dialog takes care of adding the price if necessary
