@@ -1049,7 +1049,8 @@ public:
             if (KMyMoneySettings::showDateOfLastReconciliation())
                 m_html += QString("<td>%1</td>").arg(i18n("Reconciled"));
 
-            m_html += "<td width=\"10%\" class=\"right nowrap\">";
+            const int width = KMyMoneySettings::showLimitInfo() ? 10 : 20;
+            m_html += QString::fromUtf8("<td width=\"%1%\" class=\"right nowrap\">").arg(width);
             m_html += i18n("Balance");
             m_html += "</td>";
 
