@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-16 02:32+0000\n"
+"POT-Creation-Date: 2025-07-19 06:35+0000\n"
 "PO-Revision-Date: 2025-07-16 07:50+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -6202,7 +6202,7 @@ msgstr "Nova oznaka"
 msgid "Unable to add tag"
 msgstr "Ni mogoče dodati oznake"
 
-#: kmymoney/kmymoneyutils.cpp:682 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:682 kmymoney/views/kinstitutionsview.cpp:230
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "Ni mogoče dodati institucije: %1"
@@ -11133,7 +11133,7 @@ msgstr "Ni simbola"
 #. i18n: ectx: attribute (title), widget (QWidget, m_securitiesTab)
 #. i18n: ectx: property (windowTitle), widget (QDialog, SecuritiesDlg)
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:14
-#: kmymoney/views/kinvestmentview.ui:114
+#: kmymoney/views/kinvestmentview.ui:121
 #, kde-format
 msgid "Securities"
 msgstr "Vrednostni papirji"
@@ -19404,13 +19404,13 @@ msgctxt "@info:tooltip"
 msgid "Amount of fees"
 msgstr "Znesek pristojbin"
 
-#: kmymoney/views/journaldelegate.cpp:88
+#: kmymoney/views/journaldelegate.cpp:90
 #, kde-format
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Prazna zabeležka"
 
-#: kmymoney/views/journaldelegate.cpp:347
+#: kmymoney/views/journaldelegate.cpp:365
 #, kde-format
 msgctxt "@info %2 contains list of account names separated by <br>"
 msgid "<qt>Closed account:<br><br>%2</qt>"
@@ -19420,7 +19420,7 @@ msgstr[1] "<qt>Zaprti račun:<br><br>%2</qt>"
 msgstr[2] "<qt>Zaprti računa:<br><br>%2</qt>"
 msgstr[3] "<qt>Zaprti računi:<br><br>%2</qt>"
 
-#: kmymoney/views/journaldelegate.cpp:352
+#: kmymoney/views/journaldelegate.cpp:370
 #, kde-format
 msgctxt "@info Unable to edit "
 msgid ""
@@ -19428,28 +19428,38 @@ msgid ""
 msgstr ""
 "KMyMoney ne podpira urejanja transakcij, ki se nanašajo na zaprte račune."
 
-#: kmymoney/views/journaldelegate.cpp:354
+#: kmymoney/views/journaldelegate.cpp:372
 #, kde-format
 msgctxt "@title:window"
 msgid "Prevent editing transactions"
 msgstr "Prepreči urejanje transakcij"
 
-#: kmymoney/views/journaldelegate.cpp:368
+#: kmymoney/views/journaldelegate.cpp:386
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
 "The current implementation cannot modify multiple transactions in this view."
 msgstr "Trenutna izvedba ne more spremeniti več transakcij v tem pogledu."
 
+#: kmymoney/views/journaldelegate.cpp:583
+#, kde-format
+msgctxt "Label for tags in ledger"
+msgid "Tag: "
+msgid_plural "Tags: "
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
 #: kmymoney/views/kaccountsview.cpp:170
-#: kmymoney/views/kinstitutionsview.cpp:208
+#: kmymoney/views/kinstitutionsview.cpp:209
 #, kde-format
 msgctxt "Approximate net worth"
 msgid "Net Worth: ~%1"
 msgstr "Neto vrednost: ~%1"
 
 #: kmymoney/views/kaccountsview.cpp:171
-#: kmymoney/views/kinstitutionsview.cpp:209
+#: kmymoney/views/kinstitutionsview.cpp:210
 #, kde-format
 msgid "Net Worth: %1"
 msgstr "Neto vrednost: %1"
@@ -20234,50 +20244,50 @@ msgstr "Pričakovane likvidne obveznosti"
 msgid "Expected Profit/Loss"
 msgstr "Pričakovan dobiček/izguba"
 
-#: kmymoney/views/kinstitutionsview.cpp:251
+#: kmymoney/views/kinstitutionsview.cpp:252
 #, kde-format
 msgctxt "@info:title Dialog title"
 msgid "Edit Institution"
 msgstr "Uredi institucijo"
 
-#: kmymoney/views/kinstitutionsview.cpp:258
+#: kmymoney/views/kinstitutionsview.cpp:259
 #, kde-format
 msgid "Unable to store institution: %1"
 msgstr "Ni mogoče shraniti institucije: %1"
 
-#: kmymoney/views/kinstitutionsview.cpp:264
+#: kmymoney/views/kinstitutionsview.cpp:265
 #, kde-format
 msgid "Unable to edit institution: %1"
 msgstr "Ni mogoče urejati institucije: %1"
 
-#: kmymoney/views/kinstitutionsview.cpp:275
+#: kmymoney/views/kinstitutionsview.cpp:276
 #, kde-format
 msgid "<p>Do you really want to delete the institution <b>%1</b>?</p>"
 msgstr "<p>Ali res želite izbrisati institucijo<b>%1</b>?</p>"
 
-#: kmymoney/views/kinstitutionsview.cpp:276
+#: kmymoney/views/kinstitutionsview.cpp:277
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete institution"
 msgstr "Zbriši institucijo"
 
-#: kmymoney/views/kinstitutionsview.cpp:287
-#: kmymoney/views/kinstitutionsview.cpp:290
+#: kmymoney/views/kinstitutionsview.cpp:288
+#: kmymoney/views/kinstitutionsview.cpp:291
 #, kde-format
 msgid "Unable to delete institution: %1"
 msgstr "Ni mogoče izbrisati institucije: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:587
+#: kmymoney/views/kinvestmentview.cpp:601
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>Ali res želite izbrisati naložbo<b>%1</b>?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:588
+#: kmymoney/views/kinvestmentview.cpp:602
 #, kde-format
 msgid "Delete investment"
 msgstr "Briši naložbo"
 
-#: kmymoney/views/kinvestmentview.cpp:599
+#: kmymoney/views/kinvestmentview.cpp:613
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "Ni mogoče izbrisati naložbe: %1"
@@ -20300,8 +20310,15 @@ msgstr "Lastniški kapital"
 msgid "Select investment account:"
 msgstr "Izberite investicijski račun:"
 
+#. i18n: ectx: property (text), widget (QToolButton, m_ledgerButton)
+#: kmymoney/views/kinvestmentview.ui:57
+#, fuzzy, kde-format
+#| msgid "Open ledger"
+msgid "Goto ledger"
+msgstr "Odpri glavno knjigo"
+
 #. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
-#: kmymoney/views/kinvestmentview.ui:80
+#: kmymoney/views/kinvestmentview.ui:87
 #, kde-format
 msgid ""
 "Summary of the equities contained in this account, showing your holdings and "
@@ -20311,7 +20328,7 @@ msgstr ""
 "imetje in njihovo najnovejšo ceno."
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_searchSecurities)
-#: kmymoney/views/kinvestmentview.ui:122
+#: kmymoney/views/kinvestmentview.ui:129
 #, kde-format
 msgid "Search..."
 msgstr "Išči..."

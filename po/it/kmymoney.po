@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-16 02:32+0000\n"
+"POT-Creation-Date: 2025-07-19 06:35+0000\n"
 "PO-Revision-Date: 2025-07-15 16:40+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -6226,7 +6226,7 @@ msgstr "Nuova etichetta"
 msgid "Unable to add tag"
 msgstr "Impossibile aggiungere l'etichetta"
 
-#: kmymoney/kmymoneyutils.cpp:682 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:682 kmymoney/views/kinstitutionsview.cpp:230
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "Impossibile aggiungere l'istituto: %1"
@@ -11187,7 +11187,7 @@ msgstr "Nessun simbolo"
 #. i18n: ectx: attribute (title), widget (QWidget, m_securitiesTab)
 #. i18n: ectx: property (windowTitle), widget (QDialog, SecuritiesDlg)
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:14
-#: kmymoney/views/kinvestmentview.ui:114
+#: kmymoney/views/kinvestmentview.ui:121
 #, kde-format
 msgid "Securities"
 msgstr "Strumenti finanziari"
@@ -19481,13 +19481,13 @@ msgctxt "@info:tooltip"
 msgid "Amount of fees"
 msgstr "Importo dei pagamenti"
 
-#: kmymoney/views/journaldelegate.cpp:88
+#: kmymoney/views/journaldelegate.cpp:90
 #, kde-format
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Promemoria vuoto"
 
-#: kmymoney/views/journaldelegate.cpp:347
+#: kmymoney/views/journaldelegate.cpp:365
 #, kde-format
 msgctxt "@info %2 contains list of account names separated by <br>"
 msgid "<qt>Closed account:<br><br>%2</qt>"
@@ -19495,7 +19495,7 @@ msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
 msgstr[0] "<qt>Conto chiuso:<br><br>%2</qt>"
 msgstr[1] "<qt>Conti chiusi:<br><br>%2</qt>"
 
-#: kmymoney/views/journaldelegate.cpp:352
+#: kmymoney/views/journaldelegate.cpp:370
 #, kde-format
 msgctxt "@info Unable to edit "
 msgid ""
@@ -19504,13 +19504,13 @@ msgstr ""
 "KMyMoney non supporta la modifica delle transazioni che fanno riferimento a "
 "conti chiusi."
 
-#: kmymoney/views/journaldelegate.cpp:354
+#: kmymoney/views/journaldelegate.cpp:372
 #, kde-format
 msgctxt "@title:window"
 msgid "Prevent editing transactions"
 msgstr "Impedisci la modifica delle transazioni"
 
-#: kmymoney/views/journaldelegate.cpp:368
+#: kmymoney/views/journaldelegate.cpp:386
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
@@ -19518,15 +19518,23 @@ msgid ""
 msgstr ""
 "L'attuale implementazione non può modificare più transazioni in questa vista."
 
+#: kmymoney/views/journaldelegate.cpp:583
+#, kde-format
+msgctxt "Label for tags in ledger"
+msgid "Tag: "
+msgid_plural "Tags: "
+msgstr[0] ""
+msgstr[1] ""
+
 #: kmymoney/views/kaccountsview.cpp:170
-#: kmymoney/views/kinstitutionsview.cpp:208
+#: kmymoney/views/kinstitutionsview.cpp:209
 #, kde-format
 msgctxt "Approximate net worth"
 msgid "Net Worth: ~%1"
 msgstr "Patrimonio netto: ~%1"
 
 #: kmymoney/views/kaccountsview.cpp:171
-#: kmymoney/views/kinstitutionsview.cpp:209
+#: kmymoney/views/kinstitutionsview.cpp:210
 #, kde-format
 msgid "Net Worth: %1"
 msgstr "Patrimonio netto: %1"
@@ -20313,50 +20321,50 @@ msgstr "Passività liquide attese"
 msgid "Expected Profit/Loss"
 msgstr "Profitti/Perdite attese"
 
-#: kmymoney/views/kinstitutionsview.cpp:251
+#: kmymoney/views/kinstitutionsview.cpp:252
 #, kde-format
 msgctxt "@info:title Dialog title"
 msgid "Edit Institution"
 msgstr "Modifica istituto"
 
-#: kmymoney/views/kinstitutionsview.cpp:258
+#: kmymoney/views/kinstitutionsview.cpp:259
 #, kde-format
 msgid "Unable to store institution: %1"
 msgstr "Impossibile memorizzare l'istituto: %1"
 
-#: kmymoney/views/kinstitutionsview.cpp:264
+#: kmymoney/views/kinstitutionsview.cpp:265
 #, kde-format
 msgid "Unable to edit institution: %1"
 msgstr "Impossibile modificare l'istituto: %1"
 
-#: kmymoney/views/kinstitutionsview.cpp:275
+#: kmymoney/views/kinstitutionsview.cpp:276
 #, kde-format
 msgid "<p>Do you really want to delete the institution <b>%1</b>?</p>"
 msgstr "<p>Vuoi davvero eliminare l'istituto <b>%1</b> ?</p>"
 
-#: kmymoney/views/kinstitutionsview.cpp:276
+#: kmymoney/views/kinstitutionsview.cpp:277
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete institution"
 msgstr "Elimina istituto"
 
-#: kmymoney/views/kinstitutionsview.cpp:287
-#: kmymoney/views/kinstitutionsview.cpp:290
+#: kmymoney/views/kinstitutionsview.cpp:288
+#: kmymoney/views/kinstitutionsview.cpp:291
 #, kde-format
 msgid "Unable to delete institution: %1"
 msgstr "Impossibile eliminare l'istituto: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:587
+#: kmymoney/views/kinvestmentview.cpp:601
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>Vuoi davvero eliminare l'investimento <b>%1</b>?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:588
+#: kmymoney/views/kinvestmentview.cpp:602
 #, kde-format
 msgid "Delete investment"
 msgstr "Elimina l'investimento"
 
-#: kmymoney/views/kinvestmentview.cpp:599
+#: kmymoney/views/kinvestmentview.cpp:613
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "Impossibile eliminare l'investimento: %1"
@@ -20379,8 +20387,15 @@ msgstr "Titoli"
 msgid "Select investment account:"
 msgstr "Seleziona conto di investimento:"
 
+#. i18n: ectx: property (text), widget (QToolButton, m_ledgerButton)
+#: kmymoney/views/kinvestmentview.ui:57
+#, fuzzy, kde-format
+#| msgid "New ledger"
+msgid "Goto ledger"
+msgstr "Nuovo registro"
+
 #. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
-#: kmymoney/views/kinvestmentview.ui:80
+#: kmymoney/views/kinvestmentview.ui:87
 #, kde-format
 msgid ""
 "Summary of the equities contained in this account, showing your holdings and "
@@ -20390,7 +20405,7 @@ msgstr ""
 "detenute e del loro prezzo più recente."
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_searchSecurities)
-#: kmymoney/views/kinvestmentview.ui:122
+#: kmymoney/views/kinvestmentview.ui:129
 #, kde-format
 msgid "Search..."
 msgstr "Cerca..."
@@ -27761,9 +27776,6 @@ msgstr "salvataggio del report '%1' in '%2'"
 
 #~ msgid "Account Types"
 #~ msgstr "Tipi di conto"
-
-#~ msgid "New ledger"
-#~ msgstr "Nuovo registro"
 
 #~ msgid ""
 #~ "This dialog does not allow new tags to be created. Please pick a tag from "

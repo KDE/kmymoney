@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-16 02:32+0000\n"
+"POT-Creation-Date: 2025-07-19 06:35+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -6495,7 +6495,7 @@ msgstr "Νέα ετικέτα"
 msgid "Unable to add tag"
 msgstr "Αδυναμία προσθήκης ετικέτας"
 
-#: kmymoney/kmymoneyutils.cpp:682 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:682 kmymoney/views/kinstitutionsview.cpp:230
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "Αδυναμία προσθήκης του ιδρύματος: %1"
@@ -11861,7 +11861,7 @@ msgstr "Σύμβολο"
 #. i18n: ectx: attribute (title), widget (QWidget, m_securitiesTab)
 #. i18n: ectx: property (windowTitle), widget (QDialog, SecuritiesDlg)
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:14
-#: kmymoney/views/kinvestmentview.ui:114
+#: kmymoney/views/kinvestmentview.ui:121
 #, kde-format
 msgid "Securities"
 msgstr "Αξιόγραφα"
@@ -20408,14 +20408,14 @@ msgctxt "@info:tooltip"
 msgid "Amount of fees"
 msgstr "Το ποσό είναι:"
 
-#: kmymoney/views/journaldelegate.cpp:88
+#: kmymoney/views/journaldelegate.cpp:90
 #, fuzzy, kde-format
 #| msgid "Copy of %1"
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Αντίγραφο του %1"
 
-#: kmymoney/views/journaldelegate.cpp:347
+#: kmymoney/views/journaldelegate.cpp:365
 #, kde-format
 msgctxt "@info %2 contains list of account names separated by <br>"
 msgid "<qt>Closed account:<br><br>%2</qt>"
@@ -20423,7 +20423,7 @@ msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: kmymoney/views/journaldelegate.cpp:352
+#: kmymoney/views/journaldelegate.cpp:370
 #, fuzzy, kde-format
 #| msgid "Cannot remove transaction that references a closed account."
 msgctxt "@info Unable to edit "
@@ -20432,22 +20432,30 @@ msgid ""
 msgstr ""
 "Αδυναμία διαγραφής συναλλαγής η οποία αναφέρεται σε έναν κλειστό λογαριασμό."
 
-#: kmymoney/views/journaldelegate.cpp:354
+#: kmymoney/views/journaldelegate.cpp:372
 #, fuzzy, kde-format
 #| msgid "Deleting transactions"
 msgctxt "@title:window"
 msgid "Prevent editing transactions"
 msgstr "Διαγραφή συναλλαγών"
 
-#: kmymoney/views/journaldelegate.cpp:368
+#: kmymoney/views/journaldelegate.cpp:386
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
 "The current implementation cannot modify multiple transactions in this view."
 msgstr ""
 
+#: kmymoney/views/journaldelegate.cpp:583
+#, kde-format
+msgctxt "Label for tags in ledger"
+msgid "Tag: "
+msgid_plural "Tags: "
+msgstr[0] ""
+msgstr[1] ""
+
 #: kmymoney/views/kaccountsview.cpp:170
-#: kmymoney/views/kinstitutionsview.cpp:208
+#: kmymoney/views/kinstitutionsview.cpp:209
 #, fuzzy, kde-format
 #| msgid "Net Worth: "
 msgctxt "Approximate net worth"
@@ -20455,7 +20463,7 @@ msgid "Net Worth: ~%1"
 msgstr "Καθαρή αξία: "
 
 #: kmymoney/views/kaccountsview.cpp:171
-#: kmymoney/views/kinstitutionsview.cpp:209
+#: kmymoney/views/kinstitutionsview.cpp:210
 #, fuzzy, kde-format
 #| msgid "Net Worth: "
 msgid "Net Worth: %1"
@@ -21296,52 +21304,52 @@ msgstr "Αναμενόμενη ρευστότητα στοιχείων παθη�
 msgid "Expected Profit/Loss"
 msgstr "Αναμενόμενο κέρδος / ζημιά"
 
-#: kmymoney/views/kinstitutionsview.cpp:251
+#: kmymoney/views/kinstitutionsview.cpp:252
 #, fuzzy, kde-format
 #| msgid "Edit institution..."
 msgctxt "@info:title Dialog title"
 msgid "Edit Institution"
 msgstr "Επεξεργασία ιδρύματος..."
 
-#: kmymoney/views/kinstitutionsview.cpp:258
+#: kmymoney/views/kinstitutionsview.cpp:259
 #, kde-format
 msgid "Unable to store institution: %1"
 msgstr "Αδυναμία αποθήκευσης του ιδρύματος: %1"
 
-#: kmymoney/views/kinstitutionsview.cpp:264
+#: kmymoney/views/kinstitutionsview.cpp:265
 #, kde-format
 msgid "Unable to edit institution: %1"
 msgstr "Αδυναμία επεξεργασίας του ιδρύματος: %1"
 
-#: kmymoney/views/kinstitutionsview.cpp:275
+#: kmymoney/views/kinstitutionsview.cpp:276
 #, kde-format
 msgid "<p>Do you really want to delete the institution <b>%1</b>?</p>"
 msgstr "<p>Θέλετε πράγματι να διαγράψετε το ίδρυμα <b>%1</b>;</p>"
 
-#: kmymoney/views/kinstitutionsview.cpp:276
+#: kmymoney/views/kinstitutionsview.cpp:277
 #, fuzzy, kde-format
 #| msgid "Delete institution..."
 msgctxt "@title:window"
 msgid "Delete institution"
 msgstr "Διαγραφή ιδρύματος..."
 
-#: kmymoney/views/kinstitutionsview.cpp:287
-#: kmymoney/views/kinstitutionsview.cpp:290
+#: kmymoney/views/kinstitutionsview.cpp:288
+#: kmymoney/views/kinstitutionsview.cpp:291
 #, kde-format
 msgid "Unable to delete institution: %1"
 msgstr "Αδυναμία διαγραφής ιδρύματος: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:587
+#: kmymoney/views/kinvestmentview.cpp:601
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>Θέλετε πράγματι να διαγράψετε την επένδυση <b>%1</b>;</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:588
+#: kmymoney/views/kinvestmentview.cpp:602
 #, kde-format
 msgid "Delete investment"
 msgstr "Διαγραφή επένδυσης"
 
-#: kmymoney/views/kinvestmentview.cpp:599
+#: kmymoney/views/kinvestmentview.cpp:613
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "Αδυναμία διαγραφής επένδυσης: %1"
@@ -21365,8 +21373,15 @@ msgstr "Μετοχές"
 msgid "Select investment account:"
 msgstr "Επιλογή νέου τύπου επένδυσης"
 
+#. i18n: ectx: property (text), widget (QToolButton, m_ledgerButton)
+#: kmymoney/views/kinvestmentview.ui:57
+#, fuzzy, kde-format
+#| msgid "Open ledger"
+msgid "Goto ledger"
+msgstr "Άνοιγμα καθολικού"
+
 #. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
-#: kmymoney/views/kinvestmentview.ui:80
+#: kmymoney/views/kinvestmentview.ui:87
 #, kde-format
 msgid ""
 "Summary of the equities contained in this account, showing your holdings and "
@@ -21376,7 +21391,7 @@ msgstr ""
 "και την πιο πρόσφατη τιμή τους."
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_searchSecurities)
-#: kmymoney/views/kinvestmentview.ui:122
+#: kmymoney/views/kinvestmentview.ui:129
 #, fuzzy, kde-format
 #| msgctxt "Search widget label"
 #| msgid "S&earch:"
@@ -29006,11 +29021,6 @@ msgstr ""
 
 #~ msgid "Account Types"
 #~ msgstr "Τύποι λογαριασμών"
-
-#, fuzzy
-#~| msgid "Open ledger"
-#~ msgid "New ledger"
-#~ msgstr "Άνοιγμα καθολικού"
 
 #~ msgid ""
 #~ "This dialog does not allow new tags to be created. Please pick a tag from "
