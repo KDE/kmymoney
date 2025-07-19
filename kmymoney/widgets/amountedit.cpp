@@ -80,6 +80,7 @@ public:
         , m_isReadOnly(false)
         , m_allowModifyShares(true)
         , m_isEnabled(qq->isEnabled())
+        , m_lastChangeWasRemove(false)
         , m_actionIcons(NoItem)
         , m_initialExchangeRate(MyMoneyMoney::ONE)
         , m_state(AmountEdit::DisplayValue)
@@ -330,6 +331,12 @@ public:
             widgetTextCache = txt;
             if (q->isEnabled() && !txt.isEmpty()) {
                 ensureFractionalPart(widgetTextCache, state);
+                // ensureFractionalPart is used to add digits but
+                // ist should not remove some. If that's the
+                // case we revert what it has done
+                if (widgetTextCache.length() < txt.length()) {
+                    widgetTextCache = txt;
+                }
             }
             // only update text if it really differs
             if (m_state == state && widgetTextCache.compare(q->QLineEdit::text())) {
@@ -362,6 +369,29 @@ public:
         q->QLineEdit::setReadOnly(ro);
     }
 
+    /**
+     * This updates the widget defined by @a widgetSelector which
+     * could be @c AmountEdit::DisplayValue or @c AmountEdit::DisplayShares.
+     * In case the last change to the widget was the removal of a
+     * character, the precision is unlimited and the value of the
+     * updated string did not change, we keep what is in the widget
+     * and do not modify it.
+     */
+    void updateWidgetText(const AmountEdit::DisplayState widgetSelector, const MyMoneyMoney& amount)
+    {
+        auto& widget = (widgetSelector == AmountEdit::DisplayValue) ? m_valueText : m_sharesText;
+        const auto fract = precision(widgetSelector);
+        auto txt(amount.formatMoney(QString(), fract, false));
+
+        // the following logic checks that we keep a possible decimal
+        // symbol in the display when the last digit after the decimal
+        // symbol has been removed and no specific precision is known
+        if (m_lastChangeWasRemove && (fract == -1) && (MyMoneyMoney(widget) == MyMoneyMoney(txt))) {
+            txt = widget;
+        }
+        setWidgetText(widget, amount, txt, widgetSelector);
+    }
+
     AmountEdit* q_ptr;
     QFrame* m_calculatorFrame;
     KMyMoneyCalculator* m_calculator;
@@ -373,6 +403,7 @@ public:
     bool m_isReadOnly; // read only state as set by application
     bool m_allowModifyShares; // allow to override shares even if read only state
     bool m_isEnabled;
+    bool m_lastChangeWasRemove;
     QString m_previousText; // keep track of what has been typed
 
     QString m_valueText; // keep track of what was the original value
@@ -649,8 +680,7 @@ void AmountEdit::setValue(const MyMoneyMoney& amount, bool forceUpdate)
 
     d->valueSet = true;
     d->m_value = amount;
-    const auto txt(amount.formatMoney(QString(), d->precision(AmountEdit::DisplayValue), false));
-    d->setValueText(txt);
+    d->updateWidgetText(AmountEdit::DisplayValue, amount);
 
     if (!hasMultipleCurrencies()) {
         setShares(amount);
@@ -669,9 +699,7 @@ void AmountEdit::setShares(const MyMoneyMoney& amount)
     Q_D(AmountEdit);
     d->sharesSet = !d->valueSet;
     d->m_shares = amount;
-
-    const auto txt(amount.formatMoney(QString(), d->precision(AmountEdit::DisplayShares), false));
-    d->setSharesText(txt);
+    d->updateWidgetText(AmountEdit::DisplayShares, amount);
 
     if (!d->m_shares.isZero()) {
         d->m_initialExchangeRate = d->m_value / d->m_shares;
@@ -698,6 +726,7 @@ void AmountEdit::theTextChanged(const QString & theText)
     QString nsign, psign;
     nsign = locale.negativeSign();
     psign = locale.positiveSign();
+    d->m_lastChangeWasRemove = false;
 
     auto i = 0;
     if (isEnabled()) {
@@ -717,6 +746,7 @@ void AmountEdit::theTextChanged(const QString & theText)
                 // adjust value or shares depending on state
                 // by using the initialExchangeRate
                 if (d->m_state == AmountEdit::DisplayValue) {
+                    d->m_lastChangeWasRemove = d->m_valueText.length() > l_text.length();
                     d->m_valueText = l_text;
                     MyMoneyMoney amount(l_text);
                     d->adjustToPrecision(AmountEdit::DisplayValue, amount);
@@ -724,6 +754,7 @@ void AmountEdit::theTextChanged(const QString & theText)
                     d->m_sharesText = amount.formatMoney(QString(), d->precision(AmountEdit::DisplayShares), false);
                     d->m_lastChanged = ValueChanged;
                 } else {
+                    d->m_lastChangeWasRemove = d->m_sharesText.length() > l_text.length();
                     d->m_sharesText = l_text;
                     MyMoneyMoney amount(l_text);
                     d->adjustToPrecision(AmountEdit::DisplayShares, amount);
