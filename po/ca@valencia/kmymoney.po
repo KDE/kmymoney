@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-16 04:29+0000\n"
-"PO-Revision-Date: 2025-07-06 11:04+0200\n"
+"POT-Creation-Date: 2025-07-19 08:02+0000\n"
+"PO-Revision-Date: 2025-07-16 09:19+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -6237,7 +6237,7 @@ msgstr "Etiqueta nova"
 msgid "Unable to add tag"
 msgstr "No s'ha pogut afegir l'etiqueta"
 
-#: kmymoney/kmymoneyutils.cpp:682 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:682 kmymoney/views/kinstitutionsview.cpp:230
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "No s'ha pogut afegir la institució: %1"
@@ -6918,27 +6918,23 @@ msgid "  * value set to shares in split of transaction '%1'."
 msgstr "  * Valors establits a accions en el desglossament de l'operació «%1»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3351
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Split %2 in transaction '%1' contains different signs for shares and "
-#| "value. Please fix manually."
+#, kde-format
 msgid ""
 "  * Split %2 in transaction '%1' contains different signs for shares and "
 "value."
 msgstr ""
 "  * El desglossament %2 de l'operació «%1» conté signes diferents per a les "
-"accions i el valor. Per favor, arregleu-ho manualment."
+"accions i el valor."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3368
-#, fuzzy, kde-format
-#| msgid "Investment Transactions"
+#, kde-format
 msgid "    Reinvestment transaction '%1' fixed."
-msgstr "Operacions d'inversió"
+msgstr "    S'ha corregit l'operació de reinversió «%1»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3372
 #, kde-format
 msgid "    Please fix manually."
-msgstr ""
+msgstr "    Corregiu-ho manualment."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3385
 #, kde-format
@@ -11204,7 +11200,7 @@ msgstr "Sense símbol"
 #. i18n: ectx: attribute (title), widget (QWidget, m_securitiesTab)
 #. i18n: ectx: property (windowTitle), widget (QDialog, SecuritiesDlg)
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:14
-#: kmymoney/views/kinvestmentview.ui:114
+#: kmymoney/views/kinvestmentview.ui:121
 #, kde-format
 msgid "Securities"
 msgstr "Títols"
@@ -12852,13 +12848,14 @@ msgstr ""
 "Açò pot tardar una estona depenent de l'amplada de banda disponible."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:127
-#, fuzzy, kde-format
-#| msgid "Please select your financial institution from the list below..."
+#, kde-format
 msgctxt "@title:group Manual enter OFX details"
 msgid ""
 "Please provide the details for your financial institution in the fields "
 "below."
-msgstr "Seleccioneu la institució financera des de la llista davall…"
+msgstr ""
+"Proporcioneu els detalls de la vostra institució financera en els camps de "
+"davall."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:245
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:299
@@ -19503,13 +19500,13 @@ msgctxt "@info:tooltip"
 msgid "Amount of fees"
 msgstr "Import de les despeses"
 
-#: kmymoney/views/journaldelegate.cpp:88
+#: kmymoney/views/journaldelegate.cpp:90
 #, kde-format
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Recordatori buit"
 
-#: kmymoney/views/journaldelegate.cpp:347
+#: kmymoney/views/journaldelegate.cpp:365
 #, kde-format
 msgctxt "@info %2 contains list of account names separated by <br>"
 msgid "<qt>Closed account:<br><br>%2</qt>"
@@ -19517,7 +19514,7 @@ msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
 msgstr[0] "<qt>Compte tancat:<br><br>%2</qt>"
 msgstr[1] "<qt>Comptes tancats:<br><br>%2</qt>"
 
-#: kmymoney/views/journaldelegate.cpp:352
+#: kmymoney/views/journaldelegate.cpp:370
 #, kde-format
 msgctxt "@info Unable to edit "
 msgid ""
@@ -19525,13 +19522,13 @@ msgid ""
 msgstr ""
 "KMyMoney no permet editar operacions que fan referència a comptes tancats."
 
-#: kmymoney/views/journaldelegate.cpp:354
+#: kmymoney/views/journaldelegate.cpp:372
 #, kde-format
 msgctxt "@title:window"
 msgid "Prevent editing transactions"
 msgstr "Evita l'edició d'operacions"
 
-#: kmymoney/views/journaldelegate.cpp:368
+#: kmymoney/views/journaldelegate.cpp:386
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
@@ -19539,9 +19536,17 @@ msgid ""
 msgstr ""
 "La implementació actual no pot modificar múltiples operacions en esta vista."
 
+#: kmymoney/views/journaldelegate.cpp:583
+#, kde-format
+msgctxt "Label for tags in ledger"
+msgid "Tag: "
+msgid_plural "Tags: "
+msgstr[0] ""
+msgstr[1] ""
+
 # skip-rule: ff-net
 #: kmymoney/views/kaccountsview.cpp:170
-#: kmymoney/views/kinstitutionsview.cpp:208
+#: kmymoney/views/kinstitutionsview.cpp:209
 #, kde-format
 msgctxt "Approximate net worth"
 msgid "Net Worth: ~%1"
@@ -19549,7 +19554,7 @@ msgstr "Valor net: ~%1"
 
 # skip-rule: ff-net
 #: kmymoney/views/kaccountsview.cpp:171
-#: kmymoney/views/kinstitutionsview.cpp:209
+#: kmymoney/views/kinstitutionsview.cpp:210
 #, kde-format
 msgid "Net Worth: %1"
 msgstr "Valor net: %1"
@@ -20335,50 +20340,50 @@ msgstr "Passius líquids esperats"
 msgid "Expected Profit/Loss"
 msgstr "Benefici/pèrdua esperat"
 
-#: kmymoney/views/kinstitutionsview.cpp:251
+#: kmymoney/views/kinstitutionsview.cpp:252
 #, kde-format
 msgctxt "@info:title Dialog title"
 msgid "Edit Institution"
 msgstr "Editeu la institució"
 
-#: kmymoney/views/kinstitutionsview.cpp:258
+#: kmymoney/views/kinstitutionsview.cpp:259
 #, kde-format
 msgid "Unable to store institution: %1"
 msgstr "No s'ha pogut guardar la institució: %1"
 
-#: kmymoney/views/kinstitutionsview.cpp:264
+#: kmymoney/views/kinstitutionsview.cpp:265
 #, kde-format
 msgid "Unable to edit institution: %1"
 msgstr "No s'ha pogut editar la institució: %1"
 
-#: kmymoney/views/kinstitutionsview.cpp:275
+#: kmymoney/views/kinstitutionsview.cpp:276
 #, kde-format
 msgid "<p>Do you really want to delete the institution <b>%1</b>?</p>"
 msgstr "<p>Segur que voleu suprimir la institució <b>%1</b>?</p>"
 
-#: kmymoney/views/kinstitutionsview.cpp:276
+#: kmymoney/views/kinstitutionsview.cpp:277
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete institution"
 msgstr "Suprimiu una institució"
 
-#: kmymoney/views/kinstitutionsview.cpp:287
-#: kmymoney/views/kinstitutionsview.cpp:290
+#: kmymoney/views/kinstitutionsview.cpp:288
+#: kmymoney/views/kinstitutionsview.cpp:291
 #, kde-format
 msgid "Unable to delete institution: %1"
 msgstr "No s'ha pogut suprimir la institució: %1"
 
-#: kmymoney/views/kinvestmentview.cpp:587
+#: kmymoney/views/kinvestmentview.cpp:601
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>Segur que voleu suprimir la inversió <b>%1</b>?</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:588
+#: kmymoney/views/kinvestmentview.cpp:602
 #, kde-format
 msgid "Delete investment"
 msgstr "Elimina la inversió"
 
-#: kmymoney/views/kinvestmentview.cpp:599
+#: kmymoney/views/kinvestmentview.cpp:613
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "No s'ha pogut suprimir la inversió: %1"
@@ -20401,8 +20406,15 @@ msgstr "Accions"
 msgid "Select investment account:"
 msgstr "Seleccioneu el compte d'inversions:"
 
+#. i18n: ectx: property (text), widget (QToolButton, m_ledgerButton)
+#: kmymoney/views/kinvestmentview.ui:57
+#, fuzzy, kde-format
+#| msgid "Open ledger"
+msgid "Goto ledger"
+msgstr "Obri el llibre major"
+
 #. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
-#: kmymoney/views/kinvestmentview.ui:80
+#: kmymoney/views/kinvestmentview.ui:87
 #, kde-format
 msgid ""
 "Summary of the equities contained in this account, showing your holdings and "
@@ -20412,7 +20424,7 @@ msgstr ""
 "propietat i la seua cotització més recent."
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_searchSecurities)
-#: kmymoney/views/kinvestmentview.ui:122
+#: kmymoney/views/kinvestmentview.ui:129
 #, kde-format
 msgid "Search..."
 msgstr "Busca…"

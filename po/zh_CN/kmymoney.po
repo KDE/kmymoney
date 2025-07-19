@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-16 04:29+0000\n"
+"POT-Creation-Date: 2025-07-19 08:02+0000\n"
 "PO-Revision-Date: 2024-03-30 19:46\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -6170,7 +6170,7 @@ msgstr "新建标签"
 msgid "Unable to add tag"
 msgstr "无法添加标签"
 
-#: kmymoney/kmymoneyutils.cpp:682 kmymoney/views/kinstitutionsview.cpp:229
+#: kmymoney/kmymoneyutils.cpp:682 kmymoney/views/kinstitutionsview.cpp:230
 #, kde-format
 msgid "Cannot add institution: %1"
 msgstr "无法添加金融机构：%1"
@@ -11184,7 +11184,7 @@ msgstr "无代号"
 #. i18n: ectx: attribute (title), widget (QWidget, m_securitiesTab)
 #. i18n: ectx: property (windowTitle), widget (QDialog, SecuritiesDlg)
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:14
-#: kmymoney/views/kinvestmentview.ui:114
+#: kmymoney/views/kinvestmentview.ui:121
 #, kde-format
 msgid "Securities"
 msgstr "证券"
@@ -19292,21 +19292,21 @@ msgctxt "@info:tooltip"
 msgid "Amount of fees"
 msgstr "贷款类型："
 
-#: kmymoney/views/journaldelegate.cpp:88
+#: kmymoney/views/journaldelegate.cpp:90
 #, fuzzy, kde-format
 #| msgid "Copy memo"
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "复制备忘"
 
-#: kmymoney/views/journaldelegate.cpp:347
+#: kmymoney/views/journaldelegate.cpp:365
 #, kde-format
 msgctxt "@info %2 contains list of account names separated by <br>"
 msgid "<qt>Closed account:<br><br>%2</qt>"
 msgid_plural "<qt>Closed accounts:<br><br>%2</qt>"
 msgstr[0] ""
 
-#: kmymoney/views/journaldelegate.cpp:352
+#: kmymoney/views/journaldelegate.cpp:370
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in a closed account."
 msgctxt "@info Unable to edit "
@@ -19314,22 +19314,29 @@ msgid ""
 "KMyMoney does not support to edit transaction that reference closed accounts."
 msgstr "在关闭的账户里无法创建交易。"
 
-#: kmymoney/views/journaldelegate.cpp:354
+#: kmymoney/views/journaldelegate.cpp:372
 #, fuzzy, kde-format
 #| msgid "Storing transactions"
 msgctxt "@title:window"
 msgid "Prevent editing transactions"
 msgstr "对交易排序"
 
-#: kmymoney/views/journaldelegate.cpp:368
+#: kmymoney/views/journaldelegate.cpp:386
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
 "The current implementation cannot modify multiple transactions in this view."
 msgstr ""
 
+#: kmymoney/views/journaldelegate.cpp:583
+#, kde-format
+msgctxt "Label for tags in ledger"
+msgid "Tag: "
+msgid_plural "Tags: "
+msgstr[0] ""
+
 #: kmymoney/views/kaccountsview.cpp:170
-#: kmymoney/views/kinstitutionsview.cpp:208
+#: kmymoney/views/kinstitutionsview.cpp:209
 #, fuzzy, kde-format
 #| msgid "Net Worth: "
 msgctxt "Approximate net worth"
@@ -19337,7 +19344,7 @@ msgid "Net Worth: ~%1"
 msgstr "净值："
 
 #: kmymoney/views/kaccountsview.cpp:171
-#: kmymoney/views/kinstitutionsview.cpp:209
+#: kmymoney/views/kinstitutionsview.cpp:210
 #, fuzzy, kde-format
 #| msgid "Net Worth: "
 msgid "Net Worth: %1"
@@ -20118,52 +20125,52 @@ msgstr ""
 msgid "Expected Profit/Loss"
 msgstr ""
 
-#: kmymoney/views/kinstitutionsview.cpp:251
+#: kmymoney/views/kinstitutionsview.cpp:252
 #, fuzzy, kde-format
 #| msgid "Edit institution..."
 msgctxt "@info:title Dialog title"
 msgid "Edit Institution"
 msgstr "编辑金融机构..."
 
-#: kmymoney/views/kinstitutionsview.cpp:258
+#: kmymoney/views/kinstitutionsview.cpp:259
 #, kde-format
 msgid "Unable to store institution: %1"
 msgstr "无法保存金融机构：%1"
 
-#: kmymoney/views/kinstitutionsview.cpp:264
+#: kmymoney/views/kinstitutionsview.cpp:265
 #, kde-format
 msgid "Unable to edit institution: %1"
 msgstr "无法编辑金融机构：%1"
 
-#: kmymoney/views/kinstitutionsview.cpp:275
+#: kmymoney/views/kinstitutionsview.cpp:276
 #, kde-format
 msgid "<p>Do you really want to delete the institution <b>%1</b>?</p>"
 msgstr "<p>您真的要删除金融机构<b>%1</b>吗？</p>"
 
-#: kmymoney/views/kinstitutionsview.cpp:276
+#: kmymoney/views/kinstitutionsview.cpp:277
 #, fuzzy, kde-format
 #| msgid "Delete institution..."
 msgctxt "@title:window"
 msgid "Delete institution"
 msgstr "删除金融机构..."
 
-#: kmymoney/views/kinstitutionsview.cpp:287
-#: kmymoney/views/kinstitutionsview.cpp:290
+#: kmymoney/views/kinstitutionsview.cpp:288
+#: kmymoney/views/kinstitutionsview.cpp:291
 #, kde-format
 msgid "Unable to delete institution: %1"
 msgstr "无法删除金融机构：%1"
 
-#: kmymoney/views/kinvestmentview.cpp:587
+#: kmymoney/views/kinvestmentview.cpp:601
 #, kde-format
 msgid "<p>Do you really want to delete the investment <b>%1</b>?</p>"
 msgstr "<p>您真的要删除投资<b>%1</b>吗？</p>"
 
-#: kmymoney/views/kinvestmentview.cpp:588
+#: kmymoney/views/kinvestmentview.cpp:602
 #, kde-format
 msgid "Delete investment"
 msgstr "删除投资"
 
-#: kmymoney/views/kinvestmentview.cpp:599
+#: kmymoney/views/kinvestmentview.cpp:613
 #, kde-format
 msgid "Unable to delete investment: %1"
 msgstr "无法删除投资：%1"
@@ -20188,8 +20195,15 @@ msgstr "权益"
 msgid "Select investment account:"
 msgstr "选择新的投资类型"
 
+#. i18n: ectx: property (text), widget (QToolButton, m_ledgerButton)
+#: kmymoney/views/kinvestmentview.ui:57
+#, fuzzy, kde-format
+#| msgid "New ledger"
+msgid "Goto ledger"
+msgstr "新建账簿"
+
 #. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
-#: kmymoney/views/kinvestmentview.ui:80
+#: kmymoney/views/kinvestmentview.ui:87
 #, kde-format
 msgid ""
 "Summary of the equities contained in this account, showing your holdings and "
@@ -20197,7 +20211,7 @@ msgid ""
 msgstr "此账户所包含的产权概述。显示您的持有状况和它们最新的价值。"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_searchSecurities)
-#: kmymoney/views/kinvestmentview.ui:122
+#: kmymoney/views/kinvestmentview.ui:129
 #, fuzzy, kde-format
 #| msgid "Search view"
 msgid "Search..."
@@ -26505,9 +26519,6 @@ msgstr ""
 
 #~ msgid "Remove this security item from the file"
 #~ msgstr "从文件中删除此证券项。"
-
-#~ msgid "New ledger"
-#~ msgstr "新建账簿"
 
 #~ msgid "Do you want to show <b>%1</b> column on every loaded view?"
 #~ msgstr "你想在每个已加载的视图上显示 <b>%1</b> 列吗？"
