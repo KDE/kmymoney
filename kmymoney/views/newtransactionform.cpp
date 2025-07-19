@@ -57,6 +57,12 @@ NewTransactionForm::NewTransactionForm(QWidget* parent)
 {
     const auto journalModel = MyMoneyFile::instance()->journalModel();
     d->ui->setupUi(this);
+
+#ifndef ENABLE_COSTCENTER
+    d->ui->costCenterLabel->hide();
+    d->ui->costCenterEdit->hide();
+#endif
+
     connect(journalModel, &QAbstractItemModel::rowsInserted, this, &NewTransactionForm::rowsInserted);
     connect(journalModel, &QAbstractItemModel::rowsRemoved, this, &NewTransactionForm::rowsRemoved);
     connect(journalModel, &QAbstractItemModel::dataChanged, this, &NewTransactionForm::modelDataChanged);
