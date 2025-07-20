@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-19 06:35+0000\n"
-"PO-Revision-Date: 2025-07-15 10:45+0100\n"
+"POT-Creation-Date: 2025-07-20 02:02+0000\n"
+"PO-Revision-Date: 2025-07-19 12:12+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -969,9 +969,9 @@ msgid "Exchange Rate/Price Editor"
 msgstr "Editor de índice de cotización/precio"
 
 #. i18n: ectx: property (text), widget (QLabel, amountLabel)
-#. i18n: ectx: property (text), widget (QLabel, label_7)
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #. i18n: ectx: attribute (title), widget (QWidget, m_amountTab)
+#. i18n: ectx: property (text), widget (QLabel, label_7)
 #. i18n: ectx: attribute (title), widget (QWidget, amountTab)
 #: kmymoney/dialogs/kcurrencycalculator.ui:51
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:398
@@ -1035,7 +1035,6 @@ msgstr "xxx"
 
 #. i18n: ectx: property (text), widget (QLabel, postdateLabel)
 #. i18n: ectx: property (text), widget (QLabel, dateLabel)
-#. i18n: ectx: property (text), widget (QLabel, label_6)
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
@@ -1965,7 +1964,7 @@ msgstr "Tipo"
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:237
 #: kmymoney/views/investtransactioneditor.ui:54
 #: kmymoney/views/investtransactioneditor.ui:236
-#: kmymoney/views/khomeview_p.h:1074
+#: kmymoney/views/khomeview_p.h:1075
 #, kde-format
 msgid "Total"
 msgstr "Total"
@@ -2139,7 +2138,7 @@ msgid "Liability"
 msgstr "Pasivos"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:554 kmymoney/kmymoney.cpp:447
-#: kmymoney/models/ledgerfilterbase.cpp:76 kmymoney/views/khomeview_p.h:1832
+#: kmymoney/models/ledgerfilterbase.cpp:76 kmymoney/views/khomeview_p.h:1833
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -8583,7 +8582,7 @@ msgid "*** UNASSIGNED ***"
 msgstr "*** SIN ASIGNAR ***"
 
 #: kmymoney/mymoney/splitmodel.cpp:200 kmymoney/mymoney/splitmodel.cpp:205
-#: kmymoney/widgets/amountedit.cpp:291 kmymoney/widgets/amountedit.cpp:342
+#: kmymoney/widgets/amountedit.cpp:292 kmymoney/widgets/amountedit.cpp:349
 #: kmymoney/widgets/creditdebitedit.cpp:126
 #: kmymoney/widgets/creditdebitedit.cpp:127
 #: kmymoney/widgets/creditdebitedit.cpp:156
@@ -10135,7 +10134,6 @@ msgid "Clear category field selection."
 msgstr "Borrar la selección del campo de categoría."
 
 #. i18n: ectx: property (text), widget (QLabel, memoLabel)
-#. i18n: ectx: property (text), widget (QLabel, label_3)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkMemo)
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #. i18n: ectx: attribute (title), widget (QWidget, memoTab)
@@ -10183,7 +10181,7 @@ msgstr "Borrar la selección del campo de memorando."
 #: kmymoney/plugins/views/reports/core/listtable.cpp:763
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1053
+#: kmymoney/views/khomeview_p.h:1054
 #, kde-format
 msgid "Balance"
 msgstr "Saldo"
@@ -11216,7 +11214,6 @@ msgstr ""
 "Complete todos los nombres y símbolos que faltan."
 
 #. i18n: ectx: property (text), widget (QLabel, statusLabel)
-#. i18n: ectx: property (text), widget (QLabel, label_9)
 #. i18n: ectx: property (text), widget (QTableWidget, tableWidget)
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:72
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:157
@@ -12787,7 +12784,7 @@ msgstr "Organización"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
 #: kmymoney/views/investtransactioneditor.ui:98
 #: kmymoney/views/khomeview_p.h:617 kmymoney/views/khomeview_p.h:1037
-#: kmymoney/views/khomeview_p.h:1165 kmymoney/views/newtransactioneditor.ui:17
+#: kmymoney/views/khomeview_p.h:1166 kmymoney/views/newtransactioneditor.ui:17
 #: kmymoney/widgets/ktransactionfilter.cpp:102
 #: kmymoney/widgets/ktransactionfilter.ui:113
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:74
@@ -13088,7 +13085,6 @@ msgstr ""
 "coincida con esta cuenta."
 
 #. i18n: ectx: property (text), widget (QLabel, numberLabel)
-#. i18n: ectx: property (text), widget (QLabel, label_4)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkNumber)
 #. i18n: ectx: property (text), widget (QTreeWidget, m_listAccount)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:376
@@ -14583,7 +14579,6 @@ msgid "Register ending balance"
 msgstr "Registrar saldo final"
 
 #. i18n: ectx: property (text), widget (QLabel, categoryLabel)
-#. i18n: ectx: property (text), widget (QLabel, label_2)
 #. i18n: ectx: attribute (title), widget (QWidget, m_categoryTab)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkCategory)
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:244
@@ -15582,13 +15577,13 @@ msgstr[0] "%1 día"
 msgstr[1] "%1 días"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:379
-#: kmymoney/views/khomeview_p.h:1234
+#: kmymoney/views/khomeview_p.h:1235
 #, kde-format
 msgid "The balance of %1 is below the minimum balance %2 today."
 msgstr "El saldo de %1 está por debajo del saldo mínimo %2 hoy."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:384
-#: kmymoney/views/khomeview_p.h:1238
+#: kmymoney/views/khomeview_p.h:1239
 #, kde-format
 msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
 msgid_plural ""
@@ -15597,19 +15592,19 @@ msgstr[0] "El saldo de %2 caerá por debajo del saldo mínimo %3 en %1 día."
 msgstr[1] "El saldo de %2 caerá por debajo del saldo mínimo %3 en %1 días."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:403
-#: kmymoney/views/khomeview_p.h:1256
+#: kmymoney/views/khomeview_p.h:1257
 #, kde-format
 msgid "The balance of %1 is below %2 today."
 msgstr "El saldo de %1 esta por debajo de %2 hoy."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:408
-#: kmymoney/views/khomeview_p.h:1261
+#: kmymoney/views/khomeview_p.h:1262
 #, kde-format
 msgid "The balance of %1 is above %2 today."
 msgstr "El saldo de %1 está por debajo de %2 hoy."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:415
-#: kmymoney/views/khomeview_p.h:1267
+#: kmymoney/views/khomeview_p.h:1268
 #, kde-format
 msgid "The balance of %2 will drop below %3 in %1 day."
 msgid_plural "The balance of %2 will drop below %3 in %1 days."
@@ -15617,7 +15612,7 @@ msgstr[0] "El saldo de %2 caerá por debajo de %3 en %1 día."
 msgstr[1] "El saldo de %2 caerá por debajo de %3 en %1 días."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:422
-#: kmymoney/views/khomeview_p.h:1274
+#: kmymoney/views/khomeview_p.h:1275
 #, kde-format
 msgid "The balance of %2 will raise above %3 in %1 day."
 msgid_plural "The balance of %2 will raise above %3 in %1 days."
@@ -15690,7 +15685,7 @@ msgstr ""
 "No hay datos proporcionados por el complemento de informes para este gráfico."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:666
-#: kmymoney/views/khomeview_p.h:571 kmymoney/views/khomeview_p.h:1571
+#: kmymoney/views/khomeview_p.h:571 kmymoney/views/khomeview_p.h:1572
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "Activar el complemento de informes para ver este gráfico."
@@ -15950,7 +15945,6 @@ msgid "Num"
 msgstr "Nº"
 
 #. i18n: ectx: property (text), widget (QLabel, tagsLabel)
-#. i18n: ectx: property (text), widget (QLabel, label_5)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:697
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:525
@@ -16521,7 +16515,7 @@ msgstr "Intervalo"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:172
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:27
 #: kmymoney/plugins/views/reports/kreportsview_p.h:441
-#: kmymoney/views/khomeview_p.h:1108
+#: kmymoney/views/khomeview_p.h:1109
 #, kde-format
 msgid "Report"
 msgstr "Informe"
@@ -16859,7 +16853,7 @@ msgstr "Informes"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
 #: kmymoney/plugins/views/reports/kreportsview.ui:54
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:49
-#: kmymoney/views/khomeview_p.h:1110
+#: kmymoney/views/khomeview_p.h:1111
 #, kde-format
 msgid "Comment"
 msgstr "Comentario"
@@ -16933,7 +16927,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr "Gráfico de tarta de ingresos y gastos"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:883
-#: kmymoney/views/khomeview_p.h:1545
+#: kmymoney/views/khomeview_p.h:1546
 #, kde-format
 msgid "Net Worth"
 msgstr "Valor neto"
@@ -17253,7 +17247,7 @@ msgid "Net Worth Forecast"
 msgstr "Pronóstico de valor neto"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
-#: kmymoney/views/khomeview_p.h:1567
+#: kmymoney/views/khomeview_p.h:1568
 #, kde-format
 msgctxt "@title Home page section"
 msgid "Budget"
@@ -19517,8 +19511,8 @@ msgstr ""
 msgctxt "Label for tags in ledger"
 msgid "Tag: "
 msgid_plural "Tags: "
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Etiqueta: "
+msgstr[1] "Etiquetas: "
 
 #: kmymoney/views/kaccountsview.cpp:170
 #: kmymoney/views/kinstitutionsview.cpp:209
@@ -20153,18 +20147,18 @@ msgctxt "Header not reconciled"
 msgid "!R"
 msgstr "!R"
 
-#: kmymoney/views/khomeview_p.h:1059
+#: kmymoney/views/khomeview_p.h:1060
 #, kde-format
 msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr "Al saldo mínimo<br>/ crédito máximo"
 
-#: kmymoney/views/khomeview_p.h:1103
+#: kmymoney/views/khomeview_p.h:1104
 #, kde-format
 msgctxt "@title Home page section"
 msgid "Favorite Reports"
 msgstr "Informes favoritos"
 
-#: kmymoney/views/khomeview_p.h:1159
+#: kmymoney/views/khomeview_p.h:1160
 #, kde-format
 msgctxt "@title Home page section Forecast days"
 msgid "%1 Day Forecast"
@@ -20172,7 +20166,7 @@ msgid_plural "%1 Day Forecast"
 msgstr[0] "Pronóstico para %1 día"
 msgstr[1] "Pronóstico para %1 días"
 
-#: kmymoney/views/khomeview_p.h:1170
+#: kmymoney/views/khomeview_p.h:1171
 #, kde-format
 msgctxt "Forecast days"
 msgid "%1 day"
@@ -20180,131 +20174,131 @@ msgid_plural "%1 days"
 msgstr[0] "%1 día"
 msgstr[1] "%1 días "
 
-#: kmymoney/views/khomeview_p.h:1393
+#: kmymoney/views/khomeview_p.h:1394
 #, kde-format
 msgctxt "@title Home page section"
 msgid "Assets and Liabilities Summary"
 msgstr "Resumen de activo y pasivo"
 
-#: kmymoney/views/khomeview_p.h:1417
+#: kmymoney/views/khomeview_p.h:1418
 #, kde-format
 msgctxt "@title:column table on home page: not marked"
 msgid "!M"
 msgstr "!M"
 
-#: kmymoney/views/khomeview_p.h:1421
+#: kmymoney/views/khomeview_p.h:1422
 #, kde-format
 msgctxt "@title:column table on home page: cleared"
 msgid "C"
 msgstr "L"
 
-#: kmymoney/views/khomeview_p.h:1425
+#: kmymoney/views/khomeview_p.h:1426
 #, kde-format
 msgctxt "@title:column table on home page: not reconciled"
 msgid "!R"
 msgstr "!C"
 
-#: kmymoney/views/khomeview_p.h:1429
+#: kmymoney/views/khomeview_p.h:1430
 #, kde-format
 msgctxt "@title:column table on home page: last reconciliation date"
 msgid "Reconciled"
 msgstr "Conciliada"
 
-#: kmymoney/views/khomeview_p.h:1432
+#: kmymoney/views/khomeview_p.h:1433
 #, kde-format
 msgctxt "@title:column table on home page"
 msgid "Balance"
 msgstr "Saldo"
 
-#: kmymoney/views/khomeview_p.h:1436
+#: kmymoney/views/khomeview_p.h:1437
 #, kde-format
 msgctxt "@title:column table on home page"
 msgid "Asset Accounts"
 msgstr "Cuentas de activo"
 
-#: kmymoney/views/khomeview_p.h:1441
+#: kmymoney/views/khomeview_p.h:1442
 #, kde-format
 msgctxt "@title:column table on home page"
 msgid "Liability Accounts"
 msgstr "Cuentas de pasivo"
 
-#: kmymoney/views/khomeview_p.h:1526
+#: kmymoney/views/khomeview_p.h:1527
 #, kde-format
 msgid "Total Assets"
 msgstr "Total de activos"
 
-#: kmymoney/views/khomeview_p.h:1534
+#: kmymoney/views/khomeview_p.h:1535
 #, kde-format
 msgid "Total Liabilities"
 msgstr "Total de pasivos"
 
-#: kmymoney/views/khomeview_p.h:1822
+#: kmymoney/views/khomeview_p.h:1823
 #, kde-format
 msgctxt "@title Home page section"
 msgid "Cash Flow Summary"
 msgstr "Resumen de flujo de caja"
 
-#: kmymoney/views/khomeview_p.h:1827
+#: kmymoney/views/khomeview_p.h:1828
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "Ingresos y gastos de este mes"
 
-#: kmymoney/views/khomeview_p.h:1835
+#: kmymoney/views/khomeview_p.h:1836
 #, kde-format
 msgid "Scheduled Income"
 msgstr "Ingresos planificados"
 
-#: kmymoney/views/khomeview_p.h:1838
+#: kmymoney/views/khomeview_p.h:1839
 #, kde-format
 msgid "Expenses"
 msgstr "Gastos"
 
-#: kmymoney/views/khomeview_p.h:1841
+#: kmymoney/views/khomeview_p.h:1842
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "Gastos planificados"
 
-#: kmymoney/views/khomeview_p.h:1869
+#: kmymoney/views/khomeview_p.h:1870
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "Activos y pasivos líquidos"
 
-#: kmymoney/views/khomeview_p.h:1874
+#: kmymoney/views/khomeview_p.h:1875
 #, kde-format
 msgid "Liquid Assets"
 msgstr "Activos líquidos"
 
-#: kmymoney/views/khomeview_p.h:1877
+#: kmymoney/views/khomeview_p.h:1878
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "Transferencias a pasivos líquidos"
 
-#: kmymoney/views/khomeview_p.h:1880
+#: kmymoney/views/khomeview_p.h:1881
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "Pasivos líquidos"
 
-#: kmymoney/views/khomeview_p.h:1883
+#: kmymoney/views/khomeview_p.h:1884
 #, kde-format
 msgid "Other Transfers"
 msgstr "Otras transferencias"
 
-#: kmymoney/views/khomeview_p.h:1926
+#: kmymoney/views/khomeview_p.h:1927
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "Estado del flujo de caja"
 
-#: kmymoney/views/khomeview_p.h:1931
+#: kmymoney/views/khomeview_p.h:1932
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "Activos líquidos esperados"
 
-#: kmymoney/views/khomeview_p.h:1934
+#: kmymoney/views/khomeview_p.h:1935
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "Pasivos líquidos esperados"
 
-#: kmymoney/views/khomeview_p.h:1937
+#: kmymoney/views/khomeview_p.h:1938
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "Beneficios/pérdidas esperados"
@@ -20377,10 +20371,9 @@ msgstr "Seleccionar cuenta de inversión:"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_ledgerButton)
 #: kmymoney/views/kinvestmentview.ui:57
-#, fuzzy, kde-format
-#| msgid "Open ledger"
+#, kde-format
 msgid "Goto ledger"
-msgstr "Abrir libro mayor"
+msgstr "Ir al libro mayor"
 
 #. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
 #: kmymoney/views/kinvestmentview.ui:87
@@ -21429,6 +21422,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, payToLabel)
+#. i18n: ectx: property (text), widget (QLabel, payeeLabel)
 #: kmymoney/views/newspliteditor.ui:137
 #: kmymoney/views/newtransactioneditor.ui:101
 #: kmymoney/views/newtransactionform.ui:40
@@ -21437,7 +21431,6 @@ msgid "Payer/Payee"
 msgstr "Pagador/beneficiario"
 
 #. i18n: ectx: property (text), widget (QLabel, costCenterLabel)
-#. i18n: ectx: property (text), widget (QLabel, label_8)
 #: kmymoney/views/newspliteditor.ui:167
 #: kmymoney/views/newtransactioneditor.ui:240
 #: kmymoney/views/newtransactionform.ui:82
@@ -21486,7 +21479,7 @@ msgstr "Seleccionar transacción para rellenar automáticamente"
 #. i18n: ectx: property (text), widget (QLabel, linkLabel)
 #: kmymoney/views/newtransactioneditor.cpp:1133
 #: kmymoney/views/newtransactioneditor.ui:320
-#: kmymoney/views/newtransactionform.cpp:98
+#: kmymoney/views/newtransactionform.cpp:104
 #: kmymoney/views/newtransactionform.ui:179
 #, kde-format
 msgid "Link"
@@ -21534,7 +21527,7 @@ msgctxt "@info:tooltip"
 msgid "Enter the category or counter account of the transaction."
 msgstr "Introduzca la categoría o la contracuenta de la transacción."
 
-#: kmymoney/views/newtransactionform.cpp:129
+#: kmymoney/views/newtransactionform.cpp:135
 #, kde-format
 msgctxt ""
 "@item:intext Amount, %1 transaction amount, %2 payment direction enclosed in "
@@ -21895,7 +21888,7 @@ msgstr "Lista del orden de pestañas…"
 msgid "Tab Order Editor"
 msgstr "Editor del orden de pestañas"
 
-#: kmymoney/widgets/amountedit.cpp:272
+#: kmymoney/widgets/amountedit.cpp:273
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid ""
@@ -21903,7 +21896,7 @@ msgid ""
 msgstr ""
 "El valor se muestra en %1. Pulse este botón para cambiar la divisa a %2."
 
-#: kmymoney/widgets/amountedit.cpp:279
+#: kmymoney/widgets/amountedit.cpp:280
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid "Values are presented in %1."
