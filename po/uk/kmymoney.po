@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-20 02:02+0000\n"
-"PO-Revision-Date: 2025-07-15 13:59+0300\n"
+"PO-Revision-Date: 2025-07-20 15:47+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -19588,10 +19588,10 @@ msgstr ""
 msgctxt "Label for tags in ledger"
 msgid "Tag: "
 msgid_plural "Tags: "
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Мітки: "
+msgstr[1] "Мітки: "
+msgstr[2] "Мітки: "
+msgstr[3] "Мітка: "
 
 #: kmymoney/views/kaccountsview.cpp:170
 #: kmymoney/views/kinstitutionsview.cpp:209
@@ -20455,10 +20455,9 @@ msgstr "Виберіть рахунок для інвестиції:"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_ledgerButton)
 #: kmymoney/views/kinvestmentview.ui:57
-#, fuzzy, kde-format
-#| msgid "Open ledger"
+#, kde-format
 msgid "Goto ledger"
-msgstr "Відкрити облікову книгу"
+msgstr "Перейти до облікової книги"
 
 #. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
 #: kmymoney/views/kinvestmentview.ui:87
