@@ -4,27 +4,12 @@ include:
     file:
       - /gitlab-templates/json-validation.yml
       - /gitlab-templates/linux.yml
-      - /gitlab-templates/freebsd.yml
-      - /gitlab-templates/windows.yml
-      - /gitlab-templates/craft-appimage.yml
-      - /gitlab-templates/craft-windows-x86-64.yml
-      - /gitlab-templates/craft-macos-arm64.yml
-      - /gitlab-templates/craft-macos-x86-64.yml
-
-# macos installs currently only on demand since they are failing
-craft_macos_arm64:
-  when: manual
-
-craft_macos_x86_64:
-  when: manual
-
-# appimage and windows are currently broken due to changes in craft
-# that do not support Qt5 builds anymore. Switched to manual execution.
-craft_appimage_qt515_x86_64:
-  when: manual
-
-craft_windows_qt515_x86_64:
-  when: manual
+      - /gitlab-templates/freebsd-qt6.yml
+      - /gitlab-templates/windows-qt6.yml
+      - /gitlab-templates/craft-appimage-qt6.yml
+      - /gitlab-templates/craft-windows-x86-64-qt6.yml
+#      - /gitlab-templates/craft-macos-arm64.yml
+#      - /gitlab-templates/craft-macos-x86-64.yml
 
 # custom builds
 
