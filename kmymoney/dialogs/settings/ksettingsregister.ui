@@ -82,6 +82,9 @@
           </item>
           <item>
            <widget class="QCheckBox" name="kcfg_ShowAllSplits">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>Show all split details in ledger</string>
             </property>
@@ -616,6 +619,22 @@ Selecting 0% will list all transactions.</string>
     <hint type="destinationlabel">
      <x>171</x>
      <y>378</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>kcfg_LedgerLens</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>kcfg_ShowAllSplits</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>315</x>
+     <y>201</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>315</x>
+     <y>229</y>
     </hint>
    </hints>
   </connection>

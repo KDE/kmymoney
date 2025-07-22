@@ -114,12 +114,12 @@ public:
                 }
             }
         };
-        const auto showAllSplits = LedgerViewSettings::instance()->showAllSplits();
+        const auto showLedgerLens = LedgerViewSettings::instance()->showLedgerLens();
+        const auto showAllSplits = LedgerViewSettings::instance()->showAllSplits() & showLedgerLens;
+        const auto havePayeeColumn = !m_view->isColumnHidden(JournalModel::Payee);
 
         if(index.column() == JournalModel::Column::Detail) {
             const auto showDetails = LedgerViewSettings::instance()->showTransactionDetails();
-            const auto showLedgerLens = LedgerViewSettings::instance()->showLedgerLens();
-            const auto havePayeeColumn = !m_view->isColumnHidden(JournalModel::Payee);
 
             if (index.data(eMyMoney::Model::TransactionIsInvestmentRole).toBool() && isInvestmentView()) {
                 if (((opt.state & QStyle::State_Selected) && (showLedgerLens)) || showDetails || showAllSplits) {
@@ -201,6 +201,7 @@ public:
                         rc.lines << index.data(eMyMoney::Model::Roles::SplitStyledSingleLineMemoRole).toString();
                     }
                     if (rc.lines.at(0).isEmpty()) {
+                        rc.lines.clear();
                         rc.lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
                     }
                 }
@@ -210,7 +211,6 @@ public:
         } else if(index.column() == JournalModel::Column::Quantity) {
             if (index.data(eMyMoney::Model::TransactionIsInvestmentRole).toBool()) {
                 const auto showDetails = LedgerViewSettings::instance()->showTransactionDetails();
-                const auto showLedgerLens = LedgerViewSettings::instance()->showLedgerLens();
                 rc.lines << opt.text;
                 if (((opt.state & QStyle::State_Selected) && (showLedgerLens)) || showDetails) {
                     // we have to pay attention here as later on empty items will be removed
@@ -247,7 +247,6 @@ public:
             }
 
         } else if (index.column() == JournalModel::Column::Deposit) {
-            const auto havePayeeColumn = !m_view->isColumnHidden(JournalModel::Payee);
             rc.lines << opt.text;
             if (showAllSplits && isMultiSplitDisplay(index)) {
                 const auto payee = index.data(eMyMoney::Model::SplitPayeeRole).toString();
@@ -259,7 +258,6 @@ public:
             }
 
         } else if (index.column() == JournalModel::Column::Payment) {
-            const auto havePayeeColumn = !m_view->isColumnHidden(JournalModel::Payee);
             rc.lines << opt.text;
             if (showAllSplits && isMultiSplitDisplay(index)) {
                 const auto payee = index.data(eMyMoney::Model::SplitPayeeRole).toString();

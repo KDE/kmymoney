@@ -637,7 +637,7 @@ void LedgerView::setModel(QAbstractItemModel* model)
 {
     if (!d->columnSelector) {
         d->columnSelector = new ColumnSelector(this, d->groupName);
-        connect(d->columnSelector, &ColumnSelector::columnsChanged, MyMoneyFile::instance()->journalModel(), &JournalModel::resetRowHeightInformation);
+        connect(d->columnSelector, &ColumnSelector::columnsChanged, this, &LedgerView::slotSettingsChanged);
     }
     QSignalBlocker blocker(this);
     QTableView::setModel(model);
