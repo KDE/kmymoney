@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-20 02:02+0000\n"
+"POT-Creation-Date: 2025-07-23 02:00+0000\n"
 "PO-Revision-Date: 2020-01-02 16:30+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -4077,21 +4077,21 @@ msgid "Use the ledger lens"
 msgstr "Použiť šošovku účtovnej knihy"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowAllSplits)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:86
+#: kmymoney/dialogs/settings/ksettingsregister.ui:89
 #, fuzzy, kde-format
 #| msgid "Show a grid in the register"
 msgid "Show all split details in ledger"
 msgstr "Ukazovať mriežku v registry"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:96
+#: kmymoney/dialogs/settings/ksettingsregister.ui:99
 #, fuzzy, kde-format
 #| msgid "Information"
 msgid "Information headers"
 msgstr "Informácia"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_ShowFancyMarker)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:102
+#: kmymoney/dialogs/settings/ksettingsregister.ui:105
 #, kde-format
 msgid ""
 "Draws a larger header above each group of transactions. The grouping depends "
@@ -4101,64 +4101,64 @@ msgstr ""
 "aktuálnom poradí triedenia."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFancyMarker)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:105
+#: kmymoney/dialogs/settings/ksettingsregister.ui:108
 #, fuzzy, kde-format
 #| msgid "Show group header between transactions"
 msgid "Show group headers between transactions"
 msgstr "Ukazovať hlavičky skupiny medzi transakciami"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFiscalMarker)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:115
+#: kmymoney/dialogs/settings/ksettingsregister.ui:118
 #, kde-format
 msgid "Show header for the previous and current fiscal year"
 msgstr "Ukazovať hlavičky predchádzajúceho a súčasného fiškálneho roka"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:123
+#: kmymoney/dialogs/settings/ksettingsregister.ui:126
 #, fuzzy, kde-format
 #| msgid "Do not show reconciled transactions"
 msgid "Don't show reconciliation entries"
 msgstr "Neukazovať zosúladené transakcie"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:128
+#: kmymoney/dialogs/settings/ksettingsregister.ui:131
 #, fuzzy, kde-format
 #| msgid "Show date of last reconciliation on the Homepage"
 msgid "Show last reconciliation entry with date and balance in ledger"
 msgstr "Zobraziť dátum posledného vyrovnania na domovskej stránke"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:133
+#: kmymoney/dialogs/settings/ksettingsregister.ui:136
 #, kde-format
 msgid "Show all reconciliation entries with date and balance in ledger"
 msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, sorting)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:161
+#: kmymoney/dialogs/settings/ksettingsregister.ui:164
 #, kde-format
 msgid "Sorting"
 msgstr "Triedenie"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab3)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:168
+#: kmymoney/dialogs/settings/ksettingsregister.ui:171
 #, kde-format
 msgid "Normal view"
 msgstr "&Normálne zobrazenie"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab4)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:181
+#: kmymoney/dialogs/settings/ksettingsregister.ui:184
 #, kde-format
 msgid "Reconciliation view"
 msgstr "Pohľad zosúladenia"
 
 #. i18n: ectx: attribute (title), widget (QWidget, TabPage)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:194
+#: kmymoney/dialogs/settings/ksettingsregister.ui:197
 #, kde-format
 msgid "Search view"
 msgstr "Pohľad hľadania"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel2)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:210
+#: kmymoney/dialogs/settings/ksettingsregister.ui:213
 #, kde-format
 msgid ""
 "Use the <i>left</i> and <i>right</i> buttons to add and remove sort options. "
@@ -4172,14 +4172,14 @@ msgstr ""
 "medzi <i>vzostupne</i> a <i>zostupne</i>."
 
 #. i18n: ectx: attribute (title), widget (QWidget, TabPage1)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:221
+#: kmymoney/dialogs/settings/ksettingsregister.ui:224
 #, kde-format
 msgid "Data entry"
 msgstr "Dátová položka"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoIncCheckNumber)
 #. i18n: ectx: label, entry (AutoIncCheckNumber), group (General Options)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:227
+#: kmymoney/dialogs/settings/ksettingsregister.ui:230
 #: kmymoney/settings/kmymoney.kcfg:21
 #, kde-format
 msgid "Auto increment check number"
@@ -4187,20 +4187,20 @@ msgstr "Automatické zvýšenie čísla šeku"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusChangeIsEnter)
 #. i18n: ectx: label, entry (FocusChangeIsEnter), group (General Options)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:237
+#: kmymoney/dialogs/settings/ksettingsregister.ui:240
 #: kmymoney/settings/kmymoney.kcfg:76
 #, kde-format
 msgid "Keep changes when selecting a different transaction/split"
 msgstr "Zachovať zmeny pri výbere inej transakcie/rozdelenia"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnterMovesBetweenFields)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:244
+#: kmymoney/dialogs/settings/ksettingsregister.ui:247
 #, kde-format
 msgid "Use Enter to move between fields"
 msgstr "Použiť Enter sa pohyb medzi poľami"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_stringMatchFromStart)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:254
+#: kmymoney/dialogs/settings/ksettingsregister.ui:257
 #, kde-format
 msgid ""
 "Mark this option, if you always want to match names e.g. for payees from the "
@@ -4210,13 +4210,13 @@ msgstr ""
 "začiatku. Ak nie je nastavené, každý podreťazec je zhodný."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_stringMatchFromStart)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:257
+#: kmymoney/dialogs/settings/ksettingsregister.ui:260
 #, kde-format
 msgid "Match names from start"
 msgstr "Priraďovať názvy od začiatku"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_AutoReconciliation)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:264
+#: kmymoney/dialogs/settings/ksettingsregister.ui:267
 #, kde-format
 msgid ""
 "After entering the reconciliation data automatically detect the transactions "
@@ -4226,7 +4226,7 @@ msgstr ""
 "týmto dátam (v niektorých prípadoch to nie je možné takto urobiť)."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoReconciliation)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:267
+#: kmymoney/dialogs/settings/ksettingsregister.ui:270
 #: kmymoney/views/reconciliationledgerviewpage.cpp:127
 #, kde-format
 msgid "Automatic reconciliation"
@@ -4234,21 +4234,21 @@ msgstr "Automatické zosúladenie"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_1)
 #. i18n: ectx: label, entry (initialDateFieldCursorPosition), group (List Options)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:279
+#: kmymoney/dialogs/settings/ksettingsregister.ui:282
 #: kmymoney/settings/kmymoney.kcfg:344
 #, kde-format
 msgid "Initial cursor position within the date field"
 msgstr "Počiatočná pozícia kurzora v poli dátumu"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_initialDateFieldCursorPosition)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:287
+#: kmymoney/dialogs/settings/ksettingsregister.ui:290
 #, kde-format
 msgid "Day"
 msgstr "Deň"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_initialDateFieldCursorPosition)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:292
+#: kmymoney/dialogs/settings/ksettingsregister.ui:295
 #: kmymoney/plugins/views/reports/core/listtable.cpp:709
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:537
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:96
@@ -4258,20 +4258,20 @@ msgstr "Mesiac"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_initialDateFieldCursorPosition)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:297
+#: kmymoney/dialogs/settings/ksettingsregister.ui:300
 #: kmymoney/plugins/views/budget/knewbudgetdlg.ui:39
 #, kde-format
 msgid "Year"
 msgstr "Rok"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:321
+#: kmymoney/dialogs/settings/ksettingsregister.ui:324
 #, kde-format
 msgid "Default reconciliation state"
 msgstr "Predvolený stav zosúladenia"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, kcfg_defaultReconciliationState)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:331
+#: kmymoney/dialogs/settings/ksettingsregister.ui:334
 #, kde-format
 msgid ""
 "Default reconciliation state for transactions entered during reconciliation "
@@ -4280,7 +4280,7 @@ msgstr ""
 "Predvolený stav zosúladenia pre transakcie zadané počas harmonizácie účtu"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:335
+#: kmymoney/dialogs/settings/ksettingsregister.ui:338
 #: kmymoney/models/ledgerfilter.cpp:77
 #, kde-format
 msgid "Not marked"
@@ -4288,7 +4288,7 @@ msgstr "Neoznačené"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_stateBox)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:340
+#: kmymoney/dialogs/settings/ksettingsregister.ui:343
 #: kmymoney/widgets/ktransactionfilter.ui:605
 #, kde-format
 msgctxt "@item reconciliation status"
@@ -4297,7 +4297,7 @@ msgstr "Zmazané"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkReconciled)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:345
+#: kmymoney/dialogs/settings/ksettingsregister.ui:348
 #: kmymoney/plugins/views/reports/core/listtable.cpp:713
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
 #: kmymoney/views/khomeview_p.h:1050
@@ -4307,25 +4307,25 @@ msgid "Reconciled"
 msgstr "Vysporiadané"
 
 #. i18n: ectx: property (title), widget (QGroupBox, kcfg_AutoFillTransaction)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:371
+#: kmymoney/dialogs/settings/ksettingsregister.ui:374
 #, kde-format
 msgid "Autofill"
 msgstr "Automatické vypĺňanie"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioButton1)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:380
+#: kmymoney/dialogs/settings/ksettingsregister.ui:383
 #, kde-format
 msgid "Do not auto-fill transaction data at all."
 msgstr "Vôbec nevypĺňať údaje transakcie automaticky."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton1)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:383
+#: kmymoney/dialogs/settings/ksettingsregister.ui:386
 #, kde-format
 msgid "No Autofill"
 msgstr "Žiadne automatické vypĺňanie"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioButton2)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:392
+#: kmymoney/dialogs/settings/ksettingsregister.ui:395
 #, no-c-format, kde-format
 msgid ""
 "Collect all transactions for the given payee. Treat all transactions that "
@@ -4343,13 +4343,13 @@ msgstr ""
 "Výber 0% vypíše všetky transakcie."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton2)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:395
+#: kmymoney/dialogs/settings/ksettingsregister.ui:398
 #, kde-format
 msgid "Same transaction if amount differs less than percentage set below"
 msgstr "Rovnaká transakcia, ak suma sa líši o menej percent ako "
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioButton3)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:408
+#: kmymoney/dialogs/settings/ksettingsregister.ui:411
 #, kde-format
 msgid ""
 "The data of the last transaction assigned to the category used most often "
@@ -4359,19 +4359,19 @@ msgstr ""
 "pre tohto príjemcu sú automaticky vyplnené do editora transakcie."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton3)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:411
+#: kmymoney/dialogs/settings/ksettingsregister.ui:414
 #, kde-format
 msgid "With previously most often used transaction for the payee"
 msgstr "S doteraz najčastejšie používanými transakciami pre príjemcu"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:430
+#: kmymoney/dialogs/settings/ksettingsregister.ui:433
 #, kde-format
 msgid "Same transaction if amount differs less than "
 msgstr "Rovnaká transakcia, ak suma sa líši o menej ako"
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_AutoFillDifference)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:437
+#: kmymoney/dialogs/settings/ksettingsregister.ui:440
 #, kde-format
 msgid ""
 "Two transactions are usually treated identical for autofill, if they refer "
@@ -4383,13 +4383,13 @@ msgstr ""
 "považované, ak sa ich výška líši o viac než tu uvedené percento."
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_AutoFillDifference)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:440
+#: kmymoney/dialogs/settings/ksettingsregister.ui:443
 #, no-c-format, kde-format
 msgid "%"
 msgstr "%"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_AutoFillUseMemos)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:469
+#: kmymoney/dialogs/settings/ksettingsregister.ui:472
 #, kde-format
 msgid ""
 "If this option is checked the memos from the previous transaction will be "
@@ -4401,25 +4401,25 @@ msgstr ""
 "automaticky vyplnená."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoFillUseMemos)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:472
+#: kmymoney/dialogs/settings/ksettingsregister.ui:475
 #, kde-format
 msgid "Use memos from previous transaction"
 msgstr "Ľubovoľné poznámky z predchádzajúcej transakcie"
 
 #. i18n: ectx: attribute (title), widget (QWidget, TabPage2)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:499
+#: kmymoney/dialogs/settings/ksettingsregister.ui:502
 #, kde-format
 msgid "Import"
 msgstr "Importovať"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:507
+#: kmymoney/dialogs/settings/ksettingsregister.ui:510
 #, kde-format
 msgid "Match transactions within days"
 msgstr "Priradiť transakcie počas dní"
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_matchInterval)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:517
+#: kmymoney/dialogs/settings/ksettingsregister.ui:520
 #, kde-format
 msgid ""
 "Search for matching transactions within the range of the posting date of the "
@@ -4429,7 +4429,7 @@ msgstr ""
 "transakcie +/- počet zadaných dní."
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_askForPayeeCategory)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:554
+#: kmymoney/dialogs/settings/ksettingsregister.ui:557
 #, kde-format
 msgid ""
 "Whenever a new payee is detected during import of a statement, the user will "
@@ -4441,7 +4441,7 @@ msgstr ""
 "vybraná."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_askForPayeeCategory)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:557
+#: kmymoney/dialogs/settings/ksettingsregister.ui:560
 #, kde-format
 msgid "Ask for a new payee's default category"
 msgstr "Požiadať o predvolenú kategóriu nového príjemcu"
@@ -20019,7 +20019,7 @@ msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Kópia %1"
 
-#: kmymoney/views/journaldelegate.cpp:365
+#: kmymoney/views/journaldelegate.cpp:363
 #, kde-format
 msgctxt "@info %2 contains list of account names separated by <br>"
 msgid "<qt>Closed account:<br><br>%2</qt>"
@@ -20028,7 +20028,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: kmymoney/views/journaldelegate.cpp:370
+#: kmymoney/views/journaldelegate.cpp:368
 #, fuzzy, kde-format
 #| msgid "Cannot remove transaction that references a closed account."
 msgctxt "@info Unable to edit "
@@ -20036,21 +20036,21 @@ msgid ""
 "KMyMoney does not support to edit transaction that reference closed accounts."
 msgstr "Nie je možné transakciu, ktorá odkazuje na uzavretý účet."
 
-#: kmymoney/views/journaldelegate.cpp:372
+#: kmymoney/views/journaldelegate.cpp:370
 #, fuzzy, kde-format
 #| msgid "Deleting transactions"
 msgctxt "@title:window"
 msgid "Prevent editing transactions"
 msgstr "Vymazávanie transakcií"
 
-#: kmymoney/views/journaldelegate.cpp:386
+#: kmymoney/views/journaldelegate.cpp:384
 #, kde-format
 msgctxt "@info Editing multiple transactions"
 msgid ""
 "The current implementation cannot modify multiple transactions in this view."
 msgstr ""
 
-#: kmymoney/views/journaldelegate.cpp:583
+#: kmymoney/views/journaldelegate.cpp:581
 #, kde-format
 msgctxt "Label for tags in ledger"
 msgid "Tag: "
