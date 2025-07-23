@@ -61,7 +61,12 @@ struct InstitutionsModel::Private
         MyMoneyMoney value;
         for (int row = 0; row < rows; ++row) {
             const auto subIdx(q->index(row, 0, idx));
-            value += subIdx.data(eMyMoney::Model::AccountValueRole).value<MyMoneyMoney>();
+            // For investments, we need to include the sub-accounts as well
+            if (subIdx.data(eMyMoney::Model::AccountTypeRole).value<eMyMoney::Account::Type>() == eMyMoney::Account::Type::Investment) {
+                value += subIdx.data(eMyMoney::Model::AccountTotalValueRole).value<MyMoneyMoney>();
+            } else {
+                value += subIdx.data(eMyMoney::Model::AccountValueRole).value<MyMoneyMoney>();
+            }
         }
         return value;
     }
@@ -259,7 +264,10 @@ void InstitutionsModel::slotLoadAccountsWithoutInstitutions(const QModelIndexLis
 {
     bool dirty = m_dirty;
     for (const auto idx : indexes) {
-        addAccount(QString(), idx.data(eMyMoney::Model::IdRole).toString());
+        // Don't include stock accounts which also don't have an institution assigned
+        if (idx.data(eMyMoney::Model::AccountTypeRole).value<eMyMoney::Account::Type>() != eMyMoney::Account::Type::Stock) {
+            addAccount(QString(), idx.data(eMyMoney::Model::IdRole).toString());
+        }
     }
     m_dirty = dirty;
 }
