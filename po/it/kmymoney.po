@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-20 03:32+0000\n"
-"PO-Revision-Date: 2025-07-15 16:40+0200\n"
+"PO-Revision-Date: 2025-07-21 08:46+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -19517,8 +19517,8 @@ msgstr ""
 msgctxt "Label for tags in ledger"
 msgid "Tag: "
 msgid_plural "Tags: "
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Etichetta: "
+msgstr[1] "Etichette: "
 
 #: kmymoney/views/kaccountsview.cpp:170
 #: kmymoney/views/kinstitutionsview.cpp:209
@@ -20383,10 +20383,9 @@ msgstr "Seleziona conto di investimento:"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_ledgerButton)
 #: kmymoney/views/kinvestmentview.ui:57
-#, fuzzy, kde-format
-#| msgid "New ledger"
+#, kde-format
 msgid "Goto ledger"
-msgstr "Nuovo registro"
+msgstr "Vai al registro"
 
 #. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
 #: kmymoney/views/kinvestmentview.ui:87
