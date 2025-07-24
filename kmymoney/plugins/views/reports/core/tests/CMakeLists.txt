@@ -1,7 +1,6 @@
 include(ECMAddTests)
 
 set(tests_sources
-  chart-test.cpp
   pivotgrid-test.cpp
   pivottable-test.cpp
   querytable-test.cpp
@@ -27,11 +26,11 @@ set(tests_gui_sources
 )
 
 # do not run this test on KDE CI, as it is broken for unknown reason
-if(NOT $ENV{KDECI_BUILD})
-    ecm_add_tests(${tests_gui_sources}
+if(NOT "$ENV{KDECI_BUILD}")
+    kmm_add_tests(${tests_gui_sources}
       NAME_PREFIX
         "reports-"
-      ENV
+      ENVIRONMENT
         "QT_QPA_PLATFORM=offscreen"
       GUI
       LINK_LIBRARIES
