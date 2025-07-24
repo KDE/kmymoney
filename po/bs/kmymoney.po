@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-23 02:00+0000\n"
+"POT-Creation-Date: 2025-07-24 02:03+0000\n"
 "PO-Revision-Date: 2015-02-09 11:02+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -9025,7 +9025,7 @@ msgstr "Godina"
 msgid "Cost center"
 msgstr "Unesena svota"
 
-#: kmymoney/mymoney/storage/institutionsmodel.cpp:233
+#: kmymoney/mymoney/storage/institutionsmodel.cpp:238
 #, kde-format
 msgid "Accounts with no institution assigned"
 msgstr "Računi koji nisu dodijeljeni od institucija"
