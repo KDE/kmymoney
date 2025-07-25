@@ -33,7 +33,9 @@ public:
     int investmentOption() const;
     bool quoteOption() const;
     bool scheduleOption() const;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QTextCodec* decodeOption();
+#endif
     bool txNotesOption() const;
     bool generalDebugOption() const;
     bool xmlDebugOption() const;

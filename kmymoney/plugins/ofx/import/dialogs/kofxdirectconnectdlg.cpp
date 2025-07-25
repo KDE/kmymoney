@@ -13,9 +13,14 @@
 #include <QLabel>
 #include <QRegularExpression>
 #include <QTemporaryFile>
-#include <QTextCodec>
 #include <QTextStream>
 #include <QUuid>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QTextCodec>
+#else
+#include <QStringDecoder>
+#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -100,9 +105,15 @@ bool KOfxDirectConnectDlg::init()
         d->m_fpTrace.write("response:\n", 10);
     }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     auto codec = QTextCodec::codecForName("Windows-1251");
-    qDebug() << "creating job"; // << codec->fromUnicode(request);
-    m_job = KIO::http_post(QUrl(m_connector.url()), codec->fromUnicode(request), KIO::HideProgressInfo);
+    const auto encodedRequest = codec->fromUnicode(request);
+#else
+    auto fromUtf16 = QStringEncoder(QLatin1String("Windows-1251"));
+    const auto encodedRequest = fromUtf16(request);
+#endif
+    qDebug() << "creating job"; // << encodedRequest;
+    m_job = KIO::http_post(QUrl(m_connector.url()), encodedRequest, KIO::HideProgressInfo);
 
     // open the temp file. We come around here twice if init() is called twice
     if (m_tmpfile) {

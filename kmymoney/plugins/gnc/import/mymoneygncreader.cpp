@@ -13,19 +13,21 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+#include <QDebug>
 #include <QFile>
-#include <QMap>
+#include <QFileDialog>
 #include <QIcon>
 #include <QInputDialog>
-#include <QFileDialog>
-#include <QTextCodec>
-#include <QTextStream>
-#include <QDebug>
-#include <QXmlAttributes>
-#include <QXmlInputSource>
+#include <QMap>
 #include <QPointer>
 #include <QRandomGenerator>
+#include <QTextStream>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QTextCodec>
+#include <QXmlAttributes>
+#include <QXmlInputSource>
+#endif
 // ----------------------------------------------------------------------------
 // KDE Includes
 #ifndef _GNCFILEANON
@@ -37,7 +39,7 @@
 // ----------------------------------------------------------------------------
 // Third party Includes
 
-// ------------------------------------------------------------Box21----------------
+// ----------------------------------------------------------------------------
 // Project Includes
 #include <config-kmymoney.h>
 #ifndef _GNCFILEANON
@@ -92,7 +94,9 @@ void MyMoneyGncReader::setOptions()
         m_investmentOption = dlg.investmentOption();
         m_useFinanceQuote = dlg.quoteOption();
         m_useTxNotes = dlg.txNotesOption();
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         m_decoder = dlg.decodeOption();
+#endif
         gncdebug = dlg.generalDebugOption();
         xmldebug = dlg.xmlDebugOption();
         bAnonymize = dlg.anonymizeOption();
@@ -104,7 +108,9 @@ void MyMoneyGncReader::setOptions()
         m_investmentOption = 0;
         m_useFinanceQuote = false;
         m_useTxNotes = false;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         m_decoder = nullptr;
+#endif
         gncdebug = false; // general debug messages
         xmldebug = false; // xml trace
         bAnonymize = false; // anonymize input
@@ -183,6 +189,7 @@ bool GncObject::isDataElement(const QString& elName, const QXmlStreamAttributes&
 // return the variable string, decoded if required
 QString GncObject::var(int i) const
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     /* This code was needed because the Qt3 XML reader apparently did not process
      the encoding parameter in the <?xml header.
      This SEEMS to have been rectified in Qt4 though I have little test data
@@ -190,6 +197,9 @@ QString GncObject::var(int i) const
      If true, we can remove the encoding option in the import options dialog
      and this code too.*/
     return (pMain->m_decoder == nullptr ? m_v[i] : pMain->m_decoder->toUnicode(m_v[i].toUtf8()));
+#else
+    return m_v[i];
+#endif
 }
 
 const QString GncObject::getKvpValue(const QString& key, const QString& type) const
@@ -1317,7 +1327,9 @@ MyMoneyGncReader::MyMoneyGncReader()
     m_gncCommodityCount = m_gncAccountCount = m_gncTransactionCount = m_gncScheduleCount = 0;
     m_smallBusinessFound = m_budgetsFound = m_lotsFound = false;
     m_commodityCount = m_priceCount = m_accountCount = m_transactionCount = m_templateCount = m_scheduleCount = 0;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     m_decoder = nullptr;
+#endif
     // build a list of valid versions
     static const QString versionList[] = {"gnc:book 2.0.0", "gnc:commodity 2.0.0", "gnc:pricedb 1",
                                           "gnc:account 2.0.0", "gnc:transaction 2.0.0", "gnc:schedxaction 1.0.0",

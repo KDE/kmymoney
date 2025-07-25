@@ -15,9 +15,13 @@
 #include <QPointer>
 #include <QRegularExpression>
 #include <QStandardItem>
-#include <QTextCodec>
 #include <QTextStream>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QTextCodec>
+#else
+#include <QStringDecoder>
+#endif
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -30,6 +34,7 @@
 
 #include "convdate.h"
 #include "csvutil.h"
+#include "kmm_codec.h"
 #include "mymoneyaccount.h"
 #include "mymoneyenums.h"
 #include "mymoneyfile.h"
@@ -1828,20 +1833,21 @@ void CSVFile::readFile(CSVProfile *profile)
     if (!inFile.exists())
         return;
     inFile.open(QIODevice::ReadOnly);
-    QTextCodec* codec = QTextCodec::codecForMib(profile->m_encodingMIBEnum);
-#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
-    QByteArray encodedString = inFile.readAll();
-    QString buf = codec->toUnicode(encodedString);
-#else
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QTextStream inStream(&inFile);
+    QTextCodec* codec = QTextCodec::codecForMib(profile->m_encodingMIBEnum);
     inStream.setCodec(codec);
-
-    QString buf = inStream.readAll();
+    const QString decodedData = inStream.readAll();
+#else
+    const auto encodedData = inFile.readAll();
+    QStringDecoder decoder(KMM_Codec::codecNameForMib(profile->m_encodingMIBEnum));
+    const QString decodedData = decoder.decode(encodedData);
 #endif
+
     inFile.close();
     m_model->clear();
     m_parse->setTextDelimiter(profile->m_textDelimiter);
-    QStringList rows = m_parse->parseFile(buf);        // parse the buffer
+    QStringList rows = m_parse->parseFile(decodedData); // parse the buffer
     m_rowCount = m_parse->lastLine();                  // won't work without above line
     getColumnCount(profile, rows);
     getStartEndRow(profile);

@@ -21,8 +21,13 @@
 #include <QList>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
-#include <QTextCodec>
 #include <QUuid>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QTextCodec>
+#else
+#include <QStringDecoder>
+#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -367,8 +372,13 @@ QString MyMoneyOfxConnector::statementRequest() const
     QString result;
     if (fi.userpass[0]) {
         char* szrequest = libofx_request_statement(&fi, &account, statementStartDate().startOfDay().toSecsSinceEpoch());
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         auto codec = QTextCodec::codecForName("Windows-1251");
         result = codec->toUnicode(szrequest);
+#else
+        auto toUtf16 = QStringDecoder(QLatin1String("Windows-1251"));
+        result = toUtf16(szrequest);
+#endif
         free(szrequest);
         // remove the trailing zero
         result.remove(QChar(0));

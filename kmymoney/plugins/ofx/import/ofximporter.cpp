@@ -15,7 +15,6 @@
 #include <QFile>
 #include <QRadioButton>
 #include <QSpinBox>
-#include <QTextCodec>
 #include <QTextStream>
 #include <QUrl>
 

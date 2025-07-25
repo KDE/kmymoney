@@ -18,7 +18,6 @@
 #include <QScreen>
 #include <QScrollBar>
 #include <QStandardItemModel>
-#include <QTextCodec>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -38,6 +37,7 @@
 #include "csvimporter.h"
 #include "icons.h"
 #include "investmentwizardpage.h"
+#include "kmm_codec.h"
 #include "mymoneyqifprofile.h"
 #include "pluginsettings.h"
 #include "priceswizardpage.h"
@@ -705,40 +705,7 @@ void SeparatorPage::initializePage()
 
 void SeparatorPage::initializeEncodingCombobox()
 {
-    ui->m_encoding->clear();
-
-    QList<QTextCodec *>   codecs;
-    QMap<QString, QTextCodec *> codecMap;
-    static const QRegularExpression iso8859RegExp(QLatin1String("ISO[- ]8859-([0-9]+).*"));
-
-    const auto availableMibs = QTextCodec::availableMibs();
-    for (const auto& mib : qAsConst(availableMibs)) {
-        QTextCodec *codec = QTextCodec::codecForMib(mib);
-
-        QString sortKey = codec->name().toUpper();
-        int rank;
-
-        const auto iso8859(iso8859RegExp.match(sortKey));
-        if (sortKey.startsWith(QLatin1String("UTF-8"))) {             // krazy:exclude=strings
-            rank = 1;
-        } else if (sortKey.startsWith(QLatin1String("UTF-16"))) {            // krazy:exclude=strings
-            rank = 2;
-        } else if (iso8859.hasMatch()) {
-            if (iso8859.captured(1).size() == 1)
-                rank = 3;
-            else
-                rank = 4;
-        } else {
-            rank = 5;
-        }
-        sortKey.prepend(QChar('0' + rank));
-
-        codecMap.insert(sortKey, codec);
-    }
-    codecs = codecMap.values();
-
-    for (const auto codec : qAsConst(codecs))
-        ui->m_encoding->addItem(codec->name(), codec->mibEnum());
+    KMM_Codec::loadComboBox(ui->m_encoding);
 }
 
 void SeparatorPage::encodingChanged(const int index)
