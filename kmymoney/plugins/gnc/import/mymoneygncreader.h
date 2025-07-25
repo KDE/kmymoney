@@ -852,7 +852,11 @@ public:
 #else
     void readFile(QString, QString);
 #endif // _GNCFILEANON
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QTextCodec *m_decoder;
+#endif
+
 protected:
     friend class GncObject; // pity we can't just say GncObject. And compiler doesn't like multiple friends on one line...
     friend class GncFile; // there must be a better way...

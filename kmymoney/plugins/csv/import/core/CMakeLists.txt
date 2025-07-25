@@ -15,7 +15,7 @@ generate_export_header(kmm_csvimportercore)
 target_link_libraries(kmm_csvimportercore
   PUBLIC
     kmm_mymoney
-    $<$<BOOL:${BUILD_WITH_QT6}>:Qt::Core5Compat>
+    kmm_codec
 )
 
 set_target_properties(kmm_csvimportercore PROPERTIES

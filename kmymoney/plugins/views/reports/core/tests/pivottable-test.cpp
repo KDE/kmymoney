@@ -10,20 +10,26 @@
 #include <QList>
 #include <QRegularExpression>
 #include <QTest>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QTextCodec>
+#else
+#include <QStringConverter>
+#endif
 
 // DOH, mmreport.h uses this without including it!!
-#include "mymoneyinstitution.h"
+#include "kmm_codec.h"
 #include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyinstitution.h"
+#include "mymoneypayee.h"
 #include "mymoneyprice.h"
 #include "mymoneyreport.h"
-#include "mymoneystatement.h"
+#include "mymoneysecurity.h"
 #include "mymoneysplit.h"
-#include "mymoneypayee.h"
-#include "mymoneyexception.h"
+#include "mymoneystatement.h"
 #include "mymoneystoragedump.h"
-#include "mymoneyenums.h"
 
 #include "pivottable.h"
 #include "tests/testutilities.h"
@@ -1158,8 +1164,7 @@ void PivotTableTest::testHtmlEncoding()
     XMLandback(filter);
     PivotTable networth_f(filter);
 
-    QByteArray encoding = QTextCodec::codecForLocale()->name();
-
+    const auto encoding = KMM_Codec::encodingForLocale();
     QString html = networth_f.renderReport(QLatin1String("html"), encoding, filter.name());
 
     static const QRegularExpression rx(QLatin1String("^.*<meta .* charset=" + encoding + ".*>.*"),

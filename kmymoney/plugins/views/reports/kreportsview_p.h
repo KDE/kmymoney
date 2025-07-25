@@ -31,13 +31,18 @@
 #include <QMimeData>
 #include <QPointer>
 #include <QPrintPreviewDialog>
-#include <QTextCodec>
 #include <QTimer>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include <QUrlQuery>
 #include <QVBoxLayout>
 #include <QWheelEvent>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QTextCodec>
+#else
+#include <QStringConverter>
+#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -55,6 +60,7 @@
 #include "ui_reportcontrol.h"
 
 #include "icons.h"
+#include "kmm_codec.h"
 #include "kmm_printer.h"
 #include "kmmtextbrowser.h"
 #include "kmymoneysettings.h"
@@ -260,7 +266,7 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     parent->setCurrentIndex(tabNr);
 
     // get users character set encoding
-    m_encoding = QTextCodec::codecForLocale()->name();
+    m_encoding = KMM_Codec::encodingForLocale();
 }
 
 KReportTab::~KReportTab()

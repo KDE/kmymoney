@@ -15,10 +15,15 @@
 #include <QRegularExpression>
 #include <QStandardPaths>
 #include <QTabWidget>
-#include <QTextCodec>
 #include <QTextStream>
 #include <QTimer>
 #include <QUuid>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QTextCodec>
+#else
+#include <QStringDecoder>
+#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -356,8 +361,13 @@ bool KOnlineBankingSetupWizard::finishLoginPage()
         QString hver = m_headerVersion->headerVersion();
         strncpy(fi.header_version, hver.toLatin1(), OFX_HEADERVERSION_LENGTH - 1);
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         auto codec = QTextCodec::codecForName("Windows-1251");
         auto request = codec->toUnicode(libofx_request_accountinfo(&fi));
+#else
+        auto toUtf16 = QStringDecoder(QLatin1String("Windows-1251"));
+        QString request = toUtf16(libofx_request_accountinfo(&fi));
+#endif
 
         // Check if we need to tweak the request for specific institutions
         MyMoneyOfxConnector::institutionSpecificRequestAdjustment(request);
@@ -375,7 +385,14 @@ bool KOnlineBankingSetupWizard::finishLoginPage()
             metaData.insert(QLatin1String("UserAgent"), userAgent);
         }
 
-        OfxHttpRequest(QString("POST"), QUrl((*m_it_info).url), codec->fromUnicode(request), metaData, filename, false);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+        const auto encodedRequest = codec->fromUnicode(request);
+#else
+        auto fromUtf16 = QStringEncoder(QLatin1String("Windows-1251"));
+        const auto encodedRequest = fromUtf16(request);
+#endif
+
+        OfxHttpRequest(QString("POST"), QUrl((*m_it_info).url), encodedRequest, metaData, filename, false);
         backButton->setEnabled(backButtonState);
 
         LibofxContextPtr ctx = libofx_get_new_context();

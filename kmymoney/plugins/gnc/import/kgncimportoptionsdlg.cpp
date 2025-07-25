@@ -9,11 +9,13 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QByteArray>
 #include <QCheckBox>
 #include <QList>
-#include <QByteArray>
-#include <QTextCodec>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QTextCodec>
+#endif
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -23,6 +25,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmm_codec.h"
 #include "ui_kgncimportoptionsdlg.h"
 
 class KGncImportOptionsDlgPrivate
@@ -31,10 +34,9 @@ class KGncImportOptionsDlgPrivate
     Q_DECLARE_PUBLIC(KGncImportOptionsDlg)
 
 public:
-    explicit KGncImportOptionsDlgPrivate(KGncImportOptionsDlg *qq) :
-        q_ptr(qq),
-        ui(new Ui::KGncImportOptionsDlg),
-        m_localeCodec(nullptr)
+    explicit KGncImportOptionsDlgPrivate(KGncImportOptionsDlg* qq)
+        : q_ptr(qq)
+        , ui(new Ui::KGncImportOptionsDlg)
     {
     }
 
@@ -78,20 +80,11 @@ public:
 
     void buildCodecList()
     {
-        m_localeCodec = QTextCodec::codecForLocale();
-        auto codecList = QTextCodec::availableCodecs();
-        QList<QByteArray>::const_iterator itc;
-        for (itc = codecList.cbegin(); itc != codecList.cend(); ++itc) {
-            if (*itc == m_localeCodec)
-                ui->comboDecode->insertItem(0, QString(*itc));
-            else
-                ui->comboDecode->insertItem(9999, QString(*itc));
-        }
+        KMM_Codec::loadComboBox(ui->comboDecode);
     }
 
     KGncImportOptionsDlg      *q_ptr;
-    Ui::KGncImportOptionsDlg  *ui;
-    QTextCodec                *m_localeCodec;
+    Ui::KGncImportOptionsDlg* ui;
 };
 
 KGncImportOptionsDlg::KGncImportOptionsDlg(QWidget *parent) :
@@ -139,6 +132,7 @@ bool KGncImportOptionsDlg::scheduleOption() const
 };
 
 // return selected codec or 0
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 QTextCodec* KGncImportOptionsDlg::decodeOption()
 {
     Q_D(const KGncImportOptionsDlg);
@@ -148,6 +142,7 @@ QTextCodec* KGncImportOptionsDlg::decodeOption()
         return (QTextCodec::codecForName(d->ui->comboDecode->currentText().toUtf8()));
     }
 }
+#endif
 
 bool KGncImportOptionsDlg::txNotesOption() const
 {
