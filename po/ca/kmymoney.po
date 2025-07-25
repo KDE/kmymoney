@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-24 03:37+0000\n"
-"PO-Revision-Date: 2025-07-20 10:16+0200\n"
+"PO-Revision-Date: 2025-07-24 22:12+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -15595,9 +15595,10 @@ msgstr "Avui, el saldo de %1 està per sota del saldo mínim de %2."
 msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
 msgid_plural ""
 "The balance of %2 will drop below the minimum balance %3 in %1 days."
-msgstr[0] "El saldo de %2 se situarà per sota del saldo mínim de %3 en %1 dia."
+msgstr[0] ""
+"El saldo de %2 se situarà per sota del saldo mínim de %3 d'aquí a %1 dia."
 msgstr[1] ""
-"El saldo de %2 se situarà per sota del saldo mínim de %3 en %1 dies."
+"El saldo de %2 se situarà per sota del saldo mínim de %3 d'aquí a %1 dies."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:403
 #: kmymoney/views/khomeview_p.h:1257
@@ -15616,16 +15617,16 @@ msgstr "Avui, el saldo de %1 està per sobre de %2."
 #, kde-format
 msgid "The balance of %2 will drop below %3 in %1 day."
 msgid_plural "The balance of %2 will drop below %3 in %1 days."
-msgstr[0] "El saldo de %2 se situarà per sota de %3 en %1 dia."
-msgstr[1] "El saldo de %2 se situarà per sota de %3 en %1 dies."
+msgstr[0] "El saldo de %2 se situarà per sota de %3 d'aquí a %1 dia."
+msgstr[1] "El saldo de %2 se situarà per sota de %3 d'aquí a %1 dies."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:422
 #: kmymoney/views/khomeview_p.h:1275
 #, kde-format
 msgid "The balance of %2 will raise above %3 in %1 day."
 msgid_plural "The balance of %2 will raise above %3 in %1 days."
-msgstr[0] "El saldo de %2 se situarà per sobre de %3 en %1 dia."
-msgstr[1] "El saldo de %2 se situarà per sobre de %3 en %1 dies."
+msgstr[0] "El saldo de %2 se situarà per sobre de %3 d'aquí a %1 dia."
+msgstr[1] "El saldo de %2 se situarà per sobre de %3 d'aquí a %1 dies."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:437
 #, kde-format
@@ -18416,13 +18417,13 @@ msgid_plural ""
 msgstr[0] ""
 "Heu configurat el KMyMoney per a usar el GPG per a protegir les vostres "
 "dades i també encriptar-les amb la clau de recuperació del KMyMoney. Aquesta "
-"clau està a punt de caducar en %1 dia. Si us plau, actualitzeu la clau des "
-"de l'anell de claus emprant el frontal del GPG (p. ex. el KGPG)."
+"clau està a punt de caducar d'aquí a %1 dia. Si us plau, actualitzeu la clau "
+"des de l'anell de claus emprant el frontal del GPG (p. ex. el KGPG)."
 msgstr[1] ""
 "Heu configurat el KMyMoney per a usar el GPG per a protegir les vostres "
 "dades i també encriptar-les amb la clau de recuperació del KMyMoney. Aquesta "
-"clau està a punt de caducar en %1 dies. Si us plau, actualitzeu la clau des "
-"de l'anell de claus emprant el frontal del GPG (p. ex. el KGPG)."
+"clau està a punt de caducar d'aquí a %1 dies. Si us plau, actualitzeu la "
+"clau des de l'anell de claus emprant el frontal del GPG (p. ex. el KGPG)."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:280
 #, kde-format

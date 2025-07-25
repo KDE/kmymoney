@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-24 03:37+0000\n"
-"PO-Revision-Date: 2025-06-30 19:10+0200\n"
+"PO-Revision-Date: 2025-07-24 17:50+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 25.04.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -5331,7 +5331,7 @@ msgstr "Redigera flikordning"
 #: kmymoney/kmymoney.cpp:1519
 #, kde-format
 msgid "Ledger Quick Open"
-msgstr ""
+msgstr "Snabböppna huvudbok"
 
 #: kmymoney/kmymoney.cpp:1521
 #, kde-format
@@ -6858,27 +6858,23 @@ msgid "  * value set to shares in split of transaction '%1'."
 msgstr "  * värde tilldelat till aktier vid delning av transaktionen '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3351
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Split %2 in transaction '%1' contains different signs for shares and "
-#| "value. Please fix manually."
+#, kde-format
 msgid ""
 "  * Split %2 in transaction '%1' contains different signs for shares and "
 "value."
 msgstr ""
 "  * Delen %2 i transaktionen '%1' innehåller olika tecken för aktier och "
-"värde. Rätta det manuellt."
+"värde."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3368
-#, fuzzy, kde-format
-#| msgid "Investment transaction"
+#, kde-format
 msgid "    Reinvestment transaction '%1' fixed."
-msgstr "Investeringstransaktion"
+msgstr "    Återinvesteringstransaktion '%1' rättad."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3372
 #, kde-format
 msgid "    Please fix manually."
-msgstr ""
+msgstr "    Rätta manuellt."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3385
 #, kde-format
@@ -12746,13 +12742,12 @@ msgstr ""
 "Detta kan ta lite tid beroende på tillgänglig bandbredd."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:127
-#, fuzzy, kde-format
-#| msgid "Please select your financial institution from the list below..."
+#, kde-format
 msgctxt "@title:group Manual enter OFX details"
 msgid ""
 "Please provide the details for your financial institution in the fields "
 "below."
-msgstr "Välj finansinstitut i listan nedan..."
+msgstr "Tillhandahåll information om ditt finansinstitut i fälten nedan."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:245
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:299
@@ -19375,8 +19370,8 @@ msgstr ""
 msgctxt "Label for tags in ledger"
 msgid "Tag: "
 msgid_plural "Tags: "
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Etikett:"
+msgstr[1] "Etiketter:"
 
 #: kmymoney/views/kaccountsview.cpp:170
 #: kmymoney/views/kinstitutionsview.cpp:209
@@ -20232,10 +20227,9 @@ msgstr "Välj investeringskonto:"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_ledgerButton)
 #: kmymoney/views/kinvestmentview.ui:57
-#, fuzzy, kde-format
-#| msgid "New ledger"
+#, kde-format
 msgid "Goto ledger"
-msgstr "Ny huvudbok"
+msgstr "Gå till huvudbok"
 
 #. i18n: ectx: property (toolTip), widget (KMMEmptyTreeView, m_equitiesTree)
 #: kmymoney/views/kinvestmentview.ui:87
