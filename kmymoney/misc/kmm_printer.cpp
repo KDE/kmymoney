@@ -13,29 +13,30 @@
 
 // Q_LOGGING_CATEGORY(Print, "Printing")
 
+static QPrinter* globalPrinter(nullptr);
+static QPrinter* globalPdfPrinter(nullptr);
+static QPrintDialog* globalDialog(nullptr);
+static QPageSetupDialog* globalPdfDialog(nullptr);
+
 KMyMoneyPrinter::KMyMoneyPrinter()
 {
 }
 
 QPrinter* KMyMoneyPrinter::instance(QPrinter::PrinterMode mode)
 {
-    static QPrinter* printer(nullptr);
-
-    if (printer == nullptr) {
-        printer = new QPrinter(mode);
+    if (globalPrinter == nullptr) {
+        globalPrinter = new QPrinter(mode);
     }
-    return printer;
+    return globalPrinter;
 }
 
 QPrintDialog* KMyMoneyPrinter::dialog()
 {
-    static QPrintDialog* dialog(nullptr);
-
-    if (dialog == nullptr) {
-        dialog = new QPrintDialog(instance());
-        dialog->setWindowTitle(QString());
+    if (globalDialog == nullptr) {
+        globalDialog = new QPrintDialog(instance());
+        globalDialog->setWindowTitle(QString());
     }
-    return dialog;
+    return globalDialog;
 }
 
 QPrinter* KMyMoneyPrinter::startPrint(QPrinter::PrinterMode mode)
@@ -49,11 +50,10 @@ QPrinter* KMyMoneyPrinter::startPrint(QPrinter::PrinterMode mode)
 
 void KMyMoneyPrinter::cleanup()
 {
-    auto printer = instance();
-    auto dlg = dialog();
-
-    delete dlg;
-    delete printer;
+    delete globalDialog;
+    delete globalPrinter;
+    globalDialog = nullptr;
+    globalPrinter = nullptr;
 }
 
 KMyMoneyPDFPrinter::KMyMoneyPDFPrinter()
@@ -62,24 +62,20 @@ KMyMoneyPDFPrinter::KMyMoneyPDFPrinter()
 
 QPrinter* KMyMoneyPDFPrinter::instance()
 {
-    static QPrinter* printer(nullptr);
-
-    if (printer == nullptr) {
-        printer = new QPrinter(QPrinter::HighResolution);
-        printer->setOutputFormat(QPrinter::PdfFormat);
+    if (globalPdfPrinter == nullptr) {
+        globalPdfPrinter = new QPrinter(QPrinter::HighResolution);
+        globalPdfPrinter->setOutputFormat(QPrinter::PdfFormat);
     }
-    return printer;
+    return globalPdfPrinter;
 }
 
 QPageSetupDialog* KMyMoneyPDFPrinter::dialog(const QString& title)
 {
-    static QPageSetupDialog* dialog(nullptr);
-
-    if (dialog == nullptr) {
-        dialog = new QPageSetupDialog(instance());
+    if (globalPdfDialog == nullptr) {
+        globalPdfDialog = new QPageSetupDialog(instance());
     }
-    dialog->setWindowTitle(title);
-    return dialog;
+    globalPdfDialog->setWindowTitle(title);
+    return globalPdfDialog;
 }
 
 QPrinter* KMyMoneyPDFPrinter::startPrint(const QString& title)
@@ -93,9 +89,8 @@ QPrinter* KMyMoneyPDFPrinter::startPrint(const QString& title)
 
 void KMyMoneyPDFPrinter::cleanup()
 {
-    auto printer = instance();
-    auto dlg = dialog();
-
-    delete dlg;
-    delete printer;
+    delete globalPdfDialog;
+    delete globalPdfPrinter;
+    globalPdfDialog = nullptr;
+    globalPdfPrinter = nullptr;
 }
