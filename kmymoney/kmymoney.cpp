@@ -1199,6 +1199,7 @@ KMyMoneyApp::~KMyMoneyApp()
 
     // destroy printer object
     KMyMoneyPrinter::cleanup();
+    KMyMoneyPDFPrinter::cleanup();
 
     // destroy find transaction dialog
     delete d->m_searchDlg;
