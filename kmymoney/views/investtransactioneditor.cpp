@@ -150,6 +150,7 @@ public:
     void loadFeeAndInterestAmountEdits();
     void adjustSharesCommodity(AmountEdit* amountEdit, const QString& accountId);
     void setupAssetAccount(const QString& accountId);
+    void storePrice() const;
 
     InvestTransactionEditor* q;
     Ui_InvestTransactionEditor* ui;
@@ -741,6 +742,18 @@ void InvestTransactionEditor::Private::setupAssetAccount(const QString& accountI
 void InvestTransactionEditor::Private::scheduleUpdateTotalAmount()
 {
     QMetaObject::invokeMethod(q, "updateTotalAmount", Qt::QueuedConnection);
+}
+
+void InvestTransactionEditor::Private::storePrice() const
+{
+    if ((stockSplit.action() == QLatin1String("Buy")) || (stockSplit.action() == QLatin1String("Reinvestset"))) {
+        const auto id = stockSplit.accountId();
+        const auto file = MyMoneyFile::instance();
+        const auto acc = file->account(id);
+        MyMoneySecurity sec = file->security(acc.currencyId());
+        MyMoneyPrice price(acc.currencyId(), sec.tradingCurrency(), ui->dateEdit->date(), stockSplit.price(), "Transaction");
+        file->addPrice(price);
+    }
 }
 
 InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString& accId)
@@ -1364,10 +1377,12 @@ QStringList InvestTransactionEditor::saveTransaction(const QStringList& selected
         const auto file = MyMoneyFile::instance();
         if (t.id().isEmpty()) {
             file->addTransaction(t);
+            d->storePrice();
             selection = journalEntrySelection(t.id(), d->stockSplit.accountId());
         } else {
             t.setImported(false);
             file->modifyTransaction(t);
+            d->storePrice();
         }
         ft.commit();
 
