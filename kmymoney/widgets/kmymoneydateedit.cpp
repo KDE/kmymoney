@@ -8,11 +8,13 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QApplication>
+#include <QClipboard>
 #include <QDate>
 #include <QDateTimeEdit>
-#include <QDebug>
 #include <QKeyEvent>
 #include <QLineEdit>
+#include <QMimeData>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -538,6 +540,20 @@ void KMyMoneyDateEdit::keyPressEvent(QKeyEvent* keyEvent)
     QDate date;
     d->m_lastKeyPressWasEscape = false;
 
+    const auto keySeq = QKeySequence(keyEvent->modifiers() | keyEvent->key());
+
+    if (keySeq.matches(QKeySequence(QKeySequence::Paste))) {
+        const QClipboard* clipboard = QApplication::clipboard();
+        const QMimeData* mimeData = clipboard->mimeData();
+        if (mimeData->hasText()) {
+            if (mimeData->text().length() > lineEdit()->selectedText().length()) {
+                lineEdit()->selectAll();
+            }
+        } else {
+            return; // only allow text to be pasted
+        }
+    }
+
     switch (key) {
     case Qt::Key_Down:
     case Qt::Key_Up:
@@ -628,7 +644,7 @@ void KMyMoneyDateEdit::keyPressEvent(QKeyEvent* keyEvent)
                 if (!oldDate.isValid() || (oldDate.day() != newDate.day())) {
                     d->m_originalDay = newDate.day();
                 }
-                if (oldSection != newSection) {
+                if ((keyEvent->modifiers() == Qt::NoModifier) && (oldSection != newSection)) {
                     d->selectSection(newSection);
                 }
             }
