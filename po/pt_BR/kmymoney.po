@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-24 03:37+0000\n"
+"POT-Creation-Date: 2025-07-27 03:31+0000\n"
 "PO-Revision-Date: 2023-09-16 02:47-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -1921,8 +1921,8 @@ msgstr "Contas/Categorias"
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_4)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:148
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:493
-#: kmymoney/plugins/views/reports/kreportsview_p.h:954
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1494
+#: kmymoney/plugins/views/reports/kreportsview_p.h:960
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1500
 #: kmymoney/views/kpayeesview.ui:117 kmymoney/views/ktagsview.ui:121
 #: kmymoney/views/ktagsview.ui:127
 #, kde-format
@@ -5681,7 +5681,7 @@ msgid "No KMyMoneyFile open"
 msgstr "Nenhum arquivo KMyMoney aberto"
 
 #: kmymoney/kmymoney.cpp:3053 kmymoney/kmymoney.cpp:3055
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1363
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1375
 #: kmymoney/plugins/xml/xmlstorage.cpp:691
 #, kde-format
 msgctxt "Application is ready to use"
@@ -5941,7 +5941,7 @@ msgstr ""
 "Não foi possível importar %1 usando o plugin %2.  O plugin retornou o "
 "seguinte erro: %3"
 
-#: kmymoney/kmymoney.cpp:3988 kmymoney/plugins/ofx/import/ofximporter.cpp:1051
+#: kmymoney/kmymoney.cpp:3988 kmymoney/plugins/ofx/import/ofximporter.cpp:1050
 #, kde-format
 msgid "Importing error"
 msgstr "Erro de importação"
@@ -6263,7 +6263,7 @@ msgid "Budget"
 msgstr "Orçamento"
 
 #: kmymoney/kmymoneyutils.cpp:127
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1025
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1031
 #, kde-format
 msgid "Cash Flow"
 msgstr "Dinheiro"
@@ -6274,7 +6274,7 @@ msgid "Unable to load schedule details"
 msgstr "Não foi possível carregar os detalhes do agendamento"
 
 #: kmymoney/kmymoneyutils.cpp:376
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:114
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:119
 #: kmymoney/wizards/kmymoneywizard_p.h:78
 #, kde-format
 msgctxt "Go to next page of the wizard"
@@ -10302,8 +10302,8 @@ msgstr ""
 "center> Insira novamente as suas seleções de colunas."
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:349
-#: kmymoney/plugins/csv/import/csvwizard.cpp:995
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1066
+#: kmymoney/plugins/csv/import/csvwizard.cpp:962
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1033
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:382
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:411
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:432
@@ -10626,7 +10626,7 @@ msgctxt "Clear all column assignments"
 msgid "Clear all"
 msgstr "Limpar tudo"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:216
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:221
 #, kde-format
 msgid ""
 "Version of your CSV config file is %1.%2.%3 and is newer than supported "
@@ -10635,7 +10635,7 @@ msgstr ""
 "A versão do seu arquivo de configuração CSV é %1.%2.%3 e é mais recente que "
 "a versão suportada %4.%5.%6. Você poderá ter problemas."
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:298
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:303
 #, kde-format
 msgid ""
 "<center>During update of <b>%1</b><br>the profile type for <b>%2</b> could "
@@ -10646,37 +10646,37 @@ msgstr ""
 "não pôde ser reconhecido.<br>O perfil não pode ser usado por causa disso."
 "<br>Deseja removê-lo?</center>"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1581
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1586
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "buy"
 msgstr "compra"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1583
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1588
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "sell,repurchase"
 msgstr "venda,recompra"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1585
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1590
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "reinvest,reinv,re-inv"
 msgstr "reinvestimento,reinv,re-inv"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1587
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1592
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "dividend"
 msgstr "dividendos"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1589
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1594
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "interest,income"
 msgstr "juros,receitas"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1591
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1596
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid ""
@@ -10685,7 +10685,7 @@ msgstr ""
 "adição,dividendos de ações,reinv divd,transferir,novo registro em,item do "
 "diário"
 
-#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1593
+#: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1598
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "remove"
@@ -10740,17 +10740,17 @@ msgid ""
 msgstr ""
 "<center>O nome do perfil foi renomeado de <b>%1</b> para <b>%2</b>.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:955
+#: kmymoney/plugins/csv/import/csvwizard.cpp:922
 #, kde-format
 msgid "Import CSV"
 msgstr "Importar CSV"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:957
+#: kmymoney/plugins/csv/import/csvwizard.cpp:924
 #, kde-format
 msgid "Make QIF File"
 msgstr "Criar um arquivo QIF"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:994
+#: kmymoney/plugins/csv/import/csvwizard.cpp:961
 #, kde-format
 msgid ""
 "<center>Autodetect could not detect your decimal symbol in column %1.</"
@@ -10761,7 +10761,7 @@ msgstr ""
 "na coluna %1.</center><center>Tente a seleção manual para ver as células "
 "problemáticas e corrigir os seus dados.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1064
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1031
 #, kde-format
 msgid ""
 "<center>There are invalid date formats in column '%1'.</"
@@ -10770,7 +10770,7 @@ msgstr ""
 "<center>Existem formatos de datas inválidos na coluna '%1'.</"
 "center><center>Verifique as suas seleções.</center>"
 
-#: kmymoney/plugins/csv/import/csvwizard.cpp:1112
+#: kmymoney/plugins/csv/import/csvwizard.cpp:1079
 #, kde-format
 msgctxt "@info:tooltip QIF profile not selected"
 msgid "Please select a QIF profile in the CSV importer settings"
@@ -11916,29 +11916,29 @@ msgstr ""
 msgid "Always use this selection for this price source."
 msgstr "Sempre usar esta seleção para fonte de valores."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:239
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:249
 #, kde-format
 msgid "Account%1"
 msgstr "Conta%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:244
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:254
 #, kde-format
 msgid "Stock%1"
 msgstr "Ação%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:253
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:263
 #, kde-format
 msgid "Payee%1"
 msgstr "Beneficiário%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:260
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:270
 #, kde-format
 msgid "Schedule%1"
 msgstr "Agendamento%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1212
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1251
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1357
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1222
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1261
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1369
 #, kde-format
 msgid ""
 "Import failed:\n"
@@ -11949,17 +11949,17 @@ msgstr ""
 "\n"
 "%1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1361
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1373
 #, kde-format
 msgid "Import complete"
 msgstr "Importação concluída"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1418
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1430
 #, kde-format
 msgid "Disguise your wealth"
 msgstr "Mascarar seu patrimônio"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1419
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1431
 #, kde-format
 msgid ""
 "Each monetary value on your file will be multiplied by a random number "
@@ -11978,33 +11978,33 @@ msgstr ""
 "todos os valores.\n"
 "Estes números não serão armazenados no arquivo."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1438
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1450
 #, kde-format
 msgid "Loading commodities..."
 msgstr "Carregando mercadorias..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1490
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1502
 #, kde-format
 msgid "Loading prices..."
 msgstr "Carregando preços..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1494
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1502
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1506
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1514
 #, kde-format
 msgid "Imported History"
 msgstr "Histórico importado"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1523
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1535
 #, kde-format
 msgid "Loading accounts..."
 msgstr "Carregando contas..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1668
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1680
 #, kde-format
 msgid "Loading transactions..."
 msgstr "Carregando transações..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1771
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1783
 #, kde-format
 msgid ""
 "Account or Category %1, transaction date %2; split contains invalid value; "
@@ -12013,38 +12013,38 @@ msgstr ""
 "Na Conta ou Categoria %1, a transação datada em %2 contém valor de parcela "
 "inválido. Verifique"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1813
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1825
 #, kde-format
 msgid "Imported Transaction"
 msgstr "Transação importada"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1862
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1874
 #, kde-format
 msgid "Loading templates..."
 msgstr "Carregando modelos..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1876
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1888
 #, kde-format
 msgid "Unknown payee"
 msgstr "Beneficiário desconhecido"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2004
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2016
 #, kde-format
 msgid "Schedule %1 contains unknown action (key = %2, type = %3)"
 msgstr "O agendamento %1 contém uma ação desconhecida (chave = %2, tipo= %3)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2012
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2024
 #, kde-format
 msgid "Schedule %1 contains multiple actions; only one has been imported"
 msgstr ""
 "O agendamento %1 contém ações múltiplas; somente uma ação pode ser importada"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2018
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2030
 #, kde-format
 msgid "Schedule %1 contains no valid splits"
 msgstr "O agendamento %1 não contém parcelas válidas"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2023
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2035
 #, kde-format
 msgid ""
 "Schedule %1 appears to contain a formula. GnuCash formulae are not "
@@ -12053,18 +12053,18 @@ msgstr ""
 "O agendamento %1 parece conter uma fórmula. Fórmulas do GnuCash não são "
 "conversíveis"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2073
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2085
 #, kde-format
 msgid "Loading schedules..."
 msgstr "Carregando agendamentos..."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2161
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2173
 #, kde-format
 msgid "Schedule %1 has interval of %2 which is not currently available"
 msgstr ""
 "O agendamento %1 possui intervalo de %2 que não está atualmente disponível"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2168
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2180
 #, kde-format
 msgid ""
 "Schedule %1 contains unknown interval specification; please check for "
@@ -12073,7 +12073,7 @@ msgstr ""
 "O agendamento %1 contém uma especificação de intervalo desconhecida; por "
 "favor verifique a operação correta"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2204
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2216
 #, kde-format
 msgid ""
 "Schedule %1 contains a deferred interval specification; please check for "
@@ -12082,12 +12082,12 @@ msgstr ""
 "O agendamento %1 contém uma especificação de intervalo posterior; Verifique "
 "a operação correta"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2229
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2241
 #, kde-format
 msgid "Schedule %1 dropped at user request"
 msgstr "Agendamento %1 descartado por solicitação do usuário"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2282
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2294
 #, kde-format
 msgid ""
 "Your main currency seems to be %1 (%2); do you want to set this as your base "
@@ -12096,29 +12096,29 @@ msgstr ""
 "Sua moeda base parece ser %1 (%2); deseja configurar isto como sua moeda "
 "base?"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2300
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2312
 #, kde-format
 msgctxt "Button to show more detailed data"
 msgid "More"
 msgstr "Mais"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2302
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2314
 #, kde-format
 msgctxt "Button to close the current dialog"
 msgid "Done"
 msgstr "Concluído"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2304
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2316
 #, kde-format
 msgid "Save Report"
 msgstr "Salvar relatório"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2321
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2333
 #, kde-format
 msgid "Problems were encountered in converting schedule '%1'."
 msgstr "Problemas foram encontrados ao converter o agendamento '%1'."
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2346
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2358
 #, kde-format
 msgid ""
 "Found:\n"
@@ -12127,91 +12127,91 @@ msgstr ""
 "Encontrado:\n"
 "\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2347
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2359
 #, kde-format
 msgid "%1 commodity (equity)\n"
 msgid_plural "%1 commodities (equities)\n"
 msgstr[0] "%1 mercadoria (valor)\n"
 msgstr[1] "%1 mercadorias (valores)\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2348
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2360
 #, kde-format
 msgid "%1 price\n"
 msgid_plural "%1 prices\n"
 msgstr[0] "%1 preço\n"
 msgstr[1] "%1 preços\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2349
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2361
 #, kde-format
 msgid "%1 account\n"
 msgid_plural "%1 accounts\n"
 msgstr[0] "%1 conta\n"
 msgstr[1] "%1 contas\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2350
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2362
 #, kde-format
 msgid "%1 transaction\n"
 msgid_plural "%1 transactions\n"
 msgstr[0] "%1 transação\n"
 msgstr[1] "%1 transações\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2351
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2363
 #, kde-format
 msgid "%1 schedule\n"
 msgid_plural "%1 schedules\n"
 msgstr[0] "%1 agendamento\n"
 msgstr[1] "%1 agendamentos\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2354
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2366
 #, kde-format
 msgid "No inconsistencies were detected\n"
 msgstr "Nenhuma inconsistência foi detectada\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2356
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2368
 #, kde-format
 msgid "%1 inconsistency was detected and corrected\n"
 msgid_plural "%1 inconsistencies were detected and corrected\n"
 msgstr[0] "%1 inconsistência foi detectada e corrigida\n"
 msgstr[1] "%1 inconsistências foram detectadas e corrigidas\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2361
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2373
 #, kde-format
 msgid "%1 orphan account was created\n"
 msgid_plural "%1 orphan accounts were created\n"
 msgstr[0] "%1 conta órfã foi criada\n"
 msgstr[1] "%1 contas órfãs foram criadas\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2366
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2378
 #, kde-format
 msgid "%1 possible schedule problem was noted\n"
 msgid_plural "%1 possible schedule problems were noted\n"
 msgstr[0] "%1 problema possível de agendamento foi anotado\n"
 msgstr[1] "%1 problemas possíveis de agendamento foram anotados\n"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2371
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2383
 #, kde-format
 msgid "Small Business Features (Customers, Invoices, etc.)"
 msgstr "Recursos para pequenos negócios (clientes, recibos, etc.)"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2372
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2384
 #: kmymoney/plugins/views/budget/budgetview.cpp:53
 #, kde-format
 msgid "Budgets"
 msgstr "Orçamentos"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2373
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2385
 #, kde-format
 msgid "Lots"
 msgstr "Lotes"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2375
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2387
 #, kde-format
 msgid "The following features found in your file are not currently supported:"
 msgstr ""
 "Os seguintes recursos encontrados em seu arquivo não são atualmente "
 "suportados:"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2378
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2390
 #, kde-format
 msgid ""
 "\n"
@@ -12222,17 +12222,17 @@ msgstr ""
 "\n"
 "Pressione 'Mais' para mais informações"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2392
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2404
 #, kde-format
 msgid "Save report as"
 msgstr "Salvar o relatório como"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2429
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2441
 #, kde-format
 msgid "Orphan created from unknown GnuCash account"
 msgstr "Órfão criado de uma conta GnuCash desconhecida"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2444
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2456
 #, kde-format
 msgid ""
 "One or more transactions contain a reference to an otherwise unknown "
@@ -12242,7 +12242,7 @@ msgstr ""
 "Uma ou mais transações contém uma referência para uma conta desconhecida\n"
 "Uma conta de ativos com o nome %1 foi criada para conter estes dados"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2478
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2490
 #, kde-format
 msgid ""
 "An Investment account must be a child of an Asset account\n"
@@ -12251,7 +12251,7 @@ msgstr ""
 "Um conta de Investimento deve ser filha de uma conta de Investimento\n"
 "A conta %1 será armazenada sob a conta de Investimentos principal"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2485
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2497
 #, kde-format
 msgid ""
 "An Income account must be a child of an Income account\n"
@@ -12260,7 +12260,7 @@ msgstr ""
 "Um conta de Receita deve ser filha de uma conta de Receita\n"
 "A conta %1 será armazenada sob a conta de Receitas principal"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2492
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2504
 #, kde-format
 msgid ""
 "An Expense account must be a child of an Expense account\n"
@@ -12269,23 +12269,23 @@ msgstr ""
 "Uma conta de Despesa deve ser filha de uma conta de Despesa\n"
 "A conta %1 será armazenada sob a conta de Despesas principal"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2541
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2553
 #, kde-format
 msgid "Enter the investment account name "
 msgstr "Insira o nome da conta investimento "
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2543
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2555
 #, kde-format
 msgid "My Investments"
 msgstr "Meus investimentos"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2582
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2594
 #, kde-format
 msgid "Select parent investment account or enter new name. Stock %1"
 msgstr "Selecione a conta de investimento pai ou insira um novo nome. Ação %1"
 
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2609
-#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2626
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2621
+#: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2638
 #, kde-format
 msgid "%1 is not an Investment Account. Do you wish to make it one?"
 msgstr "%1 não é uma Conta de Investimento. Deseja torná-la uma?"
@@ -12723,7 +12723,7 @@ msgid "Pick &date"
 msgstr "Selecionar &data"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:307
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:900
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:899
 #, kde-format
 msgid "Online settings"
 msgstr "Configurações online"
@@ -13075,13 +13075,13 @@ msgstr ""
 "Para confirmar esta ordem, indique o código óptico apresentado pelo seu "
 "&gerador"
 
-#: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:205
+#: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:216
 #: kmymoney/plugins/ofx/import/ofxpartner.cpp:411
 #, kde-format
 msgid "The HTTP request failed."
 msgstr "A requisição HTTP falhou."
 
-#: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:205
+#: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:216
 #: kmymoney/plugins/ofx/import/ofxpartner.cpp:411
 #, kde-format
 msgctxt "The HTTP request failed"
@@ -13100,12 +13100,12 @@ msgstr "Conexão Direta OFX"
 msgid "Contacting bank..."
 msgstr "Contactando o banco..."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:79
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:84
 #, kde-format
 msgid "Loading banklist"
 msgstr "Carregando lista de bancos"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:80
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:85
 #, kde-format
 msgid ""
 "Getting list of banks from https://www.ofxhome.com/\n"
@@ -13114,7 +13114,7 @@ msgstr ""
 "Obtendo a lista de bancos de https://www.ofxhome.com/\n"
 "Isto pode levar algum tempo dependendo da largura de banda disponível."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:127
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:132
 #, fuzzy, kde-format
 #| msgid "Please select your financial institution from the list below..."
 msgctxt "@title:group Manual enter OFX details"
@@ -13123,30 +13123,30 @@ msgid ""
 "below."
 msgstr "Selecione a instituição financeira na lista abaixo..."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:245
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:299
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:250
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:304
 #, kde-format
 msgid "Supports online statements<br/>"
 msgstr "Suporta extratos online<br/>"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:247
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:301
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:252
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:306
 #, kde-format
 msgid "Supports investments<br/>"
 msgstr "Suporta investimentos<br/>"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:249
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:303
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:254
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:308
 #, kde-format
 msgid "Supports bill payment (but not supported by KMyMoney yet)<br/>"
 msgstr "Suporta pagamentos de contas (ainda não suportado pelo KMyMoney)<br/>"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:253
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:258
 #, kde-format
 msgid "OFX host failed. Last successful access was on '%1'. "
 msgstr "Falha na máquina OFX. O último acesso bem sucedido foi em '%1'."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:255
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:260
 #, kde-format
 msgid ""
 "Certificate verification of OFX host failed. Last successful verification "
@@ -13155,58 +13155,58 @@ msgstr ""
 "A verificação do certificado da máquina OFX falhou. A última verificação bem "
 "sucedida foi em '%1'."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:263
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:268
 #, kde-format
 msgid "Does not support online banking"
 msgstr "Não suporta banco online"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:273
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:278
 #, kde-format
 msgid "Please choose a bank."
 msgstr "Selecione um banco."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:279
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:284
 #, kde-format
 msgid "Please fill all fields with values."
 msgstr "Preencha todos os campos com valores."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:283
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:288
 #, kde-format
 msgid "<p>Details for %1:</p>"
 msgstr "<p>Detalhes do %1:</p>"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:394
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:411
 #, kde-format
 msgid "No suitable accounts were found at this bank."
 msgstr "Não foram encontradas contas apropriadas neste banco."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:410
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:427
 #, kde-format
 msgid "Please choose an account"
 msgstr "Selecione uma conta"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:513
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:530
 #, kde-format
 msgid "Server message: %1\n"
 msgstr "Mensagem do servidor: %1\n"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:521
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:538
 #, kde-format
 msgid "Your bank returned warnings when signing on"
 msgstr "O seu banco retornou um alerta na conexão"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:521
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:538
 #, kde-format
 msgctxt "Warning 'message'"
 msgid "WARNING %1"
 msgstr "ATENÇÃO %1"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:524
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:541
 #, kde-format
 msgid "Error signing onto your bank"
 msgstr "Erro ao conectar-se ao seu banco"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:524
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:541
 #, kde-format
 msgid "ERROR %1"
 msgstr "ERRO %1"
@@ -13624,134 +13624,134 @@ msgstr "Deslocamento do fuso horário"
 msgid "Method to detect duplicate transactions during import"
 msgstr "Método para detectar transações duplicadas durante a importação"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:71
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:76
 #, kde-format
 msgid "Quicken Windows 2003"
 msgstr "Quicken Windows 2003"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:72
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:77
 #, kde-format
 msgid "Quicken Windows 2004"
 msgstr "Quicken Windows 2004"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:73
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:78
 #, kde-format
 msgid "Quicken Windows 2005"
 msgstr "Quicken Windows 2005"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:74
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:79
 #, kde-format
 msgid "Quicken Windows 2006"
 msgstr "Quicken Windows 2006"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:75
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:80
 #, kde-format
 msgid "Quicken Windows 2007"
 msgstr "Quicken Windows 2007"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:76
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:141
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:145
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:81
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:146
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:150
 #, kde-format
 msgid "Quicken Windows 2008"
 msgstr "Quicken Windows 2008"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:79
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:84
 #, kde-format
 msgid "Quicken Windows 2010"
 msgstr "Quicken Windows 2010"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:80
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:85
 #, kde-format
 msgid "Quicken Windows 2011"
 msgstr "Quicken Windows 2011"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:81
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:86
 #, kde-format
 msgid "Quicken Windows 2012"
 msgstr "Quicken Windows 2012"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:82
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:87
 #, kde-format
 msgid "Quicken Windows 2013"
 msgstr "Quicken Windows 2013"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:83
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:88
 #, kde-format
 msgid "Quicken Windows 2014"
 msgstr "Quicken Windows 2014"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:85
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:90
 #, kde-format
 msgid "Quicken Windows 2015"
 msgstr "Quicken Windows 2015"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:86
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:91
 #, kde-format
 msgid "Quicken Windows 2016"
 msgstr "Quicken Windows 2016"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:88
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:93
 #, kde-format
 msgid "Quicken Windows 2017"
 msgstr "Quicken Windows 2017"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:89
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:94
 #, kde-format
 msgid "Quicken Windows 2018"
 msgstr "Quicken Windows 2018"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:90
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:95
 #, kde-format
 msgid "Quicken Windows 2019"
 msgstr "Quicken Windows 2019"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:92
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:97
 #, kde-format
 msgid "Quicken Windows (Expert)"
 msgstr "Quicken Windows (Avançado)"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:95
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:100
 #, kde-format
 msgid "Quicken Mac (Expert)"
 msgstr "Quicken Mac (Avançado)"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:98
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:103
 #, kde-format
 msgid "MS-Money 2003"
 msgstr "MS-Money 2003"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:99
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:104
 #, kde-format
 msgid "MS-Money 2004"
 msgstr "MS-Money 2004"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:100
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:105
 #, kde-format
 msgid "MS-Money 2005"
 msgstr "MS-Money 2005"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:101
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:106
 #, kde-format
 msgid "MS-Money 2006"
 msgstr "MS-Money 2006"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:102
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:107
 #, kde-format
 msgid "MS-Money 2007"
 msgstr "MS-Money 2007"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:103
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:108
 #, kde-format
 msgid "MS-Money Plus"
 msgstr "MS-Money Plus"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:104
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:109
 #, kde-format
 msgid "MS-Money (Expert)"
 msgstr "MS-Money (Avançado)"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:225
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:230
 #, kde-format
 msgid "Enter your password for account <b>%1</b>"
 msgstr "Digite a senha da conta <b>%1</b>"
@@ -13768,23 +13768,23 @@ msgstr "OFX FITID"
 msgid "KMyMoney Hash"
 msgstr "Hash do KMyMoney"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:161
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:160
 #, kde-format
 msgid "OFX..."
 msgstr "OFX..."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:175
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:174
 #, kde-format
 msgid "OFX import file selection"
 msgstr "Seleção de arquivo OFX para importar"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:177
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:176
 #, kde-format
 msgctxt "Filter for QFileDialog"
 msgid "OFX files (*.ofx *.qfx *.ofc);;All files (*)"
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:197
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:196
 #, kde-format
 msgid ""
 "Unable to import %1 using the OFX importer plugin.  This file is not the "
@@ -13793,27 +13793,27 @@ msgstr ""
 "Não foi possível importar %1 usando o plugin de importação do OFX.  Este "
 "arquivo não está no formato correto."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:198
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:197
 #, kde-format
 msgid "Incorrect format"
 msgstr "Formato incorreto"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:244
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:243
 #, kde-format
 msgid "Unable to parse file"
 msgstr "Não foi possível analisar arquivo"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:847
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:846
 #, kde-format
 msgid "No accounts found."
 msgstr "Nenhuma conta encontrada."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1035
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1034
 #, kde-format
 msgid "Error connecting to bank: %1"
 msgstr "Erro ao conectar-se ao banco: %1"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1048
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1047
 #, kde-format
 msgid ""
 "<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The plugin "
@@ -13822,12 +13822,12 @@ msgstr ""
 "<p>Não foi possível importar <b>'%1'</b> usando o plugin de importação OFX.  "
 "O plugin retornou o seguinte erro:</p><p>%2</p>"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1085
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1084
 #, kde-format
 msgid "Importing process terminated unexpectedly."
 msgstr "Processo de importação terminou de maneira inesperada."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1085
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1084
 #, kde-format
 msgid "Failed to import all statements."
 msgstr "Falha ao importar todas as transações."
@@ -15590,7 +15590,7 @@ msgstr "Nome"
 #. i18n: ectx: property (text), widget (QPushButton, m_forecastButton)
 #: kmymoney/plugins/views/forecast/forecastview.cpp:53
 #: kmymoney/plugins/views/forecast/kforecastview.ui:272
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1338
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1344
 #, kde-format
 msgid "Forecast"
 msgstr "Previsão"
@@ -15843,7 +15843,7 @@ msgstr "Previsão de orçamento"
 #. i18n: ectx: property (text), widget (QToolButton, buttonChart)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:479
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:146
-#: kmymoney/plugins/views/reports/kreportsview_p.h:431
+#: kmymoney/plugins/views/reports/kreportsview_p.h:437
 #: kmymoney/plugins/views/reports/reportcontrol.ui:41
 #, kde-format
 msgid "Chart"
@@ -16826,7 +16826,7 @@ msgstr "Intervalo"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:168
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:172
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:27
-#: kmymoney/plugins/views/reports/kreportsview_p.h:441
+#: kmymoney/plugins/views/reports/kreportsview_p.h:447
 #: kmymoney/views/khomeview_p.h:1109
 #, kde-format
 msgid "Report"
@@ -16980,7 +16980,7 @@ msgid "Failed to save: %1"
 msgstr "Não foi possível salvar: %1"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:401
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1493
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1499
 #: kmymoney/plugins/views/reports/reportsview.cpp:83
 #: kmymoney/plugins/views/reports/reportsview.cpp:119
 #: kmymoney/plugins/views/reports/reportsview.cpp:177
@@ -16990,60 +16990,60 @@ msgstr "Relatório Criado"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:401
 #: kmymoney/plugins/views/reports/kreportsview.cpp:472
-#: kmymoney/plugins/views/reports/kreportsview_p.h:824
-#: kmymoney/plugins/views/reports/kreportsview_p.h:832
-#: kmymoney/plugins/views/reports/kreportsview_p.h:840
-#: kmymoney/plugins/views/reports/kreportsview_p.h:849
-#: kmymoney/plugins/views/reports/kreportsview_p.h:861
-#: kmymoney/plugins/views/reports/kreportsview_p.h:874
-#: kmymoney/plugins/views/reports/kreportsview_p.h:891
-#: kmymoney/plugins/views/reports/kreportsview_p.h:899
-#: kmymoney/plugins/views/reports/kreportsview_p.h:907
-#: kmymoney/plugins/views/reports/kreportsview_p.h:915
-#: kmymoney/plugins/views/reports/kreportsview_p.h:926
-#: kmymoney/plugins/views/reports/kreportsview_p.h:939
-#: kmymoney/plugins/views/reports/kreportsview_p.h:948
-#: kmymoney/plugins/views/reports/kreportsview_p.h:962
-#: kmymoney/plugins/views/reports/kreportsview_p.h:971
-#: kmymoney/plugins/views/reports/kreportsview_p.h:979
-#: kmymoney/plugins/views/reports/kreportsview_p.h:987
-#: kmymoney/plugins/views/reports/kreportsview_p.h:995
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1003
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1011
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1020
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1031
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1043
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1053
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1063
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1073
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1083
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1093
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1103
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1113
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1127
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1142
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1164
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1186
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1203
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1225
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1234
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1243
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1252
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1266
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1277
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1292
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1301
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1311
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1320
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1328
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1346
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1356
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1367
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1377
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1396
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1405
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1414
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1423
+#: kmymoney/plugins/views/reports/kreportsview_p.h:830
+#: kmymoney/plugins/views/reports/kreportsview_p.h:838
+#: kmymoney/plugins/views/reports/kreportsview_p.h:846
+#: kmymoney/plugins/views/reports/kreportsview_p.h:855
+#: kmymoney/plugins/views/reports/kreportsview_p.h:867
+#: kmymoney/plugins/views/reports/kreportsview_p.h:880
+#: kmymoney/plugins/views/reports/kreportsview_p.h:897
+#: kmymoney/plugins/views/reports/kreportsview_p.h:905
+#: kmymoney/plugins/views/reports/kreportsview_p.h:913
+#: kmymoney/plugins/views/reports/kreportsview_p.h:921
+#: kmymoney/plugins/views/reports/kreportsview_p.h:932
+#: kmymoney/plugins/views/reports/kreportsview_p.h:945
+#: kmymoney/plugins/views/reports/kreportsview_p.h:954
+#: kmymoney/plugins/views/reports/kreportsview_p.h:968
+#: kmymoney/plugins/views/reports/kreportsview_p.h:977
+#: kmymoney/plugins/views/reports/kreportsview_p.h:985
+#: kmymoney/plugins/views/reports/kreportsview_p.h:993
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1001
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1009
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1017
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1026
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1037
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1049
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1059
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1069
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1079
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1089
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1099
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1109
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1119
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1133
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1148
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1170
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1192
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1209
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1231
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1240
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1249
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1258
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1272
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1283
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1298
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1307
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1317
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1326
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1334
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1352
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1362
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1373
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1383
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1402
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1411
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1420
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1429
 #, kde-format
 msgid "Default Report"
 msgstr "Relatório predefinido"
@@ -17087,7 +17087,7 @@ msgstr ""
 "Desculpe, mas o <b>%1</b> é um relatório padrão. Você não pode apagá-lo."
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:544
-#: kmymoney/plugins/views/reports/kreportsview_p.h:573
+#: kmymoney/plugins/views/reports/kreportsview_p.h:579
 #, kde-format
 msgid "Delete Report?"
 msgstr "Excluir o relatório?"
@@ -17176,18 +17176,18 @@ msgid "Comment"
 msgstr "Comentário"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonChart)
-#: kmymoney/plugins/views/reports/kreportsview_p.h:432
+#: kmymoney/plugins/views/reports/kreportsview_p.h:438
 #: kmymoney/plugins/views/reports/reportcontrol.ui:38
 #, kde-format
 msgid "Show the chart version of this report"
 msgstr "Mostrar a versão do gráfico deste relatório"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:442
+#: kmymoney/plugins/views/reports/kreportsview_p.h:448
 #, kde-format
 msgid "Show the report version of this chart"
 msgstr "Mostrar a versão em relatório deste gráfico"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:572
+#: kmymoney/plugins/views/reports/kreportsview_p.h:578
 #, kde-format
 msgid ""
 "<qt>Are you sure you want to delete report <b>%1</b>?  There is no way to "
@@ -17196,326 +17196,326 @@ msgstr ""
 "<qt>Deseja realmente excluir o relatório <b>%1</b>? Não será possível "
 "recuperá-lo.</qt>"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:634
+#: kmymoney/plugins/views/reports/kreportsview_p.h:640
 msgid "Charts"
 msgstr "Gráficos"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:677
+#: kmymoney/plugins/views/reports/kreportsview_p.h:683
 msgid "Favorite Reports"
 msgstr "Relatórios favoritos"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:705
+#: kmymoney/plugins/views/reports/kreportsview_p.h:711
 msgid "Old Customized Reports"
 msgstr "Antigos relatórios personalizados"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:816
+#: kmymoney/plugins/views/reports/kreportsview_p.h:822
 #, kde-format
 msgid "Income and Expenses"
 msgstr "Receitas e despesas"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:823
+#: kmymoney/plugins/views/reports/kreportsview_p.h:829
 #, kde-format
 msgid "Income and Expenses This Month"
 msgstr "Receitas e despesas deste mês"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:831
+#: kmymoney/plugins/views/reports/kreportsview_p.h:837
 #, kde-format
 msgid "Income and Expenses This Year"
 msgstr "Receitas e despesas deste ano"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:839
+#: kmymoney/plugins/views/reports/kreportsview_p.h:845
 #, kde-format
 msgid "Income and Expenses By Year"
 msgstr "Receitas e despesas por ano"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:848
+#: kmymoney/plugins/views/reports/kreportsview_p.h:854
 #, kde-format
 msgid "Income and Expenses Graph"
 msgstr "Gráfico de receitas e despesas"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:860
+#: kmymoney/plugins/views/reports/kreportsview_p.h:866
 #, kde-format
 msgid "Income and Expenses Bar Graph"
 msgstr "Gráfico de barra de receitas e despesas"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:873
+#: kmymoney/plugins/views/reports/kreportsview_p.h:879
 #, kde-format
 msgid "Income and Expenses Pie Chart"
 msgstr "Gráfico de setores de receitas e despesas"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:883
+#: kmymoney/plugins/views/reports/kreportsview_p.h:889
 #: kmymoney/views/khomeview_p.h:1546
 #, kde-format
 msgid "Net Worth"
 msgstr "Valor líquido"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:890
+#: kmymoney/plugins/views/reports/kreportsview_p.h:896
 #, kde-format
 msgid "Net Worth By Month"
 msgstr "Valor líquido por mês"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:898
+#: kmymoney/plugins/views/reports/kreportsview_p.h:904
 #, kde-format
 msgid "Net Worth Today"
 msgstr "Valor líquido hoje"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:906
+#: kmymoney/plugins/views/reports/kreportsview_p.h:912
 #, kde-format
 msgid "Net Worth By Year"
 msgstr "Valor líquido por ano"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:914
+#: kmymoney/plugins/views/reports/kreportsview_p.h:920
 #, kde-format
 msgid "7-day Cash Flow Forecast"
 msgstr "Previsão do fluxo de dinheiro para 7 dias"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:925
+#: kmymoney/plugins/views/reports/kreportsview_p.h:931
 #, kde-format
 msgid "Net Worth Graph"
 msgstr "Gráfico de patrimônio líquido"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:938
+#: kmymoney/plugins/views/reports/kreportsview_p.h:944
 #, kde-format
 msgid "Account Balances by Institution"
 msgstr "Saldo de contas por instituição"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:947
+#: kmymoney/plugins/views/reports/kreportsview_p.h:953
 #, kde-format
 msgid "Account Balances by Type"
 msgstr "Saldo de contas por tipo"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:961
+#: kmymoney/plugins/views/reports/kreportsview_p.h:967
 #, kde-format
 msgid "Transactions by Account"
 msgstr "Transações por conta"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:970
+#: kmymoney/plugins/views/reports/kreportsview_p.h:976
 #, kde-format
 msgid "Transactions by Category"
 msgstr "Transações por categoria"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:978
+#: kmymoney/plugins/views/reports/kreportsview_p.h:984
 #, kde-format
 msgid "Transactions by Payee"
 msgstr "Transações por beneficiário"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:986
+#: kmymoney/plugins/views/reports/kreportsview_p.h:992
 #, kde-format
 msgid "Transactions by Tag"
 msgstr "Transações por etiquetas"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:994
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1000
 #, kde-format
 msgid "Transactions by Month"
 msgstr "Transações por mês"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1002
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1008
 #, kde-format
 msgid "Transactions by Week"
 msgstr "Transações por semana"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1010
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1016
 #, kde-format
 msgid "Loan Transactions"
 msgstr "Transações de empréstimos"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1019
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1025
 #, kde-format
 msgid "Transactions by Reconciliation Status"
 msgstr "Transações por status de reconciliação"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1030
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1036
 #, kde-format
 msgid "Cash Flow Transactions This Month"
 msgstr "Transações em dinheiro neste mês"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1035
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1041
 #: kmymoney/views/kmymoneyview.cpp:194
 #, kde-format
 msgid "Investments"
 msgstr "Investimentos"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1042
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1048
 #, kde-format
 msgid "Investment Transactions"
 msgstr "Transações de investimento"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1052
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1058
 #, kde-format
 msgid "Investment Holdings by Account"
 msgstr "Investimentos por conta"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1062
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1068
 #, kde-format
 msgid "Investment Holdings by Type"
 msgstr "Investimentos por tipo"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1072
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1078
 #, kde-format
 msgid "Investment Performance by Account"
 msgstr "Desempenho dos investimentos por conta"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1082
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1088
 #, kde-format
 msgid "Investment Performance by Type"
 msgstr "Desempenho dos investimentos por tipo"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1092
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1098
 #, kde-format
 msgid "Investment Capital Gains by Account"
 msgstr "Ganhos de capital do investimento por Conta"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1102
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1108
 #, kde-format
 msgid "Investment Capital Gains by Type"
 msgstr "Ganhos de capital do investimento por Tipo"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1112
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1118
 #, kde-format
 msgid "Investment Holdings Pie"
 msgstr "Gráfico circular de investimentos"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1126
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1132
 #, kde-format
 msgid "Investment Worth Graph"
 msgstr "Gráfico de investimento líquido"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1141
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1147
 #, kde-format
 msgid "Investment Price Graph"
 msgstr "Gráfico do preço do investimento"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1163
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1169
 #, kde-format
 msgid "Investment Moving Average Price Graph"
 msgstr "Gráfico do preço médio dos movimentos do investimento"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1185
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1191
 #, kde-format
 msgid "Investment Moving Average"
 msgstr "Média de movimentos do investimento"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1202
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1208
 #, kde-format
 msgid "Investment Moving Average vs Actual"
 msgstr "Média de movimentos do investimento contra o real"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1217
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1223
 #, kde-format
 msgid "Taxes"
 msgstr "Impostos"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1224
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1230
 #, kde-format
 msgid "Tax Transactions by Category"
 msgstr "Transações de impostos por categoria"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1233
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1239
 #, kde-format
 msgid "Tax Transactions by Payee"
 msgstr "Transações de impostos por beneficiário"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1242
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1248
 #, kde-format
 msgid "Tax Transactions by Category Last Fiscal Year"
 msgstr "Transações de impostos por categoria do último ano fiscal"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1251
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1257
 #, kde-format
 msgid "Tax Transactions by Payee Last Fiscal Year"
 msgstr "Transações de impostos por beneficiário do último ano fiscal"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1258
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1264
 #, kde-format
 msgid "Budgeting"
 msgstr "Orçamento"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1265
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1271
 #, kde-format
 msgid "Budgeted vs. Actual This Year"
 msgstr "Orçamento x real neste ano"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1276
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1282
 #, kde-format
 msgid "Budgeted vs. Actual This Year (YTM)"
 msgstr "Orçamento x real neste ano (TIR)"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1291
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1297
 #: kmymoney/plugins/views/reports/reportsview.cpp:176
 #, kde-format
 msgid "Monthly Budgeted vs. Actual"
 msgstr "Orçamento mensal x real"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1300
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1306
 #, kde-format
 msgid "Yearly Budgeted vs. Actual"
 msgstr "Orçamento anual x real"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1310
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1316
 #, kde-format
 msgid "Monthly Budget"
 msgstr "Orçamento mensal"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1319
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1325
 #, kde-format
 msgid "Yearly Budget"
 msgstr "Orçamento anual"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1327
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1333
 #, kde-format
 msgid "Yearly Budgeted vs Actual Graph"
 msgstr "Orçamento anual x gráfico real"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1345
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1351
 #, kde-format
 msgid "Forecast By Month"
 msgstr "Previsão por mês"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1355
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1361
 #, kde-format
 msgid "Forecast Next Quarter"
 msgstr "Previsão para o próximo trimestre"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1366
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1372
 #, kde-format
 msgid "Income and Expenses Forecast This Year"
 msgstr "Receitas e despesas deste ano"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1376
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1382
 #, kde-format
 msgid "Net Worth Forecast Graph"
 msgstr "Gráfico de previsão do patrimônio líquido"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, NewGeneralInfoWizardPage)
 #. i18n: ectx: property (title), widget (QWizardPage, CheckingStartWizardPage)
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1388
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1394
 #: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:14
 #: kmymoney/wizards/newloanwizard/newgeneralinfowizardpage.ui:6
 #, kde-format
 msgid "General Information"
 msgstr "Informações gerais"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1395
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1401
 #, kde-format
 msgid "Schedule Information"
 msgstr "Informações do agendamento"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1404
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1410
 #, kde-format
 msgid "Schedule Summary Information"
 msgstr "Informações do resumo do agendamento"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1413
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1419
 #, kde-format
 msgid "Account Information"
 msgstr "Informações da conta"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1422
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1428
 #, kde-format
 msgid "Loan Information"
 msgstr "Informações do empréstimo"
 
-#: kmymoney/plugins/views/reports/kreportsview_p.h:1492
+#: kmymoney/plugins/views/reports/kreportsview_p.h:1498
 #, kde-format
 msgid "%1 YTD Account Transactions"
 msgstr "%1 conta de transações YTD"
