@@ -3268,21 +3268,44 @@ QStringList MyMoneyFile::consistencyCheck()
         }
 
         const auto splits = t.splits();
-        if (!t.splitSum().isZero()) {
-            rc << i18n("  * Sum of splits in transaction '%1' posted on %2 is not zero.", t.id(), MyMoneyUtils::formatDate(t.postDate()));
-            for (const auto& split : splits) {
-                const auto accIdx = d->accountsModel.indexById(split.accountId());
-                const auto name = accIdx.data(eMyMoney::Model::AccountFullHierarchyNameRole).toString();
-                const auto acc = d->accountsModel.itemByIndex(accIdx);
-                const auto security = MyMoneyFile::instance()->security(acc.currencyId());
-                rc << i18n("    Account: %1, Amount: %2", name, MyMoneyUtils::formatMoney(split.shares(), security));
+
+        auto checkSplitSum = [&]() {
+            if (!t.splitSum().isZero()) {
+                rc << i18n("  * Sum of splits in transaction '%1' posted on %2 is not zero.", t.id(), MyMoneyUtils::formatDate(t.postDate()));
+                for (const auto& split : t.splits()) {
+                    const auto accIdx = d->accountsModel.indexById(split.accountId());
+                    const auto name = accIdx.data(eMyMoney::Model::AccountFullHierarchyNameRole).toString();
+                    const auto acc = d->accountsModel.itemByIndex(accIdx);
+                    const auto security = MyMoneyFile::instance()->security(acc.currencyId());
+                    rc << i18n("    Account: %1, Amount: %2", name, MyMoneyUtils::formatMoney(split.shares(), security));
+                }
+                ++unfixedCount;
             }
-            ++unfixedCount;
-        }
+        };
+
+        checkSplitSum();
 
         for (const auto& split : splits) {
             bool sChanged = false;
             MyMoneySplit s = split;
+            // in one case (see b.k.o #507404) a split referenced a
+            // a base account (identified by ids starting with AStd::).
+            // This is normally prevented in MyMoneyFile::addTransaction
+            // and MyMoneyFile::modifyTransaction from happening. The
+            // fix is to remove the the split from the transaction and let
+            // the user assign the correct one.
+            if (isStandardAccount(split.accountId())) {
+                rc << i18nc("Consistency check, all params are internal ids",
+                            "  * Split %2 in transaction '%1' referenced standard account %3 and has been removed.",
+                            t.id(),
+                            split.id(),
+                            s.accountId());
+                t.removeSplit(s);
+                ++problemCount;
+                tChanged = true;
+                checkSplitSum();
+            }
+
             if (payeeConversionMap.find(split.payeeId()) != payeeConversionMap.end()) {
                 s.setPayeeId(payeeConversionMap[s.payeeId()]);
                 sChanged = true;
