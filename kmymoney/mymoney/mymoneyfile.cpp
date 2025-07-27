@@ -4865,7 +4865,12 @@ QMap<QString, QVector<int> > MyMoneyFile::countTransactionsWithSpecificReconcili
         case eMyMoney::Split::State::Cleared:
         case eMyMoney::Split::State::Reconciled:
         case eMyMoney::Split::State::Frozen:
-            result[accountId][(int)flag]++;
+            if (result.contains(accountId)) {
+                result[accountId][(int)flag]++;
+            } else {
+                qDebug() << "MyMoneyFile::countTransactionsWithSpecificReconciliationState: unknown account id" << accountId << "in transaction"
+                         << idx.data(eMyMoney::Model::JournalTransactionIdRole).toString();
+            }
             break;
         default:
             break;
