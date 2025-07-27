@@ -4873,15 +4873,11 @@ QMap<QString, QVector<int> > MyMoneyFile::countTransactionsWithSpecificReconcili
     // fill with empty result for all existing accounts
     QList<MyMoneyAccount> list;
     accountList(list);
-    qDebug() << "account entries:" << list.count();
     for (const auto& acc : qAsConst(list)) {
-        qDebug() << "create" << acc.id();
         result[acc.id()] = QVector<int>((int)eMyMoney::Split::State::MaxReconcileState, 0);
     }
-    qDebug() << "result entries:" << result.count();
 
     const auto rows = d->journalModel.rowCount();
-    qDebug() << "processing rows:" << rows;
     QModelIndex idx;
     for (int row = 0; row < rows; ++row) {
         idx = d->journalModel.index(row, 0);
@@ -4892,7 +4888,6 @@ QMap<QString, QVector<int> > MyMoneyFile::countTransactionsWithSpecificReconcili
         case eMyMoney::Split::State::Cleared:
         case eMyMoney::Split::State::Reconciled:
         case eMyMoney::Split::State::Frozen:
-            qDebug() << "Update" << accountId << "with" << static_cast<int>(flag) << "on row" << row;
             result[accountId][(int)flag]++;
             break;
         default:
