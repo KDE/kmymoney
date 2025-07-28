@@ -14,3 +14,9 @@ path = "kmymoney/icons/**"
 precedence = "aggregate"
 SPDX-FileCopyrightText = "KDE Community"
 SPDX-License-Identifier = "LGPL-3.0-only"
+
+[[annotations]]
+path = ".flatpak-manifest.json"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2025 Mark Penner <mrp@markpenner.space>"
+SPDX-License-Identifier = "MIT"
