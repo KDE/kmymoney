@@ -110,6 +110,138 @@
             ]
         },
         {
+            "name": "libofx",
+            "buildsystem": "cmake-ninja",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/libofx/libofx/releases/download/0.10.9/libofx-0.10.9.tar.gz",
+                    "sha256": "1ca89ff7d681c9edad312172ac464231a8de686e653213612f9417492cef0d37",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 7309,
+                        "stable-only": true,
+                        "url-template": "https://github.com/libofx/libofx/releases/download/0.10.9/libofx-$version.tar.gz"
+                    }
+                }
+            ],
+            "cleanup": [
+                "/bin"
+            ],
+            "modules": [
+                {
+                    "name": "opensp",
+                    "buildsystem": "autotools",
+                    "rm-configure": true,
+                    "config-opts": [
+                        "--disable-doc-build",
+                        "--disable-static"
+                    ],
+                    "sources": [
+                        {
+                            "type": "archive",
+                            "url": "https://sourceforge.net/projects/openjade/files/opensp/1.5.2/OpenSP-1.5.2.tar.gz",
+                            "sha256": "57f4898498a368918b0d49c826aa434bb5b703d2c3b169beb348016ab25617ce",
+                            "x-checker-data": {
+                                "type": "anitya",
+                                "project-id": 377818,
+                                "stable-only": true,
+                                "url-template": "https://sourceforge.net/projects/openjade/files/opensp/$version/OpenSP-$version.tar.gz"
+                            }
+                        },
+                        {
+                            "type": "shell",
+                            "commands": [
+                                "cp -p /usr/share/automake-*/config.{sub,guess} ."
+                            ]
+                        },
+                        {
+                            "type": "script",
+                            "dest-filename": "autogen.sh",
+                            "commands": [
+                                "autoreconf -vfi"
+                            ]
+                        }
+                    ],
+                    "cleanup": [
+                        "/bin"
+                    ]
+                },
+                {
+                    "name": "libxml++",
+                    "buildsystem": "meson",
+                    "config-opts": [
+                        "-Dbuild-examples=false",
+                        "-Dbuild-tests=false"
+                    ],
+                    "sources": [
+                        {
+                            "type": "archive",
+                            "url": "https://download.gnome.org/sources/libxml++/2.42/libxml++-2.42.3.tar.xz",
+                            "sha256": "74b95302e24dbebc56e97048e86ad0a4121fc82a43e58d381fbe1d380e8eba04",
+                            "x-checker-data": {
+                                "type": "gnome",
+                                "name": "libxml++",
+                                "versions": {
+                                    "<": "2.91"
+                                }
+                            }
+                        }
+                    ],
+                    "cleanup": [
+                        "/bin"
+                    ],
+                    "modules": [
+                        {
+                            "name": "glibmm",
+                            "buildsystem": "meson",
+                            "config-opts": [
+                                "-Dbuild-examples=false"
+                            ],
+                            "sources": [
+                                {
+                                    "type": "archive",
+                                    "url": "https://download.gnome.org/sources/glibmm/2.66/glibmm-2.66.8.tar.xz",
+                                    "sha256": "64f11d3b95a24e2a8d4166ecff518730f79ecc27222ef41faf7c7e0340fc9329",
+                                    "x-checker-data": {
+                                        "type": "gnome",
+                                        "name": "glibmm",
+                                        "versions": {
+                                            "<": "2.68"
+                                        }
+                                    }
+                                }
+                            ],
+                            "modules": [
+                                {
+                                    "name": "sigc++",
+                                    "buildsystem": "meson",
+                                    "config-opts": [
+                                        "-Dbuild-examples=false",
+                                        "-Dbuild-tests=false"
+                                    ],
+                                    "sources": [
+                                        {
+                                            "type": "archive",
+                                            "url": "https://download.gnome.org/sources/libsigc++/2.12/libsigc++-2.12.1.tar.xz",
+                                            "sha256": "a9dbee323351d109b7aee074a9cb89ca3e7bcf8ad8edef1851f4cf359bd50843",
+                                            "x-checker-data": {
+                                                "type": "gnome",
+                                                "name": "libsigc++",
+                                                "versions": {
+                                                    "<": "2.99"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "name": "kmymoney",
             "buildsystem": "cmake-ninja",
             "config-opts": [
