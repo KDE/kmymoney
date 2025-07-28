@@ -1,0 +1,131 @@
+{
+    "id": "org.kde.kmymoney",
+    "runtime": "org.kde.Platform",
+    "runtime-version": "6.9",
+    "sdk": "org.kde.Sdk",
+    "command": "kmymoney",
+    "desktop-file-name-suffix": " (Nightly)",
+    "rename-icon": "kmymoney",
+    "copy-icon": true,
+    "finish-args": [
+        "--device=dri",
+        "--share=ipc",
+        "--share=network",
+        "--socket=fallback-x11",
+        "--socket=wayland",
+        "--system-talk-name=org.freedesktop.UDisks2"
+    ],
+    "cleanup": [
+        "*.a",
+        "*.la",
+        "/include",
+        "/lib/cmake",
+        "/lib/pkgconfig",
+        "/mkspecs",
+        "/share/aclocal",
+        "/share/doc",
+        "/share/info",
+        "/share/man"
+    ],
+    "modules": [
+        {
+            "name": "qgpgme",
+            "buildsystem": "autotools",
+            "config-opts": [
+                "--enable-languages=cpp,qt6",
+                "--disable-glibtest",
+                "--disable-gpgconf-test",
+                "--disable-gpg-test",
+                "--disable-gpgsm-test",
+                "--disable-g13-test"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://gnupg.org/ftp/gcrypt/gpgme/gpgme-1.24.3.tar.bz2",
+                    "sha256": "bfc17f5bd1b178c8649fdd918956d277080f33df006a2dc40acdecdce68c50dd",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 1239,
+                        "stable-only": true,
+                        "url-template": "https://gnupg.org/ftp/gcrypt/gpgme/gpgme-$version.tar.bz2",
+                        "versions": {
+                            "<": "2.0.0"
+                        }
+                    }
+                }
+            ],
+            "cleanup": [
+                "/bin"
+            ]
+        },
+        {
+            "name": "qtkeychain",
+            "buildsystem": "cmake-ninja",
+            "config-opts": [
+                "-DBUILD_WITH_QT6=ON",
+                "-DBUILD_TESTING=OFF"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/frankosterfeld/qtkeychain/archive/refs/tags/0.15.0.tar.gz",
+                    "sha256": "f4254dc8f0933b06d90672d683eab08ef770acd8336e44dfa030ce041dc2ca22",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 4138,
+                        "stable-only": true,
+                        "url-template": "https://github.com/frankosterfeld/qtkeychain/archive/refs/tags/$version.tar.gz"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "alkimia",
+            "buildsystem": "cmake-ninja",
+            "config-opts": [
+                "-DQT_MAJOR_VERSION=6",
+                "-DBUILD_APPLETS=OFF",
+                "-DBUILD_TESTING=OFF"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://invent.kde.org/office/alkimia.git"
+                }
+            ]
+        },
+        {
+            "name": "kdiagram",
+            "buildsystem": "cmake-ninja",
+            "config-opts": [
+                "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
+                "-DBUILD_TESTING=OFF"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://invent.kde.org/graphics/kdiagram.git"
+                }
+            ]
+        },
+        {
+            "name": "kmymoney",
+            "buildsystem": "cmake-ninja",
+            "config-opts": [
+                "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
+                "-DBUILD_WITH_QT6=ON"
+            ],
+            "builddir": true,
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": "."
+                }
+            ],
+            "cleanup": [
+                "/share/icons/hicolor/1024x1024"
+            ]
+        }
+    ]
+}
