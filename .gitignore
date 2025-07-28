@@ -24,3 +24,4 @@ docker/.env
 .vscode
 CMakeLists.txt.user
 ci-*/
+.flatpak-builder
