@@ -1743,7 +1743,10 @@ void LedgerView::slotMoveToAccount(const QString& accountId)
     }
 
     pActions[eMenu::Action::MoveTransactionTo]->setData(accountId);
+    const bool enabled = pActions[eMenu::Action::MoveTransactionTo]->isEnabled();
+    pActions[eMenu::Action::MoveTransactionTo]->setEnabled(true);
     pActions[eMenu::Action::MoveTransactionTo]->activate(QAction::Trigger);
+    pActions[eMenu::Action::MoveTransactionTo]->setEnabled(enabled);
 }
 
 void LedgerView::resizeSection(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize)
