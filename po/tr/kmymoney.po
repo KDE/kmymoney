@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-28 01:56+0000\n"
-"PO-Revision-Date: 2025-07-19 22:20+0300\n"
+"PO-Revision-Date: 2025-07-28 11:04+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -6801,17 +6801,13 @@ msgid "    Account: %1, Amount: %2"
 msgstr "    Hesap: %1, Tutar: %2"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3299
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Split %2 in transaction '%1' contains a reference to invalid account "
-#| "%3. Please fix manually."
+#, kde-format
 msgctxt "Consistency check, all params are internal ids"
 msgid ""
 "  * Split %2 in transaction '%1' referenced standard account %3 and has been "
 "removed."
 msgstr ""
-"  * “%1” işlemindeki %2 bölmesi, geçersiz %3 hesabına bir başvuru içeriyor. "
-"Lütfen elle düzeltin."
+"  * “%1” işlemindeki %2 bölmesi, standart %3 hesabına başvurdu ve kaldırıldı."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3312
 #, kde-format

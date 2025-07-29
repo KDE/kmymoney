@@ -13,33 +13,35 @@
 # Marvin <matheusvictor.salles@gmail.com>, 2020.
 # Antonio Henrique L. Rodrigues <ahlr_2000@yahoo.com>, 2020.
 # Geraldo Simiao <geraldosimiao@fedoraproject.org>, 2023.
+# SPDX-FileCopyrightText: 2025 Frederico Goncalves Guimaraes <frederico@teia.bio.br>
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-28 01:56+0000\n"
-"PO-Revision-Date: 2023-09-18 10:19-0300\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
+"PO-Revision-Date: 2025-07-28 21:25-0300\n"
+"Last-Translator: Frederico Goncalves Guimaraes <frederico@teia.bio.br>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
-"Marcus Gama, André Marcelo Alvarenga, Luiz Fernando Ranghetti, Bruno Urias"
+"Frederico Gonçalves Guimarães, Marcus Gama, André Marcelo Alvarenga, Luiz "
+"Fernando Ranghetti, Bruno Urias"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
-"marcus.gama@gmail.com, alvarenga@kde.org, elchevive@opensuse.org, bruno."
-"urias@yahoo.com.br"
+"frederico@teia.bio.br, marcus.gama@gmail.com, alvarenga@kde.org, "
+"elchevive@opensuse.org, bruno.urias@yahoo.com.br"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:132
 #, kde-format
@@ -63,8 +65,7 @@ msgid "Invalid Statement"
 msgstr "Extrato inválido"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:485
-#, fuzzy, kde-format
-#| msgid "No Institution"
+#, kde-format
 msgctxt "@info Group name for accounts with no assigned institution"
 msgid "No institution"
 msgstr "Nenhuma instituição"
@@ -124,13 +125,14 @@ msgid "(Fees) %1"
 msgstr "(Taxas) %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1053
-#, fuzzy, kde-format
-#| msgid "Additional Fees: %1"
+#, kde-format
 msgctxt "Prepend name of payee (%1) to original memo (%2)"
 msgid ""
 "Original payee: %1\n"
 "%2"
-msgstr "Taxas adicionais: %1"
+msgstr ""
+"Beneficiário original: %1\n"
+"%2"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1061
 #, kde-format
@@ -318,15 +320,13 @@ msgid "Schedule found"
 msgstr "Agendamento encontrado"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
-#, fuzzy, kde-format
-#| msgid "Create a new asset account"
+#, kde-format
 msgctxt "Create undo action"
 msgid "Create account"
-msgstr "Criar uma nova conta de ativos"
+msgstr "Criar conta"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
-#, fuzzy, kde-format
-#| msgid "Create category"
+#, kde-format
 msgctxt "Create undo action"
 msgid "Create category"
 msgstr "Criar categoria"
@@ -444,11 +444,10 @@ msgstr[1] "%1 extratos foram processados com os seguintes resultados:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ImportSummaryDialog)
 #: kmymoney/dialogs/importsummarydlg.ui:14
-#, fuzzy, kde-format
-#| msgid "Imported History"
+#, kde-format
 msgctxt "@title:window"
 msgid "Import summary"
-msgstr "Histórico importado"
+msgstr "Importar resumo"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonSkip)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonCancel)
@@ -970,8 +969,7 @@ msgstr ""
 
 #: kmymoney/dialogs/kcurrencycalculator.cpp:438
 #: kmymoney/mymoney/mymoneyfile.cpp:3677
-#, fuzzy, kde-format
-#| msgid "User"
+#, kde-format
 msgctxt "@info price source"
 msgid "User"
 msgstr "Usuário"
@@ -1668,10 +1666,9 @@ msgid "Configure"
 msgstr "Configurar"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:346
-#, fuzzy, kde-format
-#| msgid "%1 units in %2"
+#, kde-format
 msgid "%1 units for one %2"
-msgstr "%1 unidades em %2"
+msgstr "%1 unidades para cada %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:384
 #, kde-format
@@ -1679,18 +1676,16 @@ msgid "[No identifier]"
 msgstr "[Sem identificador]"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:500
-#, fuzzy, kde-format
-#| msgid "No account selected"
+#, kde-format
 msgctxt "@info online update price info"
 msgid "No security selected."
-msgstr "Nenhuma conta selecionada"
+msgstr "Não foi selecionado nenhum título."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:510
-#, fuzzy, kde-format
-#| msgid "Security found"
+#, kde-format
 msgctxt "@info online update price info"
 msgid "No Security to be updated."
-msgstr "Título encontrado"
+msgstr "Nenhum título a ser atualizado."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:534
 #, kde-format
@@ -1717,9 +1712,9 @@ msgid ""
 "the current update operation."
 msgstr ""
 "Ocorreu uma falha ao obter uma cotação para %1 de %2.  Pressione <b>Não</b> "
-"para remover a fonte de preço online desta ação permanentemente. <b>Sim</b> "
-"para continuar atualizando esta ação nas próximas atualizações de preço ou "
-"<b>Cancelar</b> para interromper a operação de atualização atual."
+"para remover a fonte de preço online deste título permanentemente. <b>Sim</"
+"b> para continuar atualizando este título nas próximas atualizações de preço "
+"ou <b>Cancelar</b> para interromper a operação de atualização atual."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:567
 #, kde-format
@@ -1727,19 +1722,17 @@ msgid "Cannot update security <b>%1</b>: %2"
 msgstr "Não foi possível atualizar o título <b>%1</b>: %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:633
-#, fuzzy, kde-format
-#| msgid "Price for %1 updated (id %2)"
+#, kde-format
 msgctxt ""
 "@info Online price update %1 online id, %2 internal id, %3 price, %4 date"
 msgid "Price for %1 updated to %3 for %4 (id %2)"
-msgstr "Preço para %1 atualizado (id %2)"
+msgstr "Preço para %1 atualizado para %3 em %4 (id %2)"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:639
-#, fuzzy, kde-format
-#| msgid "Received an invalid price for %1, unable to update."
+#, kde-format
 msgctxt "@info Online price update %1 online id"
 msgid "Received an invalid price for %1, unable to update."
-msgstr "Valor inválido recebido para %1, não foi possível atualizar."
+msgstr "Foi recebido um preço inválido para %1, não foi possível atualizar."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:699
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
@@ -1760,6 +1753,10 @@ msgid ""
 "loaded if you have used it for a successful price update. Otherwise, the old "
 "setting will be shown."
 msgstr ""
+"Na próxima vez que você abrir essa caixa de diálogo, a fonte de preço "
+"modificado será carregada somente se você a tiver utilizado para uma "
+"atualização de preço bem-sucedida. Caso contrário, será exibida a "
+"configuração antiga."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KEquityPriceUpdateDlg)
 #: kmymoney/dialogs/kequitypriceupdatedlg.ui:15
@@ -2029,8 +2026,7 @@ msgstr "Editor de preço"
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, m_searchWidget)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:26
-#, fuzzy, kde-format
-#| msgid "Search..."
+#, kde-format
 msgctxt "Placeholder text for search bar"
 msgid "Search..."
 msgstr "Pesquisar..."
@@ -2127,7 +2123,7 @@ msgstr "Total para todas as ações"
 #: kmymoney/dialogs/knewaccountdlg.cpp:258
 #, kde-format
 msgid "VAT account"
-msgstr "Conta VAT"
+msgstr "Conta IVA"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:550 kmymoney/kmymoney.cpp:445
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:188
@@ -2231,12 +2227,7 @@ msgstr ""
 "categoria com o mesmo nome."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:911
-#, fuzzy, kde-format
-#| msgid ""
-#| "You have selected to suppress the display of unused categories in the "
-#| "KMyMoney configuration dialog. The category you just created will "
-#| "therefore only be shown if it is used. Otherwise, it will be hidden in "
-#| "the accounts/categories view."
+#, kde-format
 msgctxt "@info"
 msgid ""
 "You have selected to suppress the display of accounts with a zero balance in "
@@ -2244,24 +2235,19 @@ msgid ""
 "therefore only be shown if it is used. Otherwise, it will be hidden in all "
 "accounts views."
 msgstr ""
-"Você optou por suprimir a exibição de categorias não usadas no diálogo de "
-"configuração do KMyMoney. A categoria recém-criada só será exibida se ela "
-"for usada. Caso contrário, ela ficará oculta na visão de contas/categorias."
+"Você optou por suprimir a exibição de contas com saldo zero nas "
+"configurações do KMyMoney. Por isso, a conta recém-criada será exibida "
+"somente se ela for usada. Caso contrário, ela ficará oculta em todas as "
+"visualizações de contas."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:913
-#, fuzzy, kde-format
-#| msgid "Hide closed accounts"
+#, kde-format
 msgctxt "@title:window Warning message about hidden account"
 msgid "Hidden accounts"
-msgstr "Ocultar contas fechadas"
+msgstr "Ocultar contas"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:921
-#, fuzzy, kde-format
-#| msgid ""
-#| "You have selected to suppress the display of unused categories in the "
-#| "KMyMoney configuration dialog. The category you just created will "
-#| "therefore only be shown if it is used. Otherwise, it will be hidden in "
-#| "the accounts/categories view."
+#, kde-format
 msgctxt "@info"
 msgid ""
 "You have selected to suppress the display of unused categories in the "
@@ -2269,13 +2255,13 @@ msgid ""
 "only be shown if it is used. Otherwise, it will be hidden in the accounts/"
 "categories view."
 msgstr ""
-"Você optou por suprimir a exibição de categorias não usadas no diálogo de "
-"configuração do KMyMoney. A categoria recém-criada só será exibida se ela "
-"for usada. Caso contrário, ela ficará oculta na visão de contas/categorias."
+"Você optou por suprimir a exibição de categorias não usadas nas "
+"configurações do KMyMoney. Por isso, a categoria recém-criada será exibida "
+"somente se ela for usada. Caso contrário, ela ficará oculta na visualização "
+"de contas/categorias."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:923
-#, fuzzy, kde-format
-#| msgid "Hidden categories"
+#, kde-format
 msgctxt "@title:window Warning message about hidden category"
 msgid "Hidden categories"
 msgstr "Categorias ocultas"
@@ -2290,27 +2276,26 @@ msgstr "Não foi possível adicionar instituição"
 #, kde-format
 msgctxt "@info:tooltip Hint to provide name"
 msgid "Please provide a name for the new category or account."
-msgstr ""
+msgstr "Por favor, forneça um nome para a nova categoria ou conta."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1071
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:107
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
-msgstr ""
+msgstr "Você não pode criar uma conta ou categoria que contenha %1 no nome."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1078
 #, kde-format
 msgctxt "@info:tooltip Hint to provide VAT percentage in range"
 msgid "Please provide a percentage greater than zero and less than 100."
-msgstr ""
+msgstr "Por favor, forneça um percentual maior do que zero e menor do que 100."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1082
-#, fuzzy, kde-format
-#| msgid "Please select a default category for payee '%1'"
+#, kde-format
 msgctxt "@info:tooltip Hint to provide category to assign VAT"
 msgid "Please select a category for the VAT."
-msgstr "Selecione uma categoria padrão para o beneficiário '%1'"
+msgstr "Por favor, selecione uma categoria para o IVA."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1147
 #, kde-format
@@ -2330,19 +2315,15 @@ msgid "Create category"
 msgstr "Criar categoria"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1172
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>The category <b>%1</b> currently does not exist. Do you want to create "
-#| "it?</p><p><i>The parent account will default to <b>%2</b> but can be "
-#| "changed in the following dialog</i>.</p>"
+#, kde-format
 msgid ""
 "<p>The account <b>%1</b> currently does not exist. Do you want to create it?"
 "</p><p><i>The parent account will default to <b>%2</b> but can be changed in "
 "the following dialog</i>.</p>"
 msgstr ""
-"<p>A categoria <b>%1</b> atualmente não existe. Deseja criá-la?</p><p><i>A "
-"conta pai será a <b>%2</b> mas ela pode ser modificada no diálogo a seguir</"
-"i>.</p>"
+"<p>A conta <b>%1</b> atualmente não existe. Deseja criá-la?</p><p><i>A conta "
+"mãe será a <b>%2</b>, mas ela pode ser modificada no diálogo a seguir</i>.</"
+"p>"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1194
 #, fuzzy, kde-format
@@ -2439,7 +2420,7 @@ msgstr "Número do último cheque:"
 #: kmymoney/dialogs/knewaccountdlg.ui:227
 #, kde-format
 msgid "No auto-VAT-assignment"
-msgstr "Sem atribuição automática de VAT"
+msgstr "Sem atribuição automática de IVA"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_costCenterRequiredCheckBox)
 #: kmymoney/dialogs/knewaccountdlg.ui:234
@@ -2602,25 +2583,25 @@ msgstr "Opções de etiquetas"
 #: kmymoney/dialogs/knewaccountdlg.ui:630
 #, kde-format
 msgid "VAT details"
-msgstr "Detalhes VAT"
+msgstr "Detalhes do IVA"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_vatCategory)
 #: kmymoney/dialogs/knewaccountdlg.ui:662
 #, kde-format
 msgid "VAT category"
-msgstr "Categoria VAT"
+msgstr "Categoria do IVA"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/dialogs/knewaccountdlg.ui:682
 #, kde-format
 msgid "VAT percentage"
-msgstr "Porcentagem VAT"
+msgstr "Porcentagem do IVA"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_vatAssignment)
 #: kmymoney/dialogs/knewaccountdlg.ui:760
 #, kde-format
 msgid "Enable auto VAT assignment"
-msgstr "Ativar atribuição automática de VAT"
+msgstr "Ativar atribuição automática de IVA"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_amountGroupBox)
 #: kmymoney/dialogs/knewaccountdlg.ui:790
@@ -2926,24 +2907,7 @@ msgstr "Escolha XML se não tiver certeza."
 
 #. i18n: ectx: property (html), widget (QTextBrowser, textBrowser)
 #: kmymoney/dialogs/ksaveasquestion.ui:52
-#, fuzzy, kde-format
-#| msgid ""
-#| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#| "REC-html40/strict.dtd\">\n"
-#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#| "css\">\n"
-#| "p, li { white-space: pre-wrap; }\n"
-#| "</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; "
-#| "font-weight:400; font-style:normal;\">\n"
-#| "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
-#| "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#| "\">KMyMoney supports multiple storage types. The availability of storage "
-#| "types depends on the presence of plugins and their activation in the "
-#| "application settings.</p>\n"
-#| "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
-#| "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /"
-#| ">If you are uncertain what to choose here, then <span style=\" font-"
-#| "weight:600;\">XML</span> is probably your best choice.</p></body></html>"
+#, kde-format
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
 "REC-html40/strict.dtd\">\n"
@@ -2967,16 +2931,14 @@ msgstr ""
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; font-"
 "weight:400; font-style:normal;\">\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
-"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">O "
-"KMyMoney tem suporte a diversos tipos de armazenamento. A disponibilidade "
-"dos tipos de armazenamento depende da presença dos plugins e da sua ativação "
-"nas configurações do aplicativo.</p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
-"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br />Se "
-"não tiver certeza do que escolher aqui, então o <span style=\" font-"
-"weight:600;\">XML</span> será provavelmente a melhor escolha.</p></body></"
-"html>"
+"<p align=\"justify\" style=\" margin: 0; -qt-block-indent:0; text-indent:0px;"
+"\">O KMyMoney tem suporte a diversos tipos de armazenamento. A "
+"disponibilidade dos tipos de armazenamento depende da presença de plugins e "
+"da sua ativação nas configurações do aplicativo.</p>\n"
+"<p align=\"justify\" style=\" margin: 0; -qt-block-indent:0; text-indent:0px;"
+"\"><br />Se não tiver certeza do que escolher aqui, então o <span style=\" "
+"font-weight:600;\">XML</span> será provavelmente a melhor escolha.</p></"
+"body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/ksaveasquestion.ui:68
@@ -5310,7 +5272,7 @@ msgstr "Atualizar preços manualmente..."
 #: kmymoney/kmymoney.cpp:1489
 #, kde-format
 msgid "Edit security..."
-msgstr "Editar segurança..."
+msgstr "Editar título..."
 
 #: kmymoney/kmymoney.cpp:1490
 #, kde-format
@@ -6254,7 +6216,7 @@ msgstr ""
 #: kmymoney/kmymoneyutils.cpp:485
 #, kde-format
 msgid "Delete security"
-msgstr "Remover título"
+msgstr "Excluir o título"
 
 #: kmymoney/kmymoneyutils.cpp:493
 #, kde-format
@@ -6638,27 +6600,23 @@ msgstr "Esta conta ainda está incluída em uma agenda ativa"
 #, kde-format
 msgctxt "@info:tooltip for 'VAT' column (% rate)"
 msgid "VAT percentage rate, if configured."
-msgstr ""
+msgstr "Taxa percentual do IVA, caso esteja configurada."
 
 #: kmymoney/models/statementmodel.cpp:127
 #: kmymoney/mymoney/storage/accountsmodel.cpp:513
-#, fuzzy, kde-format
-#| msgid ""
-#| "A cost center assignment is required for a transaction in the selected "
-#| "category."
+#, kde-format
 msgctxt "@info:tooltip for 'CC' column (YES/NO value)"
 msgid ""
 "Whether a cost center assignment is necessary when entering a transaction."
 msgstr ""
-"É necessária a atribuição de um centro de custo para uma transação na "
-"categoria selecionada."
+"Se é necessário associar um centro de custo ao entrar com uma transação."
 
 #: kmymoney/models/statementmodel.cpp:129
 #: kmymoney/mymoney/storage/accountsmodel.cpp:515
 #, kde-format
 msgctxt "@info:tooltip for 'Balance' column"
 msgid "Account balance (in account's currency)"
-msgstr ""
+msgstr "Saldo da conta (na moeda da conta)"
 
 #: kmymoney/models/statementmodel.cpp:131
 #: kmymoney/mymoney/storage/accountsmodel.cpp:481

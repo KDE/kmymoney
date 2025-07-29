@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-28 01:56+0000\n"
-"PO-Revision-Date: 2025-07-19 20:16+0200\n"
+"PO-Revision-Date: 2025-07-28 06:11+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -6831,17 +6831,14 @@ msgid "    Account: %1, Amount: %2"
 msgstr "    Račun: %1, Znesek: %2"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3299
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Split %2 in transaction '%1' contains a reference to invalid account "
-#| "%3. Please fix manually."
+#, kde-format
 msgctxt "Consistency check, all params are internal ids"
 msgid ""
 "  * Split %2 in transaction '%1' referenced standard account %3 and has been "
 "removed."
 msgstr ""
-"  * Delitev %2 v transakciji '%1' vsebuje sklic na neveljaven račun %3. "
-"Prosimo, ročno popravite."
+"* Razdelitev %2 v transakciji '%1' se je sklicevala na standardni račun %3 "
+"in je bila odstranjena."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3312
 #, kde-format
