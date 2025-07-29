@@ -627,7 +627,7 @@ public:
                 m_filterModel->setData(m_filterModel->index(m_currentRow, OnlinePriceModel::Price),
                                        price.formatMoney(toCurrency.tradingSymbol(), precision),
                                        Qt::EditRole);
-                m_filterModel->setData(m_filterModel->index(m_currentRow, OnlinePriceModel::Date), MyMoneyUtils::formatDate(date), Qt::EditRole);
+                m_filterModel->setData(m_filterModel->index(m_currentRow, OnlinePriceModel::Date), date, Qt::EditRole);
 
                 logStatusMessage(i18nc("@info Online price update %1 online id, %2 internal id, %3 price, %4 date",
                                        "Price for %1 updated to %3 for %4 (id %2)",
