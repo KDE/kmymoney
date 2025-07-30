@@ -151,6 +151,7 @@ public:
     void adjustSharesCommodity(AmountEdit* amountEdit, const QString& accountId);
     void setupAssetAccount(const QString& accountId);
     void storePrice() const;
+    void updateTotalAmount();
 
     InvestTransactionEditor* q;
     Ui_InvestTransactionEditor* ui;
@@ -418,6 +419,8 @@ void InvestTransactionEditor::Private::setSecurity(const MyMoneySecurity& sec)
         if (currentActivity) {
             needWarning |= ((currentActivity->feesRequired() != Invest::Activity::Unused) && haveValue(feeSplitModel));
             needWarning |= ((currentActivity->interestRequired() != Invest::Activity::Unused) && haveValue(interestSplitModel));
+            currentActivity->updateLabelText();
+            updateTotalAmount();
         }
 
         if (needWarning) {
@@ -759,6 +762,16 @@ void InvestTransactionEditor::Private::storePrice() const
     }
 }
 
+void InvestTransactionEditor::Private::updateTotalAmount()
+{
+    stockSplit.setValue(currentActivity->valueAllShares().convert(transactionCurrency.smallestAccountFraction(), security.roundingMethod())
+                        * currentActivity->sharesFactor());
+    if (currentActivity->type() != eMyMoney::Split::InvestmentTransactionType::SplitShares) {
+        scheduleUpdateTotalAmount();
+    }
+    updateWidgetState();
+}
+
 InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString& accId)
     : TransactionEditorBase(parent, accId)
     , d(new Private(this))
@@ -825,12 +838,7 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     connect(d->ui->sharesAmountEdit, &AmountEdit::amountChanged, this, [&]() {
         if (d->currentActivity) {
             d->stockSplit.setShares(d->ui->sharesAmountEdit->value() * d->currentActivity->sharesFactor());
-            d->stockSplit.setValue(d->currentActivity->valueAllShares().convert(d->transactionCurrency.smallestAccountFraction(), d->security.roundingMethod())
-                                   * d->currentActivity->sharesFactor());
-            if (d->currentActivity->type() != eMyMoney::Split::InvestmentTransactionType::SplitShares) {
-                d->scheduleUpdateTotalAmount();
-            }
-            d->updateWidgetState();
+            d->updateTotalAmount();
         }
     });
 
@@ -840,12 +848,7 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
     connect(d->ui->priceAmountEdit, &AmountEdit::amountChanged, this, [&]() {
         if (d->currentActivity) {
-            d->stockSplit.setValue(d->currentActivity->valueAllShares().convert(d->transactionCurrency.smallestAccountFraction(), d->security.roundingMethod())
-                                   * d->currentActivity->sharesFactor());
-            if (d->currentActivity->type() != eMyMoney::Split::InvestmentTransactionType::SplitShares) {
-                d->scheduleUpdateTotalAmount();
-            }
-            d->updateWidgetState();
+            d->updateTotalAmount();
         }
     });
 
@@ -915,6 +918,10 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
                 qDebug() << "Problem to find securityId" << accountId << "or" << securityId << "in InvestTransactionEditor::securityAccountChanged";
             }
         }
+        if (d->currentActivity) {
+            d->currentActivity->updateLabelText();
+            d->updateTotalAmount();
+        }
     });
 
     connect(d->ui->securityAccountCombo, &QComboBox::currentTextChanged, this, [&](const QString& text) {
@@ -976,6 +983,7 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     d->ui->feesCombo->installEventFilter(this);
     d->ui->interestCombo->installEventFilter(this);
     d->ui->assetAccountCombo->installEventFilter(this);
+    d->ui->securityAccountCombo->installEventFilter(this);
     d->ui->memoEdit->installEventFilter(this);
 
     // make sure that an empty widget causes the hint frame to show
@@ -1423,6 +1431,12 @@ bool InvestTransactionEditor::eventFilter(QObject* o, QEvent* e)
             } else if (o == d->ui->assetAccountCombo) {
                 if (needCreateCategory(d->ui->assetAccountCombo)) {
                     createCategory(d->ui->assetAccountCombo, eMyMoney::Account::Type::Asset);
+                }
+            } else if (o == d->ui->securityAccountCombo) {
+                const auto accountId = d->ui->securityAccountCombo->completer()->currentIndex().data(eMyMoney::Model::IdRole).toString();
+                const auto indexes = d->securitiesModel->match(d->securitiesModel->index(0, 0), eMyMoney::Model::IdRole, accountId);
+                if (indexes.count() == 1) {
+                    d->ui->securityAccountCombo->setCurrentIndex(indexes.at(0).row());
                 }
             }
             updateWidgets();

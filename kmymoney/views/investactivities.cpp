@@ -182,8 +182,7 @@ void Activity::setupWidgets(const QStringList& activityWidgets) const
 
     setWidgetVisibility(dynamicWidgetNames, false);
 
-    setLabelText("priceLabel", priceLabelText());
-    setLabelText("sharesLabel", sharesLabelText());
+    updateLabelText();
 
     static const QStringList standardWidgetNames = {
         // clang-format off
@@ -201,6 +200,12 @@ void Activity::setupWidgets(const QStringList& activityWidgets) const
 
     setWidgetVisibility(standardWidgetNames, true);
     setWidgetVisibility(activityWidgets, true);
+}
+
+void Activity::updateLabelText() const
+{
+    setLabelText("priceLabel", priceLabelText());
+    setLabelText("sharesLabel", sharesLabelText());
 }
 
 bool Activity::haveCategoryAndAmount(const QString& categoryWidget, const QString& amountWidget, fieldRequired_t optional) const

@@ -93,6 +93,8 @@ public:
 
     QString actionString() const;
 
+    void updateLabelText() const;
+
 protected:
     explicit Activity(InvestTransactionEditor* editor, const QString& action);
     virtual QString priceLabelText() const;
