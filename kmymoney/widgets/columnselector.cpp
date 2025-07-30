@@ -111,7 +111,9 @@ public:
             }
 
             // allow context menu to be opened on tree header for columns selection
+            // and allow resizing of columns
             headerView->setContextMenuPolicy(Qt::CustomContextMenu);
+            headerView->setSectionResizeMode(QHeaderView::Interactive);
 
             if (!isInit) {
                 q->connect(headerView, &QWidget::customContextMenuRequested, q, &ColumnSelector::slotColumnsMenu);
