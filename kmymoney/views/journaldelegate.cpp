@@ -671,10 +671,11 @@ void JournalDelegate::resetLineHeight()
 QSize JournalDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
     // get parameters only once per update to speed things up
+    QStyleOptionViewItem opt = option;
+    initStyleOption(&opt, index);
+    QStyle* style = opt.widget ? opt.widget->style() : QApplication::style();
+
     if (d->m_lineHeight == -1) {
-        QStyleOptionViewItem opt = option;
-        initStyleOption(&opt, index);
-        QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
         d->m_margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
         d->m_lineHeight = opt.fontMetrics.lineSpacing();
     }
@@ -693,7 +694,8 @@ QSize JournalDelegate::sizeHint(const QStyleOptionViewItem& option, const QModel
         }
     }
 
-    QSize size(10, d->m_lineHeight + 2 * d->m_margin);
+    QSize size = style->sizeFromContents(QStyle::CT_ItemViewItem, &opt, QSize(), opt.widget);
+    size.setHeight(d->m_lineHeight + 2 * d->m_margin);
 
     const auto settings = LedgerViewSettings::instance();
     if (((option.state & QStyle::State_Selected) && (settings->showLedgerLens())) || settings->showTransactionDetails()) {
