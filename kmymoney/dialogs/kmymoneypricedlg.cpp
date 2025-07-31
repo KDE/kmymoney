@@ -144,6 +144,10 @@ public:
 
         rc = calc->exec();
         delete calc;
+
+        // make sure old prices are hidden
+        m_sortModel->invalidate();
+
         return rc;
     }
 
@@ -246,9 +250,6 @@ void KMyMoneyPriceDlg::slotNewPrice()
         if (dlg->exec()) {
             MyMoneyPrice price(dlg->ui->m_security->security().id(), dlg->ui->m_currency->security().id(), dlg->date(), MyMoneyMoney::ONE, QString());
             d->editPrice(price);
-
-            // make sure old prices are hidden
-            d->m_sortModel->invalidate();
         }
     } catch (...) {
     }
