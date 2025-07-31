@@ -587,7 +587,7 @@ void KTagsView::updateActions(const SelectedObjects& selections)
         d->clearItemData();
         break;
     case 1:
-        d->ui->m_tabWidget->setEnabled(true); // disable tab widget
+        d->ui->m_tabWidget->setEnabled(true); // enable tab widget
         d->ui->m_balanceLabel->show();
         pActions[eMenu::Action::DeleteTag]->setEnabled(true);
         pActions[eMenu::Action::RenameTag]->setEnabled(true);
@@ -826,5 +826,19 @@ void KTagsView::slotDeleteTag()
 
     } catch (const MyMoneyException &e) {
         KMessageBox::detailedError(this, i18n("Unable to remove tag(s)"), QString::fromLatin1(e.what()));
+    }
+}
+
+void KTagsView::executeAction(eMenu::Action action, const SelectedObjects& selections)
+{
+    Q_UNUSED(selections)
+
+    Q_D(KTagsView);
+    switch (action) {
+    case eMenu::Action::FileClose:
+        d->m_selections.clearSelections();
+        break;
+    default:
+        break;
     }
 }
