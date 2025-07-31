@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-28 01:56+0000\n"
+"POT-Creation-Date: 2025-07-31 01:58+0000\n"
 "PO-Revision-Date: 2025-07-21 14:24+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -6445,7 +6445,7 @@ msgid "Last Price Update"
 msgstr "Dernière mise à jour du cours"
 
 #: kmymoney/models/equitiesmodel.cpp:540
-#: kmymoney/widgets/columnselector.cpp:219
+#: kmymoney/widgets/columnselector.cpp:221
 #, kde-format
 msgid "Displayed columns"
 msgstr "Colonnes affichées"
@@ -19328,31 +19328,31 @@ msgstr "Impossible d'ouvrir le fichier de modèle « %1 »"
 msgid "Unable to upload to '%1'.<br />%2"
 msgstr "Impossible de charger vers « %1 ».<br /> %2"
 
-#: kmymoney/views/investactivities.cpp:279
+#: kmymoney/views/investactivities.cpp:284
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "Parts"
 
-#: kmymoney/views/investactivities.cpp:290
+#: kmymoney/views/investactivities.cpp:295
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price/share"
 msgstr "Cours par titre"
 
-#: kmymoney/views/investactivities.cpp:292
+#: kmymoney/views/investactivities.cpp:297
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Transaction amount"
 msgstr "Montant de l'opération"
 
-#: kmymoney/views/investactivities.cpp:294
+#: kmymoney/views/investactivities.cpp:299
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "Cours"
 
-#: kmymoney/views/investactivities.cpp:651
+#: kmymoney/views/investactivities.cpp:656
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Ratio 1/"
@@ -19412,7 +19412,7 @@ msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
 msgstr "Revenu d'intérêt"
 
-#: kmymoney/views/investtransactioneditor.cpp:305
+#: kmymoney/views/investtransactioneditor.cpp:306
 #: kmymoney/views/multitransactioneditor.cpp:229
 #: kmymoney/views/newtransactioneditor.cpp:335
 #, kde-format
@@ -19420,7 +19420,7 @@ msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr ""
 "La date de saisie est antérieure à la date d'ouverture du compte <b>%1</b>."
 
-#: kmymoney/views/investtransactioneditor.cpp:421
+#: kmymoney/views/investtransactioneditor.cpp:424
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -19430,13 +19430,13 @@ msgstr ""
 "Le produit de la transaction a été modifié, ce qui rendra probablement "
 "toutes les informations de prix non valables. "
 
-#: kmymoney/views/investtransactioneditor.cpp:601
+#: kmymoney/views/investtransactioneditor.cpp:604
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
 msgstr "Sélectionnez l'activité pour cette opération."
 
-#: kmymoney/views/investtransactioneditor.cpp:604
+#: kmymoney/views/investtransactioneditor.cpp:607
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19446,13 +19446,13 @@ msgstr ""
 "Il est impossible de modifier la sécurité pour cette opération car le compte "
 "de sécurité est fermé."
 
-#: kmymoney/views/investtransactioneditor.cpp:617
+#: kmymoney/views/investtransactioneditor.cpp:620
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "Nombre de partages"
 
-#: kmymoney/views/investtransactioneditor.cpp:619
+#: kmymoney/views/investtransactioneditor.cpp:622
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19463,19 +19463,19 @@ msgstr ""
 "sécurité est fermé."
 
 # Ancien: "Saisir la transaction suivante"
-#: kmymoney/views/investtransactioneditor.cpp:623
+#: kmymoney/views/investtransactioneditor.cpp:626
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr "Saisissez le nombre de répartition pour cette transaction"
 
-#: kmymoney/views/investtransactioneditor.cpp:629
+#: kmymoney/views/investtransactioneditor.cpp:632
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "Taux de répartition"
 
-#: kmymoney/views/investtransactioneditor.cpp:631
+#: kmymoney/views/investtransactioneditor.cpp:634
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19484,55 +19484,55 @@ msgstr ""
 "Il est impossible de modifier le taux de fractionnement car le compte de "
 "sécurité est fermé."
 
-#: kmymoney/views/investtransactioneditor.cpp:635
+#: kmymoney/views/investtransactioneditor.cpp:638
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr "Saisissez le taux de répartition pour cette transaction"
 
-#: kmymoney/views/investtransactioneditor.cpp:647
+#: kmymoney/views/investtransactioneditor.cpp:650
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr "Saisissez l'information de prix pour cette transaction"
 
-#: kmymoney/views/investtransactioneditor.cpp:663
+#: kmymoney/views/investtransactioneditor.cpp:666
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "Sélectionner un compte pour solder la transaction"
 
-#: kmymoney/views/investtransactioneditor.cpp:670
+#: kmymoney/views/investtransactioneditor.cpp:673
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr "Saisissez la catégorie pour les taxes"
 
-#: kmymoney/views/investtransactioneditor.cpp:673
+#: kmymoney/views/investtransactioneditor.cpp:676
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "Saisissez le montant pour les taxes"
 
-#: kmymoney/views/investtransactioneditor.cpp:679
+#: kmymoney/views/investtransactioneditor.cpp:682
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr "Saisissez une catégories d'intérêt"
 
-#: kmymoney/views/investtransactioneditor.cpp:682
+#: kmymoney/views/investtransactioneditor.cpp:685
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "Saisissez le montant des intérêts"
 
-#: kmymoney/views/investtransactioneditor.cpp:687
+#: kmymoney/views/investtransactioneditor.cpp:690
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
 msgstr "Sélectionnez la sécurité pour cette opération"
 
-#: kmymoney/views/investtransactioneditor.cpp:692
+#: kmymoney/views/investtransactioneditor.cpp:695
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""

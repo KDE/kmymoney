@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-28 01:56+0000\n"
+"POT-Creation-Date: 2025-07-31 01:58+0000\n"
 "PO-Revision-Date: 2024-02-09 23:23+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -6435,7 +6435,7 @@ msgid "Last Price Update"
 msgstr "&Последнее обновление"
 
 #: kmymoney/models/equitiesmodel.cpp:540
-#: kmymoney/widgets/columnselector.cpp:219
+#: kmymoney/widgets/columnselector.cpp:221
 #, kde-format
 msgid "Displayed columns"
 msgstr "Отображаемые столбцы"
@@ -19338,31 +19338,31 @@ msgstr "Невозможно открыть файл шаблона «%1»"
 msgid "Unable to upload to '%1'.<br />%2"
 msgstr "Невозможно отправить по адресу «%1».<br />%2"
 
-#: kmymoney/views/investactivities.cpp:279
+#: kmymoney/views/investactivities.cpp:284
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "Акции"
 
-#: kmymoney/views/investactivities.cpp:290
+#: kmymoney/views/investactivities.cpp:295
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price/share"
 msgstr "Цена за акцию"
 
-#: kmymoney/views/investactivities.cpp:292
+#: kmymoney/views/investactivities.cpp:297
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Transaction amount"
 msgstr "Сумма операции"
 
-#: kmymoney/views/investactivities.cpp:294
+#: kmymoney/views/investactivities.cpp:299
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "Цена"
 
-#: kmymoney/views/investactivities.cpp:651
+#: kmymoney/views/investactivities.cpp:656
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Ratio 1/"
@@ -19422,14 +19422,14 @@ msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
 msgstr "Доход от процентов"
 
-#: kmymoney/views/investtransactioneditor.cpp:305
+#: kmymoney/views/investtransactioneditor.cpp:306
 #: kmymoney/views/multitransactioneditor.cpp:229
 #: kmymoney/views/newtransactioneditor.cpp:335
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "Дата проводки предшествует дате открытия счёта <b>%1</b>."
 
-#: kmymoney/views/investtransactioneditor.cpp:421
+#: kmymoney/views/investtransactioneditor.cpp:424
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -19439,7 +19439,7 @@ msgstr ""
 "Финансовый инструмент операции был изменён. Из-за этого все курсы могут "
 "стать неверными. Проверьте их."
 
-#: kmymoney/views/investtransactioneditor.cpp:601
+#: kmymoney/views/investtransactioneditor.cpp:604
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Select the security for this transaction"
@@ -19447,7 +19447,7 @@ msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
 msgstr "Выберите ценную бумагу для этой операции"
 
-#: kmymoney/views/investtransactioneditor.cpp:604
+#: kmymoney/views/investtransactioneditor.cpp:607
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19455,13 +19455,13 @@ msgid ""
 "account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:617
+#: kmymoney/views/investtransactioneditor.cpp:620
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "Количество акций"
 
-#: kmymoney/views/investtransactioneditor.cpp:619
+#: kmymoney/views/investtransactioneditor.cpp:622
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19469,74 +19469,74 @@ msgid ""
 "closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:623
+#: kmymoney/views/investtransactioneditor.cpp:626
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr "Укажите количество акций для данной операции"
 
-#: kmymoney/views/investtransactioneditor.cpp:629
+#: kmymoney/views/investtransactioneditor.cpp:632
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "Коэффициент дробления"
 
-#: kmymoney/views/investtransactioneditor.cpp:631
+#: kmymoney/views/investtransactioneditor.cpp:634
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:635
+#: kmymoney/views/investtransactioneditor.cpp:638
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr "Укажите коэффициент дробления для данной операции"
 
-#: kmymoney/views/investtransactioneditor.cpp:647
+#: kmymoney/views/investtransactioneditor.cpp:650
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr "Укажите курс для данной операции"
 
-#: kmymoney/views/investtransactioneditor.cpp:663
+#: kmymoney/views/investtransactioneditor.cpp:666
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "Выберите счёт для балансирования операции"
 
-#: kmymoney/views/investtransactioneditor.cpp:670
+#: kmymoney/views/investtransactioneditor.cpp:673
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr "Укажите статью бюджета комиссии"
 
-#: kmymoney/views/investtransactioneditor.cpp:673
+#: kmymoney/views/investtransactioneditor.cpp:676
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "Укажите сумму комиссии"
 
-#: kmymoney/views/investtransactioneditor.cpp:679
+#: kmymoney/views/investtransactioneditor.cpp:682
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr "Укажите статью бюджета процентов"
 
-#: kmymoney/views/investtransactioneditor.cpp:682
+#: kmymoney/views/investtransactioneditor.cpp:685
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "Укажите сумму процентов"
 
-#: kmymoney/views/investtransactioneditor.cpp:687
+#: kmymoney/views/investtransactioneditor.cpp:690
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
 msgstr "Выберите ценную бумагу для этой операции"
 
-#: kmymoney/views/investtransactioneditor.cpp:692
+#: kmymoney/views/investtransactioneditor.cpp:695
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""

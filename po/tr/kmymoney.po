@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-28 01:56+0000\n"
+"POT-Creation-Date: 2025-07-31 01:58+0000\n"
 "PO-Revision-Date: 2025-07-28 11:04+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -6317,7 +6317,7 @@ msgid "Last Price Update"
 msgstr "Son Fiyat Güncellemesi"
 
 #: kmymoney/models/equitiesmodel.cpp:540
-#: kmymoney/widgets/columnselector.cpp:219
+#: kmymoney/widgets/columnselector.cpp:221
 #, kde-format
 msgid "Displayed columns"
 msgstr "Görüntülenen sütunlar"
@@ -19022,31 +19022,31 @@ msgstr "Şablon dosyası “%1” yazmak için açılamadı"
 msgid "Unable to upload to '%1'.<br />%2"
 msgstr "“%1” konumuna yüklenemedi.<br />%2"
 
-#: kmymoney/views/investactivities.cpp:279
+#: kmymoney/views/investactivities.cpp:284
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Shares"
 msgstr "Hisseler"
 
-#: kmymoney/views/investactivities.cpp:290
+#: kmymoney/views/investactivities.cpp:295
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price/share"
 msgstr "Fiyat/Hisse"
 
-#: kmymoney/views/investactivities.cpp:292
+#: kmymoney/views/investactivities.cpp:297
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Transaction amount"
 msgstr "İşlem tutarı"
 
-#: kmymoney/views/investactivities.cpp:294
+#: kmymoney/views/investactivities.cpp:299
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Price"
 msgstr "Fiyat"
 
-#: kmymoney/views/investactivities.cpp:651
+#: kmymoney/views/investactivities.cpp:656
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Ratio 1/"
@@ -19106,14 +19106,14 @@ msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
 msgstr "Faiz Geliri"
 
-#: kmymoney/views/investtransactioneditor.cpp:305
+#: kmymoney/views/investtransactioneditor.cpp:306
 #: kmymoney/views/multitransactioneditor.cpp:229
 #: kmymoney/views/newtransactioneditor.cpp:335
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "<b>%1</b> hesabının kayıt tarihi açılış tarihinden önce."
 
-#: kmymoney/views/investtransactioneditor.cpp:421
+#: kmymoney/views/investtransactioneditor.cpp:424
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -19123,13 +19123,13 @@ msgstr ""
 "İşlem malı değiştirildi, bu da muhtemelen tüm fiyat bilgilerini geçersiz "
 "kılacak. Lütfen bunları denetleyin."
 
-#: kmymoney/views/investtransactioneditor.cpp:601
+#: kmymoney/views/investtransactioneditor.cpp:604
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
 msgstr "Bu işlemin etkinliğini seçin."
 
-#: kmymoney/views/investtransactioneditor.cpp:604
+#: kmymoney/views/investtransactioneditor.cpp:607
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19139,13 +19139,13 @@ msgstr ""
 "Menkul kıymet hesabı kapalı olduğu için bu işlemin menkul kıymeti "
 "değiştirilemez."
 
-#: kmymoney/views/investtransactioneditor.cpp:617
+#: kmymoney/views/investtransactioneditor.cpp:620
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "Hisse sayısı"
 
-#: kmymoney/views/investtransactioneditor.cpp:619
+#: kmymoney/views/investtransactioneditor.cpp:622
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19153,74 +19153,74 @@ msgid ""
 "closed."
 msgstr "Menkul kıymet hesabı kapalı olduğu için hisse sayısı değiştirilemez."
 
-#: kmymoney/views/investtransactioneditor.cpp:623
+#: kmymoney/views/investtransactioneditor.cpp:626
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr "Bu işlemin hisse sayısını girin"
 
-#: kmymoney/views/investtransactioneditor.cpp:629
+#: kmymoney/views/investtransactioneditor.cpp:632
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "Bölme oranı"
 
-#: kmymoney/views/investtransactioneditor.cpp:631
+#: kmymoney/views/investtransactioneditor.cpp:634
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr "Menkul kıymet hesabı kapalı olduğu için bölme oranı değiştirilemez."
 
-#: kmymoney/views/investtransactioneditor.cpp:635
+#: kmymoney/views/investtransactioneditor.cpp:638
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr "Bu işlem için bölme oranını girin"
 
-#: kmymoney/views/investtransactioneditor.cpp:647
+#: kmymoney/views/investtransactioneditor.cpp:650
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr "Bu işlemin fiyat bilgisini girin"
 
-#: kmymoney/views/investtransactioneditor.cpp:663
+#: kmymoney/views/investtransactioneditor.cpp:666
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "İşlemi dengeleyecek hesabı seçin"
 
-#: kmymoney/views/investtransactioneditor.cpp:670
+#: kmymoney/views/investtransactioneditor.cpp:673
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr "Ücretler kategorisini girin"
 
-#: kmymoney/views/investtransactioneditor.cpp:673
+#: kmymoney/views/investtransactioneditor.cpp:676
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "Ücret tutarını girin"
 
-#: kmymoney/views/investtransactioneditor.cpp:679
+#: kmymoney/views/investtransactioneditor.cpp:682
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr "Faiz kategorisini girin"
 
-#: kmymoney/views/investtransactioneditor.cpp:682
+#: kmymoney/views/investtransactioneditor.cpp:685
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "Faiz türünü girin"
 
-#: kmymoney/views/investtransactioneditor.cpp:687
+#: kmymoney/views/investtransactioneditor.cpp:690
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
 msgstr "Bu işlemin menkul kıymetini girin"
 
-#: kmymoney/views/investtransactioneditor.cpp:692
+#: kmymoney/views/investtransactioneditor.cpp:695
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
