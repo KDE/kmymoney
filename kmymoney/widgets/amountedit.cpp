@@ -507,7 +507,7 @@ void AmountEdit::resizeEvent(QResizeEvent* event)
 void AmountEdit::focusInEvent(QFocusEvent* event)
 {
     QLineEdit::focusInEvent(event);
-    if ((event->reason() == Qt::MouseFocusReason) || (event->reason() == Qt::ActiveWindowFocusReason)) {
+    if (event->reason() != Qt::ActiveWindowFocusReason) {
         if (!hasSelectedText()) {
             // we need to wait until all processing is done before
             // we can successfully call selectAll. Hence the
@@ -522,23 +522,25 @@ void AmountEdit::focusOutEvent(QFocusEvent* event)
     Q_D(AmountEdit);
     QLineEdit::focusOutEvent(event);
 
-    // make sure we have a zero value in case the current text
-    // is empty but this is not allowed
-    if (text().isEmpty() && !d->m_allowEmpty) {
-        QLineEdit::setText(QLatin1String("0"));
-    }
+    if (event->reason() != Qt::ActiveWindowFocusReason) {
+        // make sure we have a zero value in case the current text
+        // is empty but this is not allowed
+        if (text().isEmpty() && !d->m_allowEmpty) {
+            QLineEdit::setText(QLatin1String("0"));
+        }
 
-    // make sure we have a fractional part
-    if (!text().isEmpty())
-        ensureFractionalPart();
+        // make sure we have a fractional part
+        if (!text().isEmpty())
+            ensureFractionalPart();
 
-    // in case the widget contains a different value we emit
-    // the amountChanged signal
-    if ((d->m_value != value()) || (d->m_shares != shares())) {
-        d->m_value = value();
-        d->m_shares = shares();
-        d->valueSet = true;
-        Q_EMIT amountChanged();
+        // in case the widget contains a different value we emit
+        // the amountChanged signal
+        if ((d->m_value != value()) || (d->m_shares != shares())) {
+            d->m_value = value();
+            d->m_shares = shares();
+            d->valueSet = true;
+            Q_EMIT amountChanged();
+        }
     }
 }
 
