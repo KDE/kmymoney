@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-29 03:27+0000\n"
-"PO-Revision-Date: 2025-07-26 14:40+0200\n"
+"POT-Creation-Date: 2025-07-31 03:24+0000\n"
+"PO-Revision-Date: 2025-07-29 09:09+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -2883,7 +2883,7 @@ msgstr "Anomena i guarda l'emmagatzematge…"
 #: kmymoney/dialogs/ksaveasquestion.ui:23
 #, kde-format
 msgid "Choose XML if unsure."
-msgstr "Seleccioneu XML si no n'esteu segur."
+msgstr "Trieu XML si no n'esteu segur."
 
 #. i18n: ectx: property (html), widget (QTextBrowser, textBrowser)
 #: kmymoney/dialogs/ksaveasquestion.ui:52
@@ -6381,7 +6381,7 @@ msgid "Last Price Update"
 msgstr "Última actualització del preu"
 
 #: kmymoney/models/equitiesmodel.cpp:540
-#: kmymoney/widgets/columnselector.cpp:219
+#: kmymoney/widgets/columnselector.cpp:221
 #, kde-format
 msgid "Displayed columns"
 msgstr "Columnes mostrades"
@@ -6877,17 +6877,14 @@ msgid "    Account: %1, Amount: %2"
 msgstr "    Compte: %1, Import: %2"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3299
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Split %2 in transaction '%1' contains a reference to invalid account "
-#| "%3. Please fix manually."
+#, kde-format
 msgctxt "Consistency check, all params are internal ids"
 msgid ""
 "  * Split %2 in transaction '%1' referenced standard account %3 and has been "
 "removed."
 msgstr ""
-"  * El desglossament %2 de l'operació «%1» conté una referència a un compte "
-"no vàlid %3. Per favor, arregleu-ho manualment."
+"  * El desglossament %2 de l'operació «%1» ha fet una referència al compte "
+"estàndard %3 i s'ha eliminat."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:3312
 #, kde-format
@@ -10049,7 +10046,7 @@ msgid ""
 "'%4'.</center><center>Please choose which you wish to accept.</center>"
 msgstr ""
 "<center>El camp %1 conté «%2»</center><center>i el camp %3 conté «%4».</"
-"center><center>Seleccioneu quin voleu acceptar.</center>"
+"center><center>Trieu quin voleu acceptar.</center>"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:398
 #, kde-format
@@ -12465,7 +12462,7 @@ msgstr "La pr&imera data que es puga"
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.ui:98
 #, kde-format
 msgid "Pick &date"
-msgstr "Seleccioneu una &data"
+msgstr "Trieu una &data"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:307
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:899
@@ -14699,7 +14696,7 @@ msgstr ""
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:239
 #, kde-format
 msgid "Select output file"
-msgstr "Seleccioneu el fitxer d'eixida"
+msgstr "Trieu el fitxer d'eixida"
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:267
 #: kmymoney/plugins/sql/kselectdatabasedlg.cpp:175
@@ -17579,7 +17576,7 @@ msgstr "Nom de l'informe"
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:38
 #, kde-format
 msgid "<p>Choose a name for this report.</p>"
-msgstr "<p>Seleccioneu un nom per a este informe.</p>"
+msgstr "<p>Trieu un nom per a este informe.</p>"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_editComment)
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:59
@@ -17796,8 +17793,7 @@ msgstr "Marques"
 #, kde-format
 msgid "<p>Choose how large of a time period each column should encompass</p>"
 msgstr ""
-"<p>Seleccioneu la llargària del període de temps que ha d'abastar cada "
-"columna.</p>"
+"<p>Trieu la llargària del període de temps que ha d'abastar cada columna.</p>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, dataRangeBox)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:120
@@ -17896,8 +17892,8 @@ msgstr "Mostra la fila de totals"
 msgid ""
 "<p>Choose what kind of accounts to display as the rows of this report.</p>"
 msgstr ""
-"<p>Seleccioneu la classe de comptes que es mostraran com a files d'este "
-"informe.</p>"
+"<p>Trieu la classe de comptes que es mostraran com a files d'este informe.</"
+"p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkTotalColumn)
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:87
@@ -17957,7 +17953,7 @@ msgstr "Organitza per:"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:62
 #, kde-format
 msgid "<p>Choose how to group the transactions in this report</p>"
-msgstr "<p>Seleccioneu com agrupar les operacions en este informe</p>"
+msgstr "<p>Trieu com agrupar les operacions en este informe</p>"
 
 #. i18n: ectx: property (toolTip), widget (QGroupBox, buttonGroupBox1)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:138
@@ -17966,8 +17962,8 @@ msgid ""
 "<p>Choose which columns should be shown in the report.</p><p>The date and "
 "transaction amount are always shown.</p>"
 msgstr ""
-"<p>Seleccioneu les columnes que s'han de mostrar en l'informe.</p><p>Sempre "
-"es mostren la data i l'import de l'operació.</p>"
+"<p>Trieu les columnes que s'han de mostrar en l'informe.</p><p>Sempre es "
+"mostren la data i l'import de l'operació.</p>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox1)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:141
@@ -18293,8 +18289,8 @@ msgid ""
 "You have configured KMyMoney to save your data secured with GPG. Please "
 "choose the key you want to use for encryption of your data."
 msgstr ""
-"Heu configurat KMyMoney per a guardar les dades assegurades amb GPG. "
-"Seleccioneu la clau que voleu utilitzar per a encriptar les dades."
+"Heu configurat KMyMoney per a guardar les dades assegurades amb GPG. Trieu "
+"la clau que voleu utilitzar per a encriptar les dades."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/xml/kgpgkeyselectiondlg.ui:39
