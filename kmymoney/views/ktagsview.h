@@ -41,6 +41,8 @@ public:
     explicit KTagsView(QWidget *parent = nullptr);
     ~KTagsView() override;
 
+    virtual void executeAction(eMenu::Action action, const SelectedObjects& selections) override;
+
 public Q_SLOTS:
     void slotSelectTag(const QString& tagId);
     void slotHelp();
