@@ -673,6 +673,7 @@ void LedgerView::reset()
     if (d->editor) {
         closeEditor(d->editor, QAbstractItemDelegate::NoHint);
         d->editor->deleteLater();
+        d->editor = nullptr;
     }
 
     // make sure to kick-off re-selection only once
