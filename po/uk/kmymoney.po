@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-31 03:24+0000\n"
+"POT-Creation-Date: 2025-08-01 03:40+0000\n"
 "PO-Revision-Date: 2025-07-26 11:43+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -1988,7 +1988,7 @@ msgstr "Разом"
 msgid "Closed"
 msgstr "Закрито"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:272
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:273
 #, kde-format
 msgid "Do you really want to delete the selected price entry?"
 msgid_plural "Do you really want to delete the selected price entries?"
@@ -1997,32 +1997,32 @@ msgstr[1] "Ви справді бажаєте вилучити позначен�
 msgstr[2] "Ви справді бажаєте вилучити позначені записи цін?"
 msgstr[3] "Ви справді бажаєте вилучити позначений запис ціни?"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:273
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:274
 #, kde-format
 msgid "Delete price information"
 msgstr "Вилучити дані ціни"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:342
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:343
 #, kde-format
 msgid "New price..."
 msgstr "Створити запис ціни…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:343
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:344
 #, kde-format
 msgid "Edit price..."
 msgstr "Змінити запис ціни…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:344
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:345
 #, kde-format
 msgid "Online Price Update..."
 msgstr "Інтерактивне оновлення цін…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:345
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:346
 #, kde-format
 msgid "Delete price..."
 msgstr "Вилучити запис ціни…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:357
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:358
 #, kde-format
 msgctxt "@title:menu"
 msgid "Price options"
@@ -21252,7 +21252,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Перейти до «%1»"
 
-#: kmymoney/views/ledgerview.cpp:743
+#: kmymoney/views/ledgerview.cpp:744
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -21263,33 +21263,33 @@ msgstr ""
 "підтримки паралельного редагування двох операцій. <a href=\"jumpToEditor"
 "\">Перейти до поточного редактора</a>"
 
-#: kmymoney/views/ledgerview.cpp:868
+#: kmymoney/views/ledgerview.cpp:869
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Операцію не пов'язано з категорією."
 
-#: kmymoney/views/ledgerview.cpp:875
+#: kmymoney/views/ledgerview.cpp:876
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "У даних операції не вказано прив'язки <b>%1</b>."
 
-#: kmymoney/views/ledgerview.cpp:884
+#: kmymoney/views/ledgerview.cpp:885
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr ""
 "Цей розклад прострочено з %1. Натисніть на піктограмі, щоб ввести його."
 
-#: kmymoney/views/ledgerview.cpp:890
+#: kmymoney/views/ledgerview.cpp:891
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr ""
 "Цей запис операції імпортовано. Натисніть на піктограмі, щоб прийняти його."
 
-#: kmymoney/views/ledgerview.cpp:895
+#: kmymoney/views/ledgerview.cpp:896
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -21298,31 +21298,31 @@ msgstr ""
 "Для цієї операції встановлено відповідність. Натисніть на піктограмі, щоб "
 "прийняти встановлений варіант, або скасуйте встановлення відповідності."
 
-#: kmymoney/views/ledgerview.cpp:973
+#: kmymoney/views/ledgerview.cpp:974
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Не вводити прострочену заплановану операцію."
 
-#: kmymoney/views/ledgerview.cpp:974
+#: kmymoney/views/ledgerview.cpp:975
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Ввести прострочену заплановану операцію."
 
-#: kmymoney/views/ledgerview.cpp:977
+#: kmymoney/views/ledgerview.cpp:978
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Хочете ввести розклад прострочення зараз?"
 
-#: kmymoney/views/ledgerview.cpp:978
+#: kmymoney/views/ledgerview.cpp:979
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Ввести розклад прострочення"
 
-#: kmymoney/views/ledgerview.cpp:998
+#: kmymoney/views/ledgerview.cpp:999
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -21332,7 +21332,7 @@ msgstr ""
 "Від'єднати приховану (відповідну) операцію від показаної і ввести її до "
 "книги знову."
 
-#: kmymoney/views/ledgerview.cpp:1000
+#: kmymoney/views/ledgerview.cpp:1001
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21342,14 +21342,14 @@ msgstr ""
 "Прийняти відповідність так, як її показано, і вилучити дані прихованої "
 "(відповідної) операції."
 
-#: kmymoney/views/ledgerview.cpp:1004
+#: kmymoney/views/ledgerview.cpp:1005
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr ""
 "Хочете прийняти чи скасувати встановлення відповідності запису операції?"
 
-#: kmymoney/views/ledgerview.cpp:1005
+#: kmymoney/views/ledgerview.cpp:1006
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
