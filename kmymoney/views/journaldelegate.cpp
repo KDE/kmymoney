@@ -670,15 +670,17 @@ void JournalDelegate::resetLineHeight()
 
 QSize JournalDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-    // get parameters only once per update to speed things up
     QStyleOptionViewItem opt = option;
     initStyleOption(&opt, index);
     QStyle* style = opt.widget ? opt.widget->style() : QApplication::style();
 
+    // get parameters only once per update to speed things up
     if (d->m_lineHeight == -1) {
         d->m_margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
         d->m_lineHeight = opt.fontMetrics.lineSpacing();
     }
+
+    bool resizeSection(false);
 
     if(index.isValid()) {
         // check if we are showing the edit widget
@@ -691,11 +693,19 @@ QSize JournalDelegate::sizeHint(const QStyleOptionViewItem& option, const QModel
                     return editor->minimumSizeHint();
                 }
             }
+            resizeSection = d->m_view->isResizingSectionToContents();
         }
     }
 
-    QSize size = style->sizeFromContents(QStyle::CT_ItemViewItem, &opt, QSize(), opt.widget);
-    size.setHeight(d->m_lineHeight + 2 * d->m_margin);
+    QSize size(10, d->m_lineHeight + 2 * d->m_margin);
+
+    // only when we are requested by the user to resize the
+    // column to the content (user double clicked on section
+    // header) we do this more expensive operation
+    if (resizeSection) {
+        size = style->sizeFromContents(QStyle::CT_ItemViewItem, &opt, QSize(), opt.widget);
+        size.setHeight(d->m_lineHeight + 2 * d->m_margin);
+    }
 
     const auto settings = LedgerViewSettings::instance();
     if (((option.state & QStyle::State_Selected) && (settings->showLedgerLens())) || settings->showTransactionDetails()) {

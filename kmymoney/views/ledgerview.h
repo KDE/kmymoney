@@ -97,6 +97,13 @@ public:
      */
     void setFocus();
 
+    /**
+     * Returns true if user double clicked the section header handle
+     * to force resize to contents. Used by JournalDelegate to
+     * improve performance of sizeHint() method.
+     */
+    bool isResizingSectionToContents() const;
+
 public Q_SLOTS:
     /**
      * This method scrolls the ledger so that the current item is visible
