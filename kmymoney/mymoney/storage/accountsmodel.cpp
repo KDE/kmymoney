@@ -572,7 +572,6 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
         return data(subIdx, role);
     }
 
-    MyMoneyAccount tradingCurrency;
     const auto isInvestmentAccount = account.accountType() == eMyMoney::Account::Type::Investment;
 
     switch(role) {
