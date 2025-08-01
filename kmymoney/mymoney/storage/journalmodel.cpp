@@ -948,7 +948,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::SplitStyledMemoRole: {
         QString rc(split.memo());
         if (!split.payeeId().isEmpty()) {
-            const auto payee = MyMoneyFile::instance()->payee(split.payeeId());
+            const auto payee = MyMoneyFile::instance()->payeesModel()->itemById(split.payeeId());
             rc = payee.decorateLink(rc);
         }
         if (role == eMyMoney::Model::SplitStyledSingleLineMemoRole) {

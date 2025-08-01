@@ -1691,10 +1691,12 @@ bool MyMoneyFile::isInvestmentTransaction(const MyMoneyTransaction& t) const
 {
     const auto splits = t.splits();
     for (const auto& split : qAsConst(splits)) {
-        auto acc = d->accountsModel.itemById(split.accountId());
-        if (!acc.id().isEmpty()) {
-            if (acc.isInvest() && (split.investmentTransactionType() != eMyMoney::Split::InvestmentTransactionType::UnknownTransactionType)) {
-                return true;
+        if (split.investmentTransactionType() != eMyMoney::Split::InvestmentTransactionType::UnknownTransactionType) {
+            auto acc = d->accountsModel.itemById(split.accountId());
+            if (!acc.id().isEmpty()) {
+                if (acc.isInvest()) {
+                    return true;
+                }
             }
         }
     }
