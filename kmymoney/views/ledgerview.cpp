@@ -94,6 +94,7 @@ public:
         , showValuesInverted(false)
         , newTransactionPresent(false)
         , reselectAfterResetPending(false)
+        , resizeToContents(false)
         , selectOnly(false)
     {
         infoMessage->hide();
@@ -529,6 +530,7 @@ public:
     bool showValuesInverted;
     bool newTransactionPresent;
     bool reselectAfterResetPending;
+    bool resizeToContents;
     bool selectOnly;
     QString accountId;
     QString groupName;
@@ -611,6 +613,13 @@ LedgerView::LedgerView(QWidget* parent)
     connect(horizontalHeader(), &QHeaderView::sectionClicked, this, [&]() {
         Q_EMIT modifySortOrder();
     });
+
+    connect(horizontalHeader(), &QHeaderView::sectionHandleDoubleClicked, this, [&](int section) {
+        d->resizeToContents = true;
+        resizeColumnToContents(section);
+        d->resizeToContents = false;
+    });
+
     setTabKeyNavigation(false);
 }
 
@@ -1772,4 +1781,9 @@ void LedgerView::setFocus()
 void LedgerView::setSelectOnly(bool selectOnly)
 {
     d->selectOnly = selectOnly;
+}
+
+bool LedgerView::isResizingSectionToContents() const
+{
+    return d->resizeToContents;
 }
