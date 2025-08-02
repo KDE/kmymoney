@@ -92,88 +92,98 @@ struct icaltimetype qdateTimeToIcalTimeType(const QDateTime& dateTime) {
     return icalDateTime;
 }
 
+#if ICAL_CHECK_VERSION(3, 99, 99)
+struct icalrecurrencetype *scheduleToRecurenceRule(const MyMoneySchedule& schedule) {
+    struct icalrecurrencetype *recurrence = icalrecurrencetype_new();
+#else
 struct icalrecurrencetype scheduleToRecurenceRule(const MyMoneySchedule& schedule) {
-    struct icalrecurrencetype recurrence;
-    icalrecurrencetype_clear(&recurrence);
+    struct icalrecurrencetype recurrenceObject;
+    struct icalrecurrencetype *recurrence = &recurrenceObject;
+    icalrecurrencetype_clear(recurrence);
+#endif
     if (schedule.willEnd())
-        recurrence.until = qdateToIcalTimeType(schedule.endDate());
-    recurrence.week_start = icalrecurrencetype_day_day_of_week(QLocale().firstDayOfWeek());
+        recurrence->until = qdateToIcalTimeType(schedule.endDate());
+    recurrence->week_start = icalrecurrencetype_day_day_of_week(QLocale().firstDayOfWeek());
     int frequencyFactor = 1; // used to translate kmymoney frequency to icalendar frequency
 
     switch (schedule.baseOccurrence()) {
     case Schedule::Occurrence::Daily:
-        recurrence.freq = ICAL_DAILY_RECURRENCE;
+        recurrence->freq = ICAL_DAILY_RECURRENCE;
         break;
     case Schedule::Occurrence::Weekly:
-        recurrence.freq = ICAL_WEEKLY_RECURRENCE;
+        recurrence->freq = ICAL_WEEKLY_RECURRENCE;
         break;
     case Schedule::Occurrence::Fortnightly:
-        recurrence.freq = ICAL_WEEKLY_RECURRENCE;
+        recurrence->freq = ICAL_WEEKLY_RECURRENCE;
         frequencyFactor = 2;
         break;
     case Schedule::Occurrence::EveryOtherWeek:
-        recurrence.freq = ICAL_WEEKLY_RECURRENCE;
+        recurrence->freq = ICAL_WEEKLY_RECURRENCE;
         frequencyFactor = 2;
         break;
     case Schedule::Occurrence::EveryHalfMonth:
-        recurrence.freq = ICAL_WEEKLY_RECURRENCE;
+        recurrence->freq = ICAL_WEEKLY_RECURRENCE;
         frequencyFactor = 2;
         break;
     case Schedule::Occurrence::EveryThreeWeeks:
-        recurrence.freq = ICAL_WEEKLY_RECURRENCE;
+        recurrence->freq = ICAL_WEEKLY_RECURRENCE;
         frequencyFactor = 3;
         break;
     case Schedule::Occurrence::EveryThirtyDays:
-        recurrence.freq = ICAL_DAILY_RECURRENCE;
+        recurrence->freq = ICAL_DAILY_RECURRENCE;
         frequencyFactor = 30;
         break;
     case Schedule::Occurrence::Monthly:
-        recurrence.freq = ICAL_MONTHLY_RECURRENCE;
+        recurrence->freq = ICAL_MONTHLY_RECURRENCE;
         break;
     case Schedule::Occurrence::EveryFourWeeks:
-        recurrence.freq = ICAL_WEEKLY_RECURRENCE;
+        recurrence->freq = ICAL_WEEKLY_RECURRENCE;
         frequencyFactor = 4;
         break;
     case Schedule::Occurrence::EveryEightWeeks:
-        recurrence.freq = ICAL_WEEKLY_RECURRENCE;
+        recurrence->freq = ICAL_WEEKLY_RECURRENCE;
         frequencyFactor = 8;
         break;
     case Schedule::Occurrence::EveryOtherMonth:
-        recurrence.freq = ICAL_MONTHLY_RECURRENCE;
+        recurrence->freq = ICAL_MONTHLY_RECURRENCE;
         frequencyFactor = 2;
         break;
     case Schedule::Occurrence::EveryThreeMonths:
-        recurrence.freq = ICAL_MONTHLY_RECURRENCE;
+        recurrence->freq = ICAL_MONTHLY_RECURRENCE;
         frequencyFactor = 3;
         break;
     case Schedule::Occurrence::TwiceYearly:
-        recurrence.freq = ICAL_MONTHLY_RECURRENCE;
+        recurrence->freq = ICAL_MONTHLY_RECURRENCE;
         frequencyFactor = 6;
         break;
     case Schedule::Occurrence::EveryOtherYear:
-        recurrence.freq = ICAL_YEARLY_RECURRENCE;
+        recurrence->freq = ICAL_YEARLY_RECURRENCE;
         frequencyFactor = 2;
         break;
     case Schedule::Occurrence::Quarterly:
-        recurrence.freq = ICAL_MONTHLY_RECURRENCE;
+        recurrence->freq = ICAL_MONTHLY_RECURRENCE;
         frequencyFactor = 3;
         break;
     case Schedule::Occurrence::EveryFourMonths:
-        recurrence.freq = ICAL_MONTHLY_RECURRENCE;
+        recurrence->freq = ICAL_MONTHLY_RECURRENCE;
         frequencyFactor = 4;
         break;
     case Schedule::Occurrence::Yearly:
-        recurrence.freq = ICAL_YEARLY_RECURRENCE;
+        recurrence->freq = ICAL_YEARLY_RECURRENCE;
         break;
     case Schedule::Occurrence::Once:
     case Schedule::Occurrence::Any:
     default:
         qWarning() << "Once, any or unknown recurrence returned recurrence is invalid" << Qt::endl;
-        recurrence.freq = ICAL_NO_RECURRENCE;
+        recurrence->freq = ICAL_NO_RECURRENCE;
         break;
     }
-    recurrence.interval = frequencyFactor*schedule.occurrenceMultiplier();
+    recurrence->interval = frequencyFactor*schedule.occurrenceMultiplier();
+#if ICAL_CHECK_VERSION(3, 99, 99)
     return recurrence;
+#else
+    return recurrenceObject;
+#endif
 }
 
 QString scheduleToDescription(const MyMoneySchedule& schedule)
